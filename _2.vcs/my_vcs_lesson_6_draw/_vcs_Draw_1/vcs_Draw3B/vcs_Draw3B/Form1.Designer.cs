@@ -53,8 +53,6 @@
             this.lblDegrees = new System.Windows.Forms.Label();
             this.hbarDegrees = new System.Windows.Forms.HScrollBar();
             this.timer_compass = new System.Windows.Forms.Timer(this.components);
-            this.pictureBox_brown = new System.Windows.Forms.PictureBox();
-            this.timer_brown = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_round = new System.Windows.Forms.PictureBox();
             this.timer_round = new System.Windows.Forms.Timer(this.components);
             this.timer_spiral = new System.Windows.Forms.Timer(this.components);
@@ -77,7 +75,6 @@
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_compass1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_compass2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_brown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_round)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_circular)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ball)).BeginInit();
@@ -277,21 +274,6 @@
             this.timer_compass.Interval = 250;
             this.timer_compass.Tick += new System.EventHandler(this.timer_compass_Tick);
             // 
-            // pictureBox_brown
-            // 
-            this.pictureBox_brown.BackColor = System.Drawing.Color.LightGray;
-            this.pictureBox_brown.Location = new System.Drawing.Point(244, 12);
-            this.pictureBox_brown.Name = "pictureBox_brown";
-            this.pictureBox_brown.Size = new System.Drawing.Size(50, 50);
-            this.pictureBox_brown.TabIndex = 67;
-            this.pictureBox_brown.TabStop = false;
-            // 
-            // timer_brown
-            // 
-            this.timer_brown.Enabled = true;
-            this.timer_brown.Interval = 1000;
-            this.timer_brown.Tick += new System.EventHandler(this.timer_brown_Tick);
-            // 
             // pictureBox_round
             // 
             this.pictureBox_round.BackColor = System.Drawing.Color.LightGray;
@@ -383,7 +365,6 @@
             this.Controls.Add(this.pictureBox_ball);
             this.Controls.Add(this.pictureBox_circular);
             this.Controls.Add(this.pictureBox_round);
-            this.Controls.Add(this.pictureBox_brown);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox_word);
             this.Controls.Add(this.pictureBox_progressbar);
@@ -410,7 +391,6 @@
             this.groupBox1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_compass1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_compass2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_brown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_round)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_circular)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_ball)).EndInit();
@@ -446,8 +426,6 @@
         private System.Windows.Forms.Label lblDegrees;
         private System.Windows.Forms.HScrollBar hbarDegrees;
         private System.Windows.Forms.Timer timer_compass;
-        private System.Windows.Forms.PictureBox pictureBox_brown;
-        private System.Windows.Forms.Timer timer_brown;
         private System.Windows.Forms.PictureBox pictureBox_round;
         private System.Windows.Forms.Timer timer_round;
         private System.Windows.Forms.Timer timer_spiral;

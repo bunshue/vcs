@@ -21,7 +21,7 @@ namespace vcs_DrawJ_Watermark2
         }
 
 
-        #region 获取系统字体
+        #region 獲取系統字體
         private void GetSystemFont(ToolStripComboBox cb)
         {
             InstalledFontCollection myFont = new InstalledFontCollection();
@@ -29,7 +29,7 @@ namespace vcs_DrawJ_Watermark2
             {
                 cb.Items.Add(ff.Name);
             }
-            cb.SelectedItem = "宋体";
+            cb.SelectedItem = "宋體";
         }
         #endregion
         private void Form1_Load(object sender, EventArgs e)
@@ -37,9 +37,9 @@ namespace vcs_DrawJ_Watermark2
             cbbPosition.SelectedIndex = 0;
         }
 
-        string [] ImgArray=null;
-        string ImgDirectoryPath=null;
-        
+        string[] ImgArray = null;
+        string ImgDirectoryPath = null;
+
         private void btnLoadImg_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -55,7 +55,7 @@ namespace vcs_DrawJ_Watermark2
                     string ImgName = ImgPath.Substring(ImgPath.LastIndexOf("\\") + 1, ImgPath.Length - ImgPath.LastIndexOf("\\") - 1);
                     lbImgList.Items.Add(ImgName);
                 }
-                tsslStatus.Text = "图片总数：" + lbImgList.Items.Count;
+                tsslStatus.Text = "圖片總數：" + lbImgList.Items.Count;
             }
         }
 
@@ -63,7 +63,7 @@ namespace vcs_DrawJ_Watermark2
         {
             if (lbImgList.SelectedItems.Count > 0)
             {
-                tsslText.Text = "图片位置：" + ImgDirectoryPath + "\\" + lbImgList.SelectedItems[0].ToString();
+                tsslText.Text = "圖片位置：" + ImgDirectoryPath + "\\" + lbImgList.SelectedItems[0].ToString();
             }
         }
 
@@ -116,8 +116,8 @@ namespace vcs_DrawJ_Watermark2
         private void rbTxt_CheckedChanged(object sender, EventArgs e)
         {
             trackBar1.Enabled = false;
-            if(rbPIC.Checked)
-            pbImgPreview.Image = null;
+            if (rbPIC.Checked)
+                pbImgPreview.Image = null;
         }
 
         private void rbPIC_CheckedChanged(object sender, EventArgs e)
@@ -148,9 +148,9 @@ namespace vcs_DrawJ_Watermark2
             }
         }
 
-        Bitmap bt=null;
+        Bitmap bt = null;
         float fontSize = 8;
-        Color fontColor=Color.Black;
+        Color fontColor = Color.Black;
         FontFamily FontF = null;
         FontStyle fontStyle = FontStyle.Regular;
         int Fwidth;
@@ -158,33 +158,33 @@ namespace vcs_DrawJ_Watermark2
         Bitmap BigBt;
         Font f;
         Brush b;
-        private void AddFontWatermark(string txt,string Iname,int i)//预览
+        private void AddFontWatermark(string txt, string Iname, int i)//預覽
         {
             b = new SolidBrush(fontColor);
-            bt = new Bitmap(368,75);
-            BigBt = new Bitmap(Image.FromFile(ImgDirectoryPath + "\\" +Iname));
+            bt = new Bitmap(368, 75);
+            BigBt = new Bitmap(Image.FromFile(ImgDirectoryPath + "\\" + Iname));
             Graphics g = Graphics.FromImage(bt);
             Graphics g1 = Graphics.FromImage(BigBt);
             g.Clear(Color.Gainsboro);
             pbImgPreview.Image = bt;
             if (FontF == null)
             {
-                f = new Font(txt,fontSize);
+                f = new Font(txt, fontSize);
                 SizeF XMaxSize = g.MeasureString(txt, f);
                 Fwidth = (int)XMaxSize.Width;
                 Fheight = (int)XMaxSize.Height;
-                g.DrawString(txt,f, b, (int)(368 - Fwidth) / 2, (int)(75 - Fheight) / 2);
-                if (cbbPosition.SelectedIndex==0)//正中
+                g.DrawString(txt, f, b, (int)(368 - Fwidth) / 2, (int)(75 - Fheight) / 2);
+                if (cbbPosition.SelectedIndex == 0)//正中
                 {
                     g1.DrawString(txt, f, b, (int)(BigBt.Width - Fwidth) / 2, (int)(BigBt.Height - Fheight) / 2);
                 }
                 if (cbbPosition.SelectedIndex == 1)//左上
                 {
-                    g1.DrawString(txt, f, b, 30,30);
+                    g1.DrawString(txt, f, b, 30, 30);
                 }
-                if (cbbPosition.SelectedIndex ==2)//左下
+                if (cbbPosition.SelectedIndex == 2)//左下
                 {
-                    g1.DrawString(txt, f, b, 30, (int)(BigBt.Height - Fheight)-30);
+                    g1.DrawString(txt, f, b, 30, (int)(BigBt.Height - Fheight) - 30);
                 }
                 if (cbbPosition.SelectedIndex == 3) //右上
                 {
@@ -192,7 +192,7 @@ namespace vcs_DrawJ_Watermark2
                 }
                 if (cbbPosition.SelectedIndex == 4)//右下
                 {
-                    g1.DrawString(txt, f, b, (int)(BigBt.Width - Fwidth), (int)(BigBt.Height - Fheight)-30);
+                    g1.DrawString(txt, f, b, (int)(BigBt.Width - Fwidth), (int)(BigBt.Height - Fheight) - 30);
                 }
             }
             else
@@ -212,7 +212,7 @@ namespace vcs_DrawJ_Watermark2
                 }
                 if (cbbPosition.SelectedIndex == 2)//左下
                 {
-                    g1.DrawString(txt, new Font(FontF, fontSize, fontStyle), b, 30, (int)(BigBt.Height - Fheight)-30);
+                    g1.DrawString(txt, new Font(FontF, fontSize, fontStyle), b, 30, (int)(BigBt.Height - Fheight) - 30);
                 }
                 if (cbbPosition.SelectedIndex == 3) //右上
                 {
@@ -220,7 +220,7 @@ namespace vcs_DrawJ_Watermark2
                 }
                 if (cbbPosition.SelectedIndex == 4)//右下
                 {
-                    g1.DrawString(txt, new Font(FontF, fontSize, fontStyle), b, (int)(BigBt.Width - Fwidth), (int)(BigBt.Height - Fheight)-30);
+                    g1.DrawString(txt, new Font(FontF, fontSize, fontStyle), b, (int)(BigBt.Width - Fwidth), (int)(BigBt.Height - Fheight) - 30);
                 }
             }
             if (i == 1)
@@ -266,11 +266,11 @@ namespace vcs_DrawJ_Watermark2
                 }
                 if (cbbPosition.SelectedIndex == 3) //右上
                 {
-                    g1.DrawImage(effect, (int)(BigBt.Width - effect.Width)-30, 30);
+                    g1.DrawImage(effect, (int)(BigBt.Width - effect.Width) - 30, 30);
                 }
                 if (cbbPosition.SelectedIndex == 4)//右下
                 {
-                    g1.DrawImage(effect, (int)(BigBt.Width - effect.Width)-30, (int)(BigBt.Height - effect.Height) - 30);
+                    g1.DrawImage(effect, (int)(BigBt.Width - effect.Width) - 30, (int)(BigBt.Height - effect.Height) - 30);
                 }
             }
             if (i == 3)
@@ -319,12 +319,12 @@ namespace vcs_DrawJ_Watermark2
                 }
             }
         }
-       
+
         private void txtWaterMarkFont_TextChanged(object sender, EventArgs e)
         {
             if (lbImgList.Items.Count <= 0)
             {
-                MessageBox.Show("请加载图片","警告",MessageBoxButtons.OK,MessageBoxIcon.Error);
+                MessageBox.Show("請加載圖片", "警告", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
             else
@@ -340,7 +340,7 @@ namespace vcs_DrawJ_Watermark2
         }
 
         /// <summary>
-        /// 调节透明度
+        /// 調節透明度
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -356,7 +356,7 @@ namespace vcs_DrawJ_Watermark2
             else
             {
                 Image.GetThumbnailImageAbort callb = null;
-                //对水印图片生成缩略图,缩小到原图得1/4
+                //對水印圖片生成縮略圖,縮小到原圖得1/4
                 new_img = source.GetThumbnailImage(source.Width / 4, source.Width / 4, callb, new System.IntPtr());
                 effect = new Bitmap(this.new_img.Width, this.new_img.Height);
             }
@@ -382,25 +382,25 @@ namespace vcs_DrawJ_Watermark2
 
         private void trackBar1_ValueChanged(object sender, EventArgs e)
         {
-            if(rbPIC.Checked&&txtWaterMarkImg.Text.Trim()!="")
-            ChangeAlpha();
+            if (rbPIC.Checked && txtWaterMarkImg.Text.Trim() != "")
+                ChangeAlpha();
         }
 
         private void btnPerform_Click(object sender, EventArgs e)
         {
-            if (rbTxt.Checked&&txtSavaPath.Text!=""&&txtWaterMarkFont.Text!="")
+            if (rbTxt.Checked && txtSavaPath.Text != "" && txtWaterMarkFont.Text != "")
             {
                 for (int i = 0; i < lbImgList.Items.Count; i++)
                 {
                     AddFontWatermark(txtWaterMarkFont.Text.Trim(), lbImgList.Items[i].ToString(), 1);
                 }
-                MessageBox.Show("添加水印成功","提示",MessageBoxButtons.OK,MessageBoxIcon.Exclamation);
+                MessageBox.Show("添加水印成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
             if (rbPIC.Checked && txtSavaPath.Text != "" && pbImgPreview.Image != null)
             {
                 for (int i = 0; i < lbImgList.Items.Count; i++)
                 {
-                    AddFontWatermark(txtWaterMarkFont.Text.Trim(), lbImgList.Items[i].ToString(),3);
+                    AddFontWatermark(txtWaterMarkFont.Text.Trim(), lbImgList.Items[i].ToString(), 3);
                 }
                 MessageBox.Show("添加水印成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }

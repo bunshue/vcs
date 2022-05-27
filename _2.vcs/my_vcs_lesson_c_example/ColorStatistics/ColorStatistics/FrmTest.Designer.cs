@@ -3,14 +3,14 @@
     partial class FrmTest
     {
         /// <summary>
-        /// 必需的设计器变量。
+        /// 必需的設計器變量。
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// 清理所有正在使用的资源。
+        /// 清理所有正在使用的資源。
         /// </summary>
-        /// <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        /// <param name="disposing">如果應釋放托管資源，為 true；否則為 false。</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,11 +20,11 @@
             base.Dispose(disposing);
         }
 
-        #region Windows 窗体设计器生成的代码
+        #region Windows 窗體設計器生成的代碼
 
         /// <summary>
-        /// 设计器支持所需的方法 - 不要
-        /// 使用代码编辑器修改此方法的内容。
+        /// 設計器支持所需的方法 - 不要
+        /// 使用代碼編輯器修改此方法的內容。
         /// </summary>
         private void InitializeComponent()
         {
@@ -53,16 +53,16 @@
             this.CmdOpen.Name = "CmdOpen";
             this.CmdOpen.Size = new System.Drawing.Size(75, 23);
             this.CmdOpen.TabIndex = 1;
-            this.CmdOpen.Text = "选择图像";
+            this.CmdOpen.Text = "選擇圖像";
             this.CmdOpen.UseVisualStyleBackColor = true;
             this.CmdOpen.Click += new System.EventHandler(this.CmdOpen_Click);
             // 
             // PicR
             // 
             this.PicR.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.PicR.Location = new System.Drawing.Point(658, 12);
+            this.PicR.Location = new System.Drawing.Point(658, 133);
             this.PicR.Name = "PicR";
-            this.PicR.Size = new System.Drawing.Size(436, 601);
+            this.PicR.Size = new System.Drawing.Size(480, 480);
             this.PicR.TabIndex = 2;
             this.PicR.TabStop = false;
             this.PicR.Click += new System.EventHandler(this.PicR_Click);
@@ -91,7 +91,7 @@
             this.CmdDeal.Name = "CmdDeal";
             this.CmdDeal.Size = new System.Drawing.Size(75, 23);
             this.CmdDeal.TabIndex = 5;
-            this.CmdDeal.Text = "处理";
+            this.CmdDeal.Text = "處理";
             this.CmdDeal.UseVisualStyleBackColor = true;
             this.CmdDeal.Click += new System.EventHandler(this.CmdDeal_Click);
             // 
@@ -102,7 +102,7 @@
             this.Label.Name = "Label";
             this.Label.Size = new System.Drawing.Size(89, 12);
             this.Label.TabIndex = 6;
-            this.Label.Text = "主要颜色总数：";
+            this.Label.Text = "主要顏色總數：";
             // 
             // SliderColorAmount
             // 
@@ -161,9 +161,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(1100, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(1144, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(336, 601);
+            this.richTextBox1.Size = new System.Drawing.Size(292, 601);
             this.richTextBox1.TabIndex = 12;
             this.richTextBox1.Text = "";
             // 
@@ -187,7 +187,7 @@
             this.MaximizeBox = false;
             this.Name = "FrmTest";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "测试窗口";
+            this.Text = "測試窗口";
             this.Load += new System.EventHandler(this.FrmTest_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PicR)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -215,4 +215,3 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
-

@@ -3,14 +3,14 @@
     partial class Frm_Main
     {
         /// <summary>
-        /// 必需的设计器变量。
+        /// 必需的設計器變量。
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// 清理所有正在使用的资源。
+        /// 清理所有正在使用的資源。
         /// </summary>
-        /// <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        /// <param name="disposing">如果應釋放托管資源，為 true；否則為 false。</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,11 +20,11 @@
             base.Dispose(disposing);
         }
 
-        #region Windows 窗体设计器生成的代码
+        #region Windows 窗體設計器生成的代碼
 
         /// <summary>
-        /// 设计器支持所需的方法 - 不要
-        /// 使用代码编辑器修改此方法的内容。
+        /// 設計器支持所需的方法 - 不要
+        /// 使用代碼編輯器修改此方法的內容。
         /// </summary>
         private void InitializeComponent()
         {
@@ -86,7 +86,7 @@
             // 
             this.tsslStatus.Name = "tsslStatus";
             this.tsslStatus.Size = new System.Drawing.Size(56, 17);
-            this.tsslStatus.Text = "准备就绪";
+            this.tsslStatus.Text = "準備就緒";
             // 
             // tsslText
             // 
@@ -128,7 +128,7 @@
             this.groupBox1.Size = new System.Drawing.Size(189, 359);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "加水印图片列表";
+            this.groupBox1.Text = "加水印圖片列表";
             // 
             // lbImgList
             // 
@@ -146,7 +146,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(65, 23);
             this.button2.TabIndex = 8;
-            this.button2.Text = "浏览...";
+            this.button2.Text = "瀏覽...";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -175,7 +175,7 @@
             this.btnPreview.Name = "btnPreview";
             this.btnPreview.Size = new System.Drawing.Size(75, 23);
             this.btnPreview.TabIndex = 5;
-            this.btnPreview.Text = "水印预览";
+            this.btnPreview.Text = "水印預覽";
             this.btnPreview.UseVisualStyleBackColor = true;
             this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
             // 
@@ -185,7 +185,7 @@
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 4;
-            this.btnExit.Text = "关闭退出";
+            this.btnExit.Text = "關閉退出";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
@@ -195,7 +195,7 @@
             this.btnPerform.Name = "btnPerform";
             this.btnPerform.Size = new System.Drawing.Size(75, 23);
             this.btnPerform.TabIndex = 3;
-            this.btnPerform.Text = "开始执行";
+            this.btnPerform.Text = "開始執行";
             this.btnPerform.UseVisualStyleBackColor = true;
             this.btnPerform.Click += new System.EventHandler(this.btnPerform_Click);
             // 
@@ -205,7 +205,7 @@
             this.btnLoadImg.Name = "btnLoadImg";
             this.btnLoadImg.Size = new System.Drawing.Size(75, 23);
             this.btnLoadImg.TabIndex = 2;
-            this.btnLoadImg.Text = "加载图片";
+            this.btnLoadImg.Text = "加載圖片";
             this.btnLoadImg.UseVisualStyleBackColor = true;
             this.btnLoadImg.Click += new System.EventHandler(this.btnLoadImg_Click);
             // 
@@ -230,7 +230,7 @@
             this.groupBox2.Size = new System.Drawing.Size(383, 274);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "水印设置";
+            this.groupBox2.Text = "水印設置";
             // 
             // label6
             // 
@@ -239,7 +239,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(257, 12);
             this.label6.TabIndex = 16;
-            this.label6.Text = "注意：水印图片建议使用分辨率为368*75的图片";
+            this.label6.Text = "注意：水印圖片建議使用分辨率為368*75的圖片";
             // 
             // label4
             // 
@@ -272,7 +272,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 12);
             this.label2.TabIndex = 14;
-            this.label2.Text = "透明设置：";
+            this.label2.Text = "透明設置：";
             // 
             // button1
             // 
@@ -280,7 +280,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(65, 23);
             this.button1.TabIndex = 13;
-            this.button1.Text = "字体设置";
+            this.button1.Text = "字體設置";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -305,7 +305,7 @@
             this.rbPIC.Name = "rbPIC";
             this.rbPIC.Size = new System.Drawing.Size(95, 16);
             this.rbPIC.TabIndex = 11;
-            this.rbPIC.Text = "添加图片水印";
+            this.rbPIC.Text = "添加圖片水印";
             this.rbPIC.UseVisualStyleBackColor = true;
             this.rbPIC.CheckedChanged += new System.EventHandler(this.rbPIC_CheckedChanged);
             // 
@@ -356,7 +356,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 12);
             this.label3.TabIndex = 0;
-            this.label3.Text = "水印图片：";
+            this.label3.Text = "水印圖片：";
             // 
             // btnSelect
             // 
@@ -364,7 +364,7 @@
             this.btnSelect.Name = "btnSelect";
             this.btnSelect.Size = new System.Drawing.Size(65, 23);
             this.btnSelect.TabIndex = 2;
-            this.btnSelect.Text = "浏览...";
+            this.btnSelect.Text = "瀏覽...";
             this.btnSelect.UseVisualStyleBackColor = true;
             this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
             // 
@@ -381,12 +381,12 @@
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.Filter = "图片文件|*.jpeg;*.jpg;*.png;*.bmp;*.gif";
+            this.openFileDialog1.Filter = "圖片文件|*.jpeg;*.jpg;*.png;*.bmp;*.gif";
             this.openFileDialog1.Multiselect = true;
             // 
             // openFileDialog2
             // 
-            this.openFileDialog2.Filter = "图片文件|*.jpeg;*.jpg;*.png;*.bmp";
+            this.openFileDialog2.Filter = "圖片文件|*.jpeg;*.jpg;*.png;*.bmp";
             // 
             // Form1
             // 
@@ -399,7 +399,7 @@
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "批量添加图片水印";
+            this.Text = "批量添加圖片水印";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
@@ -454,4 +454,3 @@
         private System.Windows.Forms.Label label6;
     }
 }
-

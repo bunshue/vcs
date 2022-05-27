@@ -319,12 +319,170 @@ namespace vcs_Draw3D
         }
         //投票比例繪圖程式 SP
 
+        Bitmap draw_random_pattern(int type)
+        {
+            int N = 30;
+            List<Point> Points = new List<Point>();
+            int W = 250;
+            int H = 250;
+
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);
+
+            if (type < 6)
+            {
+                int i;
+                int j;
+                int rr = 20;
+                Random r = new Random();
+
+                Points.Clear();
+                for (i = 0; i < N; i++)
+                {
+                    Points.Add(new Point(r.Next(W), r.Next(H)));
+                }
+
+                if (type == 1)
+                {
+                    for (j = 0; j < N; j++)
+                    {
+                        for (i = 0; i < N; i++)
+                        {
+                            g.DrawLine(new Pen(Color.Red, 1), Points[i], Points[j]);
+                        }
+                    }
+                }
+                else if (type == 2)
+                {
+                    for (i = 0; i < N; i++)
+                    {
+                        g.FillEllipse(Brushes.Red, Points[i].X - rr / 2, Points[i].Y - rr / 2, rr, rr);
+                    }
+                }
+                else if (type == 3)
+                {
+                    for (j = 0; j < N; j++)
+                    {
+                        for (i = 0; i < N; i++)
+                        {
+                            g.DrawLine(new Pen(Color.Red, 1), Points[i], Points[j]);
+                        }
+                    }
+                    for (i = 0; i < N; i++)
+                    {
+                        g.FillEllipse(Brushes.Red, Points[i].X - rr / 2, Points[i].Y - rr / 2, rr, rr);
+                    }
+                }
+                else if (type == 4)
+                {
+                    for (i = 0; i < (N - 1); i++)
+                    {
+                        g.DrawLine(new Pen(Color.Red, 1), Points[i], Points[i + 1]);
+                    }
+
+                    for (i = 0; i < N; i++)
+                    {
+                        g.FillEllipse(Brushes.Red, Points[i].X - rr / 2, Points[i].Y - rr / 2, rr, rr);
+                    }
+
+                }
+                else if (type == 5)
+                {
+                    //統計分布 0~250中抽中的數字
+                    //X軸 是 0~250
+                    //Y軸 是 都抽中的數字的次數
+
+                    N = 1500;
+                    H = 250;
+                    //int A = 30;
+
+                    int[] rnd = new int[N];
+                    int[] result = new int[H];
+
+                    richTextBox1.Text += "N = " + N.ToString() + "\n";
+                    richTextBox1.Text += "H = " + H.ToString() + "\n";
+
+                    //Random r = new Random();
+
+                    //int i;
+                    for (i = 0; i < N; i++)
+                    {
+                        rnd[i] = r.Next(H); //0~250 抽出數字  共 N 次
+                    }
+
+                    //累計到 result 陣列裏
+                    for (i = 0; i < H; i++)
+                    {
+                        result[i] = 0;
+                    }
+
+                    for (i = 0; i < N; i++)
+                    {
+                        result[rnd[i]]++;
+                    }
+
+                    /*
+                    richTextBox1.Text += "rnd array\n";
+                    for (i = 0; i < N; i++)
+                    {
+                        richTextBox1.Text += rnd[i].ToString() + " ";
+                    }
+
+                    richTextBox1.Text += "\n\n";
+
+                    richTextBox1.Text += "result array\n";
+                    for (i = 0; i < H; i++)
+                    {
+                        richTextBox1.Text += result[i].ToString() + " ";
+                    }
+                    richTextBox1.Text += "\n\n";
+                    */
+
+
+                    //把 result 陣列 畫出來
+                    int ratio = 10;
+
+                    Pen redPen = new Pen(Color.Red, 1);
+                    Point[] curvePoints = new Point[H];    //一維陣列內有 H 個Point
+
+                    for (i = 0; i < H; i++)
+                    {
+                        curvePoints[i].X = i;
+                        curvePoints[i].Y = 250-result[i] * ratio;
+                    }
+                    // Draw lines between original points to screen.
+                    //g.DrawLines(redPen, curvePoints);   //畫直線
+
+                    for (i = 0; i < H; i++)
+                    {
+                        g.FillEllipse(Brushes.Red, curvePoints[i].X, curvePoints[i].Y, 5, 5);
+
+                    }
+
+
+
+                }
+            }
+            else
+            {
+
+
+            }
+
+            return bitmap1;
+        }
+
         private void pictureBox5_Paint(object sender, PaintEventArgs e)
         {
         }
 
         private void timer5_Tick(object sender, EventArgs e)
         {
+            pictureBox5.Image = draw_random_pattern(1); //兩兩相連
+            pictureBox6.Image = draw_random_pattern(2); //圓點
+            pictureBox7.Image = draw_random_pattern(3); //圓點連線
+            pictureBox8.Image = draw_random_pattern(4); //布朗運動
+            pictureBox9.Image = draw_random_pattern(5); //亂數
         }
 
 

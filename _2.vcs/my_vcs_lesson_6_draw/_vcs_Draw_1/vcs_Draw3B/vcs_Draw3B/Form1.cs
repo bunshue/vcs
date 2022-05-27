@@ -167,7 +167,6 @@ namespace vcs_Draw3B
             pictureBox_spiral.Size = new Size(W, H);
             pictureBox_star.Size = new Size(W, H);
             pictureBox_polygon.Size = new Size(W, H);
-            pictureBox_brown.Size = new Size(W, H);
             pictureBox_round.Size = new Size(W, H);
             pictureBox_ellipse.Size = new Size(350, 200);
             pictureBox_circular.Size = new Size(W, H);
@@ -187,7 +186,6 @@ namespace vcs_Draw3B
             pictureBox_spiral.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox_star.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             pictureBox_polygon.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            pictureBox_brown.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             pictureBox_round.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             pictureBox_circular.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             pictureBox_ball.Location = new Point(x_st + dx * 1, y_st + dy * 1);
@@ -967,48 +965,7 @@ namespace vcs_Draw3B
             pictureBox_compass1.Refresh();
 
         }
-
         //指南針SP
-
-        //布朗運動 ST
-        void draw_brown_motion()
-        {
-            int N = 50;
-            Point[] pt;
-
-            int W = pictureBox_brown.ClientSize.Width;
-            int H = pictureBox_brown.ClientSize.Height;
-            int i;
-
-            pt = new Point[N];    //一維陣列內有N個Point
-
-            Random rand = new Random();
-            for (i = 0; i < N; i++)
-            {
-                pt[i] = new Point(rand.Next(W), rand.Next(H));
-
-            }
-
-            //新建圖檔, 初始化畫布
-            Bitmap bitmap1 = new Bitmap(pictureBox_brown.Width, pictureBox_brown.Height);
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
-            pictureBox_brown.Image = bitmap1;
-
-            g.DrawLines(Pens.Red, pt);
-
-            int r = 5;
-            for (i = 0; i < N; i++)
-            {
-                g.FillEllipse(Brushes.Red, pt[i].X - r, pt[i].Y - r, r * 2, r * 2);
-            }
-        }
-
-        private void timer_brown_Tick(object sender, EventArgs e)
-        {
-            draw_brown_motion();
-        }
-        //布朗運動 SP
 
         int cnt = 0;
         void draw_spin_signal()
