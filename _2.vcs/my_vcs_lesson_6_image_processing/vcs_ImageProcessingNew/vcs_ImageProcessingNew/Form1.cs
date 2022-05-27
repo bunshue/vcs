@@ -273,7 +273,113 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //圖像邊緣提取2
+            //圖像邊緣提取
 
+            /*
+            用到的算法是robert算子，這是一種比較簡單的算法：
+
+            f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
+
+            博主一共寫了三段代碼，第一段是邊緣提取，第二段是線條加粗，第三段是原圖和邊緣圖重合，三段代碼可以放在一起，但為了看得清晰我就把他們分開了。
+            */
+
+            string filename = @"C:\______test_files\picture1.jpg";
+            pictureBox1.Image = Image.FromFile(filename);
+
+            if (this.pictureBox1.Image != null)
+            {
+
+                int Height = this.pictureBox1.Image.Height;
+                int Width = this.pictureBox1.Image.Width;
+                Bitmap bitmap = new Bitmap(Width, Height, PixelFormat.Format24bppRgb);
+                Bitmap MyBitmap = (Bitmap)this.pictureBox1.Image;
+                BitmapData oldData = MyBitmap.LockBits(new Rectangle(0, 0, Width, Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb); //原圖
+                BitmapData newData = bitmap.LockBits(new Rectangle(0, 0, Width, Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);  //新圖即邊緣圖
+                unsafe
+                {
+                    //首先第一段代碼是提取邊緣，邊緣置為黑色，其他部分置為白色
+                    byte* pin_1 = (byte*)(oldData.Scan0.ToPointer());
+                    byte* pin_2 = pin_1 + (oldData.Stride);
+                    byte* pout = (byte*)(newData.Scan0.ToPointer());
+                    for (int y = 0; y < oldData.Height - 1; y++)
+                    {
+                        for (int x = 0; x < oldData.Width; x++)
+                        {
+                            //使用robert算子
+                            double b = System.Math.Sqrt(((double)pin_1[0] - (double)(pin_2[0] + 3)) * ((double)pin_1[0] - (double)(pin_2[0] + 3)) + ((double)(pin_1[0] + 3) - (double)pin_2[0]) * ((double)(pin_1[0] + 3) - (double)pin_2[0]));
+                            double g = System.Math.Sqrt(((double)pin_1[1] - (double)(pin_2[1] + 3)) * ((double)pin_1[1] - (double)(pin_2[1] + 3)) + ((double)(pin_1[1] + 3) - (double)pin_2[1]) * ((double)(pin_1[1] + 3) - (double)pin_2[1]));
+                            double r = System.Math.Sqrt(((double)pin_1[2] - (double)(pin_2[2] + 3)) * ((double)pin_1[2] - (double)(pin_2[2] + 3)) + ((double)(pin_1[2] + 3) - (double)pin_2[2]) * ((double)(pin_1[2] + 3) - (double)pin_2[2]));
+                            double bgr = b + g + r;//博主一直在糾結要不要除以3，感覺沒差，選阈值的時候調整一下就好了- -
+
+                            if (bgr > 80) //阈值，超過阈值判定為邊緣（選取適當的阈值）
+                            {
+                                b = 0;
+                                g = 0;
+                                r = 0;
+                            }
+                            else
+                            {
+                                b = 255;
+                                g = 255;
+                                r = 255;
+                            }
+                            pout[0] = (byte)(b);
+                            pout[1] = (byte)(g);
+                            pout[2] = (byte)(r);
+                            pin_1 = pin_1 + 3;
+                            pin_2 = pin_2 + 3;
+                            pout = pout + 3;
+
+                        }
+                        pin_1 += oldData.Stride - oldData.Width * 3;
+                        pin_2 += oldData.Stride - oldData.Width * 3;
+                        pout += newData.Stride - newData.Width * 3;
+                    }
+
+                    //這裡博主加粗了一下線條- -，不喜歡的同學可以刪了這段代碼
+                    byte* pin_5 = (byte*)(newData.Scan0.ToPointer());
+                    for (int y = 0; y < oldData.Height - 1; y++)
+                    {
+                        for (int x = 3; x < oldData.Width; x++)
+                        {
+                            if (pin_5[0] == 0 && pin_5[1] == 0 && pin_5[2] == 0)
+                            {
+                                pin_5[-3] = 0;
+                                pin_5[-2] = 0;
+                                pin_5[-1] = 0;      //邊緣點的前一個像素點置為黑色（注意一定要是遍歷過的像素點）                                                    
+                            }
+                            pin_5 += 3;
+
+                        }
+                        pin_5 += newData.Stride - newData.Width * 3;
+                    }
+
+                    //這段代碼是把原圖和邊緣圖重合
+                    byte* pin_3 = (byte*)(oldData.Scan0.ToPointer());
+                    byte* pin_4 = (byte*)(newData.Scan0.ToPointer());
+                    for (int y = 0; y < oldData.Height - 1; y++)
+                    {
+                        for (int x = 0; x < oldData.Width; x++)
+                        {
+                            if (pin_4[0] == 255 && pin_4[1] == 255 && pin_4[2] == 255)
+                            {
+                                pin_4[0] = pin_3[0];
+                                pin_4[1] = pin_3[1];
+                                pin_4[2] = pin_3[2];
+                            }
+                            pin_3 += 3;
+                            pin_4 += 3;
+                        }
+                        pin_3 += oldData.Stride - oldData.Width * 3;
+                        pin_4 += newData.Stride - newData.Width * 3;
+                    }
+                    //......
+                    bitmap.UnlockBits(newData);
+                    MyBitmap.UnlockBits(oldData);
+                    this.pictureBox1.Image = bitmap;
+                }
+            }
         }
 
         int borderwidth = 1;
@@ -439,7 +545,44 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //色階調整
+            //色階調整
 
+            string filename = @"C:\______test_files\picture1.jpg";
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+
+            Bitmap bitmap2 = img_color_gradation(bitmap1, 0, 100, 0);
+
+            pictureBox1.Image = bitmap2;
+
+
+        }
+
+        //色階調整
+        public static unsafe Bitmap img_color_gradation(Bitmap src, int r, int g, int b)
+        {
+            int width = src.Width;
+            int height = src.Height;
+            Bitmap back = new Bitmap(width, height);
+            Rectangle rect = new Rectangle(0, 0, width, height);
+            //這種速度最快  
+            BitmapData bmpData = src.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);//24位rgb顯示一個像素，即一個像素點3個字節，每個字節是BGR分量。Format32bppRgb是用4個字節表示一個像素  
+            byte* ptr = (byte*)(bmpData.Scan0);
+            for (int j = 0; j < height; j++)
+            {
+                for (int i = 0; i < width; i++)
+                {
+                    //ptr[2]爲r值，ptr[1]爲g值，ptr[0]爲b值  
+                    int red = ptr[2] + r; if (red > 255) red = 255; if (red < 0) red = 0;
+                    int green = ptr[1] + g; if (green > 255) green = 255; if (green < 0) green = 0;
+                    int blue = ptr[0] + b; if (blue > 255) blue = 255; if (blue < 0) blue = 0;
+                    back.SetPixel(i, j, Color.FromArgb(red, green, blue));
+                    ptr += 3; //Format24bppRgb格式每個像素佔3字節  
+                }
+                ptr += bmpData.Stride - bmpData.Width * 3;//每行讀取到最後“有用”數據時，跳過未使用空間XX  
+            }
+            src.UnlockBits(bmpData);
+            return back;
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -454,7 +597,57 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //浮雕效果3
 
+            string filename = @"C:\______test_files\picture1.jpg";
+            pictureBox1.Image = Image.FromFile(filename);
+
+
+            /*
+使圖像產生浮雕的效果，主要通過對圖像像素點的像素值分別與相鄰像素點的像素值相減後加上128，然後將其作為新的像素點的值。
+
+以浮雕效果顯示圖像主要通過GetPixel方法獲得每一點像素的值，通過SetPixel設置該像素點的像素值。
+*/
+
+            //以浮雕效果顯示圖像
+            try
+            {
+                int Height = this.pictureBox1.Image.Height;
+                int Width = this.pictureBox1.Image.Width;
+                Bitmap newBitmap = new Bitmap(Width, Height);
+                Bitmap oldBitmap = (Bitmap)this.pictureBox1.Image;
+                Color pixel1, pixel2;
+                for (int x = 0; x < Width - 1; x++)
+                {
+                    for (int y = 0; y < Height - 1; y++)
+                    {
+                        int r = 0, g = 0, b = 0;
+                        pixel1 = oldBitmap.GetPixel(x, y);
+                        pixel2 = oldBitmap.GetPixel(x + 1, y + 1);
+                        r = Math.Abs(pixel1.R - pixel2.R + 128);
+                        g = Math.Abs(pixel1.G - pixel2.G + 128);
+                        b = Math.Abs(pixel1.B - pixel2.B + 128);
+                        if (r > 255)
+                            r = 255;
+                        if (r < 0)
+                            r = 0;
+                        if (g > 255)
+                            g = 255;
+                        if (g < 0)
+                            g = 0;
+                        if (b > 255)
+                            b = 255;
+                        if (b < 0)
+                            b = 0;
+                        newBitmap.SetPixel(x, y, Color.FromArgb(r, g, b));
+                    }
+                }
+                this.pictureBox1.Image = newBitmap;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "信息提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void button11_Click(object sender, EventArgs e)

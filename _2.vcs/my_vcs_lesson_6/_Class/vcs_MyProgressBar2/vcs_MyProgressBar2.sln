@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_ProgressBar", "vcs_ProgressBar\vcs_ProgressBar.csproj", "{8990B0CB-B9E1-4DF0-BED0-FD41E1F460E5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_MyProgressBar2", "vcs_MyProgressBar2\vcs_MyProgressBar2.csproj", "{8990B0CB-B9E1-4DF0-BED0-FD41E1F460E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

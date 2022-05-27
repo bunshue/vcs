@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 using System.Threading;
 
-namespace vcs_ProgressBar
+namespace vcs_MyProgressBar2
 {
     public partial class Form1 : Form
     {

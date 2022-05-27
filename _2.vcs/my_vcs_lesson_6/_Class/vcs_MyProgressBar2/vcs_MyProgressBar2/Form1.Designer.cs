@@ -1,4 +1,4 @@
-﻿namespace vcs_ProgressBar
+﻿namespace vcs_MyProgressBar2
 {
     partial class Form1
     {
