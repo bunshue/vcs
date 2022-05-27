@@ -32,6 +32,8 @@ namespace vcs_PictureBox1
 
             //要先把圖片框PictureBox靠近Form的邊緣
             //C# 控制項跟著視窗自動縮放或維持相對位置  可以使用 Control.Anchor 屬性
+
+            pictureBox1.Dock = DockStyle.Fill;
         }
     }
 }

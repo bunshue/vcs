@@ -87,10 +87,10 @@ namespace vcs_PictureMontageHex
             RemoveHexagon(row, col);
 
             // Let the user select a new picture.
-            if (ofdFile.ShowDialog() == DialogResult.OK)
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                Bitmap bm = LoadBitmapUnlocked(ofdFile.FileName);
-                Hexagons.Add(new Hexagon(row, col, bm, ofdFile.FileName));
+                Bitmap bm = LoadBitmapUnlocked(openFileDialog1.FileName);
+                Hexagons.Add(new Hexagon(row, col, bm, openFileDialog1.FileName));
             }
 
             // Redraw.
@@ -114,19 +114,6 @@ namespace vcs_PictureMontageHex
                         return i;
             }
             return -1;
-        }
-
-        private void mnuFileSaveAs_Click(object sender, EventArgs e)
-        {
-            if (sfdSave.ShowDialog() == DialogResult.OK)
-            {
-                SaveImage(GridImage, sfdSave.FileName);
-            }
-        }
-
-        private void mnuFileExit_Click(object sender, EventArgs e)
-        {
-            Close();
         }
 
         // A parameter changed. Update the drawing.
@@ -178,20 +165,20 @@ namespace vcs_PictureMontageHex
 
         private void picBorderColor_Click(object sender, EventArgs e)
         {
-            cdBorderColor.Color = picBorderColor.BackColor;
-            if (cdBorderColor.ShowDialog() == DialogResult.OK)
+            colorDialog1.Color = picBorderColor.BackColor;
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
             {
-                picBorderColor.BackColor = cdBorderColor.Color;
+                picBorderColor.BackColor = colorDialog1.Color;
                 pictureBox1.Refresh();
             }
         }
 
         private void picBackgroundColor_Click(object sender, EventArgs e)
         {
-            cdBorderColor.Color = picBackgroundColor.BackColor;
-            if (cdBorderColor.ShowDialog() == DialogResult.OK)
+            colorDialog1.Color = picBackgroundColor.BackColor;
+            if (colorDialog1.ShowDialog() == DialogResult.OK)
             {
-                picBackgroundColor.BackColor = cdBorderColor.Color;
+                picBackgroundColor.BackColor = colorDialog1.Color;
                 pictureBox1.Refresh();
             }
         }
@@ -231,65 +218,6 @@ namespace vcs_PictureMontageHex
             ymax += xmin;
         }
 
-        // Load the files from a directory.
-        private void mnuFileOpenDirectoryFiles_Click(object sender, EventArgs e)
-        {
-            if (ofdDirectoryFiles.ShowDialog() == DialogResult.OK)
-            {
-                // Get a list of the files in the directory.
-                FileInfo info = new FileInfo(ofdDirectoryFiles.FileName);
-                DirectoryInfo dir_info = info.Directory;
-                List<FileInfo> file_infos = new List<FileInfo>();
-                foreach (FileInfo file_info in dir_info.GetFiles())
-                {
-                    string ext = file_info.Extension.ToLower().Replace(".", "");
-                    if ((ext == "bmp") || (ext == "png") ||
-                        (ext == "jpg") || (ext == "jpeg") ||
-                        (ext == "gif") || (ext == "tiff"))
-                    {
-                        file_infos.Add(file_info);
-                    }
-                }
-
-                // Calculate the number of rows and columns.
-                int num_rows = (int)Math.Sqrt(file_infos.Count);
-                int num_cols = num_rows;
-                if (num_rows * num_cols < file_infos.Count)
-                    num_cols++;
-                if (num_rows * num_cols < file_infos.Count)
-                    num_rows++;
-
-                // Load the files.
-                Hexagons = new List<Hexagon>();
-                int index = 0;
-                for (int row = 0; row < num_rows; row++)
-                {
-                    for (int col = 0; col < num_cols; col++)
-                    {
-                        string name = file_infos[index].Name;
-                        string full_name = file_infos[index].FullName;
-                        Bitmap bm = LoadBitmapUnlocked(full_name);
-                        Hexagons.Add(new Hexagon(row, col, bm, name));
-
-                        index++;
-                        if (index >= file_infos.Count) break;
-                    }
-                    if (index >= file_infos.Count) break;
-                }
-
-                MakeGrid();
-
-
-
-            }
-        }
-
-        private void btnCreateGrid_Click(object sender, EventArgs e)
-        {
-            MakeGrid();
-            pictureBox1.Visible = true;
-        }
-
         // Make and display a new grid.
         private void MakeGrid()
         {
@@ -314,16 +242,14 @@ namespace vcs_PictureMontageHex
 
             // Display the result.
             pictureBox1.Image = GridImage;
-            mnuFileSaveAs.Enabled = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string folder_path = @"C:\______test_files\_pic";
-            richTextBox1.Text += "folder_path = " + folder_path + "\n";
+            string foldername = @"C:\______test_files\__pic\_MU";
 
             // Get a list of the files in the directory.
-            DirectoryInfo dir_info = new DirectoryInfo(folder_path);
+            DirectoryInfo dir_info = new DirectoryInfo(foldername);
 
             List<FileInfo> file_infos = new List<FileInfo>();
             foreach (FileInfo file_info in dir_info.GetFiles())
@@ -368,8 +294,85 @@ namespace vcs_PictureMontageHex
 
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            // Load the files from a directory.
 
-        // Load the files from a directory.
+            string foldername = @"C:\______test_files\__pic\_MU";
+
+            DirectoryInfo dir_info = new DirectoryInfo(foldername);
+            List<FileInfo> file_infos = new List<FileInfo>();
+            foreach (FileInfo file_info in dir_info.GetFiles())
+            {
+                string ext = file_info.Extension.ToLower().Replace(".", "");
+                if ((ext == "bmp") || (ext == "png") ||
+                    (ext == "jpg") || (ext == "jpeg") ||
+                    (ext == "gif") || (ext == "tiff"))
+                {
+                    file_infos.Add(file_info);
+                }
+            }
+
+            // Calculate the number of rows and columns.
+            int num_rows = (int)Math.Sqrt(file_infos.Count);
+            int num_cols = num_rows;
+            if (num_rows * num_cols < file_infos.Count)
+                num_cols++;
+            if (num_rows * num_cols < file_infos.Count)
+                num_rows++;
+
+            // Load the files.
+            Hexagons = new List<Hexagon>();
+            int index = 0;
+            for (int row = 0; row < num_rows; row++)
+            {
+                for (int col = 0; col < num_cols; col++)
+                {
+                    string name = file_infos[index].Name;
+                    string full_name = file_infos[index].FullName;
+                    Bitmap bm = LoadBitmapUnlocked(full_name);
+                    Hexagons.Add(new Hexagon(row, col, bm, name));
+
+                    index++;
+                    if (index >= file_infos.Count) break;
+                }
+                if (index >= file_infos.Count) break;
+            }
+
+            MakeGrid();
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+
+            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+
+            try
+            {
+                //bitmap1.Save(@file1, ImageFormat.Jpeg);
+                //bitmap1.Save(filename, ImageFormat.Bmp);
+                //bitmap1.Save(@file3, ImageFormat.Png);
+
+                SaveImage(GridImage, filename);
+
+                //richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                richTextBox1.Text += "已存檔 : " + filename + "\n";
+                //richTextBox1.Text += "已存檔 : " + file3 + "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+            }
+
+
+
+
+
+        }
+
+
 
     }
 }

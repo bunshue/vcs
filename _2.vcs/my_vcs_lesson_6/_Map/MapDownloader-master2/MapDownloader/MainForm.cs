@@ -51,7 +51,7 @@ namespace MapDownloader
         private GMapOverlay regionOverlay = new GMapOverlay("region");
 
         private int retryNum = 3;
-        private string tilePath = "C:\\GisMap";
+        private string tilePath = "C:\\______test_files\\GisMap";
 
         private bool isLeftButtonDown = false;
         // Current dragable node when editing "current area polygon"
@@ -94,12 +94,17 @@ namespace MapDownloader
 
             string retryStr = ConfigHelper.GetAppConfig("Retry");
             string center = ConfigHelper.GetAppConfig("MapCenter");
+
+                richTextBox1.Text += "get center : " + center + "\n";
+
             string[] centerPoints = center.Split(',');
             if (centerPoints.Length == 2)
             {
                 if (gMapControl1 != null)
                 {
                     gMapControl1.Position = new PointLatLng(double.Parse(centerPoints[1]), double.Parse(centerPoints[0]));
+
+                        richTextBox1.Text += "Position : " + gMapControl1.Position.ToString() + "\n";
                 }
             }
             retryNum = int.Parse(retryStr);
@@ -136,6 +141,12 @@ namespace MapDownloader
             lb_draw.Text = "";
             lb_info1.Text = "";
             lb_info2.Text = "";
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         // Init map
@@ -591,7 +602,37 @@ namespace MapDownloader
 
         void loadChinaWorker_DoWork(object sender, DoWorkEventArgs e)
         {
+            try
+            {
+                string filename_json = @"C:\______test_files\_json\ChinaBoundary";
+                byte[] buffer = File.ReadAllBytes(filename_json);
+
+                //byte[] buffer = Properties.Resources.ChinaBoundary_Province_City; //另種讀取資料的方式
+                //byte[] buffer = Properties.Resources.ChinaBoundary;               //另種讀取資料的方式
+                china = GMapChinaRegion.ChinaMapRegion.GetChinaRegionFromJsonBinaryBytes(buffer);
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "Error : " + ex.ToString() + "\n";
+            }
         }
+
+        /*
+        void loadChinaWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                //byte[] buffer = Properties.Resources.ChinaBoundary_Province_City;
+                byte[] buffer = Properties.Resources.ChinaBoundary;
+                china = GMapChinaRegion.ChinaMapRegion.GetChinaRegionFromJsonBinaryBytes(buffer);
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "Error : " + ex.ToString() + "\n";
+            }
+
+        }
+        */
 
         #endregion
 
@@ -610,6 +651,7 @@ namespace MapDownloader
                     RectLatLng area = GMapUtil.PolygonUtils.GetRegionMaxRect(polygon);
                     try
                     {
+                        richTextBox1.Text += "開啟 下載地圖 表單\n";
                         DownloadCfgForm downloadCfgForm = new DownloadCfgForm(area, this.gMapControl1.MapProvider);
                         if (downloadCfgForm.ShowDialog() == DialogResult.OK)
                         {
@@ -688,11 +730,13 @@ namespace MapDownloader
 
         private void 下载地图ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "你按了 下載地圖\n";
             DownloadMap(currentAreaPolygon);
         }
 
         private void 允许编辑ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "你按了 允許編輯\n";
             this.允许编辑ToolStripMenuItem.Enabled = false;
             MapRoute route = currentAreaPolygon;
             this.currentDragableNodes = new List<GMapMarkerEllipse>();
@@ -713,6 +757,7 @@ namespace MapDownloader
 
         private void 停止编辑ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "你按了 停止編輯\n";
             this.允许编辑ToolStripMenuItem.Enabled = true;
             if (currentDragableNodes == null) return;
             for (int i = 0; i < currentDragableNodes.Count; ++i)
@@ -1169,19 +1214,13 @@ namespace MapDownloader
 
         private void 下载KMLToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "你按了 下載KML\n";
             if (currentAreaPolygon != null)
             {
-                string name = "KmlFile.kml";
-                SaveFileDialog saveFileDialog1 = new SaveFileDialog
-                {
-                    FileName = name,
-                    Title = "选择Kml文件位置",
-                    Filter = "Kml文件|*.kml"
-                };
-                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    SaveKmlToFile(currentAreaPolygon, name, saveFileDialog1.FileName);
-                }
+                string fname = "kml_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".kml";
+                string filename = Application.StartupPath + "\\" + fname;
+                SaveKmlToFile(currentAreaPolygon, fname, filename);
+                richTextBox1.Text += "已存檔 : " + filename + "\n";
             }
         }
 
@@ -2150,6 +2189,7 @@ namespace MapDownloader
         {
 
         }
+
 
     }
 }

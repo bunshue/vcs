@@ -14,17 +14,45 @@ namespace vcs_OptimizeJpg
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\elephant.jpg";
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private Image OriginalImage = null;
+        private Image image = null;
 
-        // Select the default compression level.
         private void Form1_Load(object sender, EventArgs e)
         {
-            cboCI.Text = "100";
+            cboCI.Text = "100"; //預設壓縮等級
+
+            // Load the file.
+            image = LoadBitmapUnlocked(filename);
+
+            // Save at compression 100.
+            string file_name = Application.StartupPath + "\\__temp.jpg";
+            SaveJpg(image, file_name, 100);
+
+            /*
+            string file_name100 = Application.StartupPath + "\\__temp100.jpg";
+            SaveJpg(image, file_name100, 100);
+
+
+            string file_name60 = Application.StartupPath + "\\__temp60.jpg";
+            SaveJpg(image, file_name60, 60);
+
+
+            string file_name05 = Application.StartupPath + "\\__temp05.jpg";
+            SaveJpg(image, file_name05, 5);
+            */
+
+            // See how big the file is.
+            FileInfo file_info = new FileInfo(file_name);
+            lbl100.Text = file_info.Length.ToFileSizeApi();
+
+            // Display the file at the selected compression.
+            ShowImageSample();
         }
 
         // Display a sample that uses the selected compression index.
@@ -37,7 +65,7 @@ namespace vcs_OptimizeJpg
         // Display a sample that uses the selected compression index.
         private void ShowImageSample()
         {
-            if (OriginalImage == null)
+            if (image == null)
             {
                 return;
             }
@@ -52,7 +80,7 @@ namespace vcs_OptimizeJpg
             // Save the image with the selected compression level.
             long compression = long.Parse(cboCI.Text);
             string file_name = Application.StartupPath + "\\__temp.jpg";
-            SaveJpg(OriginalImage, file_name, compression);
+            SaveJpg(image, file_name, compression);
 
             // Display the result without locking the file.
             pictureBox1.Image = LoadBitmapUnlocked(file_name);
@@ -103,51 +131,10 @@ namespace vcs_OptimizeJpg
             }
         }
 
-        //開啟JPG檔
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (ofdPicture.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    // Load the file.
-                    OriginalImage = LoadBitmapUnlocked(ofdPicture.FileName);
-
-                    // Save at compression 100.
-                    string file_name = Application.StartupPath + "\\__temp.jpg";
-                    SaveJpg(OriginalImage, file_name, 100);
-
-                    /*
-                    string file_name100 = Application.StartupPath + "\\__temp100.jpg";
-                    SaveJpg(OriginalImage, file_name100, 100);
-
-
-                    string file_name60 = Application.StartupPath + "\\__temp60.jpg";
-                    SaveJpg(OriginalImage, file_name60, 60);
-
-
-                    string file_name05 = Application.StartupPath + "\\__temp05.jpg";
-                    SaveJpg(OriginalImage, file_name05, 5);
-                    */
-
-                    // See how big the file is.
-                    FileInfo file_info = new FileInfo(file_name);
-                    lbl100.Text = file_info.Length.ToFileSizeApi();
-
-                    // Display the file at the selected compression.
-                    ShowImageSample();
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-                }
-            }
-        }
-
         // Save the file with the selected compression level.
         private void button2_Click(object sender, EventArgs e)
         {
-            if (OriginalImage == null)
+            if (image == null)
             {
                 richTextBox1.Text += "尚未開啟圖檔\n";
                 return;
@@ -156,7 +143,7 @@ namespace vcs_OptimizeJpg
             try
             {
                 string filename = Application.StartupPath + "\\jpg_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-                OriginalImage.Save(filename, ImageFormat.Jpeg);
+                image.Save(filename, ImageFormat.Jpeg);
                 richTextBox1.Text += "已存檔 : " + filename + "\n";
             }
             catch (Exception ex)

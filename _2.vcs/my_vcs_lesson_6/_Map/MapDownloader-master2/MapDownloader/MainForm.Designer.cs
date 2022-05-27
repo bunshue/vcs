@@ -157,6 +157,7 @@
             this.button9 = new System.Windows.Forms.Button();
             this.lb_info1 = new System.Windows.Forms.Label();
             this.gMapControl1 = new MapDownloader.MapControl();
+            this.bt_clear = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.contextMenuStripSelectedArea.SuspendLayout();
@@ -1339,12 +1340,23 @@
             this.gMapControl1.TabIndex = 0;
             this.gMapControl1.Zoom = 0D;
             // 
+            // bt_clear
+            // 
+            this.bt_clear.Location = new System.Drawing.Point(1147, 381);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(69, 32);
+            this.bt_clear.TabIndex = 27;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1479, 700);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.lb_info1);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
@@ -1523,6 +1535,7 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Label lb_info1;
+        private System.Windows.Forms.Button bt_clear;
     }
 }
 

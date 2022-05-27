@@ -121,9 +121,9 @@
             this.button6.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button6.Location = new System.Drawing.Point(829, 12);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(115, 64);
+            this.button6.Size = new System.Drawing.Size(115, 78);
             this.button6.TabIndex = 7;
-            this.button6.Text = "開啟圖片";
+            this.button6.Text = "開啟圖片在listBox裏";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 

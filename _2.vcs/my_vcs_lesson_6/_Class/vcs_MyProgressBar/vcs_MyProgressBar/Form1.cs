@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_PictureBox5_Slider
+namespace vcs_MyProgressBar
 {
     public partial class Form1 : Form
     {
@@ -20,6 +20,10 @@ namespace vcs_PictureBox5_Slider
         {
             label1.Text = "";
 
+            pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
+            pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
+            pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
+            pictureBox1.Paint += new PaintEventHandler(pictureBox1_Paint);
         }
 
         // The current value.

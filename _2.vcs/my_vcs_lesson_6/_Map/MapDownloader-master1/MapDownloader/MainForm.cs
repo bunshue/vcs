@@ -53,7 +53,7 @@ namespace MapDownloader
         private GMapOverlay regionOverlay = new GMapOverlay("region");
 
         private int retryNum = 3;
-        private string tilePath = "C:\\GisMap";
+        private string tilePath = "C:\\______test_files\\GisMap";
         private SQLitePureImageCache sqliteCache = new SQLitePureImageCache();
         private MySQLPureImageCacheMulti mysqlCache = new MySQLPureImageCacheMulti();
 
@@ -98,14 +98,6 @@ namespace MapDownloader
 
             richTextBox1.Text += "4444 InitMySQLConString()\n";
             InitMySQLConString();
-
-            //控件位置
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-        }
-
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
         }
 
         // Init App, load configurations
@@ -182,6 +174,12 @@ namespace MapDownloader
             lb_draw.Text = "";
             lb_info1.Text = "";
             lb_info2.Text = "";
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         // Init map
@@ -642,6 +640,24 @@ namespace MapDownloader
         {
             try
             {
+                string filename_json = @"C:\______test_files\_json\ChinaBoundary";
+                byte[] buffer = File.ReadAllBytes(filename_json);
+
+                //byte[] buffer = Properties.Resources.ChinaBoundary_Province_City; //另種讀取資料的方式
+                //byte[] buffer = Properties.Resources.ChinaBoundary;               //另種讀取資料的方式
+                china = GMapChinaRegion.ChinaMapRegion.GetChinaRegionFromJsonBinaryBytes(buffer);
+            }
+            catch (Exception ex)
+            {
+                //log.Error(ex);
+            }
+        }
+
+        /*
+        void loadChinaWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
                 //byte[] buffer = Properties.Resources.ChinaBoundary_Province_City;
                 byte[] buffer = Properties.Resources.ChinaBoundary;
                 china = GMapChinaRegion.ChinaMapRegion.GetChinaRegionFromJsonBinaryBytes(buffer);
@@ -651,6 +667,7 @@ namespace MapDownloader
                 richTextBox1.Text += "Error : " + ex.ToString() + "\n";
             }
         }
+        */
 
         #endregion
 
@@ -669,6 +686,7 @@ namespace MapDownloader
                     RectLatLng area = GMapUtil.PolygonUtils.GetRegionMaxRect(polygon);
                     try
                     {
+                        richTextBox1.Text += "開啟 下載地圖 表單\n";
                         DownloadCfgForm downloadCfgForm = new DownloadCfgForm(area, this.gMapControl1.MapProvider);
                         if (downloadCfgForm.ShowDialog() == DialogResult.OK)
                         {
@@ -747,11 +765,13 @@ namespace MapDownloader
 
         private void 下载地图ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "你按了 下載地圖\n";
             DownloadMap(currentAreaPolygon);
         }
 
         private void 允许编辑ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "你按了 允許編輯\n";
             this.允许编辑ToolStripMenuItem.Enabled = false;
             MapRoute route = currentAreaPolygon;
             this.currentDragableNodes = new List<GMapMarkerEllipse>();
@@ -772,6 +792,7 @@ namespace MapDownloader
 
         private void 停止编辑ToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "你按了 停止編輯\n";
             this.允许编辑ToolStripMenuItem.Enabled = true;
             if (currentDragableNodes == null) return;
             for (int i = 0; i < currentDragableNodes.Count; ++i)
@@ -1228,19 +1249,13 @@ namespace MapDownloader
 
         private void 下载KMLToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "你按了 下載KML\n";
             if (currentAreaPolygon != null)
             {
-                string name = "KmlFile.kml";
-                SaveFileDialog saveFileDialog1 = new SaveFileDialog
-                {
-                    FileName = name,
-                    Title = "选择Kml文件位置",
-                    Filter = "Kml文件|*.kml"
-                };
-                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
-                {
-                    SaveKmlToFile(currentAreaPolygon, name, saveFileDialog1.FileName);
-                }
+                string fname = "kml_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".kml";
+                string filename = Application.StartupPath + "\\" + fname;
+                SaveKmlToFile(currentAreaPolygon, fname, filename);
+                richTextBox1.Text += "已存檔 : " + filename + "\n";
             }
         }
 
@@ -2140,11 +2155,74 @@ namespace MapDownloader
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //從 恭王府 天安門
+
+            PointLatLng p1 = new PointLatLng(39.9422, 116.3927);    //恭王府
+            PointLatLng p2 = new PointLatLng(39.9142, 116.4039);    //天安門
+
+            /* 從地圖坐標找起
+            int x = 200;
+            int y = 200;
+
+            routeStartPoint = this.gMapControl1.FromLocalToLatLng(x, y);
+
+            x = 400;
+            y = 400;
+            routeEndPoint = this.gMapControl1.FromLocalToLatLng(x, y);
+            */
+
+            routeStartPoint = p1;
+            routeEndPoint = p2;
+
+            GMapImageMarker marker = new GMapImageMarker(routeEndPoint, Properties.Resources.MapMarker_Bubble_Chartreuse);
+            this.routeOverlay.Markers.Add(marker);
+
+            if (routeStartPoint != PointLatLng.Empty)
+            {
+                MapRoute route = GMapProvidersExt.AMap.AMapProvider.Instance.GetRoute(routeStartPoint, routeEndPoint, currentCenterCityName);
+
+                GMapRoute mapRoute = new GMapRoute(route.Points, "");
+                if (mapRoute != null)
+                {
+                    this.routeOverlay.Routes.Add(mapRoute);
+                    this.gMapControl1.ZoomAndCenterRoute(mapRoute);
+                }
+            }
 
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
+            PointLatLng p1 = new PointLatLng(39.9422, 116.3927);    //恭王府
+            PointLatLng p2 = new PointLatLng(39.9142, 116.4039);    //天安門
+
+            RoutingProvider rp = gMapControl1.MapProvider as RoutingProvider;
+            //獲取路徑
+            //根據起止點經緯度查找路徑
+            //MapRoute GetRoute(PointLatLng start, PointLatLng end, bool avoidHighways, bool walkingMode, int Zoom);
+            //根據起止點地址查找路徑
+            //MapRoute GetRoute(string start, string end, bool avoidHighways, bool walkingMode, int Zoom);
+            //avoidHighways：是否避免走高速公路
+            //walkingMode：是否步行
+            //zoom：查找路徑時的zoom
+
+            //MapRoute route = rp.GetRoute(p1, p2, false, false, (int)gMapControl1.Zoom);
+            MapRoute route = GMapProvidersExt.AMap.AMapProvider.Instance.GetRoute(p1, p2, currentCenterCityName);
+            if (route != null)
+            {
+                //添加routes圖層
+                GMapOverlay routes = new GMapOverlay("routes");
+                GMapRoute r = new GMapRoute(route.Points, route.Name);
+                r.Stroke = new Pen(Color.Red, 3);   //連線顏色與大小
+                routes.Routes.Add(r);
+                //添加到地圖
+                gMapControl1.Overlays.Add(routes);
+                gMapControl1.ZoomAndCenterRoute(r);
+            }
+            else
+            {
+                MessageBox.Show("未能找到路線");
+            }
 
         }
 

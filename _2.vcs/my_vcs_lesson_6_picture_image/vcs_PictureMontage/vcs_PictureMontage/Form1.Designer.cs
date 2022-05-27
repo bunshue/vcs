@@ -48,9 +48,9 @@
             // 
             this.pictureBox1.BackColor = System.Drawing.Color.White;
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(17, 58);
+            this.pictureBox1.Location = new System.Drawing.Point(17, 63);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(782, 520);
+            this.pictureBox1.Size = new System.Drawing.Size(800, 600);
             this.pictureBox1.TabIndex = 2;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
@@ -60,17 +60,18 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(885, 12);
+            this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.richTextBox1.Location = new System.Drawing.Point(835, 0);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(155, 630);
+            this.richTextBox1.Size = new System.Drawing.Size(231, 673);
             this.richTextBox1.TabIndex = 3;
             this.richTextBox1.Text = "";
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(261, 12);
+            this.button4.Location = new System.Drawing.Point(359, 12);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.Size = new System.Drawing.Size(100, 40);
             this.button4.TabIndex = 10;
             this.button4.Text = "Background";
             this.button4.UseVisualStyleBackColor = true;
@@ -78,9 +79,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(180, 12);
+            this.button3.Location = new System.Drawing.Point(241, 12);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(100, 40);
             this.button3.TabIndex = 9;
             this.button3.Text = "Save";
             this.button3.UseVisualStyleBackColor = true;
@@ -88,9 +89,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(99, 12);
+            this.button2.Location = new System.Drawing.Point(127, 12);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(100, 40);
             this.button2.TabIndex = 8;
             this.button2.Text = "Open";
             this.button2.UseVisualStyleBackColor = true;
@@ -100,7 +101,7 @@
             // 
             this.button1.Location = new System.Drawing.Point(17, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(100, 40);
             this.button1.TabIndex = 7;
             this.button1.Text = "New";
             this.button1.UseVisualStyleBackColor = true;
@@ -112,7 +113,7 @@
             this.groupBox1.Controls.Add(this.radioButton3);
             this.groupBox1.Controls.Add(this.radioButton2);
             this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Location = new System.Drawing.Point(352, 7);
+            this.groupBox1.Location = new System.Drawing.Point(610, 7);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(207, 45);
             this.groupBox1.TabIndex = 11;
@@ -169,7 +170,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1066, 598);
+            this.ClientSize = new System.Drawing.Size(1066, 673);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -179,6 +180,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

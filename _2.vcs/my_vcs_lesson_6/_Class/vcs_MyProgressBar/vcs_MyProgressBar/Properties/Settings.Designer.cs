@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_PictureBox5_Slider.Properties
+namespace vcs_MyProgressBar.Properties
 {
 
 

@@ -15,13 +15,18 @@ namespace vcs_PictureMontage
 {
     public partial class Form1 : Form
     {
+        // The loaded images.
+        private List<ImageInfo> Images = new List<ImageInfo>();
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        // The loaded images.
-        private List<ImageInfo> Images = new List<ImageInfo>();
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
 
         // Redraw the images.
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -297,5 +302,6 @@ namespace vcs_PictureMontage
             }
             pictureBox1.Refresh();
         }
+
     }
 }

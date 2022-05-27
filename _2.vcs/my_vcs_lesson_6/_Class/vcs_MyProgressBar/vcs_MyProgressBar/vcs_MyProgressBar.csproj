@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{8B892818-72FE-4898-A025-7E901A4F6888}</ProjectGuid>
+    <ProjectGuid>{B928BC7E-A3A4-4297-ADE6-21AEA3AE6FFB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_PictureBox5_Slider</RootNamespace>
-    <AssemblyName>vcs_PictureBox5_Slider</AssemblyName>
+    <RootNamespace>vcs_MyProgressBar</RootNamespace>
+    <AssemblyName>vcs_MyProgressBar</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
