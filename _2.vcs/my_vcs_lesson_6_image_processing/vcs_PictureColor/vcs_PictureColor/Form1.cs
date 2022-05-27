@@ -520,6 +520,10 @@ namespace vcs_PictureColor
                 }
             }
 
+            //一律忽視最亮和最暗的數值
+            brightness_data[0] = 0;
+            brightness_data[255] = 0;
+
             richTextBox1.Text += "共有 " + total_points.ToString() + " 個點\n";
 
             draw_brightness(pbox2);
@@ -545,7 +549,7 @@ namespace vcs_PictureColor
             Bitmap bitmap2 = new Bitmap(ww, hh1);
             Graphics g2 = Graphics.FromImage(bitmap2);
             g2.Clear(Color.Pink);
-            Pen p = new Pen(Color.Red, 2);
+            Pen p = new Pen(Color.Blue, 2);
 
             double ratio = 0;
             ratio = (double)hh2 / most;

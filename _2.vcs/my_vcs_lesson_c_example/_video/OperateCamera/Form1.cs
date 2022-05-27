@@ -6,6 +6,7 @@ using System.Drawing.Imaging;
 using System.Text;
 using System.Windows;
 using System.Windows.Forms;
+using System.Drawing;
 
 using System.IO;
 using System.Windows.Media.Imaging;
@@ -15,9 +16,6 @@ using AForge.Controls;
 using AForge.Video;
 using AForge.Video.DirectShow;
 using AForge.Video.FFMPEG;
-
-using Size = System.Drawing.Size;
-using System.Drawing;
 
 namespace OperateCamera
 {

@@ -29,34 +29,48 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer_spotlight2 = new System.Windows.Forms.Timer(this.components);
+            this.pictureBox_spotlight2 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_spotlight2)).BeginInit();
             this.SuspendLayout();
             // 
-            // timer1
+            // timer_spotlight2
             // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 10;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer_spotlight2.Enabled = true;
+            this.timer_spotlight2.Interval = 10;
+            this.timer_spotlight2.Tick += new System.EventHandler(this.timer_spotlight2_Tick);
+            // 
+            // pictureBox_spotlight2
+            // 
+            this.pictureBox_spotlight2.Location = new System.Drawing.Point(474, 12);
+            this.pictureBox_spotlight2.Name = "pictureBox_spotlight2";
+            this.pictureBox_spotlight2.Size = new System.Drawing.Size(219, 206);
+            this.pictureBox_spotlight2.TabIndex = 1;
+            this.pictureBox_spotlight2.TabStop = false;
+            this.pictureBox_spotlight2.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_spotlight2_Paint);
+            this.pictureBox_spotlight2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox_spotlight2_MouseDown);
+            this.pictureBox_spotlight2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox_spotlight2_MouseMove);
+            this.pictureBox_spotlight2.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox_spotlight2_MouseUp);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 266);
+            this.ClientSize = new System.Drawing.Size(1138, 768);
+            this.Controls.Add(this.pictureBox_spotlight2);
             this.DoubleBuffered = true;
             this.Name = "Form1";
             this.Text = "探照燈";
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
-            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
-            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
-            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
+            this.Load += new System.EventHandler(this.Form1_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_spotlight2)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timer_spotlight2;
+        private System.Windows.Forms.PictureBox pictureBox_spotlight2;
     }
 }
 

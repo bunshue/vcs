@@ -99,6 +99,7 @@ namespace MapDownloader
             richTextBox1.Text += "3333 InitPOISearch()\n";
             InitPOISearch();
 
+            richTextBox1.Text += "4444 InitMySQLConString()\n";
             InitMySQLConString();
         }
 
