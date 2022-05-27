@@ -78,6 +78,8 @@
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_time = new System.Windows.Forms.PictureBox();
+            this.label_datetime = new System.Windows.Forms.Label();
+            this.pictureBox_datetime = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
@@ -90,6 +92,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_time)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_datetime)).BeginInit();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -124,9 +127,10 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(645, 453);
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
             // 
@@ -593,11 +597,33 @@
             this.pictureBox_time.TabStop = false;
             this.pictureBox_time.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_time_Paint);
             // 
+            // label_datetime
+            // 
+            this.label_datetime.AutoSize = true;
+            this.label_datetime.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label_datetime.Location = new System.Drawing.Point(176, 217);
+            this.label_datetime.Name = "label_datetime";
+            this.label_datetime.Size = new System.Drawing.Size(241, 21);
+            this.label_datetime.TabIndex = 121;
+            this.label_datetime.Text = "動態製作現在時間小圖檔";
+            // 
+            // pictureBox_datetime
+            // 
+            this.pictureBox_datetime.BackColor = System.Drawing.Color.White;
+            this.pictureBox_datetime.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_datetime.Location = new System.Drawing.Point(413, 205);
+            this.pictureBox_datetime.Name = "pictureBox_datetime";
+            this.pictureBox_datetime.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox_datetime.TabIndex = 120;
+            this.pictureBox_datetime.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1517, 718);
+            this.Controls.Add(this.label_datetime);
+            this.Controls.Add(this.pictureBox_datetime);
             this.Controls.Add(this.pictureBox_time);
             this.Controls.Add(this.pictureBox11);
             this.Controls.Add(this.pictureBox10);
@@ -661,7 +687,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_time)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_datetime)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -716,6 +744,8 @@
         private System.Windows.Forms.PictureBox pictureBox11;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.PictureBox pictureBox_time;
+        private System.Windows.Forms.Label label_datetime;
+        private System.Windows.Forms.PictureBox pictureBox_datetime;
     }
 }
 

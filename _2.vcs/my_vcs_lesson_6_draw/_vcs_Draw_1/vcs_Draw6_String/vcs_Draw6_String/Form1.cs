@@ -30,6 +30,7 @@ namespace vcs_Draw6_String
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
             pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
             p = new Pen(Color.Red, 3);
 
@@ -100,6 +101,9 @@ namespace vcs_Draw6_String
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             pictureBox1.Location = new Point(40, 40);
+            //指定畫布大小
+            pictureBox1.Width = 640;
+            pictureBox1.Height = 480;
 
             x_st = 700;
             y_st = 40;
@@ -116,6 +120,10 @@ namespace vcs_Draw6_String
 
             pictureBox_time.Location = new Point(x_st + dx * 0, y_st - 70);
             pictureBox_time.Size = new Size(700, 60);
+
+            label_datetime.Location = new Point(x_st + dx * 0 + 700, y_st - 70);
+            pictureBox_datetime.Location = new Point(x_st + dx * 0 + 700 + 250, y_st - 70);
+            pictureBox_datetime.Size = new Size(230, 50);
 
             pictureBox3.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox3.BackColor = Color.Pink;
@@ -1398,6 +1406,15 @@ namespace vcs_Draw6_String
         private void timer1_Tick(object sender, EventArgs e)
         {
             this.pictureBox_time.Invalidate();
+
+
+            MyTempImage myTempImage = new MyTempImage();
+
+            //myTempImage.CreateImage();
+            pictureBox_datetime.Image = Image.FromFile(myTempImage.CreateImage());
+
+            //string thefullname = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss") + ".gif"; // "nowtime.gif";
+            //richTextBox1.Text += thefullname + "\n";
         }
 
         private void pictureBox_time_Paint(object sender, PaintEventArgs e)
@@ -1418,9 +1435,24 @@ namespace vcs_Draw6_String
                 }
             }
             e.Graphics.DrawString(text, f, Brushes.White, 2, 2);
-
         }
-
-
     }
+
+    public class MyTempImage
+    {
+        public string CreateImage()
+        {
+            string str = DateTime.Now.ToString();
+            Bitmap image = new Bitmap(200, 30);
+            Graphics g = Graphics.FromImage(image);
+            string thefullname = DateTime.Now.ToString("yyyy-MM-dd HH-mm-ss") + ".gif"; // "nowtime.gif";
+
+            g.Clear(Color.White);
+            g.DrawString(str, new Font("CourIEr New", 10), new SolidBrush(Color.Red), 20, 5);
+            //Graphics 類還有很多繪圖方法可以繪制 直線、曲線、圓等等 
+            image.Save(thefullname, System.Drawing.Imaging.ImageFormat.Gif);
+            return thefullname;
+        }
+    }
+
 }

@@ -86,7 +86,6 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(170, 70);
             this.button8.TabIndex = 101;
-            this.button8.Text = "根據url獲取遠程html源碼";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -128,7 +127,6 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(170, 70);
             this.button7.TabIndex = 89;
-            this.button7.Text = "抓取網頁裡面的所有鏈接";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
