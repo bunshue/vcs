@@ -29,23 +29,6 @@ namespace vcs_PictureScale
             label2.Text = "放大 " + pictureBox2.Image.Width.ToString() + " X " + pictureBox2.Image.Height.ToString();
         }
 
-        private void vScrollBar_Scroll(object sender, ScrollEventArgs e)
-        {
-            int value1 = vScrollBar1.Value;
-            int value2 = vScrollBar2.Value;
-
-            float scale_x = ((float)(vScrollBar1.Maximum - vScrollBar1.Value)) / 10;
-            float scale_y = ((float)(vScrollBar2.Maximum - vScrollBar2.Value)) / 10;
-
-            PixelOffsetMode mode = PixelOffsetMode.HighQuality;
-
-            // Make the scaled image.
-            pictureBox2.Image = MakeScaledImage(pictureBox1.Image, scale_x, scale_y, mode);
-
-            label1.Text = "原圖 " + pictureBox1.Image.Width.ToString() + " X " + pictureBox1.Image.Height.ToString();
-            label2.Text = "放大 " + pictureBox2.Image.Width.ToString() + " X " + pictureBox2.Image.Height.ToString();
-        }
-
         // Return a scaled version of the input image.
         private Bitmap MakeScaledImage(Image image, float scale_x, float scale_y, PixelOffsetMode mode)
         {
@@ -63,5 +46,31 @@ namespace vcs_PictureScale
             }
             return bm;
         }
+
+        float ratio_x = 1.0f;
+        float ratio_y = 1.0f;
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            ratio_x += 0.1f;
+            ratio_y += 0.1f;
+
+            if (ratio_x > 15.0f)
+                timer1.Enabled = false;
+            if (ratio_y > 15.0f)
+                timer1.Enabled = false;
+
+            PixelOffsetMode mode = PixelOffsetMode.HighQuality;
+
+            // Make the scaled image.
+            pictureBox2.Image = MakeScaledImage(pictureBox1.Image, ratio_x, ratio_y, mode);
+
+            label1.Text = "原圖 " + pictureBox1.Image.Width.ToString() + " X " + pictureBox1.Image.Height.ToString();
+            label2.Text = "放大 " + pictureBox2.Image.Width.ToString() + " X " + pictureBox2.Image.Height.ToString();
+            //richTextBox1.Text += ratio_x.ToString() + "\t" + ratio_y.ToString() + "\n";
+
+            Application.DoEvents();
+
+        }
     }
 }
+
