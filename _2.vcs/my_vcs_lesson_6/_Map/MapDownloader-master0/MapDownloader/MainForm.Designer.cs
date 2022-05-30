@@ -164,6 +164,19 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.bt_clear = new System.Windows.Forms.Button();
             this.gMapControl1 = new MapDownloader.MapControl();
+            this.lb_info1 = new System.Windows.Forms.Label();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button0 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.lb_info2 = new System.Windows.Forms.Label();
+            this.lb_draw = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.contextMenuStripSelectedArea.SuspendLayout();
@@ -1261,6 +1274,7 @@
             this.buttonMapImage.TabIndex = 4;
             this.buttonMapImage.Text = "拼接图";
             this.buttonMapImage.UseVisualStyleBackColor = true;
+            this.buttonMapImage.Click += new System.EventHandler(this.buttonMapImage_Click);
             // 
             // textBoxImageZoom
             // 
@@ -1359,15 +1373,15 @@
             // richTextBox1
             // 
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Right;
-            this.richTextBox1.Location = new System.Drawing.Point(815, 24);
+            this.richTextBox1.Location = new System.Drawing.Point(852, 24);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(161, 559);
+            this.richTextBox1.Size = new System.Drawing.Size(124, 559);
             this.richTextBox1.TabIndex = 9;
             this.richTextBox1.Text = "";
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(862, 421);
+            this.bt_clear.Location = new System.Drawing.Point(899, 411);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(75, 32);
             this.bt_clear.TabIndex = 10;
@@ -1397,9 +1411,132 @@
             this.gMapControl1.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             this.gMapControl1.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.gMapControl1.ShowTileGridLines = false;
-            this.gMapControl1.Size = new System.Drawing.Size(383, 300);
+            this.gMapControl1.Size = new System.Drawing.Size(100, 100);
             this.gMapControl1.TabIndex = 0;
             this.gMapControl1.Zoom = 0D;
+            // 
+            // lb_info1
+            // 
+            this.lb_info1.AutoSize = true;
+            this.lb_info1.Location = new System.Drawing.Point(711, 492);
+            this.lb_info1.Name = "lb_info1";
+            this.lb_info1.Size = new System.Drawing.Size(33, 12);
+            this.lb_info1.TabIndex = 39;
+            this.lb_info1.Text = "label2";
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(689, 403);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(120, 40);
+            this.button9.TabIndex = 37;
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(689, 360);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(120, 40);
+            this.button8.TabIndex = 38;
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(689, 315);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(120, 40);
+            this.button7.TabIndex = 36;
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(689, 275);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(120, 40);
+            this.button6.TabIndex = 35;
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button0
+            // 
+            this.button0.Location = new System.Drawing.Point(689, 28);
+            this.button0.Name = "button0";
+            this.button0.Size = new System.Drawing.Size(120, 40);
+            this.button0.TabIndex = 34;
+            this.button0.Text = "button0";
+            this.button0.UseVisualStyleBackColor = true;
+            this.button0.Click += new System.EventHandler(this.button0_Click);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(689, 235);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(120, 40);
+            this.button5.TabIndex = 33;
+            this.button5.Text = "地址解析";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(689, 195);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(120, 40);
+            this.button4.TabIndex = 32;
+            this.button4.Text = "button4";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(689, 156);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(120, 40);
+            this.button3.TabIndex = 31;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // lb_info2
+            // 
+            this.lb_info2.AutoSize = true;
+            this.lb_info2.Location = new System.Drawing.Point(711, 531);
+            this.lb_info2.Name = "lb_info2";
+            this.lb_info2.Size = new System.Drawing.Size(33, 12);
+            this.lb_info2.TabIndex = 30;
+            this.lb_info2.Text = "label2";
+            // 
+            // lb_draw
+            // 
+            this.lb_draw.AutoSize = true;
+            this.lb_draw.Location = new System.Drawing.Point(711, 458);
+            this.lb_draw.Name = "lb_draw";
+            this.lb_draw.Size = new System.Drawing.Size(33, 12);
+            this.lb_draw.TabIndex = 29;
+            this.lb_draw.Text = "label2";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(689, 114);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(120, 40);
+            this.button2.TabIndex = 28;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(689, 70);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(120, 40);
+            this.button1.TabIndex = 27;
+            this.button1.Text = "代理設置";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // MainForm
             // 
@@ -1407,6 +1544,19 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(1233, 605);
+            this.Controls.Add(this.lb_info1);
+            this.Controls.Add(this.button9);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.button0);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.lb_info2);
+            this.Controls.Add(this.lb_draw);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.gMapControl1);
@@ -1584,6 +1734,19 @@
         private System.Windows.Forms.ToolStripMenuItem 测距ToolStripMenuItem;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.Label lb_info1;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button0;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label lb_info2;
+        private System.Windows.Forms.Label lb_draw;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button1;
     }
 }
 

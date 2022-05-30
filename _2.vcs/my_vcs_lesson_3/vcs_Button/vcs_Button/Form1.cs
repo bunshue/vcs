@@ -219,7 +219,7 @@ namespace vcs_Button
 
         private void bt_star_Paint(object sender, PaintEventArgs e)
         {
-            string filename = @"C:\______test_files\_icon\star.bmp";
+            string filename = @"C:\_git\vcs\_2.vcs\______test_files\__pic\_icon\star.bmp";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             GraphicsPath graphicsPath = CalculateControlGraphicsPath(bitmap1);
             this.bt_star.Region = new Region(graphicsPath);

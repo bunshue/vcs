@@ -131,19 +131,22 @@ namespace MapDownloader
                 retryNum = int.Parse(retryStr);
 
                 conString = string.Format(conStringFormat, ip, port, dbName, userID, password);
+
+                richTextBox1.Text += "conString = " + conString + "\n";
+
                 if (mysqlCache != null)
                 {
                     mysqlCache.ConnectionString = conString;
                 }
 
                 tilePath = ConfigHelper.GetAppConfig("TilePath");
+                richTextBox1.Text += "get tilePath : " + tilePath + "\n";
             }
             catch (Exception ex)
             {
-                log.Error(ex);
+                richTextBox1.Text += "Error : " + ex.ToString() + "\n";
             }
         }
-
 
         void show_item_location()
         {
@@ -155,15 +158,32 @@ namespace MapDownloader
             gMapControl1.Location = new Point(x_st, y_st);
             gMapControl1.Size = new Size(W, H);
 
+            x_st = border + W + border;
+            int dy = 50;
+            button0.Location = new Point(x_st, y_st + dy * 0);
+            button1.Location = new Point(x_st, y_st + dy * 1);
+            button2.Location = new Point(x_st, y_st + dy * 2);
+            button3.Location = new Point(x_st, y_st + dy * 3);
+            button4.Location = new Point(x_st, y_st + dy * 4);
+            button5.Location = new Point(x_st, y_st + dy * 5);
+            button6.Location = new Point(x_st, y_st + dy * 6);
+            button7.Location = new Point(x_st, y_st + dy * 7);
+            button8.Location = new Point(x_st, y_st + dy * 8);
+            button9.Location = new Point(x_st, y_st + dy * 9);
 
-
-
-
-            //控件位置
+            lb_draw.Location = new Point(x_st, y_st + dy * 10);
+            lb_info1.Location = new Point(x_st, y_st + dy * 11);
+            lb_info2.Location = new Point(x_st, y_st + dy * 12);
+            lb_draw.Text = "";
+            lb_info1.Text = "";
+            lb_info2.Text = "";
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
         }
 
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
 
         // Init map
         private void InitMap()
@@ -278,6 +298,7 @@ namespace MapDownloader
                 if (!place.Equals(Placemark.Empty))
                 {
                     this.toolStripStatusCenter.Text = "地图中心:" + place.ProvinceName + "," + place.CityName + "," + place.DistrictName;
+					lb_info2.Text = "地圖中心 : " + place.ProvinceName + "," + place.CityName + "," + place.DistrictName;
                     currentCenterCityName = place.CityName;
                 }
             }
@@ -366,6 +387,11 @@ namespace MapDownloader
             if (e.Button == MouseButtons.Left)
             {
                 isLeftButtonDown = true;
+                richTextBox1.Text += "MouseDown 你按了滑鼠左鍵\n";
+                lb_draw.Text += "滑鼠左鍵";
+
+
+
             }
         }
 
@@ -379,6 +405,8 @@ namespace MapDownloader
                 int zoom = (int)this.gMapControl1.Zoom;
                 double resolution = this.gMapControl1.MapProvider.Projection.GetLevelResolution(zoom);
                 this.toolStripStatusTip.Text = string.Format("显示级别：{0} 分辨率：{1:F3}米/像素 坐标：{2:F4},{3:F4}", zoom, resolution, p.Lng, p.Lat);
+
+                lb_info1.Text = string.Format("显示级别：{0} 分辨率：{1:F3}米/像素 坐标：{2:F4},{3:F4}", zoom, resolution, p.Lng, p.Lat);
 
                 if (isLeftButtonDown && currentDragableNode != null)
                 {
@@ -456,8 +484,6 @@ namespace MapDownloader
 
             this.comboBoxStore.SelectedIndex = 0;
             this.comboBoxStore.SelectedIndexChanged += new EventHandler(comboBoxStore_SelectedIndexChanged);
-
-            this.buttonMapImage.Click += new EventHandler(buttonMapImage_Click);
 
             this.dataGridView1.AutoSize = true;
             this.dataGridView1.RowPostPaint += new DataGridViewRowPostPaintEventHandler(dataGridViewPOI_RowPostPaint);
@@ -823,7 +849,7 @@ namespace MapDownloader
 
         #region 拼接大图
 
-        void buttonMapImage_Click(object sender, EventArgs e)
+        private void buttonMapImage_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "你按了 拼接大圖 之 拼接圖\n";
             if (currentAreaPolygon != null)
@@ -1767,7 +1793,7 @@ namespace MapDownloader
             }
         }
 
-        #endregion 
+        #endregion
 
         #region 导入数据
 
@@ -2156,7 +2182,7 @@ namespace MapDownloader
             }
         }
 
-        #endregion 
+        #endregion
 
         private List<PointLatLng> GetRandomPoint()
         {
@@ -2260,7 +2286,221 @@ namespace MapDownloader
             }
         }
 
+        private void button0_Click(object sender, EventArgs e)
+        {
+            if (this.gMapControl1.ShowTileGridLines == false)
+            {
+                this.gMapControl1.ShowTileGridLines = true;
+            }
+            else
+            {
+                this.gMapControl1.ShowTileGridLines = false;
+            }
+        }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ProxyForm proxyForm = new ProxyForm();
+            DialogResult diaResult = proxyForm.ShowDialog();
+            if (diaResult == DialogResult.OK)
+            {
+                bool isProxyOn = proxyForm.CheckProxyOn();
+                if (isProxyOn)
+                {
+                    string ip = proxyForm.GetProxyIp();
+                    int port = proxyForm.GetProxyPort();
+                    // set your proxy here if need
+                    GMapProvider.IsSocksProxy = true;
+                    GMapProvider.WebProxy = new WebProxy(ip, port);
+                }
+                else
+                {
+                    GMapProvider.IsSocksProxy = false;
+                }
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //讀取GPX檔案
+            //已搬走
+            richTextBox1.Text += "已搬走\n";
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //讀取KML檔案
+            string filename = @"C:\______test_files\__RW\_xml\kml_mountain.kml";
+
+                        this.polygonsOverlay.Clear();
+            InitKMLPlaceMarks(KmlUtil.GetPlaceMarksFromKmlFile(filename));
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //地圖存圖
+            //已搬走
+            richTextBox1.Text += "已搬走\n";
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //广东省深圳市福田区华强北路1002号
+
+            string address = "广东省深圳市福田区华强北路1002号";
+
+            if (!string.IsNullOrEmpty(address))
+            {
+                richTextBox1.Text += "你按了 地址解析 之 查詢\t地址 : " + address + "\n";
+
+                this.routeOverlay.Markers.Clear();
+                Placemark placemark = new Placemark(address);
+
+                richTextBox1.Text += "初始化就給值 Text : " + placemark.Address + "\n";
+
+                //placemark.CityName = currentCenterCityName;   //useless
+
+                //richTextBox1.Text += "currentCenterCityName : " + currentCenterCityName + "\n";   尚未給值
+
+                if (currentAreaPolygon != null)
+                {
+                    placemark.CityName = currentAreaPolygon.Name;
+                }
+
+                //richTextBox1.Text += "placemark.CityName : " + placemark.CityName + "\n"; 無資料
+
+                List<PointLatLng> points = new List<PointLatLng>();
+                //GeoCoderStatusCode statusCode = SoSoMapProvider.Instance.GetPoints(placemark, out points);
+                GeoCoderStatusCode statusCode = AMapProvider.Instance.GetPoints(placemark, out points);
+
+                //richTextBox1.Text += "Text : " + placemark.Address + "\n";
+
+                if (statusCode == GeoCoderStatusCode.G_GEO_SUCCESS)
+                {
+                    richTextBox1.Text += "查詢資料成功, 共有" + points.Count.ToString() + " 筆資料\n";
+                    foreach (PointLatLng point in points)
+                    {
+                        richTextBox1.Text += "取得地圖資料 地理座標 " + point.ToString() + "\n";
+                        GMarkerGoogle marker = new GMarkerGoogle(point, GMarkerGoogleType.red_dot);
+
+                        marker.ToolTipText = placemark.Address;
+                        this.routeOverlay.Markers.Add(marker);
+                        this.gMapControl1.Position = point;
+
+                        richTextBox1.Text += "Text1 : " + placemark.Address + "\n";
+
+                        /*  除了第一項，全無資料
+                        richTextBox1.Text += "Text2 : " + placemark.AdministrativeAreaName + "\n";
+                        richTextBox1.Text += "Text3 : " + placemark.CityName.ToString() + "\n";
+                        richTextBox1.Text += "Text4 : " + placemark.CountryName + "\n";
+                        richTextBox1.Text += "Text5 : " + placemark.DistrictName + "\n";
+                        richTextBox1.Text += "Text6 : " + placemark.HouseNo.ToString() + "\n";
+                        richTextBox1.Text += "Text7 : " + placemark.LocalityName + "\n";
+                        richTextBox1.Text += "Text8 : " + placemark.Name.ToString() + "\n";
+                        richTextBox1.Text += "Text9 : " + placemark.Neighborhood + "\n";
+                        richTextBox1.Text += "Text10 : " + placemark.ProvinceName.ToString() + "\n";
+
+                        richTextBox1.Text += "Text9 : " + placemark.StreetNumber.ToString() + "\n";
+                        richTextBox1.Text += "Text9 : " + placemark.SubAdministrativeAreaName + "\n";
+                        richTextBox1.Text += "Text9 : " + placemark.Tel.ToString() + "\n";
+                        richTextBox1.Text += "Text9 : " + placemark.ThoroughfareName + "\n";
+                        */
+                    }
+                }
+                else
+                {
+                    richTextBox1.Text += "查詢資料失敗\n";
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "地址無資料\n";
+            }
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //從 恭王府 天安門
+
+            PointLatLng p1 = new PointLatLng(39.9422, 116.3927);    //恭王府
+            PointLatLng p2 = new PointLatLng(39.9142, 116.4039);    //天安門
+
+            /* 從地圖坐標找起
+            int x = 200;
+            int y = 200;
+
+            routeStartPoint = this.gMapControl1.FromLocalToLatLng(x, y);
+
+            x = 400;
+            y = 400;
+            routeEndPoint = this.gMapControl1.FromLocalToLatLng(x, y);
+            */
+
+            routeStartPoint = p1;
+            routeEndPoint = p2;
+
+            GMapImageMarker marker = new GMapImageMarker(routeEndPoint, Properties.Resources.MapMarker_Bubble_Chartreuse);
+            this.routeOverlay.Markers.Add(marker);
+
+            if (routeStartPoint != PointLatLng.Empty)
+            {
+                MapRoute route = GMapProvidersExt.AMap.AMapProvider.Instance.GetRoute(routeStartPoint, routeEndPoint, currentCenterCityName);
+
+                GMapRoute mapRoute = new GMapRoute(route.Points, "");
+                if (mapRoute != null)
+                {
+                    this.routeOverlay.Routes.Add(mapRoute);
+                    this.gMapControl1.ZoomAndCenterRoute(mapRoute);
+                }
+            }
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            PointLatLng p1 = new PointLatLng(39.9422, 116.3927);    //恭王府
+            PointLatLng p2 = new PointLatLng(39.9142, 116.4039);    //天安門
+
+            RoutingProvider rp = gMapControl1.MapProvider as RoutingProvider;
+            //獲取路徑
+            //根據起止點經緯度查找路徑
+            //MapRoute GetRoute(PointLatLng start, PointLatLng end, bool avoidHighways, bool walkingMode, int Zoom);
+            //根據起止點地址查找路徑
+            //MapRoute GetRoute(string start, string end, bool avoidHighways, bool walkingMode, int Zoom);
+            //avoidHighways：是否避免走高速公路
+            //walkingMode：是否步行
+            //zoom：查找路徑時的zoom
+
+            //MapRoute route = rp.GetRoute(p1, p2, false, false, (int)gMapControl1.Zoom);
+            MapRoute route = GMapProvidersExt.AMap.AMapProvider.Instance.GetRoute(p1, p2, currentCenterCityName);
+            if (route != null)
+            {
+                //添加routes圖層
+                GMapOverlay routes = new GMapOverlay("routes");
+                GMapRoute r = new GMapRoute(route.Points, route.Name);
+                r.Stroke = new Pen(Color.Red, 3);   //連線顏色與大小
+                routes.Routes.Add(r);
+                //添加到地圖
+                gMapControl1.Overlays.Add(routes);
+                gMapControl1.ZoomAndCenterRoute(r);
+            }
+            else
+            {
+                MessageBox.Show("未能找到路線");
+            }
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+        }
 
     }
 }
+

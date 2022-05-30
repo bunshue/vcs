@@ -7,10 +7,30 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+
+using System.IO;    //for Directory
+using System.Collections;   //for ArrayList
+
+//應改成 vcs_DynamicAddRemoveControls8_MergeMap
+//切割一圖 並做成拼圖
+
+
 namespace vcs_DragPicture9
 {
     public partial class Form1 : Form
     {
+        private const int COLUMNS = 2;
+        private const int ROWS = 2;
+        //private const int PICTURE_WIDTH = 1920 / COLUMNS * 9 / 10;
+        //private const int PICTURE_HEIGHT = 1080 / ROWS * 9 / 10;
+
+        int PICTURE_WIDTH = 500;
+        int PICTURE_HEIGHT = 500;
+
+        ArrayList picture_files = new ArrayList();
+
+        List<string> filenames = new List<string>();
+
         public Form1()
         {
             InitializeComponent();
@@ -18,30 +38,59 @@ namespace vcs_DragPicture9
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename1 = @"C:\______test_files\__pic\_peony1\p1.jpg";
-            string filename2 = @"C:\______test_files\__pic\_peony1\p2.jpg";
-            string filename3 = @"C:\______test_files\__pic\_peony1\p3.jpg";
-            pictureBox1.Image = Image.FromFile(filename1);
-            pictureBox1.ClientSize = new Size(pictureBox1.Image.Width / 2, pictureBox1.Image.Height / 2);
-            pictureBox2.Image = Image.FromFile(filename2);
-            pictureBox2.ClientSize = new Size(pictureBox2.Image.Width / 2, pictureBox2.Image.Height / 2);
-            pictureBox3.Image = Image.FromFile(filename3);
-            pictureBox3.ClientSize = new Size(pictureBox3.Image.Width / 2, pictureBox3.Image.Height / 2);
+            //設定執行後的表單起始位置
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new System.Drawing.Point(0, 0);
 
-            pictureBox1.MouseDown += PictureBox_MouseDown;
-            pictureBox1.MouseMove += PictureBox_MouseMove;
-            pictureBox1.MouseUp += PictureBox_MouseUp;
-            pictureBox2.MouseDown += PictureBox_MouseDown;
-            pictureBox2.MouseMove += PictureBox_MouseMove;
-            pictureBox2.MouseUp += PictureBox_MouseUp;
-            pictureBox3.MouseDown += PictureBox_MouseDown;
-            pictureBox3.MouseMove += PictureBox_MouseMove;
-            pictureBox3.MouseUp += PictureBox_MouseUp;
+            filenames.Clear();
+            filenames.Add(@"C:\______test_files\__pic\_peony1\p1.jpg");
+            filenames.Add(@"C:\______test_files\__pic\_peony1\p2.jpg");
+            filenames.Add(@"C:\______test_files\__pic\_peony1\p3.jpg");
+            filenames.Add(@"C:\______test_files\__pic\_peony1\p4.jpg");
+
+            showPictures();
+        }
+
+        void showPictures()
+        {
+            // 設定位置及圖片方塊寬高值
+            int LEFT_ANCHOR = 0;
+            int TOP_ANCHOR = 0;
+
+            int i;
+            int j;
+            for (j = 0; j < ROWS; j++)
+            {
+                for (i = 0; i < COLUMNS; i++)
+                {
+                    // 實例化圖片方塊
+                    PictureBox pbx = new PictureBox();
+                    // 設定圖片方塊參數
+                    pbx.Left = LEFT_ANCHOR + PICTURE_WIDTH * i;
+                    pbx.Top = TOP_ANCHOR + PICTURE_HEIGHT * j;
+                    pbx.Width = PICTURE_WIDTH;
+                    pbx.Height = PICTURE_HEIGHT;
+                    //pbx.BackColor = Color.Pink;
+                    //pbx.Text = i.ToString() + ", " + j.ToString();
+                    pbx.Tag = "dynamic" + (COLUMNS * j + i).ToString("D2");
+                    pbx.Name = "pbx" + (COLUMNS * j + i).ToString("D2");
+                    pbx.SizeMode = PictureBoxSizeMode.Normal;
+                    pbx.MouseDown += PictureBox_MouseDown;
+                    pbx.MouseMove += PictureBox_MouseMove;
+                    pbx.MouseUp += PictureBox_MouseUp;
+
+                    pbx.Image = Image.FromFile(filenames[j * 2 + i]);
+
+                    // 將圖片方塊加入表單
+                    this.Controls.Add(pbx);
+                }
+            }
         }
 
         bool flag_pictureBox_mouse_down = false;
         int pictureBox_position_x_old = 0;
         int pictureBox_position_y_old = 0;
+
         private void PictureBox_MouseDown(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)

@@ -14,6 +14,7 @@ namespace vcs_PictureSpilit
     public partial class Form1 : Form
     {
         PictureBox[,] pbox = new PictureBox[3, 3];
+        List<PictureBox> pbox_list = new List<PictureBox>();    //把所有pbox集合起來
 
         public Form1()
         {
@@ -22,13 +23,38 @@ namespace vcs_PictureSpilit
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            RemoveAllPictureBox();
+            SpilitPicture();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        void RemoveAllPictureBox()
         {
+            //richTextBox1.Text += "遍歷所有控件\n";
+            int i;
+            for (i = 0; i < 10; i++)
+            {
+                foreach (Control con in this.Controls)
+                {
+                    String strControl = con.GetType().ToString();//获得控件的类型
+                    String strControlName = con.Name.ToString();//获得控件的名称
+
+                    //richTextBox1.Text += "Type\t" + strControl + "\tName\t" + strControlName + "\n";
+
+                    if (strControl == "System.Windows.Forms.PictureBox")
+                    {
+                        //richTextBox1.Text += "remove this.....\n";
+                        this.Controls.Remove(con);
+
+                    }
+                }
+            }
+            pbox_list.Clear();
+        }
+
+        void SpilitPicture()
+        {
+            pbox_list.Clear();
             string filename = @"C:\______test_files\picture1.jpg";
-            //pictureBox1.Image = Image.FromFile(filename);
 
             Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
@@ -41,6 +67,8 @@ namespace vcs_PictureSpilit
             int h = H / R;
             int dx = w * 12 / 10;
             int dy = h * 12 / 10;
+            dx = w + 0;
+            dy = h + 0;
 
             Bitmap bitmap2 = new Bitmap(w, h);
             RectangleF rect;
@@ -64,14 +92,31 @@ namespace vcs_PictureSpilit
                     pbox[x, y].BackColor = Color.Pink;
                     pbox[x, y].BorderStyle = BorderStyle.None;
                     pbox[x, y].SizeMode = PictureBoxSizeMode.Normal;   //圖片Zoom的方法
+                    pbox[x, y].BorderStyle = BorderStyle.FixedSingle;
                     pbox[x, y].Image = bitmap2;
                     pbox[x, y].MouseDown += PictureBox_MouseDown;
                     pbox[x, y].MouseMove += PictureBox_MouseMove;
                     pbox[x, y].MouseUp += PictureBox_MouseUp;
                     //panel.Controls.Add(pbox[x, y]);
                     this.Controls.Add(pbox[x, y]);
+                    pbox_list.Add(pbox[x, y]);  //把圖加入物件陣列
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //打亂重排
+
+            RemoveAllPictureBox();  //移除掉目前所有的pbox控件
+
+
+            
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "pbox_list 個數 " + pbox_list.Count.ToString() + "\n";
         }
 
         bool flag_pictureBox_mouse_down = false;
@@ -115,5 +160,6 @@ namespace vcs_PictureSpilit
                 ((PictureBox)sender).Location = new Point(((PictureBox)sender).Location.X + dx, ((PictureBox)sender).Location.Y + dy);
             }
         }
+
     }
 }
