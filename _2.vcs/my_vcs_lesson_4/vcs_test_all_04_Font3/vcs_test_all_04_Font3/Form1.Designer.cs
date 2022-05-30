@@ -30,6 +30,8 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.cboFonts = new System.Windows.Forms.ComboBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -52,11 +54,21 @@
             this.cboFonts.TabIndex = 1;
             this.cboFonts.SelectedIndexChanged += new System.EventHandler(this.cboFonts_SelectedIndexChanged);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(15, 54);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(836, 608);
+            this.pictureBox1.TabIndex = 2;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(514, 514);
+            this.ClientSize = new System.Drawing.Size(1146, 697);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.cboFonts);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Arial", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -64,7 +76,7 @@
             this.Name = "Form1";
             this.Text = "vcs_test_all_04_Font3";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -74,6 +86,7 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox cboFonts;
+        private System.Windows.Forms.PictureBox pictureBox1;
 
     }
 }

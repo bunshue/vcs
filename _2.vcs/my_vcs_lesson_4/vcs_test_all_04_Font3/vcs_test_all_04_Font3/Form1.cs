@@ -28,32 +28,6 @@ namespace vcs_test_all_04_Font3
             cboFonts.DataSource = font_names.ToArray();
         }
 
-        // Draw font samples.
-        private void Form1_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.Clear(this.BackColor);
-
-            int x = 20;
-            int y = cboFonts.Bottom + 5;
-            DrawSamples(e.Graphics, TextRenderingHint.AntiAlias, x, ref y);
-
-            y += 10;
-            DrawSamples(e.Graphics, TextRenderingHint.AntiAliasGridFit, x, ref y);
-
-            y += 10;
-            DrawSamples(e.Graphics, TextRenderingHint.ClearTypeGridFit, x, ref y);
-
-            x += 250;
-            y = cboFonts.Bottom + 5;
-            DrawSamples(e.Graphics, TextRenderingHint.SingleBitPerPixel, x, ref y);
-
-            y += 10;
-            DrawSamples(e.Graphics, TextRenderingHint.SingleBitPerPixelGridFit, x, ref y);
-
-            y += 10;
-            DrawSamples(e.Graphics, TextRenderingHint.SystemDefault, x, ref y);
-        }
-
         private void DrawSamples(Graphics gr, TextRenderingHint hint, int x, ref int y)
         {
             gr.TextRenderingHint = TextRenderingHint.AntiAlias;
@@ -86,7 +60,34 @@ namespace vcs_test_all_04_Font3
         // Redraw the samples using the new font.
         private void cboFonts_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.Refresh();
+            this.pictureBox1.Invalidate();
+        }
+
+        // Draw font samples.
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.Clear(this.BackColor);
+
+            int x = 20;
+            int y = cboFonts.Bottom + 5;
+            DrawSamples(e.Graphics, TextRenderingHint.AntiAlias, x, ref y);
+
+            y += 10;
+            DrawSamples(e.Graphics, TextRenderingHint.AntiAliasGridFit, x, ref y);
+
+            y += 10;
+            DrawSamples(e.Graphics, TextRenderingHint.ClearTypeGridFit, x, ref y);
+
+            x += 250;
+            y = cboFonts.Bottom + 5;
+            DrawSamples(e.Graphics, TextRenderingHint.SingleBitPerPixel, x, ref y);
+
+            y += 10;
+            DrawSamples(e.Graphics, TextRenderingHint.SingleBitPerPixelGridFit, x, ref y);
+
+            y += 10;
+            DrawSamples(e.Graphics, TextRenderingHint.SystemDefault, x, ref y);
+
         }
     }
 }

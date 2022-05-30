@@ -315,6 +315,16 @@ namespace vcs_test_all_04_Font
             richTextBox2.Text = "字型: " + family_name + Environment.NewLine + sample_string;
         }
 
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
 
 
     }
