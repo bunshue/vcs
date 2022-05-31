@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_AllowDrop", "vcs_AllowDrop\vcs_AllowDrop.csproj", "{0B25F649-5665-44C1-88F4-FC386619B873}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_Form2_AllowDrop2", "vcs_Form2_AllowDrop2\vcs_Form2_AllowDrop2.csproj", "{0B25F649-5665-44C1-88F4-FC386619B873}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

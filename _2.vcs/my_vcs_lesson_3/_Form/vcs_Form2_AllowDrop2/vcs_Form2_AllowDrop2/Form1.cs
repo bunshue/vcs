@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_AllowDrop
+namespace vcs_Form2_AllowDrop2
 {
     public partial class Form1 : Form
     {

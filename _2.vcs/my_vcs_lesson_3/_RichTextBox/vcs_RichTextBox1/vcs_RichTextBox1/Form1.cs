@@ -26,7 +26,7 @@ namespace vcs_RichTextBox1
         {
             show_item_location();
 
-            label4.Text = "字數 : " + richTextBox1.TextLength.ToString();
+            label4.Text = "字數 : " + richTextBox1.TextLength.ToString() + ", 行數 : " + richTextBox1.Lines.Length.ToString();
             label6.Text = "";
 
             // Format RichTextBox1.
@@ -163,7 +163,7 @@ namespace vcs_RichTextBox1
             y_st = 12 + 410;
             richTextBox2.Location = new Point(x_st, y_st);
 
-            richTextBox3.Size = new Size(400, 300);
+            richTextBox3.Size = new Size(400, 250);
             x_st = 820 + 510;
             y_st = 12;
             richTextBox3.Location = new Point(x_st, y_st);
@@ -178,17 +178,19 @@ namespace vcs_RichTextBox1
             bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Size.Width - bt_clear2.Size.Width, richTextBox2.Location.Y + richTextBox2.Size.Height - bt_clear2.Size.Height);
             bt_clear3.Location = new Point(richTextBox3.Location.X + richTextBox3.Size.Width - bt_clear3.Size.Width, richTextBox3.Location.Y + richTextBox3.Size.Height - bt_clear3.Size.Height);
 
-            label4.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - 140, richTextBox1.Location.Y + 5);
+            label4.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - 220, richTextBox1.Location.Y + 5);
             label6.Location = new Point(richTextBox1.Location.X + 100, richTextBox1.Location.Y + 5);
 
             x_st = 1350;
-            y_st = 350;
+            y_st = 400;
             dy = 40;
             label1.Location = new Point(x_st, y_st + dy * 0);
             label7.Location = new Point(x_st, y_st + dy * 1);
             label2.Location = new Point(x_st, y_st + dy * 2);
             label3.Location = new Point(x_st, y_st + dy * 3);
             label5.Location = new Point(x_st, y_st + dy * 4);
+            label8.Location = new Point(x_st, y_st - dy * 2);
+            label9.Location = new Point(x_st, y_st - dy * 1);
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -770,7 +772,7 @@ namespace vcs_RichTextBox1
 
         private void richTextBox1_TextChanged(object sender, EventArgs e)
         {
-            label4.Text = "字數 : " + richTextBox1.TextLength.ToString();
+            label4.Text = "字數 : " + richTextBox1.TextLength.ToString() + ", 行數 : " + richTextBox1.Lines.Length.ToString();
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -871,6 +873,12 @@ namespace vcs_RichTextBox1
         private void richTextBox1_MouseMove(object sender, MouseEventArgs e)
         {
             label6.Text = WordUnderMouse(richTextBox1, e.X, e.Y);
+
+            char ch = richTextBox1.GetCharFromPosition(e.Location);     //取得指定位置的字元
+
+            int nn = richTextBox1.GetCharIndexFromPosition(e.Location); //指定位置處的以零起始的字元索引
+
+            label8.Text = "MouseMove : " + ch.ToString() + " @ " + nn.ToString();
         }
 
         // Return the word under the mouse.
@@ -1022,6 +1030,12 @@ namespace vcs_RichTextBox1
 
             sw.Stop();
             richTextBox1.Text += "經過時間 : " + sw.Elapsed.TotalSeconds.ToString("0.00") + " 秒\n";
+        }
+
+        private void richTextBox1_SelectionChanged(object sender, EventArgs e)
+        {
+            label9.Text = "SelectionChanged : ST " + richTextBox1.SelectionStart.ToString() + "   " + "len = " + richTextBox1.SelectionLength.ToString();
+
         }
     }
 }

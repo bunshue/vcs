@@ -1,4 +1,4 @@
-﻿namespace vcs_AllowDrop
+﻿namespace vcs_Form2_AllowDrop2
 {
     partial class Form1
     {

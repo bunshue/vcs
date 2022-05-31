@@ -21,7 +21,7 @@ namespace GMapDownload
         private GMapProvider mapProvider;
 
         private List<DownloadLevelCfg> downloadLevelCfgs = new List<DownloadLevelCfg>();
-        
+
         private TileDownloaderArgs tileDownloaderArgs = new TileDownloaderArgs();
 
         public DownloadCfgForm(RectLatLng rectLatLng, GMapProvider mapProvider)
@@ -35,12 +35,17 @@ namespace GMapDownload
 
             InitUI();
 
-            BackgroundWorker backgroundWorker =new BackgroundWorker();
+            BackgroundWorker backgroundWorker = new BackgroundWorker();
             backgroundWorker.DoWork += new DoWorkEventHandler(backgroundWorker_DoWork);
             backgroundWorker.WorkerReportsProgress = true;
             backgroundWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(backgroundWorker_RunWorkerCompleted);
             //backgroundWorker.ProgressChanged += new ProgressChangedEventHandler(backgroundWorker_ProgressChanged);
             backgroundWorker.RunWorkerAsync();
+        }
+
+        private void DownloadCfgForm_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void InitUI()
@@ -122,7 +127,7 @@ namespace GMapDownload
             {
                 log.Error(ex);
             }
-            
+
         }
 
         #region 全选 反选 清除
@@ -213,7 +218,7 @@ namespace GMapDownload
                     catch (Exception exception)
                     {
                         //downloadLevelCfg.Tip = "无法下载";
-                        string msg = string.Format("第{0}级数据量太大，会内存溢出，请分片下载！",downloadLevelCfgs[i].ZoomLevel);
+                        string msg = string.Format("第{0}级数据量太大，会内存溢出，请分片下载！", downloadLevelCfgs[i].ZoomLevel);
                         MessageBox.Show(msg, "提示", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                         log.Error(exception);
                     }
@@ -236,7 +241,5 @@ namespace GMapDownload
         {
             return this.tileDownloaderArgs;
         }
-
-
     }
 }

@@ -3,14 +3,14 @@
     partial class Form1
     {
         /// <summary>
-        /// 必需的设计器变量。
+        /// 必需的設計器變量。
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// 清理所有正在使用的资源。
+        /// 清理所有正在使用的資源。
         /// </summary>
-        /// <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        /// <param name="disposing">如果應釋放托管資源，為 true；否則為 false。</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,11 +20,11 @@
             base.Dispose(disposing);
         }
 
-        #region Windows 窗体设计器生成的代码
+        #region Windows 窗體設計器生成的代碼
 
         /// <summary>
-        /// 设计器支持所需的方法 - 不要
-        /// 使用代码编辑器修改此方法的内容。
+        /// 設計器支持所需的方法 - 不要
+        /// 使用代碼編輯器修改此方法的內容。
         /// </summary>
         private void InitializeComponent()
         {
@@ -50,7 +50,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(104, 83);
             this.label1.TabIndex = 1;
-            this.label1.Text = "我是用来测试拖拉时的黑色边框的Label!填充字数。。。。。";
+            this.label1.Text = "我是用來測試拖拉時的黑色邊框的Label!填充字數。。。。。";
             // 
             // textBox1
             // 
@@ -59,7 +59,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(234, 154);
             this.textBox1.TabIndex = 3;
-            this.textBox1.Text = "我是个多行的TextBox";
+            this.textBox1.Text = "我是個多行的TextBox";
             // 
             // labelTextBox1
             // 
@@ -95,4 +95,3 @@
 
     }
 }
-

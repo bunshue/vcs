@@ -99,6 +99,8 @@
             this.bt_save2 = new System.Windows.Forms.Button();
             this.button41 = new System.Windows.Forms.Button();
             this.button42 = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -121,6 +123,7 @@
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "定風波\n三月七日，沙湖道中遇雨。雨具先去，同行皆狼狽，余獨不覺，已而遂晴，故作此詞。\n莫聽穿林打葉聲，何妨吟嘯且徐行。\n竹杖芒鞋輕勝馬，誰怕？一蓑煙雨任平生。\n料" +
                 "峭春風吹酒醒，微冷，山頭斜照卻相迎。\n回首向來蕭瑟處，歸去，也無風雨也無晴。\n ";
+            this.richTextBox1.SelectionChanged += new System.EventHandler(this.richTextBox1_SelectionChanged);
             this.richTextBox1.Click += new System.EventHandler(this.richTextBox1_Click);
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             this.richTextBox1.DoubleClick += new System.EventHandler(this.richTextBox1_DoubleClick);
@@ -847,11 +850,33 @@
             this.button42.UseVisualStyleBackColor = true;
             this.button42.Click += new System.EventHandler(this.button42_Click);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label8.Location = new System.Drawing.Point(1123, 667);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(274, 24);
+            this.label8.TabIndex = 97;
+            this.label8.Text = "C# richTextBox MouseMove";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label9.Location = new System.Drawing.Point(1123, 700);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(305, 24);
+            this.label9.TabIndex = 98;
+            this.label9.Text = "C# richTextBox MouseSelection";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1395, 837);
+            this.Controls.Add(this.label9);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.button42);
             this.Controls.Add(this.button41);
             this.Controls.Add(this.bt_save2);
@@ -1000,6 +1025,8 @@
         private System.Windows.Forms.Button bt_save2;
         private System.Windows.Forms.Button button41;
         private System.Windows.Forms.Button button42;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label9;
     }
 }
 

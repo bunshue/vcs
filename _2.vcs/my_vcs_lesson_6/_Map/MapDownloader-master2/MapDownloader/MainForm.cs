@@ -353,7 +353,7 @@ namespace MapDownloader
             {
                 isLeftButtonDown = true;
                 richTextBox1.Text += "MouseDown 你按了滑鼠左鍵\n";
-                lb_draw.Text += "滑鼠左鍵";
+                lb_draw.Text = "滑鼠左鍵";
 
 
 
@@ -645,7 +645,7 @@ namespace MapDownloader
         {
             if (polygon != null)
             {
-                if (!tileDownloader.IsComplete)
+                if (tileDownloader.IsComplete==false)
                 {
                     MessageBox.Show("正在下载地图，等待下载完成！");
                 }
@@ -656,11 +656,13 @@ namespace MapDownloader
                     {
                         richTextBox1.Text += "開啟 下載地圖 表單\n";
                         DownloadCfgForm downloadCfgForm = new DownloadCfgForm(area, this.gMapControl1.MapProvider);
+
                         if (downloadCfgForm.ShowDialog() == DialogResult.OK)
                         {
                             TileDownloaderArgs downloaderArgs = downloadCfgForm.GetDownloadTileGPoints();
                             this.gMapControl1.Manager.Mode = AccessMode.ServerAndCache;
 
+                            richTextBox1.Text += "儲存至 本地磁碟 : " + this.tilePath + "\n";
                             tileDownloader.TilePath = this.tilePath;    //儲存至 本地磁碟
                             tileDownloader.Retry = retryNum;
                             tileDownloader.PrefetchTileStart += new EventHandler<TileDownloadEventArgs>(tileDownloader_PrefetchTileStart);

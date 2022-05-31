@@ -1,11 +1,11 @@
 ﻿/******************************************************************
- * 创 建 人：  SamWang
- * 创建时间：  2012-5-10 16:06
+ * 創 建 人：  SamWang
+ * 創建時間：  2012-5-10 16:06
  * 描    述：
- *             移动控件但不改变大小
+ *             移動控件但不改變大小
  * 原    理：
  * 版    本：  V1.0      
- * 环    境：  VS2010
+ * 環    境：  VS2010
 ******************************************************************/
 using System;
 using System.Collections.Generic;
@@ -27,10 +27,10 @@ namespace DragControl
         #endregion
 
         #region Fields
-        private Control currentControl; //传入的控件
-        private Point pPoint; //上个鼠标坐标
-        private Point cPoint; //当前鼠标坐标
-        FrameControl fc;//边框控件
+        private Control currentControl; //傳入的控件
+        private Point pPoint; //上個鼠標坐標
+        private Point cPoint; //當前鼠標坐標
+        FrameControl fc;//邊框控件
         #endregion
 
         #region Properties
@@ -39,7 +39,7 @@ namespace DragControl
 
         #region Methods
         /// <summary>
-        /// 挂载事件
+        /// 掛載事件
         /// </summary>
         private void AddEvents()
         {
@@ -50,7 +50,7 @@ namespace DragControl
         }
 
         /// <summary>
-        /// 绘制拖拉时的黑色边框
+        /// 繪制拖拉時的黑色邊框
         /// </summary>
         public static void DrawDragBound(Control ctrl)
         {
@@ -61,19 +61,19 @@ namespace DragControl
             Point[] ps = new Point[5]{new Point(0,0),new Point(width -1,0),
                 new Point(width -1,height -1),new Point(0,height-1),new Point(0,0)};
             g.DrawLines(new Pen(Color.Black), ps);
-        }    
+        }
 
         #endregion
 
         #region Events
         /// <summary>
-        /// 鼠标单击事件：用来显示边框
+        /// 鼠標單擊事件：用來顯示邊框
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         protected void MouseClick(object sender, MouseEventArgs e)
         {
-            this.currentControl.Parent.Refresh();//刷新父容器，清除掉其他控件的边框
+            this.currentControl.Parent.Refresh();//刷新父容器，清除掉其他控件的邊框
             this.currentControl.BringToFront();
             fc = new FrameControl(this.currentControl);
             this.currentControl.Parent.Controls.Add(fc);
@@ -82,25 +82,25 @@ namespace DragControl
         }
 
         /// <summary>
-        /// 鼠标按下事件：记录当前鼠标相对窗体的坐标
+        /// 鼠標按下事件：記錄當前鼠標相對窗體的坐標
         /// </summary>
         void MouseDown(object sender, MouseEventArgs e)
-        {            
-            pPoint = Cursor.Position;               
+        {
+            pPoint = Cursor.Position;
         }
 
         /// <summary>
-        /// 鼠标移动事件：让控件跟着鼠标移动
+        /// 鼠標移動事件：讓控件跟著鼠標移動
         /// </summary>
         void MouseMove(object sender, MouseEventArgs e)
         {
-            Cursor.Current = Cursors.SizeAll; //当鼠标处于控件内部时，显示光标样式为SizeAll
-            //当鼠标左键按下时才触发
+            Cursor.Current = Cursors.SizeAll; //當鼠標處于控件內部時，顯示光標樣式為SizeAll
+            //當鼠標左鍵按下時才觸發
             if (e.Button == MouseButtons.Left)
             {
                 MoveControl.DrawDragBound(this.currentControl);
-                if(fc != null ) fc.Visible = false; //先隐藏
-                cPoint = Cursor.Position;//获得当前鼠标位置
+                if (fc != null) fc.Visible = false; //先隱藏
+                cPoint = Cursor.Position;//獲得當前鼠標位置
                 int x = cPoint.X - pPoint.X;
                 int y = cPoint.Y - pPoint.Y;
                 currentControl.Location = new Point(currentControl.Location.X + x, currentControl.Location.Y + y);
@@ -109,7 +109,7 @@ namespace DragControl
         }
 
         /// <summary>
-        /// 鼠标弹起事件：让自定义的边框出现
+        /// 鼠標彈起事件：讓自定義的邊框出現
         /// </summary>
         void MouseUp(object sender, MouseEventArgs e)
         {
