@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_DllImport1
+namespace vcs__Mix00
 {
     static class Program
     {

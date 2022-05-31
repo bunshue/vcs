@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_Mix04_filename.Properties {
+namespace vcs__Mix00.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

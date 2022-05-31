@@ -283,9 +283,11 @@ namespace MapDownloader
         {
             if (e.Button == MouseButtons.Right)
             {
+                richTextBox1.Text += "開啟右鍵選單\n";
                 leftClickPoint = new GPoint(e.X, e.Y);
                 if (allowRouting)
                 {
+                    richTextBox1.Text += "開啟右鍵選單 之 contextMenuStripLocation\n";
                     this.contextMenuStripLocation.Show(Cursor.Position);
                 }
             }
@@ -427,6 +429,7 @@ namespace MapDownloader
             {
                 if (item is GMapAreaPolygon && currentAreaPolygon != null)
                 {
+                    richTextBox1.Text += "開啟右鍵選單 之 contextMenuStripSelectedArea\n";
                     this.contextMenuStripSelectedArea.Show(Cursor.Position);
                 }
             }

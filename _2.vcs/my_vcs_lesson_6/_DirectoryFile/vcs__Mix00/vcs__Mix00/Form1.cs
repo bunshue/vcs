@@ -10,10 +10,9 @@ using System.Windows.Forms;
 using System.IO;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
-
 using System.Diagnostics;   //for FileVersionInfo
 
-namespace vcs_Mix04_filename
+namespace vcs__Mix00
 {
     public partial class Form1 : Form
     {

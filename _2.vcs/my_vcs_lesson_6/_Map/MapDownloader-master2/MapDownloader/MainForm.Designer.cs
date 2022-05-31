@@ -614,42 +614,42 @@
             // 矩形ToolStripMenuItem
             // 
             this.矩形ToolStripMenuItem.Name = "矩形ToolStripMenuItem";
-            this.矩形ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.矩形ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.矩形ToolStripMenuItem.Text = "矩形";
             this.矩形ToolStripMenuItem.Click += new System.EventHandler(this.矩形ToolStripMenuItem_Click);
             // 
             // 圆形ToolStripMenuItem
             // 
             this.圆形ToolStripMenuItem.Name = "圆形ToolStripMenuItem";
-            this.圆形ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.圆形ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.圆形ToolStripMenuItem.Text = "圆形";
             this.圆形ToolStripMenuItem.Click += new System.EventHandler(this.圆形ToolStripMenuItem_Click);
             // 
             // 多边形ToolStripMenuItem
             // 
             this.多边形ToolStripMenuItem.Name = "多边形ToolStripMenuItem";
-            this.多边形ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.多边形ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.多边形ToolStripMenuItem.Text = "多边形";
             this.多边形ToolStripMenuItem.Click += new System.EventHandler(this.多边形ToolStripMenuItem_Click);
             // 
             // 线段ToolStripMenuItem
             // 
             this.线段ToolStripMenuItem.Name = "线段ToolStripMenuItem";
-            this.线段ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.线段ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.线段ToolStripMenuItem.Text = "线段";
             this.线段ToolStripMenuItem.Click += new System.EventHandler(this.线段ToolStripMenuItem_Click);
             // 
             // 折线段ToolStripMenuItem
             // 
             this.折线段ToolStripMenuItem.Name = "折线段ToolStripMenuItem";
-            this.折线段ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.折线段ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.折线段ToolStripMenuItem.Text = "线条";
             this.折线段ToolStripMenuItem.Click += new System.EventHandler(this.折线段ToolStripMenuItem_Click);
             // 
             // 测距ToolStripMenuItem
             // 
             this.测距ToolStripMenuItem.Name = "测距ToolStripMenuItem";
-            this.测距ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.测距ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.测距ToolStripMenuItem.Text = "测距";
             this.测距ToolStripMenuItem.Click += new System.EventHandler(this.测距ToolStripMenuItem_Click);
             // 
@@ -1336,7 +1336,7 @@
             this.gMapControl1.ScaleMode = GMap.NET.WindowsForms.ScaleModes.Integer;
             this.gMapControl1.SelectedAreaFillColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(65)))), ((int)(((byte)(105)))), ((int)(((byte)(225)))));
             this.gMapControl1.ShowTileGridLines = false;
-            this.gMapControl1.Size = new System.Drawing.Size(216, 300);
+            this.gMapControl1.Size = new System.Drawing.Size(100, 100);
             this.gMapControl1.TabIndex = 0;
             this.gMapControl1.Zoom = 0D;
             // 

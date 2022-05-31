@@ -39,7 +39,12 @@
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.bt_clear2 = new System.Windows.Forms.Button();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cb_show0 = new System.Windows.Forms.CheckBox();
+            this.cb_show1 = new System.Windows.Forms.CheckBox();
+            this.cb_show2 = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -118,7 +123,7 @@
             // 
             // bt_clear1
             // 
-            this.bt_clear1.Location = new System.Drawing.Point(946, 591);
+            this.bt_clear1.Location = new System.Drawing.Point(1114, 591);
             this.bt_clear1.Name = "bt_clear1";
             this.bt_clear1.Size = new System.Drawing.Size(75, 34);
             this.bt_clear1.TabIndex = 13;
@@ -128,7 +133,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(624, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(792, 12);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(397, 613);
             this.richTextBox1.TabIndex = 12;
@@ -136,7 +141,7 @@
             // 
             // bt_clear2
             // 
-            this.bt_clear2.Location = new System.Drawing.Point(534, 591);
+            this.bt_clear2.Location = new System.Drawing.Point(702, 591);
             this.bt_clear2.Name = "bt_clear2";
             this.bt_clear2.Size = new System.Drawing.Size(75, 34);
             this.bt_clear2.TabIndex = 15;
@@ -146,17 +151,63 @@
             // 
             // richTextBox2
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(212, 12);
+            this.richTextBox2.Location = new System.Drawing.Point(380, 12);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.Size = new System.Drawing.Size(397, 613);
             this.richTextBox2.TabIndex = 14;
             this.richTextBox2.Text = "";
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.cb_show2);
+            this.groupBox2.Controls.Add(this.cb_show1);
+            this.groupBox2.Controls.Add(this.cb_show0);
+            this.groupBox2.Location = new System.Drawing.Point(184, 471);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(166, 145);
+            this.groupBox2.TabIndex = 12;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "顯示";
+            // 
+            // cb_show0
+            // 
+            this.cb_show0.AutoSize = true;
+            this.cb_show0.Checked = true;
+            this.cb_show0.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_show0.Enabled = false;
+            this.cb_show0.Location = new System.Drawing.Point(20, 33);
+            this.cb_show0.Name = "cb_show0";
+            this.cb_show0.Size = new System.Drawing.Size(48, 16);
+            this.cb_show0.TabIndex = 0;
+            this.cb_show0.Text = "檔名";
+            this.cb_show0.UseVisualStyleBackColor = true;
+            // 
+            // cb_show1
+            // 
+            this.cb_show1.AutoSize = true;
+            this.cb_show1.Location = new System.Drawing.Point(20, 72);
+            this.cb_show1.Name = "cb_show1";
+            this.cb_show1.Size = new System.Drawing.Size(72, 16);
+            this.cb_show1.TabIndex = 1;
+            this.cb_show1.Text = "檔案大小";
+            this.cb_show1.UseVisualStyleBackColor = true;
+            // 
+            // cb_show2
+            // 
+            this.cb_show2.AutoSize = true;
+            this.cb_show2.Location = new System.Drawing.Point(20, 104);
+            this.cb_show2.Name = "cb_show2";
+            this.cb_show2.Size = new System.Drawing.Size(72, 16);
+            this.cb_show2.TabIndex = 2;
+            this.cb_show2.Text = "檔案日期";
+            this.cb_show2.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1051, 665);
+            this.ClientSize = new System.Drawing.Size(1205, 665);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.bt_clear2);
             this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.bt_clear1);
@@ -171,6 +222,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -188,6 +241,10 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button bt_clear2;
         private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.CheckBox cb_show2;
+        private System.Windows.Forms.CheckBox cb_show1;
+        private System.Windows.Forms.CheckBox cb_show0;
     }
 }
 

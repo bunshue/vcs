@@ -9,6 +9,8 @@ using System.Windows.Forms;
 
 using System.IO;
 
+using MediaInfoNET;
+
 namespace vcs_FileManager
 {
     public partial class Form1 : Form
@@ -325,7 +327,19 @@ namespace vcs_FileManager
                     richTextBox1.Text += directory_old + "\n";
                 }
 
-                richTextBox1.Text += "\t" + fileinfos[i].filename + "\n";
+                if (cb_show0.Checked == true)
+                {
+                    richTextBox1.Text += "\t" + fileinfos[i].filename;
+                }
+                if (cb_show1.Checked == true)
+                {
+                    richTextBox1.Text += "\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
+                }
+                if (cb_show2.Checked == true)
+                {
+                    richTextBox1.Text += "\t" + fileinfos[i].filecreationtime;
+                }
+                richTextBox1.Text += "\n";
 
                 /*
                                     bool res;
@@ -359,7 +373,7 @@ namespace vcs_FileManager
             string FolederName = path;
             richTextBox1.Text += path + "\n\n";
 
-            if (File.Exists(path) == true)
+            if (System.IO.File.Exists(path) == true)
             {
                 // This path is a file
                 richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
@@ -422,7 +436,7 @@ namespace vcs_FileManager
 
             richTextBox1.Text += "\n搜尋路徑" + path + "\n";
 
-            if (File.Exists(path) == true)
+            if (System.IO.File.Exists(path) == true)
             {
                 // This path is a file
                 richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
@@ -451,3 +465,4 @@ namespace vcs_FileManager
         }
     }
 }
+

@@ -656,7 +656,86 @@ namespace vcs_WinAPI
             //bool v = SetSystemTime(ref t);
             richTextBox1.Text += "偽執行\n";
         }
+
         //設定系統時間 SP
+
+        #region 取得目前的桌面路徑
+        [DllImport("user32.dll", CharSet = CharSet.Auto, SetLastError = true)]
+        public static extern int SystemParametersInfo(int uAction, int uParam, StringBuilder lpvParam, int fuWinIni);
+        private const int SPI_GETDESKWALLPAPER = 0x0073;
+        #endregion 
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            //取得目前的桌面路徑
+            //定義存儲緩沖區大小
+            StringBuilder s = new StringBuilder(300);
+            //獲取Window 桌面背景圖片地址，使用緩沖區
+            SystemParametersInfo(SPI_GETDESKWALLPAPER, 300, s, 0);
+            //緩沖區中字符進行轉換
+            string wallpaper_path = s.ToString(); //系統桌面背景圖片路徑
+
+            if (wallpaper_path == "")
+            {
+                richTextBox1.Text += "桌布為純色 或 無桌布\n";
+            }
+            else
+            {
+                richTextBox1.Text += "桌布路徑 : " + wallpaper_path + "\n";
+            }
+
+        }
+
+        #region 取系統的硬盤分區的盤符，用API函數：GetDriveType
+        [DllImport("kernel32.dll", EntryPoint = "GetDriveType")]
+        public static extern int GetDriveType(string nDrive);
+        #endregion
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            //取系統的硬盤分區的盤符
+            string[] dirs = Environment.GetLogicalDrives(); //取得所有的盤符
+
+            foreach (string dir in dirs)
+            {
+                richTextBox1.Text += dir + "\tType : " + GetDriveType(dir).ToString();
+                if (GetDriveType(dir) == 3)
+                {
+                    richTextBox1.Text += "\t硬碟\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "\n";
+                }
+            }
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 
     /// <summary>

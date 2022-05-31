@@ -1,4 +1,4 @@
-﻿namespace vcs_Mix04_filename
+﻿namespace vcs__Mix00
 {
     partial class Form1
     {
