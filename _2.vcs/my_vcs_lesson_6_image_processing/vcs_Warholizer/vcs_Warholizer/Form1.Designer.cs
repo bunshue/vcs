@@ -48,7 +48,6 @@
             this.picFromColor1 = new System.Windows.Forms.PictureBox();
             this.cdColor = new System.Windows.Forms.ColorDialog();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.sfdResult = new System.Windows.Forms.SaveFileDialog();
             this.picFromColor0 = new System.Windows.Forms.PictureBox();
             this.mnuFileOpen = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -234,10 +233,6 @@
             this.pictureBox2.TabIndex = 15;
             this.pictureBox2.TabStop = false;
             // 
-            // sfdResult
-            // 
-            this.sfdResult.Filter = "Image Files|*.bmp;*.jpg;*.gif;*.tif;*.png|All Files|*.*";
-            // 
             // picFromColor0
             // 
             this.picFromColor0.BackColor = System.Drawing.Color.Red;
@@ -347,7 +342,6 @@
         private System.Windows.Forms.PictureBox picFromColor1;
         private System.Windows.Forms.ColorDialog cdColor;
         private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.SaveFileDialog sfdResult;
         private System.Windows.Forms.PictureBox picFromColor0;
         private System.Windows.Forms.ToolStripMenuItem mnuFileOpen;
         private System.Windows.Forms.PictureBox pictureBox1;

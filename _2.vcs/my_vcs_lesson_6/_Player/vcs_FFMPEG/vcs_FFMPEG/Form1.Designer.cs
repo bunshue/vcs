@@ -60,6 +60,8 @@
             this.tb_filename = new System.Windows.Forms.TextBox();
             this.lb_time = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.bt_plus = new System.Windows.Forms.Button();
+            this.bt_minus = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_st)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar_sp)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -371,11 +373,35 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // bt_plus
+            // 
+            this.bt_plus.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_plus.BackgroundImage")));
+            this.bt_plus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_plus.Location = new System.Drawing.Point(442, 199);
+            this.bt_plus.Name = "bt_plus";
+            this.bt_plus.Size = new System.Drawing.Size(40, 40);
+            this.bt_plus.TabIndex = 63;
+            this.bt_plus.UseVisualStyleBackColor = true;
+            this.bt_plus.Click += new System.EventHandler(this.bt_plus_Click);
+            // 
+            // bt_minus
+            // 
+            this.bt_minus.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_minus.BackgroundImage")));
+            this.bt_minus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_minus.Location = new System.Drawing.Point(442, 241);
+            this.bt_minus.Name = "bt_minus";
+            this.bt_minus.Size = new System.Drawing.Size(40, 40);
+            this.bt_minus.TabIndex = 64;
+            this.bt_minus.UseVisualStyleBackColor = true;
+            this.bt_minus.Click += new System.EventHandler(this.bt_minus_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(948, 666);
+            this.Controls.Add(this.bt_minus);
+            this.Controls.Add(this.bt_plus);
             this.Controls.Add(this.lb_time);
             this.Controls.Add(this.tb_filename);
             this.Controls.Add(this.groupBox2);
@@ -436,6 +462,8 @@
         private System.Windows.Forms.TextBox tb_filename;
         private System.Windows.Forms.Label lb_time;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Button bt_plus;
+        private System.Windows.Forms.Button bt_minus;
     }
 }
 

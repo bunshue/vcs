@@ -262,7 +262,8 @@
             // 
             // timer10
             // 
-            this.timer10.Interval = 1000;
+            this.timer10.Enabled = true;
+            this.timer10.Interval = 50;
             this.timer10.Tick += new System.EventHandler(this.timer10_Tick);
             // 
             // timer11

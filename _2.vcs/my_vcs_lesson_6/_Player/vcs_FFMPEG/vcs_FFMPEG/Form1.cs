@@ -27,6 +27,7 @@ namespace vcs_FFMPEG
         int flag_play_mode = 0;    //0: stop, 1: play, 2:  pause
         int mp3_position = 0;
         int mp3_length = 0;
+        int mp3_volume = 50;
 
         public Form1()
         {
@@ -203,6 +204,49 @@ namespace vcs_FFMPEG
             mp3_position = 0;
             trackBar_st.Value = mp3_position;
             trackBar_sp.Value = mp3_length;
+        }
+
+        private void bt_plus_Click(object sender, EventArgs e)
+        {
+            do_plus();
+        }
+
+        private void bt_minus_Click(object sender, EventArgs e)
+        {
+            do_minus();
+        }
+
+        void do_plus()	//+
+        {
+            int amount = 5;
+            axWindowsMediaPlayer1_setup_volume(true, amount);
+        }
+
+        void do_minus()	//-
+        {
+            int amount = 5;
+            axWindowsMediaPlayer1_setup_volume(false, amount);
+        }
+
+        void axWindowsMediaPlayer1_setup_volume(bool dir, int amount)
+        {
+            if (dir == true)   //volume up
+            {
+                if (mp3_volume <= 95)
+                {
+                    mp3_volume += 5;
+                    axWindowsMediaPlayer1.settings.volume = mp3_volume;
+                }
+            }
+            else   //volume down
+            {
+                if (mp3_volume >= 5)
+                {
+                    mp3_volume -= 5;
+                    axWindowsMediaPlayer1.settings.volume = mp3_volume;
+                }
+            }
+            //show_main_message1("音量 : " + mp3_volume.ToString(), S_OK, 30);
         }
 
         private void trackBar_st_Scroll(object sender, EventArgs e)
@@ -546,7 +590,7 @@ namespace vcs_FFMPEG
             string video_filename1 = @"C:\______test_files\__RW\_avi\i2c.avi";
             //string video_filename2 = @"D:\內視鏡影片\190902-0827.mp4";
 
-            string path = @"D:\dddddddddd3\";
+            string path = @"C:\dddddddddd3\";
             CatchImg(video_filename1, path);
         }
 
@@ -657,17 +701,16 @@ namespace vcs_FFMPEG
         //獲取視頻第一秒圖片
         public string CatchImg(string FileName, string oldimg)
         {
-            string imgpath = @"C:\dddddddddd\";
+            string imgpath = @"C:\dddddddddd3\";
             //string trueimgpath = "";
             //trueimgpath = "InfoReleaseResources/Image/" + GroupId + "/";
             if (Directory.Exists(imgpath)==false)
             {
                 Directory.CreateDirectory(imgpath);
             }
-            //取得ffmpeg.exe的路徑
-            string ffmpeg = @"C:\______test_files\_exe\ffmpeg.exe";
+
             string vFileName = FileName;
-            if ((System.IO.File.Exists(ffmpeg) == false) || (System.IO.File.Exists(vFileName) == false))
+            if ((System.IO.File.Exists(ffmpeg_filename) == false) || (System.IO.File.Exists(vFileName) == false))
             {
                 return "";
             }
@@ -683,7 +726,7 @@ namespace vcs_FFMPEG
             int? width, height;
             GetVideoFormatSize(vFileName, out width, out height);
             string FlvImgSize = width + "x" + height;
-            ProcessStartInfo startInfo = new ProcessStartInfo(ffmpeg);
+            ProcessStartInfo startInfo = new ProcessStartInfo(ffmpeg_filename);
             startInfo.UseShellExecute = false; // 要獲取輸出，此值必須爲 false。
             startInfo.CreateNoWindow = true;
             //startInfo.RedirectStandardResult = true;
@@ -705,6 +748,7 @@ namespace vcs_FFMPEG
             }
             catch
             {
+                richTextBox1.Text += "FAIL\n";
                 return "";
             }
 
@@ -732,9 +776,8 @@ namespace vcs_FFMPEG
                 pro.StartInfo.ErrorDialog = false;
                 pro.StartInfo.RedirectStandardError = true;
 
-                string ffmpeg_filename = @"C:\______test_files\_exe\ffmpeg.exe";
+                pro.StartInfo.FileName = ffmpeg_filename;   //FFMPEG程式所在地
 
-                pro.StartInfo.FileName = ffmpeg_filename;
                 pro.StartInfo.Arguments = " -i " + fileName;
 
                 pro.Start();
@@ -763,6 +806,7 @@ namespace vcs_FFMPEG
                 return;
             }
         }
+
     }
 }
 

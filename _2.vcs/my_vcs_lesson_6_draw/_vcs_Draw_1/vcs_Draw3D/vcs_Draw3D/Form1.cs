@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Drawing2D; //for SmoothingMode
+using System.Drawing.Drawing2D; //for SmoothingMode, PixelOffsetMode
 using System.Drawing.Text;      //for TextRenderingHint
 using System.IO;                //for File
 
@@ -525,8 +525,53 @@ namespace vcs_Draw3D
         {
         }
 
+
+        // Return a scaled version of the input image.
+        private Bitmap MakeScaledImage(Image image, float scale_x, float scale_y, PixelOffsetMode mode)
+        {
+            int W = (int)(scale_x * image.Width);
+            int H = (int)(scale_y * image.Height);
+            Bitmap bm = new Bitmap(W, H);
+            using (Graphics g = Graphics.FromImage(bm))
+            {
+                g.Clear(Color.Yellow);
+                Rectangle src_rect = new Rectangle(0, 0, image.Width, image.Height);
+                Rectangle dest_rect = new Rectangle(0, 0, W, H);
+                g.PixelOffsetMode = mode;
+                g.InterpolationMode = InterpolationMode.NearestNeighbor;
+                g.DrawImage(image, dest_rect, src_rect, GraphicsUnit.Pixel);
+            }
+            return bm;
+        }
+
+        float ratio_x = 1.0f;
+        float ratio_y = 1.0f;
         private void timer10_Tick(object sender, EventArgs e)
         {
+            string filename = @"C:\______test_files\__RW\_png\scale16X16.png";
+
+            ratio_x += 0.1f;
+            ratio_y += 0.1f;
+
+            if (ratio_x > 15.0f)
+                timer10.Enabled = false;
+            if (ratio_y > 15.0f)
+                timer10.Enabled = false;
+
+            PixelOffsetMode mode = PixelOffsetMode.HighQuality;
+
+            Image image = Image.FromFile(filename);
+            //pictureBox1.Image = image;
+
+            // Make the scaled image.
+            pictureBox10.Image = MakeScaledImage(image, ratio_x, ratio_y, mode);
+
+            //label1.Text = "原圖 " + pictureBox1.Image.Width.ToString() + " X " + pictureBox1.Image.Height.ToString();
+            //label2.Text = "放大 " + pictureBox10.Image.Width.ToString() + " X " + pictureBox10.Image.Height.ToString();
+            //richTextBox1.Text += ratio_x.ToString() + "\t" + ratio_y.ToString() + "\n";
+
+            Application.DoEvents();
+
         }
 
         private void pictureBox11_Paint(object sender, PaintEventArgs e)

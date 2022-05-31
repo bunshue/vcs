@@ -13,6 +13,8 @@ namespace vcs_FileManager
 {
     public partial class Form1 : Form
     {
+        string search_path = String.Empty;
+        List<String> old_search_path = new List<String>();
 
         Int64 total_size = 0;
         Int64 total_files = 0;
@@ -88,7 +90,50 @@ namespace vcs_FileManager
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //先不急
+            //show_item_location();
+            //update_default_setting();
+        }
 
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //Properties.Settings.Default.search_path = save_path;
+            Properties.Settings.Default.Save();
+
+        }
+
+        void show_item_location()
+        {
+
+        }
+
+        void update_default_setting()
+        {
+            search_path = Properties.Settings.Default.search_path;
+
+            //預設搜尋路徑
+            string PATH = Properties.Settings.Default.search_path;
+            //richTextBox2.Text += "PATH = " + PATH + "\n";
+
+            string[] path = PATH.Split(';');
+
+            foreach (string p in path)
+            {
+                if (p.Length > 0)
+                {
+                    //check existency
+                    if (Directory.Exists(p) == true)
+                    {
+                        //richTextBox2.Text += "len = " + p.Length.ToString() + "\t" + p + "\n";
+                        richTextBox2.Text += "加入路徑 : " + p + "\n";
+                        old_search_path.Add(p);       //目前只能 儲存/加入 一個路徑
+                    }
+                    else
+                    {
+                        richTextBox2.Text += "搜尋預設路徑不存在 : " + p + "\tskip\n";
+                    }
+                }
+            }
         }
 
         private void bt_clear1_Click(object sender, EventArgs e)
@@ -406,4 +451,3 @@ namespace vcs_FileManager
         }
     }
 }
-

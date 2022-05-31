@@ -616,8 +616,18 @@ namespace vcs_ImageProcessing2
             else
                 pictureBox12.Image = bmp;
 
-            // Save the file.
-            SaveBitmapUsingExtension(bmp, filename2);
+            //自動檔名 與 存檔語法
+            //string filename2 = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            try
+            {
+                bmp.Save(filename2, ImageFormat.Bmp);
+
+                richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+            }
         }
 
         // Convert the Bitmap to grayscale.
@@ -646,40 +656,6 @@ namespace vcs_ImageProcessing2
 
             // Unlock the bitmap.
             bm32.UnlockBitmap();
-        }
-
-        // Save the file with the appropriate format.
-        // Throw a NotSupportedException if the file
-        // has an unknown extension.
-        public void SaveBitmapUsingExtension(Bitmap bm, string filename)
-        {
-            string extension = Path.GetExtension(filename);
-            switch (extension.ToLower())
-            {
-                case ".bmp":
-                    bm.Save(filename, ImageFormat.Bmp);
-                    break;
-                case ".exif":
-                    bm.Save(filename, ImageFormat.Exif);
-                    break;
-                case ".gif":
-                    bm.Save(filename, ImageFormat.Gif);
-                    break;
-                case ".jpg":
-                case ".jpeg":
-                    bm.Save(filename, ImageFormat.Jpeg);
-                    break;
-                case ".png":
-                    bm.Save(filename, ImageFormat.Png);
-                    break;
-                case ".tif":
-                case ".tiff":
-                    bm.Save(filename, ImageFormat.Tiff);
-                    break;
-                default:
-                    throw new NotSupportedException(
-                        "Unknown file extension " + extension);
-            }
         }
 
         // Load a Bitmap without locking its file.

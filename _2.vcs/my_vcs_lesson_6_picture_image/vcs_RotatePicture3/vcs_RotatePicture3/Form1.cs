@@ -10,24 +10,34 @@ namespace vcs_RotatePicture3
 {
     public partial class Form1 : Form
     {
+        // The original image.
+        private Bitmap bitmap1;
+
+        // The rotated image.
+        private Bitmap bitmap2;
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        // The original image.
-        private Bitmap OriginalBitmap;
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            // Load an image file.
+            string filename = @"C:\______test_files\picture1.jpg";
 
-        // The rotated image.
-        private Bitmap RotatedBitmap;
+            bitmap1 = new Bitmap(filename);
+            pictureBox1.Image = bitmap1;
+            pictureBox1.Visible = true;
+        }
 
         void RotatePicture(float angle)
         {
             // Rotate.
-            RotatedBitmap = RotateBitmap(OriginalBitmap, angle);
+            bitmap2 = RotateBitmap(bitmap1, angle);
 
             // Display the result.
-            pictureBox1.Image = RotatedBitmap;
+            pictureBox1.Image = bitmap2;
 
             // Size the form to fit.
             SizeForm();
@@ -112,16 +122,6 @@ namespace vcs_RotatePicture3
             this.ClientSize = new Size(
                 Math.Max(W, this.ClientSize.Width),
                 Math.Max(H, this.ClientSize.Height));
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            // Load an image file.
-            string filename = @"C:\______test_files\picture1.jpg";
-
-            OriginalBitmap = new Bitmap(filename);
-            pictureBox1.Image = OriginalBitmap;
-            pictureBox1.Visible = true;
         }
 
         float angle = 0;

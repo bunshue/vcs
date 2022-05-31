@@ -1,5 +1,17 @@
 
 
+
+
+非1080p的，要標注出來
+
+
+標準版轉出程式：
+用一個結構陣列List儲存最終資料
+
+
+
+
+
 richtextbox 直接貼上簡中 會出現亂碼  why?
 
 別人的vcs程式也會這樣嗎？
@@ -5139,6 +5151,41 @@ Response.Write(String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo"));
 
 //--------------------------------------------------------------------------------------------------------------------------
 
+vcs helper的  根據副檔名 決定檔案儲存格式
+
+        // Save the file with the appropriate format.
+        // Throw a NotSupportedException if the file
+        // has an unknown extension.
+        public void SaveBitmapUsingExtension(Bitmap bm, string filename)
+        {
+            string extension = Path.GetExtension(filename);
+            switch (extension.ToLower())
+            {
+                case ".bmp":
+                    bm.Save(filename, ImageFormat.Bmp);
+                    break;
+                case ".exif":
+                    bm.Save(filename, ImageFormat.Exif);
+                    break;
+                case ".gif":
+                    bm.Save(filename, ImageFormat.Gif);
+                    break;
+                case ".jpg":
+                case ".jpeg":
+                    bm.Save(filename, ImageFormat.Jpeg);
+                    break;
+                case ".png":
+                    bm.Save(filename, ImageFormat.Png);
+                    break;
+                case ".tif":
+                case ".tiff":
+                    bm.Save(filename, ImageFormat.Tiff);
+                    break;
+                default:
+                    throw new NotSupportedException(
+                        "Unknown file extension " + extension);
+            }
+        }
 
 
 

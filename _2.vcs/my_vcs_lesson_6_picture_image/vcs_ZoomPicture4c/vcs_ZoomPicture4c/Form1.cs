@@ -99,9 +99,7 @@ namespace vcs_ZoomPicture4c
                         dest_rect, source_rect, GraphicsUnit.Pixel);
                 }
 
-                // Save the bitmap.
                 bitmap1.Save(filename, ImageFormat.Bmp);
-                //richTextBox1.Text += "存檔成功\n";
                 //richTextBox1.Text += "已存檔 : " + filename + "\n";
             }
         }
@@ -220,6 +218,11 @@ namespace vcs_ZoomPicture4c
             int height = Math.Abs(StartPoint.Y - EndPoint.Y);
             DisplayGraphics.DrawRectangle(Pens.Red, x, y, width, height);
             pictureBox1.Refresh();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+
         }
 
     
