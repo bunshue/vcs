@@ -11,13 +11,18 @@ namespace vcs_DynamicAddRemoveControls2
 {
     public partial class Form1 : Form
     {
+        Button[,] btn = new Button[3, 3];
+        Font font = new Font("微軟正黑體", 12);
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        Button[,] btn = new Button[3, 3];
-        Font font = new Font("微軟正黑體", 12);
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -68,3 +73,4 @@ namespace vcs_DynamicAddRemoveControls2
         }
     }
 }
+

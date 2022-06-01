@@ -39,7 +39,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(768, 10);
+            this.button1.Location = new System.Drawing.Point(1017, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 40);
             this.button1.TabIndex = 0;
@@ -49,15 +49,15 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(768, 134);
+            this.richTextBox1.Location = new System.Drawing.Point(1017, 136);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(229, 437);
+            this.richTextBox1.Size = new System.Drawing.Size(229, 625);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(897, 10);
+            this.button2.Location = new System.Drawing.Point(1146, 12);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 40);
             this.button2.TabIndex = 2;
@@ -67,7 +67,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(768, 70);
+            this.button3.Location = new System.Drawing.Point(1017, 72);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(100, 40);
             this.button3.TabIndex = 3;
@@ -77,11 +77,11 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(897, 70);
+            this.button4.Location = new System.Drawing.Point(1146, 72);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(100, 40);
             this.button4.TabIndex = 4;
-            this.button4.Text = "清除";
+            this.button4.Text = "清除這些新增的控件";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -89,7 +89,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1006, 596);
+            this.ClientSize = new System.Drawing.Size(1261, 773);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
@@ -97,6 +97,7 @@
             this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }

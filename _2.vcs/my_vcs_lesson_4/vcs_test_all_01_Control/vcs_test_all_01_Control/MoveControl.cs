@@ -1,20 +1,13 @@
-﻿/******************************************************************
- * 創 建 人：  SamWang
- * 創建時間：  2012-5-10 16:06
- * 描    述：
- *             移動控件但不改變大小
- * 原    理：
- * 版    本：  V1.0      
- * 環    境：  VS2010
-******************************************************************/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 
-namespace DragControl
+//移動控件但不改變大小
+
+namespace vcs_test_all_01_Control
 {
     public class MoveControl
     {

@@ -23,6 +23,11 @@ namespace vcs_DynamicAddRemoveControls5
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "建立新表單並新增控件於其上\n";
@@ -196,7 +201,7 @@ namespace vcs_DynamicAddRemoveControls5
                 Button2[j].FlatAppearance.BorderColor = Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(65)))), ((int)(((byte)(85)))));
                 Button2[j].BackColor = Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(65)))), ((int)(((byte)(85)))));
             }
-            panel1.Controls.AddRange(Button2); 
+            panel1.Controls.AddRange(Button2);
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -234,7 +239,7 @@ namespace vcs_DynamicAddRemoveControls5
             pb_new.Top = 50;
             pb_new.BackColor = Color.Pink;
             this.Controls.Add(pb_new);
-            
+
             Button bt_new = new Button();
             this.Controls.Add(bt_new);
             //bt_new.Location = new Point(button10.Location.X, button10.Location.Y + 60);   same
@@ -250,7 +255,6 @@ namespace vcs_DynamicAddRemoveControls5
         {
             richTextBox1.Text += "你按了這個新控件\n";
         }
-
-
     }
 }
+

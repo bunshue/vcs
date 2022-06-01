@@ -1,13 +1,4 @@
-﻿/******************************************************************
- * 创 建 人：  SamWang
- * 创建时间：  2012-5-10 17:00
- * 描    述：
- *             在控件外部加上边框，用于拖拉，以改变内部控件的大小
- * 原    理：
- * 版    本：  V1.0      
- * 环    境：  VS2010
-******************************************************************/
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,13 +6,15 @@ using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 
-namespace DragControl
+//在控件外部加上邊框，用于拖拉，以改變內部控件的大小
+
+namespace vcs_test_all_01_Control
 {
     public class FrameControl : UserControl
     {
         #region Constructors
         /// <summary>
-        /// 构造函数
+        /// 構造函數
         /// </summary>
         public FrameControl(Control ctrl)
         {
@@ -32,24 +25,24 @@ namespace DragControl
         #endregion
 
         #region Fields
-        const int Band = 6; //调整大小的响应边框
-        private int MinWidth = 20; //最小宽度
+        const int Band = 6; //調整大小的響應邊框
+        private int MinWidth = 20; //最小寬度
         private int MinHeight = 20;//最小高度
         Size square = new Size(Band, Band);//小矩形大小
-        Control baseControl; //基础控件，即被包围的控件
-        Rectangle[] smallRects = new Rectangle[8];//边框中的八个小圆圈
-        Rectangle[] sideRects = new Rectangle[4];//四条边框，用来做响应区域
-        Point[] linePoints = new Point[5];//四条边，用于画虚线
-        Graphics g; //画图板
-        Rectangle ControlRect; //控件包含边框的区域  
-        private Point pPoint; //上个鼠标坐标
-        private Point cPoint; //当前鼠标坐标
+        Control baseControl; //基礎控件，即被包圍的控件
+        Rectangle[] smallRects = new Rectangle[8];//邊框中的八個小圓圈
+        Rectangle[] sideRects = new Rectangle[4];//四條邊框，用來做響應區域
+        Point[] linePoints = new Point[5];//四條邊，用于畫虛線
+        Graphics g; //畫圖板
+        Rectangle ControlRect; //控件包含邊框的區域  
+        private Point pPoint; //上個鼠標坐標
+        private Point cPoint; //當前鼠標坐標
         private MousePosOnCtrl mpoc;
         #endregion
 
         #region Properties
         /// <summary>
-        /// 鼠标在控件中位置
+        /// 鼠標在控件中位置
         /// </summary>
         enum MousePosOnCtrl
         {
@@ -67,7 +60,7 @@ namespace DragControl
 
         #region Methods
         /// <summary>
-        /// 加载事件
+        /// 加載事件
         /// </summary>
         private void AddEvents()
         {
@@ -77,13 +70,13 @@ namespace DragControl
             this.MouseUp += new MouseEventHandler(FrameControl_MouseUp);
         }
 
-        #region 创建边框
+        #region 創建邊框
         /// <summary>
-        /// 建立控件可视区域
+        /// 建立控件可視區域
         /// </summary>
         private void CreateBounds()
         {
-            //创建边界
+            //創建邊界
             int X = baseControl.Bounds.X - square.Width - 1;
             int Y = baseControl.Bounds.Y - square.Height - 1;
             int Height = baseControl.Bounds.Height + (square.Height * 2) + 2;
@@ -91,13 +84,13 @@ namespace DragControl
             this.Bounds = new Rectangle(X, Y, Width, Height);
             this.BringToFront();
             SetRectangles();
-            //设置可视区域
+            //設置可視區域
             this.Region = new Region(BuildFrame());
             g = this.CreateGraphics();
         }
 
         /// <summary>
-        /// 设置定义8个小矩形的范围
+        /// 設置定義8個小矩形的范圍
         /// </summary>
         void SetRectangles()
         {
@@ -118,7 +111,7 @@ namespace DragControl
             //右中
             smallRects[7] = new Rectangle(new Point(square.Width + baseControl.Width + 1, this.Height / 2 - 1), square);
 
-            //四条边线
+            //四條邊線
             //左上
             linePoints[0] = new Point(square.Width / 2, square.Height / 2);
             //右上
@@ -130,24 +123,24 @@ namespace DragControl
             //左上
             linePoints[4] = new Point(square.Width / 2, square.Height / 2);
 
-            //整个包括周围边框的范围
+            //整個包括周圍邊框的范圍
             ControlRect = new Rectangle(new Point(0, 0), this.Bounds.Size);
         }
 
         /// <summary>
-        /// 设置边框控件可视区域
+        /// 設置邊框控件可視區域
         /// </summary>
         /// <returns></returns>
         private GraphicsPath BuildFrame()
         {
             GraphicsPath path = new GraphicsPath();
-            //上边框
+            //上邊框
             sideRects[0] = new Rectangle(0, 0, this.Width - square.Width - 1, square.Height + 1);
-            //左边框
+            //左邊框
             sideRects[1] = new Rectangle(0, square.Height + 1, square.Width + 1, this.Height - square.Height - 1);
-            //下边框
+            //下邊框
             sideRects[2] = new Rectangle(square.Width + 1, this.Height - square.Height - 1, this.Width - square.Width - 1, square.Height + 1);
-            //右边框
+            //右邊框
             sideRects[3] = new Rectangle(this.Width - square.Width - 1, 0, square.Width + 1, this.Height - square.Height - 1);
 
             path.AddRectangle(sideRects[0]);
@@ -159,25 +152,25 @@ namespace DragControl
         #endregion
 
         /// <summary>
-        /// 绘图
+        /// 繪圖
         /// </summary>
         public void Draw()
         {
             this.BringToFront();
-            //g.FillRectangles(Brushes.LightGray, sideRects); //填充四条边框的内部
+            //g.FillRectangles(Brushes.LightGray, sideRects); //填充四條邊框的內部
             Pen pen = new Pen(Color.Black);
-            pen.DashStyle = DashStyle.Dot;//设置为虚线,用虚线画四边，模拟微软效果
-            g.DrawLines(pen, linePoints);//绘制四条边线
-            g.FillRectangles(Brushes.White, smallRects); //填充8个小矩形的内部
+            pen.DashStyle = DashStyle.Dot;//設置為虛線,用虛線畫四邊，模擬微軟效果
+            g.DrawLines(pen, linePoints);//繪制四條邊線
+            g.FillRectangles(Brushes.White, smallRects); //填充8個小矩形的內部
             foreach (Rectangle smallRect in smallRects)
             {
-                g.DrawEllipse(Pens.Black, smallRect);    //绘制8个小椭圆
+                g.DrawEllipse(Pens.Black, smallRect);    //繪制8個小橢圓
             }
-            //g.DrawRectangles(Pens.Black, smallRects);  //绘制8个小矩形的黑色边线
+            //g.DrawRectangles(Pens.Black, smallRects);  //繪制8個小矩形的黑色邊線
         }
 
         /// <summary>
-        /// 设置光标状态
+        /// 設置光標狀態
         /// </summary>
         public bool SetCursorShape(int x, int y)
         {
@@ -235,7 +228,7 @@ namespace DragControl
         }
 
         /// <summary>
-        /// 控件移动
+        /// 控件移動
         /// </summary>
         private void ControlMove()
         {
@@ -248,7 +241,7 @@ namespace DragControl
                     if (baseControl.Height - y > MinHeight)
                     {
                         baseControl.Top += y;
-                        baseControl.Height -= y;                        
+                        baseControl.Height -= y;
                     }
                     else
                     {
@@ -270,14 +263,14 @@ namespace DragControl
                     if (baseControl.Width - x > MinWidth)
                     {
                         baseControl.Left += x;
-                        baseControl.Width -= x;                        
+                        baseControl.Width -= x;
                     }
                     else
                     {
                         baseControl.Left -= MinWidth - baseControl.Width;
                         baseControl.Width = MinWidth;
                     }
-                    
+
                     break;
                 case MousePosOnCtrl.RIGHT:
                     if (baseControl.Width + x > MinWidth)
@@ -330,7 +323,7 @@ namespace DragControl
                     {
                         baseControl.Width = MinWidth;
                     }
-                    break;               
+                    break;
                 case MousePosOnCtrl.BOTTOMLEFT:
                     if (baseControl.Height + y > MinHeight)
                     {
@@ -369,16 +362,16 @@ namespace DragControl
                         baseControl.Width = MinWidth;
                     }
                     break;
-                
+
             }
             pPoint = Cursor.Position;
-        }        
+        }
 
         #endregion
 
         #region Events
         /// <summary>
-        /// 鼠标按下事件：记录当前鼠标相对窗体的坐标
+        /// 鼠標按下事件：記錄當前鼠標相對窗體的坐標
         /// </summary>
         void FrameControl_MouseDown(object sender, MouseEventArgs e)
         {
@@ -386,7 +379,7 @@ namespace DragControl
         }
 
         /// <summary>
-        /// 鼠标移动事件：让控件跟着鼠标移动
+        /// 鼠標移動事件：讓控件跟著鼠標移動
         /// </summary>
         void FrameControl_MouseMove(object sender, MouseEventArgs e)
         {
@@ -399,16 +392,16 @@ namespace DragControl
             else
             {
                 this.Visible = true;
-                SetCursorShape(e.X, e.Y); //更新鼠标指针样式
+                SetCursorShape(e.X, e.Y); //更新鼠標指針樣式
             }
         }
 
         /// <summary>
-        /// 鼠标弹起事件：让自定义的边框出现
+        /// 鼠標彈起事件：讓自定義的邊框出現
         /// </summary>
         void FrameControl_MouseUp(object sender, MouseEventArgs e)
         {
-            this.baseControl.Refresh(); //刷掉黑色边框
+            this.baseControl.Refresh(); //刷掉黑色邊框
             this.Visible = true;
             CreateBounds();
             Draw();
@@ -416,3 +409,6 @@ namespace DragControl
         #endregion
     }
 }
+
+
+

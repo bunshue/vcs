@@ -109,6 +109,13 @@ namespace vcs_test_all_01_Control
             tooltip3.BackColor = Color.LightGray;	//BackColor:取得或設定工具提示的背景色彩.
             tooltip3.AutoPopDelay = 5000;	//AutoPopDelay:當指標靜止於控制項上時,ToolTip 保持可見的時間 (以毫秒為單位).預設值為 5000.
             tooltip3.ToolTipTitle = "vcs";	//ToolTipTitle:取得或設定工具提示視窗的標題.
+
+            //可自由移動所有控件
+            //this.TransparencyKey = SystemColors.Control;
+            foreach (Control subCtrl in this.Controls)
+            {
+                new MoveControl(subCtrl);
+            }
         }
 
         void show_item_location()
@@ -1239,3 +1246,4 @@ namespace vcs_test_all_01_Control
         }
     }
 }
+

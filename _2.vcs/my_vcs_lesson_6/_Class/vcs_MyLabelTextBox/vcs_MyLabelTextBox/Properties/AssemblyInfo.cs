@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 組件的一般資訊是由下列的屬性集控制。
 // 變更這些屬性的值即可修改組件的相關
 // 資訊。
-[assembly: AssemblyTitle("vcs_test_all_24_DllImport_GetMediaLength")]
+[assembly: AssemblyTitle("vcs_MyLabelTextBox")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Home")]
-[assembly: AssemblyProduct("vcs_test_all_24_DllImport_GetMediaLength")]
-[assembly: AssemblyCopyright("Copyright © Home 2017")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("vcs_MyLabelTextBox")]
+[assembly: AssemblyCopyright("Copyright ©  2022")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // 下列 GUID 為專案公開 (Expose) 至 COM 時所要使用的 typelib ID
-[assembly: Guid("09543033-1946-4d4d-a078-923821bc8b65")]
+[assembly: Guid("2b0f978a-c5a2-4552-a5f5-30a0415d76d4")]
 
 // 組件的版本資訊是由下列四項值構成:
 //

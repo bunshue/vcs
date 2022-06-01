@@ -20,6 +20,11 @@ namespace vcs_DynamicAddRemoveControls3
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         // Display all of the images in the Buttons folder.
         private void button1_Click(object sender, EventArgs e)
         {
@@ -65,8 +70,10 @@ namespace vcs_DynamicAddRemoveControls3
             const int margin = 3;
             int x = margin;
             int y = margin;
-            const int num_columns = 10;
+            const int num_columns = 6;
             const int xmax = num_columns * (wid + margin);
+
+            int x_offset = 450;
 
             // Find the images.
             foreach (string filename in Directory.GetFiles(foldername, "*.jpeg"))
@@ -77,7 +84,7 @@ namespace vcs_DynamicAddRemoveControls3
                 btn.BackgroundImage = new Bitmap(filename);
                 btn.BackgroundImageLayout = ImageLayout.Zoom;
                 btn.Size = new Size(64, 64);
-                btn.Location = new Point(x, y);
+                btn.Location = new Point(x + x_offset, y);
                 x += wid + margin;
                 if (x > xmax)
                 {
@@ -105,7 +112,9 @@ namespace vcs_DynamicAddRemoveControls3
                 btn[i] = new Button();//實體化Button
 
                 btn[i].Size = new Size(60, 40);
-                btn[i].Location = new Point(70 * i + 20, 450);
+
+                btn[i].Location = new Point(70 * (i % 5) + 20, 450 + 100 * (i / 5));
+
                 btn[i].Text = i.ToString();
 
                 btn[i].Click += new EventHandler(this.btnXO_Click);//事件

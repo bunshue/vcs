@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace DragControl
+namespace vcs_MyLabelTextBox
 {
     public partial class LabelTextBox : UserControl
     {
@@ -42,9 +42,8 @@ namespace DragControl
             }
         }
 
-
         /// <summary>
-        /// 调整label与cTextBox的大小
+        /// 調整label與cTextBox的大小
         /// </summary>
         /// <param name="e"></param>
         protected override void OnSizeChanged(EventArgs e)
@@ -66,9 +65,10 @@ namespace DragControl
                 this.textBox1.Height = this.Height - 2;
             }
             this.textBox1.Left = label1.Left + label1.Width;
-            this.textBox1.Width = this.Width - textBox1.Left - frame;
+            this.textBox1.Width = this.Width - textBox1.Left - frame - 50;
 
             base.OnSizeChanged(e);
         }
     }
 }
+

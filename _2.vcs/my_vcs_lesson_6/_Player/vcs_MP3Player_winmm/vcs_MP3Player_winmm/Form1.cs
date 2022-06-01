@@ -16,6 +16,12 @@ namespace vcs_MP3Player_winmm
 {
     public partial class Form1 : Form
     {
+        /*  same
+        // API 宣告
+        [DllImport("winmm.dll", EntryPoint = "mciSendString", CharSet = CharSet.Auto)]
+        public static extern int mciSendString(string lpstrCommand, string lpstrReturnString, int uReturnLength, int hwndCallback);
+        */
+
         //winmm.dll播放在window下播放MP3短路徑沒有任何問題，如果是長路徑必須把長路徑轉化成DOS下的短路徑表示方法才能正常播放。
 
         /*
@@ -148,10 +154,17 @@ namespace vcs_MP3Player_winmm
 
         private void button6_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += (GetMediaLen(filename).ToString() + " 秒\n");
             //richTextBox1.Text += (GetMediaLen(@"C:\______test_files\_wav\WindowsShutdown.wav").ToString() + " 秒\n");
             //richTextBox1.Text += (GetMediaLen(@"C:\______test_files\_mp3\aaaa.mp3").ToString() + " 秒");
             //richTextBox1.Text += (GetMediaLen(@"F:\_______VIDEO_ALL_all1\[诸神字幕组][TBS][世界遗产][20160124 加德满都谷地].mp4").ToString() + " 秒");
+
+            string filename = @"C:\______test_files\_mp3\aaaa.mp3";
+            long len = GetMediaLen(filename);
+            richTextBox1.Text += "檔案 : " + filename + ", 長度 : " + len.ToString() + " 秒\n";
+
+            filename = @"C:\______test_files\_wav\WindowsShutdown.wav";
+            len = GetMediaLen(filename);
+            richTextBox1.Text += "檔案 : " + filename + ", 長度 : " + len.ToString() + " 秒\n";
         }
 
         // 取得多媒體檔案長度
@@ -170,13 +183,15 @@ namespace vcs_MP3Player_winmm
                 if (mciSendString("status Media length", tm, tm.Length, 0) == 0)
                 {
                     tm = tm.Trim((char)0);
-                    if (!string.IsNullOrEmpty(tm)) RetVal = Convert.ToInt64(tm) / 1000;
+                    if (!string.IsNullOrEmpty(tm))
+                    {
+                        RetVal = Convert.ToInt64(tm) / 1000;
+                    }
                 }
                 mciSendString("close Media", null, 0, 0);
             }
             return RetVal;
         }
-
-
     }
 }
+

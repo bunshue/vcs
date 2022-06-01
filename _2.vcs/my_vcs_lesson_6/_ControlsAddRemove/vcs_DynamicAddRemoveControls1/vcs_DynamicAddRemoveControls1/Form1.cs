@@ -25,7 +25,10 @@ namespace vcs_DynamicAddRemoveControls1
         public Form1()
         {
             InitializeComponent();
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
             //動態產生button並且綁定click事件
             DynamicGenerateButton();
         }
@@ -418,9 +421,6 @@ namespace vcs_DynamicAddRemoveControls1
         {
             richTextBox1.Clear();
         }
-
-
-
-
     }
 }
+

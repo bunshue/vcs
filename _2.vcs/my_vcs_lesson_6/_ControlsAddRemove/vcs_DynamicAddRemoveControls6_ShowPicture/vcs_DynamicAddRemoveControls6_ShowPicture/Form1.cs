@@ -29,13 +29,14 @@ namespace vcs_DynamicAddRemoveControls6_ShowPicture
         public Form1()
         {
             InitializeComponent();
-            //設定執行後的表單起始位置
-            this.StartPosition = FormStartPosition.Manual;
-            this.Location = new System.Drawing.Point(0, 0);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //設定執行後的表單起始位置
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new System.Drawing.Point(0, 0);
+
             showPictures();
         }
 

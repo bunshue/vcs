@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_test_all_24_DllImport_GetMediaLength
+namespace vcs_MyLabelTextBox
 {
     static class Program
     {
