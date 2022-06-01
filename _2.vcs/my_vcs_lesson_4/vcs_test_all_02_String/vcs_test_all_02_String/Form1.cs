@@ -20,8 +20,58 @@ namespace vcs_test_all_02_String
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 200 + 10;
+            dy = 40 + 10;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+
             richTextBox1.Text += "\n\n";
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -41,6 +91,11 @@ namespace vcs_test_all_02_String
             }
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
             string str = "Welcome to the United States and have a nice day.";
@@ -54,9 +109,10 @@ namespace vcs_test_all_02_String
             }
         }
 
-        string my_string = "   歡迎來到Myson Century!   ";
         private void button4_Click(object sender, EventArgs e)
         {
+            string my_string = "   歡迎來到 The United States of America     ";
+
             richTextBox1.Text += "\n";
             richTextBox1.Text += "字串:\t" + my_string + " 長度:\t" + my_string.Length.ToString() + "\n";
 
@@ -71,39 +127,39 @@ namespace vcs_test_all_02_String
 
         private void button5_Click(object sender, EventArgs e)
         {
+            string my_string = "   歡迎來到 The United States of America     ";
+
             int result;
             richTextBox1.Text += "\n原字串:\t" + my_string + "\n";
-            result = my_string.IndexOf("n", 0);
-            richTextBox1.Text += "找到n在 " + result.ToString() + "\n";
+            result = my_string.IndexOf("m", 0);
+            richTextBox1.Text += "找到m在 " + result.ToString() + "\n";
 
-            result = my_string.IndexOf("n", result + 1);
-            richTextBox1.Text += "找到n在 " + result.ToString() + "\n";
+            result = my_string.IndexOf("m", result + 1);
+            richTextBox1.Text += "找到m在 " + result.ToString() + "\n";
 
-            result = my_string.IndexOf("n", result + 1);
-            richTextBox1.Text += "找到n在 " + result.ToString() + "\n";
+            result = my_string.IndexOf("m", result + 1);
+            richTextBox1.Text += "找到m在 " + result.ToString() + "\n";
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            string my_string = "   歡迎來到 The United States of America     ";
+
             string new_string = "";
             richTextBox1.Text += "\n原字串:\t" + my_string + "\n";
-            new_string = my_string.Substring(7, 5);
-            richTextBox1.Text += "從第7字開始抓5字:\t" + new_string + "\n";
+            new_string = my_string.Substring(29, 7);
+            richTextBox1.Text += "從第29字開始抓7字:\t" + new_string + "\n";
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
+            string my_string = "   歡迎來到 The United States of America     ";
             string new_string = "";
             new_string = my_string.Trim();
 
             richTextBox1.Text += "\n";
             richTextBox1.Text += "原字串:\t|" + my_string + "|\t長度:\t" + my_string.Length.ToString() + "\n";
             richTextBox1.Text += "新字串:\t|" + new_string + "|\t長度:\t" + new_string.Length.ToString() + "\n";
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -159,9 +215,14 @@ namespace vcs_test_all_02_String
             richTextBox1.Text += "用星號連結組合起來 : " + result + "\n";
         }
 
-        private void bt_clear_Click(object sender, EventArgs e)
+        private void button11_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -245,7 +306,6 @@ namespace vcs_test_all_02_String
 
             string filename = string.Format("bmp_{0:yyyyMMdd_HHmmss}.bmp", DateTime.Now);
             richTextBox1.Text += "用string.Format製作依時檔案\n結果 : " + filename + "\n";
-
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -254,6 +314,21 @@ namespace vcs_test_all_02_String
             int i = 123;
             richTextBox1.Text += "左邊補空-----" + i.ToString().PadLeft(5) + "-----\n";       //共5位數, 左邊補空
             richTextBox1.Text += "右邊補空-----" + i.ToString().PadRight(5) + "-----\n";       //共5位數, 右邊補空
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

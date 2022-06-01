@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.rb_sort2 = new System.Windows.Forms.RadioButton();
             this.rb_sort1 = new System.Windows.Forms.RadioButton();
@@ -40,11 +41,21 @@
             this.bt_clear2 = new System.Windows.Forms.Button();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.cb_show0 = new System.Windows.Forms.CheckBox();
-            this.cb_show1 = new System.Windows.Forms.CheckBox();
             this.cb_show2 = new System.Windows.Forms.CheckBox();
+            this.cb_show1 = new System.Windows.Forms.CheckBox();
+            this.cb_show0 = new System.Windows.Forms.CheckBox();
+            this.button4 = new System.Windows.Forms.Button();
+            this.cb_compare0 = new System.Windows.Forms.CheckBox();
+            this.cb_compare2 = new System.Windows.Forms.CheckBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cb_compare3 = new System.Windows.Forms.CheckBox();
+            this.cb_compare1 = new System.Windows.Forms.CheckBox();
+            this.listView1 = new System.Windows.Forms.ListView();
+            this.button5 = new System.Windows.Forms.Button();
+            this.bt_start_files = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -93,9 +104,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(12, 326);
+            this.button3.Location = new System.Drawing.Point(12, 172);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(101, 126);
+            this.button3.Size = new System.Drawing.Size(100, 60);
             this.button3.TabIndex = 10;
             this.button3.Text = "Info";
             this.button3.UseVisualStyleBackColor = true;
@@ -103,9 +114,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 169);
+            this.button2.Location = new System.Drawing.Point(12, 94);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(101, 126);
+            this.button2.Size = new System.Drawing.Size(100, 60);
             this.button2.TabIndex = 9;
             this.button2.Text = "從一個資料夾中撈出所有檔案 標準版 多層";
             this.button2.UseVisualStyleBackColor = true;
@@ -115,7 +126,7 @@
             // 
             this.button1.Location = new System.Drawing.Point(12, 12);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(101, 126);
+            this.button1.Size = new System.Drawing.Size(100, 60);
             this.button1.TabIndex = 8;
             this.button1.Text = "從一個資料夾中撈出所有檔案 標準版  一層";
             this.button1.UseVisualStyleBackColor = true;
@@ -123,7 +134,7 @@
             // 
             // bt_clear1
             // 
-            this.bt_clear1.Location = new System.Drawing.Point(1114, 591);
+            this.bt_clear1.Location = new System.Drawing.Point(1497, 591);
             this.bt_clear1.Name = "bt_clear1";
             this.bt_clear1.Size = new System.Drawing.Size(75, 34);
             this.bt_clear1.TabIndex = 13;
@@ -133,15 +144,15 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(792, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(549, 321);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(397, 613);
+            this.richTextBox1.Size = new System.Drawing.Size(1023, 304);
             this.richTextBox1.TabIndex = 12;
             this.richTextBox1.Text = "";
             // 
             // bt_clear2
             // 
-            this.bt_clear2.Location = new System.Drawing.Point(702, 591);
+            this.bt_clear2.Location = new System.Drawing.Point(455, 591);
             this.bt_clear2.Name = "bt_clear2";
             this.bt_clear2.Size = new System.Drawing.Size(75, 34);
             this.bt_clear2.TabIndex = 15;
@@ -153,7 +164,7 @@
             // 
             this.richTextBox2.Location = new System.Drawing.Point(380, 12);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(397, 613);
+            this.richTextBox2.Size = new System.Drawing.Size(150, 613);
             this.richTextBox2.TabIndex = 14;
             this.richTextBox2.Text = "";
             // 
@@ -169,6 +180,26 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "顯示";
             // 
+            // cb_show2
+            // 
+            this.cb_show2.AutoSize = true;
+            this.cb_show2.Location = new System.Drawing.Point(20, 104);
+            this.cb_show2.Name = "cb_show2";
+            this.cb_show2.Size = new System.Drawing.Size(72, 16);
+            this.cb_show2.TabIndex = 2;
+            this.cb_show2.Text = "檔案日期";
+            this.cb_show2.UseVisualStyleBackColor = true;
+            // 
+            // cb_show1
+            // 
+            this.cb_show1.AutoSize = true;
+            this.cb_show1.Location = new System.Drawing.Point(20, 72);
+            this.cb_show1.Name = "cb_show1";
+            this.cb_show1.Size = new System.Drawing.Size(72, 16);
+            this.cb_show1.TabIndex = 1;
+            this.cb_show1.Text = "檔案大小";
+            this.cb_show1.UseVisualStyleBackColor = true;
+            // 
             // cb_show0
             // 
             this.cb_show0.AutoSize = true;
@@ -182,31 +213,119 @@
             this.cb_show0.Text = "檔名";
             this.cb_show0.UseVisualStyleBackColor = true;
             // 
-            // cb_show1
+            // button4
             // 
-            this.cb_show1.AutoSize = true;
-            this.cb_show1.Location = new System.Drawing.Point(20, 72);
-            this.cb_show1.Name = "cb_show1";
-            this.cb_show1.Size = new System.Drawing.Size(72, 16);
-            this.cb_show1.TabIndex = 1;
-            this.cb_show1.Text = "檔案大小";
-            this.cb_show1.UseVisualStyleBackColor = true;
+            this.button4.Location = new System.Drawing.Point(12, 250);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(100, 60);
+            this.button4.TabIndex = 16;
+            this.button4.Text = "比較";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // cb_show2
+            // cb_compare0
             // 
-            this.cb_show2.AutoSize = true;
-            this.cb_show2.Location = new System.Drawing.Point(20, 104);
-            this.cb_show2.Name = "cb_show2";
-            this.cb_show2.Size = new System.Drawing.Size(72, 16);
-            this.cb_show2.TabIndex = 2;
-            this.cb_show2.Text = "檔案日期";
-            this.cb_show2.UseVisualStyleBackColor = true;
+            this.cb_compare0.AutoSize = true;
+            this.cb_compare0.Checked = true;
+            this.cb_compare0.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_compare0.Location = new System.Drawing.Point(20, 33);
+            this.cb_compare0.Name = "cb_compare0";
+            this.cb_compare0.Size = new System.Drawing.Size(60, 16);
+            this.cb_compare0.TabIndex = 0;
+            this.cb_compare0.Text = "真檔名";
+            this.cb_compare0.UseVisualStyleBackColor = true;
+            this.cb_compare0.CheckedChanged += new System.EventHandler(this.check_cb_compare);
+            // 
+            // cb_compare2
+            // 
+            this.cb_compare2.AutoSize = true;
+            this.cb_compare2.Location = new System.Drawing.Point(20, 102);
+            this.cb_compare2.Name = "cb_compare2";
+            this.cb_compare2.Size = new System.Drawing.Size(72, 16);
+            this.cb_compare2.TabIndex = 1;
+            this.cb_compare2.Text = "檔案大小";
+            this.cb_compare2.UseVisualStyleBackColor = true;
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.cb_compare1);
+            this.groupBox3.Controls.Add(this.cb_compare3);
+            this.groupBox3.Controls.Add(this.cb_compare2);
+            this.groupBox3.Controls.Add(this.cb_compare0);
+            this.groupBox3.Location = new System.Drawing.Point(118, 250);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(118, 192);
+            this.groupBox3.TabIndex = 13;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "比較";
+            // 
+            // cb_compare3
+            // 
+            this.cb_compare3.AutoSize = true;
+            this.cb_compare3.Enabled = false;
+            this.cb_compare3.Location = new System.Drawing.Point(20, 136);
+            this.cb_compare3.Name = "cb_compare3";
+            this.cb_compare3.Size = new System.Drawing.Size(72, 16);
+            this.cb_compare3.TabIndex = 2;
+            this.cb_compare3.Text = "檔案內容";
+            this.cb_compare3.UseVisualStyleBackColor = true;
+            // 
+            // cb_compare1
+            // 
+            this.cb_compare1.AutoSize = true;
+            this.cb_compare1.Location = new System.Drawing.Point(20, 71);
+            this.cb_compare1.Name = "cb_compare1";
+            this.cb_compare1.Size = new System.Drawing.Size(72, 16);
+            this.cb_compare1.TabIndex = 3;
+            this.cb_compare1.Text = "模糊檔名";
+            this.cb_compare1.UseVisualStyleBackColor = true;
+            this.cb_compare1.CheckedChanged += new System.EventHandler(this.check_cb_compare);
+            // 
+            // listView1
+            // 
+            this.listView1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.listView1.Location = new System.Drawing.Point(549, 12);
+            this.listView1.Name = "listView1";
+            this.listView1.Size = new System.Drawing.Size(1023, 303);
+            this.listView1.TabIndex = 17;
+            this.listView1.UseCompatibleStateImageBehavior = false;
+            this.listView1.View = System.Windows.Forms.View.Details;
+            this.listView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listView1_KeyDown);
+            this.listView1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseClick);
+            this.listView1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView1_MouseDoubleClick);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(11, 382);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(100, 60);
+            this.button5.TabIndex = 18;
+            this.button5.Text = "test";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // bt_start_files
+            // 
+            this.bt_start_files.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_start_files.BackgroundImage")));
+            this.bt_start_files.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_start_files.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_start_files.Location = new System.Drawing.Point(300, 17);
+            this.bt_start_files.Name = "bt_start_files";
+            this.bt_start_files.Size = new System.Drawing.Size(50, 50);
+            this.bt_start_files.TabIndex = 19;
+            this.bt_start_files.UseVisualStyleBackColor = true;
+            this.bt_start_files.Click += new System.EventHandler(this.bt_start_files_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1205, 665);
+            this.ClientSize = new System.Drawing.Size(1584, 661);
+            this.Controls.Add(this.bt_start_files);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.bt_clear2);
             this.Controls.Add(this.richTextBox2);
@@ -224,6 +343,8 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -245,6 +366,15 @@
         private System.Windows.Forms.CheckBox cb_show2;
         private System.Windows.Forms.CheckBox cb_show1;
         private System.Windows.Forms.CheckBox cb_show0;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.CheckBox cb_compare0;
+        private System.Windows.Forms.CheckBox cb_compare2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.CheckBox cb_compare3;
+        private System.Windows.Forms.CheckBox cb_compare1;
+        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button bt_start_files;
     }
 }
 

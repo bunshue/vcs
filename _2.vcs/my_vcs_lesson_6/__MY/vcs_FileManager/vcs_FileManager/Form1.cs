@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;
+using System.IO;    //for FileInfo DirectoryInfo
+using System.Diagnostics;   //for Process
+using System.Globalization; //for CultureInfo
 
 using MediaInfoNET;
 
@@ -15,6 +17,10 @@ namespace vcs_FileManager
 {
     public partial class Form1 : Form
     {
+        //string foldername = @"C:\______test_files_file_manager";    //欲搜尋的資料夾
+        //string foldername = @"D:\vcs\astro\_DATA2\_________整理_mp3\wen2";
+        string foldername = @"C:\______test_files\__RW\_avi";
+
         string search_path = String.Empty;
         List<String> old_search_path = new List<String>();
 
@@ -26,9 +32,13 @@ namespace vcs_FileManager
 
         string FolederName = string.Empty;
         List<MyFileInfo> fileinfos = new List<MyFileInfo>();
+        List<MyFileInfo> fileinfos_match = new List<MyFileInfo>();
+
         public class MyFileInfo
         {
             public string filename;
+            public string fullfilename;
+            public string shortfilename;
             public string filepath;
             public string fileextension;
             public long filesize;
@@ -42,6 +52,17 @@ namespace vcs_FileManager
             public MyFileInfo(string n, string p, string e, long s, DateTime c)
             {
                 this.filename = n;
+                this.filepath = p;
+                this.fileextension = e;
+                this.filesize = s;
+                this.filecreationtime = c;
+            }
+
+            public MyFileInfo(string n, string fn, string sn, string p, string e, long s, DateTime c)
+            {
+                this.filename = n;
+                this.fullfilename = fn;
+                this.shortfilename = sn;
                 this.filepath = p;
                 this.fileextension = e;
                 this.filesize = s;
@@ -92,6 +113,11 @@ namespace vcs_FileManager
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.listView1.GridLines = true;
+            listView1.View = View.Details;  //定義列表顯示的方式
+            listView1.FullRowSelect = true; //整行一起選取
+            listView1.Clear();
+
             //先不急
             //show_item_location();
             //update_default_setting();
@@ -281,7 +307,26 @@ namespace vcs_FileManager
                 //richTextBox1.Text += fi.DirectoryName + "\n";
             */
 
-            fileinfos.Add(new MyFileInfo(fi.Name, FolederName, fi.Extension, fi.Length, fi.CreationTime));
+            //過濾掉檔名的一些字 用以做比較用
+            string shortname = fi.Name;
+            string[] remove_word = new string[] { "BCP", "pc", "-", "-", "-", "-", "-" };
+            foreach (string r in remove_word)
+            {
+                shortname = shortname.Replace(r, "");
+            }
+
+            //只取前7字
+            if (shortname.Length > 7)
+                shortname = shortname.Substring(0, 7);
+
+            //一律轉小寫
+            shortname = shortname.ToLower();
+
+            //richTextBox1.Text += "fname = " + fi.FullName + "\n";
+            //richTextBox1.Text += "dname = " + fi.DirectoryName + "\n";
+
+            //把資料放進 List<MyFileInfo> fileinfos 中
+            fileinfos.Add(new MyFileInfo(fi.Name, fi.FullName, shortname, fi.DirectoryName, fi.Extension, fi.Length, fi.CreationTime));
         }
 
         void show_file_info()  //轉出一層
@@ -294,9 +339,9 @@ namespace vcs_FileManager
 
 
             if (fileinfos.Count == 0)
-                richTextBox1.Text += "無資料\n";
+                richTextBox1.Text += "無資料a\n";
             else
-                richTextBox1.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料a\n";
+                richTextBox1.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料c\n";
 
             if (rb_sort0.Checked == true)
             {
@@ -327,6 +372,7 @@ namespace vcs_FileManager
                     richTextBox1.Text += directory_old + "\n";
                 }
 
+
                 if (cb_show0.Checked == true)
                 {
                     richTextBox1.Text += "\t" + fileinfos[i].filename;
@@ -339,6 +385,14 @@ namespace vcs_FileManager
                 {
                     richTextBox1.Text += "\t" + fileinfos[i].filecreationtime;
                 }
+
+                richTextBox1.Text += "\tfname: " + fileinfos[i].fullfilename;
+                richTextBox1.Text += "\tdname: " + fileinfos[i].filepath;
+                richTextBox1.Text += "\tsn: " + fileinfos[i].shortfilename;
+                richTextBox1.Text += "\tpath: " + fileinfos[i].filepath;
+                richTextBox1.Text += "\text: " + fileinfos[i].fileextension;
+
+
                 richTextBox1.Text += "\n";
 
                 /*
@@ -352,14 +406,189 @@ namespace vcs_FileManager
                                     }
                 */
 
+
             }
+        }
+
+        void show_match_files()
+        {
+            if (fileinfos_match.Count == 0)
+            {
+                richTextBox1.Text += "無資料b\n";
+                return;
+            }
+            else
+            {
+                richTextBox1.Text += "找到 " + fileinfos_match.Count.ToString() + " 筆資料b\n";
+            }
+            listView1.Clear();
+
+            listView1.Columns.Add("檔名", 200, HorizontalAlignment.Left);
+            listView1.Columns.Add("大小", 100, HorizontalAlignment.Left);
+            listView1.Columns.Add("資料夾", 400, HorizontalAlignment.Left);
+            listView1.Columns.Add("副檔名", 80, HorizontalAlignment.Left);
+            listView1.Columns.Add("修改日期", 180, HorizontalAlignment.Left);
+            listView1.Visible = true;
+
+            for (int i = 0; i < fileinfos_match.Count; i++)
+            {
+                //ListViewItem i1 = new ListViewItem(fileinfos_match[i].filename);
+                ListViewItem i1;
+
+                ListViewItem.ListViewSubItem sub_i1a = new ListViewItem.ListViewSubItem();
+                ListViewItem.ListViewSubItem sub_i1b = new ListViewItem.ListViewSubItem();
+                ListViewItem.ListViewSubItem sub_i1c = new ListViewItem.ListViewSubItem();
+                ListViewItem.ListViewSubItem sub_i1d = new ListViewItem.ListViewSubItem();
+                ListViewItem.ListViewSubItem sub_i1e = new ListViewItem.ListViewSubItem();
+
+                string item = string.Empty; //useless
+                string items = string.Empty;
+                string itema = string.Empty;
+                string itemb = string.Empty;
+                string itemc = string.Empty;
+                string itemd = string.Empty;
+                string iteme = string.Empty;
+
+                //debug mesg
+                //richTextBox2.Text += "i = " + i.ToString() + ", filename : " + fileinfos_match[i].filepath + "\\" + fileinfos_match[i].filename + "\n";
+
+                MediaFile f = new MediaFile(fileinfos_match[i].filepath + "\\" + fileinfos_match[i].filename);
+
+                richTextBox1.Text += "  影片長度: " + f.General.DurationString + "\n";
+                richTextBox1.Text += "  FileSize: " + f.FileSize.ToString() + "\n";
+                richTextBox1.Text += "  Extension: " + f.Extension + "\n";
+
+                if ((f.InfoAvailable == true) && (f.Video.Count > 0))
+                {
+                    int w = f.Video[0].Width;
+                    int h = f.Video[0].Height;
+                    //richTextBox2.Text += "  輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
+                    //richTextBox2.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
+                    //richTextBox2.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
+                    //fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
+
+                    item = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
+
+                    itema = fileinfos_match[i].filename;
+                    itemb = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos_match[i].filesize));
+                    itemc = fileinfos_match[i].filepath;
+                    itemd = fileinfos_match[i].fileextension;
+                    iteme = fileinfos_match[i].filecreationtime.ToString();
+
+                    //i1 = new ListViewItem(fileinfos_match[i].filename);
+                    i1 = new ListViewItem(itema);
+                    i1.UseItemStyleForSubItems = false;
+
+                    //sub_i10.Text = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
+
+                    sub_i1b.Text = itemb;
+                    i1.SubItems.Add(sub_i1b);
+
+                    sub_i1c.Text = itemc;
+                    i1.SubItems.Add(sub_i1c);
+                    //sub_i1a.Text = fileinfos_match[i].filepath;
+                    //sub_i1a.Text = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
+                    sub_i1d.Text = itemd;
+                    i1.SubItems.Add(sub_i1d);
+
+                    sub_i1e.Text = iteme;
+                    i1.SubItems.Add(sub_i1e);
+
+                    //sub_i1a.Text = fi.Length.ToString();
+                    //sub_i1b.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos_match[i].filesize));
+                    //sub_i1c.Text = itemc;
+                    //i1.SubItems.Add(sub_i1c);
+
+                    sub_i1a.ForeColor = System.Drawing.Color.Blue;
+                    sub_i1b.ForeColor = System.Drawing.Color.Blue;
+                    sub_i1c.ForeColor = System.Drawing.Color.Blue;
+
+                    sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                    sub_i1b.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                    sub_i1c.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+
+
+                    listView1.Items.Add(i1);
+                    richTextBox1.Text += "A";
+                }
+                else
+                {
+                    richTextBox1.Text += "B";
+                    //continue;
+                }
+
+                
+                //設置ListView最後一行可見
+                //listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+
+            }
+
+            /*
+                        i1 = new ListViewItem(fileinfos_match[i].filename);
+                        i1.UseItemStyleForSubItems = false;
+
+                        richTextBox2.Text += "XXXXXXXXXXXXXXXXXXXXXXXXX1\n";
+                        //richTextBox2.Text += "xxxxx" + fileinfos_match[i].filename + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos_match[i].filesize)) + "\n";
+                        sub_i1a.Text = fileinfos_match[i].filepath;
+                        i1.SubItems.Add(sub_i1a);
+                        //sub_i1a.Text = fi.Length.ToString();
+                        sub_i1b.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos_match[i].filesize));
+                        i1.SubItems.Add(sub_i1b);
+
+                        sub_i1a.ForeColor = System.Drawing.Color.Blue;
+                        sub_i1b.ForeColor = System.Drawing.Color.Blue;
+
+                        sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                        sub_i1b.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                    }
+                }
+                else
+                {
+                    if (cb_video_only.Checked == true)
+                        continue;
+
+                    if (cb_generate_text.Checked == false)
+                        continue;
+
+                    i1 = new ListViewItem(fileinfos_match[i].filename);
+                    i1.UseItemStyleForSubItems = false;
+
+                    richTextBox2.Text += "XXXXXXXXXXXXXXXXXXXXXXXXX2\n";
+                    sub_i1a.Text = fileinfos_match[i].filepath;
+                    i1.SubItems.Add(sub_i1a);
+                    //sub_i1a.Text = fi.Length.ToString();
+                    sub_i1b.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos_match[i].filesize));
+                    i1.SubItems.Add(sub_i1b);
+
+                    sub_i1a.ForeColor = System.Drawing.Color.Blue;
+                    sub_i1b.ForeColor = System.Drawing.Color.Blue;
+
+                    sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                    sub_i1b.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                }
+
+                if (flag_search_mode == 1)
+                {
+                    bool res;
+                    res = i1.Name.ToLower().Replace(" ", "").Contains(tb_search_text_pattern.Text.ToLower().Replace("-", ""));
+                    if (res == false)
+                        continue;
+                    else
+                    {
+                        richTextBox1.Text += "aaaa get file : " + i1.Name + "\n";
+                    }
+                }
+            */
+
+
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             //從一個資料夾中撈出所有檔案 標準版
 
-            string foldername = @"C:\______test_files\_exe";
             string path = foldername;
 
             //轉出一層
@@ -424,8 +653,6 @@ namespace vcs_FileManager
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string foldername = @"C:\______test_files\_exe";
-
             string path = foldername;
 
             //轉出多層
@@ -463,6 +690,264 @@ namespace vcs_FileManager
         {
             show_file_info();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (fileinfos.Count == 0)
+                richTextBox1.Text += "無資料c\n";
+            else
+                richTextBox1.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料b\n";
+
+            int len = fileinfos.Count;
+            if (len < 2)
+                return;
+
+            fileinfos_match.Clear();
+
+            int i;
+            int j;
+            for (i = 0; i < len; i++)
+            {
+                for (j = i + 1; j < (len - 1); j++)
+                {
+                    if (cb_compare0.Checked == true)    //比較真檔名
+                    {
+                        if (fileinfos[i].filename == fileinfos[j].filename)
+                        {
+                            richTextBox1.Text += "找到真檔名\n";
+                            richTextBox1.Text += fileinfos[i].fullfilename + "\n";
+                            richTextBox1.Text += fileinfos[j].fullfilename + "\n";
+                            fileinfos_match.Add(fileinfos[i]);
+                            fileinfos_match.Add(fileinfos[j]);
+                        }
+                    }
+
+                    if (cb_compare1.Checked == true)    //比較模糊檔名
+                    {
+                        if (fileinfos[i].shortfilename == fileinfos[j].shortfilename)
+                        {
+                            richTextBox1.Text += "找到模糊檔名\n";
+                            richTextBox1.Text += fileinfos[i].fullfilename + "\n";
+                            richTextBox1.Text += fileinfos[j].fullfilename + "\n";
+                            fileinfos_match.Add(fileinfos[i]);
+                            fileinfos_match.Add(fileinfos[j]);
+                        }
+                    }
+
+                    if (cb_compare2.Checked == true)    //比較檔案大小
+                    {
+                        if (fileinfos[i].filesize == fileinfos[j].filesize)
+                        {
+                            richTextBox1.Text += "找到相同檔案大小\n";
+                            richTextBox1.Text += fileinfos[i].fullfilename + "\n";
+                            richTextBox1.Text += fileinfos[j].fullfilename + "\n";
+                            fileinfos_match.Add(fileinfos[i]);
+                            fileinfos_match.Add(fileinfos[j]);
+                        }
+                    }
+
+
+
+                }
+            }
+
+            richTextBox1.Text += "show match files\n";
+            show_match_files();
+        }
+
+        private void check_cb_compare(object sender, EventArgs e)
+        {
+            //richTextBox1.Text += "你按了 " + ((CheckBox)sender).Name + "\n";
+            string name = ((CheckBox)sender).Name;
+            if (name == "cb_compare0")
+            {
+                if (cb_compare0.Checked == true)
+                {
+                    cb_compare1.Checked = false;
+                }
+            }
+            else if (name == "cb_compare1")
+            {
+                if (cb_compare1.Checked == true)
+                {
+                    cb_compare0.Checked = false;
+                }
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            /*
+            listView1.Clear();
+            listView1.Columns.Add("檔名", 100, HorizontalAlignment.Left);
+            listView1.Columns.Add("大小", 50, HorizontalAlignment.Left);
+            listView1.Columns.Add("資料夾", 500, HorizontalAlignment.Left);
+            listView1.Columns.Add("副檔名", 100, HorizontalAlignment.Left);
+            listView1.Columns.Add("修改日期", 100, HorizontalAlignment.Left);
+
+            // + 影片格式
+
+            listView1.Visible = true;
+            */
+
+            string filename = @"C:\______test_files\__RW\_avi\i2c.avi";
+
+            MediaFile f = new MediaFile(filename);
+
+            richTextBox1.Text += "  影片長度: " + f.General.DurationString + "\n";
+            richTextBox1.Text += "  FileSize: " + f.FileSize.ToString() + "\n";
+            richTextBox1.Text += "  Extension: " + f.Extension + "\n";
+
+
+
+
+        }
+
+        private void listView1_MouseClick(object sender, MouseEventArgs e)
+        {
+            /*
+            int selNdx;
+            string fullname;
+
+            selNdx = listView1.SelectedIndices[0];
+
+
+            richTextBox2.Text += "aaa:\t" + listView1.Items[selNdx].Text + "\n";
+            richTextBox2.Text += "bbb:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
+            richTextBox2.Text += "ccc:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+            richTextBox2.Text += "ddd:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
+            */
+
+            int selNdx;
+            string fullname;
+
+            selNdx = listView1.SelectedIndices[0];
+            listView1.Items[selNdx].Selected = true;    //選到的項目
+            richTextBox2.Text += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
+            richTextBox2.Text += "你選擇了檔名:\t" + listView1.Items[selNdx].Text + "\n";
+            richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
+        }
+
+        private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            int selNdx;
+            string fullname;
+
+            selNdx = listView1.SelectedIndices[0];
+
+            /*
+            richTextBox2.Text += "aaa:\t" + listView1.Items[selNdx].Text + "\n";
+            richTextBox2.Text += "bbb:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
+            richTextBox2.Text += "ccc:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
+            richTextBox2.Text += "ddd:\t" + listView1.Items[selNdx].SubItems[3].Text + "\n";
+            */
+
+            string video_player_path = @"D:\___backup\PotPlayer\PotPlayerMini64.exe";
+
+            selNdx = listView1.SelectedIndices[0];
+            listView1.Items[selNdx].Selected = true;    //選到的項目
+            //richTextBox2.Text += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
+            richTextBox2.Text += "你選擇了資料夾:\t" + listView1.Items[selNdx].Text + "\n";
+
+            fullname = listView1.Items[selNdx].SubItems[2].Text + "\\" + listView1.Items[selNdx].Text;
+
+            richTextBox1.Text += "開啟路徑: " + fullname + "\n";
+
+
+            //richTextBox2.Text += "video_player_path = " + video_player_path + "\n";
+            richTextBox2.Text += "fullname = " + fullname + "\n";
+
+
+            if (video_player_path == String.Empty)
+            {
+                Process.Start(fullname); //使用預設程式開啟
+            }
+            else
+            {
+                if (System.IO.File.Exists(video_player_path) == true)
+                {
+                    Process.Start(video_player_path, fullname);    //指名播放程式開啟
+                }
+            }
+
+
+        }
+
+        private void bt_start_files_Click(object sender, EventArgs e)
+        {
+            richTextBox2.Text += "你選擇了 : " + listView1.SelectedIndices.Count.ToString() + " 個檔案, 分別是\n";
+            for (int i = 0; i < listView1.SelectedIndices.Count; i++)
+            {
+                richTextBox2.Text += listView1.SelectedItems[i].SubItems[2].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
+            }
+            richTextBox2.Text += "開啟\n";
+
+            int selNdx;
+            string all_filename = string.Empty;
+
+            if (this.listView1.SelectedIndices.Count <= 0)  //總共選擇的個數
+            {
+                richTextBox2.Text += "無檔案\n";
+                return;
+            }
+
+            string video_player_path = @"D:\___backup\PotPlayer\PotPlayerMini64.exe";
+
+            //richTextBox2.Text += "總共選了 : " + listView1.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
+            //for (int i = 0; i < listView1.SelectedIndices.Count; i++)
+            for (int i = 0; i < listView1.SelectedItems.Count; i++)
+            {
+                selNdx = listView1.SelectedIndices[i];
+                listView1.Items[selNdx].Selected = true;    //選到的項目
+                //richTextBox2.Text += listView1.Items[selNdx].Text + "\n";
+
+                all_filename += " \"" + listView1.Items[selNdx].SubItems[2].Text + "\\" + listView1.Items[selNdx].SubItems[0].Text + "\"";
+            }
+
+            //指定應用程式路徑
+            string target = String.Empty;
+
+            //方法一
+            //Process.Start(target, "參數");
+            //Process.Start(target, all_filename);
+
+            //方法二
+
+            target = video_player_path;
+
+            ProcessStartInfo pInfo = new ProcessStartInfo(target);
+            pInfo.Arguments = all_filename;
+
+            /*
+            // debug mesg
+            richTextBox2.Text += "target : " + target + "\n";
+            richTextBox2.Text += "all_filename : " + all_filename + "\n";
+            */
+
+            if (video_player_path == String.Empty)
+            {
+                all_filename = all_filename.Trim().Replace("\"", "");
+                Process.Start(all_filename); //使用預設程式開啟, 無法一次播放多個檔案
+            }
+            else
+            {
+                Process.Start(video_player_path, all_filename);    //指名播放程式開啟
+            }
+
+            /*
+            using (Process p = new Process())
+            {
+                p.StartInfo = pInfo;
+                p.Start();
+            }
+            */
+        }
+
+        private void listView1_KeyDown(object sender, KeyEventArgs e)
+        {
+            richTextBox2.Text += "KeyDown, 按鍵是：" + e.KeyCode + "\n";
+
+
+        }
     }
 }
-
