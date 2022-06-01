@@ -1291,6 +1291,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(110, 45);
             this.button8.TabIndex = 24;
+            this.button8.Text = "從恭王府北京協和醫院";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 

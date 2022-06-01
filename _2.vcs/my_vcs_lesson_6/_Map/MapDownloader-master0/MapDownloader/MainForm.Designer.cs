@@ -1439,6 +1439,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(120, 40);
             this.button8.TabIndex = 38;
+            this.button8.Text = "從恭王府北京協和醫院";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -1448,6 +1449,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(120, 40);
             this.button7.TabIndex = 36;
+            this.button7.Text = "從 恭王府 天安門 2";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -1457,6 +1459,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(120, 40);
             this.button6.TabIndex = 35;
+            this.button6.Text = "從 恭王府 天安門 1";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -1466,7 +1469,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(120, 40);
             this.button0.TabIndex = 34;
-            this.button0.Text = "button0";
+            this.button0.Text = "顯示網格";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -1476,7 +1479,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(120, 40);
             this.button5.TabIndex = 33;
-            this.button5.Text = "地址解析";
+            this.button5.Text = "地址解析 之 查詢";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -1486,7 +1489,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(120, 40);
             this.button4.TabIndex = 32;
-            this.button4.Text = "button4";
+            this.button4.Text = "地圖存圖";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -1496,7 +1499,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(120, 40);
             this.button3.TabIndex = 31;
-            this.button3.Text = "button3";
+            this.button3.Text = "讀取KML檔案";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -1524,7 +1527,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(120, 40);
             this.button2.TabIndex = 28;
-            this.button2.Text = "button2";
+            this.button2.Text = "讀取GPX檔案";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -1534,7 +1537,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(120, 40);
             this.button1.TabIndex = 27;
-            this.button1.Text = "代理設置";
+            this.button1.Text = "下載設置 之 代理設置";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
