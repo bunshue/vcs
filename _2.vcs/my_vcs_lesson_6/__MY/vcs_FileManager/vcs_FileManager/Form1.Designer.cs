@@ -64,6 +64,7 @@
             this.cb_filesize = new System.Windows.Forms.CheckBox();
             this.tb_filesize = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
+            this.bt_clear3 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -148,7 +149,7 @@
             // 
             this.bt_clear1.Location = new System.Drawing.Point(1697, 591);
             this.bt_clear1.Name = "bt_clear1";
-            this.bt_clear1.Size = new System.Drawing.Size(75, 34);
+            this.bt_clear1.Size = new System.Drawing.Size(63, 30);
             this.bt_clear1.TabIndex = 13;
             this.bt_clear1.Text = "Clear";
             this.bt_clear1.UseVisualStyleBackColor = true;
@@ -166,7 +167,7 @@
             // 
             this.bt_clear2.Location = new System.Drawing.Point(455, 591);
             this.bt_clear2.Name = "bt_clear2";
-            this.bt_clear2.Size = new System.Drawing.Size(75, 34);
+            this.bt_clear2.Size = new System.Drawing.Size(63, 30);
             this.bt_clear2.TabIndex = 15;
             this.bt_clear2.Text = "Clear";
             this.bt_clear2.UseVisualStyleBackColor = true;
@@ -442,11 +443,23 @@
             this.label2.TabIndex = 18;
             this.label2.Text = "MB";
             // 
+            // bt_clear3
+            // 
+            this.bt_clear3.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear3.Location = new System.Drawing.Point(1121, 269);
+            this.bt_clear3.Name = "bt_clear3";
+            this.bt_clear3.Size = new System.Drawing.Size(63, 30);
+            this.bt_clear3.TabIndex = 58;
+            this.bt_clear3.Text = "清除";
+            this.bt_clear3.UseVisualStyleBackColor = true;
+            this.bt_clear3.Click += new System.EventHandler(this.bt_clear3_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1784, 662);
+            this.Controls.Add(this.bt_clear3);
             this.Controls.Add(this.groupBox_file);
             this.Controls.Add(this.bt_clear_dir);
             this.Controls.Add(this.bt_remove_dir);
@@ -519,6 +532,7 @@
         private System.Windows.Forms.CheckBox cb_filesize;
         private System.Windows.Forms.TextBox tb_filesize;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button bt_clear3;
     }
 }
 

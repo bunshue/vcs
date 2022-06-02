@@ -95,7 +95,7 @@ namespace MapDownloader
             string retryStr = ConfigHelper.GetAppConfig("Retry");
             string center = ConfigHelper.GetAppConfig("MapCenter");
 
-                richTextBox1.Text += "get center : " + center + "\n";
+            richTextBox1.Text += "get center : " + center + "\n";
 
             string[] centerPoints = center.Split(',');
             if (centerPoints.Length == 2)
@@ -104,7 +104,7 @@ namespace MapDownloader
                 {
                     gMapControl1.Position = new PointLatLng(double.Parse(centerPoints[1]), double.Parse(centerPoints[0]));
 
-                        richTextBox1.Text += "Position : " + gMapControl1.Position.ToString() + "\n";
+                    richTextBox1.Text += "Position : " + gMapControl1.Position.ToString() + "\n";
                 }
             }
             retryNum = int.Parse(retryStr);
@@ -645,7 +645,7 @@ namespace MapDownloader
         {
             if (polygon != null)
             {
-                if (tileDownloader.IsComplete==false)
+                if (tileDownloader.IsComplete == false)
                 {
                     MessageBox.Show("正在下载地图，等待下载完成！");
                 }
@@ -2049,15 +2049,15 @@ namespace MapDownloader
 
             List<PointLatLng> points = FindPointLatLngByAddress(address);
 
-                    richTextBox1.Text += "查詢資料成功, 共有" + points.Count.ToString() + " 筆資料\n";
-                    foreach (PointLatLng point in points)
-                    {
-                        richTextBox1.Text += "取得地圖資料 地理座標 " + point.ToString() + "\n";
-                        GMarkerGoogle marker = new GMarkerGoogle(point, GMarkerGoogleType.red_dot);
+            richTextBox1.Text += "查詢資料成功, 共有" + points.Count.ToString() + " 筆資料\n";
+            foreach (PointLatLng point in points)
+            {
+                richTextBox1.Text += "取得地圖資料 地理座標 " + point.ToString() + "\n";
+                GMarkerGoogle marker = new GMarkerGoogle(point, GMarkerGoogleType.red_dot);
 
                 marker.ToolTipText = address;
-                        this.routeOverlay.Markers.Add(marker);
-                        this.gMapControl1.Position = point;
+                this.routeOverlay.Markers.Add(marker);
+                this.gMapControl1.Position = point;
 
                 //richTextBox1.Text += "Text1 : " + placemark.Address + "\n";
             }
@@ -2196,16 +2196,16 @@ namespace MapDownloader
 
                 if (statusCode == GeoCoderStatusCode.G_GEO_SUCCESS)
                 {
-                    richTextBox1.Text += "查詢資料成功, 共有" + points.Count.ToString() + " 筆資料\n";
                     /*
+                    richTextBox1.Text += "查詢資料成功, 共有" + points.Count.ToString() + " 筆資料\n";
                     foreach (PointLatLng point in points)
                     {
                         richTextBox1.Text += "取得地圖資料 地理座標 " + point.ToString() + "\n";
                         richTextBox1.Text += "Text1 : " + placemark.Address + "\n";
-    }
+                    }
                     */
                     return points;
-}
+                }
                 else
                 {
                     richTextBox1.Text += "查詢資料失敗\n";
@@ -2216,9 +2216,8 @@ namespace MapDownloader
             {
                 richTextBox1.Text += "地址無資料\n";
                 return null;
-}
+            }
         }
     }
 }
-
 
