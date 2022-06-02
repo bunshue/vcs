@@ -964,6 +964,7 @@
             this.button64.Name = "button64";
             this.button64.Size = new System.Drawing.Size(135, 45);
             this.button64.TabIndex = 98;
+            this.button64.Text = "棒圖";
             this.button64.UseVisualStyleBackColor = true;
             this.button64.Click += new System.EventHandler(this.button64_Click);
             // 
@@ -974,6 +975,7 @@
             this.button65.Name = "button65";
             this.button65.Size = new System.Drawing.Size(135, 45);
             this.button65.TabIndex = 99;
+            this.button65.Text = "餅圖";
             this.button65.UseVisualStyleBackColor = true;
             this.button65.Click += new System.EventHandler(this.button65_Click);
             // 

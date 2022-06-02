@@ -8492,12 +8492,146 @@ namespace vcs_Draw_Example1
 
         private void button64_Click(object sender, EventArgs e)
         {
+            //棒圖
+            //畫棒圖
+            Draw_Imgbar();
+        }
 
+        //畫棒圖
+        void Draw_Imgbar()
+        {
+            //創建一個長度爲400，寬帶爲400的Bitmap實例
+            Bitmap bmp = new Bitmap(400, 300);
+            Graphics g;
+            g = Graphics.FromImage(bmp);
+            g.Clear(Color.Snow);
+            string[] sitem = { "很好", "好", "一般", "差" };
+            int[] num = { 1000, 69, 90, 2000 };
+            int cnt, i, len, iBarWidth;
+            float scale;
+            float[] nflt;
+            string header;
+            header = "";
+            cnt = 0;
+            iBarWidth = 40;
+            scale = 1;
+            len = num.Length;
+            //nflt.Length = len;
+            nflt = new float[len];
+            for (i = 0; i < len; i++)
+            {
+                cnt += num[i];
+            }
+            //flt = cnt /len;
+            for (i = 0; i < len; i++)
+            {
+                nflt[i] = 200 * num[i] / cnt;
+                //nflt[i] = scale * num[i]/cnt;
+            }
+
+            header = "調查統計結果一覽圖";
+            g.DrawString(header, new Font("宋體", 12, FontStyle.Bold), Brushes.Black, new Point(75, 10));
+            Point myRec = new Point(300, 40);
+            Point myDec = new Point(320, 40);
+
+            for (i = 0; i < len; i++)
+            {
+                g.DrawRectangle(Pens.Black, myRec.X, myRec.Y, 20, 10);
+                //繪製小方塊
+                g.FillRectangle(new SolidBrush(Return_Color(i)), myRec.X, myRec.Y, 20, 10);
+                //填充小方塊
+                g.DrawString(" " + sitem[i], new Font("宋體", 9), Brushes.Black, myDec);
+                //繪製小方塊右邊的文字
+                myRec.Y += 15;
+                myDec.Y += 15;
+
+                g.DrawRectangle(Pens.Black, (i * iBarWidth) + 15, 290 - (nflt[i] * scale), 20, (nflt[i] * scale) + 5);
+                //繪製Bar圖
+                g.FillRectangle(new SolidBrush(Return_Color(i)), (i * iBarWidth) + 15, 290 - (nflt[i] * scale), 20, (nflt[i] * scale) + 5);
+                //以指定的色彩填充Bar圖
+                g.DrawString(num[i].ToString(), new Font("宋體", 9), Brushes.Black, (i * iBarWidth) + 20, 275 - (nflt[i] * scale));
+                //顯示Bar圖代表的數據
+
+                //s = s + nflt[i];    
+            }
+            Pen p = new Pen(Color.Black, 1);
+            g.DrawRectangle(p, 1, 1, 398, 298);
+
+            pictureBox1.Image = bmp;
         }
 
         private void button65_Click(object sender, EventArgs e)
         {
+            //餅圖
+            //畫餅圖
+            Draw_Img();
+        }
 
+        //畫餅圖
+        void Draw_Img()
+        {
+            Bitmap bmp = new Bitmap(400, 300);
+            //創建一個長度爲400，寬帶爲400的Bitmap實例
+            Graphics g;
+            g = Graphics.FromImage(bmp);
+            g.Clear(Color.Snow);
+            string[] sitem = { "很好", "好", "一般", "差" };
+            int[] num = { 1000, 69, 90, 20 };
+            int cnt, i, len;
+            float s;
+            float[] nflt;
+            string header;
+            header = "";
+            cnt = 0;
+            s = 0;
+            len = num.Length;
+            //nflt.Length = len;
+            nflt = new float[len];
+            for (i = 0; i < len; i++)
+            {
+                cnt += num[i];
+            }
+            //flt = cnt /len;
+            for (i = 0; i < len; i++)
+            {
+
+                nflt[i] = 360 * num[i] / cnt;
+            }
+
+
+            header = "調查統計結果一覽圖";
+            g.DrawString(header, new Font("宋體", 12, FontStyle.Bold), Brushes.Black, new Point(75, 10));
+            g.DrawString("單位：次", new Font("宋體", 9), Brushes.Black, new Point(300, 25));
+
+            Point myRec = new Point(300, 40);
+            Point myDec = new Point(320, 40);
+
+
+            for (i = 0; i < len; i++)
+            {
+                if (i == len - 1)
+                {
+                    //s = 360-s;
+                    nflt[i] = 360 - s;
+                }
+
+                g.DrawRectangle(Pens.Black, myRec.X, myRec.Y, 20, 10);
+                //繪製小方塊
+                g.FillRectangle(new SolidBrush(Return_Color(i)), myRec.X, myRec.Y, 20, 10);
+                //填充小方塊
+                g.DrawString(" " + sitem[i] + " " + num[i], new Font("宋體", 9), Brushes.Black, myDec);
+                //繪製小方塊右邊的文字
+                myRec.Y += 15;
+                myDec.Y += 15;
+
+                g.FillPie(new SolidBrush(Return_Color(i)), 50, 50, 200, 200, s, nflt[i]);
+                g.DrawPie(Pens.Black, 50, 50, 200, 200, s, nflt[i]);
+                s = s + nflt[i];
+            }
+            Pen p = new Pen(Color.Black, 1);
+            g.DrawRectangle(p, 1, 1, 398, 298);
+
+            pictureBox1.Image = bmp;
         }
 
         private void button66_Click(object sender, EventArgs e)
