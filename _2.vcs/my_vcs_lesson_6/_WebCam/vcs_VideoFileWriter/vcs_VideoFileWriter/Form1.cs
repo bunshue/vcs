@@ -489,7 +489,7 @@ namespace vcs_VideoFileWriter
                 File.Delete(audio_filename);
             }
 
-            string filename = @"C:\______test_files\__RW\_avi\i2c.avi";
+            string filename = @"C:\______test_files\_video\i2c.avi";
 
             AviManager aviManager = new AviManager(filename, true);
 

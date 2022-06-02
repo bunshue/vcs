@@ -94,7 +94,7 @@ namespace vcs_Cryptography5
             richTextBox1.Text += "\n\n";
         }
 
-        string filename = @"C:\______test_files\__RW\_avi\i2c.avi";
+        string filename = @"C:\______test_files\_video\i2c.avi";
         private void button8_Click(object sender, EventArgs e)
         {
             //MD5

@@ -1007,7 +1007,7 @@ namespace vcs_FileManager
             listView1.Visible = true;
             */
 
-            string filename = @"C:\______test_files\__RW\_avi\i2c.avi";
+            string filename = @"C:\______test_files\_video\i2c.avi";
 
             MediaFile f = new MediaFile(filename);
 

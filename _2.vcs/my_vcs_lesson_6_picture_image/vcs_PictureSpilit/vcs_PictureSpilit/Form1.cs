@@ -16,6 +16,11 @@ namespace vcs_PictureSpilit
         PictureBox[,] pbox = new PictureBox[3, 3];
         List<PictureBox> pbox_list = new List<PictureBox>();    //把所有pbox集合起來
 
+        private const int COLUMN = 4;
+        private const int ROW = 3;
+        int x_st = 100;
+        int y_st = 100;
+
         public Form1()
         {
             InitializeComponent();
@@ -59,12 +64,8 @@ namespace vcs_PictureSpilit
             Bitmap bitmap1 = new Bitmap(filename);
             int W = bitmap1.Width;
             int H = bitmap1.Height;
-            int C = 4;
-            int R = 3;
-            int x_st = 100;
-            int y_st = 100;
-            int w = W / C;
-            int h = H / R;
+            int w = W / COLUMN;
+            int h = H / ROW;
             int dx = w * 12 / 10;
             int dy = h * 12 / 10;
             dx = w + 0;
@@ -72,13 +73,13 @@ namespace vcs_PictureSpilit
 
             Bitmap bitmap2 = new Bitmap(w, h);
             RectangleF rect;
-            pbox = new PictureBox[C, R];
+            pbox = new PictureBox[COLUMN, ROW];
 
-            Random r = new Random();
+            //Random r = new Random();
 
-            for (int x = 0; x < pbox.GetLength(0); x++)
+            for (int x = 0; x < COLUMN; x++)     //COLUMN
             {
-                for (int y = 0; y < pbox.GetLength(1); y++)
+                for (int y = 0; y < ROW; y++) //ROW
                 {
                     rect = new RectangleF(x * w, y * h, w, h);
                     bitmap2 = bitmap1.Clone(rect, PixelFormat.Format32bppArgb);
@@ -108,15 +109,66 @@ namespace vcs_PictureSpilit
         {
             //打亂重排
 
-            RemoveAllPictureBox();  //移除掉目前所有的pbox控件
+            //RemoveAllPictureBox();  //移除掉目前所有的pbox控件
 
+            Random r = new Random();
 
-            
+            int[] sequence = new int[COLUMN * ROW];
+            int i;
+            for (i = 0; i < COLUMN * ROW; i++)
+            {
+                sequence[i] = i;
+            }
+
+            int tmp;
+
+            for (i = 0; i < sequence.Length; i++)
+            {
+                int n = r.Next(sequence.Length);
+                //richTextBox1.Text += "第" + i.ToString() + "項和第" + n.ToString() + "項交換\n";
+                tmp = sequence[i];
+                sequence[i] = sequence[n];
+                sequence[n] = tmp;
+            }
+            /*
+            richTextBox1.Text += "結果：";
+            for (i = 0; i < sequence.Length; i++)
+            {
+                richTextBox1.Text += sequence[i].ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
+            */
+
+            string filename = @"C:\______test_files\picture1.jpg";
+
+            Bitmap bitmap1 = new Bitmap(filename);
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            int w = W / COLUMN;
+            int h = H / ROW;
+            int dx = w * 12 / 10;
+            int dy = h * 12 / 10;
+            dx = w + 0;
+            dy = h + 0;
+
+            int index = 0;
+
+            for (int x = 0; x < COLUMN; x++)     //COLUMN
+            {
+                for (int y = 0; y < ROW; y++) //ROW
+                {
+                    pbox[sequence[index] % COLUMN, sequence[index] / COLUMN].Location = new Point(x_st + x * dx, y_st + y * dy);
+                    index++;
+                }
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "pbox_list 個數 " + pbox_list.Count.ToString() + "\n";
+            richTextBox1.Text += "COLUMN = " + pbox.GetLength(0).ToString() + "\n";
+            richTextBox1.Text += "ROW = " + pbox.GetLength(1).ToString() + "\n";
+
         }
 
         bool flag_pictureBox_mouse_down = false;
@@ -160,6 +212,6 @@ namespace vcs_PictureSpilit
                 ((PictureBox)sender).Location = new Point(((PictureBox)sender).Location.X + dx, ((PictureBox)sender).Location.Y + dy);
             }
         }
-
     }
 }
+

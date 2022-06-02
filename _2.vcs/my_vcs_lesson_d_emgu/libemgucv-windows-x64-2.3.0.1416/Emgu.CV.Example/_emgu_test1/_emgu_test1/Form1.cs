@@ -64,7 +64,7 @@ namespace _emgu_test1
         {
             //string filename = "F:\\Naval Legends Yamato  World of Warships.mp4";
             string filename = @"D:\\Carreno Busta vs Kei Nishikori Final Set Tie Break HD.mp4";
-            //string filename = @"C:\______test_files\__RW\_avi\i2c.avi";
+            //string filename = @"C:\______test_files\_video\i2c.avi";
 
             //Capture cap2 = null;
             Capture cap2 = new Capture(filename);

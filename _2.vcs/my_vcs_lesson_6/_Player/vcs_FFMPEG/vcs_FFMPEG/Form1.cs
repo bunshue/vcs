@@ -550,11 +550,11 @@ namespace vcs_FFMPEG
             //取得影片的寬高
 
             //CMD 命令  通過ffmpeg執行一條CMD命令可以讀取出視頻的幀高度和幀寬度信息。
-            //C:\______test_files\_exe>ffmpeg.exe -i "C:\______test_files\__RW\_avi\i2c.avi"
+            //C:\______test_files\_exe>ffmpeg.exe -i "C:\______test_files\_video\i2c.avi"
 
             //string ffmpeg_filename = @"C:\______test_files\_exe\ffmpeg.exe";
 
-            string video_filename1 = @"C:\______test_files\__RW\_avi\i2c.avi";
+            string video_filename1 = @"C:\______test_files\_video\i2c.avi";
             string video_filename2 = @"D:\內視鏡影片\190902-0827.mp4";
 
             //System.Diagnostics.Process.Start(ffmpeg_filename, video_filename);
@@ -571,7 +571,7 @@ namespace vcs_FFMPEG
         private void bt_ffmpeg1_Click(object sender, EventArgs e)
         {
             //獲取視頻時長
-            string video_filename1 = @"C:\______test_files\__RW\_avi\i2c.avi";
+            string video_filename1 = @"C:\______test_files\_video\i2c.avi";
             string video_filename2 = @"D:\內視鏡影片\190902-0827.mp4";
 
             string length;
@@ -587,7 +587,7 @@ namespace vcs_FFMPEG
         {
             //獲取視頻第一秒圖片
 
-            string video_filename1 = @"C:\______test_files\__RW\_avi\i2c.avi";
+            string video_filename1 = @"C:\______test_files\_video\i2c.avi";
             //string video_filename2 = @"D:\內視鏡影片\190902-0827.mp4";
 
             string path = @"C:\dddddddddd3\";

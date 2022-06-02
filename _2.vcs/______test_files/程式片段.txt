@@ -5256,6 +5256,9 @@ vcs helper的  根據副檔名 決定檔案儲存格式
 //--------------------------------------------------------------------------------------------------------------------------
 
 
+            int[,] pbox = new int[9, 2];    //[Col,Row]
+            richTextBox1.Text += "COLUMN = " + pbox.GetLength(0).ToString() + "\n";    //9
+            richTextBox1.Text += "ROW = " + pbox.GetLength(1).ToString() + "\n";    //2
 
 
 
