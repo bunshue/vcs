@@ -48,14 +48,26 @@
             this.cb_compare0 = new System.Windows.Forms.CheckBox();
             this.cb_compare2 = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.cb_compare3 = new System.Windows.Forms.CheckBox();
             this.cb_compare1 = new System.Windows.Forms.CheckBox();
+            this.cb_compare3 = new System.Windows.Forms.CheckBox();
             this.listView1 = new System.Windows.Forms.ListView();
             this.button5 = new System.Windows.Forms.Button();
             this.bt_start_files = new System.Windows.Forms.Button();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.bt_clear_dir = new System.Windows.Forms.Button();
+            this.bt_remove_dir = new System.Windows.Forms.Button();
+            this.bt_add_dir = new System.Windows.Forms.Button();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.groupBox_file = new System.Windows.Forms.GroupBox();
+            this.cb_checkcount = new System.Windows.Forms.CheckBox();
+            this.tb_count = new System.Windows.Forms.TextBox();
+            this.cb_filesize = new System.Windows.Forms.CheckBox();
+            this.tb_filesize = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox_file.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -134,7 +146,7 @@
             // 
             // bt_clear1
             // 
-            this.bt_clear1.Location = new System.Drawing.Point(1497, 591);
+            this.bt_clear1.Location = new System.Drawing.Point(1697, 591);
             this.bt_clear1.Name = "bt_clear1";
             this.bt_clear1.Size = new System.Drawing.Size(75, 34);
             this.bt_clear1.TabIndex = 13;
@@ -146,7 +158,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(549, 321);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(1023, 304);
+            this.richTextBox1.Size = new System.Drawing.Size(1223, 304);
             this.richTextBox1.TabIndex = 12;
             this.richTextBox1.Text = "";
             // 
@@ -162,9 +174,9 @@
             // 
             // richTextBox2
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(380, 12);
+            this.richTextBox2.Location = new System.Drawing.Point(380, 432);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(150, 613);
+            this.richTextBox2.Size = new System.Drawing.Size(150, 193);
             this.richTextBox2.TabIndex = 14;
             this.richTextBox2.Text = "";
             // 
@@ -259,17 +271,6 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "比較";
             // 
-            // cb_compare3
-            // 
-            this.cb_compare3.AutoSize = true;
-            this.cb_compare3.Enabled = false;
-            this.cb_compare3.Location = new System.Drawing.Point(20, 136);
-            this.cb_compare3.Name = "cb_compare3";
-            this.cb_compare3.Size = new System.Drawing.Size(72, 16);
-            this.cb_compare3.TabIndex = 2;
-            this.cb_compare3.Text = "檔案內容";
-            this.cb_compare3.UseVisualStyleBackColor = true;
-            // 
             // cb_compare1
             // 
             this.cb_compare1.AutoSize = true;
@@ -281,12 +282,23 @@
             this.cb_compare1.UseVisualStyleBackColor = true;
             this.cb_compare1.CheckedChanged += new System.EventHandler(this.check_cb_compare);
             // 
+            // cb_compare3
+            // 
+            this.cb_compare3.AutoSize = true;
+            this.cb_compare3.Enabled = false;
+            this.cb_compare3.Location = new System.Drawing.Point(20, 136);
+            this.cb_compare3.Name = "cb_compare3";
+            this.cb_compare3.Size = new System.Drawing.Size(72, 16);
+            this.cb_compare3.TabIndex = 2;
+            this.cb_compare3.Text = "檔案內容";
+            this.cb_compare3.UseVisualStyleBackColor = true;
+            // 
             // listView1
             // 
             this.listView1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.listView1.Location = new System.Drawing.Point(549, 12);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(1023, 303);
+            this.listView1.Size = new System.Drawing.Size(1223, 303);
             this.listView1.TabIndex = 17;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -309,18 +321,137 @@
             this.bt_start_files.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_start_files.BackgroundImage")));
             this.bt_start_files.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_start_files.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_start_files.Location = new System.Drawing.Point(300, 17);
+            this.bt_start_files.Location = new System.Drawing.Point(156, 130);
             this.bt_start_files.Name = "bt_start_files";
             this.bt_start_files.Size = new System.Drawing.Size(50, 50);
             this.bt_start_files.TabIndex = 19;
             this.bt_start_files.UseVisualStyleBackColor = true;
             this.bt_start_files.Click += new System.EventHandler(this.bt_start_files_Click);
             // 
+            // listBox1
+            // 
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.ItemHeight = 12;
+            this.listBox1.Location = new System.Drawing.Point(129, 12);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(194, 100);
+            this.listBox1.TabIndex = 30;
+            // 
+            // bt_clear_dir
+            // 
+            this.bt_clear_dir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_clear_dir.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear_dir.Location = new System.Drawing.Point(330, 82);
+            this.bt_clear_dir.Name = "bt_clear_dir";
+            this.bt_clear_dir.Size = new System.Drawing.Size(20, 20);
+            this.bt_clear_dir.TabIndex = 34;
+            this.bt_clear_dir.Text = "C";
+            this.bt_clear_dir.UseVisualStyleBackColor = true;
+            this.bt_clear_dir.Click += new System.EventHandler(this.bt_clear_dir_Click);
+            // 
+            // bt_remove_dir
+            // 
+            this.bt_remove_dir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_remove_dir.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_remove_dir.Location = new System.Drawing.Point(330, 52);
+            this.bt_remove_dir.Name = "bt_remove_dir";
+            this.bt_remove_dir.Size = new System.Drawing.Size(20, 20);
+            this.bt_remove_dir.TabIndex = 33;
+            this.bt_remove_dir.Text = "-";
+            this.bt_remove_dir.UseVisualStyleBackColor = true;
+            this.bt_remove_dir.Click += new System.EventHandler(this.bt_remove_dir_Click);
+            // 
+            // bt_add_dir
+            // 
+            this.bt_add_dir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_add_dir.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_add_dir.Location = new System.Drawing.Point(330, 22);
+            this.bt_add_dir.Name = "bt_add_dir";
+            this.bt_add_dir.Size = new System.Drawing.Size(20, 20);
+            this.bt_add_dir.TabIndex = 32;
+            this.bt_add_dir.Text = "+";
+            this.bt_add_dir.UseVisualStyleBackColor = true;
+            this.bt_add_dir.Click += new System.EventHandler(this.bt_add_dir_Click);
+            // 
+            // groupBox_file
+            // 
+            this.groupBox_file.Controls.Add(this.cb_checkcount);
+            this.groupBox_file.Controls.Add(this.tb_count);
+            this.groupBox_file.Controls.Add(this.cb_filesize);
+            this.groupBox_file.Controls.Add(this.tb_filesize);
+            this.groupBox_file.Controls.Add(this.label2);
+            this.groupBox_file.Location = new System.Drawing.Point(251, 250);
+            this.groupBox_file.Name = "groupBox_file";
+            this.groupBox_file.Size = new System.Drawing.Size(198, 98);
+            this.groupBox_file.TabIndex = 48;
+            this.groupBox_file.TabStop = false;
+            this.groupBox_file.Text = "選項";
+            // 
+            // cb_checkcount
+            // 
+            this.cb_checkcount.AutoSize = true;
+            this.cb_checkcount.Checked = true;
+            this.cb_checkcount.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_checkcount.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_checkcount.Location = new System.Drawing.Point(11, 54);
+            this.cb_checkcount.Name = "cb_checkcount";
+            this.cb_checkcount.Size = new System.Drawing.Size(91, 20);
+            this.cb_checkcount.TabIndex = 48;
+            this.cb_checkcount.Text = "結束個數";
+            this.cb_checkcount.UseVisualStyleBackColor = true;
+            // 
+            // tb_count
+            // 
+            this.tb_count.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_count.Location = new System.Drawing.Point(108, 50);
+            this.tb_count.Name = "tb_count";
+            this.tb_count.Size = new System.Drawing.Size(52, 30);
+            this.tb_count.TabIndex = 46;
+            this.tb_count.Text = "30";
+            this.tb_count.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // cb_filesize
+            // 
+            this.cb_filesize.AutoSize = true;
+            this.cb_filesize.Checked = true;
+            this.cb_filesize.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_filesize.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_filesize.Location = new System.Drawing.Point(11, 21);
+            this.cb_filesize.Name = "cb_filesize";
+            this.cb_filesize.Size = new System.Drawing.Size(91, 20);
+            this.cb_filesize.TabIndex = 45;
+            this.cb_filesize.Text = "檔案大小";
+            this.cb_filesize.UseVisualStyleBackColor = true;
+            // 
+            // tb_filesize
+            // 
+            this.tb_filesize.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_filesize.Location = new System.Drawing.Point(108, 17);
+            this.tb_filesize.Name = "tb_filesize";
+            this.tb_filesize.Size = new System.Drawing.Size(52, 30);
+            this.tb_filesize.TabIndex = 17;
+            this.tb_filesize.Text = "1000";
+            this.tb_filesize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(166, 25);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(23, 12);
+            this.label2.TabIndex = 18;
+            this.label2.Text = "MB";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1584, 661);
+            this.ClientSize = new System.Drawing.Size(1784, 662);
+            this.Controls.Add(this.groupBox_file);
+            this.Controls.Add(this.bt_clear_dir);
+            this.Controls.Add(this.bt_remove_dir);
+            this.Controls.Add(this.bt_add_dir);
+            this.Controls.Add(this.listBox1);
             this.Controls.Add(this.bt_start_files);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.listView1);
@@ -345,6 +476,8 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox_file.ResumeLayout(false);
+            this.groupBox_file.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -375,6 +508,17 @@
         private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button bt_start_files;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button bt_clear_dir;
+        private System.Windows.Forms.Button bt_remove_dir;
+        private System.Windows.Forms.Button bt_add_dir;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.GroupBox groupBox_file;
+        private System.Windows.Forms.CheckBox cb_checkcount;
+        private System.Windows.Forms.TextBox tb_count;
+        private System.Windows.Forms.CheckBox cb_filesize;
+        private System.Windows.Forms.TextBox tb_filesize;
+        private System.Windows.Forms.Label label2;
     }
 }
 
