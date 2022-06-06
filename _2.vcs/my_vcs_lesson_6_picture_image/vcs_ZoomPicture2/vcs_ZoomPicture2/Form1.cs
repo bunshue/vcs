@@ -38,6 +38,11 @@ namespace vcs_ZoomPicture2
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             pictureBox1.Image = Image.FromFile("c:\\______test_files\\picture1.jpg"); //載入圖檔，由檔案
@@ -79,5 +84,6 @@ namespace vcs_ZoomPicture2
             do_image_size_change = false;
 
         }
+
     }
 }

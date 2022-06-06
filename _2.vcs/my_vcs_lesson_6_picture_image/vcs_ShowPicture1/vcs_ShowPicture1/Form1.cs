@@ -15,7 +15,7 @@ namespace vcs_ShowPicture1
     {
         Hashtable ht = new Hashtable();
 
-        string dirname = @"C:\______test_files\__pic\_MU";
+        string foldername = @"C:\______test_files\__pic\_MU";
 
         public Form1()
         {
@@ -24,8 +24,9 @@ namespace vcs_ShowPicture1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            DirectoryInfo dir = new DirectoryInfo(dirname);
-            GetAllFiles(dir);
+            DirectoryInfo di = new DirectoryInfo(foldername);
+
+            GetAllFiles(di);
             foreach (DictionaryEntry de in ht)
             {
                 this.comboBox1.Items.Add(de.Key);
@@ -34,23 +35,30 @@ namespace vcs_ShowPicture1
                 comboBox1.SelectedIndex = 0;
         }
 
-        public void GetAllFiles(DirectoryInfo dir)
+        //多層 且指明副檔名
+        public void GetAllFiles(DirectoryInfo di)
         {
-            FileSystemInfo[] fileinfo = dir.GetFileSystemInfos();
-            foreach (FileSystemInfo i in fileinfo)
+            FileSystemInfo[] fileinfo = di.GetFileSystemInfos();
+            foreach (FileSystemInfo fi in fileinfo)
             {
-                if (i is DirectoryInfo)
+                if (fi is DirectoryInfo)
                 {
-                    GetAllFiles((DirectoryInfo)i);
+                    GetAllFiles((DirectoryInfo)fi);
                 }
                 else
                 {
-                    string str = i.FullName;
+                    string str = fi.FullName;
+
+
+                    //找尋短檔名及副檔名
+
                     int b = str.LastIndexOf("\\");
                     string strType = str.Substring(b + 1);
                     if (strType.Substring(strType.Length - 3).ToLower() == "jpg" || strType.Substring(strType.Length - 3).ToLower() == "bmp")
                     {
+                        //ht.add(key, value), key不能重複
                         ht.Add(strType.Substring(0, strType.Length - 4), strType);
+                        richTextBox1.Text += "add : " + strType + "\t" + strType.Substring(0, strType.Length - 4) + "\t" + strType + "\n";
                     }
                 }
             }
@@ -73,7 +81,29 @@ namespace vcs_ShowPicture1
 
         private void showPic(string name)
         {
-            this.pictureBox1.ImageLocation = dirname + "\\" + name;
+            this.pictureBox1.ImageLocation = foldername + "\\" + name;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            int len = ht.Count;
+
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+
+            //方法一：遍歷traversal 1:
+            foreach (DictionaryEntry de in ht)
+            {
+                richTextBox1.Text += "key = " + de.Key + "\t" + "value = " + de.Value + "\n";
+            }
+
+            //方法二：遍歷traversal 2:
+            IDictionaryEnumerator d = ht.GetEnumerator();
+            while (d.MoveNext())
+            {
+                //richTextBox1.Text += "key = " + d.Entry.Key + "\t" + "value = " + d.Entry.Value + "\n";
+            }
+
+
         }
 
     }

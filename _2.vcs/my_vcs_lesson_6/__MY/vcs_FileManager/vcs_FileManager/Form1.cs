@@ -466,31 +466,322 @@ namespace vcs_FileManager
             //一律轉小寫
             shortname = shortname.ToLower();
 
-            string[] remove_word = new string[] { "taxv.xyz_259LU", "259LU", "-", "[javdb.com]259LU", "[javdb.com]", "027_3xplanet_", "[Thz.la]"
-                , "259lu", "027_3xplanet_", "hhd800.com@", "big2048.com@", "[bbs.yzkof.com]"
+            //richTextBox1.Text += "old = " + shortname + "\n";
+
+            //先過濾掉一些字
+            string[] remove_word = new string[] { "taxv.xyz_", "[javdb.com]", "[javdb.com]", "027_3xplanet_", "[Thz.la]"
+                , "9288.pro@", "027_3xplanet_", "hhd800.com@", "big2048.com@", "[bbs.yzkof.com]"
                 , "jav20s8.com@", "[javdb.com]", "松島楓", "桐原エリカ", "(Kirihara Erika)"
                 , "[javdb.com]", "Abigaile Johnson ", "Heydoug", "heyzo_hd", "DLLAF"
                 , "bbs2048.org@", "Abigaile Johnson ", "Heydoug", "avmans.com", "FHD"
-                , "FC2PPV", "僕とかえでの甘～い性活", "松島かえで", "IPT", "MIG"
-                , "初剃り", "[44x.me]", "bbsxv.xyz", "@蜂鳥@fengniao151.vip", "QQQQ"
+                , "QQQQ", "僕とかえでの甘～い性活", "松島かえで", "[garea chinan]", "MIG"
+                , "初剃り", "[44x.me]", "bbsxv.xyz", "@蜂鳥@fengniao151.vip", "18x78.com_"
                 , "taxv.xyz", "jav20s8.com@", "shimohira", "hikari", "deeper.21"
-                , "3xHen.com.", "200GANA", "Caribbeancom", "[HD]", "104DANDAN"
-                , "_ShareSex.net.", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "Caribbeancom", "[HD]", "104DANDAN"
+                , "QQQQ", "jav4you.", "private", "52JAV.COM", "crv2000.com"
+                , "javidol.com", "Prestige", "[thzu.cc]", "wowg.", "18x78.com_"
+                , "(hibino)", "kpkp3.com", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "-", "_", ".", " ", "QQQQ"};  //最後再刪除標點符號
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "-", "%", "$", "(", ")"};  //最後再刪除標點符號
 
             foreach (string r in remove_word)
             {
                 shortname = shortname.Replace(r.ToLower(), "").Trim();
             }
 
-            //只取前10字
-            if (shortname.Length > 10)
+            //後面是7碼的
+            string[] series7 = new string[] {
+                  "fc2ppv", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+            };
+
+            //後面是6碼的
+            string[] series6 = new string[] {
+                  "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+            };
+
+            //後面是5碼的
+            string[] series5 = new string[] {
+                  "hodv", "kin", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+            };
+
+
+            //後面是4碼的
+            string[] series4 = new string[] {
+                  "259luxu", "ofje", "nhdtb", "siro", "422ion", "kwbd", "heyzo"
+                , "ppt", "583erkr", "525dht", "229scute", "200gana", "QQQQ", "QQQQ"
+                , "hunb", "sprd", "luxu", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+            };
+
+            //後面是3碼的
+            string[] series3 = new string[] {
+                  "390jac", "534ind", "590mcht", "300mium", "joymii.", "474musume", "594prgo"
+                , "300ntk", "358with", "384shss", "393otim", "476mla", "491tkwa", "498ddh"
+                , "hunta", "318lady", "300ntk", "326hgp", "428suke", "451hhh", "285endx"
+                , "dgcemd", "dgcemd", "261ara", "529stcv", "230orec", "300maan", "345simm"
+                , "336knb", "435mfcs", "546erofc", "502sei", "483pak", "210ako", "383reiw"
+                , "292my", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                //5
+                , "dldss", "hmdnv", "kmhrs", "dvdms", "stars", "fcdss", "fsdss"
+                , "ftdss", "ptnoz", "dvdes", "svdvd", "QQQQ", "QQQQ", "QQQQ"
+                , "favkh", "mxsps", "dandy", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+
+                //4
+                , "sdnm", "ssis", "kire", "iptd", "jufe", "mkmp", "natr"
+                , "wanz", "mide", "cawd", "miaa", "pred", "azrd", "rctd"
+                , "ksbj", "sdmu", "snis", "ssni", "vagu", "venu", "focs"
+                , "mdbk", "vrtm", "mtall", "bacj", "mcsr", "mifd", "mrss"
+                , "ngod", "homa", "mdtm", "urkk", "mukc", "venx", "ymdd"
+                , "hzgd", "onsg", "mudr", "mvsd", "agav", "cadv", "hnds"
+                , "mist", "mxgs", "pppd", "kawd", "ndra", "mudr", "mmkz"
+                , "lulu", "ebod", "dvaj", "ipit", "mrhp", "ktra", "sdab"
+                , "miad", "midd", "xvsr", "pppe", "ekdv", "dasd", "cemd"
+                , "kmhr", "sdde", "shkd", "soav", "cjod", "ktkl", "star"
+                , "mmks", "sqte", "mird", "sdmm", "nacr", "tppn", "pkpd"
+                , "hgot", "atid", "cesd", "ktkc", "apns", "fset", "nkkd"
+                , "ambi", "kdmi", "aukg", "pcde", "msfh", "fffs", "genm"
+                , "akdl", "sama", "iesp", "waaa", "tysf", "avsa", "cpde"
+                , "ktkz", "sdmf", "clot", "saba", "dnjr", "hdka", "kuse"
+                , "royd", "mimk", "upsm", "sdjs", "cead", "kymi", "dpmi"
+                , "eyan", "smcp", "onez", "bobb", "nnpj", "kray", "mdon"
+                , "sace", "bijn", "rabs", "sapa", "crpd", "jufd", "misg"
+                , "gnab", "docp", "bahp", "cetd", "urlh", "milk", "sksk"
+                , "aqsh", "mism", "mond", "sspd", "mogi", "bban", "pfes"
+                , "xmom", "zocm", "aqsh", "dtsg", "voss", "zmen", "dfdm"
+                , "hawa", "dkwt", "real", "ekdv", "dvaj", "vema", "mgmj"
+                , "omhd", "bacn", "ggen", "honb", "piyo", "hjmo", "csct"
+                , "ikep", "josi", "oksn", "jjcc", "mmym", "post", "apkh"
+                , "sora", "juny", "hbad", "crim", "miae", "mdyd", "mizd"
+                , "sgrs", "mbyd", "apak", "apak", "nima", "tikp", "migd"
+                , "okad", "oned", "sdmt", "annd", "ipsd", "lhjf", "masd"
+                , "mama", "magd", "nass", "mild", "sdms", "onem", "sdmt"
+                , "edrg", "myba", "supd", "nsfs", "baam", "tyod", "aldn"
+                , "dass", "mlsm", "good", "jrze", "hthd", "iene", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                //3
+                , "abp", "jul", "jux", "ipx", "adn", "meyd", "midv"
+                , "chn", "abw", "pxh", "ped", "gvh", "gvg", "tek"
+                , "vec", "dje", "arm", "roe", "blk", "ecb", "pgd"
+                , "mgt", "hmn", "hnd", "rbd", "veo", "bbi", "tki"
+                , "fch", "ttd", "rbk", "ipz", "rki", "soe", "crc"
+                , "dkd", "ure", "bgn", "adz", "oyc", "raw", "leg"
+                , "ebl", "sma", "san", "esk", "bur", "wnz", "man"
+                , "dss", "dic", "kyk", "pla", "umd", "abs", "fir"
+                , "ddk", "scd", "cmd", "kir", "omt", "xrw", "ktb"
+                , "wkd", "sga", "ytr", "dtt", "jbs", "zex", "izm"
+                , "bkd", "juy", "juc", "kbi", "jbd", "scg", "QQQQ"
+                , "mdb", "tem", "cwp", "aka", "QQQQ", "QQQQ", "QQQQ"
+                , "elo", "mek", "evo", "ban", "cwm", "egt", "ezd"
+                , "jag", "kaz", "ksd", "mdb", "nsr", "sgv", "fax"
+                , "ars", "rct", "bid", "blo", "nwf", "ufd", "vdd"
+                , "vis", "wfs", "wif", "yzf", "veq", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                //2
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "dsam", "toen", "bt", "dllafbd", "QQQQ", "QQQQ", "QQQQ"
+                , "xv", "sw", "bf", "sy", "gs", "QQQQ", "QQQQ"
+            };
+
+
+            int len = 0;
+            int position = -1;
+
+            if (position < 0)
             {
-                shortname = shortname.Substring(0, 10);
+                foreach (string r in series7)   //後面是7碼的
+                {
+                    position = shortname.IndexOf(r, 0);
+                    if (position > -1)
+                    {
+                        len = r.Length;
+                        shortname = shortname.Substring(position, len + 7);
+                        break;
+                    }
+                }
             }
+
+            if (position < 0)
+            {
+                foreach (string r in series6)   //後面是6碼的
+                {
+                    position = shortname.IndexOf(r, 0);
+                    if (position > -1)
+                    {
+                        len = r.Length;
+                        shortname = shortname.Substring(position, len + 6);
+                        break;
+                    }
+                }
+            }
+
+            if (position < 0)
+            {
+                foreach (string r in series5)   //後面是5碼的
+                {
+                    position = shortname.IndexOf(r, 0);
+                    if (position > -1)
+                    {
+                        len = r.Length;
+                        shortname = shortname.Substring(position, len + 5);
+                        break;
+                    }
+                }
+            }
+
+            if (position < 0)
+            {
+                foreach (string r in series4)   //後面是4碼的
+                {
+                    position = shortname.IndexOf(r, 0);
+                    if (position > -1)
+                    {
+                        len = r.Length;
+                        shortname = shortname.Substring(position, len + 4);
+                        break;
+                    }
+                }
+            }
+
+            if (position < 0)
+            {
+                foreach (string r in series3)   //後面是3碼的
+                {
+                    position = shortname.IndexOf(r, 0);
+                    if (position > -1)
+                    {
+                        len = r.Length;
+                        shortname = shortname.Substring(position, len + 3);
+                        break;
+                    }
+                }
+            }
+
+            //dv接4碼
+            if (position < 0)
+            {
+                string pattern = "dv";
+                position = shortname.IndexOf(pattern, 0);
+                if (position > -1)
+                {
+                    len = pattern.Length;
+                    shortname = shortname.Substring(position, len + 4);
+                }
+            }
+
+            //richTextBox1.Text += "new = " + shortname + "\n";
+
+            /*
+            //richTextBox1.Text += "sn1 : " + shortname + "\n";
+            if (shortname.Contains("sharesex") == true)
+            {
+                int len = shortname.Length;
+                if (len > 9)
+                {
+                    shortname = shortname.Substring(len - 9, 6);
+                    //richTextBox1.Text += "sn2 : " + shortname + "\n";
+                }
+            }
+            if (shortname.Contains("3xhen") == true)
+            {
+                int len = shortname.Length;
+                if (len > 9)
+                {
+                    shortname = shortname.Substring(len - 9, 6);
+                    //richTextBox1.Text += "sn2 : " + shortname + "\n";
+                }
+            }
+
+
+
+            string[] series5 = new string[] { "dldss", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"};
+            string[] series4 = new string[] { "sdnm", "ssis", "kire", "iptd", "jufe", "mkmp", "natr"
+                , "wanz", "mide", "cawd", "miaa", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"};
+            string[] series3 = new string[] { "abp", "jul", "jux", "ipx", "adn", "meyd", "midv"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"};
+
+
+            foreach (string r in series5)
+            {
+                if (shortname.Length > 8)
+                {
+                    shortname = shortname.Substring(0, 8);
+                }
+            }
+            foreach (string r in series4)
+            {
+                if (shortname.Length > 7)
+                {
+                    shortname = shortname.Substring(0, 7);
+                }
+            }
+            foreach (string r in series3)
+            {
+                if (shortname.Length > 6)
+                {
+                    shortname = shortname.Substring(0, 6);
+                }
+            }
+            */
+
+
+            /*
+            //只取前10字
+            if (shortname.Length > 6)
+            {
+                shortname = shortname.Substring(0, 6);
+            }
+            */
+
+            //richTextBox1.Text += "sn4 : " + shortname + "\n";
             return shortname;
         }
 
@@ -695,10 +986,13 @@ namespace vcs_FileManager
                     //richTextBox2.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
                     //fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
 
-                    itemg = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
+                    if (w != 1920)
+                    {
+                        itemg = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
 
-                    sub_i1g.Text = itemg;
-                    i1.SubItems.Add(sub_i1g);
+                        sub_i1g.Text = itemg;
+                        i1.SubItems.Add(sub_i1g);
+                    }
 
 
 
@@ -1023,6 +1317,7 @@ namespace vcs_FileManager
 
         private void button5_Click(object sender, EventArgs e)
         {
+            /*
             int len = fileinfos_match.Count;
             richTextBox1.Text += "len = " + len.ToString() + "\n";
             int i;
@@ -1034,8 +1329,12 @@ namespace vcs_FileManager
 
 
             }
+            */
+
+            richTextBox1.Text += "listview len = " + listView1.Items.Count.ToString() + "\n";
 
         }
+
 
         private void listView1_MouseClick(object sender, MouseEventArgs e)
         {
@@ -1173,6 +1472,87 @@ namespace vcs_FileManager
             */
         }
 
+        private void bt_start_files2_Click(object sender, EventArgs e)
+        {
+            //全選播放
+
+            int len = listView1.Items.Count;
+            for (int i = 0; i < len; i++)
+            {
+                listView1.Items[i].Selected = true;
+
+            }
+
+            richTextBox2.Text += "你選擇了 : " + listView1.SelectedIndices.Count.ToString() + " 個檔案, 分別是\n";
+            for (int i = 0; i < listView1.SelectedIndices.Count; i++)
+            {
+                richTextBox2.Text += listView1.SelectedItems[i].SubItems[2].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
+            }
+            richTextBox2.Text += "開啟\n";
+
+
+            int selNdx;
+            string all_filename = string.Empty;
+
+            if (this.listView1.SelectedIndices.Count <= 0)  //總共選擇的個數
+            {
+                richTextBox2.Text += "無檔案\n";
+                return;
+            }
+
+            //richTextBox2.Text += "總共選了 : " + listView1.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
+            //for (int i = 0; i < listView1.SelectedIndices.Count; i++)
+            for (int i = 0; i < listView1.SelectedItems.Count; i++)
+            {
+                selNdx = listView1.SelectedIndices[i];
+                listView1.Items[selNdx].Selected = true;    //選到的項目
+                //richTextBox2.Text += listView1.Items[selNdx].Text + "\n";
+
+                all_filename += " \"" + listView1.Items[selNdx].SubItems[2].Text + "\\" + listView1.Items[selNdx].SubItems[0].Text + "\"";
+            }
+
+            //指定應用程式路徑
+            string target = String.Empty;
+
+            //方法一
+            //Process.Start(target, "參數");
+            //Process.Start(target, all_filename);
+
+            //方法二
+
+            target = video_player_path;
+
+            ProcessStartInfo pInfo = new ProcessStartInfo(target);
+            pInfo.Arguments = all_filename;
+
+            /*
+            // debug mesg
+            richTextBox2.Text += "target : " + target + "\n";
+            richTextBox2.Text += "all_filename : " + all_filename + "\n";
+            */
+
+            if (video_player_path == String.Empty)
+            {
+                all_filename = all_filename.Trim().Replace("\"", "");
+                Process.Start(all_filename); //使用預設程式開啟, 無法一次播放多個檔案
+            }
+            else
+            {
+                Process.Start(video_player_path, all_filename);    //指名播放程式開啟
+            }
+
+            /*
+            using (Process p = new Process())
+            {
+                p.StartInfo = pInfo;
+                p.Start();
+            }
+            */
+
+
+        }
+
+
         private void listView1_KeyDown(object sender, KeyEventArgs e)
         {
             //richTextBox2.Text += "KeyDown, 按鍵是：" + e.KeyCode + "\n";
@@ -1225,6 +1605,77 @@ namespace vcs_FileManager
             old_search_path.Clear();
         }
 
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //搜尋特定檔名
+
+            if (fileinfos.Count == 0)
+                richTextBox1.Text += "無資料c\n";
+            else
+                richTextBox1.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料b\n";
+
+            int len = fileinfos.Count;
+            if (len < 2)
+                return;
+
+            match_count = 0;
+            fileinfos_match.Clear();
+
+            int i;
+            int j;
+            for (i = 0; i < len; i++)
+            {
+
+                if (fileinfos[i].filename.ToLower().Contains(tb_find.Text.ToLower()) == true)
+                {
+                    fileinfos_match.Add(fileinfos[i]);
+                    //match_count++;
+                }
+            }
+
+            richTextBox1.Text += "show match files\n";
+            show_MyFileInfo(fileinfos_match);
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //優優檔
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            /*
+            string longname = "FC2PPV-2589532-ゆき高畫質-S1新人未歩なな(未步奈奈).mp4";
+            string sn = get_shortname(longname);
+            richTextBox1.Text += "short name : " + sn + "\n";
+            return;
+            */
+
+            //show all shortnames
+            if (fileinfos.Count == 0)
+                richTextBox1.Text += "無資料c\n";
+            else
+                richTextBox1.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料b\n";
+
+            int len = fileinfos.Count;
+            if (len < 2)
+                return;
+
+
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                if (fileinfos[i].shortfilename.Length > 6)
+                {
+                    richTextBox1.Text += fileinfos[i].filename.ToLower() + "\t\t" + fileinfos[i].shortfilename + "\n";
+                    //richTextBox1.Text += fileinfos[i].shortfilename + "\n";
+                }
+            }
+
+
+        }
+
     }
 }
-

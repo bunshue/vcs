@@ -1823,7 +1823,7 @@ namespace vcs_test_all_02_Array
             string bbb = "bbbb" + cnt.ToString();
             cnt++;
 
-            HT.Add(aaa, bbb);        //加入雜湊表，Key: aaa, Value: bbb
+            HT.Add(aaa, bbb);        //加入雜湊表，Key: aaa, Value: bbb, Key不能重複
             richTextBox1.Text += "加入雜湊表，Key: " + aaa + ", Value: " + bbb + "\n";
         }
 
@@ -1918,7 +1918,7 @@ namespace vcs_test_all_02_Array
             ICollection key = HT.Keys;
             foreach (string k in key)
             {
-                richTextBox1.Text += k + "\t" + HT[k] + "\n";
+                richTextBox1.Text += "Key : " + k + "\tValue : " + HT[k] + "\n";
             }
         }
 

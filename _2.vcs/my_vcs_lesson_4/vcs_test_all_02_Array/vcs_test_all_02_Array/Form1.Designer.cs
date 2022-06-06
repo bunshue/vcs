@@ -649,7 +649,7 @@
             this.ht0.Name = "ht0";
             this.ht0.Size = new System.Drawing.Size(170, 40);
             this.ht0.TabIndex = 63;
-            this.ht0.Text = "info";
+            this.ht0.Text = "show hashtable";
             this.ht0.UseVisualStyleBackColor = true;
             this.ht0.Click += new System.EventHandler(this.ht0_Click);
             // 

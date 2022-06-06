@@ -65,6 +65,11 @@
             this.tb_filesize = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.bt_clear3 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.tb_find = new System.Windows.Forms.TextBox();
+            this.button7 = new System.Windows.Forms.Button();
+            this.bt_start_files2 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -239,8 +244,6 @@
             // cb_compare0
             // 
             this.cb_compare0.AutoSize = true;
-            this.cb_compare0.Checked = true;
-            this.cb_compare0.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_compare0.Location = new System.Drawing.Point(20, 33);
             this.cb_compare0.Name = "cb_compare0";
             this.cb_compare0.Size = new System.Drawing.Size(60, 16);
@@ -265,9 +268,9 @@
             this.groupBox3.Controls.Add(this.cb_compare3);
             this.groupBox3.Controls.Add(this.cb_compare2);
             this.groupBox3.Controls.Add(this.cb_compare0);
-            this.groupBox3.Location = new System.Drawing.Point(118, 250);
+            this.groupBox3.Location = new System.Drawing.Point(118, 151);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(118, 192);
+            this.groupBox3.Size = new System.Drawing.Size(118, 164);
             this.groupBox3.TabIndex = 13;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "比較";
@@ -275,6 +278,8 @@
             // cb_compare1
             // 
             this.cb_compare1.AutoSize = true;
+            this.cb_compare1.Checked = true;
+            this.cb_compare1.CheckState = System.Windows.Forms.CheckState.Checked;
             this.cb_compare1.Location = new System.Drawing.Point(20, 71);
             this.cb_compare1.Name = "cb_compare1";
             this.cb_compare1.Size = new System.Drawing.Size(72, 16);
@@ -309,7 +314,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(11, 382);
+            this.button5.Location = new System.Drawing.Point(118, 385);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(100, 60);
             this.button5.TabIndex = 18;
@@ -322,7 +327,7 @@
             this.bt_start_files.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_start_files.BackgroundImage")));
             this.bt_start_files.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_start_files.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_start_files.Location = new System.Drawing.Point(156, 130);
+            this.bt_start_files.Location = new System.Drawing.Point(399, 22);
             this.bt_start_files.Name = "bt_start_files";
             this.bt_start_files.Size = new System.Drawing.Size(50, 50);
             this.bt_start_files.TabIndex = 19;
@@ -381,7 +386,7 @@
             this.groupBox_file.Controls.Add(this.cb_filesize);
             this.groupBox_file.Controls.Add(this.tb_filesize);
             this.groupBox_file.Controls.Add(this.label2);
-            this.groupBox_file.Location = new System.Drawing.Point(251, 250);
+            this.groupBox_file.Location = new System.Drawing.Point(251, 151);
             this.groupBox_file.Name = "groupBox_file";
             this.groupBox_file.Size = new System.Drawing.Size(198, 98);
             this.groupBox_file.TabIndex = 48;
@@ -454,11 +459,64 @@
             this.bt_clear3.UseVisualStyleBackColor = true;
             this.bt_clear3.Click += new System.EventHandler(this.bt_clear3_Click);
             // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(12, 316);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(100, 60);
+            this.button6.TabIndex = 59;
+            this.button6.Text = "搜尋特定檔名";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // tb_find
+            // 
+            this.tb_find.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_find.Location = new System.Drawing.Point(118, 328);
+            this.tb_find.Name = "tb_find";
+            this.tb_find.Size = new System.Drawing.Size(185, 36);
+            this.tb_find.TabIndex = 60;
+            this.tb_find.Text = "maron";
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(12, 385);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(100, 60);
+            this.button7.TabIndex = 61;
+            this.button7.Text = "優優檔";
+            this.button7.UseVisualStyleBackColor = true;
+            // 
+            // bt_start_files2
+            // 
+            this.bt_start_files2.Location = new System.Drawing.Point(455, 22);
+            this.bt_start_files2.Name = "bt_start_files2";
+            this.bt_start_files2.Size = new System.Drawing.Size(50, 50);
+            this.bt_start_files2.TabIndex = 62;
+            this.bt_start_files2.Text = "全選 播放";
+            this.bt_start_files2.UseVisualStyleBackColor = true;
+            this.bt_start_files2.Click += new System.EventHandler(this.bt_start_files2_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(224, 385);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(100, 60);
+            this.button8.TabIndex = 63;
+            this.button8.Text = "get_shortname";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1784, 662);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.bt_start_files2);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.tb_find);
+            this.Controls.Add(this.button6);
             this.Controls.Add(this.bt_clear3);
             this.Controls.Add(this.groupBox_file);
             this.Controls.Add(this.bt_clear_dir);
@@ -492,6 +550,7 @@
             this.groupBox_file.ResumeLayout(false);
             this.groupBox_file.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -533,6 +592,11 @@
         private System.Windows.Forms.TextBox tb_filesize;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button bt_clear3;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.TextBox tb_find;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button bt_start_files2;
+        private System.Windows.Forms.Button button8;
     }
 }
 
