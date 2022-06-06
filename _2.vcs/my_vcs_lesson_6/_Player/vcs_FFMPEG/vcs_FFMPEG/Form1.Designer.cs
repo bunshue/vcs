@@ -79,7 +79,7 @@
             // trackBar_st
             // 
             this.trackBar_st.LargeChange = 1;
-            this.trackBar_st.Location = new System.Drawing.Point(12, 18);
+            this.trackBar_st.Location = new System.Drawing.Point(12, 58);
             this.trackBar_st.Maximum = 100;
             this.trackBar_st.Name = "trackBar_st";
             this.trackBar_st.Size = new System.Drawing.Size(693, 45);
@@ -89,7 +89,7 @@
             // trackBar_sp
             // 
             this.trackBar_sp.LargeChange = 1;
-            this.trackBar_sp.Location = new System.Drawing.Point(12, 63);
+            this.trackBar_sp.Location = new System.Drawing.Point(12, 102);
             this.trackBar_sp.Maximum = 100;
             this.trackBar_sp.Name = "trackBar_sp";
             this.trackBar_sp.Size = new System.Drawing.Size(693, 45);

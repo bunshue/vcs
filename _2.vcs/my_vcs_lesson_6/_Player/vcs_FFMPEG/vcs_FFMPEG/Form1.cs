@@ -57,6 +57,181 @@ namespace vcs_FFMPEG
             axWindowsMediaPlayer1.Visible = false;
 
             bt_open_file_Click(sender, e);
+
+
+            PictureBox pbx = new PictureBox();
+            //pbx.Parent = this;  //相當於 this.Controls.Add(pbx)
+            //pbx.SizeMode = PictureBoxSizeMode.Zoom;
+            //pbx.Image = bitmap1;
+            pbx.BackColor = Color.Pink;
+            pbx.Size = new Size(693, 60);
+            pbx.Location = new Point(12, 12);
+
+            pbx.MouseDown += new MouseEventHandler(pbx_MouseDown);
+            pbx.MouseMove += new MouseEventHandler(pbx_MouseMove);
+            pbx.MouseUp += new MouseEventHandler(pbx_MouseUp);
+            pbx.Paint += new PaintEventHandler(pbx_Paint);
+
+            this.Controls.Add(pbx);
+        }
+
+        ToolTip toolTip1 = new ToolTip();
+
+        // The current value.
+        private int StartValue = 234;
+        private int StopValue = 567;
+
+        int move_value = 0; //1:StartValue, 2: StopValue
+
+        // The minimum and maximum allowed values.
+        private const int MinimumValue = 0;
+        private const int MaximumValue = 1000;
+
+        // Move the needle to this position.
+        private bool flag_pbx_mouse_down = false;
+        private void pbx_MouseDown(object sender, MouseEventArgs e)
+        {
+            int value = XtoValue(sender, e.X);
+
+            int abs1 = Math.Abs(value - StartValue);
+            int abs2 = Math.Abs(value - StopValue);
+
+            if ((abs1 < abs2) && (abs1 < 10))
+            {
+                //選中 StartValue
+                flag_pbx_mouse_down = true;
+                SetValue(sender, XtoValue(sender, e.X));
+                move_value = 1;
+            }
+
+            if ((abs1 > abs2) && (abs2 < 10))
+            {
+                //選中 StopValue
+                flag_pbx_mouse_down = true;
+                SetValue(sender, XtoValue(sender, e.X));
+                move_value = 2;
+            }
+
+            richTextBox1.Text += "value = " + value.ToString() + "\tabs1 = " + abs1.ToString() + "\tabs2 = " + abs2.ToString() + "\n";
+
+            return;
+        }
+
+        private void pbx_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (flag_pbx_mouse_down == false)
+            {
+                return;
+            }
+            SetValue(sender, XtoValue(sender, e.X));
+        }
+
+        private void pbx_MouseUp(object sender, MouseEventArgs e)
+        {
+            flag_pbx_mouse_down = false;
+            toolTip1.Hide(this);
+            move_value = 0;
+        }
+
+        // Draw the needle.
+        private void pbx_Paint(object sender, PaintEventArgs e)
+        {
+            // Calculate the needle's X coordinate.
+            int x1 = ValueToX(sender, StartValue);
+            int x2 = ValueToX(sender, StopValue);
+
+            //case 1
+            using (Pen pen = new Pen(Color.Lime, 2))
+            {
+                e.Graphics.DrawLine(pen, x1, 0, x1, ((PictureBox)sender).ClientSize.Height);
+            }
+
+            using (Pen pen = new Pen(Color.Red, 2))
+            {
+                e.Graphics.DrawLine(pen, x2, 0, x2, ((PictureBox)sender).ClientSize.Height);
+            }
+
+
+            /*
+            //case 2
+            int y = (int)(pbx.ClientSize.Height * 0.25);
+            int hgt = pbx.ClientSize.Height - 2 * y;
+
+            // Draw it.
+            e.Graphics.FillRectangle(Brushes.Blue, 0, y, x, hgt);
+            using (Pen pen = new Pen(Color.Blue, 3))
+            {
+                e.Graphics.DrawLine(pen, x, 0, x, pbx.ClientSize.Height);
+            }
+            */
+        }
+
+        // Convert an X coordinate to a value.
+        private int XtoValue(object sender, int x)
+        {
+            return MinimumValue + (MaximumValue - MinimumValue) * x / (int)(((PictureBox)sender).ClientSize.Width - 1);
+        }
+
+        // Convert value to an X coordinate.
+        private int ValueToX(object sender, int value)
+        {
+            return (((PictureBox)sender).ClientSize.Width - 1) * (value - MinimumValue) / (int)(MaximumValue - MinimumValue);
+        }
+
+        // Set the slider's value. If the value has changed,
+        // display the value tooltip.
+        private void SetValue(object sender, int value)
+        {
+            // Make sure the new value is within bounds.
+            if (value < MinimumValue)
+            {
+                value = MinimumValue;
+            }
+            if (value > MaximumValue)
+            {
+                value = MaximumValue;
+            }
+
+            // See if the value has changed.
+            if (move_value == 1)
+            {
+                if (StartValue == value)
+                {
+                    return;
+                }
+            }
+            else if (move_value == 2)
+            {
+                if (StopValue == value)
+                {
+                    return;
+                }
+            }
+
+            // Save the new value.
+            if (move_value == 1)
+                StartValue = value;
+            else if (move_value == 2)
+                StopValue = value;
+
+            // Redraw to show the new value.
+            ((PictureBox)sender).Refresh();
+
+            // Display the value tooltip.
+            int tip_x = 0;
+            int tip_y = 0;
+            if (move_value == 1)
+            {
+                tip_x = ((PictureBox)sender).Left + (int)ValueToX(sender, StartValue);
+                tip_y = ((PictureBox)sender).Top;
+                toolTip1.Show(StartValue.ToString(), this, tip_x, tip_y, 3000);
+            }
+            else if (move_value == 2)
+            {
+                tip_x = ((PictureBox)sender).Left + (int)ValueToX(sender, StopValue);
+                tip_y = ((PictureBox)sender).Top;
+                toolTip1.Show(StopValue.ToString(), this, tip_x, tip_y, 3000);
+            }
         }
 
         void show_item_location()
