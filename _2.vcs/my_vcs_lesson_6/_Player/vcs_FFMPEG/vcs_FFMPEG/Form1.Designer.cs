@@ -31,8 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.trackBar_st = new System.Windows.Forms.TrackBar();
-            this.trackBar_sp = new System.Windows.Forms.TrackBar();
             this.bt_open_file = new System.Windows.Forms.Button();
             this.bt_save_file = new System.Windows.Forms.Button();
             this.bt_play_pause = new System.Windows.Forms.Button();
@@ -62,8 +60,6 @@
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.bt_plus = new System.Windows.Forms.Button();
             this.bt_minus = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar_st)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar_sp)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -75,26 +71,6 @@
             this.richTextBox1.Size = new System.Drawing.Size(924, 206);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
-            // 
-            // trackBar_st
-            // 
-            this.trackBar_st.LargeChange = 1;
-            this.trackBar_st.Location = new System.Drawing.Point(12, 58);
-            this.trackBar_st.Maximum = 100;
-            this.trackBar_st.Name = "trackBar_st";
-            this.trackBar_st.Size = new System.Drawing.Size(693, 45);
-            this.trackBar_st.TabIndex = 43;
-            this.trackBar_st.Scroll += new System.EventHandler(this.trackBar_st_Scroll);
-            // 
-            // trackBar_sp
-            // 
-            this.trackBar_sp.LargeChange = 1;
-            this.trackBar_sp.Location = new System.Drawing.Point(12, 102);
-            this.trackBar_sp.Maximum = 100;
-            this.trackBar_sp.Name = "trackBar_sp";
-            this.trackBar_sp.Size = new System.Drawing.Size(693, 45);
-            this.trackBar_sp.TabIndex = 44;
-            this.trackBar_sp.Scroll += new System.EventHandler(this.trackBar_sp_Scroll);
             // 
             // bt_open_file
             // 
@@ -409,20 +385,16 @@
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.lb_cut);
             this.Controls.Add(this.lb_total);
-            this.Controls.Add(this.trackBar_sp);
             this.Controls.Add(this.lb_sp);
             this.Controls.Add(this.lb_st);
             this.Controls.Add(this.bt_stop);
             this.Controls.Add(this.bt_play_pause);
             this.Controls.Add(this.bt_save_file);
             this.Controls.Add(this.bt_open_file);
-            this.Controls.Add(this.trackBar_st);
             this.Controls.Add(this.richTextBox1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar_st)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar_sp)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
@@ -433,8 +405,6 @@
         #endregion
 
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.TrackBar trackBar_st;
-        private System.Windows.Forms.TrackBar trackBar_sp;
         private System.Windows.Forms.Button bt_open_file;
         private System.Windows.Forms.Button bt_save_file;
         private System.Windows.Forms.Button bt_play_pause;

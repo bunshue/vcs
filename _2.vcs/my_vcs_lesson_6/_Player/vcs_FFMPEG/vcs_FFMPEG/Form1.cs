@@ -44,13 +44,6 @@ namespace vcs_FFMPEG
             lb_sp.Text = "結束 : ";
             lb_cut.Text = "選取 : ";
             tb_filename.Text = "";
-            trackBar_st.Maximum = 100;
-            trackBar_st.Minimum = 0;
-            trackBar_st.Value = 0;
-
-            trackBar_sp.Maximum = 100;
-            trackBar_sp.Minimum = 0;
-            trackBar_sp.Value = 100;
 
             this.axWindowsMediaPlayer1 = new AxWindowsMediaPlayer();
             this.axWindowsMediaPlayer1.Enabled = true;
@@ -99,29 +92,79 @@ namespace vcs_FFMPEG
         private bool flag_pbx_mouse_down = false;
         private void pbx_MouseDown(object sender, MouseEventArgs e)
         {
+            int dd = PbxMaximumValue / 80;
             int value = XtoValue(sender, e.X);
 
             int abs1 = Math.Abs(value - PbxStartValue);
             int abs2 = Math.Abs(value - PbxStopValue);
 
-            if ((abs1 < abs2) && (abs1 < 30))
+            if ((abs1 < abs2) && (abs1 < dd))
             {
                 //選中 PbxStartValue
                 flag_pbx_mouse_down = true;
                 SetValue(sender, XtoValue(sender, e.X));
                 move_value = 1;
+                mp3_position = PbxStartValue;
+                axWindowsMediaPlayer1.Ctlcontrols.currentPosition = mp3_position;
+                //richTextBox1.Text += "let mp3_position = " + mp3_position.ToString() + "\n";
             }
-
-            if ((abs1 > abs2) && (abs2 < 30))
+            else if ((abs1 > abs2) && (abs2 < dd))
             {
                 //選中 PbxStopValue
                 flag_pbx_mouse_down = true;
                 SetValue(sender, XtoValue(sender, e.X));
                 move_value = 2;
             }
-
-            richTextBox1.Text += "value = " + value.ToString() + "\tabs1 = " + abs1.ToString() + "\tabs2 = " + abs2.ToString() + "\n";
-
+            else if (value < PbxStartValue)
+            {
+                richTextBox1.Text += "左 ";
+                if (PbxStartValue > 5)
+                    PbxStartValue -= 5;
+                //選中 PbxStartValue
+                flag_pbx_mouse_down = true;
+                SetValue(sender, XtoValue(sender, e.X));
+                move_value = 1;
+                mp3_position = PbxStartValue;
+                axWindowsMediaPlayer1.Ctlcontrols.currentPosition = mp3_position;
+            }
+            else if (value > PbxStopValue)
+            {
+                richTextBox1.Text += "右 ";
+                if (PbxStopValue < (PbxMaximumValue - 5))
+                    PbxStopValue += 5;
+                flag_pbx_mouse_down = true;
+                SetValue(sender, XtoValue(sender, e.X));
+                move_value = 2;
+            }
+            else
+            {
+                richTextBox1.Text += "中 ";
+                if (abs1 < abs2)
+                {
+                    //較靠近PbxStartValue
+                    if (PbxStartValue < (PbxStopValue - 5))
+                    {
+                        PbxStartValue += 5;
+                        flag_pbx_mouse_down = true;
+                        SetValue(sender, XtoValue(sender, e.X));
+                        move_value = 1;
+                        mp3_position = PbxStartValue;
+                        axWindowsMediaPlayer1.Ctlcontrols.currentPosition = mp3_position;
+                    }
+                }
+                else
+                {
+                    //較靠近PbxStopValue
+                    if (PbxStopValue > (PbxStartValue + 5))
+                    {
+                        PbxStopValue -= 5;
+                        flag_pbx_mouse_down = true;
+                        SetValue(sender, XtoValue(sender, e.X));
+                        move_value = 2;
+                    }
+                }
+            }
+            //richTextBox1.Text += "value = " + value.ToString() + "\tabs1 = " + abs1.ToString() + "\tabs2 = " + abs2.ToString() + "\n";
             return;
         }
 
@@ -149,12 +192,12 @@ namespace vcs_FFMPEG
             int x2 = ValueToX(sender, PbxStopValue);
 
             //case 1
-            using (Pen pen = new Pen(Color.Lime, 2))
+            using (Pen pen = new Pen(Color.Lime, 5))
             {
                 e.Graphics.DrawLine(pen, x1, 0, x1, ((PictureBox)sender).ClientSize.Height);
             }
 
-            using (Pen pen = new Pen(Color.Red, 2))
+            using (Pen pen = new Pen(Color.Red, 5))
             {
                 e.Graphics.DrawLine(pen, x2, 0, x2, ((PictureBox)sender).ClientSize.Height);
             }
@@ -172,6 +215,19 @@ namespace vcs_FFMPEG
                 e.Graphics.DrawLine(pen, x, 0, x, pbx.ClientSize.Height);
             }
             */
+
+
+            if (flag_play_mode == 1)
+            {
+                mp3_position = (int)axWindowsMediaPlayer1.Ctlcontrols.currentPosition;
+                //richTextBox1.Text += mp3_position.ToString() + " ";
+
+                int xx = ValueToX(sender, mp3_position);
+                using (Pen pen = new Pen(Color.Blue, 3))
+                {
+                    e.Graphics.DrawLine(pen, xx, 0, xx, ((PictureBox)sender).ClientSize.Height);
+                }
+            }
         }
 
         // Convert an X coordinate to a value.
@@ -218,9 +274,15 @@ namespace vcs_FFMPEG
 
             // Save the new value.
             if (move_value == 1)
+            {
                 PbxStartValue = value;
+                mp3_position = PbxStartValue;
+                axWindowsMediaPlayer1.Ctlcontrols.currentPosition = mp3_position;
+            }
             else if (move_value == 2)
+            {
                 PbxStopValue = value;
+            }
 
             // Redraw to show the new value.
             ((PictureBox)sender).Refresh();
@@ -240,6 +302,12 @@ namespace vcs_FFMPEG
                 tip_y = ((PictureBox)sender).Top;
                 toolTip1.Show(PbxStopValue.ToString(), this, tip_x, tip_y, 3000);
             }
+
+            lb_st.Text = "起始 : " + (mp3_position / 3600).ToString("D2") + " : " + ((mp3_position / 60) % 60).ToString("D2") + " : " + (mp3_position % 60).ToString("D2") + "    " + mp3_position.ToString();
+            lb_sp.Text = "結束 : " + (PbxStopValue / 3600).ToString("D2") + " : " + ((PbxStopValue / 60) % 60).ToString("D2") + " : " + (PbxStopValue % 60).ToString("D2") + "    " + PbxStopValue.ToString();
+
+            int cut = PbxStopValue - PbxStartValue;
+            lb_cut.Text = "選取 : " + (cut / 3600).ToString("D2") + " : " + ((cut / 60) % 60).ToString("D2") + " : " + (cut % 60).ToString("D2") + "    " + cut.ToString();
         }
 
         void show_item_location()
@@ -272,8 +340,8 @@ namespace vcs_FFMPEG
 
             richTextBox1.Text += "取得音樂檔案長度 :\n";
 
-            string filename = @"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_日本演歌\__石川さゆり\Ishikawa Sayuri 【アルバム】[演歌] 石川さゆり ‐ 全曲集 Super Best.mp3";
-            //string filename = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
+            //string filename = @"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_日本演歌\__石川さゆり\Ishikawa Sayuri 【アルバム】[演歌] 石川さゆり ‐ 全曲集 Super Best.mp3";
+            string filename = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
 
             richTextBox1.Text += "檔案 : " + filename + "\n";
             richTextBox1.Text += "音樂長度 : ";
@@ -289,14 +357,6 @@ namespace vcs_FFMPEG
             lb_total.Text = "全長 : " + (total_length / 3600).ToString("D2") + " : " + ((total_length / 60) % 60).ToString("D2") + " : " + (total_length % 60).ToString("D2") + "    " + total_length.ToString();
             richTextBox1.Text += "total_length = " + total_length.ToString() + "\n";
             mp3_length = total_length;
-
-            trackBar_st.Maximum = total_length;
-            trackBar_st.Minimum = 0;
-            trackBar_st.Value = 0;
-
-            trackBar_sp.Maximum = total_length;
-            trackBar_sp.Minimum = 0;
-            trackBar_sp.Value = total_length;
 
             PbxMinimumValue = 0;
             PbxMaximumValue = total_length;
@@ -314,7 +374,7 @@ namespace vcs_FFMPEG
             lb_st.Text = "起始 : " + (mp3_position / 3600).ToString("D2") + " : " + ((mp3_position / 60) % 60).ToString("D2") + " : " + (mp3_position % 60).ToString("D2") + "    " + mp3_position.ToString();
             lb_sp.Text = "結束 : " + (total_length / 3600).ToString("D2") + " : " + ((total_length / 60) % 60).ToString("D2") + " : " + (total_length % 60).ToString("D2") + "    " + total_length.ToString();
 
-            int cut = trackBar_sp.Value - trackBar_st.Value;
+            int cut = PbxStopValue - PbxStartValue;
             lb_cut.Text = "選取 : " + (cut / 3600).ToString("D2") + " : " + ((cut / 60) % 60).ToString("D2") + " : " + (cut % 60).ToString("D2") + "    " + cut.ToString();
         }
 
@@ -326,8 +386,9 @@ namespace vcs_FFMPEG
                 return;
             }
 
-            int cut1 = trackBar_st.Value;
-            int cut2 = trackBar_sp.Value;
+            int cut1 = PbxStartValue;
+            int cut2 = PbxStopValue;
+
             int cut_time = 0;
 
             if (cut1 >= cut2)
@@ -372,16 +433,18 @@ namespace vcs_FFMPEG
             if ((flag_play_mode == 0) || (flag_play_mode == 2))
             {
                 flag_play_mode = 1;
+                //一律從設定裁減開始時開始播放
+
+                mp3_position = PbxStartValue;
+                axWindowsMediaPlayer1.Ctlcontrols.currentPosition = mp3_position;
                 axWindowsMediaPlayer1.Ctlcontrols.play();
-                //richTextBox1.Text += "start at : " + axWindowsMediaPlayer1.Ctlcontrols.currentPosition.ToString() + "\n";
+                richTextBox1.Text += "start at : " + axWindowsMediaPlayer1.Ctlcontrols.currentPosition.ToString() + "\n";
             }
             else if (flag_play_mode == 1)
             {
                 flag_play_mode = 2;
                 axWindowsMediaPlayer1.Ctlcontrols.pause();
-
             }
-
         }
 
         private void bt_stop_Click(object sender, EventArgs e)
@@ -390,8 +453,10 @@ namespace vcs_FFMPEG
             axWindowsMediaPlayer1.Ctlcontrols.stop();
             lb_time.Text = axWindowsMediaPlayer1.Ctlcontrols.currentPositionString;
             mp3_position = 0;
-            trackBar_st.Value = mp3_position;
-            trackBar_sp.Value = mp3_length;
+
+            PbxStartValue = mp3_position;
+            PbxStopValue = mp3_length;
+            this.pbx.Invalidate();
         }
 
         private void bt_plus_Click(object sender, EventArgs e)
@@ -439,6 +504,7 @@ namespace vcs_FFMPEG
 
         private void trackBar_st_Scroll(object sender, EventArgs e)
         {
+            /*
             mp3_position = trackBar_st.Value;
             axWindowsMediaPlayer1.Ctlcontrols.currentPosition = mp3_position;
             lb_time.Text = axWindowsMediaPlayer1.Ctlcontrols.currentPositionString;
@@ -449,10 +515,18 @@ namespace vcs_FFMPEG
                 int cut = trackBar_sp.Value - trackBar_st.Value;
                 lb_cut.Text = "選取 : " + (cut / 3600).ToString("D2") + " : " + ((cut / 60) % 60).ToString("D2") + " : " + (cut % 60).ToString("D2") + "    " + cut.ToString();
             }
+            */
+            /*
+            PbxStartValue = trackBar_st.Value;
+            flag_pbx_mouse_down = true;
+            SetValue(sender, XtoValue(sender, PbxStartValue));
+            move_value = 1;
+            */
         }
 
         private void trackBar_sp_Scroll(object sender, EventArgs e)
         {
+            /*
             lb_sp.Text = "結束 : " + (mp3_position / 3600).ToString("D2") + " : " + ((mp3_position / 60) % 60).ToString("D2") + " : " + (mp3_position % 60).ToString("D2") + "    " + mp3_position.ToString();
 
             if (trackBar_st.Value < trackBar_sp.Value)
@@ -460,6 +534,13 @@ namespace vcs_FFMPEG
                 int cut = trackBar_sp.Value - trackBar_st.Value;
                 lb_cut.Text = "選取 : " + (cut / 3600).ToString("D2") + " : " + ((cut / 60) % 60).ToString("D2") + " : " + (cut % 60).ToString("D2") + "    " + cut.ToString();
             }
+            */
+            /*
+            PbxStopValue = trackBar_sp.Value;
+            flag_pbx_mouse_down = true;
+            SetValue(sender, XtoValue(sender, PbxStopValue));
+            move_value = 2;
+            */
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -988,6 +1069,7 @@ namespace vcs_FFMPEG
             if (flag_play_mode == 1)
             {
                 lb_time.Text = axWindowsMediaPlayer1.Ctlcontrols.currentPositionString;
+                this.pbx.Invalidate();
             }
             else
             {

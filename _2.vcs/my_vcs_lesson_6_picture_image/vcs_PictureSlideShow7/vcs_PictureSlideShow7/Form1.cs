@@ -9,11 +9,16 @@ using System.Windows.Forms;
 
 using System.IO;    //for DirectoryInfo
 
-namespace vcs_PictureSlideShow6
+namespace vcs_PictureSlideShow7
 {
     public partial class Form1 : Form
     {
         private List<string> imageList;//播放的圖片
+
+        Graphics g;
+        Pen p;
+        SolidBrush sb;
+        Bitmap bitmap1;
 
         public Form1()
         {
@@ -23,6 +28,25 @@ namespace vcs_PictureSlideShow6
         private void Form1_Load(object sender, EventArgs e)
         {
             InitLoad();
+
+            int W = 1920;
+            int H = 1080;
+
+            //----開新的Bitmap----
+            bitmap1 = new Bitmap(W, H);
+            //----使用上面的Bitmap畫圖----
+            g = Graphics.FromImage(bitmap1);
+            g.DrawRectangle(Pens.Red, 100, 100, 100, 100);
+            //this.BackgroundImage = bitmap1;
+            //this.pictureBox1.Image = bitmap1;
+
+            p = new Pen(Color.Red, 10);     // 設定畫筆為紅色、粗細為 10 點。
+            sb = new SolidBrush(Color.Blue);
+            g.Clear(Color.White);
+
+            //最大化螢幕
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
         }
 
         /// <summary>
@@ -33,8 +57,6 @@ namespace vcs_PictureSlideShow6
             try
             {
                 bool flag = false;
-                //string folder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bgImages");
-                //string folder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bgImages");
                 string foldername = @"C:\______test_files\__pic\_peony1";
 
                 DirectoryInfo di = new DirectoryInfo(foldername);
@@ -48,7 +70,7 @@ namespace vcs_PictureSlideShow6
                         if (!flag)
                         {
                             imageList = new List<string>();
-                            this.pictureBox1.Image = Image.FromFile(fi[i].FullName);
+                            //this.pictureBox1.Image = Image.FromFile(fi[i].FullName);
                         }
                         imageList.Add(fi[i].FullName);
                         flag = true;
@@ -61,21 +83,36 @@ namespace vcs_PictureSlideShow6
             }
         }
 
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.X)
+            {
+                Application.Exit();
+            }
+        }
+
         int index = 0;
         private void timer1_Tick(object sender, EventArgs e)
         {
+            //richTextBox1.Text += "(" + index.ToString() + "/" + imageList.Count.ToString() + ") ";
             int len = imageList.Count;
             //richTextBox1.Text += "目前共有 " + len.ToString() + " 張圖片\n";
 
-            this.pictureBox1.Image.Dispose();
-            this.pictureBox1.Image = Image.FromFile(imageList[index]);
-            //richTextBox1.Text += "index = " + index.ToString() + ", show : " + imageList[index] + "\n";
+            Image image = Image.FromFile(imageList[index]); // 產生一個Image物件
+            int w = image.Width;
+            int h = image.Height;
+
+            int x = (1920 - w) / 2;
+            int y = (1080 - h) / 2;
+            g.DrawImage(image, x, y);
+
+            this.BackgroundImage = bitmap1;
+            this.Invalidate();
 
             if (index < (len - 1))
                 index++;
             else
                 index = 0;
-
         }
     }
 }

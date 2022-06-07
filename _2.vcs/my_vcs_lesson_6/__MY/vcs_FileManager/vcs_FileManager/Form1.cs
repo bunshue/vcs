@@ -24,7 +24,7 @@ namespace vcs_FileManager
         string foldername = @"F:\";
 
 
-        //string video_player_path = String.Empty;
+        string video_player_path = String.Empty;
         string audio_player_path = String.Empty;
         string picture_viewer_path = String.Empty;
         string text_editor_path = String.Empty;
@@ -33,9 +33,6 @@ namespace vcs_FileManager
         string default_vcs_path = @"C:\_git\vcs\_2.vcs";
         string default_python_path = @"C:\_git\vcs\_4.cmpp\_python_test";
         string default_matlab_path = @"C:\_git\vcs\_4.cmpp\_matlab1_test";
-
-        string video_player_path = @"D:\___backup\PotPlayer\PotPlayerMini64.exe";
-        //string video_player_path = @"C:\Program Files\DAUM\PotPlayer\PotPlayerMini.exe";
 
         List<String> old_search_path = new List<String>();
 
@@ -164,6 +161,7 @@ namespace vcs_FileManager
                 if (i < (listBox1.Items.Count - 1))
                     save_path += ";";
             }
+            Properties.Settings.Default.video_player_path = video_player_path;
             Properties.Settings.Default.search_path = save_path;
             Properties.Settings.Default.Save();
         }
@@ -181,20 +179,44 @@ namespace vcs_FileManager
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new System.Drawing.Point(0, 0);
 
-            this.listBox1.BorderStyle = BorderStyle.Fixed3D;
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
 
-            int x_st = 550;
-            int y_st = 12;
+            //button
+            x_st = 12;
+            y_st = 12;
+            dx = 100+10;
+            dy = 60+10;
+
+            //button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button7.Location = new Point(x_st + dx *0, y_st + dy * 6);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            //button10.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            //button11.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+
+            x_st = 420;
+            y_st = 12;
             int W = 1920;
             this.listView1.Location = new Point(x_st, y_st);
-            this.listView1.Size = new Size(W - x_st - 12, 500);
-            this.richTextBox1.Location = new Point(x_st, y_st + 500);
-            this.richTextBox1.Size = new Size(W - x_st - 12, 500);
+            this.listView1.Size = new Size(W - x_st - 12, 700);
+            this.listBox1.BorderStyle = BorderStyle.Fixed3D;
+
+            this.richTextBox1.Location = new Point(x_st, y_st + 700);
+            this.richTextBox1.Size = new Size(W - x_st - 12, 325);
 
             x_st = 12;
-            y_st = 700;
-            this.richTextBox2.Location = new Point(x_st, y_st);
-            this.richTextBox2.Size = new Size(500, 300);
+            this.richTextBox2.Location = new Point(x_st, y_st+700);
+            this.richTextBox2.Size = new Size(400, 325);
 
             bt_clear1.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - bt_clear1.Width, richTextBox1.Location.Y);
             bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - bt_clear2.Width, richTextBox2.Location.Y);
@@ -267,7 +289,18 @@ namespace vcs_FileManager
 
         void update_default_setting()
         {
+            video_player_path = Properties.Settings.Default.video_player_path;
             search_path = Properties.Settings.Default.search_path;
+
+            if (System.IO.File.Exists(Properties.Settings.Default.video_player_path) == false)
+            {
+                richTextBox2.Text += "播放影片程式不存在 : " + Properties.Settings.Default.video_player_path + "\n使用Windows預設播放影片程式\n";
+                //video_player_path = String.Empty;
+                video_player_path = @"D:\___backup\PotPlayer\PotPlayerMini64.exe";
+                //video_player_path = @"C:\Program Files\DAUM\PotPlayer\PotPlayerMini.exe";
+
+
+            }
 
             //預設搜尋路徑
             string PATH = Properties.Settings.Default.search_path;
@@ -726,8 +759,6 @@ namespace vcs_FileManager
 
         void show_file_info()  //轉出一層
         {
-            return;
-
             //排序 由小到大
             //fileinfos.Sort((x, y) => { return x.filesize.CompareTo(y.filesize); });
 
@@ -823,11 +854,11 @@ namespace vcs_FileManager
             }
             listView1.Clear();
 
-            listView1.Columns.Add("檔名", 280, HorizontalAlignment.Left);
-            listView1.Columns.Add("大小", 70, HorizontalAlignment.Left);
-            listView1.Columns.Add("資料夾", 450, HorizontalAlignment.Left);
-            listView1.Columns.Add("副檔名", 70, HorizontalAlignment.Left);
-            listView1.Columns.Add("修改日期", 140, HorizontalAlignment.Left);
+            listView1.Columns.Add("檔名", 300, HorizontalAlignment.Left);
+            listView1.Columns.Add("大小", 90, HorizontalAlignment.Left);
+            listView1.Columns.Add("資料夾", 500, HorizontalAlignment.Left);
+            listView1.Columns.Add("副檔名", 80, HorizontalAlignment.Left);
+            listView1.Columns.Add("修改日期", 150, HorizontalAlignment.Left);
             listView1.Columns.Add("簡名", 180, HorizontalAlignment.Left);
             listView1.Columns.Add("格式", 180, HorizontalAlignment.Left);
             listView1.Visible = true;
@@ -1083,7 +1114,7 @@ namespace vcs_FileManager
 
                     richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
 
-                    show_file_info();
+                    //show_file_info();
                 }
                 else
                 {
@@ -1148,7 +1179,7 @@ namespace vcs_FileManager
                         this.Text = "DrAP (轉出時間 : " + (stopwatch.ElapsedMilliseconds / 1000).ToString() + " 秒)";
             */
 
-            show_file_info();
+            //show_file_info();
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -1318,9 +1349,11 @@ namespace vcs_FileManager
 
             selNdx = listView1.SelectedIndices[0];
             listView1.Items[selNdx].Selected = true;    //選到的項目
-            richTextBox2.Text += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
+
+            int selectCount = listView1.SelectedIndices.Count;
+            richTextBox2.Text += "你選擇了 : " + selectCount.ToString() + " 個檔案\t";
             richTextBox2.Text += "你選擇了檔名:\t" + listView1.Items[selNdx].Text + "\n";
-            richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
+            richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[2].Text + "\n";
         }
 
         private void listView1_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -1339,7 +1372,9 @@ namespace vcs_FileManager
 
             selNdx = listView1.SelectedIndices[0];
             listView1.Items[selNdx].Selected = true;    //選到的項目
-            //richTextBox2.Text += "count = " + this.listView1.SelectedIndices.Count.ToString() + "\t";
+
+            int selectCount = listView1.SelectedIndices.Count;
+            richTextBox2.Text += "你選擇了 : " + selectCount.ToString() + " 個檔案\t";
             richTextBox2.Text += "你選擇了資料夾:\t" + listView1.Items[selNdx].Text + "\n";
 
             fullname = listView1.Items[selNdx].SubItems[2].Text + "\\" + listView1.Items[selNdx].Text;
@@ -1362,14 +1397,13 @@ namespace vcs_FileManager
                     Process.Start(video_player_path, fullname);    //指名播放程式開啟
                 }
             }
-
-
         }
 
         private void bt_start_files_Click(object sender, EventArgs e)
         {
-            richTextBox2.Text += "你選擇了 : " + listView1.SelectedIndices.Count.ToString() + " 個檔案, 分別是\n";
-            for (int i = 0; i < listView1.SelectedIndices.Count; i++)
+            int selectCount = listView1.SelectedIndices.Count;
+            richTextBox2.Text += "你選擇了 : " + selectCount.ToString() + " 個檔案, 分別是\n";
+            for (int i = 0; i < selectCount; i++)
             {
                 richTextBox2.Text += listView1.SelectedItems[i].SubItems[2].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
             }
@@ -1378,14 +1412,15 @@ namespace vcs_FileManager
             int selNdx;
             string all_filename = string.Empty;
 
-            if (this.listView1.SelectedIndices.Count <= 0)  //總共選擇的個數
+            if (selectCount <= 0)  //總共選擇的個數
             {
                 richTextBox2.Text += "無檔案\n";
                 return;
             }
 
             //richTextBox2.Text += "總共選了 : " + listView1.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
-            //for (int i = 0; i < listView1.SelectedIndices.Count; i++)
+
+            //for (int i = 0; i < selectCount; i++) //same
             for (int i = 0; i < listView1.SelectedItems.Count; i++)
             {
                 selNdx = listView1.SelectedIndices[i];
@@ -1442,28 +1477,28 @@ namespace vcs_FileManager
             for (int i = 0; i < len; i++)
             {
                 listView1.Items[i].Selected = true;
-
             }
 
-            richTextBox2.Text += "你選擇了 : " + listView1.SelectedIndices.Count.ToString() + " 個檔案, 分別是\n";
-            for (int i = 0; i < listView1.SelectedIndices.Count; i++)
+            int selectCount = listView1.SelectedIndices.Count;
+            richTextBox2.Text += "你選擇了 : " + selectCount.ToString() + " 個檔案, 分別是\n";
+            for (int i = 0; i < selectCount; i++)
             {
                 richTextBox2.Text += listView1.SelectedItems[i].SubItems[2].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
             }
             richTextBox2.Text += "開啟\n";
 
-
             int selNdx;
             string all_filename = string.Empty;
 
-            if (this.listView1.SelectedIndices.Count <= 0)  //總共選擇的個數
+            if (selectCount <= 0)  //總共選擇的個數
             {
                 richTextBox2.Text += "無檔案\n";
                 return;
             }
 
             //richTextBox2.Text += "總共選了 : " + listView1.SelectedItems.Count.ToString() + " 個檔案，分別是 : \n";
-            //for (int i = 0; i < listView1.SelectedIndices.Count; i++)
+
+            //for (int i = 0; i < selectCount; i++)
             for (int i = 0; i < listView1.SelectedItems.Count; i++)
             {
                 selNdx = listView1.SelectedIndices[i];
@@ -1526,16 +1561,24 @@ namespace vcs_FileManager
             }
             else if (e.KeyCode == Keys.Delete)
             {
-                richTextBox2.Text += "你選擇了 : " + listView1.SelectedIndices.Count.ToString() + " 個檔案, 分別是\n";
-                for (int i = 0; i < listView1.SelectedIndices.Count; i++)
+                int selectCount = listView1.SelectedIndices.Count;
+                if (selectCount <= 0)  //總共選擇的個數
                 {
-                    richTextBox2.Text += listView1.SelectedItems[i].SubItems[2].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text + "\n";
+                    richTextBox1.Text += "未選擇要刪除的項目\n";
+                    return;
                 }
-                richTextBox2.Text += "刪除\n";
 
+                richTextBox2.Text += "你選擇了 : " + selectCount.ToString() + " 個檔案, 分別是\n";
+                for (int i = 0; i < selectCount; i++)
+                {
+                    string filename = listView1.SelectedItems[i].SubItems[2].Text + "\\" + listView1.SelectedItems[i].SubItems[0].Text;
+                    richTextBox2.Text += "刪除 : " + filename + "\n";
+                    System.IO.File.Delete(filename);
 
+                    int selectIndex = listView1.SelectedItems[i].Index;
+                    listView1.Items.RemoveAt(selectIndex);
+                }
             }
-
         }
 
         private void bt_add_dir_Click(object sender, EventArgs e)
@@ -1624,7 +1667,7 @@ namespace vcs_FileManager
 
             string[] good_pattern = new string[] {
                   "1111", "3333", "7777", "9999", "jessica", "airi", "julia"
-                , "jjjj", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "jjjj", "kana", "mai", "tia", "smr", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "gggg", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
@@ -1694,6 +1737,12 @@ namespace vcs_FileManager
                     //richTextBox1.Text += fileinfos[i].shortfilename + "\n";
                 }
             }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            
+
         }
     }
 }

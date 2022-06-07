@@ -34,5 +34,17 @@ namespace vcs_FileManager.Properties {
                 this["search_path"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string video_player_path {
+            get {
+                return ((string)(this["video_player_path"]));
+            }
+            set {
+                this["video_player_path"] = value;
+            }
+        }
     }
 }

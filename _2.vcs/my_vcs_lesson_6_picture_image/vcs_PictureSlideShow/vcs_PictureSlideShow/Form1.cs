@@ -12,11 +12,13 @@ namespace vcs_PictureSlideShow
 {
     public partial class Form1 : Form
     {
+        int no;    //成員變數no紀錄照片編號供所有程序共用
+
         public Form1()
         {
             InitializeComponent();
         }
-        int no;    //成員變數no紀錄照片編號供所有程序共用
+
         private void Form1_Load(object sender, EventArgs e)
         {
             no = 1; //預設照片編號為1
@@ -26,6 +28,7 @@ namespace vcs_PictureSlideShow
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             btnP.Enabled = false;   //設上一張鈕不能使用
         }
+
         //按下一張鈕時
         private void btnN_Click(object sender, EventArgs e)
         {
@@ -36,6 +39,7 @@ namespace vcs_PictureSlideShow
             pictureBox1.Image = new Bitmap("../../pic" + no.ToString() + ".jpg");
             pictureBox1.Size = new Size(250, 200);  //恢復成預設大小
         }
+
         //按上一張鈕時
         private void btnP_Click(object sender, EventArgs e)
         {
@@ -46,6 +50,7 @@ namespace vcs_PictureSlideShow
             pictureBox1.Image = new Bitmap("../../pic" + no.ToString() + ".jpg");
             pictureBox1.Size = new Size(250, 200);  //恢復成預設大小
         }
+
         //按縮小鈕時
         private void btnS_Click(object sender, EventArgs e)
         {
@@ -56,8 +61,11 @@ namespace vcs_PictureSlideShow
                 do     //時間間隔 < 0.1秒
                 {
                     Application.DoEvents(); //處理其他事件
-                } while ((DateTime.Now - now).TotalSeconds < 0.1);
+                }
+                while ((DateTime.Now - now).TotalSeconds < 0.1);
             }
         }
     }
 }
+
+
