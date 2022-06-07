@@ -466,7 +466,7 @@ namespace vcs_FileManager
             //一律轉小寫
             shortname = shortname.ToLower();
 
-            //richTextBox1.Text += "old = " + shortname + "\n";
+            //richTextBox1.Text += "old  = " + shortname + "\n";
 
             //先過濾掉一些字
             string[] remove_word = new string[] { "taxv.xyz_", "[javdb.com]", "[javdb.com]", "027_3xplanet_", "[Thz.la]"
@@ -480,7 +480,7 @@ namespace vcs_FileManager
                 , "QQQQ", "QQQQ", "Caribbeancom", "[HD]", "104DANDAN"
                 , "QQQQ", "jav4you.", "private", "52JAV.COM", "crv2000.com"
                 , "javidol.com", "Prestige", "[thzu.cc]", "wowg.", "18x78.com_"
-                , "(hibino)", "kpkp3.com", "QQQQ", "QQQQ", "QQQQ"
+                , "(hibino)", "kpkp3.com", "bbyxv.xyz", "aaxv.xyz", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
@@ -491,10 +491,13 @@ namespace vcs_FileManager
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "-", "%", "$", "(", ")"};  //最後再刪除標點符號
 
+            //重複刪除乾淨
             foreach (string r in remove_word)
             {
                 shortname = shortname.Replace(r.ToLower(), "").Trim();
             }
+
+            //richTextBox1.Text += "new 1 = " + shortname + "\n";
 
             //後面是7碼的
             string[] series7 = new string[] {
@@ -670,6 +673,7 @@ namespace vcs_FileManager
                 }
             }
 
+            //richTextBox1.Text += "new 2 = " + shortname + "\n";
             if (position < 0)
             {
                 foreach (string r in series4)   //後面是4碼的
@@ -684,6 +688,7 @@ namespace vcs_FileManager
                 }
             }
 
+            //richTextBox1.Text += "new 3 = " + shortname + "\n";
             if (position < 0)
             {
                 foreach (string r in series3)   //後面是3碼的
@@ -698,7 +703,9 @@ namespace vcs_FileManager
                 }
             }
 
-            //dv接4碼
+            //richTextBox1.Text += "new 4 = " + shortname + "\n";
+            /*
+            //dv接4碼, 有點問題, 會誤判......
             if (position < 0)
             {
                 string pattern = "dv";
@@ -707,81 +714,13 @@ namespace vcs_FileManager
                 {
                     len = pattern.Length;
                     shortname = shortname.Substring(position, len + 4);
-                }
-            }
-
-            //richTextBox1.Text += "new = " + shortname + "\n";
-
-            /*
-            //richTextBox1.Text += "sn1 : " + shortname + "\n";
-            if (shortname.Contains("sharesex") == true)
-            {
-                int len = shortname.Length;
-                if (len > 9)
-                {
-                    shortname = shortname.Substring(len - 9, 6);
-                    //richTextBox1.Text += "sn2 : " + shortname + "\n";
-                }
-            }
-            if (shortname.Contains("3xhen") == true)
-            {
-                int len = shortname.Length;
-                if (len > 9)
-                {
-                    shortname = shortname.Substring(len - 9, 6);
-                    //richTextBox1.Text += "sn2 : " + shortname + "\n";
-                }
-            }
-
-
-
-            string[] series5 = new string[] { "dldss", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"};
-            string[] series4 = new string[] { "sdnm", "ssis", "kire", "iptd", "jufe", "mkmp", "natr"
-                , "wanz", "mide", "cawd", "miaa", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"};
-            string[] series3 = new string[] { "abp", "jul", "jux", "ipx", "adn", "meyd", "midv"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"};
-
-
-            foreach (string r in series5)
-            {
-                if (shortname.Length > 8)
-                {
-                    shortname = shortname.Substring(0, 8);
-                }
-            }
-            foreach (string r in series4)
-            {
-                if (shortname.Length > 7)
-                {
-                    shortname = shortname.Substring(0, 7);
-                }
-            }
-            foreach (string r in series3)
-            {
-                if (shortname.Length > 6)
-                {
-                    shortname = shortname.Substring(0, 6);
+                    break;             
                 }
             }
             */
 
+            //richTextBox1.Text += "new =  " + shortname + "\n";
 
-            /*
-            //只取前10字
-            if (shortname.Length > 6)
-            {
-                shortname = shortname.Substring(0, 6);
-            }
-            */
-
-            //richTextBox1.Text += "sn4 : " + shortname + "\n";
             return shortname;
         }
 
@@ -1012,7 +951,7 @@ namespace vcs_FileManager
                 listView1.Items.Add(i1);
 
                 //設置ListView最後一行可見
-                listView1.Items[listView1.Items.Count - 1].EnsureVisible();
+                //listView1.Items[listView1.Items.Count - 1].EnsureVisible();
 
             }
 
@@ -1080,9 +1019,13 @@ namespace vcs_FileManager
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //從一個資料夾中撈出所有檔案 標準版
+            //從一個資料夾中撈出所有檔案 標準版 多層 標準版
 
-            string path = foldername;
+            if (listBox1.Items.Count == 0)
+            {
+                richTextBox2.Text += "未選擇資料夾\n";
+                return;
+            }
 
             //轉出一層
             fileinfos.Clear();
@@ -1092,64 +1035,67 @@ namespace vcs_FileManager
             total_size = 0;
             total_files = 0;
 
-            //只撈一層的檔案
-            total_size = 0;
-            total_files = 0;
-
-            string FolederName = path;
-            richTextBox1.Text += path + "\n\n";
-
-            if (System.IO.File.Exists(path) == true)
+            string path;
+            richTextBox2.Text += "listbox 共有 " + listBox1.Items.Count.ToString() + " 個項目\n";
+            for (int i = 0; i < listBox1.Items.Count; i++)
             {
-                // This path is a file
-                richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
-                ProcessFile(path);
-                richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
-            }
-            else if (Directory.Exists(path) == true)
-            {
-                // This path is a directory
-                //ProcessDirectory(path);
+                path = listBox1.Items[i].ToString();
 
-                try
+                richTextBox2.Text += "\n搜尋路徑" + path + "\n";
+
+                if (System.IO.File.Exists(path) == true)
                 {
-                    //richTextBox1.Text += targetDirectory + "\n\n";
-                    //DirectoryInfo di = new DirectoryInfo(targetDirectory);
-                    //richTextBox1.Text += di.Name + "\n\n";
+                    // This path is a file
+                    richTextBox1.Text += "XXXXXXXXXXXXXXX\n\n";
+                    ProcessFile(path);
+                    richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
+                }
+                else if (Directory.Exists(path) == true)
+                {
+                    // This path is a directory
+                    //ProcessDirectory(path);
 
-                    // Process the list of files found in the directory.
                     try
                     {
-                        string[] fileEntries = Directory.GetFiles(path);
-                        Array.Sort(fileEntries);
-                        foreach (string fileName in fileEntries)
+                        //richTextBox1.Text += targetDirectory + "\n\n";
+                        //DirectoryInfo di = new DirectoryInfo(targetDirectory);
+                        //richTextBox1.Text += di.Name + "\n\n";
+
+                        // Process the list of files found in the directory.
+                        try
                         {
-                            ProcessFile(fileName);
+                            string[] fileEntries = Directory.GetFiles(path);
+                            Array.Sort(fileEntries);
+                            foreach (string fileName in fileEntries)
+                            {
+                                ProcessFile(fileName);
+                            }
                         }
-                        //step = 0;
+                        catch (UnauthorizedAccessException ex)
+                        {
+                            richTextBox1.Text += ex.Message + "\n";
+                        }
                     }
-                    catch (UnauthorizedAccessException ex)
+                    catch (IOException ex)
                     {
-                        richTextBox1.Text += ex.Message + "\n";
+                        richTextBox1.Text += "IOException, " + ex.GetType().Name + "\n";
                     }
+
+                    richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
+
+                    show_file_info();
                 }
-                catch (IOException ex)
+                else
                 {
-                    richTextBox1.Text += "IOException, " + ex.GetType().Name + "\n";
+                    richTextBox1.Text += "非合法路徑或檔案a\n";
                 }
-
-                richTextBox1.Text += "\n資料夾 " + path + "\t檔案個數 : " + total_files.ToString() + "\t大小 : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
-
-                show_file_info();
-            }
-            else
-            {
-                richTextBox1.Text += "非合法路徑或檔案a\n";
             }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //從一個資料夾中撈出所有檔案 標準版
+
             if (listBox1.Items.Count == 0)
             {
                 richTextBox2.Text += "未選擇資料夾\n";
@@ -1228,8 +1174,24 @@ namespace vcs_FileManager
             int j;
             for (i = 0; i < len; i++)
             {
+                if (cb_compare4.Checked == true)    //僅影音檔案
+                {
+                    if ((fileinfos[i].filename.Contains(".zip") == true) || (fileinfos[i].filename.Contains(".rar") == true))
+                    {
+                        continue;
+                    }
+                }
+
                 for (j = i + 1; j < (len - 1); j++)
                 {
+                    if (cb_compare4.Checked == true)    //僅影音檔案
+                    {
+                        if ((fileinfos[j].filename.Contains(".zip") == true) || (fileinfos[j].filename.Contains(".rar") == true))
+                        {
+                            continue;
+                        }
+                    }
+
                     if (cb_compare0.Checked == true)    //比較真檔名
                     {
                         if (fileinfos[i].filename == fileinfos[j].filename)
@@ -1622,32 +1584,92 @@ namespace vcs_FileManager
             fileinfos_match.Clear();
 
             int i;
-            int j;
             for (i = 0; i < len; i++)
             {
 
                 if (fileinfos[i].filename.ToLower().Contains(tb_find.Text.ToLower()) == true)
                 {
                     fileinfos_match.Add(fileinfos[i]);
-                    //match_count++;
+                    match_count++;
+                }
+                if (cb_checkcount.Checked == true)
+                {
+                    skip_count = int.Parse(tb_count.Text);
+                    if (match_count > skip_count)
+                    {
+                        richTextBox1.Text += "滿 " + skip_count.ToString() + " 項, 提前結束\n";
+                        break;
+                    }
                 }
             }
 
             richTextBox1.Text += "show match files\n";
             show_MyFileInfo(fileinfos_match);
-
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
             //優優檔
+            if (fileinfos.Count == 0)
+                richTextBox1.Text += "無資料c\n";
+            else
+                richTextBox1.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料b\n";
 
+            int len = fileinfos.Count;
+            if (len < 2)
+                return;
+
+            match_count = 0;
+            fileinfos_match.Clear();
+
+            string[] good_pattern = new string[] {
+                  "1111", "3333", "7777", "9999", "jessica", "airi", "julia"
+                , "jjjj", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "gggg", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+            };
+
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                foreach (string ptn in good_pattern)
+                {
+                    if (fileinfos[i].filename.ToLower().Contains(ptn) == true)
+                    {
+                        fileinfos_match.Add(fileinfos[i]);
+                        match_count++;
+                        break;
+                    }
+                }
+                if (cb_checkcount.Checked == true)
+                {
+                    skip_count = int.Parse(tb_count.Text);
+                    if (match_count > skip_count)
+                    {
+                        richTextBox1.Text += "滿 " + skip_count.ToString() + " 項, 提前結束\n";
+                        break;
+                    }
+                }
+            }
+
+            richTextBox1.Text += "show match files\n";
+            show_MyFileInfo(fileinfos_match);
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
             /*
-            string longname = "FC2PPV-2589532-ゆき高畫質-S1新人未歩なな(未步奈奈).mp4";
+            string longname = @"D:\內視鏡影片\Capsule Endoscopy Animation - ANKON NaviCam [720p].mp4";
             string sn = get_shortname(longname);
             richTextBox1.Text += "short name : " + sn + "\n";
             return;
@@ -1663,7 +1685,6 @@ namespace vcs_FileManager
             if (len < 2)
                 return;
 
-
             int i;
             for (i = 0; i < len; i++)
             {
@@ -1673,9 +1694,7 @@ namespace vcs_FileManager
                     //richTextBox1.Text += fileinfos[i].shortfilename + "\n";
                 }
             }
-
-
         }
-
     }
 }
+

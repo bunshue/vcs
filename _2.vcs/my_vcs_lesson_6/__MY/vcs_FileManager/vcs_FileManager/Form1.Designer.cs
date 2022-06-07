@@ -48,6 +48,7 @@
             this.cb_compare0 = new System.Windows.Forms.CheckBox();
             this.cb_compare2 = new System.Windows.Forms.CheckBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.cb_compare4 = new System.Windows.Forms.CheckBox();
             this.cb_compare1 = new System.Windows.Forms.CheckBox();
             this.cb_compare3 = new System.Windows.Forms.CheckBox();
             this.listView1 = new System.Windows.Forms.ListView();
@@ -244,7 +245,7 @@
             // cb_compare0
             // 
             this.cb_compare0.AutoSize = true;
-            this.cb_compare0.Location = new System.Drawing.Point(20, 33);
+            this.cb_compare0.Location = new System.Drawing.Point(20, 20);
             this.cb_compare0.Name = "cb_compare0";
             this.cb_compare0.Size = new System.Drawing.Size(60, 16);
             this.cb_compare0.TabIndex = 0;
@@ -255,7 +256,7 @@
             // cb_compare2
             // 
             this.cb_compare2.AutoSize = true;
-            this.cb_compare2.Location = new System.Drawing.Point(20, 102);
+            this.cb_compare2.Location = new System.Drawing.Point(20, 60);
             this.cb_compare2.Name = "cb_compare2";
             this.cb_compare2.Size = new System.Drawing.Size(72, 16);
             this.cb_compare2.TabIndex = 1;
@@ -264,23 +265,36 @@
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.cb_compare4);
             this.groupBox3.Controls.Add(this.cb_compare1);
             this.groupBox3.Controls.Add(this.cb_compare3);
             this.groupBox3.Controls.Add(this.cb_compare2);
             this.groupBox3.Controls.Add(this.cb_compare0);
             this.groupBox3.Location = new System.Drawing.Point(118, 151);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(118, 164);
+            this.groupBox3.Size = new System.Drawing.Size(134, 130);
             this.groupBox3.TabIndex = 13;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "比較";
+            // 
+            // cb_compare4
+            // 
+            this.cb_compare4.AutoSize = true;
+            this.cb_compare4.Checked = true;
+            this.cb_compare4.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_compare4.Location = new System.Drawing.Point(20, 100);
+            this.cb_compare4.Name = "cb_compare4";
+            this.cb_compare4.Size = new System.Drawing.Size(84, 16);
+            this.cb_compare4.TabIndex = 4;
+            this.cb_compare4.Text = "僅影音檔案";
+            this.cb_compare4.UseVisualStyleBackColor = true;
             // 
             // cb_compare1
             // 
             this.cb_compare1.AutoSize = true;
             this.cb_compare1.Checked = true;
             this.cb_compare1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cb_compare1.Location = new System.Drawing.Point(20, 71);
+            this.cb_compare1.Location = new System.Drawing.Point(20, 40);
             this.cb_compare1.Name = "cb_compare1";
             this.cb_compare1.Size = new System.Drawing.Size(72, 16);
             this.cb_compare1.TabIndex = 3;
@@ -292,7 +306,7 @@
             // 
             this.cb_compare3.AutoSize = true;
             this.cb_compare3.Enabled = false;
-            this.cb_compare3.Location = new System.Drawing.Point(20, 136);
+            this.cb_compare3.Location = new System.Drawing.Point(20, 80);
             this.cb_compare3.Name = "cb_compare3";
             this.cb_compare3.Size = new System.Drawing.Size(72, 16);
             this.cb_compare3.TabIndex = 2;
@@ -386,7 +400,7 @@
             this.groupBox_file.Controls.Add(this.cb_filesize);
             this.groupBox_file.Controls.Add(this.tb_filesize);
             this.groupBox_file.Controls.Add(this.label2);
-            this.groupBox_file.Location = new System.Drawing.Point(251, 151);
+            this.groupBox_file.Location = new System.Drawing.Point(267, 151);
             this.groupBox_file.Name = "groupBox_file";
             this.groupBox_file.Size = new System.Drawing.Size(198, 98);
             this.groupBox_file.TabIndex = 48;
@@ -436,7 +450,7 @@
             this.tb_filesize.Name = "tb_filesize";
             this.tb_filesize.Size = new System.Drawing.Size(52, 30);
             this.tb_filesize.TabIndex = 17;
-            this.tb_filesize.Text = "1000";
+            this.tb_filesize.Text = "300";
             this.tb_filesize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label2
@@ -486,6 +500,7 @@
             this.button7.TabIndex = 61;
             this.button7.Text = "優優檔";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // bt_start_files2
             // 
@@ -597,6 +612,7 @@
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button bt_start_files2;
         private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.CheckBox cb_compare4;
     }
 }
 

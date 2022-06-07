@@ -37,10 +37,10 @@ namespace vcs_MouseCursor4
         private void button1_Click(object sender, EventArgs e)
         {
             //改變本表單中的滑鼠游標
-            richTextBox1.Text += "1111在窗体中改变鼠标样式\n";
+            richTextBox1.Text += "1111在窗體中改變鼠標樣式\n";
 
             Cursor myCursor = new Cursor(Cursor.Current.Handle);
-            IntPtr colorCursorHandle = LoadCursorFromFile("..//..//image/special.ani");//鼠标图标路径
+            IntPtr colorCursorHandle = LoadCursorFromFile("..//..//image/special.ani");//鼠標圖標路徑
             myCursor.GetType().InvokeMember("handle", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetField, null, myCursor, new object[] { colorCursorHandle });
             this.Cursor = myCursor;
         }
@@ -48,7 +48,7 @@ namespace vcs_MouseCursor4
         private void button2_Click(object sender, EventArgs e)
         {
             //恢復
-            richTextBox1.Text += "2222在窗体中还原鼠标样式\n";
+            richTextBox1.Text += "2222在窗體中還原鼠標樣式\n";
             this.Cursor = Cursors.Default;
         }
 
@@ -93,4 +93,3 @@ namespace vcs_MouseCursor4
         }
     }
 }
-

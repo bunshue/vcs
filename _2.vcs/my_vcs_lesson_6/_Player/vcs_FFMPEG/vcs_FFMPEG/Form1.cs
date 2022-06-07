@@ -28,6 +28,7 @@ namespace vcs_FFMPEG
         int mp3_position = 0;
         int mp3_length = 0;
         int mp3_volume = 50;
+        PictureBox pbx = new PictureBox();
 
         public Form1()
         {
@@ -56,10 +57,6 @@ namespace vcs_FFMPEG
             this.Controls.Add(this.axWindowsMediaPlayer1);
             axWindowsMediaPlayer1.Visible = false;
 
-            bt_open_file_Click(sender, e);
-
-
-            PictureBox pbx = new PictureBox();
             //pbx.Parent = this;  //相當於 this.Controls.Add(pbx)
             //pbx.SizeMode = PictureBoxSizeMode.Zoom;
             //pbx.Image = bitmap1;
@@ -67,25 +64,36 @@ namespace vcs_FFMPEG
             pbx.Size = new Size(693, 60);
             pbx.Location = new Point(12, 12);
 
+            pbx.MouseHover += new EventHandler(pbx_MouseHover);
             pbx.MouseDown += new MouseEventHandler(pbx_MouseDown);
             pbx.MouseMove += new MouseEventHandler(pbx_MouseMove);
             pbx.MouseUp += new MouseEventHandler(pbx_MouseUp);
             pbx.Paint += new PaintEventHandler(pbx_Paint);
 
             this.Controls.Add(pbx);
+
+            bt_open_file_Click(sender, e);
         }
 
         ToolTip toolTip1 = new ToolTip();
 
         // The current value.
-        private int StartValue = 234;
-        private int StopValue = 567;
+        int PbxStartValue = 234;
+        int PbxStopValue = 567;
 
-        int move_value = 0; //1:StartValue, 2: StopValue
+        int move_value = 0; //1:PbxStartValue, 2: PbxStopValue
 
         // The minimum and maximum allowed values.
-        private const int MinimumValue = 0;
-        private const int MaximumValue = 1000;
+        int PbxMinimumValue = 0;
+        int PbxMaximumValue = 1000;
+
+        private void pbx_MouseHover(object sender, EventArgs e)
+        {
+            //TBD
+            //int value = XtoValue(sender, e.X);
+
+
+        }
 
         // Move the needle to this position.
         private bool flag_pbx_mouse_down = false;
@@ -93,20 +101,20 @@ namespace vcs_FFMPEG
         {
             int value = XtoValue(sender, e.X);
 
-            int abs1 = Math.Abs(value - StartValue);
-            int abs2 = Math.Abs(value - StopValue);
+            int abs1 = Math.Abs(value - PbxStartValue);
+            int abs2 = Math.Abs(value - PbxStopValue);
 
-            if ((abs1 < abs2) && (abs1 < 10))
+            if ((abs1 < abs2) && (abs1 < 30))
             {
-                //選中 StartValue
+                //選中 PbxStartValue
                 flag_pbx_mouse_down = true;
                 SetValue(sender, XtoValue(sender, e.X));
                 move_value = 1;
             }
 
-            if ((abs1 > abs2) && (abs2 < 10))
+            if ((abs1 > abs2) && (abs2 < 30))
             {
-                //選中 StopValue
+                //選中 PbxStopValue
                 flag_pbx_mouse_down = true;
                 SetValue(sender, XtoValue(sender, e.X));
                 move_value = 2;
@@ -137,8 +145,8 @@ namespace vcs_FFMPEG
         private void pbx_Paint(object sender, PaintEventArgs e)
         {
             // Calculate the needle's X coordinate.
-            int x1 = ValueToX(sender, StartValue);
-            int x2 = ValueToX(sender, StopValue);
+            int x1 = ValueToX(sender, PbxStartValue);
+            int x2 = ValueToX(sender, PbxStopValue);
 
             //case 1
             using (Pen pen = new Pen(Color.Lime, 2))
@@ -169,13 +177,13 @@ namespace vcs_FFMPEG
         // Convert an X coordinate to a value.
         private int XtoValue(object sender, int x)
         {
-            return MinimumValue + (MaximumValue - MinimumValue) * x / (int)(((PictureBox)sender).ClientSize.Width - 1);
+            return PbxMinimumValue + (PbxMaximumValue - PbxMinimumValue) * x / (int)(((PictureBox)sender).ClientSize.Width - 1);
         }
 
         // Convert value to an X coordinate.
         private int ValueToX(object sender, int value)
         {
-            return (((PictureBox)sender).ClientSize.Width - 1) * (value - MinimumValue) / (int)(MaximumValue - MinimumValue);
+            return (((PictureBox)sender).ClientSize.Width - 1) * (value - PbxMinimumValue) / (int)(PbxMaximumValue - PbxMinimumValue);
         }
 
         // Set the slider's value. If the value has changed,
@@ -183,26 +191,26 @@ namespace vcs_FFMPEG
         private void SetValue(object sender, int value)
         {
             // Make sure the new value is within bounds.
-            if (value < MinimumValue)
+            if (value < PbxMinimumValue)
             {
-                value = MinimumValue;
+                value = PbxMinimumValue;
             }
-            if (value > MaximumValue)
+            if (value > PbxMaximumValue)
             {
-                value = MaximumValue;
+                value = PbxMaximumValue;
             }
 
             // See if the value has changed.
             if (move_value == 1)
             {
-                if (StartValue == value)
+                if (PbxStartValue == value)
                 {
                     return;
                 }
             }
             else if (move_value == 2)
             {
-                if (StopValue == value)
+                if (PbxStopValue == value)
                 {
                     return;
                 }
@@ -210,9 +218,9 @@ namespace vcs_FFMPEG
 
             // Save the new value.
             if (move_value == 1)
-                StartValue = value;
+                PbxStartValue = value;
             else if (move_value == 2)
-                StopValue = value;
+                PbxStopValue = value;
 
             // Redraw to show the new value.
             ((PictureBox)sender).Refresh();
@@ -222,15 +230,15 @@ namespace vcs_FFMPEG
             int tip_y = 0;
             if (move_value == 1)
             {
-                tip_x = ((PictureBox)sender).Left + (int)ValueToX(sender, StartValue);
+                tip_x = ((PictureBox)sender).Left + (int)ValueToX(sender, PbxStartValue);
                 tip_y = ((PictureBox)sender).Top;
-                toolTip1.Show(StartValue.ToString(), this, tip_x, tip_y, 3000);
+                toolTip1.Show(PbxStartValue.ToString(), this, tip_x, tip_y, 3000);
             }
             else if (move_value == 2)
             {
-                tip_x = ((PictureBox)sender).Left + (int)ValueToX(sender, StopValue);
+                tip_x = ((PictureBox)sender).Left + (int)ValueToX(sender, PbxStopValue);
                 tip_y = ((PictureBox)sender).Top;
-                toolTip1.Show(StopValue.ToString(), this, tip_x, tip_y, 3000);
+                toolTip1.Show(PbxStopValue.ToString(), this, tip_x, tip_y, 3000);
             }
         }
 
@@ -289,6 +297,11 @@ namespace vcs_FFMPEG
             trackBar_sp.Maximum = total_length;
             trackBar_sp.Minimum = 0;
             trackBar_sp.Value = total_length;
+
+            PbxMinimumValue = 0;
+            PbxMaximumValue = total_length;
+            PbxStartValue = 0;
+            PbxStopValue = total_length;
 
             axWindowsMediaPlayer1.URL = filename;
 
