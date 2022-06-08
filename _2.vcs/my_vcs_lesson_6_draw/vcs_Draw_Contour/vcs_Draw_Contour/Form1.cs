@@ -43,8 +43,7 @@ namespace vcs_Draw_Contour
         void draw_contour(int cx, int cy)
         {
             int i, j;
-            //                    R   C
-            //int[,] gray = new int[ROW, COLUMN];    //Row = 19, Column = 8
+            //                                  R   C
             double[,] brightness = new double[ROW, COLUMN];    //Row = 19, Column = 8
             int[,] brightness2 = new int[ROW, COLUMN];    //Row = 19, Column = 8
 
@@ -57,18 +56,13 @@ namespace vcs_Draw_Contour
             double min = 100;
             double vv = 0;
 
-            richTextBox1.Text += "stepx = " + stepx.ToString() + "\n";
-            richTextBox1.Text += "stepy = " + stepy.ToString() + "\n";
-
+            //richTextBox1.Text += "stepx = " + stepx.ToString() + "\tstepy = " + stepy.ToString() + "\n";
 
             for (j = 0; j < ROW; j++)
             {
                 for (i = 0; i < COLUMN; i++)
                 {
-                    //gray[j, i] = (i - COLUMN / 2) * 10 + (j - ROW / 2) * 10;
-
-                    //vv = cosd((i - COLUMN / 2) * stepx) + cosd((j - ROW / 2) * stepy);
-                    vv = cosd((i - cx) * 1) + cosd((j - cy) * 1);
+                    vv = F1(i - cx, j - cy);
 
                     brightness[j, i] = vv;
                     if (vv > max)
@@ -79,14 +73,13 @@ namespace vcs_Draw_Contour
                     //對應到0~255
                     brightness2[j, i] = (int)((vv + 2.0) * 64);
                     if (brightness2[j, i] == 256)
+                    {
                         brightness2[j, i] = 255;
+                    }
                     brightness2[j, i] = (brightness2[j, i] / 5) * 5;
                 }
             }
-
-            richTextBox1.Text += "max = " + max.ToString() + "\n";
-            richTextBox1.Text += "min = " + min.ToString() + "\n";
-
+            //richTextBox1.Text += "max = " + max.ToString() + "\tmin = " + min.ToString() + "\n";
 
             /*
             richTextBox1.Text += "print value\n";
@@ -123,7 +116,11 @@ namespace vcs_Draw_Contour
             {
                 for (i = 0; i < COLUMN; i++)
                 {
-                    //bitmap1.SetPixel(i, j, Color.FromArgb(255, (byte)(brightness[j, i] * 100), (byte)(brightness[j, i] * 100), (byte)(brightness[j, i] * 100)));
+                    if (((i % 100) == 0) && ((j % 50) == 0))
+                    {
+                        //bitmap1.SetPixel(i, j, Color.Red);
+                        brightness2[j, i] = 255;
+                    }
                     bitmap1.SetPixel(i, j, Color.FromArgb(255, (byte)(brightness2[j, i]), (byte)(brightness2[j, i]), (byte)(brightness2[j, i])));
                 }
             }
@@ -142,9 +139,8 @@ namespace vcs_Draw_Contour
 
             pictureBox1.Image = bitmap1;
             //pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-
-
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
             draw_contour(cx, cy);
@@ -163,5 +159,14 @@ namespace vcs_Draw_Contour
                 cy = dd;
             draw_contour(cx, cy);
         }
+
+        private double F1(int x, int y)
+        {
+            return cosd(x) + cosd(y);   //z=cox(x) + cos(y)
+        }
     }
 }
+
+
+
+

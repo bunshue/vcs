@@ -42,7 +42,7 @@ namespace vcs_PictureSlideShow7
 
             p = new Pen(Color.Red, 10);     // 設定畫筆為紅色、粗細為 10 點。
             sb = new SolidBrush(Color.Blue);
-            g.Clear(Color.White);
+            g.Clear(Color.Black);
 
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
@@ -98,13 +98,38 @@ namespace vcs_PictureSlideShow7
             int len = imageList.Count;
             //richTextBox1.Text += "目前共有 " + len.ToString() + " 張圖片\n";
 
+            Random r = new Random();
+            index = r.Next(len);
+
             Image image = Image.FromFile(imageList[index]); // 產生一個Image物件
             int w = image.Width;
             int h = image.Height;
 
-            int x = (1920 - w) / 2;
-            int y = (1080 - h) / 2;
-            g.DrawImage(image, x, y);
+            //w = w * 3 / 2;
+            //h = h * 3 / 2;
+
+            int i;
+            for (i = 1; i <= 10; i++)
+            {
+                if ((w / i < 1920 * 7 / 10) && (h / i < 1080 * 7 / 10))
+                {
+                    break;
+
+                }
+
+            }
+            w = w / i;
+            h = h / i;
+            //Random r = new Random();
+            //w += r.Next(100);
+            //h += r.Next(100);
+
+            int x = (1920 - w) / 2 + r.Next(-200, 200);
+            int y = (1080 - h) / 2 + r.Next(-200, 200);
+            g.DrawImage(image, x, y, w, h);
+            g.DrawRectangle(new Pen(Color.White, 10), x, y, w, h);
+
+            //g.DrawImage(image, 10, 50, image.Width, image.Height);
 
             this.BackgroundImage = bitmap1;
             this.Invalidate();

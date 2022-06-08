@@ -42,7 +42,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(649, 372);
+            this.ClientSize = new System.Drawing.Size(729, 499);
             this.DoubleBuffered = true;
             this.Name = "Form1";
             this.Text = "畫曲線 DrawCurve 跳動";

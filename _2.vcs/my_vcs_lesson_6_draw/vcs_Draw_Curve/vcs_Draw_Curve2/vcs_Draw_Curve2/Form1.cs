@@ -36,8 +36,13 @@ namespace vcs_Draw_Curve2
         private void timer1_Tick(object sender, EventArgs e)
         {
             Tension = Tension + Tension_D; // 調整張力
-            if (Tension >= 2 || Tension <= -1) Tension_D = -Tension_D;
+            if (Tension >= 2 || Tension <= -1)
+            {
+                Tension_D = -Tension_D;
+            }
             this.Invalidate();
         }
     }
 }
+
+

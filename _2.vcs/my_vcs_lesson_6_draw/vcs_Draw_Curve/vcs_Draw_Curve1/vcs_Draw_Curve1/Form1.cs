@@ -20,7 +20,6 @@ namespace vcs_Draw_Curve1
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            Tension = trackBar1.Value * 0.1f;
             this.Text = "畫曲線  DrawCurve： 張力 = " + Tension.ToString();
 
             int Cx = 100;  // 基準點
@@ -37,12 +36,10 @@ namespace vcs_Draw_Curve1
             e.Graphics.DrawCurve(Pens.Black, pt, Tension);  // 曲線的繪出
 
             for (int i = 0; i < pt.Length; i++) // 控制點的繪出
+            {
                 e.Graphics.DrawEllipse(Pens.Black, pt[i].X - 2, pt[i].Y - 2, 4, 4);
+            }
 
-
-
-
-            Tension = trackBar1.Value * 0.1f;
             this.Text = "畫封閉的曲線  DrawClosedCurve： 張力 = " + Tension.ToString();
             //int Cx = 300;  // 基準點
             //int Cy = 200;
@@ -60,7 +57,9 @@ namespace vcs_Draw_Curve1
             e.Graphics.DrawClosedCurve(Pens.Black, pt, Tension, System.Drawing.Drawing2D.FillMode.Alternate);  // 曲線的繪出
 
             for (int i = 0; i < pt.Length; i++) // 控制點的繪出
+            {
                 e.Graphics.DrawEllipse(Pens.Black, pt[i].X - 2, pt[i].Y - 2, 4, 4);
+            }
         }
 
         private void Form1_Resize(object sender, EventArgs e)
@@ -68,12 +67,20 @@ namespace vcs_Draw_Curve1
             this.Invalidate();
         }
 
-        private void trackBar1_Scroll(object sender, EventArgs e)
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            Tension = trackBar1.Value * 0.1f;
+
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Tension += 0.1f;
+            if (Tension > 1.0)
+            {
+                Tension = 0;
+            }
             this.Text = "畫曲線  DrawCurve： 張力 = " + Tension.ToString();
             this.Invalidate();
         }
-
     }
 }

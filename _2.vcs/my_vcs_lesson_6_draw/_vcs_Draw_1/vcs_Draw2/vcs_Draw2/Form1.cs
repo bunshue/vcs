@@ -17,7 +17,7 @@ namespace vcs_Draw2
     {
         Graphics g;
         Pen p;
-        SolidBrush sb;
+        //SolidBrush sb;
         Bitmap bitmap1;
 
         public Form1()
