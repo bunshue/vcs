@@ -66,9 +66,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 283);
+            this.richTextBox1.Location = new System.Drawing.Point(10, 300);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(924, 206);
+            this.richTextBox1.Size = new System.Drawing.Size(1000, 200);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -76,7 +76,7 @@
             // 
             this.bt_open_file.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_open_file.BackgroundImage")));
             this.bt_open_file.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_open_file.Location = new System.Drawing.Point(26, 204);
+            this.bt_open_file.Location = new System.Drawing.Point(249, 179);
             this.bt_open_file.Name = "bt_open_file";
             this.bt_open_file.Size = new System.Drawing.Size(64, 64);
             this.bt_open_file.TabIndex = 45;
@@ -87,7 +87,7 @@
             // 
             this.bt_save_file.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_save_file.BackgroundImage")));
             this.bt_save_file.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_save_file.Location = new System.Drawing.Point(107, 204);
+            this.bt_save_file.Location = new System.Drawing.Point(330, 179);
             this.bt_save_file.Name = "bt_save_file";
             this.bt_save_file.Size = new System.Drawing.Size(64, 64);
             this.bt_save_file.TabIndex = 46;
@@ -98,7 +98,7 @@
             // 
             this.bt_play_pause.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_play_pause.BackgroundImage")));
             this.bt_play_pause.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_play_pause.Location = new System.Drawing.Point(192, 204);
+            this.bt_play_pause.Location = new System.Drawing.Point(415, 179);
             this.bt_play_pause.Name = "bt_play_pause";
             this.bt_play_pause.Size = new System.Drawing.Size(64, 64);
             this.bt_play_pause.TabIndex = 47;
@@ -109,7 +109,7 @@
             // 
             this.bt_stop.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_stop.BackgroundImage")));
             this.bt_stop.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_stop.Location = new System.Drawing.Point(360, 204);
+            this.bt_stop.Location = new System.Drawing.Point(583, 179);
             this.bt_stop.Name = "bt_stop";
             this.bt_stop.Size = new System.Drawing.Size(64, 64);
             this.bt_stop.TabIndex = 48;
@@ -120,7 +120,7 @@
             // 
             this.lb_st.AutoSize = true;
             this.lb_st.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_st.Location = new System.Drawing.Point(711, 35);
+            this.lb_st.Location = new System.Drawing.Point(10, 185);
             this.lb_st.Name = "lb_st";
             this.lb_st.Size = new System.Drawing.Size(58, 21);
             this.lb_st.TabIndex = 49;
@@ -130,7 +130,7 @@
             // 
             this.lb_sp.AutoSize = true;
             this.lb_sp.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_sp.Location = new System.Drawing.Point(711, 66);
+            this.lb_sp.Location = new System.Drawing.Point(10, 220);
             this.lb_sp.Name = "lb_sp";
             this.lb_sp.Size = new System.Drawing.Size(58, 21);
             this.lb_sp.TabIndex = 50;
@@ -140,7 +140,7 @@
             // 
             this.lb_total.AutoSize = true;
             this.lb_total.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_total.Location = new System.Drawing.Point(711, 6);
+            this.lb_total.Location = new System.Drawing.Point(10, 150);
             this.lb_total.Name = "lb_total";
             this.lb_total.Size = new System.Drawing.Size(58, 21);
             this.lb_total.TabIndex = 51;
@@ -150,7 +150,7 @@
             // 
             this.lb_cut.AutoSize = true;
             this.lb_cut.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_cut.Location = new System.Drawing.Point(711, 99);
+            this.lb_cut.Location = new System.Drawing.Point(10, 255);
             this.lb_cut.Name = "lb_cut";
             this.lb_cut.Size = new System.Drawing.Size(58, 21);
             this.lb_cut.TabIndex = 52;
@@ -211,7 +211,7 @@
             this.groupBox1.Controls.Add(this.bt_ffmpeg1);
             this.groupBox1.Controls.Add(this.bt_ffmpeg2);
             this.groupBox1.Controls.Add(this.bt_ffmpeg0);
-            this.groupBox1.Location = new System.Drawing.Point(771, 495);
+            this.groupBox1.Location = new System.Drawing.Point(580, 500);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(165, 167);
             this.groupBox1.TabIndex = 58;
@@ -260,9 +260,9 @@
             this.groupBox2.Controls.Add(this.button6);
             this.groupBox2.Controls.Add(this.button8);
             this.groupBox2.Controls.Add(this.button7);
-            this.groupBox2.Location = new System.Drawing.Point(12, 509);
+            this.groupBox2.Location = new System.Drawing.Point(10, 500);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(551, 126);
+            this.groupBox2.Size = new System.Drawing.Size(550, 120);
             this.groupBox2.TabIndex = 59;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "new";
@@ -327,17 +327,17 @@
             // tb_filename
             // 
             this.tb_filename.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_filename.Location = new System.Drawing.Point(12, 134);
+            this.tb_filename.Location = new System.Drawing.Point(10, 10);
             this.tb_filename.Multiline = true;
             this.tb_filename.Name = "tb_filename";
-            this.tb_filename.Size = new System.Drawing.Size(924, 61);
+            this.tb_filename.Size = new System.Drawing.Size(1000, 60);
             this.tb_filename.TabIndex = 61;
             // 
             // lb_time
             // 
             this.lb_time.AutoSize = true;
             this.lb_time.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_time.Location = new System.Drawing.Point(273, 223);
+            this.lb_time.Location = new System.Drawing.Point(496, 198);
             this.lb_time.Name = "lb_time";
             this.lb_time.Size = new System.Drawing.Size(58, 21);
             this.lb_time.TabIndex = 62;
@@ -353,7 +353,7 @@
             // 
             this.bt_plus.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_plus.BackgroundImage")));
             this.bt_plus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_plus.Location = new System.Drawing.Point(442, 199);
+            this.bt_plus.Location = new System.Drawing.Point(665, 174);
             this.bt_plus.Name = "bt_plus";
             this.bt_plus.Size = new System.Drawing.Size(40, 40);
             this.bt_plus.TabIndex = 63;
@@ -364,7 +364,7 @@
             // 
             this.bt_minus.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_minus.BackgroundImage")));
             this.bt_minus.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_minus.Location = new System.Drawing.Point(442, 241);
+            this.bt_minus.Location = new System.Drawing.Point(665, 216);
             this.bt_minus.Name = "bt_minus";
             this.bt_minus.Size = new System.Drawing.Size(40, 40);
             this.bt_minus.TabIndex = 64;
@@ -375,7 +375,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(948, 666);
+            this.ClientSize = new System.Drawing.Size(1019, 681);
             this.Controls.Add(this.bt_minus);
             this.Controls.Add(this.bt_plus);
             this.Controls.Add(this.lb_time);
@@ -393,7 +393,7 @@
             this.Controls.Add(this.bt_open_file);
             this.Controls.Add(this.richTextBox1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "FFMEPG";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);

@@ -359,6 +359,7 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(160, 70);
             this.button17.TabIndex = 46;
+            this.button17.Text = "獲取計算機磁盤空間";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 

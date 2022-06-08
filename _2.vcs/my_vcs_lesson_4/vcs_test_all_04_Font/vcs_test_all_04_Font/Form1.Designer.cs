@@ -66,8 +66,9 @@
             this.label6 = new System.Windows.Forms.Label();
             this.button13 = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.button14 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -486,15 +487,6 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "選擇並顯示字型";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(6, 57);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(390, 612);
-            this.pictureBox1.TabIndex = 1;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
-            // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
@@ -504,11 +496,32 @@
             this.comboBox1.TabIndex = 2;
             this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(6, 57);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(390, 612);
+            this.pictureBox1.TabIndex = 1;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
+            // 
+            // button14
+            // 
+            this.button14.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button14.Location = new System.Drawing.Point(218, 547);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(200, 40);
+            this.button14.TabIndex = 56;
+            this.button14.Text = "搜尋本機字型";
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1747, 699);
+            this.Controls.Add(this.button14);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.button13);
             this.Controls.Add(this.groupBox3);
@@ -578,6 +591,7 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.Button button14;
     }
 }
 

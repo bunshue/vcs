@@ -342,6 +342,16 @@ namespace vcs_Mix05
         private void button4_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //獲取屏幕的分辨率
+            //獲取屏幕的分辨率，也就是顯示器屏幕的大小。
+            int W = SystemInformation.PrimaryMonitorSize.Width;
+            int H = SystemInformation.PrimaryMonitorSize.Height;
+
+            richTextBox1.Text += "W = " + W.ToString() + " H = " + H.ToString() + "\n";
+
+            richTextBox1.Text += "取得桌面大小\n";
+            richTextBox1.Text += "桌面寬度 : \t" + Screen.PrimaryScreen.WorkingArea.Width.ToString() + "\n";
+            richTextBox1.Text += "桌面高度 : \t" + Screen.PrimaryScreen.WorkingArea.Height.ToString() + "\n";
         }
 
         //class test ST
@@ -1070,23 +1080,11 @@ namespace vcs_Mix05
         private void button24_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //獲取系統字體
-            InstalledFontCollection fc = new InstalledFontCollection();
-            foreach (FontFamily font in fc.Families)
-            {
-                richTextBox1.Text += "get font : " + font.Name + "\n";
-            }
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //獲取系統預定義顏色
-            Array colors = System.Enum.GetValues(typeof(KnownColor));
-            foreach (object colorName in colors)
-            {
-                richTextBox1.Text += "get color : " + colorName.ToString() + "\n";
-            }
         }
 
         private void button26_Click(object sender, EventArgs e)

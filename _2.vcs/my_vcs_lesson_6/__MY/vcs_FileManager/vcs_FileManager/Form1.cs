@@ -190,19 +190,16 @@ namespace vcs_FileManager
             dx = 100+10;
             dy = 60+10;
 
-            //button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button4.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button5.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-
-            button6.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button7.Location = new Point(x_st + dx *0, y_st + dy * 6);
-            button8.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button9.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            //button10.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            //button11.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
             x_st = 420;
             y_st = 12;
@@ -1048,6 +1045,11 @@ namespace vcs_FileManager
 
         }
 
+        private void button0_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             //從一個資料夾中撈出所有檔案 標準版 多層 標準版
@@ -1666,17 +1668,21 @@ namespace vcs_FileManager
             fileinfos_match.Clear();
 
             string[] good_pattern = new string[] {
-                  "1111", "3333", "7777", "9999", "jessica", "airi", "julia"
-                , "jjjj", "kana", "mai", "tia", "smr", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "gggg", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                  "asami", "yuna", "kaede", "hayashi", "julia", "jjjj", "chitose"    //A class
+                , "QQQQ", "QQQQ", "jessica", "airi", "QQQQ", "QQQQ", "QQQQ"
+                , "smr", "yama", "maria", "akari", "maron", "ryo", "QQQQ"
+                , "mai", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "suzu", "yuri", "sakura", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "1111", "3333", "7777", "9999", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "kana", "tia", "momo", "yui", "QQQQ", "QQQQ", "QQQQ"    //B class
+                , "ayaka", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "gggg", "debut", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"    //new tmp
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
@@ -1744,6 +1750,16 @@ namespace vcs_FileManager
             
 
         }
+
+        private void bt_setup_Click(object sender, EventArgs e)
+        {
+            Form_Setup frm = new Form_Setup();    //實體化 Form_Setup 視窗物件
+            frm.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
+            frm.ShowDialog();   //顯示 frm 視窗
+
+            update_default_setting();
+        }
+
     }
 }
 

@@ -824,8 +824,17 @@ namespace vcs_ColorMap
 
             }
             pictureBox1.Image = bitmap1;
+        }
 
-
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //獲取系統預定義顏色
+            Array colors = System.Enum.GetValues(typeof(KnownColor));
+            foreach (object colorName in colors)
+            {
+                richTextBox1.Text += "get color : " + colorName.ToString() + "\n";
+            }
         }
     }
 }
+

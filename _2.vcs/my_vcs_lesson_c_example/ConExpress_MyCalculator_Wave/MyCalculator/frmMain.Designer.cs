@@ -3,14 +3,14 @@
     partial class frmMain
     {
         /// <summary>
-        /// 必需的设计器变量。
+        /// 必需的設計器變量。
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// 清理所有正在使用的资源。
+        /// 清理所有正在使用的資源。
         /// </summary>
-        /// <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        /// <param name="disposing">如果應釋放托管資源，為 true；否則為 false。</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,11 +20,11 @@
             base.Dispose(disposing);
         }
 
-        #region Windows 窗体设计器生成的代码
+        #region Windows 窗體設計器生成的代碼
 
         /// <summary>
-        /// 设计器支持所需的方法 - 不要
-        /// 使用代码编辑器修改此方法的内容。
+        /// 設計器支持所需的方法 - 不要
+        /// 使用代碼編輯器修改此方法的內容。
         /// </summary>
         private void InitializeComponent()
         {
@@ -81,7 +81,7 @@
             this.rtbInput.Size = new System.Drawing.Size(346, 128);
             this.rtbInput.TabIndex = 0;
             this.rtbInput.Text = "";
-            this.toolTip1.SetToolTip(this.rtbInput, "可输入多行进行计算,也可选择部分表达式计算\r\n未选择时计算输入的全部表达式");
+            this.toolTip1.SetToolTip(this.rtbInput, "可輸入多行進行計算,也可選擇部分表達式計算\r\n未選擇時計算輸入的全部表達式");
             this.rtbInput.KeyUp += new System.Windows.Forms.KeyEventHandler(this.rtbInput_KeyUp);
             // 
             // tabControl1
@@ -105,8 +105,8 @@
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage1.Size = new System.Drawing.Size(474, 303);
             this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "计算表达式";
-            this.toolTip1.SetToolTip(this.tabPage1, "输入表达式和查看计算结果");
+            this.tabPage1.Text = "計算表達式";
+            this.toolTip1.SetToolTip(this.tabPage1, "輸入表達式和查看計算結果");
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // splitContainer3
@@ -147,7 +147,7 @@
             this.trvOperateToken.ShowNodeToolTips = true;
             this.trvOperateToken.Size = new System.Drawing.Size(106, 277);
             this.trvOperateToken.TabIndex = 0;
-            this.toolTip1.SetToolTip(this.trvOperateToken, "双击操作符即可在当前输入位置插入选择的操作符");
+            this.toolTip1.SetToolTip(this.trvOperateToken, "雙擊操作符即可在當前輸入位置插入選擇的操作符");
             this.trvOperateToken.NodeMouseDoubleClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.trvOperateToken_NodeMouseDoubleClick);
             // 
             // splitContainer1
@@ -180,7 +180,7 @@
             this.groupBox1.Size = new System.Drawing.Size(352, 148);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "输入表达式";
+            this.groupBox1.Text = "輸入表達式";
             // 
             // groupBox2
             // 
@@ -191,7 +191,7 @@
             this.groupBox2.Size = new System.Drawing.Size(352, 145);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "计算结果";
+            this.groupBox2.Text = "計算結果";
             // 
             // rtbOutput
             // 
@@ -201,7 +201,7 @@
             this.rtbOutput.Size = new System.Drawing.Size(346, 125);
             this.rtbOutput.TabIndex = 0;
             this.rtbOutput.Text = "";
-            this.toolTip1.SetToolTip(this.rtbOutput, "显示计算结果，多行计算时分行显示");
+            this.toolTip1.SetToolTip(this.rtbOutput, "顯示計算結果，多行計算時分行顯示");
             // 
             // tabPage2
             // 
@@ -211,8 +211,8 @@
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
             this.tabPage2.Size = new System.Drawing.Size(474, 303);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "语法树分析";
-            this.toolTip1.SetToolTip(this.tabPage2, "查看表达式的语法树分析");
+            this.tabPage2.Text = "語法樹分析";
+            this.toolTip1.SetToolTip(this.tabPage2, "查看表達式的語法樹分析");
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
             // splitContainer2
@@ -244,7 +244,7 @@
             this.groupBox3.Size = new System.Drawing.Size(265, 297);
             this.groupBox3.TabIndex = 0;
             this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "语法树";
+            this.groupBox3.Text = "語法樹";
             // 
             // trvSyntaxTree
             // 
@@ -253,7 +253,7 @@
             this.trvSyntaxTree.Name = "trvSyntaxTree";
             this.trvSyntaxTree.Size = new System.Drawing.Size(259, 277);
             this.trvSyntaxTree.TabIndex = 0;
-            this.toolTip1.SetToolTip(this.trvSyntaxTree, "表达式的语法树分析，选择节点后在右边显示节点属性");
+            this.toolTip1.SetToolTip(this.trvSyntaxTree, "表達式的語法樹分析，選擇節點后在右邊顯示節點屬性");
             this.trvSyntaxTree.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.trvSyntaxTree_AfterSelect);
             // 
             // groupBox4
@@ -265,7 +265,7 @@
             this.groupBox4.Size = new System.Drawing.Size(199, 297);
             this.groupBox4.TabIndex = 1;
             this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "节点属性";
+            this.groupBox4.Text = "節點屬性";
             // 
             // pgToken
             // 
@@ -274,7 +274,7 @@
             this.pgToken.Name = "pgToken";
             this.pgToken.Size = new System.Drawing.Size(193, 277);
             this.pgToken.TabIndex = 0;
-            this.toolTip1.SetToolTip(this.pgToken, "显示选中的节点属性");
+            this.toolTip1.SetToolTip(this.pgToken, "顯示選中的節點屬性");
             // 
             // btnExecute
             // 
@@ -283,8 +283,8 @@
             this.btnExecute.Name = "btnExecute";
             this.btnExecute.Size = new System.Drawing.Size(75, 23);
             this.btnExecute.TabIndex = 1;
-            this.btnExecute.Text = "计算(&C)";
-            this.toolTip1.SetToolTip(this.btnExecute, "点击按钮或按F5键执行计算\r\n当未选中\"允许多行计算\"时,回车也执行计算");
+            this.btnExecute.Text = "計算(&C)";
+            this.toolTip1.SetToolTip(this.btnExecute, "點擊按鈕或按F5鍵執行計算\r\n當未選中\"允許多行計算\"時,回車也執行計算");
             this.btnExecute.UseVisualStyleBackColor = true;
             this.btnExecute.Click += new System.EventHandler(this.btnExecute_Click);
             // 
@@ -297,7 +297,7 @@
             this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 2;
             this.btnExit.Text = "退出(&E)";
-            this.toolTip1.SetToolTip(this.btnExit, "点击按钮或按Esc键退出程序");
+            this.toolTip1.SetToolTip(this.btnExit, "點擊按鈕或按Esc鍵退出程序");
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
@@ -309,8 +309,8 @@
             this.chkAllowMultiLine.Name = "chkAllowMultiLine";
             this.chkAllowMultiLine.Size = new System.Drawing.Size(96, 16);
             this.chkAllowMultiLine.TabIndex = 4;
-            this.chkAllowMultiLine.Text = "允许多行计算";
-            this.toolTip1.SetToolTip(this.chkAllowMultiLine, "选中时可以输入多行表达式，否则回车后执行计算");
+            this.chkAllowMultiLine.Text = "允許多行計算";
+            this.toolTip1.SetToolTip(this.chkAllowMultiLine, "選中時可以輸入多行表達式，否則回車后執行計算");
             this.chkAllowMultiLine.UseVisualStyleBackColor = true;
             this.chkAllowMultiLine.CheckedChanged += new System.EventHandler(this.chkAllowMultiLine_CheckedChanged);
             // 
@@ -326,7 +326,7 @@
             this.btnAbout.Name = "btnAbout";
             this.btnAbout.Size = new System.Drawing.Size(75, 23);
             this.btnAbout.TabIndex = 5;
-            this.btnAbout.Text = "关于(&A)";
+            this.btnAbout.Text = "關於(&A)";
             this.btnAbout.UseVisualStyleBackColor = true;
             this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
             // 

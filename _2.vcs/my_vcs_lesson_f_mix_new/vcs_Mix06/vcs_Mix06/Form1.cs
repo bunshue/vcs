@@ -208,15 +208,19 @@ namespace vcs_Mix06
         {
             show_button_text(sender);
 
+            double pi = Math.PI;
 
-            string expr = "3*5*8/7";
-
+            //string expr = "3*5*8/7";
+            //string expr = "sin(3.14159/2)";
 
             NEval neval = new NEval();
 
-
-            double result = neval.Eval(expr);
-            richTextBox1.Text += result.ToString() + "\n";
+            for (int i = 0; i <= 180; i += 10)
+            {
+                string expr = "sin(" + (pi * i / 180).ToString() + ")";
+                double result = neval.Eval(expr);
+                richTextBox1.Text += "sin(" + i.ToString() + ") = " + result.ToString() + "\n";
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -337,19 +341,11 @@ namespace vcs_Mix06
         private void button16_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //獲取屏幕的分辨率，也就是顯示器屏幕的大小。
-            int W = SystemInformation.PrimaryMonitorSize.Width;
-            int H = SystemInformation.PrimaryMonitorSize.Height;
-
-            richTextBox1.Text += "W = " + W.ToString() + " H = " + H.ToString() + "\n";
-
-            richTextBox1.Text += "取得桌面大小\n";
-            richTextBox1.Text += "桌面寬度 : \t" + Screen.PrimaryScreen.WorkingArea.Width.ToString() + "\n";
-            richTextBox1.Text += "桌面高度 : \t" + Screen.PrimaryScreen.WorkingArea.Height.ToString() + "\n";
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
+            show_button_text(sender);
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -391,27 +387,6 @@ namespace vcs_Mix06
         private void button20_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //獲取計算機磁盤空間
-            //在System.IO命名空間下的DriveInfo類的GetDrives()方法可以用來獲得計算機上的所有邏輯驅動器的名稱。DriveInfo類的TotalSize屬性可義獲得磁盤的空間大小。
-            System.IO.DriveInfo[] drive = System.IO.DriveInfo.GetDrives();
-            for (int i = 0; i < drive.Length; i++)
-            {
-                richTextBox1.Text += "取得磁碟 : " + drive[i].Name;
-
-                if (drive[i].IsReady == true)
-                {
-                    richTextBox1.Text += "\t空間 : " + Convert.ToString(drive[i].TotalSize / 1024 / 1024 / 1024) + "GB\n";
-                }
-                else
-                {
-                    richTextBox1.Text += "\n";
-                }
-
-            }
-
-
-
-
         }
 
         public class Shoe

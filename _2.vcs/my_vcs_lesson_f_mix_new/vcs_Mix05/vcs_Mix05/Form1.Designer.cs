@@ -112,7 +112,6 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(170, 70);
             this.button25.TabIndex = 112;
-            this.button25.Text = "獲取系統預定義顏色";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -123,7 +122,6 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(170, 70);
             this.button24.TabIndex = 111;
-            this.button24.Text = "獲取系統字體";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
@@ -368,6 +366,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(170, 70);
             this.button4.TabIndex = 88;
+            this.button4.Text = "獲取屏幕的分辨率";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 

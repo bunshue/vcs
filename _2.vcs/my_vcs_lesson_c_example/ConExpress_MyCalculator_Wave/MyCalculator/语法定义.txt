@@ -1,21 +1,21 @@
-﻿ConExpress MyCalculator语法定义
+﻿ConExpress MyCalculator語法定義
 基本功能
-支持数值运算、逻辑运算和字符串运算，支持多重括号嵌套，支持变量，不区分大小写。
+支持數值運算、邏輯運算和字符串運算，支持多重括號嵌套，支持變量，不區分大小寫。
 
 分隔符
 ( ) ,
 
-关键字
+關鍵字
 abs if left max mid min right round sin string and or not mod xor e pi true false
 
 操作符
 + - * / > >= < <= = == <> != ! & && | || ^ ' " %
 
-&和&&都是逻辑运算符号，&不支持VB的字符串连接，字符串连接采用C#的+
-如果操作数必须为数值，但实际为字符串，将尝试转换，转换成功则按数值计算，否则报错
-如果操作数可以为数值，但实际为字符串，则被转换为字符串，否则按数值计算
+&和&&都是邏輯運算符號，&不支持VB的字符串連接，字符串連接采用C#的+
+如果操作數必須為數值，但實際為字符串，將嘗試轉換，轉換成功則按數值計算，否則報錯
+如果操作數可以為數值，但實際為字符串，則被轉換為字符串，否則按數值計算
 
-优先级定义
+優先級定義
 + -
 * / % mod
 > >= < <= = == <> !=
@@ -23,18 +23,15 @@ abs if left max mid min right round sin string and or not mod xor e pi true fals
 ^
 sin cos min max left right abs if round pi
 
-关于变量
-非关键字的字符即被作为变量，不区分大小写，默认值为空，可以和普通数值一样运算，如下
+關於變量
+非關鍵字的字符即被作為變量，不區分大小寫，默認值為空，可以和普通數值一樣運算，如下
 n=1
 n=n+2 
 3+n
-最后一行的结果为6
+最後一行的結果為6
 
-关于波形绘制
-指定X和Y的函数，其中包含n，然后指定n的范围，就可以绘制相应的波形。
-比如X为n，Y为100*sin(n)，绘制的是正弦波。
+關於波形繪制
+指定X和Y的函數，其中包含n，然后指定n的範圍，就可以繪制相應的波形。
+比如X為n，Y為100*sin(n)，繪制的是正弦波。
 
 
-Author:Alex Leo
-Email:alexleo321@hotmail.com
-Blog: http://www.cnblogs.com/conexpress/

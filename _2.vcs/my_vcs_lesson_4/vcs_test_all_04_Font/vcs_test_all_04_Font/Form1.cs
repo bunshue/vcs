@@ -266,7 +266,6 @@ namespace vcs_test_all_04_Font
             {
                 richTextBox1.AppendText(family.Name + "\n");
             }
-
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -281,7 +280,6 @@ namespace vcs_test_all_04_Font
             Font f = new Font(pfc.Families[0], 40);
             //設置字體            
             richTextBox2.Font = f;
-
         }
 
         private void DisPlaySelectedFont(object sender, EventArgs e)
@@ -325,7 +323,15 @@ namespace vcs_test_all_04_Font
 
         }
 
+        private void button14_Click(object sender, EventArgs e)
+        {
+            //獲取系統字體
+            InstalledFontCollection fc = new InstalledFontCollection();
+            foreach (FontFamily font in fc.Families)
+            {
+                richTextBox1.Text += "get font : " + font.Name + "\n";
+            }
 
-
+        }
     }
 }

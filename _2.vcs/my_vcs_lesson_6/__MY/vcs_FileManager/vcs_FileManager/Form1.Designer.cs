@@ -72,6 +72,8 @@
             this.bt_start_files2 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
+            this.bt_setup = new System.Windows.Forms.Button();
+            this.button0 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -124,7 +126,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(12, 172);
+            this.button3.Location = new System.Drawing.Point(12, 202);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(100, 60);
             this.button3.TabIndex = 10;
@@ -134,7 +136,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 94);
+            this.button2.Location = new System.Drawing.Point(12, 139);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 60);
             this.button2.TabIndex = 9;
@@ -144,7 +146,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 12);
+            this.button1.Location = new System.Drawing.Point(12, 73);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 60);
             this.button1.TabIndex = 8;
@@ -172,7 +174,7 @@
             // 
             // bt_clear2
             // 
-            this.bt_clear2.Location = new System.Drawing.Point(297, 179);
+            this.bt_clear2.Location = new System.Drawing.Point(359, 280);
             this.bt_clear2.Name = "bt_clear2";
             this.bt_clear2.Size = new System.Drawing.Size(63, 30);
             this.bt_clear2.TabIndex = 15;
@@ -182,7 +184,7 @@
             // 
             // richTextBox2
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(269, 124);
+            this.richTextBox2.Location = new System.Drawing.Point(335, 255);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.Size = new System.Drawing.Size(111, 111);
             this.richTextBox2.TabIndex = 14;
@@ -235,7 +237,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(12, 250);
+            this.button4.Location = new System.Drawing.Point(12, 268);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(100, 60);
             this.button4.TabIndex = 16;
@@ -329,7 +331,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(12, 308);
+            this.button5.Location = new System.Drawing.Point(12, 326);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(100, 60);
             this.button5.TabIndex = 18;
@@ -342,7 +344,7 @@
             this.bt_start_files.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_start_files.BackgroundImage")));
             this.bt_start_files.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_start_files.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_start_files.Location = new System.Drawing.Point(359, 10);
+            this.bt_start_files.Location = new System.Drawing.Point(360, 10);
             this.bt_start_files.Name = "bt_start_files";
             this.bt_start_files.Size = new System.Drawing.Size(50, 50);
             this.bt_start_files.TabIndex = 19;
@@ -476,7 +478,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(12, 374);
+            this.button6.Location = new System.Drawing.Point(12, 389);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(100, 60);
             this.button6.TabIndex = 59;
@@ -495,7 +497,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(12, 443);
+            this.button7.Location = new System.Drawing.Point(12, 450);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(100, 60);
             this.button7.TabIndex = 61;
@@ -505,7 +507,7 @@
             // 
             // bt_start_files2
             // 
-            this.bt_start_files2.Location = new System.Drawing.Point(359, 63);
+            this.bt_start_files2.Location = new System.Drawing.Point(360, 60);
             this.bt_start_files2.Name = "bt_start_files2";
             this.bt_start_files2.Size = new System.Drawing.Size(50, 50);
             this.bt_start_files2.TabIndex = 62;
@@ -533,11 +535,33 @@
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
+            // bt_setup
+            // 
+            this.bt_setup.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("bt_setup.BackgroundImage")));
+            this.bt_setup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_setup.Location = new System.Drawing.Point(360, 110);
+            this.bt_setup.Name = "bt_setup";
+            this.bt_setup.Size = new System.Drawing.Size(50, 50);
+            this.bt_setup.TabIndex = 65;
+            this.bt_setup.UseVisualStyleBackColor = true;
+            this.bt_setup.Click += new System.EventHandler(this.bt_setup_Click);
+            // 
+            // button0
+            // 
+            this.button0.Location = new System.Drawing.Point(12, 12);
+            this.button0.Name = "button0";
+            this.button0.Size = new System.Drawing.Size(100, 60);
+            this.button0.TabIndex = 66;
+            this.button0.UseVisualStyleBackColor = true;
+            this.button0.Click += new System.EventHandler(this.button0_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1784, 756);
+            this.Controls.Add(this.button0);
+            this.Controls.Add(this.bt_setup);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.bt_start_files2);
@@ -626,6 +650,8 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.CheckBox cb_compare4;
         private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button bt_setup;
+        private System.Windows.Forms.Button button0;
     }
 }
 

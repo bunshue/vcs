@@ -585,7 +585,22 @@ namespace vcs__Mix00
 
         private void button17_Click(object sender, EventArgs e)
         {
+            //獲取計算機磁盤空間
+            //在System.IO命名空間下的DriveInfo類的GetDrives()方法可以用來獲得計算機上的所有邏輯驅動器的名稱。DriveInfo類的TotalSize屬性可義獲得磁盤的空間大小。
+            System.IO.DriveInfo[] drive = System.IO.DriveInfo.GetDrives();
+            for (int i = 0; i < drive.Length; i++)
+            {
+                richTextBox1.Text += "取得磁碟 : " + drive[i].Name;
 
+                if (drive[i].IsReady == true)
+                {
+                    richTextBox1.Text += "\t空間 : " + Convert.ToString(drive[i].TotalSize / 1024 / 1024 / 1024) + "GB\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "\n";
+                }
+            }
         }
 
         private void button18_Click(object sender, EventArgs e)

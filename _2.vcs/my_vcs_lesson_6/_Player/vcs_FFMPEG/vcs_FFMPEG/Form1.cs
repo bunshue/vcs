@@ -54,8 +54,8 @@ namespace vcs_FFMPEG
             //pbx.SizeMode = PictureBoxSizeMode.Zoom;
             //pbx.Image = bitmap1;
             pbx.BackColor = Color.Pink;
-            pbx.Size = new Size(693, 60);
-            pbx.Location = new Point(12, 12);
+            pbx.Size = new Size(1000, 60);
+            pbx.Location = new Point(10, 80);
 
             pbx.MouseHover += new EventHandler(pbx_MouseHover);
             pbx.MouseDown += new MouseEventHandler(pbx_MouseDown);
@@ -119,7 +119,9 @@ namespace vcs_FFMPEG
             {
                 richTextBox1.Text += "左 ";
                 if (PbxStartValue > 5)
+                {
                     PbxStartValue -= 5;
+                }
                 //選中 PbxStartValue
                 flag_pbx_mouse_down = true;
                 SetValue(sender, XtoValue(sender, e.X));
@@ -131,7 +133,9 @@ namespace vcs_FFMPEG
             {
                 richTextBox1.Text += "右 ";
                 if (PbxStopValue < (PbxMaximumValue - 5))
+                {
                     PbxStopValue += 5;
+                }
                 flag_pbx_mouse_down = true;
                 SetValue(sender, XtoValue(sender, e.X));
                 move_value = 2;
@@ -192,16 +196,29 @@ namespace vcs_FFMPEG
             int x2 = ValueToX(sender, PbxStopValue);
 
             //case 1
-            using (Pen pen = new Pen(Color.Lime, 5))
+            using (Pen pen = new Pen(Color.Lime, 9))
             {
-                e.Graphics.DrawLine(pen, x1, 0, x1, ((PictureBox)sender).ClientSize.Height);
+                if (x1 < 4)
+                {
+                    e.Graphics.DrawLine(pen, x1 + 4, 0, x1 + 4, ((PictureBox)sender).ClientSize.Height);
+                }
+                else
+                {
+                    e.Graphics.DrawLine(pen, x1, 0, x1, ((PictureBox)sender).ClientSize.Height);
+                }
             }
 
-            using (Pen pen = new Pen(Color.Red, 5))
+            using (Pen pen = new Pen(Color.Red, 9))
             {
-                e.Graphics.DrawLine(pen, x2, 0, x2, ((PictureBox)sender).ClientSize.Height);
+                if (x2 > (((PictureBox)sender).ClientSize.Height - 4))
+                {
+                    e.Graphics.DrawLine(pen, x2 - 4, 0, x2 - 4, ((PictureBox)sender).ClientSize.Height);
+                }
+                else
+                {
+                    e.Graphics.DrawLine(pen, x2 - 4, 0, x2 - 4, ((PictureBox)sender).ClientSize.Height);
+                }
             }
-
 
             /*
             //case 2
@@ -256,12 +273,21 @@ namespace vcs_FFMPEG
                 value = PbxMaximumValue;
             }
 
-            // See if the value has changed.
             if (move_value == 1)
             {
                 if (PbxStartValue == value)
                 {
                     return;
+                }
+                else
+                {
+                    if (value > PbxStopValue)
+                    {
+                        value = PbxStopValue;
+                    }
+                    PbxStartValue = value;
+                    mp3_position = PbxStartValue;
+                    axWindowsMediaPlayer1.Ctlcontrols.currentPosition = mp3_position;
                 }
             }
             else if (move_value == 2)
@@ -270,18 +296,14 @@ namespace vcs_FFMPEG
                 {
                     return;
                 }
-            }
-
-            // Save the new value.
-            if (move_value == 1)
-            {
-                PbxStartValue = value;
-                mp3_position = PbxStartValue;
-                axWindowsMediaPlayer1.Ctlcontrols.currentPosition = mp3_position;
-            }
-            else if (move_value == 2)
-            {
-                PbxStopValue = value;
+                else
+                {
+                    if (value < PbxStartValue)
+                    {
+                        value = PbxStartValue;
+                    }
+                    PbxStopValue = value;
+                }
             }
 
             // Redraw to show the new value.
@@ -500,47 +522,6 @@ namespace vcs_FFMPEG
                 }
             }
             //show_main_message1("音量 : " + mp3_volume.ToString(), S_OK, 30);
-        }
-
-        private void trackBar_st_Scroll(object sender, EventArgs e)
-        {
-            /*
-            mp3_position = trackBar_st.Value;
-            axWindowsMediaPlayer1.Ctlcontrols.currentPosition = mp3_position;
-            lb_time.Text = axWindowsMediaPlayer1.Ctlcontrols.currentPositionString;
-            lb_st.Text = "起始 : " + (mp3_position / 3600).ToString("D2") + " : " + ((mp3_position / 60) % 60).ToString("D2") + " : " + (mp3_position % 60).ToString("D2") + "    " + mp3_position.ToString();
-
-            if (trackBar_st.Value < trackBar_sp.Value)
-            {
-                int cut = trackBar_sp.Value - trackBar_st.Value;
-                lb_cut.Text = "選取 : " + (cut / 3600).ToString("D2") + " : " + ((cut / 60) % 60).ToString("D2") + " : " + (cut % 60).ToString("D2") + "    " + cut.ToString();
-            }
-            */
-            /*
-            PbxStartValue = trackBar_st.Value;
-            flag_pbx_mouse_down = true;
-            SetValue(sender, XtoValue(sender, PbxStartValue));
-            move_value = 1;
-            */
-        }
-
-        private void trackBar_sp_Scroll(object sender, EventArgs e)
-        {
-            /*
-            lb_sp.Text = "結束 : " + (mp3_position / 3600).ToString("D2") + " : " + ((mp3_position / 60) % 60).ToString("D2") + " : " + (mp3_position % 60).ToString("D2") + "    " + mp3_position.ToString();
-
-            if (trackBar_st.Value < trackBar_sp.Value)
-            {
-                int cut = trackBar_sp.Value - trackBar_st.Value;
-                lb_cut.Text = "選取 : " + (cut / 3600).ToString("D2") + " : " + ((cut / 60) % 60).ToString("D2") + " : " + (cut % 60).ToString("D2") + "    " + cut.ToString();
-            }
-            */
-            /*
-            PbxStopValue = trackBar_sp.Value;
-            flag_pbx_mouse_down = true;
-            SetValue(sender, XtoValue(sender, PbxStopValue));
-            move_value = 2;
-            */
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -973,7 +954,7 @@ namespace vcs_FFMPEG
             string imgpath = @"C:\dddddddddd3\";
             //string trueimgpath = "";
             //trueimgpath = "InfoReleaseResources/Image/" + GroupId + "/";
-            if (Directory.Exists(imgpath)==false)
+            if (Directory.Exists(imgpath) == false)
             {
                 Directory.CreateDirectory(imgpath);
             }
@@ -983,7 +964,7 @@ namespace vcs_FFMPEG
             {
                 return "";
             }
-            
+
             //獲得圖片相對路徑/最後存儲到數據庫的路徑,如:/InfoReleaseResources/Image/分組/圖片.jpg
 
             richTextBox1.Text += "3333333\n";
@@ -1076,7 +1057,6 @@ namespace vcs_FFMPEG
                 return;
             }
         }
-
     }
 }
 
