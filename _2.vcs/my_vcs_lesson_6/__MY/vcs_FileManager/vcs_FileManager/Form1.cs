@@ -187,8 +187,8 @@ namespace vcs_FileManager
             //button
             x_st = 12;
             y_st = 12;
-            dx = 100+10;
-            dy = 60+10;
+            dx = 100 + 10;
+            dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -212,7 +212,7 @@ namespace vcs_FileManager
             this.richTextBox1.Size = new Size(W - x_st - 12, 325);
 
             x_st = 12;
-            this.richTextBox2.Location = new Point(x_st, y_st+700);
+            this.richTextBox2.Location = new Point(x_st, y_st + 700);
             this.richTextBox2.Size = new Size(400, 325);
 
             bt_clear1.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - bt_clear1.Width, richTextBox1.Location.Y);
@@ -1039,18 +1039,9 @@ namespace vcs_FileManager
                     }
                 }
             */
-
-
-
-
         }
 
         private void button0_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
         {
             //從一個資料夾中撈出所有檔案 標準版 多層 標準版
 
@@ -1125,7 +1116,7 @@ namespace vcs_FileManager
             }
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             //從一個資料夾中撈出所有檔案 標準版
 
@@ -1184,12 +1175,12 @@ namespace vcs_FileManager
             //show_file_info();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
             show_file_info();
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
             if (fileinfos.Count == 0)
                 richTextBox1.Text += "無資料c\n";
@@ -1310,24 +1301,8 @@ namespace vcs_FileManager
             }
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void button4_Click(object sender, EventArgs e)
         {
-            /*
-            int len = fileinfos_match.Count;
-            richTextBox1.Text += "len = " + len.ToString() + "\n";
-            int i;
-            for (i = 0; i < len; i++)
-            {
-                //debug mesg
-                richTextBox2.Text += "i = " + i.ToString() + ", filename : " + fileinfos_match[i].filepath + "\\" + fileinfos_match[i].filename + "\n";
-
-
-
-            }
-            */
-
-            richTextBox1.Text += "listview len = " + listView1.Items.Count.ToString() + "\n";
-
         }
 
 
@@ -1612,7 +1587,7 @@ namespace vcs_FileManager
             old_search_path.Clear();
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void button5_Click(object sender, EventArgs e)
         {
             //搜尋特定檔名
 
@@ -1652,7 +1627,7 @@ namespace vcs_FileManager
             show_MyFileInfo(fileinfos_match);
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private void button6_Click(object sender, EventArgs e)
         {
             //優優檔
             if (fileinfos.Count == 0)
@@ -1669,16 +1644,17 @@ namespace vcs_FileManager
 
             string[] good_pattern = new string[] {
                   "asami", "yuna", "kaede", "hayashi", "julia", "jjjj", "chitose"    //A class
-                , "QQQQ", "QQQQ", "jessica", "airi", "QQQQ", "QQQQ", "QQQQ"
+                , "nozomi", "anri", "jessica", "airi", "ths", "QQQQ", "QQQQ"
+                , "松島", "桐原", "冬月", "小川", "椎名", "宮瀬", "QQQQ"
                 , "smr", "yama", "maria", "akari", "maron", "ryo", "QQQQ"
-                , "mai", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "suzu", "yuri", "sakura", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "1111", "3333", "7777", "9999", "QQQQ", "QQQQ", "QQQQ"
+                , "mai", "karen", "rinne", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "suzu", "yuri", "sakura", "nanami", "minami", "QQQQ", "QQQQ"
+                , "1111", "3333", "7777", "9999", "mino", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "kana", "tia", "momo", "yui", "QQQQ", "QQQQ", "QQQQ"    //B class
+                , "kana", "tia", "momo", "yui", "sho", "QQQQ", "QQQQ"    //B class
                 , "ayaka", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
@@ -1715,6 +1691,10 @@ namespace vcs_FileManager
             show_MyFileInfo(fileinfos_match);
         }
 
+        private void button7_Click(object sender, EventArgs e)
+        {
+        }
+
         private void button8_Click(object sender, EventArgs e)
         {
             /*
@@ -1747,8 +1727,21 @@ namespace vcs_FileManager
 
         private void button9_Click(object sender, EventArgs e)
         {
-            
+            /*
+            int len = fileinfos_match.Count;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                //debug mesg
+                richTextBox2.Text += "i = " + i.ToString() + ", filename : " + fileinfos_match[i].filepath + "\\" + fileinfos_match[i].filename + "\n";
 
+
+
+            }
+            */
+
+            richTextBox1.Text += "listview len = " + listView1.Items.Count.ToString() + "\n";
         }
 
         private void bt_setup_Click(object sender, EventArgs e)
@@ -1759,7 +1752,9 @@ namespace vcs_FileManager
 
             update_default_setting();
         }
-
     }
 }
+
+
+//大檔資料存檔
 

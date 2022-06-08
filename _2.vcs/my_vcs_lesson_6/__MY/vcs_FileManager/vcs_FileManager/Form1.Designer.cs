@@ -130,7 +130,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(100, 60);
             this.button3.TabIndex = 10;
-            this.button3.Text = "顯示全部";
+            this.button3.Text = "比較";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -140,7 +140,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(100, 60);
             this.button2.TabIndex = 9;
-            this.button2.Text = "從一個資料夾中撈出所有檔案 標準版 多層";
+            this.button2.Text = "顯示全部";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -150,7 +150,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 60);
             this.button1.TabIndex = 8;
-            this.button1.Text = "從一個資料夾中撈出所有檔案 標準版  一層";
+            this.button1.Text = "從一個資料夾中撈出所有檔案 標準版 多層";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -241,7 +241,6 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(100, 60);
             this.button4.TabIndex = 16;
-            this.button4.Text = "比較";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -335,7 +334,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(100, 60);
             this.button5.TabIndex = 18;
-            this.button5.Text = "test";
+            this.button5.Text = "搜尋特定檔名";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -482,14 +481,14 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(100, 60);
             this.button6.TabIndex = 59;
-            this.button6.Text = "搜尋特定檔名";
+            this.button6.Text = "優優檔";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // tb_find
             // 
             this.tb_find.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_find.Location = new System.Drawing.Point(118, 374);
+            this.tb_find.Location = new System.Drawing.Point(118, 375);
             this.tb_find.Name = "tb_find";
             this.tb_find.Size = new System.Drawing.Size(141, 36);
             this.tb_find.TabIndex = 60;
@@ -501,7 +500,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(100, 60);
             this.button7.TabIndex = 61;
-            this.button7.Text = "優優檔";
+            this.button7.Text = "優優系列";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -531,7 +530,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(100, 60);
             this.button9.TabIndex = 64;
-            this.button9.Text = "大檔資料存檔";
+            this.button9.Text = "test";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -552,6 +551,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(100, 60);
             this.button0.TabIndex = 66;
+            this.button0.Text = "從一個資料夾中撈出所有檔案 標準版  一層";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 

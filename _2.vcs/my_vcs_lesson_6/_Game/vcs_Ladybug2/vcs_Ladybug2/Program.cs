@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_Form6_NotRectangle1
+namespace vcs_Ladybug2
 {
     static class Program
     {

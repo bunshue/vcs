@@ -30,6 +30,12 @@ namespace vcs_Draw_GraphicsPath
             p = new Pen(Color.Red, 10);     //default pen
 
             show_item_location();
+
+            //繪製圓角表單
+            this.BackColor = Color.Pink;
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.Region = null;
+            SetWindowRegion();
         }
 
         void show_item_location()
@@ -499,6 +505,17 @@ namespace vcs_Draw_GraphicsPath
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //製作非矩形視窗
+            //Region的用法
+            this.FormBorderStyle = FormBorderStyle.None;
+            GraphicsPath gp = new GraphicsPath();
+            Rectangle rect = new Rectangle(new Point(0, 0), new Size(this.Width, this.Height));
+            gp.AddEllipse(rect);
+            //gp.AddEllipse(60, 80, 400, 300);
+            Region r = new Region(gp);
+            this.Region = r;
+
+            //this.Region = new Region(gp); //same
 
         }
 
@@ -601,5 +618,44 @@ namespace vcs_Draw_GraphicsPath
             }
         }
 
+        private void Form1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void Form1_Resize(object sender, EventArgs e)
+        {
+            this.Region = null;
+            SetWindowRegion();
+        }
+
+        public void SetWindowRegion()
+        {
+            GraphicsPath FormPath;
+            FormPath = new GraphicsPath();
+            Rectangle rect = new Rectangle(0, 22, this.Width, this.Height - 22);//this.Left-10,this.Top-10,this.Width-10,this.Height-10);                
+            FormPath = GetRoundedRectPath(rect, 30);
+            this.Region = new Region(FormPath);
+        }
+
+        private GraphicsPath GetRoundedRectPath(Rectangle rect, int radius)
+        {
+            int diameter = radius;
+            Rectangle arcRect = new Rectangle(rect.Location, new Size(diameter, diameter));
+            GraphicsPath path = new GraphicsPath();
+            //   左上角  
+            path.AddArc(arcRect, 180, 90);
+            //   右上角  
+            arcRect.X = rect.Right - diameter;
+            path.AddArc(arcRect, 270, 90);
+            //   右下角  
+            arcRect.Y = rect.Bottom - diameter;
+            path.AddArc(arcRect, 0, 90);
+            //   左下角  
+            arcRect.X = rect.Left;
+            path.AddArc(arcRect, 90, 90);
+            path.CloseFigure();
+            return path;
+        }
     }
 }

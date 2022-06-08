@@ -55,6 +55,7 @@
             this.timer_progressbar = new System.Windows.Forms.Timer(this.components);
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.pictureBox_progressbar = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_progressbar)).BeginInit();
@@ -107,9 +108,9 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(369, 10);
+            this.pictureBox1.Location = new System.Drawing.Point(369, 66);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(640, 480);
+            this.pictureBox1.Size = new System.Drawing.Size(640, 424);
             this.pictureBox1.TabIndex = 130;
             this.pictureBox1.TabStop = false;
             // 
@@ -206,7 +207,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(170, 70);
             this.button10.TabIndex = 135;
-            this.button10.Text = "GraphicsPath 使用";
+            this.button10.Text = "製作非矩形視窗";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -334,11 +335,22 @@
             this.pictureBox_progressbar.TabStop = false;
             this.pictureBox_progressbar.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox_progressbar_Paint);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label1.Location = new System.Drawing.Point(369, 22);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(154, 24);
+            this.label1.TabIndex = 146;
+            this.label1.Text = "繪製圓角表單";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1440, 811);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.button19);
             this.Controls.Add(this.button18);
@@ -366,10 +378,13 @@
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
+            this.Resize += new System.EventHandler(this.Form1_Resize);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_progressbar)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -401,6 +416,7 @@
         private System.Windows.Forms.Timer timer_progressbar;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.PictureBox pictureBox_progressbar;
+        private System.Windows.Forms.Label label1;
     }
 }
 
