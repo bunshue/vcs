@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_Draw_Contour
+namespace vcs_Draw_2D_Matrix
 {
     public partial class Form1 : Form
     {

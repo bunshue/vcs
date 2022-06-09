@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{3019FF64-F699-4D66-BF20-BB2FC9C31962}</ProjectGuid>
+    <ProjectGuid>{3A6FA052-D5D3-410D-B194-54B7E9B30DFD}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_Draw_Contour</RootNamespace>
-    <AssemblyName>vcs_Draw_Contour</AssemblyName>
+    <RootNamespace>vcs_Wallpaper4</RootNamespace>
+    <AssemblyName>vcs_Wallpaper4</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

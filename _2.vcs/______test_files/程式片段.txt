@@ -298,15 +298,6 @@ ContextMenuStrip 選取項目 按右鍵 編輯DropDownItems(E)
             }
             
             
-
-//字串的追加
-            StringBuilder str =new StringBuilder( "Hellow World!");
-            Console.WriteLine("---Append---");
-            str.Append("What a beautiful day");
-            Console.WriteLine("追加後的字符串為：{0}",str);
-
-
-
 //轉義字符 @
 
             Console.WriteLine(@"C:\Windows\system32");//第一種輸出格式就是在前面加@
@@ -578,31 +569,9 @@ https://www.twblogs.net/a/5f02b56e9644181341a1b6e0
         }
 
 
-
-
-
         				
 //--------------------------------------------------------------------------------------------------------------------------
-
-        public static string GetRandomString2(int length)
-        {
-            var str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            //var next = new Random();
-            Random Rnd = new Random(); //加入Random，產生的數字不會重覆
-            var builder = new StringBuilder();
-            for (var i = 0; i < length; i++)
-            {
-                builder.Append(str[Rnd.Next(0, str.Length)]);
-            }
-            return builder.ToString();
-        }
-
-
-		
-        				
-//--------------------------------------------------------------------------------------------------------------------------
-
-                
+               
 
            //在cmd控制台輸入命令
         private void create(string str)
@@ -3409,19 +3378,6 @@ using System.Reflection;
 
 
 
-
-
-            //StringBuilder("")
-            //字元串相加，（+號是不是也一樣？）
-            StringBuilder sb = new StringBuilder("");
-            sb.Append("AB");
-            sb.Append("CD");
-            sb.Append("EFG");
-
-            richTextBox1.Text += sb + "\n";
-
-                          
-
 求取字母的ASCII值
 
             Console.Write("輸入一個字符："); 
@@ -4284,6 +4240,7 @@ return retVal.ToString("x");
 
 //--------------------------------------------------------------------------------------------------------------------------
 
+ReadAllLines
 
         /// <summary>
         /// 將文字檔內容顯示於所指定的 TextBox

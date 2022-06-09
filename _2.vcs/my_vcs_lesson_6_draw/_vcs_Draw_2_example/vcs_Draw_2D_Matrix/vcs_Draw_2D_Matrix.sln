@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_Draw_Contour", "vcs_Draw_Contour\vcs_Draw_Contour.csproj", "{3019FF64-F699-4D66-BF20-BB2FC9C31962}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_Draw_2D_Matrix", "vcs_Draw_2D_Matrix\vcs_Draw_2D_Matrix.csproj", "{3019FF64-F699-4D66-BF20-BB2FC9C31962}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

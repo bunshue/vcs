@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_Draw_Contour
+namespace vcs_Draw_2D_Matrix
 {
     static class Program
     {

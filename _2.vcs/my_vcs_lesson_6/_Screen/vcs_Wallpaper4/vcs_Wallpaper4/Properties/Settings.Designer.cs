@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_Draw_Contour.Properties
+namespace vcs_Wallpaper4.Properties
 {
 
 
