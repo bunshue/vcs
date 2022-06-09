@@ -20,7 +20,8 @@ namespace vcs_Form6_NotRectangle3
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\__RW\_bmp\not_rectangle.bmp";
+            //string filename = @"C:\______test_files\__RW\_bmp\not_rectangle.bmp";
+            string filename = @"C:\______test_files\__RW\_png\ladybug.png"; //128X128
 
             bitmap1 = new Bitmap(filename);
             bitmap1.MakeTransparent(Color.Blue);

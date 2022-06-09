@@ -183,5 +183,34 @@ namespace vcs_test_all_05_RegularExpression
             }
 
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //驗證Email格式
+            //tb_email
+
+
+        }
+
+        //驗證Email格式
+        public bool IsEmail(string str_Email)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(str_Email, @"^([/w-/.]+)@((/[[0-9]{1,3}/.[0-9] {1,3}/.[0-9]{1,3}/.)|(([/w-]+/.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(/)?]$");
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //驗證URl網址格式
+            //tb_rul
+
+
+        }
+
+        //驗證URL網址格式
+        public bool IsUrl(string str_url)
+        {
+            return System.Text.RegularExpressions.Regex.IsMatch(str_url, @"http(s)?://([/w-]+/.)+[/w-]+(/[/w- ./?%&=]*)?");
+        } 
+
     }
 }

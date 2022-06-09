@@ -87,7 +87,7 @@ namespace vcs_FileManager
 
         private void bt_exit_Click(object sender, EventArgs e)
         {
-            Application.Exit();
+            this.Close();
         }
 
         void bt_exit_setup()
@@ -225,3 +225,4 @@ namespace vcs_FileManager
         }
     }
 }
+

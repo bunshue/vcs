@@ -487,7 +487,7 @@ namespace vcs_test_all_03_Syntax
             sb1.Append("*******興隆超市*******\n");
             sb1.Append("品名-----數量-----價格\n");
             sb1.Append("精品白沙   1       8元\n");
-            sb1.Append("張新發槟榔 1      10元\n");
+            sb1.Append("張新發檳榔 1      10元\n");
             sb1.Append("合計：     2      18元\n");
             sb1.Append("---收銀員：張三---\n");
             sb1.Append("---技術支持：李四---\n\n\n");
@@ -495,10 +495,14 @@ namespace vcs_test_all_03_Syntax
             richTextBox1.Text += sb1.ToString() + "\n";
 
             //StringBuilder 就是 字符串相加
-            StringBuilder sb2 = new StringBuilder("");
+            //StringBuilder("")
+            //字元串相加，（+號是不是也一樣？）
+            StringBuilder sb2 = new StringBuilder("這裏是 : ");
             sb2.Append("群曜");
             sb2.Append("醫電");
-            sb2.Append("股份有限公司");
+            sb2.Append("股份");
+            sb2.Append("有限");
+            sb2.Append("公司");
 
             richTextBox1.Text += "取得字串 : " + sb2 + "\n";
         }
@@ -528,8 +532,17 @@ namespace vcs_test_all_03_Syntax
             return new StackTrace(1).GetFrame(0).GetMethod().Name;
         }
 
+
+        int aaa = 100;
+        int bbb = 5;
         private void button12_Click(object sender, EventArgs e)
         {
+            //Debug.Assert 用法
+
+            Debug.Assert(bbb != 0);
+            richTextBox1.Text += aaa.ToString() + " / " + bbb.ToString() + " = " + (aaa / bbb).ToString() + "\n";
+
+            bbb--;
         }
 
         private void button13_Click(object sender, EventArgs e)

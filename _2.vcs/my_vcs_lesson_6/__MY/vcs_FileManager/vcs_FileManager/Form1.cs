@@ -297,9 +297,8 @@ namespace vcs_FileManager
                 //video_player_path = String.Empty;
                 video_player_path = @"D:\___backup\PotPlayer\PotPlayerMini64.exe";
                 //video_player_path = @"C:\Program Files\DAUM\PotPlayer\PotPlayerMini.exe";
-
-
             }
+            richTextBox1.Text += "video_player_path : " + video_player_path + "\n";
 
             //預設搜尋路徑
             string PATH = Properties.Settings.Default.search_path;
@@ -1772,7 +1771,6 @@ namespace vcs_FileManager
             {
                 button5_Click(sender, e);
             }
-
         }
     }
 }

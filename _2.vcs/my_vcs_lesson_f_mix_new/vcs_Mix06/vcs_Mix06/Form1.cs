@@ -170,6 +170,12 @@ namespace vcs_Mix06
         private void button0_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //表單預設參數
+            richTextBox1.Text += "AAA = " + SystemInformation.FrameBorderSize.Width.ToString() + "\n";  //8
+            richTextBox1.Text += "BBB = " + SystemInformation.FrameBorderSize.Height.ToString() + "\n"; //8
+            richTextBox1.Text += "CCC = " + SystemInformation.CaptionHeight.ToString() + "\n";          //23
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -231,15 +237,6 @@ namespace vcs_Mix06
         private void button6_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //字符型轉換 轉為字符串
-
-            int value = 12345;
-            richTextBox1.Text += "a\t" + value.ToString("n") + "\n"; //生成 12,345.00
-            richTextBox1.Text += "b\t" + value.ToString("C") + "\n"; //生成 ￥12,345.00
-            richTextBox1.Text += "c\t" + value.ToString("e") + "\n"; //生成 1.234500e+004
-            richTextBox1.Text += "d\t" + value.ToString("f4") + "\n"; //生成 12345.0000
-            richTextBox1.Text += "e\t" + value.ToString("x") + "\n"; //生成 3039 (16進制)
-            richTextBox1.Text += "f\t" + value.ToString("p") + "\n"; //生成 1,234,500.00%
         }
 
         private void button7_Click(object sender, EventArgs e)

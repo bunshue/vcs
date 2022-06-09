@@ -1,4 +1,22 @@
 
+[C#] 使用 Regex.Match 從 String 中提出英文或數字
+正規表示式
+
+[abc]： 字元集合
+[^a-z]： 非a-z
+\d ：  數字
+\D ：  非數字
+\s ： 一個空白字元
+\S：  非空白字元
+\w：  單詞字元(a-z,A-Z,0-9,_)
+\W：  非單詞字元
+
+
+
+
+
+如何把一個大Bitmap直接縮成一個小Bitmap
+例如原本300X300的Bitmap要如何變成一個100X100的Bitmap?
 
 
 
@@ -7,10 +25,6 @@
 
 標準版轉出程式：
 用一個結構陣列List儲存最終資料
-
-
-
-
 
 richtextbox 直接貼上簡中 會出現亂碼  why?
 
@@ -600,25 +614,8 @@ https://www.twblogs.net/a/5f02b56e9644181341a1b6e0
             //一定要關閉。
             p.StandardInput.WriteLine("exit");
         }
-
-
-
-C# 正則表達式驗證Email格式、URl網址
-驗證Email格式的主要代碼如下：
-public bool IsEmail(string str_Email)
-{
-return System.Text.RegularExpressions.Regex.IsMatch(str_Email, @"^([/w-/.]+)@((/[[0-9]{1,3}/.[0-9] {1,3}/.[0-9]{1,3}/.)|(([/w-]+/.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(/)?]$");
-}
-
-
-驗證URl網址格式的主要代碼如下：
-public bool IsUrl(string str_url)
-{
-return System.Text.RegularExpressions.Regex.IsMatch(str_url, @"http(s)?://([/w-]+/.)+[/w-]+(/[/w- ./?%&=]*)?");
-} 
-
-
-
+        
+        
         private string CurrentDir = new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent.FullName;
 
             richTextBox1.Text += "CurrentDir1 = " + Environment.CurrentDirectory + "\n";
@@ -2733,18 +2730,6 @@ image.Save(s, image.RawFormat);
 Byte[] bfye = s.ToArray();
 
 
-
-
-
-        private string GetDriveData(long data)//将磁盘大小的单位由byte转化为G
-        {
-            return (data / Convert.ToDouble(1024) / Convert.ToDouble(1024) / Convert.ToDouble(1024)).ToString("0.00");
-        }
-
-          
-
- 
- 
 
 
 C# 控制台程序設置字體顏色

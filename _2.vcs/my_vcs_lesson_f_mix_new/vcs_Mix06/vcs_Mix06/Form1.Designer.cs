@@ -193,6 +193,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(170, 70);
             this.button0.TabIndex = 105;
+            this.button0.Text = "表單預設參數";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -244,7 +245,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(170, 70);
             this.button6.TabIndex = 100;
-            this.button6.Text = "數字顯示";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
