@@ -129,7 +129,7 @@ namespace vcs_ScreenRuler
 
         #region 移動無邊框Form
         private Point mouseOffset;//記錄滑鼠座標
-        private bool isMouseDown = false;//是否按下滑鼠
+        private bool flag_mouse_down = false;//是否按下滑鼠
 
         private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -140,13 +140,13 @@ namespace vcs_ScreenRuler
                 xOffset = -e.X;
                 yOffset = -e.Y;
                 mouseOffset = new Point(xOffset, yOffset);
-                isMouseDown = true;
+                flag_mouse_down = true;
             }
         }
 
         private void Form1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (isMouseDown)
+            if (flag_mouse_down == true)
             {
                 Point mousePos = Control.MousePosition;
                 mousePos.Offset(mouseOffset.X, mouseOffset.Y);
@@ -158,7 +158,7 @@ namespace vcs_ScreenRuler
         {
             if (e.Button == MouseButtons.Left)
             {
-                isMouseDown = false;
+                flag_mouse_down = false;
             }
         }
         #endregion

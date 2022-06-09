@@ -314,6 +314,77 @@ namespace vcs_Mix00
         private void button2_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //編碼轉換範例
+
+            string string_old = "方法";   //原字串
+            string string_by_big5 = "群曜";   //使用 big5 的字串
+            string string_by_gb2312 = "醫電"; //使用 gb2312 的字串
+            string string_by_utf8 = "股份"; //使用 UTF8 的字串
+            string string_by_ascii = "有限"; //使用 ASCII 的字串
+            string string_by_default = "公司"; //使用 預設編碼 的字串
+
+            byte[] bytes_big5;      //存放 big5 轉換出來的拜列
+            byte[] bytes_gb2312;    //存放 gb2312 轉換出來的拜列
+            byte[] bytes_utf8;      //存放 UTF8 轉換出來的拜列
+            byte[] bytes_ascii;     //存放 ASCII 轉換出來的拜列
+            byte[] bytes_default;   //存放 預設編碼 轉換出來的拜列
+            int len = 0;
+
+            richTextBox1.Text +="用gb2312寫\"方法\"二字, 就是寫B7BD B7A8\n";
+            //使用gb2312將字串轉成拜列
+            bytes_gb2312 = Encoding.GetEncoding("gb2312").GetBytes(string_old);
+            len = bytes_gb2312.Length;
+            richTextBox1.Text += "len = " + len.ToString() + "\tdata : \t";
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += bytes_gb2312[i].ToString("X2");
+
+            }
+            richTextBox1.Text += "\n";
+
+            //B7BD B7A8用big5解開, 得到"源楊"二字.
+            //用gb2312將拜列解開成字串
+            string_by_gb2312 = Encoding.GetEncoding("gb2312").GetString(bytes_gb2312);
+            //用big5將拜列解開成字串
+            string_by_big5 = Encoding.GetEncoding("big5").GetString(bytes_gb2312);
+
+            richTextBox1.Text += "拜列用gb2312解開 : \t" + string_by_gb2312 + "\t正確\n";
+            //B7BD B7A8用big5解開, 得到"源楊"二字.
+            richTextBox1.Text += "拜列用big解開 : \t" + string_by_big5 + "\t錯誤\n";
+
+
+
+            //以下就不展開了
+
+            //使用UTF8將字串轉成拜列
+            bytes_utf8 = Encoding.UTF8.GetBytes(string_by_utf8);
+            //用UTF8將拜列解開成字串
+            string string_by_utf8_new = Encoding.UTF8.GetString(bytes_utf8);
+
+            //使用ASCII將字串轉成拜列
+            bytes_ascii = Encoding.ASCII.GetBytes(string_by_ascii);
+            //用ASCII將拜列解開成字串
+            string string_by_ascii_new = Encoding.ASCII.GetString(bytes_ascii);
+
+            //使用預設編碼將字串轉成拜列
+            bytes_default = Encoding.Default.GetBytes(string_by_default);
+            //用預設編碼將拜列解開成字串
+            string string_by_default_new = Encoding.Default.GetString(bytes_default);
+
+
+
+
+
+            //在 C# 中使用 BitConverter.ToString() 方法將字串轉換為十六進位制
+            string decString = "0123456789";
+            byte[] bytes = Encoding.Default.GetBytes(decString);
+            string hexString = BitConverter.ToString(bytes);
+            hexString = hexString.Replace("-", "");
+            Console.WriteLine(hexString);
+            richTextBox1.Text += hexString + "\n";
+
         }
 
         private void button3_Click(object sender, EventArgs e)

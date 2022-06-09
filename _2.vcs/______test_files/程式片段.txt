@@ -366,13 +366,6 @@ ContextMenuStrip 選取項目 按右鍵 編輯DropDownItems(E)
 drawingMode = DrawingMode.None;
 
 
-
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
 namespace GMapDrawTools
 {
     public enum DrawingMode
@@ -1096,7 +1089,7 @@ static bool ValidateEmailAccount(string server, int port, string userName, strin
             string CRLF = "\r\n"; 
             //login 
             data = "USER " + userName + CRLF; 
-            charData = System.Text.Encoding.ASCII.GetBytes(data); 
+            charData = Encoding.ASCII.GetBytes(data); 
             netStream.Write(charData, 0, charData.Length); 
             if (!reader.ReadLine().Contains("+OK")) 
             { 
@@ -1105,7 +1098,7 @@ static bool ValidateEmailAccount(string server, int port, string userName, strin
                 return false; 
             } 
             data = "PASS " + password + CRLF; 
-            charData = System.Text.Encoding.ASCII.GetBytes(data); 
+            charData = Encoding.ASCII.GetBytes(data); 
             netStream.Write(charData, 0, charData.Length); 
             if (!reader.ReadLine().Contains("+OK")) 
             { 
@@ -1265,11 +1258,10 @@ writer.Open(filename, width, height, this.Videofps, VideoCodec.MPEG4);
                         myWebClient.Credentials = myCredentials;
                         byte[] responseArray = myWebClient.UploadFile("ftp://student.aii.avans.nl/GRP/42IN11EWd/Videos/" + fileName, filePath);
 
-                        String temp = System.Text.Encoding.ASCII.GetString(responseArray);
+                        String temp = Encoding.ASCII.GetString(responseArray);
 
                         // Decode and display the response.
-                        Console.WriteLine("\nResponse Received.The contents of the file uploaded are:\n{0}",
-                            System.Text.Encoding.ASCII.GetString(responseArray));
+                        Console.WriteLine("\nResponse Received.The contents of the file uploaded are:\n{0}", Encoding.ASCII.GetString(responseArray));
 
 
             textBox1.ShortcutsEnabled = false;   // 不啟用快速鍵, 限制 TextBox 上不使用快速鍵與滑鼠右鍵表單
@@ -2195,7 +2187,7 @@ private string GetContentFromUrll(string _requestUrl)
             HttpWebRequest _WebRequest = ( HttpWebRequest )WebRequest.Create( _requestUrl );
             _WebRequest.Method = "GET";
             WebResponse _WebResponse = _WebRequest.GetResponse();
-            StreamReader _ResponseStream = new StreamReader( _WebResponse.GetResponseStream(), System.Text.Encoding.GetEncoding("gb2312"));
+            StreamReader _ResponseStream = new StreamReader( _WebResponse.GetResponseStream(), Encoding.GetEncoding("gb2312"));
             _StrResponse = _ResponseStream.ReadToEnd();
             _WebResponse.Close(); 
             _ResponseStream.Close();
@@ -3233,7 +3225,7 @@ DoubleBuffer
  skinEngine1.SkinFile = "PageColor.ssk"; 
 
 
-objStreamWriter = new StreamWriter(objFileStream, System.Text.Encoding.Unicode); 
+objStreamWriter = new StreamWriter(objFileStream, Encoding.Unicode); 
 
 
 
@@ -3337,8 +3329,8 @@ public static string GetHtml(string URL)
 
 
 開關檔案 使用指定的編碼
-StreamWriter outStream = new StreamWriter( filepath,false,System.Text.Encoding.GetEncoding( 950 ) );
-using ( StreamReader sr = new StreamReader( filepath,System.Text.Encoding.GetEncoding( 936 ) ) )
+StreamWriter outStream = new StreamWriter(filepath, false, Encoding.GetEncoding(950));
+using (StreamReader sr = new StreamReader(filepath, Encoding.GetEncoding(936)))
 
 
 
@@ -3419,9 +3411,9 @@ using System.Reflection;
 
 
 
-            //System.Text.StringBuilder("")
+            //StringBuilder("")
             //字元串相加，（+號是不是也一樣？）
-            System.Text.StringBuilder sb = new System.Text.StringBuilder("");
+            StringBuilder sb = new StringBuilder("");
             sb.Append("AB");
             sb.Append("CD");
             sb.Append("EFG");
@@ -3820,23 +3812,12 @@ StreamReader fileReader = new StreamReader(@"C:\File\file.txt");
 string text = fileReader.ReadToEnd();
 Console.WriteLine(text);			
 
+
+
 使用 C# 中的 FileInfo.Length 屬性獲取檔案大小
-
-
-
-            FileInfo fileinfo = new FileInfo("dark.jpg");
-            Console.WriteLine(fileinfo.Length);
+FileInfo fileinfo = new FileInfo("dark.jpg");
+Console.WriteLine(fileinfo.Length);
 FileInfo 類提供了用於在 C# 中建立，開啟，複製，刪除和移動檔案的方法。
-
-
-在 C# 中使用 BitConverter.ToString() 方法將字串轉換為十六進位制
-
-            string decString = "0123456789";
-            byte[] bytes = Encoding.Default.GetBytes(decString);
-            string hexString = BitConverter.ToString(bytes);
-            hexString = hexString.Replace("-", "");
-            Console.WriteLine(hexString);
-
 
 
 在 C# 中使用 String.Format() 方法將字串轉換為十六進位制

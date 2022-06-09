@@ -29,7 +29,10 @@ namespace vcs_Form6_NotRectangle4
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.BackgroundImage = Bitmap.FromFile("../../matlab.png");
+            //string filename = @"C:\______test_files\__RW\_png\ladybug.png"; //128X128
+            string filename = @"../../matlab.png";  //圖很大 900X800, 後面要改成Zoom
+            this.BackgroundImage = Bitmap.FromFile(filename);
+
             this.BackgroundImageLayout = ImageLayout.Zoom;
 
             this.FormBorderStyle = FormBorderStyle.None;
@@ -43,24 +46,23 @@ namespace vcs_Form6_NotRectangle4
         }
 
         private Point mouseOffset; //記錄鼠標指針的坐標
-        private bool isMouseDown = false;
+        private bool flag_mouse_down = false;
         private void WinForm_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
         {
             int xOffset;
             int yOffset;
             if (e.Button == MouseButtons.Left)
             {
-                xOffset = -e.X - SystemInformation.FrameBorderSize.Width;
-                yOffset = -e.Y - SystemInformation.CaptionHeight -
-                SystemInformation.FrameBorderSize.Height;
+                xOffset = -e.X;
+                yOffset = -e.Y;
                 mouseOffset = new Point(xOffset, yOffset);
-                isMouseDown = true;
+                flag_mouse_down = true;
             }
         }
 
         private void WinForm_MouseMove(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            if (isMouseDown)
+            if (flag_mouse_down == true)
             {
                 Point mousePos = Control.MousePosition;
                 mousePos.Offset(mouseOffset.X, mouseOffset.Y);
@@ -70,12 +72,11 @@ namespace vcs_Form6_NotRectangle4
 
         private void WinForm_MouseUp(object sender, System.Windows.Forms.MouseEventArgs e)
         {
-            // 修改鼠標狀態isMouseDown的值
-            // 確保只有鼠標左鍵按下並移動時，才移動窗體
             if (e.Button == MouseButtons.Left)
             {
-                isMouseDown = false;
+                flag_mouse_down = false;
             }
         }
     }
 }
+
