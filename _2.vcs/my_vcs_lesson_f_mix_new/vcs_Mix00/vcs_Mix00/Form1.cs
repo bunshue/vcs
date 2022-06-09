@@ -33,7 +33,7 @@ namespace vcs_Mix00
 {
     public partial class Form1 : Form
     {
-        Cursor myCursor = new Cursor(@"C:\WINDOWS\Cursors\cross_r.cur"); //自定义鼠标 
+        Cursor myCursor = new Cursor(@"C:\WINDOWS\Cursors\cross_r.cur"); //自定義鼠標 
         Bitmap bitmap1;
 
         public Form1()
@@ -359,7 +359,7 @@ namespace vcs_Mix00
             //string serviceFileName = location.Substring(0, location.LastIndexOf('\\')) + "\\" + serviceName + ".exe";
 
 
-            //Cursor myCursor = new Cursor(@"C:\WINDOWS\Cursors\cross_r.cur"); //自定义鼠标 
+            //Cursor myCursor = new Cursor(@"C:\WINDOWS\Cursors\cross_r.cur"); //自定義鼠標 
 
             //使用WMI取得USB資訊
 
@@ -419,12 +419,12 @@ namespace vcs_Mix00
             try
             {
                 //局部圖像放大
-                Cursor.Current = myCursor;								//定义鼠标
-                Graphics graphics = pictureBox1.CreateGraphics();				//实例化pictureBox1控件的Graphics类
-                //声明两个Rectangle对象，分别用来指定要放大的区域和放大后的区域
-                Rectangle sourceRectangle = new Rectangle(e.X - r, e.Y - r, r * 2, r * 2);	//要放大的区域 
+                Cursor.Current = myCursor;								//定義鼠標
+                Graphics graphics = pictureBox1.CreateGraphics();				//實例化pictureBox1控件的Graphics類
+                //聲明兩個Rectangle對象，分別用來指定要放大的區域和放大后的區域
+                Rectangle sourceRectangle = new Rectangle(e.X - r, e.Y - r, r * 2, r * 2);	//要放大的區域 
                 Rectangle destRectangle = new Rectangle(e.X - r * ratio, e.Y - r * ratio, r * 2 * ratio, r * 2 * ratio);
-                //调用DrawImage方法对选定区域进行重新绘制，以放大该部分
+                //調用DrawImage方法對選定區域進行重新繪制，以放大該部分
                 graphics.DrawImage(bitmap1, destRectangle, sourceRectangle, GraphicsUnit.Pixel);
             }
             catch { }

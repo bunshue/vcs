@@ -53,6 +53,8 @@ namespace vcs_FileManager
         int skip_count = 100;
         int match_count = 0;
 
+        bool flag_need_shortname = false;
+
         public class MyFileInfo
         {
             public string filename;
@@ -479,8 +481,11 @@ namespace vcs_FileManager
                 //richTextBox1.Text += fi.Directory + "\n";
                 //richTextBox1.Text += fi.DirectoryName + "\n";
             */
-
-            string shortname = get_shortname(fi.Name);  //過濾掉檔名的一些字 用以做比較用
+            string shortname = string.Empty;
+            if (flag_need_shortname == true)
+            {
+                shortname = get_shortname(fi.Name);  //過濾掉檔名的一些字 用以做比較用
+            }
 
             //richTextBox1.Text += "fname = " + fi.FullName + "\n";
             //richTextBox1.Text += "dname = " + fi.DirectoryName + "\n";
@@ -1182,6 +1187,10 @@ namespace vcs_FileManager
 
         private void button3_Click(object sender, EventArgs e)
         {
+            flag_need_shortname = true;
+
+            button1_Click(sender, e);   //do_search_recurrsively
+
             if (fileinfos.Count == 0)
                 richTextBox1.Text += "無資料c\n";
             else
@@ -1279,6 +1288,7 @@ namespace vcs_FileManager
 
             richTextBox1.Text += "show match files\n";
             show_MyFileInfo(fileinfos_match);
+            flag_need_shortname = false;
         }
 
         private void check_cb_compare(object sender, EventArgs e)
@@ -1644,18 +1654,18 @@ namespace vcs_FileManager
 
             string[] good_pattern = new string[] {
                   "asami", "yuna", "kaede", "hayashi", "julia", "jjjj", "chitose"    //A class
-                , "nozomi", "anri", "jessica", "airi", "ths", "QQQQ", "QQQQ"
+                , "nozomi", "anri", "jessica", "airi", "ths", "saeko", ""
                 , "松島", "桐原", "冬月", "小川", "椎名", "宮瀬", "QQQQ"
                 , "smr", "yama", "maria", "akari", "maron", "ryo", "QQQQ"
-                , "mai", "karen", "rinne", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "suzu", "yuri", "sakura", "nanami", "minami", "QQQQ", "QQQQ"
-                , "1111", "3333", "7777", "9999", "mino", "QQQQ", "QQQQ"
+                , "mai", "karen", "rinne", "miu", "kano", "QQQQ", "QQQQ"
+                , "suzu", "yuri", "sakura", "nanami", "minami", "iori", "QQQQ"
+                , "1111", "3333", "7777", "9999", "mino", "megumi", "QQQQ"
+                , "kurara", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "立花", "愛世", "美月", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "kana", "tia", "momo", "yui", "sho", "QQQQ", "QQQQ"    //B class
-                , "ayaka", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "kana", "tia", "momo", "yui", "sho", "nene", "QQQQ"    //B class
+                , "ayaka", "jgj", "sora", "bt", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "gggg", "debut", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"    //new tmp
@@ -1693,6 +1703,7 @@ namespace vcs_FileManager
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //DDT 259 KBI.......
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -1751,6 +1762,17 @@ namespace vcs_FileManager
             frm.ShowDialog();   //顯示 frm 視窗
 
             update_default_setting();
+        }
+
+        private void tb_find_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //e.Handled = check_textbox_hexadecimal(e);
+
+            if (e.KeyChar == (Char)13)  //收到Enter後, 執行動作
+            {
+                button5_Click(sender, e);
+            }
+
         }
     }
 }

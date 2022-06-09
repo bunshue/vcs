@@ -493,6 +493,7 @@
             this.tb_find.Size = new System.Drawing.Size(141, 36);
             this.tb_find.TabIndex = 60;
             this.tb_find.Text = "maron";
+            this.tb_find.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tb_find_KeyPress);
             // 
             // button7
             // 
