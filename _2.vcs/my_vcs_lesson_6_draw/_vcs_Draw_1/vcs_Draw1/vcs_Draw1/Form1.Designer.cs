@@ -432,6 +432,7 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(120, 42);
             this.button24.TabIndex = 43;
+            this.button24.Text = "畫貝茲線";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 

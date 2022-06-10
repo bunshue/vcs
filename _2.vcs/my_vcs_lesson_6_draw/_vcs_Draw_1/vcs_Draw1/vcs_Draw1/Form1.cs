@@ -1386,6 +1386,20 @@ namespace vcs_Draw1
 
         private void button24_Click(object sender, EventArgs e)
         {
+            //畫貝茲線
+            Graphics g = this.pictureBox1.CreateGraphics();
+            Pen p = new Pen(Color.Red, 5);
+            float startX = 50.0F;
+            float startY = 80.0F;
+            float controlX1 = 150.0F;
+            float controlY1 = 20.0F;
+            float controlX2 = 230.0F;
+            float controlY2 = 50.0F;
+            float endX = 190.0F;
+            float endY = 80.0F;
+            g.DrawBezier(p, startX, startY, controlX1, controlY1, controlX2, controlY2, endX, endY);
+            //4個Point點分別表示起始點、第一個控制點、第二個控制點和結束點。
+
         }
 
         private void button18_Click(object sender, EventArgs e)

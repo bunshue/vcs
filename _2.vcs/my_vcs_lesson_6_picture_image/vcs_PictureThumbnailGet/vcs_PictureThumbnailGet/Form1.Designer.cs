@@ -144,6 +144,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(100, 67);
             this.button8.TabIndex = 10;
+            this.button8.Text = "用GetThumbnailImage製作小圖";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
