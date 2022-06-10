@@ -74,6 +74,8 @@
             this.button9 = new System.Windows.Forms.Button();
             this.bt_setup = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.tb_shortname = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -126,9 +128,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(12, 202);
+            this.button3.Location = new System.Drawing.Point(12, 165);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(100, 60);
+            this.button3.Size = new System.Drawing.Size(100, 50);
             this.button3.TabIndex = 10;
             this.button3.Text = "比較";
             this.button3.UseVisualStyleBackColor = true;
@@ -136,9 +138,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(12, 139);
+            this.button2.Location = new System.Drawing.Point(12, 115);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 60);
+            this.button2.Size = new System.Drawing.Size(100, 50);
             this.button2.TabIndex = 9;
             this.button2.Text = "顯示全部";
             this.button2.UseVisualStyleBackColor = true;
@@ -146,9 +148,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 73);
+            this.button1.Location = new System.Drawing.Point(12, 63);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 60);
+            this.button1.Size = new System.Drawing.Size(100, 50);
             this.button1.TabIndex = 8;
             this.button1.Text = "從一個資料夾中撈出所有檔案 標準版 多層";
             this.button1.UseVisualStyleBackColor = true;
@@ -237,9 +239,9 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(12, 268);
+            this.button4.Location = new System.Drawing.Point(12, 216);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(100, 60);
+            this.button4.Size = new System.Drawing.Size(100, 50);
             this.button4.TabIndex = 16;
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
@@ -330,9 +332,9 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(12, 326);
+            this.button5.Location = new System.Drawing.Point(12, 267);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(100, 60);
+            this.button5.Size = new System.Drawing.Size(100, 50);
             this.button5.TabIndex = 18;
             this.button5.Text = "搜尋特定檔名";
             this.button5.UseVisualStyleBackColor = true;
@@ -477,9 +479,9 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(12, 389);
+            this.button6.Location = new System.Drawing.Point(12, 316);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(100, 60);
+            this.button6.Size = new System.Drawing.Size(100, 50);
             this.button6.TabIndex = 59;
             this.button6.Text = "優優檔";
             this.button6.UseVisualStyleBackColor = true;
@@ -497,9 +499,9 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(12, 450);
+            this.button7.Location = new System.Drawing.Point(12, 365);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(100, 60);
+            this.button7.Size = new System.Drawing.Size(100, 50);
             this.button7.TabIndex = 61;
             this.button7.Text = "優優系列";
             this.button7.UseVisualStyleBackColor = true;
@@ -517,9 +519,9 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(12, 509);
+            this.button8.Location = new System.Drawing.Point(12, 415);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(100, 60);
+            this.button8.Size = new System.Drawing.Size(100, 50);
             this.button8.TabIndex = 63;
             this.button8.Text = "get_shortname";
             this.button8.UseVisualStyleBackColor = true;
@@ -527,9 +529,9 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(12, 575);
+            this.button9.Location = new System.Drawing.Point(12, 466);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(100, 60);
+            this.button9.Size = new System.Drawing.Size(100, 50);
             this.button9.TabIndex = 64;
             this.button9.Text = "test";
             this.button9.UseVisualStyleBackColor = true;
@@ -550,17 +552,37 @@
             // 
             this.button0.Location = new System.Drawing.Point(12, 12);
             this.button0.Name = "button0";
-            this.button0.Size = new System.Drawing.Size(100, 60);
+            this.button0.Size = new System.Drawing.Size(100, 50);
             this.button0.TabIndex = 66;
             this.button0.Text = "從一個資料夾中撈出所有檔案 標準版  一層";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(12, 522);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(100, 50);
+            this.button10.TabIndex = 67;
+            this.button10.Text = "測試shortname";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
+            // tb_shortname
+            // 
+            this.tb_shortname.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_shortname.Location = new System.Drawing.Point(12, 580);
+            this.tb_shortname.Name = "tb_shortname";
+            this.tb_shortname.Size = new System.Drawing.Size(306, 36);
+            this.tb_shortname.TabIndex = 68;
+            this.tb_shortname.Text = "jul-123-2.julia.mp4";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1784, 756);
+            this.Controls.Add(this.button10);
             this.Controls.Add(this.button0);
             this.Controls.Add(this.bt_setup);
             this.Controls.Add(this.button9);
@@ -589,6 +611,7 @@
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
+            this.Controls.Add(this.tb_shortname);
             this.Name = "Form1";
             this.Text = "檔案管理員";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -653,6 +676,8 @@
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button bt_setup;
         private System.Windows.Forms.Button button0;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.TextBox tb_shortname;
     }
 }
 

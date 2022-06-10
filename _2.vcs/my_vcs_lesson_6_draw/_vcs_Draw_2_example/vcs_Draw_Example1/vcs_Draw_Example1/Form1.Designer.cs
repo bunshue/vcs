@@ -194,7 +194,6 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(135, 45);
             this.button2.TabIndex = 20;
-            this.button2.Text = "已知的顏色列舉";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -238,7 +237,6 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(135, 45);
             this.button7.TabIndex = 25;
-            this.button7.Text = "畫2D陣列";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -676,7 +674,6 @@
             this.button44.Name = "button44";
             this.button44.Size = new System.Drawing.Size(135, 45);
             this.button44.TabIndex = 70;
-            this.button44.Text = "畫2D陣列2";
             this.button44.UseVisualStyleBackColor = true;
             this.button44.Click += new System.EventHandler(this.button44_Click);
             // 
@@ -762,7 +759,6 @@
             this.button46.Name = "button46";
             this.button46.Size = new System.Drawing.Size(135, 45);
             this.button46.TabIndex = 80;
-            this.button46.Text = "畫圓角矩形";
             this.button46.UseVisualStyleBackColor = true;
             this.button46.Click += new System.EventHandler(this.button46_Click);
             // 
@@ -986,7 +982,6 @@
             this.button66.Name = "button66";
             this.button66.Size = new System.Drawing.Size(135, 45);
             this.button66.TabIndex = 100;
-            this.button66.Text = "生成Color類所有static預定義成員的顏色表";
             this.button66.UseVisualStyleBackColor = true;
             this.button66.Click += new System.EventHandler(this.button66_Click);
             // 

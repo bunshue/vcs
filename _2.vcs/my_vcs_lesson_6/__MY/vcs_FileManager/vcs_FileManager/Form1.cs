@@ -17,22 +17,11 @@ namespace vcs_FileManager
 {
     public partial class Form1 : Form
     {
-        //string foldername = @"C:\______test_files_file_manager";    //欲搜尋的資料夾
-        //string foldername = @"D:\vcs\astro\_DATA2\_________整理_mp3\wen2";
-        //string foldername = @"C:\______test_files\__RW\_avi";
-        //string foldername = @"F:\_____BC";
-        string foldername = @"F:\";
-
-
         string video_player_path = String.Empty;
         string audio_player_path = String.Empty;
         string picture_viewer_path = String.Empty;
-        string text_editor_path = String.Empty;
+        //string text_editor_path = String.Empty;
         string search_path = String.Empty;
-
-        string default_vcs_path = @"C:\_git\vcs\_2.vcs";
-        string default_python_path = @"C:\_git\vcs\_4.cmpp\_python_test";
-        string default_matlab_path = @"C:\_git\vcs\_4.cmpp\_matlab1_test";
 
         List<String> old_search_path = new List<String>();
 
@@ -164,6 +153,8 @@ namespace vcs_FileManager
                     save_path += ";";
             }
             Properties.Settings.Default.video_player_path = video_player_path;
+            Properties.Settings.Default.audio_player_path = audio_player_path;
+            Properties.Settings.Default.picture_viewer_path = picture_viewer_path;
             Properties.Settings.Default.search_path = save_path;
             Properties.Settings.Default.Save();
         }
@@ -190,7 +181,7 @@ namespace vcs_FileManager
             x_st = 12;
             y_st = 12;
             dx = 100 + 10;
-            dy = 60 + 10;
+            dy = 50 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -202,6 +193,8 @@ namespace vcs_FileManager
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            tb_shortname.Location = new Point(x_st + dx * 0, y_st + dy * 11-5);
 
             x_st = 420;
             y_st = 12;
@@ -289,6 +282,8 @@ namespace vcs_FileManager
         void update_default_setting()
         {
             video_player_path = Properties.Settings.Default.video_player_path;
+            audio_player_path = Properties.Settings.Default.audio_player_path;
+            picture_viewer_path = Properties.Settings.Default.picture_viewer_path;
             search_path = Properties.Settings.Default.search_path;
 
             if (System.IO.File.Exists(Properties.Settings.Default.video_player_path) == false)
@@ -1664,7 +1659,7 @@ namespace vcs_FileManager
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "kana", "tia", "momo", "yui", "sho", "nene", "QQQQ"    //B class
-                , "ayaka", "jgj", "sora", "bt", "QQQQ", "QQQQ", "QQQQ"
+                , "ayaka", "jgj", "sora", "bt", "maki", "ayumi", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "gggg", "debut", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"    //new tmp
@@ -1707,13 +1702,6 @@ namespace vcs_FileManager
 
         private void button8_Click(object sender, EventArgs e)
         {
-            /*
-            string longname = @"D:\內視鏡影片\Capsule Endoscopy Animation - ANKON NaviCam [720p].mp4";
-            string sn = get_shortname(longname);
-            richTextBox1.Text += "short name : " + sn + "\n";
-            return;
-            */
-
             //show all shortnames
             if (fileinfos.Count == 0)
                 richTextBox1.Text += "無資料c\n";
@@ -1754,6 +1742,16 @@ namespace vcs_FileManager
             richTextBox1.Text += "listview len = " + listView1.Items.Count.ToString() + "\n";
         }
 
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //string longname = @"D:\內視鏡影片\Capsule Endoscopy Animation - ANKON NaviCam [720p].mp4";
+            string longname = tb_shortname.Text;
+
+            string shortname = get_shortname(longname);
+            richTextBox1.Text += "long name :  " + longname + "\n";
+            richTextBox1.Text += "short name : " + shortname + "\n";
+        }
+
         private void bt_setup_Click(object sender, EventArgs e)
         {
             Form_Setup frm = new Form_Setup();    //實體化 Form_Setup 視窗物件
@@ -1772,6 +1770,7 @@ namespace vcs_FileManager
                 button5_Click(sender, e);
             }
         }
+
     }
 }
 

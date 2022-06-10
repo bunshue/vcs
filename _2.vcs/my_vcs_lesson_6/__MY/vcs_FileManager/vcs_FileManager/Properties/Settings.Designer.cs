@@ -46,5 +46,29 @@ namespace vcs_FileManager.Properties {
                 this["video_player_path"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string audio_player_path {
+            get {
+                return ((string)(this["audio_player_path"]));
+            }
+            set {
+                this["audio_player_path"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string picture_viewer_path {
+            get {
+                return ((string)(this["picture_viewer_path"]));
+            }
+            set {
+                this["picture_viewer_path"] = value;
+            }
+        }
     }
 }

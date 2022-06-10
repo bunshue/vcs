@@ -39,22 +39,25 @@
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
+            this.button0 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(600, 700);
+            this.pictureBox1.Size = new System.Drawing.Size(100, 100);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(729, 12);
+            this.button1.Location = new System.Drawing.Point(719, 81);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 70);
+            this.button1.Size = new System.Drawing.Size(120, 60);
             this.button1.TabIndex = 2;
             this.button1.Text = "DrawColorMap";
             this.button1.UseVisualStyleBackColor = true;
@@ -62,9 +65,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(729, 88);
+            this.button2.Location = new System.Drawing.Point(719, 157);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 70);
+            this.button2.Size = new System.Drawing.Size(120, 60);
             this.button2.TabIndex = 3;
             this.button2.Text = "DrawColorMap";
             this.button2.UseVisualStyleBackColor = true;
@@ -72,9 +75,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(729, 164);
+            this.button3.Location = new System.Drawing.Point(719, 233);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(100, 70);
+            this.button3.Size = new System.Drawing.Size(120, 60);
             this.button3.TabIndex = 4;
             this.button3.Text = "列舉系統的所有Color並以ComboBox顯示";
             this.button3.UseVisualStyleBackColor = true;
@@ -85,7 +88,7 @@
             this.comboBox1.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.comboBox1.Font = new System.Drawing.Font("新細明體", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(841, 12);
+            this.comboBox1.Location = new System.Drawing.Point(859, 12);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(290, 50);
             this.comboBox1.TabIndex = 5;
@@ -93,9 +96,9 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(729, 240);
+            this.button4.Location = new System.Drawing.Point(719, 309);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(100, 70);
+            this.button4.Size = new System.Drawing.Size(120, 60);
             this.button4.TabIndex = 6;
             this.button4.Text = "System Color";
             this.button4.UseVisualStyleBackColor = true;
@@ -103,7 +106,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(841, 102);
+            this.richTextBox1.Location = new System.Drawing.Point(859, 102);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(290, 590);
             this.richTextBox1.TabIndex = 7;
@@ -111,9 +114,9 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(729, 316);
+            this.button5.Location = new System.Drawing.Point(719, 385);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(100, 70);
+            this.button5.Size = new System.Drawing.Size(120, 60);
             this.button5.TabIndex = 8;
             this.button5.Text = "顏色名稱1";
             this.button5.UseVisualStyleBackColor = true;
@@ -121,9 +124,9 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(729, 392);
+            this.button6.Location = new System.Drawing.Point(719, 461);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(100, 70);
+            this.button6.Size = new System.Drawing.Size(120, 60);
             this.button6.TabIndex = 9;
             this.button6.Text = "顏色名稱2";
             this.button6.UseVisualStyleBackColor = true;
@@ -131,9 +134,9 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(729, 468);
+            this.button7.Location = new System.Drawing.Point(719, 537);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(100, 70);
+            this.button7.Size = new System.Drawing.Size(120, 60);
             this.button7.TabIndex = 10;
             this.button7.Text = "顏色名稱3";
             this.button7.UseVisualStyleBackColor = true;
@@ -141,19 +144,41 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(729, 544);
+            this.button8.Location = new System.Drawing.Point(719, 613);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(100, 70);
+            this.button8.Size = new System.Drawing.Size(120, 60);
             this.button8.TabIndex = 11;
             this.button8.Text = "獲取系統預定義顏色";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
+            // button0
+            // 
+            this.button0.Location = new System.Drawing.Point(719, 12);
+            this.button0.Name = "button0";
+            this.button0.Size = new System.Drawing.Size(120, 60);
+            this.button0.TabIndex = 12;
+            this.button0.Text = "已知的顏色列舉";
+            this.button0.UseVisualStyleBackColor = true;
+            this.button0.Click += new System.EventHandler(this.button0_Click);
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(719, 679);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(120, 60);
+            this.button9.TabIndex = 13;
+            this.button9.Text = "生成Color類所有static預定義成員的顏色表";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1143, 739);
+            this.ClientSize = new System.Drawing.Size(1162, 739);
+            this.Controls.Add(this.button9);
+            this.Controls.Add(this.button0);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.button7);
             this.Controls.Add(this.button6);
@@ -186,6 +211,8 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button0;
+        private System.Windows.Forms.Button button9;
     }
 }
 

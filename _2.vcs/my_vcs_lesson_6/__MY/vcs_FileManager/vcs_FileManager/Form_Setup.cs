@@ -32,13 +32,11 @@ namespace vcs_FileManager
             lb_setup5.Text = "";
 
             tb_setup0.Text = Properties.Settings.Default.video_player_path;
-            //tb_setup1.Text = Properties.Settings.Default.audio_player_path;
-            //tb_setup2.Text = Properties.Settings.Default.picture_viewer_path;
+            tb_setup1.Text = Properties.Settings.Default.audio_player_path;
+            tb_setup2.Text = Properties.Settings.Default.picture_viewer_path;
             //tb_setup3.Text = Properties.Settings.Default.text_editor_path;
             tb_setup4.Text = Properties.Settings.Default.search_path;
 
-            tb_setup1.Enabled = false;
-            tb_setup2.Enabled = false;
             tb_setup3.Enabled = false;
             show_item_location();
         }
@@ -193,8 +191,8 @@ namespace vcs_FileManager
         {
             //儲存
             Properties.Settings.Default.video_player_path = tb_setup0.Text;
-            //Properties.Settings.Default.audio_player_path = tb_setup1.Text;
-            //Properties.Settings.Default.picture_viewer_path = tb_setup2.Text;
+            Properties.Settings.Default.audio_player_path = tb_setup1.Text;
+            Properties.Settings.Default.picture_viewer_path = tb_setup2.Text;
             //Properties.Settings.Default.text_editor_path = tb_setup3.Text;
             Properties.Settings.Default.search_path = tb_setup4.Text;
 

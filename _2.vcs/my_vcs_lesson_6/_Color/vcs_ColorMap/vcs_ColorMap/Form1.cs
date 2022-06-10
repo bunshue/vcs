@@ -198,6 +198,98 @@ namespace vcs_ColorMap
             g = pictureBox1.CreateGraphics();
             p = new Pen(Color.Red, 6);
 
+
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            /*
+            //最大化螢幕
+            this.FormBorderStyle = FormBorderStyle.None;
+            //this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
+
+            //設定執行後的表單大小
+            this.Size = new Size(1920, 1040);
+            //設定執行後的表單起始位置
+            this.StartPosition = FormStartPosition.Manual;
+            this.Location = new System.Drawing.Point(0, 0);
+            */
+
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 12;
+            y_st = 12;
+            dx = 120 + 10;
+            dy = 60 + 10;
+
+            button0.Location = new Point(x_st + dx * 8, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 8, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 8, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 8, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 8, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 8, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 8, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 8, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 8, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 8, y_st + dy * 9);
+
+            pictureBox1.Size = new Size(600, 700);
+            pictureBox1.BackColor = Color.Pink;
+
+            comboBox1.Location = new Point(x_st + dx * 9, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 9, y_st + dy * 1);
+
+            this.Size = new Size(1500, 800);
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            //已知的顏色列舉
+
+            pictureBox1.Size = new Size(900, 600);
+
+            Graphics g = pictureBox1.CreateGraphics();
+
+            // 將 KnownColor 列舉的內容項目複雜到 allColors 陣列
+            Array colorsArray = Enum.GetValues(typeof(KnownColor));
+            KnownColor[] allColors = new KnownColor[colorsArray.Length];
+            Array.Copy(colorsArray, allColors, colorsArray.Length);
+
+            richTextBox1.Text += "共有 " + allColors.Length.ToString() + " 種顏色\n";
+            // Loop through printing out the values' names in the colors 
+            // they represent.
+            float y = -20;
+            float x = 0;
+
+            for (int i = 0; i < allColors.Length; i++)
+            {
+                // 一排 25 個
+                if (i > 0 && i % 25 == 0)
+                {
+                    x += 120.0f;
+                    y = 0.0f;
+                }
+                else
+                {
+                    // 在該排中 往下列出
+                    y += 22.0F;
+                }
+
+                // 產生該顏色的塗刷
+                SolidBrush sb = new SolidBrush(Color.FromName(allColors[i].ToString()));
+                Font f = new Font("Times New Roman", 12);
+                g.DrawString(allColors[i].ToString(), f, sb, x, y);
+
+                // 釋放該塗刷
+                sb.Dispose();
+            }
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -835,6 +927,60 @@ namespace vcs_ColorMap
                 richTextBox1.Text += "get color : " + colorName.ToString() + "\n";
             }
         }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            //生成Color類所有static預定義成員的顏色表
+
+            //生成Color類所有static預定義成員的顏色表
+
+            const long CELLS_PER_LINE = 10;
+
+            const float MARGIN = 12;
+            const float CELL_WIDTH = 160;
+            const float CELL_HEIGHT = 64;
+            const float COLOR_LEFT_MARGIN = 8;
+            const float COLOR_TOP_MARGIN = 8;
+            const float COLOR_CELL_WIDTH = 48;
+            const float COLOR_CELL_HEIGHT = 32;
+            const float TEXT_TOP_MARGIN = COLOR_TOP_MARGIN + COLOR_CELL_HEIGHT + 2;
+
+            List<Color> vColors = new List<Color>();
+            Type t = typeof(Color);
+            PropertyInfo[] vProps = t.GetProperties();
+            foreach (PropertyInfo propInfo in vProps)
+            {
+                if (MemberTypes.Property == propInfo.MemberType && typeof(Color) == propInfo.PropertyType)
+                {
+                    Color tmpColor = (Color)propInfo.GetValue(null, null);
+                    vColors.Add(tmpColor);
+                }
+            }
+
+            Bitmap bmpColor = new Bitmap((int)(CELLS_PER_LINE * CELL_WIDTH + MARGIN * 2), (int)((vColors.Count / CELLS_PER_LINE + 1) * CELL_HEIGHT + MARGIN * 2));
+            using (Graphics grp = Graphics.FromImage(bmpColor))
+            {
+                grp.Clear(Color.Black);
+
+                for (int i = 0; i < vColors.Count; i++)
+                {
+                    float nLeftBase = MARGIN + i % CELLS_PER_LINE * CELL_WIDTH;
+                    float nTopBase = MARGIN + i / CELLS_PER_LINE * CELL_HEIGHT;
+
+                    grp.DrawRectangle(new Pen(Color.White), nLeftBase, nTopBase, CELL_WIDTH, CELL_HEIGHT);
+
+                    grp.FillRectangle(new SolidBrush(vColors[i]), nLeftBase + COLOR_LEFT_MARGIN, nTopBase + COLOR_TOP_MARGIN, COLOR_CELL_WIDTH, COLOR_CELL_HEIGHT);
+
+                    grp.DrawString(vColors[i].Name, new Font("宋體", 9, FontStyle.Regular), new SolidBrush(Color.White), nLeftBase + COLOR_LEFT_MARGIN, nTopBase + TEXT_TOP_MARGIN);
+                }
+            }
+
+            pictureBox1.Image = bmpColor;
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            bmpColor.Save("AllColor.bmp");
+
+        }
+
     }
 }
 
