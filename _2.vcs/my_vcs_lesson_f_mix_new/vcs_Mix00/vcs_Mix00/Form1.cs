@@ -11,7 +11,7 @@ using System.IO;
 using System.Net;
 using System.Collections;
 using System.Drawing.Text;
-using System.Drawing.Imaging;
+using System.Drawing.Imaging;   //for ColorAdjustType
 using System.Drawing.Drawing2D;
 using System.Management;
 using System.Reflection;    //for Assembly
@@ -460,11 +460,112 @@ namespace vcs_Mix00
         private void button5_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //Image Cut
+            //Image Cut
+            string filename1 = @"C:\______test_files\picture1.jpg";
+            string filename2 = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            string mesg = "lion-mouse";
+
+            Cut(filename1, filename2, 200, 200, mesg);
+        }
+
+        /// <summary>
+        /// 圖像切割
+        /// </summary>
+        /// <param name="filename1">原圖片路徑</param>
+        /// <param name="filename2">切割後圖片路徑</param>
+        /// <param name="width">切割後圖像寬度</param>
+        /// <param name="height">切割後圖像高度</param>
+        public static void Cut(string filename1, string filename2, int width, int height, string message)
+        {
+            Bitmap bitmap = new Bitmap(filename1);
+            Decimal MaxRow = Math.Ceiling((Decimal)bitmap.Height / height);
+            Decimal MaxColumn = Math.Ceiling((decimal)bitmap.Width / width);
+            for (decimal i = 0; i < MaxRow; i++)
+            {
+                for (decimal j = 0; j < MaxColumn; j++)
+                {
+                    Bitmap bitmap1 = new Bitmap(width, height);
+                    for (int offsetX = 0; offsetX < width; offsetX++)
+                    {
+                        for (int offsetY = 0; offsetY < height; offsetY++)
+                        {
+                            if (((j * width + offsetX) < bitmap.Width) && ((i * height + offsetY) < bitmap.Height))
+                            {
+                                bitmap1.SetPixel(offsetX, offsetY, bitmap.GetPixel((int)(j * width + offsetX), (int)(i * height + offsetY)));
+                            }
+                        }
+                    }
+                    Graphics g = Graphics.FromImage(bitmap1);
+                    g.DrawString(message, new Font("黑體", 20), new SolidBrush(Color.FromArgb(70, Color.WhiteSmoke)), 0, 0);//加水印
+
+                    try
+                    {
+                        //bitmap1.Save(@file1, ImageFormat.Jpeg);
+                        bitmap1.Save(filename2, ImageFormat.Bmp);
+                        //bitmap1.Save(@file3, ImageFormat.Png);
+
+                        //richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                        //richTextBox1.Text += "已存檔 : " + filename + "\n";
+                        //richTextBox1.Text += "已存檔 : " + file3 + "\n";
+                    }
+                    catch (Exception ex)
+                    {
+                        //richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                    }
+                }
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            float gamma = 1.5f;
+
+            //從pictureBox取得Bitmap
+            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+
+            Bitmap bitmap2 = KiGamma(bitmap1, gamma);
+
+            pictureBox1.Image = bitmap2;
+
+        }
+
+
+        //C#圖片處理之Gamma校正
+        //gamma值是用曲線表示的，這是一種人的眼睛對光的一種感應曲線，其中包括了物理量、身理感官及心理的感知度。
+
+        /// <summary>
+        /// Gamma校正
+        /// </summary>
+        /// <param name="bmp">輸入Bitmap</param>
+        /// <param name="val">[0 <-明- 1 -暗-> 2]</param>
+        /// <returns>輸出Bitmap</returns>
+        public static Bitmap KiGamma(Bitmap bmp, float val)
+        {
+            if (bmp == null)
+            {
+                return null;
+            }
+
+            // 1表示無變化，就不做
+            if (val == 1.0000f) return bmp;
+
+            try
+            {
+                Bitmap b = new Bitmap(bmp.Width, bmp.Height);
+                Graphics g = Graphics.FromImage(b);
+                ImageAttributes attr = new ImageAttributes();
+
+                attr.SetGamma(val, ColorAdjustType.Bitmap);
+                g.DrawImage(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, attr);
+                g.Dispose();
+                return b;
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         private void button7_Click(object sender, EventArgs e)

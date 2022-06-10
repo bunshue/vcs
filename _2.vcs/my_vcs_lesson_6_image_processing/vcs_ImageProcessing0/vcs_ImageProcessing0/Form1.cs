@@ -1333,7 +1333,37 @@ namespace vcs_ImageProcessing0
 
         private void button15_Click(object sender, EventArgs e)
         {
+            //圖片測試
+            string filename = @"C:\______test_files\elephant.jpg";
+            Image sample = new Bitmap(filename);
+            MemoryStream buf = new MemoryStream();
+            sample.Save(buf, ImageFormat.Bmp);
+            byte[] currentImage = buf.GetBuffer();
 
+            int[] stats = new int[3];
+            for (int i = 0; i < currentImage.Length; )
+            {
+                for (int j = 0; j < 3; j++)
+                {
+                    stats[j] += currentImage[i];
+                    ++i;
+                }
+            }
+            richTextBox1.Text += "Blue: " + stats[0] + "\n";
+            richTextBox1.Text += "Green: " + stats[1] + "\n";
+            richTextBox1.Text += "Red: " + stats[2] + "\n";
+            if ((stats[0] > stats[1]) && (stats[0] > stats[2]))
+            {
+                richTextBox1.Text += "This is a cold picture." + "\n";
+            }
+            if ((stats[1] > stats[0]) && (stats[1] > stats[2]))
+            {
+                richTextBox1.Text += "This is a summer picture." + "\n";
+            }
+            if ((stats[2] > stats[0]) && (stats[2] > stats[1]))
+            {
+                richTextBox1.Text += "This is a fiery picture." + "\n";
+            }
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -1666,3 +1696,4 @@ namespace vcs_ImageProcessing0
         }
     }
 }
+

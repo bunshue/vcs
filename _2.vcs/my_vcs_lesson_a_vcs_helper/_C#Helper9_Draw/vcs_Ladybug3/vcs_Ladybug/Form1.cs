@@ -20,7 +20,7 @@ namespace vcs_Ladybug
         public int Speed = 5; // 漫遊的速度
 
         double Angle = 0; // 目前的旋轉角度
-        Random rd = new Random(); // 亂數
+        Random r = new Random(); // 亂數
 
         public Form1()
         {
@@ -29,42 +29,39 @@ namespace vcs_Ladybug
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename2 = @"C:\______test_files\__RW\_png\ladybug.png";
-            bitmap1 = new Bitmap(filename2);
-            //cir = new GC_2D_MovableCircle(20, new Point(this.pictureBox2.ClientSize.Width / 2, this.pictureBox2.ClientSize.Height / 2));
-            Update();
+            string filename = @"C:\______test_files\__RW\_png\ladybug.png";
+            bitmap1 = new Bitmap(filename);
+            Run_Ladybug();
 
-
-            pictureBox2.Size = new Size(1920 / 2, 1080 / 2);
-            pictureBox2.Location = new Point(0, 0);
+            pictureBox1.Size = new Size(1920 / 2, 1080 / 2);
+            pictureBox1.Location = new Point(0, 0);
 
             //最大化螢幕
-            //this.FormBorderStyle = FormBorderStyle.None;
+            this.FormBorderStyle = FormBorderStyle.None;
             //this.WindowState = FormWindowState.Maximized;
-
-
+            this.Size = new Size(1920 / 2, 1080 / 2);
+            richTextBox1.Visible = false;
         }
 
-        private void pictureBox2_Paint(object sender, PaintEventArgs e)
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             e.Graphics.ResetTransform();
             Draw(e.Graphics);
         }
 
-        private void timer2_Tick(object sender, EventArgs e)
+        private void timer1_Tick(object sender, EventArgs e)
         {
             //Wander_Center = new PointF(1920 / 4, 1080 / 4);
             Run_Ladybug();
-            this.pictureBox2.Invalidate();
+            this.pictureBox1.Invalidate();
         }
-
 
         void Run_Ladybug()
         {
             // NPC 和 漫遊中心點 的 夾角向量
             PointF vectorToCenter = new PointF(Wander_Center.X - pos.X, Wander_Center.Y - pos.Y);
             // NPC 和 漫遊中心點 的距離
-            double len = Math.Sqrt((Wander_Center.X - pos.X) * (Wander_Center.X - pos.X) +(Wander_Center.Y - pos.Y) * (Wander_Center.Y - pos.Y));
+            double len = Math.Sqrt((Wander_Center.X - pos.X) * (Wander_Center.X - pos.X) + (Wander_Center.Y - pos.Y) * (Wander_Center.Y - pos.Y));
 
             if (len > 5 * Wander_Radius) // 在 5 倍 的漫遊半徑距離 外
             {
@@ -97,11 +94,11 @@ namespace vcs_Ladybug
                     diff = radius;
                 }
 
-                Angle = Angle + (diff + (rd.NextDouble() * 0.001)); // 再加一點點 亂數
+                Angle = Angle + (diff + (r.NextDouble() * 0.001)); // 再加一點點 亂數
             }
             else // 在 漫遊的半徑距離 內
             {
-                double rate = rd.NextDouble() * 0.06 - 0.03; // 一些 亂數 改變 角度
+                double rate = r.NextDouble() * 0.06 - 0.03; // 一些 亂數 改變 角度
                 Angle += rate;
             }
 
@@ -128,4 +125,5 @@ namespace vcs_Ladybug
         }
     }
 }
+
 
