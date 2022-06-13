@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
 
 //平移縮放旋轉
 
@@ -57,47 +58,65 @@ namespace vcs_Draw7_Transform2
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //平移 旋轉 座標軸
-
-            Graphics g = this.pictureBox1.CreateGraphics();
-            g.Clear(Color.White);
-            Pen p = new Pen(Color.Red, 5);
-            Rectangle rect = new Rectangle(0, 0, 200, 50);
-
-            richTextBox1.Text += "平移坐標軸至指定座標(100, 100) 然後畫一線\n";
-            g.TranslateTransform(100, 100);
-            g.DrawLine(p, 0, 0, 100, 0);
-            g.ResetTransform();
-
-            richTextBox1.Text += "平移坐標軸至指定座標(200, 200) 然後再進行旋轉座標畫線\n";
-            g.TranslateTransform(200, 200);
-            for (int i = 0; i < 8; i++)
-            {
-                //g.RotateTransform(45);
-                g.RotateTransform(10);//旋轉指定的角度
-                g.DrawLine(p, 0, 0, 100, 0);
-            }
-            g.Dispose();
         }
 
         //平移
         private void button1_Click(object sender, EventArgs e)
         {
+            //準備
             Graphics g = this.pictureBox1.CreateGraphics();
             g.Clear(Color.White);
             Pen p = new Pen(Color.Red, 5);
-            Rectangle rect = new Rectangle(0, 0, 200, 50);
+            Rectangle rect = new Rectangle(10, 10, 200, 50);
 
+            string filename = @"C:\______test_files\picture1.jpg";
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+
+            int w = bitmap1.Width;
+            int h = bitmap1.Height;
+            int x_st = 50;
+            int y_st = 50;
+            Point p0 = new Point(0, 0);
+            Point p1 = new Point(400, 0);
+            Point p2 = new Point(0, 400);
+
+
+            //原本的, 做相同的事
+            p.Color = Color.Red;
             g.DrawRectangle(p, rect);   //用紅色筆畫矩形
-
-            //向左平移100向下平移50
-            g.TranslateTransform(100, 50);
-            p.Color = Color.Green;
-            g.DrawRectangle(p, rect);   //用綠色筆畫平移後的圖形
-
-            g.ResetTransform(); //恢復
             g.DrawString("平移, 紅色是原本的, 綠色是平移後的", new Font("標楷體", 16), new SolidBrush(Color.Blue), new PointF(0, 0));
+            g.DrawImage(bitmap1, x_st, y_st, w / 2, h / 2);
+            g.DrawLine(p, p0, p1);
+            g.DrawLine(p, p0, p2);
 
+
+            g.DrawLine(p, p0.X + 150, p0.Y + 400, p1.X + 150, p1.Y + 400);
+            g.DrawLine(p, p0.X + 150, p0.Y + 400, p2.X + 150, p2.Y + 400);
+
+            //平移
+            g.TranslateTransform(150, 400);  //平移原點 再右移 再下移 然後再進行畫圖
+
+            if (checkBox2.Checked == true)
+            {
+                g.SmoothingMode = SmoothingMode.AntiAlias;
+            }
+
+            if (checkBox1.Checked == true)
+            {
+                g.RotateTransform(10);  //依原點旋轉
+            }
+
+            //平移後的, 做相同的事
+            p.Color = Color.Green;
+            p.Width = 3;
+            g.DrawRectangle(p, rect);   //用綠色筆畫平移後的圖形
+            g.DrawString("平移, 紅色是原本的, 綠色是平移後的", new Font("標楷體", 16), new SolidBrush(Color.Green), new PointF(0, 0));
+            g.DrawImage(bitmap1, x_st, y_st, w / 2, h / 2);
+            g.DrawLine(p, p0, p1);
+            g.DrawLine(p, p0, p2);
+
+            //恢復
+            g.ResetTransform();
             g.Dispose();
             p.Dispose();
         }
@@ -125,26 +144,41 @@ namespace vcs_Draw7_Transform2
         }
 
         //旋轉
-        //坐標原點為矩形的左上點
         private void button3_Click(object sender, EventArgs e)
         {
+            int i;
             Graphics g = this.pictureBox1.CreateGraphics();
             g.Clear(Color.White);
             Pen p = new Pen(Color.Red, 5);
-            Rectangle rect = new Rectangle(0, 0, 200, 50);
-            g.DrawRectangle(p, rect);   //用紅色筆畫矩形
-            g.TranslateTransform(200, 0);
-            g.RotateTransform(90);
 
+            //未旋轉
+            g.TranslateTransform(100, 100);   //平移原點 再右移 再下移 然後再進行畫圖
+
+            g.DrawLine(p, 0, 0, 50, 0);
+            for (i = 0; i < 10; i++)
+            {
+                g.TranslateTransform(50, 0);   //平移原點 再右移 再下移 然後再進行畫圖
+                //g.RotateTransform(30);
+                g.DrawLine(p, 0, 0, 50, 0);
+            }
+
+            //旋轉
+            g.ResetTransform();
+            g.TranslateTransform(100, 200);   //平移原點 再右移 再下移 然後再進行畫圖
             p.Color = Color.Green;
-            g.DrawRectangle(p, rect);   //用綠色筆畫旋轉後的圖形
+            g.DrawLine(p, 0, 0, 50, 0);
+            for (i = 0; i < 10; i++)
+            {
+                g.TranslateTransform(50, 0);   //平移原點 再右移 再下移 然後再進行畫圖
+                g.RotateTransform(30);
+                g.DrawLine(p, 0, 0, 50, 0);
+            }
 
             g.ResetTransform(); //恢復
             g.DrawString("旋轉, 紅色是原本的, 綠色是旋轉後的", new Font("標楷體", 16), new SolidBrush(Color.Blue), new PointF(0, 0));
 
             g.Dispose();
             p.Dispose();
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -154,9 +188,7 @@ namespace vcs_Draw7_Transform2
             g.DrawString("字串旋轉列印", new Font("標楷體", 20), new SolidBrush(Color.Blue), new PointF(20, 20));
 
             Font f = new Font("標楷體", 50);
-            RotateDeawString(g, f, 35, "字串旋轉列印", 20, 20);
-
-
+            RotateDrawString(g, f, 35, "字串旋轉列印", 20, 20);
         }
 
         /// <summary>
@@ -168,7 +200,7 @@ namespace vcs_Draw7_Transform2
         /// <param name="msg">列印訊息</param>
         /// <param name="x">重設原點 X 位置</param>
         /// <param name="y">重設原點 Y 位置</param>
-        private void RotateDeawString(Graphics g, Font font, int degree, string msg, int x, int y)
+        private void RotateDrawString(Graphics g, Font font, int degree, string msg, int x, int y)
         {
             // 原點位置重設
             g.TranslateTransform(mmTo100InchX(x), mmTo100InchY(y));
@@ -196,32 +228,45 @@ namespace vcs_Draw7_Transform2
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //轉變座標軸角度
-
             Graphics g = this.pictureBox1.CreateGraphics();
             g.Clear(Color.White);
-            Pen p = new Pen(Color.Red, 5);
-            Rectangle rect = new Rectangle(0, 0, 200, 50);
 
-            richTextBox1.Text += "轉變坐標軸角度\n";
+            draw_grid(g);
 
-            for (int i = 0; i <= 90; i += 10)
-            {
-                g.RotateTransform(i);//旋轉指定的角度
-                g.DrawLine(p, 0, 0, 500, 0);    //畫一條線
-                g.ResetTransform();//恢復坐標軸坐標 回 0 度
-            }
+            g.DrawString("群曜醫電1", new Font("標楷體", 50), new SolidBrush(Color.Blue), new PointF(0, 0));
 
-            p = new Pen(Color.Blue, 2);
-            g.RotateTransform(20);//旋轉指定的角度
-            g.DrawLine(p, 0, 0, 500, 0);    //畫一條線
-            g.ResetTransform();//恢復坐標軸坐標 回 0 度
+            g.ScaleTransform(0.5f, 2);  //x軸比例再放大, y軸比例再放大
 
-            g.RotateTransform(30);//旋轉指定的角度
-            g.DrawLine(p, 0, 0, 500, 0);    //畫一條線
-            g.ResetTransform();//恢復坐標軸坐標 回 0 度
+            g.DrawString("群曜醫電2", new Font("標楷體", 50), new SolidBrush(Color.Blue), new PointF(0, 40));
+
+            g.ScaleTransform(0.5f, 2);  //x軸比例再放大, y軸比例再放大
+
+            g.DrawString("群曜醫電3", new Font("標楷體", 50), new SolidBrush(Color.Blue), new PointF(0, 80));
+
+            g.ResetTransform();
+            g.ScaleTransform(1.5f, 1);  //x軸比例再放大, y軸比例再放大
+
+            g.DrawString("群曜醫電4", new Font("標楷體", 50), new SolidBrush(Color.Blue), new PointF(0, 600));
 
             g.Dispose();
+        }
+
+        void draw_grid(Graphics g)
+        {
+            int W = this.pictureBox1.Width;
+            int H = this.pictureBox1.Height;
+            int i;
+            int j;
+            for (i = 0; i <= W; i += 50)
+            {
+                g.DrawLine(Pens.Gray, i, 0, i, H);
+            }
+            for (j = 0; j <= H; j += 50)
+            {
+                g.DrawLine(Pens.Gray, 0, j, W, j);
+            }
+
+
         }
 
         private void button6_Click(object sender, EventArgs e)

@@ -41,6 +41,8 @@
             this.button8 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.bt_save = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBox2 = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,7 +50,7 @@
             // 
             this.button1.Location = new System.Drawing.Point(6, 72);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(140, 50);
+            this.button1.Size = new System.Drawing.Size(86, 50);
             this.button1.TabIndex = 0;
             this.button1.Text = "平移";
             this.button1.UseVisualStyleBackColor = true;
@@ -99,7 +101,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(140, 50);
             this.button5.TabIndex = 5;
-            this.button5.Text = "轉變座標軸角度";
+            this.button5.Text = "縮放";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -117,7 +119,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(140, 50);
             this.button0.TabIndex = 7;
-            this.button0.Text = "平移 旋轉 座標軸";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -170,11 +171,33 @@
             this.bt_save.UseVisualStyleBackColor = true;
             this.bt_save.Click += new System.EventHandler(this.bt_save_Click);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(98, 77);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(48, 16);
+            this.checkBox1.TabIndex = 13;
+            this.checkBox1.Text = "旋轉";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // checkBox2
+            // 
+            this.checkBox2.AutoSize = true;
+            this.checkBox2.Location = new System.Drawing.Point(98, 99);
+            this.checkBox2.Name = "checkBox2";
+            this.checkBox2.Size = new System.Drawing.Size(60, 16);
+            this.checkBox2.TabIndex = 14;
+            this.checkBox2.Text = "反鋸齒";
+            this.checkBox2.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1180, 848);
+            this.Controls.Add(this.checkBox2);
+            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.bt_save);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button8);
@@ -193,6 +216,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -211,6 +235,8 @@
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button bt_save;
+        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBox2;
     }
 }
 
