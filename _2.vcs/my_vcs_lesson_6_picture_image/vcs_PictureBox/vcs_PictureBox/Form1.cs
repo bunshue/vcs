@@ -178,29 +178,6 @@ namespace vcs_PictureBox
 
         private void button12_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Image == null)
-                return;
-
-            #region 影像旋轉(以中心順時針轉10度)
-            //建立新的影像
-            Image rotateImage = new Bitmap(pictureBox1.Image.Width, pictureBox1.Image.Height) as Image;
-            //準備繪製新的影像
-            Graphics graphics1 = Graphics.FromImage(rotateImage);
-            //設定中心點
-            graphics1.TranslateTransform((float)pictureBox1.Image.Width / 2, (float)pictureBox1.Image.Height / 2);
-            //順時針轉10度
-            graphics1.RotateTransform(10);
-            //還原中心點
-            graphics1.TranslateTransform(-(float)pictureBox1.Image.Width / 2, -(float)pictureBox1.Image.Height / 2);
-            //於座標(0,0)開始繪製來源影像
-            graphics1.DrawImage(pictureBox1.Image, 0, 0, pictureBox1.Image.Width, pictureBox1.Image.Height);
-            graphics1.Dispose();
-            //儲存新的影像
-            string filename = Application.StartupPath + "\\rotate_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-            rotateImage.Save(@filename, ImageFormat.Jpeg);
-            richTextBox1.Text += "影像旋轉，存檔完成，檔名：" + filename + "\n";
-            pictureBox1.Image = rotateImage;
-            #endregion
         }
 
         private void button1_Click(object sender, EventArgs e)

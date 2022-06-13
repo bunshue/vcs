@@ -317,6 +317,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(140, 50);
             this.button18.TabIndex = 35;
+            this.button18.Text = "DrawString範例";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 

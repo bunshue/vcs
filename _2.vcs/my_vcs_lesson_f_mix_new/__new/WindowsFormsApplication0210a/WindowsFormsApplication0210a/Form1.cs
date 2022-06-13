@@ -121,25 +121,6 @@ namespace WindowsFormsApplication0210a
             g.DrawImage(bitmap1, 0, 50);
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "無 MakeTransparent\n";
-            string filename = @"..\..\pic\lion.bmp";
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-            pictureBox1.Image = bitmap1;
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "有 MakeTransparent\n";
-            string filename = @"..\..\pic\lion.bmp";
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-            bitmap1.MakeTransparent(Color.White);//將圖片白色部分透明化;
-            pictureBox1.Image = bitmap1;
-
-        }
-
         private void button5_Click(object sender, EventArgs e)
         {
             Graphics g = this.pictureBox1.CreateGraphics();
@@ -179,11 +160,6 @@ namespace WindowsFormsApplication0210a
 
             // Draw the transparent bitmap to the screen.
             g.DrawImage(bitmap1, 0, 200, bitmap1.Width, bitmap1.Height);
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            
         }
     }
 }

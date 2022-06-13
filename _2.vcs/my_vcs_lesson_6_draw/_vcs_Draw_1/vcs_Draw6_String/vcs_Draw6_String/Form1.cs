@@ -784,6 +784,45 @@ namespace vcs_Draw6_String
 
         private void button18_Click(object sender, EventArgs e)
         {
+            //DrawString範例
+            Graphics g = this.pictureBox1.CreateGraphics();
+
+            int y = 0;
+            g.FillRectangle(Brushes.White, ClientRectangle);//繪制窗體背景色
+            Rectangle rect = new Rectangle(0, y, 400, Font.Height);
+            //g.FillRectangle(Brushes.Blue, rect);//墳兗一個矩形
+            g.DrawRectangle(Pens.Blue, rect);//繪製一個矩形
+            g.DrawString("This text is left justified.", Font, Brushes.Black, rect);
+            y += Font.Height + 20;
+            //Font.Dispose();//沒有創建對象,無須釋放資源
+
+            Font f = new Font("Arial", 16, FontStyle.Bold | FontStyle.Italic);
+            rect = new Rectangle(0, y, 400, f.Height);
+            g.DrawRectangle(Pens.Blue, rect);
+            StringFormat sf = new StringFormat();
+            sf.Alignment = StringAlignment.Far;
+            g.DrawString("This text is right justified.", f, Brushes.Blue, rect, sf);
+            y += f.Height + 20;
+            f.Dispose();//創建了對象,須釋放資源
+
+            f = new Font("Courier Ncw", 12, FontStyle.Underline | FontStyle.Bold);
+            rect = new Rectangle(0, y, 400, f.Height);
+            g.DrawRectangle(Pens.Blue, rect);
+            sf = new StringFormat();
+            sf.Alignment = StringAlignment.Center;
+            g.DrawString("This text is centered, and unederlined.", f, Brushes.Blue, rect, sf);
+            y += f.Height + 20;
+            f.Dispose();
+
+            f = new Font("Times New Roman", 12);
+            rect = new Rectangle(0, y, 400, f.Height * 3);
+            g.DrawRectangle(Pens.Blue, rect);
+            string longString = "This text is much longer, and drawn ";
+            longString += "into a rectangle that is higher than ";
+            longString += "one line,so that it will wrap. It is ";
+            longString += "very easy to wrap text using GDI+.";
+            g.DrawString(longString, f, Brushes.Black, rect);
+            f.Dispose();
         }
 
         private void button19_Click(object sender, EventArgs e)

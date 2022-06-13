@@ -229,7 +229,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(170, 70);
             this.button12.TabIndex = 137;
-            this.button12.Text = "GraphicsPath 使用";
+            this.button12.Text = "不規則圖形裁剪圖片";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 

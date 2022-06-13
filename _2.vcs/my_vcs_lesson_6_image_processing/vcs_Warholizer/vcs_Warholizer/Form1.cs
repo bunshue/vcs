@@ -192,5 +192,25 @@ namespace vcs_Warholizer
             picToColor3.BackColor = Color.Gray;
             picToColor4.BackColor = Color.Khaki;
         }
+
+        private void bt_set1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_set2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_set3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_set4_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

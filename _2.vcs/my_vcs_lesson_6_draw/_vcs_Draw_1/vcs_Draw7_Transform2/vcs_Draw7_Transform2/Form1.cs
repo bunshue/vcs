@@ -450,7 +450,34 @@ namespace vcs_Draw7_Transform2
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //旋轉一張圖片
 
+            string filename = @"C:\______test_files\picture1.jpg";
+            pictureBox1.Image = Image.FromFile(filename);
+
+            #region 影像旋轉(以中心順時針轉10度)
+            //建立新的影像
+            Image rotateImage = new Bitmap(pictureBox1.Image.Width, pictureBox1.Image.Height) as Image;
+            //準備繪製新的影像
+            Graphics g = Graphics.FromImage(rotateImage);
+            //設定中心點
+            g.TranslateTransform((float)pictureBox1.Image.Width / 2, (float)pictureBox1.Image.Height / 2);
+            //順時針轉10度
+            g.RotateTransform(10);
+            //還原中心點
+            g.TranslateTransform(-(float)pictureBox1.Image.Width / 2, -(float)pictureBox1.Image.Height / 2);
+            //於座標(0,0)開始繪製來源影像
+            g.DrawImage(pictureBox1.Image, 0, 0, pictureBox1.Image.Width, pictureBox1.Image.Height);
+            g.Dispose();
+            pictureBox1.Image = rotateImage;
+
+            /*
+            //儲存新的影像
+            string filename = Application.StartupPath + "\\rotate_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            rotateImage.Save(@filename, ImageFormat.Jpeg);
+            richTextBox1.Text += "影像旋轉，存檔完成，檔名：" + filename + "\n";
+            */
+            #endregion
         }
 
         private void bt_save_Click(object sender, EventArgs e)

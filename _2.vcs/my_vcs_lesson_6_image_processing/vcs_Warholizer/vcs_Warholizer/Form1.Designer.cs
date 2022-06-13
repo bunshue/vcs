@@ -53,6 +53,10 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mnuFile = new System.Windows.Forms.ToolStripMenuItem();
+            this.bt_set1 = new System.Windows.Forms.Button();
+            this.bt_set2 = new System.Windows.Forms.Button();
+            this.bt_set3 = new System.Windows.Forms.Button();
+            this.bt_set4 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picToColor4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picToColor3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picToColor2)).BeginInit();
@@ -97,7 +101,7 @@
             // 
             this.mnuColorsSet2.Name = "mnuColorsSet2";
             this.mnuColorsSet2.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D2)));
-            this.mnuColorsSet2.Size = new System.Drawing.Size(144, 22);
+            this.mnuColorsSet2.Size = new System.Drawing.Size(152, 22);
             this.mnuColorsSet2.Text = "Set &2";
             this.mnuColorsSet2.Click += new System.EventHandler(this.mnuColorsSet2_Click);
             // 
@@ -115,7 +119,7 @@
             // 
             this.mnuColorsSet1.Name = "mnuColorsSet1";
             this.mnuColorsSet1.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D1)));
-            this.mnuColorsSet1.Size = new System.Drawing.Size(144, 22);
+            this.mnuColorsSet1.Size = new System.Drawing.Size(152, 22);
             this.mnuColorsSet1.Text = "Set &1";
             this.mnuColorsSet1.Click += new System.EventHandler(this.mnuColorsSet1_Click);
             // 
@@ -144,7 +148,7 @@
             // 
             this.mnuColorsSet3.Name = "mnuColorsSet3";
             this.mnuColorsSet3.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D3)));
-            this.mnuColorsSet3.Size = new System.Drawing.Size(144, 22);
+            this.mnuColorsSet3.Size = new System.Drawing.Size(152, 22);
             this.mnuColorsSet3.Text = "Set &3";
             this.mnuColorsSet3.Click += new System.EventHandler(this.mnuColorsSet3_Click);
             // 
@@ -152,7 +156,7 @@
             // 
             this.mnuColorsSet4.Name = "mnuColorsSet4";
             this.mnuColorsSet4.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D4)));
-            this.mnuColorsSet4.Size = new System.Drawing.Size(144, 22);
+            this.mnuColorsSet4.Size = new System.Drawing.Size(152, 22);
             this.mnuColorsSet4.Text = "Set &4";
             this.mnuColorsSet4.Click += new System.EventHandler(this.mnuColorsSet4_Click);
             // 
@@ -268,7 +272,7 @@
             this.mnuColors});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(763, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(953, 24);
             this.menuStrip1.TabIndex = 27;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -281,11 +285,55 @@
             this.mnuFile.Size = new System.Drawing.Size(38, 20);
             this.mnuFile.Text = "&File";
             // 
+            // bt_set1
+            // 
+            this.bt_set1.Location = new System.Drawing.Point(316, 30);
+            this.bt_set1.Name = "bt_set1";
+            this.bt_set1.Size = new System.Drawing.Size(50, 50);
+            this.bt_set1.TabIndex = 28;
+            this.bt_set1.Text = "1";
+            this.bt_set1.UseVisualStyleBackColor = true;
+            this.bt_set1.Click += new System.EventHandler(this.bt_set1_Click);
+            // 
+            // bt_set2
+            // 
+            this.bt_set2.Location = new System.Drawing.Point(372, 30);
+            this.bt_set2.Name = "bt_set2";
+            this.bt_set2.Size = new System.Drawing.Size(50, 50);
+            this.bt_set2.TabIndex = 29;
+            this.bt_set2.Text = "2";
+            this.bt_set2.UseVisualStyleBackColor = true;
+            this.bt_set2.Click += new System.EventHandler(this.bt_set2_Click);
+            // 
+            // bt_set3
+            // 
+            this.bt_set3.Location = new System.Drawing.Point(428, 30);
+            this.bt_set3.Name = "bt_set3";
+            this.bt_set3.Size = new System.Drawing.Size(50, 50);
+            this.bt_set3.TabIndex = 30;
+            this.bt_set3.Text = "3";
+            this.bt_set3.UseVisualStyleBackColor = true;
+            this.bt_set3.Click += new System.EventHandler(this.bt_set3_Click);
+            // 
+            // bt_set4
+            // 
+            this.bt_set4.Location = new System.Drawing.Point(484, 30);
+            this.bt_set4.Name = "bt_set4";
+            this.bt_set4.Size = new System.Drawing.Size(50, 50);
+            this.bt_set4.TabIndex = 31;
+            this.bt_set4.Text = "4";
+            this.bt_set4.UseVisualStyleBackColor = true;
+            this.bt_set4.Click += new System.EventHandler(this.bt_set4_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(763, 589);
+            this.ClientSize = new System.Drawing.Size(953, 589);
+            this.Controls.Add(this.bt_set4);
+            this.Controls.Add(this.bt_set3);
+            this.Controls.Add(this.bt_set2);
+            this.Controls.Add(this.bt_set1);
             this.Controls.Add(this.picToColor4);
             this.Controls.Add(this.picToColor3);
             this.Controls.Add(this.btnGo);
@@ -347,6 +395,10 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem mnuFile;
+        private System.Windows.Forms.Button bt_set1;
+        private System.Windows.Forms.Button bt_set2;
+        private System.Windows.Forms.Button bt_set3;
+        private System.Windows.Forms.Button bt_set4;
     }
 }
 
