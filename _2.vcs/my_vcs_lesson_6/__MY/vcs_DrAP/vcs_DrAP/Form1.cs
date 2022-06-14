@@ -350,9 +350,8 @@ namespace vcs_DrAP
             //轉出一層
             richTextBox2.Text += "開始計時\n";
             this.Text = "DrAP";
-            // Create stopwatch
+
             Stopwatch stopwatch = new Stopwatch();
-            // Begin timing
             stopwatch.Start();
 
             flag_search_mode = 0;
@@ -444,9 +443,7 @@ namespace vcs_DrAP
                 flag_search_done = 0;
             }
 
-            // Stop timing
             stopwatch.Stop();
-            // Write result
             richTextBox2.Text += "停止計時\t";
             richTextBox2.Text += "總時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
             this.Text = "DrAP (轉出時間 : " + (stopwatch.ElapsedMilliseconds / 1000).ToString() + " 秒)";

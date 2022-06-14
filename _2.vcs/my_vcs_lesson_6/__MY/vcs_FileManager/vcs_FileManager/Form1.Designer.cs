@@ -76,6 +76,10 @@
             this.button0 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.tb_shortname = new System.Windows.Forms.TextBox();
+            this.lb_files = new System.Windows.Forms.Label();
+            this.lb_filesize = new System.Windows.Forms.Label();
+            this.lb_find = new System.Windows.Forms.Label();
+            this.lb_time = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -87,7 +91,7 @@
             this.groupBox1.Controls.Add(this.rb_sort2);
             this.groupBox1.Controls.Add(this.rb_sort1);
             this.groupBox1.Controls.Add(this.rb_sort0);
-            this.groupBox1.Location = new System.Drawing.Point(125, 471);
+            this.groupBox1.Location = new System.Drawing.Point(120, 507);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(140, 145);
             this.groupBox1.TabIndex = 11;
@@ -176,7 +180,7 @@
             // 
             // bt_clear2
             // 
-            this.bt_clear2.Location = new System.Drawing.Point(359, 280);
+            this.bt_clear2.Location = new System.Drawing.Point(360, 428);
             this.bt_clear2.Name = "bt_clear2";
             this.bt_clear2.Size = new System.Drawing.Size(63, 30);
             this.bt_clear2.TabIndex = 15;
@@ -186,7 +190,7 @@
             // 
             // richTextBox2
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(335, 255);
+            this.richTextBox2.Location = new System.Drawing.Point(330, 390);
             this.richTextBox2.Name = "richTextBox2";
             this.richTextBox2.Size = new System.Drawing.Size(111, 111);
             this.richTextBox2.TabIndex = 14;
@@ -197,7 +201,7 @@
             this.groupBox2.Controls.Add(this.cb_show2);
             this.groupBox2.Controls.Add(this.cb_show1);
             this.groupBox2.Controls.Add(this.cb_show0);
-            this.groupBox2.Location = new System.Drawing.Point(271, 471);
+            this.groupBox2.Location = new System.Drawing.Point(266, 507);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(107, 145);
             this.groupBox2.TabIndex = 12;
@@ -274,9 +278,9 @@
             this.groupBox3.Controls.Add(this.cb_compare3);
             this.groupBox3.Controls.Add(this.cb_compare2);
             this.groupBox3.Controls.Add(this.cb_compare0);
-            this.groupBox3.Location = new System.Drawing.Point(129, 119);
+            this.groupBox3.Location = new System.Drawing.Point(120, 118);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(134, 130);
+            this.groupBox3.Size = new System.Drawing.Size(107, 130);
             this.groupBox3.TabIndex = 13;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "比較";
@@ -356,7 +360,7 @@
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(129, 12);
+            this.listBox1.Location = new System.Drawing.Point(120, 12);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(194, 100);
             this.listBox1.TabIndex = 30;
@@ -404,7 +408,7 @@
             this.groupBox_file.Controls.Add(this.cb_filesize);
             this.groupBox_file.Controls.Add(this.tb_filesize);
             this.groupBox_file.Controls.Add(this.label2);
-            this.groupBox_file.Location = new System.Drawing.Point(129, 255);
+            this.groupBox_file.Location = new System.Drawing.Point(120, 403);
             this.groupBox_file.Name = "groupBox_file";
             this.groupBox_file.Size = new System.Drawing.Size(198, 98);
             this.groupBox_file.TabIndex = 48;
@@ -469,7 +473,7 @@
             // bt_clear3
             // 
             this.bt_clear3.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear3.Location = new System.Drawing.Point(1121, 269);
+            this.bt_clear3.Location = new System.Drawing.Point(1697, 403);
             this.bt_clear3.Name = "bt_clear3";
             this.bt_clear3.Size = new System.Drawing.Size(63, 30);
             this.bt_clear3.TabIndex = 58;
@@ -490,7 +494,7 @@
             // tb_find
             // 
             this.tb_find.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_find.Location = new System.Drawing.Point(118, 375);
+            this.tb_find.Location = new System.Drawing.Point(118, 320);
             this.tb_find.Name = "tb_find";
             this.tb_find.Size = new System.Drawing.Size(141, 36);
             this.tb_find.TabIndex = 60;
@@ -577,11 +581,53 @@
             this.tb_shortname.TabIndex = 68;
             this.tb_shortname.Text = "jul-123-2.julia.mp4";
             // 
+            // lb_files
+            // 
+            this.lb_files.AutoSize = true;
+            this.lb_files.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_files.Location = new System.Drawing.Point(226, 172);
+            this.lb_files.Name = "lb_files";
+            this.lb_files.Size = new System.Drawing.Size(69, 21);
+            this.lb_files.TabIndex = 69;
+            this.lb_files.Text = "lb_files";
+            // 
+            // lb_filesize
+            // 
+            this.lb_filesize.AutoSize = true;
+            this.lb_filesize.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_filesize.Location = new System.Drawing.Point(226, 195);
+            this.lb_filesize.Name = "lb_filesize";
+            this.lb_filesize.Size = new System.Drawing.Size(92, 21);
+            this.lb_filesize.TabIndex = 70;
+            this.lb_filesize.Text = "lb_filesize";
+            // 
+            // lb_find
+            // 
+            this.lb_find.AutoSize = true;
+            this.lb_find.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_find.Location = new System.Drawing.Point(226, 219);
+            this.lb_find.Name = "lb_find";
+            this.lb_find.Size = new System.Drawing.Size(67, 21);
+            this.lb_find.TabIndex = 71;
+            this.lb_find.Text = "lb_find";
+            // 
+            // lb_time
+            // 
+            this.lb_time.AutoSize = true;
+            this.lb_time.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_time.Location = new System.Drawing.Point(226, 245);
+            this.lb_time.Name = "lb_time";
+            this.lb_time.Size = new System.Drawing.Size(69, 21);
+            this.lb_time.TabIndex = 72;
+            this.lb_time.Text = "lb_time";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1784, 756);
+            this.Controls.Add(this.lb_time);
+            this.Controls.Add(this.lb_find);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button0);
             this.Controls.Add(this.bt_setup);
@@ -612,6 +658,8 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.tb_shortname);
+            this.Controls.Add(this.lb_filesize);
+            this.Controls.Add(this.lb_files);
             this.Name = "Form1";
             this.Text = "檔案管理員";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -678,6 +726,10 @@
         private System.Windows.Forms.Button button0;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.TextBox tb_shortname;
+        private System.Windows.Forms.Label lb_files;
+        private System.Windows.Forms.Label lb_filesize;
+        private System.Windows.Forms.Label lb_find;
+        private System.Windows.Forms.Label lb_time;
     }
 }
 

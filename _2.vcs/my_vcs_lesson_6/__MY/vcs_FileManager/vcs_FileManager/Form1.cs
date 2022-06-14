@@ -239,9 +239,16 @@ namespace vcs_FileManager
             bt_clear1.Location = new Point(richTextBox1.Location.X + richTextBox1.Width - bt_clear1.Width, richTextBox1.Location.Y);
             bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - bt_clear2.Width, richTextBox2.Location.Y);
             bt_clear3.Location = new Point(listView1.Location.X + listView1.Size.Width - bt_clear3.Size.Width, listView1.Location.Y + listView1.Size.Height - bt_clear3.Size.Height);
+            lb_find.Location = new Point(bt_clear3.Location.X - 200, bt_clear3.Location.Y);
+            lb_time.Location = new Point(bt_clear1.Location.X - 200, bt_clear1.Location.Y);
 
             bt_minimize_setup();
             bt_exit_setup();
+
+            lb_files.Text = "";
+            lb_filesize.Text = "";
+            lb_find.Text = "";
+            lb_time.Text = "";
         }
 
         private void bt_minimize_Click(object sender, EventArgs e)
@@ -864,6 +871,7 @@ namespace vcs_FileManager
             }
 
             show_MyFileInfo(fileinfos);
+            lb_find.Text = "個數 : " + fileinfos.Count.ToString() + " 個";
         }
 
         void show_MyFileInfo(List<MyFileInfo> fis)
@@ -1079,6 +1087,16 @@ namespace vcs_FileManager
                 return;
             }
 
+            lb_files.Text = "";
+            lb_filesize.Text = "";
+            lb_find.Text = "";
+            lb_time.Text = "";
+            this.Cursor = Cursors.WaitCursor;   // set busy cursor
+            button0.BackColor = Color.Red;
+            Application.DoEvents();
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
             //轉出一層
             fileinfos.Clear();
             fileinfos_match.Clear();
@@ -1142,20 +1160,35 @@ namespace vcs_FileManager
                     richTextBox1.Text += "非合法路徑或檔案a\n";
                 }
             }
+
+            this.Cursor = Cursors.Default;
+            button0.BackColor = System.Drawing.SystemColors.ControlLight;
+
+            stopwatch.Stop();
+            lb_time.Text = "時間 : " + stopwatch.Elapsed.TotalSeconds.ToString("0.00") + " 秒";
+            lb_files.Text = "檔案個數 : " + total_files.ToString();
+            lb_filesize.Text = "總容量   : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size));
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             //從一個資料夾中撈出所有檔案 標準版
-
+            
             if (listBox1.Items.Count == 0)
             {
                 richTextBox2.Text += "未選擇資料夾\n";
                 return;
             }
 
+            lb_files.Text = "";
+            lb_filesize.Text = "";
+            lb_find.Text = "";
+            lb_time.Text = "";
+            this.Cursor = Cursors.WaitCursor;   // set busy cursor
             button1.BackColor = Color.Red;
             Application.DoEvents();
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
 
             //轉出多層
             fileinfos.Clear();
@@ -1194,22 +1227,38 @@ namespace vcs_FileManager
                 }
             }
 
-            /*
-                        // Stop timing
-                        stopwatch.Stop();
-                        // Write result
-                        richTextBox2.Text += "停止計時\t";
-                        richTextBox2.Text += "總時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
-                        this.Text = "DrAP (轉出時間 : " + (stopwatch.ElapsedMilliseconds / 1000).ToString() + " 秒)";
-            */
-
             //show_file_info();
+
+            this.Cursor = Cursors.Default;
             button1.BackColor = System.Drawing.SystemColors.ControlLight;
+
+            //stopwatch.Stop();
+            lb_time.Text = "時間 : " + stopwatch.Elapsed.TotalSeconds.ToString("0.00") + " 秒";
+            lb_files.Text = "檔案個數 : " + total_files.ToString();
+            lb_filesize.Text = "總容量   : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size));
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            lb_files.Text = "";
+            lb_filesize.Text = "";
+            lb_find.Text = "";
+            lb_time.Text = "";
+            this.Cursor = Cursors.WaitCursor;   // set busy cursor
+            button2.BackColor = Color.Red;
+            Application.DoEvents();
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
+
             show_file_info();
+
+            this.Cursor = Cursors.Default;
+            button2.BackColor = System.Drawing.SystemColors.ControlLight;
+
+            //stopwatch.Stop();
+            lb_time.Text = "時間 : " + stopwatch.Elapsed.TotalSeconds.ToString("0.00") + " 秒";
+            lb_files.Text = "檔案個數 : " + total_files.ToString();
+            lb_filesize.Text = "總容量   : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size));
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -1227,8 +1276,15 @@ namespace vcs_FileManager
             if (len < 2)
                 return;
 
-            button5.BackColor = Color.Red;
+            lb_files.Text = "";
+            lb_filesize.Text = "";
+            lb_find.Text = "";
+            lb_time.Text = "";
+            this.Cursor = Cursors.WaitCursor;   // set busy cursor
+            button3.BackColor = Color.Red;
             Application.DoEvents();
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
 
             match_count = 0;
             fileinfos_match.Clear();
@@ -1319,7 +1375,12 @@ namespace vcs_FileManager
             richTextBox1.Text += "show match files\n";
             show_MyFileInfo(fileinfos_match);
             flag_need_shortname = false;
+            this.Cursor = Cursors.Default;
             button3.BackColor = System.Drawing.SystemColors.ControlLight;
+
+            stopwatch.Stop();
+            lb_time.Text = "時間 : " + stopwatch.Elapsed.TotalSeconds.ToString("0.00") + " 秒";
+            lb_find.Text = "個數 : " + fileinfos_match.ToString() + " 個";
         }
 
         private void check_cb_compare(object sender, EventArgs e)
@@ -1641,8 +1702,16 @@ namespace vcs_FileManager
             if (len < 2)
                 return;
 
+            listView1.Clear();
+            lb_files.Text = "";
+            lb_filesize.Text = "";
+            lb_find.Text = "";
+            lb_time.Text = "";
+            this.Cursor = Cursors.WaitCursor;   // set busy cursor
             button5.BackColor = Color.Red;
             Application.DoEvents();
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
 
             match_count = 0;
             fileinfos_match.Clear();
@@ -1669,7 +1738,12 @@ namespace vcs_FileManager
 
             richTextBox1.Text += "show match files\n";
             show_MyFileInfo(fileinfos_match);
+            this.Cursor = Cursors.Default;
             button5.BackColor = System.Drawing.SystemColors.ControlLight;
+
+            stopwatch.Stop();
+            lb_time.Text = "時間 : " + stopwatch.Elapsed.TotalSeconds.ToString("0.00") + " 秒";
+            lb_find.Text = "個數 : " + fileinfos_match.ToString() + " 個";
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -1684,8 +1758,15 @@ namespace vcs_FileManager
             if (len < 2)
                 return;
 
+            lb_files.Text = "";
+            lb_filesize.Text = "";
+            lb_find.Text = "";
+            lb_time.Text = "";
+            this.Cursor = Cursors.WaitCursor;   // set busy cursor
             button6.BackColor = Color.Red;
             Application.DoEvents();
+            Stopwatch stopwatch = new Stopwatch();
+            stopwatch.Start();
 
             match_count = 0;
             fileinfos_match.Clear();
@@ -1737,7 +1818,13 @@ namespace vcs_FileManager
 
             richTextBox1.Text += "show match files\n";
             show_MyFileInfo(fileinfos_match);
+            this.Cursor = Cursors.Default;
             button6.BackColor = System.Drawing.SystemColors.ControlLight;
+
+            stopwatch.Stop();
+            lb_time.Text = "時間 : " + stopwatch.Elapsed.TotalSeconds.ToString("0.00") + " 秒";
+            lb_find.Text = "個數 : " + fileinfos_match.ToString() + " 個";
+
         }
 
         private void button7_Click(object sender, EventArgs e)
