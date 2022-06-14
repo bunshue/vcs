@@ -220,19 +220,17 @@ namespace vcs_FFMPEG
                 }
             }
 
-            /*
             //case 2
             int y = (int)(pbx.ClientSize.Height * 0.25);
             int hgt = pbx.ClientSize.Height - 2 * y;
 
             // Draw it.
-            e.Graphics.FillRectangle(Brushes.Blue, 0, y, x, hgt);
+            e.Graphics.FillRectangle(Brushes.Blue, x1, y, x2-x1, hgt);
             using (Pen pen = new Pen(Color.Blue, 3))
             {
-                e.Graphics.DrawLine(pen, x, 0, x, pbx.ClientSize.Height);
+                e.Graphics.DrawLine(pen, x1, 0, x1, pbx.ClientSize.Height);
+                e.Graphics.DrawLine(pen, x2, 0, x2, pbx.ClientSize.Height);
             }
-            */
-
 
             if (flag_play_mode == 1)
             {

@@ -73,9 +73,6 @@ namespace vcs_PacMan
         {
             g = e.Graphics;
             Brush brush = new SolidBrush(Color.Blue);
-            //g.TranslateTransform(center_x, center_y);         //平移
-            //g.ScaleTransform(radiox, radioy);   //縮放
-            //g.RotateTransform(angle);           //旋轉
             DrawPacman(center_x, center_y, radius);
             label1.Text = "W = " + this.Size.Width.ToString() + " H = " + this.Size.Height.ToString() + " x = " + center_x.ToString() + " y = " + center_y.ToString() + " r = " + radius.ToString();
             //g.DrawRectangle(new Pen(Color.Black), new Rectangle(10, 10, this.Size.Width - 30, this.Size.Height - 50));

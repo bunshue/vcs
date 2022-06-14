@@ -70,5 +70,41 @@ namespace vcs_FileManager.Properties {
                 this["picture_viewer_path"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int min_file_size {
+            get {
+                return ((int)(this["min_file_size"]));
+            }
+            set {
+                this["min_file_size"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int search_count {
+            get {
+                return ((int)(this["search_count"]));
+            }
+            set {
+                this["search_count"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string search_pattern {
+            get {
+                return ((string)(this["search_pattern"]));
+            }
+            set {
+                this["search_pattern"] = value;
+            }
+        }
     }
 }

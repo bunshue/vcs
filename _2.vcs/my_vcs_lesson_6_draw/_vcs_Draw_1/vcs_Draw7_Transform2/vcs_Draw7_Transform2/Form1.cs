@@ -121,26 +121,8 @@ namespace vcs_Draw7_Transform2
             p.Dispose();
         }
 
-        //縮放
         private void button2_Click(object sender, EventArgs e)
         {
-            Graphics g = this.pictureBox1.CreateGraphics();
-            g.Clear(Color.White);
-            Pen p = new Pen(Color.Red, 5);
-            Rectangle rect = new Rectangle(0, 0, 200, 50);
-            g.DrawRectangle(p, rect);   //用紅色筆畫矩形
-            g.ScaleTransform(0.5f, 2);
-
-            p.Color = Color.Green;
-            g.DrawRectangle(p, rect);   //用綠色筆畫縮放後的圖形
-
-            g.ResetTransform(); //恢復
-            g.DrawString("縮放, 紅色是原本的, 綠色是縮放後的", new Font("標楷體", 16), new SolidBrush(Color.Blue), new PointF(0, 0));
-
-            g.Dispose();
-            p.Dispose();
-
-            //寬縮小一半，高放大一倍
         }
 
         //旋轉
@@ -228,27 +210,60 @@ namespace vcs_Draw7_Transform2
 
         private void button5_Click(object sender, EventArgs e)
         {
+            Font f = new Font("標楷體", 40);
+
             Graphics g = this.pictureBox1.CreateGraphics();
             g.Clear(Color.White);
 
             draw_grid(g);
 
-            g.DrawString("群曜醫電1", new Font("標楷體", 50), new SolidBrush(Color.Blue), new PointF(0, 0));
+            int w = 0;
+            int h = 0;
+            string str = "放大縮小";
 
-            g.ScaleTransform(0.5f, 2);  //x軸比例再放大, y軸比例再放大
+            w = g.MeasureString(str, f).ToSize().Width;
+            h = g.MeasureString(str, f).ToSize().Height;
 
-            g.DrawString("群曜醫電2", new Font("標楷體", 50), new SolidBrush(Color.Blue), new PointF(0, 40));
+            Pen p = new Pen(Color.Red, 3);
 
-            g.ScaleTransform(0.5f, 2);  //x軸比例再放大, y軸比例再放大
+            g.DrawString("放大縮小1", f, new SolidBrush(Color.Blue), new PointF(0, 0));
+            Rectangle rect1 = new Rectangle(0, 0, w / 4, h);
+            g.DrawRectangle(p, rect1);   //用紅色筆畫矩形
 
-            g.DrawString("群曜醫電3", new Font("標楷體", 50), new SolidBrush(Color.Blue), new PointF(0, 80));
+            g.ScaleTransform(-1, 1);
+            g.DrawString("反向字體", f, new SolidBrush(Color.Blue), new PointF(-w * 1, h));
 
             g.ResetTransform();
-            g.ScaleTransform(1.5f, 1);  //x軸比例再放大, y軸比例再放大
+            g.ScaleTransform(0.5f, 2);  //x軸比例再放大, y軸比例再放大
+            g.DrawString("放大縮小2", f, new SolidBrush(Color.Blue), new PointF(0, h * 1));
+            Rectangle rect2 = new Rectangle(0, h * 1, w / 4, h);
+            g.DrawRectangle(p, rect2);   //用紅色筆畫矩形
 
-            g.DrawString("群曜醫電4", new Font("標楷體", 50), new SolidBrush(Color.Blue), new PointF(0, 600));
+            g.ResetTransform();
+            g.ScaleTransform(2.0f, 1);  //x軸比例再放大, y軸比例再放大
+            g.DrawString("放大縮小3", f, new SolidBrush(Color.Blue), new PointF(0, h * 5));
+            Rectangle rect3 = new Rectangle(0, h * 5, w / 4, h);
+            g.DrawRectangle(p, rect3);   //用紅色筆畫矩形
+
+            g.ResetTransform();
+            g.ScaleTransform(3.0f, 3);  //x軸比例再放大, y軸比例再放大
+            g.DrawString("放大縮小4", f, new SolidBrush(Color.Blue), new PointF(0, h * 3));
+            Rectangle rect4 = new Rectangle(0, h * 3, w / 4, h);
+            g.DrawRectangle(p, rect4);   //用紅色筆畫矩形
+
+            //恢復比例, 寫說明
+            w = w / 4 * 7;
+            f = new Font("標楷體", 20);
+            //標示放大縮小比例
+            g.ResetTransform();
+            g.DrawString("正常", f, new SolidBrush(Color.Black), new PointF(w * 1, h * 0));
+            g.DrawString("X負一倍, Y不變", f, new SolidBrush(Color.Black), new PointF(w * 1, h * 1));
+            g.DrawString("X一半, Y一倍", f, new SolidBrush(Color.Black), new PointF(w * 1, h * 2));
+            g.DrawString("X一倍, Y不變", f, new SolidBrush(Color.Black), new PointF(w * 1, h * 6));
+            g.DrawString("X三倍, Y三倍", f, new SolidBrush(Color.Black), new PointF(w * 1, h * 8));
 
             g.Dispose();
+            f.Dispose();
         }
 
         void draw_grid(Graphics g)
@@ -257,16 +272,25 @@ namespace vcs_Draw7_Transform2
             int H = this.pictureBox1.Height;
             int i;
             int j;
-            for (i = 0; i <= W; i += 50)
+
+            Font f = new Font("標楷體", 40);
+
+            int w = 0;
+            int h = 0;
+            string str = "放大縮小";
+
+            w = g.MeasureString(str, f).ToSize().Width;
+            h = g.MeasureString(str, f).ToSize().Height;
+            richTextBox1.Text += "w = " + (w / 4).ToString() + ", h = " + h.ToString() + "\n";
+
+            for (i = 0; i <= W; i += w / 4)
             {
                 g.DrawLine(Pens.Gray, i, 0, i, H);
             }
-            for (j = 0; j <= H; j += 50)
+            for (j = 0; j <= H; j += h)
             {
                 g.DrawLine(Pens.Gray, 0, j, W, j);
             }
-
-
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -511,4 +535,3 @@ namespace vcs_Draw7_Transform2
         }
     }
 }
-

@@ -156,6 +156,32 @@ namespace vcs_FileManager
             Properties.Settings.Default.audio_player_path = audio_player_path;
             Properties.Settings.Default.picture_viewer_path = picture_viewer_path;
             Properties.Settings.Default.search_path = save_path;
+
+            int value = 0;
+            bool conversionSuccessful = int.TryParse(tb_filesize.Text, out value);    //out為必須
+            if (conversionSuccessful == true)
+            {
+                Properties.Settings.Default.min_file_size = value;
+            }
+            else
+            {
+                richTextBox1.Text += "int.TryParse 失敗\n";
+                richTextBox1.Text += "取得容量限制數字失敗\n";
+            }
+
+            conversionSuccessful = int.TryParse(tb_count.Text, out value);    //out為必須
+            if (conversionSuccessful == true)
+            {
+                Properties.Settings.Default.search_count = value;
+            }
+            else
+            {
+                richTextBox1.Text += "int.TryParse 失敗\n";
+                richTextBox1.Text += "取得檔案個數數字失敗\n";
+            }
+
+            Properties.Settings.Default.search_pattern = tb_find.Text;
+
             Properties.Settings.Default.Save();
         }
 
@@ -194,7 +220,7 @@ namespace vcs_FileManager
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
             button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            tb_shortname.Location = new Point(x_st + dx * 0, y_st + dy * 11-5);
+            tb_shortname.Location = new Point(x_st + dx * 0, y_st + dy * 11 - 5);
 
             x_st = 420;
             y_st = 12;
@@ -318,6 +344,9 @@ namespace vcs_FileManager
                     }
                 }
             }
+            tb_filesize.Text = Properties.Settings.Default.min_file_size.ToString();
+            tb_count.Text = Properties.Settings.Default.search_count.ToString();
+            tb_find.Text = Properties.Settings.Default.search_pattern;
         }
 
         private void bt_clear1_Click(object sender, EventArgs e)
@@ -1125,6 +1154,9 @@ namespace vcs_FileManager
                 return;
             }
 
+            button1.BackColor = Color.Red;
+            Application.DoEvents();
+
             //轉出多層
             fileinfos.Clear();
             fileinfos_match.Clear();
@@ -1172,6 +1204,7 @@ namespace vcs_FileManager
             */
 
             //show_file_info();
+            button1.BackColor = System.Drawing.SystemColors.ControlLight;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -1193,6 +1226,9 @@ namespace vcs_FileManager
             int len = fileinfos.Count;
             if (len < 2)
                 return;
+
+            button5.BackColor = Color.Red;
+            Application.DoEvents();
 
             match_count = 0;
             fileinfos_match.Clear();
@@ -1283,6 +1319,7 @@ namespace vcs_FileManager
             richTextBox1.Text += "show match files\n";
             show_MyFileInfo(fileinfos_match);
             flag_need_shortname = false;
+            button3.BackColor = System.Drawing.SystemColors.ControlLight;
         }
 
         private void check_cb_compare(object sender, EventArgs e)
@@ -1604,6 +1641,9 @@ namespace vcs_FileManager
             if (len < 2)
                 return;
 
+            button5.BackColor = Color.Red;
+            Application.DoEvents();
+
             match_count = 0;
             fileinfos_match.Clear();
 
@@ -1629,6 +1669,7 @@ namespace vcs_FileManager
 
             richTextBox1.Text += "show match files\n";
             show_MyFileInfo(fileinfos_match);
+            button5.BackColor = System.Drawing.SystemColors.ControlLight;
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -1642,6 +1683,9 @@ namespace vcs_FileManager
             int len = fileinfos.Count;
             if (len < 2)
                 return;
+
+            button6.BackColor = Color.Red;
+            Application.DoEvents();
 
             match_count = 0;
             fileinfos_match.Clear();
@@ -1658,9 +1702,9 @@ namespace vcs_FileManager
                 , "立花", "愛世", "美月", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
-                , "kana", "tia", "momo", "yui", "sho", "nene", "QQQQ"    //B class
-                , "ayaka", "jgj", "sora", "bt", "maki", "ayumi", "QQQQ"
-                , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
+                , "kana", "tia", "momo", "yui", "sho", "nene", "園田"    //B class
+                , "ayaka", "jgj", "sora", "bt", "maki", "ayumi", "mion"
+                , "本田岬", "lily", "lauren", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
                 , "gggg", "debut", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"    //new tmp
                 , "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ", "QQQQ"
@@ -1693,11 +1737,13 @@ namespace vcs_FileManager
 
             richTextBox1.Text += "show match files\n";
             show_MyFileInfo(fileinfos_match);
+            button6.BackColor = System.Drawing.SystemColors.ControlLight;
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
             //DDT 259 KBI.......
+            //sga dtt kbi 
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -1770,7 +1816,6 @@ namespace vcs_FileManager
                 button5_Click(sender, e);
             }
         }
-
     }
 }
 

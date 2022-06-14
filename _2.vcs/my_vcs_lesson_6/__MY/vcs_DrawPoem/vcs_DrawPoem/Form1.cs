@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
+using System.Drawing.Text;  //for InstalledFontCollection
 
 namespace vcs_DrawPoem
 {
@@ -17,6 +18,7 @@ namespace vcs_DrawPoem
 
         bool flag_debug_message = true;    //print some message, font size, timer cnt, index.....
         bool flag_debug_richtextbox = false;    //use richtextbox in release mode
+        bool flag_use_user_font = true;    //使用自定義字型
 
         string filepath_setup = "setup\\poetry.setup.txt";
         string filepath_poetry = "data\\poetry.txt";
@@ -94,6 +96,11 @@ namespace vcs_DrawPoem
         int random_play_sequence_index = 0;
         int move_step = MOVE_STEP;
 
+        //指明使用特定字型檔
+        string path = @"./font/康楷體w5.TTC";
+        //讀取字型文件
+        PrivateFontCollection pfc = new PrivateFontCollection();
+
         public Form1()
         {
             InitializeComponent();
@@ -104,6 +111,12 @@ namespace vcs_DrawPoem
 
             this.ShowInTaskbar = false;     //false : 表單不顯示在 Windows 工作列中
             //this.ShowInTaskbar = true;     //true : 表單顯示在 Windows 工作列中
+
+            if (flag_use_user_font == true)
+            {
+                pfc.AddFontFile(path);
+                f = new Font(pfc.Families[0], 40);
+            }
         }
 
         bool loadTextSetup()
@@ -1514,7 +1527,10 @@ namespace vcs_DrawPoem
             //richTextBox1.Clear();
             richTextBox1.Text += "\n\n第 " + (show_lyrics_index + 1).ToString() + " 首, " + str_author + " " + str_title + ", 長度 " + lines_in_this_lyrics.ToString() + " 行\n";
 
-            f = new Font(font_type, font_size_default);
+            if (flag_use_user_font == false)
+                f = new Font(font_type, font_size_default);
+            else
+                f = new Font(pfc.Families[0], font_size_default);
 
             bmp = new Bitmap(100, 100);     //initial W, H
             g = Graphics.FromImage(bmp);
@@ -1540,7 +1556,10 @@ namespace vcs_DrawPoem
                     fontsize = f.Size;
                     if (fontsize > 5)
                         fontsize -= 1;      //這個地方要考慮 若是字串超長 永遠無法滿足 該要如何處理例外
-                    f = new Font(font_type, fontsize);
+                    if (flag_use_user_font == false)
+                        f = new Font(font_type, fontsize);
+                    else
+                        f = new Font(pfc.Families[0], fontsize);
                     richTextBox1.Text += "縮小字型為 " + fontsize.ToString() + "\n";
                 }
             }
@@ -1767,7 +1786,6 @@ namespace vcs_DrawPoem
             }
         }
 
-
         void reload_slide_show_string()
         {
             g.Clear(Color.Red);
@@ -1790,7 +1808,10 @@ namespace vcs_DrawPoem
             richTextBox1.Text += "從頭播起 從大List裡找出第 " + show_lyrics_index.ToString() + "首的內容\n";
             */
 
-            f = new Font(font_type, font_size_default);
+            if (flag_use_user_font == false)
+                f = new Font(font_type, font_size_default);
+            else
+                f = new Font(pfc.Families[0], font_size_default);
 
             bmp = new Bitmap(100, 100);     //initial W, H
             g = Graphics.FromImage(bmp);
@@ -1885,6 +1906,7 @@ namespace vcs_DrawPoem
             i = 0;
             x_st = p * (2 * (N - i) - 1) + h * (N - i - 1);
             y_st = sky + d1 + d2 + d3;
+
             g.DrawString(str_title, f, new SolidBrush(Color.Black), border + x_st, y_st, drawFormat);
 
             title_width = g.MeasureString(str_title, f).ToSize().Width;

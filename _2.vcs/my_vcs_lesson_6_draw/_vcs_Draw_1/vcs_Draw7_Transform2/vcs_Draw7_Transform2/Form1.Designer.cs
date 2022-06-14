@@ -62,7 +62,6 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(140, 50);
             this.button2.TabIndex = 1;
-            this.button2.Text = "縮放";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -81,7 +80,7 @@
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(160, 10);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(610, 800);
+            this.pictureBox1.Size = new System.Drawing.Size(610, 900);
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
@@ -109,7 +108,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(776, 10);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(388, 642);
+            this.richTextBox1.Size = new System.Drawing.Size(388, 900);
             this.richTextBox1.TabIndex = 6;
             this.richTextBox1.Text = "";
             // 
@@ -196,7 +195,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1180, 848);
+            this.ClientSize = new System.Drawing.Size(1180, 917);
             this.Controls.Add(this.checkBox2);
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.bt_save);
