@@ -92,7 +92,7 @@ namespace vcs_ReadRSS1
             XmlNode rssNode = FoundChildNode(xmlDoc, "rss");
             XmlNode channelNode = FoundChildNode(rssNode, "channel");
 
-            //然后我们就可以遍历它的子节点，根据子节点的Name属性，读取我们需要的信息。
+            //然後我們就可以遍歷它的子節點，根據子節點的Name屬性，讀取我們需要的信息。
             rss.Channel channel = new rss.Channel();
             channel.Items = new Hashtable();
             for (int i = 0; i < channelNode.ChildNodes.Count; i++)

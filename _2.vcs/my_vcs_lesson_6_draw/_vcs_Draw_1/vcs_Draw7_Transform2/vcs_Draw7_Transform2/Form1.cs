@@ -54,14 +54,20 @@ namespace vcs_Draw7_Transform2
 
             pictureBox1.Location = new Point(160, 10);
             richTextBox1.Location = new Point(820, 10);
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
-        private void button0_Click(object sender, EventArgs e)
+        private void bt_clear_Click(object sender, EventArgs e)
         {
+            richTextBox1.Clear();
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+            g.Clear(Color.White);
         }
 
-        //平移
-        private void button1_Click(object sender, EventArgs e)
+        //平移, 旋轉
+        private void button0_Click(object sender, EventArgs e)
         {
             //準備
             Graphics g = this.pictureBox1.CreateGraphics();
@@ -121,12 +127,8 @@ namespace vcs_Draw7_Transform2
             p.Dispose();
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-        }
-
         //旋轉
-        private void button3_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             int i;
             Graphics g = this.pictureBox1.CreateGraphics();
@@ -163,52 +165,8 @@ namespace vcs_Draw7_Transform2
             p.Dispose();
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            //字串旋轉列印
-            Graphics g = this.pictureBox1.CreateGraphics();
-            g.DrawString("字串旋轉列印", new Font("標楷體", 20), new SolidBrush(Color.Blue), new PointF(20, 20));
-
-            Font f = new Font("標楷體", 50);
-            RotateDrawString(g, f, 35, "字串旋轉列印", 20, 20);
-        }
-
-        /// <summary>
-        /// 旋轉列印字串
-        /// </summary>
-        /// <param name="e">PrintPageEventArgs</param>
-        /// <param name="font">字型</param>
-        /// <param name="degree">旋轉角度</param>
-        /// <param name="msg">列印訊息</param>
-        /// <param name="x">重設原點 X 位置</param>
-        /// <param name="y">重設原點 Y 位置</param>
-        private void RotateDrawString(Graphics g, Font font, int degree, string msg, int x, int y)
-        {
-            // 原點位置重設
-            g.TranslateTransform(mmTo100InchX(x), mmTo100InchY(y));
-            // 設定旋轉角度
-            g.RotateTransform(degree);
-            // 標題
-            g.DrawString(msg, font, Brushes.Black, mmTo100InchX(0), mmTo100InchY(0));
-            //繪圖畫布還原
-            g.ResetTransform();
-        }
-
-        private int mmTo100InchX(int mm)
-        {
-            int times = 100;
-            double result = (mm * times / 25.4);
-            return (int)Math.Floor(result);
-        }
-
-        private int mmTo100InchY(int mm)
-        {
-            int times = 100;
-            double result = (mm * times / 25.4);
-            return (int)Math.Floor(result);
-        }
-
-        private void button5_Click(object sender, EventArgs e)
+        //縮放
+        private void button2_Click(object sender, EventArgs e)
         {
             Font f = new Font("標楷體", 40);
 
@@ -291,6 +249,18 @@ namespace vcs_Draw7_Transform2
             {
                 g.DrawLine(Pens.Gray, 0, j, W, j);
             }
+        }
+        
+        private void button3_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -533,5 +503,6 @@ namespace vcs_Draw7_Transform2
                 richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
             }
         }
+
     }
 }

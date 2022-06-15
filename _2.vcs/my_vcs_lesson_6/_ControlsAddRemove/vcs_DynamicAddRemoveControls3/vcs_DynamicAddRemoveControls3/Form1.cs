@@ -128,8 +128,14 @@ namespace vcs_DynamicAddRemoveControls3
 
         private void btnXO_Click(object sender, EventArgs e)//動態Button 的事件
         {
-            richTextBox1.Text += "你按下: " + ((Button)(sender)).Text + "\t" +
-            "索引值: " + ((Button)(sender)).TabIndex.ToString() + "\n";
+            /* same
+            richTextBox1.Text += "你按下: " + ((Button)(sender)).Text + "\t" + "索引值: " + ((Button)(sender)).TabIndex.ToString() + "\n";
+            */
+
+            //Unboxing (出箱)
+            Button btn = (Button)sender;
+
+            richTextBox1.Text += "你按下: " + btn.Text + "\t" + "索引值: " + btn.TabIndex.ToString() + "\n";
         }
 
         private void button4_Click(object sender, EventArgs e)
