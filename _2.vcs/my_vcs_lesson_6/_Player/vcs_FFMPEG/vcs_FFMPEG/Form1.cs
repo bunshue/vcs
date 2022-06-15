@@ -22,6 +22,7 @@ namespace vcs_FFMPEG
     {
         string ffmpeg_filename = @"C:\______test_files\_exe\ffmpeg\ffmpeg.exe";
         string mp3_filename = string.Empty;
+        string extension = string.Empty;
 
         AxWindowsMediaPlayer axWindowsMediaPlayer1;
         int flag_play_mode = 0;    //0: stop, 1: play, 2:  pause
@@ -362,6 +363,9 @@ namespace vcs_FFMPEG
 
             //string filename = @"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_日本演歌\__石川さゆり\Ishikawa Sayuri 【アルバム】[演歌] 石川さゆり ‐ 全曲集 Super Best.mp3";
             string filename = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
+            //string filename = @"D:\內視鏡影片\川﨑院長が胃カメラ内視鏡検査を受けてみました！ 胃カメラは怖くない！ 痛みや苦痛が少ない胃カメラとは？.mp4";
+
+            extension = Path.GetExtension(filename);
 
             richTextBox1.Text += "檔案 : " + filename + "\n";
             richTextBox1.Text += "音樂長度 : ";
@@ -421,7 +425,7 @@ namespace vcs_FFMPEG
             richTextBox1.Text += "擷取範圍 : " + cut1.ToString() + " 到 " + cut2.ToString() + "\t共 " + cut_time.ToString() + " 秒\n";
 
             //音頻切割
-            string mp3_cut_filename = Application.StartupPath + "\\cut_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".mp3";
+            string mp3_cut_filename = Application.StartupPath + "\\cut_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + extension;
             string startTime = (cut1 / 3600).ToString("D2") + ":" + ((cut1 / 60) % 60).ToString("D2") + ":" + (cut1 % 60).ToString("D2");
             string cutTime = (cut_time / 3600).ToString("D2") + ":" + ((cut_time / 60) % 60).ToString("D2") + ":" + (cut_time % 60).ToString("D2");
 

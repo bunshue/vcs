@@ -49,8 +49,8 @@ namespace image_test2
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
 
-            pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            //pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 4 + 75, y_st + dy * 0);
         }
 
 
@@ -205,7 +205,7 @@ namespace image_test2
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //圖片切割
+            //圖片切割, 切成 M X N 個
             string filename1 = @"C:\______test_files\picture1.jpg";
             string filename2 = Application.StartupPath + "\\cut_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
             bool result = imageCut(filename1, 2, 2, 100, filename2);
@@ -218,12 +218,26 @@ namespace image_test2
         private void button1_Click(object sender, EventArgs e)
         {
             //圖片壓縮
+            string filename1 = @"C:\______test_files\picture1.jpg";
+            string filename2 = Application.StartupPath + "\\compress_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            bool result = imageCompress(filename1, 30, filename2);
+            if (result == true)
+                richTextBox1.Text += "OK\n";
+            else
+                richTextBox1.Text += "FAIL\n";
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             //圖片縮略圖
+            string filename1 = @"C:\______test_files\picture1.jpg";
+            string filename2 = Application.StartupPath + "\\thumb_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            bool result = getThumImage(filename1, 100, 3, filename2);
+            if (result == true)
+                richTextBox1.Text += "OK\n";
+            else
+                richTextBox1.Text += "FAIL\n";
         }
 
         public static Bitmap returnAlpha(Bitmap bmp, int alpha)
@@ -248,9 +262,19 @@ namespace image_test2
             //改變圖片透明度
             string filename = @"C:\______test_files\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-            pictureBox1.Image = returnAlpha(bitmap1, 80);
-            pictureBox2.Image = returnAlpha(bitmap1, 160);
-            pictureBox3.Image = returnAlpha(bitmap1, 220);
+            Bitmap bitmap80 = returnAlpha(bitmap1, 80);
+            Bitmap bitmap160 = returnAlpha(bitmap1, 160);
+            Bitmap bitmap220 = returnAlpha(bitmap1, 220);
+
+            bitmap80.Save(@"picture_80.bmp", ImageFormat.Bmp);
+            bitmap160.Save(@"picture_160.bmp", ImageFormat.Bmp);
+            bitmap220.Save(@"picture_220.bmp", ImageFormat.Bmp);
+
+            pictureBox1.Image = bitmap80;
+            pictureBox2.Image = bitmap160;
+            pictureBox3.Image = bitmap220;
+
+            richTextBox1.Text += "OK\n";
         }
 
         Bitmap reduce_bitmap(Bitmap bitmap1, int percent)
