@@ -543,7 +543,6 @@
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(135, 45);
             this.button32.TabIndex = 62;
-            this.button32.Text = "使用GDI畫坐標圖(支持負值)";
             this.button32.UseVisualStyleBackColor = true;
             this.button32.Click += new System.EventHandler(this.button32_Click);
             // 
@@ -559,12 +558,12 @@
             // 
             // button34
             // 
-            this.button34.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button34.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button34.Location = new System.Drawing.Point(1214, 239);
             this.button34.Name = "button34";
             this.button34.Size = new System.Drawing.Size(135, 45);
             this.button34.TabIndex = 64;
-            this.button34.Text = "影像的寬高可以是負的";
+            this.button34.Text = "影像的寬高可以是負的, 做倒影鏡射";
             this.button34.UseVisualStyleBackColor = true;
             this.button34.Click += new System.EventHandler(this.button34_Click);
             // 

@@ -84,17 +84,37 @@ namespace vcs_Draw_GraphicsPath
 
         private void button0_Click(object sender, EventArgs e)
         {
+            //畫圖形路徑
+            //繪制圖形路徑
+            //路徑是通過組合直線、矩形和簡單的曲線而形成的。
+            //在GDI+中，GraphicsPath對象允許將基本構造塊收集到一個單元中，調用一次Graphics類的DrawPath方法，就可以繪制出整個單元的直線、矩形、多邊形和曲線。
+
             Graphics g = this.pictureBox1.CreateGraphics();
-            GraphicsPath gp = new GraphicsPath();
+            GraphicsPath gp = new GraphicsPath(); // GraphicsPath物件
             Pen p = new Pen(Color.Blue, 1);
             Point[] pts = { new Point(15, 30), new Point(30, 40), new Point(50, 30) };
             gp.AddArc(15, 20, 80, 50, 210, 120);
             gp.StartFigure();
             gp.AddCurve(pts);
-            gp.AddString("圖形路徑", new FontFamily("標楷體"), (int)FontStyle.Underline, 50, new PointF(20, 50), new StringFormat());
             gp.AddPie(180, 20, 80, 50, 210, 120);
-            g.DrawPath(p, gp);
 
+            // 繪出文字字串
+            gp.AddString("圖形路徑", new FontFamily("標楷體"), (int)FontStyle.Underline, 50, new PointF(20, 50), new StringFormat());
+
+            // 將 gp 內的形狀 繪出
+            g.DrawPath(p, gp);  // 繪出GraphicsPath物件
+
+            //參數分開寫
+            string text = "天若有情天亦老"; // 文字字串
+            FontFamily family = new FontFamily("標楷體");
+            StringFormat format = StringFormat.GenericDefault;
+            // format.FormatFlags = StringFormatFlags.DirectionVertical;　// 垂直
+
+            // 繪出文字字串
+            gp.AddString(text, family, (int)FontStyle.Regular, 50, new Point(20, 120), format);
+
+            // 將 gp 內的形狀 繪出
+            g.DrawPath(p, gp); // 繪出GraphicsPath物件
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -191,23 +211,6 @@ namespace vcs_Draw_GraphicsPath
 
         private void button5_Click(object sender, EventArgs e)
         {
-
-            //畫圖形路徑
-            //繪制圖形路徑
-            //路徑是通過組合直線、矩形和簡單的曲線而形成的。
-            //在GDI+中，GraphicsPath對象允許將基本構造塊收集到一個單元中，調用一次Graphics類的DrawPath方法，就可以繪制出整個單元的直線、矩形、多邊形和曲線。
-
-            Graphics g = this.pictureBox1.CreateGraphics();
-            GraphicsPath gp = new GraphicsPath();
-            Pen p = new Pen(Color.Blue, 1);
-            Point[] myPoints = { new Point(15, 30), new Point(30, 40), new Point(50, 30) };
-            gp.AddArc(15, 20, 80, 50, 210, 120);
-            gp.StartFigure();
-            gp.AddCurve(myPoints);
-            gp.AddString("圖形路徑", new FontFamily("標楷體"), (int)FontStyle.Underline, 50, new PointF(20, 50), new StringFormat());
-            gp.AddPie(180, 20, 80, 50, 210, 120);
-            g.DrawPath(p, gp);
-
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -482,26 +485,6 @@ namespace vcs_Draw_GraphicsPath
 
         private void button9_Click(object sender, EventArgs e)
         {
-            //GraphicsPath - AddString() 加入字串路徑
-
-            GraphicsPath gp = new GraphicsPath(); // GraphicsPath物件
-
-            string text = "天若有情天亦老"; // 文字字串
-
-            FontFamily family = new FontFamily("標楷體");
-            StringFormat format = StringFormat.GenericDefault;
-            // format.FormatFlags = StringFormatFlags.DirectionVertical;　// 垂直
-
-            gp.AddString(text,  // 繪出文字字串
-                family,
-                (int)FontStyle.Regular,
-                70,
-                new Point(30, 30),
-                format);
-
-            // 將 gp 內的形狀 繪出
-            g.DrawPath(Pens.Black, gp); // 繪出GraphicsPath物件
-
         }
 
         private void button10_Click(object sender, EventArgs e)

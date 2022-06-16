@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{261EF7E3-B818-4549-85A6-A298D4270FD9}</ProjectGuid>
+    <ProjectGuid>{09AE8877-78B4-4093-87FE-5175B6D2ADF4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_Draw7_Transform</RootNamespace>
-    <AssemblyName>vcs_Draw7_Transform</AssemblyName>
+    <RootNamespace>vcs_ImageProcessingJ</RootNamespace>
+    <AssemblyName>vcs_ImageProcessingJ</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

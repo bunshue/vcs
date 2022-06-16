@@ -14,6 +14,14 @@
 
 
 
+無法嵌入互操作類型“Microsoft.Office.Interop.Excel.ApplicationClass”。請改用適用的接口，interop.excel
+無法嵌入互操作類型“Microsoft.Office.Interop.Excel.ApplicationClass”。請改用適用的接口，interop.excel
+把Microsoft.Office.Interop.Excel.DLL的嵌入互操作類型改為ture就可以了
+
+
+
+
+
 
 如何把一個大Bitmap直接縮成一個小Bitmap
 例如原本300X300的Bitmap要如何變成一個100X100的Bitmap?
@@ -5036,7 +5044,28 @@ Response.Write(String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo"));
 
 
 
-
+C# 獲得硬盤參數程序代碼如下：
+public static void HardDisk(out string[] 制造商, out string[] 型號, out string[] 序列號)
+{
+        ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
+        制造商 = new string[searcher.Get().Count];
+        型號 = new string[searcher.Get().Count];
+        序列號 = new string[searcher.Get().Count];
+        int i = 0;
+        foreach (ManagementObject share in searcher.Get())
+        {
+                try
+                        {
+                        制造商[i] = share.GetPropertyValue("Manufacturer").ToString();
+                        型號[i] = share.GetPropertyValue("Model").ToString();
+                        序列號[i] = share.GetPropertyValue("Signature").ToString();
+                }
+                catch (System.Exception er)
+                {
+                }
+                i ;
+        }
+} 
 
 
 
@@ -5044,7 +5073,43 @@ Response.Write(String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo"));
         				
 //--------------------------------------------------------------------------------------------------------------------------
 
+C# 獲得網卡參數程序代碼如下：
+public static void NetworkAdapter(out string[] 制造商, out string[] MAC地址)
+{
+        ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter");
+        制造商 = new string[searcher.Get().Count];
+        MAC地址 = new string[searcher.Get().Count];
+        int i = 0;
+        foreach (ManagementObject share in searcher.Get())
+        {
+                try
+                {
+                        制造商[i] = share.GetPropertyValue("Manufacturer").ToString();
+                        MAC地址[i] = share.GetPropertyValue("MACAddress").ToString();
+                }
+                        catch (System.Exception er)
+                {
+                }
+                i ;
+        }
+} 
 
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+C# 獲得主板序列號程序代碼如下：
+public static void MainboardSerialNumber(out string[] 序列號)
+{
+        ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select * From Win32_BIOS");
+        序列號 = new string[searcher.Get().Count];
+        int i = 0;
+        foreach (ManagementObject share in searcher.Get())
+        {
+                序列號[i] = share.GetPropertyValue("SerialNumber").ToString();
+                i ;
+        }
+}
 
 
 
@@ -5052,13 +5117,20 @@ Response.Write(String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo"));
 
 
 
-
-
-//--------------------------------------------------------------------------------------------------------------------------
-
-
-
-
+C# 獲得主板參數程序代碼如下：
+public static void Mainboard(out string[] 制造商, out string[] 型號)
+{
+        ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
+        制造商 = new string[searcher.Get().Count];
+        型號 = new string[searcher.Get().Count];
+        int i = 0;
+        foreach (ManagementObject share in searcher.Get())
+        {
+                制造商[i] = share.GetPropertyValue("Manufacturer").ToString();
+                型號[i] = share.GetPropertyValue("Product").ToString();
+                i ;
+        }
+} 
 
 
 
