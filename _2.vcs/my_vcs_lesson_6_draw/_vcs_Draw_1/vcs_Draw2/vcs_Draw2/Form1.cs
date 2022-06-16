@@ -193,7 +193,8 @@ namespace vcs_Draw2
 
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 7);
 
-            bt_save.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+            bt_reset.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+            bt_save.Location = new Point(x_st + dx * 4, y_st + dy * 8);
 
             richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 9 + 10);
             richTextBox1.Size = new Size(richTextBox1.Size.Width + 240, this.Height - richTextBox1.Location.Y - 50);
@@ -1310,9 +1311,22 @@ namespace vcs_Draw2
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
-            bitmap1 = null;
-            pictureBox1.Image = null;
+            //新建圖檔, 初始化畫布
+            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+            pictureBox1.Image = bitmap1;
+
             richTextBox1.Clear();
+        }
+
+        private void bt_reset_Click(object sender, EventArgs e)
+        {
+            //新建圖檔, 初始化畫布
+            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+            pictureBox1.Image = bitmap1;
         }
 
         private void bt_save_Click(object sender, EventArgs e)
@@ -1414,18 +1428,13 @@ namespace vcs_Draw2
             g.Clear(Color.White);//以指定的顏色清除控制元件背景
             Brush Var_Back = Brushes.Black;//設定畫刷
             FontFamily Var_FontFamily = new FontFamily("標楷體");//設定字體樣式
-            string Var_Str = "海納百川，有容乃大；壁立千仞，無欲則剛。";//設定字串
-
-            //SizeF Var_Size = g.MeasureString(Var_Str, Var_Font);//取得字串的大小
-            //int Var_X = (panel_word.Width - Convert.ToInt32(Var_Size.Width)) / 2;//設定平移的X座標
-            //int Var_Y = (panel_word.Height - Convert.ToInt32(Var_Size.Height)) / 2;////設定平移的Y座標
+            string Var_Str = size.ToString() + "海納百川，有容乃大；壁立千仞，無欲則剛。";//設定字串
 
             GraphicsPath Var_Path = new GraphicsPath();//實例化GraphicsPath對像
             Var_Path.AddString(Var_Str, Var_FontFamily, (int)FontStyle.Regular, 50, new Point(0, 0), new StringFormat());//在路徑中新增文字
             PointF[] Var_PointS = Var_Path.PathPoints;//取得路徑中的點
             Byte[] Car_Types = Var_Path.PathTypes;//取得對應點的類型
 
-            //Matrix Var_Matrix = new Matrix(Convert.ToSingle(textBox1.Text), 0.0F, 0.0F, Convert.ToSingle(textBox1.Text), 0.0F, 0.0F);//設定仿射矩陣
             Matrix Var_Matrix = new Matrix((float)size, 0.0F, 0.0F, (float)size, 0.0F, 0.0F);//設定仿射矩陣
             Var_Matrix.TransformPoints(Var_PointS);
             GraphicsPath Var_New_Path = new GraphicsPath(Var_PointS, Car_Types);
@@ -1433,4 +1442,6 @@ namespace vcs_Draw2
         }
     }
 }
+
+
 

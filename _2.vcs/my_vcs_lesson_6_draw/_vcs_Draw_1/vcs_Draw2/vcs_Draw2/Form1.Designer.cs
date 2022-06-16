@@ -96,6 +96,7 @@
             this.rb_color2 = new System.Windows.Forms.RadioButton();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.panel_word = new System.Windows.Forms.Panel();
+            this.bt_reset = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_pen)).BeginInit();
@@ -453,7 +454,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(755, 449);
+            this.bt_clear.Location = new System.Drawing.Point(972, 449);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(102, 42);
             this.bt_clear.TabIndex = 46;
@@ -464,7 +465,7 @@
             // bt_save
             // 
             this.bt_save.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_save.Location = new System.Drawing.Point(875, 449);
+            this.bt_save.Location = new System.Drawing.Point(864, 449);
             this.bt_save.Name = "bt_save";
             this.bt_save.Size = new System.Drawing.Size(102, 42);
             this.bt_save.TabIndex = 47;
@@ -820,11 +821,23 @@
             this.panel_word.Size = new System.Drawing.Size(708, 102);
             this.panel_word.TabIndex = 67;
             // 
+            // bt_reset
+            // 
+            this.bt_reset.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_reset.Location = new System.Drawing.Point(756, 449);
+            this.bt_reset.Name = "bt_reset";
+            this.bt_reset.Size = new System.Drawing.Size(102, 42);
+            this.bt_reset.TabIndex = 68;
+            this.bt_reset.Text = "Reset";
+            this.bt_reset.UseVisualStyleBackColor = true;
+            this.bt_reset.Click += new System.EventHandler(this.bt_reset_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1416, 673);
+            this.Controls.Add(this.bt_reset);
             this.Controls.Add(this.panel_word);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
@@ -961,6 +974,7 @@
         private System.Windows.Forms.RadioButton rb_color2;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Panel panel_word;
+        private System.Windows.Forms.Button bt_reset;
     }
 }
 

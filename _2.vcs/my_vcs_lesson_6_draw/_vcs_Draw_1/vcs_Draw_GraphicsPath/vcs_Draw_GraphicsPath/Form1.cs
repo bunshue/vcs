@@ -119,7 +119,16 @@ namespace vcs_Draw_GraphicsPath
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //畫聯結線條
+            GraphicsPath gp = new GraphicsPath();
+            Pen penJoin = new Pen(Color.FromArgb(255, 0, 0, 255), 20);
 
+            gp.StartFigure();
+            gp.AddLine(new Point(50, 200), new Point(100, 200));
+            gp.AddLine(new Point(100, 200), new Point(100, 250));
+
+            penJoin.LineJoin = LineJoin.Bevel;
+            g.DrawPath(penJoin, gp);
         }
 
         private void button2_Click(object sender, EventArgs e)
