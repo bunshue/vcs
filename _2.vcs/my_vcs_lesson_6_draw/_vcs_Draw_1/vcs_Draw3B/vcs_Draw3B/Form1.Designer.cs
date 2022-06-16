@@ -31,7 +31,6 @@
             this.components = new System.ComponentModel.Container();
             this.bt_clear = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.timer_random_color = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_spiral = new System.Windows.Forms.PictureBox();
             this.pictureBox_ellipse = new System.Windows.Forms.PictureBox();
             this.timer_draw_ellipse = new System.Windows.Forms.Timer(this.components);
@@ -41,8 +40,6 @@
             this.timer_draw_polygon = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_rectangle = new System.Windows.Forms.PictureBox();
             this.timer_draw_rectangle = new System.Windows.Forms.Timer(this.components);
-            this.pictureBox_random_pixel_image = new System.Windows.Forms.PictureBox();
-            this.timer_random_pixel_image = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_progressbar = new System.Windows.Forms.PictureBox();
             this.timer_progressbar = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_word = new System.Windows.Forms.PictureBox();
@@ -69,7 +66,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_polygon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rectangle)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_pixel_image)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_progressbar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_word)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -100,10 +96,6 @@
             this.richTextBox1.Size = new System.Drawing.Size(323, 211);
             this.richTextBox1.TabIndex = 53;
             this.richTextBox1.Text = "";
-            // 
-            // timer_random_color
-            // 
-            this.timer_random_color.Tick += new System.EventHandler(this.timer_random_color_Tick);
             // 
             // pictureBox_spiral
             // 
@@ -171,21 +163,6 @@
             this.timer_draw_rectangle.Enabled = true;
             this.timer_draw_rectangle.Interval = 1000;
             this.timer_draw_rectangle.Tick += new System.EventHandler(this.timer_draw_rectangle_Tick);
-            // 
-            // pictureBox_random_pixel_image
-            // 
-            this.pictureBox_random_pixel_image.BackColor = System.Drawing.Color.Pink;
-            this.pictureBox_random_pixel_image.Location = new System.Drawing.Point(12, 624);
-            this.pictureBox_random_pixel_image.Name = "pictureBox_random_pixel_image";
-            this.pictureBox_random_pixel_image.Size = new System.Drawing.Size(50, 50);
-            this.pictureBox_random_pixel_image.TabIndex = 63;
-            this.pictureBox_random_pixel_image.TabStop = false;
-            // 
-            // timer_random_pixel_image
-            // 
-            this.timer_random_pixel_image.Enabled = true;
-            this.timer_random_pixel_image.Interval = 1000;
-            this.timer_random_pixel_image.Tick += new System.EventHandler(this.timer_random_pixel_image_Tick);
             // 
             // pictureBox_progressbar
             // 
@@ -368,7 +345,6 @@
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox_word);
             this.Controls.Add(this.pictureBox_progressbar);
-            this.Controls.Add(this.pictureBox_random_pixel_image);
             this.Controls.Add(this.pictureBox_rectangle);
             this.Controls.Add(this.pictureBox_polygon);
             this.Controls.Add(this.pictureBox_star);
@@ -385,7 +361,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_star)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_polygon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rectangle)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_pixel_image)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_progressbar)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_word)).EndInit();
             this.groupBox1.ResumeLayout(false);
@@ -404,7 +379,6 @@
 
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Timer timer_random_color;
         private System.Windows.Forms.PictureBox pictureBox_spiral;
         private System.Windows.Forms.PictureBox pictureBox_ellipse;
         private System.Windows.Forms.Timer timer_draw_ellipse;
@@ -414,8 +388,6 @@
         private System.Windows.Forms.Timer timer_draw_polygon;
         private System.Windows.Forms.PictureBox pictureBox_rectangle;
         private System.Windows.Forms.Timer timer_draw_rectangle;
-        private System.Windows.Forms.PictureBox pictureBox_random_pixel_image;
-        private System.Windows.Forms.Timer timer_random_pixel_image;
         private System.Windows.Forms.PictureBox pictureBox_progressbar;
         private System.Windows.Forms.Timer timer_progressbar;
         private System.Windows.Forms.PictureBox pictureBox_word;

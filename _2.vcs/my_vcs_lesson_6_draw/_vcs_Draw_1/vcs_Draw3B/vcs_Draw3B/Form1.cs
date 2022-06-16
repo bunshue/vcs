@@ -18,14 +18,6 @@ namespace vcs_Draw3B
         int W = 250;
         int H = 250;
 
-        //for random color ST
-        //Reference : https://home.gamer.com.tw/creationDetail.php?sn=4281924
-        private Label[] lb_color = new Label[101];
-        Random r = new Random(Guid.NewGuid().GetHashCode());
-        private int _R = 0, _G = 0, _B = 0;
-        private int lb_color_x = 0, lb_color_y = 0;
-        //for random color SP
-
         Graphics g_spiral;  //for draw spiral
         Graphics ge;    //for draw ellipse
         Graphics gs;    //for draw star
@@ -108,8 +100,6 @@ namespace vcs_Draw3B
             EllipseWidth = this.pictureBox_ellipse.ClientSize.Width - 2 * EllipseMargin;
             EllipseHeight = this.pictureBox_ellipse.ClientSize.Height - 2 * EllipseMargin;
 
-            draw_random_color();
-
             //三顆跳跳球 ST
             ball1 = new ClassBall(new Point(this.pictureBox_ball.ClientSize.Width / 2, this.pictureBox_ball.ClientSize.Height / 2),
                                 new Point(3, 5),
@@ -174,7 +164,6 @@ namespace vcs_Draw3B
             pictureBox_ball_in_box.Size = new Size(W, H);
             pictureBox_double_circle.Size = new Size(W, H);
 
-            pictureBox_random_pixel_image.Size = new Size(W + 50, 110);
             pictureBox_progressbar.Size = new Size(600, 100);
             pictureBox_rectangle.Size = new Size(600, 350);
 
@@ -194,7 +183,6 @@ namespace vcs_Draw3B
 
             groupBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0 + 50);
             pictureBox_ellipse.Location = new Point(x_st + dx * 4 - 40, y_st + dy * 1);
-            pictureBox_random_pixel_image.Location = new Point(x_st + dx * 0, y_st + dy * 2 + 120 * 3);
             pictureBox_word.Location = new Point(x_st + dx * 1, y_st + dy * 2 + 120 * 3);
 
             pictureBox_progressbar.Location = new Point(x_st + dx * 3 - 80, y_st + dy * 2 + 80 - 100);
@@ -279,48 +267,6 @@ namespace vcs_Draw3B
                 Application.DoEvents();
             }
         }
-
-
-        //for random color ST
-        void draw_random_color()
-        {
-            int x_st = 470;
-            int y_st = 670;
-            int WIDTH = 40;
-            for (int i = 1; i < lb_color.Length; i++)
-            {
-                lb_color[i] = new Label();
-                lb_color[i].Width = WIDTH;
-                lb_color[i].Height = WIDTH;
-                lb_color[i].Text = " ";
-                lb_color[i].Location = new Point(x_st + lb_color_x, y_st + lb_color_y);
-                _R = r.Next(256);
-                _G = r.Next(256);
-                _B = r.Next(256);
-                lb_color[i].BackColor = Color.FromArgb(_R, _G, _B);
-                this.Controls.Add(lb_color[i]);
-                lb_color_x += WIDTH;
-
-                if (i % 10 == 0)
-                {
-                    lb_color_x = 0;
-                    lb_color_y += WIDTH;
-                }
-            }
-            timer_random_color.Enabled = true;
-        }
-
-        private void timer_random_color_Tick(object sender, EventArgs e)
-        {
-            for (int i = 1; i < lb_color.Length; i++)
-            {
-                _R = r.Next(256);
-                _G = r.Next(256);
-                _B = r.Next(256);
-                lb_color[i].BackColor = Color.FromArgb(_R, _G, _B);
-            }
-        }
-        //for random color SP
 
         private void timer_draw_ellipse_Tick(object sender, EventArgs e)
         {
@@ -568,42 +514,6 @@ namespace vcs_Draw3B
         private void timer_draw_rectangle_Tick(object sender, EventArgs e)
         {
             draw_color_rectangles();
-        }
-
-        void draw_random_pixel_image()
-        {
-            int W = pictureBox_random_pixel_image.ClientSize.Width;
-            int H = pictureBox_random_pixel_image.ClientSize.Height;
-
-            //bitmap
-            Bitmap bmp = new Bitmap(W, H);
-
-            //random number
-            Random rand = new Random();
-
-            //create random pixels
-            for (int y = 0; y < H; y++)
-            {
-                for (int x = 0; x < W; x++)
-                {
-                    //generate random ARGB value
-                    int a = rand.Next(256);
-                    int r = rand.Next(256);
-                    int g = rand.Next(256);
-                    int b = rand.Next(256);
-
-                    //set ARGB value
-                    bmp.SetPixel(x, y, Color.FromArgb(a, r, g, b));
-                }
-            }
-
-            //load bmp in picturebox1
-            pictureBox_random_pixel_image.Image = bmp;
-        }
-
-        private void timer_random_pixel_image_Tick(object sender, EventArgs e)
-        {
-            draw_random_pixel_image();
         }
 
         private void timer_progressbar_Tick(object sender, EventArgs e)

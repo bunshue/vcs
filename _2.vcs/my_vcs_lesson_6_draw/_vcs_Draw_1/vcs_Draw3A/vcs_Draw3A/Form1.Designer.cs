@@ -77,8 +77,6 @@
             this.panel_radar = new System.Windows.Forms.Panel();
             this.pictureBox_radar = new System.Windows.Forms.PictureBox();
             this.timer_radar = new System.Windows.Forms.Timer(this.components);
-            this.pictureBox_random_2d_array = new System.Windows.Forms.PictureBox();
-            this.timer_random_2d_array = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_hex = new System.Windows.Forms.PictureBox();
             this.timer_hex = new System.Windows.Forms.Timer(this.components);
             this.pictureBox_random_color = new System.Windows.Forms.PictureBox();
@@ -104,7 +102,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rotate)).BeginInit();
             this.panel_radar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_radar)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_2d_array)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hex)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_color)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_battery2)).BeginInit();
@@ -463,20 +460,6 @@
             this.timer_radar.Interval = 5;
             this.timer_radar.Tick += new System.EventHandler(this.timer_radar_Tick);
             // 
-            // pictureBox_random_2d_array
-            // 
-            this.pictureBox_random_2d_array.Location = new System.Drawing.Point(132, 352);
-            this.pictureBox_random_2d_array.Name = "pictureBox_random_2d_array";
-            this.pictureBox_random_2d_array.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox_random_2d_array.TabIndex = 74;
-            this.pictureBox_random_2d_array.TabStop = false;
-            // 
-            // timer_random_2d_array
-            // 
-            this.timer_random_2d_array.Enabled = true;
-            this.timer_random_2d_array.Interval = 500;
-            this.timer_random_2d_array.Tick += new System.EventHandler(this.timer_random_2d_array_Tick);
-            // 
             // pictureBox_hex
             // 
             this.pictureBox_hex.Location = new System.Drawing.Point(12, 348);
@@ -522,7 +505,6 @@
             this.Controls.Add(this.pictureBox_battery2);
             this.Controls.Add(this.pictureBox_random_color);
             this.Controls.Add(this.pictureBox_hex);
-            this.Controls.Add(this.pictureBox_random_2d_array);
             this.Controls.Add(this.panel_radar);
             this.Controls.Add(this.pictureBox_rotate);
             this.Controls.Add(this.pictureBox_border2);
@@ -575,7 +557,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_rotate)).EndInit();
             this.panel_radar.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_radar)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_2d_array)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_hex)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_random_color)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_battery2)).EndInit();
@@ -634,8 +615,6 @@
         private System.Windows.Forms.Panel panel_radar;
         private System.Windows.Forms.PictureBox pictureBox_radar;
         private System.Windows.Forms.Timer timer_radar;
-        private System.Windows.Forms.PictureBox pictureBox_random_2d_array;
-        private System.Windows.Forms.Timer timer_random_2d_array;
         private System.Windows.Forms.PictureBox pictureBox_hex;
         private System.Windows.Forms.Timer timer_hex;
         private System.Windows.Forms.PictureBox pictureBox_random_color;

@@ -267,7 +267,6 @@ namespace vcs_Draw3C
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
             bt_exit_setup();
-
         }
 
         void bt_exit_setup()
