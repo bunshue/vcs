@@ -520,11 +520,54 @@ namespace vcs_Mix00
         private void button6_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //clone 範例
+            /*
+            在Bitmap中可以找到
+
+            Clone（）方法，該方法有三個重載方法。
+            Clone（）
+            Clone（Rectangle， PixelFormat）
+            Clone（RectangleF， PixelFormat）
+            */
+
+            string filename = @"C:\______test_files\picture1.jpg";
+            Bitmap bitmap1 = new Bitmap(filename);
+
+            Bitmap bitmap2 = (Bitmap)bitmap1.Clone();
+
+            int w = bitmap1.Width;
+            int h = bitmap1.Height;
+            Rectangle rect = new Rectangle(w / 2, h / 2, w / 2, h / 2);
+
+            //Bitmap bitmap3 = (Bitmap)bitmap1.Clone(rect, PixelFormat.Format32bppArgb);    //same
+            Bitmap bitmap3 = (Bitmap)bitmap1.Clone(rect, bitmap1.PixelFormat);
+
+            pictureBox1.Image = bitmap3;
+
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //抓屏將生成的圖片顯示在pictureBox
+
+            Image image = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+
+            Graphics g = Graphics.FromImage(image);
+
+            g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height));
+
+            //IntPtr dc1 = g.GetHdc();      //此處這兩句多餘，具體看最後GetHdc()定義
+
+            //g.ReleaseHdc(dc1);           
+
+            g.Dispose();
+
+            this.pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+
+            this.pictureBox1.Image = image;
         }
 
         private void button8_Click(object sender, EventArgs e)

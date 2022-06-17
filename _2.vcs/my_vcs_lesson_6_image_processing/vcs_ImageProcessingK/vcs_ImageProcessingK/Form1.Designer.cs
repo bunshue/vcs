@@ -1,4 +1,4 @@
-﻿namespace vcs_ImageProcessingI
+﻿namespace vcs_ImageProcessingK
 {
     partial class Form1
     {
@@ -49,7 +49,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(130, 50);
             this.button0.TabIndex = 0;
-            this.button0.Text = "向右旋轉圖像90°";
+            this.button0.Text = "均值濾波";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -76,7 +76,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(130, 50);
             this.button1.TabIndex = 3;
-            this.button1.Text = "旋轉圖像180°";
+            this.button1.Text = "轉換爲灰度圖";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -86,7 +86,6 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(130, 50);
             this.button2.TabIndex = 4;
-            this.button2.Text = "圖像切變";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -96,7 +95,6 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(130, 50);
             this.button3.TabIndex = 5;
-            this.button3.Text = "圖像截取";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -106,7 +104,6 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(130, 50);
             this.button4.TabIndex = 6;
-            this.button4.Text = "改變圖像大小";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -116,7 +113,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(130, 50);
             this.button5.TabIndex = 7;
-            this.button5.Text = "設置圖像的分辨率";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -126,7 +122,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(130, 50);
             this.button6.TabIndex = 8;
-            this.button6.Text = "用GDI+畫圖";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 

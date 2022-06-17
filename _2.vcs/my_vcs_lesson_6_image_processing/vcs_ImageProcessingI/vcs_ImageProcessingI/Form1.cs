@@ -191,23 +191,6 @@ new Point(100, 400)};// destination for lower-left point of original
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //在窗體上面繪圖並顯示圖像
-            Graphics g = this.pictureBox1.CreateGraphics();
-            Pen blackPen = new Pen(Color.Black, 1);
-
-            if (ClientRectangle.Height / 10 > 0)
-            {
-
-                for (int y = 0; y < ClientRectangle.Height; y += ClientRectangle.Height / 10)
-                {
-
-                    g.DrawLine(blackPen, new Point(0, 0), new Point(ClientRectangle.Width, y));
-
-                }
-
-            }
-
-            blackPen.Dispose();
         }
 
         private void button8_Click(object sender, EventArgs e)

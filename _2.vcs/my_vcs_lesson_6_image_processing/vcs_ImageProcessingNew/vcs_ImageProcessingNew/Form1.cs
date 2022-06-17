@@ -587,11 +587,110 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
 
         private void button8_Click(object sender, EventArgs e)
         {
+            //使用ColorMatrix圖片亮度處理
+
+
+            //圖片亮度處理
+
+            //亮度百分比
+
+            int percent = 50;
+
+            Single v = 0.006F * percent;
+
+            Single[][] matrix = {         
+
+                new Single[] { 1, 0, 0, 0, 0 },         
+
+                new Single[] { 0, 1, 0, 0, 0 },          
+
+                new Single[] { 0, 0, 1, 0, 0 },         
+
+                new Single[] { 0, 0, 0, 1, 0 },         
+
+                new Single[] { v, v, v, 0, 1 }     
+
+            };
+
+            System.Drawing.Imaging.ColorMatrix cm = new System.Drawing.Imaging.ColorMatrix(matrix);
+
+            System.Drawing.Imaging.ImageAttributes attr = new System.Drawing.Imaging.ImageAttributes();
+
+            attr.SetColorMatrix(cm);
+
+            string filename = @"C:\______test_files\picture1.jpg";
+
+            Image tmp = Image.FromFile(filename);
+
+
+
+            this.pictureBox1.Image = Image.FromFile(filename);
+
+
+
+            Graphics g = Graphics.FromImage(tmp);
+
+            try
+            {
+
+                Rectangle destRect = new Rectangle(0, 0, tmp.Width, tmp.Height);
+
+                g.DrawImage(tmp, destRect, 0, 0, tmp.Width, tmp.Height, GraphicsUnit.Pixel, attr);
+
+            }
+
+            finally
+            {
+
+                g.Dispose();
+
+            }
+
+
+
+            this.pictureBox2.Image = (Image)tmp.Clone();
 
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //使用ColorMatrix取灰度
+            string filename = @"C:\______test_files\picture1.jpg";
+
+            //取灰度
+            this.pictureBox1.Image = Image.FromFile(filename);
+
+            Bitmap currentBitmap = new Bitmap(this.pictureBox1.Image);
+
+            Graphics g = Graphics.FromImage(currentBitmap);
+
+            ImageAttributes ia = new ImageAttributes();
+
+            float[][] colorMatrix =   {    
+
+                new   float[]   {0.299f,   0.299f,   0.299f,   0,   0},
+
+                new   float[]   {0.587f,   0.587f,   0.587f,   0,   0},
+
+                new   float[]   {0.114f,   0.114f,   0.114f,   0,   0},
+
+                new   float[]   {0,   0,   0,   1,   0},
+
+                new   float[]   {0,   0,   0,   0,   1}
+
+            };
+
+            ColorMatrix cm = new ColorMatrix(colorMatrix);
+
+            ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+
+            g.DrawImage(currentBitmap, new Rectangle(0, 0, currentBitmap.Width, currentBitmap.Height), 0, 0, currentBitmap.Width, currentBitmap.Height, GraphicsUnit.Pixel, ia);
+
+            this.pictureBox2.Image = (Image)(currentBitmap.Clone());
+
+            g.Dispose();
+
+
 
         }
 
@@ -698,14 +797,67 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
             }
         }
 
+        public static Image resizeImage(Image imgToResize, Size size)
+        {
+            return (Image)(new Bitmap(imgToResize, size));
+        }
+
         private void button12_Click(object sender, EventArgs e)
         {
+            //調整影像大小 1
+            //調整影像大小
+            //使用 C# 中的 Bitmap 類調整影象大小
+            string filename = @"C:\______test_files\picture1.jpg";
+            Image image1 = Image.FromFile(filename);
+            Bitmap bitmap1 = new Bitmap(image1);
+            //Image image2 = resizeImage(bitmap1, new Size(image1.Width / 2, image1.Height / 2));
+            Image image2 = resizeImage(bitmap1, new Size(100, 300));
+
+            pictureBox1.Image = image2;
+
 
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
+            //調整影像大小 2
+            //調整影像大小 2
+            //使用 C# 中的 Graphics.DrawImage() 函式調整影象大小
+            string filename = @"C:\______test_files\picture1.jpg";
+            Image image1 = Image.FromFile(filename);
+            Bitmap bitmap1 = new Bitmap(image1);
+            Image image2 = resizeImage(bitmap1, new Size(200, 200));
 
+            pictureBox1.Image = image2;
+        }
+
+        public static Image resizeImage2(Image image, int width, int height)
+        {
+            var destinationRect = new Rectangle(0, 0, width, height);
+            var destinationImage = new Bitmap(width, height);
+
+            destinationImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            using (var graphics = Graphics.FromImage(destinationImage))
+            {
+                graphics.CompositingMode = CompositingMode.SourceCopy;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+
+                using (var wrapMode = new ImageAttributes())
+                {
+                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                    graphics.DrawImage(image, destinationRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+                }
+            }
+
+            return (Image)destinationImage;
+            /*
+            destinationImage.SetResolution() 函式保持影象的 dpi，而不考慮其實際大小
+            graphics.CompositingMode = CompositingMode.SourceCopy 屬性指定在渲染顏色時它將覆蓋背景顏色
+            graphics.CompositingQuality = CompositingQuality.HighQuality 屬性指定我們只希望渲染高質量的影象
+            wrapMode.SetWrapMode(WrapMode.TileFlipXY) 函式可以防止在影象邊界周圍出現鬼影
+            graphics.DrawImage() 繪製具有指定尺寸的實際影象。
+            */
         }
 
         private void button14_Click(object sender, EventArgs e)

@@ -1,4 +1,70 @@
 
+
+
+
+            //跟隨鼠標在 pictureBox 的圖片上畫矩形
+            pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
+            pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
+            pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
+
+
+        private int intStartX = 0;
+        private int intStartY = 0;
+        private bool isMouseDraw = false;
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            isMouseDraw = true;
+            intStartX = e.X;
+            intStartY = e.Y;
+        }
+
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (isMouseDraw)
+            {
+                try
+                {
+                    //Image tmp = Image.FromFile("1.png");
+
+                    Graphics g = this.pictureBox1.CreateGraphics();
+
+                    //清空上次畫下的痕跡
+
+                    g.Clear(this.pictureBox1.BackColor);
+
+                    Brush brush = new SolidBrush(Color.Red);
+
+                    Pen pen = new Pen(brush, 1);
+
+                    pen.DashStyle = DashStyle.Solid;
+
+                    g.DrawRectangle(pen, new Rectangle(intStartX > e.X ? e.X : intStartX, intStartY > e.Y ? e.Y : intStartY, Math.Abs(e.X - intStartX), Math.Abs(e.Y - intStartY)));
+
+                    g.Dispose();
+
+                    //this.pictureBox_Src.Image = tmp;
+                }
+
+                catch (Exception ex)
+                {
+                    ex.ToString();
+                }
+            }
+        }
+
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        {
+            isMouseDraw = false;
+
+            intStartX = 0;
+
+            intStartY = 0;
+        }
+
+
+
+
+
 [C#] 使用 Regex.Match 從 String 中提出英文或數字
 正規表示式
 
@@ -13,8 +79,10 @@
 
 
 
+pictureBox圖像直接存檔
+pictureBox1.Image.Save(filename);
 
-無法嵌入互操作類型“Microsoft.Office.Interop.Excel.ApplicationClass”。請改用適用的接口，interop.excel
+
 無法嵌入互操作類型“Microsoft.Office.Interop.Excel.ApplicationClass”。請改用適用的接口，interop.excel
 把Microsoft.Office.Interop.Excel.DLL的嵌入互操作類型改為ture就可以了
 

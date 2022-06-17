@@ -463,6 +463,27 @@ namespace vcs_FFMPEG
                 axWindowsMediaPlayer1.Ctlcontrols.currentPosition = mp3_position;
                 axWindowsMediaPlayer1.Ctlcontrols.play();
                 richTextBox1.Text += "start at : " + axWindowsMediaPlayer1.Ctlcontrols.currentPosition.ToString() + "\n";
+
+
+                int W = axWindowsMediaPlayer1.Ctlcontrols.currentItem.imageSourceWidth;
+                int H = axWindowsMediaPlayer1.Ctlcontrols.currentItem.imageSourceHeight;
+                richTextBox1.Text += "W : " + W.ToString() + "\n";
+                richTextBox1.Text += "H : " + H.ToString() + "\n";
+                if (W > 0)
+                {
+                    axWindowsMediaPlayer1.Visible = true;
+                    axWindowsMediaPlayer1.Width = W / 2;
+                    axWindowsMediaPlayer1.Height = H / 2;
+
+                    axWindowsMediaPlayer1.Location = new Point(1035, 0);
+                    this.Size = new Size(1035 + W / 2, 720);
+
+                    //1035, 720
+                    richTextBox1.Text += "AAAAAAAA";
+
+
+                }
+
             }
             else if (flag_play_mode == 1)
             {
@@ -667,6 +688,29 @@ namespace vcs_FFMPEG
         private void button9_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += axWindowsMediaPlayer1.Ctlcontrols.currentPosition.ToString() + "\n";
+
+
+            string filename = @"D:\內視鏡影片\川﨑院長が胃カメラ内視鏡検査を受けてみました！ 胃カメラは怖くない！ 痛みや苦痛が少ない胃カメラとは？.mp4";
+
+            axWindowsMediaPlayer1.URL = filename;
+
+            axWindowsMediaPlayer1.Ctlcontrols.play();
+
+
+
+            richTextBox1.Text += "媒體長度:\t" + axWindowsMediaPlayer1.currentMedia.duration.ToString() + " 秒\n";
+            richTextBox1.Text += "影像寬度:\t" + axWindowsMediaPlayer1.currentMedia.imageSourceWidth.ToString() + "\n";
+            richTextBox1.Text += "影像高度:\t" + axWindowsMediaPlayer1.currentMedia.imageSourceHeight.ToString() + "\n";
+            richTextBox1.Text += "Name:\t" + axWindowsMediaPlayer1.currentMedia.name + "\n";
+            richTextBox1.Text += "全螢幕:\t" + axWindowsMediaPlayer1.fullScreen.ToString() + "\n";
+            richTextBox1.Text += "播放器寬:\t" + axWindowsMediaPlayer1.Width.ToString() + "\n";
+            richTextBox1.Text += "播放器高:\t" + axWindowsMediaPlayer1.Height.ToString() + "\n";
+            richTextBox1.Text += "播放器名:\t" + axWindowsMediaPlayer1.Name + "\n";
+            richTextBox1.Text += "聲量:\t" + axWindowsMediaPlayer1.settings.volume.ToString() + "\n";
+            richTextBox1.Text += "URL:\t" + axWindowsMediaPlayer1.URL + "\n";
+            richTextBox1.Text += "版本:\t" + axWindowsMediaPlayer1.versionInfo + "\n";
+
+
         }
 
         private void button10_Click(object sender, EventArgs e)
