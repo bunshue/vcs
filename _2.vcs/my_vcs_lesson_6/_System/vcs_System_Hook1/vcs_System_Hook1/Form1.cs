@@ -7,11 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-
-using System.Runtime.InteropServices;
-using Microsoft.Win32;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
+using Microsoft.Win32;
 
 namespace vcs_System_Hook1
 {
@@ -27,6 +26,7 @@ namespace vcs_System_Hook1
             BlockInput(b);
             FuckSysKey(b);//鎖定ctrl+alt+del
         }
+
         public delegate int HookProc(int nCode, int wParam, IntPtr lParam);
         static int hHook = 0;
         public const int WH_KEYBOARD_LL = 13;   //ESC
@@ -104,6 +104,7 @@ namespace vcs_System_Hook1
         public int KeyBoardHookProc(int nCode, int wParam, IntPtr lParam)
         {
             this.Text = "抓到ESC";
+            richTextBox1.Text += "抓到ESC\n";
 
             return 0;
         }
@@ -123,6 +124,7 @@ namespace vcs_System_Hook1
             //ST
             Hook_Start();
             this.Text = "啟動";
+            richTextBox1.Text += "啟動 Hook\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -130,6 +132,7 @@ namespace vcs_System_Hook1
             //SP
             Hook_Clear();
             this.Text = "取消";
+            richTextBox1.Text += "取消 Hook\n";
 
         }
     }

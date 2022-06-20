@@ -501,7 +501,6 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(240, 50);
             this.button23.TabIndex = 51;
-            this.button23.Text = "CPU 與記憶體使用率";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 

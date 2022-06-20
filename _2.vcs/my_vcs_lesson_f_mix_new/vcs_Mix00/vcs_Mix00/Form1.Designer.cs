@@ -76,6 +76,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(170, 70);
             this.button9.TabIndex = 102;
+            this.button9.Text = "獲得處理器參數程序代碼";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -86,6 +87,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(170, 70);
             this.button8.TabIndex = 101;
+            this.button8.Text = "點陣列 BitArray 使用";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 

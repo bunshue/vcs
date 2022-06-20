@@ -1,6 +1,14 @@
 
 
 
+ProgressBar類是密封(sealed)的，不能再被繼承。
+
+
+
+
+
+
+
 
             //跟隨鼠標在 pictureBox 的圖片上畫矩形
             pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);

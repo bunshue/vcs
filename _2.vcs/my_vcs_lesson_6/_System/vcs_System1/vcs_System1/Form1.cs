@@ -33,9 +33,6 @@ namespace vcs_System1
     {
         DateTime start_time = DateTime.Now;
 
-        //PerformanceCounter pc = new PerformanceCounter(); 若未給參數 要在使用時給參數
-        static PerformanceCounter pc = new PerformanceCounter("Processor", "% Processor Time", "_Total");
-
         public Form1()
         {
             InitializeComponent();
@@ -517,17 +514,8 @@ namespace vcs_System1
             richTextBox1.Text += "VersionInfo: " + FileVersionInfo.GetVersionInfo(@"C:\WINDOWS\NOTEPAD.EXE").FileVersion.ToString() + "\n";
         }
 
-        static PerformanceCounter cpu = new PerformanceCounter("Processor", "% Processor Time", "_Total");
-        static PerformanceCounter memory = new PerformanceCounter("Memory", "% Committed Bytes in Use");
         private void button23_Click(object sender, EventArgs e)
         {
-            //CPU 與記憶體使用率
-            //建一個 PerformanceCounter 物件，指定分類、計數器名稱、執行個體，接著用 NextValue() 取值，輕鬆搞定。
-            Console.WriteLine("CPU: {0:n1}%", cpu.NextValue());
-            Console.WriteLine("Memory: {0:n0}%", memory.NextValue());
-
-            richTextBox1.Text += "CPU: " + cpu.NextValue() + "\n";
-            richTextBox1.Text += "Memory: " + memory.NextValue() + "\n";
         }
 
         private void button24_Click(object sender, EventArgs e)
@@ -1367,22 +1355,12 @@ namespace vcs_System1
             label4.Text = "可用虛擬內存(B)： " + Convert.ToString(myComputer.Info.AvailableVirtualMemory / 1024 / 1024) + " MB";
 
             timer2.Interval = 2000;
-            double cpu_usage = pc.NextValue();
-            label5.Text = "CPU使用率 " + cpu_usage.ToString() + " %";
-            richTextBox1.Text += "CPU使用率 " + cpu_usage.ToString() + " %\n";
-
-            /*
-            pc.CategoryName = "Processor";
-            pc.CounterName = "% Processor Time";
-            pc.InstanceName = "_Total";
-            */
         }
 
         private void bt_memory_Click(object sender, EventArgs e)
         {
             timer2.Enabled = true;
         }
-
 
         // Save the current settings.
         private void SaveSettings()
@@ -1607,12 +1585,6 @@ namespace vcs_System1
 
         private void timer3_Tick(object sender, EventArgs e)
         {
-            // CPU 與記憶體使用率
-            Console.WriteLine("CPU: {0:n1}%", cpu.NextValue());
-            Console.WriteLine("Memory: {0:n0}%", memory.NextValue());
-
-            richTextBox1.Text += "CPU: " + cpu.NextValue() + " %\n";
-            richTextBox1.Text += "Memory: " + memory.NextValue() + " %\n";
         }
 
 

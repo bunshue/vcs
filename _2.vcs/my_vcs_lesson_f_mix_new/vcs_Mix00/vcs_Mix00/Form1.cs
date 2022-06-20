@@ -434,8 +434,8 @@ namespace vcs_Mix00
 
             //使用WMI取得USB資訊
 
-            ManagementObjectSearcher search = new ManagementObjectSearcher("SELECT * FROM Win32_USBHub");
-            ManagementObjectCollection collection = search.Get();
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_USBHub");
+            ManagementObjectCollection collection = mos.Get();
             var usbList = from u in collection.Cast<ManagementBaseObject>()
                           select new
                           {
@@ -573,11 +573,92 @@ namespace vcs_Mix00
         private void button8_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            // 創建兩個大小為 8 的點陣列
+            BitArray ba1 = new BitArray(8);
+            BitArray ba2 = new BitArray(8);
+
+            byte[] a = { 0xAA };
+            byte[] b = { 0x55 };
+
+            // 把值 60 和 13 存儲到點陣列中
+            ba1 = new BitArray(a);
+            ba2 = new BitArray(b);
+
+            // ba1 的內容
+            richTextBox1.Text += "Bit array ba1 : " + ba1.ToString() + "\n";
+            for (int i = (ba1.Count - 1); i >= 0; i--)
+            {
+                richTextBox1.Text += ba1[i].ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
+
+            // ba2 的內容
+            richTextBox1.Text += "Bit array ba2 : " + ba2.ToString() + "\n";
+            for (int i = (ba2.Count - 1); i >= 0; i--)
+            {
+                richTextBox1.Text += ba2[i].ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
+
+            BitArray ba3 = new BitArray(8);
+
+            ba3 = ba1.And(ba2);
+            // ba3 的內容
+            richTextBox1.Text += "Bit array ba3 after AND : " + ba3.ToString() + "\n";
+            for (int i = (ba3.Count - 1); i >= 0; i--)
+            {
+                richTextBox1.Text += ba3[i].ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
+
+            ba3 = new BitArray(8);
+            ba3 = ba1.Or(ba2);
+            // ba3 的內容
+            richTextBox1.Text += "Bit array ba3 after OR : " + ba3.ToString() + "\n";
+            for (int i = (ba3.Count - 1); i >= 0; i--)
+            {
+                richTextBox1.Text += ba3[i].ToString() + " ";
+            }
+            richTextBox1.Text += "\n";
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //獲得處理器參數程序代碼
+            get_ProcessorInfo();
+
+
+
+        }
+
+        void get_ProcessorInfo()
+        {
+            string[] 制造商;
+            string[] 型號;
+            string[] 序列號;
+
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+            制造商 = new string[mos.Get().Count];
+            型號 = new string[mos.Get().Count];
+            序列號 = new string[mos.Get().Count];
+            int i = 0;
+            foreach (ManagementObject mo in mos.Get())
+            {
+                try
+                {
+                    制造商[i] = mo.GetPropertyValue("Manufacturer").ToString();
+                    序列號[i] = mo.GetPropertyValue("ProcessorId").ToString();
+
+                    richTextBox1.Text += "制造商[" + i.ToString() + "] : " + 制造商[i].ToString() + "\n";
+                    richTextBox1.Text += "序列號[" + i.ToString() + "] : " + 序列號[i].ToString() + "\n";
+                }
+                catch (System.Exception er)
+                {
+                }
+                i++;
+            }
         }
 
         //局部圖像放大
