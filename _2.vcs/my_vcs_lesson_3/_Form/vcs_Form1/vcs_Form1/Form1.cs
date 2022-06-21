@@ -315,43 +315,6 @@ namespace vcs_Form1
 
         private void button14_Click(object sender, EventArgs e)
         {
-            create_irregular_form();
-        }
-
-        void create_irregular_form()
-        {
-            //建立一個不規則的表單
-            // Make points to define a polygon for the form.
-            PointF[] pts = new PointF[10];
-            float cx = (float)(this.ClientSize.Width * 0.5);
-            float cy = (float)(this.ClientSize.Height * 0.5);
-            float r1 = (float)(this.ClientSize.Height * 0.45);
-            float r2 = (float)(this.ClientSize.Height * 0.25);
-            float theta = (float)(-Math.PI / 2);
-            float dtheta = (float)(2 * Math.PI / 10);
-            for (int i = 0; i < 10; i += 2)
-            {
-                pts[i] = new PointF(
-                    (float)(cx + r1 * Math.Cos(theta)),
-                    (float)(cy + r1 * Math.Sin(theta)));
-                theta += dtheta;
-                pts[i + 1] = new PointF(
-                    (float)(cx + r2 * Math.Cos(theta)),
-                    (float)(cy + r2 * Math.Sin(theta)));
-                theta += dtheta;
-            }
-
-            // Use the polygon to define a GraphicsPath.
-            GraphicsPath path = new GraphicsPath();
-            path.AddPolygon(pts);
-
-            // Make a region from the path.
-            Region form_region = new Region(path);
-
-            // Restrict the form to the region.
-            this.Region = form_region;
-
-
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -541,15 +504,6 @@ namespace vcs_Form1
 
         private void button32_Click(object sender, EventArgs e)
         {
-            //不規則表單 Region
-            //通過設置窗體的Region屬性，製作不規則窗體。
-
-            GraphicsPath gp = new GraphicsPath();
-            Rectangle rect = new Rectangle(0, 0, 600, 400);
-            gp.AddEllipse(rect);
-            Region r = new Region(gp);
-            this.Region = r;
-            //this.Region = new Region(gp); same
         }
 
         private void button33_Click(object sender, EventArgs e)
