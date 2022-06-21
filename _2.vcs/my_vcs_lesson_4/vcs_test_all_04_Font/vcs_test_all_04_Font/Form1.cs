@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Text;  //for InstalledFontCollection
+using System.Drawing.Text;  //for InstalledFontCollection, PrivateFontCollection
 
 namespace vcs_test_all_04_Font
 {
@@ -271,13 +271,17 @@ namespace vcs_test_all_04_Font
         private void button13_Click(object sender, EventArgs e)
         {
             //指明使用特定字型檔
+
             //路徑             
             string path = @"../../font/金梅重黑浮體白字.ttf";
+
             //讀取字體文件             
             PrivateFontCollection pfc = new PrivateFontCollection();
             pfc.AddFontFile(path);
+
             //實例化字體             
             Font f = new Font(pfc.Families[0], 40);
+
             //設置字體            
             richTextBox2.Font = f;
         }
