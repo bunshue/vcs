@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_Form7_Transparent.Properties {
+namespace vcs_Form6_NotRectangle7.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]

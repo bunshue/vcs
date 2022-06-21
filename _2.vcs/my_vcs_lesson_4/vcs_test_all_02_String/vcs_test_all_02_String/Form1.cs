@@ -34,8 +34,8 @@ namespace vcs_test_all_02_String
             //button
             x_st = 10;
             y_st = 10;
-            dx = 200 + 10;
-            dy = 40 + 10;
+            dx = 180 + 10;
+            dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -47,6 +47,7 @@ namespace vcs_test_all_02_String
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+
             button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -58,7 +59,27 @@ namespace vcs_test_all_02_String
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+
+            textBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button31.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button32.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button33.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button34.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button35.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button36.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            button37.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+
+            richTextBox1.Location = new Point(x_st + dx * 4+150, y_st + dy * 0);
 
             richTextBox1.Text += "\n\n";
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -329,6 +350,164 @@ namespace vcs_test_all_02_String
         private void button19_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            //貨幣單位
+            double money = 1234.567;
+            richTextBox1.Text += "\n";
+            richTextBox1.Text += money.ToString("C") + "\n";
+            richTextBox1.Text += "新台幣：" + money.ToString("C0") + "元\n"; //到整數
+            richTextBox1.Text += money.ToString("C", CultureInfo.CurrentCulture) + "\n";
+            richTextBox1.Text += money.ToString("C", CultureInfo.CreateSpecificCulture("da-DK")) + "\n";
+            richTextBox1.Text += money.ToString("C", CultureInfo.CreateSpecificCulture("en-US")) + "\n";
+            richTextBox1.Text += money.ToString("C", CultureInfo.CreateSpecificCulture("ja-JP")) + "\n";
+            richTextBox1.Text += money.ToString("C", CultureInfo.CreateSpecificCulture("fr-FR")) + "\n";
+
+
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            //數字顯示格式     百分比%
+
+            //double x = 1234567890;
+            int x = 12345;
+            richTextBox1.Text += "十進位\t" + x.ToString() + "\n";
+            richTextBox1.Text += "十六進位\t" + x.ToString("X2") + "\n";
+            richTextBox1.Text += "數值格式\t" + x.ToString("N0") + "\n";
+
+            double y = 123.456;
+            richTextBox1.Text += "數值格式\t" + y.ToString("N4") + "\n";
+
+            richTextBox1.Text += "將0.87顯示為87%\n";
+            float percent = 0.87f;
+            richTextBox1.Text += "percent = " + percent.ToString() + "\t數字\n";
+            string percent_text = percent.ToString("P0");
+            richTextBox1.Text += "percent = " + percent_text + "\t百分比\n";
+
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            //小數點下n位四捨五入
+
+            double pi = Math.PI;
+            richTextBox1.Text += "小數點下2位\t" + pi.ToString("n2") + "\n";
+            richTextBox1.Text += "小數點下4位\t" + pi.ToString("n4") + "\t四捨五入\n";
+            richTextBox1.Text += "小數點下5位\t" + pi.ToString("n5") + "\n";
+            richTextBox1.Text += "小數點下10位\t" + pi.ToString("n10") + "\n";
+            richTextBox1.Text += "小數點下15位\t" + pi.ToString("n15") + "\n";
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            //字符型轉換 轉為字符串
+
+            int value = 12345;
+            richTextBox1.Text += "a\t" + value.ToString("n") + "\n"; //生成 12,345.00
+            richTextBox1.Text += "b\t" + value.ToString("C") + "\n"; //生成 ￥12,345.00
+            richTextBox1.Text += "c\t" + value.ToString("e") + "\n"; //生成 1.234500e+004
+            richTextBox1.Text += "d\t" + value.ToString("f4") + "\n"; //生成 12345.0000
+            richTextBox1.Text += "e\t" + value.ToString("x") + "\n"; //生成 3039 (16進制)
+            richTextBox1.Text += "f\t" + value.ToString("p") + "\n"; //生成 1,234,500.00%
+
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            //數字顯示
+
+
+            /*
+            保留兩位小數
+            ToString("0.00");
+
+            ToString("0.00");
+            */
+
+
+
+
+
+            double dis1 = 150000000000.0 / 340.0 / 60.0 / 60.0 / 24.0;
+            //label4.Text = dis.ToString("#,###,###,###.##") + " 天";
+
+            double dis2 = 150000000000.0 / 299792458.0;
+            //label5.Text = dis.ToString() + " 秒";
+            //label5.Text = dis.ToString("#,###,###,###.##") + " 秒";
+
+            //txtValue.Text = pi.ToString("F15");		//小數點以下15位
+            //txtError.Text = error.ToString("E");		//科學符號
+
+
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        int value1 = 12345;
+        double value2 = 123.456;
+        double value3 = 1234.5678;
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = value1.ToString("D");
+        }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = value1.ToString("D8");
+        }
+
+        private void button33_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = value1.ToString("X");
+        }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = value1.ToString("X8");
+        }
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = value2.ToString("F4");
+            //textBox1.Text = value2.ToString("F0");  //四捨五入到整數
+            //textBox1.Text = value2.ToString("F1");  //四捨五入到小數點下一位
+        }
+
+        private void button36_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = value3.ToString("#0.00");         //格式化，小數點後留2位，四捨五入
+        }
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+            textBox1.Text = value3.ToString("#00000.000");   //格式化，小數點前5位，小數點後留3位四捨五入
         }
     }
 }

@@ -28,15 +28,28 @@ namespace vcs_test_all_04_Font
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
             SizeLabelFont(label2);
             SizeLabelFont(label3);
             SizeLabelFont(label4);
             SizeLabelFont(label5);
 
+            search_installed_font();
+        }
+
+        void search_installed_font()
+        {
+            listBox2.Items.Clear();
+
             // List the font families.
             InstalledFontCollection fonts = new InstalledFontCollection();
             foreach (FontFamily font_family in fonts.Families)
             {
+                if (cb_chinese.Checked == true)
+                {
+                    if (font_family.Name[0] < 'Z')
+                        continue;
+                }
                 listBox2.Items.Add(font_family.Name);
             }
 
@@ -336,6 +349,11 @@ namespace vcs_test_all_04_Font
                 richTextBox1.Text += "get font : " + font.Name + "\n";
             }
 
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            search_installed_font();
         }
     }
 }

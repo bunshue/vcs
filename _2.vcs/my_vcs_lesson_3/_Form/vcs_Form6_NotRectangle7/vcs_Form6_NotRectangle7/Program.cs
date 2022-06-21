@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_Form7_Transparent
+namespace vcs_Form6_NotRectangle7
 {
     static class Program
     {

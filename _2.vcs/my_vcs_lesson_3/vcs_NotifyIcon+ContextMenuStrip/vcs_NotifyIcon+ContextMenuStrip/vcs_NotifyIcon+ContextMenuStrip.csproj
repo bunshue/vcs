@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{FEA89A86-4A3C-4424-A3AE-03B14FAF0377}</ProjectGuid>
+    <ProjectGuid>{1FF8F480-436F-40BE-BB30-7FFFAB6B933E}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_Form7_Transparent</RootNamespace>
-    <AssemblyName>vcs_Form7_Transparent</AssemblyName>
+    <RootNamespace>vcs_NotifyIcon_ContextMenuStrip</RootNamespace>
+    <AssemblyName>vcs_NotifyIcon+ContextMenuStrip</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -65,7 +65,6 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -69,6 +69,9 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button14 = new System.Windows.Forms.Button();
+            this.cb_chinese = new System.Windows.Forms.CheckBox();
+            this.button15 = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -516,11 +519,45 @@
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
+            // cb_chinese
+            // 
+            this.cb_chinese.Checked = true;
+            this.cb_chinese.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_chinese.Location = new System.Drawing.Point(1224, 11);
+            this.cb_chinese.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cb_chinese.Name = "cb_chinese";
+            this.cb_chinese.Size = new System.Drawing.Size(63, 14);
+            this.cb_chinese.TabIndex = 12;
+            this.cb_chinese.Text = "僅中文";
+            // 
+            // button15
+            // 
+            this.button15.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button15.Location = new System.Drawing.Point(1108, 5);
+            this.button15.Name = "button15";
+            this.button15.Size = new System.Drawing.Size(100, 40);
+            this.button15.TabIndex = 15;
+            this.button15.Text = "搜尋本機字型";
+            this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button15_Click);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(1224, 31);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(77, 12);
+            this.label7.TabIndex = 57;
+            this.label7.Text = "雙擊字型套用";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1747, 699);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.button15);
+            this.Controls.Add(this.cb_chinese);
             this.Controls.Add(this.button14);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.button13);
@@ -546,6 +583,7 @@
             this.groupBox4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -592,6 +630,9 @@
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Button button14;
+        internal System.Windows.Forms.CheckBox cb_chinese;
+        private System.Windows.Forms.Button button15;
+        private System.Windows.Forms.Label label7;
     }
 }
 

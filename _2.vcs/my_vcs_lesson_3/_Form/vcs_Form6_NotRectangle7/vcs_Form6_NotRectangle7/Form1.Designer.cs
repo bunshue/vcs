@@ -1,4 +1,4 @@
-﻿namespace vcs_Form7_Transparent
+﻿namespace vcs_Form6_NotRectangle7
 {
     partial class Form1
     {

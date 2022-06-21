@@ -138,7 +138,7 @@ namespace vcs_RichTextBox1
             button28.Location = new Point(x_st + dx * 1, y_st + dy * 13);
             button29.Location = new Point(x_st + dx * 1, y_st + dy * 14);
 
-            textBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button30.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             button31.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             button32.Location = new Point(x_st + dx * 2, y_st + dy * 2);
             button33.Location = new Point(x_st + dx * 2, y_st + dy * 3);
@@ -151,7 +151,6 @@ namespace vcs_RichTextBox1
             button40.Location = new Point(x_st + dx * 2, y_st + dy * 10);
             button41.Location = new Point(x_st + dx * 2, y_st + dy * 12);
             button42.Location = new Point(x_st + dx * 2, y_st + dy * 13);
-
 
             richTextBox1.Size = new Size(500, 400);
             x_st = 820;
@@ -625,86 +624,76 @@ namespace vcs_RichTextBox1
         {
         }
 
-        int value1 = 12345;
-        double value2 = 123.456;
-        double value3 = 1234.5678;
+        //用WordPad編輯
+        // Allow the user to edit the file with WordPad.
+        private void button30_Click(object sender, EventArgs e)
+        {
+            // Hide.
+            this.ShowInTaskbar = false;
+            this.Hide();
+
+            // Save the current text into the file.
+            richTextBox_rtf.SaveFile(rtf_filename);
+
+            // We will open rtf_filename with wordpad.exe.
+            ProcessStartInfo start_info =
+                new ProcessStartInfo("wordpad.exe", rtf_filename);
+            start_info.WindowStyle = ProcessWindowStyle.Maximized;
+
+            // Open wordpad.
+            Process proc = new Process();
+            proc.StartInfo = start_info;
+            proc.Start();
+
+            // Wait for wordpad to finish.
+            proc.WaitForExit();
+
+            // Reload the file.
+            richTextBox_rtf.LoadFile(rtf_filename);
+
+            // Unhide.
+            this.ShowInTaskbar = true;
+            this.Show();
+        }
 
         private void button31_Click(object sender, EventArgs e)
         {
-            textBox1.Text = value1.ToString("D");
         }
 
         private void button32_Click(object sender, EventArgs e)
         {
-            textBox1.Text = value1.ToString("D8");
         }
 
         private void button33_Click(object sender, EventArgs e)
         {
-            textBox1.Text = value1.ToString("X");
         }
 
         private void button34_Click(object sender, EventArgs e)
         {
-            textBox1.Text = value1.ToString("X8");
         }
 
         private void button35_Click(object sender, EventArgs e)
         {
-            textBox1.Text = value2.ToString("F4");
-            //textBox1.Text = value2.ToString("F0");  //四捨五入到整數
-            //textBox1.Text = value2.ToString("F1");  //四捨五入到小數點下一位
         }
 
         private void button36_Click(object sender, EventArgs e)
         {
-            textBox1.Text = value3.ToString("#0.00");         //格式化，小數點後留2位，四捨五入
         }
 
         private void button37_Click(object sender, EventArgs e)
         {
-            textBox1.Text = value3.ToString("#00000.000");   //格式化，小數點前5位，小數點後留3位四捨五入
         }
 
         private void button38_Click(object sender, EventArgs e)
         {
-            double money = 1234.567;
-            richTextBox1.Text += "\n";
-            richTextBox1.Text += money.ToString("C") + "\n";
-            richTextBox1.Text += "新台幣：" + money.ToString("C0") + "元\n"; //到整數
-            richTextBox1.Text += money.ToString("C", CultureInfo.CurrentCulture) + "\n";
-            richTextBox1.Text += money.ToString("C", CultureInfo.CreateSpecificCulture("da-DK")) + "\n";
-            richTextBox1.Text += money.ToString("C", CultureInfo.CreateSpecificCulture("en-US")) + "\n";
-            richTextBox1.Text += money.ToString("C", CultureInfo.CreateSpecificCulture("ja-JP")) + "\n";
-            richTextBox1.Text += money.ToString("C", CultureInfo.CreateSpecificCulture("fr-FR")) + "\n";
         }
 
         private void button39_Click(object sender, EventArgs e)
         {
-            //double x = 1234567890;
-            int x = 12345;
-            richTextBox1.Text += "十進位\t" + x.ToString() + "\n";
-            richTextBox1.Text += "十六進位\t" + x.ToString("X2") + "\n";
-            richTextBox1.Text += "數值格式\t" + x.ToString("N0") + "\n";
-
-            double y = 123.456;
-            richTextBox1.Text += "數值格式\t" + y.ToString("N4") + "\n";
-
-            richTextBox1.Text += "將0.87顯示為87%\n";
-            float percent = 0.87f;
-            richTextBox1.Text += "percent = " + percent.ToString() + "\t數字\n";
-            string percent_text = percent.ToString("P0");
-            richTextBox1.Text += "percent = " + percent_text + "\t百分比\n";
         }
 
         private void button40_Click(object sender, EventArgs e)
         {
-            double pi = Math.PI;
-            richTextBox1.Text += "小數點下2位\t" + pi.ToString("n2") + "\n";
-            richTextBox1.Text += "小數點下4位\t" + pi.ToString("n4") + "\t四捨五入\n";
-            richTextBox1.Text += "小數點下5位\t" + pi.ToString("n5") + "\n";
-            richTextBox1.Text += "小數點下10位\t" + pi.ToString("n10") + "\n";
-            richTextBox1.Text += "小數點下15位\t" + pi.ToString("n15") + "\n";
         }
 
         /// <summary>自定义方法 -- 
@@ -913,38 +902,6 @@ namespace vcs_RichTextBox1
             // Return the result.
             if (start_pos > end_pos) return "";
             return txt.Substring(start_pos, end_pos - start_pos + 1);
-        }
-
-        //用WordPad編輯
-        // Allow the user to edit the file with WordPad.
-        private void button30_Click(object sender, EventArgs e)
-        {
-            // Hide.
-            this.ShowInTaskbar = false;
-            this.Hide();
-
-            // Save the current text into the file.
-            richTextBox_rtf.SaveFile(rtf_filename);
-
-            // We will open rtf_filename with wordpad.exe.
-            ProcessStartInfo start_info =
-                new ProcessStartInfo("wordpad.exe", rtf_filename);
-            start_info.WindowStyle = ProcessWindowStyle.Maximized;
-
-            // Open wordpad.
-            Process proc = new Process();
-            proc.StartInfo = start_info;
-            proc.Start();
-
-            // Wait for wordpad to finish.
-            proc.WaitForExit();
-
-            // Reload the file.
-            richTextBox_rtf.LoadFile(rtf_filename);
-
-            // Unhide.
-            this.ShowInTaskbar = true;
-            this.Show();
         }
 
         // Save the current text into the file.

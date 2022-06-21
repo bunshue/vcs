@@ -23,7 +23,7 @@ using System.Windows.Forms;
  
 */
 
-namespace vcs_Form7_Transparent
+namespace vcs_Form6_NotRectangle7
 {
     public partial class Form1 : Form
     {
