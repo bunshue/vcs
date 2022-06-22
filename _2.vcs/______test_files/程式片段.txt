@@ -1,7 +1,32 @@
 
 
 
+
 ProgressBar類是密封(sealed)的，不能再被繼承。
+
+
+
+pictureBox圖像直接存檔
+pictureBox1.Image.Save(filename);
+
+
+
+存圖 
+                    FileStream fs = (FileStream)saveFileDialog1.OpenFile();
+                    switch (saveFileDialog1.FilterIndex)    		//選擇保存文件類型
+                    {
+                        case 1:
+                            this.pictureBox1.Image.Save(fs, ImageFormat.Jpeg); 		//保存為jpeg文件
+                            break;
+                        case 2:
+                            this.pictureBox1.Image.Save(fs, ImageFormat.Bmp);
+                            break;
+                        case 3:
+                            this.pictureBox1.Image.Save(fs, ImageFormat.Gif);
+                            break;
+                    }
+                    fs.Close();         					//關閉文件流
+
 
 
 
@@ -84,11 +109,6 @@ ProgressBar類是密封(sealed)的，不能再被繼承。
 \S：  非空白字元
 \w：  單詞字元(a-z,A-Z,0-9,_)
 \W：  非單詞字元
-
-
-
-pictureBox圖像直接存檔
-pictureBox1.Image.Save(filename);
 
 
 無法嵌入互操作類型“Microsoft.Office.Interop.Excel.ApplicationClass”。請改用適用的接口，interop.excel
@@ -272,20 +292,8 @@ C:\______test_files\_exe\ffmpeg>
 
 
 
-C# 播放 wav 或音樂檔方式
 
-在 C# 內播放 wav或音樂檔案方式，可使用下面範例實現
-Sample Code
 
-System.Media.SoundPlayer sp = new System.Media.SoundPlayer();
-sp.SoundLocation = @"C:\Wave音效檔\DoReMe.wav";
-sp.Play(); // 撥放
-..
-..
-..
-sp.Stop(); // 停止
-
- 
 
 
 
@@ -322,16 +330,6 @@ vcs_mp3cutter
 應該為vcs_FFMPEG大集合
 
 
-
-
-
-
-
-
-            //簡易播放wav的方法，僅可播放wav，不可播放mp3
-            string filename = @"C:\______test_files\_wav\WindowsShutdown.wav";
-            SoundPlayer simpleSound = new SoundPlayer(filename);
-            simpleSound.Play();
 
 
 
@@ -971,56 +969,38 @@ https://www.zhangshengrong.com/p/yOXD5ejR1B/
 
 \\圖片格式轉換
 
-        public void ImageFormatter(string sourcePath, string distationPath, string format) {
+        public void ImageFormatter(string sourcePath, string filename, string format) {
             System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(sourcePath);
             switch (format.ToLower()) {
                 case "bmp":
-                    bitmap.Save(distationPath, ImageFormat.Bmp);
+                    bitmap.Save(filename, ImageFormat.Bmp);
                     break;
                 case "emf":
-                    bitmap.Save(distationPath, ImageFormat.Emf);
+                    bitmap.Save(filename, ImageFormat.Emf);
                     break;
                 case "gif":
-                    bitmap.Save(distationPath, ImageFormat.Gif);
+                    bitmap.Save(filename, ImageFormat.Gif);
                     break;
                 case "ico":
-                    bitmap.Save(distationPath, ImageFormat.Icon);
+                    bitmap.Save(filename, ImageFormat.Icon);
                     break;
                 case "jpg":
-                    bitmap.Save(distationPath, ImageFormat.Jpeg);
+                    bitmap.Save(filename, ImageFormat.Jpeg);
                     break;
                 case "png":
-                    bitmap.Save(distationPath, ImageFormat.Png);
+                    bitmap.Save(filename, ImageFormat.Png);
                     break;
                 case "tif":
-                    bitmap.Save(distationPath, ImageFormat.Tiff);
+                    bitmap.Save(filename, ImageFormat.Tiff);
                     break;
                 case "wmf":
-                    bitmap.Save(distationPath, ImageFormat.Wmf);
+                    bitmap.Save(filename, ImageFormat.Wmf);
                     break;
                 default: throw new Exception("無法轉換此格式！");
             }
         }
 
     
-存圖 
-                    FileStream fs = (FileStream)saveFileDialog1.OpenFile();
-                    switch (saveFileDialog1.FilterIndex)    		//選擇保存文件類型
-                    {
-                        case 1:
-                            this.pictureBox1.Image.Save(fs, ImageFormat.Jpeg); 		//保存為jpeg文件
-                            break;
-                        case 2:
-                            this.pictureBox1.Image.Save(fs, ImageFormat.Bmp);
-                            break;
-                        case 3:
-                            this.pictureBox1.Image.Save(fs, ImageFormat.Gif);
-                            break;
-                    }
-                    fs.Close();         					//關閉文件流
-
-
-
 
 
             Bitmap bitmap1 = new Bitmap(w, h);
@@ -1064,12 +1044,6 @@ public static string byteToHexStr(byte[] bytes)
     }
     return returnStr;
 }
-
-
-
-
-貼個黑圖
-pictureBox1.Image = Properties.Resources.blank;
 
 //========================================================================================
 
@@ -1693,25 +1667,6 @@ DataTable可以加標題 比較像EXCEL表單
 //============================================================================================================================
 
 
-
-
-
-            //數字前面補0或是其他符號
-
-            string s1 = "";
-            string s2 = "";
-            int a = 123;
-            s1 = a.ToString().PadLeft(32, '0');
-
-            richTextBox1.Text += "s1 " + s1 + "\n";
-
-
-            s2 = a.ToString().PadLeft(32, '#');
-
-            richTextBox1.Text += "s2 " + s2 + "\n";
-
-
-
                 
             //comport訊息
             if (serialPort2.IsOpen)
@@ -1727,15 +1682,6 @@ DataTable可以加標題 比較像EXCEL表單
             }
 
 
-
-        private void btnOK_Click(object sender, EventArgs e)
-        {
-            decimal n1 = nudNo1.Value;  //n1=nudNo1的Value值
-            decimal n2 = nudNo2.Value;  //n2=nudNo2的Value值
-            //根據nudPoint.Value來格式化顯示的數值
-            lblAns.Text = (n1 + n2).ToString("F" + nudPoint.Value.ToString());
-        }
-  
 
 private PlayState _palystate = PlayState.Closed;
 
@@ -1862,26 +1808,6 @@ C#讀取exe版本號
 	// 更新
 	File.Copy(updatedAssemblyPath, currentAssemblyPath, true);
 	
-
-
-
-C# 控制台如何播放音頻文件，
-using System.Reflection;
-using System.Media;
- 
-10             string namespaceName = Assembly.GetExecutingAssembly().GetName().Name.ToString();  
-11             Assembly assembly = Assembly.GetExecutingAssembly();
-12             SoundPlayer sp = new SoundPlayer(assembly.GetManifestResourceStream(namespaceName + ".Resources" + ".STEAMBLO.WAV"));
-13             Console.Write("快看，輪船到了~！");
-14             sp.Play();
-string namespaceName = Assembly.GetExecutingAssembly().GetName().Name.ToString();   這段代碼是獲取前文檔命名空間的名稱的，也就是對應的“ThePlay”。
-
-Assembly assembly = Assembly.GetExecutingAssembly();   獲取包含當前執行的代碼的程序集。
-SoundPlayer sp = new SoundPlayer(assembly.GetManifestResourceStream(namespaceName + ".Resources" + ".STEAMBLO.WAV"));   
-namespaceName 是上面獲取的空間名稱，Resource是音頻文件夾的名稱，STEAMBLO.WAV 是對應的音頻文件！ 區分大小寫！ 不然會導致獲取為空！ 遺憾的是，只支持.wav格式的音頻文件！
-
-什麼？還是播放不了？
-
 
             
 using System.Reflection;
@@ -2805,34 +2731,6 @@ public class TestWS : System.Web.Services.WebService
 } 
 
 
-
-
-//將圖片放入byte數組
-
-Image image = Image.FromFile(file);
-MemoryStream s = new MemoryStream();
-image.Save(s, image.RawFormat);
-Byte[] bfye = s.ToArray();
-
-
-
-
-C# 控制台程序設置字體顏色
-
-
-Console.BackgroundColor = ConsoleColor.Blue; //設置背景色
-Console.ForegroundColor = ConsoleColor.White; //設置前景色，即字體顏色
-Console.WriteLine(“第一行白藍.”);
-
-Console.ResetColor(); //將控制台的前景色和背景色設為默認值
-Console.BackgroundColor = ConsoleColor.Green;
-Console.ForegroundColor = ConsoleColor.DarkGreen;
-string value = “第三行 綠暗綠”;
-Console.WriteLine(value.PadRight(Console.WindowWidth-value.Length)); //設置一整行的背景色
-
-        
-
-
 //-------------------------------------------------------------
 
 
@@ -3485,37 +3383,6 @@ dataGridView1.Sort(dataGridView1.Columns[1], System.ComponentModel.ListSortDirec
             
 
 
-//播放音樂
-using System.Media;
-            string filename = @"C:\______test_files\_wav\start.wav";
-            SoundPlayer sp = new SoundPlayer(filename);
-            sp.Play();
-        
-        
-      //挪用體系默許的閱讀器 
-      System.Diagnostics.Process.Start( "http://www.谷歌.cn");  
-
-
-16進制與字符串、字節數組之間的轉換。，
-
-1.將十進制數的字符串轉化成十六進制數的字符串
-
-//十進制轉二進制
-Console.WriteLine("十進制166的二進制表示: "+Convert.ToString(166, 2));
-//十進制轉八進制
-Console.WriteLine("十進制166的八進制表示: "+Convert.ToString(166, 8));
-//十進制轉十六進制
-Console.WriteLine("十進制166的十六進制表示: "+Convert.ToString(166, 16));
-    
-//二進制轉十進制
-Console.WriteLine("二進制 111101 的十進制表示: "+Convert.ToInt32("111101", 2));
-//八進制轉十進制
-Console.WriteLine("八進制 44 的十進制表示: "+Convert.ToInt32("44", 8));
-//十六進制轉十進制
-Console.WriteLine("十六進制 CC的十進制表示: "+Convert.ToInt32("CC", 16));
-
-2.16進制與字符串、字節數組之間的轉換
-
             richTextBox1.Text += "取得網頁資料\n";
             string strUrl = "https://www.google.com.tw/"; //獲得IP的網址了
 
@@ -3842,18 +3709,12 @@ Console.WriteLine(fileinfo.Length);
 FileInfo 類提供了用於在 C# 中建立，開啟，複製，刪除和移動檔案的方法。
 
 
-在 C# 中使用 String.Format() 方法將字串轉換為十六進位制
-            string decString = "0123456789";
-            var hexString = string.Join("",
-                decString.Select(c => String.Format("{0:X2}", Convert.ToInt32(c))));
-            Console.WriteLine(hexString);
-
-
-Process.Start("http://www.mrbccd.com");
 
 //打开注册表
 string regeditstr = Environment.GetEnvironmentVariable("WinDir");//WinDir系统环境变量的名称
 Process.Start(regeditstr + "\\regedit.exe");//打开注册表
+
+
 
 
 //開啟檔案總管到指定的目錄
@@ -4764,35 +4625,6 @@ public static byte[] drawImg(string check)
 
 
 
-
-
-
-        				
-//--------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-//--------------------------------------------------------------------------------------------------------------------------
-
-
-C# 播放鈴聲
-
-4             //播放鈴聲 
-
-5 System.Media.SoundPlayer sndPlayer =new   System.Media.SoundPlayer(Application.StartupPath + @"/ring.wav");    //wav格式的鈴聲 
-
-6              sndPlayer.PlayLooping(); 
-
-
-
-
-//--------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
 //--------------------------------------------------------------------------------------------------------------------------
 
 
@@ -4910,6 +4742,7 @@ C# 播放鈴聲
             Point p = new Point(600, 240);
 
             this.DesktopLocation = p;
+
 
 
 
@@ -5213,60 +5046,6 @@ public static void Mainboard(out string[] 制造商, out string[] 型號)
 
         				
 //--------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-//--------------------------------------------------------------------------------------------------------------------------
-
-vcs helper的  根據副檔名 決定檔案儲存格式
-
-        // Save the file with the appropriate format.
-        // Throw a NotSupportedException if the file
-        // has an unknown extension.
-        public void SaveBitmapUsingExtension(Bitmap bm, string filename)
-        {
-            string extension = Path.GetExtension(filename);
-            switch (extension.ToLower())
-            {
-                case ".bmp":
-                    bm.Save(filename, ImageFormat.Bmp);
-                    break;
-                case ".exif":
-                    bm.Save(filename, ImageFormat.Exif);
-                    break;
-                case ".gif":
-                    bm.Save(filename, ImageFormat.Gif);
-                    break;
-                case ".jpg":
-                case ".jpeg":
-                    bm.Save(filename, ImageFormat.Jpeg);
-                    break;
-                case ".png":
-                    bm.Save(filename, ImageFormat.Png);
-                    break;
-                case ".tif":
-                case ".tiff":
-                    bm.Save(filename, ImageFormat.Tiff);
-                    break;
-                default:
-                    throw new NotSupportedException(
-                        "Unknown file extension " + extension);
-            }
-        }
-
-
-
-
-//--------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-        				
-//----------------------
-----------------------------------------------------------------------------------------------------
 
 
 

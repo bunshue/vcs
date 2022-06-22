@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;    //for FileStream, path
 using System.Media;         //SystemSounds類別、SoundPlayer類別
 using System.Runtime.InteropServices;   //for DllImport
+using System.Text.RegularExpressions;
 
 using WMPLib;   //for mp3
 
@@ -501,10 +502,152 @@ namespace vcs_AudioVideoTest1
 
         }
 
+        List<string> al = new List<string>(); //當前歌詞時間表
         private void button13_Click(object sender, EventArgs e)
         {
+            //從mp3檔名找lrc
+            string filename = @"C:\______test_files\_mp3\04-三月雪(&黃妃).mp3";
 
+            string filename_lyrics = Path.Combine(Path.GetDirectoryName(filename), Path.GetFileNameWithoutExtension(filename) + ".lrc");
+
+            richTextBox1.Text += "f1 = " + filename + "\n";
+            richTextBox1.Text += "f2 = " + filename_lyrics + "\n";
+
+            if (!File.Exists(filename_lyrics))
+            {
+                richTextBox1.Text = "無 歌詞檔案\n";
+                return;
+            }
+
+            using (StreamReader sr = new StreamReader(new FileStream(filename_lyrics, FileMode.Open), Encoding.Default))
+            {
+                string tempLrc = "";
+                while (!sr.EndOfStream)
+                {
+                    tempLrc = sr.ReadToEnd();
+                }
+
+                if (tempLrc.Trim() == "")
+                {
+                    this.richTextBox1.Text = "歌詞檔案內容為空";
+                    return;
+                }
+
+                tempLrc = tempLrc.Trim();
+                Regex rg = new Regex("\r*\n*\\[ver:(.*)\\]\r*\n*");
+                tempLrc = rg.Replace(tempLrc, "");
+                rg = new Regex("\r*\n*\\[al:(.*)\\]\r*\n*");
+                tempLrc = rg.Replace(tempLrc, "");
+                rg = new Regex("\r*\n*\\[by:(.*)\\]\r*\n*");
+                tempLrc = rg.Replace(tempLrc, "");
+                rg = new Regex("\r*\n*\\[offset:(.*)\\]\r*\n*");
+                tempLrc = rg.Replace(tempLrc, "");
+                rg = new Regex("\r*\n*\\[ar:(.*)\\]\r*\n*");
+                Match mtch;
+                mtch = rg.Match(tempLrc);
+                tempLrc = rg.Replace(tempLrc, "\n歌手:" + mtch.Groups[1].Value + "\n");
+                rg = new Regex("\r*\n*\\[ti:(.+?)\\]\r*\n*");   //這裡注意貪婪匹配問題.+?
+                mtch = rg.Match(tempLrc);
+                tempLrc = rg.Replace(tempLrc, "\n歌名:" + mtch.Groups[1].Value + "\n");
+                rg = new Regex("\r*\n*\\[[0-9][0-9]:[0-9][0-9].[0-9][0-9]\\]");
+                MatchCollection mc = rg.Matches(tempLrc);
+                al.Clear();
+
+                foreach (Match m in mc)
+                {
+                    string temp = m.Groups[0].Value;
+                    //this.Text += temp + "+";                        
+                    string mi = temp.Substring(temp.IndexOf('[') + 1, 2);
+                    string se = temp.Substring(temp.IndexOf(':') + 1, 2);
+                    string ms = temp.Substring(temp.IndexOf('.') + 1, 2);   //這是毫秒，其實我只精確到秒，毫秒後面並沒有用
+                    //this.Text += mi + ":" + se + "+";
+                    string time = Convert.ToInt32(mi) * 60 + Convert.ToInt32(se) + "";  //這裡並沒有新增毫秒
+                    al.Add(time);
+                }
+
+                tempLrc = rg.Replace(tempLrc, "\n");
+                char[] remove = { '\r', '\n', ' ' };
+                this.richTextBox1.Text = tempLrc.TrimStart(remove);
+                this.timer1.Interval = 1000;
+                this.timer1.Tick += ShowLineLrc;
+                this.timer1.Start();
+            }
+
+            int len = al.Count;
+            richTextBox1.Text = "len = " + len.ToString() + "\n";
         }
+
+        int position = 0;
+        /// <summary>
+        /// 定時器執行的方法，每隔1秒執行一次  歌詞逐行顯示
+        private void ShowLineLrc(object sender, EventArgs e)
+        {
+            //int pos = al.IndexOf(trackBarValue.ToString());
+            position++;
+            int pos = position;
+            bool isAr = this.richTextBox1.Text.Contains("歌手:");
+            bool isTi = this.richTextBox1.Text.Contains("歌名:");
+
+
+            if ((pos >= 0) && (pos < 25))
+            {
+                int n = isAr ? 1 : 0;
+                int m = isTi ? 1 : 0;
+
+                int height = 28 * (this.al.Count + m + n);
+                int max = height - this.richTextBox1.Height;
+
+
+                this.richTextBox1.SelectAll();
+                this.richTextBox1.SelectionColor = Color.Black;
+                this.richTextBox1.SelectionLength = 0;/**/
+
+                int l = this.richTextBox1.Lines[pos + m + n].Length;
+                this.richTextBox1.Select(this.richTextBox1.GetFirstCharIndexFromLine(pos + m + n), l);
+                this.richTextBox1.SelectionColor = Color.OrangeRed;
+                this.richTextBox1.SelectionLength = 0;
+                //this.Text = GetScrollPos(this.richTextBox1.Handle, SB_VERT).ToString() + "-" + al.Count + "-" + this.richTextBox1.Height;
+
+                if ((pos + m + n) * 28 <= max)
+                {
+                    int start = this.richTextBox1.GetFirstCharIndexFromLine(pos + m + n);
+                    this.richTextBox1.SelectionStart = start;
+                    this.richTextBox1.ScrollToCaret();
+
+                }
+                else
+                {
+                    /*
+                    //this.richTextBox1.Focus();
+                    SendMessage(this.richTextBox1.Handle, WM_VSCROLL, SB_BOTTOM, 0);
+                    UpdateWindow(this.richTextBox1.Handle);
+                    //this.richTextBox1.SelectionStart = this.richTextBox1.Text.Length;
+                    //this.richTextBox1.ScrollToCaret();
+                    */
+                }
+
+                /*
+                if (this.lrcForm != null)
+                {
+                    string l1 = this.richTextBox1.Lines[pos + m + n];
+                    string l2;
+                    if ((pos + m + n) < this.richTextBox1.Lines.Length - 1)
+                    {
+                        l2 = this.richTextBox1.Lines[pos + m + n + 1];
+                    }
+                    else
+                    {
+                        l2 = "。。。。。";
+                    }
+
+                    this.lrcForm.setLrc(l1, l2, pos);
+                    //this.lrcForm.setLrc(ArrayList al,);
+
+                }
+                */
+            }
+        }
+
 
     }
 

@@ -658,6 +658,33 @@ namespace vcs_RichTextBox1
 
         private void button31_Click(object sender, EventArgs e)
         {
+            //richTextBox 內文變色
+
+            richTextBox1.SelectionColor = Color.Red;
+            richTextBox1.AppendText("內文變色\n");
+            richTextBox1.AppendText("恢復原色\n");
+
+            richTextBox1.SelectionColor = Color.Orange;
+            richTextBox1.AppendText("多行內文變色\n多行內文變色\n多行內文變色\n多行內文變色\n多行內文變色\n多行內文變色\n");
+            richTextBox1.AppendText("恢復原色\n");
+
+            richTextBox1.SelectionColor = Color.Yellow;
+            richTextBox1.AppendText("內文變色\n");
+            richTextBox1.AppendText("恢復原色\n");
+
+            richTextBox1.SelectionColor = Color.Green;
+            richTextBox1.AppendText("內文變色\n");
+            richTextBox1.AppendText("恢復原色\n");
+
+            richTextBox1.SelectionColor = Color.Blue;
+            richTextBox1.AppendText("內文變色\n");
+            richTextBox1.AppendText("恢復原色\n");
+
+            richTextBox1.SelectionColor = Color.Purple;
+            richTextBox1.AppendText("內文變色\n");
+            richTextBox1.AppendText("恢復原色\n");
+            richTextBox1.AppendText("恢復原色\n");
+            richTextBox1.AppendText("恢復原色\n");
         }
 
         private void button32_Click(object sender, EventArgs e)
