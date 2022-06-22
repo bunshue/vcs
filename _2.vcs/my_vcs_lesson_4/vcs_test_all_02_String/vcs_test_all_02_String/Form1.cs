@@ -92,7 +92,24 @@ namespace vcs_test_all_02_String
 
         private void button0_Click(object sender, EventArgs e)
         {
+            //字串轉拜列
+            richTextBox1.Text += "字串 轉 拜列\n";
 
+            string str = "this is a lion-mouse.";
+
+            richTextBox1.Text += "字串 : " + str + "\n";
+
+            byte[] byte_array = Encoding.ASCII.GetBytes(str);
+
+            int len = byte_array.Length;
+            richTextBox1.Text += "拜列長度 : " + len.ToString() + "\n";
+            richTextBox1.Text += "拜列內容 :\n";
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + (char)byte_array[i] + "\t" + byte_array[i].ToString("X2") + "\n";
+
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -114,7 +131,13 @@ namespace vcs_test_all_02_String
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //連接符 與 佔位符
+            string str1 = "lion";
+            string str2 = "mouse";
+            string m = String.Format("{0}", str1);   //字符串格式輸出
+            string n = String.Format("{0}", str2);
 
+            richTextBox1.Text += "str = " + m + "-" + n + "\n";     //用“+”連接符
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -238,7 +261,15 @@ namespace vcs_test_all_02_String
 
         private void button11_Click(object sender, EventArgs e)
         {
-
+            //split
+            string str = "this-is-a-lion-mouse";
+            string[] word = str.Split('-');
+            richTextBox1.Text += "原字串: " + str + "\n";
+            richTextBox1.Text += "分割後, len = " + word.Length.ToString() + ", 內容:\n";
+            foreach (string s in word)
+            {
+                richTextBox1.Text += s + "\n";
+            }
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -446,7 +477,12 @@ namespace vcs_test_all_02_String
 
         private void button25_Click(object sender, EventArgs e)
         {
-
+            richTextBox1.Text += "111\t" + 12345.ToString("n") + "\n"; //生成 12,345.00
+            richTextBox1.Text += "111\t" + 12345.ToString("C") + "\n"; //生成 ￥12,345.00
+            richTextBox1.Text += "111\t" + 12345.ToString("e") + "\n"; //生成 1.234500e+004
+            richTextBox1.Text += "111\t" + 12345.ToString("f4") + "\n"; //生成 12345.0000
+            richTextBox1.Text += "111\t" + 12345.ToString("x") + "\n"; //生成 3039 (16進制)
+            richTextBox1.Text += "111\t" + 12345.ToString("p") + "\n"; //生成 1,234,500
         }
 
         private void button26_Click(object sender, EventArgs e)

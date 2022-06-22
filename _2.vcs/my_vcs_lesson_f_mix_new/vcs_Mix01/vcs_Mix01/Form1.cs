@@ -336,7 +336,6 @@ namespace vcs_Mix01
             richTextBox1.Text += "解讀後:\t" + dt1.ToString() + "\n";
             //MessageBox.Show(dt1.ToString());
 
-
             string str2 = "20091014223600";
             DateTime dt2;
             DateTime dtNow = DateTime.Now;
@@ -352,8 +351,6 @@ namespace vcs_Mix01
                 richTextBox1.Text += "解讀後2:\t" + dtNow.ToString() + "\n";
                 //MessageBox.Show(dtNow.ToString());
             }
-
-
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -819,7 +816,7 @@ namespace vcs_Mix01
             }
         }
         //數字大寫顯示 SP
-        
+
         private void button14_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
@@ -881,16 +878,6 @@ namespace vcs_Mix01
         private void button18_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            string filename = @"C:\______test_files\_mp3\02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
-            Mp3Info mp3 = new Mp3Info(filename);
-            string artist = mp3.Artist;
-            string album = mp3.Album;
-            string title = mp3.Title;
-
-            richTextBox1.Text += "artist : " + artist + "\n";
-            richTextBox1.Text += "album : " + album + "\n";
-            richTextBox1.Text += "title : " + title + "\n";
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -944,144 +931,11 @@ namespace vcs_Mix01
         private void button21_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //從mp3中提取信息 1
-            //從mp3中提取信息
-
-            string filename = @"C:\______test_files\_mp3\aaaa.mp3";
-
-            byte[] b = new byte[128];
-            string sTitle;
-            string sSinger;
-            string sAlbum;
-            string sYear;
-            string sComm;
-
-            FileStream fs = new FileStream(filename, FileMode.Open);
-
-            fs.Seek(-128, SeekOrigin.End);
-            fs.Read(b, 0, 128);
-
-            bool isSet = false;
-            String sFlag = System.Text.Encoding.Default.GetString(b, 0, 3);
-            if (sFlag.CompareTo("TAG") == 0)
-            {
-                System.Console.WriteLine("Tag is setted!Replica Watches");
-                richTextBox1.Text += "Tag is setted!Replica Watches\n";
-                isSet = true;
-            }
-
-            if (isSet)
-            {
-                //http://study.pctoday.net.cn/3_Visual+Studio.aspx
-
-                sTitle = System.Text.Encoding.Default.GetString(b, 3, 30);
-
-                System.Console.WriteLine("标题:" + sTitle);
-                richTextBox1.Text += "標題:" + sTitle + "\n";
-
-                //Exclusive Replica Rolex Watches;
-
-                sSinger = System.Text.Encoding.Default.GetString(b, 33, 30);
-
-                System.Console.WriteLine("艺术家:" + sSinger);
-                richTextBox1.Text += "藝術家:" + sSinger + "\n";
-
-                //get album;
-
-                sAlbum = System.Text.Encoding.Default.GetString(b, 63, 30);
-
-                System.Console.WriteLine("唱片标题:" + sAlbum);
-                richTextBox1.Text += "唱片標題:" + sAlbum + "\n";
-
-                //egacn.com/Watches/Tag-Heuer;
-
-                sYear = System.Text.Encoding.Default.GetString(b, 93, 4);
-
-                System.Console.WriteLine("发行年:" + sYear);
-                richTextBox1.Text += "發行年:" + sYear + "\n";
-
-                //watchstylish.com;
-
-                sComm = System.Text.Encoding.Default.GetString(b, 97, 30);
-
-                System.Console.WriteLine("备注:" + sComm);
-                richTextBox1.Text += "備註:" + sComm + "\n";
-
-            }
-            fs.Close();
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //從mp3中提取信息 2
-            //get mp3 info
-
-            //string filename = @"C:\______test_files\_mp3\02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
-            string filename = @"C:\______test_files\_mp3\aaaa.mp3";
-
-            byte[] b = new byte[128];
-            string sTitle;
-            string sSinger;
-            string sAlbum;
-            string sYear;
-            string sComm;
-
-            FileStream fs = new FileStream(filename, FileMode.Open);
-
-            fs.Seek(-128, SeekOrigin.End);
-
-            fs.Read(b, 0, 128);
-
-            bool isSet = false;
-
-            String sFlag = System.Text.Encoding.Default.GetString(b, 0, 3);
-
-            if (sFlag.CompareTo("TAG") == 0)
-            {
-                System.Console.WriteLine("Tag is setted!Replica Watches");
-                richTextBox1.Text += "Tag is setted!Replica Watches" + "\n";
-                isSet = true;
-            }
-
-            if (isSet)
-            {
-                //http://study.pctoday.net.cn/3_Visual+Studio.aspx
-
-                sTitle = System.Text.Encoding.Default.GetString(b, 3, 30);
-
-                System.Console.WriteLine("标题:" + sTitle);
-                richTextBox1.Text += "标题:" + sTitle + "\n";
-
-                //Exclusive Replica Rolex Watches;
-
-                sSinger = System.Text.Encoding.Default.GetString(b, 33, 30);
-
-                System.Console.WriteLine("艺术家:" + sSinger);
-                richTextBox1.Text += "艺术家:" + sSinger + "\n";
-
-                //get album;
-
-                sAlbum = System.Text.Encoding.Default.GetString(b, 63, 30);
-
-                System.Console.WriteLine("唱片标题:" + sAlbum);
-                richTextBox1.Text += "唱片标题:" + sAlbum + "\n";
-
-                //egacn.com/Watches/Tag-Heuer;
-
-                sYear = System.Text.Encoding.Default.GetString(b, 93, 4);
-
-                System.Console.WriteLine("发行年:" + sYear);
-                richTextBox1.Text += "发行年:" + sYear + "\n";
-
-                //watchstylish.com;
-
-                sComm = System.Text.Encoding.Default.GetString(b, 97, 30);
-
-                System.Console.WriteLine("备注:" + sComm);
-                richTextBox1.Text += "备注:" + sComm + "\n";
-            }
-            fs.Close();
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -1106,12 +960,6 @@ namespace vcs_Mix01
         private void button24_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //播放wav檔
-            string filename = @"C:\______test_files\_wav\start.wav";
-            SoundPlayer player = new SoundPlayer(); //声明一个控制WAV文件的声音播放文件对象
-            player.SoundLocation = filename; //指定声音文件的路径
-            player.LoadAsync();  //设置播放的方法
-            player.Play(); //播放声音文件
         }
 
         private void button25_Click(object sender, EventArgs e)
@@ -1214,31 +1062,6 @@ namespace vcs_Mix01
         private void button29_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-        }
-    }
-
-    struct Mp3Info
-    {
-        public string Title;  //歌曲名,30个字节     3-62 
-        public string Artist; //歌手名,30个字节     33-62
-        public string Album;  //专辑名,30个字节     63-92
-        //public string Year;//年,4个字符     
-        //public string Comment;//注释,28个字节      
-        //public char reserved1;//保留位，一个字节        
-        //public char reserved2;//保留位，一个字节        
-        //public char reserved3;//保留位，一个字节  
-
-        public Mp3Info(string fileName)
-        {
-            FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-            fs.Seek(-128, SeekOrigin.End);
-            byte[] Info = new byte[128];
-            int length = fs.Read(Info, 0, 128);
-            fs.Close();
-
-            Title = Encoding.Default.GetString(Info, 3, 30).Replace("\0", string.Empty);
-            Artist = Encoding.Default.GetString(Info, 33, 30).Replace("\0", string.Empty);
-            Album = Encoding.Default.GetString(Info, 63, 30).Replace("\0", string.Empty);
         }
     }
 }

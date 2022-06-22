@@ -124,7 +124,6 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(170, 70);
             this.button24.TabIndex = 111;
-            this.button24.Text = "播放wav檔";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
@@ -146,7 +145,6 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(170, 70);
             this.button22.TabIndex = 109;
-            this.button22.Text = "從mp3中提取信息2";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
@@ -157,7 +155,6 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(170, 70);
             this.button21.TabIndex = 108;
-            this.button21.Text = "從mp3中提取信息1";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
@@ -310,7 +307,6 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(170, 70);
             this.button18.TabIndex = 94;
-            this.button18.Text = "mp3 info";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 

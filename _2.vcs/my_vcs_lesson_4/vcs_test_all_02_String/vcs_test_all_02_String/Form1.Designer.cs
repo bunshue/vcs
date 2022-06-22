@@ -97,6 +97,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(180, 60);
             this.button2.TabIndex = 2;
+            this.button2.Text = "連接符 與 佔位符";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -195,6 +196,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(180, 60);
             this.button11.TabIndex = 12;
+            this.button11.Text = "split";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -300,6 +302,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(180, 60);
             this.button0.TabIndex = 47;
+            this.button0.Text = "字串轉拜列";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -365,6 +368,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(180, 60);
             this.button25.TabIndex = 53;
+            this.button25.Text = "字符型轉換 轉為字符串";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 

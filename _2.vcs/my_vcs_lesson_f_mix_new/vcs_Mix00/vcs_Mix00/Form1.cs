@@ -480,8 +480,9 @@ namespace vcs_Mix00
         private void button5_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
             //Image Cut
-            //Image Cut
+
             string filename1 = @"C:\______test_files\picture1.jpg";
             string filename2 = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
             string mesg = "lion-mouse";
@@ -564,7 +565,6 @@ namespace vcs_Mix00
             Bitmap bitmap3 = (Bitmap)bitmap1.Clone(rect, bitmap1.PixelFormat);
 
             pictureBox1.Image = bitmap3;
-
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -573,9 +573,9 @@ namespace vcs_Mix00
 
             //抓屏將生成的圖片顯示在pictureBox
 
-            Image image = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+            Image image1 = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
 
-            Graphics g = Graphics.FromImage(image);
+            Graphics g = Graphics.FromImage(image1);
 
             g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height));
 
@@ -587,7 +587,7 @@ namespace vcs_Mix00
 
             this.pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
 
-            this.pictureBox1.Image = image;
+            this.pictureBox1.Image = image1;
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -701,66 +701,56 @@ namespace vcs_Mix00
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //昨天在給豆瓣電台加皮膚功能的時候考慮的，需要遍歷圖像的每個像素，然後算出均值。
-            //如果圖片比較暗，那麼文字就變成白色的，如果圖片比較亮，文字就變成黑色的。
-            //直接在C#用計算這樣的計算是需要付出一定性能代價的（相比非托管代碼），而且圖片越大，性能損耗就越嚴重。
-            //所以考慮把這部分代碼寫到unsafe語句中，讓它在內存裡直接計算。
+            string filename = @"C:\______test_files\red.bmp";
 
-            string filename = @"C:\______test_files\picture1.jpg";
+            Bitmap bitmap1 = new Bitmap(filename);
 
-            Bitmap image = new Bitmap(filename);
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
 
-            BitmapData data = image.LockBits(
+            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
 
-            new Rectangle(0, 0, image.Width, image.Height), ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+            Rectangle rect = new Rectangle(100, 100, 20, 20);
+            BitmapData data = bitmap1.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+
+            int w = data.Width;
+            int h = data.Height;
+
+            richTextBox1.Text += "w = " + w.ToString() + ", h = " + h.ToString() + "\n";
 
             unsafe
             {
                 long r = 0;
                 long g = 0;
                 long b = 0;
-                long pixelCount = data.Height * data.Width;
+                long pixelCount = h * w;
 
                 byte* ptr = (byte*)(data.Scan0);
 
-                for (int i = 0; i < data.Height; i++)
+                for (int i = 0; i < h; i++)
                 {
-                    for (int j = 0; j < data.Width; j++)
+                    for (int j = 0; j < w; j++)
                     {
-                        r += *ptr;
+                        //排列是BGR
+                        b += *ptr;
                         g += *(ptr + 1);
-                        b += *(ptr + 2);
+                        r += *(ptr + 2);
                         ptr += 3;
-                    } ptr += data.Stride - data.Width * 3;
+                    }
+                    ptr += data.Stride - w * 3;
                 }
 
                 double totalRGB = (r / pixelCount + g / pixelCount + b / pixelCount) / 3;
 
-                if (totalRGB > 127)
-                {
-                    this.BackColor = Color.FromArgb(0, 0, 0);
-                }
-                else
-                {
-                    this.BackColor = Color.FromArgb(255, 2552, 55);
-                }
+                richTextBox1.Text += "平均 R : " + (r / pixelCount).ToString() + "\n";
+                richTextBox1.Text += "平均 G : " + (g / pixelCount).ToString() + "\n";
+                richTextBox1.Text += "平均 B : " + (b / pixelCount).ToString() + "\n";
+                richTextBox1.Text += "平均亮度 : " + totalRGB.ToString() + "\n";
             }
-        }
-
-        string getVid(string url)
-        {
-            string strRegex = "(?<=id_)(\\w+)";
-            Regex reg = new Regex(strRegex);
-            Match match = reg.Match(url);
-            return match.ToString();
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-
-            string url = "http://v.youku.com/v_show/id_XNzk2NTI0MzMy.html";
-            string vid = getVid(url);
-            richTextBox1.Text += "vid : " + vid + "\n";
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -784,10 +774,6 @@ namespace vcs_Mix00
 
         private void button13_Click(object sender, EventArgs e)
         {
-            /// 利用C#來解讀MP3文件的TAG區信息。
-            //string mp3_filename = @"C:\______test_files\_mp3\aaaa.mp3";
-
-            // TBD
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -916,8 +902,8 @@ namespace vcs_Mix00
             if (iData.GetDataPresent(DataFormats.Bitmap))
             {
                 richTextBox1.Text += "取得圖片\n";
-                Image img = (Bitmap)iData.GetData(DataFormats.Bitmap);
-                //pictureBox1.Image = img;
+                Image image1 = (Bitmap)iData.GetData(DataFormats.Bitmap);
+                //pictureBox1.Image = image1;
             }
         }
 
@@ -1539,188 +1525,6 @@ namespace vcs_Mix00
         Function,
         OpeningParenthesis,
         ClosingParenthesis
-    }
-
-
-
-    public class clsMP3TAG
-    {
-        private byte[] TAGBody = new byte[128];
-
-        private byte[] sTag = new byte[3];
-        private byte[] sTitle = new byte[30];
-        private byte[] sArtist = new byte[30];
-        private byte[] sAlbum = new byte[30];
-        private byte[] sYear = new byte[4];
-        private byte[] sComment = new byte[30];
-        private byte[] sGenre = new byte[1];
-
-        System.Exception myException;
-
-        public clsMP3TAG(byte[] TAG)
-        {
-            if (TAG.Length != 128)
-            {
-                myException = new Exception("不是標准的 Mpeg-MP3 TAG 格式。\nTAG長度應該是 128 Byte。");
-                throw (myException);
-            }
-            else
-            {
-                Array.Copy(TAG, 0, sTag, 0, 3);
-                if (!Encoding.Default.GetString(sTag).Equals("TAG"))
-                {
-                    myException = new Exception("不是標准的 Mpeg-MP3 TAG 格式。\nTAG位校驗出錯。");
-                    throw (myException);
-                }
-
-                Array.Copy(TAG, 3, sTitle, 0, 30);
-                Array.Copy(TAG, 33, sArtist, 0, 30);
-                Array.Copy(TAG, 63, sAlbum, 0, 30);
-                Array.Copy(TAG, 93, sYear, 0, 4);
-                Array.Copy(TAG, 97, sComment, 0, 30);
-                Array.Copy(TAG, 127, sGenre, 0, 1);
-
-
-            }
-        }
-
-        /**/
-        //////////////////////////////////////////////////////
-        /// 以下是屬性，只讀
-        //////////////////////////////////////////////////////
-        public string Title
-        {
-            get
-            {
-                return Encoding.Default.GetString(sTitle);
-            }
-        }
-
-        public string Artist
-        {
-            get
-            {
-                return Encoding.Default.GetString(sArtist);
-            }
-        }
-
-        public string Album
-        {
-            get
-            {
-                return Encoding.Default.GetString(sAlbum);
-            }
-        }
-
-        public string Year
-        {
-            get
-            {
-                return Encoding.Default.GetString(sYear);
-            }
-        }
-
-        public string Comment
-        {
-            get
-            {
-                return Encoding.Default.GetString(sComment);
-            }
-        }
-
-        public string Genre
-        {
-            get
-            {
-                switch (Convert.ToInt16(sGenre[0]))
-                {
-                    case 0: return "Blues";
-                    case 20: return "Alternative";
-                    case 40: return "AlternRock";
-                    case 60: return "Top 40";
-                    case 1: return "Classic Rock";
-                    case 21: return "Ska";
-                    case 41: return "Bass";
-                    case 61: return "Christian Rap";
-                    case 2: return "Country";
-                    case 22: return "Death Metal";
-                    case 42: return "Soul";
-                    case 62: return "Pop/Funk";
-                    case 3: return "Dance";
-                    case 23: return "Pranks";
-                    case 43: return "Punk";
-                    case 63: return "Jungle";
-                    case 4: return "Disco";
-                    case 24: return "Soundtrack";
-                    case 44: return "Space";
-                    case 64: return "Native American";
-                    case 5: return "Funk";
-                    case 25: return "Euro-Techno";
-                    case 45: return "Meditative";
-                    case 65: return "Cabaret";
-                    case 6: return "Grunge";
-                    case 26: return "AmbIEnt";
-                    case 46: return "Instrumental Pop";
-                    case 66: return "New Wave";
-                    case 7: return "Hip-Hop";
-                    case 27: return "Trip-Hop";
-                    case 47: return "Instrumental Rock";
-                    case 67: return "Psychadelic";
-                    case 8: return "Jazz";
-                    case 28: return "Vocal";
-                    case 48: return "Ethnic";
-                    case 68: return "Rave";
-                    case 9: return "Metal";
-                    case 29: return "Jazz+Funk";
-                    case 49: return "Gothic";
-                    case 69: return "Showtunes";
-                    case 10: return "New Age";
-                    case 30: return "Fusion";
-                    case 50: return "Darkwave";
-                    case 70: return "Trailer";
-                    case 11: return "OldIEs";
-                    case 31: return "Trance";
-                    case 51: return "Techno-Industrial";
-                    case 71: return "Lo-Fi";
-                    case 12: return "Other";
-                    case 32: return "Classical";
-                    case 52: return "Electronic";
-                    case 72: return "Tribal";
-                    case 13: return "Pop";
-                    case 33: return "Instrumental";
-                    case 53: return "Pop-Folk";
-                    case 73: return "Acid Punk";
-                    case 14: return "R&B";
-                    case 34: return "Acid";
-                    case 54: return "Eurodance";
-                    case 74: return "Acid Jazz";
-                    case 15: return "Rap";
-                    case 35: return "House";
-                    case 55: return "Dream";
-                    case 75: return "Polka";
-                    case 16: return "Reggae";
-                    case 36: return "Game";
-                    case 56: return "Southern Rock";
-                    case 76: return "Retro";
-                    case 17: return "Rock";
-                    case 37: return "Sound Clip";
-                    case 57: return "Comedy";
-                    case 77: return "Musical";
-                    case 18: return "Techno";
-                    case 38: return "Gospel";
-                    case 58: return "Cult";
-                    case 78: return "Rock & Roll";
-                    case 19: return "Industrial";
-                    case 39: return "Noise";
-                    case 59: return "Gangsta";
-                    case 79: return "Hard Rock";
-
-
-                    default:
-                        return "未知類型";
-                }
-            }
-        }
     }
 }
 

@@ -36,8 +36,8 @@ namespace vcs_AudioVideoTest1
             //button
             x_st = 12;
             y_st = 12;
-            dx = 120;
-            dy = 40;
+            dx = 190 + 10;
+            dy = 35 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -46,6 +46,14 @@ namespace vcs_AudioVideoTest1
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+
+            button7.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button8.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button9.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 6);
 
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 7 + 20);
 
@@ -308,6 +316,402 @@ namespace vcs_AudioVideoTest1
             PlaySound(filename, new System.IntPtr(), PlaySoundFlags.SND_SYNC);
         }
         //使用 winmm.DLL 的 PlaySound() 播放.wav檔 SP
+
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            /// 利用C#來解讀MP3文件的TAG區信息。
+            //string mp3_filename = @"C:\______test_files\_mp3\aaaa.mp3";
+
+            // TBD
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            //從mp3中提取信息1
+
+            //從mp3中提取信息 1
+            //從mp3中提取信息
+
+            string filename = @"C:\______test_files\_mp3\aaaa.mp3";
+
+            byte[] b = new byte[128];
+            string sTitle;
+            string sSinger;
+            string sAlbum;
+            string sYear;
+            string sComm;
+
+            FileStream fs = new FileStream(filename, FileMode.Open);
+
+            fs.Seek(-128, SeekOrigin.End);
+            fs.Read(b, 0, 128);
+
+            bool isSet = false;
+            String sFlag = System.Text.Encoding.Default.GetString(b, 0, 3);
+            if (sFlag.CompareTo("TAG") == 0)
+            {
+                System.Console.WriteLine("Tag is setted!Replica Watches");
+                richTextBox1.Text += "Tag is setted!Replica Watches\n";
+                isSet = true;
+            }
+
+            if (isSet)
+            {
+                //http://study.pctoday.net.cn/3_Visual+Studio.aspx
+
+                sTitle = System.Text.Encoding.Default.GetString(b, 3, 30);
+
+                System.Console.WriteLine("标题:" + sTitle);
+                richTextBox1.Text += "標題:" + sTitle + "\n";
+
+                //Exclusive Replica Rolex Watches;
+
+                sSinger = System.Text.Encoding.Default.GetString(b, 33, 30);
+
+                System.Console.WriteLine("艺术家:" + sSinger);
+                richTextBox1.Text += "藝術家:" + sSinger + "\n";
+
+                //get album;
+
+                sAlbum = System.Text.Encoding.Default.GetString(b, 63, 30);
+
+                System.Console.WriteLine("唱片标题:" + sAlbum);
+                richTextBox1.Text += "唱片標題:" + sAlbum + "\n";
+
+                //egacn.com/Watches/Tag-Heuer;
+
+                sYear = System.Text.Encoding.Default.GetString(b, 93, 4);
+
+                System.Console.WriteLine("发行年:" + sYear);
+                richTextBox1.Text += "發行年:" + sYear + "\n";
+
+                //watchstylish.com;
+
+                sComm = System.Text.Encoding.Default.GetString(b, 97, 30);
+
+                System.Console.WriteLine("备注:" + sComm);
+                richTextBox1.Text += "備註:" + sComm + "\n";
+
+            }
+            fs.Close();
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //從mp3中提取信息2
+
+            //從mp3中提取信息 2
+            //get mp3 info
+
+            //string filename = @"C:\______test_files\_mp3\02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
+            string filename = @"C:\______test_files\_mp3\aaaa.mp3";
+
+            byte[] b = new byte[128];
+            string sTitle;
+            string sSinger;
+            string sAlbum;
+            string sYear;
+            string sComm;
+
+            FileStream fs = new FileStream(filename, FileMode.Open);
+
+            fs.Seek(-128, SeekOrigin.End);
+
+            fs.Read(b, 0, 128);
+
+            bool isSet = false;
+
+            String sFlag = System.Text.Encoding.Default.GetString(b, 0, 3);
+
+            if (sFlag.CompareTo("TAG") == 0)
+            {
+                System.Console.WriteLine("Tag is setted!Replica Watches");
+                richTextBox1.Text += "Tag is setted!Replica Watches" + "\n";
+                isSet = true;
+            }
+
+            if (isSet)
+            {
+                //http://study.pctoday.net.cn/3_Visual+Studio.aspx
+
+                sTitle = System.Text.Encoding.Default.GetString(b, 3, 30);
+
+                System.Console.WriteLine("标题:" + sTitle);
+                richTextBox1.Text += "标题:" + sTitle + "\n";
+
+                //Exclusive Replica Rolex Watches;
+
+                sSinger = System.Text.Encoding.Default.GetString(b, 33, 30);
+
+                System.Console.WriteLine("艺术家:" + sSinger);
+                richTextBox1.Text += "艺术家:" + sSinger + "\n";
+
+                //get album;
+
+                sAlbum = System.Text.Encoding.Default.GetString(b, 63, 30);
+
+                System.Console.WriteLine("唱片标题:" + sAlbum);
+                richTextBox1.Text += "唱片标题:" + sAlbum + "\n";
+
+                //egacn.com/Watches/Tag-Heuer;
+
+                sYear = System.Text.Encoding.Default.GetString(b, 93, 4);
+
+                System.Console.WriteLine("发行年:" + sYear);
+                richTextBox1.Text += "发行年:" + sYear + "\n";
+
+                //watchstylish.com;
+
+                sComm = System.Text.Encoding.Default.GetString(b, 97, 30);
+
+                System.Console.WriteLine("备注:" + sComm);
+                richTextBox1.Text += "备注:" + sComm + "\n";
+            }
+            fs.Close();
+
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //播放wav檔
+            string filename = @"C:\______test_files\_wav\start.wav";
+            SoundPlayer player = new SoundPlayer(); //声明一个控制WAV文件的声音播放文件对象
+            player.SoundLocation = filename; //指定声音文件的路径
+            player.LoadAsync();  //设置播放的方法
+            player.Play(); //播放声音文件
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //mp3 info
+
+            string filename = @"C:\______test_files\_mp3\02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
+            Mp3Info mp3 = new Mp3Info(filename);
+            string artist = mp3.Artist;
+            string album = mp3.Album;
+            string title = mp3.Title;
+
+            richTextBox1.Text += "artist : " + artist + "\n";
+            richTextBox1.Text += "album : " + album + "\n";
+            richTextBox1.Text += "title : " + title + "\n";
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+    }
+
+    public class clsMP3TAG
+    {
+        private byte[] TAGBody = new byte[128];
+
+        private byte[] sTag = new byte[3];
+        private byte[] sTitle = new byte[30];
+        private byte[] sArtist = new byte[30];
+        private byte[] sAlbum = new byte[30];
+        private byte[] sYear = new byte[4];
+        private byte[] sComment = new byte[30];
+        private byte[] sGenre = new byte[1];
+
+        System.Exception myException;
+
+        public clsMP3TAG(byte[] TAG)
+        {
+            if (TAG.Length != 128)
+            {
+                myException = new Exception("不是標准的 Mpeg-MP3 TAG 格式。\nTAG長度應該是 128 Byte。");
+                throw (myException);
+            }
+            else
+            {
+                Array.Copy(TAG, 0, sTag, 0, 3);
+                if (!Encoding.Default.GetString(sTag).Equals("TAG"))
+                {
+                    myException = new Exception("不是標准的 Mpeg-MP3 TAG 格式。\nTAG位校驗出錯。");
+                    throw (myException);
+                }
+
+                Array.Copy(TAG, 3, sTitle, 0, 30);
+                Array.Copy(TAG, 33, sArtist, 0, 30);
+                Array.Copy(TAG, 63, sAlbum, 0, 30);
+                Array.Copy(TAG, 93, sYear, 0, 4);
+                Array.Copy(TAG, 97, sComment, 0, 30);
+                Array.Copy(TAG, 127, sGenre, 0, 1);
+
+
+            }
+        }
+
+        /**/
+        //////////////////////////////////////////////////////
+        /// 以下是屬性，只讀
+        //////////////////////////////////////////////////////
+        public string Title
+        {
+            get
+            {
+                return Encoding.Default.GetString(sTitle);
+            }
+        }
+
+        public string Artist
+        {
+            get
+            {
+                return Encoding.Default.GetString(sArtist);
+            }
+        }
+
+        public string Album
+        {
+            get
+            {
+                return Encoding.Default.GetString(sAlbum);
+            }
+        }
+
+        public string Year
+        {
+            get
+            {
+                return Encoding.Default.GetString(sYear);
+            }
+        }
+
+        public string Comment
+        {
+            get
+            {
+                return Encoding.Default.GetString(sComment);
+            }
+        }
+
+        public string Genre
+        {
+            get
+            {
+                switch (Convert.ToInt16(sGenre[0]))
+                {
+                    case 0: return "Blues";
+                    case 20: return "Alternative";
+                    case 40: return "AlternRock";
+                    case 60: return "Top 40";
+                    case 1: return "Classic Rock";
+                    case 21: return "Ska";
+                    case 41: return "Bass";
+                    case 61: return "Christian Rap";
+                    case 2: return "Country";
+                    case 22: return "Death Metal";
+                    case 42: return "Soul";
+                    case 62: return "Pop/Funk";
+                    case 3: return "Dance";
+                    case 23: return "Pranks";
+                    case 43: return "Punk";
+                    case 63: return "Jungle";
+                    case 4: return "Disco";
+                    case 24: return "Soundtrack";
+                    case 44: return "Space";
+                    case 64: return "Native American";
+                    case 5: return "Funk";
+                    case 25: return "Euro-Techno";
+                    case 45: return "Meditative";
+                    case 65: return "Cabaret";
+                    case 6: return "Grunge";
+                    case 26: return "AmbIEnt";
+                    case 46: return "Instrumental Pop";
+                    case 66: return "New Wave";
+                    case 7: return "Hip-Hop";
+                    case 27: return "Trip-Hop";
+                    case 47: return "Instrumental Rock";
+                    case 67: return "Psychadelic";
+                    case 8: return "Jazz";
+                    case 28: return "Vocal";
+                    case 48: return "Ethnic";
+                    case 68: return "Rave";
+                    case 9: return "Metal";
+                    case 29: return "Jazz+Funk";
+                    case 49: return "Gothic";
+                    case 69: return "Showtunes";
+                    case 10: return "New Age";
+                    case 30: return "Fusion";
+                    case 50: return "Darkwave";
+                    case 70: return "Trailer";
+                    case 11: return "OldIEs";
+                    case 31: return "Trance";
+                    case 51: return "Techno-Industrial";
+                    case 71: return "Lo-Fi";
+                    case 12: return "Other";
+                    case 32: return "Classical";
+                    case 52: return "Electronic";
+                    case 72: return "Tribal";
+                    case 13: return "Pop";
+                    case 33: return "Instrumental";
+                    case 53: return "Pop-Folk";
+                    case 73: return "Acid Punk";
+                    case 14: return "R&B";
+                    case 34: return "Acid";
+                    case 54: return "Eurodance";
+                    case 74: return "Acid Jazz";
+                    case 15: return "Rap";
+                    case 35: return "House";
+                    case 55: return "Dream";
+                    case 75: return "Polka";
+                    case 16: return "Reggae";
+                    case 36: return "Game";
+                    case 56: return "Southern Rock";
+                    case 76: return "Retro";
+                    case 17: return "Rock";
+                    case 37: return "Sound Clip";
+                    case 57: return "Comedy";
+                    case 77: return "Musical";
+                    case 18: return "Techno";
+                    case 38: return "Gospel";
+                    case 58: return "Cult";
+                    case 78: return "Rock & Roll";
+                    case 19: return "Industrial";
+                    case 39: return "Noise";
+                    case 59: return "Gangsta";
+                    case 79: return "Hard Rock";
+
+
+                    default:
+                        return "未知類型";
+                }
+            }
+        }
+    }
+
+    struct Mp3Info
+    {
+        public string Title;  //歌曲名,30个字节     3-62 
+        public string Artist; //歌手名,30个字节     33-62
+        public string Album;  //专辑名,30个字节     63-92
+        //public string Year;//年,4个字符     
+        //public string Comment;//注释,28个字节      
+        //public char reserved1;//保留位，一个字节        
+        //public char reserved2;//保留位，一个字节        
+        //public char reserved3;//保留位，一个字节  
+
+        public Mp3Info(string fileName)
+        {
+            FileStream fs = new FileStream(fileName, FileMode.Open, FileAccess.Read);
+            fs.Seek(-128, SeekOrigin.End);
+            byte[] Info = new byte[128];
+            int length = fs.Read(Info, 0, 128);
+            fs.Close();
+
+            Title = Encoding.Default.GetString(Info, 3, 30).Replace("\0", string.Empty);
+            Artist = Encoding.Default.GetString(Info, 33, 30).Replace("\0", string.Empty);
+            Album = Encoding.Default.GetString(Info, 63, 30).Replace("\0", string.Empty);
+        }
     }
 }
+
 

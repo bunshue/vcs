@@ -11,6 +11,7 @@ using System.IO;
 
 using iTextSharp.text;
 using iTextSharp.text.pdf;
+using System.IO;
 
 //參考/加入參考/ itextsharp.dll
 //加入/現有項目 ICSharpCode.SharpZipLib.dll 有更新時才複製到輸出目錄
@@ -83,8 +84,111 @@ namespace vcs_ReadWrite_PDF1
             richTextBox2.Text += "已存檔 : " + filename2 + "\n";
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string filename = @"C:\______test_files\__RW\_pdf\note_Linux_workstation.pdf";
+
+            string result = ReadPdf(filename);
+            richTextBox1.Text += "result : " + result + "\n";
+
+            int pageCount = GetPdfPageCount(filename);
+
+            richTextBox1.Text += "pageCount : " + pageCount.ToString() + "\n";
+        }
+
+
+        /// <summary>
+        /// 讀取PDF文本內容
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public static string ReadPdf(string fileName)
+        {
+            if (!File.Exists(fileName))
+            {
+                //LogHandler.LogWrite(@"指定的PDF文件不存在：" + fileName);
+                return string.Empty;
+            }
+            //
+            string fileContent = string.Empty;
+            StringBuilder sbFileContent = new StringBuilder();
+            //打開文件
+            PdfReader reader = null;
+            try
+            {
+                reader = new PdfReader(fileName);
+            }
+            catch (Exception ex)
+            {
+                //LogHandler.LogWrite(string.Format(@"加載PDF文件{0}失敗,錯誤:{1}", new string[] { fileName, ex.ToString() }));
+
+                if (reader != null)
+                {
+                    reader = null;
+                }
+
+                return string.Empty;
+            }
+
+            try
+            {
+                //循環各頁（索引從1開始）
+                for (int i = 1; i <= reader.NumberOfPages; i++)
+                {
+                    //sbFileContent.AppendLine(PdfTextExtractor.GetTextFromPage(reader, i));
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                //LogHandler.LogWrite(string.Format(@"解析PDF文件{0}失敗,錯誤:{1}", new string[] { fileName, ex.ToString() }));
+
+            }
+            finally
+            {
+                if (reader != null)
+                {
+                    reader = null;
+                }
+            }
+            //
+            fileContent = sbFileContent.ToString();
+            return fileContent;
+        }
+        /// <summary>
+        /// 獲取PDF頁數
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public static int GetPdfPageCount(string fileName)
+        {
+            if (!File.Exists(fileName))
+            {
+                //LogHandler.LogWrite(@"指定的PDF文件不存在：" + fileName);
+                return -1;
+            }
+            //打開文件
+            PdfReader reader = null;
+            try
+            {
+                reader = new PdfReader(fileName);
+            }
+            catch (Exception ex)
+            {
+                //LogHandler.LogWrite(string.Format(@"加載PDF文件{0}失敗,錯誤:{1}", new string[] { fileName, ex.ToString() }));
+
+                if (reader != null)
+                {
+                    reader = null;
+                }
+
+                return -1;
+            }
+            //
+            return reader.NumberOfPages;
+        }
     }
 }
-
 
 

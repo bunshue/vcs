@@ -237,7 +237,6 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(170, 70);
             this.button11.TabIndex = 111;
-            this.button11.Text = "test RE";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -259,7 +258,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(170, 70);
             this.button13.TabIndex = 113;
-            this.button13.Text = "mp3 info";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 

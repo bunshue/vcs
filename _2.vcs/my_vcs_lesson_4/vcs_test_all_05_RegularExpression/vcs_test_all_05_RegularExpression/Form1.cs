@@ -210,7 +210,22 @@ namespace vcs_test_all_05_RegularExpression
         public bool IsUrl(string str_url)
         {
             return System.Text.RegularExpressions.Regex.IsMatch(str_url, @"http(s)?://([/w-]+/.)+[/w-]+(/[/w- ./?%&=]*)?");
-        } 
+        }
+
+        string getVid(string url)
+        {
+            string strRegex = "(?<=id_)(\\w+)";
+            Regex reg = new Regex(strRegex);
+            Match match = reg.Match(url);
+            return match.ToString();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            string url = "http://v.youku.com/v_show/id_XNzk2NTI0MzMy.html";
+            string vid = getVid(url);
+            richTextBox1.Text += "vid : " + vid + "\n";
+        }
 
     }
 }

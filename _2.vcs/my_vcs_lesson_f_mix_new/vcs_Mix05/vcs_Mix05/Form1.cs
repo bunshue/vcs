@@ -354,32 +354,10 @@ namespace vcs_Mix05
             richTextBox1.Text += "桌面高度 : \t" + Screen.PrimaryScreen.WorkingArea.Height.ToString() + "\n";
         }
 
-        //class test ST
-        class P
-        {
-            private string pname;
-            public string Name
-            {
-                get
-                {
-                    return "name : " + pname;
-                }
-                set
-                {
-                    pname = value;
-                }
-            }
-        }
-
         private void button5_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            P obj = new P();
-            obj.Name = "david wang";            //使用到set
-            Console.WriteLine(obj.Name);        //使用到get
-
         }
-        //class test SP
 
         private void button6_Click(object sender, EventArgs e)
         {
@@ -435,204 +413,10 @@ namespace vcs_Mix05
         }
         //設置系統日期和時間 SP
 
-        //Class測試 ST
-
-        /*
-        理解多態。
-        首先，我們先來看下怎樣用虛方法實現多態
-
-        我們都知道，喜鵲（Magpie）、老鷹（Eagle）、企鵝（Penguin）都是屬於鳥類，我們可以根據這三者的共有特性提取出鳥類（Bird）做為父類，喜鵲喜歡吃蟲子，老鷹喜歡吃肉，企鵝喜歡吃魚。
-        */
-
-        //創建基類Bird如下，添加一個虛方法Eat():
-
-        /*
-        /// <summary>
-        /// 鳥類：父類
-        /// </summary>
-        public class Bird
-        {
-            /// <summary>
-            /// 吃：虛方法
-            /// </summary>
-            public virtual void Eat()
-            {
-                Console.WriteLine("我是一只小小鳥，我喜歡吃蟲子~");
-            }
-        }
-        */
-
-        /// <summary>
-        /// 鳥類：基類
-        /// </summary>
-        public abstract class Bird
-        {
-            /// <summary>
-            /// 吃：抽象方法
-            /// </summary>
-            public abstract void Eat(); //抽象類Bird內添加一個Eat()抽象方法，沒有方法體。也不能實例化。
-        }
-
-        //創建子類Magpie如下，繼承父類Bird，重寫父類Bird中的虛方法Eat()：
-
-        /// <summary>
-        /// 飛 接口
-        /// </summary>
-        public interface IFlyable
-        {
-            void Fly();
-        }
-
-        /*
-        /// <summary>
-        /// 喜鵲：子類
-        /// </summary>
-        public class Magpie : Bird
-        {
-            /// <summary>
-            /// 重寫父類中Eat方法
-            /// </summary>
-            public override void Eat()
-            {
-                Console.WriteLine("我是一只喜鵲，我喜歡吃蟲子~");
-            }
-        }
-
-        //創建一個子類Eagle如下，繼承父類Bird，重寫父類Bird中的虛方法Eat()：
-
-        /// <summary>
-        /// 老鷹：子類
-        /// </summary>
-        public class Eagle : Bird
-        {
-            /// <summary>
-            /// 重寫父類中Eat方法
-            /// </summary>
-            public override void Eat()
-            {
-                Console.WriteLine("我是一只老鷹，我喜歡吃肉~");
-            }
-        }
-        */
-
-        //喜鵲Magpie實現IFlyable接口，代碼如下：
-
-        /// <summary>
-        /// 喜鵲：子類，實現IFlyable接口
-        /// </summary>
-        public class Magpie : Bird, IFlyable
-        {
-            /// <summary>
-            /// 重寫父類Bird中Eat方法
-            /// </summary>
-            public override void Eat()
-            {
-                Console.WriteLine("我是一只喜鵲，我喜歡吃蟲子~");
-            }
-            /// <summary>
-            /// 實現 IFlyable接口方法
-            /// </summary>
-            public void Fly()
-            {
-                Console.WriteLine("我是一只喜鵲，我可以飛哦~~");
-            }
-        }
-
-        //老鷹Eagle實現IFlyable接口，代碼如下：
-
-        /// <summary>
-        /// 老鷹：子類實現飛接口
-        /// </summary>
-        public class Eagle : Bird, IFlyable
-        {
-            /// <summary>
-            /// 重寫父類Bird中Eat方法
-            /// </summary>
-            public override void Eat()
-            {
-                Console.WriteLine("我是一只老鷹，我喜歡吃肉~");
-            }
-
-            /// <summary>
-            /// 實現 IFlyable接口方法
-            /// </summary>
-            public void Fly()
-            {
-                Console.WriteLine("我是一只老鷹，我可以飛哦~~");
-            }
-        }
-
-        //創建一個子類Penguin如下，繼承父類Bird，重寫父類Bird中的虛方法Eat()：
-
-        /// <summary>
-        /// 企鵝：子類
-        /// </summary>
-        public class Penguin : Bird
-        {
-            /// <summary>
-            /// 重寫父類中Eat方法
-            /// </summary>
-            public override void Eat()
-            {
-                Console.WriteLine("我是一只小企鵝，我喜歡吃魚~");
-            }
-        }
-
-        /// <summary>
-        /// 飛機類，實現IFlyable接口
-        /// </summary>
-        public class Plane : IFlyable
-        {
-            /// <summary>
-            /// 實現接口方法
-            /// </summary>
-            public void Fly()
-            {
-                Console.WriteLine("我是一架飛機，我也能飛~~");
-            }
-        }
 
         private void button8_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //Class測試
-            //Class測試
-            //創建一個Bird基類數組，添加基類Bird對象，Magpie對象，Eagle對象，Penguin對象
-            Bird[] birds = { 
-                       //new Bird(),    用Abstract, Bird就不能創建對象了
-                       new Magpie(),
-                       new Eagle(),
-                       new Penguin()
-            };
-            //遍歷一下birds數組
-            foreach (Bird bird in birds)
-            {
-                bird.Eat();
-            }
-
-            //創建一個IFlyable接口數組，添加 Magpie對象，Eagle對象
-            IFlyable[] flys = { 
-                       new Magpie(),
-                       new Eagle()
-        };
-            //遍歷一下flys數組
-            foreach (IFlyable fly in flys)
-            {
-                fly.Fly();
-            }
-
-
-            //創建一個IFlyable接口數組，添加 Magpie對象，Eagle對象，Plane對象
-            IFlyable[] flys2 = { 
-                           new Magpie(),
-                           new Eagle(),
-                           new Plane()
-            };
-            //遍歷一下flys數組
-            foreach (IFlyable fly in flys2)
-            {
-                fly.Fly();
-            }
         }
         //Class測試 SP
 
@@ -999,52 +783,18 @@ namespace vcs_Mix05
         private void button20_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //字串轉拜列
-            richTextBox1.Text += "字串 轉 拜列\n";
-
-            string str = "this is a lion-mouse.";
-
-            richTextBox1.Text += "字串 : " + str + "\n";
-
-            byte[] byte_array = Encoding.ASCII.GetBytes(str);
-
-            int len = byte_array.Length;
-            richTextBox1.Text += "拜列長度 : " + len.ToString() + "\n";
-            richTextBox1.Text += "拜列內容 :\n";
-            int i;
-            for (i = 0; i < len; i++)
-            {
-                richTextBox1.Text += "i = " + i.ToString() + "\t" + (char)byte_array[i] + "\t" + byte_array[i].ToString("X2") + "\n";
-
-            }
 
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //split
-            string str = "this-is-a-lion-mouse";
-            string[] word = str.Split('-');
-            richTextBox1.Text += "原字串: " + str + "\n";
-            richTextBox1.Text += "分割後, len = " + word.Length.ToString() + ", 內容:\n";
-            foreach (string s in word)
-            {
-                richTextBox1.Text += s + "\n";
-            }
 
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //連接符 與 佔位符
-            string str1 = "lion";
-            string str2 = "mouse";
-            string m = String.Format("{0}", str1);   //字符串格式輸出
-            string n = String.Format("{0}", str2);
-
-            richTextBox1.Text += "str = " + m + "-" + n + "\n";     //用“+”連接符
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -1152,21 +902,12 @@ namespace vcs_Mix05
         private void button27_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            richTextBox1.Text += "111\t" + 12345.ToString("n") + "\n"; //生成 12,345.00
-            richTextBox1.Text += "111\t" + 12345.ToString("C") + "\n"; //生成 ￥12,345.00
-            richTextBox1.Text += "111\t" + 12345.ToString("e") + "\n"; //生成 1.234500e+004
-            richTextBox1.Text += "111\t" + 12345.ToString("f4") + "\n"; //生成 12345.0000
-            richTextBox1.Text += "111\t" + 12345.ToString("x") + "\n"; //生成 3039 (16進制)
-            richTextBox1.Text += "111\t" + 12345.ToString("p") + "\n"; //生成 1,234,500
         }
 
         private void button28_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
             //陽歷轉換成陰歷的類
-
-
-
         }
 
         private void button29_Click(object sender, EventArgs e)
