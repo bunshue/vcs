@@ -19,7 +19,7 @@ namespace vcs_Thread_Example
         int cnt1 = 0;
         int cnt2 = 0;
         //色塊 SP
-        
+
         private ChangeTime timechange;
         public Form1()
         {
@@ -153,14 +153,14 @@ namespace vcs_Thread_Example
         private void button9_Click(object sender, EventArgs e)
         {
             //停止
-            
+
 
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
             //掛起
-            
+
 
         }
 
@@ -286,6 +286,28 @@ namespace vcs_Thread_Example
 
             }
         }
+
+        private void bt_thread_example_Click(object sender, EventArgs e)
+        {
+            Thread t = new Thread(new ParameterizedThreadStart(delegate(object obj)
+            {
+                while (true)
+                {
+                    Thread.Sleep(400);
+                    if (bt_thread_example.BackColor == Color.Green)
+                    {
+                        bt_thread_example.BackColor = Color.Pink;
+                    }
+                    else
+                    {
+                        bt_thread_example.BackColor = Color.Green;
+                    }
+                }
+            }));
+            t.Name = " --start tray thread";
+            t.IsBackground = true;
+            t.Priority = ThreadPriority.Lowest;
+            t.Start(null);
+        }
     }
 }
-

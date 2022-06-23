@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_NotifyIcon1
+namespace vcs_NotifyIcon_ContextMenuStrip
 {
     static class Program
     {

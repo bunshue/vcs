@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_NotifyIcon1.Properties
+namespace vcs_NotifyIcon_ContextMenuStrip.Properties
 {
 
 
@@ -44,7 +44,7 @@ namespace vcs_NotifyIcon1.Properties
             {
                 if ((resourceMan == null))
                 {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("vcs_NotifyIcon1.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("vcs_NotifyIcon_ContextMenuStrip.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;

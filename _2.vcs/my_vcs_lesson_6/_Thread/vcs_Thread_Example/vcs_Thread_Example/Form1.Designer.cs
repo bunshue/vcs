@@ -62,6 +62,7 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.button12 = new System.Windows.Forms.Button();
             this.button13 = new System.Windows.Forms.Button();
+            this.bt_thread_example = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -408,11 +409,23 @@
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
+            // bt_thread_example
+            // 
+            this.bt_thread_example.Font = new System.Drawing.Font("新細明體", 14F);
+            this.bt_thread_example.Location = new System.Drawing.Point(418, 38);
+            this.bt_thread_example.Name = "bt_thread_example";
+            this.bt_thread_example.Size = new System.Drawing.Size(138, 63);
+            this.bt_thread_example.TabIndex = 15;
+            this.bt_thread_example.Text = "Thread 範例";
+            this.bt_thread_example.UseVisualStyleBackColor = true;
+            this.bt_thread_example.Click += new System.EventHandler(this.bt_thread_example_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1073, 685);
+            this.Controls.Add(this.bt_thread_example);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.richTextBox1);
@@ -470,6 +483,7 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button button12;
         private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Button bt_thread_example;
     }
 }
 
