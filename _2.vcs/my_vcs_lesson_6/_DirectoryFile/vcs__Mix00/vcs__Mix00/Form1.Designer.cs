@@ -412,6 +412,7 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(160, 70);
             this.button22.TabIndex = 51;
+            this.button22.Text = "取得檔案類型";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 

@@ -31,6 +31,9 @@ namespace vcs_NotifyIcon_ContextMenuStrip
 
             this.WindowState = FormWindowState.Minimized;
             this.Visible = false;
+            
+            //this.ShowInTaskbar = false; // Don't show in the task bar, only in the tray.
+
             this.notifyIcon1.Visible = true;
 
             //系統托盤動態圖標閃爍圖標 ST
@@ -78,7 +81,9 @@ namespace vcs_NotifyIcon_ContextMenuStrip
 
             contextMenuStrip1.Visible = true;
 
-            notifyIcon1.ContextMenuStrip = contextMenuStrip1;
+            // Set the NotifyIcon's context menu.
+            notifyIcon1.ContextMenuStrip = contextMenuStrip1;   //等同於在notifyIcon1屬性 ContextMenuStrip (指向, 選contextMenuStrip1)
+
             notifyIcon1.Text = "製作TrayIcon";    //設置系統托盤顯示文字
             notifyIcon1.Visible = true;
             notifyIcon1.Icon = icon;

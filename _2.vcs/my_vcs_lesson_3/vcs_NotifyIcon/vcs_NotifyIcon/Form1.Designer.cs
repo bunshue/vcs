@@ -41,7 +41,6 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.contextMenuStrip1.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -136,14 +135,7 @@
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(338, 350);
             this.richTextBox1.TabIndex = 2;
-            this.richTextBox1.Text = "contextMenuStrip1/Items 展開集合/加入 MenuItem 或 Seperator\nMenuItem 加入 ToolStripMenuIte" +
-                "m，修改Text，修改觸發事件\n";
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 500;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.richTextBox1.Text = "";
             // 
             // Form1
             // 
@@ -174,7 +166,6 @@
         private System.Windows.Forms.RadioButton radioButton2;
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Timer timer1;
     }
 }
 

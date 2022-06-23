@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Drawing.Drawing2D;     //for HatchBrush, LinearGradientBrush
+
 namespace vcs_Draw_TextureBrush
 {
     public partial class Form1 : Form
@@ -141,6 +143,87 @@ namespace vcs_Draw_TextureBrush
 
         private void button4_Click(object sender, EventArgs e)
         {
+            pictureBox1.Size = new Size(720, 900);
+
+            Graphics g = pictureBox1.CreateGraphics();
+
+            int x_st = 0;
+            int y_st = 0;
+            int w = 300;
+            int h = 50;
+            int dy = h + 10;
+            Rectangle rect = new Rectangle(x_st, y_st, w, h);
+
+            //(紋理刷)
+            string filename = @"C:\______test_files\picture1.jpg";
+            TextureBrush textureBrush = new TextureBrush(new Bitmap(filename));
+
+            //對原圖(x_st,y_st) w, h 抓一塊出來放在(x_st,y_st)
+            rect = new Rectangle(x_st, y_st, w, h);
+            g.FillRectangle(textureBrush, rect);       //(紋理刷)
+            g.DrawString("紋理刷", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(x_st + w + 10, y_st));
+            rect = new Rectangle(x_st, y_st + dy, w, h);
+            g.FillRectangle(textureBrush, rect);       //(紋理刷)
+            g.DrawString("紋理刷", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(x_st + w + 10, y_st + dy));
+            rect = new Rectangle(x_st, y_st + dy * 2, w, h);
+            g.FillRectangle(textureBrush, rect);       //(紋理刷)
+            g.DrawString("紋理刷", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(x_st + w + 10, y_st + dy * 2));
+            rect = new Rectangle(x_st, y_st + dy * 3, w, h);
+            g.FillRectangle(textureBrush, rect);       //(紋理刷)
+            g.DrawString("紋理刷", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(x_st + w + 10, y_st + dy * 3));
+
+            //實心刷
+            SolidBrush sb1 = new SolidBrush(Color.DarkOrchid);
+            SolidBrush sb2 = new SolidBrush(Color.Aquamarine);
+            SolidBrush sb3 = new SolidBrush(Color.DarkOrange);
+            rect = new Rectangle(x_st, y_st + dy * 4, w, h);
+            g.FillRectangle(sb1, rect);　        // (實心刷)
+            g.DrawString("實心刷", new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + w + 10, y_st + dy * 4));
+            rect = new Rectangle(x_st, y_st + dy * 5, w, h);
+            g.FillRectangle(sb2, rect);　        // (實心刷)
+            g.DrawString("實心刷", new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + w + 10, y_st + dy * 5));
+            rect = new Rectangle(x_st, y_st + dy * 6, w, h);
+            g.FillRectangle(sb3, rect);　        // (實心刷)
+            g.DrawString("實心刷", new Font("標楷體", 20), new SolidBrush(Color.Green), new PointF(x_st + w + 10, y_st + dy * 6));
+
+            //梯度刷
+            LinearGradientBrush lgb = new LinearGradientBrush(rect,
+            Color.DarkOrange, Color.Aquamarine,
+            LinearGradientMode.BackwardDiagonal);
+            rect = new Rectangle(x_st, y_st + dy * 7, w, h);
+            g.FillRectangle(lgb, rect);            //(梯度刷)
+            g.DrawString("梯度刷", new Font("標楷體", 20), new SolidBrush(Color.Blue), new PointF(x_st + w + 10, y_st + dy * 7));
+
+            //陰影刷
+            HatchBrush hb1 = new HatchBrush(HatchStyle.DiagonalCross,
+            Color.DarkOrange, Color.Aquamarine);
+            HatchBrush hb2 = new HatchBrush(HatchStyle.DarkVertical,
+            Color.DarkOrange, Color.Aquamarine);
+            HatchBrush hb3 = new HatchBrush(HatchStyle.LargeConfetti,
+            Color.DarkOrange, Color.Aquamarine);
+            rect = new Rectangle(x_st, y_st + dy * 8, w, h);
+            g.FillRectangle(hb1, rect);             //(陰影刷)
+            g.DrawString("陰影刷", new Font("標楷體", 20), new SolidBrush(Color.Purple), new PointF(x_st + w + 10, y_st + dy * 8));
+            rect = new Rectangle(x_st, y_st + dy * 9, w, h);
+            g.FillRectangle(hb2, rect);             //(陰影刷)
+            g.DrawString("陰影刷", new Font("標楷體", 20), new SolidBrush(Color.Purple), new PointF(x_st + w + 10, y_st + dy * 9));
+            rect = new Rectangle(x_st, y_st + dy * 10, w, h);
+            g.FillRectangle(hb3, rect);             //(陰影刷)
+            g.DrawString("陰影刷", new Font("標楷體", 20), new SolidBrush(Color.Purple), new PointF(x_st + w + 10, y_st + dy * 10));
+
+            x_st = w + 150;
+
+            LinearGradientBrush linGrBrush = new LinearGradientBrush(
+   new Point(0, 10),
+   new Point(200, 10),
+   Color.FromArgb(255, 255, 0, 0),   // Opaque red
+   Color.FromArgb(255, 0, 0, 255));  // Opaque blue
+
+            Pen pen = new Pen(linGrBrush, 10);
+
+            g.DrawLine(pen, x_st, 10, x_st + 200, 10);
+            g.FillEllipse(linGrBrush, x_st, 30, 200, 100);
+            g.FillRectangle(linGrBrush, x_st, 155, 450, 30);
 
         }
 
