@@ -13,6 +13,11 @@ using System.Windows.Forms;
 加入要儲存的參數 的 名稱 型別 預設值
 
 若是數字 一定要給預設值
+
+儲存參數到 Properties.Settings.Default
+
+方案總管/Properties/Settings.settings點開 加入名稱 型別 範圍/預設值
+ 
 */
 
 namespace vcs_PropertiesSettingsDefault
@@ -24,6 +29,7 @@ namespace vcs_PropertiesSettingsDefault
             InitializeComponent();
         }
 
+        //在程式開啟時把資料讀出來
         private void Form1_Load(object sender, EventArgs e)
         {
             richTextBox1.Text += "取得預設資料 :\n";
@@ -37,6 +43,17 @@ namespace vcs_PropertiesSettingsDefault
             int w = Properties.Settings.Default.Right - Properties.Settings.Default.Left;
             int h = Properties.Settings.Default.Bottom - Properties.Settings.Default.Top;
             this.SetBounds(x_st, y_st, w, h);   //SetBounds : 設定控件的位置與大小
+        }
+
+        //在程式關閉時把資料存起來
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Properties.Settings.Default.Left = this.Left;
+            Properties.Settings.Default.Top = this.Top;
+            Properties.Settings.Default.Right = this.Right;
+            Properties.Settings.Default.Bottom = this.Bottom;
+
+            Properties.Settings.Default.Save();
         }
 
         void show_form_information()
@@ -60,15 +77,6 @@ namespace vcs_PropertiesSettingsDefault
         {
             show_form_information();
         }
-
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Properties.Settings.Default.Left = this.Left;
-            Properties.Settings.Default.Top = this.Top;
-            Properties.Settings.Default.Right = this.Right;
-            Properties.Settings.Default.Bottom = this.Bottom;
-
-            Properties.Settings.Default.Save();
-        }
     }
 }
+

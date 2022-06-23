@@ -45,6 +45,7 @@ namespace vcs_SystemTray
             InitializeComponent();
 
             NotifyIcon ni = new NotifyIcon() { Icon = this.Icon, Visible = true };
+
             //RegisterHotKey
             bool bOK = RegisterHotKey(this.Handle, 0, (int)HotkeyModifiers.Win, Keys.F10);
 
@@ -70,6 +71,10 @@ namespace vcs_SystemTray
             };
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+        }
+
         //WndProc
         protected override void WndProc(ref Message m)
         {
@@ -90,10 +95,6 @@ namespace vcs_SystemTray
                     break;
             }
             base.WndProc(ref m);
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
         }
     }
 }

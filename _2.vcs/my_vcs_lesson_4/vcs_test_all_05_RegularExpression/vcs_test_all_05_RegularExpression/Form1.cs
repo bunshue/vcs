@@ -20,8 +20,36 @@ namespace vcs_test_all_05_RegularExpression
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             txtString_TextChanged(sender, e);
             txtTestString_TextChanged(sender, e);
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 750;
+            y_st = 10;
+            dx = 160 + 10;
+            dy = 40 + 10;
+
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button11.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button12.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button13.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button14.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button15.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button16.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button17.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button18.Location = new Point(x_st + dx * 0, y_st + dy * 10);
         }
 
         private void txtString_TextChanged(object sender, EventArgs e)
@@ -260,6 +288,51 @@ namespace vcs_test_all_05_RegularExpression
             {
                 richTextBox1.Text += "i = " + i.ToString() + "\t" + emailList[i] + "\n";
             }
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
 
         }
 

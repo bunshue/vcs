@@ -20,6 +20,57 @@ namespace vcs_CopyFromScreen
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 120 + 10;
+            dy = 50 + 10;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            //抓屏將生成的圖片顯示在pictureBox
+
+            Image image1 = new Bitmap(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
+
+            Graphics g = Graphics.FromImage(image1);
+
+            g.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height));
+
+            //IntPtr dc1 = g.GetHdc();      //此處這兩句多餘，具體看最後GetHdc()定義
+
+            //g.ReleaseHdc(dc1);           
+
+            g.Dispose();
+
+            this.pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+
+            this.pictureBox1.Image = image1;
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             save_fullscreen_to_local_drive();       //全螢幕截圖
@@ -328,3 +379,4 @@ namespace vcs_CopyFromScreen
         }
     }
 }
+

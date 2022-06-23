@@ -172,6 +172,19 @@ namespace vcs_Clipboard
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //從windows剪貼板獲取內容
+            IDataObject iData = Clipboard.GetDataObject();
+            if (iData.GetDataPresent(DataFormats.Text))
+            {
+                richTextBox1.Text += "取得文字:\n";
+                Console.WriteLine((String)iData.GetData(DataFormats.Text));
+            }
+            if (iData.GetDataPresent(DataFormats.Bitmap))
+            {
+                richTextBox1.Text += "取得圖片\n";
+                Image image1 = (Bitmap)iData.GetData(DataFormats.Bitmap);
+                //pictureBox1.Image = image1;
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)

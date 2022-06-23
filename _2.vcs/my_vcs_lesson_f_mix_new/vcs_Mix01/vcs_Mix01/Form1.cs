@@ -322,6 +322,37 @@ namespace vcs_Mix01
         private void button4_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //MD5 校驗默認為32位的字符串， 而C#默認的是16位的字節數組，需要略加修改，轉為32個字節的字符串，
+
+            string data = "hello world";
+            string key = "123";
+            string result = Md5Sum(data + key);  // 返回
+            richTextBox1.Text += result + "\n";
+
+        }
+
+
+        public static string Md5Sum(string strToEncrypt)
+        {
+            // 將需要加密的字符串轉為byte數組
+            byte[] bs = UTF8Encoding.UTF8.GetBytes(strToEncrypt);
+
+            // 創建md5 對象
+            System.Security.Cryptography.MD5 md5;
+            md5 = System.Security.Cryptography.MD5CryptoServiceProvider.Create();
+
+            // 生成16位的二進制校驗碼
+            byte[] hashBytes = md5.ComputeHash(bs);
+
+            // 轉為32位字符串
+            string hashString = "";
+            for (int i = 0; i < hashBytes.Length; i++)
+            {
+                hashString += System.Convert.ToString(hashBytes[i], 16).PadLeft(2, '0');
+            }
+
+            return hashString.PadLeft(32, '0');
         }
 
         private void button5_Click(object sender, EventArgs e)
