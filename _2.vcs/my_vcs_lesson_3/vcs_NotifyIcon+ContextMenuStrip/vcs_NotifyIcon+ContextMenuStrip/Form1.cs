@@ -9,6 +9,9 @@ using System.Windows.Forms;
 
 using System.Threading;
 
+
+//程序最小化到系統托盤    進行中  還有問題
+
 namespace vcs_NotifyIcon_ContextMenuStrip
 {
     public partial class Form1 : Form
@@ -62,6 +65,11 @@ namespace vcs_NotifyIcon_ContextMenuStrip
             t.Priority = ThreadPriority.Lowest;
             t.Start(null);
             //系統托盤動態圖標閃爍圖標 SP
+
+
+            NormalToMinimized();
+
+            //this.ShowInTaskbar = false;   useless
         }
 
         void setup_notifyIcon_contextMenuStrip()
@@ -78,11 +86,14 @@ namespace vcs_NotifyIcon_ContextMenuStrip
             toolStripMenuItem2});
 
             //contextMenuStrip1.Items.Add("AAAAAA");    //不好用
+            //contextMenuStrip1.ItemClicked += recoveryToolStripMenuItem_Click; //不好用
 
             contextMenuStrip1.Visible = true;
 
             // Set the NotifyIcon's context menu.
             notifyIcon1.ContextMenuStrip = contextMenuStrip1;   //等同於在notifyIcon1屬性 ContextMenuStrip (指向, 選contextMenuStrip1)
+
+            notifyIcon1.MouseMove += new MouseEventHandler(notifyIcon1_MouseMove);
 
             notifyIcon1.Text = "製作TrayIcon";    //設置系統托盤顯示文字
             notifyIcon1.Visible = true;
@@ -93,12 +104,33 @@ namespace vcs_NotifyIcon_ContextMenuStrip
         {
             this.Visible = true;
             this.WindowState = FormWindowState.Normal;
-            //notifyIcon1.Visible = false;
+            notifyIcon1.Visible = false;
         }
 
         private void toolStripMenuItem2_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void notifyIcon1_MouseMove(object sender, MouseEventArgs e)
+        {
+            this.notifyIcon1.ShowBalloonTip(1000, "当前时间：", DateTime.Now.ToLocalTime().ToString(), ToolTipIcon.Info);
+        }
+
+        //NormalToMinimized()是把當前窗體隱藏，並顯示托盤通知按鈕（這個按鈕初始是隱藏的）。
+        void NormalToMinimized()
+        {
+            this.WindowState = FormWindowState.Minimized;
+            this.Visible = false;
+            this.notifyIcon1.Visible = true;
+        }
+
+        //MinimizedToNormal()是重新顯示窗體，並把托盤通知按鈕隱藏。
+        void MinimizedToNormal()
+        {
+            this.Visible = true;
+            this.WindowState = FormWindowState.Normal;
+            notifyIcon1.Visible = false;
         }
 
         int use_icon = 0;
@@ -132,9 +164,14 @@ namespace vcs_NotifyIcon_ContextMenuStrip
             this.notifyIcon1.Visible = true;
             this.notifyIcon1.ShowBalloonTip(1000, "当前时间：", DateTime.Now.ToLocalTime().ToString(), ToolTipIcon.Info);
 
-
+            /*
             //關閉
             //this.notifyIcon1.Visible = false;
+            */
+
+            //NormalToMinimized();
+
+            //this.ShowInTaskbar = false;
         }
     }
 }

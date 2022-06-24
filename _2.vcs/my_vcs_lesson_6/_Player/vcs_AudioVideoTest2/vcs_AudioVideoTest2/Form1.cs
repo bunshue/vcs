@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Threading;     //for Thread
+using System.Threading;     // for Thread
 using System.Media;         // for SystemSounds     SystemSounds類別、SoundPlayer類別
 
 namespace vcs_AudioVideoTest2
@@ -21,12 +21,64 @@ namespace vcs_AudioVideoTest2
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 12;
+            y_st = 12;
+            dx = 190 + 10;
+            dy = 40 + 10;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+
+            button7.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button8.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button9.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+
+            groupBox3.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+
+            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 8 + 20);
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             Console.Beep(); //蜂鳴器發聲 262Hz, 500ms
             //Console.Beep(262, 500); //蜂鳴器發聲 262Hz, 500ms
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
         }
 
         //參考https://msdn.microsoft.com/zh-tw/library/4fe3hdb1(v=vs.110).aspx
@@ -181,19 +233,123 @@ namespace vcs_AudioVideoTest2
             SystemSounds.Question.Play();
         }
 
-        private void bt_clear_Click(object sender, EventArgs e)
+        private void button10_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
+            //C# 演奏月亮代表我的心
+
+            //racket 定義節拍
+            const int one = 600;//一拍
+            const int half = 300;//半拍
+            const int four_one = 150;//1/4拍
+            const int onedot = 450;//附點音符
+            ////note   定義音符
+            //const int mnote1 = 440;//do
+            //const int mnote2 = 495;//re
+            //const int mnote3 = 550;//mi
+            //const int mnote4 = 587;//fa
+            //const int mnote5 = 660;//so
+            //const int mnote6 = 733;//la
+            //const int mnote7 = 825;//si
+
+            //const int lnote5 = 325;
+
+            #region
+            //low note   低音區
+            const int lnote1 = 262;
+            const int lnote2 = 294;
+            const int lnote3 = 330;
+            const int lnote4 = 349;
+            const int lnote5 = 392;
+            const int lnote6 = 440;
+            const int lnote7 = 494;
+            //mid note   中音區
+            const int mnote1 = 523;
+            const int mnote2 = 578;
+            const int mnote3 = 659;
+            const int mnote4 = 698;
+            const int mnote5 = 784;
+            const int mnote6 = 880;
+            const int mnote7 = 988;
+            //hight note   高音區
+            const int hnote1 = 1046;
+            const int hnote2 = 1175;
+            const int hnote3 = 1318;
+            const int hnote4 = 1397;
+            const int hnote5 = 1568;
+            const int hnote6 = 1760;
+            const int hnote7 = 1976;
+            #endregion
+
+            //月亮代表我的心
+            Console.Beep(lnote5, half);
+
+            Console.Beep(mnote1, onedot);
+            Console.Beep(mnote3, half);
+            Console.Beep(mnote5, onedot);
+            Console.Beep(mnote1, half);
+
+            Console.Beep(lnote7, onedot);
+            Console.Beep(mnote3, half);
+            Console.Beep(mnote5, onedot);
+            Console.Beep(mnote5, half);
+
+
+            Console.Beep(mnote6, onedot);
+            Console.Beep(mnote7, half);
+            Console.Beep(hnote1, onedot);
+            Console.Beep(mnote6, half);
+
+            Console.Beep(mnote5, one);
+            System.Threading.Thread.Sleep(one);
+            System.Threading.Thread.Sleep(one);
+            Console.Beep(mnote3, half);
+            Console.Beep(mnote2, half);
+
+            Console.Beep(mnote1, onedot);
+            Console.Beep(mnote1, half);
+            Console.Beep(mnote1, half);
+            Console.Beep(mnote1, one);
+            Console.Beep(mnote3, half);
+            Console.Beep(mnote2, half);
+
+            Console.Beep(mnote1, onedot);
+            Console.Beep(mnote1, half);
+            Console.Beep(mnote1, half);
+            Console.Beep(mnote1, one);
+            Console.Beep(mnote2, half);
+            Console.Beep(mnote3, half);
+
+
+            Console.Beep(mnote2, onedot);
+            Console.Beep(mnote1, half);
+            Console.Beep(lnote6, one);
+            Console.Beep(mnote2, half);
+            Console.Beep(mnote3, half);
+
+            Console.Beep(mnote2, one);
         }
 
         private void button11_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_play_tone_Click(object sender, EventArgs e)
         {
             int freq = int.Parse(txtFrequency.Text);
             int duration = int.Parse(txtDuration.Text);
 
             System.Console.Beep(freq, duration);
         }
-
 
         //PC喇叭音效 ST
         protected void Play(Note tune)
@@ -290,108 +446,31 @@ namespace vcs_AudioVideoTest2
         {
             PlayMic(7);
         }
-
         //PC喇叭音效 SP
 
-
-        private void button10_Click(object sender, EventArgs e)
+        private void bt_system_sound0_Click(object sender, EventArgs e)
         {
-            //C# 演奏月亮代表我的心
-
-            //racket 定義節拍
-            const int one = 600;//一拍
-            const int half = 300;//半拍
-            const int four_one = 150;//1/4拍
-            const int onedot = 450;//附點音符
-            ////note   定義音符
-            //const int mnote1 = 440;//do
-            //const int mnote2 = 495;//re
-            //const int mnote3 = 550;//mi
-            //const int mnote4 = 587;//fa
-            //const int mnote5 = 660;//so
-            //const int mnote6 = 733;//la
-            //const int mnote7 = 825;//si
-
-            //const int lnote5 = 325;
-
-            #region
-            //low note   低音區
-            const int lnote1 = 262;
-            const int lnote2 = 294;
-            const int lnote3 = 330;
-            const int lnote4 = 349;
-            const int lnote5 = 392;
-            const int lnote6 = 440;
-            const int lnote7 = 494;
-            //mid note   中音區
-            const int mnote1 = 523;
-            const int mnote2 = 578;
-            const int mnote3 = 659;
-            const int mnote4 = 698;
-            const int mnote5 = 784;
-            const int mnote6 = 880;
-            const int mnote7 = 988;
-            //hight note   高音區
-            const int hnote1 = 1046;
-            const int hnote2 = 1175;
-            const int hnote3 = 1318;
-            const int hnote4 = 1397;
-            const int hnote5 = 1568;
-            const int hnote6 = 1760;
-            const int hnote7 = 1976;
-            #endregion
-
-            //月亮代表我的心
-            Console.Beep(lnote5, half);
-
-            Console.Beep(mnote1, onedot);
-            Console.Beep(mnote3, half);
-            Console.Beep(mnote5, onedot);
-            Console.Beep(mnote1, half);
-
-            Console.Beep(lnote7, onedot);
-            Console.Beep(mnote3, half);
-            Console.Beep(mnote5, onedot);
-            Console.Beep(mnote5, half);
-
-
-            Console.Beep(mnote6, onedot);
-            Console.Beep(mnote7, half);
-            Console.Beep(hnote1, onedot);
-            Console.Beep(mnote6, half);
-
-            Console.Beep(mnote5, one);
-            System.Threading.Thread.Sleep(one);
-            System.Threading.Thread.Sleep(one);
-            Console.Beep(mnote3, half);
-            Console.Beep(mnote2, half);
-
-            Console.Beep(mnote1, onedot);
-            Console.Beep(mnote1, half);
-            Console.Beep(mnote1, half);
-            Console.Beep(mnote1, one);
-            Console.Beep(mnote3, half);
-            Console.Beep(mnote2, half);
-
-            Console.Beep(mnote1, onedot);
-            Console.Beep(mnote1, half);
-            Console.Beep(mnote1, half);
-            Console.Beep(mnote1, one);
-            Console.Beep(mnote2, half);
-            Console.Beep(mnote3, half);
-
-
-            Console.Beep(mnote2, onedot);
-            Console.Beep(mnote1, half);
-            Console.Beep(lnote6, one);
-            Console.Beep(mnote2, half);
-            Console.Beep(mnote3, half);
-
-            Console.Beep(mnote2, one);
-
-
+            SystemSounds.Asterisk.Play();
         }
 
+        private void bt_system_sound1_Click(object sender, EventArgs e)
+        {
+            SystemSounds.Beep.Play();
+        }
 
+        private void bt_system_sound2_Click(object sender, EventArgs e)
+        {
+            SystemSounds.Exclamation.Play();
+        }
+
+        private void bt_system_sound3_Click(object sender, EventArgs e)
+        {
+            SystemSounds.Hand.Play();
+        }
+
+        private void bt_system_sound4_Click(object sender, EventArgs e)
+        {
+            SystemSounds.Question.Play();
+        }
     }
 }

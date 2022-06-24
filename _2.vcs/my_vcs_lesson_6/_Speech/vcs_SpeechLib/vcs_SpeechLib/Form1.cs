@@ -28,8 +28,61 @@ namespace vcs_SpeechLib
 
         }
 
+        private void button0_Click(object sender, EventArgs e)
+        {
+            string article1 = "Insight Medical Solutions Inc.";
+            string article2 = "群曜醫電股份有限公司";
+
+            try
+            {
+                SpeechVoiceSpeakFlags SpFlags = SpeechVoiceSpeakFlags.SVSFlagsAsync;
+                SpVoice Voice = new SpVoice();
+                Voice.Speak(article1 + article2, SpFlags);
+            }
+            catch (Exception er)
+            {
+                MessageBox.Show("An Error Occured!", "SpeechApp", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
+            //生成聲音文件(Wav)
+
+            string article1 = "Insight Medical Solutions Inc.";
+            string article2 = "群曜醫電股份有限公司";
+
+            try
+            {
+                string filename = Application.StartupPath + "\\wav_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".wav";
+
+                SpeechVoiceSpeakFlags SpFlags = SpeechVoiceSpeakFlags.SVSFlagsAsync;
+                SpVoice Voice = new SpVoice();
+
+                SpeechStreamFileMode SpFileMode = SpeechStreamFileMode.SSFMCreateForWrite;
+                SpFileStream SpFileStream = new SpFileStream();
+                SpFileStream.Open(filename, SpFileMode, false);
+                Voice.AudioOutputStream = SpFileStream;
+                Voice.Speak(article1 + article2, SpFlags);
+                Voice.WaitUntilDone(100);
+                SpFileStream.Close();
+
+                richTextBox1.Text += "已存檔 : " + filename + "\n";
+
+
+
+                /* 後續
+                ISpeechObjectTokens tokens = Voice.GetVoices(string.Empty, string.Empty);
+                
+                int index = GetChineseVoiceIndex(tokens);
+                voice.Voice = tokens.Item(index);    //簡單的語音短信就生成了。
+                */
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("An Error Occured!", "SpeechApp", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -91,28 +144,6 @@ namespace vcs_SpeechLib
 
         private void button4_Click(object sender, EventArgs e)
         {
-            try
-            {
-                string filename = Application.StartupPath + "\\wav_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".wav";
-
-                SpeechVoiceSpeakFlags SpFlags = SpeechVoiceSpeakFlags.SVSFlagsAsync;
-                SpVoice Voice = new SpVoice();
-
-                SpeechStreamFileMode SpFileMode = SpeechStreamFileMode.SSFMCreateForWrite;
-                SpFileStream SpFileStream = new SpFileStream();
-                SpFileStream.Open(filename, SpFileMode, false);
-                Voice.AudioOutputStream = SpFileStream;
-                Voice.Speak(this.richTextBox1.Text, SpFlags);
-                Voice.WaitUntilDone(100);
-                SpFileStream.Close();
-
-                richTextBox1.Text += "已存檔 : " + filename + "\n";
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An Error Occured!", "SpeechApp", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-
         }
     }
 

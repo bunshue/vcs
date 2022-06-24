@@ -19,9 +19,14 @@ namespace vcs_AudioVideoTest1
     public partial class Form1 : Form
     {
         private WMPLib.WindowsMediaPlayer wplayer;// = new WMPLib.WindowsMediaPlayer();
+
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             show_item_location();
             wplayer = new WMPLib.WindowsMediaPlayer();
             trackBar1.Value = wplayer.settings.volume;
@@ -38,7 +43,7 @@ namespace vcs_AudioVideoTest1
             x_st = 12;
             y_st = 12;
             dx = 190 + 10;
-            dy = 35 + 10;
+            dy = 40 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -56,7 +61,15 @@ namespace vcs_AudioVideoTest1
             button12.Location = new Point(x_st + dx * 1, y_st + dy * 5);
             button13.Location = new Point(x_st + dx * 1, y_st + dy * 6);
 
-            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 7 + 20);
+            button14.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button15.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button16.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button17.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button18.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button19.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+
+            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 8 + 20);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
@@ -94,6 +107,23 @@ namespace vcs_AudioVideoTest1
             SoundPlayer sp = new SoundPlayer();// 新增一個SoundPlayer物件
             sp.Stream = Properties.Resources.WindowsShutdown; // 設定檔案的串流 從專案的資源來的
             sp.Play(); // 播放
+
+            /*
+            SoundPlayer sp = new SoundPlayer();
+            sp.SoundLocation = filename;
+            sp.Load(); //同步加載聲音
+            sp.Play(); //啟用新線程播放
+            //sp.PlayLooping(); //循環播放模式
+            //sp.PlaySync(); //UI線程播放
+            */
+
+            /*
+            //播放wav檔
+            SoundPlayer sp = new SoundPlayer(); //声明一个控制WAV文件的声音播放文件对象
+            sp.SoundLocation = filename; //指定声音文件的路径
+            sp.LoadAsync();  //设置播放的方法
+            sp.Play(); //播放声音文件
+            */
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -478,12 +508,6 @@ namespace vcs_AudioVideoTest1
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //播放wav檔
-            string filename = @"C:\______test_files\_wav\start.wav";
-            SoundPlayer player = new SoundPlayer(); //声明一个控制WAV文件的声音播放文件对象
-            player.SoundLocation = filename; //指定声音文件的路径
-            player.LoadAsync();  //设置播放的方法
-            player.Play(); //播放声音文件
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -648,7 +672,40 @@ namespace vcs_AudioVideoTest1
             }
         }
 
+        private void button14_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public class clsMP3TAG
