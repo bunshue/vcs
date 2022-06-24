@@ -503,8 +503,32 @@ namespace vcs_test_all_01_Math
             richTextBox1.Text += A.ToString() + " 和 " + B.ToString() + " 的最小公倍數 = " + LCM2(A, B).ToString() + "\n";
         }
 
+        //求出三點之間的夾角
+        public static double Angle(Point cen, Point first, Point second)
+        {
+            const double M_PI = 3.1415926535897;
+
+            double ma_x = first.X - cen.X;
+            double ma_y = first.Y - cen.Y;
+            double mb_x = second.X - cen.X;
+            double mb_y = second.Y - cen.Y;
+            double v1 = (ma_x * mb_x) + (ma_y * mb_y);
+            double ma_val = Math.Sqrt(ma_x * ma_x + ma_y * ma_y);
+            double mb_val = Math.Sqrt(mb_x * mb_x + mb_y * mb_y);
+            double cosM = v1 / (ma_val * mb_val);
+            double angleAMB = Math.Acos(cosM) * 180 / M_PI;
+
+            return angleAMB;
+        }
+
         private void button10_Click(object sender, EventArgs e)
         {
+            //求出三點之間的夾角
+
+            Point button2Point = new Point(0, 0);
+            Point button3Point = new Point(0, 5);
+            Point button4Point = new Point(2, 5);
+            richTextBox1.Text += "夾角 : " + Angle(button3Point, button2Point, button4Point) + " 度\n";
         }
 
         private void button11_Click(object sender, EventArgs e)

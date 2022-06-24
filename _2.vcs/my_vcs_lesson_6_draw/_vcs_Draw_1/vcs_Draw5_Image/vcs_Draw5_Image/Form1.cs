@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Drawing.Imaging;
+
 namespace vcs_Draw5_Image
 {
     public partial class Form1 : Form
@@ -45,18 +47,29 @@ namespace vcs_Draw5_Image
         {
             int x_st = 14;
             int y_st = 12;
-            int dx = 100;
-            int dy = 45;
+            int dx = 170 + 10;
+            int dy = 45 + 10;
 
-            button1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button3.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button4.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button5.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button6.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button7.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button9.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 7);
 
             bt_clear.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 9);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -64,6 +77,11 @@ namespace vcs_Draw5_Image
             richTextBox1.Clear();
             g.Clear(Color.White);
             pictureBox1.Image = bitmap1;
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -274,6 +292,45 @@ namespace vcs_Draw5_Image
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //DrawImage語法
+
+            int x_st = 100;
+            int y_st = 100;
+            int w = 100;
+            int h = 100;
+
+            //先初始化一個位圖對象，來存儲截取後的圖像
+            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height, PixelFormat.Format32bppRgb);
+
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+
+            //這個矩形定義了，你將要在被截取的圖像上要截取的圖像區域的左頂點位置和截取的大小
+            Rectangle rectSource = new Rectangle(x_st, y_st, w, h);
+
+            //這個矩形定義了，你將要把 截取的圖像區域 繪制到初始化的位圖的位置和大小
+            //我的定義，說明，我將把截取的區域，從位圖左頂點開始繪制，繪制截取的區域原來大小
+            Rectangle rectDest = new Rectangle(0, 0, w, h);
+
+            //第一個參數就是加載你要截取的圖像對象，第二個和第三個參數及如上所說定義截取和繪制圖像過程中的相關屬性，第四個屬性定義了屬性值所使用的度量單位
+            g.DrawImage(pictureBox_old.Image, rectDest, rectSource, GraphicsUnit.Pixel);
+
+            rectDest = new Rectangle(w, h, w, h);
+            g.DrawImage(pictureBox_old.Image, rectDest, rectSource, GraphicsUnit.Pixel);
+
+            rectDest = new Rectangle(w * 2, h * 2, w, h);
+            g.DrawImage(pictureBox_old.Image, rectDest, rectSource, GraphicsUnit.Pixel);
+
+            rectDest = new Rectangle(w * 3, h * 3, w, h);
+            g.DrawImage(pictureBox_old.Image, rectDest, rectSource, GraphicsUnit.Pixel);
+
+            //這是在GUI上顯示被截取的圖像
+            pictureBox1.Image = (Image)bitmap1;
+
+            g.Dispose();
+
+
+
 
         }
 
@@ -287,5 +344,44 @@ namespace vcs_Draw5_Image
 
         }
 
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

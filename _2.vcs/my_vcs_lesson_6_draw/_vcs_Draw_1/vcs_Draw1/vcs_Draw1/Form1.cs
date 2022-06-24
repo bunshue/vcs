@@ -145,7 +145,8 @@ namespace vcs_Draw1
             button59.Location = new Point(x_st + dx * 4, y_st + dy * 11);
 
             bt_eraser.Location = new Point(x_st + dx * 2, y_st + dy * 12);
-            bt_save.Location = new Point(x_st + dx * 3, y_st + dy * 12);
+            bt_reset.Location = new Point(x_st + dx * 3, y_st + dy * 12);
+            bt_save.Location = new Point(x_st + dx * 4, y_st + dy * 12);
 
             comboBox1.Location = new Point(x_st + dx * 0, y_st + dy * 12);
             checkBox1.Location = new Point(x_st + dx * 1, y_st + dy * 12);
@@ -422,9 +423,7 @@ namespace vcs_Draw1
                 }
             }
             pictureBox1.Image = bitmap1;
-
         }
-
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -454,204 +453,6 @@ namespace vcs_Draw1
                     richTextBox1.Text += "xxxxxxxxxx\n";
                     break;
             }
-
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-            int width;
-            int height;
-
-            string filename = "C:\\______test_files\\picture1.jpg";
-
-            richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
-
-            bitmap1 = new Bitmap(filename);
-
-            richTextBox1.Text += "檔案大小 W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
-
-            width = bitmap1.Width;
-            height = bitmap1.Height;
-
-            pictureBox1.Size = new Size(width, height);
-            pictureBox1.Location = new Point(20, 20);
-
-            pictureBox1.Image = bitmap1;
-            richTextBox1.Text += "\n";
-
-            SolidBrush sb;
-            Font f;
-            sb = new SolidBrush(Color.Purple);
-            f = new Font("Times New Roman", 30);
-            //f = new Font("標楷體", 20);
-            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-
-            //g.DrawRectangle(p, 0, 0, bitmap1.Width - 1, bitmap1.Height - 1);
-            //g.DrawRectangle(p, 100, 100, bitmap1.Width - 1 - 200, bitmap1.Height - 1 - 200);
-
-            p = new Pen(Color.Purple, 5);
-
-            /*
-            g.DrawLine(p, 0, bitmap1.Height / 2, bitmap1.Width - 1, bitmap1.Height / 2);
-            g.DrawLine(p, bitmap1.Width / 2, 0, bitmap1.Width / 2, bitmap1.Height - 1);
-            g.DrawString("Sugar", f, sb, new PointF(bitmap1.Width - 75, bitmap1.Height / 2 - 35));
-            g.DrawString("Sugar", f, sb, new PointF(bitmap1.Width - 75, bitmap1.Height / 1 - 35));
-            */
-
-            g.DrawString("Sugar", f, sb, new PointF(bitmap1.Width - 210, bitmap1.Height / 1 - 150));
-
-            pictureBox1.Image = bitmap1;
-
-
-            this.FormBorderStyle = FormBorderStyle.None;
-            //this.WindowState = FormWindowState.Maximized;
-            this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
-
-            //存檔
-            save_image_to_drive();
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-            int width;
-            int height;
-
-            string filename = "C:\\______test_files\\step2.png";
-            richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
-
-            bitmap1 = new Bitmap(filename);
-            //pictureBox1.Image = bitmap2;
-
-            richTextBox1.Text += "W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
-
-            width = bitmap1.Width;
-            height = bitmap1.Height;
-
-            pictureBox1.Size = new Size(width, height);
-            pictureBox1.Location = new Point(20, 20);
-            pictureBox1.Image = bitmap1;
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-            SolidBrush sb;
-            Font f;
-
-            sb = new SolidBrush(Color.Blue);
-            //f = new Font("標楷體", 20);
-            f = new Font("標楷體", 16);
-
-            if (bitmap1 == null)
-            {
-                open_new_file();
-            }
-
-            sb = new SolidBrush(Color.Red);
-            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-            //g.FillRectangle(sb, 75, 75, 200, 75);
-
-            //g.DrawString("內視鏡時效已過", f, sb, new PointF(70.0F, 110.0F));
-            //g.DrawString("請更換", f, sb, new PointF(240.0F, 200.0F));
-
-            //g.DrawString("內視鏡時效已過", f, sb, new PointF(120.0F, 70.0F));
-            //g.DrawString("請更換", f, sb, new PointF(270.0F, 160.0F));
-            //g.DrawString("相機非全新且不同", f, sb, new PointF(90.0F, 250.0F));
-
-            f = new Font("標楷體", 24);
-            g.DrawString("主機電池失效", f, sb, new PointF(60.0F, 90.0F));
-            g.DrawString("請更換與校時", f, sb, new PointF(60.0F, 200.0F));
-
-            //f = new Font("標楷體", 12);
-            //g.DrawString("(使用<30分，累計關機>30分)", f, sb, new PointF(40.0F, 290.0F));
-
-            pictureBox1.Image = bitmap1;
-
-        }
-
-        private void button14_Click(object sender, EventArgs e)
-        {
-            if (bitmap1 == null)
-            {
-                richTextBox1.Text += "尚未開啟圖片\n";
-                return;
-            }
-
-            int ccc = 0;
-            int xx;
-            int yy;
-
-            richTextBox1.Text += "W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
-
-            Color rr = Color.Red;
-            Color gg = Color.Green;
-            Color bb = Color.Blue;
-
-            richTextBox1.Text += "R : " + rr.A.ToString("X2") + rr.R.ToString("X2") + rr.G.ToString("X2") + rr.B.ToString("X2") + "\n";
-            richTextBox1.Text += "G : " + gg.A.ToString("X2") + gg.R.ToString("X2") + gg.G.ToString("X2") + gg.B.ToString("X2") + "\n";
-            richTextBox1.Text += "B : " + bb.A.ToString("X2") + bb.R.ToString("X2") + bb.G.ToString("X2") + bb.B.ToString("X2") + "\n";
-
-            for (yy = 0; yy < bitmap1.Height; yy++)
-            {
-                for (xx = 0; xx < bitmap1.Width; xx++)
-                {
-                    if ((yy % 120) == 0)
-                    {
-                        bitmap1.SetPixel(xx, yy, rr);
-                    }
-                    else if ((yy % 120) == 30)
-                    {
-                        bitmap1.SetPixel(xx, yy, gg);
-                    }
-                    else if ((yy % 120) == 60)
-                    {
-                        bitmap1.SetPixel(xx, yy, bb);
-                    }
-                    else if ((yy % 120) == 90)
-                    {
-                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0, 0, 0));
-                    }
-
-                    ccc++;
-                    if ((ccc % 30000) == 0)
-                    {
-                        Color p = bitmap1.GetPixel(xx, yy);
-                        //richTextBox1.Text += p.ToString() + " ";
-                        richTextBox1.Text += p.A.ToString("X2") + p.R.ToString("X2") + p.G.ToString("X2") + p.B.ToString("X2") + " ";
-
-                    }
-
-                }
-            }
-            pictureBox1.Image = bitmap1;
-            richTextBox1.Text += "\n";
-        }
-
-        private void button15_Click(object sender, EventArgs e)
-        {
-            int width;
-            int height;
-
-            string filename = "C:\\______test_files\\sample.png";
-            richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
-
-            bitmap1 = new Bitmap(filename);
-            //pictureBox1.Image = bitmap2;
-
-            richTextBox1.Text += "W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
-
-            width = bitmap1.Width;
-            height = bitmap1.Height;
-
-            //pictureBox1.Size = new Size(1, 1);
-            pictureBox1.Size = new Size(width, height);
-            pictureBox1.Location = new Point(20, 20);
-
-            pictureBox1.Image = bitmap1;
-            richTextBox1.Text += "\n";
-
-            this.FormBorderStyle = FormBorderStyle.None;
-            //this.WindowState = FormWindowState.Maximized;
-            this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -845,9 +646,6 @@ namespace vcs_Draw1
             this.FormBorderStyle = FormBorderStyle.None;
             //this.WindowState = FormWindowState.Maximized;
             this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
-
-
-
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -898,8 +696,6 @@ namespace vcs_Draw1
             g.DrawString("ims", f, sb, new PointF(80, 300));
 
             pictureBox1.Image = bitmap1;
-
-
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -1044,11 +840,197 @@ namespace vcs_Draw1
             //this.WindowState = FormWindowState.Maximized;
             this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
 
-            //存檔
-            save_image_to_drive();
-
             richTextBox1.Text += "FullHD點圖 SP\n";
+        }
 
+        private void button11_Click(object sender, EventArgs e)
+        {
+            int width;
+            int height;
+
+            string filename = "C:\\______test_files\\picture1.jpg";
+
+            richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
+
+            bitmap1 = new Bitmap(filename);
+
+            richTextBox1.Text += "檔案大小 W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
+
+            width = bitmap1.Width;
+            height = bitmap1.Height;
+
+            pictureBox1.Size = new Size(width, height);
+            pictureBox1.Location = new Point(20, 20);
+
+            pictureBox1.Image = bitmap1;
+            richTextBox1.Text += "\n";
+
+            SolidBrush sb;
+            Font f;
+            sb = new SolidBrush(Color.Purple);
+            f = new Font("Times New Roman", 30);
+            //f = new Font("標楷體", 20);
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+
+            //g.DrawRectangle(p, 0, 0, bitmap1.Width - 1, bitmap1.Height - 1);
+            //g.DrawRectangle(p, 100, 100, bitmap1.Width - 1 - 200, bitmap1.Height - 1 - 200);
+
+            p = new Pen(Color.Purple, 5);
+
+            /*
+            g.DrawLine(p, 0, bitmap1.Height / 2, bitmap1.Width - 1, bitmap1.Height / 2);
+            g.DrawLine(p, bitmap1.Width / 2, 0, bitmap1.Width / 2, bitmap1.Height - 1);
+            g.DrawString("Sugar", f, sb, new PointF(bitmap1.Width - 75, bitmap1.Height / 2 - 35));
+            g.DrawString("Sugar", f, sb, new PointF(bitmap1.Width - 75, bitmap1.Height / 1 - 35));
+            */
+
+            g.DrawString("Sugar", f, sb, new PointF(bitmap1.Width - 210, bitmap1.Height / 1 - 150));
+
+            pictureBox1.Image = bitmap1;
+
+            this.FormBorderStyle = FormBorderStyle.None;
+            //this.WindowState = FormWindowState.Maximized;
+            this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            int width;
+            int height;
+
+            string filename = "C:\\______test_files\\step2.png";
+            richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
+
+            bitmap1 = new Bitmap(filename);
+            //pictureBox1.Image = bitmap2;
+
+            richTextBox1.Text += "W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
+
+            width = bitmap1.Width;
+            height = bitmap1.Height;
+
+            pictureBox1.Size = new Size(width, height);
+            pictureBox1.Location = new Point(20, 20);
+            pictureBox1.Image = bitmap1;
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            SolidBrush sb;
+            Font f;
+
+            sb = new SolidBrush(Color.Blue);
+            //f = new Font("標楷體", 20);
+            f = new Font("標楷體", 16);
+
+            if (bitmap1 == null)
+            {
+                open_new_file();
+            }
+
+            sb = new SolidBrush(Color.Red);
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+            //g.FillRectangle(sb, 75, 75, 200, 75);
+
+            //g.DrawString("內視鏡時效已過", f, sb, new PointF(70.0F, 110.0F));
+            //g.DrawString("請更換", f, sb, new PointF(240.0F, 200.0F));
+
+            //g.DrawString("內視鏡時效已過", f, sb, new PointF(120.0F, 70.0F));
+            //g.DrawString("請更換", f, sb, new PointF(270.0F, 160.0F));
+            //g.DrawString("相機非全新且不同", f, sb, new PointF(90.0F, 250.0F));
+
+            f = new Font("標楷體", 24);
+            g.DrawString("主機電池失效", f, sb, new PointF(60.0F, 90.0F));
+            g.DrawString("請更換與校時", f, sb, new PointF(60.0F, 200.0F));
+
+            //f = new Font("標楷體", 12);
+            //g.DrawString("(使用<30分，累計關機>30分)", f, sb, new PointF(40.0F, 290.0F));
+
+            pictureBox1.Image = bitmap1;
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            if (bitmap1 == null)
+            {
+                richTextBox1.Text += "尚未開啟圖片\n";
+                return;
+            }
+
+            int ccc = 0;
+            int xx;
+            int yy;
+
+            richTextBox1.Text += "W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
+
+            Color rr = Color.Red;
+            Color gg = Color.Green;
+            Color bb = Color.Blue;
+
+            richTextBox1.Text += "R : " + rr.A.ToString("X2") + rr.R.ToString("X2") + rr.G.ToString("X2") + rr.B.ToString("X2") + "\n";
+            richTextBox1.Text += "G : " + gg.A.ToString("X2") + gg.R.ToString("X2") + gg.G.ToString("X2") + gg.B.ToString("X2") + "\n";
+            richTextBox1.Text += "B : " + bb.A.ToString("X2") + bb.R.ToString("X2") + bb.G.ToString("X2") + bb.B.ToString("X2") + "\n";
+
+            for (yy = 0; yy < bitmap1.Height; yy++)
+            {
+                for (xx = 0; xx < bitmap1.Width; xx++)
+                {
+                    if ((yy % 120) == 0)
+                    {
+                        bitmap1.SetPixel(xx, yy, rr);
+                    }
+                    else if ((yy % 120) == 30)
+                    {
+                        bitmap1.SetPixel(xx, yy, gg);
+                    }
+                    else if ((yy % 120) == 60)
+                    {
+                        bitmap1.SetPixel(xx, yy, bb);
+                    }
+                    else if ((yy % 120) == 90)
+                    {
+                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0, 0, 0));
+                    }
+
+                    ccc++;
+                    if ((ccc % 30000) == 0)
+                    {
+                        Color p = bitmap1.GetPixel(xx, yy);
+                        //richTextBox1.Text += p.ToString() + " ";
+                        richTextBox1.Text += p.A.ToString("X2") + p.R.ToString("X2") + p.G.ToString("X2") + p.B.ToString("X2") + " ";
+                    }
+                }
+            }
+            pictureBox1.Image = bitmap1;
+            richTextBox1.Text += "\n";
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            int width;
+            int height;
+
+            string filename = "C:\\______test_files\\sample.png";
+            richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
+
+            bitmap1 = new Bitmap(filename);
+            //pictureBox1.Image = bitmap2;
+
+            richTextBox1.Text += "W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
+
+            width = bitmap1.Width;
+            height = bitmap1.Height;
+
+            //pictureBox1.Size = new Size(1, 1);
+            pictureBox1.Size = new Size(width, height);
+            pictureBox1.Location = new Point(20, 20);
+
+            pictureBox1.Image = bitmap1;
+            richTextBox1.Text += "\n";
+
+            this.FormBorderStyle = FormBorderStyle.None;
+            //this.WindowState = FormWindowState.Maximized;
+            this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -1206,36 +1188,6 @@ namespace vcs_Draw1
             pictureBox1.Image = bitmap1;
         }
 
-        void save_image_to_drive()
-        {
-            if (bitmap1 != null)
-            {
-                string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                String filename1 = filename + ".jpg";
-                String filename2 = filename + ".bmp";
-                String filename3 = filename + ".png";
-
-                try
-                {
-                    bitmap1.Save(@filename1, ImageFormat.Jpeg);
-                    bitmap1.Save(@filename2, ImageFormat.Bmp);
-                    bitmap1.Save(@filename3, ImageFormat.Png);
-
-                    richTextBox1.Text += "存檔成功\n";
-                    richTextBox1.Text += "已存檔 : " + filename1 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename2 + "\n";
-                    richTextBox1.Text += "已存檔 : " + filename3 + "\n";
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-                }
-            }
-            else
-                richTextBox1.Text += "無圖可存\n";
-        }
-
-
         private void button17_Click(object sender, EventArgs e)
         {
             //TBD
@@ -1245,161 +1197,6 @@ namespace vcs_Draw1
             bitmap1 = new Bitmap(pic_width / 2, pic_height / 2);
             pictureBox1.Image = bitmap1;
             //pictureBox1.BackColor = Color.Black;
-        }
-
-        private void button25_Click(object sender, EventArgs e)
-        {
-            //DrawCurve
-
-            pictureBox1.Size = new Size(500, 500);
-
-            Graphics g = this.pictureBox1.CreateGraphics();
-            Pen p1 = new Pen(Color.Red, 2);
-            Pen p2 = new Pen(Color.Green, 2);
-            Pen p3 = new Pen(Color.Blue, 2);
-            Pen p4 = new Pen(Color.Gold, 2);
-            Pen p5 = new Pen(Color.Black, 2);
-            Point pt1 = new Point(200, 100);
-            Point pt2 = new Point(300, 100);
-            Point pt3 = new Point(400, 200);
-            Point pt4 = new Point(300, 300);
-            Point pt5 = new Point(200, 300);
-            Point pt6 = new Point(100, 200);
-            Point[] pts = { pt1, pt2, pt3, pt4, pt5, pt6 };
-            g.DrawCurve(p1, pts, 1.0F); //使用tension
-            g.DrawCurve(p2, pts);   //不使用tension
-            g.DrawPolygon(p3, pts);
-
-            g.DrawLines(p4, pts);
-        }
-
-        private void button26_Click(object sender, EventArgs e)
-        {
-            if (bitmap1 == null)
-            {
-                open_new_file();
-            }
-
-            DrawSmileImage(g);
-        }
-
-        private void DrawSmileImage(Graphics g)
-        {
-            Rectangle rect;
-
-            rect = new Rectangle(10, 10, 80, 80);
-            g.FillEllipse(Brushes.LightGreen, rect);
-            g.DrawEllipse(Pens.Green, rect);
-
-            rect = new Rectangle(40, 40, 20, 30);
-            g.FillEllipse(Brushes.LightBlue, rect);
-            g.DrawEllipse(Pens.Blue, rect);
-
-            rect = new Rectangle(25, 30, 50, 50);
-            g.DrawArc(Pens.Red, rect, 20, 140);
-
-            rect = new Rectangle(25, 25, 15, 20);
-            g.FillEllipse(Brushes.White, rect);
-            g.DrawEllipse(Pens.Black, rect);
-            rect = new Rectangle(30, 30, 10, 10);
-            g.FillEllipse(Brushes.Black, rect);
-
-            rect = new Rectangle(60, 25, 15, 20);
-            g.FillEllipse(Brushes.White, rect);
-            g.DrawEllipse(Pens.Black, rect);
-            rect = new Rectangle(65, 30, 10, 10);
-            g.FillEllipse(Brushes.Black, rect);
-        }
-
-        private void button21_Click(object sender, EventArgs e)
-        {
-            pictureBox1.Location = new Point(0, 200);
-
-            g = this.CreateGraphics();
-            int w = 550;
-            int h = 170;
-
-            DrawTest(g, w, h);
-        }
-
-        private void button22_Click(object sender, EventArgs e)
-        {
-            pictureBox1.Size = new Size(550, 170);
-            pictureBox1.Location = new Point(50, 50);
-
-            panel1.Size = new Size(550, 170);
-            panel1.Location = new Point(50, 250);
-
-            g = pictureBox1.CreateGraphics();
-            int w = pictureBox1.ClientSize.Width;
-            int h = pictureBox1.ClientSize.Height;
-
-            DrawTest(g, w, h);
-        }
-
-        private void button23_Click(object sender, EventArgs e)
-        {
-            panel1.Size = new Size(550, 170);
-            panel1.Location = new Point(50, 50);
-
-            g = panel1.CreateGraphics();
-            int w = panel1.ClientSize.Width;
-            int h = panel1.ClientSize.Height;
-
-            DrawTest(g, w, h);
-        }
-
-        private void DrawTest(Graphics g, int w, int h)
-        {
-            g.DrawRectangle(p, 0, 0, w - 1, h - 1);
-            Rectangle rect = new Rectangle(0, 0, w - 1, h - 1);
-            g.DrawEllipse(p, rect);
-
-            p = new Pen(Color.FromArgb(255, 0, 123, 0), 5);
-            Point px1 = new Point(w / 10, h / 2);
-            Point px2 = new Point(w * 9 / 10, h / 2);
-            g.DrawLine(new Pen(Brushes.Black, 5), px1, px2);
-
-            p = new Pen(Brushes.Green, 3);
-            Point[] points = new Point[7];
-            points[0] = new Point(w / 2, 10);
-            points[1] = new Point(0, h - 10);
-            points[2] = new Point(w / 4, h - 10);
-            points[3] = new Point(w / 4, h - 10 - 30);
-            points[4] = new Point(w * 3 / 4, h - 10 - 30);
-            points[5] = new Point(w * 3 / 4, h - 10);
-            points[6] = new Point(w, h - 10);
-            g.DrawPolygon(p, points);
-
-            richTextBox1.Text += "w = " + w.ToString() + "\n";
-            richTextBox1.Text += "h = " + h.ToString() + "\n";
-
-            p = new Pen(Color.Blue, 3);
-            g.DrawRectangle(p, 0, 0, w - 1, h - 1);
-            g.DrawRectangle(p, 0, 0, w - 1 - 50, h - 1 - 50);
-            g.DrawRectangle(p, 0, 0, w - 1 - 100, h - 1 - 100);
-
-            //Brush b = new SolidBrush(Color.Blue);
-            Brush b = new SolidBrush(Color.FromArgb(30, 0, 123, 0));
-            g.FillRectangle(b, w / 4, 50, w / 2, 50);
-        }
-
-        private void button24_Click(object sender, EventArgs e)
-        {
-            //畫貝茲線
-            Graphics g = this.pictureBox1.CreateGraphics();
-            Pen p = new Pen(Color.Red, 5);
-            float startX = 50.0F;
-            float startY = 80.0F;
-            float controlX1 = 150.0F;
-            float controlY1 = 20.0F;
-            float controlX2 = 230.0F;
-            float controlY2 = 50.0F;
-            float endX = 190.0F;
-            float endY = 80.0F;
-            g.DrawBezier(p, startX, startY, controlX1, controlY1, controlX2, controlY2, endX, endY);
-            //4個Point點分別表示起始點、第一個控制點、第二個控制點和結束點。
-
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -1528,11 +1325,6 @@ namespace vcs_Draw1
             g.Clear(Color.Gray);
         }
 
-        private void bt_save_Click(object sender, EventArgs e)
-        {
-            save_image_to_drive();
-        }
-
         void open_new_file()
         {
             richTextBox1.Text += "開啟一個 640 X 480 的空畫布\n";
@@ -1566,6 +1358,159 @@ namespace vcs_Draw1
             catch
             {
             }
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Location = new Point(0, 200);
+
+            g = this.CreateGraphics();
+            int w = 550;
+            int h = 170;
+
+            DrawTest(g, w, h);
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+            pictureBox1.Size = new Size(550, 170);
+            pictureBox1.Location = new Point(50, 50);
+
+            panel1.Size = new Size(550, 170);
+            panel1.Location = new Point(50, 250);
+
+            g = pictureBox1.CreateGraphics();
+            int w = pictureBox1.ClientSize.Width;
+            int h = pictureBox1.ClientSize.Height;
+
+            DrawTest(g, w, h);
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            panel1.Size = new Size(550, 170);
+            panel1.Location = new Point(50, 50);
+
+            g = panel1.CreateGraphics();
+            int w = panel1.ClientSize.Width;
+            int h = panel1.ClientSize.Height;
+
+            DrawTest(g, w, h);
+        }
+
+        private void DrawTest(Graphics g, int w, int h)
+        {
+            g.DrawRectangle(p, 0, 0, w - 1, h - 1);
+            Rectangle rect = new Rectangle(0, 0, w - 1, h - 1);
+            g.DrawEllipse(p, rect);
+
+            p = new Pen(Color.FromArgb(255, 0, 123, 0), 5);
+            Point px1 = new Point(w / 10, h / 2);
+            Point px2 = new Point(w * 9 / 10, h / 2);
+            g.DrawLine(new Pen(Brushes.Black, 5), px1, px2);
+
+            p = new Pen(Brushes.Green, 3);
+            Point[] points = new Point[7];
+            points[0] = new Point(w / 2, 10);
+            points[1] = new Point(0, h - 10);
+            points[2] = new Point(w / 4, h - 10);
+            points[3] = new Point(w / 4, h - 10 - 30);
+            points[4] = new Point(w * 3 / 4, h - 10 - 30);
+            points[5] = new Point(w * 3 / 4, h - 10);
+            points[6] = new Point(w, h - 10);
+            g.DrawPolygon(p, points);
+
+            richTextBox1.Text += "w = " + w.ToString() + "\n";
+            richTextBox1.Text += "h = " + h.ToString() + "\n";
+
+            p = new Pen(Color.Blue, 3);
+            g.DrawRectangle(p, 0, 0, w - 1, h - 1);
+            g.DrawRectangle(p, 0, 0, w - 1 - 50, h - 1 - 50);
+            g.DrawRectangle(p, 0, 0, w - 1 - 100, h - 1 - 100);
+
+            //Brush b = new SolidBrush(Color.Blue);
+            Brush b = new SolidBrush(Color.FromArgb(30, 0, 123, 0));
+            g.FillRectangle(b, w / 4, 50, w / 2, 50);
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            //畫貝茲線
+            Graphics g = this.pictureBox1.CreateGraphics();
+            Pen p = new Pen(Color.Red, 5);
+            float startX = 50.0F;
+            float startY = 80.0F;
+            float controlX1 = 150.0F;
+            float controlY1 = 20.0F;
+            float controlX2 = 230.0F;
+            float controlY2 = 50.0F;
+            float endX = 190.0F;
+            float endY = 80.0F;
+            g.DrawBezier(p, startX, startY, controlX1, controlY1, controlX2, controlY2, endX, endY);
+            //4個Point點分別表示起始點、第一個控制點、第二個控制點和結束點。
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+            //DrawCurve
+
+            pictureBox1.Size = new Size(500, 500);
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+            Pen p1 = new Pen(Color.Red, 2);
+            Pen p2 = new Pen(Color.Green, 2);
+            Pen p3 = new Pen(Color.Blue, 2);
+            Pen p4 = new Pen(Color.Gold, 2);
+            Pen p5 = new Pen(Color.Black, 2);
+            Point pt1 = new Point(200, 100);
+            Point pt2 = new Point(300, 100);
+            Point pt3 = new Point(400, 200);
+            Point pt4 = new Point(300, 300);
+            Point pt5 = new Point(200, 300);
+            Point pt6 = new Point(100, 200);
+            Point[] pts = { pt1, pt2, pt3, pt4, pt5, pt6 };
+            g.DrawCurve(p1, pts, 1.0F); //使用tension
+            g.DrawCurve(p2, pts);   //不使用tension
+            g.DrawPolygon(p3, pts);
+
+            g.DrawLines(p4, pts);
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+            if (bitmap1 == null)
+            {
+                open_new_file();
+            }
+            DrawSmileImage(g);
+        }
+
+        private void DrawSmileImage(Graphics g)
+        {
+            Rectangle rect;
+
+            rect = new Rectangle(10, 10, 80, 80);
+            g.FillEllipse(Brushes.LightGreen, rect);
+            g.DrawEllipse(Pens.Green, rect);
+
+            rect = new Rectangle(40, 40, 20, 30);
+            g.FillEllipse(Brushes.LightBlue, rect);
+            g.DrawEllipse(Pens.Blue, rect);
+
+            rect = new Rectangle(25, 30, 50, 50);
+            g.DrawArc(Pens.Red, rect, 20, 140);
+
+            rect = new Rectangle(25, 25, 15, 20);
+            g.FillEllipse(Brushes.White, rect);
+            g.DrawEllipse(Pens.Black, rect);
+            rect = new Rectangle(30, 30, 10, 10);
+            g.FillEllipse(Brushes.Black, rect);
+
+            rect = new Rectangle(60, 25, 15, 20);
+            g.FillEllipse(Brushes.White, rect);
+            g.DrawEllipse(Pens.Black, rect);
+            rect = new Rectangle(65, 30, 10, 10);
+            g.FillEllipse(Brushes.Black, rect);
         }
 
         private void button27_Click(object sender, EventArgs e)
@@ -1822,6 +1767,11 @@ namespace vcs_Draw1
         }
         #endregion
 
+        private void button29_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "就是 Button 上的 UAC圖示\n";
+        }
+
         private void button30_Click(object sender, EventArgs e)
         {
             //clone範例
@@ -1851,6 +1801,128 @@ namespace vcs_Draw1
 
         private void button31_Click(object sender, EventArgs e)
         {
+        }
+
+        //在線的上下畫字
+        private void button32_Click(object sender, EventArgs e)
+        {
+            // Draw some text along a line segment.
+            Graphics g = pictureBox1.CreateGraphics();
+            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
+            g.SmoothingMode = SmoothingMode.AntiAlias;
+            g.InterpolationMode = InterpolationMode.High;
+
+            // Draw some text along some line segments.
+            DrawOnSegment(g, new PointF(20, 20), new PointF(330, 150), "This is some text above a line segment.", true);
+            DrawOnSegment(g, new PointF(20, 20), new PointF(330, 150), "This is some text below a line segment.", false);
+
+            DrawOnSegment(g, new PointF(330, 200), new PointF(20, 120), "This is some text above a line segment.", true);
+            DrawOnSegment(g, new PointF(330, 200), new PointF(20, 120), "This is some text below a line segment.", false);
+        }
+
+        // Draw some text.
+        private void DrawOnSegment(Graphics g, PointF start_point, PointF end_point, string txt, bool text_above_segment)
+        {
+            int start_ch = 0;
+
+            g.DrawLine(Pens.Green, start_point, end_point);
+            DrawTextOnSegment(g, Brushes.Blue, this.Font, txt, ref start_ch, ref start_point, end_point, text_above_segment);
+        }
+
+        // Draw some text along a line segment.
+        // Leave char_num pointing to the next character to be drawn.
+        // Leave start_point holding the last point used.
+        private void DrawTextOnSegment(Graphics gr, Brush brush, Font font, string txt, ref int first_ch, ref PointF start_point, PointF end_point, bool text_above_segment)
+        {
+            float dx = end_point.X - start_point.X;
+            float dy = end_point.Y - start_point.Y;
+            float dist = (float)Math.Sqrt(dx * dx + dy * dy);
+            dx /= dist;
+            dy /= dist;
+
+            // See how many characters will fit.
+            int last_ch = first_ch;
+            while (last_ch < txt.Length)
+            {
+                string test_string = txt.Substring(first_ch, last_ch - first_ch + 1);
+                if (gr.MeasureString(test_string, font).Width > dist)
+                {
+                    // This is one too many characters.
+                    last_ch--;
+                    break;
+                }
+                last_ch++;
+            }
+            if (last_ch < first_ch) return;
+            if (last_ch >= txt.Length) last_ch = txt.Length - 1;
+            string chars_that_fit = txt.Substring(first_ch, last_ch - first_ch + 1);
+
+            // Rotate and translate to position the characters.
+            GraphicsState state = gr.Save();
+            if (text_above_segment)
+            {
+                gr.TranslateTransform(0, -gr.MeasureString(chars_that_fit, font).Height, MatrixOrder.Append);
+            }
+            float angle = (float)(180 * Math.Atan2(dy, dx) / Math.PI);
+            gr.RotateTransform(angle, MatrixOrder.Append);
+            gr.TranslateTransform(start_point.X, start_point.Y, MatrixOrder.Append);
+
+            // Draw the characters that fit.
+            gr.DrawString(chars_that_fit, font, brush, 0, 0);
+
+            // Restore the saved state.
+            gr.Restore(state);
+
+            // Update first_ch and start_point.
+            first_ch = last_ch + 1;
+            float text_width = gr.MeasureString(chars_that_fit, font).Width;
+            start_point = new PointF(start_point.X + dx * text_width, start_point.Y + dy * text_width);
+        }
+
+        private void button33_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+            //在Button上畫圖
+            richTextBox1.Text += "在Button上畫圖, 要改buttonXX_Paint()\n";
+        }
+
+        private void button34_Paint(object sender, PaintEventArgs e)
+        {
+            int W = button34.Width;
+            int H = button34.Height;
+            //e.Graphics.FillRectangle(new SolidBrush(Color.White), x_st, y_st, W, H);
+            e.Graphics.FillRectangle(new SolidBrush(Color.Pink), 0, 0, W, H);
+
+            Pen p = new Pen(Color.Red, 6);
+            e.Graphics.DrawRectangle(p, 0, 0, W - 0, H - 0);
+
+            e.Graphics.DrawString("在Button上畫圖", new Font("標楷體", 11), new SolidBrush(Color.Blue), 5, 15);
+        }
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button36_Click(object sender, EventArgs e)
+        {
+            //Rectangle的交集與聯集
+
+            Graphics g = pictureBox1.CreateGraphics();
+
+            Rectangle rect1 = new Rectangle(30, 30, 150, 150);
+            g.FillRectangle(Brushes.Green, rect1); //綠色矩形區塊 固定 畫綠色
+
+            Rectangle rect2 = new Rectangle(120, 120, 150, 150);
+            g.FillRectangle(Brushes.Red, rect2); //紅色矩形區塊 依滑鼠位置變化 畫紅色
+
+            Rectangle union = Rectangle.Union(rect1, rect2); //聯集區域
+            g.DrawRectangle(Pens.Black, union);                   //聯集 畫 黑色框
+
+            Rectangle intersect = Rectangle.Intersect(rect1, rect2); //交集區域
+            g.FillRectangle(Brushes.Yellow, intersect);    //交集 畫黃色
         }
 
         private void button37_Click(object sender, EventArgs e)
@@ -2009,109 +2081,6 @@ namespace vcs_Draw1
             Point center = new Point(100, 100);
             FillStar(g, center, radius, Color.Red);
             pictureBox1.Image = bitmap1;
-        }
-
-        private void button35_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button36_Click(object sender, EventArgs e)
-        {
-            //Rectangle的交集與聯集
-
-            Graphics g = pictureBox1.CreateGraphics();
-
-            Rectangle rect1 = new Rectangle(30, 30, 150, 150);
-            g.FillRectangle(Brushes.Green, rect1); //綠色矩形區塊 固定 畫綠色
-
-            Rectangle rect2 = new Rectangle(120, 120, 150, 150);
-            g.FillRectangle(Brushes.Red, rect2); //紅色矩形區塊 依滑鼠位置變化 畫紅色
-
-            Rectangle union = Rectangle.Union(rect1, rect2); //聯集區域
-            g.DrawRectangle(Pens.Black, union);                   //聯集 畫 黑色框
-
-            Rectangle intersect = Rectangle.Intersect(rect1, rect2); //交集區域
-            g.FillRectangle(Brushes.Yellow, intersect);    //交集 畫黃色
-        }
-
-        //在線的上下畫字
-        private void button32_Click(object sender, EventArgs e)
-        {
-            // Draw some text along a line segment.
-            Graphics g = pictureBox1.CreateGraphics();
-            g.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAliasGridFit;
-            g.SmoothingMode = SmoothingMode.AntiAlias;
-            g.InterpolationMode = InterpolationMode.High;
-
-            // Draw some text along some line segments.
-            DrawOnSegment(g, new PointF(20, 20), new PointF(330, 150), "This is some text above a line segment.", true);
-            DrawOnSegment(g, new PointF(20, 20), new PointF(330, 150), "This is some text below a line segment.", false);
-
-            DrawOnSegment(g, new PointF(330, 200), new PointF(20, 120), "This is some text above a line segment.", true);
-            DrawOnSegment(g, new PointF(330, 200), new PointF(20, 120), "This is some text below a line segment.", false);
-        }
-
-        // Draw some text.
-        private void DrawOnSegment(Graphics g, PointF start_point, PointF end_point, string txt, bool text_above_segment)
-        {
-            int start_ch = 0;
-
-            g.DrawLine(Pens.Green, start_point, end_point);
-            DrawTextOnSegment(g, Brushes.Blue, this.Font, txt, ref start_ch, ref start_point, end_point, text_above_segment);
-        }
-
-        // Draw some text along a line segment.
-        // Leave char_num pointing to the next character to be drawn.
-        // Leave start_point holding the last point used.
-        private void DrawTextOnSegment(Graphics gr, Brush brush, Font font, string txt, ref int first_ch, ref PointF start_point, PointF end_point, bool text_above_segment)
-        {
-            float dx = end_point.X - start_point.X;
-            float dy = end_point.Y - start_point.Y;
-            float dist = (float)Math.Sqrt(dx * dx + dy * dy);
-            dx /= dist;
-            dy /= dist;
-
-            // See how many characters will fit.
-            int last_ch = first_ch;
-            while (last_ch < txt.Length)
-            {
-                string test_string = txt.Substring(first_ch, last_ch - first_ch + 1);
-                if (gr.MeasureString(test_string, font).Width > dist)
-                {
-                    // This is one too many characters.
-                    last_ch--;
-                    break;
-                }
-                last_ch++;
-            }
-            if (last_ch < first_ch) return;
-            if (last_ch >= txt.Length) last_ch = txt.Length - 1;
-            string chars_that_fit = txt.Substring(first_ch, last_ch - first_ch + 1);
-
-            // Rotate and translate to position the characters.
-            GraphicsState state = gr.Save();
-            if (text_above_segment)
-            {
-                gr.TranslateTransform(0, -gr.MeasureString(chars_that_fit, font).Height, MatrixOrder.Append);
-            }
-            float angle = (float)(180 * Math.Atan2(dy, dx) / Math.PI);
-            gr.RotateTransform(angle, MatrixOrder.Append);
-            gr.TranslateTransform(start_point.X, start_point.Y, MatrixOrder.Append);
-
-            // Draw the characters that fit.
-            gr.DrawString(chars_that_fit, font, brush, 0, 0);
-
-            // Restore the saved state.
-            gr.Restore(state);
-
-            // Update first_ch and start_point.
-            first_ch = last_ch + 1;
-            float text_width = gr.MeasureString(chars_that_fit, font).Width;
-            start_point = new PointF(start_point.X + dx * text_width, start_point.Y + dy * text_width);
-        }
-
-        private void button33_Click(object sender, EventArgs e)
-        {
         }
 
         //基本畫圖1
@@ -2724,6 +2693,45 @@ namespace vcs_Draw1
             }
         }
 
+        private void bt_reset_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_save_Click(object sender, EventArgs e)
+        {
+            save_image_to_drive();
+        }
+
+        void save_image_to_drive()
+        {
+            if (bitmap1 != null)
+            {
+                string filename = Application.StartupPath + "\\IMG_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                String filename1 = filename + ".jpg";
+                String filename2 = filename + ".bmp";
+                String filename3 = filename + ".png";
+
+                try
+                {
+                    bitmap1.Save(@filename1, ImageFormat.Jpeg);
+                    bitmap1.Save(@filename2, ImageFormat.Bmp);
+                    bitmap1.Save(@filename3, ImageFormat.Png);
+
+                    richTextBox1.Text += "存檔成功\n";
+                    richTextBox1.Text += "已存檔 : " + filename1 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename3 + "\n";
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
+            }
+            else
+                richTextBox1.Text += "無圖可存\n";
+        }
+
         int flag_mouse_down = 0;    //給erase用
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
@@ -2744,25 +2752,6 @@ namespace vcs_Draw1
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             flag_mouse_down = 0;
-        }
-
-        private void button34_Click(object sender, EventArgs e)
-        {
-            //在Button上畫圖
-            richTextBox1.Text += "在Button上畫圖, 要改buttonXX_Paint()\n";
-        }
-
-        private void button34_Paint(object sender, PaintEventArgs e)
-        {
-            int W = button34.Width;
-            int H = button34.Height;
-            //e.Graphics.FillRectangle(new SolidBrush(Color.White), x_st, y_st, W, H);
-            e.Graphics.FillRectangle(new SolidBrush(Color.Pink), 0, 0, W, H);
-
-            Pen p = new Pen(Color.Red, 6);
-            e.Graphics.DrawRectangle(p, 0, 0, W - 0, H - 0);
-
-            e.Graphics.DrawString("在Button上畫圖", new Font("標楷體", 11), new SolidBrush(Color.Blue), 5, 15);
         }
 
         private void button49_Click(object sender, EventArgs e)
@@ -3018,3 +3007,4 @@ namespace vcs_Draw1
         }
     }
 }
+

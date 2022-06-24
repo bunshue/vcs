@@ -353,6 +353,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(190, 40);
             this.button14.TabIndex = 25;
+            this.button14.Text = "月亮代表我的心1";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -363,6 +364,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(190, 40);
             this.button15.TabIndex = 26;
+            this.button15.Text = "月亮代表我的心2";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 

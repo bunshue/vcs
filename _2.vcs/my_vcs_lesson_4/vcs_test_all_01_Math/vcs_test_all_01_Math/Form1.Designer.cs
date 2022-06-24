@@ -203,11 +203,12 @@
             // 
             // button10
             // 
-            this.button10.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button10.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button10.Location = new System.Drawing.Point(183, 4);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(155, 40);
             this.button10.TabIndex = 9;
+            this.button10.Text = "求出三點之間的夾角";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
