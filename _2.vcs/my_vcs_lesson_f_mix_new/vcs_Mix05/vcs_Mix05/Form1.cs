@@ -20,7 +20,6 @@ using System.Drawing.Text;  //for InstalledFontCollection
 using System.Runtime.InteropServices;
 using Microsoft.Win32;  //for RegistryKey
 
-
 namespace vcs_Mix05
 {
     public partial class Form1 : Form
@@ -134,30 +133,9 @@ namespace vcs_Mix05
             shell.Close();
         }
 
-        List<double[]> pts = new List<double[]>();    //二維List for double array
-        int g = 10;
-
-        //二維List for double
         private void button1_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            double t = 0;
-
-            for (t = 0; t <= 5.0; t += 0.1)
-            {
-                //richTextBox1.Text += "t = " + t.ToString() + "\n";
-                pts.Add(new double[] { t, g * t * t / 2, g * t * t * t / 2, Math.Sqrt(g * t * t / 2) });
-            }
-
-            int len = pts.Count;
-
-            richTextBox1.Text += "共有 " + len.ToString() + " 個項目, 分別是:\n";
-            int i;
-            for (i = 0; i < len; i++)
-            {
-                richTextBox1.Text += pts[i][0].ToString("n3") + "\t" + pts[i][1].ToString("n3") + "\t" + pts[i][2].ToString("n3") + "\t" + pts[i][3].ToString("n3") + "\n";
-            }
         }
 
         //多筆資料比較
@@ -166,8 +144,6 @@ namespace vcs_Mix05
         {
             show_button_text(sender);
             //int N = 10;
-
-            pts.Clear();
 
             //一維陣列用法：
             double[] a = new double[CNT];
@@ -342,16 +318,6 @@ namespace vcs_Mix05
         private void button4_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //獲取屏幕的分辨率
-            //獲取屏幕的分辨率，也就是顯示器屏幕的大小。
-            int W = SystemInformation.PrimaryMonitorSize.Width;
-            int H = SystemInformation.PrimaryMonitorSize.Height;
-
-            richTextBox1.Text += "W = " + W.ToString() + " H = " + H.ToString() + "\n";
-
-            richTextBox1.Text += "取得桌面大小\n";
-            richTextBox1.Text += "桌面寬度 : \t" + Screen.PrimaryScreen.WorkingArea.Width.ToString() + "\n";
-            richTextBox1.Text += "桌面高度 : \t" + Screen.PrimaryScreen.WorkingArea.Height.ToString() + "\n";
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -707,24 +673,6 @@ namespace vcs_Mix05
         private void button15_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //易經 六十四卦
-            char[] word = new char[64];
-            word = GetChars();
-            int i;
-            for (i = 0; i < 64; i++)
-            {
-                richTextBox1.Text += word[i].ToString() + "    ";
-            }
-        }
-
-        public static char[] GetChars()
-        {
-            List<char> chars = new List<char>();
-            for (int i = 19904; i <= 19967; i++)
-            {
-                chars.Add((char)i);
-            }
-            return chars.ToArray();
         }
 
         private void button16_Click(object sender, EventArgs e)

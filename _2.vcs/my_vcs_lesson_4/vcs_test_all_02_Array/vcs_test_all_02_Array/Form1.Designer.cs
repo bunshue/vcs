@@ -70,6 +70,13 @@
             this.tb_matrix = new System.Windows.Forms.TextBox();
             this.rtb_matrix = new System.Windows.Forms.RichTextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ht13 = new System.Windows.Forms.Button();
+            this.ht12 = new System.Windows.Forms.Button();
+            this.ht11 = new System.Windows.Forms.Button();
+            this.ht10 = new System.Windows.Forms.Button();
+            this.ht9 = new System.Windows.Forms.Button();
+            this.ht8 = new System.Windows.Forms.Button();
+            this.ht7 = new System.Windows.Forms.Button();
             this.ht6 = new System.Windows.Forms.Button();
             this.ht5 = new System.Windows.Forms.Button();
             this.ht4 = new System.Windows.Forms.Button();
@@ -133,7 +140,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 42);
             this.button1.TabIndex = 0;
-            this.button1.Text = "xxx";
+            this.button1.Text = "獲取二維陣列的長度";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -148,12 +155,12 @@
             // 
             // button2
             // 
-            this.button2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button2.Location = new System.Drawing.Point(12, 93);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 42);
             this.button2.TabIndex = 2;
-            this.button2.Text = "xxx";
+            this.button2.Text = "二維陣列所有元素總和";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -562,6 +569,13 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.ht13);
+            this.groupBox1.Controls.Add(this.ht12);
+            this.groupBox1.Controls.Add(this.ht11);
+            this.groupBox1.Controls.Add(this.ht10);
+            this.groupBox1.Controls.Add(this.ht9);
+            this.groupBox1.Controls.Add(this.ht8);
+            this.groupBox1.Controls.Add(this.ht7);
             this.groupBox1.Controls.Add(this.ht6);
             this.groupBox1.Controls.Add(this.ht5);
             this.groupBox1.Controls.Add(this.ht4);
@@ -571,17 +585,88 @@
             this.groupBox1.Controls.Add(this.ht0);
             this.groupBox1.Location = new System.Drawing.Point(890, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 337);
+            this.groupBox1.Size = new System.Drawing.Size(312, 337);
             this.groupBox1.TabIndex = 62;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "HashTable";
+            // 
+            // ht13
+            // 
+            this.ht13.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.ht13.Location = new System.Drawing.Point(164, 297);
+            this.ht13.Name = "ht13";
+            this.ht13.Size = new System.Drawing.Size(140, 40);
+            this.ht13.TabIndex = 76;
+            this.ht13.UseVisualStyleBackColor = true;
+            this.ht13.Click += new System.EventHandler(this.ht13_Click);
+            // 
+            // ht12
+            // 
+            this.ht12.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.ht12.Location = new System.Drawing.Point(164, 251);
+            this.ht12.Name = "ht12";
+            this.ht12.Size = new System.Drawing.Size(140, 40);
+            this.ht12.TabIndex = 75;
+            this.ht12.UseVisualStyleBackColor = true;
+            this.ht12.Click += new System.EventHandler(this.ht12_Click);
+            // 
+            // ht11
+            // 
+            this.ht11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.ht11.Location = new System.Drawing.Point(164, 205);
+            this.ht11.Name = "ht11";
+            this.ht11.Size = new System.Drawing.Size(140, 40);
+            this.ht11.TabIndex = 74;
+            this.ht11.UseVisualStyleBackColor = true;
+            this.ht11.Click += new System.EventHandler(this.ht11_Click);
+            // 
+            // ht10
+            // 
+            this.ht10.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.ht10.Location = new System.Drawing.Point(164, 159);
+            this.ht10.Name = "ht10";
+            this.ht10.Size = new System.Drawing.Size(140, 40);
+            this.ht10.TabIndex = 73;
+            this.ht10.UseVisualStyleBackColor = true;
+            this.ht10.Click += new System.EventHandler(this.ht10_Click);
+            // 
+            // ht9
+            // 
+            this.ht9.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.ht9.Location = new System.Drawing.Point(164, 113);
+            this.ht9.Name = "ht9";
+            this.ht9.Size = new System.Drawing.Size(140, 40);
+            this.ht9.TabIndex = 72;
+            this.ht9.UseVisualStyleBackColor = true;
+            this.ht9.Click += new System.EventHandler(this.ht9_Click);
+            // 
+            // ht8
+            // 
+            this.ht8.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.ht8.Location = new System.Drawing.Point(164, 67);
+            this.ht8.Name = "ht8";
+            this.ht8.Size = new System.Drawing.Size(140, 40);
+            this.ht8.TabIndex = 71;
+            this.ht8.UseVisualStyleBackColor = true;
+            this.ht8.Click += new System.EventHandler(this.ht8_Click);
+            // 
+            // ht7
+            // 
+            this.ht7.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.ht7.Location = new System.Drawing.Point(164, 21);
+            this.ht7.Name = "ht7";
+            this.ht7.Size = new System.Drawing.Size(140, 40);
+            this.ht7.TabIndex = 70;
+            this.ht7.Text = "Hashtable 物件";
+            this.ht7.UseVisualStyleBackColor = true;
+            this.ht7.Click += new System.EventHandler(this.ht7_Click);
             // 
             // ht6
             // 
             this.ht6.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.ht6.Location = new System.Drawing.Point(18, 297);
             this.ht6.Name = "ht6";
-            this.ht6.Size = new System.Drawing.Size(170, 40);
+            this.ht6.Size = new System.Drawing.Size(140, 40);
             this.ht6.TabIndex = 69;
             this.ht6.Text = "獲取鍵的集合";
             this.ht6.UseVisualStyleBackColor = true;
@@ -592,7 +677,7 @@
             this.ht5.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.ht5.Location = new System.Drawing.Point(18, 251);
             this.ht5.Name = "ht5";
-            this.ht5.Size = new System.Drawing.Size(170, 40);
+            this.ht5.Size = new System.Drawing.Size(140, 40);
             this.ht5.TabIndex = 68;
             this.ht5.Text = "sort";
             this.ht5.UseVisualStyleBackColor = true;
@@ -603,7 +688,7 @@
             this.ht4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.ht4.Location = new System.Drawing.Point(18, 205);
             this.ht4.Name = "ht4";
-            this.ht4.Size = new System.Drawing.Size(170, 40);
+            this.ht4.Size = new System.Drawing.Size(140, 40);
             this.ht4.TabIndex = 67;
             this.ht4.Text = "clear";
             this.ht4.UseVisualStyleBackColor = true;
@@ -614,7 +699,7 @@
             this.ht3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.ht3.Location = new System.Drawing.Point(18, 159);
             this.ht3.Name = "ht3";
-            this.ht3.Size = new System.Drawing.Size(170, 40);
+            this.ht3.Size = new System.Drawing.Size(140, 40);
             this.ht3.TabIndex = 66;
             this.ht3.Text = "modify";
             this.ht3.UseVisualStyleBackColor = true;
@@ -625,7 +710,7 @@
             this.ht2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.ht2.Location = new System.Drawing.Point(18, 113);
             this.ht2.Name = "ht2";
-            this.ht2.Size = new System.Drawing.Size(170, 40);
+            this.ht2.Size = new System.Drawing.Size(140, 40);
             this.ht2.TabIndex = 65;
             this.ht2.Text = "remove";
             this.ht2.UseVisualStyleBackColor = true;
@@ -636,7 +721,7 @@
             this.ht1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.ht1.Location = new System.Drawing.Point(18, 67);
             this.ht1.Name = "ht1";
-            this.ht1.Size = new System.Drawing.Size(170, 40);
+            this.ht1.Size = new System.Drawing.Size(140, 40);
             this.ht1.TabIndex = 64;
             this.ht1.Text = "add";
             this.ht1.UseVisualStyleBackColor = true;
@@ -647,7 +732,7 @@
             this.ht0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.ht0.Location = new System.Drawing.Point(18, 21);
             this.ht0.Name = "ht0";
-            this.ht0.Size = new System.Drawing.Size(170, 40);
+            this.ht0.Size = new System.Drawing.Size(140, 40);
             this.ht0.TabIndex = 63;
             this.ht0.Text = "show hashtable";
             this.ht0.UseVisualStyleBackColor = true;
@@ -688,11 +773,12 @@
             // 
             // button39
             // 
-            this.button39.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button39.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button39.Location = new System.Drawing.Point(646, 156);
             this.button39.Name = "button39";
             this.button39.Size = new System.Drawing.Size(200, 42);
             this.button39.TabIndex = 66;
+            this.button39.Text = "使用 GetBytes() 方法將字串轉換為位元組陣列";
             this.button39.UseVisualStyleBackColor = true;
             this.button39.Click += new System.EventHandler(this.button39_Click);
             // 
@@ -1224,6 +1310,13 @@
         private System.Windows.Forms.TextBox numText6c;
         private System.Windows.Forms.TextBox numText4c;
         private System.Windows.Forms.TextBox numText5c;
+        private System.Windows.Forms.Button ht13;
+        private System.Windows.Forms.Button ht12;
+        private System.Windows.Forms.Button ht11;
+        private System.Windows.Forms.Button ht10;
+        private System.Windows.Forms.Button ht9;
+        private System.Windows.Forms.Button ht8;
+        private System.Windows.Forms.Button ht7;
     }
 }
 

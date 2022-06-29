@@ -90,7 +90,7 @@ namespace vcs_test_all_02_Array
             button44.Location = new Point(x_st + dx * 3, y_st + dy * 8);
             button45.Location = new Point(x_st + dx * 3, y_st + dy * 9);
 
-            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 6 - 100, y_st + dy * 0);
             richTextBox1.Size = new Size(800, 900);
 
             groupBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
@@ -100,7 +100,8 @@ namespace vcs_test_all_02_Array
 
             x_st = 15;
             y_st = 15;
-            dy = 45;
+            dx = 140 + 5;
+            dy = 40 + 5;
 
             ht0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             ht1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -109,6 +110,15 @@ namespace vcs_test_all_02_Array
             ht4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             ht5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             ht6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+
+            ht7.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            ht8.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            ht9.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            ht10.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            ht11.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            ht12.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            ht13.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -203,15 +213,37 @@ namespace vcs_test_all_02_Array
             richTextBox1.Text += "三維陣列內容\n";
             PrintArray(gray2);
             */
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //獲取二維陣列的長度
+
+            int[,] array2D;
+            //使用 C# 中的 Array.GetLength() 函式獲取 2D 陣列的寬度和高度
+            //使用 C# 中的 Array.GetUpperBound() 函式獲取二維陣列的寬度和高度
+            array2D = new int[5, 10];
+            Console.WriteLine(array2D.GetLength(0));	//5
+            Console.WriteLine(array2D.GetLength(1));	//10
+
+            //使用 C# 中的 Array.GetUpperBound() 函式獲取二維陣列的寬度和高度
+            array2D = new int[5, 10];
+            Console.WriteLine(array2D.GetUpperBound(0) + 1);	//5
+            Console.WriteLine(array2D.GetUpperBound(1) + 1);	//10
+
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //計算二維陣列所有元素總和
+            int[,] array = new int[,] { { 0, 11, 3, 45, 17 }, { 23, 41, 5, 8, 10 }, { 9, 21, 16, 84, 51 } };
+
+            int Total = 0;
+            foreach (int element in array)
+            {
+                Total += element;
+            }
+            richTextBox1.Text += "此二維陣列的各個元素總和為: " + Total.ToString() + "\n";
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -1694,7 +1726,15 @@ namespace vcs_test_all_02_Array
 
         private void button39_Click(object sender, EventArgs e)
         {
+            //使用 GetBytes() 方法將字串轉換為位元組陣列
 
+            string myString = "This is a string.";
+            byte[] byteArray = Encoding.ASCII.GetBytes(myString);
+            richTextBox1.Text += "The Byte Array is:\n";
+            foreach (byte bytes in byteArray)
+            {
+                richTextBox1.Text += bytes.ToString() + "\n";
+            }
         }
 
         private void button40_Click(object sender, EventArgs e)
@@ -1921,6 +1961,60 @@ namespace vcs_test_all_02_Array
                 richTextBox1.Text += "Key : " + k + "\tValue : " + HT[k] + "\n";
             }
         }
+
+        private void ht7_Click(object sender, EventArgs e)
+        {
+            //Hashtable 物件
+            richTextBox1.Text += "建立一個Hashtable\n";
+
+            Hashtable openWith = new Hashtable();
+
+            richTextBox1.Text += "給Hashtable賦值, key是唯一, value不唯一\n";
+            //            key     value
+            openWith.Add("txt", "notepad.exe");
+            openWith.Add("bmp", "paint.exe");
+            openWith.Add("dib", "paint.exe");
+            openWith.Add("rtf", "wordpad.exe");
+
+            // When you use foreach to enumerate hash table elements,
+            // the elements are retrieved as DictionaryEntry objects.
+            foreach (DictionaryEntry var in openWith)
+            {
+                richTextBox1.Text += var.Key + "\t" + var.Value + "\n";
+            }
+
+        }
+
+        private void ht8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ht9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ht10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ht11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ht12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void ht13_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
         //Hashtable 測試 SP
 

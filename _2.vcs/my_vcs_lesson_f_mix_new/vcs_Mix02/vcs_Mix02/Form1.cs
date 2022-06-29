@@ -272,16 +272,6 @@ namespace vcs_Mix02
         private void button7_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //計算二維陣列所有元素總和
-            int[,] array = new int[,] { { 0, 11, 3, 45, 17 }, { 23, 41, 5, 8, 10 }, { 9, 21, 16, 84, 51 } };
-
-            int Total = 0;
-            foreach (int element in array)
-            {
-                Total += element;
-            }
-            richTextBox1.Text += "此二維陣列的各個元素總和為: " + Total.ToString() + "\n";
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -326,6 +316,7 @@ namespace vcs_Mix02
         private void button10_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
             //主線程中啟動一個支線程,執行doSomething這樣的一個方法。
             Thread thread = new Thread(new ThreadStart(ThreadRun));
             thread.IsBackground = true;//這樣能隨主程序一起結束
@@ -456,23 +447,6 @@ namespace vcs_Mix02
         private void button14_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            richTextBox1.Text += "建立一個Hashtable\n";
-
-            Hashtable openWith = new Hashtable();
-
-            richTextBox1.Text += "給Hashtable賦值, key是唯一, value不唯一\n";
-            //            key     value
-            openWith.Add("txt", "notepad.exe");
-            openWith.Add("bmp", "paint.exe");
-            openWith.Add("dib", "paint.exe");
-            openWith.Add("rtf", "wordpad.exe");
-
-            // When you use foreach to enumerate hash table elements,
-            // the elements are retrieved as DictionaryEntry objects.
-            foreach (DictionaryEntry var in openWith)
-            {
-                richTextBox1.Text += var.Key + "\t" + var.Value + "\n";
-            }
         }
         
         private void button15_Click(object sender, EventArgs e)
@@ -488,40 +462,17 @@ namespace vcs_Mix02
         private void button17_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //在 C# 中獲取 2D 陣列的長度
-
-            int[,] array2D;
-            //使用 C# 中的 Array.GetLength() 函式獲取 2D 陣列的寬度和高度
-            //使用 C# 中的 Array.GetUpperBound() 函式獲取二維陣列的寬度和高度
-            array2D = new int[5, 10];
-            Console.WriteLine(array2D.GetLength(0));	//5
-            Console.WriteLine(array2D.GetLength(1));	//10
-
-            //使用 C# 中的 Array.GetUpperBound() 函式獲取二維陣列的寬度和高度
-            array2D = new int[5, 10];
-            Console.WriteLine(array2D.GetUpperBound(0) + 1);	//5
-            Console.WriteLine(array2D.GetUpperBound(1) + 1);	//10
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //使用 GetBytes() 方法將字串轉換為位元組陣列
-
-            string myString = "This is a string.";
-            byte[] byteArray = Encoding.ASCII.GetBytes(myString);
-            richTextBox1.Text += "The Byte Array is:\n";
-            foreach (byte bytes in byteArray)
-            {
-                richTextBox1.Text += bytes.ToString() + "\n";
-            }
         }
 
         private void button19_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
             richTextBox1.Text += "目前應用程式路徑: \t" + Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location) + "\n";
-
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -774,35 +725,6 @@ namespace vcs_Mix02
         private void button26_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            int i;
-            int j;
-            List<string[]> fileNameList = new List<string[]>();
-
-            richTextBox1.Text += "len = " + fileNameList.Count.ToString() + "\n";
-            for (i = 0; i < 10; i++)
-            {
-                fileNameList.Add(new string[] { i.ToString(), "aaaaaaa", "bbbbb", "cccccc" });
-            }
-            richTextBox1.Text += "len = " + fileNameList.Count.ToString() + "\n";
-
-            for (i = 0; i < fileNameList.Count; i++)
-            {
-                richTextBox1.Text += "i = " + i.ToString() + "\t";
-                for (j = 0; j < 4; j++)
-                {
-                    richTextBox1.Text += fileNameList[i][j] + "\t";
-                }
-                richTextBox1.Text += "\n";
-
-            }
-
-            foreach (var fileName in fileNameList)
-            {
-                string imgURL = fileName[0];
-                richTextBox1.Text += imgURL + "\n";
-            }
-
         }
 
         private void button27_Click(object sender, EventArgs e)

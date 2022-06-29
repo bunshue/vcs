@@ -23,6 +23,37 @@ namespace vcs_List1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 660;
+            y_st = 10;
+            dx = 170 + 10;
+            dy = 40 + 10;
+
+            button15.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button16.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button17.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button18.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button19.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button20.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button21.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button22.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button23.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button24.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button25.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            button26.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            button27.Location = new Point(x_st + dx * 0, y_st + dy * 12);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 13);
+
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
@@ -333,7 +364,6 @@ namespace vcs_List1
 
         private void button3_Click(object sender, EventArgs e)
         {
-
             int num = 10;
             Random rr = new Random();
 
@@ -510,6 +540,99 @@ namespace vcs_List1
                 //Console.WriteLine($"{c.ID},{c.Value1}");
                 richTextBox1.Text += "ID : " + c.ID.ToString() + "\tValue : " + c.Value1.ToString() + "\n";
             });
+        }
+
+        //二維List for double
+        private void button22_Click(object sender, EventArgs e)
+        {
+            List<double[]> pts = new List<double[]>();    //二維List for double array
+            int g = 10;
+
+            double t = 0;
+
+            for (t = 0; t <= 5.0; t += 0.1)
+            {
+                //richTextBox1.Text += "t = " + t.ToString() + "\n";
+                pts.Add(new double[] { t, g * t * t / 2, g * t * t * t / 2, Math.Sqrt(g * t * t / 2) });
+            }
+
+            int len = pts.Count;
+
+            richTextBox1.Text += "共有 " + len.ToString() + " 個項目, 分別是:\n";
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += pts[i][0].ToString("n3") + "\t" + pts[i][1].ToString("n3") + "\t" + pts[i][2].ToString("n3") + "\t" + pts[i][3].ToString("n3") + "\n";
+            }
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+            //List Char 易經 六十四卦
+            char[] word = new char[64];
+            word = GetChars();
+            int i;
+            for (i = 0; i < 64; i++)
+            {
+                richTextBox1.Text += word[i].ToString() + "    ";
+            }
+        }
+
+        public static char[] GetChars()
+        {
+            List<char> chars = new List<char>();
+            for (int i = 19904; i <= 19967; i++)
+            {
+                chars.Add((char)i);
+            }
+            return chars.ToArray();
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+            //List測試
+
+            int i;
+            int j;
+            List<string[]> fileNameList = new List<string[]>();
+
+            richTextBox1.Text += "len = " + fileNameList.Count.ToString() + "\n";
+            for (i = 0; i < 10; i++)
+            {
+                fileNameList.Add(new string[] { i.ToString(), "aaaaaaa", "bbbbb", "cccccc" });
+            }
+            richTextBox1.Text += "len = " + fileNameList.Count.ToString() + "\n";
+
+            for (i = 0; i < fileNameList.Count; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t";
+                for (j = 0; j < 4; j++)
+                {
+                    richTextBox1.Text += fileNameList[i][j] + "\t";
+                }
+                richTextBox1.Text += "\n";
+            }
+
+            foreach (var fileName in fileNameList)
+            {
+                string imgURL = fileName[0];
+                richTextBox1.Text += imgURL + "\n";
+            }
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -1,96 +1,9 @@
 
 
-using System.Net;
-using System.IO;
-using System.Drawing.Imaging;
-using System.Drawing.Drawing2D;
-using System.Reflection;    //for Assembly
-using System.Security.Cryptography; //for HashAlgorithm
-using System.Diagnostics;   //for Process
-using System.Threading;
-using System.Text.RegularExpressions;
-using System.Runtime.InteropServices;
-using System.Collections;   //for Stack
-
-
-//參考/加入參考 /COM/Microsoft Shell Controls and Automation
-using Shell32;  //for Shell
-
-
-
-        [DllImport("user32.dll")]
-        public static extern bool GetCursorPos(out POINT lpPoint);
-
-        [StructLayout(LayoutKind.Sequential)]
-        public struct POINT
-        {
-            public int X;
-            public int Y;
-            public POINT(int x, int y)
-            {
-                this.X = x;
-                this.Y = y;
-            }
-        }
-
-
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            POINT pt = new POINT();
-            GetCursorPos(out pt);
-            //label1.Text = "滑鼠位置 : (" + pt.X.ToString() + ", " + pt.Y.ToString() + ")";    same
-            label1.Text = "滑鼠位置 : (" + string.Format("X:{0}, Y:{1}", pt.X, pt.Y) + ")";
-        }
-
-
-
 WebClient不能處理特定於任何協議的任何特性，例如Cookie等。如果需要使用這些特性，需要使用.net中的HttpWebRequest類。
 
 
 The Sacred Geometry of the Yin Yang
-
-
-
-
-C# 隊列（Queue）
-
-隊列（Queue）代表了一個先進先出的對象集合。
-
-namespace CollectionsApplication
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            Queue q = new Queue();
-
-            q.Enqueue('A');
-            q.Enqueue('M');
-            q.Enqueue('G');
-            q.Enqueue('W');
-
-            Console.WriteLine("Current queue: ");
-            foreach (char c in q)
-                Console.Write(c + " ");
-            Console.WriteLine();
-            q.Enqueue('V');
-            q.Enqueue('H');
-            Console.WriteLine("Current queue: ");
-            foreach (char c in q)
-                Console.Write(c + " ");
-            Console.WriteLine();
-            Console.WriteLine("Removing some values ");
-            char ch = (char)q.Dequeue();
-            Console.WriteLine("The removed value: {0}", ch);
-            ch = (char)q.Dequeue();
-            Console.WriteLine("The removed value: {0}", ch);
-            Console.ReadKey();
-        }
-    }
-}
-
-
 
 
 MyScreenSaver.rar
@@ -98,12 +11,6 @@ C#制作簡易屏保，
 http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/184114.html
 
 https://www.cnblogs.com/Scl891004X/p/6242805.html
-
-
-
-
-
-
 
 
 ProgressBar類是密封(sealed)的，不能再被繼承。
@@ -6250,5 +6157,19 @@ old 暫存一下
 
 
 
+
+
+
+
+            //獲取屏幕的分辨率
+            //獲取屏幕的分辨率，也就是顯示器屏幕的大小。
+            int W = SystemInformation.PrimaryMonitorSize.Width;
+            int H = SystemInformation.PrimaryMonitorSize.Height;
+
+            richTextBox1.Text += "W = " + W.ToString() + " H = " + H.ToString() + "\n";
+
+            richTextBox1.Text += "取得桌面大小\n";
+            richTextBox1.Text += "桌面寬度 : \t" + Screen.PrimaryScreen.WorkingArea.Width.ToString() + "\n";
+            richTextBox1.Text += "桌面高度 : \t" + Screen.PrimaryScreen.WorkingArea.Height.ToString() + "\n";
 
 
