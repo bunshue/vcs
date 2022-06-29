@@ -1405,6 +1405,9 @@ namespace vcs_FileManager
 
         private void button4_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "找低畫質影片, 不到720p的影片\n";
+
+
         }
 
 

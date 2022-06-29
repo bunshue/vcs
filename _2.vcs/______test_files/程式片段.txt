@@ -1,5 +1,61 @@
 
 
+The Sacred Geometry of the Yin Yang
+
+
+
+
+C# 隊列（Queue）
+
+隊列（Queue）代表了一個先進先出的對象集合。
+
+namespace CollectionsApplication
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Queue q = new Queue();
+
+            q.Enqueue('A');
+            q.Enqueue('M');
+            q.Enqueue('G');
+            q.Enqueue('W');
+
+            Console.WriteLine("Current queue: ");
+            foreach (char c in q)
+                Console.Write(c + " ");
+            Console.WriteLine();
+            q.Enqueue('V');
+            q.Enqueue('H');
+            Console.WriteLine("Current queue: ");
+            foreach (char c in q)
+                Console.Write(c + " ");
+            Console.WriteLine();
+            Console.WriteLine("Removing some values ");
+            char ch = (char)q.Dequeue();
+            Console.WriteLine("The removed value: {0}", ch);
+            ch = (char)q.Dequeue();
+            Console.WriteLine("The removed value: {0}", ch);
+            Console.ReadKey();
+        }
+    }
+}
+
+
+
+
+MyScreenSaver.rar
+C#制作簡易屏保，
+http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/184114.html
+
+https://www.cnblogs.com/Scl891004X/p/6242805.html
+
+
+
+
+
+
 
 
 ProgressBar類是密封(sealed)的，不能再被繼承。
@@ -4880,11 +4936,20 @@ Response.Write(String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo"));
 //--------------------------------------------------------------------------------------------------------------------------
 
 
+            Rectangle WorkArea = Screen.GetWorkingArea(this);//屏幕顯示區域
+            int W = WorkArea.Width; //屏幕寬度
+            int H = WorkArea.Height; //屏幕高度
+            richTextBox1.Text += "W = " + W.ToString() + "\n";
+            richTextBox1.Text += "H = " + H.ToString() + "\n";
+
 
 
 
 //--------------------------------------------------------------------------------------------------------------------------
 
+
+            Cursor.Hide();  //隱藏光標
+            Cursor.Show();  //顯示光標
 
 
 

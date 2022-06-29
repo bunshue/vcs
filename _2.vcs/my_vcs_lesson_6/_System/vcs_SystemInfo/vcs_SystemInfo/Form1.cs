@@ -7,13 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-
 using System.Management;
-
-
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Diagnostics.Eventing.Reader;
+using System.Runtime.InteropServices;
 
 namespace vcs_SystemInfo
 {
@@ -934,6 +932,230 @@ namespace vcs_SystemInfo
             List<CPUInfoEntity> r6 = GetCPUInfo();
             richTextBox1.Text += "len = " + r6.Count.ToString() + "\n";
             //richTextBox1.Text += "aaaaa = " + r2.OSName.ToString() + "\n";
+        }
+
+
+        //聲明一個結構體，它將做為GetSystemInfo的一個參數：
+        //Struct 收集系統信息
+        [StructLayout(LayoutKind.Sequential)]
+        public struct SYSTEM_INFO
+        {
+
+            public uint dwOemId;
+
+            public uint dwPageSize;
+
+            public uint lpMinimumApplicationAddress;
+
+            public uint lpMaximumApplicationAddress;
+
+            public uint dwActiveProcessorMask;
+
+            public uint dwNumberOfProcessors;
+
+            public uint dwProcessorType;
+
+            public uint dwAllocationGranularity;
+
+            public uint dwProcessorLevel;
+
+            public uint dwProcessorRevision;
+
+        }
+
+        //struct 收集內存情況
+
+        [StructLayout(LayoutKind.Sequential)]
+
+        public struct MEMORYSTATUS
+        {
+
+            public uint dwLength;
+
+            public uint dwMemoryLoad;
+
+            public uint dwTotalPhys;
+
+            public uint dwAvailPhys;
+
+            public uint dwTotalPageFile;
+
+            public uint dwAvailPageFile;
+
+            public uint dwTotalVirtual;
+
+            public uint dwAvailVirtual;
+
+        }
+
+        //private System.ComponentModel.Container components;
+
+        //private System.WinForms.MenuItem menuAbout;
+
+        //private System.WinForms.MainMenu mainMenu1;
+
+        //private System.WinForms.ListBox listBox1;
+
+        //private System.WinForms.Button button1;
+
+        //获取系统信息
+
+        [DllImport("kernel32")]
+        static extern void GetSystemInfo(ref SYSTEM_INFO pSI);
+
+        //获取内存信息
+
+        [DllImport("kernel32")]
+
+        static extern void GlobalMemoryStatus(ref MEMORYSTATUS buf);
+
+        //处理器类型
+
+        public const int PROCESSOR_INTEL_386 = 386;
+
+        public const int PROCESSOR_INTEL_486 = 486;
+
+        public const int PROCESSOR_INTEL_PENTIUM = 586;
+
+        public const int PROCESSOR_MIPS_R4000 = 4000;
+
+        public const int PROCESSOR_ALPHA_21064 = 21064;
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            /*
+            try
+            {
+
+                SYSTEM_INFO pSI = new SYSTEM_INFO();
+
+                GetSystemInfo(ref pSI);
+
+                //
+
+                //
+
+                //
+
+
+                //一旦你接收到返回的結構體，那麼就可以以返回的參數來執行操作了。
+
+
+
+                //e.g.listBox1.InsertItem (0,pSI.dwActiveProcessorMask.ToString());:
+
+                //
+
+                //
+
+                //
+
+            }
+
+            catch (Exception er)
+            {
+
+                MessageBox.Show(er.Message);
+
+            }
+            */
+
+            try
+            {
+
+                SYSTEM_INFO pSI = new SYSTEM_INFO();
+
+                GetSystemInfo(ref pSI);
+
+                string CPUType;
+
+                switch (pSI.dwProcessorType)
+                {
+
+                    case PROCESSOR_INTEL_386:
+
+                        CPUType = "Intel 386";
+
+                        break;
+
+                    case PROCESSOR_INTEL_486:
+
+                        CPUType = "Intel 486";
+
+                        break;
+
+                    case PROCESSOR_INTEL_PENTIUM:
+
+                        CPUType = "Intel Pentium";
+
+                        break;
+
+                    case PROCESSOR_MIPS_R4000:
+
+                        CPUType = "MIPS R4000";
+
+                        break;
+
+                    case PROCESSOR_ALPHA_21064:
+
+                        CPUType = "DEC Alpha 21064";
+
+                        break;
+
+                    default:
+                        CPUType = "(unknown)";
+                        break;
+
+                }
+
+                richTextBox1.Text += "Active Processor Mask :" + pSI.dwActiveProcessorMask.ToString() + "\n";
+
+                richTextBox1.Text += "Allocation Granularity :" + pSI.dwAllocationGranularity.ToString() + "\n";
+
+                richTextBox1.Text += "Number Of Processors :" + pSI.dwNumberOfProcessors.ToString() + "\n";
+
+                richTextBox1.Text += "OEM ID :" + pSI.dwOemId.ToString() + "\n";
+
+                richTextBox1.Text += "Page Size:" + pSI.dwPageSize.ToString() + "\n";
+
+                richTextBox1.Text += "Processor Level Value:" + pSI.dwProcessorLevel.ToString() + "\n";
+
+                richTextBox1.Text += "Processor Revision:" + pSI.dwProcessorRevision.ToString() + "\n";
+
+                richTextBox1.Text += "CPU type:" + CPUType + "\n";
+
+                richTextBox1.Text += "Maximum Application Address: " + pSI.lpMaximumApplicationAddress.ToString() + "\n";
+
+                richTextBox1.Text += "Minimum Application Address:" + pSI.lpMinimumApplicationAddress.ToString() + "\n";
+
+                /************** 从 GlobalMemoryStatus 获取返回值****************/
+
+                MEMORYSTATUS memSt = new MEMORYSTATUS();
+                GlobalMemoryStatus(ref memSt);
+
+                richTextBox1.Text += "Available Page File :" + (memSt.dwAvailPageFile / 1024).ToString() + "\n";
+
+                richTextBox1.Text += "Available Physical Memory : " + (memSt.dwAvailPhys / 1024).ToString() + "\n";
+
+                richTextBox1.Text += "Available Virtual Memory:" + (memSt.dwAvailVirtual / 1024).ToString() + "\n";
+
+                richTextBox1.Text += "Size of structur :" + memSt.dwLength.ToString() + "\n";
+
+                richTextBox1.Text += "Memory In Use :" + memSt.dwMemoryLoad.ToString() + "\n";
+
+                richTextBox1.Text += "Total Page Size :" + (memSt.dwTotalPageFile / 1024).ToString() + "\n";
+
+                richTextBox1.Text += "Total Physical Memory :" + (memSt.dwTotalPhys / 1024).ToString() + "\n";
+
+                richTextBox1.Text += "Total Virtual Memory :" + (memSt.dwTotalVirtual / 1024).ToString() + "\n";
+
+            }
+
+            catch (Exception er)
+            {
+
+                MessageBox.Show(er.Message);
+            }
         }
     }
 }
