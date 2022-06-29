@@ -23,6 +23,47 @@ namespace vcs_WebClient3
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 130 + 10;
+            dy = 50 + 10;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
 
         }
 
@@ -291,6 +332,117 @@ namespace vcs_WebClient3
             return (SecurityProtocolType)result;
         }
 
+        private void button10_Click(object sender, EventArgs e)
+        {
+            WebClient wc = new WebClient();
+            wc.BaseAddress = "http://www.juedui100.com/";   //設置根目錄
+            wc.Encoding = Encoding.UTF8;                    //設置按照何種編碼訪問，如果不加此行，獲取到的字符串中文將是亂碼
+            string str = wc.DownloadString("/");
+            Console.WriteLine(str);
+
+
+            //----------------------以下為OpenRead()以流的方式讀取----------------------
+            wc.Headers.Add("Accept", "image/gif, image/x-xbitmap, image/jpeg, image/pjpeg, application/x-shockwave-flash, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, */*");
+            wc.Headers.Add("Accept-Language", "zh-cn");
+            wc.Headers.Add("UA-CPU", "x86");
+            //wc.Headers.Add("Accept-Encoding","gzip, deflate");    //因為我們的程序無法進行gzip解碼所以如果這樣請求獲得的資源可能無法解碼。當然我們可以給程序加入gzip處理的模塊 那是題外話了。
+            wc.Headers.Add("User-Agent", "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.2; SV1; .NET CLR 1.1.4322; .NET CLR 2.0.50727)");
+            //Headers   用於添加添加請求的頭信息
+            System.IO.Stream objStream = wc.OpenRead("user/6974068.html");      //獲取訪問流
+            System.IO.StreamReader _read = new System.IO.StreamReader(objStream, System.Text.Encoding.UTF8);    //新建一個讀取流，用指定的編碼讀取，此處是utf-8
+            Console.Write(_read.ReadToEnd());   //輸出讀取到的字符串
+
+            //------------------------DownloadFile下載文件-------------------------------
+            wc.DownloadFile("http://www.baidu.com/img/shouye_b5486898c692066bd2cbaeda86d74448.gif", @"D:\123.gif");     //將遠程文件保存到本地
+            //------------------------DownloadFile下載到字節數組-------------------------------
+            byte[] bytes = wc.DownloadData("http://www.baidu.com/img/shouye_b5486898c692066bd2cbaeda86d74448.gif");
+            FileStream fs = new FileStream(@"E:\123.gif", FileMode.Create);
+            fs.Write(bytes, 0, bytes.Length);
+            fs.Flush();
+
+            WebHeaderCollection whc = wc.ResponseHeaders;   //獲取響應頭信息
+            foreach (string s in whc)
+            {
+                Console.WriteLine(s + ":" + whc.Get(s));
+            }
+
+            Console.WriteLine(wc.QueryString.Count);    //輸出0
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //異步下載頁面的例子：
+            WebClient wc = new WebClient();
+            wc.Encoding = Encoding.UTF8;                    //設置按照何種編碼訪問，如果不加此行，獲取到的字符串中文將是亂碼
+            wc.DownloadStringCompleted += new DownloadStringCompletedEventHandler(DownComplete);
+            wc.DownloadStringAsync(new Uri("http://www.juedui100.com/"));
+            Console.WriteLine("下載!");
+        }
+        public static void DownComplete(object sender, DownloadStringCompletedEventArgs e)
+        {
+            Console.WriteLine(sender.ToString());   //輸出 System.Net.WebClient   觸發事件的對象
+            Console.WriteLine(e.Result);    //輸出頁面源代碼
+        }
+
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+
+        //將數據下載到字節數組：
+            WebClient wc = new WebClient();
+            //直接下載
+            wc.DownloadFile("http://24.duote.com.cn/kugou.zip", @"ku.zip");
+            Console.WriteLine("下載完成了嗎？");   //下載完成後輸出 下載完成了嗎？
+
+            //將數據下載到字節數組
+            byte[] byteArr = wc.DownloadData("http://24.duote.com.cn/kugou.zip");
+            FileStream fs = new FileStream(@"D:\kugo.zip",FileMode.OpenOrCreate,FileAccess.ReadWrite);
+            fs.Write(byteArr,0,byteArr.Length);
+
+            //至於異步與下載雷同
+            
+            Console.WriteLine("現在完成了還是沒完成呢？");
+
+
+        }
+
+
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public class Protocols
@@ -302,5 +454,4 @@ namespace vcs_WebClient3
             protocol_Tls11 = (SecurityProtocolType)768,
             protocol_Tls12 = (SecurityProtocolType)3072;
     }
-
 }
