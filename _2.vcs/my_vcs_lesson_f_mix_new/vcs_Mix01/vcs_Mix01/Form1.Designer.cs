@@ -114,6 +114,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(170, 70);
             this.button25.TabIndex = 112;
+            this.button25.Text = "通过exe文件获得版本";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -311,6 +312,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(170, 70);
             this.button18.TabIndex = 94;
+            this.button18.Text = "Dictionary使用範例1";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -332,6 +334,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(170, 70);
             this.button16.TabIndex = 92;
+            this.button16.Text = "Dictionary使用範例2";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 

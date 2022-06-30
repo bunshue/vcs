@@ -11,7 +11,7 @@ using System.IO;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 using System.Reflection;    //for Assembly
-using System.Security.Cryptography; //for HashAlgorithm
+using System.Security.Cryptography; //for HashAlgorithm, MD5
 using System.Diagnostics;   //for Process
 using System.Threading;
 using System.Media;     //for SoundPlayer
@@ -340,8 +340,8 @@ namespace vcs_Mix01
             byte[] bs = UTF8Encoding.UTF8.GetBytes(strToEncrypt);
 
             // 創建md5 對象
-            System.Security.Cryptography.MD5 md5;
-            md5 = System.Security.Cryptography.MD5CryptoServiceProvider.Create();
+            MD5 md5;
+            md5 = MD5CryptoServiceProvider.Create();
 
             // 生成16位的二進制校驗碼
             byte[] hashBytes = md5.ComputeHash(bs);
@@ -892,6 +892,85 @@ namespace vcs_Mix01
         private void button16_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            /*
+            從一組鍵（Key）到一組值（Value）的對映，每一個新增項都是由一個值及其相關連的鍵組成  
+            任何鍵都必須是唯一的  
+            鍵不能為空引用null（VB中的Nothing），若值為引用型別，則可以為空值  
+            Key和Value可以是任何型別（string，int，custom class 等）
+            */
+
+            richTextBox1.Text += "建立Dictionary<K,V>，然後新增元素\n";
+            Dictionary<string, string> film = new Dictionary<string, string>();
+            film.Add("韋小寶", "鹿鼎記");
+            film.Add("陸小鳳", "陸小鳳傳奇");
+            film.Add("張無忌", "倚天屠龍記");
+            film.Add("楊過", "神鵰俠侶");
+            film.Add("令狐沖", "笑傲江湖");
+            richTextBox1.Text += "集合現在的元素個數為 " + film.Count.ToString() + "\n";
+
+            richTextBox1.Text += "移除一個\n";
+            film.Remove("楊過");
+            richTextBox1.Text += "集合現在的元素個數為 " + film.Count.ToString() + "\n";
+
+            richTextBox1.Text += "遍歷集合\n";
+            richTextBox1.Text += "所有武俠電影的主角及電影名\n";
+            richTextBox1.Text += "\t主角\t電影\n";
+            foreach (KeyValuePair<string, string> kvp in film)
+            {
+                richTextBox1.Text += "\t" + kvp.Key + "\t" + kvp.Value + "\n";
+            }
+
+            richTextBox1.Text += "檢查元素是否存在，如不存在，新增\n";
+            if (!film.ContainsKey("段譽"))
+            {
+                richTextBox1.Text += "該元素不存在，新增\n";
+                film.Add("段譽", "天龍八部");
+            }
+            else
+            {
+                richTextBox1.Text += "該元素已存在\n";
+            }
+
+            richTextBox1.Text += "獲取鍵的集合\n";
+            Dictionary<string, string>.KeyCollection keys = film.Keys;
+
+            richTextBox1.Text += "遍歷鍵的集合\n";
+            richTextBox1.Text += "受歡迎的武俠片中主角名\n";
+            foreach (string str in keys)
+            {
+                richTextBox1.Text += str + "\n";
+            }
+
+            Dictionary<string, string>.ValueCollection values = film.Values;
+            richTextBox1.Text += "遍歷值的集合\n";
+            richTextBox1.Text += "最受歡迎的武俠片\n";
+            foreach (string strfilm in values)
+            {
+                richTextBox1.Text += strfilm + "\n";
+            }
+
+            richTextBox1.Text += "遍歷元素的另一種方法\n";
+            richTextBox1.Text += "和雜湊表相同的遍歷元素方法\n";
+            foreach (string strname in film.Values)
+            {
+                richTextBox1.Text += strname + "\n";
+            }
+
+            richTextBox1.Text += "獲取鍵對應的值\n";
+            string myfilm = film["令狐沖"];
+            richTextBox1.Text += "主角為令狐沖的電影名 : " + myfilm + "\n";
+
+            richTextBox1.Text += "獲取鍵對應值的TryGetValue方法\n";
+            string objfilm = string.Empty;
+            if (film.TryGetValue("段譽", out objfilm))
+            {
+                richTextBox1.Text += "主角為段譽的電影是 : " + objfilm + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "沒有主角為段譽的電影\n";
+            }
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -915,31 +994,86 @@ namespace vcs_Mix01
 
             //GetUpperBound(0) 返回數組的第一維的索引上限，GetUpperBound(i)返回數組的i+1維的上限，GetUpperBound(Rank-1)返回數組的最後一維的上限，也就是列數-1
 
-            System.Console.WriteLine("Items.Rank =" + items.Rank);
-            System.Console.WriteLine("Items.GetUpperBound(0)=" + items.GetUpperBound(0));
+            Console.WriteLine("Items.Rank =" + items.Rank);
+            Console.WriteLine("Items.GetUpperBound(0)=" + items.GetUpperBound(0));
 
-            System.Console.WriteLine("Items.GetUpperBound(1)=" + items.GetUpperBound(1));
-            System.Console.WriteLine("Items.GetUpperBound(2)=" + items.GetUpperBound(items.Rank - 1));
+            Console.WriteLine("Items.GetUpperBound(1)=" + items.GetUpperBound(1));
+            Console.WriteLine("Items.GetUpperBound(2)=" + items.GetUpperBound(items.Rank - 1));
 
-            System.Console.WriteLine("Items[0, 0, 0]=" + items[0, 0, 0]);
-            System.Console.WriteLine("Items[0, 0, 1]=" + items[0, 0, 1]);
-            System.Console.WriteLine("Items[0, 0, 2]=" + items[0, 0, 2]);
-            System.Console.WriteLine("Items[0, 0, 3]=" + items[0, 0, 3]);
-            System.Console.WriteLine("Items[0, 0, 4]=" + items[0, 0, 4]);
+            Console.WriteLine("Items[0, 0, 0]=" + items[0, 0, 0]);
+            Console.WriteLine("Items[0, 0, 1]=" + items[0, 0, 1]);
+            Console.WriteLine("Items[0, 0, 2]=" + items[0, 0, 2]);
+            Console.WriteLine("Items[0, 0, 3]=" + items[0, 0, 3]);
+            Console.WriteLine("Items[0, 0, 4]=" + items[0, 0, 4]);
 
 
-            System.Console.WriteLine("Items[0, 1, 0]=" + items[0, 1, 0]);
-            System.Console.WriteLine("Items[0, 2, 0]=" + items[0, 1, 1]);
-            System.Console.WriteLine("Items[0, 2, 0]=" + items[0, 1, 2]);
-            System.Console.WriteLine("Items[0, 2, 0]=" + items[0, 1, 3]);
+            Console.WriteLine("Items[0, 1, 0]=" + items[0, 1, 0]);
+            Console.WriteLine("Items[0, 2, 0]=" + items[0, 1, 1]);
+            Console.WriteLine("Items[0, 2, 0]=" + items[0, 1, 2]);
+            Console.WriteLine("Items[0, 2, 0]=" + items[0, 1, 3]);
 
-            System.Console.WriteLine("Items[0, 2, 0]=" + items[0, 1, 4]);
-
+            Console.WriteLine("Items[0, 2, 0]=" + items[0, 1, 4]);
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //Dictionary使用範例1
+
+            //建立及初始化
+
+            Dictionary<string, int> myDictionary = new Dictionary<string, int>();
+
+            //新增元素
+
+            myDictionary.Add("C#", 0);
+            myDictionary.Add("C++", 1);
+            myDictionary.Add("C", 2);
+            myDictionary.Add("VB", 2);
+
+            //查詢元素By Key
+
+            if (myDictionary.ContainsKey("C#"))
+            {
+                Console.WriteLine("Key:{0},Value:{1}", "C#", myDictionary["C#"]);
+            }
+
+            //遍歷元素 By KeyValuePair
+
+            foreach (KeyValuePair<string, int> kvp in myDictionary)
+            {
+                Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
+            }
+
+            //僅遍歷鍵 By Keys 屬性
+
+            Dictionary<string, int>.KeyCollection keyCol = myDictionary.Keys;
+            foreach (string key in keyCol/*string key in myDictionary.Keys*/)
+            {
+                Console.WriteLine("Key = {0}", key);
+            }
+
+            //僅遍歷值By Valus屬性
+
+            Dictionary<string, int>.ValueCollection valueCol = myDictionary.Values;
+            foreach (int value in valueCol)
+            {
+                Console.WriteLine("Value = {0}", value);
+            }
+
+            //移除指定的鍵值By Remove方法
+
+            myDictionary.Remove("C#");
+            if (myDictionary.ContainsKey("C#"))
+            {
+                Console.WriteLine("Key:{0},Value:{1}", "C#", myDictionary["C#"]);
+            }
+            else
+            {
+                Console.WriteLine("不存在 Key : C#");
+            }  
+
+
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -1163,6 +1297,25 @@ namespace vcs_Mix01
         private void button25_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //通过exe文件获得版本
+
+            //string path = @"C:\Program Files (x86)\ArcGIS\Desktop10.8\bin\ArcMap.exe";
+            string path = @"vcs_Mix01.exe";
+
+            richTextBox1.Text += "版本 : " + GetVersion(path) + "\n";
+
+
+        }
+
+        public string GetVersion(string path)
+        {
+            string version = string.Empty;
+            FileVersionInfo file = FileVersionInfo.GetVersionInfo(path);
+            //版本号显示为“主版本号.次版本号.内部版本号.专用部件号”。
+            //version = String.Format("{0}.{1}.{2}.{3}", file.FileMajorPart, file.FileMinorPart, file.FileBuildPart, file.FilePrivatePart);
+            //使用文件版本信息
+            version = file.FileVersion;
+            return version;
         }
 
         int cnt = 0;
