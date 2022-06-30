@@ -201,6 +201,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(170, 70);
             this.button14.TabIndex = 104;
+            this.button14.Text = "模擬按下PrintScreen";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -341,6 +342,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(170, 70);
             this.button15.TabIndex = 91;
+            this.button15.Text = "模擬按下Alt + PrintScreen";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 

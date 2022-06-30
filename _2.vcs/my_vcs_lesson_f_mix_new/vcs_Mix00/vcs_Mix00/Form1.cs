@@ -541,7 +541,67 @@ namespace vcs_Mix00
         private void button6_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+
+            _serialNumber.Clear();
+            matchDriveLetterWithSerial();
+            richTextBox1.Text += "len = " + _serialNumber.Count.ToString() + "\n";
+
+            int len = _serialNumber.Count;
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += "取得序號 : " + _serialNumber[i] + "\n";
+
+            }
         }
+
+
+        //讀取U盤序列號
+
+
+        private List<string> _serialNumber = new List<string>();
+
+        /// <summary>
+        /// 調用這個函數將本機所有U盤序列號存儲到_serialNumber中
+        /// </summary>
+        private void matchDriveLetterWithSerial()
+        {
+            string[] diskArray;
+            string driveNumber;
+            var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_LogicalDiskToPartition");
+            foreach (ManagementObject dm in searcher.Get())
+            {
+                getValueInQuotes(dm["Dependent"].ToString());
+                diskArray = getValueInQuotes(dm["Antecedent"].ToString()).Split(',');
+                driveNumber = diskArray[0].Remove(0, 6).Trim();
+                var disks = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
+                foreach (ManagementObject disk in disks.Get())
+                {
+                    if (disk["Name"].ToString() == ("\\\\.\\PHYSICALDRIVE" + driveNumber) & disk["InterfaceType"].ToString() == "USB")
+                    {
+                        _serialNumber.Add(parseSerialFromDeviceID(disk["PNPDeviceID"].ToString()));
+                    }
+                }
+            }
+        }
+        private static string parseSerialFromDeviceID(string deviceId)
+        {
+            var splitDeviceId = deviceId.Split('\\');
+            var arrayLen = splitDeviceId.Length - 1;
+            var serialArray = splitDeviceId[arrayLen].Split('&');
+            var serial = serialArray[0];
+            return serial;
+        }
+
+        private static string getValueInQuotes(string inValue)
+        {
+            var posFoundStart = inValue.IndexOf("\"");
+            var posFoundEnd = inValue.IndexOf("\"", posFoundStart + 1);
+            var parsedValue = inValue.Substring(posFoundStart + 1, (posFoundEnd - posFoundStart) - 1);
+            return parsedValue;
+        }
+
 
         private void button7_Click(object sender, EventArgs e)
         {

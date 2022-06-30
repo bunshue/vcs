@@ -17,6 +17,7 @@ using System.Threading;
 using System.Media;     //for SoundPlayer
 using System.Web;   //for HttpUtility, 需改用.Net Framework4, 然後參考/加入參考/.Net/System.Web
 using System.Globalization; //for CultureInfo
+using System.Runtime.InteropServices;
 
 using System.Xml;
 using System.Xml.Linq;
@@ -848,14 +849,44 @@ namespace vcs_Mix01
         }
         //數字大寫顯示 SP
 
+
+
+        [DllImport("user32.dll")]
+        static extern void keybd_event
+        (
+            byte bVk,// 虛擬鍵值  
+            byte bScan,// 硬件掃描碼  
+            uint dwFlags,// 動作標識  
+            IntPtr dwExtraInfo// 與鍵盤動作關聯的輔加信息  
+        );
+
         private void button14_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //模擬按下PrintScreen
+
+            keybd_event((byte)0x2c, 0, 0x0, IntPtr.Zero);//down
+            Application.DoEvents();
+            keybd_event((byte)0x2c, 0, 0x2, IntPtr.Zero);//up
+            Application.DoEvents();
+
+
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //模擬按下Alt + PrintScreen
+
+            keybd_event((byte)Keys.Menu, 0, 0x0, IntPtr.Zero);
+            keybd_event((byte)0x2c, 0, 0x0, IntPtr.Zero);//down
+            Application.DoEvents();
+            Application.DoEvents();
+            keybd_event((byte)0x2c, 0, 0x2, IntPtr.Zero);//up
+            keybd_event((byte)Keys.Menu, 0, 0x2, IntPtr.Zero);
+            Application.DoEvents();
+            Application.DoEvents();
         }
 
         private void button16_Click(object sender, EventArgs e)

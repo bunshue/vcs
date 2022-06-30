@@ -29,10 +29,9 @@ namespace vcs_Big_Bitmap
             bitmap1 = new Bitmap(this.Width, this.Height);
             g = Graphics.FromImage(bitmap1);
             g.Clear(Color.Pink);
-            g.DrawRectangle(Pens.Red, 0, 0, this.Width-100, this.Height-100);
+            g.DrawRectangle(Pens.Red, 0, 0, this.Width - 100, this.Height - 100);
             this.BackgroundImage = bitmap1;
         }
-
 
         int aaa = 100;
         private void button1_Click(object sender, EventArgs e)

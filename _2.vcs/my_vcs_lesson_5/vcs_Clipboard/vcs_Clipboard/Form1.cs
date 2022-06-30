@@ -46,18 +46,6 @@ namespace vcs_Clipboard
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 4);
 
-            int offset = 70;
-            button15.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 5);
-            button16.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 6);
-            button17.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 7);
-            button18.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 8);
-            button19.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 9);
-            button20.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 10);
-            button21.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 11);
-            button22.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 12);
-            button26.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 13);
-            button27.Location = new Point(x_st + dx * 2 + offset, y_st + dy * 14);
-
             groupBox1.Location = new Point(12, 350);
             y_st = 18;
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -66,6 +54,24 @@ namespace vcs_Clipboard
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button10.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             button11.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+
+            x_st = 10;
+            y_st = 800;
+            dx = 140 + 10;
+            dy = 50 + 10;
+
+            button15.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button16.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button17.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button20.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button27.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button28.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button29.Location = new Point(x_st + dx * 3, y_st + dy * 2);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -603,6 +609,40 @@ namespace vcs_Clipboard
             //片資料放置到Clipboard中
             Clipboard.SetImage(bitmap1);
             this.Show();//重新顯示窗體
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+            //從剪貼板獲取圖片
+            IDataObject newobject = null;
+            Bitmap NewBitmap = null;
+
+            try
+            {
+                Application.DoEvents();
+                newobject = Clipboard.GetDataObject();
+
+                if (Clipboard.ContainsImage())
+                {
+                    NewBitmap = (Bitmap)(Clipboard.GetImage().Clone());
+                }
+
+                //return NewBitmap;
+                pictureBox_clipboard.Image = NewBitmap;
+                richTextBox1.Text += "OK\n";
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                richTextBox1.Text += "無圖片\n";
+            }
+
+
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+
         }
     }
 

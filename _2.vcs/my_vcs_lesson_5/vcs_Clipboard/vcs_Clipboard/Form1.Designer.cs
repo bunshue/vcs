@@ -69,6 +69,8 @@
             this.button25 = new System.Windows.Forms.Button();
             this.button26 = new System.Windows.Forms.Button();
             this.button27 = new System.Windows.Forms.Button();
+            this.button28 = new System.Windows.Forms.Button();
+            this.button29 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_clipboard)).BeginInit();
@@ -359,9 +361,9 @@
             // button15
             // 
             this.button15.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button15.Location = new System.Drawing.Point(333, 302);
+            this.button15.Location = new System.Drawing.Point(12, 730);
             this.button15.Name = "button15";
-            this.button15.Size = new System.Drawing.Size(159, 52);
+            this.button15.Size = new System.Drawing.Size(140, 50);
             this.button15.TabIndex = 19;
             this.button15.Text = "判斷Clipboard中是否包含圖片資料";
             this.button15.UseVisualStyleBackColor = true;
@@ -369,10 +371,10 @@
             // 
             // button16
             // 
-            this.button16.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button16.Location = new System.Drawing.Point(333, 364);
+            this.button16.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button16.Location = new System.Drawing.Point(12, 792);
             this.button16.Name = "button16";
-            this.button16.Size = new System.Drawing.Size(159, 52);
+            this.button16.Size = new System.Drawing.Size(140, 50);
             this.button16.TabIndex = 20;
             this.button16.Text = "將圖片資料放置到Clipboard中";
             this.button16.UseVisualStyleBackColor = true;
@@ -381,9 +383,9 @@
             // button17
             // 
             this.button17.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button17.Location = new System.Drawing.Point(333, 433);
+            this.button17.Location = new System.Drawing.Point(12, 861);
             this.button17.Name = "button17";
-            this.button17.Size = new System.Drawing.Size(159, 52);
+            this.button17.Size = new System.Drawing.Size(140, 50);
             this.button17.TabIndex = 21;
             this.button17.Text = "判斷Clipboard中是否包含文字資料";
             this.button17.UseVisualStyleBackColor = true;
@@ -391,10 +393,10 @@
             // 
             // button18
             // 
-            this.button18.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button18.Location = new System.Drawing.Point(333, 491);
+            this.button18.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button18.Location = new System.Drawing.Point(158, 732);
             this.button18.Name = "button18";
-            this.button18.Size = new System.Drawing.Size(159, 52);
+            this.button18.Size = new System.Drawing.Size(140, 50);
             this.button18.TabIndex = 22;
             this.button18.Text = "將文字資料放置到Clipboard中";
             this.button18.UseVisualStyleBackColor = true;
@@ -402,10 +404,10 @@
             // 
             // button19
             // 
-            this.button19.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button19.Location = new System.Drawing.Point(333, 549);
+            this.button19.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button19.Location = new System.Drawing.Point(158, 790);
             this.button19.Name = "button19";
-            this.button19.Size = new System.Drawing.Size(159, 52);
+            this.button19.Size = new System.Drawing.Size(140, 50);
             this.button19.TabIndex = 23;
             this.button19.Text = "顯示Clipboard中的文字資料";
             this.button19.UseVisualStyleBackColor = true;
@@ -413,10 +415,10 @@
             // 
             // button20
             // 
-            this.button20.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button20.Location = new System.Drawing.Point(333, 607);
+            this.button20.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button20.Location = new System.Drawing.Point(158, 848);
             this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(159, 52);
+            this.button20.Size = new System.Drawing.Size(140, 50);
             this.button20.TabIndex = 24;
             this.button20.Text = "取得Clipboard中檔名的集合";
             this.button20.UseVisualStyleBackColor = true;
@@ -424,10 +426,10 @@
             // 
             // button21
             // 
-            this.button21.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button21.Location = new System.Drawing.Point(333, 664);
+            this.button21.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button21.Location = new System.Drawing.Point(304, 732);
             this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(159, 52);
+            this.button21.Size = new System.Drawing.Size(140, 50);
             this.button21.TabIndex = 25;
             this.button21.Text = "Clipboard內的影像全部顯示存檔";
             this.button21.UseVisualStyleBackColor = true;
@@ -435,10 +437,10 @@
             // 
             // button22
             // 
-            this.button22.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button22.Location = new System.Drawing.Point(333, 722);
+            this.button22.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button22.Location = new System.Drawing.Point(304, 790);
             this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(159, 52);
+            this.button22.Size = new System.Drawing.Size(140, 50);
             this.button22.TabIndex = 26;
             this.button22.Text = "Clipboard內的影像部分顯示存檔";
             this.button22.UseVisualStyleBackColor = true;
@@ -491,10 +493,10 @@
             // 
             // button26
             // 
-            this.button26.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button26.Location = new System.Drawing.Point(333, 780);
+            this.button26.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button26.Location = new System.Drawing.Point(304, 848);
             this.button26.Name = "button26";
-            this.button26.Size = new System.Drawing.Size(159, 52);
+            this.button26.Size = new System.Drawing.Size(140, 50);
             this.button26.TabIndex = 30;
             this.button26.Text = "從剪貼板取出圖片然後寫上字保存到文件";
             this.button26.UseVisualStyleBackColor = true;
@@ -502,20 +504,44 @@
             // 
             // button27
             // 
-            this.button27.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button27.Location = new System.Drawing.Point(333, 838);
+            this.button27.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button27.Location = new System.Drawing.Point(450, 802);
             this.button27.Name = "button27";
-            this.button27.Size = new System.Drawing.Size(159, 52);
+            this.button27.Size = new System.Drawing.Size(140, 50);
             this.button27.TabIndex = 31;
             this.button27.Text = "全屏截圖放置到Clipboard中";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
+            // 
+            // button28
+            // 
+            this.button28.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button28.Location = new System.Drawing.Point(450, 860);
+            this.button28.Name = "button28";
+            this.button28.Size = new System.Drawing.Size(140, 50);
+            this.button28.TabIndex = 32;
+            this.button28.Text = "從剪貼板獲取圖片";
+            this.button28.UseVisualStyleBackColor = true;
+            this.button28.Click += new System.EventHandler(this.button28_Click);
+            // 
+            // button29
+            // 
+            this.button29.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button29.Location = new System.Drawing.Point(450, 916);
+            this.button29.Name = "button29";
+            this.button29.Size = new System.Drawing.Size(140, 50);
+            this.button29.TabIndex = 33;
+            this.button29.Text = "全屏截圖放置到Clipboard中";
+            this.button29.UseVisualStyleBackColor = true;
+            this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1332, 997);
+            this.Controls.Add(this.button29);
+            this.Controls.Add(this.button28);
             this.Controls.Add(this.button27);
             this.Controls.Add(this.button26);
             this.Controls.Add(this.groupBox2);
@@ -597,6 +623,8 @@
         private System.Windows.Forms.Button button25;
         private System.Windows.Forms.Button button26;
         private System.Windows.Forms.Button button27;
+        private System.Windows.Forms.Button button28;
+        private System.Windows.Forms.Button button29;
     }
 }
 

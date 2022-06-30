@@ -32,6 +32,9 @@ using System.Net.Mime;  //for MediaTypeNames
 常見的電子郵件協議有SMTP(簡單郵件傳輸協議)、POP3(郵局協議)、IMAP(Internet郵件訪問協議)
 */
 
+
+//自 2022 年 5 月 30 日起，​​如果第三方應用程式或裝置只要求您以使用者名稱和密碼登入 Google 帳戶，Google 將不再支援這些應用程式或裝置。
+
 namespace vcs_SendMail
 {
     public partial class Form1 : Form
