@@ -768,6 +768,26 @@ namespace vcs_Mix00
 
         private void button11_Click(object sender, EventArgs e)
         {
+            Point p1 = new Point(100, 100);
+            Point p2 = new Point(300, 300);
+            Graphics g = this.pictureBox1.CreateGraphics();
+            g.DrawLine(Pens.Red, p1, p2);
+
+            richTextBox1.Text += "在pictureBox1上的座標\n";
+            richTextBox1.Text += "p1 : " + p1.ToString() + "\n";
+            richTextBox1.Text += "p2 : " + p2.ToString() + "\n";
+
+            richTextBox1.Text += "在表單上的座標\n";
+            Point p1a = this.PointToScreen(p1);
+            Point p2a = this.PointToScreen(p2);
+            richTextBox1.Text += "p1a : " + p1a.ToString() + "\n";
+            richTextBox1.Text += "p2a : " + p2a.ToString() + "\n";
+
+            richTextBox1.Text += "在視窗上的座標\n";
+            Point p1b = this.pictureBox1.PointToScreen(p1);
+            Point p2b = this.pictureBox1.PointToScreen(p2);
+            richTextBox1.Text += "p1b : " + p1b.ToString() + "\n";
+            richTextBox1.Text += "p2b : " + p2b.ToString() + "\n";
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -791,6 +811,27 @@ namespace vcs_Mix00
 
         private void button13_Click(object sender, EventArgs e)
         {
+            //Md5和Sha1两种加密方式
+
+            const string s = "123456";
+            Console.WriteLine("密码：" + s);
+
+            Console.WriteLine("Md5：" + s.Md5());
+            Console.WriteLine("长度：" + s.Md5().Length);
+
+            Console.WriteLine("Sha1：" + s.Sha1());
+            Console.WriteLine("长度：" + s.Sha1().Length);
+
+
+            richTextBox1.Text +="密码：" + s+"\n";
+
+            richTextBox1.Text +="Md5：" + s.Md5()+"\n";
+            richTextBox1.Text +="长度：" + s.Md5().Length+"\n";
+
+            richTextBox1.Text +="Sha1：" + s.Sha1()+"\n";
+            richTextBox1.Text += "长度：" + s.Sha1().Length + "\n";
+
+
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -1155,7 +1196,91 @@ namespace vcs_Mix00
 
         private void button21_Click(object sender, EventArgs e)
         {
+            //string.Format 格式化日期
 
+            //c# 日期函數
+
+            DateTime dt = DateTime.Now;
+
+            richTextBox1.Text += "日期 1:\t" + dt.ToString() + "\n";//2005-11-5 13:21:25
+            richTextBox1.Text += "日期 1:\t" + dt.ToFileTime().ToString() + "\n";//127756416859912816
+            richTextBox1.Text += "日期 1:\t" + dt.ToFileTimeUtc().ToString() + "\n";//127756704859912816
+            richTextBox1.Text += "日期 1:\t" + dt.ToLocalTime().ToString() + "\n";//2005-11-5 21:21:25
+            richTextBox1.Text += "日期 1:\t" + dt.ToLongDateString().ToString() + "\n";//2005年11月5*
+            richTextBox1.Text += "日期 1:\t" + dt.ToLongTimeString().ToString() + "\n";//13:21:25
+            richTextBox1.Text += "日期 1:\t" + dt.ToOADate().ToString() + "\n";//38661.5565508218
+            richTextBox1.Text += "日期 1:\t" + dt.ToShortDateString().ToString() + "\n";//2005-11-5
+            richTextBox1.Text += "日期 1:\t" + dt.ToShortTimeString().ToString() + "\n";//13:21
+            richTextBox1.Text += "日期 1:\t" + dt.ToUniversalTime().ToString() + "\n";//2005-11-5 5:21:25
+
+            //?2005-11-5 13:30:28.4412864
+            richTextBox1.Text += "日期 1:\t" + dt.Year.ToString() + "\n";//2005
+            richTextBox1.Text += "日期 1:\t" + dt.Date.ToString() + "\n";//2005-11-5 0:00:00
+            richTextBox1.Text += "日期 1:\t" + dt.DayOfWeek.ToString() + "\n";//Saturday
+            richTextBox1.Text += "日期 1:\t" + dt.DayOfYear.ToString() + "\n";//309
+            richTextBox1.Text += "日期 1:\t" + dt.Hour.ToString() + "\n";//13
+            richTextBox1.Text += "日期 1:\t" + dt.Millisecond.ToString() + "\n";//441
+            richTextBox1.Text += "日期 1:\t" + dt.Minute.ToString() + "\n";//30
+            richTextBox1.Text += "日期 1:\t" + dt.Month.ToString() + "\n";//11
+            richTextBox1.Text += "日期 1:\t" + dt.Second.ToString() + "\n";//28
+            richTextBox1.Text += "日期 1:\t" + dt.Ticks.ToString() + "\n";//632667942284412864
+            richTextBox1.Text += "日期 1:\t" + dt.TimeOfDay.ToString() + "\n";//13:30:28.4412864
+            richTextBox1.Text += "日期 1:\t" + dt.ToString() + "\n";//2005-11-5 13:47:04
+            richTextBox1.Text += "日期 1:\t" + dt.AddYears(1).ToString() + "\n";//2006-11-5 13:47:04
+            richTextBox1.Text += "日期 1:\t" + dt.AddDays(1.1).ToString() + "\n";//2005-11-6 16:11:04
+            richTextBox1.Text += "日期 1:\t" + dt.AddHours(1.1).ToString() + "\n";//2005-11-5 14:53:04
+            richTextBox1.Text += "日期 1:\t" + dt.AddMilliseconds(1.1).ToString() + "\n";//2005-11-5 13:47:04
+            richTextBox1.Text += "日期 1:\t" + dt.AddMonths(1).ToString() + "\n";//2005-12-5 13:47:04
+            richTextBox1.Text += "日期 1:\t" + dt.AddSeconds(1.1).ToString() + "\n";//2005-11-5 13:47:05
+            richTextBox1.Text += "日期 1:\t" + dt.AddMinutes(1.1).ToString() + "\n";//2005-11-5 13:48:10
+            richTextBox1.Text += "日期 1:\t" + dt.AddTicks(1000).ToString() + "\n";//2005-11-5 13:47:04
+            richTextBox1.Text += "日期 1:\t" + dt.CompareTo(dt).ToString() + "\n";//0
+            //richTextBox1.Text +="日期 1:\t"+ dt.Add(?).ToString()+"\n";//問號為一個時間段
+
+            richTextBox1.Text += "日期 1:\t" + dt.Equals("2005-11-6 16:11:04").ToString() + "\n";//False
+            richTextBox1.Text += "日期 1:\t" + dt.Equals(dt).ToString() + "\n";//True
+            richTextBox1.Text += "日期 1:\t" + dt.GetHashCode().ToString() + "\n";//1474088234
+            richTextBox1.Text += "日期 1:\t" + dt.GetType().ToString() + "\n";//System.DateTime
+            richTextBox1.Text += "日期 1:\t" + dt.GetTypeCode().ToString() + "\n";//DateTime
+
+            /*
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(s)[0].ToString() + "\n";//2005-11-05T14:06:25
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(t)[0].ToString() + "\n";//14:06
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(y)[0].ToString() + "\n";//2005年11月
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(D)[0].ToString() + "\n";//2005年11月5*
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(D)[1].ToString() + "\n";//2005 11 05
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(D)[2].ToString() + "\n";//星期六 2005 11 05
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(D)[3].ToString() + "\n";//星期六 2005年11月5*
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(M)[0].ToString() + "\n";//11月5*
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(f)[0].ToString() + "\n";//2005年11月5* 14:06
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(g)[0].ToString() + "\n";//2005-11-5 14:06
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(r)[0].ToString() + "\n";//Sat, 05 Nov 2005 14:06:25 GMT
+            */
+
+            /*
+            或者dt.ToString("yyyy年MM月dd*");//2005年11月5*
+            dt.ToString("yyyy-MM-dd");//2005-11-5*
+            以此類推……
+            */
+
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:d｝", dt) + "\n";//2005-11-5
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:D｝", dt) + "\n";//2005年11月5*
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:f｝", dt) + "\n";//2005年11月5* 14:23
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:F｝", dt) + "\n";//2005年11月5* 14:23:23
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:g｝", dt) + "\n";//2005-11-5 14:23
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:G｝", dt) + "\n";//2005-11-5 14:23:23
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:M｝", dt) + "\n";//11月5*
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:R｝", dt) + "\n";//Sat, 05 Nov 2005 14:23:23 GMT
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:s｝", dt) + "\n";//2005-11-05T14:23:23
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:t｝", dt) + "\n";//14:23
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:T｝", dt) + "\n";//14:23:23
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:u｝", dt) + "\n";//2005-11-05 14:23:23Z
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:U｝", dt) + "\n";//2005年11月5* 6:23:23
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:Y｝", dt) + "\n";//2005年11月
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0｝", dt) + "\n";//2005-11-5 14:23:23?
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:yyyyMMddHHmmssffff｝", dt) + "\n";
+            //yyyymm等可以設置,比如Label16.Text = string.Format("｛0:yyyyMMdd｝",dt)+"\n";
+            //綁定也適用:例:<%# string.Format("｛0:yyyy.MM.dd｝",eval_r("sj"))%>
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -1986,6 +2111,54 @@ namespace vcs_Mix00
             {
                 this.DisposeGraphics();
             }
+        }
+    }
+
+    public static class EncryptHelper
+    {
+        /// <summary>
+        /// 基于Md5的自定义加密字符串方法：输入一个字符串，返回一个由32个字符组成的十六进制的哈希散列（字符串）。
+        /// </summary>
+        /// <param name="str">要加密的字符串</param>
+        /// <returns>加密后的十六进制的哈希散列（字符串）</returns>
+        public static string Md5(this string str)
+        {
+            //将输入字符串转换成字节数组
+            var buffer = Encoding.Default.GetBytes(str);
+            //接着，创建Md5对象进行散列计算
+            var data = MD5.Create().ComputeHash(buffer);
+
+            //创建一个新的Stringbuilder收集字节
+            var sb = new StringBuilder();
+
+            //遍历每个字节的散列数据
+            foreach (var t in data)
+            {
+                //格式每一个十六进制字符串
+                sb.Append(t.ToString("X2"));
+            }
+
+            //返回十六进制字符串
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// 基于Sha1的自定义加密字符串方法：输入一个字符串，返回一个由40个字符组成的十六进制的哈希散列（字符串）。
+        /// </summary>
+        /// <param name="str">要加密的字符串</param>
+        /// <returns>加密后的十六进制的哈希散列（字符串）</returns>
+        public static string Sha1(this string str)
+        {
+            var buffer = Encoding.UTF8.GetBytes(str);
+            var data = SHA1.Create().ComputeHash(buffer);
+
+            var sb = new StringBuilder();
+            foreach (var t in data)
+            {
+                sb.Append(t.ToString("X2"));
+            }
+
+            return sb.ToString();
         }
     }
 }
