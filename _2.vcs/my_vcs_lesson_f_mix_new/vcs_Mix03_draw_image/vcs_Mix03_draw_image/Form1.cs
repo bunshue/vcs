@@ -307,10 +307,84 @@ namespace vcs_Mix03_draw_image
             return (Image)(img);
         }
 
+        //圖片質量壓縮(不改變尺寸) ST
+        private static ImageCodecInfo GetEncoderInfo(String mimeType)
+        {
+            int j;
+            ImageCodecInfo[] encoders;
+            encoders = ImageCodecInfo.GetImageEncoders();
+            for (j = 0; j < encoders.Length; ++j)
+            {
+                if (encoders[j].MimeType == mimeType)
+                    return encoders[j];
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// 圖片壓縮(降低質量以減小文件的大小)
+        /// </summary>
+        /// <param name="srcBitmap">傳入的Bitmap對象</param>
+        /// <param name="destStream">壓縮後的Stream對象</param>
+        /// <param name="level">壓縮等級，0到100，0 最差質量，100 最佳</param>
+        public static void Compress(Bitmap srcBitmap, Stream destStream, long level)
+        {
+            ImageCodecInfo myImageCodecInfo;
+            System.Drawing.Imaging.Encoder myEncoder;
+            EncoderParameter myEncoderParameter;
+            EncoderParameters myEncoderParameters;
+
+            // Get an ImageCodecInfo object that represents the JPEG codec.
+            myImageCodecInfo = GetEncoderInfo("image/jpeg");
+
+            // Create an Encoder object based on the GUID
+
+            // for the Quality parameter category.
+            myEncoder = System.Drawing.Imaging.Encoder.Quality;
+
+            // Create an EncoderParameters object.
+            // An EncoderParameters object has an array of EncoderParameter
+            // objects. In this case, there is only one
+
+            // EncoderParameter object in the array.
+            myEncoderParameters = new EncoderParameters(1);
+
+            // Save the bitmap as a JPEG file with 給定的 quality level
+            myEncoderParameter = new EncoderParameter(myEncoder, level);
+            myEncoderParameters.Param[0] = myEncoderParameter;
+            srcBitmap.Save(destStream, myImageCodecInfo, myEncoderParameters);
+        }
+
+
+        /// <summary>
+        /// 圖片壓縮(降低質量以減小文件的大小)
+        /// </summary>
+        /// <param name="srcBitMap">傳入的Bitmap對象</param>
+        /// <param name="destFile">壓縮後的圖片保存路徑</param>
+        /// <param name="level">壓縮等級，0到100，0 最差質量，100 最佳</param>
+        public static void Compress(Bitmap srcBitMap, string destFile, long level)
+        {
+            Stream s = new FileStream(destFile, FileMode.Create);
+            Compress(srcBitMap, s, level);
+            s.Close();
+        }
+
         private void button4_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //圖片質量壓縮(不改變尺寸)
+            
+            string filename = @"C:\______test_files\elephant.jpg";
+            richTextBox1.Text += "原圖 : " + filename + "\n";
+
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+            Compress(bitmap1, "compressfile010.jpg", 10);
+            Compress(bitmap1, "compressfile040.jpg", 40);
+            Compress(bitmap1, "compressfile070.jpg", 70);
+            Compress(bitmap1, "compressfile100.jpg", 100);
+
         }
+        //圖片質量壓縮(不改變尺寸) SP
 
         private void button5_Click(object sender, EventArgs e)
         {

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.button19 = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
             this.button14 = new System.Windows.Forms.Button();
@@ -50,6 +51,7 @@
             this.button2 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.timer6 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // button19
@@ -120,6 +122,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(170, 70);
             this.button6.TabIndex = 137;
+            this.button6.Text = "Class 範例 6 TimerAlarm";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -278,6 +281,11 @@
             this.richTextBox1.TabIndex = 159;
             this.richTextBox1.Text = "";
             // 
+            // timer6
+            // 
+            this.timer6.Interval = 1000;
+            this.timer6.Tick += new System.EventHandler(this.timer6_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -336,6 +344,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Timer timer6;
     }
 }
 

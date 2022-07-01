@@ -7,10 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Threading;
+using System.Timers;
+
 namespace vcs_Class3
 {
     public partial class Form1 : Form
     {
+        TimerAlarm timeAlarm = new TimerAlarm();
+
         public Form1()
         {
             InitializeComponent();
@@ -35,8 +40,8 @@ namespace vcs_Class3
             //button
             x_st = 10;
             y_st = 10;
-            dx = 170+10;
-            dy = 70+10;
+            dx = 170 + 10;
+            dy = 70 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -466,6 +471,17 @@ namespace vcs_Class3
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //Class 範例 6 TimerAlarm
+
+            timeAlarm = new TimerAlarm();
+            timeAlarm.AlarmTime = FormatConvert.inputToSeconds("12:34:56");
+
+            timeAlarm.Message = "AAAAAAAAA";
+
+            if (timeAlarm.Countdown > 0)
+            {
+                this.timer6.Enabled = true;
+            }
 
         }
 
@@ -553,7 +569,158 @@ namespace vcs_Class3
         {
 
         }
+
+        private void timer6_Tick(object sender, EventArgs e)
+        {
+            //動態顯示剩下的時間
+            if (timeAlarm.Countdown >= 0)
+            {
+                richTextBox1.Text += FormatConvert.secondsToTime(timeAlarm.Countdown) + " ";
+            }
+            else
+            {
+
+                this.timer6.Enabled = false;
+            }
+        }
+    }
+
+    public class TimerAlarm
+    {
+        private int clockTime = 0;
+        private int alarmTime = 0;
+        private string message = "时间到了";
+        private System.Timers.Timer timerClock = new System.Timers.Timer();
+
+        public int AlarmTime
+        {
+            set
+            {
+                alarmTime = value;
+            }
+        }
+
+        public int ClockTime
+        {
+            set
+            {
+                clockTime = value;
+            }
+        }
+
+        public string Message
+        {
+            set
+            {
+                message = value;
+            }
+        }
+
+        public int Countdown
+        {
+            get
+            {
+                return alarmTime - clockTime;
+            }
+        }
+
+        public TimerAlarm()
+        {
+            //MessageBox.Show("TimeAlarm start.");
+            timerClock.Elapsed += new ElapsedEventHandler(OnTimer);
+            timerClock.Interval = 1000;
+            timerClock.Enabled = true;
+        }
+
+        public void OnTimer(Object source, ElapsedEventArgs e)
+        {
+            try
+            {
+                clockTime++;
+                if (clockTime == alarmTime)
+                {
+                    MessageBox.Show(message, "时间到了", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+
+            catch (Exception ex)
+            {
+                MessageBox.Show("OnTimer(): " + ex.Message);
+            }
+        }
+
+        public void StopTimer()
+        {
+            timerClock.Enabled = false;
+        }
+    }
+
+    public class FormatConvert
+    {
+        //inputToSeconds()将一个string型的时间字串转换成一共有多少秒。
+        public static int inputToSeconds(string timerInput)
+        {
+            string[] timeArray = new string[3];
+            int minutes = 0;
+            int hours = 0;
+            int seconds = 0;
+            int occurence = 0;
+            int length = 0;
+            int totalTime = 0;
+
+            occurence = timerInput.LastIndexOf(":");
+            length = timerInput.Length;
+
+            //Check for invalid input
+            if (occurence == -1 || length != 8)
+            {
+                MessageBox.Show("Invalid Time Format.");
+            }
+            else
+            {
+                timeArray = timerInput.Split(':');
+                seconds = Convert.ToInt32(timeArray[2]);
+                minutes = Convert.ToInt32(timeArray[1]);
+                hours = Convert.ToInt32(timeArray[0]);
+
+                totalTime += seconds;
+                totalTime += minutes * 60;
+                totalTime += (hours * 60) * 60;
+            }
+            return totalTime;
+        }
+
+        //secondsToTime方法是把秒转换一个时间格式的字串返回。
+        public static string secondsToTime(int seconds)
+        {
+            int minutes = 0;
+            int hours = 0;
+            while (seconds >= 60)
+            {
+                minutes += 1;
+                seconds -= 60;
+            }
+
+            while (minutes >= 60)
+            {
+                hours += 1;
+                minutes -= 60;
+            }
+
+            string strHours = hours.ToString();
+            string strMinutes = minutes.ToString();
+            string strSeconds = seconds.ToString();
+
+            if (strHours.Length < 2)
+                strHours = "0" + strHours;
+
+            if (strMinutes.Length < 2)
+                strMinutes = "0" + strMinutes;
+
+            if (strSeconds.Length < 2)
+                strSeconds = "0" + strSeconds;
+
+            return strHours + ":" + strMinutes + ":" + strSeconds;
+        }
     }
 }
-
-
