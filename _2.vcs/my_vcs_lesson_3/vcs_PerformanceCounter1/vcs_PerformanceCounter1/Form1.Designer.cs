@@ -1,4 +1,4 @@
-﻿namespace vcs_PerformanceCounter
+﻿namespace vcs_PerformanceCounter1
 {
     partial class Form1
     {

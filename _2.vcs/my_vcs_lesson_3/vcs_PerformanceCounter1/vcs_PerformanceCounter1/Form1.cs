@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_PerformanceCounter
+namespace vcs_PerformanceCounter1
 {
     public partial class Form1 : Form
     {

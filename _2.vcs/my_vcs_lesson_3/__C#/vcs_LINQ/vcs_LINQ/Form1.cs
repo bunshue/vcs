@@ -213,15 +213,45 @@ namespace vcs_LINQ
             //執行查詢
             //Console.WriteLine(studentsToXml);
             richTextBox1.Text += studentsToXml + "\n";
-
-
-
-
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //LINQ to XML RW
+            /*
+            //LINQ to XML操作Xml文檔
 
+            //.Net中的System.Xml.Linq命名空間提供了linq to xml的支持。這個命名空間中的XDocument，XElement以及XText，XAttribute提供了讀寫xml文檔的關鍵方法。
+            1. 使用linq to xml寫xml：
+            使用XDocument的構造函數可以構造一個Xml文檔對象；使用XElement對象可以構造一個xml節點元素，使用XAttribute構造函數可以構造元素的屬性；使用XText構造函數可以構造節點內的文本。
+            */
+
+            var xDoc = new XDocument(new XElement("root",
+                new XElement("dog",
+                    new XText("dog said black is a beautify color"),
+                    new XAttribute("color", "black")),
+                new XElement("cat"),
+                new XElement("pig", "pig is great")));
+
+            //xDoc輸出xml的encoding是系統默認編碼，對於簡體中文操作系統是gb2312
+            //默認是縮進格式化的xml，而無須格式化設置
+            xDoc.Save("aaaa.xml");
+
+            //LINQ to XML read
+
+            var query = from item in xDoc.Element("root").Elements()
+                        select new
+                        {
+                            TypeName = item.Name,
+                            Saying = item.Value,
+                            Color = item.Attribute("color") == null ? (string)null : item.Attribute("color").Value
+                        };
+
+            foreach (var item in query)
+            {
+                Console.WriteLine("{0} 's color is {1},{0} said {2}", item.TypeName, item.Color ?? "Unknown", item.Saying ?? "nothing");
+                richTextBox1.Text += item.TypeName + "\t" + item.Color + "\n";
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)

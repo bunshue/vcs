@@ -875,6 +875,43 @@ namespace vcs_test_all_02_Array
         private void button18_Click(object sender, EventArgs e)
         {
 
+            String[, ,] items =
+            new String[,,] {
+            {
+            { "A1", "A2", "A3", "☆", "○" },
+            { "B1", "B2", "B3", "☆", "○" },
+            { "C1", "C2", "C3", "☆", "○" },
+            { "D1", "D2", "D3", "☆", "○" }
+            }, {
+            { "E1", "E2", "E3", "☆", "○" },
+            { "F1", "F2", "F3", "☆", "○" },
+            { "G1", "G2", "G3", "☆", "○" },
+            { "H1", "H2", "H3", "☆", "○" }
+            }
+            };
+
+            //GetUpperBound(0) 返回數組的第一維的索引上限，GetUpperBound(i)返回數組的i+1維的上限，GetUpperBound(Rank-1)返回數組的最後一維的上限，也就是列數-1
+
+            Console.WriteLine("Items.Rank =" + items.Rank);
+            Console.WriteLine("Items.GetUpperBound(0)=" + items.GetUpperBound(0));
+
+            Console.WriteLine("Items.GetUpperBound(1)=" + items.GetUpperBound(1));
+            Console.WriteLine("Items.GetUpperBound(2)=" + items.GetUpperBound(items.Rank - 1));
+
+            Console.WriteLine("Items[0, 0, 0]=" + items[0, 0, 0]);
+            Console.WriteLine("Items[0, 0, 1]=" + items[0, 0, 1]);
+            Console.WriteLine("Items[0, 0, 2]=" + items[0, 0, 2]);
+            Console.WriteLine("Items[0, 0, 3]=" + items[0, 0, 3]);
+            Console.WriteLine("Items[0, 0, 4]=" + items[0, 0, 4]);
+
+
+            Console.WriteLine("Items[0, 1, 0]=" + items[0, 1, 0]);
+            Console.WriteLine("Items[0, 2, 0]=" + items[0, 1, 1]);
+            Console.WriteLine("Items[0, 2, 0]=" + items[0, 1, 2]);
+            Console.WriteLine("Items[0, 2, 0]=" + items[0, 1, 3]);
+
+            Console.WriteLine("Items[0, 2, 0]=" + items[0, 1, 4]);
+
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -1737,9 +1774,73 @@ namespace vcs_test_all_02_Array
             }
         }
 
+        string[] LunarHolDayName = {
+                  "小寒", "大寒", "立春", "雨水",
+                  "驚蟄", "春分", "清明", "谷雨",
+                  "立夏", "小滿", "芒種", "夏至",
+                  "小暑", "大暑", "立秋", "處暑",
+                  "白露", "秋分", "寒露", "霜降",
+                  "立冬", "小雪", "大雪", "冬至"};
+
         private void button40_Click(object sender, EventArgs e)
         {
+            //陣列宣告範例
+            int[] A = new int[5];
+            int[] B = new int[] { 1, 2, 3, 4, 5 };
+            int[] C = { 1, 3, 5, 7, 9 };
+            int[,] D = new int[3, 3];
+            int[,] E = new int[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+            int[,] F = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+            int[, ,] G = new int[3, 4, 5];
 
+            //一維陣列
+            int[] myArr = new int[4];	//宣告
+            myArr[0] = 1;
+            myArr[1] = 2;
+            myArr[2] = 3;
+            myArr[3] = 4;
+            myArr = new int[] { 1, 2, 3, 4 };	//改值
+
+            //三維陣列的寫法：
+            int[, ,] myArray = new int[2, 3, 4];
+
+            //鋸齒陣列	//不規則陣列
+            char[][] ch = new char[][]
+            {
+                new char[] {'a','b','c'},
+                new char[] {'c','d','e','f','g','h'},
+                new char[] {'w','x','y','z'}
+            };
+
+            //Color陣列
+            System.Drawing.Color[] color1 = new Color[5];
+            color1[0] = Color.Brown;
+            color1[1] = Color.Azure;
+            color1[2] = Color.Chartreuse;
+            color1[3] = Color.Cyan;
+            color1[4] = Color.Gainsboro;
+
+            //Point陣列
+            Point a = new Point(10, 20);    //宣告一個Point變數
+            a.X = 30;   //改值
+            a.Y = 40;
+            a = new Point(35, 45);          //同時更改XY兩個整數屬性的值
+
+
+            int[] index = new int[4] { 2, 4, 6, 8 };
+            int[] a1 = new int[4];
+            a1[0] = 5;
+            a1[1] = 4;
+            a1[2] = 6;
+            a1[3] = 2;
+            Array.Sort(a1);
+            richTextBox1.Text += "\n最大值為：" + a1[3].ToString() + "\n";
+
+            foreach (string str in LunarHolDayName)
+            {
+                richTextBox1.Text += str + " ";
+            }
+            richTextBox1.Text += "\n";
         }
 
         private void button41_Click(object sender, EventArgs e)

@@ -281,12 +281,144 @@ namespace vcs_Dictionary
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //Dictionary字典用法5
 
+            //建立及初始化
+
+            Dictionary<string, int> myDictionary = new Dictionary<string, int>();
+
+            //新增元素
+
+            myDictionary.Add("C#", 0);
+            myDictionary.Add("C++", 1);
+            myDictionary.Add("C", 2);
+            myDictionary.Add("VB", 2);
+
+            //查詢元素By Key
+
+            if (myDictionary.ContainsKey("C#"))
+            {
+                Console.WriteLine("Key:{0},Value:{1}", "C#", myDictionary["C#"]);
+            }
+
+            //遍歷元素 By KeyValuePair
+
+            foreach (KeyValuePair<string, int> kvp in myDictionary)
+            {
+                Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
+            }
+
+            //僅遍歷鍵 By Keys 屬性
+
+            Dictionary<string, int>.KeyCollection keyCol = myDictionary.Keys;
+            foreach (string key in keyCol/*string key in myDictionary.Keys*/)
+            {
+                Console.WriteLine("Key = {0}", key);
+            }
+
+            //僅遍歷值By Valus屬性
+
+            Dictionary<string, int>.ValueCollection valueCol = myDictionary.Values;
+            foreach (int value in valueCol)
+            {
+                Console.WriteLine("Value = {0}", value);
+            }
+
+            //移除指定的鍵值By Remove方法
+
+            myDictionary.Remove("C#");
+            if (myDictionary.ContainsKey("C#"))
+            {
+                Console.WriteLine("Key:{0},Value:{1}", "C#", myDictionary["C#"]);
+            }
+            else
+            {
+                Console.WriteLine("不存在 Key : C#");
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //Dictionary字典用法6
 
+            /*
+            從一組鍵（Key）到一組值（Value）的對映，每一個新增項都是由一個值及其相關連的鍵組成  
+            任何鍵都必須是唯一的  
+            鍵不能為空引用null（VB中的Nothing），若值為引用型別，則可以為空值  
+            Key和Value可以是任何型別（string，int，custom class 等）
+            */
+
+            richTextBox1.Text += "建立Dictionary<K,V>，然後新增元素\n";
+            Dictionary<string, string> film = new Dictionary<string, string>();
+            film.Add("韋小寶", "鹿鼎記");
+            film.Add("陸小鳳", "陸小鳳傳奇");
+            film.Add("張無忌", "倚天屠龍記");
+            film.Add("楊過", "神鵰俠侶");
+            film.Add("令狐沖", "笑傲江湖");
+            richTextBox1.Text += "集合現在的元素個數為 " + film.Count.ToString() + "\n";
+
+            richTextBox1.Text += "移除一個\n";
+            film.Remove("楊過");
+            richTextBox1.Text += "集合現在的元素個數為 " + film.Count.ToString() + "\n";
+
+            richTextBox1.Text += "遍歷集合\n";
+            richTextBox1.Text += "所有武俠電影的主角及電影名\n";
+            richTextBox1.Text += "\t主角\t電影\n";
+            foreach (KeyValuePair<string, string> kvp in film)
+            {
+                richTextBox1.Text += "\t" + kvp.Key + "\t" + kvp.Value + "\n";
+            }
+
+            richTextBox1.Text += "檢查元素是否存在，如不存在，新增\n";
+            if (!film.ContainsKey("段譽"))
+            {
+                richTextBox1.Text += "該元素不存在，新增\n";
+                film.Add("段譽", "天龍八部");
+            }
+            else
+            {
+                richTextBox1.Text += "該元素已存在\n";
+            }
+
+            richTextBox1.Text += "獲取鍵的集合\n";
+            Dictionary<string, string>.KeyCollection keys = film.Keys;
+
+            richTextBox1.Text += "遍歷鍵的集合\n";
+            richTextBox1.Text += "受歡迎的武俠片中主角名\n";
+            foreach (string str in keys)
+            {
+                richTextBox1.Text += str + "\n";
+            }
+
+            Dictionary<string, string>.ValueCollection values = film.Values;
+            richTextBox1.Text += "遍歷值的集合\n";
+            richTextBox1.Text += "最受歡迎的武俠片\n";
+            foreach (string strfilm in values)
+            {
+                richTextBox1.Text += strfilm + "\n";
+            }
+
+            richTextBox1.Text += "遍歷元素的另一種方法\n";
+            richTextBox1.Text += "和雜湊表相同的遍歷元素方法\n";
+            foreach (string strname in film.Values)
+            {
+                richTextBox1.Text += strname + "\n";
+            }
+
+            richTextBox1.Text += "獲取鍵對應的值\n";
+            string myfilm = film["令狐沖"];
+            richTextBox1.Text += "主角為令狐沖的電影名 : " + myfilm + "\n";
+
+            richTextBox1.Text += "獲取鍵對應值的TryGetValue方法\n";
+            string objfilm = string.Empty;
+            if (film.TryGetValue("段譽", out objfilm))
+            {
+                richTextBox1.Text += "主角為段譽的電影是 : " + objfilm + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "沒有主角為段譽的電影\n";
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)

@@ -197,7 +197,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(180, 40);
             this.button5.TabIndex = 5;
-            this.button5.Text = "陣列宣告範例";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -208,7 +207,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(180, 40);
             this.button6.TabIndex = 6;
-            this.button6.Text = "十六進位顯示";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -241,7 +239,6 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(180, 40);
             this.button9.TabIndex = 9;
-            this.button9.Text = "StringBuilder語法";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -401,7 +398,6 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(180, 40);
             this.button25.TabIndex = 25;
-            this.button25.Text = "10進位轉十六進位";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -443,7 +439,6 @@
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(180, 40);
             this.button30.TabIndex = 31;
-            this.button30.Text = "16進位轉10進位";
             this.button30.UseVisualStyleBackColor = true;
             this.button30.Click += new System.EventHandler(this.button30_Click);
             // 
@@ -454,7 +449,6 @@
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(180, 40);
             this.button33.TabIndex = 32;
-            this.button33.Text = "十六進位轉換";
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
@@ -563,7 +557,6 @@
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(180, 40);
             this.button31.TabIndex = 48;
-            this.button31.Text = "10進位轉各種進位";
             this.button31.UseVisualStyleBackColor = true;
             this.button31.Click += new System.EventHandler(this.button31_Click);
             // 

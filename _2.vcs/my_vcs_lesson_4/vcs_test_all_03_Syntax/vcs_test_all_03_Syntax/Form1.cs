@@ -356,80 +356,12 @@ namespace vcs_test_all_03_Syntax
             richTextBox1.Text += "日期的資料型別是：" + DateTime.Now.GetType().ToString() + "\n";
         }
 
-        string[] LunarHolDayName = {
-                  "小寒", "大寒", "立春", "雨水",
-                  "驚蟄", "春分", "清明", "谷雨",
-                  "立夏", "小滿", "芒種", "夏至",
-                  "小暑", "大暑", "立秋", "處暑",
-                  "白露", "秋分", "寒露", "霜降",
-                  "立冬", "小雪", "大雪", "冬至"};
-
         private void button5_Click(object sender, EventArgs e)
         {
-            int[] A = new int[5];
-            int[] B = new int[] { 1, 2, 3, 4, 5 };
-            int[] C = { 1, 3, 5, 7, 9 };
-            int[,] D = new int[3, 3];
-            int[,] E = new int[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
-            int[,] F = { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
-            int[, ,] G = new int[3, 4, 5];
-
-            //一維陣列
-            int[] myArr = new int[4];	//宣告
-            myArr[0] = 1;
-            myArr[1] = 2;
-            myArr[2] = 3;
-            myArr[3] = 4;
-            myArr = new int[] { 1, 2, 3, 4 };	//改值
-
-            //三維陣列的寫法：
-            int[, ,] myArray = new int[2, 3, 4];
-
-            //鋸齒陣列	//不規則陣列
-            char[][] ch = new char[][]
-            {
-                new char[] {'a','b','c'},
-                new char[] {'c','d','e','f','g','h'},
-                new char[] {'w','x','y','z'}
-            };
-
-            //Color陣列
-            System.Drawing.Color[] color1 = new Color[5];
-            color1[0] = Color.Brown;
-            color1[1] = Color.Azure;
-            color1[2] = Color.Chartreuse;
-            color1[3] = Color.Cyan;
-            color1[4] = Color.Gainsboro;
-
-            //Point陣列
-            Point a = new Point(10, 20);    //宣告一個Point變數
-            a.X = 30;   //改值
-            a.Y = 40;
-            a = new Point(35, 45);          //同時更改XY兩個整數屬性的值
-
-
-            int[] index = new int[4] { 2, 4, 6, 8 };
-            int[] a1 = new int[4];
-            a1[0] = 5;
-            a1[1] = 4;
-            a1[2] = 6;
-            a1[3] = 2;
-            Array.Sort(a1);
-            richTextBox1.Text += "\n最大值為：" + a1[3].ToString() + "\n";
-
-            foreach (string str in LunarHolDayName)
-            {
-                richTextBox1.Text += str + " ";
-            }
-            richTextBox1.Text += "\n";
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            int value1 = 65535;
-            int value2 = 0x12345;
-            MessageBox.Show("十進位：" + value1 + "  十六進位： 0x" + Convert.ToString(value1, 16));
-            MessageBox.Show("十六進位： 0x" + Convert.ToString(value2, 16) + "  十進位：" + value2);
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -479,32 +411,6 @@ namespace vcs_test_all_03_Syntax
 
         private void button9_Click(object sender, EventArgs e)
         {
-            //StringBuilder語法
-
-            richTextBox1.Text += "StringBuilder test\n";
-            StringBuilder sb1 = new StringBuilder();
-            sb1.Append("\r\n\r\n\r\n");
-            sb1.Append("*******興隆超市*******\n");
-            sb1.Append("品名-----數量-----價格\n");
-            sb1.Append("精品白沙   1       8元\n");
-            sb1.Append("張新發檳榔 1      10元\n");
-            sb1.Append("合計：     2      18元\n");
-            sb1.Append("---收銀員：張三---\n");
-            sb1.Append("---技術支持：李四---\n\n\n");
-
-            richTextBox1.Text += sb1.ToString() + "\n";
-
-            //StringBuilder 就是 字符串相加
-            //StringBuilder("")
-            //字元串相加，（+號是不是也一樣？）
-            StringBuilder sb2 = new StringBuilder("這裏是 : ");
-            sb2.Append("群曜");
-            sb2.Append("醫電");
-            sb2.Append("股份");
-            sb2.Append("有限");
-            sb2.Append("公司");
-
-            richTextBox1.Text += "取得字串 : " + sb2 + "\n";
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -694,9 +600,6 @@ namespace vcs_test_all_03_Syntax
 
         private void button25_Click(object sender, EventArgs e)
         {
-            int dint = 170;
-            string strHex = String.Format("{0:X2}", dint);    //X2的2代表若缺0會自動補0，所以沒有2也沒關係
-            richTextBox1.Text += "result : " + strHex + "\n";
         }
 
         private void button26_Click(object sender, EventArgs e)
@@ -863,81 +766,10 @@ namespace vcs_test_all_03_Syntax
 
         private void button30_Click(object sender, EventArgs e)
         {
-            string s2 = "AB";
-
-            //轉換10進位
-            int j = 0;
-            int result = 0;
-
-            for (int i = 0; i < s2.Length; i++)
-            {
-                result = result * 16;
-                j = s2[i] - 48;
-                if (j < 10)
-                {
-                    result = result + j;
-                }
-                else
-                {
-                    result = result + j - 39;
-                }
-            }
-            richTextBox1.Text += "result : " + result.ToString() + "\n";
-
-            //另一種寫法
-            //Convert.ToInt32("100", 16);
-
-            richTextBox1.Text += "result : " + Convert.ToInt32("AB", 16).ToString() + "\n";
         }
 
         private void button31_Click(object sender, EventArgs e)
         {
-            int a, n, r;
-
-            a = 12345;
-
-            string[] m = {"0", "1", "2", "3",
-                           "4", "5", "6", "7",
-                           "8", "9", "A", "B",
-                           "C", "D", "E", "F"};
-            string s = "";
-
-            richTextBox1.Text = "10進位數字\t" + a.ToString() + "\n";
-
-            n = 2;
-            s = "";
-            for (; a > 0; a = a / n)
-            {
-                r = a % n;  //取得餘數
-
-                s = m[r] + s; // 查表，串列左邊
-            }
-
-            richTextBox1.Text += "2進位\t" + s + "\n";
-
-            a = 12345;
-            n = 8;
-            s = "";
-            for (; a > 0; a = a / n)
-            {
-                r = a % n;  //取得餘數
-
-                s = m[r] + s; // 查表，串列左邊
-            }
-
-            richTextBox1.Text += "8進位\t" + s + "\n";
-
-            a = 12345;
-            n = 16;
-            s = "";
-            for (; a > 0; a = a / n)
-            {
-                r = a % n;  //取得餘數
-
-                s = m[r] + s; // 查表，串列左邊
-            }
-
-            richTextBox1.Text += "16進位\t" + s + "\n";
         }
 
         //函式多載(function overloading) ST
@@ -990,18 +822,6 @@ namespace vcs_test_all_03_Syntax
 
         private void button33_Click(object sender, EventArgs e)
         {
-            string hexValues = "48 65 6C 6C 6F 20 57 6F 72 6C 64 21";
-            string[] hexValuesSplit = hexValues.Split(' ');
-            richTextBox1.Text += "hexValues\tvalue\tstringValue\tcharValue\n";
-            foreach (String hex in hexValuesSplit)
-            {
-                // Convert the number expressed in base-16 to an integer.
-                int value = Convert.ToInt32(hex, 16);
-                // Get the character corresponding to the integral value.
-                string stringValue = Char.ConvertFromUtf32(value);
-                char charValue = (char)value;
-                richTextBox1.Text += hex + '\t' + value.ToString() + '\t' + stringValue + '\t' + charValue + '\n';
-            }
         }
 
         //傳值呼叫 vs 傳址呼叫 ST

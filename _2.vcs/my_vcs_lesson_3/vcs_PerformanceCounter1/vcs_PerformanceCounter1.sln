@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_PerformanceCounter", "vcs_PerformanceCounter\vcs_PerformanceCounter.csproj", "{D77B0525-D27A-4F0B-ADD3-9BBC8AC27B6A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_PerformanceCounter1", "vcs_PerformanceCounter1\vcs_PerformanceCounter1.csproj", "{D77B0525-D27A-4F0B-ADD3-9BBC8AC27B6A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

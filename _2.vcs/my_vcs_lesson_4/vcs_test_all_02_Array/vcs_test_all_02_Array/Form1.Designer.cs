@@ -336,7 +336,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(200, 42);
             this.button18.TabIndex = 19;
-            this.button18.Text = "xxx";
+            this.button18.Text = "多維陣列";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -789,6 +789,7 @@
             this.button40.Name = "button40";
             this.button40.Size = new System.Drawing.Size(200, 42);
             this.button40.TabIndex = 67;
+            this.button40.Text = "陣列宣告範例";
             this.button40.UseVisualStyleBackColor = true;
             this.button40.Click += new System.EventHandler(this.button40_Click);
             // 

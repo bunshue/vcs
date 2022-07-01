@@ -22,6 +22,7 @@ namespace vcs_TextBox
         private void Form1_Load(object sender, EventArgs e)
         {
             textBox1.ShortcutsEnabled = false;   // 不啟用快速鍵, 限制 TextBox 上不使用快速鍵與滑鼠右鍵表單
+            textBox_use_scrollbar.ScrollBars = ScrollBars.Both;
 
             // Register the TextChanged event handler.
             textBox2.TextChanged += textBox2_TextChanged;

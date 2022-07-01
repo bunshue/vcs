@@ -56,6 +56,7 @@
             this.textBox7 = new System.Windows.Forms.TextBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.textBox_use_scrollbar = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -65,7 +66,7 @@
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox2.Location = new System.Drawing.Point(11, 556);
+            this.textBox2.Location = new System.Drawing.Point(18, 607);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(171, 34);
@@ -76,7 +77,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label3.Location = new System.Drawing.Point(12, 520);
+            this.label3.Location = new System.Drawing.Point(12, 570);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(289, 21);
             this.label3.TabIndex = 4;
@@ -353,11 +354,23 @@
             this.label9.TabIndex = 22;
             this.label9.Text = "(用KeyPress, 限制 TextBox只能輸入十六進位碼、Backspace、Enter)";
             // 
+            // textBox_use_scrollbar
+            // 
+            this.textBox_use_scrollbar.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox_use_scrollbar.Location = new System.Drawing.Point(16, 488);
+            this.textBox_use_scrollbar.Multiline = true;
+            this.textBox_use_scrollbar.Name = "textBox_use_scrollbar";
+            this.textBox_use_scrollbar.Size = new System.Drawing.Size(262, 38);
+            this.textBox_use_scrollbar.TabIndex = 23;
+            this.textBox_use_scrollbar.Text = "TextBox加ScrollBar 1 TextBox加ScrollBar 2 TextBox加ScrollBar 3 TextBox加ScrollBar 4 T" +
+                "extBox加ScrollBar 5 TextBox加ScrollBar 6 TextBox加ScrollBar 7 TextBox加ScrollBar 8";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1044, 699);
+            this.Controls.Add(this.textBox_use_scrollbar);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
@@ -417,6 +430,7 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox textBox_use_scrollbar;
     }
 }
 

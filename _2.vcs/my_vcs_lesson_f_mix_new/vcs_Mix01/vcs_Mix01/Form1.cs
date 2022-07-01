@@ -504,35 +504,6 @@ namespace vcs_Mix01
         private void button9_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //格式化列印
-
-            Console.WriteLine("The value 99999 in different ways:");
-            Console.WriteLine("c format : {0:c}", 99999);
-            Console.WriteLine("d9 format : {0:d9}", 99999);
-            Console.WriteLine("f format : {0:f3}", 99999);
-            Console.WriteLine("g format : {0:g}", 99999);
-
-            Console.WriteLine("n format : {0:n}", 99999);
-            Console.WriteLine("E format : {0:E}", 99999);
-            Console.WriteLine("e format : {0:e}", 99999);
-            Console.WriteLine("X format : {0:X}", 99999);
-            Console.WriteLine("x format : {0:x}", 99999);
-
-            int x1 = 3;
-            int x2 = 8;
-            int x3 = 3;
-            int x4 = 4;
-            int x5 = 2;
-            string xx = String.Format("{0}-{1}-{2}-{3}-{4}", x1, x2, x3, x4, x5);
-            richTextBox1.Text += "xx = " + xx + "\n";
-
-            richTextBox1.Text += "String.Format是將指定的 String類型的數據中的每個格式項替換為相應對象的值的文本等效項。 \n";
-
-            string p1 = "Jackie";
-            string p2 = "Aillo";
-
-            richTextBox1.Text += String.Format("Hello {0}, I'm {1}", p1, p2) + "\n";
-            richTextBox1.Text += String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo") + "\n";
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -892,188 +863,16 @@ namespace vcs_Mix01
         private void button16_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            /*
-            從一組鍵（Key）到一組值（Value）的對映，每一個新增項都是由一個值及其相關連的鍵組成  
-            任何鍵都必須是唯一的  
-            鍵不能為空引用null（VB中的Nothing），若值為引用型別，則可以為空值  
-            Key和Value可以是任何型別（string，int，custom class 等）
-            */
-
-            richTextBox1.Text += "建立Dictionary<K,V>，然後新增元素\n";
-            Dictionary<string, string> film = new Dictionary<string, string>();
-            film.Add("韋小寶", "鹿鼎記");
-            film.Add("陸小鳳", "陸小鳳傳奇");
-            film.Add("張無忌", "倚天屠龍記");
-            film.Add("楊過", "神鵰俠侶");
-            film.Add("令狐沖", "笑傲江湖");
-            richTextBox1.Text += "集合現在的元素個數為 " + film.Count.ToString() + "\n";
-
-            richTextBox1.Text += "移除一個\n";
-            film.Remove("楊過");
-            richTextBox1.Text += "集合現在的元素個數為 " + film.Count.ToString() + "\n";
-
-            richTextBox1.Text += "遍歷集合\n";
-            richTextBox1.Text += "所有武俠電影的主角及電影名\n";
-            richTextBox1.Text += "\t主角\t電影\n";
-            foreach (KeyValuePair<string, string> kvp in film)
-            {
-                richTextBox1.Text += "\t" + kvp.Key + "\t" + kvp.Value + "\n";
-            }
-
-            richTextBox1.Text += "檢查元素是否存在，如不存在，新增\n";
-            if (!film.ContainsKey("段譽"))
-            {
-                richTextBox1.Text += "該元素不存在，新增\n";
-                film.Add("段譽", "天龍八部");
-            }
-            else
-            {
-                richTextBox1.Text += "該元素已存在\n";
-            }
-
-            richTextBox1.Text += "獲取鍵的集合\n";
-            Dictionary<string, string>.KeyCollection keys = film.Keys;
-
-            richTextBox1.Text += "遍歷鍵的集合\n";
-            richTextBox1.Text += "受歡迎的武俠片中主角名\n";
-            foreach (string str in keys)
-            {
-                richTextBox1.Text += str + "\n";
-            }
-
-            Dictionary<string, string>.ValueCollection values = film.Values;
-            richTextBox1.Text += "遍歷值的集合\n";
-            richTextBox1.Text += "最受歡迎的武俠片\n";
-            foreach (string strfilm in values)
-            {
-                richTextBox1.Text += strfilm + "\n";
-            }
-
-            richTextBox1.Text += "遍歷元素的另一種方法\n";
-            richTextBox1.Text += "和雜湊表相同的遍歷元素方法\n";
-            foreach (string strname in film.Values)
-            {
-                richTextBox1.Text += strname + "\n";
-            }
-
-            richTextBox1.Text += "獲取鍵對應的值\n";
-            string myfilm = film["令狐沖"];
-            richTextBox1.Text += "主角為令狐沖的電影名 : " + myfilm + "\n";
-
-            richTextBox1.Text += "獲取鍵對應值的TryGetValue方法\n";
-            string objfilm = string.Empty;
-            if (film.TryGetValue("段譽", out objfilm))
-            {
-                richTextBox1.Text += "主角為段譽的電影是 : " + objfilm + "\n";
-            }
-            else
-            {
-                richTextBox1.Text += "沒有主角為段譽的電影\n";
-            }
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            String[, ,] items =
-            new String[,,] {
-            {
-            { "A1", "A2", "A3", "☆", "○" },
-            { "B1", "B2", "B3", "☆", "○" },
-            { "C1", "C2", "C3", "☆", "○" },
-            { "D1", "D2", "D3", "☆", "○" }
-            }, {
-            { "E1", "E2", "E3", "☆", "○" },
-            { "F1", "F2", "F3", "☆", "○" },
-            { "G1", "G2", "G3", "☆", "○" },
-            { "H1", "H2", "H3", "☆", "○" }
-            }
-            };
-
-            //GetUpperBound(0) 返回數組的第一維的索引上限，GetUpperBound(i)返回數組的i+1維的上限，GetUpperBound(Rank-1)返回數組的最後一維的上限，也就是列數-1
-
-            Console.WriteLine("Items.Rank =" + items.Rank);
-            Console.WriteLine("Items.GetUpperBound(0)=" + items.GetUpperBound(0));
-
-            Console.WriteLine("Items.GetUpperBound(1)=" + items.GetUpperBound(1));
-            Console.WriteLine("Items.GetUpperBound(2)=" + items.GetUpperBound(items.Rank - 1));
-
-            Console.WriteLine("Items[0, 0, 0]=" + items[0, 0, 0]);
-            Console.WriteLine("Items[0, 0, 1]=" + items[0, 0, 1]);
-            Console.WriteLine("Items[0, 0, 2]=" + items[0, 0, 2]);
-            Console.WriteLine("Items[0, 0, 3]=" + items[0, 0, 3]);
-            Console.WriteLine("Items[0, 0, 4]=" + items[0, 0, 4]);
-
-
-            Console.WriteLine("Items[0, 1, 0]=" + items[0, 1, 0]);
-            Console.WriteLine("Items[0, 2, 0]=" + items[0, 1, 1]);
-            Console.WriteLine("Items[0, 2, 0]=" + items[0, 1, 2]);
-            Console.WriteLine("Items[0, 2, 0]=" + items[0, 1, 3]);
-
-            Console.WriteLine("Items[0, 2, 0]=" + items[0, 1, 4]);
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //Dictionary使用範例1
-
-            //建立及初始化
-
-            Dictionary<string, int> myDictionary = new Dictionary<string, int>();
-
-            //新增元素
-
-            myDictionary.Add("C#", 0);
-            myDictionary.Add("C++", 1);
-            myDictionary.Add("C", 2);
-            myDictionary.Add("VB", 2);
-
-            //查詢元素By Key
-
-            if (myDictionary.ContainsKey("C#"))
-            {
-                Console.WriteLine("Key:{0},Value:{1}", "C#", myDictionary["C#"]);
-            }
-
-            //遍歷元素 By KeyValuePair
-
-            foreach (KeyValuePair<string, int> kvp in myDictionary)
-            {
-                Console.WriteLine("Key = {0}, Value = {1}", kvp.Key, kvp.Value);
-            }
-
-            //僅遍歷鍵 By Keys 屬性
-
-            Dictionary<string, int>.KeyCollection keyCol = myDictionary.Keys;
-            foreach (string key in keyCol/*string key in myDictionary.Keys*/)
-            {
-                Console.WriteLine("Key = {0}", key);
-            }
-
-            //僅遍歷值By Valus屬性
-
-            Dictionary<string, int>.ValueCollection valueCol = myDictionary.Values;
-            foreach (int value in valueCol)
-            {
-                Console.WriteLine("Value = {0}", value);
-            }
-
-            //移除指定的鍵值By Remove方法
-
-            myDictionary.Remove("C#");
-            if (myDictionary.ContainsKey("C#"))
-            {
-                Console.WriteLine("Key:{0},Value:{1}", "C#", myDictionary["C#"]);
-            }
-            else
-            {
-                Console.WriteLine("不存在 Key : C#");
-            }  
-
-
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -1363,46 +1162,6 @@ namespace vcs_Mix01
         private void button27_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //LINQ to XML write
-            /*
-            //LINQ to XML操作Xml文檔
-
-
-            //.Net中的System.Xml.Linq命名空間提供了linq to xml的支持。這個命名空間中的XDocument，XElement以及XText，XAttribute提供了讀寫xml文檔的關鍵方法。
-            1. 使用linq to xml寫xml：
-            使用XDocument的構造函數可以構造一個Xml文檔對象；使用XElement對象可以構造一個xml節點元素，使用XAttribute構造函數可以構造元素的屬性；使用XText構造函數可以構造節點內的文本。
-            */
-
-
-            var xDoc = new XDocument(new XElement("root",
-                new XElement("dog",
-                    new XText("dog said black is a beautify color"),
-                    new XAttribute("color", "black")),
-                new XElement("cat"),
-                new XElement("pig", "pig is great")));
-
-            //xDoc輸出xml的encoding是系統默認編碼，對於簡體中文操作系統是gb2312
-            //默認是縮進格式化的xml，而無須格式化設置
-            xDoc.Save("aaaa.xml");
-
-
-            //LINQ to XML read
-
-
-            var query = from item in xDoc.Element("root").Elements()
-                        select new
-                        {
-                            TypeName = item.Name,
-                            Saying = item.Value,
-                            Color = item.Attribute("color") == null ? (string)null : item.Attribute("color").Value
-                        };
-
-
-            foreach (var item in query)
-            {
-                Console.WriteLine("{0} 's color is {1},{0} said {2}", item.TypeName, item.Color ?? "Unknown", item.Saying ?? "nothing");
-                richTextBox1.Text += item.TypeName + "\t" + item.Color + "\n";
-            }
         }
 
         private void button28_Click(object sender, EventArgs e)

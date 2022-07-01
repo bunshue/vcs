@@ -35,7 +35,7 @@ namespace vcs_test_all_02_String
             x_st = 10;
             y_st = 10;
             dx = 180 + 10;
-            dy = 60 + 10;
+            dy = 50 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -47,28 +47,29 @@ namespace vcs_test_all_02_String
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
 
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button20.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button21.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button22.Location = new Point(x_st + dx * 1, y_st + dy * 10);
+            button23.Location = new Point(x_st + dx * 1, y_st + dy * 11);
 
-            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button30.Location = new Point(x_st + dx * 2, y_st + dy * 6);
 
             textBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             button31.Location = new Point(x_st + dx * 3, y_st + dy * 1);
@@ -274,7 +275,35 @@ namespace vcs_test_all_02_String
 
         private void button12_Click(object sender, EventArgs e)
         {
+            //格式化列印
 
+            Console.WriteLine("The value 99999 in different ways:");
+            Console.WriteLine("c format : {0:c}", 99999);
+            Console.WriteLine("d9 format : {0:d9}", 99999);
+            Console.WriteLine("f format : {0:f3}", 99999);
+            Console.WriteLine("g format : {0:g}", 99999);
+
+            Console.WriteLine("n format : {0:n}", 99999);
+            Console.WriteLine("E format : {0:E}", 99999);
+            Console.WriteLine("e format : {0:e}", 99999);
+            Console.WriteLine("X format : {0:X}", 99999);
+            Console.WriteLine("x format : {0:x}", 99999);
+
+            int x1 = 3;
+            int x2 = 8;
+            int x3 = 3;
+            int x4 = 4;
+            int x5 = 2;
+            string xx = String.Format("{0}-{1}-{2}-{3}-{4}", x1, x2, x3, x4, x5);
+            richTextBox1.Text += "xx = " + xx + "\n";
+
+            richTextBox1.Text += "String.Format是將指定的 String類型的數據中的每個格式項替換為相應對象的值的文本等效項。 \n";
+
+            string p1 = "Jackie";
+            string p2 = "Aillo";
+
+            richTextBox1.Text += String.Format("Hello {0}, I'm {1}", p1, p2) + "\n";
+            richTextBox1.Text += String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo") + "\n";
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -370,7 +399,32 @@ namespace vcs_test_all_02_String
 
         private void button17_Click(object sender, EventArgs e)
         {
+            //StringBuilder語法
 
+            richTextBox1.Text += "StringBuilder test\n";
+            StringBuilder sb1 = new StringBuilder();
+            sb1.Append("\r\n\r\n\r\n");
+            sb1.Append("*******興隆超市*******\n");
+            sb1.Append("品名-----數量-----價格\n");
+            sb1.Append("精品白沙   1       8元\n");
+            sb1.Append("張新發檳榔 1      10元\n");
+            sb1.Append("合計：     2      18元\n");
+            sb1.Append("---收銀員：張三---\n");
+            sb1.Append("---技術支持：李四---\n\n\n");
+
+            richTextBox1.Text += sb1.ToString() + "\n";
+
+            //StringBuilder 就是 字符串相加
+            //StringBuilder("")
+            //字元串相加，（+號是不是也一樣？）
+            StringBuilder sb2 = new StringBuilder("這裏是 : ");
+            sb2.Append("群曜");
+            sb2.Append("醫電");
+            sb2.Append("股份");
+            sb2.Append("有限");
+            sb2.Append("公司");
+
+            richTextBox1.Text += "取得字串 : " + sb2 + "\n";
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -487,23 +541,120 @@ namespace vcs_test_all_02_String
 
         private void button26_Click(object sender, EventArgs e)
         {
-
+            //十六進位顯示
+            int value1 = 65535;
+            int value2 = 0x12345;
+            MessageBox.Show("十進位：" + value1 + "  十六進位： 0x" + Convert.ToString(value1, 16));
+            MessageBox.Show("十六進位： 0x" + Convert.ToString(value2, 16) + "  十進位：" + value2);
         }
 
         private void button27_Click(object sender, EventArgs e)
         {
-
+            string hexValues = "48 65 6C 6C 6F 20 57 6F 72 6C 64 21";
+            string[] hexValuesSplit = hexValues.Split(' ');
+            richTextBox1.Text += "hexValues\tvalue\tstringValue\tcharValue\n";
+            foreach (String hex in hexValuesSplit)
+            {
+                // Convert the number expressed in base-16 to an integer.
+                int value = Convert.ToInt32(hex, 16);
+                // Get the character corresponding to the integral value.
+                string stringValue = Char.ConvertFromUtf32(value);
+                char charValue = (char)value;
+                richTextBox1.Text += hex + '\t' + value.ToString() + '\t' + stringValue + '\t' + charValue + '\n';
+            }
         }
 
         private void button28_Click(object sender, EventArgs e)
         {
-
+            //10進位轉十六進位
+            int dint = 170;
+            string strHex = String.Format("{0:X2}", dint);    //X2的2代表若缺0會自動補0，所以沒有2也沒關係
+            richTextBox1.Text += "result : " + strHex + "\n";
         }
 
         private void button29_Click(object sender, EventArgs e)
         {
+            //16進位轉10進位
+            string s2 = "AB";
+
+            //轉換10進位
+            int j = 0;
+            int result = 0;
+
+            for (int i = 0; i < s2.Length; i++)
+            {
+                result = result * 16;
+                j = s2[i] - 48;
+                if (j < 10)
+                {
+                    result = result + j;
+                }
+                else
+                {
+                    result = result + j - 39;
+                }
+            }
+            richTextBox1.Text += "result : " + result.ToString() + "\n";
+
+            //另一種寫法
+            //Convert.ToInt32("100", 16);
+
+            richTextBox1.Text += "result : " + Convert.ToInt32("AB", 16).ToString() + "\n";
 
         }
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+            //10進位轉各種進位
+            int a, n, r;
+
+            a = 12345;
+
+            string[] m = {"0", "1", "2", "3",
+                           "4", "5", "6", "7",
+                           "8", "9", "A", "B",
+                           "C", "D", "E", "F"};
+            string s = "";
+
+            richTextBox1.Text += "10進位數字\t" + a.ToString() + "\n";
+
+            n = 2;
+            s = "";
+            for (; a > 0; a = a / n)
+            {
+                r = a % n;  //取得餘數
+
+                s = m[r] + s; // 查表，串列左邊
+            }
+
+            richTextBox1.Text += "2進位\t" + s + "\n";
+
+            a = 12345;
+            n = 8;
+            s = "";
+            for (; a > 0; a = a / n)
+            {
+                r = a % n;  //取得餘數
+
+                s = m[r] + s; // 查表，串列左邊
+            }
+
+            richTextBox1.Text += "8進位\t" + s + "\n";
+
+            a = 12345;
+            n = 16;
+            s = "";
+            for (; a > 0; a = a / n)
+            {
+                r = a % n;  //取得餘數
+
+                s = m[r] + s; // 查表，串列左邊
+            }
+
+            richTextBox1.Text += "16進位\t" + s + "\n";
+
+        }
+
 
         int value1 = 12345;
         double value2 = 123.456;
@@ -545,6 +696,7 @@ namespace vcs_test_all_02_String
         {
             textBox1.Text = value3.ToString("#00000.000");   //格式化，小數點前5位，小數點後留3位四捨五入
         }
+
     }
 }
 

@@ -1079,7 +1079,8 @@ namespace vcs_FileManager
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //從一個資料夾中撈出所有檔案 標準版 多層 標準版
+            richTextBox1.Text += "撈出資料夾一層檔案\n";
+            //從一個資料夾中撈出所有檔案 標準版 一層 標準版
 
             if (listBox1.Items.Count == 0)
             {
@@ -1172,6 +1173,7 @@ namespace vcs_FileManager
 
         private void button1_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "撈出資料夾多層檔案\n";
             //從一個資料夾中撈出所有檔案 標準版
             
             if (listBox1.Items.Count == 0)
@@ -1406,6 +1408,9 @@ namespace vcs_FileManager
         private void button4_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "找低畫質影片, 不到720p的影片\n";
+
+
+
 
 
         }
