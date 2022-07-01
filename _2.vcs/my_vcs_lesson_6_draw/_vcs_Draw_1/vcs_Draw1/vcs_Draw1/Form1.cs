@@ -1904,6 +1904,77 @@ namespace vcs_Draw1
 
         private void button35_Click(object sender, EventArgs e)
         {
+            //透明色測試
+            richTextBox1.Text += "R = " + Color.Transparent.R.ToString() + "\n";
+            richTextBox1.Text += "G = " + Color.Transparent.G.ToString() + "\n";
+            richTextBox1.Text += "B = " + Color.Transparent.B.ToString() + "\n";
+            richTextBox1.Text += "A = " + Color.Transparent.A.ToString() + "\n";
+            richTextBox1.Text += "A2 = " + Color.Red.A.ToString() + "\n";
+
+
+            string filename = @"C:\______test_files\picture1.jpg";
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+            g = Graphics.FromImage(bitmap1);
+
+
+
+            //清空畫布並用透明色填充
+            //g.Clear(Color.Transparent);
+
+
+            Color c1 = Color.FromArgb(255, 255, 0, 0);
+            SolidBrush sb1 = new SolidBrush(c1);
+            g.FillRectangle(sb1, 50, 50, 100, 100);
+
+            Color c2 = Color.FromArgb(255, 0, 255, 0);
+            SolidBrush sb2 = new SolidBrush(c2);
+            g.FillRectangle(sb2, 100, 50, 100, 100);
+
+
+            Color c3 = Color.FromArgb(255, 255, 0, 0);
+            SolidBrush sb3 = new SolidBrush(c3);
+            g.FillRectangle(sb3, 50, 200, 100, 100);
+
+            Color c4 = Color.FromArgb(128, 0, 255, 0);
+            SolidBrush sb4 = new SolidBrush(c4);
+            g.FillRectangle(sb4, 100, 200, 100, 100);
+
+
+            //g.FillRectangle(Brushes.Blue, 00, 320, 600, 50);
+            //g.FillRectangle(Brushes.Blue, 00, 420, 600, 50);
+            /*
+            int i;
+            int w = 40;
+            for (i = 0; i < 13; i++)
+            {
+            Color c5 = Color.FromArgb(255, 20 * i, 0, 0);
+            SolidBrush sb5 = new SolidBrush(c5);
+            g.FillRectangle(sb5, 50 + w * i, 300, w, 100);
+
+            }
+            for (i = 0; i < 13; i++)
+            {
+            Color c5 = Color.FromArgb(20 * i, 255, 0, 0);
+            SolidBrush sb5 = new SolidBrush(c5);
+            g.FillRectangle(sb5, 50 + w * i, 400, w, 100);
+
+            }
+            */
+
+            Color c6 = Color.FromArgb(200, 255, 255, 255);
+            SolidBrush sb5 = new SolidBrush(c6);
+            g.FillRectangle(sb5, 300, 100, 100, 100);
+
+
+            //g.DrawString("格子裏", new Font("黑體", 20), new SolidBrush(c6), 200, 100);
+            g.DrawString("格子裏", new Font("黑體", 20), new SolidBrush(Color.Black), 200, 100);
+
+
+            g.DrawRectangle(Pens.Red, 100, 100, 100, 100);
+            
+            
+            pictureBox1.Image = bitmap1;
+
         }
 
         private void button36_Click(object sender, EventArgs e)
@@ -2999,7 +3070,40 @@ namespace vcs_Draw1
 
         private void button58_Click(object sender, EventArgs e)
         {
+            open_new_file();
 
+            int dy = 150;
+
+            //MakeTransparent 功能
+
+            string filename = @"C:\______test_files\__pic\lion.bmp";
+
+            richTextBox1.Text += "無 MakeTransparent\n";
+            Bitmap bmp1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            g.DrawImage(bmp1, 0, 0, bmp1.Width, bmp1.Height);
+
+
+
+            richTextBox1.Text += "有 MakeTransparent\n";
+            Bitmap bmp2 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            //bmp2.MakeTransparent();    //沒寫就是預設的     程式碼會讓系統預設透明色彩透明
+            bmp2.MakeTransparent(Color.White);//將圖片白色部分透明化, 將此 Bitmap 的指定色彩變為透明。
+
+            g.DrawImage(bmp2, 0, dy, bmp2.Width, bmp2.Height);
+
+
+            richTextBox1.Text += "有 MakeTransparent 指名某點顏色變透明\n";
+            Bitmap bmp3 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+
+            Color backColor = bmp3.GetPixel(20, 80);   //選取圖片邊緣的一個點的顏色當成背景色
+            bmp3.MakeTransparent(backColor); //將此背景色設定為透明
+            g.DrawImage(bmp3, 0, dy * 2, bmp3.Width, bmp3.Height);
+
+            g.DrawString("無 MakeTransparent", new Font("標楷體", 20), new SolidBrush(Color.Navy), 0, bmp1.Height - 30);
+            g.DrawString("有 MakeTransparent", new Font("標楷體", 20), new SolidBrush(Color.Navy), 0, dy + bmp2.Height - 30);
+            g.DrawString("有 MakeTransparent 指名某點顏色變透明", new Font("標楷體", 20), new SolidBrush(Color.Navy), 0, dy * 2 + bmp3.Height - 30);
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button59_Click(object sender, EventArgs e)

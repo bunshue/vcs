@@ -361,7 +361,7 @@ namespace vcs_Draw_Transform1
 
             Bitmap bitmap2 = new Bitmap(W, H);
             Graphics g = Graphics.FromImage(bitmap2);
-            Pen p = new Pen(Color.Red, 3);
+            //Pen p = new Pen(Color.Red, 3);
             g.Clear(Color.Pink);
 
             //圖片的中心, 依此中心旋轉

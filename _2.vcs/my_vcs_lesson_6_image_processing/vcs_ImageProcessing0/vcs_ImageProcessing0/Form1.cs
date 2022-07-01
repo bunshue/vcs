@@ -1368,6 +1368,24 @@ namespace vcs_ImageProcessing0
 
         private void button16_Click(object sender, EventArgs e)
         {
+            //將圖片放入拜列
+
+            string filename = @"C:\______test_files\pic_256X100.bmp";
+
+            Image image = Image.FromFile(filename);
+
+            MemoryStream ms = new MemoryStream();
+            image.Save(ms, image.RawFormat);
+            Byte[] byte_array = ms.ToArray();
+
+            int len = byte_array.Length;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+            int i;
+            for (i = 54; i < (54 + 256 * 2); i++)
+            {
+                richTextBox1.Text += byte_array[i].ToString("D03") + " ";
+
+            }
 
         }
 

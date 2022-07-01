@@ -524,7 +524,7 @@
             // 
             // button31
             // 
-            this.button31.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button31.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button31.Location = new System.Drawing.Point(883, 296);
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(120, 42);
@@ -591,6 +591,7 @@
             this.button35.Name = "button35";
             this.button35.Size = new System.Drawing.Size(120, 42);
             this.button35.TabIndex = 62;
+            this.button35.Text = "透明色測試";
             this.button35.UseVisualStyleBackColor = true;
             this.button35.Click += new System.EventHandler(this.button35_Click);
             // 
@@ -846,6 +847,7 @@
             this.button58.Name = "button58";
             this.button58.Size = new System.Drawing.Size(120, 42);
             this.button58.TabIndex = 86;
+            this.button58.Text = "去背效果3";
             this.button58.UseVisualStyleBackColor = true;
             this.button58.Click += new System.EventHandler(this.button58_Click);
             // 

@@ -120,47 +120,5 @@ namespace WindowsFormsApplication0210a
             // Draw the modified image.
             g.DrawImage(bitmap1, 0, 50);
         }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            Graphics g = this.pictureBox1.CreateGraphics();
-
-            string filename = @"..\..\pic\lion.bmp";
-
-            Bitmap bitmap1 = new Bitmap(filename);
-
-            // Draw bitmap1 to the screen.
-            g.DrawImage(bitmap1, 0, 0, bitmap1.Width, bitmap1.Height);
-
-            // Make the default transparent color transparent for bitmap1.
-            bitmap1.MakeTransparent();    //沒寫就是預設的     程式碼會讓系統預設透明色彩透明
-            //bitmap1.MakeTransparent(Color.White); //將此 Bitmap 的指定色彩變為透明。
-
-            // Draw the transparent bitmap to the screen.
-            g.DrawImage(bitmap1, 0, 200, bitmap1.Width, bitmap1.Height);
-
-
-
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            Graphics g = this.pictureBox1.CreateGraphics();
-
-            string filename = @"..\..\pic\lion.bmp";
-
-            Bitmap bitmap1 = new Bitmap(filename);
-
-            // Draw bitmap1 to the screen.
-            g.DrawImage(bitmap1, 0, 0, bitmap1.Width, bitmap1.Height);
-
-            Color backColor = bitmap1.GetPixel(1, 1);   //選取圖片邊緣的一個點的顏色當成背景色
-
-            bitmap1.MakeTransparent(backColor); //將此背景色設定為透明
-
-            // Draw the transparent bitmap to the screen.
-            g.DrawImage(bitmap1, 0, 200, bitmap1.Width, bitmap1.Height);
-        }
     }
 }
-

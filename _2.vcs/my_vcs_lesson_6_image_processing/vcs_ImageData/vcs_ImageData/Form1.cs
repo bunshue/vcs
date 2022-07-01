@@ -71,11 +71,11 @@ namespace vcs_ImageData
             richTextBox1.Text += image.Width.ToString() + " x " + image.Height.ToString() + " x " + image.ImageBit.ToString() + "bit\n";
 
             int i, j;
-            int x_st = 200;
-            int y_st = 200;
-            for (j = 0; j < 30; j += 1)
+            int x_st = 100;
+            int y_st = 100;
+            for (j = 0; j < 150; j += 1)
             {
-                for (i = 0; i < 30; i += 1)
+                for (i = 0; i < 150; i += 1)
                 {
                     //image[x_st + i, y_st + j, 0] = (i * 5 + j * 5) % 256;
                     //image[x_st + i, y_st + j, 1] = (i * 5 + j * 5) % 256;

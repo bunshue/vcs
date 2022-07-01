@@ -69,6 +69,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(170, 45);
             this.button6.TabIndex = 20;
+            this.button6.Text = "取得圖片的一部分";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 

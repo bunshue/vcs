@@ -328,15 +328,51 @@ namespace vcs_Draw5_Image
             pictureBox1.Image = (Image)bitmap1;
 
             g.Dispose();
+        }
 
+        //C#獲取圖片的指定部分
+        /// <summary>
+        /// 獲取圖片指定部分
+        /// </summary>
+        /// <param name="filename">圖片路徑</param>
+        /// <param name="sx">原始圖片開始截取處的坐標X值</param>
+        /// <param name="sy">原始圖片開始截取處的坐標Y值</param>
+        /// <param name="sWidth">原始圖片的寬度</param>
+        /// <param name="sHeight">原始圖片的高度</param>
+        /// <param name="dx">目標圖片開始繪制處的坐標X值(通常為0)</param>
+        /// <param name="dy">目標圖片開始繪制處的坐標Y值(通常為0)</param>
+        /// <param name="dWidth">目標圖片的寬度</param>
+        /// <param name="dHeight">目標圖片的高度</param>
+        static Bitmap GetPart(string filename, int sx, int sy, int sWidth, int sHeight, int dx, int dy, int dWidth, int dHeight)
+        {
+            Image image = Image.FromFile(filename);
 
+            Bitmap bitmap1 = new Bitmap(dWidth, dHeight);
+            Graphics g = Graphics.FromImage(bitmap1);
+            Rectangle rec1 = new Rectangle(new Point(sx, sy), new Size(sWidth, sHeight));//原圖位置
+            Rectangle rec2 = new Rectangle(new Point(dx, dy), new Size(dWidth, dHeight));//目標位置
 
+            g.DrawImage(image, rec2, rec1, GraphicsUnit.Pixel);
 
+            return bitmap1;
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //取得圖片的一部分
+            string filename = @"C:\______test_files\picture1.jpg";
 
+            int sx = 0;
+            int sy = 0;
+            int sWidth = 305 / 2;
+            int sHeight = 400 / 2;
+            int dx = 0;
+            int dy = 0;
+            int dWidth = 305 / 1;
+            int dHeight = 400 / 1;
+
+            Bitmap bitmap1 = GetPart(filename, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+            pictureBox1.Image = bitmap1;
         }
 
         private void button7_Click(object sender, EventArgs e)
