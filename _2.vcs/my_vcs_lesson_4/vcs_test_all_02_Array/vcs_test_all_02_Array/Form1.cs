@@ -2088,7 +2088,51 @@ namespace vcs_test_all_02_Array
 
         private void ht8_Click(object sender, EventArgs e)
         {
+            //遍歷Hashtable 的幾種方法
 
+            Hashtable hashtable = new Hashtable();
+
+            hashtable.Add("first", "Beijing");
+            hashtable.Add("second", "Shanghai");
+            hashtable.Add("third", "Hangzhou");
+            hashtable.Add("forth", "Nanjing");
+
+            //遍歷方法一：遍歷雜湊表中的鍵
+            foreach (string key in hashtable.Keys)
+            {
+                Console.WriteLine(hashtable[key]);
+            }
+            Console.WriteLine("--------------------");
+
+            //遍歷方法二：遍歷雜湊表中的值
+            foreach (string value in hashtable.Values)
+            {
+                Console.WriteLine(value);
+            }
+            Console.WriteLine("--------------------");
+
+            //遍歷方法三：遍歷雜湊表中的鍵值
+            foreach (DictionaryEntry de in hashtable)
+            {
+                Console.WriteLine(de.Value);
+                Console.WriteLine(de.Key.ToString());
+                Console.WriteLine(de.Value.ToString());
+            }
+            Console.WriteLine("--------------------");
+
+            //遍歷方法四：遍歷雜湊表中的鍵值
+            IDictionaryEnumerator myEnumerator = hashtable.GetEnumerator();
+            while (myEnumerator.MoveNext())
+            {
+                Console.WriteLine(hashtable[myEnumerator.Key]);
+
+
+                //Hashtable關健字
+                richTextBox1.Text += "Hashtable關健字 : " + myEnumerator.Key.ToString() + "\n";
+
+                //Hashtable值
+                richTextBox1.Text += "Hashtable值 : " + myEnumerator.Value.ToString() + "\n";
+            }
         }
 
         private void ht9_Click(object sender, EventArgs e)
@@ -2297,4 +2341,3 @@ namespace vcs_test_all_02_Array
         }
     }
 }
-

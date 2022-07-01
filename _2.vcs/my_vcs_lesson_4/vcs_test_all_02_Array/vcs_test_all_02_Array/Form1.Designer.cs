@@ -642,11 +642,12 @@
             // 
             // ht8
             // 
-            this.ht8.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.ht8.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.ht8.Location = new System.Drawing.Point(164, 67);
             this.ht8.Name = "ht8";
             this.ht8.Size = new System.Drawing.Size(140, 40);
             this.ht8.TabIndex = 71;
+            this.ht8.Text = "遍歷Hashtable 的幾種方法";
             this.ht8.UseVisualStyleBackColor = true;
             this.ht8.Click += new System.EventHandler(this.ht8_Click);
             // 
