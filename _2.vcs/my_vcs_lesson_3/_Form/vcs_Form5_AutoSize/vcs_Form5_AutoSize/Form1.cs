@@ -14,6 +14,7 @@ namespace vcs_Form5_AutoSize
         //自適應窗體, 參考: http://blog.sina.com.cn/s/blog_45eaa01a0101c7ko.html
         //1.声明自适应类实例
         AutoSizeFormClass asc = new AutoSizeFormClass();
+
         public Form1()
         {
             InitializeComponent();
@@ -45,12 +46,12 @@ namespace vcs_Form5_AutoSize
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("C:\\test.txt");
+            System.Diagnostics.Process.Start(@"C:\______test_files\__RW\_txt\琵琶行.txt");
         }
 
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start("mailto:wang_wj@myson.com.tw");
+            System.Diagnostics.Process.Start("bunshue@gmail.com");
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -65,12 +66,12 @@ namespace vcs_Form5_AutoSize
 
         private void button4_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("您要將變更儲存至\"Myson_Doc.doc\"嗎?", "Microsoft Office Word", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+            MessageBox.Show("您要將變更儲存至\"vcs_doc.doc\"嗎?", "Microsoft Office Word", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("您要將變更儲存至\"Myson_Doc.doc\"嗎?", "Microsoft Office Word", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
+            DialogResult result = MessageBox.Show("您要將變更儲存至\"vcs_doc.doc\"嗎?", "Microsoft Office Word", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
                 MessageBox.Show("您選了Yes");
             else if (result == DialogResult.No)

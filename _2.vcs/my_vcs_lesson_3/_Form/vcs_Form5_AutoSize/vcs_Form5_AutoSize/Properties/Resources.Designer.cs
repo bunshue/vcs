@@ -63,9 +63,9 @@ namespace vcs_Form5_AutoSize.Properties {
         /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
-        internal static System.Drawing.Bitmap _1104_22099815000 {
+        internal static System.Drawing.Bitmap ims_small_logo {
             get {
-                object obj = ResourceManager.GetObject("1104_22099815000", resourceCulture);
+                object obj = ResourceManager.GetObject("ims_small_logo", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

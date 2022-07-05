@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Collections;   //for IEnumerable
+
 namespace vcs_Queue
 {
     public partial class Form1 : Form
@@ -151,5 +153,114 @@ namespace vcs_Queue
             richTextBox1.Text += "The removed value: " + ch + "\n";
 
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //创建一个队列
+            Queue myQ = new Queue();
+            myQ.Enqueue("The");//入队
+            myQ.Enqueue("quick");
+            myQ.Enqueue("brown");
+            myQ.Enqueue("fox");
+            myQ.Enqueue(null);//添加null
+            myQ.Enqueue("fox");//添加重复的元素
+
+            // 打印队列的数量和值
+            Console.WriteLine("myQ");
+            Console.WriteLine("\tCount:    {0}", myQ.Count);
+
+            // 打印队列中的所有值
+            Console.Write("Queue values:");
+            PrintValues(myQ);
+
+            // 打印队列中的第一个元素，并移除
+            Console.WriteLine("(Dequeue)\t{0}", myQ.Dequeue());
+
+            // 打印队列中的所有值
+            Console.Write("Queue values:");
+            PrintValues(myQ);
+
+            // 打印队列中的第一个元素，并移除
+            Console.WriteLine("(Dequeue)\t{0}", myQ.Dequeue());
+
+            // 打印队列中的所有值
+            Console.Write("Queue values:");
+            PrintValues(myQ);
+
+            // 打印队列中的第一个元素
+            Console.WriteLine("(Peek)   \t{0}", myQ.Peek());
+
+            // 打印队列中的所有值
+            Console.Write("Queue values:");
+            PrintValues(myQ);
+
+        }
+
+        public static void PrintValues(IEnumerable myCollection)
+        {
+            foreach (Object obj in myCollection)
+                Console.Write("    {0}", obj);
+            Console.WriteLine();
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //创建一个队列对象Queue
+            Queue queue = new Queue();
+
+            // 队列的插入操作 入队 
+            queue.Enqueue("what21");
+            // 队列中添加数值
+            queue.Enqueue(21);
+            // 队列中添加null 
+            queue.Enqueue(null);
+            // 队列中
+            queue.Enqueue(new object());
+            // 队列中重复插入
+            queue.Enqueue("what21");
+            // 标识一下最好一个
+            queue.Enqueue("我是最后一个了");
+
+            // 遍历队列的所有内容
+            foreach (Object item in queue)
+            {
+                Console.WriteLine("<1> {0}", item);
+            }
+
+            // 队列的数量
+            Console.WriteLine("这个队列的数量为：{0}", queue.Count);
+            // 取列中的第一个元素
+            object one = queue.Peek();
+            Console.WriteLine("我是第一个元素：{0}", one);
+            // 取列中的第一个元素，并移除 
+            object rone = queue.Dequeue();
+            Console.WriteLine("我是第一个元素：{0}", rone);
+
+
+            // 遍历队列的所有内容
+            foreach (Object item in queue)
+            {
+                Console.WriteLine("<2> {0}", item);
+            }
+
+            //  遍历方法二
+            IEnumerator enumer = queue.GetEnumerator();
+            while (enumer.MoveNext())
+            {
+                object o = enumer.Current;
+                Console.WriteLine("<3> " + o);
+            }
+
+            // 将Queue转换为数组
+            object[] objs = queue.ToArray();
+            for (int i = 0; i < objs.Length; i++)
+            {
+                object o = objs[i];
+                Console.Write("<4> " + o + "\n");
+            }
+            
+
+        }
+
     }
 }
