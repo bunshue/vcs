@@ -823,12 +823,12 @@ namespace vcs_Mix00
             Console.WriteLine("长度：" + s.Sha1().Length);
 
 
-            richTextBox1.Text +="密码：" + s+"\n";
+            richTextBox1.Text += "密码：" + s + "\n";
 
-            richTextBox1.Text +="Md5：" + s.Md5()+"\n";
-            richTextBox1.Text +="长度：" + s.Md5().Length+"\n";
+            richTextBox1.Text += "Md5：" + s.Md5() + "\n";
+            richTextBox1.Text += "长度：" + s.Md5().Length + "\n";
 
-            richTextBox1.Text +="Sha1：" + s.Sha1()+"\n";
+            richTextBox1.Text += "Sha1：" + s.Sha1() + "\n";
             richTextBox1.Text += "长度：" + s.Sha1().Length + "\n";
 
 
@@ -1285,17 +1285,255 @@ namespace vcs_Mix00
 
         private void button22_Click(object sender, EventArgs e)
         {
+            //代碼統計
 
+            string filename = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_f_mix_new\vcs_Mix00\vcs_Mix00\Form1.cs";
+            //CountMethods(filename);
+
+            //GetMethodNameAndLines(filename);
+
+            //StackCount(filename);
         }
+
+
+        //统计方法的个数
+        public void CountMethods(string path)
+        {
+            int count = 0;
+            Regex reg = new Regex(@"\s*\w*\s*\w*\s*\w*\s+\w+\([^=!><]*\)(//.*)?\s*\{?$");
+            string[] lines = File.ReadAllLines(path);
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if (reg.IsMatch(lines[i].ToString()))
+                {
+                    count++;
+                    richTextBox1.Text += lines[i].ToString() + "\n";
+                }
+            }
+            string info = string.Format("total methods:{0}", count);
+            richTextBox1.Text += info + "\n";
+        }
+
+
+        //统计方法名称
+        public void GetMethodNameAndLines(string path)
+        {
+            string[] input = File.ReadAllLines(path);
+            MatchCollection mc = null;
+            Regex reg = new Regex(@"\s*\w*\s*\w*\s*\w+\s+\w+\([^=!><.]*\)(//.*)?\s*\{?$");
+            ArrayList al = new ArrayList();
+            for (int i = 0; i < input.Length; i++)
+            {
+                mc = reg.Matches(input[i]);
+                if (mc.Count > 0)
+                {
+                    al.Add(mc[0].ToString());
+                }
+            }
+
+            for (int m = 0; m < al.Count; m++)
+            {
+                richTextBox1.Text += "第 " + (m + 1).ToString() + " 個方法：" + al[m].ToString() + "\n";
+            }
+        }
+
+        /*
+        //正则与栈结合，统计方法行数名称和个数
+        public void StackCount(string path)
+        {
+            Stack stack = new Stack();
+            //ht存放方法名和方法行数
+            Hashtable ht = new Hashtable();
+            //指示是否为有效方法行
+            bool isLine = false;
+            //指示方法是否结束
+            bool isEnd = false;
+            string methodName = "";
+            //标记后续是否还有方法 0-无 1-有
+            int flag = 0;
+            //临时存放方法行数
+            int count = 0;
+            //方法之外的普通行
+            int j = 0;
+            //匹配方法名
+            Regex regMethodName = new Regex(@"\s+\w+\s*\(");
+            //匹配方法开始行
+            Regex regLineStart = new Regex(@"\s*\w*\s*\w*\s*\w+\s+\w+\([^=!><.]*\)(//.*)?\s*\{?$");
+            //匹配左大括号
+            Regex regLeft = new Regex(@"\s+\{");
+            //匹配右大括号
+            Regex regRight = new Regex(@"\s+\}");
+            //存放源码字符串数组
+            string[] lines = File.ReadAllLines(path);
+            for (int i = 0; i < lines.Length; i++)
+            {
+                if (regLineStart.IsMatch(lines[i]))
+                {
+                    Match mc = regMethodName.Match(lines[i].ToString());
+                    //methodName = GetMethodName(mc.ToString());
+                    methodName = mc.ToString();
+                    if (lines[i].ToString().Contains('{'))
+                    {
+                        stack.Push(lines[i].ToString());
+                    }
+                    isLine = true;
+                    isEnd = false;
+                    flag = 1;
+                    count++;
+                }
+                else if (regLeft.IsMatch(lines[i].ToString()))
+                {
+                    if (isLine)
+                    {
+                        count++;
+                        //此处避免不规范写法导致的统计失误
+                        if (lines[i].Contains('{') && lines[i].Contains('}'))
+                        {
+                            continue;
+                        }
+                        stack.Push(lines[i].ToString());
+                    }
+                }
+                else if (regRight.IsMatch(lines[i]))
+                {
+                    if (!isEnd)
+                    {
+                        stack.Pop();
+                        count++;
+                    }
+                    if (stack.Count == 0)
+                    {
+                        isLine = false;
+                        isEnd = true;
+                        if (flag != 0)
+                        {
+                            //解决重载方法的重名问题
+                            if (ht.ContainsKey(methodName))
+                            {
+                                //isOverride += 1;
+                                methodName = methodName + "重载+" + i;
+                            }
+                            ht.Add(methodName, count);
+                            count = 0;
+                        }
+                        else
+                        {
+                            j++;
+                        }
+                        flag = 0;
+                    }
+                }
+                else if (isLine)
+                {
+                    count++;
+                }
+                else
+                {
+                    j++;
+                }
+            }
+            foreach (DictionaryEntry de in ht)
+            {
+                richTextBox1.Text += "key : " + de.Key.ToString() + ", value : " + de.Value.ToString() + "\n";
+
+                //Console.WriteLine(de.Key.ToString());
+                //Console.WriteLine(de.Value.ToString());
+            }
+        }
+        */
 
         private void button23_Click(object sender, EventArgs e)
         {
+            string str ="10/3";
+            float result = Calculator.dealWith(str);
+            richTextBox1.Text += str + " = " + result.ToString() + "\n";
+
 
         }
 
         private void button24_Click(object sender, EventArgs e)
         {
+            string random_chinese_word = CreateCode(10);
+            richTextBox1.Text += random_chinese_word + "\n";
 
+        }
+
+        //隨機生成漢字（摘錄保存的代碼），生成漢字摘錄代碼
+
+        /// <summary>
+        /// 隨機生成漢字
+        /// </summary>
+        /// <param name="strlength">長度（4位）</param>
+        /// <returns></returns>
+        public string CreateCode(int strlength)
+        {
+            //定義一個字符串數組儲存漢字編碼的組成元素
+            string[] r = new String[16] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
+            Random rnd = new Random();
+            //定義一個object數組用來
+            object[] bytes = new object[strlength];
+            /**/
+            /*每循環一次產生一個含兩個元素的十六進制字節數組，並將其放入bject數組中
+            每個漢字有四個區位碼組成
+            區位碼第1位和區位碼第2位作為字節數組第一個元素
+            區位碼第3位和區位碼第4位作為字節數組第二個元素
+            */
+            for (int i = 0; i < strlength; i++)
+            {
+                //區位碼第1位
+                int r1 = rnd.Next(11, 14);
+                string str_r1 = r[r1].Trim();
+                //區位碼第2位
+                rnd = new Random(r1 * unchecked((int)DateTime.Now.Ticks) + i);//更換隨機數發生器的種子避免產生重復值
+                int r2;
+                if (r1 == 13)
+                    r2 = rnd.Next(0, 7);
+                else
+                    r2 = rnd.Next(0, 16);
+                string str_r2 = r[r2].Trim();
+                //區位碼第3位
+                rnd = new Random(r2 * unchecked((int)DateTime.Now.Ticks) + i);
+                int r3 = rnd.Next(10, 16);
+                string str_r3 = r[r3].Trim();
+                //區位碼第4位
+                rnd = new Random(r3 * unchecked((int)DateTime.Now.Ticks) + i);
+                int r4;
+                if (r3 == 10)
+                {
+                    r4 = rnd.Next(1, 16);
+                }
+                else if (r3 == 15)
+                {
+                    r4 = rnd.Next(0, 15);
+                }
+                else
+                {
+                    r4 = rnd.Next(0, 16);
+                }
+                string str_r4 = r[r4].Trim();
+                //定義兩個字節變量存儲產生的隨機漢字區位碼
+                byte byte1 = Convert.ToByte(str_r1 + str_r2, 16);
+                byte byte2 = Convert.ToByte(str_r3 + str_r4, 16);
+                //將兩個字節變量存儲在字節數組中
+                byte[] str_r = new byte[] { byte1, byte2 };
+                //將產生的一個漢字的字節數組放入object數組中
+                bytes.SetValue(str_r, i);
+            }
+
+
+            //獲取GB2312編碼頁（表）
+            Encoding gb = Encoding.GetEncoding("gb2312");
+
+            //根據漢字編碼的字節數組解碼出中文漢字
+
+            string txt = string.Empty;
+
+            for (int i = 0; i < strlength; i++)
+            {
+                string str1 = gb.GetString((byte[])Convert.ChangeType(bytes[i], typeof(byte[])));
+                txt += str1;
+            }
+            return txt;
         }
 
         private void button25_Click(object sender, EventArgs e)
@@ -2161,8 +2399,166 @@ namespace vcs_Mix00
             return sb.ToString();
         }
     }
+
+    public static class Calculator
+    {
+        public static float dealWith(string number)
+        {
+            string operand1 = "", opreand2 = "";
+            float result = 0;
+            char opera = ' ', operandOrOera = ' ';
+            string[,] opreandArray = new string[50, 2];
+            Queue numberQueue = new Queue();
+
+            //循環字符串中的所有字符並賦值給numberQueue隊列 
+            foreach (char c in number)
+            {
+
+                numberQueue.Enqueue(c);
+            }
+
+            //拆分隊列中的字符，構成一個數字與“+”或“-”的組合，然後逐個放入二維數組opreandArray中
+            while (numberQueue.Count != 0)
+            {
+                operandOrOera = Convert.ToChar(numberQueue.Peek());
+                if (operandOrOera == '(')
+                {
+                    numberQueue.Dequeue();
+                    string inside = null;
+                    while (Convert.ToChar(numberQueue.Peek()) != ')')
+                    {
+                        inside += (numberQueue.Dequeue()).ToString();
+                    }
+                    numberQueue.Dequeue();
+                    operand1 = dealWith(inside).ToString();
+                }
+                while (Convert.ToInt32(operandOrOera) > 47 && Convert.ToInt32(operandOrOera) < 58)//ASCII48-57對應0-9
+                {
+                    numberQueue.Dequeue();
+                    operand1 += operandOrOera.ToString();
+                    if (numberQueue.Count != 0)
+                    {
+                        operandOrOera = Convert.ToChar(numberQueue.Peek());
+                    }
+                    else
+                    {
+                        break;
+                    }
+                }
+                int j = 0;
+                if (operandOrOera == '+' || operandOrOera == '-' || operandOrOera == '*' || operandOrOera == '/')
+                {
+                    numberQueue.Dequeue();
+                    opera = operandOrOera;
+                    //如果是"+"或"-"
+                    if (opera == '+' || opera == '-')
+                    {
+                        opreandArray[j, 0] = operand1;
+                        opreandArray[j, 1] = opera.ToString();
+                        j++;
+                        operand1 = null;
+                    }
+                    //如果是"*"或"/"
+                    else
+                    {
+                        char n = Convert.ToChar(numberQueue.Peek());
+                        if (n == '(')
+                        {
+
+                            numberQueue.Dequeue();
+                            string inside = null;
+                            while (Convert.ToChar(numberQueue.Peek()) != ')')
+                            {
+                                inside += (numberQueue.Dequeue()).ToString();
+                            }
+                            numberQueue.Dequeue();
+                            opreand2 = dealWith(inside).ToString();
+                        }
+                        while (Convert.ToInt32(n) > 47 && Convert.ToInt32(n) < 58)
+                        {
+                            opreand2 += n.ToString();
+                            numberQueue.Dequeue();
+                            if (numberQueue.Count != 0)
+                            {
+                                n = Convert.ToChar(numberQueue.Peek());
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
+
+                        switch (opera)
+                        {
+                            case ('*'):
+                                {
+                                    operand1 = (Convert.ToInt32(operand1) * Convert.ToInt32(opreand2)).ToString();
+                                    break;
+                                }
+                            case ('/'):
+                                {
+                                    try
+                                    {
+                                        operand1 = (Convert.ToInt32(operand1) / Convert.ToInt32(opreand2)).ToString();
+                                    }
+                                    catch (Exception)
+                                    {
+
+                                    }
+                                    break;
+                                }
+
+                        }
+                        opreand2 = null;
+                    }
+                }
+            }
+
+
+            //把二維數組中的數計算，賦值result
+            int count = 0;
+            for (int i = 0; opreandArray[i, 0] != null; i++)
+            {
+                count++;
+            }
+            for (int i = 0; i < count; i++)
+            {
+                if (i == 0)
+                {
+                    result += Convert.ToInt32(opreandArray[i, 0]);
+
+                }
+                else
+                {
+                    if (opreandArray[i - 1, 1] == "+")
+                    {
+                        result += Convert.ToInt32(opreandArray[i, 0]);
+                    }
+                    else
+                    {
+                        result -= Convert.ToInt32(opreandArray[i, 0]);
+                    }
+                }
+            }
+
+
+
+            //最後把沒有放進數組中的加上或者減掉
+            if (count != 0)
+            {
+                if (opreandArray[count - 1, 1] == "+")
+                {
+                    return result + Convert.ToInt32(operand1);
+                }
+                else
+                {
+                    return result - Convert.ToInt32(operand1);
+                }
+            }
+            else
+            {
+                return Convert.ToInt32(operand1);
+            }
+        }
+    }
 }
-
-
-
-

@@ -107,5 +107,29 @@ namespace vcs_DataGridViewB_DataTable
             }
             richTextBox1.Text += "\n";
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            DataTable dt = new DataTable();
+
+            dt.Columns.Add("name", typeof(System.String));
+            dt.Columns.Add("sex", typeof(System.String));
+            dt.Columns.Add("age", typeof(System.String));
+
+            for (int i = 0; i < 10; i++)
+            {
+                DataRow dr = dt.NewRow();
+                dr[0] = "aaaa";
+                dr[1] = "bbbb";
+                dr[2] = "cccc";
+
+                //將上述該行加入DataTable中
+                dt.Rows.Add(dr);
+            }
+
+            //綁定在sorce上
+            dataGridView1.DataSource = dt;
+        }
     }
 }
+

@@ -4206,12 +4206,78 @@ ReadAllLines
 
 
 
+MD5加密
+
+protected void Page_Load(object sender, EventArgs e)
+{
+    string s = "123";
+    Response.Write(getMd5(s));
+}
+
+public string getMd5(string str)
+{
+    MD5 md5 = MD5.Create();//MD5抽象類無法實例化 實例化該方法
+    byte[] buffer = Encoding.Default.GetBytes(str); //將字符串轉換為字節數組
+    byte[] mdbuffer = md5.ComputeHash(buffer); //調用ComputeHash方法把數組傳進去
+    //將字節數組中每個元素ToString();
+    StringBuilder result = new StringBuilder();
+    for (int i = 0; i < mdbuffer.Length; i++)
+    {
+        result.Append(mdbuffer[i].ToString("x2")); //ToString得到十進制字符串 ToString("x")十六進制字符串 ToString("x2")對齊
+    }
+    return result.ToString();
+}
+
+
+
 
         				
 //--------------------------------------------------------------------------------------------------------------------------
 
 
 
+正則表達式
+
+用於字符串處理、表單驗證等。
+var regx = "^[a-zA-Z0-9]{6,20}$";
+if ( ! Regex.IsMatch("abcdef;sd123",regex)
+{
+    //長度必須6-20，字母和數字
+}
+^  匹配一行的開始 例如正則表達式 ^when 能夠匹配到 ”when in the“ 的開始，但不能匹配到 ”what and when in the“ 
+$ 匹配一行的結束。 例如正則表達式 food$ 能夠匹配到 “he's  food” 的末尾 
+.點 匹配任何單個字符，例如正則表達式 r.t 能夠匹配 “rat、rut、r t”，但是不能匹配root 
+*  匹配0或多個正好在它之前的那個字符，例如 .* 能夠匹配任意數量的任何字符。 
+[] 匹配匹配一個出現在[]中的字符 
+|  或 敏感詞 ab|cd|ed|df
+() 提高優先級 a(bc) 實現分組
++ 緊跟在+前面的字符出現任意次，至少1次
+? 緊跟在?前面的字符出現或不出現
+{n} {n,} {n,m} 匹配一定范圍個數 {1,} 相當與+ {0,} 相當於*
+\d 代表 [0-9] \D 代表 [^0-9] 非0-9
+\i 代表 [a-z]
+\u 代表 [A-Z]
+\a 代表 [A-Za-z]
+\w 代表 [a-zA-Z0-9] 
+常用表達式
+匹配身份證：\d{15}|\d{18}
+匹配中國郵政編碼：[1-9]\d{5}(?!\d)
+匹配騰訊QQ號：[1-9][0-9]{4,}
+匹配國內電話號碼：\d{3}-\d{8}|\d{4}-\d{7}
+匹配帳號是否合法(字母開頭，允許5-16字節，允許字母數字下劃線)：^[a-zA-Z][a-zA-Z0-9_]{4,15}$
+匹配網址URL的正則表達式：[a-zA-z]+://[^\s]*
+匹配Email地址的正則表達式：\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*
+匹配首尾空白字符的正則表達式：^\s*|\s*$
+匹配HTML標記的正則表達式：<(\S*?)[^>]*>.*?</\1>|<.*? />
+匹配中文字符的正則表達式： [\u4e00-\u9fa5]
+限制網頁表單裡的文本框輸入內容：
+只能輸入中文：<input type="text" onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))" />
+只能輸入數字：<input type="text" onkeyup="value=value.replace(/[^\d]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\d]/g,''))" />
+只能輸入數字和英文：<input type="text" onkeyup="value=value.replace(/[\W]/g,'') " onbeforepaste="clipboardData.setData('text',clipboardData.getData('text).replace(/[^\d]/g,''))" />
+
+
+
+
 
 //--------------------------------------------------------------------------------------------------------------------------
 
@@ -4220,7 +4286,21 @@ ReadAllLines
 
 //--------------------------------------------------------------------------------------------------------------------------
 
+        /// <summary>
+        /// 限制textBox中的字符輸入, 用KeyPress事件
+        /// 僅允許 數字, Enter, Backspace, +-*/()
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //如果輸入的不是數字類別，也不是回車鍵、Backspace鍵、+ - * / ( )，則textBox1_KeyPress取消該輸入
+            if (!(Char.IsNumber(e.KeyChar)) && e.KeyChar != (char)13 && e.KeyChar != (char)8 && e.KeyChar != (char)40 && e.KeyChar != (char)41 && e.KeyChar != (char)42 && e.KeyChar != (char)43 && e.KeyChar != (char)45 && e.KeyChar != (char)47)
+            {
+                e.Handled = true;
+            } 
 
+        }
 
 //--------------------------------------------------------------------------------------------------------------------------
 
