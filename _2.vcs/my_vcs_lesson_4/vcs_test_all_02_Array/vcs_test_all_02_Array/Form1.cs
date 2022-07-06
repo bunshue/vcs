@@ -2126,7 +2126,6 @@ namespace vcs_test_all_02_Array
             {
                 Console.WriteLine(hashtable[myEnumerator.Key]);
 
-
                 //Hashtable關健字
                 richTextBox1.Text += "Hashtable關健字 : " + myEnumerator.Key.ToString() + "\n";
 
@@ -2137,6 +2136,53 @@ namespace vcs_test_all_02_Array
 
         private void ht9_Click(object sender, EventArgs e)
         {
+            Hashtable ht = new Hashtable(); //創建一個Hashtable實例
+
+            //key值唯一,value值可以重複.
+            ht.Add("E", "e");//添加key/鍵值對
+            ht.Add("A", "a");
+            ht.Add("C", "c");
+            ht.Add("B", "b");
+            string s = (string)ht["A"];
+            if (ht.Contains("E")) //判斷哈希表是否包含特定鍵,其返回值為true或false
+            {
+                richTextBox1.Text += "the E key : exists\n";
+            }
+            else
+            {
+                richTextBox1.Text += "the E key : no exists\n";
+
+            }
+
+            ht.Remove("C");//移除一個key/鍵值對
+            richTextBox1.Text += "輸出 : " + ht["A"] + "\n";  //此處輸出a
+
+            ht.Clear();//移除所有元素
+
+            richTextBox1.Text += "輸出 : " + ht["A"] + "\n";  //此處將不會有任何輸出
+
+            //遍歷哈希表
+            //遍歷哈希表需要用到DictionaryEntry Object，代碼如下：
+            foreach (DictionaryEntry de in ht)
+            {
+                Console.WriteLine(de.Key);//de.Key對應于key/value鍵值對key
+                Console.WriteLine(de.Value);//de.Key對應于key/value鍵值對value
+
+            }
+
+
+
+            //對哈希表進行排序
+            /*
+            對哈希表進行排序在這里的定義是對key/value鍵值對中的key按一定規則重新排列，但是實際上這個定義是不能實現的，因為我們無法直接在Hashtable進行對key進行重新排列，如果需要Hashtable提供某種規則的輸出，可以采用一種變通的做法：
+            */
+            ArrayList akeys = new ArrayList(ht.Keys);
+            akeys.Sort(); //按字母順序進行排序
+            foreach (string skey in akeys)
+            {
+                Console.Write(skey + ":");
+                Console.WriteLine(ht[skey]);//排序後輸出
+            }
 
         }
 

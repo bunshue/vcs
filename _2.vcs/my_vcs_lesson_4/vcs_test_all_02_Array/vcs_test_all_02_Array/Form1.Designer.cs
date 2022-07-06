@@ -637,6 +637,7 @@
             this.ht9.Name = "ht9";
             this.ht9.Size = new System.Drawing.Size(140, 40);
             this.ht9.TabIndex = 72;
+            this.ht9.Text = "Hashtable test";
             this.ht9.UseVisualStyleBackColor = true;
             this.ht9.Click += new System.EventHandler(this.ht9_Click);
             // 

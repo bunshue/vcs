@@ -928,6 +928,24 @@ namespace vcs_Mix00
 
         private void button16_Click(object sender, EventArgs e)
         {
+            //谷歌百度以圖搜圖 感知哈希算法
+            //感知哈希算法 獲取圖片的Hashcode
+
+            string filename = string.Empty;
+            string result = string.Empty;
+            
+            filename = @"C:\______test_files\picture1.jpg";
+            result = ImageComparer.GetImageHashCode(filename);
+            richTextBox1.Text += result + "\n";
+
+            filename = @"C:\______test_files\elephant.jpg";
+            result = ImageComparer.GetImageHashCode(filename);
+            richTextBox1.Text += result + "\n";
+
+            filename = @"C:\______test_files\picture1.bmp";
+            result = ImageComparer.GetImageHashCode(filename);
+            richTextBox1.Text += result + "\n";
+
 
         }
 
@@ -1444,7 +1462,7 @@ namespace vcs_Mix00
 
         private void button23_Click(object sender, EventArgs e)
         {
-            string str ="10/3";
+            string str = "10/3";
             float result = Calculator.dealWith(str);
             richTextBox1.Text += str + " = " + result.ToString() + "\n";
 
@@ -1538,12 +1556,51 @@ namespace vcs_Mix00
 
         private void button25_Click(object sender, EventArgs e)
         {
+            //這裡使用Where擴展方法獲取大於4的值。
 
+            List<int> intList = new List<int>() { 1, 2, 3, 4, 5 };
+
+            var maxIntList = intList.Where(i => i > 4);
+
+            foreach (var item in maxIntList)
+            {
+
+                Console.WriteLine(item);
+
+            }
+
+            intList.Add(6);
+
+            foreach (var item in maxIntList)
+            {
+                Console.WriteLine(item);
+            }
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
+            List<int> intList = new List<int>() { 1, 2, 3, 4, 5 };
 
+            var maxIntList = intList.Where(i => i > 4).ToList();//調用ToList()方法
+
+            foreach (var item in maxIntList)
+            {
+                Console.WriteLine(item);
+            }
+
+            intList.Add(6);
+
+            foreach (var item in maxIntList)
+            {
+                Console.WriteLine(item);
+            }
+
+            maxIntList = intList.Where(i => i > 4).ToList();//調用ToList()方法
+
+            foreach (var item in maxIntList)
+            {
+                Console.WriteLine(item);
+            }
         }
 
         private void button27_Click(object sender, EventArgs e)
@@ -2559,6 +2616,191 @@ namespace vcs_Mix00
             {
                 return Convert.ToInt32(operand1);
             }
+        }
+    }
+
+    /// <summary> 
+    /// 感知哈希算法 
+    /// </summary> 
+    public class ImageComparer
+    {
+        /// <summary> 
+        /// 獲取圖片的Hashcode 
+        /// </summary> 
+        /// <param name="imageName"></param> 
+        /// <returns></returns> 
+        public static string GetImageHashCode(string imageName)
+        {
+            int width = 8;
+            int height = 8;
+
+            //  第一步 
+            //  將圖片縮小到8x8的尺寸，總共64個像素。這一步的作用是去除圖片的細節， 
+            //  只保留結構、明暗等基本信息，摒棄不同尺寸、比例帶來的圖片差異。 
+            Bitmap bmp = new Bitmap(Thumb(imageName));
+            int[] pixels = new int[width * height];
+
+            //  第二步 
+            //  將縮小後的圖片，轉為64級灰度。也就是說，所有像素點總共只有64種顏色。 
+            for (int i = 0; i < width; i++)
+            {
+                for (int j = 0; j < height; j++)
+                {
+                    Color color = bmp.GetPixel(i, j);
+                    pixels[i * height + j] = RGBToGray(color.ToArgb());
+                }
+            }
+
+            //  第三步 
+            //  計算所有64個像素的灰度平均值。 
+            int avgPixel = Average(pixels);
+
+            //  第四步 
+            //  將每個像素的灰度，與平均值進行比較。大於或等於平均值，記為1；小於平均值，記為0。 
+            int[] comps = new int[width * height];
+            for (int i = 0; i < comps.Length; i++)
+            {
+                if (pixels[i] >= avgPixel)
+                {
+                    comps[i] = 1;
+                }
+                else
+                {
+                    comps[i] = 0;
+                }
+            }
+
+            //  第五步 
+            //  將上一步的比較結果，組合在一起，就構成了一個64位的整數，這就是這張圖片的指紋。組合的次序並不重要，只要保證所有圖片都采用同樣次序就行了。 
+            StringBuilder hashCode = new StringBuilder();
+            for (int i = 0; i < comps.Length; i += 4)
+            {
+                int result = comps[i] * (int)Math.Pow(2, 3) + comps[i + 1] * (int)Math.Pow(2, 2) + comps[i + 2] * (int)Math.Pow(2, 1) + comps[i + 2];
+                hashCode.Append(BinaryToHex(result));
+            }
+            bmp.Dispose();
+            return hashCode.ToString();
+        }
+
+        /// <summary> 
+        /// 計算"漢明距離"（Hamming distance）。 
+        /// 如果不相同的數據位不超過5，就說明兩張圖片很相似；如果大於10，就說明這是兩張不同的圖片。 
+        /// </summary> 
+        /// <param name="sourceHashCode"></param> 
+        /// <param name="hashCode"></param> 
+        /// <returns></returns> 
+        public static int HammingDistance(String sourceHashCode, String hashCode)
+        {
+            int difference = 0;
+            int len = sourceHashCode.Length;
+
+            for (int i = 0; i < len; i++)
+            {
+                if (sourceHashCode[i] != hashCode[i])
+                {
+                    difference++;
+                }
+            }
+            return difference;
+        }
+
+        /// <summary> 
+        /// 縮放圖片
+        /// </summary> 
+        /// <param name="imageName"></param> 
+        /// <returns></returns> 
+        private static Image Thumb(string imageName)
+        {
+            return Image.FromFile(imageName).GetThumbnailImage(8, 8, () => { return false; }, IntPtr.Zero);
+        }
+
+        /// <summary> 
+        /// 轉為64級灰度 
+        /// </summary> 
+        /// <param name="pixels"></param> 
+        /// <returns></returns> 
+        private static int RGBToGray(int pixels)
+        {
+            int _red = (pixels >> 16) & 0xFF;
+            int _green = (pixels >> 8) & 0xFF;
+            int _blue = (pixels) & 0xFF;
+            return (int)(0.3 * _red + 0.59 * _green + 0.11 * _blue);
+        }
+
+        /// <summary> 
+        /// 計算平均值 
+        /// </summary> 
+        /// <param name="pixels"></param> 
+        /// <returns></returns> 
+        private static int Average(int[] pixels)
+        {
+            float m = 0;
+            for (int i = 0; i < pixels.Length; ++i)
+            {
+                m += pixels[i];
+            }
+            m = m / pixels.Length;
+            return (int)m;
+        }
+
+        private static char BinaryToHex(int binary)
+        {
+            char ch = ' ';
+            switch (binary)
+            {
+                case 0:
+                    ch = '0';
+                    break;
+                case 1:
+                    ch = '1';
+                    break;
+                case 2:
+                    ch = '2';
+                    break;
+                case 3:
+                    ch = '3';
+                    break;
+                case 4:
+                    ch = '4';
+                    break;
+                case 5:
+                    ch = '5';
+                    break;
+                case 6:
+                    ch = '6';
+                    break;
+                case 7:
+                    ch = '7';
+                    break;
+                case 8:
+                    ch = '8';
+                    break;
+                case 9:
+                    ch = '9';
+                    break;
+                case 10:
+                    ch = 'a';
+                    break;
+                case 11:
+                    ch = 'b';
+                    break;
+                case 12:
+                    ch = 'c';
+                    break;
+                case 13:
+                    ch = 'd';
+                    break;
+                case 14:
+                    ch = 'e';
+                    break;
+                case 15:
+                    ch = 'f';
+                    break;
+                default:
+                    ch = ' ';
+                    break;
+            }
+            return ch;
         }
     }
 }

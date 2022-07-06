@@ -291,6 +291,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(170, 70);
             this.button16.TabIndex = 116;
+            this.button16.Text = "感知哈希算法 獲取圖片的Hashcode";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -364,6 +365,7 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(170, 70);
             this.button23.TabIndex = 123;
+            this.button23.Text = "dealWith";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
@@ -385,6 +387,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(170, 70);
             this.button25.TabIndex = 125;
+            this.button25.Text = "List之搜尋語法1";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -395,6 +398,7 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(170, 70);
             this.button26.TabIndex = 126;
+            this.button26.Text = "List之搜尋語法2";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
