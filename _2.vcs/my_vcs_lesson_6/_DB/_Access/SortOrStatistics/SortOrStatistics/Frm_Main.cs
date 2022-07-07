@@ -19,8 +19,9 @@ namespace SortOrStatistics
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            getScoure("select * from [tb_ware]");
+
         }
+
         public void getScoure(string strName)
         {
             try
@@ -56,6 +57,11 @@ namespace SortOrStatistics
             }
         }
 
+        private void button0_Click(object sender, EventArgs e)
+        {
+            getScoure("select * from [tb_ware]");
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             //调用方法重新向控件添加数据
@@ -69,3 +75,4 @@ namespace SortOrStatistics
         }
     }
 }
+

@@ -55,28 +55,26 @@ namespace vcs_Clipboard
             button10.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             button11.Location = new Point(x_st + dx * 0, y_st + dy * 5);
 
-            x_st = 10;
-            y_st = 800;
+            x_st = 350;
+            y_st = 350;
             dx = 140 + 10;
             dy = 50 + 10;
 
             button15.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button16.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button17.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button18.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button20.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button21.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button22.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button26.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button27.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            button28.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            button29.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button18.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button19.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button20.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button21.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button22.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button26.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button27.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button28.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button29.Location = new Point(x_st + dx * 1, y_st + dy * 1);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            richTextBox2.Visible = false;
-            pictureBox1.Visible = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -118,7 +116,6 @@ namespace vcs_Clipboard
                 //取出Bitmap資料, 可做處理
                 Bitmap bitmap1 = (Bitmap)dataObject3.GetData(DataFormats.Bitmap);  //取得Bitmap資料
                 pictureBox1.Image = bitmap1;
-                pictureBox1.Visible = true;
                 if (bitmap1 != null)
                 {
                     string filename = Application.StartupPath + "\\vcs_Clipboard_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
@@ -152,7 +149,6 @@ namespace vcs_Clipboard
                 //取出Text資料, 可做處理
                 String str = (String)dataObject3.GetData(DataFormats.Rtf);
                 richTextBox2.Rtf = Clipboard.GetText(TextDataFormat.Rtf);
-                richTextBox2.Visible = true;
             }
 
             if (dataObject3.GetDataPresent(DataFormats.Html))  //HTML類

@@ -21,6 +21,7 @@ namespace Access2000Path
         DataTable dt;
         int MaxValue = 0, State = 1;
         string ConStr;
+
         public Form1()
         {
             InitializeComponent();
@@ -57,18 +58,21 @@ namespace Access2000Path
             this.textBox3.Text = dt.Rows[0][4].ToString();
             this.textBox4.Text = dt.Rows[0][5].ToString();
         }
+
         //第一條
         private void button1_Click(object sender, EventArgs e)
         {
             showInfo(0, 1);
             State = 1;
         }
+
         //最後一條
         private void button4_Click(object sender, EventArgs e)
         {
             showInfo(MaxValue - 1, MaxValue);
             State = MaxValue;
         }
+
         //下一條
         private void button3_Click(object sender, EventArgs e)
         {
@@ -84,6 +88,7 @@ namespace Access2000Path
                 State += 1;
             }
         }
+
         //上一條
         private void button2_Click(object sender, EventArgs e)
         {
@@ -134,6 +139,6 @@ namespace Access2000Path
             richTextBox1.Text += "\n";
         }
         //顯示資料庫的內容 SP
-
     }
 }
+

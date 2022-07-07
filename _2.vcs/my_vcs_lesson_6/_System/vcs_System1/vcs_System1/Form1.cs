@@ -12,7 +12,7 @@ using System.Net;   //for DNS
 using System.IO.Ports;          //for serial ports
 using System.Collections;   //for DictionaryEntry
 using System.Globalization;
-using System.Runtime.InteropServices;   //for DllImport
+using System.Runtime.InteropServices;   //for DllImport, StructLayout
 using System.Diagnostics;       //for Process
 using System.Reflection;        //for Assembly
 using System.Management;
@@ -281,6 +281,34 @@ namespace vcs_System1
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //取得CPU編號、硬盤編號等系統有關環境、屬性
+            SystemInfo systemInfo = new SystemInfo();
+            richTextBox1.Text += "操作系統：" + systemInfo.GetOperationSystemInName() + "\n";
+            richTextBox1.Text += "CPU編號：" + systemInfo.GetCpuId() + "\n";
+            richTextBox1.Text += "硬盤編號：" + systemInfo.GetMainHardDiskId() + "\n";
+            richTextBox1.Text += "Windows目錄所在位置：" + systemInfo.GetSysDirectory() + "\n";
+            richTextBox1.Text += "系統目錄所在位置：" + systemInfo.GetWinDirectory() + "\n";
+            MemoryInfo memoryInfo = systemInfo.GetMemoryInfo();
+            CpuInfo cpuInfo = systemInfo.GetCpuInfo();
+            richTextBox1.Text += "dwActiveProcessorMask" + cpuInfo.dwActiveProcessorMask + "\n";
+            richTextBox1.Text += "dwAllocationGranularity" + cpuInfo.dwAllocationGranularity + "\n";
+            richTextBox1.Text += "CPU個數：" + cpuInfo.dwNumberOfProcessors + "\n";
+            richTextBox1.Text += "OEM ID：" + cpuInfo.dwOemId + "\n";
+            richTextBox1.Text += "頁面大小" + cpuInfo.dwPageSize + "\n";
+            richTextBox1.Text += "CPU等級" + cpuInfo.dwProcessorLevel + "\n";
+            richTextBox1.Text += "dwProcessorRevision" + cpuInfo.dwProcessorRevision + "\n";
+            richTextBox1.Text += "CPU類型" + cpuInfo.dwProcessorType + "\n";
+            richTextBox1.Text += "lpMaximumApplicationAddress" + cpuInfo.lpMaximumApplicationAddress + "\n";
+            richTextBox1.Text += "lpMinimumApplicationAddress" + cpuInfo.lpMinimumApplicationAddress + "\n";
+            richTextBox1.Text += "CPU類型：" + cpuInfo.dwProcessorType + "\n";
+            richTextBox1.Text += "可用交換文件大小：" + memoryInfo.dwAvailPageFile + "\n";
+            richTextBox1.Text += "可用物理內存大小：" + memoryInfo.dwAvailPhys + "\n";
+            richTextBox1.Text += "可用虛擬內存大小" + memoryInfo.dwAvailVirtual + "\n";
+            richTextBox1.Text += "操作系統位數：" + memoryInfo.dwLength + "\n";
+            richTextBox1.Text += "已經使用內存大小：" + memoryInfo.dwMemoryLoad + "\n";
+            richTextBox1.Text += "交換文件總大小：" + memoryInfo.dwTotalPageFile + "\n";
+            richTextBox1.Text += "總物理內存大小：" + memoryInfo.dwTotalPhys + "\n";
+            richTextBox1.Text += "總虛擬內存大小：" + memoryInfo.dwTotalVirtual + "\n";
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -304,7 +332,7 @@ namespace vcs_System1
 
         private void button7_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         //取得硬碟資訊 ST
@@ -1586,7 +1614,335 @@ namespace vcs_System1
         private void timer3_Tick(object sender, EventArgs e)
         {
         }
+    }
 
 
+    /**/
+    /**
+* LayoutKind.Automatic：為了提高效率允許運行態對類型成員重新排序
+* 注意：永遠不要使用這個選項來調用不受管轄的動態鏈接庫函數。
+* LayoutKind.Explicit：對每個域按照FIEldOffset屬性對類型成員排序
+* LayoutKind.Sequential：對出現在受管轄類型定義地方的不受管轄內存中的類型成員進行排序。
+*/
+    /**/
+    /// <summary>
+    /// 定義CPU的信息結構
+    /// </summary>
+    [StructLayout(LayoutKind.Sequential)]
+    public struct CpuInfo
+    {
+        /**/
+        /// <summary>
+        /// OEM ID
+        /// </summary>
+        public uint dwOemId;
+        /**/
+        /// <summary>
+        /// 頁面大小
+        /// </summary>
+        public uint dwPageSize;
+        public uint lpMinimumApplicationAddress;
+        public uint lpMaximumApplicationAddress;
+        public uint dwActiveProcessorMask;
+        /**/
+        /// <summary>
+        /// CPU個數
+        /// </summary>
+        public uint dwNumberOfProcessors;
+        /**/
+        /// <summary>
+        /// CPU類型
+        /// </summary>
+        public uint dwProcessorType;
+        public uint dwAllocationGranularity;
+        /**/
+        /// <summary>
+        /// CPU等級
+        /// </summary>
+        public uint dwProcessorLevel;
+        public uint dwProcessorRevision;
+    }
+
+
+    /**/
+    /**
+* LayoutKind.Automatic：為了提高效率允許運行態對類型成員重新排序
+* 注意：永遠不要使用這個選項來調用不受管轄的動態鏈接庫函數。
+* LayoutKind.Explicit：對每個域按照FIEldOffset屬性對類型成員排序
+* LayoutKind.Sequential：對出現在受管轄類型定義地方的不受管轄內存中的類型成員進行排序。
+*/
+    /**/
+    /// <summary>
+    /// 定義內存的信息結構
+    /// </summary>
+    [StructLayout(LayoutKind.Sequential)]
+    public struct MemoryInfo
+    {
+        /**/
+        /// <summary>
+        ///
+        /// </summary>
+        public uint dwLength;
+        /**/
+        /// <summary>
+        /// 已經使用的內存
+        /// </summary>
+        public uint dwMemoryLoad;
+        /**/
+        /// <summary>
+        /// 總物理內存大小
+        /// </summary>
+        public uint dwTotalPhys;
+        /**/
+        /// <summary>
+        /// 可用物理內存大小
+        /// </summary>
+        public uint dwAvailPhys;
+        /**/
+        /// <summary>
+        /// 交換文件總大小
+        /// </summary>
+        public uint dwTotalPageFile;
+        /**/
+        /// <summary>
+        /// 可用交換文件大小
+        /// </summary>
+        public uint dwAvailPageFile;
+        /**/
+        /// <summary>
+        /// 總虛擬內存大小
+        /// </summary>
+        public uint dwTotalVirtual;
+        /**/
+        /// <summary>
+        /// 可用虛擬內存大小
+        /// </summary>
+        public uint dwAvailVirtual;
+    }
+
+    /**/
+    /**
+* LayoutKind.Automatic：為了提高效率允許運行態對類型成員重新排序
+* 注意：永遠不要使用這個選項來調用不受管轄的動態鏈接庫函數。
+* LayoutKind.Explicit：對每個域按照FIEldOffset屬性對類型成員排序
+* LayoutKind.Sequential：對出現在受管轄類型定義地方的不受管轄內存中的類型成員進行排序。
+*/
+    /**/
+    /// <summary>
+    /// 定義系統時間的信息結構
+    /// </summary>
+    [StructLayout(LayoutKind.Sequential)]
+    public struct SystemTimeInfo
+    {
+        /**/
+        /// <summary>
+        /// 年
+        /// </summary>
+        public ushort wYear;
+        /**/
+        /// <summary>
+        /// 月
+        /// </summary>
+        public ushort wMonth;
+        /**/
+        /// <summary>
+        /// 星期
+        /// </summary>
+        public ushort wDayOfWeek;
+        /**/
+        /// <summary>
+        /// 天
+        /// </summary>
+        public ushort wDay;
+        /**/
+        /// <summary>
+        /// 小時
+        /// </summary>
+        public ushort wHour;
+        /**/
+        /// <summary>
+        /// 分鐘
+        /// </summary>
+        public ushort wMinute;
+        /**/
+        /// <summary>
+        /// 秒
+        /// </summary>
+        public ushort wSecond;
+        /**/
+        /// <summary>
+        /// 毫秒
+        /// </summary>
+        public ushort wMilliseconds;
+    }
+
+
+
+
+
+    /**/
+    /// <summary> 
+    /// SystemInfo 的摘要說明 
+    /// </summary> 
+    public class SystemInfo
+    {
+        private const int CHAR_COUNT = 128;
+        public SystemInfo()
+        {
+
+        }
+        [DllImport("kernel32")]
+        private static extern void GetWindowsDirectory(StringBuilder WinDir, int count);
+
+        [DllImport("kernel32")]
+        private static extern void GetSystemDirectory(StringBuilder SysDir, int count);
+
+        [DllImport("kernel32")]
+        private static extern void GetSystemInfo(ref CpuInfo cpuInfo);
+
+        [DllImport("kernel32")]
+        private static extern void GlobalMemoryStatus(ref MemoryInfo memInfo);
+
+        [DllImport("kernel32")]
+        private static extern void GetSystemTime(ref SystemTimeInfo sysInfo);
+
+        /**/
+        /// <summary> 
+        /// 查詢CPU編號 
+        /// </summary> 
+        /// <returns></returns> 
+        public string GetCpuId()
+        {
+            ManagementClass mClass = new ManagementClass("Win32_Processor");
+            ManagementObjectCollection moc = mClass.GetInstances();
+            string cpuId = null;
+            foreach (ManagementObject mo in moc)
+            {
+                cpuId = mo.Properties["ProcessorId"].Value.ToString();
+                break;
+            }
+            return cpuId;
+        }
+
+        /**/
+        /// <summary> 
+        /// 查詢硬盤編號 
+        /// </summary> 
+        /// <returns></returns> 
+        public string GetMainHardDiskId()
+        {
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_PhysicalMedia");
+            String hardDiskID = null;
+            foreach (ManagementObject mo in searcher.Get())
+            {
+                hardDiskID = mo["SerialNumber"].ToString().Trim();
+                break;
+            }
+            return hardDiskID;
+        }
+
+        /**/
+        /// <summary> 
+        /// 獲取Windows目錄 
+        /// </summary> 
+        /// <returns></returns> 
+        public string GetWinDirectory()
+        {
+            StringBuilder sBuilder = new StringBuilder(CHAR_COUNT);
+            GetWindowsDirectory(sBuilder, CHAR_COUNT);
+            return sBuilder.ToString();
+        }
+
+        /**/
+        /// <summary> 
+        /// 獲取系統目錄 
+        /// </summary> 
+        /// <returns></returns> 
+        public string GetSysDirectory()
+        {
+            StringBuilder sBuilder = new StringBuilder(CHAR_COUNT);
+            GetSystemDirectory(sBuilder, CHAR_COUNT);
+            return sBuilder.ToString();
+        }
+
+        /**/
+        /// <summary> 
+        /// 獲取CPU信息 
+        /// </summary> 
+        /// <returns></returns> 
+        public CpuInfo GetCpuInfo()
+        {
+            CpuInfo cpuInfo = new CpuInfo();
+            GetSystemInfo(ref cpuInfo);
+            return cpuInfo;
+        }
+
+        /**/
+        /// <summary> 
+        /// 獲取系統內存信息 
+        /// </summary> 
+        /// <returns></returns> 
+        public MemoryInfo GetMemoryInfo()
+        {
+            MemoryInfo memoryInfo = new MemoryInfo();
+            GlobalMemoryStatus(ref memoryInfo);
+            return memoryInfo;
+        }
+
+        /**/
+        /// <summary> 
+        /// 獲取系統時間信息 
+        /// </summary> 
+        /// <returns></returns> 
+        public SystemTimeInfo GetSystemTimeInfo()
+        {
+            SystemTimeInfo systemTimeInfo = new SystemTimeInfo();
+            GetSystemTime(ref systemTimeInfo);
+            return systemTimeInfo;
+        }
+
+        /**/
+        /// <summary> 
+        /// 獲取系統名稱 
+        /// </summary> 
+        /// <returns></returns> 
+        public string GetOperationSystemInName()
+        {
+            OperatingSystem os = System.Environment.OSVersion;
+            string osName = "UNKNOWN";
+            switch (os.Platform)
+            {
+                case PlatformID.Win32Windows:
+                    switch (os.Version.Minor)
+                    {
+                        case 0: osName = "Windows 95"; break;
+                        case 10: osName = "Windows 98"; break;
+                        case 90: osName = "Windows ME"; break;
+                    }
+                    break;
+                case PlatformID.Win32NT:
+                    switch (os.Version.Major)
+                    {
+                        case 3: osName = "Windws NT 3.51"; break;
+                        case 4: osName = "Windows NT 4"; break;
+                        case 5: if (os.Version.Minor == 0)
+                            {
+                                osName = "Windows 2000";
+                            }
+                            else if (os.Version.Minor == 1)
+                            {
+                                osName = "Windows XP";
+                            }
+                            else if (os.Version.Minor == 2)
+                            {
+                                osName = "Windows Server 2003";
+                            }
+                            break;
+                        case 6: osName = "Longhorn"; break;
+                    }
+                    break;
+            }
+            return String.Format("{0},{1}", osName, os.Version.ToString());
+        }
     }
 }

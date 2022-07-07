@@ -40,8 +40,8 @@ namespace vcs_Process1
             //button
             x_st = 12;
             y_st = 12;
-            dx = 170;
-            dy = 55;
+            dx = 160 + 10;
+            dy = 70 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -88,6 +88,7 @@ namespace vcs_Process1
             button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
 
             groupBox1.Size = new Size(180, 200);
+            dy = 60;
             groupBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_system0.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 10);
             bt_system1.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 10);
@@ -208,7 +209,7 @@ namespace vcs_Process1
 
         private void button7_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -247,7 +248,7 @@ namespace vcs_Process1
 
             //開啟程式
             //Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL");
-            
+
 
             //呼叫外部的Exe文件
             //Process.Start(textBox1.Text);  //呼叫 *.exe

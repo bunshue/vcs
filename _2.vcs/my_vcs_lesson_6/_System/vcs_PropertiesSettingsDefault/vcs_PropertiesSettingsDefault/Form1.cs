@@ -32,6 +32,8 @@ namespace vcs_PropertiesSettingsDefault
         //在程式開啟時把資料讀出來
         private void Form1_Load(object sender, EventArgs e)
         {
+            label1.Text = "記住表單的大小和位置,\n程式關閉時記住,\n程式開啟時讀出並套用";
+
             richTextBox1.Text += "取得預設資料 :\n";
             richTextBox1.Text += "Left : \t" + Properties.Settings.Default.Left.ToString() + "\n";
             richTextBox1.Text += "Top : \t" + Properties.Settings.Default.Top.ToString() + "\n";

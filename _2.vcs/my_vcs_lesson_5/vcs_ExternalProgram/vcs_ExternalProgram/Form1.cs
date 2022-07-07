@@ -39,10 +39,27 @@ namespace vcs_ExternalProgram
             //通過 WIN32 API 實現嵌入程序窗體，win32api
 
             //string sPath = Environment.GetEnvironmentVariable("windir");//獲取系統變量 windir(windows)    
-            const string appFile =
-                "C:\\Program Files\\Windows NT\\Accessories\\wordpad.exe";
-            InsertWindow insertwin = new InsertWindow(panel1, appFile);  
+            const string exe_filename = "C:\\Program Files\\Windows NT\\Accessories\\wordpad.exe";
+            InsertWindow insertwin = new InsertWindow(panel1, exe_filename);
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //想做一個開啟pdf的, 目前無法指名檔案
+            const string exe_filename = @"C:\Program Files\Adobe\Acrobat DC\Acrobat\Acrobat.exe";
+            string filename = @"C:\______test_files\__RW\_pdf\note_Linux_workstation.pdf";
+
+            panel1.Location = new Point(200, 10);
+            panel1.Size = new Size(300, 400);
+            //panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            Controls.Add(this.panel1);
+
+            //通過 WIN32 API 實現嵌入程序窗體，win32api
+
+            //string sPath = Environment.GetEnvironmentVariable("windir");//獲取系統變量 windir(windows)    
+            //InsertWindow insertwin = new InsertWindow(panel1, exe_filename + " " + filename);
+            InsertWindow insertwin = new InsertWindow(panel1, exe_filename);
         }
     }
 
@@ -53,18 +70,18 @@ namespace vcs_ExternalProgram
         /// </summary>  
         /// <param name="pW">容器</param>  
         /// <param name="appname">程序名</param>  
-        public InsertWindow(Panel pW, string appname)
+        public InsertWindow(Panel pW, string exe_filename)
         {
             this.pan = pW;
-            this.LoadEvent(appname);
+            this.LoadEvent(exe_filename);
             pane();
         }
 
         ~InsertWindow()
         {
-            if (m_innerProcess != null)
+            if (process != null)
             {
-                m_innerProcess.Dispose();
+                process.Dispose();
             }
         }
 
@@ -74,20 +91,13 @@ namespace vcs_ExternalProgram
             */
 
         [DllImport("user32.dll")]
-        static extern IntPtr SetParent(IntPtr hWndChild,
-            IntPtr hWndNewParent
-        );
+        static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
 
         [DllImport("user32.dll")]
-        static extern Int32 GetWindowLong(IntPtr hWnd,
-            Int32 nIndex
-        );
+        static extern Int32 GetWindowLong(IntPtr hWnd, Int32 nIndex);
 
         [DllImport("user32.dll")]
-        static extern Int32 SetWindowLong(IntPtr hWnd,
-            Int32 nIndex,
-            Int32 dwNewLong
-        );
+        static extern Int32 SetWindowLong(IntPtr hWnd, Int32 nIndex, Int32 dwNewLong);
 
         [DllImport("user32.dll")]
         static extern Int32 SetWindowPos(IntPtr hWnd,
@@ -115,7 +125,7 @@ namespace vcs_ExternalProgram
         IntPtr HWND_NOTOPMOST = new IntPtr(-2);
 
         // 目標應用程序的進程.  
-        Process m_innerProcess = null;
+        Process process = null;
         #endregion
 
         #region  容器
@@ -127,33 +137,29 @@ namespace vcs_ExternalProgram
         }
         private void pane()
         {
-            panel1.Anchor = AnchorStyles.Left | AnchorStyles.Top |
-             AnchorStyles.Right | AnchorStyles.Bottom;
+            panel1.Anchor = AnchorStyles.Left | AnchorStyles.Top | AnchorStyles.Right | AnchorStyles.Bottom;
             panel1.Resize += new EventHandler(panel1_Resize);
         }
         private void panel1_Resize(object sender, EventArgs e)
         {
             // 設置目標應用程序的窗體樣式.  
 
-            IntPtr innerWnd = m_innerProcess.MainWindowHandle;
-            SetWindowPos(innerWnd, IntPtr.Zero, 0, 0,
-                panel1.ClientSize.Width, panel1.ClientSize.Height,
-                SWP_NOZORDER);
+            IntPtr innerWnd = process.MainWindowHandle;
+            SetWindowPos(innerWnd, IntPtr.Zero, 0, 0, panel1.ClientSize.Width, panel1.ClientSize.Height, SWP_NOZORDER);
         }
         #endregion
 
         #region  相應事件
-        private void LoadEvent(string appFile)
+        private void LoadEvent(string exe_filename)
         {
-
             // 啟動目標應用程序.  
-            m_innerProcess = Process.Start(appFile);
-            m_innerProcess.StartInfo.WindowStyle = ProcessWindowStyle.Hidden; //隱藏  
+            process = Process.Start(exe_filename);
+            process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden; //隱藏  
             // 等待, 直到那個程序已經完全啟動.   
-            m_innerProcess.WaitForInputIdle();
+            process.WaitForInputIdle();
 
             // 目標應用程序的主窗體.  
-            IntPtr innerWnd = m_innerProcess.MainWindowHandle;
+            IntPtr innerWnd = process.MainWindowHandle;
 
             // 設置目標應用程序的主窗體的父親(為我們的窗體).  
             SetParent(innerWnd, panel1.Handle);
@@ -163,8 +169,7 @@ namespace vcs_ExternalProgram
             wndStyle &= ~WS_BORDER;
             wndStyle &= ~WS_THICKFRAME;
             SetWindowLong(innerWnd, GWL_STYLE, wndStyle);
-            SetWindowPos(innerWnd, IntPtr.Zero, 0, 0, 0, 0,
-                SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
+            SetWindowPos(innerWnd, IntPtr.Zero, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOZORDER | SWP_FRAMECHANGED);
 
             // 在Resize事件中更新目標應用程序的窗體尺寸.  
             panel1_Resize(panel1, null);
@@ -172,3 +177,4 @@ namespace vcs_ExternalProgram
         #endregion
     }
 }
+

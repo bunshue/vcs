@@ -37,8 +37,8 @@ namespace system_test3_wmi
             //button
             x_st = 15;
             y_st = 15;
-            dx = 180;
-            dy = 70;
+            dx = 180+10;
+            dy = 70+10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -249,9 +249,9 @@ namespace system_test3_wmi
         private void GetCPUTemperature()
         {
             double CPUtprt = 0;
-            System.Management.ManagementObjectSearcher mos = new System.Management.ManagementObjectSearcher(@"root\WMI", "Select * From MSAcpi_ThermalZoneTemperature");
+            ManagementObjectSearcher mos = new ManagementObjectSearcher(@"root\WMI", "Select * From MSAcpi_ThermalZoneTemperature");
 
-            foreach (System.Management.ManagementObject mo in mos.Get())
+            foreach (ManagementObject mo in mos.Get())
             {
                 CPUtprt = Convert.ToDouble(Convert.ToDouble(mo.GetPropertyValue("CrrentTemperature").ToString()) - 2732) / 10;
                 richTextBox1.Text += "CPU温度：" + CPUtprt.ToString() + "°C\n";
@@ -872,13 +872,12 @@ namespace system_test3_wmi
         private void button21_Click(object sender, EventArgs e)
         {
             //獲得CPU的編號
-            System.Management.ManagementClass mc = new ManagementClass("win32_processor");
+            ManagementClass mc = new ManagementClass("win32_processor");
             ManagementObjectCollection moc = mc.GetInstances();
             foreach (ManagementObject mo in moc)
             {
                 MessageBox.Show(mo["processorid"].ToString());
             }
-
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -889,12 +888,8 @@ namespace system_test3_wmi
             ManagementObjectCollection m = s.Get();
             foreach (ManagementObject mo in m)
             {
-                //Console.WriteLine(mo["EstimatedRunTime"].ToString() + "minutes");
-
                 richTextBox1.Text += "EstimatedRunTime : " + mo["EstimatedRunTime"].ToString() + "minutes" + "\n";
             }
-
-
 
             /*
             c#，使用WMI對象獲取筆記本電池剩余電量的百分比
@@ -1012,8 +1007,8 @@ namespace system_test3_wmi
             try
             {
                 ConnectionOptions oConn = new ConnectionOptions();
-                System.Management.ManagementScope managementScope = new System.Management.ManagementScope("\\\\localhost", oConn);
-                System.Management.ObjectQuery objectQuery = new System.Management.ObjectQuery("select AddressWidth from Win32_Processor");
+                ManagementScope managementScope = new ManagementScope("\\\\localhost", oConn);
+                ObjectQuery objectQuery = new ObjectQuery("select AddressWidth from Win32_Processor");
                 ManagementObjectSearcher moSearcher = new ManagementObjectSearcher(managementScope, objectQuery);
                 ManagementObjectCollection moReturnCollection = null;
                 string addressWidth = null;
@@ -1037,6 +1032,7 @@ namespace system_test3_wmi
             return string.Format(@"系統：{0}。位：{1}", osVersionString, osBitString);
         }
     }
+
     class SystemInfo
     {
         public virtual List<string> GetMonitorPnpDeviceId()
@@ -1099,11 +1095,11 @@ namespace system_test3_wmi
         {
             string Dri = "";
 
-            System.Management.ManagementClass mo = new System.Management.ManagementClass("Win32_LogicalDisk");
+            ManagementClass mo = new ManagementClass("Win32_LogicalDisk");
 
-            System.Management.ManagementObjectCollection mc = mo.GetInstances();
+            ManagementObjectCollection mc = mo.GetInstances();
 
-            foreach (System.Management.ManagementObject m in mc)
+            foreach (ManagementObject m in mc)
             {
                 if (Convert.ToString(m.Properties["DriveType"].Value) == "3")
                 {
@@ -1125,11 +1121,11 @@ namespace system_test3_wmi
         {
             string Dri = "";
 
-            System.Management.ManagementClass mo = new System.Management.ManagementClass("Win32_LogicalDisk");
+            ManagementClass mo = new ManagementClass("Win32_LogicalDisk");
 
-            System.Management.ManagementObjectCollection mc = mo.GetInstances();
+            ManagementObjectCollection mc = mo.GetInstances();
 
-            foreach (System.Management.ManagementObject m in mc)
+            foreach (ManagementObject m in mc)
             {
                 if (Convert.ToString(m.Properties["DriveType"].Value) == "3")
                 {
