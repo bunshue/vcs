@@ -20,6 +20,8 @@ using System.Collections;   //for DictionaryEntry, HashTable
 using System.Text.RegularExpressions;
 using Microsoft.VisualBasic.Devices;    //for Computer
 
+using System.ServiceProcess;    //參考/加入參考/.NET/System.ServiceProcess
+
 namespace vcs_Mix02
 {
     public partial class Form1 : Form
@@ -89,12 +91,6 @@ namespace vcs_Mix02
             button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-
-            label0.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            label1.Location = new Point(x_st + dx * 0, y_st + dy * 10 + 25);
-            label2.Location = new Point(x_st + dx * 0, y_st + dy * 10 + 50);
-            label3.Location = new Point(x_st + dx * 0, y_st + dy * 10 + 75);
-            label4.Location = new Point(x_st + dx * 3, y_st + dy * 10);
 
             richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
@@ -416,17 +412,37 @@ namespace vcs_Mix02
 
                 richTextBox1.Text += "i = " + i.ToString() + "\n";
             }
-
-
-
-
-
-
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //獲取本機所有SQLServer引擎
+
+            //获得主机名称
+            string HostName = Dns.GetHostName();
+            ServiceController[] services = ServiceController.GetServices();
+
+            //从机器服务列表中找到本机的SqlServer引擎
+
+            richTextBox1.Text += "services len = " + services.Length.ToString() + "\n";
+
+            foreach (ServiceController s in services)
+            {
+                richTextBox1.Text += "s = " + s.ServiceName + "\n";
+                if (s.ServiceName.ToLower().IndexOf("mssql$") != -1)
+                {
+                    //ddlServerName.Items.Add(HostName + "\\" + s.ServiceName.Substring(s.ServiceName.IndexOf("$") + 1));     
+                    richTextBox1.Text += HostName + "\\" + s.ServiceName.Substring(s.ServiceName.IndexOf("$") + 1) + "\n";
+                }
+                else if (s.ServiceName.ToLower() == "mssqlserver")
+                {
+
+                    //ddlServerName.Items.Add(HostName);
+                    richTextBox1.Text += "bbbb " + HostName + "\n";
+                }
+            }
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -448,7 +464,7 @@ namespace vcs_Mix02
         {
             show_button_text(sender);
         }
-        
+
         private void button15_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
@@ -757,20 +773,5 @@ namespace vcs_Mix02
         {
             show_button_text(sender);
         }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            //參考/加入參考/.Net/Microsoft.VisualBasic
-            Computer myComputer = new Computer();
-            label0.Text = "物理內存總量（M）：" + Convert.ToString(myComputer.Info.TotalPhysicalMemory / 1024 / 1024);
-            label1.Text = "可用物理內存（M）：" + Convert.ToString(myComputer.Info.AvailablePhysicalMemory / 1024 / 1024);
-            label2.Text = "虛擬內存總量（M）：" + Convert.ToString(myComputer.Info.TotalVirtualMemory / 1024 / 1024);
-            label3.Text = "可用虛擬內存（M）：" + Convert.ToString(myComputer.Info.AvailableVirtualMemory / 1024 / 1024);
-
-            label4.Text = "系統啟動後經過的時間： " + (Environment.TickCount / 1000).ToString() + " 秒";
-        }
     }
 }
-
-
-

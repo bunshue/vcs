@@ -972,25 +972,6 @@ namespace vcs_Mix01
         private void button19_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            string result = appInfo();
-            richTextBox1.Text += result + "\n";
-        }
-
-        public static string appInfo()
-        {
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            FileVersionInfo fvi = FileVersionInfo.GetVersionInfo(assembly.Location);
-            string result = "File Version: " + fvi.FileVersion
-                + Environment.NewLine + "Company Name: " + fvi.CompanyName
-                + Environment.NewLine + "Comments: " + fvi.Comments
-                + Environment.NewLine + "Product Name: " + fvi.ProductName
-                + Environment.NewLine + "Copyright: " + fvi.LegalCopyright
-                + Environment.NewLine + "File Name: " + fvi.FileName
-                + Environment.NewLine + "Original File Name: " + fvi.OriginalFilename
-                + Environment.NewLine + "Product Version: " + fvi.ProductVersion
-                + Environment.NewLine + "Special build: " + fvi.SpecialBuild
-                + Environment.NewLine + "" + fvi.CompanyName;
-            return result;
         }
 
         //C#兩種方法判斷字符是否為漢字
@@ -1033,9 +1014,6 @@ namespace vcs_Mix01
             }
             //信息處理
             UInt16 intCRC16 = GetCheckCode(bytRtuData, 8 - 2);
-
-
-
             
             //Debug.Print("CRC:" + bytRtuData[8 - 2].ToString() + " " + ((byte)(intCRC16 & 0xFF)).ToString() +"|" + bytRtuData[8 - 1].ToString() + " " + ((byte)((intCRC16 >> 8) & 0xff)).ToString());
 
@@ -1139,20 +1117,6 @@ namespace vcs_Mix01
         private void button23_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //讀取exe版本號
-
-            string filename = @"C:\______test_files\_material\_dll\AForge.Video.dll";
-
-            Assembly currentAssembly = Assembly.LoadFile(filename);
-            //Assembly updatedAssembly = Assembly.LoadFile(updatedAssemblyPath);
-
-            AssemblyName currentAssemblyName = currentAssembly.GetName();
-            //AssemblyName updatedAssemblyName = updatedAssembly.GetName();
-
-            richTextBox1.Text += currentAssembly.GetName() + "\n";
-
-
         }
 
         private void button24_Click(object sender, EventArgs e)
@@ -1179,36 +1143,11 @@ namespace vcs_Mix01
             //SendKeys.SendWait("{Tab}");
             SendKeys.SendWait("{Enter}");
 
-
-
-
-
-
-
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //通过exe文件获得版本
-
-            //string path = @"C:\Program Files (x86)\ArcGIS\Desktop10.8\bin\ArcMap.exe";
-            string path = @"vcs_Mix01.exe";
-
-            richTextBox1.Text += "版本 : " + GetVersion(path) + "\n";
-
-
-        }
-
-        public string GetVersion(string path)
-        {
-            string version = string.Empty;
-            FileVersionInfo file = FileVersionInfo.GetVersionInfo(path);
-            //版本号显示为“主版本号.次版本号.内部版本号.专用部件号”。
-            //version = String.Format("{0}.{1}.{2}.{3}", file.FileMajorPart, file.FileMinorPart, file.FileBuildPart, file.FilePrivatePart);
-            //使用文件版本信息
-            version = file.FileVersion;
-            return version;
         }
 
         int cnt = 0;
