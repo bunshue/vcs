@@ -262,11 +262,10 @@
             // bt_exit
             // 
             this.bt_exit.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_exit.Location = new System.Drawing.Point(951, 325);
+            this.bt_exit.Location = new System.Drawing.Point(962, 305);
             this.bt_exit.Name = "bt_exit";
-            this.bt_exit.Size = new System.Drawing.Size(100, 40);
+            this.bt_exit.Size = new System.Drawing.Size(50, 50);
             this.bt_exit.TabIndex = 27;
-            this.bt_exit.Text = "Exit";
             this.bt_exit.UseVisualStyleBackColor = true;
             this.bt_exit.Click += new System.EventHandler(this.bt_exit_Click);
             // 

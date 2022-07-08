@@ -415,6 +415,252 @@ namespace vcs_Mix03_draw_image
         {
             show_button_text(sender);
 
+            //畫OV亮度
+
+            int[] gray = new int[220];
+            gray[0] = 4;
+            gray[1] = 6;
+            gray[2] = 9;
+            gray[3] = 11;
+            gray[4] = 14;
+            gray[5] = 16;
+            gray[6] = 18;
+            gray[7] = 20;
+            gray[8] = 22;
+            gray[9] = 24;
+            gray[10] = 26;
+            gray[11] = 28;
+            gray[12] = 30;
+            gray[13] = 32;
+            gray[14] = 33;
+            gray[15] = 35;
+            gray[16] = 37;
+            gray[17] = 38;
+            gray[18] = 40;
+            gray[19] = 41;
+            gray[20] = 43;
+            gray[21] = 44;
+            gray[22] = 46;
+            gray[23] = 47;
+            gray[24] = 49;
+            gray[25] = 50;
+            gray[26] = 51;
+            gray[27] = 53;
+            gray[28] = 54;
+            gray[29] = 55;
+            gray[30] = 57;
+            gray[31] = 58;
+            gray[32] = 59;
+            gray[33] = 61;
+            gray[34] = 62;
+            gray[35] = 63;
+            gray[36] = 65;
+            gray[37] = 66;
+            gray[38] = 67;
+            gray[39] = 68;
+            gray[40] = 70;
+            gray[41] = 71;
+            gray[42] = 72;
+            gray[43] = 73;
+            gray[44] = 74;
+            gray[45] = 75;
+            gray[46] = 77;
+            gray[47] = 78;
+            gray[48] = 79;
+            gray[49] = 80;
+            gray[50] = 81;
+            gray[51] = 82;
+            gray[52] = 83;
+            gray[53] = 84;
+            gray[54] = 85;
+            gray[55] = 86;
+            gray[56] = 87;
+            gray[57] = 88;
+            gray[58] = 89;
+            gray[59] = 90;
+            gray[60] = 91;
+            gray[61] = 92;
+            gray[62] = 93;
+            gray[63] = 94;
+            gray[64] = 95;
+            gray[65] = 96;
+            gray[66] = 97;
+            gray[67] = 98;
+            gray[68] = 99;
+            gray[69] = 99;
+            gray[70] = 100;
+            gray[71] = 101;
+            gray[72] = 102;
+            gray[73] = 103;
+            gray[74] = 103;
+            gray[75] = 104;
+            gray[76] = 105;
+            gray[77] = 106;
+            gray[78] = 106;
+            gray[79] = 107;
+            gray[80] = 108;
+            gray[81] = 109;
+            gray[82] = 109;
+            gray[83] = 110;
+            gray[84] = 111;
+            gray[85] = 111;
+            gray[86] = 112;
+            gray[87] = 113;
+            gray[88] = 113;
+            gray[89] = 114;
+            gray[90] = 115;
+            gray[91] = 115;
+            gray[92] = 116;
+            gray[93] = 116;
+            gray[94] = 117;
+            gray[95] = 118;
+            gray[96] = 118;
+            gray[97] = 119;
+            gray[98] = 119;
+            gray[99] = 120;
+            gray[100] = 120;
+            gray[101] = 121;
+            gray[102] = 122;
+            gray[103] = 122;
+            gray[104] = 123;
+            gray[105] = 123;
+            gray[106] = 124;
+            gray[107] = 124;
+            gray[108] = 125;
+            gray[109] = 125;
+            gray[110] = 126;
+            gray[111] = 126;
+            gray[112] = 127;
+            gray[113] = 127;
+            gray[114] = 128;
+            gray[115] = 128;
+            gray[116] = 129;
+            gray[117] = 129;
+            gray[118] = 130;
+            gray[119] = 130;
+            gray[120] = 130;
+            gray[121] = 131;
+            gray[122] = 131;
+            gray[123] = 132;
+            gray[124] = 132;
+            gray[125] = 133;
+            gray[126] = 133;
+            gray[127] = 134;
+            gray[128] = 134;
+            gray[129] = 134;
+            gray[130] = 135;
+            gray[131] = 135;
+            gray[132] = 136;
+            gray[133] = 136;
+            gray[134] = 140;
+            gray[135] = 143;
+            gray[136] = 145;
+            gray[137] = 149;
+            gray[138] = 151;
+            gray[139] = 153;
+            gray[140] = 156;
+            gray[141] = 159;
+            gray[142] = 161;
+            gray[143] = 163;
+            gray[144] = 165;
+            gray[145] = 168;
+            gray[146] = 169;
+            gray[147] = 171;
+            gray[148] = 173;
+            gray[149] = 176;
+            gray[150] = 179;
+            gray[151] = 182;
+            gray[152] = 184;
+            gray[153] = 187;
+            gray[154] = 189;
+            gray[155] = 191;
+            gray[156] = 193;
+            gray[157] = 196;
+            gray[158] = 197;
+            gray[159] = 199;
+            gray[160] = 200;
+            gray[161] = 202;
+            gray[162] = 203;
+            gray[163] = 204;
+            gray[164] = 206;
+            gray[165] = 207;
+            gray[166] = 209;
+            gray[167] = 211;
+            gray[168] = 212;
+            gray[169] = 214;
+            gray[170] = 215;
+            gray[171] = 216;
+            gray[172] = 217;
+            gray[173] = 218;
+            gray[174] = 219;
+            gray[175] = 219;
+            gray[176] = 220;
+            gray[177] = 220;
+            gray[178] = 221;
+            gray[179] = 221;
+            gray[180] = 221;
+            gray[181] = 222;
+            gray[182] = 222;
+            gray[183] = 223;
+            gray[184] = 223;
+            gray[185] = 223;
+            gray[186] = 223;
+            gray[187] = 224;
+            gray[188] = 224;
+            gray[189] = 223;
+            gray[190] = 224;
+            gray[191] = 224;
+            gray[192] = 225;
+            gray[193] = 225;
+            gray[194] = 225;
+            gray[195] = 225;
+            gray[196] = 226;
+            gray[197] = 226;
+            gray[198] = 226;
+            gray[199] = 226;
+            gray[200] = 226;
+            gray[201] = 226;
+            gray[202] = 226;
+            gray[203] = 226;
+            gray[204] = 226;
+            gray[205] = 226;
+            gray[206] = 226;
+            gray[207] = 226;
+            gray[208] = 226;
+            gray[209] = 226;
+            gray[210] = 226;
+            gray[211] = 226;
+            gray[212] = 226;
+            gray[213] = 226;
+            gray[214] = 226;
+            gray[215] = 226;
+            gray[216] = 226;
+            gray[217] = 226;
+            gray[218] = 226;
+            gray[219] = 226;
+
+            Graphics g = pictureBox1.CreateGraphics();				//實例化pictureBox1控件的Graphics類
+            //g.DrawLines(Pens.Red, gray.ToArray());
+
+            g.Clear(Color.White);
+
+            g.DrawRectangle(Pens.Red, 0, 0, 440, 256);
+            Point[] curvePoints = new Point[220];    //一維陣列內有 8 個Point
+
+            int i;
+            for (i = 0; i < 220; i++)
+            {
+                curvePoints[i].X = i * 2;
+                curvePoints[i].Y = 255 - (gray[i]);
+            }
+
+
+            // Draw lines between original points to screen.
+            g.DrawLines(Pens.Red, curvePoints);   //畫直線
+            // Draw curve to screen.
+            //gc.DrawCurve(redPen, curvePoints); //畫曲線
+
+
         }
 
         private void button11_Click(object sender, EventArgs e)

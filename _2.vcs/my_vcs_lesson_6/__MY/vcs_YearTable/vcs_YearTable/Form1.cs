@@ -111,12 +111,29 @@ namespace vcs_YearTable
             button26.Location = new Point(x_st + dx * 6, y_st + dy * 2);
             bt_info.Location = new Point(x_st + dx * 7, y_st + dy * 2);
             bt_save.Location = new Point(x_st + dx * 8, y_st + dy * 2);
-            bt_exit.Location = new Point(x_st + dx * 9, y_st + dy * 2);
 
             richTextBox1.Location = new Point(x_st + dx * 10, y_st - dy * 3);
 
             //控件位置
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            int width = 5;
+            int w = 50; //設定按鈕大小 W
+            int h = 50; //設定按鈕大小 H
+
+            bt_exit.Size = new Size(w, h);
+            bt_exit.Text = "";
+            Bitmap bmp = new Bitmap(w, h);
+            Graphics g = Graphics.FromImage(bmp);
+            Pen p = new Pen(Color.Red, width);
+            g.Clear(Color.Pink);
+            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
+            g.DrawLine(p, 0, 0, w - 1, h - 1);
+            g.DrawLine(p, w - 1, 0, 0, h - 1);
+            bt_exit.Image = bmp;
+
+            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
+            bt_exit.BringToFront();     //移到最上層
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -1519,6 +1536,18 @@ namespace vcs_YearTable
             for (i = 0; i < total_persons; i++)
             {
                 personinfos.Add(new PersonInfo(person[i, 0], DateTime.Parse(person[i, 1]), DateTime.Parse(person[i, 2])));
+            }
+
+            //過濾掉重複的
+            for (i = 0; i < personinfos.Count; i++)
+            {
+                for (j = (i + 1); j < personinfos.Count; j++)
+                {
+                    if (personinfos[i].name == personinfos[j].name)
+                    {
+                        personinfos.RemoveAt(i);
+                    }
+                }
             }
 
             if (personinfos.Count == 0)

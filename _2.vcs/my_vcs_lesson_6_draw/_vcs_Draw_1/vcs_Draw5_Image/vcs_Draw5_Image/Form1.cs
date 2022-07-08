@@ -47,8 +47,8 @@ namespace vcs_Draw5_Image
         {
             int x_st = 14;
             int y_st = 12;
-            int dx = 170 + 10;
-            int dy = 45 + 10;
+            int dx = 180 + 10;
+            int dy = 50 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -81,7 +81,36 @@ namespace vcs_Draw5_Image
 
         private void button0_Click(object sender, EventArgs e)
         {
+            //用DrawImage貼上影像 並改變影像位置與大小
 
+            bitmap1 = new Bitmap(filename);
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+
+            int w = bitmap1.Width;
+            int h = bitmap1.Height;
+
+            g.DrawImage(bitmap1, new Rectangle(0, 0, w, h));
+
+            //g.DrawImage(bitmap1, new Rectangle(w / 4, h / 4, w / 2, h / 2));
+
+            //g.DrawImage(bitmap1, new Rectangle(w / 4, h / 4, w / 2, h / 2));
+            //g.DrawImage(bitmap1, new Rectangle(w / 10 * 5 / 2, h / 10 * 5 / 2, w / 10 * 5, h / 10 * 5));
+
+            int i;
+            int x_st;
+            int y_st;
+            int dw;
+            int dh;
+
+            for (i = 0; i < 5; i++)
+            {
+                x_st = w / 10 * i / 2;
+                y_st = h / 10 * i / 2;
+                dw = w / 10 * (10 - i);
+                dh = h / 10 * (10 - i);
+                g.DrawImage(bitmap1, new Rectangle(x_st, y_st, dw, dh));
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -377,7 +406,19 @@ namespace vcs_Draw5_Image
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //DrawImage
+            //在指定位置畫上一圖
 
+            Image image = Image.FromFile(@"C:\______test_files\__pic\_cat\cat2.png");
+
+            int x = 100;
+            int y = 100;
+
+            //貼上原圖
+            g.DrawImage(image, x, y);
+            //貼上原圖 1/4
+            g.DrawImage(image, x + 150, y + 150, image.Width / 2, image.Height / 2);
+            pictureBox1.Image = bitmap1;
         }
 
         private void button8_Click(object sender, EventArgs e)

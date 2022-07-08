@@ -63,6 +63,11 @@ namespace vcs_Cryptography_new
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
         private void button0_Click(object sender, EventArgs e)
         {
             /*
@@ -128,10 +133,6 @@ namespace vcs_Cryptography_new
             string result = Md5Sum(data + key);  // 返回
 
             richTextBox1.Text += result + "\n";
-
-            
-
-
         }
 
         //C#默認的是16位的字節數組，需要略加修改，轉為32個字節的字符串，代碼如下：
@@ -165,9 +166,7 @@ namespace vcs_Cryptography_new
             string key = "123";
             string result = Md5Sum2(data + key);  // 返回
             richTextBox1.Text += result + "\n";
-
         }
-
 
         public static string Md5Sum2(string strToEncrypt)
         {
@@ -228,19 +227,204 @@ namespace vcs_Cryptography_new
             }
         }
 
+        private string GetStringValue(byte[] Byte)
+        {
+            string tmpString = "";
+
+            /*
+            //1111
+            ASCIIEncoding Asc = new ASCIIEncoding();
+            tmpString = Asc.GetString(Byte);
+            */
+
+            //2222
+            int iCounter;
+            for (iCounter = 0; iCounter < Byte.Length; iCounter++)
+            {
+                tmpString = tmpString + Byte[iCounter].ToString();
+            }
+
+            return tmpString;
+        }
+
+        private byte[] GetKeyByteArray(string strKey)
+        {
+            ASCIIEncoding Asc = new ASCIIEncoding();
+            int tmpStrLen = strKey.Length;
+            byte[] tmpByte = new byte[tmpStrLen - 1];
+            tmpByte = Asc.GetBytes(strKey);
+            return tmpByte;
+        }
+
+        /// <summary>
+        /// 使用DES加密（Added by niehl 2005-4-6）
+        /// </summary>
+        /// <param name="originalValue">待加密的字符串</param>
+        /// <param name="key">密鑰(最大長度8)</param>
+        /// <param name="IV">初始化向量(最大長度8)</param>
+        /// <returns>加密後的字符串</returns>
+        public string DESEncrypt(string originalValue, string key, string IV)
+        {
+            //將key和IV處理成8個字符
+            key += "12345678";
+            IV += "12345678";
+            key = key.Substring(0, 8);
+            IV = IV.Substring(0, 8);
+            SymmetricAlgorithm sa;
+            ICryptoTransform ct;
+            MemoryStream ms;
+            CryptoStream cs;
+            byte[] byt;
+            sa = new DESCryptoServiceProvider();
+            sa.Key = Encoding.UTF8.GetBytes(key);
+            sa.IV = Encoding.UTF8.GetBytes(IV);
+            ct = sa.CreateEncryptor();
+            byt = Encoding.UTF8.GetBytes(originalValue);
+            ms = new MemoryStream();
+            cs = new CryptoStream(ms, ct, CryptoStreamMode.Write);
+            cs.Write(byt, 0, byt.Length);
+            cs.FlushFinalBlock();
+            cs.Close();
+            return Convert.ToBase64String(ms.ToArray());
+        }
+
+        public string DESEncrypt(string originalValue, string key)
+        {
+            return DESEncrypt(originalValue, key, key);
+        }
+        /// <summary>
+        /// 使用DES解密（Added by niehl 2005-4-6）
+        /// </summary>
+        /// <param name="encryptedValue">待解密的字符串</param>
+        /// <param name="key">密鑰(最大長度8)</param>
+        /// <param name="IV">m初始化向量(最大長度8)</param>
+        /// <returns>解密後的字符串</returns>
+        public string DESDecrypt(string encryptedValue, string key, string IV)
+        {
+            //將key和IV處理成8個字符
+            key += "12345678";
+            IV += "12345678";
+            key = key.Substring(0, 8);
+            IV = IV.Substring(0, 8);
+            SymmetricAlgorithm sa;
+            ICryptoTransform ct;
+            MemoryStream ms;
+            CryptoStream cs;
+            byte[] byt;
+            sa = new DESCryptoServiceProvider();
+            sa.Key = Encoding.UTF8.GetBytes(key);
+            sa.IV = Encoding.UTF8.GetBytes(IV);
+            ct = sa.CreateDecryptor();
+            byt = Convert.FromBase64String(encryptedValue);
+            ms = new MemoryStream();
+            cs = new CryptoStream(ms, ct, CryptoStreamMode.Write);
+            cs.Write(byt, 0, byt.Length);
+            cs.FlushFinalBlock();
+            cs.Close();
+            return Encoding.UTF8.GetString(ms.ToArray());
+        }
+
         private void button5_Click(object sender, EventArgs e)
         {
+            //各種加密算法
 
+            string initial_data = "12345";
+            byte[] tmpByte;
+            MD5 md5 = new MD5CryptoServiceProvider();
+            tmpByte = md5.ComputeHash(GetKeyByteArray(initial_data));
+            md5.Clear();
+            string md5_result = GetStringValue(tmpByte);
+
+            richTextBox1.Text += "MD5 = " + md5_result + "\n";
+
+            //byte[] tmpByte;
+            SHA1 sha1 = new SHA1CryptoServiceProvider();
+            tmpByte = sha1.ComputeHash(GetKeyByteArray(initial_data));
+            sha1.Clear();
+            string sha1_result = GetStringValue(tmpByte);
+
+            richTextBox1.Text += "SHA1 = " + sha1_result + "\n";
+
+            //byte[] tmpByte;
+            SHA256 sha256 = new SHA256Managed();
+            tmpByte = sha256.ComputeHash(GetKeyByteArray(initial_data));
+            sha256.Clear();
+            string sha256_result = GetStringValue(tmpByte);
+
+            richTextBox1.Text += "SHA256 = " + sha256_result + "\n";
+
+            //byte[] tmpByte;
+            SHA512 sha512 = new SHA512Managed();
+            tmpByte = sha512.ComputeHash(GetKeyByteArray(initial_data));
+            sha512.Clear();
+            string sha512_result = GetStringValue(tmpByte);
+            richTextBox1.Text += "SHA512 = " + sha512_result + "\n";
+
+
+            string key = "abc";
+            string DES_result = DESEncrypt(initial_data, key);
+            richTextBox1.Text += "DES Enc = " + DES_result + "\n";
+
+
+            string DES_decrypt_result = DESDecrypt(DES_result, key, "0");
+            richTextBox1.Text += "DES Dec = " + DES_decrypt_result + "\n";
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //Md5和Sha1兩種加密方式
+            //Md5和Sha1两种加密方式
 
+            const string s = "123456";
+            Console.WriteLine("密码：" + s);
+
+            Console.WriteLine("Md5：" + s.Md5());
+            Console.WriteLine("长度：" + s.Md5().Length);
+
+            Console.WriteLine("Sha1：" + s.Sha1());
+            Console.WriteLine("长度：" + s.Sha1().Length);
+
+
+            richTextBox1.Text += "密码：" + s + "\n";
+
+            richTextBox1.Text += "Md5：" + s.Md5() + "\n";
+            richTextBox1.Text += "长度：" + s.Md5().Length + "\n";
+
+            richTextBox1.Text += "Sha1：" + s.Sha1() + "\n";
+            richTextBox1.Text += "长度：" + s.Sha1().Length + "\n";
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //MD5   32位
+            //MD5 校驗默認為32位的字符串， 而C#默認的是16位的字節數組，需要略加修改，轉為32個字節的字符串，
 
+            string data = "hello world";
+            string key = "123";
+            string result = Md5Sum3(data + key);  // 返回
+            richTextBox1.Text += result + "\n";
+        }
+
+        public static string Md5Sum3(string strToEncrypt)
+        {
+            // 將需要加密的字符串轉為byte數組
+            byte[] bs = UTF8Encoding.UTF8.GetBytes(strToEncrypt);
+
+            // 創建md5 對象
+            MD5 md5;
+            md5 = MD5CryptoServiceProvider.Create();
+
+            // 生成16位的二進制校驗碼
+            byte[] hashBytes = md5.ComputeHash(bs);
+
+            // 轉為32位字符串
+            string hashString = "";
+            for (int i = 0; i < hashBytes.Length; i++)
+            {
+                hashString += System.Convert.ToString(hashBytes[i], 16).PadLeft(2, '0');
+            }
+
+            return hashString.PadLeft(32, '0');
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -255,7 +439,6 @@ namespace vcs_Cryptography_new
 
         private void button10_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -302,7 +485,54 @@ namespace vcs_Cryptography_new
         {
 
         }
+    }
 
+    public static class EncryptHelper
+    {
+        /// <summary>
+        /// 基于Md5的自定义加密字符串方法：输入一个字符串，返回一个由32个字符组成的十六进制的哈希散列（字符串）。
+        /// </summary>
+        /// <param name="str">要加密的字符串</param>
+        /// <returns>加密后的十六进制的哈希散列（字符串）</returns>
+        public static string Md5(this string str)
+        {
+            //将输入字符串转换成字节数组
+            var buffer = Encoding.Default.GetBytes(str);
+            //接着，创建Md5对象进行散列计算
+            var data = MD5.Create().ComputeHash(buffer);
 
+            //创建一个新的Stringbuilder收集字节
+            var sb = new StringBuilder();
+
+            //遍历每个字节的散列数据
+            foreach (var t in data)
+            {
+                //格式每一个十六进制字符串
+                sb.Append(t.ToString("X2"));
+            }
+
+            //返回十六进制字符串
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// 基于Sha1的自定义加密字符串方法：输入一个字符串，返回一个由40个字符组成的十六进制的哈希散列（字符串）。
+        /// </summary>
+        /// <param name="str">要加密的字符串</param>
+        /// <returns>加密后的十六进制的哈希散列（字符串）</returns>
+        public static string Sha1(this string str)
+        {
+            var buffer = Encoding.UTF8.GetBytes(str);
+            var data = SHA1.Create().ComputeHash(buffer);
+
+            var sb = new StringBuilder();
+            foreach (var t in data)
+            {
+                sb.Append(t.ToString("X2"));
+            }
+
+            return sb.ToString();
+        }
     }
 }
+

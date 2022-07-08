@@ -61,6 +61,7 @@
             this.bt_clear.TabIndex = 55;
             this.bt_clear.Text = "clear";
             this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
             // button19
             // 
@@ -200,6 +201,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(180, 55);
             this.button7.TabIndex = 41;
+            this.button7.Text = "MD5   32位";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -218,6 +220,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(180, 55);
             this.button6.TabIndex = 39;
+            this.button6.Text = "Md5和Sha1兩種加密方式";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -228,6 +231,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(180, 55);
             this.button5.TabIndex = 38;
+            this.button5.Text = "各種加密算法";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 

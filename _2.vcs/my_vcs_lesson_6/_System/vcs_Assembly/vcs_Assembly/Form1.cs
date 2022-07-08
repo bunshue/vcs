@@ -34,8 +34,8 @@ namespace vcs_Assembly
             //button
             x_st = 10;
             y_st = 10;
-            dx = 180;
-            dy = 80;
+            dx = 170 + 10;
+            dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -44,6 +44,16 @@ namespace vcs_Assembly
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -126,10 +136,82 @@ namespace vcs_Assembly
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //獲取反射信息1
 
+            //reflecting reflect=new reflecting();//定義一個新的自身類
+            //調用一個reflecting.exe程序集
+
+            Assembly myAssembly = Assembly.LoadFrom("vcs_Assembly.exe");
+            getreflectioninfo(myAssembly);
+            //reflect.getreflectioninfo(myAssembly);//獲取反射信息
+        }
+
+        //定義一個獲取反射內容的方法
+        void getreflectioninfo(Assembly myassembly)
+        {
+            Type[] typearr = myassembly.GetTypes();//獲取類型
+
+            foreach (Type type in typearr)//針對每個類型獲取詳細信息
+            {
+                //獲取類型的結構信息
+                ConstructorInfo[] myconstructors = type.GetConstructors();
+                Console.WriteLine(myconstructors.ToString());
+
+                //獲取類型的字段信息
+                FieldInfo[] myfields = type.GetFields();
+                Console.WriteLine(myfields.ToString());
+
+                //獲取方法信息
+                MethodInfo[] myMethodInfo = type.GetMethods();
+                Console.WriteLine(myMethodInfo.ToString());
+
+                //獲取屬性信息
+                PropertyInfo[] myproperties = type.GetProperties();
+                Console.WriteLine(myproperties.ToString());
+
+                //獲取事件信息
+                EventInfo[] Myevents = type.GetEvents();
+                Console.WriteLine(Myevents.ToString());
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)
+        {
+            //獲取反射信息2
+            string fname = "vcs_Assembly.exe";
+
+            Assembly assembly = null;
+            try
+            {
+                // try to load assembly
+                assembly = Assembly.LoadFrom(fname);
+
+                // get types of the assembly
+                Type[] types = assembly.GetTypes();
+
+                // check all types
+                foreach (Type type in types)
+                {
+                    // get interfaces ot the type
+                    Type[] interfaces = type.GetInterfaces();
+                }
+            }
+            catch (Exception)
+            {
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
         {
 
         }

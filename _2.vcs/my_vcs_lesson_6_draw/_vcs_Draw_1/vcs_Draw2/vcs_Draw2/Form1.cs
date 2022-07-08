@@ -1169,18 +1169,6 @@ namespace vcs_Draw2
 
         private void button23_Click(object sender, EventArgs e)
         {
-            //DrawPicture
-            //在指定位置畫上一圖
-            // Create image.
-            Image newImage = Image.FromFile(@"C:\______test_files\__pic\_cat\cat2.png");
-            //Image newImage = Resource1.doraemon;
-
-            // Create coordinates for upper-left corner of image.
-            int x = 200;
-            int y = 200;
-
-            // Draw image to screen.
-            g.DrawImage(newImage, x, y);
         }
 
         private void button24_Click(object sender, EventArgs e)

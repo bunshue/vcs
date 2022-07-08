@@ -118,7 +118,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(170, 70);
             this.button6.TabIndex = 100;
-            this.button6.Text = "讀取U盤序列號";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -129,7 +128,6 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(170, 70);
             this.button1.TabIndex = 98;
-            this.button1.Text = "各種加密算法";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -161,7 +159,6 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(170, 70);
             this.button4.TabIndex = 88;
-            this.button4.Text = "使用WMI取得USB資訊";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -258,7 +255,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(170, 70);
             this.button13.TabIndex = 113;
-            this.button13.Text = "Md5和Sha1两种加密方式";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -332,7 +328,6 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(170, 70);
             this.button20.TabIndex = 120;
-            this.button20.Text = "畫OV亮度";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
