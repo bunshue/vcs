@@ -48,7 +48,7 @@ namespace vcs_Draw5_Image
             int x_st = 14;
             int y_st = 12;
             int dx = 180 + 10;
-            int dy = 50 + 10;
+            int dy = 55 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -67,9 +67,9 @@ namespace vcs_Draw5_Image
             button14.Location = new Point(x_st + dx * 1, y_st + dy * 6);
             button15.Location = new Point(x_st + dx * 1, y_st + dy * 7);
 
-            bt_clear.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 8);
 
-            richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -418,6 +418,10 @@ namespace vcs_Draw5_Image
             g.DrawImage(image, x, y);
             //貼上原圖 1/4
             g.DrawImage(image, x + 150, y + 150, image.Width / 2, image.Height / 2);
+
+            //圖片改變比例
+            g.DrawImage(image, x + 300, y + 150, image.Width / 2, image.Height * 2);
+
             pictureBox1.Image = bitmap1;
         }
 

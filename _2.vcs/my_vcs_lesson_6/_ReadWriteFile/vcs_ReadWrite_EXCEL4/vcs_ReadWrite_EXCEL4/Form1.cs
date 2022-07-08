@@ -18,7 +18,6 @@ using System.Data.OleDb;    //for OleDbConnection, 表示資料來源的開啟�
 using Excel = Microsoft.Office.Interop.Excel;
 */
 
-
 namespace vcs_ReadWrite_EXCEL4
 {
     public partial class Form1 : Form
@@ -149,15 +148,15 @@ namespace vcs_ReadWrite_EXCEL4
                 return;
             }
 
-            DataTable TableValue = ReadExcelData(openFileDialog1.FileName, "Sheet1");
+            DataTable dt = ReadExcelData(openFileDialog1.FileName, "Sheet1");
 
-            if (TableValue == null)
+            if (dt == null)
             {
                 richTextBox1.Text += "無法讀取Excel資料\n";
                 return;
             }
 
-            dataGridView1.DataSource = TableValue;
+            dataGridView1.DataSource = dt;
 
 
             int c;
@@ -172,7 +171,7 @@ namespace vcs_ReadWrite_EXCEL4
 
         public DataTable ReadExcelData(string filename, string SheetName)
         {
-            DataTable dataTable = new DataTable();
+            DataTable dt = new DataTable();
 
             //定義OleDb======================================================
             //1.檔案位置
@@ -208,7 +207,7 @@ namespace vcs_ReadWrite_EXCEL4
                 {
                     using (OleDbDataAdapter dr = new OleDbDataAdapter(queryString, Connect))
                     {
-                        dr.Fill(dataTable);
+                        dr.Fill(dt);
                     }
                 }
                 catch (Exception ex)
@@ -217,7 +216,7 @@ namespace vcs_ReadWrite_EXCEL4
                     return null;
                 }
             }
-            return dataTable;
+            return dt;
         }
 
         void print_dataGridView_data(DataGridView dgv)
@@ -245,3 +244,4 @@ namespace vcs_ReadWrite_EXCEL4
         }
     }
 }
+

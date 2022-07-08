@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace WindowsFormsApplication0210a
+namespace vcs_KeyboardSendKeys
 {
     static class Program
     {

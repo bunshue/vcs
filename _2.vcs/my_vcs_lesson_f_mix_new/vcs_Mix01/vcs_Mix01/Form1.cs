@@ -789,44 +789,14 @@ namespace vcs_Mix01
         }
         //數字大寫顯示 SP
 
-
-
-        [DllImport("user32.dll")]
-        static extern void keybd_event
-        (
-            byte bVk,// 虛擬鍵值  
-            byte bScan,// 硬件掃描碼  
-            uint dwFlags,// 動作標識  
-            IntPtr dwExtraInfo// 與鍵盤動作關聯的輔加信息  
-        );
-
         private void button14_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //模擬按下PrintScreen
-
-            keybd_event((byte)0x2c, 0, 0x0, IntPtr.Zero);//down
-            Application.DoEvents();
-            keybd_event((byte)0x2c, 0, 0x2, IntPtr.Zero);//up
-            Application.DoEvents();
-
-
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //模擬按下Alt + PrintScreen
-
-            keybd_event((byte)Keys.Menu, 0, 0x0, IntPtr.Zero);
-            keybd_event((byte)0x2c, 0, 0x0, IntPtr.Zero);//down
-            Application.DoEvents();
-            Application.DoEvents();
-            keybd_event((byte)0x2c, 0, 0x2, IntPtr.Zero);//up
-            keybd_event((byte)Keys.Menu, 0, 0x2, IntPtr.Zero);
-            Application.DoEvents();
-            Application.DoEvents();
         }
 
         public static int inputToSeconds(string timerInput)
@@ -1091,27 +1061,6 @@ namespace vcs_Mix01
         private void button24_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            SendKeys.SendWait("{Tab}");
-
-            SendKeys.SendWait("{Enter}");
-            SendKeys.SendWait("123456789");
-
-            SendKeys.SendWait("{Enter}");
-            string name = "this is a lion-mouse";
-
-            SendKeys.SendWait("{Enter}");
-            foreach (char ArrayValue in name.ToCharArray())
-            {
-                SendKeys.SendWait(ArrayValue.ToString());
-                Thread.Sleep(10);
-            }
-
-            SendKeys.SendWait("{Enter}");
-
-
-            //SendKeys.SendWait("{Tab}");
-            SendKeys.SendWait("{Enter}");
-
         }
 
         private void button25_Click(object sender, EventArgs e)
@@ -1119,46 +1068,9 @@ namespace vcs_Mix01
             show_button_text(sender);
         }
 
-        int cnt = 0;
         private void button26_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //C# 模擬鍵盤操作--SendKey(),SendKeys()
-            //https://www.cnblogs.com/wolfocme110/p/13444309.html
-
-            //光标移至richTextBox1
-            richTextBox1.Focus();
-
-            //模拟按下"ABCDEFG"
-            SendKeys.SendWait("(ABCDEFG)");
-            SendKeys.SendWait("{left 5}");
-            SendKeys.SendWait("{h 10}");
-
-            /*
-            更多举例:
-            SendKeys.SendWait("^C");  //Ctrl+C 组合键
-            SendKeys.SendWait("+C");  //Shift+C 组合键
-            SendKeys.SendWait("%C");  //Alt+C 组合键
-            SendKeys.SendWait("+(AX)");  //Shift+A+X 组合键
-            SendKeys.SendWait("+AX");  //Shift+A 组合键,之后按X键
-            SendKeys.SendWait("{left 5}");  //按←键 5次
-            SendKeys.SendWait("{h 10}");   //按h键 10次
-            SendKeys.Send("汉字");  //模拟输入"汉字"2个字
-            */
-
-            richTextBox1.Text += "到richTextBox裡面添加一些文字\n";
-            richTextBox1.Focus();
-            SendKeys.Send("到richTextBox裡面添加一些文字  " + (cnt++).ToString() + "\n");
-            SendKeys.Send("到richTextBox裡面添加一些文字  " + (cnt++).ToString() + "\n");
-            SendKeys.Send("到richTextBox裡面添加一些文字  " + (cnt++).ToString() + "\n");
-            SendKeys.Send("{TAB}"); //按了Tab
-            SendKeys.Send("123456");
-            SendKeys.Send("{ENTER}");   //添加Enter
-            SendKeys.Send("{ENTER}");
-            SendKeys.Send("{ENTER}");
-            SendKeys.Send("到richTextBox裡面添加一些文字  " + (cnt++).ToString() + "\n");
-
         }
 
         private void button27_Click(object sender, EventArgs e)

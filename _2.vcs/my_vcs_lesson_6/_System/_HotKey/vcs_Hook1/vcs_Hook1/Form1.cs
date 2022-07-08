@@ -58,13 +58,9 @@ namespace vcs_Hook1
             {
                 KeyBoardHookProcedure = new HookProc(KeyBoardHookProc);
 
-                //hHook = SetWindowsHookEx(2,
-                //            KeyBoardHookProcedure,
-                //           GetModuleHandle(Process.GetCurrentProcess().MainModule.ModuleName), GetCurrentThreadId());
+                //hHook = SetWindowsHookEx(2, KeyBoardHookProcedure, GetModuleHandle(Process.GetCurrentProcess().MainModule.ModuleName), GetCurrentThreadId());
 
-                hHook = SetWindowsHookEx(WH_KEYBOARD_LL,
-                          KeyBoardHookProcedure,
-                         GetModuleHandle(Process.GetCurrentProcess().MainModule.ModuleName), 0);
+                hHook = SetWindowsHookEx(WH_KEYBOARD_LL, KeyBoardHookProcedure, GetModuleHandle(Process.GetCurrentProcess().MainModule.ModuleName), 0);
 
                 //如果設置鉤子失敗.
                 if (hHook == 0)
@@ -86,7 +82,10 @@ namespace vcs_Hook1
                 hHook = 0;
             }
             //如果去掉鉤子失敗.
-            if (!retKeyboard) throw new Exception("UnhookWindowsHookEx failed.");
+            if (!retKeyboard)
+            {
+                throw new Exception("UnhookWindowsHookEx failed.");
+            }
         }
 
         //這裡可以添加自己想要的信息處理
@@ -101,8 +100,7 @@ namespace vcs_Hook1
                     return 1;
 
                 }
-                if (kbh.vkCode == (int)Keys.Y
-                  && (int)Control.ModifierKeys == (int)Keys.Control + (int)Keys.Alt)  //截獲Ctrl+Alt+Y
+                if (kbh.vkCode == (int)Keys.Y&& (int)Control.ModifierKeys == (int)Keys.Control + (int)Keys.Alt)  //截獲Ctrl+Alt+Y
                 {
                     richTextBox1.Text += "快捷鍵已攔截! Ctrl + Alt + Y\n";
                     return 1;
@@ -129,16 +127,23 @@ namespace vcs_Hook1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            richTextBox1.Text += "攔截目標 : F8 TBD\n";
+            richTextBox1.Text += "攔截目標 : Ctrl + Alt + Y\n";
+            richTextBox1.Text += "攔截目標 : X\n";
+            richTextBox1.Text += "攔截目標 : 系統開始菜單\n";
 
+            richTextBox1.Text += "未啟動攔截\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "啟動攔截\n";
             Hook_Start();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "未啟動攔截\n";
             Hook_Clear();
         }
     }

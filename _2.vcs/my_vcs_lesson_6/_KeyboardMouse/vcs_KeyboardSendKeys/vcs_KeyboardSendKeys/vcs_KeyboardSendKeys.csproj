@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1C7E99B7-6CF1-4B08-AEC1-77E0C8DAD24F}</ProjectGuid>
+    <ProjectGuid>{1F691AEC-5791-4912-8BA6-5773FFACC48B}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WindowsFormsApplication0210a</RootNamespace>
-    <AssemblyName>WindowsFormsApplication0210a</AssemblyName>
+    <RootNamespace>vcs_KeyboardSendKeys</RootNamespace>
+    <AssemblyName>vcs_KeyboardSendKeys</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

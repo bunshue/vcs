@@ -18,6 +18,11 @@ namespace vcs_RegistryKey_RightButton
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             string sText = this.Text;
@@ -25,14 +30,10 @@ namespace vcs_RegistryKey_RightButton
             // Application.ExecutablePath 是程式執行檔的完整路徑檔案名稱
             // %1 表示傳入的檔案
 
-
             // 加入檔案右鍵選單
             RegFile(sText, sFullName);
 
-
             richTextBox1.Text += "done 1\n";
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -42,12 +43,10 @@ namespace vcs_RegistryKey_RightButton
             // Application.ExecutablePath 是程式執行檔的完整路徑檔案名稱
             // %1 表示傳入的檔案
 
-
             // 加入目錄右鍵選單
             RegDirectory(sText, sFullName);
 
             richTextBox1.Text += "done 2\n";
-
         }
 
         private void RegFile(string sText, string sFullName)
@@ -73,4 +72,3 @@ namespace vcs_RegistryKey_RightButton
         }
     }
 }
-

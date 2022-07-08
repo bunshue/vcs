@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WindowsFormsApplication0210a.Properties
+namespace vcs_KeyboardSendKeys.Properties
 {
 
 
