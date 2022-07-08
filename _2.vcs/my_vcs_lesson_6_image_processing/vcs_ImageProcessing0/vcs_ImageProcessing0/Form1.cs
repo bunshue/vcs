@@ -1241,6 +1241,8 @@ namespace vcs_ImageProcessing0
 
         private void button13_Click(object sender, EventArgs e)
         {
+            button13.BackColor = Color.Red;
+            Application.DoEvents();
             //量測時間 黑白
             string filename = @"C:\______test_files\__pic\_book\2016122615573727.jpg";
             Bitmap bitmap1 = new Bitmap(filename);
@@ -1279,10 +1281,16 @@ namespace vcs_ImageProcessing0
             pictureBox1.Image = bitmap1; //顯示在 pictureBox1 圖片控制項中
 
             richTextBox1.Text += "完成, 總時間 : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
+
+            button13.BackColor = System.Drawing.SystemColors.ControlLight;
+            Application.DoEvents();
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
+            button14.BackColor = Color.Red;
+            Application.DoEvents();
+
             //量測時間 測光
             string filename = @"C:\______test_files\__pic\_book\2016122615573727.jpg";
             Bitmap bitmap1 = new Bitmap(filename);
@@ -1329,6 +1337,9 @@ namespace vcs_ImageProcessing0
             richTextBox1.Text += "亮度 : " + (y_total / (w * h)).ToString() + "\n";
 
             richTextBox1.Text += "完成, 總時間 : " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
+
+            button14.BackColor = System.Drawing.SystemColors.ControlLight;
+            Application.DoEvents();
         }
 
         private void button15_Click(object sender, EventArgs e)

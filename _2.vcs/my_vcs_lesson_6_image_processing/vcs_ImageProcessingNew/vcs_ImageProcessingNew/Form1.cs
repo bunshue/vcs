@@ -66,95 +66,15 @@ namespace vcs_ImageProcessingNew
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //底片效果
-            //底片效果
-            //原理: GetPixel方法獲得每一點像素的值, 然後再使用SetPixel方法將取反後的顏色值設置到對應的點.
-            //以底片效果顯示圖像
-            try
-            {
-                int Height = this.pictureBox1.Image.Height;
-                int Width = this.pictureBox1.Image.Width;
-                Bitmap newbitmap = new Bitmap(Width, Height);
-                Bitmap oldbitmap = (Bitmap)this.pictureBox1.Image;
-                Color pixel;
-                for (int x = 1; x < Width; x++)
-                {
-                    for (int y = 1; y < Height; y++)
-                    {
-                        int r, g, b;
-                        pixel = oldbitmap.GetPixel(x, y);
-                        r = 255 - pixel.R;
-                        g = 255 - pixel.G;
-                        b = 255 - pixel.B;
-                        newbitmap.SetPixel(x, y, Color.FromArgb(r, g, b));
-                    }
-                }
-                this.pictureBox1.Image = newbitmap;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "信息提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //浮雕效果1
-            //浮雕效果
-            //原理: 對圖像像素點的像素值分別與相鄰像素點的像素值相減後加上128, 然後將其作為新的像素點的值
-            //以浮雕效果顯示圖像
-            //C#實現浮雕效果顯示圖片
-
-            /*
-            使圖像產生浮雕的效果，主要通過對圖像像素點的像素值分別與相鄰像素點的像素值相減後加上128，然後將其作為新的像素點的值。
-            以浮雕效果顯示圖像主要通過GetPixel方法獲得每一點像素的值，通過SetPixel設置該像素點的像素值。
-            */
-
-            try
-            {
-                int Height = this.pictureBox1.Image.Height;
-                int Width = this.pictureBox1.Image.Width;
-                Bitmap newBitmap = new Bitmap(Width, Height);
-                Bitmap oldBitmap = (Bitmap)this.pictureBox1.Image;
-                Color pixel1, pixel2;
-                for (int x = 0; x < Width - 1; x++)
-                {
-                    for (int y = 0; y < Height - 1; y++)
-                    {
-                        int r = 0, g = 0, b = 0;
-                        pixel1 = oldBitmap.GetPixel(x, y);
-                        pixel2 = oldBitmap.GetPixel(x + 1, y + 1);
-                        r = Math.Abs(pixel1.R - pixel2.R + 128);
-                        g = Math.Abs(pixel1.G - pixel2.G + 128);
-                        b = Math.Abs(pixel1.B - pixel2.B + 128);
-                        if (r > 255)
-                            r = 255;
-                        if (r < 0)
-                            r = 0;
-                        if (g > 255)
-                            g = 255;
-                        if (g < 0)
-                            g = 0;
-                        if (b > 255)
-                            b = 255;
-                        if (b < 0)
-                            b = 0;
-                        newBitmap.SetPixel(x, y, Color.FromArgb(r, g, b));
-                    }
-                }
-                this.pictureBox1.Image = newBitmap;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "信息提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //浮雕效果2
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -696,57 +616,6 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //浮雕效果3
-
-            string filename = @"C:\______test_files\picture1.jpg";
-            pictureBox1.Image = Image.FromFile(filename);
-
-
-            /*
-使圖像產生浮雕的效果，主要通過對圖像像素點的像素值分別與相鄰像素點的像素值相減後加上128，然後將其作為新的像素點的值。
-
-以浮雕效果顯示圖像主要通過GetPixel方法獲得每一點像素的值，通過SetPixel設置該像素點的像素值。
-*/
-
-            //以浮雕效果顯示圖像
-            try
-            {
-                int Height = this.pictureBox1.Image.Height;
-                int Width = this.pictureBox1.Image.Width;
-                Bitmap newBitmap = new Bitmap(Width, Height);
-                Bitmap oldBitmap = (Bitmap)this.pictureBox1.Image;
-                Color pixel1, pixel2;
-                for (int x = 0; x < Width - 1; x++)
-                {
-                    for (int y = 0; y < Height - 1; y++)
-                    {
-                        int r = 0, g = 0, b = 0;
-                        pixel1 = oldBitmap.GetPixel(x, y);
-                        pixel2 = oldBitmap.GetPixel(x + 1, y + 1);
-                        r = Math.Abs(pixel1.R - pixel2.R + 128);
-                        g = Math.Abs(pixel1.G - pixel2.G + 128);
-                        b = Math.Abs(pixel1.B - pixel2.B + 128);
-                        if (r > 255)
-                            r = 255;
-                        if (r < 0)
-                            r = 0;
-                        if (g > 255)
-                            g = 255;
-                        if (g < 0)
-                            g = 0;
-                        if (b > 255)
-                            b = 255;
-                        if (b < 0)
-                            b = 0;
-                        newBitmap.SetPixel(x, y, Color.FromArgb(r, g, b));
-                    }
-                }
-                this.pictureBox1.Image = newBitmap;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "信息提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
         }
 
         private void button11_Click(object sender, EventArgs e)

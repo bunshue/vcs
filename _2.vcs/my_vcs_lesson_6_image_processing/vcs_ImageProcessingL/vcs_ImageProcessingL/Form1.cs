@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+//C#圖像處理(各種旋轉、改變大小、柔化、銳化、霧化、底片、浮雕、黑白、濾鏡效果)
+
 namespace vcs_ImageProcessingL
 {
     public partial class Form1 : Form
@@ -35,12 +37,41 @@ namespace vcs_ImageProcessingL
             button12.Text = "積木效果";
 
             reset_pictureBox();
+            show_item_location();
         }
 
         void reset_pictureBox()
         {
             //讀取圖檔
             pictureBox1.Image = Image.FromFile(filename);
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 170 + 10;
+            dy = 50 + 10;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            button12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -50,7 +81,7 @@ namespace vcs_ImageProcessingL
 
         /*
         一. 底片效果
-        原理: GetPixel方法獲得每一點像素的值, 然后再使用SetPixel方法將取反后的顏色值設置到對應的點.
+        原理: GetPixel方法獲得每一點像素的值, 然後再使用SetPixel方法將取反後的顏色值設置到對應的點.
         */
 
         private void button1_Click(object sender, EventArgs e)
@@ -86,8 +117,10 @@ namespace vcs_ImageProcessingL
 
         /*
         二. 浮雕效果
+        原理: 對圖像像素點的像素值分別與相鄰像素點的像素值相減後加上128, 然後將其作爲新的像素點的值.
 
-        原理: 對圖像像素點的像素值分別與相鄰像素點的像素值相減后加上128, 然后將其作為新的像素點的值.
+        使圖像產生浮雕的效果，主要通過對圖像像素點的像素值分別與相鄰像素點的像素值相減後加上128，然後將其作為新的像素點的值。
+        以浮雕效果顯示圖像主要通過GetPixel方法獲得每一點像素的值，通過SetPixel設置該像素點的像素值。
         */
 
         private void button2_Click(object sender, EventArgs e)
@@ -138,16 +171,11 @@ namespace vcs_ImageProcessingL
         三. 黑白效果
 
         原理: 彩色圖像處理成黑白效果通常有3種算法；
-
         (1).最大值法: 使每個像素點的 R, G, B 值等于原像素點的 RGB (顏色值) 中最大的一個；
-
         (2).平均值法: 使用每個像素點的 R,G,B值等于原像素點的RGB值的平均值；
-
         (3).加權平均值法: 對每個像素點的 R, G, B值進行加權
-
             ---自認為第三種方法做出來的黑白效果圖像最 "真實".
         */
-
 
         private void button3_Click(object sender, EventArgs e)
         {
