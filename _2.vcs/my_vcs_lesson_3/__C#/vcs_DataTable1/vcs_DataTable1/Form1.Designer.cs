@@ -289,7 +289,9 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(160, 70);
             this.button16.TabIndex = 42;
+            this.button16.Text = "去除DataTable中的重複項";
             this.button16.UseVisualStyleBackColor = true;
+            this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
             // button17
             // 
@@ -299,6 +301,7 @@
             this.button17.Size = new System.Drawing.Size(160, 70);
             this.button17.TabIndex = 43;
             this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
             // button18
             // 
@@ -308,6 +311,7 @@
             this.button18.Size = new System.Drawing.Size(160, 70);
             this.button18.TabIndex = 44;
             this.button18.UseVisualStyleBackColor = true;
+            this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
             // button19
             // 
@@ -317,6 +321,7 @@
             this.button19.Size = new System.Drawing.Size(160, 70);
             this.button19.TabIndex = 45;
             this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
             // button20
             // 
@@ -326,6 +331,7 @@
             this.button20.Size = new System.Drawing.Size(160, 70);
             this.button20.TabIndex = 46;
             this.button20.UseVisualStyleBackColor = true;
+            this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
             // button21
             // 
@@ -335,6 +341,7 @@
             this.button21.Size = new System.Drawing.Size(160, 70);
             this.button21.TabIndex = 47;
             this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
             // button22
             // 
@@ -344,6 +351,7 @@
             this.button22.Size = new System.Drawing.Size(160, 70);
             this.button22.TabIndex = 48;
             this.button22.UseVisualStyleBackColor = true;
+            this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
             // button23
             // 
@@ -353,6 +361,7 @@
             this.button23.Size = new System.Drawing.Size(160, 70);
             this.button23.TabIndex = 49;
             this.button23.UseVisualStyleBackColor = true;
+            this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
             // Form1
             // 

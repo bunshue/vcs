@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Drawing.Imaging;   //for BitmapData
+using System.Drawing.Drawing2D; //for InterpolationMode
 using System.Runtime.InteropServices;   //for Marshal
 
 namespace vcs_ImageProcessingB
@@ -22,6 +23,52 @@ namespace vcs_ImageProcessingB
         }
 
         private void Form1_Load(object sender, EventArgs e)
+        {
+
+            pictureBox1.Image = Image.FromFile(filename);
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 160 + 10;
+            dy = 50 + 10;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+
+            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+
+        }
+
+        private void button0_Click(object sender, EventArgs e)
         {
             pictureBox1.Image = Image.FromFile(filename);
         }
@@ -92,7 +139,6 @@ namespace vcs_ImageProcessingB
 
         private void button9_Click(object sender, EventArgs e)
         {
-            pictureBox1.Image = Image.FromFile(filename);
         }
 
         //旋轉 90, 180, 270 度
@@ -238,7 +284,6 @@ namespace vcs_ImageProcessingB
             newlbmp.UnlockBits();
             return newbmp;
         }
-
 
         //浮雕
         public Bitmap EmbossmentImage(Bitmap bmp)
@@ -413,6 +458,232 @@ namespace vcs_ImageProcessingB
             newlbmp.UnlockBits();
             return newbmp;
         }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //向右旋轉圖像90°
+            Graphics g = this.pictureBox1.CreateGraphics();
+            Bitmap bitmap1 = new Bitmap(filename);//加載圖像
+            //g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);//填充窗體背景爲白色, 清空pictureBox
+            Point[] destinationPoints = {
+new Point(400, 0), // destination for upper-left point of original
+new Point(400, 305),// destination for upper-right point of original
+new Point(0, 0)}; // destination for lower-left point of original
+            g.DrawImage(bitmap1, destinationPoints);
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //旋轉圖像180°
+            Graphics g = this.pictureBox1.CreateGraphics();
+            Bitmap bitmap1 = new Bitmap(filename);
+            //g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);//填充窗體背景爲白色, 清空pictureBox
+            Point[] destinationPoints = {
+new Point(0, 400), // destination for upper-left point of original
+new Point(305, 400),// destination for upper-right point of original
+new Point(0, 0)}; // destination for lower-left point of original
+            g.DrawImage(bitmap1, destinationPoints);
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //圖像切變
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+            Bitmap bitmap1 = new Bitmap(filename);
+            //g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);//填充窗體背景爲白色, 清空pictureBox
+            Point[] destinationPoints = {
+new Point(0, 0), // destination for upper-left point of original
+new Point(305, 0), // destination for upper-right point of original
+new Point(100, 400)};// destination for lower-left point of original
+            g.DrawImage(bitmap1, destinationPoints);
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            //圖像截取
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+            Bitmap bitmap1 = new Bitmap(filename);
+            //g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);//填充窗體背景爲白色, 清空pictureBox
+            Rectangle sr = new Rectangle(80, 60, 400, 400);//要截取的矩形區域
+            Rectangle dr = new Rectangle(0, 0, 200, 200);//要顯示到Form的矩形區域
+            g.DrawImage(bitmap1, dr, sr, GraphicsUnit.Pixel);
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            //改變圖像大小
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+            Bitmap bitmap1 = new Bitmap(filename);
+            //g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);//填充窗體背景爲白色, 清空pictureBox
+            int width = bitmap1.Width;
+            int height = bitmap1.Height;
+            // 改變圖像大小使用低質量的模式
+            g.InterpolationMode = InterpolationMode.NearestNeighbor;
+            g.DrawImage(bitmap1, new Rectangle(10, 10, 120, 120), // source rectangle
+
+            new Rectangle(0, 0, width, height), // destination rectangle
+            GraphicsUnit.Pixel);
+            // 使用高質量模式
+            //g.CompositingQuality = CompositingQuality.HighSpeed;
+            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+            g.DrawImage(
+            bitmap1,
+            new Rectangle(130, 10, 120, 120),
+            new Rectangle(0, 0, width, height),
+            GraphicsUnit.Pixel);
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            //轉成灰階
+            pictureBox1.Image = Image.FromFile(filename);
+
+            pictureBox1.Image = ConvertToGrayscale(pictureBox1.Image);
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            //轉成灰階
+            pictureBox1.Image = Image.FromFile(filename);
+
+            pictureBox1.Image = ConvertToGrayscale_CM(pictureBox1.Image);
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            //透明度
+            pictureBox1.Image = Image.FromFile(filename);
+
+            pictureBox1.Image = ConvertToTransparency(pictureBox1.Image);
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            //旋轉
+            pictureBox1.Image = Image.FromFile(filename);
+
+            pictureBox1.Image = ConvertToRotate(pictureBox1.Image);
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            //扭曲(Twist)
+            pictureBox1.Image = Image.FromFile(filename);
+
+            //圖片的扭曲（Twist）作法
+
+            //從pictureBox取得Bitmap
+            Bitmap bitmap1 = (Bitmap)pictureBox1.Image.Clone();   //用pictureBox背景的复本实例化Bitmap类
+
+            //參數設定
+            System.Random oRandom = new System.Random();
+            int iAmplitude = oRandom.Next(5, 10);	//振幅
+            int iFrequency = oRandom.Next(30, 60);	//頻率
+            //複製一個失真前的Bitmap過來參考
+            Bitmap bitmap2 = (Bitmap)bitmap1.Clone();
+            for (int y = 0; y < bitmap1.Height; y++)
+            {
+                for (int x = 0; x < bitmap1.Width; x++)
+                {
+                    int newX = (int)(x + (iAmplitude * System.Math.Sin(System.Math.PI * y / iFrequency)));
+                    int newY = (int)(y + (iAmplitude * System.Math.Cos(System.Math.PI * x / iFrequency)));
+                    if (newX < 0 || newX >= bitmap1.Width) newX = 0;
+                    if (newY < 0 || newY >= bitmap1.Height) newY = 0;
+                    bitmap1.SetPixel(x, y, bitmap2.GetPixel(newX, newY));
+                }
+            }
+            //參考後丟棄，bitmap1為最終圖案
+            bitmap2.Dispose();
+
+            pictureBox1.Image = bitmap1;
+
+        }
+
+
+        public Bitmap ConvertToGrayscale(Image image) // Image 是抽象基底類別
+        {
+            Bitmap source = (Bitmap)image;  // Image 是 Bitmap 的父類別
+            Bitmap dest = new Bitmap(source.Width, source.Height); //新增一樣寬高的點陣圖物件
+
+            for (int y = 0; y < dest.Height; y++)
+            {
+                for (int x = 0; x < dest.Width; x++)
+                {
+                    Color c = source.GetPixel(x, y); // 得到 原始像素 的 Color
+                    int luma = (int)(c.R * 0.3 + c.G * 0.6 + c.B * 0.1);  // 以 3:6:1 的比例得到設定值
+                    dest.SetPixel(x, y, Color.FromArgb(luma, luma, luma)); // 寫入 像素値
+                }
+            }
+            return dest;
+        }
+
+        // 使用色彩矩陣來調整影像色彩
+        public Bitmap ConvertToGrayscale_CM(Image image)
+        {
+            Bitmap dest = new Bitmap(image.Width, image.Height);
+            Graphics g = Graphics.FromImage(dest); // 從點陣圖 建立 新的畫布
+
+            // 定義含有 RGBA 空間座標的 5 x 5 矩陣
+            // (R, G, B, A, 1) 乘上 此矩陣
+            ColorMatrix cm = new ColorMatrix(
+                   new float[][]{ new float[]{0.3f, 0.3f, 0.3f, 0, 0},
+                                  new float[]{0.6f, 0.6f, 0.6f, 0, 0},
+                                  new float[]{0.1f, 0.1f, 0.1f, 0, 0},
+                                  new float[]{  0,    0,    0,  1, 0},
+                                  new float[]{  0,    0,    0,  0, 1}});
+
+            // ImageAttributes 類別的多個方法會使用色彩矩陣來調整影像色彩
+            ImageAttributes ia = new ImageAttributes();
+
+            // 設定預設分類的色彩調整矩陣。
+            ia.SetColorMatrix(cm);
+            g.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, ia);
+            g.Dispose();
+
+            return dest;
+        }
+
+        public Bitmap ConvertToTransparency(Image image)
+        {
+            Bitmap dest = new Bitmap(image.Width, image.Height);
+            Graphics g = Graphics.FromImage(dest);
+
+            ImageAttributes ia = new ImageAttributes();
+
+            ColorMatrix cm = new ColorMatrix();
+
+            cm.Matrix33 = 0.5f; // 透明度
+
+            ia.SetColorMatrix(cm);
+
+            g.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height), 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, ia);
+            g.Dispose();
+
+            return dest;
+        }
+
+        public Bitmap ConvertToRotate(Image image)
+        {
+            Bitmap dest = new Bitmap(image.Width, image.Height);
+            Graphics g = Graphics.FromImage(dest);
+
+            Matrix mx = new Matrix();
+
+            mx.Rotate(30);
+            g.Transform = mx;
+
+            g.DrawImage(image, new Rectangle(0, 0, image.Width, image.Height));
+
+            g.Dispose();
+
+            return dest;
+        }
+
     }
 
     //內存法

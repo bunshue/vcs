@@ -439,6 +439,47 @@ namespace vcs_Cryptography_new
 
         private void button10_Click(object sender, EventArgs e)
         {
+            string str = "lion-mouse";
+
+            string str_md5_32 = GetBigMd5(str);
+            string str_md5_16 = GetSmallMd5(str);
+
+            richTextBox1.Text += "32位MD5 : " + str_md5_32 + "\n";
+            richTextBox1.Text += "16位MD5 : " + str_md5_16 + "\n";
+        }
+
+        /// <summary>
+        /// 32位md5
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static string GetBigMd5(string str)
+        {
+            string cl = str;
+            string pwd = "";
+            var md5 = MD5.Create();
+
+            byte[] s = md5.ComputeHash(Encoding.UTF8.GetBytes(cl));
+
+            for (int i = 0; i < s.Length; i++)
+            {
+                pwd = pwd + s[i].ToString("X2");
+            }
+
+            return pwd;
+        }
+
+        /// <summary>
+        /// 16位MD5
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static string GetSmallMd5(string str)
+        {
+            var md5 = new MD5CryptoServiceProvider();
+            string t2 = BitConverter.ToString(md5.ComputeHash(UTF8Encoding.Default.GetBytes(str)), 4, 8);
+            t2 = t2.Replace("-", "");
+            return t2;
         }
 
         private void button11_Click(object sender, EventArgs e)

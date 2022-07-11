@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Collections;   //for ArrayList
+
 namespace vcs_DataTable1
 {
     public partial class Form1 : Form
@@ -574,6 +576,33 @@ namespace vcs_DataTable1
             richTextBox1.Text += "\n";
         }
 
+        /// <summary>
+        /// 判斷DataTable中是否包含某值
+        /// </summary>
+        /// <param name="dt">DataTable</param>
+        /// <param name="columnName">列名</param>
+        /// <param name="fieldData">值</param>
+        /// <returns></returns>
+        public Boolean IsColumnIncludeData(DataTable dt, String columnName, string fieldData)
+        {
+            if (dt == null)
+            {
+                return false;
+            }
+            else
+            {
+                DataRow[] dataRows = dt.Select(columnName + "='" + fieldData + "'");
+                if (dataRows.Length.Equals(1))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+
         private void button10_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "構建DataTable，給列名添加公式\n";
@@ -739,31 +768,120 @@ namespace vcs_DataTable1
 
         }
 
-        /// <summary>
-        /// 判斷DataTable中是否包含某值
-        /// </summary>
-        /// <param name="dt">DataTable</param>
-        /// <param name="columnName">列名</param>
-        /// <param name="fieldData">值</param>
-        /// <returns></returns>
-        public Boolean IsColumnIncludeData(DataTable dt, String columnName, string fieldData)
+        private void button16_Click(object sender, EventArgs e)
         {
-            if (dt == null)
+            //去除DataTable中的重複項
+
+            //建立DataTable 1
+            //1.創建表實例
+            DataTable dt = new DataTable();
+            dt = create_data_table1(dt);
+
+            //加一筆重複資料
+
+            //3.創建新行
+            DataRow dr2 = dt.NewRow();
+
+            //4.為新行賦值 並 添加到DataTable
+            dr2[0] = "5";
+            dr2[1] = "john";
+            dr2[2] = "80";
+            dt.Rows.Add(dr2);
+
+            richTextBox1.Text += "原資料:\n";
+            show_data_table(dt);
+
+            richTextBox1.Text += "\n去除DataTable中的重複項\n\n";
+
+            DeleteSameRow(dt, "座號");    //後面是比較項目, Columns資料, "座號", "姓名", "分數"
+
+            richTextBox1.Text += "新資料:\n";
+            show_data_table(dt);
+        }
+
+        ///
+        /// 删除DataTable重复列，类似distinct   
+        ///
+        ///DataTable
+        ///字段名
+        ///
+        public static DataTable DeleteSameRow(DataTable dt, string Field)
+        {
+            ArrayList indexList = new ArrayList();
+            // 找出待删除的行索引   
+            for (int i = 0; i < dt.Rows.Count - 1; i++)
             {
-                return false;
+                if (!IsContain(indexList, i))
+                {
+                    for (int j = i + 1; j < dt.Rows.Count; j++)
+                    {
+                        if (dt.Rows[i][Field].ToString() == dt.Rows[j][Field].ToString())
+                        {
+                            indexList.Add(j);
+                        }
+                    }
+                }
             }
-            else
+            indexList.Sort();
+            // 排序
+            for (int i = indexList.Count - 1; i >= 0; i--)// 根据待删除索引列表删除行  
             {
-                DataRow[] dataRows = dt.Select(columnName + "='" + fieldData + "'");
-                if (dataRows.Length.Equals(1))
+                int index = Convert.ToInt32(indexList[i]);
+                dt.Rows.RemoveAt(index);
+            }
+            return dt;
+        }    /// <summary>   
+        /// 判断数组中是否存在   
+        /// </summary>   
+        /// <param name="indexList">数组</param>   
+        /// <param name="index">索引</param>   
+        /// <returns></returns>   
+        public static bool IsContain(ArrayList indexList, int index)
+        {
+            for (int i = 0; i < indexList.Count; i++)
+            {
+                int tempIndex = Convert.ToInt32(indexList[i]);
+                if (tempIndex == index)
                 {
                     return true;
                 }
-                else
-                {
-                    return false;
-                }
             }
+            return false;
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

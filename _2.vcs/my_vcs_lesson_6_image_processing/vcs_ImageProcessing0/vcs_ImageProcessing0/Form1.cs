@@ -35,6 +35,10 @@ namespace vcs_ImageProcessing0
 
         Stopwatch sw = new Stopwatch();
 
+        private Bitmap bitmap1;
+        byte[] srcData;
+        //int[] histoData;
+
         public struct RGB
         {
             private byte _r;
@@ -164,6 +168,7 @@ namespace vcs_ImageProcessing0
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+
             button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
@@ -175,7 +180,18 @@ namespace vcs_ImageProcessing0
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+
+            pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             pictureBox1.Size = new Size(640, 480);
 
         }
@@ -1395,22 +1411,161 @@ namespace vcs_ImageProcessing0
             for (i = 54; i < (54 + 256 * 2); i++)
             {
                 richTextBox1.Text += byte_array[i].ToString("D03") + " ";
-
             }
-
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
+            //BitmapData使用
+            //用Marshal做影像處理, TBD
+
+            filename = @"C:\______test_files\picture1.jpg";
+            LoadBitmap(filename);
+
+
+            int len = srcData.Length;
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+            richTextBox1.Text += "W = " + W.ToString() + "\n";
+            richTextBox1.Text += "H = " + H.ToString() + "\n";
+            int i;
+            int j;
+            for (j = 0; j < H; j++)
+            {
+                for (i = 0; i < W; i++)
+                {
+                    //richTextBox1.Text += srcData[j * H + i].ToString("X2") + " ";
+                    //richTextBox1.Text += srcData[j * H + i].ToString() + " ";
+
+                    //srcData[j * H + i] = (byte)(255 - srcData[j * H + i]);
+
+                }
+                //richTextBox1.Text += "\n";
+            }
+
+            //準備修改srcData值  並把 srcData恢復成圖片
+
+
+            for (i = 0; i < 305 * 10; i++)
+            {
+                srcData[i] = 0;
+
+            }
+
+            richTextBox1.Text += "\n";
+            richTextBox1.Text += "\n";
+            richTextBox1.Text += "\n";
+
+
+            for (i = 0; i < 150; i++)
+            {
+                //richTextBox1.Text += srcData[i].ToString() + " ";
+
+            }
+            richTextBox1.Text += "\n";
+        }
+
+        // load and initialize from file
+        private void LoadBitmap(string filename)
+        {
+            // read from file
+            bitmap1 = (Bitmap)Image.FromFile(filename);
+            pictureBox1.Image = bitmap1;
+
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+
+            // read byte data
+            BitmapData bmpData = bitmap1.LockBits(new Rectangle(0, 0, W, H), ImageLockMode.ReadWrite, PixelFormat.Format8bppIndexed);
+            srcData = new byte[W * H];
+            IntPtr srcPtr = bmpData.Scan0;
+            Marshal.Copy(srcPtr, srcData, 0, W * H);
+            // pay attention: order in byte array: height first
+            bitmap1.UnlockBits(bmpData);
+        }
+
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            //建立一個GrayBitmapData類做影像處理
+
+            //均值濾波
+
+            string filename = @"C:\______test_files\picture1.jpg";
+            Bitmap bitmap1 = new Bitmap(filename);
+
+            if (bitmap1 == null)
+                return;
+
+            GrayBitmapData gbmp = new GrayBitmapData(bitmap1);
+            gbmp.AverageFilter(3);
+            gbmp.ShowImage(pictureBox1);
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+            //建立一個GrayBitmapData類做影像處理
+
+            //轉換爲灰度圖
+            string filename = @"C:\______test_files\picture1.jpg";
+            Bitmap bitmap1 = new Bitmap(filename);
+
+            if (bitmap1 == null)
+                return;
+
+            GrayBitmapData gbmp = new GrayBitmapData(bitmap1);
+            gbmp.ShowImage(pictureBox1);
 
         }
 
-        private void button18_Click(object sender, EventArgs e)
+        private void button20_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void button19_Click(object sender, EventArgs e)
+        private void button21_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button29_Click(object sender, EventArgs e)
         {
 
         }
@@ -1724,5 +1879,243 @@ namespace vcs_ImageProcessing0
             else return Span.TotalSeconds;
         }
     }
-}
 
+    class GrayBitmapData
+    {
+        public byte[,] Data;//保存像素矩陣
+        public int Width;//圖像的寬度
+        public int Height;//圖像的高度
+
+        public GrayBitmapData()
+        {
+            this.Width = 0;
+            this.Height = 0;
+            this.Data = null;
+        }
+
+        public GrayBitmapData(Bitmap bmp)
+        {
+            BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, bmp.Width, bmp.Height), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+            this.Width = bmpData.Width;
+            this.Height = bmpData.Height;
+            Data = new byte[Height, Width];
+            unsafe
+            {
+                byte* ptr = (byte*)bmpData.Scan0.ToPointer();
+                for (int i = 0; i < Height; i++)
+                {
+                    for (int j = 0; j < Width; j++)
+                    {
+                        //將24位的RGB彩色圖轉換爲灰度圖
+                        int temp = (int)(0.114 * (*ptr++)) + (int)(0.587 * (*ptr++)) + (int)(0.299 * (*ptr++));
+                        Data[i, j] = (byte)temp;
+                    }
+                    ptr += bmpData.Stride - Width * 3;//指針加上填充的空白空間
+                    //其中BitmapData類的Stride屬性爲每行像素所佔的字節。
+                }
+            }
+            bmp.UnlockBits(bmpData);
+        }
+
+        public GrayBitmapData(string path)
+            : this(new Bitmap(path))
+        {
+        }
+
+        public Bitmap ToBitmap()
+        {
+            Bitmap bmp = new Bitmap(Width, Height, PixelFormat.Format24bppRgb);
+            BitmapData bmpData = bmp.LockBits(new Rectangle(0, 0, Width, Height), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
+            unsafe
+            {
+                byte* ptr = (byte*)bmpData.Scan0.ToPointer();
+                for (int i = 0; i < Height; i++)
+                {
+                    for (int j = 0; j < Width; j++)
+                    {
+                        *(ptr++) = Data[i, j];
+                        *(ptr++) = Data[i, j];
+                        *(ptr++) = Data[i, j];
+                    }
+                    ptr += bmpData.Stride - Width * 3;
+                    //其中BitmapData類的Stride屬性爲每行像素所佔的字節。
+                }
+            }
+            bmp.UnlockBits(bmpData);
+            return bmp;
+        }
+
+        public void ShowImage(PictureBox pbx)
+        {
+            Bitmap b = this.ToBitmap();
+            pbx.Image = b;
+            //b.Dispose();
+        }
+
+        public void SaveImage(string path)
+        {
+            Bitmap b = ToBitmap();
+            b.Save(path);
+            //b.Dispose();
+        }
+        //均值濾波
+        public void AverageFilter(int windowSize)
+        {
+            if (windowSize % 2 == 0)
+            {
+                return;
+            }
+
+            for (int i = 0; i < Height; i++)
+            {
+                for (int j = 0; j < Width; j++)
+                {
+                    int sum = 0;
+                    for (int g = -(windowSize - 1) / 2; g <= (windowSize - 1) / 2; g++)
+                    {
+                        for (int k = -(windowSize - 1) / 2; k <= (windowSize - 1) / 2; k++)
+                        {
+                            int a = i + g, b = j + k;
+                            if (a < 0) a = 0;
+                            if (a > Height - 1) a = Height - 1;
+                            if (b < 0) b = 0;
+                            if (b > Width - 1) b = Width - 1;
+                            sum += Data[a, b];
+                        }
+                    }
+                    Data[i, j] = (byte)(sum / (windowSize * windowSize));
+                }
+            }
+        }
+
+        //中值濾波
+        public void MidFilter(int windowSize)
+        {
+            if (windowSize % 2 == 0)
+            {
+                return;
+            }
+
+            int[] temp = new int[windowSize * windowSize];
+            byte[,] newdata = new byte[Height, Width];
+            for (int i = 0; i < Height; i++)
+            {
+                for (int j = 0; j < Width; j++)
+                {
+                    int n = 0;
+                    for (int g = -(windowSize - 1) / 2; g <= (windowSize - 1) / 2; g++)
+                    {
+                        for (int k = -(windowSize - 1) / 2; k <= (windowSize - 1) / 2; k++)
+                        {
+                            int a = i + g, b = j + k;
+                            if (a < 0) a = 0;
+                            if (a > Height - 1) a = Height - 1;
+                            if (b < 0) b = 0;
+                            if (b > Width - 1) b = Width - 1;
+                            temp[n++] = Data[a, b];
+                        }
+                    }
+                    newdata[i, j] = GetMidValue(temp, windowSize * windowSize);
+                }
+            }
+
+            for (int i = 0; i < Height; i++)
+            {
+                for (int j = 0; j < Width; j++)
+                {
+                    Data[i, j] = newdata[i, j];
+                }
+            }
+        }
+
+        //獲得一個向量的中值
+        private byte GetMidValue(int[] t, int length)
+        {
+            int temp = 0;
+            for (int i = 0; i < length - 2; i++)
+            {
+                for (int j = i + 1; j < length - 1; j++)
+                {
+                    if (t[i] > t[j])
+                    {
+                        temp = t[i];
+                        t[i] = t[j];
+                        t[j] = temp;
+                    }
+                }
+            }
+
+            return (byte)t[(length - 1) / 2];
+        }
+
+        //一種新的濾波方法，是亮的更亮、暗的更暗
+        public void NewFilter(int windowSize)
+        {
+            if (windowSize % 2 == 0)
+            {
+                return;
+            }
+
+            for (int i = 0; i < Height; i++)
+            {
+                for (int j = 0; j < Width; j++)
+                {
+                    int sum = 0;
+                    for (int g = -(windowSize - 1) / 2; g <= (windowSize - 1) / 2; g++)
+                    {
+                        for (int k = -(windowSize - 1) / 2; k <= (windowSize - 1) / 2; k++)
+                        {
+                            int a = i + g, b = j + k;
+                            if (a < 0) a = 0;
+                            if (a > Height - 1) a = Height - 1;
+                            if (b < 0) b = 0;
+                            if (b > Width - 1) b = Width - 1;
+                            sum += Data[a, b];
+                        }
+                    }
+                    double avg = (sum + 0.0) / (windowSize * windowSize);
+                    if (avg / 255 < 0.5)
+                    {
+                        Data[i, j] = (byte)(2 * avg / 255 * Data[i, j]);
+                    }
+                    else
+                    {
+                        Data[i, j] = (byte)((1 - 2 * (1 - avg / 255.0) * (1 - Data[i, j] / 255.0)) * 255);
+                    }
+                }
+            }
+        }
+
+
+        //直方圖均衡
+        public void HistEqual()
+        {
+            double[] num = new double[256];
+            for (int i = 0; i < 256; i++) num[i] = 0;
+
+            for (int i = 0; i < Height; i++)
+            {
+                for (int j = 0; j < Width; j++)
+                {
+                    num[Data[i, j]]++;
+                }
+            }
+
+            double[] newGray = new double[256];
+            double n = 0;
+            for (int i = 0; i < 256; i++)
+            {
+                n += num[i];
+                newGray[i] = n * 255 / (Height * Width);
+            }
+
+            for (int i = 0; i < Height; i++)
+            {
+                for (int j = 0; j < Width; j++)
+                {
+                    Data[i, j] = (byte)newGray[Data[i, j]];
+                }
+            }
+        }
+    }
+}

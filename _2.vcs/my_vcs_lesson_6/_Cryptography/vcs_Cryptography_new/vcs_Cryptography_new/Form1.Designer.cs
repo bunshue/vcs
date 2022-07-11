@@ -160,6 +160,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(180, 55);
             this.button10.TabIndex = 45;
+            this.button10.Text = "32/16位MD5";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
