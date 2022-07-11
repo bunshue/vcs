@@ -33,13 +33,14 @@ namespace vcs_Draw_ColorMatrix
             //button
             x_st = 12;
             y_st = 12;
-            dx = 170;
-            dy = 50;
+            dx = 170 + 10;
+            dy = 50 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
 
             pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
 
@@ -79,7 +80,7 @@ namespace vcs_Draw_ColorMatrix
             //畫使用ColorMatrix的圖
             g.DrawImage(
                image,
-               new Rectangle(0+W, 0, W, H),  // destination rectangle, 向右移動W
+               new Rectangle(0 + W, 0, W, H),  // destination rectangle, 向右移動W
                0, 0,        // upper-left corner of source rectangle 
                W,       // width of source rectangle
                H,      // height of source rectangle
@@ -165,9 +166,70 @@ namespace vcs_Draw_ColorMatrix
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //使用ColorMatrix圖片亮度處理
 
+            //圖片亮度處理
+
+            //亮度百分比
+
+            int percent = 50;
+
+            Single v = 0.006F * percent;
+
+            Single[][] matrix = {         
+                new Single[] { 1, 0, 0, 0, 0 },         
+                new Single[] { 0, 1, 0, 0, 0 },          
+                new Single[] { 0, 0, 1, 0, 0 },         
+                new Single[] { 0, 0, 0, 1, 0 },         
+                new Single[] { v, v, v, 0, 1 }     
+            };
+
+            System.Drawing.Imaging.ColorMatrix cm = new System.Drawing.Imaging.ColorMatrix(matrix);
+            System.Drawing.Imaging.ImageAttributes attr = new System.Drawing.Imaging.ImageAttributes();
+            attr.SetColorMatrix(cm);
+            string filename = @"C:\______test_files\picture1.jpg";
+
+            Image tmp = Image.FromFile(filename);
+
+            this.pictureBox1.Image = Image.FromFile(filename);
+
+            Graphics g = Graphics.FromImage(tmp);
+            try
+            {
+                Rectangle destRect = new Rectangle(0, 0, tmp.Width, tmp.Height);
+                g.DrawImage(tmp, destRect, 0, 0, tmp.Width, tmp.Height, GraphicsUnit.Pixel, attr);
+            }
+            finally
+            {
+                g.Dispose();
+            }
+            this.pictureBox1.Image = (Image)tmp.Clone();
         }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //使用ColorMatrix取灰度
+            string filename = @"C:\______test_files\picture1.jpg";
 
+            //取灰度
+            this.pictureBox1.Image = Image.FromFile(filename);
+            Bitmap currentBitmap = new Bitmap(this.pictureBox1.Image);
+            Graphics g = Graphics.FromImage(currentBitmap);
+            ImageAttributes ia = new ImageAttributes();
+            float[][] colorMatrix =   {    
+                new   float[]   {0.299f,   0.299f,   0.299f,   0,   0},
+                new   float[]   {0.587f,   0.587f,   0.587f,   0,   0},
+                new   float[]   {0.114f,   0.114f,   0.114f,   0,   0},
+                new   float[]   {0,   0,   0,   1,   0},
+                new   float[]   {0,   0,   0,   0,   1}
+            };
+
+            ColorMatrix cm = new ColorMatrix(colorMatrix);
+            ia.SetColorMatrix(cm, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+            g.DrawImage(currentBitmap, new Rectangle(0, 0, currentBitmap.Width, currentBitmap.Height), 0, 0, currentBitmap.Width, currentBitmap.Height, GraphicsUnit.Pixel, ia);
+            this.pictureBox1.Image = (Image)(currentBitmap.Clone());
+            g.Dispose();
+        }
     }
 }
+
