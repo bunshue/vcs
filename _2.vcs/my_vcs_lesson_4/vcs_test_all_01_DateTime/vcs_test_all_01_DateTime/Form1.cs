@@ -1233,8 +1233,79 @@ namespace vcs_test_all_01_DateTime
 
         }
 
+        public static int inputToSeconds(string timerInput)
+        {
+            string[] timeArray = new string[3];
+            int minutes = 0;
+            int hours = 0;
+            int seconds = 0;
+            int occurence = 0;
+            int length = 0;
+            int totalTime = 0;
+
+            occurence = timerInput.LastIndexOf(":");
+            length = timerInput.Length;
+
+            //Check for invalid input
+            if (occurence == -1 || length != 8)
+            {
+                MessageBox.Show("Invalid Time Format.");
+            }
+            else
+            {
+                timeArray = timerInput.Split(':');
+
+                seconds = Convert.ToInt32(timeArray[2]);
+                minutes = Convert.ToInt32(timeArray[1]);
+                hours = Convert.ToInt32(timeArray[0]);
+
+                totalTime += seconds;
+                totalTime += minutes * 60;
+                totalTime += (hours * 60) * 60;
+            }
+            return totalTime;
+        }
+
+        //secondsToTime方法是把秒转换一个时间格式的字串返回。
+
+        public static string secondsToTime(int seconds)
+        {
+            int minutes = 0;
+            int hours = 0;
+            while (seconds >= 60)
+            {
+                minutes += 1;
+                seconds -= 60;
+            }
+            while (minutes >= 60)
+            {
+                hours += 1;
+                minutes -= 60;
+            }
+            string strHours = hours.ToString();
+            string strMinutes = minutes.ToString();
+            string strSeconds = seconds.ToString();
+
+            if (strHours.Length < 2)
+                strHours = "0" + strHours;
+            if (strMinutes.Length < 2)
+                strMinutes = "0" + strMinutes;
+            if (strSeconds.Length < 2)
+                strSeconds = "0" + strSeconds;
+            return strHours + ":" + strMinutes + ":" + strSeconds;
+        }
+
         private void button40_Click(object sender, EventArgs e)
         {
+            //從零點到現在的秒數
+
+            int total_time = inputToSeconds("23:59:59");
+            richTextBox1.Text += "total_time = " + total_time.ToString() + "\n";
+
+
+            int nn = 86399;
+            string current_time = secondsToTime(nn);
+            richTextBox1.Text += "current_time = " + current_time + "\n";
         }
 
         private void button45_Click(object sender, EventArgs e)
@@ -1773,6 +1844,242 @@ DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元999
                 + ts.Seconds.ToString() + "秒";
 
             return dateDiff;
+        }
+
+        private void button55_Click(object sender, EventArgs e)
+        {
+            //string.Format 格式化日期
+
+            //c# 日期函數
+
+            DateTime dt = DateTime.Now;
+
+            richTextBox1.Text += "日期 1:\t" + dt.ToString() + "\n";//2005-11-5 13:21:25
+            richTextBox1.Text += "日期 1:\t" + dt.ToFileTime().ToString() + "\n";//127756416859912816
+            richTextBox1.Text += "日期 1:\t" + dt.ToFileTimeUtc().ToString() + "\n";//127756704859912816
+            richTextBox1.Text += "日期 1:\t" + dt.ToLocalTime().ToString() + "\n";//2005-11-5 21:21:25
+            richTextBox1.Text += "日期 1:\t" + dt.ToLongDateString().ToString() + "\n";//2005年11月5*
+            richTextBox1.Text += "日期 1:\t" + dt.ToLongTimeString().ToString() + "\n";//13:21:25
+            richTextBox1.Text += "日期 1:\t" + dt.ToOADate().ToString() + "\n";//38661.5565508218
+            richTextBox1.Text += "日期 1:\t" + dt.ToShortDateString().ToString() + "\n";//2005-11-5
+            richTextBox1.Text += "日期 1:\t" + dt.ToShortTimeString().ToString() + "\n";//13:21
+            richTextBox1.Text += "日期 1:\t" + dt.ToUniversalTime().ToString() + "\n";//2005-11-5 5:21:25
+
+            //?2005-11-5 13:30:28.4412864
+            richTextBox1.Text += "日期 1:\t" + dt.Year.ToString() + "\n";//2005
+            richTextBox1.Text += "日期 1:\t" + dt.Date.ToString() + "\n";//2005-11-5 0:00:00
+            richTextBox1.Text += "日期 1:\t" + dt.DayOfWeek.ToString() + "\n";//Saturday
+            richTextBox1.Text += "日期 1:\t" + dt.DayOfYear.ToString() + "\n";//309
+            richTextBox1.Text += "日期 1:\t" + dt.Hour.ToString() + "\n";//13
+            richTextBox1.Text += "日期 1:\t" + dt.Millisecond.ToString() + "\n";//441
+            richTextBox1.Text += "日期 1:\t" + dt.Minute.ToString() + "\n";//30
+            richTextBox1.Text += "日期 1:\t" + dt.Month.ToString() + "\n";//11
+            richTextBox1.Text += "日期 1:\t" + dt.Second.ToString() + "\n";//28
+            richTextBox1.Text += "日期 1:\t" + dt.Ticks.ToString() + "\n";//632667942284412864
+            richTextBox1.Text += "日期 1:\t" + dt.TimeOfDay.ToString() + "\n";//13:30:28.4412864
+            richTextBox1.Text += "日期 1:\t" + dt.ToString() + "\n";//2005-11-5 13:47:04
+            richTextBox1.Text += "日期 1:\t" + dt.AddYears(1).ToString() + "\n";//2006-11-5 13:47:04
+            richTextBox1.Text += "日期 1:\t" + dt.AddDays(1.1).ToString() + "\n";//2005-11-6 16:11:04
+            richTextBox1.Text += "日期 1:\t" + dt.AddHours(1.1).ToString() + "\n";//2005-11-5 14:53:04
+            richTextBox1.Text += "日期 1:\t" + dt.AddMilliseconds(1.1).ToString() + "\n";//2005-11-5 13:47:04
+            richTextBox1.Text += "日期 1:\t" + dt.AddMonths(1).ToString() + "\n";//2005-12-5 13:47:04
+            richTextBox1.Text += "日期 1:\t" + dt.AddSeconds(1.1).ToString() + "\n";//2005-11-5 13:47:05
+            richTextBox1.Text += "日期 1:\t" + dt.AddMinutes(1.1).ToString() + "\n";//2005-11-5 13:48:10
+            richTextBox1.Text += "日期 1:\t" + dt.AddTicks(1000).ToString() + "\n";//2005-11-5 13:47:04
+            richTextBox1.Text += "日期 1:\t" + dt.CompareTo(dt).ToString() + "\n";//0
+            //richTextBox1.Text +="日期 1:\t"+ dt.Add(?).ToString()+"\n";//問號為一個時間段
+
+            richTextBox1.Text += "日期 1:\t" + dt.Equals("2005-11-6 16:11:04").ToString() + "\n";//False
+            richTextBox1.Text += "日期 1:\t" + dt.Equals(dt).ToString() + "\n";//True
+            richTextBox1.Text += "日期 1:\t" + dt.GetHashCode().ToString() + "\n";//1474088234
+            richTextBox1.Text += "日期 1:\t" + dt.GetType().ToString() + "\n";//System.DateTime
+            richTextBox1.Text += "日期 1:\t" + dt.GetTypeCode().ToString() + "\n";//DateTime
+
+            /*
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(s)[0].ToString() + "\n";//2005-11-05T14:06:25
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(t)[0].ToString() + "\n";//14:06
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(y)[0].ToString() + "\n";//2005年11月
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(D)[0].ToString() + "\n";//2005年11月5*
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(D)[1].ToString() + "\n";//2005 11 05
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(D)[2].ToString() + "\n";//星期六 2005 11 05
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(D)[3].ToString() + "\n";//星期六 2005年11月5*
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(M)[0].ToString() + "\n";//11月5*
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(f)[0].ToString() + "\n";//2005年11月5* 14:06
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(g)[0].ToString() + "\n";//2005-11-5 14:06
+            richTextBox1.Text += "日期 1:\t" + dt.GetDateTimeFormats(r)[0].ToString() + "\n";//Sat, 05 Nov 2005 14:06:25 GMT
+            */
+
+            /*
+            或者dt.ToString("yyyy年MM月dd*");//2005年11月5*
+            dt.ToString("yyyy-MM-dd");//2005-11-5*
+            以此類推……
+            */
+
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:d｝", dt) + "\n";//2005-11-5
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:D｝", dt) + "\n";//2005年11月5*
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:f｝", dt) + "\n";//2005年11月5* 14:23
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:F｝", dt) + "\n";//2005年11月5* 14:23:23
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:g｝", dt) + "\n";//2005-11-5 14:23
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:G｝", dt) + "\n";//2005-11-5 14:23:23
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:M｝", dt) + "\n";//11月5*
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:R｝", dt) + "\n";//Sat, 05 Nov 2005 14:23:23 GMT
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:s｝", dt) + "\n";//2005-11-05T14:23:23
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:t｝", dt) + "\n";//14:23
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:T｝", dt) + "\n";//14:23:23
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:u｝", dt) + "\n";//2005-11-05 14:23:23Z
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:U｝", dt) + "\n";//2005年11月5* 6:23:23
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:Y｝", dt) + "\n";//2005年11月
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0｝", dt) + "\n";//2005-11-5 14:23:23?
+            richTextBox1.Text += "日期 1:\t" + string.Format("｛0:yyyyMMddHHmmssffff｝", dt) + "\n";
+            //yyyymm等可以設置,比如Label16.Text = string.Format("｛0:yyyyMMdd｝",dt)+"\n";
+            //綁定也適用:例:<%# string.Format("｛0:yyyy.MM.dd｝",eval_r("sj"))%>
+        }
+
+        private void button56_Click(object sender, EventArgs e)
+        {
+            //打印時間訊息用法
+
+
+            //2007年4月24日
+            richTextBox1.Text += DateTime.Now.ToString("D") + "\n";
+            //2007-4-24
+            richTextBox1.Text += DateTime.Now.ToString("d") + "\n";
+
+            //2007年4月24日 16:30:15
+            richTextBox1.Text += DateTime.Now.ToString("F") + "\n";
+            //2007年4月24日 16:30
+            richTextBox1.Text += DateTime.Now.ToString("f") + "\n";
+
+            //2007-4-24 16:30:15
+            richTextBox1.Text += DateTime.Now.ToString("G") + "\n";
+            //2007-4-24 16:30
+            richTextBox1.Text += DateTime.Now.ToString("g") + "\n";
+
+            //16:30:15
+            richTextBox1.Text += DateTime.Now.ToString("T") + "\n";
+            //16:30
+            richTextBox1.Text += DateTime.Now.ToString("t") + "\n";
+
+            //2007年4月24日 8:30:15
+            richTextBox1.Text += DateTime.Now.ToString("U") + "\n";
+            //2007-04-24 16:30:15Z
+            richTextBox1.Text += DateTime.Now.ToString("u") + "\n";
+
+            //4月24日
+            richTextBox1.Text += DateTime.Now.ToString("m") + "\n";
+            richTextBox1.Text += DateTime.Now.ToString("M") + "\n";
+            //Tue, 24 Apr 2007 16:30:15 GMT
+            richTextBox1.Text += DateTime.Now.ToString("r") + "\n";
+            richTextBox1.Text += DateTime.Now.ToString("R") + "\n";
+            //2007年4月 
+            richTextBox1.Text += DateTime.Now.ToString("y") + "\n";
+            richTextBox1.Text += DateTime.Now.ToString("Y") + "\n";
+            //2007-04-24T15:52:19.1562500+08:00
+            richTextBox1.Text += DateTime.Now.ToString("o") + "\n";
+            richTextBox1.Text += DateTime.Now.ToString("O") + "\n";
+            //2007-04-24T16:30:15
+            richTextBox1.Text += DateTime.Now.ToString("s") + "\n";
+            //2007-04-24 15:52:19
+            richTextBox1.Text += DateTime.Now.ToString("yyyy-MM-dd HH：mm：ss：ffff") + "\n";
+            //2007年04月24 15時56分48秒
+            richTextBox1.Text += DateTime.Now.ToString("yyyy年MM月dd HH時mm分ss秒") + "\n";
+
+            //星期二, 四月 24 2007
+            richTextBox1.Text += DateTime.Now.ToString("dddd, MMMM dd yyyy") + "\n";
+            //二, 四月 24 '07
+            richTextBox1.Text += DateTime.Now.ToString("ddd, MMM d \"'\"yy") + "\n";
+            //星期二, 四月 24
+            richTextBox1.Text += DateTime.Now.ToString("dddd, MMMM dd") + "\n";
+            //4-07
+            richTextBox1.Text += DateTime.Now.ToString("M/yy") + "\n";
+            //24-04-07
+            richTextBox1.Text += DateTime.Now.ToString("dd-MM-yy") + "\n";
+        }
+
+        private void button57_Click(object sender, EventArgs e)
+        {
+            //C#中時間相關知識點小結
+            //一、月份英文簡寫
+
+            DateTime dt = DateTime.Now;
+            string MM = dt.AddMonths(-1).ToString("MMM", new System.Globalization.CultureInfo("en-us"));//月英文縮寫：Jul
+            richTextBox1.Text += "月份英文簡寫\t" + MM + "\n";
+
+
+
+            //二、當月第一天和最后一天
+
+            DateTime ThisMonth_Frist = DateTime.Now.AddDays(1 - DateTime.Now.Day).Date;
+            DateTime ThisMOnth_Last = DateTime.Now.AddDays(1 - DateTime.Now.Day).Date.AddMonths(1).AddSeconds(-1);
+            richTextBox1.Text += "當月第一天\t" + ThisMonth_Frist + "\n";
+            richTextBox1.Text += "當月最后一天\t" + ThisMOnth_Last + "\n";
+
+            //三、上月第一天和最后一天
+
+            DateTime Today = DateTime.Today;//當天時間
+            DateTime ThisMonth = new DateTime(Today.Year, Today.Month, 1);//當前月第一天時間
+            DateTime LastMonth_First = ThisMonth.AddMonths(-1);//上月第一天時間
+            DateTime LastMonth_Last = ThisMonth.AddDays(-1);//上月最后一天時間
+            richTextBox1.Text += "上月第一天\t" + LastMonth_First + "\n";
+            richTextBox1.Text += "上月最后一天\t" + LastMonth_Last + "\n";
+
+            //四、本周第幾天
+
+            int daysInWeek1 = (int)DateTime.Now.DayOfWeek;//注意：此處周,日時回傳0，
+            int daysInWeek2 = (int)DateTime.Now.DayOfWeek == 0 ? 7 : (int)DateTime.Now.DayOfWeek;//當前周第幾天,注釋:周日為0
+            richTextBox1.Text += "本周第幾天\t" + daysInWeek1.ToString() + "\n";
+            richTextBox1.Text += "本周第幾天\t" + daysInWeek2.ToString() + "\n";
+
+
+            //五、本月第幾周
+
+            //int a = WeekOfMonth(DateTime.Now, false);//
+            //richTextBox1.Text += "本月第幾周\t" + a + "\n";
+        }
+
+        //本年第幾周
+        private int WeekOfYear()
+        {
+            var dt = DateTime.Now;
+            int firstWeekend = Convert.ToInt32(DateTime.Parse(dt.Year + "-1-1").DayOfWeek);
+            int weekDay = firstWeekend == 0 ? 1 : (7 - firstWeekend + 1);
+            int currentDay = dt.DayOfYear;
+            int current_week = Convert.ToInt32(Math.Ceiling((currentDay - weekDay) / 7.0)) + 1;
+            return current_week;
+        }
+
+        //前幾周的周一和周日
+        private void FEDayInLastWeek()
+        {
+            int N = 3;//前幾周引數
+            DateTime Today = DateTime.Now;
+            int daysInWeek = (int)Today.DayOfWeek == 0 ? 7 : (int)Today.DayOfWeek;//當前周第幾天,注釋:周日為0
+
+            for (int i = N; i > 0; i--)
+            {
+                //起始日期
+                DateTime firstDay = Today.AddDays(1 - (7 * i + daysInWeek));
+                DateTime lastDay = Today.AddDays(7 - (7 * i + daysInWeek));
+            }
+        }
+
+        //本周一和當前日
+        private void FristDayToNowInThisWeek()
+        {
+            int daysInWeek = (int)DateTime.Now.DayOfWeek == 0 ? 7 : (int)DateTime.Now.DayOfWeek;//當前周第幾天,注釋:周日為0
+            //起始日期
+            DateTime firstDay = DateTime.Now.AddDays(1 - daysInWeek);
+            DateTime lastDay = DateTime.Now;
+        }
+
+        private void button58_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button59_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void bt_special_00_Click(object sender, EventArgs e)

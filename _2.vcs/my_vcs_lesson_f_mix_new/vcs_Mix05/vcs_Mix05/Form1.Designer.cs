@@ -100,7 +100,6 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(170, 70);
             this.button26.TabIndex = 113;
-            this.button26.Text = "打印時間訊息用法";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
@@ -203,7 +202,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(170, 70);
             this.button13.TabIndex = 103;
-            this.button13.Text = "獲取當前行號";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -214,7 +212,6 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(170, 70);
             this.button9.TabIndex = 102;
-            this.button9.Text = "最短路徑分析";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -336,7 +333,6 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(170, 70);
             this.button12.TabIndex = 90;
-            this.button12.Text = "(Console)各種數據格式的輸出";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -347,7 +343,6 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(170, 70);
             this.button7.TabIndex = 89;
-            this.button7.Text = "設置系統日期和時間";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -368,7 +363,6 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(170, 70);
             this.button3.TabIndex = 87;
-            this.button3.Text = "C#中時間相關知識點小結";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -379,7 +373,6 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(170, 70);
             this.button2.TabIndex = 86;
-            this.button2.Text = "多筆資料比較";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 

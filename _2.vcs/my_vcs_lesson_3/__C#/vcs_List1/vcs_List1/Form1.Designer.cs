@@ -417,6 +417,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(170, 40);
             this.button25.TabIndex = 27;
+            this.button25.Text = "List之搜尋語法1";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -427,6 +428,7 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(170, 40);
             this.button26.TabIndex = 28;
+            this.button26.Text = "List之搜尋語法2";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 

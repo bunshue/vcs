@@ -398,6 +398,7 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(135, 45);
             this.button20.TabIndex = 47;
+            this.button20.Text = "用GDI+畫圖";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 

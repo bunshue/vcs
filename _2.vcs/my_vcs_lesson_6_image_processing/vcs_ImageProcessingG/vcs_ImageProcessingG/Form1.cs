@@ -14,6 +14,7 @@ namespace vcs_ImageProcessingG
     public partial class Form1 : Form
     {
         string filename = @"C:\______test_files\picture1.jpg";
+        //string filename = @"C:\______test_files\isinbaeva.jpg";
 
         public Form1()
         {
@@ -22,8 +23,64 @@ namespace vcs_ImageProcessingG
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            button0.Text = "恢復";
+            button1.Text = "底片效果";
+            button2.Text = "浮雕效果";
+            button3.Text = "黑白效果";
+            button4.Text = "柔化效果";
+            button5.Text = "銳化效果";
+            button6.Text = "霧化效果 TBD";
+            button7.Text = "光照效果";
+            button8.Text = "百葉窗效果 垂直/水平";
+            button9.Text = "馬賽克效果";
+            button10.Text = "油畫效果";
+            button11.Text = "扭曲效果 TBD";
+            button12.Text = "積木效果";
+
+            reset_pictureBox();
+            show_item_location();
+        }
+
+        void reset_pictureBox()
+        {
             //讀取圖檔
             pictureBox1.Image = Image.FromFile(filename);
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 170 + 10;
+            dy = 50 + 10;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
+            button12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
+            button13.Location = new Point(x_st + dx * 0, y_st + dy * 13);
+            button14.Location = new Point(x_st + dx * 0, y_st + dy * 14);
+        }
+
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            reset_pictureBox();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -68,8 +125,105 @@ namespace vcs_ImageProcessingG
             pictureBox1.Image = image_processing7(filename);
         }
 
+        /*
+        八.百葉窗效果
+
+        原理:(1).垂直百葉窗效果:
+
+        根據窗口或圖像的高度或寬度和定制的百葉窗顯示條寬度計算百葉窗顯示的條數量 ；
+
+        根據窗口或圖像的高度或寬度定制百葉窗顯示條數量計算百窗顯示的條寬度.
+
+        (2).水平百葉窗效果: 原理同上,只是繪制像素點開始的坐標不同.
+        */
+
+        int cnt = 0;
         private void button8_Click(object sender, EventArgs e)
         {
+            if ((cnt % 2) == 0)
+            {
+                shutter1();
+            }
+            else
+            {
+                shutter2();
+            }
+            cnt++;
+        }
+
+        void shutter1()
+        {
+            //垂直百葉窗顯示圖像
+            try
+            {
+                Bitmap MyBitmap = (Bitmap)this.pictureBox1.Image.Clone();
+                int dw = MyBitmap.Width / 30;
+                int dh = MyBitmap.Height;
+                Graphics g = this.pictureBox1.CreateGraphics();
+                g.Clear(Color.Gray);
+                Point[] MyPoint = new Point[30];
+                for (int x = 0; x < 30; x++)
+                {
+                    MyPoint[x].Y = 0;
+                    MyPoint[x].X = x * dw;
+                }
+                Bitmap bitmap = new Bitmap(MyBitmap.Width, MyBitmap.Height);
+                for (int i = 0; i < dw; i++)
+                {
+                    for (int j = 0; j < 30; j++)
+                    {
+                        for (int k = 0; k < dh; k++)
+                        {
+                            bitmap.SetPixel(MyPoint[j].X + i, MyPoint[j].Y + k,
+                            MyBitmap.GetPixel(MyPoint[j].X + i, MyPoint[j].Y + k));
+                        }
+                    }
+                    this.pictureBox1.Refresh();
+                    this.pictureBox1.Image = bitmap;
+                    System.Threading.Thread.Sleep(100);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "信息提示");
+            }
+        }
+
+        void shutter2()
+        {
+            //水平百葉窗顯示圖像
+            try
+            {
+                Bitmap MyBitmap = (Bitmap)this.pictureBox1.Image.Clone();
+                int dh = MyBitmap.Height / 20;
+                int dw = MyBitmap.Width;
+                Graphics g = this.pictureBox1.CreateGraphics();
+                g.Clear(Color.Gray);
+                Point[] MyPoint = new Point[20];
+                for (int y = 0; y < 20; y++)
+                {
+                    MyPoint[y].X = 0;
+                    MyPoint[y].Y = y * dh;
+                }
+                Bitmap bitmap = new Bitmap(MyBitmap.Width, MyBitmap.Height);
+                for (int i = 0; i < dh; i++)
+                {
+                    for (int j = 0; j < 20; j++)
+                    {
+                        for (int k = 0; k < dw; k++)
+                        {
+                            bitmap.SetPixel(MyPoint[j].X + k, MyPoint[j].Y + i, MyBitmap.GetPixel(MyPoint[j].X + k, MyPoint[j].Y + i));
+                        }
+                    }
+                    this.pictureBox1.Refresh();
+                    this.pictureBox1.Image = bitmap;
+                    System.Threading.Thread.Sleep(100);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "信息提示");
+            }
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -606,13 +760,6 @@ namespace vcs_ImageProcessingG
             {
                 MessageBox.Show(ex.Message, "信息提示");
             }
-
-        }
-
-        private void button15_Click(object sender, EventArgs e)
-        {
-            //讀取圖檔
-            pictureBox1.Image = Image.FromFile(filename);
         }
     }
 }

@@ -13,7 +13,7 @@ using Microsoft.Win32;  //for Registry
 
 //WMI是Windows Management Instrumentation的簡稱，即：視窗管理規范。
 
-namespace system_test3_wmi
+namespace vcs_WMI__new2
 {
     public partial class Form1 : Form
     {
@@ -37,8 +37,8 @@ namespace system_test3_wmi
             //button
             x_st = 15;
             y_st = 15;
-            dx = 180+10;
-            dy = 70+10;
+            dx = 180 + 10;
+            dy = 70 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -876,7 +876,7 @@ namespace system_test3_wmi
             ManagementObjectCollection moc = mc.GetInstances();
             foreach (ManagementObject mo in moc)
             {
-                MessageBox.Show(mo["processorid"].ToString());
+                richTextBox1.Text += "獲得CPU的編號 : " + mo["processorid"].ToString() + "\n";
             }
         }
 
@@ -908,9 +908,6 @@ namespace system_test3_wmi
             {
                 Console.WriteLine("EstimatedChargeRemaining: \t{0}%", mom.Current.Properties["EstimatedChargeRemaining"].Value);
             }
-
-
-
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -1141,6 +1138,5 @@ namespace system_test3_wmi
             return Dri;
         }
     }
-
-
 }
+

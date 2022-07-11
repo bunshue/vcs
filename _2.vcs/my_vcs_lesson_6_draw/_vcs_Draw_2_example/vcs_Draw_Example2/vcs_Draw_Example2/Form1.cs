@@ -2162,6 +2162,40 @@ namespace vcs_Draw_Example2
 
         private void button20_Click(object sender, EventArgs e)
         {
+            //用GDI+畫圖
+
+            Graphics g = this.pictureBox1.CreateGraphics();
+            g.FillRectangle(Brushes.White, this.ClientRectangle);
+            for (int i = 1; i <= 7; ++i)
+            {
+                //在窗體上面畫出橙色的矩形
+
+                Rectangle r = new Rectangle(i * 40 - 15, 0, 15,
+                this.ClientRectangle.Height);
+                g.FillRectangle(Brushes.Orange, r);
+            }
+            //在內存中創建一個Bitmap並設置CompositingMode
+            Bitmap bmp = new Bitmap(260, 260,
+
+            System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            Graphics gBmp = Graphics.FromImage(bmp);
+            gBmp.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
+            // 創建一個帶有Alpha的紅色區域
+            // 並將其畫在內存的位圖裏面
+            Color red = Color.FromArgb(0x60, 0xff, 0, 0);
+            Brush redBrush = new SolidBrush(red);
+            gBmp.FillEllipse(redBrush, 70, 70, 160, 160);
+            // 創建一個帶有Alpha的綠色區域
+            Color green = Color.FromArgb(0x40, 0, 0xff, 0);
+            Brush greenBrush = new SolidBrush(green);
+            gBmp.FillRectangle(greenBrush, 10, 10, 140, 140);
+            //在窗體上面畫出位圖 now draw the bitmap on our window
+            g.DrawImage(bmp, 20, 20, bmp.Width, bmp.Height);
+            // 清理資源
+            bmp.Dispose();
+            gBmp.Dispose();
+            redBrush.Dispose();
+            greenBrush.Dispose();
         }
 
         private void button21_Click(object sender, EventArgs e)

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace system_test3_wmi
+namespace vcs_WMI__new2
 {
     static class Program
     {

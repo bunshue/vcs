@@ -679,6 +679,7 @@
             this.button40.Name = "button40";
             this.button40.Size = new System.Drawing.Size(165, 55);
             this.button40.TabIndex = 47;
+            this.button40.Text = "從零點到現在的秒數";
             this.button40.UseVisualStyleBackColor = true;
             this.button40.Click += new System.EventHandler(this.button40_Click);
             // 
@@ -1315,7 +1316,9 @@
             this.button55.Name = "button55";
             this.button55.Size = new System.Drawing.Size(165, 55);
             this.button55.TabIndex = 78;
+            this.button55.Text = "string.Format 格式化日期";
             this.button55.UseVisualStyleBackColor = true;
+            this.button55.Click += new System.EventHandler(this.button55_Click);
             // 
             // button56
             // 
@@ -1324,7 +1327,9 @@
             this.button56.Name = "button56";
             this.button56.Size = new System.Drawing.Size(165, 55);
             this.button56.TabIndex = 79;
+            this.button56.Text = "打印時間訊息用法";
             this.button56.UseVisualStyleBackColor = true;
+            this.button56.Click += new System.EventHandler(this.button56_Click);
             // 
             // button57
             // 
@@ -1333,7 +1338,9 @@
             this.button57.Name = "button57";
             this.button57.Size = new System.Drawing.Size(165, 55);
             this.button57.TabIndex = 80;
+            this.button57.Text = "C#中時間相關知識點小結";
             this.button57.UseVisualStyleBackColor = true;
+            this.button57.Click += new System.EventHandler(this.button57_Click);
             // 
             // button58
             // 
@@ -1343,6 +1350,7 @@
             this.button58.Size = new System.Drawing.Size(165, 55);
             this.button58.TabIndex = 81;
             this.button58.UseVisualStyleBackColor = true;
+            this.button58.Click += new System.EventHandler(this.button58_Click);
             // 
             // button59
             // 
@@ -1352,6 +1360,7 @@
             this.button59.Size = new System.Drawing.Size(165, 55);
             this.button59.TabIndex = 82;
             this.button59.UseVisualStyleBackColor = true;
+            this.button59.Click += new System.EventHandler(this.button59_Click);
             // 
             // dateTimePicker2
             // 

@@ -274,6 +274,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(180, 50);
             this.button18.TabIndex = 19;
+            this.button18.Text = "(Console)各種數據格式的輸出";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 

@@ -1,4 +1,4 @@
-﻿namespace system_test3_wmi
+﻿namespace vcs_WMI__new2
 {
     partial class Form1
     {

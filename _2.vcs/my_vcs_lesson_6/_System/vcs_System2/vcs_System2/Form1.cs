@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Net;   //for Dns
 using System.Runtime.InteropServices;   //for DllImport
 using System.Diagnostics;   //for Process
 using System.Net.NetworkInformation;    //for Ping & PingReply
@@ -534,6 +535,32 @@ namespace vcs_System2
 
         private void button25_Click(object sender, EventArgs e)
         {
+            //獲取本機所有SQLServer引擎
+
+            //获得主机名称
+            string HostName = Dns.GetHostName();
+            ServiceController[] services = ServiceController.GetServices();
+
+            //从机器服务列表中找到本机的SqlServer引擎
+
+            richTextBox1.Text += "services len = " + services.Length.ToString() + "\n";
+
+            foreach (ServiceController s in services)
+            {
+                richTextBox1.Text += "s = " + s.ServiceName + "\n";
+                if (s.ServiceName.ToLower().IndexOf("mssql$") != -1)
+                {
+                    //ddlServerName.Items.Add(HostName + "\\" + s.ServiceName.Substring(s.ServiceName.IndexOf("$") + 1));     
+                    richTextBox1.Text += HostName + "\\" + s.ServiceName.Substring(s.ServiceName.IndexOf("$") + 1) + "\n";
+                }
+                else if (s.ServiceName.ToLower() == "mssqlserver")
+                {
+
+                    //ddlServerName.Items.Add(HostName);
+                    richTextBox1.Text += "bbbb " + HostName + "\n";
+                }
+            }
+
         }
 
         private void button26_Click(object sender, EventArgs e)
@@ -600,10 +627,52 @@ namespace vcs_System2
             System.Diagnostics.Process.Start("mmsys.cpl");
         }
 
+        //設置系統日期和時間 ST
+        public class SetSystemDateTime
+        {
+            [DllImportAttribute("Kernel32.dll")]
+            public static extern void GetLocalTime(SystemTime st);
+            [DllImportAttribute("Kernel32.dll")]
+            public static extern void SetLocalTime(SystemTime st);
+        }
+
+        [StructLayoutAttribute(LayoutKind.Sequential)]
+        public class SystemTime
+        {
+            public ushort vYear;
+            public ushort vMonth;
+            public ushort vDayOfWeek;
+            public ushort vDay;
+            public ushort vHour;
+            public ushort vMinute;
+            public ushort vSecond;
+        }
+
         private void button36_Click(object sender, EventArgs e)
         {
+            //設置系統日期和時間
+            //Romeo可用 Sugar不可用
+            //DateTime Year = this.dateTimePicker1.Value;
+            SystemTime MySystemTime = new SystemTime();
+            SetSystemDateTime.GetLocalTime(MySystemTime);
+            /*
+            MySystemTime.vYear = (ushort)this.dateTimePicker1.Value.Year;
+            MySystemTime.vMonth = (ushort)this.dateTimePicker1.Value.Month;
+            MySystemTime.vDay = (ushort)this.dateTimePicker1.Value.Day;
+            MySystemTime.vHour = (ushort)this.dateTimePicker2.Value.Hour;
+            MySystemTime.vMinute = (ushort)this.dateTimePicker2.Value.Minute;
+            MySystemTime.vSecond = (ushort)this.dateTimePicker2.Value.Second;
+            */
+            MySystemTime.vYear = 2021;
+            MySystemTime.vMonth = 11;
+            MySystemTime.vDay = 3;
+            MySystemTime.vHour = 23;
+            MySystemTime.vMinute = 37;
+            MySystemTime.vSecond = 00;
 
+            SetSystemDateTime.SetLocalTime(MySystemTime);
         }
+        //設置系統日期和時間 SP
 
         private void button37_Click(object sender, EventArgs e)
         {

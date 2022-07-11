@@ -198,6 +198,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(170, 70);
             this.button14.TabIndex = 104;
+            this.button14.Text = "獲取當前行號";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -347,7 +348,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(170, 70);
             this.button12.TabIndex = 90;
-            this.button12.Text = "獲取本機所有SQLServer引擎";
+            this.button12.Text = "最短路徑分析";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -358,6 +359,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(170, 70);
             this.button7.TabIndex = 89;
+            this.button7.Text = "多筆資料比較";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 

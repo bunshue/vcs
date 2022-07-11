@@ -58,13 +58,13 @@ namespace vcs_ImageProcessingI
         {
             //向右旋轉圖像90°
             Graphics g = this.pictureBox1.CreateGraphics();
-            Bitmap bmp = new Bitmap(filename);//加載圖像
+            Bitmap bitmap1 = new Bitmap(filename);//加載圖像
             //g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);//填充窗體背景爲白色, 清空pictureBox
             Point[] destinationPoints = {
 new Point(400, 0), // destination for upper-left point of original
 new Point(400, 305),// destination for upper-right point of original
 new Point(0, 0)}; // destination for lower-left point of original
-            g.DrawImage(bmp, destinationPoints);
+            g.DrawImage(bitmap1, destinationPoints);
 
         }
 
@@ -72,13 +72,13 @@ new Point(0, 0)}; // destination for lower-left point of original
         {
             //旋轉圖像180°
             Graphics g = this.pictureBox1.CreateGraphics();
-            Bitmap bmp = new Bitmap(filename);
+            Bitmap bitmap1 = new Bitmap(filename);
             //g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);//填充窗體背景爲白色, 清空pictureBox
             Point[] destinationPoints = {
 new Point(0, 400), // destination for upper-left point of original
 new Point(305, 400),// destination for upper-right point of original
 new Point(0, 0)}; // destination for lower-left point of original
-            g.DrawImage(bmp, destinationPoints);
+            g.DrawImage(bitmap1, destinationPoints);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -86,13 +86,13 @@ new Point(0, 0)}; // destination for lower-left point of original
             //圖像切變
 
             Graphics g = this.pictureBox1.CreateGraphics();
-            Bitmap bmp = new Bitmap(filename);
+            Bitmap bitmap1 = new Bitmap(filename);
             //g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);//填充窗體背景爲白色, 清空pictureBox
             Point[] destinationPoints = {
 new Point(0, 0), // destination for upper-left point of original
 new Point(305, 0), // destination for upper-right point of original
 new Point(100, 400)};// destination for lower-left point of original
-            g.DrawImage(bmp, destinationPoints);
+            g.DrawImage(bitmap1, destinationPoints);
 
         }
 
@@ -101,11 +101,11 @@ new Point(100, 400)};// destination for lower-left point of original
             //圖像截取
 
             Graphics g = this.pictureBox1.CreateGraphics();
-            Bitmap bmp = new Bitmap(filename);
+            Bitmap bitmap1 = new Bitmap(filename);
             //g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);//填充窗體背景爲白色, 清空pictureBox
             Rectangle sr = new Rectangle(80, 60, 400, 400);//要截取的矩形區域
             Rectangle dr = new Rectangle(0, 0, 200, 200);//要顯示到Form的矩形區域
-            g.DrawImage(bmp, dr, sr, GraphicsUnit.Pixel);
+            g.DrawImage(bitmap1, dr, sr, GraphicsUnit.Pixel);
 
 
 
@@ -116,13 +116,13 @@ new Point(100, 400)};// destination for lower-left point of original
             //改變圖像大小
 
             Graphics g = this.pictureBox1.CreateGraphics();
-            Bitmap bmp = new Bitmap(filename);
+            Bitmap bitmap1 = new Bitmap(filename);
             //g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);//填充窗體背景爲白色, 清空pictureBox
-            int width = bmp.Width;
-            int height = bmp.Height;
+            int width = bitmap1.Width;
+            int height = bitmap1.Height;
             // 改變圖像大小使用低質量的模式
             g.InterpolationMode = InterpolationMode.NearestNeighbor;
-            g.DrawImage(bmp, new Rectangle(10, 10, 120, 120), // source rectangle
+            g.DrawImage(bitmap1, new Rectangle(10, 10, 120, 120), // source rectangle
 
             new Rectangle(0, 0, width, height), // destination rectangle
             GraphicsUnit.Pixel);
@@ -130,7 +130,7 @@ new Point(100, 400)};// destination for lower-left point of original
             //g.CompositingQuality = CompositingQuality.HighSpeed;
             g.InterpolationMode = InterpolationMode.HighQualityBicubic;
             g.DrawImage(
-            bmp,
+            bitmap1,
             new Rectangle(130, 10, 120, 120),
             new Rectangle(0, 0, width, height),
             GraphicsUnit.Pixel);
@@ -139,54 +139,10 @@ new Point(100, 400)};// destination for lower-left point of original
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //設置圖像的分辨率
-
-            Graphics g = this.pictureBox1.CreateGraphics();
-            Bitmap bmp = new Bitmap(filename);
-            //g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);//填充窗體背景爲白色, 清空pictureBox
-            bmp.SetResolution(300f, 300f);
-            g.DrawImage(bmp, 0, 0);
-            bmp.SetResolution(1200f, 1200f);
-            g.DrawImage(bmp, 180, 0);
-
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //用GDI+畫圖
-
-            Graphics g = this.pictureBox1.CreateGraphics();
-            g.FillRectangle(Brushes.White, this.ClientRectangle);
-            for (int i = 1; i <= 7; ++i)
-            {
-                //在窗體上面畫出橙色的矩形
-
-                Rectangle r = new Rectangle(i * 40 - 15, 0, 15,
-                this.ClientRectangle.Height);
-                g.FillRectangle(Brushes.Orange, r);
-            }
-            //在內存中創建一個Bitmap並設置CompositingMode
-            Bitmap bmp = new Bitmap(260, 260,
-
-            System.Drawing.Imaging.PixelFormat.Format32bppArgb);
-            Graphics gBmp = Graphics.FromImage(bmp);
-            gBmp.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
-            // 創建一個帶有Alpha的紅色區域
-            // 並將其畫在內存的位圖裏面
-            Color red = Color.FromArgb(0x60, 0xff, 0, 0);
-            Brush redBrush = new SolidBrush(red);
-            gBmp.FillEllipse(redBrush, 70, 70, 160, 160);
-            // 創建一個帶有Alpha的綠色區域
-            Color green = Color.FromArgb(0x40, 0, 0xff, 0);
-            Brush greenBrush = new SolidBrush(green);
-            gBmp.FillRectangle(greenBrush, 10, 10, 140, 140);
-            //在窗體上面畫出位圖 now draw the bitmap on our window
-            g.DrawImage(bmp, 20, 20, bmp.Width, bmp.Height);
-            // 清理資源
-            bmp.Dispose();
-            gBmp.Dispose();
-            redBrush.Dispose();
-            greenBrush.Dispose();
         }
 
         private void button7_Click(object sender, EventArgs e)

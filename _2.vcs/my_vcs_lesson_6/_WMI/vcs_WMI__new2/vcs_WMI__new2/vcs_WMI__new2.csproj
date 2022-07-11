@@ -8,8 +8,8 @@
     <ProjectGuid>{EFFFF04A-47BB-45A6-99C4-714F252A757F}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>system_test3_wmi</RootNamespace>
-    <AssemblyName>system_test3_wmi</AssemblyName>
+    <RootNamespace>vcs_WMI__new2</RootNamespace>
+    <AssemblyName>vcs_WMI__new2</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

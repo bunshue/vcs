@@ -622,11 +622,54 @@ namespace vcs_List1
 
         private void button25_Click(object sender, EventArgs e)
         {
+            //List之搜尋語法1
+            //這裡使用Where擴展方法獲取大於4的值。
+
+            List<int> intList = new List<int>() { 1, 2, 3, 4, 5 };
+
+            var maxIntList = intList.Where(i => i > 4);
+
+            foreach (var item in maxIntList)
+            {
+
+                Console.WriteLine(item);
+
+            }
+
+            intList.Add(6);
+
+            foreach (var item in maxIntList)
+            {
+                Console.WriteLine(item);
+            }
 
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
+            //List之搜尋語法2
+            List<int> intList = new List<int>() { 1, 2, 3, 4, 5 };
+
+            var maxIntList = intList.Where(i => i > 4).ToList();//調用ToList()方法
+
+            foreach (var item in maxIntList)
+            {
+                Console.WriteLine(item);
+            }
+
+            intList.Add(6);
+
+            foreach (var item in maxIntList)
+            {
+                Console.WriteLine(item);
+            }
+
+            maxIntList = intList.Where(i => i > 4).ToList();//調用ToList()方法
+
+            foreach (var item in maxIntList)
+            {
+                Console.WriteLine(item);
+            }
 
         }
 
