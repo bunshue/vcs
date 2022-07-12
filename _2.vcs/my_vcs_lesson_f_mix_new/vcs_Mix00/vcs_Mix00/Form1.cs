@@ -480,52 +480,6 @@ namespace vcs_Mix00
 
         private void button10_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\red.bmp";
-
-            Bitmap bitmap1 = new Bitmap(filename);
-
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-
-            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
-
-            Rectangle rect = new Rectangle(100, 100, 20, 20);
-            BitmapData data = bitmap1.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
-
-            int w = data.Width;
-            int h = data.Height;
-
-            richTextBox1.Text += "w = " + w.ToString() + ", h = " + h.ToString() + "\n";
-
-            unsafe
-            {
-                long r = 0;
-                long g = 0;
-                long b = 0;
-                long pixelCount = h * w;
-
-                byte* ptr = (byte*)(data.Scan0);
-
-                for (int i = 0; i < h; i++)
-                {
-                    for (int j = 0; j < w; j++)
-                    {
-                        //排列是BGR
-                        b += *ptr;
-                        g += *(ptr + 1);
-                        r += *(ptr + 2);
-                        ptr += 3;
-                    }
-                    ptr += data.Stride - w * 3;
-                }
-
-                double totalRGB = (r / pixelCount + g / pixelCount + b / pixelCount) / 3;
-
-                richTextBox1.Text += "平均 R : " + (r / pixelCount).ToString() + "\n";
-                richTextBox1.Text += "平均 G : " + (g / pixelCount).ToString() + "\n";
-                richTextBox1.Text += "平均 B : " + (b / pixelCount).ToString() + "\n";
-                richTextBox1.Text += "平均亮度 : " + totalRGB.ToString() + "\n";
-            }
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -878,93 +832,11 @@ namespace vcs_Mix00
             string str = "10/3";
             float result = Calculator.dealWith(str);
             richTextBox1.Text += str + " = " + result.ToString() + "\n";
-
-
         }
 
         private void button24_Click(object sender, EventArgs e)
         {
-            string random_chinese_word = CreateCode(10);
-            richTextBox1.Text += random_chinese_word + "\n";
 
-        }
-
-        //隨機生成漢字（摘錄保存的代碼），生成漢字摘錄代碼
-
-        /// <summary>
-        /// 隨機生成漢字
-        /// </summary>
-        /// <param name="strlength">長度（4位）</param>
-        /// <returns></returns>
-        public string CreateCode(int strlength)
-        {
-            //定義一個字符串數組儲存漢字編碼的組成元素
-            string[] r = new String[16] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
-            Random rnd = new Random();
-            //定義一個object數組用來
-            object[] bytes = new object[strlength];
-            /**/
-            /*每循環一次產生一個含兩個元素的十六進制字節數組，並將其放入bject數組中
-            每個漢字有四個區位碼組成
-            區位碼第1位和區位碼第2位作為字節數組第一個元素
-            區位碼第3位和區位碼第4位作為字節數組第二個元素
-            */
-            for (int i = 0; i < strlength; i++)
-            {
-                //區位碼第1位
-                int r1 = rnd.Next(11, 14);
-                string str_r1 = r[r1].Trim();
-                //區位碼第2位
-                rnd = new Random(r1 * unchecked((int)DateTime.Now.Ticks) + i);//更換隨機數發生器的種子避免產生重復值
-                int r2;
-                if (r1 == 13)
-                    r2 = rnd.Next(0, 7);
-                else
-                    r2 = rnd.Next(0, 16);
-                string str_r2 = r[r2].Trim();
-                //區位碼第3位
-                rnd = new Random(r2 * unchecked((int)DateTime.Now.Ticks) + i);
-                int r3 = rnd.Next(10, 16);
-                string str_r3 = r[r3].Trim();
-                //區位碼第4位
-                rnd = new Random(r3 * unchecked((int)DateTime.Now.Ticks) + i);
-                int r4;
-                if (r3 == 10)
-                {
-                    r4 = rnd.Next(1, 16);
-                }
-                else if (r3 == 15)
-                {
-                    r4 = rnd.Next(0, 15);
-                }
-                else
-                {
-                    r4 = rnd.Next(0, 16);
-                }
-                string str_r4 = r[r4].Trim();
-                //定義兩個字節變量存儲產生的隨機漢字區位碼
-                byte byte1 = Convert.ToByte(str_r1 + str_r2, 16);
-                byte byte2 = Convert.ToByte(str_r3 + str_r4, 16);
-                //將兩個字節變量存儲在字節數組中
-                byte[] str_r = new byte[] { byte1, byte2 };
-                //將產生的一個漢字的字節數組放入object數組中
-                bytes.SetValue(str_r, i);
-            }
-
-
-            //獲取GB2312編碼頁（表）
-            Encoding gb = Encoding.GetEncoding("gb2312");
-
-            //根據漢字編碼的字節數組解碼出中文漢字
-
-            string txt = string.Empty;
-
-            for (int i = 0; i < strlength; i++)
-            {
-                string str1 = gb.GetString((byte[])Convert.ChangeType(bytes[i], typeof(byte[])));
-                txt += str1;
-            }
-            return txt;
         }
 
         private void button25_Click(object sender, EventArgs e)

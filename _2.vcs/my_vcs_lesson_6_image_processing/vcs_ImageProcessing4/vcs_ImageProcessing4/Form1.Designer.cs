@@ -1,4 +1,4 @@
-﻿namespace vcs_ImageProcessingB
+﻿namespace vcs_ImageProcessing4
 {
     partial class Form1
     {

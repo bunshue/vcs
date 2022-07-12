@@ -105,6 +105,13 @@ namespace vcs_test_all_00_Usually
             fs.Close();
             */
             pictureBox1.ClientSize = new Size(image.Width, image.Height);
+
+            //程式開啟時顯示在畫面正中央
+            int W = Screen.PrimaryScreen.Bounds.Width;
+            int H = Screen.PrimaryScreen.Bounds.Height;
+            int w = this.Width;
+            int h = this.Height;
+            this.Location = new Point((W - w) / 2, (H - h) / 2);
         }
 
         void show_item_location()
@@ -579,3 +586,4 @@ namespace vcs_test_all_00_Usually
             protocol_Tls12 = (SecurityProtocolType)3072;
     }
 }
+

@@ -11,7 +11,7 @@ using System.Drawing.Imaging;   //for BitmapData
 using System.Drawing.Drawing2D; //for InterpolationMode
 using System.Runtime.InteropServices;   //for Marshal
 
-namespace vcs_ImageProcessingB
+namespace vcs_ImageProcessing4
 {
     public partial class Form1 : Form
     {

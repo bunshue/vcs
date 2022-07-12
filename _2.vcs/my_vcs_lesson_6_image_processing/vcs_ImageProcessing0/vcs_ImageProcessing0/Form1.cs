@@ -1522,7 +1522,54 @@ namespace vcs_ImageProcessing0
 
         private void button20_Click(object sender, EventArgs e)
         {
+            //使用unsafe加快處理圖像速度
 
+            string filename = @"C:\______test_files\red.bmp";
+
+            Bitmap bitmap1 = new Bitmap(filename);
+
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+
+            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+
+            Rectangle rect = new Rectangle(100, 100, 20, 20);
+            BitmapData data = bitmap1.LockBits(rect, ImageLockMode.ReadWrite, PixelFormat.Format24bppRgb);
+
+            int w = data.Width;
+            int h = data.Height;
+
+            richTextBox1.Text += "w = " + w.ToString() + ", h = " + h.ToString() + "\n";
+
+            unsafe
+            {
+                long r = 0;
+                long g = 0;
+                long b = 0;
+                long pixelCount = h * w;
+
+                byte* ptr = (byte*)(data.Scan0);
+
+                for (int i = 0; i < h; i++)
+                {
+                    for (int j = 0; j < w; j++)
+                    {
+                        //排列是BGR
+                        b += *ptr;
+                        g += *(ptr + 1);
+                        r += *(ptr + 2);
+                        ptr += 3;
+                    }
+                    ptr += data.Stride - w * 3;
+                }
+
+                double totalRGB = (r / pixelCount + g / pixelCount + b / pixelCount) / 3;
+
+                richTextBox1.Text += "平均 R : " + (r / pixelCount).ToString() + "\n";
+                richTextBox1.Text += "平均 G : " + (g / pixelCount).ToString() + "\n";
+                richTextBox1.Text += "平均 B : " + (b / pixelCount).ToString() + "\n";
+                richTextBox1.Text += "平均亮度 : " + totalRGB.ToString() + "\n";
+            }
         }
 
         private void button21_Click(object sender, EventArgs e)
