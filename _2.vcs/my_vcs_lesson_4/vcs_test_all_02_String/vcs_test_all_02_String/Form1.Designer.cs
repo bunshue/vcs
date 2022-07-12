@@ -285,6 +285,7 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(180, 50);
             this.button19.TabIndex = 20;
+            this.button19.Text = "數字大寫顯示";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 

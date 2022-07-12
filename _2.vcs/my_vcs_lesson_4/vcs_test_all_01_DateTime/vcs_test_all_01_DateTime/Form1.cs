@@ -66,8 +66,8 @@ namespace vcs_test_all_01_DateTime
             //button
             x_st = 10;
             y_st = 10;
-            dx = 170;
-            dy = 55;
+            dx = 170 + 10;
+            dy = 50 + 2;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -84,83 +84,103 @@ namespace vcs_test_all_01_DateTime
             button12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
             button13.Location = new Point(x_st + dx * 0, y_st + dy * 13);
             button14.Location = new Point(x_st + dx * 0, y_st + dy * 14);
+            button15.Location = new Point(x_st + dx * 0, y_st + dy * 15);
+            button16.Location = new Point(x_st + dx * 0, y_st + dy * 16);
+            button17.Location = new Point(x_st + dx * 0, y_st + dy * 17);
+            button18.Location = new Point(x_st + dx * 0, y_st + dy * 18);
+            button19.Location = new Point(x_st + dx * 0, y_st + dy * 19);
 
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button17.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button18.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button20.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button21.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button22.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button23.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button24.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            button25.Location = new Point(x_st + dx * 1, y_st + dy * 10);
-            button26.Location = new Point(x_st + dx * 1, y_st + dy * 11);
-            button27.Location = new Point(x_st + dx * 1, y_st + dy * 12);
-            button28.Location = new Point(x_st + dx * 1, y_st + dy * 13);
-            button29.Location = new Point(x_st + dx * 1, y_st + dy * 14);
+            button20.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button25.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button26.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button28.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button29.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button30.Location = new Point(x_st + dx * 1, y_st + dy * 10);
+            button31.Location = new Point(x_st + dx * 1, y_st + dy * 11);
+            button32.Location = new Point(x_st + dx * 1, y_st + dy * 12);
+            button33.Location = new Point(x_st + dx * 1, y_st + dy * 13);
+            button34.Location = new Point(x_st + dx * 1, y_st + dy * 14);
+            button35.Location = new Point(x_st + dx * 1, y_st + dy * 15);
+            button36.Location = new Point(x_st + dx * 1, y_st + dy * 16);
+            button37.Location = new Point(x_st + dx * 1, y_st + dy * 17);
+            button38.Location = new Point(x_st + dx * 1, y_st + dy * 18);
+            button39.Location = new Point(x_st + dx * 1, y_st + dy * 19);
 
-            button30.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button31.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button32.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button33.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button34.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button35.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button36.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button37.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button38.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button39.Location = new Point(x_st + dx * 2, y_st + dy * 9);
-            button40.Location = new Point(x_st + dx * 2, y_st + dy * 10);
-            button41.Location = new Point(x_st + dx * 2, y_st + dy * 11);
-            button42.Location = new Point(x_st + dx * 2, y_st + dy * 12);
-            button43.Location = new Point(x_st + dx * 2, y_st + dy * 13);
-            button44.Location = new Point(x_st + dx * 2, y_st + dy * 14);
-            groupBox5.Location = new Point(x_st + dx * 2, y_st + dy * 15);
+            button40.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button41.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button42.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button43.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button44.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button45.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button46.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button47.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button48.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button49.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            button50.Location = new Point(x_st + dx * 2, y_st + dy * 10);
+            button51.Location = new Point(x_st + dx * 2, y_st + dy * 11);
+            comboBox1.Location = new Point(x_st + dx * 2, y_st + dy * 12);
+            //button52.Location = new Point(x_st + dx * 2, y_st + dy * 12);
+            button53.Location = new Point(x_st + dx * 2, y_st + dy * 13);
+            button54.Location = new Point(x_st + dx * 2, y_st + dy * 14);
+            button55.Location = new Point(x_st + dx * 2, y_st + dy * 15);
+            button56.Location = new Point(x_st + dx * 2, y_st + dy * 16);
+            button57.Location = new Point(x_st + dx * 2, y_st + dy * 17);
+            button58.Location = new Point(x_st + dx * 2, y_st + dy * 18);
+            button59.Location = new Point(x_st + dx * 2, y_st + dy * 19);
 
-            button45.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            button46.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            button47.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            button48.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            button49.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            button50.Location = new Point(x_st + dx * 3, y_st + dy * 5);
-            button51.Location = new Point(x_st + dx * 3, y_st + dy * 6);
-            comboBox1.Location = new Point(x_st + dx * 3, y_st + dy * 7);
-            //button52.Location = new Point(x_st + dx * 3, y_st + dy * 7);
-            button53.Location = new Point(x_st + dx * 3, y_st + dy * 8);
-            button54.Location = new Point(x_st + dx * 3, y_st + dy * 9);
-            button55.Location = new Point(x_st + dx * 3, y_st + dy * 10);
-            button56.Location = new Point(x_st + dx * 3, y_st + dy * 11);
-            button57.Location = new Point(x_st + dx * 3, y_st + dy * 12);
-            button58.Location = new Point(x_st + dx * 3, y_st + dy * 13);
-            button59.Location = new Point(x_st + dx * 3, y_st + dy * 14);
+            button60.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button61.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button62.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button63.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button64.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button65.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button66.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            button67.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            button68.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+            button69.Location = new Point(x_st + dx * 3, y_st + dy * 9);
+            button70.Location = new Point(x_st + dx * 3, y_st + dy * 10);
+            button71.Location = new Point(x_st + dx * 3, y_st + dy * 11);
+            button72.Location = new Point(x_st + dx * 3, y_st + dy * 12);
+            button73.Location = new Point(x_st + dx * 3, y_st + dy * 13);
+            button74.Location = new Point(x_st + dx * 3, y_st + dy * 14);
+            button75.Location = new Point(x_st + dx * 3, y_st + dy * 15);
+            button76.Location = new Point(x_st + dx * 3, y_st + dy * 16);
+            button77.Location = new Point(x_st + dx * 3, y_st + dy * 17);
+            button78.Location = new Point(x_st + dx * 3, y_st + dy * 18);
+            button79.Location = new Point(x_st + dx * 3, y_st + dy * 19);
 
+            groupBox5.Location = new Point(x_st + dx * 4, y_st + dy * 6);
             groupBox6.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            groupBox7.Location = new Point(x_st + dx * 6-70, y_st + dy * 0);
+            groupBox8.Location = new Point(x_st + dx * 4, y_st + dy * 8 + 30);
+            groupBox7.Location = new Point(x_st + dx * 4, y_st + dy * 12 - 20);
+            groupBox9.Location = new Point(x_st + dx * 4 + 145, y_st + dy * 12 - 20);
+            groupBox10.Location = new Point(x_st + dx * 4, y_st + dy * 16 + 45);
 
-            //button
-            x_st = 10;
-            y_st = 10;
-            dx = 170;
-            dy = 55;
+            groupBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            groupBox2.Location = new Point(x_st + dx * 6, y_st + dy * 5);
+            groupBox4.Location = new Point(x_st + dx * 6, y_st + dy * 10);
+            groupBox3.Location = new Point(x_st + dx * 6, y_st + dy * 12);
 
-            textBox2.Location = new Point(x_st + dx * 4, y_st + dy * 9);
-            bt1.Location = new Point(x_st + dx * 5, y_st + dy * 9);
-            textBox1.Location = new Point(x_st + dx * 4, y_st + dy * 10);
-            bt0.Location = new Point(x_st + dx * 5, y_st + dy * 10);
-            dateTimePicker1.Location = new Point(x_st + dx * 4, y_st + dy * 11);
-            bt2.Location = new Point(x_st + dx * 5, y_st + dy * 11);
-            bt4.Location = new Point(x_st + dx * 5, y_st + dy * 12);
+            textBox2.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            textBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 40);
+            bt0.Location = new Point(x_st + dx * 1, y_st + dy * 0 + 40);
+            dateTimePicker1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 80);
+            bt2.Location = new Point(x_st + dx * 1, y_st + dy * 0 + 80);
 
-            label1.Location = new Point(x_st + dx * 4, y_st + dy * 15);
-            label2.Location = new Point(x_st + dx * 5 + 100, y_st + dy * 15);
-            label5.Location = new Point(x_st + dx * 6 + 200, y_st + dy * 15);
+            label1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 20);
+            label2.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 60);
+            label3.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 100);
+            label4.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 140);
+            label5.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 180);
 
-            label3.Location = new Point(x_st + dx * 4, y_st + dy * 16);
-            label4.Location = new Point(x_st + dx * 5 + 100, y_st + dy * 16);
-
-            richTextBox1.Size = new Size(520, 800);
-            //richTextBox1.Location = new Point(x_st + dx * 0, y_st + dy * 13);
+            richTextBox1.Size = new Size(520, 1040);
+            richTextBox1.Location = new Point(x_st + dx * 8 - 60, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //最大化螢幕
@@ -485,6 +505,26 @@ namespace vcs_test_all_01_DateTime
 
         private void button12_Click(object sender, EventArgs e)
         {
+            DateTime value;
+            richTextBox1.Text += "日期 : " + textBox1.Text + "\n";
+            try    // Parse the date and display it in ordinal format.
+            {
+                value = DateTime.Parse(textBox1.Text);
+                richTextBox1.Text += "日期轉序數 : " + value.ToOrdinal() + "\n";
+            }
+            catch
+            {
+            }
+
+            richTextBox1.Text += "日期 : " + dateTimePicker1.Text + "\n";
+            try    // Parse the date and display it in ordinal format.
+            {
+                value = DateTime.Parse(dateTimePicker1.Text);
+                richTextBox1.Text += "日期轉序數 : " + value.ToOrdinal() + "\n";
+            }
+            catch
+            {
+            }
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -724,7 +764,6 @@ namespace vcs_test_all_01_DateTime
             label2.Text = DateTime.Now.ToString("yyyy/MM/dd", cuinfo);
             label3.Text = DateTime.Now.ToString("HH:mm:ss");
             label4.Text = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-
 
             if (flag_timer_counter_down_enable == 1)
             {
@@ -1683,30 +1722,6 @@ namespace vcs_test_all_01_DateTime
             }
         }
 
-        private void bt4_Click(object sender, EventArgs e)
-        {
-            DateTime value;
-            richTextBox1.Text += "日期 : " + textBox1.Text + "\n";
-            try    // Parse the date and display it in ordinal format.
-            {
-                value = DateTime.Parse(textBox1.Text);
-                richTextBox1.Text += "日期轉序數 : " + value.ToOrdinal() + "\n";
-            }
-            catch
-            {
-            }
-
-            richTextBox1.Text += "日期 : " + dateTimePicker1.Text + "\n";
-            try    // Parse the date and display it in ordinal format.
-            {
-                value = DateTime.Parse(dateTimePicker1.Text);
-                richTextBox1.Text += "日期轉序數 : " + value.ToOrdinal() + "\n";
-            }
-            catch
-            {
-            }
-        }
-
         private void button49_Click(object sender, EventArgs e)
         {
             //一段時間以後
@@ -2078,6 +2093,106 @@ DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元999
         }
 
         private void button59_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button60_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button61_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button62_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button63_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button64_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button65_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button66_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button67_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button68_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button69_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button70_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button71_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button72_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button73_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button74_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button75_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button76_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button77_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button78_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button79_Click(object sender, EventArgs e)
         {
 
         }
@@ -3429,4 +3544,3 @@ DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元999
     #endregion
 
 }
-

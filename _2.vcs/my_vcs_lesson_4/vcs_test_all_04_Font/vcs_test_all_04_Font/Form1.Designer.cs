@@ -406,7 +406,7 @@
             this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox3.Size = new System.Drawing.Size(103, 316);
+            this.groupBox3.Size = new System.Drawing.Size(103, 658);
             this.groupBox3.TabIndex = 53;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Properties";
@@ -485,7 +485,7 @@
             this.groupBox4.Controls.Add(this.pictureBox1);
             this.groupBox4.Location = new System.Drawing.Point(1333, 12);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(402, 675);
+            this.groupBox4.Size = new System.Drawing.Size(472, 675);
             this.groupBox4.TabIndex = 55;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "選擇並顯示字型";
@@ -503,7 +503,7 @@
             // 
             this.pictureBox1.Location = new System.Drawing.Point(6, 57);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(390, 612);
+            this.pictureBox1.Size = new System.Drawing.Size(460, 612);
             this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
@@ -554,7 +554,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1747, 699);
+            this.ClientSize = new System.Drawing.Size(1904, 1041);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.button15);
             this.Controls.Add(this.cb_chinese);

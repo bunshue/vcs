@@ -36,6 +36,12 @@ namespace vcs_test_all_04_Font
             SizeLabelFont(label5);
 
             search_installed_font();
+
+            InstalledFontCollection fonts = new InstalledFontCollection();
+            var font_names =
+                from family in fonts.Families
+                select family.Name;
+            comboBox1.DataSource = font_names.ToArray();
         }
 
         void show_item_location()
@@ -382,12 +388,61 @@ namespace vcs_test_all_04_Font
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
+            this.pictureBox1.Invalidate();
+        }
 
+        private void DrawSamples(Graphics gr, TextRenderingHint hint, int x, ref int y)
+        {
+            gr.TextRenderingHint = TextRenderingHint.AntiAlias;
+            gr.DrawString(hint.ToString(), this.Font, Brushes.Blue, x - 10, y);
+            y += 20;
+            gr.TextRenderingHint = hint;
+            for (int font_size = 6; font_size <= 16; font_size += 2)
+            {
+                DrawSample(gr, font_size, x, ref y);
+            }
+        }
+
+        // Draw a sample of the indicated text.
+        private void DrawSample(Graphics gr, float font_size, int x, ref int y)
+        {
+            try
+            {
+                using (Font font = new Font(comboBox1.Text, font_size))
+                {
+                    string text = comboBox1.Text + ", " + font_size.ToString();
+                    gr.DrawString(text, font, Brushes.Black, x, y);
+                    y = (int)(y + font_size) + 10;
+                }
+            }
+            catch
+            {
+            }
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
+            e.Graphics.Clear(this.BackColor);
 
+            int x = 20;
+            int y = comboBox1.Bottom + 5;
+            DrawSamples(e.Graphics, TextRenderingHint.AntiAlias, x, ref y);
+
+            y += 10;
+            DrawSamples(e.Graphics, TextRenderingHint.AntiAliasGridFit, x, ref y);
+
+            y += 10;
+            DrawSamples(e.Graphics, TextRenderingHint.ClearTypeGridFit, x, ref y);
+
+            x += 250;
+            y = comboBox1.Bottom + 5;
+            DrawSamples(e.Graphics, TextRenderingHint.SingleBitPerPixel, x, ref y);
+
+            y += 10;
+            DrawSamples(e.Graphics, TextRenderingHint.SingleBitPerPixelGridFit, x, ref y);
+
+            y += 10;
+            DrawSamples(e.Graphics, TextRenderingHint.SystemDefault, x, ref y);
         }
 
         private void button14_Click(object sender, EventArgs e)
