@@ -78,9 +78,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(1182, 350);
+            this.richTextBox1.Location = new System.Drawing.Point(1135, 202);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(206, 298);
+            this.richTextBox1.Size = new System.Drawing.Size(206, 128);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -113,7 +113,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(100, 40);
             this.button10.TabIndex = 10;
-            this.button10.Text = "人年表_宋";
+            this.button10.Text = "人年表_五代兩宋";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -251,7 +251,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(1325, 391);
+            this.bt_clear.Location = new System.Drawing.Point(1247, 275);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(61, 35);
             this.bt_clear.TabIndex = 25;

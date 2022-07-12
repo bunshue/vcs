@@ -112,7 +112,8 @@ namespace vcs_YearTable
             bt_info.Location = new Point(x_st + dx * 7, y_st + dy * 2);
             bt_save.Location = new Point(x_st + dx * 8, y_st + dy * 2);
 
-            richTextBox1.Location = new Point(x_st + dx * 10, y_st - dy * 3);
+            richTextBox1.Location = new Point(x_st + dx * 10, y_st + dy * 0);
+            richTextBox1.Size = new Size(700, 170);
 
             //控件位置
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -308,7 +309,7 @@ namespace vcs_YearTable
         private const int EMPEROR_DATA_TANG = 0x01;     //emperor data 1, Tang
         private const int EMPEROR_DATA_CHING = 0x02;    //emperor data 2, Ching
 
-        private const int PERSON_DATA_1 = 0x11;   //person data 1, Sung
+        private const int PERSON_DATA_1 = 0x11;   //person data 1, 五代兩宋
         private const int PERSON_DATA_2 = 0x12;   //person data 2, Ming
         private const int PERSON_DATA_3 = 0x13;   //person data 3, Ching
         private const int PERSON_DATA_GREAT = 0x20;   //person data, 有名的人
@@ -326,6 +327,10 @@ namespace vcs_YearTable
             if (index == PERSON_DATA_1)
             {
                 person = new string[,] { 
+                { "宋太祖", "927年3月21日", "976年11月14日"},
+                { "宋太宗", "939年11月20日", "997年5月8日"},
+                { "李煜", "937年8月15日", "978年8月15日"},
+                { "媽祖", "960年3月23日", "987年9月9日"},
                 { "寇準", "961年", "1023年10月24日"},
                 { "范仲淹", "989年10月1日", "1052年6月19日"},
                 { "包拯", "999年3月5日", "1062年7月3日"},

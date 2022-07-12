@@ -64,8 +64,18 @@ namespace vcs_ImageProcessingB
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
+            pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -684,6 +694,55 @@ new Point(100, 400)};// destination for lower-left point of original
             return dest;
         }
 
+        private void button20_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
     //內存法
@@ -988,8 +1047,14 @@ new Point(100, 400)};// destination for lower-left point of original
 
         public static double GetSeconds()
         {
-            if (endDate == DateTime.MinValue) return 0.0;
-            else return Span.TotalSeconds;
+            if (endDate == DateTime.MinValue)
+            {
+                return 0.0;
+            }
+            else
+            {
+                return Span.TotalSeconds;
+            }
         }
     }
 }
