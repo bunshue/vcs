@@ -19,7 +19,7 @@ namespace vcs_SaveWebpage_Image
         int timer_display_show_main_mesg_count = 0;
         int timer_display_show_main_mesg_count_target = 0;
 
-        string foldername = @"C:\dddddddddd\_網頁存圖";
+        string foldername = @"C:\dddddddddd\_存圖";
 
         public Form1()
         {
@@ -36,6 +36,9 @@ namespace vcs_SaveWebpage_Image
 
             int screenWidth = Screen.PrimaryScreen.Bounds.Width;
             int screenHeight = Screen.PrimaryScreen.Bounds.Height;
+
+            bt_open_folder.BackgroundImage = Properties.Resources.folder_open;
+            bt_open_folder.BackgroundImageLayout = ImageLayout.Zoom;
 
             this.Location = new System.Drawing.Point(screenWidth - this.Width - 50, screenHeight - this.Height - 400);
             this.BackColor = Color.Gold;
@@ -63,7 +66,15 @@ namespace vcs_SaveWebpage_Image
 
                 //pictureBox_clipboard.Image = img;
 
-                String filename = foldername + "\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+                string filename = string.Empty;
+                if (rb_filetype1.Checked == true)
+                {
+                    filename = foldername + "\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+                }
+                else
+                {
+                    filename = foldername + "\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+                }
 
                 Bitmap bitmap1 = (Bitmap)img;
 
@@ -71,9 +82,14 @@ namespace vcs_SaveWebpage_Image
                 {
                     try
                     {
-                        //bitmap1.Save(@file1, ImageFormat.Jpeg);
-                        bitmap1.Save(filename, ImageFormat.Bmp);
-                        //bitmap1.Save(@file3, ImageFormat.Png);
+                        if (rb_filetype1.Checked == true)
+                        {
+                            bitmap1.Save(filename, ImageFormat.Jpeg);
+                        }
+                        else
+                        {
+                            bitmap1.Save(filename, ImageFormat.Bmp);
+                        }
 
                         //richTextBox1.Text += "存檔成功\n";
                         //richTextBox1.Text += "已存檔 : " + filename + "\n";

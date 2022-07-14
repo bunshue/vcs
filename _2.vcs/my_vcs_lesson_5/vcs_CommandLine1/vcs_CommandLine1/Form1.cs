@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
 using System.Diagnostics;       //for Process
 
 namespace vcs_CommandLine1
@@ -20,6 +21,8 @@ namespace vcs_CommandLine1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            richTextBox2.KeyUp += new KeyEventHandler(richTextBox2_KeyUp);
+
             show_item_location();
         }
 
@@ -218,17 +221,16 @@ namespace vcs_CommandLine1
         //1. 同步模式
         public void exec_sync(string exePath, string parameters)
         {
-            System.Diagnostics.ProcessStartInfo psi =
-            new System.Diagnostics.ProcessStartInfo();
+            ProcessStartInfo psi = new ProcessStartInfo();
             psi.RedirectStandardOutput = true;
             psi.RedirectStandardError = true;
-            psi.WindowStyle = System.Diagnostics.ProcessWindowStyle.Hidden;
+            psi.WindowStyle = ProcessWindowStyle.Hidden;
             psi.UseShellExecute = false;
             psi.FileName = exePath;
             psi.Arguments = parameters;
-            System.Diagnostics.Process process = System.Diagnostics.Process.Start(psi);
-            System.IO.StreamReader outputStreamReader = process.StandardOutput;
-            System.IO.StreamReader errStreamReader = process.StandardError;
+            Process process = Process.Start(psi);
+            StreamReader outputStreamReader = process.StandardOutput;
+            StreamReader errStreamReader = process.StandardError;
             process.WaitForExit(2000);
             if (process.HasExited)
             {
@@ -242,7 +244,7 @@ namespace vcs_CommandLine1
         //2.異步模式
         public void exec_async(string exePath, string parameters)
         {
-            Process process = new System.Diagnostics.Process();
+            Process process = new Process();
             process.StartInfo.FileName = exePath;
             process.StartInfo.Arguments = parameters;
             process.StartInfo.UseShellExecute = false;
@@ -283,7 +285,11 @@ namespace vcs_CommandLine1
             if (e.KeyCode == Keys.Enter)
             {
                 int count = richTextBox2.Lines.Length;
-                if (count == 0) return;
+                if (count == 0)
+                {
+                    return;
+                }
+
                 while (count > 0 && (string.IsNullOrEmpty(richTextBox2.Lines[count - 1])))
                 {
                     count--;
@@ -298,8 +304,10 @@ namespace vcs_CommandLine1
         public void ExecuteCmd(string cmd)
         {
             if (cmd.ToLower() == "cmd")
+            {
                 return;
-            System.Diagnostics.Process p = new System.Diagnostics.Process();
+            }
+            Process p = new Process();
             p.StartInfo.FileName = "cmd.exe";
             p.StartInfo.UseShellExecute = false;
             p.StartInfo.RedirectStandardInput = true;

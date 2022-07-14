@@ -152,7 +152,6 @@
             this.richTextBox2.Size = new System.Drawing.Size(490, 577);
             this.richTextBox2.TabIndex = 32;
             this.richTextBox2.Text = "";
-            this.richTextBox2.KeyUp += new System.Windows.Forms.KeyEventHandler(this.richTextBox2_KeyUp);
             // 
             // label1
             // 

@@ -1,5 +1,16 @@
 
 
+pictureCrop 標準版
+
+2006/03/11
+		相距 XXX 天
+2022/07/07
+
+
+
+
+
+
 WebClient不能處理特定於任何協議的任何特性，例如Cookie等。如果需要使用這些特性，需要使用.net中的HttpWebRequest類。
 
 
