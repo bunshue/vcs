@@ -211,7 +211,7 @@ namespace vcs_ImageProcessing4
             return null;
         }
 
-        //重设大小
+        //重設大小
         public Bitmap ResizeImage(Bitmap bmp, Size size)
         {
             Bitmap newbmp = new Bitmap(size.Width, size.Height);
@@ -283,7 +283,7 @@ namespace vcs_ImageProcessing4
                             Result = r > g ? r : g;
                             Result = Result > b ? Result : b;
                             break;
-                        case 2://加权平均值法
+                        case 2://加權平均值法
                             Result = ((int)(0.3 * r) + (int)(0.59 * g) + (int)(0.11 * b));
                             break;
                     }
@@ -373,7 +373,7 @@ namespace vcs_ImageProcessing4
                     r /= 16;
                     g /= 16;
                     b /= 16;
-                    //处理颜色值溢出
+                    //處理顏色值溢出
                     r = r > 255 ? 255 : r;
                     r = r < 0 ? 0 : r;
                     g = g > 255 ? 255 : g;
@@ -388,7 +388,7 @@ namespace vcs_ImageProcessing4
             return newbmp;
         }
 
-        //锐化
+        //銳化
         public Bitmap SharpenImage(Bitmap bmp)
         {
             int H = bmp.Height;
@@ -419,7 +419,7 @@ namespace vcs_ImageProcessing4
                             index++;
                         }
                     }
-                    //处理颜色值溢出
+                    //處理顏色值溢出
                     r = r > 255 ? 255 : r;
                     r = r < 0 ? 0 : r;
                     g = g > 255 ? 255 : g;
@@ -434,7 +434,7 @@ namespace vcs_ImageProcessing4
             return newbmp;
         }
 
-        //雾化
+        //霧化
         public Bitmap AtomizationImage(Bitmap bmp)
         {
             int H = bmp.Height;
@@ -453,7 +453,7 @@ namespace vcs_ImageProcessing4
                 for (int y = 1; y < H - 1; y++)
                 {
                     int k = MyRandom.Next(123456);
-                    //像素块大小
+                    //像素塊大小
                     int dx = x + k % 19;
                     int dy = y + k % 19;
                     if (dx >= W)
@@ -588,7 +588,7 @@ new Point(100, 400)};// destination for lower-left point of original
             //圖片的扭曲（Twist）作法
 
             //從pictureBox取得Bitmap
-            Bitmap bitmap1 = (Bitmap)pictureBox1.Image.Clone();   //用pictureBox背景的复本实例化Bitmap类
+            Bitmap bitmap1 = (Bitmap)pictureBox1.Image.Clone();   //用pictureBox背景的復本實例化Bitmap類
 
             //參數設定
             System.Random oRandom = new System.Random();
@@ -950,7 +950,7 @@ new Point(100, 400)};// destination for lower-left point of original
                 unsafe
                 {
                     Iptr = bitmapData.Scan0;
-                    //二维图像循环
+                    //二維圖像循環
 
                 }
             }
@@ -1058,4 +1058,3 @@ new Point(100, 400)};// destination for lower-left point of original
         }
     }
 }
-

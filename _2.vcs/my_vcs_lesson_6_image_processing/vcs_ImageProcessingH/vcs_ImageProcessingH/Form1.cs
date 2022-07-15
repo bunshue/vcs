@@ -27,6 +27,19 @@ namespace vcs_ImageProcessingH
             show_item_location();
 
             pictureBox0.Image = Image.FromFile(filename);
+
+            scrRed.Scroll += new ScrollEventHandler(ChangeColorTone_Scroll);
+            scrGreen.Scroll += new ScrollEventHandler(ChangeColorTone_Scroll);
+            scrBlue.Scroll += new ScrollEventHandler(ChangeColorTone_Scroll);
+            scrBright.Scroll += new ScrollEventHandler(ChangeColorTone_Scroll);
+
+            // Display the image converted to sepia tone.
+            scrRed.Value = 128;
+            scrGreen.Value = 128;
+            scrBlue.Value = 128;
+            scrBright.Value = 128;
+            picColor.BackColor = Color.FromArgb(scrRed.Value, scrGreen.Value, scrBlue.Value);
+            ColorPicture();
         }
 
         void show_item_location()
@@ -55,8 +68,8 @@ namespace vcs_ImageProcessingH
             int H = 400;
             x_st = 12;
             y_st = 50;
-            dx = W+20;
-            dy = H+50;
+            dx = W + 20;
+            dy = H + 50;
             pictureBox0.Size = new Size(W, H);
             pictureBox1.Size = new Size(W, H);
             pictureBox2.Size = new Size(W, H);
@@ -69,25 +82,24 @@ namespace vcs_ImageProcessingH
             pictureBox3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             pictureBox4.Location = new Point(x_st + dx * 4, y_st + dy * 0);
 
-
             label0.Location = new Point(x_st + dx * 0, y_st + dy * 0 - 25);
             label1.Location = new Point(x_st + dx * 1, y_st + dy * 0 - 25);
             label2.Location = new Point(x_st + dx * 2, y_st + dy * 0 - 25);
             label3.Location = new Point(x_st + dx * 3, y_st + dy * 0 - 25);
             label4.Location = new Point(x_st + dx * 4, y_st + dy * 0 - 25);
 
-
             label0.Text = "原圖";
             label2.Text = "";
             label3.Text = "";
             label4.Text = "";
+
+            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
             bt_exit_setup();
         }
-
 
         void bt_exit_setup()
         {
@@ -274,10 +286,60 @@ namespace vcs_ImageProcessingH
                 }
             }
         }
-
         //二值化對比 SP
 
 
+        // Color the picture.
+        private void ColorPicture()
+        {
+            picToned.Image = ToColorTone(picOriginal.Image, picColor.BackColor);
+        }
 
+        // Convert an image to sepia tone.
+        private Bitmap ToColorTone(Image image, Color color)
+        {
+            float scale = scrBright.Value / 128f;
+
+            float r = color.R / 255f * scale;
+            float g = color.G / 255f * scale;
+            float b = color.B / 255f * scale;
+
+            // Make the ColorMatrix.
+            ColorMatrix cm = new ColorMatrix(new float[][]
+            {
+                new float[] {r, 0, 0, 0, 0},
+                new float[] {0, g, 0, 0, 0},
+                new float[] {0, 0, b, 0, 0},
+                new float[] {0, 0, 0, 1, 0},
+                new float[] {0, 0, 0, 0, 1}
+            });
+            ImageAttributes attributes = new ImageAttributes();
+            attributes.SetColorMatrix(cm);
+
+            // Draw the image onto the new bitmap while applying the new ColorMatrix.
+            Point[] points =
+            {
+                new Point(0, 0),
+                new Point(image.Width - 1, 0),
+                new Point(0, image.Height - 1),
+            };
+            Rectangle rect = new Rectangle(0, 0, image.Width, image.Height);
+
+            // Make the result bitmap.
+            Bitmap bm = new Bitmap(image.Width, image.Height);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.DrawImage(image, points, rect, GraphicsUnit.Pixel, attributes);
+            }
+
+            // Return the result.
+            return bm;
+        }
+
+        private void ChangeColorTone_Scroll(object sender, ScrollEventArgs e)
+        {
+            picColor.BackColor = Color.FromArgb(scrRed.Value, scrGreen.Value, scrBlue.Value);
+            ColorPicture();
+        }
     }
 }

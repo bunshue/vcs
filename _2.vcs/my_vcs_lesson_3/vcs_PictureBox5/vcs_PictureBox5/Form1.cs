@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_PictureBox1
+namespace vcs_PictureBox5
 {
     public partial class Form1 : Form
     {
@@ -22,7 +22,7 @@ namespace vcs_PictureBox1
             Image loadedImage = Image.FromFile(filename);
             pictureBox1.Image = loadedImage;
 
-
+            //拉動表單大小連帶改變pictureBox大小
 
             //圖片框PictureBox滿框(Zoom)
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;

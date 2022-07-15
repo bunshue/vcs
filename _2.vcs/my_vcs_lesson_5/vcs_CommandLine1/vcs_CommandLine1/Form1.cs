@@ -301,24 +301,46 @@ namespace vcs_CommandLine1
             }
         }
 
+        /// <summary>
+        /// 執行Cmd命令
+        /// </summary>
         public void ExecuteCmd(string cmd)
         {
             if (cmd.ToLower() == "cmd")
             {
                 return;
             }
+
+            //process用於調用外部程序
             Process p = new Process();
-            p.StartInfo.FileName = "cmd.exe";
-            p.StartInfo.UseShellExecute = false;
-            p.StartInfo.RedirectStandardInput = true;
-            p.StartInfo.RedirectStandardOutput = true;
-            p.StartInfo.RedirectStandardError = true;
-            p.StartInfo.CreateNoWindow = true;
-            p.Start();                                  //設置自動刷新緩沖並更新   
-            p.StandardInput.AutoFlush = true;           //寫入命令     
+            p.StartInfo.FileName = "cmd.exe";   //呼叫程式 cmd.exe
+            p.StartInfo.UseShellExecute = false;    //是否指定操作系統外殼進程啟動程序
+
+            //可能接受來自調用程序的輸入信息
+
+            p.StartInfo.RedirectStandardInput = true;   //重定向標准輸入
+            p.StartInfo.RedirectStandardOutput = true;  //重定向標准輸出
+            p.StartInfo.RedirectStandardError = true;   //重定向錯誤輸出
+            p.StartInfo.CreateNoWindow = true;          //不顯示程序窗口
+            p.Start();                                  //設置自動刷新緩沖並更新   //啟動程序
+
+            //System.Threading.Thread.Sleep(1000);        //等一秒
+
+            p.StandardInput.AutoFlush = true;           //輸入命令
             p.StandardInput.WriteLine(cmd);
-            p.StandardInput.WriteLine("exit");          //等待結束  
-            richTextBox2.AppendText(p.StandardOutput.ReadToEnd());
+            p.StandardInput.WriteLine("exit");          //等待結束  //一定要關閉
+
+            //same
+            //richTextBox2.AppendText(p.StandardOutput.ReadToEnd());  //直接顯示出來
+
+            StreamReader reader = p.StandardOutput;//截取輸出流
+            string output = reader.ReadLine();//每次讀取一行
+
+            while (!reader.EndOfStream)
+            {
+                richTextBox2.Text += output + "\n";
+                output = reader.ReadLine();
+            }
             p.WaitForExit();
             p.Close();
         }

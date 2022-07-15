@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Drawing.Imaging;
+using System.Drawing.Drawing2D; //for InterpolationMode
 
 namespace vcs_Draw5_Image
 {
@@ -35,7 +36,7 @@ namespace vcs_Draw5_Image
 
             //指定畫布大小
             pictureBox1.Width = 710;
-            pictureBox1.Height = 700;
+            pictureBox1.Height = 900;
             bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
 
             g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
@@ -427,7 +428,41 @@ namespace vcs_Draw5_Image
 
         private void button8_Click(object sender, EventArgs e)
         {
+            //用DrawImage畫出不同圖片大小的圖
 
+            pictureBox_old.Image = Image.FromFile(filename); //載入圖檔，由檔案
+
+            int W = pictureBox_old.Image.Width;
+            int H = pictureBox_old.Image.Height;
+            float scale;
+            int w = 0;
+            int h = 0;
+            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.InterpolationMode = InterpolationMode.NearestNeighbor;   // No smoothing.
+
+            Rectangle source = new Rectangle(0, 0, W, H);
+            Point[] dest =
+                {
+                    new Point(0, 0),
+                    new Point(w, 0),
+                    new Point(0, h),
+                };
+
+            //改變圖形大小
+            for (scale = 2.00f; scale > 0.50f; scale -= 0.33f)
+            {
+                w = (int)(W * scale);
+                h = (int)(H * scale);
+
+                dest[0] = new Point(0, 0);
+                dest[1] = new Point(w, 0);
+                dest[2] = new Point(0, h);
+                g.DrawImage(pictureBox_old.Image, dest, source, GraphicsUnit.Pixel);
+            }
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button9_Click(object sender, EventArgs e)

@@ -48,6 +48,17 @@ namespace vcs_WMI__new
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
@@ -215,8 +226,9 @@ namespace vcs_WMI__new
                     richTextBox1.Text += "制造商[" + i.ToString() + "] : " + 制造商[i].ToString() + "\n";
                     richTextBox1.Text += "序列號[" + i.ToString() + "] : " + 序列號[i].ToString() + "\n";
                 }
-                catch (System.Exception er)
+                catch (System.Exception ex)
                 {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
                 }
                 i++;
             }
@@ -240,33 +252,170 @@ namespace vcs_WMI__new
                     space = (System.UInt64)(disk["FreeSpace"]);
             }
             return space;
-        }  
+        }
 
 
         private void button5_Click(object sender, EventArgs e)
         {
-
+            //取得本機MAC地址
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("select * from Win32_NetworkAdapterConfiguration");
+            foreach (ManagementObject mo in mos.Get())
+            {
+                if (Convert.ToBoolean(mo["ipEnabled"]) == true)
+                {
+                    richTextBox1.Text += "取得本機MAC地址 : " + Convert.ToString(mo["MACAddress"]) + "\n";
+                }
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //獲得硬盤參數
 
+        }
+
+        //C# 獲得硬盤參數程序代碼如下：
+        public void HardDisk(out string[] 制造商, out string[] 型號, out string[] 序列號)
+        {
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
+            制造商 = new string[searcher.Get().Count];
+            型號 = new string[searcher.Get().Count];
+            序列號 = new string[searcher.Get().Count];
+            int i = 0;
+            foreach (ManagementObject share in searcher.Get())
+            {
+                try
+                {
+                    制造商[i] = share.GetPropertyValue("Manufacturer").ToString();
+                    型號[i] = share.GetPropertyValue("Model").ToString();
+                    序列號[i] = share.GetPropertyValue("Signature").ToString();
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
+                i++;
+            }
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //獲得網卡參數
 
         }
 
+        //C# 獲得網卡參數程序代碼如下：
+        public void NetworkAdapter(out string[] 制造商, out string[] MAC地址)
+        {
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter");
+            制造商 = new string[searcher.Get().Count];
+            MAC地址 = new string[searcher.Get().Count];
+            int i = 0;
+            foreach (ManagementObject share in searcher.Get())
+            {
+                try
+                {
+                    制造商[i] = share.GetPropertyValue("Manufacturer").ToString();
+                    MAC地址[i] = share.GetPropertyValue("MACAddress").ToString();
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
+                i++;
+            }
+        }
+
+
         private void button8_Click(object sender, EventArgs e)
         {
+            //獲得主板序列號
 
+        }
+
+        //C# 獲得主板序列號程序代碼如下：
+        public static void MainboardSerialNumber(out string[] 序列號)
+        {
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select * From Win32_BIOS");
+            序列號 = new string[searcher.Get().Count];
+            int i = 0;
+            foreach (ManagementObject share in searcher.Get())
+            {
+                序列號[i] = share.GetPropertyValue("SerialNumber").ToString();
+                i++;
+            }
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //獲得主板參數
 
         }
 
+        //C# 獲得主板參數程序代碼如下：
+        public static void Mainboard(out string[] 制造商, out string[] 型號)
+        {
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
+            制造商 = new string[searcher.Get().Count];
+            型號 = new string[searcher.Get().Count];
+            int i = 0;
+            foreach (ManagementObject share in searcher.Get())
+            {
+                制造商[i] = share.GetPropertyValue("Manufacturer").ToString();
+                型號[i] = share.GetPropertyValue("Product").ToString();
+                i++;
+            }
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
+

@@ -168,7 +168,6 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(170, 70);
             this.button3.TabIndex = 87;
-            this.button3.Text = "測試移除邊緣";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -263,7 +262,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(170, 70);
             this.button14.TabIndex = 114;
-            this.button14.Text = "表單預設參數";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 

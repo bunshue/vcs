@@ -153,7 +153,7 @@
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(771, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(710, 700);
+            this.pictureBox1.Size = new System.Drawing.Size(710, 586);
             this.pictureBox1.TabIndex = 12;
             this.pictureBox1.TabStop = false;
             // 
@@ -184,6 +184,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(180, 55);
             this.button8.TabIndex = 23;
+            this.button8.Text = "用DrawImage畫出不同圖片大小的圖";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -261,7 +262,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1493, 923);
+            this.ClientSize = new System.Drawing.Size(1504, 941);
             this.Controls.Add(this.button15);
             this.Controls.Add(this.button14);
             this.Controls.Add(this.button13);

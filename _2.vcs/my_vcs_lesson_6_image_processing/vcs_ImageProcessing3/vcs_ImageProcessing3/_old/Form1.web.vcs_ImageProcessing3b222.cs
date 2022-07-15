@@ -8,8 +8,9 @@ using System.Text;
 using System.Windows.Forms;
 
 //C#圖像處理(各種旋轉、改變大小、柔化、銳化、霧化、底片、浮雕、黑白、濾鏡效果)
+//http://www.aspphp.online/bianchen/cyuyan/gycyy/201701/81415.html
 
-namespace vcs_ImageProcessingL
+namespace vcs_ImageProcessing3b
 {
     public partial class Form1 : Form
     {
@@ -89,24 +90,24 @@ namespace vcs_ImageProcessingL
             //以底片效果顯示圖像
             try
             {
-                int Height = this.pictureBox1.Image.Height;
-                int Width = this.pictureBox1.Image.Width;
-                Bitmap newbitmap = new Bitmap(Width, Height);
-                Bitmap oldbitmap = (Bitmap)this.pictureBox1.Image;
+                int W = this.pictureBox1.Image.Width;
+                int H = this.pictureBox1.Image.Height;
+                Bitmap bitmap1 = (Bitmap)this.pictureBox1.Image;
+                Bitmap bitmap2 = new Bitmap(W, H);
                 Color pixel;
-                for (int x = 1; x < Width; x++)
+                for (int x = 1; x < W; x++)
                 {
-                    for (int y = 1; y < Height; y++)
+                    for (int y = 1; y < H; y++)
                     {
                         int r, g, b;
-                        pixel = oldbitmap.GetPixel(x, y);
+                        pixel = bitmap1.GetPixel(x, y);
                         r = 255 - pixel.R;
                         g = 255 - pixel.G;
                         b = 255 - pixel.B;
-                        newbitmap.SetPixel(x, y, Color.FromArgb(r, g, b));
+                        bitmap2.SetPixel(x, y, Color.FromArgb(r, g, b));
                     }
                 }
-                this.pictureBox1.Image = newbitmap;
+                this.pictureBox1.Image = bitmap2;
             }
             catch (Exception ex)
             {
@@ -128,18 +129,18 @@ namespace vcs_ImageProcessingL
             //以浮雕效果顯示圖像
             try
             {
-                int Height = this.pictureBox1.Image.Height;
-                int Width = this.pictureBox1.Image.Width;
-                Bitmap newBitmap = new Bitmap(Width, Height);
-                Bitmap oldBitmap = (Bitmap)this.pictureBox1.Image;
+                int W = this.pictureBox1.Image.Width;
+                int H = this.pictureBox1.Image.Height;
+                Bitmap bitmap1 = (Bitmap)this.pictureBox1.Image;
+                Bitmap bitmap2 = new Bitmap(W, H);
                 Color pixel1, pixel2;
-                for (int x = 0; x < Width - 1; x++)
+                for (int x = 0; x < W - 1; x++)
                 {
-                    for (int y = 0; y < Height - 1; y++)
+                    for (int y = 0; y < H - 1; y++)
                     {
                         int r = 0, g = 0, b = 0;
-                        pixel1 = oldBitmap.GetPixel(x, y);
-                        pixel2 = oldBitmap.GetPixel(x + 1, y + 1);
+                        pixel1 = bitmap1.GetPixel(x, y);
+                        pixel2 = bitmap1.GetPixel(x + 1, y + 1);
                         r = Math.Abs(pixel1.R - pixel2.R + 128);
                         g = Math.Abs(pixel1.G - pixel2.G + 128);
                         b = Math.Abs(pixel1.B - pixel2.B + 128);
@@ -155,10 +156,10 @@ namespace vcs_ImageProcessingL
                             b = 255;
                         if (b < 0)
                             b = 0;
-                        newBitmap.SetPixel(x, y, Color.FromArgb(r, g, b));
+                        bitmap2.SetPixel(x, y, Color.FromArgb(r, g, b));
                     }
                 }
-                this.pictureBox1.Image = newBitmap;
+                this.pictureBox1.Image = bitmap2;
             }
             catch (Exception ex)
             {
@@ -182,15 +183,15 @@ namespace vcs_ImageProcessingL
             //以黑白效果顯示圖像
             try
             {
-                int Height = this.pictureBox1.Image.Height;
-                int Width = this.pictureBox1.Image.Width;
-                Bitmap newBitmap = new Bitmap(Width, Height);
-                Bitmap oldBitmap = (Bitmap)this.pictureBox1.Image;
+                int W = this.pictureBox1.Image.Width;
+                int H = this.pictureBox1.Image.Height;
+                Bitmap bitmap1 = (Bitmap)this.pictureBox1.Image;
+                Bitmap bitmap2 = new Bitmap(W, H);
                 Color pixel;
-                for (int x = 0; x < Width; x++)
-                    for (int y = 0; y < Height; y++)
+                for (int x = 0; x < W; x++)
+                    for (int y = 0; y < H; y++)
                     {
-                        pixel = oldBitmap.GetPixel(x, y);
+                        pixel = bitmap1.GetPixel(x, y);
                         int r, g, b, Result = 0;
                         r = pixel.R;
                         g = pixel.G;
@@ -210,9 +211,9 @@ namespace vcs_ImageProcessingL
                                 Result = ((int)(0.7 * r) + (int)(0.2 * g) + (int)(0.1 * b));
                                 break;
                         }
-                        newBitmap.SetPixel(x, y, Color.FromArgb(Result, Result, Result));
+                        bitmap2.SetPixel(x, y, Color.FromArgb(Result, Result, Result));
                     }
-                this.pictureBox1.Image = newBitmap;
+                this.pictureBox1.Image = bitmap2;
             }
             catch (Exception ex)
             {
@@ -232,22 +233,22 @@ namespace vcs_ImageProcessingL
             //以柔化效果顯示圖像
             try
             {
-                int Height = this.pictureBox1.Image.Height;
-                int Width = this.pictureBox1.Image.Width;
-                Bitmap bitmap = new Bitmap(Width, Height);
-                Bitmap MyBitmap = (Bitmap)this.pictureBox1.Image;
+                int W = this.pictureBox1.Image.Width;
+                int H = this.pictureBox1.Image.Height;
+                Bitmap bitmap1 = (Bitmap)this.pictureBox1.Image;
+                Bitmap bitmap2 = new Bitmap(W, H);
                 Color pixel;
                 //高斯模板
                 int[] Gauss = { 1, 2, 1, 2, 4, 2, 1, 2, 1 };
-                for (int x = 1; x < Width - 1; x++)
-                    for (int y = 1; y < Height - 1; y++)
+                for (int x = 1; x < W - 1; x++)
+                    for (int y = 1; y < H - 1; y++)
                     {
                         int r = 0, g = 0, b = 0;
                         int Index = 0;
                         for (int col = -1; col <= 1; col++)
                             for (int row = -1; row <= 1; row++)
                             {
-                                pixel = MyBitmap.GetPixel(x + row, y + col);
+                                pixel = bitmap1.GetPixel(x + row, y + col);
                                 r += pixel.R * Gauss[Index];
                                 g += pixel.G * Gauss[Index];
                                 b += pixel.B * Gauss[Index];
@@ -263,9 +264,9 @@ namespace vcs_ImageProcessingL
                         g = g < 0 ? 0 : g;
                         b = b > 255 ? 255 : b;
                         b = b < 0 ? 0 : b;
-                        bitmap.SetPixel(x - 1, y - 1, Color.FromArgb(r, g, b));
+                        bitmap2.SetPixel(x - 1, y - 1, Color.FromArgb(r, g, b));
                     }
-                this.pictureBox1.Image = bitmap;
+                this.pictureBox1.Image = bitmap2;
             }
             catch (Exception ex)
             {
@@ -273,35 +274,33 @@ namespace vcs_ImageProcessingL
             }
         }
 
-
         /*
         五.銳化效果
 
         原理:突出顯示顏色值大(即形成形體邊緣)的像素點.
         */
 
-
         private void button5_Click(object sender, EventArgs e)
         {
             //以銳化效果顯示圖像
             try
             {
-                int Height = this.pictureBox1.Image.Height;
-                int Width = this.pictureBox1.Image.Width;
-                Bitmap newBitmap = new Bitmap(Width, Height);
-                Bitmap oldBitmap = (Bitmap)this.pictureBox1.Image;
+                int W = this.pictureBox1.Image.Width;
+                int H = this.pictureBox1.Image.Height;
+                Bitmap bitmap1 = (Bitmap)this.pictureBox1.Image;
+                Bitmap bitmap2 = new Bitmap(W, H);
                 Color pixel;
                 //拉普拉斯模板
                 int[] Laplacian = { -1, -1, -1, -1, 9, -1, -1, -1, -1 };
-                for (int x = 1; x < Width - 1; x++)
-                    for (int y = 1; y < Height - 1; y++)
+                for (int x = 1; x < W - 1; x++)
+                    for (int y = 1; y < H - 1; y++)
                     {
                         int r = 0, g = 0, b = 0;
                         int Index = 0;
                         for (int col = -1; col <= 1; col++)
                             for (int row = -1; row <= 1; row++)
                             {
-                                pixel = oldBitmap.GetPixel(x + row, y + col); r += pixel.R * Laplacian[Index];
+                                pixel = bitmap1.GetPixel(x + row, y + col); r += pixel.R * Laplacian[Index];
                                 g += pixel.G * Laplacian[Index];
                                 b += pixel.B * Laplacian[Index];
                                 Index++;
@@ -313,9 +312,9 @@ namespace vcs_ImageProcessingL
                         g = g < 0 ? 0 : g;
                         b = b > 255 ? 255 : b;
                         b = b < 0 ? 0 : b;
-                        newBitmap.SetPixel(x - 1, y - 1, Color.FromArgb(r, g, b));
+                        bitmap2.SetPixel(x - 1, y - 1, Color.FromArgb(r, g, b));
                     }
-                this.pictureBox1.Image = newBitmap;
+                this.pictureBox1.Image = bitmap2;
             }
             catch (Exception ex)
             {
@@ -335,27 +334,27 @@ namespace vcs_ImageProcessingL
             //以霧化效果顯示圖像
             try
             {
-                int Height = this.pictureBox1.Image.Height;
-                int Width = this.pictureBox1.Image.Width;
-                Bitmap newBitmap = new Bitmap(Width, Height);
-                Bitmap oldBitmap = (Bitmap)this.pictureBox1.Image;
+                int W = this.pictureBox1.Image.Width;
+                int H = this.pictureBox1.Image.Height;
+                Bitmap bitmap1 = (Bitmap)this.pictureBox1.Image;
+                Bitmap bitmap2 = new Bitmap(W, H);
                 Color pixel;
-                for (int x = 1; x < Width - 1; x++)
-                    for (int y = 1; y < Height - 1; y++)
+                for (int x = 1; x < W - 1; x++)
+                    for (int y = 1; y < H - 1; y++)
                     {
                         System.Random MyRandom = new Random();
                         int k = MyRandom.Next(123456);
                         //像素塊大小
                         int dx = x + k % 19;
                         int dy = y + k % 19;
-                        if (dx >= Width)
-                            dx = Width - 1;
-                        if (dy >= Height)
-                            dy = Height - 1;
-                        pixel = oldBitmap.GetPixel(dx, dy);
-                        newBitmap.SetPixel(x, y, pixel);
+                        if (dx >= W)
+                            dx = W - 1;
+                        if (dy >= H)
+                            dy = H - 1;
+                        pixel = bitmap1.GetPixel(dx, dy);
+                        bitmap2.SetPixel(x, y, pixel);
                     }
-                this.pictureBox1.Image = newBitmap;
+                this.pictureBox1.Image = bitmap2;
             }
             catch (Exception ex)
             {
@@ -373,27 +372,28 @@ namespace vcs_ImageProcessingL
         private void button7_Click(object sender, EventArgs e)
         {
             //以光照效果顯示圖像
-            Graphics MyGraphics = this.pictureBox1.CreateGraphics();
-            MyGraphics.Clear(Color.White);
-            Bitmap MyBmp = new Bitmap(this.pictureBox1.Image, this.pictureBox1.Width, this.pictureBox1.Height);
-            int MyWidth = MyBmp.Width;
-            int MyHeight = MyBmp.Height;
-            Bitmap MyImage = MyBmp.Clone(new RectangleF(0, 0, MyWidth, MyHeight), System.Drawing.Imaging.PixelFormat.DontCare);
+            Graphics gr = this.pictureBox1.CreateGraphics();
+            gr.Clear(Color.White);
+
+            Bitmap bitmap1 = new Bitmap(this.pictureBox1.Image, this.pictureBox1.Width, this.pictureBox1.Height);
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            Bitmap bitmap2 = bitmap1.Clone(new RectangleF(0, 0, W, H), System.Drawing.Imaging.PixelFormat.DontCare);
             int A = Width / 2;
             int B = Height / 2;
             //MyCenter圖片中心點，發亮此值會讓強光中心發生偏移
-            Point MyCenter = new Point(MyWidth / 2, MyHeight / 2);
+            Point MyCenter = new Point(W / 2, H / 2);
             //R強光照射面的半徑，即”光暈”
-            int R = Math.Min(MyWidth / 2, MyHeight / 2);
-            for (int i = MyWidth - 1; i >= 1; i--)
+            int R = Math.Min(W / 2, H / 2);
+            for (int i = W - 1; i >= 1; i--)
             {
-                for (int j = MyHeight - 1; j >= 1; j--)
+                for (int j = H - 1; j >= 1; j--)
                 {
                     float MyLength = (float)Math.Sqrt(Math.Pow((i - MyCenter.X), 2) + Math.Pow((j - MyCenter.Y), 2));
                     //如果像素位于”光暈”之內
                     if (MyLength < R)
                     {
-                        Color MyColor = MyImage.GetPixel(i, j);
+                        Color MyColor = bitmap2.GetPixel(i, j);
                         int r, g, b;
                         //220亮度增加常量，該值越大，光亮度越強
                         float MyPixel = 220.0f * (1.0f - MyLength / R);
@@ -405,11 +405,11 @@ namespace vcs_ImageProcessingL
                         b = Math.Max(0, Math.Min(b, 255));
                         //將增亮后的像素值回寫到位圖
                         Color MyNewColor = Color.FromArgb(255, r, g, b);
-                        MyImage.SetPixel(i, j, MyNewColor);
+                        bitmap2.SetPixel(i, j, MyNewColor);
                     }
                 }
                 //重新繪制圖片
-                MyGraphics.DrawImage(MyImage, new Rectangle(0, 0, MyWidth, MyHeight));
+                gr.DrawImage(bitmap2, new Rectangle(0, 0, W, H));
             }
 
         }
@@ -445,9 +445,9 @@ namespace vcs_ImageProcessingL
             //垂直百葉窗顯示圖像
             try
             {
-                Bitmap MyBitmap = (Bitmap)this.pictureBox1.Image.Clone();
-                int dw = MyBitmap.Width / 30;
-                int dh = MyBitmap.Height;
+                Bitmap bitmap1 = (Bitmap)this.pictureBox1.Image.Clone();
+                int dw = bitmap1.Width / 30;
+                int dh = bitmap1.Height;
                 Graphics g = this.pictureBox1.CreateGraphics();
                 g.Clear(Color.Gray);
                 Point[] MyPoint = new Point[30];
@@ -456,19 +456,20 @@ namespace vcs_ImageProcessingL
                     MyPoint[x].Y = 0;
                     MyPoint[x].X = x * dw;
                 }
-                Bitmap bitmap = new Bitmap(MyBitmap.Width, MyBitmap.Height);
+
+                Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
                 for (int i = 0; i < dw; i++)
                 {
                     for (int j = 0; j < 30; j++)
                     {
                         for (int k = 0; k < dh; k++)
                         {
-                            bitmap.SetPixel(MyPoint[j].X + i, MyPoint[j].Y + k,
-                            MyBitmap.GetPixel(MyPoint[j].X + i, MyPoint[j].Y + k));
+                            bitmap2.SetPixel(MyPoint[j].X + i, MyPoint[j].Y + k,
+                            bitmap1.GetPixel(MyPoint[j].X + i, MyPoint[j].Y + k));
                         }
                     }
                     this.pictureBox1.Refresh();
-                    this.pictureBox1.Image = bitmap;
+                    this.pictureBox1.Image = bitmap2;
                     System.Threading.Thread.Sleep(100);
                 }
             }
@@ -483,9 +484,9 @@ namespace vcs_ImageProcessingL
             //水平百葉窗顯示圖像
             try
             {
-                Bitmap MyBitmap = (Bitmap)this.pictureBox1.Image.Clone();
-                int dh = MyBitmap.Height / 20;
-                int dw = MyBitmap.Width;
+                Bitmap bitmap1 = (Bitmap)this.pictureBox1.Image.Clone();
+                int dh = bitmap1.Height / 20;
+                int dw = bitmap1.Width;
                 Graphics g = this.pictureBox1.CreateGraphics();
                 g.Clear(Color.Gray);
                 Point[] MyPoint = new Point[20];
@@ -494,18 +495,19 @@ namespace vcs_ImageProcessingL
                     MyPoint[y].X = 0;
                     MyPoint[y].Y = y * dh;
                 }
-                Bitmap bitmap = new Bitmap(MyBitmap.Width, MyBitmap.Height);
+
+                Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
                 for (int i = 0; i < dh; i++)
                 {
                     for (int j = 0; j < 20; j++)
                     {
                         for (int k = 0; k < dw; k++)
                         {
-                            bitmap.SetPixel(MyPoint[j].X + k, MyPoint[j].Y + i, MyBitmap.GetPixel(MyPoint[j].X + k, MyPoint[j].Y + i));
+                            bitmap2.SetPixel(MyPoint[j].X + k, MyPoint[j].Y + i, bitmap1.GetPixel(MyPoint[j].X + k, MyPoint[j].Y + i));
                         }
                     }
                     this.pictureBox1.Refresh();
-                    this.pictureBox1.Image = bitmap;
+                    this.pictureBox1.Image = bitmap2;
                     System.Threading.Thread.Sleep(100);
                 }
             }
@@ -526,9 +528,9 @@ namespace vcs_ImageProcessingL
             //以馬賽克效果顯示圖像
             try
             {
-                Bitmap MyBitmap = (Bitmap)this.pictureBox1.Image;
-                int dw = MyBitmap.Width / 50;
-                int dh = MyBitmap.Height / 50;
+                Bitmap bitmap1 = (Bitmap)this.pictureBox1.Image;
+                int dw = bitmap1.Width / 50;
+                int dh = bitmap1.Height / 50;
                 Graphics g = this.pictureBox1.CreateGraphics();
                 g.Clear(Color.Gray);
                 Point[] MyPoint = new Point[2500];
@@ -538,27 +540,27 @@ namespace vcs_ImageProcessingL
                         MyPoint[x * 50 + y].X = x * dw;
                         MyPoint[x * 50 + y].Y = y * dh;
                     }
-                Bitmap bitmap = new Bitmap(MyBitmap.Width, MyBitmap.Height);
+                Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
                 for (int i = 0; i < 10000; i++)
                 {
-                    System.Random MyRandom = new Random();
+                    Random MyRandom = new Random();
                     int iPos = MyRandom.Next(2500);
                     for (int m = 0; m < dw; m++)
                         for (int n = 0; n < dh; n++)
                         {
-                            bitmap.SetPixel(MyPoint[iPos].X + m, MyPoint[iPos].Y + n, MyBitmap.GetPixel(MyPoint[iPos].X + m, MyPoint[iPos].Y + n));
+                            bitmap2.SetPixel(MyPoint[iPos].X + m, MyPoint[iPos].Y + n, bitmap1.GetPixel(MyPoint[iPos].X + m, MyPoint[iPos].Y + n));
                         }
                     this.pictureBox1.Refresh();
-                    this.pictureBox1.Image = bitmap;
+                    this.pictureBox1.Image = bitmap2;
                 }
                 for (int i = 0; i < 2500; i++)
                     for (int m = 0; m < dw; m++)
                         for (int n = 0; n < dh; n++)
                         {
-                            bitmap.SetPixel(MyPoint[i].X + m, MyPoint[i].Y + n, MyBitmap.GetPixel(MyPoint[i].X + m, MyPoint[i].Y + n));
+                            bitmap2.SetPixel(MyPoint[i].X + m, MyPoint[i].Y + n, bitmap1.GetPixel(MyPoint[i].X + m, MyPoint[i].Y + n));
                         }
                 this.pictureBox1.Refresh();
-                this.pictureBox1.Image = bitmap;
+                this.pictureBox1.Image = bitmap2;
             }
             catch (Exception ex)
             {
@@ -577,34 +579,34 @@ namespace vcs_ImageProcessingL
         {
             //以油畫效果顯示圖像
             Graphics g = this.pictureBox1.CreateGraphics();
-            //Bitmap bitmap = this.MyBitmap;
+
             //取得圖片尺寸
-            Bitmap MyBitmap = (Bitmap)this.pictureBox1.Image;
-            int width = MyBitmap.Width;
-            int height = MyBitmap.Height;
-            RectangleF rect = new RectangleF(0, 0, width, height);
-            Bitmap img = MyBitmap.Clone(rect, System.Drawing.Imaging.PixelFormat.DontCare);
+            Bitmap bitmap1 = (Bitmap)this.pictureBox1.Image;
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            RectangleF rect = new RectangleF(0, 0, W, H);
+            Bitmap bitmap2 = bitmap1.Clone(rect, System.Drawing.Imaging.PixelFormat.DontCare);
             //產生隨機數序列
             Random rnd = new Random();
             //取不同的值決定油畫效果的不同程度
             int iModel = 2;
-            int i = width - iModel;
+            int i = W - iModel;
             while (i > 1)
             {
-                int j = height - iModel;
+                int j = H - iModel;
                 while (j > 1)
                 {
                     int iPos = rnd.Next(100000) % iModel;
                     //將該點的RGB值設置成附近iModel點之內的任一點
-                    Color color = img.GetPixel(i + iPos, j + iPos);
-                    img.SetPixel(i, j, color);
+                    Color color = bitmap2.GetPixel(i + iPos, j + iPos);
+                    bitmap2.SetPixel(i, j, color);
                     j = j - 1;
                 }
                 i = i - 1;
             }
             //重新繪制圖像
             g.Clear(Color.White);
-            g.DrawImage(img, new Rectangle(0, 0, width, height));
+            g.DrawImage(bitmap2, new Rectangle(0, 0, W, H));
         }
 
 
@@ -631,7 +633,7 @@ namespace vcs_ImageProcessingL
             points[1] = new Point(rect.Right, rect.Top + offset.Height);
             points[2] = new Point(rect.Left, rect.Bottom - offset.Height);
             g.Clear(Color.White);
-            g.DrawImage(MyBitmap, points);
+            g.DrawImage(bitmap1, points);
             */
 
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
@@ -670,23 +672,23 @@ namespace vcs_ImageProcessingL
             //以積木效果顯示圖像
             try
             {
-                Graphics myGraphics = this.pictureBox1.CreateGraphics();
-                //Bitmap myBitmap = new Bitmap(this.BackgroundImage);
-                int myWidth, myHeight, i, j, iAvg, iPixel;
+                Graphics g = this.pictureBox1.CreateGraphics();
+
+                int W, H, i, j, iAvg, iPixel;
                 Color myColor, myNewColor;
                 RectangleF myRect;
-                Bitmap MyBitmap = (Bitmap)this.pictureBox1.Image;
-                myWidth = MyBitmap.Width;
-                myHeight = MyBitmap.Height;
-                myRect = new RectangleF(0, 0, myWidth, myHeight);
-                Bitmap bitmap = MyBitmap.Clone(myRect, System.Drawing.Imaging.PixelFormat.DontCare);
+                Bitmap bitmap1 = (Bitmap)this.pictureBox1.Image;
+                W = bitmap1.Width;
+                H = bitmap1.Height;
+                myRect = new RectangleF(0, 0, W, H);
+                Bitmap bitmap2 = bitmap1.Clone(myRect, System.Drawing.Imaging.PixelFormat.DontCare);
                 i = 0;
-                while (i < myWidth - 1)
+                while (i < W - 1)
                 {
                     j = 0;
-                    while (j < myHeight - 1)
+                    while (j < H - 1)
                     {
-                        myColor = bitmap.GetPixel(i, j);
+                        myColor = bitmap2.GetPixel(i, j);
                         iAvg = (myColor.R + myColor.G + myColor.B) / 3;
                         iPixel = 0;
                         if (iAvg >= 128)
@@ -694,13 +696,13 @@ namespace vcs_ImageProcessingL
                         else
                             iPixel = 0;
                         myNewColor = Color.FromArgb(255, iPixel, iPixel, iPixel);
-                        bitmap.SetPixel(i, j, myNewColor);
+                        bitmap2.SetPixel(i, j, myNewColor);
                         j = j + 1;
                     }
                     i = i + 1;
                 }
-                myGraphics.Clear(Color.WhiteSmoke);
-                myGraphics.DrawImage(bitmap, new Rectangle(0, 0, myWidth, myHeight));
+                g.Clear(Color.WhiteSmoke);
+                g.DrawImage(bitmap2, new Rectangle(0, 0, W, H));
             }
             catch (Exception ex)
             {

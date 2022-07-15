@@ -110,21 +110,6 @@ namespace vcs_Mix02
         private void button0_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            string filename1 = @"C:\______test_files\compare\aaaa.txt";
-            string filename2 = @"C:\______test_files\compare\bbbb.txt";
-
-            StreamReader sr1 = new StreamReader(filename1);
-            StreamReader sr2 = new StreamReader(filename2);
-            if (object.Equals(sr1.ReadToEnd(), sr2.ReadToEnd()) == true)
-            {
-                richTextBox1.Text += "兩個檔案相同\n";
-            }
-            else
-            {
-                richTextBox1.Text += "兩個檔案不相同\n";
-            }
-            sr1.Close();
-            sr2.Close();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -181,16 +166,6 @@ namespace vcs_Mix02
         private void button4_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //取得本機MAC地址
-
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("select * from Win32_NetworkAdapterConfiguration");
-            foreach (ManagementObject mo in mos.Get())
-            {
-                if (Convert.ToBoolean(mo["ipEnabled"]) == true)
-                {
-                    richTextBox1.Text += "取得本機MAC地址 : " + Convert.ToString(mo["MACAddress"]) + "\n";
-                }
-            }
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -217,52 +192,6 @@ namespace vcs_Mix02
         private void button6_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            string filename1 = @"C:\______test_files\compare\aaaa.txt";
-            string filename2 = @"C:\______test_files\compare\bbbb.txt";
-
-            if (FileCompare(filename1, filename2) == true)
-            {
-                richTextBox1.Text += "兩個檔案相同\n";
-            }
-            else
-            {
-                richTextBox1.Text += "兩個檔案不相同\n";
-            }
-        }
-
-        private bool FileCompare(string file1, string file2)
-        {
-            //　判斷相同的文件是否被參考兩次。
-            if (file1 == file2)
-            {
-                return true;
-            }
-            int file1byte = 0;
-            int file2byte = 0;
-            using (FileStream fs1 = new FileStream(file1, FileMode.Open), fs2 = new FileStream(file2, FileMode.Open))
-            {
-                //　檢查文件大小。如果兩個文件的大小並不相同,則視為不相同。
-                if (fs1.Length != fs2.Length)
-                {
-                    // 關閉文件。
-                    fs1.Close();
-                    fs2.Close();
-                    return false;
-                }
-                //　逐一比較兩個文件的每一個字節，直到發現不相符或已到達文件尾端為止。
-                do
-                {
-                    // 從每一個文件讀取一個字節。
-                    file1byte = fs1.ReadByte();
-                    file2byte = fs2.ReadByte();
-                }
-                while ((file1byte == file2byte) && (file1byte != -1));
-                // 關閉文件。
-                fs1.Close();
-                fs2.Close();
-            }
-            //　返回比較的結果。在這個時候，只有當兩個文件的內容完全相同時， "file1byte" 才會等於 "file2byte"。
-            return ((file1byte - file2byte) == 0);
         }
 
         //多筆資料比較

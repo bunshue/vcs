@@ -7,6 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Drawing.Imaging;
+
+//C#圖像處理(各種旋轉、改變大小、柔化、銳化、霧化、底片、浮雕、黑白、濾鏡效果)
 //http://www.aspphp.online/bianchen/cyuyan/gycyy/201701/81415.html
 
 namespace vcs_ImageProcessing3
@@ -72,11 +75,20 @@ namespace vcs_ImageProcessing3
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
             button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
             button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
-            button12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
-            button13.Location = new Point(x_st + dx * 0, y_st + dy * 13);
-            button14.Location = new Point(x_st + dx * 0, y_st + dy * 14);
-        }
 
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button20.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button21.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            button22.Location = new Point(x_st + dx * 1, y_st + dy * 10);
+            button23.Location = new Point(x_st + dx * 1, y_st + dy * 11);
+        }
 
         private void button0_Click(object sender, EventArgs e)
         {
@@ -85,61 +97,43 @@ namespace vcs_ImageProcessing3
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
             pictureBox1.Image = image_processing1(filename);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
             pictureBox1.Image = image_processing2(filename);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
             pictureBox1.Image = image_processing3(filename);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
             pictureBox1.Image = image_processing4(filename);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
             pictureBox1.Image = image_processing5(filename);
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
             pictureBox1.Image = image_processing6(filename);
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
             pictureBox1.Image = image_processing7(filename);
         }
-
-        /*
-        八.百葉窗效果
-
-        原理:(1).垂直百葉窗效果:
-
-        根據窗口或圖像的高度或寬度和定制的百葉窗顯示條寬度計算百葉窗顯示的條數量 ；
-
-        根據窗口或圖像的高度或寬度定制百葉窗顯示條數量計算百窗顯示的條寬度.
-
-        (2).水平百葉窗效果: 原理同上,只是繪制像素點開始的坐標不同.
-        */
 
         int cnt = 0;
         private void button8_Click(object sender, EventArgs e)
         {
+            //百葉窗效果 水平垂直輪流顯示
             if ((cnt % 2) == 0)
             {
                 shutter1();
@@ -151,106 +145,29 @@ namespace vcs_ImageProcessing3
             cnt++;
         }
 
-        void shutter1()
-        {
-            //垂直百葉窗顯示圖像
-            try
-            {
-                Bitmap MyBitmap = (Bitmap)this.pictureBox1.Image.Clone();
-                int dw = MyBitmap.Width / 30;
-                int dh = MyBitmap.Height;
-                Graphics g = this.pictureBox1.CreateGraphics();
-                g.Clear(Color.Gray);
-                Point[] MyPoint = new Point[30];
-                for (int x = 0; x < 30; x++)
-                {
-                    MyPoint[x].Y = 0;
-                    MyPoint[x].X = x * dw;
-                }
-                Bitmap bitmap = new Bitmap(MyBitmap.Width, MyBitmap.Height);
-                for (int i = 0; i < dw; i++)
-                {
-                    for (int j = 0; j < 30; j++)
-                    {
-                        for (int k = 0; k < dh; k++)
-                        {
-                            bitmap.SetPixel(MyPoint[j].X + i, MyPoint[j].Y + k,
-                            MyBitmap.GetPixel(MyPoint[j].X + i, MyPoint[j].Y + k));
-                        }
-                    }
-                    this.pictureBox1.Refresh();
-                    this.pictureBox1.Image = bitmap;
-                    System.Threading.Thread.Sleep(100);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "信息提示");
-            }
-        }
-
-        void shutter2()
-        {
-            //水平百葉窗顯示圖像
-            try
-            {
-                Bitmap MyBitmap = (Bitmap)this.pictureBox1.Image.Clone();
-                int dh = MyBitmap.Height / 20;
-                int dw = MyBitmap.Width;
-                Graphics g = this.pictureBox1.CreateGraphics();
-                g.Clear(Color.Gray);
-                Point[] MyPoint = new Point[20];
-                for (int y = 0; y < 20; y++)
-                {
-                    MyPoint[y].X = 0;
-                    MyPoint[y].Y = y * dh;
-                }
-                Bitmap bitmap = new Bitmap(MyBitmap.Width, MyBitmap.Height);
-                for (int i = 0; i < dh; i++)
-                {
-                    for (int j = 0; j < 20; j++)
-                    {
-                        for (int k = 0; k < dw; k++)
-                        {
-                            bitmap.SetPixel(MyPoint[j].X + k, MyPoint[j].Y + i, MyBitmap.GetPixel(MyPoint[j].X + k, MyPoint[j].Y + i));
-                        }
-                    }
-                    this.pictureBox1.Refresh();
-                    this.pictureBox1.Image = bitmap;
-                    System.Threading.Thread.Sleep(100);
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "信息提示");
-            }
-        }
-
         private void button9_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
             image_processing9(filename);
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
             pictureBox1.Image = image_processing10(filename);
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "TBD\n";
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
             pictureBox1.Image = image_processing12(filename);
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
+            filename = @"C:\______test_files\isinbaeva.jpg";
             image_processing11(filename);
         }
 
@@ -561,6 +478,93 @@ namespace vcs_ImageProcessing3
         }
 
         /*
+        八.百葉窗效果
+
+        原理:(1).垂直百葉窗效果:
+
+        根據窗口或圖像的高度或寬度和定制的百葉窗顯示條寬度計算百葉窗顯示的條數量 ；
+
+        根據窗口或圖像的高度或寬度定制百葉窗顯示條數量計算百窗顯示的條寬度.
+
+        (2).水平百葉窗效果: 原理同上,只是繪制像素點開始的坐標不同.
+        */
+
+        void shutter1()
+        {
+            //垂直百葉窗顯示圖像
+            try
+            {
+                Bitmap bitmap1 = (Bitmap)this.pictureBox1.Image.Clone();
+                int dw = bitmap1.Width / 30;
+                int dh = bitmap1.Height;
+                Graphics g = this.pictureBox1.CreateGraphics();
+                g.Clear(Color.Gray);
+                Point[] MyPoint = new Point[30];
+                for (int x = 0; x < 30; x++)
+                {
+                    MyPoint[x].Y = 0;
+                    MyPoint[x].X = x * dw;
+                }
+                Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
+                for (int i = 0; i < dw; i++)
+                {
+                    for (int j = 0; j < 30; j++)
+                    {
+                        for (int k = 0; k < dh; k++)
+                        {
+                            bitmap2.SetPixel(MyPoint[j].X + i, MyPoint[j].Y + k,
+                            bitmap1.GetPixel(MyPoint[j].X + i, MyPoint[j].Y + k));
+                        }
+                    }
+                    this.pictureBox1.Refresh();
+                    this.pictureBox1.Image = bitmap2;
+                    System.Threading.Thread.Sleep(100);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "信息提示");
+            }
+        }
+
+        void shutter2()
+        {
+            //水平百葉窗顯示圖像
+            try
+            {
+                Bitmap bitmap1 = (Bitmap)this.pictureBox1.Image.Clone();
+                int dh = bitmap1.Height / 20;
+                int dw = bitmap1.Width;
+                Graphics g = this.pictureBox1.CreateGraphics();
+                g.Clear(Color.Gray);
+                Point[] MyPoint = new Point[20];
+                for (int y = 0; y < 20; y++)
+                {
+                    MyPoint[y].X = 0;
+                    MyPoint[y].Y = y * dh;
+                }
+                Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
+                for (int i = 0; i < dh; i++)
+                {
+                    for (int j = 0; j < 20; j++)
+                    {
+                        for (int k = 0; k < dw; k++)
+                        {
+                            bitmap2.SetPixel(MyPoint[j].X + k, MyPoint[j].Y + i, bitmap1.GetPixel(MyPoint[j].X + k, MyPoint[j].Y + i));
+                        }
+                    }
+                    this.pictureBox1.Refresh();
+                    this.pictureBox1.Image = bitmap2;
+                    System.Threading.Thread.Sleep(100);
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "信息提示");
+            }
+        }
+
+        /*
         九.馬賽克效果
         原理: 確定圖像的隨機位置點和確定馬賽克塊的大小,然後馬賽克塊圖像覆蓋隨機點即可.
         */
@@ -589,7 +593,7 @@ namespace vcs_ImageProcessing3
                     }
                 for (int i = 0; i < 10000; i++)
                 {
-                    System.Random MyRandom = new Random();
+                    Random MyRandom = new Random();
                     int iPos = MyRandom.Next(2500);
                     for (int m = 0; m < dw; m++)
                         for (int n = 0; n < dh; n++)
@@ -760,6 +764,172 @@ namespace vcs_ImageProcessing3
             {
                 MessageBox.Show(ex.Message, "信息提示");
             }
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            string filename = @"C:\______test_files\picture1.jpg";
+            Image image;
+
+            //推拉效果顯示圖像
+            image = Image.FromFile(filename);
+            pictureBox1.Image = image;
+            pictureBox1.Size = new Size(image.Width, image.Height - 1);
+
+            try
+            {
+                Graphics g = this.pictureBox1.CreateGraphics();
+                Bitmap bitmap1 = new Bitmap(image);
+                g.Clear(this.pictureBox1.BackColor);
+                for (int i = 0; i < this.pictureBox1.Height; i++)
+                {
+                    Rectangle rectangle1 = new Rectangle(0, 0, this.pictureBox1.Width, i);
+                    Rectangle rectangle2 = new Rectangle(0, this.pictureBox1.Height - i, this.pictureBox1.Width, i + 1);
+                    Bitmap cloneBitmap = bitmap1.Clone(rectangle2, PixelFormat.DontCare);
+                    g.DrawImage(cloneBitmap, rectangle1);
+                    this.pictureBox1.Show();
+                }
+            }
+            catch { }
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+            //水平交錯效果顯示圖像
+            Bitmap bitmap1 = new Bitmap(filename);
+            pictureBox1.Image = bitmap1;
+            pictureBox1.Size = new Size(bitmap1.Width, bitmap1.Height);
+
+            bitmap1 = new Bitmap(filename);
+            pictureBox1.Image = LevelInterleaving(bitmap1);
+        }
+
+        Bitmap LevelInterleaving(Bitmap bitmap1)
+        {
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+            Graphics g = this.pictureBox1.CreateGraphics();
+            g.Clear(Color.WhiteSmoke);
+            Bitmap bitmap2 = new Bitmap(W, H);
+            int i = 0;
+            while (i <= W / 2)
+            {
+                for (int m = 0; m <= H - 1; m++)
+                {
+                    bitmap2.SetPixel(i, m, bitmap1.GetPixel(i, m));
+                }
+                for (int n = 0; n <= H - 1; n++)
+                {
+                    bitmap2.SetPixel(W - i - 1, n, bitmap1.GetPixel(W - i - 1, n));
+                }
+                i++;
+                this.Refresh();
+                this.pictureBox1.Image = bitmap2;
+                System.Threading.Thread.Sleep(10);
+            }
+            return bitmap2;
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            //垂直交錯效果顯示圖像
+            Bitmap bitmap1 = new Bitmap(filename);
+            pictureBox1.Image = bitmap1;
+            pictureBox1.Size = new Size(bitmap1.Width, bitmap1.Height);
+            bitmap1 = new Bitmap(filename);
+            pictureBox1.Image = UprightnessInterleaving(bitmap1);
+        }
+
+        Bitmap UprightnessInterleaving(Bitmap bitmap1)
+        {
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+            Graphics g = this.pictureBox1.CreateGraphics();
+            g.Clear(Color.WhiteSmoke);
+            Bitmap bitmap2 = new Bitmap(W, H);
+            int i = 0;
+            while (i <= H / 2)
+            {
+                for (int m = 0; m <= W - 1; m++)
+                {
+                    bitmap2.SetPixel(m, i, bitmap1.GetPixel(m, i));
+                }
+                for (int n = 0; n <= W - 1; n++)
+                {
+                    bitmap2.SetPixel(n, H - i - 1, bitmap1.GetPixel(n, H - i - 1));
+                }
+                i++;
+                this.Refresh();
+                pictureBox1.Image = bitmap2;
+                System.Threading.Thread.Sleep(10);
+            }
+            return bitmap2;
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+            //圖像浮雕效果
+            Bitmap bitmap1 = new Bitmap(filename);
+            pictureBox1.Image = bitmap1;
+
+            bitmap1 = new Bitmap(filename);
+            pictureBox1.Image = BassoRelievo(bitmap1);
+        }
+
+        Bitmap BassoRelievo(Bitmap bmp)
+        {
+            try
+            {
+                for (int i = 0; i < bmp.Width - 1; i++)
+                {
+                    for (int j = 0; j < bmp.Height - 1; j++)
+                    {
+                        Color Color1 = bmp.GetPixel(i, j);
+                        Color Color2 = bmp.GetPixel(i + 1, j + 1);
+                        int red = Math.Abs(Color1.R - Color2.R + 128);
+                        int green = Math.Abs(Color1.G - Color2.G + 128);
+                        int blue = Math.Abs(Color1.B - Color2.B + 128);
+                        //顏色處理
+                        if (red > 255) red = 255;
+                        if (red < 0) red = 0;
+
+                        if (green > 255) green = 255;
+                        if (green < 0) green = 0;
+
+                        if (blue > 255) blue = 255;
+                        if (blue < 0) blue = 0;
+                        bmp.SetPixel(i, j, Color.FromArgb(red, green, blue));
+                    }
+                }
+            }
+            catch { }
+
+            return bmp;
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

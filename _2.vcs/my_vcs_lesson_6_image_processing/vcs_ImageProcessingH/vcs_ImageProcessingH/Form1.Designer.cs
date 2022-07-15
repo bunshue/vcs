@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox0 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
@@ -40,11 +41,27 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label0 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.scrBright = new System.Windows.Forms.HScrollBar();
+            this.label5 = new System.Windows.Forms.Label();
+            this.scrBlue = new System.Windows.Forms.HScrollBar();
+            this.label6 = new System.Windows.Forms.Label();
+            this.scrGreen = new System.Windows.Forms.HScrollBar();
+            this.label7 = new System.Windows.Forms.Label();
+            this.scrRed = new System.Windows.Forms.HScrollBar();
+            this.picColor = new System.Windows.Forms.PictureBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.picToned = new System.Windows.Forms.PictureBox();
+            this.picOriginal = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
+            this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picColor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picToned)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picOriginal)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -148,11 +165,130 @@
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.scrBright);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.scrBlue);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Controls.Add(this.scrGreen);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.scrRed);
+            this.groupBox1.Controls.Add(this.picColor);
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.picToned);
+            this.groupBox1.Controls.Add(this.picOriginal);
+            this.groupBox1.Location = new System.Drawing.Point(14, 164);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(644, 512);
+            this.groupBox1.TabIndex = 21;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "改變色調";
+            // 
+            // scrBright
+            // 
+            this.scrBright.Location = new System.Drawing.Point(62, 81);
+            this.scrBright.Maximum = 264;
+            this.scrBright.Name = "scrBright";
+            this.scrBright.Size = new System.Drawing.Size(258, 14);
+            this.scrBright.TabIndex = 24;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(20, 81);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(38, 12);
+            this.label5.TabIndex = 23;
+            this.label5.Text = "Bright:";
+            // 
+            // scrBlue
+            // 
+            this.scrBlue.Location = new System.Drawing.Point(62, 65);
+            this.scrBlue.Maximum = 264;
+            this.scrBlue.Name = "scrBlue";
+            this.scrBlue.Size = new System.Drawing.Size(258, 14);
+            this.scrBlue.TabIndex = 22;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(20, 65);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(30, 12);
+            this.label6.TabIndex = 21;
+            this.label6.Text = "Blue:";
+            // 
+            // scrGreen
+            // 
+            this.scrGreen.Location = new System.Drawing.Point(62, 48);
+            this.scrGreen.Maximum = 264;
+            this.scrGreen.Name = "scrGreen";
+            this.scrGreen.Size = new System.Drawing.Size(258, 14);
+            this.scrGreen.TabIndex = 20;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(20, 48);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(36, 12);
+            this.label7.TabIndex = 19;
+            this.label7.Text = "Green:";
+            // 
+            // scrRed
+            // 
+            this.scrRed.Location = new System.Drawing.Point(62, 30);
+            this.scrRed.Maximum = 264;
+            this.scrRed.Name = "scrRed";
+            this.scrRed.Size = new System.Drawing.Size(258, 14);
+            this.scrRed.TabIndex = 18;
+            // 
+            // picColor
+            // 
+            this.picColor.BackColor = System.Drawing.Color.LightBlue;
+            this.picColor.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.picColor.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picColor.Location = new System.Drawing.Point(326, 30);
+            this.picColor.Name = "picColor";
+            this.picColor.Size = new System.Drawing.Size(68, 63);
+            this.picColor.TabIndex = 17;
+            this.picColor.TabStop = false;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(20, 30);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(27, 12);
+            this.label8.TabIndex = 16;
+            this.label8.Text = "Red:";
+            // 
+            // picToned
+            // 
+            this.picToned.Location = new System.Drawing.Point(326, 97);
+            this.picToned.Name = "picToned";
+            this.picToned.Size = new System.Drawing.Size(300, 400);
+            this.picToned.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.picToned.TabIndex = 15;
+            this.picToned.TabStop = false;
+            // 
+            // picOriginal
+            // 
+            this.picOriginal.Image = ((System.Drawing.Image)(resources.GetObject("picOriginal.Image")));
+            this.picOriginal.Location = new System.Drawing.Point(20, 97);
+            this.picOriginal.Name = "picOriginal";
+            this.picOriginal.Size = new System.Drawing.Size(305, 400);
+            this.picOriginal.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.picOriginal.TabIndex = 14;
+            this.picOriginal.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(782, 609);
+            this.ClientSize = new System.Drawing.Size(1190, 847);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label0);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -171,6 +307,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picColor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picToned)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picOriginal)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -189,6 +330,18 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label0;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.HScrollBar scrBright;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.HScrollBar scrBlue;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.HScrollBar scrGreen;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.HScrollBar scrRed;
+        private System.Windows.Forms.PictureBox picColor;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.PictureBox picToned;
+        private System.Windows.Forms.PictureBox picOriginal;
     }
 }
 

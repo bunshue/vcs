@@ -197,40 +197,6 @@ string extension = Path.GetExtension("C:\\soar.jpg");
 string extension = Path.GetExtension(filename);
 
 
-
-//C# 執行CMD命令方法
-
-        /// <summary>
-        /// 執行Cmd命令
-        /// </summary>
-        public void ExecCmd(string cmdstr)
-        {
-            System.Diagnostics.Process process = new System.Diagnostics.Process();
-            process.StartInfo.FileName = "cmd.exe";
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.CreateNoWindow = true;
-            process.StartInfo.RedirectStandardOutput = true;
-            process.StartInfo.RedirectStandardInput = true;
-            process.Start();
-
-            process.StandardInput.WriteLine(cmdstr);
-            process.StandardInput.AutoFlush = true;
-            process.StandardInput.WriteLine("exit");
-
-            StreamReader reader = process.StandardOutput;//截取輸出流
-
-            string output = reader.ReadLine();//每次讀取一行
-
-            while (!reader.EndOfStream)
-            {
-                PrintThrendInfo(output);
-                output = reader.ReadLine();
-            }
-
-            process.WaitForExit();
-        }
-
-
             
 
 啟動一個外部程序: [html]   using System;   using System.Collections.Generic;   using System.Linq;   using System.Text;         /* 創建一個進程，並為進程傳入需要的參數    * 或者說是啟動一個外部程序，並為其傳入參數    * 等待退出或者強制關閉   */   namespace ConsoleApplication1   {       class Program       {           static void Main(string[] args)           {                      ////////////聲明一個程序信息類，指定啟動進程是的參數信息                   System.Diagnostics.ProcessStartInfo  Info  =  new  System.Diagnostics.ProcessStartInfo();                      //設置外部程序名                   Info.FileName  =  "notepad.exe";                      //設置外部程序的啟動參數（命令行參數）為test.txt                   Info.Arguments  =  "test.txt";                      //設置外部程序工作目錄為  C:\                   Info.WorkingDirectory  =  "C:\\";                      ///////////聲明一個程序類,也就是創建一個進程                   System.Diagnostics.Process  Proc  ;                      try                   {                   //                   //啟動外部程序                   //                   Proc  =  System.Diagnostics.Process.Start(Info);                   }                   catch(System.ComponentModel.Win32Exception  e)                   {                   Console.WriteLine("系統找不到指定的程序文件。\r{0}",  e);                   return;                   }                      //打印出外部程序的開始執行時間                   Console.WriteLine("外部程序的開始執行時間：{0}",  Proc.StartTime);                      //等待3秒鐘                   Proc.WaitForExit(3000);                      //如果這個外部程序沒有結束運行則對其強行終止                   if(Proc.HasExited  ==  false)                   {                   Console.WriteLine("由主程序強行終止外部程序的運行！");                   Proc.Kill();                   }                   else                   {  www.2cto.com                 Console.WriteLine("由外部程序正常退出！");                   }                   Console.WriteLine("外部程序的結束運行時間：{0}",  Proc.ExitTime);                   Console.WriteLine("外部程序在結束運行時的返回值：{0}",  Proc.ExitCode);           }       }   }     
@@ -707,35 +673,6 @@ https://www.twblogs.net/a/5f02b56e9644181341a1b6e0
         				
 //--------------------------------------------------------------------------------------------------------------------------
                
-
-           //在cmd控制台輸入命令
-        private void create(string str)
-        {
-            //process用於調用外部程序
-            System.Diagnostics.Process p = new System.Diagnostics.Process();
-            //調用cmd.exe
-            p.StartInfo.FileName = "cmd.exe";
-            //是否指定操作系統外殼進程啟動程序
-            p.StartInfo.UseShellExecute = false;
-            //可能接受來自調用程序的輸入信息
-            //重定向標准輸入
-            p.StartInfo.RedirectStandardInput = true;
-            //重定向標准輸出
-            p.StartInfo.RedirectStandardOutput = true;
-            //重定向錯誤輸出
-            p.StartInfo.RedirectStandardError = true;
-            //不顯示程序窗口
-            p.StartInfo.CreateNoWindow = true;
-            //啟動程序
-            p.Start();
-            //睡眠1s。
-            System.Threading.Thread.Sleep(1000);
-            //輸入命令
-            p.StandardInput.WriteLine(str);
-            //一定要關閉。
-            p.StandardInput.WriteLine("exit");
-        }
-        
         
         private string CurrentDir = new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent.FullName;
 
@@ -5000,28 +4937,6 @@ Response.Write(String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo"));
 
 
 
-C# 獲得硬盤參數程序代碼如下：
-public static void HardDisk(out string[] 制造商, out string[] 型號, out string[] 序列號)
-{
-        ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
-        制造商 = new string[searcher.Get().Count];
-        型號 = new string[searcher.Get().Count];
-        序列號 = new string[searcher.Get().Count];
-        int i = 0;
-        foreach (ManagementObject share in searcher.Get())
-        {
-                try
-                        {
-                        制造商[i] = share.GetPropertyValue("Manufacturer").ToString();
-                        型號[i] = share.GetPropertyValue("Model").ToString();
-                        序列號[i] = share.GetPropertyValue("Signature").ToString();
-                }
-                catch (System.Exception er)
-                {
-                }
-                i ;
-        }
-} 
 
 
 
@@ -5029,43 +4944,6 @@ public static void HardDisk(out string[] 制造商, out string[] 型號, out str
         				
 //--------------------------------------------------------------------------------------------------------------------------
 
-C# 獲得網卡參數程序代碼如下：
-public static void NetworkAdapter(out string[] 制造商, out string[] MAC地址)
-{
-        ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_NetworkAdapter");
-        制造商 = new string[searcher.Get().Count];
-        MAC地址 = new string[searcher.Get().Count];
-        int i = 0;
-        foreach (ManagementObject share in searcher.Get())
-        {
-                try
-                {
-                        制造商[i] = share.GetPropertyValue("Manufacturer").ToString();
-                        MAC地址[i] = share.GetPropertyValue("MACAddress").ToString();
-                }
-                        catch (System.Exception er)
-                {
-                }
-                i ;
-        }
-} 
-
-
-
-//--------------------------------------------------------------------------------------------------------------------------
-
-C# 獲得主板序列號程序代碼如下：
-public static void MainboardSerialNumber(out string[] 序列號)
-{
-        ManagementObjectSearcher searcher = new ManagementObjectSearcher("Select * From Win32_BIOS");
-        序列號 = new string[searcher.Get().Count];
-        int i = 0;
-        foreach (ManagementObject share in searcher.Get())
-        {
-                序列號[i] = share.GetPropertyValue("SerialNumber").ToString();
-                i ;
-        }
-}
 
 
 
@@ -5073,21 +4951,7 @@ public static void MainboardSerialNumber(out string[] 序列號)
 
 
 
-C# 獲得主板參數程序代碼如下：
-public static void Mainboard(out string[] 制造商, out string[] 型號)
-{
-        ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_BaseBoard");
-        制造商 = new string[searcher.Get().Count];
-        型號 = new string[searcher.Get().Count];
-        int i = 0;
-        foreach (ManagementObject share in searcher.Get())
-        {
-                制造商[i] = share.GetPropertyValue("Manufacturer").ToString();
-                型號[i] = share.GetPropertyValue("Product").ToString();
-                i ;
-        }
-} 
-
+//--------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -5102,37 +4966,7 @@ public static void Mainboard(out string[] 制造商, out string[] 型號)
 //--------------------------------------------------------------------------------------------------------------------------
 
 
-//C# 執行CMD命令方法
 
-        /// <summary>
-        /// 執行Cmd命令
-        /// </summary>
-        public void ExecCmd(string cmdstr)
-        {
-            System.Diagnostics.Process process = new System.Diagnostics.Process();
-            process.StartInfo.FileName = "cmd.exe";
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.CreateNoWindow = true;
-            process.StartInfo.RedirectStandardOutput = true;
-            process.StartInfo.RedirectStandardInput = true;
-            process.Start();
-
-            process.StandardInput.WriteLine(cmdstr);
-            process.StandardInput.AutoFlush = true;
-            process.StandardInput.WriteLine("exit");
-
-            StreamReader reader = process.StandardOutput;//截取輸出流
-
-            string output = reader.ReadLine();//每次讀取一行
-
-            while (!reader.EndOfStream)
-            {
-                PrintThrendInfo(output);
-                output = reader.ReadLine();
-            }
-
-            process.WaitForExit();
-        }
 
         				
 //--------------------------------------------------------------------------------------------------------------------------

@@ -1,4 +1,4 @@
-﻿namespace vcs_PictureBox1
+﻿namespace vcs_PictureBox5
 {
     partial class Form1
     {
@@ -34,20 +34,20 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(154, 41);
+            this.pictureBox1.Location = new System.Drawing.Point(93, 86);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(153, 169);
-            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabIndex = 1;
             this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(319, 255);
+            this.ClientSize = new System.Drawing.Size(385, 360);
             this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
-            this.Text = "Form1";
+            this.Text = "拉動表單大小連帶改變pictureBox大小";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);

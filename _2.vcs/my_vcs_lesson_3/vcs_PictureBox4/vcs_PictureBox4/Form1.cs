@@ -16,15 +16,21 @@ namespace vcs_PictureBox4
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             //讀取圖檔
             string filename = @"C:\______test_files\bear.jpg";
 
-            Image myImage = System.Drawing.Image.FromFile(filename);
-            pictureBox1.Image = myImage;
-            pictureBox1.Height = myImage.Height;
-            pictureBox1.Width = myImage.Width;
+            Image image = Image.FromFile(filename);
+            pictureBox1.Image = image;
+            pictureBox1.Height = image.Height;
+            pictureBox1.Width = image.Width;
         }
+
     }
 }

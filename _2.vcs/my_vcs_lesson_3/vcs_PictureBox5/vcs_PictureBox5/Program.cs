@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_ImageProcessing3b
+namespace vcs_PictureBox5
 {
     static class Program
     {
