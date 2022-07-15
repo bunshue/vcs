@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_SaveWebpage_Image", "vcs_SaveWebpage_Image\vcs_SaveWebpage_Image.csproj", "{83AF30FB-2D27-42C9-B8B1-1797CB3C10C9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_SaveImage", "vcs_SaveImage\vcs_SaveImage.csproj", "{83AF30FB-2D27-42C9-B8B1-1797CB3C10C9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

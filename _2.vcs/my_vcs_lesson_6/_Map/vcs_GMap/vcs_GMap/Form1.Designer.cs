@@ -738,8 +738,9 @@
             this.rb_location12.AutoSize = true;
             this.rb_location12.Location = new System.Drawing.Point(104, 97);
             this.rb_location12.Name = "rb_location12";
-            this.rb_location12.Size = new System.Drawing.Size(14, 13);
+            this.rb_location12.Size = new System.Drawing.Size(47, 16);
             this.rb_location12.TabIndex = 11;
+            this.rb_location12.Text = "大清";
             this.rb_location12.UseVisualStyleBackColor = true;
             this.rb_location12.CheckedChanged += new System.EventHandler(this.radioButton_location_CheckedChanged);
             // 

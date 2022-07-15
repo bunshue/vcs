@@ -426,37 +426,6 @@ namespace vcs_Mix00
         private void button9_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //獲得處理器參數程序代碼
-            get_ProcessorInfo();
-        }
-
-        void get_ProcessorInfo()
-        {
-            string[] 制造商;
-            string[] 型號;
-            string[] 序列號;
-
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
-            制造商 = new string[mos.Get().Count];
-            型號 = new string[mos.Get().Count];
-            序列號 = new string[mos.Get().Count];
-            int i = 0;
-            foreach (ManagementObject mo in mos.Get())
-            {
-                try
-                {
-                    制造商[i] = mo.GetPropertyValue("Manufacturer").ToString();
-                    序列號[i] = mo.GetPropertyValue("ProcessorId").ToString();
-
-                    richTextBox1.Text += "制造商[" + i.ToString() + "] : " + 制造商[i].ToString() + "\n";
-                    richTextBox1.Text += "序列號[" + i.ToString() + "] : " + 序列號[i].ToString() + "\n";
-                }
-                catch (System.Exception er)
-                {
-                }
-                i++;
-            }
         }
 
         //局部圖像放大

@@ -336,18 +336,18 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(369, 297);
+            this.textBox1.Location = new System.Drawing.Point(342, 306);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(171, 22);
+            this.textBox1.Size = new System.Drawing.Size(160, 22);
             this.textBox1.TabIndex = 20;
             this.textBox1.Text = "13987654321";
             this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(369, 332);
+            this.button1.Location = new System.Drawing.Point(342, 342);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(171, 23);
+            this.button1.Size = new System.Drawing.Size(160, 40);
             this.button1.TabIndex = 22;
             this.button1.Text = "檢查中國手機號";
             this.button1.UseVisualStyleBackColor = true;
@@ -355,9 +355,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(369, 419);
+            this.button2.Location = new System.Drawing.Point(342, 431);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(171, 23);
+            this.button2.Size = new System.Drawing.Size(160, 40);
             this.button2.TabIndex = 24;
             this.button2.Text = "驗證每個月的天數";
             this.button2.UseVisualStyleBackColor = true;
@@ -365,18 +365,18 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(369, 384);
+            this.textBox2.Location = new System.Drawing.Point(342, 394);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(171, 22);
+            this.textBox2.Size = new System.Drawing.Size(160, 22);
             this.textBox2.TabIndex = 23;
             this.textBox2.Text = "25";
             this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(369, 480);
+            this.button3.Location = new System.Drawing.Point(342, 492);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(171, 23);
+            this.button3.Size = new System.Drawing.Size(160, 40);
             this.button3.TabIndex = 25;
             this.button3.Text = "正規表示式的使用";
             this.button3.UseVisualStyleBackColor = true;
@@ -384,9 +384,9 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(369, 253);
+            this.button4.Location = new System.Drawing.Point(342, 253);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(171, 23);
+            this.button4.Size = new System.Drawing.Size(160, 40);
             this.button4.TabIndex = 27;
             this.button4.Text = "檢查台灣手機號";
             this.button4.UseVisualStyleBackColor = true;
@@ -394,18 +394,18 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(369, 218);
+            this.textBox3.Location = new System.Drawing.Point(342, 218);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(171, 22);
+            this.textBox3.Size = new System.Drawing.Size(160, 22);
             this.textBox3.TabIndex = 26;
             this.textBox3.Text = "0922123456";
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(562, 253);
+            this.button5.Location = new System.Drawing.Point(540, 253);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(171, 23);
+            this.button5.Size = new System.Drawing.Size(160, 40);
             this.button5.TabIndex = 29;
             this.button5.Text = "檢查是否為數值";
             this.button5.UseVisualStyleBackColor = true;
@@ -413,36 +413,36 @@
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(562, 218);
+            this.textBox4.Location = new System.Drawing.Point(540, 218);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(171, 22);
+            this.textBox4.Size = new System.Drawing.Size(160, 22);
             this.textBox4.TabIndex = 28;
             this.textBox4.Text = "0x1234";
             this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tb_email
             // 
-            this.tb_email.Location = new System.Drawing.Point(562, 297);
+            this.tb_email.Location = new System.Drawing.Point(540, 306);
             this.tb_email.Name = "tb_email";
-            this.tb_email.Size = new System.Drawing.Size(171, 22);
+            this.tb_email.Size = new System.Drawing.Size(160, 22);
             this.tb_email.TabIndex = 30;
             this.tb_email.Text = "david@yahoo.com.tw";
             this.tb_email.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // tb_rul
             // 
-            this.tb_rul.Location = new System.Drawing.Point(562, 384);
+            this.tb_rul.Location = new System.Drawing.Point(540, 394);
             this.tb_rul.Name = "tb_rul";
-            this.tb_rul.Size = new System.Drawing.Size(171, 22);
+            this.tb_rul.Size = new System.Drawing.Size(160, 22);
             this.tb_rul.TabIndex = 31;
             this.tb_rul.Text = "http://www.yahoo.com.tw";
             this.tb_rul.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(562, 332);
+            this.button6.Location = new System.Drawing.Point(540, 342);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(171, 23);
+            this.button6.Size = new System.Drawing.Size(160, 40);
             this.button6.TabIndex = 32;
             this.button6.Text = "驗證Email格式";
             this.button6.UseVisualStyleBackColor = true;
@@ -450,9 +450,9 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(562, 419);
+            this.button7.Location = new System.Drawing.Point(540, 431);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(171, 23);
+            this.button7.Size = new System.Drawing.Size(160, 40);
             this.button7.TabIndex = 33;
             this.button7.Text = "驗證URl網址格式";
             this.button7.UseVisualStyleBackColor = true;

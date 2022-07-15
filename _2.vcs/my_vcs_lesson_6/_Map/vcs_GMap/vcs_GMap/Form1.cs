@@ -2687,6 +2687,19 @@ namespace vcs_GMap
             }
             else if (rb_location12.Checked == true)
             {
+                //大清地圖
+
+                string[,] location = null;
+
+                location = new string[,] {
+{ "北京", "39.905556", "116.391389"},
+{ "盛京", "41.795556", "123.448056"},
+{ "寧古塔", "44.416815360491", "129.1617512724705"},	//黑龍江省牡丹江市海林市長汀鎮古城村
+{ "五國城", "46.333333", "129.566667"},
+            };
+
+                show_locations(location);
+                gMapControl1.Zoom = 6; //當前比例
 
             }
             else if (rb_location13.Checked == true)

@@ -190,12 +190,58 @@ namespace vcs_WMI__new
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //獲得處理器參數程序代碼
+            get_ProcessorInfo();
+        }
+
+        void get_ProcessorInfo()
+        {
+            string[] 制造商;
+            string[] 型號;
+            string[] 序列號;
+
+            ManagementObjectSearcher mos = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
+            制造商 = new string[mos.Get().Count];
+            型號 = new string[mos.Get().Count];
+            序列號 = new string[mos.Get().Count];
+            int i = 0;
+            foreach (ManagementObject mo in mos.Get())
+            {
+                try
+                {
+                    制造商[i] = mo.GetPropertyValue("Manufacturer").ToString();
+                    序列號[i] = mo.GetPropertyValue("ProcessorId").ToString();
+
+                    richTextBox1.Text += "制造商[" + i.ToString() + "] : " + 制造商[i].ToString() + "\n";
+                    richTextBox1.Text += "序列號[" + i.ToString() + "] : " + 序列號[i].ToString() + "\n";
+                }
+                catch (System.Exception er)
+                {
+                }
+                i++;
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-
+            //獲得硬盤空間
+            richTextBox1.Text += "獲得硬盤空間 : " + GetDiskSpace() + "\n";
         }
+
+        //獲得硬盤空間
+        public System.UInt64 GetDiskSpace()
+        {
+            ManagementClass diskClass = new ManagementClass("Win32_LogicalDisk");
+            ManagementObjectCollection disks = diskClass.GetInstances();
+            System.UInt64 space = UInt64.MinValue;
+            foreach (ManagementObject disk in disks)
+            {
+                if ((disk["Name"]).ToString() == "C:")
+                    space = (System.UInt64)(disk["FreeSpace"]);
+            }
+            return space;
+        }  
+
 
         private void button5_Click(object sender, EventArgs e)
         {

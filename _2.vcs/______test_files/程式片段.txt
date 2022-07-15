@@ -1,3 +1,19 @@
+整理搜尋關鍵字
+DataTable
+
+
+
+this.toolStripStatusLabel3.Text = DateTime.Now.DayOfWeek.ToString();
+this.textBox1.SelectedText = DateTime.Now.ToString();
+this.textBox1.Text += DateTime.Now;
+
+ToolStripStatusLabel1.Text = "當前時間:" + DateTime.Now.ToLongTimeString(); 
+
+            //DateTime轉字串需顯示毫秒
+            //DateTime.ToString("yyyyMMddhhmmssfff")，fff 格式包含毫秒值中任何結尾的零。
+            richTextBox1.Text += DateTime.Now.ToString("yyyy_MMdd_hhmmss.fff") + "\n";
+   
+
 
 
 pictureCrop 標準版
@@ -767,16 +783,6 @@ https://www.twblogs.net/a/5f02b56e9644181341a1b6e0
 //是否是指名serial port讀取長度 未達目的決不罷休?
 serial.Read(bytData, 0, bytData.Length, Timeout.Infinite);
 
-
-//DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元9999年12月31日23點59分59秒之間的具體日期時刻
-            //vcs史上最早時間
-            DateTime minTime = DateTime.MinValue;
-
-            //vcs史上最晚時間
-            DateTime maxTime = DateTime.MaxValue;
-
-            richTextBox1.Text += "vcs史上最早時間 : " + minTime.ToString() + "\n";
-            richTextBox1.Text += "vcs史上最晚時間 : " + maxTime.ToString() + "\n";
 
 
 
@@ -1877,19 +1883,6 @@ str=str.PadRight(30,' ') //向長度小於30的字符串末尾添加空格，補
 button1.MouseLeave += new Syetem.EvenHandler（button1_MLeave）；
 
 
-//計算耗時任務所需的秒數
-
-　　public int GetTimeSpan(DateTime dtStart, DateTime dtEnd)
-　　{
-　　TimeSpan tsStart = new TimeSpan(dtStart.Ticks);
-　　TimeSpan tsEnd = new TimeSpan(dtEnd.Ticks);
-　　TimeSpan ts = tsEnd.Subtract(tsStart).Duration();//秒
-　　//dateDiff = ts.Days.ToString() + "天" + ts.Hours.ToString() + "小時" + ts.Minutes.ToString() + "分鐘" + ts.Seconds.ToString() + "秒";
-　　return ts.Seconds;
-　　}    
-        
-
-
 其中，getSubNode為一方法，用於獲取子目錄，以創建目錄樹節點，參數：PathName為獲取的子目錄在此節點下創建子節點，參數isEnd：結束標志,true則結束。
 
 private void getSubNode(TreeNode PathName,bool isEnd)
@@ -2353,29 +2346,6 @@ ListView添加內容範例
 
         }
         
-        
-        
-        
-
-
-//計算耗時任務所需的秒數
-
-　　public int GetTimeSpan(DateTime dtStart, DateTime dtEnd)
-
-　　{
-
-　　TimeSpan tsStart = new TimeSpan(dtStart.Ticks);
-
-　　TimeSpan tsEnd = new TimeSpan(dtEnd.Ticks);
-
-　　TimeSpan ts = tsEnd.Subtract(tsStart).Duration();//秒
-
-　　//dateDiff = ts.Days.ToString() + "天" + ts.Hours.ToString() + "小時" + ts.Minutes.ToString() + "分鐘" + ts.Seconds.ToString() + "秒";
-
-　　return ts.Seconds;
-
-　　}      
-
 
 MemoryStream 可以seek
                     MemoryStream ms = new MemoryStream();
@@ -2424,14 +2394,6 @@ MemoryStream 可以seek
         }
         
         
-            string m_fileName = DateTime.Now.ToFileTime().ToString() + ".jpg";
-            richTextBox1.Text += m_fileName + "\n";
-
- toolStripStatusLabel1.Text = "當前時間:" + DateTime.Now.ToLongTimeString(); 
- 
- 
- 
-       
 
     
             
@@ -3012,12 +2974,6 @@ c#畫三角形、並填充顏色
 	e.Graphics.FillPolygon(Brushes.Red, pntArr);
 
 
-
-this.toolStripStatusLabel3.Text = DateTime.Now.DayOfWeek.ToString();
-this.textBox1.SelectedText = DateTime.Now.ToString();
-this.textBox1.Text += DateTime.Now;
-
-
 //c#記事本實現代碼
 
 
@@ -3464,28 +3420,6 @@ string appPath = Application.ExecutablePath;
 通过设置控件背景色的alpha值
 panel1.BackColor = Color.FromA#41ccd4;
 注意：在设计时手动输入这些值，不要用颜色选取
-
-
-設定倒數計時
-        DateTime dtTarget;
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            //dtTarget = DateTime.Now.AddHours(2);  //設定兩小時後
-            dtTarget = new DateTime(2021, 9, 30, 12, 0, 0);   //設定特定時間
-
-            timer1.Start();
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            TimeSpan diffTime = dtTarget.Subtract(DateTime.Now);
-
-            string diffHour = Convert.ToString(diffTime.Hours);
-            string diffMin = Convert.ToString(diffTime.Minutes);
-            string diffSec = Convert.ToString(diffTime.Seconds);
-            label1.Text = "距離 " + dtTarget.ToString() + " 還有 " + diffHour + " 時 " + diffMin + " 分 " + diffSec + " 秒";
-
-        }
 
 
         //執行時期 顯示 屬性編輯視窗

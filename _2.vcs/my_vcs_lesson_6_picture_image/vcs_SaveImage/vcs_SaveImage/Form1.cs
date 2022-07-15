@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.IO;                //for Directory
 using System.Drawing.Imaging;   //for ImageFormat
 
-namespace vcs_SaveWebpage_Image
+namespace vcs_SaveImage
 {
     public partial class Form1 : Form
     {

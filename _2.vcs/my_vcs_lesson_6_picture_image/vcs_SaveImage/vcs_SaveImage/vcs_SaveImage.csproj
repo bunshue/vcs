@@ -8,8 +8,8 @@
     <ProjectGuid>{83AF30FB-2D27-42C9-B8B1-1797CB3C10C9}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_SaveWebpage_Image</RootNamespace>
-    <AssemblyName>vcs_SaveWebpage_Image</AssemblyName>
+    <RootNamespace>vcs_SaveImage</RootNamespace>
+    <AssemblyName>vcs_SaveImage</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

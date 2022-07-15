@@ -184,6 +184,14 @@
             this.button78 = new System.Windows.Forms.Button();
             this.button79 = new System.Windows.Forms.Button();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
+            this.groupBox11 = new System.Windows.Forms.GroupBox();
+            this.bt_diff_time = new System.Windows.Forms.Button();
+            this.tb_stop_time = new System.Windows.Forms.TextBox();
+            this.tb_start_time = new System.Windows.Forms.TextBox();
+            this.groupBox12 = new System.Windows.Forms.GroupBox();
+            this.bt_countdown = new System.Windows.Forms.Button();
+            this.tb_countdown = new System.Windows.Forms.TextBox();
+            this.timer_countdown = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -194,6 +202,8 @@
             this.groupBox8.SuspendLayout();
             this.groupBox9.SuspendLayout();
             this.groupBox10.SuspendLayout();
+            this.groupBox11.SuspendLayout();
+            this.groupBox12.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -529,7 +539,6 @@
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(170, 50);
             this.button30.TabIndex = 31;
-            this.button30.Text = "由日期找出星座";
             this.button30.UseVisualStyleBackColor = true;
             this.button30.Click += new System.EventHandler(this.button30_Click);
             // 
@@ -595,7 +604,6 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(170, 50);
             this.button29.TabIndex = 38;
-            this.button29.Text = "2022年距今還有多久";
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
@@ -628,7 +636,6 @@
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(170, 50);
             this.button33.TabIndex = 44;
-            this.button33.Text = "十二生肖 年";
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
@@ -683,7 +690,6 @@
             this.button38.Name = "button38";
             this.button38.Size = new System.Drawing.Size(170, 50);
             this.button38.TabIndex = 39;
-            this.button38.Text = "計算兩個日期的時間間隔";
             this.button38.UseVisualStyleBackColor = true;
             this.button38.Click += new System.EventHandler(this.button38_Click);
             // 
@@ -769,7 +775,6 @@
             this.button44.Name = "button44";
             this.button44.Size = new System.Drawing.Size(170, 50);
             this.button44.TabIndex = 56;
-            this.button44.Text = "兩時間相隔";
             this.button44.UseVisualStyleBackColor = true;
             this.button44.Click += new System.EventHandler(this.button44_Click);
             // 
@@ -1454,6 +1459,7 @@
             this.bt_special_08.Name = "bt_special_08";
             this.bt_special_08.Size = new System.Drawing.Size(120, 40);
             this.bt_special_08.TabIndex = 90;
+            this.bt_special_08.Text = "生肖/星座";
             this.bt_special_08.UseVisualStyleBackColor = true;
             this.bt_special_08.Click += new System.EventHandler(this.bt_special_08_Click);
             // 
@@ -1650,6 +1656,7 @@
             this.button60.Name = "button60";
             this.button60.Size = new System.Drawing.Size(170, 50);
             this.button60.TabIndex = 90;
+            this.button60.Text = "vcs時間之最早最晚";
             this.button60.UseVisualStyleBackColor = true;
             this.button60.Click += new System.EventHandler(this.button60_Click);
             // 
@@ -1853,11 +1860,99 @@
             this.groupBox10.TabIndex = 111;
             this.groupBox10.TabStop = false;
             // 
+            // groupBox11
+            // 
+            this.groupBox11.Controls.Add(this.bt_diff_time);
+            this.groupBox11.Controls.Add(this.tb_stop_time);
+            this.groupBox11.Controls.Add(this.tb_start_time);
+            this.groupBox11.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox11.ForeColor = System.Drawing.Color.Blue;
+            this.groupBox11.Location = new System.Drawing.Point(1122, 707);
+            this.groupBox11.Name = "groupBox11";
+            this.groupBox11.Size = new System.Drawing.Size(260, 147);
+            this.groupBox11.TabIndex = 65;
+            this.groupBox11.TabStop = false;
+            this.groupBox11.Text = "相距天數";
+            // 
+            // bt_diff_time
+            // 
+            this.bt_diff_time.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_diff_time.ForeColor = System.Drawing.Color.Black;
+            this.bt_diff_time.Location = new System.Drawing.Point(194, 66);
+            this.bt_diff_time.Name = "bt_diff_time";
+            this.bt_diff_time.Size = new System.Drawing.Size(60, 40);
+            this.bt_diff_time.TabIndex = 72;
+            this.bt_diff_time.Text = "相距";
+            this.bt_diff_time.UseVisualStyleBackColor = true;
+            this.bt_diff_time.Click += new System.EventHandler(this.bt_diff_time_Click);
+            // 
+            // tb_stop_time
+            // 
+            this.tb_stop_time.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_stop_time.Location = new System.Drawing.Point(23, 96);
+            this.tb_stop_time.Name = "tb_stop_time";
+            this.tb_stop_time.Size = new System.Drawing.Size(164, 36);
+            this.tb_stop_time.TabIndex = 73;
+            this.tb_stop_time.Text = "2022/7/7";
+            this.tb_stop_time.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // tb_start_time
+            // 
+            this.tb_start_time.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_start_time.Location = new System.Drawing.Point(23, 37);
+            this.tb_start_time.Name = "tb_start_time";
+            this.tb_start_time.Size = new System.Drawing.Size(164, 36);
+            this.tb_start_time.TabIndex = 72;
+            this.tb_start_time.Text = "2021/5/24";
+            this.tb_start_time.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // groupBox12
+            // 
+            this.groupBox12.Controls.Add(this.bt_countdown);
+            this.groupBox12.Controls.Add(this.tb_countdown);
+            this.groupBox12.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox12.ForeColor = System.Drawing.Color.Blue;
+            this.groupBox12.Location = new System.Drawing.Point(1176, 876);
+            this.groupBox12.Name = "groupBox12";
+            this.groupBox12.Size = new System.Drawing.Size(186, 147);
+            this.groupBox12.TabIndex = 74;
+            this.groupBox12.TabStop = false;
+            this.groupBox12.Text = "設定倒數計時";
+            // 
+            // bt_countdown
+            // 
+            this.bt_countdown.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_countdown.ForeColor = System.Drawing.Color.Black;
+            this.bt_countdown.Location = new System.Drawing.Point(68, 99);
+            this.bt_countdown.Name = "bt_countdown";
+            this.bt_countdown.Size = new System.Drawing.Size(60, 40);
+            this.bt_countdown.TabIndex = 72;
+            this.bt_countdown.Text = "倒數";
+            this.bt_countdown.UseVisualStyleBackColor = true;
+            this.bt_countdown.Click += new System.EventHandler(this.bt_countdown_Click);
+            // 
+            // tb_countdown
+            // 
+            this.tb_countdown.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_countdown.Location = new System.Drawing.Point(26, 25);
+            this.tb_countdown.Multiline = true;
+            this.tb_countdown.Name = "tb_countdown";
+            this.tb_countdown.Size = new System.Drawing.Size(144, 67);
+            this.tb_countdown.TabIndex = 72;
+            this.tb_countdown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // timer_countdown
+            // 
+            this.timer_countdown.Interval = 1000;
+            this.timer_countdown.Tick += new System.EventHandler(this.timer_countdown_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1660, 1061);
+            this.Controls.Add(this.groupBox12);
+            this.Controls.Add(this.groupBox11);
             this.Controls.Add(this.groupBox10);
             this.Controls.Add(this.button79);
             this.Controls.Add(this.button78);
@@ -1967,6 +2062,10 @@
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
             this.groupBox10.ResumeLayout(false);
+            this.groupBox11.ResumeLayout(false);
+            this.groupBox11.PerformLayout();
+            this.groupBox12.ResumeLayout(false);
+            this.groupBox12.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -2128,6 +2227,14 @@
         private System.Windows.Forms.Button button78;
         private System.Windows.Forms.Button button79;
         private System.Windows.Forms.GroupBox groupBox10;
+        internal System.Windows.Forms.GroupBox groupBox11;
+        private System.Windows.Forms.Button bt_diff_time;
+        private System.Windows.Forms.TextBox tb_stop_time;
+        private System.Windows.Forms.TextBox tb_start_time;
+        internal System.Windows.Forms.GroupBox groupBox12;
+        private System.Windows.Forms.Button bt_countdown;
+        private System.Windows.Forms.TextBox tb_countdown;
+        private System.Windows.Forms.Timer timer_countdown;
     }
 }
 

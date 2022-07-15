@@ -1,4 +1,4 @@
-﻿namespace vcs_SaveWebpage_Image
+﻿namespace vcs_SaveImage
 {
     partial class Form1
     {
