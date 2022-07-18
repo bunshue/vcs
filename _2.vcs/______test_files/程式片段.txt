@@ -4088,30 +4088,6 @@ ReadAllLines
 
 
 
-MD5加密
-
-protected void Page_Load(object sender, EventArgs e)
-{
-    string s = "123";
-    Response.Write(getMd5(s));
-}
-
-public string getMd5(string str)
-{
-    MD5 md5 = MD5.Create();//MD5抽象類無法實例化 實例化該方法
-    byte[] buffer = Encoding.Default.GetBytes(str); //將字符串轉換為字節數組
-    byte[] mdbuffer = md5.ComputeHash(buffer); //調用ComputeHash方法把數組傳進去
-    //將字節數組中每個元素ToString();
-    StringBuilder result = new StringBuilder();
-    for (int i = 0; i < mdbuffer.Length; i++)
-    {
-        result.Append(mdbuffer[i].ToString("x2")); //ToString得到十進制字符串 ToString("x")十六進制字符串 ToString("x2")對齊
-    }
-    return result.ToString();
-}
-
-
-
 
         				
 //--------------------------------------------------------------------------------------------------------------------------
