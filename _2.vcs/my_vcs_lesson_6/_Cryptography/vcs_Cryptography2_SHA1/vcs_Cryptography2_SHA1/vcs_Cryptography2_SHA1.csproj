@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{EFFFF04A-47BB-45A6-99C4-714F252A757F}</ProjectGuid>
+    <ProjectGuid>{5EB67E20-941A-4FE4-87F7-FF6FE41E71BB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_Cryptography8</RootNamespace>
-    <AssemblyName>vcs_Cryptography8</AssemblyName>
+    <RootNamespace>vcs_Cryptography2_SHA1</RootNamespace>
+    <AssemblyName>vcs_Cryptography2_SHA1</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

@@ -19,6 +19,8 @@ namespace vcs_Cryptography1_MD5
 {
     public partial class Form1 : Form
     {
+        string str_clear_text = "this is a lion-mouse";
+
         public Form1()
         {
             InitializeComponent();
@@ -289,9 +291,61 @@ namespace vcs_Cryptography1_MD5
             return pwd;
         }
 
+        private string GetStringValue(byte[] Byte)
+        {
+            string tmpString = "";
+            /*
+            ASCIIEncoding Asc = new ASCIIEncoding();
+            tmpString = Asc.GetString(Byte);
+            */
+            int iCounter;
+            for (iCounter = 0; iCounter < Byte.Length; iCounter++)
+            {
+                tmpString = tmpString + Byte[iCounter].ToString();
+            }
+            return tmpString;
+        }
+
+        private byte[] GetKeyByteArray(string strKey)
+        {
+            ASCIIEncoding Asc = new ASCIIEncoding();
+            int tmpStrLen = strKey.Length;
+            byte[] tmpByte = new byte[tmpStrLen - 1];
+            tmpByte = Asc.GetBytes(strKey);
+            return tmpByte;
+        }
+
+        private string getstrIN(string strIN)
+        {
+            if (strIN.Length == 0)
+            {
+                strIN = "~NULL~";
+            }
+            return strIN;
+        }
+
+        ///   <summary>
+        ///   給一個字符串進行MD5加密
+        ///   </summary>
+        ///   <param   name="strText">待加密字符串</param>
+        ///   <returns>加密後的字符串</returns>
+        public string MD5Encrypt(string strText)
+        {
+            richTextBox1.Text += "1111111\n";
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] result = md5.ComputeHash(GetKeyByteArray(getstrIN(strText)));
+            return GetStringValue(result);
+            /* fail
+            byte[] result = md5.ComputeHash(System.Text.Encoding.Default.GetBytes(strText));
+            return System.Text.Encoding.Default.GetString(result);
+            */
+        }
+
         private void button8_Click(object sender, EventArgs e)
         {
-
+            //將字串用MD5加密
+            string s1 = MD5Encrypt(str_clear_text);
+            richTextBox1.Text += "s1 = " + s1 + "\n";
         }
 
         private void button9_Click(object sender, EventArgs e)

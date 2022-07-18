@@ -84,84 +84,19 @@ namespace vcs_Cryptography4_MD5_SHA1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //第一個檔案
-            string FirstFilePath = "c://______test_files//zzz.html";
-            //第一個檔案的MD5碼
-            string FirstFileMD5 = string.Empty;
-            //建立MD5的演算法
-            HashAlgorithm algorithm = MD5.Create();
-            //取得第一個檔案MD5演算後的陣列
-            byte[] FirstHash = algorithm.ComputeHash(File.ReadAllBytes(FirstFilePath));
-            //建立第一個檔案的MD5碼
-            foreach (byte b in FirstHash)
-            {
-                FirstFileMD5 += b.ToString("X2");
-            }
-            richTextBox1.Text += "檔案：" + FirstFilePath + ",\tMD5：" + FirstFileMD5 + "\n";
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //string InputValue = "這是要轉MD5的文字";
-            string InputValue = "Hello World!";
-            string OutputValue = string.Empty;
-
-            //建立MD5的演算法
-            HashAlgorithm algorithm = MD5.Create();
-            //取得MD5演算後的陣列
-            byte[] hash = algorithm.ComputeHash(Encoding.UTF8.GetBytes(InputValue));
-            //依序轉存到OutputValue
-            foreach (byte b in hash)
-            {
-                OutputValue += b.ToString("X2");
-            }
-            richTextBox1.Text += "字串：" + InputValue + ",\tMD5：" + OutputValue + "\n";
-        }
-
-        //結果：// The MD5 hash of Hello World! is: ed076287532e86365e841e92bfc50d8c.
-        static string GetMd5Hash(MD5 md5Hash, string input)
-        {
-
-            // Convert the input string to a byte array and compute the hash.
-            byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(input));
-
-            // Create a new Stringbuilder to collect the bytes
-            // and create a string.
-            StringBuilder sBuilder = new StringBuilder();
-
-            // Loop through each byte of the hashed data 
-            // and format each one as a hexadecimal string.
-            for (int i = 0; i < data.Length; i++)
-            {
-                sBuilder.Append(data[i].ToString("x2"));
-            }
-
-            // Return the hexadecimal string.
-            return sBuilder.ToString();
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            string source = "Hello World!";
-            using (MD5 md5Hash = MD5.Create())
-            {
-                string hash = GetMd5Hash(md5Hash, source);
-                richTextBox1.Text += "The MD5 hash of " + source + " is: " + hash + ".\n";
-
-            }
 
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                using (FileStream fs = File.OpenRead(openFileDialog1.FileName))
-                {
-                    MD5 m = MD5.Create();
-                    richTextBox1.Text += "MD5 result : " + Convert.ToBase64String(m.ComputeHash(fs));
-                }
-            }
 
         }
 
@@ -196,24 +131,9 @@ namespace vcs_Cryptography4_MD5_SHA1
 
         }
 
-        public string Encrypt(string strPwd)
-        {
-            MD5 md5 = new MD5CryptoServiceProvider();   //創建MD5對象
-            byte[] data = System.Text.Encoding.Default.GetBytes(strPwd);//將字串編碼為一個Byte序列
-            byte[] md5data = md5.ComputeHash(data);//計算dataByte的Hash值
-            md5.Clear();    //清空MD5對象
-            string str = "";//定義一個變量，用來記錄加密後的密碼
-            for (int i = 0; i < md5data.Length - 1; i++)//遍歷byte數組
-            {
-                str += md5data[i].ToString("x").PadLeft(2, '0');//對遍歷到的Byte進行加密
-            }
-            return str;//返回得到的加密字串
-        }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            string P_str_Code = "ABCDEFG";
-            richTextBox1.Text += "使用MD5加密後的結果為：" + Encrypt(P_str_Code) + "\n";
         }
     }
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_Cryptography8
+namespace vcs_Cryptography2_SHA1
 {
     static class Program
     {
