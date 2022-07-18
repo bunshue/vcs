@@ -33,6 +33,8 @@ namespace ColorStatistics
 
         private void FrmTest_Load(object sender, EventArgs e)
         {
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
             pictureBox1.Image = Image.FromFile(filename);
 
             CmdDeal_Click(sender, e);
@@ -64,24 +66,32 @@ namespace ColorStatistics
         {
             if (MC != null)
             {
+                int offset0 = 10;
+                int offset1 = 60;
+                int offset2 = 180;
+                int offset3 = 400;
+                int dy = 26;
                 double total = 0;
                 e.Graphics.Clear(PicR.BackColor);
-                Font font = new Font("宋體", 9f);
+                Font font = new Font("標楷體", 12);
                 SolidBrush B = new SolidBrush(Color.Black);
-                e.Graphics.DrawString("      顏色        ", font, B, new PointF(0, 0));
-                e.Graphics.DrawString("     百分比      ", font, B, new PointF(120, 0));
-                e.Graphics.DrawString("數量", font, B, new PointF(250, 0));
+                e.Graphics.DrawString("顏色", font, B, new PointF(offset1, 0));
+                e.Graphics.DrawString("百分比", font, B, new PointF(offset2, 0));
+                e.Graphics.DrawString("數量", font, B, new PointF(offset3, 0));
                 B.Dispose();
                 for (int i = 0; i < MC.Count; i++)
                 {
                     B = new SolidBrush(IntToColor(MC[i].Color));
-                    e.Graphics.FillRectangle(B, new Rectangle(0, (i + 1) * 20, 100, 15));
-                    e.Graphics.DrawString(((double)MC[i].Amount / PixelAmount).ToString(), font, B, new PointF(120, (i + 1) * 20 + 3));
+
+                    e.Graphics.DrawString((i + 1).ToString(), font, B, new PointF(offset0, (i + 1) * dy + 3));
+
+                    e.Graphics.FillRectangle(B, new Rectangle(offset1, (i + 1) * dy, 100, 15));
+                    e.Graphics.DrawString(((double)MC[i].Amount / PixelAmount).ToString(), font, B, new PointF(offset2, (i + 1) * dy + 3));
                     total += (double)MC[i].Amount / PixelAmount;
-                    e.Graphics.DrawString(MC[i].Amount.ToString(), font, B, new PointF(250, (i + 1) * 20 + 3));
+                    e.Graphics.DrawString(MC[i].Amount.ToString(), font, B, new PointF(offset3, (i + 1) * dy + 3));
                     B.Dispose();
                 }
-                e.Graphics.DrawString(PixelAmount.ToString(), font, Brushes.Red, new PointF(120, 22 * 20 + 3));
+                e.Graphics.DrawString(PixelAmount.ToString(), font, Brushes.Red, new PointF(offset2, 22 * dy + 3));
 
                 font.Dispose();
             }
@@ -95,6 +105,18 @@ namespace ColorStatistics
                 Stopwatch Sw = new Stopwatch();
                 Sw.Start();
                 MC = Statistics.PrincipalColorAnalysis((Bitmap)pictureBox1.Image, SliderColorAmount.Value, SliderDelta.Value);
+
+                richTextBox1.Text += "len =" + MC.Count.ToString() + "\n";
+                int len = MC.Count;
+                int i;
+                for (i = 0; i < len; i++)
+                {
+                    richTextBox1.Text += (i + 1).ToString() + "\t" + MC[i].Color + "\t" + MC[i].Amount + "\n";
+
+                }
+
+
+
                 Sw.Stop();
                 LblStatus.Text = "計算主成分用時: " + Sw.ElapsedMilliseconds.ToString() + " 毫秒";
                 PixelAmount = pictureBox1.Image.Width * pictureBox1.Image.Height;
@@ -110,6 +132,11 @@ namespace ColorStatistics
         private void SliderDelta_Scroll(object sender, EventArgs e)
         {
             LblDelta.Text = SliderDelta.Value.ToString();
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
     }
 }

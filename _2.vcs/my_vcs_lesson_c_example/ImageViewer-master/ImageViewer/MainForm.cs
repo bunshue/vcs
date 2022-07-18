@@ -83,22 +83,29 @@ namespace ImageViewer
         void show_item_location()
         {
             //最大化螢幕
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.WindowState = FormWindowState.Maximized;
+            //this.FormBorderStyle = FormBorderStyle.None;
+            //this.WindowState = FormWindowState.Maximized;
             //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
 
             //設定執行後的表單起始位置
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(0, 0);
 
+            this.Size = new Size(1920 * 9 / 10, 900);
+
             pictureBox1.Size = new Size(1920 * 7 / 10, 500);
-            richTextBox1.Size = new Size(1920 * 3 / 10, 500);
 
-            label1.Location = new Point(richTextBox1.Location.X + 200, richTextBox1.Location.Y + 40);
-            label2.Location = new Point(richTextBox1.Location.X + 200, richTextBox1.Location.Y + 80);
+            richTextBox1.Size = new Size(200, 500);
 
+            int x_st = this.Width - 250;
+            int y_st = 50;
+
+            label1.Location = new Point(x_st, y_st + 0);
+            label2.Location = new Point(x_st, y_st + 40);
             label1.Text = "PixelInfo";
             label2.Text = "ImageInfo";
+
+            richTextBox1.Location = new Point(x_st, y_st + 80);
 
             bt_open.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_open.Size.Width, richTextBox1.Location.Y + 100);
             button1.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_open.Size.Width, richTextBox1.Location.Y + 150);
@@ -583,6 +590,10 @@ namespace ImageViewer
         {
 
         }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
     }
 }
-

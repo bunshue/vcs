@@ -61,9 +61,13 @@ namespace ColorStatistics
             int[] Map = new int[256];
 
             if (Delta > 2)
+            {
                 HalfDelta = Delta / 2 - 1;
+            }
             else
+            {
                 HalfDelta = 0;
+            }
 
             for (Y = 0; Y < 256; Y++)
             {
@@ -95,11 +99,14 @@ namespace ColorStatistics
             Array.Reverse(Result);
 
             for (Y = 0; Y < PCAAmount; Y++)
+            {
                 MC.Add(new MajorColor(Result[Y].Color, Result[Y].Amount));
+            }
             Bmp.UnlockBits(BmpData);
             GC.Collect();                                   // 立即釋放掉分配的64MB的內存
             return MC;
         }
     }
 }
+
 
