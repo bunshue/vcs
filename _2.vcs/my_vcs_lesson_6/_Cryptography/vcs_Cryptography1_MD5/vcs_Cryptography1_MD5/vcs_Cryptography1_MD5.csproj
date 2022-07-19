@@ -8,8 +8,8 @@
     <ProjectGuid>{A8829772-666D-4876-9143-483AF3DFB0AB}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_Cryptography_new</RootNamespace>
-    <AssemblyName>vcs_Cryptography_new</AssemblyName>
+    <RootNamespace>vcs_Cryptography1_MD5</RootNamespace>
+    <AssemblyName>vcs_Cryptography1_MD5</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>

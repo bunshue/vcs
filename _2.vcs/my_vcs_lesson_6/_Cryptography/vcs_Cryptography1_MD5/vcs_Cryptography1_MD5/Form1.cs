@@ -7,10 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.IO;
 using System.Security.Cryptography; //for CryptoConfig
 
-namespace vcs_Cryptography_new
+namespace vcs_Cryptography1_MD5
 {
     public partial class Form1 : Form
     {
@@ -73,6 +72,19 @@ namespace vcs_Cryptography_new
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
+            button30.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button31.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            button32.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            button33.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            button34.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            button35.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            button36.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            button37.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+            button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
+
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
@@ -95,13 +107,13 @@ namespace vcs_Cryptography_new
             MD5CryptoServiceProvider md5CSP = new MD5CryptoServiceProvider();
 
             //獲取要加密的字段，並轉化為Byte[]數組  
-            byte[] testEncrypt = System.Text.Encoding.Unicode.GetBytes(str_clear_text);
+            byte[] testEncrypt = Encoding.Unicode.GetBytes(str_clear_text);
 
             //加密Byte[]數組  
             byte[] resultEncrypt = md5CSP.ComputeHash(testEncrypt);
 
             //將加密後的數組轉化為字段(普通加密)  
-            string testResult = System.Text.Encoding.Unicode.GetString(resultEncrypt);
+            string testResult = Encoding.Unicode.GetString(resultEncrypt);
 
             //作為密碼方式加密
             //需要改用.NetFramework4.0 且 參考/加入參考 .NET /System.Web
@@ -154,7 +166,7 @@ namespace vcs_Cryptography_new
             string hashString = "";
             for (int i = 0; i < hashBytes.Length; i++)
             {
-                hashString += System.Convert.ToString(hashBytes[i], 16).PadLeft(2, '0');
+                hashString += Convert.ToString(hashBytes[i], 16).PadLeft(2, '0');
             }
 
             return hashString.PadLeft(32, '0');
@@ -185,7 +197,7 @@ namespace vcs_Cryptography_new
             string hashString = "";
             for (int i = 0; i < hashBytes.Length; i++)
             {
-                hashString += System.Convert.ToString(hashBytes[i], 16).PadLeft(2, '0');
+                hashString += Convert.ToString(hashBytes[i], 16).PadLeft(2, '0');
             }
 
             return hashString.PadLeft(32, '0');
@@ -222,79 +234,9 @@ namespace vcs_Cryptography_new
             richTextBox1.Text += "輸出:\n" + output + "\n";
         }
 
-        /// <summary>
-        /// 使用DES加密（Added by niehl 2005-4-6）
-        /// </summary>
-        /// <param name="originalValue">待加密的字符串</param>
-        /// <param name="key">密鑰(最大長度8)</param>
-        /// <param name="IV">初始化向量(最大長度8)</param>
-        /// <returns>加密後的字符串</returns>
-        public string DESEncrypt(string originalValue, string key, string IV)
-        {
-            //將key和IV處理成8個字符
-            key += "12345678";
-            IV += "12345678";
-            key = key.Substring(0, 8);
-            IV = IV.Substring(0, 8);
-            SymmetricAlgorithm sa;
-            ICryptoTransform ct;
-            MemoryStream ms;
-            CryptoStream cs;
-            byte[] byt;
-            sa = new DESCryptoServiceProvider();
-            sa.Key = Encoding.UTF8.GetBytes(key);
-            sa.IV = Encoding.UTF8.GetBytes(IV);
-            ct = sa.CreateEncryptor();
-            byt = Encoding.UTF8.GetBytes(originalValue);
-            ms = new MemoryStream();
-            cs = new CryptoStream(ms, ct, CryptoStreamMode.Write);
-            cs.Write(byt, 0, byt.Length);
-            cs.FlushFinalBlock();
-            cs.Close();
-            return Convert.ToBase64String(ms.ToArray());
-        }
-
-        public string DESEncrypt(string originalValue, string key)
-        {
-            return DESEncrypt(originalValue, key, key);
-        }
-
-        /// <summary>
-        /// 使用DES解密（Added by niehl 2005-4-6）
-        /// </summary>
-        /// <param name="encryptedValue">待解密的字符串</param>
-        /// <param name="key">密鑰(最大長度8)</param>
-        /// <param name="IV">m初始化向量(最大長度8)</param>
-        /// <returns>解密後的字符串</returns>
-        public string DESDecrypt(string encryptedValue, string key, string IV)
-        {
-            //將key和IV處理成8個字符
-            key += "12345678";
-            IV += "12345678";
-            key = key.Substring(0, 8);
-            IV = IV.Substring(0, 8);
-            SymmetricAlgorithm sa;
-            ICryptoTransform ct;
-            MemoryStream ms;
-            CryptoStream cs;
-            byte[] byt;
-            sa = new DESCryptoServiceProvider();
-            sa.Key = Encoding.UTF8.GetBytes(key);
-            sa.IV = Encoding.UTF8.GetBytes(IV);
-            ct = sa.CreateDecryptor();
-            byt = Convert.FromBase64String(encryptedValue);
-            ms = new MemoryStream();
-            cs = new CryptoStream(ms, ct, CryptoStreamMode.Write);
-            cs.Write(byt, 0, byt.Length);
-            cs.FlushFinalBlock();
-            cs.Close();
-            return Encoding.UTF8.GetString(ms.ToArray());
-        }
-
         private void button5_Click(object sender, EventArgs e)
         {
-            //各種加密算法
-
+            //MD5
             byte[] tmpByte;
             MD5 md5 = new MD5CryptoServiceProvider();
             tmpByte = md5.ComputeHash(GetKeyByteArray(str_clear_text));
@@ -302,38 +244,6 @@ namespace vcs_Cryptography_new
             string md5_result = GetStringValue(tmpByte);
 
             richTextBox1.Text += "MD5 = " + md5_result + "\n";
-
-            //byte[] tmpByte;
-            SHA1 sha1 = new SHA1CryptoServiceProvider();
-            tmpByte = sha1.ComputeHash(GetKeyByteArray(str_clear_text));
-            sha1.Clear();
-            string sha1_result = GetStringValue(tmpByte);
-
-            richTextBox1.Text += "SHA1 = " + sha1_result + "\n";
-
-            //byte[] tmpByte;
-            SHA256 sha256 = new SHA256Managed();
-            tmpByte = sha256.ComputeHash(GetKeyByteArray(str_clear_text));
-            sha256.Clear();
-            string sha256_result = GetStringValue(tmpByte);
-
-            richTextBox1.Text += "SHA256 = " + sha256_result + "\n";
-
-            //byte[] tmpByte;
-            SHA512 sha512 = new SHA512Managed();
-            tmpByte = sha512.ComputeHash(GetKeyByteArray(str_clear_text));
-            sha512.Clear();
-            string sha512_result = GetStringValue(tmpByte);
-            richTextBox1.Text += "SHA512 = " + sha512_result + "\n";
-
-
-            string key = "abc";
-            string DES_result = DESEncrypt(str_clear_text, key);
-            richTextBox1.Text += "DES Enc = " + DES_result + "\n";
-
-
-            string DES_decrypt_result = DESDecrypt(DES_result, key, "0");
-            richTextBox1.Text += "DES Dec = " + DES_decrypt_result + "\n";
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -372,7 +282,7 @@ namespace vcs_Cryptography_new
             string hashString = "";
             for (int i = 0; i < hashBytes.Length; i++)
             {
-                hashString += System.Convert.ToString(hashBytes[i], 16).PadLeft(2, '0');
+                hashString += Convert.ToString(hashBytes[i], 16).PadLeft(2, '0');
             }
 
             return hashString.PadLeft(32, '0');
@@ -446,8 +356,8 @@ namespace vcs_Cryptography_new
             byte[] result = md5.ComputeHash(GetKeyByteArray(getstrIN(strText)));
             return GetStringValue(result);
             /* fail
-            byte[] result = md5.ComputeHash(System.Text.Encoding.Default.GetBytes(strText));
-            return System.Text.Encoding.Default.GetString(result);
+            byte[] result = md5.ComputeHash(Encoding.Default.GetBytes(strText));
+            return Encoding.Default.GetString(result);
             */
         }
 
@@ -584,7 +494,7 @@ namespace vcs_Cryptography_new
             byte[] result1 = Encoding.Default.GetBytes(str_clear_text);
             byte[] result2 = md5.ComputeHash(result1);
 
-            string result3 = System.Text.Encoding.Default.GetString(result2);
+            string result3 = Encoding.Default.GetString(result2);
             richTextBox1.Text += "XXXX MD5加密結果 : " + result3 + "\n";
 
         }
@@ -631,7 +541,7 @@ namespace vcs_Cryptography_new
         public static string GetMD5(string myString)
         {
             MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] fromData = System.Text.Encoding.Unicode.GetBytes(myString);
+            byte[] fromData = Encoding.Unicode.GetBytes(myString);
             byte[] targetData = md5.ComputeHash(fromData);
             string byte2String = null;
 
@@ -661,8 +571,8 @@ namespace vcs_Cryptography_new
         public static string MD5Encrypt2(string strText)
         {
             MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] result = md5.ComputeHash(System.Text.Encoding.Default.GetBytes(strText));
-            return System.Text.Encoding.Default.GetString(result);
+            byte[] result = md5.ComputeHash(Encoding.Default.GetBytes(strText));
+            return Encoding.Default.GetString(result);
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -777,7 +687,7 @@ namespace vcs_Cryptography_new
             //MD5加密 l
             /*
             //獲取要加密的字段，並轉化為Byte[]數組
-            byte[] data = System.Text.Encoding.Unicode.GetBytes(str.ToCharArray());
+            byte[] data = Encoding.Unicode.GetBytes(str.ToCharArray());
             //建立加密服務
             MD5 md5 = new MD5CryptoServiceProvider();
             //加密Byte[]數組
@@ -844,7 +754,7 @@ namespace vcs_Cryptography_new
         public string Encrypt(string strPwd)
         {
             MD5 md5 = new MD5CryptoServiceProvider();   //創建MD5對象
-            byte[] data = System.Text.Encoding.Default.GetBytes(strPwd);//將字串編碼為一個Byte序列
+            byte[] data = Encoding.Default.GetBytes(strPwd);//將字串編碼為一個Byte序列
             byte[] md5data = md5.ComputeHash(data);//計算dataByte的Hash值
             md5.Clear();    //清空MD5對象
             string str = "";//定義一個變量，用來記錄加密後的密碼
@@ -881,7 +791,7 @@ namespace vcs_Cryptography_new
         public string Encrypt2(string strPwd)
         {
             MD5 md5 = new MD5CryptoServiceProvider();//创建MD5对象
-            byte[] data = System.Text.Encoding.Default.GetBytes(strPwd);//将字符编码为一个字节序列
+            byte[] data = Encoding.Default.GetBytes(strPwd);//将字符编码为一个字节序列
             byte[] md5data = md5.ComputeHash(data);//计算data字节数组的哈希值
             md5.Clear();//清空MD5对象
             string str = "";//定义一个变量，用来记录加密后的密码
@@ -924,9 +834,9 @@ namespace vcs_Cryptography_new
             //        可得同樣結果
 
             // step 1, calculate MD5 hash from input
-            MD5 md5 = System.Security.Cryptography.MD5.Create();
-            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
-            //byte[] inputBytes = System.Text.Encoding.Unicode.GetBytes(input);
+            MD5 md5 = MD5.Create();
+            byte[] inputBytes = Encoding.ASCII.GetBytes(input);
+            //byte[] inputBytes = Encoding.Unicode.GetBytes(input);
             byte[] hash = md5.ComputeHash(inputBytes);
 
             // step 2, convert byte array to hex string
@@ -956,8 +866,8 @@ namespace vcs_Cryptography_new
         //MD5加密 s ST
         public string CalculateMD5Hash2(string input)
         {
-            MD5 md5 = System.Security.Cryptography.MD5.Create();
-            byte[] inputBytes = System.Text.Encoding.UTF8.GetBytes(input);
+            MD5 md5 = MD5.Create();
+            byte[] inputBytes = Encoding.UTF8.GetBytes(input);
             byte[] hash = md5.ComputeHash(inputBytes);
             // step 2, convert byte array to hex string
             StringBuilder sb = new StringBuilder();
@@ -982,6 +892,56 @@ namespace vcs_Cryptography_new
             richTextBox1.Text += "輸出:\n" + output + "\n";
         }
         //MD5加密 s SP
+
+        private void button30_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button33_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button36_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button38_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button39_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
     public static class EncryptHelper
@@ -1032,7 +992,7 @@ namespace vcs_Cryptography_new
         public static string MD5(string str)
         {
             string strResult = "";
-            MD5 md5 = System.Security.Cryptography.MD5.Create();
+            MD5 md5 = System.Security.Cryptography.MD5.Create();    //此行不能簡略
             byte[] bData = md5.ComputeHash(Encoding.Unicode.GetBytes(str));
             for (int i = 0; i < bData.Length; i++)
             {

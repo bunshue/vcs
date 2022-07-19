@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_Cryptography_new", "vcs_Cryptography_new\vcs_Cryptography_new.csproj", "{A8829772-666D-4876-9143-483AF3DFB0AB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_Cryptography1_MD5", "vcs_Cryptography1_MD5\vcs_Cryptography1_MD5.csproj", "{A8829772-666D-4876-9143-483AF3DFB0AB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

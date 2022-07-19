@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
 using System.Security.Cryptography;
 
 namespace vcs_Cryptography2_SHA1
@@ -152,8 +153,110 @@ namespace vcs_Cryptography2_SHA1
             richTextBox1.Text += "SHA1加密的密碼:" + str1 + "\tSHA1加密長度是：" + str1.Length + "\n";
         }
 
+        /// <summary>
+        /// 使用DES加密（Added by niehl 2005-4-6）
+        /// </summary>
+        /// <param name="originalValue">待加密的字符串</param>
+        /// <param name="key">密鑰(最大長度8)</param>
+        /// <param name="IV">初始化向量(最大長度8)</param>
+        /// <returns>加密後的字符串</returns>
+        public string DESEncrypt(string originalValue, string key, string IV)
+        {
+            //將key和IV處理成8個字符
+            key += "12345678";
+            IV += "12345678";
+            key = key.Substring(0, 8);
+            IV = IV.Substring(0, 8);
+            SymmetricAlgorithm sa;
+            ICryptoTransform ct;
+            MemoryStream ms;
+            CryptoStream cs;
+            byte[] byt;
+            sa = new DESCryptoServiceProvider();
+            sa.Key = Encoding.UTF8.GetBytes(key);
+            sa.IV = Encoding.UTF8.GetBytes(IV);
+            ct = sa.CreateEncryptor();
+            byt = Encoding.UTF8.GetBytes(originalValue);
+            ms = new MemoryStream();
+            cs = new CryptoStream(ms, ct, CryptoStreamMode.Write);
+            cs.Write(byt, 0, byt.Length);
+            cs.FlushFinalBlock();
+            cs.Close();
+            return Convert.ToBase64String(ms.ToArray());
+        }
+
+        public string DESEncrypt(string originalValue, string key)
+        {
+            return DESEncrypt(originalValue, key, key);
+        }
+
+        /// <summary>
+        /// 使用DES解密（Added by niehl 2005-4-6）
+        /// </summary>
+        /// <param name="encryptedValue">待解密的字符串</param>
+        /// <param name="key">密鑰(最大長度8)</param>
+        /// <param name="IV">m初始化向量(最大長度8)</param>
+        /// <returns>解密後的字符串</returns>
+        public string DESDecrypt(string encryptedValue, string key, string IV)
+        {
+            //將key和IV處理成8個字符
+            key += "12345678";
+            IV += "12345678";
+            key = key.Substring(0, 8);
+            IV = IV.Substring(0, 8);
+            SymmetricAlgorithm sa;
+            ICryptoTransform ct;
+            MemoryStream ms;
+            CryptoStream cs;
+            byte[] byt;
+            sa = new DESCryptoServiceProvider();
+            sa.Key = Encoding.UTF8.GetBytes(key);
+            sa.IV = Encoding.UTF8.GetBytes(IV);
+            ct = sa.CreateDecryptor();
+            byt = Convert.FromBase64String(encryptedValue);
+            ms = new MemoryStream();
+            cs = new CryptoStream(ms, ct, CryptoStreamMode.Write);
+            cs.Write(byt, 0, byt.Length);
+            cs.FlushFinalBlock();
+            cs.Close();
+            return Encoding.UTF8.GetString(ms.ToArray());
+        }
+
+
         private void button2_Click(object sender, EventArgs e)
         {
+            //各種加密算法
+            byte[] tmpByte;
+            SHA1 sha1 = new SHA1CryptoServiceProvider();
+            tmpByte = sha1.ComputeHash(GetKeyByteArray(str_clear_text));
+            sha1.Clear();
+            string sha1_result = GetStringValue(tmpByte);
+
+            richTextBox1.Text += "SHA1 = " + sha1_result + "\n";
+
+            //byte[] tmpByte;
+            SHA256 sha256 = new SHA256Managed();
+            tmpByte = sha256.ComputeHash(GetKeyByteArray(str_clear_text));
+            sha256.Clear();
+            string sha256_result = GetStringValue(tmpByte);
+
+            richTextBox1.Text += "SHA256 = " + sha256_result + "\n";
+
+            //byte[] tmpByte;
+            SHA512 sha512 = new SHA512Managed();
+            tmpByte = sha512.ComputeHash(GetKeyByteArray(str_clear_text));
+            sha512.Clear();
+            string sha512_result = GetStringValue(tmpByte);
+            richTextBox1.Text += "SHA512 = " + sha512_result + "\n";
+
+
+            string key = "abc";
+            string DES_result = DESEncrypt(str_clear_text, key);
+            richTextBox1.Text += "DES Enc = " + DES_result + "\n";
+
+
+            string DES_decrypt_result = DESDecrypt(DES_result, key, "0");
+            richTextBox1.Text += "DES Dec = " + DES_decrypt_result + "\n";
         }
 
         private void button3_Click(object sender, EventArgs e)
