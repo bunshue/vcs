@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -54,6 +55,8 @@
             this.button21 = new System.Windows.Forms.Button();
             this.button22 = new System.Windows.Forms.Button();
             this.button23 = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.lb_title = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,7 +76,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(170, 50);
             this.button2.TabIndex = 1;
-            this.button2.Text = "浮雕效果";
+            this.button2.Text = "浮雕效果1";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -129,9 +132,10 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(364, 12);
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(364, 68);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(623, 728);
+            this.pictureBox1.Size = new System.Drawing.Size(623, 672);
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
             // 
@@ -209,7 +213,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(170, 50);
             this.button14.TabIndex = 14;
-            this.button14.Text = "霧化效果";
+            this.button14.Text = "浮雕效果2";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -259,7 +263,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(170, 50);
             this.button18.TabIndex = 20;
-            this.button18.Text = "圖像浮雕效果";
+            this.button18.Text = "扭曲效果";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -269,6 +273,7 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(170, 50);
             this.button19.TabIndex = 21;
+            this.button19.Text = "色階調整";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -278,6 +283,7 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(170, 50);
             this.button20.TabIndex = 22;
+            this.button20.Text = "馬賽克效果1";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -287,6 +293,7 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(170, 50);
             this.button21.TabIndex = 23;
+            this.button21.Text = "馬賽克效果2";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
@@ -305,14 +312,31 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(170, 50);
             this.button23.TabIndex = 25;
+            this.button23.Text = "依序顯示各項功能";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // lb_title
+            // 
+            this.lb_title.AutoSize = true;
+            this.lb_title.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_title.Location = new System.Drawing.Point(364, 24);
+            this.lb_title.Name = "lb_title";
+            this.lb_title.Size = new System.Drawing.Size(58, 21);
+            this.lb_title.TabIndex = 26;
+            this.lb_title.Text = "label1";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1328, 904);
+            this.Controls.Add(this.lb_title);
             this.Controls.Add(this.button23);
             this.Controls.Add(this.button22);
             this.Controls.Add(this.button21);
@@ -344,6 +368,7 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -375,6 +400,8 @@
         private System.Windows.Forms.Button button21;
         private System.Windows.Forms.Button button22;
         private System.Windows.Forms.Button button23;
+        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label lb_title;
     }
 }
 

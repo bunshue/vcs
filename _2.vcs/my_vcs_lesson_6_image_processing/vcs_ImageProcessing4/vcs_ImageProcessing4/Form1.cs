@@ -582,35 +582,6 @@ new Point(100, 400)};// destination for lower-left point of original
 
         private void button19_Click(object sender, EventArgs e)
         {
-            //扭曲(Twist)
-            pictureBox1.Image = Image.FromFile(filename);
-
-            //圖片的扭曲（Twist）作法
-
-            //從pictureBox取得Bitmap
-            Bitmap bitmap1 = (Bitmap)pictureBox1.Image.Clone();   //用pictureBox背景的復本實例化Bitmap類
-
-            //參數設定
-            System.Random oRandom = new System.Random();
-            int iAmplitude = oRandom.Next(5, 10);	//振幅
-            int iFrequency = oRandom.Next(30, 60);	//頻率
-            //複製一個失真前的Bitmap過來參考
-            Bitmap bitmap2 = (Bitmap)bitmap1.Clone();
-            for (int y = 0; y < bitmap1.Height; y++)
-            {
-                for (int x = 0; x < bitmap1.Width; x++)
-                {
-                    int newX = (int)(x + (iAmplitude * System.Math.Sin(System.Math.PI * y / iFrequency)));
-                    int newY = (int)(y + (iAmplitude * System.Math.Cos(System.Math.PI * x / iFrequency)));
-                    if (newX < 0 || newX >= bitmap1.Width) newX = 0;
-                    if (newY < 0 || newY >= bitmap1.Height) newY = 0;
-                    bitmap1.SetPixel(x, y, bitmap2.GetPixel(newX, newY));
-                }
-            }
-            //參考後丟棄，bitmap1為最終圖案
-            bitmap2.Dispose();
-
-            pictureBox1.Image = bitmap1;
 
         }
 

@@ -13,8 +13,9 @@ namespace vcs_PictureEnhance
 {
     public partial class Form1 : Form
     {
-        string filename1 = @"C:\______test_files\color1.bmp";
-        string filename2 = @"C:\______test_files\color2.bmp";
+        string filename1 = @"C:\______test_files\ims01.bmp";
+        //string filename1 = @"C:\______test_files\color1.bmp";
+        //string filename2 = @"C:\______test_files\color2.bmp";
 
         public Form1()
         {
@@ -35,7 +36,6 @@ namespace vcs_PictureEnhance
         {
             richTextBox1.Clear();
         }
-
 
         void evaluate_bitmap_data(Bitmap bitmap1, int x_st, int y_st, int w, int h, out int R_max, out int R_min, out int G_max, out int G_min, out int B_max, out int B_min)
         {
@@ -148,6 +148,13 @@ namespace vcs_PictureEnhance
         void show_part_image(Bitmap bitmap1, int x_st, int y_st, int w, int h)
         {
             pictureBox3.Image = bitmap1.Clone(new Rectangle(x_st, y_st, w, h), PixelFormat.Format32bppArgb);
+
+            if ((w < 640 / 2) || (h < 480 / 2))
+                return;
+
+            //準備放大兩倍
+
+
         }
 
         void draw_enhanced_image(int x_st, int y_st, int w, int h)

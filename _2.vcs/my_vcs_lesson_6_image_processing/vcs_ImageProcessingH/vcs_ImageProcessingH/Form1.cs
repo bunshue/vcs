@@ -49,6 +49,7 @@ namespace vcs_ImageProcessingH
             pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
             pictureBox3.SizeMode = PictureBoxSizeMode.Normal;
             pictureBox4.SizeMode = PictureBoxSizeMode.Normal;
+            pictureBox5.SizeMode = PictureBoxSizeMode.Normal;
 
             int x_st;
             int y_st;
@@ -75,23 +76,27 @@ namespace vcs_ImageProcessingH
             pictureBox2.Size = new Size(W, H);
             pictureBox3.Size = new Size(W, H);
             pictureBox4.Size = new Size(W, H);
+            pictureBox5.Size = new Size(W, H);
 
             pictureBox0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             pictureBox3.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             pictureBox4.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            pictureBox5.Location = new Point(x_st + dx * 5, y_st + dy * 0);
 
             label0.Location = new Point(x_st + dx * 0, y_st + dy * 0 - 25);
             label1.Location = new Point(x_st + dx * 1, y_st + dy * 0 - 25);
             label2.Location = new Point(x_st + dx * 2, y_st + dy * 0 - 25);
             label3.Location = new Point(x_st + dx * 3, y_st + dy * 0 - 25);
             label4.Location = new Point(x_st + dx * 4, y_st + dy * 0 - 25);
+            label9.Location = new Point(x_st + dx * 5, y_st + dy * 0 - 25);
 
             label0.Text = "原圖";
             label2.Text = "";
             label3.Text = "";
             label4.Text = "";
+            label9.Text = "";
 
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
@@ -156,6 +161,9 @@ namespace vcs_ImageProcessingH
             if (binary > 255)
                 binary -= 255;
             pictureBox4.Image = apply_contrast_enhancement(filename, binary);
+
+
+            pictureBox5.Image = apply_gamma2(filename, gamma);
         }
 
         private Bitmap apply_gamma(string filename, float gamma)
@@ -288,6 +296,53 @@ namespace vcs_ImageProcessingH
         }
         //二值化對比 SP
 
+
+        private Bitmap apply_gamma2(string filename, float gamma)
+        {
+            label9.Text = "Gamma = " + gamma.ToString();
+
+            //從pictureBox取得Bitmap
+            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+            Bitmap bitmap2 = KiGamma(bitmap1, gamma);
+
+            return bitmap2;
+        }
+
+        //C#圖片處理之Gamma校正
+        //gamma值是用曲線表示的，這是一種人的眼睛對光的一種感應曲線，其中包括了物理量、身理感官及心理的感知度。
+
+        /// <summary>
+        /// Gamma校正
+        /// </summary>
+        /// <param name="bmp">輸入Bitmap</param>
+        /// <param name="val">[0 <-明- 1 -暗-> 2]</param>
+        /// <returns>輸出Bitmap</returns>
+        public static Bitmap KiGamma(Bitmap bmp, float val)
+        {
+            if (bmp == null)
+            {
+                return null;
+            }
+
+            // 1表示無變化，就不做
+            if (val == 1.0000f) return bmp;
+
+            try
+            {
+                Bitmap b = new Bitmap(bmp.Width, bmp.Height);
+                Graphics g = Graphics.FromImage(b);
+                ImageAttributes attr = new ImageAttributes();
+
+                attr.SetGamma(val, ColorAdjustType.Bitmap);
+                g.DrawImage(bmp, new Rectangle(0, 0, bmp.Width, bmp.Height), 0, 0, bmp.Width, bmp.Height, GraphicsUnit.Pixel, attr);
+                g.Dispose();
+                return b;
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
         // Color the picture.
         private void ColorPicture()

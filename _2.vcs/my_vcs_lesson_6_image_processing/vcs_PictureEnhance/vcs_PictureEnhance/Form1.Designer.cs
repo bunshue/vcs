@@ -38,9 +38,11 @@
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.button5 = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox2
@@ -63,15 +65,15 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(1304, 10);
+            this.richTextBox1.Location = new System.Drawing.Point(1403, 10);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(299, 966);
+            this.richTextBox1.Size = new System.Drawing.Size(249, 966);
             this.richTextBox1.TabIndex = 5;
             this.richTextBox1.Text = "";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(675, 516);
+            this.button1.Location = new System.Drawing.Point(658, 517);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(93, 39);
             this.button1.TabIndex = 8;
@@ -81,7 +83,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(675, 574);
+            this.button2.Location = new System.Drawing.Point(658, 575);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(93, 39);
             this.button2.TabIndex = 9;
@@ -91,9 +93,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(675, 633);
+            this.button3.Location = new System.Drawing.Point(658, 634);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(93, 39);
+            this.button3.Size = new System.Drawing.Size(69, 39);
             this.button3.TabIndex = 10;
             this.button3.Text = "影像加強3";
             this.button3.UseVisualStyleBackColor = true;
@@ -101,7 +103,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(675, 695);
+            this.button4.Location = new System.Drawing.Point(658, 735);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(93, 39);
             this.button4.TabIndex = 11;
@@ -121,9 +123,9 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(774, 633);
+            this.button5.Location = new System.Drawing.Point(659, 679);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(93, 39);
+            this.button5.Size = new System.Drawing.Size(68, 39);
             this.button5.TabIndex = 13;
             this.button5.Text = "影像加強3";
             this.button5.UseVisualStyleBackColor = true;
@@ -139,11 +141,22 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
+            // pictureBox4
+            // 
+            this.pictureBox4.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox4.Location = new System.Drawing.Point(757, 498);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(640, 480);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox4.TabIndex = 15;
+            this.pictureBox4.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1615, 988);
+            this.ClientSize = new System.Drawing.Size(1664, 988);
+            this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.pictureBox3);
@@ -160,6 +173,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -176,6 +190,7 @@
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Button button5;
         private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.PictureBox pictureBox4;
     }
 }
 

@@ -274,7 +274,6 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(160, 49);
             this.button19.TabIndex = 21;
-            this.button19.Text = "扭曲(Twist)";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 

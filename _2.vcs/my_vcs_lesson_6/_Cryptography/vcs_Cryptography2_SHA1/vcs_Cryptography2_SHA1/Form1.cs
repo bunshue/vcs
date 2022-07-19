@@ -14,11 +14,11 @@ namespace vcs_Cryptography2_SHA1
 {
     public partial class Form1 : Form
     {
-        //欲進行MD5加密的字符串  
+        //欲進行加密的字符串  
         string str_clear_text = "this is a lion-mouse";
 
-        //MD5加密後的結果
-        string str_md5_text = string.Empty;
+        //加密後的結果
+        string str_encrypted_text = string.Empty;
 
         public Form1()
         {
@@ -130,30 +130,26 @@ namespace vcs_Cryptography2_SHA1
 
             //此類提供SHA1，SHA256，SHA512等3種算法，加密字串的長度依次增大。
 
-            string s2 = SHA1Encrypt(str_clear_text);
-            string s3 = SHA256Encrypt(str_clear_text);
-            string s4 = SHA512Encrypt(str_clear_text);
+            str_encrypted_text = SHA1Encrypt(str_clear_text);
+            richTextBox1.Text += "明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\tSHA1\t長度：" + str_encrypted_text.Length + "\n";
 
+            str_encrypted_text = SHA256Encrypt(str_clear_text);
+            richTextBox1.Text += "明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\tSHA256\t長度：" + str_encrypted_text.Length + "\n";
 
-            richTextBox1.Text += "s2 = " + s2 + "\n";
-            richTextBox1.Text += "s3 = " + s3 + "\n";
-            richTextBox1.Text += "s4 = " + s4 + "\n";
-
+            str_encrypted_text = SHA512Encrypt(str_clear_text);
+            richTextBox1.Text += "明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\tSHA512\t長度：" + str_encrypted_text.Length + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             //SHA1
-
-            richTextBox1.Text += "明碼：" + str_clear_text + "\n";
-
-            richTextBox1.Text += "Sha1：" + str_clear_text.Sha1() + "\n";
-            richTextBox1.Text += "長度：" + str_clear_text.Sha1().Length + "\n";
+            str_encrypted_text = str_clear_text.Sha1();
+            richTextBox1.Text += "明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\tSHA1\t長度：" + str_encrypted_text.Length + "\n";
 
             //作為密碼方式加密
             //需要改用.NetFramework4.0 且 參考/加入參考 .NET /System.Web
-            string str1 = System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(str_clear_text, "SHA1");
-            richTextBox1.Text += "SHA1加密的密碼:" + str1 + "\tSHA1加密長度是：" + str1.Length + "\n";
+            str_encrypted_text = System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(str_clear_text, "SHA1");
+            richTextBox1.Text += "明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\tSHA1\tSHA1加密長度是：" + str_encrypted_text.Length + "\n";
         }
 
         /// <summary>
@@ -233,33 +229,31 @@ namespace vcs_Cryptography2_SHA1
             SHA1 sha1 = new SHA1CryptoServiceProvider();
             tmpByte = sha1.ComputeHash(GetKeyByteArray(str_clear_text));
             sha1.Clear();
-            string sha1_result = GetStringValue(tmpByte);
+            str_encrypted_text = GetStringValue(tmpByte);
 
-            richTextBox1.Text += "SHA1 = " + sha1_result + "\n";
+            richTextBox1.Text += "明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\tSHA1\t長度：" + str_encrypted_text.Length + "\n";
 
             //byte[] tmpByte;
             SHA256 sha256 = new SHA256Managed();
             tmpByte = sha256.ComputeHash(GetKeyByteArray(str_clear_text));
             sha256.Clear();
-            string sha256_result = GetStringValue(tmpByte);
+            str_encrypted_text = GetStringValue(tmpByte);
 
-            richTextBox1.Text += "SHA256 = " + sha256_result + "\n";
+            richTextBox1.Text += "明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\tSHA256\t長度：" + str_encrypted_text.Length + "\n";
 
             //byte[] tmpByte;
             SHA512 sha512 = new SHA512Managed();
             tmpByte = sha512.ComputeHash(GetKeyByteArray(str_clear_text));
             sha512.Clear();
-            string sha512_result = GetStringValue(tmpByte);
-            richTextBox1.Text += "SHA512 = " + sha512_result + "\n";
-
+            str_encrypted_text = GetStringValue(tmpByte);
+            richTextBox1.Text += "明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\tSHA512\t長度：" + str_encrypted_text.Length + "\n";
 
             string key = "abc";
-            string DES_result = DESEncrypt(str_clear_text, key);
-            richTextBox1.Text += "DES Enc = " + DES_result + "\n";
+            str_encrypted_text = DESEncrypt(str_clear_text, key);
+            richTextBox1.Text += "DES Enc = " + str_encrypted_text + "\n";
 
-
-            string DES_decrypt_result = DESDecrypt(DES_result, key, "0");
-            richTextBox1.Text += "DES Dec = " + DES_decrypt_result + "\n";
+            string str_encrypted_text_decrypted = DESDecrypt(str_encrypted_text, key, "0");
+            richTextBox1.Text += "DES Dec = " + str_encrypted_text_decrypted + "\n";
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -286,10 +280,64 @@ namespace vcs_Cryptography2_SHA1
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //各種加密算法
+            byte[] input;
+            byte[] output;
+
+            SHA1 sha1 = new SHA1CryptoServiceProvider();
+            input = Encoding.Default.GetBytes(str_clear_text);
+            output = sha1.ComputeHash(input);
+            str_encrypted_text = Convert.ToBase64String(output);
+            richTextBox1.Text += "明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\tSHA1\n";
+
+
+            SHA256 sha256 = new SHA256CryptoServiceProvider();
+            input = Encoding.Default.GetBytes(str_clear_text);
+            output = sha256.ComputeHash(input);
+            str_encrypted_text = Convert.ToBase64String(output);
+            richTextBox1.Text += "明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\tSHA256\n";
+
+
+            SHA384 sha384 = new SHA384CryptoServiceProvider();
+            input = Encoding.Default.GetBytes(str_clear_text);
+            output = sha384.ComputeHash(input);
+            str_encrypted_text = Convert.ToBase64String(output);
+            richTextBox1.Text += "明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\tSHA384\n";
+
+
+            SHA512 sha512 = new SHA512CryptoServiceProvider();
+            input = Encoding.Default.GetBytes(str_clear_text);
+            output = sha512.ComputeHash(input);
+            str_encrypted_text = Convert.ToBase64String(output);
+            richTextBox1.Text += "明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\tSHA512\n";
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //各種加密算法
+
+            //SHA1
+            richTextBox1.Text += "SHA1\n";
+            UnicodeEncoding oConvert = new UnicodeEncoding();
+            Byte[] bytData = oConvert.GetBytes(str_clear_text);
+            System.Security.Cryptography.SHA1Managed oSha1 = new System.Security.Cryptography.SHA1Managed();
+            Byte[] bytResult = oSha1.ComputeHash(bytData);
+            foreach (int oItem in bytResult)
+            {
+                richTextBox1.Text += oItem.ToString("X");
+            }
+            richTextBox1.Text += "\n\n";
+
+
+            //SHA512
+            richTextBox1.Text += "SHA512\n";
+            //SHA512程式碼只有三行就解決了
+            System.Security.Cryptography.SHA512 oSHA = new System.Security.Cryptography.SHA512Managed();
+            byte[] aryByte = oSHA.ComputeHash(Encoding.UTF8.GetBytes(str_clear_text));
+            richTextBox1.Text += System.BitConverter.ToString(aryByte).Replace("-", "");
+            richTextBox1.Text += "\n\n";
+
+
         }
 
         private void button6_Click(object sender, EventArgs e)

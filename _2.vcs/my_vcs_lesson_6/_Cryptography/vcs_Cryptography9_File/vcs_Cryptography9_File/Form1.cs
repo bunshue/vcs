@@ -16,6 +16,12 @@ namespace vcs_Cryptography9_File
 {
     public partial class Form1 : Form
     {
+        //欲進行加密的字符串  
+        string str_clear_text = "this is a lion-mouse";
+
+        //加密後的結果
+        string str_encrypted_text = string.Empty;
+
         string filename1 = @"C:\______test_files\__RW\_txt\txt_clear.txt";          //明碼
         string filename2 = @"C:\______test_files\__RW\_txt\txt_encrypt.txt";        //密碼
 
@@ -484,8 +490,6 @@ namespace vcs_Cryptography9_File
                 SHA256Managed sha = new SHA256Managed();
                 richTextBox1.Text += "SHA1 result : " + Convert.ToBase64String(sha.ComputeHash(fs));
             }
-
-
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -493,7 +497,6 @@ namespace vcs_Cryptography9_File
             //取得檔案的唯一檢查碼Checksum MD5 SHA
 
             string filename = @"C:\______test_files\picture1.jpg";
-
 
             using (FileStream fs = File.OpenRead(filename))
             {
@@ -507,6 +510,109 @@ namespace vcs_Cryptography9_File
                 richTextBox1.Text += "MD5 code:\n";
                 richTextBox1.Text += Convert.ToBase64String(m.ComputeHash(fs)) + "\n";
             }
+        }
+
+        // Compute the file's hash.
+        private byte[] GetHashMD5(string filename)
+        {
+            using (FileStream stream = File.OpenRead(filename))
+            {
+                MD5 Md5 = MD5.Create();
+                return Md5.ComputeHash(stream);
+            }
+        }
+
+        // Compute the file's hash.
+        private byte[] GetHashSha256(string filename)
+        {
+            using (FileStream stream = File.OpenRead(filename))
+            {
+                SHA256 Sha256 = SHA256.Create();
+                return Sha256.ComputeHash(stream);
+            }
+        }
+
+        // Return a byte array as a sequence of hex values.
+        public static string BytesToString(byte[] bytes)
+        {
+            string result = "";
+            foreach (byte b in bytes)
+            {
+                result += b.ToString("x2");
+            }
+            return result;
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            //算一個檔案的MD5, SHA1值
+            string filename = @"C:\______test_files\picture1.jpg";
+
+            str_encrypted_text = BytesToString(GetHashMD5(filename));
+            richTextBox1.Text += "檔案：" + filename + "\tMD5密碼：" + str_encrypted_text + "\n";
+
+            str_encrypted_text = BytesToString(GetHashSha256(filename));
+
+            richTextBox1.Text += "檔案：" + filename + "\tSHA256密碼：" + str_encrypted_text + "\n";
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            //算一個檔案的MD5, SHA1, SHA256值
+            string filename = @"C:\______test_files\picture1.jpg";
+
+
+            //MD5
+            var tragetFile = new FileStream(filename, FileMode.Open);
+
+            var md5 = new System.Security.Cryptography.MD5CryptoServiceProvider();
+            byte[] hashbytes = md5.ComputeHash(tragetFile);
+
+            tragetFile.Close();
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hashbytes.Length; i++)
+            {
+                sb.Append(hashbytes[i].ToString("x2"));
+            }
+            richTextBox1.Text += "MD5\n";
+            richTextBox1.Text += sb.ToString() + "\n";
+
+
+            //SHA1
+            tragetFile = new FileStream(filename, FileMode.Open);
+
+            var sha1 = new System.Security.Cryptography.SHA1CryptoServiceProvider();
+            hashbytes = sha1.ComputeHash(tragetFile);
+
+            tragetFile.Close();
+
+            sb = new StringBuilder();
+            for (int i = 0; i < hashbytes.Length; i++)
+            {
+                sb.Append(hashbytes[i].ToString("x2"));
+            }
+            richTextBox1.Text += "SHA1\n";
+            richTextBox1.Text += sb.ToString() + "\n";
+
+
+            //SHA256
+            tragetFile = new FileStream(filename, FileMode.Open);
+
+            var sha256 = new System.Security.Cryptography.SHA256CryptoServiceProvider();
+            hashbytes = sha256.ComputeHash(tragetFile);
+
+            tragetFile.Close();
+
+            sb = new StringBuilder();
+            for (int i = 0; i < hashbytes.Length; i++)
+            {
+                sb.Append(hashbytes[i].ToString("x2"));
+            }
+            richTextBox1.Text += "SHA256\n";
+            richTextBox1.Text += sb.ToString() + "\n";
+
+
 
         }
     }

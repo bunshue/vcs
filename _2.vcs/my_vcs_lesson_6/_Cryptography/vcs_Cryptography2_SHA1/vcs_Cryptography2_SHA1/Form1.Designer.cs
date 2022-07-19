@@ -66,7 +66,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(414, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(611, 704);
+            this.richTextBox1.Size = new System.Drawing.Size(984, 704);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -96,6 +96,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(180, 55);
             this.button4.TabIndex = 4;
+            this.button4.Text = "各種加密算法";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -105,6 +106,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(180, 55);
             this.button5.TabIndex = 5;
+            this.button5.Text = "各種加密算法";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -238,7 +240,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(942, 562);
+            this.bt_clear.Location = new System.Drawing.Point(1325, 624);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(60, 35);
             this.bt_clear.TabIndex = 56;
@@ -259,7 +261,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1037, 738);
+            this.ClientSize = new System.Drawing.Size(1410, 738);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button19);
