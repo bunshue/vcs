@@ -105,11 +105,7 @@ namespace vcs_Cryptography_new
 
             //作為密碼方式加密
             //需要改用.NetFramework4.0 且 參考/加入參考 .NET /System.Web
-            string str = "加密在實際中的應用";
-            string str1 = System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(str, "SHA1");
-            string str2 = System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(str, "MD5");
-
-            richTextBox1.Text += "SHA1加密的密碼:" + str1 + "\tSHA1加密長度是：" + str1.Length + "\n";
+            string str2 = System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(str_clear_text, "MD5");
             richTextBox1.Text += "MD5加密的密碼：" + str2 + "\tMD5加密長度是：" + str2.Length + "\n";
         }
 
@@ -142,15 +138,14 @@ namespace vcs_Cryptography_new
             richTextBox1.Text += "MD5加密的密碼：" + result + "\tMD5加密長度是：" + result.Length + "\n";
         }
 
-        //C#默認的是16位的字節數組，需要略加修改，轉為32個字節的字符串，代碼如下：
+        //C#默認的是16位的字節數組，需要略加修改，轉為32個字節的字符串
         public static string Md5Sum(string strToEncrypt)
         {
             // 將需要加密的字符串轉為byte數組
             byte[] bs = UTF8Encoding.UTF8.GetBytes(strToEncrypt);
 
             // 創建md5 對象
-            MD5 md5;
-            md5 = MD5CryptoServiceProvider.Create();
+            MD5 md5 = MD5CryptoServiceProvider.Create();
 
             // 生成16位的二進制校驗碼
             byte[] hashBytes = md5.ComputeHash(bs);
@@ -196,37 +191,35 @@ namespace vcs_Cryptography_new
             return hashString.PadLeft(32, '0');
         }
 
+        /// <summary>
+        /// MD5加密
+        /// </summary>
+        /// <param name="text">原文</param>
+        public static string Encrypt3(string text)
+        {
+            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+            byte[] bArr = md5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(text));
+            StringBuilder sb = new StringBuilder();
+            foreach (byte b in bArr)
+            {
+                sb.Append(b.ToString("x2"));
+            }
+            return sb.ToString();
+        }
+
         private void button4_Click(object sender, EventArgs e)
         {
-        }
+            //MD5加密
 
-        private string GetStringValue(byte[] Byte)
-        {
-            string tmpString = "";
+            string input = "lion";
+            string output = Encrypt3(input);
+            richTextBox1.Text += "輸入:\n" + input + "\n";
+            richTextBox1.Text += "輸出:\n" + output + "\n";
 
-            /*
-            //1111
-            ASCIIEncoding Asc = new ASCIIEncoding();
-            tmpString = Asc.GetString(Byte);
-            */
-
-            //2222
-            int iCounter;
-            for (iCounter = 0; iCounter < Byte.Length; iCounter++)
-            {
-                tmpString = tmpString + Byte[iCounter].ToString();
-            }
-
-            return tmpString;
-        }
-
-        private byte[] GetKeyByteArray(string strKey)
-        {
-            ASCIIEncoding Asc = new ASCIIEncoding();
-            int tmpStrLen = strKey.Length;
-            byte[] tmpByte = new byte[tmpStrLen - 1];
-            tmpByte = Asc.GetBytes(strKey);
-            return tmpByte;
+            input = "mouse";
+            output = Encrypt3(input);
+            richTextBox1.Text += "輸入:\n" + input + "\n";
+            richTextBox1.Text += "輸出:\n" + output + "\n";
         }
 
         /// <summary>
@@ -345,15 +338,12 @@ namespace vcs_Cryptography_new
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //Md5和Sha1兩種加密方式
+            //MD5
 
             richTextBox1.Text += "明碼：" + str_clear_text + "\n";
 
             richTextBox1.Text += "Md5：" + str_clear_text.Md5() + "\n";
-            richTextBox1.Text += "长度：" + str_clear_text.Md5().Length + "\n";
-
-            richTextBox1.Text += "Sha1：" + str_clear_text.Sha1() + "\n";
-            richTextBox1.Text += "长度：" + str_clear_text.Sha1().Length + "\n";
+            richTextBox1.Text += "長度：" + str_clear_text.Md5().Length + "\n";
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -388,14 +378,6 @@ namespace vcs_Cryptography_new
             return hashString.PadLeft(32, '0');
         }
 
-        private void button8_Click(object sender, EventArgs e)
-        {
-            //MD5加密
-
-            string result = getMd5(str_clear_text);
-            richTextBox1.Text += "MD5加密的密碼：" + result + "\tMD5加密長度是：" + result.Length + "\n";
-        }
-
         public string getMd5(string str)
         {
             MD5 md5 = MD5.Create();//MD5抽象類無法實例化 實例化該方法
@@ -410,10 +392,70 @@ namespace vcs_Cryptography_new
             return result.ToString();
         }
 
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //MD5加密
+
+            string result = getMd5(str_clear_text);
+            richTextBox1.Text += "MD5加密的密碼：" + result + "\tMD5加密長度是：" + result.Length + "\n";
+        }
+
+
+        private string GetStringValue(byte[] Byte)
+        {
+            string tmpString = "";
+            /*
+            ASCIIEncoding Asc = new ASCIIEncoding();
+            tmpString = Asc.GetString(Byte);
+            */
+            int iCounter;
+            for (iCounter = 0; iCounter < Byte.Length; iCounter++)
+            {
+                tmpString = tmpString + Byte[iCounter].ToString();
+            }
+            return tmpString;
+        }
+
+        private byte[] GetKeyByteArray(string strKey)
+        {
+            ASCIIEncoding Asc = new ASCIIEncoding();
+            int tmpStrLen = strKey.Length;
+            byte[] tmpByte = new byte[tmpStrLen - 1];
+            tmpByte = Asc.GetBytes(strKey);
+            return tmpByte;
+        }
+
+        private string getstrIN(string strIN)
+        {
+            if (strIN.Length == 0)
+            {
+                strIN = "~NULL~";
+            }
+            return strIN;
+        }
+
+        ///   <summary>
+        ///   給一個字符串進行MD5加密
+        ///   </summary>
+        ///   <param   name="strText">待加密字符串</param>
+        ///   <returns>加密後的字符串</returns>
+        public string MD5Encrypt(string strText)
+        {
+            richTextBox1.Text += "1111111\n";
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] result = md5.ComputeHash(GetKeyByteArray(getstrIN(strText)));
+            return GetStringValue(result);
+            /* fail
+            byte[] result = md5.ComputeHash(System.Text.Encoding.Default.GetBytes(strText));
+            return System.Text.Encoding.Default.GetString(result);
+            */
+        }
 
         private void button9_Click(object sender, EventArgs e)
         {
-
+            //將字串用MD5加密
+            string s1 = MD5Encrypt(str_clear_text);
+            richTextBox1.Text += "s1 = " + s1 + "\n";
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -665,7 +707,7 @@ namespace vcs_Cryptography_new
         }
 
         /// <summary>
-        /// MD5　32位加密
+        /// MD5 32位加密
         /// </summary>
         /// <param name="str"></param>
         /// <returns></returns>
@@ -699,7 +741,10 @@ namespace vcs_Cryptography_new
             string result3 = UserMd5(str_clear_text);
             richTextBox1.Text += "MD5 32位加密 : \t" + result3 + "\n";
 
-
+            string input = "lion";
+            string output = UserMd5(input);
+            richTextBox1.Text += "輸入:\n" + input + "\n";
+            richTextBox1.Text += "輸出:\n" + output + "\n";
         }
         //MD5加密 j SP
 
@@ -809,7 +854,7 @@ namespace vcs_Cryptography_new
             }
             return str;//返回得到的加密字串
         }
-        
+
         private void button25_Click(object sender, EventArgs e)
         {
             //MD5加密 o
@@ -822,24 +867,121 @@ namespace vcs_Cryptography_new
         {
             //MD5加密 p
 
+            string old_string = "abcdefg";
+            string new_string = string.Empty;
+
+            MD5CryptoServiceProvider M5 = new MD5CryptoServiceProvider();
+            new_string = ASCIIEncoding.ASCII.GetString(M5.ComputeHash(ASCIIEncoding.ASCII.GetBytes(old_string)));
+
+            richTextBox1.Text += "原字串:\t" + old_string + "\n";
+            richTextBox1.Text += "MD5加密後的字串:\t" + new_string + "\n";
+        }
+
+        //MD5加密 q ST
+        public string Encrypt2(string strPwd)
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();//创建MD5对象
+            byte[] data = System.Text.Encoding.Default.GetBytes(strPwd);//将字符编码为一个字节序列
+            byte[] md5data = md5.ComputeHash(data);//计算data字节数组的哈希值
+            md5.Clear();//清空MD5对象
+            string str = "";//定义一个变量，用来记录加密后的密码
+            for (int i = 0; i < md5data.Length - 1; i++)//遍历字节数组
+            {
+                str += md5data[i].ToString("x").PadLeft(2, '0');//对遍历到的字节进行加密
+            }
+            return str;//返回得到的加密字符串
         }
 
         private void button27_Click(object sender, EventArgs e)
         {
             //MD5加密 q
+            /*
+            //將字串用MD5加密
+            Console.Write("請輸入密碼 : ");
+            string P_str_Code = Console.ReadLine();//记录要加密的密码
+            Program program = new Program();//创建Program对象
+            Console.WriteLine("結果:\n" + program.Encrypt2(P_str_Code));//输出加密后的字符串
+            */
+            string input = "lion";
+            string output = Encrypt2(input);
+            richTextBox1.Text += "輸入:\n" + input + "\n";
+            richTextBox1.Text += "輸出:\n" + output + "\n";
 
+            input = "mouse";
+            output = Encrypt2(input);
+            richTextBox1.Text += "輸入:\n" + input + "\n";
+            richTextBox1.Text += "輸出:\n" + output + "\n";
+        }
+        //MD5加密 q SP
+
+
+        //MD5加密 r ST
+        public string CalculateMD5Hash(string input)
+        {
+            //MD5 Encode但不轉Base64 String
+            //        MSSQL 使用
+            //        select SUBSTRING(sys.fn_sqlvarbasetostr(HASHBYTES('MD5','加密字串')),3,32)
+            //        可得同樣結果
+
+            // step 1, calculate MD5 hash from input
+            MD5 md5 = System.Security.Cryptography.MD5.Create();
+            byte[] inputBytes = System.Text.Encoding.ASCII.GetBytes(input);
+            //byte[] inputBytes = System.Text.Encoding.Unicode.GetBytes(input);
+            byte[] hash = md5.ComputeHash(inputBytes);
+
+            // step 2, convert byte array to hex string
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+            {
+                sb.Append(hash[i].ToString("X2"));
+            }
+            return sb.ToString();
         }
 
         private void button28_Click(object sender, EventArgs e)
         {
             //MD5加密 r
+            string input = "lion";
+            string output = CalculateMD5Hash(input);
+            richTextBox1.Text += "輸入:\n" + input + "\n";
+            richTextBox1.Text += "輸出:\n" + output + "\n";
 
+            input = "mouse";
+            output = CalculateMD5Hash(input);
+            richTextBox1.Text += "輸入:\n" + input + "\n";
+            richTextBox1.Text += "輸出:\n" + output + "\n";
+        }
+        //MD5加密 r SP
+
+        //MD5加密 s ST
+        public string CalculateMD5Hash2(string input)
+        {
+            MD5 md5 = System.Security.Cryptography.MD5.Create();
+            byte[] inputBytes = System.Text.Encoding.UTF8.GetBytes(input);
+            byte[] hash = md5.ComputeHash(inputBytes);
+            // step 2, convert byte array to hex string
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < hash.Length; i++)
+            {
+                sb.Append(hash[i].ToString("X2"));
+            }
+            return sb.ToString();
         }
 
         private void button29_Click(object sender, EventArgs e)
         {
             //MD5加密 s
+            string input = "lion";
+            string output = CalculateMD5Hash2(input);
+            richTextBox1.Text += "輸入:\n" + input + "\n";
+            richTextBox1.Text += "輸出:\n" + output + "\n";
+
+            input = "mouse";
+            output = CalculateMD5Hash2(input);
+            richTextBox1.Text += "輸入:\n" + input + "\n";
+            richTextBox1.Text += "輸出:\n" + output + "\n";
         }
+        //MD5加密 s SP
     }
 
     public static class EncryptHelper
@@ -869,26 +1011,7 @@ namespace vcs_Cryptography_new
             //返回十六进制字符串
             return sb.ToString();
         }
-
-        /// <summary>
-        /// 基于Sha1的自定义加密字符串方法：输入一个字符串，返回一个由40个字符组成的十六进制的哈希散列（字符串）。
-        /// </summary>
-        /// <param name="str">要加密的字符串</param>
-        /// <returns>加密后的十六进制的哈希散列（字符串）</returns>
-        public static string Sha1(this string str)
-        {
-            var buffer = Encoding.UTF8.GetBytes(str);
-            var data = SHA1.Create().ComputeHash(buffer);
-
-            var sb = new StringBuilder();
-            foreach (var t in data)
-            {
-                sb.Append(t.ToString("X2"));
-            }
-            return sb.ToString();
-        }
     }
-
 
     public class My_MD5
     {
@@ -918,5 +1041,4 @@ namespace vcs_Cryptography_new
             return strResult;
         }
     }
-
 }

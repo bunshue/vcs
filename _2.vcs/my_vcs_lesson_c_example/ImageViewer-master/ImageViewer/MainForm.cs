@@ -52,6 +52,9 @@ namespace ImageViewer
         /// </summary>
         private Matrix _matAffine;
 
+        Label lb_pixel_info;
+        Label lb_image_info;
+
         public MainForm()
         {
             InitializeComponent();
@@ -100,10 +103,15 @@ namespace ImageViewer
             int x_st = this.Width - 250;
             int y_st = 50;
 
-            label1.Location = new Point(x_st, y_st + 0);
-            label2.Location = new Point(x_st, y_st + 40);
-            label1.Text = "PixelInfo";
-            label2.Text = "ImageInfo";
+            lb_pixel_info = new Label();
+            lb_pixel_info.Location = new Point(x_st, y_st + 0);
+            lb_pixel_info.Text = "PixelInfo";
+            this.Controls.Add(lb_pixel_info);
+
+            lb_image_info = new Label();
+            lb_image_info.Location = new Point(x_st, y_st + 40);
+            lb_image_info.Text = "ImageInfo";
+            this.Controls.Add(lb_image_info);
 
             richTextBox1.Location = new Point(x_st, y_st + 80);
 
@@ -331,7 +339,7 @@ namespace ImageViewer
             bitmap1 = image.ToBitmap();
 
             // 画像サイズ
-            label2.Text = image.Width.ToString() + " x " + image.Height.ToString() + " x " + image.ImageBit.ToString() + "bit";
+            lb_image_info.Text = image.Width.ToString() + " x " + image.Height.ToString() + " x " + image.ImageBit.ToString() + "bit";
 
             // 表示する画像の領域
             _srcRect = new RectangleF(-0.5f, -0.5f, image.Width, image.Height);
@@ -477,7 +485,7 @@ namespace ImageViewer
             }
 
             // 輝度値の表示（モノクロを除く）
-            label1.Text = "(" + picX.ToString() + ", " + picY.ToString() + ")" + bright;
+            lb_pixel_info.Text = "(" + picX.ToString() + ", " + picY.ToString() + ")" + bright;
         }
 
         /// <summary>

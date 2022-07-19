@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{5EB67E20-941A-4FE4-87F7-FF6FE41E71BB}</ProjectGuid>
+    <ProjectGuid>{DE087EDA-FB37-48E5-A119-66AC0C955277}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_Cryptography1_MD5</RootNamespace>
-    <AssemblyName>vcs_Cryptography1_MD5</AssemblyName>
+    <RootNamespace>vcs_PictureEnhance</RootNamespace>
+    <AssemblyName>vcs_PictureEnhance</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

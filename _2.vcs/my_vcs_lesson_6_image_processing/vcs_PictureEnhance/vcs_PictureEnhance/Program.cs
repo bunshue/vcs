@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_Cryptography1_MD5
+namespace vcs_PictureEnhance
 {
     static class Program
     {

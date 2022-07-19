@@ -13,6 +13,7 @@ namespace vcs_Cryptography2_SHA1
 {
     public partial class Form1 : Form
     {
+        //欲進行SHA1加密的字符串  
         string str_clear_text = "this is a lion-mouse";
 
         public Form1()
@@ -138,6 +139,17 @@ namespace vcs_Cryptography2_SHA1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //SHA1
+
+            richTextBox1.Text += "明碼：" + str_clear_text + "\n";
+
+            richTextBox1.Text += "Sha1：" + str_clear_text.Sha1() + "\n";
+            richTextBox1.Text += "長度：" + str_clear_text.Sha1().Length + "\n";
+
+            //作為密碼方式加密
+            //需要改用.NetFramework4.0 且 參考/加入參考 .NET /System.Web
+            string str1 = System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(str_clear_text, "SHA1");
+            richTextBox1.Text += "SHA1加密的密碼:" + str1 + "\tSHA1加密長度是：" + str1.Length + "\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -224,4 +236,27 @@ namespace vcs_Cryptography2_SHA1
 
         }
     }
+
+    public static class EncryptHelper
+    {
+        /// <summary>
+        /// 基于Sha1的自定义加密字符串方法：输入一个字符串，返回一个由40个字符组成的十六进制的哈希散列（字符串）。
+        /// </summary>
+        /// <param name="str">要加密的字符串</param>
+        /// <returns>加密后的十六进制的哈希散列（字符串）</returns>
+        public static string Sha1(this string str)
+        {
+            var buffer = Encoding.UTF8.GetBytes(str);
+            var data = SHA1.Create().ComputeHash(buffer);
+
+            var sb = new StringBuilder();
+            foreach (var t in data)
+            {
+                sb.Append(t.ToString("X2"));
+            }
+            return sb.ToString();
+        }
+    }
+
+
 }

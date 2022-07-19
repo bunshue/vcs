@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_Cryptography1_MD5.Properties
+namespace vcs_PictureEnhance.Properties
 {
 
 

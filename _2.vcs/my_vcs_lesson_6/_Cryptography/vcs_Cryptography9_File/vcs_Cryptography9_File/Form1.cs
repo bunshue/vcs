@@ -26,7 +26,45 @@ namespace vcs_Cryptography9_File
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+        }
 
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 12;
+            y_st = 12;
+            dx = 190;
+            dy = 65;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -318,9 +356,121 @@ namespace vcs_Cryptography9_File
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //計算文件的MD5值
 
+            string filename = @"C:\______test_files\picture1.jpg";
+
+            //01.計算文件的 MD5 值
+            Console.WriteLine(string.Format("計算文件的 MD5 值：{0}", HashHelper.MD5File(filename)));
+            richTextBox1.Text += "計算文件的 MD5 值：" + HashHelper.MD5File(filename) + "\n";
+
+            //02.計算文件的 sha1 值
+            Console.WriteLine(string.Format("計算文件的 sha1 值：{0}", HashHelper.SHA1File(filename)));
+            richTextBox1.Text += "計算文件的 sha1 值：" + HashHelper.SHA1File(filename) + "\n";
+        }
+    }
+
+
+    //C#計算文件的MD5值實例
+    /*
+在C#中，數據的Hash以MD5或SHA1的方式實現，MD5與SHA1都是Hash算法，MD5輸出是128位的，SHA1輸出是160位的，MD5比SHA1快，SHA1比MD5強度高。
+1.1 SHA-1和MD5的比較
+
+因為二者均由MD4導出，SHA-1和MD5彼此很相似。相應的，他們的強度和其他特性也是相似，但還有以下幾點不同：
+
+    對強行攻擊的安全性：最顯著和最重要的區別是SHA-1摘要比MD5摘要長32 位。使用強行技術，產生任何一個報文使其摘要等於給定報摘要的難度對MD5是2128數量級的操作，而對SHA-1則是2160數量級的操作。這樣，SHA-1對強行攻擊有更大的強度。
+    對密碼分析的安全性：由於MD5的設計，易受密碼分析的攻擊，SHA-1顯得不易受這樣的攻擊。
+    速度：在相同的硬件上，SHA-1的運行速度比MD5慢。
+
+1.2 SHA-1和MD5在C#中的實現
+*/
+
+    /*
+    MD5 是 Message Digest Algorithm 5（信息摘要算法）的縮寫，MD5 一種散列(Hash)技術，廣泛用於加密、解密、數據簽名和數據完整性校驗等方面。任何一個文件，無論是可執行程序、圖像文件、臨時文件或者其他任何類型的文件，也不管它體積多大，都可以計算出一個MD5值，如果文件被修改過，就算只改動了一個字節，其 MD5 值也會變得完全不同。因此，我們可以通過對比同一文件的 MD5 值，來校驗這個文件是否被“篡改”過。C# 可以方便的計算出文件的 MD5 值：
+    \\計算文件的MD5值
+    */
+
+    /// <summary>
+    /// Hash輔助類
+    /// </summary>
+    public class HashHelper
+    {
+        /// <summary>
+        /// 計算文件的 MD5 值
+        /// </summary>
+        /// <param name="fileName">要計算 MD5 值的文件名和路徑</param>
+        /// <returns>MD5 值16進制字符串</returns>
+        public static string MD5File(string fileName)
+        {
+            return HashFile(fileName, "md5");
         }
 
+        /// <summary>
+        /// 計算文件的 sha1 值
+        /// </summary>
+        /// <param name="fileName">要計算 sha1 值的文件名和路徑</param>
+        /// <returns>sha1 值16進制字符串</returns>
+        public static string SHA1File(string fileName)
+        {
+            return HashFile(fileName, "sha1");
+        }
+
+        /// <summary>
+        /// 計算文件的哈希值
+        /// </summary>
+        /// <param name="fileName">要計算哈希值的文件名和路徑</param>
+        /// <param name="algName">算法:sha1,md5</param>
+        /// <returns>哈希值16進制字符串</returns>
+        private static string HashFile(string fileName, string algName)
+        {
+            if (!System.IO.File.Exists(fileName))
+            {
+                return string.Empty;
+            }
+
+            System.IO.FileStream fs = new System.IO.FileStream(fileName, System.IO.FileMode.Open, System.IO.FileAccess.Read);
+            byte[] hashBytes = HashData(fs, algName);
+            fs.Close();
+            return ByteArrayToHexString(hashBytes);
+        }
+
+        /// <summary>
+        /// 計算哈希值
+        /// </summary>
+        /// <param name="stream">要計算哈希值的 Stream</param>
+        /// <param name="algName">算法:sha1,md5</param>
+        /// <returns>哈希值字節數組</returns>
+        private static byte[] HashData(System.IO.Stream stream, string algName)
+        {
+            System.Security.Cryptography.HashAlgorithm algorithm;
+            if (algName == null)
+            {
+                throw new ArgumentNullException("algName 不能為 null");
+            }
+
+            if (string.Compare(algName, "sha1", true) == 0)
+            {
+                algorithm = System.Security.Cryptography.SHA1.Create();
+            }
+            else
+            {
+                if (string.Compare(algName, "md5", true) != 0)
+                {
+                    throw new Exception("algName 只能使用 sha1 或 md5");
+                }
+                algorithm = System.Security.Cryptography.MD5.Create();
+            }
+
+            return algorithm.ComputeHash(stream);
+        }
+
+        /// <summary>
+        /// 字節數組轉換為16進制表示的字符串
+        /// </summary>
+        private static string ByteArrayToHexString(byte[] buf)
+        {
+            return BitConverter.ToString(buf).Replace("-", "");
+        }
     }
 
     public static class ValidHelper

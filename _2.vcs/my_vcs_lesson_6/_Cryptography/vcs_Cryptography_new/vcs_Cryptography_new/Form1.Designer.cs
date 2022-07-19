@@ -190,6 +190,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(180, 55);
             this.button9.TabIndex = 44;
+            this.button9.Text = "MD5加密";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -241,7 +242,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(180, 55);
             this.button6.TabIndex = 39;
-            this.button6.Text = "Md5和Sha1兩種加密方式";
+            this.button6.Text = "MD5";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -263,6 +264,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(180, 55);
             this.button4.TabIndex = 37;
+            this.button4.Text = "MD5加密";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
