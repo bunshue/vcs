@@ -368,8 +368,148 @@ namespace vcs_Cryptography9_File
             Console.WriteLine(string.Format("計算文件的 sha1 值：{0}", HashHelper.SHA1File(filename)));
             richTextBox1.Text += "計算文件的 sha1 值：" + HashHelper.SHA1File(filename) + "\n";
         }
-    }
 
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //用MD5比對兩個檔案是否相同
+
+            //利用檔案的MD5碼比對兩個檔案是否相同
+            //第一個檔案
+            string filename1 = "C:\\______test_files\\compare\\aaaa.txt";
+            //第二個檔案
+            string filename2 = "C:\\______test_files\\compare\\bbbb.txt";
+            //第三個檔案
+            string filename3 = "C:\\______test_files\\compare\\ssss.txt";
+
+            //第一個檔案的MD5碼
+            string FileMD5_1 = string.Empty;
+            //建立MD5的演算法
+            HashAlgorithm algorithm = MD5.Create();
+            //取得第一個檔案MD5演算後的陣列
+            byte[] Hash1 = algorithm.ComputeHash(File.ReadAllBytes(filename1));
+            //建立第一個檔案的MD5碼
+            foreach (byte b in Hash1)
+            {
+                FileMD5_1 += b.ToString("X2");
+            }
+
+            //第二個檔案的MD5碼
+            string FileMD5_2 = string.Empty;
+            //取得第二個檔案MD5演算後的陣列
+            byte[] Hash2 = algorithm.ComputeHash(File.ReadAllBytes(filename2));
+            ///建立第二個檔案的MD5碼
+            foreach (byte b in Hash2)
+            {
+                FileMD5_2 += b.ToString("X2");
+            }
+
+            //第三個檔案的MD5碼
+            string FileMD5_3 = string.Empty;
+            //取得第三個檔案MD5演算後的陣列
+            byte[] Hash3 = algorithm.ComputeHash(File.ReadAllBytes(filename3));
+            ///建立第三個檔案的MD5碼
+            foreach (byte b in Hash3)
+            {
+                FileMD5_3 += b.ToString("X2");
+            }
+
+            if (FileMD5_1.Equals(FileMD5_2))
+                richTextBox1.Text += "檔案" + filename1 + "和檔案" + filename2 + " 完全相同\n";
+            else
+                richTextBox1.Text += "檔案" + filename1 + "和檔案" + filename2 + " 不相同\n";
+
+            if (FileMD5_1.Equals(FileMD5_3))
+                richTextBox1.Text += "檔案" + filename1 + "和檔案" + filename3 + " 完全相同\n";
+            else
+                richTextBox1.Text += "檔案" + filename1 + "和檔案" + filename3 + " 不相同\n";
+
+            if (FileMD5_2.Equals(FileMD5_3))
+                richTextBox1.Text += "檔案" + filename2 + "和檔案" + filename3 + " 完全相同\n";
+            else
+                richTextBox1.Text += "檔案" + filename2 + "和檔案" + filename3 + " 不相同\n";
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //用MD5比較兩個檔案
+
+            //第一個檔案
+            string FirstFilePath = @"c:/______test_files/picture1.jpg";
+            //第二個檔案
+            string SecondFilePath = @"c:/______test_files/picture2.jpg";
+            //第一個檔案的MD5碼
+            string FirstFileMD5 = string.Empty;
+            //建立MD5的演算法
+            HashAlgorithm algorithm = MD5.Create();
+            //取得第一個檔案MD5演算後的陣列
+            byte[] FirstHash = algorithm.ComputeHash(File.ReadAllBytes(FirstFilePath));
+            //建立第一個檔案的MD5碼
+            foreach (byte b in FirstHash)
+            {
+                FirstFileMD5 += b.ToString("X2");
+            }
+            //第二個檔案的MD5碼
+            string SecondFileMD5 = string.Empty;
+            //取得第二個檔案MD5演算後的陣列
+            byte[] SecondHash = algorithm.ComputeHash(File.ReadAllBytes(SecondFilePath));
+            ///建立第二個檔案的MD5碼
+            foreach (byte b in SecondHash)
+            {
+                SecondFileMD5 += b.ToString("X2");
+            }
+
+            richTextBox1.Text += "檔案：" + FirstFilePath + ",\tMD5：" + FirstFileMD5 + "\n";
+            richTextBox1.Text += "檔案：" + SecondFilePath + ",\tMD5：" + SecondFileMD5 + "\n";
+
+            if (FirstFileMD5.Equals(SecondFileMD5))
+            {
+                richTextBox1.Text += "兩個檔案\t完全相同\n";
+            }
+            else
+            {
+                richTextBox1.Text += "兩個檔案\t不相同\n";
+            }
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            //算一個檔案的SHA1值
+
+            string filename = @"C:\______test_files\picture1.jpg";
+
+            using (FileStream fs = File.OpenRead(filename))
+            {
+                SHA256Managed sha = new SHA256Managed();
+                richTextBox1.Text += "SHA1 result : " + Convert.ToBase64String(sha.ComputeHash(fs));
+            }
+
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            //取得檔案的唯一檢查碼Checksum MD5 SHA
+
+            string filename = @"C:\______test_files\picture1.jpg";
+
+
+            using (FileStream fs = File.OpenRead(filename))
+            {
+                //SHA Code :
+                SHA256Managed sha = new SHA256Managed();
+                richTextBox1.Text += "SHA code:\n";
+                richTextBox1.Text += Convert.ToBase64String(sha.ComputeHash(fs)) + "\n";
+
+                //MD5 Code :
+                MD5 m = MD5.Create();
+                richTextBox1.Text += "MD5 code:\n";
+                richTextBox1.Text += Convert.ToBase64String(m.ComputeHash(fs)) + "\n";
+            }
+
+        }
+    }
 
     //C#計算文件的MD5值實例
     /*

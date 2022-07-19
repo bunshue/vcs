@@ -14,6 +14,17 @@ namespace vcs_Cryptography5
 {
     public partial class Form1 : Form
     {
+        //欲進行MD5加密的字符串  
+        string str_clear_text = "this is a lion-mouse";
+
+        //MD5加密後的結果
+        string str_md5_text = string.Empty;
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -22,16 +33,17 @@ namespace vcs_Cryptography5
         private void button1_Click(object sender, EventArgs e)
         {
             MD5 md5 = MD5.Create();
-            byte[] input = Encoding.Default.GetBytes(textBox1.Text);
+            byte[] input = Encoding.Default.GetBytes(str_clear_text);
             byte[] output = md5.ComputeHash(input);
-            string result = Convert.ToBase64String(output);
-            textBox2.Text = result;
+            str_md5_text = Convert.ToBase64String(output);
+
+            //  show
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             SHA1 sha1 = new SHA1CryptoServiceProvider();
-            byte[] input = Encoding.Default.GetBytes(textBox1.Text);
+            byte[] input = Encoding.Default.GetBytes(str_clear_text);
             byte[] output = sha1.ComputeHash(input);
             string result = Convert.ToBase64String(output);
             textBox2.Text = result;
@@ -40,7 +52,7 @@ namespace vcs_Cryptography5
         private void button3_Click(object sender, EventArgs e)
         {
             SHA256 sha256 = new SHA256CryptoServiceProvider();
-            byte[] input = Encoding.Default.GetBytes(textBox1.Text);
+            byte[] input = Encoding.Default.GetBytes(str_clear_text);
             byte[] output = sha256.ComputeHash(input);
             string result = Convert.ToBase64String(output);
             textBox2.Text = result;
@@ -49,7 +61,7 @@ namespace vcs_Cryptography5
         private void button4_Click(object sender, EventArgs e)
         {
             SHA384 sha384 = new SHA384CryptoServiceProvider();
-            byte[] input = Encoding.Default.GetBytes(textBox1.Text);
+            byte[] input = Encoding.Default.GetBytes(str_clear_text);
             byte[] output = sha384.ComputeHash(input);
             string result = Convert.ToBase64String(output);
             textBox2.Text = result;
@@ -58,7 +70,7 @@ namespace vcs_Cryptography5
         private void button5_Click(object sender, EventArgs e)
         {
             SHA512 sha512 = new SHA512CryptoServiceProvider();
-            byte[] input = Encoding.Default.GetBytes(textBox1.Text);
+            byte[] input = Encoding.Default.GetBytes(str_clear_text);
             byte[] output = sha512.ComputeHash(input);
             string result = Convert.ToBase64String(output);
             textBox2.Text = result;
@@ -151,6 +163,7 @@ namespace vcs_Cryptography5
             richTextBox1.Text += "SHA256\n";
             richTextBox1.Text += sb.ToString() + "\n";
         }
+
     }
 }
 

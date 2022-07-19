@@ -171,7 +171,9 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(180, 55);
             this.button10.TabIndex = 11;
+            this.button10.Text = "用MD5比對兩個檔案是否相同";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // button11
             // 
@@ -179,7 +181,9 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(180, 55);
             this.button11.TabIndex = 12;
+            this.button11.Text = "用MD5比較兩個檔案";
             this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // button12
             // 
@@ -187,7 +191,9 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(180, 55);
             this.button12.TabIndex = 13;
+            this.button12.Text = "算一個檔案的SHA1值";
             this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // button13
             // 
@@ -195,7 +201,9 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(180, 55);
             this.button13.TabIndex = 14;
+            this.button13.Text = "取得檔案的唯一檢查碼Checksum MD5 SHA";
             this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // button14
             // 

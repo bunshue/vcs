@@ -14,8 +14,11 @@ namespace vcs_Cryptography2_SHA1
 {
     public partial class Form1 : Form
     {
-        //欲進行SHA1加密的字符串  
+        //欲進行MD5加密的字符串  
         string str_clear_text = "this is a lion-mouse";
+
+        //MD5加密後的結果
+        string str_md5_text = string.Empty;
 
         public Form1()
         {
@@ -261,6 +264,24 @@ namespace vcs_Cryptography2_SHA1
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //算一個字串的SHA1值
+
+            byte[] data = new byte[5];
+            byte[] result;
+
+            data[0] = (byte)'A';
+            data[1] = (byte)'B';
+            data[2] = (byte)'C';
+            data[3] = (byte)'D';
+            data[4] = (byte)'E';
+
+            SHA1 sha = new SHA1CryptoServiceProvider();
+            // This is one implementation of the abstract class SHA1.
+            result = sha.ComputeHash(data);
+            richTextBox1.Text += "SHA1 : " + result.ToArray().ToString() + "\n";
+
+            //TBD
+
         }
 
         private void button4_Click(object sender, EventArgs e)

@@ -41,10 +41,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.label_compare = new System.Windows.Forms.Label();
-            this.button5 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.button6 = new System.Windows.Forms.Button();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // textBox1
@@ -157,50 +154,20 @@
             this.label_compare.TabIndex = 13;
             this.label_compare.Text = "result";
             // 
-            // button5
-            // 
-            this.button5.Location = new System.Drawing.Point(47, 304);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(115, 55);
-            this.button5.TabIndex = 14;
-            this.button5.Text = "用MD5比對兩個檔案是否相同";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(190, 304);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 304);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(473, 281);
+            this.richTextBox1.Size = new System.Drawing.Size(651, 281);
             this.richTextBox1.TabIndex = 15;
             this.richTextBox1.Text = "";
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(588, 250);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 34);
-            this.button6.TabIndex = 16;
-            this.button6.Text = "對字串加MD5";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(190, 258);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(384, 22);
-            this.textBox4.TabIndex = 17;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(693, 597);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.button6);
             this.Controls.Add(this.richTextBox1);
-            this.Controls.Add(this.button5);
             this.Controls.Add(this.label_compare);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.label2);
@@ -236,10 +203,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label_compare;
-        private System.Windows.Forms.Button button5;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.TextBox textBox4;
     }
 }
 
