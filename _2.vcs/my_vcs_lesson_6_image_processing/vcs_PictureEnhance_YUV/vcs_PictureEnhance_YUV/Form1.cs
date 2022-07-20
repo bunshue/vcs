@@ -9,13 +9,105 @@ using System.Windows.Forms;
 
 using System.Drawing.Imaging;
 
-namespace vcs_PictureEnhance
+namespace vcs_PictureEnhance_YUV
 {
     public partial class Form1 : Form
     {
         string filename1 = @"C:\______test_files\ims01.bmp";
         //string filename1 = @"C:\______test_files\color1.bmp";
         //string filename2 = @"C:\______test_files\color2.bmp";
+
+        public struct RGB
+        {
+            private byte _r;
+            private byte _g;
+            private byte _b;
+
+            public RGB(byte r, byte g, byte b)
+            {
+                this._r = r;
+                this._g = g;
+                this._b = b;
+            }
+
+            public byte R
+            {
+                get { return this._r; }
+                set { this._r = value; }
+            }
+
+            public byte G
+            {
+                get { return this._g; }
+                set { this._g = value; }
+            }
+
+            public byte B
+            {
+                get { return this._b; }
+                set { this._b = value; }
+            }
+
+            public bool Equals(RGB rgb)
+            {
+                return (this.R == rgb.R) && (this.G == rgb.G) && (this.B == rgb.B);
+            }
+        }
+
+        public struct YUV
+        {
+            private double _y;
+            private double _u;
+            private double _v;
+
+            public YUV(double y, double u, double v)
+            {
+                this._y = y;
+                this._u = u;
+                this._v = v;
+            }
+
+            public double Y
+            {
+                get { return this._y; }
+                set { this._y = value; }
+            }
+
+            public double U
+            {
+                get { return this._u; }
+                set { this._u = value; }
+            }
+
+            public double V
+            {
+                get { return this._v; }
+                set { this._v = value; }
+            }
+
+            public bool Equals(YUV yuv)
+            {
+                return (this.Y == yuv.Y) && (this.U == yuv.U) && (this.V == yuv.V);
+            }
+        }
+
+        public static YUV RGBToYUV(RGB rgb)
+        {
+            double y = rgb.R * .299000 + rgb.G * .587000 + rgb.B * .114000;
+            double u = rgb.R * -.168736 + rgb.G * -.331264 + rgb.B * .500000 + 128;
+            double v = rgb.R * .500000 + rgb.G * -.418688 + rgb.B * -.081312 + 128;
+
+            return new YUV(y, u, v);
+        }
+
+        public static RGB YUVToRGB(YUV yuv)
+        {
+            byte r = (byte)(yuv.Y + 1.4075 * (yuv.V - 128));
+            byte g = (byte)(yuv.Y - 0.3455 * (yuv.U - 128) - (0.7169 * (yuv.V - 128)));
+            byte b = (byte)(yuv.Y + 1.7790 * (yuv.U - 128));
+
+            return new RGB(r, g, b);
+        }
 
         public Form1()
         {
@@ -115,18 +207,14 @@ namespace vcs_PictureEnhance
             richTextBox1.Clear();
         }
 
-        void evaluate_bitmap_data(Bitmap bitmap1, int x_st, int y_st, int w, int h, out int R_max, out int R_min, out int G_max, out int G_min, out int B_max, out int B_min)
+        void evaluate_bitmap_data(Bitmap bitmap1, int x_st, int y_st, int w, int h, out int Y_max, out int Y_min)
         {
             int i;
             int j;
             Color pt;
 
-            R_max = 0;
-            R_min = 255;
-            G_max = 0;
-            G_min = 255;
-            B_max = 0;
-            B_min = 255;
+            Y_max = 0;
+            Y_min = 255;
 
             for (j = 0; j < h; j++)
             {
@@ -134,37 +222,37 @@ namespace vcs_PictureEnhance
                 {
                     pt = bitmap1.GetPixel(x_st + i, y_st + j);
 
-                    if (R_max < pt.R)
-                        R_max = pt.R;
-                    if (G_max < pt.G)
-                        G_max = pt.G;
-                    if (B_max < pt.B)
-                        B_max = pt.B;
-                    if (R_min > pt.R)
-                        R_min = pt.R;
-                    if (G_min > pt.G)
-                        G_min = pt.G;
-                    if (B_min > pt.B)
-                        B_min = pt.B;
+                    RGB pp = new RGB(pt.R, pt.G, pt.B);
+                    YUV yyy = new YUV();
+                    yyy = RGBToYUV(pp);
+
+
+                    if (Y_max < yyy.Y)
+                        Y_max = (int)yyy.Y;
+
+                    if (Y_min > yyy.Y)
+                        Y_min = (int)yyy.Y;
                 }
             }
-            /*
-            richTextBox1.Text += "R_max = " + R_max.ToString() + "\tR_min = " + R_min.ToString() + "\n";
-            richTextBox1.Text += "G_max = " + G_max.ToString() + "\tG_min = " + G_min.ToString() + "\n";
-            richTextBox1.Text += "B_max = " + B_max.ToString() + "\tB_min = " + B_min.ToString() + "\n";
-            */
+            if (Y_max > 255)
+                Y_max = 255;
+            if (Y_min < 0)
+                Y_min = 0;
+
+            richTextBox1.Text += "Y_max = " + Y_max.ToString() + "\tY_min = " + Y_min.ToString() + "\n";
         }
 
-        void enhance_bitmap_data(Bitmap bitmap1, int x_st, int y_st, int w, int h, int R_max, int R_min, int G_max, int G_min, int B_max, int B_min)
+        void enhance_bitmap_data(Bitmap bitmap1, int x_st, int y_st, int w, int h, int R_max, int R_min, int G_max, int G_min, int B_max, int B_min, int Y_max, int Y_min)
         {
             int i;
             int j;
             Color pt;
 
-
             int diff_R = R_max - R_min;
             int diff_G = G_max - G_min;
             int diff_B = B_max - B_min;
+
+            int diff_Y = Y_max - Y_min;
 
             if (diff_R == 0)
                 diff_R = 1;
@@ -173,15 +261,17 @@ namespace vcs_PictureEnhance
             if (diff_B == 0)
                 diff_B = 1;
 
+            if (diff_Y == 0)
+                diff_Y = 1;
+
             float ratio_R = 255 / (float)diff_R;
             float ratio_G = 255 / (float)diff_G;
             float ratio_B = 255 / (float)diff_B;
 
-            /*
-            richTextBox1.Text += "ratio_R = " + ratio_R.ToString("F2") + "\n";
-            richTextBox1.Text += "ratio_G = " + ratio_G.ToString("F2") + "\n";
-            richTextBox1.Text += "ratio_B = " + ratio_B.ToString("F2") + "\n";
-            */
+            float ratio_Y = 255 / (float)diff_Y;
+
+            richTextBox1.Text += "ratio_Y = " + ratio_Y.ToString("F2") + "\n";
+
 
             for (j = 0; j < h; j++)
             {
@@ -189,37 +279,48 @@ namespace vcs_PictureEnhance
                 {
                     pt = bitmap1.GetPixel(x_st + i, y_st + j);
 
-                    if (R_max < pt.R)
-                        R_max = pt.R;
-                    if (G_max < pt.G)
-                        G_max = pt.G;
-                    if (B_max < pt.B)
-                        B_max = pt.B;
-                    if (R_min > pt.R)
-                        R_min = pt.R;
-                    if (G_min > pt.G)
-                        G_min = pt.G;
-                    if (B_min > pt.B)
-                        B_min = pt.B;
+                    RGB pp = new RGB(pt.R, pt.G, pt.B);
+                    YUV yyy = new YUV();
+                    yyy = RGBToYUV(pp);
+
+
+                    if (Y_max < yyy.Y)
+                        Y_max = (int)yyy.Y;
+
+                    if (Y_min > yyy.Y)
+                        Y_min = (int)yyy.Y;
                 }
             }
-            /*
-            richTextBox1.Text += "R_max = " + R_max.ToString() + "\tR_min = " + R_min.ToString() + "\n";
-            richTextBox1.Text += "G_max = " + G_max.ToString() + "\tG_min = " + G_min.ToString() + "\n";
-            richTextBox1.Text += "B_max = " + B_max.ToString() + "\tB_min = " + B_min.ToString() + "\n";
-            */
+
+            if (Y_max > 255)
+                Y_max = 255;
+            if (Y_min < 0)
+                Y_min = 0;
+
+            richTextBox1.Text += "Y_max = " + Y_max.ToString() + "\tY_min = " + Y_min.ToString() + "\n";
+
             for (j = 0; j < h; j++)
             {
                 for (i = 0; i < w; i++)
                 {
                     pt = bitmap1.GetPixel(x_st + i, y_st + j);
 
-                    int R_new = (int)((pt.R - R_min) * ratio_R);
-                    int G_new = (int)((pt.G - G_min) * ratio_G);
-                    int B_new = (int)((pt.B - B_min) * ratio_B);
+                    RGB pp = new RGB(pt.R, pt.G, pt.B);
+                    YUV yyy = new YUV();
+                    yyy = RGBToYUV(pp);
 
 
-                    bitmap1.SetPixel(x_st + i, y_st + j, Color.FromArgb(255, R_new, G_new, B_new));
+                    int Y_new = (int)((yyy.Y - Y_min) * ratio_Y);
+                    if (Y_new > 255)
+                        Y_new = 255;
+                    if (Y_new < 0)
+                        Y_new = 0;
+
+                    YUV yyy2 = new YUV(Y_new, yyy.U, yyy.V);
+                    RGB rrr = new RGB();
+                    rrr = YUVToRGB(yyy2);
+
+                    bitmap1.SetPixel(x_st + i, y_st + j, Color.FromArgb(255, rrr.R, rrr.G, rrr.B));
 
                 }
             }
@@ -271,9 +372,12 @@ namespace vcs_PictureEnhance
             int B_max = 0;
             int B_min = 255;
 
-            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out R_max, out R_min, out G_max, out G_min, out B_max, out B_min);
-            enhance_bitmap_data(bitmap1, x_st, y_st, w, h, R_max, R_min, G_max, G_min, B_max, B_min);
-            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out R_max, out R_min, out G_max, out G_min, out B_max, out B_min);
+            int Y_max = 0;
+            int Y_min = 255;
+
+            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out Y_max, out Y_min);
+            enhance_bitmap_data(bitmap1, x_st, y_st, w, h, R_max, R_min, G_max, G_min, B_max, B_min, Y_max, Y_min);
+            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out Y_max, out Y_min);
             show_part_image(bitmap1, x_st, y_st, w, h);
 
             pictureBox1.Image = bitmap1;
@@ -300,9 +404,13 @@ namespace vcs_PictureEnhance
             int B_max = 0;
             int B_min = 255;
 
-            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out R_max, out R_min, out G_max, out G_min, out B_max, out B_min);
-            enhance_bitmap_data(bitmap1, x_st, y_st, w, h, R_max, R_min, G_max, G_min, B_max, B_min);
-            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out R_max, out R_min, out G_max, out G_min, out B_max, out B_min);
+            int Y_max = 0;
+            int Y_min = 255;
+
+            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out Y_max, out Y_min);
+            enhance_bitmap_data(bitmap1, x_st, y_st, w, h, R_max, R_min, G_max, G_min, B_max, B_min, Y_max, Y_min);
+
+            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out Y_max, out Y_min);
             show_part_image(bitmap1, x_st, y_st, w, h);
 
             pictureBox1.Image = bitmap1;
@@ -330,9 +438,12 @@ namespace vcs_PictureEnhance
             int B_max = 0;
             int B_min = 255;
 
-            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out R_max, out R_min, out G_max, out G_min, out B_max, out B_min);
-            enhance_bitmap_data(bitmap1, x_st, y_st, w, h, R_max, R_min, G_max, G_min, B_max, B_min);
-            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out R_max, out R_min, out G_max, out G_min, out B_max, out B_min);
+            int Y_max = 0;
+            int Y_min = 255;
+
+            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out Y_max, out Y_min);
+            enhance_bitmap_data(bitmap1, x_st, y_st, w, h, R_max, R_min, G_max, G_min, B_max, B_min, Y_max, Y_min);
+            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out Y_max, out Y_min);
             show_part_image(bitmap1, x_st, y_st, w, h);
 
             pictureBox1.Image = bitmap1;
@@ -361,9 +472,12 @@ namespace vcs_PictureEnhance
             int B_max = 0;
             int B_min = 255;
 
-            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out R_max, out R_min, out G_max, out G_min, out B_max, out B_min);
-            enhance_bitmap_data(bitmap1, x_st, y_st, w, h, R_max, R_min, G_max, G_min, B_max, B_min);
-            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out R_max, out R_min, out G_max, out G_min, out B_max, out B_min);
+            int Y_max = 0;
+            int Y_min = 255;
+
+            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out Y_max, out Y_min);
+            enhance_bitmap_data(bitmap1, x_st, y_st, w, h, R_max, R_min, G_max, G_min, B_max, B_min, Y_max, Y_min);
+            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out Y_max, out Y_min);
             show_part_image(bitmap1, x_st, y_st, w, h);
 
             pictureBox1.Image = bitmap1;
@@ -392,9 +506,12 @@ namespace vcs_PictureEnhance
             int B_max = 0;
             int B_min = 255;
 
-            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out R_max, out R_min, out G_max, out G_min, out B_max, out B_min);
-            enhance_bitmap_data(bitmap1, x_st, y_st, w, h, R_max, R_min, G_max, G_min, B_max, B_min);
-            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out R_max, out R_min, out G_max, out G_min, out B_max, out B_min);
+            int Y_max = 0;
+            int Y_min = 255;
+
+            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out Y_max, out Y_min);
+            enhance_bitmap_data(bitmap1, x_st, y_st, w, h, R_max, R_min, G_max, G_min, B_max, B_min, Y_max, Y_min);
+            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out Y_max, out Y_min);
             show_part_image(bitmap1, x_st, y_st, w, h);
 
             pictureBox1.Image = bitmap1;
@@ -423,9 +540,12 @@ namespace vcs_PictureEnhance
             int B_max = 0;
             int B_min = 255;
 
-            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out R_max, out R_min, out G_max, out G_min, out B_max, out B_min);
-            enhance_bitmap_data(bitmap1, x_st, y_st, w, h, R_max, R_min, G_max, G_min, B_max, B_min);
-            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out R_max, out R_min, out G_max, out G_min, out B_max, out B_min);
+            int Y_max = 0;
+            int Y_min = 255;
+
+            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out Y_max, out Y_min);
+            enhance_bitmap_data(bitmap1, x_st, y_st, w, h, R_max, R_min, G_max, G_min, B_max, B_min, Y_max, Y_min);
+            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out Y_max, out Y_min);
             show_part_image(bitmap1, x_st, y_st, w, h);
 
             pictureBox1.Image = bitmap1;

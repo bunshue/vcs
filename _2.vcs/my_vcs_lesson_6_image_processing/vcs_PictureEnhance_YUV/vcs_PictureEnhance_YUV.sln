@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_PictureEnhance", "vcs_PictureEnhance\vcs_PictureEnhance.csproj", "{DE087EDA-FB37-48E5-A119-66AC0C955277}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_PictureEnhance_YUV", "vcs_PictureEnhance_YUV\vcs_PictureEnhance_YUV.csproj", "{DE087EDA-FB37-48E5-A119-66AC0C955277}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

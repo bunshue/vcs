@@ -1,4 +1,4 @@
-﻿namespace vcs_PictureEnhance
+﻿namespace vcs_PictureEnhance_YUV
 {
     partial class Form1
     {
@@ -65,9 +65,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(1403, 10);
+            this.richTextBox1.Location = new System.Drawing.Point(364, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(249, 966);
+            this.richTextBox1.Size = new System.Drawing.Size(200, 200);
             this.richTextBox1.TabIndex = 5;
             this.richTextBox1.Text = "";
             // 
@@ -133,7 +133,7 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(1510, 850);
+            this.bt_clear.Location = new System.Drawing.Point(364, 230);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(60, 32);
             this.bt_clear.TabIndex = 14;
@@ -154,7 +154,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1664, 988);
+            this.ClientSize = new System.Drawing.Size(684, 461);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button5);

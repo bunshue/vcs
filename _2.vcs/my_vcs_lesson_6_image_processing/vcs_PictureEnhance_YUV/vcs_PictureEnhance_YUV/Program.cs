@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_PictureEnhance
+namespace vcs_PictureEnhance_YUV
 {
     static class Program
     {
