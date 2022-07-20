@@ -207,6 +207,12 @@ namespace vcs_GMap
             rb_location11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             rb_location12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
             rb_location13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            rb_location14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            rb_location15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            rb_location16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            rb_location17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            rb_location18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            rb_location19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
             dx = 150;
             dy = 14;
@@ -2591,16 +2597,16 @@ namespace vcs_GMap
             }
             else if (rb_location7.Checked == true)
             {
-                gMapControl1.MapProvider = GMapProviders.GoogleMap; //正中地圖
+                //阿拉曼
 
-                //阿拉曼   30.833333, 28.95
-                latitude = 30.833333;   //緯度
-                longitude = 28.95; //經度
-                gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
-                gMapControl1.Zoom = 6; //當前比例
+                string[,] location = null;
 
-                update_controls_info();
-
+                location = new string[,] {
+            { "阿拉曼", "30.833333", "28.95"},
+            { "羅塞塔", "31.4014", "30.4194"},
+            };
+                show_locations(location);
+                gMapControl1.Zoom = 7; //當前比例
 
             }
             else if (rb_location8.Checked == true)
@@ -2680,15 +2686,10 @@ namespace vcs_GMap
             };
                 show_locations(location);
                 gMapControl1.Zoom = 7; //當前比例
-
-
-
-
             }
             else if (rb_location12.Checked == true)
             {
                 //大清地圖
-
                 string[,] location = null;
 
                 location = new string[,] {
@@ -2704,6 +2705,21 @@ namespace vcs_GMap
             }
             else if (rb_location13.Checked == true)
             {
+                //太平洋戰爭
+                string[,] location = null;
+
+                location = new string[,] {
+{ "拉包爾", "-4.1981", "152.1681"},
+{ "布因", "-6.746", "155.685"},
+{ "瓜達爾卡納爾島", "-9.616667", "160.183333"},
+{ "馬里亞納群島", "16.794022", "145.931389"},
+{ "關島", "13.45", "144.783333"},
+{ "塞班島", "15.209325", "145.763169"},
+{ "天寧島", "15.00", "145.633333"},
+            };
+
+                show_locations(location);
+                gMapControl1.Zoom = 5; //當前比例
 
             }
             else

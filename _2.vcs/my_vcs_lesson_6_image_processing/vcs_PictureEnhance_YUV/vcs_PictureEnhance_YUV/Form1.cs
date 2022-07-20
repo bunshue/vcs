@@ -207,14 +207,14 @@ namespace vcs_PictureEnhance_YUV
             richTextBox1.Clear();
         }
 
-        void evaluate_bitmap_data(Bitmap bitmap1, int x_st, int y_st, int w, int h, out int Y_max, out int Y_min)
+        void enhance_bitmap_data(Bitmap bitmap1, int x_st, int y_st, int w, int h)
         {
             int i;
             int j;
             Color pt;
 
-            Y_max = 0;
-            Y_min = 255;
+            int Y_max = 0;
+            int Y_min = 255;
 
             for (j = 0; j < h; j++)
             {
@@ -240,33 +240,11 @@ namespace vcs_PictureEnhance_YUV
                 Y_min = 0;
 
             richTextBox1.Text += "Y_max = " + Y_max.ToString() + "\tY_min = " + Y_min.ToString() + "\n";
-        }
-
-        void enhance_bitmap_data(Bitmap bitmap1, int x_st, int y_st, int w, int h, int R_max, int R_min, int G_max, int G_min, int B_max, int B_min, int Y_max, int Y_min)
-        {
-            int i;
-            int j;
-            Color pt;
-
-            int diff_R = R_max - R_min;
-            int diff_G = G_max - G_min;
-            int diff_B = B_max - B_min;
 
             int diff_Y = Y_max - Y_min;
 
-            if (diff_R == 0)
-                diff_R = 1;
-            if (diff_G == 0)
-                diff_G = 1;
-            if (diff_B == 0)
-                diff_B = 1;
-
             if (diff_Y == 0)
                 diff_Y = 1;
-
-            float ratio_R = 255 / (float)diff_R;
-            float ratio_G = 255 / (float)diff_G;
-            float ratio_B = 255 / (float)diff_B;
 
             float ratio_Y = 255 / (float)diff_Y;
 
@@ -365,19 +343,7 @@ namespace vcs_PictureEnhance_YUV
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename1);	//Bitmap.FromFile出來的是Image格式
             Graphics g = Graphics.FromImage(bitmap1);
 
-            int R_max = 0;
-            int R_min = 255;
-            int G_max = 0;
-            int G_min = 255;
-            int B_max = 0;
-            int B_min = 255;
-
-            int Y_max = 0;
-            int Y_min = 255;
-
-            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out Y_max, out Y_min);
-            enhance_bitmap_data(bitmap1, x_st, y_st, w, h, R_max, R_min, G_max, G_min, B_max, B_min, Y_max, Y_min);
-            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out Y_max, out Y_min);
+            enhance_bitmap_data(bitmap1, x_st, y_st, w, h);
             show_part_image(bitmap1, x_st, y_st, w, h);
 
             pictureBox1.Image = bitmap1;
@@ -397,20 +363,7 @@ namespace vcs_PictureEnhance_YUV
             int w = W * 3 / 4;
             int h = H * 3 / 4;
 
-            int R_max = 0;
-            int R_min = 255;
-            int G_max = 0;
-            int G_min = 255;
-            int B_max = 0;
-            int B_min = 255;
-
-            int Y_max = 0;
-            int Y_min = 255;
-
-            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out Y_max, out Y_min);
-            enhance_bitmap_data(bitmap1, x_st, y_st, w, h, R_max, R_min, G_max, G_min, B_max, B_min, Y_max, Y_min);
-
-            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out Y_max, out Y_min);
+            enhance_bitmap_data(bitmap1, x_st, y_st, w, h);
             show_part_image(bitmap1, x_st, y_st, w, h);
 
             pictureBox1.Image = bitmap1;
@@ -431,23 +384,10 @@ namespace vcs_PictureEnhance_YUV
             int w = W / 2;
             int h = H / 2;
 
-            int R_max = 0;
-            int R_min = 255;
-            int G_max = 0;
-            int G_min = 255;
-            int B_max = 0;
-            int B_min = 255;
-
-            int Y_max = 0;
-            int Y_min = 255;
-
-            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out Y_max, out Y_min);
-            enhance_bitmap_data(bitmap1, x_st, y_st, w, h, R_max, R_min, G_max, G_min, B_max, B_min, Y_max, Y_min);
-            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out Y_max, out Y_min);
+            enhance_bitmap_data(bitmap1, x_st, y_st, w, h);
             show_part_image(bitmap1, x_st, y_st, w, h);
 
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -465,23 +405,10 @@ namespace vcs_PictureEnhance_YUV
             int w = W / 3;
             int h = H / 3;
 
-            int R_max = 0;
-            int R_min = 255;
-            int G_max = 0;
-            int G_min = 255;
-            int B_max = 0;
-            int B_min = 255;
-
-            int Y_max = 0;
-            int Y_min = 255;
-
-            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out Y_max, out Y_min);
-            enhance_bitmap_data(bitmap1, x_st, y_st, w, h, R_max, R_min, G_max, G_min, B_max, B_min, Y_max, Y_min);
-            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out Y_max, out Y_min);
+            enhance_bitmap_data(bitmap1, x_st, y_st, w, h); 
             show_part_image(bitmap1, x_st, y_st, w, h);
 
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -499,23 +426,10 @@ namespace vcs_PictureEnhance_YUV
             int w = W / 10;
             int h = H / 10;
 
-            int R_max = 0;
-            int R_min = 255;
-            int G_max = 0;
-            int G_min = 255;
-            int B_max = 0;
-            int B_min = 255;
-
-            int Y_max = 0;
-            int Y_min = 255;
-
-            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out Y_max, out Y_min);
-            enhance_bitmap_data(bitmap1, x_st, y_st, w, h, R_max, R_min, G_max, G_min, B_max, B_min, Y_max, Y_min);
-            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out Y_max, out Y_min);
+            enhance_bitmap_data(bitmap1, x_st, y_st, w, h); 
             show_part_image(bitmap1, x_st, y_st, w, h);
 
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -533,23 +447,10 @@ namespace vcs_PictureEnhance_YUV
             int w = W / 3;
             int h = H / 3;
 
-            int R_max = 0;
-            int R_min = 255;
-            int G_max = 0;
-            int G_min = 255;
-            int B_max = 0;
-            int B_min = 255;
-
-            int Y_max = 0;
-            int Y_min = 255;
-
-            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out Y_max, out Y_min);
-            enhance_bitmap_data(bitmap1, x_st, y_st, w, h, R_max, R_min, G_max, G_min, B_max, B_min, Y_max, Y_min);
-            evaluate_bitmap_data(bitmap1, x_st, y_st, w, h, out Y_max, out Y_min);
+            enhance_bitmap_data(bitmap1, x_st, y_st, w, h); 
             show_part_image(bitmap1, x_st, y_st, w, h);
 
             pictureBox1.Image = bitmap1;
-
         }
 
         bool flag_pictureBox2_mouse_down = false;
