@@ -11,9 +11,16 @@ using System.IO;
 using System.Drawing.Drawing2D;
 using System.Threading.Tasks;
 
-namespace ImageViewer
+/*
+//使用
+1. 加入dll
+2. 修改.csproj
+3. 加入pictureBox和richTextBox兩個控件
+*/
+
+namespace vcs_ImageViewer
 {
-    public partial class MainForm : Form
+    public partial class Form1 : Form
     {
         /// <summary>
         /// 開いた画像ファイル名
@@ -55,22 +62,36 @@ namespace ImageViewer
         Label lb_pixel_info;
         Label lb_image_info;
 
-        public MainForm()
+        public Form1()
         {
             InitializeComponent();
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            this.pictureBox1.BorderStyle = BorderStyle.Fixed3D;
+
+            //this.pictureBox1.Dock = DockStyle.Left;
 
             // ホイールイベントの追加
             this.pictureBox1.MouseWheel += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseWheel);
 
+            this.pictureBox1.DragDrop += new System.Windows.Forms.DragEventHandler(this.pictureBox1_DragDrop);
+            this.pictureBox1.DragEnter += new System.Windows.Forms.DragEventHandler(this.pictureBox1_DragEnter);
+            this.pictureBox1.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDoubleClick);
+            this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
+            this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
+            this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
+            this.pictureBox1.PreviewKeyDown += new System.Windows.Forms.PreviewKeyDownEventHandler(this.pictureBox1_PreviewKeyDown);
+
             pictureBox1.AllowDrop = true;
 
+            this.Resize += new EventHandler(Form1_Resize);
+
             // リサイズイベントを強制的に実行（Graphicsオブジェクトの作成のため）
-            MainForm_Resize(null, null);
+            Form1_Resize(null, null);
 
             // Matrixクラスの確保（単位行列が代入される）
             _matAffine = new Matrix();
@@ -96,14 +117,8 @@ namespace ImageViewer
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(0, 0);
 
-            this.Size = new Size(1920 * 9 / 10, 900);
-
-            pictureBox1.Size = new Size(1920 * 7 / 10, 500);
-
-            richTextBox1.Size = new Size(200, 500);
-
-            int x_st = this.Width - 250;
-            int y_st = 50;
+            int x_st = 1400;
+            int y_st = 20;
 
             lb_pixel_info = new Label();
             lb_pixel_info.Location = new Point(x_st, y_st + 0);
@@ -115,10 +130,15 @@ namespace ImageViewer
             lb_image_info.Text = "ImageInfo";
             this.Controls.Add(lb_image_info);
 
-            richTextBox1.Location = new Point(x_st, y_st + 80);
+            pictureBox1.Size = new Size(1000, 800);
+            pictureBox1.Location = new Point(0, 0);
+            richTextBox1.Size = new Size(300, 700);
+            richTextBox1.Location = new Point(1400, 100);
+
+            this.Size = new Size(1720, 850);
 
             bt_exit_setup();
-        }
+    }
 
         private void bt_exit_Click(object sender, EventArgs e)
         {
@@ -162,7 +182,7 @@ namespace ImageViewer
             }
         }
 
-        private void MainForm_Resize(object sender, EventArgs e)
+        private void Form1_Resize(object sender, EventArgs e)
         {
             if ((pictureBox1.Width == 0) || (pictureBox1.Height == 0))
             {
@@ -192,7 +212,7 @@ namespace ImageViewer
             point_old.Y = e.Y;
             // マウスダウンフラグ
             flag_mouse_down = true;
-        }
+}
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {

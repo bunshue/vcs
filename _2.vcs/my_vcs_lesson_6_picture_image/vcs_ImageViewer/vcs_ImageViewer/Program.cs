@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_PictureEnhance_RGB
+namespace vcs_ImageViewer
 {
     static class Program
     {

@@ -356,6 +356,7 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(170, 50);
             this.button24.TabIndex = 27;
+            this.button24.Text = "降低解析度";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
@@ -365,6 +366,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(170, 50);
             this.button25.TabIndex = 28;
+            this.button25.Text = "光暈效果";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
