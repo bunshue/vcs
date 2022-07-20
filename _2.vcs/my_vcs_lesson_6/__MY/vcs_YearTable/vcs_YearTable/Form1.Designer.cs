@@ -332,6 +332,7 @@
             this.button19.Size = new System.Drawing.Size(100, 40);
             this.button19.TabIndex = 33;
             this.button19.UseVisualStyleBackColor = true;
+            this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
             // button20
             // 
@@ -340,7 +341,9 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(100, 40);
             this.button20.TabIndex = 34;
+            this.button20.Text = "製作西元前";
             this.button20.UseVisualStyleBackColor = true;
+            this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
             // button21
             // 
@@ -350,6 +353,7 @@
             this.button21.Size = new System.Drawing.Size(100, 40);
             this.button21.TabIndex = 35;
             this.button21.UseVisualStyleBackColor = true;
+            this.button21.Click += new System.EventHandler(this.button21_Click);
             // 
             // button22
             // 
@@ -359,6 +363,7 @@
             this.button22.Size = new System.Drawing.Size(100, 40);
             this.button22.TabIndex = 36;
             this.button22.UseVisualStyleBackColor = true;
+            this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
             // button23
             // 
@@ -368,6 +373,7 @@
             this.button23.Size = new System.Drawing.Size(100, 40);
             this.button23.TabIndex = 37;
             this.button23.UseVisualStyleBackColor = true;
+            this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
             // button24
             // 
@@ -377,6 +383,7 @@
             this.button24.Size = new System.Drawing.Size(100, 40);
             this.button24.TabIndex = 38;
             this.button24.UseVisualStyleBackColor = true;
+            this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
             // button25
             // 
@@ -386,6 +393,7 @@
             this.button25.Size = new System.Drawing.Size(100, 40);
             this.button25.TabIndex = 39;
             this.button25.UseVisualStyleBackColor = true;
+            this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
             // button26
             // 
@@ -395,6 +403,7 @@
             this.button26.Size = new System.Drawing.Size(100, 40);
             this.button26.TabIndex = 40;
             this.button26.UseVisualStyleBackColor = true;
+            this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
             // panel1
             // 

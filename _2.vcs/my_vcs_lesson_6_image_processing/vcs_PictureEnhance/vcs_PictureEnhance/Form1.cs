@@ -29,7 +29,85 @@ namespace vcs_PictureEnhance
             pictureBox2.MouseMove += new MouseEventHandler(pictureBox2_MouseMove);
             pictureBox2.MouseUp += new MouseEventHandler(pictureBox2_MouseUp);
             pictureBox2.Paint += new PaintEventHandler(pictureBox2_Paint);
+
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            int W = 640;
+            int H = 480;
+
+            x_st = 10;
+            y_st = 10;
+            dx = W + 10;
+            dy = H + 10;
+
+            pictureBox1.Size = new Size(W, H);
+            pictureBox2.Size = new Size(W, H);
+            pictureBox3.Size = new Size(W, H);
+            pictureBox4.Size = new Size(W, H);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+            pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox4.SizeMode = PictureBoxSizeMode.Normal;
+
+            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            pictureBox2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            pictureBox3.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            pictureBox4.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+
+            dy = 50;
+            button1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button2.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button3.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button5.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+
+            richTextBox1.Size = new Size(500, H * 2 + 10);
+            richTextBox1.Location = new Point(x_st + dx * 2 + 100, y_st + dy * 0);
+
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            //最大化螢幕
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+            bt_exit_setup();
+        }
+
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        void bt_exit_setup()
+        {
+            int width = 5;
+            int w = 50; //設定按鈕大小 W
+            int h = 50; //設定按鈕大小 H
+
+            Button bt_exit = new Button();  // 實例化按鈕
+            bt_exit.Size = new Size(w, h);
+            bt_exit.Text = "";
+            Bitmap bmp = new Bitmap(w, h);
+            Graphics g = Graphics.FromImage(bmp);
+            Pen p = new Pen(Color.Red, width);
+            g.Clear(Color.Pink);
+            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
+            g.DrawLine(p, 0, 0, w - 1, h - 1);
+            g.DrawLine(p, w - 1, 0, 0, h - 1);
+            bt_exit.Image = bmp;
+
+            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
+            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
+
+            this.Controls.Add(bt_exit); // 將按鈕加入表單
+            bt_exit.BringToFront();     //移到最上層
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -70,10 +148,11 @@ namespace vcs_PictureEnhance
                         B_min = pt.B;
                 }
             }
-
+            /*
             richTextBox1.Text += "R_max = " + R_max.ToString() + "\tR_min = " + R_min.ToString() + "\n";
             richTextBox1.Text += "G_max = " + G_max.ToString() + "\tG_min = " + G_min.ToString() + "\n";
             richTextBox1.Text += "B_max = " + B_max.ToString() + "\tB_min = " + B_min.ToString() + "\n";
+            */
         }
 
         void enhance_bitmap_data(Bitmap bitmap1, int x_st, int y_st, int w, int h, int R_max, int R_min, int G_max, int G_min, int B_max, int B_min)
@@ -98,10 +177,11 @@ namespace vcs_PictureEnhance
             float ratio_G = 255 / (float)diff_G;
             float ratio_B = 255 / (float)diff_B;
 
-
+            /*
             richTextBox1.Text += "ratio_R = " + ratio_R.ToString("F2") + "\n";
             richTextBox1.Text += "ratio_G = " + ratio_G.ToString("F2") + "\n";
             richTextBox1.Text += "ratio_B = " + ratio_B.ToString("F2") + "\n";
+            */
 
             for (j = 0; j < h; j++)
             {
@@ -123,11 +203,11 @@ namespace vcs_PictureEnhance
                         B_min = pt.B;
                 }
             }
-
+            /*
             richTextBox1.Text += "R_max = " + R_max.ToString() + "\tR_min = " + R_min.ToString() + "\n";
             richTextBox1.Text += "G_max = " + G_max.ToString() + "\tG_min = " + G_min.ToString() + "\n";
             richTextBox1.Text += "B_max = " + B_max.ToString() + "\tB_min = " + B_min.ToString() + "\n";
-
+            */
             for (j = 0; j < h; j++)
             {
                 for (i = 0; i < w; i++)
@@ -147,14 +227,36 @@ namespace vcs_PictureEnhance
 
         void show_part_image(Bitmap bitmap1, int x_st, int y_st, int w, int h)
         {
-            pictureBox3.Image = bitmap1.Clone(new Rectangle(x_st, y_st, w, h), PixelFormat.Format32bppArgb);
+            Bitmap bitmap3 = bitmap1.Clone(new Rectangle(x_st, y_st, w, h), PixelFormat.Format32bppArgb);
 
-            if ((w < 640 / 2) || (h < 480 / 2))
+            pictureBox3.Image = bitmap3;
+
+            if ((w > 640 / 2) || (h > 480 / 2))
+            {
+                pictureBox4.Image = null;
                 return;
+            }
 
             //準備放大兩倍
+            richTextBox1.Text += "x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + ", w = " + w.ToString() + ", h = " + h.ToString() + "\n";
 
+            Bitmap bitmap4 = new Bitmap(w * 2, h * 2);
+            int i;
+            int j;
+            Color p;
 
+            for (j = 0; j < h; j++)
+            {
+                for (i = 0; i < w; i++)
+                {
+                    p = bitmap3.GetPixel(i, j);
+                    bitmap4.SetPixel(i * 2, j * 2, p);
+                    bitmap4.SetPixel(i * 2, j * 2 + 1, p);
+                    bitmap4.SetPixel(i * 2 + 1, j * 2, p);
+                    bitmap4.SetPixel(i * 2 + 1, j * 2 + 1, p);
+                }
+            }
+            pictureBox4.Image = bitmap4;
         }
 
         void draw_enhanced_image(int x_st, int y_st, int w, int h)
@@ -388,8 +490,21 @@ namespace vcs_PictureEnhance
             flag_pictureBox2_mouse_down = false;
             //richTextBox1.Text += "Up : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
 
-            draw_enhanced_image(draw_x_st, draw_y_st, draw_w, draw_h);
+            int W = 640;
+            int H = 480;
 
+            if ((draw_x_st < 0) || (draw_x_st >= W))
+                return;
+            if ((draw_y_st < 0) || (draw_y_st >= H))
+                return;
+            if ((draw_w < 0) || (draw_w > W))
+                return;
+            if ((draw_h < 0) || (draw_h > H))
+                return;
+            if (((draw_x_st + draw_w) > W) || ((draw_y_st + draw_h) > H))
+                return;
+
+            draw_enhanced_image(draw_x_st, draw_y_st, draw_w, draw_h);
         }
 
         private void pictureBox2_Paint(object sender, PaintEventArgs e)
@@ -399,3 +514,4 @@ namespace vcs_PictureEnhance
         }
     }
 }
+

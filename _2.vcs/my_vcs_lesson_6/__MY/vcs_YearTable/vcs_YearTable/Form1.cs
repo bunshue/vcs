@@ -138,7 +138,7 @@ namespace vcs_YearTable
             bt_exit.BringToFront();     //移到最上層
 
             panel1.Location = new Point(0, 0);
-            panel1.Size = new Size(1920-50, 800);
+            panel1.Size = new Size(1920 - 50, 800);
             pictureBox1.Location = new Point(20, 20);
         }
 
@@ -1554,6 +1554,46 @@ namespace vcs_YearTable
             }
 
             richTextBox1.Text += "done\n";
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+            //製作西元前
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void bt_info_Click(object sender, EventArgs e)

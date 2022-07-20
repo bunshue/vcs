@@ -21,6 +21,8 @@ namespace vcs_ImageProcessing3
         string filename = @"C:\______test_files\picture1.jpg";
         //string filename = @"C:\______test_files\isinbaeva.jpg";
 
+        Button bt_exit = new Button();  // 實例化按鈕
+
         public Form1()
         {
             InitializeComponent();
@@ -94,6 +96,41 @@ namespace vcs_ImageProcessing3
             lb_title.Text = "";
             lb_title.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 15);
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+
+            //最大化螢幕
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+            bt_exit_setup();
+        }
+
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        void bt_exit_setup()
+        {
+            int width = 5;
+            int w = 50; //設定按鈕大小 W
+            int h = 50; //設定按鈕大小 H
+
+            //Button bt_exit = new Button();  // 實例化按鈕
+            bt_exit.Size = new Size(w, h);
+            bt_exit.Text = "";
+            Bitmap bmp = new Bitmap(w, h);
+            Graphics g = Graphics.FromImage(bmp);
+            Pen p = new Pen(Color.Red, width);
+            g.Clear(Color.Pink);
+            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
+            g.DrawLine(p, 0, 0, w - 1, h - 1);
+            g.DrawLine(p, w - 1, 0, 0, h - 1);
+            bt_exit.Image = bmp;
+
+            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
+            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
+
+            this.Controls.Add(bt_exit); // 將按鈕加入表單
+            bt_exit.BringToFront();     //移到最上層
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -1139,7 +1176,51 @@ namespace vcs_ImageProcessing3
 
         private void button23_Click(object sender, EventArgs e)
         {
-            timer1.Enabled = true;
+            //關掉所有控件 
+            //remove_all_controls();
+
+            int W = Screen.PrimaryScreen.Bounds.Width;
+            int H = Screen.PrimaryScreen.Bounds.Height;
+            int w = W * 7 / 10;
+            int h = H * 7 / 10;
+            pictureBox1.Size = new Size(w, h);
+            pictureBox1.Location = new Point((W - w) / 2, (H - h) / 2);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+
+            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
+            bt_exit.BringToFront();
+            /*
+            //最大化螢幕
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+            */
+            //timer1.Enabled = true;
+        }
+
+        void remove_all_controls()
+        {
+            //richTextBox1.Text += "遍歷所有控件\n";
+            int i;
+
+            for (i = 0; i < 10; i++)
+            {
+                foreach (Control con in this.Controls)
+                {
+                    System.String strControl = con.GetType().ToString();//获得控件的类型
+                    System.String strControlName = con.Name.ToString();//获得控件的名称
+
+                    richTextBox1.Text += "Type\t" + strControl + "\tName\t" + strControlName + "\n";
+
+                    if (strControlName == "pictureBox1")
+                        continue;
+                    if (strControlName == "bt_exit")
+                        continue;
+                    if (strControlName == "richTextBox1")
+                        continue;
+
+                    this.Controls.Remove(con);
+                }
+            }
         }
 
         int item = 0;
