@@ -81,6 +81,8 @@ namespace ImageViewer
             {
                 OpenImageFile(cmds[1]);
             }
+
+            open_image_file();
         }
 
         void show_item_location()
@@ -115,10 +117,6 @@ namespace ImageViewer
 
             richTextBox1.Location = new Point(x_st, y_st + 80);
 
-            bt_open.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_open.Size.Width, richTextBox1.Location.Y + 100);
-            button1.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_open.Size.Width, richTextBox1.Location.Y + 150);
-
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
             bt_exit_setup();
         }
 
@@ -568,7 +566,7 @@ namespace ImageViewer
             }
         }
 
-        private void bt_open_Click(object sender, EventArgs e)
+        void open_image_file()
         {
             string filename = @"C:\______test_files\ims01.bmp";
             OpenImageFile(filename);
@@ -593,15 +591,6 @@ namespace ImageViewer
             }
             */
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
     }
 }
+

@@ -102,11 +102,23 @@ namespace vcs_PictureEnhance_YUV
 
         public static RGB YUVToRGB(YUV yuv)
         {
-            byte r = (byte)(yuv.Y + 1.4075 * (yuv.V - 128));
-            byte g = (byte)(yuv.Y - 0.3455 * (yuv.U - 128) - (0.7169 * (yuv.V - 128)));
-            byte b = (byte)(yuv.Y + 1.7790 * (yuv.U - 128));
+            double r = yuv.Y + 1.4075 * (yuv.V - 128);
+            double g = yuv.Y - 0.3455 * (yuv.U - 128) - (0.7169 * (yuv.V - 128));
+            double b = yuv.Y + 1.7790 * (yuv.U - 128);
+            if (r > 255)
+                r = 255;
+            if (g > 255)
+                g = 255;
+            if (b > 255)
+                b = 255;
+            if (r < 0)
+                r = 0;
+            if (g < 0)
+                g = 0;
+            if (b < 0)
+                b = 0;
 
-            return new RGB(r, g, b);
+            return new RGB((byte)r, (byte)g, (byte)b);
         }
 
         public Form1()
@@ -226,7 +238,6 @@ namespace vcs_PictureEnhance_YUV
                     YUV yyy = new YUV();
                     yyy = RGBToYUV(pp);
 
-
                     if (Y_max < yyy.Y)
                         Y_max = (int)yyy.Y;
 
@@ -239,7 +250,7 @@ namespace vcs_PictureEnhance_YUV
             if (Y_min < 0)
                 Y_min = 0;
 
-            richTextBox1.Text += "Y_max = " + Y_max.ToString() + "\tY_min = " + Y_min.ToString() + "\n";
+            //richTextBox1.Text += "Y_max = " + Y_max.ToString() + "\tY_min = " + Y_min.ToString() + "\n";
 
             int diff_Y = Y_max - Y_min;
 
@@ -248,34 +259,7 @@ namespace vcs_PictureEnhance_YUV
 
             float ratio_Y = 255 / (float)diff_Y;
 
-            richTextBox1.Text += "ratio_Y = " + ratio_Y.ToString("F2") + "\n";
-
-
-            for (j = 0; j < h; j++)
-            {
-                for (i = 0; i < w; i++)
-                {
-                    pt = bitmap1.GetPixel(x_st + i, y_st + j);
-
-                    RGB pp = new RGB(pt.R, pt.G, pt.B);
-                    YUV yyy = new YUV();
-                    yyy = RGBToYUV(pp);
-
-
-                    if (Y_max < yyy.Y)
-                        Y_max = (int)yyy.Y;
-
-                    if (Y_min > yyy.Y)
-                        Y_min = (int)yyy.Y;
-                }
-            }
-
-            if (Y_max > 255)
-                Y_max = 255;
-            if (Y_min < 0)
-                Y_min = 0;
-
-            richTextBox1.Text += "Y_max = " + Y_max.ToString() + "\tY_min = " + Y_min.ToString() + "\n";
+            //richTextBox1.Text += "ratio_Y = " + ratio_Y.ToString("F2") + "\n";
 
             for (j = 0; j < h; j++)
             {
@@ -286,7 +270,6 @@ namespace vcs_PictureEnhance_YUV
                     RGB pp = new RGB(pt.R, pt.G, pt.B);
                     YUV yyy = new YUV();
                     yyy = RGBToYUV(pp);
-
 
                     int Y_new = (int)((yyy.Y - Y_min) * ratio_Y);
                     if (Y_new > 255)
@@ -306,6 +289,20 @@ namespace vcs_PictureEnhance_YUV
 
         void show_part_image(Bitmap bitmap1, int x_st, int y_st, int w, int h)
         {
+            int W = 640;
+            int H = 480;
+
+            if ((x_st < 0) || (x_st >= W))
+                return;
+            if ((y_st < 0) || (y_st >= H))
+                return;
+            if ((w < 0) || (w > W))
+                return;
+            if ((h < 0) || (h > H))
+                return;
+            if (((x_st + w) > W) || ((y_st + h) > H))
+                return;
+
             Bitmap bitmap3 = bitmap1.Clone(new Rectangle(x_st, y_st, w, h), PixelFormat.Format32bppArgb);
 
             pictureBox3.Image = bitmap3;
@@ -317,7 +314,7 @@ namespace vcs_PictureEnhance_YUV
             }
 
             //準備放大兩倍
-            richTextBox1.Text += "x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + ", w = " + w.ToString() + ", h = " + h.ToString() + "\n";
+            //richTextBox1.Text += "x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + ", w = " + w.ToString() + ", h = " + h.ToString() + "\n";
 
             Bitmap bitmap4 = new Bitmap(w * 2, h * 2);
             int i;
@@ -373,7 +370,6 @@ namespace vcs_PictureEnhance_YUV
         {
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename1);	//Bitmap.FromFile出來的是Image格式
             Graphics g = Graphics.FromImage(bitmap1);
-            //g.Clear(Color.White);
 
             int W = bitmap1.Width;
             int H = bitmap1.Height;
@@ -394,7 +390,6 @@ namespace vcs_PictureEnhance_YUV
         {
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename1);	//Bitmap.FromFile出來的是Image格式
             Graphics g = Graphics.FromImage(bitmap1);
-            //g.Clear(Color.White);
 
             int W = bitmap1.Width;
             int H = bitmap1.Height;
@@ -415,7 +410,6 @@ namespace vcs_PictureEnhance_YUV
         {
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename1);	//Bitmap.FromFile出來的是Image格式
             Graphics g = Graphics.FromImage(bitmap1);
-            //g.Clear(Color.White);
 
             int W = bitmap1.Width;
             int H = bitmap1.Height;
@@ -436,7 +430,6 @@ namespace vcs_PictureEnhance_YUV
         {
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename1);	//Bitmap.FromFile出來的是Image格式
             Graphics g = Graphics.FromImage(bitmap1);
-            //g.Clear(Color.White);
 
             int W = bitmap1.Width;
             int H = bitmap1.Height;

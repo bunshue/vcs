@@ -194,6 +194,20 @@ namespace vcs_PictureEnhance_RGB
 
         void show_part_image(Bitmap bitmap1, int x_st, int y_st, int w, int h)
         {
+            int W = 640;
+            int H = 480;
+
+            if ((x_st < 0) || (x_st >= W))
+                return;
+            if ((y_st < 0) || (y_st >= H))
+                return;
+            if ((w < 0) || (w > W))
+                return;
+            if ((h < 0) || (h > H))
+                return;
+            if (((x_st + w) > W) || ((y_st + h) > H))
+                return;
+
             Bitmap bitmap3 = bitmap1.Clone(new Rectangle(x_st, y_st, w, h), PixelFormat.Format32bppArgb);
 
             pictureBox3.Image = bitmap3;
@@ -205,7 +219,7 @@ namespace vcs_PictureEnhance_RGB
             }
 
             //準備放大兩倍
-            richTextBox1.Text += "x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + ", w = " + w.ToString() + ", h = " + h.ToString() + "\n";
+            //richTextBox1.Text += "x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + ", w = " + w.ToString() + ", h = " + h.ToString() + "\n";
 
             Bitmap bitmap4 = new Bitmap(w * 2, h * 2);
             int i;
@@ -261,7 +275,6 @@ namespace vcs_PictureEnhance_RGB
         {
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename1);	//Bitmap.FromFile出來的是Image格式
             Graphics g = Graphics.FromImage(bitmap1);
-            //g.Clear(Color.White);
 
             int W = bitmap1.Width;
             int H = bitmap1.Height;
@@ -272,7 +285,7 @@ namespace vcs_PictureEnhance_RGB
             int w = W / 2;
             int h = H / 2;
 
-            enhance_bitmap_data(bitmap1, x_st, y_st, w, h); 
+            enhance_bitmap_data(bitmap1, x_st, y_st, w, h);
             show_part_image(bitmap1, x_st, y_st, w, h);
 
             pictureBox1.Image = bitmap1;
@@ -282,7 +295,6 @@ namespace vcs_PictureEnhance_RGB
         {
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename1);	//Bitmap.FromFile出來的是Image格式
             Graphics g = Graphics.FromImage(bitmap1);
-            //g.Clear(Color.White);
 
             int W = bitmap1.Width;
             int H = bitmap1.Height;
@@ -293,7 +305,7 @@ namespace vcs_PictureEnhance_RGB
             int w = W / 3;
             int h = H / 3;
 
-            enhance_bitmap_data(bitmap1, x_st, y_st, w, h); 
+            enhance_bitmap_data(bitmap1, x_st, y_st, w, h);
             show_part_image(bitmap1, x_st, y_st, w, h);
 
             pictureBox1.Image = bitmap1;
@@ -303,7 +315,6 @@ namespace vcs_PictureEnhance_RGB
         {
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename1);	//Bitmap.FromFile出來的是Image格式
             Graphics g = Graphics.FromImage(bitmap1);
-            //g.Clear(Color.White);
 
             int W = bitmap1.Width;
             int H = bitmap1.Height;
@@ -314,7 +325,7 @@ namespace vcs_PictureEnhance_RGB
             int w = W / 10;
             int h = H / 10;
 
-            enhance_bitmap_data(bitmap1, x_st, y_st, w, h); 
+            enhance_bitmap_data(bitmap1, x_st, y_st, w, h);
             show_part_image(bitmap1, x_st, y_st, w, h);
 
             pictureBox1.Image = bitmap1;
@@ -324,7 +335,6 @@ namespace vcs_PictureEnhance_RGB
         {
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename1);	//Bitmap.FromFile出來的是Image格式
             Graphics g = Graphics.FromImage(bitmap1);
-            //g.Clear(Color.White);
 
             int W = bitmap1.Width;
             int H = bitmap1.Height;
@@ -335,7 +345,7 @@ namespace vcs_PictureEnhance_RGB
             int w = W / 3;
             int h = H / 3;
 
-            enhance_bitmap_data(bitmap1, x_st, y_st, w, h); 
+            enhance_bitmap_data(bitmap1, x_st, y_st, w, h);
             show_part_image(bitmap1, x_st, y_st, w, h);
 
             pictureBox1.Image = bitmap1;
