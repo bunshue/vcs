@@ -13,7 +13,7 @@ namespace vcs_PictureCrop1
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\picture1.jpg";
+        string filename = @"C:\______test_files\elephant.jpg";
 
         private bool flag_select_area = false;  //開始選取的旗標
         private Point pt_st = Point.Empty;//記錄鼠標按下時的坐標，用來確定繪圖起點
@@ -43,12 +43,39 @@ namespace vcs_PictureCrop1
 
             W = bitmap1.Width;
             H = bitmap1.Height;
-            pictureBox1.ClientSize = new Size(W, H);
-            pictureBox2.ClientSize = new Size(W, H);
+            //pictureBox1.ClientSize = new Size(W, H);
+            //pictureBox2.ClientSize = new Size(W, H);
             nud_w.Maximum = W;
             nud_h.Maximum = H;
             nud_x_st.Maximum = W;
             nud_y_st.Maximum = H;
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            int pbx_W = 420;
+            int pbx_H = 420;
+
+            x_st = 10;
+            y_st = 10;
+            dx = pbx_W + 10;
+            dy = pbx_H + 10;
+
+            pictureBox1.Size = new Size(pbx_W, pbx_H);
+            pictureBox2.Size = new Size(pbx_W, pbx_H);
+            richTextBox1.Size = new Size(pbx_W, pbx_H);
+            //pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+            //pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
+
+            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            pictureBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
         }
 
         // Return a Rectangle with these points as corners.
@@ -335,3 +362,4 @@ namespace vcs_PictureCrop1
         }
     }
 }
+

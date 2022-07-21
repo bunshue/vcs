@@ -91,6 +91,25 @@ namespace vcs_Draw_Bitmap
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //一個大bitmap貼上多個小bitmap
+            string filename = @"C:\______test_files\picture1.jpg";
+
+            //大bitmap
+            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+
+            //小bitmap
+            Bitmap bitmap2 = new Bitmap(filename);
+
+
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+
+            for (int i = 0; i < 300; i += 50)
+            {
+                g.DrawImage(bitmap2, i, i, bitmap2.Width, bitmap2.Height);
+            }
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button5_Click(object sender, EventArgs e)

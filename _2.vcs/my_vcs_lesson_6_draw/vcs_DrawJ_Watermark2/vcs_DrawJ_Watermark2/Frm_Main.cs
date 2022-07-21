@@ -55,7 +55,7 @@ namespace vcs_DrawJ_Watermark2
                     string ImgName = ImgPath.Substring(ImgPath.LastIndexOf("\\") + 1, ImgPath.Length - ImgPath.LastIndexOf("\\") - 1);
                     lbImgList.Items.Add(ImgName);
                 }
-                tsslStatus.Text = "圖片總數：" + lbImgList.Items.Count;
+                richTextBox1.Text += "圖片總數：" + lbImgList.Items.Count + "\n";
             }
         }
 
@@ -63,7 +63,7 @@ namespace vcs_DrawJ_Watermark2
         {
             if (lbImgList.SelectedItems.Count > 0)
             {
-                tsslText.Text = "圖片位置：" + ImgDirectoryPath + "\\" + lbImgList.SelectedItems[0].ToString();
+                richTextBox1.Text += "圖片位置：" + ImgDirectoryPath + "\\" + lbImgList.SelectedItems[0].ToString() + "\n";
             }
         }
 
@@ -324,7 +324,7 @@ namespace vcs_DrawJ_Watermark2
         {
             if (lbImgList.Items.Count <= 0)
             {
-                MessageBox.Show("請加載圖片", "警告", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                richTextBox1.Text += "請加載圖片\n";
                 return;
             }
             else
@@ -352,7 +352,9 @@ namespace vcs_DrawJ_Watermark2
             pbImgPreview.Refresh();
             source = new Bitmap(Image.FromFile(txtWaterMarkImg.Text.Trim()));
             if (source.Width <= 368)
+            {
                 effect = new Bitmap(368, 75);
+            }
             else
             {
                 Image.GetThumbnailImageAbort callb = null;
@@ -369,6 +371,7 @@ namespace vcs_DrawJ_Watermark2
             ColorMatrix imgMatrix = new ColorMatrix(matrixItems);
             ImageAttributes imgEffect = new ImageAttributes();
             imgEffect.SetColorMatrix(imgMatrix, ColorMatrixFlag.Default, ColorAdjustType.Bitmap);
+
             if (source.Width <= 368)
             {
                 _effect.DrawImage(source, new Rectangle(0, 0, 368, 75), 0, 0, 368, 75, GraphicsUnit.Pixel, imgEffect);
@@ -383,7 +386,9 @@ namespace vcs_DrawJ_Watermark2
         private void trackBar1_ValueChanged(object sender, EventArgs e)
         {
             if (rbPIC.Checked && txtWaterMarkImg.Text.Trim() != "")
+            {
                 ChangeAlpha();
+            }
         }
 
         private void btnPerform_Click(object sender, EventArgs e)
@@ -394,15 +399,17 @@ namespace vcs_DrawJ_Watermark2
                 {
                     AddFontWatermark(txtWaterMarkFont.Text.Trim(), lbImgList.Items[i].ToString(), 1);
                 }
-                MessageBox.Show("添加水印成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                richTextBox1.Text += "添加水印成功\n";
             }
+
             if (rbPIC.Checked && txtSavaPath.Text != "" && pbImgPreview.Image != null)
             {
                 for (int i = 0; i < lbImgList.Items.Count; i++)
                 {
                     AddFontWatermark(txtWaterMarkFont.Text.Trim(), lbImgList.Items[i].ToString(), 3);
                 }
-                MessageBox.Show("添加水印成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                richTextBox1.Text += "添加水印成功\n";
             }
         }
 
@@ -415,6 +422,6 @@ namespace vcs_DrawJ_Watermark2
                 NewFolderPath = txtSavaPath.Text.Trim();
             }
         }
-
     }
 }
+

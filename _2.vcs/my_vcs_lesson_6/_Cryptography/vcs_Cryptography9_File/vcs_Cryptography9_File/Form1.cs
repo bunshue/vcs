@@ -22,6 +22,7 @@ namespace vcs_Cryptography9_File
         //加密後的結果
         string str_encrypted_text = string.Empty;
 
+        string filename = @"C:\______test_files\picture1.jpg";                      //準備算MD5的檔案
         string filename1 = @"C:\______test_files\__RW\_txt\txt_clear.txt";          //明碼
         string filename2 = @"C:\______test_files\__RW\_txt\txt_encrypt.txt";        //密碼
 
@@ -75,8 +76,6 @@ namespace vcs_Cryptography9_File
 
         private void button0_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
-
             string result_MD5 = ValidHelper.GetFileMD5(filename);
             string result_SHA1 = ValidHelper.GetFileSHA1(filename);
             string result_SHA256 = ValidHelper.GetFileSHA256(filename);
@@ -176,13 +175,36 @@ namespace vcs_Cryptography9_File
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //獲取文件MD5值
-            //獲取文件MD5值
-            string result = string.Empty;
-            string filename = @"C:\______test_files\picture1.jpg";
+            //算一個檔案的MD5值
+            str_encrypted_text = GetMD5HashFromFile(filename);
+            richTextBox1.Text += "檔案 : " + filename + "\n";
+            richTextBox1.Text += "檔案MD5值 : " + str_encrypted_text + "\t長度 : " + str_encrypted_text.Length + "\n";
 
-            result = GetMD5HashFromFile(filename);
-            richTextBox1.Text += "檔案 MD5加密的密碼：" + result + "\tMD5加密長度是：" + result.Length + "\n";
+            str_encrypted_text = BytesToString(GetHashMD5(filename));
+            richTextBox1.Text += "檔案：" + filename + "\tMD5密碼：" + str_encrypted_text + "\n";
+
+            //算一個檔案的MD5值
+            Console.WriteLine(string.Format("計算文件的 MD5 值：{0}", HashHelper.MD5File(filename)));
+            richTextBox1.Text += "計算文件的 MD5 值：" + HashHelper.MD5File(filename) + "\n";
+
+            //算一個檔案的MD5值
+            using (FileStream fs = File.OpenRead(filename))
+            {
+                MD5 md5 = MD5.Create();
+                str_encrypted_text = Convert.ToBase64String(md5.ComputeHash(fs));
+
+                richTextBox1.Text += "檔案 : " + filename + "\n";
+                richTextBox1.Text += "檔案MD5值 : " + str_encrypted_text + "\t長度 : " + str_encrypted_text.Length + "\n";
+            }
+
+            //取得檔案的唯一檢查碼Checksum MD5
+            using (FileStream fs = File.OpenRead(filename))
+            {
+                //MD5 Code :
+                MD5 m = MD5.Create();
+                richTextBox1.Text += "MD5 code:\n";
+                richTextBox1.Text += Convert.ToBase64String(m.ComputeHash(fs)) + "\n";
+            }
         }
 
         /// <summary>
@@ -214,7 +236,6 @@ namespace vcs_Cryptography9_File
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //文件加密
             //文件加密
             try
             {
@@ -305,7 +326,6 @@ namespace vcs_Cryptography9_File
             //刪除加密前的文件
             //File.Delete(inFile);
             richTextBox1.Text += "加密成功\n";
-
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -328,15 +348,6 @@ namespace vcs_Cryptography9_File
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //算一個檔案的MD5值
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                using (FileStream fs = File.OpenRead(openFileDialog1.FileName))
-                {
-                    MD5 m = MD5.Create();
-                    richTextBox1.Text += "MD5 result : " + Convert.ToBase64String(m.ComputeHash(fs));
-                }
-            }
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -362,17 +373,6 @@ namespace vcs_Cryptography9_File
 
         private void button9_Click(object sender, EventArgs e)
         {
-            //計算文件的MD5值
-
-            string filename = @"C:\______test_files\picture1.jpg";
-
-            //01.計算文件的 MD5 值
-            Console.WriteLine(string.Format("計算文件的 MD5 值：{0}", HashHelper.MD5File(filename)));
-            richTextBox1.Text += "計算文件的 MD5 值：" + HashHelper.MD5File(filename) + "\n";
-
-            //02.計算文件的 sha1 值
-            Console.WriteLine(string.Format("計算文件的 sha1 值：{0}", HashHelper.SHA1File(filename)));
-            richTextBox1.Text += "計算文件的 sha1 值：" + HashHelper.SHA1File(filename) + "\n";
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -481,22 +481,22 @@ namespace vcs_Cryptography9_File
 
         private void button12_Click(object sender, EventArgs e)
         {
+
+            //02.計算文件的 sha1 值
+            Console.WriteLine(string.Format("計算文件的 sha1 值：{0}", HashHelper.SHA1File(filename)));
+            richTextBox1.Text += "計算文件的 sha1 值：" + HashHelper.SHA1File(filename) + "\n";
+
+
+            str_encrypted_text = BytesToString(GetHashSha256(filename));
+            richTextBox1.Text += "檔案：" + filename + "\tSHA256密碼：" + str_encrypted_text + "\n";
+
+
             //算一個檔案的SHA1值
-
-            string filename = @"C:\______test_files\picture1.jpg";
-
             using (FileStream fs = File.OpenRead(filename))
             {
                 SHA256Managed sha = new SHA256Managed();
                 richTextBox1.Text += "SHA1 result : " + Convert.ToBase64String(sha.ComputeHash(fs));
             }
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-            //取得檔案的唯一檢查碼Checksum MD5 SHA
-
-            string filename = @"C:\______test_files\picture1.jpg";
 
             using (FileStream fs = File.OpenRead(filename))
             {
@@ -504,12 +504,11 @@ namespace vcs_Cryptography9_File
                 SHA256Managed sha = new SHA256Managed();
                 richTextBox1.Text += "SHA code:\n";
                 richTextBox1.Text += Convert.ToBase64String(sha.ComputeHash(fs)) + "\n";
-
-                //MD5 Code :
-                MD5 m = MD5.Create();
-                richTextBox1.Text += "MD5 code:\n";
-                richTextBox1.Text += Convert.ToBase64String(m.ComputeHash(fs)) + "\n";
             }
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
         }
 
         // Compute the file's hash.
@@ -545,15 +544,6 @@ namespace vcs_Cryptography9_File
 
         private void button14_Click(object sender, EventArgs e)
         {
-            //算一個檔案的MD5, SHA1值
-            string filename = @"C:\______test_files\picture1.jpg";
-
-            str_encrypted_text = BytesToString(GetHashMD5(filename));
-            richTextBox1.Text += "檔案：" + filename + "\tMD5密碼：" + str_encrypted_text + "\n";
-
-            str_encrypted_text = BytesToString(GetHashSha256(filename));
-
-            richTextBox1.Text += "檔案：" + filename + "\tSHA256密碼：" + str_encrypted_text + "\n";
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -611,9 +601,6 @@ namespace vcs_Cryptography9_File
             }
             richTextBox1.Text += "SHA256\n";
             richTextBox1.Text += sb.ToString() + "\n";
-
-
-
         }
     }
 

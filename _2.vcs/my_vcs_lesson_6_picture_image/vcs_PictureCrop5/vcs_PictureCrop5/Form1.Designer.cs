@@ -32,7 +32,6 @@
             this.button1 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.groupBox_selection = new System.Windows.Forms.GroupBox();
             this.lb_x_st = new System.Windows.Forms.Label();
             this.nud_x_st = new System.Windows.Forms.NumericUpDown();
@@ -42,13 +41,14 @@
             this.lb_y_st = new System.Windows.Forms.Label();
             this.lb_w = new System.Windows.Forms.Label();
             this.nud_w = new System.Windows.Forms.NumericUpDown();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox_selection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_x_st)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_y_st)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_h)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_w)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -87,15 +87,6 @@
             this.label1.Size = new System.Drawing.Size(58, 21);
             this.label1.TabIndex = 3;
             this.label1.Text = "label1";
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox2.Location = new System.Drawing.Point(818, 12);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(472, 329);
-            this.pictureBox2.TabIndex = 4;
-            this.pictureBox2.TabStop = false;
             // 
             // groupBox_selection
             // 
@@ -210,6 +201,15 @@
             this.nud_w.TabIndex = 9;
             this.nud_w.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // pictureBox2
+            // 
+            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox2.Location = new System.Drawing.Point(818, 12);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(472, 329);
+            this.pictureBox2.TabIndex = 4;
+            this.pictureBox2.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -225,13 +225,13 @@
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.groupBox_selection.ResumeLayout(false);
             this.groupBox_selection.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_x_st)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_y_st)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_h)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_w)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -243,7 +243,6 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox pictureBox2;
         private System.Windows.Forms.GroupBox groupBox_selection;
         private System.Windows.Forms.Label lb_x_st;
         private System.Windows.Forms.NumericUpDown nud_x_st;
@@ -253,6 +252,7 @@
         private System.Windows.Forms.Label lb_y_st;
         private System.Windows.Forms.Label lb_w;
         private System.Windows.Forms.NumericUpDown nud_w;
+        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 

@@ -36,31 +36,18 @@
             this.radioButton2 = new System.Windows.Forms.RadioButton();
             this.radioButton1 = new System.Windows.Forms.RadioButton();
             this.pictureBox_src = new System.Windows.Forms.PictureBox();
-            this.groupBox_selection = new System.Windows.Forms.GroupBox();
-            this.lb_x_st = new System.Windows.Forms.Label();
-            this.nud_x_st = new System.Windows.Forms.NumericUpDown();
-            this.lb_h = new System.Windows.Forms.Label();
-            this.nud_y_st = new System.Windows.Forms.NumericUpDown();
-            this.nud_h = new System.Windows.Forms.NumericUpDown();
-            this.lb_y_st = new System.Windows.Forms.Label();
-            this.lb_w = new System.Windows.Forms.Label();
-            this.nud_w = new System.Windows.Forms.NumericUpDown();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_dst)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_src)).BeginInit();
-            this.groupBox_selection.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_x_st)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_y_st)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_h)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_w)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox_dst
             // 
-            this.pictureBox_dst.Location = new System.Drawing.Point(344, 12);
+            this.pictureBox_dst.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox_dst.Location = new System.Drawing.Point(518, 12);
             this.pictureBox_dst.Name = "pictureBox_dst";
-            this.pictureBox_dst.Size = new System.Drawing.Size(305, 400);
-            this.pictureBox_dst.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_dst.Size = new System.Drawing.Size(500, 500);
             this.pictureBox_dst.TabIndex = 0;
             this.pictureBox_dst.TabStop = false;
             // 
@@ -71,7 +58,7 @@
             this.groupBox1.Controls.Add(this.radioButton3);
             this.groupBox1.Controls.Add(this.radioButton2);
             this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Location = new System.Drawing.Point(669, 12);
+            this.groupBox1.Location = new System.Drawing.Point(1024, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(115, 271);
             this.groupBox1.TabIndex = 1;
@@ -145,147 +132,37 @@
             // 
             // pictureBox_src
             // 
+            this.pictureBox_src.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox_src.Location = new System.Drawing.Point(12, 12);
             this.pictureBox_src.Name = "pictureBox_src";
-            this.pictureBox_src.Size = new System.Drawing.Size(305, 400);
-            this.pictureBox_src.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox_src.Size = new System.Drawing.Size(500, 500);
             this.pictureBox_src.TabIndex = 2;
             this.pictureBox_src.TabStop = false;
             // 
-            // groupBox_selection
+            // richTextBox1
             // 
-            this.groupBox_selection.Controls.Add(this.lb_x_st);
-            this.groupBox_selection.Controls.Add(this.nud_x_st);
-            this.groupBox_selection.Controls.Add(this.lb_h);
-            this.groupBox_selection.Controls.Add(this.nud_y_st);
-            this.groupBox_selection.Controls.Add(this.nud_h);
-            this.groupBox_selection.Controls.Add(this.lb_y_st);
-            this.groupBox_selection.Controls.Add(this.lb_w);
-            this.groupBox_selection.Controls.Add(this.nud_w);
-            this.groupBox_selection.Location = new System.Drawing.Point(819, 12);
-            this.groupBox_selection.Name = "groupBox_selection";
-            this.groupBox_selection.Size = new System.Drawing.Size(230, 192);
-            this.groupBox_selection.TabIndex = 16;
-            this.groupBox_selection.TabStop = false;
-            this.groupBox_selection.Text = "選取區域";
-            // 
-            // lb_x_st
-            // 
-            this.lb_x_st.AutoSize = true;
-            this.lb_x_st.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_x_st.Location = new System.Drawing.Point(47, 18);
-            this.lb_x_st.Name = "lb_x_st";
-            this.lb_x_st.Size = new System.Drawing.Size(47, 24);
-            this.lb_x_st.TabIndex = 6;
-            this.lb_x_st.Text = "x_st";
-            // 
-            // nud_x_st
-            // 
-            this.nud_x_st.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.nud_x_st.Location = new System.Drawing.Point(97, 16);
-            this.nud_x_st.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.nud_x_st.Name = "nud_x_st";
-            this.nud_x_st.Size = new System.Drawing.Size(89, 36);
-            this.nud_x_st.TabIndex = 5;
-            this.nud_x_st.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // lb_h
-            // 
-            this.lb_h.AutoSize = true;
-            this.lb_h.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_h.Location = new System.Drawing.Point(59, 144);
-            this.lb_h.Name = "lb_h";
-            this.lb_h.Size = new System.Drawing.Size(21, 24);
-            this.lb_h.TabIndex = 12;
-            this.lb_h.Text = "h";
-            // 
-            // nud_y_st
-            // 
-            this.nud_y_st.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.nud_y_st.Location = new System.Drawing.Point(97, 58);
-            this.nud_y_st.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.nud_y_st.Name = "nud_y_st";
-            this.nud_y_st.Size = new System.Drawing.Size(89, 36);
-            this.nud_y_st.TabIndex = 7;
-            this.nud_y_st.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // nud_h
-            // 
-            this.nud_h.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.nud_h.Location = new System.Drawing.Point(97, 142);
-            this.nud_h.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.nud_h.Name = "nud_h";
-            this.nud_h.Size = new System.Drawing.Size(89, 36);
-            this.nud_h.TabIndex = 11;
-            this.nud_h.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // lb_y_st
-            // 
-            this.lb_y_st.AutoSize = true;
-            this.lb_y_st.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_y_st.Location = new System.Drawing.Point(47, 60);
-            this.lb_y_st.Name = "lb_y_st";
-            this.lb_y_st.Size = new System.Drawing.Size(47, 24);
-            this.lb_y_st.TabIndex = 8;
-            this.lb_y_st.Text = "y_st";
-            // 
-            // lb_w
-            // 
-            this.lb_w.AutoSize = true;
-            this.lb_w.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_w.Location = new System.Drawing.Point(59, 102);
-            this.lb_w.Name = "lb_w";
-            this.lb_w.Size = new System.Drawing.Size(26, 24);
-            this.lb_w.TabIndex = 10;
-            this.lb_w.Text = "w";
-            // 
-            // nud_w
-            // 
-            this.nud_w.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.nud_w.Location = new System.Drawing.Point(97, 100);
-            this.nud_w.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.nud_w.Name = "nud_w";
-            this.nud_w.Size = new System.Drawing.Size(89, 36);
-            this.nud_w.TabIndex = 9;
-            this.nud_w.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.richTextBox1.Location = new System.Drawing.Point(1145, 12);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(284, 610);
+            this.richTextBox1.TabIndex = 3;
+            this.richTextBox1.Text = "";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1085, 634);
-            this.Controls.Add(this.groupBox_selection);
+            this.ClientSize = new System.Drawing.Size(1439, 634);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.pictureBox_src);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.pictureBox_dst);
             this.Name = "Form1";
             this.Text = "擷取部份影像繪圖 分割圖片顯示";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_dst)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_src)).EndInit();
-            this.groupBox_selection.ResumeLayout(false);
-            this.groupBox_selection.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_x_st)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_y_st)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_h)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.nud_w)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -300,15 +177,7 @@
         private System.Windows.Forms.RadioButton radioButton1;
         private System.Windows.Forms.PictureBox pictureBox_src;
         private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.GroupBox groupBox_selection;
-        private System.Windows.Forms.Label lb_x_st;
-        private System.Windows.Forms.NumericUpDown nud_x_st;
-        private System.Windows.Forms.Label lb_h;
-        private System.Windows.Forms.NumericUpDown nud_y_st;
-        private System.Windows.Forms.NumericUpDown nud_h;
-        private System.Windows.Forms.Label lb_y_st;
-        private System.Windows.Forms.Label lb_w;
-        private System.Windows.Forms.NumericUpDown nud_w;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

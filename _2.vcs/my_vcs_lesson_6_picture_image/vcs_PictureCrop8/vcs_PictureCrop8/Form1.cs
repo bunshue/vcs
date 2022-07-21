@@ -13,13 +13,11 @@ namespace vcs_PictureCrop8
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\picture1.bmp";
+        string filename = @"C:\______test_files\picture1.jpg";
 
         private bool flag_select_area = false;  //開始選取的旗標
         private Point pt_st = Point.Empty;//記錄鼠標按下時的坐標，用來確定繪圖起點
         private Point pt_sp = Point.Empty;//記錄鼠標放開時的坐標，用來確定繪圖終點
-        private Bitmap bitmap1 = null;  //原圖位圖Bitmap
-        private Bitmap bitmap2 = null;  //擷取部分位圖Bitmap
         private Rectangle select_rectangle;//用來保存截圖的矩形
 
         private int W = 0;  //原圖的寬
@@ -40,12 +38,13 @@ namespace vcs_PictureCrop8
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            image = System.Drawing.Image.FromFile(filename);
+            //讀取圖檔, 多一層Image結構
+            image = Image.FromFile(filename);
+            pictureBox1.Image = image;
+
             W = image.Width;
             H = image.Height;
-            pictureBox1.Image = image;
-            pictureBox1.Width = W;
-            pictureBox1.Height = H;
+
             int w = 100;
             int h = 100;
             tb_w.Text = w.ToString();
@@ -57,7 +56,6 @@ namespace vcs_PictureCrop8
             tb_y_st.Text = y_st.ToString();
 
             select_rectangle = MakeRectangle(x_st, y_st, x_st + w, y_st + h);
-
 
             //試著在啟動時就把預設截取位置畫出來
         }
@@ -73,13 +71,6 @@ namespace vcs_PictureCrop8
             flag_select_area = true;
             x_st = e.X;
             y_st = e.Y;
-
-            Graphics g = pictureBox1.CreateGraphics();
-            g.DrawLine(new Pen(Color.Black, 1), new Point(e.X, 0), new Point(e.X, H));
-            g.DrawLine(new Pen(Color.Black, 1), new Point(0, e.Y), new Point(W, e.Y));
-            //g.DrawLine(new Pen(Color.Black, 1), new Point(0, e.Y), new Point(e.X, e.Y));
-            //g.DrawLine(new Pen(Color.Black, 1), new Point(e.X, e.Y), new Point(W - e.X, e.Y));
-            //Application.DoEvents();
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
@@ -164,28 +155,10 @@ namespace vcs_PictureCrop8
             g.DrawRectangle(new Pen(Color.Red, 1), x_st2, y_st2, w, h);
 
             select_rectangle = new Rectangle(x_st2, y_st2, w, h);
-                                                                            tb_x_st.Text = x_st2.ToString();
-                                                                            tb_y_st.Text = y_st2.ToString();
-                                                                            tb_w.Text = w.ToString();
-                                                                            tb_h.Text = h.ToString();
-        }
-
-        private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
-        {
-            try
-            {
-                Graphics g2 = this.pictureBox2.CreateGraphics();
-                Bitmap bitmap = new Bitmap(pictureBox1.Image);
-                Bitmap cloneBitmap = bitmap.Clone(select_rectangle, PixelFormat.DontCare);
-                g2.DrawImage(cloneBitmap, e.X, e.Y);
-                /* 原本圖要不要塗白  像是剪下
-                Graphics g1 = pictureBox1.CreateGraphics();
-                SolidBrush myBrush = new SolidBrush(Color.White);
-                g1.FillRectangle(myBrush, select_rectangle);
-                */
-            }
-            catch
-            { }
+            tb_x_st.Text = x_st2.ToString();
+            tb_y_st.Text = y_st2.ToString();
+            tb_w.Text = w.ToString();
+            tb_h.Text = h.ToString();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -195,8 +168,8 @@ namespace vcs_PictureCrop8
             Bitmap cloneBitmap = bitmap.Clone(select_rectangle, PixelFormat.DontCare);
             cloneBitmap.Save(filename, ImageFormat.Bmp);
             richTextBox1.Text += "存截圖，存檔檔名：" + filename + "\n";
+
         }
-
-
     }
 }
+

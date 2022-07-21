@@ -111,39 +111,13 @@ namespace vcs_PictureCrop5
             Bitmap bitmap2 = new Bitmap((int)W, (int)H);
             Graphics g2 = Graphics.FromImage(bitmap2);
 
-
             //             擷取螢幕位置起點  自建bmp的位置起點     擷取大小
             g2.CopyFromScreen(this.Location.X + pictureBox1.Location.X + (int)x_st, this.Location.Y + pictureBox1.Location.Y + (int)y_st, 0, 0, new Size((int)W, (int)H));
 
-            //自訂截圖存檔
-            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-            try
-            {
-                //bitmap2.Save(@file1, ImageFormat.Jpeg);
-                bitmap2.Save(filename, ImageFormat.Bmp);
-                //bitmap2.Save(@file3, ImageFormat.Png);
-
-                //richTextBox1.Text += "已存檔 : " + file1 + "\n";
-                richTextBox1.Text += "已存檔 : " + filename + "\n";
-                //richTextBox1.Text += "已存檔 : " + file3 + "\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-            }
-
-            //複製到剪貼簿
-            Clipboard.SetImage(bitmap2);
             g2.Dispose();
 
             g.Dispose();
 
-
-
-
-
         }
     }
 }
-
-

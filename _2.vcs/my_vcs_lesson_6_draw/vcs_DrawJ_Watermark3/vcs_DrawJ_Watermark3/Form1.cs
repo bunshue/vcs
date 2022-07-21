@@ -32,6 +32,7 @@ namespace vcs_DrawJ_Watermark3
             //讀取圖檔, 多一層Image結構
             string filename1 = @"C:\______test_files\picture1.jpg";
             Image image = Image.FromFile(filename1);
+
             pictureBox1.Image = image;
 
             string filename2 = @"C:\______test_files\_material\ims-small-logo.png";
@@ -374,12 +375,10 @@ namespace vcs_DrawJ_Watermark3
             using (Graphics gr = Graphics.FromImage(result_bm))
             {
                 Rectangle rect = new Rectangle(x, y, watermark_bm.Width, watermark_bm.Height);
-                gr.DrawImage(watermark_bm, rect, 0, 0,
-                    watermark_bm.Width, watermark_bm.Height,
-                    GraphicsUnit.Pixel, image_attributes);
+                gr.DrawImage(watermark_bm, rect, 0, 0, watermark_bm.Width, watermark_bm.Height, GraphicsUnit.Pixel, image_attributes);
             }
         }
-
     }
 }
+
 

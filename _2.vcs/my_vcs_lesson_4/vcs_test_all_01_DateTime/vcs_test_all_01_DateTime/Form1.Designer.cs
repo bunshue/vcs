@@ -244,7 +244,6 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(170, 50);
             this.button3.TabIndex = 3;
-            this.button3.Text = "時間差計算2";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -299,7 +298,6 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(170, 50);
             this.button9.TabIndex = 9;
-            this.button9.Text = "時間差計算4";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -354,7 +352,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(170, 50);
             this.button13.TabIndex = 14;
-            this.button13.Text = "距今時間";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -365,7 +362,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(170, 50);
             this.button14.TabIndex = 13;
-            this.button14.Text = "分析日期時間";
+            this.button14.Text = "日期時間顯示";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -376,7 +373,6 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(170, 50);
             this.button15.TabIndex = 12;
-            this.button15.Text = "現在日期時間";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -387,7 +383,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(170, 50);
             this.button16.TabIndex = 21;
-            this.button16.Text = "計算兩個時間差";
+            this.button16.Text = "時間差計算2";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 

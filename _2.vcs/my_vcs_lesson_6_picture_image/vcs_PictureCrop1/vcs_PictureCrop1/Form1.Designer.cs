@@ -42,7 +42,6 @@
             this.nud_y_st = new System.Windows.Forms.NumericUpDown();
             this.nud_x_st = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.groupBox_selection = new System.Windows.Forms.GroupBox();
             this.lb_x_st = new System.Windows.Forms.Label();
             this.lb_h = new System.Windows.Forms.Label();
@@ -54,7 +53,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_w)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_y_st)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_x_st)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.groupBox_selection.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -221,17 +219,6 @@
             this.label3.TabIndex = 9;
             this.label3.Text = "可將選取區域貼在空白處";
             // 
-            // pictureBox3
-            // 
-            this.pictureBox3.BackColor = System.Drawing.Color.LightGray;
-            this.pictureBox3.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox3.Location = new System.Drawing.Point(698, 21);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(320, 420);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.pictureBox3.TabIndex = 10;
-            this.pictureBox3.TabStop = false;
-            // 
             // groupBox_selection
             // 
             this.groupBox_selection.Controls.Add(this.button6);
@@ -296,7 +283,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1359, 698);
             this.Controls.Add(this.groupBox_selection);
-            this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
@@ -317,7 +303,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_w)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_y_st)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_x_st)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.groupBox_selection.ResumeLayout(false);
             this.groupBox_selection.PerformLayout();
             this.ResumeLayout(false);
@@ -341,7 +326,6 @@
         private System.Windows.Forms.NumericUpDown nud_w;
         private System.Windows.Forms.NumericUpDown nud_h;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.GroupBox groupBox_selection;
         private System.Windows.Forms.Label lb_x_st;
         private System.Windows.Forms.Label lb_h;

@@ -65,9 +65,10 @@
             // 
             // richTextBox1
             // 
+            this.richTextBox1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.richTextBox1.Location = new System.Drawing.Point(395, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(824, 633);
+            this.richTextBox1.Size = new System.Drawing.Size(1050, 633);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -77,7 +78,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(180, 55);
             this.button2.TabIndex = 2;
-            this.button2.Text = "獲取文件MD5值";
+            this.button2.Text = "算一個檔案的MD5值";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -137,7 +138,6 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(180, 55);
             this.button7.TabIndex = 8;
-            this.button7.Text = "算一個檔案的MD5值";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -157,7 +157,6 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(180, 55);
             this.button9.TabIndex = 10;
-            this.button9.Text = "計算文件的MD5值";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -201,7 +200,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(180, 55);
             this.button13.TabIndex = 14;
-            this.button13.Text = "取得檔案的唯一檢查碼Checksum MD5 SHA";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -211,7 +209,6 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(180, 55);
             this.button14.TabIndex = 15;
-            this.button14.Text = "算一個檔案的MD5, SHA1值";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -271,7 +268,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1231, 664);
+            this.ClientSize = new System.Drawing.Size(1457, 664);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button19);
             this.Controls.Add(this.button18);

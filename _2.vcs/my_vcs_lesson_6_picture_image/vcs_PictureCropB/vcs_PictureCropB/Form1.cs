@@ -14,10 +14,13 @@ namespace vcs_PictureCropB
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             Image img = Image.FromFile(@"C:\______test_files\picture1.jpg");
 
             pictureBox_src.Image = img;
-
         }
 
         private void radioButton_CheckedChanged(object sender, EventArgs e)
@@ -64,10 +67,9 @@ namespace vcs_PictureCropB
 
             pictureBox_dst.Image = targetbitmap;
 
-            nud_x_st.Value = src_x;
-            nud_y_st.Value = src_y;
-            nud_w.Value = pictureBox_src.Width / 2;
-            nud_h.Value = pictureBox_src.Height / 2;
         }
     }
 }
+
+
+

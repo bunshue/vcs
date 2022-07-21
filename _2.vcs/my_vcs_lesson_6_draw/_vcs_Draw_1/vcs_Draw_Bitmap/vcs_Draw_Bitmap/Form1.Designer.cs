@@ -100,7 +100,7 @@
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(369, 10);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(640, 424);
+            this.pictureBox1.Size = new System.Drawing.Size(720, 720);
             this.pictureBox1.TabIndex = 130;
             this.pictureBox1.TabStop = false;
             // 
@@ -151,6 +151,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(170, 70);
             this.button4.TabIndex = 125;
+            this.button4.Text = "一個大bitmap貼上多個小bitmap";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -177,9 +178,9 @@
             // richTextBox1
             // 
             this.richTextBox1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.richTextBox1.Location = new System.Drawing.Point(1031, 10);
+            this.richTextBox1.Location = new System.Drawing.Point(1128, 9);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(400, 790);
+            this.richTextBox1.Size = new System.Drawing.Size(300, 790);
             this.richTextBox1.TabIndex = 122;
             this.richTextBox1.Text = "";
             // 

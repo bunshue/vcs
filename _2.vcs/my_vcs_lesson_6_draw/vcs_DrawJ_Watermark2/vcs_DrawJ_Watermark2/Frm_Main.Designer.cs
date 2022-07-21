@@ -29,10 +29,6 @@
         private void InitializeComponent()
         {
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
-            this.tsslStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tsslText = new System.Windows.Forms.ToolStripStatusLabel();
-            this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lbImgList = new System.Windows.Forms.ListBox();
             this.button2 = new System.Windows.Forms.Button();
@@ -61,69 +57,17 @@
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
             this.openFileDialog2 = new System.Windows.Forms.OpenFileDialog();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.statusStrip1.SuspendLayout();
-            this.splitContainer1.Panel1.SuspendLayout();
-            this.splitContainer1.Panel2.SuspendLayout();
-            this.splitContainer1.SuspendLayout();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbImgPreview)).BeginInit();
             this.SuspendLayout();
             // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.tsslStatus,
-            this.tsslText});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 368);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(601, 22);
-            this.statusStrip1.TabIndex = 0;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // tsslStatus
-            // 
-            this.tsslStatus.Name = "tsslStatus";
-            this.tsslStatus.Size = new System.Drawing.Size(56, 17);
-            this.tsslStatus.Text = "準備就緒";
-            // 
-            // tsslText
-            // 
-            this.tsslText.Name = "tsslText";
-            this.tsslText.Size = new System.Drawing.Size(0, 17);
-            // 
-            // splitContainer1
-            // 
-            this.splitContainer1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer1.IsSplitterFixed = true;
-            this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Name = "splitContainer1";
-            // 
-            // splitContainer1.Panel1
-            // 
-            this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
-            // 
-            // splitContainer1.Panel2
-            // 
-            this.splitContainer1.Panel2.Controls.Add(this.button2);
-            this.splitContainer1.Panel2.Controls.Add(this.txtSavaPath);
-            this.splitContainer1.Panel2.Controls.Add(this.label5);
-            this.splitContainer1.Panel2.Controls.Add(this.btnPreview);
-            this.splitContainer1.Panel2.Controls.Add(this.btnExit);
-            this.splitContainer1.Panel2.Controls.Add(this.btnPerform);
-            this.splitContainer1.Panel2.Controls.Add(this.btnLoadImg);
-            this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainer1.Size = new System.Drawing.Size(601, 368);
-            this.splitContainer1.SplitterDistance = 206;
-            this.splitContainer1.SplitterWidth = 2;
-            this.splitContainer1.TabIndex = 1;
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.lbImgList);
-            this.groupBox1.Location = new System.Drawing.Point(7, 2);
+            this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(189, 359);
             this.groupBox1.TabIndex = 0;
@@ -142,7 +86,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(321, 291);
+            this.button2.Location = new System.Drawing.Point(523, 298);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(65, 23);
             this.button2.TabIndex = 8;
@@ -154,16 +98,16 @@
             // 
             this.txtSavaPath.BackColor = System.Drawing.Color.White;
             this.txtSavaPath.Enabled = false;
-            this.txtSavaPath.Location = new System.Drawing.Point(78, 292);
+            this.txtSavaPath.Location = new System.Drawing.Point(280, 299);
             this.txtSavaPath.Name = "txtSavaPath";
             this.txtSavaPath.ReadOnly = true;
-            this.txtSavaPath.Size = new System.Drawing.Size(239, 21);
+            this.txtSavaPath.Size = new System.Drawing.Size(239, 22);
             this.txtSavaPath.TabIndex = 7;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(13, 296);
+            this.label5.Location = new System.Drawing.Point(215, 303);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 12);
             this.label5.TabIndex = 6;
@@ -171,7 +115,7 @@
             // 
             // btnPreview
             // 
-            this.btnPreview.Location = new System.Drawing.Point(114, 327);
+            this.btnPreview.Location = new System.Drawing.Point(316, 334);
             this.btnPreview.Name = "btnPreview";
             this.btnPreview.Size = new System.Drawing.Size(75, 23);
             this.btnPreview.TabIndex = 5;
@@ -181,7 +125,7 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(301, 327);
+            this.btnExit.Location = new System.Drawing.Point(503, 334);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 4;
@@ -191,7 +135,7 @@
             // 
             // btnPerform
             // 
-            this.btnPerform.Location = new System.Drawing.Point(207, 327);
+            this.btnPerform.Location = new System.Drawing.Point(409, 334);
             this.btnPerform.Name = "btnPerform";
             this.btnPerform.Size = new System.Drawing.Size(75, 23);
             this.btnPerform.TabIndex = 3;
@@ -201,7 +145,7 @@
             // 
             // btnLoadImg
             // 
-            this.btnLoadImg.Location = new System.Drawing.Point(14, 327);
+            this.btnLoadImg.Location = new System.Drawing.Point(216, 334);
             this.btnLoadImg.Name = "btnLoadImg";
             this.btnLoadImg.Size = new System.Drawing.Size(75, 23);
             this.btnLoadImg.TabIndex = 2;
@@ -225,7 +169,7 @@
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.btnSelect);
             this.groupBox2.Controls.Add(this.pbImgPreview);
-            this.groupBox2.Location = new System.Drawing.Point(3, 3);
+            this.groupBox2.Location = new System.Drawing.Point(217, 12);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(383, 274);
             this.groupBox2.TabIndex = 0;
@@ -326,7 +270,7 @@
             // 
             this.txtWaterMarkFont.Location = new System.Drawing.Point(75, 49);
             this.txtWaterMarkFont.Name = "txtWaterMarkFont";
-            this.txtWaterMarkFont.Size = new System.Drawing.Size(239, 21);
+            this.txtWaterMarkFont.Size = new System.Drawing.Size(239, 22);
             this.txtWaterMarkFont.TabIndex = 2;
             this.txtWaterMarkFont.TextChanged += new System.EventHandler(this.txtWaterMarkFont_TextChanged);
             // 
@@ -346,7 +290,7 @@
             this.txtWaterMarkImg.Location = new System.Drawing.Point(75, 109);
             this.txtWaterMarkImg.Name = "txtWaterMarkImg";
             this.txtWaterMarkImg.ReadOnly = true;
-            this.txtWaterMarkImg.Size = new System.Drawing.Size(239, 21);
+            this.txtWaterMarkImg.Size = new System.Drawing.Size(239, 22);
             this.txtWaterMarkImg.TabIndex = 1;
             // 
             // label3
@@ -388,25 +332,35 @@
             // 
             this.openFileDialog2.Filter = "圖片文件|*.jpeg;*.jpg;*.png;*.bmp";
             // 
-            // Form1
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(606, 14);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(410, 585);
+            this.richTextBox1.TabIndex = 9;
+            this.richTextBox1.Text = "";
+            // 
+            // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(601, 390);
-            this.Controls.Add(this.splitContainer1);
-            this.Controls.Add(this.statusStrip1);
+            this.ClientSize = new System.Drawing.Size(1028, 644);
+            this.Controls.Add(this.richTextBox1);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.txtSavaPath);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.btnPreview);
+            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.btnExit);
+            this.Controls.Add(this.btnLoadImg);
+            this.Controls.Add(this.btnPerform);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
-            this.Name = "Form1";
+            this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "批量添加圖片水印";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.statusStrip1.ResumeLayout(false);
-            this.statusStrip1.PerformLayout();
-            this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel2.ResumeLayout(false);
-            this.splitContainer1.Panel2.PerformLayout();
-            this.splitContainer1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -420,8 +374,6 @@
         #endregion
 
         private System.Windows.Forms.ColorDialog colorDialog1;
-        private System.Windows.Forms.StatusStrip statusStrip1;
-        private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.ListBox lbImgList;
         private System.Windows.Forms.GroupBox groupBox2;
@@ -440,8 +392,6 @@
         private System.Windows.Forms.RadioButton rbPIC;
         private System.Windows.Forms.RadioButton rbTxt;
         private System.Windows.Forms.OpenFileDialog openFileDialog1;
-        private System.Windows.Forms.ToolStripStatusLabel tsslStatus;
-        private System.Windows.Forms.ToolStripStatusLabel tsslText;
         private System.Windows.Forms.TrackBar trackBar1;
         private System.Windows.Forms.OpenFileDialog openFileDialog2;
         private System.Windows.Forms.Button button1;
@@ -452,5 +402,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
