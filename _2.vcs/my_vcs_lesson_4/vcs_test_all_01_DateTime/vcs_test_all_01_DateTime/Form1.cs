@@ -166,7 +166,7 @@ namespace vcs_test_all_01_DateTime
             groupBox4.Location = new Point(x_st + dx * 6, y_st + dy * 10);
             groupBox3.Location = new Point(x_st + dx * 6, y_st + dy * 12);
             groupBox11.Location = new Point(x_st + dx * 6, y_st + dy * 14);
-            groupBox12.Location = new Point(x_st + dx * 6+100, y_st + dy * 17);
+            groupBox12.Location = new Point(x_st + dx * 6 + 100, y_st + dy * 17);
 
             textBox2.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
@@ -598,7 +598,7 @@ namespace vcs_test_all_01_DateTime
             string dateDiff = ts.Days.ToString() + "天" + ts.Hours.ToString() + "小時" + ts.Minutes.ToString() + "分鐘" + ts.Seconds.ToString() + "秒";
             richTextBox1.Text += dateDiff + "\n";
             return dateDiff;
-        }    
+        }
 
         private void button17_Click(object sender, EventArgs e)
         {
@@ -1411,7 +1411,7 @@ namespace vcs_test_all_01_DateTime
                                             dt.Hour, dt.Minute,
                                             dt.Second);
 
-            richTextBox1.Text += "依時間建立檔案 :"+filename + "\n";
+            richTextBox1.Text += "依時間建立檔案 :" + filename + "\n";
 
             string m_fileName = DateTime.Now.ToFileTime().ToString() + ".jpg";
             richTextBox1.Text += "依時間建立檔案 :" + m_fileName + "\n";
@@ -2234,7 +2234,7 @@ DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元999
         {
             //農曆計算
             DateTime _d = DateTime.Now;
-            LunarDate ld = new LunarDate(_d);
+            LunarDate1 ld = new LunarDate1(_d);
             string result = "";
             result += "干支年：" + ld.LunarYear + "\n";
             result += "生肖：" + ld.Animal + "\n";
@@ -2489,9 +2489,19 @@ DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元999
 
         private void bt_special_09_Click(object sender, EventArgs e)
         {
+            //陽歷轉換成農曆的類
 
+            LunarDate2 date = new LunarDate2(1901, 9, 7);
+
+            richTextBox1.Text += "農曆 = " + date.ToString() + "\n";
+
+            richTextBox1.Text += "天干地支 : " + date.chineseEar + "\n";
+            richTextBox1.Text += "生肖 : " + date.Aminals + "\n";
+
+            richTextBox1.Text += "農曆年 = " + date.LunarYear + "\n";
+            richTextBox1.Text += "農曆月 = " + date.LunarMonth + "\n";
+            richTextBox1.Text += "農曆日 = " + date.LunarDay + "\n";
         }
-
 
         private void bt_weekday_00_Click(object sender, EventArgs e)
         {
@@ -2714,7 +2724,7 @@ DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元999
         private const ushort START_YEAR = 1901;
         private const ushort END_YEAR = 2050;
         private DateTime m_Date = DateTime.MinValue;
-        private LunarDate m_LunarDate = null;
+        private LunarDate1 m_LunarDate = null;
         private string m_LunarYear = "", m_LunarMonth = "", m_LunarDay = "";
         private string m_Animal = "", m_Constellation = "", m_SolarTerm = "";
 
@@ -3371,7 +3381,7 @@ DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元999
         #region OutPut
 
         /// <summary>阴历日期,以LunarDate(年日月)形式表示。</summary>
-        public LunarDate LunarDate
+        public LunarDate1 LunarDate
         {
             get
             {
@@ -3380,7 +3390,7 @@ DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元999
                     ushort iYear, iMonth, iDay;
                     TimeSpan ts = m_Date - (new DateTime(START_YEAR, 1, 1));
                     this.CalcLunarDate(out iYear, out iMonth, out iDay, (uint)(ts.Days));
-                    this.m_LunarDate = new LunarDate(iYear, iMonth, iDay);
+                    this.m_LunarDate = new LunarDate1(iYear, iMonth, iDay);
                 }
                 return this.m_LunarDate;
             }
@@ -3464,9 +3474,7 @@ DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元999
         #endregion
     }
 
-
-
-    public class LunarDate
+    public class LunarDate1
     {
         private int _y, _m, _d;
         private string lunardate = "";
@@ -3474,7 +3482,7 @@ DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元999
         private string solarterm = "", animal = "";
 
 
-        public LunarDate(DateTime dt)
+        public LunarDate1(DateTime dt)
         {
             LunarDateClass ldc = new LunarDateClass(dt);
             this.lunarday = ldc.LunarDay;
@@ -3487,7 +3495,7 @@ DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元999
             this._m = ldc.LunarDate.Month;
             this._d = ldc.LunarDate.Day;
         }
-        public LunarDate(int y, int m, int d)
+        public LunarDate1(int y, int m, int d)
         {
             this._y = y;
             this._m = m;
@@ -3567,5 +3575,167 @@ DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元999
 
     #endregion
 
+
+
+    public class LunarDate2
+    {
+        public const int MAX_YEAR = 2011;
+        public const int MIN_YEAR = 1900;
+
+        static readonly string[] lookupTable = new string[] 
+    { 
+        "0100101101101080131", "0100101011100000219", "1010010101110000208",
+        "0101001001101050129", "1101001001100000216", "1101100101010000204",
+        "0110101010101040125", "0101011010100000213", "1001101011010000202", 
+        "0100101011101020122", "0100101011100000210", "1010010011011060130",
+        "1010010011010000218", "1101001001010000206", "1101010101001050126",
+        "1011010101010000214", "0101011010100000204", "1001011011010020123", 
+        "1001010110110000211", "0100100110111070201", "0100100110110000220", 
+        "1010010010110000208", "1011001001011050128", "0110101001010000216", 
+        "0110110101000000205", "1010110110101040124", "0010101101100000213", 
+        "1001010101110000202", "0100100101111020123", "0100100101110000210", 
+        "0110010010110060130", "1101010010100000217", "1110101001010000206", 
+        "0110110101001050126", "0101101011010000214", "0010101101100000204", 
+        "1001001101110030124", "1001001011100000211", "1100100101101070131", 
+        "1100100101010000219", "1101010010100000208", "1101101001010060127",
+        "1011010101010000215", "0101011010100000205", "1010101011011040125", 
+        "0010010111010000213", "1001001011010000202", "1100100101011020122", 
+        "1010100101010000210", "1011010010101070129", "0110110010100000217", 
+        "1011010101010000206", "0101010110101050127", "0100110110100000214", 
+        "1010010110110000203", "0101001010111030124", "0101001010110000212", 
+        "1010100101010080131", "1110100101010000218", "0110101010100000208", 
+        "1010110101010060128", "1010101101010000215", "0100101101100000205",
+        "1010010101110040125", "1010010101110000213", "0101001001100000202",
+        "1110100100110030121", "1101100101010000209", "0101101010101070130",
+        "0101011010100000217", "1001011011010000206", "0100101011101050127",
+        "0100101011010000215", "1010010011010000203", "1101001001101040123",
+        "1101001001010000211", "1101010100101080131", "1011010101000000218",
+        "1011011010100000207", "1001011011010060128", "1001010110110000216", 
+        "0100100110110000205", "1010010010111040125", "1010010010110000213", 
+        "1011001001011100202", "0110101001010000220", "0110110101000000209", 
+        "1010110110101060129", "1010101101100000217", "1001001101110000206",
+        "0100100101111050127", "0100100101110000215", "0110010010110000204", 
+        "0110101001010030123", "1110101001010000210", "0110101100101080131",
+        "0101101011000000219", "1010101101100000207", "1001001101101050128", 
+        "1001001011100000216", "1100100101100000205", "1101010010101040124",
+        "1101010010100000212", "1101101001010000201", "0101101010101020122",
+        "0101011010100000209", "1010101011011070129", "0010010111010000218",
+        "1001001011010000207", "1100100101011050126", "1010100101010000214",
+        "1011010010100000214" 
+    };
+
+        /**/
+        /// <summary>十二生肖</summary>
+        static readonly string animalsTable = "鼠牛虎兔龍蛇馬羊猴雞狗豬";
+        static readonly string monthsTable = "正二三四五六七八九十寒臘";
+        static readonly string daysTable = "初一初二初三初四初五初六初七初八初九初十十一十二十三十四十五十六十七十八十九二十廿一廿二廿三廿四廿五廿六廿七廿八廿九三十";
+
+        /**/
+        /// <summary>天干地支</summary>
+        static readonly string[] chineseEra;
+        static LunarDate2()
+        {
+            string sky = "甲乙丙丁戊已庚辛壬癸";        //天干
+            string earth = "子丑寅卯辰巳午未申酉戌亥";  //地支
+            chineseEra = new string[60];
+            for (int i = 0; i < 60; i++)
+                chineseEra[i] = sky.Substring(i % 10, 1) + earth.Substring(i % 12, 1);
+        }
+
+        public LunarDate2(int year, int month, int day)
+        {
+            if ((year < MIN_YEAR) || (year > MAX_YEAR))
+                throw new ArgumentOutOfRangeException("year too large or too small");
+
+            // 計算農歷年
+            int lunarYear;
+            int lunarMonth;
+            int lunarDay;
+
+            lunarYear = year;
+            // 農歷新年月份
+            lunarMonth = Convert.ToInt32((lookupTable[lunarYear - MIN_YEAR].Substring(15, 2)));
+            // 農歷新年日子
+            lunarDay = Convert.ToInt32((lookupTable[lunarYear - MIN_YEAR].Substring(17, 2))); ;
+            if ((month < lunarMonth) || ((month == lunarMonth) && (day < lunarDay)))
+            {
+                lunarYear--;
+                // 農歷新年月份
+                lunarMonth = Convert.ToInt32((lookupTable[lunarYear - MIN_YEAR].Substring(15, 2)));
+                // 農歷新年日子
+                lunarDay = Convert.ToInt32((lookupTable[lunarYear - MIN_YEAR].Substring(17, 2))); ;
+            }
+
+            // 計算農歷月
+            DateTime date = new DateTime(year, month, day);
+            DateTime lunarDate2 = new DateTime(lunarYear, lunarMonth, lunarDay);
+            TimeSpan span = date - lunarDate2;
+            int dayCount = span.Days;
+            lunarMonth = 1;
+            lunarDay = 1;
+            bool leapMonth = false; //閏月
+            for (int i = 0; i < dayCount; i++)
+            {
+                lunarDay++;
+                if (lunarDay == 30 + Convert.ToInt32(lookupTable[lunarYear - MIN_YEAR].Substring(lunarMonth - 1, 1)) ||
+                (leapMonth == true && (lunarDay == 30 + Convert.ToInt32(lookupTable[lunarYear - MIN_YEAR].Substring(12, 1)))))
+                {
+                    if (
+                        (leapMonth == false) &&
+                        (lunarMonth == Convert.ToInt32(lookupTable[lunarYear - MIN_YEAR].Substring(13, 2)))
+                        )
+                    {
+                        leapMonth = true;
+                    }
+                    else
+                    {
+                        leapMonth = false;
+                        lunarMonth++;
+                    }
+                    lunarDay = 1;
+                }
+                else
+                {
+                }
+            }
+
+            // 計算農歷日
+            lunarDayText = daysTable.Substring((lunarDay - 1) * 2, 2);
+            // 計算農歷月
+            lunarMonthText = monthsTable.Substring(lunarMonth - 1, 1) + "月";
+            if (leapMonth == true) lunarMonthText = "閏" + lunarMonthText;
+            // 農歷年
+            lunarYearText = Convert.ToString(lunarYear, 10) + "年";
+            // 計算天干地支
+            chineseEarText = chineseEra[(lunarYear - 4) % 60];
+            // 計算生肖
+            aminalsText = animalsTable.Substring((lunarYear - 4) % 12, 1);
+        }
+
+        //農歷日
+        private string lunarDayText;
+        public string LunarDay { get { return this.lunarDayText; } }
+
+        //農歷月
+        private string lunarMonthText;
+        public string LunarMonth { get { return this.lunarMonthText; } }
+
+        //農歷年
+        private string lunarYearText;
+        public string LunarYear { get { return this.lunarYearText; } }
+
+        //天干地支
+        private string chineseEarText;
+        public string chineseEar { get { return this.chineseEarText; } }
+
+        //生肖
+        private string aminalsText;
+        public string Aminals { get { return this.aminalsText; } }
+
+        public override string ToString()
+        {
+            return aminalsText + "," + chineseEarText + "," + lunarYearText + lunarMonthText + lunarDayText;
+        }
+    }
 }
 

@@ -187,6 +187,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(170, 70);
             this.button0.TabIndex = 105;
+            this.button0.Text = "獲取系統進程的用戶名";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -368,6 +369,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(170, 70);
             this.button4.TabIndex = 88;
+            this.button4.Text = "加入檔案右鍵選單";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 

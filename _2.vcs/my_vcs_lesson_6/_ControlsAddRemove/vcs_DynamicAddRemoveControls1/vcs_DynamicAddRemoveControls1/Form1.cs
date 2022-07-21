@@ -421,6 +421,34 @@ namespace vcs_DynamicAddRemoveControls1
         {
             richTextBox1.Clear();
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //動態創建按鈕和事件
+
+            int i = 0;
+            for (i = 0; i < 10; i++)
+            {
+                Button btn = new Button();//創建一個新的按鈕
+                btn.Name = "button" + i.ToString();//這是我用來區別各個按鈕的辦法
+                btn.Text = "button" + i.ToString();
+                btn.Size = new Size(80, 45);
+                Point p = new Point(100, 50 + i * 50);//創建一個坐標,用來給新的按鈕定位
+                btn.Location = p;//把按鈕的位置與剛創建的坐標綁定在一起
+
+                this.richTextBox1.Controls.Add(btn);    //向 某控件 中添加此按鈕
+
+                //動態添加控件的事件,語句:
+                //Control.Command += new CommandEventHandler(this.EventFun);
+                btn.Click += new System.EventHandler(btn_click);//將按鈕的方法綁定到按鈕的單擊事件中b.Click是按鈕的單擊事件
+            }
+        }
+
+        private void btn_click(object sender, System.EventArgs e)
+        {
+            Button b1 = (Button)sender;//將觸發此事件的對象轉換為該Button對象
+
+            richTextBox1.Text += "你按了 " + b1.Name + "\n";
+        }
     }
 }
-

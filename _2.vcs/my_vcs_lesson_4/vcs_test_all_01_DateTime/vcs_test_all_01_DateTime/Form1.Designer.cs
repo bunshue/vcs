@@ -1449,6 +1449,7 @@
             this.bt_special_09.Name = "bt_special_09";
             this.bt_special_09.Size = new System.Drawing.Size(120, 40);
             this.bt_special_09.TabIndex = 91;
+            this.bt_special_09.Text = "農曆";
             this.bt_special_09.UseVisualStyleBackColor = true;
             this.bt_special_09.Click += new System.EventHandler(this.bt_special_09_Click);
             // 

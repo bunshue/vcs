@@ -19,7 +19,7 @@ using System.Net;
 using System.Collections;   //for DictionaryEntry, HashTable
 using System.Text.RegularExpressions;
 using Microsoft.VisualBasic.Devices;    //for Computer
-
+using Microsoft.Win32;  //for RegistryKey
 using System.ServiceProcess;    //參考/加入參考/.NET/System.ServiceProcess
 
 namespace vcs_Mix02
@@ -110,6 +110,40 @@ namespace vcs_Mix02
         private void button0_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //獲取系統進程的用戶名
+            foreach (Process p in Process.GetProcesses())
+            {
+                //Console.Write(p.ProcessName);
+                //Console.Write("----");
+                //Console.WriteLine(GetProcessUserName(p.Id));
+
+                richTextBox1.Text += p.ProcessName + "\t" + GetProcessUserName(p.Id) + "\n";
+            }
+        }
+
+        private static string GetProcessUserName(int pID)
+        {
+            string text1 = null;
+            SelectQuery query1 = new SelectQuery("Select * from Win32_Process WHERE processID=" + pID);
+            ManagementObjectSearcher searcher1 = new ManagementObjectSearcher(query1);
+            try
+            {
+                foreach (ManagementObject disk in searcher1.Get())
+                {
+                    ManagementBaseObject inPar = null;
+                    ManagementBaseObject outPar = null;
+                    inPar = disk.GetMethodParameters("GetOwner");
+                    outPar = disk.InvokeMethod("GetOwner", inPar, null);
+                    text1 = outPar["User"].ToString();
+                    break;
+                }
+            }
+            catch
+            {
+                text1 = "SYSTEM";
+            }
+            return text1;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -166,6 +200,45 @@ namespace vcs_Mix02
         private void button4_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //加入檔案右鍵選單
+
+            string sText = this.Text;
+            string sFullName = string.Format("{0} %1", Application.ExecutablePath);
+            // Application.ExecutablePath 是程式執行檔的完整路徑檔案名稱
+            // %1 表示傳入的檔案
+            //if (this.rbFile.Checked)
+            {
+                // 加入檔案右鍵選單
+                RegFile(sText, sFullName);
+            }
+            //else
+            {
+                // 加入目錄右鍵選單
+                //RegDirectory(sText, sFullName);
+            }
+            MessageBox.Show("作業成功");
+        }
+
+        private void RegFile(string sText, string sFullName)
+        {
+            RegistryKey shell = Registry.ClassesRoot.OpenSubKey(@"*\shell", true);
+            RegistryKey custom = shell.CreateSubKey(sText);
+            RegistryKey cmd = custom.CreateSubKey("command");
+            cmd.SetValue(string.Empty, sFullName);
+            cmd.Close();
+            custom.Close();
+            shell.Close();
+        }
+
+        private void RegDirectory(string sText, string sFullName)
+        {
+            RegistryKey shell = Registry.ClassesRoot.OpenSubKey(@"directory\shell", true);
+            RegistryKey custom = shell.CreateSubKey(sText);
+            RegistryKey cmd = custom.CreateSubKey("command");
+            cmd.SetValue("", sFullName);
+            cmd.Close();
+            custom.Close();
+            shell.Close();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -893,6 +966,7 @@ namespace vcs_Mix02
                 }
                 catch (Exception ex)
                 {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
                 }
             }
         }

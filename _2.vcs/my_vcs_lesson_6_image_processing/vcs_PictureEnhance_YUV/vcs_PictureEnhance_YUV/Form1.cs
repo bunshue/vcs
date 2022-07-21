@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
 using System.Drawing.Imaging;
 
 namespace vcs_PictureEnhance_YUV
@@ -16,6 +17,9 @@ namespace vcs_PictureEnhance_YUV
         string filename1 = @"C:\______test_files\ims01.bmp";
         //string filename1 = @"C:\______test_files\color1.bmp";
         //string filename2 = @"C:\______test_files\color2.bmp";
+
+        int W = 0;
+        int H = 0;
 
         public struct RGB
         {
@@ -129,6 +133,9 @@ namespace vcs_PictureEnhance_YUV
         private void Form1_Load(object sender, EventArgs e)
         {
             pictureBox2.Image = Image.FromFile(filename1);
+            W = pictureBox2.Image.Width;
+            H = pictureBox2.Image.Height;
+
             pictureBox2.MouseDown += new MouseEventHandler(pictureBox2_MouseDown);
             pictureBox2.MouseMove += new MouseEventHandler(pictureBox2_MouseMove);
             pictureBox2.MouseUp += new MouseEventHandler(pictureBox2_MouseUp);
@@ -144,18 +151,18 @@ namespace vcs_PictureEnhance_YUV
             int dx;
             int dy;
 
-            int W = 640;
-            int H = 480;
+            int pbx_W = 800;
+            int pbx_H = 520;
 
             x_st = 10;
             y_st = 10;
-            dx = W + 10;
-            dy = H + 10;
+            dx = pbx_W + 10;
+            dy = pbx_H + 10;
 
-            pictureBox1.Size = new Size(W, H);
-            pictureBox2.Size = new Size(W, H);
-            pictureBox3.Size = new Size(W, H);
-            pictureBox4.Size = new Size(W, H);
+            pictureBox1.Size = new Size(pbx_W, pbx_H);
+            pictureBox2.Size = new Size(pbx_W, pbx_H);
+            pictureBox3.Size = new Size(pbx_W, pbx_H);
+            pictureBox4.Size = new Size(pbx_W, pbx_H);
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
             pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
@@ -173,7 +180,7 @@ namespace vcs_PictureEnhance_YUV
             button5.Location = new Point(x_st + dx * 2, y_st + dy * 3);
             button4.Location = new Point(x_st + dx * 2, y_st + dy * 4);
 
-            richTextBox1.Size = new Size(500, H * 2 + 10);
+            richTextBox1.Size = new Size(180, pbx_H * 2 + 10);
             richTextBox1.Location = new Point(x_st + dx * 2 + 100, y_st + dy * 0);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -181,7 +188,71 @@ namespace vcs_PictureEnhance_YUV
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
+            bt_open_file_setup();
             bt_exit_setup();
+        }
+
+        private void bt_open_file_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+
+            openFileDialog1.Title = "單選檔案";
+            //openFileDialog1.ShowHelp = true;
+            openFileDialog1.FileName = "";              //預設開啟的檔名
+            openFileDialog1.DefaultExt = "*.txt";
+            openFileDialog1.Filter = "圖片(*.bmp,*.jpg,*.png)|*.bmp;*.jpg;*.png";   //存檔類型
+            //openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
+            openFileDialog1.RestoreDirectory = true;
+            //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
+            openFileDialog1.InitialDirectory = "c:\\______test_files";  //預設開啟的路徑
+            openFileDialog1.Multiselect = false;    //單選
+            if (openFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                richTextBox1.Text += "已選取檔案: " + openFileDialog1.FileName + "\n";
+                FileInfo f = new FileInfo(openFileDialog1.FileName);
+                richTextBox1.Text += "Name: " + f.Name + "\n";
+                richTextBox1.Text += "FullName: " + f.FullName + "\n";
+                richTextBox1.Text += "Extension: " + f.Extension + "\n";
+                richTextBox1.Text += "size: " + f.Length.ToString() + "\n";
+                richTextBox1.Text += "Directory: " + f.Directory + "\n";
+                richTextBox1.Text += "DirectoryName: " + f.DirectoryName + "\n";
+
+                filename1 = openFileDialog1.FileName;
+
+                pictureBox2.Image = Image.FromFile(filename1);
+                W = pictureBox2.Image.Width;
+                H = pictureBox2.Image.Height;
+                //richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "未選取檔案\n";
+            }
+        }
+
+        void bt_open_file_setup()
+        {
+            int width = 5;
+            int w = 50; //設定按鈕大小 W
+            int h = 50; //設定按鈕大小 H
+
+            Button bt_open_file = new Button();  // 實例化按鈕
+            bt_open_file.Size = new Size(w, h);
+            bt_open_file.Text = "";
+            Bitmap bmp = new Bitmap(w, h);
+            Graphics g = Graphics.FromImage(bmp);
+            Pen p = new Pen(Color.Blue, width);
+            g.Clear(Color.Pink);
+            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
+            g.DrawLine(p, w / 4, 0, (w - 1) / 2, h - 1);
+            g.DrawLine(p, (w - 1) * 3 / 4, 0, (w - 1) / 2, h - 1);
+            bt_open_file.Image = bmp;
+
+            bt_open_file.Location = new Point(this.ClientSize.Width - bt_open_file.Width, 0 + h);
+            bt_open_file.Click += bt_open_file_Click;     // 加入按鈕事件
+
+            this.Controls.Add(bt_open_file); // 將按鈕加入表單
+            bt_open_file.BringToFront();     //移到最上層
         }
 
         private void bt_exit_Click(object sender, EventArgs e)
@@ -250,8 +321,6 @@ namespace vcs_PictureEnhance_YUV
             if (Y_min < 0)
                 Y_min = 0;
 
-            //richTextBox1.Text += "Y_max = " + Y_max.ToString() + "\tY_min = " + Y_min.ToString() + "\n";
-
             int diff_Y = Y_max - Y_min;
 
             if (diff_Y == 0)
@@ -259,7 +328,8 @@ namespace vcs_PictureEnhance_YUV
 
             float ratio_Y = 255 / (float)diff_Y;
 
-            //richTextBox1.Text += "ratio_Y = " + ratio_Y.ToString("F2") + "\n";
+            richTextBox1.Text += "M = " + Y_max.ToString() + "\tm = " + Y_min.ToString() + "\n";
+            richTextBox1.Text += "diff = " + diff_Y.ToString("F2") + "\tratio = " + ratio_Y.ToString("F2") + "\n";
 
             for (j = 0; j < h; j++)
             {
@@ -285,20 +355,24 @@ namespace vcs_PictureEnhance_YUV
 
                 }
             }
+
+            //若是幾乎沒什麼變化的, 畫一個框來表示區域
+            if (ratio_Y < 1.4)
+            {
+                Graphics g = Graphics.FromImage(bitmap1);
+                g.DrawRectangle(Pens.Blue, x_st, y_st, w, h);
+            }
         }
 
         void show_part_image(Bitmap bitmap1, int x_st, int y_st, int w, int h)
         {
-            int W = 640;
-            int H = 480;
-
             if ((x_st < 0) || (x_st >= W))
                 return;
             if ((y_st < 0) || (y_st >= H))
                 return;
-            if ((w < 0) || (w > W))
+            if ((w <= 0) || (w > W))
                 return;
-            if ((h < 0) || (h > H))
+            if ((h <= 0) || (h > H))
                 return;
             if (((x_st + w) > W) || ((y_st + h) > H))
                 return;
@@ -353,7 +427,7 @@ namespace vcs_PictureEnhance_YUV
 
             int W = bitmap1.Width;
             int H = bitmap1.Height;
-            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+            //richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
 
             int x_st = W / 8;
             int y_st = H / 8;
@@ -373,7 +447,7 @@ namespace vcs_PictureEnhance_YUV
 
             int W = bitmap1.Width;
             int H = bitmap1.Height;
-            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+            //richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
 
             int x_st = 50;
             int y_st = 50;
@@ -393,7 +467,7 @@ namespace vcs_PictureEnhance_YUV
 
             int W = bitmap1.Width;
             int H = bitmap1.Height;
-            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+            //richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
 
             int x_st = W / 3;
             int y_st = H / 3;
@@ -413,7 +487,7 @@ namespace vcs_PictureEnhance_YUV
 
             int W = bitmap1.Width;
             int H = bitmap1.Height;
-            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+            //richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
 
             int x_st = W / 12;
             int y_st = H / 4;
@@ -433,7 +507,7 @@ namespace vcs_PictureEnhance_YUV
 
             int W = bitmap1.Width;
             int H = bitmap1.Height;
-            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+            //richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
 
             int x_st = W / 3;
             int y_st = H / 3 - 50;
@@ -504,16 +578,13 @@ namespace vcs_PictureEnhance_YUV
             flag_pictureBox2_mouse_down = false;
             //richTextBox1.Text += "Up : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
 
-            int W = 640;
-            int H = 480;
-
             if ((draw_x_st < 0) || (draw_x_st >= W))
                 return;
             if ((draw_y_st < 0) || (draw_y_st >= H))
                 return;
-            if ((draw_w < 0) || (draw_w > W))
+            if ((draw_w <= 0) || (draw_w > W))
                 return;
-            if ((draw_h < 0) || (draw_h > H))
+            if ((draw_h <= 0) || (draw_h > H))
                 return;
             if (((draw_x_st + draw_w) > W) || ((draw_y_st + draw_h) > H))
                 return;
