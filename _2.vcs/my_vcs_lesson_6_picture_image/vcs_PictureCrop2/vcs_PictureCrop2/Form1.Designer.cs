@@ -29,11 +29,6 @@
         private void InitializeComponent()
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFileOpen = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFileSaveAs = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuFileExit = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuScale = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuScale100 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuScale75 = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,8 +36,6 @@
             this.mnuScale50 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuScale25 = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuScale15 = new System.Windows.Forms.ToolStripMenuItem();
-            this.rectangleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuRectangleReset = new System.Windows.Forms.ToolStripMenuItem();
             this.sfdImage = new System.Windows.Forms.SaveFileDialog();
             this.ofdImage = new System.Windows.Forms.OpenFileDialog();
             this.label1 = new System.Windows.Forms.Label();
@@ -61,6 +54,14 @@
             this.lb_y_st = new System.Windows.Forms.Label();
             this.lb_w = new System.Windows.Forms.Label();
             this.nud_w = new System.Windows.Forms.NumericUpDown();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picImage)).BeginInit();
             this.groupBox_selection.SuspendLayout();
@@ -73,54 +74,12 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.mnuScale,
-            this.rectangleToolStripMenuItem});
+            this.mnuScale});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1309, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuFileOpen,
-            this.mnuFileSaveAs,
-            this.toolStripMenuItem1,
-            this.mnuFileExit});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
-            this.fileToolStripMenuItem.Text = "&File";
-            // 
-            // mnuFileOpen
-            // 
-            this.mnuFileOpen.Name = "mnuFileOpen";
-            this.mnuFileOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.mnuFileOpen.Size = new System.Drawing.Size(168, 22);
-            this.mnuFileOpen.Text = "&Open...";
-            this.mnuFileOpen.Click += new System.EventHandler(this.mnuFileOpen_Click);
-            // 
-            // mnuFileSaveAs
-            // 
-            this.mnuFileSaveAs.Enabled = false;
-            this.mnuFileSaveAs.Name = "mnuFileSaveAs";
-            this.mnuFileSaveAs.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.mnuFileSaveAs.Size = new System.Drawing.Size(168, 22);
-            this.mnuFileSaveAs.Text = "&Save As...";
-            this.mnuFileSaveAs.Click += new System.EventHandler(this.mnuFileSaveAs_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(165, 6);
-            // 
-            // mnuFileExit
-            // 
-            this.mnuFileExit.Name = "mnuFileExit";
-            this.mnuFileExit.Size = new System.Drawing.Size(168, 22);
-            this.mnuFileExit.Text = "E&xit";
-            this.mnuFileExit.Click += new System.EventHandler(this.mnuFileExit_Click);
             // 
             // mnuScale
             // 
@@ -140,60 +99,44 @@
             this.mnuScale100.Checked = true;
             this.mnuScale100.CheckState = System.Windows.Forms.CheckState.Checked;
             this.mnuScale100.Name = "mnuScale100";
-            this.mnuScale100.Size = new System.Drawing.Size(106, 22);
+            this.mnuScale100.Size = new System.Drawing.Size(152, 22);
             this.mnuScale100.Text = "1&00%";
             this.mnuScale100.Click += new System.EventHandler(this.mnuScale_Click);
             // 
             // mnuScale75
             // 
             this.mnuScale75.Name = "mnuScale75";
-            this.mnuScale75.Size = new System.Drawing.Size(106, 22);
+            this.mnuScale75.Size = new System.Drawing.Size(152, 22);
             this.mnuScale75.Text = "&75%";
             this.mnuScale75.Click += new System.EventHandler(this.mnuScale_Click);
             // 
             // mnuScale66
             // 
             this.mnuScale66.Name = "mnuScale66";
-            this.mnuScale66.Size = new System.Drawing.Size(106, 22);
+            this.mnuScale66.Size = new System.Drawing.Size(152, 22);
             this.mnuScale66.Text = "&66%";
             this.mnuScale66.Click += new System.EventHandler(this.mnuScale_Click);
             // 
             // mnuScale50
             // 
             this.mnuScale50.Name = "mnuScale50";
-            this.mnuScale50.Size = new System.Drawing.Size(106, 22);
+            this.mnuScale50.Size = new System.Drawing.Size(152, 22);
             this.mnuScale50.Text = "&50%";
             this.mnuScale50.Click += new System.EventHandler(this.mnuScale_Click);
             // 
             // mnuScale25
             // 
             this.mnuScale25.Name = "mnuScale25";
-            this.mnuScale25.Size = new System.Drawing.Size(106, 22);
+            this.mnuScale25.Size = new System.Drawing.Size(152, 22);
             this.mnuScale25.Text = "&25%";
             this.mnuScale25.Click += new System.EventHandler(this.mnuScale_Click);
             // 
             // mnuScale15
             // 
             this.mnuScale15.Name = "mnuScale15";
-            this.mnuScale15.Size = new System.Drawing.Size(106, 22);
+            this.mnuScale15.Size = new System.Drawing.Size(152, 22);
             this.mnuScale15.Text = "&15%";
             this.mnuScale15.Click += new System.EventHandler(this.mnuScale_Click);
-            // 
-            // rectangleToolStripMenuItem
-            // 
-            this.rectangleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuRectangleReset});
-            this.rectangleToolStripMenuItem.Name = "rectangleToolStripMenuItem";
-            this.rectangleToolStripMenuItem.Size = new System.Drawing.Size(76, 20);
-            this.rectangleToolStripMenuItem.Text = "&Rectangle";
-            // 
-            // mnuRectangleReset
-            // 
-            this.mnuRectangleReset.Name = "mnuRectangleReset";
-            this.mnuRectangleReset.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.R)));
-            this.mnuRectangleReset.Size = new System.Drawing.Size(148, 22);
-            this.mnuRectangleReset.Text = "&Reset";
-            this.mnuRectangleReset.Click += new System.EventHandler(this.mnuRectangleReset_Click);
             // 
             // sfdImage
             // 
@@ -273,7 +216,7 @@
             this.richTextBox1.Dock = System.Windows.Forms.DockStyle.Right;
             this.richTextBox1.Location = new System.Drawing.Point(1102, 24);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(207, 575);
+            this.richTextBox1.Size = new System.Drawing.Size(207, 671);
             this.richTextBox1.TabIndex = 6;
             this.richTextBox1.Text = "";
             // 
@@ -390,11 +333,99 @@
             this.nud_w.TabIndex = 9;
             this.nud_w.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(866, 252);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(85, 54);
+            this.button1.TabIndex = 16;
+            this.button1.Text = "開啟檔案";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(866, 323);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(85, 54);
+            this.button2.TabIndex = 17;
+            this.button2.Text = "選取部分存檔";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(976, 252);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(85, 54);
+            this.button3.TabIndex = 18;
+            this.button3.Text = "100%";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(976, 323);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(85, 54);
+            this.button4.TabIndex = 19;
+            this.button4.Text = "75%";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(976, 393);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(85, 54);
+            this.button5.TabIndex = 20;
+            this.button5.Text = "66%";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(976, 468);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(85, 54);
+            this.button6.TabIndex = 21;
+            this.button6.Text = "50%";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(976, 528);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(85, 54);
+            this.button7.TabIndex = 22;
+            this.button7.Text = "25%";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(976, 598);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(85, 54);
+            this.button8.TabIndex = 23;
+            this.button8.Text = "15%";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1309, 599);
+            this.ClientSize = new System.Drawing.Size(1309, 695);
+            this.Controls.Add(this.button8);
+            this.Controls.Add(this.button7);
+            this.Controls.Add(this.button6);
+            this.Controls.Add(this.button5);
+            this.Controls.Add(this.button4);
+            this.Controls.Add(this.button3);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.groupBox_selection);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.txtAspectRatio);
@@ -425,11 +456,6 @@
         #endregion
 
         private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mnuFileOpen;
-        private System.Windows.Forms.ToolStripMenuItem mnuFileSaveAs;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem mnuFileExit;
         private System.Windows.Forms.SaveFileDialog sfdImage;
         private System.Windows.Forms.OpenFileDialog ofdImage;
         private System.Windows.Forms.Label label1;
@@ -445,8 +471,6 @@
         private System.Windows.Forms.ToolStripMenuItem mnuScale15;
         private System.Windows.Forms.ToolStripMenuItem mnuScale100;
         private System.Windows.Forms.TextBox txtAspectRatio;
-        private System.Windows.Forms.ToolStripMenuItem rectangleToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mnuRectangleReset;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.GroupBox groupBox_selection;
         private System.Windows.Forms.Label lb_x_st;
@@ -457,6 +481,14 @@
         private System.Windows.Forms.Label lb_y_st;
         private System.Windows.Forms.Label lb_w;
         private System.Windows.Forms.NumericUpDown nud_w;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.Button button8;
     }
 }
 

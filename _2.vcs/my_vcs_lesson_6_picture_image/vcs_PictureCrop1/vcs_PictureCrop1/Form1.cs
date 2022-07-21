@@ -43,8 +43,7 @@ namespace vcs_PictureCrop1
 
             W = bitmap1.Width;
             H = bitmap1.Height;
-            //pictureBox1.ClientSize = new Size(W, H);
-            //pictureBox2.ClientSize = new Size(W, H);
+
             nud_w.Maximum = W;
             nud_h.Maximum = H;
             nud_x_st.Maximum = W;
@@ -168,6 +167,9 @@ namespace vcs_PictureCrop1
             nud_y_st.Value = select_rectangle.Y;
             nud_w.Value = select_rectangle.Width;
             nud_h.Value = select_rectangle.Height;
+
+
+            this.Text = "選取區域 : " + select_rectangle.ToString();
         }
 
         // If the user presses Escape, cancel.
@@ -188,57 +190,6 @@ namespace vcs_PictureCrop1
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (bitmap2 != null)
-            {
-                string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-
-                try
-                {
-                    bitmap2.Save(filename, ImageFormat.Bmp);
-
-                    richTextBox1.Text += "存檔成功\n";
-                    richTextBox1.Text += "已存檔 : " + filename + "\n";
-                }
-                catch (Exception ex)
-                {
-                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-                }
-
-            }
-            else
-            {
-                richTextBox1.Text += "無圖可存\n";
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "pt_st = " + pt_st.ToString() + "\n";
-            richTextBox1.Text += "pt_sp = " + pt_sp.ToString() + "\n";
-            int w = Math.Abs(pt_sp.X - pt_st.X) + 1;
-            int h = Math.Abs(pt_sp.Y - pt_st.Y) + 1;
-            richTextBox1.Text += "w = " + w.ToString() + ", h = " + h.ToString() + "\n";
-        }
-
-        // Copy the selected area to the clipboard.
-        private void CopyToClipboard(Rectangle src_rect)
-        {
-            // Make a bitmap for the selected area's image.
-            Bitmap bm = new Bitmap(src_rect.Width, src_rect.Height);
-
-            // Copy the selected area into the bitmap.
-            using (Graphics gr = Graphics.FromImage(bm))
-            {
-                Rectangle dest_rect = new Rectangle(0, 0, src_rect.Width, src_rect.Height);
-                gr.DrawImage(bitmap1, dest_rect, src_rect, GraphicsUnit.Pixel);
-            }
-
-            // Copy the selection image to the clipboard.
-            Clipboard.SetImage(bm);
-        }
-
         private void button3_Click(object sender, EventArgs e)
         {
             // Copy the selected area to the clipboard
@@ -253,9 +204,6 @@ namespace vcs_PictureCrop1
                     richTextBox1.Text += "未選定區域，無法剪下圖片\n";
                     return;
                 }
-
-                // Copy the selection to the clipboard.
-                CopyToClipboard(select_rectangle);
 
                 // Blank the selected area in the original image.
                 using (Graphics gr = Graphics.FromImage(bitmap1))
@@ -278,34 +226,11 @@ namespace vcs_PictureCrop1
 
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            if ((select_rectangle.Width <= 0) || (select_rectangle.Height <= 0))
-            {
-                richTextBox1.Text += "未選定區域，無法複製圖片\n";
-                return;
-            }
-
-            // Copy the selected area to the clipboard.
-            CopyToClipboard(select_rectangle);
-            richTextBox1.Text += "已複製圖片\n";
-
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            //Reset
-            bitmap1 = new Bitmap(filename);
-            pictureBox1.Image = bitmap1;
-
-            W = bitmap1.Width;
-            H = bitmap1.Height;
-            pictureBox1.ClientSize = new Size(W, H);
-            pictureBox2.ClientSize = new Size(W, H);
-        }
-
         private void button6_Click(object sender, EventArgs e)
         {
+            if ((select_rectangle.Width <= 0) || (select_rectangle.Height <= 0))
+                return;
+
             int x_st = (int)nud_x_st.Value;
             int y_st = (int)nud_y_st.Value;
             int w = (int)nud_w.Value;
@@ -321,6 +246,9 @@ namespace vcs_PictureCrop1
 
         private void select_crop_area(object sender, EventArgs e)
         {
+            if ((select_rectangle.Width <= 0) || (select_rectangle.Height <= 0))
+                return;
+
             int x_st = (int)nud_x_st.Value;
             int y_st = (int)nud_y_st.Value;
             int w = (int)nud_w.Value;

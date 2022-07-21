@@ -28,7 +28,6 @@ namespace vcs_RotatePicture3
 
             bitmap1 = new Bitmap(filename);
             pictureBox1.Image = bitmap1;
-            pictureBox1.Visible = true;
         }
 
         void RotatePicture(float angle)

@@ -63,26 +63,9 @@ namespace vcs_PictureCrop2
             // Prepare to use the mouse wheel.
             this.MouseWheel += Form_MouseWheel;
 
-
             // Load the image.
             OriginalImage = LoadBitmapUnlocked(filename);
             ShowScaledImage();
-
-            // Enable the Save As menu item.
-            mnuFileSaveAs.Enabled = true;
-
-
-        }
-
-        // Let the user select an image file.
-        private void mnuFileOpen_Click(object sender, EventArgs e)
-        {
-            // Load the image.
-            OriginalImage = LoadBitmapUnlocked(filename);
-            ShowScaledImage();
-
-            // Enable the Save As menu item.
-            mnuFileSaveAs.Enabled = true;
         }
 
         // Display the scaled image.
@@ -109,71 +92,6 @@ namespace vcs_PictureCrop2
             picImage.Image = ScaledImage;
             picImage.Visible = true;
             picImage.Refresh();
-        }
-
-        // Save the selected area.
-        private void mnuFileSaveAs_Click(object sender, EventArgs e)
-        {
-            if (sfdImage.ShowDialog() == DialogResult.OK)
-            {
-                try
-                {
-                    // Copy the selected area into a new Bitmap.
-                    Bitmap bm = new Bitmap(
-                        (int)SelectionRectangle.Width,
-                        (int)SelectionRectangle.Height);
-                    using (Graphics gr = Graphics.FromImage(bm))
-                    {
-                        gr.DrawImage(OriginalImage, 0, 0,
-                            SelectionRectangle,
-                            GraphicsUnit.Pixel);
-                    }
-
-                    // Save the new Bitmap.
-                    SaveImage(bm, sfdImage.FileName);
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-            }
-        }
-
-        private void mnuFileExit_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        // Save the file with the appropriate format.
-        public void SaveImage(Image image, string filename)
-        {
-            string extension = Path.GetExtension(filename);
-            switch (extension.ToLower())
-            {
-                case ".bmp":
-                    image.Save(filename, ImageFormat.Bmp);
-                    break;
-                case ".exif":
-                    image.Save(filename, ImageFormat.Exif);
-                    break;
-                case ".gif":
-                    image.Save(filename, ImageFormat.Gif);
-                    break;
-                case ".jpg":
-                case ".jpeg":
-                    image.Save(filename, ImageFormat.Jpeg);
-                    break;
-                case ".png":
-                    image.Save(filename, ImageFormat.Png);
-                    break;
-                case ".tif":
-                case ".tiff":
-                    image.Save(filename, ImageFormat.Tiff);
-                    break;
-                default:
-                    throw new NotSupportedException(
-                        "Unknown file extension " + extension);
-            }
         }
 
         // Draw the selection rectangle.
@@ -311,10 +229,10 @@ namespace vcs_PictureCrop2
             SizeF edge_size = new SizeF();
             if ((CurrentHitType == HitTypes.TopEdge) ||
                 (CurrentHitType == HitTypes.BottomEdge))
-                    edge_size = GetEnlargedSize(0, corner_hgt);
+                edge_size = GetEnlargedSize(0, corner_hgt);
             else if ((CurrentHitType == HitTypes.LeftEdge) ||
                 (CurrentHitType == HitTypes.RightEdge))
-                    edge_size = GetEnlargedSize(corner_wid, 0);
+                edge_size = GetEnlargedSize(corner_wid, 0);
 
             // Find the center of the selection rectangle for edge drags.
             float cx = SelectionRectangle.X + SelectionRectangle.Width / 2f;
@@ -463,7 +381,7 @@ namespace vcs_PictureCrop2
             if (hit_bottom) return HitTypes.BottomEdge;
             if ((point.X >= scaled_rect.Left) && (point.X <= scaled_rect.Right) &&
                 (point.Y >= scaled_rect.Top) && (point.Y <= scaled_rect.Bottom))
-                    return HitTypes.Body;
+                return HitTypes.Body;
             return HitTypes.None;
         }
 
@@ -484,17 +402,16 @@ namespace vcs_PictureCrop2
         {
             // Get the scale factor.
             string scale_text = menu_item.Text.Replace("&", "").Replace("%", "");
+
+            richTextBox1.Text += scale_text + "\t";
+
+
             ImageScale = float.Parse(scale_text) / 100f;
+
+            richTextBox1.Text += ImageScale + "\n";
+
             ShowScaledImage();
 
-            // Display the new scale.
-            mnuScale.Text = "Scale (" + menu_item.Text.Replace("&", "") + ")";
-
-            // Check the selected menu item.
-            foreach (ToolStripMenuItem item in mnuScale.DropDownItems)
-            {
-                item.Checked = (item == menu_item);
-            }
         }
 
         // Load a bitmap without locking it.
@@ -567,14 +484,6 @@ namespace vcs_PictureCrop2
             picImage.Refresh();
         }
 
-        // Reset the selection rectangle so it is visible.
-        private void mnuRectangleReset_Click(object sender, EventArgs e)
-        {
-            SelectionRectangle.X = 10;
-            SelectionRectangle.Y = 10;
-            picImage.Refresh();
-        }
-
         // Respond to the mouse wheel.
         private void Form_MouseWheel(object sender, MouseEventArgs e)
         {
@@ -593,8 +502,7 @@ namespace vcs_PictureCrop2
                 mnuScale25,
                 mnuScale15,
             };
-            List<int> scales = new List<int>()
-                { 100, 75, 66, 50, 25, 15 };
+            List<int> scales = new List<int>() { 100, 75, 66, 50, 25, 15 };
             int index = scales.IndexOf(int_scale);
 
             // If we're zooming out, move to a smaller scale.
@@ -608,5 +516,109 @@ namespace vcs_PictureCrop2
                 SetScale(menu_items[index]);
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //開啟檔案
+            // Load the image.
+            OriginalImage = LoadBitmapUnlocked(filename);
+            ShowScaledImage();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //選取部分存檔
+
+            try
+            {
+                // Copy the selected area into a new Bitmap.
+                Bitmap bitmap1 = new Bitmap((int)SelectionRectangle.Width, (int)SelectionRectangle.Height);
+                using (Graphics gr = Graphics.FromImage(bitmap1))
+                {
+                    gr.DrawImage(OriginalImage, 0, 0, SelectionRectangle, GraphicsUnit.Pixel);
+                }
+
+                string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+                try
+                {
+                    //bitmap1.Save(@file1, ImageFormat.Jpeg);
+                    bitmap1.Save(filename, ImageFormat.Bmp);
+                    //bitmap1.Save(@file3, ImageFormat.Png);
+
+                    //richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                    richTextBox1.Text += "已存檔 : " + filename + "\n";
+                    //richTextBox1.Text += "已存檔 : " + file3 + "\n";
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //100
+
+            ImageScale = 100 / 100f;
+            richTextBox1.Text += ImageScale + "\n";
+            ShowScaledImage();
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //75
+            ImageScale = 75 / 100f;
+            richTextBox1.Text += ImageScale + "\n";
+            ShowScaledImage();
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //66
+            ImageScale = 66 / 100f;
+            richTextBox1.Text += ImageScale + "\n";
+            ShowScaledImage();
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //50
+            ImageScale = 50 / 100f;
+            richTextBox1.Text += ImageScale + "\n";
+            ShowScaledImage();
+
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            //25
+            ImageScale = 25 / 100f;
+            richTextBox1.Text += ImageScale + "\n";
+            ShowScaledImage();
+
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //15
+            ImageScale = 15 / 100f;
+            richTextBox1.Text += ImageScale + "\n";
+            ShowScaledImage();
+
+        }
+
+
+
+
     }
 }
+

@@ -41,7 +41,6 @@ namespace vcs_RotatePicture4
             // Load the bitmap.
             Bitmap bm = new Bitmap(filename);
             pictureBox1.Image = OriginalBitmap;
-            pictureBox1.Visible = true;
 
             // See how big the rotated bitmap must be.
             int wid = (int)Math.Sqrt(bm.Width * bm.Width + bm.Height * bm.Height);
@@ -89,7 +88,6 @@ namespace vcs_RotatePicture4
                 // Load the bitmap.
                 Bitmap bm = new Bitmap(ofdFile.FileName);
                 pictureBox1.Image = OriginalBitmap;
-                pictureBox1.Visible = true;
 
                 // See how big the rotated bitmap must be.
                 int wid = (int)Math.Sqrt(bm.Width * bm.Width + bm.Height * bm.Height);

@@ -39,6 +39,7 @@
             this.mnuFileExit = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.txtAngle = new System.Windows.Forms.TextBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -54,13 +55,11 @@
             // pictureBox1
             // 
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 49);
+            this.pictureBox1.Location = new System.Drawing.Point(11, 67);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(54, 50);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.Size = new System.Drawing.Size(600, 600);
             this.pictureBox1.TabIndex = 6;
             this.pictureBox1.TabStop = false;
-            this.pictureBox1.Visible = false;
             this.pictureBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseDown);
             this.pictureBox1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseMove);
             this.pictureBox1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.pictureBox1_MouseUp);
@@ -71,7 +70,7 @@
             this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(739, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1166, 24);
             this.menuStrip1.TabIndex = 5;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -133,11 +132,20 @@
             this.txtAngle.TabIndex = 8;
             this.txtAngle.TabStop = false;
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(633, 67);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(521, 600);
+            this.richTextBox1.TabIndex = 9;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(739, 624);
+            this.ClientSize = new System.Drawing.Size(1166, 789);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.txtAngle);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
@@ -166,6 +174,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnuFileExit;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtAngle;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

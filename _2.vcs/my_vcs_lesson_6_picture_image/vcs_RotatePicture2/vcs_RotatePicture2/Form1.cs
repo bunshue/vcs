@@ -16,7 +16,6 @@ namespace vcs_RotatePicture2
     public partial class Form1 : Form
     {
         // The current scale.
-        private float ImageScale = 1;
         private float angle = 0;
 
         // The original and rotated bitmaps.
@@ -46,7 +45,6 @@ namespace vcs_RotatePicture2
             if (bitmap1 == null)
                 return;
             bitmap2 = null;
-            pictureBox1.Visible = false;
 
             // Find the size of the image's rotated bounding box.
             Matrix rotation = new Matrix();
@@ -91,30 +89,16 @@ namespace vcs_RotatePicture2
                 //}
             }
 
-            // Scale the output PictureBox.
-            SetPictureBoxSize();
-
             // Display the result.
             pictureBox1.Image = bitmap2;
-            pictureBox1.Visible = true;
-        }
-
-        // Set the PictureBox to display the image
-        // at the desired scale.
-        private void SetPictureBoxSize()
-        {
-            if (bitmap2 == null)
-                return;
-            pictureBox1.ClientSize = new Size((int)(bitmap2.Width * ImageScale), (int)(bitmap2.Height * ImageScale));
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             angle += 5;
-            ImageScale += 0.01f;
-            this.Text = (angle % 360).ToString() + " 度, " + ImageScale.ToString() + " 倍";
+            this.Text = (angle % 360).ToString() + " 度";
             DisplayImage();
-            if (((angle % 360) == 0) && (ImageScale >= 1.7))
+            if ((angle % 360) == 0)
             {
                 timer1.Enabled = false;
             }

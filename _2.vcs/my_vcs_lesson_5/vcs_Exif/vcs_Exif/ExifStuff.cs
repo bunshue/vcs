@@ -6,6 +6,7 @@ using System.Text;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
+using System.Drawing.Text;  //for TextRenderingHint
 
 namespace vcs_Exif
 {
@@ -91,6 +92,73 @@ namespace vcs_Exif
             PropertyItem item = img.GetPropertyItem(OrientationId);
             item.Value[0] = (byte)orientation;
             img.SetPropertyItem(item);
+        }
+
+                // Make an image to demonstrate orientations.
+        public static Image OrientationImage(ExifOrientations orientation)
+        {
+            const int size = 64;
+            Bitmap bm = new Bitmap(size, size);
+            using (Graphics gr = Graphics.FromImage(bm))
+            {
+                gr.Clear(Color.White);
+                gr.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+
+                // Orient the result.
+                switch (orientation)
+                {
+                    case ExifOrientations.TopLeft:
+                        break;
+                    case ExifOrientations.TopRight:
+                        gr.ScaleTransform(-1, 1);
+                        break;
+                    case ExifOrientations.BottomRight:
+                        gr.RotateTransform(180);
+                        break;
+                    case ExifOrientations.BottomLeft:
+                        gr.ScaleTransform(1, -1);
+                        break;
+                    case ExifOrientations.LeftTop:
+                        gr.RotateTransform(90);
+                        gr.ScaleTransform(-1, 1, MatrixOrder.Append);
+                        break;
+                    case ExifOrientations.RightTop:
+                        gr.RotateTransform(-90);
+                        break;
+                    case ExifOrientations.RightBottom:
+                        gr.RotateTransform(90);
+                        gr.ScaleTransform(1, -1, MatrixOrder.Append);
+                        break;
+                    case ExifOrientations.LeftBottom:
+                        gr.RotateTransform(90);
+                        break;
+                }
+
+                // Translate the result to the center of the bitmap.
+                gr.TranslateTransform(
+                    size / 2, size / 2, MatrixOrder.Append);
+
+                using (StringFormat string_format = new StringFormat())
+                {
+                    string_format.LineAlignment = StringAlignment.Center;
+                    string_format.Alignment = StringAlignment.Center;
+                    using (Font font = new Font("Times New Roman", 40,
+                        GraphicsUnit.Point))
+                    {
+                        if (orientation == ExifOrientations.Unknown)
+                        {
+                            gr.DrawString("?", font, Brushes.Black,
+                                0, 0, string_format);
+                        }
+                        else
+                        {
+                            gr.DrawString("F", font, Brushes.Black,
+                                0, 0, string_format);
+                        }
+                    }
+                }
+            }
+            return bm;
         }
 
         // Possible image EXIF properties.

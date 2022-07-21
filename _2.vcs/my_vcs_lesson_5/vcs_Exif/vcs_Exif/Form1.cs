@@ -23,7 +23,25 @@ namespace vcs_Exif
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            label3.Text = "取得圖片內的方向值,\n自動轉換圖片方向";
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            string filename = @"C:\______test_files\orient1.jpg";
+
+            // Open the file.
+            using (Bitmap bm = new Bitmap(filename))
+            {
+                // Display the original image.
+                Bitmap original_bm = new Bitmap(bm);
+                pictureBox1.Image = original_bm;
+
+                // Display the image property oriented.
+                // Note: If you use new Bitmap(bm) to make the copy,
+                //       then the EXIF properties are lost. Clone instead.
+                Bitmap oriented_bm = (Bitmap)bm.Clone();
+                ExifStuff.OrientImage(oriented_bm);
+                pictureBox2.Image = oriented_bm;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -240,6 +258,27 @@ namespace vcs_Exif
             richTextBox1.Text += "aaaaa : " + aperture + "\n\n";
             richTextBox1.Text += "aaaaa : " + shutter + "\n\n";
             richTextBox1.Text += "aaaaa : " + sensitive + "\n\n";
+
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //檢查圖片的方向
+            string filename = @"C:\______test_files\orient1.jpg";
+
+
+            // Open the file.
+            Bitmap bm = new Bitmap(filename);
+            picOriginal.Image = bm;
+
+            // Get the PropertyItems property from image.
+            ExifStuff.ExifOrientations orientation = ExifStuff.ImageOrientation(bm);
+            lblOrientation.Text = orientation.ToString();
+            richTextBox1.Text += orientation.ToString() + "\n";
+            picOrientation.Image = ExifStuff.OrientationImage(orientation);
+
+
 
 
         }
