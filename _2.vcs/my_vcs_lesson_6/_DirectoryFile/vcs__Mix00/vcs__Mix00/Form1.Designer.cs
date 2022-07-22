@@ -78,7 +78,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(160, 70);
             this.button15.TabIndex = 33;
-            this.button15.Text = "各磁碟資訊";
+            this.button15.Text = "尋找資料夾和檔案";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -89,7 +89,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(160, 70);
             this.button14.TabIndex = 32;
-            this.button14.Text = "各磁碟資訊";
+            this.button14.Text = "複製檔案";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -348,7 +348,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(160, 70);
             this.button16.TabIndex = 45;
-            this.button16.Text = "偵測磁碟裝置型態";
+            this.button16.Text = "取得磁碟資訊";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -359,7 +359,6 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(160, 70);
             this.button17.TabIndex = 46;
-            this.button17.Text = "獲取計算機磁盤空間";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -434,6 +433,7 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(160, 70);
             this.button24.TabIndex = 53;
+            this.button24.Text = "加密檔案";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 

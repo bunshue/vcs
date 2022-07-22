@@ -213,7 +213,7 @@
             this.groupBox1.Controls.Add(this.bt_ffmpeg0);
             this.groupBox1.Location = new System.Drawing.Point(580, 500);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(165, 167);
+            this.groupBox1.Size = new System.Drawing.Size(173, 167);
             this.groupBox1.TabIndex = 58;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "ffmpeg";

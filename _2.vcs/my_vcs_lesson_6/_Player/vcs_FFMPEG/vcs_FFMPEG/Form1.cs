@@ -226,7 +226,7 @@ namespace vcs_FFMPEG
             int hgt = pbx.ClientSize.Height - 2 * y;
 
             // Draw it.
-            e.Graphics.FillRectangle(Brushes.Blue, x1, y, x2-x1, hgt);
+            e.Graphics.FillRectangle(Brushes.Blue, x1, y, x2 - x1, hgt);
             using (Pen pen = new Pen(Color.Blue, 3))
             {
                 e.Graphics.DrawLine(pen, x1, 0, x1, pbx.ClientSize.Height);
@@ -886,8 +886,9 @@ namespace vcs_FFMPEG
             string video_filename1 = @"C:\______test_files\_video\i2c.avi";
             //string video_filename2 = @"D:\內視鏡影片\190902-0827.mp4";
 
-            string path = @"C:\dddddddddd3\";
-            CatchImg(video_filename1, path);
+            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+
+            CatchImg(video_filename1, filename);
         }
 
         /// <summary>
@@ -905,6 +906,9 @@ namespace vcs_FFMPEG
                     width = null;
                     height = null;
                 }
+
+                //string cmd = "\"" + ffmpeg_filename + "\"" + " -i " + "\"" + video_filename + "\"";
+                //richTextBox1.Text += "cmd : " + cmd + "\n";
 
                 //執行命令獲取該文件的一些信息 
                 string output;
@@ -945,8 +949,9 @@ namespace vcs_FFMPEG
         /// <param name="command">需要執行的Command</param>
         /// <param name="output">輸出</param>
         /// <param name="error">錯誤</param>
-        public static void ExecuteCommand(string command, out string output, out string error)
+        public void ExecuteCommand(string command, out string output, out string error)
         {
+            //richTextBox1.Text += "cmd : " + command + "\n";
             try
             {
                 //創建一個進程
@@ -995,32 +1000,19 @@ namespace vcs_FFMPEG
         }
 
         //獲取視頻第一秒圖片
-        public string CatchImg(string FileName, string oldimg)
+        public void CatchImg(string video_filename, string filename)
         {
-            string imgpath = @"C:\dddddddddd3\";
-            //string trueimgpath = "";
-            //trueimgpath = "InfoReleaseResources/Image/" + GroupId + "/";
-            if (Directory.Exists(imgpath) == false)
+            if ((File.Exists(ffmpeg_filename) == false) || (File.Exists(video_filename) == false))
             {
-                Directory.CreateDirectory(imgpath);
+                return;
             }
 
-            string vFileName = FileName;
-            if ((System.IO.File.Exists(ffmpeg_filename) == false) || (System.IO.File.Exists(vFileName) == false))
-            {
-                return "";
-            }
-
-            //獲得圖片相對路徑/最後存儲到數據庫的路徑,如:/InfoReleaseResources/Image/分組/圖片.jpg
-
-            richTextBox1.Text += "3333333\n";
-
-            string flv_img = oldimg;
-            //圖片絕對路徑,如:D:\Video\Web\FlvFile\User1\0001.jpg
-            string flv_img_p = flv_img;
             //截圖的尺寸大小
             int? width, height;
-            GetVideoFormatSize(vFileName, out width, out height);
+            GetVideoFormatSize(video_filename, out width, out height);
+
+            richTextBox1.Text += "取得影片大小 : " + width.ToString() + " X " + height.ToString() + "\n";
+
             string FlvImgSize = width + "x" + height;
             ProcessStartInfo startInfo = new ProcessStartInfo(ffmpeg_filename);
             startInfo.UseShellExecute = false; // 要獲取輸出，此值必須爲 false。
@@ -1029,9 +1021,11 @@ namespace vcs_FFMPEG
             startInfo.RedirectStandardError = true;
             startInfo.WindowStyle = ProcessWindowStyle.Hidden;
             //此處組合成ffmpeg.exe文件需要的參數即可,此處命令在ffmpeg 0.4.9調試通過
-            //startInfo.Arguments = " -i " + vFileName + " -y -f image2 -ss 1 -t 0.001 -s " + FlvImgSize + " " + flv_img_p;
-            //string command = string.Format("\"{0}\" -i \"{1}\" -ss {2} -vframes 1 -r 1 -ac 1 -ab 2 -s {3}*{4} -f image2 \"{5}\"", ffmpeg, vFileName, 1, width, height, flv_img_p);
-            startInfo.Arguments = string.Format("-i \"{0}\" -ss {1} -vframes 1 -r 1 -ac 1 -ab 2 -s {2}*{3} -f image2 \"{4}\"", vFileName, 1, width, height, flv_img_p);
+            //startInfo.Arguments = " -i " + video_filename + " -y -f image2 -ss 1 -t 0.001 -s " + FlvImgSize + " " + flv_img_p;
+            //string command = string.Format("\"{0}\" -i \"{1}\" -ss {2} -vframes 1 -r 1 -ac 1 -ab 2 -s {3}*{4} -f image2 \"{5}\"", ffmpeg, video_filename, 1, width, height, flv_img_p);
+            startInfo.Arguments = string.Format("-i \"{0}\" -ss {1} -vframes 1 -r 1 -ac 1 -ab 2 -s {2}*{3} -f image2 \"{4}\"", video_filename, 1, width, height, filename);
+
+            richTextBox1.Text += "arg : " + startInfo.Arguments + "\n";
             try
             {
                 //Process.Start(startInfo);
@@ -1045,21 +1039,18 @@ namespace vcs_FFMPEG
             catch
             {
                 richTextBox1.Text += "FAIL\n";
-                return "";
+                return;
             }
 
             ///注意:圖片截取成功後,數據由內存緩存寫到磁盤需要時間較長,大概在3,4秒甚至更長;
             ///這兒需要延時後再檢測,我服務器延時8秒,即如果超過8秒圖片仍不存在,認爲截圖失敗;
             ///此處略去延時代碼.如有那位知道如何捕捉ffmpeg.exe截圖失敗消息,請告知,先謝過!
-            //if (System.IO.File.Exists(flv_img_p))
+            //if (File.Exists(flv_img_p))
             //{
             //    return flv_img;
             //}
 
-            richTextBox1.Text += "flv_img_p = " + flv_img_p + "\n";
-            richTextBox1.Text += "flv_img = " + flv_img + "\n";
-
-            return flv_img;
+            return;
         }
 
         //獲取視頻時長
@@ -1077,7 +1068,7 @@ namespace vcs_FFMPEG
                 pro.StartInfo.Arguments = " -i " + fileName;
 
                 pro.Start();
-                System.IO.StreamReader errorreader = pro.StandardError;
+                StreamReader errorreader = pro.StandardError;
                 pro.WaitForExit(1000);
 
                 string result = errorreader.ReadToEnd();
@@ -1105,4 +1096,3 @@ namespace vcs_FFMPEG
         }
     }
 }
-

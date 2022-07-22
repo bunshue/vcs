@@ -464,7 +464,7 @@ namespace vcs__Mix00
             string foldername = @"C:\______test_files\__pic";
 
             // Enumerate the files.
-            DirectoryInfo dir_info = new System.IO.DirectoryInfo(foldername);
+            DirectoryInfo dir_info = new DirectoryInfo(foldername);
 
             foreach (DirectoryInfo d_info in dir_info.GetDirectories())
             {
@@ -523,28 +523,23 @@ namespace vcs__Mix00
 
         private void button14_Click(object sender, EventArgs e)
         {
-            /*
-            //測不出來
-            File.Encrypt(@"C:\_git\vcs_test_all_02\vcs_test_all_02\bin\Debug\aaa.txt");
-            richTextBox1.Text += "加密成功！\n";
-            */
-
-            File.Copy(@"C:\_git\vcs_test_all_02\vcs_test_all_02\bin\Debug\aaa.txt", @"C:\_git\vcs_test_all_02\vcs_test_all_02\bin\Debug\bbb.txt");
-            //檔案複製，注意要確認C:\VS2012\TT.txt有檔案
-            richTextBox1.Text += "複製成功！\n";
-
+            File.Copy(@"../../Form1.cs", @"aaaaa.cs");
+            richTextBox1.Text += "複製檔案完成\n";
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
-            String result = "";
-            foreach (String a in Directory.GetDirectories(@"C:\_git\vcs_test_all_02\vcs_test_all_02\bin\Debug"))
-                result += "資料夾\t" + a + "\r\n";
-            //取得C:\VS2012下的資料夾資訊
-            foreach (String a in Directory.GetFiles(@"C:\_git\vcs_test_all_02\vcs_test_all_02\bin\Debug"))
-                result += "檔案\t" + a + "\r\n";
-            //取得C:\VS2012下的檔案資訊
-            richTextBox1.Text += result + "\n";
+            string foldername = @"C:\______test_files\__text";
+
+            foreach (String a in Directory.GetDirectories(foldername))
+            {
+                richTextBox1.Text += "找到資料夾\t" + a + "\n";
+            }
+
+            foreach (String a in Directory.GetFiles(foldername))
+            {
+                richTextBox1.Text += "找到檔案\t" + a + "\n";
+            }
         }
 
         private void bt_rename_Click(object sender, EventArgs e)
@@ -573,35 +568,32 @@ namespace vcs__Mix00
             foreach (DriveInfo d in allDrives)
             {
                 richTextBox1.Text += "Drive : " + d.Name + "\tFile type : " + d.DriveType + "\n";
-            }
-
-            foreach (DriveInfo d in allDrives)
-            {
                 if (d.DriveType == DriveType.Removable)
                 {
                     richTextBox1.Text += "Removable Device : " + d.Name + "\n";
                 }
             }
-        }
 
-        private void button17_Click(object sender, EventArgs e)
-        {
             //獲取計算機磁盤空間
             //在System.IO命名空間下的DriveInfo類的GetDrives()方法可以用來獲得計算機上的所有邏輯驅動器的名稱。DriveInfo類的TotalSize屬性可義獲得磁盤的空間大小。
-            System.IO.DriveInfo[] drive = System.IO.DriveInfo.GetDrives();
-            for (int i = 0; i < drive.Length; i++)
-            {
-                richTextBox1.Text += "取得磁碟 : " + drive[i].Name;
 
-                if (drive[i].IsReady == true)
+            for (int i = 0; i < allDrives.Length; i++)
+            {
+                richTextBox1.Text += "取得磁碟 : " + allDrives[i].Name;
+
+                if (allDrives[i].IsReady == true)
                 {
-                    richTextBox1.Text += "\t空間 : " + Convert.ToString(drive[i].TotalSize / 1024 / 1024 / 1024) + "GB\n";
+                    richTextBox1.Text += "\t空間 : " + Convert.ToString(allDrives[i].TotalSize / 1024 / 1024 / 1024) + "GB\n";
                 }
                 else
                 {
                     richTextBox1.Text += "\n";
                 }
             }
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -814,7 +806,11 @@ namespace vcs__Mix00
 
         private void button24_Click(object sender, EventArgs e)
         {
-
+            //加密檔案, 看似無用
+            /*
+            File.Encrypt(@"aaa.cs");
+            richTextBox1.Text += "加密成功！\n";
+            */
         }
 
         private void button25_Click(object sender, EventArgs e)
