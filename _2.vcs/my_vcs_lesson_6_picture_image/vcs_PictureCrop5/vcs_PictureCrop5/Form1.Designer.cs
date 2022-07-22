@@ -40,14 +40,12 @@
             this.lb_y_st = new System.Windows.Forms.Label();
             this.lb_w = new System.Windows.Forms.Label();
             this.nud_w = new System.Windows.Forms.NumericUpDown();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox_selection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_x_st)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_y_st)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_h)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_w)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -55,13 +53,13 @@
             this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(800, 531);
+            this.pictureBox1.Size = new System.Drawing.Size(1000, 600);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(818, 392);
+            this.button1.Location = new System.Drawing.Point(1027, 12);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 45);
             this.button1.TabIndex = 1;
@@ -71,9 +69,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(1054, 392);
+            this.richTextBox1.Location = new System.Drawing.Point(1033, 303);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(236, 256);
+            this.richTextBox1.Size = new System.Drawing.Size(236, 309);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             // 
@@ -87,7 +85,7 @@
             this.groupBox_selection.Controls.Add(this.lb_y_st);
             this.groupBox_selection.Controls.Add(this.lb_w);
             this.groupBox_selection.Controls.Add(this.nud_w);
-            this.groupBox_selection.Location = new System.Drawing.Point(818, 456);
+            this.groupBox_selection.Location = new System.Drawing.Point(1033, 93);
             this.groupBox_selection.Name = "groupBox_selection";
             this.groupBox_selection.Size = new System.Drawing.Size(230, 192);
             this.groupBox_selection.TabIndex = 16;
@@ -190,22 +188,12 @@
             this.nud_w.TabIndex = 9;
             this.nud_w.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // pictureBox2
-            // 
-            this.pictureBox2.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox2.Location = new System.Drawing.Point(818, 12);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(472, 329);
-            this.pictureBox2.TabIndex = 4;
-            this.pictureBox2.TabStop = false;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1302, 660);
+            this.ClientSize = new System.Drawing.Size(1282, 626);
             this.Controls.Add(this.groupBox_selection);
-            this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.pictureBox1);
@@ -219,7 +207,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.nud_y_st)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_h)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.nud_w)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -238,7 +225,6 @@
         private System.Windows.Forms.Label lb_y_st;
         private System.Windows.Forms.Label lb_w;
         private System.Windows.Forms.NumericUpDown nud_w;
-        private System.Windows.Forms.PictureBox pictureBox2;
     }
 }
 

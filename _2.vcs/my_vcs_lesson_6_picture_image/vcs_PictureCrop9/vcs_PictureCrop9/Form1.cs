@@ -140,39 +140,6 @@ namespace vcs_PictureCrop9
 
         }
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            if ((x_st < 0) || (y_st < 0) || (w <= 0) || (h <= 0))
-            {
-                richTextBox1.Text += "選取位置錯誤\n";
-
-                return;
-            }
-
-            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-
-            try
-            {
-                Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
-                Rectangle cropArea = new Rectangle(x_st, y_st, w, h);    //要截取的區域大小
-                //pictureBox2.Image = bitmap1.Clone(cropArea, PixelFormat.Format32bppArgb);
-
-                bitmap1.Clone(cropArea, PixelFormat.Format32bppArgb).Save(filename, ImageFormat.Bmp);
-
-                //bitmap1.Save(@file1, ImageFormat.Jpeg);
-                //bitmap1.Save(filename, ImageFormat.Bmp);
-                //bitmap1.Save(@file3, ImageFormat.Png);
-
-                //richTextBox1.Text += "已存檔 : " + file1 + "\n";
-                richTextBox1.Text += "已存檔 : " + filename + "\n";
-                //richTextBox1.Text += "已存檔 : " + file3 + "\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-            }
-        }
-
         void update_crop_picture()
         {
             if ((nud_x_st.Value < 0) || (nud_y_st.Value < 0) || (nud_w.Value <= 0) || (nud_h.Value <= 0))

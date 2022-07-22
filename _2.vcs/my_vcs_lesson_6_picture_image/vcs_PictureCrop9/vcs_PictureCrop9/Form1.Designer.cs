@@ -40,7 +40,6 @@
             this.nud_w = new System.Windows.Forms.NumericUpDown();
             this.lb_h = new System.Windows.Forms.Label();
             this.nud_h = new System.Windows.Forms.NumericUpDown();
-            this.button2 = new System.Windows.Forms.Button();
             this.groupBox_selection = new System.Windows.Forms.GroupBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -168,16 +167,6 @@
             this.nud_h.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.nud_h.ValueChanged += new System.EventHandler(this.nud_h_ValueChanged);
             // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(266, 535);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(93, 38);
-            this.button2.TabIndex = 13;
-            this.button2.Text = "截圖";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // groupBox_selection
             // 
             this.groupBox_selection.Controls.Add(this.lb_x_st);
@@ -201,7 +190,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(978, 651);
             this.Controls.Add(this.groupBox_selection);
-            this.Controls.Add(this.button2);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.button1);
@@ -235,7 +223,6 @@
         private System.Windows.Forms.NumericUpDown nud_w;
         private System.Windows.Forms.Label lb_h;
         private System.Windows.Forms.NumericUpDown nud_h;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.GroupBox groupBox_selection;
     }
 }

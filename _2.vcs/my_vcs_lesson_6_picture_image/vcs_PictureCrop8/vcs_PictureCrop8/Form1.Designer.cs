@@ -30,7 +30,6 @@
         {
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tb_h = new System.Windows.Forms.TextBox();
             this.tb_w = new System.Windows.Forms.TextBox();
@@ -76,22 +75,10 @@
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button1.Location = new System.Drawing.Point(84, 127);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(81, 45);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "save";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.tb_h);
             this.groupBox1.Controls.Add(this.tb_w);
-            this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.tb_y_st);
             this.groupBox1.Controls.Add(this.tb_x_st);
             this.groupBox1.Controls.Add(this.label1);
@@ -298,7 +285,6 @@
 
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox tb_h;
         private System.Windows.Forms.TextBox tb_w;

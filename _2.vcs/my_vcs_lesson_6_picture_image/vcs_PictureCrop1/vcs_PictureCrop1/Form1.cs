@@ -226,18 +226,26 @@ namespace vcs_PictureCrop1
 
         private void button6_Click(object sender, EventArgs e)
         {
-            if ((select_rectangle.Width <= 0) || (select_rectangle.Height <= 0))
-                return;
-
             int x_st = (int)nud_x_st.Value;
             int y_st = (int)nud_y_st.Value;
             int w = (int)nud_w.Value;
             int h = (int)nud_h.Value;
-            String filename = Application.StartupPath + "\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-            Bitmap bitmap = new Bitmap(pictureBox1.Image);
+
+            if ((x_st < 0) || (y_st < 0) || (w <= 0) || (h <= 0))
+            {
+                richTextBox1.Text += "選取位置錯誤\n";
+                return;
+            }
+
             select_rectangle = new Rectangle(x_st, y_st, w, h);
             //richTextBox1.Text += select_rectangle.ToString() + "\n";
-            Bitmap cloneBitmap = bitmap.Clone(select_rectangle, PixelFormat.DontCare);
+
+            if ((select_rectangle.Width <= 0) || (select_rectangle.Height <= 0))
+                return;
+
+            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            Bitmap bitmap = new Bitmap(pictureBox1.Image);
+            Bitmap cloneBitmap = bitmap.Clone(select_rectangle, PixelFormat.DontCare);  //或是 PixelFormat.Format32bppArgb
             cloneBitmap.Save(filename, ImageFormat.Bmp);
             richTextBox1.Text += "存截圖，存檔檔名：" + filename + "\n";
         }
