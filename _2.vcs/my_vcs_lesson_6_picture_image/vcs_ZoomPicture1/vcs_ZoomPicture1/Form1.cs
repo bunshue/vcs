@@ -27,6 +27,10 @@ namespace vcs_ZoomPicture1
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             g = this.CreateGraphics();	//這個視窗，就是畫布
         }
 
@@ -57,7 +61,7 @@ namespace vcs_ZoomPicture1
             switch (e.KeyCode)   //根據e.KeyCode分別執行
             {
                 case Keys.Add:
-                    if(ratio < 500)
+                    if (ratio < 500)
                         ratio += 10;
                     this.Refresh();
                     break;
@@ -99,32 +103,5 @@ namespace vcs_ZoomPicture1
             }
         }
 
-        private void Form1_MouseDown(object sender, MouseEventArgs e)
-        {
-            flag_mouse_down = true;
-            mouse_down_position_x = e.X;
-            mouse_down_position_y = e.Y;
-
-            label2.Text = "MouseDown   (" + e.X.ToString() + ", " + e.Y + ")";
-
-        }
-
-        private void Form1_MouseUp(object sender, MouseEventArgs e)
-        {
-            mouse_up_position_x = e.X;
-            mouse_up_position_y = e.Y;
-
-            label2.Text += "  MouseUp   (" + e.X.ToString() + ", " + e.Y + ") ";
-            flag_mouse_down = false;
-            this.Refresh();
-        }
-
-        private void Form1_MouseMove(object sender, MouseEventArgs e)
-        {
-            //label2.Text += "  MouseMove";
-
-            //this.Refresh();
-
-        }
     }
 }

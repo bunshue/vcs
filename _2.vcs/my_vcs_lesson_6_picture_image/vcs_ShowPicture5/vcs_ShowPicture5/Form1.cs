@@ -74,8 +74,9 @@ namespace vcs_ShowPicture5
         private void timer1_Tick(object sender, EventArgs e)
         {
             //固定一張圖
-            //string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files\picture1.jpg";
 
+            /*
             //任選一張圖
             DirectoryInfo DInfo = new DirectoryInfo(foldername);
             FileInfo[] FInfo = DInfo.GetFiles();
@@ -95,6 +96,11 @@ namespace vcs_ShowPicture5
             }
 
             filename = foldername + FInfo[sel_picture].Name;
+            */
+
+            //看似有點問題
+            //應改只要撈出圖片檔即可
+
 
             Image image = Image.FromFile(filename);
             if (image != null)

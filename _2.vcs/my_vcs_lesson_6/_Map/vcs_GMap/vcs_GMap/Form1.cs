@@ -2542,7 +2542,16 @@ namespace vcs_GMap
                 latitude = (39.92244 + 39.92280 + 39.91378 + 39.91346) / 4;     //緯度
                 longitude = (116.3922 + 116.4015 + 116.4019 + 116.3926) / 4;    //經度
                 gMapControl1.Position = new PointLatLng(latitude, longitude); //地圖中心位置
-                gMapControl1.Zoom = 15; //當前比例
+                //gMapControl1.Zoom = 15; //當前比例
+
+                string[,] location = null;
+
+                location = new string[,] {
+            { "圓明園", "40.007222", "116.2925"},
+            { "中華書局", "39.88244693415653", "116.31404671396393"},
+            };
+                show_locations(location);
+                gMapControl1.Zoom = 12; //當前比例
 
                 update_controls_info();
             }

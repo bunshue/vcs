@@ -18,6 +18,8 @@ namespace vcs_PictureCrop5
         Bitmap bitmap2; //畫臨時框
         string filename = @"C:\______test_files\elephant.jpg";
 
+        private Rectangle select_rectangle = new Rectangle(new Point(0, 0), new Size(0, 0));    //用來保存截圖的矩形
+
         private float PictureScale = 1;
 
         public Form1()
@@ -45,6 +47,11 @@ namespace vcs_PictureCrop5
             pictureBox1.Cursor = Cursors.Cross;
         }
 
+        private Rectangle MakeRectangle(Point pt1, Point pt2)
+        {
+            return new Rectangle(Math.Min(pt1.X, pt2.X), Math.Min(pt1.Y, pt2.Y), Math.Abs(pt1.X - pt2.X), Math.Abs(pt1.Y - pt2.Y));
+        }
+
         private Point point_st;
         private Point point_sp;
         private Graphics g;
@@ -66,7 +73,9 @@ namespace vcs_PictureCrop5
             //richTextBox1.Text += "pictureBox1_MouseMove\n";
 
             // Save the new point.
-            point_sp = e.Location;
+            point_sp = e.Location; //終點座標
+
+            select_rectangle = MakeRectangle(point_st, point_sp);
 
             // Draw the selection rectangle.
             g.DrawImage(bitmap1, 0, 0); //恢復原圖
@@ -100,7 +109,10 @@ namespace vcs_PictureCrop5
             float y_st = Math.Min(point_st.Y, point_sp.Y) * PictureScale;
             float W = Math.Abs(point_st.X - point_sp.X) * PictureScale;
             float H = Math.Abs(point_st.Y - point_sp.Y) * PictureScale;
-            label1.Text = "擷取 x = " + x_st.ToString() + ", y = " + y_st.ToString() + ", W = " + W.ToString() + ", H = " + H.ToString();
+
+            //label1.Text = "擷取 x = " + x_st.ToString() + ", y = " + y_st.ToString() + ", W = " + W.ToString() + ", H = " + H.ToString();
+            label1.Text = "擷取 : " + select_rectangle.ToString();
+                 
             button1.Text = "擷取";
 
             Bitmap bitmap1b = (Bitmap)bitmap1.Clone();

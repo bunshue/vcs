@@ -14,9 +14,9 @@ namespace vcs_Draw_Bitmap
 {
     public partial class Form1 : Form
     {
-        Graphics g;
-        Pen p;
-        SolidBrush sb;
+        //Graphics g;
+        //Pen p;
+        //SolidBrush sb;
         Bitmap bitmap1;
 
         string filename = @"C:\______test_files\picture1.jpg";
@@ -391,9 +391,20 @@ namespace vcs_Draw_Bitmap
 
         }
 
+        double ratio = 0.5f;
         private void button21_Click(object sender, EventArgs e)
         {
+            //改變Bitmap大小
 
+            Bitmap bitmap1;
+            Bitmap bitmap2;
+
+            bitmap1 = (Bitmap)Bitmap.FromFile(filename);
+            bitmap2 = ImageResize.Resize(bitmap1, ratio);
+
+            pictureBox1.Image = bitmap2;
+
+            ratio += 0.2f;
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -485,4 +496,27 @@ namespace vcs_Draw_Bitmap
             return bitmap1;
         }
     }
+
+    public class ImageResize
+    {
+        public static Bitmap Resize(Bitmap originImage, Double times)
+        {
+            int width = Convert.ToInt32(originImage.Width * times);
+            int height = Convert.ToInt32(originImage.Height * times);
+
+            return Process(originImage, originImage.Width, originImage.Height, width, height);
+        }
+
+        private static Bitmap Process(Bitmap originImage, int oriwidth, int oriheight, int width, int height)
+        {
+            Bitmap resizedbitmap = new Bitmap(width, height);
+            Graphics g = Graphics.FromImage(resizedbitmap);
+            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            g.Clear(Color.Transparent);
+            g.DrawImage(originImage, new Rectangle(0, 0, width, height), new Rectangle(0, 0, oriwidth, oriheight), GraphicsUnit.Pixel);
+            return resizedbitmap;
+        }
+    }
 }
+

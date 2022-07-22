@@ -123,11 +123,13 @@ namespace vcs_ImageViewer
             lb_pixel_info = new Label();
             lb_pixel_info.Location = new Point(x_st, y_st + 0);
             lb_pixel_info.Text = "PixelInfo";
+            lb_pixel_info.Size = new Size(150, 50);
             this.Controls.Add(lb_pixel_info);
 
             lb_image_info = new Label();
             lb_image_info.Location = new Point(x_st, y_st + 40);
             lb_image_info.Text = "ImageInfo";
+            lb_image_info.Size = new Size(150, 50);
             this.Controls.Add(lb_image_info);
 
             pictureBox1.Size = new Size(1000, 800);
@@ -361,13 +363,13 @@ namespace vcs_ImageViewer
         private void pictureBox1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             richTextBox1.Text += "pictureBox1_PreviewKeyDown\n";
-            if ((e.KeyCode == Keys.Right) || (e.KeyCode == Keys.Down))
+            if ((e.KeyCode == Keys.Right) || (e.KeyCode == Keys.Down) || (e.KeyCode == Keys.PageDown))
             {
                 // 次の画像ファイルを開く
                 richTextBox1.Text += "pictureBox1_PreviewKeyDown 右 下\n";
                 OpenNextFile(filename);
             }
-            else if ((e.KeyCode == Keys.Left) || (e.KeyCode == Keys.Up))
+            else if ((e.KeyCode == Keys.Left) || (e.KeyCode == Keys.Up) || (e.KeyCode == Keys.PageUp))
             {
                 // 前の画像ファイルを開く
                 richTextBox1.Text += "pictureBox1_PreviewKeyDown 左 上\n";

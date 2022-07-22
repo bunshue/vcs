@@ -50,16 +50,6 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.button20 = new System.Windows.Forms.Button();
-            this.button21 = new System.Windows.Forms.Button();
-            this.button22 = new System.Windows.Forms.Button();
-            this.button23 = new System.Windows.Forms.Button();
-            this.button24 = new System.Windows.Forms.Button();
-            this.button25 = new System.Windows.Forms.Button();
-            this.button26 = new System.Windows.Forms.Button();
-            this.button27 = new System.Windows.Forms.Button();
-            this.button28 = new System.Windows.Forms.Button();
-            this.button29 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // bt_clear
@@ -80,7 +70,7 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(180, 55);
             this.button19.TabIndex = 54;
-            this.button19.Text = "MD5加密 i";
+            this.button19.Text = "MD5 加密";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -91,7 +81,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(180, 55);
             this.button18.TabIndex = 53;
-            this.button18.Text = "MD5加密 h";
+            this.button18.Text = "MD5 加密";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -102,7 +92,7 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(180, 55);
             this.button17.TabIndex = 52;
-            this.button17.Text = "MD5加密 g";
+            this.button17.Text = "MD5 加密";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -113,7 +103,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(180, 55);
             this.button16.TabIndex = 51;
-            this.button16.Text = "MD5加密 f";
+            this.button16.Text = "MD5 加密";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -124,7 +114,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(180, 55);
             this.button15.TabIndex = 50;
-            this.button15.Text = "MD5加密 e";
+            this.button15.Text = "MD5 加密";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -135,7 +125,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(180, 55);
             this.button14.TabIndex = 49;
-            this.button14.Text = "MD5加密 d";
+            this.button14.Text = "MD5 加密";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
@@ -146,7 +136,7 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(180, 55);
             this.button13.TabIndex = 48;
-            this.button13.Text = "MD5加密 c";
+            this.button13.Text = "MD5 加密";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -157,7 +147,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(180, 55);
             this.button12.TabIndex = 47;
-            this.button12.Text = "MD5加密 b";
+            this.button12.Text = "MD5 加密";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -168,7 +158,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(180, 55);
             this.button11.TabIndex = 46;
-            this.button11.Text = "MD5加密 a";
+            this.button11.Text = "MD5 加密";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -179,7 +169,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(180, 55);
             this.button10.TabIndex = 45;
-            this.button10.Text = "32/16位MD5";
+            this.button10.Text = "MD5 加密";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -190,7 +180,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(180, 55);
             this.button9.TabIndex = 44;
-            this.button9.Text = "MD5加密";
+            this.button9.Text = "MD5 加密";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -201,7 +191,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(180, 55);
             this.button8.TabIndex = 43;
-            this.button8.Text = "MD5加密";
+            this.button8.Text = "MD5 加密";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -212,7 +202,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(180, 55);
             this.button0.TabIndex = 42;
-            this.button0.Text = "MD5";
+            this.button0.Text = "MD5(用自建函數)";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -223,15 +213,15 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(180, 55);
             this.button7.TabIndex = 41;
-            this.button7.Text = "MD5   32位";
+            this.button7.Text = "MD5 加密";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(619, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(420, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(565, 649);
+            this.richTextBox1.Size = new System.Drawing.Size(764, 649);
             this.richTextBox1.TabIndex = 40;
             this.richTextBox1.Text = "";
             // 
@@ -242,7 +232,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(180, 55);
             this.button6.TabIndex = 39;
-            this.button6.Text = "MD5";
+            this.button6.Text = "MD5 加密";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -253,7 +243,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(180, 55);
             this.button5.TabIndex = 38;
-            this.button5.Text = "MD5";
+            this.button5.Text = "MD5 加密";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -264,7 +254,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(180, 55);
             this.button4.TabIndex = 37;
-            this.button4.Text = "MD5加密";
+            this.button4.Text = "MD5 加密";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -275,7 +265,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(180, 55);
             this.button3.TabIndex = 36;
-            this.button3.Text = "MD5驗證 32 位元";
+            this.button3.Text = "MD5 加密";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -286,7 +276,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(180, 55);
             this.button2.TabIndex = 35;
-            this.button2.Text = "MD5(用類別)";
+            this.button2.Text = "MD5 加密";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -297,135 +287,15 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(180, 55);
             this.button1.TabIndex = 34;
-            this.button1.Text = "MD5(用自建函數)";
+            this.button1.Text = "MD5(用類別)";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button20
-            // 
-            this.button20.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button20.Location = new System.Drawing.Point(420, 12);
-            this.button20.Name = "button20";
-            this.button20.Size = new System.Drawing.Size(180, 55);
-            this.button20.TabIndex = 56;
-            this.button20.Text = "MD5加密 j";
-            this.button20.UseVisualStyleBackColor = true;
-            this.button20.Click += new System.EventHandler(this.button20_Click);
-            // 
-            // button21
-            // 
-            this.button21.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button21.Location = new System.Drawing.Point(420, 73);
-            this.button21.Name = "button21";
-            this.button21.Size = new System.Drawing.Size(180, 55);
-            this.button21.TabIndex = 57;
-            this.button21.Text = "MD5加密 k";
-            this.button21.UseVisualStyleBackColor = true;
-            this.button21.Click += new System.EventHandler(this.button21_Click);
-            // 
-            // button22
-            // 
-            this.button22.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button22.Location = new System.Drawing.Point(420, 134);
-            this.button22.Name = "button22";
-            this.button22.Size = new System.Drawing.Size(180, 55);
-            this.button22.TabIndex = 58;
-            this.button22.Text = "MD5加密 l";
-            this.button22.UseVisualStyleBackColor = true;
-            this.button22.Click += new System.EventHandler(this.button22_Click);
-            // 
-            // button23
-            // 
-            this.button23.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button23.Location = new System.Drawing.Point(420, 195);
-            this.button23.Name = "button23";
-            this.button23.Size = new System.Drawing.Size(180, 55);
-            this.button23.TabIndex = 59;
-            this.button23.Text = "MD5加密 m";
-            this.button23.UseVisualStyleBackColor = true;
-            this.button23.Click += new System.EventHandler(this.button23_Click);
-            // 
-            // button24
-            // 
-            this.button24.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button24.Location = new System.Drawing.Point(420, 256);
-            this.button24.Name = "button24";
-            this.button24.Size = new System.Drawing.Size(180, 55);
-            this.button24.TabIndex = 60;
-            this.button24.Text = "MD5加密 n";
-            this.button24.UseVisualStyleBackColor = true;
-            this.button24.Click += new System.EventHandler(this.button24_Click);
-            // 
-            // button25
-            // 
-            this.button25.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button25.Location = new System.Drawing.Point(420, 327);
-            this.button25.Name = "button25";
-            this.button25.Size = new System.Drawing.Size(180, 55);
-            this.button25.TabIndex = 61;
-            this.button25.Text = "MD5加密 o";
-            this.button25.UseVisualStyleBackColor = true;
-            this.button25.Click += new System.EventHandler(this.button25_Click);
-            // 
-            // button26
-            // 
-            this.button26.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button26.Location = new System.Drawing.Point(420, 399);
-            this.button26.Name = "button26";
-            this.button26.Size = new System.Drawing.Size(180, 55);
-            this.button26.TabIndex = 62;
-            this.button26.Text = "MD5加密 p";
-            this.button26.UseVisualStyleBackColor = true;
-            this.button26.Click += new System.EventHandler(this.button26_Click);
-            // 
-            // button27
-            // 
-            this.button27.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button27.Location = new System.Drawing.Point(420, 460);
-            this.button27.Name = "button27";
-            this.button27.Size = new System.Drawing.Size(180, 55);
-            this.button27.TabIndex = 63;
-            this.button27.Text = "MD5加密 q";
-            this.button27.UseVisualStyleBackColor = true;
-            this.button27.Click += new System.EventHandler(this.button27_Click);
-            // 
-            // button28
-            // 
-            this.button28.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button28.Location = new System.Drawing.Point(420, 521);
-            this.button28.Name = "button28";
-            this.button28.Size = new System.Drawing.Size(180, 55);
-            this.button28.TabIndex = 64;
-            this.button28.Text = "MD5加密 r";
-            this.button28.UseVisualStyleBackColor = true;
-            this.button28.Click += new System.EventHandler(this.button28_Click);
-            // 
-            // button29
-            // 
-            this.button29.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button29.Location = new System.Drawing.Point(420, 582);
-            this.button29.Name = "button29";
-            this.button29.Size = new System.Drawing.Size(180, 55);
-            this.button29.TabIndex = 65;
-            this.button29.Text = "MD5加密 s";
-            this.button29.UseVisualStyleBackColor = true;
-            this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1202, 672);
-            this.Controls.Add(this.button29);
-            this.Controls.Add(this.button28);
-            this.Controls.Add(this.button27);
-            this.Controls.Add(this.button26);
-            this.Controls.Add(this.button25);
-            this.Controls.Add(this.button24);
-            this.Controls.Add(this.button23);
-            this.Controls.Add(this.button22);
-            this.Controls.Add(this.button21);
-            this.Controls.Add(this.button20);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.button19);
             this.Controls.Add(this.button18);
@@ -479,16 +349,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button20;
-        private System.Windows.Forms.Button button21;
-        private System.Windows.Forms.Button button22;
-        private System.Windows.Forms.Button button23;
-        private System.Windows.Forms.Button button24;
-        private System.Windows.Forms.Button button25;
-        private System.Windows.Forms.Button button26;
-        private System.Windows.Forms.Button button27;
-        private System.Windows.Forms.Button button28;
-        private System.Windows.Forms.Button button29;
     }
 }
 

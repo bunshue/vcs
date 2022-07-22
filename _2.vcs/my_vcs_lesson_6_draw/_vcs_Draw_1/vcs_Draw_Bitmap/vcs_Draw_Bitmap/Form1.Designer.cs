@@ -333,6 +333,7 @@
             this.button21.Name = "button21";
             this.button21.Size = new System.Drawing.Size(170, 70);
             this.button21.TabIndex = 146;
+            this.button21.Text = "改變Bitmap大小";
             this.button21.UseVisualStyleBackColor = true;
             this.button21.Click += new System.EventHandler(this.button21_Click);
             // 

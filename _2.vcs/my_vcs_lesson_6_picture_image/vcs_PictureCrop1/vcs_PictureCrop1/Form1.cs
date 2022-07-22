@@ -68,13 +68,11 @@ namespace vcs_PictureCrop1
 
             pictureBox1.Size = new Size(pbx_W, pbx_H);
             pictureBox2.Size = new Size(pbx_W, pbx_H);
-            richTextBox1.Size = new Size(pbx_W, pbx_H);
             //pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             //pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
 
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            richTextBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
         }
 
         // Return a Rectangle with these points as corners.
@@ -290,4 +288,3 @@ namespace vcs_PictureCrop1
         }
     }
 }
-

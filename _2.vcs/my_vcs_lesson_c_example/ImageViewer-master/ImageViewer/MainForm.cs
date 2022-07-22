@@ -100,22 +100,25 @@ namespace ImageViewer
 
             pictureBox1.Size = new Size(1920 * 7 / 10, 500);
 
-            richTextBox1.Size = new Size(200, 500);
-
             int x_st = this.Width - 250;
             int y_st = 50;
 
             lb_pixel_info = new Label();
             lb_pixel_info.Location = new Point(x_st, y_st + 0);
             lb_pixel_info.Text = "PixelInfo";
+            lb_pixel_info.Size = new Size(150, 50);
             this.Controls.Add(lb_pixel_info);
 
             lb_image_info = new Label();
             lb_image_info.Location = new Point(x_st, y_st + 40);
             lb_image_info.Text = "ImageInfo";
+            lb_image_info.Size = new Size(150, 50);
             this.Controls.Add(lb_image_info);
 
-            richTextBox1.Location = new Point(x_st, y_st + 80);
+            richTextBox1.Size = new Size(300, 700);
+            richTextBox1.Location = new Point(x_st-70, y_st + 80);
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             bt_exit_setup();
         }
@@ -148,6 +151,11 @@ namespace ImageViewer
 
             this.Controls.Add(bt_exit); // 將按鈕加入表單
             bt_exit.BringToFront();     //移到最上層
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -274,13 +282,13 @@ namespace ImageViewer
         private void pictureBox1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {
             richTextBox1.Text += "pictureBox1_PreviewKeyDown\n";
-            if ((e.KeyCode == Keys.Right) || (e.KeyCode == Keys.Down))
+            if ((e.KeyCode == Keys.Right) || (e.KeyCode == Keys.Down) || (e.KeyCode == Keys.PageDown))
             {
                 // 次の画像ファイルを開く
                 richTextBox1.Text += "pictureBox1_PreviewKeyDown 右 下\n";
                 OpenNextFile(image_filename);
             }
-            else if ((e.KeyCode == Keys.Left) || (e.KeyCode == Keys.Up))
+            else if ((e.KeyCode == Keys.Left) || (e.KeyCode == Keys.Up) || (e.KeyCode == Keys.PageUp))
             {
                 // 前の画像ファイルを開く
                 richTextBox1.Text += "pictureBox1_PreviewKeyDown 左 上\n";
@@ -598,4 +606,3 @@ namespace ImageViewer
         }
     }
 }
-
