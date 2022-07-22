@@ -7,7 +7,8 @@
     <ProjectGuid>{765F3178-881C-4D66-A672-7AA5D51A7BE9}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ApplicationIcon>App.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
     <AssemblyKeyContainerName />
     <AssemblyName>MoonPhase</AssemblyName>
     <AssemblyOriginatorKeyFile />
@@ -90,7 +91,6 @@
     <Compile Include="frmMoon.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Content Include="App.ico" />
     <EmbeddedResource Include="frmMoon.resx">
       <DependentUpon>frmMoon.cs</DependentUpon>
     </EmbeddedResource>

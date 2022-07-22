@@ -13,7 +13,6 @@ namespace MoonPhase
     /// </summary>
     public class frmMoon : System.Windows.Forms.Form
     {
-        private System.Windows.Forms.Button btnClose;
         private System.Windows.Forms.MonthCalendar MyCalendar;
         private System.Windows.Forms.PictureBox PicMoon;
         private System.Windows.Forms.Button btnToDay;
@@ -54,9 +53,7 @@ namespace MoonPhase
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMoon));
             this.btnToDay = new System.Windows.Forms.Button();
-            this.btnClose = new System.Windows.Forms.Button();
             this.MyCalendar = new System.Windows.Forms.MonthCalendar();
             this.lblAge = new System.Windows.Forms.Label();
             this.PicMoon = new System.Windows.Forms.PictureBox();
@@ -77,18 +74,6 @@ namespace MoonPhase
             this.btnToDay.TabIndex = 2;
             this.btnToDay.Text = "Moon today";
             this.btnToDay.Click += new System.EventHandler(this.btnToDay_Click);
-            // 
-            // btnClose
-            // 
-            this.btnClose.Font = new System.Drawing.Font("Tahoma", 8.25F);
-            this.btnClose.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnClose.Location = new System.Drawing.Point(333, 203);
-            this.btnClose.Name = "btnClose";
-            this.btnClose.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.btnClose.Size = new System.Drawing.Size(75, 28);
-            this.btnClose.TabIndex = 4;
-            this.btnClose.Text = "Close";
-            this.btnClose.Click += new System.EventHandler(this.btnClose_Click);
             // 
             // MyCalendar
             // 
@@ -159,15 +144,13 @@ namespace MoonPhase
             this.Controls.Add(this.PicMoon);
             this.Controls.Add(this.lblAge);
             this.Controls.Add(this.MyCalendar);
-            this.Controls.Add(this.btnClose);
             this.Controls.Add(this.btnToDay);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.Name = "frmMoon";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "*Moon Phase*";
+            this.Text = "дым█";
             this.Load += new System.EventHandler(this.frmMoon_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PicMoon)).EndInit();
             this.ResumeLayout(false);
@@ -345,11 +328,6 @@ namespace MoonPhase
         {
             //set the date of today
             this.MyCalendar.SetDate(this.MyCalendar.TodayDate.Date);
-        }
-
-        private void btnClose_Click(object sender, System.EventArgs e)
-        {
-            Application.Exit();
         }
 
         private void button1_Click(object sender, EventArgs e)

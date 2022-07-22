@@ -16,9 +16,18 @@ namespace vcs_PictureBox
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             comboBox1.SelectedIndex = 0;
             //pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+
+            //讀取圖檔
+            string filename = @"C:\______test_files\picture1.jpg";
+            pictureBox1.Image = Image.FromFile(filename);
         }
+
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -128,52 +137,10 @@ namespace vcs_PictureBox
 
         private void button10_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Image == null)
-                return;
-
-            //顯示圖片
-            richTextBox1.Text += "圖片大小：\tW=" + pictureBox1.Image.Width.ToString()+ "\t";
-            richTextBox1.Text += "H=" + pictureBox1.Image.Height.ToString() + "\n";
-
-            #region 影像縮放(縮小一半)
-            richTextBox1.Text += "縮小一半\n";
-            //建立新的影像，長寬為原始影像的1/2
-            Image zoomImage = new Bitmap(pictureBox1.Image.Width / 2, pictureBox1.Image.Height / 2) as Image;
-            //準備繪製新的影像
-            Graphics graphics0 = Graphics.FromImage(zoomImage);
-            //於座標(0,0)開始繪製來源影像，長寬設置為來源影像的1/2
-            graphics0.DrawImage(pictureBox1.Image, 0, 0, pictureBox1.Image.Width / 2, pictureBox1.Image.Height / 2);
-            graphics0.Dispose();
-            //儲存新的影像
-            string filename = Application.StartupPath + "\\zoom_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-            zoomImage.Save(@filename, ImageFormat.Jpeg);
-            richTextBox1.Text += "縮小一半，存檔完成，檔名：" + filename + "\n";
-            #endregion
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            if (pictureBox1.Image == null)
-                return;
-
-            //顯示圖片
-            richTextBox1.Text += "圖片大小：\tW=" + pictureBox1.Image.Width.ToString() + "\t";
-            richTextBox1.Text += "H=" + pictureBox1.Image.Height.ToString() + "\n";
-
-            #region 影像放大(放大一倍)
-            richTextBox1.Text += "放大一倍\n";
-            //建立新的影像，長寬為原始影像的2倍
-            Image zoomImageb = new Bitmap(pictureBox1.Image.Width * 2, pictureBox1.Image.Height * 2) as Image;
-            //準備繪製新的影像
-            Graphics graphics0a = Graphics.FromImage(zoomImageb);
-            //於座標(0,0)開始繪製來源影像，長寬設置為來源影像的2倍
-            graphics0a.DrawImage(pictureBox1.Image, 0, 0, pictureBox1.Image.Width * 2, pictureBox1.Image.Height * 2);
-            graphics0a.Dispose();
-            //儲存新的影像
-            string filename = Application.StartupPath + "\\big_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-            zoomImageb.Save(@filename, ImageFormat.Jpeg);
-            richTextBox1.Text += "放大一倍，存檔完成，檔名：" + filename + "\n";
-            #endregion
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -182,22 +149,6 @@ namespace vcs_PictureBox
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //複製部分圖片
-            // Create a Bitmap object from a file.
-            Bitmap myBitmap = new Bitmap(@"C:/______test_files/bear.jpg");
-
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.Image = myBitmap;
-
-            // Clone a portion of the Bitmap object.
-            RectangleF cloneRect = new RectangleF(530, 30, 200, 200);
-            System.Drawing.Imaging.PixelFormat format =
-                myBitmap.PixelFormat;
-            Bitmap cloneBitmap = myBitmap.Clone(cloneRect, format);
-
-            // Draw the cloned portion of the Bitmap object.
-            Graphics g = pictureBox2.CreateGraphics();
-            g.DrawImage(cloneBitmap, 0, 0);
         }
 
         bool flag_mouse_down = false;
@@ -347,5 +298,6 @@ namespace vcs_PictureBox
 
             flag_mouse_down = false;
         }
+
     }
 }

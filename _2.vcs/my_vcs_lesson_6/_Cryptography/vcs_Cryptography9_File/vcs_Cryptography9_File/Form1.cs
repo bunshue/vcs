@@ -187,7 +187,7 @@ namespace vcs_Cryptography9_File
             Console.WriteLine(string.Format("計算文件的 MD5 值：{0}", HashHelper.MD5File(filename)));
             richTextBox1.Text += "計算文件的 MD5 值：" + HashHelper.MD5File(filename) + "\n";
 
-            //算一個檔案的MD5值
+            //算一個檔案的MD5值, 取得檔案的唯一檢查碼Checksum MD5
             using (FileStream fs = File.OpenRead(filename))
             {
                 MD5 md5 = MD5.Create();
@@ -195,15 +195,6 @@ namespace vcs_Cryptography9_File
 
                 richTextBox1.Text += "檔案 : " + filename + "\n";
                 richTextBox1.Text += "檔案MD5值 : " + str_encrypted_text + "\t長度 : " + str_encrypted_text.Length + "\n";
-            }
-
-            //取得檔案的唯一檢查碼Checksum MD5
-            using (FileStream fs = File.OpenRead(filename))
-            {
-                //MD5 Code :
-                MD5 m = MD5.Create();
-                richTextBox1.Text += "MD5 code:\n";
-                richTextBox1.Text += Convert.ToBase64String(m.ComputeHash(fs)) + "\n";
             }
         }
 
@@ -368,7 +359,6 @@ namespace vcs_Cryptography9_File
                 FirstFileMD5 += b.ToString("X2");
             }
             richTextBox1.Text += "檔案：" + FirstFilePath + ",\tMD5：" + FirstFileMD5 + "\n";
-
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -476,34 +466,24 @@ namespace vcs_Cryptography9_File
             {
                 richTextBox1.Text += "兩個檔案\t不相同\n";
             }
-
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-
-            //02.計算文件的 sha1 值
-            Console.WriteLine(string.Format("計算文件的 sha1 值：{0}", HashHelper.SHA1File(filename)));
-            richTextBox1.Text += "計算文件的 sha1 值：" + HashHelper.SHA1File(filename) + "\n";
-
-
-            str_encrypted_text = BytesToString(GetHashSha256(filename));
-            richTextBox1.Text += "檔案：" + filename + "\tSHA256密碼：" + str_encrypted_text + "\n";
-
-
             //算一個檔案的SHA1值
-            using (FileStream fs = File.OpenRead(filename))
-            {
-                SHA256Managed sha = new SHA256Managed();
-                richTextBox1.Text += "SHA1 result : " + Convert.ToBase64String(sha.ComputeHash(fs));
-            }
+            str_encrypted_text = HashHelper.SHA1File(filename);
+            richTextBox1.Text += "檔案：" + filename + "\tSHA1值：" + str_encrypted_text + "\n";
 
+            //算一個檔案的SHA256值
+            str_encrypted_text = BytesToString(GetHashSha256(filename));
+            richTextBox1.Text += "檔案：" + filename + "\tSHA256值：" + str_encrypted_text + "\n";
+
+            //算一個檔案的SHA256值
             using (FileStream fs = File.OpenRead(filename))
             {
-                //SHA Code :
                 SHA256Managed sha = new SHA256Managed();
-                richTextBox1.Text += "SHA code:\n";
-                richTextBox1.Text += Convert.ToBase64String(sha.ComputeHash(fs)) + "\n";
+                str_encrypted_text = Convert.ToBase64String(sha.ComputeHash(fs));
+                richTextBox1.Text += "檔案：" + filename + "\tSHA256值：" + str_encrypted_text + "\n";
             }
         }
 

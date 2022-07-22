@@ -69,6 +69,20 @@ namespace vcs_Draw_Bitmap
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+
+            pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 7 + 10, y_st + dy * 0);
+
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
@@ -204,11 +218,11 @@ namespace vcs_Draw_Bitmap
 
 
 
-/*            
-轉換圖片格式
-Bitmap bm = new Bitmap(舊檔名);
-bm.Save(新檔名, 新格式);	//格式為 ImageFormat.Bmp...
-            */
+            /*            
+            轉換圖片格式
+            Bitmap bm = new Bitmap(舊檔名);
+            bm.Save(新檔名, 新格式);	//格式為 ImageFormat.Bmp...
+                        */
 
 
 
@@ -289,12 +303,56 @@ bm.Save(新檔名, 新格式);	//格式為 ImageFormat.Bmp...
 
         private void button14_Click(object sender, EventArgs e)
         {
+            //縮小一半並存檔
+            if (pictureBox1.Image == null)
+                return;
+
+            //顯示圖片
+            richTextBox1.Text += "圖片大小：\tW=" + pictureBox1.Image.Width.ToString() + "\t";
+            richTextBox1.Text += "H=" + pictureBox1.Image.Height.ToString() + "\n";
+
+            #region 影像縮放(縮小一半)
+            richTextBox1.Text += "縮小一半\n";
+            //建立新的影像，長寬為原始影像的1/2
+            Image zoomImage = new Bitmap(pictureBox1.Image.Width / 2, pictureBox1.Image.Height / 2) as Image;
+            //準備繪製新的影像
+            Graphics graphics0 = Graphics.FromImage(zoomImage);
+            //於座標(0,0)開始繪製來源影像，長寬設置為來源影像的1/2
+            graphics0.DrawImage(pictureBox1.Image, 0, 0, pictureBox1.Image.Width / 2, pictureBox1.Image.Height / 2);
+            graphics0.Dispose();
+            //儲存新的影像
+            string filename = Application.StartupPath + "\\zoom_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            zoomImage.Save(@filename, ImageFormat.Jpeg);
+            richTextBox1.Text += "縮小一半，存檔完成，檔名：" + filename + "\n";
+            #endregion
+
 
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
+            //放大一倍並存檔
+            if (pictureBox1.Image == null)
+                return;
 
+            //顯示圖片
+            richTextBox1.Text += "圖片大小：\tW=" + pictureBox1.Image.Width.ToString() + "\t";
+            richTextBox1.Text += "H=" + pictureBox1.Image.Height.ToString() + "\n";
+
+            #region 影像放大(放大一倍)
+            richTextBox1.Text += "放大一倍\n";
+            //建立新的影像，長寬為原始影像的2倍
+            Image zoomImageb = new Bitmap(pictureBox1.Image.Width * 2, pictureBox1.Image.Height * 2) as Image;
+            //準備繪製新的影像
+            Graphics graphics0a = Graphics.FromImage(zoomImageb);
+            //於座標(0,0)開始繪製來源影像，長寬設置為來源影像的2倍
+            graphics0a.DrawImage(pictureBox1.Image, 0, 0, pictureBox1.Image.Width * 2, pictureBox1.Image.Height * 2);
+            graphics0a.Dispose();
+            //儲存新的影像
+            string filename = Application.StartupPath + "\\big_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            zoomImageb.Save(@filename, ImageFormat.Jpeg);
+            richTextBox1.Text += "放大一倍，存檔完成，檔名：" + filename + "\n";
+            #endregion
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -304,7 +362,18 @@ bm.Save(新檔名, 新格式);	//格式為 ImageFormat.Bmp...
 
         private void button17_Click(object sender, EventArgs e)
         {
+            //複製部分圖片
+            // Create a Bitmap object from a file.
+            Bitmap myBitmap = new Bitmap(@"C:/______test_files/bear.jpg");
 
+            // Clone a portion of the Bitmap object.
+            RectangleF cloneRect = new RectangleF(530, 30, 200, 200);
+            PixelFormat format = myBitmap.PixelFormat;
+            Bitmap cloneBitmap = myBitmap.Clone(cloneRect, format);
+
+            // Draw the cloned portion of the Bitmap object.
+            Graphics g = pictureBox1.CreateGraphics();
+            g.DrawImage(cloneBitmap, 0, 0);
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -313,6 +382,56 @@ bm.Save(新檔名, 新格式);	//格式為 ImageFormat.Bmp...
         }
 
         private void button19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button23_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button29_Click(object sender, EventArgs e)
         {
 
         }
@@ -365,6 +484,5 @@ bm.Save(新檔名, 新格式);	//格式為 ImageFormat.Bmp...
             // Return the result.
             return bitmap1;
         }
-
     }
 }

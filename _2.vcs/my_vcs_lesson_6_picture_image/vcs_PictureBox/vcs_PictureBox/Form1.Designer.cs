@@ -182,7 +182,6 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(115, 44);
             this.button10.TabIndex = 12;
-            this.button10.Text = "縮小一半並存檔";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -219,7 +218,6 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(115, 44);
             this.button11.TabIndex = 15;
-            this.button11.Text = "放大一倍並存檔";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -250,7 +248,6 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(115, 44);
             this.button1.TabIndex = 18;
-            this.button1.Text = "複製部分圖片";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -290,6 +287,7 @@
             this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
