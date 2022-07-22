@@ -409,13 +409,65 @@ namespace vcs_Draw_Bitmap
 
         private void button22_Click(object sender, EventArgs e)
         {
+            //調整影像大小 1
+            //使用 C# 中的 Bitmap 類調整影象大小
+            string filename = @"C:\______test_files\picture1.jpg";
+            Image image1 = Image.FromFile(filename);
+            Bitmap bitmap1 = new Bitmap(image1);
+            //Image image2 = resizeImage(bitmap1, new Size(image1.Width / 2, image1.Height / 2));
+            Image image2 = resizeImage(bitmap1, new Size(100, 300));
 
+            pictureBox1.Image = image2;
         }
 
         private void button23_Click(object sender, EventArgs e)
         {
+            //調整影像大小 2
+            //使用 C# 中的 Graphics.DrawImage() 函式調整影象大小
+            string filename = @"C:\______test_files\picture1.jpg";
+            Image image1 = Image.FromFile(filename);
+            Bitmap bitmap1 = new Bitmap(image1);
+            Image image2 = resizeImage(bitmap1, new Size(200, 200));
+
+            pictureBox1.Image = image2;
 
         }
+
+
+        public static Image resizeImage(Image imgToResize, Size size)
+        {
+            return (Image)(new Bitmap(imgToResize, size));
+        }
+
+        public static Image resizeImage2(Image image, int width, int height)
+        {
+            var destinationRect = new Rectangle(0, 0, width, height);
+            var destinationImage = new Bitmap(width, height);
+
+            destinationImage.SetResolution(image.HorizontalResolution, image.VerticalResolution);
+
+            using (var graphics = Graphics.FromImage(destinationImage))
+            {
+                graphics.CompositingMode = CompositingMode.SourceCopy;
+                graphics.CompositingQuality = CompositingQuality.HighQuality;
+
+                using (var wrapMode = new ImageAttributes())
+                {
+                    wrapMode.SetWrapMode(WrapMode.TileFlipXY);
+                    graphics.DrawImage(image, destinationRect, 0, 0, image.Width, image.Height, GraphicsUnit.Pixel, wrapMode);
+                }
+            }
+
+            return (Image)destinationImage;
+            /*
+            destinationImage.SetResolution() 函式保持影象的 dpi，而不考慮其實際大小
+            graphics.CompositingMode = CompositingMode.SourceCopy 屬性指定在渲染顏色時它將覆蓋背景顏色
+            graphics.CompositingQuality = CompositingQuality.HighQuality 屬性指定我們只希望渲染高質量的影象
+            wrapMode.SetWrapMode(WrapMode.TileFlipXY) 函式可以防止在影象邊界周圍出現鬼影
+            graphics.DrawImage() 繪製具有指定尺寸的實際影象。
+            */
+        }
+
 
         private void button24_Click(object sender, EventArgs e)
         {

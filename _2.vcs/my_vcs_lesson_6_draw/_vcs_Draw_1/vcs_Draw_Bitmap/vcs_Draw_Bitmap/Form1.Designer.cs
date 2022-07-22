@@ -344,6 +344,7 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(170, 70);
             this.button22.TabIndex = 147;
+            this.button22.Text = "調整影像大小 1";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
@@ -354,6 +355,7 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(170, 70);
             this.button23.TabIndex = 148;
+            this.button23.Text = "調整影像大小 2";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 

@@ -675,24 +675,26 @@ namespace vcs_ImageProcessing3
             try
             {
                 Bitmap bitmap1 = (Bitmap)this.pictureBox1.Image.Clone();
-                int dh = bitmap1.Height / 20;
-                int dw = bitmap1.Width;
+                int dh = bitmap1.Height / 20;   //记录图片的指定高度
+                int dw = bitmap1.Width; //记录图片的宽度
                 Graphics g = this.pictureBox1.CreateGraphics();
                 g.Clear(Color.Gray);
-                Point[] MyPoint = new Point[20];
-                for (int y = 0; y < 20; y++)
+                Point[] MyPoint = new Point[20];    //定义数组
+                for (int y = 0; y < 20; y++)    //记录百叶窗各节点的位置
                 {
                     MyPoint[y].X = 0;
                     MyPoint[y].Y = y * dh;
                 }
-                Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height);
+                Bitmap bitmap2 = new Bitmap(bitmap1.Width, bitmap1.Height); //实例化Bitmap类
+                //通过调用Bitmap对象的SetPixel方法重新设置图像的像素点颜色，从而实现百叶窗效果
+
                 for (int i = 0; i < dh; i++)
                 {
                     for (int j = 0; j < 20; j++)
                     {
                         for (int k = 0; k < dw; k++)
                         {
-                            bitmap2.SetPixel(MyPoint[j].X + k, MyPoint[j].Y + i, bitmap1.GetPixel(MyPoint[j].X + k, MyPoint[j].Y + i));
+                            bitmap2.SetPixel(MyPoint[j].X + k, MyPoint[j].Y + i, bitmap1.GetPixel(MyPoint[j].X + k, MyPoint[j].Y + i)); //获取当前象素颜色值
                         }
                     }
                     this.pictureBox1.Refresh();

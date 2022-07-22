@@ -29,8 +29,6 @@ namespace vcs_PictureCrop5
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            label1.Text = "";
-
             pictureBox1.Image = Image.FromFile(filename);
 
             bitmap1 = new Bitmap(filename);
@@ -110,8 +108,7 @@ namespace vcs_PictureCrop5
             float W = Math.Abs(point_st.X - point_sp.X) * PictureScale;
             float H = Math.Abs(point_st.Y - point_sp.Y) * PictureScale;
 
-            //label1.Text = "擷取 x = " + x_st.ToString() + ", y = " + y_st.ToString() + ", W = " + W.ToString() + ", H = " + H.ToString();
-            label1.Text = "擷取 : " + select_rectangle.ToString();
+            this.Text = "選取區域 : " + select_rectangle.ToString();
                  
             button1.Text = "擷取";
 

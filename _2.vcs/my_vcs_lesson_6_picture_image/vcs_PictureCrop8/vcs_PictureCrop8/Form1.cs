@@ -159,16 +159,16 @@ namespace vcs_PictureCrop8
             tb_y_st.Text = y_st2.ToString();
             tb_w.Text = w.ToString();
             tb_h.Text = h.ToString();
+            this.Text = "選取區域 : " + select_rectangle.ToString();
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            String filename = Application.StartupPath + "\\" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
             Bitmap bitmap = new Bitmap(pictureBox1.Image);
             Bitmap cloneBitmap = bitmap.Clone(select_rectangle, PixelFormat.DontCare);
             cloneBitmap.Save(filename, ImageFormat.Bmp);
             richTextBox1.Text += "存截圖，存檔檔名：" + filename + "\n";
-
         }
     }
 }

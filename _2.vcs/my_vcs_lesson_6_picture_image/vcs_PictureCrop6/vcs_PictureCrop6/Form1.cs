@@ -105,6 +105,8 @@ namespace vcs_PictureCrop6
             // Convert the points into a Rectangle.
             select_rectangle = MakeRectangle(pt_st, pt_sp);
             MadeSelection = ((select_rectangle.Width > 0) && (select_rectangle.Height > 0));
+
+            this.Text = "選取區域 : " + select_rectangle.ToString();
         }
 
         // If the user presses Escape, cancel.

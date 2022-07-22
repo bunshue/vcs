@@ -164,6 +164,8 @@ namespace vcs_PictureCrop7
                     pictureBox2.Image = bitmap1.Clone(srcRect, PixelFormat.Format32bppArgb);
                     g.Dispose();
                     bitmap1.Dispose();
+
+                    this.Text = "選取區域 : " + select_rectangle.ToString();
                 }
             }
         }
