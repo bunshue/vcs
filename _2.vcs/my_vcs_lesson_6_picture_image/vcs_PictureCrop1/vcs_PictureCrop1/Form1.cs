@@ -64,9 +64,9 @@ namespace vcs_PictureCrop1
             dy = pbx_H + 10;
 
             pictureBox1.Size = new Size(pbx_W, pbx_H);
-            pictureBox2.Size = new Size(pbx_W / 2 + 100, pbx_H);
+            pictureBox2.Size = new Size(pbx_W / 2 + 80, pbx_H);
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
-            pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
 
@@ -75,6 +75,8 @@ namespace vcs_PictureCrop1
 
             groupBox_selection.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             label1.Location = new Point(x_st + dx * 0, y_st + dy * 1 + groupBox_selection.Height + 10);
+            label2.Location = new Point(x_st + dx * 0, y_st + dy * 1 + groupBox_selection.Height + 40);
+            label2.Text = "";
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -210,10 +212,13 @@ namespace vcs_PictureCrop1
                 flag_select_area = true;
                 pt_st = e.Location; //起始點座標
 
-                nud_x_st.Value = 0;
-                nud_y_st.Value = 0;
                 nud_w.Value = 0;
                 nud_h.Value = 0;
+                nud_x_st.Value = 0;
+                nud_y_st.Value = 0;
+
+                label2.Text = "";
+                select_rectangle = new Rectangle(new Point(0, 0), new Size(0, 0));
             }
             else if (e.Button == MouseButtons.Right)
             {
@@ -232,6 +237,17 @@ namespace vcs_PictureCrop1
 
             select_rectangle = MakeRectangle(pt_st, pt_sp);
 
+            if ((select_rectangle.X < 0) || (select_rectangle.X >= W))
+                return;
+            if ((select_rectangle.Y < 0) || (select_rectangle.Y >= H))
+                return;
+            if ((select_rectangle.Width <= 0) || (select_rectangle.Width > W))
+                return;
+            if ((select_rectangle.Height <= 0) || (select_rectangle.Height > H))
+                return;
+            if (((select_rectangle.X + select_rectangle.Width) > W) || ((select_rectangle.Y + select_rectangle.Height) > H))
+                return;
+
             // Make a Bitmap to display the selection rectangle.
             Bitmap bmp = new Bitmap(bitmap1);
 
@@ -244,6 +260,12 @@ namespace vcs_PictureCrop1
             }
             // Display the temporary bitmap.
             pictureBox1.Image = bmp;
+
+            nud_x_st.Value = select_rectangle.X;
+            nud_y_st.Value = select_rectangle.Y;
+            nud_w.Value = select_rectangle.Width;
+            nud_h.Value = select_rectangle.Height;
+            label2.Text = "選取區域 : " + select_rectangle.ToString();
         }
 
         // Finish selecting the area.
@@ -272,7 +294,6 @@ namespace vcs_PictureCrop1
                 g2.DrawImage(bitmap1, dest_rectangle, select_rectangle, GraphicsUnit.Pixel);
             }
 
-            // Display the result.
             pictureBox2.Image = bitmap2;
 
             //richTextBox1.Text += "select_rectangle = " + select_rectangle.ToString() + "\n";
@@ -281,9 +302,7 @@ namespace vcs_PictureCrop1
             nud_y_st.Value = select_rectangle.Y;
             nud_w.Value = select_rectangle.Width;
             nud_h.Value = select_rectangle.Height;
-
-
-            this.Text = "選取區域 : " + select_rectangle.ToString();
+            label2.Text = "選取區域 : " + select_rectangle.ToString();
         }
 
         // If the user presses Escape, cancel.
@@ -358,13 +377,21 @@ namespace vcs_PictureCrop1
             select_rectangle = new Rectangle(x_st, y_st, w, h);
             //richTextBox1.Text += select_rectangle.ToString() + "\n";
 
-            if ((select_rectangle.Width <= 0) || (select_rectangle.Height <= 0))
+            if ((select_rectangle.X < 0) || (select_rectangle.X >= W))
+                return;
+            if ((select_rectangle.Y < 0) || (select_rectangle.Y >= H))
+                return;
+            if ((select_rectangle.Width <= 0) || (select_rectangle.Width > W))
+                return;
+            if ((select_rectangle.Height <= 0) || (select_rectangle.Height > H))
+                return;
+            if (((select_rectangle.X + select_rectangle.Width) > W) || ((select_rectangle.Y + select_rectangle.Height) > H))
                 return;
 
             string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-            Bitmap bitmap = new Bitmap(pictureBox1.Image);
-            Bitmap cloneBitmap = bitmap.Clone(select_rectangle, PixelFormat.DontCare);  //或是 PixelFormat.Format32bppArgb
-            cloneBitmap.Save(filename, ImageFormat.Bmp);
+            Bitmap bitmap1 = new Bitmap(pictureBox1.Image);
+            Bitmap bitmap2 = bitmap1.Clone(select_rectangle, PixelFormat.DontCare);  //或是 PixelFormat.Format32bppArgb
+            bitmap2.Save(filename, ImageFormat.Bmp);
             richTextBox1.Text += "存截圖，存檔檔名：" + filename + "\n";
         }
 
@@ -380,6 +407,20 @@ namespace vcs_PictureCrop1
 
             Rectangle select_rectangle2 = new Rectangle(x_st, y_st, w, h);
 
+            if ((select_rectangle2.Width <= 0) || (select_rectangle2.Height <= 0))
+                return;
+
+            if ((select_rectangle2.X < 0) || (select_rectangle2.X >= W))
+                return;
+            if ((select_rectangle2.Y < 0) || (select_rectangle2.Y >= H))
+                return;
+            if ((select_rectangle2.Width <= 0) || (select_rectangle2.Width > W))
+                return;
+            if ((select_rectangle2.Height <= 0) || (select_rectangle2.Height > H))
+                return;
+            if (((select_rectangle2.X + select_rectangle2.Width) > W) || ((select_rectangle2.Y + select_rectangle2.Height) > H))
+                return;
+
             // Make a Bitmap to display the selection rectangle.
             Bitmap bmp = new Bitmap(bitmap1);
 
@@ -392,25 +433,42 @@ namespace vcs_PictureCrop1
             }
             // Display the temporary bitmap.
             pictureBox1.Image = bmp;
+
+            Bitmap bmp2 = new Bitmap(w, h);
+
+            bmp2 = bmp.Clone(select_rectangle2, PixelFormat.DontCare);  //或是 PixelFormat.Format32bppArgb
+            pictureBox2.Image = bmp2;
         }
 
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         {
-            if ((select_rectangle.Width <= 0) || (select_rectangle.Height <= 0))
+            if ((select_rectangle.X < 0) || (select_rectangle.X >= W))
+                return;
+            if ((select_rectangle.Y < 0) || (select_rectangle.Y >= H))
+                return;
+            if ((select_rectangle.Width <= 0) || (select_rectangle.Width > W))
+                return;
+            if ((select_rectangle.Height <= 0) || (select_rectangle.Height > H))
+                return;
+            if (((select_rectangle.X + select_rectangle.Width) > W) || ((select_rectangle.Y + select_rectangle.Height) > H))
                 return;
 
             try
             {
-                Graphics graphics = this.CreateGraphics();
-                Bitmap bitmap = new Bitmap(pictureBox1.Image);
-                Bitmap cloneBitmap = bitmap.Clone(select_rectangle, PixelFormat.DontCare);
-                graphics.DrawImage(cloneBitmap, e.X, e.Y);
-                Graphics g = pictureBox1.CreateGraphics();
+                Graphics g = this.CreateGraphics();
+                Bitmap bitmap1 = new Bitmap(pictureBox1.Image);
+                Bitmap bitmap2 = bitmap1.Clone(select_rectangle, PixelFormat.DontCare);
+                g.DrawImage(bitmap2, e.X, e.Y);
+
+                //Graphics g = pictureBox1.CreateGraphics();
                 //SolidBrush myBrush = new SolidBrush(Color.White);
                 //g.FillRectangle(myBrush, select_rectangle);   //將原圖剪下
             }
-            catch
-            { }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                GC.Collect();       //回收資源
+            }
         }
     }
 }
