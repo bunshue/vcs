@@ -255,20 +255,11 @@ namespace vcs_Mix03_draw_image
 
         private void GetThumbnail(PaintEventArgs e)
         {
-            Image.GetThumbnailImageAbort callback =
-                new Image.GetThumbnailImageAbort(ThumbnailCallback);
+            Image.GetThumbnailImageAbort callback = new Image.GetThumbnailImageAbort(ThumbnailCallback);
             Image image = new Bitmap(@"c:\dddddddddd\FakePhoto.jpg");
-            Image pThumbnail = image.GetThumbnailImage(100, 100, callback, new
-               IntPtr());
-            e.Graphics.DrawImage(
-               pThumbnail,
-               10,
-               10,
-               pThumbnail.Width,
-               pThumbnail.Height);
+            Image pThumbnail = image.GetThumbnailImage(100, 100, callback, new IntPtr());
+            e.Graphics.DrawImage(pThumbnail, 10, 10, pThumbnail.Width, pThumbnail.Height);
         }
-
-
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -286,7 +277,7 @@ namespace vcs_Mix03_draw_image
         {
             FileStream fs = new FileStream(imgPath, FileMode.Open, FileAccess.Read);
             //從文件獲取原始圖片，並使用流中嵌入的顏色管理信息
-            System.Drawing.Image initImage = System.Drawing.Image.FromStream(fs, true);
+            Image initImage = Image.FromStream(fs, true);
 
             Bitmap b = new Bitmap(initImage);
 
@@ -298,7 +289,7 @@ namespace vcs_Mix03_draw_image
         {
             FileStream fs = new FileStream(imgPath, FileMode.Open, FileAccess.Read);
             //從文件獲取原始圖片，並使用流中嵌入的顏色管理信息
-            System.Drawing.Image initImage = System.Drawing.Image.FromStream(fs, true);
+            Image initImage = Image.FromStream(fs, true);
 
             Bitmap b = new Bitmap(initImage);
 
@@ -354,17 +345,16 @@ namespace vcs_Mix03_draw_image
             srcBitmap.Save(destStream, myImageCodecInfo, myEncoderParameters);
         }
 
-
         /// <summary>
         /// 圖片壓縮(降低質量以減小文件的大小)
         /// </summary>
         /// <param name="srcBitMap">傳入的Bitmap對象</param>
         /// <param name="destFile">壓縮後的圖片保存路徑</param>
         /// <param name="level">壓縮等級，0到100，0 最差質量，100 最佳</param>
-        public static void Compress(Bitmap srcBitMap, string destFile, long level)
+        public static void Compress(Bitmap bitmap1, string destFile, long level)
         {
             Stream s = new FileStream(destFile, FileMode.Create);
-            Compress(srcBitMap, s, level);
+            Compress(bitmap1, s, level);
             s.Close();
         }
 
@@ -372,7 +362,7 @@ namespace vcs_Mix03_draw_image
         {
             show_button_text(sender);
             //圖片質量壓縮(不改變尺寸)
-            
+
             string filename = @"C:\______test_files\elephant.jpg";
             richTextBox1.Text += "原圖 : " + filename + "\n";
 
@@ -756,11 +746,12 @@ namespace vcs_Mix03_draw_image
         private void button11_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //全屏幕截圖 1
 
             int W = Screen.PrimaryScreen.Bounds.Width;
-
             int H = Screen.PrimaryScreen.Bounds.Height;
+
+
+            //全屏幕截圖 1
 
             Bitmap bitmap1 = new Bitmap(W, H); //創建一個與屏幕大小一樣的位圖
 
@@ -770,42 +761,31 @@ namespace vcs_Mix03_draw_image
             }
             pictureBox1.Image = bitmap1;
 
+            //存圖
+            //bitmap1.Save("111.jpg");
+
+            //bitmap1.Dispose();
+
+            //顯示
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.Image = bitmap1;
 
 
             //全屏幕截圖 2
-            int width = Screen.PrimaryScreen.Bounds.Width;
-            int height = Screen.PrimaryScreen.Bounds.Height;
-
-            Bitmap bmp = new Bitmap(width, height);
-
-            using (Graphics g = Graphics.FromImage(bmp))
-            {
-                g.CopyFromScreen(0, 0, 0, 0, new Size(width, height));
-            }
-            bmp.Save("111.jpg");
-
-            //bmp.Dispose();
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.Image = bmp;
-
-
-
-            //全屏幕截圖 3
             //獲得當前屏幕的分辨率
             Screen scr = Screen.PrimaryScreen;
             Rectangle rc = scr.Bounds;
-            int iWidth = rc.Width;
-            int iHeight = rc.Height;
+            int w = rc.Width;
+            int h = rc.Height;
             //創建一個和屏幕一樣大的Bitmap
-            Image myImage = new Bitmap(iWidth, iHeight);
+            Image image = new Bitmap(w, h);
             //從一個繼承自Image類的對象中創建Graphics對象
-            Graphics g3 = Graphics.FromImage(myImage);
+            Graphics g2 = Graphics.FromImage(image);
             //抓屏並拷貝到myimage裡
-            g3.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(iWidth, iHeight));
-            //保存為文件
-            myImage.Save("aaaaaa.jpeg");
+            g2.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(w, h));
 
-
+            //存圖
+            //image.Save("aaaaaa.jpeg");
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -1060,3 +1040,4 @@ namespace vcs_Mix03_draw_image
         }
     }
 }
+

@@ -18,8 +18,11 @@ namespace vcs_PictureEnhance_YUV
         //string filename1 = @"C:\______test_files\color1.bmp";
         //string filename2 = @"C:\______test_files\color2.bmp";
 
-        int W = 0;
-        int H = 0;
+        int W = 0;  //全圖的寬
+        int H = 0;  //全圖的高
+
+        Bitmap bitmap1; //原圖
+        Bitmap bitmap2; //從原圖修改過的
 
         public struct RGB
         {
@@ -132,17 +135,13 @@ namespace vcs_PictureEnhance_YUV
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            pictureBox1.Image = Image.FromFile(filename1);
-            pictureBox2.Image = Image.FromFile(filename1);
-            W = pictureBox2.Image.Width;
-            H = pictureBox2.Image.Height;
-
-            pictureBox2.MouseDown += new MouseEventHandler(pictureBox2_MouseDown);
-            pictureBox2.MouseMove += new MouseEventHandler(pictureBox2_MouseMove);
-            pictureBox2.MouseUp += new MouseEventHandler(pictureBox2_MouseUp);
-            pictureBox2.Paint += new PaintEventHandler(pictureBox2_Paint);
+            pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
+            pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
+            pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
+            pictureBox1.Paint += new PaintEventHandler(pictureBox1_Paint);
 
             show_item_location();
+            reset_picture();
         }
 
         void show_item_location()
@@ -227,10 +226,7 @@ namespace vcs_PictureEnhance_YUV
 
                 filename1 = openFileDialog1.FileName;
 
-                pictureBox2.Image = Image.FromFile(filename1);
-                W = pictureBox2.Image.Width;
-                H = pictureBox2.Image.Height;
-                //richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+                reset_picture(); 
             }
             else
             {
@@ -296,6 +292,19 @@ namespace vcs_PictureEnhance_YUV
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        void reset_picture()
+        {
+            bitmap1 = (Bitmap)Image.FromFile(filename1);	//Image.FromFile出來的是Image格式
+            bitmap2 = (Bitmap)bitmap1.Clone();
+
+            pictureBox1.Image = bitmap1;
+            pictureBox2.Image = bitmap2;
+
+            W = bitmap1.Width;
+            H = bitmap1.Height;
+            //richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
         }
 
         void enhance_bitmap_data(Bitmap bitmap1, int x_st, int y_st, int w, int h)
@@ -419,151 +428,155 @@ namespace vcs_PictureEnhance_YUV
             pictureBox4.Image = bitmap4;
         }
 
-        void draw_enhanced_image(int x_st, int y_st, int w, int h)
+        void draw_enhanced_image(Bitmap bmp, int x_st, int y_st, int w, int h)
         {
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename1);	//Bitmap.FromFile出來的是Image格式
-            Graphics g = Graphics.FromImage(bitmap1);
+            enhance_bitmap_data(bmp, x_st, y_st, w, h);
+            show_part_image(bmp, x_st, y_st, w, h);
 
-            enhance_bitmap_data(bitmap1, x_st, y_st, w, h);
-            show_part_image(bitmap1, x_st, y_st, w, h);
+            pictureBox2.Image = bmp;    //把影像增強後的結果顯示出來
+        }
 
-            pictureBox1.Image = bitmap1;
+        void ImageEnhancement(int x_st, int y_st, int w, int h)
+        {
+            enhance_bitmap_data(bitmap2, x_st, y_st, w, h);
+            show_part_image(bitmap2, x_st, y_st, w, h);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename1);	//Bitmap.FromFile出來的是Image格式
-            Graphics g = Graphics.FromImage(bitmap1);
-
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-            //richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
-
-            int x_st = W / 8;
-            int y_st = H / 8;
-            int w = W * 3 / 4;
-            int h = H * 3 / 4;
+            x_st = W / 8;
+            y_st = H / 8;
+            w = W * 3 / 4;
+            h = H * 3 / 4;
 
             x_st = 100;
             y_st = 100;
             w = 640 - 200;
             h = 480 - 200;
 
-
-            enhance_bitmap_data(bitmap1, x_st, y_st, w, h);
-            show_part_image(bitmap1, x_st, y_st, w, h);
-
-            pictureBox1.Image = bitmap1;
+            reset_picture();
+            ImageEnhancement(x_st, y_st, w, h);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename1);	//Bitmap.FromFile出來的是Image格式
-            Graphics g = Graphics.FromImage(bitmap1);
-
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-            //richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
-
             int x_st = 50;
             int y_st = 50;
             int w = W / 2;
             int h = H / 2;
 
-            enhance_bitmap_data(bitmap1, x_st, y_st, w, h);
-            show_part_image(bitmap1, x_st, y_st, w, h);
-
-            pictureBox1.Image = bitmap1;
+            reset_picture();
+            ImageEnhancement(x_st, y_st, w, h);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename1);	//Bitmap.FromFile出來的是Image格式
-            Graphics g = Graphics.FromImage(bitmap1);
+            x_st = W / 3;
+            y_st = H / 3;
+            w = W / 3;
+            h = H / 3;
 
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-            //richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
-
-            int x_st = W / 3;
-            int y_st = H / 3;
-            int w = W / 3;
-            int h = H / 3;
-
-            enhance_bitmap_data(bitmap1, x_st, y_st, w, h);
-            show_part_image(bitmap1, x_st, y_st, w, h);
-
-            pictureBox1.Image = bitmap1;
+            reset_picture();
+            ImageEnhancement(x_st, y_st, w, h);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename1);	//Bitmap.FromFile出來的是Image格式
-            Graphics g = Graphics.FromImage(bitmap1);
+            x_st = W / 12;
+            y_st = H / 4;
+            w = W / 10;
+            h = H / 10;
 
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-            //richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
-
-            int x_st = W / 12;
-            int y_st = H / 4;
-            int w = W / 10;
-            int h = H / 10;
-
-            enhance_bitmap_data(bitmap1, x_st, y_st, w, h);
-            show_part_image(bitmap1, x_st, y_st, w, h);
-
-            pictureBox1.Image = bitmap1;
+            reset_picture();
+            ImageEnhancement(x_st, y_st, w, h);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename1);	//Bitmap.FromFile出來的是Image格式
-            Graphics g = Graphics.FromImage(bitmap1);
+            x_st = W / 3;
+            y_st = H / 3 - 50;
+            w = W / 3;
+            h = H / 3;
 
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-            //richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
-
-            int x_st = W / 3;
-            int y_st = H / 3 - 50;
-            int w = W / 3;
-            int h = H / 3;
-
-            enhance_bitmap_data(bitmap1, x_st, y_st, w, h);
-            show_part_image(bitmap1, x_st, y_st, w, h);
-
-            pictureBox1.Image = bitmap1;
+            reset_picture();
+            ImageEnhancement(x_st, y_st, w, h);
         }
 
-        bool flag_pictureBox2_mouse_down = false;
-        int pictureBox2_position_x_old = 0;
-        int pictureBox2_position_y_old = 0;
+        private void button6_Click(object sender, EventArgs e)
+        {
+            x_st = 640 / 2;
+            y_st = 480 / 2;
+            w = 50;
+            h = 50;
+
+            reset_picture();
+            
+            //修改bitmap1資料, debug ST
+            int i;
+            int j;
+
+            for (j = 0; j < h; j++)
+            {
+                for (i = 0; i < w; i++)
+                {
+                    //bitmap1.SetPixel(x_st + i, y_st + j, Color.Red);
+                    bitmap1.SetPixel(x_st + i, y_st + j, Color.FromArgb(255, 100 + i, 100 + i, 100 + i));
+                }
+            }
+            bitmap2 = (Bitmap)bitmap1.Clone();
+            pictureBox1.Image = bitmap1;
+            pictureBox2.Image = bitmap2;
+            //修改bitmap1資料, debug SP
+
+            ImageEnhancement(x_st, y_st, w, h);
+
+            enhance_bitmap_data(bitmap2, x_st, y_st, w, h);
+            show_part_image(bitmap2, x_st, y_st, w, h);
+
+            //亮度分布
+            draw_x_st = x_st;
+            draw_y_st = y_st;
+            draw_w = w;
+            draw_h = h;
+
+            draw_enhanced_image(bitmap2, draw_x_st, draw_y_st, draw_w, draw_h);
+            measure_brightness(pictureBox1, pictureBox4);
+            measure_brightness(pictureBox2, pictureBox5);
+
+            this.pictureBox1.Invalidate();
+        }
+
+        bool flag_pictureBox1_mouse_down = false;
+        int pictureBox1_position_x_old = 0;
+        int pictureBox1_position_y_old = 0;
 
         int draw_x_st = 0;
         int draw_y_st = 0;
         int draw_w = 0;
         int draw_h = 0;
 
-        private void pictureBox2_MouseDown(object sender, MouseEventArgs e)
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            flag_pictureBox2_mouse_down = true;
+            bitmap1 = (Bitmap)Image.FromFile(filename1);	//Image.FromFile出來的是Image格式
+            bitmap2 = (Bitmap)bitmap1.Clone();
+
+            flag_pictureBox1_mouse_down = true;
             //richTextBox1.Text += "Down : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
-            pictureBox2_position_x_old = e.X;
-            pictureBox2_position_y_old = e.Y;
+            pictureBox1_position_x_old = e.X;
+            pictureBox1_position_y_old = e.Y;
         }
 
-        private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (flag_pictureBox2_mouse_down == true)
+            if (flag_pictureBox1_mouse_down == true)
             {
                 //richTextBox1.Text += "Up : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
-                int dx = e.X - pictureBox2_position_x_old;
-                int dy = e.Y - pictureBox2_position_y_old;
+                int dx = e.X - pictureBox1_position_x_old;
+                int dy = e.Y - pictureBox1_position_y_old;
 
                 if (dx > 0)
                 {
-                    draw_x_st = pictureBox2_position_x_old;
+                    draw_x_st = pictureBox1_position_x_old;
                     draw_w = dx;
                 }
                 else
@@ -574,7 +587,7 @@ namespace vcs_PictureEnhance_YUV
 
                 if (dy > 0)
                 {
-                    draw_y_st = pictureBox2_position_y_old;
+                    draw_y_st = pictureBox1_position_y_old;
                     draw_h = dy;
                 }
                 else
@@ -583,15 +596,15 @@ namespace vcs_PictureEnhance_YUV
                     draw_h = -dy;
                 }
 
-                this.pictureBox2.Invalidate();
+                this.pictureBox1.Invalidate();
                 //richTextBox1.Text += "dx, dy : (" + dx.ToString() + ", " + dy.ToString() + ")\n";
-                //pictureBox2.Location = new Point(pictureBox2.Location.X + dx, pictureBox2.Location.Y + dy);
+                //pictureBox1.Location = new Point(pictureBox1.Location.X + dx, pictureBox1.Location.Y + dy);
             }
         }
 
-        private void pictureBox2_MouseUp(object sender, MouseEventArgs e)
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            flag_pictureBox2_mouse_down = false;
+            flag_pictureBox1_mouse_down = false;
             //richTextBox1.Text += "Up : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
 
             if ((draw_x_st < 0) || (draw_x_st >= W))
@@ -605,51 +618,17 @@ namespace vcs_PictureEnhance_YUV
             if (((draw_x_st + draw_w) > W) || ((draw_y_st + draw_h) > H))
                 return;
 
-            draw_enhanced_image(draw_x_st, draw_y_st, draw_w, draw_h);
+            draw_enhanced_image(bitmap1, draw_x_st, draw_y_st, draw_w, draw_h);
             measure_brightness(pictureBox1, pictureBox4);
             measure_brightness(pictureBox2, pictureBox5);
         }
 
-        private void pictureBox2_Paint(object sender, PaintEventArgs e)
+        private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
             //richTextBox1.Text += draw_x_st.ToString() + "\t" + draw_y_st.ToString() + "\t" + draw_w.ToString() + "\t" + draw_h.ToString() + "\n";
             e.Graphics.DrawRectangle(new Pen(Color.Blue, 3), draw_x_st, draw_y_st, draw_w, draw_h);
-        }
 
-        private void button6_Click(object sender, EventArgs e)
-        {
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename1);	//Bitmap.FromFile出來的是Image格式
-            Graphics g = Graphics.FromImage(bitmap1);
-
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-            //richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
-
-            int x_st = W / 8;
-            int y_st = H / 8;
-            int w = W * 3 / 4;
-            int h = H * 3 / 4;
-
-            x_st = 640 / 2;
-            y_st = 480 / 2;
-            w = 100;
-            h = 100;
-
-            enhance_bitmap_data(bitmap1, x_st, y_st, w, h);
-            show_part_image(bitmap1, x_st, y_st, w, h);
-            pictureBox1.Image = bitmap1;
-
-            //亮度分布
-            draw_x_st = x_st;
-            draw_y_st = y_st;
-            draw_w = w;
-            draw_h = h;
-
-            draw_enhanced_image(draw_x_st, draw_y_st, draw_w, draw_h);
-            measure_brightness(pictureBox1, pictureBox4);
-            measure_brightness(pictureBox2, pictureBox5);
-
-            this.pictureBox2.Invalidate();
+            e.Graphics.DrawString("原圖", new Font("標楷體", 30), new SolidBrush(Color.Red), new PointF(0, 0));
         }
 
         string filename = string.Empty;
@@ -663,9 +642,8 @@ namespace vcs_PictureEnhance_YUV
         //private int H = 0;  //原圖的高
         private int w = 0;  //擷取圖的寬
         private int h = 0;  //擷取圖的高
-
-        int x_st = 0;
-        int y_st = 0;
+        int x_st = 0;   //擷取開始x
+        int y_st = 0;   //擷取開始y
         int x_sp = 0;
         int y_sp = 0;
 
@@ -713,13 +691,13 @@ namespace vcs_PictureEnhance_YUV
 
             richTextBox1.Text += pbox1.Name + "\n";
 
-            //draw_enhanced_image(draw_x_st, draw_y_st, draw_w, draw_h);
+            //draw_enhanced_image(bitmap1, draw_x_st, draw_y_st, draw_w, draw_h);
             x_st = draw_x_st;
             y_st = draw_y_st;
             w = draw_w;
             h = draw_h;
 
-            Bitmap bitmap1 = (Bitmap)pbox1.Image;
+            bitmap1 = (Bitmap)pbox1.Image;
             int W = bitmap1.Width;
             int H = bitmap1.Height;
             richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
@@ -738,7 +716,7 @@ namespace vcs_PictureEnhance_YUV
                 }
             }
 
-
+            /*
             //debug
             for (i = 0; i < 256; i++)
             {
@@ -747,6 +725,7 @@ namespace vcs_PictureEnhance_YUV
                     richTextBox1.Text += "\n";
             }
             richTextBox1.Text += "\n";
+            */
 
             int y_min;
             int y_max;
@@ -766,6 +745,7 @@ namespace vcs_PictureEnhance_YUV
                 //richTextBox1.Text += brightness_data[i].ToString() + " ";
             }
 
+            /*
             for (i = 0; i < 256; i++)
             {
                 richTextBox1.Text += brightness_data[i].ToString("D3") + " ";
@@ -774,7 +754,7 @@ namespace vcs_PictureEnhance_YUV
 
             }
             richTextBox1.Text += "\n";
-
+            */
 
 
             richTextBox1.Text += "共有 " + total_points.ToString() + " 個點\n";
@@ -796,11 +776,17 @@ namespace vcs_PictureEnhance_YUV
             }
             richTextBox1.Text += "\n最多 " + most.ToString() + "\n";
 
-            int ww = 512;
+            int y_min;
+            int y_max;
+            FindYMaxYMin(brightness_data, out y_min, out y_max);
+
+            richTextBox1.Text += "y_min = " + y_min.ToString() + "\t" + "y_max = " + y_max.ToString() + "\n";
+
+            int ww = 512 + 200;
             int hh1 = 300;
             int hh2 = 256;
-            Bitmap bitmap2 = new Bitmap(ww, hh1);
-            Graphics g2 = Graphics.FromImage(bitmap2);
+            Bitmap bmp = new Bitmap(ww, hh1);
+            Graphics g2 = Graphics.FromImage(bmp);
             g2.Clear(Color.Pink);
             Pen p = new Pen(Color.Blue, 2);
 
@@ -855,7 +841,12 @@ namespace vcs_PictureEnhance_YUV
             {
                 g2.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(152 * 2 - 50, hh2));
             }
-            pbox.Image = bitmap2;
+
+            g2.DrawString("Max = " + y_max.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Navy), 512, 10);
+            g2.DrawString("min = " + y_min.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Navy), 512, 40);
+            g2.DrawString("most = " + most.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Navy), 512, 70);
+
+            pbox.Image = bmp;
         }
 
         void FindYMaxYMin(int[] array, out int y_min, out int y_max)

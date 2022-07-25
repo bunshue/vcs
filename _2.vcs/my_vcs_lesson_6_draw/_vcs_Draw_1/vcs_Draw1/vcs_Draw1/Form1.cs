@@ -23,6 +23,8 @@ namespace vcs_Draw1
 
         bool flag_print_mouse_cursor = false;
 
+        string filename = @"C:\______test_files\picture1.jpg";
+
         public Form1()
         {
             InitializeComponent();
@@ -399,12 +401,11 @@ namespace vcs_Draw1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string filename = "C:\\______test_files\\picture1.jpg";
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
             bitmap1 = new Bitmap(filename);
             g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             pictureBox1.Image = bitmap1; //顯示在 pictureBox1 圖片控制項中
         }
 
@@ -463,8 +464,8 @@ namespace vcs_Draw1
             int i;
             int xx;
             int yy;
-            int width = 600;
-            int height = 500;
+            int W = 600;
+            int H = 500;
             byte[,] rgb = new byte[30, 3];
 
             /*
@@ -537,16 +538,16 @@ namespace vcs_Draw1
                     richTextBox1.Text += "  ";
             }
             richTextBox1.Text += "\n";
-            pictureBox1.Size = new Size(width, height);
-            bitmap1 = new Bitmap(width, height);
+            pictureBox1.Size = new Size(W, H);
+            bitmap1 = new Bitmap(W, H);
 
             byte aa = 255;
             byte rr = 0;
             byte gg = 0;
             byte bb = 0;
-            for (yy = 0; yy < height; yy++)
+            for (yy = 0; yy < H; yy++)
             {
-                for (xx = 0; xx < width; xx++)
+                for (xx = 0; xx < W; xx++)
                 {
                     /*
                     if ((xx % 100) == 0)
@@ -608,38 +609,37 @@ namespace vcs_Draw1
 
         private void button6_Click(object sender, EventArgs e)
         {
-            int width = 1920;
-            int height = 1080;
+            int W = 1920;
+            int H = 1080;
 
-            pictureBox1.Size = new Size(width, height);
+            pictureBox1.Size = new Size(W, H);
             pictureBox1.Location = new Point(20, 20);
 
-            bitmap1 = new Bitmap(width, height);
+            bitmap1 = new Bitmap(W, H);
 
             int xx;
             int yy;
-            for (yy = 0; yy < height; yy++)
+            for (yy = 0; yy < H; yy++)
             {
-                for (xx = 0; xx < width; xx++)
+                for (xx = 0; xx < W; xx++)
                 {
                     bitmap1.SetPixel(xx, yy, Color.FromArgb(30, 0x11, 0x33, 0x55));
                 }
             }
 
             g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-            g.DrawRectangle(p, 0, 0, width - 1, height - 1);
+            g.DrawRectangle(p, 0, 0, W - 1, H - 1);
 
-            g.DrawRectangle(p, 50, 50, width - 100 - 1, height - 100 - 1);
+            g.DrawRectangle(p, 50, 50, W - 100 - 1, H - 100 - 1);
 
-            g.DrawRectangle(p, 100, 100, width - 200 - 1, height - 200 - 1);
+            g.DrawRectangle(p, 100, 100, W - 200 - 1, H - 200 - 1);
 
             SolidBrush sb;
             Font f;
             sb = new SolidBrush(Color.Blue);
             f = new Font("標楷體", 36);
 
-
-            g.DrawString("1920 X 1080", f, sb, new PointF(width - 500, height - 300));
+            g.DrawString("1920 X 1080", f, sb, new PointF(W - 500, H - 300));
 
             pictureBox1.Image = bitmap1;
 
@@ -650,19 +650,19 @@ namespace vcs_Draw1
 
         private void button7_Click(object sender, EventArgs e)
         {
-            int ww = 1000;
-            int hh = 500;
-            int dd = ww / 5;
-            pictureBox1.Size = new Size(ww, hh);
+            int W = 1000;
+            int H = 500;
+            int dd = W / 5;
+            pictureBox1.Size = new Size(W, H);
             pictureBox1.Location = new Point(20, 20);
 
             //逐點製作圖檔
             int xx;
             int yy;
-            bitmap1 = new Bitmap(ww, hh);
-            for (yy = 0; yy < hh; yy++)
+            bitmap1 = new Bitmap(W, H);
+            for (yy = 0; yy < H; yy++)
             {
-                for (xx = 0; xx < ww; xx++)
+                for (xx = 0; xx < W; xx++)
                 {
                     if ((xx / dd) < 1)
                         bitmap1.SetPixel(xx, yy, Color.FromArgb(255, 0xff, 0x00, 0x00));
@@ -790,15 +790,15 @@ namespace vcs_Draw1
 
         private void button10_Click(object sender, EventArgs e)
         {
-            int width = 1920;
-            int height = 1080;
+            int W = 1920;
+            int H = 1080;
 
             richTextBox1.Text += "FullHD點圖 ST\n";
 
-            pictureBox1.Size = new Size(width, height);
+            pictureBox1.Size = new Size(W, H);
             pictureBox1.Location = new Point(20, 20);
 
-            bitmap1 = new Bitmap(width, height);
+            bitmap1 = new Bitmap(W, H);
 
             var random = new Random();
             int xx;
@@ -806,9 +806,9 @@ namespace vcs_Draw1
             int rr;
             int gg;
             int bb;
-            for (yy = 0; yy < height; yy++)
+            for (yy = 0; yy < H; yy++)
             {
-                for (xx = 0; xx < width; xx++)
+                for (xx = 0; xx < W; xx++)
                 {
                     rr = random.Next(0, 256);
                     gg = random.Next(0, 256);
@@ -818,11 +818,11 @@ namespace vcs_Draw1
             }
 
             g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-            g.DrawRectangle(p, 0, 0, width - 1, height - 1);
+            g.DrawRectangle(p, 0, 0, W - 1, H - 1);
 
-            g.DrawRectangle(p, 50, 50, width - 100 - 1, height - 100 - 1);
+            g.DrawRectangle(p, 50, 50, W - 100 - 1, H - 100 - 1);
 
-            g.DrawRectangle(p, 100, 100, width - 200 - 1, height - 200 - 1);
+            g.DrawRectangle(p, 100, 100, W - 200 - 1, H - 200 - 1);
 
             /*
             SolidBrush sb;
@@ -845,21 +845,17 @@ namespace vcs_Draw1
 
         private void button11_Click(object sender, EventArgs e)
         {
-            int width;
-            int height;
-
-            string filename = "C:\\______test_files\\picture1.jpg";
+            string filename = @"C:\______test_files\picture1.jpg";
 
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
             bitmap1 = new Bitmap(filename);
 
-            richTextBox1.Text += "檔案大小 W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            richTextBox1.Text += "W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
 
-            width = bitmap1.Width;
-            height = bitmap1.Height;
-
-            pictureBox1.Size = new Size(width, height);
+            pictureBox1.Size = new Size(W, H);
             pictureBox1.Location = new Point(20, 20);
 
             pictureBox1.Image = bitmap1;
@@ -895,21 +891,17 @@ namespace vcs_Draw1
 
         private void button12_Click(object sender, EventArgs e)
         {
-            int width;
-            int height;
-
             string filename = "C:\\______test_files\\step2.png";
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
             bitmap1 = new Bitmap(filename);
             //pictureBox1.Image = bitmap2;
 
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
             richTextBox1.Text += "W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
 
-            width = bitmap1.Width;
-            height = bitmap1.Height;
-
-            pictureBox1.Size = new Size(width, height);
+            pictureBox1.Size = new Size(W, H);
             pictureBox1.Location = new Point(20, 20);
             pictureBox1.Image = bitmap1;
         }
@@ -1007,22 +999,17 @@ namespace vcs_Draw1
 
         private void button15_Click(object sender, EventArgs e)
         {
-            int width;
-            int height;
-
             string filename = "C:\\______test_files\\sample.png";
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
             bitmap1 = new Bitmap(filename);
             //pictureBox1.Image = bitmap2;
 
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
             richTextBox1.Text += "W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
 
-            width = bitmap1.Width;
-            height = bitmap1.Height;
-
-            //pictureBox1.Size = new Size(1, 1);
-            pictureBox1.Size = new Size(width, height);
+            pictureBox1.Size = new Size(W, H);
             pictureBox1.Location = new Point(20, 20);
 
             pictureBox1.Image = bitmap1;
@@ -1298,7 +1285,7 @@ namespace vcs_Draw1
             g = this.CreateGraphics();
             g.DrawImage(bitmap1, 0, 0);
 
-            //pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            //pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             //pictureBox1.Image = bitmap1; //顯示在 pictureBox1 圖片控制項中
 
             /*
@@ -1888,16 +1875,11 @@ namespace vcs_Draw1
             richTextBox1.Text += "A = " + Color.Transparent.A.ToString() + "\n";
             richTextBox1.Text += "A2 = " + Color.Red.A.ToString() + "\n";
 
-
-            string filename = @"C:\______test_files\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             g = Graphics.FromImage(bitmap1);
 
-
-
             //清空畫布並用透明色填充
             //g.Clear(Color.Transparent);
-
 
             Color c1 = Color.FromArgb(255, 255, 0, 0);
             SolidBrush sb1 = new SolidBrush(c1);
@@ -1907,7 +1889,6 @@ namespace vcs_Draw1
             SolidBrush sb2 = new SolidBrush(c2);
             g.FillRectangle(sb2, 100, 50, 100, 100);
 
-
             Color c3 = Color.FromArgb(255, 255, 0, 0);
             SolidBrush sb3 = new SolidBrush(c3);
             g.FillRectangle(sb3, 50, 200, 100, 100);
@@ -1915,7 +1896,6 @@ namespace vcs_Draw1
             Color c4 = Color.FromArgb(128, 0, 255, 0);
             SolidBrush sb4 = new SolidBrush(c4);
             g.FillRectangle(sb4, 100, 200, 100, 100);
-
 
             //g.FillRectangle(Brushes.Blue, 00, 320, 600, 50);
             //g.FillRectangle(Brushes.Blue, 00, 420, 600, 50);
@@ -1942,16 +1922,12 @@ namespace vcs_Draw1
             SolidBrush sb5 = new SolidBrush(c6);
             g.FillRectangle(sb5, 300, 100, 100, 100);
 
-
             //g.DrawString("格子裏", new Font("黑體", 20), new SolidBrush(c6), 200, 100);
             g.DrawString("格子裏", new Font("黑體", 20), new SolidBrush(Color.Black), 200, 100);
 
-
             g.DrawRectangle(Pens.Red, 100, 100, 100, 100);
-            
-            
-            pictureBox1.Image = bitmap1;
 
+            pictureBox1.Image = bitmap1;
         }
 
         private void button36_Click(object sender, EventArgs e)
@@ -2838,10 +2814,9 @@ namespace vcs_Draw1
             {
                 open_new_file();
                 //製作圖面的標記文字
-                string filename = "C:\\______test_files\\picture1.jpg";
                 bitmap1 = new Bitmap(filename);
                 g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
-                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+                pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
                 pictureBox1.Image = bitmap1; //顯示在 pictureBox1 圖片控制項中
             }
 
@@ -3008,7 +2983,6 @@ namespace vcs_Draw1
             //去背效果2
             //MakeTransparent 用法
 
-            string filename = @"C:\______test_files\picture1.jpg";
             Bitmap bitmap1 = new Bitmap(filename);
             richTextBox1.Text += "W = " + bitmap1.Width.ToString() + ", H = " + bitmap1.Height.ToString() + "\n";
 
