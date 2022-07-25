@@ -53,8 +53,8 @@ namespace vcs_DrawJ_Watermark3
         //圖片加水印
         public static Image AddTextToImg(Image image, string text)
         {
-            Bitmap bitmap = new Bitmap(image, image.Width, image.Height);
-            Graphics g = Graphics.FromImage(bitmap);
+            Bitmap bitmap1 = new Bitmap(image, image.Width, image.Height);
+            Graphics g = Graphics.FromImage(bitmap1);
 
             float fontSize = 12.0f; //字體大小
             float textWidth = text.Length * fontSize; //文本的長度
@@ -66,21 +66,21 @@ namespace vcs_DrawJ_Watermark3
             //聲明矩形域
             RectangleF textArea = new RectangleF(rectX, rectY, rectWidth, rectHeight);
 
-            Font font = new Font("宋體", fontSize); //定義字體
+            Font f = new Font("標楷體", fontSize); //定義字體
             Brush whiteBrush = new SolidBrush(Color.White); //白筆刷，畫文字用
             Brush blackBrush = new SolidBrush(Color.Black); //黑筆刷，畫背景用
 
             g.FillRectangle(blackBrush, rectX, rectY, rectWidth, rectHeight);
 
-            g.DrawString(text, font, whiteBrush, textArea);
+            g.DrawString(text, f, whiteBrush, textArea);
             MemoryStream ms = new MemoryStream();
             //保存為Jpg類型
-            bitmap.Save(ms, ImageFormat.Jpeg);
+            bitmap1.Save(ms, ImageFormat.Jpeg);
 
             Image h_hovercImg = Image.FromStream(ms);
 
             g.Dispose();
-            bitmap.Dispose();
+            bitmap1.Dispose();
             return h_hovercImg;
         }
 
@@ -88,7 +88,6 @@ namespace vcs_DrawJ_Watermark3
         {
             pictureBox1.Image.Dispose();
 
-            //調用方法：命名空間.類名.AddWaterText(picpath, "Tandy Tang - 博客園", picpath, 255, 18);
             string filename1 = @"C:\______test_files\picture1.jpg";
             string filename2 = @"C:\______test_files\picture1add.jpg";
             string text = "牡丹亭";
@@ -165,7 +164,6 @@ namespace vcs_DrawJ_Watermark3
         {
             Graphics g = this.pictureBox1.CreateGraphics();
             addWatermarkText1(g, 10, "lion-mouse", "WM_TOP_LEFT", 150, 150);
-
         }
 
         static void addWatermarkText1(Graphics g, int fontsize, string _watermarkText, string _watermarkPosition, int _width, int _height)
@@ -223,7 +221,6 @@ namespace vcs_DrawJ_Watermark3
                 drawRect = new RectangleF(73, 135, 450, 64);
                 //color = Color.FromArgb(255, 255, 255);
                 color = Color.Red;
-
             }
             else
             {
@@ -253,110 +250,67 @@ namespace vcs_DrawJ_Watermark3
         {
             Graphics g = this.pictureBox1.CreateGraphics();
             addWatermarkText2(g, "Top", 20, "mouse");
-
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //讀取圖檔, 多一層Image結構
-            string filename = @"C:\______test_files\picture1.jpg";
-            Image image = Image.FromFile(filename);
-            image = AddTextToImgbbb(image, "lion-mouse");
-            pictureBox1.Image = image;
-        }
-
-        public static Image AddTextToImgbbb(Image image, string text)
-        {
-            Bitmap bitmap = new Bitmap(image, image.Width, image.Height);
-            Graphics g = Graphics.FromImage(bitmap);
-
-            float fontSize = 12.0f; //字體大小
-            float textWidth = text.Length * fontSize; //文本的長度
-            //下面定義一個矩形區域，以後在這個矩形裡畫上白底黑字
-            float rectX = 0;
-            float rectY = 0;
-            float rectWidth = text.Length * (fontSize + 8);
-            float rectHeight = fontSize + 8;
-            //聲明矩形域
-            RectangleF textArea = new RectangleF(rectX, rectY, rectWidth, rectHeight);
-
-            Font font = new Font("宋體", fontSize); //定義字體
-            Brush whiteBrush = new SolidBrush(Color.White); //白筆刷，畫文字用
-            Brush blackBrush = new SolidBrush(Color.Black); //黑筆刷，畫背景用
-
-
-            g.FillRectangle(blackBrush, rectX, rectY, rectWidth, rectHeight);
-
-            g.DrawString(text, font, whiteBrush, textArea);
-            MemoryStream ms = new MemoryStream();
-            //保存為Jpg類型
-            bitmap.Save(ms, ImageFormat.Jpeg);
-
-            Image h_hovercImg = Image.FromStream(ms);
-
-            g.Dispose();
-            bitmap.Dispose();
-
-
-            return h_hovercImg;
-
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            Bitmap result_bm = new Bitmap(pictureBox1.Image);
+            Bitmap bitmap1 = new Bitmap(pictureBox1.Image);
 
             using (Bitmap watermark_bm = new Bitmap(pictureBox2.Image))
             {
-                int x = (result_bm.Width - watermark_bm.Width) / 2;
-                int y = (result_bm.Height - watermark_bm.Height) / 2;
-                DrawWatermark1(watermark_bm, result_bm, x, y);
+                int x = (bitmap1.Width - watermark_bm.Width) / 2;
+                int y = (bitmap1.Height - watermark_bm.Height) / 2;
+                DrawWatermark1(watermark_bm, bitmap1, x, y);
             }
 
-            pictureBox1.Image = result_bm;
+            pictureBox1.Image = bitmap1;
         }
 
         // Copy the watermark image over the result image.
-        private void DrawWatermark1(Bitmap watermark_bm, Bitmap result_bm, int x, int y)
+        private void DrawWatermark1(Bitmap bitmap1, Bitmap result_bm, int x, int y)
         {
             const byte ALPHA = 128;
             // Set the watermark's pixels' Alpha components.
             Color clr;
-            for (int py = 0; py < watermark_bm.Height; py++)
+            for (int py = 0; py < bitmap1.Height; py++)
             {
-                for (int px = 0; px < watermark_bm.Width; px++)
+                for (int px = 0; px < bitmap1.Width; px++)
                 {
-                    clr = watermark_bm.GetPixel(px, py);
-                    watermark_bm.SetPixel(px, py, Color.FromArgb(ALPHA, clr.R, clr.G, clr.B));
+                    clr = bitmap1.GetPixel(px, py);
+                    bitmap1.SetPixel(px, py, Color.FromArgb(ALPHA, clr.R, clr.G, clr.B));
                 }
             }
 
             // Set the watermark's transparent color.
-            watermark_bm.MakeTransparent(watermark_bm.GetPixel(0, 0));
+            bitmap1.MakeTransparent(bitmap1.GetPixel(0, 0));
 
             // Copy onto the result image.
-            using (Graphics gr = Graphics.FromImage(result_bm))
+            using (Graphics g = Graphics.FromImage(result_bm))
             {
-                gr.DrawImage(watermark_bm, x, y);
+                g.DrawImage(bitmap1, x, y);
             }
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            Bitmap result_bm = new Bitmap(pictureBox1.Image);
+            Bitmap bitmap1 = new Bitmap(pictureBox1.Image);
 
-            using (Bitmap watermark_bm = new Bitmap(pictureBox2.Image))
+            using (Bitmap bitmap2 = new Bitmap(pictureBox2.Image))
             {
-                int x = (result_bm.Width - watermark_bm.Width) / 2;
-                int y = (result_bm.Height - watermark_bm.Height) / 2;
-                DrawWatermark2(watermark_bm, result_bm, x, y);
+                int x = (bitmap1.Width - bitmap2.Width) / 2;
+                int y = (bitmap1.Height - bitmap2.Height) / 2;
+                DrawWatermark2(bitmap2, bitmap1, x, y);
             }
 
-            pictureBox1.Image = result_bm;
+            pictureBox1.Image = bitmap1;
         }
 
         // Copy the watermark image over the result image.
-        private void DrawWatermark2(Bitmap watermark_bm, Bitmap result_bm, int x, int y)
+        private void DrawWatermark2(Bitmap bitmap1, Bitmap result_bm, int x, int y)
         {
             // Make a ColorMatrix that multiplies
             // the alpha component by 0.5.
@@ -369,13 +323,13 @@ namespace vcs_DrawJ_Watermark3
 
             // Make pixels that are the same color as the
             // one in the upper left transparent.
-            watermark_bm.MakeTransparent(watermark_bm.GetPixel(0, 0));
+            bitmap1.MakeTransparent(bitmap1.GetPixel(0, 0));
 
             // Draw the image using the ColorMatrix.
-            using (Graphics gr = Graphics.FromImage(result_bm))
+            using (Graphics g = Graphics.FromImage(result_bm))
             {
-                Rectangle rect = new Rectangle(x, y, watermark_bm.Width, watermark_bm.Height);
-                gr.DrawImage(watermark_bm, rect, 0, 0, watermark_bm.Width, watermark_bm.Height, GraphicsUnit.Pixel, image_attributes);
+                Rectangle rect = new Rectangle(x, y, bitmap1.Width, bitmap1.Height);
+                g.DrawImage(bitmap1, rect, 0, 0, bitmap1.Width, bitmap1.Height, GraphicsUnit.Pixel, image_attributes);
             }
         }
     }

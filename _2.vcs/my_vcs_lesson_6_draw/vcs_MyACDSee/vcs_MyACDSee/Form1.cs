@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Collections;   //for ArrayList
 
 namespace vcs_MyACDSee
@@ -15,7 +16,23 @@ namespace vcs_MyACDSee
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
             pictureBox1.BackColor = Color.Black;
+
+            //全螢幕
+            //this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = FormBorderStyle.None;
+            //this.WindowState = FormWindowState.Maximized;
+            this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
+
+            string src = @"C:\______test_files\bear.jpg";
+            pictureBox1.Dock = DockStyle.Fill;
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            Image loadedImage = Image.FromFile(src);
+            pictureBox1.Image = loadedImage;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -26,26 +43,6 @@ namespace vcs_MyACDSee
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             //MessageBox.Show("Form Closed............");
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            //全螢幕
-            //this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.FormBorderStyle = FormBorderStyle.None;
-            //this.WindowState = FormWindowState.Maximized;
-            this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
-
-            string src = @"C:\______test_files\bear.jpg";
-            pictureBox1.Dock = DockStyle.Fill; 
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            Image loadedImage = Image.FromFile(src);
-            pictureBox1.Image = loadedImage;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
         }
 
         ArrayList picFileName = new ArrayList();
@@ -173,12 +170,6 @@ namespace vcs_MyACDSee
                     //richTextBox1.Text += "KeyCode: " + e.KeyCode.ToString() + "\n";
                     break;
             }
-
-        }
-
-        private void button1_Click_1(object sender, EventArgs e)
-        {
-
         }
     }
 }
