@@ -2103,6 +2103,37 @@ namespace _vcs_MakePicture
 
         private void button54_Click(object sender, EventArgs e)
         {
+            //逐點製作圖檔
+            int width;
+            int height;
+            int xx;
+            int yy;
+
+            width = 500;
+            height = 200;
+            bitmap1 = new Bitmap(width, height);
+
+            g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.Pink);
+
+            g.FillEllipse(new SolidBrush(Color.Red), new Rectangle(0, 0, 100, 200));
+            g.FillEllipse(new SolidBrush(Color.Red), new Rectangle(500 - 100, 0, 100, 200));
+
+            g.FillRectangle(new SolidBrush(Color.Red), new Rectangle(50, 0, 100, 200));
+            g.FillRectangle(new SolidBrush(Color.Green), new Rectangle(100, 0, 100, 200));
+            g.FillRectangle(new SolidBrush(Color.Pink), new Rectangle(200, 0, 100, 200));
+            g.FillRectangle(new SolidBrush(Color.Yellow), new Rectangle(300, 0, 100, 200));
+            g.FillRectangle(new SolidBrush(Color.Red), new Rectangle(400, 0, 50, 200));
+
+            Font f;
+
+            sb = new SolidBrush(Color.Blue);
+            f = new Font("標楷體", 86);
+
+            g.DrawString("群曜醫電", f, sb, new PointF(0, 50));
+
+
+            pictureBox1.Image = bitmap1;
 
         }
 

@@ -99,42 +99,42 @@
             this.mnuScale100.Checked = true;
             this.mnuScale100.CheckState = System.Windows.Forms.CheckState.Checked;
             this.mnuScale100.Name = "mnuScale100";
-            this.mnuScale100.Size = new System.Drawing.Size(152, 22);
+            this.mnuScale100.Size = new System.Drawing.Size(106, 22);
             this.mnuScale100.Text = "1&00%";
             this.mnuScale100.Click += new System.EventHandler(this.mnuScale_Click);
             // 
             // mnuScale75
             // 
             this.mnuScale75.Name = "mnuScale75";
-            this.mnuScale75.Size = new System.Drawing.Size(152, 22);
+            this.mnuScale75.Size = new System.Drawing.Size(106, 22);
             this.mnuScale75.Text = "&75%";
             this.mnuScale75.Click += new System.EventHandler(this.mnuScale_Click);
             // 
             // mnuScale66
             // 
             this.mnuScale66.Name = "mnuScale66";
-            this.mnuScale66.Size = new System.Drawing.Size(152, 22);
+            this.mnuScale66.Size = new System.Drawing.Size(106, 22);
             this.mnuScale66.Text = "&66%";
             this.mnuScale66.Click += new System.EventHandler(this.mnuScale_Click);
             // 
             // mnuScale50
             // 
             this.mnuScale50.Name = "mnuScale50";
-            this.mnuScale50.Size = new System.Drawing.Size(152, 22);
+            this.mnuScale50.Size = new System.Drawing.Size(106, 22);
             this.mnuScale50.Text = "&50%";
             this.mnuScale50.Click += new System.EventHandler(this.mnuScale_Click);
             // 
             // mnuScale25
             // 
             this.mnuScale25.Name = "mnuScale25";
-            this.mnuScale25.Size = new System.Drawing.Size(152, 22);
+            this.mnuScale25.Size = new System.Drawing.Size(106, 22);
             this.mnuScale25.Text = "&25%";
             this.mnuScale25.Click += new System.EventHandler(this.mnuScale_Click);
             // 
             // mnuScale15
             // 
             this.mnuScale15.Name = "mnuScale15";
-            this.mnuScale15.Size = new System.Drawing.Size(152, 22);
+            this.mnuScale15.Size = new System.Drawing.Size(106, 22);
             this.mnuScale15.Text = "&15%";
             this.mnuScale15.Click += new System.EventHandler(this.mnuScale_Click);
             // 

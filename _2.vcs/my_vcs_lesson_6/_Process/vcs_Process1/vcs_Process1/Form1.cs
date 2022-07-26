@@ -279,7 +279,7 @@ namespace vcs_Process1
             }
 
             //用預設的程式開啟檔案
-            filename = @"C:\______test_files\__RW\_gif\sky.gif";
+            filename = @"C:\______test_files\__pic\_gif\sky.gif";
 
             Process.Start("explorer.exe", filename);
             //Process.Start(filename);    //same

@@ -31,7 +31,7 @@ namespace vcs_ReadWrite_GIF4
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\__RW\_gif\cat.gif";
+            string filename = @"C:\______test_files\__pic\_gif\cat.gif";
             image = new AnimateImage(Image.FromFile(filename));
             image.OnFrameChanged += new EventHandler<EventArgs>(image_OnFrameChanged);
             SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);

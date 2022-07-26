@@ -43,9 +43,9 @@
             this.linkLabel1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.linkLabel1.LinkArea = new System.Windows.Forms.LinkArea(110, 28);
             this.linkLabel1.LinkBehavior = System.Windows.Forms.LinkBehavior.AlwaysUnderline;
-            this.linkLabel1.Location = new System.Drawing.Point(12, 325);
+            this.linkLabel1.Location = new System.Drawing.Point(12, 496);
             this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(532, 42);
+            this.linkLabel1.Size = new System.Drawing.Size(532, 39);
             this.linkLabel1.TabIndex = 2;
             this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "This is a picture of Saturn\'s moon Encaledus taken by the Casinni spacecraft. For" +
@@ -57,7 +57,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(12, 293);
+            this.label1.Location = new System.Drawing.Point(12, 466);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(394, 17);
             this.label1.TabIndex = 3;
@@ -66,9 +66,9 @@
             // panCloseup
             // 
             this.panCloseup.Controls.Add(this.picCloseup);
-            this.panCloseup.Location = new System.Drawing.Point(268, 12);
+            this.panCloseup.Location = new System.Drawing.Point(268, 11);
             this.panCloseup.Name = "panCloseup";
-            this.panCloseup.Size = new System.Drawing.Size(250, 250);
+            this.panCloseup.Size = new System.Drawing.Size(250, 231);
             this.panCloseup.TabIndex = 4;
             this.panCloseup.Visible = false;
             // 
@@ -76,7 +76,7 @@
             // 
             this.picCloseup.Location = new System.Drawing.Point(3, 3);
             this.picCloseup.Name = "picCloseup";
-            this.picCloseup.Size = new System.Drawing.Size(189, 196);
+            this.picCloseup.Size = new System.Drawing.Size(189, 181);
             this.picCloseup.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picCloseup.TabIndex = 1;
             this.picCloseup.TabStop = false;
@@ -84,22 +84,22 @@
             // picWhole
             // 
             this.picWhole.Image = global::vcs_PictureMagnify5.Properties.Resources.enceladus_cassini;
-            this.picWhole.Location = new System.Drawing.Point(12, 12);
+            this.picWhole.Location = new System.Drawing.Point(12, 11);
             this.picWhole.Name = "picWhole";
-            this.picWhole.Size = new System.Drawing.Size(250, 250);
+            this.picWhole.Size = new System.Drawing.Size(250, 231);
             this.picWhole.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picWhole.TabIndex = 0;
             this.picWhole.TabStop = false;
-            this.picWhole.MouseLeave += new System.EventHandler(this.picWhole_MouseLeave);
-            this.picWhole.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picWhole_MouseMove);
             this.picWhole.Paint += new System.Windows.Forms.PaintEventHandler(this.picWhole_Paint);
             this.picWhole.MouseEnter += new System.EventHandler(this.picWhole_MouseEnter);
+            this.picWhole.MouseLeave += new System.EventHandler(this.picWhole_MouseLeave);
+            this.picWhole.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picWhole_MouseMove);
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(558, 374);
+            this.ClientSize = new System.Drawing.Size(846, 567);
             this.Controls.Add(this.panCloseup);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.linkLabel1);

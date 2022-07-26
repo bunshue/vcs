@@ -14,10 +14,11 @@ namespace vcs_Draw_Bitmap
 {
     public partial class Form1 : Form
     {
-        //Graphics g;
-        //Pen p;
-        //SolidBrush sb;
+        Graphics g;
+        Pen p;
+        SolidBrush sb;
         Bitmap bitmap1;
+        Font f;
 
         string filename = @"C:\______test_files\picture1.jpg";
 
@@ -30,6 +31,7 @@ namespace vcs_Draw_Bitmap
         {
             show_item_location();
 
+            p = new Pen(Color.Red, 3);
             bitmap1 = (Bitmap)Bitmap.FromFile(filename);
             pictureBox1.Image = bitmap1;
         }
@@ -89,6 +91,20 @@ namespace vcs_Draw_Bitmap
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        void open_new_file()
+        {
+            richTextBox1.Text += "開啟一個 640 X 480 的空畫布\n";
+            //指定畫布大小
+            pictureBox1.Width = 640;
+            pictureBox1.Height = 480;
+            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+
+            g = Graphics.FromImage(bitmap1);    //以記憶體圖像 bitmap1 建立 記憶體畫布g
+            g.DrawRectangle(p, 0, 0, pictureBox1.Width - 1, pictureBox1.Height - 1);
+            pictureBox1.Image = bitmap1;
+            return;
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -222,30 +238,17 @@ namespace vcs_Draw_Bitmap
             轉換圖片格式
             Bitmap bm = new Bitmap(舊檔名);
             bm.Save(新檔名, 新格式);	//格式為 ImageFormat.Bmp...
-                        */
-
-
-
-
+            */
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
             //從pictureBox取得Bitmap
             Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
-
-
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //Bitmap先變成Graphics, 拿來畫圖用
-            Graphics g = Graphics.FromImage(bitmap1);
-            //pHdc = g.GetHdc();
-            g.ReleaseHdc();
-            //g.DrawString(drawDate, drawFont, drawBrush, xPos, yPos);
-            g.Dispose();
-
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -253,11 +256,15 @@ namespace vcs_Draw_Bitmap
             //改變Bitmap大小
             string filename = @"C:\______test_files\picture1.jpg";
             Image image = Image.FromFile(filename);
-            Bitmap bitmap1 = new Bitmap(image, image.Width / 2, image.Height / 2);
-            Bitmap bitmap2 = new Bitmap(bitmap1, bitmap1.Width * 5 / 2, bitmap1.Height * 5 / 2);
+
+            int W1 = image.Width;
+            int H1 = image.Height;
+            Bitmap bitmap1 = new Bitmap(image, W1 / 2, H1 / 2);
+
+            int W2 = bitmap1.Width;
+            int H2 = bitmap1.Height;
+            Bitmap bitmap2 = new Bitmap(bitmap1, W2 * 5 / 2, H2 * 5 / 2);
             pictureBox1.Image = bitmap2;
-
-
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -300,7 +307,6 @@ namespace vcs_Draw_Bitmap
             Clipboard.SetImage(bm);
         }
 
-
         private void button14_Click(object sender, EventArgs e)
         {
             //縮小一半並存檔
@@ -316,17 +322,15 @@ namespace vcs_Draw_Bitmap
             //建立新的影像，長寬為原始影像的1/2
             Image zoomImage = new Bitmap(pictureBox1.Image.Width / 2, pictureBox1.Image.Height / 2) as Image;
             //準備繪製新的影像
-            Graphics graphics0 = Graphics.FromImage(zoomImage);
+            Graphics g = Graphics.FromImage(zoomImage);
             //於座標(0,0)開始繪製來源影像，長寬設置為來源影像的1/2
-            graphics0.DrawImage(pictureBox1.Image, 0, 0, pictureBox1.Image.Width / 2, pictureBox1.Image.Height / 2);
-            graphics0.Dispose();
+            g.DrawImage(pictureBox1.Image, 0, 0, pictureBox1.Image.Width / 2, pictureBox1.Image.Height / 2);
+            g.Dispose();
             //儲存新的影像
             string filename = Application.StartupPath + "\\zoom_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
             zoomImage.Save(@filename, ImageFormat.Jpeg);
             richTextBox1.Text += "縮小一半，存檔完成，檔名：" + filename + "\n";
             #endregion
-
-
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -344,10 +348,10 @@ namespace vcs_Draw_Bitmap
             //建立新的影像，長寬為原始影像的2倍
             Image zoomImageb = new Bitmap(pictureBox1.Image.Width * 2, pictureBox1.Image.Height * 2) as Image;
             //準備繪製新的影像
-            Graphics graphics0a = Graphics.FromImage(zoomImageb);
+            Graphics g = Graphics.FromImage(zoomImageb);
             //於座標(0,0)開始繪製來源影像，長寬設置為來源影像的2倍
-            graphics0a.DrawImage(pictureBox1.Image, 0, 0, pictureBox1.Image.Width * 2, pictureBox1.Image.Height * 2);
-            graphics0a.Dispose();
+            g.DrawImage(pictureBox1.Image, 0, 0, pictureBox1.Image.Width * 2, pictureBox1.Image.Height * 2);
+            g.Dispose();
             //儲存新的影像
             string filename = Application.StartupPath + "\\big_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
             zoomImageb.Save(@filename, ImageFormat.Jpeg);
@@ -471,21 +475,144 @@ namespace vcs_Draw_Bitmap
 
         private void button24_Click(object sender, EventArgs e)
         {
+            //MakeTransparent 使用 去背效果1
+            string filename = @"C:\______test_files\__pic\banner_ims.png";
+            Bitmap bitmap2 = (Bitmap)Image.FromFile(filename);	//給不透明使用
+            Bitmap bitmap3 = (Bitmap)Image.FromFile(filename);	//給透明使用
 
+            ////使用默認的透明顏色進行透明設定, 可重複設定
+            bitmap3.MakeTransparent(Color.Pink);
+            bitmap3.MakeTransparent(Color.Blue);
+
+            Graphics g = Graphics.FromImage(bitmap1);
+
+            //原圖貼上
+            //               貼上位置x      貼上位置y      貼上大小W            貼上大小H
+            g.DrawImage(bitmap2, 0, 400 - 160, 305, 80);
+            g.DrawImage(bitmap3, 0, 400 - 80, 305, 80);
+
+            pictureBox1.Image = bitmap1;
+            richTextBox1.Text += "將粉紅色和藍色, 設定為透明色\n";
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
+            //MakeTransparent 使用 去背效果2
+
+            open_new_file();
+
+            pictureBox1.BackColor = Color.Pink;
+
+            string filename = @"C:\______test_files\__pic\_angry_bird\thumb-1920-283652.jpg";
+
+            GraphicsUnit units = GraphicsUnit.Pixel;
+
+            Bitmap bmp1 = new Bitmap(filename);
+            Bitmap bmp2 = new Bitmap(filename);
+
+            //bmp2 做 去背景
+            bmp2.MakeTransparent(Color.White);  //MakeTransparent 用法, bmp2 去背景, 可以多重去背, 連續寫即可
+            //bmp2.MakeTransparent(Color.Black);  //MakeTransparent 用法, bmp2 去背景, 可以多重去背, 連續寫即可
+
+            Rectangle destRect1 = new Rectangle(30, 30, bmp1.Width / 5, bmp1.Height / 5);
+            Rectangle destRect2 = new Rectangle(30, 200, bmp2.Width / 5, bmp2.Height / 5);
+
+            g.DrawRectangle(new Pen(Color.Yellow, 10), 100, 100, 300, 300);
+
+
+            SolidBrush sb = new SolidBrush(Color.Purple);
+            Font f = new Font("標楷體", 20);
+
+            g.DrawImage(bmp1, destRect1, 0, 0, bmp1.Width, bmp1.Height, units);
+            g.DrawString("沒去背", f, sb, new PointF(destRect1.X + bmp1.Width / 5, destRect1.Y + 50));
+
+
+            g.DrawImage(bmp2, destRect2, 0, 0, bmp2.Width, bmp2.Height, units);
+            g.DrawString("有去背", f, sb, new PointF(destRect2.X + bmp2.Width / 5, destRect2.Y + 50));
+
 
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
+            //MakeTransparent 使用 去背效果3
+
+            Bitmap bitmap1 = new Bitmap(filename);
+            richTextBox1.Text += "W = " + bitmap1.Width.ToString() + ", H = " + bitmap1.Height.ToString() + "\n";
+
+            int x_st = 50;
+            int y_st = 50;
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+
+            pictureBox1.Size = new Size(W * 2 + 150, H + 100);
+            pictureBox1.BackColor = Color.Pink;
+
+            Application.DoEvents();
+
+            GraphicsUnit units = GraphicsUnit.Pixel;
+
+            // Create parallelogram for drawing image.
+            Point ulCorner = new Point(x_st + 0, y_st);
+            Point urCorner = new Point(x_st + W, y_st);
+            Point llCorner = new Point(x_st + 0, y_st + H);
+            Point[] destPara = { ulCorner, urCorner, llCorner };
+
+            // Create rectangle for source image.
+            Rectangle srcRect = new Rectangle(0, 0, W, H);
+
+            Graphics g = pictureBox1.CreateGraphics();
+
+            g.DrawImage((Image)bitmap1, destPara, srcRect, units);
+
+            Application.DoEvents();
+
+            bitmap1.MakeTransparent(Color.White);
+            g.DrawImage((Image)bitmap1, new Point(x_st + W + 10, y_st));
+
+            g.DrawString("MakeTransparent 用法, 指名將白色變成透明", new Font("標楷體", 20), new SolidBrush(Color.Navy), 10, 10);
+
 
         }
 
         private void button27_Click(object sender, EventArgs e)
         {
+            //MakeTransparent 使用 去背效果4
+
+            open_new_file();
+
+            int dy = 150;
+
+            //MakeTransparent 功能
+
+            string filename = @"C:\______test_files\__pic\lion.bmp";
+
+            richTextBox1.Text += "無 MakeTransparent\n";
+            Bitmap bmp1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            g.DrawImage(bmp1, 0, 0, bmp1.Width, bmp1.Height);
+
+
+
+            richTextBox1.Text += "有 MakeTransparent\n";
+            Bitmap bmp2 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            //bmp2.MakeTransparent();    //沒寫就是預設的     程式碼會讓系統預設透明色彩透明
+            bmp2.MakeTransparent(Color.White);//將圖片白色部分透明化, 將此 Bitmap 的指定色彩變為透明。
+
+            g.DrawImage(bmp2, 0, dy, bmp2.Width, bmp2.Height);
+
+
+            richTextBox1.Text += "有 MakeTransparent 指名某點顏色變透明\n";
+            Bitmap bmp3 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+
+            Color backColor = bmp3.GetPixel(20, 80);   //選取圖片邊緣的一個點的顏色當成背景色
+            bmp3.MakeTransparent(backColor); //將此背景色設定為透明
+            g.DrawImage(bmp3, 0, dy * 2, bmp3.Width, bmp3.Height);
+
+            g.DrawString("無 MakeTransparent", new Font("標楷體", 20), new SolidBrush(Color.Navy), 0, bmp1.Height - 30);
+            g.DrawString("有 MakeTransparent", new Font("標楷體", 20), new SolidBrush(Color.Navy), 0, dy + bmp2.Height - 30);
+            g.DrawString("有 MakeTransparent 指名某點顏色變透明", new Font("標楷體", 20), new SolidBrush(Color.Navy), 0, dy * 2 + bmp3.Height - 30);
+
+            pictureBox1.Image = bitmap1;
 
         }
 
@@ -551,24 +678,25 @@ namespace vcs_Draw_Bitmap
 
     public class ImageResize
     {
-        public static Bitmap Resize(Bitmap originImage, Double times)
+        public static Bitmap Resize(Bitmap bitmap1, Double ratio)
         {
-            int width = Convert.ToInt32(originImage.Width * times);
-            int height = Convert.ToInt32(originImage.Height * times);
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            int w = Convert.ToInt32(W * ratio);
+            int h = Convert.ToInt32(H * ratio);
 
-            return Process(originImage, originImage.Width, originImage.Height, width, height);
+            return Process(bitmap1, W, H, w, h);
         }
 
-        private static Bitmap Process(Bitmap originImage, int oriwidth, int oriheight, int width, int height)
+        private static Bitmap Process(Bitmap bitmap1, int oriwidth, int oriheight, int width, int height)
         {
             Bitmap resizedbitmap = new Bitmap(width, height);
             Graphics g = Graphics.FromImage(resizedbitmap);
             g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
             g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
             g.Clear(Color.Transparent);
-            g.DrawImage(originImage, new Rectangle(0, 0, width, height), new Rectangle(0, 0, oriwidth, oriheight), GraphicsUnit.Pixel);
+            g.DrawImage(bitmap1, new Rectangle(0, 0, width, height), new Rectangle(0, 0, oriwidth, oriheight), GraphicsUnit.Pixel);
             return resizedbitmap;
         }
     }
 }
-

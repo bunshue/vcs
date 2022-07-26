@@ -824,7 +824,6 @@
             this.button56.Name = "button56";
             this.button56.Size = new System.Drawing.Size(120, 42);
             this.button56.TabIndex = 85;
-            this.button56.Text = "去背效果1";
             this.button56.UseVisualStyleBackColor = true;
             this.button56.Click += new System.EventHandler(this.button56_Click);
             // 
@@ -835,7 +834,6 @@
             this.button57.Name = "button57";
             this.button57.Size = new System.Drawing.Size(120, 42);
             this.button57.TabIndex = 85;
-            this.button57.Text = "去背效果2";
             this.button57.UseVisualStyleBackColor = true;
             this.button57.Click += new System.EventHandler(this.button57_Click);
             // 
@@ -846,7 +844,6 @@
             this.button58.Name = "button58";
             this.button58.Size = new System.Drawing.Size(120, 42);
             this.button58.TabIndex = 86;
-            this.button58.Text = "去背效果3";
             this.button58.UseVisualStyleBackColor = true;
             this.button58.Click += new System.EventHandler(this.button58_Click);
             // 

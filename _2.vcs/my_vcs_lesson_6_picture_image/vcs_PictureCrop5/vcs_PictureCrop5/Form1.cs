@@ -18,6 +18,10 @@ namespace vcs_PictureCrop5
         Bitmap bitmap2; //畫臨時框
         string filename = @"C:\______test_files\elephant.jpg";
 
+        private Point point_st;
+        private Point point_sp;
+        private Graphics g;
+
         private Rectangle select_rectangle = new Rectangle(new Point(0, 0), new Size(0, 0));    //用來保存截圖的矩形
 
         private float PictureScale = 1;
@@ -29,19 +33,12 @@ namespace vcs_PictureCrop5
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            pictureBox1.Image = Image.FromFile(filename);
-
-            bitmap1 = new Bitmap(filename);
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "W = " + pictureBox1.Image.Width.ToString() + ", H = " + pictureBox1.Image.Height.ToString() + "\n";
-
-            button1.Text = "擷取中";
-
+            bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             pictureBox1.Image = bitmap1;
+
             pictureBox1.MouseDown += pictureBox1_MouseDown;
+            pictureBox1.MouseMove += pictureBox1_MouseMove;
+            pictureBox1.MouseUp += pictureBox1_MouseUp;
             pictureBox1.Cursor = Cursors.Cross;
         }
 
@@ -50,16 +47,13 @@ namespace vcs_PictureCrop5
             return new Rectangle(Math.Min(pt1.X, pt2.X), Math.Min(pt1.Y, pt2.Y), Math.Abs(pt1.X - pt2.X), Math.Abs(pt1.Y - pt2.Y));
         }
 
-        private Point point_st;
-        private Point point_sp;
-        private Graphics g;
+        private bool flag_mouse_down = false;
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
+            flag_mouse_down = true;
             richTextBox1.Text += "pictureBox1_MouseDown\n";
+            pictureBox1.Refresh();
             point_st = e.Location;
-            pictureBox1.MouseDown -= pictureBox1_MouseDown;
-            pictureBox1.MouseMove += pictureBox1_MouseMove;
-            pictureBox1.MouseUp += pictureBox1_MouseUp;
 
             bitmap2 = (Bitmap)bitmap1.Clone();
             g = Graphics.FromImage(bitmap2);
@@ -68,40 +62,39 @@ namespace vcs_PictureCrop5
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            //richTextBox1.Text += "pictureBox1_MouseMove\n";
+            if (flag_mouse_down == true)
+            {
+                //richTextBox1.Text += "pictureBox1_MouseMove\n";
 
-            // Save the new point.
-            point_sp = e.Location; //終點座標
+                // Save the new point.
+                point_sp = e.Location; //終點座標
 
-            select_rectangle = MakeRectangle(point_st, point_sp);
+                select_rectangle = MakeRectangle(point_st, point_sp);
 
-            // Draw the selection rectangle.
-            g.DrawImage(bitmap1, 0, 0); //恢復原圖
-            float x_st = Math.Min(point_st.X, point_sp.X) * PictureScale;
-            float y_st = Math.Min(point_st.Y, point_sp.Y) * PictureScale;
-            float W = Math.Abs(point_st.X - point_sp.X) * PictureScale;
-            float H = Math.Abs(point_st.Y - point_sp.Y) * PictureScale;
-            Pen p = new Pen(Color.Red, 1 * PictureScale);
-            p.DashStyle = DashStyle.Dash;
-            g.DrawRectangle(p, x_st, y_st, W, H);   //畫上臨時框
+                // Draw the selection rectangle.
+                g.DrawImage(bitmap1, 0, 0); //恢復原圖
+                float x_st = Math.Min(point_st.X, point_sp.X) * PictureScale;
+                float y_st = Math.Min(point_st.Y, point_sp.Y) * PictureScale;
+                float W = Math.Abs(point_st.X - point_sp.X) * PictureScale;
+                float H = Math.Abs(point_st.Y - point_sp.Y) * PictureScale;
+                Pen p = new Pen(Color.Red, 1 * PictureScale);
+                p.DashStyle = DashStyle.Dash;
+                g.DrawRectangle(p, x_st, y_st, W, H);   //畫上臨時框
 
-            pictureBox1.Refresh();
+                pictureBox1.Refresh();
 
-            nud_x_st.Value = (decimal)x_st;
-            nud_y_st.Value = (decimal)y_st;
-            nud_w.Value = (decimal)W;
-            nud_h.Value = (decimal)H;
+                nud_x_st.Value = (decimal)x_st;
+                nud_y_st.Value = (decimal)y_st;
+                nud_w.Value = (decimal)W;
+                nud_h.Value = (decimal)H;
+            }
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            richTextBox1.Text += "pictureBox1_MouseUp\n";
+            flag_mouse_down = false;
 
-            pictureBox1.MouseMove -= pictureBox1_MouseMove;
-            pictureBox1.MouseUp -= pictureBox1_MouseUp;
-            pictureBox1.Image = bitmap1;
-            pictureBox1.Cursor = Cursors.Default;
-            pictureBox1.Refresh();
+            richTextBox1.Text += "pictureBox1_MouseUp\n";
 
             float x_st = Math.Min(point_st.X, point_sp.X) * PictureScale;
             float y_st = Math.Min(point_st.Y, point_sp.Y) * PictureScale;
@@ -110,8 +103,6 @@ namespace vcs_PictureCrop5
 
             this.Text = "選取區域 : " + select_rectangle.ToString();
                  
-            button1.Text = "擷取";
-
             Bitmap bitmap1b = (Bitmap)bitmap1.Clone();
             Graphics g = Graphics.FromImage(bitmap1b);
             g.DrawRectangle(Pens.Red, x_st, y_st, W, H);

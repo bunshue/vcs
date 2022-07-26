@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;
 using System.Drawing.Imaging;   //for ImageFormat
+using System.Drawing.Drawing2D; //for DashStyle
 
 namespace vcs_PictureCrop1
 {
@@ -21,7 +22,7 @@ namespace vcs_PictureCrop1
         private Point pt_sp = Point.Empty;//記錄鼠標放開時的坐標，用來確定繪圖終點
         private Bitmap bitmap1 = null;  //原圖位圖Bitmap
         private Bitmap bitmap2 = null;  //擷取部分位圖Bitmap
-        private Rectangle select_rectangle = new Rectangle(new Point(0, 0), new Size(0, 0));    //用來保存截圖的矩形
+        private Rectangle SelectionRectangle = new Rectangle(new Point(0, 0), new Size(0, 0));    //用來保存截圖的矩形
 
         private int W = 0;  //原圖的寬
         private int H = 0;  //原圖的高
@@ -218,7 +219,7 @@ namespace vcs_PictureCrop1
                 nud_y_st.Value = 0;
 
                 label2.Text = "";
-                select_rectangle = new Rectangle(new Point(0, 0), new Size(0, 0));
+                SelectionRectangle = new Rectangle(new Point(0, 0), new Size(0, 0));
             }
             else if (e.Button == MouseButtons.Right)
             {
@@ -235,17 +236,17 @@ namespace vcs_PictureCrop1
 
             pt_sp = e.Location; //終點座標
 
-            select_rectangle = MakeRectangle(pt_st, pt_sp);
+            SelectionRectangle = MakeRectangle(pt_st, pt_sp);
 
-            if ((select_rectangle.X < 0) || (select_rectangle.X >= W))
+            if ((SelectionRectangle.X < 0) || (SelectionRectangle.X >= W))
                 return;
-            if ((select_rectangle.Y < 0) || (select_rectangle.Y >= H))
+            if ((SelectionRectangle.Y < 0) || (SelectionRectangle.Y >= H))
                 return;
-            if ((select_rectangle.Width <= 0) || (select_rectangle.Width > W))
+            if ((SelectionRectangle.Width <= 0) || (SelectionRectangle.Width > W))
                 return;
-            if ((select_rectangle.Height <= 0) || (select_rectangle.Height > H))
+            if ((SelectionRectangle.Height <= 0) || (SelectionRectangle.Height > H))
                 return;
-            if (((select_rectangle.X + select_rectangle.Width) > W) || ((select_rectangle.Y + select_rectangle.Height) > H))
+            if (((SelectionRectangle.X + SelectionRectangle.Width) > W) || ((SelectionRectangle.Y + SelectionRectangle.Height) > H))
                 return;
 
             // Make a Bitmap to display the selection rectangle.
@@ -254,18 +255,18 @@ namespace vcs_PictureCrop1
             // Draw the selection rectangle.
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                Pen select_pen = new Pen(Color.Green);
-                select_pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-                g.DrawRectangle(select_pen, select_rectangle);
+                Pen p = new Pen(Color.Green);
+                p.DashStyle = DashStyle.Dash;
+                g.DrawRectangle(p, SelectionRectangle);
             }
             // Display the temporary bitmap.
             pictureBox1.Image = bmp;
 
-            nud_x_st.Value = select_rectangle.X;
-            nud_y_st.Value = select_rectangle.Y;
-            nud_w.Value = select_rectangle.Width;
-            nud_h.Value = select_rectangle.Height;
-            label2.Text = "選取區域 : " + select_rectangle.ToString();
+            nud_x_st.Value = SelectionRectangle.X;
+            nud_y_st.Value = SelectionRectangle.Y;
+            nud_w.Value = SelectionRectangle.Width;
+            nud_h.Value = SelectionRectangle.Height;
+            label2.Text = "選取區域 : " + SelectionRectangle.ToString();
         }
 
         // Finish selecting the area.
@@ -273,14 +274,16 @@ namespace vcs_PictureCrop1
         {
             // Do nothing if we're not selecting an area.
             if (flag_select_area == false)
+            {
                 return;
+            }
             flag_select_area = false;
 
             // Display the original image.
             //pictureBox1.Image = bitmap1;  //仍應保留選取區域
 
-            int w = select_rectangle.Width;
-            int h = select_rectangle.Height;
+            int w = SelectionRectangle.Width;
+            int h = SelectionRectangle.Height;
 
             if (w < 1)
                 return;
@@ -291,18 +294,18 @@ namespace vcs_PictureCrop1
             using (Graphics g2 = Graphics.FromImage(bitmap2))
             {
                 Rectangle dest_rectangle = new Rectangle(0, 0, w, h);
-                g2.DrawImage(bitmap1, dest_rectangle, select_rectangle, GraphicsUnit.Pixel);
+                g2.DrawImage(bitmap1, dest_rectangle, SelectionRectangle, GraphicsUnit.Pixel);
             }
 
             pictureBox2.Image = bitmap2;
 
-            //richTextBox1.Text += "select_rectangle = " + select_rectangle.ToString() + "\n";
+            //richTextBox1.Text += "SelectionRectangle = " + SelectionRectangle.ToString() + "\n";
 
-            nud_x_st.Value = select_rectangle.X;
-            nud_y_st.Value = select_rectangle.Y;
-            nud_w.Value = select_rectangle.Width;
-            nud_h.Value = select_rectangle.Height;
-            label2.Text = "選取區域 : " + select_rectangle.ToString();
+            nud_x_st.Value = SelectionRectangle.X;
+            nud_y_st.Value = SelectionRectangle.Y;
+            nud_w.Value = SelectionRectangle.Width;
+            nud_h.Value = SelectionRectangle.Height;
+            label2.Text = "選取區域 : " + SelectionRectangle.ToString();
         }
 
         // If the user presses Escape, cancel.
@@ -332,7 +335,7 @@ namespace vcs_PictureCrop1
             if (bitmap2 != null)
             {
 
-                if ((select_rectangle.Width <= 0) || (select_rectangle.Height <= 0))
+                if ((SelectionRectangle.Width <= 0) || (SelectionRectangle.Height <= 0))
                 {
                     richTextBox1.Text += "未選定區域，無法剪下圖片\n";
                     return;
@@ -343,7 +346,7 @@ namespace vcs_PictureCrop1
                 {
                     using (SolidBrush br = new SolidBrush(pictureBox1.BackColor))
                     {
-                        gr.FillRectangle(br, select_rectangle);
+                        gr.FillRectangle(br, SelectionRectangle);
                     }
                 }
 
@@ -361,6 +364,8 @@ namespace vcs_PictureCrop1
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //選取部分存檔
+
             reset_picture();    //為消除邊框
 
             int x_st = (int)nud_x_st.Value;
@@ -374,30 +379,30 @@ namespace vcs_PictureCrop1
                 return;
             }
 
-            select_rectangle = new Rectangle(x_st, y_st, w, h);
-            //richTextBox1.Text += select_rectangle.ToString() + "\n";
+            SelectionRectangle = new Rectangle(x_st, y_st, w, h);
+            //richTextBox1.Text += SelectionRectangle.ToString() + "\n";
 
-            if ((select_rectangle.X < 0) || (select_rectangle.X >= W))
+            if ((SelectionRectangle.X < 0) || (SelectionRectangle.X >= W))
                 return;
-            if ((select_rectangle.Y < 0) || (select_rectangle.Y >= H))
+            if ((SelectionRectangle.Y < 0) || (SelectionRectangle.Y >= H))
                 return;
-            if ((select_rectangle.Width <= 0) || (select_rectangle.Width > W))
+            if ((SelectionRectangle.Width <= 0) || (SelectionRectangle.Width > W))
                 return;
-            if ((select_rectangle.Height <= 0) || (select_rectangle.Height > H))
+            if ((SelectionRectangle.Height <= 0) || (SelectionRectangle.Height > H))
                 return;
-            if (((select_rectangle.X + select_rectangle.Width) > W) || ((select_rectangle.Y + select_rectangle.Height) > H))
+            if (((SelectionRectangle.X + SelectionRectangle.Width) > W) || ((SelectionRectangle.Y + SelectionRectangle.Height) > H))
                 return;
 
             string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
             Bitmap bitmap1 = new Bitmap(pictureBox1.Image);
-            Bitmap bitmap2 = bitmap1.Clone(select_rectangle, PixelFormat.DontCare);  //或是 PixelFormat.Format32bppArgb
+            Bitmap bitmap2 = bitmap1.Clone(SelectionRectangle, PixelFormat.DontCare);  //或是 PixelFormat.Format32bppArgb
             bitmap2.Save(filename, ImageFormat.Bmp);
             richTextBox1.Text += "存截圖，存檔檔名：" + filename + "\n";
         }
 
         private void select_crop_area(object sender, EventArgs e)
         {
-            if ((select_rectangle.Width <= 0) || (select_rectangle.Height <= 0))
+            if ((SelectionRectangle.Width <= 0) || (SelectionRectangle.Height <= 0))
                 return;
 
             int x_st = (int)nud_x_st.Value;
@@ -405,20 +410,20 @@ namespace vcs_PictureCrop1
             int w = (int)nud_w.Value;
             int h = (int)nud_h.Value;
 
-            Rectangle select_rectangle2 = new Rectangle(x_st, y_st, w, h);
+            Rectangle SelectionRectangle2 = new Rectangle(x_st, y_st, w, h);
 
-            if ((select_rectangle2.Width <= 0) || (select_rectangle2.Height <= 0))
+            if ((SelectionRectangle2.Width <= 0) || (SelectionRectangle2.Height <= 0))
                 return;
 
-            if ((select_rectangle2.X < 0) || (select_rectangle2.X >= W))
+            if ((SelectionRectangle2.X < 0) || (SelectionRectangle2.X >= W))
                 return;
-            if ((select_rectangle2.Y < 0) || (select_rectangle2.Y >= H))
+            if ((SelectionRectangle2.Y < 0) || (SelectionRectangle2.Y >= H))
                 return;
-            if ((select_rectangle2.Width <= 0) || (select_rectangle2.Width > W))
+            if ((SelectionRectangle2.Width <= 0) || (SelectionRectangle2.Width > W))
                 return;
-            if ((select_rectangle2.Height <= 0) || (select_rectangle2.Height > H))
+            if ((SelectionRectangle2.Height <= 0) || (SelectionRectangle2.Height > H))
                 return;
-            if (((select_rectangle2.X + select_rectangle2.Width) > W) || ((select_rectangle2.Y + select_rectangle2.Height) > H))
+            if (((SelectionRectangle2.X + SelectionRectangle2.Width) > W) || ((SelectionRectangle2.Y + SelectionRectangle2.Height) > H))
                 return;
 
             // Make a Bitmap to display the selection rectangle.
@@ -427,42 +432,42 @@ namespace vcs_PictureCrop1
             // Draw the selection rectangle.
             using (Graphics g = Graphics.FromImage(bmp))
             {
-                Pen select_pen = new Pen(Color.Red);
-                select_pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-                g.DrawRectangle(select_pen, select_rectangle2);
+                Pen p = new Pen(Color.Red);
+                p.DashStyle = DashStyle.Dash;
+                g.DrawRectangle(p, SelectionRectangle2);
             }
             // Display the temporary bitmap.
             pictureBox1.Image = bmp;
 
             Bitmap bmp2 = new Bitmap(w, h);
 
-            bmp2 = bmp.Clone(select_rectangle2, PixelFormat.DontCare);  //或是 PixelFormat.Format32bppArgb
+            bmp2 = bmp.Clone(SelectionRectangle2, PixelFormat.DontCare);  //或是 PixelFormat.Format32bppArgb
             pictureBox2.Image = bmp2;
         }
 
         private void Form1_MouseClick(object sender, MouseEventArgs e)
         {
-            if ((select_rectangle.X < 0) || (select_rectangle.X >= W))
+            if ((SelectionRectangle.X < 0) || (SelectionRectangle.X >= W))
                 return;
-            if ((select_rectangle.Y < 0) || (select_rectangle.Y >= H))
+            if ((SelectionRectangle.Y < 0) || (SelectionRectangle.Y >= H))
                 return;
-            if ((select_rectangle.Width <= 0) || (select_rectangle.Width > W))
+            if ((SelectionRectangle.Width <= 0) || (SelectionRectangle.Width > W))
                 return;
-            if ((select_rectangle.Height <= 0) || (select_rectangle.Height > H))
+            if ((SelectionRectangle.Height <= 0) || (SelectionRectangle.Height > H))
                 return;
-            if (((select_rectangle.X + select_rectangle.Width) > W) || ((select_rectangle.Y + select_rectangle.Height) > H))
+            if (((SelectionRectangle.X + SelectionRectangle.Width) > W) || ((SelectionRectangle.Y + SelectionRectangle.Height) > H))
                 return;
 
             try
             {
                 Graphics g = this.CreateGraphics();
                 Bitmap bitmap1 = new Bitmap(pictureBox1.Image);
-                Bitmap bitmap2 = bitmap1.Clone(select_rectangle, PixelFormat.DontCare);
+                Bitmap bitmap2 = bitmap1.Clone(SelectionRectangle, PixelFormat.DontCare);
                 g.DrawImage(bitmap2, e.X, e.Y);
 
                 //Graphics g = pictureBox1.CreateGraphics();
                 //SolidBrush myBrush = new SolidBrush(Color.White);
-                //g.FillRectangle(myBrush, select_rectangle);   //將原圖剪下
+                //g.FillRectangle(myBrush, SelectionRectangle);   //將原圖剪下
             }
             catch (Exception ex)
             {

@@ -21,8 +21,8 @@ namespace vcs_PictureCrop2
         private Point LastPoint;
         private PointF OppositeCorner;
 
-        private Bitmap OriginalImage = null;
-        private Bitmap ScaledImage = null;
+        private Bitmap bitmap1 = null;
+        private Bitmap bitmap2 = null;
 
         private float ImageScale = 1f;
         private float AspectWidth = 1f;
@@ -64,18 +64,21 @@ namespace vcs_PictureCrop2
             this.MouseWheel += Form_MouseWheel;
 
             // Load the image.
-            OriginalImage = LoadBitmapUnlocked(filename);
+            bitmap1 = LoadBitmapUnlocked(filename);
             ShowScaledImage();
         }
 
         // Display the scaled image.
         private void ShowScaledImage()
         {
-            if (OriginalImage == null) return;
-            int scaled_width = (int)(OriginalImage.Width * ImageScale);
-            int scaled_height = (int)(OriginalImage.Height * ImageScale);
-            ScaledImage = new Bitmap(scaled_width, scaled_height);
-            using (Graphics gr = Graphics.FromImage(ScaledImage))
+            if (bitmap1 == null)
+            {
+                return;
+            }
+            int scaled_width = (int)(bitmap1.Width * ImageScale);
+            int scaled_height = (int)(bitmap1.Height * ImageScale);
+            bitmap2 = new Bitmap(scaled_width, scaled_height);
+            using (Graphics g = Graphics.FromImage(bitmap2))
             {
                 Point[] dest_points =
                 {
@@ -85,11 +88,11 @@ namespace vcs_PictureCrop2
                 };
                 Rectangle src_rect = new Rectangle(
                     0, 0,
-                    OriginalImage.Width - 1,
-                    OriginalImage.Height - 1);
-                gr.DrawImage(OriginalImage, dest_points, src_rect, GraphicsUnit.Pixel);
+                    bitmap1.Width - 1,
+                    bitmap1.Height - 1);
+                g.DrawImage(bitmap1, dest_points, src_rect, GraphicsUnit.Pixel);
             }
-            picImage.Image = ScaledImage;
+            picImage.Image = bitmap2;
             picImage.Visible = true;
             picImage.Refresh();
         }
@@ -135,7 +138,9 @@ namespace vcs_PictureCrop2
             float y = ImageScale * SelectionRectangle.Y;
             float wid = ImageScale * SelectionRectangle.Width;
             float hgt = ImageScale * SelectionRectangle.Height;
-            return new RectangleF(x, y, wid, hgt);
+            {
+                return new RectangleF(x, y, wid, hgt);
+            }
         }
 
         // Start dragging.
@@ -144,7 +149,10 @@ namespace vcs_PictureCrop2
             // If the mouse is not over the
             // selection rectangle, do nothing.
             CurrentHitType = FindHitType(e.Location);
-            if (CurrentHitType == HitTypes.None) return;
+            if (CurrentHitType == HitTypes.None)
+            {
+                return;
+            }
 
             // Start the drag.
             LastPoint = e.Location;
@@ -155,26 +163,18 @@ namespace vcs_PictureCrop2
                 case HitTypes.ULCorner:
                 case HitTypes.TopEdge:
                 case HitTypes.LeftEdge:
-                    OppositeCorner = new PointF(
-                        SelectionRectangle.Right,
-                        SelectionRectangle.Bottom);
+                    OppositeCorner = new PointF(SelectionRectangle.Right, SelectionRectangle.Bottom);
                     break;
                 case HitTypes.URCorner:
-                    OppositeCorner = new PointF(
-                        SelectionRectangle.Left,
-                        SelectionRectangle.Bottom);
+                    OppositeCorner = new PointF(SelectionRectangle.Left, SelectionRectangle.Bottom);
                     break;
                 case HitTypes.LRCorner:
                 case HitTypes.BottomEdge:
                 case HitTypes.RightEdge:
-                    OppositeCorner = new PointF(
-                        SelectionRectangle.Left,
-                        SelectionRectangle.Top);
+                    OppositeCorner = new PointF(SelectionRectangle.Left, SelectionRectangle.Top);
                     break;
                 case HitTypes.LLCorner:
-                    OppositeCorner = new PointF(
-                        SelectionRectangle.Right,
-                        SelectionRectangle.Top);
+                    OppositeCorner = new PointF(SelectionRectangle.Right, SelectionRectangle.Top);
                     break;
             }
 
@@ -184,8 +184,14 @@ namespace vcs_PictureCrop2
         // Continue dragging.
         private void picImage_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!Dragging) MouseMoveNotDragging(e.Location);
-            else MouseMoveDragging(e.Location);
+            if (!Dragging)
+            {
+                MouseMoveNotDragging(e.Location);
+            }
+            else
+            {
+                MouseMoveDragging(e.Location);
+            }
         }
 
         private void MouseMoveNotDragging(Point point)
@@ -214,8 +220,11 @@ namespace vcs_PictureCrop2
                     new_cursor = Cursors.SizeAll;
                     break;
             }
+
             if (picImage.Cursor != new_cursor)
+            {
                 picImage.Cursor = new_cursor;
+            }
         }
 
         private void MouseMoveDragging(Point point)
@@ -227,12 +236,14 @@ namespace vcs_PictureCrop2
 
             // Find the new size for edge drags.
             SizeF edge_size = new SizeF();
-            if ((CurrentHitType == HitTypes.TopEdge) ||
-                (CurrentHitType == HitTypes.BottomEdge))
+            if ((CurrentHitType == HitTypes.TopEdge) || (CurrentHitType == HitTypes.BottomEdge))
+            {
                 edge_size = GetEnlargedSize(0, corner_hgt);
-            else if ((CurrentHitType == HitTypes.LeftEdge) ||
-                (CurrentHitType == HitTypes.RightEdge))
+            }
+            else if ((CurrentHitType == HitTypes.LeftEdge) || (CurrentHitType == HitTypes.RightEdge))
+            {
                 edge_size = GetEnlargedSize(corner_wid, 0);
+            }
 
             // Find the center of the selection rectangle for edge drags.
             float cx = SelectionRectangle.X + SelectionRectangle.Width / 2f;
@@ -242,54 +253,30 @@ namespace vcs_PictureCrop2
             {
                 // Corners.
                 case HitTypes.ULCorner:
-                    SelectionRectangle = new RectangleF(
-                        SelectionRectangle.Right - corner_size.Width,
-                        SelectionRectangle.Bottom - corner_size.Height,
-                        corner_size.Width, corner_size.Height);
+                    SelectionRectangle = new RectangleF(SelectionRectangle.Right - corner_size.Width, SelectionRectangle.Bottom - corner_size.Height, corner_size.Width, corner_size.Height);
                     break;
                 case HitTypes.URCorner:
-                    SelectionRectangle = new RectangleF(
-                        SelectionRectangle.Left,
-                        SelectionRectangle.Bottom - corner_size.Height,
-                        corner_size.Width, corner_size.Height);
+                    SelectionRectangle = new RectangleF(SelectionRectangle.Left, SelectionRectangle.Bottom - corner_size.Height, corner_size.Width, corner_size.Height);
                     break;
                 case HitTypes.LRCorner:
-                    SelectionRectangle = new RectangleF(
-                        SelectionRectangle.X,
-                        SelectionRectangle.Y,
-                        corner_size.Width, corner_size.Height);
+                    SelectionRectangle = new RectangleF(SelectionRectangle.X, SelectionRectangle.Y, corner_size.Width, corner_size.Height);
                     break;
                 case HitTypes.LLCorner:
-                    SelectionRectangle = new RectangleF(
-                        SelectionRectangle.Right - corner_size.Width,
-                        SelectionRectangle.Top,
-                        corner_size.Width, corner_size.Height);
+                    SelectionRectangle = new RectangleF(SelectionRectangle.Right - corner_size.Width, SelectionRectangle.Top, corner_size.Width, corner_size.Height);
                     break;
 
                 // Edges.
                 case HitTypes.TopEdge:
-                    SelectionRectangle = new RectangleF(
-                        cx - edge_size.Width / 2f,
-                        SelectionRectangle.Bottom - edge_size.Height,
-                        edge_size.Width, edge_size.Height);
+                    SelectionRectangle = new RectangleF(cx - edge_size.Width / 2f, SelectionRectangle.Bottom - edge_size.Height, edge_size.Width, edge_size.Height);
                     break;
                 case HitTypes.RightEdge:
-                    SelectionRectangle = new RectangleF(
-                        SelectionRectangle.Left,
-                        cy - edge_size.Height / 2f,
-                        edge_size.Width, edge_size.Height);
+                    SelectionRectangle = new RectangleF(SelectionRectangle.Left, cy - edge_size.Height / 2f, edge_size.Width, edge_size.Height);
                     break;
                 case HitTypes.BottomEdge:
-                    SelectionRectangle = new RectangleF(
-                        cx - edge_size.Width / 2f,
-                        SelectionRectangle.Top,
-                        edge_size.Width, edge_size.Height);
+                    SelectionRectangle = new RectangleF(cx - edge_size.Width / 2f, SelectionRectangle.Top, edge_size.Width, edge_size.Height);
                     break;
                 case HitTypes.LeftEdge:
-                    SelectionRectangle = new RectangleF(
-                        SelectionRectangle.Right - edge_size.Width,
-                        cy - edge_size.Height / 2f,
-                        edge_size.Width, edge_size.Height);
+                    SelectionRectangle = new RectangleF(SelectionRectangle.Right - edge_size.Width, cy - edge_size.Height / 2f, edge_size.Width, edge_size.Height);
                     break;
 
                 // Body.
@@ -320,8 +307,14 @@ namespace vcs_PictureCrop2
 
         private SizeF GetEnlargedSize(float new_width, float new_height)
         {
-            if (new_width < 10) new_width = 10;
-            if (new_height < 10) new_height = 10;
+            if (new_width < 10)
+            {
+                new_width = 10;
+            }
+            if (new_height < 10)
+            {
+                new_height = 10;
+            }
 
             if (new_width / new_height > AspectRatio)
             {
@@ -338,8 +331,14 @@ namespace vcs_PictureCrop2
 
         private SizeF GetReducedSize(float new_width, float new_height)
         {
-            if (new_width < 10) new_width = 10;
-            if (new_height < 10) new_height = 10;
+            if (new_width < 10)
+            {
+                new_width = 10;
+            }
+            if (new_height < 10)
+            {
+                new_height = 10;
+            }
 
             if (new_width / new_height > AspectRatio)
             {
@@ -358,30 +357,47 @@ namespace vcs_PictureCrop2
         {
             RectangleF scaled_rect = ScaledSelectionRectangle();
             bool hit_left, hit_right, hit_top, hit_bottom;
-            hit_left =
-                ((point.X >= scaled_rect.Left - HandleRadius) &&
-                 (point.X <= scaled_rect.Left + HandleRadius));
-            hit_right =
-                ((point.X >= scaled_rect.Right - HandleRadius) &&
-                 (point.X <= scaled_rect.Right + HandleRadius));
-            hit_top =
-                ((point.Y >= scaled_rect.Top - HandleRadius) &&
-                 (point.Y <= scaled_rect.Top + HandleRadius));
-            hit_bottom =
-                ((point.Y >= scaled_rect.Bottom - HandleRadius) &&
-                 (point.Y <= scaled_rect.Bottom + HandleRadius));
+            hit_left = ((point.X >= scaled_rect.Left - HandleRadius) && (point.X <= scaled_rect.Left + HandleRadius));
+            hit_right = ((point.X >= scaled_rect.Right - HandleRadius) && (point.X <= scaled_rect.Right + HandleRadius));
+            hit_top = ((point.Y >= scaled_rect.Top - HandleRadius) && (point.Y <= scaled_rect.Top + HandleRadius));
+            hit_bottom = ((point.Y >= scaled_rect.Bottom - HandleRadius) && (point.Y <= scaled_rect.Bottom + HandleRadius));
 
-            if (hit_left && hit_top) return HitTypes.ULCorner;
-            if (hit_right && hit_top) return HitTypes.URCorner;
-            if (hit_left && hit_bottom) return HitTypes.LLCorner;
-            if (hit_right && hit_bottom) return HitTypes.LRCorner;
-            if (hit_left) return HitTypes.LeftEdge;
-            if (hit_right) return HitTypes.RightEdge;
-            if (hit_top) return HitTypes.TopEdge;
-            if (hit_bottom) return HitTypes.BottomEdge;
-            if ((point.X >= scaled_rect.Left) && (point.X <= scaled_rect.Right) &&
-                (point.Y >= scaled_rect.Top) && (point.Y <= scaled_rect.Bottom))
+            if (hit_left && hit_top)
+            {
+                return HitTypes.ULCorner;
+            }
+            if (hit_right && hit_top)
+            {
+                return HitTypes.URCorner;
+            }
+            if (hit_left && hit_bottom)
+            {
+                return HitTypes.LLCorner;
+            }
+            if (hit_right && hit_bottom)
+            {
+                return HitTypes.LRCorner;
+            }
+            if (hit_left)
+            {
+                return HitTypes.LeftEdge;
+            }
+            if (hit_right)
+            {
+                return HitTypes.RightEdge;
+            }
+            if (hit_top)
+            {
+                return HitTypes.TopEdge;
+            }
+            if (hit_bottom)
+            {
+                return HitTypes.BottomEdge;
+            }
+            if ((point.X >= scaled_rect.Left) && (point.X <= scaled_rect.Right) && (point.Y >= scaled_rect.Top) && (point.Y <= scaled_rect.Bottom))
+            {
                 return HitTypes.Body;
+            }
             return HitTypes.None;
         }
 
@@ -405,13 +421,11 @@ namespace vcs_PictureCrop2
 
             richTextBox1.Text += scale_text + "\t";
 
-
             ImageScale = float.Parse(scale_text) / 100f;
 
             richTextBox1.Text += ImageScale + "\n";
 
             ShowScaledImage();
-
         }
 
         // Load a bitmap without locking it.
@@ -427,14 +441,24 @@ namespace vcs_PictureCrop2
         {
             ReadAspectRatio();
         }
+
         private void ReadAspectRatio()
         {
             // Get the new aspect ratio.
             string[] fields = txtAspectRatio.Text.Split(':');
-            if (fields.Length < 2) return;
+            if (fields.Length < 2)
+            {
+                return;
+            }
 
-            if (!float.TryParse(fields[0], out AspectWidth)) return;
-            if (!float.TryParse(fields[1], out AspectHeight)) return;
+            if (!float.TryParse(fields[0], out AspectWidth))
+            {
+                return;
+            }
+            if (!float.TryParse(fields[1], out AspectHeight))
+            {
+                return;
+            }
             AspectRatio = (float)AspectWidth / (float)AspectHeight;
 
             // Update the entered height.
@@ -461,15 +485,27 @@ namespace vcs_PictureCrop2
 
         private void txtWidth_TextChanged(object sender, EventArgs e)
         {
-            if (IgnoreTextChanged) return;
-            if (!float.TryParse(txtWidth.Text, out RectWidth)) return;
+            if (IgnoreTextChanged)
+            {
+                return;
+            }
+            if (!float.TryParse(txtWidth.Text, out RectWidth))
+            {
+                return;
+            }
             SetWidth(RectWidth);
         }
 
         private void txtHeight_TextChanged(object sender, EventArgs e)
         {
-            if (IgnoreTextChanged) return;
-            if (!float.TryParse(txtHeight.Text, out RectHeight)) return;
+            if (IgnoreTextChanged)
+            {
+                return;
+            }
+            if (!float.TryParse(txtHeight.Text, out RectHeight))
+            {
+                return;
+            }
             SetHeight(RectHeight);
         }
 
@@ -477,17 +513,17 @@ namespace vcs_PictureCrop2
         {
             float cx = SelectionRectangle.X + SelectionRectangle.Width / 2f;
             float cy = SelectionRectangle.Y + SelectionRectangle.Height / 2f;
-            SelectionRectangle = new Rectangle(
-                (int)(cx - RectWidth / 2f),
-                (int)(cy - RectHeight / 2f),
-                (int)RectWidth, (int)RectHeight);
+            SelectionRectangle = new Rectangle((int)(cx - RectWidth / 2f), (int)(cy - RectHeight / 2f), (int)RectWidth, (int)RectHeight);
             picImage.Refresh();
         }
 
         // Respond to the mouse wheel.
         private void Form_MouseWheel(object sender, MouseEventArgs e)
         {
-            if (OriginalImage == null) return;
+            if (bitmap1 == null)
+            {
+                return;
+            }
 
             // Find the current scale.
             int int_scale = (int)(ImageScale * 100);
@@ -507,8 +543,14 @@ namespace vcs_PictureCrop2
 
             // If we're zooming out, move to a smaller scale.
             // Else move to a larger scale.
-            if (e.Delta < 0) index++;
-            else index--;
+            if (e.Delta < 0)
+            {
+                index++;
+            }
+            else
+            {
+                index--;
+            }
 
             // Select the new scale menu item.
             if ((index >= 0) && (index < menu_items.Length))
@@ -521,7 +563,7 @@ namespace vcs_PictureCrop2
         {
             //開啟檔案
             // Load the image.
-            OriginalImage = LoadBitmapUnlocked(filename);
+            bitmap1 = LoadBitmapUnlocked(filename);
             ShowScaledImage();
         }
 
@@ -533,9 +575,9 @@ namespace vcs_PictureCrop2
             {
                 // Copy the selected area into a new Bitmap.
                 Bitmap bitmap1 = new Bitmap((int)SelectionRectangle.Width, (int)SelectionRectangle.Height);
-                using (Graphics gr = Graphics.FromImage(bitmap1))
+                using (Graphics g = Graphics.FromImage(bitmap1))
                 {
-                    gr.DrawImage(OriginalImage, 0, 0, SelectionRectangle, GraphicsUnit.Pixel);
+                    g.DrawImage(bitmap1, 0, 0, SelectionRectangle, GraphicsUnit.Pixel);
                 }
 
                 string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
@@ -613,12 +655,6 @@ namespace vcs_PictureCrop2
             ImageScale = 15 / 100f;
             richTextBox1.Text += ImageScale + "\n";
             ShowScaledImage();
-
         }
-
-
-
-
     }
 }
-

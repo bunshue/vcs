@@ -150,6 +150,7 @@ namespace vcs_PictureEnhance_YUV
         {
             pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
             pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
+            pictureBox2.MouseMove += new MouseEventHandler(pictureBox2_MouseMove);
             pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
             pictureBox1.Paint += new PaintEventHandler(pictureBox1_Paint);
             pictureBox3a.Paint += new PaintEventHandler(pictureBox3a_Paint);
@@ -209,6 +210,7 @@ namespace vcs_PictureEnhance_YUV
             button8.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 2, y_st + dy * 9);
             button10.Location = new Point(x_st + dx * 2, y_st + dy * 10);
+            cb_magnify.Location = new Point(x_st + dx * 2, y_st + dy * 11);
 
             richTextBox1.Size = new Size(180, pbx_H * 2 + 10);
             richTextBox1.Location = new Point(x_st + dx * 2 + 100, y_st + dy * 0);
@@ -750,6 +752,46 @@ namespace vcs_PictureEnhance_YUV
                 this.pictureBox1.Invalidate();
                 //richTextBox1.Text += "dx, dy : (" + dx.ToString() + ", " + dy.ToString() + ")\n";
                 //pictureBox1.Location = new Point(pictureBox1.Location.X + dx, pictureBox1.Location.Y + dy);
+            }
+            else if (cb_magnify.Checked == true)
+            {
+                int r = 50;
+                int R = 200;
+
+                //由 r X r 放大到 R X R
+                try
+                {
+                    Graphics g = pictureBox1.CreateGraphics();
+                    Rectangle rect1 = new Rectangle(e.X - r / 2, e.Y - r / 2, r, r); //要放大的區域 
+                    Rectangle rect2 = new Rectangle(e.X - R / 2, e.Y - R / 2, R, R);
+                    g.DrawImage(bitmap1, 0, 0, bitmap1.Width, bitmap1.Height);
+                    g.DrawImage(bitmap1, rect2, rect1, GraphicsUnit.Pixel);
+                }
+                catch
+                {
+                }
+            }
+        }
+
+        private void pictureBox2_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (cb_magnify.Checked == true)
+            {
+                int r = 50;
+                int R = 200;
+
+                //由 r X r 放大到 R X R
+                try
+                {
+                    Graphics g = pictureBox2.CreateGraphics();
+                    Rectangle rect1 = new Rectangle(e.X - r / 2, e.Y - r / 2, r, r); //要放大的區域 
+                    Rectangle rect2 = new Rectangle(e.X - R / 2, e.Y - R / 2, R, R);
+                    g.DrawImage(bitmap2, 0, 0, bitmap2.Width, bitmap2.Height);
+                    g.DrawImage(bitmap2, rect2, rect1, GraphicsUnit.Pixel);
+                }
+                catch
+                {
+                }
             }
         }
 

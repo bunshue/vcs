@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_PictureCropB
+namespace vcs_Form7_FormLoad1
 {
     static class Program
     {

@@ -47,6 +47,7 @@
             this.button0 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
+            this.cb_magnify = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3a)).BeginInit();
@@ -239,11 +240,22 @@
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
+            // cb_magnify
+            // 
+            this.cb_magnify.AutoSize = true;
+            this.cb_magnify.Location = new System.Drawing.Point(340, 123);
+            this.cb_magnify.Name = "cb_magnify";
+            this.cb_magnify.Size = new System.Drawing.Size(60, 16);
+            this.cb_magnify.TabIndex = 24;
+            this.cb_magnify.Text = "放大鏡";
+            this.cb_magnify.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 461);
+            this.Controls.Add(this.cb_magnify);
             this.Controls.Add(this.button10);
             this.Controls.Add(this.button9);
             this.Controls.Add(this.button0);
@@ -273,6 +285,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3b)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -297,6 +310,7 @@
         private System.Windows.Forms.Button button0;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.CheckBox cb_magnify;
     }
 }
 
