@@ -207,6 +207,8 @@ namespace vcs_PictureEnhance_YUV
             button6.Location = new Point(x_st + dx * 2, y_st + dy * 6);
             button7.Location = new Point(x_st + dx * 2, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 2, y_st + dy * 10);
 
             richTextBox1.Size = new Size(180, pbx_H * 2 + 10);
             richTextBox1.Location = new Point(x_st + dx * 2 + 100, y_st + dy * 0);
@@ -368,8 +370,8 @@ namespace vcs_PictureEnhance_YUV
 
             //ratio_Y = 3.0f;
 
-            richTextBox1.Text += "M = " + Y_max.ToString() + "\tm = " + Y_min.ToString() + "\n";
-            richTextBox1.Text += "diff = " + diff_Y.ToString("F2") + "\tratio = " + ratio_Y.ToString("F2") + "\n";
+            richTextBox1.Text += "\nM = " + Y_max.ToString() + "\tm = " + Y_min.ToString() + "\n";
+            richTextBox1.Text += "D = " + diff_Y.ToString("F2") + "\tR = " + ratio_Y.ToString("F2") + "\n";
 
             for (j = 0; j < h; j++)
             {
@@ -464,6 +466,8 @@ namespace vcs_PictureEnhance_YUV
 
         private void button0_Click(object sender, EventArgs e)
         {
+            show_item_location();
+            reset_picture();
 
         }
 
@@ -619,6 +623,26 @@ namespace vcs_PictureEnhance_YUV
             find_bitmap_info(bitmap2, x_st, y_st, w, h);
         }
 
+        private void button9_Click(object sender, EventArgs e)
+        {
+            //黑白
+            pictureBox5.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox5.Size = new Size(800, 800);
+            pictureBox5.Location = new Point(700, 250);
+            pictureBox5.BringToFront();
+            draw_2d_plot(bitmap2, x_st, y_st, w, h, 0);
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //彩色
+            pictureBox5.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox5.Size = new Size(800, 800);
+            pictureBox5.Location = new Point(700, 250);
+            pictureBox5.BringToFront();
+            draw_2d_plot(bitmap2, x_st, y_st, w, h, 1);
+        }
+
         void find_bitmap_info(Bitmap bmp, int x_st, int y_st, int w, int h)
         {
             int i;
@@ -761,7 +785,14 @@ namespace vcs_PictureEnhance_YUV
 
         private void pictureBox3a_Paint(object sender, PaintEventArgs e)
         {
-            e.Graphics.DrawString("兩倍 " + draw_w.ToString() + " X " + draw_h.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(0, 0));
+            if ((draw_w > 640 / 2) || (draw_h > 480 / 2))
+            {
+                e.Graphics.DrawString("選取範圍太大", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(0, 0));
+            }
+            else
+            {
+                e.Graphics.DrawString("兩倍 " + draw_w.ToString() + " X " + draw_h.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(0, 0));
+            }
         }
 
         private void pictureBox3b_Paint(object sender, PaintEventArgs e)
@@ -807,7 +838,7 @@ namespace vcs_PictureEnhance_YUV
             Bitmap bitmap1 = (Bitmap)pbox1.Image;
             int W = bitmap1.Width;
             int H = bitmap1.Height;
-            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+            //richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
             int i;
             int j;
             int total_points = 0;
@@ -863,7 +894,7 @@ namespace vcs_PictureEnhance_YUV
             richTextBox1.Text += "\n";
             */
 
-            richTextBox1.Text += "共有 " + total_points.ToString() + " 個點\n";
+            //richTextBox1.Text += "共有 " + total_points.ToString() + " 個點\n";
 
             draw_brightness(pbox2);
         }
@@ -880,13 +911,12 @@ namespace vcs_PictureEnhance_YUV
                 if (brightness_data[i] == 0)
                     brightness_data[i] = 5;
             }
-            richTextBox1.Text += "\n最多 " + most.ToString() + "\n";
+            //richTextBox1.Text += "\n最多 " + most.ToString() + "\n";
 
             int y_min;
             int y_max;
             FindYMaxYMin(brightness_data, out y_min, out y_max);
-
-            richTextBox1.Text += "y_min = " + y_min.ToString() + "\t" + "y_max = " + y_max.ToString() + "\n";
+            richTextBox1.Text += "M = " + y_max.ToString() + "\t" + "m = " + y_min.ToString() + "\n";
 
             int ww = 512 + 200;
             int hh1 = 300;
@@ -972,6 +1002,121 @@ namespace vcs_PictureEnhance_YUV
                 }
             }
         }
+
+        void draw_2d_plot(Bitmap bmp, int x_st, int y_st, int w, int h, int type)
+        {
+            int pb5_width = 800;
+            int pb5_height = 800;
+            int point_size = 20;    //放大倍率
+
+            if ((pb5_width / w) < (pb5_height / h))
+                point_size = pb5_width / w;
+            else
+                point_size = pb5_height / h;
+
+            Graphics g;
+            Pen p;
+            SolidBrush sb;
+            Bitmap bitmap1;
+
+            int W = pictureBox5.ClientSize.Width;
+            int H = pictureBox5.ClientSize.Height;
+
+            //----開新的Bitmap----
+            bitmap1 = new Bitmap(W, H);
+            //----使用上面的Bitmap畫圖----
+            g = Graphics.FromImage(bitmap1);
+
+            p = new Pen(Color.Red, 10);     // 設定畫筆為紅色、粗細為 10 點。
+            sb = new SolidBrush(Color.Blue);
+
+            g.Clear(Color.White);
+
+            if (w > 400)
+            {
+                g.DrawString("選取範圍太大", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(0, 0));
+
+                pictureBox5.Image = bitmap1;
+
+                return;
+            }
+
+
+            int[,] gray = new int[w, h];
+
+            int i;
+            int j;
+            Color pt;
+
+            int Y_max = 0;
+            int Y_min = 255;
+
+            for (j = 0; j < h; j++)
+            {
+                for (i = 0; i < w; i++)
+                {
+                    pt = bmp.GetPixel(x_st + i, y_st + j);
+
+                    RGB pp = new RGB(pt.R, pt.G, pt.B);
+                    YUV yyy = new YUV();
+                    yyy = RGBToYUV(pp);
+
+                    double y = yyy.Y;
+
+                    if (y > 255)
+                        y = 255;
+                    if (y < 0)
+                        y = 0;
+                    gray[i, j] = (int)y;
+
+
+                    if (Y_max < (int)y)
+                        Y_max = (int)y;
+
+                    if (Y_min > (int)y)
+                        Y_min = (int)y;
+                }
+            }
+
+            richTextBox1.Text += "M = " + Y_max.ToString() + "\tm = " + Y_min.ToString() + "\n";
+
+            int xx;
+            int yy;
+            int width = point_size * w;
+            int height = point_size * h;
+
+            bitmap1 = new Bitmap(width, height);
+            g = Graphics.FromImage(bitmap1);
+
+            byte aa = 255;
+            byte rr = 0;
+            byte gg = 0;
+            byte bb = 0;
+
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //設置像素的ＲＧＢ顏色值
+
+                    if (type == 0)
+                    {
+                        //黑白
+                        rr = (byte)gray[xx / point_size, yy / point_size];
+                        gg = (byte)gray[xx / point_size, yy / point_size];
+                        bb = (byte)gray[xx / point_size, yy / point_size];
+                        bitmap1.SetPixel(xx, yy, Color.FromArgb(aa, rr, gg, bb));
+                    }
+                    else
+                    {
+                        //彩色
+                        pt = bmp.GetPixel(x_st + xx / point_size, y_st + yy / point_size);
+                        bitmap1.SetPixel(xx, yy, Color.FromArgb(aa, pt.R, pt.G, pt.B));
+                    }
+                }
+            }
+            g.DrawString(w.ToString() + " X " + h.ToString() + ", " + point_size.ToString() + "倍", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(0, 0));
+            pictureBox5.Image = bitmap1;
+        }
     }
 }
-

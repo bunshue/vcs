@@ -45,6 +45,8 @@
             this.pictureBox3b = new System.Windows.Forms.PictureBox();
             this.button8 = new System.Windows.Forms.Button();
             this.button0 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3a)).BeginInit();
@@ -213,14 +215,37 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(93, 39);
             this.button0.TabIndex = 21;
+            this.button0.Text = "Reset";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(340, 12);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(93, 39);
+            this.button9.TabIndex = 22;
+            this.button9.Text = "2D plot 黑白";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(340, 57);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(93, 39);
+            this.button10.TabIndex = 23;
+            this.button10.Text = "2D plot 彩色";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 461);
+            this.Controls.Add(this.button10);
+            this.Controls.Add(this.button9);
             this.Controls.Add(this.button0);
             this.Controls.Add(this.button8);
             this.Controls.Add(this.pictureBox3b);
@@ -270,6 +295,8 @@
         private System.Windows.Forms.PictureBox pictureBox3b;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button0;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button10;
     }
 }
 
