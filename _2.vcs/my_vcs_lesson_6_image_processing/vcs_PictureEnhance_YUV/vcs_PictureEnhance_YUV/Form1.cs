@@ -169,8 +169,9 @@ namespace vcs_PictureEnhance_YUV
             int dy;
             int dy2;
 
-            int pbx_W = 800;
-            int pbx_H = 520;
+            int pbx_W = 640 + 10;
+            int pbx_H = 480 + 10;
+            int pbx_W2 = 480;
             int pbx_H2 = 520 * 2 / 3;
 
             x_st = 10;
@@ -181,10 +182,10 @@ namespace vcs_PictureEnhance_YUV
 
             pictureBox1.Size = new Size(pbx_W, pbx_H);
             pictureBox2.Size = new Size(pbx_W, pbx_H);
-            pictureBox3a.Size = new Size(pbx_W / 2, pbx_H2);
-            pictureBox3b.Size = new Size(pbx_W / 2, pbx_H2);
-            pictureBox4.Size = new Size(pbx_W, pbx_H2);
-            pictureBox5.Size = new Size(pbx_W, pbx_H2);
+            pictureBox3a.Size = new Size(pbx_W2, pbx_H2);
+            pictureBox3b.Size = new Size(pbx_W2, pbx_H2);
+            pictureBox4.Size = new Size(pbx_W2 * 2, pbx_H2);
+            pictureBox5.Size = new Size(pbx_W2 * 2, pbx_H2);
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
             pictureBox3a.SizeMode = PictureBoxSizeMode.CenterImage;
@@ -195,12 +196,13 @@ namespace vcs_PictureEnhance_YUV
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             pictureBox3a.Location = new Point(x_st + dx * 1, y_st + dy2 * 0);
-            pictureBox3b.Location = new Point(x_st + dx * 1 + pbx_W / 2, y_st + dy2 * 0);
+            pictureBox3b.Location = new Point(x_st + dx * 1 + pbx_W2, y_st + dy2 * 0);
             pictureBox4.Location = new Point(x_st + dx * 1, y_st + dy2 * 1);
             pictureBox5.Location = new Point(x_st + dx * 1, y_st + dy2 * 2);
 
             lb_brightness.Text = "";
             y_st = 60;
+            dx += 160;
             dy = 50;
             lb_brightness.Location = new Point(x_st + dx * 2, y_st + dy * -1);
             button0.Location = new Point(x_st + dx * 2, y_st + dy * 0);
@@ -214,8 +216,10 @@ namespace vcs_PictureEnhance_YUV
             button8.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 2, y_st + dy * 9);
             button10.Location = new Point(x_st + dx * 2, y_st + dy * 10);
-            cb_magnify.Location = new Point(x_st + dx * 2, y_st + dy * 11);
+            button11.Location = new Point(x_st + dx * 2, y_st + dy * 11);
+            cb_magnify.Location = new Point(x_st + dx * 2, y_st + dy * 12);
 
+            y_st = 10;
             richTextBox1.Size = new Size(180, pbx_H * 2 + 10);
             richTextBox1.Location = new Point(x_st + dx * 2 + 100, y_st + dy * 0);
 
@@ -658,6 +662,7 @@ namespace vcs_PictureEnhance_YUV
             pictureBox5.Size = new Size(800, 800);
             pictureBox5.Location = new Point(700, 250);
             pictureBox5.BringToFront();
+
             draw_2d_plot(bitmap2, x_st, y_st, w, h, 0);
         }
 
@@ -668,8 +673,383 @@ namespace vcs_PictureEnhance_YUV
             pictureBox5.Size = new Size(800, 800);
             pictureBox5.Location = new Point(700, 250);
             pictureBox5.BringToFront();
+
             draw_2d_plot(bitmap2, x_st, y_st, w, h, 1);
         }
+
+        private List<Point> Points = new List<Point>();
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //2D plot test
+
+            int W = 800;
+            int H = 800;
+
+            pictureBox5.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox5.Size = new Size(W, H);
+            pictureBox5.Location = new Point(700, 250);
+            pictureBox5.BringToFront();
+
+            //10 X 10 array
+            int w = 8;
+            int h = 6;
+
+            int point_size = 20;    //放大倍率
+            if ((W / w) < (H / h))
+                point_size = W / w;
+            else
+                point_size = H / h;
+
+            Pen p = new Pen(Color.Red, 10);
+            SolidBrush sb = new SolidBrush(Color.Blue);
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+
+            int[,] gray = new int[w, h];
+
+            int i;
+            int j;
+
+            for (j = 0; j < h; j++)
+            {
+                for (i = 0; i < w; i++)
+                {
+                    gray[i, j] = (i * i + j * j + 100) % 256;
+                }
+            }
+            Random r = new Random();
+            gray[3, 0] = r.Next(200, 256);
+            gray[2, 1] = r.Next(200, 256);
+            gray[3, 1] = r.Next(200, 256);
+            gray[4, 1] = r.Next(200, 256);
+            gray[2, 2] = r.Next(200, 256);
+            gray[3, 2] = r.Next(200, 256);
+            gray[4, 2] = r.Next(200, 256);
+            gray[5, 2] = r.Next(200, 256);
+            gray[1, 3] = r.Next(200, 256);
+            gray[2, 3] = r.Next(200, 256);
+            gray[3, 3] = r.Next(200, 256);
+            gray[4, 3] = r.Next(200, 256);
+            gray[2, 4] = r.Next(200, 256);
+            gray[3, 4] = r.Next(200, 256);
+            gray[4, 4] = r.Next(200, 256);
+            gray[5, 4] = r.Next(200, 256);
+            gray[3, 5] = r.Next(200, 256);
+            gray[4, 5] = r.Next(200, 256);
+
+            int[,] gray_new = new int[w, h];
+
+            for (j = 0; j < h; j++)
+            {
+                for (i = 0; i < w; i++)
+                {
+                    gray_new[i, j] = gray[i, j];
+
+                    if (gray[i, j] >= 200)
+                        gray_new[i, j] = 200;
+                    else
+                        gray_new[i, j] = 0;
+                }
+            }
+
+
+            int[,] gray_new2 = new int[w, h];
+
+            for (j = 0; j < h; j++)
+            {
+                for (i = 0; i < w; i++)
+                {
+                    gray_new2[i, j] = gray_new[i, j];
+
+                    //不在邊界的點
+                    if ((i > 0) && (i < (w - 1)) && (j > 0) && (j < (h - 1)))
+                    {
+                        if (gray_new[i, j] < 200)
+                            continue;
+
+                        //四鄰皆有者
+                        if ((gray_new[i + 1, j] >= 200) && (gray_new[i - 1, j] >= 200) && (gray_new[i, j + 1] >= 200) && (gray_new[i, j - 1] >= 200))
+                        {
+                            gray_new2[i, j] = 0;
+                        }
+                    }
+                }
+            }
+
+            int xx;
+            int yy;
+            int width = point_size * w;
+            int height = point_size * h;
+
+            bitmap1 = new Bitmap(width, height);
+            g = Graphics.FromImage(bitmap1);
+
+            byte aa = 255;
+            byte rr = 0;
+            byte gg = 0;
+            byte bb = 0;
+
+            for (yy = 0; yy < height; yy++)
+            {
+                for (xx = 0; xx < width; xx++)
+                {
+                    //設置像素的ＲＧＢ顏色值
+
+                    //黑白
+                    rr = (byte)gray_new2[xx / point_size, yy / point_size];
+                    gg = (byte)gray_new2[xx / point_size, yy / point_size];
+                    bb = (byte)gray_new2[xx / point_size, yy / point_size];
+                    bitmap1.SetPixel(xx, yy, Color.FromArgb(aa, rr, gg, bb));
+                }
+            }
+            g.DrawString(w.ToString() + " X " + h.ToString() + ", " + point_size.ToString() + "倍", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(0, 0));
+            pictureBox5.Image = bitmap1;
+           
+            find_connected_points(gray_new2);
+
+            richTextBox1.Text += "point array:\n";
+            richTextBox1.Text += "len = " + Points.Count.ToString() + "\n";
+        }
+
+                                                            void find_connected_points(int[,] array)
+                                                            {
+                                                                Points.Clear();
+
+                                                                int row = array.Rank;//獲取行數
+                                                                int col1 = array.GetLength(1);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
+                                                                int col2 = array.GetUpperBound(0) + 1;//獲取指定維度的上限，在 上一個1就是列數
+                                                                int num1 = array.Length;//獲取整個二維陣列的長度，即所有元 的個數
+
+                                                                richTextBox1.Text += "row = " + row.ToString() + "\n";
+                                                                richTextBox1.Text += "col1 = " + col1.ToString() + "\n";
+                                                                richTextBox1.Text += "col2 = " + col2.ToString() + "\n";
+                                                                richTextBox1.Text += "num1 = " + num1.ToString() + "\n";
+
+                                                                int total_rows = array.GetUpperBound(0) + 1;
+                                                                richTextBox1.Text += "total_rows = " + total_rows.ToString() + "\n";
+
+                                                                int w = array.GetUpperBound(0) + 1;
+                                                                int h = array.GetLength(1);
+                                                                int i;
+                                                                int j;
+                                                                for (j = 0; j < h; j++)
+                                                                {
+                                                                    for (i = 0; i < w; i++)
+                                                                    {
+                                                                        richTextBox1.Text += array[i, j] + "\t";
+
+                                                                    }
+                                                                    richTextBox1.Text += "\n";
+                                                                }
+                                                                richTextBox1.Text += "\n";
+
+                                                                int i_st = 0;
+                                                                int j_st = 0;
+                                                                int total_points = 0;
+                                                                for (j = 0; j < h; j++)
+                                                                {
+                                                                    for (i = 0; i < w; i++)
+                                                                    {
+
+                                                                        if (array[i, j] >= 200)
+                                                                        {
+                                                                            total_points++;
+                                                                        }
+                                                                    }
+                                                                }
+                                                                richTextBox1.Text += "共找到 : " + total_points.ToString() + " 點\n";
+
+
+                                                                bool flag_got_break = false;
+                                                                for (j = 0; j < h; j++)
+                                                                {
+                                                                    for (i = 0; i < w; i++)
+                                                                    {
+
+                                                                        if (array[i, j] >= 200)
+                                                                        {
+                                                                            richTextBox1.Text += "找到 i = " + i.ToString() + ", j = " + j.ToString() + "\n";
+                                                                            i_st = i;
+                                                                            j_st = j;
+                                                                            flag_got_break = true;
+                                                                            break;
+                                                                        }
+
+
+                                                                    }
+                                                                    if (flag_got_break == true)
+                                                                        break;
+                                                                }
+                                                                richTextBox1.Text += "找到起始點 i_st = " + i_st.ToString() + ", j_st = " + j_st.ToString() + "\n";
+
+                                                                int i_next = i_st;
+                                                                int j_next = j_st;
+                                                                Points.Add(new Point(i_next, j_next));
+
+                                                                for (i = 0; i < total_points; i++)
+                                                                {
+                                                                    i_st = i_next;
+                                                                    j_st = j_next;
+                                                                    FindNeighborPoint(array, i_st, j_st, out i_next, out j_next);
+                                                                    Points.Add(new Point(i_next, j_next));
+                                                                    richTextBox1.Text += "i_next = " + i_next.ToString() + "\t" + "j_next = " + j_next.ToString() + "\n";
+                                                                    array[i_next, j_next] = 0;
+                                                                }
+
+                                                            }
+
+                                                            void FindNeighborPoint(int[,] array, int i_st, int j_st, out int i_next, out int j_next)
+                                                            {
+                                                                //int i;
+                                                                int len = array.Length;
+                                                                i_next = int.MaxValue;
+                                                                j_next = int.MinValue;
+
+                                                                int i = 0;
+                                                                int j = 0;
+
+                                                                //richTextBox1.Text += "1111 i_st = " + i_st.ToString() + ", j_st = " + j_st.ToString() + "\n";
+                                                                //richTextBox1.Text += "2222 i = " + i.ToString() + ", j = " + j.ToString() + "\n";
+
+                                                                //richTextBox1.Text += "上";
+                                                                i = i_st;
+                                                                j = j_st - 1;
+
+                                                                if ((i < 0) || (j < 0) || (i >= 8) || (j >= 6))
+                                                                {
+
+                                                                }
+                                                                else if (array[i, j] >= 200)
+                                                                {
+                                                                    richTextBox1.Text += "找到";
+                                                                    i_next = i;
+                                                                    j_next = j;
+                                                                    return;
+                                                                }
+                                                                //richTextBox1.Text += "\n";
+
+                                                                //richTextBox1.Text += "右上";
+                                                                i = i_st + 1;
+                                                                j = j_st - 1;
+                                                                if ((i < 0) || (j < 0) || (i >= 8) || (j >= 6))
+                                                                {
+
+                                                                }
+                                                                else if (array[i, j] >= 200)
+                                                                {
+                                                                    richTextBox1.Text += "找到\n";
+                                                                    i_next = i;
+                                                                    j_next = j;
+                                                                    return;
+
+                                                                }
+                                                                //richTextBox1.Text += "\n";
+
+                                                                //richTextBox1.Text += "右";
+                                                                i = i_st + 1;
+                                                                j = j_st;
+                                                                if ((i < 0) || (j < 0) || (i >= 8) || (j >= 6))
+                                                                {
+
+                                                                }
+                                                                else if (array[i, j] >= 200)
+                                                                {
+                                                                    richTextBox1.Text += "找到\n";
+                                                                    i_next = i;
+                                                                    j_next = j;
+                                                                    return;
+
+                                                                }
+                                                                //richTextBox1.Text += "\n";
+
+                                                                //richTextBox1.Text += "右下";
+                                                                i = i_st + 1;
+                                                                j = j_st + 1;
+                                                                if ((i < 0) || (j < 0) || (i >= 8) || (j >= 6))
+                                                                {
+
+                                                                }
+                                                                else if (array[i, j] >= 200)
+                                                                {
+                                                                    richTextBox1.Text += "找到\n";
+                                                                    i_next = i;
+                                                                    j_next = j;
+                                                                    return;
+
+                                                                }
+                                                                //richTextBox1.Text += "\n";
+
+                                                                //richTextBox1.Text += "下";
+                                                                i = i_st;
+                                                                j = j_st + 1;
+                                                                if ((i < 0) || (j < 0) || (i >= 8) || (j >= 6))
+                                                                {
+
+                                                                }
+                                                                else if (array[i, j] >= 200)
+                                                                {
+                                                                    richTextBox1.Text += "找到\n";
+                                                                    i_next = i;
+                                                                    j_next = j;
+                                                                    return;
+
+                                                                }
+                                                                //richTextBox1.Text += "\n";
+
+                                                                //richTextBox1.Text += "左下";
+                                                                i = i_st - 1;
+                                                                j = j_st + 1;
+                                                                if ((i < 0) || (j < 0) || (i >= 8) || (j >= 6))
+                                                                {
+
+                                                                }
+                                                                else if (array[i, j] >= 200)
+                                                                {
+                                                                    richTextBox1.Text += "找到\n";
+                                                                    i_next = i;
+                                                                    j_next = j;
+                                                                    return;
+
+                                                                }
+                                                                //richTextBox1.Text += "\n";
+
+                                                                //richTextBox1.Text += "左";
+                                                                i = i_st - 1;
+                                                                j = j_st;
+                                                                if ((i < 0) || (j < 0) || (i >= 8) || (j >= 6))
+                                                                {
+
+                                                                }
+                                                                else if (array[i, j] >= 200)
+                                                                {
+                                                                    richTextBox1.Text += "找到\n";
+                                                                    i_next = i;
+                                                                    j_next = j;
+                                                                    return;
+
+                                                                }
+                                                                //richTextBox1.Text += "\n";
+
+                                                                //richTextBox1.Text += "左上";
+                                                                i = i_st - 1;
+                                                                j = j_st - 1;
+                                                                if ((i < 0) || (j < 0) || (i >= 8) || (j >= 6))
+                                                                {
+
+                                                                }
+                                                                else if (array[i, j] >= 200)
+                                                                {
+                                                                    richTextBox1.Text += "找到\n";
+                                                                    i_next = i;
+                                                                    j_next = j;
+                                                                    return;
+
+                                                                }
+                                                                //richTextBox1.Text += "\n";
+
+                                                            }
+
 
         void find_bitmap_info(Bitmap bmp, int x_st, int y_st, int w, int h)
         {
@@ -1118,6 +1498,20 @@ namespace vcs_PictureEnhance_YUV
 
         void draw_2d_plot(Bitmap bmp, int x_st, int y_st, int w, int h, int type)
         {
+            int pb5_width = 800;
+            int pb5_height = 800;
+
+            if ((draw_x_st < 0) || (draw_x_st >= pb5_width))
+                return;
+            if ((draw_y_st < 0) || (draw_y_st >= pb5_height))
+                return;
+            if ((draw_w <= 0) || (draw_w > pb5_width))
+                return;
+            if ((draw_h <= 0) || (draw_h > pb5_height))
+                return;
+            if (((draw_x_st + draw_w) > pb5_width) || ((draw_y_st + draw_h) > pb5_height))
+                return;
+
             Graphics g;
             Bitmap bitmap1;
 
@@ -1131,8 +1525,6 @@ namespace vcs_PictureEnhance_YUV
                 return;
             }
 
-            int pb5_width = 800;
-            int pb5_height = 800;
             int point_size = 20;    //放大倍率
 
             if ((pb5_width / w) < (pb5_height / h))
@@ -1297,5 +1689,6 @@ namespace vcs_PictureEnhance_YUV
 
             lb_brightness.Text = y.ToString();
         }
+
     }
 }

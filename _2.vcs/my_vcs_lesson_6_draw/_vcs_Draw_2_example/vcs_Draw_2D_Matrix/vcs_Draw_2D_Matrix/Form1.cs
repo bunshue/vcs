@@ -11,6 +11,8 @@ namespace vcs_Draw_2D_Matrix
 {
     public partial class Form1 : Form
     {
+        private List<Point> Points = new List<Point>();
+
         public Form1()
         {
             InitializeComponent();
@@ -907,17 +909,6 @@ namespace vcs_Draw_2D_Matrix
             gray[29, 22] = 12;
             gray[30, 22] = 5;
 
-            /*
-            for (j = 0; j < 11; j++)
-            {
-                for (i = 0; i < 15; i++)
-                {
-                    richTextBox1.Text += gray[i, j].ToString() + " ";
-                }
-                richTextBox1.Text += "\n";
-            }
-            */
-
             int dd = 20;
             int xx;
             int yy;
@@ -959,9 +950,313 @@ namespace vcs_Draw_2D_Matrix
                     bitmap1.SetPixel(xx, yy, Color.FromArgb(aa, rr, gg, bb));
                 }
             }
+
+            //二值化 把邊框畫出來 ST
+
+            int row = gray.Rank;//獲取行數
+            int col1 = gray.GetLength(1);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
+            int col2 = gray.GetUpperBound(0) + 1;//獲取指定維度的上限，在 上一個1就是列數
+            int num1 = gray.Length;//獲取整個二維陣列的長度，即所有元 的個數
+
+            richTextBox1.Text += "row = " + row.ToString() + "\n";
+            richTextBox1.Text += "col1 = " + col1.ToString() + "\n";
+            richTextBox1.Text += "col2 = " + col2.ToString() + "\n";
+            richTextBox1.Text += "num1 = " + num1.ToString() + "\n";
+
+            int total_rows = gray.GetUpperBound(0) + 1;
+            richTextBox1.Text += "total_rows = " + total_rows.ToString() + "\n";
+
+            int w = gray.GetUpperBound(0) + 1;
+            int h = gray.GetLength(1);
+            int i;
+            int j;
+            for (j = 0; j < h; j++)
+            {
+                for (i = 0; i < w; i++)
+                {
+                    //richTextBox1.Text += gray[i, j] + "\t";
+
+                    //二值化
+                    if (gray[i, j] > 150)
+                        gray[i, j] = 220;
+                    else
+                        gray[i, j] = 30;
+                }
+                //richTextBox1.Text += "\n";
+            }
+            //richTextBox1.Text += "\n";
+
+
+
+
+
+            find_connected_points(gray);
+
+            richTextBox1.Text += "point array:\n";
+            richTextBox1.Text += "len = " + Points.Count.ToString() + "\n";
+
+            g = Graphics.FromImage(bitmap1);
+
+            p = new Pen(Color.Red, 10);     // 設定畫筆為紅色、粗細為 10 點。
+            sb = new SolidBrush(Color.Blue);
+
+
+            int len = Points.Count;
+            int ratio = 25;
+            for (i = 0; i < len / 2; i++)
+            {
+                g.DrawLine(Pens.Red, Points[i].X * ratio, Points[i].Y * ratio, Points[i + 1].X * ratio, Points[i + 1].Y * ratio);
+
+                //richTextBox1.Text += (Points[i].X * ratio).ToString() + " " + (Points[i].Y * ratio).ToString() + " " + (Points[i + 1].X * ratio).ToString() + " " + (Points[i + 1].Y * ratio).ToString() + "\n";
+
+            }
+            //二值化 把邊框畫出來 SP
+
             pictureBox1.Image = bitmap1;
+        }
+
+        void find_connected_points(int[,] array)
+        {
+            Points.Clear();
+
+            int row = array.Rank;//獲取行數
+            int col1 = array.GetLength(1);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
+            int col2 = array.GetUpperBound(0) + 1;//獲取指定維度的上限，在 上一個1就是列數
+            int num1 = array.Length;//獲取整個二維陣列的長度，即所有元 的個數
+
+            richTextBox1.Text += "row = " + row.ToString() + "\n";
+            richTextBox1.Text += "col1 = " + col1.ToString() + "\n";
+            richTextBox1.Text += "col2 = " + col2.ToString() + "\n";
+            richTextBox1.Text += "num1 = " + num1.ToString() + "\n";
+
+            int total_rows = array.GetUpperBound(0) + 1;
+            richTextBox1.Text += "total_rows = " + total_rows.ToString() + "\n";
+
+            int w = array.GetUpperBound(0) + 1;
+            int h = array.GetLength(1);
+            int i;
+            int j;
+            for (j = 0; j < h; j++)
+            {
+                for (i = 0; i < w; i++)
+                {
+                    richTextBox1.Text += array[i, j] + "\t";
+
+                }
+                richTextBox1.Text += "\n";
+            }
+            richTextBox1.Text += "\n";
+
+            int i_st = 0;
+            int j_st = 0;
+            int total_points = 0;
+            for (j = 0; j < h; j++)
+            {
+                for (i = 0; i < w; i++)
+                {
+
+                    if (array[i, j] >= 200)
+                    {
+                        total_points++;
+                    }
+                }
+            }
+            richTextBox1.Text += "共找到 : " + total_points.ToString() + " 點\n";
+
+
+            bool flag_got_break = false;
+            for (j = 0; j < h; j++)
+            {
+                for (i = 0; i < w; i++)
+                {
+
+                    if (array[i, j] >= 200)
+                    {
+                        richTextBox1.Text += "找到 i = " + i.ToString() + ", j = " + j.ToString() + "\n";
+                        i_st = i;
+                        j_st = j;
+                        flag_got_break = true;
+                        break;
+                    }
+
+
+                }
+                if (flag_got_break == true)
+                    break;
+            }
+            richTextBox1.Text += "找到起始點 i_st = " + i_st.ToString() + ", j_st = " + j_st.ToString() + "\n";
+
+            int i_next = i_st;
+            int j_next = j_st;
+            Points.Add(new Point(i_next, j_next));
+
+            for (i = 0; i < total_points / 2; i++)
+            {
+                i_st = i_next;
+                j_st = j_next;
+                FindNeighborPoint(array, i_st, j_st, out i_next, out j_next);
+                Points.Add(new Point(i_next, j_next));
+                richTextBox1.Text += "i_next = " + i_next.ToString() + "\t" + "j_next = " + j_next.ToString() + "\n";
+                array[i_next, j_next] = 0;
+            }
+        }
+
+        void FindNeighborPoint(int[,] array, int i_st, int j_st, out int i_next, out int j_next)
+        {
+            //int i;
+            int len = array.Length;
+            i_next = int.MaxValue;
+            j_next = int.MinValue;
+
+            int i = 0;
+            int j = 0;
+
+            //richTextBox1.Text += "1111 i_st = " + i_st.ToString() + ", j_st = " + j_st.ToString() + "\n";
+            //richTextBox1.Text += "2222 i = " + i.ToString() + ", j = " + j.ToString() + "\n";
+
+            int w = array.GetUpperBound(0) + 1;
+            int h = array.GetLength(1);
+
+
+            //richTextBox1.Text += "上";
+            i = i_st;
+            j = j_st - 1;
+
+            if ((i < 0) || (j < 0) || (i >= w) || (j >= h))
+            {
+
+            }
+            else if (array[i, j] >= 200)
+            {
+                richTextBox1.Text += "找到";
+                i_next = i;
+                j_next = j;
+                return;
+            }
+            //richTextBox1.Text += "\n";
+
+            //richTextBox1.Text += "右上";
+            i = i_st + 1;
+            j = j_st - 1;
+            if ((i < 0) || (j < 0) || (i >= w) || (j >= h))
+            {
+
+            }
+            else if (array[i, j] >= 200)
+            {
+                richTextBox1.Text += "找到\n";
+                i_next = i;
+                j_next = j;
+                return;
+
+            }
+            //richTextBox1.Text += "\n";
+
+            //richTextBox1.Text += "右";
+            i = i_st + 1;
+            j = j_st;
+            if ((i < 0) || (j < 0) || (i >= w) || (j >= h))
+            {
+
+            }
+            else if (array[i, j] >= 200)
+            {
+                richTextBox1.Text += "找到\n";
+                i_next = i;
+                j_next = j;
+                return;
+
+            }
+            //richTextBox1.Text += "\n";
+
+            //richTextBox1.Text += "右下";
+            i = i_st + 1;
+            j = j_st + 1;
+            if ((i < 0) || (j < 0) || (i >= w) || (j >= h))
+            {
+
+            }
+            else if (array[i, j] >= 200)
+            {
+                richTextBox1.Text += "找到\n";
+                i_next = i;
+                j_next = j;
+                return;
+
+            }
+            //richTextBox1.Text += "\n";
+
+            //richTextBox1.Text += "下";
+            i = i_st;
+            j = j_st + 1;
+            if ((i < 0) || (j < 0) || (i >= w) || (j >= h))
+            {
+
+            }
+            else if (array[i, j] >= 200)
+            {
+                richTextBox1.Text += "找到\n";
+                i_next = i;
+                j_next = j;
+                return;
+
+            }
+            //richTextBox1.Text += "\n";
+
+            //richTextBox1.Text += "左下";
+            i = i_st - 1;
+            j = j_st + 1;
+            if ((i < 0) || (j < 0) || (i >= w) || (j >= h))
+            {
+
+            }
+            else if (array[i, j] >= 200)
+            {
+                richTextBox1.Text += "找到\n";
+                i_next = i;
+                j_next = j;
+                return;
+
+            }
+            //richTextBox1.Text += "\n";
+
+            //richTextBox1.Text += "左";
+            i = i_st - 1;
+            j = j_st;
+            if ((i < 0) || (j < 0) || (i >= w) || (j >= h))
+            {
+
+            }
+            else if (array[i, j] >= 200)
+            {
+                richTextBox1.Text += "找到\n";
+                i_next = i;
+                j_next = j;
+                return;
+
+            }
+            //richTextBox1.Text += "\n";
+
+            //richTextBox1.Text += "左上";
+            i = i_st - 1;
+            j = j_st - 1;
+            if ((i < 0) || (j < 0) || (i >= w) || (j >= h))
+            {
+
+            }
+            else if (array[i, j] >= 200)
+            {
+                richTextBox1.Text += "找到\n";
+                i_next = i;
+                j_next = j;
+                return;
+
+            }
+            //richTextBox1.Text += "\n";
 
         }
+
+
 
         private void button3_Click(object sender, EventArgs e)
         {
@@ -1404,5 +1699,3 @@ namespace vcs_Draw_2D_Matrix
         }
     }
 }
-
-

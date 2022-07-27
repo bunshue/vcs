@@ -51,6 +51,7 @@
             this.cb_magnify = new System.Windows.Forms.CheckBox();
             this.timer_rgb = new System.Windows.Forms.Timer(this.components);
             this.lb_brightness = new System.Windows.Forms.Label();
+            this.button11 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3a)).BeginInit();
@@ -89,7 +90,7 @@
             // 
             this.button1.Location = new System.Drawing.Point(239, 100);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(93, 39);
+            this.button1.Size = new System.Drawing.Size(80, 40);
             this.button1.TabIndex = 8;
             this.button1.Text = "影像加強1";
             this.button1.UseVisualStyleBackColor = true;
@@ -99,7 +100,7 @@
             // 
             this.button2.Location = new System.Drawing.Point(239, 145);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(93, 39);
+            this.button2.Size = new System.Drawing.Size(80, 40);
             this.button2.TabIndex = 9;
             this.button2.Text = "影像加強2";
             this.button2.UseVisualStyleBackColor = true;
@@ -119,7 +120,7 @@
             // 
             this.button4.Location = new System.Drawing.Point(239, 305);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(93, 39);
+            this.button4.Size = new System.Drawing.Size(80, 40);
             this.button4.TabIndex = 11;
             this.button4.Text = "影像加強4";
             this.button4.UseVisualStyleBackColor = true;
@@ -168,7 +169,7 @@
             // 
             this.button6.Location = new System.Drawing.Point(240, 362);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(93, 39);
+            this.button6.Size = new System.Drawing.Size(80, 40);
             this.button6.TabIndex = 16;
             this.button6.Text = "影像加強 + 亮度分布";
             this.button6.UseVisualStyleBackColor = true;
@@ -187,7 +188,7 @@
             // 
             this.button7.Location = new System.Drawing.Point(240, 416);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(93, 39);
+            this.button7.Size = new System.Drawing.Size(80, 40);
             this.button7.TabIndex = 18;
             this.button7.Text = "影像加強 + 亮度分布";
             this.button7.UseVisualStyleBackColor = true;
@@ -207,7 +208,7 @@
             // 
             this.button8.Location = new System.Drawing.Point(351, 56);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(93, 39);
+            this.button8.Size = new System.Drawing.Size(80, 40);
             this.button8.TabIndex = 20;
             this.button8.Text = "info";
             this.button8.UseVisualStyleBackColor = true;
@@ -217,7 +218,7 @@
             // 
             this.button0.Location = new System.Drawing.Point(240, 56);
             this.button0.Name = "button0";
-            this.button0.Size = new System.Drawing.Size(93, 39);
+            this.button0.Size = new System.Drawing.Size(80, 40);
             this.button0.TabIndex = 21;
             this.button0.Text = "Reset";
             this.button0.UseVisualStyleBackColor = true;
@@ -227,7 +228,7 @@
             // 
             this.button9.Location = new System.Drawing.Point(351, 101);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(93, 39);
+            this.button9.Size = new System.Drawing.Size(80, 40);
             this.button9.TabIndex = 22;
             this.button9.Text = "2D plot 黑白";
             this.button9.UseVisualStyleBackColor = true;
@@ -237,7 +238,7 @@
             // 
             this.button10.Location = new System.Drawing.Point(351, 146);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(93, 39);
+            this.button10.Size = new System.Drawing.Size(80, 40);
             this.button10.TabIndex = 23;
             this.button10.Text = "2D plot 彩色";
             this.button10.UseVisualStyleBackColor = true;
@@ -246,7 +247,7 @@
             // cb_magnify
             // 
             this.cb_magnify.AutoSize = true;
-            this.cb_magnify.Location = new System.Drawing.Point(351, 212);
+            this.cb_magnify.Location = new System.Drawing.Point(351, 22);
             this.cb_magnify.Name = "cb_magnify";
             this.cb_magnify.Size = new System.Drawing.Size(60, 16);
             this.cb_magnify.TabIndex = 24;
@@ -269,11 +270,22 @@
             this.lb_brightness.TabIndex = 203;
             this.lb_brightness.Text = "Y";
             // 
+            // button11
+            // 
+            this.button11.Location = new System.Drawing.Point(351, 191);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(80, 40);
+            this.button11.TabIndex = 204;
+            this.button11.Text = "2D plot test";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 461);
+            this.Controls.Add(this.button11);
             this.Controls.Add(this.lb_brightness);
             this.Controls.Add(this.cb_magnify);
             this.Controls.Add(this.button10);
@@ -333,6 +345,7 @@
         private System.Windows.Forms.CheckBox cb_magnify;
         private System.Windows.Forms.Timer timer_rgb;
         private System.Windows.Forms.Label lb_brightness;
+        private System.Windows.Forms.Button button11;
     }
 }
 
