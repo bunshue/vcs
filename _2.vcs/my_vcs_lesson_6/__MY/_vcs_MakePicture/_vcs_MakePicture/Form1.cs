@@ -7,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Imaging;   //for ImageFormat
 using System.IO;                //for File
+using System.Diagnostics;       //for Process
+using System.Drawing.Imaging;   //for ImageFormat
 
 namespace _vcs_MakePicture
 {
@@ -27,13 +28,14 @@ namespace _vcs_MakePicture
         public Form1()
         {
             InitializeComponent();
-            pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
-            p = new Pen(foreground_color, 3);
-            sb = new SolidBrush(foreground_color);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
+            p = new Pen(foreground_color, 3);
+            sb = new SolidBrush(foreground_color);
+
             show_item_location();
         }
 
@@ -61,6 +63,7 @@ namespace _vcs_MakePicture
             bt5.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             bt6.Location = new Point(x_st + dx * 6, y_st + dy * 0);
             bt7.Location = new Point(x_st + dx * 7, y_st + dy * 0);
+            bt7.BackgroundImage = Properties.Resources.folder_open;
 
             //button
             x_st = 850;
@@ -2139,6 +2142,39 @@ namespace _vcs_MakePicture
 
         private void button55_Click(object sender, EventArgs e)
         {
+            //逐點製作圖檔
+            int width;
+            int height;
+
+            width = 601;
+            height = 601;
+            bitmap1 = new Bitmap(width, height);
+
+            g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+
+            int x_st = 100;
+            int y_st = 100;
+            int dx = 50;
+            int dy = 50;
+
+            int i;
+            for (i = 0; i <= width; i += dx)
+            {
+                g.DrawLine(Pens.Black, i, 0, i, height);
+
+            }
+            for (i = 0; i <= height; i += dx)
+            {
+                g.DrawLine(Pens.Black, 0, i, width, i);
+
+            }
+
+
+
+
+
+            pictureBox1.Image = bitmap1;
 
         }
 
@@ -2279,6 +2315,8 @@ namespace _vcs_MakePicture
 
         private void bt7_Click(object sender, EventArgs e)
         {
+            //開啟檔案總管
+            Process.Start(Application.StartupPath);
         }
 
         void draw_camera_status_icon(Color back_color)

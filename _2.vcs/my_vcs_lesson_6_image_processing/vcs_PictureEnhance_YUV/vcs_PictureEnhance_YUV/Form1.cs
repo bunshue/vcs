@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;
 using System.Drawing.Imaging;
+using System.Runtime.InteropServices;
 
 namespace vcs_PictureEnhance_YUV
 {
@@ -198,7 +199,10 @@ namespace vcs_PictureEnhance_YUV
             pictureBox4.Location = new Point(x_st + dx * 1, y_st + dy2 * 1);
             pictureBox5.Location = new Point(x_st + dx * 1, y_st + dy2 * 2);
 
+            lb_brightness.Text = "";
+            y_st = 60;
             dy = 50;
+            lb_brightness.Location = new Point(x_st + dx * 2, y_st + dy * -1);
             button0.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 2, y_st + dy * 2);
@@ -334,6 +338,9 @@ namespace vcs_PictureEnhance_YUV
 
         void enhance_bitmap_data(Bitmap bitmap1, int x_st, int y_st, int w, int h)
         {
+            //影像加強前 統計所有亮度
+
+
             int i;
             int j;
             int Y_max = 0;
@@ -350,11 +357,18 @@ namespace vcs_PictureEnhance_YUV
                     YUV yyy = new YUV();
                     yyy = RGBToYUV(pp);
 
-                    if (Y_max < yyy.Y)
-                        Y_max = (int)yyy.Y;
+                    int y = (int)Math.Round(yyy.Y); //四捨五入
 
-                    if (Y_min > yyy.Y)
-                        Y_min = (int)yyy.Y;
+                    if (y > 255)
+                        y = 255;
+                    if (y < 0)
+                        y = 0;
+
+                    if (Y_max < y)
+                        Y_max = y;
+
+                    if (Y_min > y)
+                        Y_min = y;
                 }
             }
             if (Y_max > 255)
@@ -384,7 +398,9 @@ namespace vcs_PictureEnhance_YUV
                     YUV yyy = new YUV();
                     yyy = RGBToYUV(pp);
 
-                    int Y_new = (int)((yyy.Y - Y_min) * ratio_Y);
+                    int y = (int)Math.Round(yyy.Y); //四捨五入
+
+                    int Y_new = (int)((y - Y_min) * ratio_Y);
                     if (Y_new > 255)
                         Y_new = 255;
                     if (Y_new < 0)
@@ -395,7 +411,6 @@ namespace vcs_PictureEnhance_YUV
                     rrr = YUVToRGB(yyy2);
 
                     bitmap1.SetPixel(x_st + i, y_st + j, Color.FromArgb(255, rrr.R, rrr.G, rrr.B));
-
                 }
             }
 
@@ -405,6 +420,12 @@ namespace vcs_PictureEnhance_YUV
                 Graphics g = Graphics.FromImage(bitmap1);
                 g.DrawRectangle(Pens.Blue, x_st - 1, y_st - 1, w + 2, h + 2);
             }
+
+
+            //影像加強後 統計所有亮度
+
+
+
         }
 
         void show_part_image(Bitmap bitmap1, int x_st, int y_st, int w, int h)
@@ -442,6 +463,23 @@ namespace vcs_PictureEnhance_YUV
                 for (i = 0; i < w; i++)
                 {
                     pt = bitmap3b.GetPixel(i, j);
+
+                    //把最亮和最暗的標示出來
+                    RGB pp = new RGB(pt.R, pt.G, pt.B);
+                    YUV yyy = new YUV();
+                    yyy = RGBToYUV(pp);
+
+                    int y = (int)Math.Round(yyy.Y); //四捨五入
+
+                    if (y > (255 - 20))
+                    {
+                        pt = Color.Lime;
+                    }
+                    if (y < 20)
+                    {
+                        pt = Color.Blue;
+                    }
+
                     bitmap3a.SetPixel(i * 2, j * 2, pt);
                     bitmap3a.SetPixel(i * 2, j * 2 + 1, pt);
                     bitmap3a.SetPixel(i * 2 + 1, j * 2, pt);
@@ -567,8 +605,6 @@ namespace vcs_PictureEnhance_YUV
             //修改bitmap1資料, debug SP
 
             ImageEnhancement(x_st, y_st, w, h);
-            enhance_bitmap_data(bitmap2, x_st, y_st, w, h);
-            show_part_image(bitmap2, x_st, y_st, w, h);
 
             //亮度分布
             draw_x_st = x_st;
@@ -576,7 +612,6 @@ namespace vcs_PictureEnhance_YUV
             draw_w = w;
             draw_h = h;
 
-            draw_enhanced_image(bitmap2, draw_x_st, draw_y_st, draw_w, draw_h);
             measure_brightness(pictureBox1, pictureBox4);
             measure_brightness(pictureBox2, pictureBox5);
 
@@ -591,12 +626,7 @@ namespace vcs_PictureEnhance_YUV
             h = 40;
 
             reset_picture();
-
             ImageEnhancement(x_st, y_st, w, h);
-
-            enhance_bitmap_data(bitmap2, x_st, y_st, w, h);
-
-            show_part_image(bitmap2, x_st, y_st, w, h);
 
             //亮度分布
             draw_x_st = x_st;
@@ -604,7 +634,6 @@ namespace vcs_PictureEnhance_YUV
             draw_w = w;
             draw_h = h;
 
-            //draw_enhanced_image(bitmap2, draw_x_st, draw_y_st, draw_w, draw_h);
             measure_brightness(pictureBox1, pictureBox4);
             measure_brightness(pictureBox2, pictureBox5);
 
@@ -648,8 +677,8 @@ namespace vcs_PictureEnhance_YUV
 
             int i;
             int j;
-            double Y_max = 0;
-            double Y_min = 255;
+            int Y_max = 0;
+            int Y_min = 255;
             Color pt;
             for (j = 0; j < h; j++)
             {
@@ -661,11 +690,18 @@ namespace vcs_PictureEnhance_YUV
                     YUV yyy = new YUV();
                     yyy = RGBToYUV(pp);
 
-                    if (Y_max < yyy.Y)
-                        Y_max = yyy.Y;
+                    int y = (int)Math.Round(yyy.Y); //四捨五入
 
-                    if (Y_min > yyy.Y)
-                        Y_min = yyy.Y;
+                    if (y > 255)
+                        y = 255;
+                    if (y < 0)
+                        y = 0;
+
+                    if (Y_max < y)
+                        Y_max = y;
+
+                    if (Y_min > y)
+                        Y_min = y;
 
                     //if (j == 10)
                     {
@@ -677,7 +713,7 @@ namespace vcs_PictureEnhance_YUV
                     }
                     //richTextBox1.Text += "\n";
 
-                    if (yyy.Y < 100)
+                    if (y < 100)
                     {
                         //bmp.SetPixel(x_st + i, y_st + j, Color.Red);
                     }
@@ -805,6 +841,7 @@ namespace vcs_PictureEnhance_YUV
             if (((draw_x_st + draw_w) > W) || ((draw_y_st + draw_h) > H))
                 return;
 
+            richTextBox1.Text += draw_x_st.ToString() + "\t" + draw_y_st.ToString() + "\t" + draw_w.ToString() + "\t" + draw_h.ToString() + "\n";
             draw_enhanced_image(bitmap2, draw_x_st, draw_y_st, draw_w, draw_h);
             measure_brightness(pictureBox1, pictureBox4);
             measure_brightness(pictureBox2, pictureBox5);
@@ -836,28 +873,9 @@ namespace vcs_PictureEnhance_YUV
             e.Graphics.DrawString("滿框", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(0, 0));
         }
 
-        void measure_brightness(PictureBox pbox1, PictureBox pbox2)
+        void get_brigheness_data(Bitmap bitmap1, int x_st, int y_st, int w, int h)
         {
-            if (pbox1.Image == null)
-            {
-                richTextBox1.Text += pbox1.Name + " 無影像, 離開\n";
-                return;
-            }
-
             brightness_data = new int[256];
-
-            richTextBox1.Text += pbox1.Name + "\n";
-
-            //draw_enhanced_image(bitmap1, draw_x_st, draw_y_st, draw_w, draw_h);
-            x_st = draw_x_st;
-            y_st = draw_y_st;
-            w = draw_w;
-            h = draw_h;
-
-            Bitmap bitmap1 = (Bitmap)pbox1.Image;
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-            //richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
 
             int i;
             int j;
@@ -881,7 +899,7 @@ namespace vcs_PictureEnhance_YUV
                     if (y < 0)
                         y = 0;
 
-                    brightness_data[(int)y]++;
+                    brightness_data[y]++;
                     total_points++;
 
                     /*
@@ -898,69 +916,101 @@ namespace vcs_PictureEnhance_YUV
                 //richTextBox1.Text += "\n";
             }
             //richTextBox1.Text += "\n";
+            //richTextBox1.Text += "共有 " + total_points.ToString() + " 個點\n";
+        }
 
-            /*
-            //debug
-            for (i = 0; i < 256; i++)
+        void measure_brightness(PictureBox pbox1, PictureBox pbox2)
+        {
+            if (pbox1.Image == null)
             {
-                richTextBox1.Text += brightness_data[i].ToString("D3") + " ";
-                if ((i % 24) == 23)
-                    richTextBox1.Text += "\n";
+                richTextBox1.Text += pbox1.Name + " 無影像, 離開\n";
+                return;
             }
-            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += pbox1.Name + "\n";
+
+            x_st = draw_x_st;
+            y_st = draw_y_st;
+            w = draw_w;
+            h = draw_h;
+
+            Bitmap bitmap1 = (Bitmap)pbox1.Image;
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            //richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+
+            get_brigheness_data(bitmap1, x_st, y_st, w, h);
+
+            /* debug
+            richTextBox1.Text += "brightness data :\n";
+            printArrayData(brightness_data);
             */
 
-            int y_min;
-            int y_max;
+            int y_min = 0;
+            int y_max = 0;
             FindYMaxYMin(brightness_data, out y_min, out y_max);
-
             richTextBox1.Text += "y_min = " + y_min.ToString() + "\t" + "y_max = " + y_max.ToString() + "\n";
 
+            /*  修改數值
             //一律忽視最亮和最暗的數值   ????
             brightness_data[0] = 0;
             brightness_data[255] = 0;
 
+            int i;
             for (i = 0; i < 256; i++)
             {
                 if (brightness_data[i] < 40)
+                {
                     brightness_data[i] = 0;
-
+                }
                 //richTextBox1.Text += brightness_data[i].ToString() + " ";
             }
-
-            /*
-            for (i = 0; i < 256; i++)
-            {
-                richTextBox1.Text += brightness_data[i].ToString("D3") + " ";
-                if ((i % 24) == 23)
-                    richTextBox1.Text += "\n";
-
-            }
-            richTextBox1.Text += "\n";
             */
 
-            //richTextBox1.Text += "共有 " + total_points.ToString() + " 個點\n";
+            /* debug
+            richTextBox1.Text += "brightness data :\n";
+            printArrayData(brightness_data);
+            */
 
             draw_brightness(pbox2);
         }
 
-
         void draw_brightness(PictureBox pbox)
         {
             int i;
+
+            /* debug
+            richTextBox1.Text += "brightness data :\n";
+            printArrayData(brightness_data);
+            */
+
             int most = 0;
+            int brightness_st = 0;
+            int brightness_sp = 0;
             for (i = 0; i < 256; i++)
             {
                 //richTextBox1.Text += brightness_data[i].ToString() + " ";
                 if (brightness_data[i] > most)
                     most = brightness_data[i];
+                /*
                 if (brightness_data[i] == 0)
                     brightness_data[i] = 5;
+                */
+                if ((brightness_data[i] > 0) && (brightness_st == 0))
+                {
+                    brightness_st = i;
+                }
+                if (brightness_data[i] > 0)
+                {
+                    brightness_sp = i;
+                }
             }
-            //richTextBox1.Text += "\n最多 " + most.ToString() + "\n";
+            richTextBox1.Text += "\n最多 " + most.ToString() + "\n";
+            richTextBox1.Text += "亮度範圍 : " + brightness_st.ToString() + " 到 " + brightness_sp.ToString() + "\n";
+            richTextBox1.Text += "亮差 : " + (brightness_sp - brightness_st).ToString() + "\n";
 
-            int y_min;
-            int y_max;
+            int y_min = 0;
+            int y_max = 0;
             FindYMaxYMin(brightness_data, out y_min, out y_max);
             richTextBox1.Text += "M = " + y_max.ToString() + "\t" + "m = " + y_min.ToString() + "\n";
 
@@ -974,18 +1024,15 @@ namespace vcs_PictureEnhance_YUV
 
             double ratio = 0;
             ratio = (double)hh2 / most;
-
-            //richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
+            richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
 
             for (i = 0; i < 256; i++)
             {
-                //g2.FillRectangle(Brushes.Red, i * 2, 0, 2, (float)(brightness_data[i] * ratio));
                 g2.FillRectangle(Brushes.Red, i * 2, hh2 - (float)(brightness_data[i] * ratio), 2, (float)(brightness_data[i] * ratio));
             }
 
             g2.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh1 - 2);
             g2.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh2 - 2);
-
 
             Brush b = new SolidBrush(Color.FromArgb(33, Color.RoyalBlue.R, Color.RoyalBlue.G, Color.RoyalBlue.B));
 
@@ -1026,6 +1073,26 @@ namespace vcs_PictureEnhance_YUV
             g2.DrawString("Max = " + y_max.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Navy), 512, 10);
             g2.DrawString("min = " + y_min.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Navy), 512, 40);
             g2.DrawString("most = " + most.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Navy), 512, 70);
+            g2.DrawString("最亮 : " + brightness_sp.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Navy), 512, 100);
+            g2.DrawString("最暗 : " + brightness_st.ToString(), new Font("標楷體", 20), new SolidBrush(Color.Navy), 512, 130);
+            g2.DrawString("亮差 : " + (brightness_sp - brightness_st).ToString(), new Font("標楷體", 20), new SolidBrush(Color.Navy), 512, 160);
+
+
+            /*  沒幫上忙
+            //畫個curve
+            Point[] curvePoints = new Point[256];    //一維陣列內有 256 個Point
+
+            for (i = 0; i < 256; i++)
+            {
+                curvePoints[i].X = i*2;
+                curvePoints[i].Y = hh2 - (int)(brightness_data[i] * ratio);
+            }
+
+            // Draw lines between original points to screen.
+            //g2.DrawLines(Pens.Green, curvePoints);   //畫直線
+            // Draw curve to screen.
+            g2.DrawCurve(Pens.Green, curvePoints); //畫曲線
+            */
 
             pbox.Image = bmp;
         }
@@ -1101,23 +1168,27 @@ namespace vcs_PictureEnhance_YUV
                     YUV yyy = new YUV();
                     yyy = RGBToYUV(pp);
 
-                    double y = yyy.Y;
+                    int y = (int)Math.Round(yyy.Y); //四捨五入
 
                     if (y > 255)
                         y = 255;
                     if (y < 0)
                         y = 0;
-                    gray[i, j] = (int)y;
 
+                    gray[i, j] = y;
 
-                    if (Y_max < (int)y)
-                        Y_max = (int)y;
+                    if (Y_max < y)
+                        Y_max = y;
 
-                    if (Y_min > (int)y)
-                        Y_min = (int)y;
+                    if (Y_min > y)
+                        Y_min = y;
                 }
             }
 
+            if (Y_max > 255)
+                Y_max = 255;
+            if (Y_min < 0)
+                Y_min = 0;
             richTextBox1.Text += "M = " + Y_max.ToString() + "\tm = " + Y_min.ToString() + "\n";
 
             int xx;
@@ -1157,6 +1228,74 @@ namespace vcs_PictureEnhance_YUV
             }
             g.DrawString(w.ToString() + " X " + h.ToString() + ", " + point_size.ToString() + "倍", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(0, 0));
             pictureBox5.Image = bitmap1;
+        }
+
+        void printArrayData(int[] array)
+        {
+            int i;
+            int len = array.Length;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += array[i].ToString("D3") + " ";
+                if ((i % 24) == 23)
+                {
+                    richTextBox1.Text += "\n";
+                }
+            }
+            richTextBox1.Text += "\n";
+        }
+
+        [DllImport("gdi32.dll")]
+        static public extern uint GetPixel(IntPtr hDC, int XPos, int YPos);
+        [DllImport("gdi32.dll")]
+        static public extern IntPtr CreateDC(string driverName, string deviceName, string output, IntPtr lpinitData);
+        [DllImport("gdi32.dll")]
+        static public extern bool DeleteDC(IntPtr DC);
+        static public byte GetRValue(uint color)
+        {
+            return (byte)color;
+        }
+        static public byte GetGValue(uint color)
+        {
+            return ((byte)(((short)(color)) >> 8));
+        }
+        static public byte GetBValue(uint color)
+        {
+            return ((byte)((color) >> 16));
+        }
+        static public byte GetAValue(uint color)
+        {
+            return ((byte)((color) >> 24));
+        }
+
+        public Color GetColor(Point screenPoint)
+        {
+            IntPtr displayDC = CreateDC("DISPLAY", null, null, IntPtr.Zero);
+            uint colorref = GetPixel(displayDC, screenPoint.X, screenPoint.Y);
+            DeleteDC(displayDC);
+            byte Red = GetRValue(colorref);
+            byte Green = GetGValue(colorref);
+            byte Blue = GetBValue(colorref);
+            return Color.FromArgb(Red, Green, Blue);
+        }
+
+        private void timer_rgb_Tick(object sender, EventArgs e)
+        {
+            Point pt = new Point(Control.MousePosition.X, Control.MousePosition.Y);
+            Color cl = GetColor(pt);
+
+            RGB pp = new RGB(cl.R, cl.G, cl.B);
+            YUV yyy = new YUV();
+            yyy = RGBToYUV(pp);
+
+            int y = (int)Math.Round(yyy.Y); //四捨五入
+
+            if (y > 255)
+                y = 255;
+            if (y < 0)
+                y = 0;
+
+            lb_brightness.Text = y.ToString();
         }
     }
 }

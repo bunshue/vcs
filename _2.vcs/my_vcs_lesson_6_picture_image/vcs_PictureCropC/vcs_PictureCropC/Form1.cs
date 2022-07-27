@@ -15,9 +15,6 @@ namespace vcs_PictureCropC
         public Point pt_sp = new Point(0, 0);  //鼠標第二點 
         public bool flag_mouse_down = false;   //是否開始畫矩形 
 
-        /// <summary>
-        /// 在 picturebox1 上畫矩形
-        /// </summary>
         Graphics g;
 
         public Form1()
@@ -29,24 +26,17 @@ namespace vcs_PictureCropC
         {
             g = this.pictureBox1.CreateGraphics();
 
+            pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
+            pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
+            pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
         }
 
-        /// <summary>
-        /// 在 pictureBox1 上按下鼠標事件
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             flag_mouse_down = true;
             pt_st = new Point(e.X, e.Y);
         }
 
-        /// <summary>
-        /// 在 pictureBox1 上鼠標移動開始繪圖
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if (flag_mouse_down == true)
@@ -67,14 +57,10 @@ namespace vcs_PictureCropC
             }
         }
 
-        /// <summary>
-        /// 鼠標放開停止繪圖
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             flag_mouse_down = false;
         }
     }
 }
+

@@ -109,6 +109,7 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(12, 12);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(469, 386);
@@ -849,6 +850,7 @@
             this.button55.Name = "button55";
             this.button55.Size = new System.Drawing.Size(60, 60);
             this.button55.TabIndex = 59;
+            this.button55.Text = "製作表格";
             this.button55.UseVisualStyleBackColor = true;
             this.button55.Click += new System.EventHandler(this.button55_Click);
             // 
