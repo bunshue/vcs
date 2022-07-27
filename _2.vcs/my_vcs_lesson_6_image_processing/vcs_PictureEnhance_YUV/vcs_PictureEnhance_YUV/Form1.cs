@@ -336,10 +336,9 @@ namespace vcs_PictureEnhance_YUV
         {
             int i;
             int j;
-            Color pt;
-
             int Y_max = 0;
             int Y_min = 255;
+            Color pt;
 
             for (j = 0; j < h; j++)
             {
@@ -434,19 +433,19 @@ namespace vcs_PictureEnhance_YUV
             //richTextBox1.Text += "x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + ", w = " + w.ToString() + ", h = " + h.ToString() + "\n";
 
             Bitmap bitmap3a = new Bitmap(w * 2, h * 2);
+
             int i;
             int j;
-            Color p;
-
+            Color pt;
             for (j = 0; j < h; j++)
             {
                 for (i = 0; i < w; i++)
                 {
-                    p = bitmap3b.GetPixel(i, j);
-                    bitmap3a.SetPixel(i * 2, j * 2, p);
-                    bitmap3a.SetPixel(i * 2, j * 2 + 1, p);
-                    bitmap3a.SetPixel(i * 2 + 1, j * 2, p);
-                    bitmap3a.SetPixel(i * 2 + 1, j * 2 + 1, p);
+                    pt = bitmap3b.GetPixel(i, j);
+                    bitmap3a.SetPixel(i * 2, j * 2, pt);
+                    bitmap3a.SetPixel(i * 2, j * 2 + 1, pt);
+                    bitmap3a.SetPixel(i * 2 + 1, j * 2, pt);
+                    bitmap3a.SetPixel(i * 2 + 1, j * 2 + 1, pt);
                 }
             }
             pictureBox3a.Image = bitmap3a;
@@ -470,7 +469,6 @@ namespace vcs_PictureEnhance_YUV
         {
             show_item_location();
             reset_picture();
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -545,7 +543,6 @@ namespace vcs_PictureEnhance_YUV
             //修改bitmap1資料, debug ST
             int i;
             int j;
-
             for (j = 0; j < h; j++)
             {
                 for (i = 0; i < w; i++)
@@ -647,16 +644,13 @@ namespace vcs_PictureEnhance_YUV
 
         void find_bitmap_info(Bitmap bmp, int x_st, int y_st, int w, int h)
         {
+            //richTextBox1.Text += x_st.ToString() + "\t" + y_st.ToString() + "\t" + w.ToString() + "\t" + h.ToString() + "\n";
+
             int i;
             int j;
             double Y_max = 0;
             double Y_min = 255;
             Color pt;
-
-            //richTextBox1.Text += x_st.ToString() + "\t" + y_st.ToString() + "\t" + w.ToString() + "\t" + h.ToString() + "\n";
-
-            Y_max = 0;
-            Y_min = 255;
             for (j = 0; j < h; j++)
             {
                 for (i = 0; i < w; i++)
@@ -852,23 +846,6 @@ namespace vcs_PictureEnhance_YUV
 
             brightness_data = new int[256];
 
-            /*
-            if (checkBox1.Checked == true)
-            {
-                x_st = 0;
-                y_st = 0;
-                w = 640;
-                h = 480;
-            }
-            else
-            */
-            {
-                x_st = 100;
-                y_st = 100;
-                w = 640 - 200;
-                h = 480 - 200;
-            }
-
             richTextBox1.Text += pbox1.Name + "\n";
 
             //draw_enhanced_image(bitmap1, draw_x_st, draw_y_st, draw_w, draw_h);
@@ -881,27 +858,53 @@ namespace vcs_PictureEnhance_YUV
             int W = bitmap1.Width;
             int H = bitmap1.Height;
             //richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+
             int i;
             int j;
+            Color pt;
             int total_points = 0;
 
-            for (j = y_st; j < (y_st + h); j++)
+            for (j = 0; j < h; j++)
             {
-                for (i = x_st; i < (x_st + w); i++)
+                for (i = 0; i < w; i++)
                 {
-                    byte rrr = bitmap1.GetPixel(i, j).R;
-                    //richTextBox1.Text += rrr.ToString() + "-";
-                    brightness_data[rrr]++;
+                    pt = bitmap1.GetPixel(x_st + i, y_st + j);
+
+                    RGB pp = new RGB(pt.R, pt.G, pt.B);
+                    YUV yyy = new YUV();
+                    yyy = RGBToYUV(pp);
+
+                    int y = (int)Math.Round(yyy.Y); //四捨五入
+
+                    if (y > 255)
+                        y = 255;
+                    if (y < 0)
+                        y = 0;
+
+                    brightness_data[(int)y]++;
                     total_points++;
+
+                    /*
+                    if (j == 10)
+                    {
+                        richTextBox1.Text += y.ToString() + " ";
+                        if ((i % 16) == 15)
+                        {
+                            richTextBox1.Text += "\n";
+                        }
+                    }
+                    */
                 }
+                //richTextBox1.Text += "\n";
             }
+            //richTextBox1.Text += "\n";
 
             /*
             //debug
             for (i = 0; i < 256; i++)
             {
                 richTextBox1.Text += brightness_data[i].ToString("D3") + " ";
-                if((i%24)==23)
+                if ((i % 24) == 23)
                     richTextBox1.Text += "\n";
             }
             richTextBox1.Text += "\n";
@@ -940,6 +943,7 @@ namespace vcs_PictureEnhance_YUV
 
             draw_brightness(pbox2);
         }
+
 
         void draw_brightness(PictureBox pbox)
         {
@@ -1047,6 +1051,19 @@ namespace vcs_PictureEnhance_YUV
 
         void draw_2d_plot(Bitmap bmp, int x_st, int y_st, int w, int h, int type)
         {
+            Graphics g;
+            Bitmap bitmap1;
+
+            if (w > 400)
+            {
+                bitmap1 = new Bitmap(pictureBox5.Width, pictureBox5.Height);
+
+                g = Graphics.FromImage(bitmap1);
+                g.DrawString("選取範圍太大", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(0, 0));
+                pictureBox5.Image = bitmap1;
+                return;
+            }
+
             int pb5_width = 800;
             int pb5_height = 800;
             int point_size = 20;    //放大倍率
@@ -1056,42 +1073,23 @@ namespace vcs_PictureEnhance_YUV
             else
                 point_size = pb5_height / h;
 
-            Graphics g;
-            Pen p;
-            SolidBrush sb;
-            Bitmap bitmap1;
+            Pen p = new Pen(Color.Red, 10);
+            SolidBrush sb = new SolidBrush(Color.Blue);
 
             int W = pictureBox5.ClientSize.Width;
             int H = pictureBox5.ClientSize.Height;
 
-            //----開新的Bitmap----
             bitmap1 = new Bitmap(W, H);
-            //----使用上面的Bitmap畫圖----
             g = Graphics.FromImage(bitmap1);
-
-            p = new Pen(Color.Red, 10);     // 設定畫筆為紅色、粗細為 10 點。
-            sb = new SolidBrush(Color.Blue);
-
             g.Clear(Color.White);
-
-            if (w > 400)
-            {
-                g.DrawString("選取範圍太大", new Font("標楷體", 20), new SolidBrush(Color.Red), new PointF(0, 0));
-
-                pictureBox5.Image = bitmap1;
-
-                return;
-            }
-
 
             int[,] gray = new int[w, h];
 
             int i;
             int j;
-            Color pt;
-
             int Y_max = 0;
             int Y_min = 255;
+            Color pt;
 
             for (j = 0; j < h; j++)
             {

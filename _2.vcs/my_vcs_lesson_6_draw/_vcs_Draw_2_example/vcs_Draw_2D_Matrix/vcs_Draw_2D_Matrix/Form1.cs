@@ -21,6 +21,11 @@ namespace vcs_Draw_2D_Matrix
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
         private double rad(double d)
         {
             return d * Math.PI / 180.0;
@@ -36,10 +41,8 @@ namespace vcs_Draw_2D_Matrix
             return Math.Cos(d * Math.PI / 180.0);
         }
 
-
         int COLUMN = 360 + 1 + 360;
         int ROW = 360 + 1 + 360;
-
         void draw_contour(int cx, int cy)
         {
             int i, j;
@@ -1398,9 +1401,8 @@ namespace vcs_Draw_2D_Matrix
             }
             richTextBox1.Text += "\n";
             pictureBox1.Image = bitmap1;
-
-
         }
     }
 }
+
 

@@ -186,7 +186,6 @@ namespace vcs_PictureCrop1
         void reset_picture()
         {
             bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-
             pictureBox1.Image = bitmap1;
 
             W = bitmap1.Width;

@@ -157,6 +157,45 @@ namespace vcs_Mix00
             //發送數據
             //serial.Write(bytSendData, 0, 5);
 
+
+
+            byte bytRtuDataFlag = 0;
+            byte bytRtuDataIdx;
+            byte[] bytRtuData = new byte[8];
+
+            int i;
+            for (i = 0; i < 8; i++)
+            {
+                bytRtuData[i] = (byte)i;
+
+            }
+            //信息處理
+            intCRC16 = GetCheckCode(bytRtuData, 8 - 2);
+
+            //Debug.Print("CRC:" + bytRtuData[8 - 2].ToString() + " " + ((byte)(intCRC16 & 0xFF)).ToString() +"|" + bytRtuData[8 - 1].ToString() + " " + ((byte)((intCRC16 >> 8) & 0xff)).ToString());
+
+            string result = "CRC:" + bytRtuData[8 - 2].ToString() + " " + ((byte)(intCRC16 & 0xFF)).ToString() + "|" + bytRtuData[8 - 1].ToString() + " " + ((byte)((intCRC16 >> 8) & 0xff)).ToString();
+
+            richTextBox1.Text += result + "\n";
+
+
+            //bytSendData[3 + lngDataNum * 2] = (byte)(intCRC16 & 0xFF);                    //CRC校驗低位
+            //bytSendData[4 + lngDataNum * 2] = (byte)((intCRC16 >> 8) & 0xff);             //CRC校驗高位                  
+
+
+            //intCRC16 = GetCheckCode(bytSendData, 3);
+            //bytSendData[3] = (byte)(intCRC16 & 0xFF); &nbsp;               //CRC校驗低位
+            //bytSendData[4] = (byte)((intCRC16 >> 8) & 0xff);                //CRC校驗高位
+
+
+
+            //CRC16校驗檢驗
+            //if (bytRtuData[8 - 2] == (intCRC16 & 0xFF) && bytRtuData[8 - 1] == ((intCRC16 >> 8) & 0xff))
+
+
+
+
+
         }
 
         //CRC16校驗
