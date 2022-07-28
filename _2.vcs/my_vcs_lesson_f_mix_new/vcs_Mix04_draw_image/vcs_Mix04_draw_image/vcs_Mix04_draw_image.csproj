@@ -8,8 +8,8 @@
     <ProjectGuid>{E38AD5AE-BFB7-4088-BD5B-1D085DE7D135}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>image_test2</RootNamespace>
-    <AssemblyName>image_test2</AssemblyName>
+    <RootNamespace>vcs_Mix04_draw_image</RootNamespace>
+    <AssemblyName>vcs_Mix04_draw_image</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

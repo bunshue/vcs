@@ -1,4 +1,4 @@
-﻿namespace image_test2
+﻿namespace vcs_Mix04_draw_image
 {
     partial class Form1
     {

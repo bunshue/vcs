@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace test_read_write_binary
+namespace test_move_pic_in_pbox
 {
     static class Program
     {

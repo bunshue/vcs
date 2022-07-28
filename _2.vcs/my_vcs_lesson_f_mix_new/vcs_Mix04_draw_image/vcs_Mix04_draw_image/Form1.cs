@@ -10,7 +10,7 @@ using System.IO;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;   //for Encoder
 
-namespace image_test2
+namespace vcs_Mix04_draw_image
 {
     public partial class Form1 : Form
     {

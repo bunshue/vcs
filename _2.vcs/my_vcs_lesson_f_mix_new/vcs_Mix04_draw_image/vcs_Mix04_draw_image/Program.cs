@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace image_test2
+namespace vcs_Mix04_draw_image
 {
     static class Program
     {
