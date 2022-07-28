@@ -171,8 +171,9 @@ namespace vcs_PictureEnhance_YUV
 
             int pbx_W = 640 + 10;
             int pbx_H = 480 + 10;
-            int pbx_W2 = 480;
+            int pbx_W2 = 480 + 60;
             int pbx_H2 = 520 * 2 / 3;
+            int pbx_W3 = 480;
 
             x_st = 10;
             y_st = 10;
@@ -184,11 +185,11 @@ namespace vcs_PictureEnhance_YUV
             pictureBox2.Size = new Size(pbx_W, pbx_H);
             pictureBox3a.Size = new Size(pbx_W2, pbx_H2);
             pictureBox3b.Size = new Size(pbx_W2, pbx_H2);
-            pictureBox4.Size = new Size(pbx_W2 * 2, pbx_H2);
-            pictureBox5.Size = new Size(pbx_W2 * 2, pbx_H2);
+            pictureBox4.Size = new Size(pbx_W3 * 2, pbx_H2);
+            pictureBox5.Size = new Size(pbx_W3 * 2, pbx_H2);
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
-            pictureBox3a.SizeMode = PictureBoxSizeMode.CenterImage;
+            pictureBox3a.SizeMode = PictureBoxSizeMode.Normal;
             pictureBox3b.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox4.SizeMode = PictureBoxSizeMode.Normal;
             pictureBox5.SizeMode = PictureBoxSizeMode.Normal;
@@ -201,7 +202,7 @@ namespace vcs_PictureEnhance_YUV
             pictureBox5.Location = new Point(x_st + dx * 1, y_st + dy2 * 2);
 
             lb_brightness.Text = "";
-            y_st = 60;
+            y_st = 420;
             dx += 160;
             dy = 50;
             lb_brightness.Location = new Point(x_st + dx * 2, y_st + dy * -1);
@@ -220,8 +221,8 @@ namespace vcs_PictureEnhance_YUV
             cb_magnify.Location = new Point(x_st + dx * 2, y_st + dy * 12);
 
             y_st = 10;
-            richTextBox1.Size = new Size(180, pbx_H * 2 + 10);
-            richTextBox1.Location = new Point(x_st + dx * 2 + 100, y_st + dy * 0);
+            richTextBox1.Size = new Size(160, 1040);
+            richTextBox1.Location = new Point(x_st + dx * 2 + 105, y_st + dy * 0);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -342,8 +343,7 @@ namespace vcs_PictureEnhance_YUV
 
         void enhance_bitmap_data(Bitmap bitmap1, int x_st, int y_st, int w, int h)
         {
-            //影像加強前 統計所有亮度
-
+            //影像加強前 統計所有亮度, TBD
 
             int i;
             int j;
@@ -425,14 +425,10 @@ namespace vcs_PictureEnhance_YUV
                 g.DrawRectangle(Pens.Blue, x_st - 1, y_st - 1, w + 2, h + 2);
             }
 
-
-            //影像加強後 統計所有亮度
-
-
-
+            //影像加強後 統計所有亮度, TBD
         }
 
-        void show_part_image(Bitmap bitmap1, int x_st, int y_st, int w, int h)
+        void show_part_image(Bitmap bmp, int x_st, int y_st, int w, int h)
         {
             if ((x_st < 0) || (x_st >= W))
                 return;
@@ -445,8 +441,25 @@ namespace vcs_PictureEnhance_YUV
             if (((x_st + w) > W) || ((y_st + h) > H))
                 return;
 
-            Bitmap bitmap3b = bitmap1.Clone(new Rectangle(x_st, y_st, w, h), PixelFormat.Format32bppArgb);
+            //滿框放大顯示
+            Bitmap bitmap3b = bmp.Clone(new Rectangle(x_st, y_st, w, h), PixelFormat.Format32bppArgb);
             pictureBox3b.Image = bitmap3b;
+
+            int pbox3a_w = pictureBox3a.Width;
+            int pbox3a_h = pictureBox3a.Height;
+            //richTextBox1.Text += "pbox3a_w = " + pbox3a_w.ToString() + ", pbox3a_h = " + pbox3a_h.ToString() + "\n";
+
+            if (w > (pbox3a_w / 4))
+            {
+                pictureBox3a.Image = null;
+                return;
+            }
+
+            if (h > (pbox3a_h / 2))
+            {
+                pictureBox3a.Image = null;
+                return;
+            }
 
             if ((w > 640 / 2) || (h > 480 / 2))
             {
@@ -490,7 +503,28 @@ namespace vcs_PictureEnhance_YUV
                     bitmap3a.SetPixel(i * 2 + 1, j * 2 + 1, pt);
                 }
             }
-            pictureBox3a.Image = bitmap3a;
+
+            Bitmap bitmap33 = new Bitmap(pbox3a_w, pbox3a_h);
+
+            Graphics g = Graphics.FromImage(bitmap33);
+
+            Bitmap bitmap30 = bitmap1.Clone(new Rectangle(x_st, y_st, w, h), PixelFormat.Format32bppArgb);
+
+            int xx0 = 0;
+            int xx1 = pbox3a_w / 4;
+            int xx2 = pbox3a_w / 2;
+
+            int yy0 = (pbox3a_h - bitmap30.Height) / 2;
+            int yy1 = (pbox3a_h - bitmap3b.Height) / 2;
+            int yy2 = (pbox3a_h - bitmap3a.Height) / 2;
+
+            int dx = (pbox3a_w / 2 - bitmap3a.Width) / 2;
+
+            g.DrawImage(bitmap30, xx0+dx, yy0, bitmap30.Width, bitmap30.Height);   //原圖 一倍
+            g.DrawImage(bitmap3b, xx1+dx, yy1, bitmap3b.Width, bitmap3b.Height);   //增強後的圖 一倍
+            g.DrawImage(bitmap3a, xx2+dx, yy2, bitmap3a.Width, bitmap3a.Height);   //增強後的圖 二倍
+
+            pictureBox3a.Image = bitmap33;
         }
 
         void draw_enhanced_image(Bitmap bmp, int x_st, int y_st, int w, int h)
