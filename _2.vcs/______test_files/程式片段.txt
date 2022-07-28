@@ -1,3 +1,4 @@
+
 整理搜尋關鍵字
 DataTable
 
@@ -511,50 +512,6 @@ https://www.cnblogs.com/wpwen/archive/2009/01/01/1366719.html
 
 				
 
-圖片與二進制互轉
-
-       /// <summary>
-        /// Image轉二進制
-        /// </summary>
-        /// <param name="img">圖片</param>
-        /// <returns>轉換得到的二進制</returns>
-        public byte[] GetByteByImage(System.Drawing.Image img)
-        {
-            try
-            {
-                byte[] bt = null;
-                if (!img.Equals(null))
-                {
-                    using (MemoryStream mostream = new MemoryStream())
-                    {
-                        Bitmap bmp = new Bitmap(img);
-                        bmp.Save(mostream, System.Drawing.Imaging.ImageFormat.Bmp);//將圖像以指定的格式存入緩存內存流
-                        bt = new byte[mostream.Length];
-                        mostream.Position = 0;//設置留的初始位置
-                        mostream.Read(bt, 0, Convert.ToInt32(bt.Length));
-                    }
-                }
-                return bt;
-            }
-            catch
-            {
-                return null;
-            }
-        }
-
-        /// <summary>
-        /// 字節流轉換成圖片
-        /// </summary>
-        /// <param name="byt">要轉換的字節流</param>
-        /// <returns>轉換得到的Image對象</returns>
-        public static Image BytToImg(byte[] byt)
-        {
-            MemoryStream ms = new MemoryStream(byt);
-            Image img = Image.FromStream(ms);
-            return img;
-        }
-
-
 C# 以MP3的格式將錄製的音頻數據寫入文件流
 https://www.twblogs.net/a/5f02b56e9644181341a1b6e0
 
@@ -595,79 +552,6 @@ https://www.twblogs.net/a/5f02b56e9644181341a1b6e0
 
 
 
-
-//C# 圖片裁剪代碼，
-
-        /// <summary>
-        /// 縮小裁剪圖片
-        /// </summary>
-        /// <param name="int_Width">要縮小裁剪圖片寬度</param>
-        /// <param name="int_Height">要縮小裁剪圖片長度</param>
-        /// <param name="input_ImgUrl">要處理圖片路徑</param>
-        /// <param name="out_ImgUrl">處理完畢圖片路徑</param>
-        public void ImgReduceCutOut(int int_Width, int int_Height, string input_ImgUrl, string out_ImgUrl)
-        {
-            // ＝＝＝上傳標准圖大小＝＝＝
-            int int_Standard_Width = 160;
-            int int_Standard_Height = 160;
-
-            int Reduce_Width = 0; // 縮小的寬度
-            int Reduce_Height = 0; // 縮小的高度
-            int CutOut_Width = 0; // 裁剪的寬度
-            int CutOut_Height = 0; // 裁剪的高度
-            int level = 100; //縮略圖的質量 1-100的范圍
-
-            // ＝＝＝獲得縮小，裁剪大小＝＝＝
-            if (int_Standard_Height * int_Width / int_Standard_Width > int_Height)
-            {
-                Reduce_Width = int_Width;
-                Reduce_Height = int_Standard_Height * int_Width / int_Standard_Width;
-                CutOut_Width = int_Width;
-                CutOut_Height = int_Height;
-            }
-            else if (int_Standard_Height * int_Width / int_Standard_Width < int_Height)
-            {
-                Reduce_Width = int_Standard_Width * int_Height / int_Standard_Height;
-                Reduce_Height = int_Height;
-                CutOut_Width = int_Width;
-                CutOut_Height = int_Height;
-            }
-            else
-            {
-                Reduce_Width = int_Width;
-                Reduce_Height = int_Height;
-                CutOut_Width = int_Width;
-                CutOut_Height = int_Height;
-            }
-
-            // ＝＝＝通過連接創建Image對象＝＝＝
-            System.Drawing.Image oldimage = System.Drawing.Image.FromFile(Server.MapPath(input_ImgUrl));
-
-            // ＝＝＝縮小圖片＝＝＝
-            System.Drawing.Image thumbnailImage = oldimage.GetThumbnailImage(Reduce_Width, Reduce_Height, new System.Drawing.Image.GetThumbnailImageAbort(ThumbnailCallback), IntPtr.Zero);
-            Bitmap bm = new Bitmap(thumbnailImage);
-
-            // ＝＝＝處理JPG質量的函數＝＝＝
-            ImageCodecInfo[] codecs = ImageCodecInfo.GetImageEncoders();
-            ImageCodecInfo ici = null;
-            foreach (ImageCodecInfo codec in codecs)
-            {
-                if (codec.MimeType == "image/jpeg")
-                    ici = codec;
-            }
-            EncoderParameters ep = new EncoderParameters();
-            ep.Param[0] = new EncoderParameter(Encoder.Quality, (long)level);
-
-            //bm.Save(Server.MapPath("2.jpg"), ici, ep);
-
-            // ＝＝＝裁剪圖片＝＝＝
-            Rectangle cloneRect = new Rectangle(0, 0, CutOut_Width, CutOut_Height);
-            PixelFormat format = bm.PixelFormat;
-            Bitmap cloneBitmap = bm.Clone(cloneRect, format);
-
-            // ＝＝＝保存圖片＝＝＝
-            cloneBitmap.Save(Server.MapPath(out_ImgUrl), ici, ep);
-        }
 
 
         				
@@ -5305,28 +5189,8 @@ http://www.aspphp.online/bianchen/dnet/cxiapu/cxprm/201701/190579.html
 https://blog.csdn.net/happmaoo/article/details/83814604
 
 
-
-
-
-
-
         				
 //--------------------------------------------------------------------------------------------------------------------------
-
-
-
-            //如何取得系統其他進程的啟動參數？
-            //可以使用WMI來查詢得到數據
-
-            foreach (ManagementObject p in new ManagementObjectSearcher(new SelectQuery("SELECT * FROM Win32_Process")).Get())
-            {
-                richTextBox1.Text += p.Properties["commandLine"].Value + "\n";
-            }
-
-
-
-
-
 
 
 ffmpeg的用法

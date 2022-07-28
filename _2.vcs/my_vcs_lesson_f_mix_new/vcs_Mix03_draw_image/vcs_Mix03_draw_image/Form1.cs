@@ -158,7 +158,7 @@ namespace vcs_Mix03_draw_image
         {
             show_button_text(sender);
 
-            //圖片剪下一塊存檔
+            //圖片剪下一塊存檔, 圖片裁剪
             string filename1 = @"C:\______test_files\picture1.jpg";
             string filename2 = @"C:\______test_files\picture1_cut.jpg";
 
@@ -169,7 +169,7 @@ namespace vcs_Mix03_draw_image
             richTextBox1.Text += "圖片剪下一塊存檔 : " + filename2 + "\n";
         }
 
-        //C# 圖片裁剪代碼，
+        // 圖片裁剪
         /// <summary>
         /// 縮小裁剪圖片
         /// </summary>
@@ -848,13 +848,11 @@ namespace vcs_Mix03_draw_image
         {
             show_button_text(sender);
 
-
             //檢視圖片的像素
             string filename = @"C:\______test_files\picture1.jpg";
 
             Image image = Image.FromFile(filename);
             richTextBox1.Text += "檔案 : " + filename + ",\t" + "圖片像素：[" + image.Width + "*" + image.Height + "]" + "\n";
-
         }
 
         private void button22_Click(object sender, EventArgs e)

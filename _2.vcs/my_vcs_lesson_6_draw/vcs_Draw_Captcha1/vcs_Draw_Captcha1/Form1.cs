@@ -33,8 +33,8 @@ namespace vcs_Draw_Captcha1
 
         void show_item_location()
         {
-            int W = 300;
-            int H = 110;
+            int W = 280;
+            int H = 90;
 
             pictureBox00.Size = new Size(W, H);
             pictureBox01.Size = new Size(W, H);
@@ -60,6 +60,12 @@ namespace vcs_Draw_Captcha1
             pictureBox21.Size = new Size(W, H);
             pictureBox22.Size = new Size(W, H);
             pictureBox23.Size = new Size(W, H);
+            pictureBox24.Size = new Size(W, H);
+            pictureBox25.Size = new Size(W, H);
+            pictureBox26.Size = new Size(W, H);
+            pictureBox27.Size = new Size(W, H);
+            pictureBox28.Size = new Size(W, H);
+            pictureBox29.Size = new Size(W, H);
 
             int x_st;
             int y_st;
@@ -99,8 +105,17 @@ namespace vcs_Draw_Captcha1
             pictureBox22.Location = new Point(x_st + dx * 3, y_st + dy * 4);
             pictureBox23.Location = new Point(x_st + dx * 3, y_st + dy * 5);
 
-            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            pictureBox24.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            pictureBox25.Location = new Point(x_st + dx * 4, y_st + dy * 1);
+            pictureBox26.Location = new Point(x_st + dx * 4, y_st + dy * 2);
+            pictureBox27.Location = new Point(x_st + dx * 4, y_st + dy * 3);
+            pictureBox28.Location = new Point(x_st + dx * 4, y_st + dy * 4);
+            pictureBox29.Location = new Point(x_st + dx * 4, y_st + dy * 5);
+
+            richTextBox1.Size = new Size(W, 600);
+            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            this.Size = new Size(1800, 700);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)

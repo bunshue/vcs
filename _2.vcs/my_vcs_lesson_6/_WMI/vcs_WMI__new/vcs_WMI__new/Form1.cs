@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
 using System.Management;    //for WMI
 
 namespace vcs_WMI__new
@@ -369,12 +370,65 @@ namespace vcs_WMI__new
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //判斷驅動器類型
+            richTextBox1.Text += "判斷驅動器類型\n";
 
+            SelectQuery selectQuery = new SelectQuery("select * from win32_logicaldisk");
+            ManagementObjectSearcher searcher = new ManagementObjectSearcher(selectQuery);
+            foreach (ManagementObject disk in searcher.Get())
+            {
+                //comboBox1.Items.Add(disk["Name"].ToString());
+                richTextBox1.Text += "取得驅動器 : " + disk["Name"].ToString() + "\t" + get_drive_type(disk["Name"].ToString()) + "\n";
+            }
         }
+
+        string get_drive_type(string drive)
+        {
+            string DriveType;
+            string type = string.Empty;
+            DriveInfo dinfo = new DriveInfo(drive);
+            try
+            {
+                DriveType = dinfo.DriveType.ToString();
+                switch (DriveType)
+                {
+                    case "Unknown":
+                        type = "這是未知設備";
+                        break;
+                    case "NoRootDirectory":
+                        type = "這是未分區";
+                        break;
+                    case "Removable":
+                        type = "這是可移動磁盤";
+                        break;
+                    case "Fixed":
+                        type = "這是硬盤";
+                        break;
+                    case "Network":
+                        type = "這是網絡驅動器";
+                        break;
+                    case "CDRom":
+                        type = "這是光驅";
+                        break;
+                }
+            }
+            catch
+            {
+                type = "這是未知類型";
+            }
+            return type;
+        }
+
 
         private void button11_Click(object sender, EventArgs e)
         {
+            //取得系統其他進程的啟動參數
+            //使用WMI來查詢得到數據
 
+            foreach (ManagementObject p in new ManagementObjectSearcher(new SelectQuery("SELECT * FROM Win32_Process")).Get())
+            {
+                richTextBox1.Text += p.Properties["commandLine"].Value + "\n";
+            }
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -418,4 +472,3 @@ namespace vcs_WMI__new
         }
     }
 }
-

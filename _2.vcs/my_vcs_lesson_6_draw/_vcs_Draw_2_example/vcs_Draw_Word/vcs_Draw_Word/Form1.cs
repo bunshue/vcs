@@ -14,6 +14,10 @@ namespace vcs_Draw_Word
 {
     public partial class Form1 : Form
     {
+        string draw_text = "群曜醫電";
+
+        Point pt_st;    //文字的起始點(左上方)
+
         public Form1()
         {
             InitializeComponent();
@@ -21,6 +25,7 @@ namespace vcs_Draw_Word
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            pt_st = new Point(100, 100);
 
         }
 

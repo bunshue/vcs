@@ -13,14 +13,24 @@ namespace vcs_Bin2Hex
 {
     public partial class Form1 : Form
     {
+        private const int MODE_0 = 0x00;
+        private const int MODE_1 = 0x01;
+        int new_line = 1;
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        private const int MODE_0 = 0x00;
-        private const int MODE_1 = 0x01;
-        int new_line = 1;
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
 
         void print_data(byte[] data)
         {
@@ -61,7 +71,7 @@ namespace vcs_Bin2Hex
             openFileDialog1.FilterIndex = 4;    //預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();   //從目前目錄開始尋找檔案
-            //openFileDialog1.InitialDirectory = "c:\\______test_files";            //預設開啟的路徑
+            openFileDialog1.InitialDirectory = @"C:\______test_files\"; //預設開啟的路徑
             openFileDialog1.Multiselect = true;    //允許多選檔案
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -185,10 +195,8 @@ namespace vcs_Bin2Hex
             richTextBox1.Text += "\n";
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-        }
+
+
 
     }
 }

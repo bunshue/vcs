@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-// 导入 System.Runtime.InteropServices 名称空间
+// 導入 System.Runtime.InteropServices 名稱空間
 using System.Runtime.InteropServices;   //for DllImport //DllImport 	指定 DLL 的位置
 
 namespace vcs_System3
@@ -15,13 +15,13 @@ namespace vcs_System3
     public partial class Form1 : Form
     {
         /// <summary>
-        ///取得计算机的系统信息
+        ///取得計算機的系統信息
         /// </summary>
         public class ComputerInfo
         {
-            // 声明所要用到的API函数
+            // 聲明所要用到的API函數
             /// <summary>
-            /// 取得Windows的目录
+            /// 取得Windows的目錄
             /// </summary>
             /// <param name="WinDir"></param>
             /// <param name="count"></param>
@@ -29,7 +29,7 @@ namespace vcs_System3
             public static extern void GetWindowsDirectory(StringBuilder WinDir, int count);
 
             /// <summary>
-            /// 获取系统路径
+            /// 獲取系統路徑
             /// </summary>
             /// <param name="SysDir"></param>
             /// <param name="count"></param>
@@ -44,14 +44,14 @@ namespace vcs_System3
             public static extern void GetSystemInfo(ref CPU_INFO cpuinfo);
 
             /// <summary>
-            /// 取得内存状态
+            /// 取得內存狀態
             /// </summary>
             /// <param name="meminfo"></param>
             [DllImport("kernel32")]
             public static extern void GlobalMemoryStatus(ref MEMORY_INFO meminfo);
 
             /// <summary>
-            /// 取得系统时间
+            /// 取得系統時間
             /// </summary>
             /// <param name="stinfo"></param>
             [DllImport("kernel32")]
@@ -60,7 +60,7 @@ namespace vcs_System3
             {
             }
         }
-        //定义CPU的信息结构
+        //定義CPU的信息結構
         [StructLayout(LayoutKind.Sequential)]
         public struct CPU_INFO
         {
@@ -75,7 +75,7 @@ namespace vcs_System3
             public uint dwProcessorLevel;
             public uint dwProcessorRevision;
         }
-        //定义内存的信息结构
+        //定義內存的信息結構
         [StructLayout(LayoutKind.Sequential)]
         public struct MEMORY_INFO
         {
@@ -88,7 +88,7 @@ namespace vcs_System3
             public uint dwTotalVirtual;
             public uint dwAvailVirtual;
         }
-        //定义系统时间的信息结构
+        //定義系統時間的信息結構
         [StructLayout(LayoutKind.Sequential)]
         public struct SYSTEMTIME_INFO
         {
@@ -128,11 +128,11 @@ namespace vcs_System3
             richTextBox1.Text += "dwProcessorLevel = " + CpuInfo.dwProcessorLevel.ToString() + "\n";
             richTextBox1.Text += "dwProcessorRevision = " + CpuInfo.dwProcessorRevision.ToString() + "\n";
 
-            richTextBox1.Text += "本计算机中有" + CpuInfo.dwNumberOfProcessors.ToString() + "个CPU" + "\n";
-            richTextBox1.Text += "CPU的类型为" + CpuInfo.dwProcessorType.ToString() + "\n";
-            richTextBox1.Text += "CPU等级为" + CpuInfo.dwProcessorLevel.ToString() + "\n";
-            richTextBox1.Text += "CPU的OEM ID为" + CpuInfo.dwOemId.ToString() + "\n";
-            richTextBox1.Text += "CPU中的页面大小为" + CpuInfo.dwPageSize.ToString() + "\n";
+            richTextBox1.Text += "本計算機中有" + CpuInfo.dwNumberOfProcessors.ToString() + "個CPU" + "\n";
+            richTextBox1.Text += "CPU的類型為" + CpuInfo.dwProcessorType.ToString() + "\n";
+            richTextBox1.Text += "CPU等級為" + CpuInfo.dwProcessorLevel.ToString() + "\n";
+            richTextBox1.Text += "CPU的OEM ID為" + CpuInfo.dwOemId.ToString() + "\n";
+            richTextBox1.Text += "CPU中的頁面大小為" + CpuInfo.dwPageSize.ToString() + "\n";
 
 
             //調用GlobalMemoryStatus函數獲取記憶體的相關訊息
@@ -147,13 +147,13 @@ namespace vcs_System3
             richTextBox1.Text += "dwTotalVirtual = " + (MemInfo.dwTotalVirtual / 1024 / 1024).ToString().ToString() + "\n";
             richTextBox1.Text += "dwAvailVirtual = " + (MemInfo.dwAvailVirtual / 1024 / 1024).ToString().ToString() + "\n";
 
-            richTextBox1.Text += MemInfo.dwMemoryLoad.ToString() + "%的内存正在使用" + "\n";
-            richTextBox1.Text += "物理内存共有" + MemInfo.dwTotalPhys.ToString() + "字节" + "\n";
-            richTextBox1.Text += "可使用的物理内存有" + MemInfo.dwAvailPhys.ToString() + "字节" + "\n";
-            richTextBox1.Text += "交换文件总大小为" + MemInfo.dwTotalPageFile.ToString() + "字节" + "\n";
-            richTextBox1.Text += "尚可交换文件大小为" + MemInfo.dwAvailPageFile.ToString() + "字节" + "\n";
-            richTextBox1.Text += "总虚拟内存有" + MemInfo.dwTotalVirtual.ToString() + "字节" + "\n";
-            richTextBox1.Text += "未用虚拟内存有" + MemInfo.dwAvailVirtual.ToString() + "字节" + "\n";
+            richTextBox1.Text += MemInfo.dwMemoryLoad.ToString() + "%的內存正在使用" + "\n";
+            richTextBox1.Text += "物理內存共有" + MemInfo.dwTotalPhys.ToString() + "字節" + "\n";
+            richTextBox1.Text += "可使用的物理內存有" + MemInfo.dwAvailPhys.ToString() + "字節" + "\n";
+            richTextBox1.Text += "交換文件總大小為" + MemInfo.dwTotalPageFile.ToString() + "字節" + "\n";
+            richTextBox1.Text += "尚可交換文件大小為" + MemInfo.dwAvailPageFile.ToString() + "字節" + "\n";
+            richTextBox1.Text += "總虛擬內存有" + MemInfo.dwTotalVirtual.ToString() + "字節" + "\n";
+            richTextBox1.Text += "未用虛擬內存有" + MemInfo.dwAvailVirtual.ToString() + "字節" + "\n";
 
             //調用GetSystemTime函數獲取系統時間訊息
             SYSTEMTIME_INFO SysInfo = new SYSTEMTIME_INFO();
@@ -168,21 +168,20 @@ namespace vcs_System3
             richTextBox1.Text += "wMilliseconds = " + SysInfo.wMilliseconds.ToString() + "\n";
 
 
-            //调用GetWindowsDirectory和GetSystemDirectory函数分别取得Windows路径和系统路径
+            //調用GetWindowsDirectory和GetSystemDirectory函數分別取得Windows路徑和系統路徑
             const int nChars = 128;
             StringBuilder Buff = new StringBuilder(nChars);
             ComputerInfo.GetWindowsDirectory(Buff, nChars);
-            richTextBox1.Text += "Windows路径：" + Buff.ToString() + "\n";
+            richTextBox1.Text += "Windows路徑：" + Buff.ToString() + "\n";
             ComputerInfo.GetSystemDirectory(Buff, nChars);
-            richTextBox1.Text += "系统路径：" + Buff.ToString() + "\n";
+            richTextBox1.Text += "系統路徑：" + Buff.ToString() + "\n";
 
-            //调用GetSystemTime函数获取系统时间信息
+            //調用GetSystemTime函數獲取系統時間信息
             SYSTEMTIME_INFO StInfo;
             StInfo = new SYSTEMTIME_INFO();
             ComputerInfo.GetSystemTime(ref StInfo);
             richTextBox1.Text += StInfo.wYear.ToString() + "年" + StInfo.wMonth.ToString() + "月" + StInfo.wDay.ToString() + "日" + "\n";
-            richTextBox1.Text += (StInfo.wHour + 8).ToString() + "点" + StInfo.wMinute.ToString() + "分" + StInfo.wSecond.ToString() + "秒" + "\n";
+            richTextBox1.Text += (StInfo.wHour + 8).ToString() + "點" + StInfo.wMinute.ToString() + "分" + StInfo.wSecond.ToString() + "秒" + "\n";
         }
     }
 }
-

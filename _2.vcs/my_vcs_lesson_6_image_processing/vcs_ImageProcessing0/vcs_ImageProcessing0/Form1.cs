@@ -1845,8 +1845,59 @@ namespace vcs_ImageProcessing0
             pictureBox2.Image = bmp;
         }
 
+        //圖片與二進制互轉
+
+        /// <summary>
+        /// Image轉二進制
+        /// </summary>
+        /// <param name="img">圖片</param>
+        /// <returns>轉換得到的二進制</returns>
+        public byte[] GetByteByImage(System.Drawing.Image img)
+        {
+            try
+            {
+                byte[] bt = null;
+                if (!img.Equals(null))
+                {
+                    using (MemoryStream mostream = new MemoryStream())
+                    {
+                        Bitmap bmp = new Bitmap(img);
+                        bmp.Save(mostream, System.Drawing.Imaging.ImageFormat.Bmp);//將圖像以指定的格式存入緩存內存流
+                        bt = new byte[mostream.Length];
+                        mostream.Position = 0;//設置留的初始位置
+                        mostream.Read(bt, 0, Convert.ToInt32(bt.Length));
+                    }
+                }
+                return bt;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 字節流轉換成圖片
+        /// </summary>
+        /// <param name="byt">要轉換的字節流</param>
+        /// <returns>轉換得到的Image對象</returns>
+        public static Image BytToImg(byte[] byt)
+        {
+            MemoryStream ms = new MemoryStream(byt);
+            Image img = Image.FromStream(ms);
+            return img;
+        }
+
         private void button23_Click(object sender, EventArgs e)
         {
+            //圖片與二進制互轉
+
+            //函數在上
+
+
+
+            //TBD
+
 
         }
 

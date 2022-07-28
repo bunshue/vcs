@@ -27,8 +27,8 @@ namespace vcs_ReadWrite_BIN
         {
             int x_st = 10;
             int y_st = 10;
-            int dx = 170;
-            int dy = 53;
+            int dx = 150 + 10;
+            int dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -40,29 +40,30 @@ namespace vcs_ReadWrite_BIN
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
 
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button17.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button18.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button20.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button21.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            button22.Location = new Point(x_st + dx * 1, y_st + dy * 10);
-            button23.Location = new Point(x_st + dx * 1, y_st + dy * 11);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            richTextBox1.Location = new Point(350, 10);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+
+            richTextBox1.Size = new Size(680, 700);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
             //控件位置
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-
-
+            this.Size = new Size(1200, 760);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -72,7 +73,28 @@ namespace vcs_ReadWrite_BIN
 
         private void button0_Click(object sender, EventArgs e)
         {
+            //讀寫binary的範例
 
+            string filename1 = @"C:\______test_files\bear.bmp";
+            string filename2 = @"C:\______test_files\bear2.bmp";
+
+            using (FileStream fsWriter = new FileStream(filename2, FileMode.Create, FileAccess.Write))
+            {
+
+                using (FileStream fsReader = new FileStream(filename1, FileMode.Open, FileAccess.Read))
+                {
+                    byte[] bytes = new byte[1024 * 4];//4kB是合適的；
+                    int readNum;
+                    while ((readNum = fsReader.Read(bytes, 0, bytes.Length)) != 0)//小於說明讀完了
+                    {
+                        fsWriter.Write(bytes, 0, readNum);
+                    }
+
+
+                }//suing reader
+            }//using writer
+
+            richTextBox1.Text += "完成\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -814,7 +836,7 @@ namespace vcs_ReadWrite_BIN
             //FileStream.Flush 方法:清除該流的所有緩沖區，使得所有緩沖的數據都被寫入到基礎設備。  
             fileStream.Flush();
             //FileStream.Close Method:Closes the file and releases any resources associated with the current file stream.  
-            fileStream.Close();  
+            fileStream.Close();
 
 
         }
@@ -851,7 +873,7 @@ namespace vcs_ReadWrite_BIN
             {
                 File.Delete(filename2);
             }
-            
+
             //string pic = "lion-mouse";
             //byte[] bytes = Convert.FromBase64String(pic);//聲明一個byte[]用來存放Base64解碼轉換過來的數據流
 

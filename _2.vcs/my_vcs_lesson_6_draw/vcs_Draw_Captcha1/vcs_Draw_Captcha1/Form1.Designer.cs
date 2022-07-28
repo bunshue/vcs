@@ -56,6 +56,12 @@
             this.pictureBox09 = new System.Windows.Forms.PictureBox();
             this.pictureBox10 = new System.Windows.Forms.PictureBox();
             this.pictureBox11 = new System.Windows.Forms.PictureBox();
+            this.pictureBox24 = new System.Windows.Forms.PictureBox();
+            this.pictureBox25 = new System.Windows.Forms.PictureBox();
+            this.pictureBox26 = new System.Windows.Forms.PictureBox();
+            this.pictureBox27 = new System.Windows.Forms.PictureBox();
+            this.pictureBox28 = new System.Windows.Forms.PictureBox();
+            this.pictureBox29 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox01)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox02)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox03)).BeginInit();
@@ -80,6 +86,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox09)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox24)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox25)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox26)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox27)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox28)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox29)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox01
@@ -93,9 +105,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(1144, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(323, 6);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(197, 682);
+            this.richTextBox1.Size = new System.Drawing.Size(197, 213);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -108,7 +120,7 @@
             // pictureBox02
             // 
             this.pictureBox02.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox02.Location = new System.Drawing.Point(12, 125);
+            this.pictureBox02.Location = new System.Drawing.Point(12, 118);
             this.pictureBox02.Name = "pictureBox02";
             this.pictureBox02.Size = new System.Drawing.Size(50, 50);
             this.pictureBox02.TabIndex = 2;
@@ -117,7 +129,7 @@
             // pictureBox03
             // 
             this.pictureBox03.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox03.Location = new System.Drawing.Point(12, 181);
+            this.pictureBox03.Location = new System.Drawing.Point(12, 174);
             this.pictureBox03.Name = "pictureBox03";
             this.pictureBox03.Size = new System.Drawing.Size(50, 50);
             this.pictureBox03.TabIndex = 3;
@@ -155,7 +167,7 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(1266, 517);
+            this.bt_clear.Location = new System.Drawing.Point(412, 154);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(75, 30);
             this.bt_clear.TabIndex = 65;
@@ -166,7 +178,7 @@
             // pictureBox04
             // 
             this.pictureBox04.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox04.Location = new System.Drawing.Point(12, 241);
+            this.pictureBox04.Location = new System.Drawing.Point(12, 234);
             this.pictureBox04.Name = "pictureBox04";
             this.pictureBox04.Size = new System.Drawing.Size(50, 50);
             this.pictureBox04.TabIndex = 66;
@@ -175,7 +187,7 @@
             // pictureBox05
             // 
             this.pictureBox05.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox05.Location = new System.Drawing.Point(12, 297);
+            this.pictureBox05.Location = new System.Drawing.Point(12, 290);
             this.pictureBox05.Name = "pictureBox05";
             this.pictureBox05.Size = new System.Drawing.Size(50, 50);
             this.pictureBox05.TabIndex = 67;
@@ -301,7 +313,7 @@
             // pictureBox08
             // 
             this.pictureBox08.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox08.Location = new System.Drawing.Point(68, 125);
+            this.pictureBox08.Location = new System.Drawing.Point(68, 118);
             this.pictureBox08.Name = "pictureBox08";
             this.pictureBox08.Size = new System.Drawing.Size(50, 50);
             this.pictureBox08.TabIndex = 87;
@@ -310,7 +322,7 @@
             // pictureBox09
             // 
             this.pictureBox09.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox09.Location = new System.Drawing.Point(68, 181);
+            this.pictureBox09.Location = new System.Drawing.Point(68, 174);
             this.pictureBox09.Name = "pictureBox09";
             this.pictureBox09.Size = new System.Drawing.Size(50, 50);
             this.pictureBox09.TabIndex = 88;
@@ -319,7 +331,7 @@
             // pictureBox10
             // 
             this.pictureBox10.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox10.Location = new System.Drawing.Point(68, 241);
+            this.pictureBox10.Location = new System.Drawing.Point(68, 234);
             this.pictureBox10.Name = "pictureBox10";
             this.pictureBox10.Size = new System.Drawing.Size(50, 50);
             this.pictureBox10.TabIndex = 89;
@@ -328,17 +340,83 @@
             // pictureBox11
             // 
             this.pictureBox11.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox11.Location = new System.Drawing.Point(68, 297);
+            this.pictureBox11.Location = new System.Drawing.Point(68, 290);
             this.pictureBox11.Name = "pictureBox11";
             this.pictureBox11.Size = new System.Drawing.Size(50, 50);
             this.pictureBox11.TabIndex = 90;
             this.pictureBox11.TabStop = false;
+            // 
+            // pictureBox24
+            // 
+            this.pictureBox24.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBox24.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox24.Location = new System.Drawing.Point(245, 6);
+            this.pictureBox24.Name = "pictureBox24";
+            this.pictureBox24.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox24.TabIndex = 91;
+            this.pictureBox24.TabStop = false;
+            // 
+            // pictureBox25
+            // 
+            this.pictureBox25.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBox25.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox25.Location = new System.Drawing.Point(245, 62);
+            this.pictureBox25.Name = "pictureBox25";
+            this.pictureBox25.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox25.TabIndex = 92;
+            this.pictureBox25.TabStop = false;
+            // 
+            // pictureBox26
+            // 
+            this.pictureBox26.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBox26.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox26.Location = new System.Drawing.Point(245, 118);
+            this.pictureBox26.Name = "pictureBox26";
+            this.pictureBox26.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox26.TabIndex = 93;
+            this.pictureBox26.TabStop = false;
+            // 
+            // pictureBox27
+            // 
+            this.pictureBox27.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBox27.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox27.Location = new System.Drawing.Point(245, 175);
+            this.pictureBox27.Name = "pictureBox27";
+            this.pictureBox27.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox27.TabIndex = 94;
+            this.pictureBox27.TabStop = false;
+            // 
+            // pictureBox28
+            // 
+            this.pictureBox28.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBox28.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox28.Location = new System.Drawing.Point(245, 231);
+            this.pictureBox28.Name = "pictureBox28";
+            this.pictureBox28.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox28.TabIndex = 95;
+            this.pictureBox28.TabStop = false;
+            // 
+            // pictureBox29
+            // 
+            this.pictureBox29.BackColor = System.Drawing.SystemColors.Control;
+            this.pictureBox29.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox29.Location = new System.Drawing.Point(245, 287);
+            this.pictureBox29.Name = "pictureBox29";
+            this.pictureBox29.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox29.TabIndex = 96;
+            this.pictureBox29.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1467, 760);
+            this.Controls.Add(this.pictureBox29);
+            this.Controls.Add(this.pictureBox28);
+            this.Controls.Add(this.pictureBox27);
+            this.Controls.Add(this.pictureBox26);
+            this.Controls.Add(this.pictureBox25);
+            this.Controls.Add(this.pictureBox24);
             this.Controls.Add(this.pictureBox11);
             this.Controls.Add(this.pictureBox10);
             this.Controls.Add(this.pictureBox09);
@@ -392,6 +470,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox09)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox11)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox24)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox25)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox26)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox27)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox28)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox29)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -425,6 +509,12 @@
         private System.Windows.Forms.PictureBox pictureBox09;
         private System.Windows.Forms.PictureBox pictureBox10;
         private System.Windows.Forms.PictureBox pictureBox11;
+        private System.Windows.Forms.PictureBox pictureBox24;
+        private System.Windows.Forms.PictureBox pictureBox25;
+        private System.Windows.Forms.PictureBox pictureBox26;
+        private System.Windows.Forms.PictureBox pictureBox27;
+        private System.Windows.Forms.PictureBox pictureBox28;
+        private System.Windows.Forms.PictureBox pictureBox29;
     }
 }
 

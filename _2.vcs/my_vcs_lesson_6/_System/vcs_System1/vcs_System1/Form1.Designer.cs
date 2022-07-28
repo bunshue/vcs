@@ -216,7 +216,6 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(240, 50);
             this.button9.TabIndex = 9;
-            this.button9.Text = "程式開啟時間";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -304,7 +303,6 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(240, 50);
             this.button18.TabIndex = 19;
-            this.button18.Text = "螢幕資訊";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -392,7 +390,6 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(240, 50);
             this.button29.TabIndex = 28;
-            this.button29.Text = "找出所有的COM port";
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
@@ -414,7 +411,6 @@
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(240, 50);
             this.button33.TabIndex = 32;
-            this.button33.Text = "取得螢幕解析度資料";
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
@@ -637,7 +633,6 @@
             this.button45.Name = "button45";
             this.button45.Size = new System.Drawing.Size(240, 50);
             this.button45.TabIndex = 63;
-            this.button45.Text = "螢幕解析度 與 可工作區域";
             this.button45.UseVisualStyleBackColor = true;
             this.button45.Click += new System.EventHandler(this.button45_Click);
             // 
@@ -845,7 +840,6 @@
             this.button59.Name = "button59";
             this.button59.Size = new System.Drawing.Size(240, 50);
             this.button59.TabIndex = 90;
-            this.button59.Text = "判斷驅動器類型";
             this.button59.UseVisualStyleBackColor = true;
             this.button59.Click += new System.EventHandler(this.button59_Click);
             // 

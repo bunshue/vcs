@@ -190,6 +190,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(180, 60);
             this.button10.TabIndex = 11;
+            this.button10.Text = "判斷驅動器類型";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -200,6 +201,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(180, 60);
             this.button11.TabIndex = 12;
+            this.button11.Text = "取得系統其他進程的啟動參數";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 

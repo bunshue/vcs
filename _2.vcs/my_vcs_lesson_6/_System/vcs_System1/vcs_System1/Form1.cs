@@ -31,8 +31,6 @@ namespace vcs_System1
 {
     public partial class Form1 : Form
     {
-        DateTime start_time = DateTime.Now;
-
         public Form1()
         {
             InitializeComponent();
@@ -384,7 +382,6 @@ namespace vcs_System1
 
         private void button9_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "程式開啟時間: " + (DateTime.Now - start_time).ToString() + "\n";
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -440,14 +437,6 @@ namespace vcs_System1
             richTextBox1.Text += "Is OS 64-bit? " + Environment.Is64BitOperatingSystem + "\n";
             richTextBox1.Text += "Is process 64-bit? " + Environment.Is64BitProcess + "\n";
             richTextBox1.Text += "Little-endian: " + BitConverter.IsLittleEndian + "\n";
-            foreach (Screen screen in System.Windows.Forms.Screen.AllScreens)
-            {
-                richTextBox1.Text += "Screen " + screen.DeviceName + "\n";
-                richTextBox1.Text += "\tPrimary " + screen.Primary + "\n";
-                richTextBox1.Text += "\tBounds: " + screen.Bounds + "\n";
-                richTextBox1.Text += "\tWorking Area: " + screen.WorkingArea + "\n";
-                richTextBox1.Text += "\tBitsPerPixel: " + screen.BitsPerPixel + "\n";
-            }
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -493,18 +482,6 @@ namespace vcs_System1
 
         private void button18_Click(object sender, EventArgs e)
         {
-            //螢幕資訊
-            richTextBox1.Text += "AllScreens.Length = " + Screen.AllScreens.Length.ToString() + "\n";
-
-            richTextBox1.Text += "W = " + Screen.AllScreens[0].Bounds.Width.ToString() + ", H = " + Screen.AllScreens[0].Bounds.Height.ToString() + "\n";
-            richTextBox1.Text += "Bounds = " + Screen.AllScreens[0].Bounds.Size.ToString() + "\n";
-            richTextBox1.Text += "Rank = " + Screen.AllScreens.Rank.ToString() + "\n";
-
-            richTextBox1.Text += "DeviceName = " + Screen.PrimaryScreen.DeviceName + "\n";
-            richTextBox1.Text += "BitsPerPixel = " + Screen.PrimaryScreen.BitsPerPixel.ToString() + "\n";
-            richTextBox1.Text += "Bounds = " + Screen.PrimaryScreen.Bounds.ToString() + "\n";
-            richTextBox1.Text += "WorkingArea = " + Screen.PrimaryScreen.WorkingArea.ToString() + "\n";
-
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -663,18 +640,6 @@ namespace vcs_System1
 
         private void button29_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "找出所有的COM port, ";
-
-            // Get a list of serial port names.
-            string[] ports = SerialPort.GetPortNames();
-
-            richTextBox1.Text += " 共有 " + ports.Length + " 個COM port\n";
-            // Display each port name to the console.
-            foreach (string port in ports)
-            {
-                richTextBox1.Text += "\t" + port + "\n";
-            }
-            richTextBox1.Text += "\n";
         }
 
         private void button30_Click(object sender, EventArgs e)
@@ -773,13 +738,6 @@ namespace vcs_System1
 
         private void button33_Click(object sender, EventArgs e)
         {
-            //取得螢幕解析度資料
-            System.Windows.Forms.Screen scr = System.Windows.Forms.Screen.PrimaryScreen;//PrimaryScreen 属性：获取主显示设备
-            richTextBox1.Text += "Bounds:\t\t" + scr.Bounds.ToString() + "\n"; //获取屏幕的边界。属性值是一个Rectangle结构的值
-            richTextBox1.Text += "DeviceName:\t" + scr.DeviceName.ToString() + "\n"; //获取与显示关联的设备名称
-            richTextBox1.Text += "Primary:\t\t" + scr.Primary.ToString() + "\n";   //该值指示某个显示是否为主设备
-            richTextBox1.Text += "WorkingArea:\t" + scr.WorkingArea.ToString() + "\n";   //获取显示器的工作区, 属性值是一个Rectangle结构的值
-            richTextBox1.Text += "BitsPerPixel:\t" + scr.BitsPerPixel.ToString() + "\n"; //获取与数据的一个像素相关联的内存位数
         }
 
         private void button34_Click(object sender, EventArgs e)
@@ -948,17 +906,6 @@ namespace vcs_System1
 
         private void button45_Click(object sender, EventArgs e)
         {
-            //取得螢幕解析度
-            int ScreenWidth = Screen.PrimaryScreen.Bounds.Width;
-            int ScreenHeight = Screen.PrimaryScreen.Bounds.Height;
-
-            richTextBox1.Text += "螢幕解析度 : " + ScreenWidth.ToString() + " X " + ScreenHeight.ToString() + "\n";
-
-            //取得可工作區域大小
-            int WorkingAreaWidth = Screen.PrimaryScreen.WorkingArea.Width;
-            int WorkingAreaHeight = Screen.PrimaryScreen.WorkingArea.Height;
-
-            richTextBox1.Text += "可工作區域大小 : " + WorkingAreaWidth.ToString() + " X " + WorkingAreaHeight.ToString() + "\n";
         }
 
         private void button46_Click(object sender, EventArgs e)
@@ -1298,55 +1245,7 @@ namespace vcs_System1
 
         private void button59_Click(object sender, EventArgs e)
         {
-            //判斷驅動器類型
-            richTextBox1.Text += "判斷驅動器類型\n";
-
-            SelectQuery selectQuery = new SelectQuery("select * from win32_logicaldisk");
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher(selectQuery);
-            foreach (ManagementObject disk in searcher.Get())
-            {
-                //comboBox1.Items.Add(disk["Name"].ToString());
-                richTextBox1.Text += "取得驅動器 : " + disk["Name"].ToString() + "\t" + get_drive_type(disk["Name"].ToString()) + "\n";
-            }
         }
-
-        string get_drive_type(string drive)
-        {
-            string DriveType;
-            string type = string.Empty;
-            DriveInfo dinfo = new DriveInfo(drive);
-            try
-            {
-                DriveType = dinfo.DriveType.ToString();
-                switch (DriveType)
-                {
-                    case "Unknown":
-                        type = "這是未知設備";
-                        break;
-                    case "NoRootDirectory":
-                        type = "這是未分區";
-                        break;
-                    case "Removable":
-                        type = "這是可移動磁盤";
-                        break;
-                    case "Fixed":
-                        type = "這是硬盤";
-                        break;
-                    case "Network":
-                        type = "這是網絡驅動器";
-                        break;
-                    case "CDRom":
-                        type = "這是光驅";
-                        break;
-                }
-            }
-            catch
-            {
-                type = "這是未知類型";
-            }
-            return type;
-        }
-
 
         [DllImport("User32")]
         internal extern static bool GetCursorPos(out MousePoint point);

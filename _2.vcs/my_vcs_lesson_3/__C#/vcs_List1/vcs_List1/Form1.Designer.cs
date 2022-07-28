@@ -439,6 +439,7 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(170, 40);
             this.button27.TabIndex = 29;
+            this.button27.Text = "讀取一個檔案到List";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 

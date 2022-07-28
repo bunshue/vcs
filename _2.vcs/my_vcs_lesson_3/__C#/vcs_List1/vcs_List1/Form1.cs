@@ -675,6 +675,8 @@ namespace vcs_List1
 
         private void button27_Click(object sender, EventArgs e)
         {
+            //讀取一個檔案到List
+
 
         }
     }
