@@ -813,6 +813,8 @@ namespace vcs_test_all_01_DateTime
             richTextBox1.Text += "相距時間: " + str + "\n";
             str = str.Substring(0, str.IndexOf("."));
             richTextBox1.Text += "相距時間(去掉尾數): " + str + "\n";
+
+            richTextBox1.Text += "程式開啟時間: " + (DateTime.Now - start_time).ToString() + "\n";
         }
 
         //C#實現小小的日歷 ST
@@ -2082,6 +2084,20 @@ DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元999
         private void button61_Click(object sender, EventArgs e)
         {
 
+            richTextBox1.Text += "星期幾 : " + DateTime.Now.DayOfWeek.ToString() + "\n";
+
+            richTextBox1.Text += "當前時間 : " + DateTime.Now.ToLongTimeString() + "\n";
+
+            //DateTime轉字串需顯示毫秒
+            //DateTime.ToString("yyyyMMddhhmmssfff")，fff 格式包含毫秒值中任何結尾的零。
+            richTextBox1.Text += "顯示毫秒 : " + DateTime.Now.ToString("yyyy_MMdd_hhmmss.fff") + "\n";
+
+            richTextBox1.Text += "日期 : " + DateTime.Now.ToString("yyyy-MM-dd") + "\n";
+
+
+
+
+        
         }
 
         private void button62_Click(object sender, EventArgs e)

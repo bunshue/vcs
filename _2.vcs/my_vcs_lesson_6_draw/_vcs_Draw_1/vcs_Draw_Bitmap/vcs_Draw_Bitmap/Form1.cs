@@ -109,6 +109,17 @@ namespace vcs_Draw_Bitmap
 
         private void button0_Click(object sender, EventArgs e)
         {
+
+            //Bitmap 經過 Rotate後, 會改變其寬高
+            string filename = @"C:\______test_files\picture1.jpg";
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);
+            richTextBox1.Text += "W = " + bitmap1.Width.ToString() + ", H = " + bitmap1.Height.ToString() + "\n";
+
+            bitmap1.RotateFlip(RotateFlipType.Rotate90FlipNone);
+            richTextBox1.Text += "W = " + bitmap1.Width.ToString() + ", H = " + bitmap1.Height.ToString() + "\n";
+
+            pictureBox1.Image = bitmap1;
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -249,6 +260,17 @@ namespace vcs_Draw_Bitmap
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //創建32位元深度之Bitmap
+            Bitmap bitmap1 = new Bitmap(100, 100, System.Drawing.Imaging.PixelFormat.Format32bppArgb);
+            bitmap1.Save("aaaa.bmp", ImageFormat.Bmp);
+
+            //創建24位元深度之Bitmap
+            Bitmap bitmap2 = new Bitmap(100, 100, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+            bitmap2.Save("bbbb.bmp", ImageFormat.Bmp);
+
+            //沒寫, 預設為32位元深度之Bitmap
+            Bitmap bitmap3 = new Bitmap(100, 100);
+            bitmap3.Save("cccc.bmp", ImageFormat.Bmp);
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -667,7 +689,32 @@ namespace vcs_Draw_Bitmap
 
         private void button29_Click(object sender, EventArgs e)
         {
+            //MakeTransparent 使用 去背效果6
 
+            open_new_file();
+            g.Clear(Color.Pink);
+
+            string filename = @"C:\______test_files\__pic\_logo\cloud.png";
+            Bitmap bmp0 = (Bitmap)Image.FromFile(filename);
+            Bitmap bmp1 = (Bitmap)bmp0.Clone();
+
+            //bmp1.MakeTransparent(Color.Pink);     //使用默認的透明顏色進行透明設置
+            //bmp1.MakeTransparent(Color.Blue);    //使用默認的透明顏色進行透明設置
+
+            g.DrawImage(bmp0, 0, 0, bmp0.Width, bmp0.Height);
+            g.DrawImage(bmp1, 0, 210, bmp1.Width, bmp1.Height);
+
+
+            filename = @"C:\______test_files\__pic\_logo\cloud.bmp";
+            bmp0 = (Bitmap)Image.FromFile(filename);
+            bmp1 = (Bitmap)bmp0.Clone();
+
+            bmp1.MakeTransparent(Color.Black);     //使用默認的透明顏色進行透明設置
+
+            g.DrawImage(bmp0, 300, 0, bmp0.Width, bmp0.Height);
+            g.DrawImage(bmp1, 300, 210, bmp1.Width, bmp1.Height);
+
+            g.DrawString("左: PNG已將外部設為透明  右: BMP的外部是黑色的", new Font("標楷體", 18), new SolidBrush(Color.Navy), 10, pictureBox1.Height - 60);
         }
 
         int cnt = 0;

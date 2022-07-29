@@ -224,6 +224,14 @@ namespace vcs_Draw1
             p.Dispose();
         }
 
+        // Draw a point.
+        private void DrawPoint2(Graphics g, PointF pt, Brush brush, Pen pen)
+        {
+            const int RADIUS = 3;
+            g.FillEllipse(brush, pt.X - RADIUS, pt.Y - RADIUS, 2 * RADIUS, 2 * RADIUS);
+            g.DrawEllipse(pen, pt.X - RADIUS, pt.Y - RADIUS, 2 * RADIUS, 2 * RADIUS);
+        }
+
         private void DrawCircle(Graphics g, PointF center, int radius, int linewidth, Color c)
         {
             // Create a new pen.
@@ -1761,6 +1769,22 @@ namespace vcs_Draw1
 
         private void button30_Click(object sender, EventArgs e)
         {
+            //虛線樣式
+
+            if (bitmap1 == null)
+            {
+                open_new_file();
+            }
+
+
+            using (Pen dash_pen = new Pen(Color.Red))
+            {
+                dash_pen.DashStyle = DashStyle.Custom;
+                dash_pen.DashPattern = new float[] { 4, 4 };
+                g.DrawLine(dash_pen, 100, 100, 300, 300);
+            }
+
+
         }
 
         private void button31_Click(object sender, EventArgs e)
@@ -2026,6 +2050,25 @@ namespace vcs_Draw1
                 pt = new Point(200, 42 * size);
                 DrawPoint(g, pt, Color.Red, Color.Pink, 10);
             }
+
+
+
+            //private void DrawPoint2(Graphics g, PointF pt, Brush brush, Pen pen)
+
+
+            for (int size = 1; size <= 10; size++)
+            {
+                pt = new Point(300, 42 * size);
+                g.DrawString(size.ToString(), f, sb, pt);
+
+                pt = new Point(400, 42 * size);
+                DrawPoint2(g, pt, Brushes.LightBlue, Pens.Blue);
+
+                pt = new Point(500, 42 * size);
+                DrawPoint2(g, pt, Brushes.HotPink, Pens.Red);
+            }
+
+
             pictureBox1.Image = bitmap1;
         }
 

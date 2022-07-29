@@ -1664,6 +1664,7 @@
             this.button61.Name = "button61";
             this.button61.Size = new System.Drawing.Size(170, 50);
             this.button61.TabIndex = 91;
+            this.button61.Text = "日期時間顯示格式";
             this.button61.UseVisualStyleBackColor = true;
             this.button61.Click += new System.EventHandler(this.button61_Click);
             // 

@@ -47,31 +47,30 @@ namespace vcs_test_all_02_String
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            button10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
-            button11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
 
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button17.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button18.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button20.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button21.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-            button22.Location = new Point(x_st + dx * 1, y_st + dy * 10);
-            button23.Location = new Point(x_st + dx * 1, y_st + dy * 11);
+            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            button24.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button25.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button26.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button27.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button28.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button29.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button30.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button20.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            button21.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            button22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            button23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            button24.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            button25.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            button26.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            button27.Location = new Point(x_st + dx * 2, y_st + dy * 7);
+            button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
+            button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            textBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            button30.Location = new Point(x_st + dx * 3, y_st + dy * 0);
             button31.Location = new Point(x_st + dx * 3, y_st + dy * 1);
             button32.Location = new Point(x_st + dx * 3, y_st + dy * 2);
             button33.Location = new Point(x_st + dx * 3, y_st + dy * 3);
@@ -79,11 +78,29 @@ namespace vcs_test_all_02_String
             button35.Location = new Point(x_st + dx * 3, y_st + dy * 5);
             button36.Location = new Point(x_st + dx * 3, y_st + dy * 6);
             button37.Location = new Point(x_st + dx * 3, y_st + dy * 7);
+            button38.Location = new Point(x_st + dx * 3, y_st + dy * 8);
+            button39.Location = new Point(x_st + dx * 3, y_st + dy * 9);
 
-            richTextBox1.Location = new Point(x_st + dx * 4+150, y_st + dy * 0);
+            groupBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+
+            richTextBox1.Location = new Point(x_st + dx * 6 - 80, y_st + dy * 0);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            x_st = 10;
+            y_st = 20;
+
+            dy = 50;
+
+            textBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_show_number1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_show_number2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_show_number3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            bt_show_number4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            bt_show_number5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            bt_show_number6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            bt_show_number7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
 
             richTextBox1.Text += "\n\n";
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -773,9 +790,6 @@ namespace vcs_test_all_02_String
             */
 
 
-
-
-
             double dis1 = 150000000000.0 / 340.0 / 60.0 / 60.0 / 24.0;
             //label4.Text = dis.ToString("#,###,###,###.##") + " 天";
 
@@ -907,56 +921,141 @@ namespace vcs_test_all_02_String
             for (; a > 0; a = a / n)
             {
                 r = a % n;  //取得餘數
-
                 s = m[r] + s; // 查表，串列左邊
             }
 
             richTextBox1.Text += "16進位\t" + s + "\n";
+        }
+
+
+
+        private void button31_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button32_Click(object sender, EventArgs e)
+        {
 
         }
 
+        private void button33_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button34_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button35_Click(object sender, EventArgs e)
+        {
+            //數字前面補0或是其他符號
+
+            string s1 = "";
+            string s2 = "";
+            int a = 123;
+            s1 = a.ToString().PadLeft(32, '0');
+
+            richTextBox1.Text += "s1 " + s1 + "\n";
+
+
+            s2 = a.ToString().PadLeft(32, '#');
+
+            richTextBox1.Text += "s2 " + s2 + "\n";
+
+
+            int nudPoint = 3;
+
+            double num = 123.123456789;
+            //根據nudPoint.Value來格式化顯示的數值
+            richTextBox1.Text += num.ToString("F" + nudPoint.ToString()) + "\n";
+
+
+            //在 C# 中使用 String.Format() 方法將字串轉換為十六進位制
+            string decString = "0123456789";
+            var hexString = string.Join("", decString.Select(c => String.Format("{0:X2}", Convert.ToInt32(c))));
+
+            richTextBox1.Text += "hexString :" + hexString + "\n";
+
+
+
+
+
+            //String.Format是將指定的 String類型的數據中的每個格式項替換為相應對象的值的文本等效項。 
+
+            string p1 = "Jackie";
+            string p2 = "Aillo";
+
+            string string1 = String.Format("Hello {0}, I'm {1}", p1, p2);
+
+            string string2 = String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo");
+
+            richTextBox1.Text += "string1 = " + string1 + "\n";
+            richTextBox1.Text += "string2 = " + string2 + "\n";
+        }
+
+        private void button36_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button37_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button38_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button39_Click(object sender, EventArgs e)
+        {
+
+        }
 
         int value1 = 12345;
         double value2 = 123.456;
         double value3 = 1234.5678;
 
-        private void button31_Click(object sender, EventArgs e)
+        private void bt_show_number1_Click(object sender, EventArgs e)
         {
             textBox1.Text = value1.ToString("D");
         }
 
-        private void button32_Click(object sender, EventArgs e)
+        private void bt_show_number2_Click(object sender, EventArgs e)
         {
             textBox1.Text = value1.ToString("D8");
         }
 
-        private void button33_Click(object sender, EventArgs e)
+        private void bt_show_number3_Click(object sender, EventArgs e)
         {
             textBox1.Text = value1.ToString("X");
         }
 
-        private void button34_Click(object sender, EventArgs e)
+        private void bt_show_number4_Click(object sender, EventArgs e)
         {
             textBox1.Text = value1.ToString("X8");
         }
 
-        private void button35_Click(object sender, EventArgs e)
+        private void bt_show_number5_Click(object sender, EventArgs e)
         {
             textBox1.Text = value2.ToString("F4");
             //textBox1.Text = value2.ToString("F0");  //四捨五入到整數
             //textBox1.Text = value2.ToString("F1");  //四捨五入到小數點下一位
         }
 
-        private void button36_Click(object sender, EventArgs e)
+        private void bt_show_number6_Click(object sender, EventArgs e)
         {
             textBox1.Text = value3.ToString("#0.00");         //格式化，小數點後留2位，四捨五入
         }
 
-        private void button37_Click(object sender, EventArgs e)
+        private void bt_show_number7_Click(object sender, EventArgs e)
         {
             textBox1.Text = value3.ToString("#00000.000");   //格式化，小數點前5位，小數點後留3位四捨五入
         }
-
     }
 }
+
 

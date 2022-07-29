@@ -42,8 +42,8 @@ namespace vcs_AudioVideoTest1
             //button
             x_st = 12;
             y_st = 12;
-            dx = 190 + 10;
-            dy = 40 + 10;
+            dx = 220 + 10;
+            dy = 50 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -69,7 +69,7 @@ namespace vcs_AudioVideoTest1
             button19.Location = new Point(x_st + dx * 2, y_st + dy * 5);
             button20.Location = new Point(x_st + dx * 2, y_st + dy * 6);
 
-            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 8 + 20);
+            groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 7 + 20);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
@@ -780,7 +780,21 @@ namespace vcs_AudioVideoTest1
 
         private void button16_Click(object sender, EventArgs e)
         {
+            string filename = @"C:\______test_files\_wav\chimes.wav";
 
+            SoundPlayer sp = new SoundPlayer();
+            sp.SoundLocation = filename;
+            //sp.PlayLooping();   //沒效~~~
+            sp.Play(); // 撥放
+
+            //sp.Stop(); // 停止
+
+            /*  ok
+            //簡易播放wav的方法，僅可播放wav，不可播放mp3
+            filename = @"C:\______test_files\_wav\WindowsShutdown.wav";
+            SoundPlayer sp = new SoundPlayer(filename);
+            sp.Play();
+            */
         }
 
         private void button17_Click(object sender, EventArgs e)

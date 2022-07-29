@@ -126,6 +126,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(170, 70);
             this.button0.TabIndex = 129;
+            this.button0.Text = "Bitmap 經過 Rotate後, 會改變其寬高";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -211,6 +212,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(170, 70);
             this.button10.TabIndex = 135;
+            this.button10.Text = "創建32/24位元深度之Bitmap";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -421,6 +423,7 @@
             this.button29.Name = "button29";
             this.button29.Size = new System.Drawing.Size(170, 70);
             this.button29.TabIndex = 154;
+            this.button29.Text = "MakeTransparent 使用 去背效果6";
             this.button29.UseVisualStyleBackColor = true;
             this.button29.Click += new System.EventHandler(this.button29_Click);
             // 

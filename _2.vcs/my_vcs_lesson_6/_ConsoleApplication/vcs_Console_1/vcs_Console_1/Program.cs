@@ -53,6 +53,18 @@ namespace vcs_Console_1
             Console.WriteLine("顯示Console支援的字體效果");
             ShowColor();
 
+            Console.WriteLine("控制台程序設置字體顏色");
+
+            Console.BackgroundColor = ConsoleColor.Blue; //設置背景色
+            Console.ForegroundColor = ConsoleColor.White; //設置前景色，即字體顏色
+            Console.WriteLine("第一行白藍.");
+
+            Console.ResetColor(); //將控制台的前景色和背景色設為默認值
+            Console.BackgroundColor = ConsoleColor.Green;
+            Console.ForegroundColor = ConsoleColor.DarkGreen;
+            string value = "第三行 綠暗綠";
+            Console.WriteLine(value.PadRight(Console.WindowWidth - value.Length)); //設置一整行的背景色
+
             Console.Write("Press any key to continue"); //無換行
             Console.Write("Press any key to continue");//無換行
             Console.WriteLine("Press any key");//有換行

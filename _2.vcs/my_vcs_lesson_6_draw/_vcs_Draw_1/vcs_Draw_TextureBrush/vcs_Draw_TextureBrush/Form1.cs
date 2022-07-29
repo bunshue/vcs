@@ -229,7 +229,22 @@ namespace vcs_Draw_TextureBrush
 
         private void button5_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "aaaaa\n";
 
+            Graphics g = this.pictureBox1.CreateGraphics();
+            Rectangle rect = new Rectangle(10, 10, 50, 50);//定義矩形,參數為起點橫縱坐標以及其長和寬
+
+            //用圖片填充
+            TextureBrush b2 = new TextureBrush(Image.FromFile(@"C:\______test_files\picture1.jpg"));
+            rect.Location = new Point(10, 70);//更改這個矩形的起點坐標
+            rect.Width = 200;//更改這個矩形的寬來
+            rect.Height = 200;//更改這個矩形的高
+            g.FillRectangle(b2, rect);
+
+            //用漸變色填充
+            rect.Location = new Point(10, 290);
+            LinearGradientBrush b3 = new LinearGradientBrush(rect, Color.Yellow, Color.Black, LinearGradientMode.Horizontal);
+            g.FillRectangle(b3, rect);
         }
 
         private void button6_Click(object sender, EventArgs e)

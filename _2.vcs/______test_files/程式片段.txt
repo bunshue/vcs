@@ -1,19 +1,19 @@
 
+
+
+
+/// <summary>
+/// DataTable中使用Order By排序與Where過濾
+/// </summary>
+private void Bind()
+{
+}
+    
+
+
+
 整理搜尋關鍵字
 DataTable
-
-
-
-this.toolStripStatusLabel3.Text = DateTime.Now.DayOfWeek.ToString();
-this.textBox1.SelectedText = DateTime.Now.ToString();
-this.textBox1.Text += DateTime.Now;
-
-ToolStripStatusLabel1.Text = "當前時間:" + DateTime.Now.ToLongTimeString(); 
-
-            //DateTime轉字串需顯示毫秒
-            //DateTime.ToString("yyyyMMddhhmmssfff")，fff 格式包含毫秒值中任何結尾的零。
-            richTextBox1.Text += DateTime.Now.ToString("yyyy_MMdd_hhmmss.fff") + "\n";
-   
 
 
 
@@ -3168,31 +3168,6 @@ dataGridView1.Sort(dataGridView1.Columns[1], System.ComponentModel.ListSortDirec
             g.CopyFromScreen(new Point(pt.X - w / 2, pt.Y - h / 2), new Point(0, 0), new Size(w, h));
 
 
-//隨機生成四位驗證碼（0~9，a~Z）
-            int LEN = 4;
-            Random r = new Random();
-            string code = "0123456789abcdefghjklmnopqistuvwxyzABCDEFGHIJKLMNOPQISTUVWXYZ";
-            string captcha = "";
-            for (int i = 0; i < LEN; i++)
-            {
-                int ra = r.Next(code.Length);
-                captcha = code.Substring(ra, 1) + captcha;
-            }
-            richTextBox1.Text += captcha + "\n";
-            
-
-
-            richTextBox1.Text += "取得網頁資料\n";
-            string strUrl = "https://www.google.com.tw/"; //獲得IP的網址了
-
-            Uri uri = new Uri(strUrl);
-            System.Net.WebRequest wr = System.Net.WebRequest.Create(uri);
-            Stream s = wr.GetResponse().GetResponseStream();
-            StreamReader sr = new StreamReader(s, Encoding.Default);
-            string all = sr.ReadToEnd(); //讀取網站的數據
-            richTextBox1.Text += all + "\n";
-
-
 
  C# 修改啟始Form [複製鏈接]
 打開program.cs，修改Application.Run(new Form1());，將Form1改為要啟始的頁面即可!
@@ -3202,21 +3177,6 @@ dataGridView1.Sort(dataGridView1.Columns[1], System.ComponentModel.ListSortDirec
 從原來的 time.windows.com 改為 time.nist.gov，
 
 
-
-
-//如何取得網路上的圖片並顯示 
-            string url = @"https://upload.wikimedia.org/wikipedia/commons/0/0f/Ic-photo-intel-D4004.png";
-            this.pictureBox1.Image = ReadImageFromUrl(url);
-
-        private Image ReadImageFromUrl(string urlImagePath)
-        {
-            Uri uri = new Uri(urlImagePath);
-            WebRequest webRequest = WebRequest.Create(uri);
-            Stream stream = webRequest.GetResponse().GetResponseStream();
-            Image res = Image.FromStream(stream);
-            return res;
-
-        }
 
 
 
@@ -3944,28 +3904,6 @@ return retVal.ToString("x");
 
 //--------------------------------------------------------------------------------------------------------------------------
 
-ReadAllLines
-
-        /// <summary>
-        /// 將文字檔內容顯示於所指定的 TextBox
-        /// </summary>
-        /// <param name="p_TextBox">所指定的 TextBox</param>
-        private void ReadTextFile(TextBox p_TextBox)
-        {
-            string filename = @"C:\______test_files\_pic\eula.3081.txt";
-
-            sb = new StringBuilder();
-
-            string[] Txt_All_Lines = File.ReadAllLines(filename, Encoding.Default);
-
-            foreach (string Single_Line in Txt_All_Lines)
-            {
-                sb.AppendLine(Single_Line);
-            }
-
-            p_TextBox.Text = sb.ToString();
-        }
-
 
 
 //--------------------------------------------------------------------------------------------------------------------------
@@ -4028,21 +3966,10 @@ $ 匹配一行的結束。 例如正則表達式 food$ 能夠匹配到 “he's  
 
 //--------------------------------------------------------------------------------------------------------------------------
 
-        /// <summary>
-        /// 限制textBox中的字符輸入, 用KeyPress事件
-        /// 僅允許 數字, Enter, Backspace, +-*/()
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //如果輸入的不是數字類別，也不是回車鍵、Backspace鍵、+ - * / ( )，則textBox1_KeyPress取消該輸入
-            if (!(Char.IsNumber(e.KeyChar)) && e.KeyChar != (char)13 && e.KeyChar != (char)8 && e.KeyChar != (char)40 && e.KeyChar != (char)41 && e.KeyChar != (char)42 && e.KeyChar != (char)43 && e.KeyChar != (char)45 && e.KeyChar != (char)47)
-            {
-                e.Handled = true;
-            } 
 
-        }
+
+
+
 
 //--------------------------------------------------------------------------------------------------------------------------
 
@@ -4601,18 +4528,6 @@ public static byte[] drawImg(string check)
 
 
 
-String.Format是將指定的 String類型的數據中的每個格式項替換為相應對象的值的文本等效項。 
-如:
-
-（1）
-string p1 = "Jackie";
-string p2 = "Aillo";
-Response.Write(String.Format("Hello {0}, I'm {1}", p1, p2));
-（2）
-Response.Write(String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo"));
-
-
-
         				
 //--------------------------------------------------------------------------------------------------------------------------
 
@@ -4711,13 +4626,6 @@ Response.Write(String.Format("Hello {0}, I'm {1}", "Jackie", "Aillo"));
 
         				
 //--------------------------------------------------------------------------------------------------------------------------
-
-
-            Rectangle WorkArea = Screen.GetWorkingArea(this);//屏幕顯示區域
-            int W = WorkArea.Width; //屏幕寬度
-            int H = WorkArea.Height; //屏幕高度
-            richTextBox1.Text += "W = " + W.ToString() + "\n";
-            richTextBox1.Text += "H = " + H.ToString() + "\n";
 
 
 
@@ -5150,33 +5058,6 @@ public static DataTable ToDataTable(List<NetworkAdapterInformation> list)
 //--------------------------------------------------------------------------------------------------------------------------
 
 
-
-
-DataTable中使用Order By排序與Where過濾
-
-/// <summary>
-/// DataTable中使用Order By排序與Where過濾
-/// </summary>
-private void Bind()
-{
-    //這裡構造一個數據源
-    DataTable dt = new DataTable();
-    dt.Columns.Add("ID", typeof(System.String));
-    dt.Columns.Add("uName", typeof(System.String));
-    dt.Columns.Add("uDate", typeof(System.DateTime));
-    for (int i = 0; i < 10; i++)
-    {
-        DataRow dr = dt.NewRow();
-        dr["ID"] = i.ToString();
-        dr["uName"] = "name" + i;
-        dt.Rows.Add(dr);
-    }
-    dt.DefaultView.Sort = "ID asc";//相當於Order By
-    dt.DefaultView.RowFilter = "ID>5";//相當於Where
-    GridView1.DataSource = dt;
-    GridView1.DataBind();
-}
-    
 
 
 
@@ -5857,18 +5738,5 @@ old 暫存一下
 
 
 
-
-
-
-            //獲取屏幕的分辨率
-            //獲取屏幕的分辨率，也就是顯示器屏幕的大小。
-            int W = SystemInformation.PrimaryMonitorSize.Width;
-            int H = SystemInformation.PrimaryMonitorSize.Height;
-
-            richTextBox1.Text += "W = " + W.ToString() + " H = " + H.ToString() + "\n";
-
-            richTextBox1.Text += "取得桌面大小\n";
-            richTextBox1.Text += "桌面寬度 : \t" + Screen.PrimaryScreen.WorkingArea.Width.ToString() + "\n";
-            richTextBox1.Text += "桌面高度 : \t" + Screen.PrimaryScreen.WorkingArea.Height.ToString() + "\n";
 
 

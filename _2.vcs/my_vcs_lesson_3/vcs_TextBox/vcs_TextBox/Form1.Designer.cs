@@ -57,10 +57,13 @@
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.label9 = new System.Windows.Forms.Label();
             this.textBox_use_scrollbar = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.textBox8 = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // textBox2
@@ -338,6 +341,8 @@
             // 
             // groupBox5
             // 
+            this.groupBox5.Controls.Add(this.textBox8);
+            this.groupBox5.Controls.Add(this.label11);
             this.groupBox5.Location = new System.Drawing.Point(724, 468);
             this.groupBox5.Name = "groupBox5";
             this.groupBox5.Size = new System.Drawing.Size(300, 200);
@@ -364,6 +369,26 @@
             this.textBox_use_scrollbar.TabIndex = 23;
             this.textBox_use_scrollbar.Text = "TextBox加ScrollBar 1 TextBox加ScrollBar 2 TextBox加ScrollBar 3 TextBox加ScrollBar 4 T" +
                 "extBox加ScrollBar 5 TextBox加ScrollBar 6 TextBox加ScrollBar 7 TextBox加ScrollBar 8";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label11.Location = new System.Drawing.Point(21, 57);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(414, 19);
+            this.label11.TabIndex = 18;
+            this.label11.Text = "TextBox只允許僅允許 數字, Enter, Backspace, +-*/()";
+            // 
+            // textBox8
+            // 
+            this.textBox8.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox8.Location = new System.Drawing.Point(90, 116);
+            this.textBox8.MaxLength = 0;
+            this.textBox8.Name = "textBox8";
+            this.textBox8.Size = new System.Drawing.Size(133, 30);
+            this.textBox8.TabIndex = 19;
+            this.textBox8.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Form1
             // 
@@ -395,6 +420,8 @@
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -431,6 +458,8 @@
         private System.Windows.Forms.TextBox textBox7;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox textBox_use_scrollbar;
+        private System.Windows.Forms.TextBox textBox8;
+        private System.Windows.Forms.Label label11;
     }
 }
 

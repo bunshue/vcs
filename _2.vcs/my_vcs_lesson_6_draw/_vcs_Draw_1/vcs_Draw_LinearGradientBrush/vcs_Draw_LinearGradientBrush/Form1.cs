@@ -295,6 +295,16 @@ namespace vcs_Draw_LinearGradientBrush
 
         private void button8_Click(object sender, EventArgs e)
         {
+            //實現顏色漸變效果 
+            Bitmap bitmap1 = new Bitmap(300, 200);
+            Graphics g = Graphics.FromImage(bitmap1);
+
+            g.Clear(Color.BlueViolet);
+            g.DrawString("漸變圖形", new Font("黑體", 30, FontStyle.Italic), new SolidBrush(Color.White), new PointF(2, 2));
+            g.FillRectangle(new System.Drawing.Drawing2D.LinearGradientBrush(new Point(0, 0), new Point(300, 200), Color.FromArgb(0, 0, 0, 0), Color.FromArgb(255, 255, 255, 255)), 0, 0, 100, 50);
+            g.Dispose();
+
+            pictureBox1.Image = bitmap1;
 
         }
 

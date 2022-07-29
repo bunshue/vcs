@@ -223,6 +223,204 @@ namespace vcs_Mix00
         private void button1_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            richTextBox1.Text += "DataTable常用方法\n";
+
+            DataTable myTb = new DataTable("auto");
+
+            DataColumn myColid;
+            myColid = new DataColumn();
+            myColid.DataType = System.Type.GetType("System.Int32");
+            myColid.ColumnName = "id";
+            myColid.ReadOnly = true;
+            myTb.Columns.Add(myColid);
+
+            DataColumn myColname = new DataColumn();
+            myColname.DataType = System.Type.GetType("System.String");
+            myColname.ColumnName = "Name";
+            myTb.Columns.Add(myColname);
+
+            DataColumn myColtimer = new DataColumn();
+            myColtimer.DataType = System.Type.GetType("System.DateTime");
+            myColtimer.ColumnName = "Timer";
+            myTb.Columns.Add(myColtimer);
+
+            //// 主键的创建
+            //DataColumn[] PrimaryKeyColumns = new DataColumn[1];
+            //PrimaryKeyColumns[0] = myTb.Columns["id"];
+            //myTb.PrimaryKey = PrimaryKeyColumns;
+
+            myTb.PrimaryKey = new DataColumn[] { myColid };
+
+            DataRow myDr;
+
+            myDr = myTb.NewRow();
+            myDr["id"] = 1;
+            myDr["Name"] = "Name";
+            myDr["Timer"] = DateTime.Now.AddSeconds(10);
+            myTb.Rows.Add(myDr);
+
+            myDr = myTb.NewRow();
+            myDr["id"] = 11;
+            myDr["Name"] = "Name11";
+            myDr["Timer"] = DateTime.Now.AddSeconds(8);
+            myTb.Rows.Add(myDr);
+
+            myDr = myTb.NewRow();
+            myDr["id"] = 111;
+            myDr["Name"] = "Name111";
+            myDr["Timer"] = DateTime.Now.AddSeconds(5);
+            myTb.Rows.Add(myDr);
+
+            myDr = myTb.NewRow();
+            myDr["id"] = 2;
+            myDr["Name"] = "Name2";
+            myDr["Timer"] = DateTime.Now.AddSeconds(3);
+            myTb.Rows.Add(myDr);
+
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+
+            string sortOrder = "Timer asc";
+
+            //foreach (DataColumn dc in myTb.Columns)
+            //{
+            //    //sb.Append(dc.ColumnName+"<br/>");    
+            //}
+
+
+            //foreach (DataRow dr in myTb.Rows)
+            //{
+            //    foreach (DataColumn dc in myTb.Columns)
+            //    {
+            //        sb.Append(dr[dc] + "|");
+            //    }
+            //    sb.Append("<br/>");
+            //}
+
+            myTb = DeleteRows("11", myTb);
+
+            string expression;
+            expression = "id>0";
+            DataRow[] foundRows;
+
+            foundRows = myTb.Select(expression, sortOrder);
+
+            for (int i = 0; i < foundRows.Length; i++)
+            {
+                sb.Append(foundRows[i]["Name"] + "=" + foundRows[i]["Timer"] + "<br/>");
+            }
+
+            //if (UpdataNews("1", myTb, "xiaohu"))
+            //{
+            //    sb.Append("update true");
+            //}
+            //else
+            //{
+            //    sb.Append("update False");
+            //}
+
+            sb.Append("====================================<br/>");
+
+            myTb = DeleteRows("1", myTb);
+            expression = "id>0";
+            foundRows = myTb.Select(expression, sortOrder);
+            for (int i = 0; i < foundRows.Length; i++)
+            {
+                sb.Append(foundRows[i]["Name"] + "=" + foundRows[i]["Timer"] + "<br/>");
+            }
+
+            // 用户判断当前的ID是不是存在
+            if (CheckIDBool("1", myTb))
+            {
+                sb.Append("Bool true");
+            }
+            else
+            {
+                sb.Append("Bool false");
+            }
+
+            richTextBox1.Text += sb.ToString() + "\n";
+        }
+
+
+        /// <summary>
+        /// 判断是不是存在
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="myTb"></param>
+        /// <returns></returns>
+        private bool CheckIDBool(string key, DataTable myTb)
+        {
+            bool rs = false;
+            //string strKey ="";
+            //strKey = "id=" + key;
+            //if (myTb.Select(strKey).Length > 0)
+            //{
+            //    rs = true;
+            //}
+
+            // 方法二:
+            //northwindDataSet1.Customers.FindByCustomerID("ALFKI");
+
+            DataRow foundRow = myTb.Rows.Find(key);
+
+            if (foundRow != null)
+            {
+                rs = true;
+            }
+            return rs;
+        }
+
+        /// <summary>
+        /// 根据主键查找DataTable中的值,返回DataRow
+        /// </summary>
+        /// <param name="key"></param>
+        /// <param name="myTb"></param>
+        /// <returns></returns>
+        private DataRow[] DtSelect(string key, DataTable myTb)
+        {
+            string strKey = "";
+            strKey = "id=" + key;
+            DataRow[] foundRows;
+            foundRows = myTb.Select(strKey);
+            return foundRows;
+        }
+
+        private DataRow[] DtSelect(string key, DataTable myTb, string sortOrder)
+        {
+            string strKey = "";
+            strKey = "id=" + key;
+            DataRow[] foundRows;
+            foundRows = myTb.Select(strKey, sortOrder);
+            return foundRows;
+        }
+
+        private bool UpdataNews(string key, DataTable myTb, string name)
+        {
+            bool rs = false;
+            string strKey = "";
+            strKey = "id='" + key + "'";
+
+            if (CheckIDBool(key, myTb))
+            {
+                DataRow[] customerRow =
+                myTb.Select(strKey);
+                customerRow[0]["Name"] = name;
+                customerRow[0]["Timer"] = DateTime.Now.AddYears(-1);
+                rs = true;
+            }
+            return rs;
+        }
+
+        private DataTable DeleteRows(string key, DataTable myTb)
+        {
+            DataRow[] foundRows;
+            foundRows = DtSelect(key, myTb);
+            if (foundRows.Length > 0)
+            {
+                myTb.Rows.Remove(foundRows[0]);
+            }
+            return myTb;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -304,11 +502,54 @@ namespace vcs_Mix00
         private void button3_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //DataTable中使用Order By排序與Where過濾
+
+            richTextBox1.Text += "DataTable\n";
+
+            //這裡構造一個數據源
+            DataTable dt = new DataTable();
+            dt.Columns.Add("ID", typeof(System.String));
+            dt.Columns.Add("uName", typeof(System.String));
+            dt.Columns.Add("uDate", typeof(System.DateTime));
+            for (int i = 0; i < 10; i++)
+            {
+                DataRow dr = dt.NewRow();
+                dr["ID"] = i.ToString();
+                dr["uName"] = "name" + i;
+                dt.Rows.Add(dr);
+            }
+            dt.DefaultView.Sort = "ID asc";//相當於Order By
+            dt.DefaultView.RowFilter = "ID>5";//相當於Where
+
+
+            //GridView1.DataSource = dt;
+            //GridView1.DataBind();
+
+
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //ReadAllLines
+
+
+            string filename = @"C:\______test_files\__RW\_txt\article.txt";
+
+            StringBuilder sb = new StringBuilder();
+
+            string[] Txt_All_Lines = File.ReadAllLines(filename, Encoding.Default);
+
+            foreach (string Single_Line in Txt_All_Lines)
+            {
+                sb.AppendLine(Single_Line);
+            }
+
+            richTextBox1.Text += sb.ToString() + "\n";
+
+
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -461,6 +702,37 @@ namespace vcs_Mix00
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //透明色 累加 與 不累加
+
+            //新建圖檔, 初始化畫布
+            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+
+            Color red = Color.FromArgb(0x30, 0xff, 0, 0);
+            Brush redBrush = new SolidBrush(red);
+
+            int i;
+            for (i = 0; i < 400; i += 30)
+            {
+                g.FillRectangle(redBrush, i, 0, 200, 200);
+
+                g.DrawRectangle(Pens.Black, i, 0, 200, 200);
+
+            }
+
+            //若使用下行, 則透明色不累加
+            g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
+
+            for (i = 0; i < 400; i += 30)
+            {
+                g.FillRectangle(redBrush, i, 220, 200, 200);
+
+                g.DrawRectangle(Pens.Black, i, 220, 200, 200);
+
+            }
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button11_Click(object sender, EventArgs e)

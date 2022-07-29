@@ -55,8 +55,27 @@ namespace vcs_TextBox
             RightKeyCarte.Text = "禁止使用滑鼠右鍵";
             RightKeyCarte.Location = new Point(470, 550);
 
-
             this.Controls.Add(this.RightKeyCarte);//在當前窗體中添加自定義控件
+
+
+            textBox8.KeyPress += new KeyPressEventHandler(textBox8_KeyPress);
+            label11.Text = "TextBox只允許僅允許\n數字, Enter, Backspace, +-*/()";
+        }
+
+
+        /// <summary>
+        /// 限制textBox中的字符輸入, 用KeyPress事件
+        /// 僅允許 數字, Enter, Backspace, +-*/()
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void textBox8_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //如果輸入的不是數字類別，也不是回車鍵、Backspace鍵、+ - * / ( )，則textBox1_KeyPress取消該輸入
+            if (!(Char.IsNumber(e.KeyChar)) && e.KeyChar != (char)13 && e.KeyChar != (char)8 && e.KeyChar != (char)40 && e.KeyChar != (char)41 && e.KeyChar != (char)42 && e.KeyChar != (char)43 && e.KeyChar != (char)45 && e.KeyChar != (char)47)
+            {
+                e.Handled = true;
+            } 
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
