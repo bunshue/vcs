@@ -1,17 +1,4 @@
 
-
-
-
-/// <summary>
-/// DataTable中使用Order By排序與Where過濾
-/// </summary>
-private void Bind()
-{
-}
-    
-
-
-
 整理搜尋關鍵字
 DataTable
 

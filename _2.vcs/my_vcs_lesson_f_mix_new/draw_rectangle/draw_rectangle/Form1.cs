@@ -13,12 +13,12 @@ namespace draw_rectangle
 {
     public partial class Form1 : Form
     {
+        string filename = @"C:\______test_files\elephant.jpg";
+
+        private bool flag_mouse_down = false;
         private int intStartX = 0;
         private int intStartY = 0;
 
-        string filename = @"C:\______test_files\elephant.jpg";
-
-        private bool flag_mouse_down = false;  //開始選取的旗標
         private Point pt_st = Point.Empty;//記錄鼠標按下時的坐標，用來確定繪圖起點
         private Point pt_sp = Point.Empty;//記錄鼠標放開時的坐標，用來確定繪圖終點
         private Bitmap bitmap1 = null;  //原圖位圖Bitmap
@@ -60,27 +60,17 @@ namespace draw_rectangle
                 try
                 {
                     //Image tmp = Image.FromFile("1.png");
-
                     Graphics g = this.pictureBox1.CreateGraphics();
-
                     //清空上次畫下的痕跡
-
                     g.Clear(this.pictureBox1.BackColor);
-
                     Brush brush = new SolidBrush(Color.Red);
-
                     Pen pen = new Pen(brush, 1);
-
                     pen.DashStyle = DashStyle.Solid;
-
                     g.DrawRectangle(pen, new Rectangle(intStartX > e.X ? e.X : intStartX, intStartY > e.Y ? e.Y : intStartY, Math.Abs(e.X - intStartX), Math.Abs(e.Y - intStartY)));
                     //g.DrawEllipse(pen, new Rectangle(intStartX > e.X ? e.X : intStartX, intStartY > e.Y ? e.Y : intStartY, Math.Abs(e.X - intStartX), Math.Abs(e.Y - intStartY)));
-
                     g.Dispose();
-
                     //this.pictureBox_Src.Image = tmp;
                 }
-
                 catch (Exception ex)
                 {
                     ex.ToString();
@@ -91,12 +81,9 @@ namespace draw_rectangle
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             flag_mouse_down = false;
-
             intStartX = 0;
-
             intStartY = 0;
         }
-
     }
 }
 

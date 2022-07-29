@@ -15,7 +15,10 @@ namespace vcs_PictureCropD
     {
         string filename = @"C:\______test_files\elephant.jpg";
 
-        private bool flag_mouse_down = false;  //開始選取的旗標
+        private bool flag_mouse_down = false;
+        private int intStartX = 0;
+        private int intStartY = 0;
+
         private Point pt_st = Point.Empty;//記錄鼠標按下時的坐標，用來確定繪圖起點
         private Point pt_sp = Point.Empty;//記錄鼠標放開時的坐標，用來確定繪圖終點
         private Bitmap bitmap1 = null;  //原圖位圖Bitmap
@@ -59,6 +62,7 @@ namespace vcs_PictureCropD
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
+            //跟隨鼠標在 pictureBox 的圖片上畫矩形
             pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
             pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
             pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
@@ -76,69 +80,60 @@ namespace vcs_PictureCropD
         }
 
 
-
         // Start selecting the rectangle.
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left)
-            {
-                flag_mouse_down = true;
-                pt_st = e.Location; //起始點座標
+            flag_mouse_down = true;
+            pt_st = e.Location; //起始點座標
 
-                nud_w.Value = 0;
-                nud_h.Value = 0;
-                nud_x_st.Value = 0;
-                nud_y_st.Value = 0;
+            nud_w.Value = 0;
+            nud_h.Value = 0;
+            nud_x_st.Value = 0;
+            nud_y_st.Value = 0;
 
-                //label2.Text = "";
-                SelectionRectangle = new Rectangle(new Point(0, 0), new Size(0, 0));
-            }
-            else if (e.Button == MouseButtons.Right)
-            {
-                richTextBox1.Text += "滑鼠右鍵\t準備貼上選取的部分\n";
-            }
+            //label2.Text = "";
+            SelectionRectangle = new Rectangle(new Point(0, 0), new Size(0, 0));
         }
 
         // Continue selecting.
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            // Do nothing if we're not selecting an area.
-            if (flag_mouse_down == false)
-                return;
-
-            pt_sp = e.Location; //終點座標
-
-            SelectionRectangle = MakeRectangle(pt_st, pt_sp);
-
-            if ((SelectionRectangle.X < 0) || (SelectionRectangle.X >= W))
-                return;
-            if ((SelectionRectangle.Y < 0) || (SelectionRectangle.Y >= H))
-                return;
-            if ((SelectionRectangle.Width <= 0) || (SelectionRectangle.Width > W))
-                return;
-            if ((SelectionRectangle.Height <= 0) || (SelectionRectangle.Height > H))
-                return;
-            if (((SelectionRectangle.X + SelectionRectangle.Width) > W) || ((SelectionRectangle.Y + SelectionRectangle.Height) > H))
-                return;
-
-            // Make a Bitmap to display the selection rectangle.
-            Bitmap bmp = new Bitmap(bitmap1);
-
-            // Draw the selection rectangle.
-            using (Graphics g = Graphics.FromImage(bmp))
+            if (flag_mouse_down == true)
             {
-                Pen p = new Pen(Color.Green);
-                p.DashStyle = DashStyle.Dash;
-                g.DrawRectangle(p, SelectionRectangle);
-            }
-            // Display the temporary bitmap.
-            pictureBox1.Image = bmp;
+                pt_sp = e.Location; //終點座標
 
-            nud_x_st.Value = SelectionRectangle.X;
-            nud_y_st.Value = SelectionRectangle.Y;
-            nud_w.Value = SelectionRectangle.Width;
-            nud_h.Value = SelectionRectangle.Height;
-            //label2.Text = "選取區域 : " + SelectionRectangle.ToString();
+                SelectionRectangle = MakeRectangle(pt_st, pt_sp);
+
+                if ((SelectionRectangle.X < 0) || (SelectionRectangle.X >= W))
+                    return;
+                if ((SelectionRectangle.Y < 0) || (SelectionRectangle.Y >= H))
+                    return;
+                if ((SelectionRectangle.Width <= 0) || (SelectionRectangle.Width > W))
+                    return;
+                if ((SelectionRectangle.Height <= 0) || (SelectionRectangle.Height > H))
+                    return;
+                if (((SelectionRectangle.X + SelectionRectangle.Width) > W) || ((SelectionRectangle.Y + SelectionRectangle.Height) > H))
+                    return;
+
+                // Make a Bitmap to display the selection rectangle.
+                Bitmap bmp = new Bitmap(bitmap1);
+
+                // Draw the selection rectangle.
+                using (Graphics g = Graphics.FromImage(bmp))
+                {
+                    Pen p = new Pen(Color.Green);
+                    p.DashStyle = DashStyle.Dash;
+                    g.DrawRectangle(p, SelectionRectangle);
+                }
+                // Display the temporary bitmap.
+                pictureBox1.Image = bmp;
+
+                nud_x_st.Value = SelectionRectangle.X;
+                nud_y_st.Value = SelectionRectangle.Y;
+                nud_w.Value = SelectionRectangle.Width;
+                nud_h.Value = SelectionRectangle.Height;
+                //label2.Text = "選取區域 : " + SelectionRectangle.ToString();
+            }
         }
 
         // Finish selecting the area.
@@ -179,9 +174,5 @@ namespace vcs_PictureCropD
             nud_h.Value = SelectionRectangle.Height;
             //label2.Text = "選取區域 : " + SelectionRectangle.ToString();
         }
-
-
-
-
     }
 }
