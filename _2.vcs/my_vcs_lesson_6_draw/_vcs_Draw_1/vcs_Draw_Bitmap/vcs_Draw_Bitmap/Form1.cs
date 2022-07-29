@@ -328,7 +328,7 @@ namespace vcs_Draw_Bitmap
             g.Dispose();
             //儲存新的影像
             string filename = Application.StartupPath + "\\zoom_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-            zoomImage.Save(@filename, ImageFormat.Jpeg);
+            zoomImage.Save(filename, ImageFormat.Jpeg);
             richTextBox1.Text += "縮小一半，存檔完成，檔名：" + filename + "\n";
             #endregion
         }
@@ -354,13 +354,43 @@ namespace vcs_Draw_Bitmap
             g.Dispose();
             //儲存新的影像
             string filename = Application.StartupPath + "\\big_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
-            zoomImageb.Save(@filename, ImageFormat.Jpeg);
+            zoomImageb.Save(filename, ImageFormat.Jpeg);
             richTextBox1.Text += "放大一倍，存檔完成，檔名：" + filename + "\n";
             #endregion
         }
 
         private void button16_Click(object sender, EventArgs e)
         {
+            //設置圖像分辨率
+
+            //測不太出來
+
+            //設置圖像分辨率
+
+            filename = @"C:\______test_files\elephant.jpg";
+            Bitmap bmp = new Bitmap(filename);
+
+            int W = bmp.Width;
+            int H = bmp.Height;
+
+            Bitmap bitmap1 = new Bitmap(W * 2, H);
+
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.FillRectangle(Brushes.Pink, this.ClientRectangle);
+
+            bmp.Save("圖片0.bmp", ImageFormat.Bmp);
+
+            bmp.SetResolution(3f, 3f);
+            bmp.Save("圖片30.bmp", ImageFormat.Bmp);
+
+            g.DrawImage(bmp, 0, 0, bmp.Width, bmp.Height);
+
+
+            bmp.SetResolution(1200f, 1200f);
+            bmp.Save("圖片120.bmp", ImageFormat.Bmp);
+
+            g.DrawImage(bmp, 200, 0, bmp.Width, bmp.Height);
+            pictureBox1.Image = bitmap1;
 
         }
 

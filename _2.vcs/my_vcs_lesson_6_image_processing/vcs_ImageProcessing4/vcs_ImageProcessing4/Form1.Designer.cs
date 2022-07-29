@@ -153,9 +153,10 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(609, 12);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(400, 500);
+            this.pictureBox1.Size = new System.Drawing.Size(500, 800);
             this.pictureBox1.TabIndex = 9;
             this.pictureBox1.TabStop = false;
             // 
