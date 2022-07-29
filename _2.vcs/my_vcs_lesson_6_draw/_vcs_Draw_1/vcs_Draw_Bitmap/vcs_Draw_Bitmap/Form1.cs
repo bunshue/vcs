@@ -618,7 +618,21 @@ namespace vcs_Draw_Bitmap
 
         private void button28_Click(object sender, EventArgs e)
         {
+            //MakeTransparent 使用 去背效果5
 
+            open_new_file();
+
+            string filename = @"C:\______test_files\__pic\banner_ims.png";
+            Bitmap bmp0 = (Bitmap)Image.FromFile(filename);
+            Bitmap bmp1 = (Bitmap)bmp0.Clone();
+
+            bmp1.MakeTransparent(Color.Pink);     //使用默認的透明顏色進行透明設置
+            bmp1.MakeTransparent(Color.Blue);    //使用默認的透明顏色進行透明設置
+
+            g.DrawImage(bmp0, 0, 0);
+            g.DrawImage(bmp1, 0, 210);
+
+            g.DrawString("去除粉紅色與藍色", new Font("標楷體", 30), new SolidBrush(Color.Navy), 200, pictureBox1.Height - 60);
         }
 
         private void button29_Click(object sender, EventArgs e)

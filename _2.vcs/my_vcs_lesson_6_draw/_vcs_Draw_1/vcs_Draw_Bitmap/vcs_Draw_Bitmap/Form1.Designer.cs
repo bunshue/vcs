@@ -409,6 +409,7 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(170, 70);
             this.button28.TabIndex = 153;
+            this.button28.Text = "MakeTransparent 使用 去背效果5";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
