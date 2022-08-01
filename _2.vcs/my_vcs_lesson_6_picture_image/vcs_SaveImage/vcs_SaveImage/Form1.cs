@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;                //for Directory
+using System.Diagnostics;       //for Process
 using System.Drawing.Imaging;   //for ImageFormat
 
 namespace vcs_SaveImage
@@ -129,5 +130,12 @@ namespace vcs_SaveImage
                 }
             }
         }
+
+        private void bt_open_folder_Click(object sender, EventArgs e)
+        {
+            //開啟檔案總管
+            Process.Start(foldername);
+        }
     }
 }
+

@@ -95,6 +95,7 @@
             this.bt_open_folder.Size = new System.Drawing.Size(40, 40);
             this.bt_open_folder.TabIndex = 11;
             this.bt_open_folder.UseVisualStyleBackColor = true;
+            this.bt_open_folder.Click += new System.EventHandler(this.bt_open_folder_Click);
             // 
             // Form1
             // 
