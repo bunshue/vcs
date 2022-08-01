@@ -34,7 +34,7 @@
             // 
             // btnWrite
             // 
-            this.btnWrite.Location = new System.Drawing.Point(162, 27);
+            this.btnWrite.Location = new System.Drawing.Point(44, 26);
             this.btnWrite.Name = "btnWrite";
             this.btnWrite.Size = new System.Drawing.Size(142, 54);
             this.btnWrite.TabIndex = 1;
@@ -55,7 +55,7 @@
             this.AcceptButton = this.btnWrite;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(519, 459);
+            this.ClientSize = new System.Drawing.Size(553, 480);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.btnWrite);
             this.Name = "Form1";

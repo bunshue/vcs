@@ -9,6 +9,10 @@ using System.Windows.Forms;
 
 using System.Drawing.Drawing2D;   //for DashStyle
 
+//在 pictureBox 上用滑鼠畫矩形
+//mode 0 : pictureBox 無圖片
+//mode 1 : pictureBox 有圖片
+
 namespace draw_rectangle
 {
     public partial class Form1 : Form
@@ -86,4 +90,3 @@ namespace draw_rectangle
         }
     }
 }
-

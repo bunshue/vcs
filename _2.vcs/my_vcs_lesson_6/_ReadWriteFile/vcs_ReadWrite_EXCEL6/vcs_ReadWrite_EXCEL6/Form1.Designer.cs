@@ -35,32 +35,30 @@
             this.lstItems1 = new System.Windows.Forms.ListBox();
             this.lstItems2 = new System.Windows.Forms.ListBox();
             this.lblTitle2 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // txtFile
             // 
-            this.txtFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtFile.Location = new System.Drawing.Point(44, 12);
+            this.txtFile.Location = new System.Drawing.Point(44, 11);
             this.txtFile.Name = "txtFile";
-            this.txtFile.Size = new System.Drawing.Size(382, 20);
+            this.txtFile.Size = new System.Drawing.Size(763, 22);
             this.txtFile.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 15);
+            this.label1.Location = new System.Drawing.Point(12, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(26, 13);
+            this.label1.Size = new System.Drawing.Size(25, 12);
             this.label1.TabIndex = 4;
             this.label1.Text = "File:";
             // 
             // btnRead
             // 
-            this.btnRead.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnRead.Location = new System.Drawing.Point(182, 47);
+            this.btnRead.Location = new System.Drawing.Point(44, 52);
             this.btnRead.Name = "btnRead";
-            this.btnRead.Size = new System.Drawing.Size(75, 23);
+            this.btnRead.Size = new System.Drawing.Size(75, 21);
             this.btnRead.TabIndex = 3;
             this.btnRead.Text = "Read";
             this.btnRead.UseVisualStyleBackColor = true;
@@ -68,48 +66,55 @@
             // 
             // lblTitle1
             // 
-            this.lblTitle1.Location = new System.Drawing.Point(88, 82);
+            this.lblTitle1.Location = new System.Drawing.Point(42, 93);
             this.lblTitle1.Name = "lblTitle1";
-            this.lblTitle1.Size = new System.Drawing.Size(120, 18);
+            this.lblTitle1.Size = new System.Drawing.Size(120, 17);
             this.lblTitle1.TabIndex = 5;
             this.lblTitle1.Text = "label2";
             this.lblTitle1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lstItems1
             // 
-            this.lstItems1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
             this.lstItems1.FormattingEnabled = true;
-            this.lstItems1.Location = new System.Drawing.Point(88, 103);
+            this.lstItems1.ItemHeight = 12;
+            this.lstItems1.Location = new System.Drawing.Point(42, 112);
             this.lstItems1.Name = "lstItems1";
-            this.lstItems1.Size = new System.Drawing.Size(120, 147);
+            this.lstItems1.Size = new System.Drawing.Size(120, 448);
             this.lstItems1.TabIndex = 6;
             // 
             // lstItems2
             // 
-            this.lstItems2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)));
             this.lstItems2.FormattingEnabled = true;
-            this.lstItems2.Location = new System.Drawing.Point(231, 103);
+            this.lstItems2.ItemHeight = 12;
+            this.lstItems2.Location = new System.Drawing.Point(185, 112);
             this.lstItems2.Name = "lstItems2";
-            this.lstItems2.Size = new System.Drawing.Size(120, 147);
+            this.lstItems2.Size = new System.Drawing.Size(120, 448);
             this.lstItems2.TabIndex = 8;
             // 
             // lblTitle2
             // 
-            this.lblTitle2.Location = new System.Drawing.Point(231, 82);
+            this.lblTitle2.Location = new System.Drawing.Point(185, 93);
             this.lblTitle2.Name = "lblTitle2";
-            this.lblTitle2.Size = new System.Drawing.Size(120, 18);
+            this.lblTitle2.Size = new System.Drawing.Size(120, 17);
             this.lblTitle2.TabIndex = 7;
             this.lblTitle2.Text = "label2";
             this.lblTitle2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(344, 112);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(463, 448);
+            this.richTextBox1.TabIndex = 9;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnRead;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(438, 259);
+            this.ClientSize = new System.Drawing.Size(823, 586);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.lstItems2);
             this.Controls.Add(this.lblTitle2);
             this.Controls.Add(this.lstItems1);
@@ -134,6 +139,7 @@
         private System.Windows.Forms.ListBox lstItems1;
         private System.Windows.Forms.ListBox lstItems2;
         private System.Windows.Forms.Label lblTitle2;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

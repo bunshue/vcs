@@ -40,6 +40,8 @@ namespace vcs_ReadWrite_EXCEL7
         // Write into the Excel workbook.
         private void btnWrite_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "開啟檔案 : " + filename + "\n";
+
             // Get the Excel application object.
             Excel.Application excel_app = new Excel.ApplicationClass();
 
@@ -48,14 +50,14 @@ namespace vcs_ReadWrite_EXCEL7
 
             // Open the workbook.
             Excel.Workbook workbook = excel_app.Workbooks.Open(filename,
-                Type.Missing, Type.Missing, Type.Missing, Type.Missing, 
-                Type.Missing, Type.Missing, Type.Missing, Type.Missing, 
-                Type.Missing, Type.Missing, Type.Missing, Type.Missing, 
+                Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                 Type.Missing, Type.Missing);
 
             // See if the worksheet already exists.
             string sheet_name = DateTime.Now.ToString("MM-dd-yy");
-            
+
             Excel.Worksheet sheet = FindSheet(workbook, sheet_name);
             if (sheet == null)
             {
@@ -74,10 +76,8 @@ namespace vcs_ReadWrite_EXCEL7
             // Make that range of cells bold and red.
             Excel.Range header_range = sheet.get_Range("A1", "C1");
             header_range.Font.Bold = true;
-            header_range.Font.Color = 
-                System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Red);
-            header_range.Interior.Color = 
-                System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Pink);
+            header_range.Font.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Red);
+            header_range.Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Pink);
 
             // Add some data to a range of cells.
             int[,] values = 
@@ -96,7 +96,7 @@ namespace vcs_ReadWrite_EXCEL7
             // Close the Excel server.
             excel_app.Quit();
 
-            richTextBox1.Text += "Done\n";
+            richTextBox1.Text += "完成\n";
         }
 
         // Return the worksheet with the given name.
@@ -106,7 +106,6 @@ namespace vcs_ReadWrite_EXCEL7
             {
                 if (sheet.Name == sheet_name) return sheet;
             }
-
             return null;
         }
     }

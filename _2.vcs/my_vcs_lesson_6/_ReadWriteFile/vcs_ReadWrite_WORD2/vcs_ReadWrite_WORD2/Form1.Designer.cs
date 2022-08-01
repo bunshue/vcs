@@ -31,6 +31,7 @@
             this.txtPicture = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnGo = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // txtPicture
@@ -51,7 +52,7 @@
             // 
             // btnGo
             // 
-            this.btnGo.Location = new System.Drawing.Point(258, 44);
+            this.btnGo.Location = new System.Drawing.Point(61, 54);
             this.btnGo.Name = "btnGo";
             this.btnGo.Size = new System.Drawing.Size(124, 21);
             this.btnGo.TabIndex = 6;
@@ -59,12 +60,21 @@
             this.btnGo.UseVisualStyleBackColor = true;
             this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(61, 92);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(555, 515);
+            this.richTextBox1.TabIndex = 7;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnGo;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(628, 243);
+            this.ClientSize = new System.Drawing.Size(649, 619);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.btnGo);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.txtPicture);
@@ -81,6 +91,7 @@
         private System.Windows.Forms.TextBox txtPicture;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnGo;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

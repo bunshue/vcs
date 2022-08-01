@@ -101,6 +101,32 @@ namespace vcs_RandomWalk
             int W = pictureBox1.Width;
             int H = pictureBox1.Height;
 
+
+            int nx = 12;
+            int ny = 12;
+            int border = 20;
+            int dx = (W - border * 2) / nx;
+            int dy = (H - border * 2) / ny;
+
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);
+            Pen p1 = new Pen(Color.Gray, 5);
+            Pen p2 = new Pen(Color.Red, 1);
+
+            e.Graphics.DrawRectangle(p2, 0, 0, W - 1, H - 1);
+
+            int i;
+            for (i = 0; i <= ny; i++)
+            {
+                e.Graphics.DrawLine(p1, border + 0, border + dy * i, W - border, border + dy * i);
+            }
+
+            for (i = 0; i <= ny; i++)
+            {
+                e.Graphics.DrawLine(p1, border + dx * i, border, border + dx * i, H - border);
+            }
+
+            /*
             Bitmap bitmap1 = new Bitmap(W, H);
             Graphics g = Graphics.FromImage(bitmap1);
             Pen p1 = new Pen(Color.Gray, 5);
@@ -118,6 +144,8 @@ namespace vcs_RandomWalk
                 e.Graphics.DrawLine(p1, 0, i, W, i);
 
             }
+            */
+
 
             if (len < 2)
                 return;

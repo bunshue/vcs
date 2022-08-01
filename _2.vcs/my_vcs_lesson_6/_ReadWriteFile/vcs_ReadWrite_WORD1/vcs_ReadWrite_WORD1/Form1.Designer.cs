@@ -31,6 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.txtFile = new System.Windows.Forms.TextBox();
             this.btnRemoveHyperlinks = new System.Windows.Forms.Button();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -44,8 +45,6 @@
             // 
             // txtFile
             // 
-            this.txtFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.txtFile.Location = new System.Drawing.Point(44, 11);
             this.txtFile.Name = "txtFile";
             this.txtFile.Size = new System.Drawing.Size(339, 22);
@@ -53,8 +52,7 @@
             // 
             // btnRemoveHyperlinks
             // 
-            this.btnRemoveHyperlinks.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnRemoveHyperlinks.Location = new System.Drawing.Point(105, 52);
+            this.btnRemoveHyperlinks.Location = new System.Drawing.Point(44, 58);
             this.btnRemoveHyperlinks.Name = "btnRemoveHyperlinks";
             this.btnRemoveHyperlinks.Size = new System.Drawing.Size(166, 28);
             this.btnRemoveHyperlinks.TabIndex = 2;
@@ -62,12 +60,21 @@
             this.btnRemoveHyperlinks.UseVisualStyleBackColor = true;
             this.btnRemoveHyperlinks.Click += new System.EventHandler(this.btnRemoveHyperlinks_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(44, 116);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(613, 405);
+            this.richTextBox1.TabIndex = 3;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnRemoveHyperlinks;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(395, 92);
+            this.ClientSize = new System.Drawing.Size(693, 546);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.btnRemoveHyperlinks);
             this.Controls.Add(this.txtFile);
             this.Controls.Add(this.label1);
@@ -84,6 +91,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtFile;
         private System.Windows.Forms.Button btnRemoveHyperlinks;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

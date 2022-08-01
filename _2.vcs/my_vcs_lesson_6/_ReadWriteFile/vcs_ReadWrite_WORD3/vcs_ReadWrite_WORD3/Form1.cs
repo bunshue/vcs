@@ -146,7 +146,8 @@ namespace vcs_ReadWrite_WORD3
             word_doc.Close(ref save_changes, ref missing, ref missing);
             word_app.Quit(ref save_changes, ref missing, ref missing);
 
-            richTextBox1.Text += "製作一個docx檔案 使用表格 完成\n";
+            richTextBox1.Text += "製作一個docx檔案 使用表格 完成\t檔名 : " + filename + "\n";
         }
     }
 }
+

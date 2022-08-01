@@ -28,9 +28,7 @@ namespace vcs_ReadWrite_WORD2
         // Initialize the paths.
         private void Form1_Load(object sender, EventArgs e)
         {
-            txtPicture.Text = Path.GetFullPath(
-                Path.Combine(Application.StartupPath, "..\\..")) +
-                "\\test.png";
+            txtPicture.Text = Path.GetFullPath(Path.Combine(Application.StartupPath, "..\\..")) +"\\test.png";
         }
 
         // Add the text and picture to the Word document.
@@ -112,7 +110,7 @@ namespace vcs_ReadWrite_WORD2
             word_doc.Close(ref save_changes, ref missing, ref missing);
             word_app.Quit(ref save_changes, ref missing, ref missing);
 
-            MessageBox.Show("Done");
+            richTextBox1.Text += "建立Word檔案完成\t檔名 : " + filename + "\n";
         }
     }
 }

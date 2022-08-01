@@ -33,14 +33,14 @@ namespace vcs_ReadWrite_EXCEL6
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            txtFile.Text = Path.GetFullPath(
-                Path.Combine(Application.StartupPath, @"..\..")) +
-                @"\Items.xlsx";
+            txtFile.Text = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\Items.xlsx";
         }
 
         // Read from the Excel workbook.
         private void btnRead_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "開啟檔案 : " + txtFile.Text + "\n";
+
             // Get the Excel application object.
             Excel.Application excel_app = new Excel.ApplicationClass();
 
@@ -71,18 +71,15 @@ namespace vcs_ReadWrite_EXCEL6
         // Set a title Label and the values in a ListBox.
         // Get the title from cell (row, col). Get the values from
         // cell (row + 1, col) to the end of the column.
-        private void SetTitleAndListValues(Excel.Worksheet sheet, 
-            int row, int col, Label lbl, ListBox lst)
+        private void SetTitleAndListValues(Excel.Worksheet sheet, int row, int col, Label lbl, ListBox lst)
         {
             Excel.Range range;
 
             // Set the title.
             range = (Excel.Range)sheet.Cells[row, col];
             lbl.Text = (string)range.Value2;
-            lbl.ForeColor = System.Drawing.ColorTranslator.FromOle(
-                (int)(double)range.Font.Color);
-            lbl.BackColor = System.Drawing.ColorTranslator.FromOle(
-                (int)(double)range.Interior.Color);
+            lbl.ForeColor = System.Drawing.ColorTranslator.FromOle((int)(double)range.Font.Color);
+            lbl.BackColor = System.Drawing.ColorTranslator.FromOle((int)(double)range.Interior.Color);
 
             // Get the values.
             // Find the last cell in the column.
@@ -110,3 +107,4 @@ namespace vcs_ReadWrite_EXCEL6
         }
     }
 }
+

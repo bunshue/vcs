@@ -29,7 +29,8 @@ namespace vcs_ReadWrite_WORD1
         // Remove the document's hyperlinks
         private void btnRemoveHyperlinks_Click(object sender, EventArgs e)
         {
-            Cursor = Cursors.WaitCursor;
+            richTextBox1.Text += "開啟檔案 : " + txtFile.Text + "\n";
+
             Refresh();
 
             // Get the Word application object.
@@ -60,14 +61,14 @@ namespace vcs_ReadWrite_WORD1
             }
 
             // Save and close the document without prompting.
-            object save_changes = true; 
+            object save_changes = true;
             word_doc.Close(ref save_changes, ref missing, ref missing);
 
             // Close the word application.
             word_app.Quit(ref save_changes, ref missing, ref missing);
 
-            MessageBox.Show("Done");
-            Cursor = Cursors.Default;
+            richTextBox1.Text += "完成\n";
         }
     }
 }
+

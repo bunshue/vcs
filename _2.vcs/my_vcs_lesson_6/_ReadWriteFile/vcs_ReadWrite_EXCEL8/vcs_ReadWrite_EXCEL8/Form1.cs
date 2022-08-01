@@ -33,6 +33,9 @@ namespace vcs_ReadWrite_EXCEL8
         {
             //C# Excel文件導入操作
             string filename = @"C:\______test_files\__RW\_excel\excel_test_data.xls";
+
+            richTextBox1.Text += "開啟檔案 : " + filename + "\n";
+
             DataTable excelTbl = this.GetExcelTable(filename);  //調用函數獲取Excel中的信息
             if (excelTbl == null)
             {

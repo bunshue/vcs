@@ -76,6 +76,12 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.btn_draw_profile = new System.Windows.Forms.Button();
             this.groupBox_location = new System.Windows.Forms.GroupBox();
+            this.rb_location19 = new System.Windows.Forms.RadioButton();
+            this.rb_location18 = new System.Windows.Forms.RadioButton();
+            this.rb_location17 = new System.Windows.Forms.RadioButton();
+            this.rb_location16 = new System.Windows.Forms.RadioButton();
+            this.rb_location15 = new System.Windows.Forms.RadioButton();
+            this.rb_location14 = new System.Windows.Forms.RadioButton();
             this.rb_location13 = new System.Windows.Forms.RadioButton();
             this.rb_location12 = new System.Windows.Forms.RadioButton();
             this.rb_location11 = new System.Windows.Forms.RadioButton();
@@ -181,12 +187,6 @@
             this.rb_map02 = new System.Windows.Forms.RadioButton();
             this.rb_map01 = new System.Windows.Forms.RadioButton();
             this.rb_map00 = new System.Windows.Forms.RadioButton();
-            this.rb_location14 = new System.Windows.Forms.RadioButton();
-            this.rb_location15 = new System.Windows.Forms.RadioButton();
-            this.rb_location16 = new System.Windows.Forms.RadioButton();
-            this.rb_location17 = new System.Windows.Forms.RadioButton();
-            this.rb_location18 = new System.Windows.Forms.RadioButton();
-            this.rb_location19 = new System.Windows.Forms.RadioButton();
             this.groupBox_map.SuspendLayout();
             this.groupBox_location.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -734,6 +734,61 @@
             this.groupBox_location.TabIndex = 29;
             this.groupBox_location.TabStop = false;
             this.groupBox_location.Text = "Location";
+            // 
+            // rb_location19
+            // 
+            this.rb_location19.AutoSize = true;
+            this.rb_location19.Location = new System.Drawing.Point(191, 107);
+            this.rb_location19.Name = "rb_location19";
+            this.rb_location19.Size = new System.Drawing.Size(14, 13);
+            this.rb_location19.TabIndex = 18;
+            this.rb_location19.UseVisualStyleBackColor = true;
+            // 
+            // rb_location18
+            // 
+            this.rb_location18.AutoSize = true;
+            this.rb_location18.Location = new System.Drawing.Point(191, 85);
+            this.rb_location18.Name = "rb_location18";
+            this.rb_location18.Size = new System.Drawing.Size(14, 13);
+            this.rb_location18.TabIndex = 17;
+            this.rb_location18.UseVisualStyleBackColor = true;
+            // 
+            // rb_location17
+            // 
+            this.rb_location17.AutoSize = true;
+            this.rb_location17.Location = new System.Drawing.Point(191, 68);
+            this.rb_location17.Name = "rb_location17";
+            this.rb_location17.Size = new System.Drawing.Size(14, 13);
+            this.rb_location17.TabIndex = 16;
+            this.rb_location17.UseVisualStyleBackColor = true;
+            // 
+            // rb_location16
+            // 
+            this.rb_location16.AutoSize = true;
+            this.rb_location16.Location = new System.Drawing.Point(191, 51);
+            this.rb_location16.Name = "rb_location16";
+            this.rb_location16.Size = new System.Drawing.Size(14, 13);
+            this.rb_location16.TabIndex = 15;
+            this.rb_location16.UseVisualStyleBackColor = true;
+            // 
+            // rb_location15
+            // 
+            this.rb_location15.AutoSize = true;
+            this.rb_location15.Location = new System.Drawing.Point(191, 34);
+            this.rb_location15.Name = "rb_location15";
+            this.rb_location15.Size = new System.Drawing.Size(14, 13);
+            this.rb_location15.TabIndex = 14;
+            this.rb_location15.UseVisualStyleBackColor = true;
+            // 
+            // rb_location14
+            // 
+            this.rb_location14.AutoSize = true;
+            this.rb_location14.Location = new System.Drawing.Point(191, 19);
+            this.rb_location14.Name = "rb_location14";
+            this.rb_location14.Size = new System.Drawing.Size(47, 16);
+            this.rb_location14.TabIndex = 13;
+            this.rb_location14.Text = "西藏";
+            this.rb_location14.UseVisualStyleBackColor = true;
             // 
             // rb_location13
             // 
@@ -1852,60 +1907,6 @@
             this.rb_map00.TabStop = true;
             this.rb_map00.Text = "正中";
             this.rb_map00.UseVisualStyleBackColor = true;
-            // 
-            // rb_location14
-            // 
-            this.rb_location14.AutoSize = true;
-            this.rb_location14.Location = new System.Drawing.Point(191, 19);
-            this.rb_location14.Name = "rb_location14";
-            this.rb_location14.Size = new System.Drawing.Size(14, 13);
-            this.rb_location14.TabIndex = 13;
-            this.rb_location14.UseVisualStyleBackColor = true;
-            // 
-            // rb_location15
-            // 
-            this.rb_location15.AutoSize = true;
-            this.rb_location15.Location = new System.Drawing.Point(191, 34);
-            this.rb_location15.Name = "rb_location15";
-            this.rb_location15.Size = new System.Drawing.Size(14, 13);
-            this.rb_location15.TabIndex = 14;
-            this.rb_location15.UseVisualStyleBackColor = true;
-            // 
-            // rb_location16
-            // 
-            this.rb_location16.AutoSize = true;
-            this.rb_location16.Location = new System.Drawing.Point(191, 51);
-            this.rb_location16.Name = "rb_location16";
-            this.rb_location16.Size = new System.Drawing.Size(14, 13);
-            this.rb_location16.TabIndex = 15;
-            this.rb_location16.UseVisualStyleBackColor = true;
-            // 
-            // rb_location17
-            // 
-            this.rb_location17.AutoSize = true;
-            this.rb_location17.Location = new System.Drawing.Point(191, 68);
-            this.rb_location17.Name = "rb_location17";
-            this.rb_location17.Size = new System.Drawing.Size(14, 13);
-            this.rb_location17.TabIndex = 16;
-            this.rb_location17.UseVisualStyleBackColor = true;
-            // 
-            // rb_location18
-            // 
-            this.rb_location18.AutoSize = true;
-            this.rb_location18.Location = new System.Drawing.Point(191, 85);
-            this.rb_location18.Name = "rb_location18";
-            this.rb_location18.Size = new System.Drawing.Size(14, 13);
-            this.rb_location18.TabIndex = 17;
-            this.rb_location18.UseVisualStyleBackColor = true;
-            // 
-            // rb_location19
-            // 
-            this.rb_location19.AutoSize = true;
-            this.rb_location19.Location = new System.Drawing.Point(191, 107);
-            this.rb_location19.Name = "rb_location19";
-            this.rb_location19.Size = new System.Drawing.Size(14, 13);
-            this.rb_location19.TabIndex = 18;
-            this.rb_location19.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
