@@ -11,6 +11,8 @@ using System.Xml;
 using System.Xml.Linq;  //for XNamespace, XElement
 using System.IO;
 
+//作為一個小型的數據存儲傳遞的工具——XML
+
 namespace vcs_ReadWrite_XML0_mix
 {
     public partial class Form1 : Form
@@ -79,10 +81,192 @@ namespace vcs_ReadWrite_XML0_mix
 
         private void button0_Click(object sender, EventArgs e)
         {
+            //XML讀取
+            //read_xml.xml
+
+            string filename = @"C:\______test_files\__RW\_xml\vcs_ReadWrite_XML0.xml";
+
+            //XDocument doc = XDocument.Load(Server.MapPath("html5Reader/ReaderData.xml")); 
+            StringBuilder sb = new StringBuilder();
+            XmlDocument dc = new XmlDocument();
+            dc.Load(filename);
+
+            XmlNodeList xnl = dc.SelectNodes("chapter");
+            sb.Append("<ul>");
+            readxml(xnl, sb);
+            sb.Append("</ul>");
+
+            richTextBox1.Text += sb.ToString() + "\n";
+            //this.html.InnerHtml = sb.ToString(); 
         }
 
+        private void readxml(XmlNodeList xmlnl, StringBuilder sb_)
+        {
+            richTextBox1.Text += "rrrrrr len = " + xmlnl.Count.ToString() + "\n";
+            foreach (XmlNode xl in xmlnl)
+            {
+                if (xl.ChildNodes.Count == 0)
+                {
+                    sb_.Append("<li><a>" + xl.Attributes["value"].Value + "</a></li>");
+                    richTextBox1.Text += "11111";
+                }
+                else
+                {
+                    sb_.Append("<li><a>" + xl.Attributes["value"].Value + "</a><ul>");
+                    readxml(xl.ChildNodes, sb_);
+                    sb_.Append("</ul></li>");
+                    richTextBox1.Text += "22222";
+                }
+            }
+        }
+
+
+        class Student
+        {
+            public int 学号 { get; set; }
+            public string 姓名 { get; set; }
+            public int 成绩 { get; set; }
+        }
+
+        //XML文件的創建、讀取和寫入
+        class XmlProcess
+        {
+            //創建一個XML對象
+            XmlDocument xmlDoc;
+
+            //定義一個結點對象
+            XmlNode node;
+
+            //獲取當前工作目錄路徑
+            string workDir = Directory.GetCurrentDirectory();
+
+            List<Student> stuList = new List<Student>();
+
+
+            //定義一個元素
+            XmlElement xmlEle;
+            public void CreatNewXml()
+            {
+                //在工作目錄下創建一個XML文件
+                //實例化XML對象
+                xmlDoc = new XmlDocument();
+
+                //加入XML文件的聲明段落，,<?xml version="1.0" encoding="gb2312"?>
+                XmlDeclaration xmlDecl;
+                xmlDecl = xmlDoc.CreateXmlDeclaration("1.0", "gb2312", null);
+                xmlDoc.AppendChild(xmlDecl);
+
+                //加入一個根元素
+                xmlEle = xmlDoc.CreateElement("", "成績表", "");
+                xmlDoc.AppendChild(xmlEle);
+                //獲取根結點
+                XmlNode root = xmlDoc.SelectSingleNode("成績表");
+
+                //添加一個學生記錄
+                XmlElement stu1 = xmlDoc.CreateElement("學員1");
+
+                XmlElement stuNo = xmlDoc.CreateElement("學號");
+                stuNo.InnerText = "1001";
+                XmlElement stuName = xmlDoc.CreateElement("姓名");
+                stuName.InnerText = "abc";
+                XmlElement stuGrade = xmlDoc.CreateElement("成績");
+                stuGrade.InnerText = "96";
+                stu1.AppendChild(stuNo);
+                stu1.AppendChild(stuName);
+                stu1.AppendChild(stuGrade);
+                root.AppendChild(stu1);
+
+                //添加第二個學生記錄
+                XmlElement stu2 = xmlDoc.CreateElement("學員2");
+
+                stuNo = xmlDoc.CreateElement("學號");
+                stuNo.InnerText = "1002";
+                stuName = xmlDoc.CreateElement("姓名");
+                stuName.InnerText = "abcd";
+                stuGrade = xmlDoc.CreateElement("成績");
+                stuGrade.InnerText = "90";
+                stu2.AppendChild(stuNo);
+                stu2.AppendChild(stuName);
+                stu2.AppendChild(stuGrade);
+                root.AppendChild(stu2);
+
+                //以上為手動添加XML文件的方法，用於創建並書寫XML文件
+                //還可以使用XmlTextWriter對象輸出數據流
+
+
+                //生成並保存XML文件
+                xmlDoc.Save(workDir + "\\StudentGrade.xml");
+            }
+
+
+            public void DataIn(string fileName)
+            {
+                xmlDoc = new XmlDocument();
+
+                //载入XML文件
+                xmlDoc.Load(fileName);
+                //获取根结点
+                XmlNodeList nodes = xmlDoc.SelectNodes("/成绩表");
+                for (int i = 0; i < nodes.Count; i++)
+                {
+                    //获取学生信息的结点总数
+                    XmlNodeList nls = nodes[i].ChildNodes;
+
+                    //循环填充学生实例的各个字段
+                    for (int j = 0; j < nls.Count; j++)
+                    {
+                        //创建学生类实例
+                        Student stu = new Student();
+
+                        node = nls[j].SelectSingleNode("学号");
+                        stu.学号 = int.Parse(node.InnerText);
+
+                        node = nls[j].SelectSingleNode("姓名");
+                        stu.姓名 = node.InnerText;
+
+                        node = nls[j].SelectSingleNode("成绩");
+                        stu.成绩 = int.Parse(node.InnerText);
+                        stuList.Add(stu);
+                    }
+                }
+            }
+
+            public void DataOut()
+            {
+                //输出学生信息
+                for (int i = 0; i < stuList.Count; i++)
+                {
+                    Student stu = stuList[i];
+                    Console.WriteLine(stu.学号.ToString() + "  " + stu.姓名 + "  " + stu.成绩.ToString());
+                }
+            }
+            /**/
+            /*
+    public void WriteXml()
+    {
+        XmlTextWriter writer = new XmlTextWriter(workDir + "\\test.xml", Encoding.Default);
+        writer.Formatting = Formatting.Indented;
+        writer.WriteStartDocument();           
+        writer.WriteStartElement("学员");
+        writer.WriteElementString("学号", "110");
+        writer.WriteEndElement();
+        writer.WriteEndDocument();
+        writer.Flush();
+        writer.Close();
+    }
+    */
+        }
+ 
         private void button1_Click(object sender, EventArgs e)
         {
+            //XML文件的創建、讀取和寫入
+
+            XmlProcess xml = new XmlProcess();
+            xml.CreatNewXml();
+
+            string filename = @"C:\______test_files\__RW\_xml\vcs_ReadWrite_XML0b.xml";
+            xml.DataIn(filename);
+            xml.DataOut();
         }
 
         private void button2_Click(object sender, EventArgs e)

@@ -932,8 +932,6 @@ namespace vcs_ColorMap
         {
             //生成Color類所有static預定義成員的顏色表
 
-            //生成Color類所有static預定義成員的顏色表
-
             const long CELLS_PER_LINE = 10;
 
             const float MARGIN = 12;

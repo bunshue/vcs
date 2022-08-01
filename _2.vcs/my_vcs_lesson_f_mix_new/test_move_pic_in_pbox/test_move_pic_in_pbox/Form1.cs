@@ -30,6 +30,8 @@ namespace test_move_pic_in_pbox
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             pt_picture_position = new Point(0, 0);
             W = pictureBox1.Width;
             H = pictureBox1.Height;
@@ -58,6 +60,83 @@ namespace test_move_pic_in_pbox
             pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
             pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
             pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
+        }
+
+        void show_item_location()
+        {
+            //控件位置
+            //bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            //最大化螢幕
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+
+            //離開按鈕的寫法
+            bt_exit_setup();
+
+            //最小化按鈕的寫法
+            bt_minimize_setup();
+        }
+
+        void bt_exit_setup()
+        {
+            int width = 5;
+            int w = 50; //設定按鈕大小 W
+            int h = 50; //設定按鈕大小 H
+
+            Button bt_exit = new Button();  // 實例化按鈕
+            bt_exit.Size = new Size(w, h);
+            bt_exit.Text = "";
+            Bitmap bmp = new Bitmap(w, h);
+            Graphics g = Graphics.FromImage(bmp);
+            Pen p = new Pen(Color.Red, width);
+            g.Clear(Color.Pink);
+            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
+            g.DrawLine(p, 0, 0, w - 1, h - 1);
+            g.DrawLine(p, w - 1, 0, 0, h - 1);
+            bt_exit.Image = bmp;
+
+            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
+            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
+
+            this.Controls.Add(bt_exit); // 將按鈕加入表單
+            bt_exit.BringToFront();     //移到最上層
+        }
+
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        void bt_minimize_setup()
+        {
+            int width = 5;
+            int w = 50; //設定按鈕大小 W
+            int h = 50; //設定按鈕大小 H
+
+            Button bt_minimize = new Button();  // 實例化按鈕
+            bt_minimize.Size = new Size(w, h);
+            bt_minimize.Text = "";
+            Bitmap bmp = new Bitmap(w, h);
+            Graphics g = Graphics.FromImage(bmp);
+            Pen p = new Pen(Color.Red, width);
+            g.Clear(Color.Pink);
+            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
+            //g.DrawLine(p, 0, 0, w - 1, h - 1);
+            //g.DrawLine(p, w - 1, 0, 0, h - 1);
+            g.DrawLine(p, w / 4, h / 2 - 1, w * 3 / 4, h / 2 - 1);
+            bt_minimize.Image = bmp;
+
+            bt_minimize.Location = new Point(this.ClientSize.Width - bt_minimize.Width * 2 - 2, 0);
+            bt_minimize.Click += bt_minimize_Click;     // 加入按鈕事件
+
+            this.Controls.Add(bt_minimize); // 將按鈕加入表單
+            bt_minimize.BringToFront();     //移到最上層
+        }
+
+        private void bt_minimize_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;   //設定表單最小化
         }
 
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
@@ -163,7 +242,7 @@ namespace test_move_pic_in_pbox
 
             pt_st = e.Location;
         }
-
-
     }
 }
+
+
