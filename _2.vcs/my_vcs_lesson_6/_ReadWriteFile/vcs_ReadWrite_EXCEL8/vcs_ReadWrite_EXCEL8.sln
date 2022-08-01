@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "read_excel_romeo", "read_excel_romeo\read_excel_romeo.csproj", "{EBE57F9E-BCF4-4BEC-907F-B8EA23B8F164}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_ReadWrite_EXCEL8", "vcs_ReadWrite_EXCEL8\vcs_ReadWrite_EXCEL8.csproj", "{EBE57F9E-BCF4-4BEC-907F-B8EA23B8F164}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

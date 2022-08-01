@@ -10,10 +10,9 @@ using System.Windows.Forms;
 using System.IO;
 using System.Data.OleDb; 
 
-
 //用using就好  不用 參考/加入參考 romeo
 
-namespace read_excel_romeo
+namespace vcs_ReadWrite_EXCEL8
 {
     public partial class Form1 : Form
     {

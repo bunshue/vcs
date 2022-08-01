@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Drawing2D;
+using System.Drawing.Drawing2D;   //for DashStyle
 
 namespace draw_rectangle
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\elephant.jpg";
+        string filename = @"C:\______test_files\picture1.jpg";
 
         private bool flag_mouse_down = false;
         private int intStartX = 0;

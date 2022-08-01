@@ -100,14 +100,22 @@ namespace vcs_RandomWalk
 
             int W = pictureBox1.Width;
             int H = pictureBox1.Height;
+
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);
+            Pen p1 = new Pen(Color.Gray, 5);
+            Pen p2 = new Pen(Color.Red, 1);
+
+            e.Graphics.DrawRectangle(p2, 0, 0, W - 1, H - 1);
+
             int i;
             for (i = 0; i < W; i += dd)
             {
-                e.Graphics.DrawLine(Pens.Gray, i, 0, i, H);
+                e.Graphics.DrawLine(p1, i, 0, i, H);
             }
             for (i = 0; i < H; i += dd)
             {
-                e.Graphics.DrawLine(Pens.Gray, 0, i, W, i);
+                e.Graphics.DrawLine(p1, 0, i, W, i);
 
             }
 

@@ -21,6 +21,17 @@ namespace draw_rectangle2
         private int intStartX = 0;
         private int intStartY = 0;
 
+        private Point pt_st = Point.Empty;//記錄鼠標按下時的坐標，用來確定繪圖起點
+        private Point pt_sp = Point.Empty;//記錄鼠標放開時的坐標，用來確定繪圖終點
+        private Bitmap bitmap1 = null;  //原圖位圖Bitmap
+        private Bitmap bitmap2 = null;  //擷取部分位圖Bitmap
+        private Rectangle SelectionRectangle = new Rectangle(new Point(0, 0), new Size(0, 0));    //用來保存截圖的矩形
+
+        private int W = 0;  //原圖的寬
+        private int H = 0;  //原圖的高
+        //private int w = 0;  //擷取圖的寬
+        //private int h = 0;  //擷取圖的高
+
         public Form1()
         {
             InitializeComponent();
@@ -39,14 +50,14 @@ namespace draw_rectangle2
             pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
         }
 
-        void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             flag_mouse_down = true;
             intStartX = e.X;
             intStartY = e.Y;
         }
 
-        void pictureBox1_MouseMove(object sender, MouseEventArgs e)
+        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if (flag_mouse_down == true)
             {
@@ -75,7 +86,7 @@ namespace draw_rectangle2
             }
         }
 
-        void pictureBox1_MouseUp(object sender, MouseEventArgs e)
+        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
             flag_mouse_down = false;
             intStartX = 0;

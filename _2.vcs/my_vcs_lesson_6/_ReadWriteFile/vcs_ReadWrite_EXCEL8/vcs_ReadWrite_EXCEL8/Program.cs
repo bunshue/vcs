@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_draw_color_wheel
+namespace vcs_ReadWrite_EXCEL8
 {
     static class Program
     {

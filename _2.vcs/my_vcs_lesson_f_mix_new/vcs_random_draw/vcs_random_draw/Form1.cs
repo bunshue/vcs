@@ -28,7 +28,6 @@ namespace vcs_random_draw
         private void timer1_Tick(object sender, EventArgs e)
         {
             pictureBox1.Invalidate();
-
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -42,31 +41,23 @@ namespace vcs_random_draw
             int dy = (H - border * 2) / ny;
 
             Bitmap bitmap1 = new Bitmap(W, H);
-
             Graphics g = Graphics.FromImage(bitmap1);
-
             Pen p1 = new Pen(Color.Gray, 5);
+            Pen p2 = new Pen(Color.Red, 1);
+
+            g.DrawRectangle(p2, 0, 0, W - 1, H - 1);
 
             int i;
-
-            g.DrawRectangle(Pens.Red, 0, 0, W - 1, H - 1);
             for (i = 0; i <= ny; i++)
             {
-                g.DrawLine(p1, border + 0, border + dy * i, W - border, border+dy * i);
+                g.DrawLine(p1, border + 0, border + dy * i, W - border, border + dy * i);
             }
 
             for (i = 0; i <= ny; i++)
             {
                 g.DrawLine(p1, border + dx * i, border, border + dx * i, H - border);
             }
-
-
-
-
-
-
             pictureBox1.Image = bitmap1;
         }
-
     }
 }
