@@ -66,6 +66,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(160, 70);
             this.button15.TabIndex = 33;
+            this.button15.Text = "DataTable中使用Order By排序與Where過濾";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
@@ -300,6 +301,7 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(160, 70);
             this.button17.TabIndex = 43;
+            this.button17.Text = "DataTable常用方法";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 

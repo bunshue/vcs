@@ -529,6 +529,7 @@
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(120, 42);
             this.button31.TabIndex = 56;
+            this.button31.Text = "透明色 累加 與 不累加";
             this.button31.UseVisualStyleBackColor = true;
             this.button31.Click += new System.EventHandler(this.button31_Click);
             // 

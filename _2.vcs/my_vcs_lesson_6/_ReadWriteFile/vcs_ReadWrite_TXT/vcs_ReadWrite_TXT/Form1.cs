@@ -34,6 +34,24 @@ namespace vcs_ReadWrite_TXT
             richTextBox2.Clear();
         }
 
+        private void button0_Click(object sender, EventArgs e)
+        {
+            //ReadAllLines
+
+            string filename = @"C:\______test_files\__RW\_txt\article.txt";
+
+            StringBuilder sb = new StringBuilder();
+
+            string[] Txt_All_Lines = File.ReadAllLines(filename, Encoding.Default);
+
+            foreach (string Single_Line in Txt_All_Lines)
+            {
+                sb.AppendLine(Single_Line);
+            }
+
+            richTextBox1.Text += sb.ToString() + "\n";
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             String filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
@@ -84,38 +102,6 @@ namespace vcs_ReadWrite_TXT
             string y = File.ReadAllText(filename, Encoding.Default);
             richTextBox1.Text += "檔案內容 : " + y + "\n";
             richTextBox1.Text += "長度：" + y.Length.ToString() + "\n";
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-            string filename = "C:\\______test_files\\__RW\\_txt\\琵琶行.txt";
-            try
-            {
-                StreamReader sr = new StreamReader(filename, Encoding.Default);
-                string line = string.Empty;
-                int i = 0;
-
-                /*
-                while (!sr.EndOfStream)
-                {               // 每次讀取一行，直到檔尾
-                    line = sr.ReadLine();            // 讀取文字到 line 變數
-                    if (line.Length > 0)
-                    {
-                    }
-                }
-                */
-
-                while ((line = sr.ReadLine()) != null)  // 讀取文字到 line 變數
-                {
-                    i++;
-                    richTextBox2.Text += "第" + i.ToString() + "行\t" + line + "\tlength:" + line.Length.ToString() + "\n";
-                }
-                sr.Close();
-            }
-            catch (System.IO.FileNotFoundException)
-            {
-                MessageBox.Show("找不到檔案");
-            }
         }
 
         private const int ENCODING_1 = 1;	//encoding type 1, big5
@@ -189,45 +175,36 @@ namespace vcs_ReadWrite_TXT
         {
         }
 
-        private void button13_Click(object sender, EventArgs e)
+        private void button9_Click(object sender, EventArgs e)
         {
-            string filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".big5.txt";
-            write_text_file(filename, ENCODING_1);
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-            string filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".gb2312.txt";
-            write_text_file(filename, ENCODING_2);
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-            string filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".shift_jis.txt";
-            //write_text_file(filename, ENCODING_3);
-
-            int i;
-            //都はるみ全曲集２	shift_jis
-            //byte[] data = { 0x93, 0x73, 0x82, 0xCD, 0x82, 0xE9, 0x82, 0xDD, 0x91, 0x53, 0x8B, 0xC8, 0x8F, 0x57, 0x82, 0x51 };
-
-            //都はるみの三度笠
-            byte[] data = { 0x93, 0x73, 0x82, 0xCD, 0x82, 0xE9, 0x82, 0xDD, 0x82, 0xCC, 0x8E, 0x4F, 0x93, 0x78, 0x8A, 0x7D };
-
-            string str = Encoding.ASCII.GetString(data);
-            richTextBox1.Text += "str = " + str + "\n";
-            string filename2 = str + ".txt";
-
-            int len = data.Length;
-            richTextBox1.Text += "len = " + len.ToString() + "\n";
-
-            byte[] aaaaa = new byte[len];
-            for (i = 0; i < len; i++)
+            string filename = "C:\\______test_files\\__RW\\_txt\\琵琶行.txt";
+            try
             {
-                aaaaa[i] = data[i];
+                StreamReader sr = new StreamReader(filename, Encoding.Default);
+                string line = string.Empty;
+                int i = 0;
+
+                /*
+                while (!sr.EndOfStream)
+                {               // 每次讀取一行，直到檔尾
+                    line = sr.ReadLine();            // 讀取文字到 line 變數
+                    if (line.Length > 0)
+                    {
+                    }
+                }
+                */
+
+                while ((line = sr.ReadLine()) != null)  // 讀取文字到 line 變數
+                {
+                    i++;
+                    richTextBox2.Text += "第" + i.ToString() + "行\t" + line + "\tlength:" + line.Length.ToString() + "\n";
+                }
+                sr.Close();
             }
-            File.WriteAllBytes(filename, aaaaa);
-            //File.WriteAllBytes(filename2, aaaaa);
-            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename + "\n";
+            catch (System.IO.FileNotFoundException)
+            {
+                MessageBox.Show("找不到檔案");
+            }
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -321,6 +298,47 @@ namespace vcs_ReadWrite_TXT
                     break;
             }
             richTextBox1.Text += "\n存檔完成, 檔名 : " + filename + "\n";
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            string filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".shift_jis.txt";
+            //write_text_file(filename, ENCODING_3);
+
+            int i;
+            //都はるみ全曲集２	shift_jis
+            //byte[] data = { 0x93, 0x73, 0x82, 0xCD, 0x82, 0xE9, 0x82, 0xDD, 0x91, 0x53, 0x8B, 0xC8, 0x8F, 0x57, 0x82, 0x51 };
+
+            //都はるみの三度笠
+            byte[] data = { 0x93, 0x73, 0x82, 0xCD, 0x82, 0xE9, 0x82, 0xDD, 0x82, 0xCC, 0x8E, 0x4F, 0x93, 0x78, 0x8A, 0x7D };
+
+            string str = Encoding.ASCII.GetString(data);
+            richTextBox1.Text += "str = " + str + "\n";
+            string filename2 = str + ".txt";
+
+            int len = data.Length;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+
+            byte[] aaaaa = new byte[len];
+            for (i = 0; i < len; i++)
+            {
+                aaaaa[i] = data[i];
+            }
+            File.WriteAllBytes(filename, aaaaa);
+            //File.WriteAllBytes(filename2, aaaaa);
+            richTextBox1.Text += "\n存檔完成, 檔名 : " + filename + "\n";
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            string filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".gb2312.txt";
+            write_text_file(filename, ENCODING_2);
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            string filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".big5.txt";
+            write_text_file(filename, ENCODING_1);
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -577,6 +595,38 @@ namespace vcs_ReadWrite_TXT
             richTextBox1.Text += "共取得了 " + i.ToString() + " 筆資料\n";
         }
 
+        private void button23_Click(object sender, EventArgs e)
+        {
 
+        }
+
+        private void button24_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button25_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+        }
     }
 }

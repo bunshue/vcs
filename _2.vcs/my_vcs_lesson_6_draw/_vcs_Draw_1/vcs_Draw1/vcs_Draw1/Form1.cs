@@ -1789,6 +1789,34 @@ namespace vcs_Draw1
 
         private void button31_Click(object sender, EventArgs e)
         {
+            if (bitmap1 == null)
+            {
+                open_new_file();
+            }
+
+            Color red = Color.FromArgb(0x30, 0xff, 0, 0);
+            Brush redBrush = new SolidBrush(red);
+
+            int i;
+            for (i = 0; i < 400; i += 30)
+            {
+                g.FillRectangle(redBrush, i, 0, 200, 200);
+
+                g.DrawRectangle(Pens.Black, i, 0, 200, 200);
+
+            }
+
+            //若使用下行, 則透明色不累加
+            g.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceCopy;
+
+            for (i = 0; i < 400; i += 30)
+            {
+                g.FillRectangle(redBrush, i, 220, 200, 200);
+
+                g.DrawRectangle(Pens.Black, i, 220, 200, 200);
+
+            }
+            pictureBox1.Image = bitmap1;
         }
 
         //在線的上下畫字

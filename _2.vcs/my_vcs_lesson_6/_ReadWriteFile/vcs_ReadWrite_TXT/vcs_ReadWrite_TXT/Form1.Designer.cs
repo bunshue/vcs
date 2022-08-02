@@ -330,7 +330,9 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(180, 60);
             this.button0.TabIndex = 24;
+            this.button0.Text = "ReadAllLines";
             this.button0.UseVisualStyleBackColor = true;
+            this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
             // button23
             // 
@@ -340,6 +342,7 @@
             this.button23.Size = new System.Drawing.Size(180, 60);
             this.button23.TabIndex = 25;
             this.button23.UseVisualStyleBackColor = true;
+            this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
             // button24
             // 
@@ -349,6 +352,7 @@
             this.button24.Size = new System.Drawing.Size(180, 60);
             this.button24.TabIndex = 26;
             this.button24.UseVisualStyleBackColor = true;
+            this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
             // button25
             // 
@@ -358,6 +362,7 @@
             this.button25.Size = new System.Drawing.Size(180, 60);
             this.button25.TabIndex = 27;
             this.button25.UseVisualStyleBackColor = true;
+            this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
             // button26
             // 
@@ -367,6 +372,7 @@
             this.button26.Size = new System.Drawing.Size(180, 60);
             this.button26.TabIndex = 28;
             this.button26.UseVisualStyleBackColor = true;
+            this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
             // button27
             // 
@@ -376,6 +382,7 @@
             this.button27.Size = new System.Drawing.Size(180, 60);
             this.button27.TabIndex = 29;
             this.button27.UseVisualStyleBackColor = true;
+            this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
             // button28
             // 
@@ -385,6 +392,7 @@
             this.button28.Size = new System.Drawing.Size(180, 60);
             this.button28.TabIndex = 30;
             this.button28.UseVisualStyleBackColor = true;
+            this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
             // button29
             // 
@@ -394,6 +402,7 @@
             this.button29.Size = new System.Drawing.Size(180, 60);
             this.button29.TabIndex = 31;
             this.button29.UseVisualStyleBackColor = true;
+            this.button29.Click += new System.EventHandler(this.button29_Click);
             // 
             // bt_clear1
             // 
