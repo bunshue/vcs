@@ -143,7 +143,6 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(170, 70);
             this.button22.TabIndex = 109;
-            this.button22.Text = "將純文字檔拆成一行一行的字串陣列";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
@@ -209,7 +208,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(170, 70);
             this.button13.TabIndex = 103;
-            this.button13.Text = "一行一行讀取文字檔";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 

@@ -660,53 +660,6 @@ namespace vcs_Mix01
         private void button22_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            string filepath = "this is filepath";
-            string timer = "ttttt 1";
-            string timer2 = "ttttt 2";
-            string username = "david";
-            string pwd = "123456";
-
-            StreamWriter sw = new StreamWriter("info.txt");
-            sw.WriteLine(filepath);
-            sw.Flush();
-            sw.WriteLine(timer);
-            sw.Flush();
-            sw.WriteLine(timer2);
-            sw.Flush();
-            sw.WriteLine(username);
-            sw.Flush();
-            sw.WriteLine(pwd);
-            sw.Flush();
-            sw.Close();
-            richTextBox1.Text += "寫入成功!\n";
-
-            string filepathb = string.Empty;
-            string timerb = string.Empty;
-            string timer2b = string.Empty;
-            string usernameb = string.Empty;
-            string pwdb = string.Empty;
-
-            StreamReader sr = new StreamReader("info.txt");
-
-
-            filepathb = sr.ReadLine();
-            timerb = sr.ReadLine();
-            timer2b = sr.ReadLine();
-            usernameb = sr.ReadLine();
-            pwdb = sr.ReadLine();
-
-            sr.Close();
-            sr.Dispose();
-            GC.Collect();
-
-
-            richTextBox1.Text += "filepathb = " + filepathb + "\n";
-            richTextBox1.Text += "timerb = " + timerb + "\n";
-            richTextBox1.Text += "timer2b = " + timer2b + "\n";
-            richTextBox1.Text += "usernameb = " + usernameb + "\n";
-            richTextBox1.Text += "pwdb = " + pwdb + "\n";
-
         }
 
         private void button23_Click(object sender, EventArgs e)

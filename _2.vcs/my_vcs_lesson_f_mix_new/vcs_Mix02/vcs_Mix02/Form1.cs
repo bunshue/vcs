@@ -690,16 +690,6 @@ namespace vcs_Mix02
         private void button13_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //一行一行讀取文字檔
-            string filename = @"C:\______test_files\_case1\_case1a\_case1aa\eula.3081a.txt";
-
-            StreamReader SReader = new StreamReader(filename, Encoding.Default);
-            string strLine = string.Empty;
-            while ((strLine = SReader.ReadLine()) != null)
-            {
-                richTextBox1.Text += strLine + "\n";
-            }
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -892,20 +882,6 @@ namespace vcs_Mix02
         private void button22_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //將純文字檔拆成一行一行的字串陣列, 可以去除前後空白
-            string filename = @"C:\______test_files\__RW\_txt\poem.txt";
-            string[] patterns;
-            patterns = File.ReadAllLines(filename).Select(i => i.Trim()).Where(i => i != string.Empty).ToArray();
-            int len = patterns.Length;
-            //richTextBox1.Text += "len = " + len.ToString() + "\n";
-            int ii;
-            for (ii = 0; ii < len; ii++)
-            {
-                richTextBox1.Text += patterns[ii] + "\n";
-            }
-
-
         }
 
         private void button23_Click(object sender, EventArgs e)

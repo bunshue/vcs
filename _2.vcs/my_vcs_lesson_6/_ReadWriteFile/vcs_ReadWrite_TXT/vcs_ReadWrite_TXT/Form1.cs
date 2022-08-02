@@ -173,6 +173,17 @@ namespace vcs_ReadWrite_TXT
 
         private void button8_Click(object sender, EventArgs e)
         {
+            //將純文字檔拆成一行一行的字串陣列, 可以去除前後空白
+            string filename = @"C:\______test_files\__RW\_txt\poem.txt";
+            string[] patterns;
+            patterns = File.ReadAllLines(filename).Select(i => i.Trim()).Where(i => i != string.Empty).ToArray();
+            int len = patterns.Length;
+            //richTextBox1.Text += "len = " + len.ToString() + "\n";
+            int ii;
+            for (ii = 0; ii < len; ii++)
+            {
+                richTextBox1.Text += patterns[ii] + "\n";
+            }
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -597,12 +608,65 @@ namespace vcs_ReadWrite_TXT
 
         private void button23_Click(object sender, EventArgs e)
         {
+            //一行一行讀取文字檔
+            string filename = @"C:\______test_files\_case1\_case1a\_case1aa\eula.3081a.txt";
 
+            StreamReader SReader = new StreamReader(filename, Encoding.Default);
+            string strLine = string.Empty;
+            while ((strLine = SReader.ReadLine()) != null)
+            {
+                richTextBox1.Text += strLine + "\n";
+            }
         }
 
         private void button24_Click(object sender, EventArgs e)
         {
+            //RW test
 
+
+            string filepath = "this is filepath";
+            string timer = "ttttt 1";
+            string timer2 = "ttttt 2";
+            string username = "david";
+            string pwd = "123456";
+
+            StreamWriter sw = new StreamWriter("info.txt");
+            sw.WriteLine(filepath);
+            sw.Flush();
+            sw.WriteLine(timer);
+            sw.Flush();
+            sw.WriteLine(timer2);
+            sw.Flush();
+            sw.WriteLine(username);
+            sw.Flush();
+            sw.WriteLine(pwd);
+            sw.Flush();
+            sw.Close();
+            richTextBox1.Text += "寫入成功!\n";
+
+            string filepathb = string.Empty;
+            string timerb = string.Empty;
+            string timer2b = string.Empty;
+            string usernameb = string.Empty;
+            string pwdb = string.Empty;
+
+            StreamReader sr = new StreamReader("info.txt");
+
+            filepathb = sr.ReadLine();
+            timerb = sr.ReadLine();
+            timer2b = sr.ReadLine();
+            usernameb = sr.ReadLine();
+            pwdb = sr.ReadLine();
+
+            sr.Close();
+            sr.Dispose();
+            GC.Collect();
+
+            richTextBox1.Text += "filepathb = " + filepathb + "\n";
+            richTextBox1.Text += "timerb = " + timerb + "\n";
+            richTextBox1.Text += "timer2b = " + timer2b + "\n";
+            richTextBox1.Text += "usernameb = " + usernameb + "\n";
+            richTextBox1.Text += "pwdb = " + pwdb + "\n";
         }
 
         private void button25_Click(object sender, EventArgs e)

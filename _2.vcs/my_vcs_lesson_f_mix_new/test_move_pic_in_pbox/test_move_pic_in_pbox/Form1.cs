@@ -64,6 +64,12 @@ namespace test_move_pic_in_pbox
 
         void show_item_location()
         {
+            richTextBox1.Location = new Point(1650,10);
+            //richTextBox1.Visible = false;
+
+            pictureBox1.Size = new Size(1600, 900);
+            pictureBox1.Location = new Point(10, 10);
+
             //控件位置
             //bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
