@@ -23,6 +23,16 @@ namespace vcs_ReadWrite_EXCEL1
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             // 設定儲存檔名，不用設定副檔名，系統自動判斷 excel 版本，產生 .xls 或 .xlsx 副檔名
@@ -211,15 +221,162 @@ namespace vcs_ReadWrite_EXCEL1
 
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
+            //讀取EXCEL檔案到dataGridView
+            //sugar can not use this
+            //Excel數據導入到dataGridView
+            //http://weisico.com/program/2018/0531/370.html
+
+            string filename = "c:\\______test_files\\__RW\\_excel\\vcs_ReadWrite_EXCEL2.xls";
+
+            try
+            {
+                string tableName = GetExcelFirstTableName(filename);
+                richTextBox1.Text += "tableName = " + tableName + "\n";
+                //设置T_Sql
+                string TSql = "SELECT  * FROM [" + tableName + "]";
+                richTextBox1.Text += "TSql = " + TSql + "\n";
+                //读取数据
+                DataTable table = ExcelToDataSet(filename, TSql).Tables[0];
+                dataGridView1.DataSource = table;
+
+                int cols = table.Columns.Count;
+                int rows = table.Rows.Count;
+                richTextBox1.Text += "cols = " + cols.ToString() + "\n";
+                richTextBox1.Text += "rows = " + rows.ToString() + "\n";
+                int i;
+                int j;
+                for (i = 0; i < cols; i++)
+                {
+                    richTextBox1.Text += table.Columns[i] + "\t";
+                }
+                richTextBox1.Text += "\n";
+                for (i = 0; i < rows; i++)
+                {
+                    for (j = 0; j < cols; j++)
+                    {
+                        richTextBox1.Text += table.Rows[i][j] + "\t";
+                    }
+                    richTextBox1.Text += "\n";
+                }
+                richTextBox1.Text += "\n";
+            }
+            catch (Exception ex)
+            { MessageBox.Show(ex.Message); }
+
 
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
 
+        /// <summary>
+        /// 动态取Excel表名
+        /// </summary>
+        /// <param name="fullPath">文件路径</param>
+        /// <returns></returns>
+        public string GetExcelFirstTableName(string fullPath)
+        {
+            string tableName = null;
+            if (File.Exists(fullPath))
+            {
+                using (OleDbConnection conn = new OleDbConnection("Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Excel 8.0;Data Source=" + fullPath))
+                {
+                    conn.Open();
+
+                    richTextBox1.Text += "t0 = " + conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null).Rows[0][0].ToString().Trim() + "\n";
+                    richTextBox1.Text += "t1 = " + conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null).Rows[0][1].ToString().Trim() + "\n";
+
+                    richTextBox1.Text += "s1 = " + conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null).Rows[0][2].ToString().Trim() + "\n";
+                    richTextBox1.Text += "s2 = " + conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null).Rows[1][2].ToString().Trim() + "\n";
+                    richTextBox1.Text += "s3 = " + conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null).Rows[2][2].ToString().Trim() + "\n";
+
+                    richTextBox1.Text += "t3 = " + conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null).Rows[0][3].ToString().Trim() + "\n";
+
+                    richTextBox1.Text += "\n\n";
+
+                    tableName = conn.GetOleDbSchemaTable(OleDbSchemaGuid.Tables, null).Rows[0][2].ToString().Trim();
+                    richTextBox1.Text += "GetExcelFirstTableName tableName = " + tableName + "\n";
+                }
+            }
+            return tableName;
+        }
+
+
+        /// <summary>
+        /// 返回Excel数据源
+        /// </summary>
+        /// <param name="filename">文件路径</param>
+        /// <param name="TSql">TSql</param>
+        /// <returns>DataSet</returns>
+        public static DataSet ExcelToDataSet(string filename, string TSql)
+        {
+            DataSet ds;
+            string strCon = "Provider=Microsoft.Jet.OLEDB.4.0;Extended Properties=Excel 8.0;data source=" + filename;
+            OleDbConnection myConn = new OleDbConnection(strCon);
+            string strCom = TSql;
+            myConn.Open();
+            OleDbDataAdapter myCommand = new OleDbDataAdapter(strCom, myConn);
+            ds = new DataSet();
+            myCommand.Fill(ds);
+            myConn.Close();
+            return ds;
+        }
+
+
+        //配置Excel的OleDb連接字符串
+        public const string OledbConnString = "Provider = Microsoft.Jet.OLEDB.4.0 ; Data Source = {0};Extended Properties='Excel 8.0;HDR=Yes;IMEX=1;'"; //Excel的 OleDb 連接字符串
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //讀取EXCEL檔案到dataGridView
+            //another
+            //C# Excel文件導入操作
+            string filename = @"C:\______test_files\__RW\_excel\excel_test_data.xls";
+
+            richTextBox1.Text += "開啟檔案 : " + filename + "\n";
+
+            DataTable excelTbl = this.GetExcelTable(filename);  //調用函數獲取Excel中的信息
+            if (excelTbl == null)
+            {
+                return;
+            }
+
+            dataGridView1.DataSource = excelTbl;
+
+
+        }
+
+        /// 
+        /// 獲取Excel文件中的信息，保存到一個DataTable中
+        /// 
+
+        /// 文件路徑
+        /// 返回生成的DataTable
+        private DataTable GetExcelTable(string path)
+        {
+            try
+            {
+                //獲取excel數據
+                DataTable dt1 = new DataTable("excelTable");
+                string strConn = string.Format(OledbConnString, path);
+                OleDbConnection conn = new OleDbConnection(strConn);
+                conn.Open();
+                DataTable dt = conn.GetSchema("Tables");
+                //判斷excel的sheet頁數量，查詢第1頁
+                if (dt.Rows.Count > 0)
+                {
+                    string selSqlStr = string.Format("select * from [{0}]", dt.Rows[0]["TABLE_NAME"]);
+                    OleDbDataAdapter oleDa = new OleDbDataAdapter(selSqlStr, conn);
+                    oleDa.Fill(dt1);
+                }
+                conn.Close();
+                return dt1;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Excel轉換DataTable出錯：" + ex.Message);
+                return null;
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -244,5 +401,9 @@ namespace vcs_ReadWrite_EXCEL1
             sw.Close();     //寫入Excel檔資料
             richTextBox1.Text += "製作Excel檔案於: " + filename + "，此檔不能用程式讀取。" + Environment.NewLine;
         }
+
+
+
+
     }
 }
