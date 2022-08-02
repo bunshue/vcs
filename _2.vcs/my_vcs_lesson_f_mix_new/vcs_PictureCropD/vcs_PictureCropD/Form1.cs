@@ -79,7 +79,6 @@ namespace vcs_PictureCropD
             return new Rectangle(Math.Min(pt1.X, pt2.X), Math.Min(pt1.Y, pt2.Y), Math.Abs(pt1.X - pt2.X), Math.Abs(pt1.Y - pt2.Y));
         }
 
-
         // Start selecting the rectangle.
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {

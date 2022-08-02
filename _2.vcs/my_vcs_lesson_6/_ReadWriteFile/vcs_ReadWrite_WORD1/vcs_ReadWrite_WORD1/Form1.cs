@@ -69,6 +69,11 @@ namespace vcs_ReadWrite_WORD1
 
             richTextBox1.Text += "完成\n";
         }
+
+        private void btnGo_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

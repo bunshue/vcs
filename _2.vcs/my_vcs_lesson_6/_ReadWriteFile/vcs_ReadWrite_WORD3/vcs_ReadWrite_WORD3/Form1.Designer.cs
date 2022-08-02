@@ -83,7 +83,7 @@
             // btnMakeChart
             // 
             this.btnMakeChart.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.btnMakeChart.Location = new System.Drawing.Point(227, 106);
+            this.btnMakeChart.Location = new System.Drawing.Point(14, 110);
             this.btnMakeChart.Name = "btnMakeChart";
             this.btnMakeChart.Size = new System.Drawing.Size(108, 52);
             this.btnMakeChart.TabIndex = 4;

@@ -16,11 +16,12 @@ namespace vcs_ListBox1_CheckedListBox
         public Form1()
         {
             InitializeComponent();
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
             string[] itemStr = { "ListBox項目1", "ListBox項目2", "ListBox項目3", "ListBox項目4", "ListBox項目5", "ListBox項目6", "ListBox項目7", "ListBox項目8", "ListBox項目9" };
             foreach (string str in itemStr)
             {
@@ -30,6 +31,11 @@ namespace vcs_ListBox1_CheckedListBox
             listBox1.SelectedIndex = 3;
 
             label1.Text = "第四項是：" + listBox1.SelectedItem;
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -117,11 +123,6 @@ namespace vcs_ListBox1_CheckedListBox
             {
                 richTextBox1.Text += "第 " + i.ToString() + " 項\t" + items[i] + "\n";
             }
-        }
-
-        private void bt_clear_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -233,8 +234,65 @@ namespace vcs_ListBox1_CheckedListBox
         private void button14_Click(object sender, EventArgs e)
         {
             //清除listBox
+            listBox1.DataSource = null;
             listBox1.Items.Clear();
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            //做一個字串陣列 一次賦值給ListBox
+
+            //字串陣列的寫法(一維)：
+            String[] weekday = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+
+            //清除listBox
+            listBox1.DataSource = null;
+            listBox1.Items.Clear();
+
+            listBox1.DataSource = weekday;
+
+
+
+            // 將Product陣列的所有選項放入checkedListBox1內
+            checkedListBox1.Items.AddRange(weekday);
+
+
+
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button21_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button22_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
-

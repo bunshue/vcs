@@ -489,8 +489,8 @@ namespace vcs_test_all_02_Array
             String[,] language = new string[3, 6] { { "正中1", "正中2", "正中3", "正中4", "正中5", "正中6" }, { "簡中1", "簡中2", "簡中3", "簡中4", "簡中5", "簡中6" }, { "英語1", "英語2", "英語3", "英語4", "英語5", "英語6" } };
 
             //字串陣列的寫法(一維)：
-            String[] Day = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
-            string week = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
+            String[] weekday = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+            string week = weekday[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
 
             //字串宣告：
             string[] A = new string[10];
@@ -2387,3 +2387,4 @@ namespace vcs_test_all_02_Array
         }
     }
 }
+

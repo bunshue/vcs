@@ -28,12 +28,14 @@ namespace vcs_ReadWrite_WORD2
         // Initialize the paths.
         private void Form1_Load(object sender, EventArgs e)
         {
-            txtPicture.Text = Path.GetFullPath(Path.Combine(Application.StartupPath, "..\\..")) +"\\test.png";
+            
         }
 
         // Add the text and picture to the Word document.
         private void btnGo_Click(object sender, EventArgs e)
         {
+            string pic_filename = Path.GetFullPath(Path.Combine(Application.StartupPath, "..\\..")) + "\\test.png";
+
             // Get the Word application object.
             Word._Application word_app = new Word.ApplicationClass();
 
@@ -78,7 +80,7 @@ namespace vcs_ReadWrite_WORD2
             Word.Range start_range = word_doc.Bookmarks.get_Item(ref start_of_doc).Range;
 
             // Add the picture to the Range's InlineShapes.
-            string picture_file = txtPicture.Text;
+            string picture_file = pic_filename;
             Word.InlineShape inline_shape = start_range.InlineShapes.AddPicture(
                 picture_file, ref missing, ref missing, ref missing);
 

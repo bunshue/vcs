@@ -50,11 +50,25 @@ namespace draw_rectangle
             pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
         }
 
+        // Return a Rectangle with these points as corners.
+        private Rectangle MakeRectangle(int x0, int y0, int x1, int y1)
+        {
+            return new Rectangle(Math.Min(x0, x1), Math.Min(y0, y1), Math.Abs(x0 - x1), Math.Abs(y0 - y1));
+        }
+
+        private Rectangle MakeRectangle(Point pt1, Point pt2)
+        {
+            return new Rectangle(Math.Min(pt1.X, pt2.X), Math.Min(pt1.Y, pt2.Y), Math.Abs(pt1.X - pt2.X), Math.Abs(pt1.Y - pt2.Y));
+        }
+
+        // Start selecting the rectangle.
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             flag_mouse_down = true;
             intStartX = e.X;
             intStartY = e.Y;
+
+            SelectionRectangle = new Rectangle(new Point(0, 0), new Size(0, 0));
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
@@ -79,14 +93,58 @@ namespace draw_rectangle
                 {
                     ex.ToString();
                 }
+
+                nud_x_st.Value = SelectionRectangle.X;
+                nud_y_st.Value = SelectionRectangle.Y;
+                nud_w.Value = SelectionRectangle.Width;
+                nud_h.Value = SelectionRectangle.Height;
+                //label2.Text = "選取區域 : " + SelectionRectangle.ToString();
             }
         }
 
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
+            if (flag_mouse_down == false)
+            {
+                return;
+            }
             flag_mouse_down = false;
             intStartX = 0;
             intStartY = 0;
+
+
+            /*
+            // Display the original image.
+            //pictureBox1.Image = bitmap1;  //仍應保留選取區域
+
+            int w = SelectionRectangle.Width;
+            int h = SelectionRectangle.Height;
+
+            if (w < 1)
+                return;
+            if (h < 1)
+                return;
+
+            bitmap2 = new Bitmap(w, h);  //擷取部分位圖Bitmap
+            using (Graphics g2 = Graphics.FromImage(bitmap2))
+            {
+                Rectangle dest_rectangle = new Rectangle(0, 0, w, h);
+                g2.DrawImage(bitmap1, dest_rectangle, SelectionRectangle, GraphicsUnit.Pixel);
+            }
+
+            //pictureBox2.Image = bitmap2;
+            */
+
+            //richTextBox1.Text += "SelectionRectangle = " + SelectionRectangle.ToString() + "\n";
+
+            nud_x_st.Value = SelectionRectangle.X;
+            nud_y_st.Value = SelectionRectangle.Y;
+            nud_w.Value = SelectionRectangle.Width;
+            nud_h.Value = SelectionRectangle.Height;
+            //label2.Text = "選取區域 : " + SelectionRectangle.ToString();
+
+
+
         }
     }
 }

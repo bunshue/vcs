@@ -73,13 +73,18 @@ namespace vcs_ReadWrite_EXCEL6
         // cell (row + 1, col) to the end of the column.
         private void SetTitleAndListValues(Excel.Worksheet sheet, int row, int col, Label lbl, ListBox lst)
         {
+            richTextBox1.Text += "R = " + row.ToString() + ", C = " + col.ToString() + "\n";
+
             Excel.Range range;
 
             // Set the title.
             range = (Excel.Range)sheet.Cells[row, col];
+
             lbl.Text = (string)range.Value2;
             lbl.ForeColor = System.Drawing.ColorTranslator.FromOle((int)(double)range.Font.Color);
             lbl.BackColor = System.Drawing.ColorTranslator.FromOle((int)(double)range.Interior.Color);
+
+            richTextBox1.Text += "取得Title : " + (string)range.Value2 + "\n";
 
             // Get the values.
             // Find the last cell in the column.
@@ -100,11 +105,84 @@ namespace vcs_ReadWrite_EXCEL6
             for (int i = 0; i < num_items; i++)
             {
                 values1[i] = (string)range_values[i + 1, 1];
+                richTextBox1.Text += "取得Item : " + values1[i] + "\n";
             }
 
             // Display the values in the ListBox.
             lst.DataSource = values1;
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //開啟Excel檔並新增工作表
+            string filename = @"C:\_git\vcs\_2.vcs\______test_files\__RW\_excel\vcs_ReadWrite_EXCEL7_Items.xlsx";
+            richTextBox1.Text += "開啟檔案 : " + filename + "\n";
+
+            // Get the Excel application object.
+            Excel.Application excel_app = new Excel.ApplicationClass();
+
+            // Make Excel visible (optional).
+            excel_app.Visible = true;
+
+            // Open the workbook.
+            Excel.Workbook workbook = excel_app.Workbooks.Open(filename,
+                Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                Type.Missing, Type.Missing, Type.Missing, Type.Missing,
+                Type.Missing, Type.Missing);
+
+            // See if the worksheet already exists.
+            string sheet_name = DateTime.Now.ToString("MM-dd-yy");
+
+            Excel.Worksheet sheet = FindSheet(workbook, sheet_name);
+            if (sheet == null)
+            {
+                // Add the worksheet at the end.
+                sheet = (Excel.Worksheet)workbook.Sheets.Add(
+                    Type.Missing, workbook.Sheets[workbook.Sheets.Count],
+                    1, Excel.XlSheetType.xlWorksheet);
+                sheet.Name = DateTime.Now.ToString("MM-dd-yy");
+            }
+
+            // Add some data to individual cells.
+            sheet.Cells[1, 1] = "A";
+            sheet.Cells[1, 2] = "B";
+            sheet.Cells[1, 3] = "C";
+
+            // Make that range of cells bold and red.
+            Excel.Range header_range = sheet.get_Range("A1", "C1");
+            header_range.Font.Bold = true;
+            header_range.Font.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Red);
+            header_range.Interior.Color = System.Drawing.ColorTranslator.ToOle(System.Drawing.Color.Pink);
+
+            // Add some data to a range of cells.
+            int[,] values = 
+            { 
+                { 2,  4,  6},
+                { 3,  6,  9},
+                { 4,  8, 12},
+                { 5, 10, 15},
+            };
+            Excel.Range value_range = sheet.get_Range("A2", "C5");
+            value_range.Value2 = values;
+
+            // Save the changes and close the workbook.
+            workbook.Close(true, Type.Missing, Type.Missing);
+
+            // Close the Excel server.
+            excel_app.Quit();
+
+            richTextBox1.Text += "完成\n";
+        }
+
+        // Return the worksheet with the given name.
+        private Excel.Worksheet FindSheet(Excel.Workbook workbook, string sheet_name)
+        {
+            foreach (Excel.Worksheet sheet in workbook.Sheets)
+            {
+                if (sheet.Name == sheet_name) return sheet;
+            }
+            return null;
+        }
     }
 }
-

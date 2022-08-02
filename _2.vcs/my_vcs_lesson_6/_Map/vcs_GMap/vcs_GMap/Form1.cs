@@ -33,11 +33,11 @@ namespace vcs_GMap
 {
     public partial class Form1 : Form
     {
-        private GMapOverlay markersOverlay = new GMapOverlay("markers"); //放置marker的图层
+        private GMapOverlay markersOverlay = new GMapOverlay("markers"); //放置marker的圖層
         private GMapOverlay polygonsOverlay = new GMapOverlay("polygonsOverlay");
 
         //按滑鼠左鍵連線
-        //需要绘制的经纬度点集
+        //需要繪制的經緯度點集
         private List<PointLatLng> line_point = new List<PointLatLng>();
 
         TrackBar trackBar1 = new TrackBar();
@@ -91,7 +91,7 @@ namespace vcs_GMap
             drawDistance = new DrawDistance(this.gMapControl1);
             drawDistance.DrawComplete += new EventHandler<DrawDistanceEventArgs>(drawDistance_DrawComplete);
 
-            rb_location0.Checked =true;
+            rb_location0.Checked = true;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -261,47 +261,47 @@ namespace vcs_GMap
             rb_map40.Location = new Point(x_st + dx * 2, y_st + dy * 12);
             rb_map41.Location = new Point(x_st + dx * 2, y_st + dy * 13);
 
-            rb_map00.Text = "Google普通地图";
-            rb_map01.Text = "Google卫星地图";
-            rb_map02.Text = "Google混合地图";
-            rb_map03.Text = "Google中国普通地图";
-            rb_map04.Text = "Google中国卫星地图";
-            rb_map05.Text = "Google中国混合地图";
-            rb_map06.Text = "Google中国地形地图";
+            rb_map00.Text = "Google普通地圖";
+            rb_map01.Text = "Google衛星地圖";
+            rb_map02.Text = "Google混合地圖";
+            rb_map03.Text = "Google中國普通地圖";
+            rb_map04.Text = "Google中國衛星地圖";
+            rb_map05.Text = "Google中國混合地圖";
+            rb_map06.Text = "Google中國地形地圖";
             rb_map07.Text = "百度地圖 普通";
             rb_map08.Text = "百度地圖 衛星";
             rb_map09.Text = "百度地圖 混合";
-            rb_map10.Text = "高德地图 普通地图";
-            rb_map11.Text = "高德地图 卫星地图";
-            rb_map12.Text = "高德地图 混合地图";
-            rb_map13.Text = "騰迅地圖 普通地图";
-            rb_map14.Text = "騰迅地圖 卫星地图";
-            rb_map15.Text = "騰迅地圖 混合地图";
-            rb_map16.Text = "騰迅地圖 地形地图";
-            rb_map17.Text = "Here地图 普通地图";
-            rb_map18.Text = "Here地图 卫星地图";
-            rb_map19.Text = "Here地图 混合地图";
-            rb_map20.Text = "Bing地图 普通地图";
-            rb_map21.Text = "Bing地图 卫星地图";
-            rb_map22.Text = "Bing地图 混合地图";
-            rb_map23.Text = "Bing地图 普通地图中文";
-            rb_map24.Text = "天地图 街道地图(球面墨卡托)";
-            rb_map25.Text = "天地图 卫星地图(球面墨卡托)";
-            rb_map26.Text = "天地图 混合地图(球面墨卡托)";
-            rb_map27.Text = "天地图 街道地图(WGS84)";
-            rb_map28.Text = "天地图 卫星地图(WGS84)";
-            rb_map29.Text = "天地图 混合地图(WGS84)";
-            rb_map30.Text = "天地图 福建街道地图";
-            rb_map31.Text = "天地图 福建卫星地图";
-            rb_map32.Text = "天地图 福建混合地图";
-            rb_map33.Text = "ArcGIS地图 arcGIS街道地图";
-            rb_map34.Text = "ArcGIS地图 arcGIS街道地图(无POI)";
-            rb_map35.Text = "ArcGIS地图 arcGIS街道地图(冷色版)";
-            rb_map36.Text = "ArcGIS地图 arcGIS街道地图(灰色版)";
-            rb_map37.Text = "ArcGIS地图 arcGIS街道地图(暖色版)";
-            rb_map38.Text = "ArcGIS地图 arcGIS卫星地图(无偏移)";
-            rb_map39.Text = "搜狗地图 普通地图";
-            rb_map40.Text = "船舶地图 船舶";
+            rb_map10.Text = "高德地圖 普通地圖";
+            rb_map11.Text = "高德地圖 衛星地圖";
+            rb_map12.Text = "高德地圖 混合地圖";
+            rb_map13.Text = "騰迅地圖 普通地圖";
+            rb_map14.Text = "騰迅地圖 衛星地圖";
+            rb_map15.Text = "騰迅地圖 混合地圖";
+            rb_map16.Text = "騰迅地圖 地形地圖";
+            rb_map17.Text = "Here地圖 普通地圖";
+            rb_map18.Text = "Here地圖 衛星地圖";
+            rb_map19.Text = "Here地圖 混合地圖";
+            rb_map20.Text = "Bing地圖 普通地圖";
+            rb_map21.Text = "Bing地圖 衛星地圖";
+            rb_map22.Text = "Bing地圖 混合地圖";
+            rb_map23.Text = "Bing地圖 普通地圖中文";
+            rb_map24.Text = "天地圖 街道地圖(球面墨卡托)";
+            rb_map25.Text = "天地圖 衛星地圖(球面墨卡托)";
+            rb_map26.Text = "天地圖 混合地圖(球面墨卡托)";
+            rb_map27.Text = "天地圖 街道地圖(WGS84)";
+            rb_map28.Text = "天地圖 衛星地圖(WGS84)";
+            rb_map29.Text = "天地圖 混合地圖(WGS84)";
+            rb_map30.Text = "天地圖 福建街道地圖";
+            rb_map31.Text = "天地圖 福建衛星地圖";
+            rb_map32.Text = "天地圖 福建混合地圖";
+            rb_map33.Text = "ArcGIS地圖 arcGIS街道地圖";
+            rb_map34.Text = "ArcGIS地圖 arcGIS街道地圖(無POI)";
+            rb_map35.Text = "ArcGIS地圖 arcGIS街道地圖(冷色版)";
+            rb_map36.Text = "ArcGIS地圖 arcGIS街道地圖(灰色版)";
+            rb_map37.Text = "ArcGIS地圖 arcGIS街道地圖(暖色版)";
+            rb_map38.Text = "ArcGIS地圖 arcGIS衛星地圖(無偏移)";
+            rb_map39.Text = "搜狗地圖 普通地圖";
+            rb_map40.Text = "船舶地圖 船舶";
             rb_map41.Text = "";
 
             rb_map07.Enabled = false;
@@ -568,7 +568,7 @@ namespace vcs_GMap
             gMapControl1.MapScaleInfoEnabled = true;    //比例尺
             gMapControl1.ShowCenter = true; //隱藏/顯示地圖中間的紅十字
             gMapControl1.IsAccessible = false;  //??
-            gMapControl1.DragButton = MouseButtons.Left; //左键拖拽地图
+            gMapControl1.DragButton = MouseButtons.Left; //左鍵拖拽地圖
 
             gMapControl1.MinZoom = 1;  //設置控件最小縮放比例 >=1
             gMapControl1.MaxZoom = 24; //設置控件最大縮放比例 <=24
@@ -598,7 +598,7 @@ namespace vcs_GMap
             gMapControl1.OnPolygonLeave += new PolygonLeave(gMapControl1_OnPolygonLeave);
             //gMapControl1.OnPolygonDoubleClick += new PolygonDoubleClick(gMapControl1_OnPolygonDoubleClick);
 
-            this.ActiveControl = this.gMapControl1;//选中pictureBox1，不然没法触发事件
+            this.ActiveControl = this.gMapControl1;//選中pictureBox1，不然沒法觸發事件
 
             gMapControl1.Overlays.Add(markersOverlay);  //添加 圖標 Markers 的圖層
             gMapControl1.Overlays.Add(polygonsOverlay);
@@ -611,9 +611,9 @@ namespace vcs_GMap
             //gMapControl1.ShowTileGridLines = true;  //顯示座標格網  常有問題 可能是timeout
             //gMapControl1.GrayScaleMode = true;    //黑白地圖
 
-            //GMapProvider.Language = LanguageType.ChineseSimplified; //设置地图默认语言
-            GMapProvider.Language = LanguageType.ChineseTraditional; //设置地图默认语言
-            GMapProvider.TimeoutMs = 10000;//地图加载完成后设置timeoutms为1000(或者其他大于领零的数值自己尝试0)
+            //GMapProvider.Language = LanguageType.ChineseSimplified; //設置地圖默認語言
+            GMapProvider.Language = LanguageType.ChineseTraditional; //設置地圖默認語言
+            GMapProvider.TimeoutMs = 10000;//地圖加載完成后設置timeoutms為1000(或者其他大于領零的數值自己嘗試0)
         }
 
         void setup_trackBar()
@@ -831,7 +831,7 @@ namespace vcs_GMap
                 }
                 else
                 {
-                    MessageBox.Show("请先用画图工具画下载的区域多边形或选择省市区域！");
+                    MessageBox.Show("請先用畫圖工具畫下載的區域多邊形或選擇省市區域！");
                 }
             }
             */
@@ -924,7 +924,7 @@ namespace vcs_GMap
             {
                 string[] LatLng = LatLngInfo[i].Split(',');
 
-                //在坐标点上绘制一绿色点并向图层中添加标签
+                //在坐標點上繪制一綠色點并向圖層中添加標簽
                 PointLatLng point = new PointLatLng(double.Parse(LatLng[0]), double.Parse(LatLng[1]));
 
                 GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.green);
@@ -933,7 +933,7 @@ namespace vcs_GMap
 
                 //richTextBox1.Text += (double.Parse(LatLng[0])).ToString() + "\t" + (double.Parse(LatLng[1])).ToString() + "\n";
 
-                //方便之后寻找到是第几个GMapMarker   
+                //方便之后尋找到是第幾個GMapMarker   
                 gMapOverlay1.Markers[i].Tag = i;
                 gMapOverlay1.Markers[i].Tag = "xxxx";
                 gMapOverlay1.Id = "markroad";
@@ -1102,7 +1102,7 @@ namespace vcs_GMap
         {
             PointLatLng point = new PointLatLng(latitude, longitude);
             GMapMarker marker = new GMarkerGoogle(point, GMarkerGoogleType.red);
-            GMapOverlay markersOverlay_stop = new GMapOverlay("Stop"); //放置marker的图层
+            GMapOverlay markersOverlay_stop = new GMapOverlay("Stop"); //放置marker的圖層
             markersOverlay_stop.Markers.Add(marker);
             map.Overlays.Add(markersOverlay_stop);
 
@@ -1121,7 +1121,7 @@ namespace vcs_GMap
             polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Red));   //有填滿 半透明, 若不寫.Fill, 即無填滿
             polygon.Stroke = new Pen(Color.Red, 1); //邊框顏色與大小
 
-            GMapOverlay markers_polygon = new GMapOverlay("polygon"); //放置marker的图层
+            GMapOverlay markers_polygon = new GMapOverlay("polygon"); //放置marker的圖層
             markers_polygon.Polygons.Add(polygon);
             gMapControl1.Overlays.Add(markers_polygon);  //添加 圖標 Markers 的圖層
 
@@ -1487,7 +1487,7 @@ namespace vcs_GMap
             //小數點語法
             richTextBox1.Text += "北緯 : " + Latitude.ToString("0.0000") + "\t東經 : " + Longitude.ToString("0.0000") + "\n";
 
-           
+
             //txtLatitudeFrom.Text = city.Latitude.ToString("0.0000");
             //txtLongitudeFrom.Text = city.Longitude.ToString("0.0000");
 
@@ -1499,7 +1499,7 @@ namespace vcs_GMap
             update_controls_info();
 
             //gMapControl1.Refresh();
-            //gMapControl1.ShowTileGridLines = true;//显示瓦片，也就是显示方格
+            //gMapControl1.ShowTileGridLines = true;//顯示瓦片，也就是顯示方格
         }
 
         //info
@@ -1665,43 +1665,43 @@ namespace vcs_GMap
             if (rb_map00.Checked == true)
             {
                 this.gMapControl1.MapProvider = GMapProviders.GoogleMap;
-                richTextBox1.Text += "Google普通地图\n";
+                richTextBox1.Text += "Google普通地圖\n";
 
             }
             else if (rb_map01.Checked == true)
             {
                 this.gMapControl1.MapProvider = GMapProviders.GoogleSatelliteMap;
-                richTextBox1.Text += "Google卫星地图\n";
+                richTextBox1.Text += "Google衛星地圖\n";
 
             }
             else if (rb_map02.Checked == true)
             {
                 this.gMapControl1.MapProvider = GMapProviders.GoogleHybridMap;
-                richTextBox1.Text += "Google混合地图\n";
+                richTextBox1.Text += "Google混合地圖\n";
 
             }
             else if (rb_map03.Checked == true)
             {
                 gMapControl1.MapProvider = GMapProviders.GoogleChinaMap;
-                richTextBox1.Text += "Google中国普通地图\n";
+                richTextBox1.Text += "Google中國普通地圖\n";
 
             }
             else if (rb_map04.Checked == true)
             {
                 gMapControl1.MapProvider = GMapProviders.GoogleChinaSatelliteMap;
-                richTextBox1.Text += "Google中国卫星地图\n";
+                richTextBox1.Text += "Google中國衛星地圖\n";
 
             }
             else if (rb_map05.Checked == true)
             {
                 gMapControl1.MapProvider = GMapProviders.GoogleChinaHybridMap;
-                richTextBox1.Text += "Google中国混合地图\n";
+                richTextBox1.Text += "Google中國混合地圖\n";
 
             }
             else if (rb_map06.Checked == true)
             {
                 this.gMapControl1.MapProvider = GMapProviders.GoogleChinaTerrainMap;
-                richTextBox1.Text += "Google中国地形地图\n";
+                richTextBox1.Text += "Google中國地形地圖\n";
 
             }
             else if (rb_map07.Checked == true)
@@ -1727,28 +1727,28 @@ namespace vcs_GMap
             }
             else if (rb_map10.Checked == true)
             {
-                //高德地图 普通地图
+                //高德地圖 普通地圖
                 //this.gMapControl1.MapProvider = GMapProvidersExt.AMap.AMapProvider.Instance;
                 richTextBox1.Text += "GMapProvidersExt.AMap.AMapProvider.Instance.CnName\n";
 
             }
             else if (rb_map11.Checked == true)
             {
-                //高德地图 卫星地图
+                //高德地圖 衛星地圖
                 //this.gMapControl1.MapProvider = GMapProvidersExt.AMap.AMapSateliteProvider.Instance;
                 richTextBox1.Text += "GMapProvidersExt.AMap.AMapSateliteProvider.Instance.CnName\n";
 
             }
             else if (rb_map12.Checked == true)
             {
-                //高德地图 混合地图
+                //高德地圖 混合地圖
                 //this.gMapControl1.MapProvider = GMapProvidersExt.AMap.AMapHybirdProvider.Instance;
                 richTextBox1.Text += "GMapProvidersExt.AMap.AMapHybirdProvider.Instance.CnName\n";
 
             }
             else if (rb_map13.Checked == true)
             {
-                //騰迅地圖 普通地图
+                //騰迅地圖 普通地圖
                 //this.gMapControl1.MapProvider = GMapProvidersExt.Tencent.TencentMapProvider.Instance;
                 //this.mapControl.MapProvider = GMapProvidersExt.SoSo.SosoMapProvider.Instance;
                 richTextBox1.Text += "GMapProvidersExt.Tencent.TencentMapProvider.Instance.CnName\n";
@@ -1756,7 +1756,7 @@ namespace vcs_GMap
             }
             else if (rb_map14.Checked == true)
             {
-                //騰迅地圖 卫星地图
+                //騰迅地圖 衛星地圖
                 //this.gMapControl1.MapProvider = GMapProvidersExt.Tencent.TencentMapSateliteProvider.Instance;
                 //this.mapControl.MapProvider = GMapProvidersExt.SoSo.SosoMapSateliteProvider.Instance;
                 richTextBox1.Text += "GMapProvidersExt.Tencent.TencentMapSateliteProvider.Instance.CnName\n";
@@ -1764,7 +1764,7 @@ namespace vcs_GMap
             }
             else if (rb_map15.Checked == true)
             {
-                //騰迅地圖 混合地图
+                //騰迅地圖 混合地圖
                 //this.gMapControl1.MapProvider = GMapProvidersExt.Tencent.TencentMapHybridProvider.Instance;
                 //this.mapControl.MapProvider = GMapProvidersExt.SoSo.SosoMapHybridProvider.Instance;
                 richTextBox1.Text += "GMapProvidersExt.Tencent.TencentMapHybridProvider.Instance.CnName\n";
@@ -1772,105 +1772,105 @@ namespace vcs_GMap
             }
             else if (rb_map16.Checked == true)
             {
-                //騰迅地圖 地形地图
+                //騰迅地圖 地形地圖
                 //this.gMapControl1.MapProvider = TencentTerrainMapAnnoProvider.Instance;
                 richTextBox1.Text += "GMapProvidersExt.Tencent.TencentTerrainMapAnnoProvider.Instance.CnName\n";
 
             }
             else if (rb_map17.Checked == true)
             {
-                //Here地图 普通地图
+                //Here地圖 普通地圖
                 //gMapControl1.MapProvider = GMapProvidersExt.Here.NokiaMapProvider.Instance;
                 richTextBox1.Text += "GMapProvidersExt.Here.NokiaMapProvider.Instance.CnName\n";
 
             }
             else if (rb_map18.Checked == true)
             {
-                //Here地图 卫星地图
+                //Here地圖 衛星地圖
                 //gMapControl1.MapProvider = GMapProvidersExt.Here.NokiaSatelliteMapProvider.Instance;
                 richTextBox1.Text += "GMapProvidersExt.Here.NokiaSatelliteMapProvider.Instance.CnName\n";
 
             }
             else if (rb_map19.Checked == true)
             {
-                //Here地图 混合地图
+                //Here地圖 混合地圖
                 //gMapControl1.MapProvider = GMapProvidersExt.Here.NokiaHybridMapProvider.Instance;
                 richTextBox1.Text += "GMapProvidersExt.Here.NokiaHybridMapProvider.Instance.CnName\n";
 
             }
             else if (rb_map20.Checked == true)
             {
-                //Bing地图 普通地图
+                //Bing地圖 普通地圖
                 this.gMapControl1.MapProvider = GMapProviders.BingMap;
-                richTextBox1.Text += "Bing普通地图\n";
+                richTextBox1.Text += "Bing普通地圖\n";
 
             }
             else if (rb_map21.Checked == true)
             {
-                //Bing地图 卫星地图
+                //Bing地圖 衛星地圖
                 this.gMapControl1.MapProvider = GMapProviders.BingSatelliteMap;
-                richTextBox1.Text += "Bing卫星地图\n";
+                richTextBox1.Text += "Bing衛星地圖\n";
 
             }
             else if (rb_map22.Checked == true)
             {
-                //Bing地图 混合地图
+                //Bing地圖 混合地圖
                 this.gMapControl1.MapProvider = GMapProviders.BingHybridMap;
-                richTextBox1.Text += "Bing混合地图\n";
+                richTextBox1.Text += "Bing混合地圖\n";
 
             }
             else if (rb_map23.Checked == true)
             {
-                //Bing地图 普通地图中文
+                //Bing地圖 普通地圖中文
                 //this.gMapControl1.MapProvider = GMapProvidersExt.Bing.BingChinaMapProvider.Instance;
                 richTextBox1.Text += "GMapProvidersExt.Bing.BingChinaMapProvider.Instance.CnName\n";
 
             }
             else if (rb_map24.Checked == true)
             {
-                //天地图 街道地图(球面墨卡托)
+                //天地圖 街道地圖(球面墨卡托)
                 //this.gMapControl1.MapProvider = GMapProvidersExt.TianDitu.TiandituMapProviderWithAnno.Instance;
                 richTextBox1.Text += "GMapProvidersExt.TianDitu.TiandituMapProviderWithAnno.Instance.CnName\n";
 
             }
             else if (rb_map25.Checked == true)
             {
-                //天地图 卫星地图(球面墨卡托)
+                //天地圖 衛星地圖(球面墨卡托)
                 //this.gMapControl1.MapProvider = GMapProvidersExt.TianDitu.TiandituSatelliteMapProvider.Instance;
                 richTextBox1.Text += "GMapProvidersExt.TianDitu.TiandituSatelliteMapProvider.Instance.CnName\n";
 
             }
             else if (rb_map26.Checked == true)
             {
-                //天地图 混合地图(球面墨卡托)
+                //天地圖 混合地圖(球面墨卡托)
                 //this.gMapControl1.MapProvider = GMapProvidersExt.TianDitu.TiandituSatelliteMapProviderWithAnno.Instance;
                 richTextBox1.Text += "GMapProvidersExt.TianDitu.TiandituSatelliteMapProviderWithAnno.Instance.CnName\n";
 
             }
             else if (rb_map27.Checked == true)
             {
-                //天地图 街道地图(WGS84)
+                //天地圖 街道地圖(WGS84)
                 //this.gMapControl1.MapProvider = GMapProvidersExt.TianDitu.TiandituMapProviderWithAnno4326.Instance;
                 richTextBox1.Text += "GMapProvidersExt.TianDitu.TiandituMapProviderWithAnno4326.Instance.CnName\n";
 
             }
             else if (rb_map28.Checked == true)
             {
-                //天地图 卫星地图(WGS84)
+                //天地圖 衛星地圖(WGS84)
                 //this.gMapControl1.MapProvider = GMapProvidersExt.TianDitu.TiandituSatelliteMapProvider4326.Instance;
                 richTextBox1.Text += "GMapProvidersExt.TianDitu.TiandituSatelliteMapProvider4326.Instance.CnName\n";
 
             }
             else if (rb_map29.Checked == true)
             {
-                //天地图 混合地图(WGS84)
+                //天地圖 混合地圖(WGS84)
                 //this.gMapControl1.MapProvider = GMapProvidersExt.TianDitu.TiandituSatelliteMapProviderWithAnno4326.Instance;
                 richTextBox1.Text += "GMapProvidersExt.TianDitu.TiandituSatelliteMapProviderWithAnno4326.Instance.CnName\n";
 
             }
             else if (rb_map30.Checked == true)
             {
-                //天地图 福建街道地图
+                //天地圖 福建街道地圖
                 //this.gMapControl1.MapProvider = GMapProvidersExt.TianDitu.Fujian.TiandituFujianMapProviderWithAnno.Instance;
                 richTextBox1.Text += "GMapProvidersExt.TianDitu.Fujian.TiandituFujianMapProviderWithAnno.Instance.CnName\n";
                 this.gMapControl1.Position = new PointLatLng(26.0651, 119.2786);
@@ -1879,63 +1879,63 @@ namespace vcs_GMap
             else if (rb_map31.Checked == true)
             {
 
-                //天地图 福建卫星地图
+                //天地圖 福建衛星地圖
                 //this.gMapControl1.MapProvider = GMapProvidersExt.TianDitu.Fujian.TiandituFujianSatelliteMapProvider.Instance;
                 richTextBox1.Text += "GMapProvidersExt.TianDitu.Fujian.TiandituFujianSatelliteMapProvider.Instance.CnName\n";
                 this.gMapControl1.Position = new PointLatLng(26.0651, 119.2786);
             }
             else if (rb_map32.Checked == true)
             {
-                //天地图 福建混合地图
+                //天地圖 福建混合地圖
                 //this.gMapControl1.MapProvider = GMapProvidersExt.TianDitu.Fujian.TiandituFujianSatelliteMapProviderWithAnno.Instance;
                 richTextBox1.Text += "GMapProvidersExt.TianDitu.Fujian.TiandituFujianSatelliteMapProviderWithAnno.Instance.CnName\n";
                 this.gMapControl1.Position = new PointLatLng(26.0651, 119.2786);
             }
             else if (rb_map33.Checked == true)
             {
-                //ArcGIS地图 arcGIS街道地图
+                //ArcGIS地圖 arcGIS街道地圖
                 //this.gMapControl1.MapProvider = GMapProvidersExt.ArcGIS.ArcGISMapProvider.Instance;
                 richTextBox1.Text += "GMapProvidersExt.ArcGIS.ArcGISMapProvider.Instance.CnName\n";
             }
             else if (rb_map34.Checked == true)
             {
-                //ArcGIS地图 arcGIS街道地图(无POI)
+                //ArcGIS地圖 arcGIS街道地圖(無POI)
                 //this.gMapControl1.MapProvider = GMapProvidersExt.ArcGIS.ArcGISMapProviderNoPoi.Instance;
                 richTextBox1.Text += "GMapProvidersExt.ArcGIS.ArcGISMapProviderNoPoi.Instance.CnName\n";
             }
             else if (rb_map35.Checked == true)
             {
-                //ArcGIS地图 arcGIS街道地图(冷色版)
+                //ArcGIS地圖 arcGIS街道地圖(冷色版)
                 //this.gMapControl1.MapProvider = GMapProvidersExt.ArcGIS.ArcGISColdMapProvider.Instance;
                 richTextBox1.Text += "GMapProvidersExt.ArcGIS.ArcGISColdMapProvider.Instance.CnName\n";
             }
             else if (rb_map36.Checked == true)
             {
-                //ArcGIS地图 arcGIS街道地图(灰色版)
+                //ArcGIS地圖 arcGIS街道地圖(灰色版)
                 //this.gMapControl1.MapProvider = GMapProvidersExt.ArcGIS.ArcGISGrayMapProvider.Instance;
                 richTextBox1.Text += "GMapProvidersExt.ArcGIS.ArcGISGrayMapProvider.Instance.CnName\n";
             }
             else if (rb_map37.Checked == true)
             {
-                //ArcGIS地图 arcGIS街道地图(暖色版)
+                //ArcGIS地圖 arcGIS街道地圖(暖色版)
                 //this.gMapControl1.MapProvider = GMapProvidersExt.ArcGIS.ArcGISWarmMapProvider.Instance;
                 richTextBox1.Text += "GMapProvidersExt.ArcGIS.ArcGISWarmMapProvider.Instance.CnName\n";
             }
             else if (rb_map38.Checked == true)
             {
-                //ArcGIS地图 arcGIS卫星地图(无偏移)
+                //ArcGIS地圖 arcGIS衛星地圖(無偏移)
                 //this.gMapControl1.MapProvider = GMapProvidersExt.ArcGIS.ArcGISSatelliteMapProvider.Instance;
                 richTextBox1.Text += "GMapProvidersExt.ArcGIS.ArcGISSatelliteMapProvider.Instance.CnName\n";
             }
             else if (rb_map39.Checked == true)
             {
-                //搜狗地图 普通地图
+                //搜狗地圖 普通地圖
                 //this.gMapControl1.MapProvider = GMapProvidersExt.Sogou.SogouMapProvider.Instance;
                 richTextBox1.Text += "GMapProvidersExt.Sogou.SogouMapProvider.Instance.CnName\n";
             }
             else if (rb_map40.Checked == true)
             {
-                //船舶地图 船舶
+                //船舶地圖 船舶
                 //this.gMapControl1.MapProvider = GMapProvidersExt.Ship.ShipMapProvider.Instance;
                 richTextBox1.Text += "GMapProvidersExt.Ship.ShipMapProvider.Instance.CnName\n";
             }
@@ -2021,8 +2021,8 @@ namespace vcs_GMap
             richTextBox1.Text += "方法二, 距離 : " + distance2.ToString() + "\n";
         }
 
-        //计算地图上两点之间的距离--扩展功能
-        private const double EARTH_RADIUS = 6378.137;//地球半径
+        //計算地圖上兩點之間的距離--擴展功能
+        private const double EARTH_RADIUS = 6378.137;//地球半徑
         private static double radius(double d)
         {
             return d * Math.PI / 180.0;
@@ -2213,24 +2213,24 @@ namespace vcs_GMap
                 return;
 
             //添加線
-            //创建“lay”图层
+            //創建“lay”圖層
             GMapOverlay lay = new GMapOverlay("lay");
-            //创建一条route
+            //創建一條route
             GMapRoute route1 = new GMapRoute("route1");
-            //设置route的颜色和粗细
+            //設置route的顏色和粗細
             route1.Stroke = new Pen(Color.Red, 2);  //連線顏色與大小
-            //向route中添加点
+            //向route中添加點
             int i;
             for (i = 0; i < len; i++)
             {
                 route1.Points.Add(new PointLatLng(points[i].Lat, points[i].Lng));
             }
-            //将route添加到图层
+            //將route添加到圖層
             lay.Routes.Add(route1);
-            //将图层添加到地图
+            //將圖層添加到地圖
             gMapControl1.Overlays.Add(lay);
 
-            //更新显示route
+            //更新顯示route
             gMapControl1.UpdateRouteLocalPosition(route1);
         }
 
@@ -2239,9 +2239,9 @@ namespace vcs_GMap
             string location = comboBox1.Text;
             richTextBox1.Text += "location = " + location + "\n";
 
-            if (location == "甘肃")
+            if (location == "甘肅")
             {
-                richTextBox1.Text += "無 甘肃 資料";
+                richTextBox1.Text += "無 甘肅 資料";
                 return;
             }
 
@@ -2330,9 +2330,9 @@ namespace vcs_GMap
             string location = comboBox1.Text;
             richTextBox1.Text += "location = " + location + "\n";
 
-            if (location == "甘肃")
+            if (location == "甘肅")
             {
-                richTextBox1.Text += "無 甘肃 資料";
+                richTextBox1.Text += "無 甘肅 資料";
                 return;
             }
 
@@ -2425,12 +2425,12 @@ namespace vcs_GMap
                 string[,] location = null;
 
                 location = new string[,] {
-            { "台北", "25.047778", "121.517222"},
+            { "臺北", "25.047778", "121.517222"},
             { "新竹", "24.80205", "120.971817"},
-            { "台中", "24.136944", "120.684722"},
-            { "台南", "23.001389", "120.2175"},
+            { "臺中", "24.136944", "120.684722"},
+            { "臺南", "23.001389", "120.2175"},
             { "高雄", "22.64", "120.302778"},
-            { "台東", "22.791389", "121.118889"},
+            { "臺東", "22.791389", "121.118889"},
             { "花蓮", "23.992694", "121.600861"},
             { "宜蘭", "24.750278", "121.7625"},
             };
@@ -2472,7 +2472,7 @@ namespace vcs_GMap
                 polygon.Fill = new SolidBrush(Color.FromArgb(50, Color.Red));   //有填滿 半透明, 若不寫.Fill, 即無填滿
                 polygon.Stroke = new Pen(Color.Red, 1); //邊框顏色與大小
 
-                GMapOverlay markers_polygon = new GMapOverlay("polygon"); //放置marker的图层
+                GMapOverlay markers_polygon = new GMapOverlay("polygon"); //放置marker的圖層
                 markers_polygon.Polygons.Add(polygon);
                 gMapControl1.Overlays.Add(markers_polygon);  //添加 圖標 Markers 的圖層
 
@@ -2631,7 +2631,7 @@ namespace vcs_GMap
             { "碾莊", "34.29887", "117.77576"},
             { "宿縣", "33.64242", "116.9721"},
             { "雙堆集", "33.42498", "116.89588"},
-            { "台兒莊", "34.5608", "117.7382"},
+            { "臺兒莊", "34.5608", "117.7382"},
             { "運河鎮", "34.30807", "117.96176"},
             { "陳官莊", "34.00683", "116.57751"},
             };
@@ -2707,6 +2707,8 @@ namespace vcs_GMap
 { "寧古塔", "44.416815360491", "129.1617512724705"},	//黑龍江省牡丹江市海林市長汀鎮古城村
 { "五國城", "46.333333", "129.566667"},
 { "皮島", "39.55684765902427", "124.65626476139558"},
+{ "薩爾滸", "41.897516334666754", "124.2727564312876"},
+{ "錦州", "41.11652825274596", "121.12778002674251"},
 { "承德避暑山莊", "40.99498842603812", "117.9344426275432"},
 { "揚州", "32.39351078912071", "119.43441495124323"},
 { "西安", "34.27346577864542", "108.93530578323285"},
@@ -2744,6 +2746,8 @@ namespace vcs_GMap
 { "布達拉宮", "29.657778", "91.116944"},
 { "扎什倫布寺", "29.268569", "88.8698"},
 { "達蘭薩拉", "32.2153", "76.3186"},
+{ "昌都", "31.13749", "97.17767"},
+{ "汶川", "31.483789", "103.588403"},
             };
 
                 show_locations(location);
@@ -3117,7 +3121,7 @@ namespace vcs_GMap
             }
             else
             {
-                //MessageBox.Show("请先用画图工具画下载的区域多边形或选择省市区域！");
+                //MessageBox.Show("請先用畫圖工具畫下載的區域多邊形或選擇省市區域！");
             }
             */
         }
@@ -3302,7 +3306,7 @@ namespace vcs_GMap
 
                 if (china == null)
                 {
-                    //log.Error("加载中国省市边界失败！");
+                    //log.Error("加載中國省市邊界失敗！");
                     return;
                 }
 
@@ -3328,11 +3332,11 @@ namespace vcs_GMap
 
         private void InitChinaRegion()
         {
-            TreeNode rootNode = new TreeNode("中国aaaaa");
+            TreeNode rootNode = new TreeNode("中國aaaaa");
             this.treeView1.Nodes.Add(rootNode);
             rootNode.Expand();
 
-            //异步加载中国省市边界
+            //異步加載中國省市邊界
             //BackgroundWorker loadChinaWorker = new BackgroundWorker();
             //loadChinaWorker.DoWork += new DoWorkEventHandler(loadChinaWorker_DoWork);
             //loadChinaWorker.RunWorkerCompleted += new RunWorkerCompletedEventHandler(loadChinaWorker_RunWorkerCompleted);
@@ -3429,7 +3433,7 @@ namespace vcs_GMap
                         GMapAreaPolygon areaPolygon = new GMapAreaPolygon(polygon.Points, name);
                         currentAreaPolygon = areaPolygon;
                         RectLatLng rect = GMapChinaRegion.MapRegion.GetRegionMaxRect(polygon);
-                        GMapTextMarker textMarker = new GMapTextMarker(rect.LocationMiddle, "双击下载");
+                        GMapTextMarker textMarker = new GMapTextMarker(rect.LocationMiddle, "雙擊下載");
                         regionOverlay.Clear();
                         regionOverlay.Polygons.Add(areaPolygon);
                         regionOverlay.Markers.Add(textMarker);
@@ -3577,7 +3581,7 @@ namespace vcs_GMap
                 GMapAreaPolygon areaPolygon = new GMapAreaPolygon(polygon.Points, name);
                 currentAreaPolygon = areaPolygon;
                 RectLatLng rect = GMapUtil.PolygonUtils.GetRegionMaxRect(polygon);
-                GMapTextMarker textMarker = new GMapTextMarker(rect.LocationMiddle, "双击下载");
+                GMapTextMarker textMarker = new GMapTextMarker(rect.LocationMiddle, "雙擊下載");
                 regionOverlay.Clear();
                 regionOverlay.Polygons.Add(areaPolygon);
                 regionOverlay.Markers.Add(textMarker);
@@ -3585,10 +3589,10 @@ namespace vcs_GMap
             }
             */
             /*
-            GMapAreaPolygon areaPolygon = new GMapAreaPolygon(drawPolygon.Points, "下载区域");
+            GMapAreaPolygon areaPolygon = new GMapAreaPolygon(drawPolygon.Points, "下載區域");
             currentAreaPolygon = areaPolygon;
             RectLatLng rect = GMapUtil.PolygonUtils.GetRegionMaxRect(currentAreaPolygon);
-            GMapTextMarker textMarker = new GMapTextMarker(rect.LocationMiddle, "双击下载");
+            GMapTextMarker textMarker = new GMapTextMarker(rect.LocationMiddle, "雙擊下載");
             regionOverlay.Clear();
             regionOverlay.Polygons.Add(areaPolygon);
             regionOverlay.Markers.Add(textMarker);
@@ -3811,7 +3815,7 @@ namespace vcs_GMap
             catch (Exception ex)
             {
                 richTextBox1.Text += "Error : " + ex.ToString() + "\n";
-                MessageBox.Show("读取KML文件时出现异常");
+                MessageBox.Show("讀取KML文件時出現異常");
             }
             */
         }
@@ -3922,7 +3926,7 @@ namespace vcs_GMap
             }
         }
 
-        //画图完成函数
+        //畫圖完成函數
         void draw_DrawComplete(object sender, DrawEventArgs e)
         {
             try
@@ -3954,12 +3958,12 @@ namespace vcs_GMap
 
                     if (drawPolygon != null)
                     {
-                        GMapAreaPolygon areaPolygon = new GMapAreaPolygon(drawPolygon.Points, "下载区域");
+                        GMapAreaPolygon areaPolygon = new GMapAreaPolygon(drawPolygon.Points, "下載區域");
                         currentAreaPolygon = areaPolygon;
                         //RectLatLng rect = GMapUtil.PolygonUtils.GetRegionMaxRect(currentAreaPolygon);
                         RectLatLng rect = GMapChinaRegion.MapRegion.GetRegionMaxRect(currentAreaPolygon);
 
-                        GMapTextMarker textMarker = new GMapTextMarker(rect.LocationMiddle, "双击下载");
+                        GMapTextMarker textMarker = new GMapTextMarker(rect.LocationMiddle, "雙擊下載");
                         regionOverlay.Clear();
                         regionOverlay.Polygons.Add(areaPolygon);
                         regionOverlay.Markers.Add(textMarker);
@@ -4224,6 +4228,4 @@ namespace vcs_GMap
             this.StreetNumber = oth.StreetNumber;
         }
     }
-
 }
-

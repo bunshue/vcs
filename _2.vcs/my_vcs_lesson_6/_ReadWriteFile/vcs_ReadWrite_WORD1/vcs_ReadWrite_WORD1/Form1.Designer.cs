@@ -32,6 +32,7 @@
             this.txtFile = new System.Windows.Forms.TextBox();
             this.btnRemoveHyperlinks = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.btnGo = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -68,12 +69,23 @@
             this.richTextBox1.TabIndex = 3;
             this.richTextBox1.Text = "";
             // 
+            // btnGo
+            // 
+            this.btnGo.Location = new System.Drawing.Point(225, 58);
+            this.btnGo.Name = "btnGo";
+            this.btnGo.Size = new System.Drawing.Size(158, 28);
+            this.btnGo.TabIndex = 7;
+            this.btnGo.Text = "建立一Word檔案";
+            this.btnGo.UseVisualStyleBackColor = true;
+            this.btnGo.Click += new System.EventHandler(this.btnGo_Click);
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnRemoveHyperlinks;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(693, 546);
+            this.Controls.Add(this.btnGo);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.btnRemoveHyperlinks);
             this.Controls.Add(this.txtFile);
@@ -92,6 +104,7 @@
         private System.Windows.Forms.TextBox txtFile;
         private System.Windows.Forms.Button btnRemoveHyperlinks;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button btnGo;
     }
 }
 
