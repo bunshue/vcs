@@ -22,7 +22,12 @@ namespace vcs_ReadWrite_SVG
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
 
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -80,5 +85,6 @@ namespace vcs_ReadWrite_SVG
                 richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
             }
         }
+
     }
 }

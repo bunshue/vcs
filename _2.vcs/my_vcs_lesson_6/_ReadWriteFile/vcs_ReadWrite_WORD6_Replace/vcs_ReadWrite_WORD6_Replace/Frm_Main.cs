@@ -22,9 +22,9 @@ namespace vcs_ReadWrite_WORD6_Replace
 
         string filename = @"C:\______test_files\__RW\_word\Step.doc";
 
-        private Word.Application G_WordApplication;//定义Word应用程序字段
+        private Word.Application G_WordApplication;//定義Word應用程序字段
 
-        //定义G_Missing字段并添加引用
+        //定義G_Missing字段并添加引用
         private object G_Missing = System.Reflection.Missing.Value;
 
         private void Form1_Load(object sender, EventArgs e)
@@ -34,10 +34,10 @@ namespace vcs_ReadWrite_WORD6_Replace
             //Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
 
             txt_path.Text = filename;
-            txt_Find.ReadOnly = false;//取消文本框的只读状态
-            txt_Replace.ReadOnly = false;//取消文本框的只读状态
-            btn_Begin.Enabled = true;//启用开始替换按钮
-            btn_Display.Enabled = true;//启用显示文件按钮
+            txt_Find.ReadOnly = false;//取消文本框的只讀狀態
+            txt_Replace.ReadOnly = false;//取消文本框的只讀狀態
+            btn_Begin.Enabled = true;//啟用開始替換按鈕
+            btn_Display.Enabled = true;//啟用顯示文件按鈕
         }
 
         private void txt_Find_TextChanged(object sender, EventArgs e)
@@ -50,79 +50,79 @@ namespace vcs_ReadWrite_WORD6_Replace
 
         private void btn_Begin_Click(object sender, EventArgs e)
         {
-            btn_Begin.Enabled = false;//停用替换按钮
-            ThreadPool.QueueUserWorkItem(//开始线程池
-                (o) =>//使用Lambda表达式
+            btn_Begin.Enabled = false;//停用替換按鈕
+            ThreadPool.QueueUserWorkItem(//開始線程池
+                (o) =>//使用Lambda表達式
                 {
-                    G_WordApplication =//创建Word应用程序对象
+                    G_WordApplication =//創建Word應用程序對象
                          new Microsoft.Office.Interop.Word.Application();
-                    object P_FilePath = filename;//创建Object对象
+                    object P_FilePath = filename;//創建Object對象
                     richTextBox1.Text += "開啟檔案 :\t" + P_FilePath + "\n";
-                    Word.Document P_Document = G_WordApplication.Documents.Open(//打开Word文档
+                    Word.Document P_Document = G_WordApplication.Documents.Open(//打開Word文檔
                         ref P_FilePath, ref G_Missing, ref G_Missing,
                         ref G_Missing, ref G_Missing, ref G_Missing,
                         ref G_Missing, ref G_Missing, ref G_Missing,
                         ref G_Missing, ref G_Missing, ref G_Missing,
                         ref G_Missing, ref G_Missing, ref G_Missing,
                         ref G_Missing);
-                    Word.Range P_Range = //得到文档范围
+                    Word.Range P_Range = //得到文檔范圍
                         P_Document.Range(ref G_Missing, ref G_Missing);
-                    Word.Find P_Find = //得到Find对象
+                    Word.Find P_Find = //得到Find對象
                         P_Range.Find;
-                    this.Invoke(//在窗体线程中执行
-                        (MethodInvoker)(() =>//使用Lambda表达式
+                    this.Invoke(//在窗體線程中執行
+                        (MethodInvoker)(() =>//使用Lambda表達式
                         {
-                            P_Find.Text = txt_Find.Text;//设置查找的文本
-                            P_Find.Replacement.Text = txt_Replace.Text;//设置替换的文本
+                            P_Find.Text = txt_Find.Text;//設置查找的文本
+                            P_Find.Replacement.Text = txt_Replace.Text;//設置替換的文本
                         }));
-                    object P_Replace = Word.WdReplace.wdReplaceAll;//定义替换方式对象
-                    bool P_bl = P_Find.Execute(//开始替换
+                    object P_Replace = Word.WdReplace.wdReplaceAll;//定義替換方式對象
+                    bool P_bl = P_Find.Execute(//開始替換
                         ref G_Missing, ref G_Missing, ref G_Missing,
                         ref G_Missing, ref G_Missing, ref G_Missing, ref G_Missing,
                         ref G_Missing, ref G_Missing, ref G_Missing, ref P_Replace,
                         ref G_Missing, ref G_Missing, ref G_Missing, ref G_Missing);
-                    G_WordApplication.Documents.Save(//保存文档
+                    G_WordApplication.Documents.Save(//保存文檔
                         ref G_Missing, ref G_Missing);
-                    ((Word._Document)P_Document).Close(//关闭文档
+                    ((Word._Document)P_Document).Close(//關閉文檔
                         ref G_Missing, ref G_Missing, ref G_Missing);
-                    ((Word._Application)G_WordApplication).Quit(//退出Word应用程序
+                    ((Word._Application)G_WordApplication).Quit(//退出Word應用程序
                         ref G_Missing, ref G_Missing, ref G_Missing);
-                    this.Invoke(//在窗体线程中执行
-                        (MethodInvoker)(() =>//使用Lambda表达式
+                    this.Invoke(//在窗體線程中執行
+                        (MethodInvoker)(() =>//使用Lambda表達式
                         {
-                            if (P_bl)//查看是否找到并替换
+                            if (P_bl)//查看是否找到并替換
                             {
-                                MessageBox.Show("找到字符串并替换", "提示！");
+                                MessageBox.Show("找到字符串并替換", "提示！");
                             }
                             else
                             {
-                                MessageBox.Show("没有找到字符串", "提示！");
+                                MessageBox.Show("沒有找到字符串", "提示！");
                             }
-                            btn_Begin.Enabled = true;//启用开始替换按钮
+                            btn_Begin.Enabled = true;//啟用開始替換按鈕
                         }));
                 });
         }
 
         private void btn_Display_Click(object sender, EventArgs e)
         {
-            ThreadPool.QueueUserWorkItem(//开始线程池
-                (o) =>//使用Lambda表达式
+            ThreadPool.QueueUserWorkItem(//開始線程池
+                (o) =>//使用Lambda表達式
                 {
-                    G_WordApplication =//创建Word应用程序对象
+                    G_WordApplication =//創建Word應用程序對象
                          new Microsoft.Office.Interop.Word.Application();
-                    G_WordApplication.Visible = true;//Word应用程序可在桌面显示
-                    object P_FilePath = filename;//得到文件路径信息
-                    Word.Document P_Document = G_WordApplication.Documents.Open(//打开文件
+                    G_WordApplication.Visible = true;//Word應用程序可在桌面顯示
+                    object P_FilePath = filename;//得到文件路徑信息
+                    Word.Document P_Document = G_WordApplication.Documents.Open(//打開文件
                         ref P_FilePath, ref G_Missing, ref G_Missing,
                         ref G_Missing, ref G_Missing, ref G_Missing,
                         ref G_Missing, ref G_Missing, ref G_Missing,
                         ref G_Missing, ref G_Missing, ref G_Missing,
                         ref G_Missing, ref G_Missing, ref G_Missing,
                         ref G_Missing);
-                    this.Invoke(//在窗体线程中执行
+                    this.Invoke(//在窗體線程中執行
                         (MethodInvoker)(() =>
                         {
-                            btn_Display.Enabled = true;//启用显示文件按钮
+                            btn_Display.Enabled = true;//啟用顯示文件按鈕
                         }));
                 });
         }
@@ -150,13 +150,13 @@ namespace vcs_ReadWrite_WORD6_Replace
             //Create a new document  
             Microsoft.Office.Interop.Word.Document document = winword.Documents.Add(ref missing, ref missing, ref missing, ref missing);
 
-            //页边距
+            //頁邊距
             document.PageSetup.LeftMargin = 40; //1.41CM
             document.PageSetup.RightMargin = 40;
             document.PageSetup.TopMargin = 40;
             document.PageSetup.BottomMargin = 40;
 
-            //页眉 //Add header into the document
+            //頁眉 //Add header into the document
             foreach (Microsoft.Office.Interop.Word.Section section in document.Sections)
             {
                 //Get the header range and add the header details.
@@ -168,7 +168,7 @@ namespace vcs_ReadWrite_WORD6_Replace
                 headerRange.Text = "Header text goes here";
             }
 
-            //页脚 Add the footers into the document
+            //頁腳 Add the footers into the document
             foreach (Microsoft.Office.Interop.Word.Section wordSection in document.Sections)
             {
                 //Get the footer range and add the footer details.  
@@ -179,9 +179,9 @@ namespace vcs_ReadWrite_WORD6_Replace
                 footerRange.Text = "Footer text goes here";
             }
 
-            //添加内容 adding text to document
+            //添加內容 adding text to document
             document.Content.SetRange(0, 0);
-            document.Content.Text = "检测报告 " + Environment.NewLine;
+            document.Content.Text = "檢測報告 " + Environment.NewLine;
 
             //添加段落 Add paragraph with Heading 1 style
             Microsoft.Office.Interop.Word.Paragraph para1 = document.Content.Paragraphs.Add(ref missing);
@@ -201,7 +201,7 @@ namespace vcs_ReadWrite_WORD6_Replace
             {
                 foreach (Cell cell in row.Cells)
                 {
-                    //表头 Header row
+                    //表頭 Header row
                     if (cell.RowIndex == 1)
                     {
                         cell.Range.Text = "Column " + cell.ColumnIndex.ToString();

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Linq;
+using System.Drawing;
 
 using System.IO;
 
@@ -64,6 +65,10 @@ namespace vcs_ReadWrite_DICOM
         public MainForm()
         {
             InitializeComponent();
+        }
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
             dd = new DicomDecoder();
             pixels8 = new List<byte>();
             pixels16 = new List<ushort>();
@@ -72,10 +77,13 @@ namespace vcs_ReadWrite_DICOM
             signedImage = false;
             maxPixelValue = 0;
             minPixelValue = 65535;
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private void bt_clear_Click(object sender, EventArgs e)
         {
+            richTextBox1.Clear();
         }
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
@@ -367,7 +375,5 @@ namespace vcs_ReadWrite_DICOM
             imagePanelControl.viewSettingsChanged = true;
             imagePanelControl.Invalidate();
         }
-
     }
 }
-
