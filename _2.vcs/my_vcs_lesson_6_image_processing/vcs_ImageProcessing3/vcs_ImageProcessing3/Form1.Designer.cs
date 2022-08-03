@@ -394,6 +394,7 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(170, 50);
             this.button28.TabIndex = 31;
+            this.button28.Text = "積木效果";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 

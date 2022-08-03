@@ -1593,8 +1593,46 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
 
         private void button28_Click(object sender, EventArgs e)
         {
-
+            //積木效果
+            Bitmap bmp = new Bitmap(filename);
+            pictureBox1.Image = ToBlock(bmp);
         }
+
+        Bitmap ToBlock(Bitmap bitmap1)
+        {
+            Graphics g = this.pictureBox1.CreateGraphics();
+            int W, H, i, j, iAvg, iPixel;
+            Color myColor, myNewColor;
+            RectangleF myRect;
+            W = bitmap1.Width;
+            H = bitmap1.Height;
+            myRect = new RectangleF(0, 0, W, H);
+            Bitmap bitmap = bitmap1.Clone(myRect, System.Drawing.Imaging.PixelFormat.DontCare);
+            i = 0;
+            while (i < W - 1)
+            {
+                j = 0;
+                while (j < H - 1)
+                {
+                    myColor = bitmap.GetPixel(i, j);
+                    iAvg = (myColor.R + myColor.G + myColor.B) / 3;
+                    iPixel = 0;
+                    if (iAvg >= 128)
+                        iPixel = 255;
+                    else
+                        iPixel = 0;
+                    myNewColor = Color.FromArgb(255, iPixel, iPixel, iPixel);
+                    bitmap.SetPixel(i, j, myNewColor);
+                    j = j + 1;
+                }
+                i = i + 1;
+            }
+            g.Clear(Color.WhiteSmoke);
+            g.DrawImage(bitmap, new Rectangle(0, 0, W, H));
+
+            return bitmap;
+        }
+
 
         private void button29_Click(object sender, EventArgs e)
         {

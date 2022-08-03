@@ -12,16 +12,18 @@ namespace test_move_pic_in_pbox
     public partial class Form1 : Form
     {
         string filename = @"C:\______test_files\picture1.jpg";
-        Bitmap bitmap0;
-        Bitmap bitmap1;
+        Bitmap bitmap0; //放底圖
+        Bitmap bitmap1; //放貼上的小圖
         Graphics g;
 
         private Point pt_st = Point.Empty;//記錄鼠標按下時的坐標，用來確定繪圖起點
         private Point pt_sp = Point.Empty;//記錄鼠標放開時的坐標，用來確定繪圖終點
         bool flag_mouse_down = false;
         Point pt_picture_position = Point.Empty;
-        int W;
-        int H;
+        int W = 0;
+        int H = 0;
+        int w = 0;
+        int h = 0;
 
         public Form1()
         {
@@ -37,9 +39,19 @@ namespace test_move_pic_in_pbox
             H = pictureBox1.Height;
 
             bitmap0 = new Bitmap(W, H);
-            bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
 
             g = Graphics.FromImage(bitmap0);
+            g.Clear(Color.White);
+
+            bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+            w = bitmap1.Width;
+            h = bitmap1.Height;
+
+            /*
+            int x_st = (W - w) / 2;
+            int y_st = (H - h) / 2;
+            g.DrawImage(bitmap1, x_st, y_st, bitmap1.Width, bitmap1.Height);
+            */
 
             g.DrawImage(bitmap1, pt_picture_position.X, pt_picture_position.Y, bitmap1.Width, bitmap1.Height);
 
@@ -74,8 +86,8 @@ namespace test_move_pic_in_pbox
             //bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //最大化螢幕
-            //this.FormBorderStyle = FormBorderStyle.None;
-            //this.WindowState = FormWindowState.Maximized;
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
 
             //離開按鈕的寫法
             bt_exit_setup();
@@ -182,9 +194,10 @@ namespace test_move_pic_in_pbox
             //richTextBox1.Text += "dx = " + dx.ToString() + ", dy = " + dy.ToString() + "\n";
             //richTextBox1.Text += "new : " + pt_picture_position.ToString() + "\n";
 
-            bitmap0 = new Bitmap(W, H);
+            //bitmap0 = new Bitmap(W, H);
 
-            g = Graphics.FromImage(bitmap0);
+            //g = Graphics.FromImage(bitmap0);
+            g.Clear(Color.White);
 
             g.DrawImage(bitmap1, pt_picture_position.X, pt_picture_position.Y, bitmap1.Width, bitmap1.Height);
 

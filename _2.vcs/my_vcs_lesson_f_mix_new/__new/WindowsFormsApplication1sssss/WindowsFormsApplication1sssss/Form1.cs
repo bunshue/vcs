@@ -33,10 +33,6 @@ namespace WindowsFormsApplication1sssss
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-        }
-
         /// <summary>
         /// 多線程搜索方法
         /// </summary>

@@ -54,14 +54,59 @@ namespace vcs_Cryptography4
         private void button1_Click(object sender, EventArgs e)
         {
             //ROT13編碼
-            richTextBox2.Text = ROT13Encode(richTextBox1.Text);
+            richTextBox_rot13b.Text = ROT13Encode(richTextBox_rot13a.Text);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             //ROT13解碼, 其實就是再編碼一次
-            richTextBox3.Text = ROT13Encode(richTextBox2.Text);
+            richTextBox_rot13c.Text = ROT13Encode(richTextBox_rot13b.Text);
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //加密
+            textBox2.Text = Encrypt(textBox1.Text);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //解密
+            textBox2.Text = Decryptor(textBox2.Text);
+        }
+
+        private string Encrypt(string s)
+        {
+            Encoding ascii = Encoding.ASCII;
+            string EncryptString;
+            EncryptString = "";
+            for (int i = 0; i < s.Length; i++)
+            {
+                int j;
+                byte[] b = new byte[1];
+                j = Convert.ToInt32(ascii.GetBytes(s[i].ToString())[0]);
+                j = j + 5;
+                b[0] = Convert.ToByte(j);
+                EncryptString = EncryptString + ascii.GetString(b);
+            }
+            return EncryptString;
+        }
+
+        private string Decryptor(string s)
+        {
+            Encoding ascii = Encoding.ASCII;
+            string DecryptorString;
+            DecryptorString = "";
+            for (int i = 0; i < s.Length; i++)
+            {
+                int j;
+                byte[] b = new byte[1];
+                j = Convert.ToInt32(ascii.GetBytes(s[i].ToString())[0]);
+                j = j - 5;
+                b[0] = Convert.ToByte(j);
+                DecryptorString = DecryptorString + ascii.GetString(b);
+            }
+            return DecryptorString;
+        }
     }
 }

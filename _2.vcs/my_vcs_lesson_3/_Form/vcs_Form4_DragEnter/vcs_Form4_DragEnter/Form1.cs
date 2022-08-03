@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
-namespace AllowDropFile
+namespace vcs_Form4_DragEnter
 {
     public partial class Form1 : Form
     {
@@ -19,7 +19,6 @@ namespace AllowDropFile
         private void Form1_Load(object sender, EventArgs e)
         {
             this.AllowDrop = true;
-
         }
 
         private void Form1_DragEnter(object sender, DragEventArgs e)
@@ -29,7 +28,7 @@ namespace AllowDropFile
                 string[] files = (string[])e.Data.GetData(DataFormats.FileDrop);
                 for (int i = 0; i < files.Length; i++)
                 {
-                    listBox1.Items.Add(files[i]);
+                    richTextBox1.Text += "拖曳檔案進表單 : " + files[i] + "\n";
                 }
             }
         }
