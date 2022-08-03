@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Drawing.Imaging;   //for ImageFormat
 using System.Drawing.Drawing2D;
 
@@ -13,13 +14,10 @@ namespace vcs_RotatePicture1
 {
     public partial class Form1 : Form
     {
-        string filename = "C:\\______test_files\\picture1.jpg";
+        string filename = @"C:\______test_files\picture1.jpg";
 
-        // The original image.
-        private Bitmap bitmap1;
-
-        // The rotated image.
-        private Bitmap bitmap2;
+        private Bitmap bitmap1 = null;  //原圖
+        private Bitmap bitmap2 = null;  //旋轉過的圖
 
         public Form1()
         {

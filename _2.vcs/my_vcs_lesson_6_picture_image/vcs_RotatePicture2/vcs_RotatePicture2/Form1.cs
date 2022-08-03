@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Drawing.Drawing2D;
 using System.IO;
 using System.Drawing.Imaging;
+using System.Drawing.Drawing2D;
 
 namespace vcs_RotatePicture2
 {
@@ -18,9 +18,9 @@ namespace vcs_RotatePicture2
         // The current scale.
         private float angle = 0;
 
-        // The original and rotated bitmaps.
-        private Bitmap bitmap1 = null;
-        private Bitmap bitmap2 = null;
+        string filename = @"C:\______test_files\picture1.jpg";
+        private Bitmap bitmap1 = null;  //原圖
+        private Bitmap bitmap2 = null;  //旋轉過的圖
 
         public Form1()
         {
@@ -29,8 +29,6 @@ namespace vcs_RotatePicture2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
-
             using (Bitmap bm = new Bitmap(filename))
             {
                 bitmap1 = new Bitmap(bm);

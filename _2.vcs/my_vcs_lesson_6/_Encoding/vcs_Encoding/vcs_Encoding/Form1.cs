@@ -253,17 +253,116 @@ namespace vcs_Encoding
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //編碼轉換範例
+            string string_old = "方法";   //原字串
+            string string_by_big5 = "群曜";   //使用 big5 的字串
+            string string_by_gb2312 = "醫電"; //使用 gb2312 的字串
+            string string_by_utf8 = "股份"; //使用 UTF8 的字串
+            string string_by_ascii = "有限"; //使用 ASCII 的字串
+            string string_by_default = "公司"; //使用 預設編碼 的字串
 
+            byte[] bytes_big5;      //存放 big5 轉換出來的拜列
+            byte[] bytes_gb2312;    //存放 gb2312 轉換出來的拜列
+            byte[] bytes_utf8;      //存放 UTF8 轉換出來的拜列
+            byte[] bytes_ascii;     //存放 ASCII 轉換出來的拜列
+            byte[] bytes_default;   //存放 預設編碼 轉換出來的拜列
+            int len = 0;
+
+            richTextBox1.Text += "用gb2312寫\"方法\"二字, 就是寫B7BD B7A8\n";
+            //使用gb2312將字串轉成拜列
+            bytes_gb2312 = Encoding.GetEncoding("gb2312").GetBytes(string_old);
+            len = bytes_gb2312.Length;
+            richTextBox1.Text += "len = " + len.ToString() + "\tdata : \t";
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += bytes_gb2312[i].ToString("X2");
+
+            }
+            richTextBox1.Text += "\n";
+
+            //B7BD B7A8用big5解開, 得到"源楊"二字.
+            //用gb2312將拜列解開成字串
+            string_by_gb2312 = Encoding.GetEncoding("gb2312").GetString(bytes_gb2312);
+            //用big5將拜列解開成字串
+            string_by_big5 = Encoding.GetEncoding("big5").GetString(bytes_gb2312);
+
+            richTextBox1.Text += "拜列用gb2312解開 : \t" + string_by_gb2312 + "\t正確\n";
+            //B7BD B7A8用big5解開, 得到"源楊"二字.
+            richTextBox1.Text += "拜列用big解開 : \t" + string_by_big5 + "\t錯誤\n";
+
+            //以下就不展開了
+
+            //使用UTF8將字串轉成拜列
+            bytes_utf8 = Encoding.UTF8.GetBytes(string_by_utf8);
+            //用UTF8將拜列解開成字串
+            string string_by_utf8_new = Encoding.UTF8.GetString(bytes_utf8);
+
+            //使用ASCII將字串轉成拜列
+            bytes_ascii = Encoding.ASCII.GetBytes(string_by_ascii);
+            //用ASCII將拜列解開成字串
+            string string_by_ascii_new = Encoding.ASCII.GetString(bytes_ascii);
+
+            //使用預設編碼將字串轉成拜列
+            bytes_default = Encoding.Default.GetBytes(string_by_default);
+            //用預設編碼將拜列解開成字串
+            string string_by_default_new = Encoding.Default.GetString(bytes_default);
+
+            //在 C# 中使用 BitConverter.ToString() 方法將字串轉換為十六進位制
+            string decString = "0123456789";
+            byte[] bytes = Encoding.Default.GetBytes(decString);
+            string hexString = BitConverter.ToString(bytes);
+            hexString = hexString.Replace("-", "");
+            Console.WriteLine(hexString);
+            richTextBox1.Text += hexString + "\n";
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //特殊的字串解碼
+
+            //特殊的字串解碼
+
+            /*三組字串
+            =?big5?B?W01WUF0gp96zTrjqt70gZnJvbSBNVlAgcHJpdmF0ZSBuZXdzZ3JvdXA=?=
+            =?gb2312?B?S0BNUyDpX7Bs7ZjQ8g==?=
+            =?utf-8?b?N+aciOS7veaVsOaNruW6k+W6lOeUqOeoi+W6j+W8gOWPkeS6uuWRmOaWsOmXu+W/q+iurw==?=
+            */
+            string str1 = "W01WUF0gp96zTrjqt70gZnJvbSBNVlAgcHJpdmF0ZSBuZXdzZ3JvdXA=";
+            string str2 = "S0BNUyDpX7Bs7ZjQ8g==";
+            string str3 = "N+aciOS7veaVsOaNruW6k+W6lOeUqOeoi+W6j+W8gOWPkeS6uuWRmOaWsOmXu+W/q+iurw==";
+
+            string strParser1 = Encoding.GetEncoding("big5").GetString(Convert.FromBase64String(str1));
+            string strParser2 = Encoding.GetEncoding("gb2312").GetString(Convert.FromBase64String(str2));
+            string strParser3 = Encoding.GetEncoding("utf-8").GetString(Convert.FromBase64String(str3));
+
+            richTextBox1.Text += "strParser1 = " + strParser1 + "\n";
+            richTextBox1.Text += "strParser2 = " + strParser2 + "\n";
+            richTextBox1.Text += "strParser3 = " + strParser3 + "\n";
 
         }
 
+        //C#兩種方法判斷字符是否為漢字
+        //一、用漢字的 UNICODE 編碼范圍判斷
+        //漢字的 UNICODE 編碼范圍是4e00-9fbb，
         private void button7_Click(object sender, EventArgs e)
         {
+            //判斷是不是漢字
+            string text = "判斷是不是漢字，ABC,keleyi.com";
+            char[] c = text.ToCharArray();
 
+            for (int i = 0; i < c.Length; i++)
+            {
+                richTextBox1.Text += c[i] + "\t";
+                if (c[i] >= 0x4e00 && c[i] <= 0x9fbb)
+                {
+                    richTextBox1.Text += "是漢字\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "不是漢字\n";
+                }
+            }
         }
 
         private void button8_Click(object sender, EventArgs e)

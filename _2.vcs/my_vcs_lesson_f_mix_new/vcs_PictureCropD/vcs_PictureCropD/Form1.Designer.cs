@@ -60,7 +60,7 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(554, 371);
+            this.richTextBox1.Location = new System.Drawing.Point(937, 371);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(359, 294);
             this.richTextBox1.TabIndex = 1;
@@ -78,7 +78,7 @@
             this.groupBox_selection.Controls.Add(this.nud_x_st);
             this.groupBox_selection.Controls.Add(this.lb_y_st);
             this.groupBox_selection.Controls.Add(this.lb_w);
-            this.groupBox_selection.Location = new System.Drawing.Point(554, 12);
+            this.groupBox_selection.Location = new System.Drawing.Point(937, 12);
             this.groupBox_selection.Name = "groupBox_selection";
             this.groupBox_selection.Size = new System.Drawing.Size(317, 192);
             this.groupBox_selection.TabIndex = 16;
@@ -204,7 +204,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1000, 708);
+            this.ClientSize = new System.Drawing.Size(1305, 708);
             this.Controls.Add(this.groupBox_selection);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.pictureBox1);

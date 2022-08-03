@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_Cryptography7_ROT13
+namespace vcs_Cryptography4
 {
     static class Program
     {

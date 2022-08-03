@@ -28,7 +28,7 @@ namespace vcs_Remove_Bin_Obj
         {
             int x_st = 15;
             int y_st = 15;
-            int dx = 200;
+            int dx = 230;
             int dy = 40;
             checkBox3.Location = new Point(x_st, y_st + dy * 0);
             checkBox1.Location = new Point(x_st, y_st + dy * 1);
@@ -42,7 +42,8 @@ namespace vcs_Remove_Bin_Obj
 
             checkBox5.Location = new Point(x_st, y_st + dy * 10);
             checkBox6.Location = new Point(x_st, y_st + dy * 11);
-            button3.Location = new Point(x_st, y_st + dy * 12);
+            button2.Location = new Point(x_st, y_st + dy * 12);
+            button3.Location = new Point(x_st, y_st + dy * 13 + 40);
 
             lb_main_mesg.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 1);
@@ -55,6 +56,11 @@ namespace vcs_Remove_Bin_Obj
             this.Text = "目前位置 : " + currentPath;
             search_path = currentPath;
             lb_main_mesg.Text = "";
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -98,7 +104,7 @@ namespace vcs_Remove_Bin_Obj
             if (checkBox10.Checked == true)
             {
                 richTextBox1.Text += "共刪除空資料夾 " + total_delete_empty_folder_cnt.ToString() + " 個\n";
-            }        
+            }
         }
 
         // Process all files in the directory passed in, recurse on any directories 
@@ -397,7 +403,7 @@ namespace vcs_Remove_Bin_Obj
                 lb_main_mesg.Text += "\t有錯誤";
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)
         {
             lb_main_mesg.Text = "開始改名檔案";
             this.Refresh();         //加上.Refresh()才可以讓人看清楚字的變化
@@ -429,9 +435,9 @@ namespace vcs_Remove_Bin_Obj
             ProcessRenameBackup(filename_backup);
         }
 
-        private void bt_clear_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
+            //檔名簡中轉正中
         }
     }
 }

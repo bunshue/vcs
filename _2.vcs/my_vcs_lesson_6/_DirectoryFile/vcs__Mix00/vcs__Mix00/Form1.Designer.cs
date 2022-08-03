@@ -444,6 +444,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(160, 70);
             this.button25.TabIndex = 54;
+            this.button25.Text = "取得所有邏輯分區";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 

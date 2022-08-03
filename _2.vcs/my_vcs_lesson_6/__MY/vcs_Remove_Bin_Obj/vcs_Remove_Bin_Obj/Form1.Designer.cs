@@ -44,6 +44,7 @@
             this.checkBox8 = new System.Windows.Forms.CheckBox();
             this.checkBox9 = new System.Windows.Forms.CheckBox();
             this.checkBox10 = new System.Windows.Forms.CheckBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -59,9 +60,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(230, 66);
+            this.richTextBox1.Location = new System.Drawing.Point(258, 51);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(686, 527);
+            this.richTextBox1.Size = new System.Drawing.Size(658, 580);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -120,11 +121,11 @@
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button3.Location = new System.Drawing.Point(14, 488);
+            this.button3.Location = new System.Drawing.Point(15, 567);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(104, 52);
             this.button3.TabIndex = 8;
-            this.button3.Text = "改名\r\n的副本";
+            this.button3.Text = "檔名簡中轉正中";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -157,7 +158,7 @@
             this.lb_main_mesg.AutoSize = true;
             this.lb_main_mesg.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_main_mesg.ForeColor = System.Drawing.Color.Red;
-            this.lb_main_mesg.Location = new System.Drawing.Point(226, 24);
+            this.lb_main_mesg.Location = new System.Drawing.Point(254, 24);
             this.lb_main_mesg.Name = "lb_main_mesg";
             this.lb_main_mesg.Size = new System.Drawing.Size(66, 24);
             this.lb_main_mesg.TabIndex = 134;
@@ -166,7 +167,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(532, 433);
+            this.bt_clear.Location = new System.Drawing.Point(808, 529);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(85, 35);
             this.bt_clear.TabIndex = 135;
@@ -224,11 +225,23 @@
             this.checkBox10.Text = "刪除空資料夾";
             this.checkBox10.UseVisualStyleBackColor = true;
             // 
+            // button2
+            // 
+            this.button2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button2.Location = new System.Drawing.Point(15, 492);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(104, 52);
+            this.button2.TabIndex = 140;
+            this.button2.Text = "改名\r\n的副本";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(928, 605);
+            this.ClientSize = new System.Drawing.Size(928, 643);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.checkBox10);
             this.Controls.Add(this.checkBox9);
             this.Controls.Add(this.checkBox8);
@@ -270,6 +283,7 @@
         private System.Windows.Forms.CheckBox checkBox8;
         private System.Windows.Forms.CheckBox checkBox9;
         private System.Windows.Forms.CheckBox checkBox10;
+        private System.Windows.Forms.Button button2;
     }
 }
 

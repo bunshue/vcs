@@ -149,14 +149,6 @@ namespace vcs_Mix02
         private void button1_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //取得所有邏輯分區
-            //取得本地磁盤目錄
-            richTextBox1.Text += "取得所有邏輯分區\n";
-            string[] logicdrives = System.IO.Directory.GetLogicalDrives();
-            for (int i = 0; i < logicdrives.Length; i++)
-            {
-                richTextBox1.Text += "取得: " + logicdrives[i] + "\n";
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)

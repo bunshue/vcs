@@ -10,11 +10,10 @@ namespace vcs_RotatePicture4
 {
     public partial class Form1 : Form
     {
-        // The original image.
-        private Bitmap OriginalBitmap;
+        string filename = @"C:\______test_files\picture1.jpg";
 
-        // The rotated image.
-        private Bitmap RotatedBitmap;
+        private Bitmap bitmap1 = null;  //原圖
+        private Bitmap bitmap2 = null;  //旋轉過的圖
 
         // The center of the bitmap.
         private PointF ImageCenter;
@@ -32,27 +31,30 @@ namespace vcs_RotatePicture4
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
+            LoadImageFile(filename);
+        }
 
+        void LoadImageFile(string filename)
+        {
             // Start with no rotation.
             CurrentAngle = 0;
             TotalAngle = 0;
 
             // Load the bitmap.
             Bitmap bm = new Bitmap(filename);
-            pictureBox1.Image = OriginalBitmap;
+            pictureBox1.Image = bitmap1;
 
             // See how big the rotated bitmap must be.
             int wid = (int)Math.Sqrt(bm.Width * bm.Width + bm.Height * bm.Height);
 
             // Make the original unrotated bitmap.
-            OriginalBitmap = new Bitmap(wid, wid);
+            bitmap1 = new Bitmap(wid, wid);
 
             // Save the center of the image for calculating rotation angles.
             ImageCenter = new PointF(wid / 2f, wid / 2f);
 
             // Copy the image into the middle of the bitmap.
-            using (Graphics gr = Graphics.FromImage(OriginalBitmap))
+            using (Graphics gr = Graphics.FromImage(bitmap1))
             {
                 // Clear with the color in the image's upper left corner.
                 gr.Clear(bm.GetPixel(0, 0));
@@ -65,88 +67,10 @@ namespace vcs_RotatePicture4
             }
 
             // Display the original image.
-            pictureBox1.Image = OriginalBitmap;
+            pictureBox1.Image = bitmap1;
 
             // Size the form to fit.
             SizeForm();
-
-            // Enable Save As.
-            mnuFileSaveAs.Enabled = true;
-
-
-        }
-
-        // Load an image file.
-        private void mnuFileOpen_Click(object sender, EventArgs e)
-        {
-            if (ofdFile.ShowDialog() == DialogResult.OK)
-            {
-                // Start with no rotation.
-                CurrentAngle = 0;
-                TotalAngle = 0;
-
-                // Load the bitmap.
-                Bitmap bm = new Bitmap(ofdFile.FileName);
-                pictureBox1.Image = OriginalBitmap;
-
-                // See how big the rotated bitmap must be.
-                int wid = (int)Math.Sqrt(bm.Width * bm.Width + bm.Height * bm.Height);
-
-                // Make the original unrotated bitmap.
-                OriginalBitmap = new Bitmap(wid, wid);
-
-                // Save the center of the image for calculating rotation angles.
-                ImageCenter = new PointF(wid / 2f, wid / 2f);
-
-                // Copy the image into the middle of the bitmap.
-                using (Graphics gr = Graphics.FromImage(OriginalBitmap))
-                {
-                    // Clear with the color in the image's upper left corner.
-                    gr.Clear(bm.GetPixel(0, 0));
-
-                    //// For debugging. (Easier to see the background.)
-                    //gr.Clear(Color.LightBlue);
-
-                    // Draw the image centered.
-                    gr.DrawImage(bm, (wid - bm.Width) / 2, (wid - bm.Height) / 2);
-                }
-
-                // Display the original image.
-                pictureBox1.Image = OriginalBitmap;
-
-                // Size the form to fit.
-                SizeForm();
-
-                // Enable Save As.
-                mnuFileSaveAs.Enabled = true;
-            }
-        }
-
-        private void mnuFileSaveAs_Click(object sender, EventArgs e)
-        {
-            //自動檔名 與 存檔語法
-            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-
-            try
-            {
-                //bitmap1.Save(@file1, ImageFormat.Jpeg);
-                RotatedBitmap.Save(filename, ImageFormat.Bmp);
-                //bitmap1.Save(@file3, ImageFormat.Png);
-
-                //richTextBox1.Text += "已存檔 : " + file1 + "\n";
-                //richTextBox1.Text += "已存檔 : " + filename + "\n";
-                //richTextBox1.Text += "已存檔 : " + file3 + "\n";
-            }
-            catch (Exception ex)
-            {
-                //richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-            }
-
-        }
-
-        private void mnuFileExit_Click(object sender, EventArgs e)
-        {
-            Close();
         }
 
         // Return a bitmap rotated around its center.
@@ -166,7 +90,7 @@ namespace vcs_RotatePicture4
                 g.InterpolationMode = InterpolationMode.High;
 
                 // Clear with the color in the image's upper left corner.
-                g.Clear(OriginalBitmap.GetPixel(0, 0));
+                g.Clear(bitmap1.GetPixel(0, 0));
 
                 //// For debugging. (Makes it easier to see the background.)
                 //gr.Clear(Color.LightBlue);
@@ -212,7 +136,7 @@ namespace vcs_RotatePicture4
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             // Do nothing if there's no image loaded.
-            if (OriginalBitmap == null)
+            if (bitmap1 == null)
             {
                 return;
             }
@@ -228,7 +152,10 @@ namespace vcs_RotatePicture4
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             // Do nothing if there's no drag in progress.
-            if (!DragInProgress) return;
+            if (!DragInProgress)
+            {
+                return;
+            }
 
             // Get the angle from horizontal to the
             // vector between the center and the current point.
@@ -247,10 +174,10 @@ namespace vcs_RotatePicture4
             txtAngle.Text = CurrentAngle.ToString("0.00") + "°";
 
             // Rotate the original image to make the result bitmap.
-            RotatedBitmap = RotateBitmap(OriginalBitmap, CurrentAngle);
+            bitmap2 = RotateBitmap(bitmap1, CurrentAngle);
 
             // Display the result.
-            pictureBox1.Image = RotatedBitmap;
+            pictureBox1.Image = bitmap2;
             pictureBox1.Refresh();
         }
 

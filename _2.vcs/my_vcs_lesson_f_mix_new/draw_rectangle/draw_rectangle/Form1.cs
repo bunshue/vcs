@@ -41,8 +41,30 @@ namespace draw_rectangle
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             //bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             //pictureBox1.Image = bitmap1;
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            int pbx_W = 900;
+            int pbx_H = 600;
+
+            x_st = 10;
+            y_st = 10;
+            dx = pbx_W + 10;
+            dy = pbx_H + 10;
+
+            pictureBox1.Size = new Size(pbx_W, pbx_H);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
             //跟隨鼠標在 pictureBox 的圖片上畫矩形
             pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
@@ -65,9 +87,16 @@ namespace draw_rectangle
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             flag_mouse_down = true;
+            pt_st = e.Location; //起始點座標
             intStartX = e.X;
             intStartY = e.Y;
 
+            nud_w.Value = 0;
+            nud_h.Value = 0;
+            nud_x_st.Value = 0;
+            nud_y_st.Value = 0;
+
+            //label2.Text = "";
             SelectionRectangle = new Rectangle(new Point(0, 0), new Size(0, 0));
         }
 
@@ -75,6 +104,23 @@ namespace draw_rectangle
         {
             if (flag_mouse_down == true)
             {
+                pt_sp = e.Location; //終點座標
+
+                SelectionRectangle = MakeRectangle(pt_st, pt_sp);
+
+                /*
+                if ((SelectionRectangle.X < 0) || (SelectionRectangle.X >= W))
+                    return;
+                if ((SelectionRectangle.Y < 0) || (SelectionRectangle.Y >= H))
+                    return;
+                if ((SelectionRectangle.Width <= 0) || (SelectionRectangle.Width > W))
+                    return;
+                if ((SelectionRectangle.Height <= 0) || (SelectionRectangle.Height > H))
+                    return;
+                if (((SelectionRectangle.X + SelectionRectangle.Width) > W) || ((SelectionRectangle.Y + SelectionRectangle.Height) > H))
+                    return;
+                */
+
                 try
                 {
                     //Image tmp = Image.FromFile("1.png");
@@ -142,9 +188,7 @@ namespace draw_rectangle
             nud_w.Value = SelectionRectangle.Width;
             nud_h.Value = SelectionRectangle.Height;
             //label2.Text = "選取區域 : " + SelectionRectangle.ToString();
-
-
-
         }
     }
 }
+

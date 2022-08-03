@@ -477,24 +477,6 @@ namespace vcs_Mix01
         private void button10_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //特殊的字串解碼
-
-            /*三組字串
-            =?big5?B?W01WUF0gp96zTrjqt70gZnJvbSBNVlAgcHJpdmF0ZSBuZXdzZ3JvdXA=?=
-            =?gb2312?B?S0BNUyDpX7Bs7ZjQ8g==?=
-            =?utf-8?b?N+aciOS7veaVsOaNruW6k+W6lOeUqOeoi+W6j+W8gOWPkeS6uuWRmOaWsOmXu+W/q+iurw==?=
-            */
-            string str1 = "W01WUF0gp96zTrjqt70gZnJvbSBNVlAgcHJpdmF0ZSBuZXdzZ3JvdXA=";
-            string str2 = "S0BNUyDpX7Bs7ZjQ8g==";
-            string str3 = "N+aciOS7veaVsOaNruW6k+W6lOeUqOeoi+W6j+W8gOWPkeS6uuWRmOaWsOmXu+W/q+iurw==";
-
-            string strParser1 = Encoding.GetEncoding("big5").GetString(Convert.FromBase64String(str1));
-            string strParser2 = Encoding.GetEncoding("gb2312").GetString(Convert.FromBase64String(str2));
-            string strParser3 = Encoding.GetEncoding("utf-8").GetString(Convert.FromBase64String(str3));
-
-            richTextBox1.Text += "strParser1 = " + strParser1 + "\n";
-            richTextBox1.Text += "strParser2 = " + strParser2 + "\n";
-            richTextBox1.Text += "strParser3 = " + strParser3 + "\n";
         }
 
         //偵測原始檔案類型
@@ -628,28 +610,9 @@ namespace vcs_Mix01
             show_button_text(sender);
         }
 
-        //C#兩種方法判斷字符是否為漢字
-        //一、用漢字的 UNICODE 編碼范圍判斷
-        //漢字的 UNICODE 編碼范圍是4e00-9fbb，
         private void button20_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //判斷是不是漢字
-            string text = "判斷是不是漢字，ABC,keleyi.com";
-            char[] c = text.ToCharArray();
-
-            for (int i = 0; i < c.Length; i++)
-            {
-                richTextBox1.Text += c[i] + "\t";
-                if (c[i] >= 0x4e00 && c[i] <= 0x9fbb)
-                {
-                    richTextBox1.Text += "是漢字\n";
-                }
-                else
-                {
-                    richTextBox1.Text += "不是漢字\n";
-                }
-            }
         }
 
         private void button21_Click(object sender, EventArgs e)

@@ -15,11 +15,10 @@ namespace vcs_RotatePicture5
 {
     public partial class Form1 : Form
     {
-        // The original image.
-        private Bitmap OriginalBitmap;
+        string filename = @"C:\______test_files\picture1.jpg";
 
-        // The rotated image.
-        private Bitmap RotatedBitmap;
+        private Bitmap bitmap1 = null;  //原圖
+        private Bitmap bitmap2 = null;  //旋轉過的圖
 
         // The current angle of rotation during a drag.
         private float CurrentAngle = 0;
@@ -34,9 +33,12 @@ namespace vcs_RotatePicture5
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Text = "旋轉角度";
+            LoadImageFile2(filename);
+        }
 
-            string filename = @"C:\______test_files\picture1.jpg";
+        void LoadImageFile2(string filename)
+        {
+            this.Text = "旋轉角度";
 
             // Start with no rotation.
             CurrentAngle = 0;
@@ -44,16 +46,16 @@ namespace vcs_RotatePicture5
 
             // Load the bitmap.
             Bitmap bm = new Bitmap(filename);
-            pictureBox1.Image = OriginalBitmap;
+            pictureBox1.Image = bitmap1;
 
             // See how big the rotated bitmap must be.
             int wid = (int)Math.Sqrt(bm.Width * bm.Width + bm.Height * bm.Height);
 
             // Make the original unrotated bitmap.
-            OriginalBitmap = new Bitmap(wid, wid);
+            bitmap1 = new Bitmap(wid, wid);
 
             // Copy the image into the middle of the bitmap.
-            using (Graphics gr = Graphics.FromImage(OriginalBitmap))
+            using (Graphics gr = Graphics.FromImage(bitmap1))
             {
                 // Clear with the color in the image's upper left corner.
                 gr.Clear(bm.GetPixel(0, 0));
@@ -66,7 +68,7 @@ namespace vcs_RotatePicture5
             }
 
             // Display the original image.
-            pictureBox1.Image = OriginalBitmap;
+            pictureBox1.Image = bitmap1;
 
             // Size the form to fit.
             SizeForm();
@@ -90,7 +92,7 @@ namespace vcs_RotatePicture5
                 gr.InterpolationMode = InterpolationMode.High;
 
                 // Clear with the color in the image's upper left corner.
-                gr.Clear(OriginalBitmap.GetPixel(0, 0));
+                gr.Clear(bitmap1.GetPixel(0, 0));
 
                 //// For debugging. (Makes it easier to see the background.)
                 //gr.Clear(Color.LightBlue);
@@ -140,7 +142,7 @@ namespace vcs_RotatePicture5
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             // Do nothing if there's no image loaded.
-            if (OriginalBitmap == null) return;
+            if (bitmap1 == null) return;
             DragInProgress = true;
 
             // Get the initial angle from horizontal to the
@@ -172,10 +174,10 @@ namespace vcs_RotatePicture5
             this.Text = "旋轉角度 : " + CurrentAngle.ToString("0.00") + "°";
 
             // Rotate the original image to make the result bitmap.
-            RotatedBitmap = RotateBitmap(OriginalBitmap, CurrentAngle);
+            bitmap2 = RotateBitmap(bitmap1, CurrentAngle);
 
             // Display the result.
-            pictureBox1.Image = RotatedBitmap;
+            pictureBox1.Image = bitmap2;
             pictureBox1.Refresh();
         }
 

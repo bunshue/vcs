@@ -7,13 +7,18 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_Cryptography7_ROT13
+namespace vcs_Cryptography4
 {
     public partial class Form1 : Form
     {
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
         public string ROT13Encode(string InputText)
@@ -57,5 +62,6 @@ namespace vcs_Cryptography7_ROT13
             //ROT13解碼, 其實就是再編碼一次
             richTextBox3.Text = ROT13Encode(richTextBox2.Text);
         }
+
     }
 }

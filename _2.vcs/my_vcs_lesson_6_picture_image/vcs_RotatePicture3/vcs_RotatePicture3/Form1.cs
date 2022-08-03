@@ -10,11 +10,10 @@ namespace vcs_RotatePicture3
 {
     public partial class Form1 : Form
     {
-        // The original image.
-        private Bitmap bitmap1;
+        string filename = "C:\\______test_files\\picture1.jpg";
 
-        // The rotated image.
-        private Bitmap bitmap2;
+        private Bitmap bitmap1 = null;  //原圖
+        private Bitmap bitmap2 = null;  //旋轉過的圖
 
         public Form1()
         {
@@ -23,9 +22,6 @@ namespace vcs_RotatePicture3
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // Load an image file.
-            string filename = @"C:\______test_files\picture1.jpg";
-
             bitmap1 = new Bitmap(filename);
             pictureBox1.Image = bitmap1;
         }

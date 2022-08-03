@@ -815,7 +815,14 @@ namespace vcs__Mix00
 
         private void button25_Click(object sender, EventArgs e)
         {
-
+            //取得所有邏輯分區
+            //取得本地磁盤目錄
+            richTextBox1.Text += "取得所有邏輯分區\n";
+            string[] logicdrives = System.IO.Directory.GetLogicalDrives();
+            for (int i = 0; i < logicdrives.Length; i++)
+            {
+                richTextBox1.Text += "取得: " + logicdrives[i] + "\n";
+            }
         }
 
         private void button26_Click(object sender, EventArgs e)
@@ -839,4 +846,3 @@ namespace vcs__Mix00
         }
     }
 }
-
