@@ -37,9 +37,9 @@ namespace vcs_RotatePicture8
 
             pictureBox1.Image = image_rotated;
             pictureBox1.Size = new Size(image_rotated.Width, image_rotated.Height);
-
         }
     }
+
     public static class ImageEx
     {
         public static Image GetRotateImage(this Image img, float angle)
@@ -81,3 +81,4 @@ namespace vcs_RotatePicture8
         }
     }
 }
+

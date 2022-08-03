@@ -14,8 +14,6 @@ namespace vcs_PictureCrop5
 {
     public partial class Form1 : Form
     {
-        Bitmap bitmap1; //原圖
-        Bitmap bitmap2; //畫臨時框
         string filename = @"C:\______test_files\elephant.jpg";
 
         private Point point_st;
@@ -26,6 +24,17 @@ namespace vcs_PictureCrop5
 
         private float PictureScale = 1;
 
+        private Point pt_st = Point.Empty;//記錄鼠標按下時的坐標，用來確定繪圖起點
+        private Point pt_sp = Point.Empty;//記錄鼠標放開時的坐標，用來確定繪圖終點
+        private Bitmap bitmap1 = null;  //原圖位圖Bitmap
+        private Bitmap bitmap2 = null;  //擷取部分位圖Bitmap
+        private Rectangle SelectionRectangle = new Rectangle(new Point(0, 0), new Size(0, 0));    //用來保存截圖的矩形
+
+        private int W = 0;  //原圖的寬
+        private int H = 0;  //原圖的高
+        //private int w = 0;  //擷取圖的寬
+        //private int h = 0;  //擷取圖的高
+
         public Form1()
         {
             InitializeComponent();
@@ -33,13 +42,38 @@ namespace vcs_PictureCrop5
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+
             bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             pictureBox1.Image = bitmap1;
+        }
 
-            pictureBox1.MouseDown += pictureBox1_MouseDown;
-            pictureBox1.MouseMove += pictureBox1_MouseMove;
-            pictureBox1.MouseUp += pictureBox1_MouseUp;
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            int pbx_W = 900;
+            int pbx_H = 600;
+
+            x_st = 10;
+            y_st = 10;
+            dx = pbx_W + 10;
+            dy = pbx_H + 10;
+
+            //跟隨鼠標在 pictureBox 的圖片上畫矩形
+            pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
+            pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
+            pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
             pictureBox1.Cursor = Cursors.Cross;
+        }
+
+        // Return a Rectangle with these points as corners.
+        private Rectangle MakeRectangle(int x0, int y0, int x1, int y1)
+        {
+            return new Rectangle(Math.Min(x0, x1), Math.Min(y0, y1), Math.Abs(x0 - x1), Math.Abs(y0 - y1));
         }
 
         private Rectangle MakeRectangle(Point pt1, Point pt2)
