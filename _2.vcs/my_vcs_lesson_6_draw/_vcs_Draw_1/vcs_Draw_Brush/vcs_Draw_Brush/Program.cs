@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_Draw_TextureBrush
+namespace vcs_Draw_Brush
 {
     static class Program
     {

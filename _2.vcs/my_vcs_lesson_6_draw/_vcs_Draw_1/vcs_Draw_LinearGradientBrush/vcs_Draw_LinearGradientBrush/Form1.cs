@@ -308,6 +308,34 @@ namespace vcs_Draw_LinearGradientBrush
 
         }
 
+        private void button9_Click(object sender, EventArgs e)
+        {
+            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            Graphics g = Graphics.FromImage(bitmap1);
+
+            //漸層色
+            LinearGradientBrush lgBrush = new LinearGradientBrush(new Point(0, 0), new Point(220, 100), Color.Yellow, Color.Green);
+            g.FillEllipse(lgBrush, 20, 20, 200, 100);
+            g.DrawString("群曜醫電", new Font("標楷體", 40, FontStyle.Bold | FontStyle.Italic | FontStyle.Underline), lgBrush, 10, 200);
+
+            pictureBox1.Image = bitmap1;
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
 

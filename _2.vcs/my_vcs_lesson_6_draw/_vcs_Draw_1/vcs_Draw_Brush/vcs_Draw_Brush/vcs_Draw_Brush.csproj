@@ -8,8 +8,8 @@
     <ProjectGuid>{672442DB-B7F7-4024-9789-0FAD096E92BE}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_Draw_TextureBrush</RootNamespace>
-    <AssemblyName>vcs_Draw_TextureBrush</AssemblyName>
+    <RootNamespace>vcs_Draw_Brush</RootNamespace>
+    <AssemblyName>vcs_Draw_Brush</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

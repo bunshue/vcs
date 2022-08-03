@@ -36,8 +36,7 @@ namespace vcs_ReadWrite_TXT
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //ReadAllLines
-
+            //ReadAllLines 1
             string filename = @"C:\______test_files\__RW\_txt\article.txt";
 
             StringBuilder sb = new StringBuilder();
@@ -50,6 +49,42 @@ namespace vcs_ReadWrite_TXT
             }
 
             richTextBox1.Text += sb.ToString() + "\n";
+
+            //ReadAllLines 2
+            //將純文字檔拆成一行一行的字串陣列, 可以去除前後空白
+            filename = @"C:\______test_files\__RW\_txt\poem.txt";
+            string[] patterns;
+            patterns = File.ReadAllLines(filename).Select(i => i.Trim()).Where(i => i != string.Empty).ToArray();
+            int len = patterns.Length;
+            //richTextBox1.Text += "len = " + len.ToString() + "\n";
+            int ii;
+            for (ii = 0; ii < len; ii++)
+            {
+                richTextBox1.Text += patterns[ii] + "\n";
+            }
+
+            //ReadAllLines 3
+            //開檔ReadAllLines存檔
+            filename = @"C:\______test_files\__RW\_txt\琵琶行.txt";
+            // Read the whole file to a string array
+            string[] input_lines = File.ReadAllLines(filename, Encoding.Default);
+
+            List<string> output_lines = new List<string>();
+
+            len = input_lines.Length;
+            richTextBox1.Text += "共有 " + len.ToString() + " 行\n";
+            int n = 0;
+            foreach (string line in input_lines)
+            {
+                n++;
+                richTextBox1.Text += n.ToString() + "\t" + line + "\n";
+                output_lines.Add("取得資料\t" + line);
+            }
+
+            string filename2 = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+            // Save the result.
+            File.WriteAllLines(filename2, output_lines.ToArray());
+            richTextBox1.Text += "\n製作TXT檔\t" + filename2 + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -79,7 +114,7 @@ namespace vcs_ReadWrite_TXT
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string filename = "C:\\______test_files\\__RW\\_txt\\琵琶行.txt";
+            string filename = @"C:\______test_files\__RW\_txt\琵琶行.txt";
             try
             {
                 richTextBox1.LoadFile(filename, RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
@@ -92,7 +127,7 @@ namespace vcs_ReadWrite_TXT
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string filename = "C:\\______test_files\\__RW\\_txt\\琵琶行.txt";
+            string filename = @"C:\______test_files\__RW\_txt\琵琶行.txt";
             //法一
             // 運用 ReadAllText 方法 (String, Encoding) ，其中 Encoding 針對您txt檔案的編碼做變更，讀出的資料才不會有亂碼
             //richTextBox1.Text = System.IO.File.ReadAllText(filename, Encoding.Default);
@@ -167,55 +202,24 @@ namespace vcs_ReadWrite_TXT
                     sr = new StreamReader(filename, Encoding.Default);  //使用默認編碼格式, 作業系統目前 ANSI 字碼頁的編碼方式
                     break;
             }
-            richTextBox2.Text += sr.ReadToEnd();	//讀取所有文字內容
+            richTextBox2.Text += sr.ReadToEnd();	//一次性讀完所有文字內容
             sr.Close();
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //將純文字檔拆成一行一行的字串陣列, 可以去除前後空白
-            string filename = @"C:\______test_files\__RW\_txt\poem.txt";
-            string[] patterns;
-            patterns = File.ReadAllLines(filename).Select(i => i.Trim()).Where(i => i != string.Empty).ToArray();
-            int len = patterns.Length;
-            //richTextBox1.Text += "len = " + len.ToString() + "\n";
-            int ii;
-            for (ii = 0; ii < len; ii++)
-            {
-                richTextBox1.Text += patterns[ii] + "\n";
-            }
+            string filename = @"C:\______test_files\__RW\_txt\琵琶行.txt";
+
+            //創建一個讀取器
+            StreamReader sr = new StreamReader(filename);
+
+            //一次性讀取完
+            string all_text = sr.ReadToEnd();   //一次性讀完所有文字內容
+            richTextBox1.Text += all_text + "\n";
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            string filename = "C:\\______test_files\\__RW\\_txt\\琵琶行.txt";
-            try
-            {
-                StreamReader sr = new StreamReader(filename, Encoding.Default);
-                string line = string.Empty;
-                int i = 0;
-
-                /*
-                while (!sr.EndOfStream)
-                {               // 每次讀取一行，直到檔尾
-                    line = sr.ReadLine();            // 讀取文字到 line 變數
-                    if (line.Length > 0)
-                    {
-                    }
-                }
-                */
-
-                while ((line = sr.ReadLine()) != null)  // 讀取文字到 line 變數
-                {
-                    i++;
-                    richTextBox2.Text += "第" + i.ToString() + "行\t" + line + "\tlength:" + line.Length.ToString() + "\n";
-                }
-                sr.Close();
-            }
-            catch (System.IO.FileNotFoundException)
-            {
-                MessageBox.Show("找不到檔案");
-            }
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -470,31 +474,8 @@ namespace vcs_ReadWrite_TXT
 
         private void button18_Click(object sender, EventArgs e)
         {
-            string filename = "C:\\______test_files\\__RW\\_txt\\琵琶行.txt";
-            // Read the whole file to a string array
-            string[] input_lines = File.ReadAllLines(filename, Encoding.Default);
-
-            List<string> output_lines = new List<string>();
-
-            int len = input_lines.Length;
-            richTextBox1.Text += "共有 " + len.ToString() + " 行\n";
-            int n = 0;
-            foreach (string line in input_lines)
-            {
-                n++;
-                richTextBox1.Text += n.ToString() + "\t" + line + "\n";
-                output_lines.Add("取得資料\t" + line);
-            }
-
-            string filename2 = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
-            // Save the result.
-            File.WriteAllLines(filename2, output_lines.ToArray());
-            richTextBox1.Text += "\n製作TXT檔\t" + filename2 + "\n";
-        }
-
-        private void button19_Click(object sender, EventArgs e)
-        {
-            string filename = "C:\\______test_files\\__RW\\_txt\\琵琶行.txt";
+            //ReadLine 1
+            string filename = @"C:\______test_files\__RW\_txt\琵琶行.txt";
             int i;
 
             richTextBox1.Text += "\n檔案 : " + filename + "\t內容\n";
@@ -510,12 +491,8 @@ namespace vcs_ReadWrite_TXT
                     line = reader.ReadLine();
                 }
             }
-        }
 
-        private void button20_Click(object sender, EventArgs e)
-        {
-            string filename = "C:\\______test_files\\__RW\\_txt\\琵琶行.txt";
-
+            //ReadLine 2
             try
             {
                 StreamReader sr = new StreamReader(filename, Encoding.Default);
@@ -529,6 +506,60 @@ namespace vcs_ReadWrite_TXT
             {
 
             }
+
+            //ReadLine 3
+
+            //一行一行讀取文字檔
+            filename = @"C:\______test_files\_case1\_case1a\_case1aa\eula.3081a.txt";
+
+            StreamReader SReader = new StreamReader(filename, Encoding.Default);
+            string strLine = string.Empty;
+            while ((strLine = SReader.ReadLine()) != null)
+            {
+                richTextBox1.Text += strLine + "\n";
+            }
+
+
+
+            //ReadLine 4
+
+            filename = @"C:\______test_files\__RW\_txt\琵琶行.txt";
+            try
+            {
+                StreamReader sr = new StreamReader(filename, Encoding.Default);
+                string line = string.Empty;
+                i = 0;
+
+                /*
+                while (!sr.EndOfStream)
+                {               // 每次讀取一行，直到檔尾
+                    line = sr.ReadLine();            // 讀取文字到 line 變數
+                    if (line.Length > 0)
+                    {
+                    }
+                }
+                */
+
+                while ((line = sr.ReadLine()) != null)  // 讀取文字到 line 變數
+                {
+                    i++;
+                    richTextBox2.Text += "第" + i.ToString() + "行\t" + line + "\tlength:" + line.Length.ToString() + "\n";
+                }
+                sr.Close();
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                MessageBox.Show("找不到檔案");
+            }
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button20_Click(object sender, EventArgs e)
+        {
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -608,21 +639,11 @@ namespace vcs_ReadWrite_TXT
 
         private void button23_Click(object sender, EventArgs e)
         {
-            //一行一行讀取文字檔
-            string filename = @"C:\______test_files\_case1\_case1a\_case1aa\eula.3081a.txt";
-
-            StreamReader SReader = new StreamReader(filename, Encoding.Default);
-            string strLine = string.Empty;
-            while ((strLine = SReader.ReadLine()) != null)
-            {
-                richTextBox1.Text += strLine + "\n";
-            }
         }
 
         private void button24_Click(object sender, EventArgs e)
         {
             //RW test
-
 
             string filepath = "this is filepath";
             string timer = "ttttt 1";

@@ -166,7 +166,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(180, 60);
             this.button8.TabIndex = 9;
-            this.button8.Text = "將純文字檔拆成一行一行的字串陣列";
+            this.button8.Text = "ReadToEnd";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -177,7 +177,6 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(180, 60);
             this.button9.TabIndex = 10;
-            this.button9.Text = "一行一行讀取純文字檔案中的內容";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -276,7 +275,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(180, 60);
             this.button18.TabIndex = 19;
-            this.button18.Text = "開檔ReadAllLines存檔";
+            this.button18.Text = "ReadLine";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -287,7 +286,6 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(180, 60);
             this.button19.TabIndex = 20;
-            this.button19.Text = "TextReader開檔ReadLine";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -298,7 +296,6 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(180, 60);
             this.button20.TabIndex = 21;
-            this.button20.Text = "ReadLine讀完全檔";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -342,7 +339,6 @@
             this.button23.Name = "button23";
             this.button23.Size = new System.Drawing.Size(180, 60);
             this.button23.TabIndex = 25;
-            this.button23.Text = "一行一行讀取文字檔";
             this.button23.UseVisualStyleBackColor = true;
             this.button23.Click += new System.EventHandler(this.button23_Click);
             // 
@@ -353,7 +349,7 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(180, 60);
             this.button24.TabIndex = 26;
-            this.button24.Text = "RW test";
+            this.button24.Text = "StreamWriter StreamReader";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
