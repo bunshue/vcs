@@ -360,6 +360,29 @@ namespace vcs_Cryptography2_SHA1
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //c# 生成SHA1加密字符串，
+
+            var strRes = Encoding.Default.GetBytes(str_clear_text);
+            HashAlgorithm iSha = new SHA1CryptoServiceProvider();
+            strRes = iSha.ComputeHash(strRes);
+            var str_encrypted_text = new StringBuilder();
+            foreach (byte iByte in strRes)
+            {
+                str_encrypted_text.AppendFormat("{0:x2}", iByte);
+            }
+
+            richTextBox1.Text += "明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\tSHA1\t長度：" + str_encrypted_text.Length + "\n";
+
+
+            //另一種SHA1加密
+
+            string key = "123";
+            HMACSHA1 hmacsha1 = new HMACSHA1(Encoding.UTF8.GetBytes(key));
+            byte[] rstRes = hmacsha1.ComputeHash(Encoding.UTF8.GetBytes(str_clear_text));
+            string strs = Convert.ToBase64String(rstRes);
+
+
+            richTextBox1.Text += "明碼：" + str_clear_text + "\t密碼：" + strs + "\tSHA1\t長度：" + strs.Length + "\n";
 
         }
 

@@ -66,11 +66,21 @@
             this.button27 = new System.Windows.Forms.Button();
             this.button21 = new System.Windows.Forms.Button();
             this.button26 = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox_gradient_color_sp = new System.Windows.Forms.PictureBox();
+            this.pictureBox_gradient_color_st = new System.Windows.Forms.PictureBox();
+            this.pictureBox_gradient_color = new System.Windows.Forms.PictureBox();
+            this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.groupBox0.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient_color_sp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient_color_st)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient_color)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -269,42 +279,44 @@
             this.groupBox1.Size = new System.Drawing.Size(209, 796);
             this.groupBox1.TabIndex = 125;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "HatchBrush";
+            this.groupBox1.Text = "LinearGradientBrush";
             // 
             // button10
             // 
-            this.button10.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button10.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button10.Location = new System.Drawing.Point(23, 19);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(160, 60);
             this.button10.TabIndex = 116;
-            this.button10.Text = "HatchBrush 0";
+            this.button10.Text = "使用 LinearGradientBrush 0";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // button12
             // 
-            this.button12.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button12.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button12.Location = new System.Drawing.Point(23, 173);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(160, 60);
             this.button12.TabIndex = 110;
+            this.button12.Text = "使用 LinearGradientBrush 2";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // button13
             // 
-            this.button13.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button13.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button13.Location = new System.Drawing.Point(23, 249);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(160, 60);
             this.button13.TabIndex = 111;
+            this.button13.Text = "使用 LinearGradientBrush 3";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
             // button19
             // 
-            this.button19.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button19.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button19.Location = new System.Drawing.Point(23, 709);
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(160, 60);
@@ -314,17 +326,18 @@
             // 
             // button14
             // 
-            this.button14.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button14.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button14.Location = new System.Drawing.Point(23, 325);
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(160, 60);
             this.button14.TabIndex = 112;
+            this.button14.Text = "漸層色1";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 
             // button18
             // 
-            this.button18.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button18.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button18.Location = new System.Drawing.Point(23, 629);
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(160, 60);
@@ -334,41 +347,45 @@
             // 
             // button15
             // 
-            this.button15.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button15.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button15.Location = new System.Drawing.Point(23, 401);
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(160, 60);
             this.button15.TabIndex = 113;
+            this.button15.Text = "漸層色2";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 
             // button17
             // 
-            this.button17.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button17.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button17.Location = new System.Drawing.Point(23, 553);
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(160, 60);
             this.button17.TabIndex = 119;
+            this.button17.Text = "漸層色4";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
             // button11
             // 
-            this.button11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button11.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button11.Location = new System.Drawing.Point(23, 97);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(160, 60);
             this.button11.TabIndex = 114;
+            this.button11.Text = "使用 LinearGradientBrush 1";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // button16
             // 
-            this.button16.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button16.Font = new System.Drawing.Font("新細明體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button16.Location = new System.Drawing.Point(23, 477);
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(160, 60);
             this.button16.TabIndex = 115;
+            this.button16.Text = "漸層色3";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 
@@ -389,7 +406,7 @@
             this.groupBox2.Size = new System.Drawing.Size(209, 796);
             this.groupBox2.TabIndex = 126;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox3";
+            this.groupBox2.Text = "HatchBrush";
             // 
             // button20
             // 
@@ -398,6 +415,7 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(160, 60);
             this.button20.TabIndex = 116;
+            this.button20.Text = "HatchBrush 0";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 
@@ -491,11 +509,62 @@
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.panel1);
+            this.groupBox3.Controls.Add(this.pictureBox_gradient_color_sp);
+            this.groupBox3.Controls.Add(this.pictureBox_gradient_color_st);
+            this.groupBox3.Controls.Add(this.pictureBox_gradient_color);
+            this.groupBox3.Location = new System.Drawing.Point(683, 358);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(391, 280);
+            this.groupBox3.TabIndex = 127;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "漸層色";
+            // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(6, 178);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(375, 84);
+            this.panel1.TabIndex = 80;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            // 
+            // pictureBox_gradient_color_sp
+            // 
+            this.pictureBox_gradient_color_sp.BackColor = System.Drawing.Color.Lime;
+            this.pictureBox_gradient_color_sp.Location = new System.Drawing.Point(351, 94);
+            this.pictureBox_gradient_color_sp.Name = "pictureBox_gradient_color_sp";
+            this.pictureBox_gradient_color_sp.Size = new System.Drawing.Size(30, 67);
+            this.pictureBox_gradient_color_sp.TabIndex = 2;
+            this.pictureBox_gradient_color_sp.TabStop = false;
+            this.pictureBox_gradient_color_sp.Click += new System.EventHandler(this.pictureBox_gradient_color_sp_Click);
+            // 
+            // pictureBox_gradient_color_st
+            // 
+            this.pictureBox_gradient_color_st.BackColor = System.Drawing.Color.Red;
+            this.pictureBox_gradient_color_st.Location = new System.Drawing.Point(6, 94);
+            this.pictureBox_gradient_color_st.Name = "pictureBox_gradient_color_st";
+            this.pictureBox_gradient_color_st.Size = new System.Drawing.Size(30, 67);
+            this.pictureBox_gradient_color_st.TabIndex = 1;
+            this.pictureBox_gradient_color_st.TabStop = false;
+            this.pictureBox_gradient_color_st.Click += new System.EventHandler(this.pictureBox_gradient_color_st_Click);
+            // 
+            // pictureBox_gradient_color
+            // 
+            this.pictureBox_gradient_color.BackColor = System.Drawing.Color.White;
+            this.pictureBox_gradient_color.Location = new System.Drawing.Point(6, 21);
+            this.pictureBox_gradient_color.Name = "pictureBox_gradient_color";
+            this.pictureBox_gradient_color.Size = new System.Drawing.Size(375, 67);
+            this.pictureBox_gradient_color.TabIndex = 0;
+            this.pictureBox_gradient_color.TabStop = false;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1284, 811);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox0);
@@ -512,6 +581,10 @@
             this.groupBox0.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient_color_sp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient_color_st)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_gradient_color)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -557,6 +630,12 @@
         private System.Windows.Forms.Button button27;
         private System.Windows.Forms.Button button21;
         private System.Windows.Forms.Button button26;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox pictureBox_gradient_color_sp;
+        private System.Windows.Forms.PictureBox pictureBox_gradient_color_st;
+        private System.Windows.Forms.PictureBox pictureBox_gradient_color;
+        private System.Windows.Forms.ColorDialog colorDialog1;
     }
 }
 

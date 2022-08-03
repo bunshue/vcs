@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_Draw_LinearGradientBrush.Properties
+namespace vcs_Chart7.Properties
 {
 
 
