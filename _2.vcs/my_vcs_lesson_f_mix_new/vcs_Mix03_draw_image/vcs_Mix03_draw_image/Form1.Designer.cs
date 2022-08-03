@@ -102,6 +102,7 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(170, 70);
             this.button26.TabIndex = 113;
+            this.button26.Text = "產生縮略圖";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
@@ -176,7 +177,6 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(170, 70);
             this.button19.TabIndex = 106;
-            this.button19.Text = "圖像截取";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -220,6 +220,7 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(170, 70);
             this.button9.TabIndex = 102;
+            this.button9.Text = "半透明筆刷";
             this.button9.UseVisualStyleBackColor = true;
             this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
@@ -230,7 +231,7 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(170, 70);
             this.button8.TabIndex = 101;
-            this.button8.Text = "改變圖像大小";
+            this.button8.Text = "自定義直線箭頭大小";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -307,7 +308,6 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(170, 70);
             this.button18.TabIndex = 94;
-            this.button18.Text = "圖像切變";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -318,7 +318,6 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(170, 70);
             this.button17.TabIndex = 93;
-            this.button17.Text = "旋轉圖像180°";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -329,7 +328,6 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(170, 70);
             this.button16.TabIndex = 92;
-            this.button16.Text = "向右旋轉圖像90°";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 

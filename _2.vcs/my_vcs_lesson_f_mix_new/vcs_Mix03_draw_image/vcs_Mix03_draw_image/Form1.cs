@@ -521,31 +521,35 @@ namespace vcs_Mix03_draw_image
         {
             show_button_text(sender);
 
-            //改變圖像大小
-
-            string filename = @"C:\______test_files\picture1.jpg";
-
+            //自定義直線箭頭大小
             Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             Graphics g = Graphics.FromImage(bitmap1);
             g.Clear(Color.White);
 
-            Bitmap bmp = new Bitmap(filename);
-            g.FillRectangle(Brushes.White, this.ClientRectangle);
-            int width = bmp.Width;
-            int height = bmp.Height;
-            // 改變圖像大小使用低質量的模式
-            g.InterpolationMode = InterpolationMode.NearestNeighbor;
-            g.DrawImage(bmp, new Rectangle(10, 10, 120, 120), // source rectangle
-            new Rectangle(0, 0, width, height), // destination rectangle
-            GraphicsUnit.Pixel);
-            // 使用高質量模式
-            //g.CompositingQuality = CompositingQuality.HighSpeed;
-            g.InterpolationMode = InterpolationMode.HighQualityBicubic;
-            g.DrawImage(
-            bmp,
-            new Rectangle(130, 10, 120, 120),
-            new Rectangle(0, 0, width, height),
-            GraphicsUnit.Pixel);
+            g.DrawRectangle(Pens.Red, 100, 100, 100, 100);
+
+            System.Drawing.Drawing2D.AdjustableArrowCap lineCap = new System.Drawing.Drawing2D.AdjustableArrowCap(6, 6, true);
+            Pen RedPen = new Pen(Color.Red, 2);
+            RedPen.CustomEndCap = lineCap;
+
+            g.DrawLine(RedPen, 100, 100, 300, 300);
+
+
+            //畫虛線
+            Control P = (Control)sender;
+            Pen pen = new Pen(Color.FromArgb(255, 0, 0), 5);
+            pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;//虛線的樣式
+            pen.DashPattern = new float[] { 2, 2 };//設置虛線中實點和空白區域之間的間隔
+            //g.DrawLine(pen, 0, 0, 0, P.Height - 1);
+            g.DrawRectangle(pen, 50, 50, 300, 300);
+
+
+            //#畫虛線
+            Pen p = new Pen(Color.Red, 5);
+            p.DashStyle = DashStyle.Custom;//虛線的樣式
+            p.DashPattern = new float[] { 2, 2 };//設置虛線中實點和空白區域之間的間隔
+            g.DrawLine(p, 0, 0, this.pictureBox1.Width - 1, this.pictureBox1.Height - 1);
+
 
             pictureBox1.Image = bitmap1;
         }
@@ -553,6 +557,31 @@ namespace vcs_Mix03_draw_image
         private void button9_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            // 半透明筆刷
+
+            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+
+
+            //　寫文字的筆刷，透明度為100,藍色
+            Brush b = new SolidBrush(Color.FromArgb(100, Color.Blue));
+
+            int i;
+            for (i = 0; i < 10; i += 2)
+            {
+                g.DrawString("群曜醫電", new Font("標楷體", 80), b, 100 + i, 100 + i);
+            }
+            //重疊部分 筆色加深
+
+            pictureBox1.Image = bitmap1;
+
+
+
+
+
+
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -1077,95 +1106,25 @@ namespace vcs_Mix03_draw_image
         private void button16_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //平移 縮放 旋轉
 
-            //向右旋轉圖像90°
 
-            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
 
-            string filename = @"C:\______test_files\picture1.jpg";
-
-            Bitmap bmp = new Bitmap(filename);//加載圖像
-            g.FillRectangle(Brushes.White, this.ClientRectangle);//填充窗體背景為白色
-            Point[] destinationPoints = {
-new Point(100, 0), // destination for upper-left point of original
-new Point(100, 100),// destination for upper-right point of original
-new Point(0, 0)}; // destination for lower-left point of original
-            g.DrawImage(bmp, destinationPoints);
-
-            pictureBox1.Image = bitmap1;
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //旋轉圖像180°
-
-            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
-
-            string filename = @"C:\______test_files\picture1.jpg";
-
-            Bitmap bmp = new Bitmap(filename);
-            g.FillRectangle(Brushes.White, this.ClientRectangle);
-            Point[] destinationPoints = {
-new Point(0, 100), // destination for upper-left point of original
-new Point(100, 100),// destination for upper-right point of original
-new Point(0, 0)}; // destination for lower-left point of original
-            g.DrawImage(bmp, destinationPoints);
-
-            pictureBox1.Image = bitmap1;
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //圖像切變
-
-            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
-
-            string filename = @"C:\______test_files\picture1.jpg";
-
-            Bitmap bmp = new Bitmap(filename);
-            g.FillRectangle(Brushes.White, this.ClientRectangle);
-            Point[] destinationPoints = {
-new Point(0, 0), // destination for upper-left point of original
-new Point(100, 0), // destination for upper-right point of original
-new Point(50, 100)};// destination for lower-left point of original
-            g.DrawImage(bmp, destinationPoints);
-
-
-
-
-            pictureBox1.Image = bitmap1;
         }
 
         private void button19_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //圖像截取
-            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
-
-            string filename = @"C:\______test_files\picture1.jpg";
-
-            Bitmap bmp = new Bitmap(filename);
-            g.FillRectangle(Brushes.White, this.ClientRectangle);
-            Rectangle sr = new Rectangle(80, 60, 400, 400);//要截取的矩形區域
-            Rectangle dr = new Rectangle(0, 0, 200, 200);//要顯示到Form的矩形區域
-            g.DrawImage(bmp, dr, sr, GraphicsUnit.Pixel);
-
-
-            pictureBox1.Image = bitmap1;
-
         }
 
         public static Bitmap returnAlpha(Bitmap bmp, int alpha)
@@ -1375,6 +1334,25 @@ new Point(50, 100)};// destination for lower-left point of original
         private void button26_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //產生縮略圖
+            string filename1 = @"C:\______test_files\picture1.jpg";
+            string filename2 = Application.StartupPath + "\\thumb_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            bool result = getThumImage2(filename1, filename2);
+            if (result == true)
+                richTextBox1.Text += "OK\n";
+            else
+                richTextBox1.Text += "FAIL\n";
+        }
+
+        //　產生縮略圖
+        private bool getThumImage2(string imgPath, string thumbPath)
+        {
+            System.Drawing.Image.GetThumbnailImageAbort myCallback = new System.Drawing.Image.GetThumbnailImageAbort(ThumbnailCallback);
+            System.Drawing.Image img = System.Drawing.Image.FromFile(imgPath);　//　通過文件構造
+            //生成縮略圖
+            System.Drawing.Image myThumbnail = img.GetThumbnailImage(100, 50, myCallback, IntPtr.Zero);
+            myThumbnail.Save(thumbPath);　//　保存縮略圖
+            return true;
         }
 
         private void button27_Click(object sender, EventArgs e)

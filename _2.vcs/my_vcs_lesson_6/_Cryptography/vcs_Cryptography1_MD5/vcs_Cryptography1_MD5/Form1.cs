@@ -220,8 +220,6 @@ namespace vcs_Cryptography1_MD5
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //string md5 = MD5(key);
-
             str_encrypted_text = MD5encode(str_clear_text);
             richTextBox1.Text += "明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
         }
@@ -240,7 +238,31 @@ namespace vcs_Cryptography1_MD5
 
         private void button5_Click(object sender, EventArgs e)
         {
+            string key = "123";
+            str_encrypted_text = GetMD5(str_clear_text, key);
+            richTextBox1.Text += "明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
         }
+
+        /// <summary>
+        /// MD5加密
+        /// </summary>
+        /// <param name="value">需要加密的值</param>
+        /// <param name="pwSalt">附加值</param>
+        /// <returns></returns>
+        public static string GetMD5(string value, string pwSalt)
+        {
+            HashAlgorithm hashAlgorithm = new MD5CryptoServiceProvider(); // or SHA1CryptoServiceProvider();
+            byte[] result = hashAlgorithm.ComputeHash(Encoding.UTF8.GetBytes(pwSalt + value));
+
+            StringBuilder sBuilder = new StringBuilder();
+            for (int i = 0; i < result.Length; i++)
+            {
+                sBuilder.Append(result[i].ToString("x2"));
+            }
+            return sBuilder.ToString();
+        }
+
+
 
         private void button6_Click(object sender, EventArgs e)
         {

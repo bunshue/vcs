@@ -575,7 +575,7 @@ namespace vcs_ImageProcessing4
         {
             //向右旋轉圖像90°
             Graphics g = this.pictureBox1.CreateGraphics();
-            Bitmap bitmap1 = new Bitmap(filename);//加載圖像
+            Bitmap bitmap1 = new Bitmap(filename);
             //g.FillRectangle(Brushes.White, this.pictureBox1.ClientRectangle);//填充窗體背景爲白色, 清空pictureBox
             Point[] destinationPoints = {
 new Point(400, 0), // destination for upper-left point of original
@@ -767,27 +767,22 @@ new Point(100, 400)};// destination for lower-left point of original
 
         private void button20_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button23_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button24_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button25_Click(object sender, EventArgs e)

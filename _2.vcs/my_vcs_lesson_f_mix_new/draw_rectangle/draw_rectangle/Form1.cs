@@ -17,7 +17,7 @@ namespace draw_rectangle
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\picture1.jpg";
+        string filename = @"C:\______test_files\elephant.jpg";
 
         private bool flag_mouse_down = false;
         private int intStartX = 0;
@@ -98,6 +98,9 @@ namespace draw_rectangle
 
             //label2.Text = "";
             SelectionRectangle = new Rectangle(new Point(0, 0), new Size(0, 0));
+
+            nud_x_st.Value = e.X;
+            nud_y_st.Value = e.Y;
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)

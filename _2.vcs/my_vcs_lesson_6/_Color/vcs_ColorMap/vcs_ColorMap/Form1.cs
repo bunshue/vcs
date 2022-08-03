@@ -228,16 +228,27 @@ namespace vcs_ColorMap
             dx = 120 + 10;
             dy = 60 + 10;
 
-            button0.Location = new Point(x_st + dx * 8, y_st + dy * 0);
-            button1.Location = new Point(x_st + dx * 8, y_st + dy * 1);
-            button2.Location = new Point(x_st + dx * 8, y_st + dy * 2);
-            button3.Location = new Point(x_st + dx * 8, y_st + dy * 3);
-            button4.Location = new Point(x_st + dx * 8, y_st + dy * 4);
-            button5.Location = new Point(x_st + dx * 8, y_st + dy * 5);
-            button6.Location = new Point(x_st + dx * 8, y_st + dy * 6);
-            button7.Location = new Point(x_st + dx * 8, y_st + dy * 7);
-            button8.Location = new Point(x_st + dx * 8, y_st + dy * 8);
-            button9.Location = new Point(x_st + dx * 8, y_st + dy * 9);
+            button0.Location = new Point(x_st + dx * 7, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 7, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 7, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 7, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 7, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 7, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 7, y_st + dy * 6);
+            button7.Location = new Point(x_st + dx * 7, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 7, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 7, y_st + dy * 9);
+
+            button10.Location = new Point(x_st + dx * 8, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 8, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 8, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 8, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 8, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 8, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 8, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 8, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 8, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 8, y_st + dy * 9);
 
             pictureBox1.Size = new Size(600, 700);
             pictureBox1.BackColor = Color.Pink;
@@ -955,8 +966,8 @@ namespace vcs_ColorMap
                 }
             }
 
-            Bitmap bmpColor = new Bitmap((int)(CELLS_PER_LINE * CELL_WIDTH + MARGIN * 2), (int)((vColors.Count / CELLS_PER_LINE + 1) * CELL_HEIGHT + MARGIN * 2));
-            using (Graphics grp = Graphics.FromImage(bmpColor))
+            Bitmap bitmap1 = new Bitmap((int)(CELLS_PER_LINE * CELL_WIDTH + MARGIN * 2), (int)((vColors.Count / CELLS_PER_LINE + 1) * CELL_HEIGHT + MARGIN * 2));
+            using (Graphics grp = Graphics.FromImage(bitmap1))
             {
                 grp.Clear(Color.Black);
 
@@ -973,9 +984,67 @@ namespace vcs_ColorMap
                 }
             }
 
-            pictureBox1.Image = bmpColor;
+            pictureBox1.Image = bitmap1;
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            bmpColor.Save("AllColor.bmp");
+            //bitmap1.Save("AllColor.bmp");
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            //從顏色的名稱 取得顏色的分量
+            Color slateBlue = Color.FromName("SlateBlue");
+            byte g = slateBlue.G;
+            byte b = slateBlue.B;
+            byte r = slateBlue.R;
+            byte a = slateBlue.A;
+            string text = String.Format("Slate Blue has these ARGB values: Alpha:{0}, " +
+                "red:{1}, green: {2}, blue {3}", new object[] { a, r, g, b });
+
+            richTextBox1.Text += text + "\n";
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button18_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
 
         }
 

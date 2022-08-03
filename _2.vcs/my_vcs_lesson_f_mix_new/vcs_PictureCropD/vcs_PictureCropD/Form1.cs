@@ -84,6 +84,8 @@ namespace vcs_PictureCropD
         {
             flag_mouse_down = true;
             pt_st = e.Location; //起始點座標
+            intStartX = e.X;
+            intStartY = e.Y;
 
             nud_w.Value = 0;
             nud_h.Value = 0;
@@ -92,9 +94,11 @@ namespace vcs_PictureCropD
 
             //label2.Text = "";
             SelectionRectangle = new Rectangle(new Point(0, 0), new Size(0, 0));
+
+            nud_x_st.Value = e.X;
+            nud_y_st.Value = e.Y;
         }
 
-        // Continue selecting.
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if (flag_mouse_down == true)
@@ -135,15 +139,16 @@ namespace vcs_PictureCropD
             }
         }
 
-        // Finish selecting the area.
         private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
         {
-            // Do nothing if we're not selecting an area.
             if (flag_mouse_down == false)
             {
                 return;
             }
             flag_mouse_down = false;
+            intStartX = 0;
+            intStartY = 0;
+
 
             // Display the original image.
             //pictureBox1.Image = bitmap1;  //仍應保留選取區域
