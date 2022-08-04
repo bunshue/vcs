@@ -257,24 +257,6 @@ namespace vcs_System1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //方案總管/專案屬性/應用程式/組件資訊 內 修改組件資訊
-
-            //方案總管/加入/現有項目/選取AssemblyInfo.cs, 把 namespace 改成 vcs_System1
-            // Get the AssemblyInfo class.
-            AssemblyInfo info = new AssemblyInfo();
-
-            // Display the values.
-            richTextBox1.Text += "Title\t" + info.Title + "\n";
-            richTextBox1.Text += "Description\t" + info.Description + "\n";
-            richTextBox1.Text += "Company\t" + info.Company + "\n";
-            richTextBox1.Text += "Product\t" + info.Product + "\n";
-            richTextBox1.Text += "Copyright\t" + info.Copyright + "\n";
-            richTextBox1.Text += "Trademark\t" + info.Trademark + "\n";
-            richTextBox1.Text += "Assembly Version\t" + info.AssemblyVersion + "\n";
-            richTextBox1.Text += "File Version\t" + info.FileVersion + "\n";
-            richTextBox1.Text += "GUID\t" + info.Guid + "\n";
-            richTextBox1.Text += "Neutral Language\t" + info.NeutralLanguage + "\n";
-            richTextBox1.Text += "COM Visible\t" + info.IsComVisible.ToString() + "\n";
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -769,12 +751,12 @@ namespace vcs_System1
         }
 
         [DllImport("kernel32.dll")]
-        private static extern int SetComputerName(string ipComputerName);//重写API函数
+        private static extern int SetComputerName(string ipComputerName);//重寫API函數
 
         private void button37_Click(object sender, EventArgs e)
         {
             //取得並修改電腦名(偽執行)
-            Computer computer = new Computer();//创建计算机对象
+            Computer computer = new Computer();//創建計算機對象
             richTextBox1.Text += "取得原計算機名 : " + computer.Name + "\n";
 
             richTextBox1.Text += "偽執行 計算機名稱修改, 須重啟計算機使之生效\n";
@@ -944,7 +926,7 @@ namespace vcs_System1
             richTextBox1.Text += "TickCount: " + Environment.TickCount + "\t系統啟動後經過的Tick數, 1個tick為1msec\n";
             richTextBox1.Text += "UserDomainName: " + Environment.UserDomainName + "\n";
             richTextBox1.Text += "UserInteractive: " + Environment.UserInteractive + "\n";
-            richTextBox1.Text += "UserName: " + Environment.UserName + "\n";    //操作系統的登錄用户名
+            richTextBox1.Text += "UserName: " + Environment.UserName + "\n";    //操作系統的登錄用戶名
             richTextBox1.Text += "WorkingSet: " + Environment.WorkingSet + "\n";
             richTextBox1.Text += "OSVersion: " + Environment.OSVersion.ToString() + "\n";
 
@@ -1033,127 +1015,10 @@ namespace vcs_System1
 
         private void button52_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "取得Assembly資料\n";
-
-            richTextBox1.Text += "Title\t" + String.Format("關於 {0}", AssemblyTitle) + "\n";
-            richTextBox1.Text += "Product\t" + AssemblyProduct + "\n";
-            richTextBox1.Text += "Version\t" + String.Format("版本 {0}", AssemblyVersion) + "\n";
-            richTextBox1.Text += "Copyright\t" + AssemblyCopyright + "\n";
-            richTextBox1.Text += "Company\t" + AssemblyCompany + "\n";
-            richTextBox1.Text += "Description\t" + AssemblyDescription + "\n";
-
-            Assembly assembly = this.GetType().Assembly;
-            richTextBox1.Text += "取得專案名稱 : " + assembly.GetName().Name + "\n";
-
-            //取得目前執行程式的名字 與所在的資料夾
-            string sPath = System.Reflection.Assembly.GetExecutingAssembly().Location;
-            string installDirectory = Path.GetDirectoryName(sPath) + @"\";
-            richTextBox1.Text += "取得目前執行程式的名字 = " + sPath + "\n";
-            richTextBox1.Text += "取得目前執行程式所在的資料夾 = " + installDirectory + "\n";
         }
-
-        #region 組件屬性存取子
-        public string AssemblyTitle
-        {
-            get
-            {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyTitleAttribute), false);
-                if (attributes.Length > 0)
-                {
-                    AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)attributes[0];
-                    if (titleAttribute.Title != "")
-                    {
-                        return titleAttribute.Title;
-                    }
-                }
-                return System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
-            }
-        }
-
-        public string AssemblyVersion
-        {
-            get
-            {
-                return Assembly.GetExecutingAssembly().GetName().Version.ToString();
-            }
-        }
-
-        public string AssemblyDescription
-        {
-            get
-            {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyDescriptionAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    return "";
-                }
-                return ((AssemblyDescriptionAttribute)attributes[0]).Description;
-            }
-        }
-
-        public string AssemblyProduct
-        {
-            get
-            {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyProductAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    return "";
-                }
-                return ((AssemblyProductAttribute)attributes[0]).Product;
-            }
-        }
-
-        public string AssemblyCopyright
-        {
-            get
-            {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCopyrightAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    return "";
-                }
-                return ((AssemblyCopyrightAttribute)attributes[0]).Copyright;
-            }
-        }
-
-        public string AssemblyCompany
-        {
-            get
-            {
-                object[] attributes = Assembly.GetExecutingAssembly().GetCustomAttributes(typeof(AssemblyCompanyAttribute), false);
-                if (attributes.Length == 0)
-                {
-                    return "";
-                }
-                return ((AssemblyCompanyAttribute)attributes[0]).Company;
-            }
-        }
-        #endregion
 
         private void button53_Click(object sender, EventArgs e)
         {
-            //取得專案內所有表單名稱
-
-            Assembly a = Assembly.GetExecutingAssembly();       //取得目前組件
-
-            richTextBox1.Text += "目前組件 : " + a.ToString() + "\n";
-            richTextBox1.Text += "CodeBase : " + a.CodeBase.ToString() + "\n";
-            richTextBox1.Text += "FullName : " + a.FullName.ToString() + "\n";
-            richTextBox1.Text += "Location : " + a.Location.ToString() + "\n";
-            richTextBox1.Text += "GetType : " + a.GetType().ToString() + "\n";
-            richTextBox1.Text += "GetName : " + a.GetName() + "\n";
-            richTextBox1.Text += "ImageRuntimeVersion : " + a.ImageRuntimeVersion + "\n";
-
-            foreach (Type t in a.GetTypes())                    //找尋組件內所有類別型態
-            {
-                richTextBox1.Text += t.ToString() + "\n";
-
-                if (t.IsSubclassOf(typeof(Form)))           //如果父類別是繼承自Form的話
-                {
-                    //richTextBox1.Text += t.ToString() + "\n"; //列出該類別資訊
-                }
-            }
         }
 
         private void button54_Click(object sender, EventArgs e)
@@ -1162,85 +1027,18 @@ namespace vcs_System1
 
         private void button55_Click(object sender, EventArgs e)
         {
-            //取得顯示設備相關資訊
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("select * from win32_VideoController");//声明一个用于检索设备管理信息的对象
-            foreach (ManagementObject mo in mos.Get())//循环遍历WMI实例中的每一个对象
-            {
-                richTextBox1.Text += "顯示設備名稱 : " + mo["name"].ToString() + "\n";  //在文本框中显示显示设备的名称
-                richTextBox1.Text += "PNPDeviceID : " + mo["PNPDeviceID"].ToString() + "\n"; //在文本框中显示显示设备的PNPDeviceID
-
-                richTextBox1.Text += "最大更新率 : " + mo["MaxRefreshRate"].ToString() + "\n"; //在当前文本框中显示最大刷新率
-                richTextBox1.Text += "最小更新率 : " + mo["MinRefreshRate"].ToString() + "\n"; //在当前文本框中显示最小刷新率
-                richTextBox1.Text += "目前更新率 : " + mo["CurrentRefreshRate"].ToString() + "\n"; //在当前文本框中显示当前刷新率
-
-                richTextBox1.Text += "顯示模式 : " + mo["VideoModeDescription"].ToString() + "\n"; //在文本框中显示设备的当前显示模式
-            }
         }
 
         private void button56_Click(object sender, EventArgs e)
         {
-            //取得計算機的顯示設備訊息
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("select * from Win32_VideoController");
-            foreach (ManagementObject mo in mos.Get())
-            {
-                richTextBox1.Text += "顯示設備訊息\n";
-                richTextBox1.Text += "顯示設備名稱：" + mo["Name"].ToString() + "\n";//顯示設備名稱
-                richTextBox1.Text += "顯示設備PNPDeviceID：" + mo["PNPDeviceID"].ToString() + "\n";//顯示設備的PNPDeviceID
-                richTextBox1.Text += "顯示設備驅動程序文件：" + mo["InstalledDisplayDrivers"].ToString() + "\n";//顯示設備的驅動程序文件
-                richTextBox1.Text += "顯示設備驅動版本號：" + mo["DriverVersion"].ToString() + "\n";//顯示設備的驅動版本號
-                richTextBox1.Text += "顯示設備的顯示處理器：" + mo["VideoProcessor"].ToString() + "\n";//顯示設備的顯示處理器
-                richTextBox1.Text += "顯示設備的最大更新率：" + mo["MaxRefreshRate"].ToString() + "\n";//顯示設備的最大更新率
-                richTextBox1.Text += "顯示設備的最小更新率：" + mo["MinRefreshRate"].ToString() + "\n";//顯示設備的最大更新率
-                richTextBox1.Text += "顯示設備目前顯示模式：" + mo["VideoModeDescription"].ToString() + "\n";//顯示設備目前顯示模式
-            }
         }
 
         private void button57_Click(object sender, EventArgs e)
         {
-            //取得音效設備相關資訊
-            ManagementObjectSearcher mos = new ManagementObjectSearcher("select * from Win32_SoundDevice");//声明一个用于检索设备管理信息的对象
-            foreach (ManagementObject mo in mos.Get())//循环遍历WMI实例中的每一个对象
-            {
-                richTextBox1.Text += "音效設備名稱 : " + mo["ProductName"].ToString() + "\n"; //在当前文本框中显示声音设备的名称
-                richTextBox1.Text += "PNPDeviceID : " + mo["PNPDeviceID"].ToString() + "\n";//在当前文本框中显示声音设备的PNPDeviceID
-            }
         }
 
         private void button58_Click(object sender, EventArgs e)
         {
-            //取得映射驅動器路徑
-            //映射驅動器 = 網路芳鄰硬碟的連結
-
-            SelectQuery selectQuery = new SelectQuery("select * from win32_logicaldisk");
-            ManagementObjectSearcher searcher = new ManagementObjectSearcher(selectQuery);
-            int i = 0;
-            foreach (ManagementObject disk in searcher.Get())
-            {
-                string DriveType;
-                DriveType = disk["DriveType"].ToString();
-
-                richTextBox1.Text += "磁盤名稱：" + disk["Name"].ToString() + "\n";
-                //獲得硬盤的可用空間
-
-                long mb = 1048576;
-                double free = 0;
-                double use = 0;
-                double total = 0;
-                free = Convert.ToInt64(disk["FreeSpace"]) / mb;
-                //獲得硬盤的已用空間
-                use = (Convert.ToInt64(disk["Size"]) - Convert.ToInt64(disk["FreeSpace"])) / mb;
-                //獲得硬盤的合計空間
-                total = Convert.ToInt64(disk["Size"]) / mb;
-                richTextBox1.Text += " 總計：" + total.ToString() + "MB\n";
-                richTextBox1.Text += "已用空間：" + use.ToString() + "MB\n";
-                richTextBox1.Text += "可用空間：" + free.ToString() + "MB\n";
-
-                if (DriveType == "4")
-                {
-                    richTextBox1.Text += "取得 : " + disk["Name"].ToString() + "\n";
-                }
-                i++;
-            }
         }
 
         private void button59_Click(object sender, EventArgs e)
@@ -1373,7 +1171,7 @@ namespace vcs_System1
             richTextBox1.Text += "是否正常關機：" + Environment.HasShutdownStarted + "\n";
             richTextBox1.Text += "NetBIOS名稱：" + Environment.MachineName + "\n";
             richTextBox1.Text += "環境定義的新字串：" + Environment.NewLine + "\n";
-            richTextBox1.Text += "作業系統平台：" + Environment.OSVersion.Platform + "\n";
+            richTextBox1.Text += "作業系統平臺：" + Environment.OSVersion.Platform + "\n";
             richTextBox1.Text += "Service Pack版本：" + Environment.OSVersion.ServicePack + "\n";
             richTextBox1.Text += "作業系統版本：" + Environment.OSVersion.Version + "\n";
             richTextBox1.Text += "串連字串表示：" + Environment.OSVersion.VersionString + "\n";

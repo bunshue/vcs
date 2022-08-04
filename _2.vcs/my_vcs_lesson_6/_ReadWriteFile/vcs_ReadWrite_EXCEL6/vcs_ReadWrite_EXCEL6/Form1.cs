@@ -33,13 +33,14 @@ namespace vcs_ReadWrite_EXCEL6
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            txtFile.Text = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\Items.xlsx";
         }
 
         // Read from the Excel workbook.
         private void btnRead_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "開啟檔案 : " + txtFile.Text + "\n";
+            string filename = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\Items.xlsx";
+
+            richTextBox1.Text += "開啟檔案 : " + filename + "\n";
 
             // Get the Excel application object.
             Excel.Application excel_app = new Excel.ApplicationClass();
@@ -48,7 +49,7 @@ namespace vcs_ReadWrite_EXCEL6
             excel_app.Visible = true;
 
             // Open the workbook read-only.
-            Excel.Workbook workbook = excel_app.Workbooks.Open(txtFile.Text,
+            Excel.Workbook workbook = excel_app.Workbooks.Open(filename,
                 Type.Missing, true, Type.Missing, Type.Missing,
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing,
                 Type.Missing, Type.Missing, Type.Missing, Type.Missing,
@@ -115,7 +116,7 @@ namespace vcs_ReadWrite_EXCEL6
         private void button1_Click(object sender, EventArgs e)
         {
             //開啟Excel檔並新增工作表
-            string filename = @"C:\_git\vcs\_2.vcs\______test_files\__RW\_excel\vcs_ReadWrite_EXCEL7_Items.xlsx";
+            string filename = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\vcs_ReadWrite_EXCEL6_Items.xlsx";
             richTextBox1.Text += "開啟檔案 : " + filename + "\n";
 
             // Get the Excel application object.

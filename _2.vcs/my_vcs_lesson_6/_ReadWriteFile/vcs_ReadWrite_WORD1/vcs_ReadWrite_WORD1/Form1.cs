@@ -7,8 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-// Add a reference to Microsoft Word 14.0 Object Library.
+using System.IO;
 
+// Add a reference to Microsoft Word 14.0 Object Library.
 using Word = Microsoft.Office.Interop.Word;
 
 namespace vcs_ReadWrite_WORD1
@@ -22,14 +23,14 @@ namespace vcs_ReadWrite_WORD1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            txtFile.Text = Application.StartupPath + "\\Test.docx";
-            txtFile.Select(txtFile.Text.Length, 0);
         }
 
         // Remove the document's hyperlinks
         private void btnRemoveHyperlinks_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "開啟檔案 : " + txtFile.Text + "\n";
+            string doc_filename = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\vcs_ReadWrite_WORD1.docx";
+
+            richTextBox1.Text += "開啟檔案 : " + doc_filename + "\n";
 
             Refresh();
 
@@ -41,7 +42,7 @@ namespace vcs_ReadWrite_WORD1
 
             // Open the Word document.
             object missing = Type.Missing;
-            object filename = txtFile.Text;
+            object filename = doc_filename;
             object confirm_conversions = false;
             object read_only = false;
             object add_to_recent_files = false;
@@ -76,4 +77,5 @@ namespace vcs_ReadWrite_WORD1
         }
     }
 }
+
 

@@ -42,5 +42,30 @@ namespace vcs_AssemblyInfo
 
 
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //組件資訊  Assembly Info
+
+            //方案總管/專案屬性/應用程式/組件資訊 內 修改組件資訊
+
+            //方案總管/加入/現有項目/選取AssemblyInfo.cs, 把 namespace 改成 vcs_System1
+            // Get the AssemblyInfo class.
+            AssemblyInfo info = new AssemblyInfo();
+
+            // Display the values.
+            richTextBox1.Text += "Title\t" + info.Title + "\n";
+            richTextBox1.Text += "Description\t" + info.Description + "\n";
+            richTextBox1.Text += "Company\t" + info.Company + "\n";
+            richTextBox1.Text += "Product\t" + info.Product + "\n";
+            richTextBox1.Text += "Copyright\t" + info.Copyright + "\n";
+            richTextBox1.Text += "Trademark\t" + info.Trademark + "\n";
+            richTextBox1.Text += "Assembly Version\t" + info.AssemblyVersion + "\n";
+            richTextBox1.Text += "File Version\t" + info.FileVersion + "\n";
+            richTextBox1.Text += "GUID\t" + info.Guid + "\n";
+            richTextBox1.Text += "Neutral Language\t" + info.NeutralLanguage + "\n";
+            richTextBox1.Text += "COM Visible\t" + info.IsComVisible.ToString() + "\n";
+
+        }
     }
 }

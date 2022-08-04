@@ -113,7 +113,7 @@
             this.txt_path.Location = new System.Drawing.Point(105, 31);
             this.txt_path.Name = "txt_path";
             this.txt_path.ReadOnly = true;
-            this.txt_path.Size = new System.Drawing.Size(176, 22);
+            this.txt_path.Size = new System.Drawing.Size(311, 22);
             this.txt_path.TabIndex = 2;
             // 
             // label1

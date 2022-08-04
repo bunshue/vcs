@@ -22,8 +22,9 @@ namespace vcs_ReadWrite_WORD4
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //string filename = @"C:\______test_files\__RW\_word\Step.doc";
-            string filename = @"C:\______test_files\__RW\_word\bmp_format.docx";
+            //string filename = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\Step.doc";
+            string filename = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\bmp_format.docx";
+
             richTextBox1.Text += "讀取檔案 : " + filename + " ...\n";
             string txt = GrabWordFileWords(filename);
             richTextBox1.Text += txt + "\n";

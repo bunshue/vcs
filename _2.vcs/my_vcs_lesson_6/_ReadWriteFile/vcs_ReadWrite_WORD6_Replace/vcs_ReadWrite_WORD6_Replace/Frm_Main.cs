@@ -7,7 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
 using System.Threading;
+
 using Word = Microsoft.Office.Interop.Word;
 using Microsoft.Office.Interop.Word;
 
@@ -20,7 +22,8 @@ namespace vcs_ReadWrite_WORD6_Replace
             InitializeComponent();
         }
 
-        string filename = @"C:\______test_files\__RW\_word\Step.doc";
+        string filename1 = string.Empty;
+        string filename2 = string.Empty;
 
         private Word.Application G_WordApplication;//定義Word應用程序字段
 
@@ -33,7 +36,28 @@ namespace vcs_ReadWrite_WORD6_Replace
             Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效
             //Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
 
-            txt_path.Text = filename;
+            filename1 = Path.GetFullPath(Path.Combine(System.Windows.Forms.Application.StartupPath, @"..\..")) + @"\Step.doc";
+            filename2 = System.Windows.Forms.Application.StartupPath + "\\test_word_file.doc";
+
+            if (File.Exists(filename1) == false)    //確認原始檔案是否存在
+            {
+                richTextBox1.Text += "原始檔案: " + filename1 + " 不存在, 無法拷貝\n";
+            }
+
+            if (File.Exists(filename2) == true)    //確認原始檔案是否存在
+            {
+                File.Delete(filename2);
+                richTextBox1.Text += "檔案: " + filename2 + " 存在, 已刪除\n";
+            }
+
+            if (File.Exists(filename2) == false)    //確認目標檔案是否存在
+            {
+                // Copy the file.
+                File.Copy(filename1, filename2);
+                richTextBox1.Text += "目標檔案: " + filename2 + " 不存在, 已拷貝\n";
+            }
+
+            txt_path.Text = filename2;
             txt_Find.ReadOnly = false;//取消文本框的只讀狀態
             txt_Replace.ReadOnly = false;//取消文本框的只讀狀態
             btn_Begin.Enabled = true;//啟用開始替換按鈕
@@ -54,9 +78,9 @@ namespace vcs_ReadWrite_WORD6_Replace
             ThreadPool.QueueUserWorkItem(//開始線程池
                 (o) =>//使用Lambda表達式
                 {
-                    G_WordApplication =//創建Word應用程序對象
-                         new Microsoft.Office.Interop.Word.Application();
-                    object P_FilePath = filename;//創建Object對象
+                    //創建Word應用程序對象
+                    G_WordApplication = new Microsoft.Office.Interop.Word.Application();
+                    object P_FilePath = filename2;//創建Object對象
                     richTextBox1.Text += "開啟檔案 :\t" + P_FilePath + "\n";
                     Word.Document P_Document = G_WordApplication.Documents.Open(//打開Word文檔
                         ref P_FilePath, ref G_Missing, ref G_Missing,
@@ -111,7 +135,7 @@ namespace vcs_ReadWrite_WORD6_Replace
                     G_WordApplication =//創建Word應用程序對象
                          new Microsoft.Office.Interop.Word.Application();
                     G_WordApplication.Visible = true;//Word應用程序可在桌面顯示
-                    object P_FilePath = filename;//得到文件路徑信息
+                    object P_FilePath = filename2;//得到文件路徑信息
                     Word.Document P_Document = G_WordApplication.Documents.Open(//打開文件
                         ref P_FilePath, ref G_Missing, ref G_Missing,
                         ref G_Missing, ref G_Missing, ref G_Missing,

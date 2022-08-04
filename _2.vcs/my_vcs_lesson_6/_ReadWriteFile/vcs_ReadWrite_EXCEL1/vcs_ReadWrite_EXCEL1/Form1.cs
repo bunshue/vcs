@@ -141,8 +141,7 @@ namespace vcs_ReadWrite_EXCEL1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //sugar can not use this
-            string filename = @"C:\______test_files\__RW\_excel\excel_20210602_131921.xls";
+            string filename = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\excel_20210602_131921.xls";
 
             //string filename = pathFile + ".xls";
             if (File.Exists(filename) == false)
@@ -228,7 +227,7 @@ namespace vcs_ReadWrite_EXCEL1
             //Excel數據導入到dataGridView
             //http://weisico.com/program/2018/0531/370.html
 
-            string filename = "c:\\______test_files\\__RW\\_excel\\vcs_ReadWrite_EXCEL2.xls";
+            string filename = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\vcs_ReadWrite_EXCEL2.xls";
 
             try
             {
@@ -331,7 +330,8 @@ namespace vcs_ReadWrite_EXCEL1
             //讀取EXCEL檔案到dataGridView
             //another
             //C# Excel文件導入操作
-            string filename = @"C:\______test_files\__RW\_excel\excel_test_data.xls";
+
+            string filename = Path.GetFullPath(Path.Combine(Application.StartupPath, @"..\..")) + @"\excel_test_data.xls";
 
             richTextBox1.Text += "開啟檔案 : " + filename + "\n";
 

@@ -142,7 +142,6 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(240, 50);
             this.button2.TabIndex = 2;
-            this.button2.Text = "組件資訊  Assembly Info";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -850,7 +849,6 @@
             this.button58.Name = "button58";
             this.button58.Size = new System.Drawing.Size(240, 50);
             this.button58.TabIndex = 89;
-            this.button58.Text = "取得映射驅動器路徑";
             this.button58.UseVisualStyleBackColor = true;
             this.button58.Click += new System.EventHandler(this.button58_Click);
             // 
@@ -861,7 +859,6 @@
             this.button57.Name = "button57";
             this.button57.Size = new System.Drawing.Size(240, 50);
             this.button57.TabIndex = 88;
-            this.button57.Text = "取得音效設備相關資訊";
             this.button57.UseVisualStyleBackColor = true;
             this.button57.Click += new System.EventHandler(this.button57_Click);
             // 
@@ -872,7 +869,6 @@
             this.button56.Name = "button56";
             this.button56.Size = new System.Drawing.Size(240, 50);
             this.button56.TabIndex = 87;
-            this.button56.Text = "取得計算機的顯示設備訊息";
             this.button56.UseVisualStyleBackColor = true;
             this.button56.Click += new System.EventHandler(this.button56_Click);
             // 
@@ -883,7 +879,6 @@
             this.button55.Name = "button55";
             this.button55.Size = new System.Drawing.Size(240, 50);
             this.button55.TabIndex = 86;
-            this.button55.Text = "取得顯示設備相關資訊";
             this.button55.UseVisualStyleBackColor = true;
             this.button55.Click += new System.EventHandler(this.button55_Click);
             // 
@@ -904,7 +899,6 @@
             this.button53.Name = "button53";
             this.button53.Size = new System.Drawing.Size(240, 50);
             this.button53.TabIndex = 84;
-            this.button53.Text = "取得專案內所有表單名稱";
             this.button53.UseVisualStyleBackColor = true;
             this.button53.Click += new System.EventHandler(this.button53_Click);
             // 
@@ -915,7 +909,6 @@
             this.button52.Name = "button52";
             this.button52.Size = new System.Drawing.Size(240, 50);
             this.button52.TabIndex = 83;
-            this.button52.Text = "取得Assembly資料";
             this.button52.UseVisualStyleBackColor = true;
             this.button52.Click += new System.EventHandler(this.button52_Click);
             // 
