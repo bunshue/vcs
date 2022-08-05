@@ -372,7 +372,7 @@ namespace vcs__Mix00
         private void button8_Click(object sender, EventArgs e)
         {
             //獲取文件的版本信息
-            string filename = @"C:\______test_files\_material\AForge.Video.dll";
+            string filename = @"C:\______test_files\_material\_dll\AForge.Video.dll";
 
             FileVersionInfo myFileVersionInfo1 = FileVersionInfo.GetVersionInfo(filename);
             richTextBox1.Text += "版本號: " + myFileVersionInfo1.FileVersion + "\n";

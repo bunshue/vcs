@@ -109,7 +109,7 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(239, 204);
+            this.button3.Location = new System.Drawing.Point(240, 191);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(80, 40);
             this.button3.TabIndex = 10;
@@ -119,7 +119,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(240, 269);
+            this.button4.Location = new System.Drawing.Point(240, 237);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(80, 40);
             this.button4.TabIndex = 11;
@@ -138,11 +138,11 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(240, 315);
+            this.button5.Location = new System.Drawing.Point(240, 283);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(80, 40);
             this.button5.TabIndex = 13;
-            this.button5.Text = "影像加強3";
+            this.button5.Text = "全圖";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -167,7 +167,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(240, 362);
+            this.button6.Location = new System.Drawing.Point(240, 329);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(80, 40);
             this.button6.TabIndex = 16;
@@ -186,7 +186,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(240, 416);
+            this.button7.Location = new System.Drawing.Point(240, 375);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(80, 40);
             this.button7.TabIndex = 18;
@@ -206,7 +206,7 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(351, 56);
+            this.button8.Location = new System.Drawing.Point(341, 56);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(80, 40);
             this.button8.TabIndex = 20;
@@ -226,7 +226,7 @@
             // 
             // button9
             // 
-            this.button9.Location = new System.Drawing.Point(351, 101);
+            this.button9.Location = new System.Drawing.Point(341, 100);
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(80, 40);
             this.button9.TabIndex = 22;
@@ -236,7 +236,7 @@
             // 
             // button10
             // 
-            this.button10.Location = new System.Drawing.Point(351, 146);
+            this.button10.Location = new System.Drawing.Point(341, 145);
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(80, 40);
             this.button10.TabIndex = 23;
@@ -272,7 +272,7 @@
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(351, 191);
+            this.button11.Location = new System.Drawing.Point(341, 191);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(80, 40);
             this.button11.TabIndex = 204;

@@ -424,6 +424,69 @@ ContextMenuStrip 選取項目 按右鍵 編輯DropDownItems(E)
 上面就是如何Datatable中某一行的id為99，就移除這一行,id為字段名
 
 
+//C# DataTable 相關操作
+
+
+///判斷DataTable中某列是否包含某值
+/// <summary>
+    /// 判斷DataTable中是否包含某值
+    /// </summary>
+    /// <param name="dt">DataTable</param>
+    /// <param name="columnName">列名</param>
+    /// <param name="fieldData">值</param>
+    /// <returns></returns>
+    public Boolean IsColumnIncludeData(DataTable dt, String columnName, string fieldData)
+    {
+        if (dt == null)
+        {
+            return false;
+        }
+        else
+        {
+            DataRow[] dataRows = dt.Select(columnName + "='" + fieldData + "'");
+            if (dataRows.Length.Equals(1))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+    }
+
+ 
+
+向DataTable中添加數據
+
+DataTable dt = null;
+
+        dt = handle.ExecuteDataTable(sql, true);
+
+        #region
+
+        DataRow dr;
+
+        for (int i = 0; i < code.Length; i++)
+        {
+            if (IsColumnIncludeData(dt, "SystemCode", code[i]) == false)
+            {
+                dr = dt.NewRow();
+                dr[0] = name[i];
+                dr[1] = code[i];
+                dr[2] = 0;
+                dt.Rows.Add(dr);
+            }
+        }
+        
+        #endregion
+
+
+
+
+
+
 
 
 
