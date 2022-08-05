@@ -52,6 +52,7 @@
             this.timer_rgb = new System.Windows.Forms.Timer(this.components);
             this.lb_brightness = new System.Windows.Forms.Label();
             this.button11 = new System.Windows.Forms.Button();
+            this.cb_modify = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3a)).BeginInit();
@@ -110,7 +111,7 @@
             // 
             this.button3.Location = new System.Drawing.Point(239, 204);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(69, 39);
+            this.button3.Size = new System.Drawing.Size(80, 40);
             this.button3.TabIndex = 10;
             this.button3.Text = "影像加強3";
             this.button3.UseVisualStyleBackColor = true;
@@ -118,7 +119,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(239, 305);
+            this.button4.Location = new System.Drawing.Point(240, 269);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(80, 40);
             this.button4.TabIndex = 11;
@@ -137,9 +138,9 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(240, 249);
+            this.button5.Location = new System.Drawing.Point(240, 315);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(68, 39);
+            this.button5.Size = new System.Drawing.Size(80, 40);
             this.button5.TabIndex = 13;
             this.button5.Text = "影像加強3";
             this.button5.UseVisualStyleBackColor = true;
@@ -279,11 +280,24 @@
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
+            // cb_modify
+            // 
+            this.cb_modify.AutoSize = true;
+            this.cb_modify.Checked = true;
+            this.cb_modify.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_modify.Location = new System.Drawing.Point(351, 37);
+            this.cb_modify.Name = "cb_modify";
+            this.cb_modify.Size = new System.Drawing.Size(48, 16);
+            this.cb_modify.TabIndex = 205;
+            this.cb_modify.Text = "調整";
+            this.cb_modify.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 461);
+            this.Controls.Add(this.cb_modify);
             this.Controls.Add(this.button11);
             this.Controls.Add(this.lb_brightness);
             this.Controls.Add(this.cb_magnify);
@@ -345,6 +359,7 @@
         private System.Windows.Forms.Timer timer_rgb;
         private System.Windows.Forms.Label lb_brightness;
         private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.CheckBox cb_modify;
     }
 }
 

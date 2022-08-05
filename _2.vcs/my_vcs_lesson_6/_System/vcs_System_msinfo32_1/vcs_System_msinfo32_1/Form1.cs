@@ -33,7 +33,7 @@ Win32_BaseBoard, // 主板
 
 Win32_BIOS, // BIOS 芯片 
 
-Win32_ParallelPort, // 并口 
+Win32_ParallelPort, // 並口 
 
 Win32_SerialPort, // 串口 
 
@@ -518,6 +518,7 @@ namespace vcs_System_msinfo32_1
         }
 
 
+        //計算機系統信息
         public class ComputerInfoEntity
         {
             //系統名稱:Name

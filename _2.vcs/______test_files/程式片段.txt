@@ -1,4 +1,15 @@
 
+excel/excel7_item.xlsx  新舊有何不同\
+
+
+ public void ShowTxt(string a)
+ {
+ this.textBox1.AppendText(DateTime.Now.ToString() + | + a + );
+  
+   } 
+ 
+ 
+
 整理搜尋關鍵字
 DataTable
 

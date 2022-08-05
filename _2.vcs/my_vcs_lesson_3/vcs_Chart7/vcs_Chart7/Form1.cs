@@ -38,6 +38,10 @@ namespace vcs_Chart7
 
         void draw_chart_bar()
         {
+            chart1.Series.Clear();
+            chart1.ChartAreas.Clear();
+            chart1.Legends.Clear();
+            chart1.Titles.Clear();
 
             List<String> xValue = new List<string>
             {
