@@ -22,6 +22,11 @@ namespace vcs_Chart5_FollowFang
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
             chart1.Series.Clear();
@@ -97,5 +102,6 @@ namespace vcs_Chart5_FollowFang
             chart1.ChartAreas.Clear();
             chart1.Series.Clear();
         }
+
     }
 }

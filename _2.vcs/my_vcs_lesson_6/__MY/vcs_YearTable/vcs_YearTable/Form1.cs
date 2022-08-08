@@ -142,18 +142,6 @@ namespace vcs_YearTable
             pictureBox1.Location = new Point(20, 20);
         }
 
-        private void button4_Click(object sender, EventArgs e)
-        {
-            if (g != null)
-            {
-                //清除畫布
-                //g.Clear(Color.White);
-                g.Clear(BackColor);     //清除整個繪圖介面，並使用指定的背景色彩填滿它。
-
-                pictureBox1.Image = bitmap1;
-            }
-        }
-
         private class eraNameList
         {
             public string EraName { get; set; }
@@ -195,119 +183,6 @@ namespace vcs_YearTable
             eraName.Add(new eraNameList { EraName = "同治", Year_ST = 1862, Year_SP = 1874 });
             eraName.Add(new eraNameList { EraName = "光緒", Year_ST = 1875, Year_SP = 1908 });
             eraName.Add(new eraNameList { EraName = "宣統", Year_ST = 1909, Year_SP = 1911 });
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Clear();
-            eraName.Clear();
-
-            load_eraData();
-
-            int offset_x = 50;
-            int offset_y = 50;
-            int year;
-            int era_start = 0;
-            int total_year = 0;
-            richTextBox1.Text += "年號\t起\t迄\t年\n";
-            foreach (var showlist in eraName)
-            {
-                if (era_start == 0)
-                    era_start = showlist.Year_ST;
-                year = showlist.Year_SP - showlist.Year_ST + 1;
-                total_year += year;
-                showlist.Year_length = year;
-                richTextBox1.Text += showlist.EraName + "\t" + showlist.Year_ST.ToString() + "\t" + showlist.Year_SP.ToString() + "\t" + showlist.Year_length.ToString() + "\n";
-            }
-            richTextBox1.Text += "總年數 : " + total_year.ToString() + "\n";
-
-            pictureBox1.Size = new System.Drawing.Size(offset_x * 2 + total_year * 10 + 10, offset_y * 2 + 190);
-
-            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
-            pictureBox1.Image = bitmap1;
-
-            richTextBox1.Text += "已新建圖檔\n";
-            richTextBox1.Text += "畫布大小 : W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
-
-            int W = pictureBox1.Width;
-            int H = pictureBox1.Height;
-
-            int ratio;
-            ratio = W / total_year;
-
-            richTextBox1.Text += "W : " + W.ToString() + "\n";
-            richTextBox1.Text += "H : " + H.ToString() + "\n";
-            richTextBox1.Text += "ratio : " + ratio.ToString() + "\n";
-
-            //Graphics g = pictureBox1.CreateGraphics();
-            Pen p = new Pen(Color.Red, 1);
-            Font f;
-
-            int x_st = 0;
-            int y_st = 0;
-            int w = 0;
-            int h = 0;
-            int year_now = DateTime.Now.Year;
-
-            h = 50;
-            y_st = 0;
-            total_year = 0;
-
-            foreach (var showlist in eraName)
-            {
-                year = showlist.Year_SP - showlist.Year_ST + 1;
-                if (showlist.EraName == "順治")
-                    total_year = 0;
-                total_year += year;
-                showlist.Year_length = year;
-                //richTextBox1.Text += showlist.EraName + "\t" + showlist.Year_ST.ToString() + "\t" + showlist.Year_SP.ToString() + "\t" + showlist.Year_length.ToString() + "\n";
-
-                x_st = (showlist.Year_ST - era_start) * ratio;
-                w = year * ratio;
-                p = new Pen(Color.Red, 1);
-                g.DrawRectangle(p, offset_x + x_st, offset_y + y_st, w, h);
-                richTextBox1.Text += "x_st = " + (x_st / ratio).ToString() + ", w = " + (w / ratio).ToString() + "\n";
-
-                f = new Font("標楷體", 12);
-                g.DrawString((total_year - year + 1).ToString(), f, new SolidBrush(Color.Blue), new PointF(offset_x + x_st, offset_y + y_st + h));
-                f = new Font("標楷體", 10);
-                g.DrawString((showlist.Year_ST - year_now).ToString(), f, new SolidBrush(Color.Blue), new PointF(offset_x + x_st, offset_y + y_st + h + 20));
-
-                string name = showlist.EraName + "(" + year.ToString() + ")";
-                int font_size = 20;
-                int ww = 0;
-                int hh = 0;
-
-                bool flag_font_size_ok = false;
-
-                f = new Font("標楷體", font_size);
-                while (flag_font_size_ok == false)
-                {
-                    ww = g.MeasureString(name, f).ToSize().Width;
-                    hh = g.MeasureString(name, f).ToSize().Height;
-                    if ((ww > w) || (hh > h))
-                    {
-                        font_size--;
-                        richTextBox1.Text += "font太大, 減為" + font_size.ToString() + "\n";
-                        f = new Font("標楷體", font_size);
-                    }
-                    else
-                    {
-                        flag_font_size_ok = true;
-                    }
-                }
-
-                richTextBox1.Text += "ww = " + ww.ToString() + "  hh = " + hh.ToString() + "\n";
-
-                g.DrawString(name, f, new SolidBrush(Color.Blue), new PointF(offset_x + x_st + (w - ww) / 2, offset_y + y_st + (h - hh) / 2));
-
-                p = new Pen(Color.Green, 1);
-                g.DrawRectangle(p, offset_x + x_st + (w - ww) / 2, offset_y + y_st + (h - hh) / 2, ww, hh);
-
-                pictureBox1.Image = bitmap1;
-            }
         }
 
         private const int EMPEROR_DATA_SUI = 0x00;      //emperor data 0, Sui
@@ -1389,6 +1264,186 @@ namespace vcs_YearTable
                 return day.ToString() + " 日";
         }
 
+        private void pictureBox1_DoubleClick(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            //朝代起訖
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            draw_person_data(PERSON_DATA_GREAT);
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            draw_leader_data(LEADER_DATA_0);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (g != null)
+            {
+                //清除畫布
+                //g.Clear(Color.White);
+                g.Clear(BackColor);     //清除整個繪圖介面，並使用指定的背景色彩填滿它。
+
+                pictureBox1.Image = bitmap1;
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+        
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+        
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            draw_person_data(PERSON_DATA_MODERN);
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+            eraName.Clear();
+
+            load_eraData();
+
+            int offset_x = 50;
+            int offset_y = 50;
+            int year;
+            int era_start = 0;
+            int total_year = 0;
+            richTextBox1.Text += "年號\t起\t迄\t年\n";
+            foreach (var showlist in eraName)
+            {
+                if (era_start == 0)
+                    era_start = showlist.Year_ST;
+                year = showlist.Year_SP - showlist.Year_ST + 1;
+                total_year += year;
+                showlist.Year_length = year;
+                richTextBox1.Text += showlist.EraName + "\t" + showlist.Year_ST.ToString() + "\t" + showlist.Year_SP.ToString() + "\t" + showlist.Year_length.ToString() + "\n";
+            }
+            richTextBox1.Text += "總年數 : " + total_year.ToString() + "\n";
+
+            pictureBox1.Size = new System.Drawing.Size(offset_x * 2 + total_year * 10 + 10, offset_y * 2 + 190);
+
+            bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+            pictureBox1.Image = bitmap1;
+
+            richTextBox1.Text += "已新建圖檔\n";
+            richTextBox1.Text += "畫布大小 : W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
+
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+
+            int ratio;
+            ratio = W / total_year;
+
+            richTextBox1.Text += "W : " + W.ToString() + "\n";
+            richTextBox1.Text += "H : " + H.ToString() + "\n";
+            richTextBox1.Text += "ratio : " + ratio.ToString() + "\n";
+
+            //Graphics g = pictureBox1.CreateGraphics();
+            Pen p = new Pen(Color.Red, 1);
+            Font f;
+
+            int x_st = 0;
+            int y_st = 0;
+            int w = 0;
+            int h = 0;
+            int year_now = DateTime.Now.Year;
+
+            h = 50;
+            y_st = 0;
+            total_year = 0;
+
+            foreach (var showlist in eraName)
+            {
+                year = showlist.Year_SP - showlist.Year_ST + 1;
+                if (showlist.EraName == "順治")
+                    total_year = 0;
+                total_year += year;
+                showlist.Year_length = year;
+                //richTextBox1.Text += showlist.EraName + "\t" + showlist.Year_ST.ToString() + "\t" + showlist.Year_SP.ToString() + "\t" + showlist.Year_length.ToString() + "\n";
+
+                x_st = (showlist.Year_ST - era_start) * ratio;
+                w = year * ratio;
+                p = new Pen(Color.Red, 1);
+                g.DrawRectangle(p, offset_x + x_st, offset_y + y_st, w, h);
+                richTextBox1.Text += "x_st = " + (x_st / ratio).ToString() + ", w = " + (w / ratio).ToString() + "\n";
+
+                f = new Font("標楷體", 12);
+                g.DrawString((total_year - year + 1).ToString(), f, new SolidBrush(Color.Blue), new PointF(offset_x + x_st, offset_y + y_st + h));
+                f = new Font("標楷體", 10);
+                g.DrawString((showlist.Year_ST - year_now).ToString(), f, new SolidBrush(Color.Blue), new PointF(offset_x + x_st, offset_y + y_st + h + 20));
+
+                string name = showlist.EraName + "(" + year.ToString() + ")";
+                int font_size = 20;
+                int ww = 0;
+                int hh = 0;
+
+                bool flag_font_size_ok = false;
+
+                f = new Font("標楷體", font_size);
+                while (flag_font_size_ok == false)
+                {
+                    ww = g.MeasureString(name, f).ToSize().Width;
+                    hh = g.MeasureString(name, f).ToSize().Height;
+                    if ((ww > w) || (hh > h))
+                    {
+                        font_size--;
+                        richTextBox1.Text += "font太大, 減為" + font_size.ToString() + "\n";
+                        f = new Font("標楷體", font_size);
+                    }
+                    else
+                    {
+                        flag_font_size_ok = true;
+                    }
+                }
+
+                richTextBox1.Text += "ww = " + ww.ToString() + "  hh = " + hh.ToString() + "\n";
+
+                g.DrawString(name, f, new SolidBrush(Color.Blue), new PointF(offset_x + x_st + (w - ww) / 2, offset_y + y_st + (h - hh) / 2));
+
+                p = new Pen(Color.Green, 1);
+                g.DrawRectangle(p, offset_x + x_st + (w - ww) / 2, offset_y + y_st + (h - hh) / 2, ww, hh);
+
+                pictureBox1.Image = bitmap1;
+            }
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+        
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            draw_person_data(PERSON_DATA_1);
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+        
+        }
+
         private void button12_Click(object sender, EventArgs e)
         {
             draw_emperor_data(EMPEROR_DATA_TANG);
@@ -1404,11 +1459,6 @@ namespace vcs_YearTable
             draw_emperor_data(EMPEROR_DATA_SUI);
         }
 
-        private void button10_Click(object sender, EventArgs e)
-        {
-            draw_person_data(PERSON_DATA_1);
-        }
-
         private void button15_Click(object sender, EventArgs e)
         {
             draw_person_data(PERSON_DATA_2);
@@ -1419,29 +1469,9 @@ namespace vcs_YearTable
             draw_person_data(PERSON_DATA_3);
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            draw_person_data(PERSON_DATA_GREAT);
-        }
-
-        private void pictureBox1_DoubleClick(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
+        private void button17_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            draw_leader_data(LEADER_DATA_0);
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-            draw_person_data(PERSON_DATA_MODERN);
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -1636,5 +1666,8 @@ namespace vcs_YearTable
         {
             Application.Exit();
         }
+
+
+
     }
 }

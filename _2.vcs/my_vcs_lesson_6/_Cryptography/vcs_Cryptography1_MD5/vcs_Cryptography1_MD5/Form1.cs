@@ -195,10 +195,22 @@ namespace vcs_Cryptography1_MD5
 
         private void button3_Click(object sender, EventArgs e)
         {
+            str_encrypted_text = MD5Encrypt(str_clear_text);
+            richTextBox1.Text += "明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
+
             str_encrypted_text = MD5Encrypt(str_clear_text, Encoding.Unicode);
             richTextBox1.Text += "明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
         }
 
+        /// <summary>
+        /// MD5加密
+        /// </summary>
+        /// <param name="input">需要加密的字符串</param>
+        /// <returns></returns>
+        public static string MD5Encrypt(string input)
+        {
+            return MD5Encrypt(input, new UTF8Encoding());
+        }
 
         /// <summary>
         /// MD5加密
@@ -327,11 +339,11 @@ namespace vcs_Cryptography1_MD5
             ///此種加密之後的字符串是三十二位的(字母加數據)字符串  
             /// Example: password是admin 加密變成後21232f297a57a5a743894a0e4a801fc3
 
-            str_encrypted_text = MD5Encrypt(str_clear_text);
+            str_encrypted_text = MD5Encrypt2(str_clear_text);
             richTextBox1.Text += "明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
         }
 
-        public string MD5Encrypt(string beforeStr)
+        public string MD5Encrypt2(string beforeStr)
         {
             string afterString = "";
             try
@@ -347,14 +359,105 @@ namespace vcs_Cryptography1_MD5
             }
             catch (Exception ex)
             {
-                //ILog log = log4net.LogManager.GetLogger(this.GetType());
-                //log.Error("==============你引起了一個錯誤是==============" + ex.Message.ToString());
+                richTextBox1.Text += "錯誤訊息 : " + ex.ToString() + "\n";
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
             }
             return afterString;
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //16位的MD5加密
+            str_encrypted_text = MD5Encrypt16(str_clear_text);
+            richTextBox1.Text += "明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
+
+            //32位的MD5加密
+            str_encrypted_text = MD5Encrypt32(str_clear_text);
+            richTextBox1.Text += "明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
+
+            //64位的MD5加密
+            str_encrypted_text = MD5Encrypt64(str_clear_text);
+            richTextBox1.Text += "明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
+
+            int code_length = 16;
+            str_encrypted_text = md5(str_clear_text, code_length);
+            richTextBox1.Text += "明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
+
+            code_length = 32;
+            str_encrypted_text = md5(str_clear_text, code_length);
+            richTextBox1.Text += "明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
+        }
+
+        //16位的MD5加密
+        /// <summary>
+        /// 16位MD5加密
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public static string MD5Encrypt16(string password)
+        {
+            var md5 = new MD5CryptoServiceProvider();
+            string t2 = BitConverter.ToString(md5.ComputeHash(Encoding.Default.GetBytes(password)), 4, 8);
+            t2 = t2.Replace("-", "");
+            return t2;
+        }
+
+        //32位的MD5加密
+        /// <summary>
+        /// 32位MD5加密
+        /// </summary>
+        /// <param name="password"></param>
+        /// <returns></returns>
+        public static string MD5Encrypt32(string password)
+        {
+            string cl = password;
+            string pwd = "";
+            MD5 md5 = MD5.Create(); //實例化一個md5對像
+            // 加密後是一個字節類型的數組，這裡要注意編碼UTF8/Unicode等的選擇　
+            byte[] s = md5.ComputeHash(Encoding.UTF8.GetBytes(cl));
+            // 通過使用循環，將字節類型的數組轉換為字符串，此字符串是常規字符格式化所得
+            for (int i = 0; i < s.Length; i++)
+            {
+                // 將得到的字符串使用十六進制類型格式。格式後的字符是小寫的字母，如果使用大寫（X）則格式後的字符是大寫字符 
+                pwd = pwd + s[i].ToString("X");
+            }
+            return pwd;
+        }
+
+        //64位的MD5加密
+        public static string MD5Encrypt64(string password)
+        {
+            string cl = password;
+            //string pwd = "";
+            MD5 md5 = MD5.Create(); //實例化一個md5對像
+            // 加密後是一個字節類型的數組，這裡要注意編碼UTF8/Unicode等的選擇　
+            byte[] s = md5.ComputeHash(Encoding.UTF8.GetBytes(cl));
+            return Convert.ToBase64String(s);
+        }
+
+        /// <summary>
+        /// 加密用戶密碼
+        /// </summary>
+        /// <param name="password">密碼</param>
+        /// <param name="codeLength">加密位數</param>
+        /// <returns>加密密碼</returns>
+        public static string md5(string str, int codeLength)
+        {
+            if (!string.IsNullOrEmpty(str))
+            {
+                // 16位MD5加密（取32位加密的9~25字符）  
+                if (codeLength == 16)
+                {
+                    return System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(str, "MD5").ToLower().Substring(8, 16);
+                }
+
+                // 32位加密
+                if (codeLength == 32)
+                {
+                    return System.Web.Security.FormsAuthentication.HashPasswordForStoringInConfigFile(str, "MD5").ToLower();
+                }
+            }
+            return string.Empty;
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -869,3 +972,169 @@ namespace vcs_Cryptography1_MD5
         }
     }
 }
+
+
+
+/*
+
+//C#使用MD5對用戶密碼加密與驗證
+//C#中常涉及到對用戶密碼的加密於解密的算法，其中使用MD5加密是最常見的的實現方式
+
+      
+5）通過DESCryptoServiceProvider對象對字符串進行加密解密
+
+/// <summary>
+/// DES數據加密
+/// </summary>
+/// <param name="targetValue">目標值</param>
+/// <param name="key">密鑰</param>
+/// <returns>加密值</returns>
+public static string Encrypt(string targetValue, string key)
+{
+    if (string.IsNullOrEmpty(targetValue))
+    {
+        return string.Empty;
+    }
+
+    var returnValue = new StringBuilder();
+    var des = new DESCryptoServiceProvider();
+    byte[] inputByteArray = Encoding.Default.GetBytes(targetValue);
+    // 通過兩次哈希密碼設置對稱算法的初始化向量   
+    des.Key = Encoding.ASCII.GetBytes(FormsAuthentication.HashPasswordForStoringInConfigFile
+                                            (FormsAuthentication.HashPasswordForStoringInConfigFile(key, "md5").
+                                                Substring(0, 8), "sha1").Substring(0, 8));
+    // 通過兩次哈希密碼設置算法的機密密鑰   
+    des.IV = Encoding.ASCII.GetBytes(FormsAuthentication.HashPasswordForStoringInConfigFile
+                                            (FormsAuthentication.HashPasswordForStoringInConfigFile(key, "md5")
+                                                .Substring(0, 8), "md5").Substring(0, 8));
+    var ms = new MemoryStream();
+    var cs = new CryptoStream(ms, des.CreateEncryptor(), CryptoStreamMode.Write);
+    cs.Write(inputByteArray, 0, inputByteArray.Length);
+    cs.FlushFinalBlock();
+    foreach (byte b in ms.ToArray())
+    {
+        returnValue.AppendFormat("{0:X2}", b);
+    }
+    return returnValue.ToString();
+}
+
+此種算法可以通過加密密鑰進行解密，解密方法如下：
+
+/// <summary>
+/// DES數據解密
+/// </summary>
+/// <param name="targetValue"></param>
+/// <param name="key"></param>
+/// <returns></returns>
+public static string Decrypt(string targetValue, string key)
+{
+    if (string.IsNullOrEmpty(targetValue))
+    {
+        return string.Empty;
+    }
+    // 定義DES加密對象
+    var des = new DESCryptoServiceProvider();
+    int len = targetValue.Length / 2;
+    var inputByteArray = new byte[len];
+    int x, i;
+    for (x = 0; x < len; x++)
+    {
+        i = Convert.ToInt32(targetValue.Substring(x * 2, 2), 16);
+        inputByteArray[x] = (byte)i;
+    }
+    // 通過兩次哈希密碼設置對稱算法的初始化向量   
+    des.Key = Encoding.ASCII.GetBytes(FormsAuthentication.HashPasswordForStoringInConfigFile
+                                            (FormsAuthentication.HashPasswordForStoringInConfigFile(key, "md5").
+                                                Substring(0, 8), "sha1").Substring(0, 8));
+    // 通過兩次哈希密碼設置算法的機密密鑰   
+    des.IV = Encoding.ASCII.GetBytes(FormsAuthentication.HashPasswordForStoringInConfigFile
+                                            (FormsAuthentication.HashPasswordForStoringInConfigFile(key, "md5")
+                                                .Substring(0, 8), "md5").Substring(0, 8));
+    // 定義內存流
+    var ms = new MemoryStream();
+    // 定義加密流
+    var cs = new CryptoStream(ms, des.CreateDecryptor(), CryptoStreamMode.Write);
+    cs.Write(inputByteArray, 0, inputByteArray.Length);
+    cs.FlushFinalBlock();
+    return Encoding.Default.GetString(ms.ToArray());
+}
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+         #region MD5加密
+ 
+         /// <summary>
+         /// MD5對文件流加密
+         /// </summary>
+         /// <param name="sr"></param>
+         /// <returns></returns>
+         public static string MD5Encrypt(Stream stream)
+         {
+             MD5 md5serv = MD5CryptoServiceProvider.Create();
+             byte[] buffer = md5serv.ComputeHash(stream);
+             StringBuilder sb = new StringBuilder();
+             foreach (byte var in buffer)
+                 sb.Append(var.ToString("x2"));
+             return sb.ToString();
+         }
+ 
+         /// <summary>
+         /// MD5加密(返回16位加密串)
+         /// </summary>
+         /// <param name="input"></param>
+         /// <param name="encode"></param>
+         /// <returns></returns>
+         public static string MD5Encrypt16b(string input, Encoding encode)
+         {
+             MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+             string result = BitConverter.ToString(md5.ComputeHash(encode.GetBytes(input)), 4, 8);
+             result = result.Replace("-", "");
+             return result;
+         }
+         #endregion
+         
+         
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+//C#最簡單的文本加密，
+
+private char[] TextEncrypt(string content, string secretKey)
+{
+    char[] data = content.ToCharArray();
+    char[] key = secretKey.ToCharArray();
+
+    for (int i = 0; i < data.Length; i++)
+    {
+        data[i] ^= key[i % key.Length];
+    }
+
+    return data;
+}
+
+private string TextDecrypt(char[] data, string secretKey)
+{
+    char[] key = secretKey.ToCharArray();
+
+    for (int i = 0; i < data.Length; i++)
+    {
+        data[i] ^= key[i % key.Length];
+    }
+
+    return new string(data);
+}
+
+//上面是最簡單的加密和解密文本的函數，不需要任何庫文件支持，只是把原文和密鑰進行字節的異或，想要把密文翻譯回來，很簡單，拿著密文和密鑰重新異或一次就可以。
+//如果密鑰正確的話，就會回來正確的原始文本，如果密鑰錯誤的話，翻譯回來的就會是一堆的亂碼。
+//所以也起到了最簡單的加密功能。
+
+
+*/

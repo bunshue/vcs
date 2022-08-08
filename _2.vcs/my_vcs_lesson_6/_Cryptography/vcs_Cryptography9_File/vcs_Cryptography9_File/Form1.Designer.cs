@@ -138,6 +138,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(180, 55);
             this.button7.TabIndex = 8;
+            this.button7.Text = "用MD5比較兩個檔案";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 

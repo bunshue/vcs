@@ -224,6 +224,7 @@
             this.button17.TabIndex = 22;
             this.button17.Text = "距今年表";
             this.button17.UseVisualStyleBackColor = true;
+            this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
             // button18
             // 
@@ -287,6 +288,7 @@
             this.button5.Size = new System.Drawing.Size(100, 40);
             this.button5.TabIndex = 28;
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button0
             // 
@@ -295,7 +297,9 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(100, 40);
             this.button0.TabIndex = 29;
+            this.button0.Text = "朝代起訖";
             this.button0.UseVisualStyleBackColor = true;
+            this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
             // button6
             // 
@@ -305,6 +309,7 @@
             this.button6.Size = new System.Drawing.Size(100, 40);
             this.button6.TabIndex = 30;
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button9
             // 
@@ -314,6 +319,7 @@
             this.button9.Size = new System.Drawing.Size(100, 40);
             this.button9.TabIndex = 31;
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button11
             // 
@@ -323,6 +329,7 @@
             this.button11.Size = new System.Drawing.Size(100, 40);
             this.button11.TabIndex = 32;
             this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // button19
             // 

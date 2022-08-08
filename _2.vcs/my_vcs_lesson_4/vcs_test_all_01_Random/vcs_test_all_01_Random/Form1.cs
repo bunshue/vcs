@@ -67,18 +67,6 @@ namespace vcs_test_all_01_Random
             pictureBox5.Size = new Size(256 / 2, 50);
             pictureBox5.Location = new Point(750 + 256 / 2, 20 + 256 + 10 + 50 + 10);
 
-            tb_random_text1.Size = new Size(256, 50);
-            tb_random_text1.Location = new Point(750, 20 + 256 + 10 + 150 + 10);
-
-            tb_random_text2.Size = new Size(256, 50);
-            tb_random_text2.Location = new Point(750, 20 + 256 + 10 + 150 + 10 + 50 + 10);
-
-            tb_random_text3.Size = new Size(256, 50);
-            tb_random_text3.Location = new Point(750, 20 + 256 + 10 + 150 + 10 + 50 + 10 + 50 + 10);
-
-            tb_random_text4.Size = new Size(256, 50);
-            tb_random_text4.Location = new Point(750, 20 + 256 + 10 + 150 + 10 + 50 + 10 + 50 + 10 + 50 + 10);
-
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
             bt_random0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -110,6 +98,39 @@ namespace vcs_test_all_01_Random
 
             richTextBox1.Location = new Point(x_st + dx * 7 + 20, y_st + dy * 0);
             richTextBox1.Size = new Size(680, 1000);
+
+
+            int w = 300;
+            int h = 50;
+
+            x_st = 750;
+            y_st = 430;
+            dx = 160;
+            dy = 50;
+
+            tb_random_text0.Size = new Size(w, h);
+            tb_random_text0.Location = new Point(x_st, y_st + dy * 0);
+
+            tb_random_text1.Size = new Size(w, h);
+            tb_random_text1.Location = new Point(x_st, y_st + dy * 1);
+
+            tb_random_text2.Size = new Size(w, h);
+            tb_random_text2.Location = new Point(x_st, y_st + dy * 2);
+
+            tb_random_text3.Size = new Size(w, h);
+            tb_random_text3.Location = new Point(x_st, y_st + dy * 3);
+
+            tb_random_text4.Size = new Size(w, h);
+            tb_random_text4.Location = new Point(x_st, y_st + dy * 4);
+
+            tb_random_text5.Size = new Size(w, h);
+            tb_random_text5.Location = new Point(x_st, y_st + dy * 5);
+
+            tb_random_text6.Size = new Size(w, h);
+            tb_random_text6.Location = new Point(x_st, y_st + dy * 6);
+
+            tb_random_text7.Size = new Size(w, h);
+            tb_random_text7.Location = new Point(x_st, y_st + dy * 7);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -156,28 +177,34 @@ namespace vcs_test_all_01_Random
 
         private void bt_random0_Click(object sender, EventArgs e)
         {
+        }
+
+
+        public string RandomText6(int len)
+        {
+            int i;
             //產生隨機漢字
             //獲取GB2312編碼頁（表）
             Encoding gb = Encoding.GetEncoding("gb2312");
 
-            int len = 20;
             //調用函數產生隨機中文漢字編碼
             object[] bytes = CreateRegionCode2(len);
 
             //根據漢字編碼的字節數組解碼出中文漢字
-            int i;
+            string str = string.Empty;
             for (i = 0; i < len; i++)
             {
-                richTextBox1.Text += gb.GetString((byte[])Convert.ChangeType(bytes[i], typeof(byte[])));
+                str += gb.GetString((byte[])Convert.ChangeType(bytes[i], typeof(byte[])));
 
             }
-            richTextBox1.Text += "\n";
+
+            return str;
 
         }
 
 
-        /**/
-        /*
+
+    /*
     此函數在漢字編碼范圍內隨機創建含兩個元素的十六進制字節數組，每個字節數組代表一個漢字，並將
     四個字節數組存儲在object數組中。
     參數：strlength，代表需要產生的漢字個數
@@ -1185,7 +1212,7 @@ namespace vcs_test_all_01_Random
             //獲取GB2312編碼頁（表）
             Encoding gb = Encoding.GetEncoding("gb2312");
 
-            int len = 20;
+            //int len = 20;
             //調用函數產生隨機中文漢字編碼
             object[] bytes = CreateRegionCode(4);
 
@@ -1211,6 +1238,7 @@ namespace vcs_test_all_01_Random
         private void timer1_Tick(object sender, EventArgs e)
         {
             //製作random color的方法
+            int i;
             int len;
             len = Colors.Length;
 
@@ -1232,7 +1260,11 @@ namespace vcs_test_all_01_Random
 
             pictureBox5.BackColor = GetRandomColor5();
 
+
+            tb_random_text0.Text = RandomText0();
             tb_random_text1.Text = RandomText1();
+            tb_random_text5.Text = RandomText5(10);
+            tb_random_text6.Text = RandomText6(10);
 
             //產生隨機字串
             len = 10;
@@ -1254,7 +1286,7 @@ namespace vcs_test_all_01_Random
             Console.OutputEncoding = System.Text.Encoding.Unicode;
             //產生1000字Unicode中文字
             tb_random_text3.Text = "";
-            for (int i = 0; i < 4; i++)
+            for (i = 0; i < 4; i++)
             {
                 tb_random_text3.Text += getRandomUnicode().Substring(0, 1);
             }
@@ -1490,11 +1522,15 @@ namespace vcs_test_all_01_Random
 
         private void bt_random21_Click(object sender, EventArgs e)
         {
+        }
+
+
+        private string RandomText0()
+        {
             //取得任意字串
             int len = 20;
             string random_pattern = CreateAndCheckCode(real_random, len);
-
-            richTextBox1.Text += "取得random字串 : \t" + random_pattern + "\n";
+            return random_pattern;
         }
 
         Random real_random = new Random(~unchecked((int)DateTime.Now.Ticks));
@@ -1561,8 +1597,6 @@ namespace vcs_test_all_01_Random
 
         private void bt_random23_Click(object sender, EventArgs e)
         {
-            string random_chinese_word = CreateCode(10);
-            richTextBox1.Text += random_chinese_word + "\n";
         }
 
         //隨機生成漢字（摘錄保存的代碼），生成漢字摘錄代碼
@@ -1571,7 +1605,7 @@ namespace vcs_test_all_01_Random
         /// </summary>
         /// <param name="strlength">長度（4位）</param>
         /// <returns></returns>
-        public string CreateCode(int strlength)
+        public string RandomText5(int strlength)
         {
             //定義一個字符串數組儲存漢字編碼的組成元素
             string[] r = new String[16] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };

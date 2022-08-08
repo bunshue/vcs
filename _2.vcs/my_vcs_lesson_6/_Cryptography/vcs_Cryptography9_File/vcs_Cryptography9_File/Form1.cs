@@ -339,6 +339,48 @@ namespace vcs_Cryptography9_File
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //用MD5比較兩個檔案
+
+            string filename1 = @"C:\______test_files\picture1.jpg";
+            string filename2 = @"C:\______test_files\elephant.jpg";
+            string FirstFileMD5 = string.Empty;     //第一個檔案的MD5碼
+            string SecondFileMD5 = string.Empty;    //第二個檔案的MD5碼
+
+            FirstFileMD5 = string.Empty;
+            //建立MD5的演算法
+            HashAlgorithm algorithm = MD5.Create();
+            //取得第一個檔案MD5演算後的陣列
+            byte[] FirstHash = algorithm.ComputeHash(File.ReadAllBytes(filename1));
+            //建立第一個檔案的MD5碼
+            foreach (byte b in FirstHash)
+            {
+                FirstFileMD5 += b.ToString("X2");
+            }
+            richTextBox1.Text += "File 1 MD5 :   " + FirstFileMD5 + "\n";
+
+
+            SecondFileMD5 = string.Empty;
+            //建立MD5的演算法
+            algorithm = MD5.Create();
+            //取得第二個檔案MD5演算後的陣列
+            byte[] SecondHash = algorithm.ComputeHash(File.ReadAllBytes(filename2));
+            //建立第一個檔案的MD5碼
+            foreach (byte b in SecondHash)
+            {
+                SecondFileMD5 += b.ToString("X2");
+            }
+            richTextBox1.Text += "File 2 MD5 :   " + SecondFileMD5 + "\n";
+
+
+            if (FirstFileMD5.ToLower() == SecondFileMD5.ToLower())
+            {
+                richTextBox1.Text += "兩個檔案相等\n";
+            }
+            else
+            {
+                richTextBox1.Text += "兩個檔案不同\n";
+            }
+
         }
 
         private void button8_Click(object sender, EventArgs e)
