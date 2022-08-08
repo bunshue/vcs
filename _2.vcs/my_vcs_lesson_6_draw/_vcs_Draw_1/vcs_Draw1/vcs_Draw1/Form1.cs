@@ -2003,6 +2003,40 @@ namespace vcs_Draw1
 
         private void button37_Click(object sender, EventArgs e)
         {
+            //箭頭 虛線
+
+            //自定義直線箭頭大小
+            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+
+            g.DrawRectangle(Pens.Red, 100, 100, 100, 100);
+
+            System.Drawing.Drawing2D.AdjustableArrowCap lineCap = new System.Drawing.Drawing2D.AdjustableArrowCap(6, 6, true);
+            Pen RedPen = new Pen(Color.Red, 2);
+            RedPen.CustomEndCap = lineCap;
+
+            g.DrawLine(RedPen, 100, 100, 300, 300);
+
+
+            //畫虛線
+            Control P = (Control)sender;
+            Pen pen = new Pen(Color.FromArgb(255, 0, 0), 5);
+            pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;//虛線的樣式
+            pen.DashPattern = new float[] { 2, 2 };//設置虛線中實點和空白區域之間的間隔
+            //g.DrawLine(pen, 0, 0, 0, P.Height - 1);
+            g.DrawRectangle(pen, 50, 50, 300, 300);
+
+
+            //#畫虛線
+            Pen p = new Pen(Color.Red, 5);
+            p.DashStyle = DashStyle.Custom;//虛線的樣式
+            p.DashPattern = new float[] { 2, 2 };//設置虛線中實點和空白區域之間的間隔
+            g.DrawLine(p, 0, 0, this.pictureBox1.Width - 1, this.pictureBox1.Height - 1);
+
+
+            pictureBox1.Image = bitmap1;
+
         }
 
         private void button38_Click(object sender, EventArgs e)
@@ -2860,6 +2894,23 @@ namespace vcs_Draw1
 
         private void button50_Click(object sender, EventArgs e)
         {
+            //半透明筆刷
+            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+
+
+            //　寫文字的筆刷，透明度為100,藍色
+            Brush b = new SolidBrush(Color.FromArgb(100, Color.Blue));
+
+            int i;
+            for (i = 0; i < 10; i += 2)
+            {
+                g.DrawString("群曜醫電", new Font("標楷體", 80), b, 100 + i, 100 + i);
+            }
+            //重疊部分 筆色加深
+
+            pictureBox1.Image = bitmap1;
         }
 
         private void button51_Click(object sender, EventArgs e)

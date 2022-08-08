@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_Chart5_FollowFang
+namespace vcs_Color
 {
     static class Program
     {

@@ -19,8 +19,11 @@ namespace vcs_PictureEnhance_YUV
         //string filename1 = @"C:\______test_files\color1.bmp";
         //string filename2 = @"C:\______test_files\color2.bmp";
 
-        Bitmap bitmap1; //原圖
-        Bitmap bitmap2; //從原圖修改過的
+        private Point pt_st = Point.Empty;//記錄鼠標按下時的坐標，用來確定繪圖起點
+        private Point pt_sp = Point.Empty;//記錄鼠標放開時的坐標，用來確定繪圖終點
+        private Bitmap bitmap1 = null;  //原圖
+        private Bitmap bitmap2 = null;  //從原圖修改過的
+        private Rectangle SelectionRectangle = new Rectangle(new Point(0, 0), new Size(0, 0));    //用來保存截圖的矩形
 
         public Point firstPoint = new Point(0, 0);  //鼠標第一點 
         public Point secondPoint = new Point(0, 0);  //鼠標第二點 
@@ -187,6 +190,7 @@ namespace vcs_PictureEnhance_YUV
             dy = pbx_H + 10;
             dy2 = pbx_H2 + 10;
 
+            groupBox_selection.Size = new Size(pbx_W, 65);
             pictureBox1.Size = new Size(pbx_W, pbx_H);
             pictureBox2.Size = new Size(pbx_W, pbx_H);
             pictureBox3a.Size = new Size(pbx_W2, pbx_H2);
@@ -202,6 +206,7 @@ namespace vcs_PictureEnhance_YUV
 
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             pictureBox2.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            groupBox_selection.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             pictureBox3a.Location = new Point(x_st + dx * 1, y_st + dy2 * 0);
             pictureBox3b.Location = new Point(x_st + dx * 1 + pbx_W2, y_st + dy2 * 0);
             pictureBox4.Location = new Point(x_st + dx * 1, y_st + dy2 * 1);
@@ -230,6 +235,22 @@ namespace vcs_PictureEnhance_YUV
             y_st = 10;
             richTextBox1.Size = new Size(160, 1040);
             richTextBox1.Location = new Point(x_st + dx * 2 + 105, y_st + dy * 0);
+
+            x_st = 10;
+            y_st = 20;
+            dx = 50;
+            dy = 50;
+            lb_x_st.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            nud_x_st.Location = new Point(x_st + dx * 1 - 28, y_st + dy * 0);
+            lb_y_st.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            nud_y_st.Location = new Point(x_st + dx * 3 - 28, y_st + dy * 0);
+
+            lb_w.Location = new Point(x_st + dx * 4, y_st + dy * 0);
+            nud_w.Location = new Point(x_st + dx * 5 - 28, y_st + dy * 0);
+            lb_h.Location = new Point(x_st + dx * 6, y_st + dy * 0);
+            nud_h.Location = new Point(x_st + dx * 7 - 28, y_st + dy * 0);
+
+            bt_apply.Location = new Point(x_st + dx * 8, y_st + dy * 0);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -664,18 +685,122 @@ namespace vcs_PictureEnhance_YUV
 
         private void button1_Click(object sender, EventArgs e)
         {
-            x_st = W / 8;
-            y_st = H / 8;
-            w = W * 3 / 4;
-            h = H * 3 / 4;
+            int border = 60;
+            x_st = border;
+            y_st = border;
+            w = W - border * 2;
+            h = H - border * 2;
 
-            x_st = 100;
-            y_st = 100;
-            w = 640 - 200;
-            h = 480 - 200;
 
             reset_picture();
-            ImageEnhancement(x_st, y_st, w, h);
+
+            int dx = 1;
+            int dy = 1;
+
+
+            int i = 1;
+
+            for (i = 1; i < 50; i += 5)
+            {
+                dx = i;
+                dy = i;
+
+                richTextBox1.Text += "\n每隔 " + dx.ToString() + " 點計算\n";
+                read_bitmap_data(bitmap1, x_st, y_st, w, h, dx, dy);
+            }
+        }
+
+        void read_bitmap_data(Bitmap bitmap1, int x_st, int y_st, int w, int h, int dx, int dy)
+        {
+            int i;
+            int j;
+            int Y_max = 0;
+            int Y_min = 255;
+            Color pt;
+
+            int total_points = 0;
+            double total_brightness = 0;
+            double sd;
+            int average_brightness;
+            int diff_Y;
+            float ratio_Y;
+
+            int len = (int)(Math.Ceiling(w / (double)dx)) * (int)(Math.Ceiling(h / (double)dy));
+            double[] sd_num = new double[len];
+
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+
+            for (j = 0; j < h; j += dy)
+            {
+                for (i = 0; i < w; i += dx)
+                {
+                    pt = bitmap1.GetPixel(x_st + i, y_st + j);
+
+                    RGB pp = new RGB(pt.R, pt.G, pt.B);
+                    YUV yyy = new YUV();
+                    yyy = RGBToYUV(pp);
+
+                    total_brightness += yyy.Y;
+
+                    sd_num[total_points] = yyy.Y;
+
+                    total_points++;
+                }
+            }
+
+            richTextBox1.Text += "共有 " + total_points.ToString() + " 個點\n";
+            //richTextBox1.Text += "共有 " + (w * h).ToString() + " 個點\n";
+            //richTextBox1.Text += "總亮度 " + total_brightness.ToString() + "\n";
+            //richTextBox1.Text += "平均亮度 " + (total_brightness / total_points).ToString() + "\n";
+            sd = SD(sd_num);
+            richTextBox1.Text += "標準差 " + sd.ToString("F2") + "\n";
+
+            average_brightness = (int)Math.Round(total_brightness / total_points); //四捨五入
+            richTextBox1.Text += "平均亮度 " + average_brightness.ToString() + "\n";
+
+            for (j = 0; j < h; j += dy)
+            {
+                for (i = 0; i < w; i += dx)
+                {
+                    pt = bitmap1.GetPixel(x_st + i, y_st + j);
+
+                    RGB pp = new RGB(pt.R, pt.G, pt.B);
+                    YUV yyy = new YUV();
+                    yyy = RGBToYUV(pp);
+
+                    int y = (int)Math.Round(yyy.Y); //四捨五入
+
+                    if (y > 255)
+                        y = 255;
+                    if (y < 0)
+                        y = 0;
+
+                    if (Y_max < y)
+                        Y_max = y;
+
+                    if (Y_min > y)
+                        Y_min = y;
+                }
+            }
+            if (Y_max > 255)
+                Y_max = 255;
+            if (Y_min < 0)
+                Y_min = 0;
+
+            brightness_max = Y_max;
+            brightness_min = Y_min;
+
+            diff_Y = Y_max - Y_min;
+
+            if (diff_Y == 0)
+                diff_Y = 1;
+
+            ratio_Y = 255 / (float)diff_Y;
+            brightness_ratio = ratio_Y;
+
+            richTextBox1.Text += "M = " + Y_max.ToString() + "\tm = " + Y_min.ToString() + "\t";
+            richTextBox1.Text += "D = " + diff_Y.ToString("F2") + "\tR = " + ratio_Y.ToString("F2") + "\n";
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -691,24 +816,10 @@ namespace vcs_PictureEnhance_YUV
 
         private void button3_Click(object sender, EventArgs e)
         {
-            x_st = W / 3;
-            y_st = H / 3;
-            w = W / 3;
-            h = H / 3;
-
-            reset_picture();
-            ImageEnhancement(x_st, y_st, w, h);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            x_st = W / 12;
-            y_st = H / 4;
-            w = W / 10;
-            h = H / 10;
-
-            reset_picture();
-            ImageEnhancement(x_st, y_st, w, h);
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -1300,21 +1411,43 @@ namespace vcs_PictureEnhance_YUV
         int draw_w = 0;
         int draw_h = 0;
 
+        // Return a Rectangle with these points as corners.
+        private Rectangle MakeRectangle(int x0, int y0, int x1, int y1)
+        {
+            return new Rectangle(Math.Min(x0, x1), Math.Min(y0, y1), Math.Abs(x0 - x1), Math.Abs(y0 - y1));
+        }
+
+        private Rectangle MakeRectangle(Point pt1, Point pt2)
+        {
+            return new Rectangle(Math.Min(pt1.X, pt2.X), Math.Min(pt1.Y, pt2.Y), Math.Abs(pt1.X - pt2.X), Math.Abs(pt1.Y - pt2.Y));
+        }
+
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             bitmap1 = (Bitmap)Image.FromFile(filename1);	//Image.FromFile出來的是Image格式
             bitmap2 = (Bitmap)bitmap1.Clone();
 
             flag_pictureBox1_mouse_down = true;
+            pt_st = e.Location; //起始點座標
+
             //richTextBox1.Text += "Down : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
             pictureBox1_position_x_old = e.X;
             pictureBox1_position_y_old = e.Y;
+
+            nud_w.Value = 0;
+            nud_h.Value = 0;
+            nud_x_st.Value = 0;
+            nud_y_st.Value = 0;
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
             if (flag_pictureBox1_mouse_down == true)
             {
+                pt_sp = e.Location; //終點座標
+
+                SelectionRectangle = MakeRectangle(pt_st, pt_sp);
+
                 //richTextBox1.Text += "Up : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
                 int dx = e.X - pictureBox1_position_x_old;
                 int dy = e.Y - pictureBox1_position_y_old;
@@ -1344,6 +1477,11 @@ namespace vcs_PictureEnhance_YUV
                 this.pictureBox1.Invalidate();
                 //richTextBox1.Text += "dx, dy : (" + dx.ToString() + ", " + dy.ToString() + ")\n";
                 //pictureBox1.Location = new Point(pictureBox1.Location.X + dx, pictureBox1.Location.Y + dy);
+
+                nud_x_st.Value = SelectionRectangle.X;
+                nud_y_st.Value = SelectionRectangle.Y;
+                nud_w.Value = SelectionRectangle.Width;
+                nud_h.Value = SelectionRectangle.Height;
             }
             else if (cb_magnify.Checked == true)
             {
@@ -1402,6 +1540,11 @@ namespace vcs_PictureEnhance_YUV
                 return;
             if (((draw_x_st + draw_w) > W) || ((draw_y_st + draw_h) > H))
                 return;
+
+            nud_x_st.Value = SelectionRectangle.X;
+            nud_y_st.Value = SelectionRectangle.Y;
+            nud_w.Value = SelectionRectangle.Width;
+            nud_h.Value = SelectionRectangle.Height;
 
             richTextBox1.Text += "\n選取範圍 : " + draw_x_st.ToString() + "\t" + draw_y_st.ToString() + "\t" + draw_w.ToString() + "\t" + draw_h.ToString() + "\n";
             draw_enhanced_image(bitmap2, draw_x_st, draw_y_st, draw_w, draw_h);
@@ -1739,7 +1882,7 @@ namespace vcs_PictureEnhance_YUV
             g2.FillRectangle(b, 800, 0, 20, 256);
             g2.FillRectangle(b, 850, 0, 20, 256);
 
-            g2.DrawRectangle(Pens.Red, 750, hh2-brightness_sp, 20, brightness_sp - brightness_st);
+            g2.DrawRectangle(Pens.Red, 750, hh2 - brightness_sp, 20, brightness_sp - brightness_st);
 
 
             /*  沒幫上忙
@@ -2011,5 +2154,11 @@ namespace vcs_PictureEnhance_YUV
 
             return sd;
         }
+
+        private void bt_apply_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
+

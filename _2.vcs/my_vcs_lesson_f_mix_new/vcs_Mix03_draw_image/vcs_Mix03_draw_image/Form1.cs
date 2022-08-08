@@ -520,68 +520,11 @@ namespace vcs_Mix03_draw_image
         private void button8_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //自定義直線箭頭大小
-            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
-
-            g.DrawRectangle(Pens.Red, 100, 100, 100, 100);
-
-            System.Drawing.Drawing2D.AdjustableArrowCap lineCap = new System.Drawing.Drawing2D.AdjustableArrowCap(6, 6, true);
-            Pen RedPen = new Pen(Color.Red, 2);
-            RedPen.CustomEndCap = lineCap;
-
-            g.DrawLine(RedPen, 100, 100, 300, 300);
-
-
-            //畫虛線
-            Control P = (Control)sender;
-            Pen pen = new Pen(Color.FromArgb(255, 0, 0), 5);
-            pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Custom;//虛線的樣式
-            pen.DashPattern = new float[] { 2, 2 };//設置虛線中實點和空白區域之間的間隔
-            //g.DrawLine(pen, 0, 0, 0, P.Height - 1);
-            g.DrawRectangle(pen, 50, 50, 300, 300);
-
-
-            //#畫虛線
-            Pen p = new Pen(Color.Red, 5);
-            p.DashStyle = DashStyle.Custom;//虛線的樣式
-            p.DashPattern = new float[] { 2, 2 };//設置虛線中實點和空白區域之間的間隔
-            g.DrawLine(p, 0, 0, this.pictureBox1.Width - 1, this.pictureBox1.Height - 1);
-
-
-            pictureBox1.Image = bitmap1;
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            // 半透明筆刷
-
-            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
-
-
-            //　寫文字的筆刷，透明度為100,藍色
-            Brush b = new SolidBrush(Color.FromArgb(100, Color.Blue));
-
-            int i;
-            for (i = 0; i < 10; i += 2)
-            {
-                g.DrawString("群曜醫電", new Font("標楷體", 80), b, 100 + i, 100 + i);
-            }
-            //重疊部分 筆色加深
-
-            pictureBox1.Image = bitmap1;
-
-
-
-
-
-
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -1127,42 +1070,9 @@ namespace vcs_Mix03_draw_image
             show_button_text(sender);
         }
 
-        public static Bitmap returnAlpha(Bitmap bmp, int alpha)
-        {
-            Color col;
-            Bitmap bmp2 = new Bitmap(bmp);
-            for (int i = 0; i < bmp.Width; i++)
-                for (int j = 0; j < bmp.Height; j++)
-                {
-                    col = bmp.GetPixel(i, j);
-                    if ((col.A - alpha) >= 0)
-                    {
-                        bmp2.SetPixel(i, j, Color.FromArgb(Math.Abs(col.A - alpha), col.R, col.G, col.B));
-                        //bmp2.SetPixel(i, j, Color.FromArgb(10, col.R, col.G, col.B));
-                    }
-                }
-            return bmp2;
-        }
-
         private void button20_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //改變圖片透明度
-            string filename = @"C:\______test_files\picture1.jpg";
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
-            Bitmap bitmap80 = returnAlpha(bitmap1, 80);
-            Bitmap bitmap160 = returnAlpha(bitmap1, 160);
-            Bitmap bitmap220 = returnAlpha(bitmap1, 220);
-
-            bitmap80.Save(@"picture_80.bmp", ImageFormat.Bmp);
-            bitmap160.Save(@"picture_160.bmp", ImageFormat.Bmp);
-            bitmap220.Save(@"picture_220.bmp", ImageFormat.Bmp);
-
-            pictureBox1.Image = bitmap80;
-            //pictureBox2.Image = bitmap160;
-            //pictureBox3.Image = bitmap220;
-
-            richTextBox1.Text += "OK\n";
         }
 
         private void button21_Click(object sender, EventArgs e)

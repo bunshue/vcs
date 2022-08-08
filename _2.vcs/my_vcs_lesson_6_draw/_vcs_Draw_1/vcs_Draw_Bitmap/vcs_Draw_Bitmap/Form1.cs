@@ -442,10 +442,57 @@ namespace vcs_Draw_Bitmap
 
         }
 
+        public static Bitmap returnAlpha(Bitmap bmp, int alpha)
+        {
+            Color col;
+            Bitmap bmp2 = new Bitmap(bmp);
+            for (int i = 0; i < bmp.Width; i++)
+            {
+                for (int j = 0; j < bmp.Height; j++)
+                {
+                    col = bmp.GetPixel(i, j);
+                    if ((col.A - alpha) >= 0)
+                    {
+                        bmp2.SetPixel(i, j, Color.FromArgb(Math.Abs(col.A - alpha), col.R, col.G, col.B));
+                        //bmp2.SetPixel(i, j, Color.FromArgb(10, col.R, col.G, col.B));
+                    }
+                }
+            }
+            return bmp2;
+        }
+
         private void button20_Click(object sender, EventArgs e)
         {
+            //改變圖片透明度
+            string filename = @"C:\______test_files\picture1.jpg";
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            Bitmap bitmap80 = returnAlpha(bitmap1, 80);
+            Bitmap bitmap160 = returnAlpha(bitmap1, 160);
+            Bitmap bitmap220 = returnAlpha(bitmap1, 220);
+
+            bitmap80.Save(@"picture_80.bmp", ImageFormat.Bmp);
+            bitmap160.Save(@"picture_160.bmp", ImageFormat.Bmp);
+            bitmap220.Save(@"picture_220.bmp", ImageFormat.Bmp);
+
+            Bitmap bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            Graphics g = Graphics.FromImage(bmp);
+            //g.Clear(Color.Pink);
+
+            g.DrawImage(bitmap80, 0, 0);
+            g.DrawImage(bitmap160, 305, 0);
+            g.DrawImage(bitmap220, 305 * 2, 0);
+
+            pictureBox1.Image = bmp;
+
+            //pictureBox1.Image = bitmap160;
+            //pictureBox1.Image = bitmap220;
+
+            richTextBox1.Text += "OK\n";
+
 
         }
+
+
 
         double ratio = 0.5f;
         private void button21_Click(object sender, EventArgs e)

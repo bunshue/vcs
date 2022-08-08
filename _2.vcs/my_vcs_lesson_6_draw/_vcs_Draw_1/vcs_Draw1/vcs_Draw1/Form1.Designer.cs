@@ -614,6 +614,7 @@
             this.button37.Name = "button37";
             this.button37.Size = new System.Drawing.Size(120, 42);
             this.button37.TabIndex = 64;
+            this.button37.Text = "箭頭 虛線";
             this.button37.UseVisualStyleBackColor = true;
             this.button37.Click += new System.EventHandler(this.button37_Click);
             // 
@@ -765,6 +766,7 @@
             this.button50.Name = "button50";
             this.button50.Size = new System.Drawing.Size(120, 42);
             this.button50.TabIndex = 79;
+            this.button50.Text = "半透明筆刷";
             this.button50.UseVisualStyleBackColor = true;
             this.button50.Click += new System.EventHandler(this.button50_Click);
             // 

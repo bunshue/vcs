@@ -108,5 +108,51 @@ namespace vcs_Cryptography4
             }
             return DecryptorString;
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //加密
+
+            //TextEncrypt
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //解密
+
+            //TextDecrypt
+
+        }
+
+        //C#最簡單的文本加密 與 解密
+        private char[] TextEncrypt(string content, string secretKey)
+        {
+            char[] data = content.ToCharArray();
+            char[] key = secretKey.ToCharArray();
+
+            for (int i = 0; i < data.Length; i++)
+            {
+                data[i] ^= key[i % key.Length];
+            }
+
+            return data;
+        }
+
+        private string TextDecrypt(char[] data, string secretKey)
+        {
+            char[] key = secretKey.ToCharArray();
+
+            for (int i = 0; i < data.Length; i++)
+            {
+                data[i] ^= key[i % key.Length];
+            }
+
+            return new string(data);
+        }
+        //上面是最簡單的加密和解密文本的函數，不需要任何庫文件支持，只是把原文和密鑰進行字節的異或，想要把密文翻譯回來，很簡單，拿著密文和密鑰重新異或一次就可以。
+        //如果密鑰正確的話，就會回來正確的原始文本，如果密鑰錯誤的話，翻譯回來的就會是一堆的亂碼。
+        //所以也起到了最簡單的加密功能。
+
+
     }
 }
