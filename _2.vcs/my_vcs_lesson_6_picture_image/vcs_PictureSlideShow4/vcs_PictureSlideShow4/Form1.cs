@@ -13,8 +13,6 @@ namespace vcs_PictureSlideShow4
     public partial class Form1 : Form
     {
         string foldername = @"C:\______test_files\__pic\_MU";
-
-        string strPath;
         string strInfo = "";
         string[] strName = null;
         int Num = 0;
@@ -23,8 +21,6 @@ namespace vcs_PictureSlideShow4
         public Form1()
         {
             InitializeComponent();
-            //strPath = System.Environment.CurrentDirectory+"\\Image";
-            strPath = foldername;
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -37,7 +33,8 @@ namespace vcs_PictureSlideShow4
             this.pictureBox1.KeyDown += new KeyEventHandler(pictureBox1_KeyDown);
             this.ActiveControl = this.pictureBox1;//选中pictureBox1，不然没法触发事件
 
-            DirectoryInfo dir = new DirectoryInfo(strPath);
+            DirectoryInfo dir = new DirectoryInfo(foldername);
+
             GetAllFiles(dir);
             if (strInfo != "")
             {
@@ -62,7 +59,6 @@ namespace vcs_PictureSlideShow4
 
         public void GetAllFiles(DirectoryInfo dir)
         {
-
             FileSystemInfo[] fileinfo = dir.GetFileSystemInfos();
             foreach (FileSystemInfo i in fileinfo)
             {
@@ -89,7 +85,7 @@ namespace vcs_PictureSlideShow4
             //richTextBox1.Text +=strPath + "\\" + strName[N]+"\n";
 
             //讀取圖檔, 多一層Image結構
-            string filename = strPath + "\\" + strName[N];
+            string filename = foldername + "\\" + strName[N];
             Image image = Image.FromFile(filename);
             pictureBox1.Image = image;
 

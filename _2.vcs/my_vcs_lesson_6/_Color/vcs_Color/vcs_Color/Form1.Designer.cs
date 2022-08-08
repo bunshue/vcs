@@ -81,6 +81,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(180, 55);
             this.button0.TabIndex = 52;
+            this.button0.Text = "已知的顏色列舉";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -131,6 +132,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(180, 55);
             this.button3.TabIndex = 47;
+            this.button3.Text = "System Color";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -141,6 +143,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(180, 55);
             this.button2.TabIndex = 46;
+            this.button2.Text = "DrawColorMap";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -151,6 +154,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(180, 55);
             this.button1.TabIndex = 45;
+            this.button1.Text = "DrawColorMap";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -259,6 +263,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(180, 55);
             this.button12.TabIndex = 61;
+            this.button12.Text = "顏色名稱3";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -269,6 +274,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(180, 55);
             this.button11.TabIndex = 60;
+            this.button11.Text = "顏色名稱2";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -279,6 +285,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(180, 55);
             this.button10.TabIndex = 59;
+            this.button10.Text = "顏色名稱1";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 

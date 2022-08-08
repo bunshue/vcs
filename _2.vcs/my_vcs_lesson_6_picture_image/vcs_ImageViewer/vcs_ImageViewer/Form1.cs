@@ -102,8 +102,10 @@ namespace vcs_ImageViewer
             {
                 OpenImageFile(cmds[1]);
             }
-
-            open_image_file();
+            else
+            {
+                OpenImageFile(filename);    // 画像ファイルを開く
+            }
         }
 
         void show_item_location()
@@ -176,7 +178,7 @@ namespace vcs_ImageViewer
                 richTextBox1.Text += "DirectoryName: " + f.DirectoryName + "\n";
 
                 filename = openFileDialog1.FileName;
-                open_image_file();
+                OpenImageFile(filename);    // 画像ファイルを開く
             }
             else
             {
@@ -281,7 +283,7 @@ namespace vcs_ImageViewer
             point_old.Y = e.Y;
             // マウスダウンフラグ
             flag_mouse_down = true;
-}
+        }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
@@ -653,32 +655,5 @@ namespace vcs_ImageViewer
                 }
             }
         }
-
-        void open_image_file()
-        {
-            
-            OpenImageFile(filename);
-
-            /*
-            // ファイルを開くダイアログの作成 
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.InitialDirectory = @"C:\______test_files\";
-            // ファイルフィルタ 
-            openFileDialog1.Filter = "画像ﾌｧｲﾙ(*.bmp,*.jpg,*.png,*.tif,*.ico)|*.bmp;*.jpg;*.png;*.tif;*.ico";
-            // ダイアログの表示 （Cancelボタンがクリックされた場合は何もしない）
-
-            openFileDialog1.FileName = "ims_image.bmp";
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                // 画像ファイルを開く
-                OpenImageFile(openFileDialog1.FileName);
-            }
-            else
-            {
-                richTextBox1.Text += "未選取檔案\n";
-            }
-            */
-        }
     }
 }
-
