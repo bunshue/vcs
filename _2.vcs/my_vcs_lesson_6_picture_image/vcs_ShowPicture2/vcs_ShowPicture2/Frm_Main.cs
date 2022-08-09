@@ -12,7 +12,6 @@ namespace vcs_ShowPicture2
 {
     public partial class Frm_Main : Form
     {
-        string strPath;
         string strInfo = "";
         string[] strName = null;
         int Num = 0;
@@ -23,23 +22,31 @@ namespace vcs_ShowPicture2
         public Frm_Main()
         {
             InitializeComponent();
-            strPath = foldername;
         }
 
-        public void GetAllFiles(DirectoryInfo dir)
+        public void GetAllFiles(string foldername)
         {
-            FileSystemInfo[] fi = dir.GetFileSystemInfos(); 	//初始化一個FileSystemInfo類型的數組
-            foreach (FileSystemInfo i in fi) 					//循環遍歷fileinfo中的每一個記錄
+            DirectoryInfo di = new DirectoryInfo(foldername);  //實例化一個DirectoryInfo類對象
+            FileSystemInfo[] fileinfo = di.GetFileSystemInfos(); 	//初始化一個FileSystemInfo類型的數組
+            foreach (FileSystemInfo fi in fileinfo) 					//循環遍歷fileinfo中的每一個記錄
             {
-                if (i is DirectoryInfo) 						//當i在類DirectoryInfo中存在時
+                if (fi is DirectoryInfo) 						//當i在類DirectoryInfo中存在時
                 {
-                    GetAllFiles((DirectoryInfo)i); 				//獲取i下的所有文件
+                    GetAllFiles(((DirectoryInfo)fi).FullName);   //獲取i下的所有文件
                 }
                 else										//當不存在該i時
                 {
-                    string str = i.FullName; 				//記錄變量i的全名
+                    string fullname = fi.FullName;
+                    string shortname = fi.Name;
+                    string ext = fi.Extension.ToLower();
+                    string forename = shortname.Substring(0, shortname.Length - ext.Length);    //前檔名
+
+                    //if (ext == ".jpg" || ext == ".jpeg" || ext == ".bmp" || ext == ".png" || ext == ".gif")
+
+                    string str = fi.FullName; 				//記錄變量i的全名
                     int b = str.LastIndexOf("\\");				//在此示例中獲取最后一個匹配項的索引
                     string strType = str.Substring(b + 1); 	//保存文件的后綴
+
                     //當文件格式為“jpg”或者“bmp”時
                     if (strType.Substring(strType.Length - 3) == "jpg" || strType.Substring(strType.Length - 3) == "bmp")
                     {
@@ -51,8 +58,8 @@ namespace vcs_ShowPicture2
 
         private void Frm_Main_Load(object sender, EventArgs e)
         {
-            DirectoryInfo di = new DirectoryInfo(strPath); 			//實例化一個DirectoryInfo類對象
-            GetAllFiles(di); 								//獲取dir下的所有文件
+            GetAllFiles(foldername);                           //獲取dir下的所有文件
+
             if (strInfo != "")								//當字符串不為空時
             {
                 strName = strInfo.Split('#'); 					//獲取文件名
@@ -68,7 +75,7 @@ namespace vcs_ShowPicture2
 
         private void showPic(int X)
         {
-            this.pictureBox1.ImageLocation = strPath + "\\" + strName[X];
+            this.pictureBox1.ImageLocation = foldername + "\\" + strName[X];
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -100,3 +107,5 @@ namespace vcs_ShowPicture2
         }
     }
 }
+
+

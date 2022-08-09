@@ -17,7 +17,9 @@ namespace draw_rectangle
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\elephant.jpg";
+        int flag_operation_mode = 1;    //0 : 空白模式, 1 : 圖片模式
+
+        string filename = @"C:\______test_files\picture1.jpg";
 
         private bool flag_mouse_down = false;
         private int intStartX = 0;
@@ -43,8 +45,23 @@ namespace draw_rectangle
         {
             show_item_location();
 
-            //bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-            //pictureBox1.Image = bitmap1;
+            if (flag_operation_mode == 0)
+            {
+                W = pictureBox1.Width;
+                H = pictureBox1.Height;
+            }
+            else if (flag_operation_mode == 1)
+            {
+                bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+                pictureBox1.Image = bitmap1;
+                W = bitmap1.Width;
+                H = bitmap1.Height;
+            }
+            else //test
+            {
+                W = pictureBox1.Width;
+                H = pictureBox1.Height;
+            }
         }
 
         void show_item_location()
@@ -111,7 +128,6 @@ namespace draw_rectangle
 
                 SelectionRectangle = MakeRectangle(pt_st, pt_sp);
 
-                /*
                 if ((SelectionRectangle.X < 0) || (SelectionRectangle.X >= W))
                     return;
                 if ((SelectionRectangle.Y < 0) || (SelectionRectangle.Y >= H))
@@ -122,21 +138,45 @@ namespace draw_rectangle
                     return;
                 if (((SelectionRectangle.X + SelectionRectangle.Width) > W) || ((SelectionRectangle.Y + SelectionRectangle.Height) > H))
                     return;
-                */
 
                 try
                 {
-                    //Image tmp = Image.FromFile("1.png");
-                    Graphics g = this.pictureBox1.CreateGraphics();
-                    //清空上次畫下的痕跡
-                    g.Clear(this.pictureBox1.BackColor);
-                    Brush brush = new SolidBrush(Color.Red);
-                    Pen pen = new Pen(brush, 1);
-                    pen.DashStyle = DashStyle.Solid;
-                    g.DrawRectangle(pen, new Rectangle(intStartX > e.X ? e.X : intStartX, intStartY > e.Y ? e.Y : intStartY, Math.Abs(e.X - intStartX), Math.Abs(e.Y - intStartY)));
-                    //g.DrawEllipse(pen, new Rectangle(intStartX > e.X ? e.X : intStartX, intStartY > e.Y ? e.Y : intStartY, Math.Abs(e.X - intStartX), Math.Abs(e.Y - intStartY)));
-                    g.Dispose();
-                    //this.pictureBox_Src.Image = tmp;
+                    if (flag_operation_mode == 0)	//空白模式
+                    {
+                        //Image tmp = Image.FromFile("1.png");
+                        Graphics g = this.pictureBox1.CreateGraphics();
+                        //清空上次畫下的痕跡
+                        g.Clear(this.pictureBox1.BackColor);
+                        Brush brush = new SolidBrush(Color.Red);
+                        Pen pen = new Pen(brush, 1);
+                        pen.DashStyle = DashStyle.Solid;
+                        g.DrawRectangle(pen, new Rectangle(intStartX > e.X ? e.X : intStartX, intStartY > e.Y ? e.Y : intStartY, Math.Abs(e.X - intStartX), Math.Abs(e.Y - intStartY)));
+                        //g.DrawEllipse(pen, new Rectangle(intStartX > e.X ? e.X : intStartX, intStartY > e.Y ? e.Y : intStartY, Math.Abs(e.X - intStartX), Math.Abs(e.Y - intStartY)));
+                        g.Dispose();
+                        //this.pictureBox_Src.Image = tmp;
+                    }
+                    else if (flag_operation_mode == 1)  //圖片模式
+                    {
+                        Graphics g = this.pictureBox1.CreateGraphics();
+                        g.DrawImage(bitmap1, 0, 0, bitmap1.Width, bitmap1.Height);
+                        Brush brush = new SolidBrush(Color.Red);
+                        Pen pen = new Pen(brush, 1);
+                        pen.DashStyle = DashStyle.Solid;
+                        g.DrawRectangle(pen, new Rectangle(intStartX > e.X ? e.X : intStartX, intStartY > e.Y ? e.Y : intStartY, Math.Abs(e.X - intStartX), Math.Abs(e.Y - intStartY)));
+                        g.Dispose();
+                    }
+                    else //test
+                    {
+                        Image tmp = Image.FromFile(filename);
+                        Graphics g = this.pictureBox1.CreateGraphics();
+                        g.DrawImage(bitmap1, 0, 0, bitmap1.Width, bitmap1.Height);
+                        Brush brush = new SolidBrush(Color.Red);
+                        Pen pen = new Pen(brush, 1);
+                        pen.DashStyle = DashStyle.Solid;
+                        g.DrawRectangle(pen, new Rectangle(intStartX > e.X ? e.X : intStartX, intStartY > e.Y ? e.Y : intStartY, Math.Abs(e.X - intStartX), Math.Abs(e.Y - intStartY)));
+                        g.Dispose();
+                        this.pictureBox1.Image = tmp;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -194,4 +234,3 @@ namespace draw_rectangle
         }
     }
 }
-

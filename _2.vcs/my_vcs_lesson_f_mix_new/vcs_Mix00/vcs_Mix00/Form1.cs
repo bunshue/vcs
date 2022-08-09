@@ -454,6 +454,50 @@ namespace vcs_Mix00
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //撈出所有圖片檔 並存成一個List
+            string foldername = @"C:\______test_files\__pic";
+
+            filenames.Clear();
+            GetAllFiles(foldername);
+            int len = filenames.Count;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += filenames[i] + "\n";
+            }
+        }
+
+        List<String> filenames = new List<String>();
+        //多層 且指明副檔名
+        public void GetAllFiles(string foldername)
+        {
+            DirectoryInfo di = new DirectoryInfo(foldername);
+            //richTextBox1.Text += "資料夾 : " + di.FullName + "\n";
+            FileSystemInfo[] fileinfo = di.GetFileSystemInfos();
+            foreach (FileSystemInfo fi in fileinfo)
+            {
+                if (fi is DirectoryInfo)
+                {
+                    GetAllFiles(((DirectoryInfo)fi).FullName);
+                }
+                else
+                {
+                    string fullname = fi.FullName;
+                    string shortname = fi.Name;
+                    string ext = fi.Extension.ToLower();
+                    string forename = shortname.Substring(0, shortname.Length - ext.Length);    //前檔名
+
+                    if (ext == ".jpg" || ext == ".jpeg" || ext == ".bmp" || ext == ".png" || ext == ".gif")
+                    {
+                        //richTextBox1.Text += "長檔名: " + fullname + "\t副檔名: " + ext + "\n";
+                        richTextBox1.Text += "短檔名: " + shortname + "\n";
+                        richTextBox1.Text += "前檔名: " + forename + "\n";
+                        //filenames.Add(fullname);
+                    }
+                }
+            }
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -599,7 +643,7 @@ namespace vcs_Mix00
 
             string filename = string.Empty;
             string result = string.Empty;
-            
+
             filename = @"C:\______test_files\picture1.jpg";
             result = ImageComparer.GetImageHashCode(filename);
             richTextBox1.Text += result + "\n";

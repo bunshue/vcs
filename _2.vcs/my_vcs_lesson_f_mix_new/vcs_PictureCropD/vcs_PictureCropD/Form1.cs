@@ -13,7 +13,7 @@ namespace vcs_PictureCropD
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\elephant.jpg";
+        string filename = @"C:\______test_files\picture1.jpg";
 
         private bool flag_mouse_down = false;
         private int intStartX = 0;

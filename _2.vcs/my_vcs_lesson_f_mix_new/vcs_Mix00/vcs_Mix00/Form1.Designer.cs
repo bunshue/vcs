@@ -220,6 +220,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(170, 70);
             this.button10.TabIndex = 110;
+            this.button10.Text = "撈出所有圖片檔 並存成一個List";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
