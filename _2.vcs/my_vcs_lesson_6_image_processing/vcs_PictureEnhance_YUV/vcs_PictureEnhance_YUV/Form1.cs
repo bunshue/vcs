@@ -41,6 +41,9 @@ namespace vcs_PictureEnhance_YUV
         private int brightness_avg = 0;
         private double brightness_sd = 0;
         private float brightness_ratio = 0;
+        private int brightness_max_mod = 0;
+        private int brightness_min_mod = 0;
+        private float brightness_ratio_mod = 0;
 
         int[] brightness_data = new int[256];
 
@@ -454,8 +457,6 @@ namespace vcs_PictureEnhance_YUV
             float ratio_Y = 255 / (float)diff_Y;
             brightness_ratio = ratio_Y;
 
-            //ratio_Y = 3.0f;
-
             richTextBox1.Text += "\nM = " + Y_max.ToString() + "\tm = " + Y_min.ToString() + "\n";
             richTextBox1.Text += "D = " + diff_Y.ToString("F2") + "\tR = " + ratio_Y.ToString("F2") + "\n";
 
@@ -488,10 +489,11 @@ namespace vcs_PictureEnhance_YUV
                 richTextBox1.Text += "調整後:\n";
                 richTextBox1.Text += "M = " + Y_max.ToString() + "\tm = " + Y_min.ToString() + "\n";
                 richTextBox1.Text += "D = " + diff_Y.ToString("F2") + "\tR = " + ratio_Y.ToString("F2") + "\n";
-
-
-
             }
+
+            brightness_max_mod = Y_max;
+            brightness_min_mod = Y_min;
+            brightness_ratio_mod = ratio_Y;
 
             if ((sel % 2) == 0)
             {
@@ -551,17 +553,18 @@ namespace vcs_PictureEnhance_YUV
                     }
                 }
             }
-            sel++;
 
-            /*
             //若是幾乎沒什麼變化的, 畫一個框來表示區域
-            if (ratio_Y < 1.4)
+            if ((ratio_Y < 1.4) || ((sel % 2) == 1))
             {
                 Graphics g = Graphics.FromImage(bitmap1);
                 g.DrawRectangle(Pens.Blue, x_st - 1, y_st - 1, w + 2, h + 2);
             }
-            */
+
+
             //影像加強後 統計所有亮度, TBD
+
+            sel++;
         }
 
         void show_part_image(Bitmap bmp, int x_st, int y_st, int w, int h)
@@ -961,6 +964,23 @@ namespace vcs_PictureEnhance_YUV
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //選取範圍 : 418	149	145	203
+            x_st = 418;
+            y_st = 149;
+            w = 145;
+            h = 203;
+
+            reset_picture();
+            ImageEnhancement(x_st, y_st, w, h);
+
+            //亮度分布
+            draw_x_st = x_st;
+            draw_y_st = y_st;
+            draw_w = w;
+            draw_h = h;
+
+            measure_brightness();
+            this.pictureBox1.Invalidate();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -986,9 +1006,7 @@ namespace vcs_PictureEnhance_YUV
             draw_w = w;
             draw_h = h;
 
-            measure_brightness(pictureBox1, pictureBox4);
-            measure_brightness(pictureBox2, pictureBox5);
-
+            measure_brightness();
             this.pictureBox1.Invalidate();
         }
 
@@ -1035,9 +1053,7 @@ namespace vcs_PictureEnhance_YUV
             draw_w = w;
             draw_h = h;
 
-            measure_brightness(pictureBox1, pictureBox4);
-            measure_brightness(pictureBox2, pictureBox5);
-
+            measure_brightness();
             this.pictureBox1.Invalidate();
         }
 
@@ -1067,9 +1083,7 @@ namespace vcs_PictureEnhance_YUV
             draw_w = w;
             draw_h = h;
 
-            measure_brightness(pictureBox1, pictureBox4);
-            measure_brightness(pictureBox2, pictureBox5);
-
+            measure_brightness();
             this.pictureBox1.Invalidate();
         }
 
@@ -1689,8 +1703,8 @@ namespace vcs_PictureEnhance_YUV
 
             richTextBox1.Text += "\n選取範圍 : " + draw_x_st.ToString() + "\t" + draw_y_st.ToString() + "\t" + draw_w.ToString() + "\t" + draw_h.ToString() + "\n";
             draw_enhanced_image(bitmap2, draw_x_st, draw_y_st, draw_w, draw_h);
-            measure_brightness(pictureBox1, pictureBox4);
-            measure_brightness(pictureBox2, pictureBox5);
+
+            measure_brightness();
         }
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
@@ -1770,71 +1784,18 @@ namespace vcs_PictureEnhance_YUV
             richTextBox1.Text += "平均亮度 " + (total_brightness / total_points).ToString() + "\n";
         }
 
-        void measure_brightness(PictureBox pbox1, PictureBox pbox2)
+        void measure_brightness()
         {
-            if (pbox1.Image == null)
-            {
-                richTextBox1.Text += pbox1.Name + " 無影像, 離開\n";
-                return;
-            }
-
-            richTextBox1.Text += pbox1.Name + "\n";
-
             x_st = draw_x_st;
             y_st = draw_y_st;
             w = draw_w;
             h = draw_h;
 
-            Bitmap bitmap1 = (Bitmap)pbox1.Image;
-            int W = bitmap1.Width;
-            int H = bitmap1.Height;
-            //richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+            //量測原圖 bitmap1
 
             get_brigheness_data(bitmap1, x_st, y_st, w, h);
 
-            /* debug
-            richTextBox1.Text += "brightness data :\n";
-            printArrayData(brightness_data);
-            */
-
-            int y_min = 0;
-            int y_max = 0;
-            FindYMaxYMin(brightness_data, out y_min, out y_max);
-            richTextBox1.Text += "y_min = " + y_min.ToString() + "\t" + "y_max = " + y_max.ToString() + "\n";
-
-            /*  修改數值
-            //一律忽視最亮和最暗的數值   ????
-            brightness_data[0] = 0;
-            brightness_data[255] = 0;
-
             int i;
-            for (i = 0; i < 256; i++)
-            {
-                if (brightness_data[i] < 40)
-                {
-                    brightness_data[i] = 0;
-                }
-                //richTextBox1.Text += brightness_data[i].ToString() + " ";
-            }
-            */
-
-            /* debug
-            richTextBox1.Text += "brightness data :\n";
-            printArrayData(brightness_data);
-            */
-
-            draw_brightness(pbox2);
-        }
-
-        void draw_brightness(PictureBox pbox)
-        {
-            int i;
-
-            /* debug
-            richTextBox1.Text += "brightness data :\n";
-            printArrayData(brightness_data);
-            */
-
             int most = 0;
             int brightness_st = 0;
             int brightness_sp = 0;
@@ -1906,9 +1867,9 @@ namespace vcs_PictureEnhance_YUV
             int ww = 480 * 2 - 10;
             int hh1 = 300;
             int hh2 = 256;
-            Bitmap bmp = new Bitmap(ww, hh1);
-            Graphics g2 = Graphics.FromImage(bmp);
-            g2.Clear(Color.Pink);
+            Bitmap bmp4 = new Bitmap(ww, hh1);
+            Graphics g4 = Graphics.FromImage(bmp4);
+            g4.Clear(Color.Pink);
             Pen p = new Pen(Color.Blue, 2);
 
             double ratio = 0;
@@ -1917,72 +1878,68 @@ namespace vcs_PictureEnhance_YUV
 
             for (i = 0; i < 256; i++)
             {
-                g2.FillRectangle(Brushes.Red, i * 2, hh2 - (float)(brightness_data[i] * ratio), 2, (float)(brightness_data[i] * ratio));
+                g4.FillRectangle(Brushes.Red, i * 2, hh2 - (float)(brightness_data[i] * ratio), 2, (float)(brightness_data[i] * ratio));
             }
 
-            g2.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh1 - 2);
-            g2.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh2 - 2);
+            g4.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh1 - 2);
+            g4.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh2 - 2);
 
             p = new Pen(Color.Yellow, 3);
-            g2.DrawLine(p, average_brightness * 2, 0, average_brightness * 2, hh2 - 2);
-            g2.DrawLine(p, brightness_st * 2, 0, brightness_st * 2, hh2 - 2);
-            g2.DrawLine(p, brightness_sp * 2, 0, brightness_sp * 2, hh2 - 2);
+            g4.DrawLine(p, average_brightness * 2, 0, average_brightness * 2, hh2 - 2);
+            g4.DrawLine(p, brightness_st * 2, 0, brightness_st * 2, hh2 - 2);
+            g4.DrawLine(p, brightness_sp * 2, 0, brightness_sp * 2, hh2 - 2);
 
             Brush b = new SolidBrush(Color.FromArgb(33, Color.RoyalBlue.R, Color.RoyalBlue.G, Color.RoyalBlue.B));
 
-            g2.FillRectangle(b, min * 2, 0, (max - min) * 2, hh1);
-
-
-            //p = new Pen(Color.Green, 3);
-            //g2.DrawLine(p, min * 2, hh2, max * 2, 0);
+            g4.FillRectangle(b, min * 2, 0, (max - min) * 2, hh1);
 
             Font f = new Font("標楷體", 20);
 
             if ((min >= 0) && (min <= 103))
             {
-                g2.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(min * 2, hh2));
+                g4.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(min * 2, hh2));
             }
             else if (min < 0)
             {
-                g2.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(0, hh2));
+                g4.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(0, hh2));
             }
             else
             {
-                g2.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(103 * 2, hh2));
+                g4.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(103 * 2, hh2));
             }
 
             if ((max <= 255) && (max >= 152))
             {
-                g2.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(max * 2 - 50, hh2));
+                g4.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(max * 2 - 50, hh2));
 
-                g2.DrawString(brightness_st.ToString(), f, new SolidBrush(Color.Yellow), new PointF(brightness_st * 2 - 25, hh2));
-                g2.DrawString(brightness_sp.ToString(), f, new SolidBrush(Color.Yellow), new PointF(brightness_sp * 2 - 25, hh2));
-                g2.DrawString(average_brightness.ToString(), f, new SolidBrush(Color.Yellow), new PointF(average_brightness * 2 - 25, hh2));
+                g4.DrawString(brightness_st.ToString(), f, new SolidBrush(Color.Yellow), new PointF(brightness_st * 2 - 25, hh2));
+                g4.DrawString(brightness_sp.ToString(), f, new SolidBrush(Color.Yellow), new PointF(brightness_sp * 2 - 25, hh2));
+                g4.DrawString(average_brightness.ToString(), f, new SolidBrush(Color.Yellow), new PointF(average_brightness * 2 - 25, hh2));
             }
             else if (max > 255)
             {
-                g2.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(512 - 50, hh2));
+                g4.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(512 - 50, hh2));
             }
             else
             {
-                g2.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(152 * 2 - 50, hh2));
+                g4.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(152 * 2 - 50, hh2));
             }
 
             int dy = 22;
-            g2.DrawString("Max = " + y_max.ToString(), new Font("標楷體", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 0);
-            g2.DrawString("min = " + y_min.ToString(), new Font("標楷體", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 1);
-            g2.DrawString("most = " + most.ToString(), new Font("標楷體", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 2);
-            g2.DrawString("最亮 : " + brightness_sp.ToString(), new Font("標楷體", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 3);
-            g2.DrawString("最暗 : " + brightness_st.ToString(), new Font("標楷體", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 4);
-            g2.DrawString("亮差 : " + (brightness_sp - brightness_st).ToString(), new Font("標楷體", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 5);
-            g2.DrawString("平均 : " + average_brightness.ToString(), new Font("標楷體", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 6);
-            g2.DrawString("SD : " + sd.ToString("F2"), new Font("標楷體", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 7);
+            g4.DrawString("Max = " + y_max.ToString(), new Font("標楷體", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 0);
+            g4.DrawString("min = " + y_min.ToString(), new Font("標楷體", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 1);
+            g4.DrawString("most = " + most.ToString(), new Font("標楷體", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 2);
+            g4.DrawString("最亮 : " + brightness_sp.ToString(), new Font("標楷體", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 3);
+            g4.DrawString("最暗 : " + brightness_st.ToString(), new Font("標楷體", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 4);
+            g4.DrawString("亮差 : " + (brightness_sp - brightness_st).ToString(), new Font("標楷體", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 5);
+            g4.DrawString("平均 : " + average_brightness.ToString(), new Font("標楷體", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 6);
+            g4.DrawString("SD : " + sd.ToString("F2"), new Font("標楷體", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 7);
 
             float rr_sp = 2.0f;
             bool flag_modify_boundary_sp = true;
             if ((brightness_sp - average_brightness) < sd * rr_sp)
             {
-                g2.DrawString("YMax太近", new Font("標楷體", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 8);
+                g4.DrawString("YMax太近", new Font("標楷體", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 8);
                 flag_modify_boundary_sp = false;
             }
 
@@ -1990,59 +1947,250 @@ namespace vcs_PictureEnhance_YUV
             bool flag_modify_boundary_st = true;
             if ((average_brightness - brightness_st) < sd * rr_st)
             {
-                g2.DrawString("YMin太近", new Font("標楷體", 18), new SolidBrush(Color.Navy), 512 + 100, 10 + dy * 8);
+                g4.DrawString("YMin太近", new Font("標楷體", 18), new SolidBrush(Color.Navy), 512 + 100, 10 + dy * 8);
                 flag_modify_boundary_st = false;
             }
 
-            g2.DrawString(((int)Math.Round((average_brightness - sd * rr_st))).ToString() + " " +
+            g4.DrawString(((int)Math.Round((average_brightness - sd * rr_st))).ToString() + " " +
                 average_brightness.ToString() + " " +
                 ((int)Math.Round((average_brightness + sd * rr_sp))).ToString(), new Font("標楷體", 18), new SolidBrush(Color.Navy), 512, 10 + dy * 9);
 
             if ((flag_modify_boundary_sp == false) || (cb_modify.Checked == false))
             {
-                g2.DrawString("亮場未調整", new Font("標楷體", 13), new SolidBrush(Color.Red), 512 + 105, 10 + dy * 10);
+                g4.DrawString("亮場未調整", new Font("標楷體", 13), new SolidBrush(Color.Red), 512 + 105, 10 + dy * 10);
             }
 
             if ((flag_modify_boundary_st == false) || (cb_modify.Checked == false))
             {
-                g2.DrawString("暗場未調整", new Font("標楷體", 13), new SolidBrush(Color.Red), 512, 10 + dy * 10);
+                g4.DrawString("暗場未調整", new Font("標楷體", 13), new SolidBrush(Color.Red), 512, 10 + dy * 10);
             }
 
             int boundary_st = (int)Math.Round(average_brightness - sd * rr_st);
             int boundary_sp = (int)Math.Round(average_brightness + sd * rr_sp);
 
             b = new SolidBrush(Color.FromArgb(30, Color.Lime.R, Color.Lime.G, Color.Lime.B));
-            g2.FillRectangle(b, boundary_st * 2, 0 + 0, (boundary_sp - boundary_st) * 2, hh2 - 0 - 0);
-            g2.DrawRectangle(Pens.Lime, boundary_st * 2, 0 + 0, (boundary_sp - boundary_st) * 2, hh2 - 0 - 0);
-            //g2.DrawLine(Pens.Lime, boundary_st * 2, 0, boundary_st * 2, hh2);
-            //g2.DrawLine(Pens.Lime, boundary_sp * 2, 0, boundary_sp * 2, hh2);
+            g4.FillRectangle(b, boundary_st * 2, 0 + 0, (boundary_sp - boundary_st) * 2, hh2 - 0 - 0);
+            g4.DrawRectangle(Pens.Lime, boundary_st * 2, 0 + 0, (boundary_sp - boundary_st) * 2, hh2 - 0 - 0);
+            //g4.DrawLine(Pens.Lime, boundary_st * 2, 0, boundary_st * 2, hh2);
+            //g4.DrawLine(Pens.Lime, boundary_sp * 2, 0, boundary_sp * 2, hh2);
 
-
+            int width = 40;
             b = new SolidBrush(Color.FromArgb(30, Color.Lime.R, Color.Lime.G, Color.Lime.B));
-            g2.FillRectangle(b, 750, 0, 20, 256);
-            g2.FillRectangle(b, 800, 0, 20, 256);
-            g2.FillRectangle(b, 850, 0, 20, 256);
+            g4.FillRectangle(b, 750, 0, width, 256);
+            g4.FillRectangle(b, 800, 0, width, 256);
+            g4.FillRectangle(b, 850, 0, width, 256);
 
-            g2.DrawRectangle(Pens.Red, 750, hh2 - brightness_sp, 20, brightness_sp - brightness_st);
+            g4.DrawRectangle(Pens.Red, 750, hh2 - brightness_sp, width, brightness_sp - brightness_st);
 
 
-            /*  沒幫上忙
-            //畫個curve
+            //richTextBox1.Text += "brightness data :\n";
+            //printArrayData(brightness_data);
+            int mm = brightness_data.Max();
+            //richTextBox1.Text += "mm = " + mm.ToString() + "\n";
+            float rr = mm / (float)width;
+            for (i = 0; i < 256; i++)
+            {
+                g4.DrawLine(Pens.Red, 750, hh2 - i, 750 + (int)(brightness_data[i] / rr), hh2 - i);
+
+            }
+
             Point[] curvePoints = new Point[256];    //一維陣列內有 256 個Point
+            for (i = 0; i < 256; i++)
+            {
+                curvePoints[i].X = 750 + (int)(brightness_data[i] / rr);
+                curvePoints[i].Y = hh2 - i;
+            }
+            // Draw lines between original points to screen.
+            g4.DrawLines(Pens.Yellow, curvePoints);   //畫直線
+            // Draw curve to screen.
+            //g4.DrawCurve(Pens.Yellow, curvePoints); //畫曲線
+
+            //再把標準差範圍畫出來
+
+            richTextBox1.Text += "brightness_st = " + brightness_st.ToString() + "\n";
+            richTextBox1.Text += "brightness_sp = " + brightness_sp.ToString() + "\n";
+            richTextBox1.Text += "brightness_min = " + brightness_min.ToString() + "\n";
+            richTextBox1.Text += "brightness_max = " + brightness_max.ToString() + "\n";
+            richTextBox1.Text += "brightness_avg = " + brightness_avg.ToString() + "\n";
+            richTextBox1.Text += "brightness_sd = " + brightness_sd.ToString() + "\n";
+            richTextBox1.Text += "brightness_ratio = " + brightness_ratio.ToString("F2") + "\n";
+
+            richTextBox1.Text += "brightness_min_mod = " + brightness_min_mod.ToString() + "\n";
+            richTextBox1.Text += "brightness_max_mod = " + brightness_max_mod.ToString() + "\n";
+            richTextBox1.Text += "brightness_ratio_mod = " + brightness_ratio_mod.ToString("F2") + "\n";
+
+            g4.DrawRectangle(Pens.Red, 800, hh2 - brightness_max_mod, width, brightness_max_mod - brightness_min_mod);
+            g4.DrawLine(Pens.Red, 800, hh2 - brightness_avg, 800 + width, hh2 - brightness_avg);
+
+            pictureBox4.Image = bmp4;
+
+
+
+
+            //量測修改過的圖 bitmap2
+
+            get_brigheness_data(bitmap2, x_st, y_st, w, h);
+
+            most = 0;
+            brightness_st = 0;
+            brightness_sp = 0;
+            total_points = 0;
+            total_brightness = 0;
+            for (i = 0; i < 256; i++)
+            {
+                total_points += brightness_data[i];
+                total_brightness += i * brightness_data[i];
+                //richTextBox1.Text += brightness_data[i].ToString() + " ";
+                if (brightness_data[i] > most)
+                    most = brightness_data[i];
+                /*
+                if (brightness_data[i] == 0)
+                    brightness_data[i] = 5;
+                */
+                if ((brightness_data[i] > 0) && (brightness_st == 0))
+                {
+                    brightness_st = i;
+                }
+                if (brightness_data[i] > 0)
+                {
+                    brightness_sp = i;
+                }
+            }
+            richTextBox1.Text += "\n最多 " + most.ToString() + "\n";
+            richTextBox1.Text += "亮度範圍 : " + brightness_st.ToString() + " 到 " + brightness_sp.ToString() + "\n";
+            richTextBox1.Text += "亮差 : " + (brightness_sp - brightness_st).ToString() + "\n";
+
+            richTextBox1.Text += "共有 " + total_points.ToString() + " 個點\n";
+            richTextBox1.Text += "總亮度 " + total_brightness.ToString() + "\n";
+            richTextBox1.Text += "平均亮度 " + (total_brightness / total_points).ToString() + "\n";
+
+            //一維陣列用法：
+            sd_num = new double[total_points];
+
+            index = 0;
+
+            for (j = 0; j < h; j++)
+            {
+                for (i = 0; i < w; i++)
+                {
+                    pt = bitmap2.GetPixel(x_st + i, y_st + j);
+
+                    RGB pp = new RGB(pt.R, pt.G, pt.B);
+                    YUV yyy = new YUV();
+                    yyy = RGBToYUV(pp);
+
+                    sd_num[index] = yyy.Y;
+                    index++;
+                }
+            }
+
+            sd = SD(sd_num);
+            //richTextBox1.Text += "標準差 " + sd.ToString("F2") + "\n";
+            brightness_sd = sd;
+
+            average_brightness = (int)Math.Round(total_brightness / total_points); //四捨五入
+            //richTextBox1.Text += "平均亮度 " + average_brightness.ToString() + "\n";
+            brightness_avg = average_brightness;
+
+            y_min = 0;
+            y_max = 0;
+            FindYMaxYMin(brightness_data, out y_min, out y_max);
+            //richTextBox1.Text += "M = " + y_max.ToString() + "\t" + "m = " + y_min.ToString() + "\n";
+
+            ww = 480 * 2 - 10;
+            hh1 = 300;
+            hh2 = 256;
+            Bitmap bmp5 = new Bitmap(ww, hh1);
+            Graphics g5 = Graphics.FromImage(bmp5);
+            g5.Clear(Color.Pink);
+            p = new Pen(Color.Blue, 2);
+
+            ratio = 0;
+            ratio = (double)hh2 / most;
+            richTextBox1.Text += "ratio = " + ratio.ToString() + "\n";
 
             for (i = 0; i < 256; i++)
             {
-                curvePoints[i].X = i*2;
-                curvePoints[i].Y = hh2 - (int)(brightness_data[i] * ratio);
+                g5.FillRectangle(Brushes.Red, i * 2, hh2 - (float)(brightness_data[i] * ratio), 2, (float)(brightness_data[i] * ratio));
             }
 
-            // Draw lines between original points to screen.
-            //g2.DrawLines(Pens.Green, curvePoints);   //畫直線
-            // Draw curve to screen.
-            g2.DrawCurve(Pens.Green, curvePoints); //畫曲線
-            */
+            g5.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh1 - 2);
+            g5.DrawRectangle(p, 0 + 1, 0 + 1, ww - 2, hh2 - 2);
 
-            pbox.Image = bmp;
+            p = new Pen(Color.Yellow, 3);
+            g5.DrawLine(p, average_brightness * 2, 0, average_brightness * 2, hh2 - 2);
+            g5.DrawLine(p, brightness_st * 2, 0, brightness_st * 2, hh2 - 2);
+            g5.DrawLine(p, brightness_sp * 2, 0, brightness_sp * 2, hh2 - 2);
+
+            b = new SolidBrush(Color.FromArgb(33, Color.RoyalBlue.R, Color.RoyalBlue.G, Color.RoyalBlue.B));
+
+            g5.FillRectangle(b, min * 2, 0, (max - min) * 2, hh1);
+
+            f = new Font("標楷體", 20);
+
+            if ((min >= 0) && (min <= 103))
+            {
+                g5.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(min * 2, hh2));
+            }
+            else if (min < 0)
+            {
+                g5.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(0, hh2));
+            }
+            else
+            {
+                g5.DrawString(min.ToString(), f, new SolidBrush(Color.Blue), new PointF(103 * 2, hh2));
+            }
+
+            if ((max <= 255) && (max >= 152))
+            {
+                g5.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(max * 2 - 50, hh2));
+
+                g5.DrawString(brightness_st.ToString(), f, new SolidBrush(Color.Yellow), new PointF(brightness_st * 2 - 25, hh2));
+                g5.DrawString(brightness_sp.ToString(), f, new SolidBrush(Color.Yellow), new PointF(brightness_sp * 2 - 25, hh2));
+                g5.DrawString(average_brightness.ToString(), f, new SolidBrush(Color.Yellow), new PointF(average_brightness * 2 - 25, hh2));
+            }
+            else if (max > 255)
+            {
+                g5.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(512 - 50, hh2));
+            }
+            else
+            {
+                g5.DrawString(max.ToString(), f, new SolidBrush(Color.Blue), new PointF(152 * 2 - 50, hh2));
+            }
+
+
+            width = 40;
+            b = new SolidBrush(Color.FromArgb(30, Color.Lime.R, Color.Lime.G, Color.Lime.B));
+            g5.FillRectangle(b, 750, 0, width, 256);
+            g5.FillRectangle(b, 800, 0, width, 256);
+            g5.FillRectangle(b, 850, 0, width, 256);
+
+            g5.DrawRectangle(Pens.Red, 750, hh2 - brightness_sp, width, brightness_sp - brightness_st);
+
+
+            //richTextBox1.Text += "brightness data :\n";
+            //printArrayData(brightness_data);
+            mm = brightness_data.Max();
+            //richTextBox1.Text += "mm = " + mm.ToString() + "\n";
+            rr = mm / (float)width;
+            for (i = 0; i < 256; i++)
+            {
+                g5.DrawLine(Pens.Red, 750, hh2 - i, 750 + (int)(brightness_data[i] / rr), hh2 - i);
+
+            }
+
+            curvePoints = new Point[256];    //一維陣列內有 256 個Point
+            for (i = 0; i < 256; i++)
+            {
+                curvePoints[i].X = 750 + (int)(brightness_data[i] / rr);
+                curvePoints[i].Y = hh2 - i;
+            }
+            // Draw lines between original points to screen.
+            g5.DrawLines(Pens.Yellow, curvePoints);   //畫直線
+            // Draw curve to screen.
+            //g5.DrawCurve(Pens.Yellow, curvePoints); //畫曲線
+
+            pictureBox5.Image = bmp5;
         }
 
         void FindYMaxYMin(int[] array, out int y_min, out int y_max)
