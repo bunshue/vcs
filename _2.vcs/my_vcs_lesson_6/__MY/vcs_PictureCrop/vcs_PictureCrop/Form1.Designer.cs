@@ -1,4 +1,4 @@
-﻿namespace vcs_PictureCropB
+﻿namespace vcs_PictureCrop
 {
     partial class Form1
     {
@@ -43,6 +43,7 @@
             this.lb_w = new System.Windows.Forms.Label();
             this.bt_clear = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.bt_open_folder = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox_selection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_h)).BeginInit();
@@ -71,6 +72,7 @@
             // 
             // groupBox_selection
             // 
+            this.groupBox_selection.Controls.Add(this.bt_open_folder);
             this.groupBox_selection.Controls.Add(this.button6);
             this.groupBox_selection.Controls.Add(this.nud_h);
             this.groupBox_selection.Controls.Add(this.lb_x_st);
@@ -91,7 +93,7 @@
             // button6
             // 
             this.button6.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button6.Location = new System.Drawing.Point(186, 123);
+            this.button6.Location = new System.Drawing.Point(185, 80);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(90, 40);
             this.button6.TabIndex = 6;
@@ -139,11 +141,11 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(186, 69);
+            this.button3.Location = new System.Drawing.Point(185, 26);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(90, 40);
             this.button3.TabIndex = 5;
-            this.button3.Text = "Cut";
+            this.button3.Text = "Info";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -221,8 +223,18 @@
             this.pictureBox2.Location = new System.Drawing.Point(131, 12);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(100, 100);
+            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.pictureBox2.TabIndex = 19;
             this.pictureBox2.TabStop = false;
+            // 
+            // bt_open_folder
+            // 
+            this.bt_open_folder.Location = new System.Drawing.Point(207, 137);
+            this.bt_open_folder.Name = "bt_open_folder";
+            this.bt_open_folder.Size = new System.Drawing.Size(40, 40);
+            this.bt_open_folder.TabIndex = 20;
+            this.bt_open_folder.UseVisualStyleBackColor = true;
+            this.bt_open_folder.Click += new System.EventHandler(this.bt_open_folder_Click);
             // 
             // Form1
             // 
@@ -266,6 +278,7 @@
         private System.Windows.Forms.Label lb_w;
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.Button bt_open_folder;
     }
 }
 

@@ -234,7 +234,7 @@ namespace vcs_PictureEnhance_YUV
             pictureBox2.Size = new Size(pbx_W, pbx_H);
             pictureBox3a.Size = new Size(pbx_W2, pbx_H2);
             pictureBox3b.Size = new Size(pbx_W2, pbx_H2);
-            pictureBox4.Size = new Size(pbx_W3 * 2+10, pbx_H2 * 2+16);
+            pictureBox4.Size = new Size(pbx_W3 * 2 + 10, pbx_H2 * 2 + 16);
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
             pictureBox3a.SizeMode = PictureBoxSizeMode.Normal;
@@ -730,6 +730,15 @@ namespace vcs_PictureEnhance_YUV
 
         private void button1_Click(object sender, EventArgs e)
         {
+            reset_picture();
+            pictureBox2.Image = null;
+
+            Pen p = new Pen(Color.Red, 3);
+            SolidBrush sb = new SolidBrush(Color.Blue);
+            Bitmap bitmap2 = new Bitmap(pictureBox2.Width, pictureBox2.Height);
+            Graphics g = Graphics.FromImage(bitmap2);
+            g.Clear(Color.White);
+
             int border = 60;
             x_st = border;
             y_st = border;
@@ -737,25 +746,51 @@ namespace vcs_PictureEnhance_YUV
             h = H - border * 2;
 
 
-            reset_picture();
+            richTextBox1.Text += "跳點量測亮度 x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + ", w = " + w.ToString() + ", h = " + h.ToString() + "\n";
 
             int dx = 1;
             int dy = 1;
 
-
             int i = 1;
 
-            for (i = 1; i < 50; i += 5)
+            for (i = 0; i < 40; i++)
             {
-                dx = i;
-                dy = i;
+                dx = i * 5;
+                dy = i * 5;
+
+                if (dx == 0)
+                    dx = 1;
+                if (dy == 0)
+                    dy = 1;
 
                 richTextBox1.Text += "\n每隔 " + dx.ToString() + " 點計算\n";
-                read_bitmap_data(bitmap1, x_st, y_st, w, h, dx, dy);
+
+                int max = 0;
+                int min = 0;
+                int avg = 0;
+                double sd = 0;
+
+                read_bitmap_data(bitmap1, x_st, y_st, w, h, dx, dy, out max, out min, out avg, out sd);
+                richTextBox1.Text += "max = " + max.ToString() + ", min = " + max.ToString() + ", avg = " + avg.ToString() + ", sd = " + sd.ToString("F2") + "\n";
+
+                int width = 15;
+
+                H = 400;
+
+                p = new Pen(Color.Red, 3);
+                g.DrawLine(p, width * i, H - max * 1, width * i + width, H - max * 1);
+                p = new Pen(Color.Blue, 3);
+                g.DrawLine(p, width * i, H - min * 1, width * i + width, H - min * 1);
+                p = new Pen(Color.Yellow, 3);
+                g.DrawLine(p, width * i, H - avg * 1, width * i + width, H - avg * 1);
+
+                //p = new Pen(Color.Pink, 3);
+                //g.DrawLine(p, width * i, H - (int)sd, width * i + 40, H - (int)sd);
             }
+            pictureBox2.Image = bitmap2;
         }
 
-        void read_bitmap_data(Bitmap bitmap1, int x_st, int y_st, int w, int h, int dx, int dy)
+        void read_bitmap_data(Bitmap bitmap1, int x_st, int y_st, int w, int h, int dx, int dy, out int max, out int min, out int avg, out double sd)
         {
             int i;
             int j;
@@ -765,7 +800,6 @@ namespace vcs_PictureEnhance_YUV
 
             int total_points = 0;
             double total_brightness = 0;
-            double sd;
             int average_brightness;
             int diff_Y;
             float ratio_Y;
@@ -802,6 +836,7 @@ namespace vcs_PictureEnhance_YUV
 
             average_brightness = (int)Math.Round(total_brightness / total_points); //四捨五入
             richTextBox1.Text += "平均亮度 " + average_brightness.ToString() + "\n";
+            avg = average_brightness;
 
             for (j = 0; j < h; j += dy)
             {
@@ -834,6 +869,9 @@ namespace vcs_PictureEnhance_YUV
 
             brightness_max = Y_max;
             brightness_min = Y_min;
+
+            max = brightness_max;
+            min = brightness_min;
 
             diff_Y = Y_max - Y_min;
 

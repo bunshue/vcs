@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
+using System.Diagnostics;
 using System.Drawing.Imaging;   //for ImageFormat
 using System.Drawing.Drawing2D; //for DashStyle
 
@@ -15,11 +16,11 @@ using System.Drawing.Drawing2D; //for DashStyle
 //mode 0 : pictureBox 無圖片, 空白模式
 //mode 1 : pictureBox 有圖片, 圖片模式
 
-namespace vcs_PictureCropB
+namespace vcs_PictureCrop
 {
     public partial class Form1 : Form
     {
-        int flag_operation_mode = 0;    //0 : 空白模式, 1 : 圖片模式
+        int flag_operation_mode = 1;    //0 : 空白模式, 1 : 圖片模式
 
         string filename = @"C:\______test_files\picture1.jpg";
         
@@ -47,6 +48,11 @@ namespace vcs_PictureCropB
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //跟隨鼠標在 pictureBox 的圖片上畫矩形
+            pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
+            pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
+            pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
+
             nud_x_st.ValueChanged += new EventHandler(select_crop_area);
             nud_y_st.ValueChanged += new EventHandler(select_crop_area);
             nud_w.ValueChanged += new EventHandler(select_crop_area);
@@ -116,21 +122,20 @@ namespace vcs_PictureCropB
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
             pictureBox2.Size = new Size(300, 400);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
+            //pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
             pictureBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
 
             groupBox_selection.Location = new Point(x_st + dx * 1, y_st + dy * 0+400);
             groupBox_selection.BringToFront();
 
+            bt_open_folder.BackgroundImage = Properties.Resources.folder_open;
+            bt_open_folder.BackgroundImageLayout = ImageLayout.Zoom;
+
+
             richTextBox1.Size = new Size(300, 450);
             richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0 + groupBox_selection.Height+400);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
-            //跟隨鼠標在 pictureBox 的圖片上畫矩形
-            pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
-            pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
-            pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
 
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
@@ -374,7 +379,7 @@ namespace vcs_PictureCropB
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //cut
+            //Info
             richTextBox1.Text += "SelectionRectangle = " + SelectionRectangle.ToString() + "\n";
         }
 
@@ -491,9 +496,18 @@ namespace vcs_PictureCropB
                     int maxX = Math.Max(pt_st.X, pt_sp.X);
                     int maxY = Math.Max(pt_st.Y, pt_sp.Y);
 
+                    x_st = minX;
+                    y_st = minY;
+                    w = maxX - minX;
+                    h = maxY - minY;
+
+                    //畫矩形
+                    g.DrawRectangle(new Pen(Color.Red), x_st, y_st, w, h);
+
                     //畫矩形
                     g.DrawRectangle(new Pen(Color.Lime, 5), minX, minY, maxX - minX, maxY - minY);
                     */
+
                     g.Dispose();
                 }
                 else if (flag_operation_mode == 1)  //圖片模式
@@ -506,6 +520,9 @@ namespace vcs_PictureCropB
                     //g.DrawRectangle(pen, new Rectangle(intStartX > e.X ? e.X : intStartX, intStartY > e.Y ? e.Y : intStartY, Math.Abs(e.X - intStartX), Math.Abs(e.Y - intStartY)));
                     g.DrawRectangle(pen, SelectionRectangle);
                     g.Dispose();
+
+                    pictureBox2.Image = bitmap1.Clone(SelectionRectangle, PixelFormat.Format32bppArgb);
+                    //pictureBox2.Image = bitmap1.Clone(SelectionRectangle, PixelFormat.DontCare);  //或是 PixelFormat.Format32bppArgb
                 }
                 else //test
                 {
@@ -525,6 +542,13 @@ namespace vcs_PictureCropB
             {
                 ex.ToString();
             }
+        }
+
+        private void bt_open_folder_Click(object sender, EventArgs e)
+        {
+            string foldername = Application.StartupPath;
+            //開啟檔案總管
+            Process.Start(foldername);
         }
     }
 }

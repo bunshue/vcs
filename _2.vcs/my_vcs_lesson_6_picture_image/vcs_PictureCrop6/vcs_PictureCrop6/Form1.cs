@@ -83,12 +83,6 @@ namespace vcs_PictureCrop6
             select_pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
             g2.DrawRectangle(select_pen, select_rectangle);
             pictureBox1.Refresh();
-
-
-            nud_x_st.Value = (decimal)select_rectangle.X;
-            nud_y_st.Value = (decimal)select_rectangle.Y;
-            nud_w.Value = (decimal)select_rectangle.Width;
-            nud_h.Value = (decimal)select_rectangle.Height;
         }
 
         // Finish selecting the area.

@@ -1034,7 +1034,16 @@ namespace vcs_Color
 
         private void button14_Click(object sender, EventArgs e)
         {
+            //小小兵的顏色
+            //Minion Yellow Color
+            //HEX #FFD55E / RGB (255, 213, 94)
+            //顏色的名稱
+            //https://www.color-name.com/
 
+            this.pictureBox1.BackColor = Color.FromArgb(255, 213, 94);
+
+            string filename = @"C:\______test_files\__pic\_anime\minion-yellow.png";
+            pictureBox1.Image = Image.FromFile(filename);
         }
 
         private void button15_Click(object sender, EventArgs e)

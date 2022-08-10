@@ -151,6 +151,7 @@ namespace vcs_Draw_Captcha1
             draw_captcha20();    //for pictureBox20
             draw_captcha21();    //for pictureBox21
             draw_captcha22();    //for pictureBox22
+            draw_captcha23();    //for pictureBox23
         }
 
         //Captcha 00 ST
@@ -1804,6 +1805,64 @@ ASP.Net實現中文漢字驗證碼
             //bitmap1.Dispose();
         }
         //Captcha 22 SP
+
+        //Captcha 23 ST
+
+        /// <summary>
+        /// 字符
+        /// </summary>
+        /// <param name="len">幾位</param>
+        /// <returns></returns>
+        public static string validation(int cd)
+        {
+            var ran = new Random();
+            int num, tem;
+            string rtuStr = "";
+            for (int i = 0; i < cd; i++)
+            {
+                num = ran.Next();
+                if (i % 2 == 1)
+                    tem = num % 10 + '0'; //數字
+                else
+                    tem = num % 26 + 'A'; //字母
+                rtuStr += Convert.ToChar(tem).ToString();
+            }
+            return rtuStr;
+        }
+
+        /// <summary>
+        /// 生成圖像
+        /// </summary>
+        /// <param name="check">字符</param>
+        public byte[] drawImg(string check)
+        {
+            Bitmap img = new Bitmap(90, 34);
+            var ht = Graphics.FromImage(img);
+            ht.Clear(Color.White);
+            ht.DrawLine(new Pen(Color.SpringGreen), 1, 1, 90, 34);
+            Font font = new Font("微軟雅黑", 20, FontStyle.Bold);
+            var jianbian = new LinearGradientBrush(new Rectangle(0, 0, img.Width, img.Height), Color.Teal, Color.Snow, 2f, true);
+            ht.DrawString(check, font, jianbian, 0, 0);
+            ht.DrawRectangle(new Pen(Color.Aqua), 0, 0, img.Width - 1, img.Height - 1);
+            MemoryStream ms = new MemoryStream();
+            img.Save(ms, ImageFormat.Jpeg);
+            ht.Dispose();
+            pictureBox23.Image = img;
+            //img.Dispose();
+            return ms.ToArray();
+        }
+
+        void draw_captcha23()
+        {
+            string check = validation(4);
+
+            byte[] buffer = drawImg(check);
+        }
+
+        //Captcha 23 SP
+
+
+
     }
 
     /// <summary>

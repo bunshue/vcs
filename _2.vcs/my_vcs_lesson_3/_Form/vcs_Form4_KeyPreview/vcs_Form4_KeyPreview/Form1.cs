@@ -7,6 +7,12 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+/*
+表單的按鍵響應
+this.KeyPress += new KeyPressEventHandler(Form1_KeyPress);
+this.KeyPreview = true;
+*/
+
 namespace vcs_Form4_KeyPreview
 {
     public partial class Form1 : Form
@@ -25,7 +31,7 @@ namespace vcs_Form4_KeyPreview
 
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (e.KeyChar == 27)
+            if (e.KeyChar == (char)Keys.Escape)
             {
                 richTextBox1.Text += "Esc\n";
                 Application.Exit();
@@ -36,8 +42,6 @@ namespace vcs_Form4_KeyPreview
 
             }
         }
-
-
     }
 }
 

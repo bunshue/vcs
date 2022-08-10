@@ -20,14 +20,10 @@ namespace vcs_PictureBox
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            comboBox1.SelectedIndex = 0;
-            //pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-
             //讀取圖檔
             string filename = @"C:\______test_files\picture1.jpg";
             pictureBox1.Image = Image.FromFile(filename);
         }
-
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -109,32 +105,6 @@ namespace vcs_PictureBox
             pictureBox1.Image = loadedImage;
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            switch (comboBox1.SelectedIndex)
-            {
-                case 0:
-                    richTextBox1.Text += "Normal\n";
-                    pictureBox1.SizeMode = PictureBoxSizeMode.Normal; break;
-                case 1:
-                    richTextBox1.Text += "StretchImage\n";
-                    pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage; break;
-                case 2:
-                    richTextBox1.Text += "AutoSize\n";
-                    pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize; break;
-                case 3:
-                    richTextBox1.Text += "CenterImage\n";
-                    pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage; break;
-                case 4:
-                    richTextBox1.Text += "Zoom\n";
-                    pictureBox1.SizeMode = PictureBoxSizeMode.Zoom; break;
-                default:
-                    richTextBox1.Text += "Unknown\n";
-                    pictureBox1.SizeMode = PictureBoxSizeMode.Zoom; break;
-            }
-
-        }
-
         private void button10_Click(object sender, EventArgs e)
         {
         }
@@ -167,7 +137,6 @@ namespace vcs_PictureBox
             mouse_down_position_y = e.Y;
 
             richTextBox1.Text += "MouseDown   (" + e.X.ToString() + ", " + e.Y + ")\n";
-
         }
 
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
@@ -185,7 +154,6 @@ namespace vcs_PictureBox
         {
             if (pictureBox1.Image == null)
                 return;
-
 
             mouse_up_position_x = e.X;
             mouse_up_position_y = e.Y;
@@ -276,7 +244,6 @@ namespace vcs_PictureBox
 
             //Bitmap bmpImage = pictureBox1.Image;
 
-
             //Graphics g = Graphics.FromImage(targetbitmap);
 
             //Image loadedImage = Image.FromFile(openFileDialog1.FileName);
@@ -299,5 +266,41 @@ namespace vcs_PictureBox
             flag_mouse_down = false;
         }
 
+        private void rb_picturebox_sizemode(object sender, EventArgs e)
+        {
+            if (rb_0.Checked == true)
+            {
+                richTextBox1.Text += "Normal\n";
+                pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+            }
+            else if (rb_1.Checked == true)
+            {
+                richTextBox1.Text += "StretchImage\n";
+                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
+            else if (rb_2.Checked == true)
+            {
+                //richTextBox1.Text += pictureBox1.Size.ToString() + "\n";
+                richTextBox1.Text += "AutoSize, 會改變pictureBox的大小\n";
+                pictureBox1.SizeMode = PictureBoxSizeMode.AutoSize;
+                //richTextBox1.Text += pictureBox1.Size.ToString() + "\n";
+            }
+            else if (rb_3.Checked == true)
+            {
+                richTextBox1.Text += "CenterImage\n";
+                pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
+            }
+            else if (rb_4.Checked == true)
+            {
+                richTextBox1.Text += "Zoom\n";
+                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            }
+            else
+            {
+                richTextBox1.Text += "XXXXXXX\n";
+                pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+            }
+        }
     }
 }
+

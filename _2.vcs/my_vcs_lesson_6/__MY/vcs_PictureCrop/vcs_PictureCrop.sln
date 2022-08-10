@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_PictureCropB", "vcs_PictureCropB\vcs_PictureCropB.csproj", "{E3421273-1DFC-4D36-9078-9A92EC9A2A5F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_PictureCrop", "vcs_PictureCrop\vcs_PictureCrop.csproj", "{E3421273-1DFC-4D36-9078-9A92EC9A2A5F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
