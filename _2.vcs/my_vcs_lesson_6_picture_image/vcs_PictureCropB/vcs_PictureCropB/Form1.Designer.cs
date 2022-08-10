@@ -1,4 +1,4 @@
-﻿namespace draw_rectangle
+﻿namespace vcs_PictureCropB
 {
     partial class Form1
     {
@@ -41,6 +41,7 @@
             this.nud_x_st = new System.Windows.Forms.NumericUpDown();
             this.lb_y_st = new System.Windows.Forms.Label();
             this.lb_w = new System.Windows.Forms.Label();
+            this.bt_clear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox_selection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_h)).BeginInit();
@@ -94,6 +95,7 @@
             this.button6.TabIndex = 6;
             this.button6.Text = "save";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // nud_h
             // 
@@ -141,6 +143,7 @@
             this.button3.TabIndex = 5;
             this.button3.Text = "Cut";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // lb_h
             // 
@@ -200,11 +203,22 @@
             this.lb_w.TabIndex = 10;
             this.lb_w.Text = "w";
             // 
+            // bt_clear
+            // 
+            this.bt_clear.Location = new System.Drawing.Point(1186, 419);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(60, 32);
+            this.bt_clear.TabIndex = 18;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1265, 744);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.groupBox_selection);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.pictureBox1);
@@ -237,6 +251,7 @@
         private System.Windows.Forms.NumericUpDown nud_x_st;
         private System.Windows.Forms.Label lb_y_st;
         private System.Windows.Forms.Label lb_w;
+        private System.Windows.Forms.Button bt_clear;
     }
 }
 

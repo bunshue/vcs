@@ -8,13 +8,14 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.IO;
+using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;   //for DashStyle
 
 //在 pictureBox 上用滑鼠畫矩形
-//mode 0 : pictureBox 無圖片
-//mode 1 : pictureBox 有圖片
+//mode 0 : pictureBox 無圖片, 空白模式
+//mode 1 : pictureBox 有圖片, 圖片模式
 
-namespace draw_rectangle
+namespace vcs_PictureCropB
 {
     public partial class Form1 : Form
     {
@@ -29,7 +30,7 @@ namespace draw_rectangle
         private Point pt_st = Point.Empty;//記錄鼠標按下時的坐標，用來確定繪圖起點
         private Point pt_sp = Point.Empty;//記錄鼠標放開時的坐標，用來確定繪圖終點
         private Bitmap bitmap1 = null;  //原圖位圖Bitmap
-        private Bitmap bitmap2 = null;  //擷取部分位圖Bitmap
+        //private Bitmap bitmap2 = null;  //擷取部分位圖Bitmap
         private Rectangle SelectionRectangle = new Rectangle(new Point(0, 0), new Size(0, 0));    //用來保存截圖的矩形
 
         private int W = 0;  //原圖的寬
@@ -44,6 +45,11 @@ namespace draw_rectangle
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            nud_x_st.ValueChanged += new EventHandler(select_crop_area);
+            nud_y_st.ValueChanged += new EventHandler(select_crop_area);
+            nud_w.ValueChanged += new EventHandler(select_crop_area);
+            nud_h.ValueChanged += new EventHandler(select_crop_area);
+
             show_item_location();
 
             if (flag_operation_mode == 0)
@@ -65,6 +71,70 @@ namespace draw_rectangle
             }
         }
 
+        private void select_crop_area(object sender, EventArgs e)
+        {
+            int x_st = (int)nud_x_st.Value;
+            int y_st = (int)nud_y_st.Value;
+            int w = (int)nud_w.Value;
+            int h = (int)nud_h.Value;
+
+            SelectionRectangle = MakeRectangle(x_st, y_st, x_st + w, y_st + h);
+
+            if ((SelectionRectangle.X < 0) || (SelectionRectangle.X >= W))
+                return;
+            if ((SelectionRectangle.Y < 0) || (SelectionRectangle.Y >= H))
+                return;
+            if ((SelectionRectangle.Width <= 0) || (SelectionRectangle.Width > W))
+                return;
+            if ((SelectionRectangle.Height <= 0) || (SelectionRectangle.Height > H))
+                return;
+            if (((SelectionRectangle.X + SelectionRectangle.Width) > W) || ((SelectionRectangle.Y + SelectionRectangle.Height) > H))
+                return;
+
+            try
+            {
+                if (flag_operation_mode == 0)	//空白模式
+                {
+                    Graphics g = this.pictureBox1.CreateGraphics();
+                    //清空上次畫下的痕跡
+                    g.Clear(this.pictureBox1.BackColor);
+                    Brush brush = new SolidBrush(Color.Red);
+                    Pen pen = new Pen(brush, 1);
+                    pen.DashStyle = DashStyle.Solid;
+                    //g.DrawRectangle(pen, new Rectangle(intStartX > e.X ? e.X : intStartX, intStartY > e.Y ? e.Y : intStartY, Math.Abs(e.X - intStartX), Math.Abs(e.Y - intStartY)));
+                    g.DrawRectangle(pen, SelectionRectangle);
+                    g.Dispose();
+                    //this.pictureBox_Src.Image = tmp;
+                }
+                else if (flag_operation_mode == 1)  //圖片模式
+                {
+                    Graphics g = this.pictureBox1.CreateGraphics();
+                    g.DrawImage(bitmap1, 0, 0, bitmap1.Width, bitmap1.Height);
+                    Brush brush = new SolidBrush(Color.Red);
+                    Pen pen = new Pen(brush, 1);
+                    pen.DashStyle = DashStyle.Solid;
+                    g.DrawRectangle(pen, SelectionRectangle);
+                    g.Dispose();
+                }
+                else //test
+                {
+                    Image tmp = Image.FromFile(filename);
+                    Graphics g = this.pictureBox1.CreateGraphics();
+                    g.DrawImage(bitmap1, 0, 0, bitmap1.Width, bitmap1.Height);
+                    Brush brush = new SolidBrush(Color.Red);
+                    Pen pen = new Pen(brush, 1);
+                    pen.DashStyle = DashStyle.Solid;
+                    g.DrawRectangle(pen, SelectionRectangle);
+                    g.Dispose();
+                    this.pictureBox1.Image = tmp;
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+            }
+        }
+
         void show_item_location()
         {
             int x_st;
@@ -72,8 +142,8 @@ namespace draw_rectangle
             int dx;
             int dy;
 
-            int pbx_W = 900;
-            int pbx_H = 600;
+            int pbx_W = 1550;
+            int pbx_H = 900;
 
             x_st = 10;
             y_st = 10;
@@ -83,6 +153,11 @@ namespace draw_rectangle
             pictureBox1.Size = new Size(pbx_W, pbx_H);
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+
+            groupBox_selection.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0 + groupBox_selection.Height);
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //跟隨鼠標在 pictureBox 的圖片上畫矩形
             pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
@@ -187,6 +262,11 @@ namespace draw_rectangle
             bt_exit.BringToFront();     //移到最上層
         }
 
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
         void reset_picture()
         {
             if (flag_operation_mode == 0)
@@ -242,9 +322,15 @@ namespace draw_rectangle
 
                 SelectionRectangle = MakeRectangle(pt_st, pt_sp);
 
-                if ((SelectionRectangle.X < 0) || (SelectionRectangle.X >= W))
+                nud_x_st.Value = SelectionRectangle.X;
+                nud_y_st.Value = SelectionRectangle.Y;
+                nud_w.Value = SelectionRectangle.Width;
+                nud_h.Value = SelectionRectangle.Height;
+                //richTextBox1.Text += "選取區域 : " + SelectionRectangle.ToString() + "\n";
+
+                if ((SelectionRectangle.X <= 0) || (SelectionRectangle.X >= W))
                     return;
-                if ((SelectionRectangle.Y < 0) || (SelectionRectangle.Y >= H))
+                if ((SelectionRectangle.Y <= 0) || (SelectionRectangle.Y >= H))
                     return;
                 if ((SelectionRectangle.Width <= 0) || (SelectionRectangle.Width > W))
                     return;
@@ -264,8 +350,8 @@ namespace draw_rectangle
                         Brush brush = new SolidBrush(Color.Red);
                         Pen pen = new Pen(brush, 1);
                         pen.DashStyle = DashStyle.Solid;
-                        g.DrawRectangle(pen, new Rectangle(intStartX > e.X ? e.X : intStartX, intStartY > e.Y ? e.Y : intStartY, Math.Abs(e.X - intStartX), Math.Abs(e.Y - intStartY)));
-                        //g.DrawEllipse(pen, new Rectangle(intStartX > e.X ? e.X : intStartX, intStartY > e.Y ? e.Y : intStartY, Math.Abs(e.X - intStartX), Math.Abs(e.Y - intStartY)));
+                        //g.DrawRectangle(pen, new Rectangle(intStartX > e.X ? e.X : intStartX, intStartY > e.Y ? e.Y : intStartY, Math.Abs(e.X - intStartX), Math.Abs(e.Y - intStartY)));
+                        g.DrawRectangle(pen, SelectionRectangle);
                         g.Dispose();
                         //this.pictureBox_Src.Image = tmp;
                     }
@@ -276,7 +362,8 @@ namespace draw_rectangle
                         Brush brush = new SolidBrush(Color.Red);
                         Pen pen = new Pen(brush, 1);
                         pen.DashStyle = DashStyle.Solid;
-                        g.DrawRectangle(pen, new Rectangle(intStartX > e.X ? e.X : intStartX, intStartY > e.Y ? e.Y : intStartY, Math.Abs(e.X - intStartX), Math.Abs(e.Y - intStartY)));
+                        //g.DrawRectangle(pen, new Rectangle(intStartX > e.X ? e.X : intStartX, intStartY > e.Y ? e.Y : intStartY, Math.Abs(e.X - intStartX), Math.Abs(e.Y - intStartY)));
+                        g.DrawRectangle(pen, SelectionRectangle);
                         g.Dispose();
                     }
                     else //test
@@ -287,7 +374,8 @@ namespace draw_rectangle
                         Brush brush = new SolidBrush(Color.Red);
                         Pen pen = new Pen(brush, 1);
                         pen.DashStyle = DashStyle.Solid;
-                        g.DrawRectangle(pen, new Rectangle(intStartX > e.X ? e.X : intStartX, intStartY > e.Y ? e.Y : intStartY, Math.Abs(e.X - intStartX), Math.Abs(e.Y - intStartY)));
+                        //g.DrawRectangle(pen, new Rectangle(intStartX > e.X ? e.X : intStartX, intStartY > e.Y ? e.Y : intStartY, Math.Abs(e.X - intStartX), Math.Abs(e.Y - intStartY)));
+                        g.DrawRectangle(pen, SelectionRectangle);
                         g.Dispose();
                         this.pictureBox1.Image = tmp;
                     }
@@ -296,12 +384,6 @@ namespace draw_rectangle
                 {
                     ex.ToString();
                 }
-
-                nud_x_st.Value = SelectionRectangle.X;
-                nud_y_st.Value = SelectionRectangle.Y;
-                nud_w.Value = SelectionRectangle.Width;
-                nud_h.Value = SelectionRectangle.Height;
-                //label2.Text = "選取區域 : " + SelectionRectangle.ToString();
             }
         }
 
@@ -314,7 +396,6 @@ namespace draw_rectangle
             flag_mouse_down = false;
             intStartX = 0;
             intStartY = 0;
-
 
             /*
             // Display the original image.
@@ -338,13 +419,118 @@ namespace draw_rectangle
             //pictureBox2.Image = bitmap2;
             */
 
-            //richTextBox1.Text += "SelectionRectangle = " + SelectionRectangle.ToString() + "\n";
+            pt_sp = e.Location; //終點座標
 
-            nud_x_st.Value = SelectionRectangle.X;
-            nud_y_st.Value = SelectionRectangle.Y;
-            nud_w.Value = SelectionRectangle.Width;
-            nud_h.Value = SelectionRectangle.Height;
-            //label2.Text = "選取區域 : " + SelectionRectangle.ToString();
+            SelectionRectangle = MakeRectangle(pt_st, pt_sp);
+
+            if ((SelectionRectangle.X <= 0) || (SelectionRectangle.X >= W))
+                return;
+            if ((SelectionRectangle.Y <= 0) || (SelectionRectangle.Y >= H))
+                return;
+            if ((SelectionRectangle.Width <= 0) || (SelectionRectangle.Width > W))
+                return;
+            if ((SelectionRectangle.Height <= 0) || (SelectionRectangle.Height > H))
+                return;
+            if (((SelectionRectangle.X + SelectionRectangle.Width) > W) || ((SelectionRectangle.Y + SelectionRectangle.Height) > H))
+                return;
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //cut
+            richTextBox1.Text += "SelectionRectangle = " + SelectionRectangle.ToString() + "\n";
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //截圖存檔
+
+            reset_picture();    //為消除邊框
+
+            int x_st = (int)nud_x_st.Value;
+            int y_st = (int)nud_y_st.Value;
+            int w = (int)nud_w.Value;
+            int h = (int)nud_h.Value;
+
+            if ((x_st < 0) || (y_st < 0) || (w <= 0) || (h <= 0))
+            {
+                richTextBox1.Text += "選取位置錯誤\n";
+                return;
+            }
+
+            SelectionRectangle = new Rectangle(x_st, y_st, w, h);
+            //richTextBox1.Text += SelectionRectangle.ToString() + "\n";
+
+            if ((SelectionRectangle.X < 0) || (SelectionRectangle.X >= W))
+                return;
+            if ((SelectionRectangle.Y < 0) || (SelectionRectangle.Y >= H))
+                return;
+            if ((SelectionRectangle.Width <= 0) || (SelectionRectangle.Width > W))
+                return;
+            if ((SelectionRectangle.Height <= 0) || (SelectionRectangle.Height > H))
+                return;
+            if (((SelectionRectangle.X + SelectionRectangle.Width) > W) || ((SelectionRectangle.Y + SelectionRectangle.Height) > H))
+                return;
+
+            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            Bitmap bitmap1 = new Bitmap(pictureBox1.Image);
+            Bitmap bitmap2 = bitmap1.Clone(SelectionRectangle, PixelFormat.DontCare);  //或是 PixelFormat.Format32bppArgb
+            bitmap2.Save(filename, ImageFormat.Bmp);
+            richTextBox1.Text += "存截圖，存檔檔名：" + filename + "\n";
+
+            richTextBox1.Text += "將圖片資料放置到Clipboard中\n";
+            Clipboard.SetImage(bitmap2);
+
+            richTextBox1.Text += "rect = " + SelectionRectangle.ToString() + "\n";
+            richTextBox1.Text += "x_st = " + x_st.ToString() + ", y_st = " + y_st.ToString() + "\n";
+            richTextBox1.Text += "w = " + w.ToString() + ", h = " + h.ToString() + "\n";
+
+            try
+            {
+                if (flag_operation_mode == 0)	//空白模式
+                {
+                    Graphics g = this.pictureBox1.CreateGraphics();
+                    //清空上次畫下的痕跡
+                    g.Clear(this.pictureBox1.BackColor);
+                    Brush brush = new SolidBrush(Color.Red);
+                    Pen pen = new Pen(brush, 1);
+                    pen.DashStyle = DashStyle.Solid;
+                    //g.DrawRectangle(pen, new Rectangle(intStartX > e.X ? e.X : intStartX, intStartY > e.Y ? e.Y : intStartY, Math.Abs(e.X - intStartX), Math.Abs(e.Y - intStartY)));
+                    g.DrawRectangle(pen, SelectionRectangle);
+                    g.Dispose();
+                    //this.pictureBox_Src.Image = tmp;
+                }
+                else if (flag_operation_mode == 1)  //圖片模式
+                {
+                    richTextBox1.Text += "11111\n";
+                    Graphics g = this.pictureBox1.CreateGraphics();
+                    g.DrawImage(bitmap1, 0, 0, bitmap1.Width, bitmap1.Height);
+                    Brush brush = new SolidBrush(Color.Red);
+                    Pen pen = new Pen(brush, 1);
+                    pen.DashStyle = DashStyle.Solid;
+                    g.DrawRectangle(Pens.Red, 100, 100, 100, 100);
+                    g.DrawRectangle(pen, SelectionRectangle);
+                    g.Dispose();
+                    richTextBox1.Text += "22222\n";
+                }
+                else //test
+                {
+                    Image tmp = Image.FromFile(filename);
+                    Graphics g = this.pictureBox1.CreateGraphics();
+                    g.DrawImage(bitmap1, 0, 0, bitmap1.Width, bitmap1.Height);
+                    Brush brush = new SolidBrush(Color.Red);
+                    Pen pen = new Pen(brush, 1);
+                    pen.DashStyle = DashStyle.Solid;
+                    g.DrawRectangle(pen, SelectionRectangle);
+                    g.Dispose();
+                    this.pictureBox1.Image = tmp;
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+            }
+        }
+
     }
 }

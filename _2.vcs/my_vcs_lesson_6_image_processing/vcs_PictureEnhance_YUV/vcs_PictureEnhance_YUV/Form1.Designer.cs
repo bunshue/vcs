@@ -41,7 +41,6 @@
             this.bt_clear = new System.Windows.Forms.Button();
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.button6 = new System.Windows.Forms.Button();
-            this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.button7 = new System.Windows.Forms.Button();
             this.pictureBox3b = new System.Windows.Forms.PictureBox();
             this.button8 = new System.Windows.Forms.Button();
@@ -67,7 +66,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3a)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3b)).BeginInit();
             this.groupBox_selection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_h)).BeginInit();
@@ -189,15 +187,6 @@
             this.button6.Text = "影像加強 + 亮度分布";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // pictureBox5
-            // 
-            this.pictureBox5.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox5.Location = new System.Drawing.Point(120, 340);
-            this.pictureBox5.Name = "pictureBox5";
-            this.pictureBox5.Size = new System.Drawing.Size(100, 100);
-            this.pictureBox5.TabIndex = 17;
-            this.pictureBox5.TabStop = false;
             // 
             // button7
             // 
@@ -448,7 +437,6 @@
             this.Controls.Add(this.button8);
             this.Controls.Add(this.pictureBox3b);
             this.Controls.Add(this.button7);
-            this.Controls.Add(this.pictureBox5);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.pictureBox4);
             this.Controls.Add(this.bt_clear);
@@ -468,7 +456,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3a)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3b)).EndInit();
             this.groupBox_selection.ResumeLayout(false);
             this.groupBox_selection.PerformLayout();
@@ -495,7 +482,6 @@
         private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.Button button7;
         private System.Windows.Forms.PictureBox pictureBox3b;
         private System.Windows.Forms.Button button8;

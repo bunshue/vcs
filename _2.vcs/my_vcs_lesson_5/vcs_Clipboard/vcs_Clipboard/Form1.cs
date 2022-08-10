@@ -229,7 +229,7 @@ namespace vcs_Clipboard
         private void button10_Click(object sender, EventArgs e)
         {
             string str = System.String.Empty;
-            if (Clipboard.ContainsText())
+            if (Clipboard.ContainsText() == true)
             {
                 str = Clipboard.GetText();
                 richTextBox1.Text += str + "\n";
@@ -309,26 +309,26 @@ namespace vcs_Clipboard
             //webBrowser_clipboard.Navigate("about:blank");
 
             // Image.
-            if (Clipboard.ContainsImage())
+            if (Clipboard.ContainsImage() == true)
             {
                 pictureBox_clipboard.Image = Clipboard.GetImage();
             }
 
             // Text.
-            if (Clipboard.ContainsText(TextDataFormat.UnicodeText))
+            if (Clipboard.ContainsText(TextDataFormat.UnicodeText) == true)
             {
                 textBox_clipboard.Text = Clipboard.GetText(TextDataFormat.UnicodeText);
             }
 
             // HTML.
-            if (Clipboard.ContainsText(TextDataFormat.Html))
+            if (Clipboard.ContainsText(TextDataFormat.Html) == true)
             {
                 HtmlDocument doc = webBrowser_clipboard.Document;
                 doc.Body.InnerHtml = Clipboard.GetText(TextDataFormat.Html);
             }
 
             // Rich Text.
-            if (Clipboard.ContainsText(TextDataFormat.Rtf))
+            if (Clipboard.ContainsText(TextDataFormat.Rtf) == true)
             {
                 richTextBoxp_clipboard.Rtf = Clipboard.GetText(TextDataFormat.Rtf);
             }
@@ -345,8 +345,8 @@ namespace vcs_Clipboard
         {
             richTextBox1.Text += "將圖片資料放置到Clipboard中\n";
             string filename = @"C:\______test_files\picture1.jpg";
-            Image img = Image.FromFile(filename);
-            Clipboard.SetImage(img);
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+            Clipboard.SetImage(bitmap1);
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -395,7 +395,7 @@ namespace vcs_Clipboard
 
             richTextBox1.Text += "\n";
 
-            if ((Clipboard.ContainsFileDropList()) && (Clipboard.GetFileDropList().Count > 0))
+            if ((Clipboard.ContainsFileDropList() == true) && (Clipboard.GetFileDropList().Count > 0))
             {
                 int cnt = Clipboard.GetFileDropList().Count;
                 int i;
@@ -423,13 +423,13 @@ namespace vcs_Clipboard
 
             if (flag == true)
             {
-                Image img = Clipboard.GetImage();
+                Image image1 = Clipboard.GetImage();
 
-                pictureBox_clipboard.Image = img;
+                pictureBox_clipboard.Image = image1;
 
                 string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
 
-                Bitmap bitmap1 = (Bitmap)img;
+                Bitmap bitmap1 = (Bitmap)image1;
 
                 if (bitmap1 != null)
                 {
@@ -461,10 +461,10 @@ namespace vcs_Clipboard
 
             if (flag == true)
             {
-                Image img = Clipboard.GetImage();
+                Image image1 = Clipboard.GetImage();
 
-                int W = img.Width;
-                int H = img.Height;
+                int W = image1.Width;
+                int H = image1.Height;
                 int x_st = W / 3;
                 int y_st = H / 3;
                 int w = W / 3;
@@ -477,7 +477,7 @@ namespace vcs_Clipboard
                 try
                 {
                     // 擷取部份影像，顯示於pictureBox2，區域為(起點x座標, 起點y座標, 寬度, 高度)
-                    bitmap1 = ((Bitmap)img).Clone(rect, PixelFormat.Format32bppArgb);
+                    bitmap1 = ((Bitmap)image1).Clone(rect, PixelFormat.Format32bppArgb);
                     pictureBox_clipboard.Image = bitmap1;
 
                     string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
@@ -557,16 +557,16 @@ namespace vcs_Clipboard
             //從剪貼板取出圖片然後寫上字保存到文件
 
             IDataObject dataObject = Clipboard.GetDataObject();
-            Image image = (Image)(dataObject.GetData(typeof(Bitmap)));
-            if (image == null)
+            Image image1 = (Image)(dataObject.GetData(typeof(Bitmap)));
+            if (image1 == null)
             {
                 richTextBox1.Text += "無圖片, 不儲存\n";
                 return;
             }
-            Graphics g = Graphics.FromImage(image);
+            Graphics g = Graphics.FromImage(image1);
             SolidBrush sb = new SolidBrush(Color.Red);
             Font f = new Font("Arial", 10, FontStyle.Bold, GraphicsUnit.Millimeter);
-            int x_st = image.Height - (image.Height - 25);
+            int x_st = image1.Height - (image1.Height - 25);
             int y_st = 3;
 
             g.DrawString("剪貼簿上的圖片存檔" + DateTime.Now.ToString(), f, sb, x_st, y_st);
@@ -576,10 +576,10 @@ namespace vcs_Clipboard
             string filename = Application.StartupPath + "\\pic_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
             string filename_small = Application.StartupPath + "\\pic_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + "_small.jpg";
 
-            small_image = image.GetThumbnailImage(image.Width, image.Height, null, System.IntPtr.Zero);
+            small_image = image1.GetThumbnailImage(image1.Width, image1.Height, null, System.IntPtr.Zero);
             small_image.Save(filename_small, ImageFormat.Jpeg);
-            image.Save(filename, ImageFormat.Jpeg);
-            image = null;
+            image1.Save(filename, ImageFormat.Jpeg);
+            image1 = null;
             small_image = null;
 
             richTextBox1.Text += "已存檔 : " + filename + "\n";
@@ -611,20 +611,20 @@ namespace vcs_Clipboard
         {
             //從剪貼板獲取圖片
             IDataObject newobject = null;
-            Bitmap NewBitmap = null;
+            Bitmap bitmap1 = null;
 
             try
             {
                 Application.DoEvents();
                 newobject = Clipboard.GetDataObject();
 
-                if (Clipboard.ContainsImage())
+                if (Clipboard.ContainsImage() == true)
                 {
-                    NewBitmap = (Bitmap)(Clipboard.GetImage().Clone());
+                    bitmap1 = (Bitmap)(Clipboard.GetImage().Clone());
                 }
 
                 //return NewBitmap;
-                pictureBox_clipboard.Image = NewBitmap;
+                pictureBox_clipboard.Image = bitmap1;
                 richTextBox1.Text += "OK\n";
             }
             catch (Exception ex)
@@ -632,8 +632,6 @@ namespace vcs_Clipboard
                 Console.WriteLine(ex.Message);
                 richTextBox1.Text += "無圖片\n";
             }
-
-
         }
 
         private void button29_Click(object sender, EventArgs e)
