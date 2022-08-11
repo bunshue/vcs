@@ -463,12 +463,12 @@ namespace vcs_ReadWrite_TXT
         private void button17_Click(object sender, EventArgs e)
         {
             string filename = Application.StartupPath + "\\txt_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
-            StreamWriter filewriter = new StreamWriter(filename);
-            filewriter.WriteLine("鳳凰臺上鳳凰遊，鳳去臺空江自流");
-            filewriter.WriteLine("吳宮花草埋幽徑，晉代衣冠成古邱");
-            filewriter.WriteLine("三山半落青又外，二水中分白鷺洲");
-            filewriter.WriteLine("總為浮雲能蔽日，長安不見使人愁");
-            filewriter.Close();
+            StreamWriter sw = new StreamWriter(filename);
+            sw.WriteLine("鳳凰臺上鳳凰遊，鳳去臺空江自流");
+            sw.WriteLine("吳宮花草埋幽徑，晉代衣冠成古邱");
+            sw.WriteLine("三山半落青又外，二水中分白鷺洲");
+            sw.WriteLine("總為浮雲能蔽日，長安不見使人愁");
+            sw.Close();
             richTextBox1.Text += "\n製作TXT檔\t" + filename + "\n";
         }
 
@@ -624,24 +624,24 @@ namespace vcs_ReadWrite_TXT
             StreamReader sr2;
             StreamReader sr3;
 
-            sr1 = new StreamReader(filename1);     //创建StreamReader对象
-            sr2 = new StreamReader(filename2);     //创建StreamReader对象
+            sr1 = new StreamReader(filename1);     //創建StreamReader對象
+            sr2 = new StreamReader(filename2);     //創建StreamReader對象
 
-            if (object.Equals(sr1.ReadToEnd(), sr2.ReadToEnd()))    //读取文件内容并判断
+            if (object.Equals(sr1.ReadToEnd(), sr2.ReadToEnd()))    //讀取文件內容并判斷
                 richTextBox1.Text += "檔案" + filename1 + "和檔案" + filename2 + " 完全相同\n";
             else
                 richTextBox1.Text += "檔案" + filename1 + "和檔案" + filename2 + " 不相同\n";
 
-            sr1 = new StreamReader(filename1);     //创建StreamReader对象
-            sr3 = new StreamReader(filename3);     //创建StreamReader对象
-            if (object.Equals(sr1.ReadToEnd(), sr3.ReadToEnd()))    //读取文件内容并判断
+            sr1 = new StreamReader(filename1);     //創建StreamReader對象
+            sr3 = new StreamReader(filename3);     //創建StreamReader對象
+            if (object.Equals(sr1.ReadToEnd(), sr3.ReadToEnd()))    //讀取文件內容并判斷
                 richTextBox1.Text += "檔案" + filename1 + "和檔案" + filename3 + " 完全相同\n";
             else
                 richTextBox1.Text += "檔案" + filename1 + "和檔案" + filename3 + " 不相同\n";
 
-            sr2 = new StreamReader(filename2);     //创建StreamReader对象
-            sr3 = new StreamReader(filename3);     //创建StreamReader对象
-            if (object.Equals(sr2.ReadToEnd(), sr3.ReadToEnd()))    //读取文件内容并判断
+            sr2 = new StreamReader(filename2);     //創建StreamReader對象
+            sr3 = new StreamReader(filename3);     //創建StreamReader對象
+            if (object.Equals(sr2.ReadToEnd(), sr3.ReadToEnd()))    //讀取文件內容并判斷
                 richTextBox1.Text += "檔案" + filename2 + "和檔案" + filename3 + " 完全相同\n";
             else
                 richTextBox1.Text += "檔案" + filename2 + "和檔案" + filename3 + " 不相同\n";
@@ -666,7 +666,6 @@ namespace vcs_ReadWrite_TXT
             }
             sw.Flush();
             sw.Close();
-
 
             richTextBox1.Text += "讀取一個txt檔, 檔名 : " + filename + "\n";
 
@@ -764,3 +763,7 @@ namespace vcs_ReadWrite_TXT
         }
     }
 }
+
+
+
+

@@ -1,4 +1,4 @@
-﻿namespace vcs_DrawMaze
+﻿namespace vcs_RandomWalk2
 {
     partial class Form1
     {

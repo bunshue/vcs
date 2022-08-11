@@ -3,14 +3,14 @@
     partial class Frm_Main
     {
         /// <summary>
-        /// 必需的设计器变量。
+        /// 必需的設計器變量。
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// 清理所有正在使用的资源。
+        /// 清理所有正在使用的資源。
         /// </summary>
-        /// <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        /// <param name="disposing">如果應釋放托管資源，為 true；否則為 false。</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,11 +20,11 @@
             base.Dispose(disposing);
         }
 
-        #region Windows 窗体设计器生成的代码
+        #region Windows 窗體設計器生成的代碼
 
         /// <summary>
-        /// 设计器支持所需的方法 - 不要
-        /// 使用代码编辑器修改此方法的内容。
+        /// 設計器支持所需的方法 - 不要
+        /// 使用代碼編輯器修改此方法的內容。
         /// </summary>
         private void InitializeComponent()
         {
@@ -94,7 +94,7 @@
             this.groupBox1.Size = new System.Drawing.Size(451, 190);
             this.groupBox1.TabIndex = 18;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "创建XML文件";
+            this.groupBox1.Text = "創建XML文件";
             // 
             // textBox10
             // 
@@ -112,7 +112,7 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(89, 12);
             this.label10.TabIndex = 21;
-            this.label10.Text = "子节点属性值：";
+            this.label10.Text = "子節點屬性值：";
             // 
             // button1
             // 
@@ -120,7 +120,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 10;
-            this.button1.Text = "创建";
+            this.button1.Text = "創建";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -138,7 +138,7 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(89, 12);
             this.label8.TabIndex = 18;
-            this.label8.Text = "第三个元素值：";
+            this.label8.Text = "第三個元素值：";
             // 
             // textBox8
             // 
@@ -156,7 +156,7 @@
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(101, 12);
             this.label9.TabIndex = 16;
-            this.label9.Text = "第三个元素名称：";
+            this.label9.Text = "第三個元素名稱：";
             // 
             // textBox7
             // 
@@ -172,7 +172,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(89, 12);
             this.label2.TabIndex = 14;
-            this.label2.Text = "第二个元素值：";
+            this.label2.Text = "第二個元素值：";
             // 
             // textBox6
             // 
@@ -190,7 +190,7 @@
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(101, 12);
             this.label7.TabIndex = 12;
-            this.label7.Text = "第二个元素名称：";
+            this.label7.Text = "第二個元素名稱：";
             // 
             // textBox5
             // 
@@ -206,7 +206,7 @@
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(89, 12);
             this.label5.TabIndex = 10;
-            this.label5.Text = "第一个元素值：";
+            this.label5.Text = "第一個元素值：";
             // 
             // textBox4
             // 
@@ -224,7 +224,7 @@
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(101, 12);
             this.label6.TabIndex = 8;
-            this.label6.Text = "第一个元素名称：";
+            this.label6.Text = "第一個元素名稱：";
             // 
             // textBox3
             // 
@@ -242,7 +242,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(77, 12);
             this.label3.TabIndex = 6;
-            this.label3.Text = "子节点属性：";
+            this.label3.Text = "子節點屬性：";
             // 
             // textBox2
             // 
@@ -260,7 +260,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(77, 12);
             this.label4.TabIndex = 4;
-            this.label4.Text = "子节点名称：";
+            this.label4.Text = "子節點名稱：";
             // 
             // textBox1
             // 
@@ -278,7 +278,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 12);
             this.label1.TabIndex = 0;
-            this.label1.Text = "顶级节点名称：";
+            this.label1.Text = "頂級節點名稱：";
             // 
             // groupBox2
             // 
@@ -304,7 +304,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(63, 23);
             this.button4.TabIndex = 16;
-            this.button4.Text = "删除";
+            this.button4.Text = "刪除";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -354,7 +354,7 @@
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(65, 12);
             this.label12.TabIndex = 27;
-            this.label12.Text = "职工薪水：";
+            this.label12.Text = "職工薪水：";
             // 
             // label13
             // 
@@ -363,7 +363,7 @@
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(65, 12);
             this.label13.TabIndex = 25;
-            this.label13.Text = "职工性别：";
+            this.label13.Text = "職工性別：";
             // 
             // textBox11
             // 
@@ -379,7 +379,7 @@
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(65, 12);
             this.label14.TabIndex = 23;
-            this.label14.Text = "职工姓名：";
+            this.label14.Text = "職工姓名：";
             // 
             // dataGridView1
             // 
@@ -449,4 +449,3 @@
         private System.Windows.Forms.Button button2;
     }
 }
-

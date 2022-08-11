@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_DrawMaze
+namespace vcs_RandomWalk2
 {
     public partial class Form1 : Form
     {

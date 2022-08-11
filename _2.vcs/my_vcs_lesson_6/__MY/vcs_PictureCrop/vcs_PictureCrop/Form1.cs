@@ -414,10 +414,29 @@ namespace vcs_PictureCrop
             if (((SelectionRectangle.X + SelectionRectangle.Width) > W) || ((SelectionRectangle.Y + SelectionRectangle.Height) > H))
                 return;
 
-            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+
+            string filename = string.Empty;
+            if (rb_filetype1.Checked == true)
+            {
+                filename = Application.StartupPath + "\\jpg_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            }
+            else
+            {
+                filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            }
+
             Bitmap bitmap1 = new Bitmap(pictureBox1.Image);
             Bitmap bitmap2 = bitmap1.Clone(SelectionRectangle, PixelFormat.DontCare);  //或是 PixelFormat.Format32bppArgb
-            bitmap2.Save(filename, ImageFormat.Bmp);
+
+            if (rb_filetype1.Checked == true)
+            {
+                bitmap2.Save(filename, ImageFormat.Jpeg);
+            }
+            else
+            {
+                bitmap2.Save(filename, ImageFormat.Bmp);
+            }
+
             richTextBox1.Text += "存截圖，存檔檔名：" + filename + "\n";
 
             richTextBox1.Text += "將圖片資料放置到Clipboard中\n";
@@ -468,7 +487,7 @@ namespace vcs_PictureCrop
             }
             catch (Exception ex)
             {
-                ex.ToString();
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
             }
         }
 
@@ -540,7 +559,7 @@ namespace vcs_PictureCrop
             }
             catch (Exception ex)
             {
-                ex.ToString();
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
             }
         }
 

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_DrawMaze", "vcs_DrawMaze\vcs_DrawMaze.csproj", "{CEB7B111-1D47-4BA9-80DE-A71482E44DA7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "vcs_RandomWalk2", "vcs_RandomWalk2\vcs_RandomWalk2.csproj", "{CEB7B111-1D47-4BA9-80DE-A71482E44DA7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

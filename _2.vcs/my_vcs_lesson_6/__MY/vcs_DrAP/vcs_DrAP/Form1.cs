@@ -1603,16 +1603,19 @@ namespace vcs_DrAP
 
             res = fi.FullName.ToLower().Replace(" ", "").Contains(pattern.ToLower());
 
+            if (res == false)   //vcs加搜尋txt檔案
+            {
+                if (search_mode == SEARCH_MODE_VCS) //有一些vcs檔案 要跳開 (先改成小寫名)
+                {
+                    res = fi.FullName.ToLower().Replace(" ", "").Contains("____txt");
+                }
+            }
+
             if (res == true)
             {
                 if (search_mode == SEARCH_MODE_VCS) //有一些vcs檔案 要跳開 (先改成小寫名)
                 {
-                    if (fi.FullName.ToLower().Replace(" ", "").Contains("designer"))
-                    {
-                        res = false;
-                        return;
-                    }
-                    else if (fi.FullName.ToLower().Replace(" ", "").Contains("program.cs"))
+                    if (fi.FullName.ToLower().Replace(" ", "").Contains("program.cs"))
                     {
                         res = false;
                         return;
@@ -1627,6 +1630,13 @@ namespace vcs_DrAP
                         res = false;
                         return;
                     }
+                    /*
+                    else if (fi.FullName.ToLower().Replace(" ", "").Contains("designer"))
+                    {
+                        res = false;
+                        return;
+                    }
+                    */
                 }
 
                 //richTextBox2.Text += fi.FullName + "\n";
@@ -2726,8 +2736,10 @@ namespace vcs_DrAP
             string path = string.Empty;
             richTextBox1.Clear();
             richTextBox2.Clear();
+            listView1.Clear();
             removeDrawDiskSpace();
             flag_function = FUNCTION_SEARCH_TEXT;
+            Application.DoEvents();
 
             if (mode == SEARCH_MODE_VCS)
             {

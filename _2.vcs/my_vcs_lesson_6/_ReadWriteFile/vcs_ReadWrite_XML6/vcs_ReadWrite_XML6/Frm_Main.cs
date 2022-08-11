@@ -23,7 +23,7 @@ namespace vcs_ReadWrite_XML6
         static string strPath = "Employee.xml";
         static string strID = "";
 
-        //窗体加载时加载XML文件
+        //窗體加載時加載XML文件
         private void Form1_Load(object sender, EventArgs e)
         {
             if (File.Exists(strPath))
@@ -35,7 +35,7 @@ namespace vcs_ReadWrite_XML6
                 groupBox1.Enabled = true;
         }
 
-        //创建XML文件
+        //創建XML文件
         private void button1_Click(object sender, EventArgs e)
         {
             XDocument doc = new XDocument(
@@ -58,7 +58,7 @@ namespace vcs_ReadWrite_XML6
             XElement xe = XElement.Load(strPath);
             IEnumerable<XElement> elements1 = from element in xe.Elements("People")
                                               select element;
-            //生成新的编号
+            //生成新的編號
             string str = (Convert.ToInt32(elements1.Max(element => element.Attribute("ID").Value)) + 1).ToString("000");
             XElement people = new XElement(
                 "People", new XAttribute("ID", str),
@@ -91,11 +91,11 @@ namespace vcs_ReadWrite_XML6
                         );
                 }
                 xe.Save(strPath);
-            } 
+            }
             getXmlInfo();
         }
 
-        //删除XML元素
+        //刪除XML元素
         private void button4_Click(object sender, EventArgs e)
         {
             if (strID != "")
@@ -111,7 +111,7 @@ namespace vcs_ReadWrite_XML6
             getXmlInfo();
         }
 
-        //显示选中XML节点的详细信息
+        //顯示選中XML節點的詳細信息
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             strID = dataGridView1.Rows[e.RowIndex].Cells[3].Value.ToString();
@@ -127,9 +127,9 @@ namespace vcs_ReadWrite_XML6
             }
         }
 
-        #region 将XML文件内容绑定到DataGridView控件
+        #region 將XML文件內容綁定到DataGridView控件
         /// <summary>
-        /// 将XML文件内容绑定到DataGridView控件
+        /// 將XML文件內容綁定到DataGridView控件
         /// </summary>
         private void getXmlInfo()
         {

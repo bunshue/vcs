@@ -126,7 +126,7 @@ namespace vcs_Draw_Captcha1
         private void timer1_Tick(object sender, EventArgs e)
         {
             draw_captcha00();   //for pictureBox00
-            draw_captcha01();   //for pictureBox01
+
             draw_captcha02();   //for pictureBox02
             draw_captcha03();   //for pictureBox03
             draw_captcha04();   //for pictureBox04
@@ -136,7 +136,7 @@ namespace vcs_Draw_Captcha1
             draw_captcha07();   //for pictureBox07
             draw_captcha08();   //for pictureBox08
             draw_captcha09();   //for pictureBox09
-            draw_captcha10();   //for pictureBox10
+
             draw_captcha11();   //for pictureBox11
 
             draw_captcha12();   //for pictureBox12
@@ -152,6 +152,9 @@ namespace vcs_Draw_Captcha1
             draw_captcha21();    //for pictureBox21
             draw_captcha22();    //for pictureBox22
             draw_captcha23();    //for pictureBox23
+
+            draw_captcha24();   //for pictureBox24
+            draw_captcha25();   //for pictureBox25
         }
 
         //Captcha 00 ST
@@ -166,125 +169,6 @@ namespace vcs_Draw_Captcha1
             pictureBox00.Image = bitmap1;
         }
         //Captcha 00 SP
-
-        //Captcha 01 ST
-        //中文驗證法碼 ST
-        public string txt = "";
-        private void draw_captcha01()
-        {
-            //获取GB2312编码页（表） 
-            Encoding gb = Encoding.GetEncoding("gb2312");
-            //调用函数产生4个随机中文汉字编码 
-            object[] bytes = CreateCode(4);
-            //根据汉字编码的字节数组解码出中文汉字 
-            string str1 = gb.GetString((byte[])Convert.ChangeType(bytes[0], typeof(byte[])));
-            string str2 = gb.GetString((byte[])Convert.ChangeType(bytes[1], typeof(byte[])));
-            string str3 = gb.GetString((byte[])Convert.ChangeType(bytes[2], typeof(byte[])));
-            string str4 = gb.GetString((byte[])Convert.ChangeType(bytes[3], typeof(byte[])));
-            txt = str1 + str2 + str3 + str4;
-
-            if (txt == null || txt == String.Empty)
-            {
-                return;
-            }
-
-            //lb_captcha1.Text = txt;
-
-            Bitmap image = new Bitmap((int)Math.Ceiling((txt.Length * 20.5)) * 3, 22 * 3);
-            Graphics g = Graphics.FromImage(image);
-            try
-            {
-                //生成随机生成器
-                Random random = new Random();
-                //清空图片背景色
-                g.Clear(Color.White);
-                //画图片的背景噪音线
-                for (int i = 0; i < 2; i++)
-                {
-                    Point tem_Point_1 = new Point(random.Next(image.Width), random.Next(image.Height));
-                    Point tem_Point_2 = new Point(random.Next(image.Width), random.Next(image.Height));
-                    g.DrawLine(new Pen(Color.Black), tem_Point_1, tem_Point_2);
-                }
-                Font font = new Font("宋体", 12 * 2, (FontStyle.Bold));
-                LinearGradientBrush brush = new LinearGradientBrush(new Rectangle(0, 0, image.Width, image.Height), Color.Blue, Color.DarkRed, 1.2f, true);
-                g.DrawString(txt, font, brush, 2, 2);
-                //画图片的前景噪音点
-                for (int i = 0; i < 100; i++)
-                {
-                    Point tem_point = new Point(random.Next(image.Width), random.Next(image.Height));
-                    image.SetPixel(tem_point.X, tem_point.Y, Color.FromArgb(random.Next()));
-                }
-                //画图片的边框线
-                g.DrawRectangle(new Pen(Color.Silver), 0, 0, image.Width - 1, image.Height - 1);
-                pictureBox01.Image = image;
-            }
-            catch { }
-        }
-
-        /**/
-        /* 
-        此函数在汉字编码范围内随机创建含两个元素的十六进制字节数组，每个字节数组代表一个汉字，并将 
-        四个字节数组存储在object数组中。 
-        参数：strlength，代表需要产生的汉字个数 
-        */
-        public static object[] CreateCode(int strlength)
-        {
-            //定义一个字符串数组储存汉字编码的组成元素 
-            string[] r = new String[16] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
-            Random rnd = new Random();
-            //定义一个object数组用来 
-            object[] bytes = new object[strlength];
-            /**/
-            /*每循环一次产生一个含两个元素的十六进制字节数组，并将其放入bject数组中 
-         每个汉字有四个区位码组成 
-         区位码第1位和区位码第2位作为字节数组第一个元素 
-         区位码第3位和区位码第4位作为字节数组第二个元素 
-        */
-            for (int i = 0; i < strlength; i++)
-            {
-                //区位码第1位 
-                int r1 = rnd.Next(11, 14);
-                string str_r1 = r[r1].Trim();
-                //区位码第2位 
-                rnd = new Random(r1 * unchecked((int)DateTime.Now.Ticks) + i);//更换随机数发生器的种子避免产生重复值 
-                int r2;
-                if (r1 == 13)
-                    r2 = rnd.Next(0, 7);
-                else
-                    r2 = rnd.Next(0, 16);
-                string str_r2 = r[r2].Trim();
-                //区位码第3位 
-                rnd = new Random(r2 * unchecked((int)DateTime.Now.Ticks) + i);
-                int r3 = rnd.Next(10, 16);
-                string str_r3 = r[r3].Trim();
-                //区位码第4位 
-                rnd = new Random(r3 * unchecked((int)DateTime.Now.Ticks) + i);
-                int r4;
-                if (r3 == 10)
-                {
-                    r4 = rnd.Next(1, 16);
-                }
-                else if (r3 == 15)
-                {
-                    r4 = rnd.Next(0, 15);
-                }
-                else
-                {
-                    r4 = rnd.Next(0, 16);
-                }
-                string str_r4 = r[r4].Trim();
-                //定义两个字节变量存储产生的随机汉字区位码 
-                byte byte1 = Convert.ToByte(str_r1 + str_r2, 16);
-                byte byte2 = Convert.ToByte(str_r3 + str_r4, 16);
-                //将两个字节变量存储在字节数组中 
-                byte[] str_r = new byte[] { byte1, byte2 };
-                //将产生的一个汉字的字节数组放入object数组中 
-                bytes.SetValue(str_r, i);
-            }
-            return bytes;
-        }
-        //中文驗證法碼 SP
-        //Captcha 01 SP
 
         //Captcha 02 ST
         void draw_captcha02()
@@ -796,263 +680,6 @@ namespace vcs_Draw_Captcha1
         //Captcha 09 SP
 
 
-
-
-
-        //Captcha 10 ST
-
-        /*
-ASP.Net實現中文漢字驗證碼
-
-1、漢字編碼原理
-  到底怎麼辦到隨機生成漢字的呢？漢字從哪裡來的呢？是不是有個後台數據表，其中存放了所需要的所有漢字，使用程序隨機取出幾個漢字組合就行了呢？使用後台數據庫先將所有漢字存起來使用時隨機取出，這也是一種辦法，但是中文漢字有這麼多，怎麼來制作呢？其實可以不使用任何後台數據庫，使用程序就能做到這一切。要知道如何生成漢字，就得先了解中文漢字的編碼原理。
-  1980年，為了使每一個漢字有一個全國統一的代碼，我國頒布了第一個漢字編碼的國家標准： GB2312-80《信息交換用漢字編碼字符集》基本集，簡稱GB2312，這個字符集是我國中文信息處理技術的發展基礎，也是國內所有漢字系統的統一標准。到了後來又公布了國家標准GB18030-2000《信息交換用漢字編碼字符集基本集的擴充》，簡稱GB18030，編程時如果涉及到編碼和本地化的朋友應該對GB18030很熟悉。這是是我國繼GB2312-1980和GB13000-1993之後最重要的漢字編碼標准，同時也是未來我國計算機系統必須遵循的基礎性標准之一。
-  目前在中文Windows操作系統中，.Net編程中默認的的代碼頁就是GB18030簡體中文。但是事實上如果生成中文漢字驗證碼只須要使用GB2312字符集就已經足夠了。字符集中除了我們平時大家都認識的漢字外，也包含了很多我們不認識平時也很少見到的漢字。如果生成中文漢字驗證碼中有很多我們不認識的漢字讓我們輸入，對於使用拼音輸入法的朋友來說可不是好事，五筆使用者還能勉強根據漢字的長相打出來，呵呵！所以對於GB2312字符集中的漢字我們也不是全都要用。
-  中文漢字字符可以使用區位碼來表示，見
-  
-  漢字區位碼表 http://navicy2005.home4u.china.com/resource/gb2312tbl.htm
-  漢字區位碼代碼表 http://navicy2005.home4u.china.com/resource/gb2312tbm.htm
-  
-  其實這兩個表是同一回事，只不過一個使用十六進制分區表示，一個使用區位所在的數字位置表示。 例如“好”字的十六進制區位碼是ba c3，前兩位是區域，後兩位代表位置，ba處在第26區，“好”處在此區漢字的第35位也就是c3位置，所以數字代碼就是2635。這就是GB2312漢字區位原理。根據《漢字區位碼表 》我們可以發現第15區也就是AF區以前都沒有漢字，只有少量符號，漢字都從第16區B0開始，這就是為什麼GB2312字符集都是從16區開始的。
-  
-  2、.Net程序處理漢字編碼原理分析
-  在.Net中可以使用System.Text來處理所有語言的編碼。在System.Text命名空間中包含眾多編碼的類，可供進行操作及轉換。其中的Encoding類就是重點處理漢字編碼的類。通過在.Net文檔中查詢Encoding類的方法我們可以發現所有和文字編碼有關的都是字節數組，其中有兩個很好用的方法：
-  
-  
-  
-  Encoding.GetBytes ()方法將指定的 String 或字符數組的全部或部分內容編碼為字節數組
-  Encoding.GetString ()方法將指定字節數組解碼為字符串。
-  
-  
-  沒錯我們可以通過這兩個方法將漢字字符編碼為字節數組，同樣知道了漢字GB2312的字節數組編碼也就可以將字節數組解碼為漢字字符。通過對“好”字進行編碼為字節數組後
-  
-  
-  
-  Encoding gb=System.Text.Encoding.GetEncoding("gb2312");
-  object[] bytes=gb.Encoding.GetBytes ("好")；
-  
-  
-  發現得到了一個長度為2的字節數組bytes，使用
-  
-  
-  
-  string lowCode = System.Convert.ToString(bytes[0], 16); //取出元素1編碼內容（兩位16進制）
-  string hightCode = System.Convert.ToString(bytes[1], 16);//取出元素2編碼內容（兩位16進制）
-  
-  
-  之後發現字節數組bytes16進制變碼後內容竟然是{ba,c3}，剛好是“好”字的十六進制區位碼（見區位碼表）。
-  因此我們就可以隨機生成一個長度為2的十六進制字節數組，使用GetString ()方法對其進行解碼就可以得到漢字字符了。不過對於生成中文漢字驗證碼來說，因為第15區也就是AF區以前都沒有漢字，只有少量符號，漢字都從第16區B0開始，並且從區位D7開始以後的漢字都是和很難見到的繁雜漢字，所以這些都要排出掉。所以隨機生成的漢字十六進制區位碼第1位范圍在B、C、D之間，如果第1位是D的話，第2位區位碼就不能是7以後的十六進制數。在來看看區位碼表發現每區的第一個位置和最後一個位置都是空的，沒有漢字，因此隨機生成的區位碼第3位如果是A的話，第4位就不能是0；第3位如果是F的話，第4位就不能是F。
-
-*/
-
-        private string GetRandomText(int nLen)
-        {
-            //獲取GB2312編碼頁（表）
-            Encoding gb = Encoding.GetEncoding("gb2312");
-
-            //調用函數產生4個隨機中文漢字編碼
-            object[] bytes = CreateRegionCode(nLen);
-
-            //根據漢字編碼的字節數組解碼出中文漢字
-            string[] strs = new string[nLen];
-            string randString = "";
-            for (int i = 0; i < nLen; i++)
-            {
-                strs[i] = gb.GetString((byte[])Convert.ChangeType(bytes[i], typeof(byte[])));
-                randString += strs[i];
-            }
-            return randString;
-        }
-
-        /**/
-        /**/
-        /**/
-        /* 
- * 在.Net中可以使用System.Text來處理所有語言的編碼。在System.Text命名空間中包含眾多編碼的類，可供進行操作及轉換。其中的Encoding類就是重點處理漢字編碼的類。通過在.Net文檔中查詢Encoding類的方法我們可以發現所有和文字編碼有關的都是字節數組，其中有兩個很好用的方法：  
-    Encoding.GetBytes ()方法將指定的 String 或字符數組的全部或部分內容編碼為字節數組  
-    Encoding.GetString ()方法將指定字節數組解碼為字符串。  
-
-    沒錯我們可以通過這兩個方法將漢字字符編碼為字節數組，同樣知道了漢字GB2312的字節數組編碼也就可以將字節數組解碼為漢字字符。通過對“好”字進行編碼為字節數組後  
-
-    Encoding gb=System.Text.Encoding.GetEncoding("gb2312");   
-    object[] bytes=gb.Encoding.GetBytes ("好")； 
-          
-
-    發現得到了一個長度為2的字節數組bytes，使用  
-
-    string lowCode = System.Convert.ToString(bytes[0], 16); //取出元素1編碼內容（兩位16進制）   
-    string hightCode = System.Convert.ToString(bytes[1], 16);//取出元素2編碼內容（兩位16進制）   
-
-之後發現字節數組bytes16進制變碼後內容竟然是{ba,c3}，剛好是“好”字的十六進制區位碼（見區位碼表）。  
-因此我們就可以隨機生成一個長度為2的十六進制字節數組，使用GetString ()方法對其進行解碼就可以得到漢字字符了。
- 不過對於生成中文漢字驗證碼來說，因為第15區也就是AF區以前都沒有漢字，只有少量符號，漢字都從第16區B0開始，
- * 並且從區位D7開始以後的漢字都是和很難見到的繁雜漢字，所以這些都要排出掉。所以隨機生成的漢字十六進制區位碼第1位范圍在B、C、D之間，
- * 如果第1位是D的話，第2位區位碼就不能是7以後的十六進制數。在來看看區位碼表發現每區的第一個位置和最後一個位置都是空的，沒有漢字
-&nbs因此隨機生成的區位碼第3位如果是A的話，第4位就不能是0；第3位如果是F的話，第4位就不能是F。
-此函數在漢字編碼范圍內隨機創建含兩個元素的十六進制字節數組，每個字節數組代表一個漢字，並將   
-四個字節數組存儲在object數組中。   
-參數：strlength，代表需要產生的漢字個數   
-*/
-        public static object[] CreateRegionCode(int strlength)
-        {
-            //定義一個字符串數組儲存漢字編碼的組成元素   
-            string[] rBase = new String[16] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
-
-            Random rnd = new Random();
-
-            //定義一個object數組用來   
-            object[] bytes = new object[strlength];
-
-            /**/
-            /**/
-            /**/
-            /*每循環一次產生一個含兩個元素的十六進制字節數組，並將其放入bject數組中   
- 每個漢字有四個區位碼組成   
- 區位碼第1位和區位碼第2位作為字節數組第一個元素   
- 區位碼第3位和區位碼第4位作為字節數組第二個元素   
-*/
-            for (int i = 0; i < strlength; i++)
-            {
-                //區位碼第1位   
-                int r1 = rnd.Next(11, 14);
-                string str_r1 = rBase[r1].Trim();
-
-                //區位碼第2位   
-                rnd = new Random(r1 * unchecked((int)DateTime.Now.Ticks) + i);//更換隨機數發生器的  種子避免產生重復值   
-                int r2;
-                if (r1 == 13)
-                {
-                    r2 = rnd.Next(0, 7);
-                }
-                else
-                {
-                    r2 = rnd.Next(0, 16);
-                }
-                string str_r2 = rBase[r2].Trim();
-
-                //區位碼第3位   
-                rnd = new Random(r2 * unchecked((int)DateTime.Now.Ticks) + i);
-                int r3 = rnd.Next(10, 16);
-                string str_r3 = rBase[r3].Trim();
-
-                //區位碼第4位   
-                rnd = new Random(r3 * unchecked((int)DateTime.Now.Ticks) + i);
-                int r4;
-                if (r3 == 10)
-                {
-                    r4 = rnd.Next(1, 16);
-                }
-                else if (r3 == 15)
-                {
-                    r4 = rnd.Next(0, 15);
-                }
-                else
-                {
-                    r4 = rnd.Next(0, 16);
-                }
-                string str_r4 = rBase[r4].Trim();
-
-                //定義兩個字節變量存儲產生的隨機漢字區位碼   
-                byte byte1 = Convert.ToByte(str_r1 + str_r2, 16);
-                byte byte2 = Convert.ToByte(str_r3 + str_r4, 16);
-                //將兩個字節變量存儲在字節數組中   
-                byte[] str_r = new byte[] { byte1, byte2 };
-
-                //將產生的一個漢字的字節數組放入object數組中   
-                bytes.SetValue(str_r, i);
-            }
-            return bytes;
-        }
-
-        /**/
-        /// <summary>
-        /// 生成圖片驗證碼
-        /// </summary>
-        /// <param name="nLen">驗證碼的長度</param>
-        /// <param name="_codes">產生驗證碼的取值</param>
-        /// <param name="strKey">輸出參數，驗證碼的內容</param>
-        /// <returns>圖片字節流</returns>
-        private byte[] GenerateVerifyImage(int nLen, ref string strKey)
-        {
-            int nBmpWidth = 26 * nLen + 10;
-            int nBmpHeight = 40;
-            Bitmap bmp = new Bitmap(nBmpWidth, nBmpHeight);
-
-            // 1. 生成隨機背景顏色
-            int nRed, nGreen, nBlue;  // 背景的三元色
-            System.Random rd = new Random((int)System.DateTime.Now.Ticks);
-            nRed = rd.Next(255) % 128 + 128;
-            nGreen = rd.Next(255) % 128 + 128;
-            nBlue = rd.Next(255) % 128 + 128;
-
-            // 2. 填充位圖背景
-            Graphics graph = Graphics.FromImage(bmp);
-            graph.FillRectangle(new SolidBrush(Color.FromArgb(nRed, nGreen, nBlue))
-             , 0
-             , 0
-             , nBmpWidth
-             , nBmpHeight);
-
-
-            // 3. 繪制干擾線條，采用比背景略深一些的顏色
-            int nLines = 5;
-            Pen pen = new Pen(Color.FromArgb(nRed - 17, nGreen - 17, nBlue - 17), 2);
-            for (int a = 0; a < nLines; a++)
-            {
-                int x1 = rd.Next() % nBmpWidth;
-                int y1 = rd.Next() % nBmpHeight;
-                int x2 = rd.Next() % nBmpWidth;
-                int y2 = rd.Next() % nBmpHeight;
-                graph.DrawLine(pen, x1, y1, x2, y2);
-            }
-
-            // 采用的字符集，可以隨即拓展，並可以控制字符出現的幾率
-            string strCode = GetRandomText(nLen);
-
-            // 4. 循環取得字符，並繪制
-            string strResult = "";
-            for (int i = 0; i < nLen; i++)
-            {
-                int x = (i * 26 + rd.Next(5));
-                int y = rd.Next(10) + 1;
-
-                // 確定字體
-                Font font = new Font("Arial",
-                  14 + rd.Next() % 4,
-                FontStyle.Bold);
-                string c = strCode.Substring(i, 1);  // 獲取字符
-                strResult += c.ToString();
-
-                // 繪制字符
-                graph.DrawString(c.ToString(),
-                    font,
-                    new SolidBrush(Color.FromArgb(nRed - 68, nGreen - 68, nBlue - 68)),   //繪制字體顏色，采用比背景與干擾線略深一些的顏色
-                     x,
-                     y);
-            }
-            // 5. 輸出字節流
-            System.IO.MemoryStream ms = new System.IO.MemoryStream();
-            bmp.Save(ms, ImageFormat.Jpeg);
-            //bmp.Dispose();
-            pictureBox10.Image = bmp;
-            graph.Dispose();
-
-            strKey = strResult;
-            byte[] byteReturn = ms.ToArray();
-            ms.Close();
-
-            return byteReturn;
-        }
-
-        void draw_captcha10()
-        {
-            string strKey = "";
-            int _nlen = 6;
-            byte[] data = this.GenerateVerifyImage(_nlen, ref strKey); //_nLen生成驗證碼的長度
-            //Session["Jcode"] = strKey; //用來保存驗證碼的值
-            //Page.Response.OutputStream.Write(data, 0, data.Length);
-        }
-        //Captcha 10 SP
 
         //Captcha 11 ST
         void draw_captcha11()
@@ -1862,6 +1489,381 @@ ASP.Net實現中文漢字驗證碼
         //Captcha 23 SP
 
 
+
+        //Captcha 24 ST
+        //中文驗證法碼 ST
+        public string txt = "";
+        private void draw_captcha24()
+        {
+            //获取GB2312编码页（表） 
+            Encoding gb = Encoding.GetEncoding("gb2312");
+            //调用函数产生4个随机中文汉字编码 
+            object[] bytes = CreateCode(4);
+            //根据汉字编码的字节数组解码出中文汉字 
+            string str1 = gb.GetString((byte[])Convert.ChangeType(bytes[0], typeof(byte[])));
+            string str2 = gb.GetString((byte[])Convert.ChangeType(bytes[1], typeof(byte[])));
+            string str3 = gb.GetString((byte[])Convert.ChangeType(bytes[2], typeof(byte[])));
+            string str4 = gb.GetString((byte[])Convert.ChangeType(bytes[3], typeof(byte[])));
+            txt = str1 + str2 + str3 + str4;
+
+            if (txt == null || txt == String.Empty)
+            {
+                return;
+            }
+
+            //lb_captcha1.Text = txt;
+
+            Bitmap image = new Bitmap((int)Math.Ceiling((txt.Length * 20.5)) * 3, 22 * 3);
+            Graphics g = Graphics.FromImage(image);
+            try
+            {
+                //生成随机生成器
+                Random random = new Random();
+                //清空图片背景色
+                g.Clear(Color.White);
+                //画图片的背景噪音线
+                for (int i = 0; i < 2; i++)
+                {
+                    Point tem_Point_1 = new Point(random.Next(image.Width), random.Next(image.Height));
+                    Point tem_Point_2 = new Point(random.Next(image.Width), random.Next(image.Height));
+                    g.DrawLine(new Pen(Color.Black), tem_Point_1, tem_Point_2);
+                }
+                Font font = new Font("宋体", 12 * 2, (FontStyle.Bold));
+                LinearGradientBrush brush = new LinearGradientBrush(new Rectangle(0, 0, image.Width, image.Height), Color.Blue, Color.DarkRed, 1.2f, true);
+                g.DrawString(txt, font, brush, 2, 2);
+                //画图片的前景噪音点
+                for (int i = 0; i < 100; i++)
+                {
+                    Point tem_point = new Point(random.Next(image.Width), random.Next(image.Height));
+                    image.SetPixel(tem_point.X, tem_point.Y, Color.FromArgb(random.Next()));
+                }
+                //画图片的边框线
+                g.DrawRectangle(new Pen(Color.Silver), 0, 0, image.Width - 1, image.Height - 1);
+                pictureBox24.Image = image;
+            }
+            catch { }
+        }
+
+        /**/
+        /* 
+        此函数在汉字编码范围内随机创建含两个元素的十六进制字节数组，每个字节数组代表一个汉字，并将 
+        四个字节数组存储在object数组中。 
+        参数：strlength，代表需要产生的汉字个数 
+        */
+        public static object[] CreateCode(int strlength)
+        {
+            //定义一个字符串数组储存汉字编码的组成元素 
+            string[] r = new String[16] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
+            Random rnd = new Random();
+            //定义一个object数组用来 
+            object[] bytes = new object[strlength];
+            /**/
+            /*每循环一次产生一个含两个元素的十六进制字节数组，并将其放入bject数组中 
+         每个汉字有四个区位码组成 
+         区位码第1位和区位码第2位作为字节数组第一个元素 
+         区位码第3位和区位码第4位作为字节数组第二个元素 
+        */
+            for (int i = 0; i < strlength; i++)
+            {
+                //区位码第1位 
+                int r1 = rnd.Next(11, 14);
+                string str_r1 = r[r1].Trim();
+                //区位码第2位 
+                rnd = new Random(r1 * unchecked((int)DateTime.Now.Ticks) + i);//更换随机数发生器的种子避免产生重复值 
+                int r2;
+                if (r1 == 13)
+                    r2 = rnd.Next(0, 7);
+                else
+                    r2 = rnd.Next(0, 16);
+                string str_r2 = r[r2].Trim();
+                //区位码第3位 
+                rnd = new Random(r2 * unchecked((int)DateTime.Now.Ticks) + i);
+                int r3 = rnd.Next(10, 16);
+                string str_r3 = r[r3].Trim();
+                //区位码第4位 
+                rnd = new Random(r3 * unchecked((int)DateTime.Now.Ticks) + i);
+                int r4;
+                if (r3 == 10)
+                {
+                    r4 = rnd.Next(1, 16);
+                }
+                else if (r3 == 15)
+                {
+                    r4 = rnd.Next(0, 15);
+                }
+                else
+                {
+                    r4 = rnd.Next(0, 16);
+                }
+                string str_r4 = r[r4].Trim();
+                //定义两个字节变量存储产生的随机汉字区位码 
+                byte byte1 = Convert.ToByte(str_r1 + str_r2, 16);
+                byte byte2 = Convert.ToByte(str_r3 + str_r4, 16);
+                //将两个字节变量存储在字节数组中 
+                byte[] str_r = new byte[] { byte1, byte2 };
+                //将产生的一个汉字的字节数组放入object数组中 
+                bytes.SetValue(str_r, i);
+            }
+            return bytes;
+        }
+        //中文驗證法碼 SP
+        //Captcha 24 SP
+
+
+        //Captcha 25 ST
+
+        /*
+ASP.Net實現中文漢字驗證碼
+
+1、漢字編碼原理
+  到底怎麼辦到隨機生成漢字的呢？漢字從哪裡來的呢？是不是有個後台數據表，其中存放了所需要的所有漢字，使用程序隨機取出幾個漢字組合就行了呢？使用後台數據庫先將所有漢字存起來使用時隨機取出，這也是一種辦法，但是中文漢字有這麼多，怎麼來制作呢？其實可以不使用任何後台數據庫，使用程序就能做到這一切。要知道如何生成漢字，就得先了解中文漢字的編碼原理。
+  1980年，為了使每一個漢字有一個全國統一的代碼，我國頒布了第一個漢字編碼的國家標准： GB2312-80《信息交換用漢字編碼字符集》基本集，簡稱GB2312，這個字符集是我國中文信息處理技術的發展基礎，也是國內所有漢字系統的統一標准。到了後來又公布了國家標准GB18030-2000《信息交換用漢字編碼字符集基本集的擴充》，簡稱GB18030，編程時如果涉及到編碼和本地化的朋友應該對GB18030很熟悉。這是是我國繼GB2312-1980和GB13000-1993之後最重要的漢字編碼標准，同時也是未來我國計算機系統必須遵循的基礎性標准之一。
+  目前在中文Windows操作系統中，.Net編程中默認的的代碼頁就是GB18030簡體中文。但是事實上如果生成中文漢字驗證碼只須要使用GB2312字符集就已經足夠了。字符集中除了我們平時大家都認識的漢字外，也包含了很多我們不認識平時也很少見到的漢字。如果生成中文漢字驗證碼中有很多我們不認識的漢字讓我們輸入，對於使用拼音輸入法的朋友來說可不是好事，五筆使用者還能勉強根據漢字的長相打出來，呵呵！所以對於GB2312字符集中的漢字我們也不是全都要用。
+  中文漢字字符可以使用區位碼來表示，見
+  
+  漢字區位碼表 http://navicy2005.home4u.china.com/resource/gb2312tbl.htm
+  漢字區位碼代碼表 http://navicy2005.home4u.china.com/resource/gb2312tbm.htm
+  
+  其實這兩個表是同一回事，只不過一個使用十六進制分區表示，一個使用區位所在的數字位置表示。 例如“好”字的十六進制區位碼是ba c3，前兩位是區域，後兩位代表位置，ba處在第26區，“好”處在此區漢字的第35位也就是c3位置，所以數字代碼就是2635。這就是GB2312漢字區位原理。根據《漢字區位碼表 》我們可以發現第15區也就是AF區以前都沒有漢字，只有少量符號，漢字都從第16區B0開始，這就是為什麼GB2312字符集都是從16區開始的。
+  
+  2、.Net程序處理漢字編碼原理分析
+  在.Net中可以使用System.Text來處理所有語言的編碼。在System.Text命名空間中包含眾多編碼的類，可供進行操作及轉換。其中的Encoding類就是重點處理漢字編碼的類。通過在.Net文檔中查詢Encoding類的方法我們可以發現所有和文字編碼有關的都是字節數組，其中有兩個很好用的方法：
+  
+  
+  
+  Encoding.GetBytes ()方法將指定的 String 或字符數組的全部或部分內容編碼為字節數組
+  Encoding.GetString ()方法將指定字節數組解碼為字符串。
+  
+  
+  沒錯我們可以通過這兩個方法將漢字字符編碼為字節數組，同樣知道了漢字GB2312的字節數組編碼也就可以將字節數組解碼為漢字字符。通過對“好”字進行編碼為字節數組後
+  
+  
+  
+  Encoding gb=System.Text.Encoding.GetEncoding("gb2312");
+  object[] bytes=gb.Encoding.GetBytes ("好")；
+  
+  
+  發現得到了一個長度為2的字節數組bytes，使用
+  
+  
+  
+  string lowCode = System.Convert.ToString(bytes[0], 16); //取出元素1編碼內容（兩位16進制）
+  string hightCode = System.Convert.ToString(bytes[1], 16);//取出元素2編碼內容（兩位16進制）
+  
+  
+  之後發現字節數組bytes16進制變碼後內容竟然是{ba,c3}，剛好是“好”字的十六進制區位碼（見區位碼表）。
+  因此我們就可以隨機生成一個長度為2的十六進制字節數組，使用GetString ()方法對其進行解碼就可以得到漢字字符了。不過對於生成中文漢字驗證碼來說，因為第15區也就是AF區以前都沒有漢字，只有少量符號，漢字都從第16區B0開始，並且從區位D7開始以後的漢字都是和很難見到的繁雜漢字，所以這些都要排出掉。所以隨機生成的漢字十六進制區位碼第1位范圍在B、C、D之間，如果第1位是D的話，第2位區位碼就不能是7以後的十六進制數。在來看看區位碼表發現每區的第一個位置和最後一個位置都是空的，沒有漢字，因此隨機生成的區位碼第3位如果是A的話，第4位就不能是0；第3位如果是F的話，第4位就不能是F。
+
+*/
+
+        private string GetRandomText(int nLen)
+        {
+            //獲取GB2312編碼頁（表）
+            Encoding gb = Encoding.GetEncoding("gb2312");
+
+            //調用函數產生4個隨機中文漢字編碼
+            object[] bytes = CreateRegionCode(nLen);
+
+            //根據漢字編碼的字節數組解碼出中文漢字
+            string[] strs = new string[nLen];
+            string randString = "";
+            for (int i = 0; i < nLen; i++)
+            {
+                strs[i] = gb.GetString((byte[])Convert.ChangeType(bytes[i], typeof(byte[])));
+                randString += strs[i];
+            }
+            return randString;
+        }
+
+        /**/
+        /**/
+        /**/
+        /* 
+ * 在.Net中可以使用System.Text來處理所有語言的編碼。在System.Text命名空間中包含眾多編碼的類，可供進行操作及轉換。其中的Encoding類就是重點處理漢字編碼的類。通過在.Net文檔中查詢Encoding類的方法我們可以發現所有和文字編碼有關的都是字節數組，其中有兩個很好用的方法：  
+    Encoding.GetBytes ()方法將指定的 String 或字符數組的全部或部分內容編碼為字節數組  
+    Encoding.GetString ()方法將指定字節數組解碼為字符串。  
+
+    沒錯我們可以通過這兩個方法將漢字字符編碼為字節數組，同樣知道了漢字GB2312的字節數組編碼也就可以將字節數組解碼為漢字字符。通過對“好”字進行編碼為字節數組後  
+
+    Encoding gb=System.Text.Encoding.GetEncoding("gb2312");   
+    object[] bytes=gb.Encoding.GetBytes ("好")； 
+          
+
+    發現得到了一個長度為2的字節數組bytes，使用  
+
+    string lowCode = System.Convert.ToString(bytes[0], 16); //取出元素1編碼內容（兩位16進制）   
+    string hightCode = System.Convert.ToString(bytes[1], 16);//取出元素2編碼內容（兩位16進制）   
+
+之後發現字節數組bytes16進制變碼後內容竟然是{ba,c3}，剛好是“好”字的十六進制區位碼（見區位碼表）。  
+因此我們就可以隨機生成一個長度為2的十六進制字節數組，使用GetString ()方法對其進行解碼就可以得到漢字字符了。
+ 不過對於生成中文漢字驗證碼來說，因為第15區也就是AF區以前都沒有漢字，只有少量符號，漢字都從第16區B0開始，
+ * 並且從區位D7開始以後的漢字都是和很難見到的繁雜漢字，所以這些都要排出掉。所以隨機生成的漢字十六進制區位碼第1位范圍在B、C、D之間，
+ * 如果第1位是D的話，第2位區位碼就不能是7以後的十六進制數。在來看看區位碼表發現每區的第一個位置和最後一個位置都是空的，沒有漢字
+&nbs因此隨機生成的區位碼第3位如果是A的話，第4位就不能是0；第3位如果是F的話，第4位就不能是F。
+此函數在漢字編碼范圍內隨機創建含兩個元素的十六進制字節數組，每個字節數組代表一個漢字，並將   
+四個字節數組存儲在object數組中。   
+參數：strlength，代表需要產生的漢字個數   
+*/
+        public static object[] CreateRegionCode(int strlength)
+        {
+            //定義一個字符串數組儲存漢字編碼的組成元素   
+            string[] rBase = new String[16] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "a", "b", "c", "d", "e", "f" };
+
+            Random rnd = new Random();
+
+            //定義一個object數組用來   
+            object[] bytes = new object[strlength];
+
+            /**/
+            /**/
+            /**/
+            /*每循環一次產生一個含兩個元素的十六進制字節數組，並將其放入bject數組中   
+ 每個漢字有四個區位碼組成   
+ 區位碼第1位和區位碼第2位作為字節數組第一個元素   
+ 區位碼第3位和區位碼第4位作為字節數組第二個元素   
+*/
+            for (int i = 0; i < strlength; i++)
+            {
+                //區位碼第1位   
+                int r1 = rnd.Next(11, 14);
+                string str_r1 = rBase[r1].Trim();
+
+                //區位碼第2位   
+                rnd = new Random(r1 * unchecked((int)DateTime.Now.Ticks) + i);//更換隨機數發生器的  種子避免產生重復值   
+                int r2;
+                if (r1 == 13)
+                {
+                    r2 = rnd.Next(0, 7);
+                }
+                else
+                {
+                    r2 = rnd.Next(0, 16);
+                }
+                string str_r2 = rBase[r2].Trim();
+
+                //區位碼第3位   
+                rnd = new Random(r2 * unchecked((int)DateTime.Now.Ticks) + i);
+                int r3 = rnd.Next(10, 16);
+                string str_r3 = rBase[r3].Trim();
+
+                //區位碼第4位   
+                rnd = new Random(r3 * unchecked((int)DateTime.Now.Ticks) + i);
+                int r4;
+                if (r3 == 10)
+                {
+                    r4 = rnd.Next(1, 16);
+                }
+                else if (r3 == 15)
+                {
+                    r4 = rnd.Next(0, 15);
+                }
+                else
+                {
+                    r4 = rnd.Next(0, 16);
+                }
+                string str_r4 = rBase[r4].Trim();
+
+                //定義兩個字節變量存儲產生的隨機漢字區位碼   
+                byte byte1 = Convert.ToByte(str_r1 + str_r2, 16);
+                byte byte2 = Convert.ToByte(str_r3 + str_r4, 16);
+                //將兩個字節變量存儲在字節數組中   
+                byte[] str_r = new byte[] { byte1, byte2 };
+
+                //將產生的一個漢字的字節數組放入object數組中   
+                bytes.SetValue(str_r, i);
+            }
+            return bytes;
+        }
+
+        /**/
+        /// <summary>
+        /// 生成圖片驗證碼
+        /// </summary>
+        /// <param name="nLen">驗證碼的長度</param>
+        /// <param name="_codes">產生驗證碼的取值</param>
+        /// <param name="strKey">輸出參數，驗證碼的內容</param>
+        /// <returns>圖片字節流</returns>
+        private byte[] GenerateVerifyImage(int nLen, ref string strKey)
+        {
+            int nBmpWidth = 26 * nLen + 10;
+            int nBmpHeight = 40;
+            Bitmap bmp = new Bitmap(nBmpWidth, nBmpHeight);
+
+            // 1. 生成隨機背景顏色
+            int nRed, nGreen, nBlue;  // 背景的三元色
+            System.Random rd = new Random((int)System.DateTime.Now.Ticks);
+            nRed = rd.Next(255) % 128 + 128;
+            nGreen = rd.Next(255) % 128 + 128;
+            nBlue = rd.Next(255) % 128 + 128;
+
+            // 2. 填充位圖背景
+            Graphics graph = Graphics.FromImage(bmp);
+            graph.FillRectangle(new SolidBrush(Color.FromArgb(nRed, nGreen, nBlue))
+             , 0
+             , 0
+             , nBmpWidth
+             , nBmpHeight);
+
+
+            // 3. 繪制干擾線條，采用比背景略深一些的顏色
+            int nLines = 5;
+            Pen pen = new Pen(Color.FromArgb(nRed - 17, nGreen - 17, nBlue - 17), 2);
+            for (int a = 0; a < nLines; a++)
+            {
+                int x1 = rd.Next() % nBmpWidth;
+                int y1 = rd.Next() % nBmpHeight;
+                int x2 = rd.Next() % nBmpWidth;
+                int y2 = rd.Next() % nBmpHeight;
+                graph.DrawLine(pen, x1, y1, x2, y2);
+            }
+
+            // 采用的字符集，可以隨即拓展，並可以控制字符出現的幾率
+            string strCode = GetRandomText(nLen);
+
+            // 4. 循環取得字符，並繪制
+            string strResult = "";
+            for (int i = 0; i < nLen; i++)
+            {
+                int x = (i * 26 + rd.Next(5));
+                int y = rd.Next(10) + 1;
+
+                // 確定字體
+                Font font = new Font("Arial",
+                  14 + rd.Next() % 4,
+                FontStyle.Bold);
+                string c = strCode.Substring(i, 1);  // 獲取字符
+                strResult += c.ToString();
+
+                // 繪制字符
+                graph.DrawString(c.ToString(),
+                    font,
+                    new SolidBrush(Color.FromArgb(nRed - 68, nGreen - 68, nBlue - 68)),   //繪制字體顏色，采用比背景與干擾線略深一些的顏色
+                     x,
+                     y);
+            }
+            // 5. 輸出字節流
+            System.IO.MemoryStream ms = new System.IO.MemoryStream();
+            bmp.Save(ms, ImageFormat.Jpeg);
+            //bmp.Dispose();
+            pictureBox25.Image = bmp;
+            graph.Dispose();
+
+            strKey = strResult;
+            byte[] byteReturn = ms.ToArray();
+            ms.Close();
+
+            return byteReturn;
+        }
+
+        void draw_captcha25()
+        {
+            string strKey = "";
+            int _nlen = 6;
+            byte[] data = this.GenerateVerifyImage(_nlen, ref strKey); //_nLen生成驗證碼的長度
+            //Session["Jcode"] = strKey; //用來保存驗證碼的值
+            //Page.Response.OutputStream.Write(data, 0, data.Length);
+        }
+        //Captcha 25 SP
 
     }
 

@@ -775,17 +775,17 @@ namespace vcs_PictureEnhance_YUV
 
                 int width = 15;
 
-                H = 400;
+                int HH = 400;
 
                 p = new Pen(Color.Red, 3);
-                g.DrawLine(p, width * i, H - max * 1, width * i + width, H - max * 1);
+                g.DrawLine(p, width * i, HH - max * 1, width * i + width, HH - max * 1);
                 p = new Pen(Color.Blue, 3);
-                g.DrawLine(p, width * i, H - min * 1, width * i + width, H - min * 1);
+                g.DrawLine(p, width * i, HH - min * 1, width * i + width, HH - min * 1);
                 p = new Pen(Color.Yellow, 3);
-                g.DrawLine(p, width * i, H - avg * 1, width * i + width, H - avg * 1);
+                g.DrawLine(p, width * i, HH - avg * 1, width * i + width, HH - avg * 1);
 
                 //p = new Pen(Color.Pink, 3);
-                //g.DrawLine(p, width * i, H - (int)sd, width * i + 40, H - (int)sd);
+                //g.DrawLine(p, width * i, HH - (int)sd, width * i + 40, HH - (int)sd);
             }
             pictureBox2.Image = bitmap2;
         }
