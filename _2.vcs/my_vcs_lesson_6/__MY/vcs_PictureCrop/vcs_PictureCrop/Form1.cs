@@ -71,6 +71,10 @@ namespace vcs_PictureCrop
                 pictureBox1.Image = bitmap1;
                 W = bitmap1.Width;
                 H = bitmap1.Height;
+                nud_x_st.Maximum = W;
+                nud_y_st.Maximum = H;
+                nud_w.Maximum = W;
+                nud_h.Maximum = H;
             }
             else //test
             {
@@ -253,6 +257,10 @@ namespace vcs_PictureCrop
                 pictureBox1.Image = bitmap1;
                 W = bitmap1.Width;
                 H = bitmap1.Height;
+                nud_x_st.Maximum = W;
+                nud_y_st.Maximum = H;
+                nud_w.Maximum = W;
+                nud_h.Maximum = H;
             }
         }
 

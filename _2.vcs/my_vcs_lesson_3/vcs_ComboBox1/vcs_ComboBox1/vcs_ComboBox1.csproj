@@ -53,6 +53,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="ImageAndText.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -95,6 +96,30 @@
     <None Include="b.bmp" />
     <None Include="c.bmp" />
     <None Include="d.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Earth.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Jupiter.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Mars.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Mercury.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Neptune.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Saturn.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Uranus.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Venus.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

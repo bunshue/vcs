@@ -32,7 +32,6 @@ namespace vcs_Chart1
         private void Form1_Load(object sender, EventArgs e)
         {
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-            chart1_init();
         }
 
         private double rad(double d)
@@ -101,6 +100,11 @@ namespace vcs_Chart1
             #endregion
             chart1.Titles[0].Font = new System.Drawing.Font("標楷體", 30f);//设置图表标题字体样式和大小
             chart1.Legends["Legend1"].Docking = System.Windows.Forms.DataVisualization.Charting.Docking.Right;  //設定圖標顯示停靠的位置
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            chart1_init();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -333,6 +337,8 @@ namespace vcs_Chart1
             else
                 richTextBox1.Text += "無圖可存\n";
         }
+
+
     }
 }
 

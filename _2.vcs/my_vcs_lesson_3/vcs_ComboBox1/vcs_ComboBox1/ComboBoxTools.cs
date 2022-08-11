@@ -133,5 +133,50 @@ namespace vcs_ComboBox1
         }
 
         #endregion Display Images
+
+        #region Images and Text
+
+        // Set up the ComboBox to display images with text.
+        public static void DisplayImagesAndText(this ComboBox cbo, ImageAndText[] values)
+        {
+            // Make the ComboBox owner-drawn.
+            cbo.DrawMode = DrawMode.OwnerDrawVariable;
+
+            // Add the images to the ComboBox's items.
+            cbo.Items.Clear();
+            cbo.Items.AddRange(values);
+
+            // Subscribe to the DrawItem event.
+            cbo.MeasureItem += cboDrawImageAndText_MeasureItem;
+            cbo.DrawItem += cboDrawImageAndText_DrawItem;
+        }
+
+        // Measure a ComboBox item that is displaying an image.
+        private static void cboDrawImageAndText_MeasureItem(object sender, MeasureItemEventArgs e)
+        {
+            if (e.Index < 0) return;
+
+            // Get the item.
+            ComboBox cbo = sender as ComboBox;
+            ImageAndText item = (ImageAndText)cbo.Items[e.Index];
+
+            // Make the item measure itself.
+            item.MeasureItem(e);
+        }
+
+        // Draw a ComboBox item that is displaying an image.
+        private static void cboDrawImageAndText_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index < 0) return;
+
+            // Get the item.
+            ComboBox cbo = sender as ComboBox;
+            ImageAndText item = (ImageAndText)cbo.Items[e.Index];
+
+            // Make the item draw itself.
+            item.DrawItem(e);
+        }
+
+        #endregion Images and Text
     }
 }

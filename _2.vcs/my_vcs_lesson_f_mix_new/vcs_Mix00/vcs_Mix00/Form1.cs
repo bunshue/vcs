@@ -159,8 +159,8 @@ namespace vcs_Mix00
 
 
 
-            byte bytRtuDataFlag = 0;
-            byte bytRtuDataIdx;
+            //byte bytRtuDataFlag = 0;
+            //byte bytRtuDataIdx;
             byte[] bytRtuData = new byte[8];
 
             int i;
@@ -292,11 +292,106 @@ namespace vcs_Mix00
         private void button2_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //動態驗證碼變成靜態
+            //將一個gif拆成多圖
+
+            string filename1 = @"C:\______test_files\__pic\_gif\run.gif";
+
+            Image image1 = Image.FromFile(filename1);
+            FrameDimension frameDimension = new FrameDimension(image1.FrameDimensionsList[0]);
+            int frameCount = image1.GetFrameCount(frameDimension);
+            richTextBox1.Text += "frameCount = " + frameCount.ToString() + "\n";
+
+            int W = image1.Width;
+            int H = image1.Height;
+            Bitmap bitmap1 = new Bitmap(W, H);
+
+            //將一個gif拆成多圖
+            for (int i = 0; i < frameCount; i++)
+            {
+                image1.SelectActiveFrame(frameDimension, i);
+                Bitmap bmp = new Bitmap(image1);
+                string fname = "gif_fileA" + i.ToString() + ".bmp";
+                bmp.Save(fname, ImageFormat.Bmp);
+            }
+
+            //把多圖疊合起來
+            for (int i = 0; i < frameCount; i++)
+            {
+                image1.SelectActiveFrame(frameDimension, i);
+                Bitmap bmp = new Bitmap(image1);
+
+                Color dd = bmp.GetPixel(1, 1);
+                if (i == 0) //設定基底
+                {
+                    for (int x = 0; x < bmp.Width; x++)
+                    {
+                        for (int y = 0; y < bmp.Height; y++)
+                        {
+                            bitmap1.SetPixel(x, y, dd);
+                        }
+                    }
+                }
+                for (int x = 0; x < bmp.Width; x++)
+                {
+                    for (int y = 0; y < bmp.Height; y++)
+                    {
+                        Color c = bmp.GetPixel(x, y);
+                        if (c == dd)
+                        {
+                            continue;
+                        }
+                        bitmap1.SetPixel(x, y, c);
+                    }
+                }
+            }
+
+            string filename2 = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+            try
+            {
+                //bitmap1.Save(@file1, ImageFormat.Jpeg);
+                bitmap1.Save(filename2, ImageFormat.Bmp);
+                //bitmap1.Save(@file3, ImageFormat.Png);
+
+                //richTextBox1.Text += "已存檔 : " + file1 + "\n";
+                richTextBox1.Text += "已存檔 : " + filename2 + "\n";
+                //richTextBox1.Text += "已存檔 : " + file3 + "\n";
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //兩圖檔疊合
+
+            string filename1 = @"C:\______test_files\picture1.jpg";
+            string filename2 = @"C:\______test_files\picture2.jpg";
+
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename1);	//Image.FromFile出來的是Image格式
+            Bitmap bitmap2 = (Bitmap)Image.FromFile(filename2);	//Image.FromFile出來的是Image格式
+
+            Bitmap bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height, PixelFormat.Format24bppRgb);
+            //Bitmap bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            Graphics g = Graphics.FromImage(bmp);
+            g.Clear(Color.White);
+
+            g.DrawImage(bitmap1, 0, 0, bitmap1.Width, bitmap1.Height);
+            g.DrawImage(bitmap2, 200, 0, bitmap2.Width, bitmap2.Height);
+
+
+
+
+
+
+
+            pictureBox1.Image = bmp;
+
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -324,7 +419,7 @@ namespace vcs_Mix00
         /// <param name="filename2">切割後圖片路徑</param>
         /// <param name="width">切割後圖像寬度</param>
         /// <param name="height">切割後圖像高度</param>
-        public static void Cut(string filename1, string filename2, int width, int height, string message)
+        public void Cut(string filename1, string filename2, int width, int height, string message)
         {
             Bitmap bitmap = new Bitmap(filename1);
             Decimal MaxRow = Math.Ceiling((Decimal)bitmap.Height / height);
@@ -359,7 +454,7 @@ namespace vcs_Mix00
                     }
                     catch (Exception ex)
                     {
-                        //richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                        richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
                     }
                 }
             }
@@ -769,7 +864,7 @@ namespace vcs_Mix00
         {
             //代碼統計
 
-            string filename = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_f_mix_new\vcs_Mix00\vcs_Mix00\Form1.cs";
+            //string filename = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_f_mix_new\vcs_Mix00\vcs_Mix00\Form1.cs";
             //CountMethods(filename);
 
             //GetMethodNameAndLines(filename);
@@ -1659,7 +1754,7 @@ namespace vcs_Mix00
             set { this._width = value; }
         }
 
-        public System.Drawing.PointF Location
+        public PointF Location
         {
             get { return this._location; }
             set { this._location = value; }
@@ -1671,7 +1766,7 @@ namespace vcs_Mix00
             set { this._height = value; }
         }
 
-        public System.Drawing.Drawing2D.GraphicsPath GraphicsPath
+        public GraphicsPath GraphicsPath
         {
             get
             {
@@ -1681,7 +1776,7 @@ namespace vcs_Mix00
             set { this._graphicsPath = value; }
         }
 
-        public System.Drawing.Color Color
+        public Color Color
         {
             get { return this._color; }
             set { this._color = value; }
@@ -1693,7 +1788,7 @@ namespace vcs_Mix00
             set { this._borderWidth = value; }
         }
 
-        public System.Drawing.Color BorderColor
+        public Color BorderColor
         {
             get { return this._borderColor; }
             set { this._borderColor = value; }

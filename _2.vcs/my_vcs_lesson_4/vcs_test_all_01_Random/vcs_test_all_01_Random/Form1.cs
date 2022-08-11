@@ -96,44 +96,57 @@ namespace vcs_test_all_01_Random
             bt_random22.Location = new Point(x_st + dx * 2, y_st + dy * 2);
             bt_random23.Location = new Point(x_st + dx * 2, y_st + dy * 3);
 
-            richTextBox1.Location = new Point(x_st + dx * 7 + 20, y_st + dy * 0);
-            richTextBox1.Size = new Size(680, 1000);
+            richTextBox1.Location = new Point(x_st + dx * 7 + 170, y_st + dy * 0);
+            richTextBox1.Size = new Size(600, 1000);
 
-
-            int w = 300;
+            int w = 280;
             int h = 50;
-
-            x_st = 750;
+            x_st = 680;
             y_st = 430;
-            dx = 160;
-            dy = 50;
+            dx = w + 10;
+            dy = 46;
 
             tb_random_text0.Size = new Size(w, h);
-            tb_random_text0.Location = new Point(x_st, y_st + dy * 0);
-
             tb_random_text1.Size = new Size(w, h);
-            tb_random_text1.Location = new Point(x_st, y_st + dy * 1);
-
             tb_random_text2.Size = new Size(w, h);
-            tb_random_text2.Location = new Point(x_st, y_st + dy * 2);
-
             tb_random_text3.Size = new Size(w, h);
-            tb_random_text3.Location = new Point(x_st, y_st + dy * 3);
-
             tb_random_text4.Size = new Size(w, h);
-            tb_random_text4.Location = new Point(x_st, y_st + dy * 4);
-
             tb_random_text5.Size = new Size(w, h);
-            tb_random_text5.Location = new Point(x_st, y_st + dy * 5);
-
             tb_random_text6.Size = new Size(w, h);
-            tb_random_text6.Location = new Point(x_st, y_st + dy * 6);
-
             tb_random_text7.Size = new Size(w, h);
-            tb_random_text7.Location = new Point(x_st, y_st + dy * 7);
-
             tb_random_text8.Size = new Size(w, h);
+            tb_random_text9.Size = new Size(w, h);
+            tb_random_text10.Size = new Size(w, h);
+            tb_random_text11.Size = new Size(w, h);
+            tb_random_text12.Size = new Size(w, h);
+            tb_random_text13.Size = new Size(w, h);
+            tb_random_text14.Size = new Size(w, h);
+            tb_random_text15.Size = new Size(w, h);
+            tb_random_text16.Size = new Size(w, h);
+            tb_random_text17.Size = new Size(w, h);
+            tb_random_text18.Size = new Size(w, h);
+            tb_random_text19.Size = new Size(w, h);
+
+            tb_random_text0.Location = new Point(x_st, y_st + dy * 0);
+            tb_random_text1.Location = new Point(x_st, y_st + dy * 1);
+            tb_random_text2.Location = new Point(x_st, y_st + dy * 2);
+            tb_random_text3.Location = new Point(x_st, y_st + dy * 3);
+            tb_random_text4.Location = new Point(x_st, y_st + dy * 4);
+            tb_random_text5.Location = new Point(x_st, y_st + dy * 5);
+            tb_random_text6.Location = new Point(x_st, y_st + dy * 6);
+            tb_random_text7.Location = new Point(x_st, y_st + dy * 7);
             tb_random_text8.Location = new Point(x_st, y_st + dy * 8);
+            tb_random_text9.Location = new Point(x_st, y_st + dy * 9);
+            tb_random_text10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            tb_random_text11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            tb_random_text12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            tb_random_text13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            tb_random_text14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            tb_random_text15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            tb_random_text16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            tb_random_text17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            tb_random_text18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            tb_random_text19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -294,28 +307,6 @@ namespace vcs_test_all_01_Random
 
         private void bt_random3_Click(object sender, EventArgs e)
         {
-            //生成隨機字符串
-            string random_str = RandomStringGenerator.GetRandomString();
-            richTextBox1.Text += random_str + "\n";
-        }
-
-        /// <summary> 
-        /// 生成隨機字符串
-        /// </summary> 
-        private class RandomStringGenerator
-        {
-            static readonly Random r = new Random();
-            const string _chars = "0123456789";
-            public static string GetRandomString()
-            {
-                char[] buffer = new char[5];
-                for (int i = 0; i < 5; i++)
-                {
-                    buffer[i] = _chars[r.Next(_chars.Length)];
-                }
-                return new string(buffer);
-            }
-
         }
 
         private void bt_random4_Click(object sender, EventArgs e)
@@ -565,37 +556,6 @@ namespace vcs_test_all_01_Random
 
         private void bt_random11_Click(object sender, EventArgs e)
         {
-            // Make the random words.
-            // Get the number of words and letters per word.
-            int num_letters = 10;
-            int num_words = 6;
-            richTextBox1.Text += "產生任意字串，每字串 " + num_letters.ToString() + " 字, 共 " + num_words.ToString() + " 個字串\n";
-
-            // Make an array of the letters we will use.
-            char[] letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
-
-            // Make a random number generator.
-            Random rand = new Random();
-
-            // Make the words.
-            for (int i = 1; i <= num_words; i++)
-            {
-                // Make a word.
-                string word = "";
-                for (int j = 1; j <= num_letters; j++)
-                {
-                    // Pick a random number between 0 and 25
-                    // to select a letter from the letters array.
-                    int letter_num = rand.Next(0, letters.Length - 1);
-
-                    // Append the letter.
-                    word += letters[letter_num];
-                }
-
-                // Add the word to the list.
-                //lstWords.Items.Add(word);
-                richTextBox1.Text += word + "\n";
-            }
         }
 
         //亂數方法比較 ST
@@ -1114,6 +1074,9 @@ namespace vcs_test_all_01_Random
             tb_random_text6.Text = RandomText6(10);
             tb_random_text7.Text = RandomText7();
             tb_random_text8.Text = RandomText8();
+            tb_random_text9.Text = RandomText9();
+            tb_random_text10.Text = RandomText10();
+            tb_random_text11.Text = RandomText11();
 
             string result = string.Empty;
             /*
@@ -1760,12 +1723,88 @@ namespace vcs_test_all_01_Random
 
             return finalString;
         }
-
-
         //--- RandomText8 --- SP
+
+        //--- RandomText9 --- ST
+        private string RandomText9()
+        {
+            //隨機生成四位驗證碼（0~9，a~Z）
+            int LEN = 4;
+            Random r = new Random();
+            string code = "0123456789abcdefghjklmnopqistuvwxyzABCDEFGHIJKLMNOPQISTUVWXYZ";
+            string captcha = "";
+            for (int i = 0; i < LEN; i++)
+            {
+                int ra = r.Next(code.Length);
+                captcha = code.Substring(ra, 1) + captcha;
+            }
+            //richTextBox1.Text += captcha + "\n";
+            return captcha;
+        }
+        //--- RandomText9 --- SP
+
+        //--- RandomText10 --- ST
+        private string RandomText10()
+        {
+            // Make the random words.
+            // Get the number of words and letters per word.
+            int num_letters = 10;
+
+            // Make an array of the letters we will use.
+            char[] letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
+
+            // Make a random number generator.
+            Random rand = new Random();
+
+            // Make a word.
+            string word = "";
+            for (int j = 1; j <= num_letters; j++)
+            {
+                // Pick a random number between 0 and 25
+                // to select a letter from the letters array.
+                int letter_num = rand.Next(0, letters.Length - 1);
+
+                // Append the letter.
+                word += letters[letter_num];
+            }
+
+            return word;
+        }
+        //--- RandomText10 --- SP
+
+        //--- RandomText11 --- ST
+        private string RandomText11()
+        {
+            //生成隨機字符串
+            string random_str = RandomStringGenerator.GetRandomString();
+            return random_str;
+        }
+
+        /// <summary> 
+        /// 生成隨機字符串
+        /// </summary> 
+        private class RandomStringGenerator
+        {
+            static readonly Random r = new Random();
+            const string _chars = "0123456789";
+            public static string GetRandomString()
+            {
+                char[] buffer = new char[5];
+                for (int i = 0; i < 5; i++)
+                {
+                    buffer[i] = _chars[r.Next(_chars.Length)];
+                }
+                return new string(buffer);
+            }
+
+        }
+
+        //--- RandomText11 --- SP
+
 
         //RandomText SP
     }
+
 
     class Randomizer
     {

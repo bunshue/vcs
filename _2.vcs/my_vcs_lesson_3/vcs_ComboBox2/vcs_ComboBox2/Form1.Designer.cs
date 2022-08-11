@@ -34,32 +34,27 @@
             // 
             // lstTimeZones
             // 
-            this.lstTimeZones.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.lstTimeZones.FormattingEnabled = true;
             this.lstTimeZones.IntegralHeight = false;
-            this.lstTimeZones.Location = new System.Drawing.Point(12, 39);
+            this.lstTimeZones.ItemHeight = 12;
+            this.lstTimeZones.Location = new System.Drawing.Point(12, 36);
             this.lstTimeZones.Name = "lstTimeZones";
-            this.lstTimeZones.Size = new System.Drawing.Size(308, 118);
+            this.lstTimeZones.Size = new System.Drawing.Size(623, 522);
             this.lstTimeZones.TabIndex = 0;
             // 
             // cboTimeZones
             // 
-            this.cboTimeZones.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.cboTimeZones.FormattingEnabled = true;
-            this.cboTimeZones.Location = new System.Drawing.Point(12, 12);
+            this.cboTimeZones.Location = new System.Drawing.Point(12, 11);
             this.cboTimeZones.Name = "cboTimeZones";
-            this.cboTimeZones.Size = new System.Drawing.Size(309, 21);
+            this.cboTimeZones.Size = new System.Drawing.Size(624, 20);
             this.cboTimeZones.TabIndex = 1;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(333, 169);
+            this.ClientSize = new System.Drawing.Size(648, 569);
             this.Controls.Add(this.cboTimeZones);
             this.Controls.Add(this.lstTimeZones);
             this.Name = "Form1";

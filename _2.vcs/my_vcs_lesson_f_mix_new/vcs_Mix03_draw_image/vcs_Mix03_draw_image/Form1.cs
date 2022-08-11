@@ -520,6 +520,40 @@ namespace vcs_Mix03_draw_image
         private void button8_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //獲取圖片的指定部分
+
+            string filename = @"C:\______test_files\picture1.jpg";
+
+            Bitmap bitmap1 = GetPart(filename, 0, 0, 150, 200, 0, 0);
+
+            pictureBox1.Image = bitmap1;
+        }
+
+        //C#獲取圖片的指定部分
+
+        /// <summary>
+        /// http://www.cnblogs.com/KissKnife/archive/2007/10/13/923352.Html
+        /// 獲取圖片指定部分
+        /// </summary>
+        /// <param name="pPath">圖片路徑</param>
+        /// <param name="pPartStartPointX">目標圖片開始繪制處的坐標X值(通常為0)</param>
+        /// <param name="pPartStartPointY">目標圖片開始繪制處的坐標Y值(通常為0)</param>
+        /// <param name="pPartWidth">目標圖片的寬度</param>
+        /// <param name="pPartHeight">目標圖片的高度</param>
+        /// <param name="pOrigStartPointX">原始圖片開始截取處的坐標X值</param>
+        /// <param name="pOrigStartPointY">原始圖片開始截取處的坐標Y值</param>
+        static Bitmap GetPart(string pPath, int pPartStartPointX, int pPartStartPointY, int pPartWidth, int pPartHeight, int pOrigStartPointX, int pOrigStartPointY)
+        {
+            Image originalImg = Image.FromFile(pPath);
+
+            Bitmap partImg = new Bitmap(pPartWidth, pPartHeight);
+            Graphics graphics = Graphics.FromImage(partImg);
+            Rectangle destRect = new Rectangle(new Point(pPartStartPointX, pPartStartPointY), new Size(pPartWidth, pPartHeight));//目標位置
+            Rectangle origRect = new Rectangle(new Point(pOrigStartPointX, pOrigStartPointY), new Size(pPartWidth, pPartHeight));//原圖位置（默認從原圖中截取的圖片大小等於目標圖片的大小）
+
+            graphics.DrawImage(originalImg, destRect, origRect, GraphicsUnit.Pixel);
+
+            return partImg;
         }
 
         private void button9_Click(object sender, EventArgs e)

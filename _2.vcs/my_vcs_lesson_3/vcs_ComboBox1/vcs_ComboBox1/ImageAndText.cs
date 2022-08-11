@@ -8,7 +8,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Text;
 using System.Windows.Forms;
 
-namespace vcs_ComboBox3
+namespace vcs_ComboBox1
 {
     public class ImageAndText
     {
