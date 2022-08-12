@@ -2613,6 +2613,7 @@ namespace vcs_GMap
                 location = new string[,] {
             { "阿拉曼", "30.833333", "28.95"},
             { "羅塞塔", "31.4014", "30.4194"},
+            { "亞歷山卓", "31.1975", "29.8925"},
             };
                 show_locations(location);
                 gMapControl1.Zoom = 7; //當前比例
@@ -2738,6 +2739,87 @@ namespace vcs_GMap
 
             }
             else if (rb_location14.Checked == true)
+            {
+                //西藏
+                string[,] location = null;
+
+                location = new string[,] {
+{ "布達拉宮", "29.657778", "91.116944"},
+{ "扎什倫布寺", "29.268569", "88.8698"},
+{ "達蘭薩拉", "32.2153", "76.3186"},
+{ "昌都", "31.13749", "97.17767"},
+{ "汶川", "31.483789", "103.588403"},
+            };
+
+                show_locations(location);
+                gMapControl1.Zoom = 5; //當前比例
+
+            }
+            else if (rb_location15.Checked == true)
+            {
+                //印度
+                string[,] location = null;
+
+                location = new string[,] {
+{ "布達拉宮", "29.657778", "91.116944"},
+{ "扎什倫布寺", "29.268569", "88.8698"},
+{ "達蘭薩拉", "32.2153", "76.3186"},
+{ "昌都", "31.13749", "97.17767"},
+{ "汶川", "31.483789", "103.588403"},
+            };
+
+                show_locations(location);
+                gMapControl1.Zoom = 5; //當前比例
+
+            }
+            else if (rb_location16.Checked == true)
+            {
+                //金庸
+                string[,] location = null;
+
+                location = new string[,] {
+{ "風陵渡", "34.6314", "110.30895"},
+            };
+
+                show_locations(location);
+                gMapControl1.Zoom = 5; //當前比例
+
+            }
+            else if (rb_location17.Checked == true)
+            {
+                //西藏
+                string[,] location = null;
+
+                location = new string[,] {
+{ "布達拉宮", "29.657778", "91.116944"},
+{ "扎什倫布寺", "29.268569", "88.8698"},
+{ "達蘭薩拉", "32.2153", "76.3186"},
+{ "昌都", "31.13749", "97.17767"},
+{ "汶川", "31.483789", "103.588403"},
+            };
+
+                show_locations(location);
+                gMapControl1.Zoom = 5; //當前比例
+
+            }
+            else if (rb_location18.Checked == true)
+            {
+                //西藏
+                string[,] location = null;
+
+                location = new string[,] {
+{ "布達拉宮", "29.657778", "91.116944"},
+{ "扎什倫布寺", "29.268569", "88.8698"},
+{ "達蘭薩拉", "32.2153", "76.3186"},
+{ "昌都", "31.13749", "97.17767"},
+{ "汶川", "31.483789", "103.588403"},
+            };
+
+                show_locations(location);
+                gMapControl1.Zoom = 5; //當前比例
+
+            }
+            else if (rb_location19.Checked == true)
             {
                 //西藏
                 string[,] location = null;

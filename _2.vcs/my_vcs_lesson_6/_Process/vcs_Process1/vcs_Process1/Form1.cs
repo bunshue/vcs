@@ -18,7 +18,7 @@ namespace vcs_Process1
 {
     public partial class Form1 : Form
     {
-        Process myProcess;
+        Process myProcess = new Process();
         int cnt = 0;
 
         public Form1()
@@ -100,6 +100,16 @@ namespace vcs_Process1
 
         private void button0_Click(object sender, EventArgs e)
         {
+            //檢索系統中正在執行的任務
+            richTextBox1.Text = "檢索系統中正在執行的任務\n";
+            Process[] myProcesses = Process.GetProcesses();
+            foreach (Process myProcess in myProcesses)
+            {
+                if (myProcess.MainWindowTitle.Length > 0)
+                {
+                    richTextBox1.Text += "任務名：" + myProcess.MainWindowTitle + "\n";
+                }
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -201,15 +211,58 @@ namespace vcs_Process1
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //關閉計算機(偽)
+            System.Diagnostics.Process myProcess = new System.Diagnostics.Process();
+            myProcess.StartInfo.FileName = "cmd.exe";//启动cmd命令
+            myProcess.StartInfo.UseShellExecute = false;//是否使用系统外壳程序启动进程
+            myProcess.StartInfo.RedirectStandardInput = true;//是否从流中读取
+            myProcess.StartInfo.RedirectStandardOutput = true;//是否写入流
+            myProcess.StartInfo.RedirectStandardError = true;//是否将错误信息写入流
+            myProcess.StartInfo.CreateNoWindow = true;//是否在新窗口中启动进程
+            //myProcess.Start();//启动进程
+            //myProcess.StandardInput.WriteLine("shutdown -s -t 0");//执行关机命令
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //重啟計算機(偽)
+            //重啟計算機
+            System.Diagnostics.Process myProcess = new System.Diagnostics.Process();
+            myProcess.StartInfo.FileName = "cmd.exe";//启动cmd命令
+            myProcess.StartInfo.UseShellExecute = false;//是否使用系统外壳程序启动进程
+            myProcess.StartInfo.RedirectStandardInput = true;//是否从流中读取
+            myProcess.StartInfo.RedirectStandardOutput = true;//是否写入流
+            myProcess.StartInfo.RedirectStandardError = true;//是否将错误信息写入流
+            myProcess.StartInfo.CreateNoWindow = true;//是否在新窗口中启动进程
+            //myProcess.Start();//启动进程
+            //myProcess.StandardInput.WriteLine("shutdown -r -t 0");//执行重启计算机命令
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //隱式操作CMD命令行窗口
+            /*
+            MS的CMD命令行是一種重要的操作界面，
+            一些在C#中不那麼方便完成的功能，在CMD中幾個簡單的命令或許就可以輕松搞定，
+            如果能在C#中能完成CMD窗口的功能，那一定可以使我們的程序簡便不少。
 
+            下面介紹一種常用的在C#程序中調用CMD.exe程序，並且不顯示命令行窗口界面，來完成CMD中各種功能的簡單方法。
+            */
+
+
+            Process p = new Process();
+            p.StartInfo.FileName = "cmd.exe";//要執行的程序名稱
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.RedirectStandardInput = true;//可能接受來自調用程序的輸入信息
+            p.StartInfo.RedirectStandardOutput = true;//由調用程序獲取輸出信息
+            p.StartInfo.CreateNoWindow = true;//不顯示程序窗口
+            p.Start();//啟動程序
+            //向CMD窗口發送輸入信息：
+            p.StandardInput.WriteLine("shutdown -r t 10"); //10秒後重啟（C#中可不好做哦）
+            //獲取CMD窗口的輸出信息：
+            string sOutput = p.StandardOutput.ReadToEnd();
+
+            //有啦以下代碼，就可以神不知鬼不覺的操作CMD啦。總之，Process類是一個非常有用的類，它十分方便的利用第三方的程序擴展了C#的功能。
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -256,10 +309,33 @@ namespace vcs_Process1
 
         private void button10_Click(object sender, EventArgs e)
         {
+            //當前進程資料
+
+            uint uiPid = (uint)Process.GetCurrentProcess().Id;  // 當前進程 ID
+            richTextBox1.Text += "aaaaa0 :" + uiPid.ToString() + "\n";
+            richTextBox1.Text += "aaaaa3 :" + Process.GetCurrentProcess().MainWindowTitle + "\n";
+            richTextBox1.Text += "aaaaa6 :" + Process.GetCurrentProcess().SessionId + "\n";
+            richTextBox1.Text += "aaaaa9 :" + Process.GetCurrentProcess().StartTime.ToString() + "\n";
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
+            //Process類使用小例
+
+            string exe_filename = "notepad.exe";
+            Process myProcess = new Process();
+            try
+            {
+                myProcess.StartInfo.UseShellExecute = false;
+                myProcess.StartInfo.FileName = exe_filename;
+                myProcess.StartInfo.CreateNoWindow = true;
+                myProcess.Start();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
 
         }
 
@@ -622,6 +698,7 @@ namespace vcs_Process1
             catch (System.Exception ex)
             {
                 //ScriptManager.RegisterStartupScript(this.btnUpload, GetType(), "dis", "alert(進程殺死失敗);", true);
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
             }
         }
 

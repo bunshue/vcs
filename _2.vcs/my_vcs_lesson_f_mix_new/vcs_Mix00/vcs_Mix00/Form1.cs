@@ -107,13 +107,13 @@ namespace vcs_Mix00
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            pictureBox1.Size = new Size(640, 480);
+            pictureBox1.Size = new Size(820, 520);
             pictureBox1.Location = new Point(x_st + dx * 3, y_st + dy * 0);
 
             webBrowser1.Size = new Size(640, 240);
             webBrowser1.Location = new Point(x_st + dx * 3, y_st + dy * 6 + 70);
 
-            richTextBox1.Location = new Point(x_st + dx * 7 - 50, y_st + dy * 0);
+            richTextBox1.Location = new Point(x_st + dx * 7 + 120, y_st + dy * 0);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
@@ -370,11 +370,16 @@ namespace vcs_Mix00
 
             //兩圖檔疊合
 
-            string filename1 = @"C:\______test_files\picture1.jpg";
-            string filename2 = @"C:\______test_files\picture2.jpg";
+            string filename1 = @"C:\______test_files\__pic\_MU\id_card_03.jpg";
+            string filename2 = @"C:\______test_files\__pic\_MU\id_card_01.jpg";
 
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename1);	//Image.FromFile出來的是Image格式
             Bitmap bitmap2 = (Bitmap)Image.FromFile(filename2);	//Image.FromFile出來的是Image格式
+
+            pictureBox1.Image = bitmap1;
+
+            richTextBox1.Text += "W1 = " + bitmap1.Width.ToString() + ", H1 = " + bitmap1.Height.ToString() + "\n";
+            richTextBox1.Text += "W2 = " + bitmap2.Width.ToString() + ", H2 = " + bitmap2.Height.ToString() + "\n";
 
             Bitmap bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height, PixelFormat.Format24bppRgb);
             //Bitmap bmp = new Bitmap(pictureBox1.Width, pictureBox1.Height);
@@ -382,22 +387,78 @@ namespace vcs_Mix00
             g.Clear(Color.White);
 
             g.DrawImage(bitmap1, 0, 0, bitmap1.Width, bitmap1.Height);
-            g.DrawImage(bitmap2, 200, 0, bitmap2.Width, bitmap2.Height);
+            //g.DrawImage(bitmap2, 200, 0, bitmap2.Width, bitmap2.Height);
 
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+            int w = W;
+            int h = H;
 
+            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+            richTextBox1.Text += "w = " + w.ToString() + ", h = " + h.ToString() + "\n";
 
+            int i;
+            int j;
+            Color c1;
+            Color c2;
+            Color c;
+            float alpha = 0.5f;
+            for (alpha = 0; alpha <= 1; alpha += 0.03f)
+            {
+                richTextBox1.Text += "alpha = " + alpha.ToString() + "\n";
+                for (j = 0; j < h; j++)
+                {
+                    for (i = 0; i < w; i++)
+                    {
+                        c1 = bitmap1.GetPixel(i, j);
+                        c2 = bitmap2.GetPixel(i, j);
+                        c = Color.FromArgb(
+                            (int)(c1.A * alpha + c2.A * (1 - alpha)),
+                            (int)(c1.R * alpha + c2.R * (1 - alpha)),
+                            (int)(c1.G * alpha + c2.G * (1 - alpha)),
+                            (int)(c1.B * alpha + c2.B * (1 - alpha))
+                            );
+                        bmp.SetPixel(i, j, c);
+                    }
 
-
-
-
-            pictureBox1.Image = bmp;
-
+                }
+                pictureBox1.Image = bmp;
+                Application.DoEvents();
+                System.Threading.Thread.Sleep(100);
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //給圖片添加版權信息
+
+            //創建一張位圖
+            Bitmap bitmap = new Bitmap(this.pictureBox1.Width, this.pictureBox1.Height, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+
+            //根據位圖獲取畫布
+            Graphics g = Graphics.FromImage(bitmap);
+
+            //清空畫布並用透明色填充
+            g.Clear(Color.Transparent);
+
+
+            string filename = @"C:\______test_files\picture1.jpg";
+            bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+
+            //將另一幅圖片畫到畫布上
+            g.DrawImage(bitmap1, 0, 0, bitmap1.Width, bitmap1.Height);
+
+            //寫版權信息到圖片上。
+            g.DrawString("群曜醫電", new Font("黑體", 15), new SolidBrush(Color.Red), new Rectangle(20, 20, 100, 100));
+
+            //顯示
+            this.pictureBox1.Image = bitmap;
+
+            //保存圖片
+            bitmap.Save("abc.bmp",System.Drawing.Imaging.ImageFormat.Bmp);
         }
+
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -463,6 +524,20 @@ namespace vcs_Mix00
         private void button6_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //擷取部分圖片貼上
+
+            
+            Rectangle rect = Screen.GetBounds(Point.Empty);
+            using (Bitmap bitmap = new Bitmap(rect.Width, rect.Height))
+            {
+                using (Graphics g = Graphics.FromImage(bitmap))
+                {
+                    g.CopyFromScreen(Point.Empty, Point.Empty, rect.Size);
+                }
+                bitmap.Save("test.jpg", ImageFormat.Jpeg);
+
+            }
+
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -640,7 +715,34 @@ namespace vcs_Mix00
 
         private void button13_Click(object sender, EventArgs e)
         {
+            //實現全屏截圖
+        }
 
+        public static void Snap(int x, int y, int width, int height)
+        {
+            try
+            {
+                //這段代碼也可以實現截圖
+                //Image image = new Bitmap(width, height);
+                //Graphics g = Graphics.FromImage(image);
+                //g.CopyFromScreen(x, y, 0, 0, new System.Drawing.Size(width, height));
+                //string hour = DateTime.Now.Minute.ToString();
+                //string second = DateTime.Now.Second.ToString();
+                //image.Save(ScreenshotPath + "\\" + hour + "_" + second + ".jpg");
+
+                Bitmap image = new Bitmap(640, 480);
+                using (Graphics g = Graphics.FromImage(image))
+                {
+                    g.CopyFromScreen(0, 0, 0, 0, image.Size);
+                    g.Dispose();
+                    string hour = DateTime.Now.Minute.ToString();
+                    string second = DateTime.Now.Second.ToString();
+                    image.Save("aaa.jpg");
+                }
+            }
+            catch
+            {
+            }
         }
 
         private void button14_Click(object sender, EventArgs e)

@@ -142,6 +142,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(240, 50);
             this.button2.TabIndex = 2;
+            this.button2.Text = "檢視目前系統版本";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -183,7 +184,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(240, 50);
             this.button6.TabIndex = 6;
-            this.button6.Text = ".Net C# 取得電腦名稱";
+            this.button6.Text = "取得電腦名稱";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -322,7 +323,6 @@
             this.button20.Name = "button20";
             this.button20.Size = new System.Drawing.Size(240, 50);
             this.button20.TabIndex = 21;
-            this.button20.Text = "檢索系統中正在執行的任務";
             this.button20.UseVisualStyleBackColor = true;
             this.button20.Click += new System.EventHandler(this.button20_Click);
             // 

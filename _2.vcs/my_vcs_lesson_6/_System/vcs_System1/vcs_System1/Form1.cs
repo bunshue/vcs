@@ -257,6 +257,30 @@ namespace vcs_System1
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //檢視目前系統版本
+
+            OperatingSystem myOS = Environment.OSVersion;
+            if (myOS.Version.Major == 5)
+            {
+                switch (myOS.Version.Minor)
+                {
+                    case 0:
+                        MessageBox.Show("系統版本：" + "Windows 2000 " + myOS.ServicePack);
+                        break;
+                    case 1:
+                        MessageBox.Show("系統版本：" + "Windows XP " + myOS.ServicePack);
+                        break;
+                    case 2:
+                        MessageBox.Show("系統版本：" + "Windows Server 2003 " + " " + myOS.ServicePack);
+                        break;
+                    default:
+                        MessageBox.Show("系統版本：" + myOS.ToString() + " " + myOS.ServicePack);
+                        break;
+                }
+            }
+            else
+                MessageBox.Show("系統版本：" + myOS.VersionString + " " + myOS.ServicePack);
+
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -435,15 +459,6 @@ namespace vcs_System1
 
         private void button20_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text = "檢索系統中正在執行的任務\n";
-            Process[] myProcesses = Process.GetProcesses();
-            foreach (Process myProcess in myProcesses)
-            {
-                if (myProcess.MainWindowTitle.Length > 0)
-                {
-                    richTextBox1.Text += "任務名：" + myProcess.MainWindowTitle + "\n";
-                }
-            }
         }
 
         private void button21_Click(object sender, EventArgs e)

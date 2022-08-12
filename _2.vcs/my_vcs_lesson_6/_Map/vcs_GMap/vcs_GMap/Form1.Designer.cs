@@ -767,8 +767,9 @@
             this.rb_location16.AutoSize = true;
             this.rb_location16.Location = new System.Drawing.Point(191, 51);
             this.rb_location16.Name = "rb_location16";
-            this.rb_location16.Size = new System.Drawing.Size(14, 13);
+            this.rb_location16.Size = new System.Drawing.Size(47, 16);
             this.rb_location16.TabIndex = 15;
+            this.rb_location16.Text = "金庸";
             this.rb_location16.UseVisualStyleBackColor = true;
             // 
             // rb_location15
@@ -776,8 +777,9 @@
             this.rb_location15.AutoSize = true;
             this.rb_location15.Location = new System.Drawing.Point(191, 34);
             this.rb_location15.Name = "rb_location15";
-            this.rb_location15.Size = new System.Drawing.Size(14, 13);
+            this.rb_location15.Size = new System.Drawing.Size(47, 16);
             this.rb_location15.TabIndex = 14;
+            this.rb_location15.Text = "印度";
             this.rb_location15.UseVisualStyleBackColor = true;
             // 
             // rb_location14
@@ -839,9 +841,9 @@
             this.rb_location9.AutoSize = true;
             this.rb_location9.Location = new System.Drawing.Point(104, 53);
             this.rb_location9.Name = "rb_location9";
-            this.rb_location9.Size = new System.Drawing.Size(59, 16);
+            this.rb_location9.Size = new System.Drawing.Size(71, 16);
             this.rb_location9.TabIndex = 8;
-            this.rb_location9.Text = "盧溝橋";
+            this.rb_location9.Text = "中日戰爭";
             this.rb_location9.UseVisualStyleBackColor = true;
             this.rb_location9.CheckedChanged += new System.EventHandler(this.radioButton_location_CheckedChanged);
             // 
