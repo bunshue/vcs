@@ -31,7 +31,9 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox_selection = new System.Windows.Forms.GroupBox();
+            this.rb_filetype2 = new System.Windows.Forms.RadioButton();
             this.bt_open_folder = new System.Windows.Forms.Button();
+            this.rb_filetype1 = new System.Windows.Forms.RadioButton();
             this.button6 = new System.Windows.Forms.Button();
             this.nud_h = new System.Windows.Forms.NumericUpDown();
             this.lb_x_st = new System.Windows.Forms.Label();
@@ -44,8 +46,7 @@
             this.lb_w = new System.Windows.Forms.Label();
             this.bt_clear = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.rb_filetype2 = new System.Windows.Forms.RadioButton();
-            this.rb_filetype1 = new System.Windows.Forms.RadioButton();
+            this.button0 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox_selection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_h)).BeginInit();
@@ -94,6 +95,17 @@
             this.groupBox_selection.TabStop = false;
             this.groupBox_selection.Text = "選取區域";
             // 
+            // rb_filetype2
+            // 
+            this.rb_filetype2.AutoSize = true;
+            this.rb_filetype2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_filetype2.Location = new System.Drawing.Point(183, 159);
+            this.rb_filetype2.Name = "rb_filetype2";
+            this.rb_filetype2.Size = new System.Drawing.Size(54, 20);
+            this.rb_filetype2.TabIndex = 21;
+            this.rb_filetype2.Text = "bmp";
+            this.rb_filetype2.UseVisualStyleBackColor = true;
+            // 
             // bt_open_folder
             // 
             this.bt_open_folder.Location = new System.Drawing.Point(240, 137);
@@ -102,6 +114,19 @@
             this.bt_open_folder.TabIndex = 20;
             this.bt_open_folder.UseVisualStyleBackColor = true;
             this.bt_open_folder.Click += new System.EventHandler(this.bt_open_folder_Click);
+            // 
+            // rb_filetype1
+            // 
+            this.rb_filetype1.AutoSize = true;
+            this.rb_filetype1.Checked = true;
+            this.rb_filetype1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_filetype1.Location = new System.Drawing.Point(183, 137);
+            this.rb_filetype1.Name = "rb_filetype1";
+            this.rb_filetype1.Size = new System.Drawing.Size(46, 20);
+            this.rb_filetype1.TabIndex = 20;
+            this.rb_filetype1.TabStop = true;
+            this.rb_filetype1.Text = "jpg";
+            this.rb_filetype1.UseVisualStyleBackColor = true;
             // 
             // button6
             // 
@@ -240,35 +265,23 @@
             this.pictureBox2.TabIndex = 19;
             this.pictureBox2.TabStop = false;
             // 
-            // rb_filetype2
+            // button0
             // 
-            this.rb_filetype2.AutoSize = true;
-            this.rb_filetype2.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_filetype2.Location = new System.Drawing.Point(183, 159);
-            this.rb_filetype2.Name = "rb_filetype2";
-            this.rb_filetype2.Size = new System.Drawing.Size(54, 20);
-            this.rb_filetype2.TabIndex = 21;
-            this.rb_filetype2.Text = "bmp";
-            this.rb_filetype2.UseVisualStyleBackColor = true;
-            // 
-            // rb_filetype1
-            // 
-            this.rb_filetype1.AutoSize = true;
-            this.rb_filetype1.Checked = true;
-            this.rb_filetype1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_filetype1.Location = new System.Drawing.Point(183, 137);
-            this.rb_filetype1.Name = "rb_filetype1";
-            this.rb_filetype1.Size = new System.Drawing.Size(46, 20);
-            this.rb_filetype1.TabIndex = 20;
-            this.rb_filetype1.TabStop = true;
-            this.rb_filetype1.Text = "jpg";
-            this.rb_filetype1.UseVisualStyleBackColor = true;
+            this.button0.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button0.Location = new System.Drawing.Point(833, 12);
+            this.button0.Name = "button0";
+            this.button0.Size = new System.Drawing.Size(90, 40);
+            this.button0.TabIndex = 20;
+            this.button0.Text = "test";
+            this.button0.UseVisualStyleBackColor = true;
+            this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1265, 744);
+            this.Controls.Add(this.button0);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.groupBox_selection);
@@ -309,6 +322,7 @@
         private System.Windows.Forms.Button bt_open_folder;
         private System.Windows.Forms.RadioButton rb_filetype2;
         private System.Windows.Forms.RadioButton rb_filetype1;
+        private System.Windows.Forms.Button button0;
     }
 }
 

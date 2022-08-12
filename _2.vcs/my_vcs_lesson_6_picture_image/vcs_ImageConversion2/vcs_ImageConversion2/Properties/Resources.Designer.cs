@@ -63,6 +63,26 @@ namespace vcs_ImageConversion2.Properties {
         /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
+        internal static System.Drawing.Bitmap open {
+            get {
+                object obj = ResourceManager.GetObject("open", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap save {
+            get {
+                object obj = ResourceManager.GetObject("save", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
         internal static System.Drawing.Bitmap 保存1 {
             get {
                 object obj = ResourceManager.GetObject("保存1", resourceCulture);
@@ -96,26 +116,6 @@ namespace vcs_ImageConversion2.Properties {
         internal static System.Drawing.Bitmap 图标__28_ {
             get {
                 object obj = ResourceManager.GetObject("图标__28_", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
-        /// </summary>
-        internal static System.Drawing.Bitmap 图标__29_ {
-            get {
-                object obj = ResourceManager.GetObject("图标 (29)", resourceCulture);
-                return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
-        /// </summary>
-        internal static System.Drawing.Bitmap 打开 {
-            get {
-                object obj = ResourceManager.GetObject("打开", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

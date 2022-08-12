@@ -236,6 +236,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(180, 55);
             this.button15.TabIndex = 64;
+            this.button15.Text = "建立調色盤";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 

@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{9BC391A3-78D2-41D8-9E16-9CFC154BB367}</ProjectGuid>
+    <ProjectGuid>{A393DBE5-FD48-4C9A-8B00-5C22C9983FFD}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_PictureBox2</RootNamespace>
-    <AssemblyName>vcs_PictureBox2</AssemblyName>
+    <RootNamespace>vcs_PictureMixer</RootNamespace>
+    <AssemblyName>vcs_PictureMixer</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

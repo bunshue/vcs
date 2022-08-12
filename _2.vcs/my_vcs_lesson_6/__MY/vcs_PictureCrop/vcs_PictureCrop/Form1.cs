@@ -23,7 +23,7 @@ namespace vcs_PictureCrop
         int flag_operation_mode = 1;    //0 : 空白模式, 1 : 圖片模式
 
         string filename = @"C:\______test_files\picture1.jpg";
-        
+
         private int intStartX = 0;
         private int intStartY = 0;
 
@@ -34,7 +34,7 @@ namespace vcs_PictureCrop
         private Bitmap bitmap1 = null;  //原圖位圖Bitmap
         //private Bitmap bitmap2 = null;  //擷取部分位圖Bitmap
         private Rectangle SelectionRectangle = new Rectangle(new Point(0, 0), new Size(0, 0));    //用來保存截圖的矩形
-        private int X0, Y0, X1, Y1;
+        //private int X0, Y0, X1, Y1;
 
         private int W = 0;  //原圖的寬
         private int H = 0;  //原圖的高
@@ -129,7 +129,9 @@ namespace vcs_PictureCrop
             //pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
             pictureBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
 
-            groupBox_selection.Location = new Point(x_st + dx * 1, y_st + dy * 0+400);
+            button0.Location = new Point(x_st + dx * 1 - 100, y_st + dy * 0);
+
+            groupBox_selection.Location = new Point(x_st + dx * 1, y_st + dy * 0 + 400);
             groupBox_selection.BringToFront();
 
             bt_open_folder.BackgroundImage = Properties.Resources.folder_open;
@@ -137,7 +139,7 @@ namespace vcs_PictureCrop
 
 
             richTextBox1.Size = new Size(300, 450);
-            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0 + groupBox_selection.Height+400);
+            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0 + groupBox_selection.Height + 400);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -146,6 +148,9 @@ namespace vcs_PictureCrop
             this.WindowState = FormWindowState.Maximized;
             bt_open_file_setup();
             bt_exit_setup();
+
+
+            pictureBox1.Size = new Size(500, 500);
         }
 
         private void bt_open_file_Click(object sender, EventArgs e)
@@ -577,6 +582,77 @@ namespace vcs_PictureCrop
             //開啟檔案總管
             Process.Start(foldername);
         }
+
+        //不同的SizeMode, 滑鼠座標對應的點會不一樣(AutoSize和Nomal一樣)
+        private void ConvertCoordinates(PictureBox pbx, out int X, out int Y, int x, int y)
+        {
+            int W = pbx.ClientSize.Width;
+            int H = pbx.ClientSize.Height;
+            int w = pbx.Image.Width;
+            int h = pbx.Image.Height;
+
+            X = x;
+            Y = y;
+            switch (pbx.SizeMode)
+            {
+                case PictureBoxSizeMode.AutoSize:
+                case PictureBoxSizeMode.Normal:
+                    // These are okay. Leave them alone.
+                    break;
+                case PictureBoxSizeMode.CenterImage:
+                    X = x - (W - w) / 2;
+                    Y = y - (H - h) / 2;
+                    break;
+                case PictureBoxSizeMode.StretchImage:
+                    X = (int)(w * x / (float)W);
+                    Y = (int)(h * y / (float)H);
+                    break;
+                case PictureBoxSizeMode.Zoom:
+                    float pic_aspect = W / (float)H;
+                    float img_aspect = w / (float)h;
+                    if (pic_aspect > img_aspect)
+                    {
+                        // The PictureBox is wider/shorter than the image.
+                        Y = (int)(h * y / (float)H);
+
+                        // The image fills the height of the PictureBox.
+                        // Get its width.
+                        float scaled_width = w * H / h;
+                        float dx = (W - scaled_width) / 2;
+                        X = (int)((x - dx) * h / (float)H);
+                    }
+                    else
+                    {
+                        // The PictureBox is taller/thinner than the image.
+                        X = (int)(w * x / (float)W);
+
+                        // The image fills the height of the PictureBox.
+                        // Get its height.
+                        float scaled_height = h * W / w;
+                        float dy = (H - scaled_height) / 2;
+                        Y = (int)((y - dy) * w / W);
+                    }
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            //測試圖框位置與圖片位置轉換
+
+
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+
+            int X, Y;
+            int x_st = 200;
+            int y_st = 200;
+            ConvertCoordinates(pictureBox1, out X, out Y, x_st, y_st);
+
+            richTextBox1.Text += "SizeMode : " + pictureBox1.SizeMode.ToString() + "\n";
+            richTextBox1.Text += "圖框位置 : (" + x_st.ToString() + ", " + y_st.ToString() + ")\n";
+            richTextBox1.Text += "圖片位置 : (" + X.ToString() + ", " + Y.ToString() + ")\n";
+        }
     }
 }
-

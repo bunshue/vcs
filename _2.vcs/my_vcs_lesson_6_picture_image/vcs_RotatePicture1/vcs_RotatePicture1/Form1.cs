@@ -49,8 +49,8 @@ namespace vcs_RotatePicture1
         private Bitmap RotateBitmap(Bitmap bm, float angle)
         {
             // Make a Matrix to represent rotation by this angle.
-            Matrix rotate_at_origin = new Matrix();
-            rotate_at_origin.Rotate(angle);
+            Matrix matrix1 = new Matrix();
+            matrix1.Rotate(angle);
 
             // Rotate the image's corners to see how big
             // it will be after rotation.
@@ -61,18 +61,18 @@ namespace vcs_RotatePicture1
                 new PointF(bm.Width, bm.Height),
                 new PointF(0, bm.Height),
             };
-            rotate_at_origin.TransformPoints(points);
+            matrix1.TransformPoints(points);
             float xmin, xmax, ymin, ymax;
             GetPointBounds(points, out xmin, out xmax, out ymin, out ymax);
 
             // Make a bitmap to hold the rotated result.
-            int wid = (int)Math.Round(xmax - xmin);
-            int hgt = (int)Math.Round(ymax - ymin);
-            Bitmap result = new Bitmap(wid, hgt);
+            int W = (int)Math.Round(xmax - xmin);
+            int H = (int)Math.Round(ymax - ymin);
+            Bitmap result = new Bitmap(W, H);
 
             // Create the real rotation transformation.
-            Matrix rotate_at_center = new Matrix();
-            rotate_at_center.RotateAt(angle, new PointF(wid / 2f, hgt / 2f));
+            Matrix matrix2 = new Matrix();
+            matrix2.RotateAt(angle, new PointF(W / 2f, H / 2f));
 
             // Draw the image onto the new bitmap rotated.
             using (Graphics gr = Graphics.FromImage(result))
@@ -87,11 +87,11 @@ namespace vcs_RotatePicture1
                 //gr.Clear(Color.LightBlue);
 
                 // Set up the transformation to rotate.
-                gr.Transform = rotate_at_center;
+                gr.Transform = matrix2;
 
                 // Draw the image centered on the bitmap.
-                int x = (wid - bm.Width) / 2;
-                int y = (hgt - bm.Height) / 2;
+                int x = (W - bm.Width) / 2;
+                int y = (H - bm.Height) / 2;
                 gr.DrawImage(bm, x, y);
             }
 
@@ -118,9 +118,9 @@ namespace vcs_RotatePicture1
         // Make sure the form is big enough to show the rotated image.
         private void SizeForm()
         {
-            int wid = pictureBox1.Right + pictureBox1.Left;
-            int hgt = pictureBox1.Bottom + pictureBox1.Left;
-            this.ClientSize = new Size(Math.Max(wid, this.ClientSize.Width), Math.Max(hgt, this.ClientSize.Height));
+            int W = pictureBox1.Right + pictureBox1.Left;
+            int H = pictureBox1.Bottom + pictureBox1.Left;
+            this.ClientSize = new Size(Math.Max(W, this.ClientSize.Width), Math.Max(H, this.ClientSize.Height));
         }
 
         float angle = 0;
@@ -128,7 +128,7 @@ namespace vcs_RotatePicture1
         {
             angle += 15;
 
-            numericUpDown1.Value = (decimal)(angle % 360);
+            this.Text = (angle % 360).ToString() + " 度";
 
             // Rotate.
             bitmap2 = RotateBitmap(bitmap1, angle);

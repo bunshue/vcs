@@ -879,6 +879,44 @@ https://www.zhangshengrong.com/p/yOXD5ejR1B/
 
 \\圖片格式轉換
 
+
+
+vcs helper的  根據副檔名 決定檔案儲存格式
+
+        public void SaveBitmapUsingExtension(Bitmap bm, string filename)
+        {
+            string extension = Path.GetExtension(filename);
+            switch (extension.ToLower())
+            {
+                case ".bmp":
+                    bm.Save(filename, ImageFormat.Bmp);
+                    break;
+                case ".exif":
+                    bm.Save(filename, ImageFormat.Exif);
+                    break;
+                case ".gif":
+                    bm.Save(filename, ImageFormat.Gif);
+                    break;
+                case ".jpg":
+                case ".jpeg":
+                    bm.Save(filename, ImageFormat.Jpeg);
+                    break;
+                case ".png":
+                    bm.Save(filename, ImageFormat.Png);
+                    break;
+                case ".tif":
+                case ".tiff":
+                    bm.Save(filename, ImageFormat.Tiff);
+                    break;
+                default:
+                    throw new NotSupportedException(
+                        "Unknown file extension " + extension);
+            }
+        }
+
+
+
+
         public void ImageFormatter(string sourcePath, string filename, string format) {
             System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(sourcePath);
             switch (format.ToLower()) {
@@ -911,6 +949,45 @@ https://www.zhangshengrong.com/p/yOXD5ejR1B/
         }
 
     
+
+
+ 
+\\圖片格式轉換
+
+        public void ImageFormatter(string sourcePath, string distationPath, string format) {
+            System.Drawing.Bitmap bitmap = new System.Drawing.Bitmap(sourcePath);
+            switch (format.ToLower()) {
+                case "bmp":
+                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Bmp);
+                    break;
+                case "emf":
+                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Emf);
+                    break;
+                case "gif":
+                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Gif);
+                    break;
+                case "ico":
+                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Icon);
+                    break;
+                case "jpg":
+                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Jpeg);
+                    break;
+                case "png":
+                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Png);
+                    break;
+                case "tif":
+                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Tiff);
+                    break;
+                case "wmf":
+                    bitmap.Save(distationPath, System.Drawing.Imaging.ImageFormat.Wmf);
+                    break;
+                default: throw new Exception("無法轉換此格式！");
+            }
+        }
+
+
+
+
 
 
             Bitmap bitmap1 = new Bitmap(w, h);

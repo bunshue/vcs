@@ -45,36 +45,36 @@ namespace vcs_RotatePicture2
             bitmap2 = null;
 
             // Find the size of the image's rotated bounding box.
-            Matrix rotation = new Matrix();
-            rotation.Rotate(angle);
-            int old_wid = bitmap1.Width;
-            int old_hgt = bitmap1.Height;
+            Matrix matrix1 = new Matrix();
+            matrix1.Rotate(angle);
+            int W1 = bitmap1.Width;
+            int H1 = bitmap1.Height;
             PointF[] points =
             {
                 new PointF(0, 0),
-                new PointF(old_wid, 0),
-                new PointF(0, old_hgt),
-                new PointF(old_wid, old_hgt),
+                new PointF(W1, 0),
+                new PointF(0, H1),
+                new PointF(W1, H1),
             };
-            rotation.TransformPoints(points);
+            matrix1.TransformPoints(points);
             float[] xs = { points[0].X, points[1].X, points[2].X, points[3].X };
             float[] ys = { points[0].Y, points[1].Y, points[2].Y, points[3].Y };
-            int new_wid = (int)(xs.Max() - xs.Min());
-            int new_hgt = (int)(ys.Max() - ys.Min());
+            int W2 = (int)(xs.Max() - xs.Min());
+            int H2 = (int)(ys.Max() - ys.Min());
 
             // Make the rotated image.
-            bitmap2 = new Bitmap(new_wid, new_hgt);
+            bitmap2 = new Bitmap(W2, H2);
             using (Graphics g = Graphics.FromImage(bitmap2))
             {
-                g.TranslateTransform(-old_wid / 2, -old_hgt / 2, MatrixOrder.Append);
+                g.TranslateTransform(-W1 / 2, -H1 / 2, MatrixOrder.Append);
                 g.RotateTransform(angle, MatrixOrder.Append);
-                g.TranslateTransform(new_wid / 2, new_hgt / 2, MatrixOrder.Append);
-                RectangleF source_rect = new RectangleF(0, 0, bitmap1.Width, bitmap1.Height);
+                g.TranslateTransform(W2 / 2, H2 / 2, MatrixOrder.Append);
+                RectangleF source_rect = new RectangleF(0, 0, W1, H1);
                 PointF[] dest_points =
                 {
                     new PointF(0, 0),
-                    new PointF(bitmap1.Width, 0),
-                    new PointF(0, bitmap1.Height),
+                    new PointF(W1, 0),
+                    new PointF(0, H1),
                 };
                 g.DrawImage(bitmap1, dest_points, source_rect, GraphicsUnit.Pixel);
 
@@ -82,8 +82,8 @@ namespace vcs_RotatePicture2
                 //using (Pen pen = new Pen(Color.Red, 10))
                 //{
                 //    gr.DrawRectangle(pen, 0, 0,
-                //        bitmap1.Width - 1,
-                //        bitmap1.Height - 1);
+                //        W1 - 1,
+                //        H1 - 1);
                 //}
             }
 

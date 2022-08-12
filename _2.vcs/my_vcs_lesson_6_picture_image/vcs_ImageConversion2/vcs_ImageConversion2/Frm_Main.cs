@@ -64,11 +64,6 @@ namespace vcs_ImageConversion2
             }
         }
 
-        private void toolStripButton2_Click(object sender, EventArgs e) //關閉按鈕
-        {
-            Application.Exit();                                         //退出系統
-        }
-
         private void toolStripButton5_Click(object sender, EventArgs e) //清空列表的按鈕
         {
             listView1.Items.Clear();                                        //清空列表
@@ -228,3 +223,5 @@ namespace vcs_ImageConversion2
         }
     }
 }
+
+

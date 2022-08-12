@@ -171,7 +171,7 @@ namespace vcs_RotatePicture4
 
             // Add to the previous total angle rotated.
             CurrentAngle += TotalAngle;
-            txtAngle.Text = CurrentAngle.ToString("0.00") + "°";
+            this.Text = CurrentAngle.ToString("0.00") + "°";
 
             // Rotate the original image to make the result bitmap.
             bitmap2 = RotateBitmap(bitmap1, CurrentAngle);

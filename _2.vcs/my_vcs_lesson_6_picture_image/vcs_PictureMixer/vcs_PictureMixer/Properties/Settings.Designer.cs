@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_PictureBox2.Properties
+namespace vcs_PictureMixer.Properties
 {
 
 

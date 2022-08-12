@@ -43,7 +43,6 @@
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.toolStripButton5 = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tsslFileNum = new System.Windows.Forms.ToolStripStatusLabel();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -79,8 +78,7 @@
             this.toolStripButton1,
             this.toolStripSeparator4,
             this.toolStripButton5,
-            this.toolStripSeparator5,
-            this.toolStripButton2});
+            this.toolStripSeparator5});
             this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
@@ -97,12 +95,12 @@
             // toolStripButton3
             // 
             this.toolStripButton3.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton3.Image = global::vcs_ImageConversion2.Properties.Resources.打开;
+            this.toolStripButton3.Image = global::vcs_ImageConversion2.Properties.Resources.open;
             this.toolStripButton3.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton3.Name = "toolStripButton3";
             this.toolStripButton3.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton3.Text = "toolStripButton3";
-            this.toolStripButton3.ToolTipText = "选择需要转换的图片";
+            this.toolStripButton3.ToolTipText = "選擇需要轉換的圖片";
             this.toolStripButton3.Click += new System.EventHandler(this.toolStripButton3_Click);
             // 
             // toolStripSeparator1
@@ -113,13 +111,13 @@
             // toolStripButton4
             // 
             this.toolStripButton4.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
-            this.toolStripButton4.Image = global::vcs_ImageConversion2.Properties.Resources.图标__29_;
+            this.toolStripButton4.Image = global::vcs_ImageConversion2.Properties.Resources.save;
             this.toolStripButton4.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton4.Name = "toolStripButton4";
             this.toolStripButton4.Size = new System.Drawing.Size(23, 22);
             this.toolStripButton4.Text = "toolStripButton4";
             this.toolStripButton4.TextImageRelation = System.Windows.Forms.TextImageRelation.Overlay;
-            this.toolStripButton4.ToolTipText = "选择保存位置";
+            this.toolStripButton4.ToolTipText = "選擇保存位置";
             this.toolStripButton4.Click += new System.EventHandler(this.toolStripButton4_Click);
             // 
             // toolStripSeparator2
@@ -131,17 +129,17 @@
             // 
             this.toolStripLabel3.Name = "toolStripLabel3";
             this.toolStripLabel3.Size = new System.Drawing.Size(67, 22);
-            this.toolStripLabel3.Text = "转换格式：";
+            this.toolStripLabel3.Text = "轉換格式：";
             // 
             // tscbType
             // 
             this.tscbType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.tscbType.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.tscbType.Items.AddRange(new object[] {
-            "转换为BMP格式",
-            "转换为JPG格式",
-            "转换为PNG格式",
-            "转换为GIF格式"});
+            "轉換為BMP格式",
+            "轉換為JPG格式",
+            "轉換為PNG格式",
+            "轉換為GIF格式"});
             this.tscbType.Name = "tscbType";
             this.tscbType.Size = new System.Drawing.Size(121, 25);
             // 
@@ -157,7 +155,7 @@
             this.toolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.toolStripButton1.Name = "toolStripButton1";
             this.toolStripButton1.Size = new System.Drawing.Size(59, 22);
-            this.toolStripButton1.Text = "开始转换";
+            this.toolStripButton1.Text = "開始轉換";
             this.toolStripButton1.Click += new System.EventHandler(this.toolStripButton1_Click);
             // 
             // toolStripSeparator4
@@ -179,17 +177,6 @@
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
             this.toolStripSeparator5.Size = new System.Drawing.Size(6, 25);
-            // 
-            // toolStripButton2
-            // 
-            this.toolStripButton2.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
-            this.toolStripButton2.Font = new System.Drawing.Font("宋体", 9F);
-            this.toolStripButton2.Image = ((System.Drawing.Image)(resources.GetObject("toolStripButton2.Image")));
-            this.toolStripButton2.ImageTransparentColor = System.Drawing.Color.Magenta;
-            this.toolStripButton2.Name = "toolStripButton2";
-            this.toolStripButton2.Size = new System.Drawing.Size(33, 22);
-            this.toolStripButton2.Text = "关闭";
-            this.toolStripButton2.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
             // statusStrip1
             // 
@@ -229,7 +216,7 @@
             this.columnHeader4,
             this.columnHeader5,
             this.columnHeader7});
-            this.listView1.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.listView1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.listView1.FullRowSelect = true;
             this.listView1.GridLines = true;
             this.listView1.Location = new System.Drawing.Point(0, 25);
@@ -252,7 +239,7 @@
             // 
             // columnHeader2
             // 
-            this.columnHeader2.Text = "扩展名";
+            this.columnHeader2.Text = "擴展名";
             // 
             // columnHeader3
             // 
@@ -261,7 +248,7 @@
             // 
             // columnHeader4
             // 
-            this.columnHeader4.Text = "路径";
+            this.columnHeader4.Text = "路徑";
             this.columnHeader4.Width = 120;
             // 
             // columnHeader5
@@ -271,7 +258,7 @@
             // 
             // columnHeader7
             // 
-            this.columnHeader7.Text = "状态";
+            this.columnHeader7.Text = "狀態";
             // 
             // imageList1
             // 
@@ -281,7 +268,7 @@
             // 
             // openFileDialog1
             // 
-            this.openFileDialog1.Filter = "所有图片|*.jpg;*.jpeg;*.gif;*.bmp;*.ico;*.png";
+            this.openFileDialog1.Filter = "所有圖片|*.jpg;*.jpeg;*.gif;*.bmp;*.ico;*.png";
             this.openFileDialog1.Multiselect = true;
             // 
             // richTextBox1
@@ -306,7 +293,7 @@
             this.MaximizeBox = false;
             this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "批量图像格式转换";
+            this.Text = "批量圖像格式轉換";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form2_FormClosed);
             this.Load += new System.EventHandler(this.Form2_Load);
             this.toolStrip1.ResumeLayout(false);
@@ -330,7 +317,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripButton toolStripButton1;
-        private System.Windows.Forms.ToolStripButton toolStripButton2;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
@@ -352,3 +338,4 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
+
