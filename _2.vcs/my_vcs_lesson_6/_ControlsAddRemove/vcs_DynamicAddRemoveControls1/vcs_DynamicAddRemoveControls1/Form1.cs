@@ -30,10 +30,10 @@ namespace vcs_DynamicAddRemoveControls1
         private void Form1_Load(object sender, EventArgs e)
         {
             //動態產生button並且綁定click事件
-            DynamicGenerateButton();
+            DynamicGenerateButton1();
         }
 
-        private void DynamicGenerateButton()
+        private void DynamicGenerateButton1()
         {
             int btn_size;
 
@@ -331,7 +331,7 @@ namespace vcs_DynamicAddRemoveControls1
             removeAllItems();
 
             //動態產生button並且綁定click事件
-            DynamicGenerateButton();
+            DynamicGenerateButton1();
 
             foreach (Control con in this.Controls)
             {
@@ -424,7 +424,7 @@ namespace vcs_DynamicAddRemoveControls1
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //動態創建按鈕和事件
+            //動態創建按鈕和事件, 創建在richTextBox裡
 
             int i = 0;
             for (i = 0; i < 10; i++)
@@ -449,6 +449,131 @@ namespace vcs_DynamicAddRemoveControls1
             Button b1 = (Button)sender;//將觸發此事件的對象轉換為該Button對象
 
             richTextBox1.Text += "你按了 " + b1.Name + "\n";
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //動態創建按鈕和事件, 創建在Form裡
+
+            //1.建立Button物件
+            Button[] btuArray = new Button[3];
+            btuArray[0] = new Button();
+            btuArray[1] = new Button();
+            btuArray[2] = new Button();
+
+            for (int i = 0; i != btuArray.Length; i++)
+            {
+                //2.加入控制項
+                this.Controls.Add(btuArray[i]);
+                btuArray[i].Size = new Size(80, 60);
+                btuArray[i].Text = "Dynamic " + i;
+                //btuArray[i].Top = 12 + btuArray[i].Height * i;
+                //btuArray[i].Left = 13;
+                btuArray[i].Location = new Point(550 + i * 90, 500);
+                //3.為Click事件註冊
+                btuArray[i].Click += new EventHandler(button_Click);
+            }
+        }
+
+        private void button_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "你按下 :\t控件種類 : " + sender.ToString() + "\t";
+            richTextBox1.Text += "文字 :  " + ((Button)(sender)).Text + "\t";
+            richTextBox1.Text += "索引 :  " + ((Button)(sender)).TabIndex.ToString() + "\n";
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+            int count = 5;
+            Button[] btn = new Button[count];
+            for (int j = 0; j < count; j++)
+            {
+                //reader2.Read();
+                btn[j] = new Button();
+                btn[j].Name = "topic2" + j;
+                btn[j].Text = j.ToString();
+                btn[j].AutoSize = true;
+                btn[j].Location = new Point(100 * j + 20, 440);
+                btn[j].Font = new Font("微軟正黑體", 12);
+                btn[j].ForeColor = Color.White;
+                btn[j].FlatStyle = FlatStyle.Flat;
+                btn[j].FlatAppearance.BorderColor = Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(65)))), ((int)(((byte)(85)))));
+                btn[j].BackColor = Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(65)))), ((int)(((byte)(85)))));
+            }
+            this.Controls.AddRange(btn);
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+            PictureBox pb_new = new PictureBox();
+            pb_new.Size = new Size(250, 250);
+            pb_new.Left = 600;
+            pb_new.Top = 440;
+            pb_new.BackColor = Color.Pink;
+            this.Controls.Add(pb_new);
+
+            Button bt_new = new Button();
+            this.groupBox1.Controls.Add(bt_new);
+            //bt_new.Location = new Point(button10.Location.X, button10.Location.Y + 60);   same
+            bt_new.Left = button10.Location.X + 120;
+            bt_new.Top = button10.Location.Y + 0;
+            bt_new.Size = new Size(100, 40);
+            bt_new.BackColor = Color.Red;
+            bt_new.Text = "新增控件";
+            bt_new.Click += new EventHandler(bt_new_Click);
+        }
+
+        private void bt_new_Click(System.Object sender, System.EventArgs e)
+        {
+            richTextBox1.Text += "你按了這個新控件\n";
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //動態產生button並且綁定click事件
+            DynamicGenerateButton2();
+        }
+
+        private void DynamicGenerateButton2()
+        {
+            // 設定位置及按鈕寬高值
+            int LEFTANCHOR = 600;
+            int TOPANCHOR = 550;
+            int BTN_HEIGHT = 80;
+            int BTN_WIDTH = 80;
+
+            int i;
+            for (i = 0; i < 3; i++)
+            {
+                // 實例化按鈕
+                Button btn = new Button();
+
+                // 設定按鈕參數
+                btn.Text = i.ToString();
+                btn.Width = BTN_WIDTH;
+                btn.Height = BTN_HEIGHT;
+                btn.Left = LEFTANCHOR + BTN_WIDTH * i;
+                btn.Top = TOPANCHOR + BTN_HEIGHT * 0;
+
+                // 加入按鈕事件
+                btn.Click += dynamic_Btn_Click;
+
+                // 將按鈕加入表單
+                this.Controls.Add(btn);
+            }
+        }
+
+
+        //加入按鈕事件
+        private void dynamic_Btn_Click(object sender, EventArgs e)
+        {
+            // 撰寫事件內容
+            //richTextBox1.Text += "XXXXXXXXXXXXXXX\n";
+
+            //MessageBox.Show(((Button)sender).Text);
+            richTextBox1.Text += "你按了按鈕 " + ((Button)sender).Text + "\n";
+
         }
     }
 }

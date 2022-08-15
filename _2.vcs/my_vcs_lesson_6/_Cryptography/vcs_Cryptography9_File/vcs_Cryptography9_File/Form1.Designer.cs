@@ -78,7 +78,6 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(180, 55);
             this.button2.TabIndex = 2;
-            this.button2.Text = "算一個檔案的MD5值";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -138,7 +137,6 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(180, 55);
             this.button7.TabIndex = 8;
-            this.button7.Text = "用MD5比較兩個檔案";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -148,7 +146,6 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(180, 55);
             this.button8.TabIndex = 9;
-            this.button8.Text = "用MD5比較兩個檔案";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -171,7 +168,6 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(180, 55);
             this.button10.TabIndex = 11;
-            this.button10.Text = "用MD5比對兩個檔案是否相同";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -181,7 +177,6 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(180, 55);
             this.button11.TabIndex = 12;
-            this.button11.Text = "用MD5比較兩個檔案";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -219,7 +214,7 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(180, 55);
             this.button15.TabIndex = 16;
-            this.button15.Text = "算一個檔案的MD5, SHA1, SHA256值";
+            this.button15.Text = "算一個檔案的SHA1, SHA256值";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 

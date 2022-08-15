@@ -21,19 +21,6 @@ namespace vcs_ClockA
 
         }
 
-        private void colorOption1_Click(object sender, EventArgs e)
-        {
-            clockText.ForeColor = Color.Black;
-        }
-        private void colorOption2_Click(object sender, EventArgs e)
-        {
-            clockText.ForeColor = Color.Red;
-        }
-        private void colorOption3_Click(object sender, EventArgs e)
-        {
-            clockText.ForeColor = Color.Blue;
-        }
-
         private void startButton_Click(object sender, EventArgs e)
         {
             if (timeOption1.Checked)

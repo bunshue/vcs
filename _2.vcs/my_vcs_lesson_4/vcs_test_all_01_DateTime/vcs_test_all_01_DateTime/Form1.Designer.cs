@@ -1675,6 +1675,7 @@
             this.button62.Name = "button62";
             this.button62.Size = new System.Drawing.Size(170, 50);
             this.button62.TabIndex = 92;
+            this.button62.Text = "日曆1";
             this.button62.UseVisualStyleBackColor = true;
             this.button62.Click += new System.EventHandler(this.button62_Click);
             // 
@@ -1685,6 +1686,7 @@
             this.button63.Name = "button63";
             this.button63.Size = new System.Drawing.Size(170, 50);
             this.button63.TabIndex = 93;
+            this.button63.Text = "日曆2";
             this.button63.UseVisualStyleBackColor = true;
             this.button63.Click += new System.EventHandler(this.button63_Click);
             // 
