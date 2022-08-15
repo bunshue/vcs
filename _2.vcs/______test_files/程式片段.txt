@@ -1,4 +1,9 @@
 
+取得非常random的數字
+Random rd = new Random((int)DateTime.Now.Ticks);
+
+
+
 excel/excel7_item.xlsx  新舊有何不同\
 
 

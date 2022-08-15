@@ -11,6 +11,7 @@ using System.IO;    //for MemoryStream
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D; //for LinearGradientBrush
 using System.Drawing.Text;      //for TextRenderingHint
+using System.Security.Cryptography; //for RNGCryptoServiceProvider
 
 // 全自動區分電腦和人類的公開圖靈測試
 //（英語：Completely Automated Public Turing test to tell Computers and Humans Apart，簡稱CAPTCHA）
@@ -20,6 +21,8 @@ namespace vcs_Draw_Captcha1
 {
     public partial class Form1 : Form
     {
+        string captcha_text = "This is a lion-mouse";
+
         public Form1()
         {
             InitializeComponent();
@@ -66,6 +69,8 @@ namespace vcs_Draw_Captcha1
             pictureBox27.Size = new Size(W, H);
             pictureBox28.Size = new Size(W, H);
             pictureBox29.Size = new Size(W, H);
+            pictureBox30.Size = new Size(W, H);
+            pictureBox31.Size = new Size(W, H);
 
             int x_st;
             int y_st;
@@ -83,39 +88,41 @@ namespace vcs_Draw_Captcha1
             pictureBox03.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             pictureBox04.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             pictureBox05.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            pictureBox06.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            pictureBox07.Location = new Point(x_st + dx * 0, y_st + dy * 7);
 
-            pictureBox06.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            pictureBox07.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            pictureBox08.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            pictureBox09.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            pictureBox10.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            pictureBox11.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            pictureBox08.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            pictureBox09.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            pictureBox10.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            pictureBox11.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            pictureBox12.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            pictureBox13.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            pictureBox14.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            pictureBox15.Location = new Point(x_st + dx * 1, y_st + dy * 7);
 
-            pictureBox12.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            pictureBox13.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            pictureBox14.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            pictureBox15.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            pictureBox16.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            pictureBox17.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            pictureBox16.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            pictureBox17.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            pictureBox18.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            pictureBox19.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            pictureBox20.Location = new Point(x_st + dx * 2, y_st + dy * 4);
+            pictureBox21.Location = new Point(x_st + dx * 2, y_st + dy * 5);
+            pictureBox22.Location = new Point(x_st + dx * 2, y_st + dy * 6);
+            pictureBox23.Location = new Point(x_st + dx * 2, y_st + dy * 7);
 
-            pictureBox18.Location = new Point(x_st + dx * 3, y_st + dy * 0);
-            pictureBox19.Location = new Point(x_st + dx * 3, y_st + dy * 1);
-            pictureBox20.Location = new Point(x_st + dx * 3, y_st + dy * 2);
-            pictureBox21.Location = new Point(x_st + dx * 3, y_st + dy * 3);
-            pictureBox22.Location = new Point(x_st + dx * 3, y_st + dy * 4);
-            pictureBox23.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            pictureBox24.Location = new Point(x_st + dx * 3, y_st + dy * 0);
+            pictureBox25.Location = new Point(x_st + dx * 3, y_st + dy * 1);
+            pictureBox26.Location = new Point(x_st + dx * 3, y_st + dy * 2);
+            pictureBox27.Location = new Point(x_st + dx * 3, y_st + dy * 3);
+            pictureBox28.Location = new Point(x_st + dx * 3, y_st + dy * 4);
+            pictureBox29.Location = new Point(x_st + dx * 3, y_st + dy * 5);
+            pictureBox30.Location = new Point(x_st + dx * 3, y_st + dy * 6);
+            pictureBox31.Location = new Point(x_st + dx * 3, y_st + dy * 7);
 
-            pictureBox24.Location = new Point(x_st + dx * 4, y_st + dy * 0);
-            pictureBox25.Location = new Point(x_st + dx * 4, y_st + dy * 1);
-            pictureBox26.Location = new Point(x_st + dx * 4, y_st + dy * 2);
-            pictureBox27.Location = new Point(x_st + dx * 4, y_st + dy * 3);
-            pictureBox28.Location = new Point(x_st + dx * 4, y_st + dy * 4);
-            pictureBox29.Location = new Point(x_st + dx * 4, y_st + dy * 5);
-
-            richTextBox1.Size = new Size(W, 600);
-            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            richTextBox1.Size = new Size(W * 2 + 40, 790);
+            richTextBox1.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-            this.Size = new Size(1800, 700);
+            this.Location = new Point(100, 100);
+            this.Size = new Size(1800, 850);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -126,27 +133,26 @@ namespace vcs_Draw_Captcha1
         private void timer1_Tick(object sender, EventArgs e)
         {
             draw_captcha00();   //for pictureBox00
-
+            draw_captcha01();   //for pictureBox01
             draw_captcha02();   //for pictureBox02
             draw_captcha03();   //for pictureBox03
             draw_captcha04();   //for pictureBox04
             draw_captcha05();   //for pictureBox05
-
             draw_captcha06();   //for pictureBox06
             draw_captcha07();   //for pictureBox07
+
             draw_captcha08();   //for pictureBox08
             draw_captcha09();   //for pictureBox09
-
+            draw_captcha10();   //for pictureBox10
             draw_captcha11();   //for pictureBox11
-
             draw_captcha12();   //for pictureBox12
             draw_captcha13();   //for pictureBox13
             draw_captcha14();   //for pictureBox14
             draw_captcha15();   //for pictureBox15
+
             draw_captcha16();    //for pictureBox16
             draw_captcha17();    //for pictureBox17
             draw_captcha18();    //for pictureBox18
-
             draw_captcha19();    //for pictureBox19
             draw_captcha20();    //for pictureBox20
             draw_captcha21();    //for pictureBox21
@@ -155,6 +161,12 @@ namespace vcs_Draw_Captcha1
 
             draw_captcha24();   //for pictureBox24
             draw_captcha25();   //for pictureBox25
+            draw_captcha26();   //for pictureBox26
+            draw_captcha27();   //for pictureBox27
+            draw_captcha28();   //for pictureBox28
+            draw_captcha29();   //for pictureBox29
+            draw_captcha30();   //for pictureBox30
+            draw_captcha31();   //for pictureBox31
         }
 
         //Captcha 00 ST
@@ -169,6 +181,146 @@ namespace vcs_Draw_Captcha1
             pictureBox00.Image = bitmap1;
         }
         //Captcha 00 SP
+
+        //Captcha 01 ST
+        private void draw_captcha01()
+        {
+            //CreateCheckCodeImage(GenerateCheckCodes(10));
+            GetCheckCode();
+        }
+
+        void GetCheckCode()
+        {
+            int len = 10;
+            string code = GenerateCheckCodes(len);
+            byte[] bytes = CreateCheckCodeImage(code);
+            return;
+        }
+
+        private string GenerateCheckCodes(int iCount)
+        {
+            char[] oCharacter = {'0','1','2','3','4','5','6','7','8','9',
+            'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'
+            //'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'
+            };
+
+            //int number;
+            string checkCode = String.Empty;
+            int iSeed = DateTime.Now.Millisecond;
+            Random random = new Random(iSeed);
+            for (int i = 0; i < iCount; i++)
+            {
+                checkCode += oCharacter[random.Next(oCharacter.Length)];
+
+                //純數字
+                //number = random.Next(10);
+                //number = oCharacter[random.Next(oCharacter.Length)];
+                //checkCode += number.ToString();
+            }
+            return checkCode;
+        }
+
+        private byte[] CreateCheckCodeImage(string checkCode)
+        {
+            if (checkCode == null || checkCode.Trim() == String.Empty)
+            {
+                return null;
+            }
+            int iWordWidth = 20;
+            int iImageWidth = checkCode.Length * iWordWidth;
+            Bitmap bitmap1 = new Bitmap(iImageWidth, 30);
+            Graphics g = Graphics.FromImage(bitmap1);
+            try
+            {
+                //生成隨機生成器
+                Random random = new Random();
+                //清空圖片背景色
+                g.Clear(Color.White);
+
+                //畫圖片的背景噪音點
+                for (int i = 0; i < 20; i++)
+                {
+                    int x1 = random.Next(bitmap1.Width);
+                    int x2 = random.Next(bitmap1.Width);
+                    int y1 = random.Next(bitmap1.Height);
+                    int y2 = random.Next(bitmap1.Height);
+                    g.DrawLine(new Pen(Color.Silver), x1, y1, x2, y2);
+                }
+
+                //畫圖片的背景噪音線
+                for (int i = 0; i < 2; i++)
+                {
+                    int x1 = 0;
+                    int x2 = bitmap1.Width;
+                    int y1 = random.Next(bitmap1.Height);
+                    int y2 = random.Next(bitmap1.Height);
+                    if (i == 0)
+                    {
+                        g.DrawLine(new Pen(Color.Gray, 2), x1, y1, x2, y2);
+                    }
+
+                }
+                for (int i = 0; i < checkCode.Length; i++)
+                {
+                    string Code = checkCode[i].ToString();
+                    int xLeft = iWordWidth * (i);
+                    random = new Random(xLeft);
+                    int iSeed = DateTime.Now.Millisecond;
+                    int iValue = random.Next(iSeed) % 4;
+                    if (iValue == 0)
+                    {
+                        Font font = new Font("Arial", 16, (FontStyle.Bold | FontStyle.Italic));
+                        Rectangle rc = new Rectangle(xLeft, 0, iWordWidth, bitmap1.Height);
+                        LinearGradientBrush brush = new LinearGradientBrush(rc, Color.Blue, Color.Red, 1.5f, true);
+                        g.DrawString(Code, font, brush, xLeft, 2);
+                    }
+                    else if (iValue == 1)
+                    {
+                        Font font = new Font("楷體", 16, (FontStyle.Bold));
+                        Rectangle rc = new Rectangle(xLeft, 0, iWordWidth, bitmap1.Height);
+                        LinearGradientBrush brush = new LinearGradientBrush(rc, Color.Blue, Color.DarkRed, 1.3f, true);
+                        g.DrawString(Code, font, brush, xLeft, 2);
+                    }
+                    else if (iValue == 2)
+                    {
+                        Font font = new Font("宋體", 16, (FontStyle.Bold));
+                        Rectangle rc = new Rectangle(xLeft, 0, iWordWidth, bitmap1.Height);
+                        LinearGradientBrush brush = new LinearGradientBrush(rc, Color.Green, Color.Blue, 1.2f, true);
+                        g.DrawString(Code, font, brush, xLeft, 2);
+                    }
+                    else if (iValue == 3)
+                    {
+                        Font font = new Font("黑體", 16, (FontStyle.Bold |
+
+                        FontStyle.Bold));
+                        Rectangle rc = new Rectangle(xLeft, 0, iWordWidth, bitmap1.Height);
+                        LinearGradientBrush brush = new LinearGradientBrush(rc, Color.Blue, Color.Green, 1.8f, true);
+                        g.DrawString(Code, font, brush, xLeft, 2);
+                    }
+                }
+                ////畫圖片的前景噪音點 ---有無這段代碼 貌似沒啥變化
+                for (int i = 0; i < 8; i++)
+                {
+                    int x = random.Next(bitmap1.Width);
+                    int y = random.Next(bitmap1.Height);
+                    bitmap1.SetPixel(x, y, Color.FromArgb(random.Next()));
+                }
+                //畫圖片的邊框線
+                g.DrawRectangle(new Pen(Color.Silver), 0, 0, bitmap1.Width - 1, bitmap1.Height - 1);
+
+                pictureBox01.Image = bitmap1;
+
+                MemoryStream ms = new MemoryStream();
+                bitmap1.Save(ms, ImageFormat.Jpeg);
+                return ms.ToArray();
+            }
+            finally
+            {
+                g.Dispose();
+                //bitmap1.Dispose();
+            }
+        }
+        //Captcha 01 SP
 
         //Captcha 02 ST
         void draw_captcha02()
@@ -241,8 +393,8 @@ namespace vcs_Draw_Captcha1
             //寬度=(留邊)30*2 + 每個字*20
             int hh = 70;
 
-            Bitmap vaildNumImage = new Bitmap(ww, hh);
-            Graphics g = Graphics.FromImage(vaildNumImage);
+            Bitmap bitmap1 = new Bitmap(ww, hh);
+            Graphics g = Graphics.FromImage(bitmap1);
 
             //產生背景色
             Color cc = Color.FromArgb(rr.Next(256), rr.Next(256), rr.Next(256));
@@ -251,10 +403,11 @@ namespace vcs_Draw_Captcha1
 
             //產生字色，斥掉背景色
             bb = new SolidBrush(Color.FromArgb(cc.R ^ 255, cc.G ^ 255, cc.B ^ 255));
+
             //產生字體
             Font ff = new Font("Arial Black", 18, FontStyle.Regular);
-            //逐一畫每一個字
 
+            //逐一畫每一個字
             for (int i = 0; i < vaildNumAnswer.Length; i++)
             {
                 g.DrawString(vaildNumAnswer.Substring(i, 1), ff, bb, i * 20 + 30, 20);
@@ -266,7 +419,7 @@ namespace vcs_Draw_Captcha1
             {
                 g.FillRectangle(bb, rr.Next(ww), rr.Next(hh), 2, 2);
             }
-            pictureBox02.Image = vaildNumImage;
+            pictureBox02.Image = bitmap1;
         }
         //Captcha 02 SP
 
@@ -303,8 +456,8 @@ namespace vcs_Draw_Captcha1
             if (checkCode == null || checkCode.Trim() == String.Empty)
                 return;
 
-            Bitmap image = new Bitmap((int)Math.Ceiling((checkCode.Length * 20.0)), 50);
-            Graphics g = Graphics.FromImage(image);
+            Bitmap bitmap1 = new Bitmap((int)Math.Ceiling((checkCode.Length * 20.0)), 50);
+            Graphics g = Graphics.FromImage(bitmap1);
 
             try
             {
@@ -315,10 +468,10 @@ namespace vcs_Draw_Captcha1
                 //畫圖片的背景噪音線
                 for (int i = 0; i < 3; i++)
                 {
-                    int x1 = random.Next(image.Width);
-                    int x2 = random.Next(image.Width);
-                    int y1 = random.Next(image.Height);
-                    int y2 = random.Next(image.Height);
+                    int x1 = random.Next(bitmap1.Width);
+                    int x2 = random.Next(bitmap1.Width);
+                    int y1 = random.Next(bitmap1.Height);
+                    int y2 = random.Next(bitmap1.Height);
                     g.DrawLine(new Pen(Color.Black), x1, y1, x2, y2);
                 }
                 Font font = new Font("Arial", 24, (FontStyle.Bold));
@@ -327,16 +480,16 @@ namespace vcs_Draw_Captcha1
                 //畫圖片的前景噪音點
                 for (int i = 0; i < 150; i++)
                 {
-                    int x = random.Next(image.Width);
-                    int y = random.Next(image.Height);
+                    int x = random.Next(bitmap1.Width);
+                    int y = random.Next(bitmap1.Height);
 
-                    image.SetPixel(x, y, Color.FromArgb(random.Next()));
+                    bitmap1.SetPixel(x, y, Color.FromArgb(random.Next()));
                 }
                 //畫圖片的邊框線
-                g.DrawRectangle(new Pen(Color.Silver), 0, 0, image.Width - 1, image.Height - 1);
-                pbx.Width = image.Width;
-                pbx.Height = image.Height;
-                pbx.BackgroundImage = image;
+                g.DrawRectangle(new Pen(Color.Silver), 0, 0, bitmap1.Width - 1, bitmap1.Height - 1);
+                pbx.Width = bitmap1.Width;
+                pbx.Height = bitmap1.Height;
+                pbx.BackgroundImage = bitmap1;
             }
             catch
             { }
@@ -357,9 +510,11 @@ namespace vcs_Draw_Captcha1
         //Captcha 04 SP
 
         //Captcha 05 ST
-
+        void draw_captcha05()
+        {
+            //pictureBox05
+        }
         //Captcha 05 SP
-
 
         //Captcha 06 ST
         void draw_captcha06()
@@ -376,10 +531,9 @@ namespace vcs_Draw_Captcha1
             }
 
             //創建一個圖片對象
-            Bitmap bmp = new Bitmap(120, 25);
+            Bitmap bitmap1 = new Bitmap(120, 25);
             //創建GDI對象
-            Graphics g = Graphics.FromImage(bmp);
-            // MessageBox.Show(str);
+            Graphics g = Graphics.FromImage(bitmap1);
 
             string[] fonts = { "黑體", "楷體", "微軟雅黑", "宋體", "隸書" };
             Color[] colors = { Color.Red, Color.Yellow, Color.Blue, Color.Black, Color.Green };
@@ -393,217 +547,70 @@ namespace vcs_Draw_Captcha1
             //畫線
             for (int i = 0; i < 25; i++)
             {
-                Point p1 = new Point(r.Next(0, bmp.Width), r.Next(0, bmp.Height));
-                Point p2 = new Point(r.Next(0, bmp.Width), r.Next(0, bmp.Height));
+                Point p1 = new Point(r.Next(0, bitmap1.Width), r.Next(0, bitmap1.Height));
+                Point p2 = new Point(r.Next(0, bitmap1.Width), r.Next(0, bitmap1.Height));
                 g.DrawLine(new Pen(Color.Green), p1, p2);
             }
 
             //畫像素顆粒
             for (int i = 0; i < 100; i++)
             {
-                Point p = new Point(r.Next(0, bmp.Width), r.Next(0, bmp.Height));
-                bmp.SetPixel(p.X, p.Y, Color.Black);
+                Point p = new Point(r.Next(0, bitmap1.Width), r.Next(0, bitmap1.Height));
+                bitmap1.SetPixel(p.X, p.Y, Color.Black);
             }
 
             //把畫好的圖片放到PictureBox上
-            pictureBox06.Image = bmp;
+            pictureBox06.Image = bitmap1;
         }
         //Captcha 06 SP
 
         //Captcha 07 ST
         void draw_captcha07()
         {
-            string txt = "This is a lion-mouse";
-
-            Bitmap bm = MakeCaptchaImge1(txt,
-                50, 70,
-                pictureBox13.ClientSize.Width,
-                pictureBox13.ClientSize.Height);
-            pictureBox07.Image = bm;
+            Random r = new Random();
+            string str = string.Empty;
+            //生成5位随机数如 90531
+            for (int i = 0; i < 5; i++)
+            {
+                str += r.Next(0, 10);
+            }
+            Bitmap bitmap1 = new Bitmap(150, 40);
+            Graphics g = Graphics.FromImage(bitmap1);
+            //预定义几种字体样式和颜色
+            string[] fonts = { "微软雅黑", "宋体", "黑体", "隶书", "仿宋" };
+            Color[] colors = { Color.Yellow, Color.Blue, Color.Black, Color.Red, Color.Orange };
+            //因为每一数字的字体和颜色可能不同，
+            //因此循环将生成的随机数每一数字绘制到图片
+            for (int i = 0; i < str.Length; i++)
+            {
+                Point p = new Point(i * 30, 0);
+                g.DrawString(str[i].ToString(), new Font(fonts[r.Next(0, 5)], 20, FontStyle.Bold), new SolidBrush(colors[r.Next(0, 5)]), p);
+            }
+            //循环在图片范围内绘制出50条线
+            for (int i = 0; i < 50; i++)
+            {
+                //保证线的起始点都在图片范围内
+                Point p1 = new Point(r.Next(0, bitmap1.Width), r.Next(0, bitmap1.Height));
+                Point p2 = new Point(r.Next(0, bitmap1.Width), r.Next(0, bitmap1.Height));
+                g.DrawLine(new Pen(Brushes.Green), p1, p2);
+            }
+            //添加一些像素点
+            for (int i = 0; i < 300; i++)
+            {
+                Point p1 = new Point(r.Next(0, bitmap1.Width), r.Next(0, bitmap1.Height));
+                bitmap1.SetPixel(p1.X, p1.Y, Color.Green);
+            }
+            //在winForm中用PictureBox中显示出来
+            pictureBox07.Image = bitmap1;
         }
         //Captcha 07 SP
 
         //Captcha 08 ST
         void draw_captcha08()
         {
-            string txt = "This is a lion-mouse";
-
-            using (Font the_font = new Font("Times New Roman", 30))
-            {
-                pictureBox08.Image = MakeCaptchaImage2(txt,
-                    pictureBox14.ClientSize.Width,
-                    pictureBox14.ClientSize.Height,
-                    the_font, Brushes.Blue);
-            }
+            //pictureBox08
         }
-
-        private Random Rand = new Random();
-
-        // Make a captcha image for the text.
-        private Bitmap MakeCaptchaImge1(string txt, int min_size, int max_size, int wid, int hgt)
-        {
-            // Make the bitmap and associated Graphics object.
-            Bitmap bm = new Bitmap(wid, hgt);
-            using (Graphics g = Graphics.FromImage(bm))
-            {
-                g.SmoothingMode = SmoothingMode.HighQuality;
-                g.Clear(Color.White);
-
-                // See how much room is available for each character.
-                int ch_wid = (int)(wid / txt.Length);
-
-                // Draw each character.
-                for (int i = 0; i < txt.Length; i++)
-                {
-                    float font_size = Rand.Next(min_size, max_size);
-                    using (Font the_font = new Font("Times New Roman", font_size, FontStyle.Bold))
-                    {
-                        DrawCharacter1(txt.Substring(i, 1), g, the_font, i * ch_wid, ch_wid, wid, hgt);
-                    }
-                }
-            }
-
-            return bm;
-        }
-
-        // Draw a deformed character at this position.
-        private int PreviousAngle = 0;
-        private void DrawCharacter1(string txt, Graphics g, Font the_font, int X, int ch_wid, int wid, int hgt)
-        {
-            // Center the text.
-            using (StringFormat string_format = new StringFormat())
-            {
-                string_format.Alignment = StringAlignment.Center;
-                string_format.LineAlignment = StringAlignment.Center;
-                RectangleF rectf = new RectangleF(X, 0, ch_wid, hgt);
-
-                // Convert the text into a path.
-                using (GraphicsPath graphics_path = new GraphicsPath())
-                {
-                    graphics_path.AddString(txt,
-                        the_font.FontFamily, (int)(Font.Style),
-                        the_font.Size, rectf, string_format);
-
-                    // Make random warping parameters.
-                    float x1 = (float)(X + Rand.Next(ch_wid) / 2);
-                    float y1 = (float)(Rand.Next(hgt) / 2);
-                    float x2 = (float)(X + ch_wid / 2 + Rand.Next(ch_wid) / 2);
-                    float y2 = (float)(hgt / 2 + Rand.Next(hgt) / 2);
-                    PointF[] pts = {
-                    new PointF(
-                        (float)(X + Rand.Next(ch_wid) / 4),
-                        (float)(Rand.Next(hgt) / 4)),
-                    new PointF(
-                        (float)(X + ch_wid - Rand.Next(ch_wid) / 4),
-                        (float)(Rand.Next(hgt) / 4)),
-                    new PointF(
-                        (float)(X + Rand.Next(ch_wid) / 4),
-                        (float)(hgt - Rand.Next(hgt) / 4)),
-                    new PointF(
-                        (float)(X + ch_wid - Rand.Next(ch_wid) / 4),
-                        (float)(hgt - Rand.Next(hgt) / 4))
-                };
-                    Matrix mat = new Matrix();
-                    graphics_path.Warp(pts, rectf, mat,
-                        WarpMode.Perspective, 0);
-
-                    // Rotate a bit randomly.
-                    float dx = (float)(X + ch_wid / 2);
-                    float dy = (float)(hgt / 2);
-                    g.TranslateTransform(-dx, -dy, MatrixOrder.Append);
-                    int angle = PreviousAngle;
-                    do
-                    {
-                        angle = Rand.Next(-30, 30);
-                    } while (Math.Abs(angle - PreviousAngle) < 20);
-                    PreviousAngle = angle;
-                    g.RotateTransform(angle, MatrixOrder.Append);
-                    g.TranslateTransform(dx, dy, MatrixOrder.Append);
-
-                    // Draw the text.
-                    g.FillPath(Brushes.Blue, graphics_path);
-                    g.ResetTransform();
-                }
-            }
-        }
-
-        // Draw the words with letters overlapping each other.
-        private Bitmap MakeCaptchaImage2(string txt, int wid, int hgt, Font the_font, Brush the_brush)
-        {
-            Bitmap bm = new Bitmap(wid, hgt);
-            using (Graphics g = Graphics.FromImage(bm))
-            {
-                g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
-
-                int x = 0;
-                foreach (char ch in txt.ToCharArray())
-                {
-                    SizeF ch_size = g.MeasureString(ch.ToString(), the_font);
-                    int y = (int)(Rand.NextDouble() * (hgt - ch_size.Height));
-                    g.DrawString(ch.ToString(), the_font, the_brush, x, y);
-                    x += (int)(ch_size.Width * 0.35);
-                }
-            }
-            return bm;
-        }
-
-        void draw_captcha05()
-        {
-            string ccc = "this is a lion-mouse";
-            CreateImage(ccc);
-        }
-
-        //彩色驗證碼
-        private void CreateImage(string checkCode)
-        {
-            int W = checkCode.Length * 15;
-            int H = 50;
-
-            Bitmap bitmap1 = new Bitmap(W, H);
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
-
-            //定義顏色
-            Color[] c = { Color.Black, Color.Red, Color.DarkBlue, Color.Green, Color.Orange, Color.Brown, Color.DarkCyan, Color.Purple };
-            //定義字體
-            string[] font = { "Verdana", "Microsoft Sans Serif", "Comic Sans MS", "Arial", "宋體" };
-            Random rand = new Random();
-            //隨機輸出噪點
-            for (int i = 0; i < 50; i++)
-            {
-                int x = rand.Next(bitmap1.Width);
-                int y = rand.Next(bitmap1.Height);
-                g.DrawRectangle(new Pen(Color.LightGray, 0), x, y, 1, 1);
-            }
-
-            //輸出不同字體和顏色的驗證碼字符
-            for (int i = 0; i < checkCode.Length; i++)
-            {
-                int cindex = rand.Next(7);
-                int findex = rand.Next(5);
-
-                Font f = new Font(font[findex], 15, FontStyle.Bold);
-                Brush b = new SolidBrush(c[cindex]);
-                int ii = 4;
-                if ((i + 1) % 2 == 0)
-                {
-                    ii = 2;
-                }
-                g.DrawString(checkCode.Substring(i, 1), f, b, 3 + (i * 12), ii);
-            }
-            //畫一個邊框
-            g.DrawRectangle(new Pen(Color.Black, 0), 0, 0, bitmap1.Width - 1, bitmap1.Height - 1);
-
-            g.Dispose();
-
-            pictureBox05.Image = bitmap1;
-        }
-
-
-
-
-
-
+        //Captcha 08 SP
 
         //Captcha 09 ST
         private string GetValidCode(int num)
@@ -632,9 +639,9 @@ namespace vcs_Draw_Captcha1
             //將字串儲存到Session中,以便需要時進行驗證                                                
             //context.Session["ValidCode"] = strValidCode;
             //定義寬120畫素,高30畫素的資料定義的影象物件                                          
-            Bitmap image = new Bitmap(120, 30);
+            Bitmap bitmap1 = new Bitmap(120, 30);
             //繪製圖片                               
-            Graphics g = Graphics.FromImage(image);
+            Graphics g = Graphics.FromImage(bitmap1);
             try
             {
                 //生成隨機物件
@@ -644,42 +651,41 @@ namespace vcs_Draw_Captcha1
                 // 隨機產生圖片的背景噪線                                                       
                 for (int i = 0; i < 25; i++)
                 {
-                    int x1 = random.Next(image.Width);
-                    int x2 = random.Next(image.Width);
-                    int y1 = random.Next(image.Height);
-                    int y2 = random.Next(image.Height);
+                    int x1 = random.Next(bitmap1.Width);
+                    int x2 = random.Next(bitmap1.Width);
+                    int y1 = random.Next(bitmap1.Height);
+                    int y2 = random.Next(bitmap1.Height);
                     g.DrawLine(new Pen(Color.Silver), x1, y1, x2, y2);
                 }
                 //設定圖片字型風格
                 Font font = new Font("新宋體", 20, (FontStyle.Bold));
                 //設定畫筆型別
-                LinearGradientBrush brush = new LinearGradientBrush(new Rectangle(0, 0, image.Width, image.Height), Color.Blue, Color.DarkRed, 3, true);
+                LinearGradientBrush brush = new LinearGradientBrush(new Rectangle(0, 0, bitmap1.Width, bitmap1.Height), Color.Blue, Color.DarkRed, 3, true);
                 //繪製隨機字元
                 g.DrawString(strValidCode, font, brush, 5, 2);
 
                 //繪製圖片的前景噪點
-                g.DrawRectangle(new Pen(Color.Silver), 0, 0, image.Width - 1, image.Height - 1);
+                g.DrawRectangle(new Pen(Color.Silver), 0, 0, bitmap1.Width - 1, bitmap1.Height - 1);
                 //建立儲存區為記憶體的流
-                System.IO.MemoryStream ms = new System.IO.MemoryStream();
+                MemoryStream ms = new MemoryStream();
                 //將影象物件儲存為記憶體流       
-                image.Save(ms, ImageFormat.Gif);
-                //清除當前緩衝區流中的所有內容                                             
-                //context.Response.ClearContent();
-                //設定輸出流的MIME型別                           
-                //context.Response.ContentType = "image/Gif";
-                //將記憶體流寫入到輸出流                                        
-                //context.Response.BinaryWrite(ms.ToArray());
+                bitmap1.Save(ms, ImageFormat.Gif);
             }
             finally
             {
                 g.Dispose();
                 //image.Dispose();
-                pictureBox09.Image = image;
+                pictureBox09.Image = bitmap1;
             }
         }
         //Captcha 09 SP
 
-
+        //Captcha 10 ST
+        void draw_captcha10()
+        {
+            //pictureBox10
+        }
+        //Captcha 10 SP
 
         //Captcha 11 ST
         void draw_captcha11()
@@ -700,10 +706,10 @@ namespace vcs_Draw_Captcha1
         void draw_captcha12()
         {
             // 創建一個包含隨機內容的驗證碼文本
-            System.Random rand = new Random();
+            Random rand = new Random();
             int len = rand.Next(4, 6);
             char[] chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray();
-            System.Text.StringBuilder myStr = new System.Text.StringBuilder();
+            StringBuilder myStr = new StringBuilder();
             for (int iCount = 0; iCount < len; iCount++)
             {
                 myStr.Append(chars[rand.Next(chars.Length)]);
@@ -764,10 +770,8 @@ namespace vcs_Draw_Captcha1
                 pictureBox12.Image = bitmap2;
 
                 // 輸出圖片
-                System.IO.MemoryStream ms = new System.IO.MemoryStream();
+                MemoryStream ms = new MemoryStream();
                 bitmap2.Save(ms, ImageFormat.Jpeg);
-                //this.Response.ContentType = "image/png";
-                //ms.WriteTo( this.Response.OutputStream );
                 ms.Close();
             }//using
             myFont.Dispose();
@@ -778,7 +782,7 @@ namespace vcs_Draw_Captcha1
         void draw_captcha13()
         {
             //產生圖片驗證碼
-            Bitmap bitmap1 = Generate(RandomGeneratorStyle.Number, 10);
+            Bitmap bitmap1 = DrawCahpcha1(RandomGeneratorStyle.Number, 20);
             pictureBox13.Image = bitmap1;
         }
 
@@ -826,17 +830,17 @@ namespace vcs_Draw_Captcha1
         }
 
         //繪制驗證碼
-        public static Bitmap Generate(RandomGeneratorStyle style, int length)
+        public static Bitmap DrawCahpcha1(RandomGeneratorStyle style, int length)
         {
-            Bitmap bmp = new Bitmap((int)Math.Ceiling(length * 20.5), 50);//新建一個圖 片對象
-            Graphics g = Graphics.FromImage(bmp);//利用該圖片對象生成“畫板”
+            Bitmap bitmap1 = new Bitmap((int)Math.Ceiling(length * 20.5), 50);//新建一個圖 片對象
+            Graphics g = Graphics.FromImage(bitmap1);//利用該圖片對象生成“畫板”
             string strCode = GenerateRandomNumber(style, length);//生成隨機數
             Font font = new Font("Arial", 24, FontStyle.Bold | FontStyle.Italic);//設 置字體顏色
             SolidBrush brush = new SolidBrush(Color.Red);//新建一個畫刷,到這裡為止,我們 已經准備好了畫板、畫刷、和數據
             g.DrawString(strCode, font, brush, 0, 0);//關鍵的一步，進行繪制。
-            //bmp.Save(curPage.Response.OutputStream, ImageFormat.Jpeg);//保存為輸出流，否則頁 面上顯示不出來
+            //bitmap1.Save("aaaa.jpg", ImageFormat.Jpeg);//保存為輸出流，否則頁 面上顯示不出來
             //g.Dispose();//釋放掉該資源
-            return bmp;
+            return bitmap1;
         }
         //Captcha 13 SP
 
@@ -873,7 +877,7 @@ namespace vcs_Draw_Captcha1
             char code;
             string checkCode = String.Empty;
 
-            System.Random random = new Random();
+            Random random = new Random();
 
             for (int i = 0; i < 5; i++)
             {
@@ -935,7 +939,7 @@ namespace vcs_Draw_Captcha1
                 //畫圖片的邊框線
                 g.DrawRectangle(new Pen(Color.Silver), 0, 0, bitmap1.Width - 1, bitmap1.Height - 1);
 
-                System.IO.MemoryStream ms = new System.IO.MemoryStream();
+                MemoryStream ms = new MemoryStream();
                 bitmap1.Save(ms, ImageFormat.Gif);
                 pictureBox15.Image = bitmap1;
             }
@@ -950,41 +954,7 @@ namespace vcs_Draw_Captcha1
         //Captcha 16 ST
         void draw_captcha16()
         {
-            Random r = new Random();
-            string str = string.Empty;
-            //生成5位随机数如 90531
-            for (int i = 0; i < 5; i++)
-            {
-                str += r.Next(0, 10);
-            }
-            Bitmap bitmap = new Bitmap(150, 40);
-            Graphics g = Graphics.FromImage(bitmap);
-            //预定义几种字体样式和颜色
-            string[] fonts = { "微软雅黑", "宋体", "黑体", "隶书", "仿宋" };
-            Color[] colors = { Color.Yellow, Color.Blue, Color.Black, Color.Red, Color.Orange };
-            //因为每一数字的字体和颜色可能不同，
-            //因此循环将生成的随机数每一数字绘制到图片
-            for (int i = 0; i < str.Length; i++)
-            {
-                Point p = new Point(i * 30, 0);
-                g.DrawString(str[i].ToString(), new Font(fonts[r.Next(0, 5)], 20, FontStyle.Bold), new SolidBrush(colors[r.Next(0, 5)]), p);
-            }
-            //循环在图片范围内绘制出50条线
-            for (int i = 0; i < 50; i++)
-            {
-                //保证线的起始点都在图片范围内
-                Point p1 = new Point(r.Next(0, bitmap.Width), r.Next(0, bitmap.Height));
-                Point p2 = new Point(r.Next(0, bitmap.Width), r.Next(0, bitmap.Height));
-                g.DrawLine(new Pen(Brushes.Green), p1, p2);
-            }
-            //添加一些像素点
-            for (int i = 0; i < 300; i++)
-            {
-                Point p1 = new Point(r.Next(0, bitmap.Width), r.Next(0, bitmap.Height));
-                bitmap.SetPixel(p1.X, p1.Y, Color.Green);
-            }
-            //在winForm中用PictureBox中显示出来
-            pictureBox16.Image = bitmap;
+            //pictureBox16
         }
         //Captcha 16 SP
 
@@ -1000,8 +970,9 @@ namespace vcs_Draw_Captcha1
         //Captcha 18 ST
         void draw_captcha18()
         {
-            //用GDI+繪制驗證碼
-            DrawCahpcha(RandomGeneratorStyle.NumberAndChar, 20);
+            //產生圖片驗證碼
+            Bitmap bitmap1 = DrawCahpcha2(RandomGeneratorStyle.NumberAndChar, 20);
+            pictureBox18.Image = bitmap1;
         }
 
         /* same
@@ -1050,167 +1021,26 @@ namespace vcs_Draw_Captcha1
         }
 
         //繪制驗證碼
-        public void DrawCahpcha(RandomGeneratorStyle style, int length)
+        public static Bitmap DrawCahpcha2(RandomGeneratorStyle style, int length)
         {
-            Bitmap bmp = new Bitmap((int)Math.Ceiling(length * 12.5), 20);//新建一個圖 片對象
-            Graphics g = Graphics.FromImage(bmp);//利用該圖片對象生成“畫板”
+            Bitmap bitmap1 = new Bitmap((int)Math.Ceiling(length * 12.5), 20);//新建一個圖 片對象
+            Graphics g = Graphics.FromImage(bitmap1);//利用該圖片對象生成“畫板”
             string strCode = Generate2(style, length);//生成隨機數
             Font font = new Font("Arial", 12, FontStyle.Bold | FontStyle.Italic);//設 置字體顏色
             SolidBrush brush = new SolidBrush(Color.Red);//新建一個畫刷,到這裡為止,我們 已經准備好了畫板、畫刷、和數據
             g.DrawString(strCode, font, brush, 0, 0);//關鍵的一步，進行繪制。
-            //bmp.Save(curPage.Response.OutputStream, ImageFormat.Jpeg);//保存為輸出流，否則頁 面上顯示不出來
+            //bitmap1.Save("aaaa.jpg", ImageFormat.Jpeg);//保存為輸出流，否則頁 面上顯示不出來
             //g.Dispose();//釋放掉該資源
-
-            pictureBox18.Image = bmp;
+            return bitmap1;
         }
         //Captcha 18 SP
-
-
 
         //Captcha 19 ST
         void draw_captcha19()
         {
-            //CreateCheckCodeImage(GenerateCheckCodes(10));
-            GetCheckCode();
-        }
-
-        void GetCheckCode()
-        {
-            int len = 10;
-            string code = GenerateCheckCodes(len);
-            byte[] bytes = CreateCheckCodeImage(code);
-            return;
-        }
-
-        private string GenerateCheckCodes(int iCount)
-        {
-            char[] oCharacter = {'0','1','2','3','4','5','6','7','8','9',
-            'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'
-            //'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'
-            };
-
-            //int number;
-            string checkCode = String.Empty;
-            int iSeed = DateTime.Now.Millisecond;
-            System.Random random = new Random(iSeed);
-            for (int i = 0; i < iCount; i++)
-            {
-                checkCode += oCharacter[random.Next(oCharacter.Length)];
-
-                //純數字
-                //number = random.Next(10);
-                //number = oCharacter[random.Next(oCharacter.Length)];
-                //checkCode += number.ToString();
-            }
-            return checkCode;
-        }
-
-        private byte[] CreateCheckCodeImage(string checkCode)
-        {
-            if (checkCode == null || checkCode.Trim() == String.Empty)
-            {
-                return null;
-            }
-            int iWordWidth = 20;
-            int iImageWidth = checkCode.Length * iWordWidth;
-            Bitmap image = new Bitmap(iImageWidth, 30);
-            Graphics g = Graphics.FromImage(image);
-            try
-            {
-                //生成隨機生成器
-                Random random = new Random();
-                //清空圖片背景色
-                g.Clear(Color.White);
-
-                //畫圖片的背景噪音點
-                for (int i = 0; i < 20; i++)
-                {
-                    int x1 = random.Next(image.Width);
-                    int x2 = random.Next(image.Width);
-                    int y1 = random.Next(image.Height);
-                    int y2 = random.Next(image.Height);
-                    g.DrawLine(new Pen(Color.Silver), x1, y1, x2, y2);
-                }
-
-                //畫圖片的背景噪音線
-                for (int i = 0; i < 2; i++)
-                {
-                    int x1 = 0;
-                    int x2 = image.Width;
-                    int y1 = random.Next(image.Height);
-                    int y2 = random.Next(image.Height);
-                    if (i == 0)
-                    {
-                        g.DrawLine(new Pen(Color.Gray, 2), x1, y1, x2, y2);
-                    }
-
-                }
-                for (int i = 0; i < checkCode.Length; i++)
-                {
-
-                    string Code = checkCode[i].ToString();
-                    int xLeft = iWordWidth * (i);
-                    random = new Random(xLeft);
-                    int iSeed = DateTime.Now.Millisecond;
-                    int iValue = random.Next(iSeed) % 4;
-                    if (iValue == 0)
-                    {
-                        Font font = new Font("Arial", 16, (FontStyle.Bold | FontStyle.Italic));
-                        Rectangle rc = new Rectangle(xLeft, 0, iWordWidth, image.Height);
-                        LinearGradientBrush brush = new LinearGradientBrush(rc, Color.Blue, Color.Red, 1.5f, true);
-                        g.DrawString(Code, font, brush, xLeft, 2);
-                    }
-                    else if (iValue == 1)
-                    {
-                        Font font = new Font("楷體", 16, (FontStyle.Bold));
-                        Rectangle rc = new Rectangle(xLeft, 0, iWordWidth, image.Height);
-                        LinearGradientBrush brush = new LinearGradientBrush(rc, Color.Blue, Color.DarkRed, 1.3f, true);
-                        g.DrawString(Code, font, brush, xLeft, 2);
-                    }
-                    else if (iValue == 2)
-                    {
-                        Font font = new Font("宋體", 16, (FontStyle.Bold));
-                        Rectangle rc = new Rectangle(xLeft, 0, iWordWidth, image.Height);
-                        LinearGradientBrush brush = new LinearGradientBrush(rc, Color.Green, Color.Blue, 1.2f, true);
-                        g.DrawString(Code, font, brush, xLeft, 2);
-                    }
-                    else if (iValue == 3)
-                    {
-                        Font font = new Font("黑體", 16, (FontStyle.Bold |
-
-                        FontStyle.Bold));
-                        Rectangle rc = new Rectangle(xLeft, 0, iWordWidth, image.Height);
-                        LinearGradientBrush brush = new LinearGradientBrush(rc, Color.Blue, Color.Green, 1.8f, true);
-                        g.DrawString(Code, font, brush, xLeft, 2);
-                    }
-                }
-                ////畫圖片的前景噪音點 ---有無這段代碼 貌似沒啥變化
-                for (int i = 0; i < 8; i++)
-                {
-                    int x = random.Next(image.Width);
-                    int y = random.Next(image.Height);
-                    image.SetPixel(x, y, Color.FromArgb(random.Next()));
-                }
-                //畫圖片的邊框線
-                g.DrawRectangle(new Pen(Color.Silver), 0, 0, image.Width - 1, image.Height - 1);
-
-                pictureBox19.Image = image;
-
-                MemoryStream ms = new MemoryStream();
-                image.Save(ms, ImageFormat.Jpeg);
-                return ms.ToArray();
-                //Response.ClearContent();
-                //Response.ContentType = "image/jpeg";
-                //Response.BinaryWrite(ms.ToArray());
-            }
-            finally
-            {
-                g.Dispose();
-                //image.Dispose();
-            }
+            //pictureBox19
         }
         //Captcha 19 SP
-
 
         //Captcha 20 ST
         void draw_captcha20()
@@ -1256,27 +1086,24 @@ namespace vcs_Draw_Captcha1
         public MemoryStream Create(out string VNum)
         {
             VNum = RndNum(4);
-            Bitmap Img = null;
+            Bitmap bitmap1 = new Bitmap(100, 25);
             Graphics g = null;
             MemoryStream ms = null;
-            System.Random random = new Random();
+            Random random = new Random();
             //驗證碼顏色集合
             Color[] c = { Color.Black, Color.Red, Color.DarkBlue, Color.Green, Color.Orange, Color.Brown, Color.DarkCyan, Color.Purple };
             //驗證碼字體集合
             string[] fonts = { "Verdana", "Microsoft Sans Serif", "Comic Sans MS", "Arial", "宋體" };
 
-            //定義圖像的大小，生成圖像的實例
-            Img = new Bitmap(100, 25);
-
-            g = Graphics.FromImage(Img);//從Img對象生成新的Graphics對象 
+            g = Graphics.FromImage(bitmap1);//從bitmap1對象生成新的Graphics對象 
 
             g.Clear(Color.White);//背景設為白色
 
             //在隨機位置畫背景點
             for (int i = 0; i < 100; i++)
             {
-                int x = random.Next(Img.Width);
-                int y = random.Next(Img.Height);
+                int x = random.Next(bitmap1.Width);
+                int y = random.Next(bitmap1.Height);
                 g.DrawRectangle(new Pen(Color.LightGray, 0), x, y, 1, 1);
             }
             //驗證碼繪制在g中
@@ -1294,13 +1121,13 @@ namespace vcs_Draw_Captcha1
                 g.DrawString(VNum.Substring(i, 1), f, b, 3 + (i * 20), ii);//繪制一個驗證字符
             }
             ms = new MemoryStream();//生成內存流對象
-            Img.Save(ms, ImageFormat.Jpeg);//將此圖像以jpg圖像文件的格式保存到流中
+            bitmap1.Save(ms, ImageFormat.Jpeg);//將此圖像以jpg圖像文件的格式保存到流中
 
             //回收資源
             g.Dispose();
 
-            pictureBox20.Image = Img;
-            //Img.Dispose();
+            pictureBox20.Image = bitmap1;
+            //bitmap1.Dispose();
             return ms;
         }
         //Captcha 20 SP
@@ -1308,21 +1135,21 @@ namespace vcs_Draw_Captcha1
         //Captcha 21 ST
         private void ValidateCode(string VNum)
         {
-            Bitmap Img = null;
+            Bitmap bitmap1 = null;
             Graphics g = null;
             MemoryStream ms = null;
             int gheight = VNum.Length * 12;
-            Img = new Bitmap(gheight, 25);
-            g = Graphics.FromImage(Img);
+            bitmap1 = new Bitmap(gheight, 25);
+            g = Graphics.FromImage(bitmap1);
             //生成隨機生成器
             Random random = new Random();
             //背景顏色
             g.Clear(Color.White);
             for (int i = 0; i < 100; i++)
             {
-                int x = random.Next(Img.Width);
-                int y = random.Next(Img.Height);
-                Img.SetPixel(x, y, Color.FromArgb(random.Next()));
+                int x = random.Next(bitmap1.Width);
+                int y = random.Next(bitmap1.Height);
+                bitmap1.SetPixel(x, y, Color.FromArgb(random.Next()));
             }
             //文字字體
             Font f = new Font("Arial Black ", 12);
@@ -1330,14 +1157,10 @@ namespace vcs_Draw_Captcha1
             SolidBrush s = new SolidBrush(Color.Blue);
             g.DrawString(VNum, f, s, 3, 3);
             ms = new MemoryStream();
-            Img.Save(ms, ImageFormat.Jpeg);
-            //Response.ClearContent();
-            //Response.ContentType = "image/Jpeg ";
-            //Response.BinaryWrite(ms.ToArray());
+            bitmap1.Save(ms, ImageFormat.Jpeg);
             g.Dispose();
-            pictureBox21.Image = Img;
-            //Img.Dispose();
-            //Response.End();
+            pictureBox21.Image = bitmap1;
+            //bitmap1.Dispose();
         }
 
         void draw_captcha21()
@@ -1463,19 +1286,19 @@ namespace vcs_Draw_Captcha1
         /// <param name="check">字符</param>
         public byte[] drawImg(string check)
         {
-            Bitmap img = new Bitmap(90, 34);
-            var ht = Graphics.FromImage(img);
+            Bitmap bitmap1 = new Bitmap(90, 34);
+            var ht = Graphics.FromImage(bitmap1);
             ht.Clear(Color.White);
             ht.DrawLine(new Pen(Color.SpringGreen), 1, 1, 90, 34);
             Font font = new Font("微軟雅黑", 20, FontStyle.Bold);
-            var jianbian = new LinearGradientBrush(new Rectangle(0, 0, img.Width, img.Height), Color.Teal, Color.Snow, 2f, true);
+            var jianbian = new LinearGradientBrush(new Rectangle(0, 0, bitmap1.Width, bitmap1.Height), Color.Teal, Color.Snow, 2f, true);
             ht.DrawString(check, font, jianbian, 0, 0);
-            ht.DrawRectangle(new Pen(Color.Aqua), 0, 0, img.Width - 1, img.Height - 1);
+            ht.DrawRectangle(new Pen(Color.Aqua), 0, 0, bitmap1.Width - 1, bitmap1.Height - 1);
             MemoryStream ms = new MemoryStream();
-            img.Save(ms, ImageFormat.Jpeg);
+            bitmap1.Save(ms, ImageFormat.Jpeg);
             ht.Dispose();
-            pictureBox23.Image = img;
-            //img.Dispose();
+            pictureBox23.Image = bitmap1;
+            //bitmap1.Dispose();
             return ms.ToArray();
         }
 
@@ -1487,8 +1310,6 @@ namespace vcs_Draw_Captcha1
         }
 
         //Captcha 23 SP
-
-
 
         //Captcha 24 ST
         //中文驗證法碼 ST
@@ -1513,8 +1334,8 @@ namespace vcs_Draw_Captcha1
 
             //lb_captcha1.Text = txt;
 
-            Bitmap image = new Bitmap((int)Math.Ceiling((txt.Length * 20.5)) * 3, 22 * 3);
-            Graphics g = Graphics.FromImage(image);
+            Bitmap bitmap1 = new Bitmap((int)Math.Ceiling((txt.Length * 20.5)) * 3, 22 * 3);
+            Graphics g = Graphics.FromImage(bitmap1);
             try
             {
                 //生成随机生成器
@@ -1524,22 +1345,22 @@ namespace vcs_Draw_Captcha1
                 //画图片的背景噪音线
                 for (int i = 0; i < 2; i++)
                 {
-                    Point tem_Point_1 = new Point(random.Next(image.Width), random.Next(image.Height));
-                    Point tem_Point_2 = new Point(random.Next(image.Width), random.Next(image.Height));
+                    Point tem_Point_1 = new Point(random.Next(bitmap1.Width), random.Next(bitmap1.Height));
+                    Point tem_Point_2 = new Point(random.Next(bitmap1.Width), random.Next(bitmap1.Height));
                     g.DrawLine(new Pen(Color.Black), tem_Point_1, tem_Point_2);
                 }
-                Font font = new Font("宋体", 12 * 2, (FontStyle.Bold));
-                LinearGradientBrush brush = new LinearGradientBrush(new Rectangle(0, 0, image.Width, image.Height), Color.Blue, Color.DarkRed, 1.2f, true);
+                Font font = new Font("標楷體", 12 * 2, (FontStyle.Bold));
+                LinearGradientBrush brush = new LinearGradientBrush(new Rectangle(0, 0, bitmap1.Width, bitmap1.Height), Color.Blue, Color.DarkRed, 1.2f, true);
                 g.DrawString(txt, font, brush, 2, 2);
                 //画图片的前景噪音点
                 for (int i = 0; i < 100; i++)
                 {
-                    Point tem_point = new Point(random.Next(image.Width), random.Next(image.Height));
-                    image.SetPixel(tem_point.X, tem_point.Y, Color.FromArgb(random.Next()));
+                    Point tem_point = new Point(random.Next(bitmap1.Width), random.Next(bitmap1.Height));
+                    bitmap1.SetPixel(tem_point.X, tem_point.Y, Color.FromArgb(random.Next()));
                 }
                 //画图片的边框线
-                g.DrawRectangle(new Pen(Color.Silver), 0, 0, image.Width - 1, image.Height - 1);
-                pictureBox24.Image = image;
+                g.DrawRectangle(new Pen(Color.Silver), 0, 0, bitmap1.Width - 1, bitmap1.Height - 1);
+                pictureBox24.Image = bitmap1;
             }
             catch { }
         }
@@ -1609,7 +1430,6 @@ namespace vcs_Draw_Captcha1
         //中文驗證法碼 SP
         //Captcha 24 SP
 
-
         //Captcha 25 ST
 
         /*
@@ -1639,7 +1459,7 @@ ASP.Net實現中文漢字驗證碼
   
   
   
-  Encoding gb=System.Text.Encoding.GetEncoding("gb2312");
+  Encoding gb=Encoding.GetEncoding("gb2312");
   object[] bytes=gb.Encoding.GetBytes ("好")；
   
   
@@ -1685,7 +1505,7 @@ ASP.Net實現中文漢字驗證碼
 
     沒錯我們可以通過這兩個方法將漢字字符編碼為字節數組，同樣知道了漢字GB2312的字節數組編碼也就可以將字節數組解碼為漢字字符。通過對“好”字進行編碼為字節數組後  
 
-    Encoding gb=System.Text.Encoding.GetEncoding("gb2312");   
+    Encoding gb=Encoding.GetEncoding("gb2312");   
     object[] bytes=gb.Encoding.GetBytes ("好")； 
           
 
@@ -1787,17 +1607,17 @@ ASP.Net實現中文漢字驗證碼
         {
             int nBmpWidth = 26 * nLen + 10;
             int nBmpHeight = 40;
-            Bitmap bmp = new Bitmap(nBmpWidth, nBmpHeight);
+            Bitmap bitmap1 = new Bitmap(nBmpWidth, nBmpHeight);
 
             // 1. 生成隨機背景顏色
             int nRed, nGreen, nBlue;  // 背景的三元色
-            System.Random rd = new Random((int)System.DateTime.Now.Ticks);
+            Random rd = new Random((int)DateTime.Now.Ticks);
             nRed = rd.Next(255) % 128 + 128;
             nGreen = rd.Next(255) % 128 + 128;
             nBlue = rd.Next(255) % 128 + 128;
 
             // 2. 填充位圖背景
-            Graphics graph = Graphics.FromImage(bmp);
+            Graphics graph = Graphics.FromImage(bitmap1);
             graph.FillRectangle(new SolidBrush(Color.FromArgb(nRed, nGreen, nBlue))
              , 0
              , 0
@@ -1842,10 +1662,10 @@ ASP.Net實現中文漢字驗證碼
                      y);
             }
             // 5. 輸出字節流
-            System.IO.MemoryStream ms = new System.IO.MemoryStream();
-            bmp.Save(ms, ImageFormat.Jpeg);
-            //bmp.Dispose();
-            pictureBox25.Image = bmp;
+            MemoryStream ms = new MemoryStream();
+            bitmap1.Save(ms, ImageFormat.Jpeg);
+            //bitmap1.Dispose();
+            pictureBox25.Image = bitmap1;
             graph.Dispose();
 
             strKey = strResult;
@@ -1865,6 +1685,211 @@ ASP.Net實現中文漢字驗證碼
         }
         //Captcha 25 SP
 
+        //Captcha 26 ST
+        void draw_captcha26()
+        {
+        }
+        //Captcha 26 SP
+
+        //Captcha 27 ST
+        void draw_captcha27()
+        {
+        }
+        //Captcha 27 SP
+
+        //Captcha 28 ST
+        void draw_captcha28()
+        {
+        }
+        //Captcha 28 SP
+
+        //Captcha 29 ST
+        void draw_captcha29()
+        {
+            Bitmap bitmap1 = MakeCaptchaImge1(captcha_text,
+                50, //最小
+                70, //最大
+                pictureBox29.ClientSize.Width,
+                pictureBox29.ClientSize.Height);
+            pictureBox29.Image = bitmap1;
+        }
+        //Captcha 29 SP
+
+        //Captcha 30 ST
+        void draw_captcha30()
+        {
+            using (Font the_font = new Font("Times New Roman", 30))
+            {
+                pictureBox30.Image = MakeCaptchaImage2(captcha_text,
+                    pictureBox30.ClientSize.Width,
+                    pictureBox30.ClientSize.Height,
+                    the_font, Brushes.Blue);
+            }
+        }
+
+        private Random Rand = new Random();
+
+        // Make a captcha image for the text.
+        private Bitmap MakeCaptchaImge1(string txt, int min_size, int max_size, int W, int H)
+        {
+            // Make the bitmap and associated Graphics object.
+            Bitmap bitmap1 = new Bitmap(W, H);
+            using (Graphics g = Graphics.FromImage(bitmap1))
+            {
+                g.SmoothingMode = SmoothingMode.HighQuality;
+                g.Clear(Color.White);
+
+                // See how much room is available for each character.
+                int ch_wid = (int)(W / txt.Length);
+
+                // Draw each character.
+                for (int i = 0; i < txt.Length; i++)
+                {
+                    float font_size = Rand.Next(min_size, max_size);
+                    using (Font the_font = new Font("Times New Roman", font_size, FontStyle.Bold))
+                    {
+                        DrawCharacter1(txt.Substring(i, 1), g, the_font, i * ch_wid, ch_wid, W, H);
+                    }
+                }
+            }
+            return bitmap1;
+        }
+
+        // Draw a deformed character at this position.
+        private int PreviousAngle = 0;
+        private void DrawCharacter1(string txt, Graphics g, Font the_font, int X, int ch_wid, int wid, int hgt)
+        {
+            // Center the text.
+            using (StringFormat string_format = new StringFormat())
+            {
+                string_format.Alignment = StringAlignment.Center;
+                string_format.LineAlignment = StringAlignment.Center;
+                RectangleF rectf = new RectangleF(X, 0, ch_wid, hgt);
+
+                // Convert the text into a path.
+                using (GraphicsPath graphics_path = new GraphicsPath())
+                {
+                    graphics_path.AddString(txt,
+                        the_font.FontFamily, (int)(Font.Style),
+                        the_font.Size, rectf, string_format);
+
+                    // Make random warping parameters.
+                    float x1 = (float)(X + Rand.Next(ch_wid) / 2);
+                    float y1 = (float)(Rand.Next(hgt) / 2);
+                    float x2 = (float)(X + ch_wid / 2 + Rand.Next(ch_wid) / 2);
+                    float y2 = (float)(hgt / 2 + Rand.Next(hgt) / 2);
+                    PointF[] pts = {
+                    new PointF(
+                        (float)(X + Rand.Next(ch_wid) / 4),
+                        (float)(Rand.Next(hgt) / 4)),
+                    new PointF(
+                        (float)(X + ch_wid - Rand.Next(ch_wid) / 4),
+                        (float)(Rand.Next(hgt) / 4)),
+                    new PointF(
+                        (float)(X + Rand.Next(ch_wid) / 4),
+                        (float)(hgt - Rand.Next(hgt) / 4)),
+                    new PointF(
+                        (float)(X + ch_wid - Rand.Next(ch_wid) / 4),
+                        (float)(hgt - Rand.Next(hgt) / 4))
+                };
+                    Matrix mat = new Matrix();
+                    graphics_path.Warp(pts, rectf, mat,
+                        WarpMode.Perspective, 0);
+
+                    // Rotate a bit randomly.
+                    float dx = (float)(X + ch_wid / 2);
+                    float dy = (float)(hgt / 2);
+                    g.TranslateTransform(-dx, -dy, MatrixOrder.Append);
+                    int angle = PreviousAngle;
+                    do
+                    {
+                        angle = Rand.Next(-30, 30);
+                    } while (Math.Abs(angle - PreviousAngle) < 20);
+                    PreviousAngle = angle;
+                    g.RotateTransform(angle, MatrixOrder.Append);
+                    g.TranslateTransform(dx, dy, MatrixOrder.Append);
+
+                    // Draw the text.
+                    g.FillPath(Brushes.Blue, graphics_path);
+                    g.ResetTransform();
+                }
+            }
+        }
+
+        // Draw the words with letters overlapping each other.
+        private Bitmap MakeCaptchaImage2(string txt, int W, int H, Font the_font, Brush the_brush)
+        {
+            Bitmap bitmap1 = new Bitmap(W, H);
+            using (Graphics g = Graphics.FromImage(bitmap1))
+            {
+                g.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+
+                int x = 0;
+                foreach (char ch in txt.ToCharArray())
+                {
+                    SizeF ch_size = g.MeasureString(ch.ToString(), the_font);
+                    int y = (int)(Rand.NextDouble() * (H - ch_size.Height));
+                    g.DrawString(ch.ToString(), the_font, the_brush, x, y);
+                    x += (int)(ch_size.Width * 0.35);
+                }
+            }
+            return bitmap1;
+        }
+
+        //彩色驗證碼
+        private void CreateImage(string checkCode)
+        {
+            int W = checkCode.Length * 15;
+            int H = 50;
+
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+
+            //定義顏色
+            Color[] c = { Color.Black, Color.Red, Color.DarkBlue, Color.Green, Color.Orange, Color.Brown, Color.DarkCyan, Color.Purple };
+            //定義字體
+            string[] font = { "Verdana", "Microsoft Sans Serif", "Comic Sans MS", "Arial", "宋體" };
+            Random rand = new Random();
+            //隨機輸出噪點
+            for (int i = 0; i < 50; i++)
+            {
+                int x = rand.Next(bitmap1.Width);
+                int y = rand.Next(bitmap1.Height);
+                g.DrawRectangle(new Pen(Color.LightGray, 0), x, y, 1, 1);
+            }
+
+            //輸出不同字體和顏色的驗證碼字符
+            for (int i = 0; i < checkCode.Length; i++)
+            {
+                int cindex = rand.Next(7);
+                int findex = rand.Next(5);
+
+                Font f = new Font(font[findex], 15, FontStyle.Bold);
+                Brush b = new SolidBrush(c[cindex]);
+                int ii = 4;
+                if ((i + 1) % 2 == 0)
+                {
+                    ii = 2;
+                }
+                g.DrawString(checkCode.Substring(i, 1), f, b, 3 + (i * 12), ii);
+            }
+            //畫一個邊框
+            g.DrawRectangle(new Pen(Color.Black, 0), 0, 0, bitmap1.Width - 1, bitmap1.Height - 1);
+
+            g.Dispose();
+
+            pictureBox31.Image = bitmap1;
+        }
+
+        //Captcha 30 SP
+
+        //Captcha 31 ST
+        void draw_captcha31()
+        {
+            CreateImage(captcha_text);
+        }
+        //Captcha 31 SP
     }
 
     /// <summary>
@@ -1913,8 +1938,8 @@ ASP.Net實現中文漢字驗證碼
         {
             int width = 120;
             int height = 40;
-            Bitmap bmp = new Bitmap(width, height);
-            Graphics g = Graphics.FromImage(bmp);
+            Bitmap bitmap1 = new Bitmap(width, height);
+            Graphics g = Graphics.FromImage(bitmap1);
             Random rnd = new Random();
 
             //配景色
@@ -1935,24 +1960,24 @@ ASP.Net實現中文漢字驗證碼
             //樂音線
             for (int i = 0; i < 10; i++)
             {
-                int x1 = rnd.Next(bmp.Width);
-                int x2 = rnd.Next(bmp.Width);
-                int y1 = rnd.Next(bmp.Height);
-                int y2 = rnd.Next(bmp.Height);
+                int x1 = rnd.Next(bitmap1.Width);
+                int x2 = rnd.Next(bitmap1.Width);
+                int y1 = rnd.Next(bitmap1.Height);
+                int y2 = rnd.Next(bitmap1.Height);
 
                 Pen p = new Pen(GetColor(rnd), 1);
                 g.DrawLine(p, x1, y1, x2, y2);
             }
 
             //歪曲
-            bmp = TwistImage(bmp, true, 3, rnd.NextDouble() * Math.PI * 2);
-            g = Graphics.FromImage(bmp);
+            bitmap1 = TwistImage(bitmap1, true, 3, rnd.NextDouble() * Math.PI * 2);
+            g = Graphics.FromImage(bitmap1);
 
             //噪點
             for (int i = 0; i < 100; i++)
             {
-                int x1 = rnd.Next(bmp.Width);
-                int y1 = rnd.Next(bmp.Height);
+                int x1 = rnd.Next(bitmap1.Width);
+                int y1 = rnd.Next(bitmap1.Height);
 
                 Pen p = new Pen(GetColor(rnd), 1);
                 g.DrawRectangle(p, x1, y1, 1, 1);
@@ -1961,7 +1986,7 @@ ASP.Net實現中文漢字驗證碼
             //邊框
             g.DrawRectangle(new Pen(new SolidBrush(Color.FromArgb(153, 153, 153))), new Rectangle(0, 0, width - 1, height - 1));
 
-            return bmp;
+            return bitmap1;
         }
         #endregion
 
@@ -2015,20 +2040,20 @@ ASP.Net實現中文漢字驗證碼
         /// <param name="bXDir">假如歪曲則選擇為True</param>  
         /// <param name="nMultValue">波形的幅度倍數，越年夜歪曲的水平越高，普通為3</param>  
         /// <param name="dPhase">波形的肇端相位，取值區間[0-2*PI)</param>  
-        private static Bitmap TwistImage(Bitmap srcBmp, bool bXDir, double dMultValue, double dPhase)
+        private static Bitmap TwistImage(Bitmap bitmap0, bool bXDir, double dMultValue, double dPhase)
         {
-            Bitmap destBmp = new Bitmap(srcBmp.Width, srcBmp.Height);
+            Bitmap bitmap1 = new Bitmap(bitmap0.Width, bitmap0.Height);
 
             // 將位圖配景填充為白色  
-            Graphics graph = Graphics.FromImage(destBmp);
-            graph.FillRectangle(new SolidBrush(Color.White), 0, 0, destBmp.Width, destBmp.Height);
-            graph.Dispose();
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.FillRectangle(new SolidBrush(Color.White), 0, 0, bitmap1.Width, bitmap1.Height);
+            g.Dispose();
 
-            double dBaseAxisLen = bXDir ? (double)destBmp.Height : (double)destBmp.Width;
+            double dBaseAxisLen = bXDir ? (double)bitmap1.Height : (double)bitmap1.Width;
 
-            for (int i = 0; i < destBmp.Width; i++)
+            for (int i = 0; i < bitmap1.Width; i++)
             {
-                for (int j = 0; j < destBmp.Height; j++)
+                for (int j = 0; j < bitmap1.Height; j++)
                 {
                     double dx = 0;
                     dx = bXDir ? (Math.PI * 2 * (double)j) / dBaseAxisLen : (Math.PI * 2 * (double)i) / dBaseAxisLen;
@@ -2040,19 +2065,16 @@ ASP.Net實現中文漢字驗證碼
                     nOldX = bXDir ? i + (int)(dy * dMultValue) : i;
                     nOldY = bXDir ? j : j + (int)(dy * dMultValue);
 
-                    Color color = srcBmp.GetPixel(i, j);
-                    if (nOldX >= 0 && nOldX < destBmp.Width
-                     && nOldY >= 0 && nOldY < destBmp.Height)
+                    Color color = bitmap0.GetPixel(i, j);
+                    if (nOldX >= 0 && nOldX < bitmap1.Width && nOldY >= 0 && nOldY < bitmap1.Height)
                     {
-                        destBmp.SetPixel(nOldX, nOldY, color);
+                        bitmap1.SetPixel(nOldX, nOldY, color);
                     }
                 }
             }
-
-            return destBmp;
+            return bitmap1;
         }
         #endregion
-
     }
 
     /// <summary>
@@ -2180,20 +2202,21 @@ ASP.Net實現中文漢字驗證碼
         /// <param name="nMultValue">波形的幅度倍數，越大扭曲的程度越高，一般為3</param>
         /// <param name="dPhase">波形的起始相位，取值區間[0-2*PI)</param>
         /// <returns></returns>
-        public Bitmap TwistImage(Bitmap srcBmp, bool bXDir, double dMultValue, double dPhase)
+        /// 1111
+        public Bitmap TwistImage(Bitmap bitmap0, bool bXDir, double dMultValue, double dPhase)
         {
-            Bitmap destBmp = new Bitmap(srcBmp.Width, srcBmp.Height);
+            Bitmap bitmap1 = new Bitmap(bitmap0.Width, bitmap0.Height);
 
             // 將位圖背景填充為白色
-            Graphics graph = Graphics.FromImage(destBmp);
-            graph.FillRectangle(new SolidBrush(Color.White), 0, 0, destBmp.Width, destBmp.Height);
-            graph.Dispose();
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.FillRectangle(new SolidBrush(Color.White), 0, 0, bitmap1.Width, bitmap1.Height);
+            g.Dispose();
 
-            double dBaseAxisLen = bXDir ? (double)destBmp.Height : (double)destBmp.Width;
+            double dBaseAxisLen = bXDir ? (double)bitmap1.Height : (double)bitmap1.Width;
 
-            for (int i = 0; i < destBmp.Width; i++)
+            for (int i = 0; i < bitmap1.Width; i++)
             {
-                for (int j = 0; j < destBmp.Height; j++)
+                for (int j = 0; j < bitmap1.Height; j++)
                 {
                     double dx = 0;
                     dx = bXDir ? (PI2 * (double)j) / dBaseAxisLen : (PI2 * (double)i) / dBaseAxisLen;
@@ -2205,18 +2228,15 @@ ASP.Net實現中文漢字驗證碼
                     nOldX = bXDir ? i + (int)(dy * dMultValue) : i;
                     nOldY = bXDir ? j : j + (int)(dy * dMultValue);
 
-                    Color color = srcBmp.GetPixel(i, j);
-                    if (nOldX >= 0 && nOldX < destBmp.Width
-                     && nOldY >= 0 && nOldY < destBmp.Height)
+                    Color color = bitmap0.GetPixel(i, j);
+                    if (nOldX >= 0 && nOldX < bitmap1.Width && nOldY >= 0 && nOldY < bitmap1.Height)
                     {
-                        destBmp.SetPixel(nOldX, nOldY, color);
+                        bitmap1.SetPixel(nOldX, nOldY, color);
                     }
                 }
             }
-
-            return destBmp;
+            return bitmap1;
         }
-
 
 
         #endregion
@@ -2234,9 +2254,9 @@ ASP.Net實現中文漢字驗證碼
             int imageWidth = (int)(code.Length * fWidth) + 4 + Padding * 2;
             int imageHeight = fSize * 2 + Padding * 2;
 
-            Bitmap image = new Bitmap(imageWidth - 10, imageHeight - 10);
+            Bitmap bitmap1 = new Bitmap(imageWidth - 10, imageHeight - 10);
 
-            Graphics g = Graphics.FromImage(image);
+            Graphics g = Graphics.FromImage(bitmap1);
 
             g.Clear(BackgroundColor);
 
@@ -2244,15 +2264,15 @@ ASP.Net實現中文漢字驗證碼
             if (this.Chaos)
             {
 
-                Pen pen = new Pen(ChaosColor, 0);
+                Pen p = new Pen(ChaosColor, 0);
                 int c = ChaosWight * 10;
 
                 for (int i = 0; i < c; i++)
                 {
-                    int x = rnd.Next(image.Width);
-                    int y = rnd.Next(image.Height);
+                    int x = rnd.Next(bitmap1.Width);
+                    int y = rnd.Next(bitmap1.Height);
 
-                    g.DrawRectangle(pen, x, y, 1, 1);
+                    g.DrawRectangle(p, x, y, 1, 1);
                 }
             }
 
@@ -2292,13 +2312,13 @@ ASP.Net實現中文漢字驗證碼
             }
 
             //畫一個邊框 邊框顏色為Color.Gainsboro
-            g.DrawRectangle(new Pen(Color.Gainsboro, 0), 0, 0, image.Width - 1, image.Height - 1);
+            g.DrawRectangle(new Pen(Color.Gainsboro, 0), 0, 0, bitmap1.Width - 1, bitmap1.Height - 1);
             g.Dispose();
 
             //產生波形（Add By 51aspx.com）
-            image = TwistImage(image, true, 8, 4);
+            bitmap1 = TwistImage(bitmap1, true, 8, 4);
 
-            return image;
+            return bitmap1;
         }
 
         /// <summary>
@@ -2477,7 +2497,7 @@ ASP.Net實現中文漢字驗證碼
             //產生隨機字符串
             GetValidateCode();
             //聲明一個位圖對象
-            Bitmap bitMap = null;
+            Bitmap bitmap1 = null;
             //聲明一個繪圖畫面
             Graphics gph = null;
             //創建內存流
@@ -2490,9 +2510,9 @@ ASP.Net實現中文漢字驗證碼
             //字號取二者中小者，以確保所有字符能夠顯示，並且字符的下半部分也能顯示
             fontSize = fontWidth <= fontHeight ? fontWidth : fontHeight;
             //創建位圖對象
-            bitMap = new Bitmap(width + FontSize, height);
+            bitmap1 = new Bitmap(width + FontSize, height);
             //根據上面創建的位圖對象創建繪圖圖面
-            gph = Graphics.FromImage(bitMap);
+            gph = Graphics.FromImage(bitmap1);
             //設定驗證碼圖片背景色
             gph.Clear(GetControllableColor(200));
             //產生隨機干擾線條
@@ -2524,17 +2544,17 @@ ASP.Net實現中文漢字驗證碼
                 gph.DrawString(validStr.Substring(i, 1), textFont, sb, fontSize + i * (fontSize + space), y);
             }
             //扭曲圖片
-            bitMap = TwistImage(bitMap, true, random.Next(3, 5), random.Next(3));
+            bitmap1 = TwistImage(bitmap1, true, random.Next(3, 5), random.Next(3));
             try
             {
-                bitMap.Save(memStream, ImageFormat.Gif);
+                bitmap1.Save(memStream, ImageFormat.Gif);
             }
             catch (Exception ex)
             {
-                System.Windows.Forms.MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message);
             }
             //gph.Dispose();
-            bitMap.Dispose();
+            bitmap1.Dispose();
             Image img = Image.FromStream(memStream);
             gph.DrawImage(img, 50, 20, width, 10);
             return img;
@@ -2548,7 +2568,7 @@ ASP.Net實現中文漢字驗證碼
             Color color = Color.Black;
             if (colorBase > 200)
             {
-                System.Windows.Forms.MessageBox.Show("可控制顏色參數大於200，顏色默認位黑色");
+                MessageBox.Show("可控制顏色參數大於200，顏色默認位黑色");
             }
             Random random = new Random();
             //確保 R,G,B 均大於 colorBase，這樣才能保證背景色較淺
@@ -2563,7 +2583,7 @@ ASP.Net實現中文漢字驗證碼
         /// <param name="dMultValue"></param>
         /// <param name="dPhase"></param>
         /// <returns></returns>
-        Bitmap TwistImage(Bitmap srcBmp, bool bXDir, double dMultValue, double dPhase)
+        Bitmap TwistImage(Bitmap bitmap0, bool bXDir, double dMultValue, double dPhase)
         {
             int leftMargin = 0;
             int rightMargin = 0;
@@ -2571,11 +2591,11 @@ ASP.Net實現中文漢字驗證碼
             int bottomMargin = 0;
             //float PI = 3.14159265358979f;
             float PI2 = 6.28318530717959f;
-            Bitmap destBmp = new Bitmap(srcBmp.Width, srcBmp.Height);
-            double dBaseAxisLen = bXDir ? Convert.ToDouble(destBmp.Height) : Convert.ToDouble(destBmp.Width);
-            for (int i = 0; i < destBmp.Width; i++)
+            Bitmap bitmap1 = new Bitmap(bitmap0.Width, bitmap0.Height);
+            double dBaseAxisLen = bXDir ? Convert.ToDouble(bitmap1.Height) : Convert.ToDouble(bitmap1.Width);
+            for (int i = 0; i < bitmap1.Width; i++)
             {
-                for (int j = 0; j < destBmp.Height; j++)
+                for (int j = 0; j < bitmap1.Height; j++)
                 {
                     double dx = 0;
                     dx = bXDir ? PI2 * Convert.ToDouble(j) / dBaseAxisLen : PI2 * Convert.ToDouble(i) / dBaseAxisLen;
@@ -2586,14 +2606,14 @@ ASP.Net實現中文漢字驗證碼
                     int nOldY = 0;
                     nOldX = bXDir ? i + Convert.ToInt32(dy * dMultValue) : i;
                     nOldY = bXDir ? j : j + Convert.ToInt32(dy * dMultValue);
-                    Color color = srcBmp.GetPixel(i, j);
-                    if (nOldX >= leftMargin && nOldX < destBmp.Width - rightMargin && nOldY >= bottomMargin && nOldY < destBmp.Height - topMargin)
+                    Color color = bitmap0.GetPixel(i, j);
+                    if (nOldX >= leftMargin && nOldX < bitmap1.Width - rightMargin && nOldY >= bottomMargin && nOldY < bitmap1.Height - topMargin)
                     {
-                        destBmp.SetPixel(nOldX, nOldY, color);
+                        bitmap1.SetPixel(nOldX, nOldY, color);
                     }
                 }
             }
-            return destBmp;
+            return bitmap1;
         }
         /// <summary>
         /// 判斷驗證碼是否正確
@@ -2904,8 +2924,8 @@ ASP.Net實現中文漢字驗證碼
         /// <returns></returns>
         private Bitmap DrawBackground()
         {
-            Bitmap bit = new Bitmap(bgWidth + 1, bgHeight + 1);
-            Graphics g = Graphics.FromImage(bit);
+            Bitmap bitmap1 = new Bitmap(bgWidth + 1, bgHeight + 1);
+            Graphics g = Graphics.FromImage(bitmap1);
             g.SmoothingMode = SmoothingMode.HighQuality;
 
             g.Clear(Color.White);
@@ -2914,12 +2934,11 @@ ASP.Net實現中文漢字驗證碼
             g.FillRectangle(brush, rectangle);
 
             //畫噪點
-            if (isPixel)
+            if (isPixel == true)
             {
                 g.DrawImageUnscaled(DrawRandomPixel(30), 0, 0);
             }
             g.DrawImageUnscaled(DrawRandBgString(), 0, 0);
-
 
             //畫曲線
             //g.DrawImageUnscaled(DrawRandomBezier(bezierCount), 0, 0);
@@ -2937,24 +2956,22 @@ ASP.Net實現中文漢字驗證碼
                 //畫圓角
                 DrawRoundRectangle(g, rectangle, Color.FromArgb(90, 87, 46), 1, 3);
             }
-
-            return bit;
-
+            return bitmap1;
         }
         #endregion
 
         #region 畫正弦曲線
-        private Bitmap DrawTwist(Bitmap bmp, Int32 tWidth, Int32 tHeight, float angle, Color color)
+        private Bitmap DrawTwist(Bitmap bitmap0, Int32 tWidth, Int32 tHeight, float angle, Color color)
         {
             //爲了方便查看效果，在這裏我定義了一個常量。
             //它在定義數組的長度和for循環中都要用到。
             int size = bgWidth;
 
             double[] x = new double[size];
-            Bitmap b = new Bitmap(bmp.Width, bmp.Height);
-            b.MakeTransparent();
-            Graphics graphics = Graphics.FromImage(b);
-            Pen pen = new Pen(color);
+            Bitmap bitmap1 = new Bitmap(bitmap0.Width, bitmap0.Height);
+            bitmap1.MakeTransparent();
+            Graphics graphics = Graphics.FromImage(bitmap1);
+            Pen p = new Pen(color);
 
             //畫正弦曲線的橫軸間距參數。建議所用的值應該是 正數且是2的倍數。
             //在這裏採用2。
@@ -2973,14 +2990,14 @@ ASP.Net實現中文漢字驗證碼
                 //改tHeight，實現正弦曲線高度的變化。
                 x[i] = Math.Sin(2 * Math.PI * i / tWidth) * tHeight;
 
-                graphics.DrawLine(pen, i * val, temp, i * val + val / 2, (float)x[i]);
+                graphics.DrawLine(p, i * val, temp, i * val + val / 2, (float)x[i]);
                 temp = (float)x[i];
             }
             graphics.RotateTransform(60, MatrixOrder.Prepend);
 
             //旋轉圖片
-            // b = KiRotate(b, angle, Color.Transparent);
-            return b;
+            // bitmap1 = KiRotate(b, angle, Color.Transparent);
+            return bitmap1;
         }
         #endregion
 
@@ -2993,20 +3010,21 @@ ASP.Net實現中文漢字驗證碼
         /// <param name="dMultValue">波形的幅度倍數，越大扭曲的程度越高，一般爲3</param>
         /// <param name="dPhase">波形的起始相位，取值區間[0-2*PI)</param>
         /// <returns></returns>
-        public Bitmap TwistImage(Bitmap srcBmp, bool bXDir, double dMultValue, double dPhase)
+        /// 2222
+        public Bitmap TwistImage(Bitmap bitmap0, bool bXDir, double dMultValue, double dPhase)
         {
-            Bitmap destBmp = new Bitmap(srcBmp.Width, srcBmp.Height);
+            Bitmap bitmap1 = new Bitmap(bitmap0.Width, bitmap0.Height);
             double PI2 = 6.283185307179586476925286766559;
             // 將位圖背景填充爲白色
-            Graphics graph = Graphics.FromImage(destBmp);
-            graph.FillRectangle(new SolidBrush(Color.White), 0, 0, destBmp.Width, destBmp.Height);
-            graph.Dispose();
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.FillRectangle(new SolidBrush(Color.White), 0, 0, bitmap1.Width, bitmap1.Height);
+            g.Dispose();
 
-            double dBaseAxisLen = bXDir ? (double)destBmp.Height : (double)destBmp.Width;
+            double dBaseAxisLen = bXDir ? (double)bitmap1.Height : (double)bitmap1.Width;
 
-            for (int i = 0; i < destBmp.Width; i++)
+            for (int i = 0; i < bitmap1.Width; i++)
             {
-                for (int j = 0; j < destBmp.Height; j++)
+                for (int j = 0; j < bitmap1.Height; j++)
                 {
                     double dx = 0;
                     dx = bXDir ? (PI2 * (double)j) / dBaseAxisLen : (PI2 * (double)i) / dBaseAxisLen;
@@ -3018,15 +3036,14 @@ ASP.Net實現中文漢字驗證碼
                     nOldX = bXDir ? i + (int)(dy * dMultValue) : i;
                     nOldY = bXDir ? j : j + (int)(dy * dMultValue);
 
-                    Color color = srcBmp.GetPixel(i, j);
-                    if (nOldX >= 0 && nOldX < destBmp.Width
-                     && nOldY >= 0 && nOldY < destBmp.Height)
+                    Color color = bitmap0.GetPixel(i, j);
+                    if (nOldX >= 0 && nOldX < bitmap1.Width && nOldY >= 0 && nOldY < bitmap1.Height)
                     {
-                        destBmp.SetPixel(nOldX, nOldY, color);
+                        bitmap1.SetPixel(nOldX, nOldY, color);
                     }
                 }
             }
-            return destBmp;
+            return bitmap1;
         }
         #endregion
 
@@ -3038,10 +3055,10 @@ ASP.Net實現中文漢字驗證碼
         /// <param name="angle">旋轉角度</param>
         /// <param name="bkColor">背景色</param>
         /// <returns>輸出Bitmap</returns>
-        public static Bitmap KiRotate(Bitmap bmp, float angle, Color bkColor)
+        public static Bitmap KiRotate(Bitmap bitmap0, float angle, Color bkColor)
         {
-            int w = bmp.Width;
-            int h = bmp.Height;
+            int w = bitmap0.Width;
+            int h = bitmap0.Height;
 
             PixelFormat pf;
 
@@ -3051,13 +3068,13 @@ ASP.Net實現中文漢字驗證碼
             }
             else
             {
-                pf = bmp.PixelFormat;
+                pf = bitmap0.PixelFormat;
             }
 
-            Bitmap tmp = new Bitmap(w, h, pf);
-            Graphics g = Graphics.FromImage(tmp);
+            Bitmap bitmap1 = new Bitmap(w, h, pf);
+            Graphics g = Graphics.FromImage(bitmap1);
             g.Clear(bkColor);
-            g.DrawImageUnscaled(bmp, 1, 1);
+            g.DrawImageUnscaled(bitmap0, 1, 1);
             g.Dispose();
 
             GraphicsPath path = new GraphicsPath();
@@ -3066,17 +3083,17 @@ ASP.Net實現中文漢字驗證碼
             mtrx.Rotate(angle);
             RectangleF rct = path.GetBounds(mtrx);
 
-            Bitmap dst = new Bitmap((int)rct.Width, (int)rct.Height, pf);
-            g = Graphics.FromImage(dst);
+            Bitmap bitmap2 = new Bitmap((int)rct.Width, (int)rct.Height, pf);
+            g = Graphics.FromImage(bitmap2);
             g.Clear(bkColor);
             g.TranslateTransform(-rct.X, -rct.Y);
             g.RotateTransform(angle);
             g.InterpolationMode = InterpolationMode.HighQualityBilinear;
-            g.DrawImageUnscaled(tmp, 0, 0);
+            g.DrawImageUnscaled(bitmap1, 0, 0);
             g.Dispose();
-            tmp.Dispose();
+            bitmap1.Dispose();
 
-            return dst;
+            return bitmap2;
         }
         #endregion
 
@@ -3089,9 +3106,9 @@ ASP.Net實現中文漢字驗證碼
         /// <returns></returns>
         public Bitmap DrawRandomBezier(Int32 lineNum)
         {
-            Bitmap b = new Bitmap(bgWidth, bgHeight);
-            b.MakeTransparent();
-            Graphics g = Graphics.FromImage(b);
+            Bitmap bitmap1 = new Bitmap(bgWidth, bgHeight);
+            bitmap1.MakeTransparent();
+            Graphics g = Graphics.FromImage(bitmap1);
             g.Clear(Color.Transparent);
             g.SmoothingMode = SmoothingMode.HighQuality;
             g.PixelOffsetMode = PixelOffsetMode.HighQuality;
@@ -3103,10 +3120,10 @@ ASP.Net實現中文漢字驗證碼
             {
                 Pen p = new Pen(GetRandomDeepColor());
                 Point[] point = {
-                                        new Point(random.Next(1, (b.Width / 10)), random.Next(1, (b.Height))),
-                                        new Point(random.Next((b.Width / 10) * 2, (b.Width / 10) * 4), random.Next(1, (b.Height))),
-                                        new Point(random.Next((b.Width / 10) * 4, (b.Width / 10) * 6), random.Next(1, (b.Height))),
-                                        new Point(random.Next((b.Width / 10) * 8, b.Width), random.Next(1, (b.Height)))
+                                        new Point(random.Next(1, (bitmap1.Width / 10)), random.Next(1, (bitmap1.Height))),
+                                        new Point(random.Next((bitmap1.Width / 10) * 2, (bitmap1.Width / 10) * 4), random.Next(1, (bitmap1.Height))),
+                                        new Point(random.Next((bitmap1.Width / 10) * 4, (bitmap1.Width / 10) * 6), random.Next(1, (bitmap1.Height))),
+                                        new Point(random.Next((bitmap1.Width / 10) * 8, bitmap1.Width), random.Next(1, (bitmap1.Height)))
                                     };
 
                 gPath1.AddBeziers(point);
@@ -3117,16 +3134,16 @@ ASP.Net實現中文漢字驗證碼
             {
                 Pen p = new Pen(GetRandomDeepColor());
                 Point[] point = {
-                                new Point(random.Next(1, b.Width), random.Next(1, b.Height)),
-                                new Point(random.Next((b.Width / 10) * 2, b.Width), random.Next(1, b.Height)),
-                                new Point(random.Next((b.Width / 10) * 4, b.Width), random.Next(1, b.Height)),
-                                new Point(random.Next(1, b.Width), random.Next(1, b.Height))
+                                new Point(random.Next(1, bitmap1.Width), random.Next(1, bitmap1.Height)),
+                                new Point(random.Next((bitmap1.Width / 10) * 2, bitmap1.Width), random.Next(1, bitmap1.Height)),
+                                new Point(random.Next((bitmap1.Width / 10) * 4, bitmap1.Width), random.Next(1, bitmap1.Height)),
+                                new Point(random.Next(1, bitmap1.Width), random.Next(1, bitmap1.Height))
                                     };
                 gPath1.AddBeziers(point);
                 g.DrawPath(p, gPath1);
                 p.Dispose();
             }
-            return b;
+            return bitmap1;
         }
         #endregion
 
@@ -3140,22 +3157,22 @@ ASP.Net實現中文漢字驗證碼
         public Bitmap DrawRandomLine(Int32 lineNum)
         {
             if (lineNum < 0) throw new ArgumentNullException("參數bmp爲空！");
-            Bitmap b = new Bitmap(bgWidth, bgHeight);
-            b.MakeTransparent();
-            Graphics g = Graphics.FromImage(b);
+            Bitmap bitmap1 = new Bitmap(bgWidth, bgHeight);
+            bitmap1.MakeTransparent();
+            Graphics g = Graphics.FromImage(bitmap1);
             g.Clear(Color.Transparent);
             g.PixelOffsetMode = PixelOffsetMode.HighQuality;
             g.SmoothingMode = SmoothingMode.HighQuality;
             for (int i = 0; i < lineNum; i++)
             {
                 Pen p = new Pen(GetRandomDeepColor());
-                Point pt1 = new Point(random.Next(1, (b.Width / 5) * 2), random.Next(b.Height));
-                Point pt2 = new Point(random.Next((b.Width / 5) * 3, b.Width), random.Next(b.Height));
+                Point pt1 = new Point(random.Next(1, (bitmap1.Width / 5) * 2), random.Next(bitmap1.Height));
+                Point pt2 = new Point(random.Next((bitmap1.Width / 5) * 3, bitmap1.Width), random.Next(bitmap1.Height));
                 g.DrawLine(p, pt1, pt2);
                 p.Dispose();
             }
 
-            return b;
+            return bitmap1;
         }
         #endregion
 
@@ -3167,28 +3184,26 @@ ASP.Net實現中文漢字驗證碼
         /// <returns></returns>
         public Bitmap DrawRandomPixel(Int32 pixNum)
         {
-            Bitmap b = new Bitmap(bgWidth, bgHeight);
-            b.MakeTransparent();
-            Graphics graph = Graphics.FromImage(b);
+            Bitmap bitmap1 = new Bitmap(bgWidth, bgHeight);
+            bitmap1.MakeTransparent();
+            Graphics graph = Graphics.FromImage(bitmap1);
             graph.SmoothingMode = SmoothingMode.HighQuality;
             graph.InterpolationMode = InterpolationMode.HighQualityBilinear;
 
             //畫噪點 
             for (int i = 0; i < (bgHeight * bgWidth) / pixNum; i++)
             {
-                int x = random.Next(b.Width);
-                int y = random.Next(b.Height);
-                b.SetPixel(x, y, GetRandomDeepColor());
+                int x = random.Next(bitmap1.Width);
+                int y = random.Next(bitmap1.Height);
+                bitmap1.SetPixel(x, y, GetRandomDeepColor());
                 //下移座標重新畫點
-                if ((x + 1) < b.Width && (y + 1) < b.Height)
+                if ((x + 1) < bitmap1.Width && (y + 1) < bitmap1.Height)
                 {
                     //畫圖片的前景噪音點
-                    graph.DrawRectangle(new Pen(Color.Silver), random.Next(b.Width), random.Next(b.Height), 1, 1);
+                    graph.DrawRectangle(new Pen(Color.Silver), random.Next(bitmap1.Width), random.Next(bitmap1.Height), 1, 1);
                 }
-
             }
-
-            return b;
+            return bitmap1;
         }
         #endregion
 
@@ -3199,9 +3214,9 @@ ASP.Net實現中文漢字驗證碼
         /// <returns></returns>
         private Bitmap DrawStringline()
         {
-            Bitmap b = new Bitmap(bgWidth, bgHeight);
-            b.MakeTransparent();
-            Graphics g = Graphics.FromImage(b);
+            Bitmap bitmap1 = new Bitmap(bgWidth, bgHeight);
+            bitmap1.MakeTransparent();
+            Graphics g = Graphics.FromImage(bitmap1);
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
             Point[] p = new Point[validationCodeCount];
@@ -3214,7 +3229,7 @@ ASP.Net實現中文漢字驗證碼
             //g.DrawClosedCurve(new Pen(GetRandomDeepColor()), strPoint);
             g.DrawCurve(new Pen(GetRandomDeepColor(), 1), strPoint);
 
-            return b;
+            return bitmap1;
         }
         #endregion
 
@@ -3224,10 +3239,13 @@ ASP.Net實現中文漢字驗證碼
         /// </summary>
         private Bitmap DrawRandomString(string Code)
         {
-            if (fontMaxSize >= (bgHeight / 5) * 4) throw new ArgumentException("字體最大值參數FontMaxSize與驗證碼高度相近，這會導致描繪驗證碼字符串時出錯，請重新設置參數！");
-            Bitmap b = new Bitmap(bgWidth, bgHeight);
-            b.MakeTransparent();
-            Graphics g = Graphics.FromImage(b);
+            if (fontMaxSize >= (bgHeight / 5) * 4)
+            {
+                throw new ArgumentException("字體最大值參數FontMaxSize與驗證碼高度相近，這會導致描繪驗證碼字符串時出錯，請重新設置參數！");
+            }
+            Bitmap bitmap1 = new Bitmap(bgWidth, bgHeight);
+            bitmap1.MakeTransparent();
+            Graphics g = Graphics.FromImage(bitmap1);
 
             g.Clear(Color.Transparent);
             g.PixelOffsetMode = PixelOffsetMode.Half;
@@ -3244,7 +3262,6 @@ ASP.Net實現中文漢字驗證碼
             format.LineAlignment = StringAlignment.Center;
             FontFamily f = new FontFamily(GenericFontFamilies.Monospace);
 
-
             Int32 charNum = chars.Length;
 
             Point sPoint = new Point();
@@ -3259,8 +3276,6 @@ ASP.Net實現中文漢字驗證碼
                 Int32 textFontSize = Convert.ToInt32(textFont.Size);
                 fontSize = textFontSize;
                 Point point = new Point(random.Next((bgWidth / charNum) * i + 5, (bgWidth / charNum) * (i + 1)), random.Next(bgHeight / 5 + textFontSize / 2, bgHeight - textFontSize / 2));
-
-
 
                 //如果當前字符X座標小於字體的二分之一大小
                 if (point.X < textFontSize / 2)
@@ -3277,7 +3292,6 @@ ASP.Net實現中文漢字驗證碼
                 {
                     point.X = bgWidth - textFontSize / 2;
                 }
-
                 sPoint = point;
 
                 float angle = random.Next(-rotationAngle, rotationAngle);//轉動的度數
@@ -3299,7 +3313,7 @@ ASP.Net實現中文漢字驗證碼
                 textFont.Dispose();
                 mybrush2.Dispose();
             }
-            return b;
+            return bitmap1;
         }
         #endregion
 
@@ -3310,10 +3324,10 @@ ASP.Net實現中文漢字驗證碼
         /// <returns></returns>
         private Bitmap DrawRandBgString()
         {
-            Bitmap b = new Bitmap(bgWidth, bgHeight);
+            Bitmap bitmap1 = new Bitmap(bgWidth, bgHeight);
             String[] randStr = { "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z" };
-            b.MakeTransparent();
-            Graphics g = Graphics.FromImage(b);
+            bitmap1.MakeTransparent();
+            Graphics g = Graphics.FromImage(bitmap1);
 
             g.Clear(Color.Transparent);
             g.PixelOffsetMode = PixelOffsetMode.HighQuality;
@@ -3351,7 +3365,7 @@ ASP.Net實現中文漢字驗證碼
             format.Dispose();
             f.Dispose();
 
-            return b;
+            return bitmap1;
         }
         #endregion
 
@@ -3537,10 +3551,12 @@ ASP.Net實現中文漢字驗證碼
         {
             int i = maps.Length;
             if (i == 0)
+            {
                 throw new Exception("圖片數不能夠爲0");
+            }
             //創建要顯示的圖片對象,根據參數的個數設置寬度            
-            Bitmap backgroudImg = new Bitmap(i * 12, 16);
-            Graphics g = Graphics.FromImage(backgroudImg);
+            Bitmap bitmap1 = new Bitmap(i * 12, 16);
+            Graphics g = Graphics.FromImage(bitmap1);
             //清除畫布,背景設置爲白色            
             g.Clear(Color.White);
             for (int j = 0; j < i; j++)
@@ -3549,7 +3565,7 @@ ASP.Net實現中文漢字驗證碼
                 g.DrawImageUnscaled(maps[j], 0, 0);
             }
             g.Dispose();
-            return backgroudImg;
+            return bitmap1;
         }
         #endregion
 
@@ -3561,7 +3577,7 @@ ASP.Net實現中文漢字驗證碼
         private static int GetRandomSeed()
         {
             byte[] bytes = new byte[4];
-            System.Security.Cryptography.RNGCryptoServiceProvider rng = new System.Security.Cryptography.RNGCryptoServiceProvider();
+            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
             rng.GetBytes(bytes);
             return BitConverter.ToInt32(bytes, 0);
         }
@@ -3580,13 +3596,13 @@ ASP.Net實現中文漢字驗證碼
         {
             try
             {
-                Bitmap b = new Bitmap(newW, newH);
-                Graphics g = Graphics.FromImage(b);
+                Bitmap bitmap1 = new Bitmap(newW, newH);
+                Graphics g = Graphics.FromImage(bitmap1);
                 // 插值算法的質量
                 g.InterpolationMode = Mode;
                 g.DrawImage(bmp, new Rectangle(0, 0, newW, newH), new Rectangle(0, 0, bmp.Width, bmp.Height), GraphicsUnit.Pixel);
                 g.Dispose();
-                return b;
+                return bitmap1;
             }
             catch
             {
@@ -3650,24 +3666,23 @@ ASP.Net實現中文漢字驗證碼
         /// </summary>
         /// <param name="b">原始圖</param>
         /// <returns>輸出圖</returns>
-        public static Bitmap KiBlur(Bitmap b)
+        public static Bitmap KiBlur(Bitmap bitmap0)
         {
-
-            if (b == null)
+            if (bitmap0 == null)
             {
                 return null;
             }
 
-            int w = b.Width;
-            int h = b.Height;
+            int w = bitmap0.Width;
+            int h = bitmap0.Height;
 
             try
             {
 
-                Bitmap bmpRtn = new Bitmap(w, h, PixelFormat.Format24bppRgb);
+                Bitmap bitmap1 = new Bitmap(w, h, PixelFormat.Format24bppRgb);
 
-                BitmapData srcData = b.LockBits(new Rectangle(0, 0, w, h), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
-                BitmapData dstData = bmpRtn.LockBits(new Rectangle(0, 0, w, h), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
+                BitmapData srcData = bitmap0.LockBits(new Rectangle(0, 0, w, h), ImageLockMode.ReadOnly, PixelFormat.Format24bppRgb);
+                BitmapData dstData = bitmap1.LockBits(new Rectangle(0, 0, w, h), ImageLockMode.WriteOnly, PixelFormat.Format24bppRgb);
 
                 unsafe
                 {
@@ -3773,10 +3788,10 @@ ASP.Net實現中文漢字驗證碼
                     } // end of y
                 }
 
-                b.UnlockBits(srcData);
-                bmpRtn.UnlockBits(dstData);
+                bitmap0.UnlockBits(srcData);
+                bitmap1.UnlockBits(dstData);
 
-                return bmpRtn;
+                return bitmap1;
             }
             catch
             {
@@ -3793,25 +3808,25 @@ ASP.Net實現中文漢字驗證碼
         /// <param name="bitmap">Bitmap</param>
         /// <param name="threshold">閥值 -255~255</param>
         /// <returns></returns>
-        public Bitmap AdjustToRed(Bitmap bitmap, int threshold)
+        public Bitmap AdjustToRed(Bitmap bitmap1, int threshold)
         {
-            for (int y = 0; y < bitmap.Height; y++)
+            for (int y = 0; y < bitmap1.Height; y++)
             {
-                for (int x = 0; x < bitmap.Width; x++)
+                for (int x = 0; x < bitmap1.Width; x++)
                 {
                     // 取得每一個 pixel
-                    var pixel = bitmap.GetPixel(x, y);
+                    var pixel = bitmap1.GetPixel(x, y);
                     var pR = pixel.R + threshold;
                     pR = Math.Max(pR, 0);
                     pR = Math.Min(255, pR);
                     // 將改過的 RGB 寫回
                     // 只寫入紅色的值 , G B 都放零
                     Color newColor = Color.FromArgb(pixel.A, pR, 0, 0);
-                    bitmap.SetPixel(x, y, newColor);
+                    bitmap1.SetPixel(x, y, newColor);
                 }
             }
             // 回傳結果
-            return bitmap;
+            return bitmap1;
         }
 
         /// <summary>
@@ -3820,27 +3835,33 @@ ASP.Net實現中文漢字驗證碼
         /// <param name="bitmap">一個圖片實例</param>
         /// <param name="threshold">閥值 -255~+255</param>
         /// <returns></returns>
-        public Bitmap AdjustToGreen(Bitmap bitmap, int threshold)
+        public Bitmap AdjustToGreen(Bitmap bitmap1, int threshold)
         {
-            for (int y = 0; y < bitmap.Height; y++)
+            for (int y = 0; y < bitmap1.Height; y++)
             {
-                for (int x = 0; x < bitmap.Width; x++)
+                for (int x = 0; x < bitmap1.Width; x++)
                 {
                     // 取得每一個 pixel
-                    var pixel = bitmap.GetPixel(x, y);
+                    var pixel = bitmap1.GetPixel(x, y);
                     //判斷是否超過255 如果超過就是255 
                     var pG = pixel.G + threshold;
                     //如果小於0就為0
-                    if (pG > 255) pG = 255;
-                    if (pG < 0) pG = 0;
+                    if (pG > 255)
+                    {
+                        pG = 255;
+                    }
+                    if (pG < 0)
+                    {
+                        pG = 0;
+                    }
                     // 將改過的 RGB 寫回
                     // 只寫入綠色的值 , R B 都放零
                     Color newColor = Color.FromArgb(pixel.A, 0, pG, 0);
-                    bitmap.SetPixel(x, y, newColor);
+                    bitmap1.SetPixel(x, y, newColor);
                 }
             }
             // 回傳結果
-            return bitmap;
+            return bitmap1;
         }
         /// <summary>
         /// 藍色濾鏡
@@ -3859,8 +3880,14 @@ ASP.Net實現中文漢字驗證碼
                     //判斷是否超過255 如果超過就是255 
                     var pB = pixel.B + threshold;
                     //如果小於0就為0
-                    if (pB > 255) pB = 255;
-                    if (pB < 0) pB = 0;
+                    if (pB > 255)
+                    {
+                        pB = 255;
+                    }
+                    if (pB < 0)
+                    {
+                        pB = 0;
+                    }
                     // 將改過的 RGB 寫回
                     // 只寫入藍色的值 , R G 都放零
                     Color newColor = Color.FromArgb(pixel.A, 0, 0, pB);
@@ -3920,10 +3947,10 @@ ASP.Net實現中文漢字驗證碼
         public static Bitmap MakeGrayscale(Bitmap original)
         {
             //create a blank bitmap the same size as original
-            Bitmap newBitmap = new Bitmap(original.Width, original.Height);
+            Bitmap bitmap1 = new Bitmap(original.Width, original.Height);
 
             //get a graphics object from the new image
-            Graphics g = Graphics.FromImage(newBitmap);
+            Graphics g = Graphics.FromImage(bitmap1);
             g.SmoothingMode = SmoothingMode.HighQuality;
             //create the grayscale ColorMatrix
             ColorMatrix colorMatrix = new ColorMatrix(new float[][] 
@@ -3943,12 +3970,11 @@ ASP.Net實現中文漢字驗證碼
 
             //draw the original image on the new image
             //using the grayscale color matrix
-            g.DrawImage(original, new Rectangle(0, 0, original.Width, original.Height),
-               0, 0, original.Width, original.Height, GraphicsUnit.Pixel, attributes);
+            g.DrawImage(original, new Rectangle(0, 0, original.Width, original.Height), 0, 0, original.Width, original.Height, GraphicsUnit.Pixel, attributes);
 
             //dispose the Graphics object
             g.Dispose();
-            return newBitmap;
+            return bitmap1;
         }
         #endregion
 
