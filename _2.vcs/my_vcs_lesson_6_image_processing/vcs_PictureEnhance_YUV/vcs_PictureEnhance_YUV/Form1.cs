@@ -72,6 +72,73 @@ namespace vcs_PictureEnhance_YUV
         public VideoCaptureDevice Cam = null;
         DateTime webcam_start_time = DateTime.Now;
 
+        int[,] rgb_array = new int[64, 3] {
+{   0,   0, 143},
+{   0,   0, 159},
+{   0,   0, 175},
+{   0,   0, 191},
+{   0,   0, 207},
+{   0,   0, 223},
+{   0,   0, 239},
+{   0,   0, 255},
+{   0,  16, 255},
+{   0,  32, 255},
+{   0,  48, 255},
+{   0,  64, 255},
+{   0,  80, 255},
+{   0,  96, 255},
+{   0, 112, 255},
+{   0, 128, 255},
+{   0, 143, 255},
+{   0, 159, 255},
+{   0, 175, 255},
+{   0, 191, 255},
+{   0, 207, 255},
+{   0, 223, 255},
+{   0, 239, 255},
+{   0, 255, 255},
+{  16, 255, 239},
+{  32, 255, 223},
+{  48, 255, 207},
+{  64, 255, 191},
+{  80, 255, 175},
+{  96, 255, 159},
+{ 112, 255, 143},
+{ 128, 255, 128},
+{ 143, 255, 112},
+{ 159, 255,  96},
+{ 175, 255,  80},
+{ 191, 255,  64},
+{ 207, 255,  48},
+{ 223, 255,  32},
+{ 239, 255,  16},
+{ 255, 255,   0},
+{ 255, 239,   0},
+{ 255, 223,   0},
+{ 255, 207,   0},
+{ 255, 191,   0},
+{ 255, 175,   0},
+{ 255, 159,   0},
+{ 255, 143,   0},
+{ 255, 128,   0},
+{ 255, 112,   0},
+{ 255,  96,   0},
+{ 255,  80,   0},
+{ 255,  64,   0},
+{ 255,  48,   0},
+{ 255,  32,   0},
+{ 255,  16,   0},
+{ 255,   0,   0},
+{ 239,   0,   0},
+{ 223,   0,   0},
+{ 207,   0,   0},
+{ 191,   0,   0},
+{ 175,   0,   0},
+{ 159,   0,   0},
+{ 143,   0,   0},
+{ 128,   0,   0}
+};
+
         public struct RGB
         {
             private byte _r;
@@ -294,8 +361,8 @@ namespace vcs_PictureEnhance_YUV
             lb_brightness.Text = "";
             y_st = 420;
             dx += 160;
-            dy = 50;
-            lb_brightness.Location = new Point(x_st + dx * 2, y_st + dy * -1);
+            dy = 40;
+            lb_brightness.Location = new Point(x_st + dx * 2, y_st + dy * -1 - 10);
             button0.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 2, y_st + dy * 2);
@@ -308,8 +375,11 @@ namespace vcs_PictureEnhance_YUV
             button9.Location = new Point(x_st + dx * 2, y_st + dy * 9);
             button10.Location = new Point(x_st + dx * 2, y_st + dy * 10);
             button11.Location = new Point(x_st + dx * 2, y_st + dy * 11);
-            cb_magnify.Location = new Point(x_st + dx * 2, y_st + dy * 12);
-            cb_modify.Location = new Point(x_st + dx * 2, y_st + dy * 12 + 25);
+            button12.Location = new Point(x_st + dx * 2, y_st + dy * 12);
+            button13.Location = new Point(x_st + dx * 2, y_st + dy * 13);
+            button14.Location = new Point(x_st + dx * 2, y_st + dy * 14);
+            cb_magnify.Location = new Point(x_st + dx * 2, y_st + dy * 15);
+            cb_modify.Location = new Point(x_st + dx * 2, y_st + dy * 15 + 25);
 
             y_st = 10;
             richTextBox1.Size = new Size(160, 1040);
@@ -1640,9 +1710,7 @@ namespace vcs_PictureEnhance_YUV
 
             }
             //richTextBox1.Text += "\n";
-
         }
-
 
         void find_bitmap_info(Bitmap bmp, int x_st, int y_st, int w, int h)
         {
@@ -1704,6 +1772,233 @@ namespace vcs_PictureEnhance_YUV
 
             richTextBox1.Text += "Y_max = " + Y_max.ToString() + "\tY_min = " + Y_min.ToString() + "\n";
         }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            bitmap2.Save("bbbbb.bmp", ImageFormat.Bmp);
+        }
+
+        int[] r_data = new int[256];
+        int[] g_data = new int[256];
+        int[] b_data = new int[256];
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+
+            int border = 60;
+            x_st = border;
+            y_st = border;
+            w = W - border * 2;
+            h = H - border * 2;
+
+
+            x_st = 220;
+            y_st = 30;
+            w = 250;
+            h = 220;
+
+            x_st = 240;
+            y_st = 10;
+            w = 220;
+            h = 250;
+
+
+            int i;
+            int j;
+            Color pt;
+            int total_points = 0;
+            double total_brightness = 0;
+
+            brightness_data = new int[256];
+            r_data = new int[256];
+            g_data = new int[256];
+            b_data = new int[256];
+
+            for (j = 0; j < h; j++)
+            {
+                for (i = 0; i < w; i++)
+                {
+                    pt = bitmap1.GetPixel(x_st + i, y_st + j);
+                    r_data[pt.R]++;
+                    g_data[pt.G]++;
+                    b_data[pt.B]++;
+
+                    RGB pp = new RGB(pt.R, pt.G, pt.B);
+                    YUV yyy = new YUV();
+                    yyy = RGBToYUV(pp);
+
+                    total_brightness += yyy.Y;
+
+                    int y = (int)Math.Round(yyy.Y); //四捨五入
+
+                    if (y > 255)
+                        y = 255;
+                    if (y < 0)
+                        y = 0;
+
+                    brightness_data[y]++;
+                    total_points++;
+
+                    /*
+                    if (j == 10)
+                    {
+                        richTextBox1.Text += y.ToString() + " ";
+                        if ((i % 16) == 15)
+                        {
+                            richTextBox1.Text += "\n";
+                        }
+                    }
+                    */
+
+
+                    //b = new SolidBrush(Color.FromArgb(255, rgb_array[i, 0], rgb_array[i, 1], rgb_array[i, 2]));
+
+                    bitmap1.SetPixel(x_st + i, y_st + j, Color.FromArgb(255, rgb_array[y / 4, 0], rgb_array[y / 4, 1], rgb_array[y / 4, 2]));
+
+
+                }
+                //richTextBox1.Text += "\n";
+            }
+            //richTextBox1.Text += "\n";
+            richTextBox1.Text += "共有 " + total_points.ToString() + " 個點\n";
+            richTextBox1.Text += "總亮度 " + total_brightness.ToString() + "\n";
+            richTextBox1.Text += "平均亮度 " + (total_brightness / total_points).ToString() + "\n";
+
+
+            int most = 0;
+            int brightness_st = 0;
+            int brightness_sp = 0;
+            int r_st = 0;
+            int r_sp = 0;
+            int g_st = 0;
+            int g_sp = 0;
+            int b_st = 0;
+            int b_sp = 0;
+
+            for (i = 0; i < 256; i++)
+            {
+                total_points += brightness_data[i];
+                total_brightness += i * brightness_data[i];
+                //richTextBox1.Text += brightness_data[i].ToString() + " ";
+                if (brightness_data[i] > most)
+                    most = brightness_data[i];
+                /*
+                if (brightness_data[i] == 0)
+                    brightness_data[i] = 5;
+                */
+                if ((brightness_data[i] > 0) && (brightness_st == 0))
+                {
+                    brightness_st = i;
+                }
+                if (brightness_data[i] > 0)
+                {
+                    brightness_sp = i;
+                }
+
+
+                if ((r_data[i] > 0) && (r_st == 0))
+                {
+                    r_st = i;
+                }
+                if (r_data[i] > 0)
+                {
+                    r_sp = i;
+                }
+
+
+
+                if ((g_data[i] > 0) && (g_st == 0))
+                {
+                    g_st = i;
+                }
+                if (g_data[i] > 0)
+                {
+                    g_sp = i;
+                }
+
+
+
+                if ((b_data[i] > 0) && (b_st == 0))
+                {
+                    b_st = i;
+                }
+                if (b_data[i] > 0)
+                {
+                    b_sp = i;
+                }
+            }
+
+            richTextBox1.Text += "\n最多 " + most.ToString() + "\n";
+
+            richTextBox1.Text += "亮度範圍 : " + brightness_st.ToString() + " 到 " + brightness_sp.ToString() + "\n";
+            richTextBox1.Text += "亮差 : " + (brightness_sp - brightness_st).ToString() + "\n";
+
+            richTextBox1.Text += "R範圍 : " + r_st.ToString() + " 到 " + r_sp.ToString() + "\n";
+            richTextBox1.Text += "R差 : " + (r_sp - r_st).ToString() + "\n";
+
+
+            richTextBox1.Text += "G範圍 : " + g_st.ToString() + " 到 " + g_sp.ToString() + "\n";
+            richTextBox1.Text += "G差 : " + (g_sp - g_st).ToString() + "\n";
+
+
+            richTextBox1.Text += "B範圍 : " + b_st.ToString() + " 到 " + b_sp.ToString() + "\n";
+            richTextBox1.Text += "B差 : " + (b_sp - b_st).ToString() + "\n";
+
+
+            richTextBox1.Text += "共有 " + total_points.ToString() + " 個點\n";
+            richTextBox1.Text += "總亮度 " + total_brightness.ToString() + "\n";
+            richTextBox1.Text += "平均亮度 " + (total_brightness / total_points).ToString() + "\n";
+
+            Graphics g = Graphics.FromImage(bitmap1);
+
+            Brush b;
+            //int i;
+            int N = rgb_array.Length / 3;
+            int hh = 4;
+
+            border = 10;
+
+            for (i = 0; i < N; i++)
+            {
+                b = new SolidBrush(Color.FromArgb(255, rgb_array[63 - i, 0], rgb_array[63 - i, 1], rgb_array[63 - i, 2]));
+                //rgb_array
+                //g.FillRectangle(b, w / 10, i * hh + h/10, w / 10 * 8, hh);
+                g.FillRectangle(b, 550, i * hh + border, 80, hh);
+            }
+
+
+            pictureBox1.Image = bitmap1;
+
+
+
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            //DrawColorMap
+            int w = pictureBox1.ClientSize.Width;
+            int h = pictureBox1.ClientSize.Height;
+
+            Graphics g = pictureBox1.CreateGraphics();
+
+            g.Clear(Color.White);
+            Brush b;
+            int i;
+            int N = rgb_array.Length / 3;
+            int hh = 7;
+            int border = 20;
+
+            for (i = 0; i < N; i++)
+            {
+                b = new SolidBrush(Color.FromArgb(255, rgb_array[i, 0], rgb_array[i, 1], rgb_array[i, 2]));
+                //rgb_array
+                //g.FillRectangle(b, w / 10, i * hh + h/10, w / 10 * 8, hh);
+                g.FillRectangle(b, border, i * hh + border, w - border * 2, hh);
+            }
+
+        }
+
 
         bool flag_pictureBox1_mouse_down = false;
         int pictureBox1_position_x_old = 0;
@@ -2851,10 +3146,7 @@ namespace vcs_PictureEnhance_YUV
                 richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
             }
             GC.Collect();       //回收資源
-
-
-
-
         }
+
     }
 }

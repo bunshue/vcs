@@ -63,6 +63,9 @@
             this.lb_y_st = new System.Windows.Forms.Label();
             this.lb_w = new System.Windows.Forms.Label();
             this.timer_enhancement = new System.Windows.Forms.Timer(this.components);
+            this.button12 = new System.Windows.Forms.Button();
+            this.button13 = new System.Windows.Forms.Button();
+            this.button14 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3a)).BeginInit();
@@ -105,7 +108,7 @@
             // 
             this.button1.Location = new System.Drawing.Point(239, 100);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(90, 40);
+            this.button1.Size = new System.Drawing.Size(100, 32);
             this.button1.TabIndex = 8;
             this.button1.Text = "跳點量測亮度";
             this.button1.UseVisualStyleBackColor = true;
@@ -115,7 +118,7 @@
             // 
             this.button2.Location = new System.Drawing.Point(239, 145);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(90, 40);
+            this.button2.Size = new System.Drawing.Size(100, 32);
             this.button2.TabIndex = 9;
             this.button2.Text = "影像加強";
             this.button2.UseVisualStyleBackColor = true;
@@ -125,7 +128,7 @@
             // 
             this.button3.Location = new System.Drawing.Point(240, 191);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(90, 40);
+            this.button3.Size = new System.Drawing.Size(100, 32);
             this.button3.TabIndex = 10;
             this.button3.Text = "偽色彩";
             this.button3.UseVisualStyleBackColor = true;
@@ -135,7 +138,7 @@
             // 
             this.button4.Location = new System.Drawing.Point(240, 237);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(90, 40);
+            this.button4.Size = new System.Drawing.Size(100, 32);
             this.button4.TabIndex = 11;
             this.button4.Text = "測試";
             this.button4.UseVisualStyleBackColor = true;
@@ -154,7 +157,7 @@
             // 
             this.button5.Location = new System.Drawing.Point(240, 283);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(90, 40);
+            this.button5.Size = new System.Drawing.Size(100, 32);
             this.button5.TabIndex = 13;
             this.button5.Text = "全圖";
             this.button5.UseVisualStyleBackColor = true;
@@ -183,7 +186,7 @@
             // 
             this.button6.Location = new System.Drawing.Point(240, 329);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(90, 40);
+            this.button6.Size = new System.Drawing.Size(100, 32);
             this.button6.TabIndex = 16;
             this.button6.Text = "影像加強 + 亮度分布";
             this.button6.UseVisualStyleBackColor = true;
@@ -193,7 +196,7 @@
             // 
             this.button7.Location = new System.Drawing.Point(240, 375);
             this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(90, 40);
+            this.button7.Size = new System.Drawing.Size(100, 32);
             this.button7.TabIndex = 18;
             this.button7.Text = "影像加強 + 亮度分布";
             this.button7.UseVisualStyleBackColor = true;
@@ -213,7 +216,7 @@
             // 
             this.button8.Location = new System.Drawing.Point(341, 56);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(90, 40);
+            this.button8.Size = new System.Drawing.Size(100, 32);
             this.button8.TabIndex = 20;
             this.button8.Text = "info";
             this.button8.UseVisualStyleBackColor = true;
@@ -223,7 +226,7 @@
             // 
             this.button0.Location = new System.Drawing.Point(240, 56);
             this.button0.Name = "button0";
-            this.button0.Size = new System.Drawing.Size(90, 40);
+            this.button0.Size = new System.Drawing.Size(100, 32);
             this.button0.TabIndex = 21;
             this.button0.Text = "Reset";
             this.button0.UseVisualStyleBackColor = true;
@@ -233,7 +236,7 @@
             // 
             this.button9.Location = new System.Drawing.Point(341, 100);
             this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(90, 40);
+            this.button9.Size = new System.Drawing.Size(100, 32);
             this.button9.TabIndex = 22;
             this.button9.Text = "2D plot 黑白";
             this.button9.UseVisualStyleBackColor = true;
@@ -243,7 +246,7 @@
             // 
             this.button10.Location = new System.Drawing.Point(341, 145);
             this.button10.Name = "button10";
-            this.button10.Size = new System.Drawing.Size(90, 40);
+            this.button10.Size = new System.Drawing.Size(100, 32);
             this.button10.TabIndex = 23;
             this.button10.Text = "2D plot 彩色";
             this.button10.UseVisualStyleBackColor = true;
@@ -279,7 +282,7 @@
             // 
             this.button11.Location = new System.Drawing.Point(341, 191);
             this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(90, 40);
+            this.button11.Size = new System.Drawing.Size(100, 32);
             this.button11.TabIndex = 204;
             this.button11.Text = "2D plot test";
             this.button11.UseVisualStyleBackColor = true;
@@ -427,11 +430,44 @@
             this.timer_enhancement.Enabled = true;
             this.timer_enhancement.Tick += new System.EventHandler(this.timer_enhancement_Tick);
             // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(341, 237);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(100, 32);
+            this.button12.TabIndex = 207;
+            this.button12.Text = "save";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
+            // 
+            // button13
+            // 
+            this.button13.Location = new System.Drawing.Point(341, 283);
+            this.button13.Name = "button13";
+            this.button13.Size = new System.Drawing.Size(100, 32);
+            this.button13.TabIndex = 208;
+            this.button13.Text = "test";
+            this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button13_Click);
+            // 
+            // button14
+            // 
+            this.button14.Location = new System.Drawing.Point(341, 329);
+            this.button14.Name = "button14";
+            this.button14.Size = new System.Drawing.Size(100, 32);
+            this.button14.TabIndex = 209;
+            this.button14.Text = "test";
+            this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button14_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1173, 461);
+            this.Controls.Add(this.button14);
+            this.Controls.Add(this.button13);
+            this.Controls.Add(this.button12);
             this.Controls.Add(this.groupBox_selection);
             this.Controls.Add(this.cb_modify);
             this.Controls.Add(this.button11);
@@ -511,6 +547,9 @@
         private System.Windows.Forms.Label lb_y_st;
         private System.Windows.Forms.Label lb_w;
         private System.Windows.Forms.Timer timer_enhancement;
+        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button button13;
+        private System.Windows.Forms.Button button14;
     }
 }
 
