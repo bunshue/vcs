@@ -543,6 +543,17 @@ namespace vcs_Mix00
         private void button7_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+
+            double lat = 24.7793839095484;
+            double lon = 121.01557231432;
+            //double lat = 10;
+            //double lon = 10;
+            double lat_new = -lat;
+            double lon_new = -(180 - lon);
+            richTextBox1.Text += lat.ToString() + ", " + lon.ToString() + "\n";
+            richTextBox1.Text += lat_new.ToString() + ", " + lon_new.ToString() + "\n";
+
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -868,98 +879,14 @@ namespace vcs_Mix00
 
         private void button19_Click(object sender, EventArgs e)
         {
-
         }
-
-        public class Student
-        {
-            public long Id { get; set; }
-            public string Name { get; set; }
-            public short Age { get; set; }
-            public DateTime DateOfCreation { get; set; }
-            public bool? IsActive { get; set; }
-        }
-
-        public class Teacher
-        {
-            public long Id { get; set; }
-            public string Name { get; set; }
-            public Nullable<int> DepartmentId { get; set; }
-        }
-
-
-        public class Data
-        {
-            public static List<Student> GetStudents()
-            {
-                var list = new List<Student>
-        {
-            new Student {Id = 1, Name = "Smith", Age = 18, DateOfCreation = DateTime.Now, IsActive = true},
-            new Student {Id = 2, Name = "Hook", Age = 16, DateOfCreation = DateTime.Now.AddDays(-1), IsActive = true},
-            new Student {Id = 3, Name = "Jhon", Age = 15, DateOfCreation = DateTime.Now.AddDays(-2), IsActive = true},
-            new Student {Id = 4, Name = "Alan", Age = 21, DateOfCreation = DateTime.Now.AddDays(-3), IsActive = true}
-        };
-                return list;
-            }
-
-            public static List<Teacher> GetTeachers()
-            {
-                var list = new List<Teacher>
-        {
-            new Teacher {Id = 1, Name = "Smith", DepartmentId = 18 },
-            new Teacher {Id = 2, Name = "Hook", DepartmentId = 16 },
-            new Teacher {Id = 3, Name = "Jhon", DepartmentId = 15 },
-            new Teacher {Id = 4, Name = "Alan", DepartmentId = 21 }
-        };
-                return list;
-            }
-
-            public static DataTable DbNullInt()
-            {
-                DataTable table = new DataTable();
-                table.Columns.Add("Id", typeof(long));
-                table.Columns.Add("Name", typeof(string));
-
-                DataColumn column;
-                column = new DataColumn("DepartmentId", System.Type.GetType("System.Int32"));
-                column.AllowDBNull = true;
-                table.Columns.Add(column);
-
-                table.Rows.Add(1, "Smith", DBNull.Value);
-                table.Rows.Add(2, "Hook", 1);
-
-
-                return table;
-            }
-        }
-
 
         private void button20_Click(object sender, EventArgs e)
         {
-            /*
-            List<Student> students = Data.GetStudents();
-            
-            //List to DataTable conversion
-            DataTable studentTbl = students.ToDataTable();
-            
-             * //DataTable to List conversion
-            List<Student> newStudents = studentTbl.ToList<Student>();//ExtensionUtility.ToList<Student>(newStudents);
-            this.dataGridView1.DataSource = newStudents;
-
-            //List to DataTable conversion
-            DataTable teacherTbl = Data.DbNullInt();
-            //DataTable to List conversion
-            List<Teacher> newTeachers = teacherTbl.ToList<Teacher>();
-
-
-            this.dataGridView2.DataSource = newTeachers;
-            */
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
-
-
         }
 
         private void button22_Click(object sender, EventArgs e)

@@ -62,6 +62,7 @@
             this.nud_x_st = new System.Windows.Forms.NumericUpDown();
             this.lb_y_st = new System.Windows.Forms.Label();
             this.lb_w = new System.Windows.Forms.Label();
+            this.timer_enhancement = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3a)).BeginInit();
@@ -126,7 +127,7 @@
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(90, 40);
             this.button3.TabIndex = 10;
-            this.button3.Text = "彩色轉灰階";
+            this.button3.Text = "偽色彩";
             this.button3.UseVisualStyleBackColor = true;
             this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
@@ -421,6 +422,11 @@
             this.lb_w.TabIndex = 10;
             this.lb_w.Text = "w";
             // 
+            // timer_enhancement
+            // 
+            this.timer_enhancement.Enabled = true;
+            this.timer_enhancement.Tick += new System.EventHandler(this.timer_enhancement_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -451,6 +457,7 @@
             this.Controls.Add(this.richTextBox1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -503,6 +510,7 @@
         private System.Windows.Forms.NumericUpDown nud_x_st;
         private System.Windows.Forms.Label lb_y_st;
         private System.Windows.Forms.Label lb_w;
+        private System.Windows.Forms.Timer timer_enhancement;
     }
 }
 

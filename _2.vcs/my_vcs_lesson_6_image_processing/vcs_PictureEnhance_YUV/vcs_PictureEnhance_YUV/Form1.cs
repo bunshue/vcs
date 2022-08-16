@@ -11,6 +11,9 @@ using System.IO;
 using System.Drawing.Imaging;
 using System.Runtime.InteropServices;
 
+using AForge.Video;             //需要添加這兩個.dll
+using AForge.Video.DirectShow;
+
 namespace vcs_PictureEnhance_YUV
 {
     public partial class Form1 : Form
@@ -18,6 +21,7 @@ namespace vcs_PictureEnhance_YUV
         int flag_operation_mode = 0;    //0 : 圖片模式, 1 : 視訊模式
 
         string filename1 = @"C:\______test_files\ims01.bmp";
+        //string filename1 = @"C:\______test_files\__pic\_ntuh\op1.bmp";
         //string filename1 = @"C:\______test_files\color1.bmp";
         //string filename2 = @"C:\______test_files\color2.bmp";
 
@@ -51,6 +55,22 @@ namespace vcs_PictureEnhance_YUV
 
         int max = 255;
         int min = 0;
+
+        bool flag_webcam_ok = false;
+        bool flag_do_enhancement = false;
+
+        //參考
+        //【AForge.NET】C#上使用AForge.Net擷取視訊畫面
+        //https://ccw1986.blogspot.com/2013/01/ccaforgenetcapture-image.html
+
+        //AForge下載鏈結
+        //http://www.aforgenet.com/framework/downloads.html
+
+        //參考/右鍵/加入參考/瀏覽AForge.Video.dll和AForge.Video.DirectShow.dll
+
+        public FilterInfoCollection USBWebcams = null;
+        public VideoCaptureDevice Cam = null;
+        DateTime webcam_start_time = DateTime.Now;
 
         public struct RGB
         {
@@ -163,11 +183,16 @@ namespace vcs_PictureEnhance_YUV
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //C# 跨 Thread 存取 UI
+            //Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效	same
+            Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
+
             pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
             pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
             pictureBox2.MouseMove += new MouseEventHandler(pictureBox2_MouseMove);
             pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
             pictureBox1.Paint += new PaintEventHandler(pictureBox1_Paint);
+            pictureBox2.Paint += new PaintEventHandler(pictureBox2_Paint);
             pictureBox3a.Paint += new PaintEventHandler(pictureBox3a_Paint);
             pictureBox3b.Paint += new PaintEventHandler(pictureBox3b_Paint);
             nud_x_st.ValueChanged += new EventHandler(select_crop_area);
@@ -180,15 +205,33 @@ namespace vcs_PictureEnhance_YUV
 
             if (flag_operation_mode == 0)   //圖片模式
             {
-
             }
             else if (flag_operation_mode == 1)  //視訊模式
             {
+                bitmap1 = new Bitmap(640, 480);
+                bitmap2 = new Bitmap(640, 480);
+                gc = Graphics.FromImage(bitmap1);
+
+                Start_Webcam();
+
+                this.Visible = true;
+                this.KeyPreview = true;
             }
             else
             {
             }
+        }
 
+        private void Form1_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (flag_operation_mode == 0)   //圖片模式
+            {
+
+            }
+            else if (flag_operation_mode == 1)  //視訊模式
+            {
+                Stop_Webcam();
+            }
         }
 
         private void select_crop_area(object sender, EventArgs e)
@@ -395,15 +438,24 @@ namespace vcs_PictureEnhance_YUV
 
         void reset_picture()
         {
-            bitmap1 = (Bitmap)Image.FromFile(filename1);	//Image.FromFile出來的是Image格式
-            bitmap2 = (Bitmap)bitmap1.Clone();
+            if (flag_operation_mode == 0)   //圖片模式
+            {
+                bitmap1 = (Bitmap)Image.FromFile(filename1);	//Image.FromFile出來的是Image格式
+                bitmap2 = (Bitmap)bitmap1.Clone();
 
-            pictureBox1.Image = bitmap1;
-            pictureBox2.Image = bitmap2;
+                pictureBox1.Image = bitmap1;
+                pictureBox2.Image = bitmap2;
 
-            W = bitmap1.Width;
-            H = bitmap1.Height;
-            //richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+                W = bitmap1.Width;
+                H = bitmap1.Height;
+                //richTextBox1.Text += "W = " + W.ToString() + ", H = " + H.ToString() + "\n";
+
+            }
+            else if (flag_operation_mode == 1)  //視訊模式
+            {
+                W = 640;
+                H = 480;
+            }
         }
 
         int sel = 0;
@@ -898,6 +950,21 @@ namespace vcs_PictureEnhance_YUV
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //偽色彩
+
+            string filename1 = @"C:\______test_files\__pic\_ntuh\op1.jpg";
+            //string filename1 = @"C:\______test_files\fakecolor.jpg";
+
+            /*
+            //彩色轉灰階
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename1);	//Bitmap.FromFile出來的是Image格式
+
+            //SetPixel 彩色轉灰階
+            Bitmap bitmap2 = color_to_gray(bitmap1);
+
+            pictureBox1.Image = bitmap1;
+            */
+
             //彩色轉灰階
 
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename1);	//Bitmap.FromFile出來的是Image格式
@@ -905,10 +972,12 @@ namespace vcs_PictureEnhance_YUV
             //SetPixel 彩色轉灰階
             Bitmap bitmap2 = color_to_gray(bitmap1);
 
-            pictureBox1.Image = bitmap1;
+            bitmap2 = gcTrans(bitmap1, true, 255 / 10);
+            pictureBox1.Image = bitmap2;
 
 
 
+            /*
             int border = 80;
             x_st = border;
             y_st = border;
@@ -917,7 +986,7 @@ namespace vcs_PictureEnhance_YUV
 
 
             ImageEnhancement(x_st, y_st, w, h);
-
+            */
 
         }
 
@@ -1731,8 +1800,9 @@ namespace vcs_PictureEnhance_YUV
                     g.DrawImage(bitmap1, 0, 0, bitmap1.Width, bitmap1.Height);
                     g.DrawImage(bitmap1, rect2, rect1, GraphicsUnit.Pixel);
                 }
-                catch
+                catch (Exception ex)
                 {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
                 }
             }
         }
@@ -1753,8 +1823,9 @@ namespace vcs_PictureEnhance_YUV
                     g.DrawImage(bitmap2, 0, 0, bitmap2.Width, bitmap2.Height);
                     g.DrawImage(bitmap2, rect2, rect1, GraphicsUnit.Pixel);
                 }
-                catch
+                catch (Exception ex)
                 {
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
                 }
             }
         }
@@ -1775,6 +1846,8 @@ namespace vcs_PictureEnhance_YUV
             if (((draw_x_st + draw_w) > W) || ((draw_y_st + draw_h) > H))
                 return;
 
+            flag_do_enhancement = true;
+
             nud_x_st.Value = SelectionRectangle.X;
             nud_y_st.Value = SelectionRectangle.Y;
             nud_w.Value = SelectionRectangle.Width;
@@ -1793,6 +1866,30 @@ namespace vcs_PictureEnhance_YUV
             e.Graphics.DrawRectangle(new Pen(Color.Blue, 3), draw_x_st - 1, draw_y_st - 1, draw_w + 2, draw_h + 2);
 
             e.Graphics.DrawString("原圖", new Font("標楷體", 30), new SolidBrush(Color.Red), new PointF(0, 0));
+        }
+
+        int ccc = 0;
+        private void pictureBox2_Paint(object sender, PaintEventArgs e)
+        {
+            //richTextBox1.Text += draw_x_st.ToString() + "\t" + draw_y_st.ToString() + "\t" + draw_w.ToString() + "\t" + draw_h.ToString() + "\n";
+            //e.Graphics.DrawRectangle(new Pen(Color.Blue, 3), draw_x_st, draw_y_st, draw_w, draw_h);
+            e.Graphics.DrawRectangle(new Pen(Color.Blue, 3), draw_x_st - 1, draw_y_st - 1, draw_w + 2, draw_h + 2);
+
+            //e.Graphics.DrawString("原圖", new Font("標楷體", 30), new SolidBrush(Color.Red), new PointF(0, 0));
+
+            e.Graphics.DrawString((ccc++).ToString(), new Font("標楷體", 30), new SolidBrush(Color.Red), new PointF(0, 0));
+
+            //mouseup
+
+            /*
+            if ((flag_webcam_ok == true)&&(flag_do_enhancement==true))
+            {
+                draw_enhanced_image(bitmap2, draw_x_st, draw_y_st, draw_w, draw_h);
+
+                measure_brightness();
+                flag_do_enhancement = false;
+            }
+            */
         }
 
         private void pictureBox3a_Paint(object sender, PaintEventArgs e)
@@ -2269,7 +2366,6 @@ namespace vcs_PictureEnhance_YUV
             g4.DrawImage(bmp5, 0, 300 + 50, bmp5.Width, bmp5.Height);
 
             pictureBox4.Image = bmp4;
-
         }
 
         void FindYMaxYMin(int[] array, out int y_min, out int y_max)
@@ -2547,6 +2643,218 @@ namespace vcs_PictureEnhance_YUV
 
             measure_brightness();
             this.pictureBox1.Invalidate();
+        }
+
+        void Start_Webcam()
+        {
+            //richTextBox1.Text += "重新抓取USB影像\t";
+
+            int camera_index = 0;
+            USBWebcams = new FilterInfoCollection(FilterCategory.VideoInputDevice); //枚舉所有視頻輸入設備
+
+            int webcam_count = USBWebcams.Count;
+            richTextBox1.Text += "找到 " + webcam_count.ToString() + " 台WebCam\n";
+
+            if (webcam_count > 0)  // The quantity of WebCam must be more than 0.
+            {
+                flag_webcam_ok = false;
+                for (camera_index = 0; camera_index < webcam_count; camera_index++)
+                {
+                    richTextBox1.Text += "\ncamera " + camera_index.ToString() + "\t";
+                    richTextBox1.Text += "name : " + USBWebcams[camera_index].Name + "\n";
+
+                    if (USBWebcams[camera_index].Name.Contains("Virtual"))
+                    {
+                        richTextBox1.Text += "跳過 Virtual\t" + USBWebcams[camera_index].Name + "\n";
+                        continue;
+                    }
+
+                    if (USBWebcams[camera_index].Name == "InsightEyes")
+                    {
+                        richTextBox1.Text += "找到 InsightEyes 在 index = " + camera_index.ToString() + "\n";
+                        flag_webcam_ok = true;
+                        break;
+                    }
+                }
+
+                if (flag_webcam_ok == true)
+                {
+                    Cam = new VideoCaptureDevice(USBWebcams[camera_index].MonikerString);  //實例化對象
+                    Cam.NewFrame += new NewFrameEventHandler(Cam_NewFrame);
+                    Cam.Start();   // WebCam starts capturing images.
+                    //richTextBox1.Text += "有影像裝置\n";
+
+                    Cam.VideoResolution = Cam.VideoCapabilities[camera_index];
+
+                    string webcam_name = string.Empty;
+
+                    int ww;
+                    int hh;
+                    ww = Cam.VideoCapabilities[camera_index].FrameSize.Width;
+                    hh = Cam.VideoCapabilities[camera_index].FrameSize.Height;
+
+                    webcam_name = USBWebcams[camera_index].Name + " " + Cam.VideoCapabilities[camera_index].FrameSize.Width.ToString() + " X " + Cam.VideoCapabilities[camera_index].FrameSize.Height.ToString() + " @ " + Cam.VideoCapabilities[camera_index].AverageFrameRate.ToString() + " Hz";
+                    richTextBox1.Text += webcam_name + "\n";
+                    richTextBox1.Text += "啟動時間 : " + DateTime.Now.ToString() + "\n";
+                    webcam_start_time = DateTime.Now;
+                }
+                else
+                {
+                    richTextBox1.Text += "找不到裝置\n";
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "無影像裝置\n";
+            }
+        }
+
+        void Stop_Webcam()
+        {
+            if (Cam != null)
+            {
+                if (Cam.IsRunning)  // When Form1 closes itself, WebCam must stop, too.
+                {
+                    Cam.Stop();   // WebCam stops capturing images.
+                    Cam.SignalToStop();
+                    Cam.WaitForStop();
+                }
+            }
+        }
+
+        int frame_count = 0;        //計算fps用
+        //int frame_count_old = 0;    //計算fps用
+        DateTime dt_old = DateTime.Now;
+
+        Graphics gc;    //for camera
+        public Bitmap bm = null;
+        //自定義函數, 捕獲每一幀圖像並顯示
+        void Cam_NewFrame(object sender, NewFrameEventArgs eventArgs)
+        {
+            frame_count++;
+            try
+            {
+                //pictureBox1.Image = (Bitmap)eventArgs.Frame.Clone();
+                bm = (Bitmap)eventArgs.Frame.Clone();
+                //pictureBox1.Image = bm;
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+            }
+
+            try
+            {
+                gc = Graphics.FromImage(bm);
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                GC.Collect();       //回收資源
+                return;
+            }
+
+            int w;
+            int h;
+            try
+            {
+                w = bm.Width;
+                h = bm.Height;
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                GC.Collect();       //回收資源
+                return;
+            }
+
+            /*
+            if (rb2.Checked == false)
+            {
+                SolidBrush sb = new SolidBrush(Color.Black);
+                Point[] points = new Point[3];
+                int dd = 90;
+                points[0] = new Point(0, 0);
+                points[1] = new Point(dd, 0);
+                points[2] = new Point(0, dd);
+                gc.FillPolygon(sb, points);
+
+                points[0] = new Point(640 - dd, 0);
+                points[1] = new Point(640, 0);
+                points[2] = new Point(640, dd);
+                gc.FillPolygon(sb, points);
+
+                points[0] = new Point(0, 480);
+                points[1] = new Point(0, 480 - dd);
+                points[2] = new Point(dd, 480);
+                gc.FillPolygon(sb, points);
+
+                points[0] = new Point(640 - dd, 480);
+                points[1] = new Point(640, 480);
+                points[2] = new Point(640, 480 - dd);
+                gc.FillPolygon(sb, points);
+            }
+            */
+
+            try
+            {
+                pictureBox1.Image = bm;
+                //pictureBox2.Image = bm;
+                bitmap1 = (Bitmap)bm.Clone();
+                //bitmap2 = (Bitmap)bm.Clone();
+                //flag_do_enhancement = true;
+                //pictureBox2.Invalidate();
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+            }
+            GC.Collect();       //回收資源
+        }
+
+        //delay 10000 約 10秒
+        //C# 不lag的延遲時間
+        private void delay(int delay_milliseconds)
+        {
+            delay_milliseconds *= 2;
+            DateTime time_before = DateTime.Now;
+            while (((TimeSpan)(DateTime.Now - time_before)).TotalMilliseconds < delay_milliseconds)
+            {
+                Application.DoEvents();
+            }
+        }
+
+        private void timer_enhancement_Tick(object sender, EventArgs e)
+        {
+            if (flag_webcam_ok == false)
+                return;
+
+            if (bm == null)
+                return;
+
+            try
+            {
+                bitmap2 = (Bitmap)bm.Clone();
+
+                if (flag_do_enhancement == true)
+                {
+                    draw_enhanced_image(bitmap2, draw_x_st, draw_y_st, draw_w, draw_h);
+
+                    measure_brightness();
+
+                    //pictureBox2.Image = bitmap2;
+                    //pictureBox2.Invalidate();
+                }
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+            }
+            GC.Collect();       //回收資源
+
+
+
+
         }
     }
 }

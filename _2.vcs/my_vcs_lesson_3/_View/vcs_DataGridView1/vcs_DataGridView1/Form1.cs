@@ -246,6 +246,39 @@ namespace vcs_DataGridView1
         {
             dataGridView1.FirstDisplayedScrollingRowIndex = dataGridView1.RowCount - 1;
         }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "將List的資料連結到 DataGridView 裏\n";
+
+            List<Point> Points = new List<Point>();
+            Points.Clear();
+
+            int i;
+            Random r = new Random();
+            for (i = 0; i < 10; i++)
+            {
+                int i_st = r.Next(10);
+                int j_st = r.Next(10);
+                Points.Add(new Point(i_st, j_st));
+                richTextBox1.Text += "i_st = " + i_st.ToString() + "\t" + "j_st = " + j_st.ToString() + "\n";
+            }
+
+            printList(Points);
+
+            dataGridView1.DataSource = Points;
+        }
+
+        void printList(List<Point> pts)
+        {
+            int len = pts.Count;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += pts[i].ToString() + "\n";
+            }
+        }
     }
 
     class Fruit
