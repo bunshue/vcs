@@ -76,99 +76,9 @@ namespace vcs_Cryptography9_File
 
         private void button0_Click(object sender, EventArgs e)
         {
-            string result_SHA1 = ValidHelper.GetFileSHA1(filename);
-            string result_SHA256 = ValidHelper.GetFileSHA256(filename);
-            string result_SHA384 = ValidHelper.GetFileSHA384(filename);
-            string result_SHA512 = ValidHelper.GetFileSHA512(filename);
-
-            richTextBox1.Text += "SHA1 : \t\t" + result_SHA1 + "\n";
-            richTextBox1.Text += "SHA256 : \t" + result_SHA256 + "\n";
-            richTextBox1.Text += "SHA384 : \t" + result_SHA384 + "\n";
-            richTextBox1.Text += "SHA512 : \t" + result_SHA512 + "\n";
         }
-
-        ///SHA1加密
-        /// <summary>
-        /// 使用 SHA1 加密算法来加密
-        /// </summary>
-        /// <param name="sourceString">原字符串</param>
-        /// <returns>加密后字符串</returns>
-        public static string SHA1_Encrypt(string sourceString)
-        {
-            byte[] StrRes = Encoding.UTF8.GetBytes(sourceString);
-            HashAlgorithm iSHA = new SHA1CryptoServiceProvider();
-            StrRes = iSHA.ComputeHash(StrRes);
-            StringBuilder EnText = new StringBuilder();
-            foreach (byte iByte in StrRes)
-            {
-                EnText.AppendFormat("{0:x2}", iByte);
-            }
-            return EnText.ToString();
-        }
-
-        ///SHA256加密
-
-        /// <summary>
-        /// SHA256 加密
-        /// </summary>
-        /// <param name="sourceString">原字符串</param>
-        /// <returns>加密后字符串</returns>
-        public static string SHA256_Encrypt(string sourceString)
-        {
-            byte[] data = Encoding.UTF8.GetBytes(sourceString);
-            SHA256 shaM = SHA256.Create();
-            byte[] result = shaM.ComputeHash(data);
-            StringBuilder EnText = new StringBuilder();
-            foreach (byte iByte in result)
-            {
-                EnText.AppendFormat("{0:x2}", iByte);
-            }
-            return EnText.ToString();
-        }
-
-        ///SHA384加密
-        /// <summary>
-        /// SHA384 加密
-        /// </summary>
-        /// <param name="sourceString">原字符串</param>
-        /// <returns>加密后字符串</returns>
-        public static string SHA384_Encrypt(string sourceString)
-        {
-            byte[] data = Encoding.UTF8.GetBytes(sourceString);
-            SHA384 shaM = SHA384.Create();
-            byte[] result = shaM.ComputeHash(data);
-            StringBuilder EnText = new StringBuilder();
-            foreach (byte iByte in result)
-            {
-                EnText.AppendFormat("{0:x2}", iByte);
-            }
-            return EnText.ToString();
-        }
-
-        ///SHA512加密
-
-        /// <summary>
-        /// SHA512_加密
-        /// </summary>
-        /// <param name="sourceString">原字符串</param>
-        /// <returns>加密后字符串</returns>
-        public static string SHA512_Encrypt(string sourceString)
-        {
-            byte[] data = Encoding.UTF8.GetBytes(sourceString);
-            SHA512 shaM = new SHA512Managed();
-            byte[] result = shaM.ComputeHash(data);
-            StringBuilder EnText = new StringBuilder();
-            foreach (byte iByte in result)
-            {
-                EnText.AppendFormat("{0:x2}", iByte);
-            }
-            return EnText.ToString();
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
-            //上面幾個函數
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -310,21 +220,6 @@ namespace vcs_Cryptography9_File
 
         private void button12_Click(object sender, EventArgs e)
         {
-            //算一個檔案的SHA1值
-            str_encrypted_text = HashHelper.SHA1File(filename);
-            richTextBox1.Text += "檔案：" + filename + "\tSHA1值：" + str_encrypted_text + "\n";
-
-            //算一個檔案的SHA256值
-            str_encrypted_text = BytesToString(GetHashSha256(filename));
-            richTextBox1.Text += "檔案：" + filename + "\tSHA256值：" + str_encrypted_text + "\n";
-
-            //算一個檔案的SHA256值
-            using (FileStream fs = File.OpenRead(filename))
-            {
-                SHA256Managed sha = new SHA256Managed();
-                str_encrypted_text = Convert.ToBase64String(sha.ComputeHash(fs));
-                richTextBox1.Text += "檔案：" + filename + "\tSHA256值：" + str_encrypted_text + "\n";
-            }
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -332,69 +227,12 @@ namespace vcs_Cryptography9_File
         }
 
 
-        // Compute the file's hash.
-        private byte[] GetHashSha256(string filename)
-        {
-            using (FileStream stream = File.OpenRead(filename))
-            {
-                SHA256 Sha256 = SHA256.Create();
-                return Sha256.ComputeHash(stream);
-            }
-        }
-
-        // Return a byte array as a sequence of hex values.
-        public static string BytesToString(byte[] bytes)
-        {
-            string result = "";
-            foreach (byte b in bytes)
-            {
-                result += b.ToString("x2");
-            }
-            return result;
-        }
-
         private void button14_Click(object sender, EventArgs e)
         {
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
-            //算一個檔案的 SHA1, SHA256值
-            string filename = @"C:\______test_files\picture1.jpg";
-
-
-            //SHA1
-            var tragetFile = new FileStream(filename, FileMode.Open);
-
-            var sha1 = new System.Security.Cryptography.SHA1CryptoServiceProvider();
-            byte[] hashbytes = sha1.ComputeHash(tragetFile);
-
-            tragetFile.Close();
-
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < hashbytes.Length; i++)
-            {
-                sb.Append(hashbytes[i].ToString("x2"));
-            }
-            richTextBox1.Text += "SHA1\n";
-            richTextBox1.Text += sb.ToString() + "\n";
-
-
-            //SHA256
-            tragetFile = new FileStream(filename, FileMode.Open);
-
-            var sha256 = new System.Security.Cryptography.SHA256CryptoServiceProvider();
-            hashbytes = sha256.ComputeHash(tragetFile);
-
-            tragetFile.Close();
-
-            sb = new StringBuilder();
-            for (int i = 0; i < hashbytes.Length; i++)
-            {
-                sb.Append(hashbytes[i].ToString("x2"));
-            }
-            richTextBox1.Text += "SHA256\n";
-            richTextBox1.Text += sb.ToString() + "\n";
         }
     }
 
@@ -416,168 +254,6 @@ namespace vcs_Cryptography9_File
     MD5 是 Message Digest Algorithm 5（信息摘要算法）的縮寫，MD5 一種散列(Hash)技術，廣泛用於加密、解密、數據簽名和數據完整性校驗等方面。任何一個文件，無論是可執行程序、圖像文件、臨時文件或者其他任何類型的文件，也不管它體積多大，都可以計算出一個MD5值，如果文件被修改過，就算只改動了一個字節，其 MD5 值也會變得完全不同。因此，我們可以通過對比同一文件的 MD5 值，來校驗這個文件是否被“篡改”過。C# 可以方便的計算出文件的 MD5 值：
     \\計算文件的MD5值
     */
-
-    /// <summary>
-    /// Hash輔助類
-    /// </summary>
-    public class HashHelper
-    {
-        /// <summary>
-        /// 計算文件的 MD5 值
-        /// </summary>
-        /// <param name="fileName">要計算 MD5 值的文件名和路徑</param>
-        /// <returns>MD5 值16進制字符串</returns>
-        public static string MD5File(string fileName)
-        {
-            return HashFile(fileName, "md5");
-        }
-
-        /// <summary>
-        /// 計算文件的 sha1 值
-        /// </summary>
-        /// <param name="fileName">要計算 sha1 值的文件名和路徑</param>
-        /// <returns>sha1 值16進制字符串</returns>
-        public static string SHA1File(string fileName)
-        {
-            return HashFile(fileName, "sha1");
-        }
-
-        /// <summary>
-        /// 計算文件的哈希值
-        /// </summary>
-        /// <param name="fileName">要計算哈希值的文件名和路徑</param>
-        /// <param name="algName">算法:sha1,md5</param>
-        /// <returns>哈希值16進制字符串</returns>
-        private static string HashFile(string fileName, string algName)
-        {
-            if (!System.IO.File.Exists(fileName))
-            {
-                return string.Empty;
-            }
-
-            System.IO.FileStream fs = new System.IO.FileStream(fileName, System.IO.FileMode.Open, System.IO.FileAccess.Read);
-            byte[] hashBytes = HashData(fs, algName);
-            fs.Close();
-            return ByteArrayToHexString(hashBytes);
-        }
-
-        /// <summary>
-        /// 計算哈希值
-        /// </summary>
-        /// <param name="stream">要計算哈希值的 Stream</param>
-        /// <param name="algName">算法:sha1,md5</param>
-        /// <returns>哈希值字節數組</returns>
-        private static byte[] HashData(System.IO.Stream stream, string algName)
-        {
-            System.Security.Cryptography.HashAlgorithm algorithm;
-            if (algName == null)
-            {
-                throw new ArgumentNullException("algName 不能為 null");
-            }
-
-            if (string.Compare(algName, "sha1", true) == 0)
-            {
-                algorithm = System.Security.Cryptography.SHA1.Create();
-            }
-            else
-            {
-                if (string.Compare(algName, "md5", true) != 0)
-                {
-                    throw new Exception("algName 只能使用 sha1 或 md5");
-                }
-                algorithm = System.Security.Cryptography.MD5.Create();
-            }
-
-            return algorithm.ComputeHash(stream);
-        }
-
-        /// <summary>
-        /// 字節數組轉換為16進制表示的字符串
-        /// </summary>
-        private static string ByteArrayToHexString(byte[] buf)
-        {
-            return BitConverter.ToString(buf).Replace("-", "");
-        }
-    }
-
-    public static class ValidHelper
-    {
-        /* same
-        //獲取文件的MD5值
-        public static string GetFileMD5(string filePath)
-        {
-            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-            FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
-            byte[] result = md5.ComputeHash(fs);
-            md5.Clear();
-            StringBuilder sb = new StringBuilder(32);
-            for (int i = 0; i < result.Length; i++)
-            {
-                sb.Append(result[i].ToString("X2"));
-            }
-            return sb.ToString();
-        }
-
-        //獲取文件的SHA1值
-        public static string GetFileSHA1(string filePath)
-        {
-            SHA1 sha1 = new SHA1CryptoServiceProvider();
-            FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
-            byte[] result = sha1.ComputeHash(fs);
-            sha1.Clear();
-            StringBuilder sb = new StringBuilder(32);
-            for (int i = 0; i < result.Length; i++)
-            {
-                sb.Append(result[i].ToString("X2"));
-            }
-            return sb.ToString();
-        }
-        */
-
-        public static string GetFileHash(string filePath, HashAlgorithm algorithm)
-        {
-            FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
-            byte[] result = algorithm.ComputeHash(fs);
-            algorithm.Clear();
-            StringBuilder sb = new StringBuilder(32);
-            for (int i = 0; i < result.Length; i++)
-            {
-                sb.Append(result[i].ToString("X2"));
-            }
-            return sb.ToString();
-        }
-
-        public static string GetFileMD5(string filePath)
-        {
-            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
-            return GetFileHash(filePath, md5);
-        }
-
-        public static string GetFileSHA1(string filePath)
-        {
-            SHA1 sha1 = new SHA1CryptoServiceProvider();
-            return GetFileHash(filePath, sha1);
-        }
-
-        public static string GetFileSHA256(string filePath)
-        {
-            SHA256 sha256 = SHA256.Create();
-            return GetFileHash(filePath, sha256);
-        }
-
-        public static string GetFileSHA384(string filePath)
-        {
-            SHA384 sha384 = SHA384.Create();
-            return GetFileHash(filePath, sha384);
-        }
-
-        public static string GetFileSHA512(string filePath)
-        {
-            SHA512 sha512 = SHA512.Create();
-            return GetFileHash(filePath, sha512);
-        }
-    }
-
     public class EncryptHelper
     {
         /// <summary>

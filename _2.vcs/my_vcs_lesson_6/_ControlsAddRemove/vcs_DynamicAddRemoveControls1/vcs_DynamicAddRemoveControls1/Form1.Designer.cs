@@ -38,15 +38,17 @@
             this.button7 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button9 = new System.Windows.Forms.Button();
-            this.button10 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.bt_clear = new System.Windows.Forms.Button();
+            this.button12 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(879, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(1114, 12);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(253, 682);
             this.richTextBox1.TabIndex = 0;
@@ -104,11 +106,10 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(1057, 671);
+            this.button6.Location = new System.Drawing.Point(143, 584);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.Size = new System.Drawing.Size(100, 40);
             this.button6.TabIndex = 6;
-            this.button6.Text = "clear";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -134,6 +135,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button12);
             this.groupBox1.Controls.Add(this.button11);
             this.groupBox1.Controls.Add(this.button10);
             this.groupBox1.Controls.Add(this.button9);
@@ -145,15 +147,15 @@
             this.groupBox1.TabIndex = 9;
             this.groupBox1.TabStop = false;
             // 
-            // button9
+            // button11
             // 
-            this.button9.Location = new System.Drawing.Point(19, 106);
-            this.button9.Name = "button9";
-            this.button9.Size = new System.Drawing.Size(100, 40);
-            this.button9.TabIndex = 9;
-            this.button9.Text = "動態創建按鈕和事件";
-            this.button9.UseVisualStyleBackColor = true;
-            this.button9.Click += new System.EventHandler(this.button9_Click);
+            this.button11.Location = new System.Drawing.Point(125, 14);
+            this.button11.Name = "button11";
+            this.button11.Size = new System.Drawing.Size(100, 40);
+            this.button11.TabIndex = 11;
+            this.button11.Text = "動態創建按鈕和事件";
+            this.button11.UseVisualStyleBackColor = true;
+            this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
             // button10
             // 
@@ -165,21 +167,42 @@
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
-            // button11
+            // button9
             // 
-            this.button11.Location = new System.Drawing.Point(125, 14);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(100, 40);
-            this.button11.TabIndex = 11;
-            this.button11.Text = "動態創建按鈕和事件";
-            this.button11.UseVisualStyleBackColor = true;
-            this.button11.Click += new System.EventHandler(this.button11_Click);
+            this.button9.Location = new System.Drawing.Point(19, 106);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(100, 40);
+            this.button9.TabIndex = 9;
+            this.button9.Text = "動態創建按鈕和事件";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // bt_clear
+            // 
+            this.bt_clear.Location = new System.Drawing.Point(1285, 568);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(60, 32);
+            this.bt_clear.TabIndex = 15;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
+            // button12
+            // 
+            this.button12.Location = new System.Drawing.Point(125, 60);
+            this.button12.Name = "button12";
+            this.button12.Size = new System.Drawing.Size(100, 40);
+            this.button12.TabIndex = 12;
+            this.button12.Text = "動態創建按鈕和事件";
+            this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1144, 706);
+            this.ClientSize = new System.Drawing.Size(1379, 706);
+            this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
@@ -211,6 +234,8 @@
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button11;
+        private System.Windows.Forms.Button bt_clear;
+        private System.Windows.Forms.Button button12;
     }
 }
 

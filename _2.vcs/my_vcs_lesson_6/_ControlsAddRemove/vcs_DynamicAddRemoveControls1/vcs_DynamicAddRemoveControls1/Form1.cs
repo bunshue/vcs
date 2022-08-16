@@ -29,8 +29,71 @@ namespace vcs_DynamicAddRemoveControls1
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
             //動態產生button並且綁定click事件
             DynamicGenerateButton1();
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+            int dy2;
+
+            int pbx_W = 640 + 10;
+            int pbx_H = 480 + 10;
+            int pbx_W2 = 480 + 60;
+            int pbx_H2 = 520 * 2 / 3;
+            int pbx_W3 = 480;
+
+
+            groupBox1.Location = new Point(10, 650);
+
+            richTextBox1.Size = new Size(400, 900);
+            richTextBox1.Location = new Point(1500, 10);
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            //最大化螢幕
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;
+            bt_exit_setup();
+        }
+
+        private void bt_exit_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        void bt_exit_setup()
+        {
+            int width = 5;
+            int w = 50; //設定按鈕大小 W
+            int h = 50; //設定按鈕大小 H
+
+            Button bt_exit = new Button();  // 實例化按鈕
+            bt_exit.Size = new Size(w, h);
+            bt_exit.Text = "";
+            Bitmap bmp = new Bitmap(w, h);
+            Graphics g = Graphics.FromImage(bmp);
+            Pen p = new Pen(Color.Red, width);
+            g.Clear(Color.Pink);
+            g.DrawRectangle(p, width + 1, width + 1, w - 1 - (width + 1) * 2, h - 1 - (width + 1) * 2);
+            g.DrawLine(p, 0, 0, w - 1, h - 1);
+            g.DrawLine(p, w - 1, 0, 0, h - 1);
+            bt_exit.Image = bmp;
+
+            bt_exit.Location = new Point(this.ClientSize.Width - bt_exit.Width, 0);
+            bt_exit.Click += bt_exit_Click;     // 加入按鈕事件
+
+            this.Controls.Add(bt_exit); // 將按鈕加入表單
+            bt_exit.BringToFront();     //移到最上層
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void DynamicGenerateButton1()
@@ -419,7 +482,7 @@ namespace vcs_DynamicAddRemoveControls1
 
         private void button6_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
+
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -575,5 +638,57 @@ namespace vcs_DynamicAddRemoveControls1
             richTextBox1.Text += "你按了按鈕 " + ((Button)sender).Text + "\n";
 
         }
+
+        Button[,] btn = new Button[3, 3];
+        Font font = new Font("微軟正黑體", 12);
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+            btn = new Button[3, 3];
+            for (int x = 0; x < btn.GetLength(0); x++)
+            {
+                for (int y = 0; y < btn.GetLength(1); y++)
+                {
+                    btn[x, y] = new Button();
+                    btn[x, y].Size = new Size(100, 100);
+                    btn[x, y].Text = "";
+                    btn[x, y].Location = new Point(800 + x * 100, 50 + y * 100);
+                    btn[x, y].Font = font;
+                    btn[x, y].Name = "( " + x.ToString() + ", " + y.ToString() + ")";
+                    btn[x, y].Click += ButtonsClick;
+                    //panel.Controls.Add(btn[x, y]);
+                    this.Controls.Add(btn[x, y]);
+                }
+            }
+        }
+
+        private void ButtonsClick(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            richTextBox1.Text += "你按了 " + btn.Name + "\n";
+
+            if (btn.BackColor != Color.Pink)
+                btn.BackColor = Color.Pink;
+            else
+                btn.BackColor = SystemColors.ControlLight;
+
+            /*
+            if (btn.Text == "" && count < 9)
+            {
+                btn.Text = nowIndex == true ? symbol2 : symbol1;
+                nowIndex = !nowIndex;
+                label.Text = nowIndex == true ? "玩家二，請選擇。" : "玩家一，請選擇。";
+                Check();
+                count++;
+                if (count == 9)
+                {
+                    label.Text = "GameOver!";
+                    GameOver("GameOver");
+                }
+                Console.WriteLine(count);
+            }
+            */
+        }
     }
 }
+

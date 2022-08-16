@@ -59,7 +59,6 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(180, 55);
             this.button1.TabIndex = 0;
-            this.button1.Text = "各種檔案加密2";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -107,7 +106,6 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(180, 55);
             this.button0.TabIndex = 5;
-            this.button0.Text = "各種檔案加密1";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -186,7 +184,6 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(180, 55);
             this.button12.TabIndex = 13;
-            this.button12.Text = "算一個檔案的SHA1值";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -214,7 +211,6 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(180, 55);
             this.button15.TabIndex = 16;
-            this.button15.Text = "算一個檔案的SHA1, SHA256值";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 

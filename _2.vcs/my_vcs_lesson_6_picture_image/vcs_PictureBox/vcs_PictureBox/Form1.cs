@@ -25,11 +25,15 @@ namespace vcs_PictureBox
             pictureBox1.Image = Image.FromFile(filename);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
             pictureBox1.Image = null;
             pictureBox2.Image = null;
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -303,4 +307,3 @@ namespace vcs_PictureBox
         }
     }
 }
-
