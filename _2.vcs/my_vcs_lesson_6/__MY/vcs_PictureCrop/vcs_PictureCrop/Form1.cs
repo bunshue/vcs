@@ -60,27 +60,7 @@ namespace vcs_PictureCrop
 
             show_item_location();
 
-            if (flag_operation_mode == 0)
-            {
-                W = pictureBox1.Width;
-                H = pictureBox1.Height;
-            }
-            else if (flag_operation_mode == 1)
-            {
-                bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-                pictureBox1.Image = bitmap1;
-                W = bitmap1.Width;
-                H = bitmap1.Height;
-                nud_x_st.Maximum = W;
-                nud_y_st.Maximum = H;
-                nud_w.Maximum = W;
-                nud_h.Maximum = H;
-            }
-            else //test
-            {
-                W = pictureBox1.Width;
-                H = pictureBox1.Height;
-            }
+            reset_picture();
         }
 
         private void select_crop_area(object sender, EventArgs e)
@@ -121,9 +101,15 @@ namespace vcs_PictureCrop
             dx = pbx_W + 10;
             dy = pbx_H + 10;
 
-            pictureBox1.Size = new Size(pbx_W, pbx_H);
+            panel1.Size = new Size(pbx_W + 50, pbx_H + 50);
+            panel1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+
+            //pictureBox1.Size = new Size(pbx_W, pbx_H);
             pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
-            pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            //pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            pictureBox1.Location = new Point(0, 0);
+            panel1.Controls.Add(pictureBox1);
+            panel1.AutoScroll = true;
 
             pictureBox2.Size = new Size(300, 400);
             //pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
@@ -148,9 +134,6 @@ namespace vcs_PictureCrop
             this.WindowState = FormWindowState.Maximized;
             bt_open_file_setup();
             bt_exit_setup();
-
-
-            pictureBox1.Size = new Size(500, 500);
         }
 
         private void bt_open_file_Click(object sender, EventArgs e)
@@ -266,6 +249,14 @@ namespace vcs_PictureCrop
                 nud_y_st.Maximum = H;
                 nud_w.Maximum = W;
                 nud_h.Maximum = H;
+
+                pictureBox1.Width = bitmap1.Width;
+                pictureBox1.Height = bitmap1.Height;
+            }
+            else //test
+            {
+                W = pictureBox1.Width;
+                H = pictureBox1.Height;
             }
         }
 

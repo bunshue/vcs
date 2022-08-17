@@ -11,12 +11,12 @@ namespace vcs_ZoomPicture6
 {
     public partial class Form1 : Form
     {
+        Image myImage;
+
         public Form1()
         {
             InitializeComponent();
         }
-        Image myImage;
-
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -25,9 +25,7 @@ namespace vcs_ZoomPicture6
             pictureBox1.Image = myImage;
             pictureBox1.Height = myImage.Height;
             pictureBox1.Width = myImage.Width;
-
         }
-
 
         private void button2_Click(object sender, EventArgs e)
         {
@@ -38,6 +36,6 @@ namespace vcs_ZoomPicture6
             }
             catch { }
         }
-
     }
 }
+

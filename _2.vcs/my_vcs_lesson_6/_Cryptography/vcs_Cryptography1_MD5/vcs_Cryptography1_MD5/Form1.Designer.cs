@@ -188,7 +188,7 @@
             this.button10.Name = "button10";
             this.button10.Size = new System.Drawing.Size(180, 55);
             this.button10.TabIndex = 56;
-            this.button10.Text = "用MD5比對兩個檔案是否相同";
+            this.button10.Text = "用MD5比較兩個檔案";
             this.button10.UseVisualStyleBackColor = true;
             this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
@@ -221,7 +221,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(180, 55);
             this.button13.TabIndex = 59;
-            this.button13.Text = "用MD5比較兩個檔案";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -232,7 +231,7 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(180, 55);
             this.button14.TabIndex = 60;
-            this.button14.Text = "用MD5比較兩個檔案";
+            this.button14.Text = "算一個檔案的MD5值";
             this.button14.UseVisualStyleBackColor = true;
             this.button14.Click += new System.EventHandler(this.button14_Click);
             // 

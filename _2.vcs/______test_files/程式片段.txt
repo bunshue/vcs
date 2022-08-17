@@ -60,6 +60,13 @@ pictureBox圖像直接存檔
 pictureBox1.Image.Save(filename);
 
 
+寫圖片至檔案
+            //write image
+            bitmap1.Save("C:\\Output.png");
+            
+            pictureBox1.Image.Save(filename);
+
+
 
 存圖 
                     FileStream fs = (FileStream)saveFileDialog1.OpenFile();

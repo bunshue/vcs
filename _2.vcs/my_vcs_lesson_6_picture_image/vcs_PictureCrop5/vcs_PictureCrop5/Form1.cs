@@ -26,8 +26,8 @@ namespace vcs_PictureCrop5
         private Bitmap bitmap2 = null;  //擷取部分位圖Bitmap
         private Rectangle SelectionRectangle = new Rectangle(new Point(0, 0), new Size(0, 0));    //用來保存截圖的矩形
 
-        private int W = 0;  //原圖的寬
-        private int H = 0;  //原圖的高
+        //private int W = 0;  //原圖的寬
+        //private int H = 0;  //原圖的高
         //private int w = 0;  //擷取圖的寬
         //private int h = 0;  //擷取圖的高
 
@@ -55,10 +55,6 @@ namespace vcs_PictureCrop5
             float ratio_w = pbox_w / (float)W;
             float ratio_h = pbox_h / (float)H;
 
-            richTextBox1.Text += "PBOX :\t" + pbox_w.ToString() + "\t" + pbox_h.ToString() + "\n";
-            richTextBox1.Text += "PICT :\t" + W.ToString() + "\t" + H.ToString() + "\n";
-            richTextBox1.Text += "ratio :\t" + ratio_w.ToString() + "\t" + ratio_h.ToString() + "\n";
-
             if ((ratio_w >= 1) && (ratio_h >= 1))
             {
                 PictureScale = Math.Min(ratio_w, ratio_h);
@@ -67,27 +63,22 @@ namespace vcs_PictureCrop5
             {
                 PictureScale = Math.Min(ratio_w, ratio_h);
             }
-
-
-
-
+            else if ((ratio_w >= 1) && (ratio_h < 1))
+            {
+                PictureScale = ratio_h;
+            }
+            else if ((ratio_w < 1) && (ratio_h >= 1))
+            {
+                PictureScale = ratio_w;
+            }
+            richTextBox1.Text += "PBOX :\t" + pbox_w.ToString() + "\t" + pbox_h.ToString() + "\n";
+            richTextBox1.Text += "PICT :\t" + W.ToString() + "\t" + H.ToString() + "\n";
+            richTextBox1.Text += "ratio :\t" + ratio_w.ToString() + "\t" + ratio_h.ToString() + "\n";
+            richTextBox1.Text += "PictureScale :\t" + PictureScale.ToString() + "\n";
         }
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-
-            int pbx_W = 900;
-            int pbx_H = 600;
-
-            x_st = 10;
-            y_st = 10;
-            dx = pbx_W + 10;
-            dy = pbx_H + 10;
-
             //跟隨鼠標在 pictureBox 的圖片上畫矩形
             pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
             pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);

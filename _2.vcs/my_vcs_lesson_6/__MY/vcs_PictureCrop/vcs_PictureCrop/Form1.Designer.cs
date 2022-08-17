@@ -47,6 +47,7 @@
             this.bt_clear = new System.Windows.Forms.Button();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.button0 = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.groupBox_selection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nud_h)).BeginInit();
@@ -276,11 +277,20 @@
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
+            // panel1
+            // 
+            this.panel1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.panel1.Location = new System.Drawing.Point(12, 118);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(100, 100);
+            this.panel1.TabIndex = 21;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1265, 744);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.button0);
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.bt_clear);
@@ -323,6 +333,7 @@
         private System.Windows.Forms.RadioButton rb_filetype2;
         private System.Windows.Forms.RadioButton rb_filetype1;
         private System.Windows.Forms.Button button0;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 
