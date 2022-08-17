@@ -50,9 +50,15 @@
             this.button6 = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.textBox4 = new System.Windows.Forms.TextBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.button7 = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.button9 = new System.Windows.Forms.Button();
+            this.button10 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox_rot13a
@@ -183,9 +189,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(395, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(481, 8);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(754, 333);
+            this.richTextBox1.Size = new System.Drawing.Size(668, 346);
             this.richTextBox1.TabIndex = 7;
             this.richTextBox1.Text = "ABCabc123 加密變成 FGHfgh678\n\n就是右移5\n";
             // 
@@ -257,11 +263,65 @@
             this.textBox4.TabIndex = 1;
             this.textBox4.Text = "ABCabc123";
             // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.button10);
+            this.groupBox4.Controls.Add(this.button9);
+            this.groupBox4.Controls.Add(this.button8);
+            this.groupBox4.Controls.Add(this.button7);
+            this.groupBox4.Location = new System.Drawing.Point(287, 9);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(174, 345);
+            this.groupBox4.TabIndex = 8;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "檔案加密解密";
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(25, 29);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(120, 40);
+            this.button7.TabIndex = 3;
+            this.button7.Text = "檔案加密1";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(25, 85);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(120, 40);
+            this.button8.TabIndex = 4;
+            this.button8.Text = "檔案解密1";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // button9
+            // 
+            this.button9.Location = new System.Drawing.Point(25, 145);
+            this.button9.Name = "button9";
+            this.button9.Size = new System.Drawing.Size(120, 40);
+            this.button9.TabIndex = 5;
+            this.button9.Text = "檔案加密2";
+            this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
+            // 
+            // button10
+            // 
+            this.button10.Location = new System.Drawing.Point(25, 205);
+            this.button10.Name = "button10";
+            this.button10.Size = new System.Drawing.Size(120, 40);
+            this.button10.TabIndex = 6;
+            this.button10.Text = "檔案解密2";
+            this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1172, 679);
+            this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox2);
@@ -274,6 +334,7 @@
             this.groupBox2.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -301,6 +362,11 @@
         private System.Windows.Forms.Button button6;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button button10;
+        private System.Windows.Forms.Button button9;
+        private System.Windows.Forms.Button button8;
+        private System.Windows.Forms.Button button7;
     }
 }
 

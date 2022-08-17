@@ -14,16 +14,12 @@ namespace vcs_PictureCrop5
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\elephant.jpg";
+        string filename = @"C:\______test_files\picture1.jpg";
 
         private Point point_st;
         private Point point_sp;
-        private Graphics g;
 
-        private Rectangle select_rectangle = new Rectangle(new Point(0, 0), new Size(0, 0));    //用來保存截圖的矩形
-
-        private float PictureScale = 1;
-
+        private bool flag_mouse_down = false;
         private Point pt_st = Point.Empty;//記錄鼠標按下時的坐標，用來確定繪圖起點
         private Point pt_sp = Point.Empty;//記錄鼠標放開時的坐標，用來確定繪圖終點
         private Bitmap bitmap1 = null;  //原圖位圖Bitmap
@@ -34,6 +30,9 @@ namespace vcs_PictureCrop5
         private int H = 0;  //原圖的高
         //private int w = 0;  //擷取圖的寬
         //private int h = 0;  //擷取圖的高
+
+        private Graphics g;
+        private float PictureScale = 1;
 
         public Form1()
         {
@@ -46,6 +45,32 @@ namespace vcs_PictureCrop5
 
             bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             pictureBox1.Image = bitmap1;
+
+
+            int pbox_w = pictureBox1.ClientSize.Width;
+            int pbox_h = pictureBox1.ClientSize.Height;
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+
+            float ratio_w = pbox_w / (float)W;
+            float ratio_h = pbox_h / (float)H;
+
+            richTextBox1.Text += "PBOX :\t" + pbox_w.ToString() + "\t" + pbox_h.ToString() + "\n";
+            richTextBox1.Text += "PICT :\t" + W.ToString() + "\t" + H.ToString() + "\n";
+            richTextBox1.Text += "ratio :\t" + ratio_w.ToString() + "\t" + ratio_h.ToString() + "\n";
+
+            if ((ratio_w >= 1) && (ratio_h >= 1))
+            {
+                PictureScale = Math.Min(ratio_w, ratio_h);
+            }
+            else if ((ratio_w <= 1) && (ratio_h <= 1))
+            {
+                PictureScale = Math.Min(ratio_w, ratio_h);
+            }
+
+
+
+
         }
 
         void show_item_location()
@@ -81,7 +106,6 @@ namespace vcs_PictureCrop5
             return new Rectangle(Math.Min(pt1.X, pt2.X), Math.Min(pt1.Y, pt2.Y), Math.Abs(pt1.X - pt2.X), Math.Abs(pt1.Y - pt2.Y));
         }
 
-        private bool flag_mouse_down = false;
         private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
         {
             flag_mouse_down = true;
@@ -103,7 +127,7 @@ namespace vcs_PictureCrop5
                 // Save the new point.
                 point_sp = e.Location; //終點座標
 
-                select_rectangle = MakeRectangle(point_st, point_sp);
+                SelectionRectangle = MakeRectangle(point_st, point_sp);
 
                 // Draw the selection rectangle.
                 g.DrawImage(bitmap1, 0, 0); //恢復原圖
@@ -131,8 +155,6 @@ namespace vcs_PictureCrop5
             float W = Math.Abs(point_st.X - point_sp.X) * PictureScale;
             float H = Math.Abs(point_st.Y - point_sp.Y) * PictureScale;
 
-            this.Text = "選取區域 : " + select_rectangle.ToString();
-                 
             Bitmap bitmap1b = (Bitmap)bitmap1.Clone();
             Graphics g = Graphics.FromImage(bitmap1b);
             g.DrawRectangle(Pens.Red, x_st, y_st, W, H);

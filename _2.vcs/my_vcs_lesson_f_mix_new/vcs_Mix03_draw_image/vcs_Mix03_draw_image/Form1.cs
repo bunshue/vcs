@@ -20,22 +20,6 @@ namespace vcs_Mix03_draw_image
 {
     public partial class Form1 : Form
     {
-        //本程式截圖 ST
-        [DllImportAttribute("gdi32.dll")]
-
-        private static extern bool BitBlt(
-        IntPtr hdcDest, //目的DC的句柄
-        int nXDest, //目的圖形的左上角的x坐標
-        int nYDest, //目的圖形的左上角的y坐標
-        int nWidth, //目的圖形的矩形寬度
-        int nHeight, //目的圖形的矩形高度
-        IntPtr hdcSrc, //源DC的句柄
-        int nXSrc, //源圖形的左上角的x坐標
-        int nYSrc, //源圖形的左上角的x坐標
-        System.Int32 dwRop //光柵操作代碼
-        );
-        //本程式截圖 SP
-
         public Form1()
         {
             InitializeComponent();
@@ -122,36 +106,6 @@ namespace vcs_Mix03_draw_image
         private void button1_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //本程式截圖
-            Graphics g1 = this.CreateGraphics();//獲得窗體圖形對象
-
-            Image image = new Bitmap(this.ClientRectangle.Width, this.ClientRectangle.Height, g1);
-
-            Graphics g2 = Graphics.FromImage(image);//創建位圖圖形對象
-
-            IntPtr dc1 = g1.GetHdc();//獲得窗體的上下文設備
-
-            IntPtr dc2 = g2.GetHdc();//獲得位圖文件的上下文設備
-
-            BitBlt(dc2, 0, 0, this.ClientRectangle.Width, this.ClientRectangle.Height, dc1, 0, 0, 13369376);//寫入到位圖
-
-            g1.ReleaseHdc(dc1);//釋放窗體的上下文設備
-
-            g2.ReleaseHdc(dc2);//釋放位圖文件的上下文設備
-
-
-            //自動檔名 與 存檔語法
-            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-            try
-            {
-                image.Save(filename, ImageFormat.Bmp);
-                richTextBox1.Text += "已存檔 : " + filename + "\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -816,46 +770,6 @@ namespace vcs_Mix03_draw_image
         private void button11_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            int W = Screen.PrimaryScreen.Bounds.Width;
-            int H = Screen.PrimaryScreen.Bounds.Height;
-
-
-            //全屏幕截圖 1
-
-            Bitmap bitmap1 = new Bitmap(W, H); //創建一個與屏幕大小一樣的位圖
-
-            using (Graphics g = Graphics.FromImage(bitmap1))
-            {
-                g.CopyFromScreen(0, 0, 0, 0, new Size(W, H));  //用Graphics.CopyFromScreen()把屏幕位圖拷貝到該位圖上
-            }
-            pictureBox1.Image = bitmap1;
-
-            //存圖
-            //bitmap1.Save("111.jpg");
-
-            //bitmap1.Dispose();
-
-            //顯示
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.Image = bitmap1;
-
-
-            //全屏幕截圖 2
-            //獲得當前屏幕的分辨率
-            Screen scr = Screen.PrimaryScreen;
-            Rectangle rc = scr.Bounds;
-            int w = rc.Width;
-            int h = rc.Height;
-            //創建一個和屏幕一樣大的Bitmap
-            Image image = new Bitmap(w, h);
-            //從一個繼承自Image類的對象中創建Graphics對象
-            Graphics g2 = Graphics.FromImage(image);
-            //抓屏並拷貝到myimage裡
-            g2.CopyFromScreen(new Point(0, 0), new Point(0, 0), new Size(w, h));
-
-            //存圖
-            //image.Save("aaaaaa.jpeg");
         }
 
         private void button12_Click(object sender, EventArgs e)

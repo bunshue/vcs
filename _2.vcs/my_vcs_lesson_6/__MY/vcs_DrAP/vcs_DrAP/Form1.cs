@@ -1581,8 +1581,9 @@ namespace vcs_DrAP
         {
             if (checkBox8.Checked == true)
             {
-                if (fileinfos.Count > 30)
+                if (fileinfos.Count >= 30)
                 {
+                    richTextBox1.Text += "滿30結束\n";
                     return;
                 }
             }

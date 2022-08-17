@@ -41,7 +41,7 @@ namespace test_move_pic_in_pbox
             bitmap0 = new Bitmap(W, H);
 
             g = Graphics.FromImage(bitmap0);
-            g.Clear(Color.White);
+            g.Clear(SystemColors.ControlLight);
 
             bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             w = bitmap1.Width;
@@ -197,7 +197,7 @@ namespace test_move_pic_in_pbox
             //bitmap0 = new Bitmap(W, H);
 
             //g = Graphics.FromImage(bitmap0);
-            g.Clear(Color.White);
+            g.Clear(SystemColors.ControlLight);
 
             g.DrawImage(bitmap1, pt_picture_position.X, pt_picture_position.Y, bitmap1.Width, bitmap1.Height);
 

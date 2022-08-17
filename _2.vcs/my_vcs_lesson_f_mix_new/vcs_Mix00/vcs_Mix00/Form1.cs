@@ -524,20 +524,6 @@ namespace vcs_Mix00
         private void button6_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //擷取部分圖片貼上
-
-            
-            Rectangle rect = Screen.GetBounds(Point.Empty);
-            using (Bitmap bitmap = new Bitmap(rect.Width, rect.Height))
-            {
-                using (Graphics g = Graphics.FromImage(bitmap))
-                {
-                    g.CopyFromScreen(Point.Empty, Point.Empty, rect.Size);
-                }
-                bitmap.Save("test.jpg", ImageFormat.Jpeg);
-
-            }
-
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -726,34 +712,6 @@ namespace vcs_Mix00
 
         private void button13_Click(object sender, EventArgs e)
         {
-            //實現全屏截圖
-        }
-
-        public static void Snap(int x, int y, int width, int height)
-        {
-            try
-            {
-                //這段代碼也可以實現截圖
-                //Image image = new Bitmap(width, height);
-                //Graphics g = Graphics.FromImage(image);
-                //g.CopyFromScreen(x, y, 0, 0, new System.Drawing.Size(width, height));
-                //string hour = DateTime.Now.Minute.ToString();
-                //string second = DateTime.Now.Second.ToString();
-                //image.Save(ScreenshotPath + "\\" + hour + "_" + second + ".jpg");
-
-                Bitmap image = new Bitmap(640, 480);
-                using (Graphics g = Graphics.FromImage(image))
-                {
-                    g.CopyFromScreen(0, 0, 0, 0, image.Size);
-                    g.Dispose();
-                    string hour = DateTime.Now.Minute.ToString();
-                    string second = DateTime.Now.Second.ToString();
-                    image.Save("aaa.jpg");
-                }
-            }
-            catch
-            {
-            }
         }
 
         private void button14_Click(object sender, EventArgs e)
