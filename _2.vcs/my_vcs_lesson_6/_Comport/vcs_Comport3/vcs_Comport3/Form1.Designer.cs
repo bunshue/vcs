@@ -54,6 +54,7 @@
             this.groupBox_plc = new System.Windows.Forms.GroupBox();
             this.lb_sn3 = new System.Windows.Forms.Label();
             this.lb_sn2 = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.lb_sn1 = new System.Windows.Forms.Label();
             this.bt_plc_generate_sn = new System.Windows.Forms.Button();
             this.lb_sn = new System.Windows.Forms.Label();
@@ -71,7 +72,9 @@
             this.bt_plc_2 = new System.Windows.Forms.Button();
             this.lb_main_mesg1a = new System.Windows.Forms.Label();
             this.groupBox_pc = new System.Windows.Forms.GroupBox();
+            this.bt_pc_8 = new System.Windows.Forms.Button();
             this.lb_sn_pc3 = new System.Windows.Forms.Label();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.lb_main_mesg2b = new System.Windows.Forms.Label();
             this.lb_sn_pc2 = new System.Windows.Forms.Label();
             this.bt_pc_7 = new System.Windows.Forms.Button();
@@ -85,6 +88,7 @@
             this.bt_pc_3 = new System.Windows.Forms.Button();
             this.bt_pc_2 = new System.Windows.Forms.Button();
             this.groupBox_ims = new System.Windows.Forms.GroupBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.lb_main_mesg3b = new System.Windows.Forms.Label();
             this.bt_ims_0 = new System.Windows.Forms.Button();
             this.bt_ims_5 = new System.Windows.Forms.Button();
@@ -96,31 +100,29 @@
             this.timer_display = new System.Windows.Forms.Timer(this.components);
             this.lb_main_mesg0 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.groupBox_user = new System.Windows.Forms.GroupBox();
-            this.rb_user0 = new System.Windows.Forms.RadioButton();
-            this.rb_user1 = new System.Windows.Forms.RadioButton();
             this.rb_user2 = new System.Windows.Forms.RadioButton();
+            this.rb_user1 = new System.Windows.Forms.RadioButton();
+            this.rb_user0 = new System.Windows.Forms.RadioButton();
+            this.bt_pc_9 = new System.Windows.Forms.Button();
             this.groupBox_comport1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport1)).BeginInit();
             this.groupBox_comport2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport2)).BeginInit();
             this.groupBox_plc.SuspendLayout();
-            this.groupBox_pc.SuspendLayout();
-            this.groupBox_ims.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox_pc.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            this.groupBox_ims.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.groupBox_user.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(890, 42);
+            this.richTextBox1.Location = new System.Drawing.Point(705, 42);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(218, 483);
+            this.richTextBox1.Size = new System.Drawing.Size(100, 100);
             this.richTextBox1.TabIndex = 9;
             this.richTextBox1.Text = "";
             this.richTextBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.richTextBox1_KeyPress);
@@ -131,9 +133,9 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(962, 445);
+            this.bt_clear.Location = new System.Drawing.Point(723, 76);
             this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(75, 23);
+            this.bt_clear.Size = new System.Drawing.Size(60, 30);
             this.bt_clear.TabIndex = 13;
             this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
@@ -364,6 +366,14 @@
             this.lb_sn2.TabIndex = 189;
             this.lb_sn2.Text = "S/N :";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(188, 170);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox1.TabIndex = 194;
+            this.pictureBox1.TabStop = false;
+            // 
             // lb_sn1
             // 
             this.lb_sn1.AutoSize = true;
@@ -528,6 +538,8 @@
             // 
             // groupBox_pc
             // 
+            this.groupBox_pc.Controls.Add(this.bt_pc_9);
+            this.groupBox_pc.Controls.Add(this.bt_pc_8);
             this.groupBox_pc.Controls.Add(this.lb_sn_pc3);
             this.groupBox_pc.Controls.Add(this.pictureBox2);
             this.groupBox_pc.Controls.Add(this.lb_main_mesg2b);
@@ -549,15 +561,33 @@
             this.groupBox_pc.TabStop = false;
             this.groupBox_pc.Text = "PC控制台";
             // 
+            // bt_pc_8
+            // 
+            this.bt_pc_8.Location = new System.Drawing.Point(121, 76);
+            this.bt_pc_8.Name = "bt_pc_8";
+            this.bt_pc_8.Size = new System.Drawing.Size(90, 40);
+            this.bt_pc_8.TabIndex = 196;
+            this.bt_pc_8.Text = "寫入相機序號";
+            this.bt_pc_8.UseVisualStyleBackColor = true;
+            this.bt_pc_8.Click += new System.EventHandler(this.bt_pc_8_Click);
+            // 
             // lb_sn_pc3
             // 
             this.lb_sn_pc3.AutoSize = true;
             this.lb_sn_pc3.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_sn_pc3.Location = new System.Drawing.Point(117, 281);
+            this.lb_sn_pc3.Location = new System.Drawing.Point(117, 357);
             this.lb_sn_pc3.Name = "lb_sn_pc3";
             this.lb_sn_pc3.Size = new System.Drawing.Size(60, 22);
             this.lb_sn_pc3.TabIndex = 193;
             this.lb_sn_pc3.Text = "S/N :";
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(175, 244);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox2.TabIndex = 195;
+            this.pictureBox2.TabStop = false;
             // 
             // lb_main_mesg2b
             // 
@@ -574,7 +604,7 @@
             // 
             this.lb_sn_pc2.AutoSize = true;
             this.lb_sn_pc2.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_sn_pc2.Location = new System.Drawing.Point(117, 244);
+            this.lb_sn_pc2.Location = new System.Drawing.Point(117, 320);
             this.lb_sn_pc2.Name = "lb_sn_pc2";
             this.lb_sn_pc2.Size = new System.Drawing.Size(60, 22);
             this.lb_sn_pc2.TabIndex = 192;
@@ -582,7 +612,7 @@
             // 
             // bt_pc_7
             // 
-            this.bt_pc_7.Location = new System.Drawing.Point(121, 122);
+            this.bt_pc_7.Location = new System.Drawing.Point(11, 398);
             this.bt_pc_7.Name = "bt_pc_7";
             this.bt_pc_7.Size = new System.Drawing.Size(90, 40);
             this.bt_pc_7.TabIndex = 146;
@@ -592,7 +622,7 @@
             // 
             // bt_pc_6
             // 
-            this.bt_pc_6.Location = new System.Drawing.Point(121, 76);
+            this.bt_pc_6.Location = new System.Drawing.Point(11, 352);
             this.bt_pc_6.Name = "bt_pc_6";
             this.bt_pc_6.Size = new System.Drawing.Size(90, 40);
             this.bt_pc_6.TabIndex = 145;
@@ -604,7 +634,7 @@
             // 
             this.lb_sn_pc1.AutoSize = true;
             this.lb_sn_pc1.Font = new System.Drawing.Font("Consolas", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_sn_pc1.Location = new System.Drawing.Point(117, 206);
+            this.lb_sn_pc1.Location = new System.Drawing.Point(117, 282);
             this.lb_sn_pc1.Name = "lb_sn_pc1";
             this.lb_sn_pc1.Size = new System.Drawing.Size(60, 22);
             this.lb_sn_pc1.TabIndex = 191;
@@ -695,6 +725,14 @@
             this.groupBox_ims.TabIndex = 192;
             this.groupBox_ims.TabStop = false;
             this.groupBox_ims.Text = "IMS控制台";
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Location = new System.Drawing.Point(175, 168);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox3.TabIndex = 196;
+            this.pictureBox3.TabStop = false;
             // 
             // lb_main_mesg3b
             // 
@@ -797,30 +835,6 @@
             this.panel1.Size = new System.Drawing.Size(260, 77);
             this.panel1.TabIndex = 193;
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(188, 170);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(50, 50);
-            this.pictureBox1.TabIndex = 194;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pictureBox2
-            // 
-            this.pictureBox2.Location = new System.Drawing.Point(175, 168);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(50, 50);
-            this.pictureBox2.TabIndex = 195;
-            this.pictureBox2.TabStop = false;
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Location = new System.Drawing.Point(175, 168);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(50, 50);
-            this.pictureBox3.TabIndex = 196;
-            this.pictureBox3.TabStop = false;
-            // 
             // groupBox_user
             // 
             this.groupBox_user.Controls.Add(this.rb_user2);
@@ -833,15 +847,15 @@
             this.groupBox_user.TabStop = false;
             this.groupBox_user.Text = "使用者";
             // 
-            // rb_user0
+            // rb_user2
             // 
-            this.rb_user0.AutoSize = true;
-            this.rb_user0.Location = new System.Drawing.Point(10, 20);
-            this.rb_user0.Name = "rb_user0";
-            this.rb_user0.Size = new System.Drawing.Size(44, 16);
-            this.rb_user0.TabIndex = 0;
-            this.rb_user0.Text = "PLC";
-            this.rb_user0.UseVisualStyleBackColor = true;
+            this.rb_user2.AutoSize = true;
+            this.rb_user2.Location = new System.Drawing.Point(10, 70);
+            this.rb_user2.Name = "rb_user2";
+            this.rb_user2.Size = new System.Drawing.Size(43, 16);
+            this.rb_user2.TabIndex = 2;
+            this.rb_user2.Text = "IMS";
+            this.rb_user2.UseVisualStyleBackColor = true;
             // 
             // rb_user1
             // 
@@ -855,15 +869,25 @@
             this.rb_user1.Text = "PC";
             this.rb_user1.UseVisualStyleBackColor = true;
             // 
-            // rb_user2
+            // rb_user0
             // 
-            this.rb_user2.AutoSize = true;
-            this.rb_user2.Location = new System.Drawing.Point(10, 70);
-            this.rb_user2.Name = "rb_user2";
-            this.rb_user2.Size = new System.Drawing.Size(43, 16);
-            this.rb_user2.TabIndex = 2;
-            this.rb_user2.Text = "IMS";
-            this.rb_user2.UseVisualStyleBackColor = true;
+            this.rb_user0.AutoSize = true;
+            this.rb_user0.Location = new System.Drawing.Point(10, 20);
+            this.rb_user0.Name = "rb_user0";
+            this.rb_user0.Size = new System.Drawing.Size(44, 16);
+            this.rb_user0.TabIndex = 0;
+            this.rb_user0.Text = "PLC";
+            this.rb_user0.UseVisualStyleBackColor = true;
+            // 
+            // bt_pc_9
+            // 
+            this.bt_pc_9.Location = new System.Drawing.Point(121, 122);
+            this.bt_pc_9.Name = "bt_pc_9";
+            this.bt_pc_9.Size = new System.Drawing.Size(90, 40);
+            this.bt_pc_9.TabIndex = 197;
+            this.bt_pc_9.Text = "清除相機資料";
+            this.bt_pc_9.UseVisualStyleBackColor = true;
+            this.bt_pc_9.Click += new System.EventHandler(this.bt_pc_9_Click);
             // 
             // Form1
             // 
@@ -889,12 +913,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport2)).EndInit();
             this.groupBox_plc.ResumeLayout(false);
             this.groupBox_plc.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.groupBox_pc.ResumeLayout(false);
             this.groupBox_pc.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.groupBox_ims.ResumeLayout(false);
             this.groupBox_ims.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.groupBox_user.ResumeLayout(false);
             this.groupBox_user.PerformLayout();
@@ -978,6 +1002,8 @@
         private System.Windows.Forms.RadioButton rb_user2;
         private System.Windows.Forms.RadioButton rb_user1;
         private System.Windows.Forms.RadioButton rb_user0;
+        private System.Windows.Forms.Button bt_pc_8;
+        private System.Windows.Forms.Button bt_pc_9;
     }
 }
 

@@ -143,7 +143,6 @@ namespace vcs_Comport3
 
             bt_plc_6.Location = new Point(x_st + dx * 1/2+10, y_st + dy * 0);
             bt_plc_7.Location = new Point(x_st + dx * 1/2+10, y_st + dy * 1);
-
             bt_plc_8.Location = new Point(x_st + dx * 1+20, y_st + dy * 0);
             bt_plc_9.Location = new Point(x_st + dx * 1+20, y_st + dy * 1);
 
@@ -151,9 +150,9 @@ namespace vcs_Comport3
             lb_sn2.Location = new Point(x_st + dx * 1 - 90, y_st + dy * 2 + 25);
             lb_sn3.Location = new Point(x_st + dx * 1 - 90, y_st + dy * 2 + 50);
 
-            lb_sn_pc1.Location = new Point(x_st + dx * 1 - 90, y_st + dy * 2);
-            lb_sn_pc2.Location = new Point(x_st + dx * 1 - 90, y_st + dy * 2 + 25);
-            lb_sn_pc3.Location = new Point(x_st + dx * 1 - 90, y_st + dy * 2 + 50);
+            lb_sn_pc1.Location = new Point(x_st + dx * 1 - 90, y_st + dy * 4);
+            lb_sn_pc2.Location = new Point(x_st + dx * 1 - 90, y_st + dy * 4 + 25);
+            lb_sn_pc3.Location = new Point(x_st + dx * 1 - 90, y_st + dy * 4 + 50);
 
             lb_sn.Location = new Point(x_st + dx * 1 - 70, y_st + dy * 4-10);
             tb_sn1.Location = new Point(x_st + dx * 1 - 70, y_st + dy * 5-20);
@@ -166,8 +165,11 @@ namespace vcs_Comport3
             bt_pc_3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             bt_pc_4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             bt_pc_5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            bt_pc_6.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            bt_pc_7.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+
+            bt_pc_6.Location = new Point(x_st + dx * 1 / 2 + 10, y_st + dy * 0);
+            bt_pc_7.Location = new Point(x_st + dx * 1 / 2 + 10, y_st + dy * 1);
+            bt_pc_8.Location = new Point(x_st + dx * 1 + 20, y_st + dy * 0);
+            bt_pc_9.Location = new Point(x_st + dx * 1 + 20, y_st + dy * 1);
 
             bt_ims_0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_ims_1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -209,18 +211,30 @@ namespace vcs_Comport3
             if (rb_user0.Checked == true)
             {
                 richTextBox1.Text += "使用者 : PLC\n";
+                groupBox_plc.BackColor = Color.White;
+                groupBox_pc.BackColor = SystemColors.ControlLight;
+                groupBox_ims.BackColor = SystemColors.ControlLight;
             }
             else if (rb_user1.Checked == true)
             {
                 richTextBox1.Text += "使用者 : PC\n";
+                groupBox_plc.BackColor = SystemColors.ControlLight;
+                groupBox_pc.BackColor = Color.White;
+                groupBox_ims.BackColor = SystemColors.ControlLight;
             }
             else if (rb_user2.Checked == true)
             {
                 richTextBox1.Text += "使用者 : IMS\n";
+                groupBox_plc.BackColor = SystemColors.ControlLight;
+                groupBox_pc.BackColor = SystemColors.ControlLight;
+                groupBox_ims.BackColor = Color.White;
             }
             else
             {
                 richTextBox1.Text += "使用者 : 不詳\n";
+                groupBox_plc.BackColor = SystemColors.ControlLight;
+                groupBox_pc.BackColor = SystemColors.ControlLight;
+                groupBox_ims.BackColor = SystemColors.ControlLight;
             }
         }
 
@@ -1600,6 +1614,8 @@ namespace vcs_Comport3
             }
             else if (item == 9)
             {
+                /*
+                舊的  22  碼
                 if ((tb_sn1.Text.Length != 10) || (tb_sn2.Text.Length != 12))
                 {
                     make_camera_data();
@@ -1642,6 +1658,41 @@ namespace vcs_Comport3
                     return;
                 }
                 serialPort2.Write(sn_data_tmp, 0, 22);
+                */
+
+                //新的  13  碼
+
+                if (tb_sn1.Text.Length != 13)
+                {
+                    make_camera_data_new();
+                }
+
+                Send_Cmd_PLC_PC(0xC0, 0x00, 0x00, 0x00, 0x00);   //寫入相機序號
+
+                show_main_message2b("寫入相機序號", S_FALSE, 30);
+
+                richTextBox1.Text += "相機序號1長度 : " + tb_sn1.Text.Length.ToString() + "\n";
+                richTextBox1.Text += "相機序號2長度 : " + tb_sn2.Text.Length.ToString() + "\n";
+
+                int i;
+
+                byte[] sn_data_tmp = new byte[13];
+                for (i = 0; i < tb_sn1.Text.Length; i++)
+                {
+                    sn_data_tmp[i] = (byte)tb_sn1.Text[i];
+                    //richTextBox1.Text += "\ni = " + i.ToString() + " tmp data : " + tb_sn1.Text[i].ToString();
+                }
+
+                //richTextBox1.Text += "\n";
+
+                if (flag_comport_pc_ims_ok == false)
+                {
+                    show_main_message0("PC-IMS 未連線", S_FALSE, 30);
+                    return;
+                }
+                serialPort2.Write(sn_data_tmp, 0, 13);
+
+
             }
             return;
         }
@@ -1868,6 +1919,60 @@ namespace vcs_Comport3
             Send_Cmd_PC_IMS(0xFF, 0xCC, 0xBB, 0xAA);
         }
 
+        private void bt_pc_8_Click(object sender, EventArgs e)
+        {
+            show_main_message2a(((Button)sender).Text, S_FALSE, 30);
+
+            //新的  13  碼
+
+            if (tb_sn1.Text.Length != 13)
+            {
+                make_camera_data_new();
+            }
+
+            //tb_sn1.Text = "N1234567A1234";
+
+            show_main_message2b("寫入相機序號", S_FALSE, 30);
+
+            richTextBox1.Text += "相機序號1長度 : " + tb_sn1.Text.Length.ToString() + "\n";
+            richTextBox1.Text += "相機序號2長度 : " + tb_sn2.Text.Length.ToString() + "\n";
+
+            int i;
+
+            byte[] sn_data_tmp = new byte[13];
+            for (i = 0; i < tb_sn1.Text.Length; i++)
+            {
+                sn_data_tmp[i] = (byte)tb_sn1.Text[i];
+                //richTextBox1.Text += "\ni = " + i.ToString() + " tmp data : " + tb_sn1.Text[i].ToString();
+            }
+
+            //richTextBox1.Text += "\n";
+
+            Send_Cmd_PC_IMS(0xC0, 0x12, 0x34, 0x56);   //camera serial write
+
+            serialPort2.Write(sn_data_tmp, 0, 13);
+
+            delay(500);
+
+            show_main_message2b("寫入相機序號, 完成", S_FALSE, 30);
+        }
+
+        private void bt_pc_9_Click(object sender, EventArgs e)
+        {
+            //清除相機資料
+            erase_camera_data();
+        }
+
+        void erase_camera_data()
+        {
+            richTextBox1.Text += "erase all camera flash data\n";
+
+            Send_Cmd_PC_IMS(0xEE, 0xFF, 0xEE, 0xFF);   //erase all camera flash data
+            show_main_message2b("清除相機資料完成", S_OK, 30);
+            return;
+        }
+
+
         private void bt_ims_0_Click(object sender, EventArgs e)
         {
             show_main_message3a(((Button)sender).Text, S_FALSE, 30);
@@ -1907,7 +2012,8 @@ namespace vcs_Comport3
 
         private void bt_plc_generate_sn_Click(object sender, EventArgs e)
         {
-            make_camera_data();
+            //make_camera_data();
+            make_camera_data_new();
         }
 
         void make_camera_data()
@@ -1943,6 +2049,34 @@ namespace vcs_Comport3
 
             tb_sn1.Text = finalString1;
             tb_sn2.Text = finalString2;
+
+            show_main_message1a("製作相機資料完成", S_OK, 30);
+
+            richTextBox1.Text += "len1 = " + tb_sn1.Text.Length.ToString() + "\n";
+            richTextBox1.Text += "len2 = " + tb_sn2.Text.Length.ToString() + "\n";
+            return;
+        }
+
+        void make_camera_data_new()
+        {
+            //[C#] 產生一組亂數
+            //最後產生的finalString就是我們要的亂數,至於亂數長度,你可以調整第二行中8這個數字,如果沒改就是長度8的亂數.
+            var chars1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            var chars2 = "0123456789";
+            var camera_serial = new char[13];
+            var random = new Random();
+            for (int i = 0; i < camera_serial.Length; i++)
+            {
+                camera_serial[i] = chars2[random.Next(chars2.Length)];
+            }
+            camera_serial[0] = chars1[random.Next(chars1.Length)];
+            camera_serial[8] = chars1[random.Next(chars1.Length)];
+
+            var finalString1 = new String(camera_serial);
+            richTextBox1.Text += "相機序號1：" + finalString1 + "\n";
+
+            tb_sn1.Text = finalString1;
+            tb_sn2.Text = "";
 
             show_main_message1a("製作相機資料完成", S_OK, 30);
 
@@ -2758,5 +2892,7 @@ namespace vcs_Comport3
             }
             */
         }
+
+
     }
 }
