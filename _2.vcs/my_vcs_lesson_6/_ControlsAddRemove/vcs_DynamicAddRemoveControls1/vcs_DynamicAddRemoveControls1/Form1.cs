@@ -7,6 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;    //for Directory
+
+//所有的PNG檔要選屬性/複製到輸出目錄/選 有更新時才複製
+
 namespace vcs_DynamicAddRemoveControls1
 {
     public partial class Form1 : Form
@@ -32,6 +36,55 @@ namespace vcs_DynamicAddRemoveControls1
             show_item_location();
             //動態產生button並且綁定click事件
             DynamicGenerateButton1();
+
+
+            this.MouseDown += new MouseEventHandler(Form1_MouseDown);
+        }
+
+        int cnt = 1;
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            Button btn = new Button();
+
+            //設定新控件的名稱和Text屬性，以及產生的位置
+            btn.Left = e.X;
+            btn.Top = e.Y;
+            btn.Name = "Button " + cnt;
+            btn.Text = "Button" + cnt;
+            btn.Size = new Size(70, 35);
+
+            //為產生的新的Button控件設定事件
+            btn.Click += new EventHandler(btn_Click);
+            btn.MouseEnter += new EventHandler(btn_MouseEnter);
+            btn.MouseLeave += new EventHandler(btn_MouseLeave);
+
+            //在窗體中顯示此控件
+            this.Controls.Add(btn);
+
+            richTextBox1.Text += "新增控件 " + btn.Text + "\n";
+            cnt++;
+        }
+
+        //定義事件
+        private void btn_Click(object sender, System.EventArgs e)
+        {
+            if (sender.GetType() == typeof(Button))
+            {
+                Button control = (Button)sender;
+                richTextBox1.Text += "你按了 " + control.Text + "\n";
+            }
+        }
+
+        private void btn_MouseEnter(object sender, System.EventArgs e)
+        {
+            Button currentTextBox = (Button)sender;
+            currentTextBox.BackColor = Color.Yellow;    //設定按鈕的背景色
+        }
+
+        private void btn_MouseLeave(object sender, System.EventArgs e)
+        {
+            Button currentTextBox = (Button)sender;
+            currentTextBox.BackColor = System.Drawing.SystemColors.ControlLight;    //設定按鈕的背景色
         }
 
         void show_item_location()
@@ -49,7 +102,8 @@ namespace vcs_DynamicAddRemoveControls1
             int pbx_W3 = 480;
 
 
-            groupBox1.Location = new Point(10, 650);
+            groupBox1.Location = new Point(10, 430);
+            groupBox2.Location = new Point(10, 650);
 
             richTextBox1.Size = new Size(400, 900);
             richTextBox1.Location = new Point(1500, 10);
@@ -487,7 +541,15 @@ namespace vcs_DynamicAddRemoveControls1
 
         private void button7_Click(object sender, EventArgs e)
         {
+            DynamicGenerateButton3();
+        }
+
+        private void DynamicGenerateButton3()
+        {
             //動態創建按鈕和事件, 創建在richTextBox裡
+
+            int x_st = 100;
+            int y_st = 100;
 
             int i = 0;
             for (i = 0; i < 10; i++)
@@ -496,7 +558,7 @@ namespace vcs_DynamicAddRemoveControls1
                 btn.Name = "button" + i.ToString();//這是我用來區別各個按鈕的辦法
                 btn.Text = "button" + i.ToString();
                 btn.Size = new Size(80, 45);
-                Point p = new Point(100, 50 + i * 50);//創建一個坐標,用來給新的按鈕定位
+                Point p = new Point(x_st, y_st + i * 60);//創建一個坐標,用來給新的按鈕定位
                 btn.Location = p;//把按鈕的位置與剛創建的坐標綁定在一起
 
                 this.richTextBox1.Controls.Add(btn);    //向 某控件 中添加此按鈕
@@ -516,7 +578,15 @@ namespace vcs_DynamicAddRemoveControls1
 
         private void button8_Click(object sender, EventArgs e)
         {
+            DynamicGenerateButton4();
+        }
+
+        private void DynamicGenerateButton4()
+        {
             //動態創建按鈕和事件, 創建在Form裡
+
+            int x_st = 10;
+            int y_st = 900;
 
             //1.建立Button物件
             Button[] btuArray = new Button[3];
@@ -532,7 +602,7 @@ namespace vcs_DynamicAddRemoveControls1
                 btuArray[i].Text = "Dynamic " + i;
                 //btuArray[i].Top = 12 + btuArray[i].Height * i;
                 //btuArray[i].Left = 13;
-                btuArray[i].Location = new Point(550 + i * 90, 500);
+                btuArray[i].Location = new Point(x_st + i * 90, y_st);
                 //3.為Click事件註冊
                 btuArray[i].Click += new EventHandler(button_Click);
             }
@@ -547,6 +617,13 @@ namespace vcs_DynamicAddRemoveControls1
 
         private void button9_Click(object sender, EventArgs e)
         {
+            DynamicGenerateButton5();
+        }
+
+        private void DynamicGenerateButton5()
+        {
+            int x_st = 10;
+            int y_st = 980;
             int count = 5;
             Button[] btn = new Button[count];
             for (int j = 0; j < count; j++)
@@ -556,7 +633,7 @@ namespace vcs_DynamicAddRemoveControls1
                 btn[j].Name = "topic2" + j;
                 btn[j].Text = j.ToString();
                 btn[j].AutoSize = true;
-                btn[j].Location = new Point(100 * j + 20, 440);
+                btn[j].Location = new Point(x_st + 100 * j, y_st);
                 btn[j].Font = new Font("微軟正黑體", 12);
                 btn[j].ForeColor = Color.White;
                 btn[j].FlatStyle = FlatStyle.Flat;
@@ -564,29 +641,37 @@ namespace vcs_DynamicAddRemoveControls1
                 btn[j].BackColor = Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(65)))), ((int)(((byte)(85)))));
             }
             this.Controls.AddRange(btn);
-
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
+            DynamicGenerateButton6();
+        }
+
+        private void DynamicGenerateButton6()
+        {
+            int x_st = 320;
+            int y_st = 620;
+
             PictureBox pb_new = new PictureBox();
-            pb_new.Size = new Size(250, 250);
-            pb_new.Left = 600;
-            pb_new.Top = 440;
+            pb_new.Size = new Size(300, 300);
+            pb_new.Left = x_st;
+            pb_new.Top = y_st;
             pb_new.BackColor = Color.Pink;
             this.Controls.Add(pb_new);
 
             Button bt_new = new Button();
-            this.groupBox1.Controls.Add(bt_new);
+            this.Controls.Add(bt_new);
+            bt_new.BringToFront();
             //bt_new.Location = new Point(button10.Location.X, button10.Location.Y + 60);   same
-            bt_new.Left = button10.Location.X + 120;
-            bt_new.Top = button10.Location.Y + 0;
-            bt_new.Size = new Size(100, 40);
+            bt_new.Left = x_st + 100;
+            bt_new.Top = y_st + 100;
+            bt_new.Size = new Size(100, 100);
             bt_new.BackColor = Color.Red;
             bt_new.Text = "新增控件";
             bt_new.Click += new EventHandler(bt_new_Click);
-        }
 
+        }
         private void bt_new_Click(System.Object sender, System.EventArgs e)
         {
             richTextBox1.Text += "你按了這個新控件\n";
@@ -600,9 +685,12 @@ namespace vcs_DynamicAddRemoveControls1
 
         private void DynamicGenerateButton2()
         {
+            int x_st = 320;
+            int y_st = 450;
+
             // 設定位置及按鈕寬高值
-            int LEFTANCHOR = 600;
-            int TOPANCHOR = 550;
+            int LEFTANCHOR = x_st;
+            int TOPANCHOR = y_st;
             int BTN_HEIGHT = 80;
             int BTN_WIDTH = 80;
 
@@ -639,11 +727,18 @@ namespace vcs_DynamicAddRemoveControls1
 
         }
 
-        Button[,] btn = new Button[3, 3];
-        Font font = new Font("微軟正黑體", 12);
-
         private void button12_Click(object sender, EventArgs e)
         {
+            DynamicGenerateButton7();
+        }
+
+        Button[,] btn = new Button[3, 3];
+        Font font = new Font("微軟正黑體", 12);
+        private void DynamicGenerateButton7()
+        {
+            int x_st = 320 + 320;
+            int y_st = 620;
+
             btn = new Button[3, 3];
             for (int x = 0; x < btn.GetLength(0); x++)
             {
@@ -652,7 +747,7 @@ namespace vcs_DynamicAddRemoveControls1
                     btn[x, y] = new Button();
                     btn[x, y].Size = new Size(100, 100);
                     btn[x, y].Text = "";
-                    btn[x, y].Location = new Point(800 + x * 100, 50 + y * 100);
+                    btn[x, y].Location = new Point(x_st + x * 100, y_st + y * 100);
                     btn[x, y].Font = font;
                     btn[x, y].Name = "( " + x.ToString() + ", " + y.ToString() + ")";
                     btn[x, y].Click += ButtonsClick;
@@ -688,6 +783,160 @@ namespace vcs_DynamicAddRemoveControls1
                 Console.WriteLine(count);
             }
             */
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+            DynamicGenerateButton8();
+        }
+
+        private void DynamicGenerateButton8()
+        {
+            int x_st = 350;
+            int y_st = 450;
+
+            Button[] btn = new Button[10];//Button 陣列
+
+            richTextBox1.Text += "在 表單/panel/pictureBox/richtextBox 上動態建立10個按鈕控件\n";
+
+            for (int i = 0; i < 10; i++)
+            {
+                btn[i] = new Button();//實體化Button
+
+                btn[i].Size = new Size(60, 40);
+
+                btn[i].Location = new Point(x_st + 70 * (i % 5), y_st + 100 * (i / 5));
+
+                btn[i].Text = i.ToString();
+
+                btn[i].Click += new EventHandler(this.btnXO_Click);//事件
+
+                this.Controls.Add(btn[i]); //add 到 this 容器
+                //panel1.Controls.Add(btn[i]); //add 到 panel1 容器
+                //pictureBox1.Controls.Add(btn[i]); //add 到 pictureBox1 容器
+                //richTextBox1.Controls.Add(btn[i]); //add 到 richTextBox1 容器
+            }
+        }
+
+        private void btnXO_Click(object sender, EventArgs e)//動態Button 的事件
+        {
+            /* same
+            richTextBox1.Text += "你按下: " + ((Button)(sender)).Text + "\t" + "索引值: " + ((Button)(sender)).TabIndex.ToString() + "\n";
+            */
+
+            //Unboxing (出箱)
+            Button btn = (Button)sender;
+
+            richTextBox1.Text += "你按下: " + btn.Text + "\t" + "索引值: " + btn.TabIndex.ToString() + "\n";
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+            DynamicGenerateButton9();
+        }
+
+        private void DynamicGenerateButton9()
+        {
+            // Display all of the images in the Buttons folder.
+            int x_st = 900;
+            int y_st = 50;
+
+            const int w = 40;
+            const int h = 40;
+
+            int dx = w + 10;
+            int dy = h + 10;
+
+            // Find the images.
+            int num = 0;
+            foreach (string filename in Directory.GetFiles("Buttons", "*.png"))
+            {
+                // Make a new Button.
+                Button btn = new Button();
+                btn.Parent = this;
+                btn.Image = new Bitmap(filename);
+                btn.Size = new Size(32, 32);
+                btn.Location = new Point(x_st + dx * (num % 12), y_st + dy * (num / 12));
+
+                num++;
+
+                FileInfo file_info = new FileInfo(filename);
+                toolTip1.SetToolTip(btn, file_info.Name);
+            }
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+            DynamicGenerateButton10();
+        }
+
+        private void DynamicGenerateButton10()
+        {
+
+            string foldername = @"C:\______test_files\__pic\_臨江仙";
+
+            int x_st = 900;
+            int y_st = 350;
+
+            const int w = 64 + 8;
+            const int h = 64 + 8;
+            const int dx = 64 + 8;
+            const int dy = 64 + 8;
+
+            // Find the images.
+            int num = 0;
+            foreach (string filename in Directory.GetFiles(foldername, "*.jpeg"))
+            {
+                // Make a new Button.
+                Button btn = new Button();
+                btn.Parent = this;
+                btn.BackgroundImage = new Bitmap(filename);
+                btn.BackgroundImageLayout = ImageLayout.Zoom;
+                btn.Size = new Size(64, 64);
+                btn.Location = new Point(x_st + dx * (num % 6), y_st + dy * (num / 6));
+                num++;
+
+                FileInfo file_info = new FileInfo(filename);
+                toolTip1.SetToolTip(btn, file_info.Name);
+            }
+        }
+
+        private void button16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button17_Click(object sender, EventArgs e)
+        {
+            //清除這些新增的控件
+            for (int j = 0; j < 10; j++)
+            {
+                for (int i = 0; i < this.Controls.Count; i++)
+                {
+                    if ((this.Controls[i].Name == "button1") || (this.Controls[i].Name == "button2") || (this.Controls[i].Name == "button3") || (this.Controls[i].Name == "button4"))
+                    {
+                        //richTextBox1.Text += "跳過 : " + this.Controls[i].Name + "\n";
+                        continue;
+                    }
+                    else if (this.Controls[i].Name == "toolTip1")
+                    {
+                        //richTextBox1.Text += "跳過 : " + this.Controls[i].Name + "\n";
+                        continue;
+                    }
+                    else if (this.Controls[i].Name == "richTextBox1")
+                    {
+                        //richTextBox1.Text += "跳過 : " + this.Controls[i].Name + "\n";
+                        continue;
+                    }
+
+                    //richTextBox1.Text += "XXXXXXXX : " + this.Controls[i].Name + "\n";
+                    //richTextBox1.Text += "Name: " + this.Controls[i].Name + "\t";
+                    //richTextBox1.Text += "Text: " + this.Controls[i].Text + "\t";
+                    //richTextBox1.Text += "這項是：" + this.Controls[i].GetType() + "\n";
+
+                    this.Controls.Remove(this.Controls[i]);
+                }
+            }
         }
     }
 }
