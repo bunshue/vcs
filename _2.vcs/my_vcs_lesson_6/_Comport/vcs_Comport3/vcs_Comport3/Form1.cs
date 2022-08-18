@@ -67,6 +67,7 @@ namespace vcs_Comport3
             show_item_location();
             show_backcolor();
             Comport_Scan();
+            rb_user_CheckedChanged(sender, e);
         }
 
         void show_item_location()
@@ -76,32 +77,43 @@ namespace vcs_Comport3
             int dx;
             int dy;
 
-            groupBox_comport1.Location = new Point(10, 10);
+            groupBox_comport1.Location = new Point(10+410*0, 10);
             groupBox_comport1.Size = new Size(400, 70);
 
-            groupBox_comport2.Location = new Point(10, 90);
+            groupBox_comport2.Location = new Point(10+410*1, 10);
             groupBox_comport2.Size = new Size(400, 70);
 
-            groupBox_plc.Location = new Point(10, 170);
-            groupBox_plc.Size = new Size(300, 500);
+            groupBox_user.Location = new Point(10+410*2, 10);
 
-            groupBox_pc.Location = new Point(10+310, 170);
-            groupBox_pc.Size = new Size(300, 500);
+            panel1.Location = new Point(920, 10);
 
-            groupBox_ims.Location = new Point(10 + 310+310, 170);
-            groupBox_ims.Size = new Size(300, 500);
+            int W = 320;
+            int H = 550;
+            x_st = 10;
+            y_st = 120;
+            dx = W + 10;
+
+            groupBox_plc.Location = new Point(x_st + dx * 0, y_st);
+            groupBox_plc.Size = new Size(W, H);
+
+            groupBox_pc.Location = new Point(x_st + dx * 1, y_st);
+            groupBox_pc.Size = new Size(W, H);
+
+            groupBox_ims.Location = new Point(x_st + dx * 2, y_st);
+            groupBox_ims.Size = new Size(W, H);
 
             //richTextBox1
-            richTextBox1.Location = new Point(10 + 310+310+310, 170);
-            richTextBox1.Size = new Size(400-120, 500);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st);
+            richTextBox1.Size = new Size(W / 2, H);
 
-            lb_main_mesg0.Location = new Point(450, 30);
+            lb_main_mesg0.Location = new Point(350, 80);
             lb_main_mesg1a.Location = new Point(20, 30);
             lb_main_mesg2a.Location = new Point(20, 30);
             lb_main_mesg3a.Location = new Point(20, 30);
             lb_main_mesg1b.Location = new Point(20, 60);
             lb_main_mesg2b.Location = new Point(20, 60);
             lb_main_mesg3b.Location = new Point(20, 60);
+
             lb_main_mesg0.Text = "";
             lb_main_mesg1a.Text = "";
             lb_main_mesg2a.Text = "";
@@ -118,9 +130,9 @@ namespace vcs_Comport3
 
             //button
             x_st = 12;
-            y_st = 100;
+            y_st = 280;
             dx = 180;
-            dy = 50;
+            dy = 42;
 
             bt_plc_0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_plc_1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -128,23 +140,25 @@ namespace vcs_Comport3
             bt_plc_3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             bt_plc_4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             bt_plc_5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            bt_plc_6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            bt_plc_7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            bt_plc_8.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            bt_plc_9.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+
+            bt_plc_6.Location = new Point(x_st + dx * 1/2+10, y_st + dy * 0);
+            bt_plc_7.Location = new Point(x_st + dx * 1/2+10, y_st + dy * 1);
+
+            bt_plc_8.Location = new Point(x_st + dx * 1+20, y_st + dy * 0);
+            bt_plc_9.Location = new Point(x_st + dx * 1+20, y_st + dy * 1);
 
             lb_sn1.Location = new Point(x_st + dx * 1 - 90, y_st + dy * 2);
-            lb_sn2.Location = new Point(x_st + dx * 1 - 90, y_st + dy * 2 + 30);
-            lb_sn3.Location = new Point(x_st + dx * 1 - 90, y_st + dy * 2 + 60);
+            lb_sn2.Location = new Point(x_st + dx * 1 - 90, y_st + dy * 2 + 25);
+            lb_sn3.Location = new Point(x_st + dx * 1 - 90, y_st + dy * 2 + 50);
 
             lb_sn_pc1.Location = new Point(x_st + dx * 1 - 90, y_st + dy * 2);
-            lb_sn_pc2.Location = new Point(x_st + dx * 1 - 90, y_st + dy * 2 + 30);
-            lb_sn_pc3.Location = new Point(x_st + dx * 1 - 90, y_st + dy * 2 + 60);
+            lb_sn_pc2.Location = new Point(x_st + dx * 1 - 90, y_st + dy * 2 + 25);
+            lb_sn_pc3.Location = new Point(x_st + dx * 1 - 90, y_st + dy * 2 + 50);
 
-            lb_sn.Location = new Point(x_st + dx * 1-70, y_st + dy * 4);
-            tb_sn1.Location = new Point(x_st + dx * 1-70, y_st + dy * 5);
-            tb_sn2.Location = new Point(x_st + dx * 1-70, y_st + dy * 6);
-            bt_plc_generate_sn.Location = new Point(x_st + dx * 1+30, y_st + dy * 7);
+            lb_sn.Location = new Point(x_st + dx * 1 - 70, y_st + dy * 4-10);
+            tb_sn1.Location = new Point(x_st + dx * 1 - 70, y_st + dy * 5-20);
+            tb_sn2.Location = new Point(x_st + dx * 1 - 70, y_st + dy * 6-25);
+            bt_plc_generate_sn.Location = new Point(x_st + dx * 1 + 70, y_st + dy * 5 + 0);
 
             bt_pc_0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_pc_1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -152,10 +166,8 @@ namespace vcs_Comport3
             bt_pc_3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             bt_pc_4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             bt_pc_5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            bt_pc_6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            bt_pc_7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            bt_pc_8.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            bt_pc_9.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            bt_pc_6.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_pc_7.Location = new Point(x_st + dx * 1, y_st + dy * 1);
 
             bt_ims_0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_ims_1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -164,9 +176,52 @@ namespace vcs_Comport3
             bt_ims_4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             bt_ims_5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
 
+            pictureBox1.Size = new Size(W-20, 180);
+            pictureBox1.Location = new Point(10, 90);
+            pictureBox1.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.Image = Properties.Resources.plc;
+
+            pictureBox2.Size = new Size(W - 20, 180);
+            pictureBox2.Location = new Point(10, 90);
+            pictureBox2.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.Image = Properties.Resources.pc;
+
+            pictureBox3.Size = new Size(W - 20, 180);
+            pictureBox3.Location = new Point(10, 90);
+            pictureBox3.BorderStyle = BorderStyle.Fixed3D;
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox3.Image = Properties.Resources.ims;
+
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            this.Size = new Size(1135+120, 725);
+            this.Size = new Size(1200, 720);
+            this.Location = new Point(10, 10);
+
+            rb_user0.CheckedChanged += new EventHandler(rb_user_CheckedChanged);
+            rb_user1.CheckedChanged += new EventHandler(rb_user_CheckedChanged);
+            rb_user2.CheckedChanged += new EventHandler(rb_user_CheckedChanged);
+        }
+
+        void rb_user_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rb_user0.Checked == true)
+            {
+                richTextBox1.Text += "使用者 : PLC\n";
+            }
+            else if (rb_user1.Checked == true)
+            {
+                richTextBox1.Text += "使用者 : PC\n";
+            }
+            else if (rb_user2.Checked == true)
+            {
+                richTextBox1.Text += "使用者 : IMS\n";
+            }
+            else
+            {
+                richTextBox1.Text += "使用者 : 不詳\n";
+            }
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -331,7 +386,7 @@ namespace vcs_Comport3
             int cmd = input[1];
 
             richTextBox1.AppendText("[RX] : " + ((int)input[0]).ToString("X2") + " " + ((int)input[1]).ToString("X2") + " " + ((int)input[2]).ToString("X2") + " "
-                + ((int)input[3]).ToString("X2") + " " + ((int)input[4]).ToString("X2") + " " + ((int)input[5]).ToString("X2") + " " + ((int)input[6]).ToString("X2") 
+                + ((int)input[3]).ToString("X2") + " " + ((int)input[4]).ToString("X2") + " " + ((int)input[5]).ToString("X2") + " " + ((int)input[6]).ToString("X2")
                 + "  chk: " + ((int)data[6]).ToString("X2") + "\n");
 
             string mesg = "[RX] : " + ((int)data[0]).ToString("X2") + " " + ((int)data[1]).ToString("X2") + " " + ((int)data[2]).ToString("X2") + " " + ((int)data[3]).ToString("X2") + " " + ((int)data[4]).ToString("X2") + " " + ((int)data[5]).ToString("X2") + " " + ((int)data[6]).ToString("X2");
@@ -1272,7 +1327,7 @@ namespace vcs_Comport3
 
             byte xx = d0;
             byte yy = d1;
-            byte zz =d2;
+            byte zz = d2;
 
             Send_Data_PC_IMS(cmd, xx, yy, zz);
 
@@ -1803,35 +1858,15 @@ namespace vcs_Comport3
         {
             show_main_message2a(((Button)sender).Text, S_FALSE, 30);
 
+            Send_Cmd_PC_IMS(0xFF, 0xAA, 0xBB, 0xCC);
         }
 
         private void bt_pc_7_Click(object sender, EventArgs e)
         {
             show_main_message2a(((Button)sender).Text, S_FALSE, 30);
 
-        }
-
-        private void bt_pc_8_Click(object sender, EventArgs e)
-        {
-            show_main_message2a(((Button)sender).Text, S_FALSE, 30);
-
-
-            Send_Cmd_PC_IMS(0xFF, 0xAA, 0xBB, 0xCC);
-
-        }
-
-
-        private void bt_pc_9_Click(object sender, EventArgs e)
-        {
-            show_main_message2a(((Button)sender).Text, S_FALSE, 30);
-
-
             Send_Cmd_PC_IMS(0xFF, 0xCC, 0xBB, 0xAA);
-
         }
-
-
-
 
         private void bt_ims_0_Click(object sender, EventArgs e)
         {
@@ -2527,10 +2562,10 @@ namespace vcs_Comport3
 
                             lb_temperature.Text = temperature.ToString("#0.000") + " C ";
                         */
-                            /*
-                            #define XAdcPs_RawToTemperature(AdcData)				\
-                            ((((float)(AdcData)/65536.0f)/0.00198421639f ) - 273.15f)
-                            */
+                        /*
+                        #define XAdcPs_RawToTemperature(AdcData)				\
+                        ((((float)(AdcData)/65536.0f)/0.00198421639f ) - 273.15f)
+                        */
                         /*
                             //溫度偵測圖表
                             // Define some variables
@@ -2723,12 +2758,5 @@ namespace vcs_Comport3
             }
             */
         }
-
-
-
-
-
-
     }
 }
-

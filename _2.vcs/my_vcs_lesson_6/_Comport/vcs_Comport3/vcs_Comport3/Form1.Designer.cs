@@ -71,10 +71,8 @@
             this.bt_plc_2 = new System.Windows.Forms.Button();
             this.lb_main_mesg1a = new System.Windows.Forms.Label();
             this.groupBox_pc = new System.Windows.Forms.GroupBox();
-            this.bt_pc_9 = new System.Windows.Forms.Button();
             this.lb_sn_pc3 = new System.Windows.Forms.Label();
             this.lb_main_mesg2b = new System.Windows.Forms.Label();
-            this.bt_pc_8 = new System.Windows.Forms.Button();
             this.lb_sn_pc2 = new System.Windows.Forms.Label();
             this.bt_pc_7 = new System.Windows.Forms.Button();
             this.bt_pc_6 = new System.Windows.Forms.Button();
@@ -98,6 +96,13 @@
             this.timer_display = new System.Windows.Forms.Timer(this.components);
             this.lb_main_mesg0 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox2 = new System.Windows.Forms.PictureBox();
+            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.groupBox_user = new System.Windows.Forms.GroupBox();
+            this.rb_user0 = new System.Windows.Forms.RadioButton();
+            this.rb_user1 = new System.Windows.Forms.RadioButton();
+            this.rb_user2 = new System.Windows.Forms.RadioButton();
             this.groupBox_comport1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_comport1)).BeginInit();
             this.groupBox_comport2.SuspendLayout();
@@ -105,6 +110,10 @@
             this.groupBox_plc.SuspendLayout();
             this.groupBox_pc.SuspendLayout();
             this.groupBox_ims.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            this.groupBox_user.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -310,6 +319,7 @@
             // 
             this.groupBox_plc.Controls.Add(this.lb_sn3);
             this.groupBox_plc.Controls.Add(this.lb_sn2);
+            this.groupBox_plc.Controls.Add(this.pictureBox1);
             this.groupBox_plc.Controls.Add(this.lb_sn1);
             this.groupBox_plc.Controls.Add(this.bt_plc_generate_sn);
             this.groupBox_plc.Controls.Add(this.lb_sn);
@@ -518,10 +528,9 @@
             // 
             // groupBox_pc
             // 
-            this.groupBox_pc.Controls.Add(this.bt_pc_9);
             this.groupBox_pc.Controls.Add(this.lb_sn_pc3);
+            this.groupBox_pc.Controls.Add(this.pictureBox2);
             this.groupBox_pc.Controls.Add(this.lb_main_mesg2b);
-            this.groupBox_pc.Controls.Add(this.bt_pc_8);
             this.groupBox_pc.Controls.Add(this.lb_sn_pc2);
             this.groupBox_pc.Controls.Add(this.bt_pc_7);
             this.groupBox_pc.Controls.Add(this.bt_pc_6);
@@ -539,16 +548,6 @@
             this.groupBox_pc.TabIndex = 191;
             this.groupBox_pc.TabStop = false;
             this.groupBox_pc.Text = "PC控制台";
-            // 
-            // bt_pc_9
-            // 
-            this.bt_pc_9.Location = new System.Drawing.Point(107, 122);
-            this.bt_pc_9.Name = "bt_pc_9";
-            this.bt_pc_9.Size = new System.Drawing.Size(90, 40);
-            this.bt_pc_9.TabIndex = 194;
-            this.bt_pc_9.Text = "發送命令給IMS LED";
-            this.bt_pc_9.UseVisualStyleBackColor = true;
-            this.bt_pc_9.Click += new System.EventHandler(this.bt_pc_9_Click);
             // 
             // lb_sn_pc3
             // 
@@ -571,16 +570,6 @@
             this.lb_main_mesg2b.TabIndex = 148;
             this.lb_main_mesg2b.Text = "mesg1";
             // 
-            // bt_pc_8
-            // 
-            this.bt_pc_8.Location = new System.Drawing.Point(107, 76);
-            this.bt_pc_8.Name = "bt_pc_8";
-            this.bt_pc_8.Size = new System.Drawing.Size(90, 40);
-            this.bt_pc_8.TabIndex = 147;
-            this.bt_pc_8.Text = "發送命令給IMS START";
-            this.bt_pc_8.UseVisualStyleBackColor = true;
-            this.bt_pc_8.Click += new System.EventHandler(this.bt_pc_8_Click);
-            // 
             // lb_sn_pc2
             // 
             this.lb_sn_pc2.AutoSize = true;
@@ -593,19 +582,21 @@
             // 
             // bt_pc_7
             // 
-            this.bt_pc_7.Location = new System.Drawing.Point(11, 398);
+            this.bt_pc_7.Location = new System.Drawing.Point(121, 122);
             this.bt_pc_7.Name = "bt_pc_7";
             this.bt_pc_7.Size = new System.Drawing.Size(90, 40);
             this.bt_pc_7.TabIndex = 146;
+            this.bt_pc_7.Text = "發送命令給IMS LED";
             this.bt_pc_7.UseVisualStyleBackColor = true;
             this.bt_pc_7.Click += new System.EventHandler(this.bt_pc_7_Click);
             // 
             // bt_pc_6
             // 
-            this.bt_pc_6.Location = new System.Drawing.Point(11, 352);
+            this.bt_pc_6.Location = new System.Drawing.Point(121, 76);
             this.bt_pc_6.Name = "bt_pc_6";
             this.bt_pc_6.Size = new System.Drawing.Size(90, 40);
             this.bt_pc_6.TabIndex = 145;
+            this.bt_pc_6.Text = "發送命令給IMS START";
             this.bt_pc_6.UseVisualStyleBackColor = true;
             this.bt_pc_6.Click += new System.EventHandler(this.bt_pc_6_Click);
             // 
@@ -689,6 +680,7 @@
             // 
             // groupBox_ims
             // 
+            this.groupBox_ims.Controls.Add(this.pictureBox3);
             this.groupBox_ims.Controls.Add(this.lb_main_mesg3b);
             this.groupBox_ims.Controls.Add(this.bt_ims_0);
             this.groupBox_ims.Controls.Add(this.bt_ims_5);
@@ -790,7 +782,7 @@
             this.lb_main_mesg0.AutoSize = true;
             this.lb_main_mesg0.Font = new System.Drawing.Font("Arial", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_main_mesg0.ForeColor = System.Drawing.Color.Red;
-            this.lb_main_mesg0.Location = new System.Drawing.Point(470, 41);
+            this.lb_main_mesg0.Location = new System.Drawing.Point(440, 91);
             this.lb_main_mesg0.Name = "lb_main_mesg0";
             this.lb_main_mesg0.Size = new System.Drawing.Size(103, 32);
             this.lb_main_mesg0.TabIndex = 135;
@@ -805,11 +797,80 @@
             this.panel1.Size = new System.Drawing.Size(260, 77);
             this.panel1.TabIndex = 193;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(188, 170);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox1.TabIndex = 194;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            this.pictureBox2.Location = new System.Drawing.Point(175, 168);
+            this.pictureBox2.Name = "pictureBox2";
+            this.pictureBox2.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox2.TabIndex = 195;
+            this.pictureBox2.TabStop = false;
+            // 
+            // pictureBox3
+            // 
+            this.pictureBox3.Location = new System.Drawing.Point(175, 168);
+            this.pictureBox3.Name = "pictureBox3";
+            this.pictureBox3.Size = new System.Drawing.Size(50, 50);
+            this.pictureBox3.TabIndex = 196;
+            this.pictureBox3.TabStop = false;
+            // 
+            // groupBox_user
+            // 
+            this.groupBox_user.Controls.Add(this.rb_user2);
+            this.groupBox_user.Controls.Add(this.rb_user1);
+            this.groupBox_user.Controls.Add(this.rb_user0);
+            this.groupBox_user.Location = new System.Drawing.Point(596, 38);
+            this.groupBox_user.Name = "groupBox_user";
+            this.groupBox_user.Size = new System.Drawing.Size(72, 105);
+            this.groupBox_user.TabIndex = 194;
+            this.groupBox_user.TabStop = false;
+            this.groupBox_user.Text = "使用者";
+            // 
+            // rb_user0
+            // 
+            this.rb_user0.AutoSize = true;
+            this.rb_user0.Location = new System.Drawing.Point(10, 20);
+            this.rb_user0.Name = "rb_user0";
+            this.rb_user0.Size = new System.Drawing.Size(44, 16);
+            this.rb_user0.TabIndex = 0;
+            this.rb_user0.Text = "PLC";
+            this.rb_user0.UseVisualStyleBackColor = true;
+            // 
+            // rb_user1
+            // 
+            this.rb_user1.AutoSize = true;
+            this.rb_user1.Checked = true;
+            this.rb_user1.Location = new System.Drawing.Point(10, 45);
+            this.rb_user1.Name = "rb_user1";
+            this.rb_user1.Size = new System.Drawing.Size(37, 16);
+            this.rb_user1.TabIndex = 1;
+            this.rb_user1.TabStop = true;
+            this.rb_user1.Text = "PC";
+            this.rb_user1.UseVisualStyleBackColor = true;
+            // 
+            // rb_user2
+            // 
+            this.rb_user2.AutoSize = true;
+            this.rb_user2.Location = new System.Drawing.Point(10, 70);
+            this.rb_user2.Name = "rb_user2";
+            this.rb_user2.Size = new System.Drawing.Size(43, 16);
+            this.rb_user2.TabIndex = 2;
+            this.rb_user2.Text = "IMS";
+            this.rb_user2.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1119, 686);
+            this.Controls.Add(this.groupBox_user);
             this.Controls.Add(this.lb_main_mesg0);
             this.Controls.Add(this.groupBox_ims);
             this.Controls.Add(this.groupBox_pc);
@@ -832,6 +893,11 @@
             this.groupBox_pc.PerformLayout();
             this.groupBox_ims.ResumeLayout(false);
             this.groupBox_ims.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            this.groupBox_user.ResumeLayout(false);
+            this.groupBox_user.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -887,7 +953,6 @@
         private System.Windows.Forms.Button bt_ims_0;
         private System.Windows.Forms.Button bt_plc_6;
         private System.Windows.Forms.Button bt_plc_7;
-        private System.Windows.Forms.Button bt_pc_8;
         private System.Windows.Forms.Button bt_pc_7;
         private System.Windows.Forms.Button bt_pc_6;
         private System.Windows.Forms.Label lb_main_mesg1b;
@@ -905,8 +970,14 @@
         private System.Windows.Forms.Label lb_sn_pc3;
         private System.Windows.Forms.Label lb_sn_pc2;
         private System.Windows.Forms.Label lb_sn_pc1;
-        private System.Windows.Forms.Button bt_pc_9;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox2;
+        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.GroupBox groupBox_user;
+        private System.Windows.Forms.RadioButton rb_user2;
+        private System.Windows.Forms.RadioButton rb_user1;
+        private System.Windows.Forms.RadioButton rb_user0;
     }
 }
 

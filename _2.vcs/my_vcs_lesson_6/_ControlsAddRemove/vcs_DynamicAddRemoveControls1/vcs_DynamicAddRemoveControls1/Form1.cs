@@ -37,7 +37,6 @@ namespace vcs_DynamicAddRemoveControls1
             //動態產生button並且綁定click事件
             DynamicGenerateButton1();
 
-
             this.MouseDown += new MouseEventHandler(Form1_MouseDown);
         }
 
@@ -105,7 +104,7 @@ namespace vcs_DynamicAddRemoveControls1
             groupBox1.Location = new Point(10, 430);
             groupBox2.Location = new Point(10, 650);
 
-            richTextBox1.Size = new Size(400, 900);
+            richTextBox1.Size = new Size(400, 400);
             richTextBox1.Location = new Point(1500, 10);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
@@ -586,7 +585,7 @@ namespace vcs_DynamicAddRemoveControls1
             //動態創建按鈕和事件, 創建在Form裡
 
             int x_st = 10;
-            int y_st = 900;
+            int y_st = 960;
 
             //1.建立Button物件
             Button[] btuArray = new Button[3];
@@ -623,7 +622,7 @@ namespace vcs_DynamicAddRemoveControls1
         private void DynamicGenerateButton5()
         {
             int x_st = 10;
-            int y_st = 980;
+            int y_st = 1030;
             int count = 5;
             Button[] btn = new Button[count];
             for (int j = 0; j < count; j++)
@@ -651,10 +650,11 @@ namespace vcs_DynamicAddRemoveControls1
         private void DynamicGenerateButton6()
         {
             int x_st = 320;
-            int y_st = 620;
+            int y_st = 700;
 
+            int ss = 80;
             PictureBox pb_new = new PictureBox();
-            pb_new.Size = new Size(300, 300);
+            pb_new.Size = new Size(ss * 3, ss * 3);
             pb_new.Left = x_st;
             pb_new.Top = y_st;
             pb_new.BackColor = Color.Pink;
@@ -664,9 +664,9 @@ namespace vcs_DynamicAddRemoveControls1
             this.Controls.Add(bt_new);
             bt_new.BringToFront();
             //bt_new.Location = new Point(button10.Location.X, button10.Location.Y + 60);   same
-            bt_new.Left = x_st + 100;
-            bt_new.Top = y_st + 100;
-            bt_new.Size = new Size(100, 100);
+            bt_new.Left = x_st + ss;
+            bt_new.Top = y_st + ss;
+            bt_new.Size = new Size(ss, ss);
             bt_new.BackColor = Color.Red;
             bt_new.Text = "新增控件";
             bt_new.Click += new EventHandler(bt_new_Click);
@@ -736,8 +736,10 @@ namespace vcs_DynamicAddRemoveControls1
         Font font = new Font("微軟正黑體", 12);
         private void DynamicGenerateButton7()
         {
-            int x_st = 320 + 320;
-            int y_st = 620;
+            int x_st = 600;
+            int y_st = 700;
+
+            int ss = 80;
 
             btn = new Button[3, 3];
             for (int x = 0; x < btn.GetLength(0); x++)
@@ -745,9 +747,9 @@ namespace vcs_DynamicAddRemoveControls1
                 for (int y = 0; y < btn.GetLength(1); y++)
                 {
                     btn[x, y] = new Button();
-                    btn[x, y].Size = new Size(100, 100);
+                    btn[x, y].Size = new Size(ss, ss);
                     btn[x, y].Text = "";
-                    btn[x, y].Location = new Point(x_st + x * 100, y_st + y * 100);
+                    btn[x, y].Location = new Point(x_st + x * ss, y_st + y * ss);
                     btn[x, y].Font = font;
                     btn[x, y].Name = "( " + x.ToString() + ", " + y.ToString() + ")";
                     btn[x, y].Click += ButtonsClick;
@@ -792,8 +794,8 @@ namespace vcs_DynamicAddRemoveControls1
 
         private void DynamicGenerateButton8()
         {
-            int x_st = 350;
-            int y_st = 450;
+            int x_st = 320;
+            int y_st = 550;
 
             Button[] btn = new Button[10];//Button 陣列
 
@@ -805,7 +807,7 @@ namespace vcs_DynamicAddRemoveControls1
 
                 btn[i].Size = new Size(60, 40);
 
-                btn[i].Location = new Point(x_st + 70 * (i % 5), y_st + 100 * (i / 5));
+                btn[i].Location = new Point(x_st + 70 * (i % 5), y_st + 60 * (i / 5));
 
                 btn[i].Text = i.ToString();
 
@@ -903,7 +905,129 @@ namespace vcs_DynamicAddRemoveControls1
 
         private void button16_Click(object sender, EventArgs e)
         {
+            //動態創建控件和事件
+            DynamicGenerateButton11();
+        }
 
+        Color[] colorSet = { Color.Red, Color.Orange, Color.Yellow, Color.Lime };
+        Label[] new_label = new Label[100];
+
+        private void DynamicGenerateButton11()
+        {
+            Panel panel1 = new Panel();
+
+            panel1.Size = new Size(400, 400);
+            panel1.BackColor = Color.Pink;
+
+            panel1.Location = new Point(1400, 650);
+
+            this.Controls.Add(panel1);
+
+            int x_st = 0;
+            int y_st = 0;
+            int W = 45;
+            int H = 45;
+            int dx = W + 5;
+            int dy = H + 5;
+            int not_empty = 0;
+
+            //-----------隨機產生空位
+            Random rand = new Random();
+            not_empty = rand.Next(1, 100);
+
+            richTextBox1.Text += "not_empty = " + not_empty.ToString() + "\n";
+
+            //動態產生元件並指定屬性與事件
+            for (int i = 0; i < new_label.Length; i++)
+            {
+                new_label[i] = new Label();
+                new_label[i].AutoSize = false;
+                new_label[i].Name = "label" + i.ToString();
+                new_label[i].Text = (i + 1).ToString();
+                new_label[i].MouseHover += MouseHover_Handler;
+                new_label[i].MouseLeave += MouseLeave_Handler;
+                new_label[i].Click += MouseClick_Handler;
+                new_label[i].Location = new Point(x_st, y_st);
+                new_label[i].Size = new Size(W, H);
+                if (i > not_empty)  //空位
+                {
+                    new_label[i].Tag = "sample : " + i.ToString() + " is " + "empty";
+                    new_label[i].BackColor = Color.Gray;
+                }
+                else
+                {
+                    new_label[i].Tag = "sample : " + i.ToString() + " is " + "red";
+                    new_label[i].BackColor = Color.Red;
+                }
+                //this.Controls.Add(new_label[i]);
+                panel1.Controls.Add(new_label[i]);
+                x_st += dx;
+
+                if ((i % 10) == 9)
+                {
+                    x_st = 0;
+                    y_st += dy;
+                }
+            }
+        }
+
+        private void MouseHover_Handler(object sender, EventArgs e)
+        {
+            //Application.DoEvents();
+            ToolTip tooltip = new ToolTip();
+            //this.Cursor = Cursors.Hand;
+            for (int i = 0; i < new_label.Length; i++)
+            {
+                if (sender == new_label[i]) // event is from txtBox
+                {
+                    tooltip.AutoPopDelay = 10000;
+                    tooltip.ToolTipIcon = ToolTipIcon.Info;
+                    tooltip.ToolTipTitle = "Sample info";
+                    tooltip.ShowAlways = true;
+                    tooltip.SetToolTip(new_label[i], new_label[i].Tag.ToString());
+                }
+            }
+        }
+
+        private void MouseLeave_Handler(object sender, EventArgs e)
+        {
+            //this.Cursor = Cursors.Default;
+        }
+
+        private void MouseClick_Handler(object sender, EventArgs e)
+        {
+            for (int i = 0; i < new_label.Length; i++)
+            {
+                if (sender == new_label[i])
+                {
+                    //richTextBox1.Text += "click " + i.ToString() + "\n";
+                    setup_next_color(new_label[i]);
+                    break;
+                }
+            }
+        }
+
+        void setup_next_color(Label lbl)
+        {
+            bool flag_match = false;
+            //richTextBox1.Text += "old color = " + lbl.BackColor + "\n";
+            int i;
+            int next = 0;
+            for (i = 0; i < colorSet.Length; i++)
+            {
+                //richTextBox1.Text += colorSet[i].Name.ToString() + "\n";
+                if (colorSet[i] == lbl.BackColor)
+                {
+                    next = (i + 1) % 4;
+                    lbl.BackColor = colorSet[next];
+                    flag_match = true;
+                    break;
+                }
+            }
+            if (flag_match == false)
+            {
+                lbl.BackColor = Color.Red;
+            }
         }
 
         private void button17_Click(object sender, EventArgs e)
