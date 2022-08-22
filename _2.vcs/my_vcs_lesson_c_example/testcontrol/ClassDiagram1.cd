@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="hisonic.WinForm.HisonicControl.CourseGrid.CourseCommonColumn">
+    <Position X="2.5" Y="0.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>DAEAAcgAAAEAAAAAACABAAAAgEAAAIAAgCEAAAgJAAA=</HashCode>
+      <FileName>CourseGrid\CourseColumn.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="hisonic.WinForm.HisonicControl.CourseGrid.CourseTable">
+    <Position X="4.75" Y="0.5" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ABZwCBByAOIIgAgmAAACFAAAkCYCARIB4EQEBUABAhU=</HashCode>
+      <FileName>CourseGrid\CourseTable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="hisonic.WinForm.HisonicControl.CourseGrid.TableRowHeaderColumn">
+    <Position X="4.75" Y="2.75" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAQAAAAEAAAAAAAAAAAAAAAAAAAACAAEAAAAJAAA=</HashCode>
+      <FileName>CourseGrid\TableRowHeaderColumn.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="hisonic.WinForm.HisonicControl.CourseGrid.HisonicCourseTable">
+    <Position X="6.75" Y="0.5" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+      <Compartment Name="Methods" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>ABAgQAAAERECAAABQAhAAgQAJAEAgAAQIAAAAAAgIQA=</HashCode>
+      <FileName>CourseGrid\HisonicCourseTable.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="hisonic.WinForm.HisonicControl.CourseGrid.CellDataStruct">
+    <Position X="0.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIEICAAACA=</HashCode>
+      <FileName>CourseGrid\CellDataType.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Microsoft YaHei" Size="9" />
+</ClassDiagram>

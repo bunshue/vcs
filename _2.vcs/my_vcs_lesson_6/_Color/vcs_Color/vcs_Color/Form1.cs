@@ -437,6 +437,27 @@ namespace vcs_Color
             return new YUV(y, u, v);
         }
 
+        public static RGB YUVToRGB(YUV yuv)
+        {
+            double r = yuv.Y + 1.4075 * (yuv.V - 128);
+            double g = yuv.Y - 0.3455 * (yuv.U - 128) - (0.7169 * (yuv.V - 128));
+            double b = yuv.Y + 1.7790 * (yuv.U - 128);
+            if (r > 255)
+                r = 255;
+            if (g > 255)
+                g = 255;
+            if (b > 255)
+                b = 255;
+            if (r < 0)
+                r = 0;
+            if (g < 0)
+                g = 0;
+            if (b < 0)
+                b = 0;
+
+            return new RGB((byte)r, (byte)g, (byte)b);
+        }
+
         public Form1()
         {
             InitializeComponent();
@@ -780,6 +801,55 @@ namespace vcs_Color
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //DrawColorMap
+            int w = pictureBox1.ClientSize.Width;
+            int h = pictureBox1.ClientSize.Height;
+
+            Bitmap bmp = new Bitmap(w, h);
+            Graphics g = Graphics.FromImage(bmp);
+            g.Clear(Color.Pink);
+
+            Brush b;
+            Font f = new Font("標楷體", 20);
+            Pen p = new Pen(Color.Blue, 2);
+
+            RGB pp = new RGB(Color.Red.R, Color.Red.G, Color.Red.B);
+            YUV yyy = new YUV();
+            yyy = RGBToYUV(pp);
+            int y = (int)Math.Round(yyy.Y); //四捨五入
+
+            richTextBox1.Text += "y = " + y.ToString() + "\n";
+
+            if (y > 255)
+                y = 255;
+            if (y < 0)
+                y = 0;
+
+            int i;
+            for (i = 0; i < 256; i++)
+            {
+                //g.FillRectangle(Brushes.Red, i * 2, hh2 - (float)(brightness_data[i] * ratio), 2, (float)(brightness_data[i] * ratio));
+                //b = new SolidBrush(Color.FromArgb(33, Color.RoyalBlue.R, Color.RoyalBlue.G, Color.RoyalBlue.B));
+                b = new SolidBrush(Color.FromArgb(255-i, Color.Red.R, Color.Red.G, Color.Red.B));
+
+                g.FillRectangle(b, 100, i*2, 100, 2);
+
+                YUV yyy2 = new YUV(i, yyy.U, yyy.V);
+                RGB rrr = new RGB();
+                rrr = YUVToRGB(yyy2);
+
+                b = new SolidBrush(Color.FromArgb(255, rrr.R, rrr.G, rrr.B));
+                g.FillRectangle(b, 200, i * 2, 100, 2);
+
+                //richTextBox1.Text += "i = " + i.ToString() + ", "
+
+            }
+
+            g.FillRectangle(Brushes.Red, 0, 0, 100, 100);
+
+
+            pictureBox1.Image = bmp;
+
 
         }
 

@@ -233,10 +233,10 @@ namespace vcs_ReadWrite_EXCEL1
             {
                 string tableName = GetExcelFirstTableName(filename);
                 richTextBox1.Text += "tableName = " + tableName + "\n";
-                //设置T_Sql
+                //設置T_Sql
                 string TSql = "SELECT  * FROM [" + tableName + "]";
                 richTextBox1.Text += "TSql = " + TSql + "\n";
-                //读取数据
+                //讀取數據
                 DataTable table = ExcelToDataSet(filename, TSql).Tables[0];
                 dataGridView1.DataSource = table;
 
@@ -262,16 +262,15 @@ namespace vcs_ReadWrite_EXCEL1
                 richTextBox1.Text += "\n";
             }
             catch (Exception ex)
-            { MessageBox.Show(ex.Message); }
-
-
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+            }
         }
 
-
         /// <summary>
-        /// 动态取Excel表名
+        /// 動態取Excel表名
         /// </summary>
-        /// <param name="fullPath">文件路径</param>
+        /// <param name="fullPath">文件路徑</param>
         /// <returns></returns>
         public string GetExcelFirstTableName(string fullPath)
         {
@@ -302,9 +301,9 @@ namespace vcs_ReadWrite_EXCEL1
 
 
         /// <summary>
-        /// 返回Excel数据源
+        /// 返回Excel數據源
         /// </summary>
-        /// <param name="filename">文件路径</param>
+        /// <param name="filename">文件路徑</param>
         /// <param name="TSql">TSql</param>
         /// <returns>DataSet</returns>
         public static DataSet ExcelToDataSet(string filename, string TSql)
@@ -375,6 +374,7 @@ namespace vcs_ReadWrite_EXCEL1
             catch (Exception ex)
             {
                 MessageBox.Show("Excel轉換DataTable出錯：" + ex.Message);
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
                 return null;
             }
         }
@@ -401,9 +401,6 @@ namespace vcs_ReadWrite_EXCEL1
             sw.Close();     //寫入Excel檔資料
             richTextBox1.Text += "製作Excel檔案於: " + filename + "，此檔不能用程式讀取。" + Environment.NewLine;
         }
-
-
-
-
     }
 }
+

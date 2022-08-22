@@ -93,6 +93,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(180, 55);
             this.button7.TabIndex = 51;
+            this.button7.Text = "DrawColorMap";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
