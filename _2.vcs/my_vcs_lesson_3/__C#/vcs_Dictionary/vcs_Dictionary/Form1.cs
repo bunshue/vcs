@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
+
 //關於Dictionary<K,V>，的key是不能重復的，如果添加相同的key就會拋出 ArgumentException異常
 
 namespace vcs_Dictionary
@@ -57,7 +59,8 @@ namespace vcs_Dictionary
 
         private void button0_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "Dictionary字典用法1\n";
+            richTextBox1.Text += "Dictionary字典用法0\n";
+
             //Dictionary的用法
             Dictionary<string, string> AnimalData = new Dictionary<string, string>() {
             { "mouse", "Mickey" },
@@ -132,7 +135,8 @@ namespace vcs_Dictionary
 
         private void button1_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "Dictionary字典用法2\n";
+            richTextBox1.Text += "Dictionary字典用法1\n";
+
             // Display values from the dictionary.
             for (int i = 0; i < 10; i++)
             {
@@ -142,7 +146,7 @@ namespace vcs_Dictionary
 
         private void button2_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "Dictionary字典用法3\n";
+            richTextBox1.Text += "Dictionary字典用法2\n";
 
             Dictionary<string, long> population_dict = new Dictionary<string, long>();
 
@@ -261,7 +265,7 @@ namespace vcs_Dictionary
 
         private void button3_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "Dictionary字典用法4 用Class\n";
+            richTextBox1.Text += "Dictionary字典用法3 用Class\n";
 
             // Make a dictionary.
             DictionaryWithDefault<string, string> dict = new DictionaryWithDefault<string, string>("<Missing>");
@@ -281,7 +285,7 @@ namespace vcs_Dictionary
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //Dictionary字典用法5
+            richTextBox1.Text += "Dictionary字典用法4\n";
 
             //建立及初始化
 
@@ -339,7 +343,7 @@ namespace vcs_Dictionary
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //Dictionary字典用法6
+            richTextBox1.Text += "Dictionary字典用法5\n";
 
             /*
             從一組鍵（Key）到一組值（Value）的對映，每一個新增項都是由一個值及其相關連的鍵組成  
@@ -423,10 +427,39 @@ namespace vcs_Dictionary
 
         private void button6_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "Dictionary字典用法6\n";
 
+            Dictionary<string, string> ImageTypes = new Dictionary<string, string>()
+            {
+            { "FFD8", ".jpg" },
+            { "424D", ".bmp" },
+            { "474946", ".gif" },
+            { "89504E470D0A1A0A", ".png" }
+            };
+
+            richTextBox1.Text += "len = " + ImageTypes.Count.ToString() + "\n";
+
+            string filename = @"C:\______test_files\picture1.jpg";
+
+            string builtHex = string.Empty;
+            string ext = string.Empty;
+            using (Stream S = File.OpenRead(filename))
+            {
+                for (int i = 0; i < 8; i++)
+                {
+                    builtHex += S.ReadByte().ToString("X2");
+                    if (ImageTypes.ContainsKey(builtHex))
+                    {
+                        ext = ImageTypes[builtHex];
+                        break;
+                    }
+                }
+            }
+            richTextBox1.Text += "取得真實副檔名 : " + ext + "\n";
         }
-
     }
+
+
     class DictionaryWithDefault<TKey, TValue>
     {
         // Store items here.

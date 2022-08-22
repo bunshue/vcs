@@ -71,13 +71,13 @@
             this.button30 = new System.Windows.Forms.Button();
             this.button38 = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.bt_show_number1 = new System.Windows.Forms.Button();
-            this.bt_show_number2 = new System.Windows.Forms.Button();
-            this.bt_show_number3 = new System.Windows.Forms.Button();
-            this.bt_show_number4 = new System.Windows.Forms.Button();
-            this.bt_show_number5 = new System.Windows.Forms.Button();
-            this.bt_show_number6 = new System.Windows.Forms.Button();
             this.bt_show_number7 = new System.Windows.Forms.Button();
+            this.bt_show_number6 = new System.Windows.Forms.Button();
+            this.bt_show_number5 = new System.Windows.Forms.Button();
+            this.bt_show_number4 = new System.Windows.Forms.Button();
+            this.bt_show_number3 = new System.Windows.Forms.Button();
+            this.bt_show_number2 = new System.Windows.Forms.Button();
+            this.bt_show_number1 = new System.Windows.Forms.Button();
             this.button39 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -498,11 +498,12 @@
             // 
             // button31
             // 
-            this.button31.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button31.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button31.Location = new System.Drawing.Point(570, 77);
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(180, 50);
             this.button31.TabIndex = 65;
+            this.button31.Text = "16進制與字符串、字節數組之間的轉換";
             this.button31.UseVisualStyleBackColor = true;
             this.button31.Click += new System.EventHandler(this.button31_Click);
             // 
@@ -556,65 +557,17 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "數字顯示";
             // 
-            // bt_show_number1
+            // bt_show_number7
             // 
-            this.bt_show_number1.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_show_number1.Location = new System.Drawing.Point(7, 67);
-            this.bt_show_number1.Name = "bt_show_number1";
-            this.bt_show_number1.Size = new System.Drawing.Size(260, 40);
-            this.bt_show_number1.TabIndex = 74;
-            this.bt_show_number1.Text = "十進位顯示";
-            this.bt_show_number1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bt_show_number1.UseVisualStyleBackColor = true;
-            this.bt_show_number1.Click += new System.EventHandler(this.bt_show_number1_Click);
-            // 
-            // bt_show_number2
-            // 
-            this.bt_show_number2.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_show_number2.Location = new System.Drawing.Point(7, 113);
-            this.bt_show_number2.Name = "bt_show_number2";
-            this.bt_show_number2.Size = new System.Drawing.Size(260, 40);
-            this.bt_show_number2.TabIndex = 74;
-            this.bt_show_number2.Text = "十進位顯示(8位)";
-            this.bt_show_number2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bt_show_number2.UseVisualStyleBackColor = true;
-            this.bt_show_number2.Click += new System.EventHandler(this.bt_show_number2_Click);
-            // 
-            // bt_show_number3
-            // 
-            this.bt_show_number3.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_show_number3.Location = new System.Drawing.Point(7, 159);
-            this.bt_show_number3.Name = "bt_show_number3";
-            this.bt_show_number3.Size = new System.Drawing.Size(260, 40);
-            this.bt_show_number3.TabIndex = 74;
-            this.bt_show_number3.Text = "十六進位顯示";
-            this.bt_show_number3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bt_show_number3.UseVisualStyleBackColor = true;
-            this.bt_show_number3.Click += new System.EventHandler(this.bt_show_number3_Click);
-            // 
-            // bt_show_number4
-            // 
-            this.bt_show_number4.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_show_number4.Location = new System.Drawing.Point(7, 205);
-            this.bt_show_number4.Name = "bt_show_number4";
-            this.bt_show_number4.Size = new System.Drawing.Size(260, 40);
-            this.bt_show_number4.TabIndex = 74;
-            this.bt_show_number4.Text = "十六進位顯示(8位)";
-            this.bt_show_number4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bt_show_number4.UseVisualStyleBackColor = true;
-            this.bt_show_number4.Click += new System.EventHandler(this.bt_show_number4_Click);
-            // 
-            // bt_show_number5
-            // 
-            this.bt_show_number5.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_show_number5.Location = new System.Drawing.Point(7, 251);
-            this.bt_show_number5.Name = "bt_show_number5";
-            this.bt_show_number5.Size = new System.Drawing.Size(260, 40);
-            this.bt_show_number5.TabIndex = 74;
-            this.bt_show_number5.Text = "123.456小數點後4位";
-            this.bt_show_number5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bt_show_number5.UseVisualStyleBackColor = true;
-            this.bt_show_number5.Click += new System.EventHandler(this.bt_show_number5_Click);
+            this.bt_show_number7.Font = new System.Drawing.Font("標楷體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_show_number7.Location = new System.Drawing.Point(7, 343);
+            this.bt_show_number7.Name = "bt_show_number7";
+            this.bt_show_number7.Size = new System.Drawing.Size(260, 40);
+            this.bt_show_number7.TabIndex = 74;
+            this.bt_show_number7.Text = "1234.5678小數點前5位後3位";
+            this.bt_show_number7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bt_show_number7.UseVisualStyleBackColor = true;
+            this.bt_show_number7.Click += new System.EventHandler(this.bt_show_number7_Click);
             // 
             // bt_show_number6
             // 
@@ -628,17 +581,65 @@
             this.bt_show_number6.UseVisualStyleBackColor = true;
             this.bt_show_number6.Click += new System.EventHandler(this.bt_show_number6_Click);
             // 
-            // bt_show_number7
+            // bt_show_number5
             // 
-            this.bt_show_number7.Font = new System.Drawing.Font("標楷體", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_show_number7.Location = new System.Drawing.Point(7, 343);
-            this.bt_show_number7.Name = "bt_show_number7";
-            this.bt_show_number7.Size = new System.Drawing.Size(260, 40);
-            this.bt_show_number7.TabIndex = 74;
-            this.bt_show_number7.Text = "1234.5678小數點前5位後3位";
-            this.bt_show_number7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.bt_show_number7.UseVisualStyleBackColor = true;
-            this.bt_show_number7.Click += new System.EventHandler(this.bt_show_number7_Click);
+            this.bt_show_number5.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_show_number5.Location = new System.Drawing.Point(7, 251);
+            this.bt_show_number5.Name = "bt_show_number5";
+            this.bt_show_number5.Size = new System.Drawing.Size(260, 40);
+            this.bt_show_number5.TabIndex = 74;
+            this.bt_show_number5.Text = "123.456小數點後4位";
+            this.bt_show_number5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bt_show_number5.UseVisualStyleBackColor = true;
+            this.bt_show_number5.Click += new System.EventHandler(this.bt_show_number5_Click);
+            // 
+            // bt_show_number4
+            // 
+            this.bt_show_number4.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_show_number4.Location = new System.Drawing.Point(7, 205);
+            this.bt_show_number4.Name = "bt_show_number4";
+            this.bt_show_number4.Size = new System.Drawing.Size(260, 40);
+            this.bt_show_number4.TabIndex = 74;
+            this.bt_show_number4.Text = "十六進位顯示(8位)";
+            this.bt_show_number4.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bt_show_number4.UseVisualStyleBackColor = true;
+            this.bt_show_number4.Click += new System.EventHandler(this.bt_show_number4_Click);
+            // 
+            // bt_show_number3
+            // 
+            this.bt_show_number3.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_show_number3.Location = new System.Drawing.Point(7, 159);
+            this.bt_show_number3.Name = "bt_show_number3";
+            this.bt_show_number3.Size = new System.Drawing.Size(260, 40);
+            this.bt_show_number3.TabIndex = 74;
+            this.bt_show_number3.Text = "十六進位顯示";
+            this.bt_show_number3.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bt_show_number3.UseVisualStyleBackColor = true;
+            this.bt_show_number3.Click += new System.EventHandler(this.bt_show_number3_Click);
+            // 
+            // bt_show_number2
+            // 
+            this.bt_show_number2.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_show_number2.Location = new System.Drawing.Point(7, 113);
+            this.bt_show_number2.Name = "bt_show_number2";
+            this.bt_show_number2.Size = new System.Drawing.Size(260, 40);
+            this.bt_show_number2.TabIndex = 74;
+            this.bt_show_number2.Text = "十進位顯示(8位)";
+            this.bt_show_number2.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bt_show_number2.UseVisualStyleBackColor = true;
+            this.bt_show_number2.Click += new System.EventHandler(this.bt_show_number2_Click);
+            // 
+            // bt_show_number1
+            // 
+            this.bt_show_number1.Font = new System.Drawing.Font("標楷體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_show_number1.Location = new System.Drawing.Point(7, 67);
+            this.bt_show_number1.Name = "bt_show_number1";
+            this.bt_show_number1.Size = new System.Drawing.Size(260, 40);
+            this.bt_show_number1.TabIndex = 74;
+            this.bt_show_number1.Text = "十進位顯示";
+            this.bt_show_number1.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.bt_show_number1.UseVisualStyleBackColor = true;
+            this.bt_show_number1.Click += new System.EventHandler(this.bt_show_number1_Click);
             // 
             // button39
             // 

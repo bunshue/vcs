@@ -90,14 +90,14 @@ namespace vcs_Process_Start
         {
             //開啟小算盤應用程式
             //Process.Start(@"C:\WINDOWS\system32\calc.exe");   same
-            Process.Start("calc");
+            Process.Start("calc");  //打開計算機
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             //開啟記事本程式
             //Process.Start("notepad.exe"); //same
-            Process.Start("notepad");
+            Process.Start("notepad");   //打開記事本
         }
 
         private void button2_Click(object sender, EventArgs e)

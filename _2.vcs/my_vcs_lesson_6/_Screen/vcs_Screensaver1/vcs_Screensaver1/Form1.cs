@@ -11,16 +11,22 @@ using System.Windows.Forms;
 //最後運行該程序，把vcs_Screensaver1.exe改為vcs_Screensaver1.scr，拷入Windows系統目錄中，這樣就可以運行該屏幕保護程序。
 
 /*
-Visual C#是微軟公司推出的新一代程序開發語言，是微軟.Net框架中的一個重要組成部分。屏幕保護程序是以scr為擴展名的標准Windows可執行程序。屏幕保護程序不僅可以延長顯示器的使用壽命，還可以保護私人信息。本文向大家介紹一個.Net平台上用C#編寫的一個動態文本及圖形的屏幕保護程序。
+Visual C#是微軟公司推出的新一代程序開發語言，是微軟.Net框架中的一個重要組成部分。屏幕保護程序是以scr為擴展名的標准Windows可執行程序。
+屏幕保護程序不僅可以延長顯示器的使用壽命，還可以保護私人信息。
+.Net平台上用C#編寫的一個動態文本及圖形的屏幕保護程序
 
 　　一、具體實現步驟：
 
-　　（1）在Visual Studio.Net下新建一個C＃的Windows應用程序工程，命名為vcs_Screensaver5
+　　（1）在Visual Studio.Net下新建一個C＃的Windows應用程序工程，命名為vcs_Screensaver1
 
 　　（2）現在我們來設計程序的主界面：
 
 　　先將窗體的Name屬性設置為screen、Text屬性設置為空，BackColor屬性設置為Black、Size屬性設置為(800, 600)、 ControlBox、MaximizeBox、MinimizeBox、ShowInTaskbar屬性設置均為false、FormBorderStyle屬性設置為None。再往窗體上添加Label控件、PictureBox控件、Timer控件各一個。將Label控件的Name設置為Word、Text屬性設置為空；將PictureBox控件的Name設置為picture1、Image設置為一個預知圖片；將Timer控件的Name設置為timerSaver、Enabled 屬性設為true、Interval屬性設為5。
 */
+
+//我們把ScreenSaver.exe改為ScreenSaver.scr，拷入Windows系統目錄中，這樣就可以運行該屏幕保護程序。
+//　　最後運行該程序，把screen_saver.exe改為screen_saver.scr，拷入Windows系統目錄中，這樣就可以運行該屏幕保護程序。
+
 
 namespace vcs_Screensaver1
 {

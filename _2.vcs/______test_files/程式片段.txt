@@ -2324,7 +2324,70 @@ ListView添加內容範例
             }
 
         }
-        
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+Graphics g = Graphics.FromImage(ThumbNail);
+
+// 設置畫布的描繪質量
+g.CompositingQuality = CompositingQuality.HighSpeed;
+g.CompositingQuality = CompositingQuality.HighQuality;
+g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+g.SmoothingMode = SmoothingMode.HighSpeed;
+g.SmoothingMode = SmoothingMode.AntiAlias;	//反鋸齒
+g.SmoothingMode = SmoothingMode.HighQuality;
+g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+g.InterpolationMode = InterpolationMode.HighQualityBilinear;
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+　　本文將介紹在．Net中如何使用代碼畫圖表，就像用MS Excel產生的圖表一樣。也可以畫像DataGrid一樣的表格。
+　　在．Net中，微軟給我們提供了畫圖類（System.Drawing.Imaging），在該類中畫圖的準系統都有。比如：直線、折線、矩形、多邊形、橢圓形、扇形、曲線等等，因此一般的圖形都可以直接通過代碼畫出來。接下來介紹一些畫圖函數：
+Bitmap bMap=new Bitmap(500,500)　//定義映像大小；
+bMap.Save(Stream,ImageCodecInfo) //將映像儲存到指定的輸出資料流；
+Graphics gph //定義或建立GDI繪圖對像；
+PointF cPt　//定義二維平面中x,y座標；
+DrawString(string,Font,Brush,PonitF) //用指定的Brush和Font對像在指定的矩形或點繪製指定的字串；
+DrawLine(Pen,Ponit,Ponit) //用指定的筆(Pen)對像繪製指定兩點之間直線；
+DrawPolygon(Pen,Ponit[]) //用指定的筆(Pen)對像繪製指定多邊形，比如三角形，四邊形等等；
+FillPolygon(Brush,Ponit[]) //用指定的刷子(Brush)對像填充指定的多邊形；
+DrawEllipse(Pen,x,y,Width,Height) //用指定的筆繪製一個邊框定義的橢圓；
+FillEllipse(Brush,x,y,Width,Height) //用指定的刷子填充一個邊框定義的橢圓；
+DrawRectangle(Pen,x,y,Width,Height) //用指定的筆繪製一個指定座標點、寬度、高度的矩形；
+DrawPie(Pen,x,y,Width,Height,startAngle,sweepAngle) //用指定的筆繪製一個指定座標點、寬度、高度以及兩條射線組成的扇形；
+
+
+
+
+
+    
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+       
 
 MemoryStream 可以seek
                     MemoryStream ms = new MemoryStream();
@@ -4454,61 +4517,6 @@ currentPlaylist.Item[integer]; 獲取或設置指定項目媒體信息，其子�
 
 
 
-画验证码
-
-
-
-/// <summary>
-/// 字符
-/// </summary>
-/// <param name="len">几位</param>
-/// <returns></returns>
-public static string validation(int cd)
-{
-    var ran = new Random();
-    int num, tem;
-    string rtuStr = "";
-    for (int i = 0; i < cd; i++)
-    {
-        num = ran.Next();
-        if (i % 2 == 1)
-            tem = num % 10 + '0'; //数字
-        else
-            tem = num % 26 + 'A'; //字母
-        rtuStr += Convert.ToChar(tem).ToString();
-    }
-    //写入cookie
-    HttpCookie cookie = new HttpCookie("check");
-    cookie.Value = rtuStr.ToLower();
-    HttpContext.Current.Response.Cookies.Add(cookie);
-    return rtuStr;
-}
-
-/// <summary>
-/// 生成图像
-/// </summary>
-/// <param name="check">字符</param>
-public static byte[] drawImg(string check)
-{
-    Bitmap bitmap1 = new Bitmap(90, 34);
-    var ht = Graphics.FromImage(bitmap1);
-    ht.Clear(Color.White);
-    ht.DrawLine(new Pen(Color.SpringGreen), 1, 1, 90, 34);
-    Font font = new Font("微软雅黑", 20, FontStyle.Bold);
-    var jianbian = new LinearGradientBrush(new Rectangle(0, 0, bitmap1.Width, bitmap1.Height), Color.Teal, Color.Snow, 2f, true);
-    ht.DrawString(check, font, jianbian, 0, 0);
-    ht.DrawRectangle(new Pen(Color.Aqua), 0, 0, bitmap1.Width - 1, bitmap1.Height - 1);
-    MemoryStream ms = new MemoryStream();
-    bitmap1.Save(ms, ImageFormat.Jpeg);
-    ht.Dispose();
-    bitmap1.Dispose();
-    return ms.ToArray();
-}
-    
-
-
-
-
 
 
 //--------------------------------------------------------------------------------------------------------------------------
@@ -5263,8 +5271,13 @@ https://blog.csdn.net/happmaoo/article/details/83814604
 
 ffmpeg的用法
 
-//从开始分割600秒视频命令如下：
-ffmpeg -ss 00:00:00 -i sample.mp4 -c copy -t  600  dst.mp4 
+//從開始分割600秒視頻命令如下：
+
+//從開始的第1分鐘擷取3分鐘影片出來
+ffmpeg.exe -ss 00:01:00 -i sample.mp4 -c copy -t 180 cut.mp4
+or
+ffmpeg.exe -i sample.mp4 -ss 00:01:00 -t 00:03:00 -acodec copy -vcodec copy cut.mp4
+
 //-y : 強制覆蓋檔案
 //-i : 要擷取的原始檔案
 //-ss : 起始時間
@@ -5273,91 +5286,51 @@ ffmpeg -ss 00:00:00 -i sample.mp4 -c copy -t  600  dst.mp4
 //-vcodec copy : 影像編碼格式和來源檔案相同
 
 
-//查看视频文件的音视频编解码格式，视频时长，比特率等，如下：
 
-root@jackfan: ~$ ffmpeg -i test.mp3
+//查看視頻文件的音視頻編解碼格式，視頻時長，比特率等，如下：
+ffmpeg.exe -i sample.mp4
 
 
-//擷取影片
-//从 00:00:08 开始截取 1分钟，那么就是 00:01:00，终端执行：
-ffmpeg -i 视频.avi -ss 00:00:08 -t 00:01:00 -acodec copy -vcodec copy 截取.avi
+ffmpeg.exe -i xxx.mp4 -f mp3 -vn xxx.mp3并回車。
+參數解釋：-i表示input，-f表示format，-vn表示video not
 
-ffmpeg.exe -i xxx.mp4 -f mp3 -vn xxx.mp3并回车。
-
-参数解释：-i表示input，-f表示format，-vn表示video not
-
-//多个mp3文件合并成一个mp3文件
-一种方法是连接到一起
+//多個mp3文件合并成一個mp3文件
+一種方法是連接到一起
 ffmpeg64.exe -i "concat:123.mp3|124.mp3" -acodec copy output.mp3
-解释：-i代表输入参数
-          contact:123.mp3|124.mp3代表着需要连接到一起的音频文件
-           -acodec copy output.mp3 重新编码并复制到新文件中
-另一种方法是混合到一起
+解釋：-i代表輸入參數
+          contact:123.mp3|124.mp3代表著需要連接到一起的音頻文件
+           -acodec copy output.mp3 重新編碼并復制到新文件中
+另一種方法是混合到一起
 ffmpeg64.exe -i 124.mp3 -i 123.mp3 -filter_complex amix=inputs=2:duration=first:dropout_transition=2 -f mp3 remix.mp3
-解释：-i代表输入参数
-           -filter_complex ffmpeg滤镜功能，非常强大，详细请查看文档
-           amix是混合多个音频到单个音频输出
-           inputs=2代表是2个音频文件，如果更多则代表对应数字
-           duration 确定最终输出文件的长度
-               longest(最长)|shortest（最短）|first（第一个文件）
+解釋：-i代表輸入參數
+           -filter_complex ffmpeg濾鏡功能，非常強大，詳細請查看文檔
+           amix是混合多個音頻到單個音頻輸出
+           inputs=2代表是2個音頻文件，如果更多則代表對應數字
+           duration 確定最終輸出文件的長度
+               longest(最長)|shortest（最短）|first（第一個文件）
             dropout_transition
 The transition time, in seconds, for volume renormalization when an input stream ends. The default value is 2 seconds.
-            -f mp3  输出文件格式
-音频文件截取指定时间部分
+            -f mp3  輸出文件格式
+音頻文件截取指定時間部分
 ffmpeg64.exe -i 124.mp3 -vn -acodec copy -ss 00:00:00 -t 00:01:32 output.mp3
-解释：-i代表输入参数
-          -acodec copy output.mp3 重新编码并复制到新文件中
-           -ss 开始截取的时间点
-           -t 截取音频时间长度
+解釋：-i代表輸入參數
+          -acodec copy output.mp3 重新編碼并復制到新文件中
+           -ss 開始截取的時間點
+           -t 截取音頻時間長度
            
-音频文件格式转换
+音頻文件格式轉換
 ffmpeg64.exe -i null.ape -ar 44100 -ac 2 -ab 16k -vol 50 -f mp3 null.mp3
-解释：-i代表输入参数
-           -acodec aac（音频编码用AAC） 
-          -ar 设置音频采样频率
-          -ac  设置音频通道数
-          -ab 设定声音比特率
-           -vol <百分比> 设定音量
+解釋：-i代表輸入參數
+           -acodec aac（音頻編碼用AAC） 
+          -ar 設置音頻采樣頻率
+          -ac  設置音頻通道數
+          -ab 設定聲音比特率
+           -vol <百分比> 設定音量
 
 
 
-
-
-
-
-
-
-        //DrawHelper的创建圆角矩形函数
-        /// <summary>
-        /// 创建圆角矩形
-        /// </summary>
-        /// <param name="rectangle">圆角矩形的边界矩形</param>
-        /// <param name="radius">圆角大小</param>
-        /// <returns>返回圆角矩形的路径</returns>
-
-        public static GraphicsPath CreateRoundRectangle(Rectangle rectangle, int radius)
-        {
-            GraphicsPath path = new GraphicsPath(FillMode.Winding);
-            int l = rectangle.Left;
-            int t = rectangle.Top;
-            int w = rectangle.Width;
-            int h = rectangle.Height;
-            int d = radius << 1;
-            path.AddArc(l, t, d, d, 180, 90); // topleft
-            path.AddArc(l + w - d, t, d, d, 270, 90); // topright
-            path.AddArc(l + w - d, t + h - d, d, d, 0, 90); // bottomright
-            path.AddArc(l, t + h - d, d, d, 90, 90); // bottomleft
-            path.CloseFigure();
-            return path;
-        }
-
-
-
-
-
-
-
-
+        				
+//--------------------------------------------------------------------------------------------------------------------------
 
 
 
@@ -5844,6 +5817,10 @@ ffmpeg64.exe -i null.ape -ar 44100 -ac 2 -ab 16k -vol 50 -f mp3 null.mp3
 
 
 
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
 
 
 old 暫存一下
@@ -5922,6 +5899,100 @@ old 暫存一下
             }
         }
 
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+        				
+//--------------------------------------------------------------------------------------------------------------------------
 
 
 

@@ -931,6 +931,24 @@ namespace vcs_test_all_02_String
 
         private void button31_Click(object sender, EventArgs e)
         {
+            //16進制與字符串、字節數組之間的轉換
+
+            //十進制轉二進制
+            Console.WriteLine("十進制166的二進制表示: " + Convert.ToString(166, 2));
+            //十進制轉八進制
+            Console.WriteLine("十進制166的八進制表示: " + Convert.ToString(166, 8));
+            //十進制轉十六進制
+            Console.WriteLine("十進制166的十六進制表示: " + Convert.ToString(166, 16));
+
+            //二進制轉十進制
+            Console.WriteLine("二進制 111101 的十進制表示: " + Convert.ToInt32("111101", 2));
+            //八進制轉十進制
+            Console.WriteLine("八進制 44 的十進制表示: " + Convert.ToInt32("44", 8));
+            //十六進制轉十進制
+            Console.WriteLine("十六進制 CC的十進制表示: " + Convert.ToInt32("CC", 16));
+
+
+
         }
 
         private void button32_Click(object sender, EventArgs e)

@@ -106,6 +106,35 @@ namespace vcs_Mix03_draw_image
         private void button1_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+
+            List<PointF> points = new List<PointF>();
+
+            int i;
+            Random r = new Random();
+
+            Graphics g = pictureBox1.CreateGraphics();				//實例化pictureBox1控件的Graphics類
+            g.Clear(Color.White);
+
+            for (i = 0; i < 10; i++)
+            {
+                points.Add(new PointF(50 * i, r.Next(200)));
+            }
+
+            if (points.Count > 1)
+            {
+                Pen p = new Pen(Color.Red);
+                g.DrawLines(p, points.ToArray());   //List轉Array
+            }
+
+            // Draw the roots.
+            foreach (PointF point in points)
+            {
+                const float radius = 4;
+                g.DrawEllipse(Pens.Red, point.X - radius, point.Y - radius, 2 * radius, 2 * radius);
+            }
+
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -770,7 +799,58 @@ namespace vcs_Mix03_draw_image
         private void button11_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //畫驗證碼
+
+            int digits = 10;
+            string captcha = validation(digits);
+            richTextBox1.Text += captcha + "\n";
+
+            pictureBox1.Image = drawImg(captcha);
         }
+
+        /// <summary>
+        /// 字符
+        /// </summary>
+        /// <param name="len">幾位</param>
+        /// <returns></returns>
+        public static string validation(int cd)
+        {
+            var ran = new Random();
+            int num, tem;
+            string rtuStr = "";
+            for (int i = 0; i < cd; i++)
+            {
+                num = ran.Next();
+                if (i % 2 == 1)
+                    tem = num % 10 + '0'; //数字
+                else
+                    tem = num % 26 + 'A'; //字母
+                rtuStr += Convert.ToChar(tem).ToString();
+            }
+            return rtuStr;
+        }
+
+        /// <summary>
+        /// 生成图像
+        /// </summary>
+        /// <param name="check">字符</param>
+        public Bitmap drawImg(string check)
+        {
+            Bitmap bitmap1 = new Bitmap(250, 50);
+            var ht = Graphics.FromImage(bitmap1);
+            ht.Clear(Color.White);
+            ht.DrawLine(new Pen(Color.SpringGreen), 1, 1, 90, 34);
+            Font font = new Font("微软雅黑", 20, FontStyle.Bold);
+            var jianbian = new LinearGradientBrush(new Rectangle(0, 0, bitmap1.Width, bitmap1.Height), Color.Teal, Color.Snow, 2f, true);
+            ht.DrawString(check, font, jianbian, 0, 0);
+            ht.DrawRectangle(new Pen(Color.Aqua), 0, 0, bitmap1.Width - 1, bitmap1.Height - 1);
+            ht.Dispose();
+            return bitmap1;
+        }
+    
+
+
+
 
         private void button12_Click(object sender, EventArgs e)
         {
@@ -937,16 +1017,16 @@ namespace vcs_Mix03_draw_image
             }
 
             //新建一個bmp圖片
-            Image bitmap = new System.Drawing.Bitmap(towidth, toheight);
+            Image bitmap = new Bitmap(towidth, toheight);
 
             //新建一個畫板
-            Graphics g = System.Drawing.Graphics.FromImage(bitmap);
+            Graphics g = Graphics.FromImage(bitmap);
 
             //設置高質量插值法
-            g.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.High;
+            g.InterpolationMode = InterpolationMode.High;
 
             //設置高質量,低速度呈現平滑程度
-            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            g.SmoothingMode = SmoothingMode.HighQuality;
 
             //清空畫布並以透明背景色填充
             g.Clear(Color.Transparent);
@@ -997,8 +1077,19 @@ namespace vcs_Mix03_draw_image
         private void button16_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //平移 縮放 旋轉
 
+            Graphics g = pictureBox1.CreateGraphics();				//實例化pictureBox1控件的Graphics類
+            g.Clear(Color.White);
+
+            Rectangle rect = new Rectangle(100, 100, 400, 200);
+
+
+            Font font = new Font("標楷體", 20, FontStyle.Bold);
+            var jianbian = new LinearGradientBrush(new Rectangle(0, 0, 100, 100), Color.Teal, Color.Snow, 2f, true);
+            g.DrawString("群曜醫電", font, jianbian, 0, 0);
+
+
+            g.FillRectangle(jianbian, 0, 100, 200, 200);
 
 
         }
@@ -1006,7 +1097,78 @@ namespace vcs_Mix03_draw_image
         private void button17_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //根據原圖生成縮略圖
+
+            string filename = @"C:\______test_files\picture1.jpg";
+
+            richTextBox1.Text += "圖檔 轉 Bitmap\n";
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+
+            richTextBox1.Text += "Bitmap 轉 MemoryStream\n";
+            MemoryStream ms = new MemoryStream();
+            bitmap1.Save(ms, ImageFormat.Jpeg);
+
+            richTextBox1.Text += "MemoryStream 轉 拜列\n";
+            byte[] pic_array1 = ms.ToArray();
+
+
+            byte[] pic_array2 = GenerateThumbImg(pic_array1, bitmap1.Width / 2, bitmap1.Height / 2);
+
+            //then....  拜列 轉圖片~~~~
+
+
+
         }
+
+
+        //C#根據原圖生成縮略圖
+        /// <summary>
+        /// 生成縮略圖
+        /// </summary>
+        /// <param name="imgBuffer">原圖byte[]</param>
+        /// <param name="width">生成的縮略圖寬度</param>
+        /// <param name="height">生成的縮略圖高度</param>
+        /// <returns></returns>
+        private byte[] GenerateThumbImg(byte[] imgBuffer, int width, int height)
+        {
+            MemoryStream imgStream = null;
+            MemoryStream thumbStream = new MemoryStream(); ;
+            Image img = null;
+            Image thumbImg = null;
+            Graphics g = null;
+            try
+            {
+                imgStream = new MemoryStream(imgBuffer);
+                img = Image.FromStream(imgStream);
+                thumbImg = new Bitmap(img, width, height);
+                g = Graphics.FromImage(thumbImg);
+                g.DrawImage(thumbImg, 0, 0, width, height);
+                /*g.DrawImage(img, new Rectangle(0, 0, width, height),
+                    0, 0, width, height, GraphicsUnit.Pixel);*/
+                thumbImg.Save(thumbStream, ImageFormat.Jpeg);
+                return thumbStream.ToArray();
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                return null;
+            }
+            finally
+            {
+                if (g != null)
+                    g.Dispose();
+                if (thumbImg != null)
+                    thumbImg.Dispose();
+                if (img != null)
+                    img.Dispose();
+                if (thumbStream != null)
+                    thumbStream.Close();
+                if (imgStream != null)
+                    imgStream.Close();
+            }
+        }
+
 
         private void button18_Click(object sender, EventArgs e)
         {
@@ -1021,7 +1183,46 @@ namespace vcs_Mix03_draw_image
         private void button20_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            Graphics g = pictureBox1.CreateGraphics();				//實例化pictureBox1控件的Graphics類
+            g.Clear(Color.White);
+
+            Rectangle rect = new Rectangle(100, 100, 400, 200);
+
+            g.DrawRectangle(Pens.Red, rect);
+
+            int i;
+            for (i = 10; i < 100; i += 20)
+            {
+                GraphicsPath gp = CreateRoundRectangle(rect, i);
+                g.DrawPath(Pens.Green, gp);
+            }
         }
+
+        //DrawHelper的创建圆角矩形函数
+        /// <summary>
+        /// 创建圆角矩形
+        /// </summary>
+        /// <param name="rectangle">圆角矩形的边界矩形</param>
+        /// <param name="radius">圆角大小</param>
+        /// <returns>返回圆角矩形的路径</returns>
+
+        public static GraphicsPath CreateRoundRectangle(Rectangle rectangle, int radius)
+        {
+            GraphicsPath path = new GraphicsPath(FillMode.Winding);
+            int l = rectangle.Left;
+            int t = rectangle.Top;
+            int w = rectangle.Width;
+            int h = rectangle.Height;
+            int d = radius << 1;
+            path.AddArc(l, t, d, d, 180, 90); // topleft
+            path.AddArc(l + w - d, t, d, d, 270, 90); // topright
+            path.AddArc(l + w - d, t + h - d, d, d, 0, 90); // bottomright
+            path.AddArc(l, t + h - d, d, d, 90, 90); // bottomleft
+            path.CloseFigure();
+            return path;
+        }
+
 
         private void button21_Click(object sender, EventArgs e)
         {
@@ -1161,6 +1362,36 @@ namespace vcs_Mix03_draw_image
         private void button23_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //圖片 拜列 MemoryStream Bitmap轉換
+
+            string filename = @"C:\______test_files\picture1.jpg";
+
+            richTextBox1.Text += "圖檔 轉 Bitmap\n";
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+
+            richTextBox1.Text += "Bitmap 轉 MemoryStream\n";
+            MemoryStream ms = new MemoryStream();
+            bitmap1.Save(ms, ImageFormat.Jpeg);
+
+            richTextBox1.Text += "MemoryStream 轉 拜列\n";
+            byte[] pic_array1 = ms.ToArray();
+
+
+            richTextBox1.Text += "建立空白 Bitmap\n";
+            bitmap1 = new Bitmap(100, 100);
+
+            richTextBox1.Text += "對此Bitmap畫圖\n";
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+
+            ms = new MemoryStream();
+            bitmap1.Save(ms, ImageFormat.Bmp);
+            byte[] pic_array2 = ms.ToArray();
+
+            richTextBox1.Text += "len = " + pic_array2.Length.ToString() + "\n";
+
+
         }
 
         private void button24_Click(object sender, EventArgs e)
@@ -1205,10 +1436,10 @@ namespace vcs_Mix03_draw_image
         //　產生縮略圖
         private bool getThumImage2(string imgPath, string thumbPath)
         {
-            System.Drawing.Image.GetThumbnailImageAbort myCallback = new System.Drawing.Image.GetThumbnailImageAbort(ThumbnailCallback);
-            System.Drawing.Image img = System.Drawing.Image.FromFile(imgPath);　//　通過文件構造
+            Image.GetThumbnailImageAbort myCallback = new Image.GetThumbnailImageAbort(ThumbnailCallback);
+            Image img = Image.FromFile(imgPath);　//　通過文件構造
             //生成縮略圖
-            System.Drawing.Image myThumbnail = img.GetThumbnailImage(100, 50, myCallback, IntPtr.Zero);
+            Image myThumbnail = img.GetThumbnailImage(100, 50, myCallback, IntPtr.Zero);
             myThumbnail.Save(thumbPath);　//　保存縮略圖
             return true;
         }
@@ -1329,6 +1560,7 @@ namespace vcs_Mix03_draw_image
                     }
                     catch (Exception ex)
                     {
+                        MessageBox.Show(ex.Message);
                         //richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
                     }
                 }

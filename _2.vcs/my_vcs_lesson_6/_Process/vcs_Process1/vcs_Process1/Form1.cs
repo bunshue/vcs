@@ -653,10 +653,31 @@ namespace vcs_Process1
 
         private void button24_Click(object sender, EventArgs e)
         {
+            //獲得當前程序中正在運行的進程
+
+            Process[] pros = Process.GetProcesses();
+            foreach (var item in pros)
+            {
+                //item.Kill(); //關閉所有進程.
+                //item.ProcessName; //進程名
+                Console.Write(item.ToString());
+            }
         }
 
         private void button25_Click(object sender, EventArgs e)
         {
+            //打開指定文件
+
+            string filename = @"C:\______test_files\__RW\_txt\poem.txt";
+
+
+            ProcessStartInfo pro = new ProcessStartInfo(filename);
+            Process pr = new Process();
+            pr.StartInfo = pro;
+            pr.Start();
+
+
+
         }
 
         private void button26_Click(object sender, EventArgs e)

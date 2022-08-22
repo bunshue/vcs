@@ -373,6 +373,7 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(160, 70);
             this.button24.TabIndex = 25;
+            this.button24.Text = "獲得當前程序中正在運行的進程";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 
@@ -383,6 +384,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(160, 70);
             this.button25.TabIndex = 26;
+            this.button25.Text = "打開指定文件";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
