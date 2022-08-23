@@ -35,6 +35,7 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.listBox1 = new System.Windows.Forms.ListBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -99,11 +100,20 @@
             this.listBox1.Size = new System.Drawing.Size(120, 112);
             this.listBox1.TabIndex = 6;
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(4, 229);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(553, 301);
+            this.richTextBox1.TabIndex = 7;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(367, 284);
+            this.ClientSize = new System.Drawing.Size(569, 542);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
@@ -129,6 +139,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

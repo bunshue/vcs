@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Threading.Tasks;
 using System.Net;         //匯入網路通訊協定相關函數
 using System.Net.Sockets; //匯入網路插座功能函數
+using System.Threading.Tasks;
 
 namespace WindowsFormsApp1
 {
@@ -18,6 +18,11 @@ namespace WindowsFormsApp1
         public Form1()
         {
             InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -30,6 +35,8 @@ namespace WindowsFormsApp1
             byte[] R = C.Receive(ref EP);                                     //原路接收訊息
             textBox2.Text = Encoding.Default.GetString(R);                    //接收到的byte轉為文字
         }
+
     }
 }
+
 

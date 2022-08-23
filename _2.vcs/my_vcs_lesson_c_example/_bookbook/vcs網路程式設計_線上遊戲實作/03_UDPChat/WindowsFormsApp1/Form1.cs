@@ -7,22 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-
-using System.Threading.Tasks;
 using System.Net;         //匯入網路通訊協定相關函數
 using System.Net.Sockets; //匯入網路插座功能函數
 using System.Threading;   //匯入多執行緒功能函數
 using System.Collections; //匯入集合物件功能
+using System.Threading.Tasks;
 
 namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         //公用變數宣告
         UdpClient U;                                //宣告UDP通訊物件
         Thread Th;                                  //宣告監聽用執行續
@@ -31,11 +25,30 @@ namespace WindowsFormsApp1
         const short Port = 2019;                    //本程式使用的通訊埠(頻道)
         string BC = IPAddress.Broadcast.ToString(); //廣播用IP
 
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
         //表單載入
         private void Form1_Load(object sender, EventArgs e)
         {
             Control.CheckForIllegalCrossThreadCalls = false; //忽略跨執行緒操作的錯誤
             this.Text += " " + MyIP();                       //顯示本機IP於標題列
+        }
+
+        //關閉監聽執行續(如果有的話)
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                Th.Abort(); //關閉監聽執行續
+                U.Close();  //關閉監聽器
+            }
+            catch
+            {
+                //忽略錯誤，程式繼續執行
+            }
         }
 
         //找出本機IP
@@ -154,20 +167,5 @@ namespace WindowsFormsApp1
                 }
             }
         }
-
-        //關閉監聽執行續(如果有的話)
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            try
-            {
-                Th.Abort(); //關閉監聽執行續
-                U.Close();  //關閉監聽器
-            }
-            catch
-            {
-                //忽略錯誤，程式繼續執行
-            }
-        }
     }
 }
-

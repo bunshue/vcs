@@ -3,14 +3,14 @@
     partial class Form1
     {
         /// <summary>
-        /// 必需的设计器变量。
+        /// 必需的設計器變量。
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// 清理所有正在使用的资源。
+        /// 清理所有正在使用的資源。
         /// </summary>
-        /// <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        /// <param name="disposing">如果應釋放托管資源，為 true；否則為 false。</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,11 +20,11 @@
             base.Dispose(disposing);
         }
 
-        #region Windows 窗体设计器生成的代码
+        #region Windows 窗體設計器生成的代碼
 
         /// <summary>
-        /// 设计器支持所需的方法 - 不要
-        /// 使用代码编辑器修改此方法的内容。
+        /// 設計器支持所需的方法 - 不要
+        /// 使用代碼編輯器修改此方法的內容。
         /// </summary>
         private void InitializeComponent()
         {
@@ -63,7 +63,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(50, 44);
             this.button1.TabIndex = 4;
-            this.button1.Text = "开始";
+            this.button1.Text = "開始";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -82,7 +82,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 12);
             this.label2.TabIndex = 2;
-            this.label2.Text = "结束地址：";
+            this.label2.Text = "結束地址：";
             // 
             // textBox1
             // 
@@ -99,7 +99,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 0;
-            this.label1.Text = "开始地址：";
+            this.label1.Text = "開始地址：";
             // 
             // progressBar1
             // 
@@ -153,8 +153,9 @@
             this.MinimizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "局域网IP地址扫描";
+            this.Text = "局域網IP地址掃描";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -176,4 +177,3 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
-

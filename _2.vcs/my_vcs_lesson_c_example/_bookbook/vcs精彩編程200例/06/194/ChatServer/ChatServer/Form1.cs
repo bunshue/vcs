@@ -5,8 +5,9 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using System.Net.Sockets;
+
 using System.Net;
+using System.Net.Sockets;
 using System.IO;
 using System.Threading;
 
@@ -15,8 +16,9 @@ namespace ChatServer
     public partial class Form1 : Form
     {
         private TcpListener listener;
-        private int port=8888;
+        private int port = 8888;
         private Thread listenerThread;
+
         public Form1()
         {
             InitializeComponent();
@@ -27,11 +29,13 @@ namespace ChatServer
         {
             Start();
         }
+
         public void Start()
         {
             listenerThread = new Thread(new ThreadStart(ServerListener));
             listenerThread.Start();
         }
+
         protected void ServerListener()
         {
             try
@@ -39,7 +43,7 @@ namespace ChatServer
                 IPAddress ipAddress = Dns.Resolve("localhost").AddressList[0];
                 listener = new TcpListener(ipAddress, port);
                 listener.Start();
-              
+
                 while (true)
                 {
                     Socket socket = listener.AcceptSocket();
@@ -48,10 +52,10 @@ namespace ChatServer
                     if (socket.Receive(bytes) >= 0)
                     {
                         string receiveMessage = Encoding.Unicode.GetString(bytes);
-                        richTextBox1.AppendText(receiveMessage+"\r\n");
+                        richTextBox1.AppendText(receiveMessage + "\r\n");
                         sendBytes = Encoding.Unicode.GetBytes(richTextBox1.Text);
                         socket.Send(sendBytes);
-                       socket.Close();
+                        socket.Close();
                     }
 
                 }
@@ -61,14 +65,17 @@ namespace ChatServer
                 MessageBox.Show(ee.Message);
             }
         }
+
         public void Stop()
         {
             listenerThread.Abort();
         }
+
         public void Suspend()
         {
             listenerThread.Suspend();
         }
+
         public void Resume()
         {
             listenerThread.Resume();

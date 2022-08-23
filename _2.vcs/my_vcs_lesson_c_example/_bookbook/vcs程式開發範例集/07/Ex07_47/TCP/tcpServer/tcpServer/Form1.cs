@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Net;
 using System.Threading;
 using System.Net.Sockets;
@@ -14,28 +15,29 @@ namespace tcpServer
 {
     public partial class Form1 : Form
     {
+        IPAddress HostIP = IPAddress.Parse("192.168.2.114");
+        IPEndPoint point;
+        Socket socket;
+        bool flag = true;
+        Socket acceptedSocket;
+
         public Form1()
         {
             InitializeComponent();
         }
 
-        #region 定義變數
-        IPAddress HostIP = IPAddress.Parse("127.0.0.1");
-        IPEndPoint point;
-        Socket socket;
-        bool flag = true;
-        Socket acceptedSocket;
-        #endregion
+        private void Form1_Load(object sender, EventArgs e)
+        {
 
-        #region 聲名委託
+        }
+
+        //聲名委託
         delegate void SetTextCallback(string text);
         private void SetText(string text)
         {
             richTextBox1.AppendText(text + "\r\n");
         }
-        #endregion
 
-        #region 定義方法
         private void Proccess()
         {
             if (acceptedSocket.Connected)
@@ -49,11 +51,10 @@ namespace tcpServer
                 }
             }
         }
-        #endregion
 
         private void button1_Click(object sender, EventArgs e)
         {
-            HostIP = IPAddress.Parse("127.0.0.1");
+            HostIP = IPAddress.Parse("192.168.2.114");
             try
             {
                 point = new IPEndPoint(HostIP, Int32.Parse("11000"));
@@ -76,12 +77,11 @@ namespace tcpServer
                 sendByte = Encoding.BigEndianUnicode.GetBytes(sendStr.ToCharArray());
                 acceptedSocket.Send(sendByte, sendByte.Length, 0);
             }
-            catch { }
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
+            catch (Exception ex)
+            {
+                richTextBox2.Text += "xxx錯誤訊息e01 : " + ex.Message + "\n";
+            }
         }
     }
 }
+

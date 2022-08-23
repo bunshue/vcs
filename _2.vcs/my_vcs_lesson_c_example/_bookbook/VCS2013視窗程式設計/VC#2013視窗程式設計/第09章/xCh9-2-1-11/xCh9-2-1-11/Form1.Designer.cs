@@ -36,17 +36,17 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 46);
+            this.dataGridView1.Location = new System.Drawing.Point(10, 42);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(415, 163);
+            this.dataGridView1.Size = new System.Drawing.Size(612, 420);
             this.dataGridView1.TabIndex = 3;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 15);
+            this.button1.Location = new System.Drawing.Point(10, 14);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(126, 25);
+            this.button1.Size = new System.Drawing.Size(108, 23);
             this.button1.TabIndex = 2;
             this.button1.Text = "動態建構DataSet";
             this.button1.UseVisualStyleBackColor = true;
@@ -54,9 +54,9 @@
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(441, 225);
+            this.ClientSize = new System.Drawing.Size(634, 474);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.button1);
             this.Name = "Form1";

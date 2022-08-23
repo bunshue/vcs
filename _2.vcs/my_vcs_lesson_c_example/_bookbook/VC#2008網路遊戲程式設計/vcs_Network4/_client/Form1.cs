@@ -15,7 +15,6 @@ using System.IO;         //使用FileInfo類別，來建立一個檔案實體物
 
 namespace _client
 {
-   
     public partial class Form1 : Form
     {
         private Thread _thread1;
@@ -23,11 +22,7 @@ namespace _client
         Form2 f2 = new Form2();
         delegate void mydel(string str);
         int Isconn = 0;
-        public Form1()
-        {
-            InitializeComponent();
-        }
-        
+
         static string namescore;
         public string NAMESCORE
         {
@@ -36,6 +31,16 @@ namespace _client
 
 
             get { return namescore; }
+
+        }
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
 
         }
 
@@ -71,6 +76,7 @@ namespace _client
             base.Dispose(disposing);
         }
          */
+
         private void Show_listBox_1(string str)//此副程式為了避免跨執行緒錯誤
         {
             mydel a = Show_listBox_1;
@@ -80,12 +86,10 @@ namespace _client
             if ((listBox1.InvokeRequired)) this.Invoke(a, obj);
             else
             {
-
                 this.listBox1.Items.Add((string)obj[0]);
-
             }
-
         }
+
         private void Show_listBox_2(string str)//此副程式為了避免跨執行緒錯誤
         {
             mydel a = Show_listBox_2;
@@ -97,8 +101,8 @@ namespace _client
             {
                 this.listBox1.Items.Remove((string)obj[0]);
             }
-
         }
+
         private void Show_label4(string str)//此副程式為了避免跨執行緒錯誤
         {
             mydel a = Show_label4;
@@ -108,16 +112,16 @@ namespace _client
             if (label4.InvokeRequired) this.Invoke(a, obj);
             else this.label4.Text = (string)obj[0];
         }
+
         private void Show_listBox_3()//此副程式為了避免跨執行緒錯誤
         {
             if (listBox1.InvokeRequired) listBox1.Invoke(new MethodInvoker(Show_listBox_3));
             else
             {
-
                 this.listBox1.Items.Clear();
             }
         }
-        
+
         private void Listen()
         {
             byte[] byteReceieve = new byte[1024];
@@ -130,12 +134,9 @@ namespace _client
             string strAll;
             while (true)
             {
-
                 try
                 {
-
                     ii = ClientSocket.ReceiveFrom(byteReceieve, 0, byteReceieve.Length, SocketFlags.None, ref oldEP);
-
 
                     strAll = Encoding.Unicode.GetString(byteReceieve, 0, ii);
 
@@ -150,7 +151,6 @@ namespace _client
                         c_conn = 0;
                         Show_listBox_3();
                         Show_label4(strAll);
-
                     }
 
                     if ((Show == 1) && (strAll != "") && (strAll != "Show") && (strAll != "disconnect") &&
@@ -158,7 +158,6 @@ namespace _client
                     {
                         Show = 0;
                         Show_listBox_1(strAll);
-
                     }
 
                     if ((disconnect == 1) && (strAll != "") && (strAll != "disconnect") && (strAll != "Disconnect") &&
@@ -166,18 +165,16 @@ namespace _client
                     {
                         disconnect = 0;
                         Show_label4(strAll);
-
                     }
 
                     if ((Disconnect == 1) && (strAll != "") && (strAll != "Disconnect") && (strAll != "score") &&
-                        (strAll != "disconnect") && (strAll != "Show") && (strAll != "c_conn")  )
+                        (strAll != "disconnect") && (strAll != "Show") && (strAll != "c_conn"))
                     {
                         Disconnect = 0;
                         Show_listBox_2(strAll);
-
                     }
-                     if ((six == 1) && (strAll != "") && (strAll != "disconnect") && (strAll != "Disconnect") &&
-                        (strAll != "Show") && (strAll != "c_conn") && (strAll != "six"))
+                    if ((six == 1) && (strAll != "") && (strAll != "disconnect") && (strAll != "Disconnect") &&
+                       (strAll != "Show") && (strAll != "c_conn") && (strAll != "six"))
                     {
                         six = 0;
                         f2.NAMESCORE = strAll;
@@ -187,10 +184,9 @@ namespace _client
                 {
                     ;
                 }
-
             }
-
         }
+
         private void button1_Click(object sender, EventArgs e)
         {
             byte[] byteReceieve = new byte[1024];
@@ -231,7 +227,6 @@ namespace _client
                         byteSend = Encoding.Unicode.GetBytes(textBox2.Text.ToCharArray());
                         ClientSocket.Send(byteSend, 0, byteSend.Length, SocketFlags.None);//傳送byteSend資料給Server
                         MessageBox.Show("連線成功！", "玩家");
-                        
                     }
                 }
                 catch
@@ -242,7 +237,6 @@ namespace _client
                     button2.Enabled = false;
                     textBox1.ReadOnly = false;
                     textBox2.ReadOnly = false;
-
                 }
             }
         }
@@ -253,7 +247,6 @@ namespace _client
             byte[] byteSend = new byte[1024];
             if (Isconn == 1)
             {
-
                 textBox1.ReadOnly = false;
                 textBox2.ReadOnly = false;
                 button1.Enabled = true;
@@ -278,24 +271,23 @@ namespace _client
             Form2 f2 = new Form2();
             timer1.Enabled = true;
             f2.Show(this);
-
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             byte[] byteReceieve = new byte[1024];
             byte[] byteSend = new byte[1024];
-            
-                if (namescore != null)
-                {
-                    byteSend = Encoding.Unicode.GetBytes("six".ToCharArray());
-                    ClientSocket.Send(byteSend, 0, byteSend.Length, SocketFlags.None);
-                    Thread.Sleep(50);
-                    byteSend = Encoding.Unicode.GetBytes(namescore.ToCharArray());//若斷線，則傳給server斷線的字串
-                    ClientSocket.Send(byteSend, 0, byteSend.Length, SocketFlags.None);
-                    namescore = null;
-                }
-            
+
+            if (namescore != null)
+            {
+                byteSend = Encoding.Unicode.GetBytes("six".ToCharArray());
+                ClientSocket.Send(byteSend, 0, byteSend.Length, SocketFlags.None);
+                Thread.Sleep(50);
+                byteSend = Encoding.Unicode.GetBytes(namescore.ToCharArray());//若斷線，則傳給server斷線的字串
+                ClientSocket.Send(byteSend, 0, byteSend.Length, SocketFlags.None);
+                namescore = null;
+            }
         }
     }
 }
+

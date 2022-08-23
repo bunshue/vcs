@@ -7,12 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Threading.Tasks;
-
 using System.Net;         //匯入網路通訊協定相關函數
 using System.Net.Sockets; //匯入網路插座功能函數
 using System.Threading;   //匯入多執行緒功能函數
 using System.Collections; //匯入集合物件
+using System.Threading.Tasks;
 
 namespace WindowsFormsApp1
 {
@@ -48,6 +47,18 @@ namespace WindowsFormsApp1
                 }
                 Application.DoEvents();
             }
+        }
+
+        //關閉離線
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (button1.Enabled == false)
+            {
+                Send("9" + User);//傳送自己的離線訊息給伺服器
+                T.Close();       //關閉網路通訊器
+            }
+            run = false;         //關閉主表單監聽旗標
+            Application.DoEvents();
         }
 
         //主表單監聽到訊息後處理內容
@@ -591,18 +602,5 @@ namespace WindowsFormsApp1
                 }
             }
         }
-
-        //關閉離線
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (button1.Enabled == false)
-            {
-                Send("9" + User);//傳送自己的離線訊息給伺服器
-                T.Close();       //關閉網路通訊器
-            }
-            run = false;         //關閉主表單監聽旗標
-            Application.DoEvents();
-        }
     }
 }
-

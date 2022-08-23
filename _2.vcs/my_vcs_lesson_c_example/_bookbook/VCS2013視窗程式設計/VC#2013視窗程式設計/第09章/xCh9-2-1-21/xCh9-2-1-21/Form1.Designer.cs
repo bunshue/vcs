@@ -34,9 +34,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(12, 12);
+            this.button1.Location = new System.Drawing.Point(10, 11);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(126, 25);
+            this.button1.Size = new System.Drawing.Size(116, 48);
             this.button1.TabIndex = 3;
             this.button1.Text = "動態建構DataSet";
             this.button1.UseVisualStyleBackColor = true;
@@ -44,17 +44,17 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(144, 15);
+            this.textBox1.Location = new System.Drawing.Point(142, 13);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(161, 111);
+            this.textBox1.Size = new System.Drawing.Size(337, 281);
             this.textBox1.TabIndex = 4;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(323, 140);
+            this.ClientSize = new System.Drawing.Size(613, 486);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button1);
             this.Name = "Form1";

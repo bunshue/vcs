@@ -6,10 +6,12 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Net;
 using System.Net.Sockets;
 using System.IO;
 using System.Threading;
+using System.Diagnostics;
 
 namespace netsend
 {
@@ -20,9 +22,14 @@ namespace netsend
             InitializeComponent();
         }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
         private void button1_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process myProcess = new System.Diagnostics.Process();
+            Process myProcess = new Process();
             myProcess.StartInfo.FileName = "cmd.exe";
             myProcess.StartInfo.UseShellExecute = false;
             myProcess.StartInfo.RedirectStandardInput = true;
@@ -32,11 +39,6 @@ namespace netsend
             myProcess.Start();
             myProcess.StandardInput.WriteLine("net send " + textBox1.Text + " " + textBox2.Text);
             MessageBox.Show("發送成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

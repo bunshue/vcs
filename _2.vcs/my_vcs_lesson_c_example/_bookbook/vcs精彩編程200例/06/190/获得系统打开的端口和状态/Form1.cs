@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.Diagnostics;
 using System.IO;
+
 namespace 获得系统打开的端口和状态
 {
     public partial class Form1 : Form
@@ -29,27 +30,24 @@ namespace 获得系统打开的端口和状态
             p.StartInfo.CreateNoWindow = true;
             p.Start();
             p.StandardInput.WriteLine(@"netstat -a -n > c:\______test_files\port.txt");
-           
-           
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            this.richTextBox1.Text = "";
             try
             {
                 string path = @"c:\______test_files\port.txt";
-                using (StreamReader sr = new StreamReader(path,Encoding.Default))
+                using (StreamReader sr = new StreamReader(path, Encoding.Default))
                 {
                     while (sr.Peek() >= 0)
                     {
-                        this.richTextBox1.Text += sr.ReadLine()+"\r\n";
+                        this.richTextBox1.Text += sr.ReadLine() + "\r\n";
                     }
                 }
             }
-            catch (Exception hy)
+            catch (Exception ex)
             {
-                MessageBox.Show(hy.Message);
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
             }
 
         }

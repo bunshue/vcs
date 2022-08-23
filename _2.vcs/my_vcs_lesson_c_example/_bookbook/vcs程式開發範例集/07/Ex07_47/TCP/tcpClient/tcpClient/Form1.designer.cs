@@ -36,6 +36,7 @@
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -68,9 +69,9 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(74, 10);
+            this.label1.Location = new System.Drawing.Point(52, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 12);
+            this.label1.Size = new System.Drawing.Size(65, 12);
             this.label1.TabIndex = 39;
             this.label1.Text = "使用者名：";
             // 
@@ -96,7 +97,7 @@
             // 
             this.textBox1.Location = new System.Drawing.Point(133, 7);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(188, 21);
+            this.textBox1.Size = new System.Drawing.Size(188, 22);
             this.textBox1.TabIndex = 35;
             // 
             // button1
@@ -109,11 +110,20 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // richTextBox2
+            // 
+            this.richTextBox2.Location = new System.Drawing.Point(432, 5);
+            this.richTextBox2.Name = "richTextBox2";
+            this.richTextBox2.Size = new System.Drawing.Size(510, 513);
+            this.richTextBox2.TabIndex = 43;
+            this.richTextBox2.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(393, 233);
+            this.ClientSize = new System.Drawing.Size(954, 530);
+            this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
@@ -143,6 +153,7 @@
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.RichTextBox richTextBox2;
     }
 }
 

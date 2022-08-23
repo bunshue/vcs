@@ -7,22 +7,17 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Threading.Tasks;
-
 using System.Net;         //匯入網路通訊協定相關函數
 using System.Net.Sockets; //匯入網路插座功能函數
 using System.Threading;   //匯入多執行緒功能函數
+using System.Threading.Tasks;
+
 using Microsoft.VisualBasic.PowerPacks;//匯入VB向量繪圖功能
 
 namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         UdpClient U; //宣告UDP通訊物件 
         Thread Th;   //宣告監聽用執行緒 
         //繪圖相關變數宣告        
@@ -31,6 +26,11 @@ namespace WindowsFormsApp1
         Point stP;                    //繪圖起點        
         string p;                     //筆畫座標字串 
 
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
         //表單載入 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -38,6 +38,20 @@ namespace WindowsFormsApp1
             this.Controls.Add(C);     //加入畫布C到表單            
             D = new ShapeContainer(); //建立畫布(遠端繪圖用)            
             this.Controls.Add(D);     //加入畫布D到表單
+        }
+
+        //關閉接聽執行續(如果有的話)
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                Th.Abort(); //關閉監聽執行緒   
+                U.Close();  //關閉監聽器  
+            }
+            catch
+            {
+                //忽略錯誤，程式繼續執行！  
+            }
         }
 
         //啟動監聽按鍵程序
@@ -132,21 +146,5 @@ namespace WindowsFormsApp1
             S.Send(B, B.Length);                              //發送資料            
             S.Close();                                        //關閉UDP物件 
         }
-
-        //關閉接聽執行續(如果有的話)
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            try
-            {
-                Th.Abort(); //關閉監聽執行緒   
-                U.Close();  //關閉監聽器  
-            }
-            catch
-            {
-                //忽略錯誤，程式繼續執行！  
-            }
-        }
     }
 }
-
-

@@ -3,14 +3,14 @@
     partial class Form1
     {
         /// <summary>
-        /// 必需的设计器变量。
+        /// 必需的設計器變量。
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        /// 清理所有正在使用的资源。
+        /// 清理所有正在使用的資源。
         /// </summary>
-        /// <param name="disposing">如果应释放托管资源，为 true；否则为 false。</param>
+        /// <param name="disposing">如果應釋放托管資源，為 true；否則為 false。</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,11 +20,11 @@
             base.Dispose(disposing);
         }
 
-        #region Windows 窗体设计器生成的代码
+        #region Windows 窗體設計器生成的代碼
 
         /// <summary>
-        /// 设计器支持所需的方法 - 不要
-        /// 使用代码编辑器修改此方法的内容。
+        /// 設計器支持所需的方法 - 不要
+        /// 使用代碼編輯器修改此方法的內容。
         /// </summary>
         private void InitializeComponent()
         {
@@ -59,7 +59,7 @@
             this.groupBox1.Size = new System.Drawing.Size(127, 225);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "选择计算机";
+            this.groupBox1.Text = "選擇計算機";
             // 
             // listBox1
             // 
@@ -78,7 +78,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 12);
             this.label2.TabIndex = 2;
-            this.label2.Text = "计算机：";
+            this.label2.Text = "計算機：";
             // 
             // comboBox1
             // 
@@ -96,7 +96,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(53, 12);
             this.label1.TabIndex = 0;
-            this.label1.Text = "工作组：";
+            this.label1.Text = "工作組：";
             // 
             // groupBox2
             // 
@@ -111,7 +111,7 @@
             this.groupBox2.Size = new System.Drawing.Size(196, 225);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "扫描计算机已用端口号";
+            this.groupBox2.Text = "掃描計算機已用端口號";
             // 
             // listView1
             // 
@@ -128,7 +128,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(41, 23);
             this.button1.TabIndex = 5;
-            this.button1.Text = "扫描";
+            this.button1.Text = "掃描";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -164,7 +164,7 @@
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(125, 12);
             this.label3.TabIndex = 1;
-            this.label3.Text = "请设定端口扫描范围：";
+            this.label3.Text = "請設定端口掃描范圍：";
             // 
             // timer1
             // 
@@ -198,7 +198,7 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "局域网端口扫描";
+            this.Text = "局域網端口掃描";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox1.ResumeLayout(false);

@@ -6,17 +6,13 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Runtime.InteropServices;
 
 namespace 使桌面圖標文字透明
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         [DllImport("user32.dll")]
         public static extern int GetDesktopWindow();
 
@@ -33,8 +29,17 @@ namespace 使桌面圖標文字透明
         private const int wMsg2 = 0x1024;
         private const uint lParam1 = 0xffffffff;
         private const uint lParam2 = 0x00ffffff;
-        Rectangle lpRect = new Rectangle(0,0,0,0);
+        Rectangle lpRect = new Rectangle(0, 0, 0, 0);
 
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             int hwnd;
@@ -47,10 +52,6 @@ namespace 使桌面圖標文字透明
             InvalidateRect(hwnd, ref lpRect, true);
             MessageBox.Show("設定成功！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
+

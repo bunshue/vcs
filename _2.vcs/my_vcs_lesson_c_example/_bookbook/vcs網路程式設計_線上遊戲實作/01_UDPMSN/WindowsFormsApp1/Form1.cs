@@ -7,11 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.Threading.Tasks;
-
 using System.Net;         //匯入網路通訊協定相關參數
 using System.Net.Sockets; //匯入網路插座功能函數
 using System.Threading;   //匯入多執行續功能函數
+using System.Threading.Tasks;
 
 namespace WindowsFormsApp1
 {
@@ -19,6 +18,7 @@ namespace WindowsFormsApp1
     {
         UdpClient U; //宣告UDP通訊物件
         Thread Th;   //宣告監聽用執行續
+
         public Form1()
         {
             InitializeComponent();
@@ -28,6 +28,20 @@ namespace WindowsFormsApp1
         private void Form1_Load(object sender, EventArgs e)
         {
             this.Text += " " + MyIP();                              //顯示本機IP於標題列
+        }
+
+        //關閉監聽執行續(如果有的話)
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                Th.Abort(); //關閉監聽執行續
+                U.Close();  //關閉監聽器
+            }
+            catch
+            {
+                //忽略錯誤，程式繼續執行
+            }
         }
 
         //找出本機IP
@@ -77,20 +91,6 @@ namespace WindowsFormsApp1
             UdpClient S = new UdpClient();                       //建立UDP通訊器
             S.Send(B, B.Length, IP, Port);                       //發送資料到指定位置
             S.Close();                                           //關閉通訊器
-        }
-
-        //關閉監聽執行續(如果有的話)
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            try
-            {
-                Th.Abort(); //關閉監聽執行續
-                U.Close();  //關閉監聽器
-            }
-            catch
-            {
-                //忽略錯誤，程式繼續執行
-            }
         }
     }
 }

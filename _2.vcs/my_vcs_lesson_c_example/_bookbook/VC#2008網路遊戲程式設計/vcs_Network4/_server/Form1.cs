@@ -12,17 +12,14 @@ using System.Threading;  //Thread時使用
 using System.Text;       //Encoding.Unicode.GetString(...) 時使用
 using System.IO;         //使用FileInfo類別，來建立一個檔案實體物件
 
-
 namespace _server
 {
     public partial class Form1 : System.Windows.Forms.Form
     {
-
         private Socket ServerSocket, SocketForClient;
         private Thread _thread1, _thread2;
         private Hashtable ht = new Hashtable();
         private Hashtable name_score = new Hashtable(); // 使用hashtable 來記錄client-socket 的資訊
-        //注意：後面這個= new Hashtable(); --- 不可以省略
         private Hashtable htname = new Hashtable(); //記錄登錄名稱
         string[] temp = new string[1024];
         string[] tempscore = new string[1024];
@@ -62,8 +59,8 @@ namespace _server
                 --c_conn;
                 Show_label2();
                 Application.Exit();
-
             }
+
             Application.Exit();
 
             if (disposing && (components != null))
@@ -72,6 +69,7 @@ namespace _server
             }
             base.Dispose(disposing);
         }
+
         private void Show_textBox1()//此副程式為了避免跨執行緒錯誤
         {
             if (textBox1.InvokeRequired)
@@ -80,11 +78,11 @@ namespace _server
             }
             else
             {
-
                 textBox1.Text = "";
                 textBox1.ReadOnly = false;
             }
         }
+
         private void Show_button1()//此副程式為了避免跨執行緒錯誤
         {
             if (button1.InvokeRequired)
@@ -93,15 +91,13 @@ namespace _server
             }
             else
             {
-
-
                 button1.Enabled = false;
             }
         }
+
         int c_conn = 0;
         private void MainService() //這個副程式，將會偵測是否有Client端用戶目前已經連線了
         {
-
             try
             {
                 IPEndPoint serverhost = new IPEndPoint(IPAddress.Parse(textBox1.Text), 233);
@@ -120,8 +116,6 @@ namespace _server
                     ht.Add(SocketForClient.RemoteEndPoint, SocketForClient);
                     Show_label2();
 
-
-
                     //Socket s = ServerSocket.Accept();
                     //SocketForClient = s;
                     // *************************************
@@ -133,15 +127,14 @@ namespace _server
                     Thread.Sleep(200); //等待傳值給thread中的變數，防止多用戶造成衝突				
                 }
             }
-
             catch
             {
                 MessageBox.Show("IP錯誤，請重新輸入！", "伺服器");
                 Show_textBox1();
                 button1.Enabled = true;
             }
-
         }
+
         private void Show_label2()
         {
             if (label2.InvokeRequired)
@@ -155,15 +148,16 @@ namespace _server
                 //richTextBox1.Text += "bbbbbbb\n";
             }
         }
+
         private void Show_label3_1()
         {
             if (label3.InvokeRequired) label3.Invoke(new MethodInvoker(Show_label3_1));
             else
             {
-
                 label3.Text = "";
             }
         }
+
         private void Show_label3(string str)
         {
             richTextBox1.Text += "str = " + str + "\n";
@@ -195,7 +189,6 @@ namespace _server
             // *********************************************
             byte[] byteReceieve = new byte[1024];
             byte[] byteSend = new byte[1024];
-
 
             EndPoint oldEP = sock.RemoteEndPoint;
             int ii, six = 0, off_line = 0, name = 0, count_temp = 0, count_score = 0;
@@ -275,11 +268,8 @@ namespace _server
                             off_line = 0;
                         }
                     }
-
                     else  // 有人進來時
                     {
-
-
                         if (strAll == "six")
                         {
                             six = 1;
@@ -440,7 +430,6 @@ namespace _server
         {
             //_thread1.Abort();
             _thread1.Join();
-
         }
     }
 }
