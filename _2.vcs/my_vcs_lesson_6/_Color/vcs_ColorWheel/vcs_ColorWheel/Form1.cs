@@ -243,7 +243,14 @@ namespace vcs_ColorWheel
 
         private void DrawColorWheel2()
         {
-            Graphics g = this.pictureBox1.CreateGraphics();
+            int w = 400;
+            int h = 400;
+
+            pictureBox1.Size = new Size(w, h);
+
+            Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            Graphics g = Graphics.FromImage(bitmap1);
+
             g.Clear(Color.White);
 
             int i = 0;
@@ -351,6 +358,7 @@ namespace vcs_ColorWheel
                 g.DrawLine(p, cx, cy, cx + r * (float)cosd(i), cy + r * (float)sind(i));
 
 
+                pictureBox1.Image = bitmap1;
 
                 richTextBox1.Text += "i = " + i.ToString() + ", R = " + R.ToString() + ", G = " + G.ToString() + ", B = " + B.ToString() + "\n";
             }
@@ -376,10 +384,12 @@ namespace vcs_ColorWheel
 
         void DrawColorWheel3()
         {
-            Bitmap bitmap1 = new Bitmap(512, 512);
-
             int w = 512;
             int h = 512;
+
+            pictureBox1.Size = new Size(w, h);
+            Bitmap bitmap1 = new Bitmap(w, h);
+
             int cx = 512 / 2;
             int cy = 512 / 2;
             int r = 256;
@@ -431,20 +441,21 @@ namespace vcs_ColorWheel
 
                             bitmap1.SetPixel(i, j, Color.FromArgb(255, 255 - distr, 255 - distg, 255 - distb));
                         }
-
                     }
-
-
                 }
             }
 
             pictureBox1.Image = bitmap1;
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
 
             richTextBox1.Text += "cx = " + cx.ToString() + ", cy = " + cy.ToString() + "\n";
             richTextBox1.Text += "rx = " + rx.ToString() + ", ry = " + ry.ToString() + "\n";
             richTextBox1.Text += "gx = " + gx.ToString() + ", gy = " + gy.ToString() + "\n";
             richTextBox1.Text += "bx = " + bx.ToString() + ", by = " + by.ToString() + "\n";
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //TBD
         }
     }
 }

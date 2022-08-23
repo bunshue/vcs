@@ -136,9 +136,10 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.pictureBox1.Location = new System.Drawing.Point(12, 200);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(344, 500);
+            this.pictureBox1.Size = new System.Drawing.Size(400, 500);
             this.pictureBox1.TabIndex = 15;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.pictureBox1_Paint);
@@ -777,6 +778,7 @@
             this.button51.Name = "button51";
             this.button51.Size = new System.Drawing.Size(120, 42);
             this.button51.TabIndex = 80;
+            this.button51.Text = "DrawPoint";
             this.button51.UseVisualStyleBackColor = true;
             this.button51.Click += new System.EventHandler(this.button51_Click);
             // 

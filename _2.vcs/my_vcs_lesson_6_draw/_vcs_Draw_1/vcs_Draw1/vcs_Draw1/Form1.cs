@@ -2915,6 +2915,32 @@ namespace vcs_Draw1
 
         private void button51_Click(object sender, EventArgs e)
         {
+            //DrawPoint
+
+            List<PointF> points = new List<PointF>();
+
+            int i;
+            Random r = new Random();
+
+            Graphics g = pictureBox1.CreateGraphics();				//實例化pictureBox1控件的Graphics類
+            g.Clear(Color.White);
+
+            for (i = 0; i < 14; i++)
+            {
+                points.Add(new PointF(30 * i, r.Next(400)));
+            }
+
+            if (points.Count > 1)
+            {
+                Pen p = new Pen(Color.Red);
+                g.DrawLines(p, points.ToArray());   //List轉Array
+            }
+
+            foreach (PointF point in points)
+            {
+                const float radius = 4;
+                g.DrawEllipse(Pens.Red, point.X - radius, point.Y - radius, 2 * radius, 2 * radius);
+            }
         }
 
         private void button52_Click(object sender, EventArgs e)

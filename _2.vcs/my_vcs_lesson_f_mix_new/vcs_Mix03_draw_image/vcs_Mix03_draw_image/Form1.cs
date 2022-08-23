@@ -106,35 +106,6 @@ namespace vcs_Mix03_draw_image
         private void button1_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-
-            List<PointF> points = new List<PointF>();
-
-            int i;
-            Random r = new Random();
-
-            Graphics g = pictureBox1.CreateGraphics();				//實例化pictureBox1控件的Graphics類
-            g.Clear(Color.White);
-
-            for (i = 0; i < 10; i++)
-            {
-                points.Add(new PointF(50 * i, r.Next(200)));
-            }
-
-            if (points.Count > 1)
-            {
-                Pen p = new Pen(Color.Red);
-                g.DrawLines(p, points.ToArray());   //List轉Array
-            }
-
-            // Draw the roots.
-            foreach (PointF point in points)
-            {
-                const float radius = 4;
-                g.DrawEllipse(Pens.Red, point.X - radius, point.Y - radius, 2 * radius, 2 * radius);
-            }
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
