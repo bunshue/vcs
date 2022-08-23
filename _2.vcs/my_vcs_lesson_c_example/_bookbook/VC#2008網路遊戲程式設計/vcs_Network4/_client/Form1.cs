@@ -41,6 +41,15 @@ namespace _client
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //C# 跨 Thread 存取 UI
+            //Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效	same
+            Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
+
+            this.Location = new Point(1100, 300);
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
 
         }
 
@@ -288,6 +297,7 @@ namespace _client
                 namescore = null;
             }
         }
+
     }
 }
 

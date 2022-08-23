@@ -152,8 +152,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::_client.Properties.Resources.River_Sumida;
-            this.ClientSize = new System.Drawing.Size(567, 429);
+            this.ClientSize = new System.Drawing.Size(624, 441);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.label3);
@@ -166,6 +165,7 @@
             this.Controls.Add(this.label1);
             this.Name = "Form1";
             this.Text = "_client";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -12,11 +12,6 @@ namespace _client
 {
     public partial class Form2 : Form
     {
-        public Form2()
-        {
-            InitializeComponent();
-
-        }
         int cnt_name = 0, right_num = 0, score = 0, x1 = 0, a = 0;
 
         private Hashtable name_score = new Hashtable(); // 使用hashtable 來記錄暱稱與分數 的資訊
@@ -41,6 +36,20 @@ namespace _client
             get { return Sname; }
 
         }
+
+        public Form2()
+        {
+            InitializeComponent();
+
+        }
+
+        private void Form2_Load(object sender, EventArgs e)
+        {
+            //C# 跨 Thread 存取 UI
+            //Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效	same
+            Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
             Form1 f1 = new Form1();
@@ -54,7 +63,6 @@ namespace _client
             label4.Text = "玩家" + Sname + " 的分數為 :" + score.ToString();
             label3.Text = "你已答了" + right_num.ToString() + "題";
             label6.Text = "放棄了...";
-            
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -165,8 +173,6 @@ namespace _client
 
             label4.Text = "玩家" + Sname + " 的分數為 :" + score.ToString();
             label3.Text = "你已答了" + right_num.ToString() + "題";
-
-          
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -184,7 +190,6 @@ namespace _client
                 str[num] = (string)de.Key;
                 ++num;
             }
-
 
             foreach (string t in str) //分解字串存入陣列
             {
@@ -241,8 +246,6 @@ namespace _client
                 label13.Text = score.ToString() + "分";
 
             }
-
-
            // label8.Text = label8.Text;
         }
 
@@ -347,6 +350,7 @@ namespace _client
         {
 
         }
+
 
     }
 }

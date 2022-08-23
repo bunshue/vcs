@@ -48,8 +48,10 @@ namespace vcs_TCPIP
                     richTextBox1.Text += "TCP 連線失敗\n";
                 }
             }
-            richTextBox1.Text += "TCP 連線成功\n";
-
+            else
+            {
+                richTextBox1.Text += "TCP 連線成功\n";
+            }
         }
     }
 }

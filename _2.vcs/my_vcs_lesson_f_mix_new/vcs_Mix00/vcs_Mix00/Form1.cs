@@ -431,34 +431,7 @@ namespace vcs_Mix00
         private void button4_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //給圖片添加版權信息
-
-            //創建一張位圖
-            Bitmap bitmap = new Bitmap(this.pictureBox1.Width, this.pictureBox1.Height, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
-
-            //根據位圖獲取畫布
-            Graphics g = Graphics.FromImage(bitmap);
-
-            //清空畫布並用透明色填充
-            g.Clear(Color.Transparent);
-
-
-            string filename = @"C:\______test_files\picture1.jpg";
-            bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
-
-            //將另一幅圖片畫到畫布上
-            g.DrawImage(bitmap1, 0, 0, bitmap1.Width, bitmap1.Height);
-
-            //寫版權信息到圖片上。
-            g.DrawString("群曜醫電", new Font("黑體", 15), new SolidBrush(Color.Red), new Rectangle(20, 20, 100, 100));
-
-            //顯示
-            this.pictureBox1.Image = bitmap;
-
-            //保存圖片
-            bitmap.Save("abc.bmp",System.Drawing.Imaging.ImageFormat.Bmp);
         }
-
 
         private void button5_Click(object sender, EventArgs e)
         {
@@ -621,50 +594,6 @@ namespace vcs_Mix00
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //撈出所有圖片檔 並存成一個List
-            string foldername = @"C:\______test_files\__pic";
-
-            filenames.Clear();
-            GetAllFiles(foldername);
-            int len = filenames.Count;
-            richTextBox1.Text += "len = " + len.ToString() + "\n";
-
-            int i;
-            for (i = 0; i < len; i++)
-            {
-                richTextBox1.Text += filenames[i] + "\n";
-            }
-        }
-
-        List<String> filenames = new List<String>();
-        //多層 且指明副檔名
-        public void GetAllFiles(string foldername)
-        {
-            DirectoryInfo di = new DirectoryInfo(foldername);
-            //richTextBox1.Text += "資料夾 : " + di.FullName + "\n";
-            FileSystemInfo[] fileinfo = di.GetFileSystemInfos();
-            foreach (FileSystemInfo fi in fileinfo)
-            {
-                if (fi is DirectoryInfo)
-                {
-                    GetAllFiles(((DirectoryInfo)fi).FullName);
-                }
-                else
-                {
-                    string fullname = fi.FullName;
-                    string shortname = fi.Name;
-                    string ext = fi.Extension.ToLower();
-                    string forename = shortname.Substring(0, shortname.Length - ext.Length);    //前檔名
-
-                    if (ext == ".jpg" || ext == ".jpeg" || ext == ".bmp" || ext == ".png" || ext == ".gif")
-                    {
-                        //richTextBox1.Text += "長檔名: " + fullname + "\t副檔名: " + ext + "\n";
-                        richTextBox1.Text += "短檔名: " + shortname + "\n";
-                        richTextBox1.Text += "前檔名: " + forename + "\n";
-                        //filenames.Add(fullname);
-                    }
-                }
-            }
         }
 
         private void button11_Click(object sender, EventArgs e)

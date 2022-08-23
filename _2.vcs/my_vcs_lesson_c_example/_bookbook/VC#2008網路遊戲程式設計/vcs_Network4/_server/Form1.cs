@@ -32,6 +32,20 @@ namespace _server
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //C# 跨 Thread 存取 UI
+            //Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效	same
+            Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
+
+            this.Location = new Point(100, 300);
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (_thread1 != null)
+                _thread1.Abort();
+
+            if (_thread2 != null)
+                _thread2.Abort();
 
         }
 
@@ -396,19 +410,13 @@ namespace _server
 
                             name = 0;
                         }
-
                     }
-
                 }
-
-
-                catch
+                catch (Exception ex)
                 {
-                    ;
+                    MessageBox.Show("錯誤訊息 : " + ex.Message, "伺服器");
                 }
-
             }
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -433,5 +441,3 @@ namespace _server
         }
     }
 }
-
-
