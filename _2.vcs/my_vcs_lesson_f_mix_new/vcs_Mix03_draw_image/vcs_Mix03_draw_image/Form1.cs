@@ -799,58 +799,7 @@ namespace vcs_Mix03_draw_image
         private void button11_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //畫驗證碼
-
-            int digits = 10;
-            string captcha = validation(digits);
-            richTextBox1.Text += captcha + "\n";
-
-            pictureBox1.Image = drawImg(captcha);
-        }
-
-        /// <summary>
-        /// 字符
-        /// </summary>
-        /// <param name="len">幾位</param>
-        /// <returns></returns>
-        public static string validation(int cd)
-        {
-            var ran = new Random();
-            int num, tem;
-            string rtuStr = "";
-            for (int i = 0; i < cd; i++)
-            {
-                num = ran.Next();
-                if (i % 2 == 1)
-                    tem = num % 10 + '0'; //数字
-                else
-                    tem = num % 26 + 'A'; //字母
-                rtuStr += Convert.ToChar(tem).ToString();
-            }
-            return rtuStr;
-        }
-
-        /// <summary>
-        /// 生成图像
-        /// </summary>
-        /// <param name="check">字符</param>
-        public Bitmap drawImg(string check)
-        {
-            Bitmap bitmap1 = new Bitmap(250, 50);
-            var ht = Graphics.FromImage(bitmap1);
-            ht.Clear(Color.White);
-            ht.DrawLine(new Pen(Color.SpringGreen), 1, 1, 90, 34);
-            Font font = new Font("微软雅黑", 20, FontStyle.Bold);
-            var jianbian = new LinearGradientBrush(new Rectangle(0, 0, bitmap1.Width, bitmap1.Height), Color.Teal, Color.Snow, 2f, true);
-            ht.DrawString(check, font, jianbian, 0, 0);
-            ht.DrawRectangle(new Pen(Color.Aqua), 0, 0, bitmap1.Width - 1, bitmap1.Height - 1);
-            ht.Dispose();
-            return bitmap1;
-        }
-    
-
-
-
+        }    
 
         private void button12_Click(object sender, EventArgs e)
         {
@@ -1077,21 +1026,6 @@ namespace vcs_Mix03_draw_image
         private void button16_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            Graphics g = pictureBox1.CreateGraphics();				//實例化pictureBox1控件的Graphics類
-            g.Clear(Color.White);
-
-            Rectangle rect = new Rectangle(100, 100, 400, 200);
-
-
-            Font font = new Font("標楷體", 20, FontStyle.Bold);
-            var jianbian = new LinearGradientBrush(new Rectangle(0, 0, 100, 100), Color.Teal, Color.Snow, 2f, true);
-            g.DrawString("群曜醫電", font, jianbian, 0, 0);
-
-
-            g.FillRectangle(jianbian, 0, 100, 200, 200);
-
-
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -1183,46 +1117,7 @@ namespace vcs_Mix03_draw_image
         private void button20_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            Graphics g = pictureBox1.CreateGraphics();				//實例化pictureBox1控件的Graphics類
-            g.Clear(Color.White);
-
-            Rectangle rect = new Rectangle(100, 100, 400, 200);
-
-            g.DrawRectangle(Pens.Red, rect);
-
-            int i;
-            for (i = 10; i < 100; i += 20)
-            {
-                GraphicsPath gp = CreateRoundRectangle(rect, i);
-                g.DrawPath(Pens.Green, gp);
-            }
         }
-
-        //DrawHelper的创建圆角矩形函数
-        /// <summary>
-        /// 创建圆角矩形
-        /// </summary>
-        /// <param name="rectangle">圆角矩形的边界矩形</param>
-        /// <param name="radius">圆角大小</param>
-        /// <returns>返回圆角矩形的路径</returns>
-
-        public static GraphicsPath CreateRoundRectangle(Rectangle rectangle, int radius)
-        {
-            GraphicsPath path = new GraphicsPath(FillMode.Winding);
-            int l = rectangle.Left;
-            int t = rectangle.Top;
-            int w = rectangle.Width;
-            int h = rectangle.Height;
-            int d = radius << 1;
-            path.AddArc(l, t, d, d, 180, 90); // topleft
-            path.AddArc(l + w - d, t, d, d, 270, 90); // topright
-            path.AddArc(l + w - d, t + h - d, d, d, 0, 90); // bottomright
-            path.AddArc(l, t + h - d, d, d, 90, 90); // bottomleft
-            path.CloseFigure();
-            return path;
-        }
-
 
         private void button21_Click(object sender, EventArgs e)
         {

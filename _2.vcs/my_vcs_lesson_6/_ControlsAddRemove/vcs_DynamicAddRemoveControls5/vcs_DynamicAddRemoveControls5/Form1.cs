@@ -131,9 +131,11 @@ namespace vcs_DynamicAddRemoveControls5
             //當有多個按鈕需要產生時, 如何用loop方式動態產生, 並加入對應的click event
             //產生一個新的form, 並在該form上面產生MxN組的按鈕
 
+            int x_st = 700;
+            int y_st = 10;
             int i;
             int j;
-            //this.Size = new Size(800, 600);
+
             for (i = 0; i < m_cols; i++)
             {
                 for (j = 0; j < m_rows; j++)
@@ -141,8 +143,8 @@ namespace vcs_DynamicAddRemoveControls5
                     Button btn = new Button();
                     this.AcceptButton = btn;
                     this.Controls.Add(btn);
-                    btn.Left = m_btnWidth * i;
-                    btn.Top = m_btnHeight * j;
+                    btn.Left = x_st+m_btnWidth * i;
+                    btn.Top = y_st+m_btnHeight * j;
                     btn.Width = m_btnWidth;
                     btn.Height = m_btnHeight;
                     btn.Text = (j + 1).ToString() + ", " + (i + 1).ToString();

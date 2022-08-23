@@ -1284,9 +1284,9 @@ namespace vcs_Draw_Captcha1
         /// 生成圖像
         /// </summary>
         /// <param name="check">字符</param>
-        public byte[] drawImg(string check)
+        public Bitmap drawImg(string check)
         {
-            Bitmap bitmap1 = new Bitmap(90, 34);
+            Bitmap bitmap1 = new Bitmap(220, 34);
             var ht = Graphics.FromImage(bitmap1);
             ht.Clear(Color.White);
             ht.DrawLine(new Pen(Color.SpringGreen), 1, 1, 90, 34);
@@ -1294,19 +1294,15 @@ namespace vcs_Draw_Captcha1
             var jianbian = new LinearGradientBrush(new Rectangle(0, 0, bitmap1.Width, bitmap1.Height), Color.Teal, Color.Snow, 2f, true);
             ht.DrawString(check, font, jianbian, 0, 0);
             ht.DrawRectangle(new Pen(Color.Aqua), 0, 0, bitmap1.Width - 1, bitmap1.Height - 1);
-            MemoryStream ms = new MemoryStream();
-            bitmap1.Save(ms, ImageFormat.Jpeg);
             ht.Dispose();
-            pictureBox23.Image = bitmap1;
-            //bitmap1.Dispose();
-            return ms.ToArray();
+            return bitmap1;
         }
 
         void draw_captcha23()
         {
-            string check = validation(4);
-
-            byte[] buffer = drawImg(check);
+            int digits = 10;
+            string captcha = validation(digits);
+            pictureBox23.Image = drawImg(captcha);
         }
 
         //Captcha 23 SP

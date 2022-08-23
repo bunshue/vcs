@@ -342,6 +342,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(160, 60);
             this.button18.TabIndex = 120;
+            this.button18.Text = "LinearGradientBrush";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 

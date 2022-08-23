@@ -855,7 +855,48 @@ namespace vcs_Color
 
         private void button8_Click(object sender, EventArgs e)
         {
+            //DrawColorMap
+            int w = pictureBox1.ClientSize.Width;
+            int h = pictureBox1.ClientSize.Height;
 
+            Bitmap bmp = new Bitmap(w, h);
+            Graphics g = Graphics.FromImage(bmp);
+            g.Clear(Color.Pink);
+
+            Brush b;
+
+            int i;
+            int j;
+            int k;
+            int ww = 32;
+            int hh = 8;
+            int cnt = 0;
+            int new_line = 256 / ww + 1;
+            for (k = 0; k <= 256; k += ww)
+            {
+                for (j = 0; j <= 256; j += ww)
+                {
+                    for (i = 0; i <= 256; i += ww)
+                    {
+                        if (i >= 255)
+                            i = 255;
+                        if (j >= 255)
+                            j = 255;
+                        if (k >= 255)
+                            k = 255;
+
+                        b = new SolidBrush(Color.FromArgb(255, i, j, k));
+
+                        g.FillRectangle(b, (cnt % new_line) * ww, hh * (cnt / new_line), ww, hh);
+
+
+                        cnt++;
+                    }
+                }
+            }
+            richTextBox1.Text += "cnt = " + cnt.ToString() + "\n";
+
+            pictureBox1.Image = bmp;
         }
 
         private void button9_Click(object sender, EventArgs e)

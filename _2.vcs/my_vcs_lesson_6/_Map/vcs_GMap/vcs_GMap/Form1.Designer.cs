@@ -852,9 +852,9 @@
             this.rb_location8.AutoSize = true;
             this.rb_location8.Location = new System.Drawing.Point(104, 37);
             this.rb_location8.Name = "rb_location8";
-            this.rb_location8.Size = new System.Drawing.Size(71, 16);
+            this.rb_location8.Size = new System.Drawing.Size(47, 16);
             this.rb_location8.TabIndex = 7;
-            this.rb_location8.Text = "徐蚌會戰";
+            this.rb_location8.Text = "國共";
             this.rb_location8.UseVisualStyleBackColor = true;
             this.rb_location8.CheckedChanged += new System.EventHandler(this.radioButton_location_CheckedChanged);
             // 

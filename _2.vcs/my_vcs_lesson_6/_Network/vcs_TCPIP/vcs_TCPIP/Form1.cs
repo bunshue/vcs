@@ -30,10 +30,10 @@ namespace vcs_TCPIP
         {
             richTextBox1.Text += "TCP 連線...\n";
             tcpClient = new TcpClient();
-            IAsyncResult result = tcpClient.BeginConnect("192.168.10.100", 6300, null, null);
+            IAsyncResult result = tcpClient.BeginConnect("192.168.2.114", 6300, null, null);
             result.AsyncWaitHandle.WaitOne(3000, true);
 
-            if (!result.IsCompleted)
+            if (result.IsCompleted == false)
             {
                 if (try_count < 3)
                 {
@@ -48,7 +48,8 @@ namespace vcs_TCPIP
                     richTextBox1.Text += "TCP 連線失敗\n";
                 }
             }
+            richTextBox1.Text += "TCP 連線成功\n";
+
         }
     }
 }
-

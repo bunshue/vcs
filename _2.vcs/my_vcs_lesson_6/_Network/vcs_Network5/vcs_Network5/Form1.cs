@@ -18,8 +18,6 @@ using System.Threading;
 using System.Text.RegularExpressions;
 using System.Runtime.InteropServices;
 using System.Collections;   //for Stack
-using System.Text.RegularExpressions;
-
 
 //using System.Xml;
 //using System.Management;

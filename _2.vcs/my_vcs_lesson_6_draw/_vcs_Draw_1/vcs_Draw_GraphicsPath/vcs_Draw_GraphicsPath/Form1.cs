@@ -220,6 +220,43 @@ namespace vcs_Draw_GraphicsPath
 
         private void button5_Click(object sender, EventArgs e)
         {
+            Graphics g = pictureBox1.CreateGraphics();				//實例化pictureBox1控件的Graphics類
+            g.Clear(Color.White);
+
+            Rectangle rect = new Rectangle(100, 100, 400, 200);
+
+            g.DrawRectangle(Pens.Red, rect);
+
+            int i;
+            for (i = 10; i < 100; i += 20)
+            {
+                GraphicsPath gp = CreateRoundRectangle(rect, i);
+                g.DrawPath(Pens.Green, gp);
+            }
+        }
+
+        //DrawHelper的创建圆角矩形函数
+        /// <summary>
+        /// 创建圆角矩形
+        /// </summary>
+        /// <param name="rectangle">圆角矩形的边界矩形</param>
+        /// <param name="radius">圆角大小</param>
+        /// <returns>返回圆角矩形的路径</returns>
+
+        public static GraphicsPath CreateRoundRectangle(Rectangle rectangle, int radius)
+        {
+            GraphicsPath path = new GraphicsPath(FillMode.Winding);
+            int l = rectangle.Left;
+            int t = rectangle.Top;
+            int w = rectangle.Width;
+            int h = rectangle.Height;
+            int d = radius << 1;
+            path.AddArc(l, t, d, d, 180, 90); // topleft
+            path.AddArc(l + w - d, t, d, d, 270, 90); // topright
+            path.AddArc(l + w - d, t + h - d, d, d, 0, 90); // bottomright
+            path.AddArc(l, t + h - d, d, d, 90, 90); // bottomleft
+            path.CloseFigure();
+            return path;
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -494,6 +531,7 @@ namespace vcs_Draw_GraphicsPath
 
         private void button9_Click(object sender, EventArgs e)
         {
+
         }
 
         private void button10_Click(object sender, EventArgs e)

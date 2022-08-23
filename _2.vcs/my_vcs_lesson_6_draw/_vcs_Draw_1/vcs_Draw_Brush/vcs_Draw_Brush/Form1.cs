@@ -570,7 +570,22 @@ namespace vcs_Draw_Brush
 
         private void button18_Click(object sender, EventArgs e)
         {
+            //LinearGradientBrush
 
+            Graphics g = pictureBox1.CreateGraphics();				//實例化pictureBox1控件的Graphics類
+            g.Clear(Color.White);
+
+            Rectangle rect = new Rectangle(100, 100, 400, 200);
+
+            Font f = new Font("標楷體", 20, FontStyle.Bold);
+
+
+            //梯度刷
+            LinearGradientBrush lgb = new LinearGradientBrush(new Rectangle(0, 0, 100, 100), Color.Teal, Color.Snow, 2f, true);
+            g.DrawString("群曜醫電", f, lgb, 0, 0);
+
+
+            g.FillRectangle(lgb, 0, 100, 200, 200);
         }
 
         private void button19_Click(object sender, EventArgs e)
