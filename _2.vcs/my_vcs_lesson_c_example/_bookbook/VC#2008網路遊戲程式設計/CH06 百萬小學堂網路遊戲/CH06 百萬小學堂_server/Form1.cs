@@ -32,6 +32,10 @@ namespace 百萬小學堂_server
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //C# 跨 Thread 存取 UI
+            //Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效	same
+            Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
+
 
         }
 
@@ -98,6 +102,7 @@ namespace 百萬小學堂_server
         int c_conn = 0;
         private void MainService() //這個副程式，將會偵測是否有Client端用戶目前已經連線了
         {
+            richTextBox1.Text += "MainService ST\n";
             try
             {
                 IPEndPoint serverhost = new IPEndPoint(IPAddress.Parse(textBox1.Text), 233);
@@ -108,11 +113,14 @@ namespace 百萬小學堂_server
                 Show_button1();
                 while (true)  //無限迴圈檢查連線的Client的Socket資訊
                 {
+                    richTextBox1.Text += "1";
                     //如果主機socket偵聽到client的資訊，就記錄其SocketForClient資料
                     // ****** 兩種寫法皆可 *******************************
                     SocketForClient = ServerSocket.Accept();
+                    richTextBox1.Text += "2";
                     ++c_conn;
                     ht.Add(SocketForClient.RemoteEndPoint, SocketForClient);
+                    richTextBox1.Text += "3";
                     Show_label2();
 
                     //Socket s = ServerSocket.Accept();
@@ -176,6 +184,8 @@ namespace 百萬小學堂_server
 
         private void ClientService() //這個副程式，乃是無限迴圈中偵測是否有Client傳送訊息
         {
+            richTextBox1.Text += "ClientService ST\n";
+
             // *********************************************
             // *******關鍵步驟*****************************
             //   因為下面while()....裡面在會一直偵測client端所傳來的訊息
@@ -195,6 +205,7 @@ namespace 百萬小學堂_server
 
             while (true)
             {
+                richTextBox1.Text += "A";
                 //ii = SocketForClient.ReceiveFrom(byteReceieve,ref oldEP);
                 //ii = sock.ReceiveFrom(byteReceieve, 0, byteReceieve.Length, SocketFlags.None, ref oldEP);//使用指定的 SocketFlags，
                 //接收指定位元組數目的資料至資料緩衝區的指定位置，並儲存端點。 

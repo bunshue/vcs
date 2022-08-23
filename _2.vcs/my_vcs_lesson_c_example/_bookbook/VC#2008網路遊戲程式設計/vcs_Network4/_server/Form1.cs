@@ -363,11 +363,8 @@ namespace _server
 
                                 socketTemp = (Socket)dc.Value;  //de.Value = client端的IP 
                                 socketTemp.SendTo(byteSend, (EndPoint)dc.Key);
-
-
                             }
                             Thread.Sleep(50);
-
                         }
                         if ((name == 1) && (strAll != "name") && (strAll != ""))
                         {
