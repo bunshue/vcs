@@ -43,22 +43,24 @@ namespace vcs_ShowPicture3
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.FormBorderStyle = FormBorderStyle.None;
-            this.StartPosition = FormStartPosition.CenterScreen;
-
-            this.ControlBox = false;
-            this.MaximizeBox = false;
-            this.MinimizeBox = false;
-            this.ShowIcon = false;
-            this.ShowInTaskbar = false;
-
-            this.TopMost = true;
-            this.KeyPreview = true;
+            //全屏空白表單
+            this.BackColor = Color.Black;
+            //this.Size = new Size(800, 600);
+            ControlBox = false;
+            MaximizeBox = false;
+            MinimizeBox = false;
+            ShowIcon = false;
+            ShowInTaskbar = false;
+            FormBorderStyle = FormBorderStyle.None;
+            StartPosition = FormStartPosition.CenterScreen;
+            WindowState = FormWindowState.Maximized;
+            TopMost = true;
+            KeyPreview = true;
 
             this.KeyDown += Form1_KeyDown;
 
+            //this.BackColor = Color.Black;   //背景為黑
             //this.BackgroundImage = GetNoCursor(); //複製目前桌面當背景
-            this.BackColor = Color.Black;
 
             if (debug_mode == true)
             {
@@ -85,7 +87,7 @@ namespace vcs_ShowPicture3
             }
         }
 
-        private Bitmap GetNoCursor()
+        private Bitmap GetNoCursor()    //複製目前桌面當背景
         {
             Bitmap Source = new Bitmap(bounds.Width, bounds.Height);    //根据屏幕大小创建Bitmap对象
             Graphics g = Graphics.FromImage(Source);

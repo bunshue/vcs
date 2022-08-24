@@ -24,10 +24,13 @@ namespace vcs_FullScreenSetup
             ControlBox = false;
             MaximizeBox = false;
             MinimizeBox = false;
+            ShowIcon = false;
             ShowInTaskbar = false;
             FormBorderStyle = FormBorderStyle.None;
             StartPosition = FormStartPosition.CenterScreen;
-            this.WindowState = FormWindowState.Maximized;
+            WindowState = FormWindowState.Maximized;
+            TopMost = true;
+            KeyPreview = true;
 
             this.DoubleClick += new EventHandler(Form1_DoubleClick);
         }

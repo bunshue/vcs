@@ -1020,9 +1020,10 @@ namespace vcs_Mix03_draw_image
         {
             show_button_text(sender);
             //撈出所有圖片檔 並存成一個List
-            string foldername = @"C:\______test_files\__pic";
+            string foldername = @"C:\______test_files\__pic\_book_magazine";
 
             filenames.Clear();
+
             GetAllFiles(foldername);
             int len = filenames.Count;
             richTextBox1.Text += "len = " + len.ToString() + "\n";
@@ -1057,9 +1058,9 @@ namespace vcs_Mix03_draw_image
                     if (ext == ".jpg" || ext == ".jpeg" || ext == ".bmp" || ext == ".png" || ext == ".gif")
                     {
                         //richTextBox1.Text += "長檔名: " + fullname + "\t副檔名: " + ext + "\n";
-                        richTextBox1.Text += "短檔名: " + shortname + "\n";
-                        richTextBox1.Text += "前檔名: " + forename + "\n";
-                        //filenames.Add(fullname);
+                        //richTextBox1.Text += "短檔名: " + shortname + "\n";
+                        //richTextBox1.Text += "前檔名: " + forename + "\n";
+                        filenames.Add(fullname);
                     }
                 }
             }
@@ -1213,11 +1214,76 @@ namespace vcs_Mix03_draw_image
         private void button25_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            string foldername = @"C:\______test_files\__pic\_peony1";
+
+            filenames.Clear();
+
+            if (Directory.Exists(foldername) == false)
+            {
+                richTextBox1.Text += "圖片資料夾不存在, 離開\n";
+                return;
+            }
+
+            // Load the list of files.
+            filenames = FindFiles(foldername, "*.bmp;*.png;*.jpg;*.tif;*.gif", false);
+
+            for (int i = 0; i < filenames.Count; i++)
+            {
+                richTextBox1.Text += "get file \t" + filenames[i] + "\n";
+            }
+            richTextBox1.Text += "共有 " + filenames.Count.ToString() + " 個檔案\n";
+
         }
+
+        // See: Search for files that match multiple patterns in C#
+        //      http://csharphelper.com/blog/2015/06/find-files-that-match-multiple-patterns-in-c/
+        // Search for files matching the patterns.
+        private List<string> FindFiles(string fname, string patterns, bool search_subdirectories)
+        {
+            // Make the result list.
+            List<string> files = new List<string>();
+
+            // Get the patterns.
+            string[] pattern_array = patterns.Split(';');
+
+            // Search.
+            SearchOption search_option = SearchOption.TopDirectoryOnly;
+            if (search_subdirectories) search_option = SearchOption.AllDirectories;
+            foreach (string pattern in pattern_array)
+            {
+                foreach (string filename in Directory.GetFiles(fname, pattern, search_option))
+                {
+                    if (!files.Contains(filename)) files.Add(filename);
+                }
+            }
+
+            // Sort.
+            files.Sort();
+
+            // Return the result.
+            return files;
+        }
+
 
         private void button26_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+            //取得一層jpg檔
+
+            string foldername = @"C:\______test_files\__pic\_peony1";
+            string[] filenames = Directory.GetFiles(foldername, "*.jpg");
+
+
+            foreach (string filename in filenames)
+            {
+                richTextBox1.Text += "取得檔案 : " + filename + "\n";
+
+
+            }
+
+
+
         }
 
         private void button27_Click(object sender, EventArgs e)
