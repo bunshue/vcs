@@ -1,4 +1,4 @@
-﻿namespace vcs_PictureThumbnailGet
+﻿namespace vcs_PictureThumbnail1
 {
     partial class Form1
     {

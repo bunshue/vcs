@@ -152,7 +152,6 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::機智問答網路文字版_client.Properties.Resources.River_Sumida;
             this.ClientSize = new System.Drawing.Size(567, 429);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.listBox1);

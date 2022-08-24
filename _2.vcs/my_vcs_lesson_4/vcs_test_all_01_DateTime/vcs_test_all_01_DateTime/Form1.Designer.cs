@@ -145,6 +145,8 @@
             this.bt_dtp_get = new System.Windows.Forms.Button();
             this.bt_dtp_set = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.bt_special_11 = new System.Windows.Forms.Button();
+            this.bt_special_10 = new System.Windows.Forms.Button();
             this.bt_special_09 = new System.Windows.Forms.Button();
             this.bt_special_08 = new System.Windows.Forms.Button();
             this.bt_special_07 = new System.Windows.Forms.Button();
@@ -192,6 +194,9 @@
             this.bt_countdown = new System.Windows.Forms.Button();
             this.tb_countdown = new System.Windows.Forms.TextBox();
             this.timer_countdown = new System.Windows.Forms.Timer(this.components);
+            this.groupBox13 = new System.Windows.Forms.GroupBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -204,6 +209,8 @@
             this.groupBox10.SuspendLayout();
             this.groupBox11.SuspendLayout();
             this.groupBox12.SuspendLayout();
+            this.groupBox13.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -434,7 +441,7 @@
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox1.Location = new System.Drawing.Point(23, 71);
+            this.textBox1.Location = new System.Drawing.Point(23, 67);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(164, 27);
             this.textBox1.TabIndex = 22;
@@ -587,7 +594,7 @@
             // dateTimePicker1
             // 
             this.dateTimePicker1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.dateTimePicker1.Location = new System.Drawing.Point(23, 104);
+            this.dateTimePicker1.Location = new System.Drawing.Point(23, 100);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(164, 30);
             this.dateTimePicker1.TabIndex = 37;
@@ -714,7 +721,7 @@
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox2.Location = new System.Drawing.Point(23, 28);
+            this.textBox2.Location = new System.Drawing.Point(23, 24);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(164, 36);
             this.textBox2.TabIndex = 49;
@@ -1085,6 +1092,7 @@
             this.textBox7.ReadOnly = true;
             this.textBox7.Size = new System.Drawing.Size(232, 62);
             this.textBox7.TabIndex = 23;
+            this.textBox7.TextChanged += new System.EventHandler(this.textBox7_TextChanged);
             // 
             // textBox8
             // 
@@ -1253,7 +1261,7 @@
             // bt0
             // 
             this.bt0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt0.Location = new System.Drawing.Point(192, 65);
+            this.bt0.Location = new System.Drawing.Point(192, 61);
             this.bt0.Name = "bt0";
             this.bt0.Size = new System.Drawing.Size(60, 40);
             this.bt0.TabIndex = 69;
@@ -1264,7 +1272,7 @@
             // bt1
             // 
             this.bt1.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt1.Location = new System.Drawing.Point(193, 24);
+            this.bt1.Location = new System.Drawing.Point(193, 20);
             this.bt1.Name = "bt1";
             this.bt1.Size = new System.Drawing.Size(60, 40);
             this.bt1.TabIndex = 70;
@@ -1275,7 +1283,7 @@
             // bt2
             // 
             this.bt2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt2.Location = new System.Drawing.Point(193, 104);
+            this.bt2.Location = new System.Drawing.Point(193, 100);
             this.bt2.Name = "bt2";
             this.bt2.Size = new System.Drawing.Size(60, 40);
             this.bt2.TabIndex = 71;
@@ -1380,9 +1388,9 @@
             // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.Location = new System.Drawing.Point(23, 74);
+            this.dateTimePicker2.Location = new System.Drawing.Point(13, 72);
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(200, 22);
+            this.dateTimePicker2.Size = new System.Drawing.Size(179, 22);
             this.dateTimePicker2.TabIndex = 83;
             // 
             // groupBox5
@@ -1392,7 +1400,7 @@
             this.groupBox5.Controls.Add(this.dateTimePicker2);
             this.groupBox5.Location = new System.Drawing.Point(705, 298);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(245, 134);
+            this.groupBox5.Size = new System.Drawing.Size(205, 103);
             this.groupBox5.TabIndex = 84;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "DateTimePicker";
@@ -1400,7 +1408,7 @@
             // bt_dtp_get
             // 
             this.bt_dtp_get.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_dtp_get.Location = new System.Drawing.Point(135, 22);
+            this.bt_dtp_get.Location = new System.Drawing.Point(104, 24);
             this.bt_dtp_get.Name = "bt_dtp_get";
             this.bt_dtp_get.Size = new System.Drawing.Size(88, 35);
             this.bt_dtp_get.TabIndex = 86;
@@ -1411,7 +1419,7 @@
             // bt_dtp_set
             // 
             this.bt_dtp_set.Font = new System.Drawing.Font("新細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_dtp_set.Location = new System.Drawing.Point(23, 22);
+            this.bt_dtp_set.Location = new System.Drawing.Point(10, 24);
             this.bt_dtp_set.Name = "bt_dtp_set";
             this.bt_dtp_set.Size = new System.Drawing.Size(88, 35);
             this.bt_dtp_set.TabIndex = 85;
@@ -1421,6 +1429,8 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.bt_special_11);
+            this.groupBox6.Controls.Add(this.bt_special_10);
             this.groupBox6.Controls.Add(this.bt_special_09);
             this.groupBox6.Controls.Add(this.bt_special_08);
             this.groupBox6.Controls.Add(this.bt_special_07);
@@ -1433,17 +1443,37 @@
             this.groupBox6.Controls.Add(this.bt_special_00);
             this.groupBox6.Location = new System.Drawing.Point(702, 2);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(266, 293);
+            this.groupBox6.Size = new System.Drawing.Size(396, 149);
             this.groupBox6.TabIndex = 85;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "特殊曆法";
             // 
+            // bt_special_11
+            // 
+            this.bt_special_11.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_special_11.Location = new System.Drawing.Point(262, 111);
+            this.bt_special_11.Name = "bt_special_11";
+            this.bt_special_11.Size = new System.Drawing.Size(120, 35);
+            this.bt_special_11.TabIndex = 93;
+            this.bt_special_11.UseVisualStyleBackColor = true;
+            this.bt_special_11.Click += new System.EventHandler(this.bt_special_11_Click);
+            // 
+            // bt_special_10
+            // 
+            this.bt_special_10.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_special_10.Location = new System.Drawing.Point(265, 78);
+            this.bt_special_10.Name = "bt_special_10";
+            this.bt_special_10.Size = new System.Drawing.Size(120, 35);
+            this.bt_special_10.TabIndex = 92;
+            this.bt_special_10.UseVisualStyleBackColor = true;
+            this.bt_special_10.Click += new System.EventHandler(this.bt_special_10_Click);
+            // 
             // bt_special_09
             // 
             this.bt_special_09.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_special_09.Location = new System.Drawing.Point(140, 227);
+            this.bt_special_09.Location = new System.Drawing.Point(262, 43);
             this.bt_special_09.Name = "bt_special_09";
-            this.bt_special_09.Size = new System.Drawing.Size(120, 40);
+            this.bt_special_09.Size = new System.Drawing.Size(120, 35);
             this.bt_special_09.TabIndex = 91;
             this.bt_special_09.Text = "農曆";
             this.bt_special_09.UseVisualStyleBackColor = true;
@@ -1452,9 +1482,9 @@
             // bt_special_08
             // 
             this.bt_special_08.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_special_08.Location = new System.Drawing.Point(140, 177);
+            this.bt_special_08.Location = new System.Drawing.Point(262, 12);
             this.bt_special_08.Name = "bt_special_08";
-            this.bt_special_08.Size = new System.Drawing.Size(120, 40);
+            this.bt_special_08.Size = new System.Drawing.Size(120, 35);
             this.bt_special_08.TabIndex = 90;
             this.bt_special_08.Text = "生肖/星座";
             this.bt_special_08.UseVisualStyleBackColor = true;
@@ -1463,9 +1493,9 @@
             // bt_special_07
             // 
             this.bt_special_07.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_special_07.Location = new System.Drawing.Point(139, 130);
+            this.bt_special_07.Location = new System.Drawing.Point(139, 109);
             this.bt_special_07.Name = "bt_special_07";
-            this.bt_special_07.Size = new System.Drawing.Size(120, 40);
+            this.bt_special_07.Size = new System.Drawing.Size(120, 35);
             this.bt_special_07.TabIndex = 89;
             this.bt_special_07.Text = "十二生肖 年";
             this.bt_special_07.UseVisualStyleBackColor = true;
@@ -1474,9 +1504,9 @@
             // bt_special_06
             // 
             this.bt_special_06.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_special_06.Location = new System.Drawing.Point(139, 75);
+            this.bt_special_06.Location = new System.Drawing.Point(139, 78);
             this.bt_special_06.Name = "bt_special_06";
-            this.bt_special_06.Size = new System.Drawing.Size(120, 40);
+            this.bt_special_06.Size = new System.Drawing.Size(120, 35);
             this.bt_special_06.TabIndex = 88;
             this.bt_special_06.Text = "農曆";
             this.bt_special_06.UseVisualStyleBackColor = true;
@@ -1485,9 +1515,9 @@
             // bt_special_05
             // 
             this.bt_special_05.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_special_05.Location = new System.Drawing.Point(139, 23);
+            this.bt_special_05.Location = new System.Drawing.Point(139, 47);
             this.bt_special_05.Name = "bt_special_05";
-            this.bt_special_05.Size = new System.Drawing.Size(120, 40);
+            this.bt_special_05.Size = new System.Drawing.Size(120, 35);
             this.bt_special_05.TabIndex = 87;
             this.bt_special_05.Text = "農曆";
             this.bt_special_05.UseVisualStyleBackColor = true;
@@ -1496,9 +1526,9 @@
             // bt_special_04
             // 
             this.bt_special_04.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_special_04.Location = new System.Drawing.Point(13, 228);
+            this.bt_special_04.Location = new System.Drawing.Point(136, 12);
             this.bt_special_04.Name = "bt_special_04";
-            this.bt_special_04.Size = new System.Drawing.Size(120, 40);
+            this.bt_special_04.Size = new System.Drawing.Size(120, 35);
             this.bt_special_04.TabIndex = 86;
             this.bt_special_04.Text = "時辰";
             this.bt_special_04.UseVisualStyleBackColor = true;
@@ -1507,9 +1537,9 @@
             // bt_special_03
             // 
             this.bt_special_03.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_special_03.Location = new System.Drawing.Point(13, 177);
+            this.bt_special_03.Location = new System.Drawing.Point(13, 110);
             this.bt_special_03.Name = "bt_special_03";
-            this.bt_special_03.Size = new System.Drawing.Size(120, 40);
+            this.bt_special_03.Size = new System.Drawing.Size(120, 35);
             this.bt_special_03.TabIndex = 85;
             this.bt_special_03.Text = "農曆";
             this.bt_special_03.UseVisualStyleBackColor = true;
@@ -1518,9 +1548,9 @@
             // bt_special_02
             // 
             this.bt_special_02.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_special_02.Location = new System.Drawing.Point(13, 128);
+            this.bt_special_02.Location = new System.Drawing.Point(13, 77);
             this.bt_special_02.Name = "bt_special_02";
-            this.bt_special_02.Size = new System.Drawing.Size(120, 40);
+            this.bt_special_02.Size = new System.Drawing.Size(120, 35);
             this.bt_special_02.TabIndex = 84;
             this.bt_special_02.Text = "農曆";
             this.bt_special_02.UseVisualStyleBackColor = true;
@@ -1529,9 +1559,9 @@
             // bt_special_01
             // 
             this.bt_special_01.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_special_01.Location = new System.Drawing.Point(13, 76);
+            this.bt_special_01.Location = new System.Drawing.Point(13, 46);
             this.bt_special_01.Name = "bt_special_01";
-            this.bt_special_01.Size = new System.Drawing.Size(120, 40);
+            this.bt_special_01.Size = new System.Drawing.Size(120, 35);
             this.bt_special_01.TabIndex = 83;
             this.bt_special_01.Text = "日本";
             this.bt_special_01.UseVisualStyleBackColor = true;
@@ -1540,9 +1570,9 @@
             // bt_special_00
             // 
             this.bt_special_00.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_special_00.Location = new System.Drawing.Point(13, 24);
+            this.bt_special_00.Location = new System.Drawing.Point(13, 13);
             this.bt_special_00.Name = "bt_special_00";
-            this.bt_special_00.Size = new System.Drawing.Size(120, 40);
+            this.bt_special_00.Size = new System.Drawing.Size(120, 35);
             this.bt_special_00.TabIndex = 82;
             this.bt_special_00.Text = "民國";
             this.bt_special_00.UseVisualStyleBackColor = true;
@@ -1627,7 +1657,7 @@
             this.groupBox8.Controls.Add(this.bt2);
             this.groupBox8.Location = new System.Drawing.Point(705, 435);
             this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(274, 157);
+            this.groupBox8.Size = new System.Drawing.Size(274, 145);
             this.groupBox8.TabIndex = 87;
             this.groupBox8.TabStop = false;
             this.groupBox8.Text = "DateTimePicker";
@@ -1946,11 +1976,38 @@
             this.timer_countdown.Interval = 1000;
             this.timer_countdown.Tick += new System.EventHandler(this.timer_countdown_Tick);
             // 
+            // groupBox13
+            // 
+            this.groupBox13.Controls.Add(this.monthCalendar1);
+            this.groupBox13.Controls.Add(this.pictureBox1);
+            this.groupBox13.Location = new System.Drawing.Point(705, 163);
+            this.groupBox13.Name = "groupBox13";
+            this.groupBox13.Size = new System.Drawing.Size(393, 132);
+            this.groupBox13.TabIndex = 112;
+            this.groupBox13.TabStop = false;
+            this.groupBox13.Text = "月相";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(23, 21);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(107, 100);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
+            // monthCalendar1
+            // 
+            this.monthCalendar1.Location = new System.Drawing.Point(162, 10);
+            this.monthCalendar1.Name = "monthCalendar1";
+            this.monthCalendar1.TabIndex = 1;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1660, 1061);
+            this.Controls.Add(this.groupBox13);
             this.Controls.Add(this.groupBox12);
             this.Controls.Add(this.groupBox11);
             this.Controls.Add(this.groupBox10);
@@ -2066,6 +2123,8 @@
             this.groupBox11.PerformLayout();
             this.groupBox12.ResumeLayout(false);
             this.groupBox12.PerformLayout();
+            this.groupBox13.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2235,6 +2294,11 @@
         private System.Windows.Forms.Button bt_countdown;
         private System.Windows.Forms.TextBox tb_countdown;
         private System.Windows.Forms.Timer timer_countdown;
+        private System.Windows.Forms.Button bt_special_11;
+        private System.Windows.Forms.Button bt_special_10;
+        private System.Windows.Forms.GroupBox groupBox13;
+        private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

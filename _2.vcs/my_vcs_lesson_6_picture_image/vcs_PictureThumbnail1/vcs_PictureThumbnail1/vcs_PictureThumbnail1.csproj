@@ -8,8 +8,8 @@
     <ProjectGuid>{8321CB33-C45F-4973-84DE-E9D5C2FAA10A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_PictureThumbnailGet</RootNamespace>
-    <AssemblyName>vcs_PictureThumbnailGet</AssemblyName>
+    <RootNamespace>vcs_PictureThumbnail1</RootNamespace>
+    <AssemblyName>vcs_PictureThumbnail1</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>

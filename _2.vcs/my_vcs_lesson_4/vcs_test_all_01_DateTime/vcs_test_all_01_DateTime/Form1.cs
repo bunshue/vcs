@@ -156,25 +156,26 @@ namespace vcs_test_all_01_DateTime
             button78.Location = new Point(x_st + dx * 3, y_st + dy * 18);
             button79.Location = new Point(x_st + dx * 3, y_st + dy * 19);
 
-            groupBox5.Location = new Point(x_st + dx * 4, y_st + dy * 6);
+            groupBox5.Location = new Point(x_st + dx * 4, y_st + dy * 6+30);
             groupBox6.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             groupBox8.Location = new Point(x_st + dx * 4, y_st + dy * 8 + 30);
             groupBox7.Location = new Point(x_st + dx * 4, y_st + dy * 12 - 20);
             groupBox9.Location = new Point(x_st + dx * 4 + 145, y_st + dy * 12 - 20);
             groupBox10.Location = new Point(x_st + dx * 4, y_st + dy * 16 + 45);
+            groupBox13.Location = new Point(x_st + dx * 4, y_st + dy * 3 + 30);
 
-            groupBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
-            groupBox2.Location = new Point(x_st + dx * 6, y_st + dy * 5);
-            groupBox4.Location = new Point(x_st + dx * 6, y_st + dy * 10);
-            groupBox3.Location = new Point(x_st + dx * 6, y_st + dy * 12);
-            groupBox11.Location = new Point(x_st + dx * 6, y_st + dy * 14);
-            groupBox12.Location = new Point(x_st + dx * 6 + 100, y_st + dy * 17);
+            groupBox1.Location = new Point(x_st + dx * 6+35, y_st + dy * 0);
+            groupBox2.Location = new Point(x_st + dx * 6 + 35, y_st + dy * 5);
+            groupBox4.Location = new Point(x_st + dx * 6 + 35, y_st + dy * 10);
+            groupBox3.Location = new Point(x_st + dx * 6 + 35, y_st + dy * 12);
+            groupBox11.Location = new Point(x_st + dx * 6 + 35, y_st + dy * 14);
+            groupBox12.Location = new Point(x_st + dx * 6 + 110, y_st + dy * 17);
 
-            textBox2.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            textBox2.Location = new Point(x_st + dx * 0, y_st + dy * 0+10);
             bt1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            textBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 40);
+            textBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 40+10);
             bt0.Location = new Point(x_st + dx * 1, y_st + dy * 0 + 40);
-            dateTimePicker1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 80);
+            dateTimePicker1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 80+10);
             bt2.Location = new Point(x_st + dx * 1, y_st + dy * 0 + 80);
 
             label1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 20);
@@ -186,6 +187,37 @@ namespace vcs_test_all_01_DateTime
             richTextBox1.Size = new Size(520, 1040);
             richTextBox1.Location = new Point(x_st + dx * 8 - 60, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            x_st = 10;
+            y_st = 20;
+            dx = 120 + 5;
+            dy = 35 + 5;
+
+            bt_special_00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_special_01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_special_02.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_special_03.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            bt_special_04.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_special_05.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            bt_special_06.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            bt_special_07.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            bt_special_08.Location = new Point(x_st + dx * 2, y_st + dy * 0);
+            bt_special_09.Location = new Point(x_st + dx * 2, y_st + dy * 1);
+            bt_special_10.Location = new Point(x_st + dx * 2, y_st + dy * 2);
+            bt_special_11.Location = new Point(x_st + dx * 2, y_st + dy * 3);
+            groupBox6.Size = new Size(10 * 2 + 120 * 3+5*2, 20 + 35 * 4 + 5 * 3+10);
+            groupBox13.Size = new Size(10 * 2 + 120 * 3 + 5 * 2, 20 + 35 * 4 + 5 * 3 + 10-30);
+
+
+
+
+            dx = 120 + 5;
+            dy = 40 + 5;
+            bt_weekday_00.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_weekday_01.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_weekday_02.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_weekday_03.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            bt_weekday_04.Location = new Point(x_st + dx * 0, y_st + dy * 4);
 
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
@@ -2565,6 +2597,16 @@ DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元999
             richTextBox1.Text += "農曆日 = " + date.LunarDay + "\n";
         }
 
+        private void bt_special_10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bt_special_11_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void bt_weekday_00_Click(object sender, EventArgs e)
         {
             string[] Day = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
@@ -2773,6 +2815,11 @@ DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元999
             string diffSec = Convert.ToString(diffTime.Seconds);
             tb_countdown.Text = "距離 " + dtTarget.ToString() + " 還有 " + diffHour + " 時 " + diffMin + " 分 " + diffSec + " 秒";
 
+
+        }
+
+        private void textBox7_TextChanged(object sender, EventArgs e)
+        {
 
         }
 

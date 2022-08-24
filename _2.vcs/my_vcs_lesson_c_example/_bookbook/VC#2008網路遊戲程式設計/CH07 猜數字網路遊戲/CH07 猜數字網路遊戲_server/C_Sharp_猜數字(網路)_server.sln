@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 10.00
-# Visual Studio 2008
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "C_Sharp_猜數字(網路)_server", "C_Sharp_猜數字(網路)_server.csproj", "{9AF03F21-E02B-48C9-AB2E-15735D640F04}"
 EndProject
 Global

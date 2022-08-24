@@ -7,20 +7,15 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-using System.DirectoryServices;
 using System.Net;
 using System.Net.Sockets;
 using System.Threading;
+using System.DirectoryServices;
 
 namespace ScanPort
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         //實例化DirectoryEntry對象，以便獲得局域網組名和計算機名
         DirectoryEntry DEMain = new DirectoryEntry("WinNT:");
         TcpClient TClient = null;       //實例化連接偵聽對象
@@ -30,6 +25,11 @@ namespace ScanPort
         int intport = 0;                //記錄已用端口號
         int intstart = 0;               //掃描的開始端口號
         int intend = 0;                 //掃描的結束端口號
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
 
         private void Form1_Load(object sender, EventArgs e)
         {

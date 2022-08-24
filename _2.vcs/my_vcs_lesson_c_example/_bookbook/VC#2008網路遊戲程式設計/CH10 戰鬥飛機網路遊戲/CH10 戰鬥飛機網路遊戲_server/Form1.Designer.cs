@@ -95,7 +95,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(124, 22);
             this.textBox1.TabIndex = 6;
-            this.textBox1.Text = "192.168.2.109";
+            this.textBox1.Text = "192.168.2.114";
             // 
             // Form1
             // 

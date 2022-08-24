@@ -13,8 +13,8 @@ namespace MoonPhase
     /// </summary>
     public class frmMoon : System.Windows.Forms.Form
     {
-        private System.Windows.Forms.MonthCalendar MyCalendar;
-        private System.Windows.Forms.PictureBox PicMoon;
+        private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button btnToDay;
         private System.Windows.Forms.Label lblAge;
         private System.ComponentModel.IContainer components = null;
@@ -54,13 +54,13 @@ namespace MoonPhase
         private void InitializeComponent()
         {
             this.btnToDay = new System.Windows.Forms.Button();
-            this.MyCalendar = new System.Windows.Forms.MonthCalendar();
+            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
             this.lblAge = new System.Windows.Forms.Label();
-            this.PicMoon = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.PicMoon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // btnToDay
@@ -75,14 +75,14 @@ namespace MoonPhase
             this.btnToDay.Text = "Moon today";
             this.btnToDay.Click += new System.EventHandler(this.btnToDay_Click);
             // 
-            // MyCalendar
+            // monthCalendar1
             // 
-            this.MyCalendar.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.MyCalendar.Location = new System.Drawing.Point(264, 9);
-            this.MyCalendar.Name = "MyCalendar";
-            this.MyCalendar.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.MyCalendar.TabIndex = 11;
-            this.MyCalendar.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.MyCalendar_DateChanged);
+            this.monthCalendar1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.monthCalendar1.Location = new System.Drawing.Point(264, 9);
+            this.monthCalendar1.Name = "monthCalendar1";
+            this.monthCalendar1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.monthCalendar1.TabIndex = 11;
+            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
             // 
             // lblAge
             // 
@@ -95,15 +95,15 @@ namespace MoonPhase
             this.lblAge.TabIndex = 12;
             this.lblAge.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // PicMoon
+            // pictureBox1
             // 
-            this.PicMoon.BackColor = System.Drawing.Color.Navy;
-            this.PicMoon.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.PicMoon.Location = new System.Drawing.Point(16, 9);
-            this.PicMoon.Name = "PicMoon";
-            this.PicMoon.Size = new System.Drawing.Size(180, 180);
-            this.PicMoon.TabIndex = 13;
-            this.PicMoon.TabStop = false;
+            this.pictureBox1.BackColor = System.Drawing.Color.Navy;
+            this.pictureBox1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.pictureBox1.Location = new System.Drawing.Point(16, 9);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(180, 180);
+            this.pictureBox1.TabIndex = 13;
+            this.pictureBox1.TabStop = false;
             // 
             // textBox1
             // 
@@ -141,9 +141,9 @@ namespace MoonPhase
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.PicMoon);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lblAge);
-            this.Controls.Add(this.MyCalendar);
+            this.Controls.Add(this.monthCalendar1);
             this.Controls.Add(this.btnToDay);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.MaximizeBox = false;
@@ -152,7 +152,7 @@ namespace MoonPhase
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "月相";
             this.Load += new System.EventHandler(this.frmMoon_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.PicMoon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -226,9 +226,9 @@ namespace MoonPhase
 
         public void ClearDraw()
         {
-            if (PicMoon.Image != null)
+            if (pictureBox1.Image != null)
             {
-                PicMoon.Image = null;
+                pictureBox1.Image = null;
             }
         }
 
@@ -241,11 +241,11 @@ namespace MoonPhase
 
             Phase = ip;
 
-            // Width of 'bitmap1' Object = Width of 'PicMoon' control
-            int PageWidth = PicMoon.Width;
-            // Height of 'bitmap1' Object = Height of 'PicMoon' control
-            int PageHeight = PicMoon.Height;
-            // Initiate 'bitmap1' Object with size = size of control 'PicMoon' control
+            // Width of 'bitmap1' Object = Width of 'pictureBox1' control
+            int PageWidth = pictureBox1.Width;
+            // Height of 'bitmap1' Object = Height of 'pictureBox1' control
+            int PageHeight = pictureBox1.Height;
+            // Initiate 'bitmap1' Object with size = size of control 'pictureBox1' control
             Bitmap bitmap1 = new Bitmap(PageWidth, PageHeight);
             // Create graphics object for alteration.
             Graphics g = Graphics.FromImage(bitmap1);
@@ -285,7 +285,7 @@ namespace MoonPhase
             }
 
             // Display the bitmap in the picture box.
-            PicMoon.Image = bitmap1;
+            pictureBox1.Image = bitmap1;
 
             // Release graphics object
             PenB.Dispose();
@@ -298,9 +298,9 @@ namespace MoonPhase
         {
             //user select date from MonthCalendar control
             int Aday, Amonth, Ayear;
-            Aday = this.MyCalendar.SelectionStart.Day;
-            Amonth = this.MyCalendar.SelectionStart.Month;
-            Ayear = this.MyCalendar.SelectionStart.Year;
+            Aday = this.monthCalendar1.SelectionStart.Day;
+            Amonth = this.monthCalendar1.SelectionStart.Month;
+            Ayear = this.monthCalendar1.SelectionStart.Year;
             this.MoonAge(Aday, Amonth, Ayear);
         }
 
@@ -309,7 +309,7 @@ namespace MoonPhase
             richTextBox1.Text += "ShowMoon\n";
             //draw moon and print age in selected days
             this.YourChoice(); //select date
-            this.ClearDraw(); //clear PicMoon PictureBox
+            this.ClearDraw(); //clear pictureBox1 PictureBox
             this.DrawMoon(); //draw the moon
             this.PrintAge(); //print age of moon in days
         }
@@ -319,7 +319,7 @@ namespace MoonPhase
             this.ShowMoon();
         }
 
-        private void MyCalendar_DateChanged(object sender, System.Windows.Forms.DateRangeEventArgs e)
+        private void monthCalendar1_DateChanged(object sender, System.Windows.Forms.DateRangeEventArgs e)
         {
             this.ShowMoon();
         }
@@ -327,7 +327,7 @@ namespace MoonPhase
         private void btnToDay_Click(object sender, System.EventArgs e)
         {
             //set the date of today
-            this.MyCalendar.SetDate(this.MyCalendar.TodayDate.Date);
+            this.monthCalendar1.SetDate(this.monthCalendar1.TodayDate.Date);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -337,7 +337,7 @@ namespace MoonPhase
             if (conversionSuccessful == true)
             {
                 richTextBox1.Text += "得到DateTime資料： " + dt.ToString() + "\n";
-                this.MyCalendar.SetDate(dt);
+                this.monthCalendar1.SetDate(dt);
 
             }
             else

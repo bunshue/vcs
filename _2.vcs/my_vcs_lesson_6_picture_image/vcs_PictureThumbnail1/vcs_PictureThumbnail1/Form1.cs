@@ -11,7 +11,7 @@ using System.IO;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;     //for SmoothingMode, CompositingQuality, InterpolationMode
 
-namespace vcs_PictureThumbnailGet
+namespace vcs_PictureThumbnail1
 {
     public partial class Form1 : Form
     {
@@ -164,7 +164,7 @@ namespace vcs_PictureThumbnailGet
                 }
                 catch (Exception ex)
                 {
-                    //richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                    richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
                 }
             }
 
@@ -215,10 +215,9 @@ namespace vcs_PictureThumbnailGet
             }
             catch (Exception ex)
             {
-                //Response.Write(ex.ToString());
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
             }
             richTextBox1.Text += "完成\n";
-
         }
 
         private void button4_Click(object sender, EventArgs e)
