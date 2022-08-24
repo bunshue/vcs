@@ -455,6 +455,7 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(160, 70);
             this.button26.TabIndex = 55;
+            this.button26.Text = "羅列出磁盤信息";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 

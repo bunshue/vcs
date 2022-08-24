@@ -14,11 +14,6 @@ namespace howto_justify_text
 {
     public partial class Form1 : Form
     {
-        public Form1()
-        {
-            InitializeComponent();
-        }
-
         // Text justification.
         public enum TextJustification
         {
@@ -36,6 +31,17 @@ namespace howto_justify_text
         private const float ParagraphIndent = 40f;
         private const float LineSpacing = 1f;
         private const float ExtraParagraphSpacing = 0.5f;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
 
         // The text to display.
         private const string MessageText =
@@ -321,5 +327,6 @@ namespace howto_justify_text
             pictureBox_justify2.Refresh();
 
         }
+
     }
 }

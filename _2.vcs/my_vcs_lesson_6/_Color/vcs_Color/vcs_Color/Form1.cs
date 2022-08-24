@@ -901,6 +901,31 @@ namespace vcs_Color
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //DrawColorMap
+            int w = pictureBox1.ClientSize.Width;
+            int h = pictureBox1.ClientSize.Height;
+
+            Bitmap bmp = new Bitmap(w, h);
+            Graphics g = Graphics.FromImage(bmp);
+            g.Clear(Color.Pink);
+
+            SolidBrush b = new SolidBrush(Color.FromArgb(30, Color.Red));
+
+
+            int i;
+            for (i = 0; i < 60; i++)
+            {
+                g.FillRectangle(b, 10 * i, 100 + 5 * i, 100, 100);
+
+
+            }
+
+
+            pictureBox1.Image = bmp;
+
+
+
+
 
         }
 

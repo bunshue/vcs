@@ -110,6 +110,12 @@ namespace vcs_Chart0
         {
             //畫chart, 自定義座標軸刻度標籤
 
+            //清空chart
+            chart1.Series.Clear();
+            chart1.ChartAreas[0].AxisX.CustomLabels.Clear();
+
+            //不知道如何自動邊界
+
             Series s1 = new Series();
             Series s2 = new Series();
             Random r = new Random();
@@ -118,6 +124,7 @@ namespace vcs_Chart0
                 s1.Points.AddXY(i, r.Next(20, 30));
                 s2.Points.AddXY(i, r.Next(10, 30));
             }
+
             chart1.Series.Add(s1);
             chart1.Series.Add(s2);
             chart1.ChartAreas[0].AxisX.MajorGrid.LineColor = Color.Green;

@@ -171,6 +171,7 @@
             this.Controls.Add(this.pictureBox_justify2);
             this.Name = "Form1";
             this.Text = "howto_justify_text";
+            this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_justify2)).EndInit();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();

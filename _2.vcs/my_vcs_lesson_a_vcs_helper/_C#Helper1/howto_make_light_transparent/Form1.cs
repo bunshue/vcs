@@ -17,7 +17,8 @@ namespace howto_make_light_transparent
         // The original image.
         Bitmap bitmap1 = null;
 
-        string filename = "C:\\______test_files\\bear.jpg";
+        //string filename = "C:\\______test_files\\bear.jpg";
+        string filename = @"C:\______test_files\elephant.jpg";
 
         public Form1()
         {

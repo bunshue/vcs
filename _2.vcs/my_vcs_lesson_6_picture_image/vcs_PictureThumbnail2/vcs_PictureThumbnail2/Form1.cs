@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 
@@ -23,6 +24,77 @@ namespace vcs_PictureThumbnail2
         {
 
         }
+
+        private void button0_Click(object sender, EventArgs e)
+        {
+            //根據原圖生成縮略圖
+            string filename = @"C:\______test_files\picture1.jpg";
+
+            richTextBox1.Text += "圖檔 轉 Bitmap\n";
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+
+            richTextBox1.Text += "Bitmap 轉 MemoryStream\n";
+            MemoryStream ms = new MemoryStream();
+            bitmap1.Save(ms, ImageFormat.Jpeg);
+
+            richTextBox1.Text += "MemoryStream 轉 拜列\n";
+            byte[] pic_array1 = ms.ToArray();
+
+
+            byte[] pic_array2 = GenerateThumbImg(pic_array1, bitmap1.Width / 2, bitmap1.Height / 2);
+
+            //then....  拜列 轉圖片~~~~
+
+        }
+
+
+        //C#根據原圖生成縮略圖
+        /// <summary>
+        /// 生成縮略圖
+        /// </summary>
+        /// <param name="imgBuffer">原圖byte[]</param>
+        /// <param name="width">生成的縮略圖寬度</param>
+        /// <param name="height">生成的縮略圖高度</param>
+        /// <returns></returns>
+        private byte[] GenerateThumbImg(byte[] imgBuffer, int width, int height)
+        {
+            MemoryStream imgStream = null;
+            MemoryStream thumbStream = new MemoryStream(); ;
+            Image img = null;
+            Image thumbImg = null;
+            Graphics g = null;
+            try
+            {
+                imgStream = new MemoryStream(imgBuffer);
+                img = Image.FromStream(imgStream);
+                thumbImg = new Bitmap(img, width, height);
+                g = Graphics.FromImage(thumbImg);
+                g.DrawImage(thumbImg, 0, 0, width, height);
+                /*g.DrawImage(img, new Rectangle(0, 0, width, height),
+                    0, 0, width, height, GraphicsUnit.Pixel);*/
+                thumbImg.Save(thumbStream, ImageFormat.Jpeg);
+                return thumbStream.ToArray();
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
+                return null;
+            }
+            finally
+            {
+                if (g != null)
+                    g.Dispose();
+                if (thumbImg != null)
+                    thumbImg.Dispose();
+                if (img != null)
+                    img.Dispose();
+                if (thumbStream != null)
+                    thumbStream.Close();
+                if (imgStream != null)
+                    imgStream.Close();
+            }
+        }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -99,7 +171,7 @@ namespace vcs_PictureThumbnail2
 
         public bool GetPicThumbnail(string sFile, int dWidth, int dHeight, int flag)
         {
-            System.Drawing.Image iSource = System.Drawing.Image.FromFile(sFile);
+            Image iSource = Image.FromFile(sFile);
             ImageFormat tFormat = iSource.RawFormat;
             int sW = iSource.Width, sH = iSource.Height;
 
@@ -159,5 +231,179 @@ namespace vcs_PictureThumbnail2
                 ob.Dispose();
             }
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            //圖片縮略圖
+            string filename1 = @"C:\______test_files\picture1.jpg";
+            string filename2 = Application.StartupPath + "\\thumb_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            bool result = getThumImage(filename1, 100, 3, filename2);
+            if (result == true)
+                richTextBox1.Text += "OK\n";
+            else
+                richTextBox1.Text += "FAIL\n";
+        }
+
+        /// <summary>
+        /// 生成縮略圖
+        /// </summary>
+        /// <param name="sourceFile">原始圖片文件</param>
+        /// <param name="quality">質量壓縮比</param>
+        /// <param name="multiple">收縮倍數</param>
+        /// <param name="outputFile">輸出文件名</param>
+        /// <returns>成功返回true,失敗則返回false</returns>
+        public static bool getThumImage(String sourceFile, long quality, int multiple, String outputFile)
+        {
+            try
+            {
+                long imageQuality = quality;
+                Bitmap sourceImage = new Bitmap(sourceFile);
+                ImageCodecInfo myImageCodecInfo = GetEncoderInfo("image/jpeg");
+                System.Drawing.Imaging.Encoder myEncoder = System.Drawing.Imaging.Encoder.Quality;
+                EncoderParameters myEncoderParameters = new EncoderParameters(1);
+                EncoderParameter myEncoderParameter = new EncoderParameter(myEncoder, imageQuality);
+                myEncoderParameters.Param[0] = myEncoderParameter;
+                float xWidth = sourceImage.Width;
+                float yWidth = sourceImage.Height;
+                Bitmap newImage = new Bitmap((int)(xWidth / multiple), (int)(yWidth / multiple));
+                Graphics g = Graphics.FromImage(newImage);
+
+                g.DrawImage(sourceImage, 0, 0, xWidth / multiple, yWidth / multiple);
+                g.Dispose();
+                newImage.Save(outputFile, myImageCodecInfo, myEncoderParameters);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// 獲取圖片編碼信息
+        /// </summary>
+        private static ImageCodecInfo GetEncoderInfo(String mimeType)
+        {
+            int j;
+            ImageCodecInfo[] encoders;
+            encoders = ImageCodecInfo.GetImageEncoders();
+            for (j = 0; j < encoders.Length; ++j)
+            {
+                if (encoders[j].MimeType == mimeType)
+                    return encoders[j];
+            }
+            return null;
+        }
+
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //產生縮略圖
+            //產生縮略圖
+            string filename1 = @"C:\______test_files\picture1.jpg";
+            string filename2 = Application.StartupPath + "\\thumb_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
+            bool result = getThumImage2(filename1, filename2);
+            if (result == true)
+                richTextBox1.Text += "OK\n";
+            else
+                richTextBox1.Text += "FAIL\n";
+        }
+
+        //　產生縮略圖
+
+        public bool ThumbnailCallback()
+        {
+            return true;
+        }
+
+        private bool getThumImage2(string imgPath, string thumbPath)
+        {
+            Image.GetThumbnailImageAbort myCallback = new Image.GetThumbnailImageAbort(ThumbnailCallback);
+            Image img = Image.FromFile(imgPath);　//　通過文件構造
+            //生成縮略圖
+            Image myThumbnail = img.GetThumbnailImage(100, 50, myCallback, IntPtr.Zero);
+            myThumbnail.Save(thumbPath);　//　保存縮略圖
+            return true;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //減少圖片文件大小和尺寸
+            string filename = @"C:\______test_files\picture1.jpg";
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            pictureBox1.Image = reduce_bitmap(bitmap1, 80);
+            //pictureBox2.Image = reduce_bitmap(bitmap1, 50);
+            //pictureBox3.Image = reduce_bitmap(bitmap1, 20);
+        }
+
+        Bitmap reduce_bitmap(Bitmap bitmap1, int percent)
+        {
+            //C#減少圖片文件大小和尺寸
+
+            //生成80*100的縮略圖
+            int W = bitmap1.Width;
+            int H = bitmap1.Height;
+
+            int w = W * percent / 100;
+            int h = H * percent / 100;
+
+            Bitmap bitmap2 = (Bitmap)bitmap1.GetThumbnailImage(w, h, null, IntPtr.Zero);
+
+            return bitmap2;
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button10_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button12_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button13_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button14_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button15_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+
     }
 }

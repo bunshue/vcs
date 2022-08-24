@@ -128,6 +128,7 @@
             this.button46 = new System.Windows.Forms.Button();
             this.button47 = new System.Windows.Forms.Button();
             this.button48 = new System.Windows.Forms.Button();
+            this.textBox_ratio = new System.Windows.Forms.TextBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -1198,14 +1199,27 @@
             this.button48.Name = "button48";
             this.button48.Size = new System.Drawing.Size(180, 40);
             this.button48.TabIndex = 84;
+            this.button48.Text = "解讀以下比例";
             this.button48.UseVisualStyleBackColor = true;
             this.button48.Click += new System.EventHandler(this.button48_Click);
+            // 
+            // textBox_ratio
+            // 
+            this.textBox_ratio.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.textBox_ratio.Location = new System.Drawing.Point(1128, 319);
+            this.textBox_ratio.MaxLength = 8;
+            this.textBox_ratio.Name = "textBox_ratio";
+            this.textBox_ratio.Size = new System.Drawing.Size(180, 33);
+            this.textBox_ratio.TabIndex = 85;
+            this.textBox_ratio.Text = "16:9";
+            this.textBox_ratio.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1550, 958);
+            this.Controls.Add(this.textBox_ratio);
             this.Controls.Add(this.button48);
             this.Controls.Add(this.button47);
             this.Controls.Add(this.button46);
@@ -1390,6 +1404,7 @@
         private System.Windows.Forms.Button button46;
         private System.Windows.Forms.Button button47;
         private System.Windows.Forms.Button button48;
+        private System.Windows.Forms.TextBox textBox_ratio;
     }
 }
 

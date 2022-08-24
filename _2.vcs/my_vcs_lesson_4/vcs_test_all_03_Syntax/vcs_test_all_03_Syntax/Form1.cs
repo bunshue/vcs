@@ -190,6 +190,7 @@ namespace vcs_test_all_03_Syntax
             button46.Location = new Point(x_st + dx * 4, y_st + dy * 6);
             button47.Location = new Point(x_st + dx * 5, y_st + dy * 6);
             button48.Location = new Point(x_st + dx * 6, y_st + dy * 6);
+            textBox_ratio.Location = new Point(x_st + dx * 6, y_st + dy * 7);
 
             label11.Location = new Point(x_st + dx * 7, y_st + dy * 5 + 5);
             textBox_hex.Location = new Point(x_st + dx * 7 + 32, y_st + dy * 5);
@@ -1493,7 +1494,32 @@ namespace vcs_test_all_03_Syntax
 
         private void button48_Click(object sender, EventArgs e)
         {
+            //解讀比例
 
+            float aspect_ratio = GetAspectRatio(textBox_ratio.Text);
+            richTextBox1.Text += "解讀比例 : " + aspect_ratio.ToString() + "\n";
+        }
+
+        private float GetAspectRatio(string text)
+        {
+            try
+            {
+                // See if the text contains a colon.
+                if (text.Contains(":"))
+                {
+                    float width = float.Parse(text.Split(':')[0]);
+                    float height = float.Parse(text.Split(':')[1]);
+                    return width / height;
+                }
+                else
+                {
+                    return float.Parse(text);
+                }
+            }
+            catch
+            {
+                return 1;
+            }
         }
     }
 
@@ -1540,4 +1566,3 @@ namespace vcs_test_all_03_Syntax
         }
     }
 }
-

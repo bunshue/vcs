@@ -715,8 +715,7 @@ namespace vcs_Draw_Captcha1
                 myStr.Append(chars[rand.Next(chars.Length)]);
             }
             string text = myStr.ToString();
-            // 保存驗證碼到 session 中以便其他模塊使用
-            //this.Session["checkcode"] = text ;
+
             Size ImageSize = Size.Empty;
             Font myFont = new Font("MS Sans Serif", 20);
             // 計算驗證 碼圖片大小
