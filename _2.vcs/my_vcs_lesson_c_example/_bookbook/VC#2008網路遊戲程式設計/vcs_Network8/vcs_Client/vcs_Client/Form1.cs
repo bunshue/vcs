@@ -12,6 +12,7 @@ using System.Net.Sockets; //ServerSocket = new Socket(...)時使用
 using System.Threading;  //Thread時使用
 using System.Text;       //Encoding.Unicode.GetString(...) 時使用
 using System.IO;         //使用FileInfo類別，來建立一個檔案實體物件
+using System.Diagnostics;
 
 namespace vcs_Client
 {
@@ -33,7 +34,23 @@ namespace vcs_Client
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            /*
+            richTextBox1.Text += "關閉程式\n";
+            //Application.Exit();
+            try
+            {
+                System.Environment.Exit(0);
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息e41 : " + ex.Message + "\n";
+            }
+            */
 
+            //C# 強制關閉 Process
+            Process.GetCurrentProcess().Kill();
+
+            Application.Exit();
         }
 
         private void button1_Click(object sender, EventArgs e)

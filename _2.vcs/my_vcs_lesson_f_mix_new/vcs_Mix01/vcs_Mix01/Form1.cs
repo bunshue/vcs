@@ -122,6 +122,17 @@ namespace vcs_Mix01
         private void button0_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            int[] Choices;
+            int num_candidates = 10;
+            Choices = Extensions.RandomArrangement(num_candidates);
+
+            foreach (int i in Choices)
+            {
+                richTextBox1.Text += i.ToString() + " ";
+
+            }
+            richTextBox1.Text += "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -634,4 +645,32 @@ namespace vcs_Mix01
             show_button_text(sender);
         }
     }
+
+    //不重複之陣列
+    public static class Extensions
+    {
+        private static Random Rand = new Random();
+
+        // Randomize an array.
+        public static void Randomize<T>(this T[] items)
+        {
+            // For each spot in the array, pick
+            // a random item to swap into that spot.
+            for (int i = 0; i < items.Length - 1; i++)
+            {
+                int j = Rand.Next(i, items.Length);
+                T temp = items[i];
+                items[i] = items[j];
+                items[j] = temp;
+            }
+        }
+
+        public static int[] RandomArrangement(int num_items)
+        {
+            int[] items = Enumerable.Range(0, num_items).ToArray();
+            items.Randomize();
+            return items;
+        }
+    }
+
 }

@@ -8,11 +8,15 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Threading;
+using System.Diagnostics;
 
 namespace vcs_Thread_Example2
 {
     public partial class Form1 : Form
     {
+        private Thread m_worker;
+        private bool m_RunFlag = false;
+
         public Form1()
         {
             InitializeComponent();
@@ -25,13 +29,21 @@ namespace vcs_Thread_Example2
             Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
         }
 
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            //C# 強制關閉 Process
+            Process.GetCurrentProcess().Kill();
+
+            Application.Exit();
+
+
+        }
+
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
         }
 
-        private Thread m_worker;
-        private bool m_RunFlag = false;
         private void button1_Click(object sender, EventArgs e)
         {
             if (m_RunFlag == false)
@@ -60,5 +72,7 @@ namespace vcs_Thread_Example2
             }
         }
 
+
     }
 }
+

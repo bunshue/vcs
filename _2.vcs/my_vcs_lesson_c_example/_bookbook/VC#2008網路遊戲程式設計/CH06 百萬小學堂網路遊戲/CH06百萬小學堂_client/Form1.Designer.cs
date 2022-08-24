@@ -33,6 +33,7 @@
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.label4 = new System.Windows.Forms.Label();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -148,11 +149,20 @@
             // 
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(562, 12);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(274, 401);
+            this.richTextBox1.TabIndex = 10;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(567, 429);
+            this.ClientSize = new System.Drawing.Size(848, 429);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.label3);
@@ -183,6 +193,7 @@
         private System.Windows.Forms.Label label4;
         public System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

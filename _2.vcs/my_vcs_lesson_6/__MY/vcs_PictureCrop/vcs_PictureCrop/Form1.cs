@@ -93,7 +93,7 @@ namespace vcs_PictureCrop
             int dx;
             int dy;
 
-            int pbx_W = 1550;
+            int pbx_W = 1500;
             int pbx_H = 900;
 
             x_st = 10;
@@ -101,7 +101,7 @@ namespace vcs_PictureCrop
             dx = pbx_W + 10;
             dy = pbx_H + 10;
 
-            panel1.Size = new Size(pbx_W + 50, pbx_H + 50);
+            panel1.Size = new Size(pbx_W + 50, pbx_H + 150);
             panel1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
 
             //pictureBox1.Size = new Size(pbx_W, pbx_H);
@@ -111,21 +111,20 @@ namespace vcs_PictureCrop
             panel1.Controls.Add(pictureBox1);
             panel1.AutoScroll = true;
 
-            pictureBox2.Size = new Size(300, 400);
-            //pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
-            pictureBox2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            pictureBox2.Size = new Size(340, 400);
+            pictureBox2.Location = new Point(x_st + dx * 1+50, y_st + dy * 0);
 
             button0.Location = new Point(x_st + dx * 1 - 100, y_st + dy * 0);
 
-            groupBox_selection.Location = new Point(x_st + dx * 1, y_st + dy * 0 + 400);
+            groupBox_selection.Size = new Size(340, 200);
+            groupBox_selection.Location = new Point(x_st + dx * 1+50, y_st + dy * 0 + 400);
             groupBox_selection.BringToFront();
 
             bt_open_folder.BackgroundImage = Properties.Resources.folder_open;
             bt_open_folder.BackgroundImageLayout = ImageLayout.Zoom;
 
-
-            richTextBox1.Size = new Size(300, 450);
-            richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0 + groupBox_selection.Height + 400);
+            richTextBox1.Size = new Size(340, 450);
+            richTextBox1.Location = new Point(x_st + dx * 1+50, y_st + dy * 0 + groupBox_selection.Height + 400);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 

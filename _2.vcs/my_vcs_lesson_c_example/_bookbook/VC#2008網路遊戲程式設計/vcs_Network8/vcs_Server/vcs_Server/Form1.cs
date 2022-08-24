@@ -13,6 +13,7 @@ using System.Net.Sockets; //ServerSocket = new Socket(...)時使用
 using System.Threading;  //Thread時使用
 using System.Text;       //Encoding.Unicode.GetString(...) 時使用
 using System.IO;         //使用FileInfo類別，來建立一個檔案實體物件
+using System.Diagnostics;
 
 namespace vcs_Server
 {
@@ -43,7 +44,23 @@ namespace vcs_Server
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
+            /*
+            richTextBox1.Text += "關閉程式\n";
+            //Application.Exit();
+            try
+            {
+                System.Environment.Exit(0);
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息e41 : " + ex.Message + "\n";
+            }
+            */
 
+            //C# 強制關閉 Process
+            Process.GetCurrentProcess().Kill();
+
+            Application.Exit();
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -51,10 +68,9 @@ namespace vcs_Server
             //啟動
             _thread1 = new Thread(new ThreadStart(MainService));
             _thread1.Start();
-
         }
 
-        int c_conn = 0;
+        int connection_count = 0;
         private void MainService() //這個副程式，將會偵測是否有Client端用戶目前已經連線了
         {
             richTextBox1.Text += "MainService ST\n";
@@ -64,17 +80,18 @@ namespace vcs_Server
                 ServerSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
                 ServerSocket.Bind(serverhost);
                 ServerSocket.Listen(50); //設定暫止連接佇列的長度為50	
-                MessageBox.Show("伺服器啟動 !");
+
+                richTextBox1.Text += "伺服器啟動 !\n";
 
                 //Show_button1();
                 while (true)  //無限迴圈檢查連線的Client的Socket資訊
                 {
-                    richTextBox1.Text += "1";
+                    richTextBox1.Text += "1         ";
                     //如果主機socket偵聽到client的資訊，就記錄其SocketForClient資料
                     // ****** 兩種寫法皆可 *******************************
                     SocketForClient = ServerSocket.Accept();
                     richTextBox1.Text += "2";
-                    ++c_conn;
+                    connection_count++;
                     ht.Add(SocketForClient.RemoteEndPoint, SocketForClient);
                     richTextBox1.Text += "3";
                     //Show_label2();
@@ -83,6 +100,7 @@ namespace vcs_Server
                     //SocketForClient = s;
                     // *************************************
 
+                    richTextBox1.Text += "啟動Thread ClientService\n";
                     //使用執行緒來偵測該client端的socket是否有傳遞資料過來
                     _thread2 = new Thread(new ThreadStart(ClientService)); //不同Socket連線進入者都會開啟一個thread
                     _thread2.Start();
@@ -92,7 +110,7 @@ namespace vcs_Server
             }
             catch
             {
-                MessageBox.Show("IP錯誤，請重新輸入！");
+                richTextBox1.Text += "IP錯誤，請重新輸入！\n";
                 //Show_textBox1();
                 button1.Enabled = true;
             }
@@ -107,10 +125,10 @@ namespace vcs_Server
             }
             else
             {
-                label2.Text = c_conn.ToString();
+                label2.Text = connection_count.ToString();
             }
             */
-            richTextBox1.Text += "上線人數 : " + c_conn.ToString() + "\n";
+            richTextBox1.Text += "上線人數 : " + connection_count.ToString() + "\n";
 
         }
 
@@ -172,18 +190,19 @@ namespace vcs_Server
 
             while (true)
             {
-                richTextBox1.Text += "A";
                 //ii = SocketForClient.ReceiveFrom(byteReceieve,ref oldEP);
                 //ii = sock.ReceiveFrom(byteReceieve, 0, byteReceieve.Length, SocketFlags.None, ref oldEP);//使用指定的 SocketFlags，
                 //接收指定位元組數目的資料至資料緩衝區的指定位置，並儲存端點。 
                 try
                 {
                     // ii = SocketForClient.Receive(byteReceieve);
+                    //richTextBox1.Text += "A";
                     ii = sock.ReceiveFrom(byteReceieve, 0, byteReceieve.Length, SocketFlags.None, ref oldEP);//使用指定的 SocketFlags，
                     strAll = Encoding.Unicode.GetString(byteReceieve, 0, ii);
-
+                    //richTextBox1.Text += "strAll : " + strAll + "\n";
                     if (strAll == "disconnect")
                     {
+                        richTextBox1.Text += "收到 disconnect\n";
                         off_line = 1;
                     }
 
@@ -191,7 +210,7 @@ namespace vcs_Server
                     {
                         if ((strAll != "disconnect") && (strAll != ""))
                         {
-                            --c_conn;
+                            connection_count--;
 
                             htname.Remove(strAll);//移除hashtable裡有收到此字串的東西
                             ht.Remove(sock.RemoteEndPoint);
@@ -202,7 +221,7 @@ namespace vcs_Server
                                 socketTemp.SendTo(byteSend, (EndPoint)dc.Key);
                             }
                             Thread.Sleep(50);
-                            byteSend = Encoding.Unicode.GetBytes(c_conn.ToString().ToCharArray());//將c_conn整數變數轉成字串後再轉成陣列形式存給byteSend
+                            byteSend = Encoding.Unicode.GetBytes(connection_count.ToString().ToCharArray());//將connection_count整數變數轉成字串後再轉成陣列形式存給byteSend
                             foreach (DictionaryEntry dc in ht)//傳給每一個client
                             {
                                 socketTemp = (Socket)dc.Value;  //de.Value = client端的IP 
@@ -235,6 +254,8 @@ namespace vcs_Server
                     {
                         if (strAll == "six")
                         {
+                            richTextBox1.Text += "收到 six\n";
+
                             six = 1;
                             byteSend = Encoding.Unicode.GetBytes("six".ToCharArray());//將six字串轉成陣列形式存給byteSend
                             foreach (DictionaryEntry dc in ht)//傳給每一個client
@@ -255,9 +276,9 @@ namespace vcs_Server
                                     ++count_score;
                                 }
                                 Thread.Sleep(50);
-                                if (count_score == c_conn)
+                                if (count_score == connection_count)
                                 {
-                                    for (int i = 0; i < c_conn; ++i)
+                                    for (int i = 0; i < connection_count; ++i)
                                     {
                                         byteSend = Encoding.Unicode.GetBytes("six".ToCharArray());//將six字串轉成陣列形式存給byteSend
                                         foreach (DictionaryEntry dc in ht)//傳給每一個client
@@ -276,7 +297,7 @@ namespace vcs_Server
                                         Thread.Sleep(50);
                                     }
 
-                                    for (int i = 0; i < c_conn; ++i)
+                                    for (int i = 0; i < connection_count; ++i)
                                     {
                                         name_score.Remove(tempscore[i]);
                                         tempscore[i] = null;
@@ -289,15 +310,17 @@ namespace vcs_Server
 
                         if (strAll == "name")
                         {
+                            richTextBox1.Text += "收到 name\n";
+
                             name = 1;
-                            byteSend = Encoding.Unicode.GetBytes("c_conn".ToCharArray()); //將c_conn轉成陣列形式存給byteSend
+                            byteSend = Encoding.Unicode.GetBytes("connection_count".ToCharArray()); //將connection_count轉成陣列形式存給byteSend
                             foreach (DictionaryEntry dc in ht)
                             {
                                 socketTemp = (Socket)dc.Value;  //de.Value = client端的IP 
                                 socketTemp.SendTo(byteSend, (EndPoint)dc.Key);
                             }
                             Thread.Sleep(50);
-                            byteSend = Encoding.Unicode.GetBytes(c_conn.ToString().ToCharArray());
+                            byteSend = Encoding.Unicode.GetBytes(connection_count.ToString().ToCharArray());
                             foreach (DictionaryEntry dc in ht)
                             {
                                 socketTemp = (Socket)dc.Value;  //de.Value = client端的IP 
@@ -305,6 +328,7 @@ namespace vcs_Server
                             }
                             Thread.Sleep(50);
                         }
+
                         if ((name == 1) && (strAll != "name") && (strAll != ""))
                         {
                             htname.Add(strAll, SocketForClient);
@@ -317,7 +341,7 @@ namespace vcs_Server
                             }
                             Thread.Sleep(50);
 
-                            for (int i = 0; i < c_conn; ++i)
+                            for (int i = 0; i < connection_count; ++i)
                             {
                                 byteSend = Encoding.Unicode.GetBytes("Show".ToCharArray());
                                 foreach (DictionaryEntry dc in ht)
@@ -335,11 +359,11 @@ namespace vcs_Server
                                 }
                                 Thread.Sleep(50);
                             }
-                            for (int i = 0; i < c_conn; ++i)
+                            for (int i = 0; i < connection_count; ++i)
                             {
                                 temp[i] = null;
                             }
-                            if (count_temp == c_conn)
+                            if (count_temp == connection_count)
                             {
                                 count_temp = 0;
                             }

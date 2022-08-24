@@ -213,11 +213,17 @@ namespace 百萬小學堂_client
                         _thread1 = new Thread(new ThreadStart(Listen));//讓_thread1去執行Listen()副函式
                         _thread1.Start();//啟動_thread1
                         Thread.Sleep(200);
+
+                        richTextBox1.Text += "傳送 name\n";
                         byteSend = Encoding.Unicode.GetBytes("name".ToCharArray());
                         ClientSocket.Send(byteSend, 0, byteSend.Length, SocketFlags.None);//傳送byteSend資料給Server
+
                         Thread.Sleep(50);
+
+                        richTextBox1.Text += "傳送 : " + textBox2.Text + "\n";
                         byteSend = Encoding.Unicode.GetBytes(textBox2.Text.ToCharArray());
                         ClientSocket.Send(byteSend, 0, byteSend.Length, SocketFlags.None);//傳送byteSend資料給Server
+
                         MessageBox.Show("連線成功！");
                     }
                 }
@@ -243,11 +249,17 @@ namespace 百萬小學堂_client
                 textBox2.ReadOnly = false;
                 button1.Enabled = true;
                 button2.Enabled = false;
+
+                richTextBox1.Text += "傳送 disconnect\n";
                 byteSend = Encoding.Unicode.GetBytes("disconnect".ToCharArray());
                 ClientSocket.Send(byteSend, 0, byteSend.Length, SocketFlags.None);
+
                 Thread.Sleep(50);
+
+                richTextBox1.Text += "傳送 : " + textBox2.Text + "\n";
                 byteSend = Encoding.Unicode.GetBytes(textBox2.Text.ToCharArray());//若斷線，則傳給server斷線的字串
                 ClientSocket.Send(byteSend, 0, byteSend.Length, SocketFlags.None);
+
                 Isconn = 0;
                 ClientSocket.Shutdown(SocketShutdown.Both);
                 ClientSocket.Close();
@@ -272,11 +284,16 @@ namespace 百萬小學堂_client
 
             if (namescore != null)
             {
+                richTextBox1.Text += "傳送 : six\n";
                 byteSend = Encoding.Unicode.GetBytes("six".ToCharArray());
                 ClientSocket.Send(byteSend, 0, byteSend.Length, SocketFlags.None);
+
                 Thread.Sleep(50);
+
+                richTextBox1.Text += "傳送 : " + namescore + "\n";
                 byteSend = Encoding.Unicode.GetBytes(namescore.ToCharArray());//若斷線，則傳給server斷線的字串
                 ClientSocket.Send(byteSend, 0, byteSend.Length, SocketFlags.None);
+
                 namescore = null;
             }
         }

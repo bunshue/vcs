@@ -88,13 +88,13 @@
             this.groupBox1.Size = new System.Drawing.Size(111, 242);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.groupBox1.Text = "Main Thread";
             // 
             // bt_th3
             // 
             this.bt_th3.Location = new System.Drawing.Point(16, 168);
             this.bt_th3.Name = "bt_th3";
-            this.bt_th3.Size = new System.Drawing.Size(75, 33);
+            this.bt_th3.Size = new System.Drawing.Size(80, 45);
             this.bt_th3.TabIndex = 6;
             this.bt_th3.Text = "info";
             this.bt_th3.UseVisualStyleBackColor = true;
@@ -104,7 +104,7 @@
             // 
             this.bt_th2.Location = new System.Drawing.Point(16, 97);
             this.bt_th2.Name = "bt_th2";
-            this.bt_th2.Size = new System.Drawing.Size(75, 33);
+            this.bt_th2.Size = new System.Drawing.Size(80, 45);
             this.bt_th2.TabIndex = 5;
             this.bt_th2.Text = "停止";
             this.bt_th2.UseVisualStyleBackColor = true;
@@ -114,7 +114,7 @@
             // 
             this.bt_th1.Location = new System.Drawing.Point(16, 34);
             this.bt_th1.Name = "bt_th1";
-            this.bt_th1.Size = new System.Drawing.Size(75, 33);
+            this.bt_th1.Size = new System.Drawing.Size(80, 45);
             this.bt_th1.TabIndex = 4;
             this.bt_th1.Text = "啟動";
             this.bt_th1.UseVisualStyleBackColor = true;

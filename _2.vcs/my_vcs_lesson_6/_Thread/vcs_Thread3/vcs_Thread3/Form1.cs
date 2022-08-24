@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Diagnostics;   //for Process
 using System.Threading;   //匯入多執行緒功能函數
 
 namespace vcs_Thread3
@@ -22,17 +23,52 @@ namespace vcs_Thread3
         // Make and start a new counter object.
         private int thread_num = 0;
 
-        Thread Th;                                  //宣告監聽用執行續
+        Thread main_thread;                                  //宣告監聽用執行續
 
         public Form1()
         {
             InitializeComponent();
-            Thread.CurrentThread.Name = "MainThread";
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Control.CheckForIllegalCrossThreadCalls = false; //忽略跨執行緒操作的錯誤
+            //C# 跨 Thread 存取 UI
+            //Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效	same
+            Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
+
+            Thread.CurrentThread.Name = "MainThread";
+        }
+
+        //關閉監聽執行續(如果有的話)
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            try
+            {
+                main_thread.Abort(); //關閉監聽執行續
+                //U.Close();  //關閉監聽器
+            }
+            catch
+            {
+                //忽略錯誤，程式繼續執行
+            }
+
+            /*
+            richTextBox1.Text += "關閉程式\n";
+            //Application.Exit();
+            try
+            {
+                System.Environment.Exit(0);
+            }
+            catch (Exception ex)
+            {
+                richTextBox1.Text += "xxx錯誤訊息e41 : " + ex.Message + "\n";
+            }
+            */
+
+            //C# 強制關閉 Process
+            Process.GetCurrentProcess().Kill();
+
+            Application.Exit();
         }
 
         //第1種Thread使用
@@ -151,44 +187,31 @@ namespace vcs_Thread3
             {
                 i++;
                 this.Text = i.ToString();
+                richTextBox1.Text += "m";
 
                 //一秒執行一次
                 Thread.Sleep(1000); //停一秒
             }
         }
 
-        //關閉監聽執行續(如果有的話)
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            try
-            {
-                Th.Abort(); //關閉監聽執行續
-                //U.Close();  //關閉監聽器
-            }
-            catch
-            {
-                //忽略錯誤，程式繼續執行
-            }
-        }
-
         int cnt = 0;
         private void bt_th1_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "啟動Thread\n";
-            Th = new Thread(Listen); //建立監聽網路訊息的新執行緒
+            main_thread = new Thread(Listen); //建立監聽網路訊息的新執行緒
             //Th.IsBackground = true;  //設定為背景執行緒
-            Th.Name = "my_thread" + cnt.ToString();
+            main_thread.Name = "my_thread" + cnt.ToString();
             cnt++;
+            richTextBox1.Text += "啟動 Main Thread, 名稱 : " + main_thread.Name + "\n";
 
-            Th.Start();             //啟動監聽執行緒
+            main_thread.Start();             //啟動監聽執行緒
         }
 
         private void bt_th2_Click(object sender, EventArgs e)
         {
-            if (Th != null)
+            if (main_thread != null)
             {
-                richTextBox1.Text += "關閉Thread\n";
-                Th.Abort();
+                richTextBox1.Text += "關閉 Main Thread\n";
+                main_thread.Abort();
             }
             else
             {
@@ -199,19 +222,21 @@ namespace vcs_Thread3
         private void bt_th3_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "Info\n";
-            if (Th == null)
+            if (main_thread == null)
             {
-                richTextBox1.Text += "XXXXXX\n";
+                richTextBox1.Text += "Main Thread 尚未啟動\n";
             }
             else
             {
-                richTextBox1.Text += "Th\t" + Th.ToString() + "\n";
-                richTextBox1.Text += "ThreadState\t" + Th.ThreadState.ToString() + "\n";
+                richTextBox1.Text += "Main Thread\t" + main_thread.ToString() + "\n";
+                richTextBox1.Text += "ThreadState\t" + main_thread.ThreadState.ToString() + "\n";
+                richTextBox1.Text += "Name\t" + main_thread.Name + "\n";
+                richTextBox1.Text += "IsAlive\t" + main_thread.IsAlive.ToString() + "\n";
 
-                richTextBox1.Text += "Name\t" + Th.Name + "\n";
-                richTextBox1.Text += "IsAlive\t" + Th.IsAlive.ToString() + "\n";
-                if (Th.IsAlive == true)
-                    richTextBox1.Text += "IsBackground\t" + Th.IsBackground.ToString() + "\n";
+                if (main_thread.IsAlive == true)
+                {
+                    richTextBox1.Text += "IsBackground\t" + main_thread.IsBackground.ToString() + "\n";
+                }
             }
         }
 
@@ -231,8 +256,9 @@ namespace vcs_Thread3
             while (true)
             {
                 Console.Write("A");
+                richTextBox1.Text += "A";
 
-                System.Threading.Thread.Sleep(300);
+                Thread.Sleep(300);
             }
         }
 
@@ -241,7 +267,9 @@ namespace vcs_Thread3
             while (true)
             {
                 Console.Write("B");
-                System.Threading.Thread.Sleep(1000);
+                richTextBox1.Text += "B";
+
+                Thread.Sleep(1000);
             }
         }
     }
@@ -312,12 +340,10 @@ namespace vcs_Thread3
             }
             catch (Exception ex)
             {
-                // An unexpected error.
                 Console.WriteLine("Unexpected error in thread " + Number + "\r\n" + ex.Message);
             }
         }
     }
-
 
     //建一個類，模擬實際使用情況
     public class NEWThreadClass
@@ -355,7 +381,9 @@ namespace vcs_Thread3
                 }
             }
             catch (Exception ex)
-            { }
+            {
+                Console.WriteLine("Unexpected error in thread : " + ex.Message);
+            }
         }
     }
 
