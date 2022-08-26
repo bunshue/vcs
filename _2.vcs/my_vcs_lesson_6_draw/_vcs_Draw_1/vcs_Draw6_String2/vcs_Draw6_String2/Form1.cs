@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Drawing.Text;
 using System.Drawing.Drawing2D;
 
 /*
@@ -26,7 +27,8 @@ namespace vcs_Draw6_String2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            pictureBox2.Resize += new EventHandler(pictureBox2_Resize);
+            pictureBox2.Paint += new PaintEventHandler(pictureBox2_Paint);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -36,8 +38,8 @@ namespace vcs_Draw6_String2
 
         private void pictureBox1_Paint(object sender, PaintEventArgs e)
         {
-            Font _font = new Font("Arial", 12);  
-            Brush _brush = new SolidBrush(Color.Black);  
+            Font _font = new Font("Arial", 12);
+            Brush _brush = new SolidBrush(Color.Black);
             Pen _pen = new Pen(Color.Black, 1f);
             string _text = "繪製旋轉文字效果";
 
@@ -255,5 +257,99 @@ namespace vcs_Draw6_String2
             return pt;
         }
 
+        //文字對齊效果 ST
+
+        // Text justification.
+        public enum TextJustification
+        {
+            Left,
+            Right,
+            Center,
+            Full
+        }
+
+        // Arrangement parameters.
+        private Padding TextMargin = new Padding(5);
+        private const float ParagraphIndent = 40f;
+        private const float LineSpacing = 1f;
+        private const float ExtraParagraphSpacing = 0.5f;
+
+        // The text to display.
+        private const string MessageText = "拉 動 表 單 看 文 字 對 齊 效 果"; //以空白為分界
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        // Draw justified text on the PictureBox.
+        private void pictureBox2_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.Clear(pictureBox2.BackColor);
+            e.Graphics.TextRenderingHint = TextRenderingHint.AntiAliasGridFit;
+
+            // Draw within a rectangle excluding the margins.
+            RectangleF rect = new RectangleF(
+                TextMargin.Left, TextMargin.Top,
+                pictureBox2.ClientSize.Width - TextMargin.Left - TextMargin.Right,
+                pictureBox2.ClientSize.Height - TextMargin.Top - TextMargin.Bottom);
+
+            // Draw the text.
+            using (Font f = new Font("Times New Roman", 10))
+            {
+                DrawJustifiedLine(e.Graphics, rect, f, Brushes.Blue, MessageText);
+            }
+
+            // Show the text drawing area.
+            e.Graphics.DrawRectangle(Pens.Silver, Rectangle.Round(rect));
+        }
+
+        // Draw justified text on the Graphics object
+        // in the indicated Rectangle.
+        private void DrawJustifiedLine(Graphics gr, RectangleF rect, Font font, Brush brush, string text)
+        {
+            // Break the text into words.
+            string[] words = text.Split(' ');
+
+            // Add a space to each word and get their lengths.
+            float[] word_width = new float[words.Length];
+            float total_width = 0;
+            for (int i = 0; i < words.Length; i++)
+            {
+                // See how wide this word is.
+                SizeF size = gr.MeasureString(words[i], font);
+                word_width[i] = size.Width;
+                total_width += word_width[i];
+            }
+
+            // Get the additional spacing between words.
+            float extra_space = rect.Width - total_width;
+            int num_spaces = words.Length - 1;
+            if (words.Length > 1)
+            {
+                extra_space /= num_spaces;
+            }
+
+            // Draw the words.
+            float x = rect.Left;
+            float y = rect.Top;
+            for (int i = 0; i < words.Length; i++)
+            {
+                // Draw the word.
+                gr.DrawString(words[i], font, brush, x, y);
+
+                // Move right to draw the next word.
+                x += word_width[i] + extra_space;
+            }
+        }
+
+        private void pictureBox2_Resize(object sender, EventArgs e)
+        {
+            pictureBox2.Refresh();
+        }
+
+        //文字對齊效果 SP
+
     }
 }
+

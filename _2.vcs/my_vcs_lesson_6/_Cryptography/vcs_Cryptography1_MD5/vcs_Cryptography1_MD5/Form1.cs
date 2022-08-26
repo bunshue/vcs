@@ -77,6 +77,7 @@ namespace vcs_Cryptography1_MD5
             richTextBox1.Clear();
         }
 
+        //拜列轉字串
         public static string BytesToString(byte[] bytes)
         {
             string result = "";
@@ -147,7 +148,6 @@ namespace vcs_Cryptography1_MD5
 
             str_encrypted_text = MD5_Ecnrypt28(str_clear_text);
             richTextBox1.Text += "28明碼：" + str_clear_text + "\t密碼：" + str_encrypted_text + "\n";
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -204,109 +204,36 @@ namespace vcs_Cryptography1_MD5
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //用MD5比較兩個檔案
-
-            string filename1 = "C:\\______test_files\\compare\\aaaa.txt";
-            string filename2 = "C:\\______test_files\\compare\\bbbb.txt";
-            string filename3 = "C:\\______test_files\\compare\\ssss.txt";
-
-            string FileMD5_1 = string.Empty;    //第1個檔案的MD5碼
-            string FileMD5_2 = string.Empty;    //第2個檔案的MD5碼
-            string FileMD5_3 = string.Empty;    //第3個檔案的MD5碼
-
-            MD5 md5 = MD5.Create();    //創建MD5對象
-
-            //取得第一個檔案MD5演算後的陣列
-            byte[] input1 = File.ReadAllBytes(filename1);
-            byte[] md5Hash1 = md5.ComputeHash(input1);  //算拜列之Hash值
-            //string md5Result = BytesToString(md5Hash);  //Hash轉字串
-
-            //建立第一個檔案的MD5碼
-            //Hash轉字串
-            foreach (byte b in md5Hash1)
-            {
-                FileMD5_1 += b.ToString("X2");
-            }
-
-            //取得第二個檔案MD5演算後的陣列
-            byte[] input2 = File.ReadAllBytes(filename2);
-            byte[] md5Hash2 = md5.ComputeHash(input2);  //算拜列之Hash值
-            //string md5Result = BytesToString(md5Hash);  //Hash轉字串
-
-            //建立第二個檔案的MD5碼
-            //Hash轉字串
-            foreach (byte b in md5Hash2)
-            {
-                FileMD5_2 += b.ToString("X2");
-            }
-
-            //取得第三個檔案MD5演算後的陣列
-            byte[] input3 = File.ReadAllBytes(filename3);
-            byte[] md5Hash3 = md5.ComputeHash(input3);  //算拜列之Hash值
-            //string md5Result = BytesToString(md5Hash);  //Hash轉字串
-
-            //建立第三個檔案的MD5碼
-            //Hash轉字串
-            foreach (byte b in md5Hash3)
-            {
-                FileMD5_3 += b.ToString("X2");
-            }
-
-            if (FileMD5_1.Equals(FileMD5_2))
-                richTextBox1.Text += "檔案" + filename1 + "和檔案" + filename2 + " 完全相同\n";
-            else
-                richTextBox1.Text += "檔案" + filename1 + "和檔案" + filename2 + " 不相同\n";
-
-            if (FileMD5_1.Equals(FileMD5_3))
-                richTextBox1.Text += "檔案" + filename1 + "和檔案" + filename3 + " 完全相同\n";
-            else
-                richTextBox1.Text += "檔案" + filename1 + "和檔案" + filename3 + " 不相同\n";
-
-            if (FileMD5_2.Equals(FileMD5_3))
-                richTextBox1.Text += "檔案" + filename2 + "和檔案" + filename3 + " 完全相同\n";
-            else
-                richTextBox1.Text += "檔案" + filename2 + "和檔案" + filename3 + " 不相同\n";
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
             //用MD5比較兩個檔案
 
-            string filename1 = @"C:\______test_files\picture1.jpg";
-            string filename2 = @"C:\______test_files\elephant.jpg";
-            string FirstFileMD5 = string.Empty;     //第一個檔案的MD5碼
-            string SecondFileMD5 = string.Empty;    //第二個檔案的MD5碼
+            string filename1 = "C:\\______test_files\\compare\\aaaa.txt";
+            string filename2 = "C:\\______test_files\\compare\\bbbb.txt";
+            string FileMD5_1 = string.Empty;    //第1個檔案的MD5碼
+            string FileMD5_2 = string.Empty;    //第2個檔案的MD5碼
 
             MD5 md5 = MD5.Create();    //創建MD5對象
             //取得第一個檔案MD5演算後的陣列
             byte[] input1 = File.ReadAllBytes(filename1);
             byte[] md5Hash1 = md5.ComputeHash(input1);  //算拜列之Hash值
-            //string md5Result = BytesToString(md5Hash);  //Hash轉字串
 
             //建立第一個檔案的MD5碼
-            //Hash轉字串
-            foreach (byte b in md5Hash1)
-            {
-                FirstFileMD5 += b.ToString("X2");
-            }
-
-            md5 = MD5.Create();
+            FileMD5_1 = BytesToString(md5Hash1);    //Hash轉字串
+            
             //取得第二個檔案MD5演算後的陣列
             byte[] input2 = File.ReadAllBytes(filename2);
             byte[] md5Hash2 = md5.ComputeHash(input2);  //算拜列之Hash值
-            //string md5Result = BytesToString(md5Hash);  //Hash轉字串
 
             //建立第二個檔案的MD5碼
-            //Hash轉字串
-            foreach (byte b in md5Hash2)
-            {
-                SecondFileMD5 += b.ToString("X2");
-            }
+            FileMD5_2 = BytesToString(md5Hash2);    //Hash轉字串
 
-            richTextBox1.Text += "檔案：" + filename1 + ",\tMD5：" + FirstFileMD5 + "\n";
-            richTextBox1.Text += "檔案：" + filename2 + ",\tMD5：" + SecondFileMD5 + "\n";
+            richTextBox1.Text += "檔案：" + filename1 + ",\tMD5：" + FileMD5_1 + "\n";
+            richTextBox1.Text += "檔案：" + filename2 + ",\tMD5：" + FileMD5_2 + "\n";
 
-            if (FirstFileMD5.ToLower() == SecondFileMD5.ToLower())
+            if (FileMD5_1.ToLower() == FileMD5_2.ToLower())
             {
                 richTextBox1.Text += "兩個檔案\t完全相同\n";
             }
@@ -320,27 +247,27 @@ namespace vcs_Cryptography1_MD5
         {
             //算一個檔案的MD5值
             str_encrypted_text = GetMD5HashFromFile(filename);
-            richTextBox1.Text += "檔案 : " + filename + "\n";
-            richTextBox1.Text += "檔案MD5值 : " + str_encrypted_text + "\t長度 : " + str_encrypted_text.Length + "\n";
+            richTextBox1.Text += "檔案：" + filename + "\tMD5密碼：" + str_encrypted_text + "\n";
 
+            //算一個檔案的MD5值
             str_encrypted_text = BytesToString(GetHashMD5(filename));
             richTextBox1.Text += "檔案：" + filename + "\tMD5密碼：" + str_encrypted_text + "\n";
 
             //算一個檔案的MD5值
-            Console.WriteLine(string.Format("計算文件的 MD5 值：{0}", HashHelper.MD5File(filename)));
-            richTextBox1.Text += "計算文件的 MD5 值：" + HashHelper.MD5File(filename) + "\n";
+            str_encrypted_text = HashHelper.MD5File(filename);
+            richTextBox1.Text += "檔案：" + filename + "\tMD5密碼：" + str_encrypted_text + "\n";
 
-            //算一個檔案的MD5值, 取得檔案的唯一檢查碼Checksum MD5
-            MD5 md5 = MD5.Create();
-            FileStream fs = File.OpenRead(filename);
-            byte[] md5Hash = md5.ComputeHash(fs);   //算拜列之Hash值
-            fs.Close();
+            //算一個檔案的MD5值
+            str_encrypted_text = ValidHelper.GetFileMD5(filename);
+            richTextBox1.Text += "檔案：" + filename + "\tMD5密碼：" + str_encrypted_text + "\n";
+
+            //算一個檔案的MD5值
+            //檔案轉拜列轉Hash值
+            byte[] md5Hash = GetHashMD5(filename);
 
             //Hash轉字串
             str_encrypted_text = Convert.ToBase64String(md5Hash);
-
-            richTextBox1.Text += "檔案 : " + filename + "\n";
-            richTextBox1.Text += "檔案MD5值 : " + str_encrypted_text + "\t長度 : " + str_encrypted_text.Length + "\n";
+            richTextBox1.Text += "檔案：" + filename + "\tMD5密碼：" + str_encrypted_text + "\n";
         }
 
         // Compute the file's hash.
@@ -354,19 +281,6 @@ namespace vcs_Cryptography1_MD5
 
             return md5Hash;
         }
-
-        /*
-        // Return a byte array as a sequence of hex values.
-        public static string BytesToString(byte[] bytes)
-        {
-            string result = "";
-            foreach (byte b in bytes)
-            {
-                result += b.ToString("X2");
-            }
-            return result;
-        }
-        */
 
         /// <summary>
         /// 獲取文件MD5值
@@ -404,7 +318,6 @@ namespace vcs_Cryptography1_MD5
         private void button14_Click(object sender, EventArgs e)
         {
             //算一個檔案的MD5值
-
             string filename = @"C:\______test_files\picture1.jpg";                      //準備算MD5的檔案
 
             //加密後的結果
@@ -416,23 +329,15 @@ namespace vcs_Cryptography1_MD5
             //取得第一個檔案MD5演算後的陣列
             byte[] input = File.ReadAllBytes(filename);
             byte[] md5Hash = md5.ComputeHash(input);    //算拜列之Hash值
-            //string md5Result = BytesToString(md5Hash);  //Hash轉字串
 
             //建立第一個檔案的MD5碼
-            //Hash轉字串
-            foreach (byte b in md5Hash)
-            {
-                str_encrypted_text += b.ToString("X2");
-            }
-            richTextBox1.Text += "檔案：" + filename + ",\tMD5：" + str_encrypted_text + "\n";
+            str_encrypted_text = BytesToString(md5Hash);    //Hash轉字串
+
+            richTextBox1.Text += "檔案：" + filename + "\tMD5密碼：" + str_encrypted_text + "\n";
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
-            //算一個檔案的MD5值
-
-            string result_MD5 = ValidHelper.GetFileMD5(filename);
-            richTextBox1.Text += "MD5 : \t\t" + result_MD5 + "\n";
         }
 
         private void button16_Click(object sender, EventArgs e)
@@ -451,8 +356,9 @@ namespace vcs_Cryptography1_MD5
             {
                 sb.Append(md5Hash[i].ToString("x2"));
             }
-            richTextBox1.Text += "MD5\n";
-            richTextBox1.Text += sb.ToString() + "\n";
+
+            str_encrypted_text = sb.ToString();
+            richTextBox1.Text += "檔案：" + filename + "\tMD5密碼：" + str_encrypted_text + "\n";
         }
 
         private void button17_Click(object sender, EventArgs e)
@@ -484,6 +390,7 @@ namespace vcs_Cryptography1_MD5
 
             byte[] input = Encoding.Default.GetBytes(str + key);    //字串轉拜列
             byte[] md5Hash = md5.ComputeHash(input);    //算拜列之Hash值
+
             string md5Result = BytesToString(md5Hash);  //Hash轉字串
 
             return md5Result;
@@ -496,6 +403,7 @@ namespace vcs_Cryptography1_MD5
 
             byte[] input = Encoding.Default.GetBytes(str);  //字串轉拜列
             byte[] md5Hash = md5.ComputeHash(input);    //算拜列之Hash值
+
             string md5Result = BytesToString(md5Hash);  //Hash轉字串
 
             /*
@@ -555,15 +463,12 @@ namespace vcs_Cryptography1_MD5
         ///   <returns>加密後的字符串</returns>
         public static string MD5_Ecnrypt14(string str)
         {
-            string md5Result = "";
-
             MD5 md5 = MD5.Create();    //創建MD5對象
 
             byte[] input = Encoding.Default.GetBytes(str);  //字串轉拜列
             byte[] md5Hash = md5.ComputeHash(input);    //算拜列之Hash值
 
-            //Hash轉字串
-            md5Result = Encoding.Default.GetString(md5Hash);
+            string md5Result = Encoding.Default.GetString(md5Hash); //Hash轉字串
 
             return md5Result;
         }
@@ -613,7 +518,10 @@ namespace vcs_Cryptography1_MD5
 
             MD5 md5 = MD5.Create();    //創建MD5對象
 
-            byte[] input = GetKeyByteArray(getstrIN(str));  //字串轉拜列
+            byte[] input = Encoding.Default.GetBytes(str);  //字串轉拜列
+
+            //byte[] input = GetKeyByteArray(getstrIN(str));  //字串轉拜列
+
             byte[] md5Hash = md5.ComputeHash(input);    //算拜列之Hash值
 
             //Hash轉字串
@@ -652,6 +560,7 @@ namespace vcs_Cryptography1_MD5
 
             byte[] input = Encoding.Default.GetBytes(str);  //字串轉拜列
             byte[] md5Hash = md5.ComputeHash(input);    //算拜列之Hash值
+
             string md5Result = BytesToString(md5Hash);  //Hash轉字串
 
             return md5Result;
@@ -669,6 +578,7 @@ namespace vcs_Cryptography1_MD5
         {
             byte[] input = Encoding.Default.GetBytes(str);  //字串轉拜列
             byte[] md5Hash = ((HashAlgorithm)CryptoConfig.CreateFromName("MD5")).ComputeHash(input);
+
             string md5Result = BytesToString(md5Hash);  //Hash轉字串
 
             return md5Result;
@@ -747,6 +657,7 @@ namespace vcs_Cryptography1_MD5
 
             byte[] input = encode.GetBytes(str); //字串轉拜列
             byte[] md5Hash = md5.ComputeHash(input);    //算拜列之Hash值
+
             string md5Result = BytesToString(md5Hash);  //Hash轉字串
 
             return md5Result;
@@ -1035,8 +946,6 @@ namespace vcs_Cryptography1_MD5
             return GetFileHash(filePath, sha512);
         }
     }
-
-
 }
 
 
@@ -1161,7 +1070,7 @@ public static string Decrypt(string targetValue, string key)
 
 
             //將字串用MD5加密
-            Console.Write("請輸入密碼 : ");
+            Console.Write("請輸入密碼：");
             string P_str_Code = Console.ReadLine();//记录要加密的密码
             Program program = new Program();//创建Program对象
             Console.WriteLine("結果:\n" + program.Encrypt2(P_str_Code));//输出加密后的字符串
