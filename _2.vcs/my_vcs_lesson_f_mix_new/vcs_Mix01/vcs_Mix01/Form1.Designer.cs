@@ -224,7 +224,6 @@
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(170, 70);
             this.button8.TabIndex = 101;
-            this.button8.Text = "創建唯一的檔案名, 考慮時間因素";
             this.button8.UseVisualStyleBackColor = true;
             this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
@@ -256,7 +255,6 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(170, 70);
             this.button1.TabIndex = 98;
-            this.button1.Text = "取得真實副檔名";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -278,7 +276,6 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(170, 70);
             this.button11.TabIndex = 96;
-            this.button11.Text = "判斷檔案格式";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -350,7 +347,6 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(170, 70);
             this.button7.TabIndex = 89;
-            this.button7.Text = "根據文件頭判斷上傳的文件類型";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 

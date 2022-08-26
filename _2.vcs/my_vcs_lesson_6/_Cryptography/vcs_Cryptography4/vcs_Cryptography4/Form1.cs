@@ -272,6 +272,86 @@ namespace vcs_Cryptography4
             //File.Delete(inFile);
             richTextBox1.Text += "解密成功, 檔名 : " + outFile + "\n";
         }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            //CRC16
+            byte[] bytSendData = new byte[5];
+
+            //協議不支持
+            bytSendData[0] = 0x12;
+            bytSendData[1] = 0x34;
+            bytSendData[2] = 0x56;
+
+            UInt16 intCRC16 = GetCheckCode(bytSendData, 3);
+            bytSendData[3] = (byte)(intCRC16 & 0xFF);   //CRC校驗低位
+            bytSendData[4] = (byte)((intCRC16 >> 8) & 0xff);                //CRC校驗高位
+
+            //發送數據
+            //serial.Write(bytSendData, 0, 5);
+
+
+
+            //byte bytRtuDataFlag = 0;
+            //byte bytRtuDataIdx;
+            byte[] bytRtuData = new byte[8];
+
+            int i;
+            for (i = 0; i < 8; i++)
+            {
+                bytRtuData[i] = (byte)i;
+
+            }
+            //信息處理
+            intCRC16 = GetCheckCode(bytRtuData, 8 - 2);
+
+            //Debug.Print("CRC:" + bytRtuData[8 - 2].ToString() + " " + ((byte)(intCRC16 & 0xFF)).ToString() +"|" + bytRtuData[8 - 1].ToString() + " " + ((byte)((intCRC16 >> 8) & 0xff)).ToString());
+
+            string result = "CRC:" + bytRtuData[8 - 2].ToString() + " " + ((byte)(intCRC16 & 0xFF)).ToString() + "|" + bytRtuData[8 - 1].ToString() + " " + ((byte)((intCRC16 >> 8) & 0xff)).ToString();
+
+            richTextBox1.Text += result + "\n";
+
+
+            //bytSendData[3 + lngDataNum * 2] = (byte)(intCRC16 & 0xFF);                    //CRC校驗低位
+            //bytSendData[4 + lngDataNum * 2] = (byte)((intCRC16 >> 8) & 0xff);             //CRC校驗高位                  
+
+
+            //intCRC16 = GetCheckCode(bytSendData, 3);
+            //bytSendData[3] = (byte)(intCRC16 & 0xFF); &nbsp;               //CRC校驗低位
+            //bytSendData[4] = (byte)((intCRC16 >> 8) & 0xff);                //CRC校驗高位
+
+
+
+            //CRC16校驗檢驗
+            //if (bytRtuData[8 - 2] == (intCRC16 & 0xFF) && bytRtuData[8 - 1] == ((intCRC16 >> 8) & 0xff))
+
+
+
+
+
+        }
+
+        //CRC16校驗
+        private UInt16 GetCheckCode(byte[] buf, int nEnd)
+        {
+            UInt16 crc = (UInt16)0xffff;
+            int i, j;
+            for (i = 0; i < nEnd; i++)
+            {
+                crc ^= (UInt16)buf[i];
+                for (j = 0; j < 8; j++)
+                {
+                    if ((crc & 1) != 0)
+                    {
+                        crc >>= 1;
+                        crc ^= 0xA001;
+                    }
+                    else
+                        crc >>= 1;
+                }
+            }
+            return crc;
+        }
     }
 }
 

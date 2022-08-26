@@ -11,7 +11,7 @@ using System.IO;
 using System.Drawing.Imaging;
 using System.Drawing.Drawing2D;
 using System.Reflection;    //for Assembly
-using System.Security.Cryptography; //for HashAlgorithm, MD5
+using System.Security.Cryptography;
 using System.Diagnostics;   //for Process
 using System.Threading;
 using System.Media;     //for SoundPlayer
@@ -138,50 +138,6 @@ namespace vcs_Mix01
         private void button1_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //偵測原始檔案類型
-            openFileDialog1.Title = "測試讀取一個純文字檔";
-            //openFileDialog1.ShowHelp = true;
-            openFileDialog1.FileName = "";              //預設開啟的檔名
-            //openFileDialog1.DefaultExt = "*.txt";
-            //openFileDialog1.Filter = "文字檔(*.txt)|*.txt|Word檔(*.doc)|*.txt|Excel檔(*.xls)|*.txt|所有檔案(*.*)|*.*";   //存檔類型
-            //openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
-            openFileDialog1.RestoreDirectory = true;
-            //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = "c:\\______test_files";  //預設開啟的路徑
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                richTextBox1.Text += "get filename : " + openFileDialog1.FileName + "\n";
-                richTextBox1.Text += "length : " + openFileDialog1.FileName.Length.ToString() + "\n";
-
-                string builtHex = string.Empty;
-                using (Stream S = File.OpenRead(openFileDialog1.FileName))
-                {
-                    for (int i = 0; i < 8; i++)
-                    {
-                        builtHex += S.ReadByte().ToString("X2");
-
-                        /*
-                        if (ImageTypes.ContainsKey(builtHex))
-                        {
-                            string 真實副檔名 = ImageTypes[builtHex];
-                            break;
-                        }
-                        */
-                    }
-                    richTextBox1.Text += "get " + builtHex + "\n";
-
-
-                }
-
-                //richTextBox1.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
-            }
-            else
-            {
-                richTextBox1.Text += "未選取檔案\n";
-            }
-
-
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -347,111 +303,14 @@ namespace vcs_Mix01
             richTextBox1.Text += "在Form1()的InitializeComponent()後加入訊息\n";
         }
 
-        //根據文件頭判斷上傳的文件類型 ST
         private void button7_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //根據文件頭判斷上傳的文件類型
-            string filename = @"C:\______test_files\doraemon.jpg";
-            string result = getFileType(filename);
-            richTextBox1.Text += "File Type : " + result + "\n";
         }
-
-        /// <summary>
-        /// 根據文件頭判斷上傳的文件類型
-        /// </summary>
-        /// <param name="filePath">filePath是文件的完整路徑 </param>
-        /// <returns>返回true或false</returns>
-        public string getFileType(string filePath)
-        {
-            try
-            {
-                FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
-                BinaryReader reader = new BinaryReader(fs);
-                string fileClass;
-                byte buffer;
-                buffer = reader.ReadByte();
-                fileClass = buffer.ToString();
-                buffer = reader.ReadByte();
-                fileClass += buffer.ToString();
-                reader.Close();
-                fs.Close();
-
-                //richTextBox1.Text += "fileClass == " + fileClass + "\t";
-
-                if (fileClass == "255216")
-                    return "jpg";
-                else if (fileClass == "7173")
-                    return "gif";
-                else if (fileClass == "13780")
-                    return "png";
-                else if (fileClass == "6677")
-                    return "bmp";
-                else if (fileClass == "80114")
-                    return "csv";
-                else if (fileClass == "6063")
-                    return "xml";
-                else if (fileClass == "3780")
-                    return "pdf";
-                else if (fileClass == "4948")
-                    return "txt";
-                else if (fileClass == "8075")
-                    return "zip";
-                else if (fileClass == "XXXX")
-                    return "XXXX";
-                else if (fileClass == "XXXX")
-                    return "XXXX";
-                else if (fileClass == "XXXX")
-                    return "XXXX";
-                else if (fileClass == "XXXX")
-                    return "XXXX";
-                else
-                {
-                    return fileClass + "\tunknown";
-
-                }
-                // 7790是exe,8297是rar 
-            }
-            catch
-            {
-                return "unknown";
-            }
-        }
-        //根據文件頭判斷上傳的文件類型 SP
 
         private void button8_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            //創建唯一的檔案名, 考慮時間因素
-            for (int i = 0; i < 10; i++)
-            {
-                string filename = string.Format("{0}{1}", DateTime.Now.ToString("yyyyMMddHHmmss"), GetUniqueKey());
-                richTextBox1.Text += filename + "\n";
-            }
-        }
-
-        //使用RNGCryptoServiceProvider類創建唯一的最多8位數字符串。
-        private static string GetUniqueKey()
-        {
-            int maxSize = 8;
-            int minSize = 5;
-            char[] chars = new char[62];
-            string a;
-            a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
-            chars = a.ToCharArray();
-            int size = maxSize;
-            byte[] data = new byte[1];
-            RNGCryptoServiceProvider crypto = new RNGCryptoServiceProvider();
-            crypto.GetNonZeroBytes(data);
-            size = maxSize;
-            data = new byte[size];
-            crypto.GetNonZeroBytes(data);
-            StringBuilder result = new StringBuilder(size);
-            foreach (byte b in data)
-            {
-                result.Append(chars[b % (chars.Length - 1)]);
-            }
-            return result.ToString();
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -464,89 +323,9 @@ namespace vcs_Mix01
             show_button_text(sender);
         }
 
-        //偵測原始檔案類型
-        //應改用binary read
         private void button11_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            openFileDialog1.Title = "偵測原始檔案類型";
-            //openFileDialog1.ShowHelp = true;
-            openFileDialog1.FileName = "";              //預設開啟的檔名
-            //openFileDialog1.DefaultExt = "*.txt";
-            //openFileDialog1.Filter = "文字檔(*.txt)|*.txt|Word檔(*.doc)|*.txt|Excel檔(*.xls)|*.txt|所有檔案(*.*)|*.*";   //存檔類型
-            //openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
-            openFileDialog1.RestoreDirectory = true;
-            //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = "c:\\______test_files";  //預設開啟的路徑
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                richTextBox1.Text += "檔案 : " + openFileDialog1.FileName + "\n";
-                //richTextBox1.Text += "長度 : " + openFileDialog1.FileName.Length.ToString() + "\n";
-
-                int len = openFileDialog1.FileName.Length;
-
-                if (len < 10)
-                {
-                    richTextBox1.Text += "檔案太小, 忽略";
-                    return;
-                }
-
-
-                len = 10;
-                int[] data = new int[len];
-
-                string builtHex = string.Empty;
-                using (Stream S = File.OpenRead(openFileDialog1.FileName))
-                {
-                    for (int i = 0; i < 10; i++)
-                    {
-                        data[i] = S.ReadByte();
-                        builtHex += data[i].ToString("X2") + " ";
-
-                        /*
-                        if (ImageTypes.ContainsKey(builtHex))
-                        {
-                            string 真實副檔名 = ImageTypes[builtHex];
-                            break;
-                        }
-                        */
-                    }
-                    richTextBox1.Text += "data : " + builtHex + "\n";
-                    if ((data[0] == 0x89) && (data[1] == 'P') && (data[2] == 'N') && (data[3] == 'G'))
-                    {
-                        richTextBox1.Text += "PNG 檔案\n";
-                    }
-                    else if ((data[6] == 'J') && (data[7] == 'F') && (data[8] == 'I') && (data[9] == 'F'))
-                    {
-                        richTextBox1.Text += "JPG 檔案\n";
-                    }
-                    else if ((data[0] == 'G') && (data[1] == 'I') && (data[2] == 'F') && (data[9] == '8') && (data[9] == '9'))
-                    {
-                        richTextBox1.Text += "GIF 檔案\n";
-                    }
-                    else if ((data[0] == 'B') && (data[1] == 'M'))
-                    {
-                        richTextBox1.Text += "BMP 檔案\n";
-                    }
-                    else if ((data[0] == 0xFF) && (data[1] == 0xFE))
-                    {
-                        richTextBox1.Text += " 純文字Unicode 檔案\n";
-                    }
-                    else if ((data[0] == 'I') && (data[1] == 'D') && (data[2] == '3'))
-                    {
-                        richTextBox1.Text += "MP3 檔案\n";
-                    }
-                    else
-                    {
-                        richTextBox1.Text += "其他 檔案\n";
-                    }
-                }
-            }
-            else
-            {
-                richTextBox1.Text += "未選取檔案\n";
-            }
         }
 
         private void button12_Click(object sender, EventArgs e)

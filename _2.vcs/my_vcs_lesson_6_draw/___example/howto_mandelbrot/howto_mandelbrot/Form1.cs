@@ -27,7 +27,7 @@ namespace howto_mandelbrot
 
         public List<Color> Colors = new List<Color>();
 
-        private Bitmap m_Bm;
+        private Bitmap bitmap1;
 
         private const double MIN_X = -2.2;
         private const double MAX_X = 1;
@@ -75,16 +75,18 @@ namespace howto_mandelbrot
         // Draw the Mandelbrot set.
         private void DrawMandelbrot()
         {
+            richTextBox1.Text += "DrawMandelbrot()\n";
+
             // Work until the magnitude squared > 4.
             const int MAX_MAG_SQUARED = 4;
 
             // Make a Bitmap to draw on.
-            m_Bm = new Bitmap(picCanvas.ClientSize.Width, picCanvas.ClientSize.Height);
-            Graphics gr = Graphics.FromImage(m_Bm);
+            bitmap1 = new Bitmap(picCanvas.ClientSize.Width, picCanvas.ClientSize.Height);
+            Graphics gr = Graphics.FromImage(bitmap1);
 
             // Clear.
             gr.Clear(picCanvas.BackColor);
-            picCanvas.Image = m_Bm;
+            picCanvas.Image = bitmap1;
             Application.DoEvents();
 
             // Adjust the coordinate bounds to fit picCanvas.
@@ -122,7 +124,7 @@ namespace howto_mandelbrot
                     }
 
                     // Set the pixel's value.
-                    m_Bm.SetPixel(X, Y, Colors[clr % num_colors]);
+                    bitmap1.SetPixel(X, Y, Colors[clr % num_colors]);
 
                     ImaC += dImaC;
                 }
@@ -142,6 +144,7 @@ namespace howto_mandelbrot
         // Scale the selected area by this factor.
         private void ScaleArea(int scale_factor)
         {
+            richTextBox1.Text += "scale = " + scale_factor.ToString() + "\n";
             double size = scale_factor * (m_Xmax - m_Xmin);
             if (size > 3.2)
             {
@@ -179,6 +182,8 @@ namespace howto_mandelbrot
         // Zoom out to full scale.
         private void mnuScaleFull_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "full-scale\n";
+
             m_Xmin = MIN_X;
             m_Xmax = MAX_X;
             m_Ymin = MIN_Y;
@@ -245,8 +250,8 @@ namespace howto_mandelbrot
 
             m_CurX = e.X;
             m_CurY = e.Y;
-            
-            Bitmap bm = new Bitmap(m_Bm);
+
+            Bitmap bm = new Bitmap(bitmap1);
             Graphics gr = Graphics.FromImage(bm);
             gr.DrawRectangle(Pens.Yellow,
                 (int)(Math.Min(m_StartX, m_CurX)), (int)(Math.Min(m_StartY, m_CurY)),
@@ -257,9 +262,12 @@ namespace howto_mandelbrot
         // Finish selecting an area.
         private void picCanvas_MouseUp(object sender, MouseEventArgs e)
         {
-            if (!m_DrawingBox) return;
+            if (!m_DrawingBox)
+            {
+                return;
+            }
             m_DrawingBox = false;
-            picCanvas.Image = m_Bm;
+            picCanvas.Image = bitmap1;
 
             m_CurX = e.X;
             m_CurY = e.Y;
@@ -294,27 +302,27 @@ namespace howto_mandelbrot
         {
             if (dlgSaveFile.ShowDialog() == DialogResult.OK)
             {
-                m_Bm.Save(dlgSaveFile.FileName);
+                bitmap1.Save(dlgSaveFile.FileName);
                 string filename = dlgSaveFile.FileName;
                 string extension = filename.Substring(filename.LastIndexOf("."));
                 switch (extension)
                 {
                     case ".bmp":
-                        m_Bm.Save(filename, ImageFormat.Bmp);
+                        bitmap1.Save(filename, ImageFormat.Bmp);
                         break;
                     case ".jpg":
                     case ".jpeg":
-                        m_Bm.Save(filename, ImageFormat.Jpeg);
+                        bitmap1.Save(filename, ImageFormat.Jpeg);
                         break;
                     case ".gif":
-                        m_Bm.Save(filename, ImageFormat.Gif);
+                        bitmap1.Save(filename, ImageFormat.Gif);
                         break;
                     case ".png":
-                        m_Bm.Save(filename, ImageFormat.Png);
+                        bitmap1.Save(filename, ImageFormat.Png);
                         break;
                     case ".tif":
                     case ".tiff":
-                        m_Bm.Save(filename, ImageFormat.Tiff);
+                        bitmap1.Save(filename, ImageFormat.Tiff);
                         break;
                 }
             }

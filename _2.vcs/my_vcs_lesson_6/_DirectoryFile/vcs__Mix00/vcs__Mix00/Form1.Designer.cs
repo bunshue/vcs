@@ -359,6 +359,7 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(160, 70);
             this.button17.TabIndex = 46;
+            this.button17.Text = "拷貝檔案, 限定拷貝大小";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 
@@ -369,6 +370,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(160, 70);
             this.button18.TabIndex = 47;
+            this.button18.Text = "取得真實副檔名";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -379,6 +381,7 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(160, 70);
             this.button19.TabIndex = 48;
+            this.button19.Text = "判斷檔案格式";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -466,6 +469,7 @@
             this.button27.Name = "button27";
             this.button27.Size = new System.Drawing.Size(160, 70);
             this.button27.TabIndex = 56;
+            this.button27.Text = "創建唯一的檔案名, 考慮時間因素";
             this.button27.UseVisualStyleBackColor = true;
             this.button27.Click += new System.EventHandler(this.button27_Click);
             // 
@@ -476,6 +480,7 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(160, 70);
             this.button28.TabIndex = 57;
+            this.button28.Text = "根據文件頭判斷上傳的文件類型";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 
