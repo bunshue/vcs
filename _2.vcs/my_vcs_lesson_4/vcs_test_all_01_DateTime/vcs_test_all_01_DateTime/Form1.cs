@@ -43,6 +43,12 @@ namespace vcs_test_all_01_DateTime
 
             show_item_location();
 
+            this.ShowMoon();
+
+            this.monthCalendar1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.monthCalendar1.RightToLeft = System.Windows.Forms.RightToLeft.No;
+
+
         }
 
         void show_item_location()
@@ -156,27 +162,28 @@ namespace vcs_test_all_01_DateTime
             button78.Location = new Point(x_st + dx * 3, y_st + dy * 18);
             button79.Location = new Point(x_st + dx * 3, y_st + dy * 19);
 
-            groupBox5.Location = new Point(x_st + dx * 4, y_st + dy * 6+30);
+
             groupBox6.Location = new Point(x_st + dx * 4, y_st + dy * 0);
             groupBox8.Location = new Point(x_st + dx * 4, y_st + dy * 8 + 30);
+            groupBox5.Location = new Point(x_st + dx * 4 + 225, y_st + dy * 8 + 30);
             groupBox7.Location = new Point(x_st + dx * 4, y_st + dy * 12 - 20);
             groupBox9.Location = new Point(x_st + dx * 4 + 145, y_st + dy * 12 - 20);
             groupBox10.Location = new Point(x_st + dx * 4, y_st + dy * 16 + 45);
             groupBox13.Location = new Point(x_st + dx * 4, y_st + dy * 3 + 30);
 
-            groupBox1.Location = new Point(x_st + dx * 6+35, y_st + dy * 0);
+            groupBox1.Location = new Point(x_st + dx * 6 + 35, y_st + dy * 0);
             groupBox2.Location = new Point(x_st + dx * 6 + 35, y_st + dy * 5);
             groupBox4.Location = new Point(x_st + dx * 6 + 35, y_st + dy * 10);
             groupBox3.Location = new Point(x_st + dx * 6 + 35, y_st + dy * 12);
             groupBox11.Location = new Point(x_st + dx * 6 + 35, y_st + dy * 14);
             groupBox12.Location = new Point(x_st + dx * 6 + 110, y_st + dy * 17);
 
-            textBox2.Location = new Point(x_st + dx * 0, y_st + dy * 0+10);
-            bt1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            textBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 40+10);
-            bt0.Location = new Point(x_st + dx * 1, y_st + dy * 0 + 40);
-            dateTimePicker1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 80+10);
-            bt2.Location = new Point(x_st + dx * 1, y_st + dy * 0 + 80);
+            textBox2.Location = new Point(x_st + dx * 0 - 5, y_st + dy * 0 + 10);
+            bt1.Location = new Point(x_st + dx * 1 - 30, y_st + dy * 0 + 10);
+            textBox1.Location = new Point(x_st + dx * 0 - 5, y_st + dy * 0 + 40 + 10);
+            bt0.Location = new Point(x_st + dx * 1 - 30, y_st + dy * 0 + 50);
+            dateTimePicker1.Location = new Point(x_st + dx * 0 - 5, y_st + dy * 0 + 80 + 10);
+            bt2.Location = new Point(x_st + dx * 1 - 30, y_st + dy * 0 + 90);
 
             label1.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 20);
             label2.Location = new Point(x_st + dx * 0, y_st + dy * 0 + 60);
@@ -205,11 +212,7 @@ namespace vcs_test_all_01_DateTime
             bt_special_09.Location = new Point(x_st + dx * 2, y_st + dy * 1);
             bt_special_10.Location = new Point(x_st + dx * 2, y_st + dy * 2);
             bt_special_11.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            groupBox6.Size = new Size(10 * 2 + 120 * 3+5*2, 20 + 35 * 4 + 5 * 3+10);
-            groupBox13.Size = new Size(10 * 2 + 120 * 3 + 5 * 2, 20 + 35 * 4 + 5 * 3 + 10-30);
-
-
-
+            groupBox6.Size = new Size(10 * 2 + 120 * 3 + 5 * 2, 20 + 35 * 4 + 5 * 3 + 10);
 
             dx = 120 + 5;
             dy = 40 + 5;
@@ -2824,6 +2827,197 @@ DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元999
         }
 
 
+
+        //月相 ST
+        //Variables for Moon program
+        private double ip;
+        //private TextBox textBox1;
+        //private Button button1;
+        //private RichTextBox richTextBox1;
+        private double ag;
+
+        private int JulianDate(int d, int m, int y)
+        {
+            int mm, yy;
+            int k1, k2, k3;
+            int j;
+
+            yy = y - (int)((12 - m) / 10);
+            mm = m + 9;
+            if (mm >= 12)
+            {
+                mm = mm - 12;
+            }
+            k1 = (int)(365.25 * (yy + 4712));
+            k2 = (int)(30.6001 * mm + 0.5);
+            k3 = (int)((int)((yy / 100) + 49) * 0.75) - 38;
+            // 'j' for dates in Julian calendar:
+            j = k1 + k2 + d + 59;
+            if (j > 2299160)
+            {
+                // For Gregorian calendar:
+                j = j - k3;  // 'j' is the Julian date at 12h UT (Universal Time)
+            }
+            return j;
+        }
+
+        private double MoonAge(int d, int m, int y)
+        {
+            int j = JulianDate(d, m, y);
+            //Calculate the approximate phase of the moon
+            ip = (j + 4.867) / 29.53059;
+            ip = ip - Math.Floor(ip);
+            //After several trials I've seen to add the following lines, 
+            //which gave the result was not bad
+            if (ip < 0.5)
+                ag = ip * 29.53059 + 29.53059 / 2;
+            else
+                ag = ip * 29.53059 - 29.53059 / 2;
+            // Moon's age in days
+            ag = Math.Floor(ag) + 1;
+            return ag;
+        }
+
+        private void PrintAge()
+        {
+            string theAge = "Moon age";
+
+            theAge = theAge + " " + ":" + " " + ag.ToString();
+
+            if (ag == 1)
+                theAge = theAge + " " + "day";
+            else
+                theAge = theAge + " " + "days";
+
+            this.lb_moon_age.Text = theAge;
+        }
+
+        public void ClearDraw()
+        {
+            if (pictureBox1.Image != null)
+            {
+                pictureBox1.Image = null;
+            }
+        }
+
+        private void DrawMoon()
+        {
+            richTextBox1.Text += "DrawMoon\n";
+            int Xpos, Ypos, Rpos;
+            int Xpos1, Xpos2;
+            double Phase;
+
+            Phase = ip;
+
+            // Width of 'bitmap1' Object = Width of 'pictureBox1' control
+            int PageWidth = pictureBox1.Width;
+            // Height of 'bitmap1' Object = Height of 'pictureBox1' control
+            int PageHeight = pictureBox1.Height;
+            // Initiate 'bitmap1' Object with size = size of control 'pictureBox1' control
+            Bitmap bitmap1 = new Bitmap(PageWidth, PageHeight);
+            // Create graphics object for alteration.
+            Graphics g = Graphics.FromImage(bitmap1);
+
+            Pen PenB = new Pen(Color.Black); // For darkness part of the moon
+            Pen PenW = new Pen(Color.White); // For the lighted part of the moon
+
+            for (Ypos = 0; Ypos <= 45; Ypos++)
+            {
+                Xpos = (int)(Math.Sqrt(45 * 45 - Ypos * Ypos));
+                // Draw darkness part of the moon
+                Point pB1 = new Point(90 - Xpos, Ypos + 90);
+                Point pB2 = new Point(Xpos + 90, Ypos + 90);
+                Point pB3 = new Point(90 - Xpos, 90 - Ypos);
+                Point pB4 = new Point(Xpos + 90, 90 - Ypos);
+                g.DrawLine(PenB, pB1, pB2);
+                g.DrawLine(PenB, pB3, pB4);
+                // Determine the edges of the lighted part of the moon
+                Rpos = 2 * Xpos;
+                if (Phase < 0.5)
+                {
+                    Xpos1 = -Xpos;
+                    Xpos2 = (int)(Rpos - 2 * Phase * Rpos - Xpos);
+                }
+                else
+                {
+                    Xpos1 = Xpos;
+                    Xpos2 = (int)(Xpos - 2 * Phase * Rpos + Rpos);
+                }
+                // Draw the lighted part of the moon
+                Point pW1 = new Point(Xpos1 + 90, 90 - Ypos);
+                Point pW2 = new Point(Xpos2 + 90, 90 - Ypos);
+                Point pW3 = new Point(Xpos1 + 90, Ypos + 90);
+                Point pW4 = new Point(Xpos2 + 90, Ypos + 90);
+                g.DrawLine(PenW, pW1, pW2);
+                g.DrawLine(PenW, pW3, pW4);
+            }
+
+            // Display the bitmap in the picture box.
+            pictureBox1.Image = bitmap1;
+
+            // Release graphics object
+            PenB.Dispose();
+            PenW.Dispose();
+            g.Dispose();
+            bitmap1 = null;
+        }
+
+        private void YourChoice()
+        {
+            //user select date from MonthCalendar control
+            int Aday, Amonth, Ayear;
+            Aday = this.monthCalendar1.SelectionStart.Day;
+            Amonth = this.monthCalendar1.SelectionStart.Month;
+            Ayear = this.monthCalendar1.SelectionStart.Year;
+            this.MoonAge(Aday, Amonth, Ayear);
+        }
+
+        private void ShowMoon()
+        {
+            richTextBox1.Text += "ShowMoon\n";
+            //draw moon and print age in selected days
+            this.YourChoice(); //select date
+            this.ClearDraw(); //clear pictureBox1 PictureBox
+            this.DrawMoon(); //draw the moon
+            this.PrintAge(); //print age of moon in days
+        }
+
+        private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
+        {
+            this.ShowMoon();
+        }
+
+        private void btn_moon_today_Click(object sender, EventArgs e)
+        {
+            //set the date of today
+            this.monthCalendar1.SetDate(this.monthCalendar1.TodayDate.Date);
+
+        }
+
+        private void btn_moon_ok_Click(object sender, EventArgs e)
+        {
+            DateTime dt = DateTime.Now;
+            bool conversionSuccessful = DateTime.TryParse(textBox4.Text, out dt);    //out為必須
+            if (conversionSuccessful == true)
+            {
+                richTextBox1.Text += "得到DateTime資料： " + dt.ToString() + "\n";
+                this.monthCalendar1.SetDate(dt);
+
+            }
+            else
+            {
+                richTextBox1.Text += "DateTime.TryParse 失敗\n";
+            }
+
+        }
+
+
+
+
+
+
+
+
     }
 
     #region LunarDate
@@ -5160,4 +5354,3 @@ DateTime值類型代表了一個從公元0001年1月1日0點0分0秒到公元999
         #endregion
     }
 }
-

@@ -25,6 +25,9 @@ namespace vcs_Clipboard
             show_item_location();
             webBrowser_clipboard.Navigate("about:blank");
             richTextBox1.Text += "\n";
+
+            string filename = @"C:\______test_files\picture1.jpg";
+            pictureBox1.Image = Image.FromFile(filename);
         }
 
         void show_item_location()
@@ -46,7 +49,7 @@ namespace vcs_Clipboard
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 4);
 
-            groupBox1.Location = new Point(12, 350);
+            groupBox1.Location = new Point(12, 500);
             y_st = 18;
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -56,7 +59,7 @@ namespace vcs_Clipboard
             button11.Location = new Point(x_st + dx * 0, y_st + dy * 5);
 
             x_st = 350;
-            y_st = 350;
+            y_st = 500;
             dx = 140 + 10;
             dy = 50 + 10;
 
@@ -66,14 +69,18 @@ namespace vcs_Clipboard
             button18.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             button19.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             button20.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button21.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button22.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button26.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            button27.Location = new Point(x_st + dx * 0, y_st + dy * 9);
-            button28.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button29.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button21.Location = new Point(x_st + dx *1, y_st + dy * 0);
+            button22.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button26.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button27.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button28.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button29.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+
+            pictureBox1.Size = new Size(450, 450);
+            pictureBox1.Location = new Point(200, 10);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            this.Location = new Point(100, 50);
 
         }
 
@@ -191,6 +198,53 @@ namespace vcs_Clipboard
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //放小圖到剪貼簿中, 並貼到圖上
+            string filename = @"C:\______test_files\__pic\chicken.bmp";
+
+            //放進剪貼簿
+            //TBD
+
+            Image clipboard_image = GetClipboardImage();
+
+            if (clipboard_image == null)
+            {
+                return;
+            }
+
+            // Draw on the image.
+            Graphics gr = Graphics.FromImage(pictureBox1.Image);
+            Rectangle source_rect = new Rectangle(0, 0, clipboard_image.Width, clipboard_image.Height);
+            int x = 50;
+            int y = 50;
+            Rectangle dest_rect = new Rectangle(x, y, clipboard_image.Width, clipboard_image.Height);
+            gr.DrawImage(clipboard_image, dest_rect, source_rect, GraphicsUnit.Pixel);
+            pictureBox1.Refresh();
+        }
+
+        // Get a PNG from the clipboard if possible.
+        // Otherwise try to get a bitmap.
+        private Image GetClipboardImage()
+        {
+            // Try to paste PNG data.
+            if (Clipboard.ContainsData("PNG"))
+            {
+                richTextBox1.Text += "有PNG圖片\n";
+                Object png_object = Clipboard.GetData("PNG");
+                if (png_object is MemoryStream)
+                {
+                    MemoryStream png_stream = png_object as MemoryStream;
+                    return Image.FromStream(png_stream);
+                }
+            }
+
+            // Try to paste bitmap data.
+            if (Clipboard.ContainsImage())
+            {
+                return Clipboard.GetImage();
+            }
+
+            // We couldn't find anything useful. Return null.
+            return null;
         }
 
         private void button6_Click(object sender, EventArgs e)
