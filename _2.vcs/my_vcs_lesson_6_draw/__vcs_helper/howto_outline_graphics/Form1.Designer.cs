@@ -33,8 +33,8 @@
             this.btnGo = new System.Windows.Forms.Button();
             this.txtMaxRadius = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.picGraphics = new System.Windows.Forms.PictureBox();
-            ((System.ComponentModel.ISupportInitialize)(this.picGraphics)).BeginInit();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -57,7 +57,6 @@
             // 
             // btnGo
             // 
-            this.btnGo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnGo.Location = new System.Drawing.Point(235, 27);
             this.btnGo.Name = "btnGo";
             this.btnGo.Size = new System.Drawing.Size(75, 25);
@@ -84,18 +83,18 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Max Radius 字的遠距 紅色::";
             // 
-            // picGraphics
+            // pictureBox1
             // 
-            this.picGraphics.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            this.pictureBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
-            this.picGraphics.BackColor = System.Drawing.Color.White;
-            this.picGraphics.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.picGraphics.Location = new System.Drawing.Point(12, 61);
-            this.picGraphics.Name = "picGraphics";
-            this.picGraphics.Size = new System.Drawing.Size(534, 233);
-            this.picGraphics.TabIndex = 0;
-            this.picGraphics.TabStop = false;
+            this.pictureBox1.BackColor = System.Drawing.Color.White;
+            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 74);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(534, 233);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // Form1
             // 
@@ -108,11 +107,11 @@
             this.Controls.Add(this.btnGo);
             this.Controls.Add(this.txtMinRadius);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.picGraphics);
+            this.Controls.Add(this.pictureBox1);
             this.Name = "Form1";
             this.Text = "howto_outline_graphics";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.picGraphics)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -120,7 +119,7 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox picGraphics;
+        private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtMinRadius;
         private System.Windows.Forms.Button btnGo;

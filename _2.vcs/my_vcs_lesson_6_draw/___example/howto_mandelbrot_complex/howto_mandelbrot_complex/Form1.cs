@@ -75,6 +75,8 @@ namespace howto_mandelbrot
         // Draw the Mandelbrot set.
         private void DrawMandelbrot()
         {
+            richTextBox1.Text += "DrawMandelbrot()\n";
+
             // Work until the magnitude squared > 4.
             const int MAX_MAG_SQUARED = 4;
 
@@ -137,6 +139,7 @@ namespace howto_mandelbrot
         // Scale the selected area by this factor.
         private void ScaleArea(int scale_factor)
         {
+            richTextBox1.Text += "scale = " + scale_factor.ToString() + "\n";
             double size = scale_factor * (m_Xmax - m_Xmin);
             if (size > 3.2)
             {
@@ -174,6 +177,8 @@ namespace howto_mandelbrot
         // Zoom out to full scale.
         private void mnuScaleFull_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "full-scale\n";
+
             m_Xmin = MIN_X;
             m_Xmax = MAX_X;
             m_Ymin = MIN_Y;
@@ -253,7 +258,10 @@ namespace howto_mandelbrot
         // Finish selecting an area.
         private void picCanvas_MouseUp(object sender, MouseEventArgs e)
         {
-            if (!m_DrawingBox) return;
+            if (!m_DrawingBox)
+            {
+                return;
+            }
             m_DrawingBox = false;
             picCanvas.Image = m_Bm;
 

@@ -42,7 +42,7 @@
             // 
             this.lblBestArea.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblBestArea.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblBestArea.Location = new System.Drawing.Point(704, 155);
+            this.lblBestArea.Location = new System.Drawing.Point(704, 160);
             this.lblBestArea.Name = "lblBestArea";
             this.lblBestArea.Size = new System.Drawing.Size(72, 15);
             this.lblBestArea.TabIndex = 13;
@@ -51,7 +51,7 @@
             // Label3
             // 
             this.Label3.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Label3.Location = new System.Drawing.Point(704, 140);
+            this.Label3.Location = new System.Drawing.Point(704, 145);
             this.Label3.Name = "Label3";
             this.Label3.Size = new System.Drawing.Size(72, 15);
             this.Label3.TabIndex = 12;
@@ -62,7 +62,7 @@
             // 
             this.lblCurrentArea.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.lblCurrentArea.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblCurrentArea.Location = new System.Drawing.Point(704, 103);
+            this.lblCurrentArea.Location = new System.Drawing.Point(704, 108);
             this.lblCurrentArea.Name = "lblCurrentArea";
             this.lblCurrentArea.Size = new System.Drawing.Size(72, 15);
             this.lblCurrentArea.TabIndex = 11;
@@ -71,7 +71,7 @@
             // Label1
             // 
             this.Label1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.Label1.Location = new System.Drawing.Point(704, 89);
+            this.Label1.Location = new System.Drawing.Point(704, 94);
             this.Label1.Name = "Label1";
             this.Label1.Size = new System.Drawing.Size(72, 15);
             this.Label1.TabIndex = 10;
@@ -81,7 +81,7 @@
             // btnStep
             // 
             this.btnStep.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStep.Location = new System.Drawing.Point(704, 44);
+            this.btnStep.Location = new System.Drawing.Point(704, 49);
             this.btnStep.Name = "btnStep";
             this.btnStep.Size = new System.Drawing.Size(72, 30);
             this.btnStep.TabIndex = 9;
@@ -91,7 +91,7 @@
             // btnReset
             // 
             this.btnReset.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnReset.Location = new System.Drawing.Point(704, 7);
+            this.btnReset.Location = new System.Drawing.Point(704, 12);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(72, 30);
             this.btnReset.TabIndex = 8;

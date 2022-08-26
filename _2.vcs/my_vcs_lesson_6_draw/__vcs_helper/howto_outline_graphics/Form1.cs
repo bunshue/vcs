@@ -21,25 +21,23 @@ namespace howto_outline_graphics
         // Create some sample text.
         private void Form1_Load(object sender, EventArgs e)
         {
-            picGraphics.Image = Properties.Resources.Image;
-            picGraphics.Refresh();
+            pictureBox1.Image = Properties.Resources.Image;
+            pictureBox1.Refresh();
         }
 
         // Draw an outline.
         private void btnGo_Click(object sender, EventArgs e)
         {
-            Cursor = Cursors.WaitCursor;
-            picGraphics.Image = Properties.Resources.Image;
-            picGraphics.Refresh();
+            pictureBox1.Image = Properties.Resources.Image;
+            pictureBox1.Refresh();
 
             // Get the parameters.
             int min_radius = int.Parse(txtMinRadius.Text);
             int max_radius = int.Parse(txtMaxRadius.Text);
 
             // Get the outline image.
-            Bitmap outline_bm = MakeOutline(Properties.Resources.Mask,
-                min_radius, max_radius);
-            
+            Bitmap outline_bm = MakeOutline(Properties.Resources.Mask, min_radius, max_radius);
+
             // Combine the original image with the outline.
             Bitmap new_bm = (Bitmap)Properties.Resources.Image.Clone();
             using (Graphics gr = Graphics.FromImage(new_bm))
@@ -48,10 +46,8 @@ namespace howto_outline_graphics
                 gr.DrawImageUnscaledAndClipped(outline_bm, rect);
             }
 
-            picGraphics.Image = new_bm;
-            picGraphics.Refresh();
-
-            Cursor = Cursors.Default;
+            pictureBox1.Image = new_bm;
+            pictureBox1.Refresh();
         }
 
         // Make an outline image.
@@ -78,10 +74,13 @@ namespace howto_outline_graphics
                     {
                         byte alpha = 255;
                         if (dist - min_radius < 1)
+                        {
                             alpha = (byte)(255 * (dist - min_radius));
+                        }
                         else if (max_radius - dist < 1)
+                        {
                             alpha = (byte)(255 * (max_radius - dist));
-
+                        }
                         new_bm32.SetPixel(x, y, 255, 0, 0, alpha);
                     }
                 }
@@ -114,17 +113,14 @@ namespace howto_outline_graphics
                         int dx = tx - x;
                         int dy = ty - y;
                         int test_dist2 = dx * dx + dy * dy;
-                        if (test_dist2 < dist2) dist2 = test_dist2;
+                        if (test_dist2 < dist2)
+                        {
+                            dist2 = test_dist2;
+                        }
                     }
                 }
             }
-
             return (float)Math.Sqrt(dist2);
         }
-
-
-
-
-
     }
 }

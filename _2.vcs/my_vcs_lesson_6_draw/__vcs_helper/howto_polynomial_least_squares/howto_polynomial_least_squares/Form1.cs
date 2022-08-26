@@ -40,6 +40,7 @@ namespace howto_polynomial_least_squares
                 new PointF(picGraph.ClientSize.Width, picGraph.ClientSize.Height),
                 new PointF(0, 0),
             };
+
             DrawingTransform = new Matrix(world_rect, pts);
             InverseTransform = DrawingTransform.Clone();
             InverseTransform.Invert();
@@ -95,8 +96,7 @@ namespace howto_polynomial_least_squares
                     for (double x = Xmin + x_step; x <= Xmax; x += x_step)
                     {
                         double y1 = CurveFunctions.F(BestCoeffs, x);
-                        e.Graphics.DrawLine(thin_pen,
-                            (float)(x - x_step), (float)y0, (float)x, (float)y1);
+                        e.Graphics.DrawLine(thin_pen, (float)(x - x_step), (float)y0, (float)x, (float)y1);
                         y0 = y1;
                     }
                 }
@@ -109,10 +109,8 @@ namespace howto_polynomial_least_squares
             {
                 foreach (PointF pt in Points)
                 {
-                    e.Graphics.FillRectangle(Brushes.White,
-                        pt.X - dx, pt.Y - dy, 2 * dx, 2 * dy);
-                    e.Graphics.DrawRectangle(thin_pen,
-                        pt.X - dx, pt.Y - dy, 2 * dx, 2 * dy);
+                    e.Graphics.FillRectangle(Brushes.White, pt.X - dx, pt.Y - dy, 2 * dx, 2 * dy);
+                    e.Graphics.DrawRectangle(thin_pen, pt.X - dx, pt.Y - dy, 2 * dx, 2 * dy);
                 }
             }
         }
@@ -151,7 +149,9 @@ namespace howto_polynomial_least_squares
         // Find parameters for a weibull curve fit.
         private void btnFit_Click(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
+            if (Points.Count <= 0)
+                return;
+
             txtCoeffs.Clear();
             txtError.Clear();
             Application.DoEvents();
@@ -164,8 +164,7 @@ namespace howto_polynomial_least_squares
 
             DateTime stop_time = DateTime.Now;
             TimeSpan elapsed = stop_time - start_time;
-            Console.WriteLine("Time: " +
-                elapsed.TotalSeconds.ToString("0.00") + " seconds");
+            Console.WriteLine("Time: " + elapsed.TotalSeconds.ToString("0.00") + " seconds");
 
             string txt = "";
             foreach (double coeff in BestCoeffs)
@@ -180,13 +179,14 @@ namespace howto_polynomial_least_squares
             // We have a solution.
             HasSolution = true;
             picGraph.Refresh();
-
-            this.Cursor = Cursors.Default;
         }
 
         // Regraph with the given parameters.
         private void btnGraph_Click(object sender, EventArgs e)
         {
+            if (Points.Count <= 0)
+                return;
+
             // Get the coefficients.
             string[] coeffs = txtCoeffs.Text.Split();
             BestCoeffs = new List<double>();
@@ -202,9 +202,13 @@ namespace howto_polynomial_least_squares
         private void ShowError()
         {
             // Get the error.
-            double error = Math.Sqrt(
-                CurveFunctions.ErrorSquared(Points, BestCoeffs));
+            double error = Math.Sqrt(CurveFunctions.ErrorSquared(Points, BestCoeffs));
             txtError.Text = error.ToString();
+        }
+
+        private void bt_info_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "points = " + Points.Count.ToString() + "\n";
         }
     }
 }

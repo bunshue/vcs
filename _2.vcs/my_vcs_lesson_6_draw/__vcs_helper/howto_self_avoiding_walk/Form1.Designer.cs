@@ -37,6 +37,7 @@
             this.lblResults = new System.Windows.Forms.Label();
             this.trkWalk = new System.Windows.Forms.TrackBar();
             this.lblWalkNum = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.picCanvas)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trkWalk)).BeginInit();
             this.SuspendLayout();
@@ -45,53 +46,53 @@
             // 
             this.picCanvas.BackColor = System.Drawing.Color.White;
             this.picCanvas.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.picCanvas.Location = new System.Drawing.Point(222, 12);
+            this.picCanvas.Location = new System.Drawing.Point(366, 14);
             this.picCanvas.Name = "picCanvas";
-            this.picCanvas.Size = new System.Drawing.Size(220, 220);
+            this.picCanvas.Size = new System.Drawing.Size(600, 600);
             this.picCanvas.TabIndex = 0;
             this.picCanvas.TabStop = false;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 15);
+            this.label1.Location = new System.Drawing.Point(12, 14);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 13);
+            this.label1.Size = new System.Drawing.Size(37, 12);
             this.label1.TabIndex = 1;
             this.label1.Text = "Width:";
             // 
             // txtWidth
             // 
-            this.txtWidth.Location = new System.Drawing.Point(56, 12);
+            this.txtWidth.Location = new System.Drawing.Point(56, 11);
             this.txtWidth.Name = "txtWidth";
-            this.txtWidth.Size = new System.Drawing.Size(42, 20);
+            this.txtWidth.Size = new System.Drawing.Size(42, 22);
             this.txtWidth.TabIndex = 2;
             this.txtWidth.Text = "4";
-            this.txtWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtHeight
             // 
-            this.txtHeight.Location = new System.Drawing.Point(167, 12);
+            this.txtHeight.Location = new System.Drawing.Point(192, 11);
             this.txtHeight.Name = "txtHeight";
-            this.txtHeight.Size = new System.Drawing.Size(42, 20);
+            this.txtHeight.Size = new System.Drawing.Size(42, 22);
             this.txtHeight.TabIndex = 4;
             this.txtHeight.Text = "4";
-            this.txtHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(123, 15);
+            this.label2.Location = new System.Drawing.Point(148, 14);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(41, 13);
+            this.label2.Size = new System.Drawing.Size(39, 12);
             this.label2.TabIndex = 3;
             this.label2.Text = "Height:";
             // 
             // btnGenerate
             // 
-            this.btnGenerate.Location = new System.Drawing.Point(72, 38);
+            this.btnGenerate.Location = new System.Drawing.Point(87, 48);
             this.btnGenerate.Name = "btnGenerate";
-            this.btnGenerate.Size = new System.Drawing.Size(75, 23);
+            this.btnGenerate.Size = new System.Drawing.Size(75, 26);
             this.btnGenerate.TabIndex = 5;
             this.btnGenerate.Text = "Generate";
             this.btnGenerate.UseVisualStyleBackColor = true;
@@ -100,16 +101,16 @@
             // lblResults
             // 
             this.lblResults.AutoSize = true;
-            this.lblResults.Location = new System.Drawing.Point(12, 83);
+            this.lblResults.Location = new System.Drawing.Point(12, 77);
             this.lblResults.Name = "lblResults";
-            this.lblResults.Size = new System.Drawing.Size(0, 13);
+            this.lblResults.Size = new System.Drawing.Size(0, 12);
             this.lblResults.TabIndex = 6;
             // 
             // trkWalk
             // 
-            this.trkWalk.Location = new System.Drawing.Point(12, 108);
+            this.trkWalk.Location = new System.Drawing.Point(12, 100);
             this.trkWalk.Name = "trkWalk";
-            this.trkWalk.Size = new System.Drawing.Size(204, 45);
+            this.trkWalk.Size = new System.Drawing.Size(348, 45);
             this.trkWalk.TabIndex = 7;
             this.trkWalk.Visible = false;
             this.trkWalk.Scroll += new System.EventHandler(this.trkWalk_Scroll);
@@ -117,17 +118,26 @@
             // lblWalkNum
             // 
             this.lblWalkNum.AutoSize = true;
-            this.lblWalkNum.Location = new System.Drawing.Point(12, 160);
+            this.lblWalkNum.Location = new System.Drawing.Point(12, 148);
             this.lblWalkNum.Name = "lblWalkNum";
-            this.lblWalkNum.Size = new System.Drawing.Size(0, 13);
+            this.lblWalkNum.Size = new System.Drawing.Size(0, 12);
             this.lblWalkNum.TabIndex = 8;
+            // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(12, 180);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(348, 434);
+            this.richTextBox1.TabIndex = 9;
+            this.richTextBox1.Text = "";
             // 
             // Form1
             // 
             this.AcceptButton = this.btnGenerate;
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(454, 241);
+            this.ClientSize = new System.Drawing.Size(978, 630);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.lblWalkNum);
             this.Controls.Add(this.trkWalk);
             this.Controls.Add(this.lblResults);
@@ -157,6 +167,7 @@
         private System.Windows.Forms.Label lblResults;
         private System.Windows.Forms.TrackBar trkWalk;
         private System.Windows.Forms.Label lblWalkNum;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

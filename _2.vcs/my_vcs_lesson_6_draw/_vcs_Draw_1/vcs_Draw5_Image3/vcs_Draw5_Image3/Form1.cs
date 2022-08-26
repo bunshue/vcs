@@ -133,7 +133,6 @@ namespace vcs_Draw5_Image3
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Application.Exit();
         }
 
         private void button4_Click(object sender, EventArgs e)

@@ -61,6 +61,8 @@ namespace vcs_LuckyGame
             int R = 400;
             int r = 50;
 
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+
             e.Graphics.DrawEllipse(Pens.Red, cx - R, cy - R, R * 2, R * 2);
 
             for (int i = 0; i < 360; i += 30)

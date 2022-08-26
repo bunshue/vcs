@@ -27,7 +27,7 @@ namespace howto_mandelbrot
 
         public List<Color> Colors = new List<Color>();
 
-        private Bitmap bitmap1;
+        private Bitmap m_Bm;
 
         private const double MIN_X = -2.2;
         private const double MAX_X = 1;
@@ -81,12 +81,12 @@ namespace howto_mandelbrot
             const int MAX_MAG_SQUARED = 4;
 
             // Make a Bitmap to draw on.
-            bitmap1 = new Bitmap(picCanvas.ClientSize.Width, picCanvas.ClientSize.Height);
-            Graphics gr = Graphics.FromImage(bitmap1);
+            m_Bm = new Bitmap(picCanvas.ClientSize.Width, picCanvas.ClientSize.Height);
+            Graphics gr = Graphics.FromImage(m_Bm);
 
             // Clear.
             gr.Clear(picCanvas.BackColor);
-            picCanvas.Image = bitmap1;
+            picCanvas.Image = m_Bm;
             Application.DoEvents();
 
             // Adjust the coordinate bounds to fit picCanvas.
@@ -124,13 +124,13 @@ namespace howto_mandelbrot
                     }
 
                     // Set the pixel's value.
-                    bitmap1.SetPixel(X, Y, Colors[clr % num_colors]);
+                    m_Bm.SetPixel(X, Y, Colors[clr % num_colors]);
 
                     ImaC += dImaC;
                 }
                 ReaC += dReaC;
 
-                // Let the user know we//re not dead.
+                // Let the user know we're not dead.
                 if (X % 10 == 0) picCanvas.Refresh();
             }
 
@@ -251,7 +251,7 @@ namespace howto_mandelbrot
             m_CurX = e.X;
             m_CurY = e.Y;
 
-            Bitmap bm = new Bitmap(bitmap1);
+            Bitmap bm = new Bitmap(m_Bm);
             Graphics gr = Graphics.FromImage(bm);
             gr.DrawRectangle(Pens.Yellow,
                 (int)(Math.Min(m_StartX, m_CurX)), (int)(Math.Min(m_StartY, m_CurY)),
@@ -267,7 +267,7 @@ namespace howto_mandelbrot
                 return;
             }
             m_DrawingBox = false;
-            picCanvas.Image = bitmap1;
+            picCanvas.Image = m_Bm;
 
             m_CurX = e.X;
             m_CurY = e.Y;
@@ -302,27 +302,27 @@ namespace howto_mandelbrot
         {
             if (dlgSaveFile.ShowDialog() == DialogResult.OK)
             {
-                bitmap1.Save(dlgSaveFile.FileName);
+                m_Bm.Save(dlgSaveFile.FileName);
                 string filename = dlgSaveFile.FileName;
                 string extension = filename.Substring(filename.LastIndexOf("."));
                 switch (extension)
                 {
                     case ".bmp":
-                        bitmap1.Save(filename, ImageFormat.Bmp);
+                        m_Bm.Save(filename, ImageFormat.Bmp);
                         break;
                     case ".jpg":
                     case ".jpeg":
-                        bitmap1.Save(filename, ImageFormat.Jpeg);
+                        m_Bm.Save(filename, ImageFormat.Jpeg);
                         break;
                     case ".gif":
-                        bitmap1.Save(filename, ImageFormat.Gif);
+                        m_Bm.Save(filename, ImageFormat.Gif);
                         break;
                     case ".png":
-                        bitmap1.Save(filename, ImageFormat.Png);
+                        m_Bm.Save(filename, ImageFormat.Png);
                         break;
                     case ".tif":
                     case ".tiff":
-                        bitmap1.Save(filename, ImageFormat.Tiff);
+                        m_Bm.Save(filename, ImageFormat.Tiff);
                         break;
                 }
             }

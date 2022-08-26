@@ -35,6 +35,7 @@
             this.mnuToolsRedraw = new System.Windows.Forms.MenuItem();
             this.mnuToolsFullScale = new System.Windows.Forms.MenuItem();
             this.picCanvas = new System.Windows.Forms.PictureBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.picCanvas)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,7 +75,6 @@
             // picCanvas
             // 
             this.picCanvas.BackColor = System.Drawing.Color.Black;
-            this.picCanvas.Dock = System.Windows.Forms.DockStyle.Fill;
             this.picCanvas.Location = new System.Drawing.Point(0, 0);
             this.picCanvas.Name = "picCanvas";
             this.picCanvas.Size = new System.Drawing.Size(684, 541);
@@ -84,11 +84,20 @@
             this.picCanvas.MouseMove += new System.Windows.Forms.MouseEventHandler(this.picCanvas_MouseMove);
             this.picCanvas.MouseUp += new System.Windows.Forms.MouseEventHandler(this.picCanvas_MouseUp);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(701, 0);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(472, 541);
+            this.richTextBox1.TabIndex = 6;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(684, 541);
+            this.ClientSize = new System.Drawing.Size(1185, 567);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.picCanvas);
             this.Menu = this.MainMenu1;
             this.Name = "Form1";
@@ -107,6 +116,7 @@
         private System.Windows.Forms.MenuItem mnuToolsRedraw;
         internal System.Windows.Forms.MenuItem mnuToolsFullScale;
         internal System.Windows.Forms.PictureBox picCanvas;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

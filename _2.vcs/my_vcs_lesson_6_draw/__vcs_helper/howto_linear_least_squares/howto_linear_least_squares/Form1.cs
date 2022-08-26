@@ -20,9 +20,9 @@ namespace howto_linear_least_squares
 
         // Drawing constants.
         private const float Xmin = -10.0f;
-        private const float Xmax =  10.0f;
+        private const float Xmax = 10.0f;
         private const float Ymin = -10.0f;
-        private const float Ymax =  10.0f;
+        private const float Ymax = 10.0f;
         private Matrix DrawingTransform;
         private Matrix InverseTransform;
 
@@ -67,14 +67,13 @@ namespace howto_linear_least_squares
             DrawAxes(e.Graphics);
 
             // Draw the curve.
-            if (HasSolution)
+            if (HasSolution == true)
             {
                 using (Pen thin_pen = new Pen(Color.Blue, 0))
                 {
                     double y0 = BestM * Xmin + BestB;
                     double y1 = BestM * Xmax + BestB;
-                    e.Graphics.DrawLine(thin_pen,
-                        (float)Xmin, (float)y0, (float)Xmax, (float)y1);
+                    e.Graphics.DrawLine(thin_pen, (float)Xmin, (float)y0, (float)Xmax, (float)y1);
                 }
             }
 
@@ -85,10 +84,8 @@ namespace howto_linear_least_squares
             {
                 foreach (PointF pt in Points)
                 {
-                    e.Graphics.FillRectangle(Brushes.White,
-                        pt.X - dx, pt.Y - dy, 2 * dx, 2 * dy);
-                    e.Graphics.DrawRectangle(thin_pen,
-                        pt.X - dx, pt.Y - dy, 2 * dx, 2 * dy);
+                    e.Graphics.FillRectangle(Brushes.White, pt.X - dx, pt.Y - dy, 2 * dx, 2 * dy);
+                    e.Graphics.DrawRectangle(thin_pen, pt.X - dx, pt.Y - dy, 2 * dx, 2 * dy);
                 }
             }
         }
@@ -128,7 +125,9 @@ namespace howto_linear_least_squares
         // Find parameters for a weibull curve fit.
         private void btnFit_Click(object sender, EventArgs e)
         {
-            this.Cursor = Cursors.WaitCursor;
+            if (Points.Count <= 0)
+                return;
+
             txtM.Clear();
             txtB.Clear();
             txtError.Clear();
@@ -141,8 +140,7 @@ namespace howto_linear_least_squares
 
             DateTime stop_time = DateTime.Now;
             TimeSpan elapsed = stop_time - start_time;
-            Console.WriteLine("Time: " +
-                elapsed.TotalSeconds.ToString("0.00") + " seconds");
+            Console.WriteLine("Time: " + elapsed.TotalSeconds.ToString("0.00") + " seconds");
 
             txtM.Text = BestM.ToString();
             txtB.Text = BestB.ToString();
@@ -153,13 +151,14 @@ namespace howto_linear_least_squares
             // We have a solution.
             HasSolution = true;
             picGraph.Refresh();
-
-            this.Cursor = Cursors.Default;
         }
 
         // Regraph with the given parameters.
         private void btnGraph_Click(object sender, EventArgs e)
         {
+            if (Points.Count <= 0)
+                return;
+
             BestM = double.Parse(txtM.Text);
             BestB = double.Parse(txtB.Text);
             ShowError();
@@ -170,9 +169,13 @@ namespace howto_linear_least_squares
         private void ShowError()
         {
             // Get the error.
-            double error = Math.Sqrt(CurveFunctions.ErrorSquared(
-                Points, BestM, BestB));
+            double error = Math.Sqrt(CurveFunctions.ErrorSquared(Points, BestM, BestB));
             txtError.Text = error.ToString();
+        }
+
+        private void bt_info_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "points = " + Points.Count.ToString() + "\n";
         }
     }
 }

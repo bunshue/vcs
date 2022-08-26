@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.Drawing.Drawing2D;
+
 namespace howto_scale_drawing
 {
     public partial class Form1 : Form
@@ -27,8 +29,7 @@ namespace howto_scale_drawing
         {
             int W = 500;
             int H = 500;
-            e.Graphics.SmoothingMode = 
-                System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
             RectangleF smiley_rect = new RectangleF(-1, -1, 2, 2);
             float wid = (W - 1) / 2;
@@ -50,8 +51,10 @@ namespace howto_scale_drawing
         // Map a drawing coordinate rectangle to a graphics object rectangle.
         private void MapDrawing(Graphics gr, RectangleF drawing_rect, RectangleF target_rect, bool stretch)
         {
-            if ((target_rect.Width < 1) ||
-                (target_rect.Height < 1)) return;
+            if ((target_rect.Width < 1) ||(target_rect.Height < 1))
+            {
+                return;
+            }
 
             gr.ResetTransform();
 
@@ -70,14 +73,12 @@ namespace howto_scale_drawing
                 scale_x = Math.Min(scale_x, scale_y);
                 scale_y = scale_x;
             }
-            gr.ScaleTransform(scale_x, scale_y,
-                System.Drawing.Drawing2D.MatrixOrder.Append);
+            gr.ScaleTransform(scale_x, scale_y, MatrixOrder.Append);
 
             // Translate to center over the drawing area.
             float graphics_cx = (target_rect.Left + target_rect.Right) / 2;
             float graphics_cy = (target_rect.Top + target_rect.Bottom) / 2;
-            gr.TranslateTransform(graphics_cx, graphics_cy,
-                System.Drawing.Drawing2D.MatrixOrder.Append);
+            gr.TranslateTransform(graphics_cx, graphics_cy, MatrixOrder.Append);
         }
 
         // Draw a smiley face in the area (-1, -1)-(1, 1).

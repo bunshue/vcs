@@ -342,12 +342,12 @@ namespace vcs_Draw_Example1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            g = pictureBox1.CreateGraphics();
             g.Clear(Color.White);
             int center_x = 250;
             int center_y = 200;
             int radius = 180;
             DrawPacman(center_x, center_y, radius);
-            pictureBox1.Image = bitmap1;
         }
 
         private void DrawPacman(int center_x, int center_y, int radius)
