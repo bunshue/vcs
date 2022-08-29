@@ -41,18 +41,24 @@ namespace howto_user_coordinates
             e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
 
             // Use a pen that isn't scaled.
-            using (Pen thin_pen = new Pen(Color.Black, 0))
+            using (Pen thin_pen = new Pen(Color.Black, 10))
             {
                 // Draw the axes.
                 float tic = 0.25f;
                 //thin_pen.Width = 2 / DrawingScale;
+
                 thin_pen.Width = 10;
                 e.Graphics.DrawLine(thin_pen, Wxmin, 0, Wxmax, 0);
                 for (int x = (int)Wxmin; x <= Wxmax; x++)
+                {
                     e.Graphics.DrawLine(thin_pen, x, -tic, x, tic);
+                }
+
                 e.Graphics.DrawLine(thin_pen, 0, Wymin, 0, Wymax);
                 for (int y = (int)Wymin; y <= Wymax; y++)
+                {
                     e.Graphics.DrawLine(thin_pen, -tic, y, tic, y);
+                }
 
                 // Draw the ellipses.
                 thin_pen.Width = 0;

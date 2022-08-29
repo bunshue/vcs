@@ -1542,13 +1542,177 @@ namespace vcs_Color
             this.pictureBox1.BackColor = pic.BackColor;
         }
 
+        //波長轉RGB ST
+
+        private Color getColorFromWaveLength(int Wavelength)
+        {
+            double Gamma = 1.00;
+            int IntensityMax = 255;
+            double Blue;
+            double Green;
+            double Red;
+            double Factor;
+
+            if (Wavelength >= 350 && Wavelength <= 439)
+            {
+                Red = -(Wavelength - 440d) / (440d - 350d);
+                Green = 0.0;
+                Blue = 1.0;
+            }
+            else if (Wavelength >= 440 && Wavelength <= 489)
+            {
+                Red = 0.0;
+                Green = (Wavelength - 440d) / (490d - 440d);
+                Blue = 1.0;
+            }
+            else if (Wavelength >= 490 && Wavelength <= 509)
+            {
+                Red = 0.0;
+                Green = 1.0;
+                Blue = -(Wavelength - 510d) / (510d - 490d);
+
+            }
+            else if (Wavelength >= 510 && Wavelength <= 579)
+            {
+                Red = (Wavelength - 510d) / (580d - 510d);
+                Green = 1.0;
+                Blue = 0.0;
+            }
+            else if (Wavelength >= 580 && Wavelength <= 644)
+            {
+                Red = 1.0;
+                Green = -(Wavelength - 645d) / (645d - 580d);
+                Blue = 0.0;
+            }
+            else if (Wavelength >= 645 && Wavelength <= 780)
+            {
+                Red = 1.0;
+                Green = 0.0;
+                Blue = 0.0;
+            }
+            else
+            {
+                Red = 0.0;
+                Green = 0.0;
+                Blue = 0.0;
+            }
+            if (Wavelength >= 350 && Wavelength <= 419)
+            {
+                Factor = 0.3 + 0.7 * (Wavelength - 350d) / (420d - 350d);
+            }
+            else if (Wavelength >= 420 && Wavelength <= 700)
+            {
+                Factor = 1.0;
+            }
+            else if (Wavelength >= 701 && Wavelength <= 780)
+            {
+                Factor = 0.3 + 0.7 * (780d - Wavelength) / (780d - 700d);
+            }
+            else
+            {
+                Factor = 0.0;
+            }
+
+            int R = this.factorAdjust(Red, Factor, IntensityMax, Gamma);
+            int G = this.factorAdjust(Green, Factor, IntensityMax, Gamma);
+            int B = this.factorAdjust(Blue, Factor, IntensityMax, Gamma);
+
+            return Color.FromArgb(R, G, B);
+        }
+
+        private int factorAdjust(double Color,
+         double Factor,
+         int IntensityMax,
+         double Gamma)
+        {
+            if (Color == 0.0)
+            {
+                return 0;
+            }
+            else
+            {
+                return (int)Math.Round(IntensityMax * Math.Pow(Color * Factor, Gamma));
+            }
+        }
+
+
+        void getColorFromWaveLength2(double l) // RGB <0,1> <- lambda l <400,700> [nm]
+        {
+            double t;
+            double r = 0.0;
+            double g = 0.0;
+            double b = 0.0;
+            if ((l >= 400.0) && (l < 410.0)) { t = (l - 400.0) / (410.0 - 400.0); r = +(0.33 * t) - (0.20 * t * t); }
+            else if ((l >= 410.0) && (l < 475.0)) { t = (l - 410.0) / (475.0 - 410.0); r = 0.14 - (0.13 * t * t); }
+            else if ((l >= 545.0) && (l < 595.0)) { t = (l - 545.0) / (595.0 - 545.0); r = +(1.98 * t) - (t * t); }
+            else if ((l >= 595.0) && (l < 650.0)) { t = (l - 595.0) / (650.0 - 595.0); r = 0.98 + (0.06 * t) - (0.40 * t * t); }
+            else if ((l >= 650.0) && (l < 700.0)) { t = (l - 650.0) / (700.0 - 650.0); r = 0.65 - (0.84 * t) + (0.20 * t * t); }
+            if ((l >= 415.0) && (l < 475.0)) { t = (l - 415.0) / (475.0 - 415.0); g = +(0.80 * t * t); }
+            else if ((l >= 475.0) && (l < 590.0)) { t = (l - 475.0) / (590.0 - 475.0); g = 0.8 + (0.76 * t) - (0.80 * t * t); }
+            else if ((l >= 585.0) && (l < 639.0)) { t = (l - 585.0) / (639.0 - 585.0); g = 0.84 - (0.84 * t); }
+            if ((l >= 400.0) && (l < 475.0)) { t = (l - 400.0) / (475.0 - 400.0); b = +(2.20 * t) - (1.50 * t * t); }
+            else if ((l >= 475.0) && (l < 560.0)) { t = (l - 475.0) / (560.0 - 475.0); b = 0.7 - (t) + (0.30 * t * t); }
+
+            richTextBox1.Text += "l = " + l.ToString() + "\n";
+            richTextBox1.Text += "r = " + r.ToString() + "\n";
+            richTextBox1.Text += "g = " + g.ToString() + "\n";
+            richTextBox1.Text += "b = " + b.ToString() + "\n";
+
+            richTextBox1.Text += "r = " + Math.Floor(r * 255).ToString() + "\n";
+            richTextBox1.Text += "g = " + Math.Floor(g * 255).ToString() + "\n";
+            richTextBox1.Text += "b = " + Math.Floor(b * 255).ToString() + "\n";
+        }
+
         private void button16_Click(object sender, EventArgs e)
         {
+            //波長轉RGB
+
+            int w = pictureBox1.ClientSize.Width;
+            int h = pictureBox1.ClientSize.Height;
+
+            Bitmap bmp = new Bitmap(w, h);
+            Graphics g = Graphics.FromImage(bmp);
+            g.Clear(Color.Pink);
+
+            int lambda = 350;
+            for (lambda = 350; lambda <= 780; lambda++)
+            {
+                Color c = getColorFromWaveLength(lambda);
+                Pen p = new Pen(c, 1);
+                g.DrawLine(p, lambda, 0, lambda, 200);
+
+
+                if (lambda == 500)
+                {
+                    richTextBox1.Text += "l = " + lambda.ToString() + "\n";
+                    richTextBox1.Text += "r = " + c.R.ToString() + "\n";
+                    richTextBox1.Text += "g = " + c.G.ToString() + "\n";
+                    richTextBox1.Text += "b = " + c.B.ToString() + "\n";
+                }
+
+            }
+
+
+
+            pictureBox1.Image = bmp;
+
+
+
+
+            double l = 500;
+
+            getColorFromWaveLength2(l);
+
+
 
         }
+        //波長轉RGB SP
 
         private void button17_Click(object sender, EventArgs e)
         {
+            double l = 500;
+
+            getColorFromWaveLength2(l);
 
         }
 
