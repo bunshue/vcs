@@ -230,7 +230,7 @@
             this.button16.Name = "button16";
             this.button16.Size = new System.Drawing.Size(180, 55);
             this.button16.TabIndex = 65;
-            this.button16.Text = "波長轉RGB";
+            this.button16.Text = "波長轉RGB RGB轉波長";
             this.button16.UseVisualStyleBackColor = true;
             this.button16.Click += new System.EventHandler(this.button16_Click);
             // 

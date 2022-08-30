@@ -8,17 +8,6 @@ void add(int n, float *x, float *y)
   int stride = blockDim.x;
   for (int i = index; i < n; i += stride)
       y[i] = x[i] + y[i];
-
-  for (int j = index; j < n; j += stride)
-  {
-      for (int i = index; i < (n-stride); i += stride)
-      {
-          y[i] = sqrt(x[j] * y[i+stride]);
-      }
-
-  }
-
-
 }
 
 int main(void)
