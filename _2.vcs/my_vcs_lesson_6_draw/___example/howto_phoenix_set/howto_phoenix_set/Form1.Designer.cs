@@ -30,8 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             this.MainMenu1 = new System.Windows.Forms.MainMenu(this.components);
-            this.mnuFile = new System.Windows.Forms.MenuItem();
-            this.mnuFileSaveAs = new System.Windows.Forms.MenuItem();
             this.mnuScaleMnu = new System.Windows.Forms.MenuItem();
             this.mnuScale_2 = new System.Windows.Forms.MenuItem();
             this.mnuScale_4 = new System.Windows.Forms.MenuItem();
@@ -41,7 +39,6 @@
             this.mnuScaleRefresh = new System.Windows.Forms.MenuItem();
             this.mnuOpt = new System.Windows.Forms.MenuItem();
             this.mnuOptOptions = new System.Windows.Forms.MenuItem();
-            this.dlgSaveFile = new System.Windows.Forms.SaveFileDialog();
             this.picCanvas = new System.Windows.Forms.PictureBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.picCanvas)).BeginInit();
@@ -50,27 +47,12 @@
             // MainMenu1
             // 
             this.MainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.mnuFile,
             this.mnuScaleMnu,
             this.mnuOpt});
             // 
-            // mnuFile
-            // 
-            this.mnuFile.Index = 0;
-            this.mnuFile.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
-            this.mnuFileSaveAs});
-            this.mnuFile.Text = "&File";
-            // 
-            // mnuFileSaveAs
-            // 
-            this.mnuFileSaveAs.Index = 0;
-            this.mnuFileSaveAs.Shortcut = System.Windows.Forms.Shortcut.CtrlA;
-            this.mnuFileSaveAs.Text = "&Save As...";
-            this.mnuFileSaveAs.Click += new System.EventHandler(this.mnuFileSaveAs_Click);
-            // 
             // mnuScaleMnu
             // 
-            this.mnuScaleMnu.Index = 1;
+            this.mnuScaleMnu.Index = 0;
             this.mnuScaleMnu.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.mnuScale_2,
             this.mnuScale_4,
@@ -122,7 +104,7 @@
             // 
             // mnuOpt
             // 
-            this.mnuOpt.Index = 2;
+            this.mnuOpt.Index = 1;
             this.mnuOpt.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
             this.mnuOptOptions});
             this.mnuOpt.Text = "&Options";
@@ -132,12 +114,6 @@
             this.mnuOptOptions.Index = 0;
             this.mnuOptOptions.Text = "&Set Options";
             this.mnuOptOptions.Click += new System.EventHandler(this.mnuOptOptions_Click);
-            // 
-            // dlgSaveFile
-            // 
-            this.dlgSaveFile.DefaultExt = "bmp";
-            this.dlgSaveFile.Filter = "Image Files|*.bmp;*.jpg;*.jpeg;*.gif;*.png;*.tif;*.tiff|BMP|*.bmp|JPEG|*.jpg;*.jp" +
-                "eg|GIF|*.gif|PNG|*.png|TIFF|*.tif;*.tiff|All Files|*.*";
             // 
             // picCanvas
             // 
@@ -178,8 +154,6 @@
         #endregion
 
         public System.Windows.Forms.MainMenu MainMenu1;
-        public System.Windows.Forms.MenuItem mnuFile;
-        public System.Windows.Forms.MenuItem mnuFileSaveAs;
         public System.Windows.Forms.MenuItem mnuScaleMnu;
         public System.Windows.Forms.MenuItem mnuScale_2;
         public System.Windows.Forms.MenuItem mnuScale_4;
@@ -189,7 +163,6 @@
         public System.Windows.Forms.MenuItem mnuScaleRefresh;
         public System.Windows.Forms.MenuItem mnuOpt;
         public System.Windows.Forms.MenuItem mnuOptOptions;
-        internal System.Windows.Forms.SaveFileDialog dlgSaveFile;
         internal System.Windows.Forms.PictureBox picCanvas;
         private System.Windows.Forms.RichTextBox richTextBox1;
     }

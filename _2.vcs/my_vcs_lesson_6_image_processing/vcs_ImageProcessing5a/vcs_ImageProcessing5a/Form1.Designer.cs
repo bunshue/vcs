@@ -53,21 +53,14 @@
             this.btnPixellate = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtRank = new System.Windows.Forms.TextBox();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFileOpen = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuFileSaveAs = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
-            this.mnuFileExit = new System.Windows.Forms.ToolStripMenuItem();
             this.ofdImage = new System.Windows.Forms.OpenFileDialog();
-            this.sfdImage = new System.Windows.Forms.SaveFileDialog();
             this.btnPointellate = new System.Windows.Forms.Button();
             this.btnEmboss3 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.bt_clear = new System.Windows.Forms.Button();
+            this.bt_open = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnReset
@@ -288,63 +281,10 @@
             this.txtRank.Text = "9";
             this.txtRank.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1057, 24);
-            this.menuStrip1.TabIndex = 21;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuFileOpen,
-            this.mnuFileSaveAs,
-            this.toolStripMenuItem1,
-            this.mnuFileExit});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(38, 20);
-            this.fileToolStripMenuItem.Text = "&File";
-            // 
-            // mnuFileOpen
-            // 
-            this.mnuFileOpen.Name = "mnuFileOpen";
-            this.mnuFileOpen.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.mnuFileOpen.Size = new System.Drawing.Size(169, 22);
-            this.mnuFileOpen.Text = "&Open...";
-            this.mnuFileOpen.Click += new System.EventHandler(this.mnuFileOpen_Click);
-            // 
-            // mnuFileSaveAs
-            // 
-            this.mnuFileSaveAs.Name = "mnuFileSaveAs";
-            this.mnuFileSaveAs.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.A)));
-            this.mnuFileSaveAs.Size = new System.Drawing.Size(169, 22);
-            this.mnuFileSaveAs.Text = "Save &As...";
-            this.mnuFileSaveAs.Click += new System.EventHandler(this.mnuFileSaveAs_Click);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(166, 6);
-            // 
-            // mnuFileExit
-            // 
-            this.mnuFileExit.Name = "mnuFileExit";
-            this.mnuFileExit.Size = new System.Drawing.Size(169, 22);
-            this.mnuFileExit.Text = "E&xit";
-            this.mnuFileExit.Click += new System.EventHandler(this.mnuFileExit_Click);
-            // 
             // ofdImage
             // 
             this.ofdImage.FileName = "openFileDialog1";
             this.ofdImage.Filter = "Image Files|*.bmp;*.jpg;*.gif;*.png;*.tif|All Files|*.*";
-            // 
-            // sfdImage
-            // 
-            this.sfdImage.Filter = "Image Files|*.bmp;*.jpg;*.gif;*.png;*.tif|All Files|*.*";
             // 
             // btnPointellate
             // 
@@ -380,11 +320,21 @@
             this.bt_clear.TabIndex = 23;
             this.bt_clear.Text = "Clear";
             // 
+            // bt_open
+            // 
+            this.bt_open.Location = new System.Drawing.Point(229, 25);
+            this.bt_open.Name = "bt_open";
+            this.bt_open.Size = new System.Drawing.Size(100, 40);
+            this.bt_open.TabIndex = 24;
+            this.bt_open.Text = "Open";
+            this.bt_open.Click += new System.EventHandler(this.bt_open_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1057, 655);
+            this.Controls.Add(this.bt_open);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.btnEmboss3);
@@ -413,15 +363,11 @@
             this.Controls.Add(this.btnReset);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
             this.Name = "Form1";
             this.Text = "vcs_ImageProcessing5a";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -453,18 +399,12 @@
         internal System.Windows.Forms.Button btnPixellate;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtRank;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mnuFileOpen;
-        private System.Windows.Forms.ToolStripMenuItem mnuFileSaveAs;
-        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem mnuFileExit;
         private System.Windows.Forms.OpenFileDialog ofdImage;
-        private System.Windows.Forms.SaveFileDialog sfdImage;
         internal System.Windows.Forms.Button btnPointellate;
         internal System.Windows.Forms.Button btnEmboss3;
         private System.Windows.Forms.RichTextBox richTextBox1;
         internal System.Windows.Forms.Button bt_clear;
+        internal System.Windows.Forms.Button bt_open;
     }
 }
 

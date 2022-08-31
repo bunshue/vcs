@@ -62,7 +62,9 @@ namespace howto_mandelbrot
                 mid = (m_Xmin + m_Xmax) / 2;
                 m_Xmin = mid - wid / 2;
                 m_Xmax = mid + wid / 2;
-            } else {
+            }
+            else
+            {
                 // The selected area is too short and wide.
                 // Make it taller.
                 hgt = (m_Xmax - m_Xmin) * picCanvas_aspect;
@@ -296,36 +298,6 @@ namespace howto_mandelbrot
             this.Cursor = Cursors.Default;
             picCanvas.Cursor = Cursors.Cross;
         }
-
-        // Save the image.
-        private void mnuFileSaveAs_Click(object sender, EventArgs e)
-        {
-            if (dlgSaveFile.ShowDialog() == DialogResult.OK)
-            {
-                m_Bm.Save(dlgSaveFile.FileName);
-                string filename = dlgSaveFile.FileName;
-                string extension = filename.Substring(filename.LastIndexOf("."));
-                switch (extension)
-                {
-                    case ".bmp":
-                        m_Bm.Save(filename, ImageFormat.Bmp);
-                        break;
-                    case ".jpg":
-                    case ".jpeg":
-                        m_Bm.Save(filename, ImageFormat.Jpeg);
-                        break;
-                    case ".gif":
-                        m_Bm.Save(filename, ImageFormat.Gif);
-                        break;
-                    case ".png":
-                        m_Bm.Save(filename, ImageFormat.Png);
-                        break;
-                    case ".tif":
-                    case ".tiff":
-                        m_Bm.Save(filename, ImageFormat.Tiff);
-                        break;
-                }
-            }
-        }
     }
 }
+

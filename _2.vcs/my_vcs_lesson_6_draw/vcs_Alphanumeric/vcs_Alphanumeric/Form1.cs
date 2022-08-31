@@ -11,10 +11,12 @@ namespace vcs_Alphanumeric
 {
     public partial class Form1 : Form
     {
-        Graphics g;
+        Graphics g1;
+        Graphics g2;
+        Bitmap bitmap1;
+        Bitmap bitmap2;
         Pen p;
         SolidBrush sb;
-        Bitmap bitmap1;
 
         string snull =
             "00000" +
@@ -383,13 +385,27 @@ namespace vcs_Alphanumeric
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            pictureBox1.Size = new Size(830, 980);
+            pictureBox1.Location = new Point(10, 10);
+            pictureBox2.Size = new Size(480, 150);
+            pictureBox2.Location = new Point(840, 10);
+
+            this.Size = new Size(1400, 1040);
+            this.Location = new Point(50, 10);
+
             //新建圖檔, 初始化畫布
             bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            g = Graphics.FromImage(bitmap1);
-            g.Clear(BackColor);
+            g1 = Graphics.FromImage(bitmap1);
+            g1.Clear(BackColor);
             pictureBox1.Image = bitmap1;
             //richTextBox1.Text += "已新建圖檔\n";
             //richTextBox1.Text += "畫布大小 : W = " + bitmap1.Width.ToString() + " H = " + bitmap1.Height.ToString() + "\n";
+
+            //新建圖檔, 初始化畫布
+            bitmap2 = new Bitmap(pictureBox2.Width, pictureBox2.Height);
+            g2 = Graphics.FromImage(bitmap2);
+            g2.Clear(BackColor);
+            pictureBox2.Image = bitmap2;
         }
 
         string get_alphanumeric_string(char c)
@@ -440,13 +456,13 @@ namespace vcs_Alphanumeric
             return result;
         }
 
-        void draw_alphanumeric(char c, int size, Color forecolor, Color backcolor, int x_st, int y_st)
+        void draw_alphanumeric(Graphics g, char c, int size, Color forecolor, Color backcolor, int x_st, int y_st)
         {
             string str = get_alphanumeric_string(c);
-            draw_alphanumeric0(str, size, forecolor, backcolor, x_st, y_st);
+            draw_alphanumeric0(g, str, size, forecolor, backcolor, x_st, y_st);
         }
 
-        void draw_alphanumeric0(string str, int size, Color forecolor, Color backcolor, int x_st, int y_st)
+        void draw_alphanumeric0(Graphics g,string str, int size, Color forecolor, Color backcolor, int x_st, int y_st)
         {
             bool[,] word = new bool[5, 7];
 
@@ -478,7 +494,9 @@ namespace vcs_Alphanumeric
                         sb = new SolidBrush(Color.Black);
 
                     if (word[i, j] == true)
+                    {
                         g.FillRectangle(sb, x_st + i * dx, y_st + j * dy, w, h);
+                    }
                 }
                 //richTextBox1.Text += "\n";
             }
@@ -543,13 +561,13 @@ namespace vcs_Alphanumeric
 
         private void button2_Click(object sender, EventArgs e)
         {
-            g.Clear(BackColor);
+            g1.Clear(BackColor);
             pictureBox1.Image = bitmap1;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            g.Clear(BackColor);
+            g1.Clear(BackColor);
 
             int x_st = 20;
             int y_st = 20;
@@ -566,50 +584,50 @@ namespace vcs_Alphanumeric
             Color forecolor = Color.Red;
             Color backcolor = Color.Gray;
 
-            draw_alphanumeric0(s1, size, forecolor, backcolor, x_st + dx * 0, y_st + dy * 0);
-            draw_alphanumeric0(s2, size, forecolor, backcolor, x_st + dx * 1, y_st + dy * 0);
-            draw_alphanumeric0(s3, size, forecolor, backcolor, x_st + dx * 2, y_st + dy * 0);
-            draw_alphanumeric0(s4, size, forecolor, backcolor, x_st + dx * 3, y_st + dy * 0);
-            draw_alphanumeric0(s5, size, forecolor, backcolor, x_st + dx * 4, y_st + dy * 0);
+            draw_alphanumeric0(g1,s1, size, forecolor, backcolor, x_st + dx * 0, y_st + dy * 0);
+            draw_alphanumeric0(g1, s2, size, forecolor, backcolor, x_st + dx * 1, y_st + dy * 0);
+            draw_alphanumeric0(g1, s3, size, forecolor, backcolor, x_st + dx * 2, y_st + dy * 0);
+            draw_alphanumeric0(g1, s4, size, forecolor, backcolor, x_st + dx * 3, y_st + dy * 0);
+            draw_alphanumeric0(g1, s5, size, forecolor, backcolor, x_st + dx * 4, y_st + dy * 0);
 
-            draw_alphanumeric0(s6, size, forecolor, backcolor, x_st + dx * 0, y_st + dy * 1);
-            draw_alphanumeric0(s7, size, forecolor, backcolor, x_st + dx * 1, y_st + dy * 1);
-            draw_alphanumeric0(s8, size, forecolor, backcolor, x_st + dx * 2, y_st + dy * 1);
-            draw_alphanumeric0(s9, size, forecolor, backcolor, x_st + dx * 3, y_st + dy * 1);
-            draw_alphanumeric0(s0, size, forecolor, backcolor, x_st + dx * 4, y_st + dy * 1);
+            draw_alphanumeric0(g1, s6, size, forecolor, backcolor, x_st + dx * 0, y_st + dy * 1);
+            draw_alphanumeric0(g1, s7, size, forecolor, backcolor, x_st + dx * 1, y_st + dy * 1);
+            draw_alphanumeric0(g1, s8, size, forecolor, backcolor, x_st + dx * 2, y_st + dy * 1);
+            draw_alphanumeric0(g1, s9, size, forecolor, backcolor, x_st + dx * 3, y_st + dy * 1);
+            draw_alphanumeric0(g1, s0, size, forecolor, backcolor, x_st + dx * 4, y_st + dy * 1);
 
-            draw_alphanumeric0(sA, size, forecolor, backcolor, x_st + dx * 0, y_st + dy * 2);
-            draw_alphanumeric0(sB, size, forecolor, backcolor, x_st + dx * 1, y_st + dy * 2);
-            draw_alphanumeric0(sC, size, forecolor, backcolor, x_st + dx * 2, y_st + dy * 2);
-            draw_alphanumeric0(sD, size, forecolor, backcolor, x_st + dx * 3, y_st + dy * 2);
-            draw_alphanumeric0(sE, size, forecolor, backcolor, x_st + dx * 4, y_st + dy * 2);
-            draw_alphanumeric0(sF, size, forecolor, backcolor, x_st + dx * 5, y_st + dy * 2);
-            draw_alphanumeric0(sG, size, forecolor, backcolor, x_st + dx * 6, y_st + dy * 2);
+            draw_alphanumeric0(g1, sA, size, forecolor, backcolor, x_st + dx * 0, y_st + dy * 2);
+            draw_alphanumeric0(g1, sB, size, forecolor, backcolor, x_st + dx * 1, y_st + dy * 2);
+            draw_alphanumeric0(g1, sC, size, forecolor, backcolor, x_st + dx * 2, y_st + dy * 2);
+            draw_alphanumeric0(g1, sD, size, forecolor, backcolor, x_st + dx * 3, y_st + dy * 2);
+            draw_alphanumeric0(g1, sE, size, forecolor, backcolor, x_st + dx * 4, y_st + dy * 2);
+            draw_alphanumeric0(g1, sF, size, forecolor, backcolor, x_st + dx * 5, y_st + dy * 2);
+            draw_alphanumeric0(g1, sG, size, forecolor, backcolor, x_st + dx * 6, y_st + dy * 2);
 
-            draw_alphanumeric0(sH, size, forecolor, backcolor, x_st + dx * 0, y_st + dy * 3);
-            draw_alphanumeric0(sI, size, forecolor, backcolor, x_st + dx * 1, y_st + dy * 3);
-            draw_alphanumeric0(sJ, size, forecolor, backcolor, x_st + dx * 2, y_st + dy * 3);
-            draw_alphanumeric0(sK, size, forecolor, backcolor, x_st + dx * 3, y_st + dy * 3);
-            draw_alphanumeric0(sL, size, forecolor, backcolor, x_st + dx * 4, y_st + dy * 3);
-            draw_alphanumeric0(sM, size, forecolor, backcolor, x_st + dx * 5, y_st + dy * 3);
-            draw_alphanumeric0(sN, size, forecolor, backcolor, x_st + dx * 6, y_st + dy * 3);
+            draw_alphanumeric0(g1, sH, size, forecolor, backcolor, x_st + dx * 0, y_st + dy * 3);
+            draw_alphanumeric0(g1, sI, size, forecolor, backcolor, x_st + dx * 1, y_st + dy * 3);
+            draw_alphanumeric0(g1, sJ, size, forecolor, backcolor, x_st + dx * 2, y_st + dy * 3);
+            draw_alphanumeric0(g1, sK, size, forecolor, backcolor, x_st + dx * 3, y_st + dy * 3);
+            draw_alphanumeric0(g1, sL, size, forecolor, backcolor, x_st + dx * 4, y_st + dy * 3);
+            draw_alphanumeric0(g1, sM, size, forecolor, backcolor, x_st + dx * 5, y_st + dy * 3);
+            draw_alphanumeric0(g1, sN, size, forecolor, backcolor, x_st + dx * 6, y_st + dy * 3);
 
-            draw_alphanumeric0(sO, size, forecolor, backcolor, x_st + dx * 0, y_st + dy * 4);
-            draw_alphanumeric0(sP, size, forecolor, backcolor, x_st + dx * 1, y_st + dy * 4);
-            draw_alphanumeric0(sQ, size, forecolor, backcolor, x_st + dx * 2, y_st + dy * 4);
-            draw_alphanumeric0(sR, size, forecolor, backcolor, x_st + dx * 3, y_st + dy * 4);
-            draw_alphanumeric0(sS, size, forecolor, backcolor, x_st + dx * 4, y_st + dy * 4);
-            draw_alphanumeric0(sT, size, forecolor, backcolor, x_st + dx * 5, y_st + dy * 4);
-            draw_alphanumeric0(sU, size, forecolor, backcolor, x_st + dx * 6, y_st + dy * 4);
+            draw_alphanumeric0(g1, sO, size, forecolor, backcolor, x_st + dx * 0, y_st + dy * 4);
+            draw_alphanumeric0(g1, sP, size, forecolor, backcolor, x_st + dx * 1, y_st + dy * 4);
+            draw_alphanumeric0(g1, sQ, size, forecolor, backcolor, x_st + dx * 2, y_st + dy * 4);
+            draw_alphanumeric0(g1, sR, size, forecolor, backcolor, x_st + dx * 3, y_st + dy * 4);
+            draw_alphanumeric0(g1, sS, size, forecolor, backcolor, x_st + dx * 4, y_st + dy * 4);
+            draw_alphanumeric0(g1, sT, size, forecolor, backcolor, x_st + dx * 5, y_st + dy * 4);
+            draw_alphanumeric0(g1, sU, size, forecolor, backcolor, x_st + dx * 6, y_st + dy * 4);
 
-            draw_alphanumeric0(sV, size, forecolor, backcolor, x_st + dx * 0, y_st + dy * 5);
-            draw_alphanumeric0(sW, size, forecolor, backcolor, x_st + dx * 1, y_st + dy * 5);
-            draw_alphanumeric0(sX, size, forecolor, backcolor, x_st + dx * 2, y_st + dy * 5);
-            draw_alphanumeric0(sY, size, forecolor, backcolor, x_st + dx * 3, y_st + dy * 5);
-            draw_alphanumeric0(sZ, size, forecolor, backcolor, x_st + dx * 4, y_st + dy * 5);
+            draw_alphanumeric0(g1, sV, size, forecolor, backcolor, x_st + dx * 0, y_st + dy * 5);
+            draw_alphanumeric0(g1, sW, size, forecolor, backcolor, x_st + dx * 1, y_st + dy * 5);
+            draw_alphanumeric0(g1, sX, size, forecolor, backcolor, x_st + dx * 2, y_st + dy * 5);
+            draw_alphanumeric0(g1, sY, size, forecolor, backcolor, x_st + dx * 3, y_st + dy * 5);
+            draw_alphanumeric0(g1, sZ, size, forecolor, backcolor, x_st + dx * 4, y_st + dy * 5);
         }
 
-        void draw_string(string str, int size, Color forecolor, Color backcolor, int x_st, int y_st, int dx)
+        void draw_string(Graphics g, string str, int size, Color forecolor, Color backcolor, int x_st, int y_st, int dx)
         {
             int len = str.Length;
             richTextBox1.Text += "len = " + len.ToString() + "\n";
@@ -617,7 +635,7 @@ namespace vcs_Alphanumeric
             for (i = 0; i < len; i++)
             {
                 richTextBox1.Text += "i = " + i.ToString() + "\t" + str[i] + "\n";
-                draw_alphanumeric(str[i], size, forecolor, backcolor, x_st + dx * i, y_st);
+                draw_alphanumeric(g, str[i], size, forecolor, backcolor, x_st + dx * i, y_st);
             }
         }
 
@@ -631,24 +649,25 @@ namespace vcs_Alphanumeric
             int y_st = 20;
             int dx = size * 7 + 10;
 
-            draw_string(str, size, forecolor, backcolor, x_st, y_st, dx);
+            draw_string(g1,str, size, forecolor, backcolor, x_st, y_st, dx);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
             string current_time = DateTime.Now.ToString("HH:mm:ss");
 
-            richTextBox1.Text += current_time + "\n";
+            //richTextBox1.Text += current_time + "\n";
 
             int size = 6;
             Color forecolor = Color.Red;
             Color backcolor = Color.Gray;
-            int x_st = 600;
-            int y_st = 20;
+            int x_st = 10;
+            int y_st = 10;
             int dx = size * 7 + 10;
 
-            g.Clear(BackColor);
-            draw_string(current_time, size, forecolor, backcolor, x_st, y_st, dx);
+            g2.Clear(BackColor);
+            draw_string(g2, current_time, size, forecolor, backcolor, x_st, y_st, dx);
+            pictureBox2.Image = bitmap2;
         }
     }
 }

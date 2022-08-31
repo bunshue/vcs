@@ -327,40 +327,6 @@ namespace vcs_ImageProcessing5a
             lb_elapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
         }
 
-        private void mnuFileOpen_Click(object sender, EventArgs e)
-        {
-            if (ofdImage.ShowDialog() == DialogResult.OK)
-            {
-                pictureBox1.Image = new Bitmap(ofdImage.FileName);
-                pictureBox2.Image = pictureBox1.Image.Clone() as Image;
-                lb_elapsed.Text = "";
-            }
-        }
-
-        private void mnuFileSaveAs_Click(object sender, EventArgs e)
-        {
-            Bitmap bm = (Bitmap)pictureBox2.Image;
-
-            //自動檔名 與 存檔語法
-            string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
-
-            try
-            {
-                bm.Save(filename, ImageFormat.Bmp);
-
-                richTextBox1.Text += "已存檔 : " + filename + "\n";
-            }
-            catch (Exception ex)
-            {
-                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
-            }
-        }
-
-        private void mnuFileExit_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
-
         // Pointellate the image.
         private void btnPointellate_Click(object sender, EventArgs e)
         {
@@ -383,6 +349,17 @@ namespace vcs_ImageProcessing5a
 
             TimeSpan elapsed_time = stop_time - start_time;
             lb_elapsed.Text = elapsed_time.TotalSeconds.ToString("0.000000");
+        }
+
+        private void bt_open_Click(object sender, EventArgs e)
+        {
+            if (ofdImage.ShowDialog() == DialogResult.OK)
+            {
+                pictureBox1.Image = new Bitmap(ofdImage.FileName);
+                pictureBox2.Image = pictureBox1.Image.Clone() as Image;
+                lb_elapsed.Text = "";
+            }
+
         }
     }
 }
