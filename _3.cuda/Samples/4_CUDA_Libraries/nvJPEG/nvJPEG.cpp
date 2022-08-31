@@ -140,14 +140,18 @@ int prepare_buffers(FileData &file_data, std::vector<size_t> &file_len,
     img_width[i] = widths[0];
     img_height[i] = heights[0];
 
+
+    //printf("Processing: %s, %d channels\n", current_names[i], channels);
+
     std::cout << "Processing: " << current_names[i] << std::endl;
     std::cout << "Image is " << channels << " channels." << std::endl;
-    for (int c = 0; c < channels; c++) {
-      std::cout << "Channel #" << c << " size: " << widths[c] << " x "
-                << heights[c] << std::endl;
+    for (int c = 0; c < channels; c++)
+    {
+      std::cout << "Channel #" << c << " size: " << widths[c] << " x " << heights[c] << std::endl;
     }
 
-    switch (subsampling) {
+    switch (subsampling)
+    {
       case NVJPEG_CSS_444:
         std::cout << "YUV 4:4:4 chroma subsampling" << std::endl;
         break;
@@ -177,26 +181,30 @@ int prepare_buffers(FileData &file_data, std::vector<size_t> &file_len,
     int mul = 1;
     // in the case of interleaved RGB output, write only to single channel, but
     // 3 samples at once
-    if (params.fmt == NVJPEG_OUTPUT_RGBI || params.fmt == NVJPEG_OUTPUT_BGRI) {
+    if (params.fmt == NVJPEG_OUTPUT_RGBI || params.fmt == NVJPEG_OUTPUT_BGRI)
+    {
       channels = 1;
       mul = 3;
     }
     // in the case of rgb create 3 buffers with sizes of original image
-    else if (params.fmt == NVJPEG_OUTPUT_RGB ||
-             params.fmt == NVJPEG_OUTPUT_BGR) {
+    else if (params.fmt == NVJPEG_OUTPUT_RGB || params.fmt == NVJPEG_OUTPUT_BGR)
+    {
       channels = 3;
       widths[1] = widths[2] = widths[0];
       heights[1] = heights[2] = heights[0];
     }
 
     // realloc output buffer if required
-    for (int c = 0; c < channels; c++) {
+    for (int c = 0; c < channels; c++)
+    {
       int aw = mul * widths[c];
       int ah = heights[c];
       int sz = aw * ah;
       ibuf[i].pitch[c] = aw;
-      if (sz > isz[i].pitch[c]) {
-        if (ibuf[i].channel[c]) {
+      if (sz > isz[i].pitch[c])
+      {
+        if (ibuf[i].channel[c])
+        {
           checkCudaErrors(cudaFree(ibuf[i].channel[c]));
         }
         checkCudaErrors(cudaMalloc(&ibuf[i].channel[c], sz));
@@ -347,8 +355,8 @@ int write_images(std::vector<nvjpegImage_t> &iout, std::vector<int> &widths,
   }
 }
 
-double process_images(FileNames &image_names, decode_params_t &params,
-                      double &total) {
+double process_images(FileNames &image_names, decode_params_t &params, double &total)
+{
   // vector for storing raw files and file lengths
   FileData file_data(params.batch_size);
   std::vector<size_t> file_len(params.batch_size);
@@ -434,11 +442,12 @@ int findParamIndex(const char **argv, int argc, const char *parm) {
   return -1;
 }
 
-int main(int argc, const char *argv[]) {
+int main(int argc, const char *argv[])
+{
   int pidx;
 
-  if ((pidx = findParamIndex(argv, argc, "-h")) != -1 ||
-      (pidx = findParamIndex(argv, argc, "--help")) != -1) {
+  if ((pidx = findParamIndex(argv, argc, "-h")) != -1 || (pidx = findParamIndex(argv, argc, "--help")) != -1)
+  {
     std::cout << "Usage: " << argv[0]
               << " -i images_dir [-b batch_size] [-t total_images] [-device= "
                  "device_id] [-w warmup_iterations] [-o output_dir] "
@@ -572,13 +581,23 @@ int main(int argc, const char *argv[]) {
   if(params.pipelined ){
     create_decoupled_api_handles(params);
   }
+
+
   // read source images
   FileNames image_names;
   readInput(params.input_dir, image_names);
 
-  if (params.total_images == -1) {
+  printf("total_images =  %d\n", params.total_images);
+
+  if (params.total_images == -1)
+  {
     params.total_images = image_names.size();
-  } else if (params.total_images % params.batch_size) {
+
+    printf("total_images =  %d\n", params.total_images);
+  }
+  else if (params.total_images % params.batch_size)
+  {
+      printf("XXXXXXX\n");
     params.total_images =
         ((params.total_images) / params.batch_size) * params.batch_size;
     std::cout << "Changing total_images number to " << params.total_images
@@ -586,23 +605,29 @@ int main(int argc, const char *argv[]) {
               << std::endl;
   }
 
+
+  printf("total_images =  %d\n", params.total_images);
+  //printf("input_dir =  %s\n", params.input_dir); fail?
+  printf("batch_size =  %d\n", params.batch_size);
+
   std::cout << "Decoding images in directory: " << params.input_dir
             << ", total " << params.total_images << ", batchsize "
             << params.batch_size << std::endl;
 
   double total;
-  if (process_images(image_names, params, total)) return EXIT_FAILURE;
-  std::cout << "Total decoding time: " << total << std::endl;
-  std::cout << "Avg decoding time per image: " << total / params.total_images
-            << std::endl;
-  std::cout << "Avg images per sec: " << params.total_images / total
-            << std::endl;
-  std::cout << "Avg decoding time per batch: "
-            << total / ((params.total_images + params.batch_size - 1) /
-                        params.batch_size)
-            << std::endl;
+  if (process_images(image_names, params, total))
+  {
+      return EXIT_FAILURE;
+  }
 
-  if(params.pipelined ){ 
+  std::cout << "Total decoding time: " << total << " sec" << std::endl;
+
+  std::cout << "Avg decoding time per image: " << total / params.total_images << std::endl;
+  std::cout << "Avg images per sec: " << params.total_images / total << std::endl;
+  std::cout << "Avg decoding time per batch: " << total / ((params.total_images + params.batch_size - 1) / params.batch_size) << std::endl;
+
+  if(params.pipelined )
+  { 
     destroy_decoupled_api_handles(params);
   }
 
