@@ -19,6 +19,7 @@ namespace howto_make_light_transparent
 
         //string filename = "C:\\______test_files\\bear.jpg";
         string filename = @"C:\______test_files\elephant.jpg";
+        int cutoff_value = 0;
 
         public Form1()
         {
@@ -28,13 +29,16 @@ namespace howto_make_light_transparent
         private void Form1_Load(object sender, EventArgs e)
         {
             bitmap1 = new Bitmap(filename);
+            cutoff_value = scrBrightness.Value;
+            this.Text = cutoff_value.ToString();
             ShowImage();
         }
 
         // Rebuild the image.
         private void scrBrightness_Scroll(object sender, ScrollEventArgs e)
         {
-            lblBrightness.Text = scrBrightness.Value.ToString();
+            cutoff_value = scrBrightness.Value;
+            this.Text = cutoff_value.ToString();
             ShowImage();
         }
 
@@ -42,13 +46,13 @@ namespace howto_make_light_transparent
         // than the cutoff value to magenta.
         private void ShowImage()
         {
-            if (bitmap1 == null) return;
-
-            // Get the cutoff.
-            int cutoff = scrBrightness.Value;
+            if (bitmap1 == null)
+            {
+                return;
+            }
 
             // Prepare the ImageAttributes.
-            Color low_color = Color.FromArgb(cutoff, cutoff, cutoff);
+            Color low_color = Color.FromArgb(cutoff_value, cutoff_value, cutoff_value);
             Color high_color = Color.FromArgb(255, 255, 255);
             ImageAttributes image_attr = new ImageAttributes();
             image_attr.SetColorKey(low_color, high_color);
@@ -56,33 +60,33 @@ namespace howto_make_light_transparent
             // Make the result image.
             int W = bitmap1.Width;
             int H = bitmap1.Height;
-            Bitmap bm = new Bitmap(W, H);
+            Bitmap bitmap2 = new Bitmap(W, H);
 
             // Process the image.
-            using (Graphics gr = Graphics.FromImage(bm))
+            using (Graphics g = Graphics.FromImage(bitmap2))
             {
                 // Fill with magenta.
-                //gr.Clear(Color.Magenta);
-                //gr.Clear(Color.Lime);
+                //g.Clear(Color.Magenta);
+                //g.Clear(Color.Lime);
 
                 // Copy the original image onto the result
                 // image while using the ImageAttributes.
                 Rectangle dest_rect = new Rectangle(0, 0, W, H);
-                gr.DrawImage(bitmap1, dest_rect, 0, 0, W, H, GraphicsUnit.Pixel, image_attr);
+                g.DrawImage(bitmap1, dest_rect, 0, 0, W, H, GraphicsUnit.Pixel, image_attr);
             }
 
             // Display the image.
-            pictureBox1.Image = bm;
+            pictureBox1.Image = bitmap2;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             // Make a copy of the result image.
-            using (Bitmap bm = (Bitmap)pictureBox1.Image.Clone())
+            using (Bitmap bmp = (Bitmap)pictureBox1.Image.Clone())
             {
-                bm.MakeTransparent(Color.Magenta);
+                bmp.MakeTransparent(Color.Magenta);
 
-                save_image_to_drive(bm);
+                save_image_to_drive(bmp);
             }
         }
 
@@ -112,10 +116,9 @@ namespace howto_make_light_transparent
                 }
             }
             //else
-                //richTextBox1.Text += "無圖可存\n";
+            //richTextBox1.Text += "無圖可存\n";
         }
-
-
-
     }
 }
+
+

@@ -8,12 +8,14 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Reflection;    //for PropertyInfo
+using System.Runtime.InteropServices;   //for dll
 
 namespace vcs_Color
 {
     public partial class Form1 : Form
     {
         Graphics g;
+        Graphics g2;
         Pen p;
 
         double[,] rgb_data = new double[,] {
@@ -552,8 +554,8 @@ namespace vcs_Color
             show_item_location();
 
             g = pictureBox1.CreateGraphics();
+            g2 = pictureBox2.CreateGraphics();
             p = new Pen(Color.Red, 6);
-
 
             comboBox1.DrawItem += new DrawItemEventHandler(comboBox1_DrawItem);
 
@@ -630,6 +632,10 @@ namespace vcs_Color
             pictureBox1.Size = new Size(900, 700);
             pictureBox1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             pictureBox1.BackColor = Color.Pink;
+
+            pictureBox2.Size = new Size(370, 90);
+            pictureBox2.Location = new Point(x_st + dx * 0, y_st + dy * 10);
+            pictureBox2.BackColor = Color.Pink;
 
             comboBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0);
             richTextBox1.Size = new Size(300, 650);
@@ -914,9 +920,9 @@ namespace vcs_Color
             {
                 //g.FillRectangle(Brushes.Red, i * 2, hh2 - (float)(brightness_data[i] * ratio), 2, (float)(brightness_data[i] * ratio));
                 //b = new SolidBrush(Color.FromArgb(33, Color.RoyalBlue.R, Color.RoyalBlue.G, Color.RoyalBlue.B));
-                b = new SolidBrush(Color.FromArgb(255-i, Color.Red.R, Color.Red.G, Color.Red.B));
+                b = new SolidBrush(Color.FromArgb(255 - i, Color.Red.R, Color.Red.G, Color.Red.B));
 
-                g.FillRectangle(b, 100, i*2, 100, 2);
+                g.FillRectangle(b, 100, i * 2, 100, 2);
 
                 YUV yyy2 = new YUV(i, yyy.U, yyy.V);
                 RGB rrr = new RGB();
@@ -1766,7 +1772,7 @@ namespace vcs_Color
             {
                 Color c = getColorFromWaveLength(lambda);
                 p = new Pen(c, 2);
-                g.DrawLine(p, (lambda - 350)*2, 0, (lambda - 350)*2, 200);
+                g.DrawLine(p, (lambda - 350) * 2, 0, (lambda - 350) * 2, 200);
 
 
                 if (lambda == 500)
@@ -1780,7 +1786,6 @@ namespace vcs_Color
             }
             pictureBox1.Image = bmp;
 
-
             //RGB轉波長
 
             Color pt;
@@ -1789,14 +1794,21 @@ namespace vcs_Color
             {
                 pt = bmp.GetPixel(xx, 100);
 
-                //再由RGB轉波長
-
                 p = new Pen(pt, 40);
-                g.DrawLine(p, xx * 1, 200, xx * 1, 400);
+                g.DrawLine(p, xx * 1, 300, xx * 1, 400);
 
+                p = new Pen(pt, 6);
+                g.DrawLine(p, xx * 1, 200 - 40 / 2, xx * 1, 300);
+
+
+                //再由RGB轉波長
 
                 int wavelength = RGBToWavelength(pt);
                 richTextBox1.Text += wavelength.ToString() + " ";
+
+                Font f = new Font("標楷體", 12);
+                g.DrawString(wavelength.ToString(), f, Brushes.Black, new PointF(xx * 1, 400));
+
             }
 
             richTextBox1.Text += "\n";
@@ -1891,5 +1903,87 @@ namespace vcs_Color
                 g.DrawString(colorName, font, Brushes.Black, rect.X + 15, rect.Top);
             }
         }
+
+        [DllImport("gdi32.dll")]
+        static public extern uint GetPixel(IntPtr hDC, int XPos, int YPos);
+        [DllImport("gdi32.dll")]
+        static public extern IntPtr CreateDC(string driverName, string deviceName, string output, IntPtr lpinitData);
+        [DllImport("gdi32.dll")]
+        static public extern bool DeleteDC(IntPtr DC);
+        static public byte GetRValue(uint color)
+        {
+            return (byte)color;
+        }
+
+        static public byte GetGValue(uint color)
+        {
+            return ((byte)(((short)(color)) >> 8));
+        }
+
+        static public byte GetBValue(uint color)
+        {
+            return ((byte)((color) >> 16));
+        }
+
+        static public byte GetAValue(uint color)
+        {
+            return ((byte)((color) >> 24));
+        }
+
+        public Color GetColor(Point screenPoint)
+        {
+            IntPtr displayDC = CreateDC("DISPLAY", null, null, IntPtr.Zero);
+            uint colorref = GetPixel(displayDC, screenPoint.X, screenPoint.Y);
+            DeleteDC(displayDC);
+            byte Red = GetRValue(colorref);
+            byte Green = GetGValue(colorref);
+            byte Blue = GetBValue(colorref);
+            return Color.FromArgb(Red, Green, Blue);
+        }
+
+        int cnt = 0;
+        Brush b = new SolidBrush(Color.White);
+        Color cl_old;
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Point pt = new Point(Control.MousePosition.X, Control.MousePosition.Y);
+            Color cl = GetColor(pt);
+            if (cl_old != cl)
+            {
+                cnt = 0;
+                g2.Clear(BackColor);
+
+                g2.DrawString(cl.R.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Red), new PointF(5, 0));
+                g2.DrawString(cl.G.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Green), new PointF(5 + 75, 0));
+                g2.DrawString(cl.B.ToString(), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(5 + 150, 0));
+
+                cl_old = cl;
+
+                int rr = cl.R;
+                int gg = cl.G;
+                int bb = cl.B;
+
+                RGB pp = new RGB((byte)rr, (byte)gg, (byte)bb);
+                YUV yy = new YUV();
+                yy = RGBToYUV(pp);
+
+                g2.DrawString(((int)yy.Y).ToString(), new Font("Consolas", 30), new SolidBrush(Color.Yellow), new PointF(5, 35));
+                g2.DrawString(((int)yy.U).ToString(), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(5 + 75, 35));
+                g2.DrawString(((int)yy.V).ToString(), new Font("Consolas", 30), new SolidBrush(Color.Red), new PointF(5 + 150, 35));
+            }
+            else
+            {
+                cnt++;
+                if ((cnt > 25) && (cnt % 5) == 0)
+                {
+                    this.Size = new Size(240, 55);
+                    g2.Clear(BackColor);
+                    g2.DrawString(DateTime.Now.ToString("HH:mm:ss"), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(20, 5));
+                }
+            }
+
+        }
     }
 }
+
