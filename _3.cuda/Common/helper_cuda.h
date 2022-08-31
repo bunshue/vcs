@@ -859,11 +859,14 @@ inline int gpuGetMaxGflopsDeviceId() {
 }
 
 // Initialization code to find the best CUDA Device
-inline int findCudaDevice(int argc, const char **argv) {
+inline int findCudaDevice(int argc, const char **argv)
+{
   int devID = 0;
 
   // If the command-line has a device number specified, use it
-  if (checkCmdLineFlag(argc, argv, "device")) {
+  if (checkCmdLineFlag(argc, argv, "device"))
+  {
+      printf("XXXXXXXX\n");
     devID = getCmdLineArgumentInt(argc, argv, "device=");
 
     if (devID < 0) {
@@ -877,15 +880,19 @@ inline int findCudaDevice(int argc, const char **argv) {
         exit(EXIT_FAILURE);
       }
     }
-  } else {
+  }
+  else
+  {
     // Otherwise pick the device with highest Gflops/s
     devID = gpuGetMaxGflopsDeviceId();
+
+    printf("devID = %d\n", devID);
+
     checkCudaErrors(cudaSetDevice(devID));
     int major = 0, minor = 0;
     checkCudaErrors(cudaDeviceGetAttribute(&major, cudaDevAttrComputeCapabilityMajor, devID));
     checkCudaErrors(cudaDeviceGetAttribute(&minor, cudaDevAttrComputeCapabilityMinor, devID));
-    printf("GPU Device %d: \"%s\" with compute capability %d.%d\n\n",
-           devID, _ConvertSMVer2ArchName(major, minor), major, minor);
+    printf("GPU Device %d: \"%s\" with compute capability %d.%d\n\n", devID, _ConvertSMVer2ArchName(major, minor), major, minor);
 
   }
 

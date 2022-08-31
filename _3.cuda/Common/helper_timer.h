@@ -366,7 +366,8 @@ inline float StopWatchLinux::getDiffTime() {
 //! @return true if a time has been created, otherwise false
 //! @param  name of the new timer, 0 if the creation failed
 ////////////////////////////////////////////////////////////////////////////////
-inline bool sdkCreateTimer(StopWatchInterface **timer_interface) {
+inline bool sdkCreateTimer(StopWatchInterface **timer_interface){
+    printf("sdkCreateTimer\n");
 // printf("sdkCreateTimer called object %08x\n", (void *)*timer_interface);
 #if defined(WIN32) || defined(_WIN32) || defined(WIN64) || defined(_WIN64)
   *timer_interface = reinterpret_cast<StopWatchInterface *>(new StopWatchWin());
