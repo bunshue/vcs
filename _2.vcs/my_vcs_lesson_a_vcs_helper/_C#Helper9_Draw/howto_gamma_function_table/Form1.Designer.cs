@@ -43,13 +43,11 @@
             this.btnCalculate = new System.Windows.Forms.Button();
             this.txtMinX = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // lvwValues
             // 
-            this.lvwValues.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.lvwValues.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
@@ -58,7 +56,7 @@
             this.columnHeader5});
             this.lvwValues.Location = new System.Drawing.Point(12, 60);
             this.lvwValues.Name = "lvwValues";
-            this.lvwValues.Size = new System.Drawing.Size(659, 527);
+            this.lvwValues.Size = new System.Drawing.Size(664, 527);
             this.lvwValues.TabIndex = 5;
             this.lvwValues.UseCompatibleStateImageBehavior = false;
             this.lvwValues.View = System.Windows.Forms.View.Details;
@@ -165,12 +163,21 @@
             this.label4.TabIndex = 10;
             this.label4.Text = "Min X:";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(682, 60);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(512, 526);
+            this.richTextBox1.TabIndex = 11;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnCalculate;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(683, 598);
+            this.ClientSize = new System.Drawing.Size(1206, 598);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.txtMinX);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.btnCalculate);
@@ -205,6 +212,7 @@
         private System.Windows.Forms.Button btnCalculate;
         private System.Windows.Forms.TextBox txtMinX;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

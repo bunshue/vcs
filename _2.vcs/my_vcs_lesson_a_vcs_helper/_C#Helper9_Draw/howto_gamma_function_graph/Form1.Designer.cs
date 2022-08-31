@@ -40,19 +40,17 @@
             this.btnDraw = new System.Windows.Forms.Button();
             this.txtDx = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.picCanvas)).BeginInit();
             this.SuspendLayout();
             // 
             // picCanvas
             // 
-            this.picCanvas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
             this.picCanvas.BackColor = System.Drawing.Color.White;
             this.picCanvas.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.picCanvas.Location = new System.Drawing.Point(12, 59);
             this.picCanvas.Name = "picCanvas";
-            this.picCanvas.Size = new System.Drawing.Size(661, 519);
+            this.picCanvas.Size = new System.Drawing.Size(660, 536);
             this.picCanvas.TabIndex = 0;
             this.picCanvas.TabStop = false;
             // 
@@ -156,12 +154,21 @@
             this.label5.TabIndex = 10;
             this.label5.Text = "dx:";
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(693, 59);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(330, 536);
+            this.richTextBox1.TabIndex = 11;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
             this.AcceptButton = this.btnDraw;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(685, 589);
+            this.ClientSize = new System.Drawing.Size(1035, 606);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.txtDx);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.btnDraw);
@@ -197,6 +204,7 @@
         private System.Windows.Forms.Button btnDraw;
         private System.Windows.Forms.TextBox txtDx;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
