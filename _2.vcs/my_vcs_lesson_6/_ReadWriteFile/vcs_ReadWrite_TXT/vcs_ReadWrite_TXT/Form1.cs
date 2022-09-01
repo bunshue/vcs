@@ -740,12 +740,172 @@ namespace vcs_ReadWrite_TXT
 
         private void button25_Click(object sender, EventArgs e)
         {
+            //檔案置換文字
 
+            string filename = @"C:\_git\vcs\_3.cuda\Samples\5_Domain_Specific\binomialOptions\binomialOptions_vs2022.vcxproj";
+            string pattern1 = @"CUDAPropsPath)\CUDA 11.6.";
+            string pattern2 = @"CUDAPropsPath)\CUDA 11.7.";
+
+            int flag_replace_pattern = 0;
+
+            flag_replace_pattern = file_replace_pattern(filename,  pattern1, pattern2);
+
+            if (flag_replace_pattern == 0)
+            {
+                richTextBox2.Text += "置換成功\n";
+            }
+            else if (flag_replace_pattern == 1)
+            {
+                richTextBox2.Text += "原始檔案不存在\n";
+            }
+            else if (flag_replace_pattern == 2)
+            {
+                richTextBox2.Text += "沒有找到pattern, 不用置換pattern\n";
+            }
+            else
+            {
+                richTextBox2.Text += "其他錯誤\n";
+            }
+        }
+
+        int file_replace_pattern(string filename1, string pattern1, string pattern2)
+        {
+            bool flag_need_replace = false;
+
+            if (File.Exists(filename1) == false)
+            {
+                richTextBox2.Text += "檔案 : " + filename1 + ", 不存在\n";
+                return 1;   //1: 原始檔案不存在
+            }
+
+            string filename2 = filename1 + ".tmp";
+
+            //從文字檔讀出
+            StreamReader sr = new StreamReader(filename1); // 開啟檔案
+
+            string str;  // 宣告字串變數
+
+            str = sr.ReadLine(); // 讀出一行
+            while (str != null)
+            {
+                //richTextBox2.Text += str + "\n";    //一次讀一行 每一行都要加換行符號
+
+                if (str.Contains(pattern1))
+                {
+                    //richTextBox2.Text += "有找到pattern, 要置換pattern\n";
+                    //richTextBox2.Text += str + "\n";    //一次讀一行 每一行都要加換行符號
+                    flag_need_replace = true;
+                    break;
+
+                }
+                str = sr.ReadLine();
+            }
+            sr.Close(); // 關閉檔案
+
+            if (flag_need_replace == false)
+            {
+                //richTextBox2.Text += "沒有找到pattern, 不用置換pattern\n";
+                return 2;   //2: 沒有找到pattern, 不用置換pattern
+            }
+            else
+            {
+                //richTextBox2.Text += "有找到pattern, 要置換pattern\n";
+            }
+
+            if (File.Exists(filename2) == true)
+            {
+                //richTextBox2.Text += "delete filename2\n";
+                File.Delete(filename2);
+            }
+
+            sr = new StreamReader(filename1); // 開啟檔案
+            StreamWriter sw = new StreamWriter(filename2); // true 是資料可附加至檔案, open write
+            //StreamWriter sw = new StreamWriter(filename2, true); // true 是資料可附加至檔案 open write append
+
+            str = sr.ReadLine(); // 讀出一行
+            while (str != null)
+            {
+                if (str.Contains(pattern1))
+                {
+                    //richTextBox2.Text += "replace\n";
+                    str = str.Replace(pattern1, pattern2);
+                }
+
+                sw.WriteLine(str); // 寫入一行
+
+                str = sr.ReadLine();
+            }
+            sr.Close(); // 關閉檔案
+            sw.Close(); // 關閉檔案
+
+
+            if (File.Exists(filename1) == true)
+            {
+                File.Delete(filename1);
+            }
+            File.Move(filename2, filename1);
+            return 0;   //置換成功
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
+            //資料夾內 檔案置換文字
 
+            //撈出所有圖片檔 並存成一個List
+            string foldername = @"C:\_git\vcs\_3.cuda\Samples";
+
+            filenames.Clear();
+
+            string extension = ".vcxproj";
+
+            GetAllFiles(foldername, extension);
+            int len = filenames.Count;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+
+            string pattern1 = @"CUDAPropsPath)\CUDA 11.6.";
+            string pattern2 = @"CUDAPropsPath)\CUDA 11.7.";
+
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += filenames[i] + "\n";
+
+
+                int flag_replace_pattern = 0;
+
+                flag_replace_pattern = file_replace_pattern(filenames[i], pattern1, pattern2);
+            }
+        }
+
+        List<String> filenames = new List<String>();
+        //多層 且指明副檔名
+        public void GetAllFiles(string foldername, string extension)
+        {
+            DirectoryInfo di = new DirectoryInfo(foldername);
+            //richTextBox1.Text += "資料夾 : " + di.FullName + "\n";
+            FileSystemInfo[] fileinfo = di.GetFileSystemInfos();
+            foreach (FileSystemInfo fi in fileinfo)
+            {
+                if (fi is DirectoryInfo)
+                {
+                    GetAllFiles(((DirectoryInfo)fi).FullName, extension);
+                }
+                else
+                {
+                    string fullname = fi.FullName;
+                    string shortname = fi.Name;
+                    string ext = fi.Extension.ToLower();
+                    string forename = shortname.Substring(0, shortname.Length - ext.Length);    //前檔名
+
+                    if (ext == extension)
+                    {
+                        //richTextBox1.Text += "長檔名: " + fullname + "\t副檔名: " + ext + "\n";
+                        //richTextBox1.Text += "短檔名: " + shortname + "\n";
+                        //richTextBox1.Text += "前檔名: " + forename + "\n";
+                        filenames.Add(fullname);
+                    }
+                }
+            }
         }
 
         private void button27_Click(object sender, EventArgs e)

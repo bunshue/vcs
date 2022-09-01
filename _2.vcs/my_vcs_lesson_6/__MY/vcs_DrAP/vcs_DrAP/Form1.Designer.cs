@@ -260,7 +260,7 @@
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox3.Location = new System.Drawing.Point(1526, 37);
+            this.textBox3.Location = new System.Drawing.Point(1212, 15);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(142, 30);
             this.textBox3.TabIndex = 24;
@@ -329,9 +329,9 @@
             // bt_find_small_folders
             // 
             this.bt_find_small_folders.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_find_small_folders.Location = new System.Drawing.Point(1263, 71);
+            this.bt_find_small_folders.Location = new System.Drawing.Point(1165, 47);
             this.bt_find_small_folders.Name = "bt_find_small_folders";
-            this.bt_find_small_folders.Size = new System.Drawing.Size(94, 23);
+            this.bt_find_small_folders.Size = new System.Drawing.Size(115, 26);
             this.bt_find_small_folders.TabIndex = 32;
             this.bt_find_small_folders.Text = "找小資料夾";
             this.bt_find_small_folders.UseVisualStyleBackColor = true;
@@ -340,7 +340,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1237, 75);
+            this.label3.Location = new System.Drawing.Point(1139, 51);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(23, 12);
             this.label3.TabIndex = 34;
@@ -349,7 +349,7 @@
             // textBox4
             // 
             this.textBox4.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.textBox4.Location = new System.Drawing.Point(1189, 67);
+            this.textBox4.Location = new System.Drawing.Point(1091, 43);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(42, 30);
             this.textBox4.TabIndex = 33;
@@ -359,7 +359,7 @@
             // bt_test1
             // 
             this.bt_test1.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_test1.Location = new System.Drawing.Point(1589, 77);
+            this.bt_test1.Location = new System.Drawing.Point(1281, 79);
             this.bt_test1.Name = "bt_test1";
             this.bt_test1.Size = new System.Drawing.Size(38, 23);
             this.bt_test1.TabIndex = 35;
@@ -392,9 +392,9 @@
             // bt_find_same_files2
             // 
             this.bt_find_same_files2.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_find_same_files2.Location = new System.Drawing.Point(1363, 70);
+            this.bt_find_same_files2.Location = new System.Drawing.Point(1091, 80);
             this.bt_find_same_files2.Name = "bt_find_same_files2";
-            this.bt_find_same_files2.Size = new System.Drawing.Size(144, 23);
+            this.bt_find_same_files2.Size = new System.Drawing.Size(115, 26);
             this.bt_find_same_files2.TabIndex = 38;
             this.bt_find_same_files2.Text = "找可能相同檔案";
             this.bt_find_same_files2.UseVisualStyleBackColor = true;
@@ -457,7 +457,7 @@
             this.checkBox7.AutoSize = true;
             this.checkBox7.Checked = true;
             this.checkBox7.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox7.Location = new System.Drawing.Point(1526, 81);
+            this.checkBox7.Location = new System.Drawing.Point(1218, 83);
             this.checkBox7.Name = "checkBox7";
             this.checkBox7.Size = new System.Drawing.Size(62, 16);
             this.checkBox7.TabIndex = 45;
@@ -590,7 +590,7 @@
             this.checkBox8.AutoSize = true;
             this.checkBox8.Checked = true;
             this.checkBox8.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox8.Location = new System.Drawing.Point(1730, 77);
+            this.checkBox8.Location = new System.Drawing.Point(1472, 9);
             this.checkBox8.Name = "checkBox8";
             this.checkBox8.Size = new System.Drawing.Size(72, 16);
             this.checkBox8.TabIndex = 51;
@@ -614,7 +614,7 @@
             this.bt_setup.BackgroundImage = global::vcs_DrAP.Properties.Resources.setup;
             this.bt_setup.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_setup.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_setup.Location = new System.Drawing.Point(1824, 113);
+            this.bt_setup.Location = new System.Drawing.Point(1550, 9);
             this.bt_setup.Name = "bt_setup";
             this.bt_setup.Size = new System.Drawing.Size(50, 50);
             this.bt_setup.TabIndex = 52;
@@ -627,7 +627,7 @@
             this.bt_search_pattern_matlab.BackgroundImage = global::vcs_DrAP.Properties.Resources.matlab;
             this.bt_search_pattern_matlab.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_search_pattern_matlab.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_search_pattern_matlab.Location = new System.Drawing.Point(1674, 115);
+            this.bt_search_pattern_matlab.Location = new System.Drawing.Point(1416, 59);
             this.bt_search_pattern_matlab.Name = "bt_search_pattern_matlab";
             this.bt_search_pattern_matlab.Size = new System.Drawing.Size(50, 50);
             this.bt_search_pattern_matlab.TabIndex = 50;
@@ -651,7 +651,7 @@
             this.bt_search_pattern_python.BackgroundImage = global::vcs_DrAP.Properties.Resources.python;
             this.bt_search_pattern_python.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_search_pattern_python.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_search_pattern_python.Location = new System.Drawing.Point(1674, 59);
+            this.bt_search_pattern_python.Location = new System.Drawing.Point(1360, 60);
             this.bt_search_pattern_python.Name = "bt_search_pattern_python";
             this.bt_search_pattern_python.Size = new System.Drawing.Size(50, 50);
             this.bt_search_pattern_python.TabIndex = 39;
@@ -663,7 +663,7 @@
             this.bt_search_pattern_vcs.BackgroundImage = global::vcs_DrAP.Properties.Resources.vcs;
             this.bt_search_pattern_vcs.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_search_pattern_vcs.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_search_pattern_vcs.Location = new System.Drawing.Point(1674, 6);
+            this.bt_search_pattern_vcs.Location = new System.Drawing.Point(1360, 7);
             this.bt_search_pattern_vcs.Name = "bt_search_pattern_vcs";
             this.bt_search_pattern_vcs.Size = new System.Drawing.Size(50, 50);
             this.bt_search_pattern_vcs.TabIndex = 26;
@@ -721,9 +721,9 @@
             // bt_find_empty_folders
             // 
             this.bt_find_empty_folders.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_find_empty_folders.Location = new System.Drawing.Point(1363, 17);
+            this.bt_find_empty_folders.Location = new System.Drawing.Point(1091, 15);
             this.bt_find_empty_folders.Name = "bt_find_empty_folders";
-            this.bt_find_empty_folders.Size = new System.Drawing.Size(144, 23);
+            this.bt_find_empty_folders.Size = new System.Drawing.Size(115, 26);
             this.bt_find_empty_folders.TabIndex = 54;
             this.bt_find_empty_folders.Text = "找空資料夾";
             this.bt_find_empty_folders.UseVisualStyleBackColor = true;
@@ -732,7 +732,7 @@
             // bt_test2
             // 
             this.bt_test2.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_test2.Location = new System.Drawing.Point(1630, 77);
+            this.bt_test2.Location = new System.Drawing.Point(1322, 79);
             this.bt_test2.Name = "bt_test2";
             this.bt_test2.Size = new System.Drawing.Size(38, 23);
             this.bt_test2.TabIndex = 55;
@@ -744,7 +744,7 @@
             // 
             this.bt_save_file_data.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.bt_save_file_data.Font = new System.Drawing.Font("細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_save_file_data.Location = new System.Drawing.Point(1730, 115);
+            this.bt_save_file_data.Location = new System.Drawing.Point(1416, 7);
             this.bt_save_file_data.Name = "bt_save_file_data";
             this.bt_save_file_data.Size = new System.Drawing.Size(50, 50);
             this.bt_save_file_data.TabIndex = 56;

@@ -232,16 +232,37 @@ namespace vcs_DrAP
             x_st += bt_help.Size.Width + dx;
             bt_delete_file.Location = new Point(x_st, y_st + dy * 0);
 
-            bt_save_file_data.Location = new Point(bt_search_pattern_python.Location.X + 125, bt_search_pattern_python.Location.Y);
+
+            x_st = 1060;
+            y_st = 15;
+
+            textBox4.Location = new Point(x_st, y_st);
+            label3.Location = new Point(x_st + 50, y_st + 8);
+            bt_find_small_folders.Location = new Point(x_st, y_st + 50);
+            bt_find_empty_folders.Location = new Point(x_st + 120, y_st);
+            bt_find_same_files2.Location = new Point(x_st + 120, y_st + 50);
+            textBox3.Location = new Point(x_st + 100 + 140, y_st);
+            checkBox7.Location = new Point(x_st + 100 + 140, y_st + 50 + 6);
+            bt_test1.Location = new Point(x_st + 100 + 140 + 65, y_st + 50);
+            bt_test2.Location = new Point(x_st + 100 + 140 + 65 + 40, y_st + 50);
+
+            x_st = 1500;
+            y_st = 6;
+            dx = 55;
+            dy = 55;
+
+            bt_search_pattern_vcs.Location = new Point(x_st, y_st);
+            bt_search_pattern_matlab.Location = new Point(x_st + dx, y_st);
+            bt_search_pattern_python.Location = new Point(x_st, y_st + dy);
+            checkBox8.Location = new Point(x_st + dx, y_st + dy);
+            bt_save_file_data.Location = new Point(x_st + dx * 2, y_st);
 
             bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - bt_clear2.Width, richTextBox2.Location.Y);
             bt_copy_rtb_data.Location = new Point(bt_clear2.Location.X, bt_copy_rtb_data.Location.Y);
 
-            bt_search_pattern_matlab.Location = new Point(bt_search_pattern_vcs.Location.X + 55, bt_search_pattern_vcs.Location.Y);
-
             bt_setup.Location = new Point(this.ClientSize.Width - bt_setup.Width, 55);
-
             bt_clear3.Location = new Point(listView1.Location.X + listView1.Size.Width - bt_clear3.Size.Width, listView1.Location.Y + listView1.Size.Height - bt_clear3.Size.Height);
+
 
             /*
             richTextBox2.Text += "Form1 W1 " + this.Width.ToString() + "\n";
@@ -2945,9 +2966,7 @@ namespace vcs_DrAP
             {
                 //richTextBox1.Text += "共刪除空資料夾 " + total_delete_empty_folder_cnt.ToString() + " 個\n";
             }
-
         }
-
 
         // Process all files in the directory passed in, recurse on any directories 
         // that are found, and process the files they contain.

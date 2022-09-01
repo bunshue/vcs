@@ -171,6 +171,20 @@ namespace vcs_Remove_Bin_Obj
                             if (checkBox1.Checked == true)
                                 folder_name.Add(subdirectory);
                         }
+                        else if (subdirectory.EndsWith("\\.vs"))
+                        {
+                            if (checkBox3.Checked == true)
+                                richTextBox1.Text += subdirectory + "\n";
+                            if (checkBox1.Checked == true)
+                                folder_name.Add(subdirectory);
+                        }
+                        else if (subdirectory.EndsWith("\\x64"))
+                        {
+                            if (checkBox3.Checked == true)
+                                richTextBox1.Text += subdirectory + "\n";
+                            if (checkBox1.Checked == true)
+                                folder_name.Add(subdirectory);
+                        }
                         else if ((subdirectory.EndsWith("\\_UpgradeReport_Files")) || (subdirectory.EndsWith("Backup")))
                         {
                             if (checkBox7.Checked == true)
@@ -238,6 +252,10 @@ namespace vcs_Remove_Bin_Obj
                     {
                         continue;
                     }
+                    else if (folder_name[i].Contains("_3.cuda"))
+                    {
+                        continue;
+                    }
                     else if (folder_name[i].Contains("GMap.NET.Core"))
                     {
                         continue;
@@ -256,6 +274,24 @@ namespace vcs_Remove_Bin_Obj
                         continue;
                     }
                     else if (folder_name[i].Contains("GMap.NET.WindowsForms"))
+                    {
+                        continue;
+                    }
+                }
+
+                if (folder_name[i].Contains(".vs"))
+                {
+                    //需要跳過的資料夾
+                    if (folder_name[i].Contains("_3.cuda") == false)
+                    {
+                        continue;
+                    }
+                }
+
+                if (folder_name[i].Contains("x64"))
+                {
+                    //需要跳過的資料夾
+                    if (folder_name[i].Contains("_3.cuda") == true)
                     {
                         continue;
                     }
@@ -438,6 +474,147 @@ namespace vcs_Remove_Bin_Obj
         private void button3_Click(object sender, EventArgs e)
         {
             //檔名簡中轉正中
+        }
+
+        // Process all files in the directory passed in, recurse on any directories 
+        // that are found, and process the files they contain.
+        public void ProcessRenameDirectory001(string targetDirectory)
+        {
+            try
+            {
+                // Process the list of files found in the directory.
+                try
+                {
+                    string[] fileEntries = Directory.GetFiles(targetDirectory);
+                    Array.Sort(fileEntries);
+                    foreach (string fileName in fileEntries)
+                    {
+                        richTextBox1.Text += fileName + "\n";
+
+                        //MIRD-121-CD4-001.wmv
+                        /*
+                        //001
+                        if (fileName.EndsWith(" 的副本"))
+                        {
+                            if (checkBox5.Checked == true)
+                                richTextBox1.Text += fileName + "\n";
+                            if (checkBox6.Checked == true)
+                                filename_backup.Add(fileName);
+                        }
+                        */
+                    }
+
+                    // Recurse into subdirectories of this directory.
+                    string[] subdirectoryEntries = Directory.GetDirectories(targetDirectory);
+                    Array.Sort(subdirectoryEntries);
+                    foreach (string subdirectory in subdirectoryEntries)
+                    {
+                        //richTextBox1.Text += "subdirectory = " + subdirectory + "\n";
+                        DirectoryInfo di = new DirectoryInfo(subdirectory);
+                        ProcessRenameDirectory001(subdirectory);
+                    }
+                }
+                catch (UnauthorizedAccessException ex)
+                {
+                    richTextBox1.Text += ex.Message + "\n";
+                }
+            }
+            catch (IOException e)
+            {
+                richTextBox1.Text += "IOException, " + e.GetType().Name + "\n";
+            }
+        }
+
+        public void ProcessRenameBackup001(List<string> filename_backup)
+        {
+            bool flag_rename_fail = false;
+            int i;
+            int len;
+            len = filename_backup.Count;
+            richTextBox1.Text += "欲更名個數 : " + len + "\n";
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += "檔案 : " + filename_backup[i] + "\n";
+
+                //001
+                richTextBox1.Text += "new 檔案 : " + filename_backup[i].Replace(" 的副本", "") + "\n";
+
+                //if (!File.Exists(Path.Combine(dir, f.ToString().Replace("(", "").Replace(")", "")         )))
+
+
+                if (File.Exists(filename_backup[i]))     //確認檔案是否存在
+                {
+                    //001
+                    string sourceFileName = filename_backup[i];
+                    string destFileName = filename_backup[i].Replace(" 的副本", "");
+
+                    //移動檔案，從 sourceFileName 移動到 destFileName
+                    if (File.Exists(sourceFileName))        //確認原始檔案是否存在
+                    {
+                        if (!File.Exists(destFileName))     //確認目標檔案是否存在
+                        {
+                            File.Move(sourceFileName, destFileName);
+                            richTextBox1.Text += "已移動檔案: " + sourceFileName + " 到 " + destFileName + "\n";
+                        }
+                        else
+                        {
+                            richTextBox1.Text += "檔案: " + destFileName + " 已存在，無法移動\n";
+                            flag_rename_fail = true;
+                        }
+                    }
+                    else
+                    {
+                        richTextBox1.Text += "檔案: " + sourceFileName + " 不存在，無法移動\n";
+                        flag_rename_fail = true;
+                    }
+
+                }
+                else
+                {
+                    richTextBox1.Text += "資料夾或檔案: " + filename_backup[i] + " 不存在，不能刪除\n";
+                    flag_rename_fail = true;
+                }
+            }
+
+            lb_main_mesg.Text = "更名個數 : " + len + ", 完成";
+            if (flag_rename_fail == true)
+                lb_main_mesg.Text += "\t有錯誤";
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            //改名 001
+
+            lb_main_mesg.Text = "開始改名檔案";
+            this.Refresh();         //加上.Refresh()才可以讓人看清楚字的變化
+            /*
+            //取得目前所在路徑
+            string currentPath = Directory.GetCurrentDirectory();
+            richTextBox1.Text += "目前所在路徑: " + currentPath + "\n";
+
+            //確認資料夾是否存在
+            string Path = "C:\\______test_files_file_name2\\aaaa\\bbbb";
+            if (Directory.Exists(Path) == false)    //確認資料夾是否存在
+                richTextBox1.Text += "資料夾: " + Path + " 不存在\n";
+            else
+                richTextBox1.Text += "資料夾: " + Path + " 存在\n";
+            */
+
+            //string path = @"C:\_git\vcs\_2.vcs";
+
+            string path = @"C:\______test_files\rename001";
+            //string path = search_path;
+
+            filename_backup.Clear();
+
+            richTextBox1.Text += "資料夾: " + path + "\n\n";
+            if (Directory.Exists(path))
+            {
+                // This path is a directory
+                ProcessRenameDirectory001(path);
+            }
+            //ProcessRenameBackup001(filename_backup);
+
         }
     }
 }

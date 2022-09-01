@@ -361,6 +361,7 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(180, 60);
             this.button25.TabIndex = 27;
+            this.button25.Text = "檔案置換文字";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -371,6 +372,7 @@
             this.button26.Name = "button26";
             this.button26.Size = new System.Drawing.Size(180, 60);
             this.button26.TabIndex = 28;
+            this.button26.Text = "資料夾內 檔案置換文字";
             this.button26.UseVisualStyleBackColor = true;
             this.button26.Click += new System.EventHandler(this.button26_Click);
             // 
