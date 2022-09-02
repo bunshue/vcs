@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "matrixMul", "Debugging\Matrix Multiply\matrixMul_vc100.vcxproj", "{9644668E-E6BF-4C3B-A33C-901F2D91369F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "matrixMulDrv", "Debugging\Matrix Multiply (Driver API)\matrixMulDrv_vc100.vcxproj", "{1DD06A6A-85C8-49C9-9431-DE5FB6B5A39C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "simpleStreams", "Debugging\Simple Streams\simpleStreams_vc100.vcxproj", "{10419ADB-25D0-03C0-FBEB-5B561E24C62C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Profile|x64 = Profile|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9644668E-E6BF-4C3B-A33C-901F2D91369F}.Debug|x64.ActiveCfg = Debug|x64
+		{9644668E-E6BF-4C3B-A33C-901F2D91369F}.Debug|x64.Build.0 = Debug|x64
+		{9644668E-E6BF-4C3B-A33C-901F2D91369F}.Profile|x64.ActiveCfg = Profile|x64
+		{9644668E-E6BF-4C3B-A33C-901F2D91369F}.Profile|x64.Build.0 = Profile|x64
+		{9644668E-E6BF-4C3B-A33C-901F2D91369F}.Release|x64.ActiveCfg = Release|x64
+		{9644668E-E6BF-4C3B-A33C-901F2D91369F}.Release|x64.Build.0 = Release|x64
+		{1DD06A6A-85C8-49C9-9431-DE5FB6B5A39C}.Debug|x64.ActiveCfg = Debug|x64
+		{1DD06A6A-85C8-49C9-9431-DE5FB6B5A39C}.Debug|x64.Build.0 = Debug|x64
+		{1DD06A6A-85C8-49C9-9431-DE5FB6B5A39C}.Profile|x64.ActiveCfg = Profile|x64
+		{1DD06A6A-85C8-49C9-9431-DE5FB6B5A39C}.Profile|x64.Build.0 = Profile|x64
+		{1DD06A6A-85C8-49C9-9431-DE5FB6B5A39C}.Release|x64.ActiveCfg = Release|x64
+		{1DD06A6A-85C8-49C9-9431-DE5FB6B5A39C}.Release|x64.Build.0 = Release|x64
+		{10419ADB-25D0-03C0-FBEB-5B561E24C62C}.Debug|x64.ActiveCfg = Debug|x64
+		{10419ADB-25D0-03C0-FBEB-5B561E24C62C}.Debug|x64.Build.0 = Debug|x64
+		{10419ADB-25D0-03C0-FBEB-5B561E24C62C}.Profile|x64.ActiveCfg = Profile|x64
+		{10419ADB-25D0-03C0-FBEB-5B561E24C62C}.Profile|x64.Build.0 = Profile|x64
+		{10419ADB-25D0-03C0-FBEB-5B561E24C62C}.Release|x64.ActiveCfg = Release|x64
+		{10419ADB-25D0-03C0-FBEB-5B561E24C62C}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

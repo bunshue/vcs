@@ -97,6 +97,11 @@ namespace vcs_Remove_Bin_Obj
 
             ProcessDirectoryBinObj(folder_name);
 
+
+            path = @"C:\_git\vcs\_3.cuda\bin\win64\Debug";
+
+            RemoveNeedlessFiles(path);
+
             if (checkBox9.Checked == true)
             {
                 richTextBox1.Text += "共找到空資料夾 " + total_show_empty_folder_cnt.ToString() + " 個\n";
@@ -248,6 +253,10 @@ namespace vcs_Remove_Bin_Obj
                     {
                         continue;
                     }
+                    else if (folder_name[i].Contains("References"))
+                    {
+                        continue;
+                    }
                     else if (folder_name[i].Contains("XXXXXXXXXXX"))
                     {
                         continue;
@@ -279,10 +288,10 @@ namespace vcs_Remove_Bin_Obj
                     }
                 }
 
-                if (folder_name[i].Contains(".vs"))
+                if (folder_name[i].Contains("\\.vs"))
                 {
                     //需要跳過的資料夾
-                    if (folder_name[i].Contains("_3.cuda") == false)
+                    if (folder_name[i].Contains("_3.cuda") == true)
                     {
                         continue;
                     }
@@ -291,7 +300,11 @@ namespace vcs_Remove_Bin_Obj
                 if (folder_name[i].Contains("x64"))
                 {
                     //需要跳過的資料夾
-                    if (folder_name[i].Contains("_3.cuda") == true)
+                    if (folder_name[i].Contains("Common") == true)
+                    {
+                        continue;
+                    }
+                    else if (folder_name[i].Contains("References") == true)
                     {
                         continue;
                     }
@@ -301,6 +314,8 @@ namespace vcs_Remove_Bin_Obj
                 {
                     continue;
                 }
+
+                //richTextBox1.Text += "刪除 : " + folder_name[i] + "\n";
 
                 if (Directory.Exists(folder_name[i]))     //確認資料夾是否存在
                 {
@@ -639,6 +654,35 @@ namespace vcs_Remove_Bin_Obj
                 ProcessRenameDirectory001(path);
             }
             ProcessRenameBackup001(filename_rename);
+        }
+
+        void RemoveNeedlessFiles(string foldername)
+        {
+            if (Directory.Exists(foldername) == false)    //確認資料夾是否存在
+            {
+                richTextBox1.Text += "資料夾: " + foldername + " 不存在\n";
+            }
+
+            string[] filenames = Directory.GetFiles(foldername); //獲得文件夾目錄下所有文件全路徑
+            foreach (string filename in filenames)
+            {
+                if ((filename.Contains("freeglut.dll") == false) && (filename.Contains("glew64.dll") == false))
+                {
+                    richTextBox1.Text += "remove : " + filename + "\n";
+                    if (File.Exists(filename))  //確認檔案是否存在
+                    {
+                        try
+                        {
+                            File.Delete(filename);
+                            richTextBox1.Text += "已刪除檔案" + filename + "\n";
+                        }
+                        catch
+                        {
+                            richTextBox1.Text += "無法刪除檔案" + filename + "\n";
+                        }
+                    }
+                }
+            }
         }
     }
 }
