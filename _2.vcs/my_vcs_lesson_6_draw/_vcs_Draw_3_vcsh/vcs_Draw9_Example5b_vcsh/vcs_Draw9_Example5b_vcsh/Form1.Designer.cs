@@ -36,6 +36,17 @@
             this.pictureBox4 = new System.Windows.Forms.PictureBox();
             this.pictureBox5 = new System.Windows.Forms.PictureBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btnDraw = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtFrPerRev = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtIter = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtCC = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtBB = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtAA = new System.Windows.Forms.TextBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
@@ -53,19 +64,24 @@
             this.txtA = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.timer_epitrochoid = new System.Windows.Forms.Timer(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.txtIter = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.txtCC = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtBB = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtAA = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.txtFrPerRev = new System.Windows.Forms.TextBox();
-            this.btnDraw = new System.Windows.Forms.Button();
             this.tmrDraw = new System.Windows.Forms.Timer(this.components);
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtHeight = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtWidth = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtBlueCutoff = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.txtGreenCutoff = new System.Windows.Forms.TextBox();
+            this.label13 = new System.Windows.Forms.Label();
+            this.txtRedCutoff = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.txtDrawEvery = new System.Windows.Forms.TextBox();
+            this.label15 = new System.Windows.Forms.Label();
+            this.txtStopAfter = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.bt_draw_buddhabrot = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -77,6 +93,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             this.groupBox6.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBox0
@@ -154,6 +171,106 @@
             this.groupBox3.TabIndex = 70;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Hypotrochoid";
+            // 
+            // btnDraw
+            // 
+            this.btnDraw.Location = new System.Drawing.Point(398, 21);
+            this.btnDraw.Name = "btnDraw";
+            this.btnDraw.Size = new System.Drawing.Size(56, 21);
+            this.btnDraw.TabIndex = 20;
+            this.btnDraw.Text = "Draw";
+            this.btnDraw.UseVisualStyleBackColor = true;
+            this.btnDraw.Click += new System.EventHandler(this.btnDraw_Click);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(304, 24);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(36, 12);
+            this.label9.TabIndex = 19;
+            this.label9.Text = "Fr/rev:";
+            // 
+            // txtFrPerRev
+            // 
+            this.txtFrPerRev.Location = new System.Drawing.Point(342, 21);
+            this.txtFrPerRev.Name = "txtFrPerRev";
+            this.txtFrPerRev.Size = new System.Drawing.Size(49, 22);
+            this.txtFrPerRev.TabIndex = 18;
+            this.txtFrPerRev.Text = "20";
+            this.txtFrPerRev.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(221, 24);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(24, 12);
+            this.label1.TabIndex = 17;
+            this.label1.Text = "Iter:";
+            // 
+            // txtIter
+            // 
+            this.txtIter.Location = new System.Drawing.Point(252, 21);
+            this.txtIter.Name = "txtIter";
+            this.txtIter.Size = new System.Drawing.Size(49, 22);
+            this.txtIter.TabIndex = 16;
+            this.txtIter.Text = "100";
+            this.txtIter.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(153, 24);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(16, 12);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "C:";
+            // 
+            // txtCC
+            // 
+            this.txtCC.Location = new System.Drawing.Point(170, 21);
+            this.txtCC.Name = "txtCC";
+            this.txtCC.Size = new System.Drawing.Size(49, 22);
+            this.txtCC.TabIndex = 14;
+            this.txtCC.Text = "30";
+            this.txtCC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(85, 24);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(16, 12);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "B:";
+            // 
+            // txtBB
+            // 
+            this.txtBB.Location = new System.Drawing.Point(102, 21);
+            this.txtBB.Name = "txtBB";
+            this.txtBB.Size = new System.Drawing.Size(49, 22);
+            this.txtBB.TabIndex = 12;
+            this.txtBB.Text = "14";
+            this.txtBB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(11, 24);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(16, 12);
+            this.label8.TabIndex = 11;
+            this.label8.Text = "A:";
+            // 
+            // txtAA
+            // 
+            this.txtAA.Location = new System.Drawing.Point(34, 21);
+            this.txtAA.Name = "txtAA";
+            this.txtAA.Size = new System.Drawing.Size(49, 22);
+            this.txtAA.TabIndex = 10;
+            this.txtAA.Text = "80";
+            this.txtAA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // groupBox4
             // 
@@ -314,115 +431,175 @@
             this.timer_epitrochoid.Interval = 10;
             this.timer_epitrochoid.Tick += new System.EventHandler(this.timer_epitrochoid_Tick);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(221, 24);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(24, 12);
-            this.label1.TabIndex = 17;
-            this.label1.Text = "Iter:";
-            // 
-            // txtIter
-            // 
-            this.txtIter.Location = new System.Drawing.Point(252, 21);
-            this.txtIter.Name = "txtIter";
-            this.txtIter.Size = new System.Drawing.Size(49, 22);
-            this.txtIter.TabIndex = 16;
-            this.txtIter.Text = "100";
-            this.txtIter.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(153, 24);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(16, 12);
-            this.label6.TabIndex = 15;
-            this.label6.Text = "C:";
-            // 
-            // txtCC
-            // 
-            this.txtCC.Location = new System.Drawing.Point(170, 21);
-            this.txtCC.Name = "txtCC";
-            this.txtCC.Size = new System.Drawing.Size(49, 22);
-            this.txtCC.TabIndex = 14;
-            this.txtCC.Text = "30";
-            this.txtCC.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(85, 24);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(16, 12);
-            this.label7.TabIndex = 13;
-            this.label7.Text = "B:";
-            // 
-            // txtBB
-            // 
-            this.txtBB.Location = new System.Drawing.Point(102, 21);
-            this.txtBB.Name = "txtBB";
-            this.txtBB.Size = new System.Drawing.Size(49, 22);
-            this.txtBB.TabIndex = 12;
-            this.txtBB.Text = "14";
-            this.txtBB.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(11, 24);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(16, 12);
-            this.label8.TabIndex = 11;
-            this.label8.Text = "A:";
-            // 
-            // txtAA
-            // 
-            this.txtAA.Location = new System.Drawing.Point(34, 21);
-            this.txtAA.Name = "txtAA";
-            this.txtAA.Size = new System.Drawing.Size(49, 22);
-            this.txtAA.TabIndex = 10;
-            this.txtAA.Text = "80";
-            this.txtAA.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(304, 24);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(36, 12);
-            this.label9.TabIndex = 19;
-            this.label9.Text = "Fr/rev:";
-            // 
-            // txtFrPerRev
-            // 
-            this.txtFrPerRev.Location = new System.Drawing.Point(342, 21);
-            this.txtFrPerRev.Name = "txtFrPerRev";
-            this.txtFrPerRev.Size = new System.Drawing.Size(49, 22);
-            this.txtFrPerRev.TabIndex = 18;
-            this.txtFrPerRev.Text = "20";
-            this.txtFrPerRev.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // btnDraw
-            // 
-            this.btnDraw.Location = new System.Drawing.Point(398, 21);
-            this.btnDraw.Name = "btnDraw";
-            this.btnDraw.Size = new System.Drawing.Size(56, 21);
-            this.btnDraw.TabIndex = 20;
-            this.btnDraw.Text = "Draw";
-            this.btnDraw.UseVisualStyleBackColor = true;
-            this.btnDraw.Click += new System.EventHandler(this.btnDraw_Click);
-            // 
             // tmrDraw
             // 
             this.tmrDraw.Tick += new System.EventHandler(this.tmrDraw_Tick);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.bt_draw_buddhabrot);
+            this.groupBox2.Controls.Add(this.txtDrawEvery);
+            this.groupBox2.Controls.Add(this.label15);
+            this.groupBox2.Controls.Add(this.txtStopAfter);
+            this.groupBox2.Controls.Add(this.label16);
+            this.groupBox2.Controls.Add(this.txtBlueCutoff);
+            this.groupBox2.Controls.Add(this.label12);
+            this.groupBox2.Controls.Add(this.txtGreenCutoff);
+            this.groupBox2.Controls.Add(this.label13);
+            this.groupBox2.Controls.Add(this.txtRedCutoff);
+            this.groupBox2.Controls.Add(this.label14);
+            this.groupBox2.Controls.Add(this.txtHeight);
+            this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Controls.Add(this.txtWidth);
+            this.groupBox2.Controls.Add(this.label11);
+            this.groupBox2.Location = new System.Drawing.Point(487, 371);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(448, 87);
+            this.groupBox2.TabIndex = 78;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "佛像碎形";
+            // 
+            // txtHeight
+            // 
+            this.txtHeight.Location = new System.Drawing.Point(57, 40);
+            this.txtHeight.Name = "txtHeight";
+            this.txtHeight.Size = new System.Drawing.Size(60, 22);
+            this.txtHeight.TabIndex = 37;
+            this.txtHeight.Text = "200";
+            this.txtHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(14, 47);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(39, 12);
+            this.label10.TabIndex = 36;
+            this.label10.Text = "Height:";
+            // 
+            // txtWidth
+            // 
+            this.txtWidth.Location = new System.Drawing.Point(57, 18);
+            this.txtWidth.Name = "txtWidth";
+            this.txtWidth.Size = new System.Drawing.Size(60, 22);
+            this.txtWidth.TabIndex = 35;
+            this.txtWidth.Text = "200";
+            this.txtWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(14, 25);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(37, 12);
+            this.label11.TabIndex = 34;
+            this.label11.Text = "Width:";
+            // 
+            // txtBlueCutoff
+            // 
+            this.txtBlueCutoff.Location = new System.Drawing.Point(208, 54);
+            this.txtBlueCutoff.Name = "txtBlueCutoff";
+            this.txtBlueCutoff.Size = new System.Drawing.Size(72, 22);
+            this.txtBlueCutoff.TabIndex = 45;
+            this.txtBlueCutoff.Text = "50";
+            this.txtBlueCutoff.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(133, 57);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(64, 12);
+            this.label12.TabIndex = 44;
+            this.label12.Text = "Blue Cutoff:";
+            // 
+            // txtGreenCutoff
+            // 
+            this.txtGreenCutoff.Location = new System.Drawing.Point(208, 32);
+            this.txtGreenCutoff.Name = "txtGreenCutoff";
+            this.txtGreenCutoff.Size = new System.Drawing.Size(72, 22);
+            this.txtGreenCutoff.TabIndex = 43;
+            this.txtGreenCutoff.Text = "250";
+            this.txtGreenCutoff.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(133, 35);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(70, 12);
+            this.label13.TabIndex = 42;
+            this.label13.Text = "Green Cutoff:";
+            // 
+            // txtRedCutoff
+            // 
+            this.txtRedCutoff.Location = new System.Drawing.Point(208, 10);
+            this.txtRedCutoff.Name = "txtRedCutoff";
+            this.txtRedCutoff.Size = new System.Drawing.Size(72, 22);
+            this.txtRedCutoff.TabIndex = 41;
+            this.txtRedCutoff.Text = "1250";
+            this.txtRedCutoff.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(133, 13);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(61, 12);
+            this.label14.TabIndex = 40;
+            this.label14.Text = "Red Cutoff:";
+            // 
+            // txtDrawEvery
+            // 
+            this.txtDrawEvery.Location = new System.Drawing.Point(357, 32);
+            this.txtDrawEvery.Name = "txtDrawEvery";
+            this.txtDrawEvery.Size = new System.Drawing.Size(72, 22);
+            this.txtDrawEvery.TabIndex = 49;
+            this.txtDrawEvery.Text = "100000";
+            this.txtDrawEvery.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(295, 32);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(64, 12);
+            this.label15.TabIndex = 48;
+            this.label15.Text = "Draw Every:";
+            // 
+            // txtStopAfter
+            // 
+            this.txtStopAfter.Location = new System.Drawing.Point(357, 10);
+            this.txtStopAfter.Name = "txtStopAfter";
+            this.txtStopAfter.Size = new System.Drawing.Size(72, 22);
+            this.txtStopAfter.TabIndex = 47;
+            this.txtStopAfter.Text = "10000000";
+            this.txtStopAfter.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(296, 11);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(56, 12);
+            this.label16.TabIndex = 46;
+            this.label16.Text = "Stop After:";
+            // 
+            // bt_draw_buddhabrot
+            // 
+            this.bt_draw_buddhabrot.Location = new System.Drawing.Point(357, 56);
+            this.bt_draw_buddhabrot.Name = "bt_draw_buddhabrot";
+            this.bt_draw_buddhabrot.Size = new System.Drawing.Size(72, 21);
+            this.bt_draw_buddhabrot.TabIndex = 50;
+            this.bt_draw_buddhabrot.Text = "Draw";
+            this.bt_draw_buddhabrot.Click += new System.EventHandler(this.bt_draw_buddhabrot_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1105, 594);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox6);
             this.Controls.Add(this.pictureBox7);
@@ -455,6 +632,8 @@
             this.groupBox6.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -498,6 +677,22 @@
         private System.Windows.Forms.TextBox txtAA;
         private System.Windows.Forms.Timer tmrDraw;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        internal System.Windows.Forms.TextBox txtDrawEvery;
+        internal System.Windows.Forms.Label label15;
+        internal System.Windows.Forms.TextBox txtStopAfter;
+        internal System.Windows.Forms.Label label16;
+        internal System.Windows.Forms.TextBox txtBlueCutoff;
+        internal System.Windows.Forms.Label label12;
+        internal System.Windows.Forms.TextBox txtGreenCutoff;
+        internal System.Windows.Forms.Label label13;
+        internal System.Windows.Forms.TextBox txtRedCutoff;
+        internal System.Windows.Forms.Label label14;
+        internal System.Windows.Forms.TextBox txtHeight;
+        internal System.Windows.Forms.Label label10;
+        internal System.Windows.Forms.TextBox txtWidth;
+        internal System.Windows.Forms.Label label11;
+        internal System.Windows.Forms.Button bt_draw_buddhabrot;
     }
 }
 
