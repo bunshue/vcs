@@ -97,10 +97,7 @@ namespace vcs_Remove_Bin_Obj
 
             ProcessDirectoryBinObj(folder_name);
 
-
-            path = @"C:\_git\vcs\_3.cuda\bin\win64\Debug";
-
-            RemoveNeedlessFiles(path);
+            RemoveNeedlessFiles();
 
             if (checkBox9.Checked == true)
             {
@@ -293,7 +290,8 @@ namespace vcs_Remove_Bin_Obj
                     //需要跳過的資料夾
                     if (folder_name[i].Contains("_3.cuda") == true)
                     {
-                        continue;
+                        richTextBox1.Text += "跳過......\n";
+                        //continue;
                     }
                 }
 
@@ -656,19 +654,355 @@ namespace vcs_Remove_Bin_Obj
             ProcessRenameBackup001(filename_rename);
         }
 
-        void RemoveNeedlessFiles(string foldername)
+        void RemoveNeedlessFiles()
         {
-            if (Directory.Exists(foldername) == false)    //確認資料夾是否存在
+            string foldername = string.Empty;
+            string[] filenames;
+
+            foldername = @"C:\_git\vcs\_3.cuda\bin\win64\Debug";
+
+            if (Directory.Exists(foldername) == true)    //確認資料夾是否存在
             {
-                richTextBox1.Text += "資料夾: " + foldername + " 不存在\n";
+                richTextBox1.Text += "資料夾: " + foldername + " 存在\n";
+
+                filenames = Directory.GetFiles(foldername); //獲得文件夾目錄下所有文件全路徑
+                foreach (string filename in filenames)
+                {
+                    if ((filename.Contains("freeglut.dll") == false) && (filename.Contains("glew64.dll") == false))
+                    {
+                        richTextBox1.Text += "remove : " + filename + "\n";
+                        if (File.Exists(filename))  //確認檔案是否存在
+                        {
+                            try
+                            {
+                                File.Delete(filename);
+                                richTextBox1.Text += "已刪除檔案" + filename + "\n";
+                            }
+                            catch
+                            {
+                                richTextBox1.Text += "無法刪除檔案" + filename + "\n";
+                            }
+                        }
+                    }
+                }
             }
 
-            string[] filenames = Directory.GetFiles(foldername); //獲得文件夾目錄下所有文件全路徑
-            foreach (string filename in filenames)
+            foldername = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_d_emgu\libemgucv-windows-x64-2.3.0.1416\bin";
+            if (Directory.Exists(foldername) == true)    //確認資料夾是否存在
             {
-                if ((filename.Contains("freeglut.dll") == false) && (filename.Contains("glew64.dll") == false))
+                richTextBox1.Text += "資料夾: " + foldername + " 存在\n";
+
+                //filenames = Directory.GetFiles(foldername); //獲得文件夾目錄下所有文件全路徑
+                filenames = Directory.GetFiles(foldername, "*.exe"); //獲得文件夾目錄下指定後綴名文件全路徑
+                foreach (string filename in filenames)
                 {
                     richTextBox1.Text += "remove : " + filename + "\n";
+
+                    if (filename.Contains("opencv"))
+                        continue;
+                    if (filename.Contains("Example."))
+                        continue;
+                    if (filename.Contains("cvextern_test"))
+                        continue;
+
+                    if (File.Exists(filename))  //確認檔案是否存在
+                    {
+                        try
+                        {
+                            File.Delete(filename);
+                            richTextBox1.Text += "已刪除檔案" + filename + "\n";
+                        }
+                        catch
+                        {
+                            richTextBox1.Text += "無法刪除檔案" + filename + "\n";
+                        }
+                    }
+                }
+
+                filenames = Directory.GetFiles(foldername, "*.pdb"); //獲得文件夾目錄下指定後綴名文件全路徑
+                foreach (string filename in filenames)
+                {
+                    richTextBox1.Text += "remove : " + filename + "\n";
+
+                    if (filename.Contains("opencv"))
+                        continue;
+                    if (filename.Contains("example."))
+                        continue;
+                    if (filename.Contains("cvextern_test"))
+                        continue;
+
+                    if (File.Exists(filename))  //確認檔案是否存在
+                    {
+                        try
+                        {
+                            File.Delete(filename);
+                            richTextBox1.Text += "已刪除檔案" + filename + "\n";
+                        }
+                        catch
+                        {
+                            richTextBox1.Text += "無法刪除檔案" + filename + "\n";
+                        }
+                    }
+                }
+
+                filenames = Directory.GetFiles(foldername, "*.manifest"); //獲得文件夾目錄下指定後綴名文件全路徑
+                foreach (string filename in filenames)
+                {
+                    richTextBox1.Text += "remove : " + filename + "\n";
+
+                    if (filename.Contains("opencv"))
+                        continue;
+                    if (filename.Contains("example."))
+                        continue;
+                    if (filename.Contains("cvextern_test"))
+                        continue;
+
+                    if (File.Exists(filename))  //確認檔案是否存在
+                    {
+                        try
+                        {
+                            File.Delete(filename);
+                            richTextBox1.Text += "已刪除檔案" + filename + "\n";
+                        }
+                        catch
+                        {
+                            richTextBox1.Text += "無法刪除檔案" + filename + "\n";
+                        }
+                    }
+                }
+
+                filenames = Directory.GetFiles(foldername, "*.txt"); //獲得文件夾目錄下指定後綴名文件全路徑
+                foreach (string filename in filenames)
+                {
+                    richTextBox1.Text += "remove : " + filename + "\n";
+
+                    if (filename.Contains("opencv"))
+                        continue;
+                    if (filename.Contains("example."))
+                        continue;
+                    if (filename.Contains("cvextern_test"))
+                        continue;
+
+                    if (File.Exists(filename))  //確認檔案是否存在
+                    {
+                        try
+                        {
+                            File.Delete(filename);
+                            richTextBox1.Text += "已刪除檔案" + filename + "\n";
+                        }
+                        catch
+                        {
+                            richTextBox1.Text += "無法刪除檔案" + filename + "\n";
+                        }
+                    }
+                }
+
+
+                filenames = Directory.GetFiles(foldername, "*.config"); //獲得文件夾目錄下指定後綴名文件全路徑
+                foreach (string filename in filenames)
+                {
+                    richTextBox1.Text += "remove : " + filename + "\n";
+
+                    if (filename.Contains("opencv"))
+                        continue;
+                    if (filename.Contains("example."))
+                        continue;
+                    if (filename.Contains("cvextern_test"))
+                        continue;
+
+                    if (File.Exists(filename))  //確認檔案是否存在
+                    {
+                        try
+                        {
+                            File.Delete(filename);
+                            richTextBox1.Text += "已刪除檔案" + filename + "\n";
+                        }
+                        catch
+                        {
+                            richTextBox1.Text += "無法刪除檔案" + filename + "\n";
+                        }
+                    }
+                }
+
+
+                filenames = Directory.GetFiles(foldername, "*.jpg"); //獲得文件夾目錄下指定後綴名文件全路徑
+                foreach (string filename in filenames)
+                {
+                    richTextBox1.Text += "remove : " + filename + "\n";
+
+                    if (filename.Contains("opencv"))
+                        continue;
+                    if (filename.Contains("example."))
+                        continue;
+                    if (filename.Contains("cvextern_test"))
+                        continue;
+
+                    if (File.Exists(filename))  //確認檔案是否存在
+                    {
+                        try
+                        {
+                            File.Delete(filename);
+                            richTextBox1.Text += "已刪除檔案" + filename + "\n";
+                        }
+                        catch
+                        {
+                            richTextBox1.Text += "無法刪除檔案" + filename + "\n";
+                        }
+                    }
+                }
+            }
+
+            foldername = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_d_emgu\libemgucv-windows-x86-2.3.0.1416\bin";
+
+            if (Directory.Exists(foldername) == true)    //確認資料夾是否存在
+            {
+                richTextBox1.Text += "資料夾: " + foldername + " 存在\n";
+
+                //filenames = Directory.GetFiles(foldername); //獲得文件夾目錄下所有文件全路徑
+                filenames = Directory.GetFiles(foldername, "*.exe"); //獲得文件夾目錄下指定後綴名文件全路徑
+                foreach (string filename in filenames)
+                {
+                    richTextBox1.Text += "remove : " + filename + "\n";
+
+                    if (filename.Contains("opencv"))
+                        continue;
+                    if (filename.Contains("Example."))
+                        continue;
+                    if (filename.Contains("cvextern_test"))
+                        continue;
+
+                    if (File.Exists(filename))  //確認檔案是否存在
+                    {
+                        try
+                        {
+                            File.Delete(filename);
+                            richTextBox1.Text += "已刪除檔案" + filename + "\n";
+                        }
+                        catch
+                        {
+                            richTextBox1.Text += "無法刪除檔案" + filename + "\n";
+                        }
+                    }
+                }
+
+                filenames = Directory.GetFiles(foldername, "*.pdb"); //獲得文件夾目錄下指定後綴名文件全路徑
+                foreach (string filename in filenames)
+                {
+                    richTextBox1.Text += "remove : " + filename + "\n";
+
+                    if (filename.Contains("opencv"))
+                        continue;
+                    if (filename.Contains("example."))
+                        continue;
+                    if (filename.Contains("cvextern_test"))
+                        continue;
+
+                    if (File.Exists(filename))  //確認檔案是否存在
+                    {
+                        try
+                        {
+                            File.Delete(filename);
+                            richTextBox1.Text += "已刪除檔案" + filename + "\n";
+                        }
+                        catch
+                        {
+                            richTextBox1.Text += "無法刪除檔案" + filename + "\n";
+                        }
+                    }
+                }
+
+                filenames = Directory.GetFiles(foldername, "*.manifest"); //獲得文件夾目錄下指定後綴名文件全路徑
+                foreach (string filename in filenames)
+                {
+                    richTextBox1.Text += "remove : " + filename + "\n";
+
+                    if (filename.Contains("opencv"))
+                        continue;
+                    if (filename.Contains("example."))
+                        continue;
+                    if (filename.Contains("cvextern_test"))
+                        continue;
+
+                    if (File.Exists(filename))  //確認檔案是否存在
+                    {
+                        try
+                        {
+                            File.Delete(filename);
+                            richTextBox1.Text += "已刪除檔案" + filename + "\n";
+                        }
+                        catch
+                        {
+                            richTextBox1.Text += "無法刪除檔案" + filename + "\n";
+                        }
+                    }
+                }
+
+                filenames = Directory.GetFiles(foldername, "*.txt"); //獲得文件夾目錄下指定後綴名文件全路徑
+                foreach (string filename in filenames)
+                {
+                    richTextBox1.Text += "remove : " + filename + "\n";
+
+                    if (filename.Contains("opencv"))
+                        continue;
+                    if (filename.Contains("example."))
+                        continue;
+                    if (filename.Contains("cvextern_test"))
+                        continue;
+
+                    if (File.Exists(filename))  //確認檔案是否存在
+                    {
+                        try
+                        {
+                            File.Delete(filename);
+                            richTextBox1.Text += "已刪除檔案" + filename + "\n";
+                        }
+                        catch
+                        {
+                            richTextBox1.Text += "無法刪除檔案" + filename + "\n";
+                        }
+                    }
+                }
+
+
+                filenames = Directory.GetFiles(foldername, "*.config"); //獲得文件夾目錄下指定後綴名文件全路徑
+                foreach (string filename in filenames)
+                {
+                    richTextBox1.Text += "remove : " + filename + "\n";
+
+                    if (filename.Contains("opencv"))
+                        continue;
+                    if (filename.Contains("example."))
+                        continue;
+                    if (filename.Contains("cvextern_test"))
+                        continue;
+
+                    if (File.Exists(filename))  //確認檔案是否存在
+                    {
+                        try
+                        {
+                            File.Delete(filename);
+                            richTextBox1.Text += "已刪除檔案" + filename + "\n";
+                        }
+                        catch
+                        {
+                            richTextBox1.Text += "無法刪除檔案" + filename + "\n";
+                        }
+                    }
+                }
+
+
+                filenames = Directory.GetFiles(foldername, "*.jpg"); //獲得文件夾目錄下指定後綴名文件全路徑
+                foreach (string filename in filenames)
+                {
+                    richTextBox1.Text += "remove : " + filename + "\n";
+
+                    if (filename.Contains("opencv"))
+                        continue;
+                    if (filename.Contains("example."))
+                        continue;
+                    if (filename.Contains("cvextern_test"))
+                        continue;
+
                     if (File.Exists(filename))  //確認檔案是否存在
                     {
                         try
@@ -686,3 +1020,4 @@ namespace vcs_Remove_Bin_Obj
         }
     }
 }
+

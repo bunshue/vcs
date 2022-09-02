@@ -84,7 +84,7 @@ extern "C" void setTextureFilterMode(bool bLinearFilter) {
   checkCudaErrors(cudaCreateTextureObject(&tex, &texRes, &texDescr, NULL));
 }
 
-extern "C" void initCuda(const uchar *h_volume, cudaExtent volumeSize){
+extern "C" void initCuda(const uchar *h_volume, cudaExtent volumeSize) {
     printf("initCuda\n");
   // create 3D array
   cudaChannelFormatDesc channelDesc = cudaCreateChannelDesc<uchar>();
