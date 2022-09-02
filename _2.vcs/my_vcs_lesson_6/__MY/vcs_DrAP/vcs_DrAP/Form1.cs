@@ -63,6 +63,7 @@ namespace vcs_DrAP
         private const int SEARCH_MODE_VCS = 0x00;	    //search vcs code, 搜尋vcs內的關鍵字
         private const int SEARCH_MODE_PYTHON = 0x01;	//search python code, 搜尋python內的關鍵字
         private const int SEARCH_MODE_MATLAB = 0x02;	//search matlab code, 搜尋matlab內的關鍵字
+        private const int SEARCH_MODE_CUDA = 0x03;	//search cuda code, 搜尋cuda內的關鍵字
         int search_mode = SEARCH_MODE_VCS;
 
         List<String> old_search_path = new List<String>();
@@ -246,7 +247,7 @@ namespace vcs_DrAP
             bt_test1.Location = new Point(x_st + 100 + 140 + 65, y_st + 50);
             bt_test2.Location = new Point(x_st + 100 + 140 + 65 + 40, y_st + 50);
 
-            x_st = 1500;
+            x_st = 1460;
             y_st = 6;
             dx = 55;
             dy = 55;
@@ -254,7 +255,9 @@ namespace vcs_DrAP
             bt_search_pattern_vcs.Location = new Point(x_st, y_st);
             bt_search_pattern_matlab.Location = new Point(x_st + dx, y_st);
             bt_search_pattern_python.Location = new Point(x_st, y_st + dy);
-            checkBox8.Location = new Point(x_st + dx, y_st + dy);
+            bt_search_pattern_cuda.Location = new Point(x_st + dx, y_st + dy);
+            checkBox8.Location = new Point(x_st + dx*2, y_st + dy);
+
             bt_save_file_data.Location = new Point(x_st + dx * 2, y_st);
 
             bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - bt_clear2.Width, richTextBox2.Location.Y);
@@ -2753,6 +2756,12 @@ namespace vcs_DrAP
             return;
         }
 
+        private void bt_search_pattern_cuda_Click(object sender, EventArgs e)
+        {
+            do_search_mode(SEARCH_MODE_CUDA);
+            return;
+        }
+
         void do_search_mode(int mode)
         {
             string path = string.Empty;
@@ -3070,6 +3079,7 @@ namespace vcs_DrAP
         {
             listView1.Clear();
         }
+
     }
 }
 

@@ -14,7 +14,7 @@ namespace vcs_Remove_Bin_Obj
     public partial class Form1 : Form
     {
         List<string> folder_name = new List<string>();      //宣告string型態的List
-        List<string> filename_backup = new List<string>();  //宣告string型態的List
+        List<string> filename_rename = new List<string>();  //宣告string型態的List
         string search_path = string.Empty;
         int total_show_empty_folder_cnt = 0;
         int total_delete_empty_folder_cnt = 0;
@@ -358,7 +358,7 @@ namespace vcs_Remove_Bin_Obj
                             if (checkBox5.Checked == true)
                                 richTextBox1.Text += fileName + "\n";
                             if (checkBox6.Checked == true)
-                                filename_backup.Add(fileName);
+                                filename_rename.Add(fileName);
                         }
                     }
 
@@ -383,28 +383,28 @@ namespace vcs_Remove_Bin_Obj
             }
         }
 
-        public void ProcessRenameBackup(List<string> filename_backup)
+        public void ProcessRenameBackup(List<string> filename_rename)
         {
             bool flag_rename_fail = false;
             int i;
             int len;
-            len = filename_backup.Count;
+            len = filename_rename.Count;
             richTextBox1.Text += "欲更名個數 : " + len + "\n";
             for (i = 0; i < len; i++)
             {
-                richTextBox1.Text += "檔案 : " + filename_backup[i] + "\n";
+                richTextBox1.Text += "檔案 : " + filename_rename[i] + "\n";
 
 
-                richTextBox1.Text += "new 檔案 : " + filename_backup[i].Replace(" 的副本", "") + "\n";
+                richTextBox1.Text += "new 檔案 : " + filename_rename[i].Replace(" 的副本", "") + "\n";
 
                 //if (!File.Exists(Path.Combine(dir, f.ToString().Replace("(", "").Replace(")", "")         )))
 
 
-                if (File.Exists(filename_backup[i]))     //確認檔案是否存在
+                if (File.Exists(filename_rename[i]))     //確認檔案是否存在
                 {
 
-                    string sourceFileName = filename_backup[i];
-                    string destFileName = filename_backup[i].Replace(" 的副本", "");
+                    string sourceFileName = filename_rename[i];
+                    string destFileName = filename_rename[i].Replace(" 的副本", "");
 
                     //移動檔案，從 sourceFileName 移動到 destFileName
                     if (File.Exists(sourceFileName))        //確認原始檔案是否存在
@@ -429,7 +429,7 @@ namespace vcs_Remove_Bin_Obj
                 }
                 else
                 {
-                    richTextBox1.Text += "資料夾或檔案: " + filename_backup[i] + " 不存在，不能刪除\n";
+                    richTextBox1.Text += "資料夾或檔案: " + filename_rename[i] + " 不存在，不能刪除\n";
                     flag_rename_fail = true;
                 }
             }
@@ -460,7 +460,7 @@ namespace vcs_Remove_Bin_Obj
             //string path = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6_draw";
             string path = search_path;
 
-            filename_backup.Clear();
+            filename_rename.Clear();
 
             richTextBox1.Text += "資料夾: " + path + "\n\n";
             if (Directory.Exists(path))
@@ -468,7 +468,7 @@ namespace vcs_Remove_Bin_Obj
                 // This path is a directory
                 ProcessRenameDirectory(path);
             }
-            ProcessRenameBackup(filename_backup);
+            ProcessRenameBackup(filename_rename);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -489,19 +489,26 @@ namespace vcs_Remove_Bin_Obj
                     Array.Sort(fileEntries);
                     foreach (string fileName in fileEntries)
                     {
-                        richTextBox1.Text += fileName + "\n";
+                        //richTextBox1.Text += fileName + "\n";
 
-                        //MIRD-121-CD4-001.wmv
-                        /*
-                        //001
-                        if (fileName.EndsWith(" 的副本"))
+                        //取得檔案名稱
+                        string short_filename =
+                            fileName.Substring(fileName.LastIndexOf("\\") + 1,
+                            fileName.LastIndexOf(".") -
+                            (fileName.LastIndexOf("\\") + 1));
+
+                        //richTextBox1.Text += "檔案名稱:\t" + short_filename + "\n";
+
+                        if (short_filename.Length >= 11)
                         {
-                            if (checkBox5.Checked == true)
-                                richTextBox1.Text += fileName + "\n";
-                            if (checkBox6.Checked == true)
-                                filename_backup.Add(fileName);
+                            if (short_filename[short_filename.Length - 4] == '-')
+                            {
+                                if ((short_filename[short_filename.Length - 3] == '0') && (short_filename[short_filename.Length - 2] == '0'))
+                                {
+                                    filename_rename.Add(fileName);
+                                }
+                            }
                         }
-                        */
                     }
 
                     // Recurse into subdirectories of this directory.
@@ -525,60 +532,78 @@ namespace vcs_Remove_Bin_Obj
             }
         }
 
-        public void ProcessRenameBackup001(List<string> filename_backup)
+        public void ProcessRenameBackup001(List<string> filename_rename)
         {
             bool flag_rename_fail = false;
             int i;
             int len;
-            len = filename_backup.Count;
+            len = filename_rename.Count;
             richTextBox1.Text += "欲更名個數 : " + len + "\n";
             for (i = 0; i < len; i++)
             {
-                richTextBox1.Text += "檔案 : " + filename_backup[i] + "\n";
+                richTextBox1.Text += "檔案 : " + filename_rename[i] + "\n";
 
-                //001
-                richTextBox1.Text += "new 檔案 : " + filename_backup[i].Replace(" 的副本", "") + "\n";
+                //取得檔案名稱
+                string short_filename =
+                    filename_rename[i].Substring(filename_rename[i].LastIndexOf("\\") + 1,
+                    filename_rename[i].LastIndexOf(".") -
+                    (filename_rename[i].LastIndexOf("\\") + 1));
 
-                //if (!File.Exists(Path.Combine(dir, f.ToString().Replace("(", "").Replace(")", "")         )))
+                //richTextBox1.Text += "檔案名稱:\t" + short_filename + "\n";
 
-
-                if (File.Exists(filename_backup[i]))     //確認檔案是否存在
+                if (short_filename.Length >= 11)
                 {
-                    //001
-                    string sourceFileName = filename_backup[i];
-                    string destFileName = filename_backup[i].Replace(" 的副本", "");
-
-                    //移動檔案，從 sourceFileName 移動到 destFileName
-                    if (File.Exists(sourceFileName))        //確認原始檔案是否存在
+                    if (short_filename[short_filename.Length - 4] == '-')
                     {
-                        if (!File.Exists(destFileName))     //確認目標檔案是否存在
+                        if ((short_filename[short_filename.Length - 3] == '0') && (short_filename[short_filename.Length - 2] == '0'))
                         {
-                            File.Move(sourceFileName, destFileName);
-                            richTextBox1.Text += "已移動檔案: " + sourceFileName + " 到 " + destFileName + "\n";
-                        }
-                        else
-                        {
-                            richTextBox1.Text += "檔案: " + destFileName + " 已存在，無法移動\n";
-                            flag_rename_fail = true;
+                            richTextBox1.Text += "符合條件 改名 : " + filename_rename[i] + "\n";
+
+                            if (File.Exists(filename_rename[i]))     //確認檔案是否存在
+                            {
+                                string sourceFileName = filename_rename[i];
+                                string destFileName = string.Empty;
+
+                                int length = sourceFileName.Length;
+                                destFileName = sourceFileName.Substring(0, length - 8) + sourceFileName.Substring(length - 4, 4);
+
+                                richTextBox1.Text += "new filename : " + destFileName + "\n";
+
+                                //移動檔案，從 sourceFileName 移動到 destFileName
+                                if (File.Exists(sourceFileName))        //確認原始檔案是否存在
+                                {
+                                    if (!File.Exists(destFileName))     //確認目標檔案是否存在
+                                    {
+                                        File.Move(sourceFileName, destFileName);
+                                        richTextBox1.Text += "已移動檔案: " + sourceFileName + " 到 " + destFileName + "\n";
+                                    }
+                                    else
+                                    {
+                                        richTextBox1.Text += "檔案: " + destFileName + " 已存在，無法移動\n";
+                                        flag_rename_fail = true;
+                                    }
+                                }
+                                else
+                                {
+                                    richTextBox1.Text += "檔案: " + sourceFileName + " 不存在，無法移動\n";
+                                    flag_rename_fail = true;
+                                }
+                            }
+                            else
+                            {
+                                richTextBox1.Text += "資料夾或檔案: " + filename_rename[i] + " 不存在，不能刪除\n";
+                                flag_rename_fail = true;
+                            }
                         }
                     }
-                    else
-                    {
-                        richTextBox1.Text += "檔案: " + sourceFileName + " 不存在，無法移動\n";
-                        flag_rename_fail = true;
-                    }
-
-                }
-                else
-                {
-                    richTextBox1.Text += "資料夾或檔案: " + filename_backup[i] + " 不存在，不能刪除\n";
-                    flag_rename_fail = true;
                 }
             }
 
             lb_main_mesg.Text = "更名個數 : " + len + ", 完成";
             if (flag_rename_fail == true)
+            {
                 lb_main_mesg.Text += "\t有錯誤";
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -605,7 +630,7 @@ namespace vcs_Remove_Bin_Obj
             string path = @"C:\______test_files\rename001";
             //string path = search_path;
 
-            filename_backup.Clear();
+            filename_rename.Clear();
 
             richTextBox1.Text += "資料夾: " + path + "\n\n";
             if (Directory.Exists(path))
@@ -613,8 +638,7 @@ namespace vcs_Remove_Bin_Obj
                 // This path is a directory
                 ProcessRenameDirectory001(path);
             }
-            //ProcessRenameBackup001(filename_backup);
-
+            ProcessRenameBackup001(filename_rename);
         }
     }
 }

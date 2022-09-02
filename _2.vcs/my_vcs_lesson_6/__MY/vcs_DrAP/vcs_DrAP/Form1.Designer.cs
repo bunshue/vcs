@@ -74,6 +74,11 @@
             this.cb_file_s = new System.Windows.Forms.CheckBox();
             this.cb_file_size = new System.Windows.Forms.CheckBox();
             this.checkBox8 = new System.Windows.Forms.CheckBox();
+            this.bt_find_empty_folders = new System.Windows.Forms.Button();
+            this.bt_test2 = new System.Windows.Forms.Button();
+            this.bt_save_file_data = new System.Windows.Forms.Button();
+            this.bt_clear3 = new System.Windows.Forms.Button();
+            this.bt_search_pattern_cuda = new System.Windows.Forms.Button();
             this.bt_copy_rtb_data = new System.Windows.Forms.Button();
             this.bt_setup = new System.Windows.Forms.Button();
             this.bt_search_pattern_matlab = new System.Windows.Forms.Button();
@@ -84,10 +89,6 @@
             this.bt_start_files = new System.Windows.Forms.Button();
             this.bt_open_dir = new System.Windows.Forms.Button();
             this.bt_save_data = new System.Windows.Forms.Button();
-            this.bt_find_empty_folders = new System.Windows.Forms.Button();
-            this.bt_test2 = new System.Windows.Forms.Button();
-            this.bt_save_file_data = new System.Windows.Forms.Button();
-            this.bt_clear3 = new System.Windows.Forms.Button();
             this.groupBox_video.SuspendLayout();
             this.groupBox_file.SuspendLayout();
             this.SuspendLayout();
@@ -262,7 +263,7 @@
             this.textBox3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.textBox3.Location = new System.Drawing.Point(1212, 15);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(142, 30);
+            this.textBox3.Size = new System.Drawing.Size(155, 30);
             this.textBox3.TabIndex = 24;
             this.textBox3.Text = "TBGBMBKB";
             this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -597,6 +598,64 @@
             this.checkBox8.Text = "滿30結束";
             this.checkBox8.UseVisualStyleBackColor = true;
             // 
+            // bt_find_empty_folders
+            // 
+            this.bt_find_empty_folders.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_find_empty_folders.Location = new System.Drawing.Point(1091, 15);
+            this.bt_find_empty_folders.Name = "bt_find_empty_folders";
+            this.bt_find_empty_folders.Size = new System.Drawing.Size(115, 26);
+            this.bt_find_empty_folders.TabIndex = 54;
+            this.bt_find_empty_folders.Text = "找空資料夾";
+            this.bt_find_empty_folders.UseVisualStyleBackColor = true;
+            this.bt_find_empty_folders.Click += new System.EventHandler(this.bt_find_empty_folders_Click);
+            // 
+            // bt_test2
+            // 
+            this.bt_test2.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_test2.Location = new System.Drawing.Point(1322, 79);
+            this.bt_test2.Name = "bt_test2";
+            this.bt_test2.Size = new System.Drawing.Size(38, 23);
+            this.bt_test2.TabIndex = 55;
+            this.bt_test2.Text = "T2";
+            this.bt_test2.UseVisualStyleBackColor = true;
+            this.bt_test2.Click += new System.EventHandler(this.bt_test2_Click);
+            // 
+            // bt_save_file_data
+            // 
+            this.bt_save_file_data.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_save_file_data.Font = new System.Drawing.Font("細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_save_file_data.Location = new System.Drawing.Point(1416, 7);
+            this.bt_save_file_data.Name = "bt_save_file_data";
+            this.bt_save_file_data.Size = new System.Drawing.Size(50, 50);
+            this.bt_save_file_data.TabIndex = 56;
+            this.bt_save_file_data.Text = "累存大檔";
+            this.bt_save_file_data.UseVisualStyleBackColor = true;
+            this.bt_save_file_data.Click += new System.EventHandler(this.bt_save_file_data_Click);
+            // 
+            // bt_clear3
+            // 
+            this.bt_clear3.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear3.Location = new System.Drawing.Point(1577, 548);
+            this.bt_clear3.Name = "bt_clear3";
+            this.bt_clear3.Size = new System.Drawing.Size(63, 30);
+            this.bt_clear3.TabIndex = 57;
+            this.bt_clear3.Text = "清除";
+            this.bt_clear3.UseVisualStyleBackColor = true;
+            this.bt_clear3.Click += new System.EventHandler(this.bt_clear3_Click);
+            // 
+            // bt_search_pattern_cuda
+            // 
+            this.bt_search_pattern_cuda.BackColor = System.Drawing.Color.White;
+            this.bt_search_pattern_cuda.BackgroundImage = global::vcs_DrAP.Properties.Resources.cuda;
+            this.bt_search_pattern_cuda.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_search_pattern_cuda.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_search_pattern_cuda.Location = new System.Drawing.Point(1472, 59);
+            this.bt_search_pattern_cuda.Name = "bt_search_pattern_cuda";
+            this.bt_search_pattern_cuda.Size = new System.Drawing.Size(50, 50);
+            this.bt_search_pattern_cuda.TabIndex = 58;
+            this.bt_search_pattern_cuda.UseVisualStyleBackColor = false;
+            this.bt_search_pattern_cuda.Click += new System.EventHandler(this.bt_search_pattern_cuda_Click);
+            // 
             // bt_copy_rtb_data
             // 
             this.bt_copy_rtb_data.BackgroundImage = global::vcs_DrAP.Properties.Resources.clipboard;
@@ -718,56 +777,12 @@
             this.bt_save_data.UseVisualStyleBackColor = true;
             this.bt_save_data.Click += new System.EventHandler(this.bt_save_data_Click);
             // 
-            // bt_find_empty_folders
-            // 
-            this.bt_find_empty_folders.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_find_empty_folders.Location = new System.Drawing.Point(1091, 15);
-            this.bt_find_empty_folders.Name = "bt_find_empty_folders";
-            this.bt_find_empty_folders.Size = new System.Drawing.Size(115, 26);
-            this.bt_find_empty_folders.TabIndex = 54;
-            this.bt_find_empty_folders.Text = "找空資料夾";
-            this.bt_find_empty_folders.UseVisualStyleBackColor = true;
-            this.bt_find_empty_folders.Click += new System.EventHandler(this.bt_find_empty_folders_Click);
-            // 
-            // bt_test2
-            // 
-            this.bt_test2.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_test2.Location = new System.Drawing.Point(1322, 79);
-            this.bt_test2.Name = "bt_test2";
-            this.bt_test2.Size = new System.Drawing.Size(38, 23);
-            this.bt_test2.TabIndex = 55;
-            this.bt_test2.Text = "T2";
-            this.bt_test2.UseVisualStyleBackColor = true;
-            this.bt_test2.Click += new System.EventHandler(this.bt_test2_Click);
-            // 
-            // bt_save_file_data
-            // 
-            this.bt_save_file_data.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_save_file_data.Font = new System.Drawing.Font("細明體", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_save_file_data.Location = new System.Drawing.Point(1416, 7);
-            this.bt_save_file_data.Name = "bt_save_file_data";
-            this.bt_save_file_data.Size = new System.Drawing.Size(50, 50);
-            this.bt_save_file_data.TabIndex = 56;
-            this.bt_save_file_data.Text = "累存大檔";
-            this.bt_save_file_data.UseVisualStyleBackColor = true;
-            this.bt_save_file_data.Click += new System.EventHandler(this.bt_save_file_data_Click);
-            // 
-            // bt_clear3
-            // 
-            this.bt_clear3.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear3.Location = new System.Drawing.Point(1577, 548);
-            this.bt_clear3.Name = "bt_clear3";
-            this.bt_clear3.Size = new System.Drawing.Size(63, 30);
-            this.bt_clear3.TabIndex = 57;
-            this.bt_clear3.Text = "清除";
-            this.bt_clear3.UseVisualStyleBackColor = true;
-            this.bt_clear3.Click += new System.EventHandler(this.bt_clear3_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1886, 1008);
+            this.Controls.Add(this.bt_search_pattern_cuda);
             this.Controls.Add(this.bt_clear3);
             this.Controls.Add(this.bt_save_file_data);
             this.Controls.Add(this.bt_test2);
@@ -891,6 +906,7 @@
         private System.Windows.Forms.Button bt_test2;
         private System.Windows.Forms.Button bt_save_file_data;
         private System.Windows.Forms.Button bt_clear3;
+        private System.Windows.Forms.Button bt_search_pattern_cuda;
     }
 }
 

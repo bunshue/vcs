@@ -8395,6 +8395,7 @@ namespace vcs_Draw_Example1
         #endregion
         /// <summary>
         /// 自動根據參數調整圖像大小
+        /// 根據數據自動計算邊距和字體等
         /// </summary>
         public void Fit()
         {

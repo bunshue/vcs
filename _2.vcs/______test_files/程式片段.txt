@@ -3,15 +3,6 @@
 
 
 
-
-
-使用 Random 方法產生不重複亂數 
-
-//取得非常random的數字
-Random rd = new Random((int)DateTime.Now.Ticks);
-
-
-
 excel/excel7_item.xlsx  新舊有何不同\
 
 
@@ -210,12 +201,6 @@ richtextbox 直接貼上簡中 會出現亂碼  why?
 
 盡量要把dropbox的文件 搬到 git 裏
 
-
-取得檔案副檔名:
-string extension = Path.GetExtension("C:\\soar.jpg");
-string extension = Path.GetExtension(filename);
-
-
             
 
 啟動一個外部程序: [html]   using System;   using System.Collections.Generic;   using System.Linq;   using System.Text;         /* 創建一個進程，並為進程傳入需要的參數    * 或者說是啟動一個外部程序，並為其傳入參數    * 等待退出或者強制關閉   */   namespace ConsoleApplication1   {       class Program       {           static void Main(string[] args)           {                      ////////////聲明一個程序信息類，指定啟動進程是的參數信息                   System.Diagnostics.ProcessStartInfo  Info  =  new  System.Diagnostics.ProcessStartInfo();                      //設置外部程序名                   Info.FileName  =  "notepad.exe";                      //設置外部程序的啟動參數（命令行參數）為test.txt                   Info.Arguments  =  "test.txt";                      //設置外部程序工作目錄為  C:\                   Info.WorkingDirectory  =  "C:\\";                      ///////////聲明一個程序類,也就是創建一個進程                   System.Diagnostics.Process  Proc  ;                      try                   {                   //                   //啟動外部程序                   //                   Proc  =  System.Diagnostics.Process.Start(Info);                   }                   catch(System.ComponentModel.Win32Exception  e)                   {                   Console.WriteLine("系統找不到指定的程序文件。\r{0}",  e);                   return;                   }                      //打印出外部程序的開始執行時間                   Console.WriteLine("外部程序的開始執行時間：{0}",  Proc.StartTime);                      //等待3秒鐘                   Proc.WaitForExit(3000);                      //如果這個外部程序沒有結束運行則對其強行終止                   if(Proc.HasExited  ==  false)                   {                   Console.WriteLine("由主程序強行終止外部程序的運行！");                   Proc.Kill();                   }                   else                   {  www.2cto.com                 Console.WriteLine("由外部程序正常退出！");                   }                   Console.WriteLine("外部程序的結束運行時間：{0}",  Proc.ExitTime);                   Console.WriteLine("外部程序在結束運行時的返回值：{0}",  Proc.ExitCode);           }       }   }     
@@ -367,63 +352,6 @@ C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Screen
 
 多層次ContextMenuStrip
 ContextMenuStrip 選取項目 按右鍵 編輯DropDownItems(E)
-
-
-//String用法 Remove
-
-
-            string str = "0123456789";
-            string delstr1;
-            string delstr2;
-            delstr1 = str.Remove(6);//刪除字符串索引為6後面的字符
-            delstr2 = str.Remove(5,5);//刪除字符串索引自5開始後數5個長度的字符
-            Console.WriteLine(delstr1);
-            Console.WriteLine(delstr2);
-            Console.ReadLine();
-            
-
-//String用法 CopyTo
-            string str = "This is a string";
-            string copystr;
-            copystr = string.Copy(str);
-            char[] newchar=new char[20];
-            str.CopyTo(5,newchar,0,11);
-            Console.WriteLine(copystr);
-            Console.WriteLine(newchar);
-            Console.ReadLine();
-            
-//String用法 大小寫
-            string str = "This is a string";
-            string lowerstr;
-            string upperstr;
-            lowerstr = str.ToLower();
-            upperstr = str.ToUpper();
-            Console.WriteLine("小寫形式：{0}",lowerstr);
-            Console.WriteLine("大寫形式：{0}",upperstr);
-            Console.ReadLine();
-
-
-//String用法 字串查找
-            string str = "This is a string";
-            int rh1 = str.IndexOf("i");
-            int rh2 = str.LastIndexOf("i");
-            if (rh1>=0)
-            {
-                Console.WriteLine("字符i在字符串str第一次出現的位置是：{0}",rh1);
-                Console.WriteLine("字符i在字符串str最後一次出現的位置是：{0}", rh2);
-            }
-            else
-            {
-                Console.WriteLine("字符i在字符串str未出現");
-            }
-            
-            
-//轉義字符 @
-
-            Console.WriteLine(@"C:\Windows\system32");//第一種輸出格式就是在前面加@
-            Console.WriteLine("C:\\Windows\\system32");//第二種輸出格式就是將"\"改成"\\"
-            Console.ReadLine();
-                        
 
 
 
@@ -638,25 +566,6 @@ https://www.twblogs.net/a/5f02b56e9644181341a1b6e0
         				
 //--------------------------------------------------------------------------------------------------------------------------
                
-        
-        private string CurrentDir = new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent.FullName;
-
-            richTextBox1.Text += "CurrentDir1 = " + Environment.CurrentDirectory + "\n";
-            richTextBox1.Text += "CurrentDir2 = " + new DirectoryInfo(Environment.CurrentDirectory).Parent + "\n";
-            richTextBox1.Text += "CurrentDir3 = " + new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent + "\n";
-            richTextBox1.Text += "CurrentDir4 = " + new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent.FullName + "\n";
-            richTextBox1.Text += "CurrentDir5 = " + CurrentDir + "\n";
-
-            /*
-            CurrentDir1 = C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Network\vcs_GMap\vcs_GMap\bin\Debug
-            CurrentDir2 = bin
-            CurrentDir3 = vcs_GMap
-            CurrentDir4 = C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Network\vcs_GMap\vcs_GMap
-            CurrentDir5 = C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_Network\vcs_GMap\vcs_GMap
-
-            //private string CurrentDir = new DirectoryInfo(Environment.CurrentDirectory).Parent.Parent.FullName;
-            */
-
 
 
 
@@ -697,25 +606,6 @@ Beep
             Beep(800, 3000);
 
         }
-
-
-
-使用資源檔的圖片
-
-屬性/資源/加入資源/加入現有檔案/ 選取檔案 picture1.jpg
-此時, Resources 會出現 picture1.jpg
-點選picture1.jpg, 屬性
-建置動作 改成 內嵌資源
-
-
-using System.Reflection;    //for Assembly
-using System.IO;    //for Stream
-
-            Assembly asm = this.GetType().Assembly;
-            Stream stream = asm.GetManifestResourceStream("vcs_test.Resources.picture1.jpg");
-            this.BackgroundImage = new Bitmap(stream);
-
-
 
 
 
@@ -1830,24 +1720,30 @@ using System.Reflection;
 label版本.Text = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
 
+
+
+
+使用資源檔的圖片
+
+屬性/資源/加入資源/加入現有檔案/ 選取檔案 picture1.jpg
+此時, Resources 會出現 picture1.jpg
+點選picture1.jpg, 屬性
+建置動作 改成 內嵌資源
+
+
+using System.Reflection;    //for Assembly
+using System.IO;    //for Stream
+
+            Assembly asm = this.GetType().Assembly;
+            Stream stream = asm.GetManifestResourceStream("vcs_test.Resources.picture1.jpg");
+            this.BackgroundImage = new Bitmap(stream);
+
+
+
+
+
+
 //---Assembly 用法 SP-----------------------------------------------------------------------------------------------------------------------
-
-
-
-獲取文件的版本信息:
-FileVersionInfo myFileVersionInfo1 = FileVersionInfo.GetVersionInfo("D:\\TEST.DLL");
-textBox1.Text="版本號: " + myFileVersionInfo1.FileVersion;
-
-
-
-格式化字符串，向長度小於30的字符串末尾添加特定字符，補足n個字符，使用String類的PadRight(int,char)方法：
-
-String str="1234";
-str=str.PadRight(30,' ') //向長度小於30的字符串末尾添加空格，補足30個字符
-
-
-
-
 
 
 
@@ -2165,21 +2061,11 @@ private string GetContentFromUrll(string _requestUrl)
             return _StrResponse;        
         }
         
-        
-//獲取文件的版本信息:
 
+systemsystem
+//獲取文件的版本信息:
 FileVersionInfo myFileVersionInfo1 = FileVersionInfo.GetVersionInfo("D:\\TEST.DLL");
 textBox1.Text="版本號: " + myFileVersionInfo1.FileVersion;
-
-
-
-//格式化字符串，向長度小於30的字符串末尾添加特定字符，補足n個字符，使用String類的PadRight(int,char)方法：
-
-String str="1234";
-str=str.PadRight(30,' ') //向長度小於30的字符串末尾添加空格，補足30個字符
-
-
-
 
 
 首先准備一個畫板:
@@ -2355,6 +2241,7 @@ g.InterpolationMode = InterpolationMode.HighQualityBilinear;
 
 
 
+drawdraw
 
 　　本文將介紹在．Net中如何使用代碼畫圖表，就像用MS Excel產生的圖表一樣。也可以畫像DataGrid一樣的表格。
 　　在．Net中，微軟給我們提供了畫圖類（System.Drawing.Imaging），在該類中畫圖的準系統都有。比如：直線、折線、矩形、多邊形、橢圓形、扇形、曲線等等，因此一般的圖形都可以直接通過代碼畫出來。接下來介紹一些畫圖函數：
@@ -2772,7 +2659,7 @@ ed2k://|file|[www.ed2k.online][C#%E5%85%A8%E8%83%BD%E9%80%9F%E6%9F%A5%E5%AE%9D%E
 
 
 
-
+fullscreenfullscreen
 
     2. 接下來為了方便在這之上進行截圖，有一個很重要的設計實現方式：用全屏幕窗體代替現有真實屏幕，這樣就可以把截圖過程的所有操作都在那個窗體上實現（該窗體設置成無邊框，高寬等於屏幕大小即可），另外為了顯示掩蔽效果（只能正常顯示選擇的部分屏幕內容，而其實部分用一個如半透明層覆蓋），就添加一層半透明位置位圖。具體代碼如下：
 
@@ -3352,15 +3239,6 @@ using Word=Microsoft.Office.Interop.Word;
 using System.Reflection;
 
 
-            richTextBox1.Text += "string.PadLeft 字串統一長度或補字元\n";
-            int a = 15;
-            string s1 = a.ToString().PadLeft(10, '-');
-            richTextBox1.Text += s1 + "\n";
-
-            string s2 = string.Format("{0:00000}", Convert.ToInt16(a));
-            richTextBox1.Text += s2 + "\n";
-
-
 
 求取字母的ASCII值
 
@@ -3692,10 +3570,6 @@ MainMenu選了之後會有打勾記號
         }
 
 
-
-
-
-string newID = id.Insert(6, "19");
 
 
         private void button1_Click(object sender, EventArgs e)
@@ -5170,6 +5044,19 @@ public static DataTable ToDataTable(List<NetworkAdapterInformation> list)
 
 //--------------------------------------------------------------------------------------------------------------------------
 
+randomrandom
+
+
+
+
+使用 Random 方法產生不重複亂數 
+
+//取得非常random的數字
+Random rd = new Random((int)DateTime.Now.Ticks);
+
+
+
+
 
 /// <summary> 
  /// 生成隨機字符串 
@@ -5193,7 +5080,28 @@ public static DataTable ToDataTable(List<NetworkAdapterInformation> list)
 
 
 
+        public static string GetRandomString2(int length)
+        {
+            var str = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            //var next = new Random();
+            Random Rnd = new Random(); //加入Random，產生的數字不會重覆
+            var builder = new StringBuilder();
+            for (var i = 0; i < length; i++)
+            {
+                builder.Append(str[Rnd.Next(0, str.Length)]);
+            }
+            return builder.ToString();
+        }
 
+
+
+//應該效果不太好
+            //Random rnd = new Random();  //亂數產生區塊顏色
+            //foreach (DataPoint point in Chart1.Series[Series1].Points)
+            //{
+            //    //pie 顏色
+            //    point.Color = Color.FromArgb(150, rnd.Next(0, 255), rnd.Next(0, 255), rnd.Next(0, 255)); 
+            //}
 
 
         				

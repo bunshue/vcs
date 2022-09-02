@@ -21,7 +21,6 @@ namespace vcs_test_all_02_String
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
-
         }
 
         void show_item_location()
@@ -1015,12 +1014,83 @@ namespace vcs_test_all_02_String
 
         private void button36_Click(object sender, EventArgs e)
         {
+            //String用法
+
+            //String用法 Remove
+
+            string str = "0123456789";
+            string delstr1;
+            string delstr2;
+            delstr1 = str.Remove(6);//刪除字符串索引為6後面的字符
+            delstr2 = str.Remove(5, 5);//刪除字符串索引自5開始後數5個長度的字符
+            Console.WriteLine(delstr1);
+            Console.WriteLine(delstr2);
+            Console.ReadLine();
+
+
+            //String用法 CopyTo
+            str = "This is a string";
+            string copystr;
+            copystr = string.Copy(str);
+            char[] newchar = new char[20];
+            str.CopyTo(5, newchar, 0, 11);
+            Console.WriteLine(copystr);
+            Console.WriteLine(newchar);
+            Console.ReadLine();
+
+            //String用法 大小寫
+            str = "This is a string";
+            string lowerstr;
+            string upperstr;
+            lowerstr = str.ToLower();
+            upperstr = str.ToUpper();
+            Console.WriteLine("小寫形式：{0}", lowerstr);
+            Console.WriteLine("大寫形式：{0}", upperstr);
+            Console.ReadLine();
+
+
+            //String用法 字串查找
+            str = "This is a string";
+            int rh1 = str.IndexOf("i");
+            int rh2 = str.LastIndexOf("i");
+            if (rh1 >= 0)
+            {
+                Console.WriteLine("字符i在字符串str第一次出現的位置是：{0}", rh1);
+                Console.WriteLine("字符i在字符串str最後一次出現的位置是：{0}", rh2);
+            }
+            else
+            {
+                Console.WriteLine("字符i在字符串str未出現");
+            }
+
+
+            //轉義字符 @
+
+            Console.WriteLine(@"C:\Windows\system32");//第一種輸出格式就是在前面加@
+            Console.WriteLine("C:\\Windows\\system32");//第二種輸出格式就是將"\"改成"\\"
+            Console.ReadLine();
+
 
         }
+
 
         private void button37_Click(object sender, EventArgs e)
         {
 
+            //格式化字符串，向長度小於30的字符串末尾添加特定字符，補足n個字符，使用String類的PadRight(int,char)方法：
+            String str = "1234";
+            str = str.PadRight(30, ' '); //向長度小於30的字符串末尾添加空格，補足30個字符
+
+            richTextBox1.Text += "string.PadLeft 字串統一長度或補字元\n";
+            int a = 15;
+            string s1 = a.ToString().PadLeft(10, '-');
+            richTextBox1.Text += s1 + "\n";
+
+            string s2 = string.Format("{0:00000}", Convert.ToInt16(a));
+            richTextBox1.Text += s2 + "\n";
+
+            string oldID = "ABCDEFG";
+            string newID = oldID.Insert(6, "19");
         }
 
         private void button38_Click(object sender, EventArgs e)
@@ -1075,5 +1145,4 @@ namespace vcs_test_all_02_String
         }
     }
 }
-
 
