@@ -67,7 +67,7 @@ extern "C" void LoadBMPFile(uchar4 **dst, unsigned int *width,
 
   FILE *fd;
 
-  printf("Loading %s...\n", name);
+  printf("LoadBMPFile, filename : %s\n", name);
 
   if (sizeof(uchar4) != 4) {
     printf("***Bad uchar4 size***\n");
@@ -120,11 +120,13 @@ extern "C" void LoadBMPFile(uchar4 **dst, unsigned int *width,
     }
   }
 
-  if (ferror(fd)) {
+  if (ferror(fd))
+  {
     printf("***Unknown BMP load error.***\n");
     free(*dst);
     exit(EXIT_SUCCESS);
-  } else {
+  } else
+  {
     printf("BMP file loaded successfully!\n");
   }
 

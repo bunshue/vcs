@@ -132,18 +132,22 @@ int prepare_buffers(FileData &file_data, std::vector<size_t> &file_len,
   int channels;
   nvjpegChromaSubsampling_t subsampling;
 
-  for (int i = 0; i < file_data.size(); i++) {
-    checkCudaErrors(nvjpegGetImageInfo(
-        params.nvjpeg_handle, (unsigned char *)file_data[i].data(), file_len[i],
-        &channels, &subsampling, widths, heights));
+  //printf("prepare_buffers\n");
+
+  for (int i = 0; i < file_data.size(); i++)
+  {
+      printf("prepare_buffers, i = %d, filename = %s\n", i, current_names[i]);
+
+      std::cout << "prepare_buffers, i = " << i <<  ", filename = " << current_names[i] << std::endl;
+
+    checkCudaErrors(nvjpegGetImageInfo(params.nvjpeg_handle, (unsigned char *)file_data[i].data(), file_len[i],&channels, &subsampling, widths, heights));
 
     img_width[i] = widths[0];
     img_height[i] = heights[0];
 
-
     //printf("Processing: %s, %d channels\n", current_names[i], channels);
 
-    std::cout << "Processing: " << current_names[i] << std::endl;
+    std::cout << "here Processing: " << current_names[i] << std::endl;
     std::cout << "Image is " << channels << " channels." << std::endl;
     for (int c = 0; c < channels; c++)
     {
@@ -334,7 +338,11 @@ int write_images(std::vector<nvjpegImage_t> &iout, std::vector<int> &widths,
     position = sFileName.rfind(".");
     sFileName = (std::string::npos == position) ? sFileName
                                                 : sFileName.substr(0, position);
-    std::string fname(params.output_dir + "/" + sFileName + ".bmp");
+    //std::string fname(params.output_dir + "/" + sFileName + ".bmp");
+
+    std::string fname("./" + sFileName + ".bmp");
+
+    std::cout << "¥Í¦¨ÀÉ®× : " << "    ./" + sFileName + ".bmp" << std::endl;
 
     int err;
     if (params.fmt == NVJPEG_OUTPUT_RGB || params.fmt == NVJPEG_OUTPUT_BGR) {
@@ -367,8 +375,7 @@ double process_images(FileNames &image_names, decode_params_t &params, double &t
   FileNames::iterator file_iter = image_names.begin();
 
   // stream for decoding
-  checkCudaErrors(
-      cudaStreamCreateWithFlags(&params.stream, cudaStreamNonBlocking));
+  checkCudaErrors(cudaStreamCreateWithFlags(&params.stream, cudaStreamNonBlocking));
 
   int total_processed = 0;
 
@@ -377,8 +384,10 @@ double process_images(FileNames &image_names, decode_params_t &params, double &t
   // output buffer sizes, for convenience
   std::vector<nvjpegImage_t> isz(params.batch_size);
 
-  for (int i = 0; i < iout.size(); i++) {
-    for (int c = 0; c < NVJPEG_MAX_COMPONENT; c++) {
+  for (int i = 0; i < iout.size(); i++)
+  {
+    for (int c = 0; c < NVJPEG_MAX_COMPONENT; c++)
+    {
       iout[i].channel[c] = NULL;
       iout[i].pitch[c] = 0;
       isz[i].pitch[c] = 0;
@@ -387,27 +396,39 @@ double process_images(FileNames &image_names, decode_params_t &params, double &t
 
   double test_time = 0;
   int warmup = 0;
-  while (total_processed < params.total_images) {
-    if (read_next_batch(image_names, params.batch_size, file_iter, file_data,
-                        file_len, current_names))
+  int total_numbers = 0;
+  while (total_processed < params.total_images)
+  {
+      total_numbers++;
+      printf("\ntotal_numbers = %d\n", total_numbers);
+          
+    if (read_next_batch(image_names, params.batch_size, file_iter, file_data,file_len, current_names))
       return EXIT_FAILURE;
 
-    if (prepare_buffers(file_data, file_len, widths, heights, iout, isz,
-                        current_names, params))
+    //printf("\ncall prepare_buffers, file : %s\n", current_names);
+
+    if (prepare_buffers(file_data, file_len, widths, heights, iout, isz,current_names, params))
       return EXIT_FAILURE;
 
     double time;
     if (decode_images(file_data, file_len, iout, params, time))
       return EXIT_FAILURE;
-    if (warmup < params.warmup) {
+    if (warmup < params.warmup)
+    {
       warmup++;
-    } else {
+    }
+    else
+    {
       total_processed += params.batch_size;
       test_time += time;
     }
 
-    if (params.write_decoded)
-      write_images(iout, widths, heights, params, current_names);
+    printf("11111111111111111111111\n");
+    //if (params.write_decoded)
+    {
+        printf("22222222222222222222222\n");
+        write_images(iout, widths, heights, params, current_names);
+    }
   }
   total = test_time;
 
@@ -446,45 +467,55 @@ int main(int argc, const char *argv[])
 {
   int pidx;
 
+  std::cout << "main program" << std::endl;
+
   if ((pidx = findParamIndex(argv, argc, "-h")) != -1 || (pidx = findParamIndex(argv, argc, "--help")) != -1)
   {
-    std::cout << "Usage: " << argv[0]
-              << " -i images_dir [-b batch_size] [-t total_images] [-device= "
-                 "device_id] [-w warmup_iterations] [-o output_dir] "
-                 "[-pipelined] [-batched] [-fmt output_format]\n";
-    std::cout << "Parameters: " << std::endl;
-    std::cout << "\timages_dir\t:\tPath to single image or directory of images"
-              << std::endl;
-    std::cout << "\tbatch_size\t:\tDecode images from input by batches of "
-                 "specified size"
-              << std::endl;
-    std::cout << "\ttotal_images\t:\tDecode this much images, if there are "
-                 "less images \n"
-              << "\t\t\t\t\tin the input than total images, decoder will loop "
-                 "over the input"
-              << std::endl;
-    std::cout << "\tdevice_id\t:\tWhich device to use for decoding"
-              << std::endl;
-    std::cout << "\twarmup_iterations\t:\tRun this amount of batches first "
-                 "without measuring performance"
-              << std::endl;
-    std::cout
-        << "\toutput_dir\t:\tWrite decoded images as BMPs to this directory"
-        << std::endl;
-    std::cout << "\tpipelined\t:\tUse decoding in phases" << std::endl;
-    std::cout << "\tbatched\t\t:\tUse batched interface" << std::endl;
-    std::cout << "\toutput_format\t:\tnvJPEG output format for decoding. One "
-                 "of [rgb, rgbi, bgr, bgri, yuv, y, unchanged]"
-              << std::endl;
-    return EXIT_SUCCESS;
+      std::cout << "XXXXXXXXXXXXXXXXXXXXXXXXX" << std::endl;
+
+      std::cout << "Usage: " << argv[0]
+          << " -i images_dir [-b batch_size] [-t total_images] [-device= "
+          "device_id] [-w warmup_iterations] [-o output_dir] "
+          "[-pipelined] [-batched] [-fmt output_format]\n";
+
+      std::cout << "Parameters: " << std::endl;
+      std::cout << "\timages_dir\t:\tPath to single image or directory of images"
+          << std::endl;
+      std::cout << "\tbatch_size\t:\tDecode images from input by batches of "
+          "specified size"
+          << std::endl;
+      std::cout << "\ttotal_images\t:\tDecode this much images, if there are "
+          "less images \n"
+          << "\t\t\t\t\tin the input than total images, decoder will loop "
+          "over the input"
+          << std::endl;
+      std::cout << "\tdevice_id\t:\tWhich device to use for decoding"
+          << std::endl;
+      std::cout << "\twarmup_iterations\t:\tRun this amount of batches first "
+          "without measuring performance"
+          << std::endl;
+      std::cout
+          << "\toutput_dir\t:\tWrite decoded images as BMPs to this directory"
+          << std::endl;
+      std::cout << "\tpipelined\t:\tUse decoding in phases" << std::endl;
+      std::cout << "\tbatched\t\t:\tUse batched interface" << std::endl;
+      std::cout << "\toutput_format\t:\tnvJPEG output format for decoding. One "
+          "of [rgb, rgbi, bgr, bgri, yuv, y, unchanged]"
+          << std::endl;
+
+      return EXIT_SUCCESS;
   }
 
   decode_params_t params;
 
   params.input_dir = "./";
-  if ((pidx = findParamIndex(argv, argc, "-i")) != -1) {
+
+  if ((pidx = findParamIndex(argv, argc, "-i")) != -1)
+  {
     params.input_dir = argv[pidx + 1];
-  } else {
+  }
+  else
+  {
     // Search in default paths for input images.
      int found = getInputDir(params.input_dir, argv[0]);
     if (!found)
@@ -495,12 +526,14 @@ int main(int argc, const char *argv[])
   }
 
   params.batch_size = 1;
-  if ((pidx = findParamIndex(argv, argc, "-b")) != -1) {
+  if ((pidx = findParamIndex(argv, argc, "-b")) != -1)
+  {
     params.batch_size = std::atoi(argv[pidx + 1]);
   }
 
   params.total_images = -1;
-  if ((pidx = findParamIndex(argv, argc, "-t")) != -1) {
+  if ((pidx = findParamIndex(argv, argc, "-t")) != -1)
+  {
     params.total_images = std::atoi(argv[pidx + 1]);
   }
 
@@ -508,22 +541,26 @@ int main(int argc, const char *argv[])
   params.dev = findCudaDevice(argc, argv);
 
   params.warmup = 0;
-  if ((pidx = findParamIndex(argv, argc, "-w")) != -1) {
+  if ((pidx = findParamIndex(argv, argc, "-w")) != -1)
+  {
     params.warmup = std::atoi(argv[pidx + 1]);
   }
 
   params.batched = false;
-  if ((pidx = findParamIndex(argv, argc, "-batched")) != -1) {
+  if ((pidx = findParamIndex(argv, argc, "-batched")) != -1)
+  {
     params.batched = true;
   }
 
   params.pipelined = false;
-  if ((pidx = findParamIndex(argv, argc, "-pipelined")) != -1) {
+  if ((pidx = findParamIndex(argv, argc, "-pipelined")) != -1)
+  {
     params.pipelined = true;
   }
 
   params.fmt = NVJPEG_OUTPUT_RGB;
-  if ((pidx = findParamIndex(argv, argc, "-fmt")) != -1) {
+  if ((pidx = findParamIndex(argv, argc, "-fmt")) != -1)
+  {
     std::string sfmt = argv[pidx + 1];
     if (sfmt == "rgb")
       params.fmt = NVJPEG_OUTPUT_RGB;
@@ -546,13 +583,12 @@ int main(int argc, const char *argv[])
   }
 
   params.write_decoded = false;
-  if ((pidx = findParamIndex(argv, argc, "-o")) != -1) {
+  if ((pidx = findParamIndex(argv, argc, "-o")) != -1)
+  {
     params.output_dir = argv[pidx + 1];
-    if (params.fmt != NVJPEG_OUTPUT_RGB && params.fmt != NVJPEG_OUTPUT_BGR &&
-        params.fmt != NVJPEG_OUTPUT_RGBI && params.fmt != NVJPEG_OUTPUT_BGRI) {
-      std::cout << "We can write ony BMPs, which require output format be "
-                   "either RGB/BGR or RGBi/BGRi"
-                << std::endl;
+    if (params.fmt != NVJPEG_OUTPUT_RGB && params.fmt != NVJPEG_OUTPUT_BGR &&params.fmt != NVJPEG_OUTPUT_RGBI && params.fmt != NVJPEG_OUTPUT_BGRI)
+    {
+      std::cout << "We can write ony BMPs, which require output format be either RGB/BGR or RGBi/BGRi" << std::endl;
       return EXIT_FAILURE;
     }
     params.write_decoded = true;
@@ -561,38 +597,35 @@ int main(int argc, const char *argv[])
   cudaDeviceProp props;
   checkCudaErrors(cudaGetDeviceProperties(&props, params.dev));
 
-  printf("Using GPU %d (%s, %d SMs, %d th/SM max, CC %d.%d, ECC %s)\n",
-         params.dev, props.name, props.multiProcessorCount,
-         props.maxThreadsPerMultiProcessor, props.major, props.minor,
-         props.ECCEnabled ? "on" : "off");
+  printf("Using GPU %d (%s, %d SMs, %d th/SM max, CC %d.%d, ECC %s)\n",params.dev, props.name, props.multiProcessorCount,props.maxThreadsPerMultiProcessor, props.major, props.minor,props.ECCEnabled ? "on" : "off");
 
   nvjpegDevAllocator_t dev_allocator = {&dev_malloc, &dev_free};
   nvjpegPinnedAllocator_t pinned_allocator ={&host_malloc, &host_free};
   int flags = 0;
-  checkCudaErrors(nvjpegCreateEx(NVJPEG_BACKEND_DEFAULT, &dev_allocator,
-                                &pinned_allocator,flags,  &params.nvjpeg_handle));
+  checkCudaErrors(nvjpegCreateEx(NVJPEG_BACKEND_DEFAULT, &dev_allocator,&pinned_allocator,flags,  &params.nvjpeg_handle));
 
-  checkCudaErrors(
-      nvjpegJpegStateCreate(params.nvjpeg_handle, &params.nvjpeg_state));
-  checkCudaErrors(
-      nvjpegDecodeBatchedInitialize(params.nvjpeg_handle, params.nvjpeg_state,
-                                    params.batch_size, 1, params.fmt));
+  checkCudaErrors(nvjpegJpegStateCreate(params.nvjpeg_handle, &params.nvjpeg_state));
+  checkCudaErrors(nvjpegDecodeBatchedInitialize(params.nvjpeg_handle, params.nvjpeg_state,params.batch_size, 1, params.fmt));
 
-  if(params.pipelined ){
+  if(params.pipelined )
+  {
     create_decoupled_api_handles(params);
   }
 
 
   // read source images
   FileNames image_names;
+
   readInput(params.input_dir, image_names);
 
+  printf("image_names.size() =  %d\n", image_names.size());
   printf("total_images =  %d\n", params.total_images);
 
   if (params.total_images == -1)
   {
     params.total_images = image_names.size();
 
+    //here
     printf("total_images =  %d\n", params.total_images);
   }
   else if (params.total_images % params.batch_size)
@@ -604,7 +637,6 @@ int main(int argc, const char *argv[])
               << " to be multiple of batch_size - " << params.batch_size
               << std::endl;
   }
-
 
   printf("total_images =  %d\n", params.total_images);
   //printf("input_dir =  %s\n", params.input_dir); fail?

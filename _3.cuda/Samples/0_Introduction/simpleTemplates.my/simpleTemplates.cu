@@ -108,6 +108,15 @@ int main(int argc, char **argv)
 
   printf("\n[simpleTemplates] -> Test Results: %d Failures\n", g_TotalFailures);
 
+
+  int wWidth = 512;   // Window width
+  int wHeight = 512;  // Window height
+  //glutInitWindowSize(wWidth, wHeight);
+  //glutCreateWindow("CUDA Edge Detection");
+
+
+
+
   exit(g_TotalFailures == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
 }
 

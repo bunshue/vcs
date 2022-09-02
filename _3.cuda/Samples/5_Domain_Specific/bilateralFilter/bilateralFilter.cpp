@@ -539,13 +539,25 @@ int runSingleTest(char *ref_file, char *exec_path) {
   return nTotalErrors;
 }
 
-void loadImageData(int argc, char **argv) {
+void loadImageData(int argc, char **argv)
+{
   // load image (needed so we can get the width and height before we create the
   // window
   char *image_path = NULL;
 
-  if (argc >= 1) {
+  printf("loadImageData(), argc = %d\n", argc);
+  int len = argc;
+  int i;
+  for (i = 0; i < len; i++)
+  {
+      printf("argv[%d] = %s\n", i, argv[i]);
+  }
+
+
+  if (argc >= 1)
+  {
     image_path = sdkFindFilePath(image_filename, argv[0]);
+    printf("here, image_path = %s\n", image_path);
   }
 
   if (image_path == NULL) {
@@ -598,7 +610,10 @@ int main(int argc, char **argv) {
   // start logs
   int devID;
   char *ref_file = NULL;
-  printf("%s Starting...\n\n", argv[0]);
+
+  printf("\nmain.......\n");
+
+  printf("Starting %s ...\n\n", argv[0]);
 
 #if defined(__linux__)
   setenv("DISPLAY", ":0", 0);
@@ -623,10 +638,14 @@ int main(int argc, char **argv) {
   }
 
   // load image to process
+
+  printf("call loadImageData()\n");
   loadImageData(argc, argv);
+
   devID = findCudaDevice(argc, (const char **)argv);
 
-  if (checkCmdLineFlag(argc, (const char **)argv, "benchmark")) {
+  if (checkCmdLineFlag(argc, (const char **)argv, "benchmark"))
+  {
     // This is a separate mode of the sample, where we are benchmark the kernels
     // for performance
     // Running CUDA kernels (bilateralfilter) in Benchmarking mode

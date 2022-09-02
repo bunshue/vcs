@@ -25,7 +25,7 @@ namespace vcs_DrAP
         private const int FUNCTION_FIND_SMALL_FOLDERS = 0x05;        //找小資料夾
         private const int FUNCTION_FIND_EMPTY_FOLDERS = 0x06;       //找空資料夾
         private const int FUNCTION_FIND_BIG_FILES = 0x07;           //找大檔案
-        private const int FUNCTION_SEARCH_TEXT = 0x08;  //搜尋關鍵字, vcs, python, matlab...
+        private const int FUNCTION_SEARCH_TEXT = 0x08;  //搜尋關鍵字, vcs, python, matlab, cuda...
         private const int FUNCTION_TEST = 0xFF;         //測試
 
         private const int FILETYPE_VIDEO = 0x00;        //影片
@@ -59,6 +59,7 @@ namespace vcs_DrAP
         string default_vcs_path = @"C:\_git\vcs\_2.vcs";
         string default_python_path = @"C:\_git\vcs\_4.cmpp\_python_test";
         string default_matlab_path = @"C:\_git\vcs\_4.cmpp\_matlab1_test";
+        string default_cuda_path = @"C:\_git\vcs\_3.cuda";
 
         private const int SEARCH_MODE_VCS = 0x00;	    //search vcs code, 搜尋vcs內的關鍵字
         private const int SEARCH_MODE_PYTHON = 0x01;	//search python code, 搜尋python內的關鍵字
@@ -1623,21 +1624,33 @@ namespace vcs_DrAP
                 pattern = "py";
             else if (search_mode == SEARCH_MODE_MATLAB)
                 pattern = ".m";
+            else if (search_mode == SEARCH_MODE_CUDA)
+                pattern = ".cu";
             else
                 pattern = ".cs";
 
-            res = fi.FullName.ToLower().Replace(" ", "").Contains(pattern.ToLower());
+            res = fi.FullName.ToLower().Replace(" ", "").EndsWith(pattern.ToLower());
 
             if (res == false)   //vcs加搜尋txt檔案
             {
-                if (search_mode == SEARCH_MODE_VCS) //有一些vcs檔案 要跳開 (先改成小寫名)
+                if (search_mode == SEARCH_MODE_VCS) //vcs 加搜尋 .txt
                 {
                     res = fi.FullName.ToLower().Replace(" ", "").Contains("____txt");
                 }
             }
 
+            if (res == false)   //cuda加搜尋cpp檔案
+            {
+                if (search_mode == SEARCH_MODE_CUDA) //cuda 加搜尋 .cpp
+                {
+                    res = fi.FullName.ToLower().Replace(" ", "").EndsWith(".cpp");
+                }
+            }
+
             if (res == true)
             {
+                //richTextBox2.Text += "aaaa : " + fi.FullName + "\n";
+
                 if (search_mode == SEARCH_MODE_VCS) //有一些vcs檔案 要跳開 (先改成小寫名)
                 {
                     if (fi.FullName.ToLower().Replace(" ", "").Contains("program.cs"))
@@ -2802,6 +2815,16 @@ namespace vcs_DrAP
                 bt_search_pattern_matlab.BackColor = Color.Red;
                 path = default_matlab_path;
             }
+            else if (mode == SEARCH_MODE_CUDA)
+            {
+                search_mode = SEARCH_MODE_CUDA;
+                richTextBox1.Text += "搜尋開始cuda\n";
+                richTextBox2.Text += "搜尋開始cuda\n\n";
+
+                bt_search_pattern_cuda.BackgroundImage = null;
+                bt_search_pattern_cuda.BackColor = Color.Red;
+                path = default_cuda_path;
+            }
             else
             {
                 //其他搜尋模式
@@ -2849,6 +2872,11 @@ namespace vcs_DrAP
             {
                 bt_search_pattern_matlab.BackColor = System.Drawing.SystemColors.ControlLight;
                 bt_search_pattern_matlab.BackgroundImage = vcs_DrAP.Properties.Resources.matlab;
+            }
+            else if (mode == SEARCH_MODE_CUDA)
+            {
+                bt_search_pattern_cuda.BackColor = System.Drawing.SystemColors.ControlLight;
+                bt_search_pattern_cuda.BackgroundImage = vcs_DrAP.Properties.Resources.cuda;
             }
             else
             {
