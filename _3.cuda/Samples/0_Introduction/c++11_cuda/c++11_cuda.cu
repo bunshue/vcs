@@ -93,10 +93,13 @@ void xyzw_frequency_thrust_host(int *count, char *text, int n)
 }
 #endif
 
-int main(int argc, char **argv) {
-  const char *filename = sdkFindFilePath("warandpeace.txt", argv[0]);
+int main(int argc, char **argv)
+{
+  //const char *filename = sdkFindFilePath("warandpeace.txt", argv[0]);
 
-  int numBytes = 16 * 1048576;
+    const char* filename = "warandpeace.txt";
+
+    int numBytes = 16 * 1024 * 1024;
   char *h_text = (char *)malloc(numBytes);
 
   // find first CUDA device
@@ -105,8 +108,10 @@ int main(int argc, char **argv) {
   char *d_text;
   checkCudaErrors(cudaMalloc((void **)&d_text, numBytes));
 
+  printf("開啟檔案 : %s\n", filename);
   FILE *fp = fopen(filename, "r");
-  if (fp == NULL) {
+  if (fp == NULL)
+  {
     printf("Cannot find the input text file\n. Exiting..\n");
     return EXIT_FAILURE;
   }
@@ -121,17 +126,19 @@ int main(int argc, char **argv) {
   checkCudaErrors(cudaMalloc(&d_count, sizeof(int)));
   checkCudaErrors(cudaMemset(d_count, 0, sizeof(int)));
 
+
+  /*   要處理很久
   // Try uncommenting one kernel call at a time
   xyzw_frequency<<<8, 256>>>(d_count, d_text, len);
   xyzw_frequency_thrust_device<<<1, 1>>>(d_count, d_text, len);
-  checkCudaErrors(
-      cudaMemcpy(&count, d_count, sizeof(int), cudaMemcpyDeviceToHost));
+  checkCudaErrors(cudaMemcpy(&count, d_count, sizeof(int), cudaMemcpyDeviceToHost));
 
   // xyzw_frequency_thrust_host(&count, h_text, len);
 
   std::cout << "counted " << count
             << " instances of 'x', 'y', 'z', or 'w' in \"" << filename << "\""
             << std::endl;
+  */
 
   checkCudaErrors(cudaFree(d_count));
   checkCudaErrors(cudaFree(d_text));
