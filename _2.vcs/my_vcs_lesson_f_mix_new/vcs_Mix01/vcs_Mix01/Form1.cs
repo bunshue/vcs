@@ -138,6 +138,25 @@ namespace vcs_Mix01
         private void button1_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+
+            string foldername = @"C:\______test_files\__pic";
+
+            DirectoryInfo dir = new DirectoryInfo(foldername);
+            if (!dir.Exists)  //判斷資料夾路徑是否不存在
+            {
+                richTextBox1.Text += "路徑不存在\n";
+            }
+            richTextBox1.Text += dir.FullName + "資料夾下的檔案資訊如下：\n";
+
+            //傳回FileInfo物件陣列，並指定給f陣列
+            FileInfo[] f = dir.GetFiles();
+            foreach (FileInfo r in f)
+            {
+                richTextBox1.Text += "完整路徑：" + r.FullName + "\n";
+                richTextBox1.Text += "寫入時間：" + r.LastWriteTime + "\n";
+                richTextBox1.Text += "檔案大小：" + r.Length.ToString() + "\n";
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)

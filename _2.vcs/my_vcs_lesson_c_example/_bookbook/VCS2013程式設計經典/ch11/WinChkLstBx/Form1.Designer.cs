@@ -31,13 +31,13 @@
             this.btnCls = new System.Windows.Forms.Button();
             this.lblShow = new System.Windows.Forms.Label();
             this.btnCheckLot = new System.Windows.Forms.Button();
-            this.chkListLot = new System.Windows.Forms.CheckedListBox();
+            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnCls
             // 
-            this.btnCls.Location = new System.Drawing.Point(124, 333);
+            this.btnCls.Location = new System.Drawing.Point(125, 517);
             this.btnCls.Margin = new System.Windows.Forms.Padding(2);
             this.btnCls.Name = "btnCls";
             this.btnCls.Size = new System.Drawing.Size(74, 35);
@@ -50,7 +50,7 @@
             // 
             this.lblShow.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.lblShow.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.lblShow.Location = new System.Drawing.Point(28, 227);
+            this.lblShow.Location = new System.Drawing.Point(29, 411);
             this.lblShow.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblShow.Name = "lblShow";
             this.lblShow.Size = new System.Drawing.Size(262, 87);
@@ -59,7 +59,7 @@
             // 
             // btnCheckLot
             // 
-            this.btnCheckLot.Location = new System.Drawing.Point(29, 333);
+            this.btnCheckLot.Location = new System.Drawing.Point(30, 517);
             this.btnCheckLot.Margin = new System.Windows.Forms.Padding(2);
             this.btnCheckLot.Name = "btnCheckLot";
             this.btnCheckLot.Size = new System.Drawing.Size(74, 35);
@@ -68,14 +68,14 @@
             this.btnCheckLot.UseVisualStyleBackColor = true;
             this.btnCheckLot.Click += new System.EventHandler(this.btnCheckLot_Click);
             // 
-            // chkListLot
+            // checkedListBox1
             // 
-            this.chkListLot.FormattingEnabled = true;
-            this.chkListLot.Location = new System.Drawing.Point(29, 56);
-            this.chkListLot.Margin = new System.Windows.Forms.Padding(2);
-            this.chkListLot.Name = "chkListLot";
-            this.chkListLot.Size = new System.Drawing.Size(261, 144);
-            this.chkListLot.TabIndex = 7;
+            this.checkedListBox1.FormattingEnabled = true;
+            this.checkedListBox1.Location = new System.Drawing.Point(29, 56);
+            this.checkedListBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.checkedListBox1.Name = "checkedListBox1";
+            this.checkedListBox1.Size = new System.Drawing.Size(670, 324);
+            this.checkedListBox1.TabIndex = 7;
             // 
             // label1
             // 
@@ -91,11 +91,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(324, 391);
+            this.ClientSize = new System.Drawing.Size(865, 576);
             this.Controls.Add(this.btnCls);
             this.Controls.Add(this.lblShow);
             this.Controls.Add(this.btnCheckLot);
-            this.Controls.Add(this.chkListLot);
+            this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.Name = "Form1";
@@ -111,7 +111,7 @@
         private System.Windows.Forms.Button btnCls;
         private System.Windows.Forms.Label lblShow;
         private System.Windows.Forms.Button btnCheckLot;
-        private System.Windows.Forms.CheckedListBox chkListLot;
+        private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.Label label1;
     }
 }

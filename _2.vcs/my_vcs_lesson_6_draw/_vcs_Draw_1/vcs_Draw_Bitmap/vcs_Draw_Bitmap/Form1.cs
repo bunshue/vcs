@@ -420,12 +420,12 @@ namespace vcs_Draw_Bitmap
         {
             //複製部分圖片
             // Create a Bitmap object from a file.
-            Bitmap myBitmap = new Bitmap(@"C:/______test_files/bear.jpg");
+            Bitmap bitmap1 = new Bitmap(@"C:/______test_files/bear.jpg");
 
             // Clone a portion of the Bitmap object.
             RectangleF cloneRect = new RectangleF(530, 30, 200, 200);
-            PixelFormat format = myBitmap.PixelFormat;
-            Bitmap cloneBitmap = myBitmap.Clone(cloneRect, format);
+            PixelFormat format = bitmap1.PixelFormat;
+            Bitmap cloneBitmap = bitmap1.Clone(cloneRect, format);
 
             // Draw the cloned portion of the Bitmap object.
             Graphics g = pictureBox1.CreateGraphics();
@@ -434,6 +434,21 @@ namespace vcs_Draw_Bitmap
 
         private void button18_Click(object sender, EventArgs e)
         {
+            //設定bmp檔之位元深度
+            //讀取圖檔, 先放在Bitmap裏
+            string filename = @"C:\______test_files\picture1.jpg";
+            Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+            pictureBox1.Image = bitmap1;
+
+            string filename_default = "picture1_default.bmp";
+            string filename_32 = "picture1_32.bmp";
+            string filename_24 = "picture1_24.bmp";
+
+            richTextBox1.Text += "設定bmp檔之位元深度 為 預設, 即 24 位元\n";
+            bitmap1.Save(filename_default, ImageFormat.Bmp);
+
+
+
 
         }
 

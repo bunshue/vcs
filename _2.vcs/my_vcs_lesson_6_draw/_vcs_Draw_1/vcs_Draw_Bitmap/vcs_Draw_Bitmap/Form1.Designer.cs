@@ -300,6 +300,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(170, 70);
             this.button18.TabIndex = 143;
+            this.button18.Text = "設定bmp檔之位元深度";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 

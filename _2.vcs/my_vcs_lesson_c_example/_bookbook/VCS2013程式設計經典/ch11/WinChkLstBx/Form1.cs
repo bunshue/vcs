@@ -23,12 +23,12 @@ namespace WinChkLstBx
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            chkListLot.MultiColumn = true;	// chkListLot水平欄顯示
-            chkListLot.ColumnWidth = 45;    	// chkListLot水平欄寬45
+            checkedListBox1.MultiColumn = true;	// chkListLot水平欄顯示
+            checkedListBox1.ColumnWidth = 45;    	// chkListLot水平欄寬45
             // 在chkListLot核取清單方塊加入 1- 49大樂透號碼，可讓使用者勾選
             for (int i = 1; i <= 49; i++)
             {
-                chkListLot.Items.Add(i.ToString());
+                checkedListBox1.Items.Add(i.ToString());
             }
             lblShow.Text = "本期未開獎...";
         }
@@ -39,9 +39,9 @@ namespace WinChkLstBx
             // 宣告 count變數，用來記錄使用者勾選大樂透幾個號碼
             int count = 0;
             // 使用for 迴圈記錄目前共勾選幾個號碼
-            for (int i = 0; i < chkListLot.Items.Count; i++)
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
             {
-                if (chkListLot.GetItemChecked(i))
+                if (checkedListBox1.GetItemChecked(i))
                 {
                     count++;
                 }
@@ -67,11 +67,11 @@ namespace WinChkLstBx
             }
             // 將使用者在chkListLot所選號碼逐一指定給myNumStr字串變數
             // 以便將來和大樂透號碼pcNumStr字串比對
-            for (int i = 0; i < chkListLot.Items.Count; i++)
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
             {
-                if (chkListLot.GetItemChecked(i))
+                if (checkedListBox1.GetItemChecked(i))
                 {
-                    myNumStr += chkListLot.Items[i].ToString() + ", ";
+                    myNumStr += checkedListBox1.Items[i].ToString() + ", ";
                 }
             }
             // lblShow顯示本期開獎號碼
@@ -89,12 +89,6 @@ namespace WinChkLstBx
 
         private void btnCls_Click(object sender, EventArgs e)
         {
-            // 將chkListLot核取清單方塊所有項目設為不勾選
-            for (int i = 0; i < chkListLot.Items.Count; i++)
-            {
-                chkListLot.SetItemChecked(i, false);
-            }
-
         }
 
 
