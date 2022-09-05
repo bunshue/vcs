@@ -481,7 +481,8 @@ void runAutoTest(int argc, char **argv, const char *filename,
   exit(g_TotalErrors == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
 }
 
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
   char *dump_file = NULL;
 
 #if defined(__linux__)
@@ -493,23 +494,27 @@ int main(int argc, char **argv) {
 
   printf("%s Starting...\n\n", sSDKsample);
 
-  if (checkCmdLineFlag(argc, (const char **)argv, "file")) {
-    getCmdLineArgumentString(argc, (const char **)argv, "file",
-                             (char **)&dump_file);
+  if (checkCmdLineFlag(argc, (const char **)argv, "file"))
+  {
+    getCmdLineArgumentString(argc, (const char **)argv, "file", (char **)&dump_file);
 
     int kernel = 1;
 
-    if (checkCmdLineFlag(argc, (const char **)argv, "kernel")) {
+    if (checkCmdLineFlag(argc, (const char **)argv, "kernel"))
+    {
       kernel = getCmdLineArgumentInt(argc, (const char **)argv, "kernel");
     }
 
     runAutoTest(argc, argv, dump_file, kernel);
-  } else {
+  }
+  else
+  {
     printf("[%s]\n", sSDKsample);
 
     // use command-line specified CUDA device, otherwise use device with highest
     // Gflops/s
-    if (checkCmdLineFlag(argc, (const char **)argv, "device")) {
+    if (checkCmdLineFlag(argc, (const char **)argv, "device"))
+    {
       printf("[%s]\n", argv[0]);
       printf("   Does not explicitly support -device=n in OpenGL mode\n");
       printf("   To use -device=n, the sample must be running w/o OpenGL\n\n");
@@ -523,12 +528,13 @@ int main(int argc, char **argv) {
     printf("Allocating host and CUDA memory and loading image file...\n");
     const char *image_path = sdkFindFilePath("portrait_noise.bmp", argv[0]);
 
-    if (image_path == NULL) {
-      printf(
-          "imageDenoisingGL was unable to find and load image file "
-          "<portrait_noise.bmp>.\nExiting...\n");
+    if (image_path == NULL)
+    {
+      printf("imageDenoisingGL was unable to find and load image file <portrait_noise.bmp>.\nExiting...\n");
       exit(EXIT_FAILURE);
     }
+
+    printf("filename : %s\n", image_path);
 
     LoadBMPFile(&h_Src, &imageW, &imageH, image_path);
     printf("Data init done.\n");
@@ -541,20 +547,5 @@ int main(int argc, char **argv) {
     initOpenGLBuffers();
   }
 
-  printf("Starting GLUT main loop...\n");
-  printf("Press [1] to view noisy image\n");
-  printf("Press [2] to view image restored with knn filter\n");
-  printf("Press [3] to view image restored with nlm filter\n");
-  printf("Press [4] to view image restored with modified nlm filter\n");
-  printf(
-      "Press [*] to view smooth/edgy areas [RED/BLUE] Ct's when a filter is "
-      "active\n");
-  printf("Press [f] to print frame rate\n");
-  printf("Press [?] to print Noise and Lerp Ct's\n");
-  printf("Press [q] to exit\n");
-
-  sdkCreateTimer(&timer);
-  sdkStartTimer(&timer);
-
-  glutMainLoop();
+  //glutMainLoop();
 }

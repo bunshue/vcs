@@ -244,28 +244,35 @@ void MulFloatPlane(float Value, float *ImgSrcDst, int StrideF, ROI Size) {
 *
 * \return Status code
 */
-int PreLoadBmp(char *FileName, int *Width, int *Height) {
+int PreLoadBmp(char *FileName, int *Width, int *Height)
+{
   BMPFileHeader FileHeader;
   BMPInfoHeader InfoHeader;
   FILE *fh;
 
-  if (!(fh = fopen(FileName, "rb"))) {
+  if (!(fh = fopen(FileName, "rb")))
+  {
     return 1;  // invalid filename
   }
 
   fread(&FileHeader, sizeof(BMPFileHeader), 1, fh);
 
-  if (FileHeader._bm_signature != 0x4D42) {
+  if (FileHeader._bm_signature != 0x4D42)
+  {
     return 2;  // invalid file format
   }
 
   fread(&InfoHeader, sizeof(BMPInfoHeader), 1, fh);
 
-  if (InfoHeader._bm_color_depth != 24) {
+  printf("圖片位元深度 : %d 位元\n", InfoHeader._bm_color_depth);
+
+  if (InfoHeader._bm_color_depth != 24)
+  {
     return 3;  // invalid color depth
   }
 
-  if (InfoHeader._bm_compressed) {
+  if (InfoHeader._bm_compressed)
+  {
     return 4;  // invalid compression property
   }
 
@@ -275,6 +282,119 @@ int PreLoadBmp(char *FileName, int *Width, int *Height) {
   fclose(fh);
   return 0;
 }
+
+int PreLoadBmp2(char* FileName, int* Width, int* Height)
+{
+    BMPFileHeader FileHeader;
+    BMPInfoHeader InfoHeader;
+    FILE* fh;
+
+    printf("PreLoadBmp2, filename : %s\n", FileName);
+
+    if (!(fh = fopen(FileName, "rb")))
+    {
+        printf("xxxx 1\n");
+        return 1;  // invalid filename
+    }
+
+    fread(&FileHeader, sizeof(BMPFileHeader), 1, fh);
+
+    if (FileHeader._bm_signature != 0x4D42)
+    {
+        printf("xxxx 2\n");
+        return 2;  // invalid file format
+    }
+
+    printf("_bm_signature = 0x%04x\n", FileHeader._bm_signature);
+    printf("_bm_file_size = 0x%08x = %d\n", FileHeader._bm_file_size, FileHeader._bm_file_size);
+    printf("_bm_reserved = 0x%04x\n", FileHeader._bm_reserved);
+    printf("_bm_bitmap_data = 0x%04x\n", FileHeader._bm_bitmap_data);
+
+
+    fread(&InfoHeader, sizeof(BMPInfoHeader), 1, fh);
+
+    printf("圖片位元深度 : %d 位元\n", InfoHeader._bm_color_depth);
+
+
+
+    printf("InfoHeader._bm_color_depth = %d\n", InfoHeader._bm_color_depth);
+
+    printf("InfoHeader._bm_info_header_size = %x\n", InfoHeader._bm_info_header_size);
+    printf("InfoHeader._bm_image_width = %x\n", InfoHeader._bm_image_width);
+    printf("InfoHeader._bm_image_height = %x\n", InfoHeader._bm_image_height);
+    printf("InfoHeader._bm_num_of_planes = %x\n", InfoHeader._bm_num_of_planes);
+    printf("InfoHeader._bm_color_depth = %x\n", InfoHeader._bm_color_depth);
+    printf("InfoHeader._bm_compressed = %x\n", InfoHeader._bm_compressed);
+    printf("InfoHeader._bm_bitmap_size = %x\n", InfoHeader._bm_bitmap_size);
+    printf("InfoHeader._bm_hor_resolution = %x\n", InfoHeader._bm_hor_resolution);
+    printf("InfoHeader._bm_ver_resolution = %x\n", InfoHeader._bm_ver_resolution);
+
+
+    printf("InfoHeader._bm_num_colors_used = %x\n", InfoHeader._bm_num_colors_used);
+    printf("InfoHeader._bm_num_important_colors = %x\n", InfoHeader._bm_num_important_colors);
+
+
+    uint32 _bm_info_header_size;      //!< Info header size, must be 40
+    uint32 _bm_image_width;           //!< Image width
+    uint32 _bm_image_height;          //!< Image height
+    uint16 _bm_num_of_planes;         //!< Amount of image planes, must be 1
+    uint16 _bm_color_depth;           //!< Color depth
+    uint32 _bm_compressed;            //!< Image compression, must be none
+    uint32 _bm_bitmap_size;           //!< Size of bitmap data
+    uint32 _bm_hor_resolution;        //!< Horizontal resolution, assumed to be 0
+    uint32 _bm_ver_resolution;        //!< Vertical resolution, assumed to be 0
+    uint32 _bm_num_colors_used;       //!< Number of colors used, assumed to be 0
+    uint32 _bm_num_important_colors;  //!< Number of important colors, assumed to
+
+
+
+
+
+
+    if (InfoHeader._bm_compressed)
+    {
+        printf("xxxx 4\n");
+        return 4;  // invalid compression property
+    }
+
+    *Width = InfoHeader._bm_image_width;
+    *Height = InfoHeader._bm_image_height;
+
+    fclose(fh);
+    return 0;
+}
+
+int GetBmpColorDepth(char* FileName)
+{
+    BMPFileHeader FileHeader;
+    BMPInfoHeader InfoHeader;
+    FILE* fh;
+
+    //printf("GetBmpColorDepth, filename : %s\n", FileName);
+
+    if (!(fh = fopen(FileName, "rb")))
+    {
+        printf("xxxx 1\n");
+        return 1;  // invalid filename
+    }
+
+    fread(&FileHeader, sizeof(BMPFileHeader), 1, fh);
+
+    if (FileHeader._bm_signature != 0x4D42)
+    {
+        printf("xxxx 2\n");
+        return 2;  // invalid file format
+    }
+
+    fread(&InfoHeader, sizeof(BMPInfoHeader), 1, fh);
+
+    //printf("圖片位元深度 : %d 位元\n", InfoHeader._bm_color_depth);
+
+    fclose(fh);
+
+    return InfoHeader._bm_color_depth;
+}
+
 
 /**
 **************************************************************************
@@ -287,28 +407,119 @@ int PreLoadBmp(char *FileName, int *Width, int *Height) {
 *
 * \return None
 */
-void LoadBmpAsGray(char *FileName, int Stride, ROI ImSize, byte *Img) {
+void LoadBmpAsGray(char *FileName, int Stride, ROI ImSize, byte *Img)
+{
   BMPFileHeader FileHeader;
   BMPInfoHeader InfoHeader;
+
   FILE *fh;
+
+  printf("LoadBmpAsGray, filename : %s, stride = %d, W = %d, H = %d\n", FileName, Stride, ImSize.width, ImSize.height);
+
+  printf("sizeof(FileHeader) = %d\n", sizeof(FileHeader));  // 14
+  printf("sizeof(InfoHeader) = %d\n", sizeof(InfoHeader));  // 40
+
   fh = fopen(FileName, "rb");
 
   fread(&FileHeader, sizeof(BMPFileHeader), 1, fh);
   fread(&InfoHeader, sizeof(BMPInfoHeader), 1, fh);
 
-  for (int i = ImSize.height - 1; i >= 0; i--) {
-    for (int j = 0; j < ImSize.width; j++) {
+  for (int j = 0; j < ImSize.height; j++)
+  {
+    for (int i = 0; i < ImSize.width; i++)
+    {
       int r = 0, g = 0, b = 0;
       fread(&b, 1, 1, fh);
       fread(&g, 1, 1, fh);
       fread(&r, 1, 1, fh);
+
       int val = (313524 * r + 615514 * g + 119537 * b + 524288) >> 20;
-      Img[i * Stride + j] = (byte)clamp_0_255(val);
+      Img[j * Stride + i] = (byte)clamp_0_255(val);
     }
   }
 
   fclose(fh);
   return;
+}
+
+void LoadBmpAsData(char* FileName, int Stride, ROI ImSize, byte* Img, int color_depth)
+{
+    BMPFileHeader FileHeader;
+    BMPInfoHeader InfoHeader;
+
+    FILE* fh;
+
+    printf("LoadBmpAsGray, filename : %s, stride = %d, W = %d, H = %d\n", FileName, Stride, ImSize.width, ImSize.height);
+
+    printf("sizeof(FileHeader) = %d\n", sizeof(FileHeader));  // 14
+    printf("sizeof(InfoHeader) = %d\n", sizeof(InfoHeader));  // 40
+
+    fh = fopen(FileName, "rb");
+
+    fread(&FileHeader, sizeof(BMPFileHeader), 1, fh);
+    fread(&InfoHeader, sizeof(BMPInfoHeader), 1, fh);
+
+    printf("W = %d, H = %d\n", ImSize.width, ImSize.height);
+
+    for (int j = 0; j < ImSize.height; j++)
+    {
+        for (int i = 0; i < ImSize.width; i++)
+        {
+            int r = 0, g = 0, b = 0, a = 0;
+            fread(&b, 1, 1, fh);
+            fread(&g, 1, 1, fh);
+            fread(&r, 1, 1, fh);
+            if (color_depth == 32)
+            {
+                fread(&a, 1, 1, fh);
+            }
+
+            if (j == 0)
+            {
+                if (color_depth == 32)
+                {
+                    printf("[%02X %02X %02X %02X] ", b, g, r, a);
+                    if ((i % 8) == 7)
+                    {
+                        printf("\n");
+                    }
+                }
+            }
+
+            /*
+            //int val = (313524 * r + 615514 * g + 119537 * b + 524288) >> 20;
+            //Img[j * Stride + i] = (byte)clamp_0_255(val);
+
+            Img[j * Stride + i + 0] = (byte)b;
+            Img[j * Stride + i + 1] = (byte)g;
+            Img[j * Stride + i + 2] = (byte)r;
+            if (color_depth == 32)
+            {
+                Img[j * Stride + i + 3] = (byte)a;
+            }
+            */
+
+            if (color_depth == 32)
+            {
+                Img[(i + j * ImSize.width) * 4 + 0] = (byte)b;
+                Img[(i + j * ImSize.width) * 4 + 1] = (byte)g;
+                Img[(i + j * ImSize.width) * 4 + 2] = (byte)r;
+                Img[(i + j * ImSize.width) * 4 + 3] = (byte)a;
+            }
+            else
+            {
+                Img[(i + j * ImSize.width) * 3 + 0] = (byte)b;
+                Img[(i + j * ImSize.width) * 3 + 1] = (byte)g;
+                Img[(i + j * ImSize.width) * 3 + 2] = (byte)r;
+            }
+
+
+
+        }
+    }
+
+    fclose(fh);
+    return;
 }
 
 /**
@@ -322,47 +533,129 @@ void LoadBmpAsGray(char *FileName, int Stride, ROI ImSize, byte *Img) {
 *
 * \return None
 */
-void DumpBmpAsGray(char *FileName, byte *Img, int Stride, ROI ImSize) {
-  FILE *fp = NULL;
-  fp = fopen(FileName, "wb");
+void DumpBmpAsGray(char* FileName, byte* Img, int Stride, ROI ImSize)
+{
+    FILE* fp = NULL;
+    fp = fopen(FileName, "wb");
 
-  if (fp == NULL) {
-    return;
-  }
-
-  BMPFileHeader FileHeader;
-  BMPInfoHeader InfoHeader;
-
-  // init headers
-  FileHeader._bm_signature = 0x4D42;
-  FileHeader._bm_file_size = 54 + 3 * ImSize.width * ImSize.height;
-  FileHeader._bm_reserved = 0;
-  FileHeader._bm_bitmap_data = 0x36;
-  InfoHeader._bm_bitmap_size = 0;
-  InfoHeader._bm_color_depth = 24;
-  InfoHeader._bm_compressed = 0;
-  InfoHeader._bm_hor_resolution = 0;
-  InfoHeader._bm_image_height = ImSize.height;
-  InfoHeader._bm_image_width = ImSize.width;
-  InfoHeader._bm_info_header_size = 40;
-  InfoHeader._bm_num_colors_used = 0;
-  InfoHeader._bm_num_important_colors = 0;
-  InfoHeader._bm_num_of_planes = 1;
-  InfoHeader._bm_ver_resolution = 0;
-
-  fwrite(&FileHeader, sizeof(BMPFileHeader), 1, fp);
-  fwrite(&InfoHeader, sizeof(BMPInfoHeader), 1, fp);
-
-  for (int i = ImSize.height - 1; i >= 0; i--) {
-    for (int j = 0; j < ImSize.width; j++) {
-      fwrite(&(Img[i * Stride + j]), 1, 1, fp);
-      fwrite(&(Img[i * Stride + j]), 1, 1, fp);
-      fwrite(&(Img[i * Stride + j]), 1, 1, fp);
+    if (fp == NULL)
+    {
+        return;
     }
-  }
 
-  fclose(fp);
+    BMPFileHeader FileHeader;
+    BMPInfoHeader InfoHeader;
+
+    // init headers
+    FileHeader._bm_signature = 0x4D42;
+    FileHeader._bm_file_size = 54 + 3 * ImSize.width * ImSize.height;
+    FileHeader._bm_reserved = 0;
+    FileHeader._bm_bitmap_data = 0x36;
+    InfoHeader._bm_bitmap_size = 0;
+    InfoHeader._bm_color_depth = 24;
+    InfoHeader._bm_compressed = 0;
+    InfoHeader._bm_hor_resolution = 0;
+    InfoHeader._bm_image_height = ImSize.height;
+    InfoHeader._bm_image_width = ImSize.width;
+    InfoHeader._bm_info_header_size = 40;
+    InfoHeader._bm_num_colors_used = 0;
+    InfoHeader._bm_num_important_colors = 0;
+    InfoHeader._bm_num_of_planes = 1;
+    InfoHeader._bm_ver_resolution = 0;
+
+    fwrite(&FileHeader, sizeof(BMPFileHeader), 1, fp);
+    fwrite(&InfoHeader, sizeof(BMPInfoHeader), 1, fp);
+
+    byte zero = 0x00;
+
+    for (int j = 0; j < ImSize.height; j++)
+    {
+        for (int i = 0; i < ImSize.width; i++)
+        {
+            //B G R - B G R ...
+
+            fwrite(&zero, 1, 1, fp);
+            fwrite(&zero, 1, 1, fp);
+            fwrite(&(Img[j * Stride + i]), 1, 1, fp);
+            //fwrite(&(Img[j * Stride + i]), 1, 1, fp);
+            //fwrite(&(Img[j * Stride + i]), 1, 1, fp);
+            //fwrite(&zero, 1, 1, fp);
+            //fwrite(&zero, 1, 1, fp);
+        }
+    }
+    fclose(fp);
 }
+
+void DumpBmpData(char* FileName, byte* Img, int Stride, ROI ImSize, int color_depth)
+{
+    if ((color_depth != 24) && (color_depth != 32))
+    {
+        printf("僅能製作 24/32 位元深度圖片\n");
+        return;
+    }
+
+    FILE* fp = NULL;
+    fp = fopen(FileName, "wb");
+
+    if (fp == NULL)
+    {
+        return;
+    }
+
+    BMPFileHeader FileHeader;
+    BMPInfoHeader InfoHeader;
+
+    // init headers
+    FileHeader._bm_signature = 0x4D42;
+    FileHeader._bm_file_size = 54 + (color_depth / 8) * ImSize.width * ImSize.height;
+    FileHeader._bm_reserved = 0;
+    FileHeader._bm_bitmap_data = 0x36;
+    InfoHeader._bm_bitmap_size = 0;
+    InfoHeader._bm_color_depth = color_depth;
+    InfoHeader._bm_compressed = 0;
+    InfoHeader._bm_hor_resolution = 0x0ec4;
+    InfoHeader._bm_image_height = ImSize.height;
+    InfoHeader._bm_image_width = ImSize.width;
+    InfoHeader._bm_info_header_size = 40;
+    InfoHeader._bm_num_colors_used = 0;
+    InfoHeader._bm_num_important_colors = 0;
+    InfoHeader._bm_num_of_planes = 1;
+    InfoHeader._bm_ver_resolution = 0x0ec4;
+
+    fwrite(&FileHeader, sizeof(BMPFileHeader), 1, fp);
+    fwrite(&InfoHeader, sizeof(BMPInfoHeader), 1, fp);
+
+    //printf("www = % d, hhh = %d\n", InfoHeader._bm_image_width, InfoHeader._bm_image_height);
+
+    for (int j = 0; j < ImSize.height; j++)
+    {
+        for (int i = 0; i < ImSize.width; i++)
+        {
+            //B G R - B G R ...
+            //B G R A - B G R A...
+
+            if (color_depth == 32)
+            {
+                fwrite(&(Img[(i + j * ImSize.width) * 4 + 0]), 1, 1, fp);   //B
+                fwrite(&(Img[(i + j * ImSize.width) * 4 + 1]), 1, 1, fp);   //G
+                fwrite(&(Img[(i + j * ImSize.width) * 4 + 2]), 1, 1, fp);   //R
+                fwrite(&(Img[(i + j * ImSize.width) * 4 + 3]), 1, 1, fp);   //A
+            }
+            else
+            {
+                fwrite(&(Img[(i + j * ImSize.width) * 3 + 0]), 1, 1, fp);   //B
+                fwrite(&(Img[(i + j * ImSize.width) * 3 + 1]), 1, 1, fp);   //G
+                fwrite(&(Img[(i + j * ImSize.width) * 3 + 2]), 1, 1, fp);   //R
+            }
+
+            // 
+            //fwrite(&zero, 1, 1, fp);
+            //fwrite(&zero, 1, 1, fp);
+        }
+    }
+    fclose(fp);
+}
+
 
 /**
 **************************************************************************
@@ -374,14 +667,16 @@ void DumpBmpAsGray(char *FileName, byte *Img, int Stride, ROI ImSize) {
 *
 * \return None
 */
-void DumpBlockF(float *PlaneF, int StrideF, char *Fname) {
+void DumpBlockF(float *PlaneF, int StrideF, char *Fname)
+{
   FILE *fp = fopen(Fname, "wb");
 
-  for (int i = 0; i < 8; i++) {
-    for (int j = 0; j < 8; j++) {
+  for (int i = 0; i < 8; i++)
+  {
+    for (int j = 0; j < 8; j++)
+    {
       fprintf(fp, "%.*f  ", 14, PlaneF[i * StrideF + j]);
     }
-
     fprintf(fp, "\n");
   }
 
@@ -398,11 +693,14 @@ void DumpBlockF(float *PlaneF, int StrideF, char *Fname) {
 *
 * \return None
 */
-void DumpBlock(byte *Plane, int Stride, char *Fname) {
+void DumpBlock(byte *Plane, int Stride, char *Fname)
+{
   FILE *fp = fopen(Fname, "wb");
 
-  for (int i = 0; i < 8; i++) {
-    for (int j = 0; j < 8; j++) {
+  for (int i = 0; i < 8; i++)
+  {
+    for (int j = 0; j < 8; j++)
+    {
       fprintf(fp, "%.3d  ", Plane[i * Stride + j]);
     }
 
@@ -423,11 +721,14 @@ void DumpBlock(byte *Plane, int Stride, char *Fname) {
 *
 * \return Mean Square Error between images
 */
-float CalculateMSE(byte *Img1, byte *Img2, int Stride, ROI Size) {
+float CalculateMSE(byte *Img1, byte *Img2, int Stride, ROI Size)
+{
   uint32 Acc = 0;
 
-  for (int i = 0; i < Size.height; i++) {
-    for (int j = 0; j < Size.width; j++) {
+  for (int i = 0; i < Size.height; i++)
+  {
+    for (int j = 0; j < Size.width; j++)
+    {
       int TmpDiff = Img1[i * Stride + j] - Img2[i * Stride + j];
       TmpDiff *= TmpDiff;
       Acc += TmpDiff;
@@ -449,7 +750,9 @@ float CalculateMSE(byte *Img1, byte *Img2, int Stride, ROI Size) {
 *
 * \return Peak Signal to Noise Ratio between images
 */
-float CalculatePSNR(byte *Img1, byte *Img2, int Stride, ROI Size) {
+float CalculatePSNR(byte *Img1, byte *Img2, int Stride, ROI Size)
+{
   float MSE = CalculateMSE(Img1, Img2, Stride, Size);
   return 10 * log10(255 * 255 / MSE);
 }
+

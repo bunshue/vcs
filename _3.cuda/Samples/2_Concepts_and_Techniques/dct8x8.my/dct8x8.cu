@@ -183,101 +183,99 @@ float WrapperGold2(byte *ImgSrc, byte *ImgDst, int Stride, ROI Size) {
 *
 * \return Execution time in milliseconds
 */
-float WrapperCUDA1(byte *ImgSrc, byte *ImgDst, int Stride, ROI Size) {
-  // prepare channel format descriptor for passing texture into kernels
-  cudaChannelFormatDesc floattex = cudaCreateChannelDesc<float>();
+float WrapperCUDA1(byte* ImgSrc, byte* ImgDst, int Stride, ROI Size)
+{
+    // prepare channel format descriptor for passing texture into kernels
+    cudaChannelFormatDesc floattex = cudaCreateChannelDesc<float>();
 
-  // allocate device memory
-  cudaArray *Src;
-  float *Dst;
-  size_t DstStride;
-  checkCudaErrors(cudaMallocArray(&Src, &floattex, Size.width, Size.height));
-  checkCudaErrors(cudaMallocPitch((void **)(&Dst), &DstStride,
-                                  Size.width * sizeof(float), Size.height));
-  DstStride /= sizeof(float);
+    // allocate device memory
+    cudaArray* Src;
+    float* Dst;
+    size_t DstStride;
 
-  // convert source image to float representation
-  int ImgSrcFStride;
-  float *ImgSrcF = MallocPlaneFloat(Size.width, Size.height, &ImgSrcFStride);
-  CopyByte2Float(ImgSrc, Stride, ImgSrcF, ImgSrcFStride, Size);
-  AddFloatPlane(-128.0f, ImgSrcF, ImgSrcFStride, Size);
+    checkCudaErrors(cudaMallocArray(&Src, &floattex, Size.width, Size.height));
+    checkCudaErrors(cudaMallocPitch((void**)(&Dst), &DstStride, Size.width * sizeof(float), Size.height));
 
-  // copy from host memory to device
-  checkCudaErrors(cudaMemcpy2DToArray(
-      Src, 0, 0, ImgSrcF, ImgSrcFStride * sizeof(float),
-      Size.width * sizeof(float), Size.height, cudaMemcpyHostToDevice));
+    DstStride /= sizeof(float);
 
-  // setup execution parameters
-  dim3 threads(BLOCK_SIZE, BLOCK_SIZE);
-  dim3 grid(Size.width / BLOCK_SIZE, Size.height / BLOCK_SIZE);
+    // convert source image to float representation
+    int ImgSrcFStride;
+    float* ImgSrcF = MallocPlaneFloat(Size.width, Size.height, &ImgSrcFStride);
 
-  // create and start CUDA timer
-  StopWatchInterface *timerCUDA = 0;
-  sdkCreateTimer(&timerCUDA);
-  sdkResetTimer(&timerCUDA);
+    CopyByte2Float(ImgSrc, Stride, ImgSrcF, ImgSrcFStride, Size);
+    AddFloatPlane(-128.0f, ImgSrcF, ImgSrcFStride, Size);
 
-  // execute DCT kernel and benchmark
-  cudaTextureObject_t TexSrc;
-  cudaResourceDesc texRes;
-  memset(&texRes, 0, sizeof(cudaResourceDesc));
+    // copy from host memory to device
+    checkCudaErrors(cudaMemcpy2DToArray(Src, 0, 0, ImgSrcF, ImgSrcFStride * sizeof(float), Size.width * sizeof(float), Size.height, cudaMemcpyHostToDevice));
 
-  texRes.resType = cudaResourceTypeArray;
-  texRes.res.array.array = Src;
+    // setup execution parameters
+    dim3 threads(BLOCK_SIZE, BLOCK_SIZE);
+    dim3 grid(Size.width / BLOCK_SIZE, Size.height / BLOCK_SIZE);
 
-  cudaTextureDesc texDescr;
-  memset(&texDescr, 0, sizeof(cudaTextureDesc));
+    // create and start CUDA timer
+    StopWatchInterface* timerCUDA = 0;
+    sdkCreateTimer(&timerCUDA);
+    sdkResetTimer(&timerCUDA);
 
-  texDescr.normalizedCoords = false;
-  texDescr.filterMode = cudaFilterModeLinear;
-  texDescr.addressMode[0] = cudaAddressModeWrap;
-  texDescr.addressMode[1] = cudaAddressModeWrap;
-  texDescr.readMode = cudaReadModeElementType;
+    // execute DCT kernel and benchmark
+    cudaTextureObject_t TexSrc;
+    cudaResourceDesc texRes;
+    memset(&texRes, 0, sizeof(cudaResourceDesc));
 
-  checkCudaErrors(cudaCreateTextureObject(&TexSrc, &texRes, &texDescr, NULL));
+    texRes.resType = cudaResourceTypeArray;
+    texRes.res.array.array = Src;
 
-  for (int i = 0; i < BENCHMARK_SIZE; i++) {
-    sdkStartTimer(&timerCUDA);
-    CUDAkernel1DCT<<<grid, threads>>>(Dst, (int)DstStride, 0, 0, TexSrc);
-    checkCudaErrors(cudaDeviceSynchronize());
-    sdkStopTimer(&timerCUDA);
-  }
+    cudaTextureDesc texDescr;
+    memset(&texDescr, 0, sizeof(cudaTextureDesc));
 
-  getLastCudaError("Kernel execution failed");
+    texDescr.normalizedCoords = false;
+    texDescr.filterMode = cudaFilterModeLinear;
+    texDescr.addressMode[0] = cudaAddressModeWrap;
+    texDescr.addressMode[1] = cudaAddressModeWrap;
+    texDescr.readMode = cudaReadModeElementType;
 
-  // finalize CUDA timer
-  float TimerCUDASpan = sdkGetAverageTimerValue(&timerCUDA);
-  sdkDeleteTimer(&timerCUDA);
+    checkCudaErrors(cudaCreateTextureObject(&TexSrc, &texRes, &texDescr, NULL));
 
-  // execute Quantization kernel
-  CUDAkernelQuantizationFloat<<<grid, threads>>>(Dst, (int)DstStride);
-  getLastCudaError("Kernel execution failed");
+    for (int i = 0; i < BENCHMARK_SIZE; i++)
+    {
+        sdkStartTimer(&timerCUDA);
+        CUDAkernel1DCT << <grid, threads >> > (Dst, (int)DstStride, 0, 0, TexSrc);
+        checkCudaErrors(cudaDeviceSynchronize());
+        sdkStopTimer(&timerCUDA);
+    }
 
-  // copy quantized coefficients from host memory to device array
-  checkCudaErrors(cudaMemcpy2DToArray(Src, 0, 0, Dst, DstStride * sizeof(float),
-                                      Size.width * sizeof(float), Size.height,
-                                      cudaMemcpyDeviceToDevice));
+    getLastCudaError("Kernel execution failed");
 
-  // execute IDCT kernel
-  CUDAkernel1IDCT<<<grid, threads>>>(Dst, (int)DstStride, 0, 0, TexSrc);
-  getLastCudaError("Kernel execution failed");
+    // finalize CUDA timer
+    float TimerCUDASpan = sdkGetAverageTimerValue(&timerCUDA);
+    sdkDeleteTimer(&timerCUDA);
 
-  // copy quantized image block to host
-  checkCudaErrors(cudaMemcpy2D(
-      ImgSrcF, ImgSrcFStride * sizeof(float), Dst, DstStride * sizeof(float),
-      Size.width * sizeof(float), Size.height, cudaMemcpyDeviceToHost));
+    // execute Quantization kernel
+    CUDAkernelQuantizationFloat << <grid, threads >> > (Dst, (int)DstStride);
+    getLastCudaError("Kernel execution failed");
 
-  // convert image back to byte representation
-  AddFloatPlane(128.0f, ImgSrcF, ImgSrcFStride, Size);
-  CopyFloat2Byte(ImgSrcF, ImgSrcFStride, ImgDst, Stride, Size);
+    // copy quantized coefficients from host memory to device array
+    checkCudaErrors(cudaMemcpy2DToArray(Src, 0, 0, Dst, DstStride * sizeof(float), Size.width * sizeof(float), Size.height, cudaMemcpyDeviceToDevice));
 
-  // clean up memory
-  checkCudaErrors(cudaDestroyTextureObject(TexSrc));
-  checkCudaErrors(cudaFreeArray(Src));
-  checkCudaErrors(cudaFree(Dst));
-  FreePlane(ImgSrcF);
+    // execute IDCT kernel
+    CUDAkernel1IDCT << <grid, threads >> > (Dst, (int)DstStride, 0, 0, TexSrc);
+    getLastCudaError("Kernel execution failed");
 
-  // return time taken by the operation
-  return TimerCUDASpan;
+    // copy quantized image block to host
+    checkCudaErrors(cudaMemcpy2D(ImgSrcF, ImgSrcFStride * sizeof(float), Dst, DstStride * sizeof(float), Size.width * sizeof(float), Size.height, cudaMemcpyDeviceToHost));
+
+    // convert image back to byte representation
+    AddFloatPlane(128.0f, ImgSrcF, ImgSrcFStride, Size);
+    CopyFloat2Byte(ImgSrcF, ImgSrcFStride, ImgDst, Stride, Size);
+
+    // clean up memory
+    checkCudaErrors(cudaDestroyTextureObject(TexSrc));
+    checkCudaErrors(cudaFreeArray(Src));
+    checkCudaErrors(cudaFree(Dst));
+    FreePlane(ImgSrcF);
+
+    // return time taken by the operation
+    return TimerCUDASpan;
 }
 
 /**
@@ -484,179 +482,141 @@ float WrapperCUDAshort(byte *ImgSrc, byte *ImgDst, int Stride, ROI Size) {
 * \return Status code
 */
 
-int main(int argc, char **argv) {
-  //
-  // Sample initialization
-  //
-  printf("%s Starting...\n\n", argv[0]);
-
+int main(int argc, char **argv)
+{
   // initialize CUDA
   findCudaDevice(argc, (const char **)argv);
 
-  // source and results image filenames
-  char SampleImageFname[] = "teapot512.bmp";
-  char SampleImageFnameResGold1[] = "teapot512_gold1.bmp";
-  char SampleImageFnameResGold2[] = "teapot512_gold2.bmp";
-  char SampleImageFnameResCUDA1[] = "teapot512_cuda1.bmp";
-  char SampleImageFnameResCUDA2[] = "teapot512_cuda2.bmp";
-  char SampleImageFnameResCUDAshort[] = "teapot512_cuda_short.bmp";
-
-  char *pSampleImageFpath = sdkFindFilePath(SampleImageFname, argv[0]);
-
-  if (pSampleImageFpath == NULL) {
-    printf("dct8x8 could not locate Sample Image <%s>\nExiting...\n",
-           pSampleImageFpath);
-    exit(EXIT_FAILURE);
-  }
+  char filename1[] = "portrait_noise.bmp";
+  char filename2[] = "portrait_noise.ok.bmp";
 
   // preload image (acquire dimensions)
-  int ImgWidth, ImgHeight;
+  int ImgWidth;
+  int ImgHeight;
   ROI ImgSize;
-  int res = PreLoadBmp(pSampleImageFpath, &ImgWidth, &ImgHeight);
+
+  printf("PreLoadBmp, file : %s\n", filename1);
+  int res = PreLoadBmp(filename1, &ImgWidth, &ImgHeight);
+  if (res)
+  {
+      printf("\nError: Image file not found or invalid!\n");
+      exit(EXIT_FAILURE);
+      return 1;
+  }
+
   ImgSize.width = ImgWidth;
   ImgSize.height = ImgHeight;
 
-  // CONSOLE INFORMATION: saying hello to user
-  printf("CUDA sample DCT/IDCT implementation\n");
-  printf("===================================\n");
-  printf("Loading test image: %s... ", SampleImageFname);
-
-  if (res) {
-    printf("\nError: Image file not found or invalid!\n");
-    exit(EXIT_FAILURE);
-    return 1;
-  }
+  printf("W = %d, H = %d, BLOCK_SIZE = %d\n", ImgSize.width, ImgSize.height, BLOCK_SIZE);
+  printf("讀取檔案 : %s\n", filename1);
 
   // check image dimensions are multiples of BLOCK_SIZE
-  if (ImgWidth % BLOCK_SIZE != 0 || ImgHeight % BLOCK_SIZE != 0) {
+  if (ImgWidth % BLOCK_SIZE != 0 || ImgHeight % BLOCK_SIZE != 0)
+  {
     printf("\nError: Input image dimensions must be multiples of 8!\n");
     exit(EXIT_FAILURE);
     return 1;
   }
 
-  printf("[%d x %d]... ", ImgWidth, ImgHeight);
-
   // allocate image buffers
   int ImgStride;
   byte *ImgSrc = MallocPlaneByte(ImgWidth, ImgHeight, &ImgStride);
-  byte *ImgDstGold1 = MallocPlaneByte(ImgWidth, ImgHeight, &ImgStride);
-  byte *ImgDstGold2 = MallocPlaneByte(ImgWidth, ImgHeight, &ImgStride);
-  byte *ImgDstCUDA1 = MallocPlaneByte(ImgWidth, ImgHeight, &ImgStride);
-  byte *ImgDstCUDA2 = MallocPlaneByte(ImgWidth, ImgHeight, &ImgStride);
-  byte *ImgDstCUDAshort = MallocPlaneByte(ImgWidth, ImgHeight, &ImgStride);
+  byte *ImgDst = MallocPlaneByte(ImgWidth, ImgHeight, &ImgStride);
+
+  printf("ImgStride = %d\n", ImgStride);
 
   // load sample image
-  LoadBmpAsGray(pSampleImageFpath, ImgStride, ImgSize, ImgSrc);
+  LoadBmpAsGray(filename1, ImgStride, ImgSize, ImgSrc);
 
-  //
-  // RUNNING WRAPPERS
-  //
+  printf("寫入檔案 : %s\n", filename2);
+  DumpBmpAsGray(filename2, ImgDst, ImgStride, ImgSize);
 
-  // compute Gold 1 version of DCT/quantization/IDCT
-  printf("Success\nRunning Gold 1 (CPU) version... ");
-  float TimeGold1 = WrapperGold1(ImgSrc, ImgDstGold1, ImgStride, ImgSize);
+  //製作一個24位元深度之bmp檔案 ST
+  char filename3[] = "my_bmp333b.bmp";
+  printf("製作一個bmp檔案 : %s\n", filename3);
+  ImgStride = 320;
 
-  // compute Gold 2 version of DCT/quantization/IDCT
-  printf("Success\nRunning Gold 2 (CPU) version... ");
-  float TimeGold2 = WrapperGold2(ImgSrc, ImgDstGold2, ImgStride, ImgSize);
+  ImgWidth = 16;
+  ImgHeight = 16;
+  ImgSize.width = ImgWidth;
+  ImgSize.height = ImgHeight;
 
-  // compute CUDA 1 version of DCT/quantization/IDCT
-  printf("Success\nRunning CUDA 1 (GPU) version... ");
-  float TimeCUDA1 = WrapperCUDA1(ImgSrc, ImgDstCUDA1, ImgStride, ImgSize);
-
-  // compute CUDA 2 version of DCT/quantization/IDCT
-  printf("Success\nRunning CUDA 2 (GPU) version... ");
-  float TimeCUDA2 = WrapperCUDA2(ImgSrc, ImgDstCUDA2, ImgStride, ImgSize);
-
-  // compute CUDA short version of DCT/quantization/IDCT
-  printf("Success\nRunning CUDA short (GPU) version... ");
-  float TimeCUDAshort =
-      WrapperCUDAshort(ImgSrc, ImgDstCUDAshort, ImgStride, ImgSize);
-  //
-  // Execution statistics, result saving and validation
-  //
-
-  // dump result of Gold 1 processing
-  printf("Success\nDumping result to %s... ", SampleImageFnameResGold1);
-  DumpBmpAsGray(SampleImageFnameResGold1, ImgDstGold1, ImgStride, ImgSize);
-
-  // dump result of Gold 2 processing
-  printf("Success\nDumping result to %s... ", SampleImageFnameResGold2);
-  DumpBmpAsGray(SampleImageFnameResGold2, ImgDstGold2, ImgStride, ImgSize);
-
-  // dump result of CUDA 1 processing
-  printf("Success\nDumping result to %s... ", SampleImageFnameResCUDA1);
-  DumpBmpAsGray(SampleImageFnameResCUDA1, ImgDstCUDA1, ImgStride, ImgSize);
-
-  // dump result of CUDA 2 processing
-  printf("Success\nDumping result to %s... ", SampleImageFnameResCUDA2);
-  DumpBmpAsGray(SampleImageFnameResCUDA2, ImgDstCUDA2, ImgStride, ImgSize);
-
-  // dump result of CUDA short processing
-  printf("Success\nDumping result to %s... ", SampleImageFnameResCUDAshort);
-  DumpBmpAsGray(SampleImageFnameResCUDAshort, ImgDstCUDAshort, ImgStride,
-                ImgSize);
-  // print speed info
-  printf("Success\n");
-
-  printf("Processing time (CUDA 1)    : %f ms \n", TimeCUDA1);
-  printf("Processing time (CUDA 2)    : %f ms \n", TimeCUDA2);
-  printf("Processing time (CUDA short): %f ms \n", TimeCUDAshort);
-
-  // calculate PSNR between each pair of images
-  float PSNR_Src_DstGold1 =
-      CalculatePSNR(ImgSrc, ImgDstGold1, ImgStride, ImgSize);
-  float PSNR_Src_DstGold2 =
-      CalculatePSNR(ImgSrc, ImgDstGold2, ImgStride, ImgSize);
-  float PSNR_Src_DstCUDA1 =
-      CalculatePSNR(ImgSrc, ImgDstCUDA1, ImgStride, ImgSize);
-  float PSNR_Src_DstCUDA2 =
-      CalculatePSNR(ImgSrc, ImgDstCUDA2, ImgStride, ImgSize);
-  float PSNR_Src_DstCUDAshort =
-      CalculatePSNR(ImgSrc, ImgDstCUDAshort, ImgStride, ImgSize);
-  float PSNR_DstGold1_DstCUDA1 =
-      CalculatePSNR(ImgDstGold1, ImgDstCUDA1, ImgStride, ImgSize);
-  float PSNR_DstGold2_DstCUDA2 =
-      CalculatePSNR(ImgDstGold2, ImgDstCUDA2, ImgStride, ImgSize);
-  float PSNR_DstGold2_DstCUDA16b =
-      CalculatePSNR(ImgDstGold2, ImgDstCUDAshort, ImgStride, ImgSize);
-
-  printf("PSNR Original    <---> CPU(Gold 1)    : %f\n", PSNR_Src_DstGold1);
-  printf("PSNR Original    <---> CPU(Gold 2)    : %f\n", PSNR_Src_DstGold2);
-  printf("PSNR Original    <---> GPU(CUDA 1)    : %f\n", PSNR_Src_DstCUDA1);
-  printf("PSNR Original    <---> GPU(CUDA 2)    : %f\n", PSNR_Src_DstCUDA2);
-  printf("PSNR Original    <---> GPU(CUDA short): %f\n", PSNR_Src_DstCUDAshort);
-  printf("PSNR CPU(Gold 1) <---> GPU(CUDA 1)    : %f\n",
-         PSNR_DstGold1_DstCUDA1);
-  printf("PSNR CPU(Gold 2) <---> GPU(CUDA 2)    : %f\n",
-         PSNR_DstGold2_DstCUDA2);
-  printf("PSNR CPU(Gold 2) <---> GPU(CUDA short): %f\n",
-         PSNR_DstGold2_DstCUDA16b);
-
-  bool bTestResult = (PSNR_DstGold1_DstCUDA1 > PSNR_THRESHOLD_EQUAL &&
-                      PSNR_DstGold2_DstCUDA2 > PSNR_THRESHOLD_EQUAL &&
-                      PSNR_DstGold2_DstCUDA16b > PSNR_THRESHOLD_EQUAL);
-
-  //
-  // Finalization
-  //
+  byte* ImgDst333 = MallocPlaneByte(ImgWidth, ImgHeight, &ImgStride);
+  for (int i = 0; i < ImgWidth * ImgHeight; i++)
+  {
+      ImgDst333[i] = (i % 256);
+  }
+  DumpBmpAsGray(filename3, ImgDst333, ImgStride, ImgSize);
+  FreePlane(ImgDst333);
+  //製作一個24位元深度之bmp檔案 SP
 
   // release byte planes
   FreePlane(ImgSrc);
-  FreePlane(ImgDstGold1);
-  FreePlane(ImgDstGold2);
-  FreePlane(ImgDstCUDA1);
-  FreePlane(ImgDstCUDA2);
-  FreePlane(ImgDstCUDAshort);
+  FreePlane(ImgDst);
 
-  // finalize
-  printf("\nTest Summary...\n");
 
-  if (!bTestResult) {
-    printf("Test failed!\n");
-    exit(EXIT_FAILURE);
+
+  //讀取一個bmp檔案 ST, 判斷位元深度
+  char filename_read[] = "C:\\______test_files\\pic_256X100b.bmp";
+  printf("讀取檔案 : %s\n", filename_read);
+
+  res = PreLoadBmp2(filename_read, &ImgWidth, &ImgHeight);
+  if (res)
+  {
+      printf("\nError: Image file not found or invalid!\n");
+      exit(EXIT_FAILURE);
+      return 1;
   }
 
+  ImgSize.width = ImgWidth;
+  ImgSize.height = ImgHeight;
+
+  printf("W = %d, H = %d, BLOCK_SIZE = %d\n", ImgSize.width, ImgSize.height, BLOCK_SIZE);
+
+  int color_depth = GetBmpColorDepth(filename_read);
+  printf("圖片位元深度 : %d 位元\n", color_depth);
+
+
+  byte* ImageData = MallocPlaneByte(ImgWidth*(color_depth/8), ImgHeight, &ImgStride);
+
+  printf("ImgStride = %d\n", ImgStride);
+
+  LoadBmpAsData(filename_read, ImgStride, ImgSize, ImageData, color_depth);
+
+  /*
+  for (int i = 0; i < 100; i++)
+  {
+      printf("%02X ", ImageData[i]);
+
+
+  }
+  printf("\n");
+  */
+
+  //把資料存成另一個bmp檔案
+
+  //製作一個特定位元深度之bmp檔案 ST
+  char filename_write[] = "pic_256X100b.32.new.bmp";
+  printf("製作一個bmp檔案 : %s\n", filename_write);
+  //ImgStride = 320;
+
+  //ImgWidth = 16;
+  //ImgHeight = 16;
+  ImgSize.width = ImgWidth;
+  ImgSize.height = ImgHeight;
+
+  color_depth = 32;
+  DumpBmpData(filename_write, ImageData, ImgStride, ImgSize, color_depth);
+
+  //製作一個特定位元深度之bmp檔案 SP
+
+
+
+
+  FreePlane(ImageData);
+
+
+  // finalize
   printf("Test passed\n");
   exit(EXIT_SUCCESS);
 }
