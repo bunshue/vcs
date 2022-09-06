@@ -59,418 +59,35 @@
 #include "dct8x8_kernel_short.cuh"
 #include "dct8x8_kernel_quantization.cuh"
 
-/**
-**************************************************************************
-*  Wrapper function for 1st gold version of DCT, quantization and IDCT
-*implementations
-*
-* \param ImgSrc         [IN] - Source byte image plane
-* \param ImgDst         [IN] - Quantized result byte image plane
-* \param Stride         [IN] - Stride for both source and result planes
-* \param Size           [IN] - Size of both planes
-*
-* \return Execution time in milliseconds
-*/
-float WrapperGold1(byte *ImgSrc, byte *ImgDst, int Stride, ROI Size) {
-  // allocate float buffers for DCT and other data
-  int StrideF;
-  float *ImgF1 = MallocPlaneFloat(Size.width, Size.height, &StrideF);
-  float *ImgF2 = MallocPlaneFloat(Size.width, Size.height, &StrideF);
-
-  // convert source image to float representation
-  CopyByte2Float(ImgSrc, Stride, ImgF1, StrideF, Size);
-  AddFloatPlane(-128.0f, ImgF1, StrideF, Size);
-
-  // create and start CUDA timer
-  StopWatchInterface *timerGold = 0;
-  sdkCreateTimer(&timerGold);
-  sdkResetTimer(&timerGold);
-
-  // perform block-wise DCT processing and benchmarking
-  for (int i = 0; i < BENCHMARK_SIZE; i++) {
-    sdkStartTimer(&timerGold);
-    computeDCT8x8Gold1(ImgF1, ImgF2, StrideF, Size);
-    sdkStopTimer(&timerGold);
-  }
-
-  // stop and destroy CUDA timer
-  float TimerGoldSpan = sdkGetAverageTimerValue(&timerGold);
-  sdkDeleteTimer(&timerGold);
-
-  // perform quantization
-  quantizeGoldFloat(ImgF2, StrideF, Size);
-
-  // perform block-wise IDCT processing
-  computeIDCT8x8Gold1(ImgF2, ImgF1, StrideF, Size);
-
-  // convert image back to byte representation
-  AddFloatPlane(128.0f, ImgF1, StrideF, Size);
-  CopyFloat2Byte(ImgF1, StrideF, ImgDst, Stride, Size);
-
-  // free float buffers
-  FreePlane(ImgF1);
-  FreePlane(ImgF2);
-
-  // return time taken by the operation
-  return TimerGoldSpan;
-}
-
-/**
-**************************************************************************
-*  Wrapper function for 2nd gold version of DCT, quantization and IDCT
-*implementations
-*
-* \param ImgSrc         [IN] - Source byte image plane
-* \param ImgDst         [IN] - Quantized result byte image plane
-* \param Stride         [IN] - Stride for both source and result planes
-* \param Size           [IN] - Size of both planes
-*
-* \return Execution time in milliseconds
-*/
-float WrapperGold2(byte *ImgSrc, byte *ImgDst, int Stride, ROI Size) {
-  // allocate float buffers for DCT and other data
-  int StrideF;
-  float *ImgF1 = MallocPlaneFloat(Size.width, Size.height, &StrideF);
-  float *ImgF2 = MallocPlaneFloat(Size.width, Size.height, &StrideF);
-
-  // convert source image to float representation
-  CopyByte2Float(ImgSrc, Stride, ImgF1, StrideF, Size);
-  AddFloatPlane(-128.0f, ImgF1, StrideF, Size);
-
-  // create and start CUDA timer
-  StopWatchInterface *timerGold = 0;
-  sdkCreateTimer(&timerGold);
-  sdkResetTimer(&timerGold);
-
-  // perform block-wise DCT processing and benchmarking
-  for (int i = 0; i < BENCHMARK_SIZE; i++) {
-    sdkStartTimer(&timerGold);
-    computeDCT8x8Gold2(ImgF1, ImgF2, StrideF, Size);
-    sdkStopTimer(&timerGold);
-  }
-
-  // stop and destroy CUDA timer
-  float TimerGoldSpan = sdkGetAverageTimerValue(&timerGold);
-  sdkDeleteTimer(&timerGold);
-
-  // perform quantization
-  quantizeGoldFloat(ImgF2, StrideF, Size);
-
-  // perform block-wise IDCT processing
-  computeIDCT8x8Gold2(ImgF2, ImgF1, StrideF, Size);
-
-  // convert image back to byte representation
-  AddFloatPlane(128.0f, ImgF1, StrideF, Size);
-  CopyFloat2Byte(ImgF1, StrideF, ImgDst, Stride, Size);
-
-  // free float buffers
-  FreePlane(ImgF1);
-  FreePlane(ImgF2);
-
-  // return time taken by the operation
-  return TimerGoldSpan;
-}
-
-/**
-**************************************************************************
-*  Wrapper function for 1st CUDA version of DCT, quantization and IDCT
-*implementations
-*
-* \param ImgSrc         [IN] - Source byte image plane
-* \param ImgDst         [IN] - Quantized result byte image plane
-* \param Stride         [IN] - Stride for both source and result planes
-* \param Size           [IN] - Size of both planes
-*
-* \return Execution time in milliseconds
-*/
-float WrapperCUDA1(byte* ImgSrc, byte* ImgDst, int Stride, ROI Size)
+// CUDA kernel to add elements of two arrays
+/*
+__global__
+void addKernel(int n, byte* x, byte* y)
 {
-    // prepare channel format descriptor for passing texture into kernels
-    cudaChannelFormatDesc floattex = cudaCreateChannelDesc<float>();
+    int index = blockIdx.x * blockDim.x + threadIdx.x;
+    int stride = blockDim.x * gridDim.x;
 
-    // allocate device memory
-    cudaArray* Src;
-    float* Dst;
-    size_t DstStride;
+    printf("index = %d\tn=%d\tstride = %d\n", index, n, stride);
 
-    checkCudaErrors(cudaMallocArray(&Src, &floattex, Size.width, Size.height));
-    checkCudaErrors(cudaMallocPitch((void**)(&Dst), &DstStride, Size.width * sizeof(float), Size.height));
-
-    DstStride /= sizeof(float);
-
-    // convert source image to float representation
-    int ImgSrcFStride;
-    float* ImgSrcF = MallocPlaneFloat(Size.width, Size.height, &ImgSrcFStride);
-
-    CopyByte2Float(ImgSrc, Stride, ImgSrcF, ImgSrcFStride, Size);
-    AddFloatPlane(-128.0f, ImgSrcF, ImgSrcFStride, Size);
-
-    // copy from host memory to device
-    checkCudaErrors(cudaMemcpy2DToArray(Src, 0, 0, ImgSrcF, ImgSrcFStride * sizeof(float), Size.width * sizeof(float), Size.height, cudaMemcpyHostToDevice));
-
-    // setup execution parameters
-    dim3 threads(BLOCK_SIZE, BLOCK_SIZE);
-    dim3 grid(Size.width / BLOCK_SIZE, Size.height / BLOCK_SIZE);
-
-    // create and start CUDA timer
-    StopWatchInterface* timerCUDA = 0;
-    sdkCreateTimer(&timerCUDA);
-    sdkResetTimer(&timerCUDA);
-
-    // execute DCT kernel and benchmark
-    cudaTextureObject_t TexSrc;
-    cudaResourceDesc texRes;
-    memset(&texRes, 0, sizeof(cudaResourceDesc));
-
-    texRes.resType = cudaResourceTypeArray;
-    texRes.res.array.array = Src;
-
-    cudaTextureDesc texDescr;
-    memset(&texDescr, 0, sizeof(cudaTextureDesc));
-
-    texDescr.normalizedCoords = false;
-    texDescr.filterMode = cudaFilterModeLinear;
-    texDescr.addressMode[0] = cudaAddressModeWrap;
-    texDescr.addressMode[1] = cudaAddressModeWrap;
-    texDescr.readMode = cudaReadModeElementType;
-
-    checkCudaErrors(cudaCreateTextureObject(&TexSrc, &texRes, &texDescr, NULL));
-
-    for (int i = 0; i < BENCHMARK_SIZE; i++)
+    for (int i = index; i < n; i += stride)
     {
-        sdkStartTimer(&timerCUDA);
-        CUDAkernel1DCT << <grid, threads >> > (Dst, (int)DstStride, 0, 0, TexSrc);
-        checkCudaErrors(cudaDeviceSynchronize());
-        sdkStopTimer(&timerCUDA);
+        //目前都沒有進來這裡
+        //y[i] = x[i] + y[i];
+        y[i] = 0;
+        printf(".");
     }
-
-    getLastCudaError("Kernel execution failed");
-
-    // finalize CUDA timer
-    float TimerCUDASpan = sdkGetAverageTimerValue(&timerCUDA);
-    sdkDeleteTimer(&timerCUDA);
-
-    // execute Quantization kernel
-    CUDAkernelQuantizationFloat << <grid, threads >> > (Dst, (int)DstStride);
-    getLastCudaError("Kernel execution failed");
-
-    // copy quantized coefficients from host memory to device array
-    checkCudaErrors(cudaMemcpy2DToArray(Src, 0, 0, Dst, DstStride * sizeof(float), Size.width * sizeof(float), Size.height, cudaMemcpyDeviceToDevice));
-
-    // execute IDCT kernel
-    CUDAkernel1IDCT << <grid, threads >> > (Dst, (int)DstStride, 0, 0, TexSrc);
-    getLastCudaError("Kernel execution failed");
-
-    // copy quantized image block to host
-    checkCudaErrors(cudaMemcpy2D(ImgSrcF, ImgSrcFStride * sizeof(float), Dst, DstStride * sizeof(float), Size.width * sizeof(float), Size.height, cudaMemcpyDeviceToHost));
-
-    // convert image back to byte representation
-    AddFloatPlane(128.0f, ImgSrcF, ImgSrcFStride, Size);
-    CopyFloat2Byte(ImgSrcF, ImgSrcFStride, ImgDst, Stride, Size);
-
-    // clean up memory
-    checkCudaErrors(cudaDestroyTextureObject(TexSrc));
-    checkCudaErrors(cudaFreeArray(Src));
-    checkCudaErrors(cudaFree(Dst));
-    FreePlane(ImgSrcF);
-
-    // return time taken by the operation
-    return TimerCUDASpan;
 }
-
-/**
-**************************************************************************
-*  Wrapper function for 2nd CUDA version of DCT, quantization and IDCT
-*implementations
-*
-* \param ImgSrc         [IN] - Source byte image plane
-* \param ImgDst         [IN] - Quantized result byte image plane
-* \param Stride         [IN] - Stride for both source and result planes
-* \param Size           [IN] - Size of both planes
-*
-* \return Execution time in milliseconds
 */
 
-float WrapperCUDA2(byte *ImgSrc, byte *ImgDst, int Stride, ROI Size) {
-  // allocate host buffers for DCT and other data
-  int StrideF;
-  float *ImgF1 = MallocPlaneFloat(Size.width, Size.height, &StrideF);
-
-  // convert source image to float representation
-  CopyByte2Float(ImgSrc, Stride, ImgF1, StrideF, Size);
-  AddFloatPlane(-128.0f, ImgF1, StrideF, Size);
-
-  // allocate device memory
-  float *src, *dst;
-  size_t DeviceStride;
-  checkCudaErrors(cudaMallocPitch((void **)&src, &DeviceStride,
-                                  Size.width * sizeof(float), Size.height));
-  checkCudaErrors(cudaMallocPitch((void **)&dst, &DeviceStride,
-                                  Size.width * sizeof(float), Size.height));
-  DeviceStride /= sizeof(float);
-
-  // copy from host memory to device
-  checkCudaErrors(cudaMemcpy2D(
-      src, DeviceStride * sizeof(float), ImgF1, StrideF * sizeof(float),
-      Size.width * sizeof(float), Size.height, cudaMemcpyHostToDevice));
-
-  // create and start CUDA timer
-  StopWatchInterface *timerCUDA = 0;
-  sdkCreateTimer(&timerCUDA);
-
-  // setup execution parameters
-  dim3 GridFullWarps(Size.width / KER2_BLOCK_WIDTH,
-                     Size.height / KER2_BLOCK_HEIGHT, 1);
-  dim3 ThreadsFullWarps(8, KER2_BLOCK_WIDTH / 8, KER2_BLOCK_HEIGHT / 8);
-
-  // perform block-wise DCT processing and benchmarking
-  const int numIterations = 100;
-
-  for (int i = -1; i < numIterations; i++) {
-    if (i == 0) {
-      checkCudaErrors(cudaDeviceSynchronize());
-      sdkResetTimer(&timerCUDA);
-      sdkStartTimer(&timerCUDA);
-    }
-
-    CUDAkernel2DCT<<<GridFullWarps, ThreadsFullWarps>>>(dst, src,
-                                                        (int)DeviceStride);
-    getLastCudaError("Kernel execution failed");
-  }
-
-  checkCudaErrors(cudaDeviceSynchronize());
-  sdkStopTimer(&timerCUDA);
-
-  // finalize timing of CUDA Kernels
-  float avgTime = (float)sdkGetTimerValue(&timerCUDA) / (float)numIterations;
-  sdkDeleteTimer(&timerCUDA);
-  printf("%f MPix/s //%f ms\n",
-         (1E-6 * (float)Size.width * (float)Size.height) / (1E-3 * avgTime),
-         avgTime);
-
-  // setup execution parameters for quantization
-  dim3 ThreadsSmallBlocks(BLOCK_SIZE, BLOCK_SIZE);
-  dim3 GridSmallBlocks(Size.width / BLOCK_SIZE, Size.height / BLOCK_SIZE);
-
-  // execute Quantization kernel
-  CUDAkernelQuantizationFloat<<<GridSmallBlocks, ThreadsSmallBlocks>>>(
-      dst, (int)DeviceStride);
-  getLastCudaError("Kernel execution failed");
-
-  // perform block-wise IDCT processing
-  CUDAkernel2IDCT<<<GridFullWarps, ThreadsFullWarps>>>(src, dst,
-                                                       (int)DeviceStride);
-  checkCudaErrors(cudaDeviceSynchronize());
-  getLastCudaError("Kernel execution failed");
-
-  // copy quantized image block to host
-  checkCudaErrors(cudaMemcpy2D(
-      ImgF1, StrideF * sizeof(float), src, DeviceStride * sizeof(float),
-      Size.width * sizeof(float), Size.height, cudaMemcpyDeviceToHost));
-
-  // convert image back to byte representation
-  AddFloatPlane(128.0f, ImgF1, StrideF, Size);
-  CopyFloat2Byte(ImgF1, StrideF, ImgDst, Stride, Size);
-
-  // clean up memory
-  checkCudaErrors(cudaFree(dst));
-  checkCudaErrors(cudaFree(src));
-  FreePlane(ImgF1);
-
-  // return time taken by the operation
-  return avgTime;
+__global__ void addKernel(byte* c, const byte* a, const byte* b)
+{
+    printf("Q");
+    int i = threadIdx.x;
+    //c[i] = (a[i]/10 + b[i]/10) % 256;
+    c[i] = a[i];
+    printf("Z");
 }
 
-/**
-**************************************************************************
-*  Wrapper function for short CUDA version of DCT, quantization and IDCT
-*implementations
-*
-* \param ImgSrc         [IN] - Source byte image plane
-* \param ImgDst         [IN] - Quantized result byte image plane
-* \param Stride         [IN] - Stride for both source and result planes
-* \param Size           [IN] - Size of both planes
-*
-* \return Execution time in milliseconds
-*/
-float WrapperCUDAshort(byte *ImgSrc, byte *ImgDst, int Stride, ROI Size) {
-  // allocate host buffers for DCT and other data
-  int StrideS;
-  short *ImgS1 = MallocPlaneShort(Size.width, Size.height, &StrideS);
-
-  // convert source image to short representation centered at 128
-  for (int i = 0; i < Size.height; i++) {
-    for (int j = 0; j < Size.width; j++) {
-      ImgS1[i * StrideS + j] = (short)ImgSrc[i * Stride + j] - 128;
-    }
-  }
-
-  // allocate device memory
-  short *SrcDst;
-  size_t DeviceStride;
-  checkCudaErrors(cudaMallocPitch((void **)(&SrcDst), &DeviceStride,
-                                  Size.width * sizeof(short), Size.height));
-  DeviceStride /= sizeof(short);
-
-  // copy from host memory to device
-  checkCudaErrors(cudaMemcpy2D(
-      SrcDst, DeviceStride * sizeof(short), ImgS1, StrideS * sizeof(short),
-      Size.width * sizeof(short), Size.height, cudaMemcpyHostToDevice));
-
-  // create and start CUDA timer
-  StopWatchInterface *timerLibJpeg = 0;
-  sdkCreateTimer(&timerLibJpeg);
-  sdkResetTimer(&timerLibJpeg);
-
-  // setup execution parameters
-  dim3 GridShort(Size.width / KERS_BLOCK_WIDTH, Size.height / KERS_BLOCK_HEIGHT,
-                 1);
-  dim3 ThreadsShort(8, KERS_BLOCK_WIDTH / 8, KERS_BLOCK_HEIGHT / 8);
-
-  // perform block-wise DCT processing and benchmarking
-  sdkStartTimer(&timerLibJpeg);
-  CUDAkernelShortDCT<<<GridShort, ThreadsShort>>>(SrcDst, (int)DeviceStride);
-  checkCudaErrors(cudaDeviceSynchronize());
-  sdkStopTimer(&timerLibJpeg);
-  getLastCudaError("Kernel execution failed");
-
-  // stop and destroy CUDA timer
-  float TimerLibJpegSpan16b = sdkGetAverageTimerValue(&timerLibJpeg);
-  sdkDeleteTimer(&timerLibJpeg);
-
-  // setup execution parameters for quantization
-  dim3 ThreadsSmallBlocks(BLOCK_SIZE, BLOCK_SIZE);
-  dim3 GridSmallBlocks(Size.width / BLOCK_SIZE, Size.height / BLOCK_SIZE);
-
-  // execute Quantization kernel
-  CUDAkernelQuantizationShort<<<GridSmallBlocks, ThreadsSmallBlocks>>>(
-      SrcDst, (int)DeviceStride);
-  getLastCudaError("Kernel execution failed");
-
-  // perform block-wise IDCT processing
-  CUDAkernelShortIDCT<<<GridShort, ThreadsShort>>>(SrcDst, (int)DeviceStride);
-  checkCudaErrors(cudaDeviceSynchronize());
-  getLastCudaError("Kernel execution failed");
-
-  // copy quantized image block to host
-  checkCudaErrors(cudaMemcpy2D(
-      ImgS1, StrideS * sizeof(short), SrcDst, DeviceStride * sizeof(short),
-      Size.width * sizeof(short), Size.height, cudaMemcpyDeviceToHost));
-
-  // convert image back to byte representation
-  for (int i = 0; i < Size.height; i++) {
-    for (int j = 0; j < Size.width; j++) {
-      ImgDst[i * Stride + j] = clamp_0_255(ImgS1[i * StrideS + j] + 128);
-    }
-  }
-
-  // free float buffers
-  checkCudaErrors(cudaFree(SrcDst));
-  FreePlane(ImgS1);
-
-  // return time taken by the operation
-  return TimerLibJpegSpan16b;
-}
 
 /**
 **************************************************************************
@@ -611,10 +228,136 @@ int main(int argc, char **argv)
   //製作一個特定位元深度之bmp檔案 SP
 
 
-
-
   FreePlane(ImageData);
 
+
+
+  char filename_read1[] = "C:\\______test_files\\ims01.bmp";
+  char filename_read2[] = "C:\\______test_files\\ims03.bmp";
+
+  printf("讀取檔案 : %s\n", filename_read1);
+  res = PreLoadBmp2(filename_read1, &ImgWidth, &ImgHeight);
+  if (res)
+  {
+      printf("\nError: Image file not found or invalid!\n");
+      exit(EXIT_FAILURE);
+      return 1;
+  }
+  ImgSize.width = ImgWidth;
+  ImgSize.height = ImgHeight;
+  printf("W = %d, H = %d, BLOCK_SIZE = %d\n", ImgSize.width, ImgSize.height, BLOCK_SIZE);
+  color_depth = GetBmpColorDepth(filename_read1);
+  printf("圖片位元深度 : %d 位元\n", color_depth);
+  byte* ImageData1 = MallocPlaneByte(ImgWidth * (color_depth / 8), ImgHeight, &ImgStride);
+  printf("ImgStride = %d\n", ImgStride);
+  LoadBmpAsData(filename_read1, ImgStride, ImgSize, ImageData1, color_depth);
+
+  printf("讀取檔案 : %s\n", filename_read2);
+  res = PreLoadBmp2(filename_read2, &ImgWidth, &ImgHeight);
+  if (res)
+  {
+      printf("\nError: Image file not found or invalid!\n");
+      exit(EXIT_FAILURE);
+      return 1;
+  }
+  ImgSize.width = ImgWidth;
+  ImgSize.height = ImgHeight;
+  printf("W = %d, H = %d, BLOCK_SIZE = %d\n", ImgSize.width, ImgSize.height, BLOCK_SIZE);
+  color_depth = GetBmpColorDepth(filename_read2);
+  printf("圖片位元深度 : %d 位元\n", color_depth);
+  byte* ImageData2 = MallocPlaneByte(ImgWidth * (color_depth / 8), ImgHeight, &ImgStride);
+  printf("ImgStride = %d\n", ImgStride);
+  LoadBmpAsData(filename_read2, ImgStride, ImgSize, ImageData2, color_depth);
+
+  byte* ImageData3 = MallocPlaneByte(ImgWidth * (color_depth / 8), ImgHeight, &ImgStride);
+  for (int i = 0; i < ImgWidth * (color_depth / 8) * ImgHeight; i++)
+  {
+      ImageData3[i] = 0;
+  }
+
+  int N = 640 * 480 * (32 / 8);
+
+  /*
+  byte* ImageData1;
+  byte* ImageData2;
+
+  // Allocate Unified Memory - accessible from CPU or GPU
+  cudaMallocManaged(&ImageData1, N * sizeof(byte));
+  cudaMallocManaged(&ImageData2, N * sizeof(byte));
+
+  // initialize ImageData1 and ImageData2 arrays on the host
+  for (int i = 0; i < N; i++)
+  {
+      ImageData1[i] = 3.0f;
+      ImageData2[i] = 7.0f;
+  }
+  */
+
+  for (int i = 0; i < 10; i++)
+  {
+      printf("ImageData1[%d] = %d\t", i, ImageData1[i]);
+      printf("ImageData2[%d] = %d\t", i, ImageData2[i]);
+      printf("ImageData3[%d] = %d\n", i, ImageData3[i]);
+  }
+
+  printf("\n");
+
+  // Launch kernel on 1M elements on the GPU
+  int blockSize = 256;
+  int numBlocks = (N + blockSize - 1) / blockSize;
+
+  //addKernel << <numBlocks, blockSize >> > (N, ImageData1, ImageData2);
+  //addKernel << <1, size >> > (dev_c, dev_a, dev_b);
+  //__global__ void addKernel(byte * c, const byte * a, const byte * b)
+  
+  int size = 480;
+  addKernel << <1, size >> > (ImageData3, ImageData1, ImageData2);
+
+  // Wait for GPU to finish before accessing on host
+  cudaDeviceSynchronize();
+
+
+  for (int i = 0; i < 10; i++)
+  {
+      printf("ImageData1[%d] = %d\t", i, ImageData1[i]);
+      printf("ImageData2[%d] = %d\t", i, ImageData2[i]);
+      printf("ImageData3[%d] = %d\n", i, ImageData3[i]);
+  }
+
+  //製作一個特定位元深度之bmp檔案 ST
+  char filename_write1[] = "ims.new1.bmp";
+  char filename_write2[] = "ims.new2.bmp";
+  char filename_write3[] = "ims.new3.bmp";
+  printf("製作一個bmp檔案 : %s\n", filename_write1);
+  printf("製作一個bmp檔案 : %s\n", filename_write2);
+  printf("製作一個bmp檔案 : %s\n", filename_write3);
+  //ImgStride = 320;
+
+  //ImgWidth = 16;
+  //ImgHeight = 16;
+  ImgSize.width = ImgWidth;
+  ImgSize.height = ImgHeight;
+
+  color_depth = 32;
+  DumpBmpData(filename_write1, ImageData1, ImgStride, ImgSize, color_depth);
+  DumpBmpData(filename_write2, ImageData2, ImgStride, ImgSize, color_depth);
+  DumpBmpData(filename_write3, ImageData3, ImgStride, ImgSize, color_depth);
+
+  //製作一個特定位元深度之bmp檔案 SP
+
+
+
+
+
+  /*
+  // Free memory
+  cudaFree(ImageData1);
+  cudaFree(ImageData2);
+  */
+
+  FreePlane(ImageData1);
+  FreePlane(ImageData2);
+  FreePlane(ImageData3);
 
   // finalize
   printf("Test passed\n");

@@ -6,8 +6,13 @@ void add(int n, float *x, float *y)
 {
   int index = threadIdx.x;
   int stride = blockDim.x;
+
+  printf("index = %d\tn=%d\tstride = %d\n", index, n, stride);
+  
   for (int i = index; i < n; i += stride)
+  {
       y[i] = x[i] + y[i];
+  }
 }
 
 int main(void)
@@ -23,7 +28,8 @@ int main(void)
   cudaMallocManaged(&y, N*sizeof(float));
 
   // initialize x and y arrays on the host
-  for (int i = 0; i < N; i++) {
+  for (int i = 0; i < N; i++)
+  {
     x[i] = 3.0f;
     y[i] = 7.0f;
   }
@@ -39,6 +45,15 @@ int main(void)
   for (int i = 0; i < N; i++)
     maxError = fmax(maxError, fabs(y[i]-3.0f));
   //std::cout << "Max error: " << maxError << std::endl;
+  
+  
+  for (int i = 0; i < 10; i++)
+  {
+    printf("x[%d] = %f\t", i, x[i]);
+    printf("y[%d] = %f\n", i, y[i]);
+  }
+  
+  
 
   // Free memory
   cudaFree(x);

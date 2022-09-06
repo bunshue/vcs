@@ -76,7 +76,8 @@ float round_f(float num) {
 *
 * \return Pointer to the created plane
 */
-byte *MallocPlaneByte(int width, int height, int *pStepBytes) {
+byte *MallocPlaneByte(int width, int height, int *pStepBytes)
+{
   byte *ptr;
   *pStepBytes = ((int)ceil(width / 16.0f)) * 16;
   //#ifdef __ALLOW_ALIGNED_MEMORY_MANAGEMENT
@@ -304,21 +305,18 @@ int PreLoadBmp2(char* FileName, int* Width, int* Height)
         printf("xxxx 2\n");
         return 2;  // invalid file format
     }
-
+    /*
     printf("_bm_signature = 0x%04x\n", FileHeader._bm_signature);
     printf("_bm_file_size = 0x%08x = %d\n", FileHeader._bm_file_size, FileHeader._bm_file_size);
     printf("_bm_reserved = 0x%04x\n", FileHeader._bm_reserved);
     printf("_bm_bitmap_data = 0x%04x\n", FileHeader._bm_bitmap_data);
-
+    */
 
     fread(&InfoHeader, sizeof(BMPInfoHeader), 1, fh);
 
+    /*
     printf("圖片位元深度 : %d 位元\n", InfoHeader._bm_color_depth);
-
-
-
     printf("InfoHeader._bm_color_depth = %d\n", InfoHeader._bm_color_depth);
-
     printf("InfoHeader._bm_info_header_size = %x\n", InfoHeader._bm_info_header_size);
     printf("InfoHeader._bm_image_width = %x\n", InfoHeader._bm_image_width);
     printf("InfoHeader._bm_image_height = %x\n", InfoHeader._bm_image_height);
@@ -328,28 +326,9 @@ int PreLoadBmp2(char* FileName, int* Width, int* Height)
     printf("InfoHeader._bm_bitmap_size = %x\n", InfoHeader._bm_bitmap_size);
     printf("InfoHeader._bm_hor_resolution = %x\n", InfoHeader._bm_hor_resolution);
     printf("InfoHeader._bm_ver_resolution = %x\n", InfoHeader._bm_ver_resolution);
-
-
     printf("InfoHeader._bm_num_colors_used = %x\n", InfoHeader._bm_num_colors_used);
     printf("InfoHeader._bm_num_important_colors = %x\n", InfoHeader._bm_num_important_colors);
-
-
-    uint32 _bm_info_header_size;      //!< Info header size, must be 40
-    uint32 _bm_image_width;           //!< Image width
-    uint32 _bm_image_height;          //!< Image height
-    uint16 _bm_num_of_planes;         //!< Amount of image planes, must be 1
-    uint16 _bm_color_depth;           //!< Color depth
-    uint32 _bm_compressed;            //!< Image compression, must be none
-    uint32 _bm_bitmap_size;           //!< Size of bitmap data
-    uint32 _bm_hor_resolution;        //!< Horizontal resolution, assumed to be 0
-    uint32 _bm_ver_resolution;        //!< Vertical resolution, assumed to be 0
-    uint32 _bm_num_colors_used;       //!< Number of colors used, assumed to be 0
-    uint32 _bm_num_important_colors;  //!< Number of important colors, assumed to
-
-
-
-
-
+    */
 
     if (InfoHeader._bm_compressed)
     {
@@ -394,7 +373,6 @@ int GetBmpColorDepth(char* FileName)
 
     return InfoHeader._bm_color_depth;
 }
-
 
 /**
 **************************************************************************
@@ -449,10 +427,11 @@ void LoadBmpAsData(char* FileName, int Stride, ROI ImSize, byte* Img, int color_
 
     FILE* fh;
 
+    /*
     printf("LoadBmpAsGray, filename : %s, stride = %d, W = %d, H = %d\n", FileName, Stride, ImSize.width, ImSize.height);
-
     printf("sizeof(FileHeader) = %d\n", sizeof(FileHeader));  // 14
     printf("sizeof(InfoHeader) = %d\n", sizeof(InfoHeader));  // 40
+    */
 
     fh = fopen(FileName, "rb");
 
@@ -474,6 +453,7 @@ void LoadBmpAsData(char* FileName, int Stride, ROI ImSize, byte* Img, int color_
                 fread(&a, 1, 1, fh);
             }
 
+            /*
             if (j == 0)
             {
                 if (color_depth == 32)
@@ -485,6 +465,7 @@ void LoadBmpAsData(char* FileName, int Stride, ROI ImSize, byte* Img, int color_
                     }
                 }
             }
+            */
 
             /*
             //int val = (313524 * r + 615514 * g + 119537 * b + 524288) >> 20;
@@ -512,12 +493,8 @@ void LoadBmpAsData(char* FileName, int Stride, ROI ImSize, byte* Img, int color_
                 Img[(i + j * ImSize.width) * 3 + 1] = (byte)g;
                 Img[(i + j * ImSize.width) * 3 + 2] = (byte)r;
             }
-
-
-
         }
     }
-
     fclose(fh);
     return;
 }

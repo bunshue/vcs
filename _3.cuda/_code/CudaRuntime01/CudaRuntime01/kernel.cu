@@ -25,28 +25,33 @@ int main()
     int c[N] = { 0 };
 
     // initialize x and y arrays on the host
-    for (int i = 0; i < N; i++) {
+    for (int i = 0; i < N; i++)
+    {
         a[i] = i;
         b[i] = i * i;
     }
 
     // Add vectors in parallel.
     cudaError_t cudaStatus = addWithCuda(c, a, b, N);
-    if (cudaStatus != cudaSuccess) {
+    if (cudaStatus != cudaSuccess)
+    {
         fprintf(stderr, "addWithCuda failed!");
         return 1;
     }
 
     printf("done\n");
 
-    /*
-    printf("{%d,%d,%d,%d,%d} + {%d,%d,%d,%d,%d} = {%d,%d,%d,%d,%d}\n",
-        a[0], a[1], a[2], a[3], a[4], b[0], b[1], b[2], b[3], b[4], c[0], c[1], c[2], c[3], c[4]);
-    */
+    printf(" a\t+\tb\t=\tc\n");
+    for (int i = 0; i < 10; i++)
+    {
+        printf("a[%d] = %d\tb[%d] = %d\tc[%d] = %d\n", i, a[i], i, b[i], i, c[i]);
+    }
+
     // cudaDeviceReset must be called before exiting in order for profiling and
     // tracing tools such as Nsight and Visual Profiler to show complete traces.
     cudaStatus = cudaDeviceReset();
-    if (cudaStatus != cudaSuccess) {
+    if (cudaStatus != cudaSuccess)
+    {
         fprintf(stderr, "cudaDeviceReset failed!");
         return 1;
     }

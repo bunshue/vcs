@@ -2931,7 +2931,7 @@ namespace vcs_Draw_Example1
         void open_test_file()
         {
             //開檔
-            string filename = @"C:\______test_files\test_pic.bmp";
+            string filename = @"C:\______test_files\ims03.bmp";
             Image image1 = new Bitmap(filename, true);
             pictureBox1.Image = image1;
             pictureBox1.BorderStyle = BorderStyle.Fixed3D;
@@ -2943,7 +2943,7 @@ namespace vcs_Draw_Example1
         void find_brightness()
         {
             //找過亮
-            string filename = @"C:\______test_files\test_pic.bmp";
+            string filename = @"C:\______test_files\ims03.bmp";
             bitmap1 = new Bitmap(filename);
             Graphics g = Graphics.FromImage(bitmap1);
             pictureBox1.Image = bitmap1;
@@ -3015,7 +3015,7 @@ namespace vcs_Draw_Example1
 
             //統計
 
-            string filename = @"C:\______test_files\test_pic.bmp";
+            string filename = @"C:\______test_files\ims03.bmp";
             bitmap1 = new Bitmap(filename);
             Graphics g = Graphics.FromImage(bitmap1);
             pictureBox1.Image = bitmap1;
