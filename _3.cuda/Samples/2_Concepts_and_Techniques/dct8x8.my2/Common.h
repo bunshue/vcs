@@ -25,65 +25,64 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-// System includes
+/**
+**************************************************************************
+* \file Common.h
+* \brief Common includes header.
+*
+* This file contains includes of all libraries used by the project.
+*/
+
+#pragma once
+
 #include <stdio.h>
-#include <assert.h>
+#include <stdlib.h>
+#include <math.h>
 
-// CUDA runtime
 #include <cuda_runtime.h>
+#include <helper_cuda.h>  // helper functions for CUDA timing and initialization
+#include <helper_functions.h>  // helper functions for timing, string parsing
 
-// helper functions and utilities to work with CUDA
-#include <helper_functions.h>
-#include <helper_cuda.h>
+/**
+*  The dimension of pixels block
+*/
+#define BLOCK_SIZE 8
 
-#ifndef MAX
-#define MAX(a, b) (a > b ? a : b)
+/**
+*  Square of dimension of pixels block
+*/
+#define BLOCK_SIZE2 64
+
+/**
+*  log_2{BLOCK_SIZE), used for quick multiplication or division by the
+*  pixels block dimension via shifting
+*/
+#define BLOCK_SIZE_LOG2 3
+
+/**
+*  log_2{BLOCK_SIZE*BLOCK_SIZE), used for quick multiplication or division by
+* the
+*  square of pixels block via shifting
+*/
+#define BLOCK_SIZE2_LOG2 6
+
+/**
+*  This macro states that __mul24 operation is performed faster that traditional
+*  multiplication for two integers on CUDA. Please undefine if it appears to be
+*  wrong on your system
+*/
+#define __MUL24_FASTER_THAN_ASTERIX
+
+/**
+*  Wrapper to the fastest integer multiplication function on CUDA
+*/
+#ifdef __MUL24_FASTER_THAN_ASTERIX
+#define FMUL(x, y) (__mul24(x, y))
+#else
+#define FMUL(x, y) ((x) * (y))
 #endif
 
-__global__ void testKernel(int val)
-{
-    printf("blockIdx.x = %d\n", blockIdx.x);
-    printf("blockIdx.y = %d\n", blockIdx.y);
-    printf("gridDim.x = %d\n", gridDim.x);
-    printf("gridDim.y = %d\n", gridDim.y);
-    printf("blockDim.x = %d\n", blockDim.x);
-    printf("blockDim.y = %d\n", blockDim.y);
-    printf("threadIdx.x = %d\n", threadIdx.x);
-    printf("threadIdx.y = %d\n", threadIdx.y);
-    printf("threadIdx.z = %d\n", threadIdx.z);
-
-    printf("testKernel [%d, %d]:\tValue is : %d\n",
-        blockIdx.y * gridDim.x + blockIdx.x, threadIdx.z * blockDim.x * blockDim.y + threadIdx.y * blockDim.x + threadIdx.x, val);
-}
-
-int main(int argc, char **argv)
-{
-  int devID;
-  cudaDeviceProp props;
-
-  // This will pick the best possible CUDA capable device
-  devID = findCudaDevice(argc, (const char **)argv);
-  printf("devID = %d\n", devID);
-
-  // Get GPU information
-  checkCudaErrors(cudaGetDevice(&devID));
-  checkCudaErrors(cudaGetDeviceProperties(&props, devID));
-  printf("Device %d: \"%s\" with Compute %d.%d capability\n", devID, props.name, props.major, props.minor);
-
-  printf("printf() is called. Output:\n\n");
-
-  // Kernel configuration, where a two-dimensional grid and three-dimensional blocks are configured.
-
-  dim3 dimGrid(2, 2);
-  dim3 dimBlock(2, 2, 2);
-
-  testKernel<<<dimGrid, dimBlock>>>(10);
-
-
-
-  cudaDeviceSynchronize();
-
-  return EXIT_SUCCESS;
-}
-
-
+/**
+*  This macro allows using aligned memory management
+*/
+//#define __ALLOW_ALIGNED_MEMORY_MANAGEMENT
