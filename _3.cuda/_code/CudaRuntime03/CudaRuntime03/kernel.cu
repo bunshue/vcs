@@ -24,6 +24,8 @@ _Check_return_ _ACRTIMP int __cdecl rand(void);
 _ACRTIMP errno_t __cdecl rand_s(_Out_ unsigned int* _RandomValue);
 #endif
 
+void RandomInit(float* data, int n);
+
 int main()
 {
     int a[N], b[N], c[N];
@@ -71,14 +73,14 @@ int main()
 
     srand(200);
 
-    byte data[1000];
+    byte data[100];
 
-    for (int i = 0; i < 1000; i++)
+    for (int i = 0; i < 100; i++)
     {
         data[i] = rand() % 256;
     }
 
-    for (int i = 0; i < 1000; i++)
+    for (int i = 0; i < 100; i++)
     {
         printf("%d ", data[i]);
         if ((i % 32) == 31)
@@ -87,7 +89,34 @@ int main()
     printf("\n");
 
 
+    //int num = 256;
+    //size_t size = num * sizeof(float);
+
+    //float* h_A;
+
+    // Allocate input vectors h_A and h_B in host memory
+    //h_A = (float*)malloc(size);
+
+    // Initialize input vectors
+    //RandomInit(h_A, N);
+
+
+
+
+
 
 
     return 0;
 }
+
+
+// Allocates an array with random float entries.
+void RandomInit(float* data, int n)
+{
+    for (int i = 0; i < n; ++i)
+    {
+        data[i] = rand() / (float)RAND_MAX;
+    }
+}
+
+

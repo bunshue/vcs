@@ -1,35 +1,3 @@
-/* Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *  * Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  * Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *  * Neither the name of NVIDIA CORPORATION nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
-// USE_TEXSUBIMAGE2D uses glTexSubImage2D() to update the final result
-// commenting it will make the sample use the other way :
-// map a texture in CUDA and blit the result into it
-#define USE_TEXSUBIMAGE2D
-
 #if defined(WIN32) || defined(_WIN32) || defined(WIN64) || defined(_WIN64)
 #define WINDOWS_LEAN_AND_MEAN
 #define NOMINMAX
@@ -39,15 +7,7 @@
 
 // OpenGL Graphics includes
 #include <helper_gl.h>
-#if defined(__APPLE__) || defined(MACOSX)
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#include <GLUT/glut.h>
-// Sorry for Apple : unsigned int sampler is not available to you, yet...
-// Let's switch to the use of PBO and glTexSubImage
-#define USE_TEXSUBIMAGE2D
-#else
 #include <GL/freeglut.h>
-#endif
 
 // CUDA includes
 #include <cuda_runtime.h>
@@ -78,14 +38,8 @@ unsigned int image_height = 512+200;
 int iGLUTWindowHandle = 0;  // handle to the GLUT window
 
 // pbo and fbo variables
-#ifdef USE_TEXSUBIMAGE2D
 GLuint pbo_dest;
 struct cudaGraphicsResource *cuda_pbo_dest_resource;
-#else
-unsigned int *cuda_dest_resource;
-GLuint shDrawTex;  // draws a texture
-struct cudaGraphicsResource *cuda_tex_result_resource;
-#endif
 
 GLuint fbo_source;
 struct cudaGraphicsResource *cuda_tex_screen_resource;
@@ -108,18 +62,8 @@ static int fpsCount = 0;
 static int fpsLimit = 1;
 StopWatchInterface *timer = NULL;
 
-#ifndef USE_TEXTURE_RGBA8UI
 #pragma message("Note: Using Texture fmt GL_RGBA16F_ARB")
-#else
-// NOTE: the current issue with regular RGBA8 internal format of textures
-// is that HW stores them as BGRA8. Therefore CUDA will see BGRA where users
-// expected RGBA8. To prevent this issue, the driver team decided to prevent
-// this to happen
-// instead, use RGBA8UI which required the additional work of scaling the
-// fragment shader
-// output from 0-1 to 0-255. This is why we have some GLSL code, in this case
-#pragma message("Note: Using Texture RGBA8UI + GLSL for rendering")
-#endif
+
 GLuint shDraw;
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -132,10 +76,8 @@ void Cleanup(int iExitCode);
 // GL functionality
 bool initGL(int *argc, char **argv);
 
-#ifdef USE_TEXSUBIMAGE2D
 void createPBO(GLuint *pbo, struct cudaGraphicsResource **pbo_resource);
 void deletePBO(GLuint *pbo);
-#endif
 
 void createTextureDst(GLuint *tex_cudaResult, unsigned int size_x, unsigned int size_y);
 void deleteTexture(GLuint *tex);
@@ -148,7 +90,6 @@ void reshape(int w, int h);
 void mainMenu(int i);
 void initGLBuffers();
 
-#ifdef USE_TEXSUBIMAGE2D
 ////////////////////////////////////////////////////////////////////////////////
 //! Create PBO
 ////////////////////////////////////////////////////////////////////////////////
@@ -180,49 +121,18 @@ void deletePBO(GLuint* pbo)
     SDK_CHECK_ERROR_GL();
     *pbo = 0;
 }
-#endif
 
 const GLenum fbo_targets[] = {
     GL_COLOR_ATTACHMENT0_EXT, GL_COLOR_ATTACHMENT1_EXT,
     GL_COLOR_ATTACHMENT2_EXT, GL_COLOR_ATTACHMENT3_EXT};
 
-#ifndef USE_TEXSUBIMAGE2D
-static const char *glsl_drawtex_vertshader_src =
-    "void main(void)\n"
-    "{\n"
-    "	gl_Position = gl_Vertex;\n"
-    "	gl_TexCoord[0].xy = gl_MultiTexCoord0.xy;\n"
-    "}\n";
-
-static const char *glsl_drawtex_fragshader_src =
-    "#version 130\n"
-    "uniform usampler2D texImage;\n"
-    "void main()\n"
-    "{\n"
-    "   vec4 c = texture(texImage, gl_TexCoord[0].xy);\n"
-    "	gl_FragColor = c / 255.0;\n"
-    "}\n";
-#endif
-
 static const char *glsl_draw_fragshader_src =
-// WARNING: seems like the gl_FragColor doesn't want to output >1 colors...
-// you need version 1.3 so you can define a uvec4 output...
-// but MacOSX complains about not supporting 1.3 !!
-// for now, the mode where we use RGBA8UI may not work properly for Apple : only
-// RGBA16F works (default)
-#if defined(__APPLE__) || defined(MACOSX)
-    "void main()\n"
-    "{"
-    "  gl_FragColor = vec4(gl_Color * 255.0);\n"
-    "}\n";
-#else
     "#version 130\n"
     "out uvec4 FragColor;\n"
     "void main()\n"
     "{"
     "  FragColor = uvec4(gl_Color.xyz * 255.0, 255.0);\n"
     "}\n";
-#endif
 
 // copy image and process using CUDA
 void generateCUDAImage()
@@ -240,12 +150,10 @@ void generateCUDAImage()
     // calculate grid size
     dim3 block(16, 16, 1);
 
-
     dim3 grid(image_width / block.x, image_height / block.y, 1);
 
     //printf("image_width = %d\timage_height = %d\n", image_width, image_height); //512 X 512
     //printf("block.x = %d\tblock.y = %d\n", block.x, block.y);   //16, 16
-
 
     // execute CUDA kernel
     launch_cudaProcess(grid, block, 0, out_data, image_width);
@@ -268,50 +176,39 @@ void generateCUDAImage()
 // display image to the screen as textured quad
 void displayImage(GLuint texture)
 {
-  glBindTexture(GL_TEXTURE_2D, texture);
-  glEnable(GL_TEXTURE_2D);
-  glDisable(GL_DEPTH_TEST);
-  glDisable(GL_LIGHTING);
-  glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glEnable(GL_TEXTURE_2D);
+    glDisable(GL_DEPTH_TEST);
+    glDisable(GL_LIGHTING);
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
 
-  glMatrixMode(GL_PROJECTION);
-  glPushMatrix();
-  glLoadIdentity();
-  glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+    glMatrixMode(GL_PROJECTION);
+    glPushMatrix();
+    glLoadIdentity();
+    glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
 
-  glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity();
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
 
-  glViewport(0, 0, window_width, window_height);
+    glViewport(0, 0, window_width, window_height);
 
-// if the texture is a 8 bits UI, scale the fetch with a GLSL shader
-#ifndef USE_TEXSUBIMAGE2D
-  glUseProgram(shDrawTex);
-  GLint id = glGetUniformLocation(shDrawTex, "texImage");
-  glUniform1i(id, 0);  // texture unit 0 to "texImage"
-  SDK_CHECK_ERROR_GL();
-#endif
+    glBegin(GL_QUADS);
+    glTexCoord2f(0.0, 0.0);
+    glVertex3f(-1.0, -1.0, 0.5);
+    glTexCoord2f(1.0, 0.0);
+    glVertex3f(1.0, -1.0, 0.5);
+    glTexCoord2f(1.0, 1.0);
+    glVertex3f(1.0, 1.0, 0.5);
+    glTexCoord2f(0.0, 1.0);
+    glVertex3f(-1.0, 1.0, 0.5);
+    glEnd();
 
-  glBegin(GL_QUADS);
-  glTexCoord2f(0.0, 0.0);
-  glVertex3f(-1.0, -1.0, 0.5);
-  glTexCoord2f(1.0, 0.0);
-  glVertex3f(1.0, -1.0, 0.5);
-  glTexCoord2f(1.0, 1.0);
-  glVertex3f(1.0, 1.0, 0.5);
-  glTexCoord2f(0.0, 1.0);
-  glVertex3f(-1.0, 1.0, 0.5);
-  glEnd();
+    glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
 
-  glMatrixMode(GL_PROJECTION);
-  glPopMatrix();
+    glDisable(GL_TEXTURE_2D);
 
-  glDisable(GL_TEXTURE_2D);
-
-#ifndef USE_TEXSUBIMAGE2D
-  glUseProgram(0);
-#endif
-  SDK_CHECK_ERROR_GL();
+    SDK_CHECK_ERROR_GL();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -361,32 +258,25 @@ void timerEvent(int value)
 ////////////////////////////////////////////////////////////////////////////////
 //! Keyboard events handler
 ////////////////////////////////////////////////////////////////////////////////
-void keyboard(unsigned char key, int /*x*/, int /*y*/) {
-  switch (key) {
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
+{
+    switch (key)
+    {
     case (27):
-      Cleanup(EXIT_SUCCESS);
-      break;
+        Cleanup(EXIT_SUCCESS);
+        break;
 
     case ' ':
-      enable_cuda ^= 1;
-#ifdef USE_TEXTURE_RGBA8UI
-
-      if (enable_cuda) {
-        glClearColorIuiEXT(128, 128, 128, 255);
-      } else {
-        glClearColor(0.5, 0.5, 0.5, 1.0);
-      }
-
-#endif
-      break;
-  }
+        enable_cuda ^= 1;
+        break;
+    }
 }
 
 void reshape(int w, int h)
 {
     window_width = w;
     window_height = h;
-    printf("w = %d, h = %d ", w, h);
+    //printf("w = %d, h = %d ", w, h);
 }
 
 void mainMenu(int i) { keyboard((unsigned char)i, 0, 0); }
@@ -458,9 +348,6 @@ int main(int argc, char** argv)
     glutAttachMenu(GLUT_RIGHT_BUTTON);
 
     initGLBuffers();
-#ifndef USE_TEXSUBIMAGE2D
-    initCUDABuffers();
-#endif
 
     printf(
         "\n"
@@ -587,24 +474,6 @@ GLuint compileGLSLprogram(const char* vertex_shader_src, const char* fragment_sh
     return p;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//! Allocate the "render target" of CUDA
-////////////////////////////////////////////////////////////////////////////////
-#ifndef USE_TEXSUBIMAGE2D
-void initCUDABuffers() {
-  // set up vertex data parameter
-  num_texels = image_width * image_height;
-  num_values = num_texels * 4;
-  size_tex_data = sizeof(GLubyte) * num_values;
-  checkCudaErrors(cudaMalloc((void **)&cuda_dest_resource, size_tex_data));
-  // checkCudaErrors(cudaHostAlloc((void**)&cuda_dest_resource, size_tex_data,
-  // ));
-}
-#endif
-
-////////////////////////////////////////////////////////////////////////////////
-//!
-////////////////////////////////////////////////////////////////////////////////
 void initGLBuffers()
 {
     // create pbo
@@ -638,11 +507,8 @@ bool initGL(int* argc, char** argv)
     }
 
     // default initialization
-#ifndef USE_TEXTURE_RGBA8UI
     glClearColor(0.5, 0.5, 0.5, 1.0);
-#else
-    glClearColorIuiEXT(128, 128, 128, 255);
-#endif
+
     glDisable(GL_DEPTH_TEST);
 
     // viewport
