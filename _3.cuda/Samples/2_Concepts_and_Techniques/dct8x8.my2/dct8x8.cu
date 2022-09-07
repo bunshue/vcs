@@ -39,6 +39,7 @@
 * 3. Output execution timings and calculate CUDA speedup.
 */
 
+#include <stdio.h>
 #include "Common.h"
 #include "DCT8x8_Gold.h"
 #include "BmpUtil.h"
@@ -88,6 +89,13 @@ __global__ void addKernel(byte* c, const byte* a, const byte* b)
     printf("Z");
 }
 
+__global__ void vecAdd(byte* a, byte* b, byte* c)
+{
+    int i = threadIdx.x;
+    //c[i] = (a[i] + b[i])%256;
+    //c[i] = 0;
+    c[i] = (a[i] + b[i]) % 256;
+}
 
 /**
 **************************************************************************
@@ -110,6 +118,7 @@ int main(int argc, char **argv)
   // preload image (acquire dimensions)
   int ImgWidth;
   int ImgHeight;
+  int ColorDepth;
   ROI ImgSize;
 
   printf("PreLoadBmp, file : %s\n", filename1);
@@ -171,13 +180,11 @@ int main(int argc, char **argv)
   FreePlane(ImgSrc);
   FreePlane(ImgDst);
 
-
-
   //讀取一個bmp檔案 ST, 判斷位元深度
   char filename_read[] = "C:\\______test_files\\pic_256X100b.bmp";
   printf("讀取檔案 : %s\n", filename_read);
 
-  res = PreLoadBmp2(filename_read, &ImgWidth, &ImgHeight);
+  res = PreLoadBmp2(filename_read, &ImgWidth, &ImgHeight, &ColorDepth);
   if (res)
   {
       printf("\nError: Image file not found or invalid!\n");
@@ -189,16 +196,13 @@ int main(int argc, char **argv)
   ImgSize.height = ImgHeight;
 
   printf("W = %d, H = %d, BLOCK_SIZE = %d\n", ImgSize.width, ImgSize.height, BLOCK_SIZE);
+  printf("圖片位元深度 : %d 位元\n", ColorDepth);
 
-  int color_depth = GetBmpColorDepth(filename_read);
-  printf("圖片位元深度 : %d 位元\n", color_depth);
-
-
-  byte* ImageData = MallocPlaneByte(ImgWidth*(color_depth/8), ImgHeight, &ImgStride);
+  byte* ImageData = MallocPlaneByte(ImgWidth * (ColorDepth / 8), ImgHeight, &ImgStride);
 
   printf("ImgStride = %d\n", ImgStride);
 
-  LoadBmpAsData(filename_read, ImgStride, ImgSize, ImageData, color_depth);
+  LoadBmpAsData(filename_read, ImgStride, ImgSize, ImageData, ColorDepth);
 
   /*
   for (int i = 0; i < 100; i++)
@@ -222,21 +226,19 @@ int main(int argc, char **argv)
   ImgSize.width = ImgWidth;
   ImgSize.height = ImgHeight;
 
-  color_depth = 32;
-  DumpBmpData(filename_write, ImageData, ImgStride, ImgSize, color_depth);
+  ColorDepth = 32;
+  DumpBmpData(filename_write, ImageData, ImgStride, ImgSize, ColorDepth);
 
   //製作一個特定位元深度之bmp檔案 SP
 
 
   FreePlane(ImageData);
 
-
-
   char filename_read1[] = "C:\\______test_files\\ims01.bmp";
   char filename_read2[] = "C:\\______test_files\\ims03.bmp";
 
   printf("讀取檔案 : %s\n", filename_read1);
-  res = PreLoadBmp2(filename_read1, &ImgWidth, &ImgHeight);
+  res = PreLoadBmp2(filename_read1, &ImgWidth, &ImgHeight, &ColorDepth);
   if (res)
   {
       printf("\nError: Image file not found or invalid!\n");
@@ -246,14 +248,13 @@ int main(int argc, char **argv)
   ImgSize.width = ImgWidth;
   ImgSize.height = ImgHeight;
   printf("W = %d, H = %d, BLOCK_SIZE = %d\n", ImgSize.width, ImgSize.height, BLOCK_SIZE);
-  color_depth = GetBmpColorDepth(filename_read1);
-  printf("圖片位元深度 : %d 位元\n", color_depth);
-  byte* ImageData1 = MallocPlaneByte(ImgWidth * (color_depth / 8), ImgHeight, &ImgStride);
+  printf("圖片位元深度 : %d 位元\n", ColorDepth);
+  byte* ImageData1 = MallocPlaneByte(ImgWidth * (ColorDepth / 8), ImgHeight, &ImgStride);
   printf("ImgStride = %d\n", ImgStride);
-  LoadBmpAsData(filename_read1, ImgStride, ImgSize, ImageData1, color_depth);
+  LoadBmpAsData(filename_read1, ImgStride, ImgSize, ImageData1, ColorDepth);
 
   printf("讀取檔案 : %s\n", filename_read2);
-  res = PreLoadBmp2(filename_read2, &ImgWidth, &ImgHeight);
+  res = PreLoadBmp2(filename_read2, &ImgWidth, &ImgHeight, &ColorDepth);
   if (res)
   {
       printf("\nError: Image file not found or invalid!\n");
@@ -263,19 +264,26 @@ int main(int argc, char **argv)
   ImgSize.width = ImgWidth;
   ImgSize.height = ImgHeight;
   printf("W = %d, H = %d, BLOCK_SIZE = %d\n", ImgSize.width, ImgSize.height, BLOCK_SIZE);
-  color_depth = GetBmpColorDepth(filename_read2);
-  printf("圖片位元深度 : %d 位元\n", color_depth);
-  byte* ImageData2 = MallocPlaneByte(ImgWidth * (color_depth / 8), ImgHeight, &ImgStride);
+  printf("圖片位元深度 : %d 位元\n", ColorDepth);
+  byte* ImageData2 = MallocPlaneByte(ImgWidth * (ColorDepth / 8), ImgHeight, &ImgStride);
   printf("ImgStride = %d\n", ImgStride);
-  LoadBmpAsData(filename_read2, ImgStride, ImgSize, ImageData2, color_depth);
+  LoadBmpAsData(filename_read2, ImgStride, ImgSize, ImageData2, ColorDepth);
 
-  byte* ImageData3 = MallocPlaneByte(ImgWidth * (color_depth / 8), ImgHeight, &ImgStride);
-  for (int i = 0; i < ImgWidth * (color_depth / 8) * ImgHeight; i++)
+
+  byte* ImageData3 = MallocPlaneByte(ImgWidth * (ColorDepth / 8), ImgHeight, &ImgStride);
+  for (int i = 0; i < ImgWidth * (ColorDepth / 8) * ImgHeight; i++)
   {
-      ImageData3[i] = 0;
+      ImageData3[i] = 0x11;
   }
 
-  int N = 640 * 480 * (32 / 8);
+  //int N = 640 * 480 * (32 / 8);
+
+
+  int N = 256;
+  vecAdd << <1, N >> > (ImageData1, ImageData2, ImageData3);
+  //         1 block, N threads
+
+
 
   /*
   byte* ImageData1;
@@ -299,7 +307,6 @@ int main(int argc, char **argv)
       printf("ImageData2[%d] = %d\t", i, ImageData2[i]);
       printf("ImageData3[%d] = %d\n", i, ImageData3[i]);
   }
-
   printf("\n");
 
   // Launch kernel on 1M elements on the GPU
@@ -316,7 +323,7 @@ int main(int argc, char **argv)
   // Wait for GPU to finish before accessing on host
   cudaDeviceSynchronize();
 
-
+  printf("\n");
   for (int i = 0; i < 10; i++)
   {
       printf("ImageData1[%d] = %d\t", i, ImageData1[i]);
@@ -338,16 +345,12 @@ int main(int argc, char **argv)
   ImgSize.width = ImgWidth;
   ImgSize.height = ImgHeight;
 
-  color_depth = 32;
-  DumpBmpData(filename_write1, ImageData1, ImgStride, ImgSize, color_depth);
-  DumpBmpData(filename_write2, ImageData2, ImgStride, ImgSize, color_depth);
-  DumpBmpData(filename_write3, ImageData3, ImgStride, ImgSize, color_depth);
+  ColorDepth = 32;
+  DumpBmpData(filename_write1, ImageData1, ImgStride, ImgSize, ColorDepth);
+  DumpBmpData(filename_write2, ImageData2, ImgStride, ImgSize, ColorDepth);
+  DumpBmpData(filename_write3, ImageData3, ImgStride, ImgSize, ColorDepth);
 
   //製作一個特定位元深度之bmp檔案 SP
-
-
-
-
 
   /*
   // Free memory
@@ -355,9 +358,78 @@ int main(int argc, char **argv)
   cudaFree(ImageData2);
   */
 
+  printf("ImgWidth = %d\tImgHeight=%d\n", ImgWidth, ImgHeight);
+  printf("ColorDepth = %d\n", ColorDepth);
+  printf("ImgStride = %d\n", ImgStride);
+  printf("DataSize = %d\n", ImgWidth * (ColorDepth / 8) * ImgHeight);
+
+  int DataSize = ImgWidth * (ColorDepth / 8) * ImgHeight;
+
+  /*
+  byte* data1 = MallocPlaneByte(ImgWidth, ImgHeight, &ImgStride);
+  byte* data2 = MallocPlaneByte(ImgWidth, ImgHeight, &ImgStride);
+  byte* data3 = MallocPlaneByte(ImgWidth, ImgHeight, &ImgStride);
+  */
+
+  byte* data1;
+  byte* data2;
+  byte* data3;
+
+  cudaMalloc((void**)&data1, DataSize);
+  cudaMalloc((void**)&data2, DataSize);
+  cudaMalloc((void**)&data3, DataSize);
+
+  cudaMemcpy(data1, ImageData1, DataSize, cudaMemcpyHostToDevice);
+  cudaMemcpy(data2, ImageData2, DataSize, cudaMemcpyHostToDevice);
+
+  /*
+  for (int i = 0; i < ImgWidth * ImgHeight; i++)
+  {
+      data1[i] = (i % 256);
+      data2[i] = (i % 256);
+      data3[i] = 0x17;
+  }
+
+  for (int i = 0; i < 10; i++)
+  {
+      printf("data1[%d] = %d\t", i, data1[i]);
+      printf("data2[%d] = %d\t", i, data2[i]);
+      printf("data3[%d] = %d\n", i, data3[i]);
+  }
+  */
+
+  for (int i = 0; i < 10; i++)
+  {
+      //fail
+      //printf("data1[%d] = %d\t", i, *(&data1[0] + i));
+      //printf("data2[%d] = %d\t", i, *(&data2[0] + i));
+      //printf("data3[%d] = %d\n", i, data3[i]);
+  }
+
+  N = 256;
+  vecAdd << <1, N >> > (data1, data2, data3);
+  //         1 block, N threads
+
+  cudaMemcpy(ImageData3, data3, DataSize, cudaMemcpyDeviceToHost);
+
+  for (int i = 0; i < 10; i++)
+  {
+      //fail
+      //printf("data1[%d] = %d\t", i, *(data1 + i));
+      //printf("data2[%d] = %d\t", i, *(data2 + i));
+      //printf("data3[%d] = %d\n", i, *(data3 + i));
+  }
+
   FreePlane(ImageData1);
   FreePlane(ImageData2);
   FreePlane(ImageData3);
+
+
+  cudaFree(data1);
+  cudaFree(data2);
+  cudaFree(data3);
+
+
 
   // finalize
   printf("Test passed\n");

@@ -85,6 +85,7 @@ byte *MallocPlaneByte(int width, int height, int *pStepBytes)
   //#else
   ptr = (byte *)malloc(*pStepBytes * height);
   //#endif
+  printf("MallocPlaneByte, width = %d, strides = %d\n", width, *pStepBytes);
   return ptr;
 }
 
@@ -284,7 +285,8 @@ int PreLoadBmp(char *FileName, int *Width, int *Height)
   return 0;
 }
 
-int PreLoadBmp2(char* FileName, int* Width, int* Height)
+//res = PreLoadBmp2(filename_read1, &ImgWidth, &ImgHeight, &ColorDepth);
+int PreLoadBmp2(char* FileName, int* Width, int* Height, int* Depth)
 {
     BMPFileHeader FileHeader;
     BMPInfoHeader InfoHeader;
@@ -338,6 +340,7 @@ int PreLoadBmp2(char* FileName, int* Width, int* Height)
 
     *Width = InfoHeader._bm_image_width;
     *Height = InfoHeader._bm_image_height;
+    *Depth = InfoHeader._bm_color_depth;
 
     fclose(fh);
     return 0;
@@ -385,6 +388,8 @@ int GetBmpColorDepth(char* FileName)
 *
 * \return None
 */
+
+//僅支持位元深度24位元
 void LoadBmpAsGray(char *FileName, int Stride, ROI ImSize, byte *Img)
 {
   BMPFileHeader FileHeader;
@@ -392,15 +397,19 @@ void LoadBmpAsGray(char *FileName, int Stride, ROI ImSize, byte *Img)
 
   FILE *fh;
 
+  /*
   printf("LoadBmpAsGray, filename : %s, stride = %d, W = %d, H = %d\n", FileName, Stride, ImSize.width, ImSize.height);
 
   printf("sizeof(FileHeader) = %d\n", sizeof(FileHeader));  // 14
   printf("sizeof(InfoHeader) = %d\n", sizeof(InfoHeader));  // 40
+  */
 
   fh = fopen(FileName, "rb");
 
   fread(&FileHeader, sizeof(BMPFileHeader), 1, fh);
   fread(&InfoHeader, sizeof(BMPInfoHeader), 1, fh);
+
+  //printf("W = %d, H = %d\n", ImSize.width, ImSize.height);
 
   for (int j = 0; j < ImSize.height; j++)
   {
@@ -438,7 +447,7 @@ void LoadBmpAsData(char* FileName, int Stride, ROI ImSize, byte* Img, int color_
     fread(&FileHeader, sizeof(BMPFileHeader), 1, fh);
     fread(&InfoHeader, sizeof(BMPInfoHeader), 1, fh);
 
-    printf("W = %d, H = %d\n", ImSize.width, ImSize.height);
+    //printf("W = %d, H = %d\n", ImSize.width, ImSize.height);
 
     for (int j = 0; j < ImSize.height; j++)
     {
@@ -644,20 +653,20 @@ void DumpBmpData(char* FileName, byte* Img, int Stride, ROI ImSize, int color_de
 *
 * \return None
 */
-void DumpBlockF(float *PlaneF, int StrideF, char *Fname)
+void DumpBlockF(float* PlaneF, int StrideF, char* Fname)
 {
-  FILE *fp = fopen(Fname, "wb");
+    FILE* fp = fopen(Fname, "wb");
 
-  for (int i = 0; i < 8; i++)
-  {
-    for (int j = 0; j < 8; j++)
+    for (int i = 0; i < 8; i++)
     {
-      fprintf(fp, "%.*f  ", 14, PlaneF[i * StrideF + j]);
+        for (int j = 0; j < 8; j++)
+        {
+            fprintf(fp, "%.*f  ", 14, PlaneF[i * StrideF + j]);
+        }
+        fprintf(fp, "\n");
     }
-    fprintf(fp, "\n");
-  }
 
-  fclose(fp);
+    fclose(fp);
 }
 
 /**
@@ -670,66 +679,20 @@ void DumpBlockF(float *PlaneF, int StrideF, char *Fname)
 *
 * \return None
 */
-void DumpBlock(byte *Plane, int Stride, char *Fname)
+void DumpBlock(byte* Plane, int Stride, char* Fname)
 {
-  FILE *fp = fopen(Fname, "wb");
+    FILE* fp = fopen(Fname, "wb");
 
-  for (int i = 0; i < 8; i++)
-  {
-    for (int j = 0; j < 8; j++)
+    for (int i = 0; i < 8; i++)
     {
-      fprintf(fp, "%.3d  ", Plane[i * Stride + j]);
+        for (int j = 0; j < 8; j++)
+        {
+            fprintf(fp, "%.3d  ", Plane[i * Stride + j]);
+        }
+
+        fprintf(fp, "\n");
     }
 
-    fprintf(fp, "\n");
-  }
-
-  fclose(fp);
-}
-
-/**
-**************************************************************************
-*  This function performs evaluation of Mean Square Error between two images
-*
-* \param Img1           [IN] - Image 1
-* \param Img2           [IN] - Image 2
-* \param Stride         [IN] - Image stride
-* \param Size           [IN] - Image size
-*
-* \return Mean Square Error between images
-*/
-float CalculateMSE(byte *Img1, byte *Img2, int Stride, ROI Size)
-{
-  uint32 Acc = 0;
-
-  for (int i = 0; i < Size.height; i++)
-  {
-    for (int j = 0; j < Size.width; j++)
-    {
-      int TmpDiff = Img1[i * Stride + j] - Img2[i * Stride + j];
-      TmpDiff *= TmpDiff;
-      Acc += TmpDiff;
-    }
-  }
-
-  return ((float)Acc) / (Size.height * Size.width);
-}
-
-/**
-**************************************************************************
-*  This function performs evaluation of Peak Signal to Noise Ratio between
-*  two images
-*
-* \param Img1           [IN] - Image 1
-* \param Img2           [IN] - Image 2
-* \param Stride         [IN] - Image stride
-* \param Size           [IN] - Image size
-*
-* \return Peak Signal to Noise Ratio between images
-*/
-float CalculatePSNR(byte *Img1, byte *Img2, int Stride, ROI Size)
-{
-  float MSE = CalculateMSE(Img1, Img2, Stride, Size);
-  return 10 * log10(255 * 255 / MSE);
+    fclose(fp);
 }
 

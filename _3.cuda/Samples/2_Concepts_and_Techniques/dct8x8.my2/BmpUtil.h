@@ -116,7 +116,7 @@ void FreePlane(void *ptr);
 void AddFloatPlane(float Value, float *ImgSrcDst, int StrideF, ROI Size);
 void MulFloatPlane(float Value, float *ImgSrcDst, int StrideF, ROI Size);
 int PreLoadBmp(char *FileName, int *Width, int *Height);
-int PreLoadBmp2(char* FileName, int* Width, int* Height);
+int PreLoadBmp2(char* FileName, int* Width, int* Height, int* Depth);
 int GetBmpColorDepth(char* FileName);
 void LoadBmpAsGray(char *FileName, int Stride, ROI ImSize, byte *Img);
 void LoadBmpAsData(char* FileName, int Stride, ROI ImSize, byte* Img, int color_depth);

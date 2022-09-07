@@ -4,33 +4,57 @@
 #define N 256
 #include <stdio.h>
 
-__global__ void vecAdd(int* a, int* b, int* c)
+typedef unsigned char byte;
+
+__global__ void vecAdd(byte* a, byte* b, byte* c)
 {
     int i = threadIdx.x;
-    c[i] = a[i] + b[i];
+    //c[i] = a[i] + b[i];
+    c[i] = (a[i] + b[i])%256;
 }
+
 int main()
 {
     int a[N], b[N], c[N];
-    int* dev_a, * dev_b, * dev_c;
-    // initialize a and b with real values (NOT SHOWN)
-    int size = N * sizeof(int);
-    cudaMalloc((void**)&dev_a, size);
-    cudaMalloc((void**)&dev_b, size);
-    cudaMalloc((void**)&dev_c, size);
 
-    cudaMemcpy(dev_a, a, size, cudaMemcpyHostToDevice);
-    cudaMemcpy(dev_b, b, size, cudaMemcpyHostToDevice);
+    int size = N * sizeof(byte);
 
-    vecAdd << <1, N >> > (dev_a, dev_b, dev_c);
+    byte* data1;
+    byte* data2;
+    byte* data3;
+
+    cudaMalloc((void**)&data1, size);
+    cudaMalloc((void**)&data2, size);
+    cudaMalloc((void**)&data3, size);
+
+    for (int i = 0; i < N; i++)
+    {
+        a[i] = (i % 256);
+        b[i] = (i % 256);
+        c[i] = 0x17;
+    }
+
+    for (int i = 0; i < 10; i++)
+    {
+        printf("a[%d] = %d\tb[%d] = %d\tc[%d] = %d\n", i, a[i], i, b[i], i, c[i]);
+    }
+
+    cudaMemcpy(data1, a, size, cudaMemcpyHostToDevice);
+    cudaMemcpy(data2, b, size, cudaMemcpyHostToDevice);
+
+    vecAdd << <1, N >> > (data1, data2, data3);
     //         1 block, N threads
 
+    cudaMemcpy(c, data3, size, cudaMemcpyDeviceToHost);
 
-    cudaMemcpy(c, dev_c, size, cudaMemcpyDeviceToHost);
+    for (int i = 0; i < 10; i++)
+    {
+        printf("a[%d] = %d\tb[%d] = %d\tc[%d] = %d\n", i, a[i], i, b[i], i, c[i]);
+    }
 
-    cudaFree(dev_a);
-    cudaFree(dev_b);
-    cudaFree(dev_c);
+    cudaFree(data1);
+    cudaFree(data2);
+    cudaFree(data3);
 
     return 0;
 }
