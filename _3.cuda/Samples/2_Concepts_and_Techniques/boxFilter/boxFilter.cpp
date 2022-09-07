@@ -535,90 +535,94 @@ void printHelp() {
   printf("    -file=name (specify reference file for comparison)\n");
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// Program main
-////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char **argv) {
-  int devID = 0;
-  char *ref_file = NULL;
 
-#if defined(__linux__)
-  setenv("DISPLAY", ":0", 0);
-#endif
+int main(int argc, char** argv)
+{
+    int devID = 0;
+    char* ref_file = NULL;
 
-  pArgc = &argc;
-  pArgv = argv;
+    pArgc = &argc;
+    pArgv = argv;
 
-  // start logs
-  printf("%s Starting...\n\n", argv[0]);
+    // start logs
+    printf("%s Starting...\n\n", argv[0]);
 
-  if (checkCmdLineFlag(argc, (const char **)argv, "help")) {
-    printHelp();
-    exit(EXIT_SUCCESS);
-  }
-
-  // use command-line specified CUDA device, otherwise use device with highest
-  // Gflops/s
-  if (argc > 1) {
-    if (checkCmdLineFlag(argc, (const char **)argv, "threads")) {
-      nthreads = getCmdLineArgumentInt(argc, (const char **)argv, "threads");
+    if (checkCmdLineFlag(argc, (const char**)argv, "help"))
+    {
+        printHelp();
+        exit(EXIT_SUCCESS);
     }
 
-    if (checkCmdLineFlag(argc, (const char **)argv, "radius")) {
-      filter_radius =
-          getCmdLineArgumentInt(argc, (const char **)argv, "radius");
+    // use command-line specified CUDA device, otherwise use device with highest
+    // Gflops/s
+    if (argc > 1) {
+        if (checkCmdLineFlag(argc, (const char**)argv, "threads"))
+        {
+            nthreads = getCmdLineArgumentInt(argc, (const char**)argv, "threads");
+        }
+
+        if (checkCmdLineFlag(argc, (const char**)argv, "radius"))
+        {
+            filter_radius = getCmdLineArgumentInt(argc, (const char**)argv, "radius");
+        }
+
+        if (checkCmdLineFlag(argc, (const char**)argv, "passes"))
+        {
+            iterations = getCmdLineArgumentInt(argc, (const char**)argv, "passes");
+        }
+
+        if (checkCmdLineFlag(argc, (const char**)argv, "file"))
+        {
+            getCmdLineArgumentString(argc, (const char**)argv, "file", (char**)&ref_file);
+        }
     }
 
-    if (checkCmdLineFlag(argc, (const char **)argv, "passes")) {
-      iterations = getCmdLineArgumentInt(argc, (const char **)argv, "passes");
+    // load image to process
+    loadImageData(argc, argv);
+    devID = findCudaDevice(argc, (const char**)argv);
+
+    if (checkCmdLineFlag(argc, (const char**)argv, "benchmark"))
+    {
+        // This is a separate mode of the sample, where we are benchmark the kernels
+        // for performance
+        // Running CUDA kernels (boxfilter) in Benchmarking mode
+        g_TotalErrors += runBenchmark();
+        exit(g_TotalErrors == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
     }
-
-    if (checkCmdLineFlag(argc, (const char **)argv, "file")) {
-      getCmdLineArgumentString(argc, (const char **)argv, "file",
-                               (char **)&ref_file);
+    else if (checkCmdLineFlag(argc, (const char**)argv, "radius") || checkCmdLineFlag(argc, (const char**)argv, "passes"))
+    {
+        // This overrides the default mode.  Users can specify the radius used by
+        // the filter kernel
+        g_TotalErrors += runSingleTest(ref_file, argv[0]);
+        exit(g_TotalErrors == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
     }
-  }
+    else
+    {
+        // Default mode running with OpenGL visualization and in automatic mode
+        // the output automatically changes animation
+        printf("\n");
 
-  // load image to process
-  loadImageData(argc, argv);
-  devID = findCudaDevice(argc, (const char **)argv);
+        initGL(&argc, argv);
 
-  if (checkCmdLineFlag(argc, (const char **)argv, "benchmark")) {
-    // This is a separate mode of the sample, where we are benchmark the kernels
-    // for performance
-    // Running CUDA kernels (boxfilter) in Benchmarking mode
-    g_TotalErrors += runBenchmark();
-    exit(g_TotalErrors == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
-  } else if (checkCmdLineFlag(argc, (const char **)argv, "radius") ||
-             checkCmdLineFlag(argc, (const char **)argv, "passes")) {
-    // This overrides the default mode.  Users can specify the radius used by
-    // the filter kernel
-    g_TotalErrors += runSingleTest(ref_file, argv[0]);
-    exit(g_TotalErrors == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
-  } else {
-    // Default mode running with OpenGL visualization and in automatic mode
-    // the output automatically changes animation
-    printf("\n");
+        initCuda(true);
+        initGLResources();
 
-    initGL(&argc, argv);
-
-    initCuda(true);
-    initGLResources();
-
-// sets the callback function so it will call cleanup upon exit
+        // sets the callback function so it will call cleanup upon exit
 #if defined(__APPLE__) || defined(MACOSX)
-    atexit(cleanup);
+        atexit(cleanup);
 #else
-    glutCloseFunc(cleanup);
+        glutCloseFunc(cleanup);
 #endif
 
-    printf("Running Standard Demonstration with GLUT loop...\n\n");
-    printf(
-        "Press '+' and '-' to change filter width\n"
-        "Press ']' and '[' to change number of iterations\n"
-        "Press 'a' or  'A' to change animation ON/OFF\n\n");
+        printf("Running Standard Demonstration with GLUT loop...\n\n");
+        printf(
+            "Press '+' and '-' to change filter width\n"
+            "Press ']' and '[' to change number of iterations\n"
+            "Press 'a' or  'A' to change animation ON/OFF\n\n");
 
-    // Main OpenGL loop that will run visualization for every vsync
-    glutMainLoop();
-  }
+        // Main OpenGL loop that will run visualization for every vsync
+        glutMainLoop();
+    }
 }
+
+

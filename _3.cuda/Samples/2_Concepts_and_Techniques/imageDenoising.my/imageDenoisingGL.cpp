@@ -485,10 +485,6 @@ int main(int argc, char **argv)
 {
   char *dump_file = NULL;
 
-#if defined(__linux__)
-  setenv("DISPLAY", ":0", 0);
-#endif
-
   pArgc = &argc;
   pArgv = argv;
 
@@ -523,8 +519,7 @@ int main(int argc, char **argv)
       exit(EXIT_SUCCESS);
     }
 
-    // First load the image, so we know what the size of the image (imageW and
-    // imageH)
+    // First load the image, so we know what the size of the image (imageW and imageH)
     printf("Allocating host and CUDA memory and loading image file...\n");
     const char *image_path = sdkFindFilePath("portrait_noise.bmp", argv[0]);
 
@@ -547,5 +542,5 @@ int main(int argc, char **argv)
     initOpenGLBuffers();
   }
 
-  //glutMainLoop();
+  glutMainLoop();
 }
