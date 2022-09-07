@@ -292,7 +292,7 @@ int PreLoadBmp2(char* FileName, int* Width, int* Height, int* Depth)
     BMPInfoHeader InfoHeader;
     FILE* fh;
 
-    printf("PreLoadBmp2, filename : %s\n", FileName);
+    //printf("PreLoadBmp2, filename : %s\n", FileName);
 
     if (!(fh = fopen(FileName, "rb")))
     {
@@ -370,7 +370,7 @@ int GetBmpColorDepth(char* FileName)
 
     fread(&InfoHeader, sizeof(BMPInfoHeader), 1, fh);
 
-    //printf("圖片位元深度 : %d 位元\n", InfoHeader._bm_color_depth);
+    printf("圖片位元深度 : %d 位元\n", InfoHeader._bm_color_depth);
 
     fclose(fh);
 

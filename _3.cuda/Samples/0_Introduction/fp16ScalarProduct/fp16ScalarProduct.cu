@@ -135,81 +135,76 @@ void generateInput(half2 *a, size_t size) {
   }
 }
 
-int main(int argc, char *argv[]) {
-  srand((unsigned int)time(NULL));
-  size_t size = NUM_OF_BLOCKS * NUM_OF_THREADS * 16;
+int main(int argc, char* argv[])
+{
+    srand((unsigned int)time(NULL));
+    size_t size = NUM_OF_BLOCKS * NUM_OF_THREADS * 16;
 
-  half2 *vec[2];
-  half2 *devVec[2];
+    half2* vec[2];
+    half2* devVec[2];
 
-  float *results;
-  float *devResults;
+    float* results;
+    float* devResults;
 
-  int devID = findCudaDevice(argc, (const char **)argv);
+    int devID = findCudaDevice(argc, (const char**)argv);
 
-  cudaDeviceProp devProp;
-  checkCudaErrors(cudaGetDeviceProperties(&devProp, devID));
+    cudaDeviceProp devProp;
+    checkCudaErrors(cudaGetDeviceProperties(&devProp, devID));
 
-  if (devProp.major < 5 || (devProp.major == 5 && devProp.minor < 3)) {
-    printf(
-        "ERROR: fp16ScalarProduct requires GPU devices with compute SM 5.3 or "
-        "higher.\n");
-    return EXIT_WAIVED;
-  }
+    if (devProp.major < 5 || (devProp.major == 5 && devProp.minor < 3))
+    {
+        printf("ERROR: fp16ScalarProduct requires GPU devices with compute SM 5.3 or higher.\n");
+        return EXIT_WAIVED;
+    }
 
-  for (int i = 0; i < 2; ++i) {
-    checkCudaErrors(cudaMallocHost((void **)&vec[i], size * sizeof *vec[i]));
-    checkCudaErrors(cudaMalloc((void **)&devVec[i], size * sizeof *devVec[i]));
-  }
+    for (int i = 0; i < 2; ++i)
+    {
+        checkCudaErrors(cudaMallocHost((void**)&vec[i], size * sizeof * vec[i]));
+        checkCudaErrors(cudaMalloc((void**)&devVec[i], size * sizeof * devVec[i]));
+    }
 
-  checkCudaErrors(
-      cudaMallocHost((void **)&results, NUM_OF_BLOCKS * sizeof *results));
-  checkCudaErrors(
-      cudaMalloc((void **)&devResults, NUM_OF_BLOCKS * sizeof *devResults));
+    checkCudaErrors(cudaMallocHost((void**)&results, NUM_OF_BLOCKS * sizeof * results));
+    checkCudaErrors(cudaMalloc((void**)&devResults, NUM_OF_BLOCKS * sizeof * devResults));
 
-  for (int i = 0; i < 2; ++i) {
-    generateInput(vec[i], size);
-    checkCudaErrors(cudaMemcpy(devVec[i], vec[i], size * sizeof *vec[i],
-                               cudaMemcpyHostToDevice));
-  }
+    for (int i = 0; i < 2; ++i)
+    {
+        generateInput(vec[i], size);
+        checkCudaErrors(cudaMemcpy(devVec[i], vec[i], size * sizeof * vec[i], cudaMemcpyHostToDevice));
+    }
 
-  scalarProductKernel_native<<<NUM_OF_BLOCKS, NUM_OF_THREADS>>>(
-      devVec[0], devVec[1], devResults, size);
+    scalarProductKernel_native << <NUM_OF_BLOCKS, NUM_OF_THREADS >> > (devVec[0], devVec[1], devResults, size);
 
-  checkCudaErrors(cudaMemcpy(results, devResults,
-                             NUM_OF_BLOCKS * sizeof *results,
-                             cudaMemcpyDeviceToHost));
+    checkCudaErrors(cudaMemcpy(results, devResults, NUM_OF_BLOCKS * sizeof * results, cudaMemcpyDeviceToHost));
 
-  float result_native = 0;
-  for (int i = 0; i < NUM_OF_BLOCKS; ++i) {
-    result_native += results[i];
-  }
-  printf("Result native operators\t: %f \n", result_native);
+    float result_native = 0;
+    for (int i = 0; i < NUM_OF_BLOCKS; ++i)
+    {
+        result_native += results[i];
+    }
 
-  scalarProductKernel_intrinsics<<<NUM_OF_BLOCKS, NUM_OF_THREADS>>>(
-      devVec[0], devVec[1], devResults, size);
+    printf("Result native operators\t: %f \n", result_native);
 
-  checkCudaErrors(cudaMemcpy(results, devResults,
-                             NUM_OF_BLOCKS * sizeof *results,
-                             cudaMemcpyDeviceToHost));
+    scalarProductKernel_intrinsics << <NUM_OF_BLOCKS, NUM_OF_THREADS >> > (devVec[0], devVec[1], devResults, size);
 
-  float result_intrinsics = 0;
-  for (int i = 0; i < NUM_OF_BLOCKS; ++i) {
-    result_intrinsics += results[i];
-  }
-  printf("Result intrinsics\t: %f \n", result_intrinsics);
+    checkCudaErrors(cudaMemcpy(results, devResults, NUM_OF_BLOCKS * sizeof * results, cudaMemcpyDeviceToHost));
 
-  printf("&&&& fp16ScalarProduct %s\n",
-         (fabs(result_intrinsics - result_native) < 0.00001) ? "PASSED"
-                                                             : "FAILED");
+    float result_intrinsics = 0;
+    for (int i = 0; i < NUM_OF_BLOCKS; ++i)
+    {
+        result_intrinsics += results[i];
+    }
+    printf("Result intrinsics\t: %f \n", result_intrinsics);
 
-  for (int i = 0; i < 2; ++i) {
-    checkCudaErrors(cudaFree(devVec[i]));
-    checkCudaErrors(cudaFreeHost(vec[i]));
-  }
+    printf("&&&& fp16ScalarProduct %s\n", (fabs(result_intrinsics - result_native) < 0.00001) ? "PASSED" : "FAILED");
 
-  checkCudaErrors(cudaFree(devResults));
-  checkCudaErrors(cudaFreeHost(results));
+    for (int i = 0; i < 2; ++i)
+    {
+        checkCudaErrors(cudaFree(devVec[i]));
+        checkCudaErrors(cudaFreeHost(vec[i]));
+    }
 
-  return EXIT_SUCCESS;
+    checkCudaErrors(cudaFree(devResults));
+    checkCudaErrors(cudaFreeHost(results));
+
+    return EXIT_SUCCESS;
 }

@@ -1,30 +1,3 @@
-/* Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *  * Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  * Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *  * Neither the name of NVIDIA CORPORATION nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
 // Includes, system
 #include <stdio.h>
 
@@ -137,32 +110,30 @@ int runNormVecByDotProductAWBarrier(int argc, char **argv, int deviceId);
 ////////////////////////////////////////////////////////////////////////////////
 // Program main
 ////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
   printf("%s starting...\n", argv[0]);
 
   // This will pick the best possible CUDA capable device
   int dev = findCudaDevice(argc, (const char **)argv);
 
   int major = 0;
-  checkCudaErrors(
-      cudaDeviceGetAttribute(&major, cudaDevAttrComputeCapabilityMajor, dev));
+  checkCudaErrors(cudaDeviceGetAttribute(&major, cudaDevAttrComputeCapabilityMajor, dev));
 
   // Arrive-Wait Barrier require a GPU of Volta (SM7X) architecture or higher.
-  if (major < 7) {
+  if (major < 7)
+  {
     printf("simpleAWBarrier requires SM 7.0 or higher.  Exiting...\n");
     exit(EXIT_WAIVED);
   }
 
   int supportsCooperativeLaunch = 0;
-  checkCudaErrors(cudaDeviceGetAttribute(&supportsCooperativeLaunch,
-                                         cudaDevAttrCooperativeLaunch, dev));
+  checkCudaErrors(cudaDeviceGetAttribute(&supportsCooperativeLaunch,cudaDevAttrCooperativeLaunch, dev));
 
-  if (!supportsCooperativeLaunch) {
-    printf(
-        "\nSelected GPU (%d) does not support Cooperative Kernel Launch, "
-        "Waiving the run\n",
-        dev);
-    exit(EXIT_WAIVED);
+  if (!supportsCooperativeLaunch)
+  {
+      printf("\nSelected GPU (%d) does not support Cooperative Kernel Launch, Waiving the run\n", dev);
+      exit(EXIT_WAIVED);
   }
 
   int testResult = runNormVecByDotProductAWBarrier(argc, argv, dev);
@@ -171,85 +142,80 @@ int main(int argc, char **argv) {
   exit(testResult ? EXIT_SUCCESS : EXIT_FAILURE);
 }
 
-int runNormVecByDotProductAWBarrier(int argc, char **argv, int deviceId) {
-  float *vecA, *d_vecA;
-  float *vecB, *d_vecB;
-  double *d_partialResults;
-  int size = 10000000;
+int runNormVecByDotProductAWBarrier(int argc, char** argv, int deviceId)
+{
+    float* vecA, * d_vecA;
+    float* vecB, * d_vecB;
+    double* d_partialResults;
+    int size = 10000000;
 
-  checkCudaErrors(cudaMallocHost(&vecA, sizeof(float) * size));
-  checkCudaErrors(cudaMallocHost(&vecB, sizeof(float) * size));
+    checkCudaErrors(cudaMallocHost(&vecA, sizeof(float) * size));
+    checkCudaErrors(cudaMallocHost(&vecB, sizeof(float) * size));
 
-  checkCudaErrors(cudaMalloc(&d_vecA, sizeof(float) * size));
-  checkCudaErrors(cudaMalloc(&d_vecB, sizeof(float) * size));
+    checkCudaErrors(cudaMalloc(&d_vecA, sizeof(float) * size));
+    checkCudaErrors(cudaMalloc(&d_vecB, sizeof(float) * size));
 
-  float baseVal = 2.0;
-  for (int i = 0; i < size; i++) {
-    vecA[i] = vecB[i] = baseVal;
-  }
-
-  cudaStream_t stream;
-  checkCudaErrors(cudaStreamCreateWithFlags(&stream, cudaStreamNonBlocking));
-
-  checkCudaErrors(cudaMemcpyAsync(d_vecA, vecA, sizeof(float) * size,
-                                  cudaMemcpyHostToDevice, stream));
-  checkCudaErrors(cudaMemcpyAsync(d_vecB, vecB, sizeof(float) * size,
-                                  cudaMemcpyHostToDevice, stream));
-
-  // Kernel configuration, where a one-dimensional
-  // grid and one-dimensional blocks are configured.
-  int minGridSize = 0, blockSize = 0;
-  checkCudaErrors(cudaOccupancyMaxPotentialBlockSize(
-      &minGridSize, &blockSize, (void *)normVecByDotProductAWBarrier, 0, size));
-
-  int smemSize = ((blockSize / 32) + 1) * sizeof(double);
-
-  int numBlocksPerSm = 0;
-  checkCudaErrors(cudaOccupancyMaxActiveBlocksPerMultiprocessor(
-      &numBlocksPerSm, normVecByDotProductAWBarrier, blockSize, smemSize));
-
-  int multiProcessorCount = 0;
-  checkCudaErrors(cudaDeviceGetAttribute(
-      &multiProcessorCount, cudaDevAttrMultiProcessorCount, deviceId));
-
-  minGridSize = multiProcessorCount * numBlocksPerSm;
-  checkCudaErrors(cudaMalloc(&d_partialResults, minGridSize * sizeof(double)));
-
-  printf(
-      "Launching normVecByDotProductAWBarrier kernel with numBlocks = %d "
-      "blockSize = %d\n",
-      minGridSize, blockSize);
-
-  dim3 dimGrid(minGridSize, 1, 1), dimBlock(blockSize, 1, 1);
-
-  void *kernelArgs[] = {(void *)&d_vecA, (void *)&d_vecB,
-                        (void *)&d_partialResults, (void *)&size};
-
-  checkCudaErrors(
-      cudaLaunchCooperativeKernel((void *)normVecByDotProductAWBarrier, dimGrid,
-                                  dimBlock, kernelArgs, smemSize, stream));
-
-  checkCudaErrors(cudaMemcpyAsync(vecA, d_vecA, sizeof(float) * size,
-                                  cudaMemcpyDeviceToHost, stream));
-  checkCudaErrors(cudaStreamSynchronize(stream));
-
-  float expectedResult = (baseVal / sqrt(size * baseVal * baseVal));
-  unsigned int matches = 0;
-  for (int i = 0; i < size; i++) {
-    if ((vecA[i] - expectedResult) > 0.00001) {
-      printf("mismatch at i = %d\n", i);
-      break;
-    } else {
-      matches++;
+    float baseVal = 2.0;
+    for (int i = 0; i < size; i++)
+    {
+        vecA[i] = vecB[i] = baseVal;
     }
-  }
 
-  printf("Result = %s\n", matches == size ? "PASSED" : "FAILED");
-  checkCudaErrors(cudaFree(d_vecA));
-  checkCudaErrors(cudaFree(d_vecB));
-  checkCudaErrors(cudaFree(d_partialResults));
+    cudaStream_t stream;
+    checkCudaErrors(cudaStreamCreateWithFlags(&stream, cudaStreamNonBlocking));
 
-  checkCudaErrors(cudaFreeHost(vecA));
-  checkCudaErrors(cudaFreeHost(vecB));
-  return matches == size;
+    checkCudaErrors(cudaMemcpyAsync(d_vecA, vecA, sizeof(float) * size, cudaMemcpyHostToDevice, stream));
+    checkCudaErrors(cudaMemcpyAsync(d_vecB, vecB, sizeof(float) * size, cudaMemcpyHostToDevice, stream));
+
+    // Kernel configuration, where a one-dimensional
+    // grid and one-dimensional blocks are configured.
+    int minGridSize = 0, blockSize = 0;
+    checkCudaErrors(cudaOccupancyMaxPotentialBlockSize(&minGridSize, &blockSize, (void*)normVecByDotProductAWBarrier, 0, size));
+
+    int smemSize = ((blockSize / 32) + 1) * sizeof(double);
+
+    int numBlocksPerSm = 0;
+    checkCudaErrors(cudaOccupancyMaxActiveBlocksPerMultiprocessor(&numBlocksPerSm, normVecByDotProductAWBarrier, blockSize, smemSize));
+
+    int multiProcessorCount = 0;
+    checkCudaErrors(cudaDeviceGetAttribute(&multiProcessorCount, cudaDevAttrMultiProcessorCount, deviceId));
+
+    minGridSize = multiProcessorCount * numBlocksPerSm;
+    checkCudaErrors(cudaMalloc(&d_partialResults, minGridSize * sizeof(double)));
+
+    printf("Launching normVecByDotProductAWBarrier kernel with numBlocks = %d blockSize = %d\n", minGridSize, blockSize);
+
+    dim3 dimGrid(minGridSize, 1, 1), dimBlock(blockSize, 1, 1);
+
+    void* kernelArgs[] = { (void*)&d_vecA, (void*)&d_vecB,(void*)&d_partialResults, (void*)&size };
+
+    checkCudaErrors(cudaLaunchCooperativeKernel((void*)normVecByDotProductAWBarrier, dimGrid, dimBlock, kernelArgs, smemSize, stream));
+
+    checkCudaErrors(cudaMemcpyAsync(vecA, d_vecA, sizeof(float) * size, cudaMemcpyDeviceToHost, stream));
+    checkCudaErrors(cudaStreamSynchronize(stream));
+
+    float expectedResult = (baseVal / sqrt(size * baseVal * baseVal));
+    unsigned int matches = 0;
+    for (int i = 0; i < size; i++)
+    {
+        if ((vecA[i] - expectedResult) > 0.00001)
+        {
+            printf("mismatch at i = %d\n", i);
+            break;
+        }
+        else
+        {
+            matches++;
+        }
+    }
+
+    printf("Result = %s\n", matches == size ? "PASSED" : "FAILED");
+    checkCudaErrors(cudaFree(d_vecA));
+    checkCudaErrors(cudaFree(d_vecB));
+    checkCudaErrors(cudaFree(d_partialResults));
+
+    checkCudaErrors(cudaFreeHost(vecA));
+    checkCudaErrors(cudaFreeHost(vecB));
+    return matches == size;
 }
+

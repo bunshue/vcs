@@ -104,50 +104,49 @@ __global__ static void timedReduction(const float *input, float *output,
 // the memory. With more than 32 the speed scales linearly.
 
 // Start the main CUDA Sample here
-int main(int argc, char **argv) {
-  printf("CUDA Clock sample\n");
+int main(int argc, char** argv)
+{
+    printf("CUDA Clock sample\n");
 
-  // This will pick the best possible CUDA capable device
-  int dev = findCudaDevice(argc, (const char **)argv);
+    // This will pick the best possible CUDA capable device
+    int dev = findCudaDevice(argc, (const char**)argv);
 
-  float *dinput = NULL;
-  float *doutput = NULL;
-  clock_t *dtimer = NULL;
+    float* dinput = NULL;
+    float* doutput = NULL;
+    clock_t* dtimer = NULL;
 
-  clock_t timer[NUM_BLOCKS * 2];
-  float input[NUM_THREADS * 2];
+    clock_t timer[NUM_BLOCKS * 2];
+    float input[NUM_THREADS * 2];
 
-  for (int i = 0; i < NUM_THREADS * 2; i++) {
-    input[i] = (float)i;
-  }
+    for (int i = 0; i < NUM_THREADS * 2; i++)
+    {
+        input[i] = (float)i;
+    }
 
-  checkCudaErrors(
-      cudaMalloc((void **)&dinput, sizeof(float) * NUM_THREADS * 2));
-  checkCudaErrors(cudaMalloc((void **)&doutput, sizeof(float) * NUM_BLOCKS));
-  checkCudaErrors(
-      cudaMalloc((void **)&dtimer, sizeof(clock_t) * NUM_BLOCKS * 2));
+    checkCudaErrors(cudaMalloc((void**)&dinput, sizeof(float) * NUM_THREADS * 2));
+    checkCudaErrors(cudaMalloc((void**)&doutput, sizeof(float) * NUM_BLOCKS));
+    checkCudaErrors(cudaMalloc((void**)&dtimer, sizeof(clock_t) * NUM_BLOCKS * 2));
 
-  checkCudaErrors(cudaMemcpy(dinput, input, sizeof(float) * NUM_THREADS * 2,
-                             cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(dinput, input, sizeof(float) * NUM_THREADS * 2, cudaMemcpyHostToDevice));
 
-  timedReduction<<<NUM_BLOCKS, NUM_THREADS, sizeof(float) * 2 * NUM_THREADS>>>(
-      dinput, doutput, dtimer);
+    timedReduction << <NUM_BLOCKS, NUM_THREADS, sizeof(float) * 2 * NUM_THREADS >> > (dinput, doutput, dtimer);
 
-  checkCudaErrors(cudaMemcpy(timer, dtimer, sizeof(clock_t) * NUM_BLOCKS * 2,
-                             cudaMemcpyDeviceToHost));
+    checkCudaErrors(cudaMemcpy(timer, dtimer, sizeof(clock_t) * NUM_BLOCKS * 2, cudaMemcpyDeviceToHost));
 
-  checkCudaErrors(cudaFree(dinput));
-  checkCudaErrors(cudaFree(doutput));
-  checkCudaErrors(cudaFree(dtimer));
+    checkCudaErrors(cudaFree(dinput));
+    checkCudaErrors(cudaFree(doutput));
+    checkCudaErrors(cudaFree(dtimer));
 
-  long double avgElapsedClocks = 0;
+    long double avgElapsedClocks = 0;
 
-  for (int i = 0; i < NUM_BLOCKS; i++) {
-    avgElapsedClocks += (long double)(timer[i + NUM_BLOCKS] - timer[i]);
-  }
+    for (int i = 0; i < NUM_BLOCKS; i++)
+    {
+        avgElapsedClocks += (long double)(timer[i + NUM_BLOCKS] - timer[i]);
+    }
 
-  avgElapsedClocks = avgElapsedClocks / NUM_BLOCKS;
-  printf("Average clocks/block = %Lf\n", avgElapsedClocks);
+    avgElapsedClocks = avgElapsedClocks / NUM_BLOCKS;
+    printf("Average clocks/block = %Lf\n", avgElapsedClocks);
 
-  return EXIT_SUCCESS;
+    return EXIT_SUCCESS;
 }
+
