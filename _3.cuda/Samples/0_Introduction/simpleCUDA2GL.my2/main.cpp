@@ -59,8 +59,7 @@ static int fpsCount = 0;
 static int fpsLimit = 1;
 StopWatchInterface *timer = NULL;
 
-extern "C" void launch_cudaProcess(dim3 grid, dim3 block, int sbytes, unsigned int* g_odata, int imgw);
-extern "C" void launch_cudaProcess2(unsigned int* g_odata, int imgw);
+extern "C" void launch_cudaProcess(dim3 grid, dim3 block, int sbytes, int* g_odata, int imgw);
 
 // Forward declarations
 void FreeResource();
@@ -115,15 +114,13 @@ void deletePBO(GLuint* pbo)
     *pbo = 0;
 }
 
-const GLenum fbo_targets[] = {
-    GL_COLOR_ATTACHMENT0_EXT, GL_COLOR_ATTACHMENT1_EXT,
-    GL_COLOR_ATTACHMENT2_EXT, GL_COLOR_ATTACHMENT3_EXT};
-
 // copy image and process using CUDA
+int ratio = 10;
+
 void generateCUDAImage()
 {
     // run the Cuda kernel
-    unsigned int* out_data;
+    int* out_data;
 
     checkCudaErrors(cudaGraphicsMapResources(1, &cuda_pbo_dest_resource, 0));
     size_t num_bytes;
@@ -134,10 +131,10 @@ void generateCUDAImage()
 
     // calculate grid size
     //dim3 block(16, 16, 1);
-    dim3 block(16, 16, 1);
+    //dim3 block(16, 16, 1);
 
     //dim3 grid(image_width / block.x, image_height / block.y, 1);
-    dim3 grid(16, 16, 1);
+    //dim3 grid(16, 16, 1);
 
     /*
     printf("image_width = %d\timage_height = %d\n", image_width, image_height); //512 X 512
@@ -152,10 +149,38 @@ void generateCUDAImage()
 
     //printf("image_width = %d\timage_height = %d\n", image_width, image_height); //512 X 512
     //printf("block.x = %d\tblock.y = %d\n", block.x, block.y);   //16, 16
-    launch_cudaProcess(grid, block, 0, out_data, image_width);
 
-    //launch_cudaProcess2(out_data, image_width);
-    
+    //launch_cudaProcess(grid, block, 0, out_data, image_width);
+
+    const char* filename_read1 = "C:\\______test_files\\ims01.24.bmp"; //24 bits
+    const char* filename_read2 = "C:\\______test_files\\ims03.24.bmp"; //24 bits
+
+    /*
+    int imageW = 0;
+    int imageH = 0;
+    LoadBMPFile(&h_Src1, &imageW, &imageH, filename_read1);
+    printf("filename : %s\tW = %d\tH = %d\n", filename_read1, imageW, imageH);
+    */
+
+    cudaError_t cudaStatus;
+    int a[256 * 256];
+    int i;
+    for (i = 0; i < 256 * 256; i++)
+    {
+        a[i] = i * 256 * ratio;
+    }
+    ratio += 10;
+    if (ratio >= 255)
+        ratio = 1;
+
+    // Copy input vectors from host memory to GPU buffers.
+    cudaStatus = cudaMemcpy(out_data, a, 256*256 * sizeof(int), cudaMemcpyHostToDevice);
+    if (cudaStatus != cudaSuccess)
+    {
+        printf("cudaMemcpy failed!\n");
+        return;
+    }
+
 
     // CUDA generated data in cuda memory or in a mapped PBO made of BGRA 8 bits
     // 2 solutions, here :
@@ -244,7 +269,6 @@ void display()
         sdkResetTimer(&timer);
     }
 }
-
 
 void timerEvent(int value)
 {

@@ -237,110 +237,125 @@ inline bool sdkLoadPGM(const char *file, T **data, unsigned int *w,
 }
 
 template <class T>
-inline bool sdkLoadPPM4(const char *file, T **data, unsigned int *w,
-                        unsigned int *h) {
-  unsigned char *idata = 0;
-  unsigned int channels;
+inline bool sdkLoadPPM4(const char* file, T** data, unsigned int* w, unsigned int* h)
+{
+    unsigned char* idata = 0;
+    unsigned int channels;
 
-  if (__loadPPM(file, &idata, w, h, &channels)) {
-    // pad 4th component
-    int size = *w * *h;
-    // keep the original pointer
-    unsigned char *idata_orig = idata;
-    *data = reinterpret_cast<T *>(malloc(sizeof(T) * size * 4));
-    unsigned char *ptr = *data;
+    if (__loadPPM(file, &idata, w, h, &channels))
+    {
+        // pad 4th component
+        int size = *w * *h;
+        // keep the original pointer
+        unsigned char* idata_orig = idata;
+        *data = reinterpret_cast<T*>(malloc(sizeof(T) * size * 4));
+        unsigned char* ptr = *data;
 
-    for (int i = 0; i < size; i++) {
-      *ptr++ = *idata++;
-      *ptr++ = *idata++;
-      *ptr++ = *idata++;
-      *ptr++ = 0;
+        for (int i = 0; i < size; i++)
+        {
+            *ptr++ = *idata++;
+            *ptr++ = *idata++;
+            *ptr++ = *idata++;
+            *ptr++ = 0;
+        }
+
+        free(idata_orig);
+        return true;
     }
-
-    free(idata_orig);
-    return true;
-  } else {
-    free(idata);
-    return false;
-  }
+    else
+    {
+        free(idata);
+        return false;
+    }
 }
 
-inline bool __savePPM(const char *file, unsigned char *data, unsigned int w,
-                      unsigned int h, unsigned int channels) {
-  assert(NULL != data);
-  assert(w > 0);
-  assert(h > 0);
+inline bool __savePPM(const char* file, unsigned char* data, unsigned int w, unsigned int h, unsigned int channels)
+{
+    printf("__savePPM __savePPM __savePPM\n");
 
-  std::fstream fh(file, std::fstream::out | std::fstream::binary);
+    assert(NULL != data);
+    assert(w > 0);
+    assert(h > 0);
 
-  if (fh.bad()) {
-    std::cerr << "__savePPM() : Opening file failed." << std::endl;
-    return false;
-  }
+    std::fstream fh(file, std::fstream::out | std::fstream::binary);
 
-  if (channels == 1) {
-    fh << "P5\n";
-  } else if (channels == 3) {
-    fh << "P6\n";
-  } else {
-    std::cerr << "__savePPM() : Invalid number of channels." << std::endl;
-    return false;
-  }
+    if (fh.bad())
+    {
+        std::cerr << "__savePPM() : Opening file failed." << std::endl;
+        return false;
+    }
 
-  fh << w << "\n" << h << "\n" << 0xff << std::endl;
+    if (channels == 1)
+    {
+        fh << "P5\n";
+    }
+    else if (channels == 3)
+    {
+        fh << "P6\n";
+    }
+    else
+    {
+        std::cerr << "__savePPM() : Invalid number of channels." << std::endl;
+        return false;
+    }
 
-  for (unsigned int i = 0; (i < (w * h * channels)) && fh.good(); ++i) {
-    fh << data[i];
-  }
+    fh << w << "\n" << h << "\n" << 0xff << std::endl;
 
-  fh.flush();
+    for (unsigned int i = 0; (i < (w * h * channels)) && fh.good(); ++i)
+    {
+        fh << data[i];
+    }
 
-  if (fh.bad()) {
-    std::cerr << "__savePPM() : Writing data failed." << std::endl;
-    return false;
-  }
+    fh.flush();
 
-  fh.close();
+    if (fh.bad())
+    {
+        std::cerr << "__savePPM() : Writing data failed." << std::endl;
+        return false;
+    }
 
-  return true;
+    fh.close();
+
+    return true;
 }
 
 template <class T>
-inline bool sdkSavePGM(const char *file, T *data, unsigned int w,
-                       unsigned int h) {
-  unsigned int size = w * h;
-  unsigned char *idata = (unsigned char *)malloc(sizeof(unsigned char) * size);
+inline bool sdkSavePGM(const char* file, T* data, unsigned int w, unsigned int h)
+{
+    printf("sdkSavePGM sdkSavePGM sdkSavePGM\n");
 
-  std::transform(data, data + size, idata,
-                 helper_image_internal::ConverterToUByte<T>());
+    unsigned int size = w * h;
+    unsigned char* idata = (unsigned char*)malloc(sizeof(unsigned char) * size);
 
-  // write file
-  bool result = __savePPM(file, idata, w, h, 1);
+    std::transform(data, data + size, idata, helper_image_internal::ConverterToUByte<T>());
 
-  // cleanup
-  free(idata);
+    // write file
+    bool result = __savePPM(file, idata, w, h, 1);
 
-  return result;
+    // cleanup
+    free(idata);
+
+    return result;
 }
 
-inline bool sdkSavePPM4ub(const char *file, unsigned char *data, unsigned int w,
-                          unsigned int h) {
-  // strip 4th component
-  int size = w * h;
-  unsigned char *ndata =
-      (unsigned char *)malloc(sizeof(unsigned char) * size * 3);
-  unsigned char *ptr = ndata;
+inline bool sdkSavePPM4ub(const char* file, unsigned char* data, unsigned int w, unsigned int h)
+{
+    // strip 4th component
+    int size = w * h;
+    unsigned char* ndata = (unsigned char*)malloc(sizeof(unsigned char) * size * 3);
+    unsigned char* ptr = ndata;
 
-  for (int i = 0; i < size; i++) {
-    *ptr++ = *data++;
-    *ptr++ = *data++;
-    *ptr++ = *data++;
-    data++;
-  }
+    for (int i = 0; i < size; i++)
+    {
+        *ptr++ = *data++;
+        *ptr++ = *data++;
+        *ptr++ = *data++;
+        data++;
+    }
 
-  bool result = __savePPM(file, ndata, w, h, 3);
-  free(ndata);
-  return result;
+    bool result = __savePPM(file, ndata, w, h, 3);
+    free(ndata);
+    return result;
 }
 
 //////////////////////////////////////////////////////////////////////////////
