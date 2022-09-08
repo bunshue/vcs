@@ -63,6 +63,7 @@ extern "C" void LoadBMPFile(uchar4 **dst, int *width, int *height,
                             const char *name);
 
 // CUDA wrapper functions for allocation/freeing texture arrays
+
 extern "C" cudaTextureObject_t texImage;
 
 extern "C" cudaError_t CUDA_MallocArray(uchar4 **h_Src, int imageW, int imageH);

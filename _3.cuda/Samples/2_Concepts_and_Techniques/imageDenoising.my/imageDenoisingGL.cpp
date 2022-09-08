@@ -1,48 +1,6 @@
-/* Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *  * Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  * Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *  * Neither the name of NVIDIA CORPORATION nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
-/*
- * This sample demonstrates two adaptive image denoising techniques:
- * KNN and NLM, based on computation of both geometric and color distance
- * between texels. While both techniques are already implemented in the
- * DirectX SDK using shaders, massively speeded up variation
- * of the latter technique, taking advantage of shared memory, is implemented
- * in addition to DirectX counterparts.
- * See supplied whitepaper for more explanations.
- */
-
 // OpenGL Graphics includes
 #include <helper_gl.h>
-#if defined(__APPLE__) || defined(MACOSX)
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#include <GLUT/glut.h>
-#else
 #include <GL/freeglut.h>
-#endif
 
 // CUDA utilities and system includes
 #include <cuda_runtime.h>
@@ -77,8 +35,11 @@ const char *sReference[] = {"ref_passthru.ppm", "ref_knn.ppm", "ref_nlm.ppm",
 GLuint gl_PBO, gl_Tex;
 struct cudaGraphicsResource *cuda_pbo_resource;  // handles OpenGL-CUDA exchange
 // Source image on the host side
-uchar4 *h_Src;
+
+uchar4 *h_Src1;
+uchar4* h_Src2;
 int imageW, imageH;
+
 GLuint shader;
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -115,230 +76,290 @@ char **pArgv = NULL;
 #define REFRESH_DELAY 10  // ms
 
 void cleanup();
+void print_some_data(cudaTextureObject_t texImage);
 
-void computeFPS() {
-  frameCount++;
-  fpsCount++;
+void computeFPS()
+{
+    //printf("computeFPS ");
+    frameCount++;
+    fpsCount++;
 
-  if (fpsCount == fpsLimit) {
-    char fps[256];
-    float ifps = 1.f / (sdkGetAverageTimerValue(&timer) / 1000.f);
-    sprintf(fps, "<%s>: %3.1f fps", filterMode[g_Kernel], ifps);
+    if (fpsCount == fpsLimit)
+    {
+        char fps[256];
+        float ifps = 1.f / (sdkGetAverageTimerValue(&timer) / 1000.f);
+        sprintf(fps, "<%s>: %3.1f fps", filterMode[g_Kernel], ifps);
 
-    glutSetWindowTitle(fps);
-    fpsCount = 0;
+        glutSetWindowTitle(fps);
+        fpsCount = 0;
 
-    // fpsLimit = (int)MAX(ifps, 1.f);
-    sdkResetTimer(&timer);
-  }
+        // fpsLimit = (int)MAX(ifps, 1.f);
+        sdkResetTimer(&timer);
+    }
 }
 
-void runImageFilters(TColor *d_dst) {
-  switch (g_Kernel) {
+void runImageFilters(TColor* d_dst)
+{
+    //printf("%d ", g_Kernel);
+    switch (g_Kernel)
+    {
     case 0:
-      cuda_Copy(d_dst, imageW, imageH, texImage);
-      break;
+        //cuda_Copy(d_dst, imageW, imageH, texImage);
+        break;
 
     case 1:
-      if (!g_Diag) {
-        cuda_KNN(d_dst, imageW, imageH, 1.0f / (knnNoise * knnNoise), lerpC,
-                 texImage);
-      } else {
-        cuda_KNNdiag(d_dst, imageW, imageH, 1.0f / (knnNoise * knnNoise), lerpC,
-                     texImage);
-      }
+        if (!g_Diag)
+        {
+            cuda_KNN(d_dst, imageW, imageH, 1.0f / (knnNoise * knnNoise), lerpC, texImage);
+        }
+        else
+        {
+            cuda_KNNdiag(d_dst, imageW, imageH, 1.0f / (knnNoise * knnNoise), lerpC, texImage);
+        }
 
-      break;
+        break;
 
     case 2:
-      if (!g_Diag) {
-        cuda_NLM(d_dst, imageW, imageH, 1.0f / (nlmNoise * nlmNoise), lerpC,
-                 texImage);
-      } else {
-        cuda_NLMdiag(d_dst, imageW, imageH, 1.0f / (nlmNoise * nlmNoise), lerpC,
-                     texImage);
-      }
+        if (!g_Diag)
+        {
+            cuda_NLM(d_dst, imageW, imageH, 1.0f / (nlmNoise * nlmNoise), lerpC, texImage);
+        }
+        else
+        {
+            cuda_NLMdiag(d_dst, imageW, imageH, 1.0f / (nlmNoise * nlmNoise), lerpC, texImage);
+        }
 
-      break;
+        break;
 
     case 3:
-      if (!g_Diag) {
-        cuda_NLM2(d_dst, imageW, imageH, 1.0f / (nlmNoise * nlmNoise), lerpC,
-                  texImage);
-      } else {
-        cuda_NLM2diag(d_dst, imageW, imageH, 1.0f / (nlmNoise * nlmNoise),
-                      lerpC, texImage);
-      }
+        if (!g_Diag)
+        {
+            cuda_NLM2(d_dst, imageW, imageH, 1.0f / (nlmNoise * nlmNoise), lerpC, texImage);
+        }
+        else
+        {
+            cuda_NLM2diag(d_dst, imageW, imageH, 1.0f / (nlmNoise * nlmNoise), lerpC, texImage);
+        }
 
-      break;
-  }
+        break;
 
-  getLastCudaError("Filtering kernel execution failed.\n");
-}
+    case 10:
+        printf("Change some data\n");
 
-void displayFunc(void) {
-  sdkStartTimer(&timer);
-  TColor *d_dst = NULL;
-  size_t num_bytes;
+        cuda_Copy(d_dst, imageW, imageH, texImage);
 
-  if (frameCounter++ == 0) {
-    sdkResetTimer(&timer);
-  }
+        //print_some_data(texImage);    //TBD
 
-  checkCudaErrors(cudaGraphicsMapResources(1, &cuda_pbo_resource, 0));
-  getLastCudaError("cudaGraphicsMapResources failed");
-  checkCudaErrors(cudaGraphicsResourceGetMappedPointer(
-      (void **)&d_dst, &num_bytes, cuda_pbo_resource));
-  getLastCudaError("cudaGraphicsResourceGetMappedPointer failed");
+        //cuda_Copy(d_dst, imageW, imageH, texImage);
 
-  runImageFilters(d_dst);
+        //cuda_NLM(d_dst, imageW/2, imageH, 1.0f / (nlmNoise * nlmNoise * 5), lerpC, texImage);
 
-  checkCudaErrors(cudaGraphicsUnmapResources(1, &cuda_pbo_resource, 0));
+        g_Kernel = 0;
+        break;
 
-  // Common display code path
-  {
-    glClear(GL_COLOR_BUFFER_BIT);
+    case 11:
+        printf("Copy ims 01\n");
 
-    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, imageW, imageH, GL_RGBA,
-                    GL_UNSIGNED_BYTE, BUFFER_DATA(0));
-    glBegin(GL_TRIANGLES);
-    glTexCoord2f(0, 0);
-    glVertex2f(-1, -1);
-    glTexCoord2f(2, 0);
-    glVertex2f(+3, -1);
-    glTexCoord2f(0, 2);
-    glVertex2f(-1, +3);
-    glEnd();
-    glFinish();
-  }
 
-  if (frameCounter == frameN) {
-    frameCounter = 0;
+        g_Kernel = 0;
+        break;
 
-    if (g_FPS) {
-      printf("FPS: %3.1f\n", frameN / (sdkGetTimerValue(&timer) * 0.001));
-      g_FPS = false;
+    case 13:
+        printf("Copy ims 03\n");
+
+
+        g_Kernel = 0;
+        break;
     }
-  }
 
-  glutSwapBuffers();
-  glutReportErrors();
-
-  sdkStopTimer(&timer);
-
-  computeFPS();
+    getLastCudaError("Filtering kernel execution failed.\n");
 }
 
-void timerEvent(int value) {
-  if (glutGetWindow()) {
-    glutPostRedisplay();
-    glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
-  }
+void displayFunc(void)
+{
+    //printf("dis ");
+
+    sdkStartTimer(&timer);
+    TColor* d_dst = NULL;
+    size_t num_bytes;
+
+    if (frameCounter++ == 0)
+    {
+        sdkResetTimer(&timer);
+    }
+
+    checkCudaErrors(cudaGraphicsMapResources(1, &cuda_pbo_resource, 0));
+    getLastCudaError("cudaGraphicsMapResources failed");
+    checkCudaErrors(cudaGraphicsResourceGetMappedPointer((void**)&d_dst, &num_bytes, cuda_pbo_resource));
+    //printf("(%d) ", num_bytes);
+    getLastCudaError("cudaGraphicsResourceGetMappedPointer failed");
+
+    runImageFilters(d_dst);
+
+    checkCudaErrors(cudaGraphicsUnmapResources(1, &cuda_pbo_resource, 0));
+
+    // Common display code path
+    {
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, imageW, imageH, GL_RGBA, GL_UNSIGNED_BYTE, BUFFER_DATA(0));
+        glBegin(GL_TRIANGLES);
+        glTexCoord2f(0, 0);
+        glVertex2f(-1, -1);
+        glTexCoord2f(2, 0);
+        glVertex2f(+3, -1);
+        glTexCoord2f(0, 2);
+        glVertex2f(-1, +3);
+        glEnd();
+        glFinish();
+    }
+
+    if (frameCounter == frameN)
+    {
+        frameCounter = 0;
+
+        if (g_FPS)
+        {
+            printf("FPS: %3.1f\n", frameN / (sdkGetTimerValue(&timer) * 0.001));
+            g_FPS = false;
+        }
+    }
+
+    glutSwapBuffers();
+    glutReportErrors();
+
+    sdkStopTimer(&timer);
+
+    //computeFPS();
 }
 
-void keyboard(unsigned char k, int /*x*/, int /*y*/) {
-  switch (k) {
+void timerEvent(int value)
+{
+    //printf("timer ");
+    if (glutGetWindow())
+    {
+        //printf("glutGetWindow ");
+        glutPostRedisplay();
+        glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
+    }
+}
+
+void keyboard(unsigned char k, int /*x*/, int /*y*/)
+{
+    switch (k)
+    {
     case 27:
     case 'q':
     case 'Q':
-#if defined(__APPLE__) || defined(MACOSX)
-      exit(EXIT_SUCCESS);
-#else
-      glutDestroyWindow(glutGetWindow());
-      return;
-#endif
+        //離開視窗
+        glutDestroyWindow(glutGetWindow());
+        return;
 
     case '1':
-      printf("Passthrough.\n");
-      g_Kernel = 0;
-      break;
+        printf("Passthrough.\n");
+        g_Kernel = 0;
+        break;
 
     case '2':
-      printf("KNN method \n");
-      g_Kernel = 1;
-      break;
+        printf("KNN method \n");
+        g_Kernel = 1;
+        break;
 
     case '3':
-      printf("NLM method\n");
-      g_Kernel = 2;
-      break;
+        printf("NLM method\n");
+        g_Kernel = 2;
+        break;
 
     case '4':
-      printf("Quick NLM(NLM2) method\n");
-      g_Kernel = 3;
-      break;
+        printf("Quick NLM(NLM2) method\n");
+        g_Kernel = 3;
+        break;
+
+    case 'c':
+        printf("Change some data\n");
+        g_Kernel = 10;
+        break;
+
+    case 'a':
+        printf("Copy ims 01\n");
+        g_Kernel = 11;
+        break;
+
+    case 'b':
+        printf("Copy ims 03\n");
+        g_Kernel = 13;
+        break;
 
     case '*':
-      printf(g_Diag ? "LERP highlighting mode.\n" : "Normal mode.\n");
-      g_Diag = !g_Diag;
-      break;
+        printf(g_Diag ? "LERP highlighting mode.\n" : "Normal mode.\n");
+        g_Diag = !g_Diag;
+        break;
 
     case 'n':
-      printf("Decrease noise level.\n");
-      knnNoise -= noiseStep;
-      nlmNoise -= noiseStep;
-      break;
+        printf("Decrease noise level.\n");
+        knnNoise -= noiseStep;
+        nlmNoise -= noiseStep;
+        break;
 
     case 'N':
-      printf("Increase noise level.\n");
-      knnNoise += noiseStep;
-      nlmNoise += noiseStep;
-      break;
+        printf("Increase noise level.\n");
+        knnNoise += noiseStep;
+        nlmNoise += noiseStep;
+        break;
 
     case 'l':
-      printf("Decrease LERP quotient.\n");
-      lerpC = MAX(lerpC - lerpStep, 0.0f);
-      break;
+        printf("Decrease LERP quotient.\n");
+        lerpC = MAX(lerpC - lerpStep, 0.0f);
+        break;
 
     case 'L':
-      printf("Increase LERP quotient.\n");
-      lerpC = MIN(lerpC + lerpStep, 1.0f);
-      break;
+        printf("Increase LERP quotient.\n");
+        lerpC = MIN(lerpC + lerpStep, 1.0f);
+        break;
 
     case 'f':
     case 'F':
-      g_FPS = true;
-      break;
+        g_FPS = true;
+        break;
 
     case '?':
-      printf("lerpC = %5.5f\n", lerpC);
-      printf("knnNoise = %5.5f\n", knnNoise);
-      printf("nlmNoise = %5.5f\n", nlmNoise);
-      break;
-  }
+        printf("lerpC = %5.5f\n", lerpC);
+        printf("knnNoise = %5.5f\n", knnNoise);
+        printf("nlmNoise = %5.5f\n", nlmNoise);
+        break;
+    }
 }
 
-int initGL(int *argc, char **argv) {
-  printf("Initializing GLUT...\n");
-  glutInit(argc, argv);
-  glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
-  glutInitWindowSize(imageW, imageH);
-  glutInitWindowPosition(512 - imageW / 2, 384 - imageH / 2);
-  glutCreateWindow(argv[0]);
-  glutDisplayFunc(displayFunc);
-  glutKeyboardFunc(keyboard);
-  glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
-  printf("OpenGL window created.\n");
+int initGL(int* argc, char** argv)
+{
+    printf("Initializing GLUT...\n");
+    glutInit(argc, argv);
+    glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
+    glutInitWindowSize(imageW, imageH);
+    glutInitWindowPosition(512 - imageW / 2, 384 - imageH / 2);
+    glutCreateWindow(argv[0]);
 
-#if defined(__APPLE__) || defined(MACOSX)
-  atexit(cleanup);
-#else
-  glutCloseFunc(cleanup);
-#endif
+    glutDisplayFunc(displayFunc);   //設定callback function
+    glutKeyboardFunc(keyboard);     //設定callback function
 
-  if (!isGLVersionSupported(1, 5) ||
-      !areGLExtensionsSupported(
-          "GL_ARB_vertex_buffer_object GL_ARB_pixel_buffer_object")) {
-    fprintf(stderr, "Error: failed to get minimal extensions for demo\n");
-    fprintf(stderr, "This sample requires:\n");
-    fprintf(stderr, "  OpenGL version 1.5\n");
-    fprintf(stderr, "  GL_ARB_vertex_buffer_object\n");
-    fprintf(stderr, "  GL_ARB_pixel_buffer_object\n");
-    fflush(stderr);
-    return false;
-  }
+    glutTimerFunc(REFRESH_DELAY, timerEvent, 0);    //設定timer事件
 
-  return 0;
+    printf("OpenGL window created.\n");
+
+    glutCloseFunc(cleanup);
+
+    if (!isGLVersionSupported(1, 5) || !areGLExtensionsSupported("GL_ARB_vertex_buffer_object GL_ARB_pixel_buffer_object"))
+    {
+        fprintf(stderr, "Error: failed to get minimal extensions for demo\n");
+        fprintf(stderr, "This sample requires:\n");
+        fprintf(stderr, "  OpenGL version 1.5\n");
+        fprintf(stderr, "  GL_ARB_vertex_buffer_object\n");
+        fprintf(stderr, "  GL_ARB_pixel_buffer_object\n");
+        fflush(stderr);
+        return false;
+    }
+
+    return 0;
 }
 
 // shader for displaying floating-point texture
@@ -347,200 +368,190 @@ static const char *shader_code =
     "TEX result.color, fragment.texcoord, texture[0], 2D; \n"
     "END";
 
-GLuint compileASMShader(GLenum program_type, const char *code) {
-  GLuint program_id;
-  glGenProgramsARB(1, &program_id);
-  glBindProgramARB(program_type, program_id);
-  glProgramStringARB(program_type, GL_PROGRAM_FORMAT_ASCII_ARB,
-                     (GLsizei)strlen(code), (GLubyte *)code);
+GLuint compileASMShader(GLenum program_type, const char* code) {
+    GLuint program_id;
+    glGenProgramsARB(1, &program_id);
+    glBindProgramARB(program_type, program_id);
+    glProgramStringARB(program_type, GL_PROGRAM_FORMAT_ASCII_ARB,
+        (GLsizei)strlen(code), (GLubyte*)code);
 
-  GLint error_pos;
-  glGetIntegerv(GL_PROGRAM_ERROR_POSITION_ARB, &error_pos);
+    GLint error_pos;
+    glGetIntegerv(GL_PROGRAM_ERROR_POSITION_ARB, &error_pos);
 
-  if (error_pos != -1) {
-    const GLubyte *error_string;
-    error_string = glGetString(GL_PROGRAM_ERROR_STRING_ARB);
-    fprintf(stderr, "Program error at position: %d\n%s\n", (int)error_pos,
+    if (error_pos != -1) {
+        const GLubyte* error_string;
+        error_string = glGetString(GL_PROGRAM_ERROR_STRING_ARB);
+        fprintf(stderr, "Program error at position: %d\n%s\n", (int)error_pos,
             error_string);
-    return 0;
-  }
+        return 0;
+    }
 
-  return program_id;
+    return program_id;
 }
 
-void initOpenGLBuffers() {
-  printf("Creating GL texture...\n");
-  glEnable(GL_TEXTURE_2D);
-  glGenTextures(1, &gl_Tex);
-  glBindTexture(GL_TEXTURE_2D, gl_Tex);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, imageW, imageH, 0, GL_RGBA,
-               GL_UNSIGNED_BYTE, h_Src);
-  printf("Texture created.\n");
-
-  printf("Creating PBO...\n");
-  glGenBuffers(1, &gl_PBO);
-  glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, gl_PBO);
-  glBufferData(GL_PIXEL_UNPACK_BUFFER_ARB, imageW * imageH * 4, h_Src,
-               GL_STREAM_COPY);
-  // While a PBO is registered to CUDA, it can't be used
-  // as the destination for OpenGL drawing calls.
-  // But in our particular case OpenGL is only used
-  // to display the content of the PBO, specified by CUDA kernels,
-  // so we need to register/unregister it only once.
-  // DEPRECATED: checkCudaErrors(cudaGLRegisterBufferObject(gl_PBO) );
-  checkCudaErrors(cudaGraphicsGLRegisterBuffer(
-      &cuda_pbo_resource, gl_PBO, cudaGraphicsMapFlagsWriteDiscard));
-  GLenum gl_error = glGetError();
-
-  if (gl_error != GL_NO_ERROR) {
-#if defined(WIN32) || defined(_WIN32) || defined(WIN64) || defined(_WIN64)
-    char tmpStr[512];
-    // NOTE: "%s(%i) : " allows Visual Studio to directly jump to the file at
-    // the right line when the user double clicks on the error line in the
-    // Output pane. Like any compile error.
-    sprintf_s(tmpStr, 255, "\n%s(%i) : GL Error : %s\n\n", __FILE__, __LINE__,
-              gluErrorString(gl_error));
-    OutputDebugString(tmpStr);
-#endif
-    fprintf(stderr, "GL Error in file '%s' in line %d :\n", __FILE__, __LINE__);
-    fprintf(stderr, "%s\n", gluErrorString(gl_error));
-    exit(EXIT_FAILURE);
-  }
-
-  printf("PBO created.\n");
-
-  // load shader program
-  shader = compileASMShader(GL_FRAGMENT_PROGRAM_ARB, shader_code);
-}
-
-void cleanup() {
-  free(h_Src);
-  checkCudaErrors(CUDA_FreeArray());
-  checkCudaErrors(cudaGraphicsUnregisterResource(cuda_pbo_resource));
-
-  glDeleteProgramsARB(1, &shader);
-
-  sdkDeleteTimer(&timer);
-}
-
-void runAutoTest(int argc, char **argv, const char *filename,
-                 int kernel_param) {
-  printf("[%s] - (automated testing w/ readback)\n", sSDKsample);
-
-  int devID = findCudaDevice(argc, (const char **)argv);
-
-  // First load the image, so we know what the size of the image (imageW and
-  // imageH)
-  printf("Allocating host and CUDA memory and loading image file...\n");
-  const char *image_path = sdkFindFilePath("portrait_noise.bmp", argv[0]);
-
-  if (image_path == NULL) {
-    printf(
-        "imageDenoisingGL was unable to find and load image file "
-        "<portrait_noise.bmp>.\nExiting...\n");
-    exit(EXIT_FAILURE);
-  }
-
-  LoadBMPFile(&h_Src, &imageW, &imageH, image_path);
-  printf("Data init done.\n");
-
-  checkCudaErrors(CUDA_MallocArray(&h_Src, imageW, imageH));
-
-  TColor *d_dst = NULL;
-  unsigned char *h_dst = NULL;
-  checkCudaErrors(
-      cudaMalloc((void **)&d_dst, imageW * imageH * sizeof(TColor)));
-  h_dst = (unsigned char *)malloc(imageH * imageW * 4);
-
-  {
-    g_Kernel = kernel_param;
-    printf("[AutoTest]: %s <%s>\n", sSDKsample, filterMode[g_Kernel]);
-
-    runImageFilters(d_dst);
-
-    checkCudaErrors(cudaDeviceSynchronize());
-
-    checkCudaErrors(cudaMemcpy(h_dst, d_dst, imageW * imageH * sizeof(TColor),
-                               cudaMemcpyDeviceToHost));
-    sdkSavePPM4ub(filename, h_dst, imageW, imageH);
-  }
-
-  checkCudaErrors(CUDA_FreeArray());
-  free(h_Src);
-
-  checkCudaErrors(cudaFree(d_dst));
-  free(h_dst);
-
-  printf("\n[%s] -> Kernel %d, Saved: %s\n", sSDKsample, kernel_param,
-         filename);
-
-  exit(g_TotalErrors == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
-}
-
-int main(int argc, char **argv)
+void initOpenGLBuffers()
 {
-  char *dump_file = NULL;
+    printf("Creating GL texture...\n");
+    glEnable(GL_TEXTURE_2D);
+    glGenTextures(1, &gl_Tex);
+    glBindTexture(GL_TEXTURE_2D, gl_Tex);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
-  pArgc = &argc;
-  pArgv = argv;
-
-  printf("%s Starting...\n\n", sSDKsample);
-
-  if (checkCmdLineFlag(argc, (const char **)argv, "file"))
-  {
-    getCmdLineArgumentString(argc, (const char **)argv, "file", (char **)&dump_file);
-
-    int kernel = 1;
-
-    if (checkCmdLineFlag(argc, (const char **)argv, "kernel"))
+    for (int i = 0; i < imageW * imageH / 3; i++)
     {
-      kernel = getCmdLineArgumentInt(argc, (const char **)argv, "kernel");
+        h_Src1[i].x = h_Src1[i].x / 2;
+        h_Src1[i].y = h_Src1[i].y / 2;
+        h_Src1[i].z = h_Src1[i].z / 2;
+        h_Src1[i].w = h_Src1[i].w / 2;
     }
 
-    runAutoTest(argc, argv, dump_file, kernel);
-  }
-  else
-  {
-    printf("[%s]\n", sSDKsample);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, imageW, imageH, 0, GL_RGBA, GL_UNSIGNED_BYTE, h_Src1);
 
-    // use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
-    if (checkCmdLineFlag(argc, (const char **)argv, "device"))
+    printf("Texture created.\n");
+
+    printf("Creating PBO...\n");
+    glGenBuffers(1, &gl_PBO);
+    glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, gl_PBO);
+    glBufferData(GL_PIXEL_UNPACK_BUFFER_ARB, imageW * imageH * 4, h_Src1, GL_STREAM_COPY);
+    // While a PBO is registered to CUDA, it can't be used
+    // as the destination for OpenGL drawing calls.
+    // But in our particular case OpenGL is only used
+    // to display the content of the PBO, specified by CUDA kernels,
+    // so we need to register/unregister it only once.
+    // DEPRECATED: checkCudaErrors(cudaGLRegisterBufferObject(gl_PBO) );
+    checkCudaErrors(cudaGraphicsGLRegisterBuffer(&cuda_pbo_resource, gl_PBO, cudaGraphicsMapFlagsWriteDiscard));
+    GLenum gl_error = glGetError();
+
+    if (gl_error != GL_NO_ERROR)
     {
-      printf("[%s]\n", argv[0]);
-      printf("   Does not explicitly support -device=n in OpenGL mode\n");
-      printf("   To use -device=n, the sample must be running w/o OpenGL\n\n");
-      printf(" > %s -device=n -qatest\n", argv[0]);
-      printf("exiting...\n");
-      exit(EXIT_SUCCESS);
+        char tmpStr[512];
+        // NOTE: "%s(%i) : " allows Visual Studio to directly jump to the file at
+        // the right line when the user double clicks on the error line in the
+        // Output pane. Like any compile error.
+        sprintf_s(tmpStr, 255, "\n%s(%i) : GL Error : %s\n\n", __FILE__, __LINE__, gluErrorString(gl_error));
+        OutputDebugString(tmpStr);
+
+        fprintf(stderr, "GL Error in file '%s' in line %d :\n", __FILE__, __LINE__);
+        fprintf(stderr, "%s\n", gluErrorString(gl_error));
+        exit(EXIT_FAILURE);
     }
+
+    printf("PBO created.\n");
+
+    // load shader program
+    shader = compileASMShader(GL_FRAGMENT_PROGRAM_ARB, shader_code);
+}
+
+void cleanup()
+{
+    printf("cleanup()\n");
+
+    free(h_Src1);
+    free(h_Src2);
+    checkCudaErrors(CUDA_FreeArray());
+    checkCudaErrors(cudaGraphicsUnregisterResource(cuda_pbo_resource));
+
+    glDeleteProgramsARB(1, &shader);
+
+    sdkDeleteTimer(&timer);
+}
+
+void runAutoTest(int argc, char** argv, const char* filename, int kernel_param)
+{
+    printf("XXXXXXXXXX  runAutoTest runAutoTest runAutoTest runAutoTest\n");
+    printf("[%s] - (automated testing w/ readback)\n", sSDKsample);
+
+    int devID = findCudaDevice(argc, (const char**)argv);
 
     // First load the image, so we know what the size of the image (imageW and imageH)
     printf("Allocating host and CUDA memory and loading image file...\n");
-    const char *image_path = sdkFindFilePath("portrait_noise.bmp", argv[0]);
+
+    const char* image_path = sdkFindFilePath("portrait_noise.bmp", argv[0]);
 
     if (image_path == NULL)
     {
-      printf("imageDenoisingGL was unable to find and load image file <portrait_noise.bmp>.\nExiting...\n");
-      exit(EXIT_FAILURE);
+        printf(
+            "imageDenoisingGL was unable to find and load image file "
+            "<portrait_noise.bmp>.\nExiting...\n");
+        exit(EXIT_FAILURE);
     }
 
-    printf("filename : %s\n", image_path);
-
-    LoadBMPFile(&h_Src, &imageW, &imageH, image_path);
+    LoadBMPFile(&h_Src1, &imageW, &imageH, image_path);
     printf("Data init done.\n");
 
+    checkCudaErrors(CUDA_MallocArray(&h_Src1, imageW, imageH));
+
+    TColor* d_dst = NULL;
+    unsigned char* h_dst = NULL;
+    checkCudaErrors(cudaMalloc((void**)&d_dst, imageW * imageH * sizeof(TColor)));
+    h_dst = (unsigned char*)malloc(imageH * imageW * 4);
+
+    {
+        g_Kernel = kernel_param;
+        printf("[AutoTest]: %s <%s>\n", sSDKsample, filterMode[g_Kernel]);
+
+        checkCudaErrors(cudaDeviceSynchronize());
+
+        checkCudaErrors(cudaMemcpy(h_dst, d_dst, imageW * imageH * sizeof(TColor),
+            cudaMemcpyDeviceToHost));
+        sdkSavePPM4ub(filename, h_dst, imageW, imageH);
+    }
+
+    checkCudaErrors(CUDA_FreeArray());
+    free(h_Src1);
+
+    checkCudaErrors(cudaFree(d_dst));
+    free(h_dst);
+
+    printf("\n[%s] -> Kernel %d, Saved: %s\n", sSDKsample, kernel_param, filename);
+
+    exit(g_TotalErrors == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
+}
+
+int main(int argc, char** argv)
+{
+    //const char* image_path = sdkFindFilePath("portrait_noise.bmp", argv[0]);
+    //const char* filename_read1 = "C:\\______test_files\\ims01.bmp"; //32 bits
+    const char* filename_read1 = "C:\\______test_files\\ims01.24.bmp"; //24 bits
+    const char* filename_read2 = "C:\\______test_files\\ims03.24.bmp"; //24 bits
+
+    imageW = 0;
+    imageH = 0;
+    LoadBMPFile(&h_Src1, &imageW, &imageH, filename_read1);
+    printf("filename : %s\tW = %d\tH = %d\n", filename_read1, imageW, imageH);
+
+    imageW = 0;
+    imageH = 0;
+    LoadBMPFile(&h_Src2, &imageW, &imageH, filename_read2);
+    printf("filename : %s\tW = %d\tH = %d\n", filename_read2, imageW, imageH);
+
     initGL(&argc, argv);
-    findCudaDevice(argc, (const char **)argv);
+    findCudaDevice(argc, (const char**)argv);
 
-    checkCudaErrors(CUDA_MallocArray(&h_Src, imageW, imageH));
+    checkCudaErrors(CUDA_MallocArray(&h_Src1, imageW, imageH));
+    //checkCudaErrors(CUDA_MallocArray(&h_Src2, imageW, imageH));
 
+    printf("111\n");
     initOpenGLBuffers();
-  }
+    printf("222\n");
+    glutSetWindowTitle("ims pic");
+    printf("333\n");
+    glutMainLoop();
+    printf("444\n");
+}
 
-  glutMainLoop();
+void print_some_data(cudaTextureObject_t texImage)
+{
+    int i;
+    for (i = 0; i < 10; i++)
+    {
+        float x = (float)i + 0.5f;
+        float y = (float)i + 0.5f;
+
+
+        //float4 clr00 = tex2D<float4>(texImage, x, y);
+    }
 }
