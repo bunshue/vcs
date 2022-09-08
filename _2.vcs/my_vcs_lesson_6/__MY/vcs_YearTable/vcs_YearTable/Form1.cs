@@ -1272,6 +1272,8 @@ namespace vcs_YearTable
         private void button0_Click(object sender, EventArgs e)
         {
             //朝代起訖
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)

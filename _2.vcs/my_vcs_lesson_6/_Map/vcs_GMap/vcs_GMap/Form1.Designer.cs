@@ -758,8 +758,9 @@
             this.rb_location17.AutoSize = true;
             this.rb_location17.Location = new System.Drawing.Point(191, 68);
             this.rb_location17.Name = "rb_location17";
-            this.rb_location17.Size = new System.Drawing.Size(14, 13);
+            this.rb_location17.Size = new System.Drawing.Size(47, 16);
             this.rb_location17.TabIndex = 16;
+            this.rb_location17.Text = "古都";
             this.rb_location17.UseVisualStyleBackColor = true;
             // 
             // rb_location16
