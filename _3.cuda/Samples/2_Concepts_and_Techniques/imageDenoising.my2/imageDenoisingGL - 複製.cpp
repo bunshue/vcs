@@ -16,8 +16,17 @@
 #include <helper_functions.h>  // includes for helper utility functions
 #include <helper_cuda.h>  // includes for cuda error checking and initialization
 
-const char* filterMode[] = { "Passthrough", "KNN method", "NLM method",
-                            "Quick NLM(NLM2) method", NULL };
+const char *sSDKsample = "CUDA ImageDenoising";
+
+const char *filterMode[] = {"Passthrough", "KNN method", "NLM method",
+                            "Quick NLM(NLM2) method", NULL};
+
+// Define the files that are to be save and the reference images for validation
+const char *sOriginal[] = {"image_passthru.ppm", "image_knn.ppm",
+                           "image_nlm.ppm", "image_nlm2.ppm", NULL};
+
+const char *sReference[] = {"ref_passthru.ppm", "ref_knn.ppm", "ref_nlm.ppm",
+                            "ref_nlm2.ppm", NULL};
 
 ////////////////////////////////////////////////////////////////////////////////
 // Global data handlers and parameters
@@ -31,6 +40,8 @@ uchar4 *h_Src1;
 uchar4* h_Src2;
 int imageW, imageH;
 
+GLuint shader;
+
 ////////////////////////////////////////////////////////////////////////////////
 // Main program
 ////////////////////////////////////////////////////////////////////////////////
@@ -39,9 +50,16 @@ bool g_FPS = false;
 bool g_Diag = false;
 StopWatchInterface *timer = NULL;
 
+// Algorithms global parameters
+const float noiseStep = 0.025f;
+const float lerpStep = 0.025f;
+static float knnNoise = 0.32f;
+static float nlmNoise = 1.45f;
+static float lerpC = 0.2f;
 
 const int frameN = 24;
 int frameCounter = 0;
+
 #define BUFFER_DATA(i) ((char *)0 + i)
 
 // Auto-Verification Code
@@ -58,6 +76,7 @@ char **pArgv = NULL;
 #define REFRESH_DELAY 10  // ms
 
 void cleanup();
+void print_some_data(cudaTextureObject_t texImage);
 
 void computeFPS()
 {
@@ -81,9 +100,6 @@ void computeFPS()
 
 void runImageFilters(TColor* d_dst)
 {
-
-    cuda_Copy(d_dst, imageW, imageH, texImage);
-
     //printf("%d ", g_Kernel);
     switch (g_Kernel)
     {
@@ -94,9 +110,11 @@ void runImageFilters(TColor* d_dst)
     case 1:
         if (!g_Diag)
         {
+            cuda_KNN(d_dst, imageW, imageH, 1.0f / (knnNoise * knnNoise), lerpC, texImage);
         }
         else
         {
+            cuda_KNNdiag(d_dst, imageW, imageH, 1.0f / (knnNoise * knnNoise), lerpC, texImage);
         }
 
         break;
@@ -104,9 +122,11 @@ void runImageFilters(TColor* d_dst)
     case 2:
         if (!g_Diag)
         {
+            cuda_NLM(d_dst, imageW, imageH, 1.0f / (nlmNoise * nlmNoise), lerpC, texImage);
         }
         else
         {
+            cuda_NLMdiag(d_dst, imageW, imageH, 1.0f / (nlmNoise * nlmNoise), lerpC, texImage);
         }
 
         break;
@@ -114,9 +134,11 @@ void runImageFilters(TColor* d_dst)
     case 3:
         if (!g_Diag)
         {
+            cuda_NLM2(d_dst, imageW, imageH, 1.0f / (nlmNoise * nlmNoise), lerpC, texImage);
         }
         else
         {
+            cuda_NLM2diag(d_dst, imageW, imageH, 1.0f / (nlmNoise * nlmNoise), lerpC, texImage);
         }
 
         break;
@@ -124,7 +146,7 @@ void runImageFilters(TColor* d_dst)
     case 10:
         printf("Change some data\n");
 
-        //cuda_Copy(d_dst, imageW, imageH, texImage);
+        cuda_Copy(d_dst, imageW, imageH, texImage);
 
         //print_some_data(texImage);    //TBD
 
@@ -208,7 +230,7 @@ void displayFunc(void)
 
     sdkStopTimer(&timer);
 
-    computeFPS();
+    //computeFPS();
 }
 
 void timerEvent(int value)
@@ -275,18 +297,24 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
 
     case 'n':
         printf("Decrease noise level.\n");
+        knnNoise -= noiseStep;
+        nlmNoise -= noiseStep;
         break;
 
     case 'N':
         printf("Increase noise level.\n");
+        knnNoise += noiseStep;
+        nlmNoise += noiseStep;
         break;
 
     case 'l':
         printf("Decrease LERP quotient.\n");
+        lerpC = MAX(lerpC - lerpStep, 0.0f);
         break;
 
     case 'L':
         printf("Increase LERP quotient.\n");
+        lerpC = MIN(lerpC + lerpStep, 1.0f);
         break;
 
     case 'f':
@@ -295,6 +323,9 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
         break;
 
     case '?':
+        printf("lerpC = %5.5f\n", lerpC);
+        printf("knnNoise = %5.5f\n", knnNoise);
+        printf("nlmNoise = %5.5f\n", nlmNoise);
         break;
     }
 }
@@ -331,6 +362,33 @@ int initGL(int* argc, char** argv)
     return 0;
 }
 
+// shader for displaying floating-point texture
+static const char *shader_code =
+    "!!ARBfp1.0\n"
+    "TEX result.color, fragment.texcoord, texture[0], 2D; \n"
+    "END";
+
+GLuint compileASMShader(GLenum program_type, const char* code) {
+    GLuint program_id;
+    glGenProgramsARB(1, &program_id);
+    glBindProgramARB(program_type, program_id);
+    glProgramStringARB(program_type, GL_PROGRAM_FORMAT_ASCII_ARB,
+        (GLsizei)strlen(code), (GLubyte*)code);
+
+    GLint error_pos;
+    glGetIntegerv(GL_PROGRAM_ERROR_POSITION_ARB, &error_pos);
+
+    if (error_pos != -1) {
+        const GLubyte* error_string;
+        error_string = glGetString(GL_PROGRAM_ERROR_STRING_ARB);
+        fprintf(stderr, "Program error at position: %d\n%s\n", (int)error_pos,
+            error_string);
+        return 0;
+    }
+
+    return program_id;
+}
+
 void initOpenGLBuffers()
 {
     printf("Creating GL texture...\n");
@@ -342,17 +400,14 @@ void initOpenGLBuffers()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
-    /*
-    for (int i = 0; i < imageW * imageH; i++)
+    for (int i = 0; i < imageW * imageH / 3; i++)
     {
         h_Src1[i].x = h_Src1[i].x / 2;
         h_Src1[i].y = h_Src1[i].y / 2;
         h_Src1[i].z = h_Src1[i].z / 2;
         h_Src1[i].w = h_Src1[i].w / 2;
     }
-    */
 
-    //在這裡把影像設定到pBox....
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, imageW, imageH, 0, GL_RGBA, GL_UNSIGNED_BYTE, h_Src1);
 
     printf("Texture created.\n");
@@ -361,7 +416,12 @@ void initOpenGLBuffers()
     glGenBuffers(1, &gl_PBO);
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, gl_PBO);
     glBufferData(GL_PIXEL_UNPACK_BUFFER_ARB, imageW * imageH * 4, h_Src1, GL_STREAM_COPY);
-
+    // While a PBO is registered to CUDA, it can't be used
+    // as the destination for OpenGL drawing calls.
+    // But in our particular case OpenGL is only used
+    // to display the content of the PBO, specified by CUDA kernels,
+    // so we need to register/unregister it only once.
+    // DEPRECATED: checkCudaErrors(cudaGLRegisterBufferObject(gl_PBO) );
     checkCudaErrors(cudaGraphicsGLRegisterBuffer(&cuda_pbo_resource, gl_PBO, cudaGraphicsMapFlagsWriteDiscard));
     GLenum gl_error = glGetError();
 
@@ -380,6 +440,9 @@ void initOpenGLBuffers()
     }
 
     printf("PBO created.\n");
+
+    // load shader program
+    shader = compileASMShader(GL_FRAGMENT_PROGRAM_ARB, shader_code);
 }
 
 void cleanup()
@@ -391,12 +454,67 @@ void cleanup()
     checkCudaErrors(CUDA_FreeArray());
     checkCudaErrors(cudaGraphicsUnregisterResource(cuda_pbo_resource));
 
-sdkDeleteTimer(&timer);
+    glDeleteProgramsARB(1, &shader);
+
+    sdkDeleteTimer(&timer);
+}
+
+void runAutoTest(int argc, char** argv, const char* filename, int kernel_param)
+{
+    printf("XXXXXXXXXX  runAutoTest runAutoTest runAutoTest runAutoTest\n");
+    printf("[%s] - (automated testing w/ readback)\n", sSDKsample);
+
+    int devID = findCudaDevice(argc, (const char**)argv);
+
+    // First load the image, so we know what the size of the image (imageW and imageH)
+    printf("Allocating host and CUDA memory and loading image file...\n");
+
+    const char* image_path = sdkFindFilePath("portrait_noise.bmp", argv[0]);
+
+    if (image_path == NULL)
+    {
+        printf(
+            "imageDenoisingGL was unable to find and load image file "
+            "<portrait_noise.bmp>.\nExiting...\n");
+        exit(EXIT_FAILURE);
+    }
+
+    LoadBMPFile(&h_Src1, &imageW, &imageH, image_path);
+    printf("Data init done.\n");
+
+    checkCudaErrors(CUDA_MallocArray(&h_Src1, imageW, imageH));
+
+    TColor* d_dst = NULL;
+    unsigned char* h_dst = NULL;
+    checkCudaErrors(cudaMalloc((void**)&d_dst, imageW * imageH * sizeof(TColor)));
+    h_dst = (unsigned char*)malloc(imageH * imageW * 4);
+
+    {
+        g_Kernel = kernel_param;
+        printf("[AutoTest]: %s <%s>\n", sSDKsample, filterMode[g_Kernel]);
+
+        checkCudaErrors(cudaDeviceSynchronize());
+
+        checkCudaErrors(cudaMemcpy(h_dst, d_dst, imageW * imageH * sizeof(TColor),
+            cudaMemcpyDeviceToHost));
+        sdkSavePPM4ub(filename, h_dst, imageW, imageH);
+    }
+
+    checkCudaErrors(CUDA_FreeArray());
+    free(h_Src1);
+
+    checkCudaErrors(cudaFree(d_dst));
+    free(h_dst);
+
+    printf("\n[%s] -> Kernel %d, Saved: %s\n", sSDKsample, kernel_param, filename);
+
+    exit(g_TotalErrors == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
 }
 
 int main(int argc, char** argv)
 {
-    //讀取圖片資料
+    //const char* image_path = sdkFindFilePath("portrait_noise.bmp", argv[0]);
+    //const char* filename_read1 = "C:\\______test_files\\ims01.bmp"; //32 bits
     const char* filename_read1 = "C:\\______test_files\\ims01.24.bmp"; //24 bits
     const char* filename_read2 = "C:\\______test_files\\ims03.24.bmp"; //24 bits
 
@@ -414,10 +532,26 @@ int main(int argc, char** argv)
     findCudaDevice(argc, (const char**)argv);
 
     checkCudaErrors(CUDA_MallocArray(&h_Src1, imageW, imageH));
-    checkCudaErrors(CUDA_MallocArray(&h_Src2, imageW, imageH));
+    //checkCudaErrors(CUDA_MallocArray(&h_Src2, imageW, imageH));
 
+    printf("111\n");
     initOpenGLBuffers();
+    printf("222\n");
     glutSetWindowTitle("ims pic");
-
+    printf("333\n");
     glutMainLoop();
+    printf("444\n");
+}
+
+void print_some_data(cudaTextureObject_t texImage)
+{
+    int i;
+    for (i = 0; i < 10; i++)
+    {
+        float x = (float)i + 0.5f;
+        float y = (float)i + 0.5f;
+
+
+        //float4 clr00 = tex2D<float4>(texImage, x, y);
+    }
 }

@@ -16,8 +16,17 @@
 #include <helper_functions.h>  // includes for helper utility functions
 #include <helper_cuda.h>  // includes for cuda error checking and initialization
 
-const char* filterMode[] = { "Passthrough", "KNN method", "NLM method",
-                            "Quick NLM(NLM2) method", NULL };
+const char *sSDKsample = "CUDA ImageDenoising";
+
+const char *filterMode[] = {"Passthrough", "KNN method", "NLM method",
+                            "Quick NLM(NLM2) method", NULL};
+
+// Define the files that are to be save and the reference images for validation
+const char *sOriginal[] = {"image_passthru.ppm", "image_knn.ppm",
+                           "image_nlm.ppm", "image_nlm2.ppm", NULL};
+
+const char *sReference[] = {"ref_passthru.ppm", "ref_knn.ppm", "ref_nlm.ppm",
+                            "ref_nlm2.ppm", NULL};
 
 ////////////////////////////////////////////////////////////////////////////////
 // Global data handlers and parameters
@@ -31,6 +40,8 @@ uchar4 *h_Src1;
 uchar4* h_Src2;
 int imageW, imageH;
 
+GLuint shader;
+
 ////////////////////////////////////////////////////////////////////////////////
 // Main program
 ////////////////////////////////////////////////////////////////////////////////
@@ -39,9 +50,16 @@ bool g_FPS = false;
 bool g_Diag = false;
 StopWatchInterface *timer = NULL;
 
+// Algorithms global parameters
+const float noiseStep = 0.025f;
+const float lerpStep = 0.025f;
+static float knnNoise = 0.32f;
+static float nlmNoise = 1.45f;
+static float lerpC = 0.2f;
 
 const int frameN = 24;
 int frameCounter = 0;
+
 #define BUFFER_DATA(i) ((char *)0 + i)
 
 // Auto-Verification Code
@@ -79,58 +97,51 @@ void computeFPS()
     }
 }
 
+void do_alpha_mixer(int alpha, TColor* d_dst)
+{
+    //printf("%d ", alpha);
+
+    cuda_Mix(d_dst, alpha, imageW, imageH, texImage1, texImage2);
+}
+
+int alpha = 0;
 void runImageFilters(TColor* d_dst)
 {
+    do_alpha_mixer(alpha, d_dst);
 
-    cuda_Copy(d_dst, imageW, imageH, texImage);
+    alpha++;
+    if (alpha > 100)
+        alpha = 0;
+
+    //cuda_Copy(d_dst, imageW, imageH, texImage1);
 
     //printf("%d ", g_Kernel);
     switch (g_Kernel)
     {
     case 0:
-        //cuda_Copy(d_dst, imageW, imageH, texImage);
+        
         break;
 
     case 1:
-        if (!g_Diag)
-        {
-        }
-        else
-        {
-        }
-
+        cuda_Copy(d_dst, imageW, imageH, texImage1);
         break;
 
     case 2:
-        if (!g_Diag)
-        {
-        }
-        else
-        {
-        }
-
+        cuda_Copy(d_dst, imageW, imageH, texImage2);
         break;
 
     case 3:
-        if (!g_Diag)
-        {
-        }
-        else
-        {
-        }
 
         break;
 
     case 10:
         printf("Change some data\n");
 
-        //cuda_Copy(d_dst, imageW, imageH, texImage);
+        cuda_Copy(d_dst, imageW, imageH, texImage1);
 
-        //print_some_data(texImage);    //TBD
+        //cuda_Copy(d_dst, imageW, imageH, texImage1);
 
-        //cuda_Copy(d_dst, imageW, imageH, texImage);
-
-        //cuda_NLM(d_dst, imageW/2, imageH, 1.0f / (nlmNoise * nlmNoise * 5), lerpC, texImage);
+        //cuda_NLM(d_dst, imageW/2, imageH, 1.0f / (nlmNoise * nlmNoise * 5), lerpC, texImage1);
 
         g_Kernel = 0;
         break;
@@ -234,59 +245,19 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
         return;
 
     case '1':
-        printf("Passthrough.\n");
-        g_Kernel = 0;
-        break;
-
-    case '2':
-        printf("KNN method \n");
+        printf("1\n");
         g_Kernel = 1;
         break;
 
-    case '3':
-        printf("NLM method\n");
+    case '2':
+        printf("2\n");
         g_Kernel = 2;
         break;
 
+    case '3':
+        break;
+
     case '4':
-        printf("Quick NLM(NLM2) method\n");
-        g_Kernel = 3;
-        break;
-
-    case 'c':
-        printf("Change some data\n");
-        g_Kernel = 10;
-        break;
-
-    case 'a':
-        printf("Copy ims 01\n");
-        g_Kernel = 11;
-        break;
-
-    case 'b':
-        printf("Copy ims 03\n");
-        g_Kernel = 13;
-        break;
-
-    case '*':
-        printf(g_Diag ? "LERP highlighting mode.\n" : "Normal mode.\n");
-        g_Diag = !g_Diag;
-        break;
-
-    case 'n':
-        printf("Decrease noise level.\n");
-        break;
-
-    case 'N':
-        printf("Increase noise level.\n");
-        break;
-
-    case 'l':
-        printf("Decrease LERP quotient.\n");
-        break;
-
-    case 'L':
-        printf("Increase LERP quotient.\n");
         break;
 
     case 'f':
@@ -343,7 +314,7 @@ void initOpenGLBuffers()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
     /*
-    for (int i = 0; i < imageW * imageH; i++)
+    for (int i = 0; i < imageW * imageH / 3; i++)
     {
         h_Src1[i].x = h_Src1[i].x / 2;
         h_Src1[i].y = h_Src1[i].y / 2;
@@ -391,12 +362,13 @@ void cleanup()
     checkCudaErrors(CUDA_FreeArray());
     checkCudaErrors(cudaGraphicsUnregisterResource(cuda_pbo_resource));
 
-sdkDeleteTimer(&timer);
+    sdkDeleteTimer(&timer);
 }
 
 int main(int argc, char** argv)
 {
-    //讀取圖片資料
+    //const char* image_path = sdkFindFilePath("portrait_noise.bmp", argv[0]);
+    //const char* filename_read1 = "C:\\______test_files\\ims01.bmp"; //32 bits
     const char* filename_read1 = "C:\\______test_files\\ims01.24.bmp"; //24 bits
     const char* filename_read2 = "C:\\______test_files\\ims03.24.bmp"; //24 bits
 
@@ -413,11 +385,10 @@ int main(int argc, char** argv)
     initGL(&argc, argv);
     findCudaDevice(argc, (const char**)argv);
 
-    checkCudaErrors(CUDA_MallocArray(&h_Src1, imageW, imageH));
-    checkCudaErrors(CUDA_MallocArray(&h_Src2, imageW, imageH));
+    checkCudaErrors(CUDA_MallocArray(&texImage1, &h_Src1, imageW, imageH));
+    checkCudaErrors(CUDA_MallocArray(&texImage2, &h_Src2, imageW, imageH));
 
     initOpenGLBuffers();
     glutSetWindowTitle("ims pic");
-
     glutMainLoop();
 }

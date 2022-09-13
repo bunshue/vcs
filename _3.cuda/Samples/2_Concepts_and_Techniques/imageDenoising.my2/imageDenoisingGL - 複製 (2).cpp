@@ -6,13 +6,14 @@
 #include <cuda_runtime.h>
 #include <cuda_gl_interop.h>
 
+// Includes
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include "imageDenoising.h"
+
 // includes, project
 #include <helper_cuda.h>  // includes for cuda error checking and initialization
-
-typedef unsigned int TColor;
-
-extern "C" cudaError_t CUDA_MallocArray(uchar4 * *h_Src, int imageW, int imageH);
-extern "C" cudaError_t CUDA_FreeArray();
 
 ////////////////////////////////////////////////////////////////////////////////
 // Global data handlers and parameters
@@ -23,6 +24,7 @@ struct cudaGraphicsResource *cuda_pbo_resource;  // handles OpenGL-CUDA exchange
 // Source image on the host side
 
 uchar4 *h_Src1;
+uchar4* h_Src2;
 int imageW, imageH;
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -155,41 +157,35 @@ void cleanup()
     printf("cleanup()\n");
 
     free(h_Src1);
+    free(h_Src2);
     checkCudaErrors(CUDA_FreeArray());
     checkCudaErrors(cudaGraphicsUnregisterResource(cuda_pbo_resource));
 }
 
 int main(int argc, char** argv)
 {
-    //自製圖片資料
-    imageW = 640;
-    imageH = 480;
+    //讀取圖片資料
+    const char* filename_read1 = "C:\\______test_files\\ims01.24.bmp"; //24 bits
+    const char* filename_read2 = "C:\\______test_files\\ims03.24.bmp"; //24 bits
 
-    h_Src1 = (uchar4*)malloc(imageW * imageH * 4);
+    imageW = 0;
+    imageH = 0;
+    LoadBMPFile(&h_Src1, &imageW, &imageH, filename_read1);
+    printf("filename : %s\tW = %d\tH = %d\n", filename_read1, imageW, imageH);
 
-    int i;
-    int j;
-
-    for (j = 0; j < imageH; j++)
-    {
-        for (i = 0; i < imageW; i++)
-        {
-            h_Src1[imageW * j + i].x = (i * j) % 256;   //R
-            h_Src1[imageW * j + i].y = (i * j) % 256;   //G
-            h_Src1[imageW * j + i].z = (i * j) % 256;   //B
-        }
-    }
+    imageW = 0;
+    imageH = 0;
+    LoadBMPFile(&h_Src2, &imageW, &imageH, filename_read2);
+    printf("filename : %s\tW = %d\tH = %d\n", filename_read2, imageW, imageH);
 
     initGL(&argc, argv);
     findCudaDevice(argc, (const char**)argv);
 
     checkCudaErrors(CUDA_MallocArray(&h_Src1, imageW, imageH));
+    checkCudaErrors(CUDA_MallocArray(&h_Src2, imageW, imageH));
 
-    printf("111\n");
     initOpenGLBuffers();
-    printf("222\n");
     glutSetWindowTitle("ims pic");
-    printf("333\n");
+
     glutMainLoop();
-    printf("444\n");
 }
