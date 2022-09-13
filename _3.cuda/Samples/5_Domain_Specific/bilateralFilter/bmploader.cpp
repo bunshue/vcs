@@ -40,7 +40,7 @@ extern "C" void LoadBMPFile(uchar4 * *dst, unsigned int* width,
 
     FILE* fd;
 
-    printf("LoadBMPFile, filename : %s\n", name);
+    printf("Loading %s...\n", name);
 
     if (sizeof(uchar4) != 4) {
         printf("***Bad uchar4 size***\n");
@@ -54,19 +54,22 @@ extern "C" void LoadBMPFile(uchar4 * *dst, unsigned int* width,
 
     fread(&hdr, sizeof(hdr), 1, fd);
 
-    if (hdr.type != 0x4D42) {
+    if (hdr.type != 0x4D42)
+    {
         printf("***BMP load error: bad file format***\n");
         exit(EXIT_SUCCESS);
     }
 
     fread(&infoHdr, sizeof(infoHdr), 1, fd);
 
-    if (infoHdr.bitsPerPixel != 24) {
+    if (infoHdr.bitsPerPixel != 24)
+    {
         printf("***BMP load error: invalid color depth***\n");
         exit(EXIT_SUCCESS);
     }
 
-    if (infoHdr.compression) {
+    if (infoHdr.compression)
+    {
         printf("***BMP load error: compressed image***\n");
         exit(EXIT_SUCCESS);
     }
@@ -80,15 +83,17 @@ extern "C" void LoadBMPFile(uchar4 * *dst, unsigned int* width,
 
     fseek(fd, hdr.offset - sizeof(hdr) - sizeof(infoHdr), SEEK_CUR);
 
-    for (y = 0; y < infoHdr.height; y++) {
-        for (x = 0; x < infoHdr.width; x++) {
-            (*dst)[(y * infoHdr.width + x)].w = 0;
+    for (y = 0; y < infoHdr.height; y++)
+    {
+        for (x = 0; x < infoHdr.width; x++)
+        {
             (*dst)[(y * infoHdr.width + x)].z = fgetc(fd);
             (*dst)[(y * infoHdr.width + x)].y = fgetc(fd);
             (*dst)[(y * infoHdr.width + x)].x = fgetc(fd);
         }
 
-        for (x = 0; x < (4 - (3 * infoHdr.width) % 4) % 4; x++) {
+        for (x = 0; x < (4 - (3 * infoHdr.width) % 4) % 4; x++)
+        {
             fgetc(fd);
         }
     }

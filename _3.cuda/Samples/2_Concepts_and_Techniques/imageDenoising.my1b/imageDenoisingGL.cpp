@@ -160,12 +160,13 @@ void displayFunc(void)
 
 void timerEvent(int value)
 {
-    //printf("timer ");
+    printf("t");
     if (glutGetWindow())
     {
+        printf("r");
         //printf("glutGetWindow ");
         glutPostRedisplay();
-        glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
+        glutTimerFunc(REFRESH_DELAY, timerEvent, 0);    //設定timer事件
     }
 }
 
@@ -248,7 +249,7 @@ void initOpenGLBuffers()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
     /*
-    for (int i = 0; i < imageW * imageH / 3; i++)
+    for (int i = 0; i < imageW * imageH; i++)
     {
         h_Src1[i].x = h_Src1[i].x / 2;
         h_Src1[i].y = h_Src1[i].y / 2;
@@ -301,20 +302,52 @@ void cleanup()
 
 int main(int argc, char** argv)
 {
-    //const char* filename_read1 = "C:\\______test_files\\ims01.24.bmp"; //24 bits
-    //const char* filename_read2 = "C:\\______test_files\\ims03.24.bmp"; //24 bits
-    const char* filename_read1 = "C:\\______test_files\\__pic\\_ggb\\ggb1.bmp"; //24 bits
-    const char* filename_read2 = "C:\\______test_files\\__pic\\_ggb\\ggb2.bmp"; //24 bits
+    int mode = 1;
 
-    imageW = 0;
-    imageH = 0;
-    LoadBMPFile(&h_Src1, &imageW, &imageH, filename_read1);
-    printf("filename : %s\tW = %d\tH = %d\n", filename_read1, imageW, imageH);
+    if (mode == 0)
+    {
+        //讀取圖片資料
+        const char* filename_read1 = "C:\\______test_files\\ims01.24.bmp"; //24 bits
+        const char* filename_read2 = "C:\\______test_files\\ims03.24.bmp"; //24 bits
+        //const char* filename_read1 = "C:\\______test_files\\__pic\\_ggb\\ggb1.bmp"; //24 bits
+        //const char* filename_read2 = "C:\\______test_files\\__pic\\_ggb\\ggb2.bmp"; //24 bits
 
-    imageW = 0;
-    imageH = 0;
-    LoadBMPFile(&h_Src2, &imageW, &imageH, filename_read2);
-    printf("filename : %s\tW = %d\tH = %d\n", filename_read2, imageW, imageH);
+        imageW = 0;
+        imageH = 0;
+        LoadBMPFile(&h_Src1, &imageW, &imageH, filename_read1);
+        printf("filename : %s\tW = %d\tH = %d\n", filename_read1, imageW, imageH);
+
+        imageW = 0;
+        imageH = 0;
+        LoadBMPFile(&h_Src2, &imageW, &imageH, filename_read2);
+        printf("filename : %s\tW = %d\tH = %d\n", filename_read2, imageW, imageH);
+    }
+    else
+    {
+        //自製圖片資料
+        imageW = 512;
+        imageH = 512;
+
+        h_Src1 = (uchar4*)malloc(imageW * imageH * 4);
+        h_Src2 = (uchar4*)malloc(imageW * imageH * 4);
+
+        int i;
+        int j;
+
+        for (j = 0; j < imageH; j++)
+        {
+            for (i = 0; i < imageW; i++)
+            {
+                h_Src1[imageW * j + i].x = (i * j) % 256;   //R
+                h_Src1[imageW * j + i].y = (i * j) % 256;   //G
+                h_Src1[imageW * j + i].z = (i * j) % 256;   //B
+
+                h_Src2[imageW * j + i].x = (i / 2) % 256;   //R
+                h_Src2[imageW * j + i].y = (i / 2) % 256;   //G
+                h_Src2[imageW * j + i].z = (i / 2) % 256;   //B
+            }
+        }
+    }
 
     initGL(&argc, argv);
     findCudaDevice(argc, (const char**)argv);
