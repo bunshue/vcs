@@ -69,9 +69,6 @@ int fpsLimit = 1;  // FPS limit for sampling
 unsigned int frameCount = 0;
 unsigned int g_TotalErrors = 0;
 
-int *pArgc = NULL;
-char **pArgv = NULL;
-
 #define MAX_EPSILON_ERROR 5
 #define REFRESH_DELAY 10  // ms
 
@@ -99,23 +96,39 @@ void computeFPS()
 
 void do_alpha_mixer(int alpha, TColor* d_dst)
 {
-    //printf("%d ", alpha);
-
     cuda_Mix(d_dst, alpha, imageW, imageH, texImage1, texImage2);
 }
 
+int flag_direction = 0;
 int alpha = 0;
 void runImageFilters(TColor* d_dst)
 {
     do_alpha_mixer(alpha, d_dst);
 
-    alpha++;
-    if (alpha > 100)
-        alpha = 0;
+    if (flag_direction == 0)
+    {
+        alpha++;
+        if (alpha > 100)
+        {
+            alpha = 100;
+            flag_direction = 1;
+        }
+    }
+    else
+    {
+        alpha--;
+        if (alpha < 0)
+        {
+            alpha = 0;
+            flag_direction = 0;
+        }
+    }
 
     //cuda_Copy(d_dst, imageW, imageH, texImage1);
 
+    //¹w³] g_Kernel = 0
     //printf("%d ", g_Kernel);
+
     switch (g_Kernel)
     {
     case 0:
@@ -367,10 +380,10 @@ void cleanup()
 
 int main(int argc, char** argv)
 {
-    //const char* image_path = sdkFindFilePath("portrait_noise.bmp", argv[0]);
-    //const char* filename_read1 = "C:\\______test_files\\ims01.bmp"; //32 bits
     const char* filename_read1 = "C:\\______test_files\\ims01.24.bmp"; //24 bits
     const char* filename_read2 = "C:\\______test_files\\ims03.24.bmp"; //24 bits
+    //const char* filename_read1 = "C:\\______test_files\\__pic\\_ggb\\ggb1.bmp"; //24 bits
+    //const char* filename_read2 = "C:\\______test_files\\__pic\\_ggb\\ggb2.bmp"; //24 bits
 
     imageW = 0;
     imageH = 0;
@@ -389,6 +402,9 @@ int main(int argc, char** argv)
     checkCudaErrors(CUDA_MallocArray(&texImage2, &h_Src2, imageW, imageH));
 
     initOpenGLBuffers();
-    glutSetWindowTitle("ims pic");
+    //glutSetWindowTitle("ims pic");
+    sdkCreateTimer(&timer);
+    sdkStartTimer(&timer);
     glutMainLoop();
 }
+

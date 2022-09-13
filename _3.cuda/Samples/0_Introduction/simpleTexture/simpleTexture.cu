@@ -1,11 +1,3 @@
-/*
- * This sample demonstrates how use texture fetches in CUDA
- *
- * This sample takes an input PGM image (image_filename) and generates
- * an output PGM image (image_filename_out).  This CUDA kernel performs
- * a simple 2D transform (rotation) on the texture coordinates (u,v).
- */
-
 // Includes, system
 #include <stdlib.h>
 #include <stdio.h>
@@ -70,36 +62,15 @@ void runTest(int argc, char **argv);
 ////////////////////////////////////////////////////////////////////////////////
 // Program main
 ////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
-  printf("%s starting...\n", sampleName);
+    printf("sampleName = %s\n", sampleName);
+    printf("%s starting...\n", sampleName);
 
-  // Process command-line arguments
-  if (argc > 1)
-  {
-      printf("XXXXXXXX\n");
-    if (checkCmdLineFlag(argc, (const char **)argv, "input")) {
-      getCmdLineArgumentString(argc, (const char **)argv, "input",
-                               (char **)&imageFilename);
+    runTest(argc, argv);
 
-      if (checkCmdLineFlag(argc, (const char **)argv, "reference")) {
-        getCmdLineArgumentString(argc, (const char **)argv, "reference",
-                                 (char **)&refFilename);
-      } else {
-        printf("-input flag should be used with -reference flag");
-        exit(EXIT_FAILURE);
-      }
-    } else if (checkCmdLineFlag(argc, (const char **)argv, "reference")) {
-      printf("-reference flag should be used with -input flag");
-      exit(EXIT_FAILURE);
-    }
-  }
-
-  runTest(argc, argv);
-
-  printf("%s completed, returned %s\n", sampleName,
-         testResult ? "OK" : "ERROR!");
-  exit(testResult ? EXIT_SUCCESS : EXIT_FAILURE);
+    printf("%s completed, returned %s\n", sampleName, testResult ? "OK" : "ERROR!");
+    exit(testResult ? EXIT_SUCCESS : EXIT_FAILURE);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -112,6 +83,8 @@ void runTest(int argc, char** argv)
     // load image from disk
     float* hData = NULL;
     unsigned int width, height;
+
+    printf("imageFilename = %s\n", imageFilename);
     char* imagePath = sdkFindFilePath(imageFilename, argv[0]);
 
     if (imagePath == NULL)
@@ -127,6 +100,8 @@ void runTest(int argc, char** argv)
 
     // Load reference image from image (output)
     float* hDataRef = (float*)malloc(size);
+
+    printf("refFilename = %s\n", refFilename);
     char* refPath = sdkFindFilePath(refFilename, argv[0]);
 
     if (refPath == NULL)
@@ -142,8 +117,7 @@ void runTest(int argc, char** argv)
     checkCudaErrors(cudaMalloc((void**)&dData, size));
 
     // Allocate array and copy image data
-    cudaChannelFormatDesc channelDesc =
-        cudaCreateChannelDesc(32, 0, 0, 0, cudaChannelFormatKindFloat);
+    cudaChannelFormatDesc channelDesc = cudaCreateChannelDesc(32, 0, 0, 0, cudaChannelFormatKindFloat);
     cudaArray* cuArray;
     checkCudaErrors(cudaMallocArray(&cuArray, &channelDesc, width, height));
     checkCudaErrors(cudaMemcpyToArray(cuArray, 0, 0, hData, size, cudaMemcpyHostToDevice));
@@ -198,12 +172,15 @@ void runTest(int argc, char** argv)
     char outputFilename[1024];
     strcpy(outputFilename, imagePath);
     strcpy(outputFilename + strlen(imagePath) - 4, "_out.pgm");
+
     sdkSavePGM(outputFilename, hOutputData, width, height);
-    printf("Wrote '%s'\n", outputFilename);
+
+    printf("outputFilename = %s\n", outputFilename);
 
     // Write regression file if necessary
     if (checkCmdLineFlag(argc, (const char**)argv, "regression"))
     {
+        printf("XXXXXXX\n");
         // Write file for regression test
         sdkWriteFile<float>("./data/regression.dat", hOutputData, width * height, 0.0f, false);
     }
@@ -226,4 +203,5 @@ void runTest(int argc, char** argv)
     free(imagePath);
     free(refPath);
 }
+
 
