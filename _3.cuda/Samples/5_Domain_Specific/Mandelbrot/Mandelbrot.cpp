@@ -1137,136 +1137,136 @@ void printHelp() {
 ////////////////////////////////////////////////////////////////////////////////
 // Main program
 ////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char **argv) {
-  pArgc = &argc;
-  pArgv = argv;
+int main(int argc, char** argv) {
+    pArgc = &argc;
+    pArgv = argv;
 
 #if defined(__linux__)
-  setenv("DISPLAY", ":0", 0);
+    setenv("DISPLAY", ":0", 0);
 #endif
 
-  printf("[%s] - Starting...\n", sSDKsample);
+    printf("[%s] - Starting...\n", sSDKsample);
 
-  // parse command line arguments
-  if (checkCmdLineFlag(argc, (const char **)argv, "help")) {
-    printHelp();
-    exit(EXIT_SUCCESS);
-  }
+    // parse command line arguments
+    if (checkCmdLineFlag(argc, (const char**)argv, "help")) {
+        printHelp();
+        exit(EXIT_SUCCESS);
+    }
 
-  int mode = 0;
+    int mode = 0;
 
-  if (checkCmdLineFlag(argc, (const char **)argv, "mode")) {
-    mode = getCmdLineArgumentInt(argc, (const char **)argv, "mode");
-    g_isJuliaSet = mode;
+    if (checkCmdLineFlag(argc, (const char**)argv, "mode")) {
+        mode = getCmdLineArgumentInt(argc, (const char**)argv, "mode");
+        g_isJuliaSet = mode;
 
-  } else {
-    g_isJuliaSet = 0;
-  }
+    }
+    else {
+        g_isJuliaSet = 0;
+    }
 
-  // Set the initial parameters for either Mandelbrot and Julia sets and reset
-  // all parameters
-  if (g_isJuliaSet)  // settings for Julia
-  {
-    char *ref_path = sdkFindFilePath("params.txt", argv[0]);
-    startJulia(ref_path);
-  } else  // settings for Mandelbrot
-  {
-    g_isMoving = true;
-    xOff = -0.5;
-    yOff = 0.0;
-    scale = 3.2;
-    xdOff = 0.0;
-    ydOff = 0.0;
-    dscale = 1.0;
-    colorSeed = 0;
-    colors.x = 3;
-    colors.y = 5;
-    colors.z = 7;
-    crunch = 512;
-    animationFrame = 0;
-    animationStep = 0;
-    pass = 0;
-  }
+    // Set the initial parameters for either Mandelbrot and Julia sets and reset
+    // all parameters
+    if (g_isJuliaSet)  // settings for Julia
+    {
+        char* ref_path = sdkFindFilePath("params.txt", argv[0]);
+        startJulia(ref_path);
+    }
+    else  // settings for Mandelbrot
+    {
+        g_isMoving = true;
+        xOff = -0.5;
+        yOff = 0.0;
+        scale = 3.2;
+        xdOff = 0.0;
+        ydOff = 0.0;
+        dscale = 1.0;
+        colorSeed = 0;
+        colors.x = 3;
+        colors.y = 5;
+        colors.z = 7;
+        crunch = 512;
+        animationFrame = 0;
+        animationStep = 0;
+        pass = 0;
+    }
 
-  if (checkCmdLineFlag(argc, (const char **)argv, "file")) {
-    fpsLimit = frameCheckNumber;
+    if (checkCmdLineFlag(argc, (const char**)argv, "file")) {
+        fpsLimit = frameCheckNumber;
 
+        // use command-line specified CUDA device, otherwise use device with highest
+        // Gflops/s
+        findCudaDevice(argc, (const char**)argv);  // no OpenGL usage
+
+        // We run the Automated Testing code path
+        runSingleTest(argc, argv);
+
+        exit(g_TotalErrors == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
+    }
+    else if (checkCmdLineFlag(argc, (const char**)argv, "benchmark")) {
+        // run benchmark
+        // use command-line specified CUDA device, otherwise use device with highest
+        // Gflops/s
+        findCudaDevice(argc, (const char**)argv);
+
+        // We run the Automated Performance Test
+        runBenchmark(argc, argv);
+
+        exit(g_TotalErrors == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
+    }
     // use command-line specified CUDA device, otherwise use device with highest
     // Gflops/s
-    findCudaDevice(argc, (const char **)argv);  // no OpenGL usage
+    else if (checkCmdLineFlag(argc, (const char**)argv, "device")) {
+        printf("[%s]\n", argv[0]);
+        printf("   Does not explicitly support -device=n in OpenGL mode\n");
+        printf("   To use -device=n, the sample must be running w/o OpenGL\n\n");
+        printf(" > %s -device=n -file=<image_name>.ppm\n", argv[0]);
+        printf("exiting...\n");
+        exit(EXIT_SUCCESS);
+    }
 
-    // We run the Automated Testing code path
-    runSingleTest(argc, argv);
+    // Otherwise it succeeds, we will continue to run this sample
+    initData(argc, argv);
 
-    exit(g_TotalErrors == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
-  } else if (checkCmdLineFlag(argc, (const char **)argv, "benchmark")) {
-    // run benchmark
-    // use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
-    findCudaDevice(argc, (const char **)argv);
+    // Initialize OpenGL context first before the CUDA context is created.  This
+    // is needed
+    // to achieve optimal performance with OpenGL/CUDA interop.
+    initGL(&argc, argv);
+    initOpenGLBuffers(imageW, imageH);
 
-    // We run the Automated Performance Test
-    runBenchmark(argc, argv);
+    printf("Starting GLUT main loop...\n");
+    printf("\n");
+    printf("Press [s] to toggle between GPU and CPU implementations\n");
+    printf("Press [j] to toggle between Julia and Mandelbrot sets\n");
+    printf("Press [r] or [R] to decrease or increase red color channel\n");
+    printf("Press [g] or [G] to decrease or increase green color channel\n");
+    printf("Press [b] or [B] to decrease or increase blue color channel\n");
+    printf("Press [e] to reset\n");
+    printf("Press [a] or [A] to animate colors\n");
+    printf("Press [c] or [C] to change colors\n");
+    printf("Press [d] or [D] to increase or decrease the detail\n");
+    printf("Press [p] to record main parameters to file params.txt\n");
+    printf("Press [o] to read main parameters from file params.txt\n");
+    printf(
+        "Left mouse button + drag = move (Mandelbrot or Julia) or animate "
+        "(Julia)\n");
+    printf(
+        "Press [m] to toggle between move and animate (Julia) for left mouse "
+        "button\n");
+    printf("Middle mouse button + drag = Zoom\n");
+    printf("Right mouse button = Menu\n");
+    printf("Press [?] to print location and scale\n");
+    printf("Press [q] to exit\n");
+    printf("\n");
 
-    exit(g_TotalErrors == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
-  }
-  // use command-line specified CUDA device, otherwise use device with highest
-  // Gflops/s
-  else if (checkCmdLineFlag(argc, (const char **)argv, "device")) {
-    printf("[%s]\n", argv[0]);
-    printf("   Does not explicitly support -device=n in OpenGL mode\n");
-    printf("   To use -device=n, the sample must be running w/o OpenGL\n\n");
-    printf(" > %s -device=n -file=<image_name>.ppm\n", argv[0]);
-    printf("exiting...\n");
-    exit(EXIT_SUCCESS);
-  }
+    sdkCreateTimer(&hTimer);
+    sdkStartTimer(&hTimer);
 
-  // Otherwise it succeeds, we will continue to run this sample
-  initData(argc, argv);
-
-  // Initialize OpenGL context first before the CUDA context is created.  This
-  // is needed
-  // to achieve optimal performance with OpenGL/CUDA interop.
-  initGL(&argc, argv);
-  initOpenGLBuffers(imageW, imageH);
-
-  printf("Starting GLUT main loop...\n");
-  printf("\n");
-  printf("Press [s] to toggle between GPU and CPU implementations\n");
-  printf("Press [j] to toggle between Julia and Mandelbrot sets\n");
-  printf("Press [r] or [R] to decrease or increase red color channel\n");
-  printf("Press [g] or [G] to decrease or increase green color channel\n");
-  printf("Press [b] or [B] to decrease or increase blue color channel\n");
-  printf("Press [e] to reset\n");
-  printf("Press [a] or [A] to animate colors\n");
-  printf("Press [c] or [C] to change colors\n");
-  printf("Press [d] or [D] to increase or decrease the detail\n");
-  printf("Press [p] to record main parameters to file params.txt\n");
-  printf("Press [o] to read main parameters from file params.txt\n");
-  printf(
-      "Left mouse button + drag = move (Mandelbrot or Julia) or animate "
-      "(Julia)\n");
-  printf(
-      "Press [m] to toggle between move and animate (Julia) for left mouse "
-      "button\n");
-  printf("Middle mouse button + drag = Zoom\n");
-  printf("Right mouse button = Menu\n");
-  printf("Press [?] to print location and scale\n");
-  printf("Press [q] to exit\n");
-  printf("\n");
-
-  sdkCreateTimer(&hTimer);
-  sdkStartTimer(&hTimer);
-
-#if defined(__APPLE__) || defined(MACOSX)
-  atexit(cleanup);
-#else
-  glutCloseFunc(cleanup);
-#endif
+    glutCloseFunc(cleanup);
 
 #if defined(WIN32) || defined(_WIN32) || defined(WIN64) || defined(_WIN64)
-  setVSync(0);
+    setVSync(0);
 #endif
 
-  glutMainLoop();
-}  // main
+    glutMainLoop();
+}
+

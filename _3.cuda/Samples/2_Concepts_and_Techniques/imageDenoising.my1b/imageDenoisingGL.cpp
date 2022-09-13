@@ -326,5 +326,6 @@ int main(int argc, char** argv)
     //glutSetWindowTitle("ims pic");
     sdkCreateTimer(&timer);
     sdkStartTimer(&timer);
+
     glutMainLoop();
 }
