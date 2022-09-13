@@ -1,30 +1,3 @@
-/* Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *  * Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  * Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *  * Neither the name of NVIDIA CORPORATION nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
 /*
   Bindless Texture/Surface
 
@@ -72,8 +45,7 @@ const char *imageFilenames[] = {
 const cudaExtent atlasSize = make_cudaExtent(4, 4, 0);
 const dim3 windowSize(512, 512);
 const dim3 windowBlockSize(16, 16, 1);
-const dim3 windowGridSize(windowSize.x / windowBlockSize.x,
-                          windowSize.y / windowBlockSize.y);
+const dim3 windowGridSize(windowSize.x / windowBlockSize.x, windowSize.y / windowBlockSize.y);
 
 float lod = 0.5;  // texture mip map level
 
@@ -314,104 +286,106 @@ void runAutoTest(const char *ref_file, char *exec_path) {
   exit(bTestResult ? EXIT_SUCCESS : EXIT_FAILURE);
 }
 
-void loadImageData(const char *exe_path) {
-  std::vector<Image> images;
+void loadImageData(const char* exe_path)
+{
+    std::vector<Image> images;
 
-  for (size_t i = 0; i < sizeof(imageFilenames) / sizeof(imageFilenames[0]);
-       i++) {
-    unsigned int imgWidth = 0;
-    unsigned int imgHeight = 0;
-    uchar *imgData = NULL;
-    const char *imgPath = 0;
-    const char *imgFilename = imageFilenames[i];
+    for (size_t i = 0; i < sizeof(imageFilenames) / sizeof(imageFilenames[0]); i++)
+    {
+        unsigned int imgWidth = 0;
+        unsigned int imgHeight = 0;
+        uchar* imgData = NULL;
+        const char* imgPath = 0;
+        const char* imgFilename = imageFilenames[i];
 
-    if (exe_path) {
-      imgPath = sdkFindFilePath(imgFilename, exe_path);
+        if (exe_path)
+        {
+            imgPath = sdkFindFilePath(imgFilename, exe_path);
+        }
+
+        if (imgPath == 0)
+        {
+            printf("Error finding image file '%s'\n", imgFilename);
+            exit(EXIT_FAILURE);
+        }
+
+        sdkLoadPPM4(imgPath, (unsigned char**)&imgData, &imgWidth, &imgHeight);
+
+        if (!imgData)
+        {
+            printf("Error opening file '%s'\n", imgPath);
+            exit(EXIT_FAILURE);
+        }
+
+        printf("Loaded '%s', %d x %d pixels\n", imgPath, imgWidth, imgHeight);
+
+        checkHost(imgWidth > 1);
+        checkHost(imgHeight > 1);
+
+        Image img;
+        img.size = make_cudaExtent(imgWidth, imgHeight, 0);
+        img.h_data = imgData;
+        images.push_back(img);
     }
 
-    if (imgPath == 0) {
-      printf("Error finding image file '%s'\n", imgFilename);
-      exit(EXIT_FAILURE);
-    }
-
-    sdkLoadPPM4(imgPath, (unsigned char **)&imgData, &imgWidth, &imgHeight);
-
-    if (!imgData) {
-      printf("Error opening file '%s'\n", imgPath);
-      exit(EXIT_FAILURE);
-    }
-
-    printf("Loaded '%s', %d x %d pixels\n", imgPath, imgWidth, imgHeight);
-
-    checkHost(imgWidth > 1);
-    checkHost(imgHeight > 1);
-
-    Image img;
-    img.size = make_cudaExtent(imgWidth, imgHeight, 0);
-    img.h_data = imgData;
-    images.push_back(img);
-  }
-
-  initAtlasAndImages(&images[0], images.size(), atlasSize);
+    initAtlasAndImages(&images[0], images.size(), atlasSize);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // Program main
 ////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char **argv) {
-  sdkCreateTimer(&timer);
+int main(int argc, char** argv)
+{
+    sdkCreateTimer(&timer);
 
-  pArgc = &argc;
-  pArgv = argv;
+    pArgc = &argc;
+    pArgv = argv;
 
-  char *ref_file = NULL;
+    char* ref_file = NULL;
 
-#if defined(__linux__)
-  setenv("DISPLAY", ":0", 0);
-#endif
+    printf("%s Starting...\n\n", sSDKsample);
 
-  printf("%s Starting...\n\n", sSDKsample);
+    if (checkCmdLineFlag(argc, (const char**)argv, "file"))
+    {
+        fpsLimit = frameCheckNumber;
+        getCmdLineArgumentString(argc, (const char**)argv, "file", &ref_file);
+    }
 
-  if (checkCmdLineFlag(argc, (const char **)argv, "file")) {
-    fpsLimit = frameCheckNumber;
-    getCmdLineArgumentString(argc, (const char **)argv, "file", &ref_file);
-  }
+    srand(15234);
 
-  srand(15234);
+    // use command-line specified CUDA device, otherwise use device with highest
+    // Gflops/s
+    findCudaDevice(argc, (const char**)argv);
 
-  // use command-line specified CUDA device, otherwise use device with highest
-  // Gflops/s
-  findCudaDevice(argc, (const char **)argv);
+    if (!ref_file)
+    {
+        initGL(&argc, argv);
 
-  if (!ref_file) {
-    initGL(&argc, argv);
+        // OpenGL buffers
+        initGLBuffers();
+    }
 
-    // OpenGL buffers
-    initGLBuffers();
-  }
+    if (!checkCudaCapabilities(3, 0))
+    {
+        cleanup();
 
-  if (!checkCudaCapabilities(3, 0)) {
-    cleanup();
+        exit(EXIT_WAIVED);
+    }
 
-    exit(EXIT_WAIVED);
-  }
+    loadImageData(argv[0]);
 
-  loadImageData(argv[0]);
+    if (ref_file)
+    {
+        runAutoTest(ref_file, argv[0]);
+    }
 
-  if (ref_file) {
-    runAutoTest(ref_file, argv[0]);
-  }
+    printf(
+        "Press space to toggle animation\n"
+        "Press '+' and '-' to change lod level\n"
+        "Press 'r' to randomize virtual atlas\n");
 
-  printf(
-      "Press space to toggle animation\n"
-      "Press '+' and '-' to change lod level\n"
-      "Press 'r' to randomize virtual atlas\n");
+    glutCloseFunc(cleanup_all);
 
-#if defined(__APPLE__) || defined(MACOSX)
-  atexit(cleanup_all);
-#else
-  glutCloseFunc(cleanup_all);
-#endif
-
-  glutMainLoop();
+    glutMainLoop();
 }
+

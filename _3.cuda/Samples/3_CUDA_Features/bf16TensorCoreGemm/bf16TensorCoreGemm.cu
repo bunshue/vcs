@@ -1,30 +1,3 @@
-/* Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *  * Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  * Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *  * Neither the name of NVIDIA CORPORATION nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
 // CUDA sample demonstrating a __nv_bfloat16 (E8M7) GEMM computation using the Warp Matrix Multiply
 // and Accumulate API introduced in CUDA 11.0.
 
@@ -624,11 +597,11 @@ __global__ void simple_wmma_bf16gemm(__nv_bfloat16 *a, __nv_bfloat16 *b, float *
 #endif
 }
 
-__host__ void matMultiplyOnHost(__nv_bfloat16 *A, __nv_bfloat16 *B, float *C,
-                                float alpha, float beta,
-                                int numARows, int numAColumns,
-                                int numBRows, int numBColumns,
-                                int numCRows, int numCColumns)
+__host__ void matMultiplyOnHost(__nv_bfloat16* A, __nv_bfloat16* B, float* C,
+    float alpha, float beta,
+    int numARows, int numAColumns,
+    int numBRows, int numBColumns,
+    int numCRows, int numCColumns)
 {
     for (int i = 0; i < numCRows; i++) {
         for (int j = 0; j < numCColumns; j++) {
@@ -638,16 +611,16 @@ __host__ void matMultiplyOnHost(__nv_bfloat16 *A, __nv_bfloat16 *B, float *C,
                 temp += (float)A[i * numAColumns + k] * (float)B[j * numBRows + k];
             }
 
-            C[i*numCColumns + j] = temp * alpha + beta * C[i * numCColumns + j];
+            C[i * numCColumns + j] = temp * alpha + beta * C[i * numCColumns + j];
         }
     }
 }
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
     printf("Initializing...\n");
 
-    int dev = findCudaDevice(argc, (const char **)argv);
+    int dev = findCudaDevice(argc, (const char**)argv);
 
     cudaDeviceProp deviceProp;
     checkCudaErrors(cudaGetDeviceProperties(&deviceProp, dev));
@@ -662,26 +635,26 @@ int main(int argc, char **argv)
     printf("N: %d (%d x %d)\n", N_GLOBAL, N, N_TILES);
     printf("K: %d (%d x %d)\n", K_GLOBAL, K, K_TILES);
 
-    __nv_bfloat16 *A_h = NULL;
-    __nv_bfloat16 *B_h = NULL;
-    float *C_h = NULL;
+    __nv_bfloat16* A_h = NULL;
+    __nv_bfloat16* B_h = NULL;
+    float* C_h = NULL;
 #if CPU_DEBUG
-    float *result_hD = NULL;
-    float *result_host = NULL;
+    float* result_hD = NULL;
+    float* result_host = NULL;
 #endif
 
-    A_h = (__nv_bfloat16*) malloc(sizeof(__nv_bfloat16) * M_GLOBAL * K_GLOBAL);
-    B_h = (__nv_bfloat16*) malloc(sizeof(__nv_bfloat16) * K_GLOBAL * N_GLOBAL);
-    C_h = (float*) malloc(sizeof(float) * M_GLOBAL * N_GLOBAL);
+    A_h = (__nv_bfloat16*)malloc(sizeof(__nv_bfloat16) * M_GLOBAL * K_GLOBAL);
+    B_h = (__nv_bfloat16*)malloc(sizeof(__nv_bfloat16) * K_GLOBAL * N_GLOBAL);
+    C_h = (float*)malloc(sizeof(float) * M_GLOBAL * N_GLOBAL);
 #if CPU_DEBUG
-    result_hD   = (float*) malloc(sizeof(float) * M_GLOBAL * N_GLOBAL);
-    result_host = (float*) malloc(sizeof(float) * M_GLOBAL * N_GLOBAL);
+    result_hD = (float*)malloc(sizeof(float) * M_GLOBAL * N_GLOBAL);
+    result_host = (float*)malloc(sizeof(float) * M_GLOBAL * N_GLOBAL);
 #endif
 
-    __nv_bfloat16 *A = NULL;
-    __nv_bfloat16 *B = NULL;
-    float *C = NULL;
-    float *D = NULL;
+    __nv_bfloat16* A = NULL;
+    __nv_bfloat16* B = NULL;
+    float* C = NULL;
+    float* D = NULL;
 
     checkCudaErrors(cudaMalloc((void**)&A, sizeof(__nv_bfloat16) * M_GLOBAL * K_GLOBAL));
     checkCudaErrors(cudaMalloc((void**)&B, sizeof(__nv_bfloat16) * N_GLOBAL * K_GLOBAL));
@@ -708,7 +681,7 @@ int main(int argc, char **argv)
         // of the A and B matrices. Therefore, the right amount to request is the maximum of those
         // two numbers.
         SHMEM_SZ = MAX(sizeof(__nv_bfloat16) * (BLOCK_COL_TILES * M) * (CHUNK_K * K + SKEW_BF16) * 2,
-                       M * (BLOCK_ROW_WARPS * WARP_ROW_TILES) * N * (BLOCK_COL_WARPS * WARP_COL_TILES) * sizeof(float))
+        M * (BLOCK_ROW_WARPS * WARP_ROW_TILES) * N * (BLOCK_COL_WARPS * WARP_COL_TILES) * sizeof(float))
     };
 
     printf("Required shared memory size: %lu Kb\n", SHMEM_SZ / 1024UL);
@@ -718,15 +691,15 @@ int main(int argc, char **argv)
 
     cudaEvent_t start, stop;
 
-    checkCudaErrors(cudaEventCreate(&start));    
+    checkCudaErrors(cudaEventCreate(&start));
     checkCudaErrors(cudaEventCreate(&stop));
     checkCudaErrors(cudaEventRecord(start));
 
     // kernel to run - default (b16mma_shmem_gemm_async_copy == 0)
     kernels selected_kernel = bf16mma_shmem_gemm_async_copy;
 
-    if (checkCmdLineFlag(argc, (const char **)argv, "kernel")) {
-        int kernel_number = getCmdLineArgumentInt(argc, (const char **)argv, "kernel");
+    if (checkCmdLineFlag(argc, (const char**)argv, "kernel")) {
+        int kernel_number = getCmdLineArgumentInt(argc, (const char**)argv, "kernel");
         if (kernel_number < 3) {
             selected_kernel = (kernels)kernel_number;
         }
@@ -742,24 +715,24 @@ int main(int argc, char **argv)
 
         switch (selected_kernel)
         {
-            case bf16mma_shmem_gemm_async_copy :
-            default:
-                checkCudaErrors(cudaFuncSetAttribute(compute_bf16gemm_async_copy, cudaFuncAttributeMaxDynamicSharedMemorySize, SHMEM_SZ));
-                checkKernelErrors((compute_bf16gemm_async_copy<<<deviceProp.multiProcessorCount*2, THREADS_PER_BLOCK, SHMEM_SZ>>>(A, B, C, D, alpha, beta)));
-                break;
-            case bf16mma_shmem_gemm :
-                checkCudaErrors(cudaFuncSetAttribute(compute_bf16gemm, cudaFuncAttributeMaxDynamicSharedMemorySize, SHMEM_SZ));
-                checkKernelErrors((compute_bf16gemm<<<deviceProp.multiProcessorCount*2, THREADS_PER_BLOCK, SHMEM_SZ>>>(A, B, C, D, alpha, beta)));
-                break;
+        case bf16mma_shmem_gemm_async_copy:
+        default:
+            checkCudaErrors(cudaFuncSetAttribute(compute_bf16gemm_async_copy, cudaFuncAttributeMaxDynamicSharedMemorySize, SHMEM_SZ));
+            checkKernelErrors((compute_bf16gemm_async_copy << <deviceProp.multiProcessorCount * 2, THREADS_PER_BLOCK, SHMEM_SZ >> > (A, B, C, D, alpha, beta)));
+            break;
+        case bf16mma_shmem_gemm:
+            checkCudaErrors(cudaFuncSetAttribute(compute_bf16gemm, cudaFuncAttributeMaxDynamicSharedMemorySize, SHMEM_SZ));
+            checkKernelErrors((compute_bf16gemm << <deviceProp.multiProcessorCount * 2, THREADS_PER_BLOCK, SHMEM_SZ >> > (A, B, C, D, alpha, beta)));
+            break;
         }
 #if CPU_DEBUG
-        checkCudaErrors(cudaMemcpy(result_hD, D, sizeof(float)*M_GLOBAL*N_GLOBAL, cudaMemcpyDeviceToHost));
+        checkCudaErrors(cudaMemcpy(result_hD, D, sizeof(float) * M_GLOBAL * N_GLOBAL, cudaMemcpyDeviceToHost));
 #endif
     }
     else {
         dim3 gridDim;
         dim3 blockDim;
-     
+
         // blockDim.x must be a multple of warpSize
         // 128x4 means we have 16 warps and a block computes a 64x64 output tile
         blockDim.x = 128;
@@ -769,7 +742,7 @@ int main(int argc, char **argv)
         gridDim.y = (N_GLOBAL + N * blockDim.y - 1) / (N * blockDim.y);
 
         printf("Computing... using simple_wmma_gemm kernel\n");
-        simple_wmma_bf16gemm<<<gridDim, blockDim>>>(A, B, C, D, M_GLOBAL, N_GLOBAL, K_GLOBAL, alpha, beta);
+        simple_wmma_bf16gemm << <gridDim, blockDim >> > (A, B, C, D, M_GLOBAL, N_GLOBAL, K_GLOBAL, alpha, beta);
 #if CPU_DEBUG
         checkCudaErrors(cudaMemcpy(result_hD, D, sizeof(float) * M_GLOBAL * N_GLOBAL, cudaMemcpyDeviceToHost));
 #endif
@@ -784,10 +757,10 @@ int main(int argc, char **argv)
     memcpy(result_host, C_h, sizeof(float) * M_GLOBAL * N_GLOBAL);
 
     matMultiplyOnHost(A_h, B_h, result_host,
-                      alpha, beta,
-                      M_GLOBAL, K_GLOBAL,
-                      K_GLOBAL, N_GLOBAL,
-                      M_GLOBAL, N_GLOBAL);
+        alpha, beta,
+        M_GLOBAL, K_GLOBAL,
+        K_GLOBAL, N_GLOBAL,
+        M_GLOBAL, N_GLOBAL);
 
     for (int i = 0; i < N_GLOBAL * M_GLOBAL; i++) {
         if (fabs(result_hD[i] - result_host[i]) > 0.1f) {
@@ -803,7 +776,7 @@ int main(int argc, char **argv)
     checkCudaErrors(cudaEventElapsedTime(&milliseconds, start, stop));
 
     printf("Time: %f ms\n", milliseconds);
-    printf("TFLOPS: %.2f\n", (((double)M_GLOBAL * N_GLOBAL * K_GLOBAL * 2)/(milliseconds/1000.)) / 1e12);
+    printf("TFLOPS: %.2f\n", (((double)M_GLOBAL * N_GLOBAL * K_GLOBAL * 2) / (milliseconds / 1000.)) / 1e12);
 
     free(A_h);
     free(B_h);

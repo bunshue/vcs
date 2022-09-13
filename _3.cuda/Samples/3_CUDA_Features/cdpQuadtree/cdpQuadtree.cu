@@ -1,30 +1,3 @@
-/* Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *  * Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  * Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *  * Neither the name of NVIDIA CORPORATION nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
 #include <thrust/random.h>
 #include <thrust/device_vector.h>
 #include <thrust/host_vector.h>
@@ -626,117 +599,118 @@ struct Random_generator {
 // Allocate GPU structs, launch kernel and clean up
 ////////////////////////////////////////////////////////////////////////////////
 bool cdpQuadtree(int warp_size) {
-  // Constants to control the algorithm.
-  const int num_points = 1024;
-  const int max_depth = 8;
-  const int min_points_per_node = 16;
+    // Constants to control the algorithm.
+    const int num_points = 1024;
+    const int max_depth = 8;
+    const int min_points_per_node = 16;
 
-  // Allocate memory for points.
-  thrust::device_vector<float> x_d0(num_points);
-  thrust::device_vector<float> x_d1(num_points);
-  thrust::device_vector<float> y_d0(num_points);
-  thrust::device_vector<float> y_d1(num_points);
+    // Allocate memory for points.
+    thrust::device_vector<float> x_d0(num_points);
+    thrust::device_vector<float> x_d1(num_points);
+    thrust::device_vector<float> y_d0(num_points);
+    thrust::device_vector<float> y_d1(num_points);
 
-  // Generate random points.
-  Random_generator rnd;
-  thrust::generate(
-      thrust::make_zip_iterator(thrust::make_tuple(x_d0.begin(), y_d0.begin())),
-      thrust::make_zip_iterator(thrust::make_tuple(x_d0.end(), y_d0.end())),
-      rnd);
+    // Generate random points.
+    Random_generator rnd;
+    thrust::generate(
+        thrust::make_zip_iterator(thrust::make_tuple(x_d0.begin(), y_d0.begin())),
+        thrust::make_zip_iterator(thrust::make_tuple(x_d0.end(), y_d0.end())),
+        rnd);
 
-  // Host structures to analyze the device ones.
-  Points points_init[2];
-  points_init[0].set(thrust::raw_pointer_cast(&x_d0[0]),
-                     thrust::raw_pointer_cast(&y_d0[0]));
-  points_init[1].set(thrust::raw_pointer_cast(&x_d1[0]),
-                     thrust::raw_pointer_cast(&y_d1[0]));
+    // Host structures to analyze the device ones.
+    Points points_init[2];
+    points_init[0].set(thrust::raw_pointer_cast(&x_d0[0]),
+        thrust::raw_pointer_cast(&y_d0[0]));
+    points_init[1].set(thrust::raw_pointer_cast(&x_d1[0]),
+        thrust::raw_pointer_cast(&y_d1[0]));
 
-  // Allocate memory to store points.
-  Points *points;
-  checkCudaErrors(cudaMalloc((void **)&points, 2 * sizeof(Points)));
-  checkCudaErrors(cudaMemcpy(points, points_init, 2 * sizeof(Points),
-                             cudaMemcpyHostToDevice));
+    // Allocate memory to store points.
+    Points* points;
+    checkCudaErrors(cudaMalloc((void**)&points, 2 * sizeof(Points)));
+    checkCudaErrors(cudaMemcpy(points, points_init, 2 * sizeof(Points),
+        cudaMemcpyHostToDevice));
 
-  // We could use a close form...
-  int max_nodes = 0;
+    // We could use a close form...
+    int max_nodes = 0;
 
-  for (int i = 0, num_nodes_at_level = 1; i < max_depth;
-       ++i, num_nodes_at_level *= 4)
-    max_nodes += num_nodes_at_level;
+    for (int i = 0, num_nodes_at_level = 1; i < max_depth;
+        ++i, num_nodes_at_level *= 4)
+        max_nodes += num_nodes_at_level;
 
-  // Allocate memory to store the tree.
-  Quadtree_node root;
-  root.set_range(0, num_points);
-  Quadtree_node *nodes;
-  checkCudaErrors(
-      cudaMalloc((void **)&nodes, max_nodes * sizeof(Quadtree_node)));
-  checkCudaErrors(
-      cudaMemcpy(nodes, &root, sizeof(Quadtree_node), cudaMemcpyHostToDevice));
+    // Allocate memory to store the tree.
+    Quadtree_node root;
+    root.set_range(0, num_points);
+    Quadtree_node* nodes;
+    checkCudaErrors(
+        cudaMalloc((void**)&nodes, max_nodes * sizeof(Quadtree_node)));
+    checkCudaErrors(
+        cudaMemcpy(nodes, &root, sizeof(Quadtree_node), cudaMemcpyHostToDevice));
 
-  // We set the recursion limit for CDP to max_depth.
-  cudaDeviceSetLimit(cudaLimitDevRuntimeSyncDepth, max_depth);
+    // We set the recursion limit for CDP to max_depth.
+    cudaDeviceSetLimit(cudaLimitDevRuntimeSyncDepth, max_depth);
 
-  // Build the quadtree.
-  Parameters params(max_depth, min_points_per_node);
-  std::cout << "Launching CDP kernel to build the quadtree" << std::endl;
-  const int NUM_THREADS_PER_BLOCK = 128;  // Do not use less than 128 threads.
-  const int NUM_WARPS_PER_BLOCK = NUM_THREADS_PER_BLOCK / warp_size;
-  const size_t smem_size = 4 * NUM_WARPS_PER_BLOCK * sizeof(int);
-  build_quadtree_kernel<
-      NUM_THREADS_PER_BLOCK><<<1, NUM_THREADS_PER_BLOCK, smem_size>>>(
-      nodes, points, params);
-  checkCudaErrors(cudaGetLastError());
+    // Build the quadtree.
+    Parameters params(max_depth, min_points_per_node);
+    std::cout << "Launching CDP kernel to build the quadtree" << std::endl;
+    const int NUM_THREADS_PER_BLOCK = 128;  // Do not use less than 128 threads.
+    const int NUM_WARPS_PER_BLOCK = NUM_THREADS_PER_BLOCK / warp_size;
+    const size_t smem_size = 4 * NUM_WARPS_PER_BLOCK * sizeof(int);
+    build_quadtree_kernel<
+        NUM_THREADS_PER_BLOCK> << <1, NUM_THREADS_PER_BLOCK, smem_size >> > (
+            nodes, points, params);
+    checkCudaErrors(cudaGetLastError());
 
-  // Copy points to CPU.
-  thrust::host_vector<float> x_h(x_d0);
-  thrust::host_vector<float> y_h(y_d0);
-  Points host_points;
-  host_points.set(thrust::raw_pointer_cast(&x_h[0]),
-                  thrust::raw_pointer_cast(&y_h[0]));
+    // Copy points to CPU.
+    thrust::host_vector<float> x_h(x_d0);
+    thrust::host_vector<float> y_h(y_d0);
+    Points host_points;
+    host_points.set(thrust::raw_pointer_cast(&x_h[0]),
+        thrust::raw_pointer_cast(&y_h[0]));
 
-  // Copy nodes to CPU.
-  Quadtree_node *host_nodes = new Quadtree_node[max_nodes];
-  checkCudaErrors(cudaMemcpy(host_nodes, nodes,
-                             max_nodes * sizeof(Quadtree_node),
-                             cudaMemcpyDeviceToHost));
+    // Copy nodes to CPU.
+    Quadtree_node* host_nodes = new Quadtree_node[max_nodes];
+    checkCudaErrors(cudaMemcpy(host_nodes, nodes,
+        max_nodes * sizeof(Quadtree_node),
+        cudaMemcpyDeviceToHost));
 
-  // Validate the results.
-  bool ok = check_quadtree(host_nodes, 0, num_points, &host_points, params);
-  std::cout << "Results: " << (ok ? "OK" : "FAILED") << std::endl;
+    // Validate the results.
+    bool ok = check_quadtree(host_nodes, 0, num_points, &host_points, params);
+    std::cout << "Results: " << (ok ? "OK" : "FAILED") << std::endl;
 
-  // Free CPU memory.
-  delete[] host_nodes;
+    // Free CPU memory.
+    delete[] host_nodes;
 
-  // Free memory.
-  checkCudaErrors(cudaFree(nodes));
-  checkCudaErrors(cudaFree(points));
+    // Free memory.
+    checkCudaErrors(cudaFree(nodes));
+    checkCudaErrors(cudaFree(points));
 
-  return ok;
+    return ok;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // Main entry point.
 ////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char **argv) {
-  // Find/set the device.
-  // The test requires an architecture SM35 or greater (CDP capable).
-  int cuda_device = findCudaDevice(argc, (const char **)argv);
-  cudaDeviceProp deviceProps;
-  checkCudaErrors(cudaGetDeviceProperties(&deviceProps, cuda_device));
-  int cdpCapable = (deviceProps.major == 3 && deviceProps.minor >= 5) ||
-                   deviceProps.major >= 4;
+int main(int argc, char** argv)
+{
+    // Find/set the device.
+    // The test requires an architecture SM35 or greater (CDP capable).
+    int cuda_device = findCudaDevice(argc, (const char**)argv);
+    cudaDeviceProp deviceProps;
+    checkCudaErrors(cudaGetDeviceProperties(&deviceProps, cuda_device));
+    int cdpCapable = (deviceProps.major == 3 && deviceProps.minor >= 5) ||
+        deviceProps.major >= 4;
 
-  printf("GPU device %s has compute capabilities (SM %d.%d)\n",
-         deviceProps.name, deviceProps.major, deviceProps.minor);
+    printf("GPU device %s has compute capabilities (SM %d.%d)\n",
+        deviceProps.name, deviceProps.major, deviceProps.minor);
 
-  if (!cdpCapable) {
-    std::cerr << "cdpQuadTree requires SM 3.5 or higher to use CUDA Dynamic "
-                 "Parallelism.  Exiting...\n"
-              << std::endl;
-    exit(EXIT_WAIVED);
-  }
+    if (!cdpCapable) {
+        std::cerr << "cdpQuadTree requires SM 3.5 or higher to use CUDA Dynamic "
+            "Parallelism.  Exiting...\n"
+            << std::endl;
+        exit(EXIT_WAIVED);
+    }
 
-  bool ok = cdpQuadtree(deviceProps.warpSize);
+    bool ok = cdpQuadtree(deviceProps.warpSize);
 
-  return (ok ? EXIT_SUCCESS : EXIT_FAILURE);
+    return (ok ? EXIT_SUCCESS : EXIT_FAILURE);
 }

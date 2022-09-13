@@ -47,7 +47,3 @@ extern "C" void cuda_Mix(TColor * d_dst, int alpha, int imageW, int imageH, cuda
 
     Mix << <grid, threads >> > (d_dst, alpha, imageW, imageH, texImage1, texImage2);
 }
-
-
-
-

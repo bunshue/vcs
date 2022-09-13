@@ -16,46 +16,23 @@
 #include <helper_functions.h>  // includes for helper utility functions
 #include <helper_cuda.h>  // includes for cuda error checking and initialization
 
-const char *sSDKsample = "CUDA ImageDenoising";
-
-const char *filterMode[] = {"Passthrough", "KNN method", "NLM method",
-                            "Quick NLM(NLM2) method", NULL};
-
-// Define the files that are to be save and the reference images for validation
-const char *sOriginal[] = {"image_passthru.ppm", "image_knn.ppm",
-                           "image_nlm.ppm", "image_nlm2.ppm", NULL};
-
-const char *sReference[] = {"ref_passthru.ppm", "ref_knn.ppm", "ref_nlm.ppm",
-                            "ref_nlm2.ppm", NULL};
-
 ////////////////////////////////////////////////////////////////////////////////
 // Global data handlers and parameters
 ////////////////////////////////////////////////////////////////////////////////
 // OpenGL PBO and texture "names"
 GLuint gl_PBO, gl_Tex;
 struct cudaGraphicsResource *cuda_pbo_resource;  // handles OpenGL-CUDA exchange
-// Source image on the host side
 
+// Source image on the host side
 uchar4 *h_Src1;
 uchar4* h_Src2;
 int imageW, imageH;
 
-GLuint shader;
-
 ////////////////////////////////////////////////////////////////////////////////
 // Main program
 ////////////////////////////////////////////////////////////////////////////////
-int g_Kernel = 0;
 bool g_FPS = false;
-bool g_Diag = false;
 StopWatchInterface *timer = NULL;
-
-// Algorithms global parameters
-const float noiseStep = 0.025f;
-const float lerpStep = 0.025f;
-static float knnNoise = 0.32f;
-static float nlmNoise = 1.45f;
-static float lerpC = 0.2f;
 
 const int frameN = 24;
 int frameCounter = 0;
@@ -84,7 +61,7 @@ void computeFPS()
     {
         char fps[256];
         float ifps = 1.f / (sdkGetAverageTimerValue(&timer) / 1000.f);
-        sprintf(fps, "<%s>: %3.1f fps", filterMode[g_Kernel], ifps);
+        sprintf(fps, "%3.1f fps", ifps);
 
         glutSetWindowTitle(fps);
         fpsCount = 0;
@@ -104,7 +81,6 @@ int alpha = 0;
 void runImageFilters(TColor* d_dst)
 {
     do_alpha_mixer(alpha, d_dst);
-
     if (flag_direction == 0)
     {
         alpha++;
@@ -123,64 +99,11 @@ void runImageFilters(TColor* d_dst)
             flag_direction = 0;
         }
     }
-
-    //cuda_Copy(d_dst, imageW, imageH, texImage1);
-
-    //¹w³] g_Kernel = 0
-    //printf("%d ", g_Kernel);
-
-    switch (g_Kernel)
-    {
-    case 0:
-        
-        break;
-
-    case 1:
-        cuda_Copy(d_dst, imageW, imageH, texImage1);
-        break;
-
-    case 2:
-        cuda_Copy(d_dst, imageW, imageH, texImage2);
-        break;
-
-    case 3:
-
-        break;
-
-    case 10:
-        printf("Change some data\n");
-
-        cuda_Copy(d_dst, imageW, imageH, texImage1);
-
-        //cuda_Copy(d_dst, imageW, imageH, texImage1);
-
-        //cuda_NLM(d_dst, imageW/2, imageH, 1.0f / (nlmNoise * nlmNoise * 5), lerpC, texImage1);
-
-        g_Kernel = 0;
-        break;
-
-    case 11:
-        printf("Copy ims 01\n");
-
-
-        g_Kernel = 0;
-        break;
-
-    case 13:
-        printf("Copy ims 03\n");
-
-
-        g_Kernel = 0;
-        break;
-    }
-
     getLastCudaError("Filtering kernel execution failed.\n");
 }
 
 void displayFunc(void)
 {
-    //printf("dis ");
-
     sdkStartTimer(&timer);
     TColor* d_dst = NULL;
     size_t num_bytes;
@@ -259,12 +182,10 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
 
     case '1':
         printf("1\n");
-        g_Kernel = 1;
         break;
 
     case '2':
         printf("2\n");
-        g_Kernel = 2;
         break;
 
     case '3':
@@ -380,10 +301,10 @@ void cleanup()
 
 int main(int argc, char** argv)
 {
-    const char* filename_read1 = "C:\\______test_files\\ims01.24.bmp"; //24 bits
-    const char* filename_read2 = "C:\\______test_files\\ims03.24.bmp"; //24 bits
-    //const char* filename_read1 = "C:\\______test_files\\__pic\\_ggb\\ggb1.bmp"; //24 bits
-    //const char* filename_read2 = "C:\\______test_files\\__pic\\_ggb\\ggb2.bmp"; //24 bits
+    //const char* filename_read1 = "C:\\______test_files\\ims01.24.bmp"; //24 bits
+    //const char* filename_read2 = "C:\\______test_files\\ims03.24.bmp"; //24 bits
+    const char* filename_read1 = "C:\\______test_files\\__pic\\_ggb\\ggb1.bmp"; //24 bits
+    const char* filename_read2 = "C:\\______test_files\\__pic\\_ggb\\ggb2.bmp"; //24 bits
 
     imageW = 0;
     imageH = 0;
@@ -407,4 +328,3 @@ int main(int argc, char** argv)
     sdkStartTimer(&timer);
     glutMainLoop();
 }
-

@@ -7,6 +7,7 @@ void PrintArray(float* data, int n);
 void PrintArray(int* data, int n);
 void RandomInit(float*, int);
 void RandomInit(int*, int);
+void init_input(float* a, size_t size);
 
 int main()
 {
@@ -39,6 +40,30 @@ int main()
         free(h_B);
     }
 
+
+
+    size = 1 << 24;  // number of elements to reduce
+
+    size_t maxBlocks = 512;
+
+    printf("%zu elements\n", size);
+
+    float* inputVec_h = NULL;
+
+    cudaMallocHost(&inputVec_h, sizeof(float) * size);
+
+
+    init_input(inputVec_h, size);
+
+
+    printf("david0913: %s:%s(%d) ST\n", __FILE__, __func__, __LINE__);
+    printf("david0913: %s:%s(%d) ST\n", __FILE__, __FUNCTION__, __LINE__);
+
+#if defined(WIN32) || defined(_WIN32) || defined(WIN64) || defined(_WIN64)
+    printf("有定義\n");
+#else
+    printf("無定義\n");
+#endif
 
 
     cudaError_t cudaStatus;
@@ -97,3 +122,16 @@ void RandomInit(int* data, int n)
         data[i] = rand() % 10000;
     }
 }
+
+
+void init_input(float* a, size_t size)
+{
+    for (size_t i = 0; i < size; i++)
+    {
+        a[i] = (rand() & 0xFF) / (float)RAND_MAX;
+    }
+}
+
+
+
+

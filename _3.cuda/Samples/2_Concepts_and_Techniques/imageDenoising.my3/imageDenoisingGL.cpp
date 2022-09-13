@@ -23,6 +23,7 @@ struct cudaGraphicsResource *cuda_pbo_resource;  // handles OpenGL-CUDA exchange
 // Source image on the host side
 
 uchar4 *h_Src1;
+uchar4* h_Src2;
 int imageW, imageH;
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -30,9 +31,6 @@ int imageW, imageH;
 ////////////////////////////////////////////////////////////////////////////////
 
 #define BUFFER_DATA(i) ((char *)0 + i)
-
-int *pArgc = NULL;
-char **pArgv = NULL;
 
 void cleanup();
 
@@ -64,10 +62,75 @@ void displayFunc(void)
         glEnd();
         glFinish();
     }
-
     glutSwapBuffers();
     glutReportErrors();
+}
 
+void keyboard(unsigned char k, int /*x*/, int /*y*/)
+{
+    switch (k)
+    {
+    case 27:
+    case 'q':
+    case 'Q':
+        //離開視窗
+        glutDestroyWindow(glutGetWindow());
+        return;
+
+    case '1':
+        printf("Passthrough.\n");
+        break;
+
+    case '2':
+        printf("KNN method \n");
+        break;
+
+    case '3':
+        printf("NLM method\n");
+        break;
+
+    case '4':
+        printf("Quick NLM(NLM2) method\n");
+        break;
+
+    case 'c':
+        printf("Change some data\n");
+        break;
+
+    case 'a':
+        printf("Copy ims 01\n");
+        break;
+
+    case 'b':
+        printf("Copy ims 03\n");
+        break;
+
+    case '*':
+        break;
+
+    case 'n':
+        printf("Decrease noise level.\n");
+        break;
+
+    case 'N':
+        printf("Increase noise level.\n");
+        break;
+
+    case 'l':
+        printf("Decrease LERP quotient.\n");
+        break;
+
+    case 'L':
+        printf("Increase LERP quotient.\n");
+        break;
+
+    case 'f':
+    case 'F':
+        break;
+
+    case '?':
+        break;
+    }
 }
 
 int initGL(int* argc, char** argv)
@@ -80,6 +143,9 @@ int initGL(int* argc, char** argv)
     glutCreateWindow(argv[0]);
 
     glutDisplayFunc(displayFunc);   //設定callback function
+    glutKeyboardFunc(keyboard);     //設定callback function
+
+    //glutTimerFunc(REFRESH_DELAY, timerEvent, 0);    //設定timer事件
 
     printf("OpenGL window created.\n");
 
@@ -155,17 +221,35 @@ void cleanup()
     printf("cleanup()\n");
 
     free(h_Src1);
+    free(h_Src2);
     checkCudaErrors(CUDA_FreeArray());
     checkCudaErrors(cudaGraphicsUnregisterResource(cuda_pbo_resource));
 }
 
 int main(int argc, char** argv)
 {
+    /*
+    //讀取圖片資料
+    const char* filename_read1 = "C:\\______test_files\\ims01.24.bmp"; //24 bits
+    const char* filename_read2 = "C:\\______test_files\\ims03.24.bmp"; //24 bits
+
+    imageW = 0;
+    imageH = 0;
+    LoadBMPFile(&h_Src1, &imageW, &imageH, filename_read1);
+    printf("filename : %s\tW = %d\tH = %d\n", filename_read1, imageW, imageH);
+
+    imageW = 0;
+    imageH = 0;
+    LoadBMPFile(&h_Src2, &imageW, &imageH, filename_read2);
+    printf("filename : %s\tW = %d\tH = %d\n", filename_read2, imageW, imageH);
+    */
+
     //自製圖片資料
     imageW = 640;
     imageH = 480;
 
     h_Src1 = (uchar4*)malloc(imageW * imageH * 4);
+    h_Src2 = (uchar4*)malloc(imageW * imageH * 4);
 
     int i;
     int j;
@@ -184,12 +268,11 @@ int main(int argc, char** argv)
     findCudaDevice(argc, (const char**)argv);
 
     checkCudaErrors(CUDA_MallocArray(&h_Src1, imageW, imageH));
+    checkCudaErrors(CUDA_MallocArray(&h_Src2, imageW, imageH));
 
-    printf("111\n");
     initOpenGLBuffers();
-    printf("222\n");
     glutSetWindowTitle("ims pic");
-    printf("333\n");
+
     glutMainLoop();
-    printf("444\n");
 }
+
