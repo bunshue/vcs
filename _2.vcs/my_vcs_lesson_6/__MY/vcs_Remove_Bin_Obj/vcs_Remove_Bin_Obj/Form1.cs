@@ -797,7 +797,6 @@ namespace vcs_Remove_Bin_Obj
                     }
                 }
 
-
                 filenames = Directory.GetFiles(foldername, "*.config"); //獲得文件夾目錄下指定後綴名文件全路徑
                 foreach (string filename in filenames)
                 {
@@ -823,7 +822,6 @@ namespace vcs_Remove_Bin_Obj
                         }
                     }
                 }
-
 
                 filenames = Directory.GetFiles(foldername, "*.jpg"); //獲得文件夾目錄下指定後綴名文件全路徑
                 foreach (string filename in filenames)
@@ -990,7 +988,6 @@ namespace vcs_Remove_Bin_Obj
                     }
                 }
 
-
                 filenames = Directory.GetFiles(foldername, "*.jpg"); //獲得文件夾目錄下指定後綴名文件全路徑
                 foreach (string filename in filenames)
                 {
@@ -1017,7 +1014,35 @@ namespace vcs_Remove_Bin_Obj
                     }
                 }
             }
+
+            string[] delete_filenames = {
+            @"C:\_git\vcs\_3.cuda\_code\a\a.exe",
+            @"C:\_git\vcs\_3.cuda\_code\a\a.exp",
+            @"C:\_git\vcs\_3.cuda\_code\a\a.lib",
+            @"C"};
+
+            foreach (string filename in delete_filenames)
+            {
+                if (File.Exists(filename))  //確認檔案是否存在
+                {
+                    try
+                    {
+                        File.Delete(filename);
+                        richTextBox1.Text += "已刪除檔案" + delete_filenames + "\n";
+                    }
+                    catch
+                    {
+                        richTextBox1.Text += "無法刪除檔案" + delete_filenames + "\n";
+                    }
+                }
+
+            }
+
+
+
+
+
+
         }
     }
 }
-

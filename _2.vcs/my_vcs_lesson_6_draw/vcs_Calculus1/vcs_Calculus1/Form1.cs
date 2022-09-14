@@ -32,15 +32,15 @@ namespace vcs_Calculus1
         private float F_normal2(float x)
         {
             //return (float)(x * x + 2 * x + 1);
-            return (float)(sind(3 * x) * 200-0);
+            return (float)(sind(3 * x) * 100);
         }
 
         void plot_figure(List<PointF> points)
         {
             int W = pictureBox1.ClientSize.Width;
             int H = pictureBox1.ClientSize.Height;
-            int border_w = 0;
-            int border_h = 0;
+            int border_w = 50;
+            int border_h = 50;
             int offset_x = 0;
             int offset_y = 0;
             int w = W - border_w * 2;
@@ -55,13 +55,21 @@ namespace vcs_Calculus1
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
             //處理數據
+            int i;
             int len = points.Count();
             richTextBox1.Text += "len = " + len.ToString() + "\n";
-            int i;
-            float x_max = 0;
-            float x_min = 0;
-            float y_max = 0;
-            float y_min = 0;
+
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += points[i].ToString() + " ";
+
+            }
+            richTextBox1.Text += "\n\n";
+
+            float x_max = -10000;
+            float x_min = 10000;
+            float y_max = -10000;
+            float y_min = 10000;
 
             for (i = 0; i < len; i++)
             {
@@ -96,9 +104,6 @@ namespace vcs_Calculus1
             ratio_x = w / (x_max - x_min + 1);
             ratio_y = h / (y_max - y_min + 1);
 
-            ratio_x = 1;
-            ratio_y = 1;
-
             richTextBox1.Text += "ratio_x = " + ratio_x.ToString() + "\n";
             richTextBox1.Text += "ratio_y = " + ratio_y.ToString() + "\n";
 
@@ -109,7 +114,9 @@ namespace vcs_Calculus1
 
             for (i = 0; i < len; i++)
             {
-                points_new.Add(new PointF(offset_x + points[i].X * ratio_x, h - (offset_y + points[i].Y * ratio_y)));
+                //ratio_y = 1;
+                //points_new.Add(new PointF(offset_x + points[i].X * ratio_x, h - (offset_y + points[i].Y * ratio_y)));
+                points_new.Add(new PointF(border_w + (offset_x + points[i].X) * ratio_x, h + border_h - (offset_y + points[i].Y) * ratio_y));
             }
 
             Pen p = new Pen(Color.Red, 0);
@@ -118,19 +125,25 @@ namespace vcs_Calculus1
             Point p1;
             Point p2;
 
-            p1 = new Point(0, h-offset_y);
-            p2 = new Point(w, h-offset_y);
-            g.DrawLine(p, p1, p2);
+            if ((y_max > 0) && (y_min < 0))
+            {
+                p1 = new Point(border_w + 0, h + border_h - (int)((offset_y + 0) * ratio_y));
+                p2 = new Point(border_w + w, h + border_h - (int)((offset_y + 0) * ratio_y));
+                g.DrawLine(Pens.Black, p1, p2);  //X軸
+                richTextBox1.Text += "可以畫X軸\n";
+                richTextBox1.Text += "p1 : " + p1.ToString() + "\n";
+                richTextBox1.Text += "p2 : " + p2.ToString() + "\n";
+            }
 
-            richTextBox1.Text += "p1 : " + p1.ToString() + "\n";
-            richTextBox1.Text += "p2 : " + p2.ToString() + "\n";
-
-            p1 = new Point(offset_x, h-0);
-            p2 = new Point(offset_x, h-h);
-            g.DrawLine(p, p1, p2);
-
-            richTextBox1.Text += "p1 : " + p1.ToString() + "\n";
-            richTextBox1.Text += "p2 : " + p2.ToString() + "\n";
+            if ((x_max > 0) && (x_min < 0))
+            {
+                p1 = new Point(border_w + (int)((0 - x_min) * ratio_x), border_h + 0);
+                p2 = new Point(border_w + (int)((0 - x_min) * ratio_x), border_h + h);
+                g.DrawLine(Pens.Black, p1, p2);    //Y軸
+                richTextBox1.Text += "可以畫Y軸\n";
+                richTextBox1.Text += "p1 : " + p1.ToString() + "\n";
+                richTextBox1.Text += "p2 : " + p2.ToString() + "\n";
+            }
 
             g.DrawRectangle(Pens.Red, border_w, border_h, w, h);
             richTextBox1.Text += "w = " + w.ToString() + "\n";
@@ -140,10 +153,10 @@ namespace vcs_Calculus1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            float dx = 1.0f;
+            float dx = 10.0f;
             List<PointF> points = new List<PointF>();
             //for (float x = -5; x <= 5; x += dx)
-            for (float x = -250; x <= 250; x += dx)
+            for (float x = -200; x <= 200; x += dx)
             {
                 float y = F_normal2(x);
                 points.Add(new PointF(x, y));
