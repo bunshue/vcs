@@ -571,175 +571,195 @@ void key(unsigned char key, int /*x*/, int /*y*/) {
   glutPostRedisplay();
 }
 
-void special(int k, int x, int y) {
-  if (displaySliders) {
-    params->Special(k, x, y);
-  }
-
-  demoMode = false;
-  idleCounter = 0;
-}
-
-void idle(void) {
-  if ((idleCounter++ > idleDelay) && (demoMode == false)) {
-    demoMode = true;
-    printf("Entering demo mode\n");
-  }
-
-  if (demoMode) {
-    camera_rot[1] += 0.1f;
-
-    if (demoCounter++ > 1000) {
-      ballr = 10 + (rand() % 10);
-      addSphere();
-      demoCounter = 0;
+void special(int k, int x, int y)
+{
+    if (displaySliders)
+    {
+        params->Special(k, x, y);
     }
-  }
 
-  glutPostRedisplay();
+    demoMode = false;
+    idleCounter = 0;
 }
 
-void initParams() {
-  if (g_refFile) {
-    timestep = 0.0f;
-    damping = 0.0f;
-    gravity = 0.0f;
-    ballr = 1;
-    collideSpring = 0.0f;
-    collideDamping = 0.0f;
-    collideShear = 0.0f;
-    collideAttraction = 0.0f;
-  } else {
-    // create a new parameter list
-    params = new ParamListGL("misc");
-    params->AddParam(
-        new Param<float>("time step", timestep, 0.0f, 1.0f, 0.01f, &timestep));
-    params->AddParam(
-        new Param<float>("damping", damping, 0.0f, 1.0f, 0.001f, &damping));
-    params->AddParam(
-        new Param<float>("gravity", gravity, 0.0f, 0.001f, 0.0001f, &gravity));
-    params->AddParam(new Param<int>("ball radius", ballr, 1, 20, 1, &ballr));
+void idle(void)
+{
+    if ((idleCounter++ > idleDelay) && (demoMode == false))
+    {
+        demoMode = true;
+        printf("Entering demo mode\n");
+    }
 
-    params->AddParam(new Param<float>("collide spring", collideSpring, 0.0f,
-                                      1.0f, 0.001f, &collideSpring));
-    params->AddParam(new Param<float>("collide damping", collideDamping, 0.0f,
-                                      0.1f, 0.001f, &collideDamping));
-    params->AddParam(new Param<float>("collide shear", collideShear, 0.0f, 0.1f,
-                                      0.001f, &collideShear));
-    params->AddParam(new Param<float>("collide attract", collideAttraction,
-                                      0.0f, 0.1f, 0.001f, &collideAttraction));
-  }
+    if (demoMode)
+    {
+        camera_rot[1] += 0.1f;
+
+        if (demoCounter++ > 1000)
+        {
+            ballr = 10 + (rand() % 10);
+            addSphere();
+            demoCounter = 0;
+        }
+    }
+
+    glutPostRedisplay();
+}
+
+void initParams()
+{
+    if (g_refFile)
+    {
+        timestep = 0.0f;
+        damping = 0.0f;
+        gravity = 0.0f;
+        ballr = 1;
+        collideSpring = 0.0f;
+        collideDamping = 0.0f;
+        collideShear = 0.0f;
+        collideAttraction = 0.0f;
+    }
+    else {
+        // create a new parameter list
+        params = new ParamListGL("misc");
+        params->AddParam(
+            new Param<float>("time step", timestep, 0.0f, 1.0f, 0.01f, &timestep));
+        params->AddParam(
+            new Param<float>("damping", damping, 0.0f, 1.0f, 0.001f, &damping));
+        params->AddParam(
+            new Param<float>("gravity", gravity, 0.0f, 0.001f, 0.0001f, &gravity));
+        params->AddParam(new Param<int>("ball radius", ballr, 1, 20, 1, &ballr));
+
+        params->AddParam(new Param<float>("collide spring", collideSpring, 0.0f,
+            1.0f, 0.001f, &collideSpring));
+        params->AddParam(new Param<float>("collide damping", collideDamping, 0.0f,
+            0.1f, 0.001f, &collideDamping));
+        params->AddParam(new Param<float>("collide shear", collideShear, 0.0f, 0.1f,
+            0.001f, &collideShear));
+        params->AddParam(new Param<float>("collide attract", collideAttraction,
+            0.0f, 0.1f, 0.001f, &collideAttraction));
+    }
 }
 
 void mainMenu(int i) { key((unsigned char)i, 0, 0); }
 
-void initMenus() {
-  glutCreateMenu(mainMenu);
-  glutAddMenuEntry("Reset block [1]", '1');
-  glutAddMenuEntry("Reset random [2]", '2');
-  glutAddMenuEntry("Add sphere [3]", '3');
-  glutAddMenuEntry("View mode [v]", 'v');
-  glutAddMenuEntry("Move cursor mode [m]", 'm');
-  glutAddMenuEntry("Toggle point rendering [p]", 'p');
-  glutAddMenuEntry("Toggle animation [ ]", ' ');
-  glutAddMenuEntry("Step animation [ret]", 13);
-  glutAddMenuEntry("Toggle sliders [h]", 'h');
-  glutAddMenuEntry("Quit (esc)", '\033');
-  glutAttachMenu(GLUT_RIGHT_BUTTON);
+void initMenus()
+{
+    glutCreateMenu(mainMenu);
+    glutAddMenuEntry("Reset block [1]", '1');
+    glutAddMenuEntry("Reset random [2]", '2');
+    glutAddMenuEntry("Add sphere [3]", '3');
+    glutAddMenuEntry("View mode [v]", 'v');
+    glutAddMenuEntry("Move cursor mode [m]", 'm');
+    glutAddMenuEntry("Toggle point rendering [p]", 'p');
+    glutAddMenuEntry("Toggle animation [ ]", ' ');
+    glutAddMenuEntry("Step animation [ret]", 13);
+    glutAddMenuEntry("Toggle sliders [h]", 'h');
+    glutAddMenuEntry("Quit (esc)", '\033');
+    glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // Program main
 ////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char **argv) {
-#if defined(__linux__)
-  setenv("DISPLAY", ":0", 0);
-#endif
+int main(int argc, char** argv)
+{
+    printf("%s Starting...\n\n", sSDKsample);
 
-  printf("%s Starting...\n\n", sSDKsample);
+    printf(
+        "NOTE: The CUDA Samples are not meant for performance measurements. "
+        "Results may vary when GPU Boost is enabled.\n\n");
 
-  printf(
-      "NOTE: The CUDA Samples are not meant for performance measurements. "
-      "Results may vary when GPU Boost is enabled.\n\n");
+    numParticles = NUM_PARTICLES;
+    uint gridDim = GRID_SIZE;
+    numIterations = 0;
 
-  numParticles = NUM_PARTICLES;
-  uint gridDim = GRID_SIZE;
-  numIterations = 0;
+    if (argc > 1)
+    {
+        if (checkCmdLineFlag(argc, (const char**)argv, "n"))
+        {
+            numParticles = getCmdLineArgumentInt(argc, (const char**)argv, "n");
+        }
 
-  if (argc > 1) {
-    if (checkCmdLineFlag(argc, (const char **)argv, "n")) {
-      numParticles = getCmdLineArgumentInt(argc, (const char **)argv, "n");
+        if (checkCmdLineFlag(argc, (const char**)argv, "grid"))
+        {
+            gridDim = getCmdLineArgumentInt(argc, (const char**)argv, "grid");
+        }
+
+        if (checkCmdLineFlag(argc, (const char**)argv, "file"))
+        {
+            getCmdLineArgumentString(argc, (const char**)argv, "file", &g_refFile);
+            fpsLimit = frameCheckNumber;
+            numIterations = 1;
+        }
     }
 
-    if (checkCmdLineFlag(argc, (const char **)argv, "grid")) {
-      gridDim = getCmdLineArgumentInt(argc, (const char **)argv, "grid");
+    gridSize.x = gridSize.y = gridSize.z = gridDim;
+    printf("grid: %d x %d x %d = %d cells\n", gridSize.x, gridSize.y, gridSize.z, gridSize.x * gridSize.y * gridSize.z);
+    printf("particles: %d\n", numParticles);
+
+    bool benchmark = checkCmdLineFlag(argc, (const char**)argv, "benchmark") != 0;
+
+    if (checkCmdLineFlag(argc, (const char**)argv, "i"))
+    {
+        numIterations = getCmdLineArgumentInt(argc, (const char**)argv, "i");
     }
 
-    if (checkCmdLineFlag(argc, (const char **)argv, "file")) {
-      getCmdLineArgumentString(argc, (const char **)argv, "file", &g_refFile);
-      fpsLimit = frameCheckNumber;
-      numIterations = 1;
+    if (benchmark || g_refFile)
+    {
+        cudaInit(argc, argv);
     }
-  }
+    else
+    {
+        if (checkCmdLineFlag(argc, (const char**)argv, "device"))
+        {
+            printf("[%s]\n", argv[0]);
+            printf("   Does not explicitly support -device=n in OpenGL mode\n");
+            printf("   To use -device=n, the sample must be running w/o OpenGL\n\n");
+            printf(" > %s -device=n -file=<*.bin>\n", argv[0]);
+            printf("exiting...\n");
+            exit(EXIT_SUCCESS);
+        }
 
-  gridSize.x = gridSize.y = gridSize.z = gridDim;
-  printf("grid: %d x %d x %d = %d cells\n", gridSize.x, gridSize.y, gridSize.z,
-         gridSize.x * gridSize.y * gridSize.z);
-  printf("particles: %d\n", numParticles);
-
-  bool benchmark =
-      checkCmdLineFlag(argc, (const char **)argv, "benchmark") != 0;
-
-  if (checkCmdLineFlag(argc, (const char **)argv, "i")) {
-    numIterations = getCmdLineArgumentInt(argc, (const char **)argv, "i");
-  }
-
-  if (benchmark || g_refFile) {
-    cudaInit(argc, argv);
-  } else {
-    if (checkCmdLineFlag(argc, (const char **)argv, "device")) {
-      printf("[%s]\n", argv[0]);
-      printf("   Does not explicitly support -device=n in OpenGL mode\n");
-      printf("   To use -device=n, the sample must be running w/o OpenGL\n\n");
-      printf(" > %s -device=n -file=<*.bin>\n", argv[0]);
-      printf("exiting...\n");
-      exit(EXIT_SUCCESS);
+        initGL(&argc, argv);
+        cudaInit(argc, argv);
     }
 
-    initGL(&argc, argv);
-    cudaInit(argc, argv);
-  }
+    initParticleSystem(numParticles, gridSize, !benchmark && g_refFile == NULL);
+    initParams();
 
-  initParticleSystem(numParticles, gridSize, !benchmark && g_refFile == NULL);
-  initParams();
+    if (benchmark || g_refFile)
+    {
+        if (numIterations <= 0)
+        {
+            numIterations = 300;
+        }
 
-  if (benchmark || g_refFile) {
-    if (numIterations <= 0) {
-      numIterations = 300;
+        runBenchmark(numIterations, argv[0]);
+    }
+    else
+    {
+        if (!g_refFile)
+        {
+            initMenus();
+        }
+
+        glutDisplayFunc(display);
+        glutReshapeFunc(reshape);
+        glutMouseFunc(mouse);
+        glutMotionFunc(motion);
+        glutKeyboardFunc(key);
+        glutSpecialFunc(special);
+        glutIdleFunc(idle);
+
+        glutCloseFunc(cleanup);
+
+        glutMainLoop();
     }
 
-    runBenchmark(numIterations, argv[0]);
-  } else {
-    if (!g_refFile) {
-      initMenus();
+    if (psystem)
+    {
+        delete psystem;
     }
 
-    glutDisplayFunc(display);
-    glutReshapeFunc(reshape);
-    glutMouseFunc(mouse);
-    glutMotionFunc(motion);
-    glutKeyboardFunc(key);
-    glutSpecialFunc(special);
-    glutIdleFunc(idle);
-
-    glutCloseFunc(cleanup);
-
-    glutMainLoop();
-  }
-
-  if (psystem) {
-    delete psystem;
-  }
-
-  exit(g_TotalErrors > 0 ? EXIT_FAILURE : EXIT_SUCCESS);
+    exit(g_TotalErrors > 0 ? EXIT_FAILURE : EXIT_SUCCESS);
 }

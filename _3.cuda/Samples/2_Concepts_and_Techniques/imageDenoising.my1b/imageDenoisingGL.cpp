@@ -51,6 +51,61 @@ unsigned int g_TotalErrors = 0;
 
 void cleanup();
 
+// commented out to remove unused parameter warnings in Linux
+void key(unsigned char key, int /*x*/, int /*y*/) {
+    switch (key) {
+    case ' ':
+        //bPause = !bPause;
+        break;
+
+    case 13:
+        break;
+
+    case '\033':
+    case 'q':
+        printf("你按了 離開\n");
+        glutDestroyWindow(glutGetWindow());
+        return;
+    case '1':
+        printf("你按了 選單項目1\n");
+        break;
+
+    case '2':
+        printf("你按了 選單項目2\n");
+        break;
+
+    case '3':
+        printf("你按了 選單項目3\n");
+        break;
+
+    case '4':
+        printf("你按了 選單項目4\n");
+        break;
+
+    case 'u':
+        break;
+
+    case 'r':
+        break;
+
+    }
+
+    glutPostRedisplay();
+}
+
+void mainMenu(int i) { key((unsigned char)i, 0, 0); }
+
+void initMenus()
+{
+    glutCreateMenu(mainMenu);
+    glutAddMenuEntry("Menu Item 1", '1');
+    glutAddMenuEntry("Menu Item 2", '2');
+    glutAddMenuEntry("Menu Item 3", '3');
+    glutAddMenuEntry("Menu Item 4", '4');
+    glutAddMenuEntry("Exit (esc)", '\033');
+    glutAttachMenu(GLUT_RIGHT_BUTTON);
+}
+
 void computeFPS()
 {
     //printf("computeFPS ");
@@ -81,6 +136,12 @@ int alpha = 0;
 void runImageFilters(TColor* d_dst)
 {
     do_alpha_mixer(alpha, d_dst);
+
+    //glColor3f(0.46f, 0.73f, 0.0f);
+    //glColor3f(1.0f, 0, 0);  //只留紅色系
+    //glColor3f(0, 1.0f, 0);  //只留綠色系
+    //glColor3f(0, 0, 1.0f);  //只留藍色系
+
     if (flag_direction == 0)
     {
         alpha++;
@@ -160,10 +221,10 @@ void displayFunc(void)
 
 void timerEvent(int value)
 {
-    printf("t");
+    //printf("t");
     if (glutGetWindow())
     {
-        printf("r");
+        //printf("r");
         //printf("glutGetWindow ");
         glutPostRedisplay();
         glutTimerFunc(REFRESH_DELAY, timerEvent, 0);    //設定timer事件
@@ -205,17 +266,94 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
     }
 }
 
+int ox = 0, oy = 0;
+int buttonState = 0;
+float camera_trans[] = { 0, -2, -150 };
+float camera_rot[] = { 0, 0, 0 };
+float camera_trans_lag[] = { 0, -2, -150 };
+float camera_rot_lag[] = { 0, 0, 0 };
+const float inertia = 0.1f;
+
+void mouse(int button, int state, int x, int y)
+{
+    int mods;
+
+    if (state == GLUT_DOWN)
+    {
+        buttonState |= 1 << button;
+    }
+    else if (state == GLUT_UP)
+    {
+        buttonState = 0;
+    }
+
+    mods = glutGetModifiers();
+
+    if (mods & GLUT_ACTIVE_SHIFT)
+    {
+        buttonState = 2;
+    }
+    else if (mods & GLUT_ACTIVE_CTRL)
+    {
+        buttonState = 3;
+    }
+
+    ox = x;
+    oy = y;
+
+    glutPostRedisplay();
+
+    printf("(%d, %d, %d) ", buttonState, ox, oy);
+}
+
+void motion(int x, int y)
+{
+    float dx = (float)(x - ox);
+    float dy = (float)(y - oy);
+
+    if (buttonState == 3)
+    {
+        // left+middle = zoom
+        camera_trans[2] += (dy / 100.0f) * 0.5f * fabs(camera_trans[2]);
+    }
+    else if (buttonState & 2)
+    {
+        // middle = translate
+        camera_trans[0] += dx / 100.0f;
+        camera_trans[1] -= dy / 100.0f;
+    }
+    else if (buttonState & 1)
+    {
+        // left = rotate
+        camera_rot[0] += dy / 5.0f;
+        camera_rot[1] += dx / 5.0f;
+    }
+    ox = x;
+    oy = y;
+    glutPostRedisplay();
+}
+
+void idle(void) { glutPostRedisplay(); }
+
 int initGL(int* argc, char** argv)
 {
     printf("Initializing GLUT...\n");
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
-    glutInitWindowSize(imageW, imageH);
-    glutInitWindowPosition(512 - imageW / 2, 384 - imageH / 2);
-    glutCreateWindow(argv[0]);
+    glutInitWindowSize(imageW, imageH); //設定視窗大小, 直接拉大內容
+    glutInitWindowPosition(512 - imageW / 2, 384 - imageH / 2);   //視窗起始位置
+
+    //glutCreateWindow(argv[0]);
+    glutCreateWindow("CUDA window system"); //開啟視窗 並顯示出視窗 Title
+    //glutCreateWindow("CUDA window system"); //開啟視窗 並顯示出視窗 Title //顯示多個視窗
+    //glutCreateWindow("CUDA window system"); //開啟視窗 並顯示出視窗 Title //顯示多個視窗
 
     glutDisplayFunc(displayFunc);   //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
+    glutMouseFunc(mouse);           //設定callback function
+    glutMotionFunc(motion);         //設定callback function
+
+    //glutIdleFunc(idle); //像是沒用
 
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);    //設定timer事件
 
@@ -233,7 +371,6 @@ int initGL(int* argc, char** argv)
         fflush(stderr);
         return false;
     }
-
     return 0;
 }
 
@@ -302,7 +439,7 @@ void cleanup()
 
 int main(int argc, char** argv)
 {
-    int mode = 1;
+    int mode = 0;
 
     if (mode == 0)
     {
@@ -359,6 +496,10 @@ int main(int argc, char** argv)
     //glutSetWindowTitle("ims pic");
     sdkCreateTimer(&timer);
     sdkStartTimer(&timer);
+
+    initMenus();
+
+    //glutFullScreen();   //全螢幕顯示
 
     glutMainLoop();
 }

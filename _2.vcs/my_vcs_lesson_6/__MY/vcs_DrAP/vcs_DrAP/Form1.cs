@@ -259,7 +259,8 @@ namespace vcs_DrAP
             bt_search_pattern_cuda.Location = new Point(x_st + dx, y_st + dy);
             checkBox8.Location = new Point(x_st + dx*2, y_st + dy);
 
-            bt_save_file_data.Location = new Point(x_st + dx * 2, y_st);
+            bt_open_dir2.Location = new Point(x_st + dx * 2, y_st);
+            bt_save_file_data.Location = new Point(x_st + dx * 3, y_st);
 
             bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Width - bt_clear2.Width, richTextBox2.Location.Y);
             bt_copy_rtb_data.Location = new Point(bt_clear2.Location.X, bt_copy_rtb_data.Location.Y);
@@ -1171,7 +1172,7 @@ namespace vcs_DrAP
                 if (flag_function == FUNCTION_SEARCH_TEXT)
                 {
                     //搜尋字串模式
-                    richTextBox2.Text += "aaaa b你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
+                    richTextBox2.Text += "aaaa b你選擇了檔名1:\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
                     richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
                     fullname = listView1.Items[selNdx].SubItems[1].Text + "\\" + listView1.Items[selNdx].SubItems[0].Text;
                 }
@@ -1270,7 +1271,7 @@ namespace vcs_DrAP
                 if (flag_function == FUNCTION_SEARCH_TEXT)
                 {
                     //搜尋字串模式
-                    richTextBox2.Text += "aaaa b你選擇了檔名:\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
+                    richTextBox2.Text += "aaaa b你選擇了檔名2:\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
                     richTextBox2.Text += "資料夾:\t" + listView1.Items[selNdx].SubItems[1].Text + "\n";
                     fullname = listView1.Items[selNdx].SubItems[1].Text + "\\" + listView1.Items[selNdx].SubItems[0].Text;
                 }
@@ -3103,10 +3104,33 @@ namespace vcs_DrAP
 
         }
 
+        private void bt_open_dir2_Click(object sender, EventArgs e)
+        {
+            int cnt = listView1.SelectedItems.Count;
+            if (cnt > 0)
+            {
+                int selNdx = listView1.SelectedIndices[0];
+
+                richTextBox2.Text += "aaaa b你選擇了檔名3:\t" + listView1.Items[selNdx].SubItems[0].Text + "\n";
+
+                string foldername = listView1.Items[selNdx].SubItems[1].Text;
+                richTextBox2.Text += "資料夾:\t" + foldername + "\n";
+
+                string fullname = listView1.Items[selNdx].SubItems[1].Text + "\\" + listView1.Items[selNdx].SubItems[0].Text;
+                richTextBox2.Text += "全檔名:\t" + fullname + "\n";
+
+                //C# 呼叫檔案總管開啟某個資料夾，並讓某個檔案或資料夾呈現反白的樣子
+                string file = @"C:\Windows\explorer.exe";
+                string argument = @"/select, " + foldername;
+                Process.Start(file, argument);
+            }
+        }
+
         private void bt_clear3_Click(object sender, EventArgs e)
         {
             listView1.Clear();
         }
+
 
     }
 }

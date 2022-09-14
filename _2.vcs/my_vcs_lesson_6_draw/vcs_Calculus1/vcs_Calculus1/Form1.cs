@@ -13,6 +13,7 @@ namespace vcs_Calculus1
 {
     public partial class Form1 : Form
     {
+        bool flag_grid_on = true;
         public Form1()
         {
             InitializeComponent();
@@ -20,7 +21,29 @@ namespace vcs_Calculus1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            pictureBox1.ClientSize = new Size(500, 500);
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+
+            //button
+            x_st = 1240;
+            y_st = 40;
+            dx = 130;
+            dy = 50;
+
+            button1.Location = new Point(10, 10);
+            pictureBox1.Location = new Point(20 + 120, 10);
+            pictureBox1.ClientSize = new Size(800+100, 700);
+            richTextBox1.Size = new Size(300, 600);
+            richTextBox1.Location = new Point(840 + 110 + 100, 10);
+
+            this.Size = new Size(1400, 800);
         }
 
         private double sind(double d)
@@ -28,8 +51,7 @@ namespace vcs_Calculus1
             return Math.Sin(d * Math.PI / 180.0);
         }
 
-
-        private float F_normal2(float x)
+        private float function(float x)
         {
             //return (float)(x * x + 2 * x + 1);
             return (float)(sind(3 * x) * 100);
@@ -37,6 +59,8 @@ namespace vcs_Calculus1
 
         void plot_figure(List<PointF> points)
         {
+            int i;
+            int j;
             int W = pictureBox1.ClientSize.Width;
             int H = pictureBox1.ClientSize.Height;
             int border_w = 50;
@@ -52,10 +76,29 @@ namespace vcs_Calculus1
             Bitmap bitmap1 = new Bitmap(W, H);
             Graphics g = Graphics.FromImage(bitmap1);
 
+            richTextBox1.Text += "W = " + W.ToString() + "\n";
+            richTextBox1.Text += "H = " + H.ToString() + "\n";
+            richTextBox1.Text += "w = " + w.ToString() + "\n";
+            richTextBox1.Text += "h = " + h.ToString() + "\n";
+
             g.SmoothingMode = SmoothingMode.AntiAlias;
 
+            if (flag_grid_on == true)
+            {
+                for (i = 0; i <= W; i += 50)
+                {
+                    //直線
+                    g.DrawLine(Pens.LightGray, i, 0, i, H);
+
+                }
+                for (j = 0; j <= H; j += 50)
+                {
+                    //橫線
+                    g.DrawLine(Pens.LightGray, 0, j, W, j);
+                }
+            }
+
             //處理數據
-            int i;
             int len = points.Count();
             richTextBox1.Text += "len = " + len.ToString() + "\n";
 
@@ -101,8 +144,8 @@ namespace vcs_Calculus1
             float ratio_x = 0;
             float ratio_y = 0;
 
-            ratio_x = w / (x_max - x_min + 1);
-            ratio_y = h / (y_max - y_min + 1);
+            ratio_x = w / (x_max - x_min);
+            ratio_y = h / (y_max - y_min);
 
             richTextBox1.Text += "ratio_x = " + ratio_x.ToString() + "\n";
             richTextBox1.Text += "ratio_y = " + ratio_y.ToString() + "\n";
@@ -133,6 +176,12 @@ namespace vcs_Calculus1
                 richTextBox1.Text += "可以畫X軸\n";
                 richTextBox1.Text += "p1 : " + p1.ToString() + "\n";
                 richTextBox1.Text += "p2 : " + p2.ToString() + "\n";
+
+                g.DrawString(x_min.ToString(), new Font("標楷體", 10), new SolidBrush(Color.Black), p1.X - 15, p1.Y + 5);
+                g.DrawString(x_max.ToString(), new Font("標楷體", 10), new SolidBrush(Color.Black), p2.X - 15, p2.Y + 5);
+
+                //要畫 0
+
             }
 
             if ((x_max > 0) && (x_min < 0))
@@ -143,6 +192,9 @@ namespace vcs_Calculus1
                 richTextBox1.Text += "可以畫Y軸\n";
                 richTextBox1.Text += "p1 : " + p1.ToString() + "\n";
                 richTextBox1.Text += "p2 : " + p2.ToString() + "\n";
+
+                g.DrawString(y_max.ToString(), new Font("標楷體", 10), new SolidBrush(Color.Black), p1.X - 15, p1.Y + 5);
+                g.DrawString(y_min.ToString(), new Font("標楷體", 10), new SolidBrush(Color.Black), p2.X - 15, p2.Y + 5);
             }
 
             g.DrawRectangle(Pens.Red, border_w, border_h, w, h);
@@ -158,7 +210,7 @@ namespace vcs_Calculus1
             //for (float x = -5; x <= 5; x += dx)
             for (float x = -200; x <= 200; x += dx)
             {
-                float y = F_normal2(x);
+                float y = function(x);
                 points.Add(new PointF(x, y));
             }
 

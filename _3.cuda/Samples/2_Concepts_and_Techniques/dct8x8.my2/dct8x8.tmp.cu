@@ -1,6 +1,64 @@
+/* Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
+ *
+ * Redistribution and use in source and binary forms, with or without
+ * modification, are permitted provided that the following conditions
+ * are met:
+ *  * Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *  * Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the distribution.
+ *  * Neither the name of NVIDIA CORPORATION nor the names of its
+ *    contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY
+ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+ * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+ * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
+ * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
+ * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+ * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
+ * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
+ * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/**
+**************************************************************************
+* \file dct8x8.cu
+* \brief Contains entry point, wrappers to host and device code and benchmark.
+*
+* This sample implements forward and inverse Discrete Cosine Transform to blocks
+* of image pixels (of 8x8 size), as in JPEG standard. The typical work flow is
+*as
+* follows:
+* 1. Run CPU version (Host code) and measure execution time;
+* 2. Run CUDA version (Device code) and measure execution time;
+* 3. Output execution timings and calculate CUDA speedup.
+*/
+
 #include <stdio.h>
 #include "Common.h"
+#include "DCT8x8_Gold.h"
 #include "BmpUtil.h"
+
+/**
+*  The number of DCT kernel calls
+*/
+#define BENCHMARK_SIZE 10
+
+/**
+*  The PSNR values over this threshold indicate images equality
+*/
+#define PSNR_THRESHOLD_EQUAL 40
+
+// includes kernels
+#include "dct8x8_kernel1.cuh"
+#include "dct8x8_kernel2.cuh"
+#include "dct8x8_kernel_short.cuh"
+#include "dct8x8_kernel_quantization.cuh"
 
 // CUDA kernel to add elements of two arrays
 /*
@@ -201,9 +259,9 @@ int main(int argc, char **argv)
   //cudaDeviceSynchronize();
 
   //製作一個特定位元深度之bmp檔案 ST
-  char filename_write1[] = "x64\\Debug\\ims.new1.bmp";
-  char filename_write2[] = "x64\\Debug\\ims.new2.bmp";
-  char filename_write3[] = "x64\\Debug\\ims.new3.bmp";
+  char filename_write1[] = "ims.new1.bmp";
+  char filename_write2[] = "ims.new2.bmp";
+  char filename_write3[] = "ims.new3.bmp";
   printf("製作一個bmp檔案 : %s\n", filename_write1);
   printf("製作一個bmp檔案 : %s\n", filename_write2);
   printf("製作一個bmp檔案 : %s\n", filename_write3);

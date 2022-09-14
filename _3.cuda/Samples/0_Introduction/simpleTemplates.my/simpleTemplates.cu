@@ -1,30 +1,3 @@
-/* Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *  * Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  * Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *  * Neither the name of NVIDIA CORPORATION nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
 /* This sample is a templatized version of the template project.
 * It also shows how to correctly templatize dynamically allocated shared
 * memory arrays.
@@ -98,26 +71,17 @@ void computeGold(T *reference, T *idata, const unsigned int len) {
 ////////////////////////////////////////////////////////////////////////////////
 // Program main
 ////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
-  printf("runTest<float,32>\n");
-  runTest<float>(argc, argv, 32);
+    printf("runTest<float,32>\n");
+    runTest<float>(argc, argv, 32);
 
-  printf("runTest<int,64>\n");
-  runTest<int>(argc, argv, 64);
+    printf("runTest<int,64>\n");
+    runTest<int>(argc, argv, 64);
 
-  printf("\n[simpleTemplates] -> Test Results: %d Failures\n", g_TotalFailures);
+    printf("\n[simpleTemplates] -> Test Results: %d Failures\n", g_TotalFailures);
 
-
-  int wWidth = 512;   // Window width
-  int wHeight = 512;  // Window height
-  //glutInitWindowSize(wWidth, wHeight);
-  //glutCreateWindow("CUDA Edge Detection");
-
-
-
-
-  exit(g_TotalFailures == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
+    exit(g_TotalFailures == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
 }
 
 // To completely templatize runTest (below) with cutil, we need to use
@@ -187,97 +151,98 @@ class ArrayFileWriter<float> {
 //! Run a simple test for CUDA
 ////////////////////////////////////////////////////////////////////////////////
 template <class T>
-void runTest(int argc, char **argv, int len) {
-  int devID;
-  cudaDeviceProp deviceProps;
+void runTest(int argc, char** argv, int len) {
+    int devID;
+    cudaDeviceProp deviceProps;
 
-  devID = findCudaDevice(argc, (const char **)argv);
+    devID = findCudaDevice(argc, (const char**)argv);
 
-  // get number of SMs on this GPU
-  checkCudaErrors(cudaGetDeviceProperties(&deviceProps, devID));
+    // get number of SMs on this GPU
+    checkCudaErrors(cudaGetDeviceProperties(&deviceProps, devID));
 
-  printf("Name = %s\n", deviceProps.name);
-  printf("clockRate = %d\n", deviceProps.clockRate);
-  printf("multiProcessorCount = %d\n", deviceProps.multiProcessorCount);
-  printf("totalGlobalMem = %u\n", deviceProps.totalGlobalMem);
-  printf("sharedMemPerBlock = %u\n", deviceProps.sharedMemPerBlock);
-  printf("totalConstMem = %d\n", deviceProps.totalConstMem);
-  printf("memoryClockRate = %d\n", deviceProps.memoryClockRate);
-  printf("maxBlocksPerMultiProcessor = %d\n", deviceProps.maxBlocksPerMultiProcessor);
+    printf("Name = %s\n", deviceProps.name);
+    printf("clockRate = %d\n", deviceProps.clockRate);
+    printf("multiProcessorCount = %d\n", deviceProps.multiProcessorCount);
+    printf("totalGlobalMem = %u\n", deviceProps.totalGlobalMem);
+    printf("sharedMemPerBlock = %u\n", deviceProps.sharedMemPerBlock);
+    printf("totalConstMem = %d\n", deviceProps.totalConstMem);
+    printf("memoryClockRate = %d\n", deviceProps.memoryClockRate);
+    printf("maxBlocksPerMultiProcessor = %d\n", deviceProps.maxBlocksPerMultiProcessor);
 
-  printf("CUDA device [%s] has %d Multi-Processors\n", deviceProps.name, deviceProps.multiProcessorCount);
+    printf("CUDA device [%s] has %d Multi-Processors\n", deviceProps.name, deviceProps.multiProcessorCount);
 
-  // create and start timer
-  StopWatchInterface *timer = NULL;
-  sdkCreateTimer(&timer);
+    // create and start timer
+    StopWatchInterface* timer = NULL;
+    sdkCreateTimer(&timer);
 
-  // start the timer
-  sdkStartTimer(&timer);
+    // start the timer
+    sdkStartTimer(&timer);
 
-  unsigned int num_threads = len;
-  unsigned int mem_size = sizeof(float) * num_threads;
+    unsigned int num_threads = len;
+    unsigned int mem_size = sizeof(float) * num_threads;
 
-  // allocate host memory
-  T *h_idata = (T *)malloc(mem_size);
+    // allocate host memory
+    T* h_idata = (T*)malloc(mem_size);
 
-  // initialize the memory
-  for (unsigned int i = 0; i < num_threads; ++i) {
-    h_idata[i] = (T)i;
-  }
+    // initialize the memory
+    for (unsigned int i = 0; i < num_threads; ++i) {
+        h_idata[i] = (T)i;
+    }
 
-  // allocate device memory
-  T *d_idata;
-  checkCudaErrors(cudaMalloc((void **)&d_idata, mem_size));
-  // copy host memory to device
-  checkCudaErrors(
-      cudaMemcpy(d_idata, h_idata, mem_size, cudaMemcpyHostToDevice));
+    // allocate device memory
+    T* d_idata;
+    checkCudaErrors(cudaMalloc((void**)&d_idata, mem_size));
+    // copy host memory to device
+    checkCudaErrors(
+        cudaMemcpy(d_idata, h_idata, mem_size, cudaMemcpyHostToDevice));
 
-  // allocate device memory for result
-  T *d_odata;
-  checkCudaErrors(cudaMalloc((void **)&d_odata, mem_size));
+    // allocate device memory for result
+    T* d_odata;
+    checkCudaErrors(cudaMalloc((void**)&d_odata, mem_size));
 
-  // setup execution parameters
-  dim3 grid(1, 1, 1);
-  dim3 threads(num_threads, 1, 1);
+    // setup execution parameters
+    dim3 grid(1, 1, 1);
+    dim3 threads(num_threads, 1, 1);
 
-  // execute the kernel
-  testKernel<T><<<grid, threads, mem_size>>>(d_idata, d_odata);
+    // execute the kernel
+    testKernel<T> << <grid, threads, mem_size >> > (d_idata, d_odata);
 
-  // check if kernel execution generated and error
-  getLastCudaError("Kernel execution failed");
+    // check if kernel execution generated and error
+    getLastCudaError("Kernel execution failed");
 
-  // allocate mem for the result on host side
-  T *h_odata = (T *)malloc(mem_size);
-  // copy result from device to host
-  checkCudaErrors(cudaMemcpy(h_odata, d_odata, sizeof(T) * num_threads, cudaMemcpyDeviceToHost));
+    // allocate mem for the result on host side
+    T* h_odata = (T*)malloc(mem_size);
+    // copy result from device to host
+    checkCudaErrors(cudaMemcpy(h_odata, d_odata, sizeof(T) * num_threads, cudaMemcpyDeviceToHost));
 
-  sdkStopTimer(&timer);
-  printf("Processing time: %f (ms)\n", sdkGetTimerValue(&timer));
-  sdkDeleteTimer(&timer);
+    sdkStopTimer(&timer);
+    printf("Processing time: %f (ms)\n", sdkGetTimerValue(&timer));
+    sdkDeleteTimer(&timer);
 
-  // compute reference solution
-  T *reference = (T *)malloc(mem_size);
-  computeGold<T>(reference, h_idata, num_threads);
+    // compute reference solution
+    T* reference = (T*)malloc(mem_size);
+    computeGold<T>(reference, h_idata, num_threads);
 
-  ArrayComparator<T> comparator;
-  ArrayFileWriter<T> writer;
+    ArrayComparator<T> comparator;
+    ArrayFileWriter<T> writer;
 
-  // check result
-  if (checkCmdLineFlag(argc, (const char **)argv, "regression")) {
-    // write file for regression test
-    writer.write("./data/regression.dat", h_odata, num_threads, 0.0f);
-  } else {
-    // custom output handling when no regression test running
-    // in this case check if the result is equivalent to the expected solution
-    bool res = comparator.compare(reference, h_odata, num_threads);
-    printf("Compare %s\n\n", (1 == res) ? "OK" : "MISMATCH");
-    g_TotalFailures += (1 != res);
-  }
+    // check result
+    if (checkCmdLineFlag(argc, (const char**)argv, "regression")) {
+        // write file for regression test
+        writer.write("./data/regression.dat", h_odata, num_threads, 0.0f);
+    }
+    else {
+        // custom output handling when no regression test running
+        // in this case check if the result is equivalent to the expected solution
+        bool res = comparator.compare(reference, h_odata, num_threads);
+        printf("Compare %s\n\n", (1 == res) ? "OK" : "MISMATCH");
+        g_TotalFailures += (1 != res);
+    }
 
-  // cleanup memory
-  free(h_idata);
-  free(h_odata);
-  free(reference);
-  checkCudaErrors(cudaFree(d_idata));
-  checkCudaErrors(cudaFree(d_odata));
+    // cleanup memory
+    free(h_idata);
+    free(h_odata);
+    free(reference);
+    checkCudaErrors(cudaFree(d_idata));
+    checkCudaErrors(cudaFree(d_odata));
 }

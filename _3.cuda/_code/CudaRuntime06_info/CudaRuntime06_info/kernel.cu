@@ -132,12 +132,16 @@ int main()
 
         printf("(%d, %d, %d) ", random_r, random_g, random_b);
     }
+    printf("\n");
 
 
-
-
-
-
+    printf("random 測試 0~1中間的小數\n");
+    for (i = 0; i < 10; i++)
+    {
+        float f;
+        f = (float)rand() / (float)RAND_MAX;
+        printf("i = %4d\t%g\n", i, f);
+    }
 
     cudaError_t cudaStatus;
 

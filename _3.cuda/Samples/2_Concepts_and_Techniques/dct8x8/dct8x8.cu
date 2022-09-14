@@ -1,30 +1,3 @@
-/* Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *  * Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  * Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *  * Neither the name of NVIDIA CORPORATION nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
 /**
 **************************************************************************
 * \file dct8x8.cu
@@ -484,179 +457,179 @@ float WrapperCUDAshort(byte *ImgSrc, byte *ImgDst, int Stride, ROI Size) {
 * \return Status code
 */
 
-int main(int argc, char **argv) {
-  //
-  // Sample initialization
-  //
-  printf("%s Starting...\n\n", argv[0]);
+int main(int argc, char** argv) {
+    //
+    // Sample initialization
+    //
+    printf("%s Starting...\n\n", argv[0]);
 
-  // initialize CUDA
-  findCudaDevice(argc, (const char **)argv);
+    // initialize CUDA
+    findCudaDevice(argc, (const char**)argv);
 
-  // source and results image filenames
-  char SampleImageFname[] = "teapot512.bmp";
-  char SampleImageFnameResGold1[] = "teapot512_gold1.bmp";
-  char SampleImageFnameResGold2[] = "teapot512_gold2.bmp";
-  char SampleImageFnameResCUDA1[] = "teapot512_cuda1.bmp";
-  char SampleImageFnameResCUDA2[] = "teapot512_cuda2.bmp";
-  char SampleImageFnameResCUDAshort[] = "teapot512_cuda_short.bmp";
+    // source and results image filenames
+    char SampleImageFname[] = "teapot512.bmp";
+    char SampleImageFnameResGold1[] = "teapot512_gold1.bmp";
+    char SampleImageFnameResGold2[] = "teapot512_gold2.bmp";
+    char SampleImageFnameResCUDA1[] = "teapot512_cuda1.bmp";
+    char SampleImageFnameResCUDA2[] = "teapot512_cuda2.bmp";
+    char SampleImageFnameResCUDAshort[] = "teapot512_cuda_short.bmp";
 
-  char *pSampleImageFpath = sdkFindFilePath(SampleImageFname, argv[0]);
+    char* pSampleImageFpath = sdkFindFilePath(SampleImageFname, argv[0]);
 
-  if (pSampleImageFpath == NULL) {
-    printf("dct8x8 could not locate Sample Image <%s>\nExiting...\n",
-           pSampleImageFpath);
-    exit(EXIT_FAILURE);
-  }
+    if (pSampleImageFpath == NULL) {
+        printf("dct8x8 could not locate Sample Image <%s>\nExiting...\n",
+            pSampleImageFpath);
+        exit(EXIT_FAILURE);
+    }
 
-  // preload image (acquire dimensions)
-  int ImgWidth, ImgHeight;
-  ROI ImgSize;
-  int res = PreLoadBmp(pSampleImageFpath, &ImgWidth, &ImgHeight);
-  ImgSize.width = ImgWidth;
-  ImgSize.height = ImgHeight;
+    // preload image (acquire dimensions)
+    int ImgWidth, ImgHeight;
+    ROI ImgSize;
+    int res = PreLoadBmp(pSampleImageFpath, &ImgWidth, &ImgHeight);
+    ImgSize.width = ImgWidth;
+    ImgSize.height = ImgHeight;
 
-  // CONSOLE INFORMATION: saying hello to user
-  printf("CUDA sample DCT/IDCT implementation\n");
-  printf("===================================\n");
-  printf("Loading test image: %s... ", SampleImageFname);
+    // CONSOLE INFORMATION: saying hello to user
+    printf("CUDA sample DCT/IDCT implementation\n");
+    printf("===================================\n");
+    printf("Loading test image: %s... ", SampleImageFname);
 
-  if (res) {
-    printf("\nError: Image file not found or invalid!\n");
-    exit(EXIT_FAILURE);
-    return 1;
-  }
+    if (res) {
+        printf("\nError: Image file not found or invalid!\n");
+        exit(EXIT_FAILURE);
+        return 1;
+    }
 
-  // check image dimensions are multiples of BLOCK_SIZE
-  if (ImgWidth % BLOCK_SIZE != 0 || ImgHeight % BLOCK_SIZE != 0) {
-    printf("\nError: Input image dimensions must be multiples of 8!\n");
-    exit(EXIT_FAILURE);
-    return 1;
-  }
+    // check image dimensions are multiples of BLOCK_SIZE
+    if (ImgWidth % BLOCK_SIZE != 0 || ImgHeight % BLOCK_SIZE != 0) {
+        printf("\nError: Input image dimensions must be multiples of 8!\n");
+        exit(EXIT_FAILURE);
+        return 1;
+    }
 
-  printf("[%d x %d]... ", ImgWidth, ImgHeight);
+    printf("[%d x %d]... ", ImgWidth, ImgHeight);
 
-  // allocate image buffers
-  int ImgStride;
-  byte *ImgSrc = MallocPlaneByte(ImgWidth, ImgHeight, &ImgStride);
-  byte *ImgDstGold1 = MallocPlaneByte(ImgWidth, ImgHeight, &ImgStride);
-  byte *ImgDstGold2 = MallocPlaneByte(ImgWidth, ImgHeight, &ImgStride);
-  byte *ImgDstCUDA1 = MallocPlaneByte(ImgWidth, ImgHeight, &ImgStride);
-  byte *ImgDstCUDA2 = MallocPlaneByte(ImgWidth, ImgHeight, &ImgStride);
-  byte *ImgDstCUDAshort = MallocPlaneByte(ImgWidth, ImgHeight, &ImgStride);
+    // allocate image buffers
+    int ImgStride;
+    byte* ImgSrc = MallocPlaneByte(ImgWidth, ImgHeight, &ImgStride);
+    byte* ImgDstGold1 = MallocPlaneByte(ImgWidth, ImgHeight, &ImgStride);
+    byte* ImgDstGold2 = MallocPlaneByte(ImgWidth, ImgHeight, &ImgStride);
+    byte* ImgDstCUDA1 = MallocPlaneByte(ImgWidth, ImgHeight, &ImgStride);
+    byte* ImgDstCUDA2 = MallocPlaneByte(ImgWidth, ImgHeight, &ImgStride);
+    byte* ImgDstCUDAshort = MallocPlaneByte(ImgWidth, ImgHeight, &ImgStride);
 
-  // load sample image
-  LoadBmpAsGray(pSampleImageFpath, ImgStride, ImgSize, ImgSrc);
+    // load sample image
+    LoadBmpAsGray(pSampleImageFpath, ImgStride, ImgSize, ImgSrc);
 
-  //
-  // RUNNING WRAPPERS
-  //
+    //
+    // RUNNING WRAPPERS
+    //
 
-  // compute Gold 1 version of DCT/quantization/IDCT
-  printf("Success\nRunning Gold 1 (CPU) version... ");
-  float TimeGold1 = WrapperGold1(ImgSrc, ImgDstGold1, ImgStride, ImgSize);
+    // compute Gold 1 version of DCT/quantization/IDCT
+    printf("Success\nRunning Gold 1 (CPU) version... ");
+    float TimeGold1 = WrapperGold1(ImgSrc, ImgDstGold1, ImgStride, ImgSize);
 
-  // compute Gold 2 version of DCT/quantization/IDCT
-  printf("Success\nRunning Gold 2 (CPU) version... ");
-  float TimeGold2 = WrapperGold2(ImgSrc, ImgDstGold2, ImgStride, ImgSize);
+    // compute Gold 2 version of DCT/quantization/IDCT
+    printf("Success\nRunning Gold 2 (CPU) version... ");
+    float TimeGold2 = WrapperGold2(ImgSrc, ImgDstGold2, ImgStride, ImgSize);
 
-  // compute CUDA 1 version of DCT/quantization/IDCT
-  printf("Success\nRunning CUDA 1 (GPU) version... ");
-  float TimeCUDA1 = WrapperCUDA1(ImgSrc, ImgDstCUDA1, ImgStride, ImgSize);
+    // compute CUDA 1 version of DCT/quantization/IDCT
+    printf("Success\nRunning CUDA 1 (GPU) version... ");
+    float TimeCUDA1 = WrapperCUDA1(ImgSrc, ImgDstCUDA1, ImgStride, ImgSize);
 
-  // compute CUDA 2 version of DCT/quantization/IDCT
-  printf("Success\nRunning CUDA 2 (GPU) version... ");
-  float TimeCUDA2 = WrapperCUDA2(ImgSrc, ImgDstCUDA2, ImgStride, ImgSize);
+    // compute CUDA 2 version of DCT/quantization/IDCT
+    printf("Success\nRunning CUDA 2 (GPU) version... ");
+    float TimeCUDA2 = WrapperCUDA2(ImgSrc, ImgDstCUDA2, ImgStride, ImgSize);
 
-  // compute CUDA short version of DCT/quantization/IDCT
-  printf("Success\nRunning CUDA short (GPU) version... ");
-  float TimeCUDAshort =
-      WrapperCUDAshort(ImgSrc, ImgDstCUDAshort, ImgStride, ImgSize);
-  //
-  // Execution statistics, result saving and validation
-  //
+    // compute CUDA short version of DCT/quantization/IDCT
+    printf("Success\nRunning CUDA short (GPU) version... ");
+    float TimeCUDAshort =
+        WrapperCUDAshort(ImgSrc, ImgDstCUDAshort, ImgStride, ImgSize);
+    //
+    // Execution statistics, result saving and validation
+    //
 
-  // dump result of Gold 1 processing
-  printf("Success\nDumping result to %s... ", SampleImageFnameResGold1);
-  DumpBmpAsGray(SampleImageFnameResGold1, ImgDstGold1, ImgStride, ImgSize);
+    // dump result of Gold 1 processing
+    printf("Success\nDumping result to %s... ", SampleImageFnameResGold1);
+    DumpBmpAsGray(SampleImageFnameResGold1, ImgDstGold1, ImgStride, ImgSize);
 
-  // dump result of Gold 2 processing
-  printf("Success\nDumping result to %s... ", SampleImageFnameResGold2);
-  DumpBmpAsGray(SampleImageFnameResGold2, ImgDstGold2, ImgStride, ImgSize);
+    // dump result of Gold 2 processing
+    printf("Success\nDumping result to %s... ", SampleImageFnameResGold2);
+    DumpBmpAsGray(SampleImageFnameResGold2, ImgDstGold2, ImgStride, ImgSize);
 
-  // dump result of CUDA 1 processing
-  printf("Success\nDumping result to %s... ", SampleImageFnameResCUDA1);
-  DumpBmpAsGray(SampleImageFnameResCUDA1, ImgDstCUDA1, ImgStride, ImgSize);
+    // dump result of CUDA 1 processing
+    printf("Success\nDumping result to %s... ", SampleImageFnameResCUDA1);
+    DumpBmpAsGray(SampleImageFnameResCUDA1, ImgDstCUDA1, ImgStride, ImgSize);
 
-  // dump result of CUDA 2 processing
-  printf("Success\nDumping result to %s... ", SampleImageFnameResCUDA2);
-  DumpBmpAsGray(SampleImageFnameResCUDA2, ImgDstCUDA2, ImgStride, ImgSize);
+    // dump result of CUDA 2 processing
+    printf("Success\nDumping result to %s... ", SampleImageFnameResCUDA2);
+    DumpBmpAsGray(SampleImageFnameResCUDA2, ImgDstCUDA2, ImgStride, ImgSize);
 
-  // dump result of CUDA short processing
-  printf("Success\nDumping result to %s... ", SampleImageFnameResCUDAshort);
-  DumpBmpAsGray(SampleImageFnameResCUDAshort, ImgDstCUDAshort, ImgStride,
-                ImgSize);
-  // print speed info
-  printf("Success\n");
+    // dump result of CUDA short processing
+    printf("Success\nDumping result to %s... ", SampleImageFnameResCUDAshort);
+    DumpBmpAsGray(SampleImageFnameResCUDAshort, ImgDstCUDAshort, ImgStride,
+        ImgSize);
+    // print speed info
+    printf("Success\n");
 
-  printf("Processing time (CUDA 1)    : %f ms \n", TimeCUDA1);
-  printf("Processing time (CUDA 2)    : %f ms \n", TimeCUDA2);
-  printf("Processing time (CUDA short): %f ms \n", TimeCUDAshort);
+    printf("Processing time (CUDA 1)    : %f ms \n", TimeCUDA1);
+    printf("Processing time (CUDA 2)    : %f ms \n", TimeCUDA2);
+    printf("Processing time (CUDA short): %f ms \n", TimeCUDAshort);
 
-  // calculate PSNR between each pair of images
-  float PSNR_Src_DstGold1 =
-      CalculatePSNR(ImgSrc, ImgDstGold1, ImgStride, ImgSize);
-  float PSNR_Src_DstGold2 =
-      CalculatePSNR(ImgSrc, ImgDstGold2, ImgStride, ImgSize);
-  float PSNR_Src_DstCUDA1 =
-      CalculatePSNR(ImgSrc, ImgDstCUDA1, ImgStride, ImgSize);
-  float PSNR_Src_DstCUDA2 =
-      CalculatePSNR(ImgSrc, ImgDstCUDA2, ImgStride, ImgSize);
-  float PSNR_Src_DstCUDAshort =
-      CalculatePSNR(ImgSrc, ImgDstCUDAshort, ImgStride, ImgSize);
-  float PSNR_DstGold1_DstCUDA1 =
-      CalculatePSNR(ImgDstGold1, ImgDstCUDA1, ImgStride, ImgSize);
-  float PSNR_DstGold2_DstCUDA2 =
-      CalculatePSNR(ImgDstGold2, ImgDstCUDA2, ImgStride, ImgSize);
-  float PSNR_DstGold2_DstCUDA16b =
-      CalculatePSNR(ImgDstGold2, ImgDstCUDAshort, ImgStride, ImgSize);
+    // calculate PSNR between each pair of images
+    float PSNR_Src_DstGold1 =
+        CalculatePSNR(ImgSrc, ImgDstGold1, ImgStride, ImgSize);
+    float PSNR_Src_DstGold2 =
+        CalculatePSNR(ImgSrc, ImgDstGold2, ImgStride, ImgSize);
+    float PSNR_Src_DstCUDA1 =
+        CalculatePSNR(ImgSrc, ImgDstCUDA1, ImgStride, ImgSize);
+    float PSNR_Src_DstCUDA2 =
+        CalculatePSNR(ImgSrc, ImgDstCUDA2, ImgStride, ImgSize);
+    float PSNR_Src_DstCUDAshort =
+        CalculatePSNR(ImgSrc, ImgDstCUDAshort, ImgStride, ImgSize);
+    float PSNR_DstGold1_DstCUDA1 =
+        CalculatePSNR(ImgDstGold1, ImgDstCUDA1, ImgStride, ImgSize);
+    float PSNR_DstGold2_DstCUDA2 =
+        CalculatePSNR(ImgDstGold2, ImgDstCUDA2, ImgStride, ImgSize);
+    float PSNR_DstGold2_DstCUDA16b =
+        CalculatePSNR(ImgDstGold2, ImgDstCUDAshort, ImgStride, ImgSize);
 
-  printf("PSNR Original    <---> CPU(Gold 1)    : %f\n", PSNR_Src_DstGold1);
-  printf("PSNR Original    <---> CPU(Gold 2)    : %f\n", PSNR_Src_DstGold2);
-  printf("PSNR Original    <---> GPU(CUDA 1)    : %f\n", PSNR_Src_DstCUDA1);
-  printf("PSNR Original    <---> GPU(CUDA 2)    : %f\n", PSNR_Src_DstCUDA2);
-  printf("PSNR Original    <---> GPU(CUDA short): %f\n", PSNR_Src_DstCUDAshort);
-  printf("PSNR CPU(Gold 1) <---> GPU(CUDA 1)    : %f\n",
-         PSNR_DstGold1_DstCUDA1);
-  printf("PSNR CPU(Gold 2) <---> GPU(CUDA 2)    : %f\n",
-         PSNR_DstGold2_DstCUDA2);
-  printf("PSNR CPU(Gold 2) <---> GPU(CUDA short): %f\n",
-         PSNR_DstGold2_DstCUDA16b);
+    printf("PSNR Original    <---> CPU(Gold 1)    : %f\n", PSNR_Src_DstGold1);
+    printf("PSNR Original    <---> CPU(Gold 2)    : %f\n", PSNR_Src_DstGold2);
+    printf("PSNR Original    <---> GPU(CUDA 1)    : %f\n", PSNR_Src_DstCUDA1);
+    printf("PSNR Original    <---> GPU(CUDA 2)    : %f\n", PSNR_Src_DstCUDA2);
+    printf("PSNR Original    <---> GPU(CUDA short): %f\n", PSNR_Src_DstCUDAshort);
+    printf("PSNR CPU(Gold 1) <---> GPU(CUDA 1)    : %f\n",
+        PSNR_DstGold1_DstCUDA1);
+    printf("PSNR CPU(Gold 2) <---> GPU(CUDA 2)    : %f\n",
+        PSNR_DstGold2_DstCUDA2);
+    printf("PSNR CPU(Gold 2) <---> GPU(CUDA short): %f\n",
+        PSNR_DstGold2_DstCUDA16b);
 
-  bool bTestResult = (PSNR_DstGold1_DstCUDA1 > PSNR_THRESHOLD_EQUAL &&
-                      PSNR_DstGold2_DstCUDA2 > PSNR_THRESHOLD_EQUAL &&
-                      PSNR_DstGold2_DstCUDA16b > PSNR_THRESHOLD_EQUAL);
+    bool bTestResult = (PSNR_DstGold1_DstCUDA1 > PSNR_THRESHOLD_EQUAL &&
+        PSNR_DstGold2_DstCUDA2 > PSNR_THRESHOLD_EQUAL &&
+        PSNR_DstGold2_DstCUDA16b > PSNR_THRESHOLD_EQUAL);
 
-  //
-  // Finalization
-  //
+    //
+    // Finalization
+    //
 
-  // release byte planes
-  FreePlane(ImgSrc);
-  FreePlane(ImgDstGold1);
-  FreePlane(ImgDstGold2);
-  FreePlane(ImgDstCUDA1);
-  FreePlane(ImgDstCUDA2);
-  FreePlane(ImgDstCUDAshort);
+    // release byte planes
+    FreePlane(ImgSrc);
+    FreePlane(ImgDstGold1);
+    FreePlane(ImgDstGold2);
+    FreePlane(ImgDstCUDA1);
+    FreePlane(ImgDstCUDA2);
+    FreePlane(ImgDstCUDAshort);
 
-  // finalize
-  printf("\nTest Summary...\n");
+    // finalize
+    printf("\nTest Summary...\n");
 
-  if (!bTestResult) {
-    printf("Test failed!\n");
-    exit(EXIT_FAILURE);
-  }
+    if (!bTestResult) {
+        printf("Test failed!\n");
+        exit(EXIT_FAILURE);
+    }
 
-  printf("Test passed\n");
-  exit(EXIT_SUCCESS);
+    printf("Test passed\n");
+    exit(EXIT_SUCCESS);
 }

@@ -519,13 +519,16 @@ int main(int argc, char** argv)
 
     if (checkCmdLineFlag(argc, (const char**)argv, "help"))
     {
+        printf("XXXXXXXXXXXXXXXXXX\n");
         printHelp();
         exit(EXIT_SUCCESS);
     }
 
     // use command-line specified CUDA device, otherwise use device with highest
     // Gflops/s
-    if (argc > 1) {
+    if (argc > 1)
+    {
+        printf("XXXXXXXXXXXXXXXXXX\n");
         if (checkCmdLineFlag(argc, (const char**)argv, "threads"))
         {
             nthreads = getCmdLineArgumentInt(argc, (const char**)argv, "threads");
@@ -553,6 +556,7 @@ int main(int argc, char** argv)
 
     if (checkCmdLineFlag(argc, (const char**)argv, "benchmark"))
     {
+        printf("XXXXXXXXXXXXXXXXXX\n");
         // This is a separate mode of the sample, where we are benchmark the kernels
         // for performance
         // Running CUDA kernels (boxfilter) in Benchmarking mode
@@ -561,6 +565,7 @@ int main(int argc, char** argv)
     }
     else if (checkCmdLineFlag(argc, (const char**)argv, "radius") || checkCmdLineFlag(argc, (const char**)argv, "passes"))
     {
+        printf("XXXXXXXXXXXXXXXXXX\n");
         // This overrides the default mode.  Users can specify the radius used by
         // the filter kernel
         g_TotalErrors += runSingleTest(ref_file, argv[0]);
