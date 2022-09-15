@@ -23,7 +23,7 @@
 GLuint gl_PBO, gl_Tex;
 struct cudaGraphicsResource *cuda_pbo_resource;  // handles OpenGL-CUDA exchange
 
-int mode = 1;   //0: 自製圖片資料, 1: 使用圖片640X480, 2: 使用圖片1920X1080
+int mode = 2;   //0: 自製圖片資料, 1: 使用圖片640X480, 2: 使用圖片1920X1080
 
 // Source image on the host side
 uchar4 *h_Src1;
@@ -165,7 +165,7 @@ void runImageFilters(TColor* d_dst)
     getLastCudaError("Filtering kernel execution failed.\n");
 }
 
-void displayFunc(void)
+void display(void)
 {
     sdkStartTimer(&timer);
     TColor* d_dst = NULL;
@@ -358,7 +358,7 @@ int initGL(int* argc, char** argv)
     //glutCreateWindow("CUDA window system"); //開啟視窗 並顯示出視窗 Title //顯示多個視窗
     //glutCreateWindow("CUDA window system"); //開啟視窗 並顯示出視窗 Title //顯示多個視窗
 
-    glutDisplayFunc(displayFunc);   //設定callback function
+    glutDisplayFunc(display);       //設定callback function
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
     glutMouseFunc(mouse);           //設定callback function

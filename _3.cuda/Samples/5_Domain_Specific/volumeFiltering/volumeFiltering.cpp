@@ -60,7 +60,6 @@ const char *sSDKsample = "CUDA 3D Volume Filtering";
 #include "volumeFilter.h"
 #include "volumeRender.h"
 
-const char *volumeFilename = "Bucky.raw";
 cudaExtent volumeSize = make_cudaExtent(32, 32, 32);
 
 uint width = 512, height = 512;
@@ -596,55 +595,19 @@ void *loadRawFile(char *filename, size_t size)
     return data;
 }
 
-void initData(int argc, char **argv)
+void initData(int argc, char** argv)
 {
-    // parse arguments
-    char *filename;
+    printf("initData\n");
 
-    if (getCmdLineArgumentString(argc, (const char **) argv, "file", &filename))
-    {
-        volumeFilename = filename;
-    }
+    char* filename = "Bucky.raw";
 
-    int n;
+    printf("filename : %s\n", filename);
 
-    if (checkCmdLineFlag(argc, (const char **) argv, "size"))
-    {
-        n = getCmdLineArgumentInt(argc, (const char **) argv, "size");
-        volumeSize.width = volumeSize.height = volumeSize.depth = n;
-    }
-
-    if (checkCmdLineFlag(argc, (const char **) argv, "xsize"))
-    {
-        n = getCmdLineArgumentInt(argc, (const char **) argv, "xsize");
-        volumeSize.width = n;
-    }
-
-    if (checkCmdLineFlag(argc, (const char **) argv, "ysize"))
-    {
-        n = getCmdLineArgumentInt(argc, (const char **) argv, "ysize");
-        volumeSize.height = n;
-    }
-
-    if (checkCmdLineFlag(argc, (const char **) argv, "zsize"))
-    {
-        n = getCmdLineArgumentInt(argc, (const char **) argv, "zsize");
-        volumeSize.depth = n;
-    }
-
-    char *path = sdkFindFilePath(volumeFilename, argv[0]);
-
-    if (path == 0)
-    {
-        printf("Error finding file '%s'\n", volumeFilename);
-        exit(EXIT_FAILURE);
-    }
-
-    size_t size = volumeSize.width*volumeSize.height*volumeSize.depth*sizeof(VolumeType);
-    void *h_volume = loadRawFile(path, size);
+    size_t size = volumeSize.width * volumeSize.height * volumeSize.depth * sizeof(VolumeType);
+    void* h_volume = loadRawFile(filename, size);
 
     FilterKernel_init();
-    Volume_init(&volumeOriginal,volumeSize, h_volume, 0);
+    Volume_init(&volumeOriginal, volumeSize, h_volume, 0);
     free(h_volume);
     Volume_init(&volumeFilter0, volumeSize, NULL, 1);
     Volume_init(&volumeFilter1, volumeSize, NULL, 1);
@@ -661,11 +624,11 @@ void initData(int argc, char **argv)
 
 //////////////////////////////////////////////////////////////////////////
 // AUTOMATIC TESTING
-void runSingleTest(const char *ref_file, const char *exec_path)
+void runSingleTest(const char* ref_file, const char* exec_path)
 {
-    uint *d_output;
-    checkCudaErrors(cudaMalloc((void **)&d_output, width*height*sizeof(uint)));
-    checkCudaErrors(cudaMemset(d_output, 0, width*height*sizeof(uint)));
+    uint* d_output;
+    checkCudaErrors(cudaMalloc((void**)&d_output, width * height * sizeof(uint)));
+    checkCudaErrors(cudaMemset(d_output, 0, width * height * sizeof(uint)));
 
     float modelView[16] =
     {
@@ -689,12 +652,12 @@ void runSingleTest(const char *ref_file, const char *exec_path)
     invViewMatrix[11] = modelView[14];
 
     // call CUDA kernel, writing results to PBO
-    VolumeRender_copyInvViewMatrix(invViewMatrix, sizeof(float4)*3);
+    VolumeRender_copyInvViewMatrix(invViewMatrix, sizeof(float4) * 3);
     filterAnimation = false;
 
     // Start timer 0 and process n loops on the GPU
     int nIter = 10;
-    float scale = 2.0f/float(nIter-1);
+    float scale = 2.0f / float(nIter - 1);
 
     for (int i = -1; i < nIter; i++)
     {
@@ -713,20 +676,19 @@ void runSingleTest(const char *ref_file, const char *exec_path)
     cudaDeviceSynchronize();
     sdkStopTimer(&timer);
     // Get elapsed time and throughput, then log to sample and master logs
-    double dAvgTime = sdkGetTimerValue(&timer)/(nIter * 1000.0);
+    double dAvgTime = sdkGetTimerValue(&timer) / (nIter * 1000.0);
     printf("volumeFiltering, Throughput = %.4f MTexels/s, Time = %.5f s, Size = %u Texels, NumDevsUsed = %u, Workgroup = %u\n",
-           (1.0e-6 * width * height)/dAvgTime, dAvgTime, (width * height), 1, blockSize.x * blockSize.y);
+        (1.0e-6 * width * height) / dAvgTime, dAvgTime, (width * height), 1, blockSize.x * blockSize.y);
 
 
     getLastCudaError("Error: kernel execution FAILED");
     checkCudaErrors(cudaDeviceSynchronize());
 
-    unsigned char *h_output = (unsigned char *)malloc(width*height*4);
-    checkCudaErrors(cudaMemcpy(h_output, d_output, width*height*4, cudaMemcpyDeviceToHost));
+    unsigned char* h_output = (unsigned char*)malloc(width * height * 4);
+    checkCudaErrors(cudaMemcpy(h_output, d_output, width * height * 4, cudaMemcpyDeviceToHost));
 
     sdkSavePPM4ub("volumefilter.ppm", h_output, width, height);
-    bool bTestResult = sdkComparePPM("volumefilter.ppm", sdkFindFilePath(ref_file, exec_path),
-                                     MAX_EPSILON_ERROR, THRESHOLD, true);
+    bool bTestResult = sdkComparePPM("volumefilter.ppm", sdkFindFilePath(ref_file, exec_path), MAX_EPSILON_ERROR, THRESHOLD, true);
 
     checkCudaErrors(cudaFree(d_output));
     free(h_output);
@@ -749,35 +711,30 @@ void printHelp()
     printf("\t\t-zsize = 32 (volume size, anisotropic)\n\n");
 }
 
-int
-main(int argc, char **argv)
+int main(int argc, char** argv)
 {
     pArgc = &argc;
     pArgv = argv;
 
-    char *ref_file = NULL;
-
-#if defined(__linux__)
-    setenv ("DISPLAY", ":0", 0);
-#endif
+    char* ref_file = NULL;
 
     printf("%s Starting...\n\n", sSDKsample);
 
     //start logs
 
-    if (checkCmdLineFlag(argc, (const char **)argv, "help"))
+    if (checkCmdLineFlag(argc, (const char**)argv, "help"))
     {
         printHelp();
         exit(EXIT_SUCCESS);
     }
 
-    if (checkCmdLineFlag(argc, (const char **)argv, "file"))
+    if (checkCmdLineFlag(argc, (const char**)argv, "file"))
     {
         fpsLimit = frameCheckNumber;
-        getCmdLineArgumentString(argc, (const char **)argv, "file", &ref_file);
+        getCmdLineArgumentString(argc, (const char**)argv, "file", &ref_file);
     }
 
-    int device = findCudaDevice(argc, (const char **)argv);
+    int device = findCudaDevice(argc, (const char**)argv);
 
     if (!ref_file)
     {
@@ -802,21 +759,16 @@ main(int argc, char **argv)
     }
     else
     {
-        // This is the normal rendering path for VolumeRender
-        glutDisplayFunc(display);
-        glutKeyboardFunc(keyboard);
-        glutMouseFunc(mouse);
-        glutMotionFunc(motion);
-        glutReshapeFunc(reshape);
-        glutIdleFunc(idle);
+        glutDisplayFunc(display);   //設定callback function
+        glutKeyboardFunc(keyboard); //設定callback function
+        glutMouseFunc(mouse);       //設定callback function
+        glutMotionFunc(motion);     //設定callback function
+        glutReshapeFunc(reshape);   //設定callback function
+        glutIdleFunc(idle);         //設定callback function
 
         initPixelBuffer();
 
-#if defined (__APPLE__) || defined(MACOSX)
-        atexit(cleanup);
-#else
         glutCloseFunc(cleanup);
-#endif
 
         glutMainLoop();
     }

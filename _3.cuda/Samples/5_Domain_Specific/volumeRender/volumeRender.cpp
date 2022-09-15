@@ -1,30 +1,3 @@
-/* Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *  * Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  * Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *  * Neither the name of NVIDIA CORPORATION nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
 /*
   Volume rendering sample
 
@@ -42,15 +15,7 @@
 
 // OpenGL Graphics includes
 #include <helper_gl.h>
-#if defined(__APPLE__) || defined(MACOSX)
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#include <GLUT/glut.h>
-#ifndef glutCloseFunc
-#define glutCloseFunc glutWMCloseFunc
-#endif
-#else
 #include <GL/freeglut.h>
-#endif
 
 // CUDA Runtime, Interop, and includes
 #include <cuda_runtime.h>
@@ -528,110 +493,122 @@ void runSingleTest(const char *ref_file, const char *exec_path) {
 ////////////////////////////////////////////////////////////////////////////////
 // Program main
 ////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char **argv) {
-  pArgc = &argc;
-  pArgv = argv;
+int main(int argc, char** argv)
+{
+    pArgc = &argc;
+    pArgv = argv;
 
-  char *ref_file = NULL;
+    char* ref_file = NULL;
 
-#if defined(__linux__)
-  setenv("DISPLAY", ":0", 0);
-#endif
+    // start logs
+    printf("%s Starting...\n\n", sSDKsample);
 
-  // start logs
-  printf("%s Starting...\n\n", sSDKsample);
+    if (checkCmdLineFlag(argc, (const char**)argv, "file"))
+    {
+        printf("XXXXXXXXXXXXXXXXXXXXX\n");
+        getCmdLineArgumentString(argc, (const char**)argv, "file", &ref_file);
+        fpsLimit = frameCheckNumber;
+    }
 
-  if (checkCmdLineFlag(argc, (const char **)argv, "file")) {
-    getCmdLineArgumentString(argc, (const char **)argv, "file", &ref_file);
-    fpsLimit = frameCheckNumber;
-  }
+    if (ref_file)
+    {
+        printf("XXXXXXXXXXXXXXXXXXXXX\n");
+        findCudaDevice(argc, (const char**)argv);
+    }
+    else
+    {
+        // First initialize OpenGL context, so we can properly set the GL for CUDA.
+        // This is necessary in order to achieve optimal performance with
+        // OpenGL/CUDA interop.
+        initGL(&argc, argv);
 
-  if (ref_file) {
-    findCudaDevice(argc, (const char **)argv);
-  } else {
-    // First initialize OpenGL context, so we can properly set the GL for CUDA.
-    // This is necessary in order to achieve optimal performance with
-    // OpenGL/CUDA interop.
-    initGL(&argc, argv);
+        findCudaDevice(argc, (const char**)argv);
+    }
 
-    findCudaDevice(argc, (const char **)argv);
-  }
+    // parse arguments
+    char* filename;
 
-  // parse arguments
-  char *filename;
+    if (getCmdLineArgumentString(argc, (const char**)argv, "volume", &filename))
+    {
+        printf("XXXXXXXXXXXXXXXXXXXXX\n");
+        volumeFilename = filename;
+    }
 
-  if (getCmdLineArgumentString(argc, (const char **)argv, "volume",
-                               &filename)) {
-    volumeFilename = filename;
-  }
+    int n;
 
-  int n;
+    if (checkCmdLineFlag(argc, (const char**)argv, "size"))
+    {
+        printf("XXXXXXXXXXXXXXXXXXXXX\n");
+        n = getCmdLineArgumentInt(argc, (const char**)argv, "size");
+        volumeSize.width = volumeSize.height = volumeSize.depth = n;
+    }
 
-  if (checkCmdLineFlag(argc, (const char **)argv, "size")) {
-    n = getCmdLineArgumentInt(argc, (const char **)argv, "size");
-    volumeSize.width = volumeSize.height = volumeSize.depth = n;
-  }
+    if (checkCmdLineFlag(argc, (const char**)argv, "xsize"))
+    {
+        printf("XXXXXXXXXXXXXXXXXXXXX\n");
+        n = getCmdLineArgumentInt(argc, (const char**)argv, "xsize");
+        volumeSize.width = n;
+    }
 
-  if (checkCmdLineFlag(argc, (const char **)argv, "xsize")) {
-    n = getCmdLineArgumentInt(argc, (const char **)argv, "xsize");
-    volumeSize.width = n;
-  }
+    if (checkCmdLineFlag(argc, (const char**)argv, "ysize"))
+    {
+        printf("XXXXXXXXXXXXXXXXXXXXX\n");
+        n = getCmdLineArgumentInt(argc, (const char**)argv, "ysize");
+        volumeSize.height = n;
+    }
 
-  if (checkCmdLineFlag(argc, (const char **)argv, "ysize")) {
-    n = getCmdLineArgumentInt(argc, (const char **)argv, "ysize");
-    volumeSize.height = n;
-  }
+    if (checkCmdLineFlag(argc, (const char**)argv, "zsize"))
+    {
+        printf("XXXXXXXXXXXXXXXXXXXXX\n");
+        n = getCmdLineArgumentInt(argc, (const char**)argv, "zsize");
+        volumeSize.depth = n;
+    }
 
-  if (checkCmdLineFlag(argc, (const char **)argv, "zsize")) {
-    n = getCmdLineArgumentInt(argc, (const char **)argv, "zsize");
-    volumeSize.depth = n;
-  }
+    // load volume data
+    char* path = sdkFindFilePath(volumeFilename, argv[0]);
 
-  // load volume data
-  char *path = sdkFindFilePath(volumeFilename, argv[0]);
+    if (path == 0)
+    {
+        printf("Error finding file '%s'\n", volumeFilename);
+        exit(EXIT_FAILURE);
+    }
 
-  if (path == 0) {
-    printf("Error finding file '%s'\n", volumeFilename);
-    exit(EXIT_FAILURE);
-  }
+    size_t size = volumeSize.width * volumeSize.height * volumeSize.depth * sizeof(VolumeType);
+    void* h_volume = loadRawFile(path, size);
 
-  size_t size = volumeSize.width * volumeSize.height * volumeSize.depth *
-                sizeof(VolumeType);
-  void *h_volume = loadRawFile(path, size);
+    initCuda(h_volume, volumeSize);
+    free(h_volume);
 
-  initCuda(h_volume, volumeSize);
-  free(h_volume);
+    sdkCreateTimer(&timer);
 
-  sdkCreateTimer(&timer);
+    printf(
+        "Press '+' and '-' to change density (0.01 increments)\n"
+        "      ']' and '[' to change brightness\n"
+        "      ';' and ''' to modify transfer function offset\n"
+        "      '.' and ',' to modify transfer function scale\n\n");
 
-  printf(
-      "Press '+' and '-' to change density (0.01 increments)\n"
-      "      ']' and '[' to change brightness\n"
-      "      ';' and ''' to modify transfer function offset\n"
-      "      '.' and ',' to modify transfer function scale\n\n");
+    // calculate new grid size
+    gridSize = dim3(iDivUp(width, blockSize.x), iDivUp(height, blockSize.y));
 
-  // calculate new grid size
-  gridSize = dim3(iDivUp(width, blockSize.x), iDivUp(height, blockSize.y));
+    if (ref_file)
+    {
+        printf("XXXXXXXXXXXXXXXXXXXXX\n");
+        runSingleTest(ref_file, argv[0]);
+    }
+    else
+    {
+        // This is the normal rendering path for VolumeRender
+        glutDisplayFunc(display);
+        glutKeyboardFunc(keyboard);
+        glutMouseFunc(mouse);
+        glutMotionFunc(motion);
+        glutReshapeFunc(reshape);
+        glutIdleFunc(idle);
 
-  if (ref_file) {
-    runSingleTest(ref_file, argv[0]);
-  } else {
-    // This is the normal rendering path for VolumeRender
-    glutDisplayFunc(display);
-    glutKeyboardFunc(keyboard);
-    glutMouseFunc(mouse);
-    glutMotionFunc(motion);
-    glutReshapeFunc(reshape);
-    glutIdleFunc(idle);
+        initPixelBuffer();
 
-    initPixelBuffer();
+        glutCloseFunc(cleanup);
 
-#if defined(__APPLE__) || defined(MACOSX)
-    atexit(cleanup);
-#else
-    glutCloseFunc(cleanup);
-#endif
-
-    glutMainLoop();
-  }
+        glutMainLoop();
+    }
 }

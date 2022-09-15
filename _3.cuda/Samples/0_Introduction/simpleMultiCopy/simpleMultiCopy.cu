@@ -88,6 +88,7 @@ int main(int argc, char* argv[])
 
     if (checkCmdLineFlag(argc, (const char**)argv, "device"))
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXX\n");
         cuda_device = getCmdLineArgumentInt(argc, (const char**)argv, "device=");
 
         if (cuda_device < 0)

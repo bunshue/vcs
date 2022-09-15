@@ -46,6 +46,7 @@
             this.checkBox10 = new System.Windows.Forms.CheckBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
+            this.cb_debug = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // button1
@@ -248,11 +249,23 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
+            // cb_debug
+            // 
+            this.cb_debug.AutoSize = true;
+            this.cb_debug.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_debug.Location = new System.Drawing.Point(135, 588);
+            this.cb_debug.Name = "cb_debug";
+            this.cb_debug.Size = new System.Drawing.Size(94, 31);
+            this.cb_debug.TabIndex = 142;
+            this.cb_debug.Text = "debug";
+            this.cb_debug.UseVisualStyleBackColor = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(928, 643);
+            this.Controls.Add(this.cb_debug);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.checkBox10);
@@ -298,6 +311,7 @@
         private System.Windows.Forms.CheckBox checkBox10;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.CheckBox cb_debug;
     }
 }
 

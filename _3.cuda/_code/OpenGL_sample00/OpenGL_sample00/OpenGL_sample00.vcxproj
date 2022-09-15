@@ -11,13 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <CudaCompile Include="OpenGL_sample04.cu" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="rgb.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="rgb.c" />
+    <CudaCompile Include="OpenGL_sample00.cu" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FC9F5E8E-F1CD-4500-8625-916EC21D307E}</ProjectGuid>

@@ -1,30 +1,3 @@
-/* Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *  * Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  * Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *  * Neither the name of NVIDIA CORPORATION nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
 /*
     This example demonstrates how to use the Cuda OpenGL bindings to
     dynamically modify a vertex buffer using a Cuda kernel.
@@ -54,15 +27,7 @@
 
 // OpenGL Graphics includes
 #include <helper_gl.h>
-#if defined (__APPLE__) || defined(MACOSX)
-  #pragma clang diagnostic ignored "-Wdeprecated-declarations"
-  #include <GLUT/glut.h>
-  #ifndef glutCloseFunc
-  #define glutCloseFunc glutWMCloseFunc
-  #endif
-#else
 #include <GL/freeglut.h>
-#endif
 
 // includes, cuda
 #include <cuda_runtime.h>
@@ -166,15 +131,13 @@ __global__ void simple_vbo_kernel(float4 *pos, unsigned int width, unsigned int 
 }
 
 
-void launch_kernel(float4 *pos, unsigned int mesh_width,
-                   unsigned int mesh_height, float time)
+void launch_kernel(float4* pos, unsigned int mesh_width, unsigned int mesh_height, float time)
 {
     // execute the kernel
     dim3 block(8, 8, 1);
     dim3 grid(mesh_width / block.x, mesh_height / block.y, 1);
-    simple_vbo_kernel<<< grid, block>>>(pos, mesh_width, mesh_height, time);
+    simple_vbo_kernel << < grid, block >> > (pos, mesh_width, mesh_height, time);
 }
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // Program main
@@ -186,14 +149,11 @@ int main(int argc, char **argv)
     pArgc = &argc;
     pArgv = argv;
 
-#if defined(__linux__)
-    setenv ("DISPLAY", ":0", 0);
-#endif
-
     printf("%s starting...\n", sSDKsample);
 
     if (argc > 1)
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXX\n");
         if (checkCmdLineFlag(argc, (const char **)argv, "file"))
         {
             // In this mode, we are running non-OpenGL and doing a compare of the VBO was generated correctly
@@ -231,19 +191,20 @@ void computeFPS()
 ////////////////////////////////////////////////////////////////////////////////
 //! Initialize GL
 ////////////////////////////////////////////////////////////////////////////////
-bool initGL(int *argc, char **argv)
+bool initGL(int* argc, char** argv)
 {
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
     glutInitWindowSize(window_width, window_height);
     glutCreateWindow("Cuda GL Interop (VBO)");
-    glutDisplayFunc(display);
-    glutKeyboardFunc(keyboard);
-    glutMotionFunc(motion);
-    glutTimerFunc(REFRESH_DELAY, timerEvent,0);
+    glutDisplayFunc(display);       //設定callback function
+    glutKeyboardFunc(keyboard);     //設定callback function
+    glutMotionFunc(motion);         //設定callback function
+
+    glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
 
     // initialize necessary OpenGL extensions
-    if (! isGLVersionSupported(2,0))
+    if (!isGLVersionSupported(2, 0))
     {
         fprintf(stderr, "ERROR: Support for necessary OpenGL extensions missing.");
         fflush(stderr);
@@ -260,30 +221,30 @@ bool initGL(int *argc, char **argv)
     // projection
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(60.0, (GLfloat)window_width / (GLfloat) window_height, 0.1, 10.0);
+    gluPerspective(60.0, (GLfloat)window_width / (GLfloat)window_height, 0.1, 10.0);
 
     SDK_CHECK_ERROR_GL();
 
     return true;
 }
 
-
 ////////////////////////////////////////////////////////////////////////////////
 //! Run a simple test for CUDA
 ////////////////////////////////////////////////////////////////////////////////
-bool runTest(int argc, char **argv, char *ref_file)
+bool runTest(int argc, char** argv, char* ref_file)
 {
     // Create the CUTIL timer
     sdkCreateTimer(&timer);
 
     // use command-line specified CUDA device, otherwise use device with highest Gflops/s
-    int devID = findCudaDevice(argc, (const char **)argv);
+    int devID = findCudaDevice(argc, (const char**)argv);
 
     // command line mode only
     if (ref_file != NULL)
     {
+        printf("111 XXXXXXXXXXXXXXXXXXXXXXXX\n");
         // create VBO
-        checkCudaErrors(cudaMalloc((void **)&d_vbo_buffer, mesh_width*mesh_height*4*sizeof(float)));
+        checkCudaErrors(cudaMalloc((void**)&d_vbo_buffer, mesh_width * mesh_height * 4 * sizeof(float)));
 
         // run the cuda part
         runAutoTest(devID, argv, ref_file);
@@ -296,6 +257,7 @@ bool runTest(int argc, char **argv, char *ref_file)
     }
     else
     {
+        printf("222\n");
         // First initialize OpenGL context, so we can properly set the GL for CUDA.
         // This is necessary in order to achieve optimal performance with OpenGL/CUDA interop.
         if (false == initGL(&argc, argv))
@@ -308,11 +270,7 @@ bool runTest(int argc, char **argv, char *ref_file)
         glutKeyboardFunc(keyboard);
         glutMouseFunc(mouse);
         glutMotionFunc(motion);
-#if defined (__APPLE__) || defined(MACOSX)
-        atexit(cleanup);
-#else
         glutCloseFunc(cleanup);
-#endif
 
         // create VBO
         createVBO(&vbo, &cuda_vbo_resource, cudaGraphicsMapFlagsWriteDiscard);
@@ -361,10 +319,10 @@ void runCuda(struct cudaGraphicsResource **vbo_resource)
 #endif
 #endif
 
-void sdkDumpBin2(void *data, unsigned int bytes, const char *filename)
+void sdkDumpBin2(void* data, unsigned int bytes, const char* filename)
 {
     printf("sdkDumpBin: <%s>\n", filename);
-    FILE *fp;
+    FILE* fp;
     FOPEN(fp, filename, "wb");
     fwrite(data, bytes, 1, fp);
     fflush(fp);
@@ -374,30 +332,31 @@ void sdkDumpBin2(void *data, unsigned int bytes, const char *filename)
 ////////////////////////////////////////////////////////////////////////////////
 //! Run the Cuda part of the computation
 ////////////////////////////////////////////////////////////////////////////////
-void runAutoTest(int devID, char **argv, char *ref_file)
+void runAutoTest(int devID, char** argv, char* ref_file)
 {
-    char *reference_file = NULL;
-    void *imageData = malloc(mesh_width*mesh_height*sizeof(float));
+    char* reference_file = NULL;
+    void* imageData = malloc(mesh_width * mesh_height * sizeof(float));
 
     // execute the kernel
-    launch_kernel((float4 *)d_vbo_buffer, mesh_width, mesh_height, g_fAnim);
+    launch_kernel((float4*)d_vbo_buffer, mesh_width, mesh_height, g_fAnim);
 
     cudaDeviceSynchronize();
     getLastCudaError("launch_kernel failed");
 
-    checkCudaErrors(cudaMemcpy(imageData, d_vbo_buffer, mesh_width*mesh_height*sizeof(float), cudaMemcpyDeviceToHost));
+    checkCudaErrors(cudaMemcpy(imageData, d_vbo_buffer, mesh_width * mesh_height * sizeof(float), cudaMemcpyDeviceToHost));
 
-    sdkDumpBin2(imageData, mesh_width*mesh_height*sizeof(float), "simpleGL.bin");
+    sdkDumpBin2(imageData, mesh_width * mesh_height * sizeof(float), "simpleGL.bin");
     reference_file = sdkFindFilePath(ref_file, argv[0]);
 
     if (reference_file &&
         !sdkCompareBin2BinFloat("simpleGL.bin", reference_file,
-                                mesh_width*mesh_height*sizeof(float),
-                                MAX_EPSILON_ERROR, THRESHOLD, pArgv[0]))
+            mesh_width * mesh_height * sizeof(float),
+            MAX_EPSILON_ERROR, THRESHOLD, pArgv[0]))
     {
         g_TotalErrors++;
     }
 }
+
 
 ////////////////////////////////////////////////////////////////////////////////
 //! Create VBO

@@ -91,7 +91,8 @@ __global__ void transformKernel(float *g_odata, int width,
 ////////////////////////////////////////////////////////////////////////////////
 // Program main
 ////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
     // use command-line specified CUDA device, otherwise use device with highest
     // Gflops/s
     int devID = findCudaDevice(argc, (const char**)argv);
@@ -106,7 +107,8 @@ int main(int argc, char** argv) {
         deviceProps.multiProcessorCount);
     printf("SM %d.%d\n", deviceProps.major, deviceProps.minor);
 
-    if (deviceProps.major < 2) {
+    if (deviceProps.major < 2)
+    {
         printf(
             "%s requires SM 2.0 or higher for support of Texture Arrays.  Test "
             "will exit... \n",
@@ -121,17 +123,19 @@ int main(int argc, char** argv) {
     unsigned int size = cubemap_size * num_layers * sizeof(float);
     float* h_data = (float*)malloc(size);
 
-    for (int i = 0; i < (int)(cubemap_size * num_layers); i++) {
+    for (int i = 0; i < (int)(cubemap_size * num_layers); i++)
+    {
         h_data[i] = (float)i;
     }
 
     // this is the expected transformation of the input data (the expected output)
     float* h_data_ref = (float*)malloc(size);
 
-    for (unsigned int layer = 0; layer < num_layers; layer++) {
-        for (int i = 0; i < (int)(cubemap_size); i++) {
-            h_data_ref[layer * cubemap_size + i] =
-                -h_data[layer * cubemap_size + i] + layer;
+    for (unsigned int layer = 0; layer < num_layers; layer++)
+    {
+        for (int i = 0; i < (int)(cubemap_size); i++)
+        {
+            h_data_ref[layer * cubemap_size + i] = -h_data[layer * cubemap_size + i] + layer;
         }
     }
 
@@ -140,19 +144,15 @@ int main(int argc, char** argv) {
     checkCudaErrors(cudaMalloc((void**)&d_data, size));
 
     // allocate array and copy image data
-    cudaChannelFormatDesc channelDesc =
-        cudaCreateChannelDesc(32, 0, 0, 0, cudaChannelFormatKindFloat);
+    cudaChannelFormatDesc channelDesc = cudaCreateChannelDesc(32, 0, 0, 0, cudaChannelFormatKindFloat);
     cudaArray* cu_3darray;
     //    checkCudaErrors(cudaMalloc3DArray( &cu_3darray, &channelDesc,
     //    make_cudaExtent(width, height, num_layers), cudaArrayLayered ));
-    checkCudaErrors(cudaMalloc3DArray(&cu_3darray, &channelDesc,
-        make_cudaExtent(width, width, num_faces),
-        cudaArrayCubemap));
+    checkCudaErrors(cudaMalloc3DArray(&cu_3darray, &channelDesc, make_cudaExtent(width, width, num_faces), cudaArrayCubemap));
     cudaMemcpy3DParms myparms = { 0 };
     myparms.srcPos = make_cudaPos(0, 0, 0);
     myparms.dstPos = make_cudaPos(0, 0, 0);
-    myparms.srcPtr =
-        make_cudaPitchedPtr(h_data, width * sizeof(float), width, width);
+    myparms.srcPtr = make_cudaPitchedPtr(h_data, width * sizeof(float), width, width);
     myparms.dstArray = cu_3darray;
     myparms.extent = make_cudaExtent(width, width, num_faces);
     myparms.kind = cudaMemcpyHostToDevice;
@@ -185,8 +185,7 @@ int main(int argc, char** argv) {
         "block has 8 x 8 threads\n",
         width, num_layers, dimGrid.x, dimGrid.y);
 
-    transformKernel << <dimGrid, dimBlock >> > (d_data, width,
-        tex);  // warmup (for better timing)
+    transformKernel << <dimGrid, dimBlock >> > (d_data, width, tex);  // warmup (for better timing)
 
 // check if kernel execution generated an error
     getLastCudaError("warmup Kernel execution failed");
@@ -206,8 +205,7 @@ int main(int argc, char** argv) {
     checkCudaErrors(cudaDeviceSynchronize());
     sdkStopTimer(&timer);
     printf("Processing time: %.3f msec\n", sdkGetTimerValue(&timer));
-    printf("%.2f Mtexlookups/sec\n",
-        (cubemap_size / (sdkGetTimerValue(&timer) / 1000.0f) / 1e6));
+    printf("%.2f Mtexlookups/sec\n", (cubemap_size / (sdkGetTimerValue(&timer) / 1000.0f) / 1e6));
     sdkDeleteTimer(&timer);
 
     // allocate mem for the result on host side
@@ -216,17 +214,17 @@ int main(int argc, char** argv) {
     checkCudaErrors(cudaMemcpy(h_odata, d_data, size, cudaMemcpyDeviceToHost));
 
     // write regression file if necessary
-    if (checkCmdLineFlag(argc, (const char**)argv, "regression")) {
+    if (checkCmdLineFlag(argc, (const char**)argv, "regression"))
+    {
         // write file for regression test
-        sdkWriteFile<float>("./data/regression.dat", h_odata, width * width, 0.0f,
-            false);
+        sdkWriteFile<float>("./data/regression.dat", h_odata, width * width, 0.0f, false);
     }
-    else {
+    else
+    {
         printf("Comparing kernel output to expected data\n");
 
 #define MIN_EPSILON_ERROR 5e-3f
-        bResult =
-            compareData(h_odata, h_data_ref, cubemap_size, MIN_EPSILON_ERROR, 0.0f);
+        bResult = compareData(h_odata, h_data_ref, cubemap_size, MIN_EPSILON_ERROR, 0.0f);
     }
 
     // cleanup memory
