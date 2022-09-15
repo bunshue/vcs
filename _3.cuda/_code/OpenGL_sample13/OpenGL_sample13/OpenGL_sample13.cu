@@ -146,9 +146,8 @@ static void Init(void)
     Teapot(14);
 }
 
-static void Reshape(int w, int h)
+static void reshape(int w, int h)
 {
-
     glViewport(0, 0, (GLint)w, (GLint)h);
 
     glMatrixMode(GL_PROJECTION);
@@ -158,9 +157,8 @@ static void Reshape(int w, int h)
     glLoadIdentity();
 }
 
-static void Key(unsigned char key, int x, int y)
+static void keyboard(unsigned char key, int x, int y)
 {
-
     switch (key) {
     case 27:
         exit(0);
@@ -190,9 +188,8 @@ static void SpecialKey(int key, int x, int y)
     }
 }
 
-static void Draw(void)
+static void display(void)
 {
-
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glPushMatrix();
@@ -205,10 +202,12 @@ static void Draw(void)
 
     glPopMatrix();
 
-    if (doubleBuffer) {
+    if (doubleBuffer)
+    {
         glutSwapBuffers();
     }
-    else {
+    else
+    {
         glFlush();
     }
 }
@@ -219,11 +218,14 @@ static void Args(int argc, char** argv)
 
     doubleBuffer = GL_FALSE;
 
-    for (i = 1; i < argc; i++) {
-        if (strcmp(argv[i], "-sb") == 0) {
+    for (i = 1; i < argc; i++)
+    {
+        if (strcmp(argv[i], "-sb") == 0)
+        {
             doubleBuffer = GL_FALSE;
         }
-        else if (strcmp(argv[i], "-db") == 0) {
+        else if (strcmp(argv[i], "-db") == 0)
+        {
             doubleBuffer = GL_TRUE;
         }
     }
@@ -239,15 +241,16 @@ int main(int argc, char** argv)
     type = GLUT_RGB | GLUT_DEPTH;
     type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
     glutInitDisplayMode(type);
-    glutInitWindowSize(300, 300);
+    glutInitWindowSize(600, 600);
     glutCreateWindow("TeaPot");
 
     Init();
 
-    glutReshapeFunc(Reshape);
-    glutKeyboardFunc(Key);
-    glutSpecialFunc(SpecialKey);
-    glutDisplayFunc(Draw);
+    glutDisplayFunc(display);       //設定callback function
+    glutReshapeFunc(reshape);       //設定callback function
+    glutKeyboardFunc(keyboard);     //設定callback function
+    glutSpecialFunc(SpecialKey);    //設定callback function
+
     glutMainLoop();
 }
 

@@ -82,6 +82,7 @@ int main(int argc, char** argv)
 
     if (checkCmdLineFlag(argc, (const char**)argv, "help") || checkCmdLineFlag(argc, (const char**)argv, "h"))
     {
+        printf("XXXXXXXXXXXXXXXXXX\n");
         printf(
             "Usage: %s depth=<max_depth>\t(where max_depth is a value between 1 "
             "and 8).\n",
@@ -91,6 +92,7 @@ int main(int argc, char** argv)
 
     if (checkCmdLineFlag(argc, (const char**)argv, "depth"))
     {
+        printf("XXXXXXXXXXXXXXXXXX\n");
         max_depth = getCmdLineArgumentInt(argc, (const char**)argv, "depth");
 
         if (max_depth < 1 || max_depth > 8)
@@ -108,34 +110,28 @@ int main(int argc, char** argv)
 
     if (!(deviceProp.major > 3 || (deviceProp.major == 3 && deviceProp.minor >= 5)))
     {
+        printf("XXXXXXXXXXXXXXXXXX\n");
         printf("GPU %d - %s  does not support CUDA Dynamic Parallelism\n Exiting.", device, deviceProp.name);
         exit(EXIT_WAIVED);
     }
 
     // Print a message describing what the sample does.
-    printf(
-        "*********************************************************************"
-        "******\n");
-    printf(
-        "The CPU launches 2 blocks of 2 threads each. On the device each thread "
-        "will\n");
-    printf(
-        "launch 2 blocks of 2 threads each. The GPU we will do that "
-        "recursively\n");
+    printf("***************************************************************************\n");
+    printf("The CPU launches 2 blocks of 2 threads each. On the device each thread will\n");
+    printf("launch 2 blocks of 2 threads each. The GPU we will do that recursively\n");
     printf("until it reaches max_depth=%d\n\n", max_depth);
     printf("In total 2");
     int num_blocks = 2, sum = 2;
 
-    for (int i = 1; i < max_depth; ++i) {
+    for (int i = 1; i < max_depth; ++i)
+    {
         num_blocks *= 4;
         printf("+%d", num_blocks);
         sum += num_blocks;
     }
 
     printf("=%d blocks are launched!!! (%d from the GPU)\n", sum, sum - 2);
-    printf(
-        "************************************************************************"
-        "***\n\n");
+    printf("***************************************************************************\n\n");
 
     // We set the recursion limit for CDP to max_depth.
     cudaDeviceSetLimit(cudaLimitDevRuntimeSyncDepth, max_depth);
@@ -150,4 +146,3 @@ int main(int argc, char** argv)
 
     exit(EXIT_SUCCESS);
 }
-

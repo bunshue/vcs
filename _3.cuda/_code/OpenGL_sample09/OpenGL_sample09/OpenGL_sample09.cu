@@ -19,9 +19,8 @@
 #define OPENGL_WIDTH 48
 #define OPENGL_HEIGHT 13
 
-
 GLenum rgb, doubleBuffer;
-GLint windW = 600, windH = 300;
+GLint windW = 800, windH = 400;
 
 GLenum mode1, mode2;
 GLint boxW, boxH;
@@ -41,17 +40,14 @@ GLubyte OpenGL_bits[] = {
    0x3e, 0x00, 0x00, 0xf8, 0x0c, 0x00,
 };
 
-
 static void Init(void)
 {
-
     mode1 = GL_TRUE;
     mode2 = GL_TRUE;
 }
 
-static void Reshape(int width, int height)
+static void reshape(int width, int height)
 {
-
     windW = width;
     windH = height;
 }
@@ -61,7 +57,8 @@ static void RotateColorMask(void)
     static GLint rotation = 0;
 
     rotation = (rotation + 1) & 0x3;
-    switch (rotation) {
+    switch (rotation)
+    {
     case 0:
         glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
         glIndexMask(0xff);
@@ -83,9 +80,10 @@ static void RotateColorMask(void)
 
 static void SetColor(int index)
 {
-
-    if (rgb) {
-        switch (index) {
+    if (rgb)
+    {
+        switch (index)
+        {
         case 0:
             glColor3f(0.0, 0.0, 0.0);
             break;
@@ -112,15 +110,16 @@ static void SetColor(int index)
             break;
         }
     }
-    else {
+    else
+    {
         glIndexi(index);
     }
 }
 
-static void Key(unsigned char key, int x, int y)
+static void keyboard(unsigned char key, int x, int y)
 {
-
-    switch (key) {
+    switch (key)
+    {
     case '1':
         mode1 = !mode1;
         glutPostRedisplay();
@@ -164,7 +163,8 @@ static void Point(void)
     GLint i;
 
     glBegin(GL_POINTS);
-    for (i = 1; i < 8; i++) {
+    for (i = 1; i < 8; i++)
+    {
         GLint j = i * 2;
         SetColor(i);
         glVertex2i(-j, -j);
@@ -186,7 +186,8 @@ static void Lines(void)
     glPushMatrix();
 
     glTranslatef(-12, 0, 0);
-    for (i = 1; i < 8; i++) {
+    for (i = 1; i < 8; i++)
+    {
         SetColor(i);
         glBegin(GL_LINES);
         glVertex2i(-boxW / 4, -boxH / 4);
@@ -205,7 +206,6 @@ static void Lines(void)
 
 static void LineStrip(void)
 {
-
     glBegin(GL_LINE_STRIP);
     SetColor(1);
     glVertex2f(PIXEL_CENTER(-boxW / 4), PIXEL_CENTER(-boxH / 4));
@@ -225,7 +225,6 @@ static void LineStrip(void)
 
 static void LineLoop(void)
 {
-
     glBegin(GL_LINE_LOOP);
     SetColor(1);
     glVertex2f(PIXEL_CENTER(-boxW / 4), PIXEL_CENTER(-boxH / 4));
@@ -268,7 +267,6 @@ static void LineLoop(void)
 
 static void Bitmap(void)
 {
-
     glBegin(GL_LINES);
     SetColor(1);
     glVertex2i(-boxW / 2, 0);
@@ -294,7 +292,6 @@ static void Bitmap(void)
 
 static void Triangles(void)
 {
-
     glBegin(GL_TRIANGLES);
     SetColor(1);
     glVertex2i(-boxW / 4, -boxH / 4);
@@ -320,7 +317,6 @@ static void Triangles(void)
 
 static void TriangleStrip(void)
 {
-
     glBegin(GL_TRIANGLE_STRIP);
     SetColor(1);
     glVertex2i(-boxW / 4, -boxH / 4);
@@ -370,7 +366,8 @@ static void TriangleFan(void)
     glBegin(GL_TRIANGLE_FAN);
     SetColor(7);
     glVertex2i(0, 0);
-    for (i = 0; i < 8; i++) {
+    for (i = 0; i < 8; i++)
+    {
         SetColor(7 - i);
         glVertex2iv(vx[i]);
     }
@@ -385,7 +382,6 @@ static void TriangleFan(void)
 
 static void Rect(void)
 {
-
     (rgb) ? glColor3f(1.0, 0.0, 1.0) : glIndexi(5);
     glRecti(-boxW / 4, -boxH / 4, boxW / 4, boxH / 4);
 }
@@ -415,7 +411,8 @@ static void Polygons(void)
     vx[7][0] = x1; vx[7][1] = y0;
 
     glBegin(GL_POLYGON);
-    for (i = 0; i < 8; i++) {
+    for (i = 0; i < 8; i++)
+    {
         SetColor(7 - i);
         glVertex2iv(vx[i]);
     }
@@ -430,7 +427,6 @@ static void Polygons(void)
 
 static void Quads(void)
 {
-
     glBegin(GL_QUADS);
     SetColor(1);
     glVertex2i(-boxW / 4, -boxH / 4);
@@ -461,7 +457,6 @@ static void Quads(void)
 
 static void QuadStrip(void)
 {
-
     glBegin(GL_QUAD_STRIP);
     SetColor(1);
     glVertex2i(-boxW / 4, -boxH / 4);
@@ -485,9 +480,8 @@ static void QuadStrip(void)
     glEnd();
 }
 
-static void Draw(void)
+static void display(void)
 {
-
     glViewport(0, 0, windW, windH);
     glDisable(GL_SCISSOR_TEST);
 
@@ -501,17 +495,21 @@ static void Draw(void)
 
     glPopAttrib();
 
-    if (mode1) {
+    if (mode1)
+    {
         glShadeModel(GL_SMOOTH);
     }
-    else {
+    else
+    {
         glShadeModel(GL_FLAT);
     }
 
-    if (mode2) {
+    if (mode2)
+    {
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     }
-    else {
+    else
+    {
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     }
 
@@ -531,10 +529,12 @@ static void Draw(void)
     Viewport(2, 2); Quads();
     Viewport(2, 3); QuadStrip();
 
-    if (doubleBuffer) {
+    if (doubleBuffer)
+    {
         glutSwapBuffers();
     }
-    else {
+    else
+    {
         glFlush();
     }
 }
@@ -546,17 +546,22 @@ static void Args(int argc, char** argv)
     rgb = GL_TRUE;
     doubleBuffer = GL_FALSE;
 
-    for (i = 1; i < argc; i++) {
-        if (strcmp(argv[i], "-ci") == 0) {
+    for (i = 1; i < argc; i++)
+    {
+        if (strcmp(argv[i], "-ci") == 0)
+        {
             rgb = GL_FALSE;
         }
-        else if (strcmp(argv[i], "-rgb") == 0) {
+        else if (strcmp(argv[i], "-rgb") == 0)
+        {
             rgb = GL_TRUE;
         }
-        else if (strcmp(argv[i], "-sb") == 0) {
+        else if (strcmp(argv[i], "-sb") == 0)
+        {
             doubleBuffer = GL_FALSE;
         }
-        else if (strcmp(argv[i], "-db") == 0) {
+        else if (strcmp(argv[i], "-db") == 0)
+        {
             doubleBuffer = GL_TRUE;
         }
     }
@@ -577,9 +582,11 @@ int main(int argc, char** argv)
 
     Init();
 
-    glutReshapeFunc(Reshape);
-    glutKeyboardFunc(Key);
-    glutDisplayFunc(Draw);
+    glutDisplayFunc(display);       //設定callback function
+    glutReshapeFunc(reshape);       //設定callback function
+    glutKeyboardFunc(keyboard);     //設定callback function
+
     glutMainLoop();
 }
+
 

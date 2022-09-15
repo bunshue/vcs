@@ -53,21 +53,23 @@ struct mesh {
 	struct facet* facets;
 } theMesh;
 
-GLubyte contourTexture1[] = {
+GLubyte contourTexture1[] = 
+{
 	255, 255, 255, 255,
 	255, 255, 255, 255,
 	255, 255, 255, 255,
 	127, 127, 127, 127,
 };
-GLubyte contourTexture2[] = {
+
+GLubyte contourTexture2[] = 
+{
 	255, 255, 255, 255,
 	255, 127, 127, 127,
 	255, 127, 127, 127,
 	255, 127, 127, 127,
 };
 
-
-static void Animate(void)
+static void display(void)
 {
 	struct coord* coord;
 	struct facet* facet;
@@ -394,19 +396,19 @@ static void Init(void)
 	glRotatef(35.0, 0.0, 0.0, 1.0);
 }
 
-static void Reshape(int width, int height)
+static void reshape(int width, int height)
 {
-
 	glViewport(0, 0, width, height);
 }
 
-static void Key(unsigned char key, int x, int y)
+static void keyboard(unsigned char key, int x, int y)
 {
-
-	switch (key) {
+	switch (key)
+	{
 	case 'c':
 		contouring++;
-		if (contouring == 1) {
+		if (contouring == 1)
+		{
 			static GLfloat map[4] = { 0, 0, 20, 0 };
 
 			glTexImage2D(GL_TEXTURE_2D, 0, 1, 4, 4, 0, GL_LUMINANCE,
@@ -419,7 +421,8 @@ static void Key(unsigned char key, int x, int y)
 			glEnable(GL_TEXTURE_GEN_S);
 			glEnable(GL_TEXTURE_GEN_T);
 		}
-		else if (contouring == 2) {
+		else if (contouring == 2)
+		{
 			static GLfloat map[4] = { 0, 0, 20, 0 };
 
 			glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
@@ -431,7 +434,8 @@ static void Key(unsigned char key, int x, int y)
 			glTexGenfv(GL_T, GL_EYE_PLANE, map);
 			glPopMatrix();
 		}
-		else {
+		else
+		{
 			contouring = 0;
 			glDisable(GL_TEXTURE_GEN_S);
 			glDisable(GL_TEXTURE_GEN_T);
@@ -440,54 +444,65 @@ static void Key(unsigned char key, int x, int y)
 		break;
 	case 's':
 		smooth = !smooth;
-		if (smooth) {
+		if (smooth)
+		{
 			glShadeModel(GL_SMOOTH);
 		}
-		else {
+		else
+		{
 			glShadeModel(GL_FLAT);
 		}
 		break;
 	case 'l':
 		lighting = !lighting;
-		if (lighting) {
+		if (lighting)
+		{
 			glEnable(GL_LIGHTING);
 			glEnable(GL_LIGHT0);
-			if (rgb) {
+			if (rgb)
+			{
 				glEnable(GL_COLOR_MATERIAL);
 			}
 		}
-		else {
+		else
+		{
 			glDisable(GL_LIGHTING);
 			glDisable(GL_LIGHT0);
-			if (rgb) {
+			if (rgb)
+			{
 				glDisable(GL_COLOR_MATERIAL);
 			}
 		}
 		break;
 	case 'd':
 		depth = !depth;
-		if (depth) {
+		if (depth)
+		{
 			glEnable(GL_DEPTH_TEST);
 			clearMask |= GL_DEPTH_BUFFER_BIT;
 		}
-		else {
+		else
+		{
 			glDisable(GL_DEPTH_TEST);
 			clearMask &= ~GL_DEPTH_BUFFER_BIT;
 		}
 		break;
 	case ' ':
 		stepMode = !stepMode;
-		if (stepMode) {
+		if (stepMode)
+		{
 			glutIdleFunc(0);
-			glutDisplayFunc(Animate);
+			glutDisplayFunc(display);
 		}
-		else {
-			glutIdleFunc(Animate);
+		else
+		{
+			glutIdleFunc(display);
 			glutDisplayFunc(0);
 		}
 		break;
 	case 'n':
-		if (stepMode) {
+		if (stepMode)
+		{
 			nextFrame = 1;
 		}
 		break;
@@ -511,49 +526,66 @@ static void Args(int argc, char** argv)
 	checkerSize = 2;
 	height = 0.2;
 
-	for (i = 1; i < argc; i++) {
-		if (strcmp(argv[i], "-ci") == 0) {
+	for (i = 1; i < argc; i++)
+	{
+		if (strcmp(argv[i], "-ci") == 0)
+		{
 			rgb = GL_FALSE;
 		}
-		else if (strcmp(argv[i], "-rgb") == 0) {
+		else if (strcmp(argv[i], "-rgb") == 0)
+		{
 			rgb = GL_TRUE;
 		}
-		else if (strcmp(argv[i], "-sb") == 0) {
+		else if (strcmp(argv[i], "-sb") == 0)
+		{
 			doubleBuffer = GL_FALSE;
 		}
-		else if (strcmp(argv[i], "-db") == 0) {
+		else if (strcmp(argv[i], "-db") == 0)
+		{
 			doubleBuffer = GL_TRUE;
 		}
-		else if (strcmp(argv[i], "-grid") == 0) {
-			if (i + 2 >= argc || argv[i + 1][0] == '-' || argv[i + 2][0] == '-') {
+		else if (strcmp(argv[i], "-grid") == 0)
+		{
+			if (i + 2 >= argc || argv[i + 1][0] == '-' || argv[i + 2][0] == '-')
+			{
 				printf("-grid (No numbers).\n");
 			}
-			else {
+			else
+			{
 				widthX = atoi(argv[++i]);
 				widthY = atoi(argv[++i]);
 			}
 		}
-		else if (strcmp(argv[i], "-size") == 0) {
-			if (i + 1 >= argc || argv[i + 1][0] == '-') {
+		else if (strcmp(argv[i], "-size") == 0)
+		{
+			if (i + 1 >= argc || argv[i + 1][0] == '-')
+			{
 				printf("-checker (No number).\n");
 			}
-			else {
+			else
+			{
 				checkerSize = atoi(argv[++i]);
 			}
 		}
-		else if (strcmp(argv[i], "-wave") == 0) {
-			if (i + 1 >= argc || argv[i + 1][0] == '-') {
+		else if (strcmp(argv[i], "-wave") == 0)
+		{
+			if (i + 1 >= argc || argv[i + 1][0] == '-')
+			{
 				printf("-wave (No number).\n");
 			}
-			else {
+			else
+			{
 				height = atof(argv[++i]);
 			}
 		}
-		else if (strcmp(argv[i], "-frames") == 0) {
-			if (i + 1 >= argc || argv[i + 1][0] == '-') {
+		else if (strcmp(argv[i], "-frames") == 0)
+		{
+			if (i + 1 >= argc || argv[i + 1][0] == '-')
+			{
 				printf("-frames (No number).\n");
 			}
-			else {
+			else
+			{
 				frames = atoi(argv[++i]);
 			}
 		}
@@ -571,15 +603,16 @@ int main(int argc, char** argv)
 	type |= (rgb) ? GLUT_RGB : GLUT_INDEX;
 	type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
 	glutInitDisplayMode(type);
-	glutInitWindowSize(300, 300);
+	glutInitWindowSize(600, 600);
 	glutCreateWindow("Wave Demo");
 
 	Init();
 
-	glutReshapeFunc(Reshape);
-	glutKeyboardFunc(Key);
-	glutIdleFunc(Animate);
-	glutDisplayFunc(Animate);
+	glutDisplayFunc(display);       //設定callback function
+	glutReshapeFunc(reshape);       //設定callback function
+	glutKeyboardFunc(keyboard);     //設定callback function
+	glutIdleFunc(display);
+
 	glutMainLoop();
 }
 

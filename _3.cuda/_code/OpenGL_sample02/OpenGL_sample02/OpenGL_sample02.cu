@@ -15,22 +15,33 @@
 
 GLenum rgb, doubleBuffer;
 
-float boxA[3] = {
+float boxA[3] =
+{
     0, 0, 0
 };
-float boxB[3] = {
+
+float boxB[3] =
+{
     -100, 0, 0
 };
-float boxC[3] = {
+
+float boxC[3] =
+{
     100, 0, 0
 };
-float boxD[3] = {
+
+float boxD[3] =
+{
     0, 95, 0
 };
-float boxE[3] = {
+
+float boxE[3] =
+{
     0, -105, 0
 };
-GLubyte OpenGL_bits1[] = {
+
+GLubyte OpenGL_bits1[] =
+{
    0x00, 0x03, 0x00,
    0x7f, 0xfb, 0xff,
    0x7f, 0xfb, 0xff,
@@ -45,7 +56,9 @@ GLubyte OpenGL_bits1[] = {
    0x63, 0x00, 0x00,
    0x3e, 0x00, 0x00,
 };
-GLubyte OpenGL_bits2[] = {
+
+GLubyte OpenGL_bits2[] =
+{
    0x00, 0x00, 0x00,
    0xff, 0xff, 0x01,
    0xff, 0xff, 0x01,
@@ -60,7 +73,9 @@ GLubyte OpenGL_bits2[] = {
    0x8c, 0xed, 0x0e,
    0xf8, 0x0c, 0x00,
 };
-GLubyte logo_bits[] = {
+
+GLubyte logo_bits[] =
+{
    0x00, 0x66, 0x66,
    0xff, 0x66, 0x66,
    0x00, 0x00, 0x00,
@@ -79,11 +94,10 @@ GLubyte logo_bits[] = {
    0xff, 0x66, 0x66,
 };
 
-
 static void Init(void)
 {
-
-    if (!rgb) {
+    if (!rgb)
+    {
         glutSetColor(0, 0.0, 0.0, 0.0);
         glutSetColor(1, 1.0, 0.0, 0.0);
         glutSetColor(2, 0.0, 1.0, 0.0);
@@ -98,9 +112,8 @@ static void Init(void)
     glClearIndex(0.0);
 }
 
-static void Reshape(int width, int height)
+static void reshape(int width, int height)
 {
-
     glViewport(0, 0, width, height);
 
     glMatrixMode(GL_PROJECTION);
@@ -109,18 +122,17 @@ static void Reshape(int width, int height)
     glMatrixMode(GL_MODELVIEW);
 }
 
-static void Key(unsigned char key, int x, int y)
+static void keyboard(unsigned char key, int x, int y)
 {
-
-    switch (key) {
+    switch (key)
+    {
     case 27:
         exit(0);
     }
 }
 
-static void Draw(void)
+static void display(void)
 {
-
     glClear(GL_COLOR_BUFFER_BIT);
 
     glRasterPos3fv(boxA);
@@ -139,36 +151,30 @@ static void Draw(void)
 
     (rgb) ? glColor3f(1.0, 1.0, 1.0) : glIndexi(7);
     glRasterPos3fv(boxB);
-    glBitmap(OPENGL_WIDTH, OPENGL_HEIGHT, OPENGL_WIDTH, 0.0, OPENGL_WIDTH, 0.0,
-        OpenGL_bits1);
-    glBitmap(OPENGL_WIDTH, OPENGL_HEIGHT, OPENGL_WIDTH, 0.0, OPENGL_WIDTH, 0.0,
-        OpenGL_bits2);
+    glBitmap(OPENGL_WIDTH, OPENGL_HEIGHT, OPENGL_WIDTH, 0.0, OPENGL_WIDTH, 0.0, OpenGL_bits1);
+    glBitmap(OPENGL_WIDTH, OPENGL_HEIGHT, OPENGL_WIDTH, 0.0, OPENGL_WIDTH, 0.0, OpenGL_bits2);
 
     (rgb) ? glColor3f(0.0, 1.0, 1.0) : glIndexi(6);
     glRasterPos3fv(boxC);
-    glBitmap(OPENGL_WIDTH, OPENGL_HEIGHT, OPENGL_WIDTH, 0.0, OPENGL_WIDTH, 0.0,
-        OpenGL_bits1);
-    glBitmap(OPENGL_WIDTH, OPENGL_HEIGHT, OPENGL_WIDTH, 0.0, OPENGL_WIDTH, 0.0,
-        OpenGL_bits2);
+    glBitmap(OPENGL_WIDTH, OPENGL_HEIGHT, OPENGL_WIDTH, 0.0, OPENGL_WIDTH, 0.0, OpenGL_bits1);
+    glBitmap(OPENGL_WIDTH, OPENGL_HEIGHT, OPENGL_WIDTH, 0.0, OPENGL_WIDTH, 0.0, OpenGL_bits2);
 
     (rgb) ? glColor3f(1.0, 0.0, 1.0) : glIndexi(5);
     glRasterPos3fv(boxD);
-    glBitmap(OPENGL_WIDTH, OPENGL_HEIGHT, OPENGL_WIDTH, 0.0, OPENGL_WIDTH, 0.0,
-        OpenGL_bits1);
-    glBitmap(OPENGL_WIDTH, OPENGL_HEIGHT, OPENGL_WIDTH, 0.0, OPENGL_WIDTH, 0.0,
-        OpenGL_bits2);
+    glBitmap(OPENGL_WIDTH, OPENGL_HEIGHT, OPENGL_WIDTH, 0.0, OPENGL_WIDTH, 0.0, OpenGL_bits1);
+    glBitmap(OPENGL_WIDTH, OPENGL_HEIGHT, OPENGL_WIDTH, 0.0, OPENGL_WIDTH, 0.0, OpenGL_bits2);
 
     (rgb) ? glColor3f(1.0, 1.0, 0.0) : glIndexi(3);
     glRasterPos3fv(boxE);
-    glBitmap(OPENGL_WIDTH, OPENGL_HEIGHT, OPENGL_WIDTH, 0.0, OPENGL_WIDTH, 0.0,
-        OpenGL_bits1);
-    glBitmap(OPENGL_WIDTH, OPENGL_HEIGHT, OPENGL_WIDTH, 0.0, OPENGL_WIDTH, 0.0,
-        OpenGL_bits2);
+    glBitmap(OPENGL_WIDTH, OPENGL_HEIGHT, OPENGL_WIDTH, 0.0, OPENGL_WIDTH, 0.0, OpenGL_bits1);
+    glBitmap(OPENGL_WIDTH, OPENGL_HEIGHT, OPENGL_WIDTH, 0.0, OPENGL_WIDTH, 0.0, OpenGL_bits2);
 
-    if (doubleBuffer) {
+    if (doubleBuffer)
+    {
         glutSwapBuffers();
     }
-    else {
+    else
+    {
         glFlush();
     }
 }
@@ -180,17 +186,22 @@ static void Args(int argc, char** argv)
     rgb = GL_TRUE;
     doubleBuffer = GL_FALSE;
 
-    for (i = 1; i < argc; i++) {
-        if (strcmp(argv[i], "-ci") == 0) {
+    for (i = 1; i < argc; i++)
+    {
+        if (strcmp(argv[i], "-ci") == 0)
+        {
             rgb = GL_FALSE;
         }
-        else if (strcmp(argv[i], "-rgb") == 0) {
+        else if (strcmp(argv[i], "-rgb") == 0)
+        {
             rgb = GL_TRUE;
         }
-        else if (strcmp(argv[i], "-sb") == 0) {
+        else if (strcmp(argv[i], "-sb") == 0)
+        {
             doubleBuffer = GL_FALSE;
         }
-        else if (strcmp(argv[i], "-db") == 0) {
+        else if (strcmp(argv[i], "-db") == 0)
+        {
             doubleBuffer = GL_TRUE;
         }
     }
@@ -206,13 +217,14 @@ int main(int argc, char** argv)
     type = (rgb) ? GLUT_RGB : GLUT_INDEX;
     type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
     glutInitDisplayMode(type);
-    glutInitWindowSize(300, 300);
+    glutInitWindowSize(600, 600);
     glutCreateWindow("Bitmap Test");
 
     Init();
 
-    glutReshapeFunc(Reshape);
-    glutKeyboardFunc(Key);
-    glutDisplayFunc(Draw);
+    glutDisplayFunc(display);       //設定callback function
+    glutReshapeFunc(reshape);       //設定callback function
+    glutKeyboardFunc(keyboard);     //設定callback function
+
     glutMainLoop();
 }

@@ -1,30 +1,3 @@
-/* Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *  * Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  * Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *  * Neither the name of NVIDIA CORPORATION nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
 #include <stdio.h>
 #include "helper_cuda.h"
 #include "Mandelbrot_kernel.h"
@@ -355,40 +328,40 @@ void RunMandelbrot0(uchar4 *dst, const int imageW, const int imageH,
 }  // RunMandelbrot0
 
 // The host CPU Mandelbrot thread spawner
-void RunMandelbrot1(uchar4 *dst, const int imageW, const int imageH,
-                    const int crunch, const double xOff, const double yOff,
-                    const double xjp, const double yjp, const double scale,
-                    const uchar4 colors, const int frame,
-                    const int animationFrame, const int mode, const int numSMs,
-                    const bool isJ, int version) {
-  dim3 threads(BLOCKDIM_X, BLOCKDIM_Y);
-  dim3 grid(iDivUp(imageW, BLOCKDIM_X), iDivUp(imageH, BLOCKDIM_Y));
+void RunMandelbrot1(uchar4* dst, const int imageW, const int imageH,
+    const int crunch, const double xOff, const double yOff,
+    const double xjp, const double yjp, const double scale,
+    const uchar4 colors, const int frame,
+    const int animationFrame, const int mode, const int numSMs,
+    const bool isJ, int version) {
+    dim3 threads(BLOCKDIM_X, BLOCKDIM_Y);
+    dim3 grid(iDivUp(imageW, BLOCKDIM_X), iDivUp(imageH, BLOCKDIM_Y));
 
-  int numWorkerBlocks = numSMs;
+    int numWorkerBlocks = numSMs;
 
-  switch (mode) {
+    switch (mode) {
     default:
     case 0:
-      Mandelbrot1<float><<<numWorkerBlocks, threads>>>(
-          dst, imageW, imageH, crunch, (float)xOff, (float)yOff, (float)xjp,
-          (float)yjp, (float)scale, colors, frame, animationFrame, grid.x,
-          grid.x * grid.y, isJ);
-      break;
+        Mandelbrot1<float> << <numWorkerBlocks, threads >> > (
+            dst, imageW, imageH, crunch, (float)xOff, (float)yOff, (float)xjp,
+            (float)yjp, (float)scale, colors, frame, animationFrame, grid.x,
+            grid.x * grid.y, isJ);
+        break;
     case 1:
-      float x0, x1, y0, y1;
-      dsdeq(x0, x1, xOff);
-      dsdeq(y0, y1, yOff);
-      MandelbrotDS1<<<numWorkerBlocks, threads>>>(
-          dst, imageW, imageH, crunch, x0, x1, y0, y1, (float)xjp, (float)yjp,
-          (float)scale, colors, frame, animationFrame, grid.x, grid.x * grid.y,
-          isJ);
-      break;
+        float x0, x1, y0, y1;
+        dsdeq(x0, x1, xOff);
+        dsdeq(y0, y1, yOff);
+        MandelbrotDS1 << <numWorkerBlocks, threads >> > (
+            dst, imageW, imageH, crunch, x0, x1, y0, y1, (float)xjp, (float)yjp,
+            (float)scale, colors, frame, animationFrame, grid.x, grid.x * grid.y,
+            isJ);
+        break;
     case 2:
-      Mandelbrot1<double><<<numWorkerBlocks, threads>>>(
-          dst, imageW, imageH, crunch, xOff, yOff, xjp, yjp, scale, colors,
-          frame, animationFrame, grid.x, grid.x * grid.y, isJ);
-      break;
-  }
+        Mandelbrot1<double> << <numWorkerBlocks, threads >> > (
+            dst, imageW, imageH, crunch, xOff, yOff, xjp, yjp, scale, colors,
+            frame, animationFrame, grid.x, grid.x * grid.y, isJ);
+        break;
+    }
 
-  getLastCudaError("Mandelbrot1 kernel execution failed.\n");
+    getLastCudaError("Mandelbrot1 kernel execution failed.\n");
 }  // RunMandelbrot1

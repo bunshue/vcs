@@ -35,13 +35,14 @@ GLubyte stippleBits[32 * 4] = {
     0xAA, 0xAA, 0xAA, 0xAA, 0x55, 0x55, 0x55, 0x55,
 };
 
-
 static void Init(void)
 {
     GLint i;
 
-    if (!rgb) {
-        for (i = 0; i < 16; i++) {
+    if (!rgb)
+    {
+        for (i = 0; i < 16; i++)
+        {
             glutSetColor(i + CI_OFFSET_1, 0.0, 0.0, i / 15.0);
             glutSetColor(i + CI_OFFSET_2, 0.0, i / 15.0, 0.0);
         }
@@ -56,9 +57,8 @@ static void Init(void)
     stipple = GL_FALSE;
 }
 
-static void Reshape(int width, int height)
+static void reshape(int width, int height)
 {
-
     glViewport(0, 0, width, height);
 
     glMatrixMode(GL_PROJECTION);
@@ -67,10 +67,10 @@ static void Reshape(int width, int height)
     glMatrixMode(GL_MODELVIEW);
 }
 
-static void Key(unsigned char key, int x, int y)
+static void keyboard(unsigned char key, int x, int y)
 {
-
-    switch (key) {
+    switch (key)
+    {
     case '1':
         antiAlias = !antiAlias;
         glutPostRedisplay();
@@ -84,13 +84,14 @@ static void Key(unsigned char key, int x, int y)
     }
 }
 
-static void Draw(void)
+static void display(void)
 {
     GLint ci1, ci2;
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    if (antiAlias) {
+    if (antiAlias)
+    {
         ci1 = CI_OFFSET_1;
         ci2 = CI_OFFSET_2;
         glBlendFunc(GL_SRC_ALPHA, GL_ONE);
@@ -98,7 +99,8 @@ static void Draw(void)
         glEnable(GL_POLYGON_SMOOTH);
         glDisable(GL_DEPTH_TEST);
     }
-    else {
+    else
+    {
         ci1 = 4;
         ci2 = 2;
         glDisable(GL_BLEND);
@@ -106,10 +108,12 @@ static void Draw(void)
         glEnable(GL_DEPTH_TEST);
     }
 
-    if (stipple) {
+    if (stipple)
+    {
         glEnable(GL_POLYGON_STIPPLE);
     }
-    else {
+    else
+    {
         glDisable(GL_POLYGON_STIPPLE);
     }
 
@@ -124,7 +128,8 @@ static void Draw(void)
     glVertex3f(0.9, 0.0, -25.0);
     glEnd();
 
-    if (doubleBuffer) {
+    if (doubleBuffer)
+    {
         glutSwapBuffers();
     }
     else {
@@ -139,17 +144,22 @@ static void Args(int argc, char** argv)
     rgb = GL_TRUE;
     doubleBuffer = GL_FALSE;
 
-    for (i = 1; i < argc; i++) {
-        if (strcmp(argv[i], "-ci") == 0) {
+    for (i = 1; i < argc; i++)
+    {
+        if (strcmp(argv[i], "-ci") == 0)
+        {
             rgb = GL_FALSE;
         }
-        else if (strcmp(argv[i], "-rgb") == 0) {
+        else if (strcmp(argv[i], "-rgb") == 0)
+        {
             rgb = GL_TRUE;
         }
-        else if (strcmp(argv[i], "-sb") == 0) {
+        else if (strcmp(argv[i], "-sb") == 0)
+        {
             doubleBuffer = GL_FALSE;
         }
-        else if (strcmp(argv[i], "-db") == 0) {
+        else if (strcmp(argv[i], "-db") == 0)
+        {
             doubleBuffer = GL_TRUE;
         }
     }
@@ -166,14 +176,15 @@ int main(int argc, char** argv)
     type |= (rgb) ? GLUT_RGB : GLUT_INDEX;
     type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
     glutInitDisplayMode(type);
-    glutInitWindowSize(300, 300);
+    glutInitWindowSize(600, 600);
     glutCreateWindow("Depth Test");
 
     Init();
 
-    glutReshapeFunc(Reshape);
-    glutKeyboardFunc(Key);
-    glutDisplayFunc(Draw);
+    glutDisplayFunc(display);       //設定callback function
+    glutReshapeFunc(reshape);       //設定callback function
+    glutKeyboardFunc(keyboard);     //設定callback function
+
     glutMainLoop();
 }
 

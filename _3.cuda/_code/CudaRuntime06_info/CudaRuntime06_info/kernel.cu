@@ -53,7 +53,8 @@ int main()
 
 
 
-    size = 1 << 24;  // number of elements to reduce
+    //size = 1 << 24;  // number of elements to reduce
+    size = 1 << 10;  // number of elements to reduce
 
     size_t maxBlocks = 512;
 
@@ -71,10 +72,17 @@ int main()
     printf("david0913: %s:%s(%d) ST\n", __FILE__, __FUNCTION__, __LINE__);
 
 #if defined(WIN32) || defined(_WIN32) || defined(WIN64) || defined(_WIN64)
-    printf("有定義\n");
+    printf("WIN64 有定義\n");
 #else
-    printf("無定義\n");
+    printf("WIN64 無定義\n");
 #endif
+
+#if defined(__APPLE__) || defined(MACOSX)
+    printf("__APPLE__ 或 MACOSX 有定義\n");
+#else
+    printf("__APPLE__ 或 MACOSX 無定義\n");
+#endif
+
 
     uchar* h_Data;
     //uint byteCount = 64 * 1048576;
@@ -142,6 +150,11 @@ int main()
         f = (float)rand() / (float)RAND_MAX;
         printf("i = %4d\t%g\n", i, f);
     }
+
+
+
+
+
 
     cudaError_t cudaStatus;
 
