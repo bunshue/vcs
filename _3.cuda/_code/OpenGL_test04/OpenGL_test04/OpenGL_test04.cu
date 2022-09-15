@@ -6,16 +6,10 @@
 //#include "device_launch_parameters.h"
 
 #include <stdio.h>
-
+#include <string.h>
+#include <stdlib.h>
+//#include <GL/glut.h>  //32位元用的
 
 int main(int argc, char** argv)
 {
-
-
-
-
-
-	return 0;
 }
-
-

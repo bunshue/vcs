@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <CudaCompile Include="OpenGL_test03.cu" />
+    <CudaCompile Include="OpenGL_test05.cu" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{FC9F5E8E-F1CD-4500-8625-916EC21D307E}</ProjectGuid>
