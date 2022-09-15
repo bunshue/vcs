@@ -23,6 +23,8 @@
 GLuint gl_PBO, gl_Tex;
 struct cudaGraphicsResource *cuda_pbo_resource;  // handles OpenGL-CUDA exchange
 
+int mode = 1;   //0: 自製圖片資料, 1: 使用圖片640X480, 2: 使用圖片1920X1080
+
 // Source image on the host side
 uchar4 *h_Src1;
 uchar4* h_Src2;
@@ -231,6 +233,11 @@ void timerEvent(int value)
     }
 }
 
+void reshape(int x, int y)
+{
+    printf("reshape\n");
+}
+
 void keyboard(unsigned char k, int /*x*/, int /*y*/)
 {
     switch (k)
@@ -333,7 +340,10 @@ void motion(int x, int y)
     glutPostRedisplay();
 }
 
-void idle(void) { glutPostRedisplay(); }
+void idle(void)
+{
+    glutPostRedisplay();
+}
 
 int initGL(int* argc, char** argv)
 {
@@ -349,18 +359,18 @@ int initGL(int* argc, char** argv)
     //glutCreateWindow("CUDA window system"); //開啟視窗 並顯示出視窗 Title //顯示多個視窗
 
     glutDisplayFunc(displayFunc);   //設定callback function
+    glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
     glutMouseFunc(mouse);           //設定callback function
     glutMotionFunc(motion);         //設定callback function
-
-    //glutIdleFunc(idle); //像是沒用
+    glutIdleFunc(idle);             //設定callback function
+    glutCloseFunc(cleanup);         //設定callback function
 
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);    //設定timer事件
 
     printf("OpenGL window created.\n");
 
-    glutCloseFunc(cleanup);
-
+    //以下這段是必要的
     if (!isGLVersionSupported(1, 5) || !areGLExtensionsSupported("GL_ARB_vertex_buffer_object GL_ARB_pixel_buffer_object"))
     {
         fprintf(stderr, "Error: failed to get minimal extensions for demo\n");
@@ -439,27 +449,7 @@ void cleanup()
 
 int main(int argc, char** argv)
 {
-    int mode = 0;
-
     if (mode == 0)
-    {
-        //讀取圖片資料
-        const char* filename_read1 = "C:\\______test_files\\ims01.24.bmp"; //24 bits
-        const char* filename_read2 = "C:\\______test_files\\ims03.24.bmp"; //24 bits
-        //const char* filename_read1 = "C:\\______test_files\\__pic\\_ggb\\ggb1.bmp"; //24 bits
-        //const char* filename_read2 = "C:\\______test_files\\__pic\\_ggb\\ggb2.bmp"; //24 bits
-
-        imageW = 0;
-        imageH = 0;
-        LoadBMPFile(&h_Src1, &imageW, &imageH, filename_read1);
-        printf("filename : %s\tW = %d\tH = %d\n", filename_read1, imageW, imageH);
-
-        imageW = 0;
-        imageH = 0;
-        LoadBMPFile(&h_Src2, &imageW, &imageH, filename_read2);
-        printf("filename : %s\tW = %d\tH = %d\n", filename_read2, imageW, imageH);
-    }
-    else
     {
         //自製圖片資料
         imageW = 512;
@@ -484,6 +474,35 @@ int main(int argc, char** argv)
                 h_Src2[imageW * j + i].z = (i / 2) % 256;   //B
             }
         }
+    }
+    else
+    {
+        char* filename_read1 = ""; //24 bits
+        char* filename_read2 = ""; //24 bits
+
+        //讀取圖片資料
+        if (mode == 1)
+        {
+            //使用圖片640X480
+            filename_read1 = "C:\\______test_files\\ims01.24.bmp"; //24 bits
+            filename_read2 = "C:\\______test_files\\ims03.24.bmp"; //24 bits
+        }
+        else
+        {
+            //使用圖片1920X1080
+            filename_read1 = "C:\\______test_files\\__pic\\_ggb\\ggb1.bmp"; //24 bits
+            filename_read2 = "C:\\______test_files\\__pic\\_ggb\\ggb2.bmp"; //24 bits
+        }
+
+        imageW = 0;
+        imageH = 0;
+        LoadBMPFile(&h_Src1, &imageW, &imageH, filename_read1);
+        printf("filename : %s\tW = %d\tH = %d\n", filename_read1, imageW, imageH);
+
+        imageW = 0;
+        imageH = 0;
+        LoadBMPFile(&h_Src2, &imageW, &imageH, filename_read2);
+        printf("filename : %s\tW = %d\tH = %d\n", filename_read2, imageW, imageH);
     }
 
     initGL(&argc, argv);

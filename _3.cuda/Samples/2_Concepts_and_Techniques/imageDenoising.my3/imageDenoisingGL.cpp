@@ -6,7 +6,14 @@
 #include <cuda_runtime.h>
 #include <cuda_gl_interop.h>
 
+// Includes
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+//#include "imageDenoising.h"
+
 // includes, project
+#include <helper_functions.h>  // includes for helper utility functions
 #include <helper_cuda.h>  // includes for cuda error checking and initialization
 
 typedef unsigned int TColor;
@@ -29,13 +36,18 @@ int imageW, imageH;
 ////////////////////////////////////////////////////////////////////////////////
 // Main program
 ////////////////////////////////////////////////////////////////////////////////
+StopWatchInterface *timer = NULL;
 
 #define BUFFER_DATA(i) ((char *)0 + i)
 
+#define MAX_EPSILON_ERROR 5
+#define REFRESH_DELAY 10  // ms
 void cleanup();
 
 void displayFunc(void)
 {
+    printf("d");
+    sdkStartTimer(&timer);
     TColor* d_dst = NULL;
     size_t num_bytes;
 
@@ -44,6 +56,8 @@ void displayFunc(void)
     checkCudaErrors(cudaGraphicsResourceGetMappedPointer((void**)&d_dst, &num_bytes, cuda_pbo_resource));
     //printf("(%d) ", num_bytes);
     getLastCudaError("cudaGraphicsResourceGetMappedPointer failed");
+
+    //runImageFilters(d_dst);
 
     checkCudaErrors(cudaGraphicsUnmapResources(1, &cuda_pbo_resource, 0));
 
@@ -64,6 +78,18 @@ void displayFunc(void)
     }
     glutSwapBuffers();
     glutReportErrors();
+}
+
+void timerEvent(int value)
+{
+    //printf("t");
+    if (glutGetWindow())
+    {
+        //printf("r");
+        //printf("glutGetWindow ");
+        glutPostRedisplay();
+        glutTimerFunc(REFRESH_DELAY, timerEvent, 0);    //設定timer事件
+    }
 }
 
 void keyboard(unsigned char k, int /*x*/, int /*y*/)
@@ -145,7 +171,7 @@ int initGL(int* argc, char** argv)
     glutDisplayFunc(displayFunc);   //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
 
-    //glutTimerFunc(REFRESH_DELAY, timerEvent, 0);    //設定timer事件
+    glutTimerFunc(REFRESH_DELAY, timerEvent, 0);    //設定timer事件
 
     printf("OpenGL window created.\n");
 
@@ -212,7 +238,6 @@ void initOpenGLBuffers()
         fprintf(stderr, "%s\n", gluErrorString(gl_error));
         exit(EXIT_FAILURE);
     }
-
     printf("PBO created.\n");
 }
 
@@ -224,6 +249,7 @@ void cleanup()
     free(h_Src2);
     checkCudaErrors(CUDA_FreeArray());
     checkCudaErrors(cudaGraphicsUnregisterResource(cuda_pbo_resource));
+    sdkDeleteTimer(&timer);
 }
 
 int main(int argc, char** argv)
@@ -272,7 +298,8 @@ int main(int argc, char** argv)
 
     initOpenGLBuffers();
     glutSetWindowTitle("ims pic");
+    sdkCreateTimer(&timer);
+    sdkStartTimer(&timer);
 
     glutMainLoop();
 }
-

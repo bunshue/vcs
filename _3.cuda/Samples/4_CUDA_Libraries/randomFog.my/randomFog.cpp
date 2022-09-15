@@ -32,7 +32,8 @@ RNG *g_pRng = NULL;
 CheckRender *g_pCheckRender = NULL;
 
 // Simple struct which contains the position and color of a vertex
-struct SVertex {
+struct SVertex
+{
   GLfloat x, y, z;
   GLfloat r, g, b;
 };
@@ -48,74 +49,21 @@ int nSkip2 = 0;  // Number of samples to discard between y,z
 int nSkip3 = 0;  // Number of samples to discard between z,x
 
 // Control the display
-enum Shape_t { Sphere, SphericalShell, Cube, Plane };
+enum Shape_t { Sphere, Cube, Plane };
+
 Shape_t g_currentShape = Sphere;
+
 bool g_bShowAxes = true;
 bool g_bTenXZoom = false;
-bool g_bAutoRotate = true;
 int g_lastShapeX = 1024;
 int g_lastShapeY = 1024;
-float g_xRotated = 0.0f;
-float g_yRotated = 0.0f;
 
 const float PI = 3.14159265359f;
 
-void createCube(void)
-{
-    int startVertex = 0;
-
-    for (int i = startVertex; i < g_nVerticesPopulated; i++) {
-        g_pVertices[i].x = (g_pRng->getNextU01() - .5f) * 2;
-
-        for (int j = 0; j < nSkip1; j++) {
-            g_pRng->getNextU01();
-        }
-
-        g_pVertices[i].y = (g_pRng->getNextU01() - .5f) * 2;
-
-        for (int j = 0; j < nSkip2; j++) {
-            g_pRng->getNextU01();
-        }
-
-        g_pVertices[i].z = (g_pRng->getNextU01() - .5f) * 2;
-
-        for (int j = 0; j < nSkip3; j++) {
-            g_pRng->getNextU01();
-        }
-
-        g_pVertices[i].r = 1.0f;
-        g_pVertices[i].g = 1.0f;
-        g_pVertices[i].b = 1.0f;
-    }
-}
-
-void createPlane(void)
-{
-    int startVertex = 0;
-
-    for (int i = startVertex; i < g_nVerticesPopulated; i++) {
-        g_pVertices[i].x = (g_pRng->getNextU01() - .5f) * 2;
-
-        for (int j = 0; j < nSkip1; j++) {
-            g_pRng->getNextU01();
-        }
-
-        g_pVertices[i].y = (g_pRng->getNextU01() - .5f) * 2;
-
-        for (int j = 0; j < nSkip2; j++) {
-            g_pRng->getNextU01();
-        }
-
-        g_pVertices[i].z = 0.0f;
-
-        g_pVertices[i].r = 1.0f;
-        g_pVertices[i].g = 1.0f;
-        g_pVertices[i].b = 1.0f;
-    }
-}
-
 void createSphere(void)
 {
+    printf("nSkip(%d, %d, %d) ", nSkip1, nSkip2, nSkip3);
+
     int startVertex = 0;
 
     for (int i = startVertex; i < g_nVerticesPopulated; i++)
@@ -124,23 +72,20 @@ void createSphere(void)
         float rho;
         float theta;
 
-        if (g_currentShape == Sphere) {
             r = g_pRng->getNextU01();
             r = powf(r, 1.f / 3.f);
 
-            for (int j = 0; j < nSkip3; j++) {
+            for (int j = 0; j < nSkip3; j++)
+            {
+                printf("XXXXXXXX\n");
                 g_pRng->getNextU01();
             }
-        }
-        else
-        {
-            r = 1.0f;
-        }
 
         rho = g_pRng->getNextU01() * PI * 2.0f;
 
         for (int j = 0; j < nSkip1; j++)
         {
+            printf("XXXXXXXX\n");
             g_pRng->getNextU01();
         }
 
@@ -149,6 +94,7 @@ void createSphere(void)
 
         for (int j = 0; j < nSkip2; j++)
         {
+            printf("XXXXXXXX\n");
             g_pRng->getNextU01();
         }
 
@@ -219,32 +165,19 @@ void drawPoints(void)
 
 void drawText(void)
 {
-    using std::string;
-    using std::stringstream;
-
-    glPushMatrix();
     glLoadIdentity();
     glRasterPos2f(-1.2f, 1.2f);
 
-    string infoString;
-    stringstream ss;
-    g_pRng->getInfoString(infoString);
-    ss << " skip1=" << nSkip1;
-    ss << " skip2=" << nSkip2;
-    ss << " skip3=" << nSkip3;
-    ss << " points=" << g_nVerticesPopulated;
-    infoString.append(ss.str());
-
+    string infoString = "This is a lion-mouse.";
     for (unsigned int i = 0; i < infoString.size(); i++)
     {
         glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, infoString[i]);
     }
-
-    glPopMatrix();
 }
 
 void reshape(int x, int y)
 {
+    printf("reshape\n");
     float xScale;
     float yScale;
 
@@ -292,11 +225,12 @@ void reshape(int x, int y)
 
 void display(void)
 {
+    //printf("d");
     glClear(GL_COLOR_BUFFER_BIT);
     glLoadIdentity();
     glTranslatef(0.0f, 0.0f, -4.0f);
-    glRotatef(g_yRotated, 0.0f, 1.0f, 0.0f);
-    glRotatef(g_xRotated, 1.0f, 0.0f, 0.0f);
+    //glRotatef(g_yRotated, 0.0f, 1.0f, 0.0f);
+    //glRotatef(g_xRotated, 1.0f, 0.0f, 0.0f);
     drawPoints();
     drawText();
     glFlush();
@@ -305,41 +239,20 @@ void display(void)
 
 void idle(void)
 {
-    if (g_bAutoRotate)
-    {
-        g_yRotated += 0.1f;
-
-        if (g_yRotated >= 360.0f)
-        {
-            g_yRotated -= 360.0f;
-        }
-
-        g_xRotated += 0.05f;
-
-        if (g_xRotated >= 360.0f)
-        {
-            g_xRotated -= 360.0f;
-        }
-
-        display();
-    }
+    //printf("I");
 }
 
 void reCreate(void)
 {
+    printf("reCreate ");
     switch (g_currentShape)
     {
     case Sphere:
-    case SphericalShell:
         createSphere();
         break;
 
-    case Cube:
-        createCube();
-        break;
-
     default:
-        createPlane();
+        break;
     }
 
     display();
@@ -382,349 +295,77 @@ void keyboard(unsigned char key, int x, int y)
         display();
         break;
 
-    case 'e':
-    case 'E':
-        g_currentShape = SphericalShell;
-        createSphere();
-        display();
-        break;
-
-    case 'b':
-    case 'B':
-        g_currentShape = Cube;
-        createCube();
-        display();
-        break;
-
-    case 'p':
-    case 'P':
-        g_currentShape = Plane;
-        createPlane();
-        display();
-        break;
-
-        // Rotation
-    case 'a':
-    case 'A':
-        g_bAutoRotate = !g_bAutoRotate;
-        break;
-
-    case 'i':
-    case 'I':
-        g_xRotated -= 1.0f;
-
-        if (g_xRotated <= 0.0f) {
-            g_xRotated += 360.0f;
-        }
-
-        display();
-        break;
-
-    case ',':
-        g_xRotated += 1.0f;
-
-        if (g_xRotated >= 360.0f) {
-            g_xRotated -= 360.0f;
-        }
-
-        display();
-        break;
-
-    case 'j':
-    case 'J':
-        g_yRotated -= 1.0f;
-
-        if (g_yRotated <= 0.0f) {
-            g_yRotated += 360.0f;
-        }
-
-        display();
-        break;
-
-    case 'l':
-    case 'L':
-        g_yRotated += 1.0f;
-
-        if (g_yRotated >= 360.0f) {
-            g_yRotated -= 360.0f;
-        }
-
-        display();
-        break;
-
-        // Zoom
-    case 't':
-    case 'T':
-        g_bTenXZoom = !g_bTenXZoom;
-        reshape(g_lastShapeX, g_lastShapeY);
-        reCreate();
-        break;
-
-        // Axes
-    case 'z':
-    case 'Z':
-        g_bShowAxes = !g_bShowAxes;
-        reCreate();
-        break;
-
-        // RNG
-    case 'x':
-    case 'X':
-        g_pRng->selectRng(RNG::Pseudo);
-        reCreate();
-        break;
-
-    case 'c':
-    case 'C':
-        g_pRng->selectRng(RNG::Quasi);
-        reCreate();
-        break;
-
-    case 'v':
-    case 'V':
-        g_pRng->selectRng(RNG::ScrambledQuasi);
-        reCreate();
-        break;
-
-    case 'r':
-    case 'R':
-        g_pRng->resetSeed();
-        reCreate();
-        break;
-
-    case ']':
-        g_pRng->incrementDimensions();
-        reCreate();
-        break;
-
-    case '[':
-        g_pRng->resetDimensions();
-        reCreate();
-        break;
-
-    case '1':
-        nSkip1++;
-        reCreate();
-        break;
-
-    case '2':
-        nSkip2++;
-        reCreate();
-        break;
-
-    case '3':
-        nSkip3++;
-        reCreate();
-        break;
-
-    case '!':
-        nSkip1 = 0;
-        nSkip2 = 0;
-        nSkip3 = 0;
-        reCreate();
-        break;
-
-        // Number of vertices
-    case '+':
-        g_nVerticesPopulated += 8000;
-
-        if (g_nVerticesPopulated > g_nVertices) {
-            g_nVerticesPopulated = g_nVertices;
-        }
-
-        reCreate();
-        break;
-
-    case '-':
-        g_nVerticesPopulated -= 8000;
-
-        if (g_nVerticesPopulated < 8000) {
-            g_nVerticesPopulated = 8000;
-        }
-
-        reCreate();
-        break;
-
         // Quit
     case 27:
     case 'q':
     case 'Q':
-#if defined(__APPLE__) || defined(MACOSX)
-        exit(EXIT_SUCCESS);
-#else
         glutDestroyWindow(glutGetWindow());
         return;
-#endif
     }
-}
-
-void showHelp(void)
-{
-    using std::left;
-    using std::setw;
-    using std::stringstream;
-
-    stringstream ss;
-
-    ss << "\nRandom number visualization\n\n";
-    ss << "On creation, randomFog generates 200,000 random coordinates in "
-        "spherical coordinate space (radius, angle rho, angle theta) with "
-        "curand's XORWOW algorithm. The coordinates are normalized for a "
-        "uniform distribution through the sphere.\n\n";
-    ss << "The X axis is drawn with blue in the negative direction and yellow "
-        "positive.\n"
-        << "The Y axis is drawn with green in the negative direction and magenta "
-        "positive.\n"
-        << "The Z axis is drawn with red in the negative direction and cyan "
-        "positive.\n\n";
-    ss << "The following keys can be used to control the output:\n\n";
-    ss << left;
-    ss << "\t" << setw(10) << "s"
-        << "Generate a new set of random numbers and display as spherical "
-        "coordinates (Sphere)\n";
-    ss << "\t" << setw(10) << "e"
-        << "Generate a new set of random numbers and display on a spherical "
-        "surface (shEll)\n";
-    ss << "\t" << setw(10) << "b"
-        << "Generate a new set of random numbers and display as cartesian "
-        "coordinates (cuBe/Box)\n";
-    ss << "\t" << setw(10) << "p"
-        << "Generate a new set of random numbers and display on a cartesian plane "
-        "(Plane)\n\n";
-    ss << "\t" << setw(10) << "i,l,j"
-        << "Rotate the negative Z-axis up, right, down and left respectively\n";
-    ss << "\t" << setw(10) << "a"
-        << "Toggle auto-rotation\n";
-    ss << "\t" << setw(10) << "t"
-        << "Toggle 10x zoom\n";
-    ss << "\t" << setw(10) << "z"
-        << "Toggle axes display\n\n";
-    ss << "\t" << setw(10) << "x"
-        << "Select XORWOW generator (default)\n";
-    ss << "\t" << setw(10) << "c"
-        << "Select Sobol' generator\n";
-    ss << "\t" << setw(10) << "v"
-        << "Select scrambled Sobol' generator\n";
-    ss << "\t" << setw(10) << "r"
-        << "Reset XORWOW (i.e. reset to initial seed) and regenerate\n";
-    ss << "\t" << setw(10) << "]"
-        << "Increment the number of Sobol' dimensions and regenerate\n";
-    ss << "\t" << setw(10) << "["
-        << "Reset the number of Sobol' dimensions to 1 and regenerate\n\n";
-    ss << "\t" << setw(10) << "+"
-        << "Increment the number of displayed points by 8,000 (up to maximum "
-        "200,000)\n";
-    ss << "\t" << setw(10) << "-"
-        << "Decrement the number of displayed points by 8,000 (down to minimum "
-        "8,000)\n\n";
-    ss << "\t" << setw(10) << "q/[ESC]"
-        << "Quit the application.\n\n";
-    puts(ss.str().c_str());
 }
 
 int main(int argc, char** argv)
 {
-    using std::runtime_error;
+    // Initialize GL
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+    // TODO use width/height?
+    glutInitWindowSize(1000, 1000);     //設定視窗大小, 直接拉大內容
+    glutInitWindowPosition(900, 50);    //視窗起始位置
 
-    try {
-        bool bQA = false;
+    // Create a window with rendering context and everything else we need
+    glutCreateWindow("Random Fog");
 
-        // Open the log file
-        printf("Random Fog\n");
-        printf("==========\n\n");
-
-        // Check QA mode
-        if (checkCmdLineFlag(argc, (const char**)argv, "qatest")) {
-            bQA = true;
-
-            findCudaDevice(argc, (const char**)argv);
-
-            g_pCheckRender =
-                new CheckBackBuffer(g_lastShapeX, g_lastShapeY, 4, false);
-        }
-        else
-        {
-            // Initialize GL
-            glutInit(&argc, argv);
-            glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-            // TODO use width/height?
-            glutInitWindowSize(1000, 1000);
-            // Create a window with rendering context and everything else we need
-            glutCreateWindow("Random Fog");
-
-            if (!isGLVersionSupported(2, 0)) {
-                fprintf(stderr, "This sample requires at least OpenGL 2.0\n");
-                exit(EXIT_WAIVED);
-            }
-
-            // Select CUDA device with OpenGL interoperability
-            findCudaDevice(argc, (const char**)argv);
-        }
-
-        // Create vertices
-        g_nVertices = 200000;
-        g_nVerticesPopulated = 200000;
-        g_pVertices = new SVertex[g_nVertices + 6];
-
-        // Setup the random number generators
-        g_pRng = new RNG(12345, 1, 100000);
-        printf("CURAND initialized\n");
-
-        // Compute the initial vertices and indices, starting in spherical mode
-        createSphere();
-        createAxes();
-
-        showHelp();
-
-        if (bQA) {
-            g_pCheckRender->setExecPath(argv[0]);
-            g_pCheckRender->dumpBin(
-                g_pVertices, g_nVerticesPopulated * sizeof(SVertex), "randomFog.bin");
-
-            if (g_pCheckRender->compareBin2BinFloat(
-                "randomFog.bin", "ref_randomFog.bin",
-                g_nVerticesPopulated * sizeof(SVertex) / sizeof(float), 0.25f,
-                0.35f)) {
-                cleanup(EXIT_SUCCESS);
-            }
-            else {
-                cleanup(EXIT_FAILURE);
-            }
-        }
-        else {
-            // As we do not yet use a depth buffer, we cannot fill our sphere
-            glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-            // Enable the vertex array functionality:
-            glEnableClientState(GL_VERTEX_ARRAY);
-            // Enable the color array functionality (so we can specify a color for
-            // each vertex)
-            glEnableClientState(GL_COLOR_ARRAY);
-            // Pass the vertex pointer:
-            glVertexPointer(3,  // 3 components per vertex (x,y,z)
-                GL_FLOAT, sizeof(SVertex), g_pVertices);
-            // Pass the color pointer
-            glColorPointer(3,  // 3 components per vertex (r,g,b)
-                GL_FLOAT, sizeof(SVertex),
-                &g_pVertices[0].r);  // Pointer to the first color
- // Point size for point mode
-            glPointSize(1.0f);
-            glLineWidth(2.0f);
-            glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-            // Notify glut which messages we require:
-            glutDisplayFunc(display);
-            glutReshapeFunc(reshape);
-            glutKeyboardFunc(keyboard);
-            glutIdleFunc(idle);
-
-            glutCloseFunc(glutClose);
-
-            // Let's get started!
-            glutMainLoop();
-        }
+    if (!isGLVersionSupported(2, 0))
+    {
+        fprintf(stderr, "This sample requires at least OpenGL 2.0\n");
+        exit(EXIT_WAIVED);
     }
-    catch (runtime_error& e) {
-        printf("runtime error (%s)\n", e.what());
-    }
+
+    // Select CUDA device with OpenGL interoperability
+    findCudaDevice(argc, (const char**)argv);
+
+    // Create vertices
+    g_nVertices = 200000;
+    g_nVerticesPopulated = 200000;
+    g_pVertices = new SVertex[g_nVertices + 6];
+
+    // Setup the random number generators
+    g_pRng = new RNG(12345, 1, 100000);
+    printf("CURAND initialized\n");
+
+    // Compute the initial vertices and indices, starting in spherical mode
+    createSphere();
+    createAxes();
+
+    // As we do not yet use a depth buffer, we cannot fill our sphere
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    // Enable the vertex array functionality:
+    glEnableClientState(GL_VERTEX_ARRAY);
+    // Enable the color array functionality (so we can specify a color for
+    // each vertex)
+    glEnableClientState(GL_COLOR_ARRAY);
+    // Pass the vertex pointer:
+    glVertexPointer(3,  // 3 components per vertex (x,y,z)
+        GL_FLOAT, sizeof(SVertex), g_pVertices);
+    // Pass the color pointer
+    glColorPointer(3,  // 3 components per vertex (r,g,b)
+        GL_FLOAT, sizeof(SVertex),
+        &g_pVertices[0].r);  // Pointer to the first color
+// Point size for point mode
+    glPointSize(1.0f);
+    glLineWidth(2.0f);
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+
+    // Notify glut which messages we require:
+    glutDisplayFunc(display);   //設定callback function
+    glutReshapeFunc(reshape);   //設定callback function
+    glutKeyboardFunc(keyboard); //設定callback function
+    glutIdleFunc(idle);         //設定callback function
+    glutCloseFunc(glutClose);   //設定callback function
+
+    // Let's get started!
+    glutMainLoop();
 
     exit(EXIT_SUCCESS);
 }
