@@ -1,30 +1,3 @@
-/* Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *  * Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  * Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *  * Neither the name of NVIDIA CORPORATION nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
 /*
     Parallel reduction
 
@@ -418,146 +391,151 @@ void shmoo(int minN, int maxN, int maxThreads, int maxBlocks,
 // The main function which runs the reduction test.
 ////////////////////////////////////////////////////////////////////////////////
 template <class T>
-bool runTest(int argc, char **argv, ReduceType datatype) {
-  int size = 1 << 24;    // number of elements to reduce
-  int maxThreads = 256;  // number of threads per block
-  int whichKernel = 7;
-  int maxBlocks = 64;
-  bool cpuFinalReduction = false;
-  int cpuFinalThreshold = 1;
+bool runTest(int argc, char** argv, ReduceType datatype) {
+    int size = 1 << 24;    // number of elements to reduce
+    int maxThreads = 256;  // number of threads per block
+    int whichKernel = 7;
+    int maxBlocks = 64;
+    bool cpuFinalReduction = false;
+    int cpuFinalThreshold = 1;
 
-  if (checkCmdLineFlag(argc, (const char **)argv, "n")) {
-    size = getCmdLineArgumentInt(argc, (const char **)argv, "n");
-  }
-
-  if (checkCmdLineFlag(argc, (const char **)argv, "threads")) {
-    maxThreads = getCmdLineArgumentInt(argc, (const char **)argv, "threads");
-  }
-
-  if (checkCmdLineFlag(argc, (const char **)argv, "kernel")) {
-    whichKernel = getCmdLineArgumentInt(argc, (const char **)argv, "kernel");
-  }
-
-  if (checkCmdLineFlag(argc, (const char **)argv, "maxblocks")) {
-    maxBlocks = getCmdLineArgumentInt(argc, (const char **)argv, "maxblocks");
-  }
-
-  printf("%d elements\n", size);
-  printf("%d threads (max)\n", maxThreads);
-
-  cpuFinalReduction = checkCmdLineFlag(argc, (const char **)argv, "cpufinal");
-
-  if (checkCmdLineFlag(argc, (const char **)argv, "cputhresh")) {
-    cpuFinalThreshold =
-        getCmdLineArgumentInt(argc, (const char **)argv, "cputhresh");
-  }
-
-  bool runShmoo = checkCmdLineFlag(argc, (const char **)argv, "shmoo");
-
-  if (runShmoo) {
-    shmoo<T>(1, 33554432, maxThreads, maxBlocks, datatype);
-  } else {
-    // create random input data on CPU
-    unsigned int bytes = size * sizeof(T);
-
-    T *h_idata = (T *)malloc(bytes);
-
-    for (int i = 0; i < size; i++) {
-      // Keep the numbers small so we don't get truncation error in the sum
-      if (datatype == REDUCE_INT) {
-        h_idata[i] = (T)(rand() & 0xFF);
-      } else {
-        h_idata[i] = (rand() & 0xFF) / (T)RAND_MAX;
-      }
+    if (checkCmdLineFlag(argc, (const char**)argv, "n")) {
+        size = getCmdLineArgumentInt(argc, (const char**)argv, "n");
     }
 
-    int numBlocks = 0;
-    int numThreads = 0;
-    getNumBlocksAndThreads(whichKernel, size, maxBlocks, maxThreads, numBlocks,
-                           numThreads);
-
-    if (numBlocks == 1) {
-      cpuFinalThreshold = 1;
+    if (checkCmdLineFlag(argc, (const char**)argv, "threads")) {
+        maxThreads = getCmdLineArgumentInt(argc, (const char**)argv, "threads");
     }
 
-    // allocate mem for the result on host side
-    T *h_odata = (T *)malloc(numBlocks * sizeof(T));
-
-    printf("%d blocks\n\n", numBlocks);
-
-    // allocate device memory and data
-    T *d_idata = NULL;
-    T *d_odata = NULL;
-
-    checkCudaErrors(cudaMalloc((void **)&d_idata, bytes));
-    checkCudaErrors(cudaMalloc((void **)&d_odata, numBlocks * sizeof(T)));
-
-    // copy data directly to device memory
-    checkCudaErrors(
-        cudaMemcpy(d_idata, h_idata, bytes, cudaMemcpyHostToDevice));
-    checkCudaErrors(cudaMemcpy(d_odata, h_idata, numBlocks * sizeof(T),
-                               cudaMemcpyHostToDevice));
-
-    // warm-up
-    reduce<T>(size, numThreads, numBlocks, whichKernel, d_idata, d_odata);
-
-    int testIterations = 100;
-
-    StopWatchInterface *timer = 0;
-    sdkCreateTimer(&timer);
-
-    T gpu_result = 0;
-
-    gpu_result =
-        benchmarkReduce<T>(size, numThreads, numBlocks, maxThreads, maxBlocks,
-                           whichKernel, testIterations, cpuFinalReduction,
-                           cpuFinalThreshold, timer, h_odata, d_idata, d_odata);
-
-    double reduceTime = sdkGetAverageTimerValue(&timer) * 1e-3;
-    printf(
-        "Reduction, Throughput = %.4f GB/s, Time = %.5f s, Size = %u Elements, "
-        "NumDevsUsed = %d, Workgroup = %u\n",
-        1.0e-9 * ((double)bytes) / reduceTime, reduceTime, size, 1, numThreads);
-
-    // compute reference solution
-    T cpu_result = reduceCPU<T>(h_idata, size);
-
-    int precision = 0;
-    double threshold = 0;
-    double diff = 0;
-
-    if (datatype == REDUCE_INT) {
-      printf("\nGPU result = %d\n", (int)gpu_result);
-      printf("CPU result = %d\n\n", (int)cpu_result);
-    } else {
-      if (datatype == REDUCE_FLOAT) {
-        precision = 8;
-        threshold = 1e-8 * size;
-      } else {
-        precision = 12;
-        threshold = 1e-12 * size;
-      }
-
-      printf("\nGPU result = %.*f\n", precision, (double)gpu_result);
-      printf("CPU result = %.*f\n\n", precision, (double)cpu_result);
-
-      diff = fabs((double)gpu_result - (double)cpu_result);
+    if (checkCmdLineFlag(argc, (const char**)argv, "kernel")) {
+        whichKernel = getCmdLineArgumentInt(argc, (const char**)argv, "kernel");
     }
 
-    // cleanup
-    sdkDeleteTimer(&timer);
-    free(h_idata);
-    free(h_odata);
-
-    checkCudaErrors(cudaFree(d_idata));
-    checkCudaErrors(cudaFree(d_odata));
-
-    if (datatype == REDUCE_INT) {
-      return (gpu_result == cpu_result);
-    } else {
-      return (diff < threshold);
+    if (checkCmdLineFlag(argc, (const char**)argv, "maxblocks")) {
+        maxBlocks = getCmdLineArgumentInt(argc, (const char**)argv, "maxblocks");
     }
-  }
 
-  return true;
+    printf("%d elements\n", size);
+    printf("%d threads (max)\n", maxThreads);
+
+    cpuFinalReduction = checkCmdLineFlag(argc, (const char**)argv, "cpufinal");
+
+    if (checkCmdLineFlag(argc, (const char**)argv, "cputhresh")) {
+        cpuFinalThreshold =
+            getCmdLineArgumentInt(argc, (const char**)argv, "cputhresh");
+    }
+
+    bool runShmoo = checkCmdLineFlag(argc, (const char**)argv, "shmoo");
+
+    if (runShmoo) {
+        shmoo<T>(1, 33554432, maxThreads, maxBlocks, datatype);
+    }
+    else {
+        // create random input data on CPU
+        unsigned int bytes = size * sizeof(T);
+
+        T* h_idata = (T*)malloc(bytes);
+
+        for (int i = 0; i < size; i++) {
+            // Keep the numbers small so we don't get truncation error in the sum
+            if (datatype == REDUCE_INT) {
+                h_idata[i] = (T)(rand() & 0xFF);
+            }
+            else {
+                h_idata[i] = (rand() & 0xFF) / (T)RAND_MAX;
+            }
+        }
+
+        int numBlocks = 0;
+        int numThreads = 0;
+        getNumBlocksAndThreads(whichKernel, size, maxBlocks, maxThreads, numBlocks,
+            numThreads);
+
+        if (numBlocks == 1) {
+            cpuFinalThreshold = 1;
+        }
+
+        // allocate mem for the result on host side
+        T* h_odata = (T*)malloc(numBlocks * sizeof(T));
+
+        printf("%d blocks\n\n", numBlocks);
+
+        // allocate device memory and data
+        T* d_idata = NULL;
+        T* d_odata = NULL;
+
+        checkCudaErrors(cudaMalloc((void**)&d_idata, bytes));
+        checkCudaErrors(cudaMalloc((void**)&d_odata, numBlocks * sizeof(T)));
+
+        // copy data directly to device memory
+        checkCudaErrors(
+            cudaMemcpy(d_idata, h_idata, bytes, cudaMemcpyHostToDevice));
+        checkCudaErrors(cudaMemcpy(d_odata, h_idata, numBlocks * sizeof(T),
+            cudaMemcpyHostToDevice));
+
+        // warm-up
+        reduce<T>(size, numThreads, numBlocks, whichKernel, d_idata, d_odata);
+
+        int testIterations = 100;
+
+        StopWatchInterface* timer = 0;
+        sdkCreateTimer(&timer);
+
+        T gpu_result = 0;
+
+        gpu_result =
+            benchmarkReduce<T>(size, numThreads, numBlocks, maxThreads, maxBlocks,
+                whichKernel, testIterations, cpuFinalReduction,
+                cpuFinalThreshold, timer, h_odata, d_idata, d_odata);
+
+        double reduceTime = sdkGetAverageTimerValue(&timer) * 1e-3;
+        printf(
+            "Reduction, Throughput = %.4f GB/s, Time = %.5f s, Size = %u Elements, "
+            "NumDevsUsed = %d, Workgroup = %u\n",
+            1.0e-9 * ((double)bytes) / reduceTime, reduceTime, size, 1, numThreads);
+
+        // compute reference solution
+        T cpu_result = reduceCPU<T>(h_idata, size);
+
+        int precision = 0;
+        double threshold = 0;
+        double diff = 0;
+
+        if (datatype == REDUCE_INT) {
+            printf("\nGPU result = %d\n", (int)gpu_result);
+            printf("CPU result = %d\n\n", (int)cpu_result);
+        }
+        else {
+            if (datatype == REDUCE_FLOAT) {
+                precision = 8;
+                threshold = 1e-8 * size;
+            }
+            else {
+                precision = 12;
+                threshold = 1e-12 * size;
+            }
+
+            printf("\nGPU result = %.*f\n", precision, (double)gpu_result);
+            printf("CPU result = %.*f\n\n", precision, (double)cpu_result);
+
+            diff = fabs((double)gpu_result - (double)cpu_result);
+        }
+
+        // cleanup
+        sdkDeleteTimer(&timer);
+        free(h_idata);
+        free(h_odata);
+
+        checkCudaErrors(cudaFree(d_idata));
+        checkCudaErrors(cudaFree(d_odata));
+
+        if (datatype == REDUCE_INT) {
+            return (gpu_result == cpu_result);
+        }
+        else {
+            return (diff < threshold);
+        }
+    }
+
+    return true;
 }

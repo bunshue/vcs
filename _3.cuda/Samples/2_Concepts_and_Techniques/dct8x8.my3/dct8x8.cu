@@ -306,5 +306,3 @@ void printData(byte* h_A, byte* h_B, byte* h_C, int len)
     }
     printf("\n");
 }
-
-

@@ -1,30 +1,3 @@
-/* Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *  * Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  * Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *  * Neither the name of NVIDIA CORPORATION nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
 /*
   FFT-based Ocean simulation
   based on original code by Yury Uralsky and Calvin Lin
@@ -60,13 +33,7 @@
 #include <helper_functions.h>
 #include <math_constants.h>
 
-#if defined(__APPLE__) || defined(MACOSX)
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#include <GLUT/glut.h>
-#else
 #include <GL/freeglut.h>
-#endif
-
 #include <rendercheck_gl.h>
 
 const char *sSDKsample = "CUDA FFT Ocean Simulation";
@@ -659,237 +626,246 @@ void mouse(int button, int state, int x, int y) {
 }
 
 void motion(int x, int y) {
-  float dx, dy;
-  dx = (float)(x - mouseOldX);
-  dy = (float)(y - mouseOldY);
+    float dx, dy;
+    dx = (float)(x - mouseOldX);
+    dy = (float)(y - mouseOldY);
 
-  if (mouseButtons == 1) {
-    rotateX += dy * 0.2f;
-    rotateY += dx * 0.2f;
-  } else if (mouseButtons == 2) {
-    translateX += dx * 0.01f;
-    translateY -= dy * 0.01f;
-  } else if (mouseButtons == 4) {
-    translateZ += dy * 0.01f;
-  }
+    if (mouseButtons == 1) {
+        rotateX += dy * 0.2f;
+        rotateY += dx * 0.2f;
+    }
+    else if (mouseButtons == 2) {
+        translateX += dx * 0.01f;
+        translateY -= dy * 0.01f;
+    }
+    else if (mouseButtons == 4) {
+        translateZ += dy * 0.01f;
+    }
 
-  mouseOldX = x;
-  mouseOldY = y;
+    mouseOldX = x;
+    mouseOldY = y;
 }
 
 void reshape(int w, int h) {
-  glViewport(0, 0, w, h);
+    glViewport(0, 0, w, h);
 
-  glMatrixMode(GL_PROJECTION);
-  glLoadIdentity();
-  gluPerspective(60.0, (double)w / (double)h, 0.1, 10.0);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(60.0, (double)w / (double)h, 0.1, 10.0);
 
-  windowW = w;
-  windowH = h;
+    windowW = w;
+    windowH = h;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 //! Initialize GL
 ////////////////////////////////////////////////////////////////////////////////
-bool initGL(int *argc, char **argv) {
-  // Create GL context
-  glutInit(argc, argv);
-  glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
-  glutInitWindowSize(windowW, windowH);
-  glutCreateWindow("CUDA FFT Ocean Simulation");
+bool initGL(int* argc, char** argv) {
+    // Create GL context
+    glutInit(argc, argv);
+    glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
+    glutInitWindowSize(windowW, windowH);
+    glutCreateWindow("CUDA FFT Ocean Simulation");
 
-  vertShaderPath = sdkFindFilePath("ocean.vert", argv[0]);
-  fragShaderPath = sdkFindFilePath("ocean.frag", argv[0]);
+    vertShaderPath = sdkFindFilePath("ocean.vert", argv[0]);
+    fragShaderPath = sdkFindFilePath("ocean.frag", argv[0]);
 
-  if (vertShaderPath == NULL || fragShaderPath == NULL) {
-    fprintf(stderr, "Error unable to find GLSL vertex and fragment shaders!\n");
-    exit(EXIT_FAILURE);
-  }
+    if (vertShaderPath == NULL || fragShaderPath == NULL) {
+        fprintf(stderr, "Error unable to find GLSL vertex and fragment shaders!\n");
+        exit(EXIT_FAILURE);
+    }
 
-  // initialize necessary OpenGL extensions
+    // initialize necessary OpenGL extensions
 
-  if (!isGLVersionSupported(2, 0)) {
-    fprintf(stderr, "ERROR: Support for necessary OpenGL extensions missing.");
-    fflush(stderr);
-    return false;
-  }
+    if (!isGLVersionSupported(2, 0)) {
+        fprintf(stderr, "ERROR: Support for necessary OpenGL extensions missing.");
+        fflush(stderr);
+        return false;
+    }
 
-  if (!areGLExtensionsSupported(
-          "GL_ARB_vertex_buffer_object GL_ARB_pixel_buffer_object")) {
-    fprintf(stderr, "Error: failed to get minimal extensions for demo\n");
-    fprintf(stderr, "This sample requires:\n");
-    fprintf(stderr, "  OpenGL version 1.5\n");
-    fprintf(stderr, "  GL_ARB_vertex_buffer_object\n");
-    fprintf(stderr, "  GL_ARB_pixel_buffer_object\n");
-    cleanup();
-    exit(EXIT_FAILURE);
-  }
+    if (!areGLExtensionsSupported(
+        "GL_ARB_vertex_buffer_object GL_ARB_pixel_buffer_object")) {
+        fprintf(stderr, "Error: failed to get minimal extensions for demo\n");
+        fprintf(stderr, "This sample requires:\n");
+        fprintf(stderr, "  OpenGL version 1.5\n");
+        fprintf(stderr, "  GL_ARB_vertex_buffer_object\n");
+        fprintf(stderr, "  GL_ARB_pixel_buffer_object\n");
+        cleanup();
+        exit(EXIT_FAILURE);
+    }
 
-  // default initialization
-  glClearColor(0.0, 0.0, 0.0, 1.0);
-  glEnable(GL_DEPTH_TEST);
+    // default initialization
+    glClearColor(0.0, 0.0, 0.0, 1.0);
+    glEnable(GL_DEPTH_TEST);
 
-  // load shader
-  shaderProg = loadGLSLProgram(vertShaderPath, fragShaderPath);
+    // load shader
+    shaderProg = loadGLSLProgram(vertShaderPath, fragShaderPath);
 
-  SDK_CHECK_ERROR_GL();
-  return true;
+    SDK_CHECK_ERROR_GL();
+    return true;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 //! Create VBO
 ////////////////////////////////////////////////////////////////////////////////
-void createVBO(GLuint *vbo, int size) {
-  // create buffer object
-  glGenBuffers(1, vbo);
-  glBindBuffer(GL_ARRAY_BUFFER, *vbo);
-  glBufferData(GL_ARRAY_BUFFER, size, 0, GL_DYNAMIC_DRAW);
-  glBindBuffer(GL_ARRAY_BUFFER, 0);
+void createVBO(GLuint* vbo, int size) {
+    // create buffer object
+    glGenBuffers(1, vbo);
+    glBindBuffer(GL_ARRAY_BUFFER, *vbo);
+    glBufferData(GL_ARRAY_BUFFER, size, 0, GL_DYNAMIC_DRAW);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 
-  SDK_CHECK_ERROR_GL();
+    SDK_CHECK_ERROR_GL();
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 //! Delete VBO
 ////////////////////////////////////////////////////////////////////////////////
-void deleteVBO(GLuint *vbo) {
-  glDeleteBuffers(1, vbo);
-  *vbo = 0;
+void deleteVBO(GLuint* vbo)
+{
+    glDeleteBuffers(1, vbo);
+    *vbo = 0;
 }
 
 // create index buffer for rendering quad mesh
-void createMeshIndexBuffer(GLuint *id, int w, int h) {
-  int size = ((w * 2) + 2) * (h - 1) * sizeof(GLuint);
+void createMeshIndexBuffer(GLuint* id, int w, int h)
+{
+    int size = ((w * 2) + 2) * (h - 1) * sizeof(GLuint);
 
-  // create index buffer
-  glGenBuffers(1, id);
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *id);
-  glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, 0, GL_STATIC_DRAW);
+    // create index buffer
+    glGenBuffers(1, id);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, *id);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, 0, GL_STATIC_DRAW);
 
-  // fill with indices for rendering mesh as triangle strips
-  GLuint *indices =
-      (GLuint *)glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_WRITE_ONLY);
+    // fill with indices for rendering mesh as triangle strips
+    GLuint* indices = (GLuint*)glMapBuffer(GL_ELEMENT_ARRAY_BUFFER, GL_WRITE_ONLY);
 
-  if (!indices) {
-    return;
-  }
-
-  for (int y = 0; y < h - 1; y++) {
-    for (int x = 0; x < w; x++) {
-      *indices++ = y * w + x;
-      *indices++ = (y + 1) * w + x;
+    if (!indices)
+    {
+        return;
     }
 
-    // start new strip with degenerate triangle
-    *indices++ = (y + 1) * w + (w - 1);
-    *indices++ = (y + 1) * w;
-  }
+    for (int y = 0; y < h - 1; y++) {
+        for (int x = 0; x < w; x++) {
+            *indices++ = y * w + x;
+            *indices++ = (y + 1) * w + x;
+        }
 
-  glUnmapBuffer(GL_ELEMENT_ARRAY_BUFFER);
-  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+        // start new strip with degenerate triangle
+        *indices++ = (y + 1) * w + (w - 1);
+        *indices++ = (y + 1) * w;
+    }
+
+    glUnmapBuffer(GL_ELEMENT_ARRAY_BUFFER);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 }
 
 // create fixed vertex buffer to store mesh vertices
-void createMeshPositionVBO(GLuint *id, int w, int h) {
-  createVBO(id, w * h * 4 * sizeof(float));
+void createMeshPositionVBO(GLuint* id, int w, int h)
+{
+    createVBO(id, w * h * 4 * sizeof(float));
 
-  glBindBuffer(GL_ARRAY_BUFFER, *id);
-  float *pos = (float *)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+    glBindBuffer(GL_ARRAY_BUFFER, *id);
+    float* pos = (float*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
 
-  if (!pos) {
-    return;
-  }
-
-  for (int y = 0; y < h; y++) {
-    for (int x = 0; x < w; x++) {
-      float u = x / (float)(w - 1);
-      float v = y / (float)(h - 1);
-      *pos++ = u * 2.0f - 1.0f;
-      *pos++ = 0.0f;
-      *pos++ = v * 2.0f - 1.0f;
-      *pos++ = 1.0f;
+    if (!pos) {
+        return;
     }
-  }
 
-  glUnmapBuffer(GL_ARRAY_BUFFER);
-  glBindBuffer(GL_ARRAY_BUFFER, 0);
+    for (int y = 0; y < h; y++) {
+        for (int x = 0; x < w; x++) {
+            float u = x / (float)(w - 1);
+            float v = y / (float)(h - 1);
+            *pos++ = u * 2.0f - 1.0f;
+            *pos++ = 0.0f;
+            *pos++ = v * 2.0f - 1.0f;
+            *pos++ = 1.0f;
+        }
+    }
+
+    glUnmapBuffer(GL_ARRAY_BUFFER);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
 // Attach shader to a program
-int attachShader(GLuint prg, GLenum type, const char *name) {
-  GLuint shader;
-  FILE *fp;
-  int size, compiled;
-  char *src;
+int attachShader(GLuint prg, GLenum type, const char* name)
+{
+    GLuint shader;
+    FILE* fp;
+    int size, compiled;
+    char* src;
 
-  fp = fopen(name, "rb");
+    fp = fopen(name, "rb");
 
-  if (!fp) {
-    return 0;
-  }
+    if (!fp) {
+        return 0;
+    }
 
-  fseek(fp, 0, SEEK_END);
-  size = ftell(fp);
-  src = (char *)malloc(size);
+    fseek(fp, 0, SEEK_END);
+    size = ftell(fp);
+    src = (char*)malloc(size);
 
-  fseek(fp, 0, SEEK_SET);
-  fread(src, sizeof(char), size, fp);
-  fclose(fp);
+    fseek(fp, 0, SEEK_SET);
+    fread(src, sizeof(char), size, fp);
+    fclose(fp);
 
-  shader = glCreateShader(type);
-  glShaderSource(shader, 1, (const char **)&src, (const GLint *)&size);
-  glCompileShader(shader);
-  glGetShaderiv(shader, GL_COMPILE_STATUS, (GLint *)&compiled);
+    shader = glCreateShader(type);
+    glShaderSource(shader, 1, (const char**)&src, (const GLint*)&size);
+    glCompileShader(shader);
+    glGetShaderiv(shader, GL_COMPILE_STATUS, (GLint*)&compiled);
 
-  if (!compiled) {
-    char log[2048];
-    int len;
+    if (!compiled)
+    {
+        char log[2048];
+        int len;
 
-    glGetShaderInfoLog(shader, 2048, (GLsizei *)&len, log);
-    printf("Info log: %s\n", log);
+        glGetShaderInfoLog(shader, 2048, (GLsizei*)&len, log);
+        printf("Info log: %s\n", log);
+        glDeleteShader(shader);
+        return 0;
+    }
+
+    free(src);
+
+    glAttachShader(prg, shader);
     glDeleteShader(shader);
-    return 0;
-  }
 
-  free(src);
-
-  glAttachShader(prg, shader);
-  glDeleteShader(shader);
-
-  return 1;
+    return 1;
 }
 
 // Create shader program from vertex shader and fragment shader files
-GLuint loadGLSLProgram(const char *vertFileName, const char *fragFileName) {
-  GLint linked;
-  GLuint program;
+GLuint loadGLSLProgram(const char* vertFileName, const char* fragFileName)
+{
+    GLint linked;
+    GLuint program;
 
-  program = glCreateProgram();
+    program = glCreateProgram();
 
-  if (!attachShader(program, GL_VERTEX_SHADER, vertFileName)) {
-    glDeleteProgram(program);
-    fprintf(stderr, "Couldn't attach vertex shader from file %s\n",
-            vertFileName);
-    return 0;
-  }
+    if (!attachShader(program, GL_VERTEX_SHADER, vertFileName))
+    {
+        glDeleteProgram(program);
+        fprintf(stderr, "Couldn't attach vertex shader from file %s\n",vertFileName);
+        return 0;
+    }
 
-  if (!attachShader(program, GL_FRAGMENT_SHADER, fragFileName)) {
-    glDeleteProgram(program);
-    fprintf(stderr, "Couldn't attach fragment shader from file %s\n",
-            fragFileName);
-    return 0;
-  }
+    if (!attachShader(program, GL_FRAGMENT_SHADER, fragFileName))
+    {
+        glDeleteProgram(program);
+        fprintf(stderr, "Couldn't attach fragment shader from file %s\n",fragFileName);
+        return 0;
+    }
 
-  glLinkProgram(program);
-  glGetProgramiv(program, GL_LINK_STATUS, &linked);
+    glLinkProgram(program);
+    glGetProgramiv(program, GL_LINK_STATUS, &linked);
 
-  if (!linked) {
-    glDeleteProgram(program);
-    char temp[256];
-    glGetProgramInfoLog(program, 256, 0, temp);
-    fprintf(stderr, "Failed to link program: %s\n", temp);
-    return 0;
-  }
+    if (!linked)
+    {
+        glDeleteProgram(program);
+        char temp[256];
+        glGetProgramInfoLog(program, 256, 0, temp);
+        fprintf(stderr, "Failed to link program: %s\n", temp);
+        return 0;
+    }
 
-  return program;
+    return program;
 }
