@@ -10,8 +10,200 @@
 #include <string.h>
 //#include <GL/glut.h>  //32位元用的
 
-int main(int argc, char* argv[])
-{
+#include <windows.h>
 
-    return 0;
+void init(void);
+void reshape(int w, int h);
+void keyboard(unsigned char key, int x, int y);
+void mouse(int button, int state, int x, int y);
+void motion(int x, int y);
+void display(void);
+void drawCoordinates(void);
+void drawTetrahedron(void);
+
+int mx, my; //position of mouse
+int m_state = 0; //mouse usage
+float x_angle = 0.0f, y_angle = 0.0f; //angle of eye
+float dist = 10.0f; //distance from the eye
+
+void init(void)
+{
+	glEnable(GL_DEPTH_TEST);
+}
+
+void reshape(int w, int h)
+{
+	glViewport(0, 0, w, h);
+}
+
+void keyboard(unsigned char key, int x, int y)
+{
+	switch (key)
+	{
+	case '0':
+		m_state = 0;
+		break;
+	case '1':
+		m_state = 1;
+		break;
+	default:
+		break;
+	}
+}
+
+void mouse(int button, int state, int x, int y)
+{
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+	{
+		mx = x;
+		my = y;
+	}
+}
+
+void motion(int x, int y)
+{
+	int dx, dy; //offset of mouse;
+
+	dx = x - mx;
+	dy = y - my;
+
+	if (m_state == 0)
+	{
+		y_angle += dx * 0.1f;
+		x_angle += dy * 0.1f;
+	}
+	else if (m_state == 1)
+		dist += (dx + dy) * 0.01f;
+
+	mx = x;
+	my = y;
+
+	glutPostRedisplay();
+}
+
+void display(void)
+{
+	float lit_position[] = { 0.0f, 0.0f, 1.0f, 0.0f };
+	float mat_yellow[] = { 1.0f, 1.0f, 0.0f, 1.0f };
+	float mat_cyan[] = { 0.0f, 1.0f, 1.0f, 1.0f };
+	int rect[4];
+	float w, h;
+
+	glGetIntegerv(GL_VIEWPORT, rect);
+	w = rect[2];
+	h = rect[3];
+
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	glClearDepth(1.0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity(); //对应单位阵I
+
+	if (h < 1) h = 1;
+	gluPerspective(30.0, w / h, 0.1, 20.0); //对应变换阵T0
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity(); //对应单位阵I
+
+	glLightfv(GL_LIGHT0, GL_POSITION, lit_position);
+	glTranslated(0.0, 0.0, -dist); //对应变换阵T1
+	glRotatef(x_angle, 1.0f, 0.0f, 0.0f); //对应变换阵T2
+	glRotatef(y_angle, 0.0f, 1.0f, 0.0f);  //对应变换阵T3
+	glDisable(GL_LIGHTING);
+	//glLightfv(GL_LIGHT0, GL_POSITION, lit_position);
+	drawCoordinates(); //显示坐标轴，设X轴的两端点为v1、v2，考虑这两点经受的变换
+	glutWireTeapot(0.5); //显示茶壶
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	glPushMatrix(); //下压堆栈并复制栈顶
+	glTranslatef(1.0f, 0.0f, 0.0f); //对应变换阵T4
+	glScalef(0.5f, 0.5f, 0.5f); //对应变换阵T5
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_yellow);
+	drawTetrahedron(); //显示直角四面体，设某个三角形的顶点为v1'、v2'、v3'，考虑这三点经受的变换
+	glPopMatrix(); //上弹堆栈，栈顶被放弃
+	glPushMatrix();
+	glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, 1);
+	glTranslatef(-1.0f, 0.0f, 0.0f); //对应变换阵T6
+	glRotatef(-90.0f, 1.0f, 0.0f, 0.0f); //对应变换阵T7
+	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_cyan);
+	glMaterialfv(GL_BACK, GL_DIFFUSE, mat_yellow);
+	glutSolidCone(0.4, 1.0, 100, 10); //显示圆锥体
+	glPopMatrix();
+
+	glFlush();
+	glutSwapBuffers();
+}
+
+void drawCoordinates(void)
+{
+	glColor3f(1.0f, 0.0f, 0.0f); //画红色的x轴
+	glBegin(GL_LINES);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(1.0f, 0.0f, 0.0f);
+	glEnd();
+	glColor3f(0.0, 1.0, 0.0); //画绿色的y轴
+	glBegin(GL_LINES);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, 1.0f, 0.0f);
+	glEnd();
+	glColor3f(0.0, 0.0, 1.0); //画蓝色的z轴
+	glBegin(GL_LINES);
+	glVertex3f(0.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, 0.0f, 1.0f);
+	glEnd();
+}
+
+void drawTetrahedron(void)
+{
+	float pnt[4][3] = { {0.0,0.0,0.0},{1.0,0.0,0.0}, {0.0,1.0,0.0}, {0.0,0.0,1.0} };
+	int tetra[4][3] = { {0,2,1}, {0,3,2}, {0,1,3}, {1,2,3} };
+
+	glNormal3f(0.0f, 0.0f, -1.0f);
+	glBegin(GL_POLYGON); //X-Y
+	glVertex3fv(pnt[tetra[0][0]]);
+	glVertex3fv(pnt[tetra[0][1]]);
+	glVertex3fv(pnt[tetra[0][2]]);
+	glEnd();
+	glNormal3f(-1.0f, 0.0f, 0.0f);
+	glBegin(GL_POLYGON); //Y-Z
+	glVertex3fv(pnt[tetra[1][0]]);
+	glVertex3fv(pnt[tetra[1][1]]);
+	glVertex3fv(pnt[tetra[1][2]]);
+	glEnd();
+	glNormal3f(0.0f, -1.0f, 0.0f);
+	glBegin(GL_POLYGON); //Z-X
+	glVertex3fv(pnt[tetra[2][0]]);
+	glVertex3fv(pnt[tetra[2][1]]);
+	glVertex3fv(pnt[tetra[2][2]]);
+	glEnd();
+	glNormal3f(1.0f, 1.0f, 1.0f);
+	glBegin(GL_POLYGON); //slope
+	glVertex3fv(pnt[tetra[3][0]]);
+	glVertex3fv(pnt[tetra[3][1]]);
+	glVertex3fv(pnt[tetra[3][2]]);
+	glEnd();
+}
+
+int main(int argc, char** argv)
+{
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+	glutInitWindowSize(600, 600);
+	glutInitWindowPosition(1100, 200);
+	glutCreateWindow("畫茶壺圓椎三角塊");
+
+	init();
+
+	printf("0 keydown means control the angle of the eye\n");
+	printf("1 keydown means control the distance of the eye\n");
+
+	glutDisplayFunc(display);
+	glutReshapeFunc(reshape);
+	glutKeyboardFunc(keyboard);
+	glutMouseFunc(mouse);
+	glutMotionFunc(motion);
+	glutMainLoop();
+
+	return 0;
 }
