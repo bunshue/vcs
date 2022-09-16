@@ -22,9 +22,8 @@
 #define MAX_EPSILON_ERROR 5e-3f
 
 // Define the files that are to be save and the reference images for validation
-const char *imageFilename = "teapot512.pgm";
-const char *refFilename = "ref_rotated.pgm";
-const char *sampleName = "simpleTexture";
+const char* imageFilename = "teapot512.pgm";
+const char* refFilename = "ref_rotated.pgm";
 
 ////////////////////////////////////////////////////////////////////////////////
 // Constants
@@ -57,21 +56,7 @@ __global__ void transformKernel(float* outputData, int width, int height, float 
 
 ////////////////////////////////////////////////////////////////////////////////
 // Declaration, forward
-void runTest(int argc, char **argv);
-
-////////////////////////////////////////////////////////////////////////////////
-// Program main
-////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char** argv)
-{
-    printf("sampleName = %s\n", sampleName);
-    printf("%s starting...\n", sampleName);
-
-    runTest(argc, argv);
-
-    printf("%s completed, returned %s\n", sampleName, testResult ? "OK" : "ERROR!");
-    exit(testResult ? EXIT_SUCCESS : EXIT_FAILURE);
-}
+void runTest(int argc, char** argv);
 
 ////////////////////////////////////////////////////////////////////////////////
 //! Run a simple test for CUDA
@@ -92,6 +77,7 @@ void runTest(int argc, char** argv)
         printf("Unable to source image file: %s\n", imageFilename);
         exit(EXIT_FAILURE);
     }
+    printf("imageFilename : %s\n", imagePath);
 
     sdkLoadPGM(imagePath, &hData, &width, &height);
 
@@ -103,6 +89,7 @@ void runTest(int argc, char** argv)
 
     printf("refFilename = %s\n", refFilename);
     char* refPath = sdkFindFilePath(refFilename, argv[0]);
+    printf("refFilename : %s\n", refPath);
 
     if (refPath == NULL)
     {
@@ -204,4 +191,14 @@ void runTest(int argc, char** argv)
     free(refPath);
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// Program main
+////////////////////////////////////////////////////////////////////////////////
+int main(int argc, char** argv)
+{
+    runTest(argc, argv);
+
+    printf("Completed, returned %s\n", testResult ? "OK" : "ERROR!");
+    exit(testResult ? EXIT_SUCCESS : EXIT_FAILURE);
+}
 

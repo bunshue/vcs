@@ -1,20 +1,3 @@
-/*
- * Quadro and Tesla GPUs with compute capability >= 2.0 can overlap two
- * memcopies with kernel execution. This sample illustrates the usage of CUDA
- * streams to achieve overlapping of kernel execution with copying data to and
- * from the device.
- *
- * Additionally, this sample uses CUDA events to measure elapsed time for
- * CUDA calls.  Events are a part of CUDA API and provide a system independent
- * way to measure execution times on CUDA devices with approximately 0.5
- * microsecond precision.
- *
- * Elapsed times are averaged over nreps repetitions (10 by default).
- *
-*/
-
-const char *sSDKname = "simpleMultiCopy";
-
 // includes, system
 #include <stdio.h>
 
@@ -46,14 +29,14 @@ __global__ void incKernel(int* g_out, int* g_in, int N, int inner_reps)
 // Uncomment to simulate data source/sink IO times
 //#define SIMULATE_IO
 
-int *h_data_source;
-int *h_data_sink;
+int* h_data_source;
+int* h_data_sink;
 
-int *h_data_in[STREAM_COUNT];
-int *d_data_in[STREAM_COUNT];
+int* h_data_in[STREAM_COUNT];
+int* d_data_in[STREAM_COUNT];
 
-int *h_data_out[STREAM_COUNT];
-int *d_data_out[STREAM_COUNT];
+int* h_data_out[STREAM_COUNT];
+int* d_data_out[STREAM_COUNT];
 
 cudaEvent_t cycleDone[STREAM_COUNT];
 cudaStream_t stream[STREAM_COUNT];
@@ -83,8 +66,6 @@ int main(int argc, char* argv[])
     int cuda_device = 0;
     float scale_factor;
     cudaDeviceProp deviceProp;
-
-    printf("[%s] - Starting...\n", sSDKname);
 
     if (checkCmdLineFlag(argc, (const char**)argv, "device"))
     {

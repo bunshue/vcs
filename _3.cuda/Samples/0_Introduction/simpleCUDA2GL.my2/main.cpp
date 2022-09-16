@@ -20,12 +20,10 @@
 #define MAX_EPSILON 10
 #define REFRESH_DELAY 10  // ms
 
-const char *sSDKname = "simpleCUDA2GL";
-
 unsigned int g_TotalErrors = 0;
 
 // CheckFBO/BackBuffer class objects
-CheckRender *g_CheckRender = NULL;
+CheckRender* g_CheckRender = NULL;
 
 ////////////////////////////////////////////////////////////////////////////////
 // constants / global variables
@@ -38,10 +36,10 @@ int iGLUTWindowHandle = 0;  // handle to the GLUT window
 
 // pbo and fbo variables
 GLuint pbo_dest;
-struct cudaGraphicsResource *cuda_pbo_dest_resource;
+struct cudaGraphicsResource* cuda_pbo_dest_resource;
 
 GLuint fbo_source;
-struct cudaGraphicsResource *cuda_tex_screen_resource;
+struct cudaGraphicsResource* cuda_tex_screen_resource;
 
 unsigned int size_tex_data;
 unsigned int num_texels;
@@ -51,13 +49,10 @@ unsigned int num_values;
 GLuint tex_screen;      // where we render the image
 GLuint tex_cudaResult;  // where we will copy the CUDA result
 
-int *pArgc = NULL;
-char **pArgv = NULL;
-
 // Timer
 static int fpsCount = 0;
 static int fpsLimit = 1;
-StopWatchInterface *timer = NULL;
+StopWatchInterface* timer = NULL;
 
 extern "C" void launch_cudaProcess(dim3 grid, dim3 block, int sbytes, int* g_odata, int imgw);
 
@@ -66,13 +61,13 @@ void FreeResource();
 void Cleanup(int iExitCode);
 
 // GL functionality
-bool initGL(int *argc, char **argv);
+bool initGL(int* argc, char** argv);
 
-void createPBO(GLuint *pbo, struct cudaGraphicsResource **pbo_resource);
-void deletePBO(GLuint *pbo);
+void createPBO(GLuint* pbo, struct cudaGraphicsResource** pbo_resource);
+void deletePBO(GLuint* pbo);
 
-void createTextureDst(GLuint *tex_cudaResult, unsigned int size_x, unsigned int size_y);
-void deleteTexture(GLuint *tex);
+void createTextureDst(GLuint* tex_cudaResult, unsigned int size_x, unsigned int size_y);
+void deleteTexture(GLuint* tex);
 
 // rendering callbacks
 void display();
@@ -174,7 +169,7 @@ void generateCUDAImage()
         ratio = 1;
 
     // Copy input vectors from host memory to GPU buffers.
-    cudaStatus = cudaMemcpy(out_data, a, 256*256 * sizeof(int), cudaMemcpyHostToDevice);
+    cudaStatus = cudaMemcpy(out_data, a, 256 * 256 * sizeof(int), cudaMemcpyHostToDevice);
     if (cudaStatus != cudaSuccess)
     {
         printf("cudaMemcpy failed!\n");
@@ -335,11 +330,7 @@ int main(int argc, char** argv)
 {
     printf("%s Starting... argc=%d\n\n", argv[0], argc);
 
-    pArgc = &argc;
-    pArgv = argv;
-
     printf("(Interactive OpenGL Demo)\n");
-
 
     // First initialize OpenGL context, so we can properly set the GL for CUDA.
     // This is necessary in order to achieve optimal performance with OpenGL/CUDA

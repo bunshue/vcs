@@ -1,30 +1,3 @@
-/* Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *  * Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  * Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *  * Neither the name of NVIDIA CORPORATION nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
 /*
   3D texture sample
 
@@ -38,15 +11,7 @@
 #include <math.h>
 #include <helper_gl.h>
 
-#if defined(__APPLE__) || defined(MACOSX)
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#include <GLUT/glut.h>
-#ifndef glutCloseFunc
-#define glutCloseFunc glutWMCloseFunc
-#endif
-#else
 #include <GL/freeglut.h>
-#endif
 
 // includes, cuda
 #include <vector_types.h>
@@ -298,127 +263,104 @@ void initGL(int *argc, char **argv) {
   }
 }
 
-void runAutoTest(const char *ref_file, char *exec_path) {
-  checkCudaErrors(
-      cudaMalloc((void **)&d_output, width * height * sizeof(GLubyte) * 4));
+void runAutoTest(const char* ref_file, char* exec_path)
+{
+    checkCudaErrors(cudaMalloc((void**)&d_output, width * height * sizeof(GLubyte) * 4));
 
-  // render the volumeData
-  render_kernel(gridSize, blockSize, d_output, width, height, w);
+    // render the volumeData
+    render_kernel(gridSize, blockSize, d_output, width, height, w);
 
-  checkCudaErrors(cudaDeviceSynchronize());
-  getLastCudaError("render_kernel failed");
+    checkCudaErrors(cudaDeviceSynchronize());
+    getLastCudaError("render_kernel failed");
 
-  void *h_output = malloc(width * height * sizeof(GLubyte) * 4);
-  checkCudaErrors(cudaMemcpy(h_output, d_output,
-                             width * height * sizeof(GLubyte) * 4,
-                             cudaMemcpyDeviceToHost));
-  sdkDumpBin(h_output, width * height * sizeof(GLubyte) * 4,
-             "simpleTexture3D.bin");
+    void* h_output = malloc(width * height * sizeof(GLubyte) * 4);
+    checkCudaErrors(cudaMemcpy(h_output, d_output, width * height * sizeof(GLubyte) * 4, cudaMemcpyDeviceToHost));
+    sdkDumpBin(h_output, width * height * sizeof(GLubyte) * 4, "simpleTexture3D.bin");
 
-  bool bTestResult = sdkCompareBin2BinFloat(
-      "simpleTexture3D.bin", sdkFindFilePath(ref_file, exec_path),
-      width * height, MAX_EPSILON_ERROR, THRESHOLD, exec_path);
+    bool bTestResult = sdkCompareBin2BinFloat("simpleTexture3D.bin", sdkFindFilePath(ref_file, exec_path), width * height, MAX_EPSILON_ERROR, THRESHOLD, exec_path);
 
-  checkCudaErrors(cudaFree(d_output));
-  free(h_output);
+    checkCudaErrors(cudaFree(d_output));
+    free(h_output);
 
-  sdkStopTimer(&timer);
-  sdkDeleteTimer(&timer);
+    sdkStopTimer(&timer);
+    sdkDeleteTimer(&timer);
 
-  exit(bTestResult ? EXIT_SUCCESS : EXIT_FAILURE);
+    exit(bTestResult ? EXIT_SUCCESS : EXIT_FAILURE);
 }
 
-void loadVolumeData(char *exec_path)
+void loadVolumeData(char* exec_path)
 {
     printf("loadVolumeData, volumeFilename=%s\n", volumeFilename);
     printf("loadVolumeData, exec_path=%s\n", exec_path);
 
-  // load volume data
-  const char *path = sdkFindFilePath(volumeFilename, exec_path);
+    // load volume data
+    const char* path = sdkFindFilePath(volumeFilename, exec_path);
 
-  if (path == NULL)
-  {
-    fprintf(stderr, "Error unable to find 3D Volume file: '%s'\n",
+    if (path == NULL)
+    {
+        fprintf(stderr, "Error unable to find 3D Volume file: '%s'\n",
             volumeFilename);
-    exit(EXIT_FAILURE);
-  }
+        exit(EXIT_FAILURE);
+    }
 
-  size_t size = volumeSize.width * volumeSize.height * volumeSize.depth;
-  uchar *h_volume = loadRawFile(path, size);
+    size_t size = volumeSize.width * volumeSize.height * volumeSize.depth;
+    uchar* h_volume = loadRawFile(path, size);
 
-  initCuda(h_volume, volumeSize);
-  sdkCreateTimer(&timer);
+    initCuda(h_volume, volumeSize);
+    sdkCreateTimer(&timer);
 
-  free(h_volume);
+    free(h_volume);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // Program main
 ////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char **argv) {
-  pArgc = &argc;
-  pArgv = argv;
+int main(int argc, char** argv)
+{
+    pArgc = &argc;
+    pArgv = argv;
 
-  char *ref_file = NULL;
+    char* ref_file = NULL;
 
-  printf("main start\n");
+    printf("main start\n");
 
-#if defined(__linux__)
-  printf("xxxxxxxx\n");
-  setenv("DISPLAY", ":0", 0);
-#endif
+    printf("%s Starting...\n\n", sSDKsample);
 
-  printf("%s Starting...\n\n", sSDKsample);
+    if (checkCmdLineFlag(argc, (const char**)argv, "file"))
+    {
+        printf("XXXXXXXXXXX\n");
+        std::cout << "xxxxxx" << std::endl;
+        fpsLimit = frameCheckNumber;
+        getCmdLineArgumentString(argc, (const char**)argv, "file", &ref_file);
+    }
 
-  if (checkCmdLineFlag(argc, (const char **)argv, "file"))
-  {
-      std::cout << "xxxxxx" << std::endl;
-    fpsLimit = frameCheckNumber;
-    getCmdLineArgumentString(argc, (const char **)argv, "file", &ref_file);
-  }
+    // use command-line specified CUDA device, otherwise use device with highest
+    // Gflops/s
+    findCudaDevice(argc, (const char**)argv);
 
-  // use command-line specified CUDA device, otherwise use device with highest
-  // Gflops/s
-  findCudaDevice(argc, (const char **)argv);
+    if (ref_file)
+    {
+        printf("XXXXXXXXXXX\n");
+        loadVolumeData(argv[0]);
+        runAutoTest(ref_file, argv[0]);
+    }
+    else
+    {
+        initGL(&argc, argv);  //¶}±ÒCUDA3D Texture
 
+        // OpenGL buffers
+        initGLBuffers();
 
-  
+        loadVolumeData(argv[0]);
+    }
 
+    printf("Press space to toggle animation\nPress '+' and '-' to change displayed slice\n");
 
-  if (ref_file)
-  {
-      printf("XXXXXXX\n");
-    loadVolumeData(argv[0]);
-    runAutoTest(ref_file, argv[0]);
-  }
-  else
-  {
-    initGL(&argc, argv);  //¶}±ÒCUDA3D Texture
+    printf("call glutCloseFunc\n");
+    glutCloseFunc(cleanup);
 
-    // OpenGL buffers
-    initGLBuffers();
+    glutMainLoop();
 
-    loadVolumeData(argv[0]);
-  }
-
-  printf(
-      "Press space to toggle animation\n"
-      "Press '+' and '-' to change displayed slice\n");
-
-#if defined(__APPLE__) || defined(MACOSX)
-  printf("XXXXXXXX\n");
-  atexit(cleanup);
-#else
-  printf("call glutCloseFunc\n");
-  glutCloseFunc(cleanup);
-#endif
-
-  glutMainLoop();
-
-
-  std::cout << "Hello World" << std::endl;
-  getchar();//©Îsystem("pause");
-
-
-  exit(EXIT_SUCCESS);
+    exit(EXIT_SUCCESS);
 }
+

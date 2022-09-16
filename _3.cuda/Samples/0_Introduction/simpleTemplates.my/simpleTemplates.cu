@@ -32,40 +32,40 @@ int g_TotalFailures = 0;
 //! @param g_odata  output data in global memory
 ////////////////////////////////////////////////////////////////////////////////
 template <class T>
-__global__ void testKernel(T *g_idata, T *g_odata) {
-  // Shared mem size is determined by the host app at run time
-  SharedMemory<T> smem;
-  T *sdata = smem.getPointer();
+__global__ void testKernel(T* g_idata, T* g_odata) {
+    // Shared mem size is determined by the host app at run time
+    SharedMemory<T> smem;
+    T* sdata = smem.getPointer();
 
-  // access thread id
-  const unsigned int tid = threadIdx.x;
-  // access number of threads in this block
-  const unsigned int num_threads = blockDim.x;
+    // access thread id
+    const unsigned int tid = threadIdx.x;
+    // access number of threads in this block
+    const unsigned int num_threads = blockDim.x;
 
-  // read in input data from global memory
-  sdata[tid] = g_idata[tid];
-  __syncthreads();
+    // read in input data from global memory
+    sdata[tid] = g_idata[tid];
+    __syncthreads();
 
-  // perform some computations
-  sdata[tid] = (T)num_threads * sdata[tid];
-  __syncthreads();
+    // perform some computations
+    sdata[tid] = (T)num_threads * sdata[tid];
+    __syncthreads();
 
-  // write data to global memory
-  g_odata[tid] = sdata[tid];
+    // write data to global memory
+    g_odata[tid] = sdata[tid];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // declaration, forward
 template <class T>
-void runTest(int argc, char **argv, int len);
+void runTest(int argc, char** argv, int len);
 
 template <class T>
-void computeGold(T *reference, T *idata, const unsigned int len) {
-  const T T_len = static_cast<T>(len);
+void computeGold(T* reference, T* idata, const unsigned int len) {
+    const T T_len = static_cast<T>(len);
 
-  for (unsigned int i = 0; i < len; ++i) {
-    reference[i] = idata[i] * T_len;
-  }
+    for (unsigned int i = 0; i < len; ++i) {
+        reference[i] = idata[i] * T_len;
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -91,67 +91,68 @@ int main(int argc, char** argv)
 // Here's the generic wrapper for cutCompare*
 template <class T>
 class ArrayComparator {
- public:
-  bool compare(const T *reference, T *data, unsigned int len) {
-    fprintf(stderr,
+public:
+    bool compare(const T* reference, T* data, unsigned int len) {
+        fprintf(stderr,
             "Error: no comparison function implemented for this type\n");
-    return false;
-  }
+        return false;
+    }
 };
 
 // Here's the specialization for ints:
 template <>
 class ArrayComparator<int> {
- public:
-  bool compare(const int *reference, int *data, unsigned int len) {
-    return compareData(reference, data, len, 0.15f, 0.0f);
-  }
+public:
+    bool compare(const int* reference, int* data, unsigned int len) {
+        return compareData(reference, data, len, 0.15f, 0.0f);
+    }
 };
 
 // Here's the specialization for floats:
 template <>
 class ArrayComparator<float> {
- public:
-  bool compare(const float *reference, float *data, unsigned int len) {
-    return compareData(reference, data, len, 0.15f, 0.15f);
-  }
+public:
+    bool compare(const float* reference, float* data, unsigned int len) {
+        return compareData(reference, data, len, 0.15f, 0.15f);
+    }
 };
 
 // Here's the generic wrapper for cutWriteFile*
 template <class T>
 class ArrayFileWriter {
- public:
-  bool write(const char *filename, T *data, unsigned int len, float epsilon) {
-    fprintf(stderr,
+public:
+    bool write(const char* filename, T* data, unsigned int len, float epsilon) {
+        fprintf(stderr,
             "Error: no file write function implemented for this type\n");
-    return false;
-  }
+        return false;
+    }
 };
 
 // Here's the specialization for ints:
 template <>
 class ArrayFileWriter<int> {
- public:
-  bool write(const char *filename, int *data, unsigned int len, float epsilon) {
-    return sdkWriteFile(filename, data, len, epsilon, false);
-  }
+public:
+    bool write(const char* filename, int* data, unsigned int len, float epsilon) {
+        return sdkWriteFile(filename, data, len, epsilon, false);
+    }
 };
 
 // Here's the specialization for floats:
 template <>
 class ArrayFileWriter<float> {
- public:
-  bool write(const char *filename, float *data, unsigned int len,
-             float epsilon) {
-    return sdkWriteFile(filename, data, len, epsilon, false);
-  }
+public:
+    bool write(const char* filename, float* data, unsigned int len,
+        float epsilon) {
+        return sdkWriteFile(filename, data, len, epsilon, false);
+    }
 };
 
 ////////////////////////////////////////////////////////////////////////////////
 //! Run a simple test for CUDA
 ////////////////////////////////////////////////////////////////////////////////
 template <class T>
-void runTest(int argc, char** argv, int len) {
+void runTest(int argc, char** argv, int len)
+{
     int devID;
     cudaDeviceProp deviceProps;
 
@@ -185,7 +186,8 @@ void runTest(int argc, char** argv, int len) {
     T* h_idata = (T*)malloc(mem_size);
 
     // initialize the memory
-    for (unsigned int i = 0; i < num_threads; ++i) {
+    for (unsigned int i = 0; i < num_threads; ++i)
+    {
         h_idata[i] = (T)i;
     }
 
@@ -193,8 +195,7 @@ void runTest(int argc, char** argv, int len) {
     T* d_idata;
     checkCudaErrors(cudaMalloc((void**)&d_idata, mem_size));
     // copy host memory to device
-    checkCudaErrors(
-        cudaMemcpy(d_idata, h_idata, mem_size, cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(d_idata, h_idata, mem_size, cudaMemcpyHostToDevice));
 
     // allocate device memory for result
     T* d_odata;
@@ -227,11 +228,13 @@ void runTest(int argc, char** argv, int len) {
     ArrayFileWriter<T> writer;
 
     // check result
-    if (checkCmdLineFlag(argc, (const char**)argv, "regression")) {
+    if (checkCmdLineFlag(argc, (const char**)argv, "regression"))
+    {
         // write file for regression test
         writer.write("./data/regression.dat", h_odata, num_threads, 0.0f);
     }
-    else {
+    else
+    {
         // custom output handling when no regression test running
         // in this case check if the result is equivalent to the expected solution
         bool res = comparator.compare(reference, h_odata, num_threads);
