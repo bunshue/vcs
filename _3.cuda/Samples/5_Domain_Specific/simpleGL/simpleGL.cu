@@ -47,16 +47,16 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // constants
-const unsigned int window_width  = 512;
+const unsigned int window_width = 512;
 const unsigned int window_height = 512;
 
-const unsigned int mesh_width    = 256;
-const unsigned int mesh_height   = 256;
+const unsigned int mesh_width = 256;
+const unsigned int mesh_height = 256;
 
 // vbo variables
 GLuint vbo;
-struct cudaGraphicsResource *cuda_vbo_resource;
-void *d_vbo_buffer = NULL;
+struct cudaGraphicsResource* cuda_vbo_resource;
+void* d_vbo_buffer = NULL;
 
 float g_fAnim = 0.0;
 
@@ -66,7 +66,7 @@ int mouse_buttons = 0;
 float rotate_x = 0.0, rotate_y = 0.0;
 float translate_z = -3.0;
 
-StopWatchInterface *timer = NULL;
+StopWatchInterface* timer = NULL;
 
 // Auto-Verification Code
 int fpsCount = 0;        // FPS count for averaging
@@ -77,21 +77,21 @@ unsigned int frameCount = 0;
 unsigned int g_TotalErrors = 0;
 bool g_bQAReadback = false;
 
-int *pArgc = NULL;
-char **pArgv = NULL;
+int* pArgc = NULL;
+char** pArgv = NULL;
 
 #define MAX(a,b) ((a > b) ? a : b)
 
 ////////////////////////////////////////////////////////////////////////////////
 // declaration, forward
-bool runTest(int argc, char **argv, char *ref_file);
+bool runTest(int argc, char** argv, char* ref_file);
 void cleanup();
 
 // GL functionality
-bool initGL(int *argc, char **argv);
-void createVBO(GLuint *vbo, struct cudaGraphicsResource **vbo_res,
-               unsigned int vbo_res_flags);
-void deleteVBO(GLuint *vbo, struct cudaGraphicsResource *vbo_res);
+bool initGL(int* argc, char** argv);
+void createVBO(GLuint* vbo, struct cudaGraphicsResource** vbo_res,
+    unsigned int vbo_res_flags);
+void deleteVBO(GLuint* vbo, struct cudaGraphicsResource* vbo_res);
 
 // rendering callbacks
 void display();
@@ -101,33 +101,33 @@ void motion(int x, int y);
 void timerEvent(int value);
 
 // Cuda functionality
-void runCuda(struct cudaGraphicsResource **vbo_resource);
-void runAutoTest(int devID, char **argv, char *ref_file);
-void checkResultCuda(int argc, char **argv, const GLuint &vbo);
+void runCuda(struct cudaGraphicsResource** vbo_resource);
+void runAutoTest(int devID, char** argv, char* ref_file);
+void checkResultCuda(int argc, char** argv, const GLuint& vbo);
 
-const char *sSDKsample = "simpleGL (VBO)";
+const char* sSDKsample = "simpleGL (VBO)";
 
 ///////////////////////////////////////////////////////////////////////////////
 //! Simple kernel to modify vertex positions in sine wave pattern
 //! @param data  data in global memory
 ///////////////////////////////////////////////////////////////////////////////
-__global__ void simple_vbo_kernel(float4 *pos, unsigned int width, unsigned int height, float time)
+__global__ void simple_vbo_kernel(float4* pos, unsigned int width, unsigned int height, float time)
 {
-    unsigned int x = blockIdx.x*blockDim.x + threadIdx.x;
-    unsigned int y = blockIdx.y*blockDim.y + threadIdx.y;
+    unsigned int x = blockIdx.x * blockDim.x + threadIdx.x;
+    unsigned int y = blockIdx.y * blockDim.y + threadIdx.y;
 
     // calculate uv coordinates
-    float u = x / (float) width;
-    float v = y / (float) height;
-    u = u*2.0f - 1.0f;
-    v = v*2.0f - 1.0f;
+    float u = x / (float)width;
+    float v = y / (float)height;
+    u = u * 2.0f - 1.0f;
+    v = v * 2.0f - 1.0f;
 
     // calculate simple sine wave pattern
     float freq = 4.0f;
-    float w = sinf(u*freq + time) * cosf(v*freq + time) * 0.5f;
+    float w = sinf(u * freq + time) * cosf(v * freq + time) * 0.5f;
 
     // write output vertex
-    pos[y*width+x] = make_float4(u, w, v, 1.0f);
+    pos[y * width + x] = make_float4(u, w, v, 1.0f);
 }
 
 
@@ -142,9 +142,9 @@ void launch_kernel(float4* pos, unsigned int mesh_width, unsigned int mesh_heigh
 ////////////////////////////////////////////////////////////////////////////////
 // Program main
 ////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
-    char *ref_file = NULL;
+    char* ref_file = NULL;
 
     pArgc = &argc;
     pArgv = argv;
@@ -154,10 +154,10 @@ int main(int argc, char **argv)
     if (argc > 1)
     {
         printf("XXXXXXXXXXXXXXXXXXXXXX\n");
-        if (checkCmdLineFlag(argc, (const char **)argv, "file"))
+        if (checkCmdLineFlag(argc, (const char**)argv, "file"))
         {
             // In this mode, we are running non-OpenGL and doing a compare of the VBO was generated correctly
-            getCmdLineArgumentString(argc, (const char **)argv, "file", (char **)&ref_file);
+            getCmdLineArgumentString(argc, (const char**)argv, "file", (char**)&ref_file);
         }
     }
 
@@ -288,14 +288,14 @@ bool runTest(int argc, char** argv, char* ref_file)
 ////////////////////////////////////////////////////////////////////////////////
 //! Run the Cuda part of the computation
 ////////////////////////////////////////////////////////////////////////////////
-void runCuda(struct cudaGraphicsResource **vbo_resource)
+void runCuda(struct cudaGraphicsResource** vbo_resource)
 {
     // map OpenGL buffer object for writing from CUDA
-    float4 *dptr;
+    float4* dptr;
     checkCudaErrors(cudaGraphicsMapResources(1, vbo_resource, 0));
     size_t num_bytes;
-    checkCudaErrors(cudaGraphicsResourceGetMappedPointer((void **)&dptr, &num_bytes,
-                                                         *vbo_resource));
+    checkCudaErrors(cudaGraphicsResourceGetMappedPointer((void**)&dptr, &num_bytes,
+        *vbo_resource));
     //printf("CUDA mapped VBO: May access %ld bytes\n", num_bytes);
 
     // execute the kernel
@@ -309,14 +309,8 @@ void runCuda(struct cudaGraphicsResource **vbo_resource)
     checkCudaErrors(cudaGraphicsUnmapResources(1, vbo_resource, 0));
 }
 
-#ifdef _WIN32
 #ifndef FOPEN
 #define FOPEN(fHandle,filename,mode) fopen_s(&fHandle, filename, mode)
-#endif
-#else
-#ifndef FOPEN
-#define FOPEN(fHandle,filename,mode) (fHandle = fopen(filename, mode))
-#endif
 #endif
 
 void sdkDumpBin2(void* data, unsigned int bytes, const char* filename)
@@ -361,8 +355,8 @@ void runAutoTest(int devID, char** argv, char* ref_file)
 ////////////////////////////////////////////////////////////////////////////////
 //! Create VBO
 ////////////////////////////////////////////////////////////////////////////////
-void createVBO(GLuint *vbo, struct cudaGraphicsResource **vbo_res,
-               unsigned int vbo_res_flags)
+void createVBO(GLuint* vbo, struct cudaGraphicsResource** vbo_res,
+    unsigned int vbo_res_flags)
 {
     assert(vbo);
 
@@ -385,7 +379,7 @@ void createVBO(GLuint *vbo, struct cudaGraphicsResource **vbo_res,
 ////////////////////////////////////////////////////////////////////////////////
 //! Delete VBO
 ////////////////////////////////////////////////////////////////////////////////
-void deleteVBO(GLuint *vbo, struct cudaGraphicsResource *vbo_res)
+void deleteVBO(GLuint* vbo, struct cudaGraphicsResource* vbo_res)
 {
 
     // unregister this buffer object with CUDA
@@ -438,7 +432,7 @@ void timerEvent(int value)
     if (glutGetWindow())
     {
         glutPostRedisplay();
-        glutTimerFunc(REFRESH_DELAY, timerEvent,0);
+        glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
     }
 }
 
@@ -460,13 +454,9 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
     switch (key)
     {
-        case (27) :
-            #if defined(__APPLE__) || defined(MACOSX)
-                exit(EXIT_SUCCESS);
-            #else
-                glutDestroyWindow(glutGetWindow());
-                return;
-            #endif
+    case (27):
+        glutDestroyWindow(glutGetWindow());
+        return;
     }
 }
 
@@ -477,7 +467,7 @@ void mouse(int button, int state, int x, int y)
 {
     if (state == GLUT_DOWN)
     {
-        mouse_buttons |= 1<<button;
+        mouse_buttons |= 1 << button;
     }
     else if (state == GLUT_UP)
     {
@@ -512,7 +502,7 @@ void motion(int x, int y)
 //! Check if the result is correct or write data to file for external
 //! regression testing
 ////////////////////////////////////////////////////////////////////////////////
-void checkResultCuda(int argc, char **argv, const GLuint &vbo)
+void checkResultCuda(int argc, char** argv, const GLuint& vbo)
 {
     if (!d_vbo_buffer)
     {
@@ -520,14 +510,14 @@ void checkResultCuda(int argc, char **argv, const GLuint &vbo)
 
         // map buffer object
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        float *data = (float *) glMapBuffer(GL_ARRAY_BUFFER, GL_READ_ONLY);
+        float* data = (float*)glMapBuffer(GL_ARRAY_BUFFER, GL_READ_ONLY);
 
         // check result
-        if (checkCmdLineFlag(argc, (const char **) argv, "regression"))
+        if (checkCmdLineFlag(argc, (const char**)argv, "regression"))
         {
             // write file for regression test
             sdkWriteFile<float>("./data/regression.dat",
-                                data, mesh_width * mesh_height * 3, 0.0, false);
+                data, mesh_width * mesh_height * 3, 0.0, false);
         }
 
         // unmap GL buffer object
@@ -538,7 +528,7 @@ void checkResultCuda(int argc, char **argv, const GLuint &vbo)
         }
 
         checkCudaErrors(cudaGraphicsGLRegisterBuffer(&cuda_vbo_resource, vbo,
-                                                     cudaGraphicsMapFlagsWriteDiscard));
+            cudaGraphicsMapFlagsWriteDiscard));
 
         SDK_CHECK_ERROR_GL();
     }

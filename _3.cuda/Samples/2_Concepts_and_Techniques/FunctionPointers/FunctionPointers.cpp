@@ -29,11 +29,11 @@
 // S: display Sobel Edge Detection (computed with texture and shared memory)
 
 void cleanup(void);
-void initializeData(char *file);
+void initializeData(char* file);
 
 #define MAX_EPSILON_ERROR 5.0f
 
-static const char *sSDKsample = "CUDA Function Pointers (SobelFilter)";
+static const char* sSDKsample = "CUDA Function Pointers (SobelFilter)";
 
 const char* filterMode[] = { "No Filtering", "Sobel Texture","Sobel SMEM+Texture", NULL };
 
@@ -49,13 +49,13 @@ const int frameCheckNumber = 4;
 int fpsCount = 0;  // FPS count for averaging
 int fpsLimit = 8;  // FPS limit for sampling
 unsigned int frameCount = 0;
-StopWatchInterface *timer = NULL;
+StopWatchInterface* timer = NULL;
 unsigned int g_Bpp;
 
 int g_TotalErrors = 0;
 
-int *pArgc = NULL;
-char **pArgv = NULL;
+int* pArgc = NULL;
+char** pArgv = NULL;
 
 bool g_bQAReadback = false;
 
@@ -64,7 +64,7 @@ static GLuint pbo_buffer = 0;  // Front and back CA buffers
 struct cudaGraphicsResource* cuda_pbo_resource;  // CUDA Graphics Resource (to transfer PBO)
 
 static GLuint texid = 0;       // Texture for display
-unsigned char *pixels = NULL;  // Image pixel data on the host
+unsigned char* pixels = NULL;  // Image pixel data on the host
 float imageScale = 1.f;        // Image exposure
 enum SobelDisplayMode g_SobelDisplayMode;
 

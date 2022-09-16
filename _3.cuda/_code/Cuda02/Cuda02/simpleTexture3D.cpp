@@ -188,6 +188,13 @@ int main(int argc, char** argv)
     printf("> scale_factor = %1.4f\n", 1.0f / scale_factor);
     printf("> array_size   = %d\n\n", n);
 
+    printf("ª©¥»¸ê°T\n");
+    //printf("Header version:  %u.%u\n", NVMEDIA_2D_VERSION_MAJOR, NVMEDIA_2D_VERSION_MINOR);
+    printf("CUDART_VERSION : %d\n", CUDART_VERSION);
+    //printf("__CUDA_API_VERSION : %d\n", __CUDA_API_VERSION);
+    //printf("NVTX_VERSION : %d\n", NVTX_VERSION);
+    printf("GL_VERSION : %d\n", GL_VERSION);
+
 
 
 

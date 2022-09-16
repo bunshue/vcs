@@ -39,7 +39,7 @@ namespace vcs_Calculus1
 
             button1.Location = new Point(10, 10);
             pictureBox1.Location = new Point(20 + 120, 10);
-            pictureBox1.ClientSize = new Size(800+100, 700);
+            pictureBox1.ClientSize = new Size(800 + 100, 700);
             richTextBox1.Size = new Size(300, 600);
             richTextBox1.Location = new Point(840 + 110 + 100, 10);
 
@@ -49,12 +49,6 @@ namespace vcs_Calculus1
         private double sind(double d)
         {
             return Math.Sin(d * Math.PI / 180.0);
-        }
-
-        private float function(float x)
-        {
-            //return (float)(x * x + 2 * x + 1);
-            return (float)(sind(3 * x) * 100);
         }
 
         void plot_figure(List<PointF> points)
@@ -132,11 +126,11 @@ namespace vcs_Calculus1
             richTextBox1.Text += "y_max = " + y_max.ToString() + "\n";
             richTextBox1.Text += "y_min = " + y_min.ToString() + "\n";
 
-            if (x_min < 0)
+            //if (x_min < 0)
             {
                 offset_x = -(int)x_min;
             }
-            if (y_min < 0)
+            //if (y_min <= 0)
             {
                 offset_y = -(int)y_min;
             }
@@ -218,5 +212,12 @@ namespace vcs_Calculus1
 
             plot_figure(points);
         }
+
+        private float function(float x)
+        {
+            //return (float)(x * x + 2 * x + 1);
+            return (float)(sind(3 * x) * 100);
+        }
     }
 }
+
