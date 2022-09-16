@@ -1,4 +1,4 @@
-// OpenGL Graphics includes
+ï»¿// OpenGL Graphics includes
 #include <helper_gl.h>
 #include <GL/freeglut.h>
 
@@ -21,9 +21,6 @@
 
 // standard utility and system includes
 #include <helper_timer.h>
-
-// SDK information
-static const char *printfFile = "randomFog.txt";
 
 // RNG instance
 RNG *g_pRng = NULL;
@@ -171,7 +168,7 @@ void drawText(void)
     string infoString = "This is a lion-mouse.";
     for (unsigned int i = 0; i < infoString.size(); i++)
     {
-        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, infoString[i]);
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, infoString[i]);
     }
 }
 
@@ -310,8 +307,8 @@ int main(int argc, char** argv)
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     // TODO use width/height?
-    glutInitWindowSize(1000, 1000);     //³]©wµøµ¡¤j¤p, ª½±µ©Ô¤j¤º®e
-    glutInitWindowPosition(900, 50);    //µøµ¡°_©l¦ì¸m
+    glutInitWindowSize(1000, 1000);     //è¨­å®šè¦–çª—å¤§å°, ç›´æŽ¥æ‹‰å¤§å…§å®¹
+    glutInitWindowPosition(900, 50);    //è¦–çª—èµ·å§‹ä½ç½®
 
     // Create a window with rendering context and everything else we need
     glutCreateWindow("Random Fog");
@@ -358,11 +355,11 @@ int main(int argc, char** argv)
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
     // Notify glut which messages we require:
-    glutDisplayFunc(display);   //³]©wcallback function
-    glutReshapeFunc(reshape);   //³]©wcallback function
-    glutKeyboardFunc(keyboard); //³]©wcallback function
-    glutIdleFunc(idle);         //³]©wcallback function
-    glutCloseFunc(glutClose);   //³]©wcallback function
+    glutDisplayFunc(display);   //è¨­å®šcallback function
+    glutReshapeFunc(reshape);   //è¨­å®šcallback function
+    glutKeyboardFunc(keyboard); //è¨­å®šcallback function
+    glutIdleFunc(idle);         //è¨­å®šcallback function
+    glutCloseFunc(glutClose);   //è¨­å®šcallback function
 
     // Let's get started!
     glutMainLoop();

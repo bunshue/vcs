@@ -23,7 +23,7 @@
 GLuint gl_PBO, gl_Tex;
 struct cudaGraphicsResource *cuda_pbo_resource;  // handles OpenGL-CUDA exchange
 
-int mode = 1;   //0: 自製圖片資料, 1: 使用圖片640X480, 2: 使用圖片1920X1080
+int mode = 2;   //0: 自製圖片資料, 1: 使用圖片640X480, 2: 使用圖片1920X1080
 
 // Source image on the host side
 uchar4 *h_Src1;
@@ -191,6 +191,7 @@ void display(void)
         glClear(GL_COLOR_BUFFER_BIT);
 
         glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, imageW, imageH, GL_RGBA, GL_UNSIGNED_BYTE, BUFFER_DATA(0));
+
         glBegin(GL_TRIANGLES);
         glTexCoord2f(0, 0);
         glVertex2f(-1, -1);
@@ -199,6 +200,7 @@ void display(void)
         glTexCoord2f(0, 2);
         glVertex2f(-1, +3);
         glEnd();
+
         glFinish();
     }
 
