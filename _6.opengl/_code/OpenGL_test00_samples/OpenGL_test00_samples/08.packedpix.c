@@ -818,6 +818,8 @@ int main(int argc, char **argv)
     type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
     glutInitDisplayMode(type);
     glutInitWindowSize(winWidth, winHeight);
+	glutInitWindowPosition(1100, 200);
+
     glutCreateWindow("Packed Pixel Test");
 
     if (queryExts && !QueryExtension("GL_EXT_packed_pixels")) {

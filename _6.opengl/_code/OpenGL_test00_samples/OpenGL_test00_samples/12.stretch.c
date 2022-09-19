@@ -17,7 +17,6 @@
 #define logf log
 #endif
 
-
 #define STEPCOUNT 40
 #define FALSE 0
 #define TRUE 1
@@ -46,7 +45,7 @@ typedef struct _vertexRec {
 
 GLenum doubleBuffer;
 int imageSizeX, imageSizeY;
-RGBImageRec *image = NULL;
+RGBImageRec* image = NULL;
 cRec cList[50];
 vertexRec vList[5];
 int cCount, cIndex[2], cStep;
@@ -58,17 +57,18 @@ void DrawImage(void)
 
     glRasterPos2i(0, 0);
     glDrawPixels(image->sizeX, image->sizeY, GL_RGB, GL_UNSIGNED_BYTE,
-		 image->data);
+        image->data);
 
     if (doubleBuffer) {
-	glutSwapBuffers();
-    } else {
-	glFlush();
+        glutSwapBuffers();
+    }
+    else {
+        glFlush();
     }
 
     glRasterPos2i(0, 0);
     glDrawPixels(image->sizeX, image->sizeY, GL_RGB, GL_UNSIGNED_BYTE,
-		 image->data);
+        image->data);
 }
 
 void DrawPoint(void)
@@ -78,15 +78,16 @@ void DrawPoint(void)
     glColor3f(1.0, 0.0, 1.0);
     glPointSize(3.0);
     glBegin(GL_POINTS);
-	for (i = 0; i < cCount; i++) {
-	    glVertex2f(cList[i].x, cList[i].y);
-	}
+    for (i = 0; i < cCount; i++) {
+        glVertex2f(cList[i].x, cList[i].y);
+    }
     glEnd();
 
     if (doubleBuffer) {
-	glutSwapBuffers();
-    } else {
-	glFlush();
+        glutSwapBuffers();
+    }
+    else {
+        glFlush();
     }
 }
 
@@ -131,11 +132,11 @@ void InitVList(void)
 
 void ScaleImage(int sizeX, int sizeY)
 {
-    GLubyte *buf;
+    GLubyte* buf;
 
-    buf = (GLubyte *)malloc(3*sizeX*sizeY);
+    buf = (GLubyte*)malloc(3 * sizeX * sizeY);
     gluScaleImage(GL_RGB, image->sizeX, image->sizeY, GL_UNSIGNED_BYTE,
-                  image->data, sizeX, sizeY, GL_UNSIGNED_BYTE, buf);
+        image->data, sizeX, sizeY, GL_UNSIGNED_BYTE, buf);
     free(image->data);
     image->data = buf;
     image->sizeX = sizeX;
@@ -154,59 +155,61 @@ void Stretch(void)
 {
 
     glBegin(GL_TRIANGLES);
-	glTexCoord2f(vList[0].tX, vList[0].tY);
-	glVertex2f(vList[0].x, vList[0].y);
-	glTexCoord2f(vList[1].tX, vList[1].tY);
-	glVertex2f(vList[1].x, vList[1].y);
-	glTexCoord2f(vList[4].tX, vList[4].tY);
-	glVertex2f(vList[4].x, vList[4].y);
+    glTexCoord2f(vList[0].tX, vList[0].tY);
+    glVertex2f(vList[0].x, vList[0].y);
+    glTexCoord2f(vList[1].tX, vList[1].tY);
+    glVertex2f(vList[1].x, vList[1].y);
+    glTexCoord2f(vList[4].tX, vList[4].tY);
+    glVertex2f(vList[4].x, vList[4].y);
     glEnd();
 
     glBegin(GL_TRIANGLES);
-	glTexCoord2f(vList[1].tX, vList[1].tY);
-	glVertex2f(vList[1].x, vList[1].y);
-	glTexCoord2f(vList[2].tX, vList[2].tY);
-	glVertex2f(vList[2].x, vList[2].y);
-	glTexCoord2f(vList[4].tX, vList[4].tY);
-	glVertex2f(vList[4].x, vList[4].y);
+    glTexCoord2f(vList[1].tX, vList[1].tY);
+    glVertex2f(vList[1].x, vList[1].y);
+    glTexCoord2f(vList[2].tX, vList[2].tY);
+    glVertex2f(vList[2].x, vList[2].y);
+    glTexCoord2f(vList[4].tX, vList[4].tY);
+    glVertex2f(vList[4].x, vList[4].y);
     glEnd();
 
     glBegin(GL_TRIANGLES);
-	glTexCoord2f(vList[2].tX, vList[2].tY);
-	glVertex2f(vList[2].x, vList[2].y);
-	glTexCoord2f(vList[3].tX, vList[3].tY);
-	glVertex2f(vList[3].x, vList[3].y);
-	glTexCoord2f(vList[4].tX, vList[4].tY);
-	glVertex2f(vList[4].x, vList[4].y);
+    glTexCoord2f(vList[2].tX, vList[2].tY);
+    glVertex2f(vList[2].x, vList[2].y);
+    glTexCoord2f(vList[3].tX, vList[3].tY);
+    glVertex2f(vList[3].x, vList[3].y);
+    glTexCoord2f(vList[4].tX, vList[4].tY);
+    glVertex2f(vList[4].x, vList[4].y);
     glEnd();
 
     glBegin(GL_TRIANGLES);
-	glTexCoord2f(vList[3].tX, vList[3].tY);
-	glVertex2f(vList[3].x, vList[3].y);
-	glTexCoord2f(vList[0].tX, vList[0].tY);
-	glVertex2f(vList[0].x, vList[0].y);
-	glTexCoord2f(vList[4].tX, vList[4].tY);
-	glVertex2f(vList[4].x, vList[4].y);
+    glTexCoord2f(vList[3].tX, vList[3].tY);
+    glVertex2f(vList[3].x, vList[3].y);
+    glTexCoord2f(vList[0].tX, vList[0].tY);
+    glVertex2f(vList[0].x, vList[0].y);
+    glTexCoord2f(vList[4].tX, vList[4].tY);
+    glVertex2f(vList[4].x, vList[4].y);
     glEnd();
 
     if (doubleBuffer) {
-	glutSwapBuffers();
-    } else {
-	glFlush();
+        glutSwapBuffers();
+    }
+    else {
+        glFlush();
     }
 
     if (++cStep < STEPCOUNT) {
-	vList[4].x += vList[4].dX;
-	vList[4].y += vList[4].dY;
-    } else {
-	cIndex[0] = cIndex[1];
-	cIndex[1] = cIndex[1] + 1;
-	if (cIndex[1] == cCount) {
-	    cIndex[1] = 0;
-	}
-	vList[4].dX = (cList[cIndex[1]].x - cList[cIndex[0]].x) / STEPCOUNT;
-	vList[4].dY = (cList[cIndex[1]].y - cList[cIndex[0]].y) / STEPCOUNT;
-	cStep = 0;
+        vList[4].x += vList[4].dX;
+        vList[4].y += vList[4].dY;
+    }
+    else {
+        cIndex[0] = cIndex[1];
+        cIndex[1] = cIndex[1] + 1;
+        if (cIndex[1] == cCount) {
+            cIndex[1] = 0;
+        }
+        vList[4].dX = (cList[cIndex[1]].x - cList[cIndex[0]].x) / STEPCOUNT;
+        vList[4].dY = (cList[cIndex[1]].y - cList[cIndex[0]].y) / STEPCOUNT;
+        cStep = 0;
     }
 }
 
@@ -214,19 +217,19 @@ void Key(unsigned char key, int x, int y)
 {
 
     switch (key) {
-      case ' ':
-	if (cCount > 1) {
-	    InitVList();
-	    cIndex[0] = 0;
-	    cIndex[1] = 1;
-	    cStep = 0;
-	    glEnable(GL_TEXTURE_2D);
-	    op = OP_STRETCH;
-	}
-	glutPostRedisplay();
-	break;
-      case 27:
-	free(image->data);
+    case ' ':
+        if (cCount > 1) {
+            InitVList();
+            cIndex[0] = 0;
+            cIndex[1] = 1;
+            cStep = 0;
+            glEnable(GL_TEXTURE_2D);
+            op = OP_STRETCH;
+        }
+        glutPostRedisplay();
+        break;
+    case 27:
+        free(image->data);
         exit(0);
     }
 }
@@ -235,15 +238,16 @@ void Mouse(int button, int state, int mouseX, int mouseY)
 {
 
     if (state == GLUT_DOWN) {
-	if (op == OP_STRETCH) {
-	    glDisable(GL_TEXTURE_2D);
-	    cCount = 0;
-	    op = OP_DRAWIMAGE;
-	} else {
-	    SetPoint(mouseX, imageSizeY-mouseY);
-	    op = OP_DRAWPOINT;
-	}
-	glutPostRedisplay();
+        if (op == OP_STRETCH) {
+            glDisable(GL_TEXTURE_2D);
+            cCount = 0;
+            op = OP_DRAWIMAGE;
+        }
+        else {
+            SetPoint(mouseX, imageSizeY - mouseY);
+            op = OP_DRAWPOINT;
+        }
+        glutPostRedisplay();
     }
 }
 
@@ -251,45 +255,48 @@ void Animate(void)
 {
 
     switch (op) {
-      case OP_STRETCH:
-	Stretch();
-	break;
-      case OP_DRAWPOINT:
-	DrawPoint();
-	break;
-      case OP_DRAWIMAGE:
-	DrawImage();
-	break;
+    case OP_STRETCH:
+        Stretch();
+        break;
+    case OP_DRAWPOINT:
+        DrawPoint();
+        break;
+    case OP_DRAWIMAGE:
+        DrawImage();
+        break;
     }
 }
 
-static void Args(int argc, char **argv)
+static void Args(int argc, char** argv)
 {
     GLint i;
 
     doubleBuffer = GL_FALSE;
 
     for (i = 1; i < argc; i++) {
-	if (strcmp(argv[i], "-sb") == 0) {
-	    doubleBuffer = GL_FALSE;
-	} else if (strcmp(argv[i], "-db") == 0) {
-	    doubleBuffer = GL_TRUE;
-	} else if (strcmp(argv[i], "-f") == 0) {
-	    if (i+1 >= argc || argv[i+1][0] == '-') {
-		printf("-f (No file name).\n");
-		exit(1);
-	    } else {
-		image = rgbImageLoad(argv[++i]);
-		if (image == NULL) {
-		    printf("-f (Bad file name).\n");
-		    exit(1);
-		}
-	    }
-	}
+        if (strcmp(argv[i], "-sb") == 0) {
+            doubleBuffer = GL_FALSE;
+        }
+        else if (strcmp(argv[i], "-db") == 0) {
+            doubleBuffer = GL_TRUE;
+        }
+        else if (strcmp(argv[i], "-f") == 0) {
+            if (i + 1 >= argc || argv[i + 1][0] == '-') {
+                printf("-f (No file name).\n");
+                exit(1);
+            }
+            else {
+                image = rgbImageLoad(argv[++i]);
+                if (image == NULL) {
+                    printf("-f (Bad file name).\n");
+                    exit(1);
+                }
+            }
+        }
     }
 }
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
     GLenum type;
 
@@ -297,18 +304,20 @@ int main(int argc, char **argv)
     Args(argc, argv);
 
     if (image == NULL) {
-	printf("No texture file.\n");
-	exit(1);
+        printf("No texture file.\n");
+        exit(1);
     }
 
-    imageSizeX = (int)powf(2.0, (float)((int)(logf(image->sizeX)/logf(2.0))));
-    imageSizeY = (int)powf(2.0, (float)((int)(logf(image->sizeY)/logf(2.0))));
+    imageSizeX = (int)powf(2.0, (float)((int)(logf(image->sizeX) / logf(2.0))));
+    imageSizeY = (int)powf(2.0, (float)((int)(logf(image->sizeY) / logf(2.0))));
 
 
     type = GLUT_RGB;
     type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
     glutInitDisplayMode(type);
     glutInitWindowSize(imageSizeX, imageSizeY);
+    glutInitWindowPosition(1100, 200);
+
     glutCreateWindow("Stretch");
 
     glViewport(0, 0, imageSizeX, imageSizeY);
@@ -326,7 +335,7 @@ int main(int argc, char **argv)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexImage2D(GL_TEXTURE_2D, 0, 3, image->sizeX, image->sizeY, 0,
-                 GL_RGB, GL_UNSIGNED_BYTE, (unsigned char *)image->data);
+        GL_RGB, GL_UNSIGNED_BYTE, (unsigned char*)image->data);
 
     cCount = 0;
     cIndex[0] = 0;

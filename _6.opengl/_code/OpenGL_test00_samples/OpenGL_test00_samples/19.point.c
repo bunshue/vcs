@@ -24,11 +24,11 @@ static void Init(void)
     GLint i;
 
     if (!rgb) {
-	for (i = 0; i < 16; i++) {
-	    glutSetColor(i+CI_ANTI_ALIAS_RED, i/15.0, 0.0, 0.0);
-	    glutSetColor(i+CI_ANTI_ALIAS_YELLOW, i/15.0, i/15.0, 0.0);
-	    glutSetColor(i+CI_ANTI_ALIAS_GREEN, 0.0, i/15.0, 0.0);
-	}
+        for (i = 0; i < 16; i++) {
+            glutSetColor(i + CI_ANTI_ALIAS_RED, i / 15.0, 0.0, 0.0);
+            glutSetColor(i + CI_ANTI_ALIAS_YELLOW, i / 15.0, i / 15.0, 0.0);
+            glutSetColor(i + CI_ANTI_ALIAS_GREEN, 0.0, i / 15.0, 0.0);
+        }
     }
 
     glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -49,7 +49,7 @@ static void Reshape(int width, int height)
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluOrtho2D(-windW/2, windW/2, -windH/2, windH/2);
+    gluOrtho2D(-windW / 2, windW / 2, -windH / 2, windH / 2);
     glMatrixMode(GL_MODELVIEW);
 }
 
@@ -57,23 +57,23 @@ static void Key(unsigned char key, int x, int y)
 {
 
     switch (key) {
-      case '1':
-	mode = !mode;
-	glutPostRedisplay();
-	break;
-      case 'W':
-	size++;
-	glutPostRedisplay();
-	break;
-      case 'w':
-	size--;
-	if (size < 1) {
-	    size = 1;
-	}
-	glutPostRedisplay();
-	break;
-      case 27:
-	exit(0);
+    case '1':
+        mode = !mode;
+        glutPostRedisplay();
+        break;
+    case 'W':
+        size++;
+        glutPostRedisplay();
+        break;
+    case 'w':
+        size--;
+        if (size < 1) {
+            size = 1;
+        }
+        glutPostRedisplay();
+        break;
+    case 27:
+        exit(0);
     }
 }
 
@@ -81,22 +81,22 @@ static void SpecialKey(int key, int x, int y)
 {
 
     switch (key) {
-      case GLUT_KEY_LEFT:
-	point[0] -= 0.25;
-	glutPostRedisplay();
-	break;
-      case GLUT_KEY_RIGHT:
-	point[0] += 0.25;
-	glutPostRedisplay();
-	break;
-      case GLUT_KEY_UP:
-	point[1] += 0.25;
-	glutPostRedisplay();
-	break;
-      case GLUT_KEY_DOWN:
-	point[1] -= 0.25;
-	glutPostRedisplay();
-	break;
+    case GLUT_KEY_LEFT:
+        point[0] -= 0.25;
+        glutPostRedisplay();
+        break;
+    case GLUT_KEY_RIGHT:
+        point[0] += 0.25;
+        glutPostRedisplay();
+        break;
+    case GLUT_KEY_UP:
+        point[1] += 0.25;
+        glutPostRedisplay();
+        break;
+    case GLUT_KEY_DOWN:
+        point[1] -= 0.25;
+        glutPostRedisplay();
+        break;
     }
 }
 
@@ -107,30 +107,32 @@ static void Draw(void)
 
     (rgb) ? glColor3f(1.0, 1.0, 0.0) : glIndexi(3);
     glBegin(GL_LINE_STRIP);
-	glVertex2f(-windW/2, 0);
-	glVertex2f(windW/2, 0);
+    glVertex2f(-windW / 2, 0);
+    glVertex2f(windW / 2, 0);
     glEnd();
     glBegin(GL_LINE_STRIP);
-	glVertex2f(0, -windH/2);
-	glVertex2f(0, windH/2);
+    glVertex2f(0, -windH / 2);
+    glVertex2f(0, windH / 2);
     glEnd();
 
     if (mode) {
-	glEnable(GL_BLEND);
-	glEnable(GL_POINT_SMOOTH);
-    } else {
-	glDisable(GL_BLEND);
-	glDisable(GL_POINT_SMOOTH);
+        glEnable(GL_BLEND);
+        glEnable(GL_POINT_SMOOTH);
+    }
+    else {
+        glDisable(GL_BLEND);
+        glDisable(GL_POINT_SMOOTH);
     }
 
     glPointSize(size);
     if (mode) {
-	(rgb) ? glColor3f(1.0, 0.0, 0.0) : glIndexi(CI_ANTI_ALIAS_RED);
-    } else {
-	(rgb) ? glColor3f(1.0, 0.0, 0.0) : glIndexi(CI_RED);
+        (rgb) ? glColor3f(1.0, 0.0, 0.0) : glIndexi(CI_ANTI_ALIAS_RED);
+    }
+    else {
+        (rgb) ? glColor3f(1.0, 0.0, 0.0) : glIndexi(CI_RED);
     }
     glBegin(GL_POINTS);
-	glVertex3fv(point);
+    glVertex3fv(point);
     glEnd();
 
     glDisable(GL_POINT_SMOOTH);
@@ -138,17 +140,18 @@ static void Draw(void)
     glPointSize(1);
     (rgb) ? glColor3f(0.0, 1.0, 0.0) : glIndexi(2);
     glBegin(GL_POINTS);
-	glVertex3fv(point);
+    glVertex3fv(point);
     glEnd();
 
     if (doubleBuffer) {
-	glutSwapBuffers();
-    } else {
-	glFlush();
+        glutSwapBuffers();
+    }
+    else {
+        glFlush();
     }
 }
 
-static void Args(int argc, char **argv)
+static void Args(int argc, char** argv)
 {
     GLint i;
 
@@ -156,19 +159,22 @@ static void Args(int argc, char **argv)
     doubleBuffer = GL_FALSE;
 
     for (i = 1; i < argc; i++) {
-	if (strcmp(argv[i], "-ci") == 0) {
-	    rgb = GL_FALSE;
-	} else if (strcmp(argv[i], "-rgb") == 0) {
-	    rgb = GL_TRUE;
-	} else if (strcmp(argv[i], "-sb") == 0) {
-	    doubleBuffer = GL_FALSE;
-	} else if (strcmp(argv[i], "-db") == 0) {
-	    doubleBuffer = GL_TRUE;
-	}
+        if (strcmp(argv[i], "-ci") == 0) {
+            rgb = GL_FALSE;
+        }
+        else if (strcmp(argv[i], "-rgb") == 0) {
+            rgb = GL_TRUE;
+        }
+        else if (strcmp(argv[i], "-sb") == 0) {
+            doubleBuffer = GL_FALSE;
+        }
+        else if (strcmp(argv[i], "-db") == 0) {
+            doubleBuffer = GL_TRUE;
+        }
     }
 }
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
     GLenum type;
 
@@ -179,6 +185,8 @@ int main(int argc, char **argv)
     type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
     glutInitDisplayMode(type);
     glutInitWindowSize(windW, windH);
+    glutInitWindowPosition(1100, 200);
+
     glutCreateWindow("Point Test");
 
     Init();

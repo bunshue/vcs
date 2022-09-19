@@ -9,10 +9,10 @@
 
 #define MAX_STROKES 256
 enum {
-    FONT_BEGIN = 1,
-    FONT_NEXT,
-    FONT_END,
-    FONT_ADVANCE
+	FONT_BEGIN = 1,
+	FONT_NEXT,
+	FONT_END,
+	FONT_ADVANCE
 };
 #define END_OF_LIST 0
 
@@ -22,8 +22,8 @@ enum {
 
 /******************************************************************************/
 
-static GLint strokeFont[][1+MAX_STROKES*3] = {
-    {
+static GLint strokeFont[][1 + MAX_STROKES * 3] = {
+	{
 	1,
 	FONT_BEGIN, 0, 4,
 	FONT_NEXT, 2, 2,
@@ -31,8 +31,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 2, 8,
 	FONT_END, 2, 2,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	2,
 	FONT_BEGIN, 0, 3,
 	FONT_NEXT, 0, 5,
@@ -48,8 +48,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 1, 2,
 	FONT_END, 0, 3,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	3,
 	FONT_BEGIN, 0, 0,
 	FONT_NEXT, 1, 1,
@@ -64,22 +64,22 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 4, 2,
 	FONT_END, 1, 2,
 	FONT_ADVANCE, 7, 0
-    },
-    {
+	},
+	{
 	4,
 	FONT_BEGIN, 0, 4,
 	FONT_NEXT, 2, 6,
 	FONT_END, 4, 4,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	5,
 	FONT_BEGIN, 0, 5,
 	FONT_NEXT, 4, 5,
 	FONT_END, 4, 4,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	6,
 	FONT_BEGIN, 1, 4,
 	FONT_END, 3, 4,
@@ -90,8 +90,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 2, 2,
 	FONT_END, 3, 2,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	7,
 	FONT_BEGIN, 1, 2,
 	FONT_END, 1, 6,
@@ -100,8 +100,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 3, 6,
 	FONT_END, 3, 2,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	8,
 	FONT_BEGIN, 0, 2,
 	FONT_END, 2, 4,
@@ -109,12 +109,12 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 0, 6,
 	FONT_END, 4, 2,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	10,
 	FONT_ADVANCE, 0, -9
-    },
-    {
+	},
+	{
 	11,
 	FONT_BEGIN, 0, 2,
 	FONT_NEXT, 1, 1,
@@ -123,8 +123,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 3, 8,
 	FONT_END, 4, 7,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	12,
 	FONT_BEGIN, 0, 3,
 	FONT_END, 4, 3,
@@ -133,8 +133,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 2, 8,
 	FONT_END, 2, 4,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	14,
 	FONT_BEGIN, 1, 3,
 	FONT_NEXT, 2, 4,
@@ -150,8 +150,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 0, 4,
 	FONT_END, 1, 3,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	15,
 	FONT_BEGIN, 0, 3,
 	FONT_NEXT, 0, 4,
@@ -167,8 +167,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 1, 2,
 	FONT_END, 0, 3,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	16,
 	FONT_BEGIN, 4, 7,
 	FONT_NEXT, 1, 7,
@@ -177,8 +177,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 1, 3,
 	FONT_END, 4, 3,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	17,
 	FONT_BEGIN, 0, 3,
 	FONT_NEXT, 3, 3,
@@ -187,8 +187,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 3, 7,
 	FONT_END, 0, 7,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	18,
 	FONT_BEGIN, 0, 4,
 	FONT_NEXT, 0, 6,
@@ -197,8 +197,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 4, 6,
 	FONT_END, 4, 4,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	19,
 	FONT_BEGIN, 0, 7,
 	FONT_NEXT, 0, 5,
@@ -207,8 +207,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 4, 5,
 	FONT_END, 4, 7,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	20,
 	FONT_BEGIN, 0, 8,
 	FONT_NEXT, 2, 2,
@@ -216,8 +216,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 3, 6,
 	FONT_END, 1, 6,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	21,
 	FONT_BEGIN, 0, 2,
 	FONT_NEXT, 4, 2,
@@ -227,8 +227,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 4, 8,
 	FONT_END, 4, 5,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	22,
 	FONT_BEGIN, 0, 4,
 	FONT_NEXT, 0, 6,
@@ -244,8 +244,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 1, 6,
 	FONT_END, 3, 4,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	23,
 	FONT_BEGIN, 2, 0,
 	FONT_NEXT, 0, 2,
@@ -256,14 +256,14 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 0, 2,
 	FONT_END, 4, 2,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	24,
 	FONT_BEGIN, 0, 0,
 	FONT_END, 4, 0,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	25,
 	FONT_BEGIN, 2, 3,
 	FONT_NEXT, 4, 5,
@@ -271,8 +271,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 0, 5,
 	FONT_END, 4, 5,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	26,
 	FONT_BEGIN, 0, 8,
 	FONT_NEXT, 1, 9,
@@ -281,8 +281,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 3, 8,
 	FONT_END, 4, 9,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	27,
 	FONT_BEGIN, 0, 1,
 	FONT_END, 4, 7,
@@ -291,8 +291,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 0, 3,
 	FONT_END, 4, 3,
 	FONT_ADVANCE, 6, 1
-    },
-    {
+	},
+	{
 	28,
 	FONT_BEGIN, 1, 2,
 	FONT_END, 3, 2,
@@ -300,8 +300,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 1, 6,
 	FONT_END, 3, 8,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	29,
 	FONT_BEGIN, 1, 2,
 	FONT_END, 3, 2,
@@ -309,8 +309,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 3, 6,
 	FONT_END, 1, 8,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	30,
 	FONT_BEGIN, 0, 3,
 	FONT_END, 4, 3,
@@ -319,35 +319,35 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 0, 7,
 	FONT_END, 4, 7,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	31,
 	FONT_BEGIN, 0, 6,
 	FONT_NEXT, 2, 4,
 	FONT_END, 4, 6,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	32,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	33,
 	FONT_BEGIN, 2, 1,
 	FONT_END, 2, 2,
 	FONT_BEGIN, 2, 4,
 	FONT_END, 2, 8,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	34,
 	FONT_BEGIN, 1, 7,
 	FONT_END, 1, 9,
 	FONT_BEGIN, 3, 9,
 	FONT_END, 3, 7,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	35,
 	FONT_BEGIN, 1, 2,
 	FONT_END, 1, 7,
@@ -358,8 +358,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 0, 6,
 	FONT_END, 4, 6,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	36,
 	FONT_BEGIN, 2, 1,
 	FONT_END, 2, 9,
@@ -376,8 +376,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 1, 1,
 	FONT_END, 0, 2,
 	FONT_ADVANCE, 6, -1
-    },
-    {
+	},
+	{
 	37,
 	FONT_BEGIN, 0, 2,
 	FONT_NEXT, 0, 3,
@@ -394,8 +394,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 4, 2,
 	FONT_END, 5, 2,
 	FONT_ADVANCE, 8, 1
-    },
-    {
+	},
+	{
 	38,
 	FONT_BEGIN, 4, 4,
 	FONT_NEXT, 2, 2,
@@ -409,8 +409,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 0, 6,
 	FONT_END, 4, 2,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	39,
 	FONT_BEGIN, 0, 7,
 	FONT_NEXT, 1, 8,
@@ -419,24 +419,24 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 2, 8,
 	FONT_END, 1, 8,
 	FONT_ADVANCE, 6, 1
-    },
-    {
+	},
+	{
 	40,
 	FONT_BEGIN, 4, 2,
 	FONT_NEXT, 2, 4,
 	FONT_NEXT, 2, 6,
 	FONT_END, 4, 8,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	41,
 	FONT_BEGIN, 0, 2,
 	FONT_NEXT, 2, 4,
 	FONT_NEXT, 2, 6,
 	FONT_END, 0, 8,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	42,
 	FONT_BEGIN, 2, 2,
 	FONT_END, 2, 8,
@@ -447,41 +447,41 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 0, 3,
 	FONT_END, 4, 7,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	43,
 	FONT_BEGIN, 2, 3,
 	FONT_END, 2, 7,
 	FONT_BEGIN, 0, 5,
 	FONT_END, 4, 5,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	44,
 	FONT_BEGIN, 0, 1,
 	FONT_NEXT, 1, 2,
 	FONT_END, 1, 3,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	45,
 	FONT_BEGIN, 0, 5,
 	FONT_END, 4, 5,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	46,
 	FONT_BEGIN, 1, 2,
 	FONT_END, 2, 2,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	47,
 	FONT_BEGIN, 0, 3,
 	FONT_END, 4, 7,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	48,
 	FONT_BEGIN, 0, 3,
 	FONT_NEXT, 4, 7,
@@ -494,8 +494,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 4, 3,
 	FONT_END, 4, 7,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	49,
 	FONT_BEGIN, 1, 2,
 	FONT_END, 3, 2,
@@ -503,8 +503,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 2, 8,
 	FONT_END, 1, 7,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	50,
 	FONT_BEGIN, 0, 7,
 	FONT_NEXT, 1, 8,
@@ -514,8 +514,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 0, 2,
 	FONT_END, 4, 2,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	51,
 	FONT_BEGIN, 0, 3,
 	FONT_NEXT, 1, 2,
@@ -531,8 +531,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 1, 8,
 	FONT_END, 0, 7,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	52,
 	FONT_BEGIN, 3, 2,
 	FONT_NEXT, 3, 8,
@@ -540,8 +540,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 0, 4,
 	FONT_END, 4, 4,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	53,
 	FONT_BEGIN, 0, 3,
 	FONT_NEXT, 1, 2,
@@ -553,8 +553,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 0, 8,
 	FONT_END, 4, 8,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	54,
 	FONT_BEGIN, 0, 5,
 	FONT_NEXT, 0, 3,
@@ -568,16 +568,16 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 2, 8,
 	FONT_END, 3, 8,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	55,
 	FONT_BEGIN, 0, 8,
 	FONT_NEXT, 4, 8,
 	FONT_NEXT, 2, 4,
 	FONT_END, 2, 2,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	56,
 	FONT_BEGIN, 1, 5,
 	FONT_NEXT, 0, 4,
@@ -596,8 +596,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 4, 6,
 	FONT_END, 3, 5,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	57,
 	FONT_BEGIN, 1, 2,
 	FONT_NEXT, 2, 2,
@@ -610,16 +610,16 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 1, 5,
 	FONT_END, 4, 5,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	58,
 	FONT_BEGIN, 0, 3,
 	FONT_END, 1, 3,
 	FONT_BEGIN, 1, 6,
 	FONT_END, 0, 6,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	59,
 	FONT_BEGIN, 0, 1,
 	FONT_NEXT, 1, 2,
@@ -627,30 +627,30 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 1, 6,
 	FONT_END, 0, 6,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	60,
 	FONT_BEGIN, 3, 3,
 	FONT_NEXT, 1, 5,
 	FONT_END, 3, 7,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	61,
 	FONT_BEGIN, 0, 4,
 	FONT_END, 4, 4,
 	FONT_BEGIN, 4, 6,
 	FONT_END, 0, 6,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	62,
 	FONT_BEGIN, 1, 7,
 	FONT_NEXT, 3, 5,
 	FONT_END, 1, 3,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	63,
 	FONT_BEGIN, 1, 2,
 	FONT_END, 2, 2,
@@ -661,8 +661,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 1, 8,
 	FONT_END, 0, 7,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	64,
 	FONT_BEGIN, 3, 2,
 	FONT_NEXT, 1, 2,
@@ -676,8 +676,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 2, 6,
 	FONT_END, 4, 6,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	65,
 	FONT_BEGIN, 0, 2,
 	FONT_NEXT, 0, 7,
@@ -688,8 +688,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 0, 5,
 	FONT_END, 4, 5,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	66,
 	FONT_BEGIN, 0, 2,
 	FONT_NEXT, 3, 2,
@@ -704,8 +704,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 0, 8,
 	FONT_END, 0, 2,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	67,
 	FONT_BEGIN, 4, 7,
 	FONT_NEXT, 3, 8,
@@ -716,8 +716,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 3, 2,
 	FONT_END, 4, 3,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	68,
 	FONT_BEGIN, 0, 2,
 	FONT_NEXT, 3, 2,
@@ -728,8 +728,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 1, 8,
 	FONT_END, 1, 2,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	69,
 	FONT_BEGIN, 4, 2,
 	FONT_NEXT, 0, 2,
@@ -738,8 +738,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 3, 5,
 	FONT_END, 0, 5,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	70,
 	FONT_BEGIN, 0, 2,
 	FONT_NEXT, 0, 8,
@@ -747,8 +747,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 3, 5,
 	FONT_END, 0, 5,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	71,
 	FONT_BEGIN, 3, 4,
 	FONT_NEXT, 4, 4,
@@ -761,8 +761,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 3, 8,
 	FONT_END, 4, 7,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	72,
 	FONT_BEGIN, 0, 2,
 	FONT_END, 0, 8,
@@ -771,8 +771,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 4, 8,
 	FONT_END, 4, 2,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	73,
 	FONT_BEGIN, 1, 2,
 	FONT_END, 3, 2,
@@ -781,8 +781,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 1, 8,
 	FONT_END, 3, 8,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	74,
 	FONT_BEGIN, 0, 3,
 	FONT_NEXT, 1, 2,
@@ -790,8 +790,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 4, 3,
 	FONT_END, 4, 8,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	75,
 	FONT_BEGIN, 0, 2,
 	FONT_END, 0, 8,
@@ -799,15 +799,15 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 1, 5,
 	FONT_END, 4, 2,
 	FONT_ADVANCE, 8, 0
-    },
-    {
+	},
+	{
 	76,
 	FONT_BEGIN, 0, 8,
 	FONT_NEXT, 0, 2,
 	FONT_END, 4, 2,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	77,
 	FONT_BEGIN, 0, 2,
 	FONT_NEXT, 0, 8,
@@ -815,16 +815,16 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 4, 8,
 	FONT_END, 4, 2,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	78,
 	FONT_BEGIN, 0, 2,
 	FONT_NEXT, 0, 8,
 	FONT_NEXT, 4, 2,
 	FONT_END, 4, 8,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	79,
 	FONT_BEGIN, 0, 3,
 	FONT_NEXT, 0, 7,
@@ -836,8 +836,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 1, 2,
 	FONT_END, 0, 3,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	80,
 	FONT_BEGIN, 0, 2,
 	FONT_NEXT, 0, 8,
@@ -847,8 +847,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 3, 5,
 	FONT_END, 0, 5,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	81,
 	FONT_BEGIN, 0, 3,
 	FONT_NEXT, 0, 7,
@@ -862,8 +862,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 2, 5,
 	FONT_END, 4, 3,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	82,
 	FONT_BEGIN, 0, 2,
 	FONT_NEXT, 0, 8,
@@ -875,8 +875,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 1, 5,
 	FONT_END, 4, 2,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	83,
 	FONT_BEGIN, 4, 7,
 	FONT_NEXT, 3, 8,
@@ -891,16 +891,16 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 1, 2,
 	FONT_END, 0, 3,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	84,
 	FONT_BEGIN, 0, 8,
 	FONT_END, 4, 8,
 	FONT_BEGIN, 2, 8,
 	FONT_END, 2, 2,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	85,
 	FONT_BEGIN, 0, 3,
 	FONT_END, 0, 8,
@@ -910,8 +910,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 1, 2,
 	FONT_END, 0, 3,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	86,
 	FONT_BEGIN, 0, 8,
 	FONT_NEXT, 0, 5,
@@ -919,8 +919,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 4, 5,
 	FONT_END, 4, 8,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	87,
 	FONT_BEGIN, 0, 2,
 	FONT_END, 0, 8,
@@ -929,16 +929,16 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 2, 4,
 	FONT_END, 0, 2,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	88,
 	FONT_BEGIN, 0, 2,
 	FONT_END, 4, 8,
 	FONT_BEGIN, 0, 8,
 	FONT_END, 4, 2,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	89,
 	FONT_BEGIN, 2, 2,
 	FONT_NEXT, 2, 5,
@@ -946,38 +946,38 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 4, 8,
 	FONT_END, 2, 5,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	90,
 	FONT_BEGIN, 0, 8,
 	FONT_NEXT, 4, 8,
 	FONT_NEXT, 0, 2,
 	FONT_END, 4, 2,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	91,
 	FONT_BEGIN, 3, 1,
 	FONT_NEXT, 1, 1,
 	FONT_NEXT, 1, 9,
 	FONT_END, 3, 9,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	92,
 	FONT_BEGIN, 0, 7,
 	FONT_END, 4, 3,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	93,
 	FONT_BEGIN, 1, 9,
 	FONT_NEXT, 3, 9,
 	FONT_NEXT, 3, 1,
 	FONT_END, 1, 1,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	94,
 	FONT_BEGIN, 2, 2,
 	FONT_END, 2, 8,
@@ -985,8 +985,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 2, 8,
 	FONT_END, 4, 6,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	95,
 	FONT_BEGIN, 2, 3,
 	FONT_NEXT, 0, 5,
@@ -994,8 +994,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 0, 5,
 	FONT_END, 4, 5,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	96,
 	FONT_BEGIN, 3, 8,
 	FONT_NEXT, 2, 8,
@@ -1004,8 +1004,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 3, 8,
 	FONT_END, 4, 7,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	97,
 	FONT_BEGIN, 1, 6,
 	FONT_NEXT, 3, 6,
@@ -1016,8 +1016,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 1, 4,
 	FONT_END, 4, 4,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	98,
 	FONT_BEGIN, 0, 8,
 	FONT_NEXT, 0, 2,
@@ -1027,8 +1027,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 3, 6,
 	FONT_END, 0, 6,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	99,
 	FONT_BEGIN, 4, 5,
 	FONT_NEXT, 3, 6,
@@ -1038,8 +1038,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 1, 2,
 	FONT_END, 4, 2,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	100,
 	FONT_BEGIN, 4, 8,
 	FONT_NEXT, 4, 2,
@@ -1049,8 +1049,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 1, 6,
 	FONT_END, 4, 6,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	101,
 	FONT_BEGIN, 3, 2,
 	FONT_NEXT, 1, 2,
@@ -1062,8 +1062,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 3, 4,
 	FONT_END, 0, 4,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	102,
 	FONT_BEGIN, 1, 2,
 	FONT_NEXT, 1, 7,
@@ -1073,8 +1073,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 2, 5,
 	FONT_END, 0, 5,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	103,
 	FONT_BEGIN, 1, 0,
 	FONT_NEXT, 3, 0,
@@ -1087,8 +1087,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 1, 2,
 	FONT_END, 4, 2,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	104,
 	FONT_BEGIN, 0, 2,
 	FONT_END, 0, 8,
@@ -1097,16 +1097,16 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 4, 5,
 	FONT_END, 4, 2,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	105,
 	FONT_BEGIN, 2, 2,
 	FONT_END, 2, 5,
 	FONT_BEGIN, 2, 6,
 	FONT_END, 2, 7,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	106,
 	FONT_BEGIN, 0, 1,
 	FONT_NEXT, 1, 0,
@@ -1116,8 +1116,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 4, 6,
 	FONT_END, 4, 7,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	107,
 	FONT_BEGIN, 0, 2,
 	FONT_END, 0, 8,
@@ -1127,14 +1127,14 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 2, 4,
 	FONT_END, 4, 2,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	108,
 	FONT_BEGIN, 1, 2,
 	FONT_END, 1, 8,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	109,
 	FONT_BEGIN, 0, 2,
 	FONT_NEXT, 0, 6,
@@ -1146,8 +1146,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 2, 2,
 	FONT_END, 2, 5,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	110,
 	FONT_BEGIN, 0, 2,
 	FONT_NEXT, 0, 6,
@@ -1157,8 +1157,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 4, 5,
 	FONT_END, 4, 2,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	111,
 	FONT_BEGIN, 0, 3,
 	FONT_NEXT, 0, 5,
@@ -1170,8 +1170,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 1, 2,
 	FONT_END, 0, 3,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	112,
 	FONT_BEGIN, 0, 0,
 	FONT_NEXT, 0, 6,
@@ -1181,8 +1181,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 3, 2,
 	FONT_END, 0, 2,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	113,
 	FONT_BEGIN, 4, 2,
 	FONT_NEXT, 1, 2,
@@ -1193,8 +1193,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 4, 5,
 	FONT_END, 4, 0,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	114,
 	FONT_BEGIN, 0, 2,
 	FONT_END, 0, 6,
@@ -1203,8 +1203,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 3, 6,
 	FONT_END, 4, 5,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	115,
 	FONT_BEGIN, 0, 2,
 	FONT_NEXT, 3, 2,
@@ -1215,8 +1215,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 1, 6,
 	FONT_END, 4, 6,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	116,
 	FONT_BEGIN, 0, 6,
 	FONT_END, 4, 6,
@@ -1225,8 +1225,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 3, 2,
 	FONT_END, 4, 2,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	117,
 	FONT_BEGIN, 0, 6,
 	FONT_NEXT, 0, 3,
@@ -1235,8 +1235,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 4, 3,
 	FONT_END, 4, 6,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	118,
 	FONT_BEGIN, 0, 6,
 	FONT_NEXT, 0, 4,
@@ -1244,8 +1244,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 4, 4,
 	FONT_END, 4, 6,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	119,
 	FONT_BEGIN, 0, 6,
 	FONT_NEXT, 0, 3,
@@ -1255,16 +1255,16 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 4, 3,
 	FONT_END, 4, 6,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	120,
 	FONT_BEGIN, 0, 2,
 	FONT_END, 4, 6,
 	FONT_BEGIN, 0, 6,
 	FONT_END, 4, 2,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	121,
 	FONT_BEGIN, 0, 0,
 	FONT_NEXT, 4, 4,
@@ -1273,16 +1273,16 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 0, 4,
 	FONT_END, 2, 2,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	122,
 	FONT_BEGIN, 0, 6,
 	FONT_NEXT, 4, 6,
 	FONT_NEXT, 0, 2,
 	FONT_END, 4, 2,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	123,
 	FONT_BEGIN, 4, 9,
 	FONT_NEXT, 3, 8,
@@ -1292,14 +1292,14 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 3, 2,
 	FONT_END, 4, 1,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	124,
 	FONT_BEGIN, 2, 9,
 	FONT_END, 2, 0,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	125,
 	FONT_BEGIN, 2, 2,
 	FONT_NEXT, 2, 3,
@@ -1310,8 +1310,8 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 4, 5,
 	FONT_END, 2, 3,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	126,
 	FONT_BEGIN, 0, 9,
 	FONT_NEXT, 1, 8,
@@ -1321,18 +1321,18 @@ static GLint strokeFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 1, 2,
 	FONT_END, 0, 1,
 	FONT_ADVANCE, 6, 0
-    },
-    {
+	},
+	{
 	END_OF_LIST
-    }
+	}
 };
 
-static GLint outlineFont[][1+MAX_STROKES*3] = {
-    {
+static GLint outlineFont[][1 + MAX_STROKES * 3] = {
+	{
 	32,
 	FONT_ADVANCE, 250, 0
-    },
-    {
+	},
+	{
 	33,
 	FONT_BEGIN, 234, 559,
 	FONT_NEXT, 236, 605,
@@ -1365,8 +1365,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 148, 2,
 	FONT_END, 183, -9,
 	FONT_ADVANCE, 333, 0
-    },
-    {
+	},
+	{
 	34,
 	FONT_BEGIN, 308, 482,
 	FONT_NEXT, 318, 543,
@@ -1395,8 +1395,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 109, 431,
 	FONT_END, 130, 431,
 	FONT_ADVANCE, 408, 0
-    },
-    {
+	},
+	{
 	35,
 	FONT_BEGIN, 371, 271,
 	FONT_NEXT, 391, 405,
@@ -1431,8 +1431,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 200, 405,
 	FONT_END, 333, 405,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	36,
 	FONT_BEGIN, 425, 611,
 	FONT_NEXT, 387, 634,
@@ -1503,8 +1503,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 264, 28,
 	FONT_END, 264, 293,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	37,
 	FONT_BEGIN, 622, 365,
 	FONT_NEXT, 583, 349,
@@ -1602,8 +1602,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 228, 328,
 	FONT_END, 199, 323,
 	FONT_ADVANCE, 833, 0
-    },
-    {
+	},
+	{
 	38,
 	FONT_BEGIN, 287, 596,
 	FONT_NEXT, 304, 623,
@@ -1703,8 +1703,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 144, 125,
 	FONT_END, 134, 180,
 	FONT_ADVANCE, 778, 0
-    },
-    {
+	},
+	{
 	39,
 	FONT_BEGIN, 136, 450,
 	FONT_NEXT, 173, 483,
@@ -1730,8 +1730,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 97, 452,
 	FONT_END, 106, 433,
 	FONT_ADVANCE, 333, 0
-    },
-    {
+	},
+	{
 	40,
 	FONT_BEGIN, 239, 638,
 	FONT_NEXT, 191, 596,
@@ -1764,8 +1764,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 304, 660,
 	FONT_END, 295, 676,
 	FONT_ADVANCE, 333, 0
-    },
-    {
+	},
+	{
 	41,
 	FONT_BEGIN, 93, -140,
 	FONT_NEXT, 141, -98,
@@ -1798,8 +1798,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 29, -161,
 	FONT_END, 38, -177,
 	FONT_ADVANCE, 333, 0
-    },
-    {
+	},
+	{
 	42,
 	FONT_BEGIN, 76, 362,
 	FONT_NEXT, 103, 351,
@@ -1882,8 +1882,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 72, 402,
 	FONT_END, 69, 383,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	43,
 	FONT_BEGIN, 30, 286,
 	FONT_NEXT, 30, 220,
@@ -1898,8 +1898,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 249, 506,
 	FONT_END, 249, 286,
 	FONT_ADVANCE, 564, 0
-    },
-    {
+	},
+	{
 	44,
 	FONT_BEGIN, 113, -124,
 	FONT_NEXT, 150, -91,
@@ -1925,16 +1925,16 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 74, -122,
 	FONT_END, 83, -141,
 	FONT_ADVANCE, 250, 0
-    },
-    {
+	},
+	{
 	45,
 	FONT_BEGIN, 39, 194,
 	FONT_NEXT, 285, 194,
 	FONT_NEXT, 285, 257,
 	FONT_END, 39, 257,
 	FONT_ADVANCE, 333, 0
-    },
-    {
+	},
+	{
 	46,
 	FONT_BEGIN, 160, 2,
 	FONT_NEXT, 175, 18,
@@ -1951,16 +1951,16 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 89, 1,
 	FONT_END, 125, -11,
 	FONT_ADVANCE, 250, 0
-    },
-    {
+	},
+	{
 	47,
 	FONT_BEGIN, 220, 676,
 	FONT_NEXT, -9, -14,
 	FONT_NEXT, 59, -14,
 	FONT_END, 287, 676,
 	FONT_ADVANCE, 278, 0
-    },
-    {
+	},
+	{
 	48,
 	FONT_BEGIN, 292, 639,
 	FONT_NEXT, 324, 609,
@@ -2017,8 +2017,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 312, 666,
 	FONT_END, 250, 676,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	49,
 	FONT_BEGIN, 394, 0,
 	FONT_NEXT, 394, 15,
@@ -2043,8 +2043,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 118, 15,
 	FONT_END, 118, 0,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	50,
 	FONT_BEGIN, 462, 142,
 	FONT_NEXT, 435, 105,
@@ -2086,8 +2086,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 420, 0,
 	FONT_END, 475, 137,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	51,
 	FONT_BEGIN, 197, 330,
 	FONT_NEXT, 230, 326,
@@ -2153,8 +2153,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 152, 343,
 	FONT_END, 153, 330,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	52,
 	FONT_BEGIN, 370, 231,
 	FONT_NEXT, 370, 676,
@@ -2172,8 +2172,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 292, 571,
 	FONT_END, 292, 231,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	53,
 	FONT_BEGIN, 377, 583,
 	FONT_NEXT, 391, 584,
@@ -2222,8 +2222,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 139, 498,
 	FONT_END, 181, 583,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	54,
 	FONT_BEGIN, 358, 673,
 	FONT_NEXT, 279, 647,
@@ -2288,8 +2288,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 191, 375,
 	FONT_END, 242, 382,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	55,
 	FONT_BEGIN, 79, 662,
 	FONT_NEXT, 63, 618,
@@ -2305,8 +2305,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 449, 646,
 	FONT_END, 449, 662,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	56,
 	FONT_BEGIN, 285, 258,
 	FONT_NEXT, 333, 216,
@@ -2378,8 +2378,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 150, 492,
 	FONT_END, 136, 547,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	57,
 	FONT_BEGIN, 149, -9,
 	FONT_NEXT, 228, 20,
@@ -2445,8 +2445,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 362, 394,
 	FONT_END, 362, 355,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	58,
 	FONT_BEGIN, 171, 361,
 	FONT_NEXT, 186, 377,
@@ -2477,8 +2477,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 100, 1,
 	FONT_END, 136, -11,
 	FONT_ADVANCE, 278, 0
-    },
-    {
+	},
+	{
 	59,
 	FONT_BEGIN, 138, -123,
 	FONT_NEXT, 175, -90,
@@ -2519,8 +2519,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 100, 360,
 	FONT_END, 136, 348,
 	FONT_ADVANCE, 278, 0
-    },
-    {
+	},
+	{
 	60,
 	FONT_BEGIN, 111, 253,
 	FONT_NEXT, 536, 446,
@@ -2530,8 +2530,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 536, -8,
 	FONT_END, 536, 60,
 	FONT_ADVANCE, 564, 0
-    },
-    {
+	},
+	{
 	61,
 	FONT_BEGIN, 30, 386,
 	FONT_NEXT, 30, 320,
@@ -2542,8 +2542,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 534, 120,
 	FONT_END, 534, 186,
 	FONT_ADVANCE, 564, 0
-    },
-    {
+	},
+	{
 	62,
 	FONT_BEGIN, 28, -8,
 	FONT_NEXT, 536, 222,
@@ -2553,8 +2553,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 453, 253,
 	FONT_END, 28, 60,
 	FONT_ADVANCE, 564, 0
-    },
-    {
+	},
+	{
 	63,
 	FONT_BEGIN, 257, 220,
 	FONT_NEXT, 276, 267,
@@ -2613,8 +2613,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 202, 3,
 	FONT_END, 237, -8,
 	FONT_ADVANCE, 444, 0
-    },
-    {
+	},
+	{
 	64,
 	FONT_BEGIN, 554, 306,
 	FONT_NEXT, 524, 240,
@@ -2730,8 +2730,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 700, 43,
 	FONT_END, 688, 73,
 	FONT_ADVANCE, 921, 0
-    },
-    {
+	},
+	{
 	65,
 	FONT_BEGIN, 677, 23,
 	FONT_NEXT, 656, 36,
@@ -2766,8 +2766,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 447, 257,
 	FONT_END, 216, 257,
 	FONT_ADVANCE, 722, 0
-    },
-    {
+	},
+	{
 	66,
 	FONT_BEGIN, 66, 637,
 	FONT_NEXT, 95, 624,
@@ -2842,8 +2842,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 215, 365,
 	FONT_END, 215, 595,
 	FONT_ADVANCE, 667, 0
-    },
-    {
+	},
+	{
 	67,
 	FONT_BEGIN, 611, 676,
 	FONT_NEXT, 590, 676,
@@ -2905,8 +2905,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 597, 451,
 	FONT_END, 620, 451,
 	FONT_ADVANCE, 667, 0
-    },
-    {
+	},
+	{
 	68,
 	FONT_BEGIN, 300, 0,
 	FONT_NEXT, 404, 8,
@@ -2963,8 +2963,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 206, 78,
 	FONT_END, 206, 586,
 	FONT_ADVANCE, 722, 0
-    },
-    {
+	},
+	{
 	69,
 	FONT_BEGIN, 569, 169,
 	FONT_NEXT, 533, 105,
@@ -3017,8 +3017,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 552, 0,
 	FONT_END, 597, 169,
 	FONT_ADVANCE, 611, 0
-    },
-    {
+	},
+	{
 	70,
 	FONT_BEGIN, 479, 463,
 	FONT_NEXT, 456, 463,
@@ -3064,8 +3064,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 456, 231,
 	FONT_END, 479, 231,
 	FONT_ADVANCE, 556, 0
-    },
-    {
+	},
+	{
 	71,
 	FONT_BEGIN, 454, 354,
 	FONT_NEXT, 454, 336,
@@ -3136,8 +3136,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 709, 336,
 	FONT_END, 709, 354,
 	FONT_ADVANCE, 722, 0
-    },
-    {
+	},
+	{
 	72,
 	FONT_BEGIN, 297, 0,
 	FONT_NEXT, 297, 19,
@@ -3192,8 +3192,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 19, 19,
 	FONT_END, 19, 0,
 	FONT_ADVANCE, 722, 0
-    },
-    {
+	},
+	{
 	73,
 	FONT_BEGIN, 315, 0,
 	FONT_NEXT, 315, 19,
@@ -3220,8 +3220,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 18, 19,
 	FONT_END, 18, 0,
 	FONT_ADVANCE, 333, 0
-    },
-    {
+	},
+	{
 	74,
 	FONT_BEGIN, 281, 597,
 	FONT_NEXT, 294, 623,
@@ -3260,8 +3260,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 278, 183,
 	FONT_END, 278, 553,
 	FONT_ADVANCE, 389, 0
-    },
-    {
+	},
+	{
 	75,
 	FONT_BEGIN, 444, 641,
 	FONT_NEXT, 465, 636,
@@ -3327,8 +3327,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 413, 662,
 	FONT_END, 413, 643,
 	FONT_ADVANCE, 722, 0
-    },
-    {
+	},
+	{
 	76,
 	FONT_BEGIN, 12, 662,
 	FONT_NEXT, 12, 643,
@@ -3362,8 +3362,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 294, 643,
 	FONT_END, 294, 662,
 	FONT_ADVANCE, 611, 0
-    },
-    {
+	},
+	{
 	77,
 	FONT_BEGIN, 664, 662,
 	FONT_NEXT, 443, 157,
@@ -3412,8 +3412,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 863, 643,
 	FONT_END, 863, 662,
 	FONT_ADVANCE, 889, 0
-    },
-    {
+	},
+	{
 	78,
 	FONT_BEGIN, 472, 662,
 	FONT_NEXT, 472, 643,
@@ -3455,8 +3455,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 707, 643,
 	FONT_END, 707, 662,
 	FONT_ADVANCE, 722, 0
-    },
-    {
+	},
+	{
 	79,
 	FONT_BEGIN, 427, -8,
 	FONT_NEXT, 488, 9,
@@ -3523,8 +3523,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 402, 26,
 	FONT_END, 361, 22,
 	FONT_ADVANCE, 722, 0
-    },
-    {
+	},
+	{
 	80,
 	FONT_BEGIN, 59, 635,
 	FONT_NEXT, 85, 622,
@@ -3578,8 +3578,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 202, 331,
 	FONT_END, 202, 591,
 	FONT_ADVANCE, 556, 0
-    },
-    {
+	},
+	{
 	81,
 	FONT_BEGIN, 638, -153,
 	FONT_NEXT, 586, -138,
@@ -3656,8 +3656,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 322, 636,
 	FONT_END, 361, 640,
 	FONT_ADVANCE, 722, 0
-    },
-    {
+	},
+	{
 	82,
 	FONT_BEGIN, 608, 33,
 	FONT_NEXT, 572, 66,
@@ -3715,8 +3715,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 204, 343,
 	FONT_END, 204, 589,
 	FONT_ADVANCE, 667, 0
-    },
-    {
+	},
+	{
 	83,
 	FONT_BEGIN, 426, 676,
 	FONT_NEXT, 418, 654,
@@ -3783,8 +3783,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 469, 463,
 	FONT_END, 447, 676,
 	FONT_ADVANCE, 556, 0
-    },
-    {
+	},
+	{
 	84,
 	FONT_BEGIN, 401, 24,
 	FONT_NEXT, 372, 39,
@@ -3815,8 +3815,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 452, 0,
 	FONT_END, 452, 19,
 	FONT_ADVANCE, 611, 0
-    },
-    {
+	},
+	{
 	85,
 	FONT_BEGIN, 473, 662,
 	FONT_NEXT, 473, 643,
@@ -3873,8 +3873,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 705, 643,
 	FONT_END, 705, 662,
 	FONT_ADVANCE, 722, 0
-    },
-    {
+	},
+	{
 	86,
 	FONT_BEGIN, 492, 662,
 	FONT_NEXT, 492, 643,
@@ -3909,8 +3909,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 697, 643,
 	FONT_END, 697, 662,
 	FONT_ADVANCE, 722, 0
-    },
-    {
+	},
+	{
 	87,
 	FONT_BEGIN, 734, 662,
 	FONT_NEXT, 734, 643,
@@ -3965,8 +3965,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 932, 643,
 	FONT_END, 932, 662,
 	FONT_ADVANCE, 944, 0
-    },
-    {
+	},
+	{
 	88,
 	FONT_BEGIN, 458, 662,
 	FONT_NEXT, 458, 643,
@@ -4034,8 +4034,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 696, 643,
 	FONT_END, 696, 662,
 	FONT_ADVANCE, 722, 0
-    },
-    {
+	},
+	{
 	89,
 	FONT_BEGIN, 484, 662,
 	FONT_NEXT, 484, 643,
@@ -4082,8 +4082,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 703, 643,
 	FONT_END, 703, 662,
 	FONT_ADVANCE, 722, 0
-    },
-    {
+	},
+	{
 	90,
 	FONT_BEGIN, 556, 123,
 	FONT_NEXT, 528, 79,
@@ -4109,8 +4109,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 597, 176,
 	FONT_END, 574, 176,
 	FONT_ADVANCE, 611, 0
-    },
-    {
+	},
+	{
 	91,
 	FONT_BEGIN, 299, 662,
 	FONT_NEXT, 88, 662,
@@ -4127,16 +4127,16 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 209, 637,
 	FONT_END, 299, 637,
 	FONT_ADVANCE, 333, 0
-    },
-    {
+	},
+	{
 	92,
 	FONT_BEGIN, 219, -14,
 	FONT_NEXT, 287, -14,
 	FONT_NEXT, 58, 676,
 	FONT_END, -9, 676,
 	FONT_ADVANCE, 278, 0
-    },
-    {
+	},
+	{
 	93,
 	FONT_BEGIN, 34, -156,
 	FONT_NEXT, 245, -156,
@@ -4153,8 +4153,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 124, -131,
 	FONT_END, 34, -131,
 	FONT_ADVANCE, 333, 0
-    },
-    {
+	},
+	{
 	94,
 	FONT_BEGIN, 235, 586,
 	FONT_NEXT, 378, 297,
@@ -4164,16 +4164,16 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 24, 297,
 	FONT_END, 92, 297,
 	FONT_ADVANCE, 469, 0
-    },
-    {
+	},
+	{
 	95,
 	FONT_BEGIN, 500, -75,
 	FONT_NEXT, 0, -75,
 	FONT_NEXT, 0, -125,
 	FONT_END, 500, -125,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	96,
 	FONT_BEGIN, 196, 658,
 	FONT_NEXT, 159, 625,
@@ -4199,8 +4199,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 236, 657,
 	FONT_END, 227, 676,
 	FONT_ADVANCE, 333, 0
-    },
-    {
+	},
+	{
 	97,
 	FONT_BEGIN, 281, 88,
 	FONT_NEXT, 271, 77,
@@ -4271,8 +4271,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 442, 40,
 	FONT_END, 442, 66,
 	FONT_ADVANCE, 444, 0
-    },
-    {
+	},
+	{
 	98,
 	FONT_BEGIN, 165, 357,
 	FONT_NEXT, 192, 380,
@@ -4327,8 +4327,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 69, 573,
 	FONT_END, 69, 54,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	99,
 	FONT_BEGIN, 340, 89,
 	FONT_NEXT, 302, 69,
@@ -4375,8 +4375,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 412, 147,
 	FONT_END, 398, 156,
 	FONT_ADVANCE, 444, 0
-    },
-    {
+	},
+	{
 	100,
 	FONT_BEGIN, 328, 77,
 	FONT_NEXT, 308, 58,
@@ -4436,8 +4436,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 491, 42,
 	FONT_END, 491, 58,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	101,
 	FONT_BEGIN, 386, 131,
 	FONT_NEXT, 355, 97,
@@ -4486,8 +4486,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 303, 309,
 	FONT_END, 97, 309,
 	FONT_ADVANCE, 444, 0
-    },
-    {
+	},
+	{
 	102,
 	FONT_BEGIN, 186, 450,
 	FONT_NEXT, 186, 566,
@@ -4528,8 +4528,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 309, 418,
 	FONT_END, 309, 450,
 	FONT_ADVANCE, 333, 0
-    },
-    {
+	},
+	{
 	103,
 	FONT_BEGIN, 110, -49,
 	FONT_NEXT, 147, -2,
@@ -4625,8 +4625,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 387, 388,
 	FONT_END, 470, 388,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	104,
 	FONT_BEGIN, 456, 22,
 	FONT_NEXT, 438, 34,
@@ -4681,8 +4681,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 487, 0,
 	FONT_END, 487, 15,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	105,
 	FONT_BEGIN, 253, 0,
 	FONT_NEXT, 253, 15,
@@ -4718,8 +4718,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 89, 664,
 	FONT_END, 78, 632,
 	FONT_ADVANCE, 278, 0
-    },
-    {
+	},
+	{
 	106,
 	FONT_BEGIN, 108, -102,
 	FONT_NEXT, 102, -146,
@@ -4761,8 +4761,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 103, 664,
 	FONT_END, 92, 632,
 	FONT_ADVANCE, 278, 0
-    },
-    {
+	},
+	{
 	107,
 	FONT_BEGIN, 241, 0,
 	FONT_NEXT, 241, 15,
@@ -4819,8 +4819,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 7, 15,
 	FONT_END, 7, 0,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	108,
 	FONT_BEGIN, 257, 0,
 	FONT_NEXT, 257, 15,
@@ -4844,8 +4844,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 21, 15,
 	FONT_END, 21, 0,
 	FONT_ADVANCE, 278, 0
-    },
-    {
+	},
+	{
 	109,
 	FONT_BEGIN, 80, 45,
 	FONT_NEXT, 66, 25,
@@ -4924,8 +4924,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 86, 338,
 	FONT_END, 86, 85,
 	FONT_ADVANCE, 778, 0
-    },
-    {
+	},
+	{
 	110,
 	FONT_BEGIN, 76, 53,
 	FONT_NEXT, 66, 31,
@@ -4976,8 +4976,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 80, 338,
 	FONT_END, 80, 90,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	111,
 	FONT_BEGIN, 197, 455,
 	FONT_NEXT, 154, 441,
@@ -5031,8 +5031,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 301, 26,
 	FONT_END, 262, 18,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	112,
 	FONT_BEGIN, 73, -160,
 	FONT_NEXT, 64, -180,
@@ -5097,8 +5097,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 159, 88,
 	FONT_END, 159, 334,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	113,
 	FONT_BEGIN, 308, 450,
 	FONT_NEXT, 247, 460,
@@ -5157,8 +5157,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 341, 333,
 	FONT_END, 341, 127,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	114,
 	FONT_BEGIN, 72, 51,
 	FONT_NEXT, 61, 32,
@@ -5200,8 +5200,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 76, 334,
 	FONT_END, 76, 84,
 	FONT_ADVANCE, 333, 0
-    },
-    {
+	},
+	{
 	115,
 	FONT_BEGIN, 311, 451,
 	FONT_NEXT, 300, 451,
@@ -5256,8 +5256,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 300, 314,
 	FONT_END, 315, 314,
 	FONT_ADVANCE, 389, 0
-    },
-    {
+	},
+	{
 	116,
 	FONT_BEGIN, 154, 450,
 	FONT_NEXT, 154, 566,
@@ -5288,8 +5288,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 255, 418,
 	FONT_END, 255, 450,
 	FONT_ADVANCE, 278, 0
-    },
-    {
+	},
+	{
 	117,
 	FONT_BEGIN, 444, 53,
 	FONT_NEXT, 425, 64,
@@ -5333,8 +5333,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 479, 36,
 	FONT_END, 479, 50,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	118,
 	FONT_BEGIN, 338, 450,
 	FONT_NEXT, 338, 435,
@@ -5372,8 +5372,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 477, 435,
 	FONT_END, 477, 450,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	119,
 	FONT_BEGIN, 571, 435,
 	FONT_NEXT, 602, 425,
@@ -5431,8 +5431,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 694, 450,
 	FONT_END, 571, 450,
 	FONT_ADVANCE, 722, 0
-    },
-    {
+	},
+	{
 	120,
 	FONT_BEGIN, 311, 60,
 	FONT_NEXT, 318, 41,
@@ -5485,8 +5485,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 221, 197,
 	FONT_END, 302, 73,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	121,
 	FONT_BEGIN, 340, 450,
 	FONT_NEXT, 340, 435,
@@ -5535,8 +5535,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 475, 435,
 	FONT_END, 475, 450,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	122,
 	FONT_BEGIN, 400, 139,
 	FONT_NEXT, 388, 89,
@@ -5560,8 +5560,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 404, 0,
 	FONT_END, 418, 135,
 	FONT_ADVANCE, 444, 0
-    },
-    {
+	},
+	{
 	123,
 	FONT_BEGIN, 187, -82,
 	FONT_NEXT, 196, -114,
@@ -5607,16 +5607,16 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 185, 136,
 	FONT_END, 185, -41,
 	FONT_ADVANCE, 480, 0
-    },
-    {
+	},
+	{
 	124,
 	FONT_BEGIN, 133, -14,
 	FONT_NEXT, 133, 676,
 	FONT_NEXT, 67, 676,
 	FONT_END, 67, -14,
 	FONT_ADVANCE, 200, 0
-    },
-    {
+	},
+	{
 	125,
 	FONT_BEGIN, 292, 580,
 	FONT_NEXT, 283, 612,
@@ -5662,8 +5662,8 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 295, 363,
 	FONT_END, 295, 540,
 	FONT_ADVANCE, 480, 0
-    },
-    {
+	},
+	{
 	126,
 	FONT_BEGIN, 428, 273,
 	FONT_NEXT, 405, 257,
@@ -5688,18 +5688,18 @@ static GLint outlineFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 502, 273,
 	FONT_END, 466, 323,
 	FONT_ADVANCE, 541, 0
-    },
-    {
+	},
+	{
 	END_OF_LIST
-    }
+	}
 };
 
-static GLint filledFont[][1+MAX_STROKES*3] = {
-    {
+static GLint filledFont[][1 + MAX_STROKES * 3] = {
+	{
 	32,
 	FONT_ADVANCE, 250, 0
-    },
-    {
+	},
+	{
 	33,
 	FONT_BEGIN, 236, 605,
 	FONT_NEXT, 234, 559,
@@ -5750,8 +5750,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 134, 63,
 	FONT_END, 130, 42,
 	FONT_ADVANCE, 333, 0
-    },
-    {
+	},
+	{
 	34,
 	FONT_BEGIN, 162, 635,
 	FONT_NEXT, 158, 599,
@@ -5792,8 +5792,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 246, 635,
 	FONT_END, 249, 599,
 	FONT_ADVANCE, 408, 0
-    },
-    {
+	},
+	{
 	35,
 	FONT_BEGIN, 32, 405,
 	FONT_NEXT, 32, 460,
@@ -5856,8 +5856,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 371, 271,
 	FONT_END, 362, 216,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	36,
 	FONT_BEGIN, 264, 727,
 	FONT_NEXT, 264, 664,
@@ -5984,8 +5984,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 55, 476,
 	FONT_END, 52, 511,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	37,
 	FONT_BEGIN, 102, 319,
 	FONT_NEXT, 137, 397,
@@ -6145,8 +6145,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 746, 254,
 	FONT_END, 757, 173,
 	FONT_ADVANCE, 833, 0
-    },
-    {
+	},
+	{
 	38,
 	FONT_BEGIN, 42, 144,
 	FONT_NEXT, 57, 215,
@@ -6304,8 +6304,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 491, 150,
 	FONT_END, 456, 51,
 	FONT_ADVANCE, 778, 0
-    },
-    {
+	},
+	{
 	39,
 	FONT_BEGIN, 106, 433,
 	FONT_NEXT, 97, 452,
@@ -6345,8 +6345,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 208, 630,
 	FONT_END, 186, 659,
 	FONT_ADVANCE, 333, 0
-    },
-    {
+	},
+	{
 	40,
 	FONT_BEGIN, 48, 262,
 	FONT_NEXT, 52, 325,
@@ -6399,8 +6399,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 134, 269,
 	FONT_END, 134, 225,
 	FONT_ADVANCE, 333, 0
-    },
-    {
+	},
+	{
 	41,
 	FONT_BEGIN, 29, -161,
 	FONT_NEXT, 86, -111,
@@ -6453,8 +6453,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 219, 0,
 	FONT_END, 203, 519,
 	FONT_ADVANCE, 333, 0
-    },
-    {
+	},
+	{
 	42,
 	FONT_BEGIN, 69, 557,
 	FONT_NEXT, 75, 576,
@@ -6599,8 +6599,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 267, 453,
 	FONT_END, 268, 470,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	43,
 	FONT_BEGIN, 315, 506,
 	FONT_NEXT, 315, 286,
@@ -6621,8 +6621,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 315, 286,
 	FONT_END, 315, 220,
 	FONT_ADVANCE, 564, 0
-    },
-    {
+	},
+	{
 	44,
 	FONT_BEGIN, 83, -141,
 	FONT_NEXT, 74, -122,
@@ -6662,16 +6662,16 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 185, 56,
 	FONT_END, 163, 85,
 	FONT_ADVANCE, 250, 0
-    },
-    {
+	},
+	{
 	45,
 	FONT_BEGIN, 285, 257,
 	FONT_NEXT, 285, 194,
 	FONT_NEXT, 39, 257,
 	FONT_END, 39, 194,
 	FONT_ADVANCE, 333, 0
-    },
-    {
+	},
+	{
 	46,
 	FONT_BEGIN, 181, 43,
 	FONT_NEXT, 175, 18,
@@ -6696,16 +6696,16 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 74, 65,
 	FONT_END, 70, 43,
 	FONT_ADVANCE, 250, 0
-    },
-    {
+	},
+	{
 	47,
 	FONT_BEGIN, 287, 676,
 	FONT_NEXT, 59, -14,
 	FONT_NEXT, 220, 676,
 	FONT_END, -9, -14,
 	FONT_ADVANCE, 278, 0
-    },
-    {
+	},
+	{
 	48,
 	FONT_BEGIN, 476, 331,
 	FONT_NEXT, 466, 226,
@@ -6804,8 +6804,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 379, 364,
 	FONT_END, 377, 409,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	49,
 	FONT_BEGIN, 299, 674,
 	FONT_NEXT, 299, 74,
@@ -6848,8 +6848,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 118, 0,
 	FONT_END, 187, 27,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	50,
 	FONT_BEGIN, 475, 137,
 	FONT_NEXT, 420, 0,
@@ -6913,8 +6913,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 367, 628,
 	FONT_END, 334, 295,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	51,
 	FONT_BEGIN, 153, 330,
 	FONT_NEXT, 152, 343,
@@ -7014,8 +7014,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 346, 433,
 	FONT_END, 319, 660,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	52,
 	FONT_BEGIN, 292, 571,
 	FONT_NEXT, 293, 167,
@@ -7045,8 +7045,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 370, 231,
 	FONT_END, 370, 167,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	53,
 	FONT_BEGIN, 64, 415,
 	FONT_NEXT, 65, 425,
@@ -7129,8 +7129,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 372, 395,
 	FONT_END, 351, 55,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	54,
 	FONT_BEGIN, 448, 668,
 	FONT_NEXT, 384, 652,
@@ -7247,8 +7247,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 378, 179,
 	FONT_END, 399, 40,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	55,
 	FONT_BEGIN, 449, 662,
 	FONT_NEXT, 449, 646,
@@ -7274,8 +7274,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 153, 588,
 	FONT_END, 370, 588,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	56,
 	FONT_BEGIN, 136, 547,
 	FONT_NEXT, 150, 492,
@@ -7417,8 +7417,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 378, 633,
 	FONT_END, 377, 428,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	57,
 	FONT_BEGIN, 459, 396,
 	FONT_NEXT, 452, 317,
@@ -7534,8 +7534,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 122, 473,
 	FONT_END, 94, 278,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	58,
 	FONT_BEGIN, 192, 43,
 	FONT_NEXT, 186, 18,
@@ -7582,8 +7582,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 85, 424,
 	FONT_END, 81, 402,
 	FONT_ADVANCE, 278, 0
-    },
-    {
+	},
+	{
 	59,
 	FONT_BEGIN, 107, -141,
 	FONT_NEXT, 98, -122,
@@ -7648,8 +7648,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 85, 424,
 	FONT_END, 81, 402,
 	FONT_ADVANCE, 278, 0
-    },
-    {
+	},
+	{
 	60,
 	FONT_BEGIN, 536, 514,
 	FONT_NEXT, 536, 446,
@@ -7663,8 +7663,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 536, -8,
 	FONT_END, 536, 60,
 	FONT_ADVANCE, 564, 0
-    },
-    {
+	},
+	{
 	61,
 	FONT_BEGIN, 534, 186,
 	FONT_NEXT, 534, 120,
@@ -7675,8 +7675,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 30, 386,
 	FONT_END, 30, 320,
 	FONT_ADVANCE, 564, 0
-    },
-    {
+	},
+	{
 	62,
 	FONT_BEGIN, 28, 446,
 	FONT_NEXT, 28, 514,
@@ -7690,8 +7690,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 28, 514,
 	FONT_END, 536, 284,
 	FONT_ADVANCE, 564, 0
-    },
-    {
+	},
+	{
 	63,
 	FONT_BEGIN, 68, 532,
 	FONT_NEXT, 72, 567,
@@ -7784,8 +7784,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 188, 64,
 	FONT_END, 184, 43,
 	FONT_ADVANCE, 444, 0
-    },
-    {
+	},
+	{
 	64,
 	FONT_BEGIN, 321, 268,
 	FONT_NEXT, 323, 298,
@@ -7989,8 +7989,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 572, 399,
 	FONT_END, 581, 152,
 	FONT_ADVANCE, 921, 0
-    },
-    {
+	},
+	{
 	65,
 	FONT_BEGIN, 451, 19,
 	FONT_NEXT, 499, 24,
@@ -8055,8 +8055,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 152, 36,
 	FONT_END, 145, 61,
 	FONT_ADVANCE, 722, 0
-    },
-    {
+	},
+	{
 	66,
 	FONT_BEGIN, 17, 19,
 	FONT_NEXT, 67, 23,
@@ -8191,8 +8191,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 488, 327,
 	FONT_END, 482, 22,
 	FONT_ADVANCE, 667, 0
-    },
-    {
+	},
+	{
 	67,
 	FONT_BEGIN, 620, 451,
 	FONT_NEXT, 597, 451,
@@ -8300,8 +8300,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 149, 255,
 	FONT_END, 144, 329,
 	FONT_ADVANCE, 667, 0
-    },
-    {
+	},
+	{
 	68,
 	FONT_BEGIN, 16, 643,
 	FONT_NEXT, 16, 662,
@@ -8394,8 +8394,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 607, 114,
 	FONT_END, 576, 328,
 	FONT_ADVANCE, 722, 0
-    },
-    {
+	},
+	{
 	69,
 	FONT_BEGIN, 12, 19,
 	FONT_NEXT, 52, 23,
@@ -8488,8 +8488,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 203, 609,
 	FONT_END, 201, 590,
 	FONT_ADVANCE, 611, 0
-    },
-    {
+	},
+	{
 	70,
 	FONT_BEGIN, 12, 643,
 	FONT_NEXT, 12, 662,
@@ -8565,8 +8565,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 219, 37,
 	FONT_END, 205, 63,
 	FONT_ADVANCE, 556, 0
-    },
-    {
+	},
+	{
 	71,
 	FONT_BEGIN, 630, 465,
 	FONT_NEXT, 607, 465,
@@ -8697,8 +8697,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 657, 322,
 	FONT_END, 643, 300,
 	FONT_ADVANCE, 722, 0
-    },
-    {
+	},
+	{
 	72,
 	FONT_BEGIN, 19, 643,
 	FONT_NEXT, 19, 662,
@@ -8795,8 +8795,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 223, 41,
 	FONT_END, 211, 67,
 	FONT_ADVANCE, 722, 0
-    },
-    {
+	},
+	{
 	73,
 	FONT_BEGIN, 18, 643,
 	FONT_NEXT, 18, 662,
@@ -8841,8 +8841,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 238, 35,
 	FONT_END, 221, 62,
 	FONT_ADVANCE, 333, 0
-    },
-    {
+	},
+	{
 	74,
 	FONT_BEGIN, 83, 643,
 	FONT_NEXT, 83, 662,
@@ -8909,8 +8909,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 294, 623,
 	FONT_END, 281, 597,
 	FONT_ADVANCE, 389, 0
-    },
-    {
+	},
+	{
 	75,
 	FONT_BEGIN, 34, 643,
 	FONT_NEXT, 34, 662,
@@ -9034,8 +9034,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 241, 39,
 	FONT_END, 229, 65,
 	FONT_ADVANCE, 722, 0
-    },
-    {
+	},
+	{
 	76,
 	FONT_BEGIN, 12, 19,
 	FONT_NEXT, 52, 23,
@@ -9099,8 +9099,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 222, 626,
 	FONT_END, 205, 599,
 	FONT_ADVANCE, 611, 0
-    },
-    {
+	},
+	{
 	77,
 	FONT_BEGIN, 14, 643,
 	FONT_NEXT, 14, 662,
@@ -9201,8 +9201,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 12, 0,
 	FONT_END, 172, 45,
 	FONT_ADVANCE, 889, 0
-    },
-    {
+	},
+	{
 	78,
 	FONT_BEGIN, 12, 643,
 	FONT_NEXT, 12, 662,
@@ -9284,8 +9284,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 12, 0,
 	FONT_END, 172, 45,
 	FONT_ADVANCE, 722, 0
-    },
-    {
+	},
+	{
 	79,
 	FONT_BEGIN, 148, 331,
 	FONT_NEXT, 152, 254,
@@ -9384,8 +9384,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 592, 78,
 	FONT_END, 586, 589,
 	FONT_ADVANCE, 722, 0
-    },
-    {
+	},
+	{
 	80,
 	FONT_BEGIN, 16, 643,
 	FONT_NEXT, 16, 662,
@@ -9487,8 +9487,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 220, 37,
 	FONT_END, 205, 64,
 	FONT_ADVANCE, 556, 0
-    },
-    {
+	},
+	{
 	81,
 	FONT_BEGIN, 34, 330,
 	FONT_NEXT, 41, 410,
@@ -9615,8 +9615,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 426, -7,
 	FONT_END, 379, -113,
 	FONT_ADVANCE, 722, 0
-    },
-    {
+	},
+	{
 	82,
 	FONT_BEGIN, 17, 643,
 	FONT_NEXT, 17, 662,
@@ -9722,8 +9722,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 219, 40,
 	FONT_END, 206, 67,
 	FONT_ADVANCE, 667, 0
-    },
-    {
+	},
+	{
 	83,
 	FONT_BEGIN, 71, 506,
 	FONT_NEXT, 75, 546,
@@ -9828,8 +9828,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 409, 20,
 	FONT_END, 385, 336,
 	FONT_ADVANCE, 556, 0
-    },
-    {
+	},
+	{
 	84,
 	FONT_BEGIN, 17, 492,
 	FONT_NEXT, 23, 662,
@@ -9886,8 +9886,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 372, 39,
 	FONT_END, 359, 66,
 	FONT_ADVANCE, 611, 0
-    },
-    {
+	},
+	{
 	85,
 	FONT_BEGIN, 14, 643,
 	FONT_NEXT, 14, 662,
@@ -9994,8 +9994,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 657, 634,
 	FONT_END, 629, 615,
 	FONT_ADVANCE, 722, 0
-    },
-    {
+	},
+	{
 	86,
 	FONT_BEGIN, 282, 662,
 	FONT_NEXT, 282, 643,
@@ -10060,8 +10060,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 644, 623,
 	FONT_END, 625, 596,
 	FONT_ADVANCE, 722, 0
-    },
-    {
+	},
+	{
 	87,
 	FONT_BEGIN, 125, 480,
 	FONT_NEXT, 108, 526,
@@ -10174,8 +10174,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 188, 625,
 	FONT_END, 185, 609,
 	FONT_ADVANCE, 944, 0
-    },
-    {
+	},
+	{
 	88,
 	FONT_BEGIN, 22, 643,
 	FONT_NEXT, 22, 662,
@@ -10303,8 +10303,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 173, 37,
 	FONT_END, 167, 56,
 	FONT_ADVANCE, 722, 0
-    },
-    {
+	},
+	{
 	89,
 	FONT_BEGIN, 302, 662,
 	FONT_NEXT, 302, 643,
@@ -10387,8 +10387,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 214, 0,
 	FONT_END, 271, 24,
 	FONT_ADVANCE, 722, 0
-    },
-    {
+	},
+	{
 	90,
 	FONT_BEGIN, 577, 662,
 	FONT_NEXT, 577, 647,
@@ -10440,8 +10440,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 446, 624,
 	FONT_END, 577, 647,
 	FONT_ADVANCE, 611, 0
-    },
-    {
+	},
+	{
 	91,
 	FONT_BEGIN, 299, 662,
 	FONT_NEXT, 299, 637,
@@ -10470,16 +10470,16 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 299, -156,
 	FONT_END, 299, -131,
 	FONT_ADVANCE, 333, 0
-    },
-    {
+	},
+	{
 	92,
 	FONT_BEGIN, 287, -14,
 	FONT_NEXT, 219, -14,
 	FONT_NEXT, 58, 676,
 	FONT_END, -9, 676,
 	FONT_ADVANCE, 278, 0
-    },
-    {
+	},
+	{
 	93,
 	FONT_BEGIN, 34, 637,
 	FONT_NEXT, 34, 662,
@@ -10506,8 +10506,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 124, -131,
 	FONT_END, 34, -131,
 	FONT_ADVANCE, 333, 0
-    },
-    {
+	},
+	{
 	94,
 	FONT_BEGIN, 446, 297,
 	FONT_NEXT, 378, 297,
@@ -10517,16 +10517,16 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 92, 297,
 	FONT_END, 24, 297,
 	FONT_ADVANCE, 469, 0
-    },
-    {
+	},
+	{
 	95,
 	FONT_BEGIN, 500, -75,
 	FONT_NEXT, 500, -125,
 	FONT_NEXT, 0, -75,
 	FONT_END, 0, -125,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	96,
 	FONT_BEGIN, 236, 657,
 	FONT_NEXT, 195, 625,
@@ -10566,8 +10566,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 158, 540,
 	FONT_END, 154, 551,
 	FONT_ADVANCE, 333, 0
-    },
-    {
+	},
+	{
 	97,
 	FONT_BEGIN, 56, 349,
 	FONT_NEXT, 65, 383,
@@ -10688,8 +10688,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 371, 65,
 	FONT_END, 368, 105,
 	FONT_ADVANCE, 444, 0
-    },
-    {
+	},
+	{
 	98,
 	FONT_BEGIN, 3, 623,
 	FONT_NEXT, 3, 639,
@@ -10796,8 +10796,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 399, 417,
 	FONT_END, 382, 44,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	99,
 	FONT_BEGIN, 25, 213,
 	FONT_NEXT, 30, 270,
@@ -10872,8 +10872,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 114, 174,
 	FONT_END, 102, 253,
 	FONT_ADVANCE, 444, 0
-    },
-    {
+	},
+	{
 	100,
 	FONT_BEGIN, 113, 247,
 	FONT_NEXT, 116, 195,
@@ -10975,8 +10975,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 419, 683,
 	FONT_END, 424, 681,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	101,
 	FONT_BEGIN, 424, 157,
 	FONT_NEXT, 417, 140,
@@ -11057,8 +11057,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 94, 277,
 	FONT_END, 405, 277,
 	FONT_ADVANCE, 444, 0
-    },
-    {
+	},
+	{
 	102,
 	FONT_BEGIN, 383, 622,
 	FONT_NEXT, 379, 603,
@@ -11127,8 +11127,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 199, 37,
 	FONT_END, 188, 64,
 	FONT_ADVANCE, 333, 0
-    },
-    {
+	},
+	{
 	103,
 	FONT_BEGIN, 69, 293,
 	FONT_NEXT, 73, 334,
@@ -11288,8 +11288,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 404, 328,
 	FONT_END, 406, 296,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	104,
 	FONT_BEGIN, 157, 680,
 	FONT_NEXT, 157, 378,
@@ -11386,8 +11386,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 9, 0,
 	FONT_END, 61, 33,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	105,
 	FONT_BEGIN, 179, 457,
 	FONT_NEXT, 179, 102,
@@ -11441,8 +11441,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 89, 599,
 	FONT_END, 78, 632,
 	FONT_ADVANCE, 278, 0
-    },
-    {
+	},
+	{
 	106,
 	FONT_BEGIN, 32, 390,
 	FONT_NEXT, 32, 406,
@@ -11502,8 +11502,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 103, 599,
 	FONT_END, 92, 632,
 	FONT_ADVANCE, 278, 0
-    },
-    {
+	},
+	{
 	107,
 	FONT_BEGIN, 166, 681,
 	FONT_NEXT, 166, 265,
@@ -11608,8 +11608,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 7, 0,
 	FONT_END, 69, 32,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	108,
 	FONT_BEGIN, 182, 681,
 	FONT_NEXT, 182, 84,
@@ -11651,8 +11651,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 21, 0,
 	FONT_END, 81, 31,
 	FONT_ADVANCE, 278, 0
-    },
-    {
+	},
+	{
 	109,
 	FONT_BEGIN, 166, 458,
 	FONT_NEXT, 166, 383,
@@ -11791,8 +11791,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 175, 38,
 	FONT_END, 170, 67,
 	FONT_ADVANCE, 778, 0
-    },
-    {
+	},
+	{
 	110,
 	FONT_BEGIN, 161, 458,
 	FONT_NEXT, 161, 379,
@@ -11879,8 +11879,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 167, 45,
 	FONT_END, 164, 67,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	111,
 	FONT_BEGIN, 470, 228,
 	FONT_NEXT, 456, 149,
@@ -11964,8 +11964,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 377, 150,
 	FONT_END, 380, 199,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	112,
 	FONT_BEGIN, 159, 458,
 	FONT_NEXT, 159, 385,
@@ -12086,8 +12086,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 162, -163,
 	FONT_END, 159, -124,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	113,
 	FONT_BEGIN, 110, 238,
 	FONT_NEXT, 117, 169,
@@ -12180,8 +12180,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_BEGIN, 428, -170,
 	FONT_END, 425, -141,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	114,
 	FONT_BEGIN, 160, 458,
 	FONT_NEXT, 160, 369,
@@ -12257,8 +12257,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 5, 0,
 	FONT_END, 61, 32,
 	FONT_ADVANCE, 333, 0
-    },
-    {
+	},
+	{
 	115,
 	FONT_BEGIN, 51, 338,
 	FONT_NEXT, 59, 380,
@@ -12347,8 +12347,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 299, 21,
 	FONT_END, 264, 237,
 	FONT_ADVANCE, 389, 0
-    },
-    {
+	},
+	{
 	116,
 	FONT_BEGIN, 13, 425,
 	FONT_NEXT, 26, 441,
@@ -12397,8 +12397,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 126, -5,
 	FONT_END, 154, 132,
 	FONT_ADVANCE, 278, 0
-    },
-    {
+	},
+	{
 	117,
 	FONT_BEGIN, 9, 436,
 	FONT_NEXT, 9, 450,
@@ -12468,8 +12468,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 300, 427,
 	FONT_END, 259, 433,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	118,
 	FONT_BEGIN, 215, 450,
 	FONT_NEXT, 215, 435,
@@ -12537,8 +12537,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 440, 417,
 	FONT_END, 427, 393,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	119,
 	FONT_BEGIN, 201, 450,
 	FONT_NEXT, 201, 435,
@@ -12652,8 +12652,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 571, 450,
 	FONT_END, 671, 419,
 	FONT_ADVANCE, 722, 0
-    },
-    {
+	},
+	{
 	120,
 	FONT_BEGIN, 24, 435,
 	FONT_NEXT, 24, 450,
@@ -12750,8 +12750,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 17, 0,
 	FONT_END, 122, 33,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	121,
 	FONT_BEGIN, 220, 450,
 	FONT_NEXT, 220, 435,
@@ -12842,8 +12842,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 241, 20,
 	FONT_END, 273, -18,
 	FONT_ADVANCE, 500, 0
-    },
-    {
+	},
+	{
 	122,
 	FONT_BEGIN, 403, 450,
 	FONT_NEXT, 403, 435,
@@ -12889,8 +12889,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 293, 420,
 	FONT_END, 403, 435,
 	FONT_ADVANCE, 444, 0
-    },
-    {
+	},
+	{
 	123,
 	FONT_BEGIN, 100, 250,
 	FONT_NEXT, 142, 266,
@@ -12976,16 +12976,16 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 263, -94,
 	FONT_END, 259, -47,
 	FONT_ADVANCE, 480, 0
-    },
-    {
+	},
+	{
 	124,
 	FONT_BEGIN, 133, 676,
 	FONT_NEXT, 133, -14,
 	FONT_NEXT, 67, 676,
 	FONT_END, 67, -14,
 	FONT_ADVANCE, 200, 0
-    },
-    {
+	},
+	{
 	125,
 	FONT_BEGIN, 130, 669,
 	FONT_NEXT, 130, 680,
@@ -13065,8 +13065,8 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 251, -157,
 	FONT_END, 221, -47,
 	FONT_ADVANCE, 480, 0
-    },
-    {
+	},
+	{
 	126,
 	FONT_BEGIN, 502, 273,
 	FONT_NEXT, 451, 214,
@@ -13107,610 +13107,619 @@ static GLint filledFont[][1+MAX_STROKES*3] = {
 	FONT_NEXT, 76, 183,
 	FONT_END, 40, 233,
 	FONT_ADVANCE, 541, 0
-    },
-    {
+	},
+	{
 	END_OF_LIST
-    }
+	}
 };
 
-static GLubyte bitmapFont[][1+13] = {
-    {
+static GLubyte bitmapFont[][1 + 13] = {
+	{
 	32,
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-    }, 
-    {
+	},
+	{
 	33,
 	0x00, 0x00, 0x18, 0x18, 0x00, 0x00, 0x18,
 	0x18, 0x18, 0x18, 0x18, 0x18, 0x18
-    }, 
-    {
+	},
+	{
 	34,
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 	0x00, 0x00, 0x36, 0x36, 0x36, 0x36
-    }, 
-    {
+	},
+	{
 	35,
 	0x00, 0x00, 0x00, 0x66, 0x66, 0xff, 0x66,
 	0x66, 0xff, 0x66, 0x66, 0x00, 0x00
-    }, 
-    {
+	},
+	{
 	36,
 	0x00, 0x00, 0x18, 0x7e, 0xff, 0x1b, 0x1f,
 	0x7e, 0xf8, 0xd8, 0xff, 0x7e, 0x18
-    }, 
-    {
+	},
+	{
 	37,
 	0x00, 0x00, 0x0e, 0x1b, 0xdb, 0x6e, 0x30,
 	0x18, 0x0c, 0x76, 0xdb, 0xd8, 0x70
-    }, 
-    {
+	},
+	{
 	38,
 	0x00, 0x00, 0x7f, 0xc6, 0xcf, 0xd8, 0x70,
 	0x70, 0xd8, 0xcc, 0xcc, 0x6c, 0x38
-    }, 
-    {
+	},
+	{
 	39,
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 	0x00, 0x00, 0x18, 0x1c, 0x0c, 0x0e
-    }, 
-    {
+	},
+	{
 	40,
 	0x00, 0x00, 0x0c, 0x18, 0x30, 0x30, 0x30,
 	0x30, 0x30, 0x30, 0x30, 0x18, 0x0c
-    }, 
-    {
+	},
+	{
 	41,
 	0x00, 0x00, 0x30, 0x18, 0x0c, 0x0c, 0x0c,
 	0x0c, 0x0c, 0x0c, 0x0c, 0x18, 0x30
-    }, 
-    {
+	},
+	{
 	42,
 	0x00, 0x00, 0x00, 0x00, 0x99, 0x5a, 0x3c,
 	0xff, 0x3c, 0x5a, 0x99, 0x00, 0x00
-    }, 
-    {
+	},
+	{
 	43,
 	0x00, 0x00, 0x00, 0x18, 0x18, 0x18, 0xff,
 	0xff, 0x18, 0x18, 0x18, 0x00, 0x00
-    }, 
-    {
+	},
+	{
 	44,
 	0x00, 0x00, 0x30, 0x18, 0x1c, 0x1c, 0x00,
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-    }, 
-    {
+	},
+	{
 	45,
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff,
 	0xff, 0x00, 0x00, 0x00, 0x00, 0x00
-    }, 
-    {
+	},
+	{
 	46,
 	0x00, 0x00, 0x00, 0x38, 0x38, 0x00, 0x00,
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-    }, 
-    {
+	},
+	{
 	47,
 	0x00, 0x60, 0x60, 0x30, 0x30, 0x18, 0x18,
 	0x0c, 0x0c, 0x06, 0x06, 0x03, 0x03
-    }, 
-    {
+	},
+	{
 	48,
 	0x00, 0x00, 0x3c, 0x66, 0xc3, 0xe3, 0xf3,
 	0xdb, 0xcf, 0xc7, 0xc3, 0x66, 0x3c
-    }, 
-    {
+	},
+	{
 	49,
 	0x00, 0x00, 0x7e, 0x18, 0x18, 0x18, 0x18,
 	0x18, 0x18, 0x18, 0x78, 0x38, 0x18
-    }, 
-    {
+	},
+	{
 	50,
 	0x00, 0x00, 0xff, 0xc0, 0xc0, 0x60, 0x30,
 	0x18, 0x0c, 0x06, 0x03, 0xe7, 0x7e
-    }, 
-    {
+	},
+	{
 	51,
 	0x00, 0x00, 0x7e, 0xe7, 0x03, 0x03, 0x07,
 	0x7e, 0x07, 0x03, 0x03, 0xe7, 0x7e
-    }, 
-    {
+	},
+	{
 	52,
 	0x00, 0x00, 0x0c, 0x0c, 0x0c, 0x0c, 0x0c,
 	0xff, 0xcc, 0x6c, 0x3c, 0x1c, 0x0c
-    }, 
-    {
+	},
+	{
 	53,
 	0x00, 0x00, 0x7e, 0xe7, 0x03, 0x03, 0x07,
 	0xfe, 0xc0, 0xc0, 0xc0, 0xc0, 0xff
-    }, 
-    {
+	},
+	{
 	54,
 	0x00, 0x00, 0x7e, 0xe7, 0xc3, 0xc3, 0xc7,
 	0xfe, 0xc0, 0xc0, 0xc0, 0xe7, 0x7e
-    }, 
-    {
+	},
+	{
 	55,
 	0x00, 0x00, 0x30, 0x30, 0x30, 0x30, 0x18,
 	0x0c, 0x06, 0x03, 0x03, 0x03, 0xff
-    }, 
-    {
+	},
+	{
 	56,
 	0x00, 0x00, 0x7e, 0xe7, 0xc3, 0xc3, 0xe7,
 	0x7e, 0xe7, 0xc3, 0xc3, 0xe7, 0x7e
-    }, 
-    {
+	},
+	{
 	57,
 	0x00, 0x00, 0x7e, 0xe7, 0x03, 0x03, 0x03,
 	0x7f, 0xe7, 0xc3, 0xc3, 0xe7, 0x7e
-    }, 
-    {
+	},
+	{
 	58,
 	0x00, 0x00, 0x00, 0x38, 0x38, 0x00, 0x00,
 	0x38, 0x38, 0x00, 0x00, 0x00, 0x00
-    }, 
-    {
+	},
+	{
 	59,
 	0x00, 0x00, 0x30, 0x18, 0x1c, 0x1c, 0x00,
 	0x00, 0x1c, 0x1c, 0x00, 0x00, 0x00
-    }, 
-    {
+	},
+	{
 	60,
 	0x00, 0x00, 0x06, 0x0c, 0x18, 0x30, 0x60,
 	0xc0, 0x60, 0x30, 0x18, 0x0c, 0x06
-    }, 
-    {
+	},
+	{
 	61,
 	0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0x00,
 	0xff, 0xff, 0x00, 0x00, 0x00, 0x00
-    }, 
-    {
+	},
+	{
 	62,
 	0x00, 0x00, 0x60, 0x30, 0x18, 0x0c, 0x06,
 	0x03, 0x06, 0x0c, 0x18, 0x30, 0x60
-    }, 
-    {
+	},
+	{
 	63,
 	0x00, 0x00, 0x18, 0x00, 0x00, 0x18, 0x18,
 	0x0c, 0x06, 0x03, 0xc3, 0xc3, 0x7e
-    }, 
-    {
+	},
+	{
 	64,
 	0x00, 0x00, 0x3f, 0x60, 0xcf, 0xdb, 0xd3,
 	0xdd, 0xc3, 0x7e, 0x00, 0x00, 0x00
-    }, 
-    {
+	},
+	{
 	65,
 	0x00, 0x00, 0xc3, 0xc3, 0xc3, 0xc3, 0xff,
 	0xc3, 0xc3, 0xc3, 0x66, 0x3c, 0x18
-    }, 
-    {
+	},
+	{
 	66,
 	0x00, 0x00, 0xfe, 0xc7, 0xc3, 0xc3, 0xc7,
 	0xfe, 0xc7, 0xc3, 0xc3, 0xc7, 0xfe
-    }, 
-    {
+	},
+	{
 	67,
 	0x00, 0x00, 0x7e, 0xe7, 0xc0, 0xc0, 0xc0,
 	0xc0, 0xc0, 0xc0, 0xc0, 0xe7, 0x7e
-    }, 
-    {
+	},
+	{
 	68,
 	0x00, 0x00, 0xfc, 0xce, 0xc7, 0xc3, 0xc3,
 	0xc3, 0xc3, 0xc3, 0xc7, 0xce, 0xfc
-    }, 
-    {
+	},
+	{
 	69,
 	0x00, 0x00, 0xff, 0xc0, 0xc0, 0xc0, 0xc0,
 	0xfc, 0xc0, 0xc0, 0xc0, 0xc0, 0xff
-    }, 
-    {
+	},
+	{
 	70,
 	0x00, 0x00, 0xc0, 0xc0, 0xc0, 0xc0, 0xc0,
 	0xc0, 0xfc, 0xc0, 0xc0, 0xc0, 0xff
-    }, 
-    {
+	},
+	{
 	71,
 	0x00, 0x00, 0x7e, 0xe7, 0xc3, 0xc3, 0xcf,
 	0xc0, 0xc0, 0xc0, 0xc0, 0xe7, 0x7e
-    }, 
-    {
+	},
+	{
 	72,
 	0x00, 0x00, 0xc3, 0xc3, 0xc3, 0xc3, 0xc3,
 	0xff, 0xc3, 0xc3, 0xc3, 0xc3, 0xc3
-    }, 
-    {
+	},
+	{
 	73,
 	0x00, 0x00, 0x7e, 0x18, 0x18, 0x18, 0x18,
 	0x18, 0x18, 0x18, 0x18, 0x18, 0x7e
-    }, 
-    {
+	},
+	{
 	74,
 	0x00, 0x00, 0x7c, 0xee, 0xc6, 0x06, 0x06,
 	0x06, 0x06, 0x06, 0x06, 0x06, 0x06
-    }, 
-    {
+	},
+	{
 	75,
 	0x00, 0x00, 0xc3, 0xc6, 0xcc, 0xd8, 0xf0,
 	0xe0, 0xf0, 0xd8, 0xcc, 0xc6, 0xc3
-    }, 
-    {
+	},
+	{
 	76,
 	0x00, 0x00, 0xff, 0xc0, 0xc0, 0xc0, 0xc0,
 	0xc0, 0xc0, 0xc0, 0xc0, 0xc0, 0xc0
-    }, 
-    {
+	},
+	{
 	77,
 	0x00, 0x00, 0xc3, 0xc3, 0xc3, 0xc3, 0xc3,
 	0xc3, 0xdb, 0xff, 0xff, 0xe7, 0xc3
-    }, 
-    {
+	},
+	{
 	78,
 	0x00, 0x00, 0xc7, 0xc7, 0xcf, 0xcf, 0xdf,
 	0xdb, 0xfb, 0xf3, 0xf3, 0xe3, 0xe3
-    }, 
-    {
+	},
+	{
 	79,
 	0x00, 0x00, 0x7e, 0xe7, 0xc3, 0xc3, 0xc3,
 	0xc3, 0xc3, 0xc3, 0xc3, 0xe7, 0x7e
-    }, 
-    {
+	},
+	{
 	80,
 	0x00, 0x00, 0xc0, 0xc0, 0xc0, 0xc0, 0xc0,
 	0xfe, 0xc7, 0xc3, 0xc3, 0xc7, 0xfe
-    }, 
-    {
+	},
+	{
 	81,
 	0x00, 0x00, 0x3f, 0x6e, 0xdf, 0xdb, 0xc3,
 	0xc3, 0xc3, 0xc3, 0xc3, 0x66, 0x3c
-    }, 
-    {
+	},
+	{
 	82,
 	0x00, 0x00, 0xc3, 0xc6, 0xcc, 0xd8, 0xf0,
 	0xfe, 0xc7, 0xc3, 0xc3, 0xc7, 0xfe
-    }, 
-    {
+	},
+	{
 	83,
 	0x00, 0x00, 0x7e, 0xe7, 0x03, 0x03, 0x07,
 	0x7e, 0xe0, 0xc0, 0xc0, 0xe7, 0x7e
-    }, 
-    {
+	},
+	{
 	84,
 	0x00, 0x00, 0x18, 0x18, 0x18, 0x18, 0x18,
 	0x18, 0x18, 0x18, 0x18, 0x18, 0xff
-    }, 
-    {
+	},
+	{
 	85,
 	0x00, 0x00, 0x7e, 0xe7, 0xc3, 0xc3, 0xc3,
 	0xc3, 0xc3, 0xc3, 0xc3, 0xc3, 0xc3
-    }, 
-    {
+	},
+	{
 	86,
 	0x00, 0x00, 0x18, 0x3c, 0x3c, 0x66, 0x66,
 	0xc3, 0xc3, 0xc3, 0xc3, 0xc3, 0xc3
-    }, 
-    {
+	},
+	{
 	87,
 	0x00, 0x00, 0xc3, 0xe7, 0xff, 0xff, 0xdb,
 	0xdb, 0xc3, 0xc3, 0xc3, 0xc3, 0xc3
-    }, 
-    {
+	},
+	{
 	88,
 	0x00, 0x00, 0xc3, 0x66, 0x66, 0x3c, 0x3c,
 	0x18, 0x3c, 0x3c, 0x66, 0x66, 0xc3
-    }, 
-    {
+	},
+	{
 	89,
 	0x00, 0x00, 0x18, 0x18, 0x18, 0x18, 0x18,
 	0x18, 0x3c, 0x3c, 0x66, 0x66, 0xc3
-    }, 
-    {
+	},
+	{
 	90,
 	0x00, 0x00, 0xff, 0xc0, 0xc0, 0x60, 0x30,
 	0x7e, 0x0c, 0x06, 0x03, 0x03, 0xff
-    }, 
-    {
+	},
+	{
 	91,
 	0x00, 0x00, 0x3c, 0x30, 0x30, 0x30, 0x30,
 	0x30, 0x30, 0x30, 0x30, 0x30, 0x3c
-    }, 
-    {
+	},
+	{
 	92,
 	0x00, 0x03, 0x03, 0x06, 0x06, 0x0c, 0x0c,
 	0x18, 0x18, 0x30, 0x30, 0x60, 0x60
-    }, 
-    {
+	},
+	{
 	93,
 	0x00, 0x00, 0x3c, 0x0c, 0x0c, 0x0c, 0x0c,
 	0x0c, 0x0c, 0x0c, 0x0c, 0x0c, 0x3c
-    }, 
-    {
+	},
+	{
 	94,
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 	0x00, 0x00, 0xc3, 0x66, 0x3c, 0x18
-    }, 
-    {
+	},
+	{
 	95,
 	0xff, 0xff, 0x00, 0x00, 0x00, 0x00, 0x00,
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-    }, 
-    {
+	},
+	{
 	96,
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
 	0x00, 0x00, 0x18, 0x38, 0x30, 0x70
-    }, 
-    {
+	},
+	{
 	97,
 	0x00, 0x00, 0x7f, 0xc3, 0xc3, 0x7f, 0x03,
 	0xc3, 0x7e, 0x00, 0x00, 0x00, 0x00
-    }, 
-    {
+	},
+	{
 	98,
 	0x00, 0x00, 0xfe, 0xc3, 0xc3, 0xc3, 0xc3,
 	0xfe, 0xc0, 0xc0, 0xc0, 0xc0, 0xc0
-    }, 
-    {
+	},
+	{
 	99,
 	0x00, 0x00, 0x7e, 0xc3, 0xc0, 0xc0, 0xc0,
 	0xc3, 0x7e, 0x00, 0x00, 0x00, 0x00
-    }, 
-    {
+	},
+	{
 	100,
 	0x00, 0x00, 0x7f, 0xc3, 0xc3, 0xc3, 0xc3,
 	0x7f, 0x03, 0x03, 0x03, 0x03, 0x03
-    }, 
-    {
+	},
+	{
 	101,
 	0x00, 0x00, 0x7f, 0xc0, 0xc0, 0xfe, 0xc3,
 	0xc3, 0x7e, 0x00, 0x00, 0x00, 0x00
-    }, 
-    {
+	},
+	{
 	102,
 	0x00, 0x00, 0x30, 0x30, 0x30, 0x30, 0x30,
 	0xfc, 0x30, 0x30, 0x30, 0x33, 0x1e
-    }, 
-    {
+	},
+	{
 	103,
 	0x7e, 0xc3, 0x03, 0x03, 0x7f, 0xc3, 0xc3,
 	0xc3, 0x7e, 0x00, 0x00, 0x00, 0x00
-    }, 
-    {
+	},
+	{
 	104,
 	0x00, 0x00, 0xc3, 0xc3, 0xc3, 0xc3, 0xc3,
 	0xc3, 0xfe, 0xc0, 0xc0, 0xc0, 0xc0
-    }, 
-    {
+	},
+	{
 	105,
 	0x00, 0x00, 0x18, 0x18, 0x18, 0x18, 0x18,
 	0x18, 0x18, 0x00, 0x00, 0x18, 0x00
-    }, 
-    {
+	},
+	{
 	106,
 	0x38, 0x6c, 0x0c, 0x0c, 0x0c, 0x0c, 0x0c,
 	0x0c, 0x0c, 0x00, 0x00, 0x0c, 0x00
-    }, 
-    {
+	},
+	{
 	107,
 	0x00, 0x00, 0xc6, 0xcc, 0xf8, 0xf0, 0xd8,
 	0xcc, 0xc6, 0xc0, 0xc0, 0xc0, 0xc0
-    }, 
-    {
+	},
+	{
 	108,
 	0x00, 0x00, 0x7e, 0x18, 0x18, 0x18, 0x18,
 	0x18, 0x18, 0x18, 0x18, 0x18, 0x78
-    }, 
-    {
+	},
+	{
 	109,
 	0x00, 0x00, 0xdb, 0xdb, 0xdb, 0xdb, 0xdb,
 	0xdb, 0xfe, 0x00, 0x00, 0x00, 0x00
-    }, 
-    {
+	},
+	{
 	110,
 	0x00, 0x00, 0xc6, 0xc6, 0xc6, 0xc6, 0xc6,
 	0xc6, 0xfc, 0x00, 0x00, 0x00, 0x00
-    }, 
-    {
+	},
+	{
 	111,
 	0x00, 0x00, 0x7c, 0xc6, 0xc6, 0xc6, 0xc6,
 	0xc6, 0x7c, 0x00, 0x00, 0x00, 0x00
-    }, 
-    {
+	},
+	{
 	112,
 	0xc0, 0xc0, 0xc0, 0xfe, 0xc3, 0xc3, 0xc3,
 	0xc3, 0xfe, 0x00, 0x00, 0x00, 0x00
-    }, 
-    {
+	},
+	{
 	113,
 	0x03, 0x03, 0x03, 0x7f, 0xc3, 0xc3, 0xc3,
 	0xc3, 0x7f, 0x00, 0x00, 0x00, 0x00
-    }, 
-    {
+	},
+	{
 	114,
 	0x00, 0x00, 0xc0, 0xc0, 0xc0, 0xc0, 0xc0,
 	0xe0, 0xfe, 0x00, 0x00, 0x00, 0x00
-    }, 
-    {
+	},
+	{
 	115,
 	0x00, 0x00, 0xfe, 0x03, 0x03, 0x7e, 0xc0,
 	0xc0, 0x7f, 0x00, 0x00, 0x00, 0x00
-    }, 
-    {
+	},
+	{
 	116,
 	0x00, 0x00, 0x1c, 0x36, 0x30, 0x30, 0x30,
 	0x30, 0xfc, 0x30, 0x30, 0x30, 0x00
-    }, 
-    {
+	},
+	{
 	117,
 	0x00, 0x00, 0x7e, 0xc6, 0xc6, 0xc6, 0xc6,
 	0xc6, 0xc6, 0x00, 0x00, 0x00, 0x00
-    }, 
-    {
+	},
+	{
 	118,
 	0x00, 0x00, 0x18, 0x3c, 0x3c, 0x66, 0x66,
 	0xc3, 0xc3, 0x00, 0x00, 0x00, 0x00
-    }, 
-    {
+	},
+	{
 	119,
 	0x00, 0x00, 0xc3, 0xe7, 0xff, 0xdb, 0xc3,
 	0xc3, 0xc3, 0x00, 0x00, 0x00, 0x00
-    }, 
-    {
+	},
+	{
 	120,
 	0x00, 0x00, 0xc3, 0x66, 0x3c, 0x18, 0x3c,
 	0x66, 0xc3, 0x00, 0x00, 0x00, 0x00
-    }, 
-    {
+	},
+	{
 	121,
 	0xc0, 0x60, 0x60, 0x30, 0x18, 0x3c, 0x66,
 	0x66, 0xc3, 0x00, 0x00, 0x00, 0x00
-    }, 
-    {
+	},
+	{
 	122,
 	0x00, 0x00, 0xff, 0x60, 0x30, 0x18, 0x0c,
 	0x06, 0xff, 0x00, 0x00, 0x00, 0x00
-    }, 
-    {
+	},
+	{
 	123,
 	0x00, 0x00, 0x0f, 0x18, 0x18, 0x18, 0x38,
 	0xf0, 0x38, 0x18, 0x18, 0x18, 0x0f
-    }, 
-    {
+	},
+	{
 	124,
 	0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18,
 	0x18, 0x18, 0x18, 0x18, 0x18, 0x18
-    }, 
-    {
+	},
+	{
 	125,
 	0x00, 0x00, 0xf0, 0x18, 0x18, 0x18, 0x1c,
 	0x0f, 0x1c, 0x18, 0x18, 0x18, 0xf0
-    }, 
-    {
+	},
+	{
 	126,
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x06,
 	0x8f, 0xf1, 0x60, 0x00, 0x00, 0x00
-    },
-    {
+	},
+	{
 	END_OF_LIST
-    }
+	}
 };
 
 /******************************************************************************/
 
 GLenum fontCreateStroke(GLuint fontBase)
 {
-    GLint mode, i, j;
+	GLint mode, i, j;
 
-    for (i = 0; strokeFont[i][0] != END_OF_LIST; i++) {
-	glNewList(fontBase+(unsigned int)strokeFont[i][0], GL_COMPILE);
-	for (j = 1; mode = strokeFont[i][j]; j += 3) {
-	    if (mode == FONT_BEGIN) {
-		glBegin(GL_LINE_STRIP);
-		glVertex2f((float)strokeFont[i][j+1]*STROKE_SCALE,
-			   (float)strokeFont[i][j+2]*STROKE_SCALE);
-	    } else if (mode == FONT_NEXT) {
-		glVertex2f((float)strokeFont[i][j+1]*STROKE_SCALE,
-			   (float)strokeFont[i][j+2]*STROKE_SCALE);
-	    } else if (mode == FONT_END) {
-		glVertex2f((float)strokeFont[i][j+1]*STROKE_SCALE,
-			   (float)strokeFont[i][j+2]*STROKE_SCALE);
-		glEnd();
-	    } else if (mode == FONT_ADVANCE) {
-		glTranslatef((float)strokeFont[i][j+1]*STROKE_SCALE,
-			     (float)strokeFont[i][j+2]*STROKE_SCALE, 0.0);
-		break;
-	    }
+	for (i = 0; strokeFont[i][0] != END_OF_LIST; i++) {
+		glNewList(fontBase + (unsigned int)strokeFont[i][0], GL_COMPILE);
+		for (j = 1; mode = strokeFont[i][j]; j += 3) {
+			if (mode == FONT_BEGIN) {
+				glBegin(GL_LINE_STRIP);
+				glVertex2f((float)strokeFont[i][j + 1] * STROKE_SCALE,
+					(float)strokeFont[i][j + 2] * STROKE_SCALE);
+			}
+			else if (mode == FONT_NEXT) {
+				glVertex2f((float)strokeFont[i][j + 1] * STROKE_SCALE,
+					(float)strokeFont[i][j + 2] * STROKE_SCALE);
+			}
+			else if (mode == FONT_END) {
+				glVertex2f((float)strokeFont[i][j + 1] * STROKE_SCALE,
+					(float)strokeFont[i][j + 2] * STROKE_SCALE);
+				glEnd();
+			}
+			else if (mode == FONT_ADVANCE) {
+				glTranslatef((float)strokeFont[i][j + 1] * STROKE_SCALE,
+					(float)strokeFont[i][j + 2] * STROKE_SCALE, 0.0);
+				break;
+			}
+		}
+		glEndList();
 	}
-	glEndList();
-    }
-    return GL_TRUE;
+	return GL_TRUE;
 }
 
 /******************************************************************************/
 
 GLenum fontCreateOutline(GLuint fontBase)
 {
-    GLint mode, i, j;
+	GLint mode, i, j;
 
-    for (i = 0; outlineFont[i][0] != END_OF_LIST; i++) {
-	glNewList(fontBase+(unsigned int)outlineFont[i][0], GL_COMPILE);
-	for (j = 1; mode = outlineFont[i][j]; j += 3) {
-	    if (mode == FONT_BEGIN) {
-		glBegin(GL_LINE_LOOP);
-		glVertex2f((float)outlineFont[i][j+1]*OUTLINE_SCALE,
-			   (float)outlineFont[i][j+2]*OUTLINE_SCALE);
-	    } else if (mode == FONT_NEXT) {
-		glVertex2f((float)outlineFont[i][j+1]*OUTLINE_SCALE,
-			   (float)outlineFont[i][j+2]*OUTLINE_SCALE);
-	    } else if (mode == FONT_END) {
-		glVertex2f((float)outlineFont[i][j+1]*OUTLINE_SCALE,
-			   (float)outlineFont[i][j+2]*OUTLINE_SCALE);
-		glEnd();
-	    } else if (mode == FONT_ADVANCE) {
-		glTranslatef((float)outlineFont[i][j+1]*OUTLINE_SCALE,
-			     (float)outlineFont[i][j+2]*OUTLINE_SCALE, 0.0);
-		break;
-	    }
+	for (i = 0; outlineFont[i][0] != END_OF_LIST; i++) {
+		glNewList(fontBase + (unsigned int)outlineFont[i][0], GL_COMPILE);
+		for (j = 1; mode = outlineFont[i][j]; j += 3) {
+			if (mode == FONT_BEGIN) {
+				glBegin(GL_LINE_LOOP);
+				glVertex2f((float)outlineFont[i][j + 1] * OUTLINE_SCALE,
+					(float)outlineFont[i][j + 2] * OUTLINE_SCALE);
+			}
+			else if (mode == FONT_NEXT) {
+				glVertex2f((float)outlineFont[i][j + 1] * OUTLINE_SCALE,
+					(float)outlineFont[i][j + 2] * OUTLINE_SCALE);
+			}
+			else if (mode == FONT_END) {
+				glVertex2f((float)outlineFont[i][j + 1] * OUTLINE_SCALE,
+					(float)outlineFont[i][j + 2] * OUTLINE_SCALE);
+				glEnd();
+			}
+			else if (mode == FONT_ADVANCE) {
+				glTranslatef((float)outlineFont[i][j + 1] * OUTLINE_SCALE,
+					(float)outlineFont[i][j + 2] * OUTLINE_SCALE, 0.0);
+				break;
+			}
+		}
+		glEndList();
 	}
-	glEndList();
-    }
-    return GL_TRUE;
+	return GL_TRUE;
 }
 
 /******************************************************************************/
 
 GLenum fontCreateFilled(GLuint fontBase)
 {
-    GLint mode, i, j;
+	GLint mode, i, j;
 
-    for (i = 0; filledFont[i][0] != END_OF_LIST; i++) {
-	glNewList(fontBase+(unsigned int)filledFont[i][0], GL_COMPILE);
-	for (j = 1; mode = filledFont[i][j]; j += 3) {
-	    if (mode == FONT_BEGIN) {
-		glBegin(GL_TRIANGLE_STRIP);
-		glVertex2f((float)filledFont[i][j+1]*FILLED_SCALE,
-			   (float)filledFont[i][j+2]*FILLED_SCALE);
-	    } else if (mode == FONT_NEXT) {
-		glVertex2f((float)filledFont[i][j+1]*FILLED_SCALE,
-			   (float)filledFont[i][j+2]*FILLED_SCALE);
-	    } else if (mode == FONT_END) {
-		glVertex2f((float)filledFont[i][j+1]*FILLED_SCALE,
-			   (float)filledFont[i][j+2]*FILLED_SCALE);
-		glEnd();
-	    } else if (mode == FONT_ADVANCE) {
-		glTranslatef((float)filledFont[i][j+1]*FILLED_SCALE,
-			     (float)filledFont[i][j+2]*FILLED_SCALE, 0.0);
-		break;
-	    }
+	for (i = 0; filledFont[i][0] != END_OF_LIST; i++) {
+		glNewList(fontBase + (unsigned int)filledFont[i][0], GL_COMPILE);
+		for (j = 1; mode = filledFont[i][j]; j += 3) {
+			if (mode == FONT_BEGIN) {
+				glBegin(GL_TRIANGLE_STRIP);
+				glVertex2f((float)filledFont[i][j + 1] * FILLED_SCALE,
+					(float)filledFont[i][j + 2] * FILLED_SCALE);
+			}
+			else if (mode == FONT_NEXT) {
+				glVertex2f((float)filledFont[i][j + 1] * FILLED_SCALE,
+					(float)filledFont[i][j + 2] * FILLED_SCALE);
+			}
+			else if (mode == FONT_END) {
+				glVertex2f((float)filledFont[i][j + 1] * FILLED_SCALE,
+					(float)filledFont[i][j + 2] * FILLED_SCALE);
+				glEnd();
+			}
+			else if (mode == FONT_ADVANCE) {
+				glTranslatef((float)filledFont[i][j + 1] * FILLED_SCALE,
+					(float)filledFont[i][j + 2] * FILLED_SCALE, 0.0);
+				break;
+			}
+		}
+		glEndList();
 	}
-	glEndList();
-    }
-    return GL_TRUE;
+	return GL_TRUE;
 }
 
 /******************************************************************************/
 
 GLenum fontCreateBitmap(GLuint fontBase)
 {
-    GLint i;
+	GLint i;
 
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    for (i = 0; bitmapFont[i][0] != (unsigned char)END_OF_LIST; i++) {
-	glNewList(fontBase+(unsigned int)bitmapFont[i][0], GL_COMPILE);
-	glBitmap(8, 13, 0.0, 2.0, 10.0, 0.0, &bitmapFont[i][1]);
-	glEndList();
-    }
-    return GL_TRUE;
+	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+	for (i = 0; bitmapFont[i][0] != (unsigned char)END_OF_LIST; i++) {
+		glNewList(fontBase + (unsigned int)bitmapFont[i][0], GL_COMPILE);
+		glBitmap(8, 13, 0.0, 2.0, 10.0, 0.0, &bitmapFont[i][1]);
+		glEndList();
+	}
+	return GL_TRUE;
 }
 
 /******************************************************************************/
 
-void fontDrawStr(GLuint base, char *str)
+void fontDrawStr(GLuint base, char* str)
 {
 
-    glPushAttrib(GL_LIST_BIT);
-    glListBase(base);
-    glCallLists(strlen(str), GL_UNSIGNED_BYTE, (unsigned char *)str);
-    glPopAttrib();
+	glPushAttrib(GL_LIST_BIT);
+	glListBase(base);
+	glCallLists(strlen(str), GL_UNSIGNED_BYTE, (unsigned char*)str);
+	glPopAttrib();
 }
 
 /******************************************************************************/

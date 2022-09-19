@@ -41,7 +41,7 @@ GLenum lighting = GL_FALSE;
 GLenum mapPoint = GL_FALSE;
 GLenum mapType = EVAL;
 
-double point1[10*4] = {
+double point1[10 * 4] = {
     -0.5, 0.0, 0.0, 1.0,
     -0.4, 0.5, 0.0, 1.0,
     -0.3,-0.5, 0.0, 1.0,
@@ -53,7 +53,7 @@ double point1[10*4] = {
     0.3,-0.5, 0.0, 1.0,
     0.4, 0.0, 0.0, 1.0,
 };
-double cpoint1[10*4] = {
+double cpoint1[10 * 4] = {
     0.0, 0.0, 1.0, 1.0,
     0.3, 0.0, 0.7, 1.0,
     0.6, 0.0, 0.3, 1.0,
@@ -64,7 +64,7 @@ double cpoint1[10*4] = {
     1.0, 1.0, 0.5, 1.0,
     1.0, 1.0, 1.0, 1.0,
 };
-double tpoint1[11*4] = {
+double tpoint1[11 * 4] = {
     0.0, 0.0, 0.0, 1.0,
     0.0, 0.1, 0.0, 1.0,
     0.0, 0.2, 0.0, 1.0,
@@ -76,55 +76,55 @@ double tpoint1[11*4] = {
     0.0, 0.8, 0.0, 1.0,
     0.0, 0.9, 0.0, 1.0,
 };
-double point2[2*3*4] = {
-    -0.5, -0.5,  0.5, 1.0, 
-     0.0,  1.0,  0.5, 1.0, 
+double point2[2 * 3 * 4] = {
+    -0.5, -0.5,  0.5, 1.0,
+     0.0,  1.0,  0.5, 1.0,
      0.5, -0.5,  0.5, 1.0,
-    -0.5,  0.5, -0.5, 1.0, 
-     0.0, -1.0, -0.5, 1.0, 
+    -0.5,  0.5, -0.5, 1.0,
+     0.0, -1.0, -0.5, 1.0,
      0.5,  0.5, -0.5, 1.0,
 };
-double cpoint2[2*2*4] = {
+double cpoint2[2 * 2 * 4] = {
     0.0, 0.0, 0.0, 1.0,
     0.0, 0.0, 1.0, 1.0,
     0.0, 1.0, 0.0, 1.0,
     1.0, 1.0, 1.0, 1.0,
 };
-double tpoint2[2*2*2] = {
+double tpoint2[2 * 2 * 2] = {
     0.0, 0.0, 0.0, 1.0,
-    1.0, 0.0, 1.0, 1.0, 
+    1.0, 0.0, 1.0, 1.0,
 };
-float textureImage[4*2*4] =  {
+float textureImage[4 * 2 * 4] = {
     1.0, 1.0, 1.0, 1.0,
     1.0, 0.0, 0.0, 1.0,
     1.0, 0.0, 0.0, 1.0,
-    1.0, 1.0, 1.0, 1.0, 
+    1.0, 1.0, 1.0, 1.0,
     1.0, 1.0, 1.0, 1.0,
     1.0, 0.0, 0.0, 1.0,
     1.0, 0.0, 0.0, 1.0,
-    1.0, 1.0, 1.0, 1.0, 
+    1.0, 1.0, 1.0, 1.0,
 };
 
 
 static void Init(void)
 {
-    static float ambient[] = {0.1, 0.1, 0.1, 1.0};
-    static float diffuse[] = {1.0, 1.0, 1.0, 1.0};
-    static float position[] = {0.0, 0.0, -150.0, 0.0};
-    static float front_mat_shininess[] = {30.0};
-    static float front_mat_specular[] = {0.7, 0.7, 0.7, 1.0};
-    static float front_mat_diffuse[] = {1.0, 0.2, 1.0, 1.0};
-    static float back_mat_shininess[] = {50.0};
-    static float back_mat_specular[] = {0.5, 0.5, 0.2, 1.0};
-    static float back_mat_diffuse[] = {1.0, 1.0, 0.2, 1.0};
-    static float lmodel_ambient[] = {1.0, 1.0, 1.0, 1.0};
-    static float lmodel_twoside[] = {GL_TRUE};
-    static float decal[] = {GL_DECAL};
-    static float modulate[] = {GL_MODULATE};
-    static float repeat[] = {GL_REPEAT};
-    static float clamp[] = {GL_CLAMP};
-    static float nr[] = {GL_NEAREST};
-    static float ln[] = {GL_LINEAR};
+    static float ambient[] = { 0.1, 0.1, 0.1, 1.0 };
+    static float diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
+    static float position[] = { 0.0, 0.0, -150.0, 0.0 };
+    static float front_mat_shininess[] = { 30.0 };
+    static float front_mat_specular[] = { 0.7, 0.7, 0.7, 1.0 };
+    static float front_mat_diffuse[] = { 1.0, 0.2, 1.0, 1.0 };
+    static float back_mat_shininess[] = { 50.0 };
+    static float back_mat_specular[] = { 0.5, 0.5, 0.2, 1.0 };
+    static float back_mat_diffuse[] = { 1.0, 1.0, 0.2, 1.0 };
+    static float lmodel_ambient[] = { 1.0, 1.0, 1.0, 1.0 };
+    static float lmodel_twoside[] = { GL_TRUE };
+    static float decal[] = { GL_DECAL };
+    static float modulate[] = { GL_MODULATE };
+    static float repeat[] = { GL_REPEAT };
+    static float clamp[] = { GL_CLAMP };
+    static float nr[] = { GL_NEAREST };
+    static float ln[] = { GL_LINEAR };
 
     glFrontFace(GL_CCW);
 
@@ -133,17 +133,17 @@ static void Init(void)
     glMap1d(GL_MAP1_VERTEX_4, 0.0, 1.0, VDIM, VORDER, point1);
     glMap1d(GL_MAP1_COLOR_4, 0.0, 1.0, CDIM, CORDER, cpoint1);
 
-    glMap2d(GL_MAP2_VERTEX_4, 0.0, 1.0, VMINOR_ORDER*VDIM, VMAJOR_ORDER, 0.0,
-	    1.0, VDIM, VMINOR_ORDER, point2);
-    glMap2d(GL_MAP2_COLOR_4, 0.0, 1.0, CMINOR_ORDER*CDIM, CMAJOR_ORDER, 0.0,
-	    1.0, CDIM, CMINOR_ORDER, cpoint2);
-    glMap2d(GL_MAP2_TEXTURE_COORD_2, 0.0, 1.0, TMINOR_ORDER*TDIM,
-	    TMAJOR_ORDER, 0.0, 1.0, TDIM, TMINOR_ORDER, tpoint2);
+    glMap2d(GL_MAP2_VERTEX_4, 0.0, 1.0, VMINOR_ORDER * VDIM, VMAJOR_ORDER, 0.0,
+        1.0, VDIM, VMINOR_ORDER, point2);
+    glMap2d(GL_MAP2_COLOR_4, 0.0, 1.0, CMINOR_ORDER * CDIM, CMAJOR_ORDER, 0.0,
+        1.0, CDIM, CMINOR_ORDER, cpoint2);
+    glMap2d(GL_MAP2_TEXTURE_COORD_2, 0.0, 1.0, TMINOR_ORDER * TDIM,
+        TMAJOR_ORDER, 0.0, 1.0, TDIM, TMINOR_ORDER, tpoint2);
 
     glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
     glLightfv(GL_LIGHT0, GL_POSITION, position);
-    
+
     glMaterialfv(GL_FRONT, GL_DIFFUSE, front_mat_diffuse);
     glMaterialfv(GL_BACK, GL_DIFFUSE, back_mat_diffuse);
 
@@ -156,7 +156,7 @@ static void Init(void)
     glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, nr);
     glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, nr);
     glTexImage2D(GL_TEXTURE_2D, 0, 4, 2, 4, 0, GL_RGBA, GL_FLOAT,
-		 (GLvoid *)textureImage);
+        (GLvoid*)textureImage);
 }
 
 static void DrawPoints1(void)
@@ -166,9 +166,9 @@ static void DrawPoints1(void)
     glColor3f(0.0, 1.0, 0.0);
     glPointSize(2);
     glBegin(GL_POINTS);
-	for (i = 0; i < VORDER; i++) {
-	    glVertex4dv(&point1[i*4]);
-	}
+    for (i = 0; i < VORDER; i++) {
+        glVertex4dv(&point1[i * 4]);
+    }
     glEnd();
 }
 
@@ -179,11 +179,11 @@ static void DrawPoints2(void)
     glColor3f(1.0, 0.0, 1.0);
     glPointSize(2);
     glBegin(GL_POINTS);
-	for (i = 0; i < VMAJOR_ORDER; i++) {
-	    for (j = 0; j < VMINOR_ORDER; j++) {
-		glVertex4dv(&point2[i*4*VMINOR_ORDER+j*4]);
-	    }
-	}
+    for (i = 0; i < VMAJOR_ORDER; i++) {
+        for (j = 0; j < VMINOR_ORDER; j++) {
+            glVertex4dv(&point2[i * 4 * VMINOR_ORDER + j * 4]);
+        }
+    }
     glEnd();
 }
 
@@ -193,10 +193,10 @@ static void DrawMapEval1(float du)
 
     glColor3f(1.0, 0.0, 0.0);
     glBegin(GL_LINE_STRIP);
-	for (u = 0.0; u < 1.0; u += du) {
-	    glEvalCoord1d(u);
-	}
-	glEvalCoord1d(1.0);
+    for (u = 0.0; u < 1.0; u += du) {
+        glEvalCoord1d(u);
+    }
+    glEvalCoord1d(1.0);
     glEnd();
 }
 
@@ -206,15 +206,15 @@ static void DrawMapEval2(float du, float dv)
 
     glColor3f(1.0, 0.0, 0.0);
     for (v = 0.0; v < 1.0; v += dv) {
-	glBegin(GL_QUAD_STRIP);
-	    for (u = 0.0; u <= 1.0; u += du) {
-		glEvalCoord2d(u,v);
-		tmp = (v + dv < 1.0) ? (v + dv) : 1.0;
-		glEvalCoord2d(u, tmp);
-	    }
-	    glEvalCoord2d(1.0, v);
-	    glEvalCoord2d(1.0, v+dv);
-	glEnd();
+        glBegin(GL_QUAD_STRIP);
+        for (u = 0.0; u <= 1.0; u += du) {
+            glEvalCoord2d(u, v);
+            tmp = (v + dv < 1.0) ? (v + dv) : 1.0;
+            glEvalCoord2d(u, tmp);
+        }
+        glEvalCoord2d(1.0, v);
+        glEvalCoord2d(1.0, v + dv);
+        glEnd();
     }
 }
 
@@ -222,78 +222,84 @@ static void RenderEval(void)
 {
 
     if (colorType) {
-	glEnable(GL_MAP1_COLOR_4);
-	glEnable(GL_MAP2_COLOR_4);
-    } else {
-	glDisable(GL_MAP1_COLOR_4);
-	glDisable(GL_MAP2_COLOR_4);
+        glEnable(GL_MAP1_COLOR_4);
+        glEnable(GL_MAP2_COLOR_4);
+    }
+    else {
+        glDisable(GL_MAP1_COLOR_4);
+        glDisable(GL_MAP2_COLOR_4);
     }
 
     if (textureType) {
-	glEnable(GL_TEXTURE_2D);
-	glEnable(GL_MAP2_TEXTURE_COORD_2);
-    } else {
-	glDisable(GL_TEXTURE_2D);
-	glDisable(GL_MAP2_TEXTURE_COORD_2);
+        glEnable(GL_TEXTURE_2D);
+        glEnable(GL_MAP2_TEXTURE_COORD_2);
+    }
+    else {
+        glDisable(GL_TEXTURE_2D);
+        glDisable(GL_MAP2_TEXTURE_COORD_2);
     }
 
     if (polygonFilled) {
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    } else {
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    }
+    else {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     }
 
     glShadeModel(GL_SMOOTH);
 
     switch (mapType) {
-      case EVAL:
-	switch (arrayType) {
-	  case ONE_D:
-	    glDisable(GL_MAP2_VERTEX_4);
-	    glEnable(GL_MAP1_VERTEX_4);
-	    DrawPoints1();
-	    DrawMapEval1(0.1/VORDER);
-	    break;
-	  case TWO_D:
-	    glDisable(GL_MAP1_VERTEX_4);
-	    glEnable(GL_MAP2_VERTEX_4);
-	    DrawPoints2();
-	    DrawMapEval2(0.1/VMAJOR_ORDER,0.1/VMINOR_ORDER);
-	    break;
-	}
-	break;
-      case MESH:
-	switch (arrayType) {
-	  case ONE_D:
-	    DrawPoints1();
-	    glDisable(GL_MAP2_VERTEX_4);
-	    glEnable (GL_MAP1_VERTEX_4);
-	    glColor3f(0.0, 0.0, 1.0);
-	    glMapGrid1d(40, 0.0, 1.0);
-	    if (mapPoint) {
-		glPointSize(2);
-		glEvalMesh1(GL_POINT, 0, 40);
-	    } else {
-		glEvalMesh1(GL_LINE, 0, 40);
-	    }
-	    break;
-	  case TWO_D:
-	    DrawPoints2();
-	    glDisable(GL_MAP1_VERTEX_4);
-	    glEnable(GL_MAP2_VERTEX_4);
-	    glColor3f(0.0, 0.0, 1.0);
-	    glMapGrid2d(20, 0.0, 1.0, 20, 0.0, 1.0);
-	    if (mapPoint) {
-		glPointSize(2);
-		glEvalMesh2(GL_POINT, 0, 20, 0, 20);
-	    } else if (polygonFilled) {
-		glEvalMesh2(GL_FILL, 0, 20, 0, 20);
-	    } else {
-		glEvalMesh2(GL_LINE, 0, 20, 0, 20);
-	    }
-	    break;
-	}
-	break;
+    case EVAL:
+        switch (arrayType) {
+        case ONE_D:
+            glDisable(GL_MAP2_VERTEX_4);
+            glEnable(GL_MAP1_VERTEX_4);
+            DrawPoints1();
+            DrawMapEval1(0.1 / VORDER);
+            break;
+        case TWO_D:
+            glDisable(GL_MAP1_VERTEX_4);
+            glEnable(GL_MAP2_VERTEX_4);
+            DrawPoints2();
+            DrawMapEval2(0.1 / VMAJOR_ORDER, 0.1 / VMINOR_ORDER);
+            break;
+        }
+        break;
+    case MESH:
+        switch (arrayType) {
+        case ONE_D:
+            DrawPoints1();
+            glDisable(GL_MAP2_VERTEX_4);
+            glEnable(GL_MAP1_VERTEX_4);
+            glColor3f(0.0, 0.0, 1.0);
+            glMapGrid1d(40, 0.0, 1.0);
+            if (mapPoint) {
+                glPointSize(2);
+                glEvalMesh1(GL_POINT, 0, 40);
+            }
+            else {
+                glEvalMesh1(GL_LINE, 0, 40);
+            }
+            break;
+        case TWO_D:
+            DrawPoints2();
+            glDisable(GL_MAP1_VERTEX_4);
+            glEnable(GL_MAP2_VERTEX_4);
+            glColor3f(0.0, 0.0, 1.0);
+            glMapGrid2d(20, 0.0, 1.0, 20, 0.0, 1.0);
+            if (mapPoint) {
+                glPointSize(2);
+                glEvalMesh2(GL_POINT, 0, 20, 0, 20);
+            }
+            else if (polygonFilled) {
+                glEvalMesh2(GL_FILL, 0, 20, 0, 20);
+            }
+            else {
+                glEvalMesh2(GL_LINE, 0, 20, 0, 20);
+            }
+            break;
+        }
+        break;
     }
 }
 
@@ -312,59 +318,61 @@ static void Key(unsigned char key, int x, int y)
 {
 
     switch (key) {
-      case '1':
-	arrayType = ONE_D;
-	glDisable(GL_AUTO_NORMAL);
-	glutPostRedisplay();
-	break;
-      case '2':
-	arrayType = TWO_D;
-	glEnable(GL_AUTO_NORMAL);
-	glutPostRedisplay();
-	break;
-      case '3':
-	mapType = EVAL;
-	glutPostRedisplay();
-	break;
-      case '4':
-	mapType = MESH;
-	glutPostRedisplay();
-	break;
-      case '5':
-	polygonFilled = !polygonFilled;
-	glutPostRedisplay();
-	break;
-      case '6':
-	mapPoint = !mapPoint;
-	glutPostRedisplay();
-	break;
-      case '7':
-	colorType = !colorType;
-	glutPostRedisplay();
-	break;
-      case '8':
-	textureType = !textureType;
-	glutPostRedisplay();
-	break;
-      case '9':
-	lighting =! lighting;
-	if (lighting) {
-	    glEnable(GL_LIGHTING);
-	    glEnable(GL_LIGHT0);
-	    if (arrayType == TWO_D) {
-		glEnable(GL_AUTO_NORMAL);
-	    } else {
-		glDisable(GL_AUTO_NORMAL);
-	    }
-	} else {
-	    glDisable(GL_LIGHTING);
-	    glDisable(GL_LIGHT0);
-	    glDisable(GL_AUTO_NORMAL);
-	}
-	glutPostRedisplay();
-	break;
-      case 27:
-	exit(0);
+    case '1':
+        arrayType = ONE_D;
+        glDisable(GL_AUTO_NORMAL);
+        glutPostRedisplay();
+        break;
+    case '2':
+        arrayType = TWO_D;
+        glEnable(GL_AUTO_NORMAL);
+        glutPostRedisplay();
+        break;
+    case '3':
+        mapType = EVAL;
+        glutPostRedisplay();
+        break;
+    case '4':
+        mapType = MESH;
+        glutPostRedisplay();
+        break;
+    case '5':
+        polygonFilled = !polygonFilled;
+        glutPostRedisplay();
+        break;
+    case '6':
+        mapPoint = !mapPoint;
+        glutPostRedisplay();
+        break;
+    case '7':
+        colorType = !colorType;
+        glutPostRedisplay();
+        break;
+    case '8':
+        textureType = !textureType;
+        glutPostRedisplay();
+        break;
+    case '9':
+        lighting = !lighting;
+        if (lighting) {
+            glEnable(GL_LIGHTING);
+            glEnable(GL_LIGHT0);
+            if (arrayType == TWO_D) {
+                glEnable(GL_AUTO_NORMAL);
+            }
+            else {
+                glDisable(GL_AUTO_NORMAL);
+            }
+        }
+        else {
+            glDisable(GL_LIGHTING);
+            glDisable(GL_LIGHT0);
+            glDisable(GL_AUTO_NORMAL);
+        }
+        glutPostRedisplay();
+        break;
+    case 27:
+        exit(0);
     }
 }
 
@@ -372,33 +380,33 @@ static void SpecialKey(int key, int x, int y)
 {
 
     switch (key) {
-      case GLUT_KEY_LEFT:
-	rotY -= 30;
-	glutPostRedisplay();
-	break;
-      case GLUT_KEY_RIGHT:
-	rotY += 30;
-	glutPostRedisplay();
-	break;
-      case GLUT_KEY_UP:
-	rotX -= 30;
-	glutPostRedisplay();
-	break;
-      case GLUT_KEY_DOWN:
-	rotX += 30;
-	glutPostRedisplay();
-	break;
+    case GLUT_KEY_LEFT:
+        rotY -= 30;
+        glutPostRedisplay();
+        break;
+    case GLUT_KEY_RIGHT:
+        rotY += 30;
+        glutPostRedisplay();
+        break;
+    case GLUT_KEY_UP:
+        rotX -= 30;
+        glutPostRedisplay();
+        break;
+    case GLUT_KEY_DOWN:
+        rotX += 30;
+        glutPostRedisplay();
+        break;
     }
 }
 
 static void Draw(void)
 {
 
-    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glPushMatrix();
 
-    glTranslatef(0.0, 0.0 , translateZ);
+    glTranslatef(0.0, 0.0, translateZ);
     glRotatef(rotX, 1, 0, 0);
     glRotatef(rotY, 0, 1, 0);
     RenderEval();
@@ -406,28 +414,30 @@ static void Draw(void)
     glPopMatrix();
 
     if (doubleBuffer) {
-	glutSwapBuffers();
-    } else {
-	glFlush();
+        glutSwapBuffers();
+    }
+    else {
+        glFlush();
     }
 }
 
-static void Args(int argc, char **argv)
+static void Args(int argc, char** argv)
 {
     GLint i;
 
     doubleBuffer = GL_FALSE;
 
     for (i = 1; i < argc; i++) {
-	if (strcmp(argv[i], "-sb") == 0) {
-	    doubleBuffer = GL_FALSE;
-	} else if (strcmp(argv[i], "-db") == 0) {
-	    doubleBuffer = GL_TRUE;
-	}
+        if (strcmp(argv[i], "-sb") == 0) {
+            doubleBuffer = GL_FALSE;
+        }
+        else if (strcmp(argv[i], "-db") == 0) {
+            doubleBuffer = GL_TRUE;
+        }
     }
 }
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
     GLenum type;
 
@@ -437,7 +447,9 @@ int main(int argc, char **argv)
     type = GLUT_RGB | GLUT_DEPTH;
     type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
     glutInitDisplayMode(type);
-    glutInitWindowSize(300, 300);
+    glutInitWindowSize(600, 600);
+    glutInitWindowPosition(1100, 200);
+
     glutCreateWindow("Evaluator Test");
 
     Init();
@@ -448,3 +460,4 @@ int main(int argc, char **argv)
     glutDisplayFunc(Draw);
     glutMainLoop();
 }
+

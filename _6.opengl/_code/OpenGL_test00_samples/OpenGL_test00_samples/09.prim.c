@@ -15,24 +15,24 @@
 #define OPENGL_HEIGHT 13
 
 GLenum rgb, doubleBuffer;
-GLint windW = 600, windH = 300;
+GLint windW = 600, windH = 600;
 
 GLenum mode1, mode2;
 GLint boxW, boxH;
 GLubyte OpenGL_bits[] = {
-   0x00, 0x03, 0x00, 0x00, 0x00, 0x00, 
-   0x7f, 0xfb, 0xff, 0xff, 0xff, 0x01,
-   0x7f, 0xfb, 0xff, 0xff, 0xff, 0x01, 
    0x00, 0x03, 0x00, 0x00, 0x00, 0x00,
-   0x3e, 0x8f, 0xb7, 0xf9, 0xfc, 0x01, 
+   0x7f, 0xfb, 0xff, 0xff, 0xff, 0x01,
+   0x7f, 0xfb, 0xff, 0xff, 0xff, 0x01,
+   0x00, 0x03, 0x00, 0x00, 0x00, 0x00,
+   0x3e, 0x8f, 0xb7, 0xf9, 0xfc, 0x01,
    0x63, 0xdb, 0xb0, 0x8d, 0x0d, 0x00,
-   0x63, 0xdb, 0xb7, 0x8d, 0x0d, 0x00, 
+   0x63, 0xdb, 0xb7, 0x8d, 0x0d, 0x00,
    0x63, 0xdb, 0xb6, 0x8d, 0x0d, 0x00,
-   0x63, 0x8f, 0xf3, 0xcc, 0x0d, 0x00, 
+   0x63, 0x8f, 0xf3, 0xcc, 0x0d, 0x00,
    0x63, 0x00, 0x00, 0x0c, 0x4c, 0x0a,
-   0x63, 0x00, 0x00, 0x0c, 0x4c, 0x0e, 
+   0x63, 0x00, 0x00, 0x0c, 0x4c, 0x0e,
    0x63, 0x00, 0x00, 0x8c, 0xed, 0x0e,
-   0x3e, 0x00, 0x00, 0xf8, 0x0c, 0x00, 
+   0x3e, 0x00, 0x00, 0xf8, 0x0c, 0x00,
 };
 
 
@@ -53,25 +53,25 @@ static void Reshape(int width, int height)
 static void RotateColorMask(void)
 {
     static GLint rotation = 0;
-    
+
     rotation = (rotation + 1) & 0x3;
     switch (rotation) {
-      case 0:
-	glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
-	glIndexMask(0xff);
-	break;
-      case 1:
-	glColorMask(GL_FALSE, GL_TRUE, GL_TRUE, GL_TRUE);
-	glIndexMask(0xFE);
-	break;
-      case 2:
-	glColorMask(GL_TRUE, GL_FALSE, GL_TRUE, GL_TRUE);
-	glIndexMask(0xFD);
-	break;
-      case 3:
-	glColorMask(GL_TRUE, GL_TRUE, GL_FALSE, GL_TRUE);
-	glIndexMask(0xFB);
-	break;
+    case 0:
+        glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+        glIndexMask(0xff);
+        break;
+    case 1:
+        glColorMask(GL_FALSE, GL_TRUE, GL_TRUE, GL_TRUE);
+        glIndexMask(0xFE);
+        break;
+    case 2:
+        glColorMask(GL_TRUE, GL_FALSE, GL_TRUE, GL_TRUE);
+        glIndexMask(0xFD);
+        break;
+    case 3:
+        glColorMask(GL_TRUE, GL_TRUE, GL_FALSE, GL_TRUE);
+        glIndexMask(0xFB);
+        break;
     }
 }
 
@@ -79,34 +79,35 @@ static void SetColor(int index)
 {
 
     if (rgb) {
-	switch (index) {
-	  case 0:
-	    glColor3f(0.0, 0.0, 0.0);
-	    break;
-	  case 1:
-	    glColor3f(1.0, 0.0, 0.0);
-	    break;
-	  case 2:
-	    glColor3f(0.0, 1.0, 0.0);
-	    break;
-	  case 3:
-	    glColor3f(1.0, 1.0, 0.0);
-	    break;
-	  case 4:
-	    glColor3f(0.0, 0.0, 1.0);
-	    break;
-	  case 5:
-	    glColor3f(1.0, 0.0, 1.0);
-	    break;
-	  case 6:
-	    glColor3f(0.0, 1.0, 1.0);
-	    break;
-	  case 7:
-	    glColor3f(1.0, 1.0, 1.0);
-	    break;
-	}
-    } else {
-	glIndexi(index);
+        switch (index) {
+        case 0:
+            glColor3f(0.0, 0.0, 0.0);
+            break;
+        case 1:
+            glColor3f(1.0, 0.0, 0.0);
+            break;
+        case 2:
+            glColor3f(0.0, 1.0, 0.0);
+            break;
+        case 3:
+            glColor3f(1.0, 1.0, 0.0);
+            break;
+        case 4:
+            glColor3f(0.0, 0.0, 1.0);
+            break;
+        case 5:
+            glColor3f(1.0, 0.0, 1.0);
+            break;
+        case 6:
+            glColor3f(0.0, 1.0, 1.0);
+            break;
+        case 7:
+            glColor3f(1.0, 1.0, 1.0);
+            break;
+        }
+    }
+    else {
+        glIndexi(index);
     }
 }
 
@@ -114,20 +115,20 @@ static void Key(unsigned char key, int x, int y)
 {
 
     switch (key) {
-      case '1':
-	mode1 = !mode1;
-	glutPostRedisplay();
-	break;
-      case '2':
-	mode2 = !mode2;
-	glutPostRedisplay();
-	break;
-      case '3':
-	RotateColorMask();
-	glutPostRedisplay();
-	break;
-      case 27:
-	exit(0);
+    case '1':
+        mode1 = !mode1;
+        glutPostRedisplay();
+        break;
+    case '2':
+        mode2 = !mode2;
+        glutPostRedisplay();
+        break;
+    case '3':
+        RotateColorMask();
+        glutPostRedisplay();
+        break;
+    case 27:
+        exit(0);
     }
 }
 
@@ -145,7 +146,7 @@ static void Viewport(GLint row, GLint column)
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(-boxW/2, boxW/2, -boxH/2, boxH/2, 0.0, 1.0);
+    glOrtho(-boxW / 2, boxW / 2, -boxH / 2, boxH / 2, 0.0, 1.0);
     glMatrixMode(GL_MODELVIEW);
 
     glEnable(GL_SCISSOR_TEST);
@@ -157,18 +158,18 @@ static void Point(void)
     GLint i;
 
     glBegin(GL_POINTS);
-	for (i = 1; i < 8; i++) {
-	    GLint j = i * 2;
-	    SetColor(i);
-	    glVertex2i(-j, -j);
-	    glVertex2i(-j, 0);
-	    glVertex2i(-j, j);
-	    glVertex2i(0, j);
-	    glVertex2i(j, j);
-	    glVertex2i(j, 0);
-	    glVertex2i(j, -j);
-	    glVertex2i(0, -j);
-	}
+    for (i = 1; i < 8; i++) {
+        GLint j = i * 2;
+        SetColor(i);
+        glVertex2i(-j, -j);
+        glVertex2i(-j, 0);
+        glVertex2i(-j, j);
+        glVertex2i(0, j);
+        glVertex2i(j, j);
+        glVertex2i(j, 0);
+        glVertex2i(j, -j);
+        glVertex2i(0, -j);
+    }
     glEnd();
 }
 
@@ -180,19 +181,19 @@ static void Lines(void)
 
     glTranslatef(-12, 0, 0);
     for (i = 1; i < 8; i++) {
-	SetColor(i);
-	glBegin(GL_LINES);
-	    glVertex2i(-boxW/4, -boxH/4);
-	    glVertex2i(boxW/4, boxH/4);
-	glEnd();
-	glTranslatef(4, 0, 0);
+        SetColor(i);
+        glBegin(GL_LINES);
+        glVertex2i(-boxW / 4, -boxH / 4);
+        glVertex2i(boxW / 4, boxH / 4);
+        glEnd();
+        glTranslatef(4, 0, 0);
     }
 
     glPopMatrix();
 
     (rgb) ? glColor3f(1.0, 1.0, 1.0) : glIndexi(7);
     glBegin(GL_LINES);
-	glVertex2i(0, 0);
+    glVertex2i(0, 0);
     glEnd();
 }
 
@@ -200,19 +201,19 @@ static void LineStrip(void)
 {
 
     glBegin(GL_LINE_STRIP);
-	SetColor(1);
-	glVertex2f(PIXEL_CENTER(-boxW/4), PIXEL_CENTER(-boxH/4));
-	SetColor(2);
-	glVertex2f(PIXEL_CENTER(-boxW/4), PIXEL_CENTER(boxH/4));
-	SetColor(3);
-	glVertex2f(PIXEL_CENTER(boxW/4), PIXEL_CENTER(boxH/4));
-	SetColor(4);
-	glVertex2f(PIXEL_CENTER(boxW/4), PIXEL_CENTER(-boxH/4));
+    SetColor(1);
+    glVertex2f(PIXEL_CENTER(-boxW / 4), PIXEL_CENTER(-boxH / 4));
+    SetColor(2);
+    glVertex2f(PIXEL_CENTER(-boxW / 4), PIXEL_CENTER(boxH / 4));
+    SetColor(3);
+    glVertex2f(PIXEL_CENTER(boxW / 4), PIXEL_CENTER(boxH / 4));
+    SetColor(4);
+    glVertex2f(PIXEL_CENTER(boxW / 4), PIXEL_CENTER(-boxH / 4));
     glEnd();
 
     (rgb) ? glColor3f(1.0, 1.0, 1.0) : glIndexi(7);
     glBegin(GL_LINE_STRIP);
-	glVertex2i(0, 0);
+    glVertex2i(0, 0);
     glEnd();
 }
 
@@ -220,14 +221,14 @@ static void LineLoop(void)
 {
 
     glBegin(GL_LINE_LOOP);
-	SetColor(1);
-	glVertex2f(PIXEL_CENTER(-boxW/4), PIXEL_CENTER(-boxH/4));
-	SetColor(2);
-	glVertex2f(PIXEL_CENTER(-boxW/4), PIXEL_CENTER(boxH/4));
-	SetColor(3);
-	glVertex2f(PIXEL_CENTER(boxW/4), PIXEL_CENTER(boxH/4));
-	SetColor(4);
-	glVertex2f(PIXEL_CENTER(boxW/4), PIXEL_CENTER(-boxH/4));
+    SetColor(1);
+    glVertex2f(PIXEL_CENTER(-boxW / 4), PIXEL_CENTER(-boxH / 4));
+    SetColor(2);
+    glVertex2f(PIXEL_CENTER(-boxW / 4), PIXEL_CENTER(boxH / 4));
+    SetColor(3);
+    glVertex2f(PIXEL_CENTER(boxW / 4), PIXEL_CENTER(boxH / 4));
+    SetColor(4);
+    glVertex2f(PIXEL_CENTER(boxW / 4), PIXEL_CENTER(-boxH / 4));
     glEnd();
 
     glEnable(GL_LOGIC_OP);
@@ -238,24 +239,24 @@ static void LineLoop(void)
 
     SetColor(5);
     glBegin(GL_LINE_LOOP);
-	glVertex2f(PIXEL_CENTER(-boxW/8), PIXEL_CENTER(-boxH/8));
-	glVertex2f(PIXEL_CENTER(-boxW/8), PIXEL_CENTER(boxH/8));
+    glVertex2f(PIXEL_CENTER(-boxW / 8), PIXEL_CENTER(-boxH / 8));
+    glVertex2f(PIXEL_CENTER(-boxW / 8), PIXEL_CENTER(boxH / 8));
     glEnd();
     glBegin(GL_LINE_LOOP);
-	glVertex2f(PIXEL_CENTER(-boxW/8), PIXEL_CENTER(boxH/8+5));
-	glVertex2f(PIXEL_CENTER(boxW/8), PIXEL_CENTER(boxH/8+5));
+    glVertex2f(PIXEL_CENTER(-boxW / 8), PIXEL_CENTER(boxH / 8 + 5));
+    glVertex2f(PIXEL_CENTER(boxW / 8), PIXEL_CENTER(boxH / 8 + 5));
     glEnd();
     glDisable(GL_LOGIC_OP);
     glDisable(GL_BLEND);
 
     SetColor(6);
     glBegin(GL_POINTS);
-	glVertex2i(0, 0);
+    glVertex2i(0, 0);
     glEnd();
 
     (rgb) ? glColor3f(1.0, 1.0, 1.0) : glIndexi(7);
     glBegin(GL_LINE_LOOP);
-	glVertex2i(0, 0);
+    glVertex2i(0, 0);
     glEnd();
 }
 
@@ -263,17 +264,17 @@ static void Bitmap(void)
 {
 
     glBegin(GL_LINES);
-	SetColor(1);
-	glVertex2i(-boxW/2, 0);
-	glVertex2i(boxW/2, 0);
-	glVertex2i(0, -boxH/2);
-	glVertex2i(0, boxH/2);
-	SetColor(2);
-	glVertex2i(0, -3);
-	glVertex2i(0, -3+OPENGL_HEIGHT);
-	SetColor(3);
-	glVertex2i(0, -3);
-	glVertex2i(OPENGL_WIDTH, -3);
+    SetColor(1);
+    glVertex2i(-boxW / 2, 0);
+    glVertex2i(boxW / 2, 0);
+    glVertex2i(0, -boxH / 2);
+    glVertex2i(0, boxH / 2);
+    SetColor(2);
+    glVertex2i(0, -3);
+    glVertex2i(0, -3 + OPENGL_HEIGHT);
+    SetColor(3);
+    glVertex2i(0, -3);
+    glVertex2i(OPENGL_WIDTH, -3);
     glEnd();
 
     SetColor(4);
@@ -289,25 +290,25 @@ static void Triangles(void)
 {
 
     glBegin(GL_TRIANGLES);
-	SetColor(1);
-	glVertex2i(-boxW/4, -boxH/4);
-	SetColor(2);
-	glVertex2i(-boxW/8, -boxH/16);
-	SetColor(3);
-	glVertex2i(boxW/8, -boxH/16);
+    SetColor(1);
+    glVertex2i(-boxW / 4, -boxH / 4);
+    SetColor(2);
+    glVertex2i(-boxW / 8, -boxH / 16);
+    SetColor(3);
+    glVertex2i(boxW / 8, -boxH / 16);
 
-	SetColor(4);
-	glVertex2i(-boxW/4, boxH/4);
-	SetColor(5);
-	glVertex2i(-boxW/8, boxH/16);
-	SetColor(6);
-	glVertex2i(boxW/8, boxH/16);
+    SetColor(4);
+    glVertex2i(-boxW / 4, boxH / 4);
+    SetColor(5);
+    glVertex2i(-boxW / 8, boxH / 16);
+    SetColor(6);
+    glVertex2i(boxW / 8, boxH / 16);
     glEnd();
 
     (rgb) ? glColor3f(1.0, 1.0, 1.0) : glIndexi(7);
     glBegin(GL_TRIANGLES);
-	glVertex2i(0, 0);
-	glVertex2i(-100, 100);
+    glVertex2i(0, 0);
+    glVertex2i(-100, 100);
     glEnd();
 }
 
@@ -315,24 +316,24 @@ static void TriangleStrip(void)
 {
 
     glBegin(GL_TRIANGLE_STRIP);
-	SetColor(1);
-	glVertex2i(-boxW/4, -boxH/4);
-	SetColor(2);
-	glVertex2i(-boxW/4, boxH/4);
-	SetColor(3);
-	glVertex2i(0, -boxH/4);
-	SetColor(4);
-	glVertex2i(0, boxH/4);
-	SetColor(5);
-	glVertex2i(boxW/4, -boxH/4);
-	SetColor(6);
-	glVertex2i(boxW/4, boxH/4);
+    SetColor(1);
+    glVertex2i(-boxW / 4, -boxH / 4);
+    SetColor(2);
+    glVertex2i(-boxW / 4, boxH / 4);
+    SetColor(3);
+    glVertex2i(0, -boxH / 4);
+    SetColor(4);
+    glVertex2i(0, boxH / 4);
+    SetColor(5);
+    glVertex2i(boxW / 4, -boxH / 4);
+    SetColor(6);
+    glVertex2i(boxW / 4, boxH / 4);
     glEnd();
 
     (rgb) ? glColor3f(1.0, 1.0, 1.0) : glIndexi(7);
     glBegin(GL_TRIANGLE_STRIP);
-	glVertex2i(0, 0);
-	glVertex2i(-100, 100);
+    glVertex2i(0, 0);
+    glVertex2i(-100, 100);
     glEnd();
 }
 
@@ -342,14 +343,14 @@ static void TriangleFan(void)
     GLint x0, y0, x1, y1, x2, y2, x3, y3;
     GLint i;
 
-    y0 = -boxH/4;
-    y1 = y0 + boxH/2/3;
-    y2 = y1 + boxH/2/3;
-    y3 = boxH/4;
-    x0 = -boxW/4;
-    x1 = x0 + boxW/2/3;
-    x2 = x1 + boxW/2/3;
-    x3 = boxW/4;
+    y0 = -boxH / 4;
+    y1 = y0 + boxH / 2 / 3;
+    y2 = y1 + boxH / 2 / 3;
+    y3 = boxH / 4;
+    x0 = -boxW / 4;
+    x1 = x0 + boxW / 2 / 3;
+    x2 = x1 + boxW / 2 / 3;
+    x3 = boxW / 4;
 
     vx[0][0] = x0; vx[0][1] = y1;
     vx[1][0] = x0; vx[1][1] = y2;
@@ -362,17 +363,17 @@ static void TriangleFan(void)
 
     glBegin(GL_TRIANGLE_FAN);
     SetColor(7);
-	glVertex2i(0, 0);
-	for (i = 0; i < 8; i++) {
-	    SetColor(7-i);
-	    glVertex2iv(vx[i]);
-	}
+    glVertex2i(0, 0);
+    for (i = 0; i < 8; i++) {
+        SetColor(7 - i);
+        glVertex2iv(vx[i]);
+    }
     glEnd();
 
     (rgb) ? glColor3f(1.0, 1.0, 1.0) : glIndexi(7);
     glBegin(GL_TRIANGLE_FAN);
-	glVertex2i(0, 0);
-	glVertex2i(-100, 100);
+    glVertex2i(0, 0);
+    glVertex2i(-100, 100);
     glEnd();
 }
 
@@ -380,7 +381,7 @@ static void Rect(void)
 {
 
     (rgb) ? glColor3f(1.0, 0.0, 1.0) : glIndexi(5);
-    glRecti(-boxW/4, -boxH/4, boxW/4, boxH/4);
+    glRecti(-boxW / 4, -boxH / 4, boxW / 4, boxH / 4);
 }
 
 static void Polygons(void)
@@ -389,14 +390,14 @@ static void Polygons(void)
     GLint x0, y0, x1, y1, x2, y2, x3, y3;
     GLint i;
 
-    y0 = -boxH/4;
-    y1 = y0 + boxH/2/3;
-    y2 = y1 + boxH/2/3;
-    y3 = boxH/4;
-    x0 = -boxW/4;
-    x1 = x0 + boxW/2/3;
-    x2 = x1 + boxW/2/3;
-    x3 = boxW/4;
+    y0 = -boxH / 4;
+    y1 = y0 + boxH / 2 / 3;
+    y2 = y1 + boxH / 2 / 3;
+    y3 = boxH / 4;
+    x0 = -boxW / 4;
+    x1 = x0 + boxW / 2 / 3;
+    x2 = x1 + boxW / 2 / 3;
+    x3 = boxW / 4;
 
     vx[0][0] = x0; vx[0][1] = y1;
     vx[1][0] = x0; vx[1][1] = y2;
@@ -408,16 +409,16 @@ static void Polygons(void)
     vx[7][0] = x1; vx[7][1] = y0;
 
     glBegin(GL_POLYGON);
-	for (i = 0; i < 8; i++) {
-	    SetColor(7-i);
-	    glVertex2iv(vx[i]);
-	}
+    for (i = 0; i < 8; i++) {
+        SetColor(7 - i);
+        glVertex2iv(vx[i]);
+    }
     glEnd();
 
     (rgb) ? glColor3f(1.0, 1.0, 1.0) : glIndexi(7);
     glBegin(GL_POLYGON);
-	glVertex2i(0, 0);
-	glVertex2i(100, 100);
+    glVertex2i(0, 0);
+    glVertex2i(100, 100);
     glEnd();
 }
 
@@ -425,30 +426,30 @@ static void Quads(void)
 {
 
     glBegin(GL_QUADS);
-	SetColor(1);
-	glVertex2i(-boxW/4, -boxH/4);
-	SetColor(2);
-	glVertex2i(-boxW/8, -boxH/16);
-	SetColor(3);
-	glVertex2i(boxW/8, -boxH/16);
-	SetColor(4);
-	glVertex2i(boxW/4, -boxH/4);
+    SetColor(1);
+    glVertex2i(-boxW / 4, -boxH / 4);
+    SetColor(2);
+    glVertex2i(-boxW / 8, -boxH / 16);
+    SetColor(3);
+    glVertex2i(boxW / 8, -boxH / 16);
+    SetColor(4);
+    glVertex2i(boxW / 4, -boxH / 4);
 
-	SetColor(5);
-	glVertex2i(-boxW/4, boxH/4);
-	SetColor(6);
-	glVertex2i(-boxW/8, boxH/16);
-	SetColor(7);
-	glVertex2i(boxW/8, boxH/16);
-	SetColor(0);
-	glVertex2i(boxW/4, boxH/4);
+    SetColor(5);
+    glVertex2i(-boxW / 4, boxH / 4);
+    SetColor(6);
+    glVertex2i(-boxW / 8, boxH / 16);
+    SetColor(7);
+    glVertex2i(boxW / 8, boxH / 16);
+    SetColor(0);
+    glVertex2i(boxW / 4, boxH / 4);
     glEnd();
 
     (rgb) ? glColor3f(1.0, 1.0, 1.0) : glIndexi(7);
     glBegin(GL_QUADS);
-	glVertex2i(0, 0);
-	glVertex2i(100, 100);
-	glVertex2i(-100, 100);
+    glVertex2i(0, 0);
+    glVertex2i(100, 100);
+    glVertex2i(-100, 100);
     glEnd();
 }
 
@@ -456,25 +457,25 @@ static void QuadStrip(void)
 {
 
     glBegin(GL_QUAD_STRIP);
-	SetColor(1);
-	glVertex2i(-boxW/4, -boxH/4);
-	SetColor(2);
-	glVertex2i(-boxW/4, boxH/4);
-	SetColor(3);
-	glVertex2i(0, -boxH/4);
-	SetColor(4);
-	glVertex2i(0, boxH/4);
-	SetColor(5);
-	glVertex2i(boxW/4, -boxH/4);
-	SetColor(6);
-	glVertex2i(boxW/4, boxH/4);
+    SetColor(1);
+    glVertex2i(-boxW / 4, -boxH / 4);
+    SetColor(2);
+    glVertex2i(-boxW / 4, boxH / 4);
+    SetColor(3);
+    glVertex2i(0, -boxH / 4);
+    SetColor(4);
+    glVertex2i(0, boxH / 4);
+    SetColor(5);
+    glVertex2i(boxW / 4, -boxH / 4);
+    SetColor(6);
+    glVertex2i(boxW / 4, boxH / 4);
     glEnd();
 
     (rgb) ? glColor3f(1.0, 1.0, 1.0) : glIndexi(7);
     glBegin(GL_QUAD_STRIP);
-	glVertex2i(0, 0);
-	glVertex2i(100, 100);
-	glVertex2i(-100, 100);
+    glVertex2i(0, 0);
+    glVertex2i(100, 100);
+    glVertex2i(-100, 100);
     glEnd();
 }
 
@@ -495,15 +496,17 @@ static void Draw(void)
     glPopAttrib();
 
     if (mode1) {
-	glShadeModel(GL_SMOOTH);
-    } else {
-	glShadeModel(GL_FLAT);
+        glShadeModel(GL_SMOOTH);
+    }
+    else {
+        glShadeModel(GL_FLAT);
     }
 
     if (mode2) {
-	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    } else {
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    }
+    else {
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     }
 
     Viewport(0, 0); Point();
@@ -523,13 +526,14 @@ static void Draw(void)
     Viewport(2, 3); QuadStrip();
 
     if (doubleBuffer) {
-	glutSwapBuffers();
-    } else {
-	glFlush();
+        glutSwapBuffers();
+    }
+    else {
+        glFlush();
     }
 }
 
-static void Args(int argc, char **argv)
+static void Args(int argc, char** argv)
 {
     GLint i;
 
@@ -537,19 +541,22 @@ static void Args(int argc, char **argv)
     doubleBuffer = GL_FALSE;
 
     for (i = 1; i < argc; i++) {
-	if (strcmp(argv[i], "-ci") == 0) {
-	    rgb = GL_FALSE;
-	} else if (strcmp(argv[i], "-rgb") == 0) {
-	    rgb = GL_TRUE;
-	} else if (strcmp(argv[i], "-sb") == 0) {
-	    doubleBuffer = GL_FALSE;
-	} else if (strcmp(argv[i], "-db") == 0) {
-	    doubleBuffer = GL_TRUE;
-	}
+        if (strcmp(argv[i], "-ci") == 0) {
+            rgb = GL_FALSE;
+        }
+        else if (strcmp(argv[i], "-rgb") == 0) {
+            rgb = GL_TRUE;
+        }
+        else if (strcmp(argv[i], "-sb") == 0) {
+            doubleBuffer = GL_FALSE;
+        }
+        else if (strcmp(argv[i], "-db") == 0) {
+            doubleBuffer = GL_TRUE;
+        }
     }
 }
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
     GLenum type;
 
@@ -560,6 +567,8 @@ int main(int argc, char **argv)
     type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
     glutInitDisplayMode(type);
     glutInitWindowSize(windW, windH);
+    glutInitWindowPosition(1100, 200);
+
     glutCreateWindow("Primitive Test");
 
     Init();

@@ -59,12 +59,12 @@ static void Key(unsigned char key, int x, int y)
 {
 
     switch (key) {
-      case 'd':
-	dithering = !dithering;
-	glutPostRedisplay();
-	break;
-      case 27:
-	exit(0);
+    case 'd':
+        dithering = !dithering;
+        glutPostRedisplay();
+        break;
+    case 27:
+        exit(0);
     }
 }
 
@@ -77,17 +77,17 @@ static void PrintColorStrings()
     xleft = 5 + windW / 4;
     xright = 5 + windW / 2;
 
-    for (i = windH-deltaY+4; i > 0; i -= deltaY) {
-        glReadPixels(xleft, i+10, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, ubbuf);
+    for (i = windH - deltaY + 4; i > 0; i -= deltaY) {
+        glReadPixels(xleft, i + 10, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, ubbuf);
         sprintf(colorString, "(0x%x, 0x%x, 0x%x)", ubbuf[0], ubbuf[1],
-		ubbuf[2]);
+            ubbuf[2]);
         glRasterPos2f(xleft, i);
-	fontDrawStr(bitmapBase, colorString);
-        glReadPixels(xright, i+10, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, ubbuf);
+        fontDrawStr(bitmapBase, colorString);
+        glReadPixels(xright, i + 10, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, ubbuf);
         sprintf(colorString, "(0x%x, 0x%x, 0x%x)", ubbuf[0], ubbuf[1],
-		ubbuf[2]);
+            ubbuf[2]);
         glRasterPos2f(xright, i);
-	fontDrawStr(bitmapBase, colorString);
+        fontDrawStr(bitmapBase, colorString);
     }
 }
 
@@ -109,7 +109,7 @@ static void Draw(void)
 
     /* Draw background */
     glColor3f(0.1, 0.1, 1.0);
-    glRectf(0.0, 0.0, windW/2, windH);
+    glRectf(0.0, 0.0, windW / 2, windH);
 
     /* Draw labels */
     glColor3f(0.8, 0.8, 0.0);
@@ -151,7 +151,7 @@ static void Draw(void)
 
     /* Draw foreground color for comparison */
     glColor3f(0.9, 0.2, 0.8);
-    glRectf(x1, i, x2, i+deltaY);
+    glRectf(x1, i, x2, i + deltaY);
 
     /* Leave one rectangle of background color */
 
@@ -161,91 +161,93 @@ static void Draw(void)
 
     i -= 2 * deltaY;
     glBlendEquationEXT(GL_MIN_EXT);
-    glRectf(x1, i, x2, i+deltaY);
+    glRectf(x1, i, x2, i + deltaY);
 
     i -= deltaY;
     glBlendEquationEXT(GL_MAX_EXT);
-    glRectf(x1, i, x2, i+deltaY);
+    glRectf(x1, i, x2, i + deltaY);
 
     i -= deltaY;
     glBlendEquationEXT(GL_FUNC_SUBTRACT_EXT);
-    glRectf(x1, i, x2, i+deltaY);
+    glRectf(x1, i, x2, i + deltaY);
 
     i -= deltaY;
     glBlendEquationEXT(GL_FUNC_REVERSE_SUBTRACT_EXT);
-    glRectf(x1, i, x2, i+deltaY);
+    glRectf(x1, i, x2, i + deltaY);
 
     glBlendFunc(GL_ONE, GL_ZERO);
     i -= deltaY;
     glBlendEquationEXT(GL_LOGIC_OP);
     glLogicOp(GL_CLEAR);
-    glRectf(x1, i, x2, i+deltaY);
+    glRectf(x1, i, x2, i + deltaY);
 
     i -= deltaY;
     glBlendEquationEXT(GL_LOGIC_OP);
     glLogicOp(GL_SET);
-    glRectf(x1, i, x2, i+deltaY);
+    glRectf(x1, i, x2, i + deltaY);
 
     i -= deltaY;
     glBlendEquationEXT(GL_LOGIC_OP);
     glLogicOp(GL_COPY);
-    glRectf(x1, i, x2, i+deltaY);
+    glRectf(x1, i, x2, i + deltaY);
 
     i -= deltaY;
     glBlendEquationEXT(GL_LOGIC_OP);
     glLogicOp(GL_NOOP);
-    glRectf(x1, i, x2, i+deltaY);
+    glRectf(x1, i, x2, i + deltaY);
 
     i -= deltaY;
     glBlendEquationEXT(GL_LOGIC_OP);
     glLogicOp(GL_AND);
-    glRectf(x1, i, x2, i+deltaY);
+    glRectf(x1, i, x2, i + deltaY);
 
     i -= deltaY;
     glBlendEquationEXT(GL_LOGIC_OP);
     glLogicOp(GL_INVERT);
-    glRectf(x1, i, x2, i+deltaY);
+    glRectf(x1, i, x2, i + deltaY);
 
     i -= deltaY;
     glBlendEquationEXT(GL_LOGIC_OP);
     glLogicOp(GL_OR);
-    glRectf(x1, i, x2, i+deltaY);
+    glRectf(x1, i, x2, i + deltaY);
 
     i -= deltaY;
     glBlendEquationEXT(GL_LOGIC_OP);
     glLogicOp(GL_XOR);
-    glRectf(x1, i, x2, i+deltaY);
-    glRectf(x1, i+10, x2, i+5);
+    glRectf(x1, i, x2, i + deltaY);
+    glRectf(x1, i + 10, x2, i + 5);
 
     if (doPrint) {
-	glDisable(GL_BLEND);
-	glColor3f(1.0, 1.0, 1.0);
-	PrintColorStrings();
+        glDisable(GL_BLEND);
+        glColor3f(1.0, 1.0, 1.0);
+        PrintColorStrings();
     }
 
     if (doubleBuffer) {
         glutSwapBuffers();
-    } else {
+    }
+    else {
         glFlush();
     }
 }
 
-static void Args(int argc, char **argv)
+static void Args(int argc, char** argv)
 {
     GLint i;
 
     doubleBuffer = GL_FALSE;
 
     for (i = 1; i < argc; i++) {
-	if (strcmp(argv[i], "-sb") == 0) {
-	    doubleBuffer = GL_FALSE;
-	} else if (strcmp(argv[i], "-db") == 0) {
-	    doubleBuffer = GL_TRUE;
-	}
+        if (strcmp(argv[i], "-sb") == 0) {
+            doubleBuffer = GL_FALSE;
+        }
+        else if (strcmp(argv[i], "-db") == 0) {
+            doubleBuffer = GL_TRUE;
+        }
     }
 }
 
-static GLboolean QueryExtension(char *extName)
+static GLboolean QueryExtension(char* extName)
 {
     /*
     ** Search for extName in the extensions string. Use of strstr()
@@ -253,19 +255,19 @@ static GLboolean QueryExtension(char *extName)
     ** other extension names. Could use strtok() but the constant
     ** string returned by glGetString can be in read-only memory.
     */
-    char *p = (char *) glGetString(GL_EXTENSIONS);
-    char *end = p + strlen(p);
+    char* p = (char*)glGetString(GL_EXTENSIONS);
+    char* end = p + strlen(p);
     while (p < end) {
-	int n = strcspn(p, " ");
-	if ((strlen(extName) == n) && (strncmp(extName, p, n) == 0)) {
-	    return GL_TRUE;
-	}
-	p += (n + 1);
+        int n = strcspn(p, " ");
+        if ((strlen(extName) == n) && (strncmp(extName, p, n) == 0)) {
+            return GL_TRUE;
+        }
+        p += (n + 1);
     }
     return GL_FALSE;
 }
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
     GLenum type;
 
@@ -279,18 +281,18 @@ int main(int argc, char **argv)
     glutCreateWindow("Blend Equation");
 
     if (!QueryExtension("GL_EXT_blend_logic_op")) {
-	printf("Blend_logic_op extension is not present.\n");
-	exit(0);
+        printf("Blend_logic_op extension is not present.\n");
+        exit(0);
     }
 
     if (!QueryExtension("GL_EXT_blend_minmax")) {
-	printf("Blend_minmax extension is not present.\n");
-	exit(0);
+        printf("Blend_minmax extension is not present.\n");
+        exit(0);
     }
 
     if (!QueryExtension("GL_EXT_blend_subtract")) {
-	printf("Blend_subtract extension is not present.\n");
-	exit(0);
+        printf("Blend_subtract extension is not present.\n");
+        exit(0);
     }
 
     Init();
@@ -303,7 +305,7 @@ int main(int argc, char **argv)
 
 #else
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
 
     printf("GL_EXT_blend_logic_op extension is not present.\n");

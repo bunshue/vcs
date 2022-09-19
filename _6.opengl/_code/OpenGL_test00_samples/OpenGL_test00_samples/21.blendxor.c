@@ -39,12 +39,12 @@ static void Key(unsigned char key, int x, int y)
 {
 
     switch (key) {
-      case 'd':
-	dithering = !dithering;
-	glutPostRedisplay();
-	break;
-      case 27:
-	exit(0);
+    case 'd':
+        dithering = !dithering;
+        glutPostRedisplay();
+        break;
+    case 27:
+        exit(0);
     }
 }
 
@@ -64,15 +64,15 @@ static void Draw(void)
     /* Draw background prims */
     glColor3f(0.1, 0.1, 1.0);
     glBegin(GL_TRIANGLES);
-        glVertex2i(5, 5);
-        glVertex2i(130, 50);
-        glVertex2i(100,  300);
+    glVertex2i(5, 5);
+    glVertex2i(130, 50);
+    glVertex2i(100, 300);
     glEnd();
     glColor3f(0.5, 0.2, 0.9);
     glBegin(GL_TRIANGLES);
-        glVertex2i(200, 100);
-        glVertex2i(330, 50);
-        glVertex2i(340,  400);
+    glVertex2i(200, 100);
+    glVertex2i(330, 50);
+    glVertex2i(340, 400);
     glEnd();
 
     glEnable(GL_BLEND);
@@ -81,29 +81,30 @@ static void Draw(void)
 
     /* Draw a set of rectangles across the window */
     glColor3f(0.9, 0.2, 0.8);
-    for(i = 0; i < 400; i+=60) {
+    for (i = 0; i < 400; i += 60) {
         glBegin(GL_POLYGON);
-            glVertex2i(i, 100);
-            glVertex2i(i+50, 100);
-            glVertex2i(i+50, 200);
-            glVertex2i(i, 200);
+        glVertex2i(i, 100);
+        glVertex2i(i + 50, 100);
+        glVertex2i(i + 50, 200);
+        glVertex2i(i, 200);
         glEnd();
     }
     if (doubleBuffer) {
-	glutSwapBuffers();
-	glDrawBuffer(GL_FRONT);	/* draw next prims in visible buffer */
-    } else {
-	glFlush();
+        glutSwapBuffers();
+        glDrawBuffer(GL_FRONT);	/* draw next prims in visible buffer */
+    }
+    else {
+        glFlush();
     }
     sleep(2);
 
     /* Redraw  the rectangles, which should erase them */
-    for(i = 0; i < 400; i+=60) {
+    for (i = 0; i < 400; i += 60) {
         glBegin(GL_POLYGON);
-            glVertex2i(i, 100);
-            glVertex2i(i+50, 100);
-            glVertex2i(i+50, 200);
-            glVertex2i(i, 200);
+        glVertex2i(i, 100);
+        glVertex2i(i + 50, 100);
+        glVertex2i(i + 50, 200);
+        glVertex2i(i, 200);
         glEnd();
     }
 
@@ -114,22 +115,23 @@ static void Draw(void)
     assert(glGetError() == GL_NO_ERROR);
 }
 
-static void Args(int argc, char **argv)
+static void Args(int argc, char** argv)
 {
     GLint i;
 
     doubleBuffer = GL_FALSE;
 
     for (i = 1; i < argc; i++) {
-	if (strcmp(argv[i], "-sb") == 0) {
-	    doubleBuffer = GL_FALSE;
-	} else if (strcmp(argv[i], "-db") == 0) {
-	    doubleBuffer = GL_TRUE;
-	}
+        if (strcmp(argv[i], "-sb") == 0) {
+            doubleBuffer = GL_FALSE;
+        }
+        else if (strcmp(argv[i], "-db") == 0) {
+            doubleBuffer = GL_TRUE;
+        }
     }
 }
 
-static GLboolean QueryExtension(char *extName)
+static GLboolean QueryExtension(char* extName)
 {
     /*
     ** Search for extName in the extensions string. Use of strstr()
@@ -137,32 +139,32 @@ static GLboolean QueryExtension(char *extName)
     ** other extension names. Could use strtok() but the constant
     ** string returned by glGetString can be in read-only memory.
     */
-    char *p = (char *) glGetString(GL_EXTENSIONS);
-    char *end = p + strlen(p);
+    char* p = (char*)glGetString(GL_EXTENSIONS);
+    char* end = p + strlen(p);
     while (p < end) {
-	int n = strcspn(p, " ");
-	if ((strlen(extName) == n) && (strncmp(extName, p, n) == 0)) {
-	    return GL_TRUE;
-	}
-	p += (n + 1);
+        int n = strcspn(p, " ");
+        if ((strlen(extName) == n) && (strncmp(extName, p, n) == 0)) {
+            return GL_TRUE;
+        }
+        p += (n + 1);
     }
     return GL_FALSE;
 }
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
     Args(argc, argv);
 
 #if (GLUT_API_VERSION >= 4 || GLUT_XLIB_IMPLEMENTATION >= 9)
     if (doubleBuffer) glutInitDisplayString("red<=4 green<=4 blue<=4 double");
-    else glutInitDisplayString("red<=4 green<=4 blue<=4");    
+    else glutInitDisplayString("red<=4 green<=4 blue<=4");
 #else
     {
-       GLenum type = GLUT_RGB;
-       type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
+        GLenum type = GLUT_RGB;
+        type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
 
-       glutInitDisplayMode(type);
+        glutInitDisplayMode(type);
     }
 #endif
 
@@ -170,8 +172,8 @@ int main(int argc, char **argv)
     glutCreateWindow("Blend XOR");
 
     if (!QueryExtension("GL_EXT_blend_logic_op")) {
-	printf("Blend_logic_op extension is not present.\n");
-	exit(0);
+        printf("Blend_logic_op extension is not present.\n");
+        exit(0);
     }
 
     Init();
@@ -184,7 +186,7 @@ int main(int argc, char **argv)
 
 #else
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
 
     printf("GL_EXT_blend_logic_op extension is not present.\n");

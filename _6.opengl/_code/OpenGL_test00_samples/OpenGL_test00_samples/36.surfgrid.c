@@ -27,7 +27,7 @@
 #include <string.h>
 #include <math.h>
 
-//#include <GL/glut.h>      //32 bits
+ //#include <GL/glut.h>      //32 bits
 #include <GL/freeglut.h>    //64 bits
 
 #ifdef GL_EXT_polygon_offset
@@ -37,7 +37,7 @@
 
 
 static GLfloat controlpts[] = {
-	 4.0, 0.0, 0.0, 4.0, 2.0, 0.0, 1.0, 2.0, 3.0, 0.0, 1.0, 2.0,
+     4.0, 0.0, 0.0, 4.0, 2.0, 0.0, 1.0, 2.0, 3.0, 0.0, 1.0, 2.0,
          3.0, 0.0, 1.0, 2.0, 4.0, 0.0, 1.0, 2.0, 8.0, 0.0, 0.0, 4.0,
          8.0, 0.0, 0.0, 4.0, 4.0, 0.0,-1.0, 2.0, 3.0, 0.0,-1.0, 2.0,
          3.0, 0.0,-1.0, 2.0, 2.0, 0.0,-1.0, 2.0, 4.0, 0.0, 0.0, 4.0,
@@ -124,7 +124,7 @@ void norm(float v[3])
 {
     float r;
 
-    r = sqrt( v[0]*v[0] + v[1]*v[1] + v[2]*v[2] );
+    r = sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
 
     v[0] /= r;
     v[1] /= r;
@@ -133,25 +133,25 @@ void norm(float v[3])
 
 float dot(float a[3], float b[3])
 {
-    return (a[0]*b[0] + a[1]*b[1] + a[2]*b[2]);
+    return (a[0] * b[0] + a[1] * b[1] + a[2] * b[2]);
 }
 
 void cross(float v1[3], float v2[3], float result[3])
 {
-    result[0] = v1[1]*v2[2] - v1[2]*v2[1];
-    result[1] = v1[2]*v2[0] - v1[0]*v2[2];
-    result[2] = v1[0]*v2[1] - v1[1]*v2[0];
+    result[0] = v1[1] * v2[2] - v1[2] * v2[1];
+    result[1] = v1[2] * v2[0] - v1[0] * v2[2];
+    result[2] = v1[0] * v2[1] - v1[1] * v2[0];
 }
 
 float length(float v[3])
 {
-    float r = sqrt( v[0]*v[0] + v[1]*v[1] + v[2]*v[2] );
+    float r = sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
     return r;
 }
 
 
 static long winwidth = W, winheight = H;
-GLUnurbsObj *nobj;
+GLUnurbsObj* nobj;
 GLuint surflist, gridlist;
 
 int useglunurbs = 0;
@@ -163,8 +163,8 @@ int fullscreen = 0;
 float modelmatrix[16];
 float factor = 0.5;
 float bias = 0.002;
-int usegments=4;
-int vsegments=4;
+int usegments = 4;
+int vsegments = 4;
 
 int spindx, spindy;
 int startx, starty;
@@ -187,36 +187,36 @@ void move(int x, int y)
     curx = x;
     cury = y;
     if (curx != startx || cury != starty) {
-	redraw();
-	startx = curx;
-	starty = cury;
+        redraw();
+        startx = curx;
+        starty = cury;
     }
 }
 
 
 void button(int button, int state, int x, int y)
 {
-    if(button != GLUT_LEFT_BUTTON)
-	return;
-    switch(state) {
+    if (button != GLUT_LEFT_BUTTON)
+        return;
+    switch (state) {
     case GLUT_DOWN:
-	prevx = curx = startx = x;
-	prevy = cury = starty = y;
-	spindx = 0;
-	spindy = 0;
-	tracking = GL_TRUE;
-	break;
+        prevx = curx = startx = x;
+        prevy = cury = starty = y;
+        spindx = 0;
+        spindy = 0;
+        tracking = GL_TRUE;
+        break;
     case GLUT_UP:
-	/*
-	 * If user released the button while moving the mouse, keep
-	 * spinning.
-	 */
-	if (x != prevx || y != prevy) {
-	    spindx = x - prevx;
-	    spindy = y - prevy;
-	}
-	tracking = GL_FALSE;
-	break;
+        /*
+         * If user released the button while moving the mouse, keep
+         * spinning.
+         */
+        if (x != prevx || y != prevy) {
+            spindx = x - prevx;
+            spindy = y - prevy;
+        }
+        tracking = GL_FALSE;
+        break;
     }
 }
 
@@ -226,7 +226,7 @@ void reshape(int width, int height)
 {
     int size;
     size = (width < height ? width : height);
-    glViewport((width-size)/2, (height-size)/2, size, size);
+    glViewport((width - size) / 2, (height - size) / 2, size, size);
     glutReshapeWindow(size, size);
     redraw();
 }
@@ -269,7 +269,7 @@ void init(void)
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective( 40.0, 1.0, 2.0, 200.0 );
+    gluPerspective(40.0, 1.0, 2.0, 200.0);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glGetFloatv(GL_MODELVIEW_MATRIX, modelmatrix);
@@ -286,13 +286,13 @@ void init(void)
     glEnable(GL_POLYGON_OFFSET_EXT);
     glFrontFace(GL_CCW);
 
-    glEnable( GL_MAP2_VERTEX_4 );
+    glEnable(GL_MAP2_VERTEX_4);
     glClearColor(0.25, 0.25, 0.5, 0.0);
 
-    glPolygonOffsetEXT( factor, bias );
+    glPolygonOffsetEXT(factor, bias);
 
     nobj = gluNewNurbsRenderer();
-    gluNurbsProperty(nobj, GLU_SAMPLING_METHOD, GLU_DOMAIN_DISTANCE );
+    gluNurbsProperty(nobj, GLU_SAMPLING_METHOD, GLU_DOMAIN_DISTANCE);
 
     surflist = glGenLists(1);
     gridlist = glGenLists(1);
@@ -302,82 +302,84 @@ void init(void)
 void drawmesh(void)
 {
     int i, j;
-    float *p;
+    float* p;
 
     int up2p = 4;
     int uorder = 3, vorder = 3;
     int nu = 4, nv = 4;
     int vp2p = up2p * uorder * nu;
 
-    for (j=0; j < nv; j++) {
-	for (i=0; i < nu; i++) {
-	    p = torusbezierpts + (j * vp2p * vorder) + (i * up2p * uorder);
-	    glPolygonOffsetEXT( factor, bias );
-	    glMap2f( GL_MAP2_VERTEX_4, 0.0, 1.0, up2p, 3, 0.0, 1.0, vp2p, 3,
-		     (void*)p );
-	    if (showsurf) {
-		surfacematerials();
-		glEvalMesh2( GL_FILL, 0, usegments, 0, vsegments );
-	    }
-	    if (showgrid) {
-                gridmaterials();
-	        glEvalMesh2( GL_LINE, 0, usegments, 0, vsegments );
+    for (j = 0; j < nv; j++) {
+        for (i = 0; i < nu; i++) {
+            p = torusbezierpts + (j * vp2p * vorder) + (i * up2p * uorder);
+            glPolygonOffsetEXT(factor, bias);
+            glMap2f(GL_MAP2_VERTEX_4, 0.0, 1.0, up2p, 3, 0.0, 1.0, vp2p, 3,
+                (void*)p);
+            if (showsurf) {
+                surfacematerials();
+                glEvalMesh2(GL_FILL, 0, usegments, 0, vsegments);
             }
-	}
+            if (showgrid) {
+                gridmaterials();
+                glEvalMesh2(GL_LINE, 0, usegments, 0, vsegments);
+            }
+        }
     }
 }
 
 void redraw(void)
 {
-    static int i=0;
+    static int i = 0;
     int dx, dy;
     float v[3], n[3], rot[3];
     float len, rlen, ang;
     static GLuint vcount;
 
-    glClear(GL_COLOR_BUFFER_BIT|GL_DEPTH_BUFFER_BIT);
-    glColor3f( 1, 0, 0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glColor3f(1, 0, 0);
 
     if (tracking) {
-	dx = curx - startx;
-	dy = cury - starty;
-    } else {
-	dx = spindx;
-	dy = spindy;
+        dx = curx - startx;
+        dy = cury - starty;
+    }
+    else {
+        dx = spindx;
+        dy = spindy;
     }
     if (dx || dy) {
-	dy = -dy;
-	v[0] = dx;
-	v[1] = dy;
-	v[2] = 0;
+        dy = -dy;
+        v[0] = dx;
+        v[1] = dy;
+        v[2] = 0;
 
-	len = length(v);
-	ang = -len / 600 * 360;
-	norm( v );
-	cross( v, z_axis, rot );
+        len = length(v);
+        ang = -len / 600 * 360;
+        norm(v);
+        cross(v, z_axis, rot);
 
-	/*
-	** This is certainly not recommended for programs that care
-	** about performance or numerical stability: we concatenate
-	** the rotation onto the current modelview matrix and read the
-	** matrix back, thus saving ourselves from writing our own
-	** matrix manipulation routines.
-	*/
-	glLoadIdentity();
-	glRotatef(ang, rot[0], rot[1], rot[2]);
-	glMultMatrixf(modelmatrix);
-	glGetFloatv(GL_MODELVIEW_MATRIX, modelmatrix);
+        /*
+        ** This is certainly not recommended for programs that care
+        ** about performance or numerical stability: we concatenate
+        ** the rotation onto the current modelview matrix and read the
+        ** matrix back, thus saving ourselves from writing our own
+        ** matrix manipulation routines.
+        */
+        glLoadIdentity();
+        glRotatef(ang, rot[0], rot[1], rot[2]);
+        glMultMatrixf(modelmatrix);
+        glGetFloatv(GL_MODELVIEW_MATRIX, modelmatrix);
     }
     glLoadIdentity();
-    glTranslatef( 0.0, 0.0, -10.0 );
+    glTranslatef(0.0, 0.0, -10.0);
     glMultMatrixf(modelmatrix);
-    
+
     if (useglunurbs) {
-	if (showsurf) glCallList(surflist);
-	if (showgrid) glCallList(gridlist);
-    } else {
-	glMapGrid2f( usegments, 0.0, 1.0, vsegments, 0.0, 1.0 );
-	drawmesh();
+        if (showsurf) glCallList(surflist);
+        if (showgrid) glCallList(gridlist);
+    }
+    else {
+        glMapGrid2f(usegments, 0.0, 1.0, vsegments, 0.0, 1.0);
+        drawmesh();
     }
 
     glutSwapBuffers();
@@ -389,7 +391,7 @@ static void usage(void)
     exit(-1);
 }
 
-static GLboolean queryExtension(char *extName)
+static GLboolean queryExtension(char* extName)
 {
     /*
     ** Search for extName in the extensions string.  Use of strstr()
@@ -397,14 +399,14 @@ static GLboolean queryExtension(char *extName)
     ** other extension names.  Could use strtok() but the constant
     ** string returned by glGetString can be in read-only memory.
     */
-    char *p = (char *) glGetString(GL_EXTENSIONS);
-    char *end = p + strlen(p);
+    char* p = (char*)glGetString(GL_EXTENSIONS);
+    char* end = p + strlen(p);
     while (p < end) {
-	int n = strcspn(p, " ");
-	if ((strlen(extName) == n) && (strncmp(extName, p, n) == 0)) {
-	    return GL_TRUE;
-	}
-	p += (n + 1);
+        int n = strcspn(p, " ");
+        if ((strlen(extName) == n) && (strncmp(extName, p, n) == 0)) {
+            return GL_TRUE;
+        }
+        p += (n + 1);
     }
     return GL_FALSE;
 }
@@ -415,107 +417,110 @@ static GLboolean queryExtension(char *extName)
 */
 void menu(int item)
 {
-    switch(item) {
+    switch (item) {
     case 'p':
-	if (glIsEnabled( GL_POLYGON_OFFSET_EXT )) {
-	    glDisable( GL_POLYGON_OFFSET_EXT );
-	    printf("disabling polygon offset\n");
-	} else {
-	    glEnable( GL_POLYGON_OFFSET_EXT );
-	    printf("enabling polygon offset\n");
-	}
-	break;
+        if (glIsEnabled(GL_POLYGON_OFFSET_EXT)) {
+            glDisable(GL_POLYGON_OFFSET_EXT);
+            printf("disabling polygon offset\n");
+        }
+        else {
+            glEnable(GL_POLYGON_OFFSET_EXT);
+            printf("enabling polygon offset\n");
+        }
+        break;
     case 'F':
-	factor += 0.1;
-	printf( "factor: %8.4f\n", factor);
-	break;
+        factor += 0.1;
+        printf("factor: %8.4f\n", factor);
+        break;
     case 'f':
-	factor -= 0.1;
-	printf( "factor: %8.4f\n", factor);
-	break;
+        factor -= 0.1;
+        printf("factor: %8.4f\n", factor);
+        break;
     case 'B':
-	bias += 0.0001;
-	printf( "bias:  %8.4f\n", bias);
-	break;
+        bias += 0.0001;
+        printf("bias:  %8.4f\n", bias);
+        break;
     case 'b':
-	bias -= 0.0001;
-	printf( "bias:  %8.4f\n", bias);
-	break;
+        bias -= 0.0001;
+        printf("bias:  %8.4f\n", bias);
+        break;
     case 'g':
-	showgrid = !showgrid;
-	break;
+        showgrid = !showgrid;
+        break;
     case 'n':
-	useglunurbs = !useglunurbs;
-	break;
+        useglunurbs = !useglunurbs;
+        break;
     case 's':
-	smooth = !smooth;
-	if (smooth) {
-	    glShadeModel( GL_SMOOTH );
-	} else {
-	    glShadeModel( GL_FLAT );
-	}
-	break;
+        smooth = !smooth;
+        if (smooth) {
+            glShadeModel(GL_SMOOTH);
+        }
+        else {
+            glShadeModel(GL_FLAT);
+        }
+        break;
     case 't':
-	showsurf = !showsurf;
-	break;
+        showsurf = !showsurf;
+        break;
     case 'u':
-	usegments = (usegments < 2 ? 1 : usegments-1);
-	createlists();
-	break;
+        usegments = (usegments < 2 ? 1 : usegments - 1);
+        createlists();
+        break;
     case 'U':
-	usegments++;
-	createlists();
-	break;
+        usegments++;
+        createlists();
+        break;
     case 'v':
-	vsegments = (vsegments < 2 ? 1 : vsegments-1);
-	createlists();
-	break;
+        vsegments = (vsegments < 2 ? 1 : vsegments - 1);
+        createlists();
+        break;
     case 'V':
-	vsegments++;
-	createlists();
-	break;
+        vsegments++;
+        createlists();
+        break;
     case '\033': /* ESC key: quit */
-	exit(0);
-	break;
+        exit(0);
+        break;
     }
 }
 
 void key(unsigned char key, int x, int y)
 {
-   menu((int)key);
+    menu((int)key);
 }
 
 void animate()
 {
-    if (!tracking && (spindx!=0 || spindy!=0))
-	redraw();
+    if (!tracking && (spindx != 0 || spindy != 0))
+        redraw();
 }
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
     int i, ms;
 
     glutInit(&argc, argv); /* initialize glut, processing arguments */
 
-    for (i=1; i<argc; i++) {
-	if (argv[i][0] == '-') {
-	    switch (argv[i][1]) {
-	      case 'f':
-		fullscreen = 1;
-		break;
-	      default:
-		usage();
-		break;
-	    }
-	} else {
-	    usage();
-	}
+    for (i = 1; i < argc; i++) {
+        if (argv[i][0] == '-') {
+            switch (argv[i][1]) {
+            case 'f':
+                fullscreen = 1;
+                break;
+            default:
+                usage();
+                break;
+            }
+        }
+        else {
+            usage();
+        }
     }
 
     glutInitWindowSize(winwidth, winheight);
-    glutInitDisplayMode(GLUT_RGBA|GLUT_DOUBLE|GLUT_DEPTH);
+    glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
     glutCreateWindow("Surfgrid: a polygon offset demo "
-		     "(press right button for menu)");
+        "(press right button for menu)");
 
     /* create a menu for the right mouse button */
     glutCreateMenu(menu);
@@ -544,9 +549,9 @@ int main(int argc, char **argv)
     glutIdleFunc(animate);
 
     if (!queryExtension("GL_EXT_polygon_offset")) {
-	printf("Warning: " 
-	       "GL_EXT_polygon_offset not supported on this machine... "
-	       "trying anyway\n");
+        printf("Warning: "
+            "GL_EXT_polygon_offset not supported on this machine... "
+            "trying anyway\n");
     }
 
     init();
@@ -559,25 +564,25 @@ float circleknots[] = { 0.0, 0.0, 0.0, 0.25, 0.50, 0.50, 0.75, 1.0, 1.0, 1.0 };
 
 void createlists(void)
 {
-    gluNurbsProperty(nobj, GLU_U_STEP, (usegments-1)*4 );
-    gluNurbsProperty(nobj, GLU_V_STEP, (vsegments-1)*4 );
+    gluNurbsProperty(nobj, GLU_U_STEP, (usegments - 1) * 4);
+    gluNurbsProperty(nobj, GLU_V_STEP, (vsegments - 1) * 4);
 
     gluNurbsProperty(nobj, GLU_DISPLAY_MODE, GLU_FILL);
     glNewList(surflist, GL_COMPILE);
-    	surfacematerials();
-    	gluBeginSurface(nobj);
-    	gluNurbsSurface(nobj, 10, circleknots, 10, circleknots,
-		    	4, 28, torusnurbpts, 3, 3, GL_MAP2_VERTEX_4);
-    	gluEndSurface(nobj);
+    surfacematerials();
+    gluBeginSurface(nobj);
+    gluNurbsSurface(nobj, 10, circleknots, 10, circleknots,
+        4, 28, torusnurbpts, 3, 3, GL_MAP2_VERTEX_4);
+    gluEndSurface(nobj);
     glEndList();
 
     gluNurbsProperty(nobj, GLU_DISPLAY_MODE, GLU_OUTLINE_POLYGON);
     glNewList(gridlist, GL_COMPILE);
-    	gridmaterials();
-    	gluBeginSurface(nobj);
-    	gluNurbsSurface(nobj, 10, circleknots, 10, circleknots,
-		    	4, 28, torusnurbpts, 3, 3, GL_MAP2_VERTEX_4);
-    	gluEndSurface(nobj);
+    gridmaterials();
+    gluBeginSurface(nobj);
+    gluNurbsSurface(nobj, 10, circleknots, 10, circleknots,
+        4, 28, torusnurbpts, 3, 3, GL_MAP2_VERTEX_4);
+    gluEndSurface(nobj);
     glEndList();
 }
 
@@ -588,7 +593,7 @@ void createlists(void)
  * using OpenGL evaluators.
  */
 static GLfloat torusbezierpts[] = {
-	 4.0, 0.0, 0.0, 4.0, 2.0, 0.0, 1.0, 2.0, 3.0, 0.0, 1.0, 2.0,
+     4.0, 0.0, 0.0, 4.0, 2.0, 0.0, 1.0, 2.0, 3.0, 0.0, 1.0, 2.0,
          3.0, 0.0, 1.0, 2.0, 4.0, 0.0, 1.0, 2.0, 8.0, 0.0, 0.0, 4.0,
          8.0, 0.0, 0.0, 4.0, 4.0, 0.0,-1.0, 2.0, 3.0, 0.0,-1.0, 2.0,
          3.0, 0.0,-1.0, 2.0, 2.0, 0.0,-1.0, 2.0, 4.0, 0.0, 0.0, 4.0,
@@ -664,7 +669,7 @@ static GLfloat torusnurbpts[] = {
 
 #else
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
 
     printf("Couldn't find GL_EXT_polygon_offset extension.\n");

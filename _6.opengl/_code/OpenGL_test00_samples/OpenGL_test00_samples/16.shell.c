@@ -18,8 +18,8 @@ static void Reshape(int width, int height)
 static void Key(unsigned char key, int x, int y)
 {
     switch (key) {
-      case 27:
-	exit(0);
+    case 27:
+        exit(0);
     }
 }
 
@@ -30,28 +30,30 @@ static void Draw(void)
     glClear(GL_COLOR_BUFFER_BIT);
 
     if (doubleBuffer) {
-	glutSwapBuffers();
-    } else {
-	glFlush();
+        glutSwapBuffers();
+    }
+    else {
+        glFlush();
     }
 }
 
-static void Args(int argc, char **argv)
+static void Args(int argc, char** argv)
 {
     GLint i;
 
     doubleBuffer = GL_FALSE;
 
     for (i = 1; i < argc; i++) {
-	if (strcmp(argv[i], "-sb") == 0) {
-	    doubleBuffer = GL_FALSE;
-	} else if (strcmp(argv[i], "-db") == 0) {
-	    doubleBuffer = GL_TRUE;
-	}
+        if (strcmp(argv[i], "-sb") == 0) {
+            doubleBuffer = GL_FALSE;
+        }
+        else if (strcmp(argv[i], "-db") == 0) {
+            doubleBuffer = GL_TRUE;
+        }
     }
 }
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
     GLenum type;
 
@@ -61,7 +63,9 @@ int main(int argc, char **argv)
     type = GLUT_RGB;
     type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
     glutInitDisplayMode(type);
-    glutInitWindowSize(400, 400);
+    glutInitWindowSize(600, 600);
+    glutInitWindowPosition(1100, 200);
+
     glutCreateWindow("Shell");
 
     glutReshapeFunc(Reshape);

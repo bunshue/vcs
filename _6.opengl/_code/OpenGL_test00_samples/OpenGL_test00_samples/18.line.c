@@ -29,9 +29,9 @@ static void Init(void)
     GLint i;
 
     if (!rgb) {
-	for (i = 0; i < 16; i++) {
-	    glutSetColor(i+CI_OFFSET, i/15.0, i/15.0, 0.0);
-	}
+        for (i = 0; i < 16; i++) {
+            glutSetColor(i + CI_OFFSET, i / 15.0, i / 15.0, 0.0);
+        }
     }
 
     glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -59,16 +59,16 @@ static void Key(unsigned char key, int x, int y)
 {
 
     switch (key) {
-      case '1':
-	mode1 = !mode1;
-	glutPostRedisplay();
-	break;
-      case '2':
-	mode2 = !mode2;
-	glutPostRedisplay();
-	break;
-      case 27:
-	exit(0);
+    case '1':
+        mode1 = !mode1;
+        glutPostRedisplay();
+        break;
+    case '2':
+        mode2 = !mode2;
+        glutPostRedisplay();
+        break;
+    case 27:
+        exit(0);
     }
 }
 
@@ -76,17 +76,17 @@ static void SpecialKey(int key, int x, int y)
 {
 
     switch (key) {
-      case GLUT_KEY_UP:
-	size++;
-	glutPostRedisplay();
-	break;
-      case GLUT_KEY_DOWN:
-	size--;
-	if (size < 1) {
-	    size = 1;
-	}
-	glutPostRedisplay();
-	break;
+    case GLUT_KEY_UP:
+        size++;
+        glutPostRedisplay();
+        break;
+    case GLUT_KEY_DOWN:
+        size--;
+        if (size < 1) {
+            size = 1;
+        }
+        glutPostRedisplay();
+        break;
     }
 }
 
@@ -99,51 +99,54 @@ static void Draw(void)
     glLineWidth(size);
 
     if (mode1) {
-	glEnable(GL_LINE_STIPPLE);
-    } else {
-	glDisable(GL_LINE_STIPPLE);
+        glEnable(GL_LINE_STIPPLE);
     }
-    
+    else {
+        glDisable(GL_LINE_STIPPLE);
+    }
+
     if (mode2) {
-	ci = CI_OFFSET;
-	glEnable(GL_LINE_SMOOTH);
-	glEnable(GL_BLEND);
-    } else {
-	ci = 3;
-	glDisable(GL_LINE_SMOOTH);
-	glDisable(GL_BLEND);
+        ci = CI_OFFSET;
+        glEnable(GL_LINE_SMOOTH);
+        glEnable(GL_BLEND);
+    }
+    else {
+        ci = 3;
+        glDisable(GL_LINE_SMOOTH);
+        glDisable(GL_BLEND);
     }
 
     glPushMatrix();
 
     for (i = 0; i < 360; i += 5) {
-	glRotatef(5.0, 0,0,1);
+        glRotatef(5.0, 0, 0, 1);
 
-	(rgb) ? glColor3f(1.0, 1.0, 0.0) : glIndexi(ci);
-	glBegin(GL_LINE_STRIP);
-	    glVertex3fv(pntA);
-	    glVertex3fv(pntB);
-	glEnd();
+        (rgb) ? glColor3f(1.0, 1.0, 0.0) : glIndexi(ci);
+        glBegin(GL_LINE_STRIP);
+        glVertex3fv(pntA);
+        glVertex3fv(pntB);
+        glEnd();
 
-	glPointSize(1);
+        glPointSize(1);
 
-	(rgb) ? glColor3f(0.0, 1.0, 0.0) : glIndexi(2);
-	glBegin(GL_POINTS);
-	    glVertex3fv(pntA);
-	    glVertex3fv(pntB);
-	glEnd();
+        (rgb) ? glColor3f(0.0, 1.0, 0.0) : glIndexi(2);
+        glBegin(GL_POINTS);
+        glVertex3fv(pntA);
+        glVertex3fv(pntB);
+        glEnd();
     }
 
     glPopMatrix();
 
     if (doubleBuffer) {
-	glutSwapBuffers();
-    } else {
-	glFlush();
+        glutSwapBuffers();
+    }
+    else {
+        glFlush();
     }
 }
 
-static void Args(int argc, char **argv)
+static void Args(int argc, char** argv)
 {
     GLint i;
 
@@ -151,19 +154,22 @@ static void Args(int argc, char **argv)
     doubleBuffer = GL_FALSE;
 
     for (i = 1; i < argc; i++) {
-	if (strcmp(argv[i], "-ci") == 0) {
-	    rgb = GL_FALSE;
-	} else if (strcmp(argv[i], "-rgb") == 0) {
-	    rgb = GL_TRUE;
-	} else if (strcmp(argv[i], "-sb") == 0) {
-	    doubleBuffer = GL_FALSE;
-	} else if (strcmp(argv[i], "-db") == 0) {
-	    doubleBuffer = GL_TRUE;
-	}
+        if (strcmp(argv[i], "-ci") == 0) {
+            rgb = GL_FALSE;
+        }
+        else if (strcmp(argv[i], "-rgb") == 0) {
+            rgb = GL_TRUE;
+        }
+        else if (strcmp(argv[i], "-sb") == 0) {
+            doubleBuffer = GL_FALSE;
+        }
+        else if (strcmp(argv[i], "-db") == 0) {
+            doubleBuffer = GL_TRUE;
+        }
     }
 }
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
     GLenum type;
 
@@ -172,7 +178,9 @@ int main(int argc, char **argv)
     type = (rgb) ? GLUT_RGB : GLUT_INDEX;
     type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
     glutInitDisplayMode(type);
-    glutInitWindowSize(300, 300);
+    glutInitWindowSize(600, 600);
+    glutInitWindowPosition(1100, 200);
+
     glutCreateWindow("Line Test");
 
     Init();
@@ -183,3 +191,4 @@ int main(int argc, char **argv)
     glutDisplayFunc(Draw);
     glutMainLoop();
 }
+
