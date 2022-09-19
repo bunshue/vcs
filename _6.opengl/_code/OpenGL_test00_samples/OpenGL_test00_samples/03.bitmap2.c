@@ -1,3 +1,10 @@
+// OpenGL Graphics includes
+//#include <helper_gl.h>
+//#include <GL/freeglut.h>
+
+//#include "cuda_runtime.h"
+//#include "device_launch_parameters.h"
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -621,7 +628,7 @@ static void Init(void)
     useLists = GL_TRUE;
 }
 
-static void Reshape(int width, int height)
+static void reshape(int width, int height)
 {
 
     glViewport(0, 0, width, height);
@@ -632,7 +639,7 @@ static void Reshape(int width, int height)
     glMatrixMode(GL_MODELVIEW);
 }
 
-static void Key(unsigned char key, int x, int y)
+static void keyboard(unsigned char key, int x, int y)
 {
 
     switch (key) {
@@ -649,7 +656,7 @@ static void Key(unsigned char key, int x, int y)
     }
 }
 
-static void Draw(void)
+static void display(void)
 {
     GLint i, j;
 
@@ -767,8 +774,9 @@ int main(int argc, char** argv)
 
     Init();
 
-    glutReshapeFunc(Reshape);
-    glutKeyboardFunc(Key);
-    glutDisplayFunc(Draw);
+    glutDisplayFunc(display);       //設定callback function
+    glutReshapeFunc(reshape);       //設定callback function
+    glutKeyboardFunc(keyboard);     //設定callback function
+
     glutMainLoop();
 }

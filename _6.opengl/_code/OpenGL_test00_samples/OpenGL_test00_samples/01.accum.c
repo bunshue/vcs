@@ -1,3 +1,10 @@
+// OpenGL Graphics includes
+//#include <helper_gl.h>
+//#include <GL/freeglut.h>
+
+//#include "cuda_runtime.h"
+//#include "device_launch_parameters.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -6,27 +13,43 @@
 #include <GL/freeglut.h>    //64 bits
 
 GLenum doubleBuffer;
-GLint thing1, thing2;
+GLint thing1, thing2, thing3, thing4;
 
 static void Init(void)
 {
-    glClearColor(0.0, 0.0, 0.0, 0.0);
+    //           R    G    B     A
+    glClearColor(0.0, 0.0, 0.0, 0.0);   //設定背景色(0 0 0為黑色)
+
     glClearAccum(0.0, 0.0, 0.0, 0.0);
 
     thing1 = glGenLists(1);
     glNewList(thing1, GL_COMPILE);
-    glColor3f(1.0, 0.0, 0.0);
-    glRectf(-1.0, -1.0, 1.0, 0.0);
+    glColor3f(1.0, 0.0, 0.0);   //R
+    glRectf(-1.0, -0.8, 1.0, 0.8);
     glEndList();
 
     thing2 = glGenLists(1);
     glNewList(thing2, GL_COMPILE);
-    glColor3f(0.0, 1.0, 0.0);
-    glRectf(0.0, -1.0, 1.0, 1.0);
+    glColor3f(0.0, 1.0, 0.0);   //G
+    glRectf(-0.8, -1.0, 0.2, 1.0);
+    glEndList();
+
+    thing3 = glGenLists(1);
+    glNewList(thing3, GL_COMPILE);
+    glColor3f(0.0, 0.0, 1.0);   //B
+    glRectf(-0.2, -1.0, 0.8, 1.0);
+
+    /*
+    thing4 = glGenLists(1);
+    glNewList(thing4, GL_COMPILE);
+    glColor3f(1.0, 0.0, 0.0);   //xxxx
+    glRectf(-1.2, -1.2, 1.2, 1.2);
+    */
+
     glEndList();
 }
 
-static void Reshape(int width, int height)
+static void reshape(int width, int height)
 {
     glViewport(0, 0, width, height);
 
@@ -36,7 +59,7 @@ static void Reshape(int width, int height)
     glLoadIdentity();
 }
 
-static void Key(unsigned char key, int x, int y)
+static void keyboard(unsigned char key, int x, int y)
 {
     switch (key)
     {
@@ -53,7 +76,7 @@ static void Key(unsigned char key, int x, int y)
     }
 }
 
-static void Draw(void)
+static void display(void)
 {
     glPushMatrix();
 
@@ -67,14 +90,24 @@ static void Draw(void)
     glCallList(thing2);
     glAccum(GL_ACCUM, 0.5);
 
+    glClear(GL_COLOR_BUFFER_BIT);
+    glCallList(thing3);
+    glAccum(GL_ACCUM, 0.5);
+
+    glClear(GL_COLOR_BUFFER_BIT);
+    glCallList(thing4);
+    glAccum(GL_ACCUM, 0.5);
+
     glAccum(GL_RETURN, 1.0);
 
     glPopMatrix();
 
-    if (doubleBuffer) {
+    if (doubleBuffer)
+    {
         glutSwapBuffers();
     }
-    else {
+    else
+    {
         glFlush();
     }
 }
@@ -85,11 +118,14 @@ static void Args(int argc, char** argv)
 
     doubleBuffer = GL_FALSE;
 
-    for (i = 1; i < argc; i++) {
-        if (strcmp(argv[i], "-sb") == 0) {
+    for (i = 1; i < argc; i++)
+    {
+        if (strcmp(argv[i], "-sb") == 0)
+        {
             doubleBuffer = GL_FALSE;
         }
-        else if (strcmp(argv[i], "-db") == 0) {
+        else if (strcmp(argv[i], "-db") == 0)
+        {
             doubleBuffer = GL_TRUE;
         }
     }
@@ -108,12 +144,13 @@ int main(int argc, char** argv)
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(1100, 200);
 
-    glutCreateWindow("Accum Test");
+    glutCreateWindow("顏色重疊測試");
 
     Init();
 
-    glutReshapeFunc(Reshape);
-    glutKeyboardFunc(Key);
-    glutDisplayFunc(Draw);
+    glutDisplayFunc(display);       //設定callback function
+    glutReshapeFunc(reshape);       //設定callback function
+    glutKeyboardFunc(keyboard);     //設定callback function
+
     glutMainLoop();
 }

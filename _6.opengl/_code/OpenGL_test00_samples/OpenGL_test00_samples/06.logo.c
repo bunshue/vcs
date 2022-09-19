@@ -1,3 +1,10 @@
+// OpenGL Graphics includes
+//#include <helper_gl.h>
+//#include <GL/freeglut.h>
+
+//#include "cuda_runtime.h"
+//#include "device_launch_parameters.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -1278,7 +1285,7 @@ static void Init(void)
 	polyMode = GL_BACK;
 }
 
-static void Reshape(int width, int height)
+static void reshape(int width, int height)
 {
 
 	glViewport(0, 0, width, height);
@@ -1289,10 +1296,10 @@ static void Reshape(int width, int height)
 	glMatrixMode(GL_MODELVIEW);
 }
 
-static void Key(unsigned char key, int x, int y)
+static void keyboard(unsigned char key, int x, int y)
 {
-
-	switch (key) {
+	switch (key)
+{
 	case 'z':
 		zTranslation -= 1.0;
 		glutPostRedisplay();
@@ -1314,7 +1321,8 @@ static void Key(unsigned char key, int x, int y)
 		glutPostRedisplay();
 		break;
 	case '4':
-		switch (polyMode) {
+		switch (polyMode)
+		{
 		case GL_BACK:
 			polyMode = GL_FRONT;
 			break;
@@ -1352,11 +1360,13 @@ static void Key(unsigned char key, int x, int y)
 		break;
 	case '9':
 		doStipple = !doStipple;
-		if (doStipple) {
+		if (doStipple)
+		{
 			glPolygonStipple(stipple);
 			glEnable(GL_POLYGON_STIPPLE);
 		}
-		else {
+		else
+		{
 			glDisable(GL_POLYGON_STIPPLE);
 		}
 		glutPostRedisplay();
@@ -1441,8 +1451,8 @@ static void Key(unsigned char key, int x, int y)
 
 static void SpecialKey(int key, int x, int y)
 {
-
-	switch (key) {
+	switch (key)
+	{
 	case GLUT_KEY_LEFT:
 		yRotation += 0.5;
 		glutPostRedisplay();
@@ -1462,7 +1472,7 @@ static void SpecialKey(int key, int x, int y)
 	}
 }
 
-static void Draw(void)
+static void display(void)
 {
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -1477,10 +1487,12 @@ static void Draw(void)
 
 	glPopMatrix();
 
-	if (doubleBuffer) {
+	if (doubleBuffer)
+	{
 		glutSwapBuffers();
 	}
-	else {
+	else
+	{
 		glFlush();
 	}
 }
@@ -1491,11 +1503,14 @@ static void Args(int argc, char** argv)
 
 	doubleBuffer = GL_FALSE;
 
-	for (i = 1; i < argc; i++) {
-		if (strcmp(argv[i], "-sb") == 0) {
+	for (i = 1; i < argc; i++)
+	{
+		if (strcmp(argv[i], "-sb") == 0)
+		{
 			doubleBuffer = GL_FALSE;
 		}
-		else if (strcmp(argv[i], "-db") == 0) {
+		else if (strcmp(argv[i], "-db") == 0)
+		{
 			doubleBuffer = GL_TRUE;
 		}
 	}
@@ -1518,9 +1533,11 @@ int main(int argc, char** argv)
 
 	Init();
 
-	glutReshapeFunc(Reshape);
-	glutKeyboardFunc(Key);
+	glutDisplayFunc(display);       //設定callback function
+	glutReshapeFunc(reshape);       //設定callback function
+	glutKeyboardFunc(keyboard);     //設定callback function
+
 	glutSpecialFunc(SpecialKey);
-	glutDisplayFunc(Draw);
+
 	glutMainLoop();
 }
