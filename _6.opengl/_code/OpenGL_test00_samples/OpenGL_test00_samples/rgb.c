@@ -1,7 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h> 
 #include <string.h>
-#include <GL/glut.h>
+
+//#include <GL/glut.h>      //32 bits
+#include <GL/freeglut.h>    //64 bits
+
 #include "rgb.h"
 
 /******************************************************************************/

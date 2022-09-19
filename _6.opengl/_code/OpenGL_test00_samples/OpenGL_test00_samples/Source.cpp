@@ -1,7 +1,9 @@
 ﻿// OpenGL Graphics includes
 #include <iostream>
 #include <helper_gl.h>
-#include <GL/freeglut.h>
+
+//#include <GL/glut.h>      //32 bits
+#include <GL/freeglut.h>    //64 bits
 
 //#include "cuda_runtime.h"
 //#include "device_launch_parameters.h"
@@ -150,8 +152,8 @@ int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-	glutInitWindowSize(500, 500);
-	glutInitWindowPosition(0, 0);
+    glutInitWindowSize(600, 600);
+    glutInitWindowPosition(1100, 200);
 	glutCreateWindow("開啟視窗");	//開啟視窗 並顯示出視窗 Title
 
 	init();
