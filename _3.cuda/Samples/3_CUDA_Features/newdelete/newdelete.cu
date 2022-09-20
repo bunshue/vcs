@@ -14,7 +14,7 @@ namespace cg = cooperative_groups;
 #include <vector>
 #include <algorithm>
 
-const char *sSDKsample = "newdelete";
+const char* sSDKsample = "newdelete";
 
 #include "container.hpp"
 
@@ -127,10 +127,10 @@ __global__ void placementNew(int* d_result)
 }
 
 struct ComplexType_t {
-  int a;
-  int b;
-  float c;
-  float d;
+    int a;
+    int b;
+    float c;
+    float d;
 };
 
 __global__ void complexVector(int* d_result)

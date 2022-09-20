@@ -23,22 +23,22 @@
 #include <helper_timer.h>
 
 // SDK information
-static const char *printfFile = "randomFog.txt";
+static const char* printfFile = "randomFog.txt";
 
 // RNG instance
-RNG *g_pRng = NULL;
+RNG* g_pRng = NULL;
 
 // CheckRender instance (for QA)
-CheckRender *g_pCheckRender = NULL;
+CheckRender* g_pCheckRender = NULL;
 
 // Simple struct which contains the position and color of a vertex
 struct SVertex {
-  GLfloat x, y, z;
-  GLfloat r, g, b;
+    GLfloat x, y, z;
+    GLfloat r, g, b;
 };
 
 // Data for the vertices
-SVertex *g_pVertices = NULL;
+SVertex* g_pVertices = NULL;
 int g_nVertices;           // Size of the vertex array
 int g_nVerticesPopulated;  // Number currently populated
 
@@ -64,22 +64,26 @@ void createCube(void)
 {
     int startVertex = 0;
 
-    for (int i = startVertex; i < g_nVerticesPopulated; i++) {
+    for (int i = startVertex; i < g_nVerticesPopulated; i++)
+    {
         g_pVertices[i].x = (g_pRng->getNextU01() - .5f) * 2;
 
-        for (int j = 0; j < nSkip1; j++) {
+        for (int j = 0; j < nSkip1; j++)
+        {
             g_pRng->getNextU01();
         }
 
         g_pVertices[i].y = (g_pRng->getNextU01() - .5f) * 2;
 
-        for (int j = 0; j < nSkip2; j++) {
+        for (int j = 0; j < nSkip2; j++)
+        {
             g_pRng->getNextU01();
         }
 
         g_pVertices[i].z = (g_pRng->getNextU01() - .5f) * 2;
 
-        for (int j = 0; j < nSkip3; j++) {
+        for (int j = 0; j < nSkip3; j++)
+        {
             g_pRng->getNextU01();
         }
 
@@ -93,16 +97,19 @@ void createPlane(void)
 {
     int startVertex = 0;
 
-    for (int i = startVertex; i < g_nVerticesPopulated; i++) {
+    for (int i = startVertex; i < g_nVerticesPopulated; i++)
+    {
         g_pVertices[i].x = (g_pRng->getNextU01() - .5f) * 2;
 
-        for (int j = 0; j < nSkip1; j++) {
+        for (int j = 0; j < nSkip1; j++)
+        {
             g_pRng->getNextU01();
         }
 
         g_pVertices[i].y = (g_pRng->getNextU01() - .5f) * 2;
 
-        for (int j = 0; j < nSkip2; j++) {
+        for (int j = 0; j < nSkip2; j++)
+        {
             g_pRng->getNextU01();
         }
 
@@ -124,11 +131,13 @@ void createSphere(void)
         float rho;
         float theta;
 
-        if (g_currentShape == Sphere) {
+        if (g_currentShape == Sphere)
+        {
             r = g_pRng->getNextU01();
             r = powf(r, 1.f / 3.f);
 
-            for (int j = 0; j < nSkip3; j++) {
+            for (int j = 0; j < nSkip3; j++)
+            {
                 g_pRng->getNextU01();
             }
         }

@@ -205,10 +205,12 @@ void initGLBuffers() {
 }
 
 // Load raw data from disk
-uchar* loadRawFile(const char* filename, size_t size) {
+uchar* loadRawFile(const char* filename, size_t size)
+{
     FILE* fp = fopen(filename, "rb");
 
-    if (!fp) {
+    if (!fp)
+    {
         fprintf(stderr, "Error opening file '%s'\n", filename);
         return 0;
     }
@@ -222,7 +224,8 @@ uchar* loadRawFile(const char* filename, size_t size) {
     return data;
 }
 
-void initGL(int* argc, char** argv) {
+void initGL(int* argc, char** argv)
+{
     // initialize GLUT callback functions
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
@@ -233,28 +236,27 @@ void initGL(int* argc, char** argv) {
     glutReshapeFunc(reshape);
     glutIdleFunc(idle);
 
-    if (!isGLVersionSupported(2, 0) ||
-        !areGLExtensionsSupported("GL_ARB_pixel_buffer_object")) {
+    if (!isGLVersionSupported(2, 0) || !areGLExtensionsSupported("GL_ARB_pixel_buffer_object"))
+    {
         fprintf(stderr, "Required OpenGL extensions are missing.");
         exit(EXIT_FAILURE);
     }
 }
 
-void runAutoTest(const char* ref_file, char* exec_path) {
+void runAutoTest(const char* ref_file, char* exec_path)
+{
     size_t windowBytes = windowSize.x * windowSize.y * sizeof(GLubyte) * 4;
 
     checkCudaErrors(cudaMalloc((void**)&d_output, windowBytes));
 
     // render the volumeData
-    renderAtlasImage(windowGridSize, windowBlockSize, d_output, windowSize.x,
-        windowSize.y, lod);
+    renderAtlasImage(windowGridSize, windowBlockSize, d_output, windowSize.x, windowSize.y, lod);
 
     checkCudaErrors(cudaDeviceSynchronize());
     getLastCudaError("render_kernel failed");
 
     void* h_output = malloc(windowBytes);
-    checkCudaErrors(
-        cudaMemcpy(h_output, d_output, windowBytes, cudaMemcpyDeviceToHost));
+    checkCudaErrors(cudaMemcpy(h_output, d_output, windowBytes, cudaMemcpyDeviceToHost));
     sdkDumpBin(h_output, (unsigned int)windowBytes, "bindlessTexture.bin");
 
     bool bTestResult = sdkCompareBin2BinFloat(
@@ -325,7 +327,7 @@ int main(int argc, char** argv)
 
     char* ref_file = NULL;
 
-    printf("Starting...\n\n" );
+    printf("Starting...\n\n");
 
     if (checkCmdLineFlag(argc, (const char**)argv, "file"))
     {
