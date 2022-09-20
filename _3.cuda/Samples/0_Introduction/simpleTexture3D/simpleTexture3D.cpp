@@ -1,30 +1,3 @@
-/* Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *  * Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  * Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *  * Neither the name of NVIDIA CORPORATION nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
 /*
   3D texture sample
 
@@ -38,15 +11,7 @@
 #include <math.h>
 #include <helper_gl.h>
 
-#if defined(__APPLE__) || defined(MACOSX)
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#include <GLUT/glut.h>
-#ifndef glutCloseFunc
-#define glutCloseFunc glutWMCloseFunc
-#endif
-#else
 #include <GL/freeglut.h>
-#endif
 
 // includes, cuda
 #include <vector_types.h>
@@ -243,6 +208,9 @@ void cleanup() {
 }
 
 void initGLBuffers() {
+
+    printf("initGLBuffers\n");
+
   // create pixel buffer object
   glGenBuffers(1, &pbo);
   glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, pbo);
@@ -274,10 +242,14 @@ uchar *loadRawFile(const char *filename, size_t size) {
 }
 
 void initGL(int *argc, char **argv) {
+
+    printf("initGL\n");
+
   // initialize GLUT callback functions
   glutInit(argc, argv);
   glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
   glutInitWindowSize(width, height);
+  printf("initGL w= %d, h = %d\n", width, height);
   glutCreateWindow("CUDA 3D texture");
   glutDisplayFunc(display);
   glutKeyboardFunc(keyboard);
@@ -321,11 +293,16 @@ void runAutoTest(const char *ref_file, char *exec_path) {
   exit(bTestResult ? EXIT_SUCCESS : EXIT_FAILURE);
 }
 
-void loadVolumeData(char *exec_path) {
+void loadVolumeData(char* exec_path)
+{
+    printf("loadVolumeData, volumeFilename=%s\n", volumeFilename);
+    printf("loadVolumeData, exec_path=%s\n", exec_path);
+
   // load volume data
   const char *path = sdkFindFilePath(volumeFilename, exec_path);
 
-  if (path == NULL) {
+    if (path == NULL)
+    {
     fprintf(stderr, "Error unable to find 3D Volume file: '%s'\n",
             volumeFilename);
     exit(EXIT_FAILURE);
@@ -343,15 +320,14 @@ void loadVolumeData(char *exec_path) {
 ////////////////////////////////////////////////////////////////////////////////
 // Program main
 ////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char **argv) {
+int main(int argc, char** argv)
+{
   pArgc = &argc;
   pArgv = argv;
 
   char *ref_file = NULL;
 
-#if defined(__linux__)
-  setenv("DISPLAY", ":0", 0);
-#endif
+    printf("main start\n");
 
   printf("%s Starting...\n\n", sSDKsample);
 
@@ -376,15 +352,10 @@ int main(int argc, char **argv) {
     loadVolumeData(argv[0]);
   }
 
-  printf(
-      "Press space to toggle animation\n"
-      "Press '+' and '-' to change displayed slice\n");
+    printf("Press space to toggle animation\nPress '+' and '-' to change displayed slice\n");
 
-#if defined(__APPLE__) || defined(MACOSX)
-  atexit(cleanup);
-#else
+    printf("call glutCloseFunc\n");
   glutCloseFunc(cleanup);
-#endif
 
   glutMainLoop();
 

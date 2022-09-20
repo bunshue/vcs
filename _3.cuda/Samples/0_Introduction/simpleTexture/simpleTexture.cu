@@ -54,13 +54,6 @@ __global__ void transformKernel(float* outputData, int width, int height, float 
     outputData[y * width + x] = tex2D<float>(tex, tu + 0.5f, tv + 0.5f);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// Declaration, forward
-void runTest(int argc, char** argv);
-
-////////////////////////////////////////////////////////////////////////////////
-//! Run a simple test for CUDA
-////////////////////////////////////////////////////////////////////////////////
 void runTest(int argc, char** argv)
 {
     int devID = findCudaDevice(argc, (const char**)argv);

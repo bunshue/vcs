@@ -31,7 +31,8 @@ __global__ static void timedReduction(const float* input, float* output, clock_t
     shared[tid + blockDim.x] = input[tid + blockDim.x];
 
     // Perform reduction to find minimum.
-    for (int d = blockDim.x; d > 0; d /= 2) {
+    for (int d = blockDim.x; d > 0; d /= 2)
+    {
         __syncthreads();
 
         if (tid < d)

@@ -9,7 +9,7 @@
  * attached to both GPUs.
  */
 
-// System includes
+ // System includes
 #include <stdio.h>
 #include <assert.h>
 

@@ -32,7 +32,8 @@ int g_TotalFailures = 0;
 //! @param g_odata  output data in global memory
 ////////////////////////////////////////////////////////////////////////////////
 template <class T>
-__global__ void testKernel(T* g_idata, T* g_odata) {
+__global__ void testKernel(T* g_idata, T* g_odata)
+{
     // Shared mem size is determined by the host app at run time
     SharedMemory<T> smem;
     T* sdata = smem.getPointer();
@@ -60,27 +61,14 @@ template <class T>
 void runTest(int argc, char** argv, int len);
 
 template <class T>
-void computeGold(T* reference, T* idata, const unsigned int len) {
+void computeGold(T* reference, T* idata, const unsigned int len)
+{
     const T T_len = static_cast<T>(len);
 
-    for (unsigned int i = 0; i < len; ++i) {
+    for (unsigned int i = 0; i < len; ++i)
+    {
         reference[i] = idata[i] * T_len;
     }
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// Program main
-////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char** argv)
-{
-    printf("> runTest<float,32>\n");
-    runTest<float>(argc, argv, 32);
-    printf("> runTest<int,64>\n");
-    runTest<int>(argc, argv, 64);
-
-    printf("\n[simpleTemplates] -> Test Results: %d Failures\n", g_TotalFailures);
-
-    exit(g_TotalFailures == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
 }
 
 // To completely templatize runTest (below) with cutil, we need to use
@@ -89,59 +77,68 @@ int main(int argc, char** argv)
 
 // Here's the generic wrapper for cutCompare*
 template <class T>
-class ArrayComparator {
+class ArrayComparator
+{
 public:
-    bool compare(const T* reference, T* data, unsigned int len) {
-        fprintf(stderr,
-            "Error: no comparison function implemented for this type\n");
+    bool compare(const T* reference, T* data, unsigned int len)
+    {
+        fprintf(stderr, "Error: no comparison function implemented for this type\n");
         return false;
     }
 };
 
 // Here's the specialization for ints:
 template <>
-class ArrayComparator<int> {
+class ArrayComparator<int>
+{
 public:
-    bool compare(const int* reference, int* data, unsigned int len) {
+    bool compare(const int* reference, int* data, unsigned int len)
+    {
         return compareData(reference, data, len, 0.15f, 0.0f);
     }
 };
 
 // Here's the specialization for floats:
 template <>
-class ArrayComparator<float> {
+class ArrayComparator<float>
+{
 public:
-    bool compare(const float* reference, float* data, unsigned int len) {
+    bool compare(const float* reference, float* data, unsigned int len)
+    {
         return compareData(reference, data, len, 0.15f, 0.15f);
     }
 };
 
 // Here's the generic wrapper for cutWriteFile*
 template <class T>
-class ArrayFileWriter {
+class ArrayFileWriter
+{
 public:
-    bool write(const char* filename, T* data, unsigned int len, float epsilon) {
-        fprintf(stderr,
-            "Error: no file write function implemented for this type\n");
+    bool write(const char* filename, T* data, unsigned int len, float epsilon)
+    {
+        fprintf(stderr, "Error: no file write function implemented for this type\n");
         return false;
     }
 };
 
 // Here's the specialization for ints:
 template <>
-class ArrayFileWriter<int> {
+class ArrayFileWriter<int>
+{
 public:
-    bool write(const char* filename, int* data, unsigned int len, float epsilon) {
+    bool write(const char* filename, int* data, unsigned int len, float epsilon)
+    {
         return sdkWriteFile(filename, data, len, epsilon, false);
     }
 };
 
 // Here's the specialization for floats:
 template <>
-class ArrayFileWriter<float> {
+class ArrayFileWriter<float>
+{
 public:
-    bool write(const char* filename, float* data, unsigned int len,
-        float epsilon) {
+    bool write(const char* filename, float* data, unsigned int len, float epsilon)
+    {
         return sdkWriteFile(filename, data, len, epsilon, false);
     }
 };
@@ -150,7 +147,8 @@ public:
 //! Run a simple test for CUDA
 ////////////////////////////////////////////////////////////////////////////////
 template <class T>
-void runTest(int argc, char** argv, int len) {
+void runTest(int argc, char** argv, int len)
+{
     int devID;
     cudaDeviceProp deviceProps;
 
@@ -158,8 +156,7 @@ void runTest(int argc, char** argv, int len) {
 
     // get number of SMs on this GPU
     checkCudaErrors(cudaGetDeviceProperties(&deviceProps, devID));
-    printf("CUDA device [%s] has %d Multi-Processors\n", deviceProps.name,
-        deviceProps.multiProcessorCount);
+    printf("CUDA device [%s] has %d Multi-Processors\n", deviceProps.name, deviceProps.multiProcessorCount);
 
     // create and start timer
     StopWatchInterface* timer = NULL;
@@ -175,7 +172,8 @@ void runTest(int argc, char** argv, int len) {
     T* h_idata = (T*)malloc(mem_size);
 
     // initialize the memory
-    for (unsigned int i = 0; i < num_threads; ++i) {
+    for (unsigned int i = 0; i < num_threads; ++i)
+    {
         h_idata[i] = (T)i;
     }
 
@@ -183,8 +181,7 @@ void runTest(int argc, char** argv, int len) {
     T* d_idata;
     checkCudaErrors(cudaMalloc((void**)&d_idata, mem_size));
     // copy host memory to device
-    checkCudaErrors(
-        cudaMemcpy(d_idata, h_idata, mem_size, cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(d_idata, h_idata, mem_size, cudaMemcpyHostToDevice));
 
     // allocate device memory for result
     T* d_odata;
@@ -203,8 +200,7 @@ void runTest(int argc, char** argv, int len) {
     // allocate mem for the result on host side
     T* h_odata = (T*)malloc(mem_size);
     // copy result from device to host
-    checkCudaErrors(cudaMemcpy(h_odata, d_odata, sizeof(T) * num_threads,
-        cudaMemcpyDeviceToHost));
+    checkCudaErrors(cudaMemcpy(h_odata, d_odata, sizeof(T) * num_threads, cudaMemcpyDeviceToHost));
 
     sdkStopTimer(&timer);
     printf("Processing time: %f (ms)\n", sdkGetTimerValue(&timer));
@@ -218,11 +214,13 @@ void runTest(int argc, char** argv, int len) {
     ArrayFileWriter<T> writer;
 
     // check result
-    if (checkCmdLineFlag(argc, (const char**)argv, "regression")) {
+    if (checkCmdLineFlag(argc, (const char**)argv, "regression"))
+    {
         // write file for regression test
         writer.write("./data/regression.dat", h_odata, num_threads, 0.0f);
     }
-    else {
+    else
+    {
         // custom output handling when no regression test running
         // in this case check if the result is equivalent to the expected solution
         bool res = comparator.compare(reference, h_odata, num_threads);
@@ -237,3 +235,19 @@ void runTest(int argc, char** argv, int len) {
     checkCudaErrors(cudaFree(d_idata));
     checkCudaErrors(cudaFree(d_odata));
 }
+
+////////////////////////////////////////////////////////////////////////////////
+// Program main
+////////////////////////////////////////////////////////////////////////////////
+int main(int argc, char** argv)
+{
+    printf("> runTest<float,32>\n");
+    runTest<float>(argc, argv, 32);
+    printf("> runTest<int,64>\n");
+    runTest<int>(argc, argv, 64);
+
+    printf("\n[simpleTemplates] -> Test Results: %d Failures\n", g_TotalFailures);
+
+    exit(g_TotalFailures == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
+}
+
