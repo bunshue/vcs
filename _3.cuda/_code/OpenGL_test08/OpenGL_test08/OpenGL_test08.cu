@@ -25,6 +25,7 @@ void init() {
 // 繪圖回調函數
 void display()
 {
+    printf("d ");
     // 清除之前幀數據
     glClear(GL_COLOR_BUFFER_BIT);
 
@@ -59,11 +60,13 @@ int main(int argc, const char* argv[])
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
     // 初始化窗口
-    glutInitWindowSize(500, 500);
-    glutInitWindowPosition(100, 100);
-    glutCreateWindow(argv[0]);
+    glutInitWindowSize(600, 600);
+    glutInitWindowPosition(1100, 200);
+
+    glutCreateWindow("Color Map");
 
     init();
+
     glutReshapeFunc(reshape);
     glutDisplayFunc(display);
 
