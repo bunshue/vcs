@@ -19,7 +19,7 @@
 
 
 GLenum doubleBuffer;
-int W = 400, H = 400;
+int W = 600, H = 600;
 
 RGBImageRec* image = NULL;
 
@@ -775,9 +775,8 @@ void ReInit(void)
 	glTexEnvfv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, textureEnvironment);
 }
 
-void Draw(void)
+void display(void)
 {
-
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glFrustum(-0.2, 0.2, -0.2, 0.2, 0.15, 9.0);
@@ -818,26 +817,27 @@ void Draw(void)
 		yRotation += .375;
 	}
 
-	if (doubleBuffer) {
+	if (doubleBuffer)
+	{
 		glutSwapBuffers();
 	}
-	else {
+	else
+	{
 		glFlush();
 	}
 }
 
-void Reshape(int width, int height)
+void reshape(int width, int height)
 {
-
 	W = width;
 	H = height;
 	ReInit();
 }
 
-void Key(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int x, int y)
 {
-
-	switch (key) {
+	switch (key)
+	{
 	case 'a':
 		autoRotate = !autoRotate;
 		ReInit();
@@ -921,8 +921,8 @@ void Key(unsigned char key, int x, int y)
 
 void SpecialKey(int key, int x, int y)
 {
-
-	switch (key) {
+	switch (key)
+	{
 	case GLUT_KEY_LEFT:
 		yRotation -= 0.5;
 		autoRotate = FALSE;
@@ -957,30 +957,39 @@ void Args(int argc, char** argv)
 	doubleBuffer = GL_FALSE;
 	numComponents = 4;
 
-	for (i = 1; i < argc; i++) {
-		if (strcmp(argv[i], "-sb") == 0) {
+	for (i = 1; i < argc; i++)
+	{
+		if (strcmp(argv[i], "-sb") == 0)
+		{
 			doubleBuffer = GL_FALSE;
 		}
-		else if (strcmp(argv[i], "-db") == 0) {
+		else if (strcmp(argv[i], "-db") == 0)
+		{
 			doubleBuffer = GL_TRUE;
 		}
-		else if (strcmp(argv[i], "-f") == 0) {
-			if (i + 1 >= argc || argv[i + 1][0] == '-') {
+		else if (strcmp(argv[i], "-f") == 0)
+		{
+			if (i + 1 >= argc || argv[i + 1][0] == '-')
+			{
 				printf("-f (No file name).\n");
 				exit(1);
 			}
-			else {
+			else
+			{
 				image = rgbImageLoad(argv[++i]);
-				if (image == NULL) {
+				if (image == NULL)
+				{
 					printf("-f (Bad file name).\n");
 					exit(1);
 				}
 			}
 		}
-		else if (strcmp(argv[i], "-4") == 0) {
+		else if (strcmp(argv[i], "-4") == 0)
+		{
 			numComponents = 4;
 		}
-		else if (strcmp(argv[i], "-3") == 0) {
+		else if (strcmp(argv[i], "-3") == 0)
+		{
 			numComponents = 3;
 		}
 	}
@@ -993,6 +1002,12 @@ int main(int argc, char** argv)
 	glutInit(&argc, argv);
 	Args(argc, argv);
 
+	if (image == NULL)
+	{
+		char* filename = "1.rgb";
+		image = rgbImageLoad(filename);
+	}
+
 	if (image == NULL) {
 		printf("No texture file.\n");
 		exit(1);
@@ -1000,18 +1015,21 @@ int main(int argc, char** argv)
 
 	type = GLUT_RGB | GLUT_DEPTH;
 	type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
+
 	glutInitDisplayMode(type);
 	glutInitWindowSize(W, H);
 	glutInitWindowPosition(1100, 200);
+
 	glutCreateWindow("Texture Test");
 
 	Init();
 
-	glutReshapeFunc(Reshape);
-	glutKeyboardFunc(Key);
-	glutSpecialFunc(SpecialKey);
-	glutDisplayFunc(Draw);
-	glutIdleFunc(Draw);
+	glutDisplayFunc(display);       //設定callback function
+	glutReshapeFunc(reshape);       //設定callback function
+	glutKeyboardFunc(keyboard);     //設定callback function
+	glutSpecialFunc(SpecialKey);    //設定callback function
+
+	glutIdleFunc(display);
 
 	glutMainLoop();
 }

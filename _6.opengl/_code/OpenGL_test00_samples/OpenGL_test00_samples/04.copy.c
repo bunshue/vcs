@@ -8,16 +8,15 @@
 #include "rgb.h"
 
 GLenum doubleBuffer;
-GLint windW = 300, windH = 300;
+GLint windW = 600, windH = 600;
 
-RGBImageRec *image = NULL;
+RGBImageRec* image = NULL;
 float point[3];
 float zoom;
 GLint x, y;
 
 static void Init(void)
 {
-
     glClearColor(0.0, 0.0, 0.0, 0.0);
 
     x = 0;
@@ -25,9 +24,8 @@ static void Init(void)
     zoom = 1.8;
 }
 
-static void Reshape(int width, int height)
+static void reshape(int width, int height)
 {
-
     windW = width;
     windH = height;
 
@@ -39,46 +37,46 @@ static void Reshape(int width, int height)
     glMatrixMode(GL_MODELVIEW);
 }
 
-static void Key(unsigned char key, int x, int y)
+static void keyboard(unsigned char key, int x, int y)
 {
-
-    switch (key) {
-      case 27:
+    switch (key)
+    {
+    case 27:
         exit(0);
     }
 }
 
 static void SpecialKey(int key, int x, int y)
 {
-
-    switch (key) {
-      case GLUT_KEY_UP:
-	zoom += 0.2;
-	glutPostRedisplay();
-	break;
-      case GLUT_KEY_DOWN:
-	zoom -= 0.2;
-	if (zoom < 0.2) {
-	    zoom = 0.2;
-	}
-	glutPostRedisplay();
-	break;
+    switch (key)
+    {
+    case GLUT_KEY_UP:
+        zoom += 0.2;
+        glutPostRedisplay();
+        break;
+    case GLUT_KEY_DOWN:
+        zoom -= 0.2;
+        if (zoom < 0.2)
+        {
+            zoom = 0.2;
+        }
+        glutPostRedisplay();
+        break;
     }
 }
 
-static void Mouse(int button, int state, int mouseX, int mouseY)
+static void mouse(int button, int state, int mouseX, int mouseY)
 {
-
-    if (state == GLUT_DOWN) {
-	x = mouseX;
-	y = mouseY;
-	glutPostRedisplay();
+    if (state == GLUT_DOWN)
+    {
+        x = mouseX;
+        y = mouseY;
+        glutPostRedisplay();
     }
 }
 
-static void Draw(void)
+static void display(void)
 {
-
     glClear(GL_COLOR_BUFFER_BIT);
 
     point[0] = (windW / 2) - (image->sizeX / 2);
@@ -88,8 +86,7 @@ static void Draw(void)
 
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     glPixelZoom(1.0, 1.0);
-    glDrawPixels(image->sizeX, image->sizeY, GL_RGB, GL_UNSIGNED_BYTE,
-		 image->data);
+    glDrawPixels(image->sizeX, image->sizeY, GL_RGB, GL_UNSIGNED_BYTE, image->data);
 
     point[0] = (float)x;
     point[1] = windH - (float)y;
@@ -97,67 +94,89 @@ static void Draw(void)
     glRasterPos3fv(point);
 
     glPixelZoom(zoom, zoom);
-    glCopyPixels((windW/2)-(image->sizeX/2), (windH/2)-(image->sizeY/2),
-		 image->sizeX, image->sizeY, GL_COLOR);
+    glCopyPixels((windW / 2) - (image->sizeX / 2), (windH / 2) - (image->sizeY / 2), image->sizeX, image->sizeY, GL_COLOR);
 
-    if (doubleBuffer) {
-	glutSwapBuffers();
-    } else {
-	glFlush();
+    if (doubleBuffer)
+    {
+        glutSwapBuffers();
+    }
+    else
+    {
+        glFlush();
     }
 }
 
-static void Args(int argc, char **argv)
+static void Args(int argc, char** argv)
 {
     GLint i;
 
     doubleBuffer = GL_FALSE;
 
-    for (i = 1; i < argc; i++) {
-	if (strcmp(argv[i], "-sb") == 0) {
-	    doubleBuffer = GL_FALSE;
-	} else if (strcmp(argv[i], "-db") == 0) {
-	    doubleBuffer = GL_TRUE;
-	} else if (strcmp(argv[i], "-f") == 0) {
-	    if (i+1 >= argc || argv[i+1][0] == '-') {
-		printf("-f (No file name).\n");
-		exit(1);
-	    } else {
-		image = rgbImageLoad(argv[++i]);
-		if (image == NULL) {
-		    printf("-f (bad file name).\n");
-		    exit(1);
-		}
-	    }
-	}
+    for (i = 1; i < argc; i++)
+    {
+        if (strcmp(argv[i], "-sb") == 0)
+        {
+            doubleBuffer = GL_FALSE;
+        }
+        else if (strcmp(argv[i], "-db") == 0)
+        {
+            doubleBuffer = GL_TRUE;
+        }
+        else if (strcmp(argv[i], "-f") == 0)
+        {
+            if (i + 1 >= argc || argv[i + 1][0] == '-')
+            {
+                printf("-f (No file name).\n");
+                exit(1);
+            }
+            else
+            {
+                image = rgbImageLoad(argv[++i]);
+                if (image == NULL)
+                {
+                    printf("-f (bad file name).\n");
+                    exit(1);
+                }
+            }
+        }
     }
 }
 
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
     GLenum type;
 
     glutInit(&argc, argv);
     Args(argc, argv);
 
-    if (image == NULL) {
-	printf("No texture file.\n");
-	exit(1);
+    if (image == NULL)
+    {
+        char* filename = "3.rgb";
+        image = rgbImageLoad(filename);
+    }
+
+    if (image == NULL)
+    {
+        printf("No texture file.\n");
+        exit(1);
     }
 
     type = GLUT_RGB;
     type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
     glutInitDisplayMode(type);
     glutInitWindowSize(windW, windH);
+    glutInitWindowPosition(1100, 200);
 
     glutCreateWindow("Copy Test");
 
     Init();
 
-    glutReshapeFunc(Reshape);
-    glutKeyboardFunc(Key);
-    glutSpecialFunc(SpecialKey);
-    glutMouseFunc(Mouse);
-    glutDisplayFunc(Draw);
+    glutDisplayFunc(display);       //設定callback function
+    glutReshapeFunc(reshape);       //設定callback function
+    glutKeyboardFunc(keyboard);     //設定callback function
+    glutSpecialFunc(SpecialKey);    //設定callback function
+    glutMouseFunc(mouse);
+
     glutMainLoop();
 }
+

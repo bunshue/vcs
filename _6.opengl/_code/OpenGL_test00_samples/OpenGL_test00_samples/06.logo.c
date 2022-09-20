@@ -1299,7 +1299,7 @@ static void reshape(int width, int height)
 static void keyboard(unsigned char key, int x, int y)
 {
 	switch (key)
-{
+	{
 	case 'z':
 		zTranslation -= 1.0;
 		glutPostRedisplay();

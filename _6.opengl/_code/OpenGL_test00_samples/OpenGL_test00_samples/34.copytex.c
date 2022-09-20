@@ -746,7 +746,6 @@ int main(int argc, char** argv)
 
 int main(int argc, char** argv)
 {
-
 	printf("Couldn't find GL_EXT_texture_object extension.\n");
 	printf("Couldn't find GL_EXT_copy_texture extension.\n");
 	printf("Couldn't find GL_EXT_subtexture extension.\n");

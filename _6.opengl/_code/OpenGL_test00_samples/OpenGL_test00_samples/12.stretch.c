@@ -213,12 +213,13 @@ void Stretch(void)
     }
 }
 
-void Key(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int x, int y)
 {
-
-    switch (key) {
+    switch (key)
+    {
     case ' ':
-        if (cCount > 1) {
+        if (cCount > 1)
+        {
             InitVList();
             cIndex[0] = 0;
             cIndex[1] = 1;
@@ -234,10 +235,10 @@ void Key(unsigned char key, int x, int y)
     }
 }
 
-void Mouse(int button, int state, int mouseX, int mouseY)
+void mouse(int button, int state, int mouseX, int mouseY)
 {
-
-    if (state == GLUT_DOWN) {
+    if (state == GLUT_DOWN)
+    {
         if (op == OP_STRETCH) {
             glDisable(GL_TEXTURE_2D);
             cCount = 0;
@@ -251,9 +252,8 @@ void Mouse(int button, int state, int mouseX, int mouseY)
     }
 }
 
-void Animate(void)
+void display(void)
 {
-
     switch (op) {
     case OP_STRETCH:
         Stretch();
@@ -303,14 +303,24 @@ int main(int argc, char** argv)
     glutInit(&argc, argv);
     Args(argc, argv);
 
-    if (image == NULL) {
+    if (image == NULL)
+    {
+        char* filename = "1.rgb";
+        image = rgbImageLoad(filename);
+    }
+
+    if (image == NULL)
+    {
         printf("No texture file.\n");
         exit(1);
     }
 
+    printf("檔案已開啟, W = %d, H = %d\n", image->sizeX, image->sizeY);
+
     imageSizeX = (int)powf(2.0, (float)((int)(logf(image->sizeX) / logf(2.0))));
     imageSizeY = (int)powf(2.0, (float)((int)(logf(image->sizeY) / logf(2.0))));
 
+    printf("imageSizeX = %d, imageSizeY = %d\n", imageSizeX, imageSizeY);
 
     type = GLUT_RGB;
     type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
@@ -343,9 +353,13 @@ int main(int argc, char** argv)
     cStep = 0;
     op = OP_DRAWIMAGE;
 
-    glutKeyboardFunc(Key);
-    glutMouseFunc(Mouse);
-    glutIdleFunc(Animate);
-    glutDisplayFunc(Animate);
+    glutDisplayFunc(display);       //設定callback function
+    //glutReshapeFunc(reshape);       //設定callback function
+    glutKeyboardFunc(keyboard);     //設定callback function
+    //glutSpecialFunc(SpecialKey);    //設定callback function
+    glutMouseFunc(mouse);
+
+    glutIdleFunc(display);
+
     glutMainLoop();
 }

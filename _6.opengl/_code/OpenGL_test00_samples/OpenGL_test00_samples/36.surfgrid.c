@@ -671,7 +671,6 @@ static GLfloat torusnurbpts[] = {
 
 int main(int argc, char** argv)
 {
-
     printf("Couldn't find GL_EXT_polygon_offset extension.\n");
 }
 

@@ -12,7 +12,7 @@
 #include "rgb.h"
 
 GLenum doubleBuffer;
-int winW = 300, winH = 300;
+int winW = 600, winH = 600;
 
 RGBImageRec* earthImage = NULL, * skyImage = NULL;
 GLint skyList, earthList;
@@ -32,10 +32,8 @@ float ln_mipmap_ln[] = { GL_LINEAR_MIPMAP_LINEAR };
 int horizon;
 float texMinX, texMinY, texMaxX, texMaxY;
 
-
 static void Init(void)
 {
-
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
 	magFilter = nr;
@@ -73,9 +71,8 @@ static void Init(void)
 	glEndList();
 }
 
-static void Reshape(int width, int height)
+static void reshape(int width, int height)
 {
-
 	winW = width;
 	winH = height;
 
@@ -87,10 +84,10 @@ static void Reshape(int width, int height)
 	glMatrixMode(GL_MODELVIEW);
 }
 
-static void Key(unsigned char key, int x, int y)
+static void keyboard(unsigned char key, int x, int y)
 {
-
-	switch (key) {
+	switch (key)
+	{
 	case '1':
 		horizon -= 5;
 		texMinY -= 5.0 / (float)winH;
@@ -112,8 +109,8 @@ static void Key(unsigned char key, int x, int y)
 
 static void SpecialKey(int key, int x, int y)
 {
-
-	switch (key) {
+	switch (key)
+	{
 	case GLUT_KEY_LEFT:
 		texMinX -= 5.0 / (float)winW;
 		texMaxX -= 5.0 / (float)winW;
@@ -137,9 +134,8 @@ static void SpecialKey(int key, int x, int y)
 	}
 }
 
-static void Draw(void)
+static void display(void)
 {
-
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	glPushMatrix();
@@ -227,11 +223,26 @@ int main(int argc, char** argv)
 	glutInit(&argc, argv);
 	Args(argc, argv);
 
-	if (earthImage == NULL) {
+	if (earthImage == NULL)
+	{
+		char* filename = "1.rgb";
+		earthImage = rgbImageLoad(filename);
+	}
+
+	if (earthImage == NULL)
+	{
 		printf("No earth texture file.\n");
 		exit(1);
 	}
-	if (skyImage == NULL) {
+
+	if (skyImage == NULL)
+	{
+		char* filename = "2.rgb";
+		skyImage = rgbImageLoad(filename);
+	}
+
+	if (skyImage == NULL)
+	{
 		printf("No sky texture file.\n");
 		exit(1);
 	}
@@ -246,9 +257,10 @@ int main(int argc, char** argv)
 
 	Init();
 
-	glutReshapeFunc(Reshape);
-	glutKeyboardFunc(Key);
-	glutSpecialFunc(SpecialKey);
-	glutDisplayFunc(Draw);
+	glutDisplayFunc(display);       //設定callback function
+	glutReshapeFunc(reshape);       //設定callback function
+	glutKeyboardFunc(keyboard);     //設定callback function
+	glutSpecialFunc(SpecialKey);    //設定callback function
+
 	glutMainLoop();
 }

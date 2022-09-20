@@ -142,9 +142,8 @@ static void Init(void)
 	height = 20;
 }
 
-static void Reshape(int width, int height)
+static void reshape(int width, int height)
 {
-
 	glViewport(0, 0, width, height);
 
 	glMatrixMode(GL_PROJECTION);
@@ -154,10 +153,10 @@ static void Reshape(int width, int height)
 	glMatrixMode(GL_MODELVIEW);
 }
 
-static void Key(unsigned char key, int x, int y)
+static void keyboard(unsigned char key, int x, int y)
 {
-
-	switch (key) {
+	switch (key)
+	{
 	case 'X':
 		zRotation += 5;
 		glutPostRedisplay();
@@ -166,7 +165,6 @@ static void Key(unsigned char key, int x, int y)
 		zRotation -= 5;
 		glutPostRedisplay();
 		break;
-
 	case '1':
 		gluQuadricDrawStyle(quadObj, GLU_FILL);
 		glutPostRedisplay();
@@ -183,20 +181,20 @@ static void Key(unsigned char key, int x, int y)
 		gluQuadricDrawStyle(quadObj, GLU_SILHOUETTE);
 		glutPostRedisplay();
 		break;
-
 	case '0':
 		shade = !shade;
-		if (shade) {
+		if (shade)
+		{
 			glShadeModel(GL_SMOOTH);
 			gluQuadricNormals(quadObj, GLU_SMOOTH);
 		}
-		else {
+		else
+		{
 			glShadeModel(GL_FLAT);
 			gluQuadricNormals(quadObj, GLU_FLAT);
 		}
 		glutPostRedisplay();
 		break;
-
 	case 'A':
 		stacks++;
 		glutPostRedisplay();
@@ -205,7 +203,6 @@ static void Key(unsigned char key, int x, int y)
 		stacks--;
 		glutPostRedisplay();
 		break;
-
 	case 'S':
 		slices++;
 		glutPostRedisplay();
@@ -214,9 +211,9 @@ static void Key(unsigned char key, int x, int y)
 		slices--;
 		glutPostRedisplay();
 		break;
-
 	case 'd':
-		switch (orientation) {
+		switch (orientation)
+		{
 		case GLU_OUTSIDE:
 			orientation = GLU_INSIDE;
 			break;
@@ -228,12 +225,10 @@ static void Key(unsigned char key, int x, int y)
 		gluQuadricOrientation(quadObj, orientation);
 		glutPostRedisplay();
 		break;
-
 	case 'f':
 		whichQuadric = (whichQuadric + 1) & 0x03;
 		glutPostRedisplay();
 		break;
-
 	case 'G':
 		radius1 += 1;
 		glutPostRedisplay();
@@ -242,7 +237,6 @@ static void Key(unsigned char key, int x, int y)
 		radius1 -= 1;
 		glutPostRedisplay();
 		break;
-
 	case 'J':
 		radius2 += 1;
 		glutPostRedisplay();
@@ -251,7 +245,6 @@ static void Key(unsigned char key, int x, int y)
 		radius2 -= 1;
 		glutPostRedisplay();
 		break;
-
 	case 'H':
 		height += 2;
 		glutPostRedisplay();
@@ -260,7 +253,6 @@ static void Key(unsigned char key, int x, int y)
 		height -= 2;
 		glutPostRedisplay();
 		break;
-
 	case 'K':
 		angle1 += 5;
 		glutPostRedisplay();
@@ -269,7 +261,6 @@ static void Key(unsigned char key, int x, int y)
 		angle1 -= 5;
 		glutPostRedisplay();
 		break;
-
 	case 'L':
 		angle2 += 5;
 		glutPostRedisplay();
@@ -278,20 +269,20 @@ static void Key(unsigned char key, int x, int y)
 		angle2 -= 5;
 		glutPostRedisplay();
 		break;
-
 	case 'z':
 		texture = !texture;
-		if (texture) {
+		if (texture)
+		{
 			gluQuadricTexture(quadObj, GL_TRUE);
 			glEnable(GL_TEXTURE_2D);
 		}
-		else {
+		else
+		{
 			gluQuadricTexture(quadObj, GL_FALSE);
 			glDisable(GL_TEXTURE_2D);
 		}
 		glutPostRedisplay();
 		break;
-
 	case 'q':
 		glDisable(GL_CULL_FACE);
 		glutPostRedisplay();
@@ -306,7 +297,6 @@ static void Key(unsigned char key, int x, int y)
 		glCullFace(GL_BACK);
 		glutPostRedisplay();
 		break;
-
 	case 'r':
 		glFrontFace(GL_CW);
 		glutPostRedisplay();
@@ -315,13 +305,11 @@ static void Key(unsigned char key, int x, int y)
 		glFrontFace(GL_CCW);
 		glutPostRedisplay();
 		break;
-
 	case 'y':
 		doDither = !doDither;
 		(doDither) ? glEnable(GL_DITHER) : glDisable(GL_DITHER);
 		glutPostRedisplay();
 		break;
-
 	case 27:
 		exit(0);
 	}
@@ -329,8 +317,8 @@ static void Key(unsigned char key, int x, int y)
 
 static void SpecialKey(int key, int x, int y)
 {
-
-	switch (key) {
+	switch (key)
+	{
 	case GLUT_KEY_LEFT:
 		yRotation += 5;
 		glutPostRedisplay();
@@ -350,9 +338,8 @@ static void SpecialKey(int key, int x, int y)
 	}
 }
 
-static void Draw(void)
+static void display(void)
 {
-
 	glLoadIdentity();
 	glRotatef(xRotation, 1, 0, 0);
 	glRotatef(yRotation, 0, 1, 0);
@@ -361,28 +348,29 @@ static void Draw(void)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glColor3f(1.0, 1.0, 1.0);
-	switch (whichQuadric) {
+	switch (whichQuadric)
+	{
 	case 0:
 		glTranslatef(0, 0, -height / 20.0);
-		gluCylinder(quadObj, radius1 / 10.0, radius2 / 10.0, height / 10.0,
-			slices, stacks);
+		gluCylinder(quadObj, radius1 / 10.0, radius2 / 10.0, height / 10.0, slices, stacks);
 		break;
 	case 1:
 		gluSphere(quadObj, radius1 / 10.0, slices, stacks);
 		break;
 	case 2:
-		gluPartialDisk(quadObj, radius2 / 10.0, radius1 / 10.0, slices,
-			stacks, angle1, angle2);
+		gluPartialDisk(quadObj, radius2 / 10.0, radius1 / 10.0, slices, stacks, angle1, angle2);
 		break;
 	case 3:
 		gluDisk(quadObj, radius2 / 10.0, radius1 / 10.0, slices, stacks);
 		break;
 	}
 
-	if (doubleBuffer) {
+	if (doubleBuffer)
+	{
 		glutSwapBuffers();
 	}
-	else {
+	else
+	{
 		glFlush();
 	}
 }
@@ -393,21 +381,28 @@ static void Args(int argc, char** argv)
 
 	doubleBuffer = GL_FALSE;
 
-	for (i = 1; i < argc; i++) {
-		if (strcmp(argv[i], "-sb") == 0) {
+	for (i = 1; i < argc; i++)
+	{
+		if (strcmp(argv[i], "-sb") == 0)
+		{
 			doubleBuffer = GL_FALSE;
 		}
-		else if (strcmp(argv[i], "-db") == 0) {
+		else if (strcmp(argv[i], "-db") == 0)
+		{
 			doubleBuffer = GL_TRUE;
 		}
-		else if (strcmp(argv[i], "-f") == 0) {
-			if (i + 1 >= argc || argv[i + 1][0] == '-') {
+		else if (strcmp(argv[i], "-f") == 0)
+		{
+			if (i + 1 >= argc || argv[i + 1][0] == '-')
+			{
 				printf("-f (No file name).\n");
 				exit(1);
 			}
-			else {
+			else
+			{
 				image = rgbImageLoad(argv[++i]);
-				if (image == NULL) {
+				if (image == NULL)
+				{
 					printf("-f (Bad file name).\n");
 					exit(1);
 				}
@@ -422,6 +417,12 @@ int main(int argc, char** argv)
 
 	glutInit(&argc, argv);
 	Args(argc, argv);
+
+	if (image == NULL)
+	{
+		char* filename = "1.rgb";
+		image = rgbImageLoad(filename);
+	}
 
 	if (image == NULL) {
 		printf("No texture file.\n");
@@ -438,9 +439,10 @@ int main(int argc, char** argv)
 
 	Init();
 
-	glutReshapeFunc(Reshape);
-	glutKeyboardFunc(Key);
-	glutSpecialFunc(SpecialKey);
-	glutDisplayFunc(Draw);
+	glutDisplayFunc(display);       //設定callback function
+	glutReshapeFunc(reshape);       //設定callback function
+	glutKeyboardFunc(keyboard);     //設定callback function
+	glutSpecialFunc(SpecialKey);    //設定callback function
+
 	glutMainLoop();
 }
