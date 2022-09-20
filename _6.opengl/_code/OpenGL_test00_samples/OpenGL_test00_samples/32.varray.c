@@ -15,6 +15,8 @@
 //#include <GL/glut.h>      //32 bits
 #include <GL/freeglut.h>    //64 bits
 
+#define M_PI 3.1415926535897932384626433832795f
+
 #define COLOR_OFFSET_1 16
 #define COLOR_OFFSET_2 32
 
@@ -155,9 +157,8 @@ static void Init(void)
     }
 }
 
-static void Reshape(int width, int height)
+static void reshape(int width, int height)
 {
-
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     glOrtho(0.0, 500.0, 0.0, 500.0, 0.0, -1000.0);
@@ -165,10 +166,10 @@ static void Reshape(int width, int height)
     glLoadIdentity();
 }
 
-static void Key(unsigned char key, int x, int y)
+static void keyboard(unsigned char key, int x, int y)
 {
-
-    switch (key) {
+    switch (key)
+    {
     case 'a':
         drawArray = !drawArray;
         glutPostRedisplay();
@@ -178,11 +179,14 @@ static void Key(unsigned char key, int x, int y)
         glutPostRedisplay();
         break;
     case 'm':
-        if (dlist) {
-            if (dlMode == GL_COMPILE) {
+        if (dlist)
+        {
+            if (dlMode == GL_COMPILE)
+            {
                 dlMode = GL_COMPILE_AND_EXECUTE;
             }
-            else {
+            else
+            {
                 dlMode = GL_COMPILE;
             }
         }
@@ -258,7 +262,7 @@ void TestGets(void)
 #endif
 }
 
-static void Draw(void)
+static void display(void)
 {
 #if GL_EXT_vertex_array
     int i;
@@ -537,6 +541,7 @@ int main(int argc, char** argv)
 
     type = GLUT_SINGLE;
     type |= (rgb) ? GLUT_RGB : GLUT_INDEX;
+
     glutInitDisplayMode(type);
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(1100, 200);
@@ -545,9 +550,10 @@ int main(int argc, char** argv)
 
     Init();
 
-    glutReshapeFunc(Reshape);
-    glutKeyboardFunc(Key);
-    glutDisplayFunc(Draw);
+    glutDisplayFunc(display);       //設定callback function
+    glutReshapeFunc(reshape);       //設定callback function
+    glutKeyboardFunc(keyboard);     //設定callback function
+
     glutMainLoop();
 }
 

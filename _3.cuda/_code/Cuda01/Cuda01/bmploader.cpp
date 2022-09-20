@@ -42,12 +42,14 @@ extern "C" void LoadBMPFile(uchar4 * *dst, int* width, int* height, const char* 
 
     printf("Loading %s...\n", name);
 
-    if (sizeof(uchar4) != 4) {
+    if (sizeof(uchar4) != 4)
+    {
         printf("***Bad uchar4 size***\n");
         exit(EXIT_SUCCESS);
     }
 
-    if (!(fd = fopen(name, "rb"))) {
+    if (!(fd = fopen(name, "rb")))
+    {
         printf("***BMP load error: file access denied***\n");
         exit(EXIT_SUCCESS);
     }

@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <math.h>
 
 //#include <GL/glut.h>      //32 bits
 #include <GL/freeglut.h>    //64 bits
@@ -17,7 +16,7 @@ static void Init(void)
     glEnable(GL_STENCIL_TEST);
 }
 
-static void Reshape(int width, int height)
+static void reshape(int width, int height)
 {
     glViewport(0, 0, width, height);
 
@@ -27,57 +26,62 @@ static void Reshape(int width, int height)
     glMatrixMode(GL_MODELVIEW);
 }
 
-static void Key(unsigned char key, int x, int y)
+static void keyboard(unsigned char key, int x, int y)
 {
-
-    switch (key) {
+    switch (key)
+    {
     case 27:
         exit(0);
     }
 }
 
-static void Draw(void)
+static void display(void)
 {
-
     glClear(GL_COLOR_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
+    //紅色三角形
     glStencilFunc(GL_ALWAYS, 1, 1);
     glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
 
-    glColor3ub(200, 0, 0);
+    glColor3ub(255, 0, 0);
     glBegin(GL_POLYGON);
     glVertex3i(-4, -4, 0);
     glVertex3i(4, -4, 0);
     glVertex3i(0, 4, 0);
     glEnd();
 
+    //綠色矩形 僅顯示與三角形重疊部分
     glStencilFunc(GL_EQUAL, 1, 1);
     glStencilOp(GL_INCR, GL_KEEP, GL_DECR);
 
-    glColor3ub(0, 200, 0);
+    glColor3ub(0, 255, 0);
     glBegin(GL_POLYGON);
-    glVertex3i(3, 3, 0);
-    glVertex3i(-3, 3, 0);
-    glVertex3i(-3, -3, 0);
-    glVertex3i(3, -3, 0);
+    glVertex3i(4, 3, 0);
+    glVertex3i(-4, 3, 0);
+    glVertex3i(-4, -3, 0);
+    glVertex3i(4, -3, 0);
     glEnd();
 
+    //藍色矩形 僅顯示在三角形後面
     glStencilFunc(GL_EQUAL, 1, 1);
     glStencilOp(GL_KEEP, GL_KEEP, GL_KEEP);
 
-    glColor3ub(0, 0, 200);
+    glColor3ub(0, 0, 255);
     glBegin(GL_POLYGON);
-    glVertex3i(3, 3, 0);
-    glVertex3i(-3, 3, 0);
-    glVertex3i(-3, -3, 0);
-    glVertex3i(3, -3, 0);
+    glVertex3i(3, 2, 0);
+    glVertex3i(-3, 2, 0);
+    glVertex3i(-3, -2, 0);
+    glVertex3i(3, -2, 0);
     glEnd();
 
-
-    if (doubleBuffer) {
+    if (doubleBuffer)
+    {
+        printf("Double Buffer ");
         glutSwapBuffers();
     }
-    else {
+    else
+    {
+        printf("Single Buffer ");
         glFlush();
     }
 }
@@ -88,11 +92,14 @@ static void Args(int argc, char** argv)
 
     doubleBuffer = GL_FALSE;
 
-    for (i = 1; i < argc; i++) {
-        if (strcmp(argv[i], "-sb") == 0) {
+    for (i = 1; i < argc; i++)
+    {
+        if (strcmp(argv[i], "-sb") == 0)
+        {
             doubleBuffer = GL_FALSE;
         }
-        else if (strcmp(argv[i], "-db") == 0) {
+        else if (strcmp(argv[i], "-db") == 0)
+        {
             doubleBuffer = GL_TRUE;
         }
     }
@@ -107,6 +114,7 @@ int main(int argc, char** argv)
 
     type = GLUT_RGB | GLUT_STENCIL;
     type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
+
     glutInitDisplayMode(type);
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(1100, 200);
@@ -115,8 +123,9 @@ int main(int argc, char** argv)
 
     Init();
 
-    glutReshapeFunc(Reshape);
-    glutKeyboardFunc(Key);
-    glutDisplayFunc(Draw);
+    glutDisplayFunc(display);       //設定callback function
+    glutReshapeFunc(reshape);       //設定callback function
+    glutKeyboardFunc(keyboard);     //設定callback function
+
     glutMainLoop();
 }

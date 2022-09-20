@@ -149,9 +149,8 @@ static void Init(void)
 	glEndList();
 }
 
-static void Reshape(int width, int height)
+static void reshape(int width, int height)
 {
-
 	glViewport(0, 0, width, height);
 
 	glMatrixMode(GL_PROJECTION);
@@ -160,11 +159,12 @@ static void Reshape(int width, int height)
 	glMatrixMode(GL_MODELVIEW);
 }
 
-static void Key(unsigned char key, int x, int y)
+static void keyboard(unsigned char key, int x, int y)
 {
 	GLfloat getFloat[1];
 
-	switch (key) {
+	switch (key)
+	{
 	case 'd':
 		if (fogMode != GL_EXP) { /* switch fog mode iff different */
 			fogMode = GL_EXP;
@@ -321,9 +321,8 @@ static void SpecialKey(int key, int x, int y)
 	}
 }
 
-static void Draw(void)
+static void display(void)
 {
-
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glPushMatrix();
@@ -337,10 +336,12 @@ static void Draw(void)
 
 	glPopMatrix();
 
-	if (doubleBuffer) {
+	if (doubleBuffer)
+	{
 		glutSwapBuffers();
 	}
-	else {
+	else
+	{
 		glFlush();
 	}
 }
@@ -378,10 +379,11 @@ int main(int argc, char** argv)
 
 	Init();
 
-	glutReshapeFunc(Reshape);
-	glutKeyboardFunc(Key);
-	glutSpecialFunc(SpecialKey);
-	glutDisplayFunc(Draw);
+	glutDisplayFunc(display);       //設定callback function
+	glutReshapeFunc(reshape);       //設定callback function
+	glutKeyboardFunc(keyboard);     //設定callback function
+	glutSpecialFunc(SpecialKey);    //設定callback function
+
 	glutMainLoop();
 }
 

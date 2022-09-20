@@ -24,7 +24,6 @@ enum {
 #define MAXWARP 10
 #define MAXANGLES 6000
 
-
 typedef struct _starRec {
     GLint type;
     float x[2], y[2], z[2];
@@ -33,7 +32,7 @@ typedef struct _starRec {
 
 
 GLenum doubleBuffer;
-GLint windW = 300, windH = 300;
+GLint windW = 600, windH = 600;
 
 GLenum flag = NORMAL;
 GLint starCount = MAXSTARS / 2;
@@ -121,8 +120,10 @@ GLenum StarPoint(GLint n)
     x0 += windW / 2.0;
     y0 += windH / 2.0;
 
-    if (x0 >= 0.0 && x0 < windW && y0 >= 0.0 && y0 < windH) {
-        if (stars[n].type == STREAK) {
+    if (x0 >= 0.0 && x0 < windW && y0 >= 0.0 && y0 < windH)
+    {
+        if (stars[n].type == STREAK)
+        {
             x1 = stars[n].x[1] * windW / stars[n].z[1];
             y1 = stars[n].y[1] * windH / stars[n].z[1];
             RotatePoint(&x1, &y1, stars[n].rotation);
@@ -131,23 +132,27 @@ GLenum StarPoint(GLint n)
 
             glLineWidth(MAXPOS / 100.0 / stars[n].z[0] + 1.0);
             glColor3f(1.0, (MAXWARP - speed) / MAXWARP, (MAXWARP - speed) / MAXWARP);
-            if (fabs(x0 - x1) < 1.0 && fabs(y0 - y1) < 1.0) {
+            if (fabs(x0 - x1) < 1.0 && fabs(y0 - y1) < 1.0)
+            {
                 glBegin(GL_POINTS);
                 glVertex2f(x0, y0);
                 glEnd();
             }
-            else {
+            else
+            {
                 glBegin(GL_LINES);
                 glVertex2f(x0, y0);
                 glVertex2f(x1, y1);
                 glEnd();
             }
         }
-        else {
+        else
+        {
             width = MAXPOS / 10.0 / stars[n].z[0] + 1.0;
             glColor3f(1.0, 0.0, 0.0);
             glBegin(GL_POLYGON);
-            for (i = 0; i < 8; i++) {
+            for (i = 0; i < 8; i++)
+            {
                 float x = x0 + width * Cos((float)i * MAXANGLES / 8.0);
                 float y = y0 + width * Sin((float)i * MAXANGLES / 8.0);
                 glVertex2f(x, y);
@@ -156,7 +161,8 @@ GLenum StarPoint(GLint n)
         }
         return GL_TRUE;
     }
-    else {
+    else
+    {
         return GL_FALSE;
     }
 }
@@ -167,13 +173,17 @@ void ShowStars(void)
 
     glClear(GL_COLOR_BUFFER_BIT);
 
-    for (n = 0; n < starCount; n++) {
-        if (stars[n].z[0] > speed || (stars[n].z[0] > 0.0 && speed < MAXWARP)) {
-            if (StarPoint(n) == GL_FALSE) {
+    for (n = 0; n < starCount; n++)
+    {
+        if (stars[n].z[0] > speed || (stars[n].z[0] > 0.0 && speed < MAXWARP))
+        {
+            if (StarPoint(n) == GL_FALSE)
+            {
                 NewStar(n, MAXPOS);
             }
         }
-        else {
+        else
+        {
             NewStar(n, MAXPOS);
         }
     }
@@ -186,12 +196,14 @@ static void Init(void)
 
     srand((unsigned int)time(NULL));
 
-    for (n = 0; n < MAXSTARS; n++) {
+    for (n = 0; n < MAXSTARS; n++)
+    {
         NewStar(n, 100);
     }
 
     angle = 0.0;
-    for (n = 0; n < MAXANGLES; n++) {
+    for (n = 0; n < MAXANGLES; n++)
+    {
         sinTable[n] = sin(angle);
         angle += PI / (MAXANGLES / 2.0);
     }
@@ -201,9 +213,8 @@ static void Init(void)
     glDisable(GL_DITHER);
 }
 
-void Reshape(int width, int height)
+void reshape(int width, int height)
 {
-
     windW = width;
     windH = height;
 
@@ -215,10 +226,10 @@ void Reshape(int width, int height)
     glMatrixMode(GL_MODELVIEW);
 }
 
-static void Key(unsigned char key, int x, int y)
+static void keyboard(unsigned char key, int x, int y)
 {
-
-    switch (key) {
+    switch (key)
+    {
     case ' ':
         flag = (flag == NORMAL) ? WEIRD : NORMAL;
         break;
@@ -232,30 +243,38 @@ static void Key(unsigned char key, int x, int y)
 
 void Idle(void)
 {
-
     MoveStars();
     ShowStars();
-    if (nitro > 0) {
+    if (nitro > 0)
+    {
         speed = (float)(nitro / 10) + 1.0;
-        if (speed > MAXWARP) {
+        if (speed > MAXWARP)
+        {
             speed = MAXWARP;
         }
-        if (++nitro > MAXWARP * 10) {
+        if (++nitro > MAXWARP * 10)
+        {
             nitro = -nitro;
         }
     }
-    else if (nitro < 0) {
+    else if (nitro < 0)
+    {
         nitro++;
         speed = (float)(-nitro / 10) + 1.0;
-        if (speed > MAXWARP) {
+        if (speed > MAXWARP)
+        {
             speed = MAXWARP;
         }
     }
 
-    if (doubleBuffer) {
+    if (doubleBuffer)
+    {
+        //printf("Double Buffer ");
         glutSwapBuffers();
     }
-    else {
+    else
+    {
+        //printf("Single Buffer ");
         glFlush();
     }
 }
@@ -285,6 +304,7 @@ int main(int argc, char** argv)
 
     type = GLUT_RGB;
     type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
+
     glutInitDisplayMode(type);
     glutInitWindowSize(windW, windH);
     glutInitWindowPosition(1100, 200);
@@ -293,9 +313,12 @@ int main(int argc, char** argv)
 
     Init();
 
-    glutReshapeFunc(Reshape);
-    glutKeyboardFunc(Key);
-    glutIdleFunc(Idle);
-    glutDisplayFunc(Idle);
+    //glutDisplayFunc(display);       //設定callback function
+    glutReshapeFunc(reshape);       //設定callback function
+    glutKeyboardFunc(keyboard);     //設定callback function
+    //glutSpecialFunc(SpecialKey);    //設定callback function
+    glutIdleFunc(Idle);             //設定callback function   Idle像是display
+    glutDisplayFunc(Idle);          //設定callback function   Idle像是display
+
     glutMainLoop();
 }

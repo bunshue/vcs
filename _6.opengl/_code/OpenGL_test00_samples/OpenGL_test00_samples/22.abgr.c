@@ -10,6 +10,7 @@
 ** value is not used in applying the DECAL environment.
 */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -212,7 +213,6 @@ int main(int argc, char** argv)
 
 int main(int argc, char** argv)
 {
-
     printf("Couldn't find GL_EXT_abgr extension.\n");
 }
 

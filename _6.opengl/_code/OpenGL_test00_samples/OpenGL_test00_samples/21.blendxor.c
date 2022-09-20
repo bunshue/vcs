@@ -4,6 +4,7 @@
 **    image twice restores the background to its original value.
 */
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <assert.h>
@@ -188,7 +189,6 @@ int main(int argc, char** argv)
 
 int main(int argc, char** argv)
 {
-
     printf("GL_EXT_blend_logic_op extension is not present.\n");
 }
 

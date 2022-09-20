@@ -10,7 +10,7 @@
 #define	POINT 3
 
 GLenum rgb, doubleBuffer;
-GLint windW = 600, windH = 300;
+GLint windW = 800, windH = 400;
 
 GLenum dithering = GL_TRUE;
 GLenum showVerticies = GL_TRUE;
@@ -37,29 +37,33 @@ float p0[3] = { -125,-80, 0 };
 float p1[3] = { -125, 80, 0 };
 float p2[3] = { 172,  0, 0 };
 
-
 static void Init(void)
 {
 	float r, g, b;
 	float percent1, percent2;
 	GLint i, j;
 
-	if (!rgb) {
-		for (j = 0; j <= 12; j++) {
-			if (j <= 6) {
+	if (!rgb)
+	{
+		for (j = 0; j <= 12; j++)
+		{
+			if (j <= 6)
+			{
 				percent1 = j / 6.0;
 				r = 1.0 - 0.8 * percent1;
 				g = 0.2 + 0.8 * percent1;
 				b = 0.2;
 			}
-			else {
+			else
+			{
 				percent1 = (j - 6) / 6.0;
 				r = 0.2;
 				g = 1.0 - 0.8 * percent1;
 				b = 0.2 + 0.8 * percent1;
 			}
 			glutSetColor(j + 18, r, g, b);
-			for (i = 0; i < 16; i++) {
+			for (i = 0; i < 16; i++)
+			{
 				percent2 = i / 15.0;
 				glutSetColor(j * 16 + 1 + 32, r * percent2, g * percent2, b * percent2);
 			}
@@ -76,24 +80,24 @@ static void Init(void)
 	glEnable(GL_SCISSOR_TEST);
 }
 
-static void Reshape(int width, int height)
+static void reshape(int width, int height)
 {
-
 	windW = (GLint)width;
 	windH = (GLint)height;
 }
 
-static void Key(unsigned char key, int x, int y)
+static void keyboard(unsigned char key, int x, int y)
 {
-
-	switch (key) {
+	switch (key)
+	{
 	case 'Z':
 		zoom *= 0.75;
 		glutPostRedisplay();
 		break;
 	case 'z':
 		zoom /= 0.75;
-		if (zoom > 10) {
+		if (zoom > 10)
+		{
 			zoom = 10;
 		}
 		glutPostRedisplay();
@@ -157,20 +161,24 @@ static void Key(unsigned char key, int x, int y)
 		break;
 	case '0':
 		aaMode = !aaMode;
-		if (aaMode) {
+		if (aaMode)
+		{
 			glEnable(GL_POLYGON_SMOOTH);
 			glEnable(GL_BLEND);
 			glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-			if (!rgb) {
+			if (!rgb)
+			{
 				color1 = 32;
 				color2 = 128;
 				color3 = 224;
 			}
 		}
-		else {
+		else
+		{
 			glDisable(GL_POLYGON_SMOOTH);
 			glDisable(GL_BLEND);
-			if (!rgb) {
+			if (!rgb)
+			{
 				color1 = 18;
 				color2 = 24;
 				color3 = 30;
@@ -185,8 +193,8 @@ static void Key(unsigned char key, int x, int y)
 
 static void SpecialKey(int key, int x, int y)
 {
-
-	switch (key) {
+	switch (key)
+	{
 	case GLUT_KEY_LEFT:
 		zRotation += 0.5;
 		glutPostRedisplay();
@@ -200,8 +208,8 @@ static void SpecialKey(int key, int x, int y)
 
 static void BeginPrim(void)
 {
-
-	switch (state) {
+	switch (state)
+	{
 	case SOLID:
 		glBegin(GL_POLYGON);
 		break;
@@ -216,11 +224,10 @@ static void BeginPrim(void)
 
 static void EndPrim(void)
 {
-
 	glEnd();
 }
 
-static void Draw(void)
+static void display(void)
 {
 	float scaleX, scaleY;
 
@@ -249,7 +256,8 @@ static void Draw(void)
 	glVertex3fv(boxD);
 	glEnd();
 
-	if (!hideBottomTriangle) {
+	if (!hideBottomTriangle)
+	{
 		glPushMatrix();
 
 		glScalef(zoom, zoom, zoom);
@@ -262,7 +270,8 @@ static void Draw(void)
 		glVertex3fv(p2);
 		EndPrim();
 
-		if (showVerticies) {
+		if (showVerticies)
+		{
 			(rgb) ? glColor3f(1.0, 0.0, 0.0) : glIndexi(1);
 			glRectf(p0[0] - 2, p0[1] - 2, p0[0] + 2, p0[1] + 2);
 			(rgb) ? glColor3f(0.0, 1.0, 0.0) : glIndexi(2);
@@ -313,7 +322,8 @@ static void Draw(void)
 	glDisable(GL_LINE_STIPPLE);
 	glBlendFunc(GL_ONE, GL_ZERO);
 
-	if (outline) {
+	if (outline)
+	{
 		(rgb) ? glColor3f(1.0, 1.0, 1.0) : glIndexi(7);
 		glBegin(GL_LINE_LOOP);
 		glVertex3fv(p0);
@@ -324,10 +334,12 @@ static void Draw(void)
 
 	glPopMatrix();
 
-	if (doubleBuffer) {
+	if (doubleBuffer)
+	{
 		glutSwapBuffers();
 	}
-	else {
+	else
+	{
 		glFlush();
 	}
 }
@@ -339,17 +351,22 @@ static void Args(int argc, char** argv)
 	rgb = GL_TRUE;
 	doubleBuffer = GL_FALSE;
 
-	for (i = 1; i < argc; i++) {
-		if (strcmp(argv[i], "-ci") == 0) {
+	for (i = 1; i < argc; i++)
+	{
+		if (strcmp(argv[i], "-ci") == 0)
+		{
 			rgb = GL_FALSE;
 		}
-		else if (strcmp(argv[i], "-rgb") == 0) {
+		else if (strcmp(argv[i], "-rgb") == 0)
+		{
 			rgb = GL_TRUE;
 		}
-		else if (strcmp(argv[i], "-sb") == 0) {
+		else if (strcmp(argv[i], "-sb") == 0)
+		{
 			doubleBuffer = GL_FALSE;
 		}
-		else if (strcmp(argv[i], "-db") == 0) {
+		else if (strcmp(argv[i], "-db") == 0)
+		{
 			doubleBuffer = GL_TRUE;
 		}
 	}
@@ -372,10 +389,11 @@ int main(int argc, char** argv)
 
 	Init();
 
-	glutReshapeFunc(Reshape);
-	glutKeyboardFunc(Key);
-	glutSpecialFunc(SpecialKey);
-	glutDisplayFunc(Draw);
+	glutDisplayFunc(display);       //設定callback function
+	glutReshapeFunc(reshape);       //設定callback function
+	glutKeyboardFunc(keyboard);     //設定callback function
+	glutSpecialFunc(SpecialKey);    //設定callback function
+
 	glutMainLoop();
 }
 

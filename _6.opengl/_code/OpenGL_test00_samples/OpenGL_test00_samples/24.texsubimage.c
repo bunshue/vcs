@@ -311,7 +311,6 @@ main(int argc, char** argv)
 
 int main(int argc, char** argv)
 {
-
     printf("Couldn't find GL_EXT_subtexture extension.\n");
 }
 

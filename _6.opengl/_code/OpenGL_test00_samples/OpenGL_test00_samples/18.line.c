@@ -44,9 +44,8 @@ static void Init(void)
     size = 1;
 }
 
-static void Reshape(int width, int height)
+static void reshape(int width, int height)
 {
-
     glViewport(0, 0, width, height);
 
     glMatrixMode(GL_PROJECTION);
@@ -55,10 +54,10 @@ static void Reshape(int width, int height)
     glMatrixMode(GL_MODELVIEW);
 }
 
-static void Key(unsigned char key, int x, int y)
+static void keyboard(unsigned char key, int x, int y)
 {
-
-    switch (key) {
+    switch (key)
+    {
     case '1':
         mode1 = !mode1;
         glutPostRedisplay();
@@ -74,13 +73,15 @@ static void Key(unsigned char key, int x, int y)
 
 static void SpecialKey(int key, int x, int y)
 {
-
-    switch (key) {
+    switch (key)
+    {
     case GLUT_KEY_UP:
+        printf("你按了 上 ");
         size++;
         glutPostRedisplay();
         break;
     case GLUT_KEY_DOWN:
+        printf("你按了 下 ");
         size--;
         if (size < 1) {
             size = 1;
@@ -90,7 +91,7 @@ static void SpecialKey(int key, int x, int y)
     }
 }
 
-static void Draw(void)
+static void display(void)
 {
     GLint ci, i;
 
@@ -98,19 +99,23 @@ static void Draw(void)
 
     glLineWidth(size);
 
-    if (mode1) {
+    if (mode1)
+    {
         glEnable(GL_LINE_STIPPLE);
     }
-    else {
+    else
+    {
         glDisable(GL_LINE_STIPPLE);
     }
 
-    if (mode2) {
+    if (mode2)
+    {
         ci = CI_OFFSET;
         glEnable(GL_LINE_SMOOTH);
         glEnable(GL_BLEND);
     }
-    else {
+    else
+    {
         ci = 3;
         glDisable(GL_LINE_SMOOTH);
         glDisable(GL_BLEND);
@@ -118,7 +123,8 @@ static void Draw(void)
 
     glPushMatrix();
 
-    for (i = 0; i < 360; i += 5) {
+    for (i = 0; i < 360; i += 5)
+    {
         glRotatef(5.0, 0, 0, 1);
 
         (rgb) ? glColor3f(1.0, 1.0, 0.0) : glIndexi(ci);
@@ -138,10 +144,14 @@ static void Draw(void)
 
     glPopMatrix();
 
-    if (doubleBuffer) {
+    if (doubleBuffer)
+    {
+        printf("Double Buffer ");
         glutSwapBuffers();
     }
-    else {
+    else
+    {
+        printf("Single Buffer ");
         glFlush();
     }
 }
@@ -153,17 +163,22 @@ static void Args(int argc, char** argv)
     rgb = GL_TRUE;
     doubleBuffer = GL_FALSE;
 
-    for (i = 1; i < argc; i++) {
-        if (strcmp(argv[i], "-ci") == 0) {
+    for (i = 1; i < argc; i++)
+    {
+        if (strcmp(argv[i], "-ci") == 0)
+        {
             rgb = GL_FALSE;
         }
-        else if (strcmp(argv[i], "-rgb") == 0) {
+        else if (strcmp(argv[i], "-rgb") == 0)
+        {
             rgb = GL_TRUE;
         }
-        else if (strcmp(argv[i], "-sb") == 0) {
+        else if (strcmp(argv[i], "-sb") == 0)
+        {
             doubleBuffer = GL_FALSE;
         }
-        else if (strcmp(argv[i], "-db") == 0) {
+        else if (strcmp(argv[i], "-db") == 0)
+        {
             doubleBuffer = GL_TRUE;
         }
     }
@@ -173,10 +188,12 @@ int main(int argc, char** argv)
 {
     GLenum type;
 
+    glutInit(&argc, argv);
     Args(argc, argv);
 
     type = (rgb) ? GLUT_RGB : GLUT_INDEX;
     type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
+
     glutInitDisplayMode(type);
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(1100, 200);
@@ -185,10 +202,11 @@ int main(int argc, char** argv)
 
     Init();
 
-    glutReshapeFunc(Reshape);
-    glutKeyboardFunc(Key);
-    glutSpecialFunc(SpecialKey);
-    glutDisplayFunc(Draw);
+    glutDisplayFunc(display);       //設定callback function
+    glutReshapeFunc(reshape);       //設定callback function
+    glutKeyboardFunc(keyboard);     //設定callback function
+    glutSpecialFunc(SpecialKey);    //設定callback function
+
     glutMainLoop();
 }
 

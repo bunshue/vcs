@@ -307,7 +307,6 @@ int main(int argc, char** argv)
 
 int main(int argc, char** argv)
 {
-
     printf("GL_EXT_blend_logic_op extension is not present.\n");
     printf("GL_EXT_blend_minmax extension is not present.\n");
     printf("GL_EXT_blend_subtract extension is not present.\n");

@@ -11,7 +11,7 @@
 #define CI_ANTI_ALIAS_RED 48
 
 GLenum rgb, doubleBuffer;
-GLint windW = 300, windH = 300;
+GLint windW = 600, windH = 600;
 
 GLenum mode;
 GLint size;
@@ -23,8 +23,10 @@ static void Init(void)
 {
     GLint i;
 
-    if (!rgb) {
-        for (i = 0; i < 16; i++) {
+    if (!rgb)
+    {
+        for (i = 0; i < 16; i++)
+        {
             glutSetColor(i + CI_ANTI_ALIAS_RED, i / 15.0, 0.0, 0.0);
             glutSetColor(i + CI_ANTI_ALIAS_YELLOW, i / 15.0, i / 15.0, 0.0);
             glutSetColor(i + CI_ANTI_ALIAS_GREEN, 0.0, i / 15.0, 0.0);
@@ -39,7 +41,7 @@ static void Init(void)
     size = 1;
 }
 
-static void Reshape(int width, int height)
+static void reshape(int width, int height)
 {
 
     windW = width;
@@ -53,9 +55,8 @@ static void Reshape(int width, int height)
     glMatrixMode(GL_MODELVIEW);
 }
 
-static void Key(unsigned char key, int x, int y)
+static void keyboard(unsigned char key, int x, int y)
 {
-
     switch (key) {
     case '1':
         mode = !mode;
@@ -79,56 +80,67 @@ static void Key(unsigned char key, int x, int y)
 
 static void SpecialKey(int key, int x, int y)
 {
-
-    switch (key) {
+    switch (key)
+    {
     case GLUT_KEY_LEFT:
+        printf("你按了 左 ");
         point[0] -= 0.25;
         glutPostRedisplay();
         break;
     case GLUT_KEY_RIGHT:
+        printf("你按了 右 ");
         point[0] += 0.25;
         glutPostRedisplay();
         break;
     case GLUT_KEY_UP:
+        printf("你按了 上 ");
         point[1] += 0.25;
         glutPostRedisplay();
         break;
     case GLUT_KEY_DOWN:
+        printf("你按了 下 ");
         point[1] -= 0.25;
         glutPostRedisplay();
         break;
     }
 }
 
-static void Draw(void)
+static void display(void)
 {
-
     glClear(GL_COLOR_BUFFER_BIT);
 
     (rgb) ? glColor3f(1.0, 1.0, 0.0) : glIndexi(3);
+
+    //畫橫線 x軸
     glBegin(GL_LINE_STRIP);
     glVertex2f(-windW / 2, 0);
     glVertex2f(windW / 2, 0);
     glEnd();
+
+    //畫直線 y軸
     glBegin(GL_LINE_STRIP);
     glVertex2f(0, -windH / 2);
     glVertex2f(0, windH / 2);
     glEnd();
 
-    if (mode) {
+    if (mode)
+    {
         glEnable(GL_BLEND);
         glEnable(GL_POINT_SMOOTH);
     }
-    else {
+    else
+    {
         glDisable(GL_BLEND);
         glDisable(GL_POINT_SMOOTH);
     }
 
     glPointSize(size);
-    if (mode) {
+    if (mode)
+    {
         (rgb) ? glColor3f(1.0, 0.0, 0.0) : glIndexi(CI_ANTI_ALIAS_RED);
     }
-    else {
+    else
+    {
         (rgb) ? glColor3f(1.0, 0.0, 0.0) : glIndexi(CI_RED);
     }
     glBegin(GL_POINTS);
@@ -143,10 +155,14 @@ static void Draw(void)
     glVertex3fv(point);
     glEnd();
 
-    if (doubleBuffer) {
+    if (doubleBuffer)
+    {
+        printf("Double Buffer ");
         glutSwapBuffers();
     }
-    else {
+    else
+    {
+        printf("Single Buffer ");
         glFlush();
     }
 }
@@ -158,17 +174,22 @@ static void Args(int argc, char** argv)
     rgb = GL_TRUE;
     doubleBuffer = GL_FALSE;
 
-    for (i = 1; i < argc; i++) {
-        if (strcmp(argv[i], "-ci") == 0) {
+    for (i = 1; i < argc; i++)
+    {
+        if (strcmp(argv[i], "-ci") == 0)
+        {
             rgb = GL_FALSE;
         }
-        else if (strcmp(argv[i], "-rgb") == 0) {
+        else if (strcmp(argv[i], "-rgb") == 0)
+        {
             rgb = GL_TRUE;
         }
-        else if (strcmp(argv[i], "-sb") == 0) {
+        else if (strcmp(argv[i], "-sb") == 0)
+        {
             doubleBuffer = GL_FALSE;
         }
-        else if (strcmp(argv[i], "-db") == 0) {
+        else if (strcmp(argv[i], "-db") == 0)
+        {
             doubleBuffer = GL_TRUE;
         }
     }
@@ -183,6 +204,7 @@ int main(int argc, char** argv)
 
     type = (rgb) ? GLUT_RGB : GLUT_INDEX;
     type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
+
     glutInitDisplayMode(type);
     glutInitWindowSize(windW, windH);
     glutInitWindowPosition(1100, 200);
@@ -191,9 +213,10 @@ int main(int argc, char** argv)
 
     Init();
 
-    glutReshapeFunc(Reshape);
-    glutKeyboardFunc(Key);
-    glutSpecialFunc(SpecialKey);
-    glutDisplayFunc(Draw);
+    glutDisplayFunc(display);       //設定callback function
+    glutReshapeFunc(reshape);       //設定callback function
+    glutKeyboardFunc(keyboard);     //設定callback function
+    glutSpecialFunc(SpecialKey);    //設定callback function
+
     glutMainLoop();
 }

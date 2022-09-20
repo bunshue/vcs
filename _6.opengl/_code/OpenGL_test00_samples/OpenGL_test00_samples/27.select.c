@@ -64,15 +64,13 @@ static void InitObjects(GLint num)
 
 static void Init(void)
 {
-
     numObjects = 10;
     InitObjects(numObjects);
     glGetIntegerv(GL_VIEWPORT, vp);
 }
 
-static void Reshape(int width, int height)
+static void reshape(int width, int height)
 {
-
     windW = width;
     windH = height;
 }
@@ -81,8 +79,10 @@ static void Render(GLenum mode)
 {
     GLint i;
 
-    for (i = 0; i < objectCount; i++) {
-        if (mode == GL_SELECT) {
+    for (i = 0; i < objectCount; i++)
+    {
+        if (mode == GL_SELECT)
+        {
             glLoadName(i);
         }
         glColor3fv(objects[i].color);
@@ -125,7 +125,8 @@ static GLint DoSelect(GLint x, GLint y)
     glPopMatrix();
 
     hits = glRenderMode(GL_RENDER);
-    if (hits <= 0) {
+    if (hits <= 0)
+    {
         return -1;
     }
 
@@ -134,7 +135,6 @@ static GLint DoSelect(GLint x, GLint y)
 
 static void RecolorTri(GLint h)
 {
-
     objects[h].color[0] = ((rand() % 100) + 50) / 150.0;
     objects[h].color[1] = ((rand() % 100) + 50) / 150.0;
     objects[h].color[2] = ((rand() % 100) + 50) / 150.0;
@@ -158,8 +158,12 @@ static void GrowTri(GLint h)
     v[0] /= 3;
     v[1] /= 3;
 
-    for (i = 0; i < 3; i++) {
-        switch (i) {
+    oldV = (float*)malloc(sizeof(GLint));
+
+    for (i = 0; i < 3; i++)
+    {
+        switch (i)
+        {
         case 0:
             oldV = objects[h].v1;
             break;
@@ -175,20 +179,25 @@ static void GrowTri(GLint h)
     }
 }
 
-static void Mouse(int button, int state, int mouseX, int mouseY)
+static void mouse(int button, int state, int mouseX, int mouseY)
 {
     GLint hit;
 
-    if (state == GLUT_DOWN) {
+    if (state == GLUT_DOWN)
+    {
         hit = DoSelect((GLint)mouseX, (GLint)mouseY);
-        if (hit != -1) {
-            if (button == GLUT_LEFT_BUTTON) {
+        if (hit != -1)
+        {
+            if (button == GLUT_LEFT_BUTTON)
+            {
                 RecolorTri(hit);
             }
-            else if (button == GLUT_MIDDLE_BUTTON) {
+            else if (button == GLUT_MIDDLE_BUTTON)
+            {
                 GrowTri(hit);
             }
-            else if (button == GLUT_RIGHT_BUTTON) {
+            else if (button == GLUT_RIGHT_BUTTON)
+            {
                 DeleteTri(hit);
             }
             glutPostRedisplay();
@@ -196,9 +205,8 @@ static void Mouse(int button, int state, int mouseX, int mouseY)
     }
 }
 
-static void Draw(void)
+static void display(void)
 {
-
     glPushMatrix();
 
     glViewport(0, 0, windW, windH);
@@ -227,7 +235,8 @@ static void DumpFeedbackVert(GLint* i, GLint n)
     GLint index;
 
     index = *i;
-    if (index + 7 > n) {
+    if (index + 7 > n)
+    {
         *i = n;
         printf("  ???\n");
         return;
@@ -249,21 +258,26 @@ static void DrawFeedback(GLint n)
     GLint verts;
 
     printf("Feedback results (%d floats):\n", n);
-    for (i = 0; i < n; i++) {
-        switch ((GLint)feedBuf[i]) {
+    for (i = 0; i < n; i++)
+    {
+        switch ((GLint)feedBuf[i])
+        {
         case GL_POLYGON_TOKEN:
             printf("Polygon");
             i++;
-            if (i < n) {
+            if (i < n)
+            {
                 verts = (GLint)feedBuf[i];
                 i++;
                 printf(": %d vertices", verts);
             }
-            else {
+            else
+            {
                 verts = 0;
             }
             printf("\n");
-            while (verts) {
+            while (verts)
+            {
                 DumpFeedbackVert(&i, n);
                 verts--;
             }
@@ -288,7 +302,8 @@ static void DrawFeedback(GLint n)
             break;
         }
     }
-    if (i == MAXFEED) {
+    if (i == MAXFEED)
+    {
         printf("...\n");
     }
     printf("\n");
@@ -329,10 +344,10 @@ static void DoFeedback(void)
     DrawFeedback((GLint)x);
 }
 
-static void Key(unsigned char key, int x, int y)
+static void keyboard(unsigned char key, int x, int y)
 {
-
-    switch (key) {
+    switch (key)
+    {
     case 'z':
         zoom /= 0.75;
         glutPostRedisplay();
@@ -347,10 +362,12 @@ static void Key(unsigned char key, int x, int y)
         break;
     case 'l':
         linePoly = !linePoly;
-        if (linePoly) {
+        if (linePoly)
+        {
             glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
         }
-        else {
+        else
+        {
             glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
         }
         glutPostRedisplay();
@@ -362,8 +379,8 @@ static void Key(unsigned char key, int x, int y)
 
 static void SpecialKey(int key, int x, int y)
 {
-
-    switch (key) {
+    switch (key)
+    {
     case GLUT_KEY_LEFT:
         zRotation += 0.5;
         glutPostRedisplay();
@@ -377,7 +394,6 @@ static void SpecialKey(int key, int x, int y)
 
 int main(int argc, char** argv)
 {
-
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
     glutInitWindowSize(600, 600);
@@ -387,11 +403,12 @@ int main(int argc, char** argv)
 
     Init();
 
-    glutReshapeFunc(Reshape);
-    glutKeyboardFunc(Key);
-    glutSpecialFunc(SpecialKey);
-    glutMouseFunc(Mouse);
-    glutDisplayFunc(Draw);
+    glutDisplayFunc(display);       //設定callback function
+    glutReshapeFunc(reshape);       //設定callback function
+    glutKeyboardFunc(keyboard);     //設定callback function
+    glutSpecialFunc(SpecialKey);    //設定callback function
+    glutMouseFunc(mouse);           //設定callback function
+
     glutMainLoop();
 }
 
