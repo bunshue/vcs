@@ -256,16 +256,16 @@ void initGL(int *argc, char **argv) {
   glutReshapeFunc(reshape);
   glutIdleFunc(idle);
 
-  if (!isGLVersionSupported(2, 0) ||
-      !areGLExtensionsSupported("GL_ARB_pixel_buffer_object")) {
+  if (!isGLVersionSupported(2, 0) || !areGLExtensionsSupported("GL_ARB_pixel_buffer_object"))
+  {
     fprintf(stderr, "Required OpenGL extensions are missing.");
     exit(EXIT_FAILURE);
   }
 }
 
-void runAutoTest(const char *ref_file, char *exec_path) {
-  checkCudaErrors(
-      cudaMalloc((void **)&d_output, width * height * sizeof(GLubyte) * 4));
+void runAutoTest(const char* ref_file, char* exec_path)
+{
+    checkCudaErrors(cudaMalloc((void**)&d_output, width * height * sizeof(GLubyte) * 4));
 
   // render the volumeData
   render_kernel(gridSize, blockSize, d_output, width, height, w);
@@ -274,15 +274,10 @@ void runAutoTest(const char *ref_file, char *exec_path) {
   getLastCudaError("render_kernel failed");
 
   void *h_output = malloc(width * height * sizeof(GLubyte) * 4);
-  checkCudaErrors(cudaMemcpy(h_output, d_output,
-                             width * height * sizeof(GLubyte) * 4,
-                             cudaMemcpyDeviceToHost));
-  sdkDumpBin(h_output, width * height * sizeof(GLubyte) * 4,
-             "simpleTexture3D.bin");
+    checkCudaErrors(cudaMemcpy(h_output, d_output, width * height * sizeof(GLubyte) * 4, cudaMemcpyDeviceToHost));
+    sdkDumpBin(h_output, width * height * sizeof(GLubyte) * 4, "simpleTexture3D.bin");
 
-  bool bTestResult = sdkCompareBin2BinFloat(
-      "simpleTexture3D.bin", sdkFindFilePath(ref_file, exec_path),
-      width * height, MAX_EPSILON_ERROR, THRESHOLD, exec_path);
+    bool bTestResult = sdkCompareBin2BinFloat("simpleTexture3D.bin", sdkFindFilePath(ref_file, exec_path), width * height, MAX_EPSILON_ERROR, THRESHOLD, exec_path);
 
   checkCudaErrors(cudaFree(d_output));
   free(h_output);
@@ -331,7 +326,10 @@ int main(int argc, char** argv)
 
   printf("%s Starting...\n\n", sSDKsample);
 
-  if (checkCmdLineFlag(argc, (const char **)argv, "file")) {
+    if (checkCmdLineFlag(argc, (const char**)argv, "file"))
+    {
+        printf("XXXXXXXXXXX\n");
+        std::cout << "xxxxxx" << std::endl;
     fpsLimit = frameCheckNumber;
     getCmdLineArgumentString(argc, (const char **)argv, "file", &ref_file);
   }
@@ -340,11 +338,15 @@ int main(int argc, char** argv)
   // Gflops/s
   findCudaDevice(argc, (const char **)argv);
 
-  if (ref_file) {
+    if (ref_file)
+    {
+        printf("XXXXXXXXXXX\n");
     loadVolumeData(argv[0]);
     runAutoTest(ref_file, argv[0]);
-  } else {
-    initGL(&argc, argv);
+    }
+    else
+    {
+        initGL(&argc, argv);  //¶}±ÒCUDA3D Texture
 
     // OpenGL buffers
     initGLBuffers();

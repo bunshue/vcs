@@ -328,8 +328,7 @@ void deleteTexture(GLuint* tex)
 
 int main(int argc, char** argv)
 {
-    printf("%s Starting... argc=%d\n\n", argv[0], argc);
-
+    printf("Starting...\n\n");
     printf("(Interactive OpenGL Demo)\n");
 
     // First initialize OpenGL context, so we can properly set the GL for CUDA.
@@ -346,10 +345,10 @@ int main(int argc, char** argv)
     sdkCreateTimer(&timer);
     sdkResetTimer(&timer);
 
-    // register callbacks
-    glutDisplayFunc(display);
-    glutKeyboardFunc(keyboard);
-    glutReshapeFunc(reshape);
+    glutDisplayFunc(display);       //設定callback function
+    glutReshapeFunc(reshape);       //設定callback function
+    glutKeyboardFunc(keyboard);     //設定callback function
+
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
 
     // create menu

@@ -20,8 +20,6 @@
 #define MAX_EPSILON 10
 #define REFRESH_DELAY 10  // ms
 
-const char *sSDKname = "simpleCUDA2GL";
-
 unsigned int g_TotalErrors = 0;
 
 // CheckFBO/BackBuffer class objects
@@ -50,9 +48,6 @@ unsigned int num_values;
 // (offscreen) render target fbo variables
 GLuint tex_screen;      // where we render the image
 GLuint tex_cudaResult;  // where we will copy the CUDA result
-
-int *pArgc = NULL;
-char **pArgv = NULL;
 
 // Timer
 static int fpsCount = 0;
@@ -309,13 +304,8 @@ void deleteTexture(GLuint* tex)
 
 int main(int argc, char** argv)
 {
-    printf("%s Starting... argc=%d\n\n", argv[0], argc);
-
-    pArgc = &argc;
-    pArgv = argv;
-
+    printf("Starting...\n\n");
     printf("(Interactive OpenGL Demo)\n");
-
 
     // First initialize OpenGL context, so we can properly set the GL for CUDA.
     // This is necessary in order to achieve optimal performance with OpenGL/CUDA
@@ -331,15 +321,16 @@ int main(int argc, char** argv)
     sdkCreateTimer(&timer);
     sdkResetTimer(&timer);
 
-    // register callbacks
-    glutDisplayFunc(display);
-    glutKeyboardFunc(keyboard);
-    glutReshapeFunc(reshape);
+    glutDisplayFunc(display);       //設定callback function
+    glutReshapeFunc(reshape);       //設定callback function
+    glutKeyboardFunc(keyboard);     //設定callback function
+
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
 
     // create menu
     glutCreateMenu(mainMenu);
     glutAddMenuEntry("Quit (esc)", '\033');
+
     glutAttachMenu(GLUT_RIGHT_BUTTON);
 
     initGLBuffers();

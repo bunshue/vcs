@@ -184,3 +184,22 @@ int main(void)
     printf("Done\n");
     return 0;
 }
+
+void printData(byte* h_A, byte* h_B, byte* h_C, int len)
+{
+    for (int i = 0; i < len; i++)
+    {
+        printf("%4d", h_A[i]);
+    }
+    printf("\n");
+    for (int i = 0; i < len; i++)
+    {
+        printf("%4d", h_B[i]);
+    }
+    printf("\n");
+    for (int i = 0; i < len; i++)
+    {
+        printf("%4d", h_C[i]);
+    }
+    printf("\n");
+}

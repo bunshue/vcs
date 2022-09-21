@@ -1,17 +1,3 @@
-/**
-**************************************************************************
-* \file dct8x8.cu
-* \brief Contains entry point, wrappers to host and device code and benchmark.
-*
-* This sample implements forward and inverse Discrete Cosine Transform to blocks
-* of image pixels (of 8x8 size), as in JPEG standard. The typical work flow is
-*as
-* follows:
-* 1. Run CPU version (Host code) and measure execution time;
-* 2. Run CUDA version (Device code) and measure execution time;
-* 3. Output execution timings and calculate CUDA speedup.
-*/
-
 #include "Common.h"
 #include "DCT8x8_Gold.h"
 #include "BmpUtil.h"

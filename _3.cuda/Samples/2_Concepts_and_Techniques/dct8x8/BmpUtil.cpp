@@ -1,30 +1,3 @@
-/* Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *  * Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  * Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *  * Neither the name of NVIDIA CORPORATION nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
 /**
 **************************************************************************
 * \file BmpUtil.cpp
@@ -76,7 +49,8 @@ float round_f(float num) {
 *
 * \return Pointer to the created plane
 */
-byte *MallocPlaneByte(int width, int height, int *pStepBytes) {
+byte *MallocPlaneByte(int width, int height, int *pStepBytes)
+{
   byte *ptr;
   *pStepBytes = ((int)ceil(width / 16.0f)) * 16;
   //#ifdef __ALLOW_ALIGNED_MEMORY_MANAGEMENT
@@ -244,18 +218,21 @@ void MulFloatPlane(float Value, float *ImgSrcDst, int StrideF, ROI Size) {
 *
 * \return Status code
 */
-int PreLoadBmp(char *FileName, int *Width, int *Height) {
+int PreLoadBmp(char *FileName, int *Width, int *Height)
+{
   BMPFileHeader FileHeader;
   BMPInfoHeader InfoHeader;
   FILE *fh;
 
-  if (!(fh = fopen(FileName, "rb"))) {
+  if (!(fh = fopen(FileName, "rb")))
+  {
     return 1;  // invalid filename
   }
 
   fread(&FileHeader, sizeof(BMPFileHeader), 1, fh);
 
-  if (FileHeader._bm_signature != 0x4D42) {
+  if (FileHeader._bm_signature != 0x4D42)
+  {
     return 2;  // invalid file format
   }
 
@@ -287,7 +264,8 @@ int PreLoadBmp(char *FileName, int *Width, int *Height) {
 *
 * \return None
 */
-void LoadBmpAsGray(char *FileName, int Stride, ROI ImSize, byte *Img) {
+void LoadBmpAsGray(char *FileName, int Stride, ROI ImSize, byte *Img)
+{
   BMPFileHeader FileHeader;
   BMPInfoHeader InfoHeader;
   FILE *fh;
@@ -322,11 +300,13 @@ void LoadBmpAsGray(char *FileName, int Stride, ROI ImSize, byte *Img) {
 *
 * \return None
 */
-void DumpBmpAsGray(char *FileName, byte *Img, int Stride, ROI ImSize) {
+void DumpBmpAsGray(char* FileName, byte* Img, int Stride, ROI ImSize)
+{
   FILE *fp = NULL;
   fp = fopen(FileName, "wb");
 
-  if (fp == NULL) {
+    if (fp == NULL)
+    {
     return;
   }
 
@@ -374,11 +354,14 @@ void DumpBmpAsGray(char *FileName, byte *Img, int Stride, ROI ImSize) {
 *
 * \return None
 */
-void DumpBlockF(float *PlaneF, int StrideF, char *Fname) {
+void DumpBlockF(float *PlaneF, int StrideF, char *Fname)
+{
   FILE *fp = fopen(Fname, "wb");
 
-  for (int i = 0; i < 8; i++) {
-    for (int j = 0; j < 8; j++) {
+  for (int i = 0; i < 8; i++)
+  {
+    for (int j = 0; j < 8; j++)
+    {
       fprintf(fp, "%.*f  ", 14, PlaneF[i * StrideF + j]);
     }
 
@@ -398,11 +381,14 @@ void DumpBlockF(float *PlaneF, int StrideF, char *Fname) {
 *
 * \return None
 */
-void DumpBlock(byte *Plane, int Stride, char *Fname) {
+void DumpBlock(byte *Plane, int Stride, char *Fname)
+{
   FILE *fp = fopen(Fname, "wb");
 
-  for (int i = 0; i < 8; i++) {
-    for (int j = 0; j < 8; j++) {
+  for (int i = 0; i < 8; i++)
+  {
+    for (int j = 0; j < 8; j++)
+    {
       fprintf(fp, "%.3d  ", Plane[i * Stride + j]);
     }
 
@@ -423,11 +409,14 @@ void DumpBlock(byte *Plane, int Stride, char *Fname) {
 *
 * \return Mean Square Error between images
 */
-float CalculateMSE(byte *Img1, byte *Img2, int Stride, ROI Size) {
+float CalculateMSE(byte *Img1, byte *Img2, int Stride, ROI Size)
+{
   uint32 Acc = 0;
 
-  for (int i = 0; i < Size.height; i++) {
-    for (int j = 0; j < Size.width; j++) {
+  for (int i = 0; i < Size.height; i++)
+  {
+    for (int j = 0; j < Size.width; j++)
+    {
       int TmpDiff = Img1[i * Stride + j] - Img2[i * Stride + j];
       TmpDiff *= TmpDiff;
       Acc += TmpDiff;
@@ -449,7 +438,8 @@ float CalculateMSE(byte *Img1, byte *Img2, int Stride, ROI Size) {
 *
 * \return Peak Signal to Noise Ratio between images
 */
-float CalculatePSNR(byte *Img1, byte *Img2, int Stride, ROI Size) {
+float CalculatePSNR(byte *Img1, byte *Img2, int Stride, ROI Size)
+{
   float MSE = CalculateMSE(Img1, Img2, Stride, Size);
   return 10 * log10(255 * 255 / MSE);
 }

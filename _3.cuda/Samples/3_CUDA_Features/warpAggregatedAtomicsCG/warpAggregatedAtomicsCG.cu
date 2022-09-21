@@ -20,7 +20,8 @@ __device__ int atomicAggInc(int* counter)
 
     // leader does the update
     int res = 0;
-    if (active.thread_rank() == 0) {
+    if (active.thread_rank() == 0)
+    {
         res = atomicAdd(counter, active.size());
     }
 
@@ -284,14 +285,13 @@ int main(int argc, char** argv)
     int calculateMaxInBucketsStatus = EXIT_SUCCESS;
     // atomicAggIncMulti & atomicAggMaxMulti require a GPU of Volta (SM7X) architecture or higher,
     // so that it can take advantage of the new MATCH capability of Volta hardware
-    if (major >= 7) {
+    if (major >= 7)
+    {
         mapIndicesToBucketsStatus = mapIndicesToBuckets(data_to_filter, d_data_to_filter, numOfBuckets);
         calculateMaxInBucketsStatus = calculateMaxInBuckets(data_to_filter, d_data_to_filter, numOfBuckets);
     }
 
-    printf("\nWarp Aggregated Atomics %s \n",
-        (host_flt_count == nres) && (mapIndicesToBucketsStatus == EXIT_SUCCESS) &&
-        (calculateMaxInBucketsStatus == EXIT_SUCCESS) ? "PASSED" : "FAILED");
+    printf("\nWarp Aggregated Atomics %s \n", (host_flt_count == nres) && (mapIndicesToBucketsStatus == EXIT_SUCCESS) && (calculateMaxInBucketsStatus == EXIT_SUCCESS) ? "PASSED" : "FAILED");
 
     checkCudaErrors(cudaFree(d_data_to_filter));
     checkCudaErrors(cudaFree(d_filtered_data));
