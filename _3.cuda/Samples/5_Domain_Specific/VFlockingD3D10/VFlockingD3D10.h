@@ -30,16 +30,16 @@
 
 #pragma once
 
-// simulation parameters
+ // simulation parameters
 struct Params {
-  float alpha;
-  float upwashX;
-  float upwashY;
-  float wingspan;
-  float dX;
-  float dY;
-  float epsilon;
-  float lambda;  // -0.1073f * wingspan ;
+	float alpha;
+	float upwashX;
+	float upwashY;
+	float wingspan;
+	float dX;
+	float dY;
+	float epsilon;
+	float lambda;  // -0.1073f * wingspan ;
 };
 
 #endif

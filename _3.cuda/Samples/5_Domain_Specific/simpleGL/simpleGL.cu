@@ -89,8 +89,7 @@ void cleanup();
 
 // GL functionality
 bool initGL(int* argc, char** argv);
-void createVBO(GLuint* vbo, struct cudaGraphicsResource** vbo_res,
-    unsigned int vbo_res_flags);
+void createVBO(GLuint* vbo, struct cudaGraphicsResource** vbo_res, unsigned int vbo_res_flags);
 void deleteVBO(GLuint* vbo, struct cudaGraphicsResource* vbo_res);
 
 // rendering callbacks
@@ -104,8 +103,6 @@ void timerEvent(int value);
 void runCuda(struct cudaGraphicsResource** vbo_resource);
 void runAutoTest(int devID, char** argv, char* ref_file);
 void checkResultCuda(int argc, char** argv, const GLuint& vbo);
-
-const char* sSDKsample = "simpleGL (VBO)";
 
 ///////////////////////////////////////////////////////////////////////////////
 //! Simple kernel to modify vertex positions in sine wave pattern
@@ -130,43 +127,12 @@ __global__ void simple_vbo_kernel(float4* pos, unsigned int width, unsigned int 
     pos[y * width + x] = make_float4(u, w, v, 1.0f);
 }
 
-
 void launch_kernel(float4* pos, unsigned int mesh_width, unsigned int mesh_height, float time)
 {
     // execute the kernel
     dim3 block(8, 8, 1);
     dim3 grid(mesh_width / block.x, mesh_height / block.y, 1);
     simple_vbo_kernel << < grid, block >> > (pos, mesh_width, mesh_height, time);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// Program main
-////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char** argv)
-{
-    char* ref_file = NULL;
-
-    pArgc = &argc;
-    pArgv = argv;
-
-    printf("%s starting...\n", sSDKsample);
-
-    if (argc > 1)
-    {
-        printf("XXXXXXXXXXXXXXXXXXXXXX\n");
-        if (checkCmdLineFlag(argc, (const char**)argv, "file"))
-        {
-            // In this mode, we are running non-OpenGL and doing a compare of the VBO was generated correctly
-            getCmdLineArgumentString(argc, (const char**)argv, "file", (char**)&ref_file);
-        }
-    }
-
-    printf("\n");
-
-    runTest(argc, argv, ref_file);
-
-    printf("%s completed, returned %s\n", sSDKsample, (g_TotalErrors == 0) ? "OK" : "ERROR!");
-    exit(g_TotalErrors == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
 }
 
 void computeFPS()
@@ -196,7 +162,10 @@ bool initGL(int* argc, char** argv)
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
     glutInitWindowSize(window_width, window_height);
+    glutInitWindowPosition(1100, 200);
+
     glutCreateWindow("Cuda GL Interop (VBO)");
+
     glutDisplayFunc(display);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
     glutMotionFunc(motion);         //設定callback function
@@ -257,7 +226,7 @@ bool runTest(int argc, char** argv, char* ref_file)
     }
     else
     {
-        printf("222\n");
+        printf("222, ref_file == null\n");
         // First initialize OpenGL context, so we can properly set the GL for CUDA.
         // This is necessary in order to achieve optimal performance with OpenGL/CUDA interop.
         if (false == initGL(&argc, argv))
@@ -294,8 +263,7 @@ void runCuda(struct cudaGraphicsResource** vbo_resource)
     float4* dptr;
     checkCudaErrors(cudaGraphicsMapResources(1, vbo_resource, 0));
     size_t num_bytes;
-    checkCudaErrors(cudaGraphicsResourceGetMappedPointer((void**)&dptr, &num_bytes,
-        *vbo_resource));
+    checkCudaErrors(cudaGraphicsResourceGetMappedPointer((void**)&dptr, &num_bytes, *vbo_resource));
     //printf("CUDA mapped VBO: May access %ld bytes\n", num_bytes);
 
     // execute the kernel
@@ -315,7 +283,7 @@ void runCuda(struct cudaGraphicsResource** vbo_resource)
 
 void sdkDumpBin2(void* data, unsigned int bytes, const char* filename)
 {
-    printf("sdkDumpBin: <%s>\n", filename);
+    printf("sdkDumpBin2, filename : %s\n", filename);
     FILE* fp;
     FOPEN(fp, filename, "wb");
     fwrite(data, bytes, 1, fp);
@@ -340,23 +308,20 @@ void runAutoTest(int devID, char** argv, char* ref_file)
     checkCudaErrors(cudaMemcpy(imageData, d_vbo_buffer, mesh_width * mesh_height * sizeof(float), cudaMemcpyDeviceToHost));
 
     sdkDumpBin2(imageData, mesh_width * mesh_height * sizeof(float), "simpleGL.bin");
+
     reference_file = sdkFindFilePath(ref_file, argv[0]);
 
-    if (reference_file &&
-        !sdkCompareBin2BinFloat("simpleGL.bin", reference_file,
-            mesh_width * mesh_height * sizeof(float),
-            MAX_EPSILON_ERROR, THRESHOLD, pArgv[0]))
+    if (reference_file && !sdkCompareBin2BinFloat("simpleGL.bin", reference_file,
+        mesh_width * mesh_height * sizeof(float), MAX_EPSILON_ERROR, THRESHOLD, pArgv[0]))
     {
         g_TotalErrors++;
     }
 }
 
-
 ////////////////////////////////////////////////////////////////////////////////
 //! Create VBO
 ////////////////////////////////////////////////////////////////////////////////
-void createVBO(GLuint* vbo, struct cudaGraphicsResource** vbo_res,
-    unsigned int vbo_res_flags)
+void createVBO(GLuint* vbo, struct cudaGraphicsResource** vbo_res, unsigned int vbo_res_flags)
 {
     assert(vbo);
 
@@ -381,7 +346,6 @@ void createVBO(GLuint* vbo, struct cudaGraphicsResource** vbo_res,
 ////////////////////////////////////////////////////////////////////////////////
 void deleteVBO(GLuint* vbo, struct cudaGraphicsResource* vbo_res)
 {
-
     // unregister this buffer object with CUDA
     checkCudaErrors(cudaGraphicsUnregisterResource(vbo_res));
 
@@ -516,8 +480,7 @@ void checkResultCuda(int argc, char** argv, const GLuint& vbo)
         if (checkCmdLineFlag(argc, (const char**)argv, "regression"))
         {
             // write file for regression test
-            sdkWriteFile<float>("./data/regression.dat",
-                data, mesh_width * mesh_height * 3, 0.0, false);
+            sdkWriteFile<float>("./data/regression.dat", data, mesh_width * mesh_height * 3, 0.0, false);
         }
 
         // unmap GL buffer object
@@ -527,9 +490,39 @@ void checkResultCuda(int argc, char** argv, const GLuint& vbo)
             fflush(stderr);
         }
 
-        checkCudaErrors(cudaGraphicsGLRegisterBuffer(&cuda_vbo_resource, vbo,
-            cudaGraphicsMapFlagsWriteDiscard));
+        checkCudaErrors(cudaGraphicsGLRegisterBuffer(&cuda_vbo_resource, vbo, cudaGraphicsMapFlagsWriteDiscard));
 
         SDK_CHECK_ERROR_GL();
     }
 }
+
+////////////////////////////////////////////////////////////////////////////////
+// Program main
+////////////////////////////////////////////////////////////////////////////////
+int main(int argc, char** argv)
+{
+    pArgc = &argc;
+    pArgv = argv;
+
+    char* ref_file = NULL;
+
+    printf("Starting...\n");
+
+    if (argc > 1)
+    {
+        printf("XXXXXXXXXXXXXXXXXXXXXX\n");
+        if (checkCmdLineFlag(argc, (const char**)argv, "file"))
+        {
+            // In this mode, we are running non-OpenGL and doing a compare of the VBO was generated correctly
+            getCmdLineArgumentString(argc, (const char**)argv, "file", (char**)&ref_file);
+        }
+    }
+
+    //printf("ref_file : %s\n", ref_file);  //null
+
+    runTest(argc, argv, ref_file);
+
+    printf("Completed, returned %s\n", (g_TotalErrors == 0) ? "OK" : "ERROR!");
+    exit(g_TotalErrors == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
+}
+

@@ -3,7 +3,6 @@
 #include <string.h>
 #include <math.h>
 #include <helper_gl.h>
-#include <GL/freeglut.h>
 
 // includes, cuda
 #include <vector_types.h>
@@ -21,121 +20,13 @@ typedef unsigned char uchar;
 const uint width = 512;
 const uint height = 512;
 
-GLuint pbo;  // OpenGL pixel buffer object
-
-StopWatchInterface *timer = NULL;
-
 #define MAX(a, b) ((a > b) ? a : b)
-
-extern "C" void cleanup();
-
-// display results using OpenGL (called by GLUT)
-void display()
-{
-    sdkStartTimer(&timer);
-
-    // display results
-    glClear(GL_COLOR_BUFFER_BIT);
-
-    // draw image from PBO
-    glDisable(GL_DEPTH_TEST);
-    glRasterPos2i(0, 0);
-    glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, pbo);
-    glDrawPixels(width, height, GL_RGBA, GL_UNSIGNED_BYTE, 0);
-    glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, 0);
-
-    glutSwapBuffers();
-    glutReportErrors();
-
-    sdkStopTimer(&timer);
-}
-
-void idle()
-{
-}
-
-void keyboard(unsigned char key, int x, int y)
-{
-    switch (key)
-    {
-    case 27:
-        glutDestroyWindow(glutGetWindow());
-        return;
-
-    default:
-        break;
-    }
-
-    glutPostRedisplay();
-}
-
-void reshape(int x, int y)
-{
-    glViewport(0, 0, x, y);
-
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glOrtho(0.0, 1.0, 0.0, 1.0, 0.0, 1.0);
-}
-
-void cleanup()
-{
-    sdkDeleteTimer(&timer);
-}
-
-void initGLBuffers()
-{
-    printf("initGLBuffers\n");
-
-    // create pixel buffer object
-    glGenBuffers(1, &pbo);
-    glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, pbo);
-    glBufferData(GL_PIXEL_UNPACK_BUFFER_ARB, width * height * sizeof(GLubyte) * 4, 0, GL_STREAM_DRAW_ARB);
-    glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, 0);
-}
-
-void initGL(int* argc, char** argv)
-{
-    printf("initGL\n");
-
-    // initialize GLUT callback functions
-    glutInit(argc, argv);
-    glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
-    glutInitWindowSize(width, height);
-
-    glutCreateWindow("開啟新視窗");
-
-    glutDisplayFunc(display);
-    glutKeyboardFunc(keyboard);
-    glutReshapeFunc(reshape);
-    glutIdleFunc(idle);
-
-    if (!isGLVersionSupported(2, 0) || !areGLExtensionsSupported("GL_ARB_pixel_buffer_object"))
-    {
-        fprintf(stderr, "Required OpenGL extensions are missing.");
-        exit(EXIT_FAILURE);
-    }
-}
 
 ////////////////////////////////////////////////////////////////////////////////
 // Program main
 ////////////////////////////////////////////////////////////////////////////////
 int main(int argc, char** argv)
 {
-    char* ref_file = NULL;
-
-    printf("main start\n");
-
-    if (checkCmdLineFlag(argc, (const char**)argv, "file"))
-    {
-        printf("XXXXXXXXXXX\n");
-        std::cout << "xxxxxx" << std::endl;
-        getCmdLineArgumentString(argc, (const char**)argv, "file", &ref_file);
-    }
-
     // use command-line specified CUDA device, otherwise use device with highest
     // Gflops/s
     int cuda_device = findCudaDevice(argc, (const char**)argv);
@@ -196,17 +87,29 @@ int main(int argc, char** argv)
     printf("GL_VERSION : %d\n", GL_VERSION);
 
 
+#if __CUDA_ARCH__ >= 800
+    printf("111111111111111111\n");
+#else
+    printf("222222222222222222222\n");
+#endif
+
+#if defined(__arm__) || defined(__aarch64__)
+    printf("Not supported on ARM\n");
+#else
+    printf("Supported on __arm__ / __aarch64__\n");
+#endif
+
+#if defined(WIN32) || defined(_WIN32) || defined(WIN64) || defined(_WIN64)
+    printf("WIN32 _WIN32 WIN64 _WIN64\n");
+#endif
+
+#if defined(__APPLE__) || defined(MACOSX)
+    printf("__APPLE__  MACOSX");
+#else
+    printf("XXXX __APPLE__  MACOSX\n");
+#endif
 
 
-    initGL(&argc, argv);  //開啟CUDA3D Texture
-
-    // OpenGL buffers
-    initGLBuffers();
-
-    printf("call glutCloseFunc\n");
-    glutCloseFunc(cleanup);
-
-    glutMainLoop();
 
     exit(EXIT_SUCCESS);
 }

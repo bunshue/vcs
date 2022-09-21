@@ -77,18 +77,7 @@ const unsigned int NUM_BANKS = 16;
 #include "dwtHaar1D_kernel.cuh"
 
 ////////////////////////////////////////////////////////////////////////////////
-// declaration, forward
-void runTest(int argc, char **argv);
-bool getLevels(unsigned int len, unsigned int *levels);
-
-////////////////////////////////////////////////////////////////////////////////
-// Program main
-////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char** argv)
-{
-    // run test
-    runTest(argc, argv);
-}
+bool getLevels(unsigned int len, unsigned int* levels);
 
 ////////////////////////////////////////////////////////////////////////////////
 //! Perform the wavelet decomposition
@@ -147,9 +136,7 @@ void runTest(int argc, char** argv)
         //printf("here\n");
         s_fname = sdkFindFilePath("signal.dat", argv[0]);
         r_gold_fname = sdkFindFilePath("regression.gold.dat", argv[0]);
-
         char filename_write[] = "x64\\Debug\\result.dat";
-
         strcpy(r_fname, filename_write);
     }
 
@@ -164,7 +151,6 @@ void runTest(int argc, char** argv)
     if (s_fname == NULL)
     {
         fprintf(stderr, "Cannot find the file containing the signal.\n%s", usage);
-
         exit(EXIT_FAILURE);
     }
 
@@ -259,8 +245,7 @@ void runTest(int argc, char** argv)
 
         // run kernel
         dwtHaar1D << <grid_size, block_size, mem_shared >> > (
-            d_idata, d_odata, approx_final, dlevels_step, num_threads_total_left,
-            block_size.x);
+            d_idata, d_odata, approx_final, dlevels_step, num_threads_total_left, block_size.x);
 
         // Copy approx_final to appropriate location
         if (approx_is_input)
@@ -306,11 +291,9 @@ void runTest(int argc, char** argv)
 
     // post processing
     // write file for regression test
-    if (r_fname == NULL) {
-        fprintf(stderr,
-            "Cannot write the output file storing the result of the wavelet "
-            "decomposition.\n%s",
-            usage);
+    if (r_fname == NULL)
+    {
+        fprintf(stderr, "Cannot write the output file storing the result of the wavelet decomposition.\n%s", usage);
         exit(EXIT_FAILURE);
     }
 
@@ -329,10 +312,7 @@ void runTest(int argc, char** argv)
 
     if (r_gold_fname == NULL)
     {
-        fprintf(stderr,
-            "Cannot read the file containing the reference result of the "
-            "wavelet decomposition.\n%s",
-            usage);
+        fprintf(stderr, "Cannot read the file containing the reference result of the wavelet decomposition.\n%s", usage);
 
         exit(EXIT_FAILURE);
     }
@@ -375,17 +355,28 @@ void runTest(int argc, char** argv)
 //! @param   levels  number of decomposition levels necessary to perform a full
 //!           decomposition
 ////////////////////////////////////////////////////////////////////////////////
-bool getLevels(unsigned int len, unsigned int* levels) {
+bool getLevels(unsigned int len, unsigned int* levels)
+{
     bool retval = false;
 
     // currently signals up to a length of 2^20 supported
-    for (unsigned int i = 0; i < 20; ++i) {
-        if (len == (1 << i)) {
+    for (unsigned int i = 0; i < 20; ++i)
+    {
+        if (len == (1 << i))
+        {
             *levels = i;
             retval = true;
             break;
         }
     }
-
     return retval;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Program main
+////////////////////////////////////////////////////////////////////////////////
+int main(int argc, char** argv)
+{
+    // run test
+    runTest(argc, argv);
 }

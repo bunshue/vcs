@@ -19,14 +19,14 @@
 // const char *printfFile = "FDTD3d.txt";
 
 // Forward declarations
-bool runTest(int argc, const char **argv);
-void showHelp(const int argc, const char **argv);
+bool runTest(int argc, const char** argv);
+void showHelp(const int argc, const char** argv);
 
 int main(int argc, char** argv)
 {
     bool bTestResult = false;
     // Start the log
-    printf("%s Starting...\n\n", argv[0]);
+    printf("Starting...\n\n");
 
     // Check help flag
     if (checkCmdLineFlag(argc, (const char**)argv, "help"))
@@ -121,10 +121,7 @@ bool runTest(int argc, const char** argv)
     // Check dimension is valid
     if (defaultDim < k_dim_min)
     {
-        printf(
-            "insufficient device memory (maximum volume on device is %d, must be "
-            "between %d and %d).\n",
-            defaultDim, k_dim_min, k_dim_max);
+        printf("insufficient device memory (maximum volume on device is %d, must be between %d and %d).\n", defaultDim, k_dim_min, k_dim_max);
         exit(EXIT_FAILURE);
     }
     else if (defaultDim > k_dim_max)
@@ -191,10 +188,7 @@ bool runTest(int argc, const char** argv)
     // Generate data
     printf(" generateRandomData\n\n");
     generateRandomData(input, outerDimx, outerDimy, outerDimz, lowerBound, upperBound);
-    printf(
-        "FDTD on %d x %d x %d volume with symmetric filter radius %d for %d "
-        "timesteps...\n\n",
-        dimx, dimy, dimz, radius, timesteps);
+    printf("FDTD on %d x %d x %d volume with symmetric filter radius %d for %d timesteps...\n\n", dimx, dimy, dimz, radius, timesteps);
 
     // Execute on the host
     printf("fdtdReference...\n");

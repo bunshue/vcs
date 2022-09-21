@@ -150,6 +150,7 @@ void createSphere(void)
 
         for (int j = 0; j < nSkip1; j++)
         {
+            printf("XXXXXXXX\n");
             g_pRng->getNextU01();
         }
 
@@ -158,6 +159,7 @@ void createSphere(void)
 
         for (int j = 0; j < nSkip2; j++)
         {
+            printf("XXXXXXXX\n");
             g_pRng->getNextU01();
         }
 
@@ -254,6 +256,7 @@ void drawText(void)
 
 void reshape(int x, int y)
 {
+    printf("reshape\n");
     float xScale;
     float yScale;
 
@@ -301,6 +304,7 @@ void reshape(int x, int y)
 
 void display(void)
 {
+    //printf("d");
     glClear(GL_COLOR_BUFFER_BIT);
     glLoadIdentity();
     glTranslatef(0.0f, 0.0f, -4.0f);
@@ -336,6 +340,7 @@ void idle(void)
 
 void reCreate(void)
 {
+    printf("reCreate ");
     switch (g_currentShape)
     {
     case Sphere:
@@ -657,7 +662,9 @@ int main(int argc, char** argv)
             glutInit(&argc, argv);
             glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
             // TODO use width/height?
-            glutInitWindowSize(1000, 1000);
+    glutInitWindowSize(1000, 1000);     //設定視窗大小, 直接拉大內容
+    glutInitWindowPosition(900, 50);    //視窗起始位置
+
             // Create a window with rendering context and everything else we need
             glutCreateWindow("Random Fog");
 
