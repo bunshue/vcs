@@ -73,22 +73,6 @@ int main(int argc, char** argv)
     int k;
     float alpha, beta, alpham1;
 
-    // This will pick the best possible CUDA capable device
-    cudaDeviceProp deviceProp;
-    int devID = findCudaDevice(argc, (const char**)argv);
-
-    if (devID < 0)
-    {
-        printf("exiting...\n");
-        exit(EXIT_SUCCESS);
-    }
-
-    checkCudaErrors(cudaGetDeviceProperties(&deviceProp, devID));
-
-    // Statistics about the GPU device
-    printf("> GPU device has %d Multi-Processors, SM %d.%d compute capabilities\n\n",
-        deviceProp.multiProcessorCount, deviceProp.major, deviceProp.minor);
-
     /* Generate a random tridiagonal symmetric matrix in CSR format */
     M = N = 1048576;
     nz = (N - 2) * 3 + 4;
@@ -128,8 +112,7 @@ int main(int argc, char** argv)
     /* Wrap raw data into cuSPARSE generic API objects */
     cusparseSpMatDescr_t matA = NULL;
     checkCudaErrors(cusparseCreateCsr(&matA, N, N, nz, d_row, d_col, d_val,
-        CUSPARSE_INDEX_32I, CUSPARSE_INDEX_32I,
-        CUSPARSE_INDEX_BASE_ZERO, CUDA_R_32F));
+        CUSPARSE_INDEX_32I, CUSPARSE_INDEX_32I, CUSPARSE_INDEX_BASE_ZERO, CUDA_R_32F));
     cusparseDnVecDescr_t vecx = NULL;
     checkCudaErrors(cusparseCreateDnVec(&vecx, N, d_x, CUDA_R_32F));
     cusparseDnVecDescr_t vecp = NULL;
@@ -158,8 +141,7 @@ int main(int argc, char** argv)
 
     /* Begin CG */
     checkCudaErrors(cusparseSpMV(cusparseHandle, CUSPARSE_OPERATION_NON_TRANSPOSE,
-        &alpha, matA, vecx, &beta, vecAx, CUDA_R_32F,
-        CUSPARSE_SPMV_ALG_DEFAULT, buffer));
+        &alpha, matA, vecx, &beta, vecAx, CUDA_R_32F, CUSPARSE_SPMV_ALG_DEFAULT, buffer));
 
     cublasSaxpy(cublasHandle, N, &alpham1, d_Ax, 1, d_r, 1);
     cublasStatus = cublasSdot(cublasHandle, N, d_r, 1, d_r, 1, &r1);

@@ -59,6 +59,40 @@ int main(int argc, char** argv)
         //bPinGenericMemory = false;
     }
 
+
+    // This will pick the best possible CUDA capable device
+    //cudaDeviceProp deviceProp;
+    int devID = findCudaDevice(argc, (const char**)argv);
+
+    if (devID < 0)
+    {
+        printf("exiting...\n");
+        exit(EXIT_SUCCESS);
+    }
+
+    checkCudaErrors(cudaGetDeviceProperties(&deviceProp, devID));
+    if (!deviceProp.managedMemory)
+    {
+        // This sample requires being run on a device that supports Unified Memory
+        fprintf(stderr, "Unified Memory not supported on this device\n");
+        exit(EXIT_WAIVED);
+    }
+
+    // This sample requires being run on a device that supports Cooperative Kernel
+// Launch
+    if (!deviceProp.cooperativeLaunch)
+    {
+        printf("\nSelected GPU (%d) does not support Cooperative Kernel Launch, Waiving the run\n", devID);
+        exit(EXIT_WAIVED);
+    }
+
+    // Statistics about the GPU device
+    printf("> GPU device has %d Multi-Processors, SM %d.%d compute capabilities\n\n",
+        deviceProp.multiProcessorCount, deviceProp.major, deviceProp.minor);
+
+    int numSms = deviceProp.multiProcessorCount;
+    printf("numSms = %d\n", numSms);
+
     float scale_factor = 1.0f;
 
     scale_factor =

@@ -451,7 +451,8 @@ std::multimap<std::pair<int, int>, int> getIdenticalGPUs() {
     return identicalGpus;
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
     constexpr size_t kNumGpusRequired = 2;
     int N = 0, nz = 0, * I = NULL, * J = NULL;
     float* val = NULL;
@@ -482,7 +483,9 @@ int main(int argc, char** argv) {
         if (distance(bestFit) <= distance(testFit)) bestFit = testFit;
     }
 
-    if (distance(bestFit) < kNumGpusRequired) {
+    if (distance(bestFit) < kNumGpusRequired)
+    {
+        //在這裡就離開, 是否有問題?
         printf(
             "No two or more GPUs with same architecture capable of "
             "concurrentManagedAccess found. "
@@ -699,20 +702,16 @@ int main(int argc, char** argv) {
     }
 #endif
 
-    printf("Total threads per GPU = %d numBlocksPerSm  = %d\n",
-        numSms * numBlocksPerSm * THREADS_PER_BLOCK, numBlocksPerSm);
-    dim3 dimGrid(numSms * numBlocksPerSm, 1, 1),
-        dimBlock(THREADS_PER_BLOCK, 1, 1);
+    printf("Total threads per GPU = %d numBlocksPerSm  = %d\n", numSms * numBlocksPerSm * THREADS_PER_BLOCK, numBlocksPerSm);
+
+    dim3 dimGrid(numSms * numBlocksPerSm, 1, 1);
+    dim3 dimBlock(THREADS_PER_BLOCK, 1, 1);
 
     // Structure used for cross-grid synchronization.
     MultiDeviceData multi_device_data;
-    checkCudaErrors(cudaHostAlloc(
-        &multi_device_data.hostMemoryArrivedList,
-        (kNumGpusRequired - 1) * sizeof(*multi_device_data.hostMemoryArrivedList),
-        cudaHostAllocPortable));
-    memset(multi_device_data.hostMemoryArrivedList, 0,
-        (kNumGpusRequired - 1) *
-        sizeof(*multi_device_data.hostMemoryArrivedList));
+    checkCudaErrors(cudaHostAlloc(&multi_device_data.hostMemoryArrivedList,
+        (kNumGpusRequired - 1) * sizeof(*multi_device_data.hostMemoryArrivedList), cudaHostAllocPortable));
+    memset(multi_device_data.hostMemoryArrivedList, 0, (kNumGpusRequired - 1) * sizeof(*multi_device_data.hostMemoryArrivedList));
     multi_device_data.numDevices = kNumGpusRequired;
     multi_device_data.deviceRank = 0;
 
@@ -726,22 +725,21 @@ int main(int argc, char** argv) {
 
     deviceId = bestFitDeviceIds.begin();
     device_count = 0;
-    while (deviceId != bestFitDeviceIds.end()) {
+    while (deviceId != bestFitDeviceIds.end())
+    {
         checkCudaErrors(cudaSetDevice(*deviceId));
-        checkCudaErrors(cudaLaunchCooperativeKernel(
-            (void*)multiGpuConjugateGradient, dimGrid, dimBlock, kernelArgs,
-            sMemSize, nStreams[device_count++]));
+        checkCudaErrors(cudaLaunchCooperativeKernel((void*)multiGpuConjugateGradient, dimGrid, dimBlock, kernelArgs, sMemSize, nStreams[device_count++]));
         multi_device_data.deviceRank++;
         deviceId++;
     }
 
     checkCudaErrors(cudaMemPrefetchAsync(x, sizeof(float) * N, cudaCpuDeviceId));
-    checkCudaErrors(
-        cudaMemPrefetchAsync(dot_result, sizeof(double), cudaCpuDeviceId));
+    checkCudaErrors(cudaMemPrefetchAsync(dot_result, sizeof(double), cudaCpuDeviceId));
 
     deviceId = bestFitDeviceIds.begin();
     device_count = 0;
-    while (deviceId != bestFitDeviceIds.end()) {
+    while (deviceId != bestFitDeviceIds.end())
+    {
         checkCudaErrors(cudaSetDevice(*deviceId));
         checkCudaErrors(cudaStreamSynchronize(nStreams[device_count++]));
         deviceId++;
@@ -757,16 +755,19 @@ int main(int argc, char** argv) {
 
     float rsum, diff, err = 0.0;
 
-    for (int i = 0; i < N; i++) {
+    for (int i = 0; i < N; i++)
+    {
         rsum = 0.0;
 
-        for (int j = I[i]; j < I[i + 1]; j++) {
+        for (int j = I[i]; j < I[i + 1]; j++)
+        {
             rsum += val_cpu[j] * x[J[j]];
         }
 
         diff = fabs(rsum - rhs);
 
-        if (diff > err) {
+        if (diff > err)
+        {
             err = diff;
         }
     }
@@ -790,7 +791,7 @@ int main(int argc, char** argv) {
 #endif
 
     printf("Test Summary:  Error amount = %f \n", err);
-    fprintf(stdout, "&&&& conjugateGradientMultiDeviceCG %s\n",
-        (sqrt(r1) < tol) ? "PASSED" : "FAILED");
+    fprintf(stdout, "&&&& conjugateGradientMultiDeviceCG %s\n", (sqrt(r1) < tol) ? "PASSED" : "FAILED");
     exit((sqrt(r1) < tol) ? EXIT_SUCCESS : EXIT_FAILURE);
 }
+

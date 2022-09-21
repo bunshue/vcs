@@ -440,6 +440,7 @@ int main(int argc, char** argv)
     checkCudaErrors(cudaOccupancyMaxActiveBlocksPerMultiprocessor(&numBlocksPerSm, gpuConjugateGradient, numThreads, sMemSize));
 
     int numSms = deviceProp.multiProcessorCount;
+
     dim3 dimGrid(numSms * numBlocksPerSm, 1, 1), dimBlock(THREADS_PER_BLOCK, 1, 1);
     checkCudaErrors(cudaEventRecord(start, 0));
     checkCudaErrors(cudaLaunchCooperativeKernel((void*)gpuConjugateGradient, dimGrid, dimBlock, kernelArgs, sMemSize, NULL));

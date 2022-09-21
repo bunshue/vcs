@@ -14,8 +14,6 @@ namespace cg = cooperative_groups;
 #include <vector>
 #include <algorithm>
 
-const char* sSDKsample = "newdelete";
-
 #include "container.hpp"
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -103,7 +101,8 @@ __global__ void placementNew(int* d_result)
 
     cg::sync(cta);
 
-    if ((threadIdx.x & 1) == 0) {
+    if ((threadIdx.x & 1) == 0)
+    {
         s_vector->push(threadIdx.x >> 1);
     }
 
@@ -190,8 +189,7 @@ bool checkResult(int* d_result, int N)
     std::vector<int> h_result;
     h_result.resize(N);
 
-    checkCudaErrors(cudaMemcpy(&h_result[0], d_result, N * sizeof(int),
-        cudaMemcpyDeviceToHost));
+    checkCudaErrors(cudaMemcpy(&h_result[0], d_result, N * sizeof(int), cudaMemcpyDeviceToHost));
     std::sort(h_result.begin(), h_result.end());
 
     bool success = true;
@@ -270,7 +268,7 @@ bool testComplexType(int threads)
 
 int main(int argc, char** argv)
 {
-    printf("%s Starting...\n\n", sSDKsample);
+    printf("Starting...\n\n");
 
     // use command-line specified CUDA device, otherwise use device with highest
     // Gflops/s

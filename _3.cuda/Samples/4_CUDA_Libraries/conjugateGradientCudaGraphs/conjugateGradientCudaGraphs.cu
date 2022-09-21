@@ -109,23 +109,6 @@ int main(int argc, char** argv)
 
     cudaStream_t stream1, streamForGraph;
 
-    // This will pick the best possible CUDA capable device
-    cudaDeviceProp deviceProp;
-    int devID = findCudaDevice(argc, (const char**)argv);
-
-    if (devID < 0)
-    {
-        printf("exiting...\n");
-        exit(EXIT_SUCCESS);
-    }
-
-    checkCudaErrors(cudaGetDeviceProperties(&deviceProp, devID));
-
-    // Statistics about the GPU device
-    printf(
-        "> GPU device has %d Multi-Processors, SM %d.%d compute capabilities\n\n",
-        deviceProp.multiProcessorCount, deviceProp.major, deviceProp.minor);
-
     /* Generate a random tridiagonal symmetric matrix in CSR format */
     N = 1048576;
     nz = (N - 2) * 3 + 4;

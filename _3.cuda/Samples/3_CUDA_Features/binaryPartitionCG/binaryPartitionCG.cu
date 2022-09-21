@@ -50,7 +50,8 @@ __global__ void oddEvenCountAndSumCG(int* inputArr, int* numOfOdds, int* sumOfOd
         {
             int oddGroupSum = cg::reduce(subTile, elem, cg::plus<int>());
 
-            if (subTile.thread_rank() == 0) {
+            if (subTile.thread_rank() == 0)
+            {
                 // Add number of odds present in this group of Odds.
                 atomicAdd(numOfOdds, subTile.size());
 

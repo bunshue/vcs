@@ -32,7 +32,8 @@ RNG* g_pRng = NULL;
 CheckRender* g_pCheckRender = NULL;
 
 // Simple struct which contains the position and color of a vertex
-struct SVertex {
+struct SVertex
+{
     GLfloat x, y, z;
     GLfloat r, g, b;
 };

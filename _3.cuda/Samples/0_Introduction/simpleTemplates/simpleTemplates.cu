@@ -156,6 +156,16 @@ void runTest(int argc, char** argv, int len)
 
     // get number of SMs on this GPU
     checkCudaErrors(cudaGetDeviceProperties(&deviceProps, devID));
+
+    printf("Name = %s\n", deviceProps.name);
+    printf("clockRate = %d\n", deviceProps.clockRate);
+    printf("multiProcessorCount = %d\n", deviceProps.multiProcessorCount);
+    printf("totalGlobalMem = %u\n", deviceProps.totalGlobalMem);
+    printf("sharedMemPerBlock = %u\n", deviceProps.sharedMemPerBlock);
+    printf("totalConstMem = %d\n", deviceProps.totalConstMem);
+    printf("memoryClockRate = %d\n", deviceProps.memoryClockRate);
+    printf("maxBlocksPerMultiProcessor = %d\n", deviceProps.maxBlocksPerMultiProcessor);
+
     printf("CUDA device [%s] has %d Multi-Processors\n", deviceProps.name, deviceProps.multiProcessorCount);
 
     // create and start timer
@@ -241,9 +251,10 @@ void runTest(int argc, char** argv, int len)
 ////////////////////////////////////////////////////////////////////////////////
 int main(int argc, char** argv)
 {
-    printf("> runTest<float,32>\n");
+    printf("runTest<float,32>\n");
     runTest<float>(argc, argv, 32);
-    printf("> runTest<int,64>\n");
+
+    printf("runTest<int,64>\n");
     runTest<int>(argc, argv, 64);
 
     printf("\n[simpleTemplates] -> Test Results: %d Failures\n", g_TotalFailures);

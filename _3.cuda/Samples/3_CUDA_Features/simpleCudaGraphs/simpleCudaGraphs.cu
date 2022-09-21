@@ -46,9 +46,11 @@ __global__ void reduce(float* inputVec, double* outputVec, size_t inputSize, siz
     }
     cg::sync(cta);
 
-    if (cta.thread_rank() == 0 && blockIdx.x < outputSize) {
+    if (cta.thread_rank() == 0 && blockIdx.x < outputSize)
+    {
         beta = 0.0;
-        for (int i = 0; i < cta.size(); i += tile32.size()) {
+        for (int i = 0; i < cta.size(); i += tile32.size())
+        {
             beta += tmp[i];
         }
         outputVec[blockIdx.x] = beta;
@@ -132,8 +134,7 @@ void CUDART_CB myHostNodeCallback(void* data)
     *result = 0.0;  // reset the result
 }
 
-void cudaGraphsManual(float* inputVec_h, float* inputVec_d, double* outputVec_d,
-    double* result_d, size_t inputSize, size_t numOfBlocks)
+void cudaGraphsManual(float* inputVec_h, float* inputVec_d, double* outputVec_d, double* result_d, size_t inputSize, size_t numOfBlocks)
 {
     cudaStream_t streamForGraph;
     cudaGraph_t graph;
@@ -179,8 +180,7 @@ void cudaGraphsManual(float* inputVec_h, float* inputVec_d, double* outputVec_d,
     kernelNodeParams.kernelParams = (void**)kernelArgs;
     kernelNodeParams.extra = NULL;
 
-    checkCudaErrors(cudaGraphAddKernelNode(&kernelNode, graph, nodeDependencies.data(),
-        nodeDependencies.size(), &kernelNodeParams));
+    checkCudaErrors(cudaGraphAddKernelNode(&kernelNode, graph, nodeDependencies.data(), nodeDependencies.size(), &kernelNodeParams));
 
     nodeDependencies.clear();
     nodeDependencies.push_back(kernelNode);
@@ -191,8 +191,7 @@ void cudaGraphsManual(float* inputVec_h, float* inputVec_d, double* outputVec_d,
     memsetParams.elementSize = sizeof(float);
     memsetParams.width = 2;
     memsetParams.height = 1;
-    checkCudaErrors(
-        cudaGraphAddMemsetNode(&memsetNode, graph, NULL, 0, &memsetParams));
+    checkCudaErrors(cudaGraphAddMemsetNode(&memsetNode, graph, NULL, 0, &memsetParams));
 
     nodeDependencies.push_back(memsetNode);
 
@@ -205,8 +204,7 @@ void cudaGraphsManual(float* inputVec_h, float* inputVec_d, double* outputVec_d,
     kernelNodeParams.kernelParams = kernelArgs2;
     kernelNodeParams.extra = NULL;
 
-    checkCudaErrors(cudaGraphAddKernelNode(&kernelNode, graph, nodeDependencies.data(),
-        nodeDependencies.size(), &kernelNodeParams));
+    checkCudaErrors(cudaGraphAddKernelNode(&kernelNode, graph, nodeDependencies.data(), nodeDependencies.size(), &kernelNodeParams));
     nodeDependencies.clear();
     nodeDependencies.push_back(kernelNode);
 
@@ -220,9 +218,7 @@ void cudaGraphsManual(float* inputVec_h, float* inputVec_d, double* outputVec_d,
     memcpyParams.dstPtr = make_cudaPitchedPtr(&result_h, sizeof(double), 1, 1);
     memcpyParams.extent = make_cudaExtent(sizeof(double), 1, 1);
     memcpyParams.kind = cudaMemcpyDeviceToHost;
-    checkCudaErrors(
-        cudaGraphAddMemcpyNode(&memcpyNode, graph, nodeDependencies.data(),
-            nodeDependencies.size(), &memcpyParams));
+    checkCudaErrors(cudaGraphAddMemcpyNode(&memcpyNode, graph, nodeDependencies.data(), nodeDependencies.size(), &memcpyParams));
     nodeDependencies.clear();
     nodeDependencies.push_back(memcpyNode);
 
@@ -234,9 +230,7 @@ void cudaGraphsManual(float* inputVec_h, float* inputVec_d, double* outputVec_d,
     hostFnData.fn_name = "cudaGraphsManual";
     hostParams.userData = &hostFnData;
 
-    checkCudaErrors(cudaGraphAddHostNode(&hostNode, graph,
-        nodeDependencies.data(),
-        nodeDependencies.size(), &hostParams));
+    checkCudaErrors(cudaGraphAddHostNode(&hostNode, graph, nodeDependencies.data(), nodeDependencies.size(), &hostParams));
 
     cudaGraphNode_t* nodes = NULL;
     size_t numNodes = 0;
