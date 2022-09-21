@@ -1,34 +1,7 @@
-/* Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *  * Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  * Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *  * Neither the name of NVIDIA CORPORATION nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+/*
+ * This sample demonstrates Inter Process Communication
+ * using cuMemMap APIs and with one process per GPU for computation.
  */
-
- /*
-  * This sample demonstrates Inter Process Communication
-  * using cuMemMap APIs and with one process per GPU for computation.
-  */
 
 #include <stdio.h>
 #include <string.h>
@@ -38,7 +11,7 @@
 
 #include "helper_multiprocess.h"
 
-  // includes, project
+ // includes, project
 #include <helper_functions.h>
 #include "helper_cuda_drvapi.h"
 
@@ -98,13 +71,14 @@ CUmemAllocationHandleType ipcHandleTypeFlag = CU_MEM_HANDLE_TYPE_WIN32;
 CUmodule cuModule;
 CUfunction _memMapIpc_kernel;
 
-static void barrierWait(volatile int* barrier, volatile int* sense,
-    unsigned int n) {
+static void barrierWait(volatile int* barrier, volatile int* sense, unsigned int n)
+{
     int count;
 
     // Check-in
     count = cpu_atomic_add32(barrier, 1);
-    if (count == n) {  // Last one in
+    if (count == n)
+    {  // Last one in
         *sense = 1;
     }
     while (!*sense)
@@ -112,7 +86,8 @@ static void barrierWait(volatile int* barrier, volatile int* sense,
 
     // Check-out
     count = cpu_atomic_add32(barrier, -1);
-    if (count == 0) {  // Last one out
+    if (count == 0)
+    {  // Last one out
         *sense = 0;
     }
     while (*sense)
@@ -120,15 +95,14 @@ static void barrierWait(volatile int* barrier, volatile int* sense,
 }
 
 // Windows-specific LPSECURITYATTRIBUTES
-void getDefaultSecurityDescriptor(CUmemAllocationProp* prop) {
-#if defined(__linux__)
-    return;
-#elif defined(WIN32) || defined(_WIN32) || defined(WIN64) || defined(_WIN64)
+void getDefaultSecurityDescriptor(CUmemAllocationProp* prop)
+{
     static const char sddl[] = "D:P(OA;;GARCSDWDWOCCDCLCSWLODTWPRPCRFA;;;WD)";
     static OBJECT_ATTRIBUTES objAttributes;
     static bool objAttributesConfigured = false;
 
-    if (!objAttributesConfigured) {
+    if (!objAttributesConfigured)
+    {
         PSECURITY_DESCRIPTOR secDesc;
         BOOL result = ConvertStringSecurityDescriptorToSecurityDescriptorA(
             sddl, SDDL_REVISION_1, &secDesc, NULL);
@@ -144,13 +118,11 @@ void getDefaultSecurityDescriptor(CUmemAllocationProp* prop) {
 
     prop->win32HandleMetaData = &objAttributes;
     return;
-#endif
 }
 
-static void memMapAllocateAndExportMemory(
-    unsigned char backingDevice, size_t allocSize,
-    std::vector<CUmemGenericAllocationHandle>& allocationHandles,
-    std::vector<ShareableHandle>& shareableHandles) {
+static void memMapAllocateAndExportMemory(unsigned char backingDevice, size_t allocSize,
+    std::vector<CUmemGenericAllocationHandle>& allocationHandles, std::vector<ShareableHandle>& shareableHandles)
+{
     // This property structure describes the physical location where the memory
     // will be allocated via cuMemCreate along with additional properties.
     CUmemAllocationProp prop = {};
@@ -170,12 +142,10 @@ static void memMapAllocateAndExportMemory(
 
     // Get the minimum granularity supported for allocation with cuMemCreate()
     size_t granularity = 0;
-    checkCudaErrors(cuMemGetAllocationGranularity(
-        &granularity, &prop, CU_MEM_ALLOC_GRANULARITY_MINIMUM));
-    if (allocSize % granularity) {
-        printf(
-            "Allocation size is not a multiple of minimum supported granularity "
-            "for this device. Exiting...\n");
+    checkCudaErrors(cuMemGetAllocationGranularity(&granularity, &prop, CU_MEM_ALLOC_GRANULARITY_MINIMUM));
+    if (allocSize % granularity)
+    {
+        printf("Allocation size is not a multiple of minimum supported granularity for this device. Exiting...\n");
         exit(EXIT_FAILURE);
     }
 
@@ -185,7 +155,8 @@ static void memMapAllocateAndExportMemory(
     // other handle types, pass NULL.
     getDefaultSecurityDescriptor(&prop);
 
-    for (int i = 0; i < allocationHandles.size(); i++) {
+    for (int i = 0; i < allocationHandles.size(); i++)
+    {
         // Create the allocation as a pinned allocation on device specified in
         // prop.location.id
         checkCudaErrors(cuMemCreate(&allocationHandles[i], allocSize, &prop, 0));
@@ -193,15 +164,12 @@ static void memMapAllocateAndExportMemory(
         // Export the allocation to a platform-specific handle. The type of handle
         // requested here must match the requestedHandleTypes field in the prop
         // structure passed to cuMemCreate.
-        checkCudaErrors(cuMemExportToShareableHandle((void*)&shareableHandles[i],
-            allocationHandles[i],
-            ipcHandleTypeFlag, 0));
+        checkCudaErrors(cuMemExportToShareableHandle((void*)&shareableHandles[i], allocationHandles[i], ipcHandleTypeFlag, 0));
     }
 }
 
-static void memMapImportAndMapMemory(
-    CUdeviceptr d_ptr, size_t mapSize,
-    std::vector<ShareableHandle>& shareableHandles, int mapDevice) {
+static void memMapImportAndMapMemory(CUdeviceptr d_ptr, size_t mapSize, std::vector<ShareableHandle>& shareableHandles, int mapDevice)
+{
     std::vector<CUmemGenericAllocationHandle> allocationHandles;
     allocationHandles.resize(shareableHandles.size());
 
@@ -216,17 +184,15 @@ static void memMapImportAndMapMemory(
     // Specify both read and write accesses.
     accessDescriptor.flags = CU_MEM_ACCESS_FLAGS_PROT_READWRITE;
 
-    for (int i = 0; i < shareableHandles.size(); i++) {
+    for (int i = 0; i < shareableHandles.size(); i++)
+    {
         // Import the memory allocation back into a CUDA handle from the platform
         // specific handle.
-        checkCudaErrors(cuMemImportFromShareableHandle(
-            &allocationHandles[i], (void*)(uintptr_t)shareableHandles[i],
-            ipcHandleTypeFlag));
+        checkCudaErrors(cuMemImportFromShareableHandle(&allocationHandles[i], (void*)(uintptr_t)shareableHandles[i], ipcHandleTypeFlag));
 
         // Assign the chunk to the appropriate VA range and release the handle.
         // After mapping the memory, it can be referenced by virtual address.
-        checkCudaErrors(
-            cuMemMap(d_ptr + (i * mapSize), mapSize, 0, allocationHandles[i], 0));
+        checkCudaErrors(cuMemMap(d_ptr + (i * mapSize), mapSize, 0, allocationHandles[i], 0));
 
         // Since we do not need to make any other mappings of this memory or export
         // it, we no longer need and can release the allocationHandle. The
@@ -235,11 +201,11 @@ static void memMapImportAndMapMemory(
     }
 
     // Retain peer access and map all chunks to mapDevice
-    checkCudaErrors(cuMemSetAccess(d_ptr, shareableHandles.size() * mapSize,
-        &accessDescriptor, 1));
+    checkCudaErrors(cuMemSetAccess(d_ptr, shareableHandles.size() * mapSize, &accessDescriptor, 1));
 }
 
-static void memMapUnmapAndFreeMemory(CUdeviceptr dptr, size_t size) {
+static void memMapUnmapAndFreeMemory(CUdeviceptr dptr, size_t size)
+{
     CUresult status = CUDA_SUCCESS;
 
     // Unmap the mapped virtual memory region
@@ -257,23 +223,26 @@ static void memMapUnmapAndFreeMemory(CUdeviceptr dptr, size_t size) {
     checkCudaErrors(cuMemAddressFree(dptr, size));
 }
 
-static void memMapGetDeviceFunction(char** argv) {
+static void memMapGetDeviceFunction(char** argv)
+{
     // first search for the module path before we load the results
     string module_path, ptx_source;
-    if (!findModulePath(PTX_FILE, module_path, argv, ptx_source)) {
-        if (!findModulePath("memMapIpc_kernel.cubin", module_path, argv,
-            ptx_source)) {
-            printf(
-                "> findModulePath could not find <simpleMemMapIpc> ptx or cubin\n");
+    if (!findModulePath(PTX_FILE, module_path, argv, ptx_source))
+    {
+        if (!findModulePath("memMapIpc_kernel.cubin", module_path, argv, ptx_source))
+        {
+            printf("findModulePath could not find <simpleMemMapIpc> ptx or cubin\n");
             exit(EXIT_FAILURE);
         }
     }
-    else {
-        printf("> initCUDA loading module: <%s>\n", module_path.c_str());
+    else
+    {
+        printf("initCUDA loading module: <%s>\n", module_path.c_str());
     }
 
     // Create module from binary file (PTX or CUBIN)
-    if (module_path.rfind("ptx") != string::npos) {
+    if (module_path.rfind("ptx") != string::npos)
+    {
         // in this branch we use compilation with parameters
         const unsigned int jitNumOptions = 3;
         CUjit_option* jitOptions = new CUjit_option[jitNumOptions];
@@ -295,16 +264,17 @@ static void memMapGetDeviceFunction(char** argv) {
             (void**)jitOptVals));
         printf("> PTX JIT log:\n%s\n", jitLogBuffer);
     }
-    else {
+    else
+    {
         checkCudaErrors(cuModuleLoad(&cuModule, module_path.c_str()));
     }
 
     // Get function handle from module
-    checkCudaErrors(
-        cuModuleGetFunction(&_memMapIpc_kernel, cuModule, "memMapIpc_kernel"));
+    checkCudaErrors(cuModuleGetFunction(&_memMapIpc_kernel, cuModule, "memMapIpc_kernel"));
 }
 
-static void childProcess(int devId, int id, char** argv) {
+static void childProcess(int devId, int id, char** argv)
+{
     volatile shmStruct* shm = NULL;
     sharedMemoryInfo info;
     ipcHandle* ipcChildHandle = NULL;
@@ -313,7 +283,8 @@ static void childProcess(int devId, int id, char** argv) {
 
     checkIpcErrors(ipcOpenSocket(ipcChildHandle));
 
-    if (sharedMemoryOpen(shmName, sizeof(shmStruct), &info) != 0) {
+    if (sharedMemoryOpen(shmName, sizeof(shmStruct), &info) != 0)
+    {
         printf("Failed to create shared memory slab\n");
         exit(EXIT_FAILURE);
     }
@@ -338,17 +309,14 @@ static void childProcess(int devId, int id, char** argv) {
     // Obtain kernel function for the sample
     memMapGetDeviceFunction(argv);
 
-    checkCudaErrors(cuOccupancyMaxActiveBlocksPerMultiprocessor(
-        &blocks, _memMapIpc_kernel, threads, 0));
-    checkCudaErrors(cuDeviceGetAttribute(
-        &multiProcessorCount, CU_DEVICE_ATTRIBUTE_MULTIPROCESSOR_COUNT, device));
+    checkCudaErrors(cuOccupancyMaxActiveBlocksPerMultiprocessor(&blocks, _memMapIpc_kernel, threads, 0));
+    checkCudaErrors(cuDeviceGetAttribute(&multiProcessorCount, CU_DEVICE_ATTRIBUTE_MULTIPROCESSOR_COUNT, device));
     blocks *= multiProcessorCount;
 
     CUdeviceptr d_ptr = 0ULL;
 
     // Reserve the required contiguous VA space for the allocations
-    checkCudaErrors(cuMemAddressReserve(&d_ptr, procCount * DATA_BUF_SIZE,
-        DATA_BUF_SIZE, 0, 0));
+    checkCudaErrors(cuMemAddressReserve(&d_ptr, procCount * DATA_BUF_SIZE, DATA_BUF_SIZE, 0, 0));
 
     // Import the memory allocations shared by the parent with us and map them in
     // our address space.
@@ -356,12 +324,14 @@ static void childProcess(int devId, int id, char** argv) {
 
     // Since we have imported allocations shared by the parent with us, we can
     // close all the ShareableHandles.
-    for (int i = 0; i < procCount; i++) {
+    for (int i = 0; i < procCount; i++)
+    {
         checkIpcErrors(ipcCloseShareableHandle(shHandle[i]));
     }
     checkIpcErrors(ipcCloseSocket(ipcChildHandle));
 
-    for (int i = 0; i < procCount; i++) {
+    for (int i = 0; i < procCount; i++)
+    {
         size_t bufferId = (i + id) % procCount;
 
         // Build arguments to be passed to cuda kernel.
@@ -380,7 +350,8 @@ static void childProcess(int devId, int id, char** argv) {
         // before proceeding to the next. This makes the data in the buffer
         // deterministic.
         barrierWait(&shm->barrier, &shm->sense, (unsigned int)procCount);
-        if (id == 0) {
+        if (id == 0)
+        {
             printf("Step %lld done\n", (unsigned long long)i);
         }
     }
@@ -390,17 +361,16 @@ static void childProcess(int devId, int id, char** argv) {
     // Copy the data onto host and verify value if it matches expected value or
     // not.
     std::vector<char> verification_buffer(DATA_BUF_SIZE);
-    checkCudaErrors(cuMemcpyDtoHAsync(&verification_buffer[0],
-        d_ptr + (id * DATA_BUF_SIZE), DATA_BUF_SIZE,
-        stream));
+    checkCudaErrors(cuMemcpyDtoHAsync(&verification_buffer[0], d_ptr + (id * DATA_BUF_SIZE), DATA_BUF_SIZE, stream));
     checkCudaErrors(cuStreamSynchronize(stream));
 
     // The contents should have the id of the sibling just after me
     char compareId = (char)((id + 1) % procCount);
-    for (unsigned long long j = 0; j < DATA_BUF_SIZE; j++) {
-        if (verification_buffer[j] != compareId) {
-            printf("Process %d: Verification mismatch at %lld: %d != %d\n", id, j,
-                (int)verification_buffer[j], (int)compareId);
+    for (unsigned long long j = 0; j < DATA_BUF_SIZE; j++)
+    {
+        if (verification_buffer[j] != compareId)
+        {
+            printf("Process %d: Verification mismatch at %lld: %d != %d\n", id, j, (int)verification_buffer[j], (int)compareId);
             break;
         }
     }
@@ -418,7 +388,8 @@ static void childProcess(int devId, int id, char** argv) {
     exit(EXIT_SUCCESS);
 }
 
-static void parentProcess(char* app) {
+static void parentProcess(char* app)
+{
     int devCount, i, nprocesses = 0;
     volatile shmStruct* shm = NULL;
     sharedMemoryInfo info;
@@ -427,7 +398,8 @@ static void parentProcess(char* app) {
     checkCudaErrors(cuDeviceGetCount(&devCount));
     std::vector<CUdevice> devices(devCount);
 
-    if (sharedMemoryCreate(shmName, sizeof(*shm), &info) != 0) {
+    if (sharedMemoryCreate(shmName, sizeof(*shm), &info) != 0)
+    {
         printf("Failed to create shared memory slab\n");
         exit(EXIT_FAILURE);
     }
@@ -435,7 +407,8 @@ static void parentProcess(char* app) {
     shm = (volatile shmStruct*)info.addr;
     memset((void*)shm, 0, sizeof(*shm));
 
-    for (i = 0; i < devCount; i++) {
+    for (i = 0; i < devCount; i++)
+    {
         checkCudaErrors(cuDeviceGet(&devices[i], i));
     }
 
@@ -446,28 +419,18 @@ static void parentProcess(char* app) {
     // Keep in mind that CUDA has minimal support for fork() without a
     // corresponding exec() in the child process, but in this case our
     // spawnProcess will always exec, so no need to worry.
-    for (i = 0; i < devCount; i++) {
+    for (i = 0; i < devCount; i++)
+    {
         bool allPeers = true;
         int deviceComputeMode;
         int deviceSupportsIpcHandle;
         int attributeVal = 0;
 
         checkCudaErrors(cuDeviceGet(&devices[i], i));
-        checkCudaErrors(cuDeviceGetAttribute(
-            &deviceComputeMode, CU_DEVICE_ATTRIBUTE_COMPUTE_MODE, devices[i]));
-        checkCudaErrors(cuDeviceGetAttribute(
-            &attributeVal, CU_DEVICE_ATTRIBUTE_VIRTUAL_ADDRESS_MANAGEMENT_SUPPORTED,
+        checkCudaErrors(cuDeviceGetAttribute(&deviceComputeMode, CU_DEVICE_ATTRIBUTE_COMPUTE_MODE, devices[i]));
+        checkCudaErrors(cuDeviceGetAttribute(&attributeVal, CU_DEVICE_ATTRIBUTE_VIRTUAL_ADDRESS_MANAGEMENT_SUPPORTED,
             devices[i]));
-#if defined(__linux__)
-        checkCudaErrors(cuDeviceGetAttribute(
-            &deviceSupportsIpcHandle,
-            CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR_SUPPORTED,
-            devices[i]));
-#else
-        checkCudaErrors(cuDeviceGetAttribute(
-            &deviceSupportsIpcHandle,
-            CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_WIN32_HANDLE_SUPPORTED, devices[i]));
-#endif
+        checkCudaErrors(cuDeviceGetAttribute(&deviceSupportsIpcHandle, CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_WIN32_HANDLE_SUPPORTED, devices[i]));
         // Check that the selected device supports virtual address management
         if (attributeVal == 0)
         {
@@ -604,10 +567,6 @@ static void parentProcess(char* app) {
 // Host code
 int main(int argc, char** argv)
 {
-#if defined(__arm__) || defined(__aarch64__)
-    printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXNot supported on ARM\n");
-    return EXIT_WAIVED;
-#else
     // Initialize
     checkCudaErrors(cuInit(0));
 
@@ -620,11 +579,10 @@ int main(int argc, char** argv)
         childProcess(atoi(argv[1]), atoi(argv[2]), argv);
     }
     return EXIT_SUCCESS;
-#endif
 }
 
-bool inline findModulePath(const char* module_file, string& module_path,
-    char** argv, string& ptx_source) {
+bool inline findModulePath(const char* module_file, string& module_path, char** argv, string& ptx_source)
+{
     char* actual_path = sdkFindFilePath(module_file, argv[0]);
 
     if (actual_path)

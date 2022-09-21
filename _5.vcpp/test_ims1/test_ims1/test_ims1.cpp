@@ -140,7 +140,8 @@ int main()
 
 
 
-	getchar();//©Îsystem("pause");
+	//getchar();//©Îsystem("pause");
+
 	return 0;
 }
 

@@ -31,8 +31,7 @@ __device__ void print_info(int depth, int thread, int uid, int parent_uid)
             }
 
             buffer[3 * depth] = '\0';
-            printf("%sBLOCK %d launched by thread %d of block %d\n", buffer, uid,
-                thread, parent_uid);
+            printf("%sBLOCK %d launched by thread %d of block %d\n", buffer, uid, thread, parent_uid);
         }
     }
     __syncthreads();
@@ -83,10 +82,7 @@ int main(int argc, char** argv)
     if (checkCmdLineFlag(argc, (const char**)argv, "help") || checkCmdLineFlag(argc, (const char**)argv, "h"))
     {
         printf("XXXXXXXXXXXXXXXXXX\n");
-        printf(
-            "Usage: %s depth=<max_depth>\t(where max_depth is a value between 1 "
-            "and 8).\n",
-            argv[0]);
+        printf("Usage: %s depth=<max_depth>\t(where max_depth is a value between 1 and 8).\n", argv[0]);
         exit(EXIT_SUCCESS);
     }
 

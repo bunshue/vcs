@@ -44,8 +44,10 @@ void createLinearSystem(float* A, double* b);
 void JacobiMethodCPU(float* A, double* b, float conv_threshold, int max_iter,
     int* numit, double* x);
 
-int main(int argc, char** argv) {
-    if (checkCmdLineFlag(argc, (const char**)argv, "help")) {
+int main(int argc, char** argv)
+{
+    if (checkCmdLineFlag(argc, (const char**)argv, "help"))
+    {
         printf("Command line: jacobiCudaGraphs [-option]\n");
         printf("Valid options:\n");
         printf("-gpumethod=<0,1 or 2>  : 0 - [Default] JacobiMethodGpuCudaGraphExecKernelSetParams\n");
