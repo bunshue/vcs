@@ -21,7 +21,8 @@ __global__ void reduce(float* inputVec, double* outputVec, size_t inputSize, siz
     size_t globaltid = blockIdx.x * blockDim.x + threadIdx.x;
 
     double temp_sum = 0.0;
-    for (int i = globaltid; i < inputSize; i += gridDim.x * blockDim.x) {
+    for (int i = globaltid; i < inputSize; i += gridDim.x * blockDim.x)
+    {
         temp_sum += (double)inputVec[i];
     }
     tmp[cta.thread_rank()] = temp_sum;
@@ -33,8 +34,10 @@ __global__ void reduce(float* inputVec, double* outputVec, size_t inputSize, siz
     double beta = temp_sum;
     double temp;
 
-    for (int i = tile32.size() / 2; i > 0; i >>= 1) {
-        if (tile32.thread_rank() < i) {
+    for (int i = tile32.size() / 2; i > 0; i >>= 1)
+    {
+        if (tile32.thread_rank() < i)
+        {
             temp = tmp[cta.thread_rank() + i];
             beta += temp;
             tmp[cta.thread_rank()] = beta;
@@ -117,7 +120,8 @@ void init_input(float* a, size_t size)
     for (size_t i = 0; i < size; i++) a[i] = (rand() & 0xFF) / (float)RAND_MAX;
 }
 
-void CUDART_CB myHostNodeCallback(void* data) {
+void CUDART_CB myHostNodeCallback(void* data)
+{
     // Check status of GPU after stream operations are done
     callBackData_t* tmp = (callBackData_t*)(data);
     // checkCudaErrors(tmp->status);
@@ -129,7 +133,8 @@ void CUDART_CB myHostNodeCallback(void* data) {
 }
 
 void cudaGraphsManual(float* inputVec_h, float* inputVec_d, double* outputVec_d,
-    double* result_d, size_t inputSize, size_t numOfBlocks) {
+    double* result_d, size_t inputSize, size_t numOfBlocks)
+{
     cudaStream_t streamForGraph;
     cudaGraph_t graph;
     std::vector<cudaGraphNode_t> nodeDependencies;
@@ -144,12 +149,10 @@ void cudaGraphsManual(float* inputVec_h, float* inputVec_d, double* outputVec_d,
 
     memcpyParams.srcArray = NULL;
     memcpyParams.srcPos = make_cudaPos(0, 0, 0);
-    memcpyParams.srcPtr =
-        make_cudaPitchedPtr(inputVec_h, sizeof(float) * inputSize, inputSize, 1);
+    memcpyParams.srcPtr = make_cudaPitchedPtr(inputVec_h, sizeof(float) * inputSize, inputSize, 1);
     memcpyParams.dstArray = NULL;
     memcpyParams.dstPos = make_cudaPos(0, 0, 0);
-    memcpyParams.dstPtr =
-        make_cudaPitchedPtr(inputVec_d, sizeof(float) * inputSize, inputSize, 1);
+    memcpyParams.dstPtr = make_cudaPitchedPtr(inputVec_d, sizeof(float) * inputSize, inputSize, 1);
     memcpyParams.extent = make_cudaExtent(sizeof(float) * inputSize, 1, 1);
     memcpyParams.kind = cudaMemcpyHostToDevice;
 
@@ -161,16 +164,13 @@ void cudaGraphsManual(float* inputVec_h, float* inputVec_d, double* outputVec_d,
     memsetParams.height = 1;
 
     checkCudaErrors(cudaGraphCreate(&graph, 0));
-    checkCudaErrors(
-        cudaGraphAddMemcpyNode(&memcpyNode, graph, NULL, 0, &memcpyParams));
-    checkCudaErrors(
-        cudaGraphAddMemsetNode(&memsetNode, graph, NULL, 0, &memsetParams));
+    checkCudaErrors(cudaGraphAddMemcpyNode(&memcpyNode, graph, NULL, 0, &memcpyParams));
+    checkCudaErrors(cudaGraphAddMemsetNode(&memsetNode, graph, NULL, 0, &memsetParams));
 
     nodeDependencies.push_back(memsetNode);
     nodeDependencies.push_back(memcpyNode);
 
-    void* kernelArgs[4] = { (void*)&inputVec_d, (void*)&outputVec_d, &inputSize,
-                           &numOfBlocks };
+    void* kernelArgs[4] = { (void*)&inputVec_d, (void*)&outputVec_d, &inputSize,&numOfBlocks };
 
     kernelNodeParams.func = (void*)reduce;
     kernelNodeParams.gridDim = dim3(numOfBlocks, 1, 1);
@@ -179,9 +179,8 @@ void cudaGraphsManual(float* inputVec_h, float* inputVec_d, double* outputVec_d,
     kernelNodeParams.kernelParams = (void**)kernelArgs;
     kernelNodeParams.extra = NULL;
 
-    checkCudaErrors(
-        cudaGraphAddKernelNode(&kernelNode, graph, nodeDependencies.data(),
-            nodeDependencies.size(), &kernelNodeParams));
+    checkCudaErrors(cudaGraphAddKernelNode(&kernelNode, graph, nodeDependencies.data(),
+        nodeDependencies.size(), &kernelNodeParams));
 
     nodeDependencies.clear();
     nodeDependencies.push_back(kernelNode);
@@ -202,14 +201,12 @@ void cudaGraphsManual(float* inputVec_h, float* inputVec_d, double* outputVec_d,
     kernelNodeParams.gridDim = dim3(1, 1, 1);
     kernelNodeParams.blockDim = dim3(THREADS_PER_BLOCK, 1, 1);
     kernelNodeParams.sharedMemBytes = 0;
-    void* kernelArgs2[3] = { (void*)&outputVec_d, (void*)&result_d,
-                            &numOfBlocks };
+    void* kernelArgs2[3] = { (void*)&outputVec_d, (void*)&result_d,&numOfBlocks };
     kernelNodeParams.kernelParams = kernelArgs2;
     kernelNodeParams.extra = NULL;
 
-    checkCudaErrors(
-        cudaGraphAddKernelNode(&kernelNode, graph, nodeDependencies.data(),
-            nodeDependencies.size(), &kernelNodeParams));
+    checkCudaErrors(cudaGraphAddKernelNode(&kernelNode, graph, nodeDependencies.data(),
+        nodeDependencies.size(), &kernelNodeParams));
     nodeDependencies.clear();
     nodeDependencies.push_back(kernelNode);
 
@@ -252,17 +249,18 @@ void cudaGraphsManual(float* inputVec_h, float* inputVec_d, double* outputVec_d,
     cudaGraph_t clonedGraph;
     cudaGraphExec_t clonedGraphExec;
     checkCudaErrors(cudaGraphClone(&clonedGraph, graph));
-    checkCudaErrors(
-        cudaGraphInstantiate(&clonedGraphExec, clonedGraph, NULL, NULL, 0));
+    checkCudaErrors(cudaGraphInstantiate(&clonedGraphExec, clonedGraph, NULL, NULL, 0));
 
-    for (int i = 0; i < GRAPH_LAUNCH_ITERATIONS; i++) {
+    for (int i = 0; i < GRAPH_LAUNCH_ITERATIONS; i++)
+    {
         checkCudaErrors(cudaGraphLaunch(graphExec, streamForGraph));
     }
 
     checkCudaErrors(cudaStreamSynchronize(streamForGraph));
 
     printf("Cloned Graph Output.. \n");
-    for (int i = 0; i < GRAPH_LAUNCH_ITERATIONS; i++) {
+    for (int i = 0; i < GRAPH_LAUNCH_ITERATIONS; i++)
+    {
         checkCudaErrors(cudaGraphLaunch(clonedGraphExec, streamForGraph));
     }
     checkCudaErrors(cudaStreamSynchronize(streamForGraph));
@@ -274,9 +272,8 @@ void cudaGraphsManual(float* inputVec_h, float* inputVec_d, double* outputVec_d,
     checkCudaErrors(cudaStreamDestroy(streamForGraph));
 }
 
-void cudaGraphsUsingStreamCapture(float* inputVec_h, float* inputVec_d,
-    double* outputVec_d, double* result_d,
-    size_t inputSize, size_t numOfBlocks) {
+void cudaGraphsUsingStreamCapture(float* inputVec_h, float* inputVec_d, double* outputVec_d, double* result_d, size_t inputSize, size_t numOfBlocks)
+{
     cudaStream_t stream1, stream2, stream3, streamForGraph;
     cudaEvent_t forkStreamEvent, memsetEvent1, memsetEvent2;
     cudaGraph_t graph;
@@ -297,12 +294,9 @@ void cudaGraphsUsingStreamCapture(float* inputVec_h, float* inputVec_d,
     checkCudaErrors(cudaStreamWaitEvent(stream2, forkStreamEvent, 0));
     checkCudaErrors(cudaStreamWaitEvent(stream3, forkStreamEvent, 0));
 
-    checkCudaErrors(cudaMemcpyAsync(inputVec_d, inputVec_h,
-        sizeof(float) * inputSize, cudaMemcpyDefault,
-        stream1));
+    checkCudaErrors(cudaMemcpyAsync(inputVec_d, inputVec_h, sizeof(float) * inputSize, cudaMemcpyDefault, stream1));
 
-    checkCudaErrors(
-        cudaMemsetAsync(outputVec_d, 0, sizeof(double) * numOfBlocks, stream2));
+    checkCudaErrors(cudaMemsetAsync(outputVec_d, 0, sizeof(double) * numOfBlocks, stream2));
 
     checkCudaErrors(cudaEventRecord(memsetEvent1, stream2));
 
@@ -311,15 +305,12 @@ void cudaGraphsUsingStreamCapture(float* inputVec_h, float* inputVec_d,
 
     checkCudaErrors(cudaStreamWaitEvent(stream1, memsetEvent1, 0));
 
-    reduce << <numOfBlocks, THREADS_PER_BLOCK, 0, stream1 >> > (
-        inputVec_d, outputVec_d, inputSize, numOfBlocks);
+    reduce << <numOfBlocks, THREADS_PER_BLOCK, 0, stream1 >> > (inputVec_d, outputVec_d, inputSize, numOfBlocks);
 
     checkCudaErrors(cudaStreamWaitEvent(stream1, memsetEvent2, 0));
 
-    reduceFinal << <1, THREADS_PER_BLOCK, 0, stream1 >> > (outputVec_d, result_d,
-        numOfBlocks);
-    checkCudaErrors(cudaMemcpyAsync(&result_h, result_d, sizeof(double),
-        cudaMemcpyDefault, stream1));
+    reduceFinal << <1, THREADS_PER_BLOCK, 0, stream1 >> > (outputVec_d, result_d, numOfBlocks);
+    checkCudaErrors(cudaMemcpyAsync(&result_h, result_d, sizeof(double), cudaMemcpyDefault, stream1));
 
     callBackData_t hostFnData = { 0 };
     hostFnData.data = &result_h;
@@ -331,8 +322,7 @@ void cudaGraphsUsingStreamCapture(float* inputVec_h, float* inputVec_d,
     cudaGraphNode_t* nodes = NULL;
     size_t numNodes = 0;
     checkCudaErrors(cudaGraphGetNodes(graph, nodes, &numNodes));
-    printf("\nNum of nodes in the graph created using stream capture API = %zu\n",
-        numNodes);
+    printf("\nNum of nodes in the graph created using stream capture API = %zu\n", numNodes);
 
     cudaGraphExec_t graphExec;
     checkCudaErrors(cudaGraphInstantiate(&graphExec, graph, NULL, NULL, 0));
@@ -340,17 +330,18 @@ void cudaGraphsUsingStreamCapture(float* inputVec_h, float* inputVec_d,
     cudaGraph_t clonedGraph;
     cudaGraphExec_t clonedGraphExec;
     checkCudaErrors(cudaGraphClone(&clonedGraph, graph));
-    checkCudaErrors(
-        cudaGraphInstantiate(&clonedGraphExec, clonedGraph, NULL, NULL, 0));
+    checkCudaErrors(cudaGraphInstantiate(&clonedGraphExec, clonedGraph, NULL, NULL, 0));
 
-    for (int i = 0; i < GRAPH_LAUNCH_ITERATIONS; i++) {
+    for (int i = 0; i < GRAPH_LAUNCH_ITERATIONS; i++)
+    {
         checkCudaErrors(cudaGraphLaunch(graphExec, streamForGraph));
     }
 
     checkCudaErrors(cudaStreamSynchronize(streamForGraph));
 
     printf("Cloned Graph Output.. \n");
-    for (int i = 0; i < GRAPH_LAUNCH_ITERATIONS; i++) {
+    for (int i = 0; i < GRAPH_LAUNCH_ITERATIONS; i++)
+    {
         checkCudaErrors(cudaGraphLaunch(clonedGraphExec, streamForGraph));
     }
 

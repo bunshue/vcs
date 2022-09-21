@@ -34,8 +34,6 @@
 #include <GL/freeglut.h>
 #include <rendercheck_gl.h>
 
-const char* sSDKsample = "CUDA FFT Ocean Simulation";
-
 #define MAX_EPSILON 0.10f
 #define THRESHOLD 0.15f
 #define REFRESH_DELAY 10  // ms
@@ -162,16 +160,12 @@ int main(int argc, char** argv)
     else
     {
         printf(
-            "[%s]\n\n"
             "Left mouse button          - rotate\n"
             "Middle mouse button        - pan\n"
             "Right mouse button         - zoom\n"
-            "'w' key                    - toggle wireframe\n",
-            sSDKsample);
-
+            "'w' key                    - toggle wireframe\n");
         runGraphicsTest(argc, argv);
     }
-
     exit(EXIT_SUCCESS);
 }
 
@@ -180,7 +174,7 @@ int main(int argc, char** argv)
 ////////////////////////////////////////////////////////////////////////////////
 void runAutoTest(int argc, char** argv)
 {
-    printf("%s Starting...\n\n", argv[0]);
+    printf("Starting...\n");
 
     // Cuda init
     int dev = findCudaDevice(argc, (const char**)argv);
@@ -223,8 +217,7 @@ void runAutoTest(int argc, char** argv)
 ////////////////////////////////////////////////////////////////////////////////
 void runGraphicsTest(int argc, char** argv)
 {
-    printf("[%s] ", sSDKsample);
-    printf("\n");
+    printf("Starting...\n");
 
     if (checkCmdLineFlag(argc, (const char**)argv, "device"))
     {
@@ -278,12 +271,12 @@ void runGraphicsTest(int argc, char** argv)
 
     runCuda();
 
-    // register callbacks
-    glutDisplayFunc(display);
-    glutKeyboardFunc(keyboard);
-    glutMouseFunc(mouse);
-    glutMotionFunc(motion);
-    glutReshapeFunc(reshape);
+    glutDisplayFunc(display);       //設定callback function
+    glutReshapeFunc(reshape);       //設定callback function
+    glutKeyboardFunc(keyboard);     //設定callback function
+    glutMouseFunc(mouse);           //設定callback function
+    glutMotionFunc(motion);         //設定callback function
+
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
 
     // start rendering mainloop
@@ -326,8 +319,7 @@ float phillips(float Kx, float Ky, float Vdir, float V, float A, float dir_depen
     float k_y = Ky / sqrtf(k_squared);
     float w_dot_k = k_x * cosf(Vdir) + k_y * sinf(Vdir);
 
-    float phillips = A * expf(-1.0f / (k_squared * L * L)) /
-        (k_squared * k_squared) * w_dot_k * w_dot_k;
+    float phillips = A * expf(-1.0f / (k_squared * L * L)) / (k_squared * k_squared) * w_dot_k * w_dot_k;
 
     // filter out waves moving opposite to wind
     if (w_dot_k < 0.0f)
@@ -615,10 +607,12 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
 ////////////////////////////////////////////////////////////////////////////////
 void mouse(int button, int state, int x, int y)
 {
-    if (state == GLUT_DOWN) {
+    if (state == GLUT_DOWN)
+    {
         mouseButtons |= 1 << button;
     }
-    else if (state == GLUT_UP) {
+    else if (state == GLUT_UP)
+    {
         mouseButtons = 0;
     }
 
@@ -673,6 +667,8 @@ bool initGL(int* argc, char** argv)
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
     glutInitWindowSize(windowW, windowH);
+    glutInitWindowPosition(1100, 200);
+
     glutCreateWindow("CUDA FFT Ocean Simulation");
 
     vertShaderPath = sdkFindFilePath("ocean.vert", argv[0]);
@@ -683,6 +679,9 @@ bool initGL(int* argc, char** argv)
         fprintf(stderr, "Error unable to find GLSL vertex and fragment shaders!\n");
         exit(EXIT_FAILURE);
     }
+
+    printf("vertShaderPath : %s\n", vertShaderPath);
+    printf("fragShaderPath : %s\n", fragShaderPath);
 
     // initialize necessary OpenGL extensions
 
