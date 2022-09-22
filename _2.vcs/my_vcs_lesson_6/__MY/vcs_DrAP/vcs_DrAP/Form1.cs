@@ -1640,11 +1640,27 @@ namespace vcs_DrAP
                 }
             }
 
-            if (res == false)   //cuda加搜尋cpp檔案
+            if (res == false)   //cuda加搜尋 .cpp 檔案
             {
                 if (search_mode == SEARCH_MODE_CUDA) //cuda 加搜尋 .cpp
                 {
                     res = fi.FullName.ToLower().Replace(" ", "").EndsWith(".cpp");
+                }
+            }
+
+            if (res == false)   //cuda加搜尋 .c 檔案
+            {
+                if (search_mode == SEARCH_MODE_CUDA) //cuda 加搜尋 .c
+                {
+                    res = fi.FullName.ToLower().Replace(" ", "").EndsWith(".c");
+                }
+            }
+
+            if (res == false)   //cuda加搜尋 .h 檔案
+            {
+                if (search_mode == SEARCH_MODE_CUDA) //cuda 加搜尋 .h
+                {
+                    res = fi.FullName.ToLower().Replace(" ", "").EndsWith(".h");
                 }
             }
 

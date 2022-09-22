@@ -15,11 +15,11 @@
 //#include <GLUT/GLUT.h>
 //#include <OpenGL/OpenGL.h>
 
-// 初始化參數
-void init() {
-    glClearColor(0.1, 0.1, 0.4, 0.0);
-    glShadeModel(GL_SMOOTH);
-}
+                                    // 初始化參數
+                                    void init() {
+                                        glClearColor(0.1, 0.1, 0.4, 0.0);
+                                        glShadeModel(GL_SMOOTH);
+                                    }
 
 
 void DrawMyObjects(void) {
@@ -148,7 +148,8 @@ void DrawMyObjects(void) {
 }
 
 // 繪圖回調函數
-void display() {
+void display()
+{
     // 清除之前幀數據
     glClear(GL_COLOR_BUFFER_BIT);
     DrawMyObjects();
@@ -168,7 +169,8 @@ void reshape(int w, int h) {
     gluLookAt(0, 0, 25, 0, 0, -1, 0, 1, 0);
 }
 
-int main(int argc, const char* argv[]) {
+int main(int argc, const char* argv[])
+{
     // 初始化顯示模式
     glutInit(&argc, const_cast<char**>(argv));
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
@@ -179,6 +181,7 @@ int main(int argc, const char* argv[]) {
     glutCreateWindow(argv[0]);
 
     init();
+
     glutReshapeFunc(reshape);
     glutDisplayFunc(display);
 

@@ -21,12 +21,12 @@
 ////////////////////////////////////////////////////////////////////////////////
 // OpenGL PBO and texture "names"
 GLuint gl_PBO, gl_Tex;
-struct cudaGraphicsResource *cuda_pbo_resource;  // handles OpenGL-CUDA exchange
+struct cudaGraphicsResource* cuda_pbo_resource;  // handles OpenGL-CUDA exchange
 
 int mode = 2;   //0: 自製圖片資料, 1: 使用圖片640X480, 2: 使用圖片1920X1080
 
 // Source image on the host side
-uchar4 *h_Src1;
+uchar4* h_Src1;
 uchar4* h_Src2;
 int imageW, imageH;
 
@@ -34,7 +34,7 @@ int imageW, imageH;
 // Main program
 ////////////////////////////////////////////////////////////////////////////////
 bool g_FPS = false;
-StopWatchInterface *timer = NULL;
+StopWatchInterface* timer = NULL;
 
 const int frameN = 24;
 int frameCounter = 0;
@@ -52,61 +52,6 @@ unsigned int g_TotalErrors = 0;
 #define REFRESH_DELAY 10  // ms
 
 void cleanup();
-
-// commented out to remove unused parameter warnings in Linux
-void key(unsigned char key, int /*x*/, int /*y*/) {
-    switch (key) {
-    case ' ':
-        //bPause = !bPause;
-        break;
-
-    case 13:
-        break;
-
-    case '\033':
-    case 'q':
-        printf("你按了 離開\n");
-        glutDestroyWindow(glutGetWindow());
-        return;
-    case '1':
-        printf("你按了 選單項目1\n");
-        break;
-
-    case '2':
-        printf("你按了 選單項目2\n");
-        break;
-
-    case '3':
-        printf("你按了 選單項目3\n");
-        break;
-
-    case '4':
-        printf("你按了 選單項目4\n");
-        break;
-
-    case 'u':
-        break;
-
-    case 'r':
-        break;
-
-    }
-
-    glutPostRedisplay();
-}
-
-void mainMenu(int i) { key((unsigned char)i, 0, 0); }
-
-void initMenus()
-{
-    glutCreateMenu(mainMenu);
-    glutAddMenuEntry("Menu Item 1", '1');
-    glutAddMenuEntry("Menu Item 2", '2');
-    glutAddMenuEntry("Menu Item 3", '3');
-    glutAddMenuEntry("Menu Item 4", '4');
-    glutAddMenuEntry("Exit (esc)", '\033');
-    glutAttachMenu(GLUT_RIGHT_BUTTON);
-}
 
 void computeFPS()
 {
@@ -517,8 +462,6 @@ int main(int argc, char** argv)
     //glutSetWindowTitle("ims pic");
     sdkCreateTimer(&timer);
     sdkStartTimer(&timer);
-
-    initMenus();
 
     //glutFullScreen();   //全螢幕顯示
 
