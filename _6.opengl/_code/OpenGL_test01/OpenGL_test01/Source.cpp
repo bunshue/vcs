@@ -49,6 +49,7 @@ void drawGrid(int xmin, int xmax, int ymin, int ymax)
 
 //display_mode = 6
 
+// 繪圖回調函數
 void display(void)
 {
     if (display_mode == 0)
@@ -284,6 +285,7 @@ void display(void)
 
 }
 
+// 窗口大小變化回調函數
 void reshape(int w, int h)
 {
     glViewport(0, 0, w, h);
@@ -336,6 +338,9 @@ void init(void)
     //好像做不做沒甚麼差別
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     glClearColor(0.0, 0.0, 0.0, 0.0);
+
+    //glClearColor(0.1, 0.1, 0.4, 0.0);
+    //glShadeModel(GL_SMOOTH);
 
     //glClearColor(0.1, 0.1, 0.4, 0.0);
     //glShadeModel(GL_SMOOTH);
