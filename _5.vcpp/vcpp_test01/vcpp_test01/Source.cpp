@@ -68,6 +68,26 @@ int main()
 
 
 
+    printf("Pointer´ú¸Õ\n");
+
+    int* p;
+    int aaa[10];
+
+    p = &aaa[0];
+    printf("p1 = %p\n", p);
+    p = aaa;
+    printf("p2 = %p\n", p);
+
+    for (i = 0; i < 10; i++)
+    {
+        aaa[i] = i * i;
+        printf("i = %d, aaa[%d] = %d, addr of aaa[%d] is %p\n", i, i, aaa[i], i, &aaa[i]);
+    }
+    for (i = 0; i < 10; i++)
+    {
+        printf("index %d, addr is %p, value is %d\n", i, p + i, *(p + i));
+    }
+
 
     //System("pause");
     //getchar();//©Îsystem("pause");

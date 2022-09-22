@@ -1,3 +1,7 @@
+// USE_TEXSUBIMAGE2D uses glTexSubImage2D() to update the final result
+// commenting it will make the sample use the other way :
+// map a texture in CUDA and blit the result into it
+#define USE_TEXSUBIMAGE2D
 #define WINDOWS_LEAN_AND_MEAN
 #define NOMINMAX
 #include <windows.h>

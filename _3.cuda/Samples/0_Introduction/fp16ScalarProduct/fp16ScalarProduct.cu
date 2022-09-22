@@ -1,30 +1,3 @@
-/* Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *  * Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  * Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *  * Neither the name of NVIDIA CORPORATION nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
 #include "cuda_fp16.h"
 #include "helper_cuda.h"
 
@@ -35,104 +8,108 @@
 #define NUM_OF_BLOCKS 128
 #define NUM_OF_THREADS 128
 
-__forceinline__ __device__ void reduceInShared_intrinsics(half2 *const v) {
-  if (threadIdx.x < 64)
-    v[threadIdx.x] = __hadd2(v[threadIdx.x], v[threadIdx.x + 64]);
-  __syncthreads();
-  if (threadIdx.x < 32)
-    v[threadIdx.x] = __hadd2(v[threadIdx.x], v[threadIdx.x + 32]);
-  __syncthreads();
-  if (threadIdx.x < 16)
-    v[threadIdx.x] = __hadd2(v[threadIdx.x], v[threadIdx.x + 16]);
-  __syncthreads();
-  if (threadIdx.x < 8)
-    v[threadIdx.x] = __hadd2(v[threadIdx.x], v[threadIdx.x + 8]);
-  __syncthreads();
-  if (threadIdx.x < 4)
-    v[threadIdx.x] = __hadd2(v[threadIdx.x], v[threadIdx.x + 4]);
-  __syncthreads();
-  if (threadIdx.x < 2)
-    v[threadIdx.x] = __hadd2(v[threadIdx.x], v[threadIdx.x + 2]);
-  __syncthreads();
-  if (threadIdx.x < 1)
-    v[threadIdx.x] = __hadd2(v[threadIdx.x], v[threadIdx.x + 1]);
-  __syncthreads();
+__forceinline__ __device__ void reduceInShared_intrinsics(half2* const v) {
+    if (threadIdx.x < 64)
+        v[threadIdx.x] = __hadd2(v[threadIdx.x], v[threadIdx.x + 64]);
+    __syncthreads();
+    if (threadIdx.x < 32)
+        v[threadIdx.x] = __hadd2(v[threadIdx.x], v[threadIdx.x + 32]);
+    __syncthreads();
+    if (threadIdx.x < 16)
+        v[threadIdx.x] = __hadd2(v[threadIdx.x], v[threadIdx.x + 16]);
+    __syncthreads();
+    if (threadIdx.x < 8)
+        v[threadIdx.x] = __hadd2(v[threadIdx.x], v[threadIdx.x + 8]);
+    __syncthreads();
+    if (threadIdx.x < 4)
+        v[threadIdx.x] = __hadd2(v[threadIdx.x], v[threadIdx.x + 4]);
+    __syncthreads();
+    if (threadIdx.x < 2)
+        v[threadIdx.x] = __hadd2(v[threadIdx.x], v[threadIdx.x + 2]);
+    __syncthreads();
+    if (threadIdx.x < 1)
+        v[threadIdx.x] = __hadd2(v[threadIdx.x], v[threadIdx.x + 1]);
+    __syncthreads();
 }
 
-__forceinline__ __device__ void reduceInShared_native(half2 *const v) {
-  if (threadIdx.x < 64) v[threadIdx.x] = v[threadIdx.x] + v[threadIdx.x + 64];
-  __syncthreads();
-  if (threadIdx.x < 32) v[threadIdx.x] = v[threadIdx.x] + v[threadIdx.x + 32];
-  __syncthreads();
-  if (threadIdx.x < 16) v[threadIdx.x] = v[threadIdx.x] + v[threadIdx.x + 16];
-  __syncthreads();
-  if (threadIdx.x < 8) v[threadIdx.x] = v[threadIdx.x] + v[threadIdx.x + 8];
-  __syncthreads();
-  if (threadIdx.x < 4) v[threadIdx.x] = v[threadIdx.x] + v[threadIdx.x + 4];
-  __syncthreads();
-  if (threadIdx.x < 2) v[threadIdx.x] = v[threadIdx.x] + v[threadIdx.x + 2];
-  __syncthreads();
-  if (threadIdx.x < 1) v[threadIdx.x] = v[threadIdx.x] + v[threadIdx.x + 1];
-  __syncthreads();
+__forceinline__ __device__ void reduceInShared_native(half2* const v) {
+    if (threadIdx.x < 64) v[threadIdx.x] = v[threadIdx.x] + v[threadIdx.x + 64];
+    __syncthreads();
+    if (threadIdx.x < 32) v[threadIdx.x] = v[threadIdx.x] + v[threadIdx.x + 32];
+    __syncthreads();
+    if (threadIdx.x < 16) v[threadIdx.x] = v[threadIdx.x] + v[threadIdx.x + 16];
+    __syncthreads();
+    if (threadIdx.x < 8) v[threadIdx.x] = v[threadIdx.x] + v[threadIdx.x + 8];
+    __syncthreads();
+    if (threadIdx.x < 4) v[threadIdx.x] = v[threadIdx.x] + v[threadIdx.x + 4];
+    __syncthreads();
+    if (threadIdx.x < 2) v[threadIdx.x] = v[threadIdx.x] + v[threadIdx.x + 2];
+    __syncthreads();
+    if (threadIdx.x < 1) v[threadIdx.x] = v[threadIdx.x] + v[threadIdx.x + 1];
+    __syncthreads();
 }
 
-__global__ void scalarProductKernel_intrinsics(half2 const *const a,
-                                               half2 const *const b,
-                                               float *const results,
-                                               size_t const size) {
-  const int stride = gridDim.x * blockDim.x;
-  __shared__ half2 shArray[NUM_OF_THREADS];
+__global__ void scalarProductKernel_intrinsics(half2 const* const a, half2 const* const b,
+    float* const results, size_t const size)
+{
+    const int stride = gridDim.x * blockDim.x;
+    __shared__ half2 shArray[NUM_OF_THREADS];
 
-  shArray[threadIdx.x] = __float2half2_rn(0.f);
-  half2 value = __float2half2_rn(0.f);
+    shArray[threadIdx.x] = __float2half2_rn(0.f);
+    half2 value = __float2half2_rn(0.f);
 
-  for (int i = threadIdx.x + blockDim.x + blockIdx.x; i < size; i += stride) {
-    value = __hfma2(a[i], b[i], value);
-  }
+    for (int i = threadIdx.x + blockDim.x + blockIdx.x; i < size; i += stride)
+    {
+        value = __hfma2(a[i], b[i], value);
+    }
 
-  shArray[threadIdx.x] = value;
-  __syncthreads();
-  reduceInShared_intrinsics(shArray);
+    shArray[threadIdx.x] = value;
+    __syncthreads();
+    reduceInShared_intrinsics(shArray);
 
-  if (threadIdx.x == 0) {
-    half2 result = shArray[0];
-    float f_result = __low2float(result) + __high2float(result);
-    results[blockIdx.x] = f_result;
-  }
+    if (threadIdx.x == 0)
+    {
+        half2 result = shArray[0];
+        float f_result = __low2float(result) + __high2float(result);
+        results[blockIdx.x] = f_result;
+    }
 }
 
-__global__ void scalarProductKernel_native(half2 const *const a,
-                                           half2 const *const b,
-                                           float *const results,
-                                           size_t const size) {
-  const int stride = gridDim.x * blockDim.x;
-  __shared__ half2 shArray[NUM_OF_THREADS];
+__global__ void scalarProductKernel_native(half2 const* const a, half2 const* const b,
+    float* const results, size_t const size)
+{
+    const int stride = gridDim.x * blockDim.x;
+    __shared__ half2 shArray[NUM_OF_THREADS];
 
-  half2 value(0.f, 0.f);
-  shArray[threadIdx.x] = value;
+    half2 value(0.f, 0.f);
+    shArray[threadIdx.x] = value;
 
-  for (int i = threadIdx.x + blockDim.x + blockIdx.x; i < size; i += stride) {
-    value = a[i] * b[i] + value;
-  }
+    for (int i = threadIdx.x + blockDim.x + blockIdx.x; i < size; i += stride)
+    {
+        value = a[i] * b[i] + value;
+    }
 
-  shArray[threadIdx.x] = value;
-  __syncthreads();
-  reduceInShared_native(shArray);
+    shArray[threadIdx.x] = value;
+    __syncthreads();
+    reduceInShared_native(shArray);
 
-  if (threadIdx.x == 0) {
-    half2 result = shArray[0];
-    float f_result = (float)result.y + (float)result.x;
-    results[blockIdx.x] = f_result;
-  }
+    if (threadIdx.x == 0)
+    {
+        half2 result = shArray[0];
+        float f_result = (float)result.y + (float)result.x;
+        results[blockIdx.x] = f_result;
+    }
 }
 
-void generateInput(half2 *a, size_t size) {
-  for (size_t i = 0; i < size; ++i) {
-    half2 temp;
-    temp.x = static_cast<float>(rand() % 4);
-    temp.y = static_cast<float>(rand() % 2);
-    a[i] = temp;
-  }
+void generateInput(half2* a, size_t size)
+{
+    for (size_t i = 0; i < size; ++i)
+    {
+        half2 temp;
+        temp.x = static_cast<float>(rand() % 4);
+        temp.y = static_cast<float>(rand() % 2);
+        a[i] = temp;
+    }
 }
 
 int main(int argc, char* argv[])

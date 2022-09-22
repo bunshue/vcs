@@ -19,7 +19,7 @@
 #define NUM_REPS 100  // number of repetitions performed
 #define TILE_DIM 16   // tile/block size
 
-const char *sSDKsample = "simplePitchLinearTexture";
+const char* sSDKsample = "simplePitchLinearTexture";
 
 // Auto-Verification Code
 bool bTestResult = true;
@@ -53,7 +53,7 @@ __global__ void shiftArray(float* odata, int pitch, int width, int height, int s
 
 ////////////////////////////////////////////////////////////////////////////////
 // Declaration, forward
-void runTest(int argc, char **argv);
+void runTest(int argc, char** argv);
 
 ////////////////////////////////////////////////////////////////////////////////
 // Program main
@@ -238,10 +238,7 @@ void runTest(int argc, char** argv)
     float fetchRatePL = nx * ny / 1.e+6f / (timePL / (1000.0f * NUM_REPS));
     float fetchRateArray = nx * ny / 1.e+6f / (timeArray / (1000.0f * NUM_REPS));
 
-    printf(
-        "\nTexture fetch rate (Mpix/s) for pitch linear: "
-        "%.2e; for array: %.2e\n\n",
-        fetchRatePL, fetchRateArray);
+    printf("\nTexture fetch rate (Mpix/s) for pitch linear: %.2e; for array: %.2e\n\n", fetchRatePL, fetchRateArray);
 
     // Cleanup
     free(h_idata);
