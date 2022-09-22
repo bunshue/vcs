@@ -37,14 +37,14 @@ void runTest(int argc, char** argv);
 ////////////////////////////////////////////////////////////////////////////////
 //! Run a simple test for CUDA
 ////////////////////////////////////////////////////////////////////////////////
-void runTest(int argc, char** argv) {
+void runTest(int argc, char** argv)
+{
     printf("[simpleCUFFT] is starting...\n");
 
     findCudaDevice(argc, (const char**)argv);
 
     // Allocate host memory for the signal
-    Complex* h_signal =
-        reinterpret_cast<Complex*>(malloc(sizeof(Complex) * SIGNAL_SIZE));
+    Complex* h_signal = reinterpret_cast<Complex*>(malloc(sizeof(Complex) * SIGNAL_SIZE));
 
     // Initialize the memory for the signal
     for (unsigned int i = 0; i < SIGNAL_SIZE; ++i)
@@ -92,51 +92,37 @@ void runTest(int argc, char** argv) {
     long long int new_size_long = new_size;
 
     checkCudaErrors(cufftCreate(&plan_adv));
-    checkCudaErrors(cufftXtMakePlanMany(plan_adv, 1, &new_size_long, NULL, 1, 1,
-        CUDA_C_32F, NULL, 1, 1, CUDA_C_32F, 1,
-        &workSize, CUDA_C_32F));
+    checkCudaErrors(cufftXtMakePlanMany(plan_adv, 1, &new_size_long, NULL, 1, 1, CUDA_C_32F, NULL, 1, 1, CUDA_C_32F, 1, &workSize, CUDA_C_32F));
     printf("Temporary buffer size %li bytes\n", workSize);
 
     // Transform signal and kernel
     printf("Transforming signal cufftExecC2C\n");
-    checkCudaErrors(cufftExecC2C(plan, reinterpret_cast<cufftComplex*>(d_signal),
-        reinterpret_cast<cufftComplex*>(d_signal),
-        CUFFT_FORWARD));
-    checkCudaErrors(cufftExecC2C(
-        plan_adv, reinterpret_cast<cufftComplex*>(d_filter_kernel),
-        reinterpret_cast<cufftComplex*>(d_filter_kernel), CUFFT_FORWARD));
+    checkCudaErrors(cufftExecC2C(plan, reinterpret_cast<cufftComplex*>(d_signal), reinterpret_cast<cufftComplex*>(d_signal), CUFFT_FORWARD));
+    checkCudaErrors(cufftExecC2C(plan_adv, reinterpret_cast<cufftComplex*>(d_filter_kernel), reinterpret_cast<cufftComplex*>(d_filter_kernel), CUFFT_FORWARD));
 
     // Multiply the coefficients together and normalize the result
     printf("Launching ComplexPointwiseMulAndScale<<< >>>\n");
-    ComplexPointwiseMulAndScale << <32, 256 >> > (d_signal, d_filter_kernel, new_size,
-        1.0f / new_size);
+    ComplexPointwiseMulAndScale << <32, 256 >> > (d_signal, d_filter_kernel, new_size, 1.0f / new_size);
 
     // Check if kernel execution generated and error
     getLastCudaError("Kernel execution failed [ ComplexPointwiseMulAndScale ]");
 
     // Transform signal back
     printf("Transforming signal back cufftExecC2C\n");
-    checkCudaErrors(cufftExecC2C(plan, reinterpret_cast<cufftComplex*>(d_signal),
-        reinterpret_cast<cufftComplex*>(d_signal),
-        CUFFT_INVERSE));
+    checkCudaErrors(cufftExecC2C(plan, reinterpret_cast<cufftComplex*>(d_signal), reinterpret_cast<cufftComplex*>(d_signal), CUFFT_INVERSE));
 
     // Copy device memory to host
     Complex* h_convolved_signal = h_padded_signal;
-    checkCudaErrors(cudaMemcpy(h_convolved_signal, d_signal, mem_size,
-        cudaMemcpyDeviceToHost));
+    checkCudaErrors(cudaMemcpy(h_convolved_signal, d_signal, mem_size, cudaMemcpyDeviceToHost));
 
     // Allocate host memory for the convolution result
-    Complex* h_convolved_signal_ref =
-        reinterpret_cast<Complex*>(malloc(sizeof(Complex) * SIGNAL_SIZE));
+    Complex* h_convolved_signal_ref = reinterpret_cast<Complex*>(malloc(sizeof(Complex) * SIGNAL_SIZE));
 
     // Convolve on the host
-    Convolve(h_signal, SIGNAL_SIZE, h_filter_kernel, FILTER_KERNEL_SIZE,
-        h_convolved_signal_ref);
+    Convolve(h_signal, SIGNAL_SIZE, h_filter_kernel, FILTER_KERNEL_SIZE, h_convolved_signal_ref);
 
     // check result
-    bool bTestResult = sdkCompareL2fe(
-        reinterpret_cast<float*>(h_convolved_signal_ref),
-        reinterpret_cast<float*>(h_convolved_signal), 2 * SIGNAL_SIZE, 1e-5f);
+    bool bTestResult = sdkCompareL2fe(reinterpret_cast<float*>(h_convolved_signal_ref), reinterpret_cast<float*>(h_convolved_signal), 2 * SIGNAL_SIZE, 1e-5f);
 
     // Destroy CUFFT context
     checkCudaErrors(cufftDestroy(plan));
@@ -155,16 +141,14 @@ void runTest(int argc, char** argv) {
 }
 
 // Pad data
-int PadData(const Complex* signal, Complex** padded_signal, int signal_size,
-    const Complex* filter_kernel, Complex** padded_filter_kernel,
-    int filter_kernel_size) {
+int PadData(const Complex* signal, Complex** padded_signal, int signal_size, const Complex* filter_kernel, Complex** padded_filter_kernel, int filter_kernel_size)
+{
     int minRadius = filter_kernel_size / 2;
     int maxRadius = filter_kernel_size - minRadius;
     int new_size = signal_size + maxRadius;
 
     // Pad signal
-    Complex* new_data =
-        reinterpret_cast<Complex*>(malloc(sizeof(Complex) * new_size));
+    Complex* new_data = reinterpret_cast<Complex*>(malloc(sizeof(Complex) * new_size));
     memcpy(new_data + 0, signal, signal_size * sizeof(Complex));
     memset(new_data + signal_size, 0, (new_size - signal_size) * sizeof(Complex));
     *padded_signal = new_data;
@@ -172,10 +156,8 @@ int PadData(const Complex* signal, Complex** padded_signal, int signal_size,
     // Pad filter
     new_data = reinterpret_cast<Complex*>(malloc(sizeof(Complex) * new_size));
     memcpy(new_data + 0, filter_kernel + minRadius, maxRadius * sizeof(Complex));
-    memset(new_data + maxRadius, 0,
-        (new_size - filter_kernel_size) * sizeof(Complex));
-    memcpy(new_data + new_size - minRadius, filter_kernel,
-        minRadius * sizeof(Complex));
+    memset(new_data + maxRadius, 0, (new_size - filter_kernel_size) * sizeof(Complex));
+    memcpy(new_data + new_size - minRadius, filter_kernel, minRadius * sizeof(Complex));
     *padded_filter_kernel = new_data;
 
     return new_size;
@@ -186,9 +168,8 @@ int PadData(const Complex* signal, Complex** padded_signal, int signal_size,
 ////////////////////////////////////////////////////////////////////////////////
 
 // Computes convolution on the host
-void Convolve(const Complex* signal, int signal_size,
-    const Complex* filter_kernel, int filter_kernel_size,
-    Complex* filtered_signal) {
+void Convolve(const Complex* signal, int signal_size, const Complex* filter_kernel, int filter_kernel_size, Complex* filtered_signal)
+{
     int minRadius = filter_kernel_size / 2;
     int maxRadius = filter_kernel_size - minRadius;
 

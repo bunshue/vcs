@@ -1,31 +1,3 @@
-/* Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *  * Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  * Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *  * Neither the name of NVIDIA CORPORATION nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
-
 #if defined(WIN32) || defined(_WIN32) || defined(WIN64) || defined(_WIN64)
 #  define WINDOWS_LEAN_AND_MEAN
 #  define NOMINMAX
@@ -51,13 +23,13 @@
 
 #define NUMBER_OF_IMAGES 3
 
-    Npp8u  * pInputImageDev[NUMBER_OF_IMAGES];
-    Npp8u  * pInputImageHost[NUMBER_OF_IMAGES];
-    Npp8u  * pSegmentationScratchBufferDev[NUMBER_OF_IMAGES];
-    Npp8u * pSegmentsDev[NUMBER_OF_IMAGES];
-    Npp8u * pSegmentsHost[NUMBER_OF_IMAGES];
-    Npp32u * pSegmentLabelsOutputBufferDev[NUMBER_OF_IMAGES];
-    Npp32u * pSegmentLabelsOutputBufferHost[NUMBER_OF_IMAGES];
+Npp8u* pInputImageDev[NUMBER_OF_IMAGES];
+Npp8u* pInputImageHost[NUMBER_OF_IMAGES];
+Npp8u* pSegmentationScratchBufferDev[NUMBER_OF_IMAGES];
+Npp8u* pSegmentsDev[NUMBER_OF_IMAGES];
+Npp8u* pSegmentsHost[NUMBER_OF_IMAGES];
+Npp32u* pSegmentLabelsOutputBufferDev[NUMBER_OF_IMAGES];
+Npp32u* pSegmentLabelsOutputBufferHost[NUMBER_OF_IMAGES];
 
 void tearDown() // Clean up and tear down
 {
@@ -96,90 +68,87 @@ const std::string& CompressedSegmentLabelsOutputFile0 = "teapot_CompressedSegmen
 const std::string& CompressedSegmentLabelsOutputFile1 = "CT_skull_CompressedSegmentLabels_8Way_512x512_32u.raw";
 const std::string& CompressedSegmentLabelsOutputFile2 = "Rocks_CompressedSegmentLabels_8Way_512x512_32u.raw";
 
-int 
-loadRaw8BitImage(Npp8u * pImage, int nWidth, int nHeight, int nImage)
+int loadRaw8BitImage(Npp8u* pImage, int nWidth, int nHeight, int nImage)
 {
-    FILE * bmpFile;
+    FILE* bmpFile;
     size_t nSize;
 
     if (nImage == 0)
     {
-        if (nWidth != 512 || nHeight != 512) 
+        if (nWidth != 512 || nHeight != 512)
             return -1;
         const char* fileName = "teapot_512x512_8u_Gray.raw";
         const char* InputFile = sdkFindFilePath(fileName, ".");
         if (InputFile == NULL)
         {
-          printf("%s file not found.. exiting\n", fileName);
-          exit(EXIT_WAIVED);
+            printf("%s file not found.. exiting\n", fileName);
+            exit(EXIT_WAIVED);
         }
 
         bmpFile = fopen(InputFile, "rb");
     }
     else if (nImage == 1)
     {
-        if (nWidth != 512 || nHeight != 512) 
+        if (nWidth != 512 || nHeight != 512)
             return -1;
         const char* fileName = "CT_skull_512x512_8u_Gray.raw";
         const char* InputFile = sdkFindFilePath(fileName, ".");
         if (InputFile == NULL)
         {
-          printf("%s file not found.. exiting\n", fileName);
-          exit(EXIT_WAIVED);
+            printf("%s file not found.. exiting\n", fileName);
+            exit(EXIT_WAIVED);
         }
 
         bmpFile = fopen(InputFile, "rb");
     }
     else if (nImage == 2)
     {
-        if (nWidth != 512 || nHeight != 512) 
+        if (nWidth != 512 || nHeight != 512)
             return -1;
         const char* fileName = "Rocks_512x512_8u_Gray.raw";
         const char* InputFile = sdkFindFilePath(fileName, ".");
         if (InputFile == NULL)
         {
-          printf("%s file not found.. exiting\n", fileName);
-          exit(EXIT_WAIVED);
+            printf("%s file not found.. exiting\n", fileName);
+            exit(EXIT_WAIVED);
         }
 
         bmpFile = fopen(InputFile, "rb");
     }
     else
     {
-        printf ("Input file load failed.\n");
+        printf("Input file load failed.\n");
         return -1;
     }
 
     if (bmpFile == NULL)
     {
-        printf ("Input file load failed.\n");
+        printf("Input file load failed.\n");
         return -1;
     }
     nSize = fread(pImage, 1, nWidth * nHeight, bmpFile);
     if (nSize < nWidth * nHeight)
     {
-        printf ("Input file load failed.\n");
-        fclose(bmpFile);        
+        printf("Input file load failed.\n");
+        fclose(bmpFile);
         return -1;
     }
     fclose(bmpFile);
 
-    printf ("Input file load succeeded.\n");
+    printf("Input file load succeeded.\n");
 
     return 0;
 }
 
-int 
-main( int argc, char** argv )
+int main(int argc, char** argv)
 {
-
     int      aSegmentationScratchBufferSize[NUMBER_OF_IMAGES];
     int      aSegmentLabelsOutputBufferSize[NUMBER_OF_IMAGES];
 
     cudaError_t cudaError;
     NppStatus nppStatus;
     NppStreamContext nppStreamCtx;
-    FILE * bmpFile;
+    FILE* bmpFile;
     NppiNorm eNorm = nppiNormInf; // default to 8 way neighbor search
 
     for (int j = 0; j < NUMBER_OF_IMAGES; j++)
@@ -202,7 +171,7 @@ main( int argc, char** argv )
         return NPP_NOT_SUFFICIENT_COMPUTE_CAPABILITY;
     }
 
-    const NppLibraryVersion *libVer   = nppGetLibVersion();
+    const NppLibraryVersion* libVer = nppGetLibVersion();
 
     printf("NPP Library Version %d.%d.%d\n", libVer->major, libVer->minor, libVer->build);
 
@@ -210,20 +179,20 @@ main( int argc, char** argv )
     cudaDriverGetVersion(&driverVersion);
     cudaRuntimeGetVersion(&runtimeVersion);
 
-    printf("CUDA Driver  Version: %d.%d\n", driverVersion/1000, (driverVersion%100)/10);
-    printf("CUDA Runtime Version: %d.%d\n\n", runtimeVersion/1000, (runtimeVersion%100)/10);
+    printf("CUDA Driver  Version: %d.%d\n", driverVersion / 1000, (driverVersion % 100) / 10);
+    printf("CUDA Runtime Version: %d.%d\n\n", runtimeVersion / 1000, (runtimeVersion % 100) / 10);
 
-    cudaError = cudaDeviceGetAttribute(&nppStreamCtx.nCudaDevAttrComputeCapabilityMajor, 
-                                       cudaDevAttrComputeCapabilityMajor, 
-                                       nppStreamCtx.nCudaDeviceId);
+    cudaError = cudaDeviceGetAttribute(&nppStreamCtx.nCudaDevAttrComputeCapabilityMajor, cudaDevAttrComputeCapabilityMajor, nppStreamCtx.nCudaDeviceId);
     if (cudaError != cudaSuccess)
+    {
         return NPP_NOT_SUFFICIENT_COMPUTE_CAPABILITY;
+    }
 
-    cudaError = cudaDeviceGetAttribute(&nppStreamCtx.nCudaDevAttrComputeCapabilityMinor, 
-                                       cudaDevAttrComputeCapabilityMinor, 
-                                       nppStreamCtx.nCudaDeviceId);
+    cudaError = cudaDeviceGetAttribute(&nppStreamCtx.nCudaDevAttrComputeCapabilityMinor, cudaDevAttrComputeCapabilityMinor, nppStreamCtx.nCudaDeviceId);
     if (cudaError != cudaSuccess)
+    {
         return NPP_NOT_SUFFICIENT_COMPUTE_CAPABILITY;
+    }
 
     cudaError = cudaStreamGetFlags(nppStreamCtx.hStream, &nppStreamCtx.nStreamFlags);
 
@@ -258,81 +227,95 @@ main( int argc, char** argv )
 
         // cudaMallocPitch OR cudaMalloc can be used here, in this sample case width == pitch.
 
-        cudaError = cudaMalloc ((void**)&pInputImageDev[nImage], oSizeROI[nImage].width * sizeof(Npp8u) * oSizeROI[nImage].height);
+        cudaError = cudaMalloc((void**)&pInputImageDev[nImage], oSizeROI[nImage].width * sizeof(Npp8u) * oSizeROI[nImage].height);
         if (cudaError != cudaSuccess)
+        {
             return NPP_MEMORY_ALLOCATION_ERR;
+        }
 
-        cudaError = cudaMalloc ((void**)&pSegmentsDev[nImage], oSizeROI[nImage].width * sizeof(Npp32u) * oSizeROI[nImage].height);
+        cudaError = cudaMalloc((void**)&pSegmentsDev[nImage], oSizeROI[nImage].width * sizeof(Npp32u) * oSizeROI[nImage].height);
         if (cudaError != cudaSuccess)
+        {
             return NPP_MEMORY_ALLOCATION_ERR;
+        }
 
-        pInputImageHost[nImage] = reinterpret_cast<Npp8u *>(malloc(oSizeROI[nImage].width * sizeof(Npp8u) * oSizeROI[nImage].height));
-        pSegmentsHost[nImage] = reinterpret_cast<Npp8u *>(malloc(oSizeROI[nImage].width * sizeof(Npp32u) * oSizeROI[nImage].height));
+        pInputImageHost[nImage] = reinterpret_cast<Npp8u*>(malloc(oSizeROI[nImage].width * sizeof(Npp8u) * oSizeROI[nImage].height));
+        pSegmentsHost[nImage] = reinterpret_cast<Npp8u*>(malloc(oSizeROI[nImage].width * sizeof(Npp32u) * oSizeROI[nImage].height));
 
         nppStatus = nppiSegmentWatershedGetBufferSize_8u_C1R(oSizeROI[nImage], &aSegmentationScratchBufferSize[nImage]);
 
-        cudaError = cudaMalloc ((void **)&pSegmentationScratchBufferDev[nImage], aSegmentationScratchBufferSize[nImage]);
+        cudaError = cudaMalloc((void**)&pSegmentationScratchBufferDev[nImage], aSegmentationScratchBufferSize[nImage]);
         if (cudaError != cudaSuccess)
+        {
             return NPP_MEMORY_ALLOCATION_ERR;
+        }
 
         // Output label marker buffers are only needed if you want to same the generated segmentation labels, they ARE compatible with NPP UF generated labels.
         // Requesting segmentation output may slightly decrease segmentation function performance.  Regardless of the pitch of the segmentation image
         // the segment labels output buffer will have a pitch of oSizeROI[nImage].width * sizeof(Npp32u).
 
         aSegmentLabelsOutputBufferSize[nImage] = oSizeROI[nImage].width * sizeof(Npp32u) * oSizeROI[nImage].height;
-        
-        cudaError = cudaMalloc ((void **)&pSegmentLabelsOutputBufferDev[nImage], aSegmentLabelsOutputBufferSize[nImage]);
-        if (cudaError != cudaSuccess)
-            return NPP_MEMORY_ALLOCATION_ERR;
 
-        pSegmentLabelsOutputBufferHost[nImage] = reinterpret_cast<Npp32u *>(malloc(oSizeROI[nImage].width * sizeof(Npp32u) * oSizeROI[nImage].height));
+        cudaError = cudaMalloc((void**)&pSegmentLabelsOutputBufferDev[nImage], aSegmentLabelsOutputBufferSize[nImage]);
+        if (cudaError != cudaSuccess)
+        {
+            return NPP_MEMORY_ALLOCATION_ERR;
+        }
+
+        pSegmentLabelsOutputBufferHost[nImage] = reinterpret_cast<Npp32u*>(malloc(oSizeROI[nImage].width * sizeof(Npp32u) * oSizeROI[nImage].height));
 
         if (loadRaw8BitImage(pInputImageHost[nImage], oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].height, nImage) == 0)
         {
-            cudaError = cudaMemcpy2DAsync(pInputImageDev[nImage], oSizeROI[nImage].width * sizeof(Npp8u), pInputImageHost[nImage], 
-                                          oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].height, 
-                                          cudaMemcpyHostToDevice, nppStreamCtx.hStream);
+            cudaError = cudaMemcpy2DAsync(pInputImageDev[nImage], oSizeROI[nImage].width * sizeof(Npp8u), pInputImageHost[nImage],
+                oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].height,
+                cudaMemcpyHostToDevice, nppStreamCtx.hStream);
 
             // Make a second copy of the unaltered input image since this function works in place and we want to reuse the input image multiple times.
-            cudaError = cudaMemcpy2DAsync(pSegmentsDev[nImage], oSizeROI[nImage].width * sizeof(Npp8u), pInputImageHost[nImage], 
-                                          oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].height, 
-                                          cudaMemcpyHostToDevice, nppStreamCtx.hStream);
+            cudaError = cudaMemcpy2DAsync(pSegmentsDev[nImage], oSizeROI[nImage].width * sizeof(Npp8u), pInputImageHost[nImage],
+                oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].height,
+                cudaMemcpyHostToDevice, nppStreamCtx.hStream);
 
-            nppStatus = nppiSegmentWatershed_8u_C1IR_Ctx(pSegmentsDev[nImage], oSizeROI[nImage].width * sizeof(Npp8u), 
-                                                         pSegmentLabelsOutputBufferDev[nImage], oSizeROI[nImage].width * sizeof(Npp32u), eNorm, 
-                                                         NPP_WATERSHED_SEGMENT_BOUNDARIES_NONE, oSizeROI[nImage], pSegmentationScratchBufferDev[nImage], nppStreamCtx);
+            nppStatus = nppiSegmentWatershed_8u_C1IR_Ctx(pSegmentsDev[nImage], oSizeROI[nImage].width * sizeof(Npp8u),
+                pSegmentLabelsOutputBufferDev[nImage], oSizeROI[nImage].width * sizeof(Npp32u), eNorm,
+                NPP_WATERSHED_SEGMENT_BOUNDARIES_NONE, oSizeROI[nImage], pSegmentationScratchBufferDev[nImage], nppStreamCtx);
 
-            if (nppStatus != NPP_SUCCESS)  
+            if (nppStatus != NPP_SUCCESS)
             {
                 if (nImage == 0)
+                {
                     printf("Lena segments 8Way 512x512 8u failed.\n");
+                }
                 else if (nImage == 1)
+                {
                     printf("CT skull segments 8Way 512x512 8u failed.\n");
+                }
                 else if (nImage == 2)
+                {
                     printf("Rocks segments 8Way 512x512 8u failed.\n");
+                }
                 tearDown();
                 return -1;
             }
 
             // Now compress the label markers output to make them easier to view.
             int nCompressedLabelsScratchBufferSize;
-            Npp8u * pCompressedLabelsScratchBufferDev;
+            Npp8u* pCompressedLabelsScratchBufferDev;
 
             nppStatus = nppiCompressMarkerLabelsGetBufferSize_32u_C1R(oSizeROI[nImage].width * oSizeROI[nImage].height, &nCompressedLabelsScratchBufferSize);
             if (nppStatus != NPP_NO_ERROR)
                 return nppStatus;
 
-            cudaError = cudaMalloc ((void **)&pCompressedLabelsScratchBufferDev, nCompressedLabelsScratchBufferSize);
+            cudaError = cudaMalloc((void**)&pCompressedLabelsScratchBufferDev, nCompressedLabelsScratchBufferSize);
             if (cudaError != cudaSuccess)
                 return NPP_MEMORY_ALLOCATION_ERR;
 
             int nCompressedLabelCount = 0;
 
-            nppStatus = nppiCompressMarkerLabelsUF_32u_C1IR(pSegmentLabelsOutputBufferDev[nImage], oSizeROI[nImage].width * sizeof(Npp32u), oSizeROI[nImage], 
-                                                            oSizeROI[nImage].width * oSizeROI[nImage].height, &nCompressedLabelCount, 
-                                                            pCompressedLabelsScratchBufferDev);
+            nppStatus = nppiCompressMarkerLabelsUF_32u_C1IR(pSegmentLabelsOutputBufferDev[nImage], oSizeROI[nImage].width * sizeof(Npp32u), oSizeROI[nImage],
+                oSizeROI[nImage].width * oSizeROI[nImage].height, &nCompressedLabelCount,
+                pCompressedLabelsScratchBufferDev);
 
-            if (nppStatus != NPP_SUCCESS)  
+            if (nppStatus != NPP_SUCCESS)
             {
                 if (nImage == 0)
                     printf("teapot_CompressedLabelMarkersUF_8Way_512x512_32u failed.\n");
@@ -345,19 +328,19 @@ main( int argc, char** argv )
             }
 
             // Copy segmented image to host
-            cudaError = cudaMemcpy2DAsync(pSegmentsHost[nImage], oSizeROI[nImage].width * sizeof(Npp8u), 
-                                          pSegmentsDev[nImage], oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].height,
-                                          cudaMemcpyDeviceToHost, nppStreamCtx.hStream);
+            cudaError = cudaMemcpy2DAsync(pSegmentsHost[nImage], oSizeROI[nImage].width * sizeof(Npp8u),
+                pSegmentsDev[nImage], oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].height,
+                cudaMemcpyDeviceToHost, nppStreamCtx.hStream);
 
             // Copy segment labels image to host
-            cudaError = cudaMemcpy2DAsync(pSegmentLabelsOutputBufferHost[nImage], oSizeROI[nImage].width * sizeof(Npp32u), 
-                                          pSegmentLabelsOutputBufferDev[nImage], oSizeROI[nImage].width * sizeof(Npp32u), oSizeROI[nImage].width * sizeof(Npp32u), oSizeROI[nImage].height,
-                                          cudaMemcpyDeviceToHost, nppStreamCtx.hStream);
+            cudaError = cudaMemcpy2DAsync(pSegmentLabelsOutputBufferHost[nImage], oSizeROI[nImage].width * sizeof(Npp32u),
+                pSegmentLabelsOutputBufferDev[nImage], oSizeROI[nImage].width * sizeof(Npp32u), oSizeROI[nImage].width * sizeof(Npp32u), oSizeROI[nImage].height,
+                cudaMemcpyDeviceToHost, nppStreamCtx.hStream);
 
             // Wait host image read backs to complete, not necessary if no need to synchronize
-            if ((cudaError = cudaStreamSynchronize(nppStreamCtx.hStream)) != cudaSuccess) 
+            if ((cudaError = cudaStreamSynchronize(nppStreamCtx.hStream)) != cudaSuccess)
             {
-                printf ("Post segmentation cudaStreamSynchronize failed\n");
+                printf("Post segmentation cudaStreamSynchronize failed\n");
                 tearDown();
                 return -1;
             }
@@ -373,7 +356,7 @@ main( int argc, char** argv )
             else if (nImage == 2)
                 bmpFile = fopen(SegmentsOutputFile2.c_str(), "wb");
 
-            if (bmpFile == NULL) 
+            if (bmpFile == NULL)
                 return -1;
             size_t nSize = 0;
             for (int j = 0; j < oSizeROI[nImage].height; j++)
@@ -397,7 +380,7 @@ main( int argc, char** argv )
             else if (nImage == 2)
                 bmpFile = fopen(CompressedSegmentLabelsOutputFile2.c_str(), "wb");
 
-            if (bmpFile == NULL) 
+            if (bmpFile == NULL)
                 return -1;
             nSize = 0;
             for (int j = 0; j < oSizeROI[nImage].height; j++)
@@ -416,16 +399,16 @@ main( int argc, char** argv )
             // Now generate a segment boundaries only output image
 
             // Make a second copy of the unaltered input image since this function works in place and we want to reuse the input image multiple times.
-            cudaError = cudaMemcpy2DAsync(pSegmentsDev[nImage], oSizeROI[nImage].width * sizeof(Npp8u), pInputImageHost[nImage], 
-                                          oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].height, 
-                                          cudaMemcpyHostToDevice, nppStreamCtx.hStream);
+            cudaError = cudaMemcpy2DAsync(pSegmentsDev[nImage], oSizeROI[nImage].width * sizeof(Npp8u), pInputImageHost[nImage],
+                oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].height,
+                cudaMemcpyHostToDevice, nppStreamCtx.hStream);
 
             // We already generated segment labels images to skip that this time
-            nppStatus = nppiSegmentWatershed_8u_C1IR_Ctx(pSegmentsDev[nImage], oSizeROI[nImage].width * sizeof(Npp8u), 
-                                                         0, 0, eNorm, 
-                                                         NPP_WATERSHED_SEGMENT_BOUNDARIES_ONLY, oSizeROI[nImage], pSegmentationScratchBufferDev[nImage], nppStreamCtx);
+            nppStatus = nppiSegmentWatershed_8u_C1IR_Ctx(pSegmentsDev[nImage], oSizeROI[nImage].width * sizeof(Npp8u),
+                0, 0, eNorm,
+                NPP_WATERSHED_SEGMENT_BOUNDARIES_ONLY, oSizeROI[nImage], pSegmentationScratchBufferDev[nImage], nppStreamCtx);
 
-            if (nppStatus != NPP_SUCCESS)  
+            if (nppStatus != NPP_SUCCESS)
             {
                 if (nImage == 0)
                     printf("Lena segment boundaries 8Way 512x512 8u failed.\n");
@@ -438,14 +421,14 @@ main( int argc, char** argv )
             }
 
             // Copy segment boundaries image to host
-            cudaError = cudaMemcpy2DAsync(pSegmentsHost[nImage], oSizeROI[nImage].width * sizeof(Npp8u), 
-                                          pSegmentsDev[nImage], oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].height,
-                                          cudaMemcpyDeviceToHost, nppStreamCtx.hStream);
+            cudaError = cudaMemcpy2DAsync(pSegmentsHost[nImage], oSizeROI[nImage].width * sizeof(Npp8u),
+                pSegmentsDev[nImage], oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].height,
+                cudaMemcpyDeviceToHost, nppStreamCtx.hStream);
 
             // Wait host image read backs to complete, not necessary if no need to synchronize
-            if ((cudaError = cudaStreamSynchronize(nppStreamCtx.hStream)) != cudaSuccess) 
+            if ((cudaError = cudaStreamSynchronize(nppStreamCtx.hStream)) != cudaSuccess)
             {
-                printf ("Post segmentation cudaStreamSynchronize failed\n");
+                printf("Post segmentation cudaStreamSynchronize failed\n");
                 tearDown();
                 return -1;
             }
@@ -457,7 +440,7 @@ main( int argc, char** argv )
             else if (nImage == 2)
                 bmpFile = fopen(SegmentBoundariesOutputFile2.c_str(), "wb");
 
-            if (bmpFile == NULL) 
+            if (bmpFile == NULL)
                 return -1;
             nSize = 0;
             for (int j = 0; j < oSizeROI[nImage].height; j++)
@@ -476,16 +459,16 @@ main( int argc, char** argv )
             // Now generate a segmented with contrasting boundaries output image
 
             // Make a second copy of the unaltered input image since this function works in place and we want to reuse the input image multiple times.
-            cudaError = cudaMemcpy2DAsync(pSegmentsDev[nImage], oSizeROI[nImage].width * sizeof(Npp8u), pInputImageHost[nImage], 
-                                          oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].height, 
-                                          cudaMemcpyHostToDevice, nppStreamCtx.hStream);
+            cudaError = cudaMemcpy2DAsync(pSegmentsDev[nImage], oSizeROI[nImage].width * sizeof(Npp8u), pInputImageHost[nImage],
+                oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].height,
+                cudaMemcpyHostToDevice, nppStreamCtx.hStream);
 
             // We already generated segment labels images to skip that this time
-            nppStatus = nppiSegmentWatershed_8u_C1IR_Ctx(pSegmentsDev[nImage], oSizeROI[nImage].width * sizeof(Npp8u), 
-                                                         0, 0, eNorm, 
-                                                         NPP_WATERSHED_SEGMENT_BOUNDARIES_CONTRAST, oSizeROI[nImage], pSegmentationScratchBufferDev[nImage], nppStreamCtx);
+            nppStatus = nppiSegmentWatershed_8u_C1IR_Ctx(pSegmentsDev[nImage], oSizeROI[nImage].width * sizeof(Npp8u),
+                0, 0, eNorm,
+                NPP_WATERSHED_SEGMENT_BOUNDARIES_CONTRAST, oSizeROI[nImage], pSegmentationScratchBufferDev[nImage], nppStreamCtx);
 
-            if (nppStatus != NPP_SUCCESS)  
+            if (nppStatus != NPP_SUCCESS)
             {
                 if (nImage == 0)
                     printf("Lena segments with contrasting boundaries 8Way 512x512 8u failed.\n");
@@ -498,14 +481,14 @@ main( int argc, char** argv )
             }
 
             // Copy segment boundaries image to host
-            cudaError = cudaMemcpy2DAsync(pSegmentsHost[nImage], oSizeROI[nImage].width * sizeof(Npp8u), 
-                                          pSegmentsDev[nImage], oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].height,
-                                          cudaMemcpyDeviceToHost, nppStreamCtx.hStream);
+            cudaError = cudaMemcpy2DAsync(pSegmentsHost[nImage], oSizeROI[nImage].width * sizeof(Npp8u),
+                pSegmentsDev[nImage], oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].height,
+                cudaMemcpyDeviceToHost, nppStreamCtx.hStream);
 
             // Wait host image read backs to complete, not necessary if no need to synchronize
-            if ((cudaError = cudaStreamSynchronize(nppStreamCtx.hStream)) != cudaSuccess) 
+            if ((cudaError = cudaStreamSynchronize(nppStreamCtx.hStream)) != cudaSuccess)
             {
-                printf ("Post segmentation cudaStreamSynchronize failed\n");
+                printf("Post segmentation cudaStreamSynchronize failed\n");
                 tearDown();
                 return -1;
             }
@@ -517,7 +500,7 @@ main( int argc, char** argv )
             else if (nImage == 2)
                 bmpFile = fopen(SegmentsWithContrastingBoundariesOutputFile2.c_str(), "wb");
 
-            if (bmpFile == NULL) 
+            if (bmpFile == NULL)
                 return -1;
             nSize = 0;
             for (int j = 0; j < oSizeROI[nImage].height; j++)

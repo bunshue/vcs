@@ -113,6 +113,25 @@ int main(int argc, char** argv)
     printf("> scale_factor = %1.4f\n", 1.0f / scale_factor);
     printf("> array_size   = %d\n\n", n);
 
+
+    // Find/set the device.
+// The test requires an architecture SM35 or greater (CDP capable).
+    cuda_device = findCudaDevice(argc, (const char**)argv);
+    cudaDeviceProp deviceProps;
+    checkCudaErrors(cudaGetDeviceProperties(&deviceProps, cuda_device));
+    int cdpCapable = (deviceProps.major == 3 && deviceProps.minor >= 5) || deviceProps.major >= 4;
+
+    printf("GPU device %s has compute capabilities (SM %d.%d)\n", deviceProps.name, deviceProps.major, deviceProps.minor);
+
+    if (!cdpCapable)
+    {
+        std::cerr << "cdpQuadTree requires SM 3.5 or higher to use CUDA Dynamic Parallelism.  Exiting...\n" << std::endl;
+        exit(EXIT_WAIVED);
+    }
+
+    printf("warpSize = %d\n", deviceProps.warpSize);
+
+
     printf("ª©¥»¸ê°T\n");
     //printf("Header version:  %u.%u\n", NVMEDIA_2D_VERSION_MAJOR, NVMEDIA_2D_VERSION_MINOR);
     printf("CUDART_VERSION : %d\n", CUDART_VERSION);

@@ -21,71 +21,73 @@
 #include <helper_functions.h>
 #include <helper_cuda.h>
 
-static const char *sSDKname = "simpleCubemapTexture";
-
-// includes, kernels
-
 ////////////////////////////////////////////////////////////////////////////////
 //! Transform a cubemap face of a linear buffe using cubemap texture lookups
 //! @param g_odata  output data in global memory
 ////////////////////////////////////////////////////////////////////////////////
-__global__ void transformKernel(float *g_odata, int width,
-                                cudaTextureObject_t tex) {
-  // calculate this thread's data point
-  unsigned int x = blockIdx.x * blockDim.x + threadIdx.x;
-  unsigned int y = blockIdx.y * blockDim.y + threadIdx.y;
+__global__ void transformKernel(float* g_odata, int width, cudaTextureObject_t tex)
+{
+    // calculate this thread's data point
+    unsigned int x = blockIdx.x * blockDim.x + threadIdx.x;
+    unsigned int y = blockIdx.y * blockDim.y + threadIdx.y;
 
-  // 0.5f offset and division are necessary to access the original data points
-  // in the texture (such that bilinear interpolation will not be activated).
-  // For details, see also CUDA Programming Guide, Appendix D
+    // 0.5f offset and division are necessary to access the original data points
+    // in the texture (such that bilinear interpolation will not be activated).
+    // For details, see also CUDA Programming Guide, Appendix D
 
-  float u = ((x + 0.5f) / (float)width) * 2.f - 1.f;
-  float v = ((y + 0.5f) / (float)width) * 2.f - 1.f;
+    float u = ((x + 0.5f) / (float)width) * 2.f - 1.f;
+    float v = ((y + 0.5f) / (float)width) * 2.f - 1.f;
 
-  float cx, cy, cz;
+    float cx, cy, cz;
 
-  for (unsigned int face = 0; face < 6; face++) {
-    // Layer 0 is positive X face
-    if (face == 0) {
-      cx = 1;
-      cy = -v;
-      cz = -u;
-    }
-    // Layer 1 is negative X face
-    else if (face == 1) {
-      cx = -1;
-      cy = -v;
-      cz = u;
-    }
-    // Layer 2 is positive Y face
-    else if (face == 2) {
-      cx = u;
-      cy = 1;
-      cz = v;
-    }
-    // Layer 3 is negative Y face
-    else if (face == 3) {
-      cx = u;
-      cy = -1;
-      cz = -v;
-    }
-    // Layer 4 is positive Z face
-    else if (face == 4) {
-      cx = u;
-      cy = -v;
-      cz = 1;
-    }
-    // Layer 4 is negative Z face
-    else if (face == 5) {
-      cx = -u;
-      cy = -v;
-      cz = -1;
-    }
+    for (unsigned int face = 0; face < 6; face++)
+    {
+        // Layer 0 is positive X face
+        if (face == 0)
+        {
+            cx = 1;
+            cy = -v;
+            cz = -u;
+        }
+        // Layer 1 is negative X face
+        else if (face == 1)
+        {
+            cx = -1;
+            cy = -v;
+            cz = u;
+        }
+        // Layer 2 is positive Y face
+        else if (face == 2)
+        {
+            cx = u;
+            cy = 1;
+            cz = v;
+        }
+        // Layer 3 is negative Y face
+        else if (face == 3)
+        {
+            cx = u;
+            cy = -1;
+            cz = -v;
+        }
+        // Layer 4 is positive Z face
+        else if (face == 4)
+        {
+            cx = u;
+            cy = -v;
+            cz = 1;
+        }
+        // Layer 4 is negative Z face
+        else if (face == 5)
+        {
+            cx = -u;
+            cy = -v;
+            cz = -1;
+        }
 
-    // read from texture, do expected transformation and write to global memory
-    g_odata[face * width * width + y * width + x] =
-        -texCubemap<float>(tex, cx, cy, cz);
-  }
+        // read from texture, do expected transformation and write to global memory
+        g_odata[face * width * width + y * width + x] = -texCubemap<float>(tex, cx, cy, cz);
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -103,16 +105,12 @@ int main(int argc, char** argv)
     cudaDeviceProp deviceProps;
 
     checkCudaErrors(cudaGetDeviceProperties(&deviceProps, devID));
-    printf("CUDA device [%s] has %d Multi-Processors ", deviceProps.name,
-        deviceProps.multiProcessorCount);
+    printf("CUDA device [%s] has %d Multi-Processors ", deviceProps.name, deviceProps.multiProcessorCount);
     printf("SM %d.%d\n", deviceProps.major, deviceProps.minor);
 
     if (deviceProps.major < 2)
     {
-        printf(
-            "%s requires SM 2.0 or higher for support of Texture Arrays.  Test "
-            "will exit... \n",
-            sSDKname);
+        printf("Requires SM 2.0 or higher for support of Texture Arrays.  Test will exit... \n");
 
         exit(EXIT_WAIVED);
     }
@@ -180,10 +178,7 @@ int main(int argc, char** argv)
     dim3 dimBlock(8, 8, 1);
     dim3 dimGrid(width / dimBlock.x, width / dimBlock.y, 1);
 
-    printf(
-        "Covering Cubemap data array of %d~3 x %d: Grid size is %d x %d, each "
-        "block has 8 x 8 threads\n",
-        width, num_layers, dimGrid.x, dimGrid.y);
+    printf("Covering Cubemap data array of %d~3 x %d: Grid size is %d x %d, each block has 8 x 8 threads\n", width, num_layers, dimGrid.x, dimGrid.y);
 
     transformKernel << <dimGrid, dimBlock >> > (d_data, width, tex);  // warmup (for better timing)
 

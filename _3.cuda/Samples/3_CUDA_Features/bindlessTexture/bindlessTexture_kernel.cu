@@ -43,20 +43,22 @@ float highestLod = 1.0f;
 
 __host__ __device__ __inline__ uint2 encodeTextureObject(
     cudaTextureObject_t obj) {
-  return make_uint2((uint)(obj & 0xFFFFFFFF), (uint)(obj >> 32));
+    return make_uint2((uint)(obj & 0xFFFFFFFF), (uint)(obj >> 32));
 }
 
-__host__ __device__ __inline__ cudaTextureObject_t decodeTextureObject(
-    uint2 obj) {
-  return (((cudaTextureObject_t)obj.x) | ((cudaTextureObject_t)obj.y) << 32);
+__host__ __device__ __inline__ cudaTextureObject_t decodeTextureObject(uint2 obj)
+{
+    return (((cudaTextureObject_t)obj.x) | ((cudaTextureObject_t)obj.y) << 32);
 }
 
-__device__ __inline__ float4 to_float4(uchar4 vec) {
-  return make_float4(vec.x, vec.y, vec.z, vec.w);
+__device__ __inline__ float4 to_float4(uchar4 vec)
+{
+    return make_float4(vec.x, vec.y, vec.z, vec.w);
 }
 
-__device__ __inline__ uchar4 to_uchar4(float4 vec) {
-  return make_uchar4((uchar)vec.x, (uchar)vec.y, (uchar)vec.z, (uchar)vec.w);
+__device__ __inline__ uchar4 to_uchar4(float4 vec)
+{
+    return make_uchar4((uchar)vec.x, (uchar)vec.y, (uchar)vec.z, (uchar)vec.w);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -251,57 +253,62 @@ uint getMipMapLevels(cudaExtent size)
 
 extern "C" void randomizeAtlas()
 {
-  uint2 *h_data = (uint2 *)atlasImage.h_data;
+    uint2* h_data = (uint2*)atlasImage.h_data;
 
-  // assign random texture object handles to our atlas image tiles
-  for (size_t i = 0; i < atlasImage.size.width * atlasImage.size.height; i++) {
+    // assign random texture object handles to our atlas image tiles
+    for (size_t i = 0; i < atlasImage.size.width * atlasImage.size.height; i++) {
 #ifdef SHOW_MIPMAPS
-    h_data[i] = encodeTextureObject(contentImages[0].textureObject);
+        h_data[i] = encodeTextureObject(contentImages[0].textureObject);
 #else
-    h_data[i] = encodeTextureObject(
-        contentImages[rand() % contentImages.size()].textureObject);
+        h_data[i] = encodeTextureObject(
+            contentImages[rand() % contentImages.size()].textureObject);
 #endif
-  }
+    }
 
-  // copy data to atlas array
-  cudaMemcpy3DParms copyParams = {0};
-  copyParams.srcPtr = make_cudaPitchedPtr(
-      atlasImage.h_data, atlasImage.size.width * sizeof(uint2),
-      atlasImage.size.width, atlasImage.size.height);
-  copyParams.dstArray = atlasImage.dataArray;
-  copyParams.extent = atlasImage.size;
-  copyParams.extent.depth = 1;
-  copyParams.kind = cudaMemcpyHostToDevice;
-  checkCudaErrors(cudaMemcpy3D(&copyParams));
+    // copy data to atlas array
+    cudaMemcpy3DParms copyParams = { 0 };
+    copyParams.srcPtr = make_cudaPitchedPtr(atlasImage.h_data, atlasImage.size.width * sizeof(uint2), atlasImage.size.width, atlasImage.size.height);
+    copyParams.dstArray = atlasImage.dataArray;
+    copyParams.extent = atlasImage.size;
+    copyParams.extent.depth = 1;
+    copyParams.kind = cudaMemcpyHostToDevice;
+    checkCudaErrors(cudaMemcpy3D(&copyParams));
 };
 
 extern "C" void deinitAtlasAndImages()
 {
-    for (size_t i = 0; i < contentImages.size(); i++) {
+    for (size_t i = 0; i < contentImages.size(); i++)
+    {
         Image& image = contentImages[i];
 
-        if (image.h_data) {
+        if (image.h_data)
+        {
             free(image.h_data);
         }
 
-        if (image.textureObject) {
+        if (image.textureObject)
+        {
             checkCudaErrors(cudaDestroyTextureObject(image.textureObject));
         }
 
-        if (image.mipmapArray) {
+        if (image.mipmapArray)
+        {
             checkCudaErrors(cudaFreeMipmappedArray(image.mipmapArray));
         }
     }
 
-    if (atlasImage.h_data) {
+    if (atlasImage.h_data)
+    {
         free(atlasImage.h_data);
     }
 
-    if (atlasImage.textureObject) {
+    if (atlasImage.textureObject)
+    {
         checkCudaErrors(cudaDestroyTextureObject(atlasImage.textureObject));
     }
 
-    if (atlasImage.dataArray) {
+    if (atlasImage.dataArray)
+    {
         checkCudaErrors(cudaFreeArray(atlasImage.dataArray));
     }
 }

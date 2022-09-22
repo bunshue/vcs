@@ -598,7 +598,8 @@ struct Random_generator {
 ////////////////////////////////////////////////////////////////////////////////
 // Allocate GPU structs, launch kernel and clean up
 ////////////////////////////////////////////////////////////////////////////////
-bool cdpQuadtree(int warp_size) {
+bool cdpQuadtree(int warp_size)
+{
     // Constants to control the algorithm.
     const int num_points = 1024;
     const int max_depth = 8;
@@ -612,39 +613,33 @@ bool cdpQuadtree(int warp_size) {
 
     // Generate random points.
     Random_generator rnd;
-    thrust::generate(
-        thrust::make_zip_iterator(thrust::make_tuple(x_d0.begin(), y_d0.begin())),
-        thrust::make_zip_iterator(thrust::make_tuple(x_d0.end(), y_d0.end())),
-        rnd);
+    thrust::generate(thrust::make_zip_iterator(thrust::make_tuple(x_d0.begin(), y_d0.begin())),
+        thrust::make_zip_iterator(thrust::make_tuple(x_d0.end(), y_d0.end())), rnd);
 
     // Host structures to analyze the device ones.
     Points points_init[2];
-    points_init[0].set(thrust::raw_pointer_cast(&x_d0[0]),
-        thrust::raw_pointer_cast(&y_d0[0]));
-    points_init[1].set(thrust::raw_pointer_cast(&x_d1[0]),
-        thrust::raw_pointer_cast(&y_d1[0]));
+    points_init[0].set(thrust::raw_pointer_cast(&x_d0[0]), thrust::raw_pointer_cast(&y_d0[0]));
+    points_init[1].set(thrust::raw_pointer_cast(&x_d1[0]), thrust::raw_pointer_cast(&y_d1[0]));
 
     // Allocate memory to store points.
     Points* points;
     checkCudaErrors(cudaMalloc((void**)&points, 2 * sizeof(Points)));
-    checkCudaErrors(cudaMemcpy(points, points_init, 2 * sizeof(Points),
-        cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(points, points_init, 2 * sizeof(Points), cudaMemcpyHostToDevice));
 
     // We could use a close form...
     int max_nodes = 0;
 
-    for (int i = 0, num_nodes_at_level = 1; i < max_depth;
-        ++i, num_nodes_at_level *= 4)
+    for (int i = 0, num_nodes_at_level = 1; i < max_depth; ++i, num_nodes_at_level *= 4)
+    {
         max_nodes += num_nodes_at_level;
+    }
 
     // Allocate memory to store the tree.
     Quadtree_node root;
     root.set_range(0, num_points);
     Quadtree_node* nodes;
-    checkCudaErrors(
-        cudaMalloc((void**)&nodes, max_nodes * sizeof(Quadtree_node)));
-    checkCudaErrors(
-        cudaMemcpy(nodes, &root, sizeof(Quadtree_node), cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMalloc((void**)&nodes, max_nodes * sizeof(Quadtree_node)));
+    checkCudaErrors(cudaMemcpy(nodes, &root, sizeof(Quadtree_node), cudaMemcpyHostToDevice));
 
     // We set the recursion limit for CDP to max_depth.
     cudaDeviceSetLimit(cudaLimitDevRuntimeSyncDepth, max_depth);

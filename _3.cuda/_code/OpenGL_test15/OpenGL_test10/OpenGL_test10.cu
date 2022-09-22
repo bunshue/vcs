@@ -189,8 +189,10 @@ int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+
 	glutInitWindowSize(600, 600);
 	glutInitWindowPosition(1100, 200);
+
 	glutCreateWindow("畫茶壺圓椎三角塊");
 
 	init();

@@ -40,8 +40,7 @@ const dim3 windowGridSize(windowSize.x / windowBlockSize.x, windowSize.y / windo
 float lod = 0.5;  // texture mip map level
 
 GLuint pbo;  // OpenGL pixel buffer object
-struct cudaGraphicsResource* cuda_pbo_resource =
-    NULL;  // CUDA Graphics Resource (to transfer PBO)
+struct cudaGraphicsResource* cuda_pbo_resource = NULL;  // CUDA Graphics Resource (to transfer PBO)
 
 bool animate = true;
 
@@ -62,11 +61,13 @@ extern "C" void deinitAtlasAndImages();
 extern "C" void randomizeAtlas();
 extern "C" void renderAtlasImage(dim3 gridSize, dim3 blockSize, uint * d_output, uint imageW, uint imageH, float lod);
 
-void computeFPS() {
+void computeFPS()
+{
     frameCount++;
     fpsCount++;
 
-    if (fpsCount == fpsLimit) {
+    if (fpsCount == fpsLimit)
+    {
         char fps[256];
         float ifps = 1.f / (sdkGetAverageTimerValue(&timer) / 1000.f);
         sprintf(fps, "%3.1f fps", ifps);
@@ -80,16 +81,15 @@ void computeFPS() {
 }
 
 // render image using CUDA
-void render() {
+void render()
+{
     // map PBO to get CUDA device pointer
     checkCudaErrors(cudaGraphicsMapResources(1, &cuda_pbo_resource, 0));
     size_t num_bytes;
-    checkCudaErrors(cudaGraphicsResourceGetMappedPointer(
-        (void**)&d_output, &num_bytes, cuda_pbo_resource));
+    checkCudaErrors(cudaGraphicsResourceGetMappedPointer((void**)&d_output, &num_bytes, cuda_pbo_resource));
 
     // call CUDA kernel, writing results to PBO
-    renderAtlasImage(windowGridSize, windowBlockSize, d_output, windowSize.x,
-        windowSize.y, lod);
+    renderAtlasImage(windowGridSize, windowBlockSize, d_output, windowSize.x, windowSize.y, lod);
 
     getLastCudaError("render_kernel failed");
 
@@ -97,7 +97,8 @@ void render() {
 }
 
 // display results using OpenGL (called by GLUT)
-void display() {
+void display()
+{
     sdkStartTimer(&timer);
 
     render();
@@ -119,22 +120,22 @@ void display() {
     computeFPS();
 }
 
-void idle() {
-    if (animate) {
+void idle()
+{
+    if (animate)
+    {
         lod += 0.02f;
         glutPostRedisplay();
     }
 }
 
-void keyboard(unsigned char key, int x, int y) {
-    switch (key) {
+void keyboard(unsigned char key, int x, int y)
+{
+    switch (key)
+    {
     case 27:
-#if defined(__APPLE__) || defined(MACOSX)
-        exit(EXIT_SUCCESS);
-#else
         glutDestroyWindow(glutGetWindow());
         return;
-#endif
         break;
 
     case '=':
@@ -162,7 +163,8 @@ void keyboard(unsigned char key, int x, int y) {
     glutPostRedisplay();
 }
 
-void reshape(int x, int y) {
+void reshape(int x, int y)
+{
     glViewport(0, 0, x, y);
 
     glMatrixMode(GL_MODELVIEW);
@@ -175,33 +177,34 @@ void reshape(int x, int y) {
 
 // Global cleanup function
 // Shared by both GL and non-GL code paths
-void cleanup() {
+void cleanup()
+{
     sdkDeleteTimer(&timer);
 
     // unregister this buffer object from CUDA C
-    if (cuda_pbo_resource) {
+    if (cuda_pbo_resource)
+    {
         cudaGraphicsUnregisterResource(cuda_pbo_resource);
         glDeleteBuffers(1, &pbo);
     }
 }
 
-void cleanup_all() {
+void cleanup_all()
+{
     cleanup();
     deinitAtlasAndImages();
 }
 
-void initGLBuffers() {
+void initGLBuffers()
+{
     // create pixel buffer object
     glGenBuffers(1, &pbo);
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, pbo);
-    glBufferData(GL_PIXEL_UNPACK_BUFFER_ARB,
-        windowSize.x * windowSize.y * sizeof(GLubyte) * 4, 0,
-        GL_STREAM_DRAW_ARB);
+    glBufferData(GL_PIXEL_UNPACK_BUFFER_ARB, windowSize.x * windowSize.y * sizeof(GLubyte) * 4, 0, GL_STREAM_DRAW_ARB);
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, 0);
 
     // register this buffer object with CUDA
-    checkCudaErrors(cudaGraphicsGLRegisterBuffer(
-        &cuda_pbo_resource, pbo, cudaGraphicsMapFlagsWriteDiscard));
+    checkCudaErrors(cudaGraphicsGLRegisterBuffer(&cuda_pbo_resource, pbo, cudaGraphicsMapFlagsWriteDiscard));
 }
 
 // Load raw data from disk
@@ -259,9 +262,7 @@ void runAutoTest(const char* ref_file, char* exec_path)
     checkCudaErrors(cudaMemcpy(h_output, d_output, windowBytes, cudaMemcpyDeviceToHost));
     sdkDumpBin(h_output, (unsigned int)windowBytes, "bindlessTexture.bin");
 
-    bool bTestResult = sdkCompareBin2BinFloat(
-        "bindlessTexture.bin", sdkFindFilePath(ref_file, exec_path),
-        windowSize.x * windowSize.y, MAX_EPSILON_ERROR, THRESHOLD, exec_path);
+    bool bTestResult = sdkCompareBin2BinFloat("bindlessTexture.bin", sdkFindFilePath(ref_file, exec_path), windowSize.x * windowSize.y, MAX_EPSILON_ERROR, THRESHOLD, exec_path);
 
     checkCudaErrors(cudaFree(d_output));
     free(h_output);

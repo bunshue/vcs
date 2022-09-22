@@ -13,25 +13,26 @@ typedef unsigned int uint;
 typedef unsigned char uchar;
 
 #pragma pack(push, 4)
-struct Image {
-  void *h_data;
-  cudaExtent size;
-  cudaResourceType type;
-  cudaArray_t dataArray;
-  cudaMipmappedArray_t mipmapArray;
-  cudaTextureObject_t textureObject;
+struct Image
+{
+    void* h_data;
+    cudaExtent size;
+    cudaResourceType type;
+    cudaArray_t dataArray;
+    cudaMipmappedArray_t mipmapArray;
+    cudaTextureObject_t textureObject;
 
-  Image() { memset(this, 0, sizeof(Image)); }
+    Image() { memset(this, 0, sizeof(Image)); }
 };
 #pragma pack(pop)
 
-inline void _checkHost(bool test, const char *condition, const char *file,
-                       int line, const char *func) {
-  if (!test) {
-    fprintf(stderr, "HOST error at %s:%d (%s) \"%s\" \n", file, line, condition,
-            func);
-    exit(EXIT_FAILURE);
-  }
+inline void _checkHost(bool test, const char* condition, const char* file, int line, const char* func)
+{
+    if (!test)
+    {
+        fprintf(stderr, "HOST error at %s:%d (%s) \"%s\" \n", file, line, condition, func);
+        exit(EXIT_FAILURE);
+    }
 }
 
 #define checkHost(condition) \

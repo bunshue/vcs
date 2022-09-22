@@ -3,6 +3,7 @@
 #include <vector>
 #include "helper_cuda.h"
 #include "helper_multiprocess.h"
+
 static const char shmName[] = "simpleIPCshm";
 // For direct NVLINK and PCI-E peers, at max 8 simultaneous peers are allowed
 // For NVSWITCH connected peers like DGX-2, simultaneous peers are not limited
@@ -10,58 +11,52 @@ static const char shmName[] = "simpleIPCshm";
 #define MAX_DEVICES (32)
 #define DATA_SIZE (64ULL << 20ULL)  // 64MB
 
-#if defined(__linux__)
-#define cpu_atomic_add32(a, x) __sync_add_and_fetch(a, x)
-#elif defined(WIN32) || defined(_WIN32) || defined(WIN64) || defined(_WIN64)
 #define cpu_atomic_add32(a, x) InterlockedAdd((volatile LONG *)a, x)
-#else
-#error Unsupported system
-#endif
 
 typedef struct shmStruct_st
 {
-  size_t nprocesses;
-  int barrier;
-  int sense;
-  int devices[MAX_DEVICES];
-  cudaIpcMemHandle_t memHandle[MAX_DEVICES];
-  cudaIpcEventHandle_t eventHandle[MAX_DEVICES];
+    size_t nprocesses;
+    int barrier;
+    int sense;
+    int devices[MAX_DEVICES];
+    cudaIpcMemHandle_t memHandle[MAX_DEVICES];
+    cudaIpcEventHandle_t eventHandle[MAX_DEVICES];
 } shmStruct;
 
-__global__ void simpleKernel(char *ptr, int sz, char val)
+__global__ void simpleKernel(char* ptr, int sz, char val)
 {
-  int idx = blockIdx.x * blockDim.x + threadIdx.x;
-  for (; idx < sz; idx += (gridDim.x * blockDim.x))
-  {
-    ptr[idx] = val;
-  }
+    int idx = blockIdx.x * blockDim.x + threadIdx.x;
+    for (; idx < sz; idx += (gridDim.x * blockDim.x))
+    {
+        ptr[idx] = val;
+    }
 }
 
-static void barrierWait(volatile int *barrier, volatile int *sense,unsigned int n)
+static void barrierWait(volatile int* barrier, volatile int* sense, unsigned int n)
 {
-  int count;
+    int count;
 
-  // Check-in
-  count = cpu_atomic_add32(barrier, 1);
-  if (count == n)  // Last one in
-  {
-      *sense = 1;
-  }
-  while (!*sense)
-  {
-      ;
-  }
+    // Check-in
+    count = cpu_atomic_add32(barrier, 1);
+    if (count == n)  // Last one in
+    {
+        *sense = 1;
+    }
+    while (!*sense)
+    {
+        ;
+    }
 
-  // Check-out
-  count = cpu_atomic_add32(barrier, -1);
-  if (count == 0)  // Last one out
-  {
-      *sense = 0;
-  }
-  while (*sense)
-  {
-      ;
-  }
+    // Check-out
+    count = cpu_atomic_add32(barrier, -1);
+    if (count == 0)  // Last one out
+    {
+        *sense = 0;
+    }
+    while (*sense)
+    {
+        ;
+    }
 }
 
 static void childProcess(int id)

@@ -18,7 +18,9 @@ __device__ void print_info(int depth, int thread, int uid, int parent_uid)
     if (threadIdx.x == 0)
     {
         if (depth == 0)
+        {
             printf("BLOCK %d launched by the host\n", uid);
+        }
         else
         {
             char buffer[32];
@@ -29,7 +31,6 @@ __device__ void print_info(int depth, int thread, int uid, int parent_uid)
                 buffer[3 * i + 1] = ' ';
                 buffer[3 * i + 2] = ' ';
             }
-
             buffer[3 * depth] = '\0';
             printf("%sBLOCK %d launched by thread %d of block %d\n", buffer, uid, thread, parent_uid);
         }
@@ -74,29 +75,10 @@ __global__ void cdp_kernel(int max_depth, int depth, int thread, int parent_uid)
 ////////////////////////////////////////////////////////////////////////////////
 int main(int argc, char** argv)
 {
-    printf("starting Simple Print (CUDA Dynamic Parallelism)\n");
+    printf("Starting Simple Print (CUDA Dynamic Parallelism)\n");
 
     // Parse a few command-line arguments.
-    int max_depth = 2;
-
-    if (checkCmdLineFlag(argc, (const char**)argv, "help") || checkCmdLineFlag(argc, (const char**)argv, "h"))
-    {
-        printf("XXXXXXXXXXXXXXXXXX\n");
-        printf("Usage: %s depth=<max_depth>\t(where max_depth is a value between 1 and 8).\n", argv[0]);
-        exit(EXIT_SUCCESS);
-    }
-
-    if (checkCmdLineFlag(argc, (const char**)argv, "depth"))
-    {
-        printf("XXXXXXXXXXXXXXXXXX\n");
-        max_depth = getCmdLineArgumentInt(argc, (const char**)argv, "depth");
-
-        if (max_depth < 1 || max_depth > 8)
-        {
-            printf("depth parameter has to be between 1 and 8\n");
-            exit(EXIT_FAILURE);
-        }
-    }
+    int max_depth = 2;  //depth parameter has to be between 1 and 8
 
     // Find/set the device.
     int device = -1;
