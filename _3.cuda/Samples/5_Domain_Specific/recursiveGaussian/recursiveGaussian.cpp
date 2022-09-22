@@ -87,27 +87,23 @@ int fpsCount = 0;  // FPS count for averaging
 int fpsLimit = 1;  // FPS limit for sampling
 unsigned int frameCount = 0;
 
-int* pArgc = NULL;
-char** pArgv = NULL;
-
 bool runBenchmark = false;
 
 const char* sSDKsample = "CUDA Recursive Gaussian";
 
-extern "C" void transpose(unsigned int* d_src, unsigned int* d_dest,
-    unsigned int width, int height);
+extern "C" void transpose(unsigned int* d_src, unsigned int* d_dest, unsigned int width, int height);
 
-extern "C" void gaussianFilterRGBA(unsigned int* d_src, unsigned int* d_dest,
-    unsigned int* d_temp, int width, int height,
-    float sigma, int order, int nthreads);
+extern "C" void gaussianFilterRGBA(unsigned int* d_src, unsigned int* d_dest, unsigned int* d_temp, int width, int height, float sigma, int order, int nthreads);
 
 void cleanup();
 
-void computeFPS() {
+void computeFPS()
+{
     frameCount++;
     fpsCount++;
 
-    if (fpsCount == fpsLimit) {
+    if (fpsCount == fpsLimit)
+    {
         char fps[256];
         float ifps = 1.f / (sdkGetAverageTimerValue(&timer) / 1000.f);
         sprintf(fps, "%s (sigma=%4.2f): %3.1f fps", sSDKsample, sigma, ifps);
@@ -121,17 +117,16 @@ void computeFPS() {
 }
 
 // display results using OpenGL
-void display() {
+void display()
+{
     sdkStartTimer(&timer);
 
     // execute filter, writing results to pbo
     unsigned int* d_result;
     checkCudaErrors(cudaGraphicsMapResources(1, &cuda_vbo_resource, 0));
     size_t num_bytes;
-    checkCudaErrors(cudaGraphicsResourceGetMappedPointer(
-        (void**)&d_result, &num_bytes, cuda_vbo_resource));
-    gaussianFilterRGBA(d_img, d_result, d_temp, width, height, sigma, order,
-        nthreads);
+    checkCudaErrors(cudaGraphicsResourceGetMappedPointer((void**)&d_result, &num_bytes, cuda_vbo_resource));
+    gaussianFilterRGBA(d_img, d_result, d_temp, width, height, sigma, order, nthreads);
 
     // unmap buffer object
     checkCudaErrors(cudaGraphicsUnmapResources(1, &cuda_vbo_resource, 0));
@@ -140,8 +135,7 @@ void display() {
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, pbo);
     glBindTexture(GL_TEXTURE_2D, texid);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, GL_RGBA,
-        GL_UNSIGNED_BYTE, 0);
+    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, 0);
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, 0);
 
     // display results
@@ -171,34 +165,36 @@ void display() {
 
 void idle() { glutPostRedisplay(); }
 
-void cleanup() {
+void cleanup()
+{
     sdkDeleteTimer(&timer);
 
     checkCudaErrors(cudaFree(d_img));
     checkCudaErrors(cudaFree(d_temp));
 
-    if (!runBenchmark) {
-        if (pbo) {
+    if (!runBenchmark)
+    {
+        if (pbo)
+        {
             // unregister this buffer object with CUDA
             checkCudaErrors(cudaGraphicsUnregisterResource(cuda_vbo_resource));
             glDeleteBuffers(1, &pbo);
         }
 
-        if (texid) {
+        if (texid)
+        {
             glDeleteTextures(1, &texid);
         }
     }
 }
 
-void keyboard(unsigned char key, int x, int y) {
-    switch (key) {
+void keyboard(unsigned char key, int x, int y)
+{
+    switch (key)
+    {
     case 27:
-#if defined(__APPLE__) || defined(MACOSX)
-        exit(EXIT_SUCCESS);
-#else
         glutDestroyWindow(glutGetWindow());
         return;
-#endif
         break;
 
     case '=':
@@ -260,7 +256,8 @@ void reshape(int x, int y) {
     glOrtho(0.0, 1.0, 0.0, 1.0, 0.0, 1.0);
 }
 
-void initCudaBuffers() {
+void initCudaBuffers()
+{
     unsigned int size = width * height * sizeof(unsigned int);
 
     // allocate device memory
@@ -272,28 +269,27 @@ void initCudaBuffers() {
     sdkCreateTimer(&timer);
 }
 
-void initGLBuffers() {
+void initGLBuffers()
+{
     // create pixel buffer object to store final image
     glGenBuffers(1, &pbo);
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, pbo);
-    glBufferData(GL_PIXEL_UNPACK_BUFFER_ARB, width * height * sizeof(GLubyte) * 4,
-        h_img, GL_STREAM_DRAW_ARB);
+    glBufferData(GL_PIXEL_UNPACK_BUFFER_ARB, width * height * sizeof(GLubyte) * 4, h_img, GL_STREAM_DRAW_ARB);
 
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, 0);
-    checkCudaErrors(cudaGraphicsGLRegisterBuffer(
-        &cuda_vbo_resource, pbo, cudaGraphicsRegisterFlagsWriteDiscard));
+    checkCudaErrors(cudaGraphicsGLRegisterBuffer(&cuda_vbo_resource, pbo, cudaGraphicsRegisterFlagsWriteDiscard));
 
     // create texture for display
     glGenTextures(1, &texid);
     glBindTexture(GL_TEXTURE_2D, texid);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA,
-        GL_UNSIGNED_BYTE, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glBindTexture(GL_TEXTURE_2D, 0);
 }
 
-void initGL(int* argc, char** argv) {
+void initGL(int* argc, char** argv)
+{
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
     glutInitWindowSize(width, height);
@@ -303,40 +299,35 @@ void initGL(int* argc, char** argv) {
     glutReshapeFunc(reshape);
     glutIdleFunc(idle);
 
-#if defined(__APPLE__) || defined(MACOSX)
-    atexit(cleanup);
-#else
     glutCloseFunc(cleanup);
-#endif
 
     printf("Press '+' and '-' to change filter width\n");
     printf("0, 1, 2 - change filter order\n");
 
-    if (!isGLVersionSupported(2, 0) ||
-        !areGLExtensionsSupported(
-            "GL_ARB_vertex_buffer_object GL_ARB_pixel_buffer_object")) {
+    if (!isGLVersionSupported(2, 0) || !areGLExtensionsSupported("GL_ARB_vertex_buffer_object GL_ARB_pixel_buffer_object"))
+    {
         fprintf(stderr, "Required OpenGL extensions missing.");
         exit(EXIT_FAILURE);
     }
 }
 
-void benchmark(int iterations) {
+void benchmark(int iterations)
+{
     // allocate memory for result
     unsigned int* d_result;
     unsigned int size = width * height * sizeof(unsigned int);
     checkCudaErrors(cudaMalloc((void**)&d_result, size));
 
     // warm-up
-    gaussianFilterRGBA(d_img, d_result, d_temp, width, height, sigma, order,
-        nthreads);
+    gaussianFilterRGBA(d_img, d_result, d_temp, width, height, sigma, order, nthreads);
 
     checkCudaErrors(cudaDeviceSynchronize());
     sdkStartTimer(&timer);
 
     // execute the kernel
-    for (int i = 0; i < iterations; i++) {
-        gaussianFilterRGBA(d_img, d_result, d_temp, width, height, sigma, order,
-            nthreads);
+    for (int i = 0; i < iterations; i++)
+    {
+        gaussianFilterRGBA(d_img, d_result, d_temp, width, height, sigma, order, nthreads);
     }
 
     checkCudaErrors(cudaDeviceSynchronize());
@@ -346,14 +337,13 @@ void benchmark(int iterations) {
     getLastCudaError("Kernel execution failed");
 
     printf("Processing time: %f (ms)\n", sdkGetTimerValue(&timer));
-    printf("%.2f Mpixels/sec\n",
-        (width * height * iterations / (sdkGetTimerValue(&timer) / 1000.0f)) /
-        1e6);
+    printf("%.2f Mpixels/sec\n", (width * height * iterations / (sdkGetTimerValue(&timer) / 1000.0f)) / 1e6);
 
     checkCudaErrors(cudaFree(d_result));
 }
 
-bool runSingleTest(const char* ref_file, const char* exec_path) {
+bool runSingleTest(const char* ref_file, const char* exec_path)
+{
     // allocate memory for result
     int nTotalErrors = 0;
     unsigned int* d_result;
@@ -361,34 +351,30 @@ bool runSingleTest(const char* ref_file, const char* exec_path) {
     checkCudaErrors(cudaMalloc((void**)&d_result, size));
 
     // warm-up
-    gaussianFilterRGBA(d_img, d_result, d_temp, width, height, sigma, order,
-        nthreads);
+    gaussianFilterRGBA(d_img, d_result, d_temp, width, height, sigma, order, nthreads);
 
     checkCudaErrors(cudaDeviceSynchronize());
     sdkStartTimer(&timer);
 
-    gaussianFilterRGBA(d_img, d_result, d_temp, width, height, sigma, order,
-        nthreads);
+    gaussianFilterRGBA(d_img, d_result, d_temp, width, height, sigma, order, nthreads);
     checkCudaErrors(cudaDeviceSynchronize());
     getLastCudaError("Kernel execution failed");
     sdkStopTimer(&timer);
 
     unsigned char* h_result = (unsigned char*)malloc(width * height * 4);
-    checkCudaErrors(cudaMemcpy(h_result, d_result, width * height * 4,
-        cudaMemcpyDeviceToHost));
+    checkCudaErrors(cudaMemcpy(h_result, d_result, width * height * 4, cudaMemcpyDeviceToHost));
 
     char dump_file[1024];
     sprintf(dump_file, "teapot512_%02d.ppm", (int)sigma);
     sdkSavePPM4ub(dump_file, h_result, width, height);
 
-    if (!sdkComparePPM(dump_file, sdkFindFilePath(ref_file, exec_path),
-        MAX_EPSILON_ERROR, THRESHOLD, false)) {
+    if (!sdkComparePPM(dump_file, sdkFindFilePath(ref_file, exec_path), MAX_EPSILON_ERROR, THRESHOLD, false))
+    {
         nTotalErrors++;
     }
 
     printf("Processing time: %f (ms)\n", sdkGetTimerValue(&timer));
-    printf("%.2f Mpixels/sec\n",
-        (width * height / (sdkGetTimerValue(&timer) / 1000.0f)) / 1e6);
+    printf("%.2f Mpixels/sec\n", (width * height / (sdkGetTimerValue(&timer) / 1000.0f)) / 1e6);
 
     checkCudaErrors(cudaFree(d_result));
     free(h_result);
@@ -402,25 +388,19 @@ bool runSingleTest(const char* ref_file, const char* exec_path) {
 ////////////////////////////////////////////////////////////////////////////////
 // Program main
 ////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char** argv) {
-    pArgc = &argc;
-    pArgv = argv;
+int main(int argc, char** argv)
+{
     char* ref_file = NULL;
 
-#if defined(__linux__)
-    setenv("DISPLAY", ":0", 0);
-#endif
-
     printf("%s Starting...\n\n", sSDKsample);
-
-    printf(
-        "NOTE: The CUDA Samples are not meant for performance measurements. "
-        "Results may vary when GPU Boost is enabled.\n\n");
+    printf("NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.\n\n");
 
     // use command-line specified CUDA device, otherwise use device with highest
     // Gflops/s
-    if (argc > 1) {
-        if (checkCmdLineFlag(argc, (const char**)argv, "file")) {
+    if (argc > 1)
+    {
+        if (checkCmdLineFlag(argc, (const char**)argv, "file"))
+        {
             getCmdLineArgumentString(argc, (const char**)argv, "file", &ref_file);
             fpsLimit = frameCheckNumber;
         }
@@ -429,33 +409,37 @@ int main(int argc, char** argv) {
     // Get the path of the filename
     char* filename;
 
-    if (getCmdLineArgumentString(argc, (const char**)argv, "image", &filename)) {
+    if (getCmdLineArgumentString(argc, (const char**)argv, "image", &filename))
+    {
         image_filename = filename;
     }
 
     // load image
     char* image_path = sdkFindFilePath(image_filename, argv[0]);
 
-    if (image_path == NULL) {
-        fprintf(stderr, "Error unable to find and load image file: '%s'\n",
-            image_filename);
+    if (image_path == NULL)
+    {
+        fprintf(stderr, "Error unable to find and load image file: '%s'\n", image_filename);
         exit(EXIT_FAILURE);
     }
 
     sdkLoadPPM4ub(image_path, (unsigned char**)&h_img, &width, &height);
 
-    if (!h_img) {
+    if (!h_img)
+    {
         printf("Error unable to load PPM file: '%s'\n", image_path);
         exit(EXIT_FAILURE);
     }
 
     printf("Loaded '%s', %d x %d pixels\n", image_path, width, height);
 
-    if (checkCmdLineFlag(argc, (const char**)argv, "threads")) {
+    if (checkCmdLineFlag(argc, (const char**)argv, "threads"))
+    {
         nthreads = getCmdLineArgumentInt(argc, (const char**)argv, "threads");
     }
 
-    if (checkCmdLineFlag(argc, (const char**)argv, "sigma")) {
+    if (checkCmdLineFlag(argc, (const char**)argv, "sigma"))
+    {
         sigma = getCmdLineArgumentFloat(argc, (const char**)argv, "sigma");
     }
 
@@ -466,19 +450,20 @@ int main(int argc, char** argv) {
     cudaGetDevice(&device);
     cudaGetDeviceProperties(&prop, device);
 
-    if (!strncmp("Tesla", prop.name, 5)) {
-        printf(
-            "Tesla card detected, running the test in benchmark mode (no OpenGL "
-            "display)\n");
+    if (!strncmp("Tesla", prop.name, 5))
+    {
+        printf("Tesla card detected, running the test in benchmark mode (no OpenGL display)\n");
         //        runBenchmark = true;
         runBenchmark = true;
     }
 
     // Benchmark or AutoTest mode detected, no OpenGL
-    if (runBenchmark == true || ref_file != NULL) {
+    if (runBenchmark == true || ref_file != NULL)
+    {
         findCudaDevice(argc, (const char**)argv);
     }
-    else {
+    else
+    {
         // First initialize OpenGL context, and then select CUDA device.
         initGL(&argc, argv);
         findCudaDevice(argc, (const char**)argv);
@@ -486,7 +471,8 @@ int main(int argc, char** argv) {
 
     initCudaBuffers();
 
-    if (ref_file) {
+    if (ref_file)
+    {
         printf("(Automated Testing)\n");
         bool testPassed = runSingleTest(ref_file, argv[0]);
 
@@ -494,7 +480,8 @@ int main(int argc, char** argv) {
         exit(testPassed ? EXIT_SUCCESS : EXIT_FAILURE);
     }
 
-    if (runBenchmark) {
+    if (runBenchmark)
+    {
         printf("(Run Benchmark)\n");
         benchmark(100);
 

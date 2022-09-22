@@ -66,7 +66,10 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // 讀取文件內容
     // 絕對路徑 : "D:\\002_Project\\006_Visual_Studio\\OpenGL\\OpenGL\\test.txt"
     // Visual Studio 2019 中使用相對路徑讀取不到文件
-    char* str = (char*)LoadFileContent("D:\\002_Project\\006_Visual_Studio\\OpenGL\\OpenGL\\test.txt");
+
+    //char* str = (char*)LoadFileContent("D:\\002_Project\\006_Visual_Studio\\OpenGL\\OpenGL\\test.txt");
+    char* str = (char*)LoadFileContent("C:\\_git\\vcs\\_6.opengl\\_code\\OpenGL_test08\\test.txt");
+
     printf("%s\n", str);
 
 
@@ -124,7 +127,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     // 設置鏡面反射光反射材質 , 這里設置為黑色 , 不反射光 , 全都吸收
     glMaterialfv(GL_FRONT, GL_SPECULAR, blueMat);
-
 
     // 啟用光照
     glEnable(GL_LIGHTING);

@@ -726,6 +726,34 @@ namespace vcs_Remove_Bin_Obj
                 }
             }
 
+            foldername = @"C:\_git\vcs\_6.opengl\bin_debug64";
+
+            if (Directory.Exists(foldername) == true)    //確認資料夾是否存在
+            {
+                richTextBox1.Text += "資料夾: " + foldername + " 存在\n";
+
+                filenames = Directory.GetFiles(foldername); //獲得文件夾目錄下所有文件全路徑
+                foreach (string filename in filenames)
+                {
+                    if ((filename.Contains("freeglut.dll") == false) && (filename.Contains("glew64.dll") == false))
+                    {
+                        richTextBox1.Text += "remove : " + filename + "\n";
+                        if (File.Exists(filename))  //確認檔案是否存在
+                        {
+                            try
+                            {
+                                File.Delete(filename);
+                                richTextBox1.Text += "已刪除檔案" + filename + "\n";
+                            }
+                            catch
+                            {
+                                richTextBox1.Text += "無法刪除檔案" + filename + "\n";
+                            }
+                        }
+                    }
+                }
+            }
+
             foldername = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_d_emgu\libemgucv-windows-x64-2.3.0.1416\bin";
             if (Directory.Exists(foldername) == true)    //確認資料夾是否存在
             {

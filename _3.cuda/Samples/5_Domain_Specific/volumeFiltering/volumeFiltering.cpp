@@ -26,15 +26,7 @@
 
   // OpenGL Graphics includes
 #include <helper_gl.h>
-#if defined (__APPLE__) || defined(MACOSX)
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#include <GLUT/glut.h>
-#ifndef glutCloseFunc
-#define glutCloseFunc glutWMCloseFunc
-#endif
-#else
 #include <GL/freeglut.h>
-#endif
 
 // CUDA Runtime and Interop
 #include <cuda_runtime.h>

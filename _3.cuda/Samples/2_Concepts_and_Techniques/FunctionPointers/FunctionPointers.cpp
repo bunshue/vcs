@@ -81,8 +81,7 @@ void computeFPS()
     {
         char fps[256];
         float ifps = 1.f / (sdkGetAverageTimerValue(&timer) / 1000.f);
-        sprintf(fps, "FunctionPointers [CUDA Edge Detection] (%s): %3.1f fps",
-            filterMode[g_SobelDisplayMode], ifps);
+        sprintf(fps, "FunctionPointers [CUDA Edge Detection] (%s): %3.1f fps", filterMode[g_SobelDisplayMode], ifps);
 
         glutSetWindowTitle(fps);
         fpsCount = 0;
@@ -103,20 +102,17 @@ void display(void)
     // map PBO to get CUDA device pointer
     checkCudaErrors(cudaGraphicsMapResources(1, &cuda_pbo_resource, 0));
     size_t num_bytes;
-    checkCudaErrors(cudaGraphicsResourceGetMappedPointer(
-        (void**)&data, &num_bytes, cuda_pbo_resource));
+    checkCudaErrors(cudaGraphicsResourceGetMappedPointer((void**)&data, &num_bytes, cuda_pbo_resource));
     // printf("CUDA mapped PBO: May access %ld bytes\n", num_bytes);
 
-    sobelFilter(data, imWidth, imHeight, g_SobelDisplayMode, imageScale, blockOp,
-        pointOp);
+    sobelFilter(data, imWidth, imHeight, g_SobelDisplayMode, imageScale, blockOp, pointOp);
     checkCudaErrors(cudaGraphicsUnmapResources(1, &cuda_pbo_resource, 0));
 
     glClear(GL_COLOR_BUFFER_BIT);
 
     glBindTexture(GL_TEXTURE_2D, texid);
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbo_buffer);
-    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, imWidth, imHeight, GL_LUMINANCE,
-        GL_UNSIGNED_BYTE, OFFSET(0));
+    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, imWidth, imHeight, GL_LUMINANCE, GL_UNSIGNED_BYTE, OFFSET(0));
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
 
     glDisable(GL_DEPTH_TEST);
@@ -146,7 +142,8 @@ void display(void)
 
 void timerEvent(int value)
 {
-    if (glutGetWindow()) {
+    if (glutGetWindow())
+    {
         glutPostRedisplay();
         glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
     }
@@ -156,7 +153,8 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
     char temp[256];
 
-    switch (key) {
+    switch (key)
+    {
     case 27:
         glutDestroyWindow(glutGetWindow());
         return;
@@ -175,24 +173,21 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
     case 'i':
     case 'I':
         g_SobelDisplayMode = SOBELDISPLAY_IMAGE;
-        sprintf(temp, "Function Pointers [CUDA Edge Detection] (%s)",
-            filterMode[g_SobelDisplayMode]);
+        sprintf(temp, "Function Pointers [CUDA Edge Detection] (%s)", filterMode[g_SobelDisplayMode]);
         glutSetWindowTitle(temp);
         break;
 
     case 's':
     case 'S':
         g_SobelDisplayMode = SOBELDISPLAY_SOBELSHARED;
-        sprintf(temp, "Function Pointers [CUDA Edge Detection] (%s)",
-            filterMode[g_SobelDisplayMode]);
+        sprintf(temp, "Function Pointers [CUDA Edge Detection] (%s)", filterMode[g_SobelDisplayMode]);
         glutSetWindowTitle(temp);
         break;
 
     case 't':
     case 'T':
         g_SobelDisplayMode = SOBELDISPLAY_SOBELTEX;
-        sprintf(temp, "Function Pointers [CUDA Edge Detection] (%s)",
-            filterMode[g_SobelDisplayMode]);
+        sprintf(temp, "Function Pointers [CUDA Edge Detection] (%s)", filterMode[g_SobelDisplayMode]);
         glutSetWindowTitle(temp);
         break;
 
@@ -272,32 +267,29 @@ void initializeData(char* file)
 
     memset(pixels, 0x0, g_Bpp * sizeof(Pixel) * imWidth * imHeight);
 
-    if (!g_bQAReadback) {
+    if (!g_bQAReadback)
+    {
         // use OpenGL Path
         glGenBuffers(1, &pbo_buffer);
         glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbo_buffer);
-        glBufferData(GL_PIXEL_UNPACK_BUFFER,
-            g_Bpp * sizeof(Pixel) * imWidth * imHeight, pixels,
-            GL_STREAM_DRAW);
+        glBufferData(GL_PIXEL_UNPACK_BUFFER, g_Bpp * sizeof(Pixel) * imWidth * imHeight, pixels, GL_STREAM_DRAW);
 
         glGetBufferParameteriv(GL_PIXEL_UNPACK_BUFFER, GL_BUFFER_SIZE, &bsize);
 
-        if ((GLuint)bsize != (g_Bpp * sizeof(Pixel) * imWidth * imHeight)) {
-            printf("Buffer object (%d) has incorrect size (%d).\n",
-                (unsigned)pbo_buffer, (unsigned)bsize);
+        if ((GLuint)bsize != (g_Bpp * sizeof(Pixel) * imWidth * imHeight))
+        {
+            printf("Buffer object (%d) has incorrect size (%d).\n", (unsigned)pbo_buffer, (unsigned)bsize);
             exit(EXIT_FAILURE);
         }
 
         glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
 
         // register this buffer object with CUDA
-        checkCudaErrors(cudaGraphicsGLRegisterBuffer(
-            &cuda_pbo_resource, pbo_buffer, cudaGraphicsMapFlagsWriteDiscard));
+        checkCudaErrors(cudaGraphicsGLRegisterBuffer(&cuda_pbo_resource, pbo_buffer, cudaGraphicsMapFlagsWriteDiscard));
 
         glGenTextures(1, &texid);
         glBindTexture(GL_TEXTURE_2D, texid);
-        glTexImage2D(GL_TEXTURE_2D, 0, ((g_Bpp == 1) ? GL_LUMINANCE : GL_BGRA),
-            imWidth, imHeight, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, NULL);
+        glTexImage2D(GL_TEXTURE_2D, 0, ((g_Bpp == 1) ? GL_LUMINANCE : GL_BGRA), imWidth, imHeight, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, NULL);
         glBindTexture(GL_TEXTURE_2D, 0);
 
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -400,7 +392,8 @@ void runAutoTest(int argc, char* argv[])
     checkCudaErrors(cudaFree(d_result));
     free(h_result);
 
-    if (g_TotalErrors != 0) {
+    if (g_TotalErrors != 0)
+    {
         printf("Test failed!\n");
         exit(EXIT_FAILURE);
     }
@@ -414,7 +407,7 @@ int main(int argc, char** argv)
     pArgc = &argc;
     pArgv = argv;
 
-    printf("\n%s Starting...\n\n", argv[0]);
+    printf("Starting...\n\n");
 
     if (checkCmdLineFlag(argc, (const char**)argv, "help"))
     {
@@ -438,12 +431,8 @@ int main(int argc, char** argv)
     if (checkCmdLineFlag(argc, (const char**)argv, "device"))
     {
         printf("XXXXXXXXXXXXXXXXXXXXXXXX\n");
-        printf(
-            "   This SDK does not explicitly support -device=n when running with "
-            "OpenGL.\n");
-        printf(
-            "   When specifying -device=n (n=0,1,2,....) the sample must not use "
-            "OpenGL.\n");
+        printf("   This SDK does not explicitly support -device=n when running with OpenGL.\n");
+        printf("   When specifying -device=n (n=0,1,2,....) the sample must not use OpenGL.\n");
         printf("   See details below to run without OpenGL:\n\n");
         printf(" > %s -device=n\n\n", argv[0]);
         printf("exiting...\n");
