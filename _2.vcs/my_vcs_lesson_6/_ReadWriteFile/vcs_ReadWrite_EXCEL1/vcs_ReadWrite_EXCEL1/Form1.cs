@@ -151,7 +151,7 @@ namespace vcs_ReadWrite_EXCEL1
             }
             else
             {
-                richTextBox1.Text += "開始開啟檔案: " + filename + "\n";
+                richTextBox1.Text += "開啟檔案: " + filename + "\n";
             }
 
             //string xlsPath = @"C:\tttt.xls";
@@ -399,8 +399,8 @@ namespace vcs_ReadWrite_EXCEL1
                 sw.WriteLine(s);
             }
             sw.Close();     //寫入Excel檔資料
-            richTextBox1.Text += "製作Excel檔案於: " + filename + "，此檔不能用程式讀取。" + Environment.NewLine;
+
+            richTextBox1.Text += "存檔檔名: " + filename + "，此檔不能用程式讀取。\n";
         }
     }
 }
-

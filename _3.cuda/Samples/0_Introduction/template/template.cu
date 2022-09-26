@@ -46,25 +46,16 @@ __global__ void testKernel(float* g_idata, float* g_odata)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// Program main
-////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char** argv)
-{
-    runTest(argc, argv);
-}
-
-////////////////////////////////////////////////////////////////////////////////
 //! Run a simple test for CUDA
 ////////////////////////////////////////////////////////////////////////////////
 void runTest(int argc, char** argv)
 {
     bool bTestResult = true;
 
-    printf("%s Starting...\n\n", argv[0]);
+    printf("Starting...\n\n");
 
-    // use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
-    int devID = findCudaDevice(argc, (const char**)argv);
+    // use command-line specified CUDA device, otherwise use device with highest Gflops/s
+    // int devID = findCudaDevice(argc, (const char**)argv);
 
     StopWatchInterface* timer = 0;
     sdkCreateTimer(&timer);
@@ -135,6 +126,39 @@ void runTest(int argc, char** argv)
     checkCudaErrors(cudaFree(d_idata));
     checkCudaErrors(cudaFree(d_odata));
 
-    exit(bTestResult ? EXIT_SUCCESS : EXIT_FAILURE);
+    //exit(bTestResult ? EXIT_SUCCESS : EXIT_FAILURE);
+}
+
+void test_sdkWriteFile()
+{
+    char* filename = "test.bin";
+
+    unsigned int num_threads = 32;
+    unsigned int mem_size = sizeof(float) * num_threads;
+    float* h_odata = (float*)malloc(mem_size);
+
+    int i;
+    for (i = 0; i < num_threads; i++)
+    {
+        h_odata[i] = (float)i;
+    }
+
+    sdkWriteFile(filename, h_odata, num_threads, 0.0f, false);
+
+
+    free(h_odata);
+
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Program main
+////////////////////////////////////////////////////////////////////////////////
+int main(int argc, char** argv)
+{
+    runTest(argc, argv);
+
+    printf("do test_sdkWriteFile\n");
+    test_sdkWriteFile();
+
 }
 

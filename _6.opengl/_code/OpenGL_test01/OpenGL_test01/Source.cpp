@@ -47,7 +47,34 @@ void drawGrid(int xmin, int xmax, int ymin, int ymax)
     }
 }
 
-//display_mode = 6
+//display_mode = 8  //畫茶壺
+
+void init8()
+{
+    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glMatrixMode(GL_PROJECTION);
+    glOrtho(-5, 5, -5, 5, 5, 15);
+    glMatrixMode(GL_MODELVIEW);
+    gluLookAt(0, 0, 10, 0, 0, 0, 0, 1, 0);
+}
+
+//display_mode = 9  //畫矩形
+
+void init9(void)
+{
+    glClearColor(0.0, 0.0, 0.0, 0.0);/* select clearing color   */
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0);/* initialize viewing values   */
+}
+
+//display_mode = 10  //畫矩形
+
+void init10(void)
+{
+    glOrtho(0.0f, 300.0f, 0.0f, 300.0f, 1.0, -1.0);//設置窗口坐標系大小
+    glClearColor(0.4f, 1.f, 0.8f, 1.0f);//設置背景色
+}
 
 // 繪圖回調函數
 void display(void)
@@ -55,6 +82,12 @@ void display(void)
     if (display_mode == 0)
     {
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
+
+        //or
+        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);   // 設置清除窗口背景色為白色
+        glClear(GL_COLOR_BUFFER_BIT);// 進行窗口清理
+        glFlush();       // 刷新OpenGL中的命令列和，使所有尚未被行的命令行
+
 
         //設定預設大小...
     }
@@ -274,9 +307,54 @@ void display(void)
     }
     else if (display_mode == 8)
     {
+    //畫茶壺
+    glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
+
+    glClear(GL_COLOR_BUFFER_BIT);
+    glColor3f(1.0, 0, 0);
+    glutWireTeapot(3);
+    glFlush();
+
+
+
     }
     else if (display_mode == 9)
     {
+        //display_mode = 9  //畫矩形
+        glClear(GL_COLOR_BUFFER_BIT);/* clear all pixels   */
+        glColor3f(1.0, 1.0, 1.0);
+        glBegin(GL_POLYGON);/* draw white polygon with corners at(0.25, 0.25, 0.0) and (0.75, 0.75, 0.0)*/
+        glVertex3f(0.25, 0.25, 0.0);
+        glVertex3f(0.75, 0.25, 0.0);
+        glVertex3f(0.75, 0.75, 0.0);
+        glVertex3f(0.25, 0.75, 0.0);
+        glEnd();
+        glFlush();/* start processing buffered OpenGL routines   */
+    }
+    else if (display_mode == 10)
+    {
+    //display_mode = 10  //畫
+    glClear(GL_COLOR_BUFFER_BIT);//清空顏色緩沖池
+    glColor3f(1.0f, 1.0f, 0.0f);//設置繪圖顏色
+    glRectf(100.0f, 100.0f, 200.0f, 200.0f);//繪制矩形
+    glFlush();//刷新緩沖
+
+
+
+    }
+    else if (display_mode == 11)
+    {
+    //display_mode = 11  //畫
+
+
+
+    }
+    else if (display_mode == 12)
+    {
+    //display_mode = 12  //畫
+
+
+
     }
     else
     {
@@ -321,9 +399,30 @@ static void keyboard(unsigned char key, int x, int y)
         break;
     case '8':
         display_mode = 8;
+        init8();
         break;
     case '9':
         display_mode = 9;
+        init9();
+        break;
+    case 'a':
+        display_mode = 10;
+        init10();
+        break;
+    case 'b':
+        display_mode = 11;
+        break;
+    case 'c':
+        display_mode = 12;
+        break;
+    case 'd':
+        display_mode = 13;
+        break;
+    case 'e':
+        display_mode = 14;
+        break;
+    case 'f':
+        display_mode = 15;
         break;
     case 27:
         exit(0);
@@ -353,7 +452,7 @@ int main(int argc, char* argv[])
 
     //glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
     //glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);    //宣告顯示模式為 Single Buffer 和 RGBA
 
     glutInitWindowSize(600, 600);       // 設定視窗大小
     glutInitWindowPosition(1100, 200);  // 設定視窗位置

@@ -467,9 +467,12 @@ inline bool sdkReadFileBlocks(const char *filename, T **data, unsigned int *len,
 //////////////////////////////////////////////////////////////////////////////
 template <class T, class S>
 inline bool sdkWriteFile(const char *filename, const T *data, unsigned int len,
-                         const S epsilon, bool verbose, bool append = false) {
+                         const S epsilon, bool verbose, bool append = false)
+{
   assert(NULL != filename);
   assert(NULL != data);
+
+  printf("sdkWriteFile : %s\n", filename);
 
   // open file for writing
   //    if (append) {

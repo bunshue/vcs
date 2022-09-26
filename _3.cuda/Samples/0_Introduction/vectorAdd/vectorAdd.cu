@@ -185,6 +185,7 @@ int main(void)
     return 0;
 }
 
+/*
 void printData(byte* h_A, byte* h_B, byte* h_C, int len)
 {
     for (int i = 0; i < len; i++)
@@ -203,3 +204,4 @@ void printData(byte* h_A, byte* h_B, byte* h_C, int len)
     }
     printf("\n");
 }
+*/

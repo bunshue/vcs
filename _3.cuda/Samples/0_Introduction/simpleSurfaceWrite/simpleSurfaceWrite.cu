@@ -77,8 +77,6 @@ __global__ void transformKernel(float* gOData, int width, int height, float thet
     gOData[y * width + x] = tex2D<float>(tex, tu, tv);
 }
 
-extern "C" void computeGold(float* reference, float* idata, const unsigned int len);
-
 ////////////////////////////////////////////////////////////////////////////////
 //! Run a simple test for CUDA
 ////////////////////////////////////////////////////////////////////////////////
@@ -92,12 +90,14 @@ void runTest(int argc, char** argv)
     cudaDeviceProp deviceProps;
 
     checkCudaErrors(cudaGetDeviceProperties(&deviceProps, devID));
-    printf("CUDA device [%s] has %d Multi-Processors, SM %d.%d\n", deviceProps.name, deviceProps.multiProcessorCount, deviceProps.major, deviceProps.minor);
+    printf("CUDA device [%s] has %d Multi-Processors, SM %d.%d\n\n", deviceProps.name, deviceProps.multiProcessorCount, deviceProps.major, deviceProps.minor);
 
     // Load image from disk
     float* hData = NULL;
     unsigned int width, height;
     char* imagePath = sdkFindFilePath(imageFilename, argv[0]);
+
+    printf("imagePath : %s\n", imagePath);
 
     if (imagePath == NULL)
     {
@@ -108,19 +108,21 @@ void runTest(int argc, char** argv)
     sdkLoadPGM(imagePath, &hData, &width, &height);
 
     unsigned int size = width * height * sizeof(float);
-    printf("Loaded '%s', %d x %d pixels\n", imageFilename, width, height);
+    printf("Loaded '%s', %d x %d pixels\n\n", imageFilename, width, height);
 
     // Load reference image from image (output)
     float* hDataRef = (float*)malloc(size);
     char* refPath = sdkFindFilePath(refFilename, argv[0]);
+    printf("refPath : %s\n", refPath);
 
     if (refPath == NULL)
     {
         printf("Unable to find reference image file: %s\n", refFilename);
         exit(EXIT_FAILURE);
     }
-
     sdkLoadPGM(refPath, &hDataRef, &width, &height);
+
+    printf("Loaded '%s', %d x %d pixels\n\n", refPath, width, height);
 
     // Allocate device memory for result
     float* dData = NULL;
@@ -196,7 +198,7 @@ void runTest(int argc, char** argv)
     char outputFilename[1024];
     strcpy(outputFilename, "output.pgm");
     sdkSavePGM("output.pgm", hOData, width, height);
-    printf("Wrote '%s'\n", outputFilename);
+    printf("outputFilename : %s\n", outputFilename);
 
     // Write regression file if necessary
     if (checkCmdLineFlag(argc, (const char**)argv, "regression"))
@@ -231,32 +233,9 @@ int main(int argc, char** argv)
 {
     printf("Starting...\n");
 
-    // Process command-line arguments
-    if (argc > 1)
-    {
-        if (checkCmdLineFlag(argc, (const char**)argv, "input"))
-        {
-            getCmdLineArgumentString(argc, (const char**)argv, "input", (char**)&imageFilename);
-
-            if (checkCmdLineFlag(argc, (const char**)argv, "reference"))
-            {
-                getCmdLineArgumentString(argc, (const char**)argv, "reference", (char**)&refFilename);
-            }
-            else
-            {
-                printf("-input flag should be used with -reference flag");
-                exit(EXIT_FAILURE);
-            }
-        }
-        else if (checkCmdLineFlag(argc, (const char**)argv, "reference"))
-        {
-            printf("-reference flag should be used with -input flag");
-            exit(EXIT_FAILURE);
-        }
-    }
-
     runTest(argc, argv);
 
     printf("Completed, returned %s\n", testResult ? "OK" : "ERROR!");
     exit(testResult ? EXIT_SUCCESS : EXIT_FAILURE);
 }
+

@@ -13,8 +13,10 @@
 #define MAX(a, b) (a > b ? a : b)
 #endif
 
+//int total_thread = 0;
 __global__ void testKernel(int val)
 {
+    /*
     printf("blockIdx.x = %d\n", blockIdx.x);
     printf("blockIdx.y = %d\n", blockIdx.y);
     printf("gridDim.x = %d\n", gridDim.x);
@@ -24,9 +26,13 @@ __global__ void testKernel(int val)
     printf("threadIdx.x = %d\n", threadIdx.x);
     printf("threadIdx.y = %d\n", threadIdx.y);
     printf("threadIdx.z = %d\n", threadIdx.z);
+    */
 
     printf("testKernel [%d, %d]:\tValue is : %d\n",
-        blockIdx.y * gridDim.x + blockIdx.x, threadIdx.z * blockDim.x * blockDim.y + threadIdx.y * blockDim.x + threadIdx.x, val);
+        blockIdx.y * gridDim.x + blockIdx.x,
+        threadIdx.z * blockDim.x * blockDim.y + threadIdx.y * blockDim.x + threadIdx.x,
+        val);
+    //total_thread++;
 }
 
 int main(int argc, char** argv)
@@ -49,12 +55,14 @@ int main(int argc, char** argv)
 
     // Kernel configuration, where a two-dimensional grid and three-dimensional blocks are configured.
 
-    dim3 dimGrid(2, 2);
-    dim3 dimBlock(2, 2, 2);
+    dim3 dimGrid(3, 3);     //MXN個block
+    dim3 dimBlock(2, 2, 2); //每個block內有AXBXC個thread
 
     testKernel << <dimGrid, dimBlock >> > (10);
 
     cudaDeviceSynchronize();
+
+    //printf("total_thread  = %d\n", total_thread);
 
     return EXIT_SUCCESS;
 }

@@ -1,6 +1,8 @@
 // USE_TEXSUBIMAGE2D uses glTexSubImage2D() to update the final result
 // commenting it will make the sample use the other way :
 // map a texture in CUDA and blit the result into it
+
+//有沒有define這個 看起來差不多
 #define USE_TEXSUBIMAGE2D
 
 #if defined(WIN32) || defined(_WIN32) || defined(WIN64) || defined(_WIN64)
