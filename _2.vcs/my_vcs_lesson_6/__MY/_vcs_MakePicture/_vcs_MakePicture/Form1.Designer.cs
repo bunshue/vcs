@@ -861,6 +861,7 @@
             this.button56.Name = "button56";
             this.button56.Size = new System.Drawing.Size(60, 60);
             this.button56.TabIndex = 60;
+            this.button56.Text = "製作桌布";
             this.button56.UseVisualStyleBackColor = true;
             this.button56.Click += new System.EventHandler(this.button56_Click);
             // 

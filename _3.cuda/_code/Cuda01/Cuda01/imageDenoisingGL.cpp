@@ -10,6 +10,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include "imageDenoising.h"
 
 // includes, project
@@ -28,12 +29,13 @@ int mode = 2;   //0: 自製圖片資料, 1: 使用圖片640X480, 2: 使用圖片1920X1080
 // Source image on the host side
 uchar4* h_Src1;
 uchar4* h_Src2;
-int imageW, imageH;
+int imageW;
+int imageH;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Main program
 ////////////////////////////////////////////////////////////////////////////////
-bool g_FPS = false;
+bool flag_print_fps_info = false;
 StopWatchInterface* timer = NULL;
 
 const int frameN = 24;
@@ -153,10 +155,10 @@ void display(void)
     {
         frameCounter = 0;
 
-        if (g_FPS)
+        if (flag_print_fps_info == true)
         {
             printf("FPS: %3.1f\n", frameN / (sdkGetTimerValue(&timer) * 0.001));
-            g_FPS = false;
+            flag_print_fps_info = false;
         }
     }
 
@@ -212,7 +214,7 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
 
     case 'f':
     case 'F':
-        g_FPS = true;
+        flag_print_fps_info = true;
         break;
 
     case '?':

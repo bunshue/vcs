@@ -14,13 +14,14 @@
 #endif
 
 /* Add two vectors on the GPU */
-__global__ void vectorAddGPU(float *a, float *b, float *c, int N)
+__global__ void vectorAddGPU(float* a, float* b, float* c, int N)
 {
-  int idx = blockIdx.x * blockDim.x + threadIdx.x;
+    int idx = blockIdx.x * blockDim.x + threadIdx.x;
 
-  if (idx < N) {
-    c[idx] = a[idx] + b[idx];
-  }
+    if (idx < N)
+    {
+        c[idx] = a[idx] + b[idx];
+    }
 }
 
 // Allocate generic memory with malloc() and pin it laster instead of using
@@ -49,9 +50,7 @@ int main(int argc, char** argv)
         printf("Usage:  simpleZeroCopy [OPTION]\n\n");
         printf("Options:\n");
         printf("  --device=[device #]  Specify the device to be used\n");
-        printf(
-            "  --use_generic_memory (optional) use generic page-aligned for system "
-            "memory\n");
+        printf("  --use_generic_memory (optional) use generic page-aligned for system memory\n");
         return EXIT_SUCCESS;
     }
 
@@ -61,10 +60,9 @@ int main(int argc, char** argv)
         cudaGetDeviceCount(&deviceCount);
         idev = atoi(device);
 
-        if (idev >= deviceCount || idev < 0) {
-            fprintf(stderr,
-                "Device number %d is invalid, will use default CUDA device 0.\n",
-                idev);
+        if (idev >= deviceCount || idev < 0)
+        {
+            fprintf(stderr, "Device number %d is invalid, will use default CUDA device 0.\n", idev);
             idev = 0;
         }
     }
@@ -77,12 +75,7 @@ int main(int argc, char** argv)
 
     if (checkCmdLineFlag(argc, (const char**)argv, "use_generic_memory"))
     {
-#if defined(__APPLE__) || defined(MACOSX)
-        bPinGenericMemory = false;  // Generic Pinning of System Paged memory is not
-                                    // currently supported on Mac OSX
-#else
         bPinGenericMemory = true;
-#endif
     }
 
     if (bPinGenericMemory)
@@ -101,8 +94,6 @@ int main(int argc, char** argv)
 
     checkCudaErrors(cudaGetDeviceProperties(&deviceProp, idev));
 
-#if CUDART_VERSION >= 2020
-
     if (!deviceProp.canMapHostMemory)
     {
         fprintf(stderr, "Device %d does not support mapping CPU host memory!\n", idev);
@@ -111,27 +102,6 @@ int main(int argc, char** argv)
     }
 
     checkCudaErrors(cudaSetDeviceFlags(cudaDeviceMapHost));
-#else
-    fprintf(stderr,
-        "CUDART version %d.%d does not support "
-        "<cudaDeviceProp.canMapHostMemory> field\n",
-        , CUDART_VERSION / 1000, (CUDART_VERSION % 100) / 10);
-
-    exit(EXIT_SUCCESS);
-#endif
-
-#if CUDART_VERSION < 4000
-
-    if (bPinGenericMemory) {
-        fprintf(
-            stderr,
-            "CUDART version %d.%d does not support <cudaHostRegister> function\n",
-            CUDART_VERSION / 1000, (CUDART_VERSION % 100) / 10);
-
-        exit(EXIT_SUCCESS);
-    }
-
-#endif
 
     /* Allocate mapped CPU memory. */
 
@@ -140,7 +110,6 @@ int main(int argc, char** argv)
 
     if (bPinGenericMemory)
     {
-#if CUDART_VERSION >= 4000
         a_UA = (float*)malloc(bytes + MEMORY_ALIGNMENT);
         b_UA = (float*)malloc(bytes + MEMORY_ALIGNMENT);
         c_UA = (float*)malloc(bytes + MEMORY_ALIGNMENT);
@@ -154,16 +123,13 @@ int main(int argc, char** argv)
         checkCudaErrors(cudaHostRegister(a, bytes, cudaHostRegisterMapped));
         checkCudaErrors(cudaHostRegister(b, bytes, cudaHostRegisterMapped));
         checkCudaErrors(cudaHostRegister(c, bytes, cudaHostRegisterMapped));
-#endif
     }
     else
     {
-#if CUDART_VERSION >= 2020
         flags = cudaHostAllocMapped;
         checkCudaErrors(cudaHostAlloc((void**)&a, bytes, flags));
         checkCudaErrors(cudaHostAlloc((void**)&b, bytes, flags));
         checkCudaErrors(cudaHostAlloc((void**)&c, bytes, flags));
-#endif
     }
 
     /* Initialize the vectors. */
@@ -173,17 +139,13 @@ int main(int argc, char** argv)
         b[n] = rand() / (float)RAND_MAX;
     }
 
-    /* Get the device pointers for the pinned CPU memory mapped into the GPU
-       memory space. */
+    // Get the device pointers for the pinned CPU memory mapped into the GPU memory space.
 
-#if CUDART_VERSION >= 2020
     checkCudaErrors(cudaHostGetDevicePointer((void**)&d_a, (void*)a, 0));
     checkCudaErrors(cudaHostGetDevicePointer((void**)&d_b, (void*)b, 0));
     checkCudaErrors(cudaHostGetDevicePointer((void**)&d_c, (void*)c, 0));
-#endif
 
-    /* Call the GPU kernel using the CPU pointers residing in CPU mapped memory.
-     */
+    // Call the GPU kernel using the CPU pointers residing in CPU mapped memory.
     printf("> vectorAddGPU kernel will add vectors using mapped CPU memory...\n");
     dim3 block(256);
     dim3 grid((unsigned int)ceil(nelem / (float)block.x));
@@ -197,7 +159,8 @@ int main(int argc, char** argv)
     errorNorm = 0.f;
     refNorm = 0.f;
 
-    for (n = 0; n < nelem; n++) {
+    for (n = 0; n < nelem; n++)
+    {
         ref = a[n] + b[n];
         diff = c[n] - ref;
         errorNorm += diff * diff;
@@ -213,23 +176,23 @@ int main(int argc, char** argv)
 
     if (bPinGenericMemory)
     {
-#if CUDART_VERSION >= 4000
         checkCudaErrors(cudaHostUnregister(a));
         checkCudaErrors(cudaHostUnregister(b));
         checkCudaErrors(cudaHostUnregister(c));
         free(a_UA);
         free(b_UA);
         free(c_UA);
-#endif
     }
     else
     {
-#if CUDART_VERSION >= 2020
         checkCudaErrors(cudaFreeHost(a));
         checkCudaErrors(cudaFreeHost(b));
         checkCudaErrors(cudaFreeHost(c));
-#endif
     }
+
+    printf("CUDART_VERSION = %d\n", CUDART_VERSION);
+
+    printf("CUDART version %d.%d\n", CUDART_VERSION / 1000, (CUDART_VERSION % 100) / 10);
 
     exit(errorNorm / refNorm < 1.e-6f ? EXIT_SUCCESS : EXIT_FAILURE);
 }

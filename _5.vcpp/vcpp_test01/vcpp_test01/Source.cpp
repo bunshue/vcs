@@ -92,6 +92,15 @@ int main()
     //System("pause");
     //getchar();//©Îsystem("pause");
 
+    char k1 = '5';
+    int k2 = atoi(&k1);
+    printf("k1 = %c\n", k1);
+    printf("k2 = %d\n", k2);
+
+    //char* k3 = "FF";
+    //int k4 = atoi(k3);
+    //printf("k3 = %s\n", k3);
+    //printf("k4 = %d\n", k4);
 
 
     return 0;

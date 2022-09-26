@@ -5,6 +5,7 @@
 #include "helper_multiprocess.h"
 
 static const char shmName[] = "simpleIPCshm";
+
 // For direct NVLINK and PCI-E peers, at max 8 simultaneous peers are allowed
 // For NVSWITCH connected peers like DGX-2, simultaneous peers are not limited
 // in the same way.
@@ -303,6 +304,7 @@ static void parentProcess(char* app)
 
 int main(int argc, char** argv)
 {
+    printf("\nmain start, argc = %d\n", argc);
     if (argc == 1)
     {
         parentProcess(argv[0]);

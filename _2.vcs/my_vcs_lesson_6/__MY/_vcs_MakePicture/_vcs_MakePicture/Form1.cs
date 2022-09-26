@@ -2180,6 +2180,38 @@ namespace _vcs_MakePicture
 
         private void button56_Click(object sender, EventArgs e)
         {
+            //製作桌布
+            int width;
+            int height;
+
+            width = 1920 / 2;
+            height = 1080 / 2;
+            bitmap1 = new Bitmap(width, height);
+
+            g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+
+            int x_st = 0;
+            int y_st = 0;
+            int dx = 100;
+            int dy = 100;
+
+            int i;
+            for (i = 0; i <= width; i += dx)
+            {
+                g.DrawLine(Pens.Black, i, 0, i, height);
+
+            }
+            for (i = 0; i <= height; i += dx)
+            {
+                g.DrawLine(Pens.Black, 0, i, width, i);
+
+            }
+
+            g.DrawRectangle(Pens.Red, 0, 0, width - 1, height - 1);
+
+
+            pictureBox1.Image = bitmap1;
 
         }
 
