@@ -54,8 +54,7 @@ struct Ray {
 // declaration, forward
 int runTest(int argc, char** argv);
 __global__ void computeAngles_kernel(const Ray, float*, cudaTextureObject_t);
-__global__ void computeVisibilities_kernel(const float*, const float*, int,
-    Bool*);
+__global__ void computeVisibilities_kernel(const float*, const float*, int, Bool*);
 void lineOfSight_gold(const HeightField, const Ray, Bool*);
 __device__ __host__ float2 getLocation(const Ray, int);
 __device__ __host__ float getAngle(const Ray, float2, float);
@@ -113,8 +112,7 @@ int runTest(int argc, char** argv)
     checkCudaErrors(cudaMallocArray(&heightFieldArray, &channelDesc, dim.x, dim.y));
 
     // Initialize device memory
-    checkCudaErrors(cudaMemcpy2DToArray(
-        heightFieldArray, 0, 0, heightField.height, dim.x * sizeof(float),
+    checkCudaErrors(cudaMemcpy2DToArray(heightFieldArray, 0, 0, heightField.height, dim.x * sizeof(float),
         dim.x * sizeof(float), dim.y, cudaMemcpyHostToDevice));
 
     cudaTextureObject_t heightFieldTex;
@@ -204,8 +202,7 @@ int runTest(int argc, char** argv)
 
     // Compare device visibility results against reference results
     bool res = compareData(thrust::raw_pointer_cast(&h_visibilitiesRef[0]),
-        thrust::raw_pointer_cast(&h_visibilities[0]),
-        ray.length, 0.0f, 0.0f);
+        thrust::raw_pointer_cast(&h_visibilities[0]), ray.length, 0.0f, 0.0f);
     printf("Average time: %f ms\n\n", sdkGetTimerValue(&timer) / numIterations);
     sdkResetTimer(&timer);
 
@@ -219,8 +216,7 @@ int runTest(int argc, char** argv)
 //! @param ray         ray
 //! @param angles      view angles
 ////////////////////////////////////////////////////////////////////////////////
-__global__ void computeAngles_kernel(const Ray ray, float* angles,
-    cudaTextureObject_t HeightFieldTex)
+__global__ void computeAngles_kernel(const Ray ray, float* angles, cudaTextureObject_t HeightFieldTex)
 {
     uint i = blockDim.x * blockIdx.x + threadIdx.x;
 
@@ -241,12 +237,12 @@ __global__ void computeAngles_kernel(const Ray ray, float* angles,
 //! @param visibilities    boolean array indicating the visibility of each point
 //!                        along the ray
 ////////////////////////////////////////////////////////////////////////////////
-__global__ void computeVisibilities_kernel(const float* angles,
-    const float* scannedAngles,
-    int numAngles, Bool* visibilities) {
+__global__ void computeVisibilities_kernel(const float* angles, const float* scannedAngles, int numAngles, Bool* visibilities)
+{
     uint i = blockDim.x * blockIdx.x + threadIdx.x;
 
-    if (i < numAngles) {
+    if (i < numAngles)
+    {
         visibilities[i] = scannedAngles[i] <= angles[i];
     }
 }
@@ -258,22 +254,23 @@ __global__ void computeVisibilities_kernel(const float* angles,
 //! @param visibilities    boolean array indicating the visibility of each point
 //!                        along the ray
 ////////////////////////////////////////////////////////////////////////////////
-void lineOfSight_gold(const HeightField heightField, const Ray ray,
-    Bool* visibilities) {
+void lineOfSight_gold(const HeightField heightField, const Ray ray, Bool* visibilities)
+{
     float angleMax = asinf(-1.0f);
 
-    for (int i = 0; i < ray.length; ++i) {
+    for (int i = 0; i < ray.length; ++i)
+    {
         float2 location = getLocation(ray, i + 1);
-        float height =
-            *(heightField.height + heightField.width * (int)floorf(location.y) +
-                (int)floorf(location.x));
+        float height = *(heightField.height + heightField.width * (int)floorf(location.y) + (int)floorf(location.x));
         float angle = getAngle(ray, location, height);
 
-        if (angle > angleMax) {
+        if (angle > angleMax)
+        {
             angleMax = angle;
             visibilities[i] = True;
         }
-        else {
+        else
+        {
             visibilities[i] = False;
         }
     }
@@ -285,7 +282,8 @@ void lineOfSight_gold(const HeightField heightField, const Ray ray,
 //! @param ray      ray
 //! @param i        integer offset along the ray
 ////////////////////////////////////////////////////////////////////////////////
-__device__ __host__ float2 getLocation(const Ray ray, int i) {
+__device__ __host__ float2 getLocation(const Ray ray, int i)
+{
     float step = i * ray.oneOverLength;
     return make_float2(ray.origin.x, ray.origin.y) + ray.dir * step;
 }

@@ -3,22 +3,18 @@
  * random numbers on GPU and CPU.
  */
 
- // Utilities and system includes
- // includes, system
-#include <stdlib.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include <curand.h>
 
-// Utilities and system includes
+ // Utilities and system includes
 #include <helper_functions.h>
 #include <helper_cuda.h>
 
 #include <cuda_runtime.h>
 #include <curand.h>
-
-float compareResults(int rand_n, float* h_RandGPU, float* h_RandCPU);
 
 const int DEFAULT_RAND_N = 2400000;
 const unsigned int DEFAULT_SEED = 777;
@@ -37,6 +33,35 @@ void print_result(float* data_array, int N)
     printf("\n");
 }
 
+float compareResults(int rand_n, float* h_RandGPU, float* h_RandCPU)
+{
+    int i;
+    float rCPU, rGPU, delta;
+    float max_delta = 0.;
+    float sum_delta = 0.;
+    float sum_ref = 0.;
+
+    for (i = 0; i < rand_n; i++)
+    {
+        rCPU = h_RandCPU[i];
+        rGPU = h_RandGPU[i];
+        delta = fabs(rCPU - rGPU);
+        sum_delta += delta;
+        sum_ref += fabs(rCPU);
+
+        if (delta >= max_delta)
+        {
+            max_delta = delta;
+        }
+    }
+
+    float L1norm = (float)(sum_delta / sum_ref);
+    printf("Max absolute error: %E\n", max_delta);
+    printf("L1 norm: %E\n\n", L1norm);
+
+    return L1norm;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // Main program
 ///////////////////////////////////////////////////////////////////////////////
@@ -44,31 +69,11 @@ int main(int argc, char** argv)
 {
     int i;
 
-    // Start logs
     printf("Starting...\n\n");
 
-    // initialize the GPU, either identified by --device
-    // or by picking the device with highest flop rate.
-    int devID = findCudaDevice(argc, (const char**)argv);
-
-    // parsing the number of random numbers to generate
     int rand_n = DEFAULT_RAND_N;
-
-    if (checkCmdLineFlag(argc, (const char**)argv, "count"))
-    {
-        rand_n = getCmdLineArgumentInt(argc, (const char**)argv, "count");
-    }
-
-    printf("Allocating data for %i samples...\n", rand_n);
-
-    // parsing the seed
     int seed = DEFAULT_SEED;
-
-    if (checkCmdLineFlag(argc, (const char**)argv, "seed"))
-    {
-        seed = getCmdLineArgumentInt(argc, (const char**)argv, "seed");
-    }
-
+    printf("Allocating data for %i samples...\n", rand_n);
     printf("Seeding with %i ...\n", seed);
 
     cudaStream_t stream;
@@ -150,31 +155,3 @@ int main(int argc, char** argv)
     exit(L1norm < 1e-6 ? EXIT_SUCCESS : EXIT_FAILURE);
 }
 
-float compareResults(int rand_n, float* h_RandGPU, float* h_RandCPU)
-{
-    int i;
-    float rCPU, rGPU, delta;
-    float max_delta = 0.;
-    float sum_delta = 0.;
-    float sum_ref = 0.;
-
-    for (i = 0; i < rand_n; i++)
-    {
-        rCPU = h_RandCPU[i];
-        rGPU = h_RandGPU[i];
-        delta = fabs(rCPU - rGPU);
-        sum_delta += delta;
-        sum_ref += fabs(rCPU);
-
-        if (delta >= max_delta)
-        {
-            max_delta = delta;
-        }
-    }
-
-    float L1norm = (float)(sum_delta / sum_ref);
-    printf("Max absolute error: %E\n", max_delta);
-    printf("L1 norm: %E\n\n", L1norm);
-
-    return L1norm;
-}

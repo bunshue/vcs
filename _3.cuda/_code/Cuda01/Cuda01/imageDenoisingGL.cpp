@@ -24,7 +24,9 @@
 GLuint gl_PBO, gl_Tex;
 struct cudaGraphicsResource* cuda_pbo_resource;  // handles OpenGL-CUDA exchange
 
-int mode = 2;   //0: 自製圖片資料, 1: 使用圖片640X480, 2: 使用圖片1920X1080
+int mode = 1;   //0: 自製圖片資料1, 1: 自製圖片資料2 3: 使用圖片640X480, 4: 使用圖片1920X1080
+
+bool flag_use_cuda = true;
 
 // Source image on the host side
 uchar4* h_Src1;
@@ -77,7 +79,14 @@ void computeFPS()
 
 void do_alpha_mixer(int alpha, TColor* d_dst)
 {
-    cuda_Mix(d_dst, alpha, imageW, imageH, texImage1, texImage2);
+    if (mode == 1)
+    {
+        cuda_Wave(d_dst, alpha, imageW, imageH);
+    }
+    else
+    {
+        cuda_Mix(d_dst, alpha, imageW, imageH, texImage1, texImage2);
+    }
 }
 
 int flag_direction = 0;
@@ -91,22 +100,29 @@ void runImageFilters(TColor* d_dst)
     //glColor3f(0, 1.0f, 0);  //只留綠色系
     //glColor3f(0, 0, 1.0f);  //只留藍色系
 
-    if (flag_direction == 0)
+    if (mode == 1)
     {
         alpha++;
-        if (alpha > 100)
-        {
-            alpha = 100;
-            flag_direction = 1;
-        }
     }
     else
     {
-        alpha--;
-        if (alpha < 0)
+        if (flag_direction == 0)
         {
-            alpha = 0;
-            flag_direction = 0;
+            alpha++;
+            if (alpha > 100)
+            {
+                alpha = 100;
+                flag_direction = 1;
+            }
+        }
+        else
+        {
+            alpha--;
+            if (alpha < 0)
+            {
+                alpha = 0;
+                flag_direction = 0;
+            }
         }
     }
     getLastCudaError("Filtering kernel execution failed.\n");
@@ -300,7 +316,14 @@ int initGL(int* argc, char** argv)
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
     glutInitWindowSize(imageW, imageH); //設定視窗大小, 直接拉大內容
-    glutInitWindowPosition(512 - imageW / 2, 384 - imageH / 2);   //視窗起始位置
+    if (imageW > 1200)
+    {
+        glutInitWindowPosition(0, 0);   //視窗起始位置
+    }
+    else
+    {
+        glutInitWindowPosition(1100, 200);   //視窗起始位置
+    }
 
     //glutCreateWindow(argv[0]);
     glutCreateWindow("CUDA window system"); //開啟視窗 並顯示出視窗 Title
@@ -424,13 +447,41 @@ int main(int argc, char** argv)
             }
         }
     }
+    else if (mode == 1)
+    {
+        //自製圖片資料
+        imageW = 1920;
+        imageH = 1080;
+
+        h_Src1 = (uchar4*)malloc(imageW * imageH * 4);
+        h_Src2 = (uchar4*)malloc(imageW * imageH * 4);
+
+        int i;
+        int j;
+
+        for (j = 0; j < imageH; j++)
+        {
+            for (i = 0; i < imageW; i++)
+            {
+                h_Src1[imageW * j + i].x = (i * j) % 256;   //R
+                h_Src1[imageW * j + i].y = (i * j) % 256;   //G
+                h_Src1[imageW * j + i].z = (i * j) % 256;   //B
+
+                h_Src2[imageW * j + i].x = (i / 2) % 256;   //R
+                h_Src2[imageW * j + i].y = (i / 2) % 256;   //G
+                h_Src2[imageW * j + i].z = (i / 2) % 256;   //B
+            }
+        }
+
+
+    }
     else
     {
         char* filename_read1 = ""; //24 bits
         char* filename_read2 = ""; //24 bits
 
         //讀取圖片資料
-        if (mode == 1)
+        if (mode == 2)
         {
             //使用圖片640X480
             filename_read1 = "C:\\______test_files\\ims01.24.bmp"; //24 bits

@@ -16,7 +16,8 @@ int host_free(void* p) { return (int)cudaFreeHost(p); }
 typedef std::vector<std::string> FileNames;
 typedef std::vector<std::vector<char> > FileData;
 
-struct decode_params_t {
+struct decode_params_t
+{
     std::string input_dir;
     int batch_size;
     int total_images;
@@ -52,9 +53,7 @@ int read_next_batch(FileNames& image_names, int batch_size,
     {
         if (cur_iter == image_names.end())
         {
-            std::cerr << "Image list is too short to fill the batch, adding files "
-                "from the beginning of the image list"
-                << std::endl;
+            std::cerr << "Image list is too short to fill the batch, adding files from the beginning of the image list" << std::endl;
             cur_iter = image_names.begin();
         }
 
@@ -68,8 +67,7 @@ int read_next_batch(FileNames& image_names, int batch_size,
         std::ifstream input(cur_iter->c_str(), std::ios::in | std::ios::binary | std::ios::ate);
         if (!(input.is_open()))
         {
-            std::cerr << "Cannot open image: " << *cur_iter
-                << ", removing it from image list" << std::endl;
+            std::cerr << "Cannot open image: " << *cur_iter << ", removing it from image list" << std::endl;
             image_names.erase(cur_iter);
             continue;
         }
@@ -84,8 +82,7 @@ int read_next_batch(FileNames& image_names, int batch_size,
         }
         if (!input.read(raw_data[counter].data(), file_size))
         {
-            std::cerr << "Cannot read from file: " << *cur_iter
-                << ", removing it from image list" << std::endl;
+            std::cerr << "Cannot read from file: " << *cur_iter << ", removing it from image list" << std::endl;
             image_names.erase(cur_iter);
             continue;
         }
@@ -101,21 +98,16 @@ int read_next_batch(FileNames& image_names, int batch_size,
 
 // prepare buffers for RGBi output format
 int prepare_buffers(FileData& file_data, std::vector<size_t>& file_len,
-    std::vector<int>& img_width, std::vector<int>& img_height,
-    std::vector<nvjpegImage_t>& ibuf,
-    std::vector<nvjpegImage_t>& isz, FileNames& current_names,
-    decode_params_t& params) {
+    std::vector<int>& img_width, std::vector<int>& img_height, std::vector<nvjpegImage_t>& ibuf,
+    std::vector<nvjpegImage_t>& isz, FileNames& current_names, decode_params_t& params)
+{
     int widths[NVJPEG_MAX_COMPONENT];
     int heights[NVJPEG_MAX_COMPONENT];
     int channels;
     nvjpegChromaSubsampling_t subsampling;
 
-    //printf("prepare_buffers\n");
-
     for (int i = 0; i < file_data.size(); i++)
     {
-        printf("prepare_buffers, i = %d, filename = %s\n", i, current_names[i]);
-
         std::cout << "prepare_buffers, i = " << i << ", filename = " << current_names[i] << std::endl;
 
         checkCudaErrors(nvjpegGetImageInfo(params.nvjpeg_handle, (unsigned char*)file_data[i].data(), file_len[i], &channels, &subsampling, widths, heights));
@@ -125,12 +117,14 @@ int prepare_buffers(FileData& file_data, std::vector<size_t>& file_len,
 
         //printf("Processing: %s, %d channels\n", current_names[i], channels);
 
-        std::cout << "here Processing: " << current_names[i] << std::endl;
+        std::cout << "Processing: " << current_names[i] << std::endl;
         std::cout << "Image is " << channels << " channels." << std::endl;
         for (int c = 0; c < channels; c++)
         {
             std::cout << "Channel #" << c << " size: " << widths[c] << " x " << heights[c] << std::endl;
         }
+
+        printf("subsampling : %d\n", subsampling);
 
         switch (subsampling)
         {
@@ -165,16 +159,20 @@ int prepare_buffers(FileData& file_data, std::vector<size_t>& file_len,
         // 3 samples at once
         if (params.fmt == NVJPEG_OUTPUT_RGBI || params.fmt == NVJPEG_OUTPUT_BGRI)
         {
+            printf("111\n");
             channels = 1;
             mul = 3;
         }
         // in the case of rgb create 3 buffers with sizes of original image
         else if (params.fmt == NVJPEG_OUTPUT_RGB || params.fmt == NVJPEG_OUTPUT_BGR)
         {
+            printf("222\n");
             channels = 3;
             widths[1] = widths[2] = widths[0];
             heights[1] = heights[2] = heights[0];
         }
+
+        printf("channels = %d\n", channels);
 
         // realloc output buffer if required
         for (int c = 0; c < channels; c++)
@@ -197,8 +195,8 @@ int prepare_buffers(FileData& file_data, std::vector<size_t>& file_len,
     return EXIT_SUCCESS;
 }
 
-void create_decoupled_api_handles(decode_params_t& params) {
-
+void create_decoupled_api_handles(decode_params_t& params)
+{
     checkCudaErrors(nvjpegDecoderCreate(params.nvjpeg_handle, NVJPEG_BACKEND_DEFAULT, &params.nvjpeg_decoder));
     checkCudaErrors(nvjpegDecoderStateCreate(params.nvjpeg_handle, params.nvjpeg_decoder, &params.nvjpeg_decoupled_state));
 
@@ -212,8 +210,8 @@ void create_decoupled_api_handles(decode_params_t& params) {
     checkCudaErrors(nvjpegDecodeParamsCreate(params.nvjpeg_handle, &params.nvjpeg_decode_params));
 }
 
-void destroy_decoupled_api_handles(decode_params_t& params) {
-
+void destroy_decoupled_api_handles(decode_params_t& params)
+{
     checkCudaErrors(nvjpegDecodeParamsDestroy(params.nvjpeg_decode_params));
     checkCudaErrors(nvjpegJpegStreamDestroy(params.jpeg_streams[0]));
     checkCudaErrors(nvjpegJpegStreamDestroy(params.jpeg_streams[1]));
@@ -250,15 +248,13 @@ int decode_images(const FileData& img_data, const std::vector<size_t>& img_len,
 
     if (!params.batched)
     {
+        printf("batched = false\n");
         if (!params.pipelined)  // decode one image at a time
         {
             checkCudaErrors(cudaEventRecord(startEvent, params.stream));
             for (int i = 0; i < params.batch_size; i++)
             {
-                checkCudaErrors(nvjpegDecode(params.nvjpeg_handle, params.nvjpeg_state,
-                    (const unsigned char*)img_data[i].data(),
-                    img_len[i], params.fmt, &out[i],
-                    params.stream));
+                checkCudaErrors(nvjpegDecode(params.nvjpeg_handle, params.nvjpeg_state, (const unsigned char*)img_data[i].data(), img_len[i], params.fmt, &out[i], params.stream));
             }
             checkCudaErrors(cudaEventRecord(stopEvent, params.stream));
         }
@@ -271,31 +267,26 @@ int decode_images(const FileData& img_data, const std::vector<size_t>& img_len,
             checkCudaErrors(nvjpegDecodeParamsSetOutputFormat(params.nvjpeg_decode_params, params.fmt));
             for (int i = 0; i < params.batch_size; i++)
             {
-                checkCudaErrors(
-                    nvjpegJpegStreamParse(params.nvjpeg_handle, (const unsigned char*)img_data[i].data(), img_len[i],
-                        0, 0, params.jpeg_streams[buffer_index]));
+                checkCudaErrors(nvjpegJpegStreamParse(params.nvjpeg_handle, (const unsigned char*)img_data[i].data(), img_len[i], 0, 0, params.jpeg_streams[buffer_index]));
 
-                checkCudaErrors(nvjpegStateAttachPinnedBuffer(params.nvjpeg_decoupled_state,
-                    params.pinned_buffers[buffer_index]));
+                checkCudaErrors(nvjpegStateAttachPinnedBuffer(params.nvjpeg_decoupled_state, params.pinned_buffers[buffer_index]));
 
-                checkCudaErrors(nvjpegDecodeJpegHost(params.nvjpeg_handle, params.nvjpeg_decoder, params.nvjpeg_decoupled_state,
-                    params.nvjpeg_decode_params, params.jpeg_streams[buffer_index]));
+                checkCudaErrors(nvjpegDecodeJpegHost(params.nvjpeg_handle, params.nvjpeg_decoder, params.nvjpeg_decoupled_state, params.nvjpeg_decode_params, params.jpeg_streams[buffer_index]));
 
                 checkCudaErrors(cudaStreamSynchronize(params.stream));
 
-                checkCudaErrors(nvjpegDecodeJpegTransferToDevice(params.nvjpeg_handle, params.nvjpeg_decoder, params.nvjpeg_decoupled_state,
-                    params.jpeg_streams[buffer_index], params.stream));
+                checkCudaErrors(nvjpegDecodeJpegTransferToDevice(params.nvjpeg_handle, params.nvjpeg_decoder, params.nvjpeg_decoupled_state, params.jpeg_streams[buffer_index], params.stream));
 
                 buffer_index = 1 - buffer_index; // switch pinned buffer in pipeline mode to avoid an extra sync
 
-                checkCudaErrors(nvjpegDecodeJpegDevice(params.nvjpeg_handle, params.nvjpeg_decoder, params.nvjpeg_decoupled_state,
-                    &out[i], params.stream));
+                checkCudaErrors(nvjpegDecodeJpegDevice(params.nvjpeg_handle, params.nvjpeg_decoder, params.nvjpeg_decoupled_state, &out[i], params.stream));
             }
             checkCudaErrors(cudaEventRecord(stopEvent, params.stream));
         }
     }
     else
     {
+        printf("XXXXXXXXXXXXXXXX  batched = true\n");
         std::vector<const unsigned char*> raw_inputs;
         for (int i = 0; i < params.batch_size; i++)
         {
@@ -303,9 +294,7 @@ int decode_images(const FileData& img_data, const std::vector<size_t>& img_len,
         }
 
         checkCudaErrors(cudaEventRecord(startEvent, params.stream));
-        checkCudaErrors(nvjpegDecodeBatched(
-            params.nvjpeg_handle, params.nvjpeg_state, raw_inputs.data(),
-            img_len.data(), out.data(), params.stream));
+        checkCudaErrors(nvjpegDecodeBatched(params.nvjpeg_handle, params.nvjpeg_state, raw_inputs.data(), img_len.data(), out.data(), params.stream));
         checkCudaErrors(cudaEventRecord(stopEvent, params.stream));
     }
     checkCudaErrors(cudaEventSynchronize(stopEvent));
@@ -318,6 +307,8 @@ int decode_images(const FileData& img_data, const std::vector<size_t>& img_len,
 int write_images(std::vector<nvjpegImage_t>& iout, std::vector<int>& widths,
     std::vector<int>& heights, decode_params_t& params, FileNames& filenames)
 {
+    printf("\nwrite_images, count = %d\n", params.batch_size);
+
     for (int i = 0; i < params.batch_size; i++)
     {
         // Get the file name, without extension.
@@ -327,9 +318,11 @@ int write_images(std::vector<nvjpegImage_t>& iout, std::vector<int>& widths,
             (std::string::npos == position)
             ? filenames[i]
             : filenames[i].substr(position + 1, filenames[i].size());
+
         position = sFileName.rfind(".");
-        sFileName = (std::string::npos == position) ? sFileName
-            : sFileName.substr(0, position);
+
+        sFileName = (std::string::npos == position) ? sFileName : sFileName.substr(0, position);
+
         //std::string fname(params.output_dir + "/" + sFileName + ".bmp");
 
         std::string fname("./" + sFileName + ".bmp");
@@ -339,21 +332,24 @@ int write_images(std::vector<nvjpegImage_t>& iout, std::vector<int>& widths,
         int err;
         if (params.fmt == NVJPEG_OUTPUT_RGB || params.fmt == NVJPEG_OUTPUT_BGR)
         {
+            //here
             err = writeBMP(fname.c_str(), iout[i].channel[0], iout[i].pitch[0],
                 iout[i].channel[1], iout[i].pitch[1], iout[i].channel[2],
                 iout[i].pitch[2], widths[i], heights[i]);
         }
         else if (params.fmt == NVJPEG_OUTPUT_RGBI || params.fmt == NVJPEG_OUTPUT_BGRI)
         {
+            printf("XXXXXX case 2\n");
             // Write BMP from interleaved data
             err = writeBMPi(fname.c_str(), iout[i].channel[0], iout[i].pitch[0], widths[i], heights[i]);
         }
+
         if (err)
         {
             std::cout << "Cannot write output file: " << fname << std::endl;
             return EXIT_FAILURE;
         }
-        std::cout << "Done writing decoded image to file: " << fname << std::endl;
+        std::cout << "Done writing decoded image to file: " << fname << ", " << widths[i] << " X " << heights[i] << std::endl;
     }
 }
 
@@ -367,6 +363,9 @@ double process_images(FileNames& image_names, decode_params_t& params, double& t
     std::vector<int> heights(params.batch_size);
     // we wrap over image files to process total_images of files
     FileNames::iterator file_iter = image_names.begin();
+
+    std::cout << "process_images\n資料夾 : " << params.input_dir << "\n檔案個數 : " << params.total_images << std::endl;
+    std::cout << "batch_size : " << params.batch_size << std::endl;
 
     // stream for decoding
     checkCudaErrors(cudaStreamCreateWithFlags(&params.stream, cudaStreamNonBlocking));
@@ -392,20 +391,17 @@ double process_images(FileNames& image_names, decode_params_t& params, double& t
     int warmup = 0;
     int total_numbers = 0;
 
-    printf("\nTotal images : %d\n", params.total_images);
+    printf("\n共有 %d 個檔案\n", params.total_images);
 
     while (total_processed < params.total_images)
     {
-        printf("\nImage : %d\n", total_numbers);
-
         total_numbers++;
+        printf("\n第 %d 個檔案\n", total_numbers);
 
         if (read_next_batch(image_names, params.batch_size, file_iter, file_data, file_len, current_names))
         {
             return EXIT_FAILURE;
         }
-
-        //printf("\ncall prepare_buffers, file : %s\n", current_names);
 
         if (prepare_buffers(file_data, file_len, widths, heights, iout, isz, current_names, params))
         {
@@ -427,12 +423,8 @@ double process_images(FileNames& image_names, decode_params_t& params, double& t
             test_time += time;
         }
 
-        printf("11111111111111111111111\n");
-        //if (params.write_decoded)
-        {
-            printf("22222222222222222222222\n");
-            write_images(iout, widths, heights, params, current_names);
-        }
+        printf("寫入檔案\n");
+        write_images(iout, widths, heights, params, current_names);
     }
     total = test_time;
 
@@ -475,148 +467,25 @@ int findParamIndex(const char** argv, int argc, const char* parm)
 
 int main(int argc, const char* argv[])
 {
-    int pidx;
-
     std::cout << "main program" << std::endl;
-
-    if ((pidx = findParamIndex(argv, argc, "-h")) != -1 || (pidx = findParamIndex(argv, argc, "--help")) != -1)
-    {
-        std::cout << "XXXXXXXXXXXXXXXXXXXXXXXXX" << std::endl;
-
-        std::cout << "Usage: " << argv[0]
-            << " -i images_dir [-b batch_size] [-t total_images] [-device= "
-            "device_id] [-w warmup_iterations] [-o output_dir] "
-            "[-pipelined] [-batched] [-fmt output_format]\n";
-
-        std::cout << "Parameters: " << std::endl;
-        std::cout << "\timages_dir\t:\tPath to single image or directory of images"
-            << std::endl;
-        std::cout << "\tbatch_size\t:\tDecode images from input by batches of "
-            "specified size"
-            << std::endl;
-        std::cout << "\ttotal_images\t:\tDecode this much images, if there are "
-            "less images \n"
-            << "\t\t\t\t\tin the input than total images, decoder will loop "
-            "over the input"
-            << std::endl;
-        std::cout << "\tdevice_id\t:\tWhich device to use for decoding"
-            << std::endl;
-        std::cout << "\twarmup_iterations\t:\tRun this amount of batches first "
-            "without measuring performance"
-            << std::endl;
-        std::cout
-            << "\toutput_dir\t:\tWrite decoded images as BMPs to this directory"
-            << std::endl;
-        std::cout << "\tpipelined\t:\tUse decoding in phases" << std::endl;
-        std::cout << "\tbatched\t\t:\tUse batched interface" << std::endl;
-        std::cout << "\toutput_format\t:\tnvJPEG output format for decoding. One "
-            "of [rgb, rgbi, bgr, bgri, yuv, y, unchanged]"
-            << std::endl;
-
-        return EXIT_SUCCESS;
-    }
 
     decode_params_t params;
 
-    params.input_dir = "./";
-
-    if ((pidx = findParamIndex(argv, argc, "-i")) != -1)
-    {
-        printf("XXXXXXXXXXXXXXXXXXXXXXXXX\n");
-        params.input_dir = argv[pidx + 1];
-    }
-    else
-    {
-        /*
-        // Search in default paths for input images.
-        std::cout << "input_dir : " << params.input_dir << std::endl;
-        int found = getInputDir(params.input_dir, argv[0]);
-        std::cout << "input_dir : " << params.input_dir << std::endl;
-        if (!found)
-        {
-            std::cout << "Please specify input directory with encoded images" << std::endl;
-            return EXIT_WAIVED;
-        }
-        */
-        //直接寫
-        params.input_dir = "./images/";
-    }
-
+    params.input_dir = "./images/";
     params.batch_size = 1;
-    if ((pidx = findParamIndex(argv, argc, "-b")) != -1)
-    {
-        printf("XXXXXXXXXXXXXXXXXXXXXXXXX\n");
-        params.batch_size = std::atoi(argv[pidx + 1]);
-    }
-
     params.total_images = -1;
-    if ((pidx = findParamIndex(argv, argc, "-t")) != -1)
-    {
-        printf("XXXXXXXXXXXXXXXXXXXXXXXXX\n");
-        params.total_images = std::atoi(argv[pidx + 1]);
-    }
 
     params.dev = 0;
     params.dev = findCudaDevice(argc, argv);
 
     params.warmup = 0;
-    if ((pidx = findParamIndex(argv, argc, "-w")) != -1)
-    {
-        printf("XXXXXXXXXXXXXXXXXXXXXXXXX\n");
-        params.warmup = std::atoi(argv[pidx + 1]);
-    }
 
     params.batched = false;
-    if ((pidx = findParamIndex(argv, argc, "-batched")) != -1)
-    {
-        printf("XXXXXXXXXXXXXXXXXXXXXXXXX\n");
-        params.batched = true;
-    }
-
     params.pipelined = false;
-    if ((pidx = findParamIndex(argv, argc, "-pipelined")) != -1)
-    {
-        printf("XXXXXXXXXXXXXXXXXXXXXXXXX\n");
-        params.pipelined = true;
-    }
 
-    params.fmt = NVJPEG_OUTPUT_RGB;
-    if ((pidx = findParamIndex(argv, argc, "-fmt")) != -1)
-    {
-        printf("XXXXXXXXXXXXXXXXXXXXXXXXX\n");
-        std::string sfmt = argv[pidx + 1];
-        if (sfmt == "rgb")
-            params.fmt = NVJPEG_OUTPUT_RGB;
-        else if (sfmt == "bgr")
-            params.fmt = NVJPEG_OUTPUT_BGR;
-        else if (sfmt == "rgbi")
-            params.fmt = NVJPEG_OUTPUT_RGBI;
-        else if (sfmt == "bgri")
-            params.fmt = NVJPEG_OUTPUT_BGRI;
-        else if (sfmt == "yuv")
-            params.fmt = NVJPEG_OUTPUT_YUV;
-        else if (sfmt == "y")
-            params.fmt = NVJPEG_OUTPUT_Y;
-        else if (sfmt == "unchanged")
-            params.fmt = NVJPEG_OUTPUT_UNCHANGED;
-        else {
-            std::cout << "Unknown format: " << sfmt << std::endl;
-            return EXIT_FAILURE;
-        }
-    }
+    params.fmt = NVJPEG_OUTPUT_RGB; //存檔格式目前只支持RGB..  即BMP
 
     params.write_decoded = false;
-    if ((pidx = findParamIndex(argv, argc, "-o")) != -1)
-    {
-        printf("XXXXXXXXXXXXXXXXXXXXXXXXX\n");
-        params.output_dir = argv[pidx + 1];
-        if (params.fmt != NVJPEG_OUTPUT_RGB && params.fmt != NVJPEG_OUTPUT_BGR && params.fmt != NVJPEG_OUTPUT_RGBI && params.fmt != NVJPEG_OUTPUT_BGRI)
-        {
-            std::cout << "We can write ony BMPs, which require output format be either RGB/BGR or RGBi/BGRi" << std::endl;
-            return EXIT_FAILURE;
-        }
-        params.write_decoded = true;
-    }
 
     cudaDeviceProp props;
     checkCudaErrors(cudaGetDeviceProperties(&props, params.dev));
@@ -631,54 +500,35 @@ int main(int argc, const char* argv[])
     checkCudaErrors(nvjpegJpegStateCreate(params.nvjpeg_handle, &params.nvjpeg_state));
     checkCudaErrors(nvjpegDecodeBatchedInitialize(params.nvjpeg_handle, params.nvjpeg_state, params.batch_size, 1, params.fmt));
 
-    if (params.pipelined)
-    {
-        create_decoupled_api_handles(params);
-    }
-
     // read source images
     FileNames image_names;
 
+    std::cout << "資料夾 : " << params.input_dir << std::endl;
+
     readInput(params.input_dir, image_names);
+    params.total_images = image_names.size();
 
-    printf("image_names.size() =  %d\n", image_names.size());
-    printf("total_images =  %d\n", params.total_images);
+    std::cout << "檔案個數 : " << image_names.size() << std::endl;
+    std::cout << "檔案個數 : " << params.total_images << std::endl;
 
-    if (params.total_images == -1)
-    {
-        params.total_images = image_names.size();
-
-        //here
-        printf("total_images =  %d\n", params.total_images);
-    }
-    else if (params.total_images % params.batch_size)
-    {
-        printf("XXXXXXX\n");
-        params.total_images =
-            ((params.total_images) / params.batch_size) * params.batch_size;
-        std::cout << "Changing total_images number to " << params.total_images
-            << " to be multiple of batch_size - " << params.batch_size
-            << std::endl;
-    }
-
-    printf("total_images =  %d\n", params.total_images);
     //printf("input_dir =  %s\n", params.input_dir); fail?
     printf("batch_size =  %d\n", params.batch_size);
 
-    std::cout << "Decoding images in directory: " << params.input_dir
-        << ", total " << params.total_images << ", batchsize "
-        << params.batch_size << std::endl;
+    std::cout << "資料夾 : " << params.input_dir << "\n檔案個數 : " << params.total_images << std::endl;
+    std::cout << "batch_size : " << params.batch_size << std::endl;
 
     double total;
+
     if (process_images(image_names, params, total))
     {
         return EXIT_FAILURE;
     }
 
+    std::cout << "\ntotal : " << total << " sec" << std::endl;
     std::cout << "Total decoding time: " << total << " sec" << std::endl;
     std::cout << "Avg decoding time per image: " << total / params.total_images << std::endl;
     std::cout << "Avg images per sec: " << params.total_images / total << std::endl;
-    std::cout << "Avg decoding time per batch: " << total / ((params.total_images + params.batch_size - 1) / params.batch_size) << std::endl;
+    std::cout << "Avg decoding time per batch: " << total / ((params.total_images + params.batch_size - 1) / params.batch_size) << std::endl << std::endl;
 
     if (params.pipelined)
     {

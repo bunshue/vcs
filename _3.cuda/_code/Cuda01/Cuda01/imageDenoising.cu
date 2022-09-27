@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 #include <helper_cuda.h>
 #include "imageDenoising.h"
 
@@ -16,13 +17,13 @@ int iDivUp(int a, int b) { return ((a % b) != 0) ? (a / b + 1) : (a / b); }
 __device__ float lerpf(float a, float b, float c) { return a + (b - a) * c; }
 
 __device__ float vecLen(float4 a, float4 b) {
-  return ((b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y) +
-          (b.z - a.z) * (b.z - a.z));
+    return ((b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y) +
+        (b.z - a.z) * (b.z - a.z));
 }
 
 __device__ TColor make_color(float r, float g, float b, float a) {
-  return ((int)(a * 255.0f) << 24) | ((int)(b * 255.0f) << 16) |
-         ((int)(g * 255.0f) << 8) | ((int)(r * 255.0f) << 0);
+    return ((int)(a * 255.0f) << 24) | ((int)(b * 255.0f) << 16) |
+        ((int)(g * 255.0f) << 8) | ((int)(r * 255.0f) << 0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -34,14 +35,14 @@ cudaTextureObject_t texImage2;
 cudaChannelFormatDesc uchar4tex = cudaCreateChannelDesc<uchar4>();
 
 // CUDA array descriptor
-cudaArray *a_Src;
+cudaArray* a_Src;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Filtering kernels
 ////////////////////////////////////////////////////////////////////////////////
 #include "imageDenoising_copy_kernel.cuh"
 
-extern "C" cudaError_t CUDA_MallocArray(cudaTextureObject_t* texImage, uchar4 * *h_Src, int imageW, int imageH)
+extern "C" cudaError_t CUDA_MallocArray(cudaTextureObject_t * texImage, uchar4 * *h_Src, int imageW, int imageH)
 {
     cudaError_t error;
 

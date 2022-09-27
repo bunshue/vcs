@@ -2181,38 +2181,73 @@ namespace _vcs_MakePicture
         private void button56_Click(object sender, EventArgs e)
         {
             //製作桌布
+            //1080p的桌面 Windows是顯示 1920 X 1040  下面的40點是工作列
+            //用ACDSee設置桌面 要選 Titled
+
             int width;
             int height;
 
-            width = 1920 / 2;
-            height = 1080 / 2;
-            bitmap1 = new Bitmap(width, height);
+            int W = 1920;
+            int H = 1040;
+
+            bitmap1 = new Bitmap(W, H);
 
             g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
+            g.Clear(Color.Black);
 
             int x_st = 0;
             int y_st = 0;
             int dx = 100;
             int dy = 100;
 
+            g.DrawRectangle(Pens.DarkGray, 0, 0, 640, 480);  //外框
+            g.DrawRectangle(Pens.DarkGray, 640, 0, 640, 480);  //外框
+            g.DrawRectangle(Pens.DarkGray, 640 * 2, 0, 640, 480);  //外框
+            g.DrawRectangle(Pens.DarkGray, 0, 480, 640, 480);  //外框
+            g.DrawRectangle(Pens.DarkGray, 640, 480, 640, 480);  //外框
+            g.DrawRectangle(Pens.DarkGray, 640 * 2, 480, 640, 480);  //外框
+            //g.DrawRectangle(Pens.DarkGray, 0, 0, 1280 - 1, 720 - 1);  //外框
+            g.DrawRectangle(Pens.Red, 0, 0, W - 1, H - 1);  //外框
+
+            g.DrawLine(Pens.DarkGray, W / 2, 0, W / 2, H);  //畫直線
+            g.DrawLine(Pens.DarkGray, 0, 1080 / 2, W, 1080 / 2);    //畫橫線
+
+            Point pt = new Point();
+
             int i;
-            for (i = 0; i <= width; i += dx)
+
+            for (i = 0; i <= W; i += dx)
             {
-                g.DrawLine(Pens.Black, i, 0, i, height);
-
+                //g.DrawLine(Pens.DarkGray, i, 0, i, H);  //畫直線
             }
-            for (i = 0; i <= height; i += dx)
+            for (i = 0; i <= H; i += dy)
             {
-                g.DrawLine(Pens.Black, 0, i, width, i);
-
+                //g.DrawLine(Pens.DarkGray, 0, i, W, i);    //畫橫線
             }
 
-            g.DrawRectangle(Pens.Red, 0, 0, width - 1, height - 1);
+            int j;
+            SolidBrush b = new SolidBrush(Color.DarkGray);
+            for (j = 0; j <= H; j += dx)
+            {
+                for (i = 0; i <= W; i += dx)
+                {
+                    pt = new Point(i, j);
+                    g.FillRectangle(b, pt.X, pt.Y, 1, 1);
+                }
+            }
 
+            string filename = @"C:\______test_files\__pic\_painting\SpringBouquet.jpg";
+            Bitmap bitmap2 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
+
+            g.DrawImage(bitmap2, (W - bitmap2.Width) / 2, (H - bitmap2.Height) / 2, bitmap2.Width, bitmap2.Height);
+            //              貼上的位置      貼上的大小 放大縮小用
+
+            Font f;
+            f = new Font("標楷體", 60);
+            sb = new SolidBrush(Color.Red);
+            g.DrawString("Sugar", f, sb, new PointF(W - 250, H - 82));
 
             pictureBox1.Image = bitmap1;
-
         }
 
         private void button57_Click(object sender, EventArgs e)

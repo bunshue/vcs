@@ -20,6 +20,7 @@
 #include <assert.h>
 #include <ctype.h>
 #include <cuda_runtime.h>
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -47,58 +48,66 @@ void UsageRF(void) {
     exit(0);
 }
 
-void parseCommandLineArguments(int argc, char* argv[], struct testOpts& opts) {
+void parseCommandLineArguments(int argc, char* argv[], struct testOpts& opts)
+{
     memset(&opts, 0, sizeof(opts));
 
-    if (checkCmdLineFlag(argc, (const char**)argv, "-h")) {
+    if (checkCmdLineFlag(argc, (const char**)argv, "-h"))
+    {
         UsageRF();
     }
 
-    if (checkCmdLineFlag(argc, (const char**)argv, "P")) {
+    if (checkCmdLineFlag(argc, (const char**)argv, "P"))
+    {
         char* reorderType = NULL;
         getCmdLineArgumentString(argc, (const char**)argv, "P", &reorderType);
 
-        if (reorderType) {
-            if ((STRCASECMP(reorderType, "symrcm") != 0) &&
-                (STRCASECMP(reorderType, "symamd") != 0)) {
+        if (reorderType)
+        {
+            if ((STRCASECMP(reorderType, "symrcm") != 0) && (STRCASECMP(reorderType, "symamd") != 0))
+            {
                 printf("\nIncorrect argument passed to -P option\n");
                 UsageRF();
             }
-            else {
+            else
+            {
                 opts.reorder = reorderType;
             }
         }
     }
 
-    if (!opts.reorder) {
+    if (!opts.reorder)
+    {
         opts.reorder = "symrcm";  // Setting default reordering to be symrcm.
     }
 
-    if (checkCmdLineFlag(argc, (const char**)argv, "file")) {
+    if (checkCmdLineFlag(argc, (const char**)argv, "file"))
+    {
         char* fileName = 0;
         getCmdLineArgumentString(argc, (const char**)argv, "file", &fileName);
 
-        if (fileName) {
+        if (fileName)
+        {
             opts.sparse_mat_filename = fileName;
         }
-        else {
+        else
+        {
             printf("\nIncorrect filename passed to -file \n ");
             UsageRF();
         }
     }
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[])
+{
     struct testOpts opts;
     cusolverRfHandle_t cusolverRfH = NULL;  // refactorization
-    cusolverSpHandle_t cusolverSpH =
-        NULL;  // reordering, permutation and 1st LU factorization
+    cusolverSpHandle_t cusolverSpH = NULL;  // reordering, permutation and 1st LU factorization
     cusparseHandle_t cusparseH = NULL;  // residual evaluation
     cudaStream_t stream = NULL;
     cusparseMatDescr_t descrA = NULL;  // A is a base-0 general matrix
 
-    csrluInfoHost_t info =
-        NULL;  // opaque info structure for LU with parital pivoting
+    csrluInfoHost_t info = NULL;  // opaque info structure for LU with parital pivoting
 
     int rowsA = 0;  // number of rows of A
     int colsA = 0;  // number of columns of A
@@ -189,10 +198,8 @@ int main(int argc, char* argv[]) {
     const double tol = 1.e-14;
     const double pivot_threshold = 1.0;
     // the constants used in cusolverRf
-    const cusolverRfFactorization_t fact_alg =
-        CUSOLVERRF_FACTORIZATION_ALG0;  // default
-    const cusolverRfTriangularSolve_t solve_alg =
-        CUSOLVERRF_TRIANGULAR_SOLVE_ALG1;  // default
+    const cusolverRfFactorization_t fact_alg = CUSOLVERRF_FACTORIZATION_ALG0;  // default
+    const cusolverRfTriangularSolve_t solve_alg = CUSOLVERRF_TRIANGULAR_SOLVE_ALG1;  // default
 
     double x_inf = 0.0;  // |x|
     double r_inf = 0.0;  // |r|
@@ -218,41 +225,47 @@ int main(int argc, char* argv[]) {
 
     findCudaDevice(argc, (const char**)argv);
 
-    if (opts.sparse_mat_filename == NULL) {
+    if (opts.sparse_mat_filename == NULL)
+    {
         opts.sparse_mat_filename = sdkFindFilePath("lap2D_5pt_n100.mtx", argv[0]);
         printf("Using default input file [%s]\n", opts.sparse_mat_filename);
     }
-    else {
+    else
+    {
         printf("Using input file [%s]\n", opts.sparse_mat_filename);
     }
 
-    if (opts.sparse_mat_filename) {
+    if (opts.sparse_mat_filename)
+    {
         if (loadMMSparseMatrix<double>(opts.sparse_mat_filename, 'd', true, &rowsA,
-            &colsA, &nnzA, &h_csrValA, &h_csrRowPtrA,
-            &h_csrColIndA, true)) {
+            &colsA, &nnzA, &h_csrValA, &h_csrRowPtrA, &h_csrColIndA, true))
+        {
             return 1;
         }
         baseA = h_csrRowPtrA[0];  // baseA = {0,1}
     }
 
-    if (rowsA != colsA) {
+    if (rowsA != colsA)
+    {
         fprintf(stderr, "Error: only support square matrix\n");
         return 1;
     }
 
     printf("WARNING: cusolverRf only works for base-0 \n");
-    if (baseA) {
-        for (int i = 0; i <= rowsA; i++) {
+    if (baseA)
+    {
+        for (int i = 0; i <= rowsA; i++)
+        {
             h_csrRowPtrA[i]--;
         }
-        for (int i = 0; i < nnzA; i++) {
+        for (int i = 0; i < nnzA; i++)
+        {
             h_csrColIndA[i]--;
         }
         baseA = 0;
     }
 
-    printf("sparse matrix A is %d x %d with %d nonzeros, base=%d\n", rowsA, colsA,
-        nnzA, baseA);
+    printf("sparse matrix A is %d x %d with %d nonzeros, base=%d\n", rowsA, colsA, nnzA, baseA);
 
     checkCudaErrors(cusolverSpCreate(&cusolverSpH));
     checkCudaErrors(cusparseCreate(&cusparseH));
@@ -264,10 +277,12 @@ int main(int argc, char* argv[]) {
     checkCudaErrors(cusparseCreateMatDescr(&descrA));
     checkCudaErrors(cusparseSetMatType(descrA, CUSPARSE_MATRIX_TYPE_GENERAL));
 
-    if (baseA) {
+    if (baseA)
+    {
         checkCudaErrors(cusparseSetMatIndexBase(descrA, CUSPARSE_INDEX_BASE_ONE));
     }
-    else {
+    else
+    {
         checkCudaErrors(cusparseSetMatIndexBase(descrA, CUSPARSE_INDEX_BASE_ZERO));
     }
 
@@ -297,8 +312,7 @@ int main(int argc, char* argv[]) {
     assert(NULL != h_xhat);
     assert(NULL != h_bhat);
 
-    checkCudaErrors(
-        cudaMalloc((void**)&d_csrRowPtrA, sizeof(int) * (rowsA + 1)));
+    checkCudaErrors(cudaMalloc((void**)&d_csrRowPtrA, sizeof(int) * (rowsA + 1)));
     checkCudaErrors(cudaMalloc((void**)&d_csrColIndA, sizeof(int) * nnzA));
     checkCudaErrors(cudaMalloc((void**)&d_csrValA, sizeof(double) * nnzA));
     checkCudaErrors(cudaMalloc((void**)&d_x, sizeof(double) * colsA));
@@ -309,7 +323,8 @@ int main(int argc, char* argv[]) {
     checkCudaErrors(cudaMalloc((void**)&d_T, sizeof(double) * rowsA * 1));
 
     printf("step 1.2: set right hand side vector (b) to 1\n");
-    for (int row = 0; row < rowsA; row++) {
+    for (int row = 0; row < rowsA; row++)
+    {
         h_b[row] = 1.0;
     }
 
@@ -318,17 +333,18 @@ int main(int argc, char* argv[]) {
     start = second();
     start = second();
 
-    if (0 == strcmp(opts.reorder, "symrcm")) {
+    if (0 == strcmp(opts.reorder, "symrcm"))
+    {
         checkCudaErrors(cusolverSpXcsrsymrcmHost(cusolverSpH, rowsA, nnzA, descrA,
-            h_csrRowPtrA, h_csrColIndA,
-            h_Qreorder));
+            h_csrRowPtrA, h_csrColIndA, h_Qreorder));
     }
-    else if (0 == strcmp(opts.reorder, "symamd")) {
+    else if (0 == strcmp(opts.reorder, "symamd"))
+    {
         checkCudaErrors(cusolverSpXcsrsymamdHost(cusolverSpH, rowsA, nnzA, descrA,
-            h_csrRowPtrA, h_csrColIndA,
-            h_Qreorder));
+            h_csrRowPtrA, h_csrColIndA, h_Qreorder));
     }
-    else {
+    else
+    {
         fprintf(stderr, "Error: %s is unknow reordering\n", opts.reorder);
         return 1;
     }
@@ -344,25 +360,26 @@ int main(int argc, char* argv[]) {
     start = second();
 
     checkCudaErrors(cusolverSpXcsrperm_bufferSizeHost(
-        cusolverSpH, rowsA, colsA, nnzA, descrA, h_csrRowPtrB, h_csrColIndB,
-        h_Qreorder, h_Qreorder, &size_perm));
+        cusolverSpH, rowsA, colsA, nnzA, descrA, h_csrRowPtrB, h_csrColIndB, h_Qreorder, h_Qreorder, &size_perm));
 
-    if (buffer_cpu) {
+    if (buffer_cpu)
+    {
         free(buffer_cpu);
     }
     buffer_cpu = (void*)malloc(sizeof(char) * size_perm);
     assert(NULL != buffer_cpu);
 
     // h_mapBfromA = Identity
-    for (int j = 0; j < nnzA; j++) {
+    for (int j = 0; j < nnzA; j++)
+    {
         h_mapBfromA[j] = j;
     }
-    checkCudaErrors(cusolverSpXcsrpermHost(
-        cusolverSpH, rowsA, colsA, nnzA, descrA, h_csrRowPtrB, h_csrColIndB,
+    checkCudaErrors(cusolverSpXcsrpermHost(cusolverSpH, rowsA, colsA, nnzA, descrA, h_csrRowPtrB, h_csrColIndB,
         h_Qreorder, h_Qreorder, h_mapBfromA, buffer_cpu));
 
     // B = A( mapBfromA )
-    for (int j = 0; j < nnzA; j++) {
+    for (int j = 0; j < nnzA; j++)
+    {
         h_csrValB[j] = h_csrValA[h_mapBfromA[j]];
     }
 
@@ -374,24 +391,21 @@ int main(int argc, char* argv[]) {
     printf("step 4.1: create opaque info structure\n");
     checkCudaErrors(cusolverSpCreateCsrluInfoHost(&info));
 
-    printf(
-        "step 4.2: analyze LU(B) to know structure of Q and R, and upper bound "
-        "for nnz(L+U)\n");
+    printf("step 4.2: analyze LU(B) to know structure of Q and R, and upper bound for nnz(L+U)\n");
     start = second();
     start = second();
 
-    checkCudaErrors(cusolverSpXcsrluAnalysisHost(
-        cusolverSpH, rowsA, nnzA, descrA, h_csrRowPtrB, h_csrColIndB, info));
+    checkCudaErrors(cusolverSpXcsrluAnalysisHost(cusolverSpH, rowsA, nnzA, descrA, h_csrRowPtrB, h_csrColIndB, info));
 
     stop = second();
     time_sp_analysis = stop - start;
 
     printf("step 4.3: workspace for LU(B)\n");
-    checkCudaErrors(cusolverSpDcsrluBufferInfoHost(
-        cusolverSpH, rowsA, nnzA, descrA, h_csrValB, h_csrRowPtrB, h_csrColIndB,
+    checkCudaErrors(cusolverSpDcsrluBufferInfoHost(cusolverSpH, rowsA, nnzA, descrA, h_csrValB, h_csrRowPtrB, h_csrColIndB,
         info, &size_internal, &size_lu));
 
-    if (buffer_cpu) {
+    if (buffer_cpu)
+    {
         free(buffer_cpu);
     }
     buffer_cpu = (void*)malloc(sizeof(char) * size_lu);
@@ -401,8 +415,7 @@ int main(int argc, char* argv[]) {
     start = second();
     start = second();
 
-    checkCudaErrors(cusolverSpDcsrluFactorHost(
-        cusolverSpH, rowsA, nnzA, descrA, h_csrValB, h_csrRowPtrB, h_csrColIndB,
+    checkCudaErrors(cusolverSpDcsrluFactorHost(cusolverSpH, rowsA, nnzA, descrA, h_csrValB, h_csrRowPtrB, h_csrColIndB,
         info, pivot_threshold, buffer_cpu));
 
     stop = second();
@@ -410,12 +423,11 @@ int main(int argc, char* argv[]) {
 
     // TODO: check singularity by tol
     printf("step 4.5: check if the matrix is singular \n");
-    checkCudaErrors(
-        cusolverSpDcsrluZeroPivotHost(cusolverSpH, info, tol, &singularity));
+    checkCudaErrors(cusolverSpDcsrluZeroPivotHost(cusolverSpH, info, tol, &singularity));
 
-    if (0 <= singularity) {
-        fprintf(stderr, "Error: A is not invertible, singularity=%d\n",
-            singularity);
+    if (0 <= singularity)
+    {
+        fprintf(stderr, "Error: A is not invertible, singularity=%d\n", singularity);
         return 1;
     }
 
@@ -425,15 +437,16 @@ int main(int argc, char* argv[]) {
     start = second();
 
     // b_hat = Q*b
-    for (int j = 0; j < rowsA; j++) {
+    for (int j = 0; j < rowsA; j++)
+    {
         h_bhat[j] = h_b[h_Qreorder[j]];
     }
     // B*x_hat = b_hat
-    checkCudaErrors(cusolverSpDcsrluSolveHost(cusolverSpH, rowsA, h_bhat, h_xhat,
-        info, buffer_cpu));
+    checkCudaErrors(cusolverSpDcsrluSolveHost(cusolverSpH, rowsA, h_bhat, h_xhat, info, buffer_cpu));
 
     // x = Q^T * x_hat
-    for (int j = 0; j < rowsA; j++) {
+    for (int j = 0; j < rowsA; j++)
+    {
         h_x[h_Qreorder[j]] = h_xhat[j];
     }
 
@@ -442,32 +455,24 @@ int main(int argc, char* argv[]) {
 
     printf("step 4.7: evaluate residual r = b - A*x (result on CPU)\n");
     // use GPU gemv to compute r = b - A*x
-    checkCudaErrors(cudaMemcpy(d_csrRowPtrA, h_csrRowPtrA,
-        sizeof(int) * (rowsA + 1),
-        cudaMemcpyHostToDevice));
-    checkCudaErrors(cudaMemcpy(d_csrColIndA, h_csrColIndA, sizeof(int) * nnzA,
-        cudaMemcpyHostToDevice));
-    checkCudaErrors(cudaMemcpy(d_csrValA, h_csrValA, sizeof(double) * nnzA,
-        cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(d_csrRowPtrA, h_csrRowPtrA, sizeof(int) * (rowsA + 1), cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(d_csrColIndA, h_csrColIndA, sizeof(int) * nnzA, cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(d_csrValA, h_csrValA, sizeof(double) * nnzA, cudaMemcpyHostToDevice));
 
-    checkCudaErrors(
-        cudaMemcpy(d_r, h_b, sizeof(double) * rowsA, cudaMemcpyHostToDevice));
-    checkCudaErrors(
-        cudaMemcpy(d_x, h_x, sizeof(double) * colsA, cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(d_r, h_b, sizeof(double) * rowsA, cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(d_x, h_x, sizeof(double) * colsA, cudaMemcpyHostToDevice));
 
     /* Wrap raw data into cuSPARSE generic API objects */
     cusparseSpMatDescr_t matA = NULL;
-    if (baseA) {
-        checkCudaErrors(cusparseCreateCsr(&matA, rowsA, colsA, nnzA, d_csrRowPtrA,
-            d_csrColIndA, d_csrValA,
-            CUSPARSE_INDEX_32I, CUSPARSE_INDEX_32I,
-            CUSPARSE_INDEX_BASE_ONE, CUDA_R_64F));
+    if (baseA)
+    {
+        checkCudaErrors(cusparseCreateCsr(&matA, rowsA, colsA, nnzA, d_csrRowPtrA, d_csrColIndA, d_csrValA,
+            CUSPARSE_INDEX_32I, CUSPARSE_INDEX_32I, CUSPARSE_INDEX_BASE_ONE, CUDA_R_64F));
     }
-    else {
-        checkCudaErrors(cusparseCreateCsr(&matA, rowsA, colsA, nnzA, d_csrRowPtrA,
-            d_csrColIndA, d_csrValA,
-            CUSPARSE_INDEX_32I, CUSPARSE_INDEX_32I,
-            CUSPARSE_INDEX_BASE_ZERO, CUDA_R_64F));
+    else
+    {
+        checkCudaErrors(cusparseCreateCsr(&matA, rowsA, colsA, nnzA, d_csrRowPtrA, d_csrColIndA, d_csrValA,
+            CUSPARSE_INDEX_32I, CUSPARSE_INDEX_32I, CUSPARSE_INDEX_BASE_ZERO, CUDA_R_64F));
     }
 
     cusparseDnVecDescr_t vecx = NULL;
@@ -477,23 +482,19 @@ int main(int argc, char* argv[]) {
 
     /* Allocate workspace for cuSPARSE */
     size_t bufferSize = 0;
-    checkCudaErrors(cusparseSpMV_bufferSize(
-        cusparseH, CUSPARSE_OPERATION_NON_TRANSPOSE, &minus_one, matA, vecx, &one,
+    checkCudaErrors(cusparseSpMV_bufferSize(cusparseH, CUSPARSE_OPERATION_NON_TRANSPOSE, &minus_one, matA, vecx, &one,
         vecAx, CUDA_R_64F, CUSPARSE_SPMV_ALG_DEFAULT, &bufferSize));
     void* buffer = NULL;
     checkCudaErrors(cudaMalloc(&buffer, bufferSize));
 
     checkCudaErrors(cusparseSpMV(cusparseH, CUSPARSE_OPERATION_NON_TRANSPOSE,
-        &minus_one, matA, vecx, &one, vecAx, CUDA_R_64F,
-        CUSPARSE_SPMV_ALG_DEFAULT, buffer));
+        &minus_one, matA, vecx, &one, vecAx, CUDA_R_64F, CUSPARSE_SPMV_ALG_DEFAULT, buffer));
 
-    checkCudaErrors(
-        cudaMemcpy(h_r, d_r, sizeof(double) * rowsA, cudaMemcpyDeviceToHost));
+    checkCudaErrors(cudaMemcpy(h_r, d_r, sizeof(double) * rowsA, cudaMemcpyDeviceToHost));
 
     x_inf = vec_norminf(colsA, h_x);
     r_inf = vec_norminf(rowsA, h_r);
-    A_inf = csr_mat_norminf(rowsA, colsA, nnzA, descrA, h_csrValA, h_csrRowPtrA,
-        h_csrColIndA);
+    A_inf = csr_mat_norminf(rowsA, colsA, nnzA, descrA, h_csrValA, h_csrRowPtrA, h_csrColIndA);
 
     printf("(CPU) |b - A*x| = %E \n", r_inf);
     printf("(CPU) |A| = %E \n", A_inf);
@@ -529,8 +530,7 @@ int main(int argc, char* argv[]) {
     assert(NULL != h_csrRowPtrU);
     assert(NULL != h_csrColIndU);
 
-    checkCudaErrors(cusolverSpDcsrluExtractHost(
-        cusolverSpH, h_Plu, h_Qlu, descrA, h_csrValL, h_csrRowPtrL, h_csrColIndL,
+    checkCudaErrors(cusolverSpDcsrluExtractHost(cusolverSpH, h_Plu, h_Qlu, descrA, h_csrValL, h_csrRowPtrL, h_csrColIndL,
         descrA, h_csrValU, h_csrRowPtrU, h_csrColIndU, info, buffer_cpu));
 
     stop = second();
@@ -557,13 +557,15 @@ int main(int argc, char* argv[]) {
 
     printf("step 6.1: P = Plu*Qreroder\n");
     // gather operation, P = Qreorder(Plu)
-    for (int j = 0; j < rowsA; j++) {
+    for (int j = 0; j < rowsA; j++)
+    {
         h_P[j] = h_Qreorder[h_Plu[j]];
     }
 
     printf("step 6.2: Q = Qlu*Qreorder \n");
     // gather operation, Q = Qreorder(Qlu)
-    for (int j = 0; j < colsA; j++) {
+    for (int j = 0; j < colsA; j++)
+    {
         h_Q[j] = h_Qreorder[h_Qlu[j]];
     }
 
@@ -578,22 +580,18 @@ int main(int argc, char* argv[]) {
     checkCudaErrors(cusolverRfSetAlgs(cusolverRfH, fact_alg, solve_alg));
 
     // matrix mode: L and U are CSR format, and L has implicit unit diagonal
-    checkCudaErrors(
-        cusolverRfSetMatrixFormat(cusolverRfH, CUSOLVERRF_MATRIX_FORMAT_CSR,
-            CUSOLVERRF_UNIT_DIAGONAL_ASSUMED_L));
+    checkCudaErrors(cusolverRfSetMatrixFormat(cusolverRfH, CUSOLVERRF_MATRIX_FORMAT_CSR,
+        CUSOLVERRF_UNIT_DIAGONAL_ASSUMED_L));
 
     // fast mode for matrix assembling
-    checkCudaErrors(cusolverRfSetResetValuesFastMode(
-        cusolverRfH, CUSOLVERRF_RESET_VALUES_FAST_MODE_ON));
+    checkCudaErrors(cusolverRfSetResetValuesFastMode(cusolverRfH, CUSOLVERRF_RESET_VALUES_FAST_MODE_ON));
 
     printf("step 9: assemble P*A*Q = L*U \n");
     start = second();
     start = second();
 
-    checkCudaErrors(cusolverRfSetupHost(
-        rowsA, nnzA, h_csrRowPtrA, h_csrColIndA, h_csrValA, nnzL, h_csrRowPtrL,
-        h_csrColIndL, h_csrValL, nnzU, h_csrRowPtrU, h_csrColIndU, h_csrValU, h_P,
-        h_Q, cusolverRfH));
+    checkCudaErrors(cusolverRfSetupHost(rowsA, nnzA, h_csrRowPtrA, h_csrColIndA, h_csrValA, nnzL, h_csrRowPtrL,
+        h_csrColIndL, h_csrValL, nnzU, h_csrRowPtrU, h_csrColIndU, h_csrValU, h_P, h_Q, cusolverRfH));
 
     checkCudaErrors(cudaDeviceSynchronize());
     stop = second();
@@ -603,23 +601,16 @@ int main(int argc, char* argv[]) {
     checkCudaErrors(cusolverRfAnalyze(cusolverRfH));
 
     printf("step 11: import A to cusolverRf \n");
-    checkCudaErrors(cudaMemcpy(d_csrRowPtrA, h_csrRowPtrA,
-        sizeof(int) * (rowsA + 1),
-        cudaMemcpyHostToDevice));
-    checkCudaErrors(cudaMemcpy(d_csrColIndA, h_csrColIndA, sizeof(int) * nnzA,
-        cudaMemcpyHostToDevice));
-    checkCudaErrors(cudaMemcpy(d_csrValA, h_csrValA, sizeof(double) * nnzA,
-        cudaMemcpyHostToDevice));
-    checkCudaErrors(
-        cudaMemcpy(d_P, h_P, sizeof(int) * rowsA, cudaMemcpyHostToDevice));
-    checkCudaErrors(
-        cudaMemcpy(d_Q, h_Q, sizeof(int) * colsA, cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(d_csrRowPtrA, h_csrRowPtrA, sizeof(int) * (rowsA + 1), cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(d_csrColIndA, h_csrColIndA, sizeof(int) * nnzA, cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(d_csrValA, h_csrValA, sizeof(double) * nnzA, cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(d_P, h_P, sizeof(int) * rowsA, cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(d_Q, h_Q, sizeof(int) * colsA, cudaMemcpyHostToDevice));
 
     start = second();
     start = second();
 
-    checkCudaErrors(cusolverRfResetValues(rowsA, nnzA, d_csrRowPtrA, d_csrColIndA,
-        d_csrValA, d_P, d_Q, cusolverRfH));
+    checkCudaErrors(cusolverRfResetValues(rowsA, nnzA, d_csrRowPtrA, d_csrColIndA, d_csrValA, d_P, d_Q, cusolverRfH));
 
     checkCudaErrors(cudaDeviceSynchronize());
     stop = second();
@@ -636,31 +627,26 @@ int main(int argc, char* argv[]) {
     time_rf_refactor = stop - start;
 
     printf("step 13: solve A*x = b \n");
-    checkCudaErrors(
-        cudaMemcpy(d_x, h_b, sizeof(double) * rowsA, cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(d_x, h_b, sizeof(double) * rowsA, cudaMemcpyHostToDevice));
 
     start = second();
     start = second();
 
-    checkCudaErrors(
-        cusolverRfSolve(cusolverRfH, d_P, d_Q, 1, d_T, rowsA, d_x, rowsA));
+    checkCudaErrors(cusolverRfSolve(cusolverRfH, d_P, d_Q, 1, d_T, rowsA, d_x, rowsA));
 
     checkCudaErrors(cudaDeviceSynchronize());
     stop = second();
     time_rf_solve = stop - start;
 
     printf("step 14: evaluate residual r = b - A*x (result on GPU)\n");
-    checkCudaErrors(
-        cudaMemcpy(d_r, h_b, sizeof(double) * rowsA, cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(d_r, h_b, sizeof(double) * rowsA, cudaMemcpyHostToDevice));
 
     checkCudaErrors(cusparseSpMV(cusparseH, CUSPARSE_OPERATION_NON_TRANSPOSE,
         &minus_one, matA, vecx, &one, vecAx, CUDA_R_64F,
         CUSPARSE_SPMV_ALG_DEFAULT, buffer));
 
-    checkCudaErrors(
-        cudaMemcpy(h_x, d_x, sizeof(double) * colsA, cudaMemcpyDeviceToHost));
-    checkCudaErrors(
-        cudaMemcpy(h_r, d_r, sizeof(double) * rowsA, cudaMemcpyDeviceToHost));
+    checkCudaErrors(cudaMemcpy(h_x, d_x, sizeof(double) * colsA, cudaMemcpyDeviceToHost));
+    checkCudaErrors(cudaMemcpy(h_r, d_r, sizeof(double) * rowsA, cudaMemcpyDeviceToHost));
 
     x_inf = vec_norminf(colsA, h_x);
     r_inf = vec_norminf(rowsA, h_r);
@@ -670,8 +656,7 @@ int main(int argc, char* argv[]) {
     printf("(GPU) |b - A*x|/(|A|*|x|) = %E \n", r_inf / (A_inf * x_inf));
 
     printf("===== statistics \n");
-    printf(" nnz(A) = %d, nnz(L+U) = %d, zero fill-in ratio = %f\n", nnzA,
-        nnzL + nnzU, ((double)(nnzL + nnzU)) / (double)nnzA);
+    printf(" nnz(A) = %d, nnz(L+U) = %d, zero fill-in ratio = %f\n", nnzA, nnzL + nnzU, ((double)(nnzL + nnzU)) / (double)nnzA);
     printf("\n");
     printf("===== timing profile \n");
     printf(" reorder A   : %f sec\n", time_reorder);
@@ -687,139 +672,181 @@ int main(int argc, char* argv[]) {
     printf(" cusolverRf refactor : %f sec\n", time_rf_refactor);
     printf(" cusolverRf solve    : %f sec\n", time_rf_solve);
 
-    if (cusolverRfH) {
+    if (cusolverRfH)
+    {
         checkCudaErrors(cusolverRfDestroy(cusolverRfH));
     }
-    if (cusolverSpH) {
+    if (cusolverSpH)
+    {
         checkCudaErrors(cusolverSpDestroy(cusolverSpH));
     }
-    if (cusparseH) {
+    if (cusparseH)
+    {
         checkCudaErrors(cusparseDestroy(cusparseH));
     }
-    if (stream) {
+    if (stream)
+    {
         checkCudaErrors(cudaStreamDestroy(stream));
     }
-    if (descrA) {
+    if (descrA)
+    {
         checkCudaErrors(cusparseDestroyMatDescr(descrA));
     }
-    if (info) {
+    if (info)
+    {
         checkCudaErrors(cusolverSpDestroyCsrluInfoHost(info));
     }
 
-    if (matA) {
+    if (matA)
+    {
         checkCudaErrors(cusparseDestroySpMat(matA));
     }
-    if (vecx) {
+    if (vecx)
+    {
         checkCudaErrors(cusparseDestroyDnVec(vecx));
     }
-    if (vecAx) {
+    if (vecAx)
+    {
         checkCudaErrors(cusparseDestroyDnVec(vecAx));
     }
 
-    if (h_csrValA) {
+    if (h_csrValA)
+    {
         free(h_csrValA);
     }
-    if (h_csrRowPtrA) {
+    if (h_csrRowPtrA)
+    {
         free(h_csrRowPtrA);
     }
-    if (h_csrColIndA) {
+    if (h_csrColIndA)
+    {
         free(h_csrColIndA);
     }
 
-    if (h_Qreorder) {
+    if (h_Qreorder)
+    {
         free(h_Qreorder);
     }
 
-    if (h_csrRowPtrB) {
+    if (h_csrRowPtrB)
+    {
         free(h_csrRowPtrB);
     }
-    if (h_csrColIndB) {
+    if (h_csrColIndB)
+    {
         free(h_csrColIndB);
     }
-    if (h_csrValB) {
+    if (h_csrValB)
+    {
         free(h_csrValB);
     }
-    if (h_mapBfromA) {
+    if (h_mapBfromA)
+    {
         free(h_mapBfromA);
     }
 
-    if (h_x) {
+    if (h_x)
+    {
         free(h_x);
     }
-    if (h_b) {
+    if (h_b)
+    {
         free(h_b);
     }
-    if (h_r) {
+    if (h_r)
+    {
         free(h_r);
     }
-    if (h_xhat) {
+    if (h_xhat)
+    {
         free(h_xhat);
     }
-    if (h_bhat) {
+    if (h_bhat)
+    {
         free(h_bhat);
     }
 
-    if (buffer_cpu) {
+    if (buffer_cpu)
+    {
         free(buffer_cpu);
     }
 
-    if (h_Plu) {
+    if (h_Plu)
+    {
         free(h_Plu);
     }
-    if (h_Qlu) {
+    if (h_Qlu)
+    {
         free(h_Qlu);
     }
-    if (h_csrRowPtrL) {
+    if (h_csrRowPtrL)
+    {
         free(h_csrRowPtrL);
     }
-    if (h_csrColIndL) {
+    if (h_csrColIndL)
+    {
         free(h_csrColIndL);
     }
-    if (h_csrValL) {
+    if (h_csrValL)
+    {
         free(h_csrValL);
     }
-    if (h_csrRowPtrU) {
+    if (h_csrRowPtrU)
+    {
         free(h_csrRowPtrU);
     }
-    if (h_csrColIndU) {
+    if (h_csrColIndU)
+    {
         free(h_csrColIndU);
     }
-    if (h_csrValU) {
+    if (h_csrValU)
+    {
         free(h_csrValU);
     }
 
-    if (h_P) {
+    if (h_P)
+    {
         free(h_P);
     }
-    if (h_Q) {
+    if (h_Q)
+    {
         free(h_Q);
     }
 
-    if (d_csrValA) {
+    if (d_csrValA)
+    {
         checkCudaErrors(cudaFree(d_csrValA));
     }
-    if (d_csrRowPtrA) {
+    if (d_csrRowPtrA)
+    {
         checkCudaErrors(cudaFree(d_csrRowPtrA));
     }
-    if (d_csrColIndA) {
+    if (d_csrColIndA)
+    {
         checkCudaErrors(cudaFree(d_csrColIndA));
     }
-    if (d_x) {
+    if (d_x)
+    {
         checkCudaErrors(cudaFree(d_x));
     }
-    if (d_b) {
+    if (d_b)
+    {
         checkCudaErrors(cudaFree(d_b));
     }
-    if (d_r) {
+    if (d_r)
+    {
         checkCudaErrors(cudaFree(d_r));
     }
-    if (d_P) {
+    if (d_P)
+    {
         checkCudaErrors(cudaFree(d_P));
     }
-    if (d_Q) {
+    if (d_Q)
+    {
         checkCudaErrors(cudaFree(d_Q));
     }
-    if (d_T) {
+    if (d_T)
+    {
         checkCudaErrors(cudaFree(d_T));
     }
 

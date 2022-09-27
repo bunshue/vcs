@@ -26,40 +26,40 @@
 
 template <typename T_ELEM>
 int loadMMSparseMatrix(
-    char *filename,
+    char* filename,
     char elem_type,
     bool csrFormat,
-    int *m,
-    int *n,
-    int *nnz,
-    T_ELEM **aVal,
-    int **aRowInd,
-    int **aColInd,
+    int* m,
+    int* n,
+    int* nnz,
+    T_ELEM** aVal,
+    int** aRowInd,
+    int** aColInd,
     int extendSymMatrix);
 
 void UsageSP(void)
 {
-    printf( "<options>\n");
-    printf( "-h          : display this help\n");
-    printf( "-file=<filename> : filename containing a matrix in MM format\n");
-    printf( "-device=<device_id> : <device_id> if want to run on specific GPU\n");
+    printf("<options>\n");
+    printf("-h          : display this help\n");
+    printf("-file=<filename> : filename containing a matrix in MM format\n");
+    printf("-device=<device_id> : <device_id> if want to run on specific GPU\n");
 
-    exit( 0 );
+    exit(0);
 }
 
-void parseCommandLineArguments(int argc, char *argv[], struct testOpts &opts)
+void parseCommandLineArguments(int argc, char* argv[], struct testOpts& opts)
 {
     memset(&opts, 0, sizeof(opts));
 
-    if (checkCmdLineFlag(argc, (const char **)argv, "-h"))
+    if (checkCmdLineFlag(argc, (const char**)argv, "-h"))
     {
         UsageSP();
     }
 
-    if (checkCmdLineFlag(argc, (const char **)argv, "file"))
+    if (checkCmdLineFlag(argc, (const char**)argv, "file"))
     {
-        char *fileName = 0;
-        getCmdLineArgumentString(argc, (const char **)argv, "file", &fileName);
+        char* fileName = 0;
+        getCmdLineArgumentString(argc, (const char**)argv, "file", &fileName);
 
         if (fileName)
         {
@@ -74,7 +74,7 @@ void parseCommandLineArguments(int argc, char *argv[], struct testOpts &opts)
 }
 
 
-int main (int argc, char *argv[])
+int main(int argc, char* argv[])
 {
     struct testOpts opts;
     cusolverSpHandle_t cusolverSpH = NULL; // reordering, permutation and 1st LU factorization
@@ -87,29 +87,29 @@ int main (int argc, char *argv[])
 
     int rowsA = 0; // number of rows of A
     int colsA = 0; // number of columns of A
-    int nnzA  = 0; // number of nonzeros of A
+    int nnzA = 0; // number of nonzeros of A
     int baseA = 0; // base index in CSR format
 
     // CSR(A) from I/O
-    int *h_csrRowPtrA = NULL; // <int> n+1 
-    int *h_csrColIndA = NULL; // <int> nnzA 
-    double *h_csrValA = NULL; // <double> nnzA 
+    int* h_csrRowPtrA = NULL; // <int> n+1 
+    int* h_csrColIndA = NULL; // <int> nnzA 
+    double* h_csrValA = NULL; // <double> nnzA 
 
-    double *h_x = NULL; // <double> n,  x = A \ b
-    double *h_b = NULL; // <double> n, b = ones(m,1)
-    double *h_r = NULL; // <double> n, r = b - A*x
+    double* h_x = NULL; // <double> n,  x = A \ b
+    double* h_b = NULL; // <double> n, b = ones(m,1)
+    double* h_r = NULL; // <double> n, r = b - A*x
 
-    size_t size_internal = 0; 
+    size_t size_internal = 0;
     size_t size_chol = 0; // size of working space for csrlu
-    void *buffer_cpu = NULL; // working space for Cholesky
-    void *buffer_gpu = NULL; // working space for Cholesky
+    void* buffer_cpu = NULL; // working space for Cholesky
+    void* buffer_gpu = NULL; // working space for Cholesky
 
-    int *d_csrRowPtrA = NULL; // <int> n+1
-    int *d_csrColIndA = NULL; // <int> nnzA
-    double *d_csrValA = NULL; // <double> nnzA
-    double *d_x = NULL; // <double> n, x = A \ b 
-    double *d_b = NULL; // <double> n, a copy of h_b
-    double *d_r = NULL; // <double> n, r = b - A*x
+    int* d_csrRowPtrA = NULL; // <int> n+1
+    int* d_csrColIndA = NULL; // <int> nnzA
+    double* d_csrValA = NULL; // <double> nnzA
+    double* d_x = NULL; // <double> n, x = A \ b 
+    double* d_b = NULL; // <double> n, a copy of h_b
+    double* d_r = NULL; // <double> n, r = b - A*x
 
     // the constants used in residual evaluation, r = b - A*x
     const double minus_one = -1.0;
@@ -117,7 +117,7 @@ int main (int argc, char *argv[])
     // the constant used in cusolverSp
     // singularity is -1 if A is invertible under tol
     // tol determines the condition of singularity
-    int singularity = 0; 
+    int singularity = 0;
     const double tol = 1.e-14;
 
     double x_inf = 0.0; // |x|
@@ -127,11 +127,11 @@ int main (int argc, char *argv[])
 
     parseCommandLineArguments(argc, argv, opts);
 
-    findCudaDevice(argc, (const char **)argv);
+    findCudaDevice(argc, (const char**)argv);
 
     if (opts.sparse_mat_filename == NULL)
     {
-        opts.sparse_mat_filename =  sdkFindFilePath("lap2D_5pt_n100.mtx", argv[0]);
+        opts.sparse_mat_filename = sdkFindFilePath("lap2D_5pt_n100.mtx", argv[0]);
         if (opts.sparse_mat_filename != NULL)
             printf("Using default input file [%s]\n", opts.sparse_mat_filename);
         else
@@ -146,8 +146,8 @@ int main (int argc, char *argv[])
 
     if (opts.sparse_mat_filename)
     {
-        if (loadMMSparseMatrix<double>(opts.sparse_mat_filename, 'd', true , &rowsA, &colsA,
-               &nnzA, &h_csrValA, &h_csrRowPtrA, &h_csrColIndA, true)) 
+        if (loadMMSparseMatrix<double>(opts.sparse_mat_filename, 'd', true, &rowsA, &colsA,
+            &nnzA, &h_csrValA, &h_csrRowPtrA, &h_csrColIndA, true))
         {
             return 1;
         }
@@ -159,7 +159,7 @@ int main (int argc, char *argv[])
         return 1;
     }
 
-    if ( rowsA != colsA ) 
+    if (rowsA != colsA)
     {
         fprintf(stderr, "Error: only support square matrix\n");
         return 1;
@@ -189,22 +189,22 @@ int main (int argc, char *argv[])
         checkCudaErrors(cusparseSetMatIndexBase(descrA, CUSPARSE_INDEX_BASE_ZERO));
     }
 
-    h_x    = (double*)malloc(sizeof(double)*colsA);
-    h_b    = (double*)malloc(sizeof(double)*rowsA);
-    h_r    = (double*)malloc(sizeof(double)*rowsA);
+    h_x = (double*)malloc(sizeof(double) * colsA);
+    h_b = (double*)malloc(sizeof(double) * rowsA);
+    h_r = (double*)malloc(sizeof(double) * rowsA);
 
     assert(NULL != h_x);
     assert(NULL != h_b);
     assert(NULL != h_r);
 
-    checkCudaErrors(cudaMalloc((void **)&d_csrRowPtrA, sizeof(int)*(rowsA+1)));
-    checkCudaErrors(cudaMalloc((void **)&d_csrColIndA, sizeof(int)*nnzA));
-    checkCudaErrors(cudaMalloc((void **)&d_csrValA   , sizeof(double)*nnzA));
-    checkCudaErrors(cudaMalloc((void **)&d_x, sizeof(double)*colsA));
-    checkCudaErrors(cudaMalloc((void **)&d_b, sizeof(double)*rowsA));
-    checkCudaErrors(cudaMalloc((void **)&d_r, sizeof(double)*rowsA));
+    checkCudaErrors(cudaMalloc((void**)&d_csrRowPtrA, sizeof(int) * (rowsA + 1)));
+    checkCudaErrors(cudaMalloc((void**)&d_csrColIndA, sizeof(int) * nnzA));
+    checkCudaErrors(cudaMalloc((void**)&d_csrValA, sizeof(double) * nnzA));
+    checkCudaErrors(cudaMalloc((void**)&d_x, sizeof(double) * colsA));
+    checkCudaErrors(cudaMalloc((void**)&d_b, sizeof(double) * rowsA));
+    checkCudaErrors(cudaMalloc((void**)&d_r, sizeof(double) * rowsA));
 
-    for(int row = 0 ; row < rowsA ; row++)
+    for (int row = 0; row < rowsA; row++)
     {
         h_b[row] = 1.0;
     }
@@ -226,11 +226,11 @@ int main (int argc, char *argv[])
         &size_internal,
         &size_chol));
 
-    if (buffer_cpu) 
+    if (buffer_cpu)
     {
-        free(buffer_cpu); 
+        free(buffer_cpu);
     }
-    buffer_cpu = (void*)malloc(sizeof(char)*size_chol);
+    buffer_cpu = (void*)malloc(sizeof(char) * size_chol);
     assert(NULL != buffer_cpu);
 
     printf("step 5: compute A = L*L^T \n");
@@ -244,38 +244,35 @@ int main (int argc, char *argv[])
     checkCudaErrors(cusolverSpDcsrcholZeroPivotHost(
         cusolverSpH, h_info, tol, &singularity));
 
-    if ( 0 <= singularity)
+    if (0 <= singularity)
     {
         fprintf(stderr, "Error: A is not invertible, singularity=%d\n", singularity);
         return 1;
     }
 
     printf("step 7: solve A*x = b \n");
-    checkCudaErrors(cusolverSpDcsrcholSolveHost(
-        cusolverSpH, rowsA, h_b, h_x, h_info, buffer_cpu));
+    checkCudaErrors(cusolverSpDcsrcholSolveHost(cusolverSpH, rowsA, h_b, h_x, h_info, buffer_cpu));
 
     printf("step 8: evaluate residual r = b - A*x (result on CPU)\n");
     // use GPU gemv to compute r = b - A*x
-    checkCudaErrors(cudaMemcpy(d_csrRowPtrA, h_csrRowPtrA, sizeof(int)*(rowsA+1), cudaMemcpyHostToDevice));
-    checkCudaErrors(cudaMemcpy(d_csrColIndA, h_csrColIndA, sizeof(int)*nnzA     , cudaMemcpyHostToDevice));
-    checkCudaErrors(cudaMemcpy(d_csrValA   , h_csrValA   , sizeof(double)*nnzA  , cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(d_csrRowPtrA, h_csrRowPtrA, sizeof(int) * (rowsA + 1), cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(d_csrColIndA, h_csrColIndA, sizeof(int) * nnzA, cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(d_csrValA, h_csrValA, sizeof(double) * nnzA, cudaMemcpyHostToDevice));
 
-    checkCudaErrors(cudaMemcpy(d_r, h_b, sizeof(double)*rowsA, cudaMemcpyHostToDevice));
-    checkCudaErrors(cudaMemcpy(d_x, h_x, sizeof(double)*colsA, cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(d_r, h_b, sizeof(double) * rowsA, cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(d_x, h_x, sizeof(double) * colsA, cudaMemcpyHostToDevice));
 
     /* Wrap raw data into cuSPARSE generic API objects */
     cusparseSpMatDescr_t matA = NULL;
     if (baseA)
     {
-        checkCudaErrors(cusparseCreateCsr(
-        &matA, rowsA, colsA, nnzA, d_csrRowPtrA, d_csrColIndA, d_csrValA, CUSPARSE_INDEX_32I,
-        CUSPARSE_INDEX_32I, CUSPARSE_INDEX_BASE_ONE, CUDA_R_64F));
+        checkCudaErrors(cusparseCreateCsr(&matA, rowsA, colsA, nnzA, d_csrRowPtrA, d_csrColIndA, d_csrValA, CUSPARSE_INDEX_32I,
+            CUSPARSE_INDEX_32I, CUSPARSE_INDEX_BASE_ONE, CUDA_R_64F));
     }
     else
     {
-        checkCudaErrors(cusparseCreateCsr(
-        &matA, rowsA, colsA, nnzA, d_csrRowPtrA, d_csrColIndA, d_csrValA, CUSPARSE_INDEX_32I,
-        CUSPARSE_INDEX_32I, CUSPARSE_INDEX_BASE_ZERO, CUDA_R_64F));
+        checkCudaErrors(cusparseCreateCsr(&matA, rowsA, colsA, nnzA, d_csrRowPtrA, d_csrColIndA, d_csrValA, CUSPARSE_INDEX_32I,
+            CUSPARSE_INDEX_32I, CUSPARSE_INDEX_BASE_ZERO, CUDA_R_64F));
     }
 
     cusparseDnVecDescr_t vecx = NULL;
@@ -288,14 +285,13 @@ int main (int argc, char *argv[])
     checkCudaErrors(cusparseSpMV_bufferSize(
         cusparseH, CUSPARSE_OPERATION_NON_TRANSPOSE, &minus_one, matA, vecx,
         &one, vecAx, CUDA_R_64F, CUSPARSE_SPMV_ALG_DEFAULT, &bufferSize));
-    void *buffer = NULL;
+    void* buffer = NULL;
     checkCudaErrors(cudaMalloc(&buffer, bufferSize));
 
-    checkCudaErrors(cusparseSpMV(
-        cusparseH, CUSPARSE_OPERATION_NON_TRANSPOSE, &minus_one, matA, vecx,
+    checkCudaErrors(cusparseSpMV(cusparseH, CUSPARSE_OPERATION_NON_TRANSPOSE, &minus_one, matA, vecx,
         &one, vecAx, CUDA_R_64F, CUSPARSE_SPMV_ALG_DEFAULT, buffer));
 
-    checkCudaErrors(cudaMemcpy(h_r, d_r, sizeof(double)*rowsA, cudaMemcpyDeviceToHost));
+    checkCudaErrors(cudaMemcpy(h_r, d_r, sizeof(double) * rowsA, cudaMemcpyDeviceToHost));
 
     x_inf = vec_norminf(colsA, h_x);
     r_inf = vec_norminf(rowsA, h_r);
@@ -304,91 +300,80 @@ int main (int argc, char *argv[])
     printf("(CPU) |b - A*x| = %E \n", r_inf);
     printf("(CPU) |A| = %E \n", A_inf);
     printf("(CPU) |x| = %E \n", x_inf);
-    printf("(CPU) |b - A*x|/(|A|*|x|) = %E \n", r_inf/(A_inf * x_inf));
+    printf("(CPU) |b - A*x|/(|A|*|x|) = %E \n", r_inf / (A_inf * x_inf));
 
     printf("step 9: create opaque info structure\n");
     checkCudaErrors(cusolverSpCreateCsrcholInfo(&d_info));
 
-    checkCudaErrors(cudaMemcpy(d_csrRowPtrA, h_csrRowPtrA, sizeof(int)*(rowsA+1), cudaMemcpyHostToDevice));
-    checkCudaErrors(cudaMemcpy(d_csrColIndA, h_csrColIndA, sizeof(int)*nnzA     , cudaMemcpyHostToDevice));
-    checkCudaErrors(cudaMemcpy(d_csrValA   , h_csrValA   , sizeof(double)*nnzA  , cudaMemcpyHostToDevice));
-    checkCudaErrors(cudaMemcpy(d_b, h_b, sizeof(double)*rowsA, cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(d_csrRowPtrA, h_csrRowPtrA, sizeof(int) * (rowsA + 1), cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(d_csrColIndA, h_csrColIndA, sizeof(int) * nnzA, cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(d_csrValA, h_csrValA, sizeof(double) * nnzA, cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(d_b, h_b, sizeof(double) * rowsA, cudaMemcpyHostToDevice));
 
     printf("step 10: analyze chol(A) to know structure of L\n");
-    checkCudaErrors(cusolverSpXcsrcholAnalysis(
-        cusolverSpH, rowsA, nnzA,
-        descrA, d_csrRowPtrA, d_csrColIndA,
-        d_info));
+    checkCudaErrors(cusolverSpXcsrcholAnalysis(cusolverSpH, rowsA, nnzA, descrA, d_csrRowPtrA, d_csrColIndA, d_info));
 
     printf("step 11: workspace for chol(A)\n");
-    checkCudaErrors(cusolverSpDcsrcholBufferInfo(
-        cusolverSpH, rowsA, nnzA,
-        descrA, d_csrValA, d_csrRowPtrA, d_csrColIndA,
-        d_info,
-        &size_internal,
-        &size_chol));
+    checkCudaErrors(cusolverSpDcsrcholBufferInfo(cusolverSpH, rowsA, nnzA,
+        descrA, d_csrValA, d_csrRowPtrA, d_csrColIndA, d_info,
+        &size_internal, &size_chol));
 
-    if (buffer_gpu) {
+    if (buffer_gpu)
+    {
         checkCudaErrors(cudaFree(buffer_gpu));
     }
-    checkCudaErrors(cudaMalloc(&buffer_gpu, sizeof(char)*size_chol));
+    checkCudaErrors(cudaMalloc(&buffer_gpu, sizeof(char) * size_chol));
 
     printf("step 12: compute A = L*L^T \n");
-    checkCudaErrors(cusolverSpDcsrcholFactor(
-        cusolverSpH, rowsA, nnzA,
-        descrA, d_csrValA, d_csrRowPtrA, d_csrColIndA,
-        d_info,
-        buffer_gpu));
+    checkCudaErrors(cusolverSpDcsrcholFactor(cusolverSpH, rowsA, nnzA, descrA, d_csrValA, d_csrRowPtrA, d_csrColIndA, d_info, buffer_gpu));
 
     printf("step 13: check if the matrix is singular \n");
-    checkCudaErrors(cusolverSpDcsrcholZeroPivot(
-        cusolverSpH, d_info, tol, &singularity));
+    checkCudaErrors(cusolverSpDcsrcholZeroPivot(cusolverSpH, d_info, tol, &singularity));
 
-    if ( 0 <= singularity){
+    if (0 <= singularity)
+    {
         fprintf(stderr, "Error: A is not invertible, singularity=%d\n", singularity);
         return 1;
     }
 
     printf("step 14: solve A*x = b \n");
-    checkCudaErrors(cusolverSpDcsrcholSolve(
-        cusolverSpH, rowsA, d_b, d_x, d_info, buffer_gpu));
+    checkCudaErrors(cusolverSpDcsrcholSolve(cusolverSpH, rowsA, d_b, d_x, d_info, buffer_gpu));
 
-    checkCudaErrors(cudaMemcpy(d_r, h_b, sizeof(double)*rowsA, cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(d_r, h_b, sizeof(double) * rowsA, cudaMemcpyHostToDevice));
 
-    checkCudaErrors(cusparseSpMV(
-        cusparseH, CUSPARSE_OPERATION_NON_TRANSPOSE, &minus_one, matA, vecx,
+    checkCudaErrors(cusparseSpMV(cusparseH, CUSPARSE_OPERATION_NON_TRANSPOSE, &minus_one, matA, vecx,
         &one, vecAx, CUDA_R_64F, CUSPARSE_SPMV_ALG_DEFAULT, buffer));
 
-    checkCudaErrors(cudaMemcpy(h_r, d_r, sizeof(double)*rowsA, cudaMemcpyDeviceToHost));
+    checkCudaErrors(cudaMemcpy(h_r, d_r, sizeof(double) * rowsA, cudaMemcpyDeviceToHost));
 
     r_inf = vec_norminf(rowsA, h_r);
 
     printf("(GPU) |b - A*x| = %E \n", r_inf);
-    printf("(GPU) |b - A*x|/(|A|*|x|) = %E \n", r_inf/(A_inf * x_inf));
+    printf("(GPU) |b - A*x|/(|A|*|x|) = %E \n", r_inf / (A_inf * x_inf));
 
 
     if (cusolverSpH) { checkCudaErrors(cusolverSpDestroy(cusolverSpH)); }
-    if (cusparseH  ) { checkCudaErrors(cusparseDestroy(cusparseH)); }
-    if (stream     ) { checkCudaErrors(cudaStreamDestroy(stream)); }
-    if (descrA     ) { checkCudaErrors(cusparseDestroyMatDescr(descrA)); }
-    if (h_info     ) { checkCudaErrors(cusolverSpDestroyCsrcholInfoHost(h_info)); }
-    if (d_info     ) { checkCudaErrors(cusolverSpDestroyCsrcholInfo(d_info)); }
-    if (matA       ) { checkCudaErrors(cusparseDestroySpMat(matA)); }
-    if (vecx       ) { checkCudaErrors(cusparseDestroyDnVec(vecx)); }
-    if (vecAx      ) { checkCudaErrors(cusparseDestroyDnVec(vecAx)); }
+    if (cusparseH) { checkCudaErrors(cusparseDestroy(cusparseH)); }
+    if (stream) { checkCudaErrors(cudaStreamDestroy(stream)); }
+    if (descrA) { checkCudaErrors(cusparseDestroyMatDescr(descrA)); }
+    if (h_info) { checkCudaErrors(cusolverSpDestroyCsrcholInfoHost(h_info)); }
+    if (d_info) { checkCudaErrors(cusolverSpDestroyCsrcholInfo(d_info)); }
+    if (matA) { checkCudaErrors(cusparseDestroySpMat(matA)); }
+    if (vecx) { checkCudaErrors(cusparseDestroyDnVec(vecx)); }
+    if (vecAx) { checkCudaErrors(cusparseDestroyDnVec(vecAx)); }
 
-    if (h_csrValA   ) { free(h_csrValA); }
+    if (h_csrValA) { free(h_csrValA); }
     if (h_csrRowPtrA) { free(h_csrRowPtrA); }
     if (h_csrColIndA) { free(h_csrColIndA); }
 
-    if (h_x   ) { free(h_x); }
-    if (h_b   ) { free(h_b); }
-    if (h_r   ) { free(h_r); }
+    if (h_x) { free(h_x); }
+    if (h_b) { free(h_b); }
+    if (h_r) { free(h_r); }
 
     if (buffer_cpu) { free(buffer_cpu); }
     if (buffer_gpu) { checkCudaErrors(cudaFree(buffer_gpu)); }
 
-    if (d_csrValA   ) { checkCudaErrors(cudaFree(d_csrValA)); }
+    if (d_csrValA) { checkCudaErrors(cudaFree(d_csrValA)); }
     if (d_csrRowPtrA) { checkCudaErrors(cudaFree(d_csrRowPtrA)); }
     if (d_csrColIndA) { checkCudaErrors(cudaFree(d_csrColIndA)); }
     if (d_x) { checkCudaErrors(cudaFree(d_x)); }

@@ -47,3 +47,51 @@ extern "C" void cuda_Mix(TColor * d_dst, int alpha, int imageW, int imageH, cuda
 
     Mix << <grid, threads >> > (d_dst, alpha, imageW, imageH, texImage1, texImage2);
 }
+
+#define PI 3.14159
+
+__global__ void Wave(TColor* dst, int alpha, int imageW, int imageH)
+{
+    const int ix = blockDim.x * blockIdx.x + threadIdx.x;
+    const int iy = blockDim.y * blockIdx.y + threadIdx.y;
+
+    if (ix < imageW && iy < imageH)
+    {
+        int cx = imageW / 2;
+        int cy = imageH / 2;
+
+        double radius = sqrt((double)((ix - cx) * (ix - cx) + (iy - cy) * (iy - cy)));
+
+        //double rad = PI * alpha / 180 / 1;
+        //float r = (float)(0.5 * sin(rad) + 0.5);
+
+        //float r = ((float)((ix + alpha) % imageW)) / imageW;
+        //alpha = 0;
+        float r = ((float)(((int)radius + alpha) % imageW)) / imageW;
+
+        if (r > 1)
+        {
+            r = 1;
+        }
+        else if (r < 0)
+        {
+            r = 0;
+        }
+        if (r > 0.5)
+        {
+            r = 1 - r;
+        }
+        r *= 2;
+
+        dst[imageW * iy + ix] = make_color(r, r, r, 0);
+    }
+}
+
+extern "C" void cuda_Wave(TColor * d_dst, int alpha, int imageW, int imageH)
+{
+    dim3 threads(BLOCKDIM_X, BLOCKDIM_Y);
+    dim3 grid(iDivUp(imageW, BLOCKDIM_X), iDivUp(imageH, BLOCKDIM_Y));
+
+    Wave << <grid, threads >> > (d_dst, alpha, imageW, imageH);
+}
+
