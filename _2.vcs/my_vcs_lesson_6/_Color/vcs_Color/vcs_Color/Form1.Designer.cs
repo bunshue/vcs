@@ -214,6 +214,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(180, 55);
             this.button18.TabIndex = 67;
+            this.button18.Text = "GetHueExample";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -224,6 +225,7 @@
             this.button17.Name = "button17";
             this.button17.Size = new System.Drawing.Size(180, 55);
             this.button17.TabIndex = 66;
+            this.button17.Text = "test";
             this.button17.UseVisualStyleBackColor = true;
             this.button17.Click += new System.EventHandler(this.button17_Click);
             // 

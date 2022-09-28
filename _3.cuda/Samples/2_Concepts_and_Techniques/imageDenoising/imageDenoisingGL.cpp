@@ -76,9 +76,6 @@ int fpsLimit = 1;  // FPS limit for sampling
 unsigned int frameCount = 0;
 unsigned int g_TotalErrors = 0;
 
-int* pArgc = NULL;
-char** pArgv = NULL;
-
 #define MAX_EPSILON_ERROR 5
 #define REFRESH_DELAY 10  // ms
 
@@ -454,15 +451,9 @@ void runAutoTest(int argc, char** argv, const char* filename,
     exit(g_TotalErrors == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
     char* dump_file = NULL;
-
-#if defined(__linux__)
-    setenv("DISPLAY", ":0", 0);
-#endif
-
-    pArgc = &argc;
-    pArgv = argv;
 
     printf("%s Starting...\n\n", sSDKsample);
 

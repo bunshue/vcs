@@ -58,6 +58,7 @@ byte *MallocPlaneByte(int width, int height, int *pStepBytes)
   //#else
   ptr = (byte *)malloc(*pStepBytes * height);
   //#endif
+  printf("MallocPlaneByte, width = %d, strides = %d\n", width, *pStepBytes);
   return ptr;
 }
 
@@ -263,7 +264,7 @@ int PreLoadBmp2(char* FileName, int* Width, int* Height)
     BMPInfoHeader InfoHeader;
     FILE* fh;
 
-    printf("PreLoadBmp2, filename : %s\n", FileName);
+    //printf("PreLoadBmp2, filename : %s\n", FileName);
 
     if (!(fh = fopen(FileName, "rb")))
     {
@@ -358,6 +359,8 @@ int GetBmpColorDepth(char* FileName)
 *
 * \return None
 */
+
+//僅支持位元深度24位元
 void LoadBmpAsGray(char *FileName, int Stride, ROI ImSize, byte *Img)
 {
   BMPFileHeader FileHeader;
@@ -365,15 +368,19 @@ void LoadBmpAsGray(char *FileName, int Stride, ROI ImSize, byte *Img)
 
   FILE *fh;
 
+  /*
   printf("LoadBmpAsGray, filename : %s, stride = %d, W = %d, H = %d\n", FileName, Stride, ImSize.width, ImSize.height);
 
   printf("sizeof(FileHeader) = %d\n", sizeof(FileHeader));  // 14
   printf("sizeof(InfoHeader) = %d\n", sizeof(InfoHeader));  // 40
+  */
 
   fh = fopen(FileName, "rb");
 
   fread(&FileHeader, sizeof(BMPFileHeader), 1, fh);
   fread(&InfoHeader, sizeof(BMPInfoHeader), 1, fh);
+
+  //printf("W = %d, H = %d\n", ImSize.width, ImSize.height);
 
   for (int j = 0; j < ImSize.height; j++)
   {
@@ -411,7 +418,7 @@ void LoadBmpAsData(char* FileName, int Stride, ROI ImSize, byte* Img, int color_
     fread(&FileHeader, sizeof(BMPFileHeader), 1, fh);
     fread(&InfoHeader, sizeof(BMPInfoHeader), 1, fh);
 
-    printf("W = %d, H = %d\n", ImSize.width, ImSize.height);
+    //printf("W = %d, H = %d\n", ImSize.width, ImSize.height);
 
     for (int j = 0; j < ImSize.height; j++)
     {

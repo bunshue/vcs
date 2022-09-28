@@ -1,5 +1,4 @@
 #include "Common.h"
-#include "DCT8x8_Gold.h"
 #include "BmpUtil.h"
 
 /**

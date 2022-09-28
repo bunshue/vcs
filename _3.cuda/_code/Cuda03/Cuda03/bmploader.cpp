@@ -8,31 +8,31 @@
 #pragma pack(1)
 
 typedef struct {
-    short type;
-    int size;
-    short reserved1;
-    short reserved2;
-    int offset;
+  short type;
+  int size;
+  short reserved1;
+  short reserved2;
+  int offset;
 } BMPHeader;
 
 typedef struct {
-    int size;
-    int width;
-    int height;
-    short planes;
-    short bitsPerPixel;
-    unsigned compression;
-    unsigned imageSize;
-    int xPelsPerMeter;
-    int yPelsPerMeter;
-    int clrUsed;
-    int clrImportant;
+  int size;
+  int width;
+  int height;
+  short planes;
+  short bitsPerPixel;
+  unsigned compression;
+  unsigned imageSize;
+  int xPelsPerMeter;
+  int yPelsPerMeter;
+  int clrUsed;
+  int clrImportant;
 } BMPInfoHeader;
 
 // Isolated definition
 typedef struct { unsigned char x, y, z, w; } uchar4;
 
-extern "C" void LoadBMPFile(uchar4 * *dst, int* width,int* height, const char* name)
+extern "C" void LoadBMPFile(uchar4 * *dst, int* width, int* height, const char* name)
 {
     BMPHeader hdr;
     BMPInfoHeader infoHdr;
@@ -42,14 +42,12 @@ extern "C" void LoadBMPFile(uchar4 * *dst, int* width,int* height, const char* n
 
     printf("Loading %s...\n", name);
 
-    if (sizeof(uchar4) != 4)
-    {
+    if (sizeof(uchar4) != 4) {
         printf("***Bad uchar4 size***\n");
         exit(EXIT_SUCCESS);
     }
 
-    if (!(fd = fopen(name, "rb")))
-    {
+    if (!(fd = fopen(name, "rb"))) {
         printf("***BMP load error: file access denied***\n");
         exit(EXIT_SUCCESS);
     }
@@ -110,6 +108,5 @@ extern "C" void LoadBMPFile(uchar4 * *dst, int* width,int* height, const char* n
     {
         printf("BMP file loaded successfully!\n");
     }
-
     fclose(fd);
 }

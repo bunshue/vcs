@@ -1,5 +1,4 @@
 #include "Common.h"
-#include "DCT8x8_Gold.h"
 #include "BmpUtil.h"
 
 /**
@@ -17,118 +16,6 @@
 #include "dct8x8_kernel2.cuh"
 #include "dct8x8_kernel_short.cuh"
 #include "dct8x8_kernel_quantization.cuh"
-
-/**
-**************************************************************************
-*  Wrapper function for 1st gold version of DCT, quantization and IDCT
-*implementations
-*
-* \param ImgSrc         [IN] - Source byte image plane
-* \param ImgDst         [IN] - Quantized result byte image plane
-* \param Stride         [IN] - Stride for both source and result planes
-* \param Size           [IN] - Size of both planes
-*
-* \return Execution time in milliseconds
-*/
-float WrapperGold1(byte *ImgSrc, byte *ImgDst, int Stride, ROI Size) {
-  // allocate float buffers for DCT and other data
-  int StrideF;
-  float *ImgF1 = MallocPlaneFloat(Size.width, Size.height, &StrideF);
-  float *ImgF2 = MallocPlaneFloat(Size.width, Size.height, &StrideF);
-
-  // convert source image to float representation
-  CopyByte2Float(ImgSrc, Stride, ImgF1, StrideF, Size);
-  AddFloatPlane(-128.0f, ImgF1, StrideF, Size);
-
-  // create and start CUDA timer
-  StopWatchInterface *timerGold = 0;
-  sdkCreateTimer(&timerGold);
-  sdkResetTimer(&timerGold);
-
-  // perform block-wise DCT processing and benchmarking
-  for (int i = 0; i < BENCHMARK_SIZE; i++) {
-    sdkStartTimer(&timerGold);
-    computeDCT8x8Gold1(ImgF1, ImgF2, StrideF, Size);
-    sdkStopTimer(&timerGold);
-  }
-
-  // stop and destroy CUDA timer
-  float TimerGoldSpan = sdkGetAverageTimerValue(&timerGold);
-  sdkDeleteTimer(&timerGold);
-
-  // perform quantization
-  quantizeGoldFloat(ImgF2, StrideF, Size);
-
-  // perform block-wise IDCT processing
-  computeIDCT8x8Gold1(ImgF2, ImgF1, StrideF, Size);
-
-  // convert image back to byte representation
-  AddFloatPlane(128.0f, ImgF1, StrideF, Size);
-  CopyFloat2Byte(ImgF1, StrideF, ImgDst, Stride, Size);
-
-  // free float buffers
-  FreePlane(ImgF1);
-  FreePlane(ImgF2);
-
-  // return time taken by the operation
-  return TimerGoldSpan;
-}
-
-/**
-**************************************************************************
-*  Wrapper function for 2nd gold version of DCT, quantization and IDCT
-*implementations
-*
-* \param ImgSrc         [IN] - Source byte image plane
-* \param ImgDst         [IN] - Quantized result byte image plane
-* \param Stride         [IN] - Stride for both source and result planes
-* \param Size           [IN] - Size of both planes
-*
-* \return Execution time in milliseconds
-*/
-float WrapperGold2(byte *ImgSrc, byte *ImgDst, int Stride, ROI Size) {
-  // allocate float buffers for DCT and other data
-  int StrideF;
-  float *ImgF1 = MallocPlaneFloat(Size.width, Size.height, &StrideF);
-  float *ImgF2 = MallocPlaneFloat(Size.width, Size.height, &StrideF);
-
-  // convert source image to float representation
-  CopyByte2Float(ImgSrc, Stride, ImgF1, StrideF, Size);
-  AddFloatPlane(-128.0f, ImgF1, StrideF, Size);
-
-  // create and start CUDA timer
-  StopWatchInterface *timerGold = 0;
-  sdkCreateTimer(&timerGold);
-  sdkResetTimer(&timerGold);
-
-  // perform block-wise DCT processing and benchmarking
-  for (int i = 0; i < BENCHMARK_SIZE; i++) {
-    sdkStartTimer(&timerGold);
-    computeDCT8x8Gold2(ImgF1, ImgF2, StrideF, Size);
-    sdkStopTimer(&timerGold);
-  }
-
-  // stop and destroy CUDA timer
-  float TimerGoldSpan = sdkGetAverageTimerValue(&timerGold);
-  sdkDeleteTimer(&timerGold);
-
-  // perform quantization
-  quantizeGoldFloat(ImgF2, StrideF, Size);
-
-  // perform block-wise IDCT processing
-  computeIDCT8x8Gold2(ImgF2, ImgF1, StrideF, Size);
-
-  // convert image back to byte representation
-  AddFloatPlane(128.0f, ImgF1, StrideF, Size);
-  CopyFloat2Byte(ImgF1, StrideF, ImgDst, Stride, Size);
-
-  // free float buffers
-  FreePlane(ImgF1);
-  FreePlane(ImgF2);
-
-  // return time taken by the operation
-  return TimerGoldSpan;
-}
 
 /**
 **************************************************************************
@@ -454,8 +341,6 @@ int main(int argc, char** argv) {
 
     // source and results image filenames
     char SampleImageFname[] = "teapot512.bmp";
-    char SampleImageFnameResGold1[] = "teapot512_gold1.bmp";
-    char SampleImageFnameResGold2[] = "teapot512_gold2.bmp";
     char SampleImageFnameResCUDA1[] = "teapot512_cuda1.bmp";
     char SampleImageFnameResCUDA2[] = "teapot512_cuda2.bmp";
     char SampleImageFnameResCUDAshort[] = "teapot512_cuda_short.bmp";
@@ -498,8 +383,6 @@ int main(int argc, char** argv) {
     // allocate image buffers
     int ImgStride;
     byte* ImgSrc = MallocPlaneByte(ImgWidth, ImgHeight, &ImgStride);
-    byte* ImgDstGold1 = MallocPlaneByte(ImgWidth, ImgHeight, &ImgStride);
-    byte* ImgDstGold2 = MallocPlaneByte(ImgWidth, ImgHeight, &ImgStride);
     byte* ImgDstCUDA1 = MallocPlaneByte(ImgWidth, ImgHeight, &ImgStride);
     byte* ImgDstCUDA2 = MallocPlaneByte(ImgWidth, ImgHeight, &ImgStride);
     byte* ImgDstCUDAshort = MallocPlaneByte(ImgWidth, ImgHeight, &ImgStride);
@@ -510,14 +393,6 @@ int main(int argc, char** argv) {
     //
     // RUNNING WRAPPERS
     //
-
-    // compute Gold 1 version of DCT/quantization/IDCT
-    printf("Success\nRunning Gold 1 (CPU) version... ");
-    float TimeGold1 = WrapperGold1(ImgSrc, ImgDstGold1, ImgStride, ImgSize);
-
-    // compute Gold 2 version of DCT/quantization/IDCT
-    printf("Success\nRunning Gold 2 (CPU) version... ");
-    float TimeGold2 = WrapperGold2(ImgSrc, ImgDstGold2, ImgStride, ImgSize);
 
     // compute CUDA 1 version of DCT/quantization/IDCT
     printf("Success\nRunning CUDA 1 (GPU) version... ");
@@ -534,14 +409,6 @@ int main(int argc, char** argv) {
     //
     // Execution statistics, result saving and validation
     //
-
-    // dump result of Gold 1 processing
-    printf("Success\nDumping result to %s... ", SampleImageFnameResGold1);
-    DumpBmpAsGray(SampleImageFnameResGold1, ImgDstGold1, ImgStride, ImgSize);
-
-    // dump result of Gold 2 processing
-    printf("Success\nDumping result to %s... ", SampleImageFnameResGold2);
-    DumpBmpAsGray(SampleImageFnameResGold2, ImgDstGold2, ImgStride, ImgSize);
 
     // dump result of CUDA 1 processing
     printf("Success\nDumping result to %s... ", SampleImageFnameResCUDA1);
@@ -563,38 +430,16 @@ int main(int argc, char** argv) {
     printf("Processing time (CUDA short): %f ms \n", TimeCUDAshort);
 
     // calculate PSNR between each pair of images
-    float PSNR_Src_DstGold1 =
-        CalculatePSNR(ImgSrc, ImgDstGold1, ImgStride, ImgSize);
-    float PSNR_Src_DstGold2 =
-        CalculatePSNR(ImgSrc, ImgDstGold2, ImgStride, ImgSize);
     float PSNR_Src_DstCUDA1 =
         CalculatePSNR(ImgSrc, ImgDstCUDA1, ImgStride, ImgSize);
     float PSNR_Src_DstCUDA2 =
         CalculatePSNR(ImgSrc, ImgDstCUDA2, ImgStride, ImgSize);
     float PSNR_Src_DstCUDAshort =
         CalculatePSNR(ImgSrc, ImgDstCUDAshort, ImgStride, ImgSize);
-    float PSNR_DstGold1_DstCUDA1 =
-        CalculatePSNR(ImgDstGold1, ImgDstCUDA1, ImgStride, ImgSize);
-    float PSNR_DstGold2_DstCUDA2 =
-        CalculatePSNR(ImgDstGold2, ImgDstCUDA2, ImgStride, ImgSize);
-    float PSNR_DstGold2_DstCUDA16b =
-        CalculatePSNR(ImgDstGold2, ImgDstCUDAshort, ImgStride, ImgSize);
 
-    printf("PSNR Original    <---> CPU(Gold 1)    : %f\n", PSNR_Src_DstGold1);
-    printf("PSNR Original    <---> CPU(Gold 2)    : %f\n", PSNR_Src_DstGold2);
     printf("PSNR Original    <---> GPU(CUDA 1)    : %f\n", PSNR_Src_DstCUDA1);
     printf("PSNR Original    <---> GPU(CUDA 2)    : %f\n", PSNR_Src_DstCUDA2);
     printf("PSNR Original    <---> GPU(CUDA short): %f\n", PSNR_Src_DstCUDAshort);
-    printf("PSNR CPU(Gold 1) <---> GPU(CUDA 1)    : %f\n",
-        PSNR_DstGold1_DstCUDA1);
-    printf("PSNR CPU(Gold 2) <---> GPU(CUDA 2)    : %f\n",
-        PSNR_DstGold2_DstCUDA2);
-    printf("PSNR CPU(Gold 2) <---> GPU(CUDA short): %f\n",
-        PSNR_DstGold2_DstCUDA16b);
-
-    bool bTestResult = (PSNR_DstGold1_DstCUDA1 > PSNR_THRESHOLD_EQUAL &&
-        PSNR_DstGold2_DstCUDA2 > PSNR_THRESHOLD_EQUAL &&
-        PSNR_DstGold2_DstCUDA16b > PSNR_THRESHOLD_EQUAL);
 
     //
     // Finalization
@@ -602,20 +447,11 @@ int main(int argc, char** argv) {
 
     // release byte planes
     FreePlane(ImgSrc);
-    FreePlane(ImgDstGold1);
-    FreePlane(ImgDstGold2);
     FreePlane(ImgDstCUDA1);
     FreePlane(ImgDstCUDA2);
     FreePlane(ImgDstCUDAshort);
 
     // finalize
-    printf("\nTest Summary...\n");
-
-    if (!bTestResult) {
-        printf("Test failed!\n");
-        exit(EXIT_FAILURE);
-    }
-
     printf("Test passed\n");
     exit(EXIT_SUCCESS);
 }

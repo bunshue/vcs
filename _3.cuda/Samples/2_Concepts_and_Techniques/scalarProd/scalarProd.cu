@@ -11,9 +11,9 @@
 #include <helper_functions.h>
 #include <helper_cuda.h>
 
-///////////////////////////////////////////////////////////////////////////////
-// Calculate scalar products of VectorN vectors of ElementN elements on CPU
-///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ // Calculate scalar products of VectorN vectors of ElementN elements on CPU
+ ///////////////////////////////////////////////////////////////////////////////
 extern "C" void scalarProdCPU(float* h_C, float* h_A, float* h_B, int vectorN, int elementN);
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -58,10 +58,9 @@ int main(int argc, char** argv)
     StopWatchInterface* hTimer = NULL;
     int i;
 
-    printf("%s Starting...\n\n", argv[0]);
+    printf("Starting...\n");
 
-    // use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
+    // use command-line specified CUDA device, otherwise use device with highest Gflops/s
     findCudaDevice(argc, (const char**)argv);
 
     sdkCreateTimer(&hTimer);
@@ -79,6 +78,7 @@ int main(int argc, char** argv)
     checkCudaErrors(cudaMalloc((void**)&d_C, RESULT_SZ));
 
     printf("...generating input data in CPU mem.\n");
+
     srand(123);
 
     // Generating input data on CPU

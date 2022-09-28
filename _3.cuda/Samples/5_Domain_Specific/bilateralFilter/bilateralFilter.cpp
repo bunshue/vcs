@@ -26,7 +26,7 @@ float gaussian_delta = 4;
 float euclidean_delta = 0.1f;
 int filter_radius = 5;
 
-unsigned int width, height;
+int width, height;
 unsigned int* hImage = NULL;
 
 GLuint pbo;                                      // OpenGL pixel buffer object
@@ -57,7 +57,7 @@ extern "C" double bilateralFilterRGBA(unsigned int* d_dest, int width, int heigh
 extern "C" void updateGaussian(float delta, int radius);
 extern "C" void updateGaussianGold(float delta, int radius);
 extern "C" void bilateralFilterGold(unsigned int* pSrc, unsigned int* pDest, float e_d, int w, int h, int r);
-extern "C" void LoadBMPFile(uchar4 * *dst, unsigned int* width, unsigned int* height, const char* name);
+extern "C" void LoadBMPFile(uchar4 * *dst, int* width, int* height, const char* name);
 
 void varyEuclidean()
 {
