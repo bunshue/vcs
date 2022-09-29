@@ -66,7 +66,7 @@ int mouse_buttons = 0;
 float rotate_x = 0.0, rotate_y = 0.0;
 float translate_z = -3.0;
 
-StopWatchInterface* timer = NULL;
+StopWatchInterface* myTimer = NULL;
 
 // Auto-Verification Code
 int fpsCount = 0;        // FPS count for averaging
@@ -88,7 +88,8 @@ void display();
 void keyboard(unsigned char key, int x, int y);
 void mouse(int button, int state, int x, int y);
 void motion(int x, int y);
-void timerEvent(int value);
+
+void myTimerEvent(int value);
 
 // Cuda functionality
 void runCuda(struct cudaGraphicsResource** vbo_resource);
@@ -124,25 +125,6 @@ void launch_kernel(float4* pos, unsigned int mesh_width, unsigned int mesh_heigh
     simple_vbo_kernel << < grid, block >> > (pos, mesh_width, mesh_height, time);
 }
 
-void computeFPS()
-{
-    frameCount++;
-    fpsCount++;
-
-    if (fpsCount == fpsLimit)
-    {
-        avgFPS = 1.f / (sdkGetAverageTimerValue(&timer) / 1000.f);
-        fpsCount = 0;
-        fpsLimit = (int)MAX(avgFPS, 1.f);
-
-        sdkResetTimer(&timer);
-    }
-
-    char fps[256];
-    sprintf(fps, "Cuda GL Interop (VBO): %3.1f fps (Max 100Hz)", avgFPS);
-    glutSetWindowTitle(fps);
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 //! Initialize GL
 ////////////////////////////////////////////////////////////////////////////////
@@ -150,6 +132,7 @@ bool initGL(int* argc, char** argv)
 {
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
+
     glutInitWindowSize(window_width, window_height);
     glutInitWindowPosition(1100, 200);
 
@@ -158,8 +141,6 @@ bool initGL(int* argc, char** argv)
     glutDisplayFunc(display);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
     glutMotionFunc(motion);         //設定callback function
-
-    glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
 
     // initialize necessary OpenGL extensions
     if (!isGLVersionSupported(2, 0))
@@ -211,20 +192,6 @@ void runCuda(struct cudaGraphicsResource** vbo_resource)
     checkCudaErrors(cudaGraphicsUnmapResources(1, vbo_resource, 0));
 }
 
-#ifndef FOPEN
-#define FOPEN(fHandle,filename,mode) fopen_s(&fHandle, filename, mode)
-#endif
-
-void sdkDumpBin2(void* data, unsigned int bytes, const char* filename)
-{
-    printf("sdkDumpBin2, filename : %s\n", filename);
-    FILE* fp;
-    FOPEN(fp, filename, "wb");
-    fwrite(data, bytes, 1, fp);
-    fflush(fp);
-    fclose(fp);
-}
-
 ////////////////////////////////////////////////////////////////////////////////
 //! Create VBO
 ////////////////////////////////////////////////////////////////////////////////
@@ -267,10 +234,10 @@ void deleteVBO(GLuint* vbo, struct cudaGraphicsResource* vbo_res)
 ////////////////////////////////////////////////////////////////////////////////
 void display()
 {
-    sdkStartTimer(&timer);
+    //printf("d ");
 
     // run CUDA kernel to generate vertex positions
-    runCuda(&cuda_vbo_resource);
+    //runCuda(&cuda_vbo_resource);
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -295,23 +262,19 @@ void display()
     glutSwapBuffers();
 
     g_fAnim += 0.01f;
-
-    sdkStopTimer(&timer);
-    computeFPS();
 }
 
-void timerEvent(int value)
+int cnt = 0;
+void myTimerEvent(int value)
 {
-    if (glutGetWindow())
-    {
-        glutPostRedisplay();
-        glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
-    }
+    cnt++;
+    printf("%d ", cnt);
+    glutTimerFunc(1000, myTimerEvent, 0);
 }
 
 void cleanup()
 {
-    sdkDeleteTimer(&timer);
+    sdkDeleteTimer(&myTimer);
 
     if (vbo)
     {
@@ -319,12 +282,12 @@ void cleanup()
     }
 }
 
-
 ////////////////////////////////////////////////////////////////////////////////
 //! Keyboard events handler
 ////////////////////////////////////////////////////////////////////////////////
 void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
+    float tt;
     switch (key)
     {
     case 13:
@@ -337,6 +300,19 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
         //離開視窗
         glutDestroyWindow(glutGetWindow());
         return;
+
+    case '1':
+        printf("S ");
+        sdkStartTimer(&myTimer);
+        break;
+    case '2':
+        sdkStopTimer(&myTimer);
+        tt = sdkGetTimerValue(&myTimer);
+        sdkResetTimer(&myTimer);
+
+        printf("%d.%03d 秒   ", (int)(tt / 1000), ((int)tt) % 1000);
+        //printf("%f 毫秒\n", tt);
+        break;
     }
 }
 
@@ -385,9 +361,6 @@ int main(int argc, char** argv)
 {
     printf("Starting...\n");
 
-    // Create the CUTIL timer
-    sdkCreateTimer(&timer);
-
     // use command-line specified CUDA device, otherwise use device with highest Gflops/s
     int devID = findCudaDevice(argc, (const char**)argv);
 
@@ -404,6 +377,10 @@ int main(int argc, char** argv)
     glutMouseFunc(mouse);
     glutMotionFunc(motion);
     glutCloseFunc(cleanup);
+
+    // timer
+    sdkCreateTimer(&myTimer);
+    glutTimerFunc(1000, myTimerEvent, 0);
 
     // create VBO
     createVBO(&vbo, &cuda_vbo_resource, cudaGraphicsMapFlagsWriteDiscard);

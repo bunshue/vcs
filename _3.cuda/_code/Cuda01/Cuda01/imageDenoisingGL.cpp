@@ -24,7 +24,11 @@
 GLuint gl_PBO, gl_Tex;
 struct cudaGraphicsResource* cuda_pbo_resource;  // handles OpenGL-CUDA exchange
 
-int mode = 1;   //0: 自製圖片資料1, 1: 自製圖片資料2 3: 使用圖片640X480, 4: 使用圖片1920X1080
+int mode = 4;   //0: 使用圖片640X480
+                //1: 使用圖片1920X1080
+                //2: 自製圖片資料1    circle
+                //3: 自製圖片資料2    wave
+                //4: 自製圖片資料2    sinewave
 
 bool flag_use_cuda = true;
 
@@ -46,13 +50,10 @@ int frameCounter = 0;
 #define BUFFER_DATA(i) ((char *)0 + i)
 
 // Auto-Verification Code
-const int frameCheckNumber = 4;
 int fpsCount = 0;  // FPS count for averaging
 int fpsLimit = 1;  // FPS limit for sampling
 unsigned int frameCount = 0;
-unsigned int g_TotalErrors = 0;
 
-#define MAX_EPSILON_ERROR 5
 #define REFRESH_DELAY 10  // ms
 
 void cleanup();
@@ -79,9 +80,13 @@ void computeFPS()
 
 void do_alpha_mixer(int alpha, TColor* d_dst)
 {
-    if (mode == 1)
+    if (mode == 3)
     {
-        cuda_Wave(d_dst, alpha, imageW, imageH);
+        cuda_Wave1(d_dst, alpha, imageW, imageH);
+    }
+    else if (mode == 4)
+    {
+        cuda_Wave2(d_dst, alpha, imageW, imageH);
     }
     else
     {
@@ -100,7 +105,7 @@ void runImageFilters(TColor* d_dst)
     //glColor3f(0, 1.0f, 0);  //只留綠色系
     //glColor3f(0, 0, 1.0f);  //只留藍色系
 
-    if (mode == 1)
+    if (mode == 3)
     {
         alpha++;
     }
@@ -315,6 +320,7 @@ int initGL(int* argc, char** argv)
     printf("Initializing GLUT...\n");
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
+
     glutInitWindowSize(imageW, imageH); //設定視窗大小, 直接拉大內容
     if (imageW > 1200)
     {
@@ -325,7 +331,6 @@ int initGL(int* argc, char** argv)
         glutInitWindowPosition(1100, 200);   //視窗起始位置
     }
 
-    //glutCreateWindow(argv[0]);
     glutCreateWindow("CUDA window system"); //開啟視窗 並顯示出視窗 Title
     //glutCreateWindow("CUDA window system"); //開啟視窗 並顯示出視窗 Title //顯示多個視窗
     //glutCreateWindow("CUDA window system"); //開啟視窗 並顯示出視窗 Title //顯示多個視窗
@@ -421,7 +426,7 @@ void cleanup()
 
 int main(int argc, char** argv)
 {
-    if (mode == 0)
+    if (mode == 2)
     {
         //自製圖片資料
         imageW = 512;
@@ -447,7 +452,7 @@ int main(int argc, char** argv)
             }
         }
     }
-    else if (mode == 1)
+    else if (mode == 3)
     {
         //自製圖片資料
         imageW = 1920;
@@ -481,13 +486,13 @@ int main(int argc, char** argv)
         char* filename_read2 = ""; //24 bits
 
         //讀取圖片資料
-        if (mode == 2)
+        if (mode == 0)  //小圖
         {
             //使用圖片640X480
             filename_read1 = "C:\\______test_files\\ims01.24.bmp"; //24 bits
             filename_read2 = "C:\\______test_files\\ims03.24.bmp"; //24 bits
         }
-        else
+        else  //mode 1 大圖
         {
             //使用圖片1920X1080
             filename_read1 = "C:\\______test_files\\__pic\\_ggb\\ggb1.bmp"; //24 bits
