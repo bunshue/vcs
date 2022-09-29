@@ -308,6 +308,8 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
     case '2':
         sdkStopTimer(&myTimer);
         tt = sdkGetTimerValue(&myTimer);
+        //tt = sdkGetAverageTimerValue(&myTimer);
+
         sdkResetTimer(&myTimer);
 
         printf("%d.%03d 秒   ", (int)(tt / 1000), ((int)tt) % 1000);
@@ -364,19 +366,14 @@ int main(int argc, char** argv)
     // use command-line specified CUDA device, otherwise use device with highest Gflops/s
     int devID = findCudaDevice(argc, (const char**)argv);
 
-    // First initialize OpenGL context, so we can properly set the GL for CUDA.
-    // This is necessary in order to achieve optimal performance with OpenGL/CUDA interop.
-    if (false == initGL(&argc, argv))
-    {
-        return false;
-    }
+    initGL(&argc, argv);
 
-    // register callbacks
-    glutDisplayFunc(display);
-    glutKeyboardFunc(keyboard);
-    glutMouseFunc(mouse);
-    glutMotionFunc(motion);
-    glutCloseFunc(cleanup);
+
+    glutDisplayFunc(display);       //設定callback function
+    glutKeyboardFunc(keyboard);     //設定callback function
+    glutMouseFunc(mouse);           //設定callback function
+    glutMotionFunc(motion);         //設定callback function
+    glutCloseFunc(cleanup);         //設定callback function
 
     // timer
     sdkCreateTimer(&myTimer);

@@ -18,7 +18,9 @@ void test_write_binary_file()
 
 }
 
-/*
+#ifndef FOPEN
+#define FOPEN(fHandle,filename,mode) fopen_s(&fHandle, filename, mode)
+#endif
 void sdkDumpBin2(void* data, unsigned int bytes, const char* filename)
 {
     printf("sdkDumpBin2, filename : %s\n", filename);
@@ -28,8 +30,6 @@ void sdkDumpBin2(void* data, unsigned int bytes, const char* filename)
     fflush(fp);
     fclose(fp);
 }
-*/
-
 
 ////////////////////////////////////////////////////////////////////////////////
 // Helper function, returning uniformly distributed
@@ -101,6 +101,16 @@ int main()
     //int k4 = atoi(k3);
     //printf("k3 = %s\n", k3);
     //printf("k4 = %d\n", k4);
+
+    /*
+    printf("sprintf ด๚ธี\n");
+
+    char fps[256];
+    sprintf(fps, "Cuda GL Interop (VBO): %3.1f fps (Max 100Hz)", 12.345);
+    //glutSetWindowTitle(fps);
+    printf("%s\n", fps);
+    */
+
 
 
     return 0;

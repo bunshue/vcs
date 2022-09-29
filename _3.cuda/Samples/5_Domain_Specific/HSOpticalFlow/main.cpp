@@ -64,6 +64,7 @@ void WriteFloFile(const char* name, int w, int h, int s, const float* u, const f
 bool LoadImageAsFP32(float*& img_data, int& img_w, int& img_h, int& img_s, const char* name, const char* exePath)
 {
     printf("Loading : %s\n", name);
+
     char* name_ = sdkFindFilePath(name, exePath);
 
     if (!name_)

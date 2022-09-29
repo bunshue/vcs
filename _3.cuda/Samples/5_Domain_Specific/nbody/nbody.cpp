@@ -59,8 +59,8 @@ std::string tipsyFile = "";
 
 int numIterations = 0;  // run until exit
 
-void computePerfStats(double& interactionsPerSecond, double& gflops,
-    float milliseconds, int iterations) {
+void computePerfStats(double& interactionsPerSecond, double& gflops,    float milliseconds, int iterations)
+{
     // double precision uses intrinsic operation followed by refinement,
     // resulting in higher operation count per interaction.
     // (Note Astrophysicists use 38 flops per interaction no matter what,
