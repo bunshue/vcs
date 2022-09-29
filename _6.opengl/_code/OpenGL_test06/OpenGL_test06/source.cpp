@@ -14,6 +14,7 @@
 
 GLenum doubleBuffer;
 GLint thing1, thing2, thing3, thing4;
+float alpha = 0.5;
 
 static void Init(void)
 {
@@ -64,12 +65,18 @@ static void keyboard(unsigned char key, int x, int y)
     switch (key)
     {
     case '1':
+        printf("畫實心色塊\n");
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-        glutPostRedisplay();
+        glutPostRedisplay();	//重做display()
         break;
     case '2':
+        printf("畫空心色塊(外框)\n");
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        glutPostRedisplay();
+        glutPostRedisplay();	//重做display()
+        break;
+    case 'r':
+        printf("重畫 alpha = %f ", alpha);
+        glutPostRedisplay();	//重做display()
         break;
     case 27:
         exit(0);
@@ -80,23 +87,30 @@ static void display(void)
 {
     glPushMatrix();
 
-    glScalef(0.8, 0.8, 1.0);
+    glScalef(0.8, 0.8, 0.8);	//X Y Z所佔整個視窗的比例 最大為1.0 就是100%
 
     glClear(GL_COLOR_BUFFER_BIT);
     glCallList(thing1);
-    glAccum(GL_LOAD, 0.5);
+    glAccum(GL_LOAD, alpha);
 
     glClear(GL_COLOR_BUFFER_BIT);
     glCallList(thing2);
-    glAccum(GL_ACCUM, 0.5);
+    glAccum(GL_ACCUM, alpha);
 
     glClear(GL_COLOR_BUFFER_BIT);
     glCallList(thing3);
-    glAccum(GL_ACCUM, 0.5);
+    glAccum(GL_ACCUM, alpha);
 
     glClear(GL_COLOR_BUFFER_BIT);
     glCallList(thing4);
-    glAccum(GL_ACCUM, 0.5);
+    glAccum(GL_ACCUM, alpha);
+
+    alpha += 0.1;
+
+    if (alpha > 1.01)
+    {
+        alpha = 0;
+    }
 
     glAccum(GL_RETURN, 1.0);
 
@@ -112,35 +126,16 @@ static void display(void)
     }
 }
 
-static void Args(int argc, char** argv)
-{
-    GLint i;
-
-    doubleBuffer = GL_FALSE;
-
-    for (i = 1; i < argc; i++)
-    {
-        if (strcmp(argv[i], "-sb") == 0)
-        {
-            doubleBuffer = GL_FALSE;
-        }
-        else if (strcmp(argv[i], "-db") == 0)
-        {
-            doubleBuffer = GL_TRUE;
-        }
-    }
-}
-
 int main(int argc, char** argv)
 {
     GLenum type;
 
     glutInit(&argc, argv);
-    Args(argc, argv);
 
     type = GLUT_RGB | GLUT_ACCUM;
     type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
-    glutInitDisplayMode(type);
+    glutInitDisplayMode(type);	//設定Single Buffer 或是 Double Buffer
+
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(1100, 200);
 

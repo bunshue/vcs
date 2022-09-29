@@ -354,8 +354,8 @@ void initOpenGLBuffers()
 {
     printf("Creating GL texture...\n");
     glEnable(GL_TEXTURE_2D);
-    glGenTextures(1, &gl_Tex);
-    glBindTexture(GL_TEXTURE_2D, gl_Tex);
+    glGenTextures(1, &gl_Tex);	//生成紋理對象
+    glBindTexture(GL_TEXTURE_2D, gl_Tex);	//綁定紋理
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);

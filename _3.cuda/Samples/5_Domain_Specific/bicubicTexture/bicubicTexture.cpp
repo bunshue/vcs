@@ -1,6 +1,5 @@
 /*
-    Bicubic texture filtering sample
-    sgreen 6/2008
+    Bicubic texture filtering sample sgreen 6/2008
 
     This sample demonstrates how to efficiently implement bicubic texture
     filtering in CUDA.
@@ -204,14 +203,14 @@ void display() {
 
 #if USE_BUFFER_TEX
         // display using buffer texture
-        glBindTexture(GL_TEXTURE_BUFFER_EXT, bufferTex);
+        glBindTexture(GL_TEXTURE_BUFFER_EXT, bufferTex);	//綁定紋理
         glBindProgramARB(GL_FRAGMENT_PROGRAM_ARB, fprog);
         glEnable(GL_FRAGMENT_PROGRAM_ARB);
         glProgramLocalParameterI4iNV(GL_FRAGMENT_PROGRAM_ARB, 0, width, 0, 0, 0);
 #else
         // download image from PBO to OpenGL texture
         glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, pbo);
-        glBindTexture(GL_TEXTURE_TYPE, displayTex);
+        glBindTexture(GL_TEXTURE_TYPE, displayTex);	//綁定紋理
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
         glTexSubImage2D(GL_TEXTURE_TYPE, 0, 0, 0, width, height, GL_BGRA,
             GL_UNSIGNED_BYTE, 0);
@@ -444,10 +443,10 @@ void initGLBuffers()
         glDeleteTextures(1, &bufferTex);
     }
 
-    glGenTextures(1, &bufferTex);
-    glBindTexture(GL_TEXTURE_BUFFER_EXT, bufferTex);
+    glGenTextures(1, &bufferTex);	//生成紋理對象
+    glBindTexture(GL_TEXTURE_BUFFER_EXT, bufferTex);	//綁定紋理
     glTexBufferEXT(GL_TEXTURE_BUFFER_EXT, GL_RGBA8, pbo);
-    glBindTexture(GL_TEXTURE_BUFFER_EXT, 0);
+    glBindTexture(GL_TEXTURE_BUFFER_EXT, 0);	//綁定紋理
 #else
 
     // create texture for display
@@ -456,12 +455,12 @@ void initGLBuffers()
         glDeleteTextures(1, &displayTex);
     }
 
-    glGenTextures(1, &displayTex);
-    glBindTexture(GL_TEXTURE_TYPE, displayTex);
+    glGenTextures(1, &displayTex);	//生成紋理對象
+    glBindTexture(GL_TEXTURE_TYPE, displayTex);	//綁定紋理
     glTexImage2D(GL_TEXTURE_TYPE, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
     glTexParameteri(GL_TEXTURE_TYPE, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_TYPE, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glBindTexture(GL_TEXTURE_TYPE, 0);
+    glBindTexture(GL_TEXTURE_TYPE, 0);	//綁定紋理
 #endif
 
     // calculate new grid size

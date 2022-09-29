@@ -185,7 +185,7 @@ void generateCUDAImage()
     checkCudaErrors(cudaGraphicsUnmapResources(1, &cuda_pbo_dest_resource, 0));
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, pbo_dest);
 
-    glBindTexture(GL_TEXTURE_2D, tex_cudaResult);
+    glBindTexture(GL_TEXTURE_2D, tex_cudaResult);	//綁定紋理
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, image_width, image_height, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
     SDK_CHECK_ERROR_GL();
     glBindBuffer(GL_PIXEL_PACK_BUFFER_ARB, 0);
@@ -195,7 +195,7 @@ void generateCUDAImage()
 // display image to the screen as textured quad
 void displayImage(GLuint texture)
 {
-    glBindTexture(GL_TEXTURE_2D, texture);
+    glBindTexture(GL_TEXTURE_2D, texture);	//綁定紋理
     glEnable(GL_TEXTURE_2D);
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_LIGHTING);
@@ -302,8 +302,8 @@ void mainMenu(int i) { keyboard((unsigned char)i, 0, 0); }
 void createTextureDst(GLuint* tex_cudaResult, unsigned int size_x, unsigned int size_y)
 {
     // create a texture
-    glGenTextures(1, tex_cudaResult);
-    glBindTexture(GL_TEXTURE_2D, *tex_cudaResult);
+    glGenTextures(1, tex_cudaResult);	//生成紋理對象
+    glBindTexture(GL_TEXTURE_2D, *tex_cudaResult);	//綁定紋理
 
     // set basic parameters
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -324,49 +324,6 @@ void deleteTexture(GLuint* tex)
     SDK_CHECK_ERROR_GL();
 
     *tex = 0;
-}
-
-int main(int argc, char** argv)
-{
-    printf("Starting...\n\n");
-    printf("(Interactive OpenGL Demo)\n");
-
-    // First initialize OpenGL context, so we can properly set the GL for CUDA.
-    // This is necessary in order to achieve optimal performance with OpenGL/CUDA
-    // interop.
-    if (false == initGL(&argc, argv))
-    {
-        return 0;
-    }
-
-    // Now initialize CUDA context (GL context has been created already)
-    findCudaDevice(argc, (const char**)argv);
-
-    sdkCreateTimer(&timer);
-    sdkResetTimer(&timer);
-
-    glutDisplayFunc(display);       //設定callback function
-    glutReshapeFunc(reshape);       //設定callback function
-    glutKeyboardFunc(keyboard);     //設定callback function
-
-    glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
-
-    // create menu
-    glutCreateMenu(mainMenu);
-    glutAddMenuEntry("Quit (esc)", '\033');
-    glutAttachMenu(GLUT_RIGHT_BUTTON);
-
-    initGLBuffers();
-
-    printf("按滑鼠右鍵 或 ESC 結束\n\n");
-
-    // start rendering mainloop
-    glutMainLoop();
-
-    // Normally unused return path
-    Cleanup(EXIT_SUCCESS);
-
-    exit(EXIT_SUCCESS);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -458,4 +415,49 @@ bool initGL(int* argc, char** argv)
 
     return true;
 }
+
+
+int main(int argc, char** argv)
+{
+    printf("Starting...\n\n");
+    printf("(Interactive OpenGL Demo)\n");
+
+    // First initialize OpenGL context, so we can properly set the GL for CUDA.
+    // This is necessary in order to achieve optimal performance with OpenGL/CUDA
+    // interop.
+    if (false == initGL(&argc, argv))
+    {
+        return 0;
+    }
+
+    // Now initialize CUDA context (GL context has been created already)
+    findCudaDevice(argc, (const char**)argv);
+
+    sdkCreateTimer(&timer);
+    sdkResetTimer(&timer);
+
+    glutDisplayFunc(display);       //設定callback function
+    glutReshapeFunc(reshape);       //設定callback function
+    glutKeyboardFunc(keyboard);     //設定callback function
+
+    glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
+
+    // create menu
+    glutCreateMenu(mainMenu);
+    glutAddMenuEntry("Quit (esc)", '\033');
+    glutAttachMenu(GLUT_RIGHT_BUTTON);
+
+    initGLBuffers();
+
+    printf("按滑鼠右鍵 或 ESC 結束\n\n");
+
+    // start rendering mainloop
+    glutMainLoop();
+
+    // Normally unused return path
+    Cleanup(EXIT_SUCCESS);
+
+    exit(EXIT_SUCCESS);
+}
+
 

@@ -320,7 +320,7 @@ void processImage()
 #ifdef USE_TEXSUBIMAGE2D
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, pbo_dest);
 
-    glBindTexture(GL_TEXTURE_2D, tex_cudaResult);
+    glBindTexture(GL_TEXTURE_2D, tex_cudaResult);	//綁定紋理
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, image_width, image_height, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
     SDK_CHECK_ERROR_GL();
     glBindBuffer(GL_PIXEL_PACK_BUFFER_ARB, 0);
@@ -346,7 +346,7 @@ void processImage()
 // display image to the screen as textured quad
 void displayImage(GLuint texture)
 {
-    glBindTexture(GL_TEXTURE_2D, texture);
+    glBindTexture(GL_TEXTURE_2D, texture);	//綁定紋理
     glEnable(GL_TEXTURE_2D);
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_LIGHTING);
@@ -552,11 +552,11 @@ void mainMenu(int i) { keyboard((unsigned char)i, 0, 0); }
 ////////////////////////////////////////////////////////////////////////////////
 //!
 ////////////////////////////////////////////////////////////////////////////////
-void createTextureSrc(GLuint* tex_screen, unsigned int size_x,
-    unsigned int size_y) {
+void createTextureSrc(GLuint* tex_screen, unsigned int size_x,    unsigned int size_y) 
+{
     // create a texture
-    glGenTextures(1, tex_screen);
-    glBindTexture(GL_TEXTURE_2D, *tex_screen);
+    glGenTextures(1, tex_screen);	//生成紋理對象
+    glBindTexture(GL_TEXTURE_2D, *tex_screen);	//綁定紋理
 
     // set basic parameters
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -584,11 +584,11 @@ void createTextureSrc(GLuint* tex_screen, unsigned int size_x,
 ////////////////////////////////////////////////////////////////////////////////
 //!
 ////////////////////////////////////////////////////////////////////////////////
-void createTextureDst(GLuint* tex_cudaResult, unsigned int size_x,
-    unsigned int size_y) {
+void createTextureDst(GLuint* tex_cudaResult, unsigned int size_x,    unsigned int size_y) 
+{
     // create a texture
-    glGenTextures(1, tex_cudaResult);
-    glBindTexture(GL_TEXTURE_2D, *tex_cudaResult);
+    glGenTextures(1, tex_cudaResult);	//生成紋理對象
+    glBindTexture(GL_TEXTURE_2D, *tex_cudaResult);	//綁定紋理
 
     // set basic parameters
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);

@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+
 #include <math.h>
 
 #ifdef _WIN32
@@ -78,12 +79,14 @@ __global__ void transformKernel(float* gOData, int width, int height, float thet
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-//! Run a simple test for CUDA
+// Program main
 ////////////////////////////////////////////////////////////////////////////////
-void runTest(int argc, char** argv)
+int main(int argc, char** argv)
 {
+    printf("Starting...\n");
+
     // Use command-line specified CUDA device,
-    // otherwise use device with highest Gflops/s
+// otherwise use device with highest Gflops/s
     int devID = findCudaDevice(argc, (const char**)argv);
 
     // Get number of SMs on this GPU
@@ -224,18 +227,13 @@ void runTest(int argc, char** argv)
     checkCudaErrors(cudaFreeArray(cuArray));
     free(imagePath);
     free(refPath);
-}
 
-////////////////////////////////////////////////////////////////////////////////
-// Program main
-////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char** argv)
-{
-    printf("Starting...\n");
 
-    runTest(argc, argv);
+
+
 
     printf("Completed, returned %s\n", testResult ? "OK" : "ERROR!");
+
     exit(testResult ? EXIT_SUCCESS : EXIT_FAILURE);
 }
 

@@ -160,7 +160,7 @@ void generateCUDAImage()
     checkCudaErrors(cudaGraphicsUnmapResources(1, &cuda_pbo_dest_resource, 0));
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, pbo_dest);
 
-    glBindTexture(GL_TEXTURE_2D, tex_cudaResult);
+    glBindTexture(GL_TEXTURE_2D, tex_cudaResult);	//綁定紋理
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, image_width, image_height, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
     SDK_CHECK_ERROR_GL();
     glBindBuffer(GL_PIXEL_PACK_BUFFER_ARB, 0);
@@ -170,7 +170,7 @@ void generateCUDAImage()
 // display image to the screen as textured quad
 void displayImage(GLuint texture)
 {
-    glBindTexture(GL_TEXTURE_2D, texture);
+    glBindTexture(GL_TEXTURE_2D, texture);	//綁定紋理
     glEnable(GL_TEXTURE_2D);
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_LIGHTING);
@@ -267,7 +267,6 @@ void reshape(int w, int h)
 {
     window_width = w;
     window_height = h;
-    //printf("w = %d, h = %d ", w, h);
 }
 
 void mainMenu(int i) { keyboard((unsigned char)i, 0, 0); }
@@ -278,8 +277,8 @@ void mainMenu(int i) { keyboard((unsigned char)i, 0, 0); }
 void createTextureDst(GLuint* tex_cudaResult, unsigned int size_x, unsigned int size_y)
 {
     // create a texture
-    glGenTextures(1, tex_cudaResult);
-    glBindTexture(GL_TEXTURE_2D, *tex_cudaResult);
+    glGenTextures(1, tex_cudaResult);	//生成紋理對象
+    glBindTexture(GL_TEXTURE_2D, *tex_cudaResult);	//綁定紋理
 
     // set basic parameters
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -300,6 +299,99 @@ void deleteTexture(GLuint* tex)
     SDK_CHECK_ERROR_GL();
 
     *tex = 0;
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//!
+////////////////////////////////////////////////////////////////////////////////
+void FreeResource()
+{
+    printf("離開程式時, FreeResource\n");
+
+    sdkDeleteTimer(&timer);
+
+    // unregister this buffer object with CUDA
+    //    checkCudaErrors(cudaGraphicsUnregisterResource(cuda_tex_screen_resource));
+    checkCudaErrors(cudaGraphicsUnregisterResource(cuda_pbo_dest_resource));
+    deletePBO(&pbo_dest);
+    deleteTexture(&tex_screen);
+    deleteTexture(&tex_cudaResult);
+
+    if (iGLUTWindowHandle)
+    {
+        glutDestroyWindow(iGLUTWindowHandle);
+    }
+
+    // finalize logs and leave
+    printf("simpleCUDA2GL Exiting...\n");
+}
+
+void Cleanup(int iExitCode)
+{
+    FreeResource();
+    printf("PPM Images are %s\n", (iExitCode == EXIT_SUCCESS) ? "Matching" : "Not Matching");
+    exit(iExitCode);
+}
+
+void initGLBuffers()
+{
+    // create pbo
+    createPBO(&pbo_dest, &cuda_pbo_dest_resource);
+
+    // create texture that will receive the result of CUDA
+    createTextureDst(&tex_cudaResult, image_width, image_height);
+
+    SDK_CHECK_ERROR_GL();
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//! Initialize GL
+////////////////////////////////////////////////////////////////////////////////
+bool initGL(int* argc, char** argv)
+{
+    // Create GL context
+    printf("argc = %d, argv = %s\n\n", *argc, argv[0]);
+    glutInit(argc, argv);
+    glutInitDisplayMode(GLUT_RGBA | GLUT_ALPHA | GLUT_DOUBLE | GLUT_DEPTH);
+    printf("window_width = %d, window_height = %d\n", window_width, window_height);
+    glutInitWindowSize(window_width, window_height);
+    glutInitWindowPosition(1100, 200);
+
+    iGLUTWindowHandle = glutCreateWindow("CUDA OpenGL post-processing");
+
+    // initialize necessary OpenGL extensions
+    if (!isGLVersionSupported(2, 0) || !areGLExtensionsSupported("GL_ARB_pixel_buffer_object GL_EXT_framebuffer_object"))
+    {
+        printf("ERROR: Support for necessary OpenGL extensions missing.");
+        fflush(stderr);
+        return false;
+    }
+
+    // default initialization
+    glClearColor(0.5, 0.5, 0.5, 1.0);
+
+    glDisable(GL_DEPTH_TEST);
+
+    // viewport
+    glViewport(0, 0, window_width, window_height);
+
+    // projection
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(60.0, (GLfloat)window_width / (GLfloat)window_height, 0.1f, 10.0f);
+
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+    glEnable(GL_LIGHT0);
+    float red[] = { 1.0f, 0.1f, 0.1f, 1.0f };
+    float white[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, red);
+    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, white);
+    glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 60.0f);
+
+    SDK_CHECK_ERROR_GL();
+
+    return true;
 }
 
 int main(int argc, char** argv)
@@ -344,95 +436,5 @@ int main(int argc, char** argv)
     Cleanup(EXIT_SUCCESS);
 
     exit(EXIT_SUCCESS);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-//!
-////////////////////////////////////////////////////////////////////////////////
-void FreeResource()
-{
-    printf("離開程式時, FreeResource\n");
-
-    sdkDeleteTimer(&timer);
-
-    // unregister this buffer object with CUDA
-    //    checkCudaErrors(cudaGraphicsUnregisterResource(cuda_tex_screen_resource));
-    checkCudaErrors(cudaGraphicsUnregisterResource(cuda_pbo_dest_resource));
-    deletePBO(&pbo_dest);
-    deleteTexture(&tex_screen);
-    deleteTexture(&tex_cudaResult);
-
-    if (iGLUTWindowHandle) {
-        glutDestroyWindow(iGLUTWindowHandle);
-    }
-
-    // finalize logs and leave
-    printf("simpleCUDA2GL Exiting...\n");
-}
-
-void Cleanup(int iExitCode)
-{
-    FreeResource();
-    printf("PPM Images are %s\n", (iExitCode == EXIT_SUCCESS) ? "Matching" : "Not Matching");
-    exit(iExitCode);
-}
-
-void initGLBuffers()
-{
-    // create pbo
-    createPBO(&pbo_dest, &cuda_pbo_dest_resource);
-
-    // create texture that will receive the result of CUDA
-    createTextureDst(&tex_cudaResult, image_width, image_height);
-
-    SDK_CHECK_ERROR_GL();
-}
-
-////////////////////////////////////////////////////////////////////////////////
-//! Initialize GL
-////////////////////////////////////////////////////////////////////////////////
-bool initGL(int* argc, char** argv)
-{
-    // Create GL context
-    printf("argc = %d, argv = %s\n\n", *argc, argv[0]);
-    glutInit(argc, argv);
-    glutInitDisplayMode(GLUT_RGBA | GLUT_ALPHA | GLUT_DOUBLE | GLUT_DEPTH);
-    printf("window_width = %d, window_height = %d\n", window_width, window_height);
-    glutInitWindowSize(window_width, window_height);
-    iGLUTWindowHandle = glutCreateWindow("CUDA OpenGL post-processing");
-
-    // initialize necessary OpenGL extensions
-    if (!isGLVersionSupported(2, 0) || !areGLExtensionsSupported("GL_ARB_pixel_buffer_object GL_EXT_framebuffer_object"))
-    {
-        printf("ERROR: Support for necessary OpenGL extensions missing.");
-        fflush(stderr);
-        return false;
-    }
-
-    // default initialization
-    glClearColor(0.5, 0.5, 0.5, 1.0);
-
-    glDisable(GL_DEPTH_TEST);
-
-    // viewport
-    glViewport(0, 0, window_width, window_height);
-
-    // projection
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluPerspective(60.0, (GLfloat)window_width / (GLfloat)window_height, 0.1f, 10.0f);
-
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-    glEnable(GL_LIGHT0);
-    float red[] = { 1.0f, 0.1f, 0.1f, 1.0f };
-    float white[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, red);
-    glMaterialfv(GL_FRONT_AND_BACK, GL_SPECULAR, white);
-    glMaterialf(GL_FRONT_AND_BACK, GL_SHININESS, 60.0f);
-
-    SDK_CHECK_ERROR_GL();
-
-    return true;
 }
 

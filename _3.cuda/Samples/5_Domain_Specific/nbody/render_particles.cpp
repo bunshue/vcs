@@ -1,30 +1,3 @@
-/* Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *  * Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  * Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *  * Neither the name of NVIDIA CORPORATION nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
 #include "render_particles.h"
 
 #define HELPERGL_EXTERN_GL_FUNC_IMPLEMENTATION
@@ -180,7 +153,7 @@ void ParticleRenderer::display(DisplayMode mode /* = PARTICLE_POINTS */) {
       glUniform1i(texLoc, 0);
 
       glActiveTexture(GL_TEXTURE0);
-      glBindTexture(GL_TEXTURE_2D, m_texture);
+      glBindTexture(GL_TEXTURE_2D, m_texture);	//綁定紋理
 
       glColor3f(1, 1, 1);
       glSecondaryColor3fv(m_baseColor);
@@ -211,7 +184,7 @@ void ParticleRenderer::display(DisplayMode mode /* = PARTICLE_POINTS */) {
       glUniform1i(texLoc, 0);
 
       glActiveTexture(GL_TEXTURE0);
-      glBindTexture(GL_TEXTURE_2D, m_texture);
+      glBindTexture(GL_TEXTURE_2D, m_texture);	//綁定紋理
 
       glColor3f(1, 1, 1);
       glSecondaryColor3fv(m_baseColor);
@@ -355,14 +328,13 @@ unsigned char *createGaussianMap(int N) {
   return (B);
 }
 
-void ParticleRenderer::_createTexture(int resolution) {
+void ParticleRenderer::_createTexture(int resolution)
+{
   unsigned char *data = createGaussianMap(resolution);
-  glGenTextures(1, (GLuint *)&m_texture);
-  glBindTexture(GL_TEXTURE_2D, m_texture);
+  glGenTextures(1, (GLuint *)&m_texture);	//生成紋理對象
+  glBindTexture(GL_TEXTURE_2D, m_texture);	//綁定紋理
   glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP_SGIS, GL_TRUE);
-  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
-                  GL_LINEAR_MIPMAP_LINEAR);
+  glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,                  GL_LINEAR_MIPMAP_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, resolution, resolution, 0, GL_RGBA,
-               GL_UNSIGNED_BYTE, data);
+  glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, resolution, resolution, 0, GL_RGBA,               GL_UNSIGNED_BYTE, data);
 }

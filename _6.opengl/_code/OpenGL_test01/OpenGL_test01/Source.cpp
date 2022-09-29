@@ -307,13 +307,13 @@ void display(void)
     }
     else if (display_mode == 8)
     {
-    //畫茶壺
-    glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
+        //畫茶壺
+        glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
 
-    glClear(GL_COLOR_BUFFER_BIT);
-    glColor3f(1.0, 0, 0);
-    glutWireTeapot(3);
-    glFlush();
+        glClear(GL_COLOR_BUFFER_BIT);
+        glColor3f(1.0, 0, 0);
+        glutWireTeapot(3);
+        glFlush();
 
 
 
@@ -333,25 +333,93 @@ void display(void)
     }
     else if (display_mode == 10)
     {
-    //display_mode = 10  //畫
-    glClear(GL_COLOR_BUFFER_BIT);//清空顏色緩沖池
-    glColor3f(1.0f, 1.0f, 0.0f);//設置繪圖顏色
-    glRectf(100.0f, 100.0f, 200.0f, 200.0f);//繪制矩形
-    glFlush();//刷新緩沖
+        //display_mode = 10  //畫
+        glClear(GL_COLOR_BUFFER_BIT);//清空顏色緩沖池
+        glColor3f(1.0f, 1.0f, 0.0f);//設置繪圖顏色
+        glRectf(100.0f, 100.0f, 200.0f, 200.0f);//繪制矩形
+        glFlush();//刷新緩沖
 
 
 
     }
     else if (display_mode == 11)
     {
-    //display_mode = 11  //畫
+        //display_mode = 11  //畫 彩色三角形
 
+        glPushMatrix();
+        glBegin(GL_TRIANGLES);          // 開始劃三角形
+        glColor3f(1.0f, 0.0f, 0.0f);         // 設定輸出色為紅色
+        glVertex2f(0.0f, 1.0f);           //(x1,y1)=(0, 1)
+        glColor3f(0.0f, 1.0f, 0.0f);         // 設定輸出色為綠色
+        glVertex2f(0.87f, -0.5f);            //(x2,y2)=(0.87,-0.5)
+        glColor3f(0.0f, 0.0f, 1.0f);         // 設定輸出色為藍色
+        glVertex2f(-0.87f, -0.5f);           //(x3,y3)=(-0.87,-0.5)
+        glEnd();                               // 結束劃三角形
+        glPopMatrix();
+        glutSwapBuffers();
 
 
     }
     else if (display_mode == 12)
     {
-    //display_mode = 12  //畫
+        //display_mode = 12  //畫矩形
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        glMatrixMode(GL_MODELVIEW);                        // 選擇模型觀察矩陣
+        glLoadIdentity();                                  // 重置模型觀察矩陣   
+        glMatrixMode(GL_PROJECTION);                        // 選擇投影矩陣     
+        glLoadIdentity();
+
+        glEnable(GL_TEXTURE_2D);    //啟用2D紋理映射
+        glBegin(GL_QUADS);
+        glTexCoord2f(0.0f, 0.0f);
+        glVertex3f(-0.5f, -0.5f, 0.0f);
+        glTexCoord2f(1.0f, 0.0f);
+        glVertex3f(0.5f, -0.5f, 0.0f);
+        glTexCoord2f(1.0f, 1.0f);
+        glVertex3f(0.5f, 0.5f, 0.0f);
+        glTexCoord2f(0.0f, 1.0f);
+        glVertex3f(-0.5f, 0.5f, 0.0f);
+        glEnd();
+        glDisable(GL_TEXTURE_2D);
+
+        glutSwapBuffers();
+
+
+
+    }
+    else if (display_mode == 13)
+    {
+    //display_mode = 13  //畫
+
+    //Single/Double buffer 會不一樣
+    //glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
+    //glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+
+    glClear(GL_COLOR_BUFFER_BIT);
+    glRectf(-0.1f, -0.1f, 0.5f, 0.5f);
+    glFlush();
+
+
+
+    }
+    else if (display_mode == 14)
+    {
+    //display_mode = 14  //畫
+
+
+
+    }
+    else if (display_mode == 15)
+    {
+    //display_mode = 15  //畫
+
+
+
+    }
+    else if (display_mode == 16)
+    {
+        //display_mode = 16  //畫
 
 
 

@@ -1,33 +1,5 @@
-/* Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *  * Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  * Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *  * Neither the name of NVIDIA CORPORATION nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
 /*
-    CUDA particle system with volumetric shadows
-    sgreen 11/2008
+    CUDA particle system with volumetric shadows sgreen 11/2008
 
     This sample demonstrates a technique for rendering realistic volumetric
     shadows through a cloud of particles. It uses CUDA for the simulation and
@@ -768,10 +740,10 @@ void initMenus() {
   glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
-GLuint createTexture(GLenum target, GLint internalformat, GLenum format, int w,
-                     int h, void *data) {
+GLuint createTexture(GLenum target, GLint internalformat, GLenum format, int w,                     int h, void *data) 
+{
   GLuint tex;
-  glGenTextures(1, &tex);
+  glGenTextures(1, &tex);	//生成紋理對象
   glBindTexture(target, tex);
   glTexParameteri(target, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
   glTexParameteri(target, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -779,12 +751,12 @@ GLuint createTexture(GLenum target, GLint internalformat, GLenum format, int w,
   glTexParameteri(target, GL_TEXTURE_WRAP_T, GL_REPEAT);
   glTexParameteri(target, GL_GENERATE_MIPMAP_SGIS, GL_TRUE);
   glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-  glTexImage2D(target, 0, internalformat, w, h, 0, format, GL_UNSIGNED_BYTE,
-               data);
+  glTexImage2D(target, 0, internalformat, w, h, 0, format, GL_UNSIGNED_BYTE,               data);
   return tex;
 }
 
-GLuint loadTexture(char *filename) {
+GLuint loadTexture(char *filename) 
+{
   unsigned char *data = 0;
   unsigned int width, height;
   sdkLoadPPM4ub(filename, &data, &width, &height);

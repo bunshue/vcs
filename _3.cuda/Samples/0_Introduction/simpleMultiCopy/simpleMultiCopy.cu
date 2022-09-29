@@ -228,8 +228,7 @@ int main(int argc, char* argv[])
     float kernel_time;
     cudaEventElapsedTime(&kernel_time, start, stop);
 
-    printf("\n");
-    printf("Relevant properties of this CUDA device\n");
+    printf("\nRelevant properties of this CUDA device\n");
     printf("(%s) Can overlap one CPU<>GPU data transfer with GPU kernel execution (device property \"deviceOverlap\")\n",
         deviceProp.deviceOverlap ? "X" : " ");
     // printf("(%s) Can execute several GPU kernels simultaneously (compute
@@ -238,14 +237,12 @@ int main(int argc, char* argv[])
         "    (Compute Capability >= 2.0 AND (Tesla product OR Quadro 4000/5000/6000/K5000)\n",
         (deviceProp.major >= 2 && deviceProp.asyncEngineCount > 1) ? "X" : " ");
 
-    printf("\n");
-    printf("Measured timings (throughput):\n");
+    printf("\nMeasured timings (throughput):\n");
     printf(" Memcpy host to device\t: %f ms (%f GB/s)\n", memcpy_h2d_time, (memsize * 1e-6) / memcpy_h2d_time);
     printf(" Memcpy device to host\t: %f ms (%f GB/s)\n", memcpy_d2h_time, (memsize * 1e-6) / memcpy_d2h_time);
     printf(" Kernel\t\t\t: %f ms (%f GB/s)\n", kernel_time, (inner_reps * memsize * 2e-6) / kernel_time);
 
-    printf("\n");
-    printf("Theoretical limits for speedup gained from overlapped data transfers:\n");
+    printf("\nTheoretical limits for speedup gained from overlapped data transfers:\n");
     printf("No overlap at all (transfer-kernel-transfer): %f ms \n", memcpy_h2d_time + memcpy_d2h_time + kernel_time);
     printf("Compute can overlap with one transfer: %f ms\n", max((memcpy_h2d_time + memcpy_d2h_time), kernel_time));
     printf("Compute can overlap with both data transfers: %f ms\n", max(max(memcpy_h2d_time, memcpy_d2h_time), kernel_time));

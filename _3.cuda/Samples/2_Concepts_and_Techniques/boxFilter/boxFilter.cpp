@@ -144,7 +144,7 @@ void display()
 
         // load texture from pbo
         glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, pbo);
-        glBindTexture(GL_TEXTURE_2D, texid);
+        glBindTexture(GL_TEXTURE_2D, texid);	//綁定紋理
         glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, 0);
         glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, 0);
 
@@ -165,7 +165,7 @@ void display()
             glVertex2f(0.0f, 1.0f);
         }
         glEnd();
-        glBindTexture(GL_TEXTURE_2D, 0);
+        glBindTexture(GL_TEXTURE_2D, 0);	//綁定紋理
         glDisable(GL_FRAGMENT_PROGRAM_ARB);
     }
 
@@ -338,12 +338,12 @@ void initGLResources()
     checkCudaErrors(cudaGraphicsGLRegisterBuffer(&cuda_pbo_resource, pbo, cudaGraphicsMapFlagsWriteDiscard));
 
     // create texture for display
-    glGenTextures(1, &texid);
-    glBindTexture(GL_TEXTURE_2D, texid);
+    glGenTextures(1, &texid);	//生成紋理對象
+    glBindTexture(GL_TEXTURE_2D, texid);	//綁定紋理
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glBindTexture(GL_TEXTURE_2D, 0);
+    glBindTexture(GL_TEXTURE_2D, 0);	//綁定紋理
 
     // load shader program
     shader = compileASMShader(GL_FRAGMENT_PROGRAM_ARB, shader_code);

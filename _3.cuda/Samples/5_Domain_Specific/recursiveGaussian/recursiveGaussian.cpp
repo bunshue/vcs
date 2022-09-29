@@ -1,6 +1,5 @@
 /*
-  Recursive Gaussian filter
-  sgreen 8/1/08
+  Recursive Gaussian filter sgreen 8/1/08
 
   This code sample implements a Gaussian blur using Deriche's recursive method:
   http://citeseer.ist.psu.edu/deriche93recursively.html
@@ -133,7 +132,7 @@ void display()
 
     // load texture from pbo
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, pbo);
-    glBindTexture(GL_TEXTURE_2D, texid);
+    glBindTexture(GL_TEXTURE_2D, texid);	//綁定紋理
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, width, height, GL_RGBA, GL_UNSIGNED_BYTE, 0);
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, 0);
@@ -280,12 +279,12 @@ void initGLBuffers()
     checkCudaErrors(cudaGraphicsGLRegisterBuffer(&cuda_vbo_resource, pbo, cudaGraphicsRegisterFlagsWriteDiscard));
 
     // create texture for display
-    glGenTextures(1, &texid);
-    glBindTexture(GL_TEXTURE_2D, texid);
+    glGenTextures(1, &texid);	//生成紋理對象
+    glBindTexture(GL_TEXTURE_2D, texid);	//綁定紋理
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glBindTexture(GL_TEXTURE_2D, 0);
+    glBindTexture(GL_TEXTURE_2D, 0);	//綁定紋理
 }
 
 void initGL(int* argc, char** argv)

@@ -1,14 +1,13 @@
- /*
- * This sample demonstrates how to use texture fetches from layered 2D textures
- * in CUDA C
- *
- * This sample first generates a 3D input data array for the layered texture
- * and the expected output. Then it starts CUDA C kernels, one for each layer,
- * which fetch their layer's texture data (using normalized texture coordinates)
- * transform it to the expected output, and write it to a 3D output data array.
- */
+/*
+* This sample demonstrates how to use texture fetches from layered 2D textures in CUDA C
+*
+* This sample first generates a 3D input data array for the layered texture
+* and the expected output. Then it starts CUDA C kernels, one for each layer,
+* which fetch their layer's texture data (using normalized texture coordinates)
+* transform it to the expected output, and write it to a 3D output data array.
+*/
 
- // includes, system
+// includes, system
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -165,6 +164,7 @@ int main(int argc, char** argv)
         printf("Comparing kernel output to expected data\n");
 
 #define MIN_EPSILON_ERROR 5e-3f
+
         bResult = compareData(h_odata, h_data_ref, width * height * num_layers, MIN_EPSILON_ERROR, 0.0f);
     }
 

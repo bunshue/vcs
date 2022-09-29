@@ -110,7 +110,7 @@ void display(void)
 
     glClear(GL_COLOR_BUFFER_BIT);
 
-    glBindTexture(GL_TEXTURE_2D, texid);
+    glBindTexture(GL_TEXTURE_2D, texid);	//綁定紋理
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbo_buffer);
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, imWidth, imHeight, GL_LUMINANCE, GL_UNSIGNED_BYTE, OFFSET(0));
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
@@ -132,7 +132,7 @@ void display(void)
     glVertex2f(1, 0);
     glTexCoord2f(0, 1);
     glEnd();
-    glBindTexture(GL_TEXTURE_2D, 0);
+    glBindTexture(GL_TEXTURE_2D, 0);	//綁定紋理
 
     glutSwapBuffers();
 
@@ -287,10 +287,10 @@ void initializeData(char* file)
         // register this buffer object with CUDA
         checkCudaErrors(cudaGraphicsGLRegisterBuffer(&cuda_pbo_resource, pbo_buffer, cudaGraphicsMapFlagsWriteDiscard));
 
-        glGenTextures(1, &texid);
-        glBindTexture(GL_TEXTURE_2D, texid);
+        glGenTextures(1, &texid);	//生成紋理對象
+        glBindTexture(GL_TEXTURE_2D, texid);	//綁定紋理
         glTexImage2D(GL_TEXTURE_2D, 0, ((g_Bpp == 1) ? GL_LUMINANCE : GL_BGRA), imWidth, imHeight, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, NULL);
-        glBindTexture(GL_TEXTURE_2D, 0);
+        glBindTexture(GL_TEXTURE_2D, 0);	//綁定紋理
 
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
         glPixelStorei(GL_PACK_ALIGNMENT, 1);

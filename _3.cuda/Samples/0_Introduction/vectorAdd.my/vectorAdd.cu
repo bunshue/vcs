@@ -48,10 +48,16 @@ int main(void)
 
     printf("[Vector addition of %d elements]\n", numElements);
 
+    // Allocate the host input vector A
     byte* h_A = (byte*)malloc(size);
+
+    // Allocate the host input vector B
     byte* h_B = (byte*)malloc(size);
+
+    // Allocate the host output vector C
     byte* h_C = (byte*)malloc(size);
 
+    // Verify that allocations succeeded
     if (h_A == NULL || h_B == NULL || h_C == NULL)
     {
         fprintf(stderr, "Failed to allocate host vectors!\n");
@@ -66,6 +72,7 @@ int main(void)
         h_C[i] = 0;
     }
 
+    // Allocate the device input vector A
     byte* d_A = NULL;
     err = cudaMalloc((void**)&d_A, size);
 
@@ -75,6 +82,7 @@ int main(void)
         exit(EXIT_FAILURE);
     }
 
+    // Allocate the device input vector B
     byte* d_B = NULL;
     err = cudaMalloc((void**)&d_B, size);
 
@@ -84,6 +92,7 @@ int main(void)
         exit(EXIT_FAILURE);
     }
 
+    // Allocate the device output vector C
     byte* d_C = NULL;
     err = cudaMalloc((void**)&d_C, size);
 
@@ -140,8 +149,19 @@ int main(void)
         exit(EXIT_FAILURE);
     }
 
+    // Verify that the result vector is correct
+    for (int i = 0; i < numElements; ++i)
+    {
+        if (fabs(h_A[i] + h_B[i] - h_C[i]) > 1e-5)
+        {
+            fprintf(stderr, "Result verification failed at element %d!\n", i);
+            exit(EXIT_FAILURE);
+        }
+    }
+
     printf("Test PASSED\n");
 
+    // Free device global memory
     err = cudaFree(d_A);
     if (err != cudaSuccess)
     {

@@ -1,12 +1,9 @@
 /*
-  Mandelbrot sample
-  submitted by Mark Granger, NewTek
+  Mandelbrot sample submitted by Mark Granger, NewTek
 
   CUDA 2.0 SDK - updated with double precision support
-  CUDA 2.1 SDK - updated to demonstrate software block scheduling using
-  atomics
-  CUDA 2.2 SDK - updated with drawing of Julia sets by Konstantin Kolchin,
-  NVIDIA
+  CUDA 2.1 SDK - updated to demonstrate software block scheduling using atomics
+  CUDA 2.2 SDK - updated with drawing of Julia sets by Konstantin Kolchin,NVIDIA
 */
 
 // OpenGL Graphics includes
@@ -401,7 +398,7 @@ void displayFunc(void)
 
     // load texture from PBO
     //  glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, gl_PBO);
-    glBindTexture(GL_TEXTURE_2D, gl_Tex);
+    glBindTexture(GL_TEXTURE_2D, gl_Tex);	//綁定紋理
     glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, imageW, imageH, GL_RGBA, GL_UNSIGNED_BYTE, BUFFER_DATA(0));
     //  glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, 0);
 
@@ -421,7 +418,7 @@ void displayFunc(void)
     glVertex2f(0.0f, 1.0f);
     glEnd();
 
-    glBindTexture(GL_TEXTURE_2D, 0);
+    glBindTexture(GL_TEXTURE_2D, 0);	//綁定紋理
     glDisable(GL_FRAGMENT_PROGRAM_ARB);
 
     sdkStopTimer(&hTimer);
@@ -924,8 +921,8 @@ void initOpenGLBuffers(int w, int h)
 
     printf("Creating GL texture...\n");
     glEnable(GL_TEXTURE_2D);
-    glGenTextures(1, &gl_Tex);
-    glBindTexture(GL_TEXTURE_2D, gl_Tex);
+    glGenTextures(1, &gl_Tex);	//生成紋理對象
+    glBindTexture(GL_TEXTURE_2D, gl_Tex);	//綁定紋理
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);

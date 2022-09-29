@@ -29,9 +29,8 @@ void init()
     //CBMPLoader bmpLoader;
     //bmpLoader.LoadBmp("/123-bmp.bmp");
 
-    // 創建紋理
-    //glGenTextures(1, &tex2D);
-    //glBindTexture(GL_TEXTURE_2D, tex2D);
+    //glGenTextures(1, &tex2D);	//生成紋理對象
+    //glBindTexture(GL_TEXTURE_2D, tex2D);	//綁定紋理
 
     // 紋理濾波參數設置
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -51,7 +50,7 @@ void DrawBox()
     glEnable(GL_TEXTURE_2D);
 
     /** 選擇紋理 */
-    //glBindTexture(GL_TEXTURE_2D, tex2D);
+    //glBindTexture(GL_TEXTURE_2D, tex2D);	//綁定紋理
 
     /** 開始繪制四邊形 */
     glBegin(GL_QUADS);
