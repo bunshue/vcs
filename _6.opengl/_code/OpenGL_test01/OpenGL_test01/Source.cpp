@@ -390,18 +390,34 @@ void display(void)
     }
     else if (display_mode == 13)
     {
-    //display_mode = 13  //畫
+    //display_mode = 13  //畫 舉形 + 四邊形
 
     //Single/Double buffer 會不一樣
     //glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
     //glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 
     glClear(GL_COLOR_BUFFER_BIT);
-    glRectf(-0.1f, -0.1f, 0.5f, 0.5f);
+
+    glRectf(-0.5f, -0.5f, 0.5f, 0.5f);
+
+    glColor4f(1.0, 0.0, 0.0, 1.0);  //設置畫筆顏色為 R
+    glBegin(GL_QUADS);
+    {
+        glTexCoord2f(0.8f, 0.0f);
+        glVertex2f(0.8f, 0.0f);
+
+        glTexCoord2f(0.0f, -0.8f);
+        glVertex2f(0.0f, -0.8f);
+
+        glTexCoord2f(-0.8f, 0.0f);
+        glVertex2f(-0.8f, 0.0f);
+
+        glTexCoord2f(0.0f, 0.8f);
+        glVertex2f(0.0f, 0.8f);
+    }
+    glEnd();
+
     glFlush();
-
-
-
     }
     else if (display_mode == 14)
     {

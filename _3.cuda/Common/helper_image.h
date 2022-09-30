@@ -478,7 +478,7 @@ inline bool sdkWriteFile(const char* filename, const T* data, unsigned int len,
     assert(NULL != filename);
     assert(NULL != data);
 
-    printf("sdkWriteFile : %s\n", filename);
+    printf("sdkWriteFile : %s, len = %d\n", filename, len);
 
     // open file for writing
     //    if (append) {

@@ -36,44 +36,15 @@ __global__ void testKernel(int N)
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// Declaration, forward
-void runTest(int argc, char** argv);
-
-////////////////////////////////////////////////////////////////////////////////
 // Program main
 ////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
     printf("Starting...\n");
 
-    runTest(argc, argv);
-
-    printf("Completed, returned %s\n", testResult ? "OK" : "ERROR!");
-    exit(testResult ? EXIT_SUCCESS : EXIT_FAILURE);
-}
-
-void runTest(int argc, char** argv)
-{
     int Nblocks = 2;
     int Nthreads = 32;
     cudaError_t error;
-
-#ifndef _WIN32
-    utsname OS_System_Type;
-    uname(&OS_System_Type);
-
-    printf("OS_System_Type.release = %s\n", OS_System_Type.release);
-
-    if (!strcasecmp(OS_System_Type.sysname, "Darwin"))
-    {
-        printf("simpleAssert is not current supported on Mac OSX\n\n");
-        exit(EXIT_SUCCESS);
-    }
-    else
-    {
-        printf("OS Info: <%s>\n\n", OS_System_Type.version);
-    }
-
-#endif
 
     // This will pick the best possible CUDA capable device
     findCudaDevice(argc, (const char**)argv);
@@ -98,4 +69,8 @@ void runTest(int argc, char** argv)
     }
 
     testResult = error == cudaErrorAssert;
+
+    printf("Completed, returned %s\n", testResult ? "OK" : "ERROR!");
+    exit(testResult ? EXIT_SUCCESS : EXIT_FAILURE);
+
 }

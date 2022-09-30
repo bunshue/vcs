@@ -1,6 +1,5 @@
 /*
-* This sample demonstrates how to use texture fetches from layered 2D textures
-* in CUDA C
+* This sample demonstrates how to use texture fetches from layered 2D textures in CUDA C
 *
 * This sample first generates a 3D input data array for the layered texture
 * and the expected output. Then it starts CUDA C kernels, one for each layer,

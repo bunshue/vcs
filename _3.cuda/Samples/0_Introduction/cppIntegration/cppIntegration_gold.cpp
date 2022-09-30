@@ -3,8 +3,8 @@
 
 ////////////////////////////////////////////////////////////////////////////////
 // export C interface
-extern "C" void computeGold(char *reference, char *idata,const unsigned int len);
-extern "C" void computeGold2(int2 *reference, int2 *idata,const unsigned int len);
+extern "C" void computeGold(char* reference, char* idata, const unsigned int len);
+extern "C" void computeGold2(int2 * reference, int2 * idata, const unsigned int len);
 
 ////////////////////////////////////////////////////////////////////////////////
 //! Compute reference data set

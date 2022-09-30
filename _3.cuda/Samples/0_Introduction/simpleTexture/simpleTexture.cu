@@ -54,7 +54,10 @@ __global__ void transformKernel(float* outputData, int width, int height, float 
     outputData[y * width + x] = tex2D<float>(tex, tu + 0.5f, tv + 0.5f);
 }
 
-void runTest(int argc, char** argv)
+////////////////////////////////////////////////////////////////////////////////
+// Program main
+////////////////////////////////////////////////////////////////////////////////
+int main(int argc, char** argv)
 {
     int devID = findCudaDevice(argc, (const char**)argv);
 
@@ -157,39 +160,23 @@ void runTest(int argc, char** argv)
 
     printf("outputFilename = %s\n", outputFilename);
 
-    // Write regression file if necessary
-    if (checkCmdLineFlag(argc, (const char**)argv, "regression"))
-    {
-        printf("XXXXXXX\n");
-        // Write file for regression test
-        sdkWriteFile<float>("./data/regression.dat", hOutputData, width * height, 0.0f, false);
-    }
-    else
-    {
-        // We need to reload the data from disk,
-        // because it is inverted upon output
-        sdkLoadPGM(outputFilename, &hOutputData, &width, &height);
+    sdkWriteFile<float>("./dump_data.dat", hOutputData, width * height, 0.0f, false);
 
-        printf("Comparing files\n");
-        printf("\toutput:    <%s>\n", outputFilename);
-        printf("\treference: <%s>\n", refPath);
+    // We need to reload the data from disk,
+    // because it is inverted upon output
+    sdkLoadPGM(outputFilename, &hOutputData, &width, &height);
 
-        testResult = compareData(hOutputData, hDataRef, width * height, MAX_EPSILON_ERROR, 0.15f);
-    }
+    printf("Comparing files\n");
+    printf("\toutput:    <%s>\n", outputFilename);
+    printf("\treference: <%s>\n", refPath);
+
+    testResult = compareData(hOutputData, hDataRef, width * height, MAX_EPSILON_ERROR, 0.15f);
 
     checkCudaErrors(cudaDestroyTextureObject(tex));
     checkCudaErrors(cudaFree(dData));
     checkCudaErrors(cudaFreeArray(cuArray));
     free(imagePath);
     free(refPath);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// Program main
-////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char** argv)
-{
-    runTest(argc, argv);
 
     printf("Completed, returned %s\n", testResult ? "OK" : "ERROR!");
     exit(testResult ? EXIT_SUCCESS : EXIT_FAILURE);

@@ -1,5 +1,16 @@
+
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctime>
+
+#include <assert.h>
+#include <math.h>
+#include <stdint.h>
+#include <vector>
+
 #include <iostream>
+
 using namespace std;
 
 const char* program_name = "測試程式的名稱";
@@ -40,7 +51,6 @@ float RandFloat(float low, float high)
     float t = (float)rand() / (float)RAND_MAX;
     return (1.0f - t) * low + t * high;
 }
-
 
 int main()
 {
@@ -111,7 +121,21 @@ int main()
     printf("%s\n", fps);
     */
 
+    printf("使用 srand 製作random資料\n");
 
+    srand((unsigned int)time(NULL));
+
+    float rr = 0;
+    for (i = 0; i < 10; i++)
+    {
+        rr = (float)rand() / (float)RAND_MAX;
+        //rr = (float)rand();
+        printf("%f ", rr);
+    }
+    printf("\n");
+
+
+    
 
     return 0;
 }

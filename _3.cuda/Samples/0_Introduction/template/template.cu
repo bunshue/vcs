@@ -11,10 +11,6 @@
 #include <helper_cuda.h>
 #include <helper_functions.h> // helper functions for SDK examples
 
-////////////////////////////////////////////////////////////////////////////////
-// declaration, forward
-void runTest(int argc, char **argv);
-
 extern "C" void computeGold(float* reference, float* idata, const unsigned int len);
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -45,10 +41,31 @@ __global__ void testKernel(float* g_idata, float* g_odata)
     g_odata[tid] = sdata[tid];
 }
 
+void test_sdkWriteFile()
+{
+    char* filename = "test.bin";
+
+    unsigned int num_threads = 32;
+    unsigned int mem_size = sizeof(float) * num_threads;
+    float* h_odata = (float*)malloc(mem_size);
+
+    int i;
+    for (i = 0; i < num_threads; i++)
+    {
+        h_odata[i] = (float)i;
+    }
+
+    sdkWriteFile(filename, h_odata, num_threads, 0.0f, false);
+
+
+    free(h_odata);
+
+}
+
 ////////////////////////////////////////////////////////////////////////////////
-//! Run a simple test for CUDA
+// Program main
 ////////////////////////////////////////////////////////////////////////////////
-void runTest(int argc, char** argv)
+int main(int argc, char** argv)
 {
     bool bTestResult = true;
 
@@ -106,18 +123,11 @@ void runTest(int argc, char** argv)
     float* reference = (float*)malloc(mem_size);
     computeGold(reference, h_idata, num_threads);
 
-    // check result
-    if (checkCmdLineFlag(argc, (const char**)argv, "regression"))
-    {
-        // write file for regression test
-        sdkWriteFile("./data/regression.dat", h_odata, num_threads, 0.0f, false);
-    }
-    else
-    {
-        // custom output handling when no regression test running
-        // in this case check if the result is equivalent to the expected solution
-        bTestResult = compareData(reference, h_odata, num_threads, 0.0f, 0.0f);
-    }
+    sdkWriteFile("./dump_data.dat", h_odata, num_threads, 0.0f, false);
+
+    // custom output handling when no regression test running
+    // in this case check if the result is equivalent to the expected solution
+    bTestResult = compareData(reference, h_odata, num_threads, 0.0f, 0.0f);
 
     // cleanup memory
     free(h_idata);
@@ -126,39 +136,11 @@ void runTest(int argc, char** argv)
     checkCudaErrors(cudaFree(d_idata));
     checkCudaErrors(cudaFree(d_odata));
 
-    //exit(bTestResult ? EXIT_SUCCESS : EXIT_FAILURE);
-}
-
-void test_sdkWriteFile()
-{
-    char* filename = "test.bin";
-
-    unsigned int num_threads = 32;
-    unsigned int mem_size = sizeof(float) * num_threads;
-    float* h_odata = (float*)malloc(mem_size);
-
-    int i;
-    for (i = 0; i < num_threads; i++)
-    {
-        h_odata[i] = (float)i;
-    }
-
-    sdkWriteFile(filename, h_odata, num_threads, 0.0f, false);
-
-
-    free(h_odata);
-
-}
-
-////////////////////////////////////////////////////////////////////////////////
-// Program main
-////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char** argv)
-{
-    runTest(argc, argv);
-
     printf("do test_sdkWriteFile\n");
+
     test_sdkWriteFile();
 
+    exit(bTestResult ? EXIT_SUCCESS : EXIT_FAILURE);
 }
+
 

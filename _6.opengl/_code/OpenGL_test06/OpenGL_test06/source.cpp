@@ -105,8 +105,11 @@ static void display(void)
     glCallList(thing4);
     glAccum(GL_ACCUM, alpha);
 
-    alpha += 0.1;
+    char mesg[20];
+    sprintf(mesg, "Alpha = %3.3f", alpha);
+    glutSetWindowTitle(mesg);
 
+    alpha += 0.1;
     if (alpha > 1.01)
     {
         alpha = 0;

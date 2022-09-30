@@ -1,6 +1,6 @@
 // includes, system
-#include <iostream>
 #include <stdlib.h>
+#include <iostream>
 
 // Required to include CUDA vector types
 #include <cuda_runtime.h>

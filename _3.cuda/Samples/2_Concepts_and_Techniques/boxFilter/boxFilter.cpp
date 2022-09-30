@@ -37,6 +37,7 @@ const char* sOriginal[] = { "teapot1024_14.ppm", "teapot1024_22.ppm", NULL };
 const char* sReference[] = { "ref_14.ppm", "ref_22.ppm", NULL };
 
 const char* image_filename = "teapot1024.ppm";
+
 int iterations = 1;
 int filter_radius = 14;
 int nthreads = 64;
@@ -71,13 +72,11 @@ extern "C" void computeGold(float* id, float* od, int w, int h, int n);
 extern "C" void initTexture(int width, int height, void* pImage, bool useRGBA);
 extern "C" void freeTextures();
 extern "C" double boxFilter(float* d_src, float* d_temp, float* d_dest,
-    int width, int height, int radius, int iterations,
-    int nthreads, StopWatchInterface * timer);
+    int width, int height, int radius, int iterations, int nthreads, StopWatchInterface * timer);
 
 extern "C" double boxFilterRGBA(unsigned int* d_src, unsigned int* d_temp,
     unsigned int* d_dest, int width, int height,
-    int radius, int iterations, int nthreads,
-    StopWatchInterface * timer);
+    int radius, int iterations, int nthreads, StopWatchInterface * timer);
 
 // This varies the filter radius, so we can see automatic animation
 void varySigma()
@@ -411,9 +410,8 @@ int runBenchmark()
     dProcessingTime /= (double)iCycles;
 
     // log testname, throughput, timing and config info to sample and master logs
-    printf("boxFilter-texture, Throughput = %.4f M RGBA Pixels/s, Time = %.5f s, Size = %u RGBA Pixels, NumDevsUsed = %u, Workgroup = %u\n",
+    printf("boxFilter-texture, Throughput = %.4f M RGBA Pixels/s, Time = %.5f s, Size = %u RGBA Pixels, NumDevsUsed = %u, Workgroup = %u\n\n",
         (1.0e-6 * width * height) / dProcessingTime, dProcessingTime, (width * height), 1, nthreads);
-    printf("\n");
 
     return 0;
 }
@@ -501,17 +499,15 @@ void loadImageData(int argc, char** argv)
 int main(int argc, char** argv)
 {
     int devID = 0;
-    char* ref_file = NULL;
+    devID = findCudaDevice(argc, (const char**)argv);
 
     printf("Starting...\n\n");
 
     // load image to process
     loadImageData(argc, argv);
-    devID = findCudaDevice(argc, (const char**)argv);
 
     // Default mode running with OpenGL visualization and in automatic mode
     // the output automatically changes animation
-    printf("\n");
 
     initGL(&argc, argv);
 
@@ -522,8 +518,7 @@ int main(int argc, char** argv)
     glutCloseFunc(cleanup);
 
     printf("Running Standard Demonstration with GLUT loop...\n\n");
-    printf(
-        "Press '+' and '-' to change filter width\n"
+    printf("Press '+' and '-' to change filter width\n"
         "Press ']' and '[' to change number of iterations\n"
         "Press 'a' or  'A' to change animation ON/OFF\n\n");
 
