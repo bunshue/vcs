@@ -103,9 +103,7 @@
     <ClInclude Include="BmpUtil.h" />
     <ClInclude Include="Common.h" />
     <None Include="dct8x8_kernel1.cuh" />
-    <None Include="dct8x8_kernel2.cuh" />
     <None Include="dct8x8_kernel_quantization.cuh" />
-    <None Include="dct8x8_kernel_short.cuh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

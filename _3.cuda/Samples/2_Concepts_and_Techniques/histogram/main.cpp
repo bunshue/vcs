@@ -14,7 +14,6 @@
 #include "histogram_common.h"
 
 const int numRuns = 16;
-const static char *sSDKsample = "[histogram]\0";
 
 int main(int argc, char** argv)
 {
@@ -32,7 +31,7 @@ int main(int argc, char** argv)
     deviceProp.minor = 0;
 
     // set logfile name and start logs
-    printf("\n[%s] - Starting...\n", sSDKsample);
+    printf("Starting...\n");
 
     // Use command-line specified CUDA device, otherwise use device with highest
     // Gflops/s
@@ -41,8 +40,7 @@ int main(int argc, char** argv)
     checkCudaErrors(cudaGetDeviceProperties(&deviceProp, dev));
 
     printf("CUDA device [%s] has %d Multi-Processors, Compute %d.%d\n",
-        deviceProp.name, deviceProp.multiProcessorCount, deviceProp.major,
-        deviceProp.minor);
+        deviceProp.name, deviceProp.multiProcessorCount, deviceProp.major, deviceProp.minor);
 
     sdkCreateTimer(&hTimer);
 
@@ -61,6 +59,7 @@ int main(int argc, char** argv)
     h_HistogramGPU = (uint*)malloc(HISTOGRAM256_BIN_COUNT * sizeof(uint));
 
     printf("...generating input data\n");
+
     srand(2009);
 
     for (uint i = 0; i < byteCount; i++)
@@ -80,9 +79,11 @@ int main(int argc, char** argv)
         printf("Running 64-bin GPU histogram for %u bytes (%u runs)...\n\n",
             byteCount, numRuns);
 
-        for (int iter = -1; iter < numRuns; iter++) {
+        for (int iter = -1; iter < numRuns; iter++)
+        {
             // iter == -1 -- warmup iteration
-            if (iter == 0) {
+            if (iter == 0)
+            {
                 cudaDeviceSynchronize();
                 sdkResetTimer(&hTimer);
                 sdkStartTimer(&hTimer);
@@ -93,21 +94,15 @@ int main(int argc, char** argv)
 
         cudaDeviceSynchronize();
         sdkStopTimer(&hTimer);
-        double dAvgSecs =
-            1.0e-3 * (double)sdkGetTimerValue(&hTimer) / (double)numRuns;
-        printf("histogram64() time (average) : %.5f sec, %.4f MB/sec\n\n", dAvgSecs,
-            ((double)byteCount * 1.0e-6) / dAvgSecs);
-        printf(
-            "histogram64, Throughput = %.4f MB/s, Time = %.5f s, Size = %u Bytes, "
+        double dAvgSecs = 1.0e-3 * (double)sdkGetTimerValue(&hTimer) / (double)numRuns;
+        printf("histogram64() time (average) : %.5f sec, %.4f MB/sec\n\n", dAvgSecs, ((double)byteCount * 1.0e-6) / dAvgSecs);
+        printf("histogram64, Throughput = %.4f MB/s, Time = %.5f s, Size = %u Bytes, "
             "NumDevsUsed = %u, Workgroup = %u\n",
-            (1.0e-6 * (double)byteCount / dAvgSecs), dAvgSecs, byteCount, 1,
-            HISTOGRAM64_THREADBLOCK_SIZE);
+            (1.0e-6 * (double)byteCount / dAvgSecs), dAvgSecs, byteCount, 1, HISTOGRAM64_THREADBLOCK_SIZE);
 
         printf("\nValidating GPU results...\n");
         printf(" ...reading back GPU results\n");
-        checkCudaErrors(cudaMemcpy(h_HistogramGPU, d_Histogram,
-            HISTOGRAM64_BIN_COUNT * sizeof(uint),
-            cudaMemcpyDeviceToHost));
+        checkCudaErrors(cudaMemcpy(h_HistogramGPU, d_Histogram, HISTOGRAM64_BIN_COUNT * sizeof(uint), cudaMemcpyDeviceToHost));
 
         printf(" ...histogram64CPU()\n");
         histogram64CPU(h_HistogramCPU, h_Data, byteCount);
@@ -115,12 +110,14 @@ int main(int argc, char** argv)
         printf(" ...comparing the results...\n");
 
         for (uint i = 0; i < HISTOGRAM64_BIN_COUNT; i++)
-            if (h_HistogramGPU[i] != h_HistogramCPU[i]) {
+        {
+            if (h_HistogramGPU[i] != h_HistogramCPU[i])
+            {
                 PassFailFlag = 0;
             }
+        }
 
-        printf(PassFailFlag ? " ...64-bin histograms match\n\n"
-            : " ***64-bin histograms do not match!!!***\n\n");
+        printf(PassFailFlag ? " ...64-bin histograms match\n\n" : " ***64-bin histograms do not match!!!***\n\n");
 
         printf("Shutting down 64-bin histogram...\n\n\n");
         closeHistogram64();
@@ -130,37 +127,31 @@ int main(int argc, char** argv)
         printf("Initializing 256-bin histogram...\n");
         initHistogram256();
 
-        printf("Running 256-bin GPU histogram for %u bytes (%u runs)...\n\n",
-            byteCount, numRuns);
+        printf("Running 256-bin GPU histogram for %u bytes (%u runs)...\n\n", byteCount, numRuns);
 
-        for (int iter = -1; iter < numRuns; iter++) {
+        for (int iter = -1; iter < numRuns; iter++)
+        {
             // iter == -1 -- warmup iteration
-            if (iter == 0) {
+            if (iter == 0)
+            {
                 checkCudaErrors(cudaDeviceSynchronize());
                 sdkResetTimer(&hTimer);
                 sdkStartTimer(&hTimer);
             }
-
             histogram256(d_Histogram, d_Data, byteCount);
         }
 
         cudaDeviceSynchronize();
         sdkStopTimer(&hTimer);
-        double dAvgSecs =
-            1.0e-3 * (double)sdkGetTimerValue(&hTimer) / (double)numRuns;
-        printf("histogram256() time (average) : %.5f sec, %.4f MB/sec\n\n",
-            dAvgSecs, ((double)byteCount * 1.0e-6) / dAvgSecs);
-        printf(
-            "histogram256, Throughput = %.4f MB/s, Time = %.5f s, Size = %u Bytes, "
+        double dAvgSecs = 1.0e-3 * (double)sdkGetTimerValue(&hTimer) / (double)numRuns;
+        printf("histogram256() time (average) : %.5f sec, %.4f MB/sec\n\n", dAvgSecs, ((double)byteCount * 1.0e-6) / dAvgSecs);
+        printf("histogram256, Throughput = %.4f MB/s, Time = %.5f s, Size = %u Bytes, "
             "NumDevsUsed = %u, Workgroup = %u\n",
-            (1.0e-6 * (double)byteCount / dAvgSecs), dAvgSecs, byteCount, 1,
-            HISTOGRAM256_THREADBLOCK_SIZE);
+            (1.0e-6 * (double)byteCount / dAvgSecs), dAvgSecs, byteCount, 1, HISTOGRAM256_THREADBLOCK_SIZE);
 
         printf("\nValidating GPU results...\n");
         printf(" ...reading back GPU results\n");
-        checkCudaErrors(cudaMemcpy(h_HistogramGPU, d_Histogram,
-            HISTOGRAM256_BIN_COUNT * sizeof(uint),
-            cudaMemcpyDeviceToHost));
+        checkCudaErrors(cudaMemcpy(h_HistogramGPU, d_Histogram, HISTOGRAM256_BIN_COUNT * sizeof(uint), cudaMemcpyDeviceToHost));
 
         printf(" ...histogram256CPU()\n");
         histogram256CPU(h_HistogramCPU, h_Data, byteCount);
@@ -168,12 +159,14 @@ int main(int argc, char** argv)
         printf(" ...comparing the results\n");
 
         for (uint i = 0; i < HISTOGRAM256_BIN_COUNT; i++)
-            if (h_HistogramGPU[i] != h_HistogramCPU[i]) {
+        {
+            if (h_HistogramGPU[i] != h_HistogramCPU[i])
+            {
                 PassFailFlag = 0;
             }
+        }
 
-        printf(PassFailFlag ? " ...256-bin histograms match\n\n"
-            : " ***256-bin histograms do not match!!!***\n\n");
+        printf(PassFailFlag ? " ...256-bin histograms match\n\n" : " ***256-bin histograms do not match!!!***\n\n");
 
         printf("Shutting down 256-bin histogram...\n\n\n");
         closeHistogram256();
@@ -187,11 +180,10 @@ int main(int argc, char** argv)
     free(h_HistogramCPU);
     free(h_Data);
 
-    printf(
-        "\nNOTE: The CUDA Samples are not meant for performance measurements. "
+    printf("\nNOTE: The CUDA Samples are not meant for performance measurements. "
         "Results may vary when GPU Boost is enabled.\n\n");
 
-    printf("%s - Test Summary\n", sSDKsample);
+    printf("Test Summary\n");
 
     // pass or fail (for both 64 bit and 256 bit histograms)
     if (!PassFailFlag)
