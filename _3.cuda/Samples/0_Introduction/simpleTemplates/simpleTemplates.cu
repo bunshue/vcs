@@ -223,20 +223,13 @@ void runTest(int argc, char** argv, int len)
     ArrayComparator<T> comparator;
     ArrayFileWriter<T> writer;
 
-    // check result
-    if (checkCmdLineFlag(argc, (const char**)argv, "regression"))
-    {
-        // write file for regression test
-        writer.write("./data/regression.dat", h_odata, num_threads, 0.0f);
-    }
-    else
-    {
-        // custom output handling when no regression test running
-        // in this case check if the result is equivalent to the expected solution
-        bool res = comparator.compare(reference, h_odata, num_threads);
-        printf("Compare %s\n\n", (1 == res) ? "OK" : "MISMATCH");
-        g_TotalFailures += (1 != res);
-    }
+    writer.write("./dump_data.dat", h_odata, num_threads, 0.0f);
+
+    // custom output handling when no regression test running
+    // in this case check if the result is equivalent to the expected solution
+    bool res = comparator.compare(reference, h_odata, num_threads);
+    printf("Compare %s\n\n", (1 == res) ? "OK" : "MISMATCH");
+    g_TotalFailures += (1 != res);
 
     // cleanup memory
     free(h_idata);

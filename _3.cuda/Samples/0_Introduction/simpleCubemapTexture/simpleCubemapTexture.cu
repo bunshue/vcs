@@ -207,19 +207,13 @@ int main(int argc, char** argv)
     // copy result from device to host
     checkCudaErrors(cudaMemcpy(h_odata, d_data, size, cudaMemcpyDeviceToHost));
 
-    // write regression file if necessary
-    if (checkCmdLineFlag(argc, (const char**)argv, "regression"))
-    {
-        // write file for regression test
-        sdkWriteFile<float>("./data/regression.dat", h_odata, width * width, 0.0f, false);
-    }
-    else
-    {
-        printf("Comparing kernel output to expected data\n");
+    sdkWriteFile<float>("./dump_data.dat", h_odata, width * width, 0.0f, false);
+
+
+    printf("Comparing kernel output to expected data\n");
 
 #define MIN_EPSILON_ERROR 5e-3f
-        bResult = compareData(h_odata, h_data_ref, cubemap_size, MIN_EPSILON_ERROR, 0.0f);
-    }
+    bResult = compareData(h_odata, h_data_ref, cubemap_size, MIN_EPSILON_ERROR, 0.0f);
 
     // cleanup memory
     free(h_data);

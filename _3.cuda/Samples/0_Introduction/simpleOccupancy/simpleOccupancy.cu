@@ -196,6 +196,7 @@ int main()
     std::cout << "[ Manual configuration with " << manualBlockSize << " threads per block ]" << std::endl;
 
     status = test(false);
+
     if (status)
     {
         std::cerr << "Test failed\n" << std::endl;

@@ -61,9 +61,6 @@ const unsigned int g_NumVertices = g_MeshWidth * g_MeshHeight;
 bool g_bQAReadback = false;
 int g_iFrameToCompare = 10;
 
-int* pArgc = NULL;
-char** pArgv = NULL;
-
 float anim;
 
 //-----------------------------------------------------------------------------
@@ -105,10 +102,8 @@ void runTest(int argc, char** argv, char* ref_file)
     int xBorder = ::GetSystemMetrics(SM_CXSIZEFRAME);
     int yBorder = ::GetSystemMetrics(SM_CYSIZEFRAME);
     int yMenu = ::GetSystemMetrics(SM_CYMENU);
-    HWND hWnd = CreateWindow(
-        wc.lpszClassName, "CUDA/D3D9 simpleD3D9 David", WS_OVERLAPPEDWINDOW, 0, 0,
-        g_WindowWidth + 2 * xBorder, g_WindowHeight + 2 * yBorder + yMenu, NULL,
-        NULL, wc.hInstance, NULL);
+    HWND hWnd = CreateWindow(wc.lpszClassName, "CUDA/D3D9 simpleD3D9 David", WS_OVERLAPPEDWINDOW, 0, 0,
+        g_WindowWidth + 2 * xBorder, g_WindowHeight + 2 * yBorder + yMenu, NULL, NULL, wc.hInstance, NULL);
 
     // Initialize Direct3D9
     if (SUCCEEDED(InitD3D9(hWnd)) && SUCCEEDED(InitCUDA()))
@@ -175,7 +170,8 @@ void runTest(int argc, char** argv, char* ref_file)
 ////////////////////////////////////////////////////////////////////////////////
 //! Run the Cuda part of the computation
 ////////////////////////////////////////////////////////////////////////////////
-void runCuda() {
+void runCuda()
+{
     HRESULT hr = S_OK;
 
     // Map vertex buffer to Cuda
@@ -186,8 +182,7 @@ void runCuda() {
     getLastCudaError("cudaGraphicsMapResources failed");
     // This gets a pointer from the Vertex Buffer
     size_t num_bytes;
-    checkCudaErrors(cudaGraphicsResourceGetMappedPointer(
-        (void**)&d_ptr, &num_bytes, cuda_VB_resource));
+    checkCudaErrors(cudaGraphicsResourceGetMappedPointer((void**)&d_ptr, &num_bytes, cuda_VB_resource));
     getLastCudaError("cudaGraphicsResourceGetMappedPointer failed");
 
     // Execute kernel
@@ -202,23 +197,21 @@ void runCuda() {
 //! Check if the result is correct or write data to file for external
 //! regression testing
 ////////////////////////////////////////////////////////////////////////////////
-bool SaveVBResult(int argc, char** argv) {
+bool SaveVBResult(int argc, char** argv)
+{
     // Lock vertex buffer
     float* data;
 
-    if (FAILED(g_pVB->Lock(0, 0, (void**)&data, 0))) {
+    if (FAILED(g_pVB->Lock(0, 0, (void**)&data, 0)))
+    {
         return false;
     }
 
-    // Save result
-    if (checkCmdLineFlag(argc, (const char**)argv, "regression")) {
-        // write file for regression test
-        sdkWriteFile<float>("./data/regression.dat", data, sizeof(CUSTOMVERTEX),
-            0.0f, false);
-    }
+    sdkWriteFile<float>("./dump_data.dat", data, sizeof(CUSTOMVERTEX), 0.0f, false);
 
     // unlock
-    if (FAILED(g_pVB->Unlock())) {
+    if (FAILED(g_pVB->Unlock()))
+    {
         return false;
     }
 
@@ -258,8 +251,7 @@ HRESULT InitD3D9(HWND hWnd)
         printLastCudaError("cudaD3D9GetDevice failed");
 
         printf("> Display Device #%d: \"%s\" %s Direct3D9\n", g_iAdapter,
-            adapterId.Description,
-            (cuStatus == cudaSuccess) ? "supports" : "does not support");
+            adapterId.Description, (cuStatus == cudaSuccess) ? "supports" : "does not support");
 
         if (cudaSuccess == cuStatus)
         {
@@ -272,8 +264,7 @@ HRESULT InitD3D9(HWND hWnd)
     // we check to make sure we have found a cuda-compatible D3D device to work on
     if (!bDeviceFound)
     {
-        printf("\n");
-        printf("  No CUDA-compatible Direct3D9 device available\n");
+        printf("\nNo CUDA-compatible Direct3D9 device available\n");
         printf("PASSED\n");
         // destroy the D3D device
         g_pD3D->Release();
@@ -625,11 +616,14 @@ HRESULT Render()
 // Name: MsgProc()
 // Desc: The window's message handler
 //-----------------------------------------------------------------------------
-LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
-    switch (msg) {
+LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+    switch (msg)
+    {
     case WM_DESTROY:
     case WM_KEYDOWN:
-        if (msg != WM_KEYDOWN || wParam == 27) {
+        if (msg != WM_KEYDOWN || wParam == 27)
+        {
             Cleanup();
 
             PostQuitMessage(0);
@@ -645,9 +639,6 @@ LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 int main(int argc, char** argv)
 {
     char* ref_file = NULL;
-
-    pArgc = &argc;
-    pArgv = argv;
 
     printf("Starting...\n");
 

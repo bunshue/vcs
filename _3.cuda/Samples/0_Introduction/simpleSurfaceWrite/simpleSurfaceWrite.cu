@@ -203,23 +203,16 @@ int main(int argc, char** argv)
     sdkSavePGM("output.pgm", hOData, width, height);
     printf("outputFilename : %s\n", outputFilename);
 
-    // Write regression file if necessary
-    if (checkCmdLineFlag(argc, (const char**)argv, "regression"))
-    {
-        // Write file for regression test
-        sdkWriteFile<float>("./data/regression.dat", hOData, width * height, 0.0f, false);
-    }
-    else
-    {
-        // We need to reload the data from disk,
-        // because it is inverted upon output
-        sdkLoadPGM(outputFilename, &hOData, &width, &height);
+    sdkWriteFile<float>("./dump_data.dat", hOData, width * height, 0.0f, false);
 
-        printf("Comparing files\n");
-        printf("\toutput:    <%s>\n", outputFilename);
-        printf("\treference: <%s>\n", refPath);
-        testResult = compareData(hOData, hDataRef, width * height, MIN_EPSILON_ERROR, 0.0f);
-    }
+    // We need to reload the data from disk,
+    // because it is inverted upon output
+    sdkLoadPGM(outputFilename, &hOData, &width, &height);
+
+    printf("Comparing files\n");
+    printf("\toutput:    <%s>\n", outputFilename);
+    printf("\treference: <%s>\n", refPath);
+    testResult = compareData(hOData, hDataRef, width * height, MIN_EPSILON_ERROR, 0.0f);
 
     checkCudaErrors(cudaDestroySurfaceObject(outputSurface));
     checkCudaErrors(cudaDestroyTextureObject(tex));
@@ -227,10 +220,6 @@ int main(int argc, char** argv)
     checkCudaErrors(cudaFreeArray(cuArray));
     free(imagePath);
     free(refPath);
-
-
-
-
 
     printf("Completed, returned %s\n", testResult ? "OK" : "ERROR!");
 
