@@ -1,0 +1,142 @@
+// OpenGL Graphics includes
+#include <iostream>
+#include <helper_gl.h>
+
+//#include "cuda_runtime.h"
+//#include "device_launch_parameters.h"
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include <GL/glut.h>      //32 bits
+//#include <GL/freeglut.h>    //64 bits
+
+GLenum doubleBuffer;
+GLint thing1, thing2, thing3, thing4;
+float alpha = 0.5;
+
+static void Init(void)
+{
+    //           R    G    B     A
+    glClearColor(0.0, 0.0, 0.0, 0.0);   //設定背景色(0 0 0為黑色)
+
+    glClearAccum(0.0, 0.0, 0.0, 0.0);
+
+    thing1 = glGenLists(1);
+    glNewList(thing1, GL_COMPILE);
+    glColor3f(1.0, 0.0, 0.0);   //R
+    glRectf(-1.0, -0.8, 1.0, 0.8);
+    glEndList();
+
+    thing2 = glGenLists(1);
+    glNewList(thing2, GL_COMPILE);
+    glColor3f(0.0, 1.0, 0.0);   //G
+    glRectf(-0.8, -1.0, 0.2, 1.0);
+    glEndList();
+
+    thing3 = glGenLists(1);
+    glNewList(thing3, GL_COMPILE);
+    glColor3f(0.0, 0.0, 1.0);   //B
+    glRectf(-0.2, -1.0, 0.8, 1.0);
+
+    /*
+    thing4 = glGenLists(1);
+    glNewList(thing4, GL_COMPILE);
+    glColor3f(1.0, 0.0, 0.0);   //xxxx
+    glRectf(-1.2, -1.2, 1.2, 1.2);
+    */
+
+    glEndList();
+}
+
+static void reshape(int width, int height)
+{
+    glViewport(0, 0, width, height);
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+}
+
+static void keyboard(unsigned char key, int x, int y)
+{
+    switch (key)
+    {
+    case '1':
+        printf("畫實心色塊\n");
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        glutPostRedisplay();	//重做display()
+        break;
+    case '2':
+        printf("畫空心色塊(外框)\n");
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        glutPostRedisplay();	//重做display()
+        break;
+    case 'r':
+        printf("重畫 alpha = %f ", alpha);
+        glutPostRedisplay();	//重做display()
+        break;
+    case 27:
+        exit(0);
+    }
+}
+
+static void display(void)
+{
+    glPushMatrix();
+
+    glScalef(0.8, 0.8, 0.8);	//X Y Z所佔整個視窗的比例 最大為1.0 就是100%
+
+
+	//glClearColor(1.0, 1.0, 1.0, 0.0);
+//glClear(GL_COLOR_BUFFER_BIT);
+
+glBegin(GL_TRIANGLES);
+   glColor3f(1.0, 0.0, 0.0);
+  glVertex2f(50.f, 50.f);
+   glVertex2f(150.f, 50.f);
+   glVertex2f(100.f, 150.f);
+glEnd();
+
+glFlush();
+	
+	
+	glPopMatrix();
+
+    if (doubleBuffer)
+    {
+        glutSwapBuffers();
+    }
+    else
+    {
+        glFlush();
+    }
+}
+
+int main(int argc, char** argv)
+{
+    GLenum type;
+
+    glutInit(&argc, argv);
+
+    type = GLUT_RGB | GLUT_ACCUM;
+    type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
+    glutInitDisplayMode(type);	//設定Single Buffer 或是 Double Buffer
+
+    glutInitWindowSize(600, 600);
+    glutInitWindowPosition(1100, 200);
+
+    glutCreateWindow("顏色重疊測試");
+
+    Init();
+
+    glutDisplayFunc(display);       //設定callback function
+    glutReshapeFunc(reshape);       //設定callback function
+    glutKeyboardFunc(keyboard);     //設定callback function
+
+    glutMainLoop();
+}
+
+

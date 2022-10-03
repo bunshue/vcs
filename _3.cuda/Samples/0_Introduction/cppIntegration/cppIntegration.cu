@@ -73,8 +73,7 @@ __global__ void kernel2(int2* g_data) {
 ////////////////////////////////////////////////////////////////////////////////
 extern "C" bool runTest(const int argc, const char** argv, char* data, int2 * data_int2, unsigned int len)
 {
-    // use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
+    // use command-line specified CUDA device, otherwise use device with highest Gflops/s
     findCudaDevice(argc, (const char**)argv);
 
     const unsigned int num_threads = len / 4;
