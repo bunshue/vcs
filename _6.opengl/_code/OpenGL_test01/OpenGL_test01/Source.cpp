@@ -14,7 +14,6 @@
 
 int display_mode = 1;
 
-//display_mode = 3
 #define NGRID 6
 
 double pnts[][2] = {
@@ -31,14 +30,14 @@ double pnts[][2] = {
 void drawGrid(int xmin, int xmax, int ymin, int ymax)
 {
     int i, j;
-    for (j = ymin; j <= ymax; j++) //水平线
+    for (j = ymin; j <= ymax; j++) //水平線
     {
         glBegin(GL_LINES);
         glVertex2d(xmin, j);
         glVertex2d(xmax, j);
         glEnd();
     }
-    for (i = xmin; i <= xmax; i++) //竖线
+    for (i = xmin; i <= xmax; i++) //豎線
     {
         glBegin(GL_LINES);
         glVertex2d(i, ymin);
@@ -86,8 +85,7 @@ void display(void)
         //or
         glClearColor(1.0f, 1.0f, 1.0f, 1.0f);   // 設置清除窗口背景色為白色
         glClear(GL_COLOR_BUFFER_BIT);// 進行窗口清理
-        glFlush();       // 刷新OpenGL中的命令列和，使所有尚未被行的命令行
-
+        glFlush();       // 刷新OpenGL中的命令列和，使所有尚未被行的命令行
 
         //設定預設大小...
     }
@@ -118,24 +116,25 @@ void display(void)
         glClearColor(0.5f, 0.5f, 0.5f, 0.0f);
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
-        //设置颜色
+        //設置顏色
         glColor3f(0.2f, 0.6f, 0.5f);
 
-        //开始渲染
+        //開始渲染
         glBegin(GL_POLYGON);
 
-        //圆的顶点数：数越大越趋近于圆
+        //圓的頂點數：數越大越趨近于圓
         const int n = 55;
         const GLfloat R = 0.5f;
         const GLfloat pi = 3.1415926f;
 
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < n; i++)
+        {
             glVertex2f(R * cos(2 * pi / n * i), R * sin(2 * pi / n * i));
         }
-        //结束渲染
+        //結束渲染
         glEnd();
 
-        //强制刷新缓存区
+        //強制刷新緩存區
         glFlush();
     }
     else if (display_mode == 3)
@@ -147,18 +146,18 @@ void display(void)
 
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        gluOrtho2D(0.0, NGRID, 0.0, NGRID); //窗口坐标范围
+        gluOrtho2D(0.0, NGRID, 0.0, NGRID); //窗口坐標范圍
 
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
 
-        //画网格
-        glColor3f(0.0f, 1.0f, 0.0f); //绿色
+        //畫網格
+        glColor3f(0.0f, 1.0f, 0.0f); //綠色
         drawGrid(0, NGRID, 0, NGRID);
 
-        //画控制点
-        glColor3f(1.0f, 0.0f, 0.0f); //红色
-        glPointSize(10.0f); //点大小
+        //畫控制點
+        glColor3f(1.0f, 0.0f, 0.0f); //紅色
+        glPointSize(10.0f); //點大小
         for (i = 0; i <= n; i++)
         {
             glBegin(GL_POINTS);
@@ -166,7 +165,7 @@ void display(void)
             glEnd();
         }
 
-        //画折线
+        //畫折線
         glColor3f(1.0f, 1.0f, 1.0f); //白色
         for (i = 0; i < n; i++)
         {
@@ -197,21 +196,27 @@ void display(void)
         for (i = 0; i < 16; i++)
         {
             printf("%10.7f", mat[i]);
-            if ((i + 1) % 4) printf(" ");
-            else printf("\n");
+            if ((i + 1) % 4)
+            {
+                printf(" ");
+            }
+            else
+            {
+                printf("\n");
+            }
         }
 
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
 
-        glColor3f(1.0f, 0.0f, 0.0f); //在右上角画红色平面：应该在后面
+        glColor3f(1.0f, 0.0f, 0.0f); //在右上角畫紅色平面：應該在后面
         glBegin(GL_POLYGON);
         glVertex3f(0.0f, 0.0f, -1.0f + 0.001f);
         glVertex3f(1.0f, 0.0f, -1.0f + 0.001f);
         glVertex3f(1.0f, 1.0f, -1.0f + 0.001f);
         glVertex3f(0.0f, 1.0f, -1.0f + 0.001f);
         glEnd();
-        glColor3f(0.0f, 1.0f, 0.0f); //在左下角画绿色的平面：应该在前面
+        glColor3f(0.0f, 1.0f, 0.0f); //在左下角畫綠色的平面：應該在前面
         glBegin(GL_POLYGON);
         glVertex3f(-1.0f, -1.0f, 1.0f - 0.001f);
         glVertex3f(0.0f + 0.5f, -1.0f, 1.0f - 0.001f);
@@ -230,21 +235,21 @@ void display(void)
 
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        gluOrtho2D(-1.0, 11.0, -1.0, 11.0); //窗口坐标范围
+        gluOrtho2D(-1.0, 11.0, -1.0, 11.0); //窗口坐標范圍
 
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
 
-        //画10*10网格
-        glColor3f(0.0f, 1.0f, 0.0f); //绿色
-        for (i = 0; i <= 10; i++) //11条水平线
+        //畫10*10網格
+        glColor3f(0.0f, 1.0f, 0.0f); //綠色
+        for (i = 0; i <= 10; i++) //11條水平線
         {
             glBegin(GL_LINES);
             glVertex2d(0.0, i * 1.0);
             glVertex2d(10.0, i * 1.0);
             glEnd();
         }
-        glBegin(GL_LINES); //11条竖线
+        glBegin(GL_LINES); //11條豎線
         for (i = 0; i <= 10; i++)
         {
             glVertex2d(i * 1.0, 0.0);
@@ -252,12 +257,14 @@ void display(void)
         }
         glEnd();
 
-        //在对角线画点
+        //在對角線畫點
         glColor3f(1.0f, 1.0f, 1.0f); //白色
-        glPointSize(10.0f); //点大小
+        glPointSize(10.0f); //點大小
         glBegin(GL_POINTS);
         for (i = 0; i <= 10; i++)
+        {
             glVertex2d(i * 1.0, i * 1.0);
+        }
         glEnd();
         for (i = 0; i <= 10; i++)
         {
@@ -265,10 +272,7 @@ void display(void)
             glVertex2d(i * 1.0, 10.0 - i * 1.0);
             glEnd();
         }
-
         glFlush();
-
-
     }
     else if (display_mode == 6)
     {
@@ -285,9 +289,6 @@ void display(void)
         glEnd();
 
         glFlush();  // Render now
-
-
-
     }
     else if (display_mode == 7)
     {
@@ -302,8 +303,6 @@ void display(void)
         glEnd();                               // 結束劃三角形
         glPopMatrix();
         glutSwapBuffers();
-
-
     }
     else if (display_mode == 8)
     {
@@ -314,9 +313,6 @@ void display(void)
         glColor3f(1.0, 0, 0);
         glutWireTeapot(3);
         glFlush();
-
-
-
     }
     else if (display_mode == 9)
     {
@@ -338,9 +334,6 @@ void display(void)
         glColor3f(1.0f, 1.0f, 0.0f);//設置繪圖顏色
         glRectf(100.0f, 100.0f, 200.0f, 200.0f);//繪制矩形
         glFlush();//刷新緩沖
-
-
-
     }
     else if (display_mode == 11)
     {
@@ -357,8 +350,6 @@ void display(void)
         glEnd();                               // 結束劃三角形
         glPopMatrix();
         glutSwapBuffers();
-
-
     }
     else if (display_mode == 12)
     {
@@ -384,51 +375,48 @@ void display(void)
         glDisable(GL_TEXTURE_2D);
 
         glutSwapBuffers();
-
-
-
     }
     else if (display_mode == 13)
     {
-    //display_mode = 13  //畫 舉形 + 四邊形
+        //display_mode = 13  //畫 舉形 + 四邊形
 
-    //Single/Double buffer 會不一樣
-    //glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
-    //glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+        //Single/Double buffer 會不一樣
+        //glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
+        //glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 
-    glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT);
 
-    glRectf(-0.5f, -0.5f, 0.5f, 0.5f);
+        glRectf(-0.5f, -0.5f, 0.5f, 0.5f);
 
-    glColor4f(1.0, 0.0, 0.0, 1.0);  //設置畫筆顏色為 R
-    glBegin(GL_QUADS);
-    {
-        glTexCoord2f(0.8f, 0.0f);
-        glVertex2f(0.8f, 0.0f);
+        glColor4f(1.0, 0.0, 0.0, 1.0);  //設置畫筆顏色為 R
+        glBegin(GL_QUADS);
+        {
+            glTexCoord2f(0.8f, 0.0f);
+            glVertex2f(0.8f, 0.0f);
 
-        glTexCoord2f(0.0f, -0.8f);
-        glVertex2f(0.0f, -0.8f);
+            glTexCoord2f(0.0f, -0.8f);
+            glVertex2f(0.0f, -0.8f);
 
-        glTexCoord2f(-0.8f, 0.0f);
-        glVertex2f(-0.8f, 0.0f);
+            glTexCoord2f(-0.8f, 0.0f);
+            glVertex2f(-0.8f, 0.0f);
 
-        glTexCoord2f(0.0f, 0.8f);
-        glVertex2f(0.0f, 0.8f);
-    }
-    glEnd();
+            glTexCoord2f(0.0f, 0.8f);
+            glVertex2f(0.0f, 0.8f);
+        }
+        glEnd();
 
-    glFlush();
+        glFlush();
     }
     else if (display_mode == 14)
     {
-    //display_mode = 14  //畫
+        //display_mode = 14  //畫
 
 
 
     }
     else if (display_mode == 15)
     {
-    //display_mode = 15  //畫
+        //display_mode = 15  //畫
 
 
 
@@ -515,6 +503,24 @@ static void keyboard(unsigned char key, int x, int y)
     glutPostRedisplay();
 }
 
+void mainMenu(int i) { keyboard(i, 0, 0); }
+
+void initMenus()
+{
+    glutCreateMenu(mainMenu);
+    glutAddMenuEntry("Nearest      [1]", '1');
+    glutAddMenuEntry("Bilinear     [2]", '2');
+    glutAddMenuEntry("Bicubic      [3]", '3');
+    glutAddMenuEntry("Fast Bicubic [4]", '4');
+    glutAddMenuEntry("Catmull-Rom  [5]", '5');
+    glutAddMenuEntry("Zoom in      [=]", '=');
+    glutAddMenuEntry("Zoom out     [-]", '-');
+    glutAddMenuEntry("Benchmark    [b]", 'b');
+    glutAddMenuEntry("DrawCurves   [c]", 'c');
+    glutAddMenuEntry("Quit       [esc]", 27);
+    glutAttachMenu(GLUT_RIGHT_BUTTON);
+}
+
 // 初始化參數
 void init(void)
 {
@@ -531,7 +537,7 @@ void init(void)
 
 int main(int argc, char* argv[])
 {
-    //初始化GLUT库，这个函数只是传说命令参数并且初始化glut库
+    //初始化GLUT庫，這個函數只是傳說命令參數并且初始化glut庫
     glutInit(&argc, argv);
 
     //glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
@@ -550,10 +556,11 @@ int main(int argc, char* argv[])
     glutKeyboardFunc(keyboard);     //設定callback function
     //glutSpecialFunc(SpecialKey);    //設定callback function
 
+    initMenus();        //設定表單按鈕
+
     glutMainLoop();     // Enter the event-processing loop
 
     return 0;
 }
-
 
 

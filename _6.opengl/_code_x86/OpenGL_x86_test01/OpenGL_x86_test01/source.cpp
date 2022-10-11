@@ -1,58 +1,29 @@
-//#include <GL/glut.h>      //32 bits
+#include <GL/glut.h>      //32 bits
 //#include <GL/freeglut.h>    //64 bits
-
-
-//-----------------------------------------------------------------------------
-//                                                              2008/6/26
-//                          A First Sample Code
-//                                                              by還是零分
-//-----------------------------------------------------------------------------
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <GL\glut.h>//使用DevC++的話要改為標入 #include <GL\openglut.h>
 
-void WindowSize(int , int );            //負責視窗及繪圖內容的比例
-void Keyboard(unsigned char , int, int );   //獲取鍵盤輸入
-void Display(void);                     //描繪
-
-int main(int argc, char** argv)
+//獲取鍵盤輸入
+void keyboard(unsigned char key, int x, int y)
 {
-   glutInit(&argc, argv);
-   glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-   glutInitWindowSize(400,400);         //視窗長寬
-   glutInitWindowPosition(600,80);         //視窗左上角的位置
-   glutCreateWindow("這裡是視窗標題");      //建立視窗
-   
-   //下面三個是用來指定Callback函數
-   glutReshapeFunc(WindowSize);
-   glutKeyboardFunc(Keyboard);
-   glutDisplayFunc(Display);
-   glutMainLoop();
-   return 0;
+   //printf("你所按按鍵的碼是%x\t此時視窗內的滑鼠座標是(%d,%d)\n", key, x, y);
+
+	switch (key)
+{
+    case 27:
+        exit(0);
+    case '1':
+        break;
+    case '2':
+        break;
+    case 'r':
+        break;
+}
 }
 
-void Display(void)
-{
-   glClearColor(1.0, 1.0, 1.0, 1.0);   //用白色塗背景
-   glClear(GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT);
-   glMatrixMode(GL_MODELVIEW);
-   glLoadIdentity();
-   gluLookAt(0,0,10.0f,0,0,0,0,1,0);   //視線的座標及方向
-   glBegin(GL_TRIANGLES);
-      glColor3f( 1, 0, 0);glVertex3f( 8.6603, -5, 0);
-      glColor3f( 0, 1, 0);glVertex3f(      0, 10, 0);
-      glColor3f( 0, 0, 1);glVertex3f(-8.6603, -5, 0);
-   glEnd();
-   glutSwapBuffers();
-}
-
-void Keyboard(unsigned char key, int x, int y)
-{
-   printf("你所按按鍵的碼是%x\t此時視窗內的滑鼠座標是(%d,%d)\n", key, x, y);
-}
-
-void WindowSize(int w, int h)
+//負責視窗及繪圖內容的比例
+void reshape(int w, int h)
 {
    printf("目前視窗大小為%dX%d\n",w,h);
    glViewport(0, 0, w, h);            //當視窗長寬改變時，畫面也跟著變
@@ -63,3 +34,81 @@ void WindowSize(int w, int h)
    glLoadIdentity();
 } 
 
+//描繪
+void display(void)
+{
+	/*
+	//用黃色塗背景	要兩行一起寫，若不寫，則是以黑色為背景
+   glClearColor(1.0, 1.0, 0.0, 1.0);   
+   glClear(GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT);
+   */
+
+glPolygonMode(GL_FRONT, GL_LINE);
+
+glBegin(GL_QUADS);	//畫矩形
+	//逆時針為空心
+	glVertex3f(-9.0f, 9.0f, 0.0f);	//左上
+	glVertex3f(-9.0f, -9.0f, 0.0f);	//左下
+	glVertex3f(9.0f, -9.0f, 0.0f);	//右下
+	glVertex3f(9.0f, 9.0f, 0.0f);	//右上
+
+	//順時針為實心
+	glVertex3f(-3.0f, 3.0f, 0.0f);	//左上
+	glVertex3f(3.0f, 3.0f, 0.0f);	//右上
+	glVertex3f(3.0f, -3.0f, 0.0f);	//右下
+	glVertex3f(-3.0f, -3.0f, 0.0f);	//左下
+
+glEnd();
+
+	glBegin(GL_TRIANGLES);	//畫三角形 3D
+		//逆時針為空心
+		glColor3f( 1, 0, 0);glVertex3f( 8, -8, 0);	//R 右下
+		glColor3f( 0, 1, 0);glVertex3f( 0, 8, 0);	//G 上
+		glColor3f( 0, 0, 1);glVertex3f(-8, -8, 0);	//B 左下
+
+		//順時針為實心
+		glColor3f( 0, 0, 1);glVertex3f(-3, -7, 0);	//B 左下
+		glColor3f( 0, 1, 0);glVertex3f( 0, -2, 0);	//G 上
+		glColor3f( 1, 0, 0);glVertex3f( 3, -7, 0);	//R 右下
+
+	glEnd();
+
+	glBegin(GL_TRIANGLES);	//畫三角形 2D
+		glColor3f(1.0, 0.0, 0.0);	//R
+		//逆時針為空心
+		glVertex2f(2.0, 4.0);	//左下
+		glVertex2f(8.0, 4.0);	//右下
+		glVertex2f(5.0, 9.0);	//上
+	glEnd();
+
+
+	//清除背景
+	//glClear(GL_COLOR_BUFFER_BIT);
+	//畫一個矩形
+
+	     //左下x,  左下y,  右上x,  右上y
+	glRectf(-8.0f, 4.0f, -4.0f, 8.0f);
+	glRectf(-0.5f, -0.5f, 0.5f, 0.5f);
+
+	glFlush();
+	glutSwapBuffers();
+}
+
+int main(int argc, char** argv)
+{
+   glutInit(&argc, argv);
+   glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+//glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
+
+   glutInitWindowSize(600,600);         //視窗長寬
+   glutInitWindowPosition(1100,200);         //視窗左上角的位置
+
+   glutCreateWindow("這裡是視窗標題");      //建立視窗
+
+    glutDisplayFunc(display);       //設定callback function
+    glutReshapeFunc(reshape);       //設定callback function
+    glutKeyboardFunc(keyboard);     //設定callback function
+
+   glutMainLoop();
+   return 0;
+}	

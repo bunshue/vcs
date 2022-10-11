@@ -1,0 +1,39 @@
+# Makefile for Win32 (nmake)
+
+
+!include <win32.mak>
+
+
+CFLAGS	= $(cflags) $(cdebug) -DWIN32
+LIBS	= $(lflags) $(ldebug) glut.lib glu.lib opengl.lib $(guilibs)
+SRCS	= abgr.c accum.c bitmap1.c bitmap2.c blendeq.c blendxor.c copy.c copytex.c depth.c eval.c fog.c line.c logo.c nurb.c           packedpix.c point.c prim.c quad.c select.c shell.c sphere.c star.c stencil.c stretch.c surfgrid.c teapot.c texenv.c texobj.c texproxy.c texsubimage.c texture.c tri.c twotextures.c          wave.c 
+# olympic.c varray.c
+EXES	= $(SRCS:.c=.exe)
+
+
+default	: $(EXES)
+
+clean	:
+	@del *.obj
+	@del *~
+
+clobber	: clean
+	@del *.exe
+
+
+$(EXES)	: $*.obj
+        $(link) -out:$@ $** $(LIBS)
+.c.obj	: 
+	$(CC) $(CFLAGS) $<
+
+
+# dependencies (must come AFTER inference rules)
+blendeq.exe	: font.obj
+copy.exe	\
+copytex.exe	\
+quad.exe	\
+stretch.exe	\
+sphere.exe	\
+texture.exe	\
+twotextures.exe	\
+packedpix.exe	: rgb.obj

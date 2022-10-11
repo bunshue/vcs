@@ -493,8 +493,7 @@ int main(int argc, char** argv)
 {
     printf("Starting...\n");
 
-    // Use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
+    // Use command-line specified CUDA device, otherwise use device with highest Gflops/s
     findCudaDevice(argc, (const char**)argv);
 
     int nFailures = 0;

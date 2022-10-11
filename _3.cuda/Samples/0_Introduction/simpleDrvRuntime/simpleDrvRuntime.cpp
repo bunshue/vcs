@@ -39,16 +39,90 @@ int CleanupNoFailure(CUcontext& cuContext);
 void RandomInit(float*, int);
 bool findModulePath(const char*, string&, char**, ostringstream&);
 
-static void check(CUresult result, char const* const func,
-    const char* const file, int const line) {
-    if (result) {
-        fprintf(stderr, "CUDA error at %s:%d code=%d \"%s\" \n", file, line,
-            static_cast<unsigned int>(result), func);
+static void check(CUresult result, char const* const func, const char* const file, int const line)
+{
+    if (result)
+    {
+        fprintf(stderr, "CUDA error at %s:%d code=%d \"%s\" \n", file, line, static_cast<unsigned int>(result), func);
         exit(EXIT_FAILURE);
     }
 }
 
 #define checkCudaDrvErrors(val) check((val), #val, __FILE__, __LINE__)
+int CleanupNoFailure(CUcontext& cuContext)
+{
+    // Free device memory
+    checkCudaErrors(cudaFree(d_A));
+    checkCudaErrors(cudaFree(d_B));
+    checkCudaErrors(cudaFree(d_C));
+
+    // Free host memory
+    if (h_A)
+    {
+        checkCudaErrors(cudaFreeHost(h_A));
+    }
+
+    if (h_B)
+    {
+        checkCudaErrors(cudaFreeHost(h_B));
+    }
+
+    if (h_C)
+    {
+        checkCudaErrors(cudaFreeHost(h_C));
+    }
+
+    checkCudaDrvErrors(cuCtxDestroy(cuContext));
+
+    return EXIT_SUCCESS;
+}
+
+// Allocates an array with random float entries.
+void RandomInit(float* data, int n)
+{
+    for (int i = 0; i < n; ++i) {
+        data[i] = rand() / (float)RAND_MAX;
+    }
+}
+
+bool inline findModulePath(const char* module_file, string& module_path, char** argv, ostringstream& ostrm)
+{
+    printf("findModulePath : %s\n", module_file);
+    char* actual_path = sdkFindFilePath(module_file, argv[0]);
+
+    if (actual_path)
+    {
+        module_path = actual_path;
+    }
+    else
+    {
+        printf("XXXXXXXXXXXXXXXXXXXXXX\n");
+        printf("> findModulePath file not found: <%s> \n", module_file);
+        return false;
+    }
+
+    if (module_path.empty())
+    {
+        printf("XXXXXXXXXXXXXXXXXXXXXX\n");
+        printf("> findModulePath could not find file: <%s> \n", module_file);
+        return false;
+    }
+    else
+    {
+        printf("here\n");
+        printf("> findModulePath found file at <%s>\n", module_path.c_str());
+        if (module_path.rfind("fatbin") != string::npos)
+        {
+            ifstream fileIn(module_path.c_str(), ios::binary);
+            ostrm << fileIn.rdbuf();
+        }
+
+        printf("actual_path : %s\n", actual_path);
+        //printf("module_path : %s\n", module_path);
+
+        return true;
+    }
+}
 
 // Host code
 int main(int argc, char** argv)
@@ -143,78 +217,4 @@ int main(int argc, char** argv)
     printf("%s\n", (i == N) ? "Result = PASS" : "Result = FAIL");
 
     exit((i == N) ? EXIT_SUCCESS : EXIT_FAILURE);
-}
-
-int CleanupNoFailure(CUcontext& cuContext)
-{
-    // Free device memory
-    checkCudaErrors(cudaFree(d_A));
-    checkCudaErrors(cudaFree(d_B));
-    checkCudaErrors(cudaFree(d_C));
-
-    // Free host memory
-    if (h_A)
-    {
-        checkCudaErrors(cudaFreeHost(h_A));
-    }
-
-    if (h_B)
-    {
-        checkCudaErrors(cudaFreeHost(h_B));
-    }
-
-    if (h_C)
-    {
-        checkCudaErrors(cudaFreeHost(h_C));
-    }
-
-    checkCudaDrvErrors(cuCtxDestroy(cuContext));
-
-    return EXIT_SUCCESS;
-}
-// Allocates an array with random float entries.
-void RandomInit(float* data, int n)
-{
-    for (int i = 0; i < n; ++i) {
-        data[i] = rand() / (float)RAND_MAX;
-    }
-}
-
-bool inline findModulePath(const char* module_file, string& module_path, char** argv, ostringstream& ostrm)
-{
-    printf("findModulePath : %s\n", module_file);
-    char* actual_path = sdkFindFilePath(module_file, argv[0]);
-
-    if (actual_path)
-    {
-        module_path = actual_path;
-    }
-    else
-    {
-        printf("XXXXXXXXXXXXXXXXXXXXXX\n");
-        printf("> findModulePath file not found: <%s> \n", module_file);
-        return false;
-    }
-
-    if (module_path.empty())
-    {
-        printf("XXXXXXXXXXXXXXXXXXXXXX\n");
-        printf("> findModulePath could not find file: <%s> \n", module_file);
-        return false;
-    }
-    else
-    {
-        printf("here\n");
-        printf("> findModulePath found file at <%s>\n", module_path.c_str());
-        if (module_path.rfind("fatbin") != string::npos)
-        {
-            ifstream fileIn(module_path.c_str(), ios::binary);
-            ostrm << fileIn.rdbuf();
-        }
-
-        printf("actual_path : %s\n", actual_path);
-        //printf("module_path : %s\n", module_path);
-
-        return true;
-    }
 }

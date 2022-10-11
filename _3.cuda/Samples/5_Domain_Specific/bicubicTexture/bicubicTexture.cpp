@@ -1,8 +1,7 @@
 /*
     Bicubic texture filtering sample sgreen 6/2008
 
-    This sample demonstrates how to efficiently implement bicubic texture
-    filtering in CUDA.
+    This sample demonstrates how to efficiently implement bicubic texture filtering in CUDA.
 
     Bicubic filtering is a higher order interpolation method that produces
     smoother results than bilinear interpolation:
@@ -125,19 +124,21 @@ extern "C" void loadImageData(int argc, char** argv);
 extern "C" void initTexture(int imageWidth, int imageHeight, uchar * h_data);
 extern "C" void freeTexture();
 extern "C" void render(int width, int height, float tx, float ty, float scale,
-    float cx, float cy, dim3 blockSize, dim3 gridSize,
-    eFilterMode filter_mode, uchar4 * output);
+    float cx, float cy, dim3 blockSize, dim3 gridSize, eFilterMode filter_mode, uchar4 * output);
 
 // w0, w1, w2, and w3 are the four cubic B-spline basis functions
-float bspline_w0(float a) {
+float bspline_w0(float a)
+{
     return (1.0f / 6.0f) * (-a * a * a + 3.0f * a * a - 3.0f * a + 1.0f);
 }
 
-float bspline_w1(float a) {
+float bspline_w1(float a)
+{
     return (1.0f / 6.0f) * (3.0f * a * a * a - 6.0f * a * a + 4.0f);
 }
 
-float bspline_w2(float a) {
+float bspline_w2(float a)
+{
     return (1.0f / 6.0f) * (-3.0f * a * a * a + 3.0f * a * a + 3.0f * a + 1.0f);
 }
 
@@ -169,30 +170,30 @@ void computeFPS()
     }
 }
 
-void plotCurve(float (*func)(float)) {
+void plotCurve(float (*func)(float))
+{
     const int steps = 100;
     glBegin(GL_LINE_STRIP);
 
-    for (int i = 0; i < steps; i++) {
+    for (int i = 0; i < steps; i++)
+    {
         float x = i / (float)(steps - 1);
         glVertex2f(x, func(x));
     }
-
     glEnd();
 }
 
 // display results using OpenGL (called by GLUT)
-void display() {
+void display()
+{
     sdkStartTimer(&timer);
 
     // map PBO to get CUDA device pointer
     uchar4* d_output;
     checkCudaErrors(cudaGraphicsMapResources(1, &cuda_pbo_resource, 0));
     size_t num_bytes;
-    checkCudaErrors(cudaGraphicsResourceGetMappedPointer(
-        (void**)&d_output, &num_bytes, cuda_pbo_resource));
-    render(imageWidth, imageHeight, tx, ty, scale, cx, cy, blockSize, gridSize,
-        g_FilterMode, d_output);
+    checkCudaErrors(cudaGraphicsResourceGetMappedPointer((void**)&d_output, &num_bytes, cuda_pbo_resource));
+    render(imageWidth, imageHeight, tx, ty, scale, cx, cy, blockSize, gridSize, g_FilterMode, d_output);
 
     checkCudaErrors(cudaGraphicsUnmapResources(1, &cuda_pbo_resource, 0));
 
@@ -212,8 +213,7 @@ void display() {
         glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, pbo);
         glBindTexture(GL_TEXTURE_TYPE, displayTex);	//¸j©w¯¾²z
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-        glTexSubImage2D(GL_TEXTURE_TYPE, 0, 0, 0, width, height, GL_BGRA,
-            GL_UNSIGNED_BYTE, 0);
+        glTexSubImage2D(GL_TEXTURE_TYPE, 0, 0, 0, width, height, GL_BGRA, GL_UNSIGNED_BYTE, 0);
         glEnable(GL_TEXTURE_TYPE);
 #endif
 
@@ -234,7 +234,8 @@ void display() {
 
         glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, 0);
 
-        if (drawCurves) {
+        if (drawCurves)
+        {
             // draw spline curves
             glPushMatrix();
             glScalef(0.25, 0.25, 1.0);
@@ -278,7 +279,8 @@ void timerEvent(int value)
     }
 }
 
-void keyboard(unsigned char key, int /*x*/, int /*y*/) {
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
+{
     switch (key)
     {
     case 27:
@@ -711,12 +713,14 @@ int main(int argc, char** argv)
 
     if (checkCmdLineFlag(argc, (const char**)argv, "help"))
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXX\n");
         printHelp();
         exit(EXIT_SUCCESS);
     }
 
     if (checkCmdLineFlag(argc, (const char**)argv, "mode"))
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXX\n");
         g_FilterMode = (eFilterMode)getCmdLineArgumentInt(argc, (const char**)argv, "mode");
 
         if (g_FilterMode < 0 || g_FilterMode >= NUM_MODES)
@@ -728,6 +732,7 @@ int main(int argc, char** argv)
 
     if (getCmdLineArgumentString(argc, (const char**)argv, "file", &filename))
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXX\n");
         dumpFilename = filename;
         fpsLimit = frameCheckNumber;
 
@@ -737,6 +742,8 @@ int main(int argc, char** argv)
     }
     else
     {
+        //here
+
         // This runs the CUDA kernel (bicubicFiltering) + OpenGL visualization
         initialize(argc, argv);
         glutMainLoop();

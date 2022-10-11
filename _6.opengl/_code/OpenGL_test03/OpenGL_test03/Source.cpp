@@ -47,19 +47,19 @@ void drawCoordinates(void)
 {
 	glLineWidth(3.0f);
 
-	glColor3f(1.0f, 0.0f, 0.0f); //画红色的x轴
+	glColor3f(1.0f, 0.0f, 0.0f); //畫紅色的x軸
 	glBegin(GL_LINES);
 	glVertex3f(0.0f, 0.0f, 0.0f);
 	glVertex3f(1.0f, 0.0f, 0.0f);
 	glEnd();
 
-	glColor3f(0.0, 1.0, 0.0); //画绿色的y轴
+	glColor3f(0.0, 1.0, 0.0); //畫綠色的y軸
 	glBegin(GL_LINES);
 	glVertex3f(0.0f, 0.0f, 0.0f);
 	glVertex3f(0.0f, 1.0f, 0.0f);
 	glEnd();
 
-	glColor3f(0.0, 0.0, 1.0); //画蓝色的z轴
+	glColor3f(0.0, 0.0, 1.0); //畫藍色的z軸
 	glBegin(GL_LINES);
 	glVertex3f(0.0f, 0.0f, 0.0f);
 	glVertex3f(0.0f, 0.0f, 1.0f);
@@ -152,5 +152,4 @@ int main(int argc, char** argv)
 
 	return 0;
 }
-
 

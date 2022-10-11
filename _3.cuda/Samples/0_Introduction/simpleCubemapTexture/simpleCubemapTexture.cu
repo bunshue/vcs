@@ -209,7 +209,6 @@ int main(int argc, char** argv)
 
     sdkWriteFile<float>("./dump_data.dat", h_odata, width * width, 0.0f, false);
 
-
     printf("Comparing kernel output to expected data\n");
 
 #define MIN_EPSILON_ERROR 5e-3f

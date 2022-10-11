@@ -9,35 +9,40 @@ using namespace cooperative_groups;
  * calculates the sum of val across the group g. The workspace array, x,
  * must be large enough to contain g.size() integers.
  */
-__device__ int sumReduction(thread_group g, int *x, int val) {
-  // rank of this thread in the group
-  int lane = g.thread_rank();
+__device__ int sumReduction(thread_group g, int* x, int val) {
+    // rank of this thread in the group
+    int lane = g.thread_rank();
 
-  // for each iteration of this loop, the number of threads active in the
-  // reduction, i, is halved, and each active thread (with index [lane])
-  // performs a single summation of it's own value with that
-  // of a "partner" (with index [lane+i]).
-  for (int i = g.size() / 2; i > 0; i /= 2) {
-    // store value for this thread in temporary array
-    x[lane] = val;
+    // for each iteration of this loop, the number of threads active in the
+    // reduction, i, is halved, and each active thread (with index [lane])
+    // performs a single summation of it's own value with that
+    // of a "partner" (with index [lane+i]).
+    for (int i = g.size() / 2; i > 0; i /= 2)
+    {
+        // store value for this thread in temporary array
+        x[lane] = val;
 
-    // synchronize all threads in group
-    g.sync();
+        // synchronize all threads in group
+        g.sync();
 
-    if (lane < i)
-      // active threads perform summation of their value with
-      // their partner's value
-      val += x[lane + i];
+        if (lane < i)
+            // active threads perform summation of their value with
+            // their partner's value
+            val += x[lane + i];
 
-    // synchronize all threads in group
-    g.sync();
-  }
+        // synchronize all threads in group
+        g.sync();
+    }
 
-  // master thread in group returns result, and others return -1.
-  if (g.thread_rank() == 0)
-    return val;
-  else
-    return -1;
+    // master thread in group returns result, and others return -1.
+    if (g.thread_rank() == 0)
+    {
+        return val;
+    }
+    else
+    {
+        return -1;
+    }
 }
 
 /**
@@ -45,7 +50,8 @@ __device__ int sumReduction(thread_group g, int *x, int val) {
  *
  * Creates cooperative groups and performs reductions
  */
-__global__ void cgkernel() {
+__global__ void cgkernel()
+{
     // threadBlockGroup includes all threads in the block
     thread_block threadBlockGroup = this_thread_block();
     int threadBlockGroupSize = threadBlockGroup.size();
@@ -66,25 +72,19 @@ __global__ void cgkernel() {
     output = sumReduction(threadBlockGroup, workspace, input);
 
     // master thread in group prints out result
-    if (threadBlockGroup.thread_rank() == 0) {
-        printf(
-            " Sum of all ranks 0..%d in threadBlockGroup is %d (expected %d)\n\n",
-            (int)threadBlockGroup.size() - 1, output, expectedOutput);
-
-        printf(" Now creating %d groups, each of size 16 threads:\n\n",
-            (int)threadBlockGroup.size() / 16);
+    if (threadBlockGroup.thread_rank() == 0)
+    {
+        printf(" Sum of all ranks 0..%d in threadBlockGroup is %d (expected %d)\n\n", (int)threadBlockGroup.size() - 1, output, expectedOutput);
+        printf(" Now creating %d groups, each of size 16 threads:\n\n", (int)threadBlockGroup.size() / 16);
     }
 
     threadBlockGroup.sync();
 
     // each tiledPartition16 group includes 16 threads
-    thread_block_tile<16> tiledPartition16 =
-        tiled_partition<16>(threadBlockGroup);
+    thread_block_tile<16> tiledPartition16 = tiled_partition<16>(threadBlockGroup);
 
-    // This offset allows each group to have its own unique area in the workspace
-    // array
-    int workspaceOffset =
-        threadBlockGroup.thread_rank() - tiledPartition16.thread_rank();
+    // This offset allows each group to have its own unique area in the workspace array
+    int workspaceOffset = threadBlockGroup.thread_rank() - tiledPartition16.thread_rank();
 
     // input to reduction, for each thread, is its' rank in the group
     input = tiledPartition16.thread_rank();
@@ -98,11 +98,9 @@ __global__ void cgkernel() {
 
     // each master thread prints out result
     if (tiledPartition16.thread_rank() == 0)
-        printf(
-            "   Sum of all ranks 0..15 in this tiledPartition16 group is %d "
-            "(expected %d)\n",
-            output, expectedOutput);
-
+    {
+        printf("   Sum of all ranks 0..15 in this tiledPartition16 group is %d (expected %d)\n", output, expectedOutput);
+    }
     return;
 }
 

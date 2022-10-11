@@ -23,7 +23,7 @@
 unsigned int g_TotalErrors = 0;
 
 // CheckFBO/BackBuffer class objects
-CheckRender *g_CheckRender = NULL;
+CheckRender* g_CheckRender = NULL;
 
 ////////////////////////////////////////////////////////////////////////////////
 // constants / global variables
@@ -36,10 +36,10 @@ int iGLUTWindowHandle = 0;  // handle to the GLUT window
 
 // pbo and fbo variables
 GLuint pbo_dest;
-struct cudaGraphicsResource *cuda_pbo_dest_resource;
+struct cudaGraphicsResource* cuda_pbo_dest_resource;
 
 GLuint fbo_source;
-struct cudaGraphicsResource *cuda_tex_screen_resource;
+struct cudaGraphicsResource* cuda_tex_screen_resource;
 
 unsigned int size_tex_data;
 unsigned int num_texels;
@@ -52,7 +52,7 @@ GLuint tex_cudaResult;  // where we will copy the CUDA result
 // Timer
 static int fpsCount = 0;
 static int fpsLimit = 1;
-StopWatchInterface *timer = NULL;
+StopWatchInterface* timer = NULL;
 
 extern "C" void launch_cudaProcess(dim3 grid, dim3 block, int sbytes, unsigned int* g_odata, int imgw);
 extern "C" void launch_cudaProcess2(unsigned int* g_odata, int imgw);
@@ -62,13 +62,13 @@ void FreeResource();
 void Cleanup(int iExitCode);
 
 // GL functionality
-bool initGL(int *argc, char **argv);
+bool initGL(int* argc, char** argv);
 
-void createPBO(GLuint *pbo, struct cudaGraphicsResource **pbo_resource);
-void deletePBO(GLuint *pbo);
+void createPBO(GLuint* pbo, struct cudaGraphicsResource** pbo_resource);
+void deletePBO(GLuint* pbo);
 
-void createTextureDst(GLuint *tex_cudaResult, unsigned int size_x, unsigned int size_y);
-void deleteTexture(GLuint *tex);
+void createTextureDst(GLuint* tex_cudaResult, unsigned int size_x, unsigned int size_y);
+void deleteTexture(GLuint* tex);
 
 // rendering callbacks
 void display();
@@ -112,7 +112,7 @@ void deletePBO(GLuint* pbo)
 
 const GLenum fbo_targets[] = {
     GL_COLOR_ATTACHMENT0_EXT, GL_COLOR_ATTACHMENT1_EXT,
-    GL_COLOR_ATTACHMENT2_EXT, GL_COLOR_ATTACHMENT3_EXT};
+    GL_COLOR_ATTACHMENT2_EXT, GL_COLOR_ATTACHMENT3_EXT };
 
 // copy image and process using CUDA
 void generateCUDAImage()
@@ -150,7 +150,7 @@ void generateCUDAImage()
     launch_cudaProcess(grid, block, 0, out_data, image_width);
 
     //launch_cudaProcess2(out_data, image_width);
-    
+
 
     // CUDA generated data in cuda memory or in a mapped PBO made of BGRA 8 bits
     // 2 solutions, here :

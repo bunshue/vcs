@@ -1,16 +1,7 @@
-// USE_TEXSUBIMAGE2D uses glTexSubImage2D() to update the final result
-// commenting it will make the sample use the other way :
-// map a texture in CUDA and blit the result into it
-
-//有沒有define這個 看起來差不多
-#define USE_TEXSUBIMAGE2D
-
-#if defined(WIN32) || defined(_WIN32) || defined(WIN64) || defined(_WIN64)
 #define WINDOWS_LEAN_AND_MEAN
 #define NOMINMAX
 #include <windows.h>
 #pragma warning(disable : 4996)
-#endif
 
 // OpenGL Graphics includes
 #include <helper_gl.h>
@@ -43,14 +34,8 @@ unsigned int image_height = 512;
 int iGLUTWindowHandle = 0;  // handle to the GLUT window
 
 // pbo and fbo variables
-#ifdef USE_TEXSUBIMAGE2D
 GLuint pbo_dest;
 struct cudaGraphicsResource* cuda_pbo_dest_resource;
-#else
-unsigned int* cuda_dest_resource;
-GLuint shDrawTex;  // draws a texture
-struct cudaGraphicsResource* cuda_tex_result_resource;
-#endif
 
 GLuint fbo_source;
 struct cudaGraphicsResource* cuda_tex_screen_resource;
@@ -79,10 +64,8 @@ void Cleanup(int iExitCode);
 // GL functionality
 bool initGL(int* argc, char** argv);
 
-#ifdef USE_TEXSUBIMAGE2D
 void createPBO(GLuint* pbo, struct cudaGraphicsResource** pbo_resource);
 void deletePBO(GLuint* pbo);
-#endif
 
 void createTextureDst(GLuint* tex_cudaResult, unsigned int size_x, unsigned int size_y);
 void deleteTexture(GLuint* tex);
@@ -94,7 +77,6 @@ void keyboard(unsigned char key, int x, int y);
 void reshape(int w, int h);
 void mainMenu(int i);
 
-#ifdef USE_TEXSUBIMAGE2D
 ////////////////////////////////////////////////////////////////////////////////
 //! Create PBO
 ////////////////////////////////////////////////////////////////////////////////
@@ -126,29 +108,10 @@ void deletePBO(GLuint* pbo)
     SDK_CHECK_ERROR_GL();
     *pbo = 0;
 }
-#endif
 
 const GLenum fbo_targets[] = {
     GL_COLOR_ATTACHMENT0_EXT, GL_COLOR_ATTACHMENT1_EXT,
     GL_COLOR_ATTACHMENT2_EXT, GL_COLOR_ATTACHMENT3_EXT };
-
-#ifndef USE_TEXSUBIMAGE2D
-static const char* glsl_drawtex_vertshader_src =
-"void main(void)\n"
-"{\n"
-"	gl_Position = gl_Vertex;\n"
-"	gl_TexCoord[0].xy = gl_MultiTexCoord0.xy;\n"
-"}\n";
-
-static const char* glsl_drawtex_fragshader_src =
-"#version 130\n"
-"uniform usampler2D texImage;\n"
-"void main()\n"
-"{\n"
-"   vec4 c = texture(texImage, gl_TexCoord[0].xy);\n"
-"	gl_FragColor = c / 255.0;\n"
-"}\n";
-#endif
 
 static const char* glsl_draw_fragshader_src =
 // WARNING: seems like the gl_FragColor doesn't want to output >1 colors...
@@ -169,15 +132,11 @@ void generateCUDAImage()
     // run the Cuda kernel
     unsigned int* out_data;
 
-#ifdef USE_TEXSUBIMAGE2D
     checkCudaErrors(cudaGraphicsMapResources(1, &cuda_pbo_dest_resource, 0));
     size_t num_bytes;
     checkCudaErrors(cudaGraphicsResourceGetMappedPointer((void**)&out_data, &num_bytes, cuda_pbo_dest_resource));
-    // printf("CUDA mapped pointer of pbo_out: May access %ld bytes, expected %d\n",
-    // num_bytes, size_tex_data);
-#else
-    out_data = cuda_dest_resource;
-#endif
+    //printf("CUDA mapped pointer of pbo_out: May access %ld bytes, expected %d\n", num_bytes, size_tex_data);
+
     // calculate grid size
     dim3 block(16, 16, 1);
     // dim3 block(16, 16, 1);
@@ -190,7 +149,7 @@ void generateCUDAImage()
     // - use glTexSubImage2D(), there is the potential to loose performance in
     // possible hidden conversion
     // - map the texture and blit the result thanks to CUDA API
-#ifdef USE_TEXSUBIMAGE2D
+
     checkCudaErrors(cudaGraphicsUnmapResources(1, &cuda_pbo_dest_resource, 0));
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, pbo_dest);
 
@@ -199,20 +158,6 @@ void generateCUDAImage()
     SDK_CHECK_ERROR_GL();
     glBindBuffer(GL_PIXEL_PACK_BUFFER_ARB, 0);
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, 0);
-#else
-  // We want to copy cuda_dest_resource data to the texture
-  // map buffer objects to get CUDA device pointers
-    cudaArray* texture_ptr;
-    checkCudaErrors(cudaGraphicsMapResources(1, &cuda_tex_result_resource, 0));
-    checkCudaErrors(cudaGraphicsSubResourceGetMappedArray(&texture_ptr, cuda_tex_result_resource, 0, 0));
-
-    int num_texels = image_width * image_height;
-    int num_values = num_texels * 4;
-    int size_tex_data = sizeof(GLubyte) * num_values;
-    checkCudaErrors(cudaMemcpyToArray(texture_ptr, 0, 0, cuda_dest_resource, size_tex_data, cudaMemcpyDeviceToDevice));
-
-    checkCudaErrors(cudaGraphicsUnmapResources(1, &cuda_tex_result_resource, 0));
-#endif
 }
 
 // display image to the screen as textured quad
@@ -234,14 +179,6 @@ void displayImage(GLuint texture)
 
     glViewport(0, 0, window_width, window_height);
 
-    // if the texture is a 8 bits UI, scale the fetch with a GLSL shader
-#ifndef USE_TEXSUBIMAGE2D
-    glUseProgram(shDrawTex);
-    GLint id = glGetUniformLocation(shDrawTex, "texImage");
-    glUniform1i(id, 0);  // texture unit 0 to "texImage"
-    SDK_CHECK_ERROR_GL();
-#endif
-
     glBegin(GL_QUADS);
     glTexCoord2f(0.0, 0.0);
     glVertex3f(-1.0, -1.0, 0.5);
@@ -258,9 +195,6 @@ void displayImage(GLuint texture)
 
     glDisable(GL_TEXTURE_2D);
 
-#ifndef USE_TEXSUBIMAGE2D
-    glUseProgram(0);
-#endif
     SDK_CHECK_ERROR_GL();
 }
 
@@ -343,20 +277,10 @@ void createTextureDst(GLuint* tex_cudaResult, unsigned int size_x, unsigned int 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-#ifdef USE_TEXSUBIMAGE2D
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, size_x, size_y, 0, GL_RGBA,        GL_UNSIGNED_BYTE, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, size_x, size_y, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
     SDK_CHECK_ERROR_GL();
-#else
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8UI_EXT, size_x, size_y, 0, GL_RGBA_INTEGER_EXT, GL_UNSIGNED_BYTE, NULL);
-    SDK_CHECK_ERROR_GL();
-    // register this texture with CUDA
-    checkCudaErrors(cudaGraphicsGLRegisterImage(&cuda_tex_result_resource, *tex_cudaResult, GL_TEXTURE_2D, cudaGraphicsMapFlagsWriteDiscard));
-#endif
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//!
-////////////////////////////////////////////////////////////////////////////////
 void deleteTexture(GLuint* tex)
 {
     glDeleteTextures(1, tex);
@@ -376,12 +300,8 @@ void FreeResource()
 
     // unregister this buffer object with CUDA
     //    checkCudaErrors(cudaGraphicsUnregisterResource(cuda_tex_screen_resource));
-#ifdef USE_TEXSUBIMAGE2D
     checkCudaErrors(cudaGraphicsUnregisterResource(cuda_pbo_dest_resource));
     deletePBO(&pbo_dest);
-#else
-    cudaFree(cuda_dest_resource);
-#endif
     deleteTexture(&tex_screen);
     deleteTexture(&tex_cudaResult);
 
@@ -479,39 +399,15 @@ GLuint compileGLSLprogram(const char* vertex_shader_src, const char* fragment_sh
     return p;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//! Allocate the "render target" of CUDA
-////////////////////////////////////////////////////////////////////////////////
-#ifndef USE_TEXSUBIMAGE2D
-void initCUDABuffers() {
-    // set up vertex data parameter
-    num_texels = image_width * image_height;
-    num_values = num_texels * 4;
-    size_tex_data = sizeof(GLubyte) * num_values;
-    checkCudaErrors(cudaMalloc((void**)&cuda_dest_resource, size_tex_data));
-    // checkCudaErrors(cudaHostAlloc((void**)&cuda_dest_resource, size_tex_data,
-    // ));
-}
-#endif
-
-////////////////////////////////////////////////////////////////////////////////
-//!
-////////////////////////////////////////////////////////////////////////////////
 void initGLBuffers()
 {
     // create pbo
-#ifdef USE_TEXSUBIMAGE2D
     createPBO(&pbo_dest, &cuda_pbo_dest_resource);
-#endif
 
     // create texture that will receive the result of CUDA
     createTextureDst(&tex_cudaResult, image_width, image_height);
     // load shader programs
     shDraw = compileGLSLprogram(NULL, glsl_draw_fragshader_src);
-
-#ifndef USE_TEXSUBIMAGE2D
-    shDrawTex = compileGLSLprogram(glsl_drawtex_vertshader_src, glsl_drawtex_fragshader_src);
-#endif
 
     SDK_CHECK_ERROR_GL();
 }
@@ -600,9 +496,6 @@ int main(int argc, char** argv)
     glutAttachMenu(GLUT_RIGHT_BUTTON);
 
     initGLBuffers();
-#ifndef USE_TEXSUBIMAGE2D
-    initCUDABuffers();
-#endif
 
     printf("\n\tControls\n"
         "\t(right click mouse button for Menu)\n"
