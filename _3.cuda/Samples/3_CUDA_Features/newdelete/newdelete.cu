@@ -1,6 +1,5 @@
 // This sample demonstrates dynamic global memory allocation through device C++
-// new and delete operators and virtual function declarations available with
-// CUDA 4.0.
+// new and delete operators and virtual function declarations available with CUDA 4.0.
 
 #include <stdio.h>
 
@@ -125,7 +124,8 @@ __global__ void placementNew(int* d_result)
     // of shared memory is that of the block)
 }
 
-struct ComplexType_t {
+struct ComplexType_t
+{
     int a;
     int b;
     float c;

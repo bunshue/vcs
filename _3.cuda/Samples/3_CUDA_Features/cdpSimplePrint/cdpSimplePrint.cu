@@ -99,6 +99,7 @@ int main(int argc, char** argv)
     printf("launch 2 blocks of 2 threads each. The GPU we will do that recursively\n");
     printf("until it reaches max_depth=%d\n\n", max_depth);
     printf("In total 2");
+
     int num_blocks = 2, sum = 2;
 
     for (int i = 1; i < max_depth; ++i)

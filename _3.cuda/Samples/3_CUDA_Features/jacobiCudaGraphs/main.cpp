@@ -2,12 +2,10 @@
 // with Jacobi Iterative Method in 3 different methods:
 // 1 - JacobiMethodGpuCudaGraphExecKernelSetParams() - CUDA Graph with
 // cudaGraphExecKernelNodeSetParams() 2 - JacobiMethodGpuCudaGraphExecUpdate() -
-// CUDA Graph with cudaGraphExecUpdate() 3 - JacobiMethodGpu() - Non CUDA Graph
-// method
+// CUDA Graph with cudaGraphExecUpdate() 3 - JacobiMethodGpu() - Non CUDA Graph method
 
 // Jacobi method on a linear system A*x = b,
-// where A is diagonally dominant and the exact solution consists
-// of all ones.
+// where A is diagonally dominant and the exact solution consists of all ones.
 // The dimension N_ROWS is included in jacobi.h
 
 #include <cuda_runtime.h>
@@ -20,20 +18,14 @@
 
 // Run the Jacobi method for A*x = b on GPU with CUDA Graph -
 // cudaGraphExecKernelNodeSetParams().
-extern double JacobiMethodGpuCudaGraphExecKernelSetParams(
-    const float* A, const double* b, const float conv_threshold,
-    const int max_iter, double* x, double* x_new, cudaStream_t stream);
+extern double JacobiMethodGpuCudaGraphExecKernelSetParams(const float* A, const double* b, const float conv_threshold, const int max_iter, double* x, double* x_new, cudaStream_t stream);
 
 // Run the Jacobi method for A*x = b on GPU with Instantiated CUDA Graph Update
 // API - cudaGraphExecUpdate().
-extern double JacobiMethodGpuCudaGraphExecUpdate(
-    const float* A, const double* b, const float conv_threshold,
-    const int max_iter, double* x, double* x_new, cudaStream_t stream);
+extern double JacobiMethodGpuCudaGraphExecUpdate(const float* A, const double* b, const float conv_threshold, const int max_iter, double* x, double* x_new, cudaStream_t stream);
 
 // Run the Jacobi method for A*x = b on GPU without CUDA Graph.
-extern double JacobiMethodGpu(const float* A, const double* b,
-    const float conv_threshold, const int max_iter,
-    double* x, double* x_new, cudaStream_t stream);
+extern double JacobiMethodGpu(const float* A, const double* b, const float conv_threshold, const int max_iter, double* x, double* x_new, cudaStream_t stream);
 
 // creates N_ROWS x N_ROWS matrix A with N_ROWS+1 on the diagonal and 1
 // elsewhere. The elements of the right hand side b all equal 2*n, hence the
@@ -41,8 +33,7 @@ extern double JacobiMethodGpu(const float* A, const double* b,
 void createLinearSystem(float* A, double* b);
 
 // Run the Jacobi method for A*x = b on CPU.
-void JacobiMethodCPU(float* A, double* b, float conv_threshold, int max_iter,
-    int* numit, double* x);
+void JacobiMethodCPU(float* A, double* b, float conv_threshold, int max_iter, int* numit, double* x);
 
 int main(int argc, char** argv)
 {

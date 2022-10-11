@@ -7,8 +7,7 @@
   new cudaTextureObject introduced in CUDA 5.0 and requiring sm3+ hardware.
 
   The mipmap generation kernel uses cudaSurfaceObject and cudaTextureObject
-  passed as kernel arguments to compute the higher mip map level based on
-  the lower.
+  passed as kernel arguments to compute the higher mip map level based on the lower.
 */
 
 #ifndef _BINDLESSTEXTURE_KERNEL_CU_
@@ -114,8 +113,7 @@ extern "C" void renderAtlasImage(dim3 gridSize, dim3 blockSize, uchar4 * d_outpu
 // MipMap Generation
 
 //  A key benefit of using the new surface objects is that we don't need any
-//  global binding points anymore. We can directly pass them as function
-//  arguments.
+//  global binding points anymore. We can directly pass them as function arguments.
 
 __global__ void d_mipmap(cudaSurfaceObject_t mipOutput, cudaTextureObject_t mipInput, uint imageW, uint imageH)
 {
@@ -256,12 +254,12 @@ extern "C" void randomizeAtlas()
     uint2* h_data = (uint2*)atlasImage.h_data;
 
     // assign random texture object handles to our atlas image tiles
-    for (size_t i = 0; i < atlasImage.size.width * atlasImage.size.height; i++) {
+    for (size_t i = 0; i < atlasImage.size.width * atlasImage.size.height; i++)
+    {
 #ifdef SHOW_MIPMAPS
         h_data[i] = encodeTextureObject(contentImages[0].textureObject);
 #else
-        h_data[i] = encodeTextureObject(
-            contentImages[rand() % contentImages.size()].textureObject);
+        h_data[i] = encodeTextureObject(contentImages[rand() % contentImages.size()].textureObject);
 #endif
     }
 

@@ -201,8 +201,7 @@ int runTest(int argc, char** argv)
     thrust::copy(d_visibilities.begin(), d_visibilities.end(), h_visibilities.begin());
 
     // Compare device visibility results against reference results
-    bool res = compareData(thrust::raw_pointer_cast(&h_visibilitiesRef[0]),
-        thrust::raw_pointer_cast(&h_visibilities[0]), ray.length, 0.0f, 0.0f);
+    bool res = compareData(thrust::raw_pointer_cast(&h_visibilitiesRef[0]), thrust::raw_pointer_cast(&h_visibilities[0]), ray.length, 0.0f, 0.0f);
     printf("Average time: %f ms\n\n", sdkGetTimerValue(&timer) / numIterations);
     sdkResetTimer(&timer);
 
@@ -294,8 +293,8 @@ __device__ __host__ float2 getLocation(const Ray ray, int i)
 //! @param location   2D coordinates of the input point
 //! @param height     height of the input point
 ////////////////////////////////////////////////////////////////////////////////
-__device__ __host__ float getAngle(const Ray ray, float2 location,
-    float height) {
+__device__ __host__ float getAngle(const Ray ray, float2 location, float height)
+{
     float2 dir = location - make_float2(ray.origin.x, ray.origin.y);
     return atanf((height - ray.origin.z) / length(dir));
 }

@@ -44,9 +44,8 @@ struct decode_params_t
     bool batched;
 };
 
-int read_next_batch(FileNames& image_names, int batch_size,
-    FileNames::iterator& cur_iter, FileData& raw_data,
-    std::vector<size_t>& raw_len, FileNames& current_names) {
+int read_next_batch(FileNames& image_names, int batch_size,    FileNames::iterator& cur_iter, FileData& raw_data,    std::vector<size_t>& raw_len, FileNames& current_names)
+{
     int counter = 0;
 
     while (counter < batch_size)
@@ -97,8 +96,7 @@ int read_next_batch(FileNames& image_names, int batch_size,
 }
 
 // prepare buffers for RGBi output format
-int prepare_buffers(FileData& file_data, std::vector<size_t>& file_len,
-    std::vector<int>& img_width, std::vector<int>& img_height, std::vector<nvjpegImage_t>& ibuf,
+int prepare_buffers(FileData& file_data, std::vector<size_t>& file_len,    std::vector<int>& img_width, std::vector<int>& img_height, std::vector<nvjpegImage_t>& ibuf,
     std::vector<nvjpegImage_t>& isz, FileNames& current_names, decode_params_t& params)
 {
     int widths[NVJPEG_MAX_COMPONENT];
@@ -159,7 +157,7 @@ int prepare_buffers(FileData& file_data, std::vector<size_t>& file_len,
         // 3 samples at once
         if (params.fmt == NVJPEG_OUTPUT_RGBI || params.fmt == NVJPEG_OUTPUT_BGRI)
         {
-            printf("111\n");
+            printf("XXXXXXXXXXX 111\n");
             channels = 1;
             mul = 3;
         }
@@ -236,8 +234,7 @@ void release_buffers(std::vector<nvjpegImage_t>& ibuf)
     }
 }
 
-int decode_images(const FileData& img_data, const std::vector<size_t>& img_len,
-    std::vector<nvjpegImage_t>& out, decode_params_t& params, double& time)
+int decode_images(const FileData& img_data, const std::vector<size_t>& img_len,    std::vector<nvjpegImage_t>& out, decode_params_t& params, double& time)
 {
     checkCudaErrors(cudaStreamSynchronize(params.stream));
     cudaEvent_t startEvent = NULL, stopEvent = NULL;
@@ -403,6 +400,7 @@ double process_images(FileNames& image_names, decode_params_t& params, double& t
             return EXIT_FAILURE;
         }
 
+        std::cout << "call prepare_buffers, filename = " << current_names[0] << std::endl;
         if (prepare_buffers(file_data, file_len, widths, heights, iout, isz, current_names, params))
         {
             return EXIT_FAILURE;

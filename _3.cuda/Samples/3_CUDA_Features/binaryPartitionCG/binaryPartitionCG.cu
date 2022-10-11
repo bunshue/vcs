@@ -4,11 +4,9 @@
  * 1.) Each thread loads a value from random array.
  * 2.) then checks if it is odd or even.
  * 3.) create binary partition group based on the above predicate
- * 4.) we count the number of odd/even in the group based on size of the binary
-       groups
+ * 4.) we count the number of odd/even in the group based on size of the binary groups
  * 5.) write it global counter of odd.
- * 6.) sum the values loaded by individual threads(using reduce) and write it to
-       global even & odd elements sum.
+ * 6.) sum the values loaded by individual threads(using reduce) and write it to global even & odd elements sum.
  *
  * **NOTE** :
  *    binary_partition results in splitting warp into divergent thread groups

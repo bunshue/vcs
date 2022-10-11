@@ -75,6 +75,60 @@ void init10(void)
     glClearColor(0.4f, 1.f, 0.8f, 1.0f);//設置背景色
 }
 
+void drawText1(void)
+{
+    using std::string;
+    using std::stringstream;
+
+    glPushMatrix();
+    glLoadIdentity();
+    glRasterPos2f(-0.8f, 0.6f);
+
+    string infoString;
+    stringstream ss;
+    ss << "Write Something to Screen";
+    infoString.append(ss.str());
+
+    for (unsigned int i = 0; i < infoString.size(); i++)
+    {
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, infoString[i]);
+    }
+    glPopMatrix();
+}
+
+inline void glPrint(int x, int y, const char* s, void* font)
+{
+    glRasterPos2f((GLfloat)x, (GLfloat)y);
+    int len = (int)strlen(s);
+
+    for (int i = 0; i < len; i++)
+    {
+        glutBitmapCharacter(font, s[i]);
+    }
+}
+
+inline void glPrintShadowed(int x, int y, const char* s, void* font, float* color)
+{
+    glColor3f(0.0, 0.0, 0.0);
+    glPrint(x - 1, y - 1, s, font);
+
+    glColor3fv((GLfloat*)color);
+    glPrint(x, y, s, font);
+}
+
+void drawText2(void)
+{
+    glPrint(-1.2, 0, "111Write Something to Screen", GLUT_BITMAP_TIMES_ROMAN_24);
+
+    float* color = new float[4];
+    color[0] = 0.0f;
+    color[1] = 1.0f;
+    color[2] = 0.0f;
+    color[3] = 1.0f;
+
+    glPrintShadowed(-1.2, -1.2, "222Write Something to Screen", GLUT_BITMAP_TIMES_ROMAN_24, color);
+}
+
 // 繪圖回調函數
 void display(void)
 {
@@ -108,6 +162,9 @@ void display(void)
         glColor4f(0.0, 0.0, 1.0, 1.0);  //設置畫筆顏色為 B
         glRectf(0.3f, -0.7f, 0.7f, 0.7f);//畫一個矩形
 
+        //drawText1();
+
+        drawText2();
 
         glFlush();//保證前面的OpenGL命令立即執行   glFlush​​負責刷新繪制緩沖器，保證繪圖命令立即執行。
     }
@@ -558,7 +615,12 @@ int main(int argc, char* argv[])
 
     initMenus();        //設定表單按鈕
 
+    printf("取得視窗寬度 : %d\n", glutGet(GLUT_WINDOW_WIDTH));
+    printf("取得視窗高度 : %d\n", glutGet(GLUT_WINDOW_HEIGHT));
+
     glutMainLoop();     // Enter the event-processing loop
+
+
 
     return 0;
 }

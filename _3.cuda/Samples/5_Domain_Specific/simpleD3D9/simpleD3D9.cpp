@@ -1,5 +1,6 @@
 // This example demonstrates how to use the CUDA Direct3D bindings to fill
 // a vertex buffer with CUDA and use Direct3D to render the data.
+
 // Host code.
 
 #pragma warning(disable : 4312)
@@ -645,8 +646,10 @@ int main(int argc, char** argv)
     // command line options
     if (argc > 1)
     {
+        printf("XXXXXXX\n");
         if (checkCmdLineFlag(argc, (const char**)argv, "file"))
         {
+            printf("XXXXXXX\n");
             getCmdLineArgumentString(argc, (const char**)argv, "file", (char**)&ref_file);
         }
     }

@@ -119,7 +119,10 @@ __global__ void reduceFinal(double* inputVec, double* result, size_t inputSize)
 
 void init_input(float* a, size_t size)
 {
-    for (size_t i = 0; i < size; i++) a[i] = (rand() & 0xFF) / (float)RAND_MAX;
+    for (size_t i = 0; i < size; i++)
+    {
+        a[i] = (rand() & 0xFF) / (float)RAND_MAX;
+    }
 }
 
 void CUDART_CB myHostNodeCallback(void* data)

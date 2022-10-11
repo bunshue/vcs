@@ -32,16 +32,19 @@ const char* sSDKname = "batchCUBLAS";
 extern "C" {
 #endif /* __cplusplus */
 
-    int getDeviceVersion(void) {
+    int getDeviceVersion(void)
+    {
         int device;
         struct cudaDeviceProp properties;
 
-        if (cudaGetDevice(&device) != cudaSuccess) {
+        if (cudaGetDevice(&device) != cudaSuccess)
+        {
             printf("failed to get device\n");
             return 0;
         }
 
-        if (cudaGetDeviceProperties(&properties, device) != cudaSuccess) {
+        if (cudaGetDeviceProperties(&properties, device) != cudaSuccess)
+        {
             printf("failed to get properties\n");
             return 0;
         }
@@ -49,15 +52,18 @@ extern "C" {
         return properties.major * 100 + properties.minor * 10;
     }
 
-    size_t getDeviceMemory(void) {
+    size_t getDeviceMemory(void)
+    {
         struct cudaDeviceProp properties;
         int device;
 
-        if (cudaGetDevice(&device) != cudaSuccess) {
+        if (cudaGetDevice(&device) != cudaSuccess)
+        {
             return 0;
         }
 
-        if (cudaGetDeviceProperties(&properties, device) != cudaSuccess) {
+        if (cudaGetDeviceProperties(&properties, device) != cudaSuccess)
+        {
             return 0;
         }
 
@@ -630,6 +636,12 @@ int main(int argc, char* argv[])
     }
 
     cublasDestroy(handle);
+
+    int version = getDeviceVersion();
+    printf("Device Version = %d\n", version);
+
+    size_t size = getDeviceMemory();
+    printf("Device Memory Size = %llu\n", size);
 
     printf("\nTest Summary\n");
     printf("%d error(s)\n", nTotalErrors);

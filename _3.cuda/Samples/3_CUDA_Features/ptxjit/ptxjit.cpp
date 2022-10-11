@@ -3,7 +3,6 @@
  * PTX code. Additionally, this sample demonstrates the seamless
  * interoperability capability of CUDA runtime Runtime and CUDA Driver API
  * calls. This sample requires Compute Capability 2.0 and higher.
- *
  */
 
  // System includes
@@ -25,31 +24,37 @@
 #if defined(_WIN64) || defined(__LP64__)
 #define PTX_FILE "ptxjit_kernel64.ptx"
 #else
+ddddd
 #define PTX_FILE "ptxjit_kernel32.ptx"
 #endif
 
 const char* sSDKname = "PTX Just In Time (JIT) Compilation (no-qatest)";
 
-bool inline findModulePath(const char* module_file, std::string& module_path,
-    char** argv, std::string& ptx_source) {
+bool inline findModulePath(const char* module_file, std::string& module_path, char** argv, std::string& ptx_source)
+{
     char* actual_path = sdkFindFilePath(module_file, argv[0]);
 
-    if (actual_path) {
+    if (actual_path)
+    {
         module_path = actual_path;
     }
-    else {
+    else
+    {
         printf("> findModulePath file not found: <%s> \n", module_file);
         return false;
     }
 
-    if (module_path.empty()) {
+    if (module_path.empty())
+    {
         printf("> findModulePath file not found: <%s> \n", module_file);
         return false;
     }
-    else {
+    else
+    {
         printf("> findModulePath <%s>\n", module_path.c_str());
 
-        if (module_path.rfind(".ptx") != std::string::npos) {
+        if (module_path.rfind(".ptx") != std::string::npos)
+        {
             FILE* fp = fopen(module_path.c_str(), "rb");
             fseek(fp, 0, SEEK_END);
             int file_size = ftell(fp);
@@ -61,13 +66,12 @@ bool inline findModulePath(const char* module_file, std::string& module_path,
             ptx_source = buf;
             delete[] buf;
         }
-
         return true;
     }
 }
 
-void ptxJIT(int argc, char** argv, CUmodule* phModule, CUfunction* phKernel,
-    CUlinkState* lState) {
+void ptxJIT(int argc, char** argv, CUmodule* phModule, CUfunction* phKernel, CUlinkState* lState)
+{
     CUjit_option options[6];
     void* optionVals[6];
     float walltime;
@@ -102,22 +106,23 @@ void ptxJIT(int argc, char** argv, CUmodule* phModule, CUfunction* phKernel,
     checkCudaErrors(cuLinkCreate(6, options, optionVals, lState));
 
     // first search for the module path before we load the results
-    if (!findModulePath(PTX_FILE, module_path, argv, ptx_source)) {
+    if (!findModulePath(PTX_FILE, module_path, argv, ptx_source))
+    {
         printf("> findModulePath could not find <ptxjit_kernel> ptx\n");
         exit(EXIT_FAILURE);
     }
-    else {
+    else
+    {
         printf("> initCUDA loading module: <%s>\n", module_path.c_str());
     }
 
     // Load the PTX from the ptx file
     printf("Loading ptxjit_kernel[] program\n");
-    myErr = cuLinkAddData(*lState, CU_JIT_INPUT_PTX, (void*)ptx_source.c_str(),
-        strlen(ptx_source.c_str()) + 1, 0, 0, 0, 0);
+    myErr = cuLinkAddData(*lState, CU_JIT_INPUT_PTX, (void*)ptx_source.c_str(), strlen(ptx_source.c_str()) + 1, 0, 0, 0, 0);
 
-    if (myErr != CUDA_SUCCESS) {
-        // Errors will be put in error_log, per CU_JIT_ERROR_LOG_BUFFER option
-        // above.
+    if (myErr != CUDA_SUCCESS)
+    {
+        // Errors will be put in error_log, per CU_JIT_ERROR_LOG_BUFFER option above.
         fprintf(stderr, "PTX Linker Error:\n%s\n", error_log);
     }
 
@@ -125,8 +130,7 @@ void ptxJIT(int argc, char** argv, CUmodule* phModule, CUfunction* phKernel,
     checkCudaErrors(cuLinkComplete(*lState, &cuOut, &outSize));
 
     // Linker walltime and info_log were requested in options above.
-    printf("CUDA Link Completed in %fms. Linker Output:\n%s\n", walltime,
-        info_log);
+    printf("CUDA Link Completed in %fms. Linker Output:\n%s\n", walltime, info_log);
 
     // Load resulting cuBin into module
     checkCudaErrors(cuModuleLoadData(phModule, cuOut));
@@ -138,7 +142,8 @@ void ptxJIT(int argc, char** argv, CUmodule* phModule, CUfunction* phKernel,
     checkCudaErrors(cuLinkDestroy(*lState));
 }
 
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
     const unsigned int nThreads = 256;
     const unsigned int nBlocks = 64;
     const size_t memSize = nThreads * nBlocks * sizeof(int);
@@ -156,18 +161,17 @@ int main(int argc, char** argv) {
     CUdevice dev = findCudaDeviceDRV(argc, (const char**)argv);
     int driverVersion;
     cudaDriverGetVersion(&driverVersion);
-    if (driverVersion < CUDART_VERSION) {
-        printf(
-            "driverVersion = %d < CUDART_VERSION = %d \n"
-            "Enhanced compatibility is not supported for this sample.. waving "
-            "execution\n",
+    if (driverVersion < CUDART_VERSION)
+    {
+        printf("driverVersion = %d < CUDART_VERSION = %d \nEnhanced compatibility is not supported for this sample.. waving execution\n",
             driverVersion, CUDART_VERSION);
         exit(EXIT_WAIVED);
     }
 
     // Allocate memory on host and device (Runtime API)
     // NOTE: The runtime API will create the GPU Context implicitly here
-    if ((h_data = (int*)malloc(memSize)) == NULL) {
+    if ((h_data = (int*)malloc(memSize)) == NULL)
+    {
         std::cerr << "Could not allocate host memory" << std::endl;
         exit(EXIT_FAILURE);
     }
@@ -184,8 +188,7 @@ int main(int argc, char** argv) {
     void* args[1] = { &d_data };
 
     // Launch the kernel (Driver API_)
-    checkCudaErrors(cuLaunchKernel(hKernel, grid.x, grid.y, grid.z, block.x,
-        block.y, block.z, 0, NULL, args, NULL));
+    checkCudaErrors(cuLaunchKernel(hKernel, grid.x, grid.y, grid.z, block.x, block.y, block.z, 0, NULL, args, NULL));
     std::cout << "CUDA kernel launched" << std::endl;
 
     // Copy the result back to the host
@@ -194,28 +197,34 @@ int main(int argc, char** argv) {
     // Check the result
     bool dataGood = true;
 
-    for (unsigned int i = 0; dataGood && i < nBlocks * nThreads; i++) {
-        if (h_data[i] != (int)i) {
+    for (unsigned int i = 0; dataGood && i < nBlocks * nThreads; i++)
+    {
+        if (h_data[i] != (int)i)
+        {
             std::cerr << "Error at " << i << std::endl;
             dataGood = false;
         }
     }
 
     // Cleanup
-    if (d_data) {
+    if (d_data)
+    {
         checkCudaErrors(cudaFree(d_data));
         d_data = 0;
     }
 
-    if (h_data) {
+    if (h_data)
+    {
         free(h_data);
         h_data = 0;
     }
 
-    if (hModule) {
+    if (hModule)
+    {
         checkCudaErrors(cuModuleUnload(hModule));
         hModule = 0;
     }
 
     return dataGood ? EXIT_SUCCESS : EXIT_FAILURE;
 }
+

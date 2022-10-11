@@ -59,7 +59,7 @@ std::string tipsyFile = "";
 
 int numIterations = 0;  // run until exit
 
-void computePerfStats(double& interactionsPerSecond, double& gflops,    float milliseconds, int iterations)
+void computePerfStats(double& interactionsPerSecond, double& gflops, float milliseconds, int iterations)
 {
     // double precision uses intrinsic operation followed by refinement,
     // resulting in higher operation count per interaction.
@@ -486,7 +486,8 @@ inline void checkGLErrors(const char* s) {
     }
 }
 
-void initGL(int* argc, char** argv) {
+void initGL(int* argc, char** argv)
+{
     // First initialize OpenGL context, so we can properly set the GL for CUDA.
     // This is necessary in order to achieve optimal performance with OpenGL/CUDA
     // interop.
@@ -495,7 +496,8 @@ void initGL(int* argc, char** argv) {
     glutInitWindowSize(720, 480);
     glutCreateWindow("CUDA n-body system");
 
-    if (bFullscreen) {
+    if (bFullscreen)
+    {
         glutFullScreen();   //¥þ¿Ã¹õÅã¥Ü
     }
 
@@ -581,13 +583,15 @@ void displayNBodySystem() {
     }
 }
 
-void display() {
+void display()
+{
     static double gflops = 0;
     static double ifps = 0;
     static double interactionsPerSecond = 0;
 
     // update the simulation
-    if (!bPause) {
+    if (!bPause)
+    {
         if (cycleDemo && (sdkGetTimerValue(&demoTimer) > demoTime)) {
             activeDemo = (activeDemo + 1) % numDemos;
             selectDemo(activeDemo);
@@ -595,28 +599,28 @@ void display() {
 
         updateSimulation();
 
-        if (!useCpu) {
-            cudaEventRecord(hostMemSyncEvent,
-                0);  // insert an event to wait on before rendering
+        if (!useCpu)
+        {
+            cudaEventRecord(hostMemSyncEvent, 0);  // insert an event to wait on before rendering
         }
     }
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    if (displayEnabled) {
+    if (displayEnabled)
+    {
         // view transform
         {
             glMatrixMode(GL_MODELVIEW);
             glLoadIdentity();
 
-            for (int c = 0; c < 3; ++c) {
-                camera_trans_lag[c] +=
-                    (camera_trans[c] - camera_trans_lag[c]) * inertia;
+            for (int c = 0; c < 3; ++c)
+            {
+                camera_trans_lag[c] += (camera_trans[c] - camera_trans_lag[c]) * inertia;
                 camera_rot_lag[c] += (camera_rot[c] - camera_rot_lag[c]) * inertia;
             }
 
-            glTranslatef(camera_trans_lag[0], camera_trans_lag[1],
-                camera_trans_lag[2]);
+            glTranslatef(camera_trans_lag[0], camera_trans_lag[1], camera_trans_lag[2]);
             glRotatef(camera_rot_lag[0], 1.0, 0.0, 0.0);
             glRotatef(camera_rot_lag[1], 0.0, 1.0, 0.0);
         }
@@ -624,40 +628,38 @@ void display() {
         displayNBodySystem();
 
         // display user interface
-        if (bShowSliders) {
+        if (bShowSliders)
+        {
             glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);  // invert color
             glEnable(GL_BLEND);
             paramlist->Render(0, 0);
             glDisable(GL_BLEND);
         }
 
-        if (bFullscreen) {
+        if (bFullscreen)
+        {
             beginWinCoords();
             char msg0[256], msg1[256], msg2[256];
 
-            if (bDispInteractions) {
-                sprintf(msg1, "%0.2f billion interactions per second",
-                    interactionsPerSecond);
+            if (bDispInteractions)
+            {
+                sprintf(msg1, "%0.2f billion interactions per second", interactionsPerSecond);
             }
             else {
                 sprintf(msg1, "%0.2f GFLOP/s", gflops);
             }
 
             sprintf(msg0, "%s", deviceName);
-            sprintf(msg2, "%0.2f FPS [%s | %d bodies]", ifps,
-                fp64 ? "double precision" : "single precision", numBodies);
+            sprintf(msg2, "%0.2f FPS [%s | %d bodies]", ifps, fp64 ? "double precision" : "single precision", numBodies);
 
             glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);  // invert color
             glEnable(GL_BLEND);
             glColor3f(0.46f, 0.73f, 0.0f);
-            glPrint(80, glutGet(GLUT_WINDOW_HEIGHT) - 122, msg0,
-                GLUT_BITMAP_TIMES_ROMAN_24);
+            glPrint(80, glutGet(GLUT_WINDOW_HEIGHT) - 122, msg0, GLUT_BITMAP_TIMES_ROMAN_24);
             glColor3f(1.0f, 1.0f, 1.0f);
-            glPrint(80, glutGet(GLUT_WINDOW_HEIGHT) - 96, msg2,
-                GLUT_BITMAP_TIMES_ROMAN_24);
+            glPrint(80, glutGet(GLUT_WINDOW_HEIGHT) - 96, msg2, GLUT_BITMAP_TIMES_ROMAN_24);
             glColor3f(1.0f, 1.0f, 1.0f);
-            glPrint(80, glutGet(GLUT_WINDOW_HEIGHT) - 70, msg1,
-                GLUT_BITMAP_TIMES_ROMAN_24);
+            glPrint(80, glutGet(GLUT_WINDOW_HEIGHT) - 70, msg1, GLUT_BITMAP_TIMES_ROMAN_24);
             glDisable(GL_BLEND);
 
             endWinCoords();
@@ -670,7 +672,8 @@ void display() {
 
     // this displays the frame rate updated every second (independent of frame
     // rate)
-    if (fpsCount >= fpsLimit) {
+    if (fpsCount >= fpsLimit)
+    {
         char fps[256];
 
         float milliseconds = 1;
@@ -955,10 +958,10 @@ int main(int argc, char** argv) {
         "NOTE: The CUDA Samples are not meant for performance measurements. "
         "Results may vary when GPU Boost is enabled.\n\n");
 
-    bFullscreen =
-        (checkCmdLineFlag(argc, (const char**)argv, "fullscreen") != 0);
+    bFullscreen = (checkCmdLineFlag(argc, (const char**)argv, "fullscreen") != 0);
 
-    if (bFullscreen) {
+    if (bFullscreen)
+    {
         bShowSliders = false;
     }
 

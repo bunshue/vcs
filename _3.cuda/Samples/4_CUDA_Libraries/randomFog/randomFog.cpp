@@ -230,7 +230,7 @@ void drawPoints(void)
 }
 
 void drawText(void)
-{
+{   //這個drawText已經搬出至範例了
     using std::string;
     using std::stringstream;
 
@@ -428,7 +428,8 @@ void keyboard(unsigned char key, int x, int y)
     case 'I':
         g_xRotated -= 1.0f;
 
-        if (g_xRotated <= 0.0f) {
+        if (g_xRotated <= 0.0f)
+        {
             g_xRotated += 360.0f;
         }
 
@@ -438,7 +439,8 @@ void keyboard(unsigned char key, int x, int y)
     case ',':
         g_xRotated += 1.0f;
 
-        if (g_xRotated >= 360.0f) {
+        if (g_xRotated >= 360.0f)
+        {
             g_xRotated -= 360.0f;
         }
 
@@ -460,7 +462,8 @@ void keyboard(unsigned char key, int x, int y)
     case 'L':
         g_yRotated += 1.0f;
 
-        if (g_yRotated >= 360.0f) {
+        if (g_yRotated >= 360.0f)
+        {
             g_yRotated -= 360.0f;
         }
 
@@ -543,7 +546,8 @@ void keyboard(unsigned char key, int x, int y)
     case '+':
         g_nVerticesPopulated += 8000;
 
-        if (g_nVerticesPopulated > g_nVertices) {
+        if (g_nVerticesPopulated > g_nVertices)
+        {
             g_nVerticesPopulated = g_nVertices;
         }
 
@@ -553,7 +557,8 @@ void keyboard(unsigned char key, int x, int y)
     case '-':
         g_nVerticesPopulated -= 8000;
 
-        if (g_nVerticesPopulated < 8000) {
+        if (g_nVerticesPopulated < 8000)
+        {
             g_nVerticesPopulated = 8000;
         }
 
@@ -564,12 +569,8 @@ void keyboard(unsigned char key, int x, int y)
     case 27:
     case 'q':
     case 'Q':
-#if defined(__APPLE__) || defined(MACOSX)
-        exit(EXIT_SUCCESS);
-#else
         glutDestroyWindow(glutGetWindow());
         return;
-#endif
     }
 }
 
@@ -640,8 +641,8 @@ void showHelp(void)
 int main(int argc, char** argv)
 {
     using std::runtime_error;
-
-    try {
+    try
+    {
         bool bQA = false;
 
         // Open the log file
@@ -649,13 +650,14 @@ int main(int argc, char** argv)
         printf("==========\n\n");
 
         // Check QA mode
-        if (checkCmdLineFlag(argc, (const char**)argv, "qatest")) {
+        if (checkCmdLineFlag(argc, (const char**)argv, "qatest"))
+        {
+            printf("XXXXXXXXXXXXXXXXXXXXXX\n");
             bQA = true;
 
             findCudaDevice(argc, (const char**)argv);
 
-            g_pCheckRender =
-                new CheckBackBuffer(g_lastShapeX, g_lastShapeY, 4, false);
+            g_pCheckRender = new CheckBackBuffer(g_lastShapeX, g_lastShapeY, 4, false);
         }
         else
         {
@@ -663,13 +665,14 @@ int main(int argc, char** argv)
             glutInit(&argc, argv);
             glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
             // TODO use width/height?
-    glutInitWindowSize(1000, 1000);     //設定視窗大小, 直接拉大內容
-    glutInitWindowPosition(900, 50);    //視窗起始位置
+            glutInitWindowSize(1000, 1000);     //設定視窗大小, 直接拉大內容
+            glutInitWindowPosition(900, 50);    //視窗起始位置
 
-            // Create a window with rendering context and everything else we need
+                    // Create a window with rendering context and everything else we need
             glutCreateWindow("Random Fog");
 
-            if (!isGLVersionSupported(2, 0)) {
+            if (!isGLVersionSupported(2, 0))
+            {
                 fprintf(stderr, "This sample requires at least OpenGL 2.0\n");
                 exit(EXIT_WAIVED);
             }
@@ -693,22 +696,23 @@ int main(int argc, char** argv)
 
         showHelp();
 
-        if (bQA) {
+        if (bQA)
+        {
             g_pCheckRender->setExecPath(argv[0]);
-            g_pCheckRender->dumpBin(
-                g_pVertices, g_nVerticesPopulated * sizeof(SVertex), "randomFog.bin");
+            g_pCheckRender->dumpBin(g_pVertices, g_nVerticesPopulated * sizeof(SVertex), "randomFog.bin");
 
-            if (g_pCheckRender->compareBin2BinFloat(
-                "randomFog.bin", "ref_randomFog.bin",
-                g_nVerticesPopulated * sizeof(SVertex) / sizeof(float), 0.25f,
-                0.35f)) {
+            if (g_pCheckRender->compareBin2BinFloat("randomFog.bin", "ref_randomFog.bin",
+                g_nVerticesPopulated * sizeof(SVertex) / sizeof(float), 0.25f, 0.35f))
+            {
                 cleanup(EXIT_SUCCESS);
             }
-            else {
+            else
+            {
                 cleanup(EXIT_FAILURE);
             }
         }
-        else {
+        else
+        {
             // As we do not yet use a depth buffer, we cannot fill our sphere
             glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
             // Enable the vertex array functionality:
