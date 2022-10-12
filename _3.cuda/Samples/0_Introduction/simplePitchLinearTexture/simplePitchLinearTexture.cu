@@ -1,4 +1,3 @@
-// includes, system
 #include <stdio.h>
 
 #ifdef _WIN32
@@ -52,27 +51,12 @@ __global__ void shiftArray(float* odata, int pitch, int width, int height, int s
 }
 
 ////////////////////////////////////////////////////////////////////////////////
-// Declaration, forward
-void runTest(int argc, char** argv);
-
-////////////////////////////////////////////////////////////////////////////////
 // Program main
 ////////////////////////////////////////////////////////////////////////////////
 int main(int argc, char** argv)
 {
-    printf("%s starting...\n\n", sSDKsample);
+    printf("Starting...\n\n");
 
-    runTest(argc, argv);
-
-    printf("%s completed, returned %s\n", sSDKsample, bTestResult ? "OK" : "ERROR!");
-    exit(bTestResult ? EXIT_SUCCESS : EXIT_FAILURE);
-}
-
-////////////////////////////////////////////////////////////////////////////////
-//! Run a simple test for CUDA
-////////////////////////////////////////////////////////////////////////////////
-void runTest(int argc, char** argv)
-{
     // Set array size
     const int nx = 2048;
     const int ny = 2048;
@@ -253,5 +237,8 @@ void runTest(int argc, char** argv)
 
     checkCudaErrors(cudaEventDestroy(start));
     checkCudaErrors(cudaEventDestroy(stop));
+
+    printf("%s completed, returned %s\n", sSDKsample, bTestResult ? "OK" : "ERROR!");
+    exit(bTestResult ? EXIT_SUCCESS : EXIT_FAILURE);
 }
 

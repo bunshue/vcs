@@ -129,8 +129,6 @@ int main(int argc, char **argv)
   FreePlane(ImgSrc);
   FreePlane(ImgDst);
 
-
-
   //讀取一個bmp檔案 ST, 判斷位元深度
   char filename_read[] = "C:\\______test_files\\pic_256X100b.bmp";
   printf("讀取檔案 : %s\n", filename_read);

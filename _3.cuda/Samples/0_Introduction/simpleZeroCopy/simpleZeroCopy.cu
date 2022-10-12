@@ -1,4 +1,3 @@
-// System includes
 #include <assert.h>
 #include <stdio.h>
 

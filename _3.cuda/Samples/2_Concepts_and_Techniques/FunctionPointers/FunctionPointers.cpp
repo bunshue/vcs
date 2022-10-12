@@ -54,9 +54,6 @@ unsigned int g_Bpp;
 
 int g_TotalErrors = 0;
 
-int* pArgc = NULL;
-char** pArgv = NULL;
-
 bool g_bQAReadback = false;
 
 // Display Data
@@ -81,7 +78,7 @@ void computeFPS()
     {
         char fps[256];
         float ifps = 1.f / (sdkGetAverageTimerValue(&timer) / 1000.f);
-        sprintf(fps, "FunctionPointers [CUDA Edge Detection] (%s): %3.1f fps", filterMode[g_SobelDisplayMode], ifps);
+        sprintf(fps, "[CUDA Edge Detection] (%s): %3.1f fps", filterMode[g_SobelDisplayMode], ifps);
 
         glutSetWindowTitle(fps);
         fpsCount = 0;
@@ -404,9 +401,6 @@ void runAutoTest(int argc, char* argv[])
 
 int main(int argc, char** argv)
 {
-    pArgc = &argc;
-    pArgv = argv;
-
     printf("Starting...\n\n");
 
     if (checkCmdLineFlag(argc, (const char**)argv, "help"))

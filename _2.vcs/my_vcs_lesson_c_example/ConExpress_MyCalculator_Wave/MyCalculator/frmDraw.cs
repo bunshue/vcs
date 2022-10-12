@@ -47,13 +47,13 @@ namespace ConExpress.Calculator
 
 
                 g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
-                //绘制X轴和Y轴
+                //繪制X軸和Y軸
                 g.DrawLine(Pens.Black, 0, this.picImage.Height / 2, this.picImage.Width, this.picImage.Height / 2);
                 g.DrawLine(Pens.Black, this.picImage.Width / 2, 0, this.picImage.Width / 2, this.picImage.Height);
                 g.TranslateTransform(Convert.ToSingle(myImage.Width / 2), Convert.ToSingle(myImage.Height / 2));
 
 
-                //计算表达式
+                //計算表達式
                 for (int intIndex = intMin; intIndex <= intMax; intIndex++)
                 {
                     TokenN.TokenValue = (double)intIndex;
@@ -63,14 +63,14 @@ namespace ConExpress.Calculator
                     }
                 }
 
-                //绘制图像
+                //繪制圖像
                 foreach (DrawInfo item in this.m_DrawInfoList)
                 {
                     g.DrawLines(new Pen(item.LineColor, item.LineWidth), item.PointList.ToArray());
                 }
                 myImage.RotateFlip(RotateFlipType.Rotate180FlipX);
 
-                //绘制刻度
+                //繪制刻度
                 SolidBrush myBrush = new SolidBrush(Color.Black);
                 for (int intX = 0; intX < myImage.Width / 2; intX += (int)(this.numScale.Value))
                 {
@@ -91,9 +91,9 @@ namespace ConExpress.Calculator
                     g.DrawLine(Pens.Black, 0, intY, 3, intY);
                     g.DrawString("-" + intY.ToString(), this.Font, myBrush, 1, intY + 1);
                 }
-                //TODO:绘制网格
+                //TODO:繪制網格
 
-                //绘制图示Legend
+                //繪制圖示Legend
                 g.TranslateTransform(Convert.ToSingle(myImage.Width / 2 * -1), Convert.ToSingle(myImage.Height / 2 * -1));
                 int intOffsetX = 10;
                 int intOffsetY = 10;
@@ -110,11 +110,11 @@ namespace ConExpress.Calculator
             }
             catch (Exception ex)
             {
-                MessageBox.Show("错误信息为：" + ex.Message, "运算发生错误", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("錯誤信息為：" + ex.Message, "運算發生錯誤", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
-        #region 工具栏操作
+        #region 工具欄操作
 
         private void btnDraw_Click(object sender, EventArgs e)
         {
@@ -158,7 +158,7 @@ namespace ConExpress.Calculator
             this.splitContainer1.Panel2Collapsed = !this.btnShowProperty.Checked;
         }
 
-        #endregion 工具栏操作
+        #endregion 工具欄操作
 
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -187,16 +187,16 @@ namespace ConExpress.Calculator
 
 
     /// <summary>
-    /// 绘图信息
+    /// 繪圖信息
     /// </summary>
     public class DrawInfo
     {
-        #region 字段和属性声明
+        #region 字段和屬性聲明
 
-        private const string CategoryName = "绘图信息";
+        private const string CategoryName = "繪圖信息";
 
-        private string m_Name = "未命名项";
-        [Category(CategoryName), DisplayName("名称"), DefaultValue("未命名项"), MergableProperty(false), Description("绘图信息的名称。")]
+        private string m_Name = "未命名項";
+        [Category(CategoryName), DisplayName("名稱"), DefaultValue("未命名項"), MergableProperty(false), Description("繪圖信息的名稱。")]
         public string Name
         {
             get { return m_Name; }
@@ -208,7 +208,7 @@ namespace ConExpress.Calculator
         }
 
         private Color m_LineColor = Color.Black;
-        [Category(CategoryName), DisplayName("线条颜色"), DefaultValue(typeof(Color), "Black"), Description("绘制线条的颜色。")]
+        [Category(CategoryName), DisplayName("線條顏色"), DefaultValue(typeof(Color), "Black"), Description("繪制線條的顏色。")]
         public Color LineColor
         {
             get { return m_LineColor; }
@@ -216,7 +216,7 @@ namespace ConExpress.Calculator
         }
 
         private float m_LineWidth = 1.0f;
-        [Category(CategoryName), DisplayName("线条宽度"), DefaultValue(1.0f), Description("绘制线条的宽度(以像素为单位)。")]
+        [Category(CategoryName), DisplayName("線條寬度"), DefaultValue(1.0f), Description("繪制線條的寬度(以像素為單位)。")]
         public float LineWidth
         {
             get { return m_LineWidth; }
@@ -224,7 +224,7 @@ namespace ConExpress.Calculator
         }
 
         private string m_ExpressionX = "n";
-        [Category(CategoryName), DisplayName("表达式X"), DefaultValue("n"), Description("对应坐标轴X的表达式。")]
+        [Category(CategoryName), DisplayName("表達式X"), DefaultValue("n"), Description("對應坐標軸X的表達式。")]
         [Editor("System.ComponentModel.Design.MultilineStringEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(UITypeEditor))]
         public string ExpressionX
         {
@@ -237,7 +237,7 @@ namespace ConExpress.Calculator
         }
 
         private string m_ExpressionY = "n";
-        [Category(CategoryName), DisplayName("表达式Y"), DefaultValue("n"), Description("对应坐标轴Y的表达式。")]
+        [Category(CategoryName), DisplayName("表達式Y"), DefaultValue("n"), Description("對應坐標軸Y的表達式。")]
         [Editor("System.ComponentModel.Design.MultilineStringEditor, System.Design, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a", typeof(UITypeEditor))]
         public string ExpressionY
         {
@@ -251,7 +251,7 @@ namespace ConExpress.Calculator
 
         private List<PointF> m_PointList = new List<PointF>();
         /// <summary>
-        /// 坐标列表
+        /// 坐標列表
         /// </summary>
         [Browsable(false)]
         public List<PointF> PointList
@@ -259,10 +259,10 @@ namespace ConExpress.Calculator
             get { return m_PointList; }
         }
 
-        #endregion 字段和属性声明
+        #endregion 字段和屬性聲明
 
         /// <summary>
-        /// 构造函数
+        /// 構造函數
         /// </summary>
         public DrawInfo()
         { }
@@ -271,9 +271,9 @@ namespace ConExpress.Calculator
         private TokenRecord m_TokenX;
         private TokenRecord m_TokenY;
         /// <summary>
-        /// 初始化记号对象
+        /// 初始化記號對象
         /// </summary>
-        /// <param name="Analyser">表达式分析计算类的实例</param>
+        /// <param name="Analyser">表達式分析計算類的實例</param>
         public void InitialToken(SyntaxAnalyse Analyser)
         {
             if (Analyser != null)
@@ -285,7 +285,7 @@ namespace ConExpress.Calculator
         }
 
         /// <summary>
-        /// 执行计算
+        /// 執行計算
         /// </summary>
         public void Execute()
         {

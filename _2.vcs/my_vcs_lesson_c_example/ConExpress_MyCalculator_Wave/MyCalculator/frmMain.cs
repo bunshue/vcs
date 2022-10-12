@@ -22,26 +22,26 @@ namespace ConExpress.Calculator
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            this.ActiveControl = this.rtbInput;//设置输入框为激活控件
+            this.ActiveControl = this.rtbInput;//砞縡跧縀北ン
             this.LoadOperateTokenTree();
         }
 
 
-        #region 内部方法
+        #region ず场よ猭
 
         /// <summary>
-        /// 加载操作记号树视图
+        /// 更巨癘腹攫跌瓜
         /// </summary>
         /// <remarks>Author:Alex Leo; Date:2008-6-12;</remarks>
         private void LoadOperateTokenTree()
         {
             this.trvOperateToken.BeginUpdate();
             this.trvOperateToken.Nodes.Clear();
-            
-            TreeNode nodRootKeyword = new TreeNode("关键字");
-            this.LoadOperateTokenChildNode(nodRootKeyword, TokenKeywordFactory.KeywordDictionary,TokenKeywordFactory.KeyWordRemarkDictionary, OperateTokenTypeEnum.TokenKeyword);
 
-            TreeNode nodRootSymbol = new TreeNode("运算符");
+            TreeNode nodRootKeyword = new TreeNode("闽龄");
+            this.LoadOperateTokenChildNode(nodRootKeyword, TokenKeywordFactory.KeywordDictionary, TokenKeywordFactory.KeyWordRemarkDictionary, OperateTokenTypeEnum.TokenKeyword);
+
+            TreeNode nodRootSymbol = new TreeNode("笲衡才");
             this.LoadOperateTokenChildNode(nodRootSymbol, TokenSymbolFactory.SymbolDictionary, TokenSymbolFactory.SymbolRemarkDictionary, OperateTokenTypeEnum.TokenSymbol);
 
             this.trvOperateToken.Nodes.Add(nodRootKeyword);
@@ -51,12 +51,12 @@ namespace ConExpress.Calculator
         }
 
         /// <summary>
-        /// 加载操作记号下级节点
+        /// 更巨癘腹竊翴
         /// </summary>
-        /// <param name="ParentNode">父节点</param>
-        /// <param name="OperateTokenDictionary">操作记号字典</param>
-        /// <param name="RemarkDictoinary">注释字典</param>
-        /// <param name="OperateTokenType">操作记号类型</param>
+        /// <param name="ParentNode">竊翴</param>
+        /// <param name="OperateTokenDictionary">巨癘腹ㄥ</param>
+        /// <param name="RemarkDictoinary">猔睦ㄥ</param>
+        /// <param name="OperateTokenType">巨癘腹摸</param>
         /// <remarks>Author:Alex Leo; Date:2008-6-12;</remarks>
         private void LoadOperateTokenChildNode(TreeNode ParentNode, SortedDictionary<string, string> OperateTokenDictionary, SortedDictionary<string, string> RemarkDictoinary, OperateTokenTypeEnum OperateTokenType)
         {
@@ -70,53 +70,53 @@ namespace ConExpress.Calculator
         }
 
         /// <summary>
-        /// 加载语法树
+        /// 更粂猭攫
         /// </summary>
-        /// <param name="TokenTop">顶级记号对象</param>
+        /// <param name="TokenTop">郴癘腹癸禜</param>
         /// <remarks>Author:Alex Leo</remarks>
         private void LoadSyntaxTree(TokenRecord TokenTop)
         {
             this.trvSyntaxTree.BeginUpdate();
 
-            TreeNode nodRoot = new TreeNode(TokenTop.ToString());//新建根节点
+            TreeNode nodRoot = new TreeNode(TokenTop.ToString());//穝竊翴
             nodRoot.Tag = TokenTop;
             try
             {
-                this.LoadSyntaxTreeSubNode(nodRoot, TokenTop);//递归加载下级节点
+                this.LoadSyntaxTreeSubNode(nodRoot, TokenTop);//患耴更竊翴
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                nodRoot.Nodes.Add(new TreeNode("加载下级节点失败"));
+                nodRoot.Nodes.Add(new TreeNode("更竊翴ア毖"));
             }
 
-            this.trvSyntaxTree.Nodes.Add(nodRoot);//添加根节点到TreeView控件
+            this.trvSyntaxTree.Nodes.Add(nodRoot);//睰竊翴TreeView北ン
             this.trvSyntaxTree.EndUpdate();
         }
 
         /// <summary>
-        /// 加载语法树下级节点
+        /// 更粂猭攫竊翴
         /// </summary>
-        /// <param name="ParentNode">上级节点</param>
-        /// <param name="ParentToken">上级记号</param>
+        /// <param name="ParentNode">竊翴</param>
+        /// <param name="ParentToken">癘腹</param>
         /// <remarks>Author:Alex Leo</remarks>
         private void LoadSyntaxTreeSubNode(TreeNode ParentNode, TokenRecord ParentToken)
         {
-            //循环加载下级节点
+            //碻吏更竊翴
             for (int intIndex = 0; intIndex < ParentToken.ChildList.Count; intIndex++)
             {
                 TokenRecord TokenChild = ParentToken.ChildList[intIndex];
                 TreeNode nodChild = new TreeNode(TokenChild.ToString());
                 nodChild.Tag = TokenChild;
                 ParentNode.Nodes.Add(nodChild);
-                LoadSyntaxTreeSubNode(nodChild, TokenChild);//递归加载下级节点
+                LoadSyntaxTreeSubNode(nodChild, TokenChild);//患耴更竊翴
             }
         }
 
         /// <summary>
-        /// 插入字符串到输入文本框
+        /// 础才﹃跧ゅセ
         /// </summary>
-        /// <param name="InsertString">要插入的字符串</param>
+        /// <param name="InsertString">璶础才﹃</param>
         /// <remarks>Author:Alex Leo</remarks>
         private void InsertIntoInputRichTextBox(string InsertString)
         {
@@ -128,23 +128,23 @@ namespace ConExpress.Calculator
             this.rtbInput.Text += strBehindSelectionStart;
         }
 
-        #endregion 内部方法
+        #endregion ず场よ猭
 
 
-        #region 控件操作
+        #region 北ン巨
 
         /// <summary>
-        /// 选择树节点
+        /// 匡拒攫竊翴
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void trvSyntaxTree_AfterSelect(object sender, TreeViewEventArgs e)
         {
-            this.pgToken.SelectedObject = e.Node.Tag;//显示选中节点的TokenRecord对象到PropertyGrid控件中
+            this.pgToken.SelectedObject = e.Node.Tag;//陪ボ匡い竊翴TokenRecord癸禜PropertyGrid北ンい
         }
 
         /// <summary>
-        /// 输入框键盘检测，按F5时执行计算
+        /// 跧龄絃浪代F5磅︽璸衡
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -157,7 +157,7 @@ namespace ConExpress.Calculator
         }
 
         /// <summary>
-        /// 双击操作符树视图的节点，将选中节点的操作符插入输入框
+        /// 蛮阑巨才攫跌瓜竊翴盢匡い竊翴巨才础跧
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -179,12 +179,12 @@ namespace ConExpress.Calculator
                     default:
                         break;
                 }
-                this.ActiveControl = this.rtbInput;//设置输入框为激活控件
+                this.ActiveControl = this.rtbInput;//砞縡跧縀北ン
             }
         }
 
         /// <summary>
-        /// 允许多行输入复选框操作
+        /// す砛︽跧狡匡巨
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -201,7 +201,7 @@ namespace ConExpress.Calculator
         }
 
         /// <summary>
-        /// 点击“计算”按钮
+        /// 翴阑¨璸衡〃秙
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -210,7 +210,7 @@ namespace ConExpress.Calculator
             SyntaxAnalyse.DicVariable.Clear();
             if (this.rtbInput.Text.Trim().Replace("\n", "").Length == 0)
             {
-                this.rtbOutput.Text = "输入的表达式不能为空，请重新输入。";
+                this.rtbOutput.Text = "跧笷Αぃ叫穝跧";
             }
             else
             {
@@ -218,9 +218,9 @@ namespace ConExpress.Calculator
                 int intTotalIndex = 0;
                 this.rtbOutput.Text = "";
                 string[] strLines;
-                this.trvSyntaxTree.Nodes.Clear();//清空语法树
+                this.trvSyntaxTree.Nodes.Clear();//睲粂猭攫
 
-                if (this.rtbInput.SelectedText.Trim().Length == 0)//获取选中的代码，如果未选中，则执行全部
+                if (this.rtbInput.SelectedText.Trim().Length == 0)//莉匡い絏狦ゼ匡い玥磅︽场
                 {
                     strSource = this.rtbInput.Text;
                 }
@@ -230,32 +230,32 @@ namespace ConExpress.Calculator
                     intTotalIndex = this.rtbInput.SelectionStart;
                 }
 
-                if (this.chkAllowMultiLine.Checked)//判断是按多行执行还是单行执行
+                if (this.chkAllowMultiLine.Checked)//耞琌︽磅︽临琌虫︽磅︽
                 {
-                    strLines = strSource.Split(new char[] { '\n' });//多行则用换行符分割成多行
+                    strLines = strSource.Split(new char[] { '\n' });//︽玥ノ传︽才だ澄Θ︽
                 }
                 else
                 {
-                    strLines = new string[] { strSource.Replace("\n", "") };//单行则移除换行符成一行
+                    strLines = new string[] { strSource.Replace("\n", "") };//虫︽玥簿埃传︽才Θ︽
                 }
 
                 foreach (string Line in strLines)
                 {
-                    if (Line.Trim().Length != 0)//避免中间出现空行
+                    if (Line.Trim().Length != 0)//磷い丁瞷︽
                     {
                         try
                         {
-                            TokenRecord TokenTop = myAnalyse.Analyse(Line);//计算表达式
-                            this.rtbOutput.Text += TokenTop.GetValueString() + "\n";//显示计算结果
-                            this.LoadSyntaxTree(TokenTop);//加载语法树到TreeView控件
+                            TokenRecord TokenTop = myAnalyse.Analyse(Line);//璸衡笷Α
+                            this.rtbOutput.Text += TokenTop.GetValueString() + "\n";//陪ボ璸衡挡狦
+                            this.LoadSyntaxTree(TokenTop);//更粂猭攫TreeView北ン
                         }
                         catch (Exception ex)
                         {
-                            this.rtbOutput.Text += "发生错误\n" + ex.Message + "\n";//显示错误信息
-                            if (ex is SyntaxException)//如果是语法错误，则选中错误的代码
+                            this.rtbOutput.Text += "祇ネ岿粇\n" + ex.Message + "\n";//陪ボ岿粇獺
+                            if (ex is SyntaxException)//狦琌粂猭岿粇玥匡い岿粇絏
                             {
                                 SyntaxException myException = (SyntaxException)ex;
-                                this.ActiveControl = this.rtbInput;//设置输入框为激活控件
+                                this.ActiveControl = this.rtbInput;//砞縡跧縀北ン
                                 this.rtbInput.Select(myException.Index + intTotalIndex, myException.Length);
                             }
                             return;
@@ -267,7 +267,7 @@ namespace ConExpress.Calculator
         }//btnExecute_Click
 
         /// <summary>
-        /// 点击“退出”按钮
+        /// 翴阑¨癶〃秙
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -277,16 +277,16 @@ namespace ConExpress.Calculator
         }
 
         /// <summary>
-        /// 点击“关于”按钮
+        /// 翴阑¨闽〃秙
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnAbout_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Author: Alex Leo\nEmail: alexleo321@hotmail.com\nBlog: http://www.cnblogs.com/conexpress/", "关于", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Author: Alex Leo\nEmail: alexleo321@hotmail.com\nBlog: http://www.cnblogs.com/conexpress/", "闽", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
-        #endregion 控件操作
+        #endregion 北ン巨
 
         private void btnDraw_Click(object sender, EventArgs e)
         {

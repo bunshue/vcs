@@ -283,6 +283,7 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
         break;
 
     case ' ':
+        printf("space ");
         break;
     }
 }
@@ -315,9 +316,6 @@ void createTextureDst(GLuint* tex_cudaResult, unsigned int size_x, unsigned int 
     SDK_CHECK_ERROR_GL();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//!
-////////////////////////////////////////////////////////////////////////////////
 void deleteTexture(GLuint* tex)
 {
     glDeleteTextures(1, tex);
@@ -342,7 +340,8 @@ void FreeResource()
     deleteTexture(&tex_screen);
     deleteTexture(&tex_cudaResult);
 
-    if (iGLUTWindowHandle) {
+    if (iGLUTWindowHandle)
+    {
         glutDestroyWindow(iGLUTWindowHandle);
     }
 
@@ -379,6 +378,8 @@ bool initGL(int* argc, char** argv)
     glutInitDisplayMode(GLUT_RGBA | GLUT_ALPHA | GLUT_DOUBLE | GLUT_DEPTH);
     printf("window_width = %d, window_height = %d\n", window_width, window_height);
     glutInitWindowSize(window_width, window_height);
+    glutInitWindowPosition(1100, 200);
+
     iGLUTWindowHandle = glutCreateWindow("CUDA OpenGL post-processing");
 
     // initialize necessary OpenGL extensions
@@ -389,7 +390,6 @@ bool initGL(int* argc, char** argv)
         return false;
     }
 
-    // default initialization
     glClearColor(0.5, 0.5, 0.5, 1.0);
 
     glDisable(GL_DEPTH_TEST);

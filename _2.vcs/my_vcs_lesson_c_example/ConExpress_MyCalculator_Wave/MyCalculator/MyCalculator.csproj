@@ -161,7 +161,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Calculator.ico" />
-    <Content Include="语法定义.txt" />
+    <Content Include="語法定義.txt" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\" />

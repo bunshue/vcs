@@ -3,11 +3,10 @@
  * Unified Virtual Address Space (UVA) features new to SDK 4.0
  */
 
- // includes, system
 #include <stdlib.h>
 #include <stdio.h>
 
-// CUDA includes
+ // CUDA includes
 #include <cuda_runtime.h>
 
 // includes, project
@@ -25,12 +24,11 @@ inline bool IsAppBuiltAs64() { return sizeof(void*) == 8; }
 
 int main(int argc, char** argv)
 {
-    printf("[%s] - Starting...\n", argv[0]);
+    printf("Starting...\n");
 
     if (!IsAppBuiltAs64())
     {
-        printf("%s is only supported with on 64-bit OSs and the application must be "
-            "built as a 64-bit target.  Test is being waived.\n", argv[0]);
+        printf("%s is only supported with on 64-bit OSs and the application must be built as a 64-bit target.  Test is being waived.\n", argv[0]);
         exit(EXIT_WAIVED);
     }
 

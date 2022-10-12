@@ -1,4 +1,3 @@
-// System includes
 #include <assert.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -80,7 +79,6 @@ __global__ static void timedReduction(const float* input, float* output, clock_t
 // block per multiprocessor and that doesn't allow you to hide the latency of
 // the memory. With more than 32 the speed scales linearly.
 
-// Start the main CUDA Sample here
 int main(int argc, char** argv)
 {
     printf("CUDA Clock sample\n");

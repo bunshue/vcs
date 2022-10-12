@@ -133,10 +133,7 @@ float WrapperCUDA1(byte* ImgSrc, byte* ImgDst, int Stride, ROI Size)
 
 int main(int argc, char** argv)
 {
-    //
-    // Sample initialization
-    //
-    printf("%s Starting...\n\n", argv[0]);
+    printf("Starting...\n\n");
 
     // initialize CUDA
     findCudaDevice(argc, (const char**)argv);
@@ -167,7 +164,8 @@ int main(int argc, char** argv)
     printf("===================================\n");
     printf("Loading test image: %s... ", SampleImageFname);
 
-    if (res) {
+    if (res)
+    {
         printf("\nError: Image file not found or invalid!\n");
         exit(EXIT_FAILURE);
         return 1;

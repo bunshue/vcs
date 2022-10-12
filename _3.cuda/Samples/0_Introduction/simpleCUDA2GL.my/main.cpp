@@ -259,6 +259,7 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
         break;
 
     case ' ':
+        printf("space ");
         break;
     }
 }
@@ -290,9 +291,6 @@ void createTextureDst(GLuint* tex_cudaResult, unsigned int size_x, unsigned int 
     SDK_CHECK_ERROR_GL();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//!
-////////////////////////////////////////////////////////////////////////////////
 void deleteTexture(GLuint* tex)
 {
     glDeleteTextures(1, tex);
@@ -367,7 +365,6 @@ bool initGL(int* argc, char** argv)
         return false;
     }
 
-    // default initialization
     glClearColor(0.5, 0.5, 0.5, 1.0);
 
     glDisable(GL_DEPTH_TEST);

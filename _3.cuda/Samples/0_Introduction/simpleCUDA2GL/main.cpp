@@ -258,6 +258,7 @@ void reshape(int w, int h)
 {
     window_width = w;
     window_height = h;
+    //printf("w = %d, h = %d ", w, h);
 }
 
 void mainMenu(int i) { keyboard((unsigned char)i, 0, 0); }
@@ -461,9 +462,6 @@ bool initGL(int* argc, char** argv)
     return true;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// Program main
-////////////////////////////////////////////////////////////////////////////////
 int main(int argc, char** argv)
 {
     printf("Starting...\n\n");
@@ -497,9 +495,7 @@ int main(int argc, char** argv)
 
     initGLBuffers();
 
-    printf("\n\tControls\n"
-        "\t(right click mouse button for Menu)\n"
-        "\t[esc] - Quit\n\n");
+    printf("«ö·Æ¹«¥kÁä ©Î ESC µ²§ô\n\n");
 
     // start rendering mainloop
     glutMainLoop();

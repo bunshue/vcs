@@ -8,6 +8,7 @@
 // 窗口大小變化回調函數
 void reshape(int w, int h)
 {
+	glViewport(0, 0, w, h);
 }
 
 void mouse(int button, int state, int x, int y)
@@ -21,6 +22,44 @@ void motion(int x, int y)
 // 繪圖回調函數
 void display(void)
 {
+	float mat[16];
+	int i;
+
+	glEnable(GL_DEPTH_TEST);
+	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+	glClearDepth(1.0);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+	glGetFloatv(GL_PROJECTION_MATRIX, mat);
+	for (i = 0; i < 16; i++)
+	{
+		printf("%10.7f", mat[i]);
+		if ((i + 1) % 4) printf(" ");
+		else printf("\n");
+	}
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
+	glColor3f(1.0f, 0.0f, 0.0f); //在右上角画红色平面：应该在后面
+	glBegin(GL_POLYGON);
+	glVertex3f(0.0f, 0.0f, -1.0f + 0.001f);
+	glVertex3f(1.0f, 0.0f, -1.0f + 0.001f);
+	glVertex3f(1.0f, 1.0f, -1.0f + 0.001f);
+	glVertex3f(0.0f, 1.0f, -1.0f + 0.001f);
+	glEnd();
+	glColor3f(0.0f, 1.0f, 0.0f); //在左下角画绿色的平面：应该在前面
+	glBegin(GL_POLYGON);
+	glVertex3f(-1.0f, -1.0f, 1.0f - 0.001f);
+	glVertex3f(0.0f + 0.5f, -1.0f, 1.0f - 0.001f);
+	glVertex3f(0.0f + 0.5f, 0.0f + 0.5f, 1.0f - 0.001f);
+	glVertex3f(-1.0f, 0.0f + 0.5f, 1.0f - 0.001f);
+	glEnd();
+	glFlush();
+
 }
 
 void keyboard(unsigned char k, int /*x*/, int /*y*/)
@@ -57,12 +96,13 @@ int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
     //glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    //glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
 
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(1100, 200);
 
-    glutCreateWindow("開啟視窗");	//開啟視窗 並顯示出視窗 Title
+    glutCreateWindow("畫顏色色塊");	//開啟視窗 並顯示出視窗 Title
 
     glutDisplayFunc(display);	//設定callback function
     glutReshapeFunc(reshape);	//設定callback function
@@ -71,7 +111,7 @@ int main(int argc, char** argv)
     glutMotionFunc(motion);		//設定callback function
 
     glutMainLoop();
-
+	
     return 0;
 }
 

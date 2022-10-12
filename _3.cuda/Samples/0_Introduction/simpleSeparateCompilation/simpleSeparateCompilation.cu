@@ -1,4 +1,3 @@
-// System includes.
 #include <stdio.h>
 #include <iostream>
 
@@ -50,8 +49,10 @@ __global__ void transformVector(float* v, deviceFunc f, uint size)
     }
 }
 
-void runTest(int argc, const char** argv)
+int main(int argc, char** argv)
 {
+    cout << "Starting..." << endl;
+
     try
     {
         // This will pick the best possible CUDA capable device.
@@ -116,14 +117,6 @@ void runTest(int argc, const char** argv)
         cout << "Error occured, exiting..." << endl;
         exit(EXIT_FAILURE);
     }
-}
-
-int main(int argc, char** argv)
-{
-    cout << "Starting..." << endl;
-
-    runTest(argc, (const char**)argv);
-
     cout << "Completed, returned " << (testResult ? "OK" : "ERROR") << endl;
 
     exit(testResult ? EXIT_SUCCESS : EXIT_FAILURE);

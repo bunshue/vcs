@@ -114,7 +114,7 @@ namespace testcontrol
         #endregion
 
         /// <summary>
-        /// 应用程序的主入口点。
+        /// 莱ノ祘Α璶秈翴
         /// </summary>
         [STAThread]
         static void Main()
@@ -124,10 +124,10 @@ namespace testcontrol
 
         private void Form1_Load(object sender, System.EventArgs e)
         {
-            curr[0] = "语文";
-            curr[1] = "数学";
-            curr[2] = "化学";
-            curr[3] = "物理";
+            curr[0] = "粂ゅ";
+            curr[1] = "计厩";
+            curr[2] = "て厩";
+            curr[3] = "瞶";
         }
 
     }

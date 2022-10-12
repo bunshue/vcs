@@ -1,4 +1,3 @@
-// includes, system
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -57,14 +56,9 @@ void test_sdkWriteFile()
 
     sdkWriteFile(filename, h_odata, num_threads, 0.0f, false);
 
-
     free(h_odata);
-
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// Program main
-////////////////////////////////////////////////////////////////////////////////
 int main(int argc, char** argv)
 {
     bool bTestResult = true;

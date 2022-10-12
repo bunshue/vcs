@@ -7,7 +7,6 @@
 * transform it to the expected output, and write it to a 3D output data array.
 */
 
-// includes, system
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -94,8 +93,7 @@ __global__ void transformKernel(float* g_odata, int width, cudaTextureObject_t t
 ////////////////////////////////////////////////////////////////////////////////
 int main(int argc, char** argv)
 {
-    // use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
+    // use command-line specified CUDA device, otherwise use device with highest Gflops/s
     int devID = findCudaDevice(argc, (const char**)argv);
 
     bool bResult = true;

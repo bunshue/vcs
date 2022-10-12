@@ -7,7 +7,6 @@
 * transform it to the expected output, and write it to a 3D output data array.
 */
 
-// includes, system
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>

@@ -17,9 +17,9 @@
 
 #include "convolutionTexture_common.h"
 
-////////////////////////////////////////////////////////////////////////////////
-// Main program
-////////////////////////////////////////////////////////////////////////////////
+ ////////////////////////////////////////////////////////////////////////////////
+ // Main program
+ ////////////////////////////////////////////////////////////////////////////////
 int main(int argc, char** argv)
 {
     float* h_Kernel, * h_Input, * h_Buffer, * h_OutputCPU, * h_OutputGPU;
@@ -38,10 +38,9 @@ int main(int argc, char** argv)
     const int imageH = 3072 / 2;
     const unsigned int iterations = 10;
 
-    printf("[%s] - Starting...\n", argv[0]);
+    printf("Starting...\n");
 
-    // use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
+    // use command-line specified CUDA device, otherwise use device with highest Gflops/s
     findCudaDevice(argc, (const char**)argv);
 
     sdkCreateTimer(&hTimer);

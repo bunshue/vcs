@@ -58,6 +58,7 @@ byte *MallocPlaneByte(int width, int height, int *pStepBytes)
   //#else
   ptr = (byte *)malloc(*pStepBytes * height);
   //#endif
+  printf("MallocPlaneByte, width = %d, strides = %d\n", width, *pStepBytes);
   return ptr;
 }
 
@@ -238,11 +239,15 @@ int PreLoadBmp(char *FileName, int *Width, int *Height)
 
   fread(&InfoHeader, sizeof(BMPInfoHeader), 1, fh);
 
-  if (InfoHeader._bm_color_depth != 24) {
+  printf("圖片位元深度 : %d 位元\n", InfoHeader._bm_color_depth);
+
+  if (InfoHeader._bm_color_depth != 24)
+{
     return 3;  // invalid color depth
   }
 
-  if (InfoHeader._bm_compressed) {
+  if (InfoHeader._bm_compressed)
+{
     return 4;  // invalid compression property
   }
 
@@ -264,6 +269,8 @@ int PreLoadBmp(char *FileName, int *Width, int *Height)
 *
 * \return None
 */
+
+//僅支持位元深度24位元
 void LoadBmpAsGray(char *FileName, int Stride, ROI ImSize, byte *Img)
 {
   BMPFileHeader FileHeader;

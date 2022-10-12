@@ -104,6 +104,7 @@ int prepare_buffers(FileData& file_data, std::vector<size_t>& file_len, std::vec
     int channels;
     nvjpegChromaSubsampling_t subsampling;
 
+    printf("file_data.size() = %d\n", file_data.size());
     for (int i = 0; i < file_data.size(); i++)
     {
         std::cout << "prepare_buffers, i = " << i << ", filename = " << current_names[i] << std::endl;
@@ -432,6 +433,95 @@ double process_images(FileNames& image_names, decode_params_t& params, double& t
     return EXIT_SUCCESS;
 }
 
+double process_images2(FileNames& image_names, decode_params_t& params, double& total)
+{
+    // vector for storing raw files and file lengths
+    FileData file_data(params.batch_size);
+    std::vector<size_t> file_len(params.batch_size);
+    FileNames current_names(params.batch_size);
+    std::vector<int> widths(params.batch_size);
+    std::vector<int> heights(params.batch_size);
+    // we wrap over image files to process total_images of files
+    FileNames::iterator file_iter = image_names.begin();
+
+    std::cout << "process_images222\n資料夾 : " << params.input_dir << "\n檔案個數 : " << params.total_images << std::endl;
+    std::cout << "batch_size : " << params.batch_size << std::endl;
+
+    // stream for decoding
+    checkCudaErrors(cudaStreamCreateWithFlags(&params.stream, cudaStreamNonBlocking));
+
+    int total_processed = 0;
+
+    // output buffers
+    std::vector<nvjpegImage_t> iout(params.batch_size);
+    // output buffer sizes, for convenience
+    std::vector<nvjpegImage_t> isz(params.batch_size);
+
+    std::cout << "iout.size() : " << iout.size() << std::endl;
+    for (int i = 0; i < iout.size(); i++)
+    {
+        printf("i = %d\n", i);
+        for (int c = 0; c < NVJPEG_MAX_COMPONENT; c++)
+        {
+            iout[i].channel[c] = NULL;
+            iout[i].pitch[c] = 0;
+            isz[i].pitch[c] = 0;
+        }
+    }
+
+    double test_time = 0;
+    int warmup = 0;
+    int total_numbers = 0;
+
+    printf("\n共有 %d 個檔案\n", params.total_images);
+
+    while (total_processed < params.total_images)
+    {
+        total_numbers++;
+        printf("\n第 %d 個檔案\n", total_numbers);
+
+        if (read_next_batch(image_names, params.batch_size, file_iter, file_data, file_len, current_names))
+        {
+            return EXIT_FAILURE;
+        }
+
+        printf("get file_len = %d\n", file_len);
+
+        std::cout << "call prepare_buffers, filename = " << current_names[0] << std::endl;
+        if (prepare_buffers(file_data, file_len, widths, heights, iout, isz, current_names, params))
+        {
+            return EXIT_FAILURE;
+        }
+
+        printf("get file_len = %d\n", file_len);
+
+        double time;
+        if (decode_images(file_data, file_len, iout, params, time))
+        {
+            return EXIT_FAILURE;
+        }
+        if (warmup < params.warmup)
+        {
+            warmup++;
+        }
+        else
+        {
+            total_processed += params.batch_size;
+            test_time += time;
+        }
+
+        std::cout << "寫入檔案 W = " << widths[0] << ", H = " << heights[0] << ", name : " << current_names[0] << std::endl;
+        write_images(iout, widths, heights, params, current_names);
+    }
+    total = test_time;
+
+    release_buffers(iout);
+
+    checkCudaErrors(cudaStreamDestroy(params.stream));
+
+    return EXIT_SUCCESS;
+}
+
 // parse parameters
 int findParamIndex(const char** argv, int argc, const char* parm)
 {
@@ -532,6 +622,14 @@ int main(int argc, const char* argv[])
     {
         destroy_decoupled_api_handles(params);
     }
+
+
+    printf("測試專門開啟某一jpg檔案\n");
+    if (process_images2(image_names, params, total))
+    {
+        return EXIT_FAILURE;
+    }
+
 
     checkCudaErrors(nvjpegJpegStateDestroy(params.nvjpeg_state));
     checkCudaErrors(nvjpegDestroy(params.nvjpeg_handle));
