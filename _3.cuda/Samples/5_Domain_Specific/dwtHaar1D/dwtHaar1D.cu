@@ -117,12 +117,10 @@ void runTest(int argc, char** argv)
         printf("XXXXXXXXXXXXXXXXXXXXX\n");
         char* tmp_sfname, * tmp_rfname, * tmp_goldfname;
 
-        if ((getCmdLineArgumentString(argc, (const char**)argv, "signal",
-            &tmp_sfname) != true) ||
-            (getCmdLineArgumentString(argc, (const char**)argv, "result",
-                &tmp_rfname) != true) ||
-            (getCmdLineArgumentString(argc, (const char**)argv, "gold",
-                &tmp_goldfname) != true)) {
+        if ((getCmdLineArgumentString(argc, (const char**)argv, "signal", &tmp_sfname) != true) ||
+            (getCmdLineArgumentString(argc, (const char**)argv, "result", &tmp_rfname) != true) ||
+            (getCmdLineArgumentString(argc, (const char**)argv, "gold", &tmp_goldfname) != true))
+        {
             fprintf(stderr, "Invalid input syntax.\n%s", usage);
             exit(EXIT_FAILURE);
         }
@@ -184,8 +182,7 @@ void runTest(int argc, char** argv)
     // The very final approximation coefficient has to be written to the output
     // data, all others are reused as input data in the next global step and
     // therefore have to be written to the input data again.
-    // The following flag indicates where to copy approx_final data
-    //   - 0 is input, 1 is output
+    // The following flag indicates where to copy approx_final data - 0 is input, 1 is output
     int approx_is_input;
 
     // allocate device mem
@@ -244,8 +241,7 @@ void runTest(int argc, char** argv)
         mem_shared += ((2 * block_size.x) / NUM_BANKS) * sizeof(float);
 
         // run kernel
-        dwtHaar1D << <grid_size, block_size, mem_shared >> > (
-            d_idata, d_odata, approx_final, dlevels_step, num_threads_total_left, block_size.x);
+        dwtHaar1D << <grid_size, block_size, mem_shared >> > (d_idata, d_odata, approx_final, dlevels_step, num_threads_total_left, block_size.x);
 
         // Copy approx_final to appropriate location
         if (approx_is_input)

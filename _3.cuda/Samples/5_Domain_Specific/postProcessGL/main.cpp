@@ -708,16 +708,8 @@ void deleteFramebuffer(GLuint* fbo) {
 ////////////////////////////////////////////////////////////////////////////////
 // Program main
 ////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char** argv) {
-#if defined(__linux__)
-    char* Xstatus = getenv("DISPLAY");
-    if (Xstatus == NULL) {
-        printf("Waiving execution as X server is not running\n");
-        exit(EXIT_WAIVED);
-    }
-    setenv("DISPLAY", ":0", 0);
-#endif
-
+int main(int argc, char** argv)
+{
     printf("%s Starting...\n\n", argv[0]);
 
     if (checkCmdLineFlag(argc, (const char**)argv, "radius") &&

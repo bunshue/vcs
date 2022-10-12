@@ -936,12 +936,9 @@ void showHelp() {
 ////////////////////////////////////////////////////////////////////////////////
 // Program main
 ////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
     bool bTestResults = true;
-
-#if defined(__linux__)
-    setenv("DISPLAY", ":0", 0);
-#endif
 
     if (checkCmdLineFlag(argc, (const char**)argv, "help")) {
         printf("\n> Command line options\n");

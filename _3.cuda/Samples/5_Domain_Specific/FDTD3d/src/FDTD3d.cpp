@@ -51,26 +51,15 @@ void showHelp(const int argc, const char** argv)
 
     std::cout << std::endl << "Syntax:" << std::endl;
     std::cout << std::left;
-    std::cout << "    " << std::setw(20) << "--device=<device>"
-        << "Specify device to use for execution" << std::endl;
-    std::cout << "    " << std::setw(20) << "--dimx=<N>"
-        << "Specify number of elements in x direction (excluding halo)"
-        << std::endl;
-    std::cout << "    " << std::setw(20) << "--dimy=<N>"
-        << "Specify number of elements in y direction (excluding halo)"
-        << std::endl;
-    std::cout << "    " << std::setw(20) << "--dimz=<N>"
-        << "Specify number of elements in z direction (excluding halo)"
-        << std::endl;
-    std::cout << "    " << std::setw(20) << "--radius=<N>"
-        << "Specify radius of stencil" << std::endl;
-    std::cout << "    " << std::setw(20) << "--timesteps=<N>"
-        << "Specify number of timesteps" << std::endl;
-    std::cout << "    " << std::setw(20) << "--block-size=<N>"
-        << "Specify number of threads per block" << std::endl;
+    std::cout << "    " << std::setw(20) << "--device=<device>" << "Specify device to use for execution" << std::endl;
+    std::cout << "    " << std::setw(20) << "--dimx=<N>" << "Specify number of elements in x direction (excluding halo)" << std::endl;
+    std::cout << "    " << std::setw(20) << "--dimy=<N>" << "Specify number of elements in y direction (excluding halo)" << std::endl;
+    std::cout << "    " << std::setw(20) << "--dimz=<N>" << "Specify number of elements in z direction (excluding halo)" << std::endl;
+    std::cout << "    " << std::setw(20) << "--radius=<N>" << "Specify radius of stencil" << std::endl;
+    std::cout << "    " << std::setw(20) << "--timesteps=<N>" << "Specify number of timesteps" << std::endl;
+    std::cout << "    " << std::setw(20) << "--block-size=<N>" << "Specify number of threads per block" << std::endl;
     std::cout << std::endl;
-    std::cout << "    " << std::setw(20) << "--noprompt"
-        << "Skip prompt before exit" << std::endl;
+    std::cout << "    " << std::setw(20) << "--noprompt" << "Skip prompt before exit" << std::endl;
     std::cout << std::endl;
 }
 
@@ -145,26 +134,31 @@ bool runTest(int argc, const char** argv)
     // Parse command line arguments
     if (checkCmdLineFlag(argc, argv, "dimx"))
     {
+        printf("XXXXXXXXXXXXXXXXXXX\n");
         dimx = CLAMP(getCmdLineArgumentInt(argc, argv, "dimx"), k_dim_min, k_dim_max);
     }
 
     if (checkCmdLineFlag(argc, argv, "dimy"))
     {
+        printf("XXXXXXXXXXXXXXXXXXX\n");
         dimy = CLAMP(getCmdLineArgumentInt(argc, argv, "dimy"), k_dim_min, k_dim_max);
     }
 
     if (checkCmdLineFlag(argc, argv, "dimz"))
     {
+        printf("XXXXXXXXXXXXXXXXXXX\n");
         dimz = CLAMP(getCmdLineArgumentInt(argc, argv, "dimz"), k_dim_min, k_dim_max);
     }
 
     if (checkCmdLineFlag(argc, argv, "radius"))
     {
+        printf("XXXXXXXXXXXXXXXXXXX\n");
         radius = CLAMP(getCmdLineArgumentInt(argc, argv, "radius"), k_radius_min, k_radius_max);
     }
 
     if (checkCmdLineFlag(argc, argv, "timesteps"))
     {
+        printf("XXXXXXXXXXXXXXXXXXX\n");
         timesteps = CLAMP(getCmdLineArgumentInt(argc, argv, "timesteps"), k_timesteps_min, k_timesteps_max);
     }
 

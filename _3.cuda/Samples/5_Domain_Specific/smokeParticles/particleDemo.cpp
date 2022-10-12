@@ -827,18 +827,15 @@ void initGL(int *argc, char **argv) {
 ////////////////////////////////////////////////////////////////////////////////
 // Program main
 ////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char **argv) {
-#if defined(__linux__)
-  setenv("DISPLAY", ":0", 0);
-#endif
-
+int main(int argc, char **argv)
+{
   printf("%s Starting...\n\n", sSDKsample);
 
-  printf(
-      "NOTE: The CUDA Samples are not meant for performance measurements. "
+  printf(      "NOTE: The CUDA Samples are not meant for performance measurements. "
       "Results may vary when GPU Boost is enabled.\n\n");
 
-  if (argc > 1) {
+  if (argc > 1)
+  {
     if (checkCmdLineFlag(argc, (const char **)argv, "n")) {
       numParticles = getCmdLineArgumentInt(argc, (const char **)argv, "n");
     }

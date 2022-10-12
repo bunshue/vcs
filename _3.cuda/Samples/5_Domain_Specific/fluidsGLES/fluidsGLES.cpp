@@ -660,10 +660,6 @@ int main(int argc, char **argv)
     int devID;
     cudaDeviceProp deviceProps;
 
-#if defined(__linux__)
-    setenv ("DISPLAY", ":0", 0);
-#endif
-
     printf("%s Starting...\n\n", sSDKname);
 
     printf("NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.\n\n");

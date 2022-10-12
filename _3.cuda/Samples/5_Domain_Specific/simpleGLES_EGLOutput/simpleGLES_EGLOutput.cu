@@ -506,24 +506,22 @@ bool runTest(int argc, char **argv, char *ref_file) {
 ////////////////////////////////////////////////////////////////////////////////
 // Program main
 ////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
   char *ref_file = NULL;
 
   pArgc = &argc;
   pArgv = argv;
 
-#if defined(__linux__)
-  setenv("DISPLAY", ":0", 0);
-#endif
-
   printf("%s starting...\n", sSDKsample);
 
-  if (argc > 1) {
-    if (checkCmdLineFlag(argc, (const char **)argv, "file")) {
+  if (argc > 1)
+  {
+    if (checkCmdLineFlag(argc, (const char **)argv, "file"))
+    {
       // In this mode, we run without OpenGL and see if VBO is generated
       // correctly
-      getCmdLineArgumentString(argc, (const char **)argv, "file",
-                               (char **)&ref_file);
+      getCmdLineArgumentString(argc, (const char **)argv, "file",                               (char **)&ref_file);
     }
   }
 

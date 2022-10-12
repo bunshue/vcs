@@ -350,13 +350,10 @@ void runAutoTest(int argc, char** argv) {
 ////////////////////////////////////////////////////////////////////////////////
 // Program main
 ////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char** argv) {
+int main(int argc, char** argv)
+{
     pArgc = &argc;
     pArgv = argv;
-
-#if defined(__linux__)
-    setenv("DISPLAY", ":0", 0);
-#endif
 
     printf("[%s] - Starting...\n", argv[0]);
 

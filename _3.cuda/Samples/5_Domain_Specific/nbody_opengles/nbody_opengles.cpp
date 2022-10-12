@@ -1,30 +1,3 @@
-/* Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *  * Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  * Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *  * Neither the name of NVIDIA CORPORATION nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
 #include <X11/Xlib.h>
 #include <GLES2/gl2.h>
 #include <EGL/egl.h>
@@ -829,35 +802,30 @@ void showHelp() {
 //////////////////////////////////////////////////////////////////////////////
 // Program main
 //////////////////////////////////////////////////////////////////////////////
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
   bool bTestResults = true;
 
-#if defined(__linux__)
-  setenv("DISPLAY", ":0", 0);
-#endif
-
-  if (checkCmdLineFlag(argc, (const char **)argv, "help")) {
+  if (checkCmdLineFlag(argc, (const char **)argv, "help"))
+  {
     printf("\n> Command line options\n");
     showHelp();
     return 0;
   }
 
-  printf(
-      "Run \"nbody_opengles -benchmark [-numbodies=<numBodies>]\" to measure "
-      "performance.\n");
+  printf(      "Run \"nbody_opengles -benchmark [-numbodies=<numBodies>]\" to measure performance.\n");
   showHelp();
 
-  bFullscreen =
-      (checkCmdLineFlag(argc, (const char **)argv, "fullscreen") != 0);
+  bFullscreen =      (checkCmdLineFlag(argc, (const char **)argv, "fullscreen") != 0);
 
-  if (bFullscreen) {
+  if (bFullscreen)
+  {
     bShowSliders = false;
   }
 
   benchmark = (checkCmdLineFlag(argc, (const char **)argv, "benchmark") != 0);
 
-  compareToCPU =
-      ((checkCmdLineFlag(argc, (const char **)argv, "compare") != 0) ||
+  compareToCPU =      ((checkCmdLineFlag(argc, (const char **)argv, "compare") != 0) ||
        (checkCmdLineFlag(argc, (const char **)argv, "qatest") != 0));
 
   QATest = (checkCmdLineFlag(argc, (const char **)argv, "qatest") != 0);
@@ -868,36 +836,41 @@ int main(int argc, char **argv) {
 
   useCpu = (checkCmdLineFlag(argc, (const char **)argv, "cpu") != 0);
 
-  if (checkCmdLineFlag(argc, (const char **)argv, "numdevices")) {
-    numDevsRequested =
-        getCmdLineArgumentInt(argc, (const char **)argv, "numdevices");
+  if (checkCmdLineFlag(argc, (const char **)argv, "numdevices"))
+  {
+    numDevsRequested =        getCmdLineArgumentInt(argc, (const char **)argv, "numdevices");
 
-    if (numDevsRequested < 1) {
-      printf(
-          "Error: \"number of CUDA devices\" specified %d is invalid.  Value "
-          "should be >= 1\n",
+    if (numDevsRequested < 1)
+    {
+      printf(          "Error: \"number of CUDA devices\" specified %d is invalid.  Value should be >= 1\n",
           numDevsRequested);
       exit(bTestResults ? EXIT_SUCCESS : EXIT_FAILURE);
-    } else {
+    }
+    else
+    {
       printf("number of CUDA devices  = %d\n", numDevsRequested);
     }
   }
 
-  if (checkCmdLineFlag(argc, (const char **)argv, "dispno")) {
+  if (checkCmdLineFlag(argc, (const char **)argv, "dispno"))
+  {
     dispno = getCmdLineArgumentInt(argc, (const char **)argv, "dispno");
   }
 
-  if (checkCmdLineFlag(argc, (const char **)argv, "width")) {
+  if (checkCmdLineFlag(argc, (const char **)argv, "width"))
+  {
     window_width = getCmdLineArgumentInt(argc, (const char **)argv, "width");
   }
 
-  if (checkCmdLineFlag(argc, (const char **)argv, "height")) {
+  if (checkCmdLineFlag(argc, (const char **)argv, "height"))
+  {
     window_height = getCmdLineArgumentInt(argc, (const char **)argv, "height");
   }
 
   // for multi-device we currently require using host memory -- the devices
   // share data via the host
-  if (numDevsRequested > 1) {
+  if (numDevsRequested > 1)
+  {
     useHostMem = true;
   }
 
@@ -905,23 +878,22 @@ int main(int argc, char **argv) {
   bool customGPU = false;
   cudaGetDeviceCount(&numDevsAvailable);
 
-  if (numDevsAvailable < numDevsRequested) {
-    printf("Error: only %d Devices available, %d requested.  Exiting.\n",
-           numDevsAvailable, numDevsRequested);
+  if (numDevsAvailable < numDevsRequested)
+  {
+    printf("Error: only %d Devices available, %d requested.  Exiting.\n",           numDevsAvailable, numDevsRequested);
     exit(EXIT_SUCCESS);
   }
 
   printf("> %s mode\n", bFullscreen ? "Fullscreen" : "Windowed");
-  printf("> Simulation data stored in %s memory\n",
-         useHostMem ? "system" : "video");
-  printf("> %s precision floating point simulation\n",
-         fp64 ? "Double" : "Single");
+  printf("> Simulation data stored in %s memory\n",         useHostMem ? "system" : "video");
+  printf("> %s precision floating point simulation\n",         fp64 ? "Double" : "Single");
   printf("> %d Devices used for simulation\n", numDevsRequested);
 
   int devID;
   cudaDeviceProp props;
 
-  if (useCpu) {
+  if (useCpu)
+  {
     useHostMem = true;
     compareToCPU = false;
     bSupportDouble = true;
@@ -933,12 +905,15 @@ int main(int argc, char **argv) {
 #endif
   }
 
-  if (!benchmark && !compareToCPU) {
+  if (!benchmark && !compareToCPU)
+  {
     initGL(&argc, argv);
   }
 
-  if (!useCpu) {
-    if (checkCmdLineFlag(argc, (const char **)argv, "device")) {
+  if (!useCpu)
+  {
+    if (checkCmdLineFlag(argc, (const char **)argv, "device"))
+    {
       customGPU = true;
     }
 
@@ -958,7 +933,8 @@ int main(int argc, char **argv) {
     bSupportDouble = true;
 
     // Initialize devices
-    if (numDevsRequested > 1 && customGPU) {
+    if (numDevsRequested > 1 && customGPU)
+    {
       printf("You can't use --numdevices and --device at the same time.\n");
       exit(EXIT_SUCCESS);
     }

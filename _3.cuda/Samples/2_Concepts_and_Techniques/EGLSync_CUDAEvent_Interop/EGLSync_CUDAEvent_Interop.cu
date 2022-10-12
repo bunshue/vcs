@@ -148,11 +148,8 @@ extern "C" cudaError_t cudaGetValueMismatch();
 
 //-----------------------FUNCTION DEFINITIONS------------------------//
 
-int main(int argc, char *argv[]) {
-#if defined(__linux__)
-  setenv("DISPLAY", ":0", 0);
-#endif
-
+int main(int argc, char *argv[])
+{
   parseCmdLine(argc, argv);
   atexit(exitHandler);
 
@@ -253,10 +250,6 @@ void checkSync(int argc, char **argv) {
         "EGLSync_CUDAEvent_Interop does not support dGPU. Waiving sample.\n");
     cleanup(WAIVED);
   }
-
-#if (defined(__arm__) || defined(__aarch64__)) && defined(__linux__)
-  graphics_setup_window(0, 0, width, height, "EGLSync_CUDA_Interop");
-#endif
 
   pSurf_read = (unsigned char *)malloc(bufferSize);
   pSurf_write = (unsigned char *)malloc(bufferSize);

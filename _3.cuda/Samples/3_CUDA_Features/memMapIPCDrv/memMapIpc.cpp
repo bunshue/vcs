@@ -53,20 +53,9 @@ bool findModulePath(const char*, string&, char**, string&);
 // CU_MEM_HANDLE_TYPE_WIN32 meaning that NT HANDLEs will be used. The
 // ipcHandleTypeFlag variable is a convenience variable and is passed by value
 // to individual requests.
-#if defined(__linux__)
-CUmemAllocationHandleType ipcHandleTypeFlag =
-CU_MEM_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR;
-#else
 CUmemAllocationHandleType ipcHandleTypeFlag = CU_MEM_HANDLE_TYPE_WIN32;
-#endif
 
-#if defined(__linux__)
-#define cpu_atomic_add32(a, x) __sync_add_and_fetch(a, x)
-#elif defined(WIN32) || defined(_WIN32) || defined(WIN64) || defined(_WIN64)
 #define cpu_atomic_add32(a, x) InterlockedAdd((volatile LONG *)a, x)
-#else
-#error Unsupported system
-#endif
 
 CUmodule cuModule;
 CUfunction _memMapIpc_kernel;
