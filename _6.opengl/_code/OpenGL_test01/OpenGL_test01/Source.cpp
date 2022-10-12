@@ -14,6 +14,8 @@
 
 int display_mode = 1;
 
+int full_screen = 0;
+
 #define NGRID 6
 
 double pnts[][2] = {
@@ -502,6 +504,27 @@ static void keyboard(unsigned char key, int x, int y)
 {
     switch (key)
     {
+    case 27:
+        glutDestroyWindow(glutGetWindow());
+        return;
+        break;
+    case ' ':
+        if (full_screen == 0)
+        {
+            full_screen = 1;
+            printf("全螢幕\n");
+            glutFullScreen();
+        }
+        else
+        {
+            //恢復成一般螢幕, 有問題
+
+            full_screen = 0;
+            printf("一般螢幕\n");
+            glutInitWindowSize(600, 600);       // 設定視窗大小
+            glutInitWindowPosition(1100, 200);  // 設定視窗位置
+        }
+        break;
     case '0':
         display_mode = 0;
         break;
@@ -551,15 +574,17 @@ static void keyboard(unsigned char key, int x, int y)
         display_mode = 14;
         break;
     case 'f':
-        printf("全螢幕\n");
         display_mode = 15;
-        glutFullScreen();
         break;
-    case 27:
-        exit(0);
     }
 
     glutPostRedisplay();
+
+    /*
+    char info[10];
+    sprintf(info, "%d", (char)display_mode);
+    glutSetWindowTitle(info);
+    */
 }
 
 void mainMenu(int i) { keyboard(i, 0, 0); }

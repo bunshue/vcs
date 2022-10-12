@@ -81,27 +81,29 @@ template <typename T_ELEM>
 void fillupMatrix(T_ELEM* A, int lda, int rows, int cols, int seed = 0);
 
 template <typename T_ELEM>
-void fillupMatrix(T_ELEM* A, int lda, int rows, int cols, int seed) {
-    for (int j = 0; j < cols; j++) {
-        for (int i = 0; i < rows; i++) {
+void fillupMatrix(T_ELEM* A, int lda, int rows, int cols, int seed)
+{
+    for (int j = 0; j < cols; j++)
+    {
+        for (int i = 0; i < rows; i++)
+        {
             A[i + lda * j] = cuGet<T_ELEM>(
-                ((double)(((lda * i + j + seed) % 253) + 1)) / 256.0,
-                ((double)((((cols * i + j) + 123 + seed) % 253) + 1)) / 256.0);
+                ((double)(((lda * i + j + seed) % 253) + 1)) / 256.0, ((double)((((cols * i + j) + 123 + seed) % 253) + 1)) / 256.0);
         }
     }
 }
 /* Explicit instantiation */
-template void fillupMatrix<float>(float* A, int lda, int rows, int cols,
-    int seed);
-template void fillupMatrix<double>(double* A, int lda, int rows, int cols,
-    int seed);
+template void fillupMatrix<float>(float* A, int lda, int rows, int cols, int seed);
+template void fillupMatrix<double>(double* A, int lda, int rows, int cols, int seed);
 
 /* For debugging */
-void printCuType(const char* str, float A) {
+void printCuType(const char* str, float A)
+{
     fprintf(stdout, "%s (0x%08x, %g)", str, floatAsUInt(A), A);
 }
 
-void printCuType(const char* str, double A) {
+void printCuType(const char* str, double A)
+{
     fprintf(stdout, "%s (0x%016llx, %g)", str, doubleAsULL(A), A);
 }
 
@@ -163,31 +165,24 @@ struct gemmTestParams {
 // template wrappers for cuda functions
 //==============================================================================
 
-static inline cublasStatus_t cublasXgemm(cublasHandle_t handle,
-    cublasOperation_t transa,
-    cublasOperation_t transb, int m, int n,
-    int k, float* alpha, const float* A,
-    int lda, float* B, int ldb,
-    float* beta, float* C, int ldc) {
-    return cublasSgemm(handle, transa, transb, m, n, k, alpha, A, lda, B, ldb,
-        beta, C, ldc);
+static inline cublasStatus_t cublasXgemm(cublasHandle_t handle, cublasOperation_t transa,
+    cublasOperation_t transb, int m, int n, int k, float* alpha, const float* A,
+    int lda, float* B, int ldb, float* beta, float* C, int ldc)
+{
+    return cublasSgemm(handle, transa, transb, m, n, k, alpha, A, lda, B, ldb, beta, C, ldc);
 }
 
-static inline cublasStatus_t cublasXgemm(cublasHandle_t handle,
-    cublasOperation_t transa,
-    cublasOperation_t transb, int m, int n,
-    int k, double* alpha, const double* A,
-    int lda, double* B, int ldb,
-    double* beta, double* C, int ldc) {
-    return cublasDgemm(handle, transa, transb, m, n, k, alpha, A, lda, B, ldb,
-        beta, C, ldc);
+static inline cublasStatus_t cublasXgemm(cublasHandle_t handle, cublasOperation_t transa,
+    cublasOperation_t transb, int m, int n, int k, double* alpha, const double* A,
+    int lda, double* B, int ldb, double* beta, double* C, int ldc)
+{
+    return cublasDgemm(handle, transa, transb, m, n, k, alpha, A, lda, B, ldb, beta, C, ldc);
 }
 
 static inline cublasStatus_t cublasXgemmBatched(
-    cublasHandle_t handle, cublasOperation_t transa, cublasOperation_t transb,
-    int m, int n, int k, float* alpha, const float* Aarray[], int lda,
-    const float* Barray[], int ldb, float* beta, float* Carray[], int ldc,
-    int batchCount) {
+    cublasHandle_t handle, cublasOperation_t transa, cublasOperation_t transb, int m, int n, int k, float* alpha, const float* Aarray[], int lda,
+    const float* Barray[], int ldb, float* beta, float* Carray[], int ldc, int batchCount)
+{
 #if CUDART_VERSION >= 4010
     return cublasSgemmBatched(handle, transa, transb, m, n, k, alpha, Aarray, lda,
         Barray, ldb, beta, Carray, ldc, batchCount);
@@ -196,11 +191,10 @@ static inline cublasStatus_t cublasXgemmBatched(
 #endif
 }
 
-static inline cublasStatus_t cublasXgemmBatched(
-    cublasHandle_t handle, cublasOperation_t transa, cublasOperation_t transb,
-    int m, int n, int k, double* alpha, const double* Aarray[], int lda,
-    const double* Barray[], int ldb, double* beta, double* Carray[], int ldc,
-    int batchCount) {
+static inline cublasStatus_t cublasXgemmBatched(cublasHandle_t handle, cublasOperation_t transa, cublasOperation_t transb,
+    int m, int n, int k, double* alpha, const double* Aarray[], int lda, const double* Barray[], int ldb, double* beta, double* Carray[], int ldc,
+    int batchCount)
+{
 #if CUDART_VERSION >= 4010
     return cublasDgemmBatched(handle, transa, transb, m, n, k, alpha, Aarray, lda,
         Barray, ldb, beta, Carray, ldc, batchCount);
@@ -265,14 +259,12 @@ static int processArgs(int argc, char* argv[], struct gemmOpts* opts)
 
 template <typename T_ELEM>
 static int TESTGEN(gemm)(const struct gemmOpts* opts, int matrixM, int matrixN,
-    int matrixK, int& numTests,
-    struct gemmTestParams<T_ELEM>* params) {
+    int matrixK, int& numTests, struct gemmTestParams<T_ELEM>* params)
+{
     static T_ELEM alpha[] = { cuGet<T_ELEM>(0, 0), cuGet<T_ELEM>(-1, -1),
-                             cuGet<T_ELEM>(1, -2), cuGet<T_ELEM>(2, -1),
-                             cuGet<T_ELEM>(0, -3) };
+                             cuGet<T_ELEM>(1, -2), cuGet<T_ELEM>(2, -1),                             cuGet<T_ELEM>(0, -3) };
     static T_ELEM beta[] = { cuGet<T_ELEM>(0, 0), cuGet<T_ELEM>(-1, -1),
-                            cuGet<T_ELEM>(1, -2), cuGet<T_ELEM>(2, -1),
-                            cuGet<T_ELEM>(0, -3) };
+                            cuGet<T_ELEM>(1, -2), cuGet<T_ELEM>(2, -1),                            cuGet<T_ELEM>(0, -3) };
 
 #define NBR_ALPHAS (sizeof(alpha) / sizeof(alpha[0]))
 #define NBR_BETAS (sizeof(beta) / sizeof(beta[0]))
@@ -301,8 +293,7 @@ static int TESTGEN(gemm)(const struct gemmOpts* opts, int matrixM, int matrixN,
     params->alpha = theAlpha;
     params->beta = theBeta;
 
-    printf("#### args: ta=%d tb=%d m=%d n=%d k=%d ", (unsigned int)params->transa,
-        (unsigned int)params->transb, params->m, params->n, params->k);
+    printf("#### args: ta=%d tb=%d m=%d n=%d k=%d ", (unsigned int)params->transa, (unsigned int)params->transb, params->m, params->n, params->k);
     printCuType(" alpha =", params->alpha);
     printCuType(" beta=", params->beta);
     printf("\n");
@@ -495,8 +486,7 @@ int test_gemm_loop(struct gemmOpts& opts, float err, double max_relative_error, 
             {
                 cudaError_t cudaStatus = cudaGetLastError();
                 CLEANUP();
-                fprintf(stderr, "!!!! GPU program execution error : cublas Error=%d, cuda Error=%d,(%s)\n",
-                    status1, cudaStatus, cudaGetErrorString(cudaStatus));
+                fprintf(stderr, "!!!! GPU program execution error : cublas Error=%d, cuda Error=%d,(%s)\n", status1, cudaStatus, cudaGetErrorString(cudaStatus));
                 return CUBLASTEST_FAILED;
             }
         }
@@ -505,16 +495,13 @@ int test_gemm_loop(struct gemmOpts& opts, float err, double max_relative_error, 
             for (int i = 0; i < opts.N; i++)
             {
                 cublasSetStream(handle, streamArray[i]);
-                status1 =
-                    cublasXgemm(handle, params.transa, params.transb, params.m,
-                        params.n, params.k, &params.alpha, devPtrA[i], rowsA, devPtrB[i], rowsB, &params.beta, devPtrC[i], rowsC);
+                status1 = cublasXgemm(handle, params.transa, params.transb, params.m, params.n, params.k, &params.alpha, devPtrA[i], rowsA, devPtrB[i], rowsB, &params.beta, devPtrC[i], rowsC);
 
                 if (status1 != CUBLAS_STATUS_SUCCESS)
                 {
                     cudaError_t cudaStatus = cudaGetLastError();
                     CLEANUP();
-                    fprintf(stderr, "!!!! GPU program execution error : cublas Error=%d, cuda Error=%d,(%s)\n",
-                        status1, cudaStatus, cudaGetErrorString(cudaStatus));
+                    fprintf(stderr, "!!!! GPU program execution error : cublas Error=%d, cuda Error=%d,(%s)\n", status1, cudaStatus, cudaGetErrorString(cudaStatus));
                     return CUBLASTEST_FAILED;
                 }
             }
@@ -522,23 +509,21 @@ int test_gemm_loop(struct gemmOpts& opts, float err, double max_relative_error, 
 
         cudaError_t cudaStatus = cudaDeviceSynchronize();
 
-        if (cudaStatus != cudaSuccess) {
+        if (cudaStatus != cudaSuccess)
+        {
             CLEANUP();
-            fprintf(stderr, "!!!! GPU program execution error on cudaDeviceSynchronize : cudaError=%d,(%s)\n",
-                cudaStatus, cudaGetErrorString(cudaStatus));
+            fprintf(stderr, "!!!! GPU program execution error on cudaDeviceSynchronize : cudaError=%d,(%s)\n", cudaStatus, cudaGetErrorString(cudaStatus));
             return CUBLASTEST_FAILED;
         }
 
         stop = second();
 
-        fprintf(stdout, "^^^^ elapsed = %10.8f sec  GFLOPS=%g\n", (stop - start),
-            opts.N * (1e-9 * flopsCoef * params.m * params.n * params.k) / (stop - start));
+        fprintf(stdout, "^^^^ elapsed = %10.8f sec  GFLOPS=%g\n", (stop - start), opts.N * (1e-9 * flopsCoef * params.m * params.n * params.k) / (stop - start));
 
     }  // end while (TESTGEN..
 
     CLEANUP();
-    fprintf(stdout, "@@@@ %cgemm test %s\n", *opts.elem_type,
-        errors ? "FAIL" : "OK");
+    fprintf(stdout, "@@@@ %cgemm test %s\n", *opts.elem_type, errors ? "FAIL" : "OK");
     return CUBLASTEST_PASSED;
 }
 

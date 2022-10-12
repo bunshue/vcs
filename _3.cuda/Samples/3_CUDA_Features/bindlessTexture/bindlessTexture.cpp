@@ -49,7 +49,6 @@ StopWatchInterface* timer = NULL;
 uint* d_output = NULL;
 
 // Auto-Verification Code
-const int frameCheckNumber = 4;
 int fpsCount = 0;  // FPS count for averaging
 int fpsLimit = 1;  // FPS limit for sampling
 int g_Index = 0;
@@ -248,6 +247,8 @@ void initGL(int* argc, char** argv)
 
 void runAutoTest(const char* ref_file, char* exec_path)
 {
+    printf("XXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
+
     size_t windowBytes = windowSize.x * windowSize.y * sizeof(GLubyte) * 4;
 
     checkCudaErrors(cudaMalloc((void**)&d_output, windowBytes));
@@ -260,6 +261,8 @@ void runAutoTest(const char* ref_file, char* exec_path)
 
     void* h_output = malloc(windowBytes);
     checkCudaErrors(cudaMemcpy(h_output, d_output, windowBytes, cudaMemcpyDeviceToHost));
+
+    //«O¯d³o­Ó
     sdkDumpBin(h_output, (unsigned int)windowBytes, "bindlessTexture.bin");
 
     bool bTestResult = sdkCompareBin2BinFloat("bindlessTexture.bin", sdkFindFilePath(ref_file, exec_path), windowSize.x * windowSize.y, MAX_EPSILON_ERROR, THRESHOLD, exec_path);
@@ -276,6 +279,8 @@ void runAutoTest(const char* ref_file, char* exec_path)
 
 void loadImageData(const char* exe_path)
 {
+    printf("\nloadImageData, filename : %s\n", exe_path);
+
     std::vector<Image> images;
 
     for (size_t i = 0; i < sizeof(imageFilenames) / sizeof(imageFilenames[0]); i++)
@@ -283,29 +288,17 @@ void loadImageData(const char* exe_path)
         unsigned int imgWidth = 0;
         unsigned int imgHeight = 0;
         uchar* imgData = NULL;
-        const char* imgPath = 0;
         const char* imgFilename = imageFilenames[i];
 
-        if (exe_path)
-        {
-            imgPath = sdkFindFilePath(imgFilename, exe_path);
-        }
-
-        if (imgPath == 0)
-        {
-            printf("Error finding image file '%s'\n", imgFilename);
-            exit(EXIT_FAILURE);
-        }
-
-        sdkLoadPPM4(imgPath, (unsigned char**)&imgData, &imgWidth, &imgHeight);
+        sdkLoadPPM4(imgFilename, (unsigned char**)&imgData, &imgWidth, &imgHeight);
 
         if (!imgData)
         {
-            printf("Error opening file '%s'\n", imgPath);
+            printf("Error opening file '%s'\n", imgFilename);
             exit(EXIT_FAILURE);
         }
 
-        printf("Loaded '%s', %d x %d pixels\n", imgPath, imgWidth, imgHeight);
+        printf("Loaded '%s', %d X %d pixels\n", imgFilename, imgWidth, imgHeight);
 
         checkHost(imgWidth > 1);
         checkHost(imgHeight > 1);
@@ -315,7 +308,6 @@ void loadImageData(const char* exe_path)
         img.h_data = imgData;
         images.push_back(img);
     }
-
     initAtlasAndImages(&images[0], images.size(), atlasSize);
 }
 
@@ -330,12 +322,6 @@ int main(int argc, char** argv)
 
     printf("Starting...\n\n");
 
-    if (checkCmdLineFlag(argc, (const char**)argv, "file"))
-    {
-        fpsLimit = frameCheckNumber;
-        getCmdLineArgumentString(argc, (const char**)argv, "file", &ref_file);
-    }
-
     srand(15234);
 
     // use command-line specified CUDA device, otherwise use device with highest
@@ -344,28 +330,33 @@ int main(int argc, char** argv)
 
     if (!ref_file)
     {
+        printf("here\n");
+
         initGL(&argc, argv);
 
         // OpenGL buffers
         initGLBuffers();
     }
 
+    printf("11111\n");
     if (!checkCudaCapabilities(3, 0))
     {
+        printf("XXXXXXX\n");
         cleanup();
 
         exit(EXIT_WAIVED);
     }
+    printf("22222\n");
 
     loadImageData(argv[0]);
 
     if (ref_file)
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
         runAutoTest(ref_file, argv[0]);
     }
 
-    printf(
-        "Press space to toggle animation\n"
+    printf("\nPress space to toggle animation\n"
         "Press '+' and '-' to change lod level\n"
         "Press 'r' to randomize virtual atlas\n");
 

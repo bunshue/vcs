@@ -338,9 +338,7 @@ void solvePoissonEquation(cudaLibXtDesc* d_ft, cudaLibXtDesc* d_ft_k, float** k,
     {
         device = d_ft_k->descriptor->GPUs[i];
         cudaSetDevice(device);
-        solvePoisson << <dimGrid, dimBlock >> > (
-            (cufftComplex*)d_ft->descriptor->data[i],
-            (cufftComplex*)d_ft_k->descriptor->data[i], k[i], N, i, nGPUs);
+        solvePoisson << <dimGrid, dimBlock >> > ((cufftComplex*)d_ft->descriptor->data[i], (cufftComplex*)d_ft_k->descriptor->data[i], k[i], N, i, nGPUs);
     }
 
     // Wait for device to finish all operation

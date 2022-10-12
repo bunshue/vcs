@@ -144,7 +144,8 @@ int main(int argc, char** argv)
     int devID = findCudaDevice(argc, (const char**)argv);
     printf("GPU selected Device ID = %d \n", devID);
 
-    if (devID < 0) {
+    if (devID < 0)
+    {
         printf("Invalid GPU device %d selected,  exiting...\n", devID);
         exit(EXIT_SUCCESS);
     }
@@ -152,8 +153,7 @@ int main(int argc, char** argv)
     checkCudaErrors(cudaGetDeviceProperties(&deviceProp, devID));
 
     /* Statistics about the GPU device */
-    printf("> GPU device has %d Multi-Processors, SM %d.%d compute capabilities\n\n",
-        deviceProp.multiProcessorCount, deviceProp.major, deviceProp.minor);
+    printf("> GPU device has %d Multi-Processors, SM %d.%d compute capabilities\n\n", deviceProp.multiProcessorCount, deviceProp.major, deviceProp.minor);
 
     /* Generate a Laplace matrix in CSR (Compressed Sparse Row) format */
     M = N = 16384;
@@ -202,9 +202,7 @@ int main(int argc, char** argv)
 
     /* Wrap raw data into cuSPARSE generic API objects */
     cusparseSpMatDescr_t matA = NULL;
-    checkCudaErrors(cusparseCreateCsr(&matA, N, N, nz, d_row, d_col, d_val,
-        CUSPARSE_INDEX_32I, CUSPARSE_INDEX_32I,
-        CUSPARSE_INDEX_BASE_ZERO, CUDA_R_32F));
+    checkCudaErrors(cusparseCreateCsr(&matA, N, N, nz, d_row, d_col, d_val, CUSPARSE_INDEX_32I, CUSPARSE_INDEX_32I, CUSPARSE_INDEX_BASE_ZERO, CUDA_R_32F));
     cusparseDnVecDescr_t vecp = NULL;
     checkCudaErrors(cusparseCreateDnVec(&vecp, N, d_p, CUDA_R_32F));
     cusparseDnVecDescr_t vecomega = NULL;
@@ -246,9 +244,7 @@ int main(int argc, char** argv)
     size_t bufferSize = 0;
     size_t tmp = 0;
     int stmp = 0;
-    checkCudaErrors(cusparseSpMV_bufferSize(
-        cusparseHandle, CUSPARSE_OPERATION_NON_TRANSPOSE, &floatone, matA, vecp,
-        &floatzero, vecomega, CUDA_R_32F, CUSPARSE_SPMV_ALG_DEFAULT, &tmp));
+    checkCudaErrors(cusparseSpMV_bufferSize(cusparseHandle, CUSPARSE_OPERATION_NON_TRANSPOSE, &floatone, matA, vecp, &floatzero, vecomega, CUDA_R_32F, CUSPARSE_SPMV_ALG_DEFAULT, &tmp));
     if (tmp > bufferSize)
     {
         bufferSize = stmp;
@@ -258,14 +254,12 @@ int main(int argc, char** argv)
     {
         bufferSize = stmp;
     }
-    checkCudaErrors(cusparseScsrsv2_bufferSize(
-        cusparseHandle, CUSPARSE_OPERATION_NON_TRANSPOSE, N, nz, descrL, d_val, d_row, d_col, infoL, &stmp));
+    checkCudaErrors(cusparseScsrsv2_bufferSize(cusparseHandle, CUSPARSE_OPERATION_NON_TRANSPOSE, N, nz, descrL, d_val, d_row, d_col, infoL, &stmp));
     if (stmp > bufferSize)
     {
         bufferSize = stmp;
     }
-    checkCudaErrors(cusparseScsrsv2_bufferSize(
-        cusparseHandle, CUSPARSE_OPERATION_NON_TRANSPOSE, N, nz, descrU, d_val, d_row, d_col, infoU, &stmp));
+    checkCudaErrors(cusparseScsrsv2_bufferSize(cusparseHandle, CUSPARSE_OPERATION_NON_TRANSPOSE, N, nz, descrU, d_val, d_row, d_col, infoU, &stmp));
     if (stmp > bufferSize)
     {
         bufferSize = stmp;
@@ -274,7 +268,6 @@ int main(int argc, char** argv)
 
     /* Conjugate gradient without preconditioning.
        ------------------------------------------
-
        Follows the description by Golub & Van Loan,
        "Matrix Computations 3rd ed.", Section 10.2.6  */
 
@@ -286,7 +279,6 @@ int main(int argc, char** argv)
     while (r1 > tol * tol && k <= max_iter)
     {
         k++;
-
         if (k == 1)
         {
             checkCudaErrors(cublasScopy(cublasHandle, N, d_r, 1, d_p, 1));
@@ -298,8 +290,7 @@ int main(int argc, char** argv)
             checkCudaErrors(cublasSaxpy(cublasHandle, N, &floatone, d_r, 1, d_p, 1));
         }
 
-        checkCudaErrors(cusparseSpMV(
-            cusparseHandle, CUSPARSE_OPERATION_NON_TRANSPOSE, &floatone, matA, vecp,
+        checkCudaErrors(cusparseSpMV(cusparseHandle, CUSPARSE_OPERATION_NON_TRANSPOSE, &floatone, matA, vecp,
             &floatzero, vecomega, CUDA_R_32F, CUSPARSE_SPMV_ALG_DEFAULT, buffer));
         checkCudaErrors(cublasSdot(cublasHandle, N, d_p, 1, d_omega, 1, &dot));
         alpha = r1 / dot;
@@ -367,74 +358,60 @@ int main(int argc, char** argv)
     printf("\nConvergence of CG using ILU(0) preconditioning: \n");
 
     /* Perform analysis for ILU(0) */
-    checkCudaErrors(cusparseScsrilu02_analysis(
-        cusparseHandle, N, nz, descr, d_val, d_row, d_col, infoILU,
-        CUSPARSE_SOLVE_POLICY_USE_LEVEL, buffer));
+    checkCudaErrors(cusparseScsrilu02_analysis(cusparseHandle, N, nz, descr, d_val, d_row, d_col, infoILU, CUSPARSE_SOLVE_POLICY_USE_LEVEL, buffer));
 
     /* Copy A data to ILU(0) vals as input*/
-    checkCudaErrors(cudaMemcpy(d_valsILU0, d_val, nz * sizeof(float),
-        cudaMemcpyDeviceToDevice));
+    checkCudaErrors(cudaMemcpy(d_valsILU0, d_val, nz * sizeof(float), cudaMemcpyDeviceToDevice));
 
     /* generate the ILU(0) factors */
-    checkCudaErrors(cusparseScsrilu02(cusparseHandle, N, nz, descr, d_valsILU0,
-        d_row, d_col, infoILU,
-        CUSPARSE_SOLVE_POLICY_USE_LEVEL, buffer));
+    checkCudaErrors(cusparseScsrilu02(cusparseHandle, N, nz, descr, d_valsILU0, d_row, d_col, infoILU, CUSPARSE_SOLVE_POLICY_USE_LEVEL, buffer));
 
     /* perform triangular solve analysis */
-    checkCudaErrors(
-        cusparseScsrsv2_analysis(cusparseHandle, CUSPARSE_OPERATION_NON_TRANSPOSE,
-            N, nz, descrL, d_valsILU0, d_row, d_col, infoL,
-            CUSPARSE_SOLVE_POLICY_USE_LEVEL, buffer));
-    checkCudaErrors(
-        cusparseScsrsv2_analysis(cusparseHandle, CUSPARSE_OPERATION_NON_TRANSPOSE,
-            N, nz, descrU, d_valsILU0, d_row, d_col, infoU,
-            CUSPARSE_SOLVE_POLICY_USE_LEVEL, buffer));
+    checkCudaErrors(cusparseScsrsv2_analysis(cusparseHandle, CUSPARSE_OPERATION_NON_TRANSPOSE,
+        N, nz, descrL, d_valsILU0, d_row, d_col, infoL, CUSPARSE_SOLVE_POLICY_USE_LEVEL, buffer));
+    checkCudaErrors(cusparseScsrsv2_analysis(cusparseHandle, CUSPARSE_OPERATION_NON_TRANSPOSE,
+        N, nz, descrU, d_valsILU0, d_row, d_col, infoU, CUSPARSE_SOLVE_POLICY_USE_LEVEL, buffer));
 
     /* reset the initial guess of the solution to zero */
-    for (int i = 0; i < N; i++) {
+    for (int i = 0; i < N; i++)
+    {
         x[i] = 0.0;
     }
-    checkCudaErrors(
-        cudaMemcpy(d_r, rhs, N * sizeof(float), cudaMemcpyHostToDevice));
-    checkCudaErrors(
-        cudaMemcpy(d_x, x, N * sizeof(float), cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(d_r, rhs, N * sizeof(float), cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(d_x, x, N * sizeof(float), cudaMemcpyHostToDevice));
 
     k = 0;
     checkCudaErrors(cublasSdot(cublasHandle, N, d_r, 1, d_r, 1, &r1));
 
-    while (r1 > tol * tol && k <= max_iter) {
+    while (r1 > tol * tol && k <= max_iter)
+    {
         // preconditioner application: d_zm1 = U^-1 L^-1 d_r
-        checkCudaErrors(cusparseScsrsv2_solve(
-            cusparseHandle, CUSPARSE_OPERATION_NON_TRANSPOSE, N, nz, &floatone,
+        checkCudaErrors(cusparseScsrsv2_solve(cusparseHandle, CUSPARSE_OPERATION_NON_TRANSPOSE, N, nz, &floatone,
             descrL, d_valsILU0, d_row, d_col, infoL, d_r, d_y,
             CUSPARSE_SOLVE_POLICY_USE_LEVEL, buffer));
-        checkCudaErrors(cusparseScsrsv2_solve(
-            cusparseHandle, CUSPARSE_OPERATION_NON_TRANSPOSE, N, nz, &floatone,
+        checkCudaErrors(cusparseScsrsv2_solve(cusparseHandle, CUSPARSE_OPERATION_NON_TRANSPOSE, N, nz, &floatone,
             descrU, d_valsILU0, d_row, d_col, infoU, d_y, d_zm1,
             CUSPARSE_SOLVE_POLICY_USE_LEVEL, buffer));
 
         k++;
 
-        if (k == 1) {
+        if (k == 1)
+        {
             checkCudaErrors(cublasScopy(cublasHandle, N, d_zm1, 1, d_p, 1));
         }
-        else {
-            checkCudaErrors(
-                cublasSdot(cublasHandle, N, d_r, 1, d_zm1, 1, &numerator));
-            checkCudaErrors(
-                cublasSdot(cublasHandle, N, d_rm2, 1, d_zm2, 1, &denominator));
+        else
+        {
+            checkCudaErrors(cublasSdot(cublasHandle, N, d_r, 1, d_zm1, 1, &numerator));
+            checkCudaErrors(cublasSdot(cublasHandle, N, d_rm2, 1, d_zm2, 1, &denominator));
             beta = numerator / denominator;
             checkCudaErrors(cublasSscal(cublasHandle, N, &beta, d_p, 1));
-            checkCudaErrors(
-                cublasSaxpy(cublasHandle, N, &floatone, d_zm1, 1, d_p, 1));
+            checkCudaErrors(cublasSaxpy(cublasHandle, N, &floatone, d_zm1, 1, d_p, 1));
         }
 
-        checkCudaErrors(cusparseSpMV(
-            cusparseHandle, CUSPARSE_OPERATION_NON_TRANSPOSE, &floatone, matA, vecp,
+        checkCudaErrors(cusparseSpMV(cusparseHandle, CUSPARSE_OPERATION_NON_TRANSPOSE, &floatone, matA, vecp,
             &floatzero, vecomega, CUDA_R_32F, CUSPARSE_SPMV_ALG_DEFAULT, buffer));
         checkCudaErrors(cublasSdot(cublasHandle, N, d_r, 1, d_zm1, 1, &numerator));
-        checkCudaErrors(
-            cublasSdot(cublasHandle, N, d_p, 1, d_omega, 1, &denominator));
+        checkCudaErrors(cublasSdot(cublasHandle, N, d_p, 1, d_omega, 1, &denominator));
         alpha = numerator / denominator;
         checkCudaErrors(cublasSaxpy(cublasHandle, N, &alpha, d_p, 1, d_x, 1));
         checkCudaErrors(cublasScopy(cublasHandle, N, d_r, 1, d_rm2, 1));
@@ -446,22 +423,24 @@ int main(int argc, char** argv)
 
     printf("  iteration = %3d, residual = %e \n", k, sqrt(r1));
 
-    checkCudaErrors(
-        cudaMemcpy(x, d_x, N * sizeof(float), cudaMemcpyDeviceToHost));
+    checkCudaErrors(cudaMemcpy(x, d_x, N * sizeof(float), cudaMemcpyDeviceToHost));
 
     /* check result */
     err = 0.0;
 
-    for (int i = 0; i < N; i++) {
+    for (int i = 0; i < N; i++)
+    {
         rsum = 0.0;
 
-        for (int j = I[i]; j < I[i + 1]; j++) {
+        for (int j = I[i]; j < I[i + 1]; j++)
+        {
             rsum += val[j] * x[J[j]];
         }
 
         diff = fabs(rsum - rhs[i]);
 
-        if (diff > err) {
+        if (diff > err)
+        {
             err = diff;
         }
     }
@@ -513,3 +492,4 @@ int main(int argc, char** argv)
         ? EXIT_SUCCESS
         : EXIT_FAILURE));
 }
+

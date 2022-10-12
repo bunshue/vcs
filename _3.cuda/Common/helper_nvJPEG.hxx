@@ -94,8 +94,7 @@ int writeBMP(const char* filename, const unsigned char* d_chanR, int pitchR,
     paddedsize = ((width * 3) + extrabytes) * height;
 
     // Headers...
-    // Note that the "BM" identifier in bytes 0 and 1 is NOT included in these
-    // "headers".
+    // Note that the "BM" identifier in bytes 0 and 1 is NOT included in these "headers".
 
     headers[0] = paddedsize + 54;  // bfSize (whole file size)
     headers[1] = 0;                // bfReserved (both)
@@ -123,8 +122,7 @@ int writeBMP(const char* filename, const unsigned char* d_chanR, int pitchR,
 
     //
     // Headers begin...
-    // When printing ints and shorts, we write out 1 character at a time to avoid
-    // endian issues.
+    // When printing ints and shorts, we write out 1 character at a time to avoid endian issues.
     //
     fprintf(outfile, "BM");
 
@@ -207,13 +205,15 @@ int writeBMPi(const char* filename, const unsigned char* d_RGB, int pitch, int w
     extrabytes = 4 - ((width * 3) % 4);  // How many bytes of padding to add to each
     // horizontal line - the size of which must
     // be a multiple of 4 bytes.
-    if (extrabytes == 4) extrabytes = 0;
+    if (extrabytes == 4)
+    {
+        extrabytes = 0;
+    }
 
     paddedsize = ((width * 3) + extrabytes) * height;
 
     // Headers...
-    // Note that the "BM" identifier in bytes 0 and 1 is NOT included in these
-    // "headers".
+    // Note that the "BM" identifier in bytes 0 and 1 is NOT included in these "headers".
     headers[0] = paddedsize + 54;  // bfSize (whole file size)
     headers[1] = 0;                // bfReserved (both)
     headers[2] = 54;               // bfOffbits

@@ -44,7 +44,7 @@ struct decode_params_t
     bool batched;
 };
 
-int read_next_batch(FileNames& image_names, int batch_size,    FileNames::iterator& cur_iter, FileData& raw_data,    std::vector<size_t>& raw_len, FileNames& current_names)
+int read_next_batch(FileNames& image_names, int batch_size, FileNames::iterator& cur_iter, FileData& raw_data, std::vector<size_t>& raw_len, FileNames& current_names)
 {
     int counter = 0;
 
@@ -96,7 +96,7 @@ int read_next_batch(FileNames& image_names, int batch_size,    FileNames::iterat
 }
 
 // prepare buffers for RGBi output format
-int prepare_buffers(FileData& file_data, std::vector<size_t>& file_len,    std::vector<int>& img_width, std::vector<int>& img_height, std::vector<nvjpegImage_t>& ibuf,
+int prepare_buffers(FileData& file_data, std::vector<size_t>& file_len, std::vector<int>& img_width, std::vector<int>& img_height, std::vector<nvjpegImage_t>& ibuf,
     std::vector<nvjpegImage_t>& isz, FileNames& current_names, decode_params_t& params)
 {
     int widths[NVJPEG_MAX_COMPONENT];
@@ -115,7 +115,7 @@ int prepare_buffers(FileData& file_data, std::vector<size_t>& file_len,    std::
 
         //printf("Processing: %s, %d channels\n", current_names[i], channels);
 
-        std::cout << "Processing: " << current_names[i] << std::endl;
+        std::cout << "讀取檔案 : " << current_names[i] << std::endl;
         std::cout << "Image is " << channels << " channels." << std::endl;
         for (int c = 0; c < channels; c++)
         {
@@ -234,7 +234,7 @@ void release_buffers(std::vector<nvjpegImage_t>& ibuf)
     }
 }
 
-int decode_images(const FileData& img_data, const std::vector<size_t>& img_len,    std::vector<nvjpegImage_t>& out, decode_params_t& params, double& time)
+int decode_images(const FileData& img_data, const std::vector<size_t>& img_len, std::vector<nvjpegImage_t>& out, decode_params_t& params, double& time)
 {
     checkCudaErrors(cudaStreamSynchronize(params.stream));
     cudaEvent_t startEvent = NULL, stopEvent = NULL;
@@ -301,10 +301,9 @@ int decode_images(const FileData& img_data, const std::vector<size_t>& img_len, 
     return EXIT_SUCCESS;
 }
 
-int write_images(std::vector<nvjpegImage_t>& iout, std::vector<int>& widths,
-    std::vector<int>& heights, decode_params_t& params, FileNames& filenames)
+int write_images(std::vector<nvjpegImage_t>& iout, std::vector<int>& widths, std::vector<int>& heights, decode_params_t& params, FileNames& filenames)
 {
-    printf("\nwrite_images, count = %d\n", params.batch_size);
+    printf("\n寫入檔案, count = %d\n", params.batch_size);
 
     for (int i = 0; i < params.batch_size; i++)
     {
@@ -421,7 +420,7 @@ double process_images(FileNames& image_names, decode_params_t& params, double& t
             test_time += time;
         }
 
-        printf("寫入檔案\n");
+        std::cout << "寫入檔案 W = " << widths[0] << ", H = " << heights[0] << ", name : " << current_names[0] << std::endl;
         write_images(iout, widths, heights, params, current_names);
     }
     total = test_time;
@@ -469,7 +468,7 @@ int main(int argc, const char* argv[])
 
     decode_params_t params;
 
-    params.input_dir = "./images/";
+    params.input_dir = "./images/";     //讀取圖檔的資料夾位置
     params.batch_size = 1;
     params.total_images = -1;
 
@@ -517,6 +516,7 @@ int main(int argc, const char* argv[])
 
     double total;
 
+    printf("開始處理資料夾內的所有圖檔\n");
     if (process_images(image_names, params, total))
     {
         return EXIT_FAILURE;

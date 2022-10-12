@@ -124,6 +124,7 @@ int loadRaw8BitImage(Npp8u* pImage, int nWidth, int nHeight, int nImage)
     FILE* bmpFile;
     size_t nSize;
 
+    printf("loadRaw8BitImage, no = %d\n", nImage);
     if (nImage == 0)
     {
         if (nWidth != 512 || nHeight != 512) return -1;
@@ -134,7 +135,7 @@ int loadRaw8BitImage(Npp8u* pImage, int nWidth, int nHeight, int nImage)
             printf("%s file not found.. exiting\n", fileName);
             exit(EXIT_WAIVED);
         }
-
+        printf("open file : %s\n", InputFile);
         FOPEN(bmpFile, InputFile, "rb");
     }
     else if (nImage == 1)
@@ -148,6 +149,7 @@ int loadRaw8BitImage(Npp8u* pImage, int nWidth, int nHeight, int nImage)
             exit(EXIT_WAIVED);
         }
 
+        printf("open file : %s\n", InputFile);
         FOPEN(bmpFile, InputFile, "rb");
     }
     else if (nImage == 2)
@@ -161,6 +163,7 @@ int loadRaw8BitImage(Npp8u* pImage, int nWidth, int nHeight, int nImage)
             exit(EXIT_WAIVED);
         }
 
+        printf("open file : %s\n", InputFile);
         FOPEN(bmpFile, InputFile, "rb");
     }
     else if (nImage == 3)
@@ -174,6 +177,7 @@ int loadRaw8BitImage(Npp8u* pImage, int nWidth, int nHeight, int nImage)
             exit(EXIT_WAIVED);
         }
 
+        printf("open file : %s\n", InputFile);
         FOPEN(bmpFile, InputFile, "rb");
     }
     else if (nImage == 4)
@@ -187,6 +191,7 @@ int loadRaw8BitImage(Npp8u* pImage, int nWidth, int nHeight, int nImage)
             exit(EXIT_WAIVED);
         }
 
+        printf("open file : %s\n", InputFile);
         FOPEN(bmpFile, InputFile, "rb");
     }
     else
@@ -342,6 +347,7 @@ int main(int argc, char** argv)
             return NPP_MEMORY_ALLOCATION_ERR;
         }
 
+        printf("call loadRaw8BitImage, filename....\n");
         if (loadRaw8BitImage(pInputImageHost[nImage], oSizeROI[nImage].width * sizeof(Npp8u), oSizeROI[nImage].height, nImage) == 0)
         {
             cudaError = cudaMemcpy2DAsync(pInputImageDev[nImage], oSizeROI[nImage].width * sizeof(Npp8u), pInputImageHost[nImage], oSizeROI[nImage].width * sizeof(Npp8u),
@@ -442,13 +448,21 @@ int main(int argc, char** argv)
                     printf("teapot_CompressedLabelMarkersUF_8Way_512x512_32u failed.\n");
                 }
                 else if (nImage == 1)
+                {
                     printf("CT_Skull_CompressedLabelMarkersUF_8Way_512x512_32u failed.\n");
+                }
                 else if (nImage == 2)
+                {
                     printf("PCB_METAL_CompressedLabelMarkersUF_8Way_509x335_32u failed.\n");
+                }
                 else if (nImage == 3)
+                {
                     printf("PCB2_CompressedLabelMarkersUF_8Way_1024x683_32u failed.\n");
+                }
                 else if (nImage == 4)
+                {
                     printf("PCB_CompressedLabelMarkersUF_8Way_1280x720_32u failed.\n");
+                }
                 tearDown();
                 return -1;
             }
@@ -498,15 +512,25 @@ int main(int argc, char** argv)
             fclose(bmpFile);
 
             if (nImage == 0)
+            {
                 printf("teapot_CompressedMarkerLabelsUF_8Way_512x512_32u succeeded, compressed label count is %d.\n", nCompressedLabelCount);
+            }
             else if (nImage == 1)
+            {
                 printf("CT_Skull_CompressedMarkerLabelsUF_8Way_512x512_32u succeeded, compressed label count is %d.\n", nCompressedLabelCount);
+            }
             else if (nImage == 2)
+            {
                 printf("PCB_METAL_CompressedMarkerLabelsUF_8Way_509x335_32u succeeded, compressed label count is %d.\n", nCompressedLabelCount);
+            }
             else if (nImage == 3)
+            {
                 printf("PCB2_CompressedMarkerLabelsUF_8Way_1024x683_32u succeeded, compressed label count is %d.\n", nCompressedLabelCount);
+            }
             else if (nImage == 4)
+            {
                 printf("PCB_CompressedMarkerLabelsUF_8Way_1280x720_32u succeeded, compressed label count is %d.\n", nCompressedLabelCount);
+            }
         }
     }
 
@@ -521,7 +545,9 @@ int main(int argc, char** argv)
     int nTotalBatchedUFCompressLabelsScratchBufferDevSize = 0;
 
     for (int k = 0; k < NUMBER_OF_IMAGES; k++)
+    {
         nTotalBatchedUFCompressLabelsScratchBufferDevSize += aCompressLabelsScratchBufferSize[k];
+    }
 
     cudaError = cudaMalloc((void**)&pUFCompressedLabelsScratchBufferDev[0], nTotalBatchedUFCompressLabelsScratchBufferDevSize);
     if (cudaError != cudaSuccess) return NPP_MEMORY_ALLOCATION_ERR;
@@ -531,10 +557,16 @@ int main(int argc, char** argv)
     int nBatchImageListBytes = NUMBER_OF_IMAGES * sizeof(NppiImageDescriptor);
 
     cudaError = cudaMalloc((void**)&pUFBatchSrcImageListDev, nBatchImageListBytes);
-    if (cudaError != cudaSuccess) return NPP_MEMORY_ALLOCATION_ERR;
+    if (cudaError != cudaSuccess)
+    {
+        return NPP_MEMORY_ALLOCATION_ERR;
+    }
 
     cudaError = cudaMalloc((void**)&pUFBatchSrcDstImageListDev, nBatchImageListBytes);
-    if (cudaError != cudaSuccess) return NPP_MEMORY_ALLOCATION_ERR;
+    if (cudaError != cudaSuccess)
+    {
+        return NPP_MEMORY_ALLOCATION_ERR;
+    }
 
     checkCudaErrors(cudaMallocHost((void**)&pUFBatchSrcImageListHost, nBatchImageListBytes));
 
@@ -562,10 +594,16 @@ int main(int argc, char** argv)
 
     // Copy label generation batch lists from CPU to GPU
     cudaError = cudaMemcpyAsync(pUFBatchSrcImageListDev, pUFBatchSrcImageListHost, nBatchImageListBytes, cudaMemcpyHostToDevice, nppStreamCtx.hStream);
-    if (cudaError != cudaSuccess) return NPP_MEMCPY_ERROR;
+    if (cudaError != cudaSuccess)
+    {
+        return NPP_MEMCPY_ERROR;
+    }
 
     cudaError = cudaMemcpyAsync(pUFBatchSrcDstImageListDev, pUFBatchSrcDstImageListHost, nBatchImageListBytes, cudaMemcpyHostToDevice, nppStreamCtx.hStream);
-    if (cudaError != cudaSuccess) return NPP_MEMCPY_ERROR;
+    if (cudaError != cudaSuccess)
+    {
+        return NPP_MEMCPY_ERROR;
+    }
 
     // We use 8-way neighbor search throughout this example
     nppStatus = nppiLabelMarkersUFBatch_8u32u_C1R_Advanced_Ctx(pUFBatchSrcImageListDev, pUFBatchSrcDstImageListDev, NUMBER_OF_IMAGES, oMaxROISize, nppiNormInf, nppStreamCtx);
@@ -618,7 +656,10 @@ int main(int argc, char** argv)
             FOPEN(bmpFile, LabelMarkersBatchOutputFile4.c_str(), "wb");
         }
 
-        if (bmpFile == NULL) return -1;
+        if (bmpFile == NULL)
+        {
+            return -1;
+        }
         size_t nSize = 0;
         for (int j = 0; j < oSizeROI[nImage].height; j++)
         {
@@ -631,10 +672,16 @@ int main(int argc, char** argv)
 
     // Now allocate scratch buffer memory for batched label compression
     cudaError = cudaMalloc((void**)&pUFBatchSrcDstScratchBufferListDev, NUMBER_OF_IMAGES * sizeof(NppiBufferDescriptor));
-    if (cudaError != cudaSuccess) return NPP_MEMORY_ALLOCATION_ERR;
+    if (cudaError != cudaSuccess)
+    {
+        return NPP_MEMORY_ALLOCATION_ERR;
+    }
 
     cudaError = cudaMalloc((void**)&pUFBatchPerImageCompressedCountListDev, NUMBER_OF_IMAGES * sizeof(Npp32u));
-    if (cudaError != cudaSuccess) return NPP_MEMORY_ALLOCATION_ERR;
+    if (cudaError != cudaSuccess)
+    {
+        return NPP_MEMORY_ALLOCATION_ERR;
+    }
 
     // Allocate host side scratch buffer point and size list and initialize with
     // device scratch buffer pointers
@@ -658,7 +705,9 @@ int main(int argc, char** argv)
         pUFBatchSrcDstScratchBufferListHost[nImage].nBufferSize = aCompressLabelsScratchBufferSize[nImage];
 
         if (aCompressLabelsScratchBufferSize[nImage] > nMaxUFCompressedLabelsScratchBufferSize)
+        {
             nMaxUFCompressedLabelsScratchBufferSize = aCompressLabelsScratchBufferSize[nImage];
+        }
 
         // Offset buffer pointer to next per image buffer
         Npp8u* pTempBuffer = reinterpret_cast<Npp8u*>(pCurUFCompressedLabelsScratchBufferDev);
@@ -669,12 +718,13 @@ int main(int argc, char** argv)
     // Copy compression batch scratch buffer list from CPU to GPU
     cudaError = cudaMemcpyAsync(pUFBatchSrcDstScratchBufferListDev, pUFBatchSrcDstScratchBufferListHost,
         NUMBER_OF_IMAGES * sizeof(NppiBufferDescriptor), cudaMemcpyHostToDevice, nppStreamCtx.hStream);
-    if (cudaError != cudaSuccess) return NPP_MEMCPY_ERROR;
+    if (cudaError != cudaSuccess)
+    {
+        return NPP_MEMCPY_ERROR;
+    }
 
-    nppStatus = nppiCompressMarkerLabelsUFBatch_32u_C1IR_Advanced_Ctx(
-        pUFBatchSrcDstImageListDev, pUFBatchSrcDstScratchBufferListDev,
-        pUFBatchPerImageCompressedCountListDev, NUMBER_OF_IMAGES, oMaxROISize,
-        nMaxUFCompressedLabelsScratchBufferSize, nppStreamCtx);
+    nppStatus = nppiCompressMarkerLabelsUFBatch_32u_C1IR_Advanced_Ctx(pUFBatchSrcDstImageListDev, pUFBatchSrcDstScratchBufferListDev,
+        pUFBatchPerImageCompressedCountListDev, NUMBER_OF_IMAGES, oMaxROISize, nMaxUFCompressedLabelsScratchBufferSize, nppStreamCtx);
     if (nppStatus != NPP_SUCCESS)
     {
         printf("BatchCompressedLabelMarkersUF_8Way_32u failed.\n");
@@ -751,20 +801,30 @@ int main(int argc, char** argv)
     for (int nImage = 0; nImage < NUMBER_OF_IMAGES; nImage++)
     {
         if (nImage == 0)
+        {
             printf("teapot_CompressedMarkerLabelsUFBatch_8Way_512x512_32u succeeded, compressed label count is %d.\n",
                 pUFBatchPerImageCompressedCountListHost[nImage]);
+        }
         else if (nImage == 1)
+        {
             printf("CT_Skull_CompressedMarkerLabelsUFBatch_8Way_512x512_32u succeeded, compressed label count is %d.\n",
                 pUFBatchPerImageCompressedCountListHost[nImage]);
+        }
         else if (nImage == 2)
+        {
             printf("PCB_METAL_CompressedMarkerLabelsUFBatch_8Way_509x335_32u succeeded, compressed label count is %d.\n",
                 pUFBatchPerImageCompressedCountListHost[nImage]);
+        }
         else if (nImage == 3)
+        {
             printf("PCB2_CompressedMarkerLabelsUFBatch_8Way_1024x683_32u succeeded, compressed label count is %d.\n",
                 pUFBatchPerImageCompressedCountListHost[nImage]);
+        }
         else if (nImage == 4)
+        {
             printf("PCB_CompressedMarkerLabelsUFBatch_8Way_1280x720_32u succeeded, compressed label count is %d.\n",
                 pUFBatchPerImageCompressedCountListHost[nImage]);
+        }
     }
 
 #endif  // USE_BATCHED_LABEL_COMPRESSION

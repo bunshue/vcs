@@ -1,7 +1,6 @@
 /* This example demonstrates how to use the CUBLAS library
  * by scaling an array of floating-point values on the device
- * and comparing the result to the same operation performed
- * on the host.
+ * and comparing the result to the same operation performed on the host.
  */
 
  /* Includes, system */

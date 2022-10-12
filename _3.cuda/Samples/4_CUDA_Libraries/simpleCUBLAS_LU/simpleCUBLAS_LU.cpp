@@ -11,7 +11,6 @@
  * of cuBLAS library. To test the correctness of upper and lower
  * matrices generated, they are multiplied and compared with the
  * original input matrix.
- *
  */
 
 #include <stdio.h>
@@ -313,7 +312,10 @@ int main(int argc, char** argv)
     checkCudaErrors(cudaMemcpy(d_Aarray, h_AarrayInput, BATCH_SIZE * matSize, cudaMemcpyHostToDevice));
 
     // create pointer array for matrices
-    for (int i = 0; i < BATCH_SIZE; i++) h_ptr_array[i] = d_Aarray + (i * N * N);
+    for (int i = 0; i < BATCH_SIZE; i++)
+    {
+        h_ptr_array[i] = d_Aarray + (i * N * N);
+    }
 
     // copy pointer array to device memory
     checkCudaErrors(cudaMemcpy(d_ptr_array, h_ptr_array, BATCH_SIZE * sizeof(DATA_TYPE*), cudaMemcpyHostToDevice));
@@ -338,9 +340,7 @@ int main(int argc, char** argv)
     checkCudaErrors(cudaMemcpy(h_infoArray, d_infoArray, BATCH_SIZE * sizeof(int), cudaMemcpyDeviceToHost));
 
 #ifdef PIVOT
-    checkCudaErrors(cudaMemcpy(h_pivotArray, d_pivotArray,
-        N * BATCH_SIZE * sizeof(int),
-        cudaMemcpyDeviceToHost));
+    checkCudaErrors(cudaMemcpy(h_pivotArray, d_pivotArray, N * BATCH_SIZE * sizeof(int), cudaMemcpyDeviceToHost));
 #endif /* PIVOT */
 
     // verify the result
@@ -396,10 +396,22 @@ int main(int argc, char** argv)
     checkCudaErrors(cudaFree(d_Aarray));
 
     // free host variables
-    if (h_infoArray) free(h_infoArray);
-    if (h_pivotArray) free(h_pivotArray);
-    if (h_AarrayOutput) free(h_AarrayOutput);
-    if (h_AarrayInput) free(h_AarrayInput);
+    if (h_infoArray)
+    {
+        free(h_infoArray);
+    }
+    if (h_pivotArray)
+    {
+        free(h_pivotArray);
+    }
+    if (h_AarrayOutput)
+    {
+        free(h_AarrayOutput);
+    }
+    if (h_AarrayInput)
+    {
+        free(h_AarrayInput);
+    }
 
     // destroy cuBLAS handle
     status = cublasDestroy(handle);

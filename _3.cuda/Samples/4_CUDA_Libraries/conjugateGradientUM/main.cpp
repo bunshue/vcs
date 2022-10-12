@@ -1,7 +1,6 @@
 /*
  * This sample implements a conjugate gradient solver on GPU
  * using CUBLAS and CUSPARSE
- *
  */
 
  // includes, system
@@ -123,8 +122,7 @@ int main(int argc, char** argv)
     /* Wrap raw data into cuSPARSE generic API objects */
     cusparseSpMatDescr_t matA = NULL;
     checkCudaErrors(cusparseCreateCsr(&matA, N, N, nz, I, J, val,
-        CUSPARSE_INDEX_32I, CUSPARSE_INDEX_32I,
-        CUSPARSE_INDEX_BASE_ZERO, CUDA_R_32F));
+        CUSPARSE_INDEX_32I, CUSPARSE_INDEX_32I, CUSPARSE_INDEX_BASE_ZERO, CUDA_R_32F));
     cusparseDnVecDescr_t vecx = NULL;
     checkCudaErrors(cusparseCreateDnVec(&vecx, N, x, CUDA_R_32F));
     cusparseDnVecDescr_t vecp = NULL;
@@ -146,15 +144,13 @@ int main(int argc, char** argv)
 
     /* Allocate workspace for cuSPARSE */
     size_t bufferSize = 0;
-    checkCudaErrors(cusparseSpMV_bufferSize(
-        cusparseHandle, CUSPARSE_OPERATION_NON_TRANSPOSE, &alpha, matA, vecx,
+    checkCudaErrors(cusparseSpMV_bufferSize(cusparseHandle, CUSPARSE_OPERATION_NON_TRANSPOSE, &alpha, matA, vecx,
         &beta, vecAx, CUDA_R_32F, CUSPARSE_SPMV_ALG_DEFAULT, &bufferSize));
     void* buffer = NULL;
     checkCudaErrors(cudaMalloc(&buffer, bufferSize));
 
     checkCudaErrors(cusparseSpMV(cusparseHandle, CUSPARSE_OPERATION_NON_TRANSPOSE,
-        &alpha, matA, vecx, &beta, vecAx, CUDA_R_32F,
-        CUSPARSE_SPMV_ALG_DEFAULT, buffer));
+        &alpha, matA, vecx, &beta, vecAx, CUDA_R_32F, CUSPARSE_SPMV_ALG_DEFAULT, buffer));
 
     cublasSaxpy(cublasHandle, N, &alpham1, Ax, 1, r, 1);
     cublasStatus = cublasSdot(cublasHandle, N, r, 1, r, 1, &r1);
@@ -174,8 +170,7 @@ int main(int argc, char** argv)
             cublasStatus = cublasScopy(cublasHandle, N, r, 1, p, 1);
         }
 
-        checkCudaErrors(cusparseSpMV(
-            cusparseHandle, CUSPARSE_OPERATION_NON_TRANSPOSE, &alpha, matA, vecp,
+        checkCudaErrors(cusparseSpMV(cusparseHandle, CUSPARSE_OPERATION_NON_TRANSPOSE, &alpha, matA, vecp,
             &beta, vecAx, CUDA_R_32F, CUSPARSE_SPMV_ALG_DEFAULT, buffer));
         cublasStatus = cublasSdot(cublasHandle, N, p, 1, Ax, 1, &dot);
         a = r1 / dot;

@@ -5,7 +5,7 @@
 
 #include "mmio.h"
 
- /* avoid Windows warnings (for example: strcpy, fscanf, etc.) */
+/* avoid Windows warnings (for example: strcpy, fscanf, etc.) */
 #if defined(_WIN32)
 #define _CRT_SECURE_NO_WARNINGS
 #endif

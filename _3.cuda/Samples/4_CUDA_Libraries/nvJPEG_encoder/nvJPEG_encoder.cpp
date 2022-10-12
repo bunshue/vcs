@@ -363,21 +363,26 @@ int processArgs(encode_params_t param)
 }
 
 // parse parameters
-int findParamIndex(const char** argv, int argc, const char* parm) {
+int findParamIndex(const char** argv, int argc, const char* parm)
+{
     int count = 0;
     int index = -1;
 
-    for (int i = 0; i < argc; i++) {
-        if (strncmp(argv[i], parm, 100) == 0) {
+    for (int i = 0; i < argc; i++)
+    {
+        if (strncmp(argv[i], parm, 100) == 0)
+        {
             index = i;
             count++;
         }
     }
 
-    if (count == 0 || count == 1) {
+    if (count == 0 || count == 1)
+    {
         return index;
     }
-    else {
+    else
+    {
         std::cout << "Error, parameter " << parm
             << " has been specified more than once, exiting\n"
             << std::endl;
@@ -394,16 +399,14 @@ int main(int argc, const char* argv[])
 
     if ((pidx = findParamIndex(argv, argc, "-h")) != -1 || (pidx = findParamIndex(argv, argc, "--help")) != -1)
     {
-        std::cout << "Usage: " << argv[0]
-            << " -i images_dir  [-o output_dir] [-device=device_id][-q quality][-s 420/444] [-fmt output_format] [-huf 0]\n";
+        std::cout << "Usage: " << argv[0] << " -i images_dir  [-o output_dir] [-device=device_id][-q quality][-s 420/444] [-fmt output_format] [-huf 0]\n";
         std::cout << "Parameters: " << std::endl;
         std::cout << "\timages_dir\t:\tPath to single image or directory of images" << std::endl;
         std::cout << "\toutput_dir\t:\tWrite encoded images as jpeg to this directory" << std::endl;
         std::cout << "\tdevice_id\t:\tWhich device to use for encoding" << std::endl;
         std::cout << "\tQuality\t:\tUse image quality [default 70]" << std::endl;
         std::cout << "\tsubsampling\t:\tUse Subsampling [420, 444]" << std::endl;
-        std::cout << "\toutput_format\t:\tnvJPEG output format for encoding. One of [rgb, rgbi, bgr, bgri, yuv, y, unchanged]"
-            << std::endl;
+        std::cout << "\toutput_format\t:\tnvJPEG output format for encoding. One of [rgb, rgbi, bgr, bgri, yuv, y, unchanged]" << std::endl;
         std::cout << "\tHuffman Optimization\t:\tUse Huffman optimization [default 0]" << std::endl;
         return EXIT_SUCCESS;
     }
@@ -474,10 +477,8 @@ int main(int argc, const char* argv[])
     cudaDeviceProp props;
     checkCudaErrors(cudaGetDeviceProperties(&props, params.dev));
 
-    printf("Using GPU %d (%s, %d SMs, %d th/SM max, CC %d.%d, ECC %s)\n",
-        params.dev, props.name, props.multiProcessorCount,
-        props.maxThreadsPerMultiProcessor, props.major, props.minor,
-        props.ECCEnabled ? "on" : "off");
+    printf("Using GPU %d (%s, %d SMs, %d th/SM max, CC %d.%d, ECC %s)\n", params.dev, props.name, props.multiProcessorCount,
+        props.maxThreadsPerMultiProcessor, props.major, props.minor, props.ECCEnabled ? "on" : "off");
 
     nvjpegDevAllocator_t dev_allocator = { &dev_malloc, &dev_free };
     checkCudaErrors(nvjpegCreate(NVJPEG_BACKEND_DEFAULT, &dev_allocator, &nvjpeg_handle));

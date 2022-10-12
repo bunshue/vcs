@@ -36,19 +36,33 @@ void tearDown() // Clean up and tear down
     for (int j = 0; j < NUMBER_OF_IMAGES; j++)
     {
         if (pSegmentLabelsOutputBufferDev[j] != 0)
+        {
             cudaFree(pSegmentLabelsOutputBufferDev[j]);
+        }
         if (pSegmentationScratchBufferDev[j] != 0)
+        {
             cudaFree(pSegmentationScratchBufferDev[j]);
+        }
         if (pSegmentsDev[j] != 0)
+        {
             cudaFree(pSegmentsDev[j]);
+        }
         if (pInputImageDev[j] != 0)
+        {
             cudaFree(pInputImageDev[j]);
+        }
         if (pSegmentLabelsOutputBufferHost[j] != 0)
+        {
             free(pSegmentLabelsOutputBufferHost[j]);
+        }
         if (pSegmentsHost[j] != 0)
+        {
             free(pSegmentsHost[j]);
+        }
         if (pInputImageHost[j] != 0)
+        {
             free(pInputImageHost[j]);
+        }
     }
 }
 
@@ -76,7 +90,9 @@ int loadRaw8BitImage(Npp8u* pImage, int nWidth, int nHeight, int nImage)
     if (nImage == 0)
     {
         if (nWidth != 512 || nHeight != 512)
+        {
             return -1;
+        }
         const char* fileName = "teapot_512x512_8u_Gray.raw";
         const char* InputFile = sdkFindFilePath(fileName, ".");
         if (InputFile == NULL)
@@ -90,7 +106,9 @@ int loadRaw8BitImage(Npp8u* pImage, int nWidth, int nHeight, int nImage)
     else if (nImage == 1)
     {
         if (nWidth != 512 || nHeight != 512)
+        {
             return -1;
+        }
         const char* fileName = "CT_skull_512x512_8u_Gray.raw";
         const char* InputFile = sdkFindFilePath(fileName, ".");
         if (InputFile == NULL)
@@ -104,7 +122,9 @@ int loadRaw8BitImage(Npp8u* pImage, int nWidth, int nHeight, int nImage)
     else if (nImage == 2)
     {
         if (nWidth != 512 || nHeight != 512)
+        {
             return -1;
+        }
         const char* fileName = "Rocks_512x512_8u_Gray.raw";
         const char* InputFile = sdkFindFilePath(fileName, ".");
         if (InputFile == NULL)
@@ -303,11 +323,15 @@ int main(int argc, char** argv)
 
             nppStatus = nppiCompressMarkerLabelsGetBufferSize_32u_C1R(oSizeROI[nImage].width * oSizeROI[nImage].height, &nCompressedLabelsScratchBufferSize);
             if (nppStatus != NPP_NO_ERROR)
+            {
                 return nppStatus;
+            }
 
             cudaError = cudaMalloc((void**)&pCompressedLabelsScratchBufferDev, nCompressedLabelsScratchBufferSize);
             if (cudaError != cudaSuccess)
+            {
                 return NPP_MEMORY_ALLOCATION_ERR;
+            }
 
             int nCompressedLabelCount = 0;
 

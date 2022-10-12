@@ -1,7 +1,6 @@
 /*
  * This sample implements a conjugate gradient solver on GPU using
  * Multi Block Cooperative Groups, also uses Unified Memory.
- *
  */
 
  // includes, system
@@ -160,8 +159,7 @@ void cpuConjugateGrad(int* I, int* J, float* val, float* x, float* Ax, float* p,
     }
 }
 
-__device__ void gpuSpMV(int* I, int* J, float* val, int nnz, int num_rows,
-    float alpha, float* inputVecX, float* outputVecY,
+__device__ void gpuSpMV(int* I, int* J, float* val, int nnz, int num_rows, float alpha, float* inputVecX, float* outputVecY,
     cg::thread_block& cta, const cg::grid_group& grid)
 {
     for (int i = grid.thread_rank(); i < num_rows; i += grid.size())
@@ -190,9 +188,7 @@ __device__ void gpuSaxpy(float* x, float* y, float a, int size, const cg::grid_g
     }
 }
 
-__device__ void gpuDotProduct(float* vecA, float* vecB, double* result,
-    int size, const cg::thread_block& cta,
-    const cg::grid_group& grid)
+__device__ void gpuDotProduct(float* vecA, float* vecB, double* result, int size, const cg::thread_block& cta, const cg::grid_group& grid)
 {
     extern __shared__ double tmp[];
 
@@ -242,9 +238,7 @@ __device__ void gpuScaleVectorAndSaxpy(const float* x, float* y, float a, float 
 }
 
 extern "C" __global__ void gpuConjugateGradient(int* I, int* J, float* val,
-    float* x, float* Ax, float* p,
-    float* r, double* dot_result,
-    int nnz, int N, float tol)
+    float* x, float* Ax, float* p, float* r, double* dot_result, int nnz, int N, float tol)
 {
     cg::thread_block cta = cg::this_thread_block();
     cg::grid_group grid = cg::this_grid();
@@ -367,8 +361,7 @@ int main(int argc, char** argv)
         exit(EXIT_WAIVED);
     }
 
-    // This sample requires being run on a device that supports Cooperative Kernel
-    // Launch
+    // This sample requires being run on a device that supports Cooperative Kernel Launch
     if (!deviceProp.cooperativeLaunch)
     {
         printf("\nSelected GPU (%d) does not support Cooperative Kernel Launch, Waiving the run\n", devID);
@@ -376,8 +369,7 @@ int main(int argc, char** argv)
     }
 
     // Statistics about the GPU device
-    printf("> GPU device has %d Multi-Processors, SM %d.%d compute capabilities\n\n",
-        deviceProp.multiProcessorCount, deviceProp.major, deviceProp.minor);
+    printf("> GPU device has %d Multi-Processors, SM %d.%d compute capabilities\n\n", deviceProp.multiProcessorCount, deviceProp.major, deviceProp.minor);
 
     /* Generate a random tridiagonal symmetric matrix in CSR format */
     N = 1048576;
