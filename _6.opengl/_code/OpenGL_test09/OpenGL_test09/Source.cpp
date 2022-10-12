@@ -2,19 +2,8 @@
 #include <helper_gl.h>
 #include <GL/freeglut.h>
 
-//#include "cuda_runtime.h"
-//#include "device_launch_parameters.h"
-
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-//#include <GL/glut.h>  //32位元用的
-
-//#include <GLUT/GLUT.h>
-//#include <OpenGL/OpenGL.h>
-
-//#include "BMPLoader.h"
-//unsigned int tex2D;
+#include <iostream>
 
 float angle;
 
@@ -100,8 +89,28 @@ void DrawBox()
     glDisable(GL_TEXTURE_2D);
 }
 
+// 窗口大小變化回調函數
+void reshape(int w, int h)
+{
+    glViewport(0, 0, w, h);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(60.0, (GLfloat)w / (GLfloat)h, 0.1, 100000.0);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+}
+
+void mouse(int button, int state, int x, int y)
+{
+}
+
+void motion(int x, int y)
+{
+}
+
 // 繪圖回調函數
-void display()
+void display(void)
 {
     // 清除之前幀數據
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -120,34 +129,58 @@ void display()
     glutPostRedisplay();
 }
 
-// 窗口大小變化回調函數
-void reshape(int w, int h)
+void keyboard(unsigned char k, int /*x*/, int /*y*/)
 {
-    glViewport(0, 0, w, h);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluPerspective(60.0, (GLfloat)w / (GLfloat)h, 0.1, 100000.0);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
+	switch (k)
+	{
+	case 27:
+	case 'q':
+	case 'Q':
+		//離開視窗
+		glutDestroyWindow(glutGetWindow());
+		return;
+
+	case '1':
+		printf("1\n");
+		break;
+
+	case '2':
+		printf("2\n");
+		break;
+
+	case '3':
+		break;
+
+	case '4':
+		break;
+
+	case '?':
+		break;
+	}
 }
 
-int main(int argc, const char* argv[])
+int main(int argc, char** argv)
 {
-    // 初始化顯示模式
-    glutInit(&argc, const_cast<char**>(argv));
+    glutInit(&argc, argv);
+    //glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+    //glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
 
-    // 初始化窗口
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(1100, 200);
-    glutCreateWindow("New Window");
+
+    glutCreateWindow("開啟視窗");	//開啟視窗 並顯示出視窗 Title
 
     init();
 
-    glutDisplayFunc(display);
-    glutReshapeFunc(reshape);
+    glutDisplayFunc(display);	//設定callback function
+    glutReshapeFunc(reshape);	//設定callback function
+    glutKeyboardFunc(keyboard);	//設定callback function
+    glutMouseFunc(mouse);		//設定callback function
+    glutMotionFunc(motion);		//設定callback function
 
     glutMainLoop(); // 開始主循環繪制
+
     return 0;
 }
 

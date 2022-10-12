@@ -551,7 +551,9 @@ static void keyboard(unsigned char key, int x, int y)
         display_mode = 14;
         break;
     case 'f':
+        printf("全螢幕\n");
         display_mode = 15;
+        glutFullScreen();
         break;
     case 27:
         exit(0);
