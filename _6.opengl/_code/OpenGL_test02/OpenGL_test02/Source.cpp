@@ -5,9 +5,35 @@
 #include <stdio.h>
 #include <iostream>
 
+int display_mode = 1;
+
+//display_mode = 01  //畫矩形
+
+void init01(void)
+{
+	glOrtho(0.0f, 300.0f, 0.0f, 300.0f, 1.0, -1.0);//設置窗口坐標系大小
+	glClearColor(0.4f, 1.f, 0.8f, 1.0f);//設置背景色
+}
+
+// 初始化參數
+void init05()
+{
+    glClearColor(0.1, 0.1, 0.4, 0.0);
+    glShadeModel(GL_SMOOTH);
+}
+
+// 窗口大小變化回調函數
 void reshape(int w, int h)
 {
 	glViewport(0, 0, w, h);
+
+    glViewport(0, 0, w, h);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(60.0, (GLfloat)w / (GLfloat)h, 0.1, 100000.0);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
 }
 
 void mouse(int button, int state, int x, int y)
@@ -18,8 +44,189 @@ void motion(int x, int y)
 {
 }
 
+// 繪圖回調函數
 void display(void)
 {
+	if (display_mode == 0)
+	{
+		glClear(GL_COLOR_BUFFER_BIT);   //清除背景
+
+		//or
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);   // 設置清除窗口背景色為白色
+		glClear(GL_COLOR_BUFFER_BIT);   //清除背景
+		glFlush();       // 刷新OpenGL中的命令列和，使所有尚未被行的命令行
+
+		//設定預設大小...
+	}
+    else if (display_mode == 1)
+    {
+        //display_mode = 1  //畫
+        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
+
+        glColor3f(1.0f, 1.0f, 0.0f);//設置繪圖顏色
+        glRectf(100.0f, 100.0f, 200.0f, 200.0f);//繪制矩形
+
+        glFlush();//刷新緩沖
+    }
+    else if (display_mode == 2)
+    {
+        //display_mode = 2  //畫 彩色三角形
+
+        glPushMatrix();
+        glBegin(GL_TRIANGLES);          // 開始畫三角形
+        glColor3f(1.0f, 0.0f, 0.0f);         // 設定輸出色為紅色
+        glVertex2f(0.0f, 1.0f);           //(x1,y1)=(0, 1)
+        glColor3f(0.0f, 1.0f, 0.0f);         // 設定輸出色為綠色
+        glVertex2f(0.87f, -0.5f);            //(x2,y2)=(0.87,-0.5)
+        glColor3f(0.0f, 0.0f, 1.0f);         // 設定輸出色為藍色
+        glVertex2f(-0.87f, -0.5f);           //(x3,y3)=(-0.87,-0.5)
+        glEnd();                               // 結束畫三角形
+        glPopMatrix();
+        glutSwapBuffers();
+    }
+    else if (display_mode == 3)
+    {
+        //display_mode = 3  //畫矩形
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        glMatrixMode(GL_MODELVIEW);                        // 選擇模型觀察矩陣
+        glLoadIdentity();                                  // 重置模型觀察矩陣   
+        glMatrixMode(GL_PROJECTION);                        // 選擇投影矩陣     
+        glLoadIdentity();
+
+        glEnable(GL_TEXTURE_2D);    //啟用2D紋理映射
+        glBegin(GL_QUADS);
+        glTexCoord2f(0.0f, 0.0f);
+        glVertex3f(-0.5f, -0.5f, 0.0f);
+        glTexCoord2f(1.0f, 0.0f);
+        glVertex3f(0.5f, -0.5f, 0.0f);
+        glTexCoord2f(1.0f, 1.0f);
+        glVertex3f(0.5f, 0.5f, 0.0f);
+        glTexCoord2f(0.0f, 1.0f);
+        glVertex3f(-0.5f, 0.5f, 0.0f);
+        glEnd();
+        glDisable(GL_TEXTURE_2D);
+
+        glutSwapBuffers();
+    }
+    else if (display_mode == 4)
+    {
+        //display_mode = 4  //畫 矩形 + 四邊形
+
+        //Single/Double buffer 會不一樣
+        //glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
+        //glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+
+        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
+
+        glRectf(-0.5f, -0.5f, 0.5f, 0.5f);
+
+        glColor4f(1.0, 0.0, 0.0, 1.0);  //設置畫筆顏色為 R
+        glBegin(GL_QUADS);
+        {
+            glTexCoord2f(0.8f, 0.0f);
+            glVertex2f(0.8f, 0.0f);
+
+            glTexCoord2f(0.0f, -0.8f);
+            glVertex2f(0.0f, -0.8f);
+
+            glTexCoord2f(-0.8f, 0.0f);
+            glVertex2f(-0.8f, 0.0f);
+
+            glTexCoord2f(0.0f, 0.8f);
+            glVertex2f(0.0f, 0.8f);
+        }
+        glEnd();
+
+        glFlush();
+    }
+    else if (display_mode == 5)
+    {
+        //display_mode = 5
+            // 清除之前幀數據
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        // 繪制三角形
+        glBegin(GL_TRIANGLES);
+        glColor3f(1, 0, 0);     //紅
+        glVertex3f(-2, -2, -5); //左下
+
+        glColor3f(0, 1, 0);     //綠
+        glVertex3f(2, -2, -5);  //右下
+
+        glColor3f(0, 0, 1);     //藍
+        glVertex3f(0, 2, -5);   //上
+        glEnd();
+
+        // 執行繪圖命令
+        glFlush();
+
+
+    }
+    else if (display_mode == 6)
+    {
+        //display_mode = 6  //畫
+
+        float mat[16];
+        int i;
+
+        glEnable(GL_DEPTH_TEST);
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClearDepth(1.0);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+        glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+        glGetFloatv(GL_PROJECTION_MATRIX, mat);
+        for (i = 0; i < 16; i++)
+        {
+            printf("%10.7f", mat[i]);
+            if ((i + 1) % 4) printf(" ");
+            else printf("\n");
+        }
+
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();
+
+        glColor3f(1.0f, 0.0f, 0.0f); //在右上角画红色平面：应该在后面
+        glBegin(GL_POLYGON);
+        glVertex3f(0.0f, 0.0f, -1.0f + 0.001f);
+        glVertex3f(1.0f, 0.0f, -1.0f + 0.001f);
+        glVertex3f(1.0f, 1.0f, -1.0f + 0.001f);
+        glVertex3f(0.0f, 1.0f, -1.0f + 0.001f);
+        glEnd();
+        glColor3f(0.0f, 1.0f, 0.0f); //在左下角画绿色的平面：应该在前面
+        glBegin(GL_POLYGON);
+        glVertex3f(-1.0f, -1.0f, 1.0f - 0.001f);
+        glVertex3f(0.0f + 0.5f, -1.0f, 1.0f - 0.001f);
+        glVertex3f(0.0f + 0.5f, 0.0f + 0.5f, 1.0f - 0.001f);
+        glVertex3f(-1.0f, 0.0f + 0.5f, 1.0f - 0.001f);
+        glEnd();
+        glFlush();
+
+    }
+    else if (display_mode == 7)
+    {
+        //display_mode = 7  //畫
+
+
+
+    }
+    else if (display_mode == 8)
+    {
+    //display_mode = 8  //畫
+
+    }
+    else if (display_mode == 9)
+    {
+    //display_mode = 9  //畫
+
+    }
+    else
+    {
+        printf("XXXXXXXXXXXXXXXXXXXXX\n");
+    }
 }
 
 void keyboard(unsigned char k, int /*x*/, int /*y*/)
@@ -32,97 +239,62 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
 		//離開視窗
 		glutDestroyWindow(glutGetWindow());
 		return;
+    case '0':
+        display_mode = 0;
+        break;
+    case '1':
+        display_mode = 1;
+        init01();
+        break;
+    case '2':
+        display_mode = 2;
+        break;
+    case '3':
+        display_mode = 3;
+        break;
+    case '4':
+        display_mode = 4;
+        break;
+    case '5':
+        display_mode = 5;
+        init05();
+        break;
+    case '6':
+        display_mode = 6;
+        break;
+    case '7':
+        display_mode = 7;
+        break;
+    case '8':
+        display_mode = 8;
+        break;
+    case '9':
+        display_mode = 9;
+        break;
 
-	case '1':
-		printf("1\n");
-		break;
-
-	case '2':
-		printf("2\n");
-		break;
-
-	case '3':
-		break;
-
-	case '4':
-		break;
-
-	case '?':
-		break;
-	}
-}
-
-void key(unsigned char key, int /*x*/, int /*y*/)
-{
-	switch (key) {
-	case ' ':
-		//bPause = !bPause;
-		break;
-
-	case 13:
-		break;
-
-	case '\033':
-	case 'q':
-		printf("你按了 離開\n");
-		glutDestroyWindow(glutGetWindow());
-		return;
-	case '1':
-		printf("你按了 選單項目1\n");
-		break;
-
-	case '2':
-		printf("你按了 選單項目2\n");
-		break;
-
-	case '3':
-		printf("你按了 選單項目3\n");
-		break;
-
-	case '4':
-		printf("你按了 選單項目4\n");
-		break;
-
-	case 'u':
-		break;
-
-	case 'r':
-		break;
-
-	}
-	glutPostRedisplay();
-}
-
-void mainMenu(int i) { key((unsigned char)i, 0, 0); }
-
-void initMenus()
-{
-	glutCreateMenu(mainMenu);
-	glutAddMenuEntry("Menu Item 1", '1');
-	glutAddMenuEntry("Menu Item 2", '2');
-	glutAddMenuEntry("Menu Item 3", '3');
-	glutAddMenuEntry("Menu Item 4", '4');
-	glutAddMenuEntry("Exit (esc)", '\033');
-	glutAttachMenu(GLUT_RIGHT_BUTTON);
+    }
+    glutPostRedisplay();    //將當前視窗打上標記，標記其需要再次顯示。
 }
 
 int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+    //glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
+    //glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);    //宣告顯示模式為 Single Buffer 和 RGBA
 
 	glutInitWindowSize(600, 600);		//設定視窗大小, 直接拉大內容
 	glutInitWindowPosition(1100, 200);	//視窗起始位置
 
-	glutCreateWindow("開啟視窗");		//開啟視窗 並顯示出視窗 Title
+    glutCreateWindow("簡單2D OpenGL畫圖 0 ~ 9");    // 設定視窗標題
+
+    init01();
 
 	glutDisplayFunc(display);	//設定callback function
 	glutReshapeFunc(reshape);	//設定callback function
 	glutKeyboardFunc(keyboard);	//設定callback function
 	glutMouseFunc(mouse);		//設定callback function
 	glutMotionFunc(motion);		//設定callback function
-
-	initMenus();
 
 	glutMainLoop();
 

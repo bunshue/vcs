@@ -1,13 +1,14 @@
-﻿// OpenGL Graphics includes
-#include <helper_gl.h>
+﻿#include <helper_gl.h>
 #include <GL/freeglut.h>
 
 #include <stdio.h>
 #include <iostream>
 
+
 // 窗口大小變化回調函數
 void reshape(int w, int h)
 {
+
 }
 
 void mouse(int button, int state, int x, int y)
@@ -59,8 +60,8 @@ int main(int argc, char** argv)
     //glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
-    glutInitWindowSize(600, 600);
-    glutInitWindowPosition(1100, 200);
+	glutInitWindowSize(600, 600);		//設定視窗大小, 直接拉大內容
+	glutInitWindowPosition(1100, 200);	//視窗起始位置
 
     glutCreateWindow("開啟視窗");	//開啟視窗 並顯示出視窗 Title
 

@@ -82,14 +82,6 @@ void init09(void)
     glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0);/* initialize viewing values   */
 }
 
-//display_mode = 10  //畫矩形
-
-void init10(void)
-{
-    glOrtho(0.0f, 300.0f, 0.0f, 300.0f, 1.0, -1.0);//設置窗口坐標系大小
-    glClearColor(0.4f, 1.f, 0.8f, 1.0f);//設置背景色
-}
-
 void drawText1(void)
 {
     using std::string;
@@ -401,105 +393,6 @@ void display(void)
         glEnd();
         glFlush();/* start processing buffered OpenGL routines   */
     }
-    else if (display_mode == 10)
-    {
-        //display_mode = 10  //畫
-        glClear(GL_COLOR_BUFFER_BIT);//清空顏色緩沖池
-        glColor3f(1.0f, 1.0f, 0.0f);//設置繪圖顏色
-        glRectf(100.0f, 100.0f, 200.0f, 200.0f);//繪制矩形
-        glFlush();//刷新緩沖
-    }
-    else if (display_mode == 11)
-    {
-        //display_mode = 11  //畫 彩色三角形
-
-        glPushMatrix();
-        glBegin(GL_TRIANGLES);          // 開始畫三角形
-        glColor3f(1.0f, 0.0f, 0.0f);         // 設定輸出色為紅色
-        glVertex2f(0.0f, 1.0f);           //(x1,y1)=(0, 1)
-        glColor3f(0.0f, 1.0f, 0.0f);         // 設定輸出色為綠色
-        glVertex2f(0.87f, -0.5f);            //(x2,y2)=(0.87,-0.5)
-        glColor3f(0.0f, 0.0f, 1.0f);         // 設定輸出色為藍色
-        glVertex2f(-0.87f, -0.5f);           //(x3,y3)=(-0.87,-0.5)
-        glEnd();                               // 結束畫三角形
-        glPopMatrix();
-        glutSwapBuffers();
-    }
-    else if (display_mode == 12)
-    {
-        //display_mode = 12  //畫矩形
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        glMatrixMode(GL_MODELVIEW);                        // 選擇模型觀察矩陣
-        glLoadIdentity();                                  // 重置模型觀察矩陣   
-        glMatrixMode(GL_PROJECTION);                        // 選擇投影矩陣     
-        glLoadIdentity();
-
-        glEnable(GL_TEXTURE_2D);    //啟用2D紋理映射
-        glBegin(GL_QUADS);
-        glTexCoord2f(0.0f, 0.0f);
-        glVertex3f(-0.5f, -0.5f, 0.0f);
-        glTexCoord2f(1.0f, 0.0f);
-        glVertex3f(0.5f, -0.5f, 0.0f);
-        glTexCoord2f(1.0f, 1.0f);
-        glVertex3f(0.5f, 0.5f, 0.0f);
-        glTexCoord2f(0.0f, 1.0f);
-        glVertex3f(-0.5f, 0.5f, 0.0f);
-        glEnd();
-        glDisable(GL_TEXTURE_2D);
-
-        glutSwapBuffers();
-    }
-    else if (display_mode == 13)
-    {
-        //display_mode = 13  //畫 矩形 + 四邊形
-
-        //Single/Double buffer 會不一樣
-        //glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
-        //glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-
-        glClear(GL_COLOR_BUFFER_BIT);
-
-        glRectf(-0.5f, -0.5f, 0.5f, 0.5f);
-
-        glColor4f(1.0, 0.0, 0.0, 1.0);  //設置畫筆顏色為 R
-        glBegin(GL_QUADS);
-        {
-            glTexCoord2f(0.8f, 0.0f);
-            glVertex2f(0.8f, 0.0f);
-
-            glTexCoord2f(0.0f, -0.8f);
-            glVertex2f(0.0f, -0.8f);
-
-            glTexCoord2f(-0.8f, 0.0f);
-            glVertex2f(-0.8f, 0.0f);
-
-            glTexCoord2f(0.0f, 0.8f);
-            glVertex2f(0.0f, 0.8f);
-        }
-        glEnd();
-
-        glFlush();
-    }
-    else if (display_mode == 14)
-    {
-        //display_mode = 14
-        
-    }
-    else if (display_mode == 15)
-    {
-        //display_mode = 15  //畫
-
-
-
-    }
-    else if (display_mode == 16)
-    {
-        //display_mode = 16  //畫
-
-
-
-    }
     else
     {
         printf("XXXXXXXXXXXXXXXXXXXXX\n");
@@ -571,25 +464,6 @@ static void keyboard(unsigned char key, int x, int y)
         display_mode = 9;
         init09();
         break;
-    case 'a':
-        display_mode = 10;
-        init10();
-        break;
-    case 'b':
-        display_mode = 11;
-        break;
-    case 'c':
-        display_mode = 12;
-        break;
-    case 'd':
-        display_mode = 13;
-        break;
-    case 'e':
-        display_mode = 14;
-        break;
-    case 'f':
-        display_mode = 15;
-        break;
     }
 
     glutPostRedisplay();    //將當前視窗打上標記，標記其需要再次顯示。
@@ -601,7 +475,29 @@ static void keyboard(unsigned char key, int x, int y)
     */
 }
 
-void mainMenu(int i) { keyboard(i, 0, 0); }
+//key 枚举值，x、y是位置
+void SpecialKey(int key, int x, int y)
+{
+    if (key == GLUT_KEY_UP)
+    {
+        printf("上 ");
+    }
+    if (key == GLUT_KEY_DOWN)
+    {
+        printf("下 ");
+    }
+    if (key == GLUT_KEY_LEFT)
+    {
+        printf("左 ");
+    }
+    if (key == GLUT_KEY_RIGHT)
+    {
+        printf("右 ");
+    }
+
+}
+
+void mainMenu(int i) { keyboard((unsigned char)i, 0, 0); }
 
 void initMenus()
 {
@@ -661,12 +557,17 @@ int main(int argc, char* argv[])
     glutDisplayFunc(display);       //設定callback function, 註冊顯示函數 // Register display callback handler for window re-paint
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
-    //glutSpecialFunc(SpecialKey);    //設定callback function
+    glutSpecialFunc(SpecialKey);    //設定callback function
 
     initMenus();        //設定表單按鈕
 
     //glutWireTeapot(200);
     //glutWireTeapot(3);
+
+
+
+    //设置一组浮点数来表示红色
+    GLfloat vRed[] = { 1.0,1.00,0.0,0.5f };
 
 
     glutMainLoop();     // Enter the event-processing loop
