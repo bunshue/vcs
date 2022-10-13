@@ -12,8 +12,31 @@ void init()
     glShadeModel(GL_SMOOTH);
 }
 
-void DrawMyObjects(void)
+// 窗口大小變化回調函數
+void reshape(int w, int h)
 {
+    glViewport(0, 0, w, h);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(60.0, (GLfloat)w / (GLfloat)h, 0.1, 100000.0);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+    gluLookAt(0, 0, 25, 0, 0, -1, 0, 1, 0);
+}
+
+void mouse(int button, int state, int x, int y)
+{
+}
+
+void motion(int x, int y)
+{
+}
+
+// 繪圖回調函數
+void display(void)
+{
+    glClear(GL_COLOR_BUFFER_BIT);   // 清除之前幀數據
+
     /* draw some points */
     glBegin(GL_POINTS);
     glColor3f(1.0, 0.0, 0.0);
@@ -129,36 +152,8 @@ void DrawMyObjects(void)
     glColor3f(0.8, 0.5, 0.2);
     glVertex2f(10.5, -9.0);
     glEnd();
-}
 
-// 窗口大小變化回調函數
-void reshape(int w, int h)
-{
-    glViewport(0, 0, w, h);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluPerspective(60.0, (GLfloat)w / (GLfloat)h, 0.1, 100000.0);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-    gluLookAt(0, 0, 25, 0, 0, -1, 0, 1, 0);
-}
-
-void mouse(int button, int state, int x, int y)
-{
-}
-
-void motion(int x, int y)
-{
-}
-
-// 繪圖回調函數
-void display(void)
-{
-    // 清除之前幀數據
-    glClear(GL_COLOR_BUFFER_BIT);
-    DrawMyObjects();
-    // 執行繪圖命令
-    glFlush();
+    glFlush();  // 執行繪圖命令
 }
 
 void keyboard(unsigned char k, int /*x*/, int /*y*/)

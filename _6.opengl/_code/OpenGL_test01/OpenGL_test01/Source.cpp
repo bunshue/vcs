@@ -48,9 +48,22 @@ void drawGrid(int xmin, int xmax, int ymin, int ymax)
     }
 }
 
-//display_mode = 8  //畫茶壺
+// 初始化參數
+void init01(void)
+{
+    //好像做不做沒甚麼差別
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+    glClearColor(0.0, 0.0, 0.0, 0.0);
 
-void init8()
+    //glClearColor(0.1, 0.1, 0.4, 0.0);
+    //glShadeModel(GL_SMOOTH);
+
+    //glClearColor(0.1, 0.1, 0.4, 0.0);
+    //glShadeModel(GL_SMOOTH);
+}
+
+//display_mode = 8  //畫茶壺
+void init08()
 {
     glClearColor(0.0, 0.0, 0.0, 0.0);
     glMatrixMode(GL_PROJECTION);
@@ -61,7 +74,7 @@ void init8()
 
 //display_mode = 9  //畫矩形
 
-void init9(void)
+void init09(void)
 {
     glClearColor(0.0, 0.0, 0.0, 0.0);/* select clearing color   */
     glMatrixMode(GL_PROJECTION);
@@ -172,7 +185,7 @@ void display(void)
     }
     else if (display_mode == 2)
     {
-        glClearColor(0.5f, 0.5f, 0.5f, 0.0f);
+        glClearColor(0.5f, 0.5f, 0.5f, 0.0f);   //設定背景 與 透明度
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
         //設置顏色
@@ -180,12 +193,10 @@ void display(void)
 
         //開始渲染
         glBegin(GL_POLYGON);
-
-        //圓的頂點數：數越大越趨近于圓
-        const int n = 55;
+        //多邊形的頂點數：數越大越趨近于圓
+        const int n = 10;
         const GLfloat R = 0.5f;
         const GLfloat pi = 3.1415926f;
-
         for (int i = 0; i < n; i++)
         {
             glVertex2f(R * cos(2 * pi / n * i), R * sin(2 * pi / n * i));
@@ -193,19 +204,33 @@ void display(void)
         //結束渲染
         glEnd();
 
+        //畫矩形
+        glBegin(GL_QUADS);              //矩形
+        glColor3f(1.0f, 0.0f, 0.0f); // R
+        glVertex2f(-0.2f, -0.2f);    // x, y
+        glVertex2f(0.2f, -0.2f);
+        glVertex2f(0.2f, 0.2f);
+        glVertex2f(-0.2f, 0.2f);
+        glEnd();
+
+        //畫一個矩形
+             //左下x,左下y,右上x,右上y,
+        glRectf(0.5f, 0.5f, 0.6f, 0.6f);
+
         //強制刷新緩存區
         glFlush();
     }
     else if (display_mode == 3)
     {
-        int i, n = 6;
+        int i;
+        int n = 6;
 
         glClearColor(0.0, 0.0, 0.0, 0.0);
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        gluOrtho2D(0.0, NGRID, 0.0, NGRID); //窗口坐標范圍
+        gluOrtho2D(0.0, NGRID, 0.0, NGRID); //窗口坐標範圍
 
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
@@ -233,9 +258,7 @@ void display(void)
             glVertex2d(pnts[i + 1][0], pnts[i + 1][1]);
             glEnd();
         }
-
         glFlush();
-
     }
     else if (display_mode == 4)
     {
@@ -252,6 +275,7 @@ void display(void)
         glLoadIdentity();
         glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
         glGetFloatv(GL_PROJECTION_MATRIX, mat);
+        /*
         for (i = 0; i < 16; i++)
         {
             printf("%10.7f", mat[i]);
@@ -264,17 +288,18 @@ void display(void)
                 printf("\n");
             }
         }
-
+        */
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
 
-        glColor3f(1.0f, 0.0f, 0.0f); //在右上角畫紅色平面：應該在后面
+        glColor3f(1.0f, 0.0f, 0.0f); //在右上角畫紅色平面：應該在後面
         glBegin(GL_POLYGON);
         glVertex3f(0.0f, 0.0f, -1.0f + 0.001f);
         glVertex3f(1.0f, 0.0f, -1.0f + 0.001f);
         glVertex3f(1.0f, 1.0f, -1.0f + 0.001f);
         glVertex3f(0.0f, 1.0f, -1.0f + 0.001f);
         glEnd();
+
         glColor3f(0.0f, 1.0f, 0.0f); //在左下角畫綠色的平面：應該在前面
         glBegin(GL_POLYGON);
         glVertex3f(-1.0f, -1.0f, 1.0f - 0.001f);
@@ -294,7 +319,7 @@ void display(void)
 
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        gluOrtho2D(-1.0, 11.0, -1.0, 11.0); //窗口坐標范圍
+        gluOrtho2D(-1.0, 11.0, -1.0, 11.0); //窗口坐標範圍
 
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
@@ -335,31 +360,18 @@ void display(void)
     }
     else if (display_mode == 6)
     {
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f); // Set background color to black and opaque
-        glClear(GL_COLOR_BUFFER_BIT);         // Clear the color buffer (background)
-
-        // Draw a Red 1x1 Square centered at origin
-        glBegin(GL_QUADS);              // Each set of 4 vertices form a quad
-        glColor3f(1.0f, 0.0f, 0.0f); // Red
-        glVertex2f(-0.5f, -0.5f);    // x, y
-        glVertex2f(0.5f, -0.5f);
-        glVertex2f(0.5f, 0.5f);
-        glVertex2f(-0.5f, 0.5f);
-        glEnd();
-
-        glFlush();  // Render now
     }
     else if (display_mode == 7)
     {
         glPushMatrix();
-        glBegin(GL_TRIANGLES);          // 開始劃三角形
+        glBegin(GL_TRIANGLES);          // 開始畫三角形
         glColor3f(1.0f, 0.0f, 0.0f);         // 設定輸出色為紅色
         glVertex2f(0.0f, 1.0f);           //(x1,y1)=(0, 1)
         glColor3f(0.0f, 1.0f, 0.0f);         // 設定輸出色為綠色
         glVertex2f(0.87f, -0.5f);            //(x2,y2)=(0.87,-0.5)
         glColor3f(0.0f, 0.0f, 1.0f);         // 設定輸出色為藍色
         glVertex2f(-0.87f, -0.5f);           //(x3,y3)=(-0.87,-0.5)
-        glEnd();                               // 結束劃三角形
+        glEnd();                               // 結束畫三角形
         glPopMatrix();
         glutSwapBuffers();
     }
@@ -402,14 +414,14 @@ void display(void)
         //display_mode = 11  //畫 彩色三角形
 
         glPushMatrix();
-        glBegin(GL_TRIANGLES);          // 開始劃三角形
+        glBegin(GL_TRIANGLES);          // 開始畫三角形
         glColor3f(1.0f, 0.0f, 0.0f);         // 設定輸出色為紅色
         glVertex2f(0.0f, 1.0f);           //(x1,y1)=(0, 1)
         glColor3f(0.0f, 1.0f, 0.0f);         // 設定輸出色為綠色
         glVertex2f(0.87f, -0.5f);            //(x2,y2)=(0.87,-0.5)
         glColor3f(0.0f, 0.0f, 1.0f);         // 設定輸出色為藍色
         glVertex2f(-0.87f, -0.5f);           //(x3,y3)=(-0.87,-0.5)
-        glEnd();                               // 結束劃三角形
+        glEnd();                               // 結束畫三角形
         glPopMatrix();
         glutSwapBuffers();
     }
@@ -440,7 +452,7 @@ void display(void)
     }
     else if (display_mode == 13)
     {
-        //display_mode = 13  //畫 舉形 + 四邊形
+        //display_mode = 13  //畫 矩形 + 四邊形
 
         //Single/Double buffer 會不一樣
         //glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
@@ -471,14 +483,8 @@ void display(void)
     }
     else if (display_mode == 14)
     {
-        //display_mode = 14  //畫一個矩形
-
-        glClear(GL_COLOR_BUFFER_BIT);
-        glRectf(-0.1f, -0.1f, 0.5f, 0.5f);
-        glFlush();
-
-
-
+        //display_mode = 14
+        
     }
     else if (display_mode == 15)
     {
@@ -537,6 +543,7 @@ static void keyboard(unsigned char key, int x, int y)
         break;
     case '1':
         display_mode = 1;
+        init01();
         break;
     case '2':
         display_mode = 2;
@@ -558,11 +565,11 @@ static void keyboard(unsigned char key, int x, int y)
         break;
     case '8':
         display_mode = 8;
-        init8();
+        init08();
         break;
     case '9':
         display_mode = 9;
-        init9();
+        init09();
         break;
     case 'a':
         display_mode = 10;
@@ -612,20 +619,6 @@ void initMenus()
     glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
-// 初始化參數
-void init(void)
-{
-    //好像做不做沒甚麼差別
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    glClearColor(0.0, 0.0, 0.0, 0.0);
-
-    //glClearColor(0.1, 0.1, 0.4, 0.0);
-    //glShadeModel(GL_SMOOTH);
-
-    //glClearColor(0.1, 0.1, 0.4, 0.0);
-    //glShadeModel(GL_SMOOTH);
-}
-
 int main(int argc, char* argv[])
 {
     //初始化GLUT庫，這個函數只是傳說命令參數并且初始化glut庫
@@ -658,8 +651,10 @@ int main(int argc, char* argv[])
 
     //int res = glutGetWindow();
     //printf("當前視窗的標記符 = %d\n", res);
+    //printf("取得視窗寬度 : %d\n", glutGet(GLUT_WINDOW_WIDTH));
+    //printf("取得視窗高度 : %d\n", glutGet(GLUT_WINDOW_HEIGHT));
 
-    init();
+    init01();
 
     glutSetCursor(GLUT_CURSOR_DESTROY); //改變視窗上的鼠標標記
 
@@ -669,10 +664,6 @@ int main(int argc, char* argv[])
     //glutSpecialFunc(SpecialKey);    //設定callback function
 
     initMenus();        //設定表單按鈕
-
-    printf("取得視窗寬度 : %d\n", glutGet(GLUT_WINDOW_WIDTH));
-    printf("取得視窗高度 : %d\n", glutGet(GLUT_WINDOW_HEIGHT));
-
 
     //glutWireTeapot(200);
     //glutWireTeapot(3);

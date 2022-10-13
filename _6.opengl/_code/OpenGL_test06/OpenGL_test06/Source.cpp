@@ -5,6 +5,24 @@
 #include <stdio.h>
 #include <iostream>
 
+// 初始化參數
+void init()
+{
+    GLfloat ambient[] = { 0.0, 0.0, 0.0, 1.0 };
+    GLfloat diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
+    //    GLfloat specular[] = { 1.0, 1.0, 1.0, 1.0 };
+    GLfloat position[] = { 0.0, 0, -1.0, 0.0 };
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
+    glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
+    //    glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
+    glLightfv(GL_LIGHT0, GL_POSITION, position);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+    glClearColor(0.0, 0.1, 0.1, 0.0);
+}
+
 // 窗口大小變化回調函數
 void reshape(int w, int h)
 {
@@ -25,23 +43,6 @@ void motion(int x, int y)
 {
 }
 
-// 初始化參數
-void init() {
-    GLfloat ambient[] = { 0.0, 0.0, 0.0, 1.0 };
-    GLfloat diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
-    //    GLfloat specular[] = { 1.0, 1.0, 1.0, 1.0 };
-    GLfloat position[] = { 0.0, 0, -1.0, 0.0 };
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
-    glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
-    //    glLightfv(GL_LIGHT0, GL_SPECULAR, specular);
-    glLightfv(GL_LIGHT0, GL_POSITION, position);
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
-    glClearColor(0.0, 0.1, 0.1, 0.0);
-}
-
 // 繪圖回調函數
 void display(void)
 {
@@ -56,8 +57,6 @@ void display(void)
     GLfloat mat_emission[] = { 0.3, 0.2, 0.2, 0.0 };
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-
-
     /* 第一行第一列繪制的球僅有漫反射光而無環境光和鏡面光。*/
     glPushMatrix();
     glTranslatef(-3.75, 3.0, 0.0);
@@ -68,8 +67,6 @@ void display(void)
     glMaterialfv(GL_FRONT, GL_EMISSION, no_mat);
     glutSolidSphere(1.0, 20, 20);
     glPopMatrix();
-
-
 
     /* 第一行第二列繪制的球有漫反射光和鏡面光，并有低高光，而無環境光 。*/
     glPushMatrix();
@@ -83,8 +80,6 @@ void display(void)
 
     glPopMatrix();
 
-
-
     /* 第一行第三列繪制的球有漫反射光和鏡面光，并有很亮的高光，而無環境光 。*/
     glPushMatrix();
     glTranslatef(1.25, 3.0, 0.0);
@@ -95,7 +90,6 @@ void display(void)
     glMaterialfv(GL_FRONT, GL_EMISSION, no_mat);
     glutSolidSphere(1.0, 20, 20);
     glPopMatrix();
-
 
     /* 第一行第四列繪制的球有漫反射光和輻射光，而無環境和鏡面反射光。*/
     glPushMatrix();
@@ -108,7 +102,6 @@ void display(void)
     glutSolidSphere(1.0, 20, 20);
     glPopMatrix();
 
-
     /* 第二行第一列繪制的球有漫反射光和環境光，而鏡面反射光。*/
     glPushMatrix();
     glTranslatef(-3.75, 0.0, 0.0);
@@ -119,7 +112,6 @@ void display(void)
     glMaterialfv(GL_FRONT, GL_EMISSION, no_mat);
     glutSolidSphere(1.0, 20, 20);
     glPopMatrix();
-
 
     /* 第二行第二列繪制的球有漫反射光、環境光和鏡面光，且有低高光。*/
     glPushMatrix();
@@ -132,7 +124,6 @@ void display(void)
     glutSolidSphere(1.0, 20, 20);
     glPopMatrix();
 
-
     /* 第二行第三列繪制的球有漫反射光、環境光和鏡面光，且有很亮的高光。*/
     glPushMatrix();
     glTranslatef(1.25, 0.0, 0.0);
@@ -143,7 +134,6 @@ void display(void)
     glMaterialfv(GL_FRONT, GL_EMISSION, no_mat);
     glutSolidSphere(1.0, 20, 20);
     glPopMatrix();
-
 
     /* 第二行第四列繪制的球有漫反射光、環境光和輻射光，而無鏡面光。*/
     glPushMatrix();
@@ -156,7 +146,6 @@ void display(void)
     glutSolidSphere(1.0, 20, 20);
     glPopMatrix();
 
-
     /* 第三行第一列繪制的球有漫反射光和有顏色的環境光，而無鏡面光。*/
     glPushMatrix();
     glTranslatef(-3.75, -3.0, 0.0);
@@ -167,7 +156,6 @@ void display(void)
     glMaterialfv(GL_FRONT, GL_EMISSION, no_mat);
     glutSolidSphere(1.0, 20, 20);
     glPopMatrix();
-
 
     /* 第三行第二列繪制的球有漫反射光和有顏色的環境光以及鏡面光，且有低高光。*/
     glPushMatrix();
@@ -180,7 +168,6 @@ void display(void)
     glutSolidSphere(1.0, 20, 20);
     glPopMatrix();
 
-
     /* 第三行第三列繪制的球有漫反射光和有顏色的環境光以及鏡面光，且有很亮的高光。*/
     glPushMatrix();
     glTranslatef(1.25, -3.0, 0.0);
@@ -191,7 +178,6 @@ void display(void)
     glMaterialfv(GL_FRONT, GL_EMISSION, no_mat);
     glutSolidSphere(1.0, 20, 20);
     glPopMatrix();
-
 
     /* 第三行第四列繪制的球有漫反射光和有顏色的環境光以及輻射光，而無鏡面光。*/
     glPushMatrix();

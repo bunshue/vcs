@@ -52,8 +52,8 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
 	}
 }
 
-// commented out to remove unused parameter warnings in Linux
-void key(unsigned char key, int /*x*/, int /*y*/) {
+void key(unsigned char key, int /*x*/, int /*y*/)
+{
 	switch (key) {
 	case ' ':
 		//bPause = !bPause;
