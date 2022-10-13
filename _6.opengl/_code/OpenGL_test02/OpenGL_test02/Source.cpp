@@ -25,8 +25,6 @@ void init05()
 // 窗口大小變化回調函數
 void reshape(int w, int h)
 {
-	glViewport(0, 0, w, h);
-
     glViewport(0, 0, w, h);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -62,15 +60,18 @@ void display(void)
     {
         //display_mode = 1  //畫
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        glColor3f(1.0f, 1.0f, 0.0f);//設置繪圖顏色
+        glColor3f(0.0f, 1.0f, 0.0f);//設置繪圖顏色
         glRectf(100.0f, 100.0f, 200.0f, 200.0f);//繪制矩形
 
         glFlush();//刷新緩沖
+        glutSwapBuffers();
     }
     else if (display_mode == 2)
     {
         //display_mode = 2  //畫 彩色三角形
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glPushMatrix();
         glBegin(GL_TRIANGLES);          // 開始畫三角形
@@ -179,13 +180,14 @@ void display(void)
         glLoadIdentity();
         glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
         glGetFloatv(GL_PROJECTION_MATRIX, mat);
+        /*
         for (i = 0; i < 16; i++)
         {
             printf("%10.7f", mat[i]);
             if ((i + 1) % 4) printf(" ");
             else printf("\n");
         }
-
+        */
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
 

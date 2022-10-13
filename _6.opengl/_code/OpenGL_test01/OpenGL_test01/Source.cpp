@@ -169,6 +169,11 @@ void display(void)
         glColor4f(0.0, 0.0, 1.0, 1.0);  //設置畫筆顏色為 B
         glRectf(0.3f, -0.7f, 0.7f, 0.7f);//畫一個矩形
 
+        //畫一個矩形
+        glColor4f(1.0, 1.0, 1.0, 1.0);  //設置畫筆顏色為 White
+        //左下x,左下y,右上x,右上y,
+        glRectf(0.5f, 0.0f, 0.65f, 0.15f);
+
         //drawText1();
 
         drawText2();
@@ -204,10 +209,6 @@ void display(void)
         glVertex2f(0.2f, 0.2f);
         glVertex2f(-0.2f, 0.2f);
         glEnd();
-
-        //畫一個矩形
-             //左下x,左下y,右上x,右上y,
-        glRectf(0.5f, 0.5f, 0.6f, 0.6f);
 
         //強制刷新緩存區
         glFlush();

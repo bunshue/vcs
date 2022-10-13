@@ -52,13 +52,11 @@ namespace AudioMerger
             }
             catch (WAVFileAudioMergeException exc)
             {
-                MessageBox.Show(mAppForm, "Audio merge exception: " + exc.Message, "Error", MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);
+                MessageBox.Show(mAppForm, "Audio merge exception: " + exc.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (WAVFileException exc)
             {
-                MessageBox.Show(mAppForm, "WAV file exception: " + exc.Message, "Error", MessageBoxButtons.OK,
-                                MessageBoxIcon.Error);
+                MessageBox.Show(mAppForm, "WAV file exception: " + exc.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception exc)
             {
@@ -67,7 +65,7 @@ namespace AudioMerger
 
             try
             {
-                mAppForm.Show_Message("Done.");
+                mAppForm.Show_Message("完成");
 
                 // Re-enable the audio merge GUI elements on the main GUI
                 mAppForm.EnableAudioMergeGUIElements();
