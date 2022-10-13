@@ -137,6 +137,7 @@ void initGL(int* argc, char** argv)
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGB | GLUT_DEPTH | GLUT_DOUBLE);
     glutInitWindowSize(width, height);
+
     glutCreateWindow("CUDA Particles");
 
     if (!isGLVersionSupported(2, 0) || !areGLExtensionsSupported("GL_ARB_multitexture GL_ARB_vertex_buffer_object"))

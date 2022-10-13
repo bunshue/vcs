@@ -324,11 +324,10 @@ int main(int argc, char** argv)
 
     srand(15234);
 
-    // use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
+    // use command-line specified CUDA device, otherwise use device with highest Gflops/s
     findCudaDevice(argc, (const char**)argv);
 
-    if (!ref_file)
+    if (ref_file == NULL)
     {
         printf("here\n");
 
@@ -350,7 +349,7 @@ int main(int argc, char** argv)
 
     loadImageData(argv[0]);
 
-    if (ref_file)
+    if (ref_file!= NULL)
     {
         printf("XXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
         runAutoTest(ref_file, argv[0]);

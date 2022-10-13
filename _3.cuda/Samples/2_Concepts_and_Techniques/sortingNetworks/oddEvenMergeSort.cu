@@ -12,9 +12,8 @@ namespace cg = cooperative_groups;
 ////////////////////////////////////////////////////////////////////////////////
 // Monolithic Bacther's sort kernel for short arrays fitting into shared memory
 ////////////////////////////////////////////////////////////////////////////////
-__global__ void oddEvenMergeSortShared(uint* d_DstKey, uint* d_DstVal,
-    uint* d_SrcKey, uint* d_SrcVal,
-    uint arrayLength, uint dir) {
+__global__ void oddEvenMergeSortShared(uint* d_DstKey, uint* d_DstVal, uint* d_SrcKey, uint* d_SrcVal, uint arrayLength, uint dir)
+{
     // Handle to thread block group
     cg::thread_block cta = cg::this_thread_block();
     // Shared memory storage for one or more small vectors
@@ -48,7 +47,9 @@ __global__ void oddEvenMergeSortShared(uint* d_DstKey, uint* d_DstVal,
             uint pos = 2 * threadIdx.x - (threadIdx.x & (stride - 1));
 
             if (offset >= stride)
+            {
                 Comparator(s_key[pos - stride], s_val[pos - stride], s_key[pos + 0], s_val[pos + 0], dir);
+            }
         }
     }
 
@@ -63,8 +64,7 @@ __global__ void oddEvenMergeSortShared(uint* d_DstKey, uint* d_DstVal,
 // Odd-even merge sort iteration kernel
 // for large arrays (not fitting into shared memory)
 ////////////////////////////////////////////////////////////////////////////////
-__global__ void oddEvenMergeGlobal(uint* d_DstKey, uint* d_DstVal, uint* d_SrcKey, uint* d_SrcVal,
-    uint arrayLength, uint size, uint stride, uint dir)
+__global__ void oddEvenMergeGlobal(uint* d_DstKey, uint* d_DstVal, uint* d_SrcKey, uint* d_SrcVal, uint arrayLength, uint size, uint stride, uint dir)
 {
     uint global_comparatorI = blockIdx.x * blockDim.x + threadIdx.x;
 
@@ -112,11 +112,13 @@ __global__ void oddEvenMergeGlobal(uint* d_DstKey, uint* d_DstVal, uint* d_SrcKe
 // Helper function
 extern "C" uint factorRadix2(uint * log2L, uint L);
 
-extern "C" void oddEvenMergeSort(uint * d_DstKey, uint * d_DstVal, uint * d_SrcKey, uint * d_SrcVal, uint batchSize,
-    uint arrayLength, uint dir)
+extern "C" void oddEvenMergeSort(uint * d_DstKey, uint * d_DstVal, uint * d_SrcKey, uint * d_SrcVal, uint batchSize, uint arrayLength, uint dir)
 {
     // Nothing to sort
-    if (arrayLength < 2) return;
+    if (arrayLength < 2)
+    {
+        return;
+    }
 
     // Only power-of-two array lengths are supported by this implementation
     uint log2L;
@@ -138,13 +140,14 @@ extern "C" void oddEvenMergeSort(uint * d_DstKey, uint * d_DstVal, uint * d_SrcK
         oddEvenMergeSortShared << <blockCount, threadCount >> > (d_DstKey, d_DstVal, d_SrcKey, d_SrcVal, SHARED_SIZE_LIMIT, dir);
 
         for (uint size = 2 * SHARED_SIZE_LIMIT; size <= arrayLength; size <<= 1)
+        {
             for (unsigned stride = size / 2; stride > 0; stride >>= 1)
             {
                 // Unlike with bitonic sort, combining bitonic merge steps with
                 // stride = [SHARED_SIZE_LIMIT / 2 .. 1] seems to be impossible as there
-                // are dependencies between data elements crossing the SHARED_SIZE_LIMIT
-                // borders
+                // are dependencies between data elements crossing the SHARED_SIZE_LIMIT borders
                 oddEvenMergeGlobal << <(batchSize * arrayLength) / 512, 256 >> > (d_DstKey, d_DstVal, d_DstKey, d_DstVal, arrayLength, size, stride, dir);
             }
+        }
     }
 }

@@ -1,5 +1,3 @@
-// Utilities and system includes
-
 #include <helper_cuda.h>
 
 // clamp x to range [a, b]

@@ -26,7 +26,6 @@
 int main(int argc, char** argv)
 {
     cudaError_t error;
-    printf("Starting...\n");
     printf("Starting up CUDA context...\n");
 
     int dev = findCudaDevice(argc, (const char**)argv);

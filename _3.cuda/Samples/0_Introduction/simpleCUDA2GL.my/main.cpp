@@ -57,7 +57,6 @@ StopWatchInterface* timer = NULL;
 extern "C" void launch_cudaProcess(dim3 grid, dim3 block, int sbytes, unsigned int* g_odata, int imgw);
 extern "C" void launch_cudaProcess2(unsigned int* g_odata, int imgw);
 
-// Forward declarations
 void FreeResource();
 void Cleanup(int iExitCode);
 
@@ -268,6 +267,7 @@ void reshape(int w, int h)
 {
     window_width = w;
     window_height = h;
+    //printf("w = %d, h = %d ", w, h);
 }
 
 void mainMenu(int i) { keyboard((unsigned char)i, 0, 0); }

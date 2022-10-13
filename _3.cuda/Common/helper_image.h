@@ -633,7 +633,8 @@ inline bool compareDataAsFloatThreshold(const T* reference, const T* data,
     }
 }
 
-inline void sdkDumpBin(void* data, unsigned int bytes, const char* filename) {
+inline void sdkDumpBin(void* data, unsigned int bytes, const char* filename)
+{
     printf("sdkDumpBin: <%s>\n", filename);
     FILE* fp;
     FOPEN(fp, filename, "wb");
@@ -643,66 +644,64 @@ inline void sdkDumpBin(void* data, unsigned int bytes, const char* filename) {
 }
 
 inline bool sdkCompareBin2BinUint(const char* src_file, const char* ref_file,
-    unsigned int nelements, const float epsilon,
-    const float threshold, char* exec_path) {
+    unsigned int nelements, const float epsilon, const float threshold, char* exec_path)
+{
     unsigned int* src_buffer, * ref_buffer;
     FILE* src_fp = NULL, * ref_fp = NULL;
 
     uint64_t error_count = 0;
     size_t fsize = 0;
 
-    if (FOPEN_FAIL(FOPEN(src_fp, src_file, "rb"))) {
-        printf("compareBin2Bin <unsigned int> unable to open src_file: %s\n",
-            src_file);
+    if (FOPEN_FAIL(FOPEN(src_fp, src_file, "rb")))
+    {
+        printf("compareBin2Bin <unsigned int> unable to open src_file: %s\n", src_file);
         error_count++;
     }
 
     char* ref_file_path = sdkFindFilePath(ref_file, exec_path);
 
-    if (ref_file_path == NULL) {
-        printf("compareBin2Bin <unsigned int>  unable to find <%s> in <%s>\n",
-            ref_file, exec_path);
-        printf(">>> Check info.xml and [project//data] folder <%s> <<<\n",
-            ref_file);
+    if (ref_file_path == NULL)
+    {
+        printf("compareBin2Bin <unsigned int>  unable to find <%s> in <%s>\n", ref_file, exec_path);
+        printf(">>> Check info.xml and [project//data] folder <%s> <<<\n", ref_file);
         printf("Aborting comparison!\n");
         printf("  FAILED\n");
         error_count++;
 
-        if (src_fp) {
+        if (src_fp)
+        {
             fclose(src_fp);
         }
 
-        if (ref_fp) {
+        if (ref_fp)
+        {
             fclose(ref_fp);
         }
     }
-    else {
-        if (FOPEN_FAIL(FOPEN(ref_fp, ref_file_path, "rb"))) {
-            printf(
-                "compareBin2Bin <unsigned int>"
-                " unable to open ref_file: %s\n",
-                ref_file_path);
+    else
+    {
+        if (FOPEN_FAIL(FOPEN(ref_fp, ref_file_path, "rb")))
+        {
+            printf("compareBin2Bin <unsigned int> unable to open ref_file: %s\n", ref_file_path);
             error_count++;
         }
 
-        if (src_fp && ref_fp) {
+        if (src_fp && ref_fp)
+        {
             src_buffer = (unsigned int*)malloc(nelements * sizeof(unsigned int));
             ref_buffer = (unsigned int*)malloc(nelements * sizeof(unsigned int));
 
             fsize = fread(src_buffer, nelements, sizeof(unsigned int), src_fp);
             fsize = fread(ref_buffer, nelements, sizeof(unsigned int), ref_fp);
 
-            printf(
-                "> compareBin2Bin <unsigned int> nelements=%d,"
+            printf("> compareBin2Bin <unsigned int> nelements=%d,"
                 " epsilon=%4.2f, threshold=%4.2f\n",
                 nelements, epsilon, threshold);
-            printf("   src_file <%s>, size=%d bytes\n", src_file,
-                static_cast<int>(fsize));
-            printf("   ref_file <%s>, size=%d bytes\n", ref_file_path,
-                static_cast<int>(fsize));
+            printf("   src_file <%s>, size=%d bytes\n", src_file, static_cast<int>(fsize));
+            printf("   ref_file <%s>, size=%d bytes\n", ref_file_path, static_cast<int>(fsize));
 
-            if (!compareData<unsigned int, float>(ref_buffer, src_buffer, nelements,
-                epsilon, threshold)) {
+            if (!compareData<unsigned int, float>(ref_buffer, src_buffer, nelements, epsilon, threshold))
+            {
                 error_count++;
             }
 
@@ -712,21 +711,26 @@ inline bool sdkCompareBin2BinUint(const char* src_file, const char* ref_file,
             free(src_buffer);
             free(ref_buffer);
         }
-        else {
-            if (src_fp) {
+        else
+        {
+            if (src_fp)
+            {
                 fclose(src_fp);
             }
 
-            if (ref_fp) {
+            if (ref_fp)
+            {
                 fclose(ref_fp);
             }
         }
     }
 
-    if (error_count == 0) {
+    if (error_count == 0)
+    {
         printf("  OK\n");
     }
-    else {
+    else
+    {
         printf("  FAILURE: %d errors...\n", (unsigned int)error_count);
     }
 
@@ -742,54 +746,54 @@ inline bool sdkCompareBin2BinFloat(const char* src_file, const char* ref_file,
 
     uint64_t error_count = 0;
 
-    if (FOPEN_FAIL(FOPEN(src_fp, src_file, "rb"))) {
+    if (FOPEN_FAIL(FOPEN(src_fp, src_file, "rb")))
+    {
         printf("compareBin2Bin <float> unable to open src_file: %s\n", src_file);
         error_count = 1;
     }
 
     char* ref_file_path = sdkFindFilePath(ref_file, exec_path);
 
-    if (ref_file_path == NULL) {
-        printf("compareBin2Bin <float> unable to find <%s> in <%s>\n", ref_file,
-            exec_path);
-        printf(">>> Check info.xml and [project//data] folder <%s> <<<\n",
-            exec_path);
+    if (ref_file_path == NULL)
+    {
+        printf("compareBin2Bin <float> unable to find <%s> in <%s>\n", ref_file, exec_path);
+        printf(">>> Check info.xml and [project//data] folder <%s> <<<\n", exec_path);
         printf("Aborting comparison!\n");
         printf("  FAILED\n");
         error_count++;
 
-        if (src_fp) {
+        if (src_fp)
+        {
             fclose(src_fp);
         }
 
-        if (ref_fp) {
+        if (ref_fp)
+        {
             fclose(ref_fp);
         }
     }
-    else {
-        if (FOPEN_FAIL(FOPEN(ref_fp, ref_file_path, "rb"))) {
-            printf("compareBin2Bin <float> unable to open ref_file: %s\n",
-                ref_file_path);
+    else
+    {
+        if (FOPEN_FAIL(FOPEN(ref_fp, ref_file_path, "rb")))
+        {
+            printf("compareBin2Bin <float> unable to open ref_file: %s\n", ref_file_path);
             error_count = 1;
         }
 
-        if (src_fp && ref_fp) {
+        if (src_fp && ref_fp)
+        {
             src_buffer = reinterpret_cast<float*>(malloc(nelements * sizeof(float)));
             ref_buffer = reinterpret_cast<float*>(malloc(nelements * sizeof(float)));
 
-            printf(
-                "> compareBin2Bin <float> nelements=%d, epsilon=%4.2f,"
-                " threshold=%4.2f\n",
+            printf("> compareBin2Bin <float> nelements=%d, epsilon=%4.2f, threshold=%4.2f\n",
                 nelements, epsilon, threshold);
             fsize = fread(src_buffer, sizeof(float), nelements, src_fp);
-            printf("   src_file <%s>, size=%d bytes\n", src_file,
-                static_cast<int>(fsize * sizeof(float)));
+            printf("   src_file <%s>, size=%d bytes\n", src_file, static_cast<int>(fsize * sizeof(float)));
             fsize = fread(ref_buffer, sizeof(float), nelements, ref_fp);
-            printf("   ref_file <%s>, size=%d bytes\n", ref_file_path,
-                static_cast<int>(fsize * sizeof(float)));
+            printf("   ref_file <%s>, size=%d bytes\n", ref_file_path, static_cast<int>(fsize * sizeof(float)));
 
-            if (!compareDataAsFloatThreshold<float, float>(
-                ref_buffer, src_buffer, nelements, epsilon, threshold)) {
+            if (!compareDataAsFloatThreshold<float, float>(ref_buffer, src_buffer, nelements, epsilon, threshold))
+            {
                 error_count++;
             }
 
@@ -799,35 +803,41 @@ inline bool sdkCompareBin2BinFloat(const char* src_file, const char* ref_file,
             free(src_buffer);
             free(ref_buffer);
         }
-        else {
-            if (src_fp) {
+        else
+        {
+            if (src_fp)
+            {
                 fclose(src_fp);
             }
 
-            if (ref_fp) {
+            if (ref_fp)
+            {
                 fclose(ref_fp);
             }
         }
     }
 
-    if (error_count == 0) {
+    if (error_count == 0)
+    {
         printf("  OK\n");
     }
-    else {
+    else
+    {
         printf("  FAILURE: %d errors...\n", (unsigned int)error_count);
     }
 
     return (error_count == 0);  // returns true if all pixels pass
 }
 
-inline bool sdkCompareL2fe(const float* reference, const float* data,
-    const unsigned int len, const float epsilon) {
+inline bool sdkCompareL2fe(const float* reference, const float* data, const unsigned int len, const float epsilon)
+{
     assert(epsilon >= 0);
 
     float error = 0;
     float ref = 0;
 
-    for (unsigned int i = 0; i < len; ++i) {
+    for (unsigned int i = 0; i < len; ++i)
+    {
         float diff = reference[i] - data[i];
         error += diff * diff;
         ref += reference[i] * reference[i];
@@ -835,7 +845,8 @@ inline bool sdkCompareL2fe(const float* reference, const float* data,
 
     float normRef = sqrtf(ref);
 
-    if (fabs(ref) < 1e-7) {
+    if (fabs(ref) < 1e-7)
+    {
 #ifdef _DEBUG
         std::cerr << "ERROR, reference l2-norm is 0\n";
 #endif
@@ -847,9 +858,9 @@ inline bool sdkCompareL2fe(const float* reference, const float* data,
     bool result = error < epsilon;
 #ifdef _DEBUG
 
-    if (!result) {
-        std::cerr << "ERROR, l2-norm error " << error << " is greater than epsilon "
-            << epsilon << "\n";
+    if (!result)
+    {
+        std::cerr << "ERROR, l2-norm error " << error << " is greater than epsilon " << epsilon << "\n";
     }
 
 #endif
@@ -857,8 +868,8 @@ inline bool sdkCompareL2fe(const float* reference, const float* data,
     return result;
 }
 
-inline bool sdkLoadPPMub(const char* file, unsigned char** data,
-    unsigned int* w, unsigned int* h) {
+inline bool sdkLoadPPMub(const char* file, unsigned char** data, unsigned int* w, unsigned int* h)
+{
     unsigned int channels;
     return __loadPPM(file, data, w, h, &channels);
 }

@@ -64,7 +64,6 @@ unsigned int g_TotalErrors = 0;
 bool g_bInteractive = false;
 
 extern "C" int runSingleTest(char* ref_file, char* exec_path);
-extern "C" int runBenchmark();
 extern "C" void loadImageData(int argc, char** argv);
 extern "C" void computeGold(float* id, float* od, int w, int h, int n);
 
@@ -362,6 +361,7 @@ void initGL(int* argc, char** argv)
 
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
 
+    //以下這塊是必要的
     if (!isGLVersionSupported(2, 0) || !areGLExtensionsSupported("GL_ARB_vertex_buffer_object GL_ARB_pixel_buffer_object"))
     {
         printf("Error: failed to get minimal extensions for demo\n");
@@ -373,57 +373,13 @@ void initGL(int* argc, char** argv)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//! Run a simple benchmark test for CUDA
-////////////////////////////////////////////////////////////////////////////////
-int runBenchmark()
-{
-    printf("[runBenchmark]: [%s]\n", sSDKsample);
-
-    initCuda(true);
-
-    unsigned int* d_result;
-    checkCudaErrors(cudaMalloc((void**)&d_result, width * height * sizeof(unsigned int)));
-
-    // warm-up
-    boxFilterRGBA(d_img, d_temp, d_temp, width, height, filter_radius, iterations, nthreads, kernel_timer);
-    checkCudaErrors(cudaDeviceSynchronize());
-
-    sdkStartTimer(&kernel_timer);
-    // Start round-trip timer and process iCycles loops on the GPU
-    iterations = 1;  // standard 1-pass filtering
-    const int iCycles = 150;
-    double dProcessingTime = 0.0;
-    printf("\nRunning BoxFilterGPU for %d cycles...\n\n", iCycles);
-
-    for (int i = 0; i < iCycles; i++)
-    {
-        dProcessingTime += boxFilterRGBA(d_img, d_temp, d_img, width, height, filter_radius, iterations, nthreads, kernel_timer);
-    }
-
-    // check if kernel execution generated an error and sync host
-    getLastCudaError("Error: boxFilterRGBA Kernel execution FAILED");
-    checkCudaErrors(cudaDeviceSynchronize());
-    sdkStopTimer(&kernel_timer);
-
-    // Get average computation time
-    dProcessingTime /= (double)iCycles;
-
-    // log testname, throughput, timing and config info to sample and master logs
-    printf("boxFilter-texture, Throughput = %.4f M RGBA Pixels/s, Time = %.5f s, Size = %u RGBA Pixels, NumDevsUsed = %u, Workgroup = %u\n\n",
-        (1.0e-6 * width * height) / dProcessingTime, dProcessingTime, (width * height), 1, nthreads);
-
-    return 0;
-}
-
-// This test specifies a single test (where you specify radius and/or
-// iterations)
+// This test specifies a single test (where you specify radius and/or iterations)
 int runSingleTest(char* ref_file, char* exec_path)
 {
     int nTotalErrors = 0;
     char dump_file[256];
 
-    printf("[runSingleTest]: [%s]\n", sSDKsample);
+    printf("[runSingleTest]\n\n");
 
     initCuda(true);
 

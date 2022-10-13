@@ -101,8 +101,7 @@ int main(int argc, char** argv)
     gpuTime = sdkGetTimerValue(&hTimer) / (float)iterations;
     printf("Average convolutionRowsGPU() time: %f msecs; //%f Mpix/s\n", gpuTime, imageW * imageH * 1e-6 / (0.001 * gpuTime));
 
-    // While CUDA kernels can't write to textures directly, this copy is
-    // inevitable
+    // While CUDA kernels can't write to textures directly, this copy is inevitable
     printf("Copying convolutionRowGPU() output back to the texture...\n");
     checkCudaErrors(cudaDeviceSynchronize());
     sdkResetTimer(&hTimer);

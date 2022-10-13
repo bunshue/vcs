@@ -11,9 +11,7 @@ namespace cg = cooperative_groups;
 ////////////////////////////////////////////////////////////////////////////////
 // Monolithic bitonic sort kernel for short arrays fitting into shared memory
 ////////////////////////////////////////////////////////////////////////////////
-__global__ void bitonicSortShared(uint* d_DstKey, uint* d_DstVal,
-    uint* d_SrcKey, uint* d_SrcVal,
-    uint arrayLength, uint dir)
+__global__ void bitonicSortShared(uint* d_DstKey, uint* d_DstVal, uint* d_SrcKey, uint* d_SrcVal, uint arrayLength, uint dir)
 {
     // Handle to thread block group
     cg::thread_block cta = cg::this_thread_block();
@@ -120,8 +118,7 @@ __global__ void bitonicSortShared1(uint* d_DstKey, uint* d_DstVal, uint* d_SrcKe
 }
 
 // Bitonic merge iteration for stride >= SHARED_SIZE_LIMIT
-__global__ void bitonicMergeGlobal(uint* d_DstKey, uint* d_DstVal, uint* d_SrcKey, uint* d_SrcVal,
-    uint arrayLength, uint size, uint stride, uint dir)
+__global__ void bitonicMergeGlobal(uint* d_DstKey, uint* d_DstVal, uint* d_SrcKey, uint* d_SrcVal, uint arrayLength, uint size, uint stride, uint dir)
 {
     uint global_comparatorI = blockIdx.x * blockDim.x + threadIdx.x;
     uint comparatorI = global_comparatorI & (arrayLength / 2 - 1);
@@ -145,8 +142,7 @@ __global__ void bitonicMergeGlobal(uint* d_DstKey, uint* d_DstVal, uint* d_SrcKe
 
 // Combined bitonic merge steps for
 // size > SHARED_SIZE_LIMIT and stride = [1 .. SHARED_SIZE_LIMIT / 2]
-__global__ void bitonicMergeShared(uint* d_DstKey, uint* d_DstVal, uint* d_SrcKey, uint* d_SrcVal,
-    uint arrayLength, uint size, uint dir)
+__global__ void bitonicMergeShared(uint* d_DstKey, uint* d_DstVal, uint* d_SrcKey, uint* d_SrcVal, uint arrayLength, uint size, uint dir)
 {
     // Handle to thread block group
     cg::thread_block cta = cg::this_thread_block();

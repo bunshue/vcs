@@ -26,17 +26,17 @@ extern "C" cudaError_t CUDA_FreeArray();
 ////////////////////////////////////////////////////////////////////////////////
 // OpenGL PBO and texture "names"
 GLuint gl_PBO, gl_Tex;
-struct cudaGraphicsResource *cuda_pbo_resource;  // handles OpenGL-CUDA exchange
+struct cudaGraphicsResource* cuda_pbo_resource;  // handles OpenGL-CUDA exchange
 // Source image on the host side
 
-uchar4 *h_Src1;
+uchar4* h_Src1;
 uchar4* h_Src2;
 int imageW, imageH;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Main program
 ////////////////////////////////////////////////////////////////////////////////
-StopWatchInterface *timer = NULL;
+StopWatchInterface* timer = NULL;
 
 #define BUFFER_DATA(i) ((char *)0 + i)
 
