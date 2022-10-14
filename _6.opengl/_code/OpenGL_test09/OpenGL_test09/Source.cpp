@@ -1,5 +1,4 @@
-﻿// OpenGL Graphics includes
-#include <helper_gl.h>
+﻿#include <helper_gl.h>
 #include <GL/freeglut.h>
 
 #include <stdio.h>
@@ -98,7 +97,6 @@ void reshape(int w, int h)
     gluPerspective(60.0, (GLfloat)w / (GLfloat)h, 0.1, 100000.0);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-
 }
 
 void mouse(int button, int state, int x, int y)

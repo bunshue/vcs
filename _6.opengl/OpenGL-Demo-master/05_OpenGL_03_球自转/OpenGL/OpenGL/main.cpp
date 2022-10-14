@@ -11,16 +11,7 @@
 #include "GLGeometryTransform.h"
 #include "StopWatch.h"
 
-#include <math.h>
-#ifdef __APPLE__
-#include <glut/glut.h>
-#else
-#define FREEGLUT_STATIC
-#include <GL/glut.h>
-#endif
 
-
-GLShaderManager        shaderManager;
 GLMatrixStack        modelViewMatrix;
 GLMatrixStack        projectionMatrix;
 //观察者位置
@@ -58,7 +49,6 @@ void SetupRC()
 {
     //1.
     glClearColor(0.7f, 0.7f, 0.7f, 1.0f );
-    shaderManager.InitializeStockShaders();
     glEnable(GL_DEPTH_TEST);
 
     //2、
@@ -74,7 +64,6 @@ void SetupRC()
 void DrawWireFramedBatch(GLTriangleBatch* pBatch)
 {
     //1、绘制图形
-    shaderManager.UseStockShader(GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vGreen);
     pBatch->Draw();
     
     //2、画黑色边框
@@ -91,7 +80,6 @@ void DrawWireFramedBatch(GLTriangleBatch* pBatch)
     
     
     //4、画线
-    shaderManager.UseStockShader(GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vBlack);
     pBatch->Draw();
     
     //5、恢复多边形模式和深度测试
@@ -131,7 +119,6 @@ void RenderScene(void)
     m3dMatrixMultiply44(mModelViewProjection, mModelView, viewFrustum.GetProjectionMatrix());
     
     GLfloat vBlack[] = {0,0,0,1};
-    shaderManager.UseStockShader(GLT_SHADER_FLAT, mModelViewProjection, vBlack);
     
     sphereBatch.Draw();
     glutSwapBuffers();

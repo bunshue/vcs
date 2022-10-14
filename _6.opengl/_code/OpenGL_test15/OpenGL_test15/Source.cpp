@@ -1,5 +1,4 @@
-﻿// OpenGL Graphics includes
-#include <helper_gl.h>
+﻿#include <helper_gl.h>
 #include <GL/freeglut.h>
 
 #include <stdio.h>
@@ -16,25 +15,6 @@ void init(void)
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 }
 
-// 窗口大小變化回調函數
-void reshape(int w, int h)
-{
-	glViewport(0, 0, (GLsizei)w, (GLsizei)h);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glOrtho(0, w, 0, h, -1.0, 1.0);
-	glMatrixMode(GL_MODELVIEW);
-
-}
-
-void mouse(int button, int state, int x, int y)
-{
-}
-
-void motion(int x, int y)
-{
-}
-
 // 繪圖回調函數
 void display(void)
 {
@@ -48,6 +28,17 @@ void display(void)
 	//width和height表示位图的宽度和高度，xorig和yorig定义了位图的原点，他是根据当期光栅位置确定的，右上为正。
 	//xmove和ymove表示位图光栅化之后光栅坐标的x增加值和y增加值
 	glFlush();
+}
+
+// 窗口大小變化回調函數
+void reshape(int w, int h)
+{
+	glViewport(0, 0, (GLsizei)w, (GLsizei)h);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glOrtho(0, w, 0, h, -1.0, 1.0);
+	glMatrixMode(GL_MODELVIEW);
+
 }
 
 void keyboard(unsigned char k, int /*x*/, int /*y*/)
@@ -78,6 +69,14 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
 	case '?':
 		break;
 	}
+}
+
+void mouse(int button, int state, int x, int y)
+{
+}
+
+void motion(int x, int y)
+{
 }
 
 int main(int argc, char** argv)

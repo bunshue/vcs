@@ -1,5 +1,4 @@
-﻿// OpenGL Graphics includes
-#include <helper_gl.h>
+﻿#include <helper_gl.h>
 #include <GL/freeglut.h>
 
 #include <stdio.h>
@@ -16,44 +15,6 @@ float dist = 10.0f; //distance from the eye
 void init(void)
 {
 	glEnable(GL_DEPTH_TEST);
-}
-
-// 窗口大小變化回調函數
-void reshape(int w, int h)
-{
-	glViewport(0, 0, w, h);
-}
-
-void mouse(int button, int state, int x, int y)
-{
-	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
-	{
-		mx = x;
-		my = y;
-	}
-
-}
-
-void motion(int x, int y)
-{
-	int dx, dy; //offset of mouse;
-
-	dx = x - mx;
-	dy = y - my;
-
-	if (m_state == 0)
-	{
-		y_angle += dx * 0.1f;
-		x_angle += dy * 0.1f;
-	}
-	else if (m_state == 1)
-		dist += (dx + dy) * 0.01f;
-
-	mx = x;
-	my = y;
-
-	glutPostRedisplay();
-
 }
 
 // 繪圖回調函數
@@ -76,7 +37,10 @@ void display(void)
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity(); //对应单位阵I
 
-	if (h < 1) h = 1;
+	if (h < 1)
+	{
+		h = 1;
+	}
 	gluPerspective(30.0, w / h, 0.1, 20.0); //对应变换阵T0
 
 	glMatrixMode(GL_MODELVIEW);
@@ -161,6 +125,12 @@ void drawTetrahedron(void)
 	glEnd();
 }
 
+// 窗口大小變化回調函數
+void reshape(int w, int h)
+{
+	glViewport(0, 0, w, h);
+}
+
 void keyboard(unsigned char k, int /*x*/, int /*y*/)
 {
 	switch (k)
@@ -194,15 +164,47 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
 	}
 }
 
+void mouse(int button, int state, int x, int y)
+{
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+	{
+		mx = x;
+		my = y;
+	}
+}
+
+void motion(int x, int y)
+{
+	int dx, dy; //offset of mouse;
+
+	dx = x - mx;
+	dy = y - my;
+
+	if (m_state == 0)
+	{
+		y_angle += dx * 0.1f;
+		x_angle += dy * 0.1f;
+	}
+	else if (m_state == 1)
+	{
+		dist += (dx + dy) * 0.01f;
+	}
+
+	mx = x;
+	my = y;
+
+	glutPostRedisplay();
+}
+
 int main(int argc, char** argv)
 {
-    glutInit(&argc, argv);
-    //glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-    //glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInit(&argc, argv);
+	//glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+	//glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 
-    glutInitWindowSize(600, 600);
-    glutInitWindowPosition(1100, 200);
+	glutInitWindowSize(600, 600);
+	glutInitWindowPosition(1100, 200);
 
 	glutCreateWindow("畫茶壺圓椎三角塊");	//開啟視窗 並顯示出視窗 Title
 
@@ -211,15 +213,13 @@ int main(int argc, char** argv)
 	printf("0 keydown means control the angle of the eye\n");
 	printf("1 keydown means control the distance of the eye\n");
 
-    glutDisplayFunc(display);	//設定callback function
-    glutReshapeFunc(reshape);	//設定callback function
-    glutKeyboardFunc(keyboard);	//設定callback function
-    glutMouseFunc(mouse);		//設定callback function
-    glutMotionFunc(motion);		//設定callback function
+	glutDisplayFunc(display);	//設定callback function
+	glutReshapeFunc(reshape);	//設定callback function
+	glutKeyboardFunc(keyboard);	//設定callback function
+	glutMouseFunc(mouse);		//設定callback function
+	glutMotionFunc(motion);		//設定callback function
 
-    glutMainLoop();
+	glutMainLoop();
 
-    return 0;
+	return 0;
 }
-
-

@@ -1,5 +1,4 @@
-﻿// OpenGL Graphics includes
-#include <helper_gl.h>
+﻿#include <helper_gl.h>
 #include <GL/freeglut.h>
 
 #include <stdio.h>
@@ -17,29 +16,6 @@ const GLfloat mat_ambient[] = { 0.7f, 0.7f, 0.7f, 1.0f };
 const GLfloat mat_diffuse[] = { 0.8f, 0.8f, 0.8f, 1.0f };
 const GLfloat mat_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 const GLfloat high_shininess[] = { 100.0f };
-
-// 窗口大小變化回調函數
-void reshape(int w, int h)
-{
-	const float ar = (float)w / (float)h;
-
-	glViewport(0, 0, w, h);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glFrustum(-ar, ar, -1.0, 1.0, 2.0, 100.0);
-
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-
-}
-
-void mouse(int button, int state, int x, int y)
-{
-}
-
-void motion(int x, int y)
-{
-}
 
 // 繪圖回調函數
 void display(void)
@@ -96,9 +72,19 @@ void display(void)
 
 }
 
-static void idle(void)
+// 窗口大小變化回調函數
+void reshape(int w, int h)
 {
-	glutPostRedisplay();
+	const float ar = (float)w / (float)h;
+
+	glViewport(0, 0, w, h);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	glFrustum(-ar, ar, -1.0, 1.0, 2.0, 100.0);
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+
 }
 
 void keyboard(unsigned char k, int /*x*/, int /*y*/)
@@ -129,25 +115,37 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
 	glutPostRedisplay();
 }
 
+void mouse(int button, int state, int x, int y)
+{
+}
+
+void motion(int x, int y)
+{
+}
+
+static void idle(void)
+{
+	glutPostRedisplay();
+}
+
 int main(int argc, char** argv)
 {
-    glutInit(&argc, argv);
-    //glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-    //glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInit(&argc, argv);
+	//glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+	//glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 
-    glutInitWindowSize(640, 480);
-    glutInitWindowPosition(1100, 200);
+	glutInitWindowSize(640, 480);
+	glutInitWindowPosition(1100, 200);
 
-    glutCreateWindow("球體旋轉");	//開啟視窗 並顯示出視窗 Title
+	glutCreateWindow("球體旋轉");	//開啟視窗 並顯示出視窗 Title
 
-    glutDisplayFunc(display);	//設定callback function
-    glutReshapeFunc(reshape);	//設定callback function
-    glutKeyboardFunc(keyboard);	//設定callback function
-    glutMouseFunc(mouse);		//設定callback function
-    glutMotionFunc(motion);		//設定callback function
-
-	glutIdleFunc(idle);
+	glutDisplayFunc(display);	//設定callback function
+	glutReshapeFunc(reshape);	//設定callback function
+	glutKeyboardFunc(keyboard);	//設定callback function
+	glutMouseFunc(mouse);		//設定callback function
+	glutMotionFunc(motion);		//設定callback function
+	glutIdleFunc(idle);			//設定callback function
 
 	glClearColor(1, 1, 1, 1);
 	glEnable(GL_CULL_FACE);
@@ -171,9 +169,9 @@ int main(int argc, char** argv)
 	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
 	glMaterialfv(GL_FRONT, GL_SHININESS, high_shininess);
 
-    glutMainLoop();
+	glutMainLoop();
 
-    return 0;
+	return 0;
 }
 
 
