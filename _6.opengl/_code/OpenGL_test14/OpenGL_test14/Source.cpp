@@ -29,12 +29,51 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
     }
 }
 
+//key 枚举值，x、y是位置
+void special(int key, int x, int y)
+{
+    if (key == GLUT_KEY_UP)
+    {
+        printf("上 ");
+    }
+    if (key == GLUT_KEY_DOWN)
+    {
+        printf("下 ");
+    }
+    if (key == GLUT_KEY_LEFT)
+    {
+        printf("左 ");
+    }
+    if (key == GLUT_KEY_RIGHT)
+    {
+        printf("右 ");
+    }
+}
+
 void mouse(int button, int state, int x, int y)
 {
 }
 
 void motion(int x, int y)
 {
+}
+
+void mainMenu(int i) { keyboard((unsigned char)i, 0, 0); }
+
+void initMenus()
+{
+    glutCreateMenu(mainMenu);   //選單管理
+    glutAddMenuEntry("Nearest      [1]", '1');  //新增一個選單條目
+    glutAddMenuEntry("Bilinear     [2]", '2');
+    glutAddMenuEntry("Bicubic      [3]", '3');
+    glutAddMenuEntry("Fast Bicubic [4]", '4');
+    glutAddMenuEntry("Catmull-Rom  [5]", '5');
+    glutAddMenuEntry("Zoom in      [=]", '=');
+    glutAddMenuEntry("Zoom out     [-]", '-');
+    glutAddMenuEntry("Benchmark    [b]", 'b');
+    glutAddMenuEntry("DrawCurves   [c]", 'c');
+    glutAddMenuEntry("Quit       [esc]", 27);
+    glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
 int main(int argc, char** argv)
@@ -52,8 +91,12 @@ int main(int argc, char** argv)
     glutDisplayFunc(display);	//設定callback function
     glutReshapeFunc(reshape);	//設定callback function
     glutKeyboardFunc(keyboard);	//設定callback function
+    glutSpecialFunc(special);   //設定callback function
+
     glutMouseFunc(mouse);		//設定callback function
     glutMotionFunc(motion);		//設定callback function
+
+    initMenus();        //設定表單按鈕
 
     glutMainLoop();
 

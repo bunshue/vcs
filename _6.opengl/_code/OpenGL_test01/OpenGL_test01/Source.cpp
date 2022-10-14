@@ -28,22 +28,25 @@ double pnts[][2] = {
     6, 6
 };
 
-
 void drawGrid(int xmin, int xmax, int ymin, int ymax)
 {
     int i, j;
     for (j = ymin; j <= ymax; j++) //水平線
     {
         glBegin(GL_LINES);
-        glVertex2d(xmin, j);
-        glVertex2d(xmax, j);
+        {
+            glVertex2d(xmin, j);
+            glVertex2d(xmax, j);
+        }
         glEnd();
     }
     for (i = xmin; i <= xmax; i++) //豎線
     {
         glBegin(GL_LINES);
-        glVertex2d(i, ymin);
-        glVertex2d(i, ymax);
+        {
+            glVertex2d(i, ymin);
+            glVertex2d(i, ymax);
+        }
         glEnd();
     }
 }
@@ -190,24 +193,28 @@ void display(void)
 
         //開始渲染
         glBegin(GL_POLYGON);
-        //多邊形的頂點數：數越大越趨近于圓
-        const int n = 10;
-        const GLfloat R = 0.5f;
-        const GLfloat pi = 3.1415926f;
-        for (int i = 0; i < n; i++)
         {
-            glVertex2f(R * cos(2 * pi / n * i), R * sin(2 * pi / n * i));
+            //多邊形的頂點數：數越大越趨近于圓
+            const int n = 10;
+            const GLfloat R = 0.5f;
+            const GLfloat pi = 3.1415926f;
+            for (int i = 0; i < n; i++)
+            {
+                glVertex2f(R * cos(2 * pi / n * i), R * sin(2 * pi / n * i));
+            }
         }
         //結束渲染
         glEnd();
 
         //畫矩形
         glBegin(GL_QUADS);              //矩形
-        glColor3f(1.0f, 0.0f, 0.0f); // R
-        glVertex2f(-0.2f, -0.2f);    // x, y
-        glVertex2f(0.2f, -0.2f);
-        glVertex2f(0.2f, 0.2f);
-        glVertex2f(-0.2f, 0.2f);
+        {
+            glColor3f(1.0f, 0.0f, 0.0f); // R
+            glVertex2f(-0.2f, -0.2f);    // x, y
+            glVertex2f(0.2f, -0.2f);
+            glVertex2f(0.2f, 0.2f);
+            glVertex2f(-0.2f, 0.2f);
+        }
         glEnd();
 
         //強制刷新緩存區
@@ -238,7 +245,9 @@ void display(void)
         for (i = 0; i <= n; i++)
         {
             glBegin(GL_POINTS);
-            glVertex2d(pnts[i][0], pnts[i][1]);
+            {
+                glVertex2d(pnts[i][0], pnts[i][1]);
+            }
             glEnd();
         }
 
@@ -247,8 +256,10 @@ void display(void)
         for (i = 0; i < n; i++)
         {
             glBegin(GL_LINES);
-            glVertex2d(pnts[i][0], pnts[i][1]);
-            glVertex2d(pnts[i + 1][0], pnts[i + 1][1]);
+            {
+                glVertex2d(pnts[i][0], pnts[i][1]);
+                glVertex2d(pnts[i + 1][0], pnts[i + 1][1]);
+            }
             glEnd();
         }
         glFlush();
@@ -287,19 +298,24 @@ void display(void)
 
         glColor3f(1.0f, 0.0f, 0.0f); //在右上角畫紅色平面：應該在後面
         glBegin(GL_POLYGON);
-        glVertex3f(0.0f, 0.0f, -1.0f + 0.001f);
-        glVertex3f(1.0f, 0.0f, -1.0f + 0.001f);
-        glVertex3f(1.0f, 1.0f, -1.0f + 0.001f);
-        glVertex3f(0.0f, 1.0f, -1.0f + 0.001f);
+        {
+            glVertex3f(0.0f, 0.0f, -1.0f + 0.001f);
+            glVertex3f(1.0f, 0.0f, -1.0f + 0.001f);
+            glVertex3f(1.0f, 1.0f, -1.0f + 0.001f);
+            glVertex3f(0.0f, 1.0f, -1.0f + 0.001f);
+        }
         glEnd();
 
         glColor3f(0.0f, 1.0f, 0.0f); //在左下角畫綠色的平面：應該在前面
         glBegin(GL_POLYGON);
-        glVertex3f(-1.0f, -1.0f, 1.0f - 0.001f);
-        glVertex3f(0.0f + 0.5f, -1.0f, 1.0f - 0.001f);
-        glVertex3f(0.0f + 0.5f, 0.0f + 0.5f, 1.0f - 0.001f);
-        glVertex3f(-1.0f, 0.0f + 0.5f, 1.0f - 0.001f);
+        {
+            glVertex3f(-1.0f, -1.0f, 1.0f - 0.001f);
+            glVertex3f(0.0f + 0.5f, -1.0f, 1.0f - 0.001f);
+            glVertex3f(0.0f + 0.5f, 0.0f + 0.5f, 1.0f - 0.001f);
+            glVertex3f(-1.0f, 0.0f + 0.5f, 1.0f - 0.001f);
+        }
         glEnd();
+
         glFlush();
     }
     else if (display_mode == 5)
@@ -322,15 +338,20 @@ void display(void)
         for (i = 0; i <= 10; i++) //11條水平線
         {
             glBegin(GL_LINES);
-            glVertex2d(0.0, i * 1.0);
-            glVertex2d(10.0, i * 1.0);
+            {
+                glVertex2d(0.0, i * 1.0);
+                glVertex2d(10.0, i * 1.0);
+            }
             glEnd();
         }
+
         glBegin(GL_LINES); //11條豎線
-        for (i = 0; i <= 10; i++)
         {
-            glVertex2d(i * 1.0, 0.0);
-            glVertex2d(i * 1.0, 10.0);
+            for (i = 0; i <= 10; i++)
+            {
+                glVertex2d(i * 1.0, 0.0);
+                glVertex2d(i * 1.0, 10.0);
+            }
         }
         glEnd();
 
@@ -338,15 +359,19 @@ void display(void)
         glColor3f(1.0f, 1.0f, 1.0f); //白色
         glPointSize(10.0f); //點大小
         glBegin(GL_POINTS);
-        for (i = 0; i <= 10; i++)
         {
-            glVertex2d(i * 1.0, i * 1.0);
+            for (i = 0; i <= 10; i++)
+            {
+                glVertex2d(i * 1.0, i * 1.0);
+            }
         }
         glEnd();
         for (i = 0; i <= 10; i++)
         {
             glBegin(GL_POINTS);
-            glVertex2d(i * 1.0, 10.0 - i * 1.0);
+            {
+                glVertex2d(i * 1.0, 10.0 - i * 1.0);
+            }
             glEnd();
         }
         glFlush();
@@ -358,12 +383,14 @@ void display(void)
     {
         glPushMatrix();
         glBegin(GL_TRIANGLES);          // 開始畫三角形
-        glColor3f(1.0f, 0.0f, 0.0f);         // 設定輸出色為紅色
-        glVertex2f(0.0f, 1.0f);           //(x1,y1)=(0, 1)
-        glColor3f(0.0f, 1.0f, 0.0f);         // 設定輸出色為綠色
-        glVertex2f(0.87f, -0.5f);            //(x2,y2)=(0.87,-0.5)
-        glColor3f(0.0f, 0.0f, 1.0f);         // 設定輸出色為藍色
-        glVertex2f(-0.87f, -0.5f);           //(x3,y3)=(-0.87,-0.5)
+        {
+            glColor3f(1.0f, 0.0f, 0.0f);         // 設定輸出色為紅色
+            glVertex2f(0.0f, 1.0f);           //(x1,y1)=(0, 1)
+            glColor3f(0.0f, 1.0f, 0.0f);         // 設定輸出色為綠色
+            glVertex2f(0.87f, -0.5f);            //(x2,y2)=(0.87,-0.5)
+            glColor3f(0.0f, 0.0f, 1.0f);         // 設定輸出色為藍色
+            glVertex2f(-0.87f, -0.5f);           //(x3,y3)=(-0.87,-0.5)
+        }
         glEnd();                               // 結束畫三角形
         glPopMatrix();
         glutSwapBuffers();
@@ -387,10 +414,12 @@ void display(void)
         glClear(GL_COLOR_BUFFER_BIT);/* clear all pixels   */
         glColor3f(1.0, 1.0, 1.0);
         glBegin(GL_POLYGON);/* draw white polygon with corners at(0.25, 0.25, 0.0) and (0.75, 0.75, 0.0)*/
-        glVertex3f(0.25, 0.25, 0.0);
-        glVertex3f(0.75, 0.25, 0.0);
-        glVertex3f(0.75, 0.75, 0.0);
-        glVertex3f(0.25, 0.75, 0.0);
+        {
+            glVertex3f(0.25, 0.25, 0.0);
+            glVertex3f(0.75, 0.25, 0.0);
+            glVertex3f(0.75, 0.75, 0.0);
+            glVertex3f(0.25, 0.75, 0.0);
+        }
         glEnd();
         glFlush();/* start processing buffered OpenGL routines   */
     }
@@ -476,45 +505,6 @@ static void keyboard(unsigned char key, int x, int y)
     */
 }
 
-//key 枚举值，x、y是位置
-void special(int key, int x, int y)
-{
-    if (key == GLUT_KEY_UP)
-    {
-        printf("上 ");
-    }
-    if (key == GLUT_KEY_DOWN)
-    {
-        printf("下 ");
-    }
-    if (key == GLUT_KEY_LEFT)
-    {
-        printf("左 ");
-    }
-    if (key == GLUT_KEY_RIGHT)
-    {
-        printf("右 ");
-    }
-}
-
-void mainMenu(int i) { keyboard((unsigned char)i, 0, 0); }
-
-void initMenus()
-{
-    glutCreateMenu(mainMenu);   //選單管理
-    glutAddMenuEntry("Nearest      [1]", '1');  //新增一個選單條目
-    glutAddMenuEntry("Bilinear     [2]", '2');
-    glutAddMenuEntry("Bicubic      [3]", '3');
-    glutAddMenuEntry("Fast Bicubic [4]", '4');
-    glutAddMenuEntry("Catmull-Rom  [5]", '5');
-    glutAddMenuEntry("Zoom in      [=]", '=');
-    glutAddMenuEntry("Zoom out     [-]", '-');
-    glutAddMenuEntry("Benchmark    [b]", 'b');
-    glutAddMenuEntry("DrawCurves   [c]", 'c');
-    glutAddMenuEntry("Quit       [esc]", 27);
-    glutAttachMenu(GLUT_RIGHT_BUTTON);
-}
-
 int main(int argc, char* argv[])
 {
     //初始化GLUT庫，這個函數只是傳說命令參數并且初始化glut庫
@@ -557,22 +547,14 @@ int main(int argc, char* argv[])
     glutDisplayFunc(display);       //設定callback function, 註冊顯示函數 // Register display callback handler for window re-paint
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
-    glutSpecialFunc(special);       //設定callback function
-
-    initMenus();        //設定表單按鈕
 
     //glutWireTeapot(200);
     //glutWireTeapot(3);
 
-
-
     //设置一组浮点数来表示红色
     GLfloat vRed[] = { 1.0,1.00,0.0,0.5f };
 
-
     glutMainLoop();     // Enter the event-processing loop
-
-
 
     return 0;
 }

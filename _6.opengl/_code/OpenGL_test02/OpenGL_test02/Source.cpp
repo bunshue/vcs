@@ -75,12 +75,14 @@ void display(void)
 
         glPushMatrix();
         glBegin(GL_TRIANGLES);          // 開始畫三角形
-        glColor3f(1.0f, 0.0f, 0.0f);         // 設定輸出色為紅色
-        glVertex2f(0.0f, 1.0f);           //(x1,y1)=(0, 1)
-        glColor3f(0.0f, 1.0f, 0.0f);         // 設定輸出色為綠色
-        glVertex2f(0.87f, -0.5f);            //(x2,y2)=(0.87,-0.5)
-        glColor3f(0.0f, 0.0f, 1.0f);         // 設定輸出色為藍色
-        glVertex2f(-0.87f, -0.5f);           //(x3,y3)=(-0.87,-0.5)
+        {
+            glColor3f(1.0f, 0.0f, 0.0f);         // 設定輸出色為紅色
+            glVertex2f(0.0f, 1.0f);           //(x1,y1)=(0, 1)
+            glColor3f(0.0f, 1.0f, 0.0f);         // 設定輸出色為綠色
+            glVertex2f(0.87f, -0.5f);            //(x2,y2)=(0.87,-0.5)
+            glColor3f(0.0f, 0.0f, 1.0f);         // 設定輸出色為藍色
+            glVertex2f(-0.87f, -0.5f);           //(x3,y3)=(-0.87,-0.5)
+        }
         glEnd();                               // 結束畫三角形
         glPopMatrix();
         glutSwapBuffers();
@@ -97,14 +99,16 @@ void display(void)
 
         glEnable(GL_TEXTURE_2D);    //啟用2D紋理映射
         glBegin(GL_QUADS);
-        glTexCoord2f(0.0f, 0.0f);
-        glVertex3f(-0.5f, -0.5f, 0.0f);
-        glTexCoord2f(1.0f, 0.0f);
-        glVertex3f(0.5f, -0.5f, 0.0f);
-        glTexCoord2f(1.0f, 1.0f);
-        glVertex3f(0.5f, 0.5f, 0.0f);
-        glTexCoord2f(0.0f, 1.0f);
-        glVertex3f(-0.5f, 0.5f, 0.0f);
+        {
+            glTexCoord2f(0.0f, 0.0f);
+            glVertex3f(-0.5f, -0.5f, 0.0f);
+            glTexCoord2f(1.0f, 0.0f);
+            glVertex3f(0.5f, -0.5f, 0.0f);
+            glTexCoord2f(1.0f, 1.0f);
+            glVertex3f(0.5f, 0.5f, 0.0f);
+            glTexCoord2f(0.0f, 1.0f);
+            glVertex3f(-0.5f, 0.5f, 0.0f);
+        }
         glEnd();
         glDisable(GL_TEXTURE_2D);
 
@@ -149,20 +153,20 @@ void display(void)
 
         // 繪制三角形
         glBegin(GL_TRIANGLES);
-        glColor3f(1, 0, 0);     //紅
-        glVertex3f(-2, -2, -5); //左下
+        {
+            glColor3f(1, 0, 0);     //紅
+            glVertex3f(-2, -2, -5); //左下
 
-        glColor3f(0, 1, 0);     //綠
-        glVertex3f(2, -2, -5);  //右下
+            glColor3f(0, 1, 0);     //綠
+            glVertex3f(2, -2, -5);  //右下
 
-        glColor3f(0, 0, 1);     //藍
-        glVertex3f(0, 2, -5);   //上
+            glColor3f(0, 0, 1);     //藍
+            glVertex3f(0, 2, -5);   //上
+        }
         glEnd();
 
         // 執行繪圖命令
         glFlush();
-
-
     }
     else if (display_mode == 6)
     {
@@ -193,20 +197,25 @@ void display(void)
 
         glColor3f(1.0f, 0.0f, 0.0f); //在右上角画红色平面：应该在后面
         glBegin(GL_POLYGON);
-        glVertex3f(0.0f, 0.0f, -1.0f + 0.001f);
-        glVertex3f(1.0f, 0.0f, -1.0f + 0.001f);
-        glVertex3f(1.0f, 1.0f, -1.0f + 0.001f);
-        glVertex3f(0.0f, 1.0f, -1.0f + 0.001f);
+        {
+            glVertex3f(0.0f, 0.0f, -1.0f + 0.001f);
+            glVertex3f(1.0f, 0.0f, -1.0f + 0.001f);
+            glVertex3f(1.0f, 1.0f, -1.0f + 0.001f);
+            glVertex3f(0.0f, 1.0f, -1.0f + 0.001f);
+        }
         glEnd();
+
         glColor3f(0.0f, 1.0f, 0.0f); //在左下角画绿色的平面：应该在前面
         glBegin(GL_POLYGON);
-        glVertex3f(-1.0f, -1.0f, 1.0f - 0.001f);
-        glVertex3f(0.0f + 0.5f, -1.0f, 1.0f - 0.001f);
-        glVertex3f(0.0f + 0.5f, 0.0f + 0.5f, 1.0f - 0.001f);
-        glVertex3f(-1.0f, 0.0f + 0.5f, 1.0f - 0.001f);
+        {
+            glVertex3f(-1.0f, -1.0f, 1.0f - 0.001f);
+            glVertex3f(0.0f + 0.5f, -1.0f, 1.0f - 0.001f);
+            glVertex3f(0.0f + 0.5f, 0.0f + 0.5f, 1.0f - 0.001f);
+            glVertex3f(-1.0f, 0.0f + 0.5f, 1.0f - 0.001f);
+        }
         glEnd();
-        glFlush();
 
+        glFlush();
     }
     else if (display_mode == 7)
     {
