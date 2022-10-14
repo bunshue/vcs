@@ -14,7 +14,8 @@ __device__ float clamp(float x, float a, float b) { return max(a, min(b, x)); }
 __device__ int clamp(int x, int a, int b) { return max(a, min(b, x)); }
 
 // convert floating point rgb color to 8-bit integer
-__device__ int rgbToInt(float r, float g, float b) {
+__device__ int rgbToInt(float r, float g, float b)
+{
     r = clamp(r, 0.0f, 255.0f);
     g = clamp(g, 0.0f, 255.0f);
     b = clamp(b, 0.0f, 255.0f);
@@ -22,7 +23,8 @@ __device__ int rgbToInt(float r, float g, float b) {
 }
 
 // get pixel from 2D image, with clamping to border
-__device__ uchar4 getPixel(int x, int y, cudaTextureObject_t inTex) {
+__device__ uchar4 getPixel(int x, int y, cudaTextureObject_t inTex)
+{
 #ifndef USE_TEXTURE_RGBA8UI
     float4 res = tex2D<float4>(inTex, x, y);
     uchar4 ucres = make_uchar4(res.x * 255.0f, res.y * 255.0f, res.z * 255.0f,
@@ -54,8 +56,8 @@ __device__ uchar4 getPixel(int x, int y, cudaTextureObject_t inTex) {
 */
 
 __global__ void cudaProcess(unsigned int* g_odata, int imgw, int imgh,
-    int tilew, int r, float threshold, float highlight,
-    cudaTextureObject_t inTex) {
+    int tilew, int r, float threshold, float highlight, cudaTextureObject_t inTex)
+{
     // Handle to thread block group
     cg::thread_block cta = cg::this_thread_block();
     extern __shared__ uchar4 sdata[];
@@ -76,14 +78,16 @@ __global__ void cudaProcess(unsigned int* g_odata, int imgw, int imgh,
     SMEM(r + tx, r + ty) = getPixel(x, y, inTex);
 
     // borders
-    if (threadIdx.x < r) {
+    if (threadIdx.x < r)
+    {
         // left
         SMEM(tx, r + ty) = getPixel(x - r, y, inTex);
         // right
         SMEM(r + bw + tx, r + ty) = getPixel(x + bw, y, inTex);
     }
 
-    if (threadIdx.y < r) {
+    if (threadIdx.y < r)
+    {
         // top
         SMEM(r + tx, ty) = getPixel(x, y - r, inTex);
         // bottom
@@ -91,7 +95,8 @@ __global__ void cudaProcess(unsigned int* g_odata, int imgw, int imgh,
     }
 
     // load corners
-    if ((threadIdx.x < r) && (threadIdx.y < r)) {
+    if ((threadIdx.x < r) && (threadIdx.y < r))
+    {
         // tl
         SMEM(tx, ty) = getPixel(x - r, y - r, inTex);
         // bl
@@ -111,8 +116,10 @@ __global__ void cudaProcess(unsigned int* g_odata, int imgw, int imgh,
     float bsum = 0.0f;
     float samples = 0.0f;
 
-    for (int dy = -r; dy <= r; dy++) {
-        for (int dx = -r; dx <= r; dx++) {
+    for (int dy = -r; dy <= r; dy++)
+    {
+        for (int dx = -r; dx <= r; dx++)
+        {
 #if 0
             // try this to see the benefit of using shared memory
             uchar4 pixel = getPixel(x + dx, y + dy);
@@ -131,7 +138,8 @@ __global__ void cudaProcess(unsigned int* g_odata, int imgw, int imgh,
                 // brighten highlights
                 float lum = (r + g + b) / (255 * 3);
 
-                if (lum > threshold) {
+                if (lum > threshold)
+                {
                     r *= highlight;
                     g *= highlight;
                     b *= highlight;
@@ -155,11 +163,9 @@ __global__ void cudaProcess(unsigned int* g_odata, int imgw, int imgh,
 #endif
 }
 
-extern "C" void launch_cudaProcess(dim3 grid, dim3 block, int sbytes,
-    cudaArray * g_data_array,
-    unsigned int* g_odata, int imgw, int imgh,
-    int tilew, int radius, float threshold,
-    float highlight) {
+extern "C" void launch_cudaProcess(dim3 grid, dim3 block, int sbytes, cudaArray * g_data_array,
+    unsigned int* g_odata, int imgw, int imgh, int tilew, int radius, float threshold, float highlight)
+{
     struct cudaChannelFormatDesc desc;
     checkCudaErrors(cudaGetChannelDesc(&desc, g_data_array));
 
@@ -177,17 +183,14 @@ extern "C" void launch_cudaProcess(dim3 grid, dim3 block, int sbytes,
     texDescr.addressMode[0] = cudaAddressModeWrap;
     texDescr.readMode = cudaReadModeElementType;
 
-    checkCudaErrors(
-        cudaCreateTextureObject(&inTexObject, &texRes, &texDescr, NULL));
+    checkCudaErrors(cudaCreateTextureObject(&inTexObject, &texRes, &texDescr, NULL));
 
 #if 0
     printf("CUDA Array channel descriptor, bits per component:\n");
-    printf("X %d Y %d Z %d W %d, kind %d\n",
-        desc.x, desc.y, desc.z, desc.w, desc.f);
+    printf("X %d Y %d Z %d W %d, kind %d\n", desc.x, desc.y, desc.z, desc.w, desc.f);
 
     printf("Possible values for channel format kind: i %d, u%d, f%d:\n",
-        cudaChannelFormatKindSigned, cudaChannelFormatKindUnsigned,
-        cudaChannelFormatKindFloat);
+        cudaChannelFormatKindSigned, cudaChannelFormatKindUnsigned, cudaChannelFormatKindFloat);
 #endif
 
     // printf("\n");
@@ -197,16 +200,16 @@ extern "C" void launch_cudaProcess(dim3 grid, dim3 block, int sbytes,
 
     int nIter = 30;
 
-    for (int i = -1; i < nIter; ++i) {
-        if (i == 0) {
+    for (int i = -1; i < nIter; ++i)
+    {
+        if (i == 0)
+        {
             sdkStartTimer(&timer);
         }
 
 #endif
 
-        cudaProcess << <grid, block, sbytes >> > (g_odata, imgw, imgh,
-            block.x + (2 * radius), radius, 0.8f,
-            4.0f, inTexObject);
+        cudaProcess << <grid, block, sbytes >> > (g_odata, imgw, imgh, block.x + (2 * radius), radius, 0.8f, 4.0f, inTexObject);
 
 #ifdef GPU_PROFILING
     }
@@ -217,12 +220,11 @@ extern "C" void launch_cudaProcess(dim3 grid, dim3 block, int sbytes,
     double dNumTexels = (double)imgw * (double)imgh;
     double mtexps = 1.0e-6 * dNumTexels / dSeconds;
 
-    if (radius == 4) {
+    if (radius == 4)
+    {
         printf("\n");
-        printf(
-            "postprocessGL, Throughput = %.4f MTexels/s, Time = %.5f s, Size = "
-            "%.0f Texels, NumDevsUsed = %d, Workgroup = %u\n",
-            mtexps, dSeconds, dNumTexels, 1, block.x * block.y);
+        printf("postprocessGL, Throughput = %.4f MTexels/s, Time = %.5f s, Size = "
+            "%.0f Texels, NumDevsUsed = %d, Workgroup = %u\n", mtexps, dSeconds, dNumTexels, 1, block.x * block.y);
     }
 
 #endif

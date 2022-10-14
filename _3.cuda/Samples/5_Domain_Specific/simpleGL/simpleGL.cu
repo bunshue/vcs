@@ -118,6 +118,8 @@ __global__ void simple_vbo_kernel(float4* pos, unsigned int width, unsigned int 
 
 void launch_kernel(float4* pos, unsigned int mesh_width, unsigned int mesh_height, float time)
 {
+    //printf("w = %d h = %d t = %f, ", mesh_width, mesh_height, time); 256, 256, dt = 0.01
+
     // execute the kernel
     dim3 block(8, 8, 1);
     dim3 grid(mesh_width / block.x, mesh_height / block.y, 1);
@@ -198,6 +200,8 @@ void runCuda(struct cudaGraphicsResource** vbo_resource)
     checkCudaErrors(cudaGraphicsMapResources(1, vbo_resource, 0));
     size_t num_bytes;
     checkCudaErrors(cudaGraphicsResourceGetMappedPointer((void**)&dptr, &num_bytes, *vbo_resource));
+
+    //1048576 bytes
     //printf("CUDA mapped VBO: May access %ld bytes\n", num_bytes);
 
     // execute the kernel
@@ -262,11 +266,9 @@ void deleteVBO(GLuint* vbo, struct cudaGraphicsResource* vbo_res)
     *vbo = 0;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//! Display callback
-////////////////////////////////////////////////////////////////////////////////
 void display()
 {
+    //printf("d ");
     sdkStartTimer(&timer);
 
     // run CUDA kernel to generate vertex positions
@@ -319,10 +321,6 @@ void cleanup()
     }
 }
 
-
-////////////////////////////////////////////////////////////////////////////////
-//! Keyboard events handler
-////////////////////////////////////////////////////////////////////////////////
 void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
     switch (key)
@@ -340,9 +338,6 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//! Mouse event handlers
-////////////////////////////////////////////////////////////////////////////////
 void mouse(int button, int state, int x, int y)
 {
     if (state == GLUT_DOWN)
@@ -378,9 +373,6 @@ void motion(int x, int y)
     mouse_old_y = y;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// Program main
-////////////////////////////////////////////////////////////////////////////////
 int main(int argc, char** argv)
 {
     printf("Starting...\n");
@@ -398,11 +390,11 @@ int main(int argc, char** argv)
         return false;
     }
 
-    // register callbacks
     glutDisplayFunc(display);
     glutKeyboardFunc(keyboard);
     glutMouseFunc(mouse);
     glutMotionFunc(motion);
+
     glutCloseFunc(cleanup);
 
     // create VBO

@@ -57,6 +57,9 @@ int main(int argc, char** argv)
     char* fname0 = sdkFindFilePath("stereo.im0.640x533.ppm", argv[0]);
     char* fname1 = sdkFindFilePath("stereo.im1.640x533.ppm", argv[0]);
 
+    printf("fname0 = %s\n", fname0);
+    printf("fname1 = %s\n", fname1);
+
     printf("Loaded <%s> as image 0\n", fname0);
 
     if (!sdkLoadPPM4ub(fname0, &h_img0, &w, &h))
@@ -205,7 +208,7 @@ int main(int argc, char** argv)
     sdkSavePGM(fnameOut, dispOut, w, h);
 
     // compute reference solution
-    printf("Computing CPU reference...\n");
+    printf("Computing CPU reference...\n\nwait...\n\n");
     cpu_gold_stereo((unsigned int*)h_img0, (unsigned int*)h_img1, (unsigned int*)h_odata, w, h, minDisp, maxDisp);
     unsigned int cpuCheckSum = 0;
 

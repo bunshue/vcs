@@ -26,7 +26,6 @@ const int N = 1048576;
 
 int main(int argc, char** argv)
 {
-    // Start logs
     printf("Starting...\n");
 
     unsigned int tableCPU[QRNG_DIMENSIONS][QRNG_RESOLUTION];

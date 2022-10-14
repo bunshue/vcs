@@ -357,6 +357,7 @@ bool initGL(int* argc, char** argv)
 
     iGLUTWindowHandle = glutCreateWindow("CUDA OpenGL post-processing");
 
+    //以下為必要
     // initialize necessary OpenGL extensions
     if (!isGLVersionSupported(2, 0) || !areGLExtensionsSupported("GL_ARB_pixel_buffer_object GL_EXT_framebuffer_object"))
     {
@@ -393,12 +394,10 @@ bool initGL(int* argc, char** argv)
 
 int main(int argc, char** argv)
 {
-    printf("Starting...\n\n");
     printf("(Interactive OpenGL Demo)\n");
 
     // First initialize OpenGL context, so we can properly set the GL for CUDA.
-    // This is necessary in order to achieve optimal performance with OpenGL/CUDA
-    // interop.
+    // This is necessary in order to achieve optimal performance with OpenGL/CUDA interop.
     if (false == initGL(&argc, argv))
     {
         return 0;

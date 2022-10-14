@@ -53,8 +53,6 @@ static int fpsCount = 0;
 static int fpsLimit = 1;
 StopWatchInterface* timer = NULL;
 
-GLuint shDraw;
-
 ////////////////////////////////////////////////////////////////////////////////
 extern "C" void launch_cudaProcess(dim3 grid, dim3 block, int sbytes, unsigned int* g_odata, int imgw);
 
@@ -112,19 +110,6 @@ void deletePBO(GLuint* pbo)
 const GLenum fbo_targets[] = {
     GL_COLOR_ATTACHMENT0_EXT, GL_COLOR_ATTACHMENT1_EXT,
     GL_COLOR_ATTACHMENT2_EXT, GL_COLOR_ATTACHMENT3_EXT };
-
-static const char* glsl_draw_fragshader_src =
-// WARNING: seems like the gl_FragColor doesn't want to output >1 colors...
-// you need version 1.3 so you can define a uvec4 output...
-// but MacOSX complains about not supporting 1.3 !!
-// for now, the mode where we use RGBA8UI may not work properly for Apple : only
-// RGBA16F works (default)
-"#version 130\n"
-"out uvec4 FragColor;\n"
-"void main()\n"
-"{"
-"  FragColor = uvec4(gl_Color.xyz * 255.0, 255.0);\n"
-"}\n";
 
 // copy image and process using CUDA
 void generateCUDAImage()
@@ -322,84 +307,6 @@ void Cleanup(int iExitCode)
     exit(iExitCode);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//!
-////////////////////////////////////////////////////////////////////////////////
-GLuint compileGLSLprogram(const char* vertex_shader_src, const char* fragment_shader_src)
-{
-    GLuint v, f, p = 0;
-
-    p = glCreateProgram();
-
-    if (vertex_shader_src)
-    {
-        v = glCreateShader(GL_VERTEX_SHADER);
-        glShaderSource(v, 1, &vertex_shader_src, NULL);
-        glCompileShader(v);
-
-        // check if shader compiled
-        GLint compiled = 0;
-        glGetShaderiv(v, GL_COMPILE_STATUS, &compiled);
-
-        if (!compiled)
-        {
-            //#ifdef NV_REPORT_COMPILE_ERRORS
-            char temp[256] = "";
-            glGetShaderInfoLog(v, 256, NULL, temp);
-            printf("Vtx Compile failed:\n%s\n", temp);
-            //#endif
-            glDeleteShader(v);
-            return 0;
-        }
-        else
-        {
-            glAttachShader(p, v);
-        }
-    }
-
-    if (fragment_shader_src)
-    {
-        f = glCreateShader(GL_FRAGMENT_SHADER);
-        glShaderSource(f, 1, &fragment_shader_src, NULL);
-        glCompileShader(f);
-
-        // check if shader compiled
-        GLint compiled = 0;
-        glGetShaderiv(f, GL_COMPILE_STATUS, &compiled);
-
-        if (!compiled)
-        {
-            //#ifdef NV_REPORT_COMPILE_ERRORS
-            char temp[256] = "";
-            glGetShaderInfoLog(f, 256, NULL, temp);
-            printf("frag Compile failed:\n%s\n", temp);
-            //#endif
-            glDeleteShader(f);
-            return 0;
-        }
-        else
-        {
-            glAttachShader(p, f);
-        }
-    }
-
-    glLinkProgram(p);
-
-    int infologLength = 0;
-    int charsWritten = 0;
-
-    glGetProgramiv(p, GL_INFO_LOG_LENGTH, (GLint*)&infologLength);
-
-    if (infologLength > 0)
-    {
-        char* infoLog = (char*)malloc(infologLength);
-        glGetProgramInfoLog(p, infologLength, (GLsizei*)&charsWritten, infoLog);
-        printf("Shader compilation error: %s\n", infoLog);
-        free(infoLog);
-    }
-    return p;
-}
-
 void initGLBuffers()
 {
     // create pbo
@@ -407,8 +314,6 @@ void initGLBuffers()
 
     // create texture that will receive the result of CUDA
     createTextureDst(&tex_cudaResult, image_width, image_height);
-    // load shader programs
-    shDraw = compileGLSLprogram(NULL, glsl_draw_fragshader_src);
 
     SDK_CHECK_ERROR_GL();
 }
@@ -428,6 +333,7 @@ bool initGL(int* argc, char** argv)
 
     iGLUTWindowHandle = glutCreateWindow("CUDA OpenGL post-processing");
 
+    //以下為必要
     // initialize necessary OpenGL extensions
     if (!isGLVersionSupported(2, 0) || !areGLExtensionsSupported("GL_ARB_pixel_buffer_object GL_EXT_framebuffer_object"))
     {
@@ -464,13 +370,10 @@ bool initGL(int* argc, char** argv)
 
 int main(int argc, char** argv)
 {
-    printf("Starting...\n\n");
-
     printf("(Interactive OpenGL Demo)\n");
 
     // First initialize OpenGL context, so we can properly set the GL for CUDA.
-    // This is necessary in order to achieve optimal performance with OpenGL/CUDA
-    // interop.
+    // This is necessary in order to achieve optimal performance with OpenGL/CUDA interop.
     if (false == initGL(&argc, argv))
     {
         return 0;

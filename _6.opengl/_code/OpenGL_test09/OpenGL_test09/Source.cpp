@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <iostream>
 
+void DrawBox();
+
 float angle;
 
 // 初始化參數
@@ -30,6 +32,26 @@ void init()
     //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, bmpLoader.imageWidth, bmpLoader.imageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, bmpLoader.image);
 
     angle = 0;
+}
+
+// 繪圖回調函數
+void display(void)
+{
+    // 清除之前幀數據
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glPushMatrix();
+    glTranslatef(0.0f, 0.0f, -5.0f);
+    glRotated(angle, 1, 1, 0);
+    DrawBox();
+    glPopMatrix();
+
+    // 執行繪圖命令
+    glFlush();
+
+    //angle++;
+    angle += 0.1;
+
+    glutPostRedisplay();
 }
 
 /** 繪制木箱 */
@@ -99,34 +121,6 @@ void reshape(int w, int h)
     glLoadIdentity();
 }
 
-void mouse(int button, int state, int x, int y)
-{
-}
-
-void motion(int x, int y)
-{
-}
-
-// 繪圖回調函數
-void display(void)
-{
-    // 清除之前幀數據
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glPushMatrix();
-    glTranslatef(0.0f, 0.0f, -5.0f);
-    glRotated(angle, 1, 1, 0);
-    DrawBox();
-    glPopMatrix();
-
-    // 執行繪圖命令
-    glFlush();
-
-    //angle++;
-    angle += 0.1;
-
-    glutPostRedisplay();
-}
-
 void keyboard(unsigned char k, int /*x*/, int /*y*/)
 {
 	switch (k)
@@ -157,6 +151,19 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
 	}
 }
 
+void mouse(int button, int state, int x, int y)
+{
+}
+
+void motion(int x, int y)
+{
+}
+
+static void idle(void)
+{
+    glutPostRedisplay();
+}
+
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
@@ -176,6 +183,7 @@ int main(int argc, char** argv)
     glutKeyboardFunc(keyboard);	//設定callback function
     glutMouseFunc(mouse);		//設定callback function
     glutMotionFunc(motion);		//設定callback function
+    glutIdleFunc(idle);			//設定callback function
 
     glutMainLoop(); // 開始主循環繪制
 

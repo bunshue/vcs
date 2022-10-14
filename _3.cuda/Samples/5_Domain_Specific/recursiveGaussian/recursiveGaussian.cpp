@@ -25,15 +25,7 @@
 
 // OpenGL Graphics includes
 #include <helper_gl.h>
-#if defined(__APPLE__) || defined(MACOSX)
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#include <GLUT/glut.h>
-#ifndef glutCloseFunc
-#define glutCloseFunc glutWMCloseFunc
-#endif
-#else
 #include <GL/freeglut.h>
-#endif
 
 // CUDA includes and interop headers
 #include <cuda_runtime.h>
@@ -57,11 +49,9 @@
 #define THRESHOLD 0.15f
 
 // Define the files that are to be save and the reference images for validation
-const char* sOriginal[] = { "teapot512_10.ppm", "teapot512_14.ppm", "teapot512_18.ppm",
-                           "teapot512_22.ppm", NULL };
+const char* sOriginal[] = { "teapot512_10.ppm", "teapot512_14.ppm", "teapot512_18.ppm", "teapot512_22.ppm", NULL };
 
-const char* sReference[] = { "ref_10.ppm", "ref_14.ppm", "ref_18.ppm",
-                            "ref_22.ppm", NULL };
+const char* sReference[] = { "ref_10.ppm", "ref_14.ppm", "ref_18.ppm", "ref_22.ppm", NULL };
 
 const char* image_filename = "teapot512.ppm";
 float sigma = 10.0f;
@@ -162,7 +152,10 @@ void display()
     computeFPS();
 }
 
-void idle() { glutPostRedisplay(); }
+void idle()
+{
+    glutPostRedisplay();
+}
 
 void cleanup()
 {
@@ -203,7 +196,8 @@ void keyboard(unsigned char key, int x, int y)
     case '-':
         sigma -= 0.1f;
 
-        if (sigma < 0.0) {
+        if (sigma < 0.0)
+        {
             sigma = 0.0f;
         }
 
@@ -216,7 +210,8 @@ void keyboard(unsigned char key, int x, int y)
     case '_':
         sigma -= 1.0f;
 
-        if (sigma < 0.0) {
+        if (sigma < 0.0)
+        {
             sigma = 0.0f;
         }
 
@@ -244,7 +239,8 @@ void keyboard(unsigned char key, int x, int y)
     glutPostRedisplay();
 }
 
-void reshape(int x, int y) {
+void reshape(int x, int y)
+{
     glViewport(0, 0, x, y);
 
     glMatrixMode(GL_MODELVIEW);
@@ -391,11 +387,10 @@ int main(int argc, char** argv)
 {
     char* ref_file = NULL;
 
-    printf("%s Starting...\n\n", sSDKsample);
+    printf("Starting...\n\n");
     printf("NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.\n\n");
 
-    // use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
+    // use command-line specified CUDA device, otherwise use device with highest Gflops/s
     if (argc > 1)
     {
         if (checkCmdLineFlag(argc, (const char**)argv, "file"))

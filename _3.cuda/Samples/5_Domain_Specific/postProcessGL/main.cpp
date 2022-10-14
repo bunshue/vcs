@@ -129,10 +129,8 @@ StopWatchInterface* timer = NULL;
 GLuint shDrawPot;  // colors the teapot
 
 ////////////////////////////////////////////////////////////////////////////////
-extern "C" void launch_cudaProcess(dim3 grid, dim3 block, int sbytes,
-    cudaArray * g_data, unsigned int* g_odata,
-    int imgw, int imgh, int tilew, int radius,
-    float threshold, float highlight);
+extern "C" void launch_cudaProcess(dim3 grid, dim3 block, int sbytes, cudaArray * g_data, unsigned int* g_odata,
+    int imgw, int imgh, int tilew, int radius, float threshold, float highlight);
 
 // Forward declarations
 void runStdProgram(int argc, char** argv);
@@ -330,14 +328,12 @@ void processImage()
   // map buffer objects to get CUDA device pointers
     cudaArray* texture_ptr;
     checkCudaErrors(cudaGraphicsMapResources(1, &cuda_tex_result_resource, 0));
-    checkCudaErrors(cudaGraphicsSubResourceGetMappedArray(
-        &texture_ptr, cuda_tex_result_resource, 0, 0));
+    checkCudaErrors(cudaGraphicsSubResourceGetMappedArray(&texture_ptr, cuda_tex_result_resource, 0, 0));
 
     int num_texels = image_width * image_height;
     int num_values = num_texels * 4;
     int size_tex_data = sizeof(GLubyte) * num_values;
-    checkCudaErrors(cudaMemcpyToArray(texture_ptr, 0, 0, cuda_dest_resource,
-        size_tex_data, cudaMemcpyDeviceToDevice));
+    checkCudaErrors(cudaMemcpyToArray(texture_ptr, 0, 0, cuda_dest_resource, size_tex_data, cudaMemcpyDeviceToDevice));
 
     checkCudaErrors(cudaGraphicsUnmapResources(1, &cuda_tex_result_resource, 0));
 #endif
@@ -552,7 +548,7 @@ void mainMenu(int i) { keyboard((unsigned char)i, 0, 0); }
 ////////////////////////////////////////////////////////////////////////////////
 //!
 ////////////////////////////////////////////////////////////////////////////////
-void createTextureSrc(GLuint* tex_screen, unsigned int size_x,    unsigned int size_y) 
+void createTextureSrc(GLuint* tex_screen, unsigned int size_x, unsigned int size_y)
 {
     // create a texture
     glGenTextures(1, tex_screen);	//生成紋理對象
@@ -567,8 +563,7 @@ void createTextureSrc(GLuint* tex_screen, unsigned int size_x,    unsigned int s
     // buffer data
 #ifndef USE_TEXTURE_RGBA8UI
     printf("Creating a Texture render target GL_RGBA16F_ARB\n");
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F_ARB, size_x, size_y, 0, GL_RGBA,
-        GL_UNSIGNED_BYTE, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F_ARB, size_x, size_y, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
 #else
     printf("Creating a Texture render target GL_RGBA8UI_EXT\n");
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8UI_EXT, size_x, size_y, 0,
@@ -576,15 +571,13 @@ void createTextureSrc(GLuint* tex_screen, unsigned int size_x,    unsigned int s
 #endif
     SDK_CHECK_ERROR_GL();
     // register this texture with CUDA
-    checkCudaErrors(cudaGraphicsGLRegisterImage(&cuda_tex_screen_resource,
-        *tex_screen, GL_TEXTURE_2D,
-        cudaGraphicsMapFlagsReadOnly));
+    checkCudaErrors(cudaGraphicsGLRegisterImage(&cuda_tex_screen_resource, *tex_screen, GL_TEXTURE_2D, cudaGraphicsMapFlagsReadOnly));
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 //!
 ////////////////////////////////////////////////////////////////////////////////
-void createTextureDst(GLuint* tex_cudaResult, unsigned int size_x,    unsigned int size_y) 
+void createTextureDst(GLuint* tex_cudaResult, unsigned int size_x, unsigned int size_y)
 {
     // create a texture
     glGenTextures(1, tex_cudaResult);	//生成紋理對象
@@ -597,42 +590,32 @@ void createTextureDst(GLuint* tex_cudaResult, unsigned int size_x,    unsigned i
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
 #ifdef USE_TEXSUBIMAGE2D
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, size_x, size_y, 0, GL_RGBA,
-        GL_UNSIGNED_BYTE, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, size_x, size_y, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
     SDK_CHECK_ERROR_GL();
 #else
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8UI_EXT, size_x, size_y, 0,
-        GL_RGBA_INTEGER_EXT, GL_UNSIGNED_BYTE, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8UI_EXT, size_x, size_y, 0, GL_RGBA_INTEGER_EXT, GL_UNSIGNED_BYTE, NULL);
     SDK_CHECK_ERROR_GL();
     // register this texture with CUDA
-    checkCudaErrors(cudaGraphicsGLRegisterImage(
-        &cuda_tex_result_resource, *tex_cudaResult, GL_TEXTURE_2D,
-        cudaGraphicsMapFlagsWriteDiscard));
+    checkCudaErrors(cudaGraphicsGLRegisterImage(&cuda_tex_result_resource, *tex_cudaResult, GL_TEXTURE_2D, cudaGraphicsMapFlagsWriteDiscard));
 #endif
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//!
-////////////////////////////////////////////////////////////////////////////////
-void deleteTexture(GLuint* tex) {
+void deleteTexture(GLuint* tex)
+{
     glDeleteTextures(1, tex);
     SDK_CHECK_ERROR_GL();
 
     *tex = 0;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//!
-////////////////////////////////////////////////////////////////////////////////
-void createDepthBuffer(GLuint* depth, unsigned int size_x,
-    unsigned int size_y) {
+void createDepthBuffer(GLuint* depth, unsigned int size_x, unsigned int size_y)
+{
     // create a renderbuffer
     glGenRenderbuffersEXT(1, depth);
     glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, *depth);
 
     // allocate storage
-    glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_DEPTH_COMPONENT24, size_x,
-        size_y);
+    glRenderbufferStorageEXT(GL_RENDERBUFFER_EXT, GL_DEPTH_COMPONENT24, size_x, size_y);
 
     // clean up
     glBindRenderbufferEXT(GL_RENDERBUFFER_EXT, 0);
@@ -640,8 +623,6 @@ void createDepthBuffer(GLuint* depth, unsigned int size_x,
     SDK_CHECK_ERROR_GL();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//!
 ////////////////////////////////////////////////////////////////////////////////
 // void
 // createRenderBuffer(GLuint* render, unsigned int size_x, unsigned int size_y)
@@ -663,31 +644,24 @@ void createDepthBuffer(GLuint* depth, unsigned int size_x,
 //                        GL_RENDERBUFFER_EXT, cudaGraphicsMapFlagsReadOnly));
 //}
 
-////////////////////////////////////////////////////////////////////////////////
-//!
-////////////////////////////////////////////////////////////////////////////////
-void deleteDepthBuffer(GLuint* depth) {
+void deleteDepthBuffer(GLuint* depth)
+{
     glDeleteRenderbuffersEXT(1, depth);
     SDK_CHECK_ERROR_GL();
 
     *depth = 0;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//!
-////////////////////////////////////////////////////////////////////////////////
-void createFramebuffer(GLuint* fbo, GLuint color, GLuint depth) {
+void createFramebuffer(GLuint* fbo, GLuint color, GLuint depth)
+{
     // create and bind a framebuffer
     glGenFramebuffersEXT(1, fbo);
     glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, *fbo);
 
     // attach images
-    glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT,
-        GL_TEXTURE_2D, color, 0);
-    // glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT,
-    // GL_RENDERBUFFER_EXT, color);
-    glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT,
-        GL_RENDERBUFFER_EXT, depth);
+    glFramebufferTexture2DEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_TEXTURE_2D, color, 0);
+    // glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_COLOR_ATTACHMENT0_EXT, GL_RENDERBUFFER_EXT, color);
+    glFramebufferRenderbufferEXT(GL_FRAMEBUFFER_EXT, GL_DEPTH_ATTACHMENT_EXT, GL_RENDERBUFFER_EXT, depth);
 
     // clean up
     glBindFramebufferEXT(GL_FRAMEBUFFER_EXT, 0);
@@ -695,10 +669,8 @@ void createFramebuffer(GLuint* fbo, GLuint color, GLuint depth) {
     SDK_CHECK_ERROR_GL();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//!
-////////////////////////////////////////////////////////////////////////////////
-void deleteFramebuffer(GLuint* fbo) {
+void deleteFramebuffer(GLuint* fbo)
+{
     glDeleteFramebuffersEXT(1, fbo);
     SDK_CHECK_ERROR_GL();
 
@@ -710,10 +682,12 @@ void deleteFramebuffer(GLuint* fbo) {
 ////////////////////////////////////////////////////////////////////////////////
 int main(int argc, char** argv)
 {
-    printf("%s Starting...\n\n", argv[0]);
+    printf("Starting...\n\n");
 
-    if (checkCmdLineFlag(argc, (const char**)argv, "radius") &&
-        checkCmdLineFlag(argc, (const char**)argv, "file")) {
+    if (checkCmdLineFlag(argc, (const char**)argv, "radius") && checkCmdLineFlag(argc, (const char**)argv, "file"))
+    {
+        printf("XXXXXXXXXX\n");
+
         getCmdLineArgumentString(argc, (const char**)argv, "file", &ref_file);
         blur_radius = getCmdLineArgumentInt(argc, (const char**)argv, "radius");
     }
@@ -723,23 +697,26 @@ int main(int argc, char** argv)
 
     // use command-line specified CUDA device, otherwise use device with highest
     // Gflops/s
-    if (checkCmdLineFlag(argc, (const char**)argv, "device")) {
-        printf("[%s]\n", argv[0]);
+    if (checkCmdLineFlag(argc, (const char**)argv, "device"))
+    {
+        printf("XXXXXXXXXX\n");
         printf("   Does not explicitly support -device=n\n");
-        printf(
-            "   This sample requires OpenGL.  Only -file=<reference> -radius=<n> "
-            "are supported\n");
+        printf("   This sample requires OpenGL.  Only -file=<reference> -radius=<n> are supported\n");
         printf("exiting...\n");
         exit(EXIT_WAIVED);
     }
 
-    if (ref_file) {
+    if (ref_file)
+    {
+        printf("XXXXXXXXXX\n");
         printf("(Test with OpenGL verification)\n");
         animate = false;
 
         runStdProgram(argc, argv);
     }
-    else {
+    else
+    {
+        printf("here\n");
         printf("(Interactive OpenGL Demo)\n");
         animate = true;
 
@@ -749,10 +726,8 @@ int main(int argc, char** argv)
     exit(EXIT_SUCCESS);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//!
-////////////////////////////////////////////////////////////////////////////////
-void FreeResource() {
+void FreeResource()
+{
     sdkDeleteTimer(&timer);
 
     // unregister this buffer object with CUDA
@@ -768,7 +743,8 @@ void FreeResource() {
     deleteDepthBuffer(&depth_buffer);
     deleteFramebuffer(&framebuffer);
 
-    if (iGLUTWindowHandle) {
+    if (iGLUTWindowHandle)
+    {
         glutDestroyWindow(iGLUTWindowHandle);
     }
 
@@ -776,23 +752,21 @@ void FreeResource() {
     printf("postProcessGL.exe Exiting...\n");
 }
 
-void Cleanup(int iExitCode) {
+void Cleanup(int iExitCode)
+{
     FreeResource();
-    printf("Images are %s\n",
-        (iExitCode == EXIT_SUCCESS) ? "Matching" : "Not Matching");
+    printf("Images are %s\n", (iExitCode == EXIT_SUCCESS) ? "Matching" : "Not Matching");
     exit(EXIT_SUCCESS);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//!
-////////////////////////////////////////////////////////////////////////////////
-GLuint compileGLSLprogram(const char* vertex_shader_src,
-    const char* fragment_shader_src) {
+GLuint compileGLSLprogram(const char* vertex_shader_src, const char* fragment_shader_src)
+{
     GLuint v, f, p = 0;
 
     p = glCreateProgram();
 
-    if (vertex_shader_src) {
+    if (vertex_shader_src)
+    {
         v = glCreateShader(GL_VERTEX_SHADER);
         glShaderSource(v, 1, &vertex_shader_src, NULL);
         glCompileShader(v);
@@ -801,7 +775,8 @@ GLuint compileGLSLprogram(const char* vertex_shader_src,
         GLint compiled = 0;
         glGetShaderiv(v, GL_COMPILE_STATUS, &compiled);
 
-        if (!compiled) {
+        if (!compiled)
+        {
             //#ifdef NV_REPORT_COMPILE_ERRORS
             char temp[256] = "";
             glGetShaderInfoLog(v, 256, NULL, temp);
@@ -810,12 +785,14 @@ GLuint compileGLSLprogram(const char* vertex_shader_src,
             glDeleteShader(v);
             return 0;
         }
-        else {
+        else
+        {
             glAttachShader(p, v);
         }
     }
 
-    if (fragment_shader_src) {
+    if (fragment_shader_src)
+    {
         f = glCreateShader(GL_FRAGMENT_SHADER);
         glShaderSource(f, 1, &fragment_shader_src, NULL);
         glCompileShader(f);
@@ -824,7 +801,8 @@ GLuint compileGLSLprogram(const char* vertex_shader_src,
         GLint compiled = 0;
         glGetShaderiv(f, GL_COMPILE_STATUS, &compiled);
 
-        if (!compiled) {
+        if (!compiled)
+        {
             //#ifdef NV_REPORT_COMPILE_ERRORS
             char temp[256] = "";
             glGetShaderInfoLog(f, 256, NULL, temp);
@@ -833,7 +811,8 @@ GLuint compileGLSLprogram(const char* vertex_shader_src,
             glDeleteShader(f);
             return 0;
         }
-        else {
+        else
+        {
             glAttachShader(p, f);
         }
     }
@@ -846,10 +825,12 @@ GLuint compileGLSLprogram(const char* vertex_shader_src,
     GLint linked = 0;
     glGetProgramiv(p, GL_LINK_STATUS, &linked);
 
-    if (linked == 0) {
+    if (linked == 0)
+    {
         glGetProgramiv(p, GL_INFO_LOG_LENGTH, (GLint*)&infologLength);
 
-        if (infologLength > 0) {
+        if (infologLength > 0)
+        {
             char* infoLog = (char*)malloc(infologLength);
             glGetProgramInfoLog(p, infologLength, (GLsizei*)&charsWritten, infoLog);
             printf("Shader compilation error: %s\n", infoLog);
@@ -878,7 +859,8 @@ void initCUDABuffers() {
 ////////////////////////////////////////////////////////////////////////////////
 //!
 ////////////////////////////////////////////////////////////////////////////////
-void initGLBuffers() {
+void initGLBuffers()
+{
     // create pbo
 #ifdef USE_TEXSUBIMAGE2D
     createPBO(&pbo_dest, &cuda_pbo_dest_resource);
@@ -909,11 +891,12 @@ void initGLBuffers() {
 ////////////////////////////////////////////////////////////////////////////////
 //! Run standard demo loop with or without GL verification
 ////////////////////////////////////////////////////////////////////////////////
-void runStdProgram(int argc, char** argv) {
+void runStdProgram(int argc, char** argv)
+{
     // First initialize OpenGL context, so we can properly set the GL for CUDA.
-    // This is necessary in order to achieve optimal performance with OpenGL/CUDA
-    // interop.
-    if (false == initGL(&argc, argv)) {
+    // This is necessary in order to achieve optimal performance with OpenGL/CUDA interop.
+    if (false == initGL(&argc, argv))
+    {
         return;
     }
 
@@ -944,16 +927,15 @@ void runStdProgram(int argc, char** argv) {
 #endif
 
     // Creating the Auto-Validation Code
-    if (ref_file) {
+    if (ref_file)
+    {
         g_CheckRender = new CheckBackBuffer(window_width, window_height, 4);
         g_CheckRender->setPixelFormat(GL_RGBA);
         g_CheckRender->setExecPath(argv[0]);
         g_CheckRender->EnableQAReadback(true);
     }
 
-    printf(
-        "\n"
-        "\tControls\n"
+    printf("\n\tControls\n"
         "\t(right click mouse button for Menu)\n"
         "\t[ ] : Toggle CUDA Post Processing (on/off)\n"
         "\t[a] : Toggle Animation (on/off)\n"
@@ -968,9 +950,6 @@ void runStdProgram(int argc, char** argv) {
     Cleanup(EXIT_SUCCESS);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//! Initialize GL
-////////////////////////////////////////////////////////////////////////////////
 bool initGL(int* argc, char** argv)
 {
     // Create GL context
@@ -1001,8 +980,7 @@ bool initGL(int* argc, char** argv)
     // projection
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluPerspective(60.0, (GLfloat)window_width / (GLfloat)window_height, 0.1f,
-        10.0f);
+    gluPerspective(60.0, (GLfloat)window_width / (GLfloat)window_height, 0.1f, 10.0f);
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 

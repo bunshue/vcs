@@ -117,7 +117,10 @@ __device__ void d_render(uint* d_output, uint imageW, uint imageH,
     uint x = blockIdx.x * blockDim.x + threadIdx.x;
     uint y = blockIdx.y * blockDim.y + threadIdx.y;
 
-    if ((x >= imageW) || (y >= imageH)) return;
+    if ((x >= imageW) || (y >= imageH))
+    {
+        return;
+    }
 
     float u = (x / (float)imageW) * 2.0f - 1.0f;
     float v = (y / (float)imageH) * 2.0f - 1.0f;
@@ -132,9 +135,15 @@ __device__ void d_render(uint* d_output, uint imageW, uint imageH,
     float tnear, tfar;
     int hit = intersectBox(eyeRay, boxMin, boxMax, &tnear, &tfar);
 
-    if (!hit) return;
+    if (!hit)
+    {
+        return;
+    }
 
-    if (tnear < 0.0f) tnear = 0.0f;  // clamp to near plane
+    if (tnear < 0.0f)
+    {
+        tnear = 0.0f;  // clamp to near plane
+    }
 
     // march along ray from front to back, accumulating color
     float4 sum = make_float4(0.0f);
@@ -160,9 +169,7 @@ __device__ void d_render(uint* d_output, uint imageW, uint imageH,
 
         if (TFMODE != TF_SINGLE_1D)
         {
-            col = tex2DLayered<float4>(transferLayerPreintTex, sample,
-                TFMODE == TF_LAYERED_2D ? sample : lastsample,
-                tfid);
+            col = tex2DLayered<float4>(transferLayerPreintTex, sample, TFMODE == TF_LAYERED_2D ? sample : lastsample, tfid);
             col.w *= density;
             lastsample = sample;
         }
@@ -210,10 +217,10 @@ __global__ void d_render_regular(uint* d_output, uint imageW, uint imageH,
     cudaTextureObject_t volumeTex,
     cudaTextureObject_t transferTex,
     cudaTextureObject_t transferLayerPreintTex,
-    float transferWeight = 0.0f) {
+    float transferWeight = 0.0f)
+{
     d_render<TF_SINGLE_1D>(d_output, imageW, imageH, density, brightness,
-        transferOffset, transferScale, volumeTex, transferTex,
-        transferLayerPreintTex, transferWeight);
+        transferOffset, transferScale, volumeTex, transferTex, transferLayerPreintTex, transferWeight);
 }
 
 __global__ void d_render_preint(uint* d_output, uint imageW, uint imageH,
@@ -222,11 +229,10 @@ __global__ void d_render_preint(uint* d_output, uint imageW, uint imageH,
     cudaTextureObject_t volumeTex,
     cudaTextureObject_t transferTex,
     cudaTextureObject_t transferLayerPreintTex,
-    float transferWeight = 0.0f) {
+    float transferWeight = 0.0f)
+{
     d_render<TF_LAYERED_2D_PREINT>(d_output, imageW, imageH, density, brightness,
-        transferOffset, transferScale, volumeTex,
-        transferTex, transferLayerPreintTex,
-        transferWeight);
+        transferOffset, transferScale, volumeTex, transferTex, transferLayerPreintTex, transferWeight);
 }
 
 __global__ void d_render_preint_off(uint* d_output, uint imageW, uint imageH,
@@ -235,13 +241,11 @@ __global__ void d_render_preint_off(uint* d_output, uint imageW, uint imageH,
     cudaTextureObject_t volumeTex,
     cudaTextureObject_t transferTex,
     cudaTextureObject_t transferLayerPreintTex,
-    float transferWeight = 0.0f) {
+    float transferWeight = 0.0f)
+{
     d_render<TF_LAYERED_2D>(d_output, imageW, imageH, density, brightness,
-        transferOffset, transferScale, volumeTex, transferTex,
-        transferLayerPreintTex, transferWeight);
+        transferOffset, transferScale, volumeTex, transferTex, transferLayerPreintTex, transferWeight);
 }
-
-//////////////////////////////////////////////////////////////////////////
 
 __global__ void d_integrate_trapezoidal(cudaExtent extent, cudaTextureObject_t transferTex, cudaSurfaceObject_t transferIntegrateSurf)
 {

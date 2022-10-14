@@ -34,18 +34,17 @@
 #define MAX_EPSILON_ERROR 5.0f
 
 // Define the files that are to be save and the reference images for validation
-const char *sOriginal[] = {"mandelbrot.ppm", "julia.ppm", NULL};
+const char* sOriginal[] = { "mandelbrot.ppm", "julia.ppm", NULL };
 
-const char *sReference[] = {"Mandelbrot_fp32.ppm", "Mandelbrot_fp64.ppm", NULL};
+const char* sReference[] = { "Mandelbrot_fp32.ppm", "Mandelbrot_fp64.ppm", NULL };
 
-const char *sReferenceJulia[] = {"referenceJulia_fp32.ppm",
-                                 "referenceJulia_fp64.ppm", NULL};
+const char* sReferenceJulia[] = { "referenceJulia_fp32.ppm",                                 "referenceJulia_fp64.ppm", NULL };
 
 bool g_isJuliaSet = false;
 bool g_isMoving = true;
 bool g_runCPU = false;
 
-FILE *stream;
+FILE* stream;
 char g_ExecPath[300];
 
 // Set to 1 to run on the CPU instead of the GPU for timing comparison.
@@ -60,13 +59,13 @@ char g_ExecPath[300];
 
 // OpenGL PBO and texture "names"
 GLuint gl_PBO, gl_Tex, gl_Shader;
-struct cudaGraphicsResource *cuda_pbo_resource;  // handles OpenGL-CUDA exchange
+struct cudaGraphicsResource* cuda_pbo_resource;  // handles OpenGL-CUDA exchange
 
 // Source image on the host side
-uchar4 *h_Src = 0;
+uchar4* h_Src = 0;
 
 // Destination image on the GPU side
-uchar4 *d_dst = NULL;
+uchar4* d_dst = NULL;
 
 // Original image width and height
 int imageW = 800, imageH = 600;
@@ -102,7 +101,7 @@ int colorSeed = 0;
 uchar4 colors;
 
 // Timer ID
-StopWatchInterface *hTimer = NULL;
+StopWatchInterface* hTimer = NULL;
 
 // User interface variables
 int lastx = 0;
@@ -122,10 +121,7 @@ int fpsLimit = 15;  // FPS limit for sampling
 unsigned int frameCount = 0;
 unsigned int g_TotalErrors = 0;
 
-int *pArgc = NULL;
-char **pArgv = NULL;
-
-const char *sSDKsample = "CUDA Mandelbrot/Julia Set";
+const char* sSDKsample = "CUDA Mandelbrot/Julia Set";
 
 #define MAX_EPSILON 50
 #define REFRESH_DELAY 10  // ms
@@ -136,7 +132,7 @@ const char *sSDKsample = "CUDA Mandelbrot/Julia Set";
 #define BUFFER_DATA(i) ((char *)0 + i)
 
 // This is specifically to enable the application to enable/disable vsync
-typedef BOOL(WINAPI *PFNWGLSWAPINTERVALFARPROC)(int);
+typedef BOOL(WINAPI* PFNWGLSWAPINTERVALFARPROC)(int);
 
 void setVSync(int interval)
 {
@@ -840,36 +836,36 @@ void mainMenu(int i)
 
 void initMenus()
 {
-  glutCreateMenu(mainMenu);
+    glutCreateMenu(mainMenu);
 
-  if (!g_runCPU)
-  {
-    glutAddMenuEntry("Hardware single precision", 0);
-
-    if (numSMs > 2)
+    if (!g_runCPU)
     {
-      glutAddMenuEntry("Emulated double-single precision", 1);
+        glutAddMenuEntry("Hardware single precision", 0);
+
+        if (numSMs > 2)
+        {
+            glutAddMenuEntry("Emulated double-single precision", 1);
+        }
+
+        if (haveDoubles)
+        {
+            glutAddMenuEntry("Hardware double precision", 2);
+        }
+    }
+    else
+    {
+        glutAddMenuEntry("Software single precision", 0);
+        glutAddMenuEntry("Software double precision", 1);
     }
 
-    if (haveDoubles)
-    {
-      glutAddMenuEntry("Hardware double precision", 2);
-    }
-  }
-  else
-  {
-    glutAddMenuEntry("Software single precision", 0);
-    glutAddMenuEntry("Software double precision", 1);
-  }
-
-  glutAttachMenu(GLUT_RIGHT_BUTTON);
+    glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
 // gl_Shader for displaying floating-point texture
-static const char *shader_code =
-    "!!ARBfp1.0\n"
-    "TEX result.color, fragment.texcoord, texture[0], 2D; \n"
-    "END";
+static const char* shader_code =
+"!!ARBfp1.0\n"
+"TEX result.color, fragment.texcoord, texture[0], 2D; \n"
+"END";
 
 GLuint compileASMShader(GLenum program_type, const char* code) {
     GLuint program_id;
@@ -1176,14 +1172,12 @@ void printHelp() {
 ////////////////////////////////////////////////////////////////////////////////
 int main(int argc, char** argv)
 {
-    pArgc = &argc;
-    pArgv = argv;
-
-    printf("[%s] - Starting...\n", sSDKsample);
+    printf("Starting...\n");
 
     // parse command line arguments
     if (checkCmdLineFlag(argc, (const char**)argv, "help"))
     {
+        printf("XXXXXXX\n");
         printHelp();
         exit(EXIT_SUCCESS);
     }
@@ -1192,6 +1186,7 @@ int main(int argc, char** argv)
 
     if (checkCmdLineFlag(argc, (const char**)argv, "mode"))
     {
+        printf("XXXXXXX\n");
         mode = getCmdLineArgumentInt(argc, (const char**)argv, "mode");
         g_isJuliaSet = mode;
 
@@ -1205,6 +1200,7 @@ int main(int argc, char** argv)
     // all parameters
     if (g_isJuliaSet)  // settings for Julia
     {
+        printf("XXXXXXX\n");
         char* ref_path = sdkFindFilePath("params.txt", argv[0]);
         startJulia(ref_path);
     }
@@ -1229,6 +1225,7 @@ int main(int argc, char** argv)
 
     if (checkCmdLineFlag(argc, (const char**)argv, "file"))
     {
+        printf("XXXXXXX\n");
         fpsLimit = frameCheckNumber;
 
         // use command-line specified CUDA device, otherwise use device with highest
@@ -1242,6 +1239,7 @@ int main(int argc, char** argv)
     }
     else if (checkCmdLineFlag(argc, (const char**)argv, "benchmark"))
     {
+        printf("XXXXXXX\n");
         // run benchmark
         // use command-line specified CUDA device, otherwise use device with highest
         // Gflops/s
@@ -1256,6 +1254,7 @@ int main(int argc, char** argv)
     // Gflops/s
     else if (checkCmdLineFlag(argc, (const char**)argv, "device"))
     {
+        printf("XXXXXXX\n");
         printf("[%s]\n", argv[0]);
         printf("   Does not explicitly support -device=n in OpenGL mode\n");
         printf("   To use -device=n, the sample must be running w/o OpenGL\n\n");
@@ -1273,8 +1272,7 @@ int main(int argc, char** argv)
     initGL(&argc, argv);
     initOpenGLBuffers(imageW, imageH);
 
-    printf("Starting GLUT main loop...\n");
-    printf("\n");
+    printf("Starting GLUT main loop...\n\n");
     printf("Press [s] to toggle between GPU and CPU implementations\n");
     printf("Press [j] to toggle between Julia and Mandelbrot sets\n");
     printf("Press [r] or [R] to decrease or increase red color channel\n");
@@ -1286,12 +1284,8 @@ int main(int argc, char** argv)
     printf("Press [d] or [D] to increase or decrease the detail\n");
     printf("Press [p] to record main parameters to file params.txt\n");
     printf("Press [o] to read main parameters from file params.txt\n");
-    printf(
-        "Left mouse button + drag = move (Mandelbrot or Julia) or animate "
-        "(Julia)\n");
-    printf(
-        "Press [m] to toggle between move and animate (Julia) for left mouse "
-        "button\n");
+    printf("Left mouse button + drag = move (Mandelbrot or Julia) or animate (Julia)\n");
+    printf("Press [m] to toggle between move and animate (Julia) for left mouse button\n");
     printf("Middle mouse button + drag = Zoom\n");
     printf("Right mouse button = Menu\n");
     printf("Press [?] to print location and scale\n");

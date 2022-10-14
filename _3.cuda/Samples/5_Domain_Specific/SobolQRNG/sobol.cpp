@@ -70,12 +70,14 @@ int main(int argc, char* argv[])
     // Print help if requested
     if (checkCmdLineFlag(argc, (const char**)argv, "help"))
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXX");
         printHelp(argc, argv);
         return 0;
     }
 
     if (checkCmdLineFlag(argc, (const char**)argv, "qatest"))
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXX");
         // For QA testing set a default number of vectors and dimensions
         n_vectors = 100000;
         n_dimensions = 100;
@@ -85,6 +87,7 @@ int main(int argc, char* argv[])
         // Parse the command line to determine the required number of vectors
         if (checkCmdLineFlag(argc, (const char**)argv, "vectors"))
         {
+            printf("XXXXXXXXXXXXXXXXXXXXXX");
             n_vectors = getCmdLineArgumentInt(argc, (const char**)argv, "vectors");
 
             if (n_vectors < 1)
@@ -100,6 +103,7 @@ int main(int argc, char* argv[])
         // vector
         if (checkCmdLineFlag(argc, (const char**)argv, "dimensions"))
         {
+            printf("XXXXXXXXXXXXXXXXXXXXXX");
             n_dimensions = getCmdLineArgumentInt(argc, (const char**)argv, "dimensions");
 
             if (n_dimensions < 1)
@@ -115,6 +119,7 @@ int main(int argc, char* argv[])
     // If any of the command line checks failed, exit
     if (!ok)
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXX");
         return -1;
     }
 

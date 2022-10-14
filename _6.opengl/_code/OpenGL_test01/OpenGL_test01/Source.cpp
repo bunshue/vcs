@@ -477,7 +477,7 @@ static void keyboard(unsigned char key, int x, int y)
 }
 
 //key 枚举值，x、y是位置
-void SpecialKey(int key, int x, int y)
+void special(int key, int x, int y)
 {
     if (key == GLUT_KEY_UP)
     {
@@ -495,7 +495,6 @@ void SpecialKey(int key, int x, int y)
     {
         printf("右 ");
     }
-
 }
 
 void mainMenu(int i) { keyboard((unsigned char)i, 0, 0); }
@@ -558,7 +557,7 @@ int main(int argc, char* argv[])
     glutDisplayFunc(display);       //設定callback function, 註冊顯示函數 // Register display callback handler for window re-paint
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
-    glutSpecialFunc(SpecialKey);    //設定callback function
+    glutSpecialFunc(special);       //設定callback function
 
     initMenus();        //設定表單按鈕
 

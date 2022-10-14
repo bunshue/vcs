@@ -1,30 +1,19 @@
 /**
- * Copyright 1993-2015 NVIDIA Corporation.  All rights reserved.
+ * CUDA 3D Volume Filtering sample
  *
- * Please refer to the NVIDIA end user license agreement (EULA) associated
- * with this source code for terms and conditions that govern your use of
- * this software. Any use, reproduction, disclosure, or distribution of
- * this software and related documentation outside the terms of the EULA
- * is strictly prohibited.
+ * This sample loads a 3D volume from disk and displays it using
+ * ray marching and 3D textures.
  *
+ * Note - this is intended to be an example of using 3D textures
+ * in CUDA, not an optimized volume renderer.
+ *
+ * Changes
+ * sgg 22/3/2010
+ * - updated to use texture for display instead of glDrawPixels.
+ * - changed to render from front-to-back rather than back-to-front.
  */
 
- /**
-  * CUDA 3D Volume Filtering sample
-  *
-  * This sample loads a 3D volume from disk and displays it using
-  * ray marching and 3D textures.
-  *
-  * Note - this is intended to be an example of using 3D textures
-  * in CUDA, not an optimized volume renderer.
-  *
-  * Changes
-  * sgg 22/3/2010
-  * - updated to use texture for display instead of glDrawPixels.
-  * - changed to render from front-to-back rather than back-to-front.
-  */
-
-  // OpenGL Graphics includes
+ // OpenGL Graphics includes
 #include <helper_gl.h>
 #include <GL/freeglut.h>
 
@@ -46,7 +35,6 @@ typedef unsigned char uchar;
 #define THRESHOLD         0.30f
 
 const char* sSDKsample = "CUDA 3D Volume Filtering";
-
 
 #include "volume.h"
 #include "volumeFilter.h"
@@ -94,9 +82,6 @@ int fpsLimit = 1;        // FPS limit for sampling
 int g_Index = 0;
 unsigned int frameCount = 0;
 unsigned int g_TotalErrors = 0;
-
-int* pArgc;
-char** pArgv;
 
 #define MAX(a,b) ((a > b) ? a : b)
 
@@ -247,7 +232,6 @@ void filter()
 // render image using CUDA
 void render()
 {
-
     VolumeRender_copyInvViewMatrix(invViewMatrix, sizeof(float4) * 3);
 
     // map PBO to get CUDA device pointer
@@ -255,8 +239,7 @@ void render()
     // map PBO to get CUDA device pointer
     checkCudaErrors(cudaGraphicsMapResources(1, &cuda_pbo_resource, 0));
     size_t num_bytes;
-    checkCudaErrors(cudaGraphicsResourceGetMappedPointer((void**)&d_output, &num_bytes,
-        cuda_pbo_resource));
+    checkCudaErrors(cudaGraphicsResourceGetMappedPointer((void**)&d_output, &num_bytes, cuda_pbo_resource));
     //printf("CUDA mapped PBO: May access %ld bytes\n", num_bytes);
 
     // clear image
@@ -353,12 +336,8 @@ void keyboard(unsigned char key, int x, int y)
     switch (key)
     {
     case 27:
-#if defined (__APPLE__) || defined(MACOSX)
-        exit(EXIT_SUCCESS);
-#else
         glutDestroyWindow(glutGetWindow());
         return;
-#endif
         break;
 
     case ' ':
@@ -509,8 +488,7 @@ void initGL(int* argc, char** argv)
     glutInitWindowSize(width, height);
     glutCreateWindow("CUDA 3D Volume Filtering");
 
-    if (!isGLVersionSupported(2, 0) ||
-        !areGLExtensionsSupported("GL_ARB_pixel_buffer_object"))
+    if (!isGLVersionSupported(2, 0) || !areGLExtensionsSupported("GL_ARB_pixel_buffer_object"))
     {
         printf("Required OpenGL extensions are missing.");
         exit(EXIT_SUCCESS);
@@ -672,7 +650,6 @@ void runSingleTest(const char* ref_file, const char* exec_path)
     printf("volumeFiltering, Throughput = %.4f MTexels/s, Time = %.5f s, Size = %u Texels, NumDevsUsed = %u, Workgroup = %u\n",
         (1.0e-6 * width * height) / dAvgTime, dAvgTime, (width * height), 1, blockSize.x * blockSize.y);
 
-
     getLastCudaError("Error: kernel execution FAILED");
     checkCudaErrors(cudaDeviceSynchronize());
 
@@ -705,23 +682,20 @@ void printHelp()
 
 int main(int argc, char** argv)
 {
-    pArgc = &argc;
-    pArgv = argv;
-
     char* ref_file = NULL;
 
     printf("%s Starting...\n\n", sSDKsample);
 
-    //start logs
-
     if (checkCmdLineFlag(argc, (const char**)argv, "help"))
     {
+        printf("XXXXXXXXX\n");
         printHelp();
         exit(EXIT_SUCCESS);
     }
 
     if (checkCmdLineFlag(argc, (const char**)argv, "file"))
     {
+        printf("XXXXXXXXX\n");
         fpsLimit = frameCheckNumber;
         getCmdLineArgumentString(argc, (const char**)argv, "file", &ref_file);
     }
@@ -736,8 +710,7 @@ int main(int argc, char** argv)
     // load volume data
     initData(argc, argv);
 
-    printf(
-        "Press \n"
+    printf("Press \n"
         "  'SPACE'     to toggle animation\n"
         "  'p'         to toggle pre-integrated transfer function\n"
         "  '+' and '-' to change density (0.01 increments)\n"
@@ -747,6 +720,7 @@ int main(int argc, char** argv)
 
     if (ref_file)
     {
+        printf("XXXXXXXXX\n");
         runSingleTest(ref_file, argv[0]);
     }
     else

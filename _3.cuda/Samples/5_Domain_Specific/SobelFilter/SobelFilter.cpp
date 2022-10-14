@@ -17,7 +17,7 @@
 #include <helper_functions.h>  // includes for SDK helper functions
 #include <helper_cuda.h>  // includes for cuda initialization and error checking
 
-const char* filterMode[] = { "No Filtering", "Sobel Texture",                            "Sobel SMEM+Texture", NULL };
+const char* filterMode[] = { "No Filtering", "Sobel Texture", "Sobel SMEM+Texture", NULL };
 
 //
 // Cuda example code that implements the Sobel edge detection
@@ -57,8 +57,7 @@ bool g_bQAReadback = false;
 
 // Display Data
 static GLuint pbo_buffer = 0;  // Front and back CA buffers
-struct cudaGraphicsResource
-    * cuda_pbo_resource;  // CUDA Graphics Resource (to transfer PBO)
+struct cudaGraphicsResource* cuda_pbo_resource;  // CUDA Graphics Resource (to transfer PBO)
 
 static GLuint texid = 0;       // Texture for display
 unsigned char* pixels = NULL;  // Image pixel data on the host
@@ -70,17 +69,18 @@ extern "C" void runAutoTest(int argc, char** argv);
 #define OFFSET(i) ((char *)NULL + (i))
 #define MAX(a, b) ((a > b) ? a : b)
 
-void computeFPS() {
+void computeFPS()
+{
     frameCount++;
     fpsCount++;
 
-    if (fpsCount == fpsLimit) {
+    if (fpsCount == fpsLimit)
+    {
         char fps[256];
         float ifps = 1.f / (sdkGetAverageTimerValue(&timer) / 1000.f);
-        sprintf(fps, "CUDA Edge Detection (%s): %3.1f fps",
-            filterMode[g_SobelDisplayMode], ifps);
+        sprintf(fps, "CUDA Edge Detection (%s): %3.1f fps", filterMode[g_SobelDisplayMode], ifps);
 
-    glutSetWindowTitle(fps);    //顯示在圖框上的標題
+        glutSetWindowTitle(fps);    //顯示在圖框上的標題
 
         fpsCount = 0;
 
@@ -89,7 +89,8 @@ void computeFPS() {
 }
 
 // This is the normal display path
-void display(void) {
+void display(void)
+{
     sdkStartTimer(&timer);
 
     // Sobel operation
@@ -98,8 +99,7 @@ void display(void) {
     // map PBO to get CUDA device pointer
     checkCudaErrors(cudaGraphicsMapResources(1, &cuda_pbo_resource, 0));
     size_t num_bytes;
-    checkCudaErrors(cudaGraphicsResourceGetMappedPointer(
-        (void**)&data, &num_bytes, cuda_pbo_resource));
+    checkCudaErrors(cudaGraphicsResourceGetMappedPointer((void**)&data, &num_bytes, cuda_pbo_resource));
     // printf("CUDA mapped PBO: May access %ld bytes\n", num_bytes);
 
     sobelFilter(data, imWidth, imHeight, g_SobelDisplayMode, imageScale);
@@ -109,8 +109,7 @@ void display(void) {
 
     glBindTexture(GL_TEXTURE_2D, texid);
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbo_buffer);
-    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, imWidth, imHeight, GL_LUMINANCE,
-        GL_UNSIGNED_BYTE, OFFSET(0));
+    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, imWidth, imHeight, GL_LUMINANCE, GL_UNSIGNED_BYTE, OFFSET(0));
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER, 0);
 
     glDisable(GL_DEPTH_TEST);
@@ -227,7 +226,9 @@ void initializeData(char* file)
 
     if (!strcmp(&file[file_length - 3], "pgm"))
     {
-        if (sdkLoadPGM<unsigned char>(file, &pixels, &w, &h) != true) {
+        printf("here\n");
+        if (sdkLoadPGM<unsigned char>(file, &pixels, &w, &h) != true)
+        {
             printf("Failed to load PGM image file: %s\n", file);
             exit(EXIT_FAILURE);
         }
@@ -236,6 +237,7 @@ void initializeData(char* file)
     }
     else if (!strcmp(&file[file_length - 3], "ppm"))
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXXX\n");
         if (sdkLoadPPM4(file, &pixels, &w, &h) != true)
         {
             printf("Failed to load PPM image file: %s\n", file);
@@ -246,6 +248,7 @@ void initializeData(char* file)
     }
     else
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXXX\n");
         exit(EXIT_FAILURE);
     }
 
@@ -257,6 +260,7 @@ void initializeData(char* file)
 
     if (!g_bQAReadback)
     {
+        printf("here\n");
         // use OpenGL Path
         glGenBuffers(1, &pbo_buffer);
         glBindBuffer(GL_PIXEL_UNPACK_BUFFER, pbo_buffer);
@@ -289,6 +293,7 @@ void initializeData(char* file)
 void loadDefaultImage(char* loc_exec)
 {
     printf("Reading image: teapot.pgm\n");
+
     const char* image_filename = "teapot.pgm";
     char* image_path = sdkFindFilePath(image_filename, loc_exec);
 
@@ -406,14 +411,11 @@ int main(int argc, char** argv)
         runAutoTest(argc, argv);
     }
 
-    // use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
+    // use command-line specified CUDA device, otherwise use device with highest Gflops/s
     if (checkCmdLineFlag(argc, (const char**)argv, "device"))
     {
-        printf("   This SDK does not explicitly support -device=n when running with "
-            "OpenGL.\n");
-        printf("   When specifying -device=n (n=0,1,2,....) the sample must not use "
-            "OpenGL.\n");
+        printf("   This SDK does not explicitly support -device=n when running with OpenGL.\n");
+        printf("   When specifying -device=n (n=0,1,2,....) the sample must not use OpenGL.\n");
         printf("   See details below to run without OpenGL:\n\n");
         printf(" > %s -device=n\n\n", argv[0]);
         printf("exiting...\n");

@@ -1,34 +1,7 @@
-/* Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *  * Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  * Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *  * Neither the name of NVIDIA CORPORATION nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+/* This sample program models formation of V-shaped flocks by big birds,
+ * such as geese and cranes, as an example of simple AI. It demonstrates
+ * that the CUDA-based implementation is much faster than a CPU-based one.
  */
-
- /* This sample program models formation of V-shaped flocks by big birds,
-  * such as geese and cranes, as an example of simple AI. It demonstrates
-  * that the CUDA-based implementation is much faster than a CPU-based one.
-  */
 
 #pragma warning(disable : 4312)
 
@@ -46,7 +19,7 @@
 #include <vector>
 #include <algorithm>
 
-  // This header includes all the necessary D3D10 includes
+ // This header includes all the necessary D3D10 includes
 #include <dynlink_d3d10.h>
 #include <cuda_runtime.h>
 #include <cuda_d3d10_interop.h>
@@ -304,7 +277,8 @@ void simulate(float2* newPos, float2* curPos, uint numBirds);
 
 LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 
-bool findCUDADevice() {
+bool findCUDADevice()
+{
     int nGraphicsGPU = 0;
     int deviceCount = 0;
     bool bFoundGraphics = false;
@@ -313,24 +287,27 @@ bool findCUDADevice() {
     // This function call returns 0 if there are no CUDA capable devices.
     cudaError_t error_id = cudaGetDeviceCount(&deviceCount);
 
-    if (error_id != cudaSuccess) {
-        printf("cudaGetDeviceCount returned %d\n-> %s\n", (int)error_id,
-            cudaGetErrorString(error_id));
+    if (error_id != cudaSuccess)
+    {
+        printf("cudaGetDeviceCount returned %d\n-> %s\n", (int)error_id, cudaGetErrorString(error_id));
         exit(EXIT_FAILURE);
     }
 
-    if (deviceCount == 0) {
+    if (deviceCount == 0)
+    {
         printf("> There are no device(s) supporting CUDA\n");
         return false;
     }
-    else {
+    else
+    {
         printf("> Found %d CUDA Capable Device(s)\n", deviceCount);
     }
 
     // Get CUDA device properties
     cudaDeviceProp deviceProp;
 
-    for (int dev = 0; dev < deviceCount; ++dev) {
+    for (int dev = 0; dev < deviceCount; ++dev)
+    {
         cudaGetDeviceProperties(&deviceProp, dev);
         strcpy(devname, deviceProp.name);
         printf("> GPU %d: %s\n", dev, devname);
@@ -339,7 +316,8 @@ bool findCUDADevice() {
     return true;
 }
 
-bool findDXDevice(char* dev_name) {
+bool findDXDevice(char* dev_name)
+{
     HRESULT hr = S_OK;
     cudaError cuStatus;
 
@@ -347,19 +325,22 @@ bool findDXDevice(char* dev_name) {
     IDXGIFactory* pFactory;
     hr = sFnPtr_CreateDXGIFactory(__uuidof(IDXGIFactory), (void**)(&pFactory));
 
-    if (!SUCCEEDED(hr)) {
+    if (!SUCCEEDED(hr))
+    {
         printf("> No DXGI Factory created.\n");
         return false;
     }
 
     UINT adapter = 0;
 
-    for (; !g_pCudaCapableAdapter; ++adapter) {
+    for (; !g_pCudaCapableAdapter; ++adapter)
+    {
         // Get a candidate DXGI adapter
         IDXGIAdapter* pAdapter = NULL;
         hr = pFactory->EnumAdapters(adapter, &pAdapter);
 
-        if (FAILED(hr)) {
+        if (FAILED(hr))
+        {
             break;  // no compatible adapters found
         }
 
@@ -369,7 +350,8 @@ bool findDXDevice(char* dev_name) {
         // This prints and resets the cudaError to cudaSuccess
         printLastCudaError("cudaD3D10GetDevice failed");
 
-        if (cudaSuccess == cuStatus) {
+        if (cudaSuccess == cuStatus)
+        {
             // If so, mark it as the one against which to create our d3d10 device
             g_pCudaCapableAdapter = pAdapter;
             g_pCudaCapableAdapter->AddRef();
@@ -382,7 +364,8 @@ bool findDXDevice(char* dev_name) {
 
     pFactory->Release();
 
-    if (!g_pCudaCapableAdapter) {
+    if (!g_pCudaCapableAdapter)
+    {
         printf("> Found 0 D3D10 Adapter(s) /w Compute capability.\n");
         return false;
     }
@@ -400,7 +383,8 @@ bool findDXDevice(char* dev_name) {
 ////////////////////////////////////////////////////////////////////////////////
 // Program main
 ////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[])
+{
     char device_name[256];
     char* ref_file = NULL;
 
@@ -409,8 +393,7 @@ int main(int argc, char* argv[]) {
 
     printf("%s Starting...\n\n", SDK_name);
 
-    printf(
-        "NOTE: The CUDA Samples are not meant for performance measurements. "
+    printf("NOTE: The CUDA Samples are not meant for performance measurements. "
         "Results may vary when GPU Boost is enabled.\n\n");
 
     if (!findCUDADevice())  // Search for CUDA GPU
@@ -419,8 +402,7 @@ int main(int argc, char* argv[]) {
         exit(EXIT_SUCCESS);
     }
 
-    if (!dynlinkLoadD3D10API())  // Search for D3D API (locate drivers, does not
-                                 // mean device is found)
+    if (!dynlinkLoadD3D10API())  // Search for D3D API (locate drivers, does not mean device is found)
     {
         printf("> D3D10 API libraries NOT found on.. Exiting.\n");
         dynlinkUnloadD3D10API();
@@ -435,9 +417,11 @@ int main(int argc, char* argv[]) {
     }
 
     // command line options
-    if (argc > 1) {
+    if (argc > 1)
+    {
         // automated build testing harness
-        if (checkCmdLineFlag(argc, (const char**)argv, "file")) {
+        if (checkCmdLineFlag(argc, (const char**)argv, "file"))
+        {
             getCmdLineArgumentString(argc, (const char**)argv, "file", &ref_file);
         }
     }
@@ -461,36 +445,30 @@ int main(int argc, char* argv[]) {
     RegisterClassEx(&wc);
 
     // Create the application's window
-    HWND hWnd = CreateWindow(
-        wc.lpszClassName, "VFlocking", WS_OVERLAPPEDWINDOW, 0, 0, g_WindowWidth,
+    HWND hWnd = CreateWindow(wc.lpszClassName, "VFlocking", WS_OVERLAPPEDWINDOW, 0, 0, g_WindowWidth,
         g_WindowHeight, GetDesktopWindow() /*NULL*/, NULL, wc.hInstance, NULL);
 
     ShowWindow(hWnd, SW_SHOWDEFAULT);
     UpdateWindow(hWnd);
 
     // Initialize Direct3D
-    if (SUCCEEDED(InitD3D(hWnd))) {
+    if (SUCCEEDED(InitD3D(hWnd)))
+    {
         {
             // register the Direct3D resources that we'll use
             // we'll read to and write from g_texture_2d, so don't set any special map
             // flags for it
             cudaError_t error = cudaSuccess;
-            error = cudaGraphicsD3D10RegisterResource(
-                &g_pCudaResourcePos, g_pPositions, cudaGraphicsRegisterFlagsNone);
-            getLastCudaError(
-                "cudaGraphicsD3D10RegisterResource (g_texture_2d) failed");
+            error = cudaGraphicsD3D10RegisterResource(&g_pCudaResourcePos, g_pPositions, cudaGraphicsRegisterFlagsNone);
+            getLastCudaError("cudaGraphicsD3D10RegisterResource (g_texture_2d) failed");
 
-            error = cudaGraphicsResourceSetMapFlags(g_pCudaResourcePos,
-                cudaD3D10MapFlagsWriteDiscard);
+            error = cudaGraphicsResourceSetMapFlags(g_pCudaResourcePos, cudaD3D10MapFlagsWriteDiscard);
             getLastCudaError("cudaGraphicsResourceSetMapFlags (g_texture_2d) failed");
 
-            cudaGraphicsD3D10RegisterResource(&g_pCudaResourceNewPos, g_pNewPositions,
-                cudaGraphicsRegisterFlagsNone);
-            getLastCudaError(
-                "cudaGraphicsD3D10RegisterResource (g_texture_2d) failed");
+            cudaGraphicsD3D10RegisterResource(&g_pCudaResourceNewPos, g_pNewPositions, cudaGraphicsRegisterFlagsNone);
+            getLastCudaError("cudaGraphicsD3D10RegisterResource (g_texture_2d) failed");
 
-            error = cudaGraphicsResourceSetMapFlags(g_pCudaResourceNewPos,
-                cudaD3D10MapFlagsWriteDiscard);
+            error = cudaGraphicsResourceSetMapFlags(g_pCudaResourceNewPos, cudaD3D10MapFlagsWriteDiscard);
             getLastCudaError("cudaGraphicsResourceSetMapFlags (g_texture_2d) failed");
         }
     }
@@ -498,18 +476,12 @@ int main(int argc, char* argv[]) {
     srand(g_seed);
 
     // allocate device memory for positions
-    checkCudaErrors(
-        cudaMalloc((void**)&d_pairs, nBirds * (nBirds - 1) * sizeof(uint2) / 2));
-    checkCudaErrors(
-        cudaMalloc((void**)&d_triples,
-            nBirds * (nBirds - 1) * (nBirds - 2) * sizeof(uint3) / 6));
+    checkCudaErrors(cudaMalloc((void**)&d_pairs, nBirds * (nBirds - 1) * sizeof(uint2) / 2));
+    checkCudaErrors(cudaMalloc((void**)&d_triples, nBirds * (nBirds - 1) * (nBirds - 2) * sizeof(uint3) / 6));
 
-    checkCudaErrors(
-        cudaMalloc((void**)&d_neighbors, nBirds * nBirds * sizeof(bool)));
-    checkCudaErrors(
-        cudaMalloc((void**)&d_leftgoals, nBirds * nBirds * sizeof(bool)));
-    checkCudaErrors(
-        cudaMalloc((void**)&d_rightgoals, nBirds * nBirds * sizeof(bool)));
+    checkCudaErrors(cudaMalloc((void**)&d_neighbors, nBirds * nBirds * sizeof(bool)));
+    checkCudaErrors(cudaMalloc((void**)&d_leftgoals, nBirds * nBirds * sizeof(bool)));
+    checkCudaErrors(cudaMalloc((void**)&d_rightgoals, nBirds * nBirds * sizeof(bool)));
 
     checkCudaErrors(cudaMalloc((void**)&d_hasproxy, nBirds * sizeof(bool)));
     checkCudaErrors(cudaMalloc((void**)&d_params, sizeof(Params)));
@@ -521,7 +493,8 @@ int main(int argc, char* argv[]) {
     //
     // the main loop
     //
-    while (false == g_bDone) {
+    while (false == g_bDone)
+    {
         Render();
 
         //
@@ -530,33 +503,37 @@ int main(int argc, char* argv[]) {
         MSG msg;
         ZeroMemory(&msg, sizeof(msg));
 
-        while (msg.message != WM_QUIT) {
-            if (PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE)) {
+        while (msg.message != WM_QUIT)
+        {
+            if (PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE))
+            {
                 TranslateMessage(&msg);
                 DispatchMessage(&msg);
             }
-            else {
+            else
+            {
                 Render();
 
-                if (ref_file) {
-                    for (int count = 0; count < g_iFrameToCompare; count++) {
+                if (ref_file)
+                {
+                    for (int count = 0; count < g_iFrameToCompare; count++)
+                    {
                         Render();
                     }
 
                     const char* cur_image_path = "VFlockingD3D10.ppm";
 
                     // Save a reference of our current test run image
-                    CheckRenderD3D10::ActiveRenderTargetToPPM(g_pd3dDevice,
-                        cur_image_path);
+                    CheckRenderD3D10::ActiveRenderTargetToPPM(g_pd3dDevice, cur_image_path);
 
                     // compare to official reference image, printing PASS or FAIL.
-                    g_bPassed = CheckRenderD3D10::PPMvsPPM(cur_image_path, ref_file,
-                        argv[0], MAX_EPSILON, 0.15f);
+                    g_bPassed = CheckRenderD3D10::PPMvsPPM(cur_image_path, ref_file, argv[0], MAX_EPSILON, 0.15f);
 
                     g_bDone = true;
                     PostQuitMessage(0);
                 }
-                else {
+                else
+                {
                     g_bPassed = true;
                 }
             }
@@ -586,7 +563,8 @@ int main(int argc, char* argv[]) {
 // Desc: Initializes Direct3D
 //-----------------------------------------------------------------------------
 
-HRESULT InitD3D(HWND hWnd) {
+HRESULT InitD3D(HWND hWnd)
+{
     // Set up the structure used to create the device and swapchain
     DXGI_SWAP_CHAIN_DESC sd;
     ZeroMemory(&sd, sizeof(sd));
@@ -603,9 +581,7 @@ HRESULT InitD3D(HWND hWnd) {
     sd.Windowed = TRUE;
 
     // Create device and swapchain
-    HRESULT hr = sFnPtr_D3D10CreateDeviceAndSwapChain(
-        g_pCudaCapableAdapter, D3D10_DRIVER_TYPE_HARDWARE, NULL, 0,
-        D3D10_SDK_VERSION, &sd, &g_pSwapChain, &g_pd3dDevice);
+    HRESULT hr = sFnPtr_D3D10CreateDeviceAndSwapChain(g_pCudaCapableAdapter, D3D10_DRIVER_TYPE_HARDWARE, NULL, 0, D3D10_SDK_VERSION, &sd, &g_pSwapChain, &g_pd3dDevice);
     AssertOrQuit(SUCCEEDED(hr));
     g_pCudaCapableAdapter->Release();
 
@@ -627,13 +603,11 @@ HRESULT InitD3D(HWND hWnd) {
     rsvdesc.Buffer.ElementWidth = nBirds;
     rsvdesc.Format = DXGI_FORMAT_R32G32_FLOAT;
     rsvdesc.ViewDimension = D3D10_SRV_DIMENSION_BUFFER;
-    g_pd3dDevice->CreateShaderResourceView(g_pPositions, &rsvdesc,
-        &g_pPositionsSRV);
+    g_pd3dDevice->CreateShaderResourceView(g_pPositions, &rsvdesc, &g_pPositionsSRV);
 
     // Create a render target view of the swapchain
     ID3D10Texture2D* pBuffer;
-    hr =
-        g_pSwapChain->GetBuffer(0, __uuidof(ID3D10Texture2D), (LPVOID*)&pBuffer);
+    hr = g_pSwapChain->GetBuffer(0, __uuidof(ID3D10Texture2D), (LPVOID*)&pBuffer);
     AssertOrQuit(SUCCEEDED(hr));
 
     hr = g_pd3dDevice->CreateRenderTargetView(pBuffer, NULL, &g_pSwapChainRTV);
@@ -666,8 +640,7 @@ HRESULT InitD3D(HWND hWnd) {
 
         if (pErrors) {
             LPVOID l_pError = NULL;
-            l_pError = pErrors->GetBufferPointer();  // then cast to a char* to see it
-                                                     // in the locals window
+            l_pError = pErrors->GetBufferPointer();  // then cast to a char* to see it in the locals window
             fprintf(stdout, "Compilation error: \n %s", (char*)l_pError);
         }
 
@@ -683,11 +656,9 @@ HRESULT InitD3D(HWND hWnd) {
 
         g_pDrawBirdsTechnique = g_pSimpleEffect->GetTechniqueByName("DrawBirds");
 
-        g_pvQuadRect =
-            g_pSimpleEffect->GetVariableByName("g_vQuadRect")->AsVector();
+        g_pvQuadRect = g_pSimpleEffect->GetVariableByName("g_vQuadRect")->AsVector();
 
-        g_pTexture2D =
-            g_pSimpleEffect->GetVariableByName("g_Texture2D")->AsShaderResource();
+        g_pTexture2D = g_pSimpleEffect->GetVariableByName("g_Texture2D")->AsShaderResource();
 
         g_pd3dDevice->IASetInputLayout(NULL);
         g_pd3dDevice->IASetPrimitiveTopology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
@@ -713,7 +684,8 @@ HRESULT InitD3D(HWND hWnd) {
 ////////////////////////////////////////////////////////////////////////////////
 //! Draw the final result on the screen
 ////////////////////////////////////////////////////////////////////////////////
-void DrawScene() {
+void DrawScene()
+{
     // Clear the backbuffer to a black color
     float ClearColor[4] = { 0.18f, 0.63f, 1.f, 1.0f };
     g_pd3dDevice->ClearRenderTargetView(g_pSwapChainRTV, ClearColor);
@@ -746,36 +718,40 @@ void DrawScene() {
 // Name: Cleanup()
 // Desc: Releases all previously initialized objects
 //-----------------------------------------------------------------------------
-void Cleanup() {
+void Cleanup()
+{
     // unregister the Cuda resources
     cudaGraphicsUnregisterResource(g_pCudaResourcePos);
-    getLastCudaError(
-        "cudaGraphicsUnregisterResource (g_pCudaResourcePos) failed");
+    getLastCudaError("cudaGraphicsUnregisterResource (g_pCudaResourcePos) failed");
     cudaGraphicsUnregisterResource(g_pCudaResourceNewPos);
-    getLastCudaError(
-        "cudaGraphicsUnregisterResource (g_pCudaResourceNewPos) failed");
+    getLastCudaError("cudaGraphicsUnregisterResource (g_pCudaResourceNewPos) failed");
 
     //
     // clean up Direct3D
     //
     {
-        if (g_pInputLayout != NULL) {
+        if (g_pInputLayout != NULL)
+        {
             g_pInputLayout->Release();
         }
 
-        if (g_pSimpleEffect != NULL) {
+        if (g_pSimpleEffect != NULL)
+        {
             g_pSimpleEffect->Release();
         }
 
-        if (g_pSwapChainRTV != NULL) {
+        if (g_pSwapChainRTV != NULL)
+        {
             g_pSwapChainRTV->Release();
         }
 
-        if (g_pSwapChain != NULL) {
+        if (g_pSwapChain != NULL)
+        {
             g_pSwapChain->Release();
         }
 
-        if (g_pd3dDevice != NULL) {
+        if (g_pd3dDevice != NULL)
+        {
             g_pd3dDevice->Release();
         }
     }
@@ -800,7 +776,8 @@ void Cleanup() {
 // Name: Render()
 // Desc: Launches the CUDA kernels to fill in the texture data
 //-----------------------------------------------------------------------------
-void Render() {
+void Render()
+{
     //
     // map the resources we've registered so we can access them in Cuda
     // - it is most efficient to map and unmap all resources in a single call,
@@ -818,12 +795,15 @@ void Render() {
     static DWORD tick_start, next_tick_start = 0, tick_end;
     static uint step = 0;
 
-    if (g_runCPU) {
-        if (!step) {
+    if (g_runCPU)
+    {
+        if (!step)
+        {
             std::cout << "CPU simulation \n";
         }
 
-        if (!(step % 100)) {
+        if (!(step % 100))
+        {
             tick_start = next_tick_start;
             next_tick_start = GetTickCount();
         }
@@ -832,31 +812,29 @@ void Render() {
         std::swap(positions, new_positions);
         g_pd3dDevice->UpdateSubresource(g_pPositions, 0, NULL, positions, 0, 0);
 
-        if (!(step % 100) && step) {
+        if (!(step % 100) && step)
+        {
             tick_end = GetTickCount();
             std::cout << "CPU, step " << step << " \n";
-            std::cout << "time per step " << float(tick_end - tick_start) / 100.f
-                << " ms \n";
+            std::cout << "time per step " << float(tick_end - tick_start) / 100.f << " ms \n";
         }
 
         step++;
     }
-    else {
-        if (!step) {
+    else
+    {
+        if (!step)
+        {
             std::cout << "CUDA simulation \n";
         }
 
         size_t num_bytes;
-        checkCudaErrors(cudaGraphicsResourceGetMappedPointer(
-            (void**)&mappedpositions, &num_bytes, g_pCudaResourcePos));
+        checkCudaErrors(cudaGraphicsResourceGetMappedPointer((void**)&mappedpositions, &num_bytes, g_pCudaResourcePos));
         getLastCudaError("cudaGraphicsResourceGetMappedPointer 1 failed \n");
-        checkCudaErrors(cudaGraphicsResourceGetMappedPointer(
-            (void**)&new_mappedpositions, &num_bytes, g_pCudaResourceNewPos));
+        checkCudaErrors(cudaGraphicsResourceGetMappedPointer((void**)&new_mappedpositions, &num_bytes, g_pCudaResourceNewPos));
         getLastCudaError("cudaGraphicsResourceGetMappedPointer 2 failed \n");
 
-        cuda_simulate(new_mappedpositions, mappedpositions, nBirds, d_hasproxy,
-            d_neighbors, d_leftgoals, d_rightgoals, d_pairs, d_triples,
-            d_params);
+        cuda_simulate(new_mappedpositions, mappedpositions, nBirds, d_hasproxy, d_neighbors, d_leftgoals, d_rightgoals, d_pairs, d_triples, d_params);
         std::swap(g_pCudaResourceNewPos, g_pCudaResourcePos);
         step++;
     }
@@ -878,22 +856,26 @@ void Render() {
 // Name: MsgProc()
 // Desc: The window's message handler
 //-----------------------------------------------------------------------------
-static LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam,
-    LPARAM lParam) {
-    switch (msg) {
+static LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
+{
+    switch (msg)
+    {
     case WM_KEYDOWN:
-        if (wParam == VK_ESCAPE) {
+        if (wParam == VK_ESCAPE)
+        {
             g_bDone = true;
             Cleanup();
             PostQuitMessage(0);
             return 0;
         }
 
-        if (wParam == 'r' || wParam == 'R') {
+        if (wParam == 'r' || wParam == 'R')
+        {
             g_seed = (unsigned)time(NULL);
             srand(g_seed);
 
-            for (uint i = 0; i < nBirds; i++) {
+            for (uint i = 0; i < nBirds; i++)
+            {
                 positions[i].x = (float)rand() / (RAND_MAX + 1) * 768 - 500;
                 positions[i].y = (float)rand() / (RAND_MAX + 1) * 768 - 300;
             }
@@ -901,11 +883,13 @@ static LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam,
             g_pd3dDevice->UpdateSubresource(g_pPositions, 0, NULL, positions, 0, 0);
         }
 
-        if (wParam == 'g' || wParam == 'G') {
+        if (wParam == 'g' || wParam == 'G')
+        {
             g_runCPU = !g_runCPU;
             srand(g_seed);
 
-            for (uint i = 0; i < nBirds; i++) {
+            for (uint i = 0; i < nBirds; i++)
+            {
                 positions[i].x = (float)rand() / (RAND_MAX + 1) * 768 - 500;
                 positions[i].y = (float)rand() / (RAND_MAX + 1) * 768 - 300;
             }
@@ -929,34 +913,38 @@ static LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam,
     return DefWindowProc(hWnd, msg, wParam, lParam);
 }
 
-void initForCUDA(uint numBirds) {
+void initForCUDA(uint numBirds)
+{
     uint i, j, k = 0, l = 0;
     uint2* p = pairs;
 
     for (i = 0; i < numBirds; i++)
-        for (j = i + 1; j < numBirds; j++) {
+    {
+        for (j = i + 1; j < numBirds; j++)
+        {
             p->x = i;
             p->y = j;
             p++;
         }
+    }
 
-    checkCudaErrors(cudaMemcpy(d_pairs, pairs,
-        nBirds * (nBirds - 1) * sizeof(uint2) / 2,
-        cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(d_pairs, pairs, nBirds * (nBirds - 1) * sizeof(uint2) / 2, cudaMemcpyHostToDevice));
 
     for (i = 0; i < numBirds; i++)
+    {
         for (j = i + 1; j < numBirds; j++)
-            for (k = j + 1; k < numBirds; k++) {
+        {
+            for (k = j + 1; k < numBirds; k++)
+            {
                 triples[l].x = i;
                 triples[l].y = j;
                 triples[l].z = k;
                 l++;
             }
+        }
+    }
 
-    checkCudaErrors(
-        cudaMemcpy(d_triples, triples,
-            nBirds * (nBirds - 1) * (nBirds - 2) * sizeof(uint3) / 6,
-            cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(d_triples, triples, nBirds * (nBirds - 1) * (nBirds - 2) * sizeof(uint3) / 6, cudaMemcpyHostToDevice));
     params->alpha = 90.f;
     params->upwashX = 30.f;
     params->upwashY = 50.f;
@@ -966,8 +954,7 @@ void initForCUDA(uint numBirds) {
     params->epsilon = 30.f;
     params->lambda = -0.1073f * params->wingspan;
 
-    checkCudaErrors(
-        cudaMemcpy(d_params, params, sizeof(Params), cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMemcpy(d_params, params, sizeof(Params), cudaMemcpyHostToDevice));
 
     memset(leftgoals, 0, nBirds * nBirds * sizeof(bool));
     memset(rightgoals, 0, nBirds * nBirds * sizeof(bool));
@@ -979,7 +966,8 @@ void initForCUDA(uint numBirds) {
     cudaMemset(d_hasproxy, 0, nBirds * sizeof(bool));
 }
 
-void initialize(uint numBirds) {
+void initialize(uint numBirds)
+{
     positions = new float2[numBirds];
     new_positions = new float2[numBirds];
     pairs = new uint2[numBirds * (numBirds - 1) / 2];
@@ -989,72 +977,85 @@ void initialize(uint numBirds) {
     leftgoals = new bool[numBirds * numBirds];
     rightgoals = new bool[numBirds * numBirds];
 
-    for (uint i = 0; i < numBirds; i++) {
+    for (uint i = 0; i < numBirds; i++)
+    {
         positions[i].x = (float)rand() / (RAND_MAX + 1) * 768 - 500;
         positions[i].y = (float)rand() / (RAND_MAX + 1) * 768 - 300;
     }
 
-    if (!g_runCPU) {
+    if (!g_runCPU)
+    {
         initForCUDA(numBirds);
     }
 
     g_wingTips = new WingTip[2 * numBirds];
 }
 
-float2 diff(float2 pos0, float2 pos1) {
+float2 diff(float2 pos0, float2 pos1)
+{
     float2 ret;
     ret.x = pos1.x - pos0.x;
     ret.y = pos1.y - pos0.y;
     return ret;
 }
 
-float cross(float2 vec0, float2 vec1) {
+float cross(float2 vec0, float2 vec1)
+{
     return vec0.x * vec1.y - vec0.y * vec1.x;
 }
 
 float norm(float2 pos) { return sqrt(pos.x * pos.x + pos.y * pos.y); }
 
-float dist(float2 pos0, float2 pos1) {
-    return sqrt((pos0.x - pos1.x) * (pos0.x - pos1.x) +
-        (pos0.y - pos1.y) * (pos0.y - pos1.y));
+float dist(float2 pos0, float2 pos1)
+{
+    return sqrt((pos0.x - pos1.x) * (pos0.x - pos1.x) + (pos0.y - pos1.y) * (pos0.y - pos1.y));
 }
 
-bool isInsideQuad(float2 pos0, float2 pos1, float width, float height) {
-    if (fabs(pos0.x - pos1.x) < 0.5f * width &&
-        fabs(pos0.y - pos1.y) < 0.5f * height) {
+bool isInsideQuad(float2 pos0, float2 pos1, float width, float height)
+{
+    if (fabs(pos0.x - pos1.x) < 0.5f * width && fabs(pos0.y - pos1.y) < 0.5f * height)
+    {
         return true;
     }
-    else {
+    else
+    {
         return false;
     }
 }
 
 bool compare(WingTip& t1, WingTip& t2) { return t1.x < t2.x ? true : false; }
 
-bool compareGoals(ViewGoal& g1, ViewGoal& g2) {
+bool compareGoals(ViewGoal& g1, ViewGoal& g2)
+{
     return g1.dist < g2.dist ? true : false;
 }
 
-float sign(float x) {
-    if (x > 0.f) {
+float sign(float x)
+{
+    if (x > 0.f)
+    {
         return 1.f;
     }
-    else if (x < 0.f) {
+    else if (x < 0.f)
+    {
         return -1.f;
     }
 
     return 0.f;
 }
 
-bool isVisible(float2 pos, float2 goal) {
+bool isVisible(float2 pos, float2 goal)
+{
     float2 leftBorder, rightBorder;
     leftBorder.x = goal.x - (0.5f * wingspan + lambda) - pos.x;
     leftBorder.y = goal.y - pos.y;
     rightBorder.x = goal.x + (0.5f * wingspan + lambda) - pos.x;
     rightBorder.y = goal.y - pos.y;
 
-    for (uint j = 0; j < nBirds; j++) {
-        if (positions[j].y >= goal.y || positions[j].y <= pos.y) {
+    for (uint j = 0; j < nBirds; j++)
+    {
+        if (positions[j].y >= goal.y || positions[j].y <= pos.y)
+        {
             continue;
         }
 
@@ -1064,21 +1065,23 @@ bool isVisible(float2 pos, float2 goal) {
         dirr.x = positions[j].x - pos.x - 0.5f * wingspan;
         dirr.y = positions[j].y - pos.y;
 
-        if (cross(leftBorder, dirl) < 0 && cross(rightBorder, dirr) > 0) {
+        if (cross(leftBorder, dirl) < 0 && cross(rightBorder, dirr) > 0)
+        {
             return false;
         }
     }
-
     return true;
 }
 
-void simulate(float2* newPos, float2* curPos, uint numBirds) {
+void simulate(float2* newPos, float2* curPos, uint numBirds)
+{
     uint i, j, k, nGaps;
 
     std::vector<WingTip> vWingTips;
     Gap g_gaps[nBirds + 1];
 
-    for (i = 0; i < numBirds; i++) {
+    for (i = 0; i < numBirds; i++)
+    {
         WingTip tip;
         tip.x = curPos[i].x - 0.5f * wingspan;
         tip.y = curPos[i].y;
@@ -1092,7 +1095,8 @@ void simulate(float2* newPos, float2* curPos, uint numBirds) {
 
     bool isSorted = false;
 
-    for (i = 0; i < numBirds; i++) {
+    for (i = 0; i < numBirds; i++)
+    {
         std::vector<ViewGoal> vViewGoals;
         bool useRule1 = true;
 
@@ -1102,8 +1106,10 @@ void simulate(float2* newPos, float2* curPos, uint numBirds) {
         uint upwashCount = 0;
         std::vector<uint> vNeighbors;
 
-        for (j = 0; j < numBirds; j++) {
-            if (j == i || curPos[j].y < curPos[i].y) {
+        for (j = 0; j < numBirds; j++)
+        {
+            if (j == i || curPos[j].y < curPos[i].y)
+            {
                 continue;
             }
 
@@ -1111,17 +1117,18 @@ void simulate(float2* newPos, float2* curPos, uint numBirds) {
             curPosShiftedBack.x = curPos[j].x;
             curPosShiftedBack.y = curPos[j].y - 0.5f * upwashY;
 
-            if (isInsideQuad(curPos[i], curPosShiftedBack,
-                2.f * (wingspan + lambda + upwashX), upwashY)) {
+            if (isInsideQuad(curPos[i], curPosShiftedBack, 2.f * (wingspan + lambda + upwashX), upwashY))
+            {
                 uint neighbor = j;
                 vNeighbors.push_back(neighbor);
 
-                if (useRule1) {
+                if (useRule1)
+                {
                     useRule1 = false;
                 }
 
-                if (curPos[i].x > curPos[j].x + (wingspan + lambda + 0.5f * upwashX) ||
-                    curPos[i].x < curPos[j].x - (wingspan + lambda + 0.5f * upwashX)) {
+                if (curPos[i].x > curPos[j].x + (wingspan + lambda + 0.5f * upwashX) || curPos[i].x < curPos[j].x - (wingspan + lambda + 0.5f * upwashX))
+                {
                     upwashCount++;
                 }
             }
@@ -1134,20 +1141,25 @@ void simulate(float2* newPos, float2* curPos, uint numBirds) {
         dij.y = 0.f;
         uint nearest = 1000;
 
-        if (useRule1) {
-            for (j = 0; j < numBirds; j++) {
-                if (j == i || curPos[j].y < curPos[i].y) {
+        if (useRule1)
+        {
+            for (j = 0; j < numBirds; j++)
+            {
+                if (j == i || curPos[j].y < curPos[i].y)
+                {
                     continue;
                 }
 
-                if ((d = norm(diff(curPos[i], curPos[j]))) < minDist) {
+                if ((d = norm(diff(curPos[i], curPos[j]))) < minDist)
+                {
                     minDist = d;
                     nearest = j;
                     dij = diff(curPos[i], curPos[j]);
                 }
             }
 
-            if (!d) {
+            if (!d)
+            {
                 continue;
             }
 
@@ -1156,8 +1168,10 @@ void simulate(float2* newPos, float2* curPos, uint numBirds) {
             newPos[i].x = curPos[i].x + dX * dij.x;
             newPos[i].y = curPos[i].y + dY * dij.y;
         }
-        else {
-            if (!isSorted) {
+        else
+        {
+            if (!isSorted)
+            {
                 std::sort(vWingTips.begin(), vWingTips.end(), compare);
                 isSorted = true;
             }
@@ -1170,7 +1184,8 @@ void simulate(float2* newPos, float2* curPos, uint numBirds) {
             j = 0;
             ViewGoal goal;
 
-            for (k = 0; k < 2 * numBirds; k++) {
+            for (k = 0; k < 2 * numBirds; k++)
+            {
                 if (vWingTips[k].y <= curPos[i].y)  // look for gaps only ahead
                 {
                     continue;
@@ -1178,18 +1193,21 @@ void simulate(float2* newPos, float2* curPos, uint numBirds) {
 
                 count += vWingTips[k].lr;
 
-                if (gapBegin && 1 == count) {
+                if (gapBegin && 1 == count)
+                {
                     gapBegin = false;
                     g_gaps[j].right.x = vWingTips[k].x;
                     g_gaps[j].right.y = vWingTips[k].y;
 
-                    if (g_gaps[j].right.x - g_gaps[j].left.x > wingspan + 2.f * lambda) {
+                    if (g_gaps[j].right.x - g_gaps[j].left.x > wingspan + 2.f * lambda)
+                    {
                         goal.pos.x = g_gaps[j].right.x - (0.5f * wingspan + lambda);
                         goal.pos.y = g_gaps[j].right.y;
                         goal.dist = fabs(goal.pos.x - curPos[i].x);
                         vViewGoals.push_back(goal);
 
-                        if (j) {
+                        if (j)
+                        {
                             goal.pos.x = g_gaps[j].left.x + (0.5f * wingspan + lambda);
                             goal.pos.y = g_gaps[j].left.y;
                             goal.dist = fabs(goal.pos.x - curPos[i].x);
@@ -1197,7 +1215,8 @@ void simulate(float2* newPos, float2* curPos, uint numBirds) {
                         }
                     }
                 }
-                else if (!count) {
+                else if (!count)
+                {
                     j++;
                     gapBegin = true;
                     g_gaps[j].left.x = vWingTips[k].x;  // + 0.5f * wingspan + lambda;
@@ -1218,13 +1237,16 @@ void simulate(float2* newPos, float2* curPos, uint numBirds) {
             dij.x = 0.f;
             dij.y = 0.f;
 
-            for (j = 0; j < nGaps; j++) {
-                if ((d = norm(diff(curPos[i], g_gaps[j].left))) < minDist) {
+            for (j = 0; j < nGaps; j++)
+            {
+                if ((d = norm(diff(curPos[i], g_gaps[j].left))) < minDist)
+                {
                     minDist = d;
                     dij = diff(curPos[i], g_gaps[j].left);
                 }
 
-                if ((d = norm(diff(curPos[i], g_gaps[j].right))) < minDist) {
+                if ((d = norm(diff(curPos[i], g_gaps[j].right))) < minDist)
+                {
                     minDist = d;
                     dij = diff(curPos[i], g_gaps[j].right);
                 }
@@ -1232,26 +1254,30 @@ void simulate(float2* newPos, float2* curPos, uint numBirds) {
 
             std::sort(vViewGoals.begin(), vViewGoals.end(), compareGoals);
 
-            if (vViewGoals.size()) {
-                if (vViewGoals[0].dist <= dX) {
+            if (vViewGoals.size())
+            {
+                if (vViewGoals[0].dist <= dX)
+                {
                     continue;
                 }
 
-                for (j = 0; j < vViewGoals.size(); j++) {
-                    if (!isVisible(curPos[i], vViewGoals[j].pos)) {
+                for (j = 0; j < vViewGoals.size(); j++)
+                {
+                    if (!isVisible(curPos[i], vViewGoals[j].pos))
+                    {
                         continue;
                     }
 
-                    newPos[i].x =
-                        curPos[i].x + sign(vViewGoals[j].pos.x - curPos[i].x) * dX;
+                    newPos[i].x = curPos[i].x + sign(vViewGoals[j].pos.x - curPos[i].x) * dX;
 
-                    for (k = 0; k < vNeighbors.size(); k++) {
-                        if (curPos[vNeighbors[k]].y >= curPos[i].y &&
-                            curPos[vNeighbors[k]].y < curPos[i].y + epsilon) {
+                    for (k = 0; k < vNeighbors.size(); k++)
+                    {
+                        if (curPos[vNeighbors[k]].y >= curPos[i].y && curPos[vNeighbors[k]].y < curPos[i].y + epsilon)
+                        {
                             newPos[i].y = curPos[i].y - dY;
                         }
-                        else if (curPos[vNeighbors[k]].y < curPos[i].y &&
-                            curPos[vNeighbors[k]].y > curPos[i].y - epsilon) {
+                        else if (curPos[vNeighbors[k]].y < curPos[i].y && curPos[vNeighbors[k]].y > curPos[i].y - epsilon)
+                        {
                             newPos[i].y = curPos[i].y + dY;
                         }
                     }

@@ -76,12 +76,7 @@
 
 #include "defines.h"
 
-#if defined(__APPLE__) || defined(MACOSX)
-#pragma clang diagnostic ignored "-Wdeprecated-declarations"
-#include <GLUT/glut.h>
-#else
 #include <GL/freeglut.h>
-#endif
 
 extern "C" void launch_classifyVoxel(dim3 grid, dim3 threads, uint * voxelVerts,
     uint * voxelOccupied, uchar * volume,
@@ -106,12 +101,10 @@ extern "C" void launch_generateTriangles2(
     uint3 gridSize, uint3 gridSizeShift, uint3 gridSizeMask, float3 voxelSize,
     float isoValue, uint activeVoxels, uint maxVerts);
 
-extern "C" void allocateTextures(uint * *d_edgeTable, uint * *d_triTable,
-    uint * *d_numVertsTable);
+extern "C" void allocateTextures(uint * *d_edgeTable, uint * *d_triTable, uint * *d_numVertsTable);
 extern "C" void createVolumeTexture(uchar * d_volume, size_t buffSize);
 extern "C" void destroyAllTextureObjects();
-extern "C" void ThrustScanWrapper(unsigned int* output, unsigned int* input,
-    unsigned int numElements);
+extern "C" void ThrustScanWrapper(unsigned int* output, unsigned int* input, unsigned int numElements);
 
 // constants
 const unsigned int window_width = 512;
@@ -136,8 +129,7 @@ float dIsoValue = 0.005f;
 // device data
 GLuint posVbo, normalVbo;
 GLint gl_Shader;
-struct cudaGraphicsResource* cuda_posvbo_resource,
-    * cuda_normalvbo_resource;  // handles OpenGL-CUDA exchange
+struct cudaGraphicsResource* cuda_posvbo_resource, * cuda_normalvbo_resource;  // handles OpenGL-CUDA exchange
 
 float4* d_pos = 0, * d_normal = 0;
 
@@ -215,32 +207,39 @@ void mainMenu(int i);
 #define EPSILON 5.0f
 #define THRESHOLD 0.30f
 
-void animation() {
-    if (animate) {
+void animation()
+{
+    if (animate)
+    {
         isoValue += dIsoValue;
 
-        if (isoValue < 0.1f) {
+        if (isoValue < 0.1f)
+        {
             isoValue = 0.1f;
             dIsoValue *= -1.0f;
         }
-        else if (isoValue > 0.9f) {
+        else if (isoValue > 0.9f)
+        {
             isoValue = 0.9f;
             dIsoValue *= -1.0f;
         }
     }
 }
 
-void timerEvent(int value) {
+void timerEvent(int value)
+{
     animation();
     glutPostRedisplay();
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
 }
 
-void computeFPS() {
+void computeFPS()
+{
     frameCount++;
     fpsCount++;
 
-    if (fpsCount == fpsLimit) {
+    if (fpsCount == fpsLimit)
+    {
         char fps[256];
         float ifps = 1.f / (sdkGetAverageTimerValue(&timer) / 1000.f);
         sprintf(fps, "CUDA Marching Cubes: %3.1f fps", ifps);
@@ -256,10 +255,14 @@ void computeFPS() {
 ////////////////////////////////////////////////////////////////////////////////
 // Load raw data from disk
 ////////////////////////////////////////////////////////////////////////////////
-uchar* loadRawFile(char* filename, int size) {
+uchar* loadRawFile(char* filename, int size)
+{
+    printf("loadRawFile, filename : %s, size = %d\n", filename, size);
+
     FILE* fp = fopen(filename, "rb");
 
-    if (!fp) {
+    if (!fp)
+    {
         fprintf(stderr, "Error opening file '%s'\n", filename);
         return 0;
     }
@@ -273,7 +276,9 @@ uchar* loadRawFile(char* filename, int size) {
     return data;
 }
 
-void dumpFile(void* dData, int data_bytes, const char* file_name) {
+void dumpFile(void* dData, int data_bytes, const char* file_name)
+{
+    printf("dumpFile, filename : %s, size = %d\n", file_name, data_bytes);
     void* hData = malloc(data_bytes);
     checkCudaErrors(cudaMemcpy(hData, dData, data_bytes, cudaMemcpyDeviceToHost));
     sdkDumpBin(hData, data_bytes, file_name);
@@ -281,21 +286,22 @@ void dumpFile(void* dData, int data_bytes, const char* file_name) {
 }
 
 template <class T>
-void dumpBuffer(T* d_buffer, int nelements, int size_element) {
+void dumpBuffer(T* d_buffer, int nelements, int size_element)
+{
     uint bytes = nelements * size_element;
     T* h_buffer = (T*)malloc(bytes);
-    checkCudaErrors(
-        cudaMemcpy(h_buffer, d_buffer, bytes, cudaMemcpyDeviceToHost));
+    checkCudaErrors(cudaMemcpy(h_buffer, d_buffer, bytes, cudaMemcpyDeviceToHost));
 
-    for (int i = 0; i < nelements; i++) {
+    for (int i = 0; i < nelements; i++)
+    {
         printf("%d: %u\n", i, h_buffer[i]);
     }
-
     printf("\n");
     free(h_buffer);
 }
 
-void runAutoTest(int argc, char** argv) {
+void runAutoTest(int argc, char** argv)
+{
     findCudaDevice(argc, (const char**)argv);
 
     // Initialize CUDA buffers for Marching Cubes
@@ -311,29 +317,21 @@ void runAutoTest(int argc, char** argv) {
 
     bool bTestResult = true;
 
-    switch (dump_option) {
+    switch (dump_option)
+    {
     case DUMP_POS:
-        dumpFile((void*)d_pos, sizeof(float4) * maxVerts,
-            "marchCube_posArray.bin");
-        bTestResult = sdkCompareBin2BinFloat(
-            "marchCube_posArray.bin", "posArray.bin",
-            maxVerts * sizeof(float) * 4, EPSILON, THRESHOLD, argv[0]);
+        dumpFile((void*)d_pos, sizeof(float4) * maxVerts, "marchCube_posArray.bin");
+        bTestResult = sdkCompareBin2BinFloat("marchCube_posArray.bin", "posArray.bin", maxVerts * sizeof(float) * 4, EPSILON, THRESHOLD, argv[0]);
         break;
 
     case DUMP_NORMAL:
-        dumpFile((void*)d_normal, sizeof(float4) * maxVerts,
-            "marchCube_normalArray.bin");
-        bTestResult = sdkCompareBin2BinFloat(
-            "marchCube_normalArray.bin", "normalArray.bin",
-            maxVerts * sizeof(float) * 4, EPSILON, THRESHOLD, argv[0]);
+        dumpFile((void*)d_normal, sizeof(float4) * maxVerts, "marchCube_normalArray.bin");
+        bTestResult = sdkCompareBin2BinFloat("marchCube_normalArray.bin", "normalArray.bin", maxVerts * sizeof(float) * 4, EPSILON, THRESHOLD, argv[0]);
         break;
 
     case DUMP_VOXEL:
-        dumpFile((void*)d_compVoxelArray, sizeof(uint) * numVoxels,
-            "marchCube_compVoxelArray.bin");
-        bTestResult = sdkCompareBin2BinFloat(
-            "marchCube_compVoxelArray.bin", "compVoxelArray.bin",
-            numVoxels * sizeof(uint), EPSILON, THRESHOLD, argv[0]);
+        dumpFile((void*)d_compVoxelArray, sizeof(uint) * numVoxels, "marchCube_compVoxelArray.bin");
+        bTestResult = sdkCompareBin2BinFloat("marchCube_compVoxelArray.bin", "compVoxelArray.bin", numVoxels * sizeof(uint), EPSILON, THRESHOLD, argv[0]);
         break;
 
     default:
@@ -355,16 +353,19 @@ int main(int argc, char** argv)
     pArgc = &argc;
     pArgv = argv;
 
-    printf("[%s] - Starting...\n", argv[0]);
+    printf("Starting...\n");
 
-    if (checkCmdLineFlag(argc, (const char**)argv, "file") &&
-        checkCmdLineFlag(argc, (const char**)argv, "dump")) {
+    if (checkCmdLineFlag(argc, (const char**)argv, "file") && checkCmdLineFlag(argc, (const char**)argv, "dump"))
+    {
+        printf("XXXXXXXXXXXXXXXXXXXXX\n");
         animate = false;
         fpsLimit = frameCheckNumber;
         g_bValidate = true;
         runAutoTest(argc, argv);
     }
-    else {
+    else
+    {
+        //here
         runGraphicsTest(argc, argv);
     }
 
@@ -374,58 +375,67 @@ int main(int argc, char** argv)
 ////////////////////////////////////////////////////////////////////////////////
 // initialize marching cubes
 ////////////////////////////////////////////////////////////////////////////////
-void initMC(int argc, char** argv) {
+void initMC(int argc, char** argv)
+{
     // parse command line arguments
     int n;
 
-    if (checkCmdLineFlag(argc, (const char**)argv, "grid")) {
+    if (checkCmdLineFlag(argc, (const char**)argv, "grid"))
+    {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
         n = getCmdLineArgumentInt(argc, (const char**)argv, "grid");
         gridSizeLog2.x = gridSizeLog2.y = gridSizeLog2.z = n;
     }
 
-    if (checkCmdLineFlag(argc, (const char**)argv, "gridx")) {
+    if (checkCmdLineFlag(argc, (const char**)argv, "gridx"))
+    {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
         n = getCmdLineArgumentInt(argc, (const char**)argv, "gridx");
         gridSizeLog2.x = n;
     }
 
-    if (checkCmdLineFlag(argc, (const char**)argv, "gridx")) {
+    if (checkCmdLineFlag(argc, (const char**)argv, "gridx"))
+    {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
         n = getCmdLineArgumentInt(argc, (const char**)argv, "gridx");
         gridSizeLog2.y = n;
     }
 
-    if (checkCmdLineFlag(argc, (const char**)argv, "gridz")) {
+    if (checkCmdLineFlag(argc, (const char**)argv, "gridz"))
+    {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
         n = getCmdLineArgumentInt(argc, (const char**)argv, "gridz");
         gridSizeLog2.z = n;
     }
 
     char* filename;
 
-    if (getCmdLineArgumentString(argc, (const char**)argv, "file", &filename)) {
+    if (getCmdLineArgumentString(argc, (const char**)argv, "file", &filename))
+    {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
         volumeFilename = filename;
     }
 
-    gridSize =
-        make_uint3(1 << gridSizeLog2.x, 1 << gridSizeLog2.y, 1 << gridSizeLog2.z);
+    gridSize = make_uint3(1 << gridSizeLog2.x, 1 << gridSizeLog2.y, 1 << gridSizeLog2.z);
     gridSizeMask = make_uint3(gridSize.x - 1, gridSize.y - 1, gridSize.z - 1);
-    gridSizeShift =
-        make_uint3(0, gridSizeLog2.x, gridSizeLog2.x + gridSizeLog2.y);
+    gridSizeShift = make_uint3(0, gridSizeLog2.x, gridSizeLog2.x + gridSizeLog2.y);
 
     numVoxels = gridSize.x * gridSize.y * gridSize.z;
-    voxelSize =
-        make_float3(2.0f / gridSize.x, 2.0f / gridSize.y, 2.0f / gridSize.z);
+    voxelSize = make_float3(2.0f / gridSize.x, 2.0f / gridSize.y, 2.0f / gridSize.z);
     maxVerts = gridSize.x * gridSize.y * 100;
 
-    printf("grid: %d x %d x %d = %d voxels\n", gridSize.x, gridSize.y, gridSize.z,
-        numVoxels);
+    printf("grid: %d x %d x %d = %d voxels\n", gridSize.x, gridSize.y, gridSize.z, numVoxels);
     printf("max verts = %d\n", maxVerts);
 
 #if SAMPLE_VOLUME
     // load volume data
     char* path = sdkFindFilePath(volumeFilename, argv[0]);
 
-    if (path == NULL) {
-        fprintf(stderr, "Error finding file '%s'\n", volumeFilename);
+    printf("path = %s\n", path);
 
+    if (path == NULL)
+    {
+        fprintf(stderr, "Error finding file '%s'\n", volumeFilename);
         exit(EXIT_FAILURE);
     }
 
@@ -438,21 +448,21 @@ void initMC(int argc, char** argv) {
     createVolumeTexture(d_volume, size);
 #endif
 
-    if (g_bValidate) {
+    if (g_bValidate)
+    {
         cudaMalloc((void**)&(d_pos), maxVerts * sizeof(float) * 4);
         cudaMalloc((void**)&(d_normal), maxVerts * sizeof(float) * 4);
     }
-    else {
+    else
+    {
         // create VBOs
         createVBO(&posVbo, maxVerts * sizeof(float) * 4);
         // DEPRECATED: checkCudaErrors( cudaGLRegisterBufferObject(posVbo) );
-        checkCudaErrors(cudaGraphicsGLRegisterBuffer(
-            &cuda_posvbo_resource, posVbo, cudaGraphicsMapFlagsWriteDiscard));
+        checkCudaErrors(cudaGraphicsGLRegisterBuffer(&cuda_posvbo_resource, posVbo, cudaGraphicsMapFlagsWriteDiscard));
 
         createVBO(&normalVbo, maxVerts * sizeof(float) * 4);
         // DEPRECATED: checkCudaErrors(cudaGLRegisterBufferObject(normalVbo));
-        checkCudaErrors(cudaGraphicsGLRegisterBuffer(
-            &cuda_normalvbo_resource, normalVbo, cudaGraphicsMapFlagsWriteDiscard));
+        checkCudaErrors(cudaGraphicsGLRegisterBuffer(&cuda_normalvbo_resource, normalVbo, cudaGraphicsMapFlagsWriteDiscard));
     }
 
     // allocate textures
@@ -467,12 +477,15 @@ void initMC(int argc, char** argv) {
     checkCudaErrors(cudaMalloc((void**)&d_compVoxelArray, memSize));
 }
 
-void cleanup() {
-    if (g_bValidate) {
+void cleanup()
+{
+    if (g_bValidate)
+    {
         cudaFree(d_pos);
         cudaFree(d_normal);
     }
-    else {
+    else
+    {
         sdkDeleteTimer(&timer);
 
         deleteVBO(&posVbo, &cuda_posvbo_resource);
@@ -489,12 +502,14 @@ void cleanup() {
     checkCudaErrors(cudaFree(d_voxelOccupiedScan));
     checkCudaErrors(cudaFree(d_compVoxelArray));
 
-    if (d_volume) {
+    if (d_volume)
+    {
         checkCudaErrors(cudaFree(d_volume));
     }
 }
 
-void initMenus() {
+void initMenus()
+{
     glutCreateMenu(mainMenu);
     glutAddMenuEntry("Toggle animation [ ]", ' ');
     glutAddMenuEntry("Increment isovalue [+]", '+');
@@ -507,10 +522,13 @@ void initMenus() {
     glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
-void runGraphicsTest(int argc, char** argv) {
+void runGraphicsTest(int argc, char** argv)
+{
     printf("MarchingCubes\n");
 
-    if (checkCmdLineFlag(argc, (const char**)argv, "device")) {
+    if (checkCmdLineFlag(argc, (const char**)argv, "device"))
+    {
+        printf("XXXXXXXXXXXXXXXXXXXXX\n");
         printf("[%s]\n", argv[0]);
         printf("   Does not explicitly support -device=n in OpenGL mode\n");
         printf("   To use -device=n, the sample must be running w/o OpenGL\n\n");
@@ -519,21 +537,22 @@ void runGraphicsTest(int argc, char** argv) {
     }
 
     // First initialize OpenGL context, so we can properly set the GL for CUDA.
-    // This is necessary in order to achieve optimal performance with OpenGL/CUDA
-    // interop.
-    if (false == initGL(&argc, argv)) {
+    // This is necessary in order to achieve optimal performance with OpenGL/CUDA interop.
+    if (false == initGL(&argc, argv))
+    {
         return;
     }
 
     findCudaDevice(argc, (const char**)argv);
 
-    // register callbacks
     glutDisplayFunc(display);
+    glutReshapeFunc(reshape);
     glutKeyboardFunc(keyboard);
     glutMouseFunc(mouse);
     glutMotionFunc(motion);
-    glutReshapeFunc(reshape);
+
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
+
     initMenus();
 
     // Initialize CUDA buffers for Marching Cubes
@@ -550,20 +569,21 @@ void runGraphicsTest(int argc, char** argv) {
 ////////////////////////////////////////////////////////////////////////////////
 //! Run the Cuda part of the computation
 ////////////////////////////////////////////////////////////////////////////////
-void computeIsosurface() {
+void computeIsosurface()
+{
     int threads = 128;
     dim3 grid(numVoxels / threads, 1, 1);
 
     // get around maximum grid size of 65535 in each dimension
-    if (grid.x > 65535) {
+    if (grid.x > 65535)
+    {
         grid.y = grid.x / 32768;
         grid.x = 32768;
     }
 
     // calculate number of vertices need per voxel
     launch_classifyVoxel(grid, threads, d_voxelVerts, d_voxelOccupied, d_volume,
-        gridSize, gridSizeShift, gridSizeMask, numVoxels,
-        voxelSize, isoValue);
+        gridSize, gridSizeShift, gridSizeMask, numVoxels, voxelSize, isoValue);
 #if DEBUG_BUFFERS
     printf("voxelVerts:\n");
     dumpBuffer(d_voxelVerts, numVoxels, sizeof(uint));
@@ -584,23 +604,21 @@ void computeIsosurface() {
     {
         uint lastElement, lastScanElement;
         checkCudaErrors(cudaMemcpy((void*)&lastElement,
-            (void*)(d_voxelOccupied + numVoxels - 1),
-            sizeof(uint), cudaMemcpyDeviceToHost));
+            (void*)(d_voxelOccupied + numVoxels - 1), sizeof(uint), cudaMemcpyDeviceToHost));
         checkCudaErrors(cudaMemcpy((void*)&lastScanElement,
-            (void*)(d_voxelOccupiedScan + numVoxels - 1),
-            sizeof(uint), cudaMemcpyDeviceToHost));
+            (void*)(d_voxelOccupiedScan + numVoxels - 1), sizeof(uint), cudaMemcpyDeviceToHost));
         activeVoxels = lastElement + lastScanElement;
     }
 
-    if (activeVoxels == 0) {
+    if (activeVoxels == 0)
+    {
         // return if there are no full voxels
         totalVerts = 0;
         return;
     }
 
     // compact voxel index array
-    launch_compactVoxels(grid, threads, d_compVoxelArray, d_voxelOccupied,
-        d_voxelOccupiedScan, numVoxels);
+    launch_compactVoxels(grid, threads, d_compVoxelArray, d_voxelOccupied, d_voxelOccupiedScan, numVoxels);
     getLastCudaError("compactVoxels failed");
 
 #endif  // SKIP_EMPTY_VOXELS
@@ -617,28 +635,24 @@ void computeIsosurface() {
     {
         uint lastElement, lastScanElement;
         checkCudaErrors(cudaMemcpy((void*)&lastElement,
-            (void*)(d_voxelVerts + numVoxels - 1),
-            sizeof(uint), cudaMemcpyDeviceToHost));
+            (void*)(d_voxelVerts + numVoxels - 1), sizeof(uint), cudaMemcpyDeviceToHost));
         checkCudaErrors(cudaMemcpy((void*)&lastScanElement,
-            (void*)(d_voxelVertsScan + numVoxels - 1),
-            sizeof(uint), cudaMemcpyDeviceToHost));
+            (void*)(d_voxelVertsScan + numVoxels - 1), sizeof(uint), cudaMemcpyDeviceToHost));
         totalVerts = lastElement + lastScanElement;
     }
 
     // generate triangles, writing to vertex buffers
-    if (!g_bValidate) {
+    if (!g_bValidate)
+    {
         size_t num_bytes;
         // DEPRECATED: checkCudaErrors(cudaGLMapBufferObject((void**)&d_pos,
         // posVbo));
         checkCudaErrors(cudaGraphicsMapResources(1, &cuda_posvbo_resource, 0));
-        checkCudaErrors(cudaGraphicsResourceGetMappedPointer(
-            (void**)&d_pos, &num_bytes, cuda_posvbo_resource));
+        checkCudaErrors(cudaGraphicsResourceGetMappedPointer((void**)&d_pos, &num_bytes, cuda_posvbo_resource));
 
-        // DEPRECATED: checkCudaErrors(cudaGLMapBufferObject((void**)&d_normal,
-        // normalVbo));
+        // DEPRECATED: checkCudaErrors(cudaGLMapBufferObject((void**)&d_normal, normalVbo));
         checkCudaErrors(cudaGraphicsMapResources(1, &cuda_normalvbo_resource, 0));
-        checkCudaErrors(cudaGraphicsResourceGetMappedPointer(
-            (void**)&d_normal, &num_bytes, cuda_normalvbo_resource));
+        checkCudaErrors(cudaGraphicsResourceGetMappedPointer((void**)&d_normal, &num_bytes, cuda_normalvbo_resource));
     }
 
 #if SKIP_EMPTY_VOXELS
@@ -647,24 +661,22 @@ void computeIsosurface() {
     dim3 grid2((int)ceil(numVoxels / (float)NTHREADS), 1, 1);
 #endif
 
-    while (grid2.x > 65535) {
+    while (grid2.x > 65535)
+    {
         grid2.x /= 2;
         grid2.y *= 2;
     }
 
 #if SAMPLE_VOLUME
-    launch_generateTriangles2(grid2, NTHREADS, d_pos, d_normal, d_compVoxelArray,
-        d_voxelVertsScan, d_volume, gridSize, gridSizeShift,
-        gridSizeMask, voxelSize, isoValue, activeVoxels,
-        maxVerts);
+    launch_generateTriangles2(grid2, NTHREADS, d_pos, d_normal, d_compVoxelArray, d_voxelVertsScan, d_volume, gridSize, gridSizeShift,
+        gridSizeMask, voxelSize, isoValue, activeVoxels, maxVerts);
 #else
-    launch_generateTriangles(grid2, NTHREADS, d_pos, d_normal, d_compVoxelArray,
-        d_voxelVertsScan, gridSize, gridSizeShift,
-        gridSizeMask, voxelSize, isoValue, activeVoxels,
-        maxVerts);
+    launch_generateTriangles(grid2, NTHREADS, d_pos, d_normal, d_compVoxelArray, d_voxelVertsScan, gridSize, gridSizeShift,
+        gridSizeMask, voxelSize, isoValue, activeVoxels, maxVerts);
 #endif
 
-    if (!g_bValidate) {
+    if (!g_bValidate)
+    {
         // DEPRECATED:      checkCudaErrors(cudaGLUnmapBufferObject(normalVbo));
         checkCudaErrors(cudaGraphicsUnmapResources(1, &cuda_normalvbo_resource, 0));
         // DEPRECATED:      checkCudaErrors(cudaGLUnmapBufferObject(posVbo));
@@ -678,38 +690,39 @@ static const char* shader_code =
 "TEX result.color, fragment.texcoord, texture[0], 2D; \n"
 "END";
 
-GLuint compileASMShader(GLenum program_type, const char* code) {
+GLuint compileASMShader(GLenum program_type, const char* code)
+{
     GLuint program_id;
     glGenProgramsARB(1, &program_id);
     glBindProgramARB(program_type, program_id);
-    glProgramStringARB(program_type, GL_PROGRAM_FORMAT_ASCII_ARB,
-        (GLsizei)strlen(code), (GLubyte*)code);
+    glProgramStringARB(program_type, GL_PROGRAM_FORMAT_ASCII_ARB, (GLsizei)strlen(code), (GLubyte*)code);
 
     GLint error_pos;
     glGetIntegerv(GL_PROGRAM_ERROR_POSITION_ARB, &error_pos);
 
-    if (error_pos != -1) {
+    if (error_pos != -1)
+    {
         const GLubyte* error_string;
         error_string = glGetString(GL_PROGRAM_ERROR_STRING_ARB);
-        fprintf(stderr, "Program error at position: %d\n%s\n", (int)error_pos,
-            error_string);
+        fprintf(stderr, "Program error at position: %d\n%s\n", (int)error_pos, error_string);
         return 0;
     }
-
     return program_id;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 //! Initialize OpenGL
 ////////////////////////////////////////////////////////////////////////////////
-bool initGL(int* argc, char** argv) {
+bool initGL(int* argc, char** argv)
+{
     // Create GL context
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
     glutInitWindowSize(window_width, window_height);
     glutCreateWindow("CUDA Marching Cubes");
 
-    if (!isGLVersionSupported(2, 0)) {
+    if (!isGLVersionSupported(2, 0))
+    {
         fprintf(stderr, "ERROR: Support for necessary OpenGL extensions missing.");
         fflush(stderr);
         return false;
@@ -751,7 +764,8 @@ bool initGL(int* argc, char** argv) {
 ////////////////////////////////////////////////////////////////////////////////
 //! Create VBO
 ////////////////////////////////////////////////////////////////////////////////
-void createVBO(GLuint* vbo, unsigned int size) {
+void createVBO(GLuint* vbo, unsigned int size)
+{
     // create buffer object
     glGenBuffers(1, vbo);
     glBindBuffer(GL_ARRAY_BUFFER, *vbo);
@@ -766,7 +780,8 @@ void createVBO(GLuint* vbo, unsigned int size) {
 ////////////////////////////////////////////////////////////////////////////////
 //! Delete VBO
 ////////////////////////////////////////////////////////////////////////////////
-void deleteVBO(GLuint* vbo, struct cudaGraphicsResource** cuda_resource) {
+void deleteVBO(GLuint* vbo, struct cudaGraphicsResource** cuda_resource)
+{
     glBindBuffer(1, *vbo);
     glDeleteBuffers(1, vbo);
     // DEPRECATED: checkCudaErrors(cudaGLUnregisterBufferObject(*vbo));
@@ -778,7 +793,8 @@ void deleteVBO(GLuint* vbo, struct cudaGraphicsResource** cuda_resource) {
 ////////////////////////////////////////////////////////////////////////////////
 // Render isosurface geometry from the vertex buffers
 ////////////////////////////////////////////////////////////////////////////////
-void renderIsosurface() {
+void renderIsosurface()
+{
     glBindBuffer(GL_ARRAY_BUFFER, posVbo);
     glVertexPointer(4, GL_FLOAT, 0, 0);
     glEnableClientState(GL_VERTEX_ARRAY);
@@ -798,11 +814,13 @@ void renderIsosurface() {
 ////////////////////////////////////////////////////////////////////////////////
 //! Display callback
 ////////////////////////////////////////////////////////////////////////////////
-void display() {
+void display()
+{
     sdkStartTimer(&timer);
 
     // run CUDA kernel to generate geometry
-    if (compute) {
+    if (compute)
+    {
         computeIsosurface();
     }
 
@@ -819,12 +837,14 @@ void display() {
 
         glPolygonMode(GL_FRONT_AND_BACK, wireframe ? GL_LINE : GL_FILL);
 
-        if (lighting) {
+        if (lighting)
+        {
             glEnable(GL_LIGHTING);
         }
 
         // render
-        if (render) {
+        if (render)
+        {
             glPushMatrix();
             glRotatef(180.0, 0.0, 1.0, 0.0);
             glRotatef(90.0, 1.0, 0.0, 0.0);
@@ -846,8 +866,10 @@ void display() {
 ////////////////////////////////////////////////////////////////////////////////
 //! Keyboard events handler
 ////////////////////////////////////////////////////////////////////////////////
-void keyboard(unsigned char key, int /*x*/, int /*y*/) {
-    switch (key) {
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
+{
+    switch (key)
+    {
     case (27):
         cleanup();
         exit(EXIT_SUCCESS);
@@ -892,10 +914,10 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/) {
     printf("isoValue = %f\n", isoValue);
     printf("voxels = %d\n", activeVoxels);
     printf("verts = %d\n", totalVerts);
-    printf("occupancy: %d / %d = %.2f%%\n", activeVoxels, numVoxels,
-        activeVoxels * 100.0f / (float)numVoxels);
+    printf("occupancy: %d / %d = %.2f%%\n", activeVoxels, numVoxels, activeVoxels * 100.0f / (float)numVoxels);
 
-    if (!compute) {
+    if (!compute)
+    {
         computeIsosurface();
     }
 }
@@ -903,11 +925,14 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/) {
 ////////////////////////////////////////////////////////////////////////////////
 //! Mouse event handlers
 ////////////////////////////////////////////////////////////////////////////////
-void mouse(int button, int state, int x, int y) {
-    if (state == GLUT_DOWN) {
+void mouse(int button, int state, int x, int y)
+{
+    if (state == GLUT_DOWN)
+    {
         mouse_buttons |= 1 << button;
     }
-    else if (state == GLUT_UP) {
+    else if (state == GLUT_UP)
+    {
         mouse_buttons = 0;
     }
 
@@ -915,19 +940,23 @@ void mouse(int button, int state, int x, int y) {
     mouse_old_y = y;
 }
 
-void motion(int x, int y) {
+void motion(int x, int y)
+{
     float dx = (float)(x - mouse_old_x);
     float dy = (float)(y - mouse_old_y);
 
-    if (mouse_buttons == 1) {
+    if (mouse_buttons == 1)
+    {
         rotate.x += dy * 0.2f;
         rotate.y += dx * 0.2f;
     }
-    else if (mouse_buttons == 2) {
+    else if (mouse_buttons == 2)
+    {
         translate.x += dx * 0.01f;
         translate.y -= dy * 0.01f;
     }
-    else if (mouse_buttons == 3) {
+    else if (mouse_buttons == 3)
+    {
         translate.z += dy * 0.01f;
     }
 
@@ -936,12 +965,14 @@ void motion(int x, int y) {
     glutPostRedisplay();
 }
 
-void idle() {
+void idle()
+{
     animation();
     glutPostRedisplay();
 }
 
-void reshape(int w, int h) {
+void reshape(int w, int h)
+{
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(60.0, (float)w / (float)h, 0.1, 10.0);
