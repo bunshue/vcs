@@ -473,7 +473,7 @@ void motion(int x, int y)
 }
 
 // commented out to remove unused parameter warnings in Linux
-void key(unsigned char key, int /*x*/, int /*y*/)
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
     switch (key)
     {
@@ -628,7 +628,7 @@ void initParams()
     }
 }
 
-void mainMenu(int i) { key((unsigned char)i, 0, 0); }
+void mainMenu(int i) { keyboard((unsigned char)i, 0, 0); }
 
 void initMenus()
 {
@@ -730,12 +730,11 @@ int main(int argc, char** argv)
 
         glutDisplayFunc(display);
         glutReshapeFunc(reshape);
+        glutKeyboardFunc(keyboard);
+        glutSpecialFunc(special);
         glutMouseFunc(mouse);
         glutMotionFunc(motion);
-        glutKeyboardFunc(key);
-        glutSpecialFunc(special);
         glutIdleFunc(idle);
-
         glutCloseFunc(cleanup);
 
         glutMainLoop();

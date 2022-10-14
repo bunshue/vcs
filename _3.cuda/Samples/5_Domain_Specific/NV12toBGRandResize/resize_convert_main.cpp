@@ -61,27 +61,20 @@ typedef struct _nv12_to_bgr24_context_t {
 
 nv12_to_bgr24_context g_ctx;
 
-static void printHelp(const char* app_name) {
+static void printHelp(const char* app_name)
+{
     std::cout << "Usage:" << app_name << " [options]\n\n";
     std::cout << "OPTIONS:\n";
     std::cout << "\t-h,--help\n\n";
     std::cout << "\t-input=nv12file             nv12 input file\n";
-    std::cout
-        << "\t-width=width                input nv12 image width, <1 -- 4096>\n";
-    std::cout
-        << "\t-height=height              input nv12 image height, <1 -- 4096>\n";
-    std::cout
-        << "\t-pitch=pitch(optional)      input nv12 image pitch, <0 -- 4096>\n";
-    std::cout
-        << "\t-dst_width=width            output BGR image width, <1 -- 4096>\n";
-    std::cout
-        << "\t-dst_height=height          output BGR image height, <1 -- 4096>\n";
-    std::cout
-        << "\t-dst_pitch=pitch(optional)  output BGR image pitch, <0 -- 4096>\n";
-    std::cout
-        << "\t-batch=batch                process frames count, <1 -- 4096>\n\n";
-    std::cout
-        << "\t-device=device_num(optional)   cuda device number, <0 -- 4096>\n\n";
+    std::cout << "\t-width=width                input nv12 image width, <1 -- 4096>\n";
+    std::cout << "\t-height=height              input nv12 image height, <1 -- 4096>\n";
+    std::cout << "\t-pitch=pitch(optional)      input nv12 image pitch, <0 -- 4096>\n";
+    std::cout << "\t-dst_width=width            output BGR image width, <1 -- 4096>\n";
+    std::cout << "\t-dst_height=height          output BGR image height, <1 -- 4096>\n";
+    std::cout << "\t-dst_pitch=pitch(optional)  output BGR image pitch, <0 -- 4096>\n";
+    std::cout << "\t-batch=batch                process frames count, <1 -- 4096>\n\n";
+    std::cout << "\t-device=device_num(optional)   cuda device number, <0 -- 4096>\n\n";
 
     return;
 }
@@ -114,54 +107,65 @@ int parseCmdLine(int argc, char* argv[])
         g_ctx.dst_height = 480;
         g_ctx.batch = 24;
     }
-    else if (argc > 1) {
-        if (checkCmdLineFlag(argc, (const char**)argv, "width")) {
+    else if (argc > 1)
+    {
+        if (checkCmdLineFlag(argc, (const char**)argv, "width"))
+        {
             g_ctx.width = getCmdLineArgumentInt(argc, (const char**)argv, "width");
         }
 
-        if (checkCmdLineFlag(argc, (const char**)argv, "height")) {
+        if (checkCmdLineFlag(argc, (const char**)argv, "height"))
+        {
             g_ctx.height = getCmdLineArgumentInt(argc, (const char**)argv, "height");
         }
 
-        if (checkCmdLineFlag(argc, (const char**)argv, "pitch")) {
+        if (checkCmdLineFlag(argc, (const char**)argv, "pitch"))
+        {
             g_ctx.pitch = getCmdLineArgumentInt(argc, (const char**)argv, "pitch");
         }
 
-        if (checkCmdLineFlag(argc, (const char**)argv, "input")) {
-            getCmdLineArgumentString(argc, (const char**)argv, "input",
-                (char**)&g_ctx.input_nv12_file);
+        if (checkCmdLineFlag(argc, (const char**)argv, "input"))
+        {
+            getCmdLineArgumentString(argc, (const char**)argv, "input", (char**)&g_ctx.input_nv12_file);
         }
 
-        if (checkCmdLineFlag(argc, (const char**)argv, "dst_width")) {
-            g_ctx.dst_width =
-                getCmdLineArgumentInt(argc, (const char**)argv, "dst_width");
+        if (checkCmdLineFlag(argc, (const char**)argv, "dst_width"))
+        {
+            g_ctx.dst_width = getCmdLineArgumentInt(argc, (const char**)argv, "dst_width");
         }
 
-        if (checkCmdLineFlag(argc, (const char**)argv, "dst_height")) {
-            g_ctx.dst_height =
-                getCmdLineArgumentInt(argc, (const char**)argv, "dst_height");
+        if (checkCmdLineFlag(argc, (const char**)argv, "dst_height"))
+        {
+            g_ctx.dst_height = getCmdLineArgumentInt(argc, (const char**)argv, "dst_height");
         }
 
-        if (checkCmdLineFlag(argc, (const char**)argv, "dst_pitch")) {
-            g_ctx.dst_pitch =
-                getCmdLineArgumentInt(argc, (const char**)argv, "dst_pitch");
+        if (checkCmdLineFlag(argc, (const char**)argv, "dst_pitch"))
+        {
+            g_ctx.dst_pitch = getCmdLineArgumentInt(argc, (const char**)argv, "dst_pitch");
         }
 
-        if (checkCmdLineFlag(argc, (const char**)argv, "batch")) {
+        if (checkCmdLineFlag(argc, (const char**)argv, "batch"))
+        {
             g_ctx.batch = getCmdLineArgumentInt(argc, (const char**)argv, "batch");
         }
     }
 
     g_ctx.device = findCudaDevice(argc, (const char**)argv);
 
-    if ((g_ctx.width == 0) || (g_ctx.height == 0) || (g_ctx.dst_width == 0) ||
-        (g_ctx.dst_height == 0) || !g_ctx.input_nv12_file) {
+    if ((g_ctx.width == 0) || (g_ctx.height == 0) || (g_ctx.dst_width == 0) || (g_ctx.dst_height == 0) || !g_ctx.input_nv12_file)
+    {
         printHelp(argv[0]);
         return -1;
     }
 
-    if (g_ctx.pitch == 0) g_ctx.pitch = g_ctx.width;
-    if (g_ctx.dst_pitch == 0) g_ctx.dst_pitch = g_ctx.dst_width;
+    if (g_ctx.pitch == 0)
+    {
+        g_ctx.pitch = g_ctx.width;
+    }
+    if (g_ctx.dst_pitch == 0)
+    {
+        g_ctx.dst_pitch = g_ctx.dst_width;
+    }
 
     return 0;
 }
@@ -169,13 +173,15 @@ int parseCmdLine(int argc, char* argv[])
 /*
   load nv12 yuvfile data into GPU device memory with batch of copy
  */
-static int loadNV12Frame(unsigned char* d_inputNV12) {
+static int loadNV12Frame(unsigned char* d_inputNV12)
+{
     unsigned char* pNV12FrameData;
     unsigned char* d_nv12;
     int frameSize;
     std::ifstream nv12File(g_ctx.input_nv12_file, std::ifstream::in | std::ios::binary);
 
-    if (!nv12File.is_open()) {
+    if (!nv12File.is_open())
+    {
         std::cerr << "Can't open files\n";
         return -1;
     }
@@ -186,7 +192,8 @@ static int loadNV12Frame(unsigned char* d_inputNV12) {
     pNV12FrameData = d_inputNV12;
 #else
     pNV12FrameData = (unsigned char*)malloc(frameSize);
-    if (pNV12FrameData == NULL) {
+    if (pNV12FrameData == NULL)
+    {
         std::cerr << "Failed to malloc pNV12FrameData\n";
         return -1;
     }
@@ -194,7 +201,8 @@ static int loadNV12Frame(unsigned char* d_inputNV12) {
 
     nv12File.read((char*)pNV12FrameData, frameSize);
 
-    if (nv12File.gcount() < frameSize) {
+    if (nv12File.gcount() < frameSize)
+    {
         std::cerr << "can't get one frame!\n";
         return -1;
     }
@@ -206,10 +214,9 @@ static int loadNV12Frame(unsigned char* d_inputNV12) {
 
     // expand one frame to multi frames for batch processing
     d_nv12 = d_inputNV12;
-    for (int i = 0; i < g_ctx.batch; i++) {
-        checkCudaErrors(cudaMemcpy2D((void*)d_nv12, g_ctx.ctx_pitch,
-            pNV12FrameData, g_ctx.width, g_ctx.width,
-            g_ctx.ctx_heights, cudaMemcpyHostToDevice));
+    for (int i = 0; i < g_ctx.batch; i++)
+    {
+        checkCudaErrors(cudaMemcpy2D((void*)d_nv12, g_ctx.ctx_pitch, pNV12FrameData, g_ctx.width, g_ctx.width, g_ctx.ctx_heights, cudaMemcpyHostToDevice));
 
         d_nv12 += g_ctx.ctx_pitch * g_ctx.ctx_heights;
     }
@@ -226,15 +233,15 @@ static int loadNV12Frame(unsigned char* d_inputNV12) {
   1. resize interlace nv12 to target size
   2. convert nv12 to bgr 3 progressive planars
  */
-void nv12ResizeAndNV12ToBGR(unsigned char* d_inputNV12) {
+void nv12ResizeAndNV12ToBGR(unsigned char* d_inputNV12)
+{
     unsigned char* d_resizedNV12;
     float* d_outputBGR;
     int size;
     char filename[40];
 
     /* allocate device memory for resized nv12 output */
-    size = g_ctx.dst_width * ceil(g_ctx.dst_height * 3.0f / 2.0f) * g_ctx.batch *
-        sizeof(unsigned char);
+    size = g_ctx.dst_width * ceil(g_ctx.dst_height * 3.0f / 2.0f) * g_ctx.batch * sizeof(unsigned char);
     checkCudaErrors(cudaMalloc((void**)&d_resizedNV12, size));
 
     /* allocate device memory for bgr output */
@@ -252,27 +259,24 @@ void nv12ResizeAndNV12ToBGR(unsigned char* d_inputNV12) {
     /* resize interlace nv12 */
 
     cudaEventRecord(start, 0);
-    for (int i = 0; i < TEST_LOOP; i++) {
-        resizeNV12Batch(d_inputNV12, g_ctx.ctx_pitch, g_ctx.width, g_ctx.height,
-            d_resizedNV12, g_ctx.dst_width, g_ctx.dst_width,
-            g_ctx.dst_height, g_ctx.batch);
+    for (int i = 0; i < TEST_LOOP; i++)
+    {
+        resizeNV12Batch(d_inputNV12, g_ctx.ctx_pitch, g_ctx.width, g_ctx.height, d_resizedNV12, g_ctx.dst_width, g_ctx.dst_width, g_ctx.dst_height, g_ctx.batch);
     }
     cudaEventRecord(stop, 0);
     cudaEventSynchronize(stop);
 
     cudaEventElapsedTime(&elapsedTime, start, stop);
-    printf(
-        "  CUDA resize nv12(%dx%d --> %dx%d), batch: %d,"
-        " average time: %.3f ms ==> %.3f ms/frame\n",
+    printf("  CUDA resize nv12(%dx%d --> %dx%d), batch: %d, average time: %.3f ms ==> %.3f ms/frame\n",
         g_ctx.width, g_ctx.height, g_ctx.dst_width, g_ctx.dst_height, g_ctx.batch,
-        (elapsedTime / (TEST_LOOP * 1.0f)),
-        (elapsedTime / (TEST_LOOP * 1.0f)) / g_ctx.batch);
+        (elapsedTime / (TEST_LOOP * 1.0f)), (elapsedTime / (TEST_LOOP * 1.0f)) / g_ctx.batch);
 
     sprintf(filename, "resized_nv12_%dx%d", g_ctx.dst_width, g_ctx.dst_height);
 
     /* convert nv12 to bgr 3 progressive planars */
     cudaEventRecord(start, 0);
-    for (int i = 0; i < TEST_LOOP; i++) {
+    for (int i = 0; i < TEST_LOOP; i++)
+    {
         nv12ToBGRplanarBatch(d_resizedNV12, g_ctx.dst_pitch,  // intput
             d_outputBGR,
             g_ctx.dst_pitch * sizeof(float),    // output
@@ -284,16 +288,12 @@ void nv12ResizeAndNV12ToBGR(unsigned char* d_inputNV12) {
 
     cudaEventElapsedTime(&elapsedTime, start, stop);
 
-    printf(
-        "  CUDA convert nv12(%dx%d) to bgr(%dx%d), batch: %d,"
-        " average time: %.3f ms ==> %.3f ms/frame\n",
+    printf("  CUDA convert nv12(%dx%d) to bgr(%dx%d), batch: %d, average time: %.3f ms ==> %.3f ms/frame\n",
         g_ctx.dst_width, g_ctx.dst_height, g_ctx.dst_width, g_ctx.dst_height,
-        g_ctx.batch, (elapsedTime / (TEST_LOOP * 1.0f)),
-        (elapsedTime / (TEST_LOOP * 1.0f)) / g_ctx.batch);
+        g_ctx.batch, (elapsedTime / (TEST_LOOP * 1.0f)), (elapsedTime / (TEST_LOOP * 1.0f)) / g_ctx.batch);
 
     sprintf(filename, "converted_bgr_%dx%d", g_ctx.dst_width, g_ctx.dst_height);
-    dumpBGR(d_outputBGR, g_ctx.dst_pitch, g_ctx.dst_width, g_ctx.dst_height,
-        g_ctx.batch, (char*)"t1", filename);
+    dumpBGR(d_outputBGR, g_ctx.dst_pitch, g_ctx.dst_width, g_ctx.dst_height, g_ctx.batch, (char*)"t1", filename);
 
     /* release resources */
     checkCudaErrors(cudaEventDestroy(start));
@@ -332,46 +332,38 @@ void nv12ToBGRandBGRresize(unsigned char* d_inputNV12) {
     /* convert interlace nv12 to bgr 3 progressive planars */
     cudaEventRecord(start, 0);
     cudaDeviceSynchronize();
-    for (int i = 0; i < TEST_LOOP; i++) {
-        nv12ToBGRplanarBatch(d_inputNV12, g_ctx.ctx_pitch, d_bgr,
-            g_ctx.ctx_pitch * sizeof(float), g_ctx.width,
-            g_ctx.height, g_ctx.batch, 0);
+    for (int i = 0; i < TEST_LOOP; i++)
+    {
+        nv12ToBGRplanarBatch(d_inputNV12, g_ctx.ctx_pitch, d_bgr, g_ctx.ctx_pitch * sizeof(float), g_ctx.width, g_ctx.height, g_ctx.batch, 0);
     }
     cudaEventRecord(stop, 0);
     cudaEventSynchronize(stop);
 
     cudaEventElapsedTime(&elapsedTime, start, stop);
-    printf(
-        "  CUDA convert nv12(%dx%d) to bgr(%dx%d), batch: %d,"
-        " average time: %.3f ms ==> %.3f ms/frame\n",
+    printf("  CUDA convert nv12(%dx%d) to bgr(%dx%d), batch: %d, average time: %.3f ms ==> %.3f ms/frame\n",
         g_ctx.width, g_ctx.height, g_ctx.width, g_ctx.height, g_ctx.batch,
-        (elapsedTime / (TEST_LOOP * 1.0f)),
-        (elapsedTime / (TEST_LOOP * 1.0f)) / g_ctx.batch);
+        (elapsedTime / (TEST_LOOP * 1.0f)), (elapsedTime / (TEST_LOOP * 1.0f)) / g_ctx.batch);
 
     sprintf(filename, "converted_bgr_%dx%d", g_ctx.width, g_ctx.height);
 
     /* resize bgr 3 progressive planars */
     cudaEventRecord(start, 0);
-    for (int i = 0; i < TEST_LOOP; i++) {
+    for (int i = 0; i < TEST_LOOP; i++)
+    {
         resizeBGRplanarBatch(d_bgr, g_ctx.ctx_pitch, g_ctx.width, g_ctx.height,
-            d_resizedBGR, g_ctx.dst_width, g_ctx.dst_width,
-            g_ctx.dst_height, g_ctx.batch);
+            d_resizedBGR, g_ctx.dst_width, g_ctx.dst_width, g_ctx.dst_height, g_ctx.batch);
     }
     cudaEventRecord(stop, 0);
     cudaEventSynchronize(stop);
 
     cudaEventElapsedTime(&elapsedTime, start, stop);
-    printf(
-        "  CUDA resize bgr(%dx%d --> %dx%d), batch: %d,"
-        " average time: %.3f ms ==> %.3f ms/frame\n",
+    printf("  CUDA resize bgr(%dx%d --> %dx%d), batch: %d, average time: %.3f ms ==> %.3f ms/frame\n",
         g_ctx.width, g_ctx.height, g_ctx.dst_width, g_ctx.dst_height, g_ctx.batch,
-        (elapsedTime / (TEST_LOOP * 1.0f)),
-        (elapsedTime / (TEST_LOOP * 1.0f)) / g_ctx.batch);
+        (elapsedTime / (TEST_LOOP * 1.0f)), (elapsedTime / (TEST_LOOP * 1.0f)) / g_ctx.batch);
 
     memset(filename, 0, sizeof(filename));
     sprintf(filename, "resized_bgr_%dx%d", g_ctx.dst_width, g_ctx.dst_height);
-    dumpBGR(d_resizedBGR, g_ctx.dst_pitch, g_ctx.dst_width, g_ctx.dst_height,
-        g_ctx.batch, (char*)"t2", filename);
+    dumpBGR(d_resizedBGR, g_ctx.dst_pitch, g_ctx.dst_width, g_ctx.dst_height, g_ctx.batch, (char*)"t2", filename);
 
     /* release resources */
     checkCudaErrors(cudaEventDestroy(start));
@@ -381,10 +373,14 @@ void nv12ToBGRandBGRresize(unsigned char* d_inputNV12) {
     checkCudaErrors(cudaFree(d_resizedBGR));
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[])
+{
     unsigned char* d_inputNV12;
 
-    if (parseCmdLine(argc, argv) < 0) return EXIT_FAILURE;
+    if (parseCmdLine(argc, argv) < 0)
+    {
+        return EXIT_FAILURE;
+    }
 
     g_ctx.ctx_pitch = g_ctx.width;
     int ctx_alignment = 32;
@@ -396,16 +392,13 @@ int main(int argc, char* argv[]) {
 
     /* load nv12 yuv data into d_inputNV12 with batch of copies */
 #if USE_UVM_MEM
-    checkCudaErrors(cudaMallocManaged(
-        (void**)&d_inputNV12,
-        (g_ctx.ctx_pitch * g_ctx.ctx_heights * g_ctx.batch), cudaMemAttachHost));
+    checkCudaErrors(cudaMallocManaged((void**)&d_inputNV12, (g_ctx.ctx_pitch * g_ctx.ctx_heights * g_ctx.batch), cudaMemAttachHost));
     printf("\nUSE_UVM_MEM\n");
 #else
-    checkCudaErrors(
-        cudaMalloc((void**)&d_inputNV12,
-            (g_ctx.ctx_pitch * g_ctx.ctx_heights * g_ctx.batch)));
+    checkCudaErrors(cudaMalloc((void**)&d_inputNV12, (g_ctx.ctx_pitch * g_ctx.ctx_heights * g_ctx.batch)));
 #endif
-    if (loadNV12Frame(d_inputNV12)) {
+    if (loadNV12Frame(d_inputNV12))
+    {
         std::cerr << "failed to load batch data!\n";
         return EXIT_FAILURE;
     }

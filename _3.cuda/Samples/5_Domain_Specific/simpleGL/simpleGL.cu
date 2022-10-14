@@ -61,9 +61,11 @@ void* d_vbo_buffer = NULL;
 float g_fAnim = 0.0;
 
 // mouse controls
-int mouse_old_x, mouse_old_y;
+int mouse_old_x;
+int mouse_old_y;
 int mouse_buttons = 0;
-float rotate_x = 0.0, rotate_y = 0.0;
+float rotate_x = 0.0;
+float rotate_y = 0.0;
 float translate_z = -3.0;
 
 StopWatchInterface* timer = NULL;
@@ -108,6 +110,7 @@ __global__ void simple_vbo_kernel(float4* pos, unsigned int width, unsigned int 
     u = u * 2.0f - 1.0f;
     v = v * 2.0f - 1.0f;
 
+    //time = 0;
     // calculate simple sine wave pattern
     float freq = 4.0f;
     float w = sinf(u * freq + time) * cosf(v * freq + time) * 0.5f;
@@ -280,6 +283,7 @@ void display()
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glTranslatef(0.0, 0.0, translate_z);
+
     glRotatef(rotate_x, 1.0, 0.0, 0.0);
     glRotatef(rotate_y, 0.0, 1.0, 0.0);
 
@@ -361,11 +365,13 @@ void motion(int x, int y)
 
     if (mouse_buttons & 1)
     {
+        //·Æ¹«¥ªÁä
         rotate_x += dy * 0.2f;
         rotate_y += dx * 0.2f;
     }
     else if (mouse_buttons & 4)
     {
+        //·Æ¹«¥kÁä
         translate_z += dy * 0.01f;
     }
 

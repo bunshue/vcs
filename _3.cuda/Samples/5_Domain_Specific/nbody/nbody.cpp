@@ -767,10 +767,13 @@ void mouse(int button, int state, int x, int y) {
     glutPostRedisplay();
 }
 
-void motion(int x, int y) {
-    if (bShowSliders) {
+void motion(int x, int y)
+{
+    if (bShowSliders)
+    {
         // call parameter list motion function
-        if (paramlist->Motion(x, y)) {
+        if (paramlist->Motion(x, y))
+        {
             updateParams();
             glutPostRedisplay();
             return;
@@ -780,16 +783,19 @@ void motion(int x, int y) {
     float dx = (float)(x - ox);
     float dy = (float)(y - oy);
 
-    if (buttonState == 3) {
+    if (buttonState == 3)
+    {
         // left+middle = zoom
         camera_trans[2] += (dy / 100.0f) * 0.5f * fabs(camera_trans[2]);
     }
-    else if (buttonState & 2) {
+    else if (buttonState & 2)
+    {
         // middle = translate
         camera_trans[0] += dx / 100.0f;
         camera_trans[1] -= dy / 100.0f;
     }
-    else if (buttonState & 1) {
+    else if (buttonState & 1)
+    {
         // left = rotate
         camera_rot[0] += dy / 5.0f;
         camera_rot[1] += dx / 5.0f;
@@ -801,8 +807,10 @@ void motion(int x, int y) {
 }
 
 // commented out to remove unused parameter warnings in Linux
-void key(unsigned char key, int /*x*/, int /*y*/) {
-    switch (key) {
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
+{
+    switch (key)
+    {
     case ' ':
         bPause = !bPause;
         break;
@@ -815,16 +823,18 @@ void key(unsigned char key, int /*x*/, int /*y*/) {
         break;
 
     case 13:  // return
-        if (bSupportDouble) {
-            if (fp64) {
+        if (bSupportDouble)
+        {
+            if (fp64)
+            {
                 switchDemoPrecision<float, double>();
             }
-            else {
+            else
+            {
                 switchDemoPrecision<double, float>();
             }
 
-            printf("> %s precision floating point simulation\n",
-                fp64 ? "Double" : "Single");
+            printf("> %s precision floating point simulation\n", fp64 ? "Double" : "Single");
         }
 
         break;
@@ -840,8 +850,7 @@ void key(unsigned char key, int /*x*/, int /*y*/) {
 
     case 'p':
     case 'P':
-        displayMode = (ParticleRenderer::DisplayMode)(
-            (displayMode + 1) % ParticleRenderer::PARTICLE_NUM_MODES);
+        displayMode = (ParticleRenderer::DisplayMode)((displayMode + 1) % ParticleRenderer::PARTICLE_NUM_MODES);
         break;
 
     case 'c':
@@ -851,8 +860,7 @@ void key(unsigned char key, int /*x*/, int /*y*/) {
         break;
 
     case '[':
-        activeDemo =
-            (activeDemo == 0) ? numDemos - 1 : (activeDemo - 1) % numDemos;
+        activeDemo = (activeDemo == 0) ? numDemos - 1 : (activeDemo - 1) % numDemos;
         selectDemo(activeDemo);
         break;
 
@@ -872,30 +880,36 @@ void key(unsigned char key, int /*x*/, int /*y*/) {
         break;
 
     case '1':
-        if (fp64) {
+        if (fp64)
+        {
             NBodyDemo<double>::reset(numBodies, NBODY_CONFIG_SHELL);
         }
-        else {
+        else
+        {
             NBodyDemo<float>::reset(numBodies, NBODY_CONFIG_SHELL);
         }
 
         break;
 
     case '2':
-        if (fp64) {
+        if (fp64)
+        {
             NBodyDemo<double>::reset(numBodies, NBODY_CONFIG_RANDOM);
         }
-        else {
+        else
+        {
             NBodyDemo<float>::reset(numBodies, NBODY_CONFIG_RANDOM);
         }
 
         break;
 
     case '3':
-        if (fp64) {
+        if (fp64)
+        {
             NBodyDemo<double>::reset(numBodies, NBODY_CONFIG_EXPAND);
         }
-        else {
+        else
+        {
             NBodyDemo<float>::reset(numBodies, NBODY_CONFIG_EXPAND);
         }
 
@@ -905,30 +919,24 @@ void key(unsigned char key, int /*x*/, int /*y*/) {
     glutPostRedisplay();
 }
 
-void special(int key, int x, int y) {
+void special(int key, int x, int y)
+{
     paramlist->Special(key, x, y);
     glutPostRedisplay();
 }
 
 void idle(void) { glutPostRedisplay(); }
 
-void showHelp() {
+void showHelp()
+{
     printf("\t-fullscreen       (run n-body simulation in fullscreen mode)\n");
-    printf(
-        "\t-fp64             (use double precision floating point values for "
-        "simulation)\n");
+    printf(        "\t-fp64             (use double precision floating point values for simulation)\n");
     printf("\t-hostmem          (stores simulation data in host memory)\n");
     printf("\t-benchmark        (run benchmark to measure performance) \n");
-    printf(
-        "\t-numbodies=<N>    (number of bodies (>= 1) to run in simulation) \n");
-    printf(
-        "\t-device=<d>       (where d=0,1,2.... for the CUDA device to use)\n");
-    printf(
-        "\t-numdevices=<i>   (where i=(number of CUDA devices > 0) to use for "
-        "simulation)\n");
-    printf(
-        "\t-compare          (compares simulation results running once on the "
-        "default GPU and once on the CPU)\n");
+    printf(        "\t-numbodies=<N>    (number of bodies (>= 1) to run in simulation) \n");
+    printf(        "\t-device=<d>       (where d=0,1,2.... for the CUDA device to use)\n");
+    printf(        "\t-numdevices=<i>   (where i=(number of CUDA devices > 0) to use for simulation)\n");
+    printf(        "\t-compare          (compares simulation results running once on the default GPU and once on the CPU)\n");
     printf("\t-cpu              (run n-body simulation on the CPU)\n");
     printf("\t-tipsy=<file.bin> (load a tipsy model file for simulation)\n\n");
 }
@@ -940,19 +948,17 @@ int main(int argc, char** argv)
 {
     bool bTestResults = true;
 
-    if (checkCmdLineFlag(argc, (const char**)argv, "help")) {
+    if (checkCmdLineFlag(argc, (const char**)argv, "help"))
+    {
         printf("\n> Command line options\n");
         showHelp();
         return 0;
     }
 
-    printf(
-        "Run \"nbody -benchmark [-numbodies=<numBodies>]\" to measure "
-        "performance.\n");
+    printf(        "Run \"nbody -benchmark [-numbodies=<numBodies>]\" to measure performance.\n");
     showHelp();
 
-    printf(
-        "NOTE: The CUDA Samples are not meant for performance measurements. "
+    printf(        "NOTE: The CUDA Samples are not meant for performance measurements. "
         "Results may vary when GPU Boost is enabled.\n\n");
 
     bFullscreen = (checkCmdLineFlag(argc, (const char**)argv, "fullscreen") != 0);
@@ -964,9 +970,7 @@ int main(int argc, char** argv)
 
     benchmark = (checkCmdLineFlag(argc, (const char**)argv, "benchmark") != 0);
 
-    compareToCPU =
-        ((checkCmdLineFlag(argc, (const char**)argv, "compare") != 0) ||
-            (checkCmdLineFlag(argc, (const char**)argv, "qatest") != 0));
+    compareToCPU =        ((checkCmdLineFlag(argc, (const char**)argv, "compare") != 0) ||            (checkCmdLineFlag(argc, (const char**)argv, "qatest") != 0));
 
     QATest = (checkCmdLineFlag(argc, (const char**)argv, "qatest") != 0);
     useHostMem = (checkCmdLineFlag(argc, (const char**)argv, "hostmem") != 0);
@@ -976,18 +980,18 @@ int main(int argc, char** argv)
 
     useCpu = (checkCmdLineFlag(argc, (const char**)argv, "cpu") != 0);
 
-    if (checkCmdLineFlag(argc, (const char**)argv, "numdevices")) {
-        numDevsRequested =
-            getCmdLineArgumentInt(argc, (const char**)argv, "numdevices");
+    if (checkCmdLineFlag(argc, (const char**)argv, "numdevices"))
+    {
+        numDevsRequested =            getCmdLineArgumentInt(argc, (const char**)argv, "numdevices");
 
-        if (numDevsRequested < 1) {
-            printf(
-                "Error: \"number of CUDA devices\" specified %d is invalid.  Value "
-                "should be >= 1\n",
+        if (numDevsRequested < 1)
+        {
+            printf(                "Error: \"number of CUDA devices\" specified %d is invalid.  Value should be >= 1\n",
                 numDevsRequested);
             exit(bTestResults ? EXIT_SUCCESS : EXIT_FAILURE);
         }
-        else {
+        else
+        {
             printf("number of CUDA devices  = %d\n", numDevsRequested);
         }
     }
@@ -996,29 +1000,32 @@ int main(int argc, char** argv)
     bool customGPU = false;
     cudaGetDeviceCount(&numDevsAvailable);
 
-    if (numDevsAvailable < numDevsRequested) {
-        printf("Error: only %d Devices available, %d requested.  Exiting.\n",
-            numDevsAvailable, numDevsRequested);
+    if (numDevsAvailable < numDevsRequested)
+    {
+        printf("Error: only %d Devices available, %d requested.  Exiting.\n",            numDevsAvailable, numDevsRequested);
         exit(EXIT_FAILURE);
     }
 
-    if (numDevsRequested > 1) {
-        // If user did not explicitly request host memory to be used, we default to
-        // P2P.
+    if (numDevsRequested > 1)
+    {
+        // If user did not explicitly request host memory to be used, we default to P2P.
         // We fallback to host memory, if any of GPUs does not support P2P.
         bool allGPUsSupportP2P = true;
         if (!useHostMem) {
             // Enable P2P only in one direction, as every peer will access gpu0
-            for (int i = 1; i < numDevsRequested; ++i) {
+            for (int i = 1; i < numDevsRequested; ++i)
+            {
                 int canAccessPeer;
                 checkCudaErrors(cudaDeviceCanAccessPeer(&canAccessPeer, i, 0));
 
-                if (canAccessPeer != 1) {
+                if (canAccessPeer != 1)
+                {
                     allGPUsSupportP2P = false;
                 }
             }
 
-            if (!allGPUsSupportP2P) {
+            if (!allGPUsSupportP2P)
+            {
                 useHostMem = true;
                 useP2P = false;
             }
@@ -1026,16 +1033,15 @@ int main(int argc, char** argv)
     }
 
     printf("> %s mode\n", bFullscreen ? "Fullscreen" : "Windowed");
-    printf("> Simulation data stored in %s memory\n",
-        useHostMem ? "system" : "video");
-    printf("> %s precision floating point simulation\n",
-        fp64 ? "Double" : "Single");
+    printf("> Simulation data stored in %s memory\n",        useHostMem ? "system" : "video");
+    printf("> %s precision floating point simulation\n",        fp64 ? "Double" : "Single");
     printf("> %d Devices used for simulation\n", numDevsRequested);
 
     int devID;
     cudaDeviceProp props;
 
-    if (useCpu) {
+    if (useCpu)
+    {
         useHostMem = true;
         compareToCPU = false;
         bSupportDouble = true;
@@ -1048,19 +1054,23 @@ int main(int argc, char** argv)
     }
 
     // Initialize GL and GLUT if necessary
-    if (!benchmark && !compareToCPU) {
+    if (!benchmark && !compareToCPU)
+    {
         initGL(&argc, argv);
         initParameters();
     }
 
-    if (!useCpu) {
+    if (!useCpu)
+    {
         // Now choose the CUDA Device
         // Either without GL interop:
-        if (benchmark || compareToCPU || useHostMem) {
+        if (benchmark || compareToCPU || useHostMem)
+        {
             // Note if we are using host memory for the body system, we
             // don't use CUDA-GL interop.
 
-            if (checkCmdLineFlag(argc, (const char**)argv, "device")) {
+            if (checkCmdLineFlag(argc, (const char**)argv, "device"))
+            {
                 customGPU = true;
             }
 
@@ -1068,7 +1078,8 @@ int main(int argc, char** argv)
         }
         else  // or with GL interop:
         {
-            if (checkCmdLineFlag(argc, (const char**)argv, "device")) {
+            if (checkCmdLineFlag(argc, (const char**)argv, "device"))
+            {
                 customGPU = true;
             }
 
@@ -1082,7 +1093,8 @@ int main(int argc, char** argv)
 
 #if CUDART_VERSION < 4000
 
-        if (numDevsRequested > 1) {
+        if (numDevsRequested > 1)
+        {
             printf("MultiGPU n-body requires CUDA 4.0 or later\n");
             exit(EXIT_SUCCESS);
         }
@@ -1090,49 +1102,53 @@ int main(int argc, char** argv)
 #endif
 
         // Initialize devices
-        if (numDevsRequested > 1 && customGPU) {
+        if (numDevsRequested > 1 && customGPU)
+        {
             printf("You can't use --numdevices and --device at the same time.\n");
             exit(EXIT_SUCCESS);
         }
 
-        if (customGPU || numDevsRequested == 1) {
+        if (customGPU || numDevsRequested == 1)
+        {
             cudaDeviceProp props;
             checkCudaErrors(cudaGetDeviceProperties(&props, devID));
-            printf("> Compute %d.%d CUDA device: [%s]\n", props.major, props.minor,
-                props.name);
+            printf("> Compute %d.%d CUDA device: [%s]\n", props.major, props.minor,                props.name);
         }
-        else {
-            for (int i = 0; i < numDevsRequested; i++) {
+        else
+        {
+            for (int i = 0; i < numDevsRequested; i++)
+            {
                 cudaDeviceProp props;
                 checkCudaErrors(cudaGetDeviceProperties(&props, i));
 
-                printf("> Compute %d.%d CUDA device: [%s]\n", props.major, props.minor,
-                    props.name);
+                printf("> Compute %d.%d CUDA device: [%s]\n", props.major, props.minor,                    props.name);
 
-                if (useHostMem) {
+                if (useHostMem)
+                {
 #if CUDART_VERSION >= 2020
 
-                    if (!props.canMapHostMemory) {
+                    if (!props.canMapHostMemory)
+                    {
                         fprintf(stderr, "Device %d cannot map host memory!\n", devID);
                         exit(EXIT_SUCCESS);
                     }
 
-                    if (numDevsRequested > 1) {
+                    if (numDevsRequested > 1)
+                    {
                         checkCudaErrors(cudaSetDevice(i));
                     }
 
                     checkCudaErrors(cudaSetDeviceFlags(cudaDeviceMapHost));
 #else
-                    fprintf(stderr,
-                        "This CUDART version does not support "
-                        "<cudaDeviceProp.canMapHostMemory> field\n");
+                    fprintf(stderr,                        "This CUDART version does not support <cudaDeviceProp.canMapHostMemory> field\n");
                     exit(EXIT_SUCCESS);
 #endif
                 }
             }
 
             // CC 1.2 and earlier do not support double precision
-            if (props.major * 10 + props.minor <= 12) {
+            if (props.major * 10 + props.minor <= 12)
+            {
                 bSupportDouble = false;
             }
         }
@@ -1140,10 +1156,9 @@ int main(int argc, char** argv)
         // if(numDevsRequested > 1)
         //    checkCudaErrors(cudaSetDevice(devID));
 
-        if (fp64 && !bSupportDouble) {
-            fprintf(stderr,
-                "One or more of the requested devices does not support double "
-                "precision floating-point\n");
+        if (fp64 && !bSupportDouble)
+        {
+            fprintf(stderr,                "One or more of the requested devices does not support double precision floating-point\n");
             exit(EXIT_SUCCESS);
         }
     }
@@ -1151,11 +1166,13 @@ int main(int argc, char** argv)
     numIterations = 0;
     blockSize = 0;
 
-    if (checkCmdLineFlag(argc, (const char**)argv, "i")) {
+    if (checkCmdLineFlag(argc, (const char**)argv, "i"))
+    {
         numIterations = getCmdLineArgumentInt(argc, (const char**)argv, "i");
     }
 
-    if (checkCmdLineFlag(argc, (const char**)argv, "blockSize")) {
+    if (checkCmdLineFlag(argc, (const char**)argv, "blockSize"))
+    {
         blockSize = getCmdLineArgumentInt(argc, (const char**)argv, "blockSize");
     }
 
@@ -1170,47 +1187,48 @@ int main(int argc, char** argv)
 #else
         numBodies = 4096;
 #endif
-    else if (numDevsRequested == 1) {
+    else if (numDevsRequested == 1)
+    {
         numBodies = compareToCPU ? 4096 : blockSize * 4 * props.multiProcessorCount;
     }
-    else {
+    else
+    {
         numBodies = 0;
 
-        for (int i = 0; i < numDevsRequested; i++) {
+        for (int i = 0; i < numDevsRequested; i++)
+        {
             cudaDeviceProp props;
             checkCudaErrors(cudaGetDeviceProperties(&props, i));
-            numBodies +=
-                blockSize * (props.major >= 2 ? 4 : 1) * props.multiProcessorCount;
+            numBodies +=                blockSize * (props.major >= 2 ? 4 : 1) * props.multiProcessorCount;
         }
     }
 
-    if (checkCmdLineFlag(argc, (const char**)argv, "numbodies")) {
+    if (checkCmdLineFlag(argc, (const char**)argv, "numbodies"))
+    {
         numBodies = getCmdLineArgumentInt(argc, (const char**)argv, "numbodies");
 
-        if (numBodies < 1) {
-            printf(
-                "Error: \"number of bodies\" specified %d is invalid.  Value should "
-                "be >= 1\n",
-                numBodies);
+        if (numBodies < 1)
+        {
+            printf(                "Error: \"number of bodies\" specified %d is invalid.  Value should be >= 1\n",                numBodies);
             exit(bTestResults ? EXIT_SUCCESS : EXIT_FAILURE);
         }
-        else if (numBodies % blockSize) {
+        else if (numBodies % blockSize)
+        {
             int newNumBodies = ((numBodies / blockSize) + 1) * blockSize;
-            printf(
-                "Warning: \"number of bodies\" specified %d is not a multiple of "
-                "%d.\n",
-                numBodies, blockSize);
+            printf(                "Warning: \"number of bodies\" specified %d is not a multiple of %d.\n",                numBodies, blockSize);
             printf("Rounding up to the nearest multiple: %d.\n", newNumBodies);
             numBodies = newNumBodies;
         }
-        else {
+        else
+        {
             printf("number of bodies = %d\n", numBodies);
         }
     }
 
     char* fname;
 
-    if (getCmdLineArgumentString(argc, (const char**)argv, "tipsy", &fname)) {
+    if (getCmdLineArgumentString(argc, (const char**)argv, "tipsy", &fname))
+    {
         tipsyFile.assign(fname, strlen(fname));
         cycleDemo = false;
         bShowSliders = false;
@@ -1283,10 +1301,10 @@ int main(int argc, char** argv)
         {
             glutDisplayFunc(display);
             glutReshapeFunc(reshape);
+            glutKeyboardFunc(keyboard);
+            glutSpecialFunc(special);
             glutMouseFunc(mouse);
             glutMotionFunc(motion);
-            glutKeyboardFunc(key);
-            glutSpecialFunc(special);
             glutIdleFunc(idle);
 
             if (!useCpu)
@@ -1317,10 +1335,10 @@ int main(int argc, char** argv)
         {
             glutDisplayFunc(display);
             glutReshapeFunc(reshape);
+            glutKeyboardFunc(keyboard);
+            glutSpecialFunc(special);
             glutMouseFunc(mouse);
             glutMotionFunc(motion);
-            glutKeyboardFunc(key);
-            glutSpecialFunc(special);
             glutIdleFunc(idle);
 
             if (!useCpu)
