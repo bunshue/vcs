@@ -46,7 +46,8 @@ void cleanup();
 
 void displayFunc(void)
 {
-    printf("d");
+    //printf("dis ");
+
     sdkStartTimer(&timer);
     TColor* d_dst = NULL;
     size_t num_bytes;
@@ -82,10 +83,9 @@ void displayFunc(void)
 
 void timerEvent(int value)
 {
-    //printf("t");
+    //printf("timer ");
     if (glutGetWindow())
     {
-        //printf("r");
         //printf("glutGetWindow ");
         glutPostRedisplay();
         glutTimerFunc(REFRESH_DELAY, timerEvent, 0);    //設定timer事件

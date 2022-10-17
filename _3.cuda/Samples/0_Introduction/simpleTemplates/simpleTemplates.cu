@@ -223,7 +223,11 @@ void runTest(int argc, char** argv, int len)
     ArrayComparator<T> comparator;
     ArrayFileWriter<T> writer;
 
-    writer.write("./dump_data.dat", h_odata, num_threads, 0.0f);
+    char filename[30];
+    sprintf(filename, "./dump_data_%d.bin", len);
+    writer.write(filename, h_odata, num_threads, 0.0f);
+
+    //writer.write("./dump_data.dat", h_odata, num_threads, 0.0f);
 
     // custom output handling when no regression test running
     // in this case check if the result is equivalent to the expected solution

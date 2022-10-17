@@ -16,20 +16,19 @@
 #include <helper_functions.h>  // includes for helper utility functions
 #include <helper_cuda.h>  // includes for cuda error checking and initialization
 
-const char *sSDKsample = "CUDA ImageDenoising";
+const char* sSDKsample = "CUDA ImageDenoising";
 
-const char *filterMode[] = {"Passthrough", "KNN method", "NLM method",
-                            "Quick NLM(NLM2) method", NULL};
+const char* filterMode[] = { "Passthrough", "KNN method", "NLM method", "Quick NLM(NLM2) method", NULL };
 
 ////////////////////////////////////////////////////////////////////////////////
 // Global data handlers and parameters
 ////////////////////////////////////////////////////////////////////////////////
 // OpenGL PBO and texture "names"
 GLuint gl_PBO, gl_Tex;
-struct cudaGraphicsResource *cuda_pbo_resource;  // handles OpenGL-CUDA exchange
+struct cudaGraphicsResource* cuda_pbo_resource;  // handles OpenGL-CUDA exchange
 // Source image on the host side
 
-uchar4 *h_Src1;
+uchar4* h_Src1;
 uchar4* h_Src2;
 int imageW, imageH;
 
@@ -39,7 +38,7 @@ int imageW, imageH;
 int g_Kernel = 0;
 bool g_FPS = false;
 bool g_Diag = false;
-StopWatchInterface *timer = NULL;
+StopWatchInterface* timer = NULL;
 
 // Algorithms global parameters
 const float noiseStep = 0.025f;
@@ -94,43 +93,6 @@ void runImageFilters(TColor* d_dst)
     case 0:
         cuda_Copy(d_dst, imageW, imageH, texImage);
         break;
-
-    case 1:
-        if (!g_Diag)
-        {
-            cuda_KNN(d_dst, imageW, imageH, 1.0f / (knnNoise * knnNoise), lerpC, texImage);
-        }
-        else
-        {
-            cuda_KNNdiag(d_dst, imageW, imageH, 1.0f / (knnNoise * knnNoise), lerpC, texImage);
-        }
-
-        break;
-
-    case 2:
-        if (!g_Diag)
-        {
-            cuda_NLM(d_dst, imageW, imageH, 1.0f / (nlmNoise * nlmNoise), lerpC, texImage);
-        }
-        else
-        {
-            cuda_NLMdiag(d_dst, imageW, imageH, 1.0f / (nlmNoise * nlmNoise), lerpC, texImage);
-        }
-
-        break;
-
-    case 3:
-        if (!g_Diag)
-        {
-            cuda_NLM2(d_dst, imageW, imageH, 1.0f / (nlmNoise * nlmNoise), lerpC, texImage);
-        }
-        else
-        {
-            cuda_NLM2diag(d_dst, imageW, imageH, 1.0f / (nlmNoise * nlmNoise), lerpC, texImage);
-        }
-
-        break;
-
     case 10:
         printf("Change some data\n");
 
@@ -139,8 +101,6 @@ void runImageFilters(TColor* d_dst)
         //print_some_data(texImage);    //TBD
 
         //cuda_Copy(d_dst, imageW, imageH, texImage);
-
-        //cuda_NLM(d_dst, imageW/2, imageH, 1.0f / (nlmNoise * nlmNoise * 5), lerpC, texImage);
 
         g_Kernel = 0;
         break;
@@ -228,7 +188,7 @@ void timerEvent(int value)
     {
         //printf("glutGetWindow ");
         glutPostRedisplay();
-        glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
+        glutTimerFunc(REFRESH_DELAY, timerEvent, 0);    //設定timer事件
     }
 }
 
@@ -245,59 +205,45 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
 
     case '1':
         printf("Passthrough.\n");
-        g_Kernel = 0;
         break;
 
     case '2':
         printf("KNN method \n");
-        g_Kernel = 1;
         break;
 
     case '3':
         printf("NLM method\n");
-        g_Kernel = 2;
         break;
 
     case '4':
         printf("Quick NLM(NLM2) method\n");
-        g_Kernel = 3;
         break;
 
     case 'c':
         printf("Change some data\n");
-        g_Kernel = 10;
         break;
 
     case 'a':
         printf("Copy ims 01\n");
-        g_Kernel = 11;
         break;
 
     case 'b':
         printf("Copy ims 03\n");
-        g_Kernel = 13;
         break;
 
     case '*':
-        printf(g_Diag ? "LERP highlighting mode.\n" : "Normal mode.\n");
-        g_Diag = !g_Diag;
         break;
 
     case 'n':
         printf("Decrease noise level.\n");
-        knnNoise -= noiseStep;
-        nlmNoise -= noiseStep;
         break;
 
     case 'N':
         printf("Increase noise level.\n");
-        knnNoise += noiseStep;
-        nlmNoise += noiseStep;
         break;
 
     case 'l':
         printf("Decrease LERP quotient.\n");
-        lerpC = MAX(lerpC - lerpStep, 0.0f);
         break;
 
     case 'L':

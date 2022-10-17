@@ -8,25 +8,25 @@
 #pragma pack(1)
 
 typedef struct {
-  short type;
-  int size;
-  short reserved1;
-  short reserved2;
-  int offset;
+    short type;
+    int size;
+    short reserved1;
+    short reserved2;
+    int offset;
 } BMPHeader;
 
 typedef struct {
-  int size;
-  int width;
-  int height;
-  short planes;
-  short bitsPerPixel;
-  unsigned compression;
-  unsigned imageSize;
-  int xPelsPerMeter;
-  int yPelsPerMeter;
-  int clrUsed;
-  int clrImportant;
+    int size;
+    int width;
+    int height;
+    short planes;
+    short bitsPerPixel;
+    unsigned compression;
+    unsigned imageSize;
+    int xPelsPerMeter;
+    int yPelsPerMeter;
+    int clrUsed;
+    int clrImportant;
 } BMPInfoHeader;
 
 // Isolated definition

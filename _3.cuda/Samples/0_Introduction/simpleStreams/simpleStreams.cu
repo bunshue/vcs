@@ -19,13 +19,10 @@
  *
 */
 
-const char* sEventSyncMethod[] = { "cudaEventDefault", "cudaEventBlockingSync",
-                                  "cudaEventDisableTiming", NULL };
+const char* sEventSyncMethod[] = { "cudaEventDefault", "cudaEventBlockingSync", "cudaEventDisableTiming", NULL };
 
-const char* sDeviceSyncMethod[] = {
-    "cudaDeviceScheduleAuto",         "cudaDeviceScheduleSpin",
-    "cudaDeviceScheduleYield",        "INVALID",
-    "cudaDeviceScheduleBlockingSync", NULL };
+const char* sDeviceSyncMethod[] = { "cudaDeviceScheduleAuto", "cudaDeviceScheduleSpin",
+    "cudaDeviceScheduleYield", "INVALID", "cudaDeviceScheduleBlockingSync", NULL };
 
 // System includes
 #include <stdio.h>
@@ -37,10 +34,6 @@ const char* sDeviceSyncMethod[] = {
 // helper functions and utilities to work with CUDA
 #include <helper_functions.h>
 #include <helper_cuda.h>
-
-#ifndef WIN32
-#include <sys/mman.h>  // for mmap() / munmap()
-#endif
 
 // Macro to aligned up to the memory size in question
 #define MEMORY_ALIGNMENT 4096
@@ -72,38 +65,18 @@ bool correct_data(int* a, const int n, const int c)
 
 inline void AllocateHostMemory(bool bPinGenericMemory, int** pp_a, int** ppAligned_a, int nbytes)
 {
-#if CUDART_VERSION >= 4000
-#if !defined(__arm__) && !defined(__aarch64__)
-    if (bPinGenericMemory) {
+    if (bPinGenericMemory)
+    {
         // allocate a generic page-aligned chunk of system memory
-#ifdef WIN32
-        printf(
-            "> VirtualAlloc() allocating %4.2f Mbytes of (generic page-aligned system memory)\n",
-            (float)nbytes / 1048576.0f);
-        *pp_a = (int*)VirtualAlloc(NULL, (nbytes + MEMORY_ALIGNMENT),
-            MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
-#else
-        printf(
-            "> mmap() allocating %4.2f Mbytes (generic page-aligned system "
-            "memory)\n",
-            (float)nbytes / 1048576.0f);
-        *pp_a = (int*)mmap(NULL, (nbytes + MEMORY_ALIGNMENT),
-            PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANON, -1, 0);
-#endif
+        printf("> VirtualAlloc() allocating %4.2f Mbytes of (generic page-aligned system memory)\n", (float)nbytes / 1048576.0f);
+        *pp_a = (int*)VirtualAlloc(NULL, (nbytes + MEMORY_ALIGNMENT), MEM_RESERVE | MEM_COMMIT, PAGE_READWRITE);
+        *ppAligned_a = (int*)ALIGN_UP(*pp_a, MEMORY_ALIGNMENT);
 
-        * ppAligned_a = (int*)ALIGN_UP(*pp_a, MEMORY_ALIGNMENT);
-
-        printf(
-            "> cudaHostRegister() registering %4.2f Mbytes of generic allocated "
-            "system memory\n",
-            (float)nbytes / 1048576.0f);
+        printf("> cudaHostRegister() registering %4.2f Mbytes of generic allocated system memory\n", (float)nbytes / 1048576.0f);
         // pin allocate memory
-        checkCudaErrors(
-            cudaHostRegister(*ppAligned_a, nbytes, cudaHostRegisterMapped));
+        checkCudaErrors(cudaHostRegister(*ppAligned_a, nbytes, cudaHostRegisterMapped));
     }
     else
-#endif
-#endif
     {
         printf("> cudaMallocHost() allocating %4.2f Mbytes of system memory\n", (float)nbytes / 1048576.0f);
         // allocate host memory (pinned is required for achieve asynchronicity)
@@ -114,21 +87,14 @@ inline void AllocateHostMemory(bool bPinGenericMemory, int** pp_a, int** ppAlign
 
 inline void FreeHostMemory(bool bPinGenericMemory, int** pp_a, int** ppAligned_a, int nbytes)
 {
-#if CUDART_VERSION >= 4000
-#if !defined(__arm__) && !defined(__aarch64__)
     // CUDA 4.0 support pinning of generic host memory
-    if (bPinGenericMemory) {
+    if (bPinGenericMemory)
+    {
         // unpin and delete host memory
         checkCudaErrors(cudaHostUnregister(*ppAligned_a));
-#ifdef WIN32
         VirtualFree(*pp_a, 0, MEM_RELEASE);
-#else
-        munmap(*pp_a, nbytes);
-#endif
     }
     else
-#endif
-#endif
     {
         cudaFreeHost(*pp_a);
     }
@@ -182,20 +148,20 @@ int main(int argc, char** argv)
 
     if ((device_sync_method = getCmdLineArgumentInt(argc, (const char**)argv, "sync_method")) >= 0)
     {
-        if (device_sync_method == 0 || device_sync_method == 1 ||
-            device_sync_method == 2 || device_sync_method == 4) {
-            printf("Device synchronization method set to = %s\n",
-                sSyncMethod[device_sync_method]);
+        if (device_sync_method == 0 || device_sync_method == 1 || device_sync_method == 2 || device_sync_method == 4)
+        {
+            printf("Device synchronization method set to = %s\n", sSyncMethod[device_sync_method]);
             printf("Setting reps to 100 to demonstrate steady state\n");
             nreps = 100;
         }
-        else {
-            printf("Invalid command line option sync_method=\"%d\"\n",
-                device_sync_method);
+        else
+        {
+            printf("Invalid command line option sync_method=\"%d\"\n", device_sync_method);
             return EXIT_FAILURE;
         }
     }
-    else {
+    else
+    {
         printHelp();
         return EXIT_SUCCESS;
     }
@@ -219,8 +185,7 @@ int main(int argc, char** argv)
 
     if (0 == num_devices)
     {
-        printf(
-            "your system does not have a CUDA capable device, waiving test...\n");
+        printf("your system does not have a CUDA capable device, waiving test...\n");
         return EXIT_WAIVED;
     }
 
@@ -258,8 +223,7 @@ int main(int argc, char** argv)
 
     printf("> CUDA Capable: SM %d.%d hardware\n", deviceProp.major, deviceProp.minor);
     printf("> %d Multiprocessor(s) x %d (Cores/Multiprocessor) = %d (Cores)\n", deviceProp.multiProcessorCount,
-        _ConvertSMVer2Cores(deviceProp.major, deviceProp.minor),
-        _ConvertSMVer2Cores(deviceProp.major, deviceProp.minor) * deviceProp.multiProcessorCount);
+        _ConvertSMVer2Cores(deviceProp.major, deviceProp.minor), _ConvertSMVer2Cores(deviceProp.major, deviceProp.minor) * deviceProp.multiProcessorCount);
 
     printf("> scale_factor = %1.4f\n", 1.0f / scale_factor);
     printf("> array_size   = %d\n\n", n);
@@ -299,8 +263,7 @@ int main(int argc, char** argv)
     // create CUDA event handles
     // use blocking sync
     cudaEvent_t start_event, stop_event;
-    int eventflags = ((device_sync_method == cudaDeviceBlockingSync) ? cudaEventBlockingSync
-        : cudaEventDefault);
+    int eventflags = ((device_sync_method == cudaDeviceBlockingSync) ? cudaEventBlockingSync : cudaEventDefault);
 
     checkCudaErrors(cudaEventCreateWithFlags(&start_event, eventflags));
     checkCudaErrors(cudaEventCreateWithFlags(&stop_event, eventflags));
@@ -360,10 +323,8 @@ int main(int argc, char** argv)
             init_array << <blocks, threads, 0, streams[i] >> > (d_a + i * n / nstreams, d_c, niterations);
         }
 
-        // asynchronously launch nstreams memcopies.  Note that memcopy in stream x
-        // will only
-        //   commence executing when all previous CUDA calls in stream x have
-        //   completed
+        // asynchronously launch nstreams memcopies.  Note that memcopy in stream x will only
+        //   commence executing when all previous CUDA calls in stream x have completed
         for (int i = 0; i < nstreams; i++)
         {
             checkCudaErrors(cudaMemcpyAsync(hAligned_a + i * n / nstreams, d_a + i * n / nstreams, nbytes / nstreams, cudaMemcpyDeviceToHost, streams[i]));

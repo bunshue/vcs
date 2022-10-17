@@ -99,7 +99,6 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Platform)'=='Win32'">
     <Link>
-      
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Platform)'=='x64'">
@@ -113,9 +112,6 @@
     <ClCompile Include="imageDenoisingGL.cpp" />
     <ClInclude Include="imageDenoising.h" />
     <None Include="imageDenoising_copy_kernel.cuh" />
-    <None Include="imageDenoising_knn_kernel.cuh" />
-    <None Include="imageDenoising_nlm2_kernel.cuh" />
-    <None Include="imageDenoising_nlm_kernel.cuh" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
