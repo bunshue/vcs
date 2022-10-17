@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{F84AC8E5-43DB-4F94-A854-A95DF3143849}</ProjectGuid>
     <RootNamespace>matrixMulDynlinkJIT_vs2022</RootNamespace>
     <ProjectName>matrixMulDynlinkJIT</ProjectName>
     <CudaToolkitCustomDir />

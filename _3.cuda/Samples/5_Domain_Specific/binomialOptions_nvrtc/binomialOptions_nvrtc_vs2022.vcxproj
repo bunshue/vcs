@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{61E60B9B-16B9-4888-A9A1-795A39CF2FC3}</ProjectGuid>
     <RootNamespace>binomialOptions_nvrtc_vs2022</RootNamespace>
     <ProjectName>binomialOptions_nvrtc</ProjectName>
     <CudaToolkitCustomDir />
@@ -63,7 +63,8 @@
       <OutputFile>$(OutDir)/binomialOptions_nvrtc.exe</OutputFile>
     </Link>
     <CudaCompile>
-      <CodeGeneration></CodeGeneration>
+      <CodeGeneration>
+      </CodeGeneration>
       <AdditionalOptions>-Xcompiler "/wd 4819"  --threads 0 </AdditionalOptions>
       <Include>./;../../../Common</Include>
       <Defines>WIN32</Defines>

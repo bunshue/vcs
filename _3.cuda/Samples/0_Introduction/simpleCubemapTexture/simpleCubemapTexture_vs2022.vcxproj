@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{A4DEB674-2B20-4DCF-BF87-087B388C323C}</ProjectGuid>
     <RootNamespace>simpleCubemapTexture_vs2022</RootNamespace>
     <ProjectName>simpleCubemapTexture</ProjectName>
     <CudaToolkitCustomDir />
@@ -99,7 +99,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <CudaCompile Include="simpleCubemapTexture.cu" />
-
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

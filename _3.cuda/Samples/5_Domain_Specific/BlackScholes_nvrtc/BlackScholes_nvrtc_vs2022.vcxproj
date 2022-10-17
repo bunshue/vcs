@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{7AB6EDA2-B5DE-4257-BA31-0A4C48510FE0}</ProjectGuid>
     <RootNamespace>BlackScholes_nvrtc_vs2022</RootNamespace>
     <ProjectName>BlackScholes_nvrtc</ProjectName>
     <CudaToolkitCustomDir />
@@ -63,7 +63,8 @@
       <OutputFile>$(OutDir)/BlackScholes_nvrtc.exe</OutputFile>
     </Link>
     <CudaCompile>
-      <CodeGeneration></CodeGeneration>
+      <CodeGeneration>
+      </CodeGeneration>
       <AdditionalOptions>-Xcompiler "/wd 4819"  --threads 0 </AdditionalOptions>
       <Include>./;../../../Common</Include>
       <Defines>WIN32</Defines>

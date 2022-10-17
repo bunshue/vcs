@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{B757AD4A-391D-4922-81A2-8FA832D1C99B}</ProjectGuid>
     <RootNamespace>batchedLabelMarkersAndLabelCompressionNPP_vs2022</RootNamespace>
     <ProjectName>batchedLabelMarkersAndLabelCompressionNPP</ProjectName>
     <CudaToolkitCustomDir />
@@ -99,7 +99,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="batchedLabelMarkersAndLabelCompressionNPP.cpp" />
-
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

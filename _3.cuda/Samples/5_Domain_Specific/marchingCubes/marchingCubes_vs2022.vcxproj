@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{61D8F7E6-DAEC-4005-ACE5-FCAC7FA62F71}</ProjectGuid>
     <RootNamespace>marchingCubes_vs2022</RootNamespace>
     <ProjectName>marchingCubes</ProjectName>
     <CudaToolkitCustomDir />
@@ -99,7 +99,6 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Platform)'=='Win32'">
     <Link>
-      
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Platform)'=='x64'">

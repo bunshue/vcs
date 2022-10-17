@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{D17B6574-A2E8-40E6-AD4A-79B80AC1FBF9}</ProjectGuid>
     <RootNamespace>nvJPEG_encoder_vs2022</RootNamespace>
     <ProjectName>nvJPEG_encoder</ProjectName>
     <CudaToolkitCustomDir />
@@ -63,7 +63,8 @@
       <OutputFile>$(OutDir)/nvJPEG_encoder.exe</OutputFile>
     </Link>
     <CudaCompile>
-      <CodeGeneration></CodeGeneration>
+      <CodeGeneration>
+      </CodeGeneration>
       <AdditionalOptions>-Xcompiler "/wd 4819"  --threads 0 </AdditionalOptions>
       <Include>./;../../../Common</Include>
       <Defines>WIN32</Defines>
@@ -99,7 +100,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="nvJPEG_encoder.cpp" />
-
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

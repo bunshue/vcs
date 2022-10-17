@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{7C89617D-BC78-4877-A344-353F451BA707}</ProjectGuid>
     <RootNamespace>simpleTemplates_vs2022</RootNamespace>
     <ProjectName>simpleTemplates</ProjectName>
     <CudaToolkitCustomDir />

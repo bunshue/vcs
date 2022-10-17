@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{F242C853-5602-4024-9C7C-21854151DF7E}</ProjectGuid>
     <RootNamespace>streamOrderedAllocationP2P_vs2022</RootNamespace>
     <ProjectName>streamOrderedAllocationP2P</ProjectName>
     <CudaToolkitCustomDir />
@@ -99,7 +99,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <CudaCompile Include="streamOrderedAllocationP2P.cu" />
-
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

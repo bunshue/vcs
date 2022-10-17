@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{7449CD80-A734-46F7-884C-8A31C6D898A1}</ProjectGuid>
     <RootNamespace>cppOverload_vs2022</RootNamespace>
     <ProjectName>cppOverload</ProjectName>
     <CudaToolkitCustomDir />

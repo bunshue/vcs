@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{30F126C1-C0BD-4FC8-838F-B24726A85403}</ProjectGuid>
     <RootNamespace>simpleLayeredTexture_vs2022</RootNamespace>
     <ProjectName>simpleLayeredTexture</ProjectName>
     <CudaToolkitCustomDir />
@@ -99,7 +99,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <CudaCompile Include="simpleLayeredTexture.cu" />
-
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

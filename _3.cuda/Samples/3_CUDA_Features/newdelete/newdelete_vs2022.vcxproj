@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{0E0A3E4C-4E56-4168-AB79-9ED43FDFC392}</ProjectGuid>
     <RootNamespace>newdelete_vs2022</RootNamespace>
     <ProjectName>newdelete</ProjectName>
     <CudaToolkitCustomDir />

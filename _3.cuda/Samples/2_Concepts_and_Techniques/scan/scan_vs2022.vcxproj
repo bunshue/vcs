@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{02CD874D-EE04-4034-9C5D-4DA763473866}</ProjectGuid>
     <RootNamespace>scan_vs2022</RootNamespace>
     <ProjectName>scan</ProjectName>
     <CudaToolkitCustomDir />

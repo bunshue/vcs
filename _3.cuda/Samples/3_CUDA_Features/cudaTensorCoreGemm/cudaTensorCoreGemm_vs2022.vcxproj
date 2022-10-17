@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{976C2EC7-0B89-483E-9F35-AC663B29B7E0}</ProjectGuid>
     <RootNamespace>cudaTensorCoreGemm_vs2022</RootNamespace>
     <ProjectName>cudaTensorCoreGemm</ProjectName>
     <CudaToolkitCustomDir />
@@ -99,7 +99,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <CudaCompile Include="cudaTensorCoreGemm.cu" />
-
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

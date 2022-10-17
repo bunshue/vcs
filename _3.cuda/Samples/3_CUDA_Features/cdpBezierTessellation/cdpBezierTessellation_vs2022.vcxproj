@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{6570E21C-6D64-4074-9F1A-2231202A7354}</ProjectGuid>
     <RootNamespace>cdpBezierTessellation_vs2022</RootNamespace>
     <ProjectName>cdpBezierTessellation</ProjectName>
     <CudaToolkitCustomDir />
@@ -100,7 +100,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <CudaCompile Include="BezierLineCDP.cu" />
-
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

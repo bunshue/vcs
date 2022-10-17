@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{27C98394-49A8-4A18-AD27-0CE5A9D0C042}</ProjectGuid>
     <RootNamespace>simpleAtomicIntrinsics_nvrtc_vs2022</RootNamespace>
     <ProjectName>simpleAtomicIntrinsics_nvrtc</ProjectName>
     <CudaToolkitCustomDir />
@@ -63,7 +63,8 @@
       <OutputFile>$(OutDir)/simpleAtomicIntrinsics_nvrtc.exe</OutputFile>
     </Link>
     <CudaCompile>
-      <CodeGeneration></CodeGeneration>
+      <CodeGeneration>
+      </CodeGeneration>
       <AdditionalOptions>-Xcompiler "/wd 4819"  --threads 0 </AdditionalOptions>
       <Include>./;../../../Common</Include>
       <Defines>WIN32</Defines>

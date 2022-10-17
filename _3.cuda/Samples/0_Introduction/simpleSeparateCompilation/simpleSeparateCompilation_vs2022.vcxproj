@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{DC2530FF-C1AD-4566-BDC4-D508B7F19E3E}</ProjectGuid>
     <RootNamespace>simpleSeparateCompilation_vs2022</RootNamespace>
     <ProjectName>simpleSeparateCompilation</ProjectName>
     <CudaToolkitCustomDir />

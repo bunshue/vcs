@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{E1A59D17-9E80-4BA7-B876-611FCC99E7FF}</ProjectGuid>
     <RootNamespace>vulkanImageCUDA_vs2022</RootNamespace>
     <ProjectName>vulkanImageCUDA</ProjectName>
     <CudaToolkitCustomDir />
@@ -99,12 +99,10 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Platform)'=='Win32'">
     <Link>
-      
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Platform)'=='x64'">
     <Link>
-      
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{1A070791-DC47-4424-8480-25E3860F6A29}</ProjectGuid>
     <RootNamespace>binomialOptions_vs2022</RootNamespace>
     <ProjectName>binomialOptions</ProjectName>
     <CudaToolkitCustomDir />

@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{E0A7F38D-965A-4096-8E84-F09F88DDEA5C}</ProjectGuid>
     <RootNamespace>simpleTextureDrv_vs2022</RootNamespace>
     <ProjectName>simpleTextureDrv</ProjectName>
     <CudaToolkitCustomDir />
@@ -103,7 +103,6 @@
       <CompileOut Condition="'$(Platform)'=='x64'">data/%(Filename)64.fatbin</CompileOut>
       <NvccCompilation>fatbin</NvccCompilation>
     </CudaCompile>
-
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

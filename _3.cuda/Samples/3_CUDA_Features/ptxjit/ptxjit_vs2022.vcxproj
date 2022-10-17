@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{AEDE7529-6421-441D-B179-FA42EF6D6606}</ProjectGuid>
     <RootNamespace>ptxjit_vs2022</RootNamespace>
     <ProjectName>ptxjit</ProjectName>
     <CudaToolkitCustomDir />
@@ -103,7 +103,6 @@
       <CompileOut Condition="'$(Platform)'=='x64'">data/%(Filename)64.ptx</CompileOut>
       <NvccCompilation>ptx</NvccCompilation>
     </CudaCompile>
-
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

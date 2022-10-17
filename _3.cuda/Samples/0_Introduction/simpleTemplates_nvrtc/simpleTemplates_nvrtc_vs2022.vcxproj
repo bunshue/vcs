@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{02BE7755-F0C9-44D8-9027-756DBB4692FC}</ProjectGuid>
     <RootNamespace>simpleTemplates_nvrtc_vs2022</RootNamespace>
     <ProjectName>simpleTemplates_nvrtc</ProjectName>
     <CudaToolkitCustomDir />
@@ -63,7 +63,8 @@
       <OutputFile>$(OutDir)/simpleTemplates_nvrtc.exe</OutputFile>
     </Link>
     <CudaCompile>
-      <CodeGeneration></CodeGeneration>
+      <CodeGeneration>
+      </CodeGeneration>
       <AdditionalOptions>-Xcompiler "/wd 4819"  --threads 0 </AdditionalOptions>
       <Include>./;../../../Common</Include>
       <Defines>WIN32</Defines>

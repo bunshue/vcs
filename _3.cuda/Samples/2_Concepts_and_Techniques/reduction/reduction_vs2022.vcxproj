@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{62F7D83F-61F1-43CC-A604-12A4073A10E9}</ProjectGuid>
     <RootNamespace>reduction_vs2022</RootNamespace>
     <ProjectName>reduction</ProjectName>
     <CudaToolkitCustomDir />

@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{B6DD60FA-C323-420D-B75D-128A6886DFFB}</ProjectGuid>
     <RootNamespace>vectorAddDrv_vs2022</RootNamespace>
     <ProjectName>vectorAddDrv</ProjectName>
     <CudaToolkitCustomDir />
@@ -103,7 +103,6 @@
       <CompileOut Condition="'$(Platform)'=='x64'">data/%(Filename)64.fatbin</CompileOut>
       <NvccCompilation>fatbin</NvccCompilation>
     </CudaCompile>
-
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

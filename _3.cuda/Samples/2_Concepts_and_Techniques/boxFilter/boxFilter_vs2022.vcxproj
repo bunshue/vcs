@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{D8B936E2-36C1-43F6-8C30-D8827B17041F}</ProjectGuid>
     <RootNamespace>boxFilter_vs2022</RootNamespace>
     <ProjectName>boxFilter</ProjectName>
     <CudaToolkitCustomDir />
@@ -99,7 +99,6 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Platform)'=='Win32'">
     <Link>
-      
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Platform)'=='x64'">
@@ -111,7 +110,6 @@
     <ClCompile Include="boxFilter.cpp" />
     <ClCompile Include="boxFilter_cpu.cpp" />
     <CudaCompile Include="boxFilter_kernel.cu" />
-
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

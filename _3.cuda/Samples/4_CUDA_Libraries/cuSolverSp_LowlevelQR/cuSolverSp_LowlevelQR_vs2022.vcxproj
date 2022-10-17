@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{E617D346-F3A1-48F4-9EBA-F856FBBBC6F7}</ProjectGuid>
     <RootNamespace>cuSolverSp_LowlevelQR_vs2022</RootNamespace>
     <ProjectName>cuSolverSp_LowlevelQR</ProjectName>
     <CudaToolkitCustomDir />

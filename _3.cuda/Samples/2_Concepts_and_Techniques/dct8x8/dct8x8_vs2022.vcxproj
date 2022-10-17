@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{1277B5C1-84F6-4B04-97EB-CEDA468DD316}</ProjectGuid>
     <RootNamespace>dct8x8_vs2022</RootNamespace>
     <ProjectName>dct8x8</ProjectName>
     <CudaToolkitCustomDir />

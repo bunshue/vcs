@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{A3E00365-51B2-4AC2-B25B-A9E43D83E0F0}</ProjectGuid>
     <RootNamespace>threadFenceReduction_vs2022</RootNamespace>
     <ProjectName>threadFenceReduction</ProjectName>
     <CudaToolkitCustomDir />

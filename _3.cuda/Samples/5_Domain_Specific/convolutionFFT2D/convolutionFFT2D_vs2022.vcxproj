@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{EC175283-AA6E-4629-8C03-7D073642F4A3}</ProjectGuid>
     <RootNamespace>convolutionFFT2D_vs2022</RootNamespace>
     <ProjectName>convolutionFFT2D</ProjectName>
     <CudaToolkitCustomDir />

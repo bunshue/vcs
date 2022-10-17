@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{8ED89AFF-9758-4CC3-A04B-7C154818E937}</ProjectGuid>
     <RootNamespace>fastWalshTransform_vs2022</RootNamespace>
     <ProjectName>fastWalshTransform</ProjectName>
     <CudaToolkitCustomDir />

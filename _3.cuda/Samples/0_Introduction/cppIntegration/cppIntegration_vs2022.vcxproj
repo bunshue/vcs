@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{0BBFC3C9-A675-469A-B580-8AB495C09316}</ProjectGuid>
     <RootNamespace>cppIntegration_vs2022</RootNamespace>
     <ProjectName>cppIntegration</ProjectName>
     <CudaToolkitCustomDir />
@@ -101,7 +101,6 @@
     <CudaCompile Include="cppIntegration.cu" />
     <ClCompile Include="cppIntegration_gold.cpp" />
     <ClCompile Include="main.cpp" />
-
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

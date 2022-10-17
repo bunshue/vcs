@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{11FC5B23-D92C-4876-A80F-06B248E4E563}</ProjectGuid>
     <RootNamespace>threadMigration_vs2022</RootNamespace>
     <ProjectName>threadMigration</ProjectName>
     <CudaToolkitCustomDir />
@@ -103,7 +103,6 @@
       <CompileOut Condition="'$(Platform)'=='x64'">data/%(Filename)64.fatbin</CompileOut>
       <NvccCompilation>fatbin</NvccCompilation>
     </CudaCompile>
-
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{4133DA0A-6A37-47C4-B1AE-A0E2A0A33302}</ProjectGuid>
     <RootNamespace>convolutionSeparable_vs2022</RootNamespace>
     <ProjectName>convolutionSeparable</ProjectName>
     <CudaToolkitCustomDir />

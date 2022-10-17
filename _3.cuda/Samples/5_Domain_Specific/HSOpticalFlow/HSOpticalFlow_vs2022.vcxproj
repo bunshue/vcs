@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{780FB22C-3C9B-4C64-A7BE-8BE994D2E291}</ProjectGuid>
     <RootNamespace>HSOpticalFlow_vs2022</RootNamespace>
     <ProjectName>HSOpticalFlow</ProjectName>
     <CudaToolkitCustomDir />

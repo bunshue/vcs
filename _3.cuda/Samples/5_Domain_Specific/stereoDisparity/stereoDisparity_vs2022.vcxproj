@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{05D4AEB2-4E24-4BD0-9D9F-3C07F264C8B0}</ProjectGuid>
     <RootNamespace>stereoDisparity_vs2022</RootNamespace>
     <ProjectName>stereoDisparity</ProjectName>
     <CudaToolkitCustomDir />

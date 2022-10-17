@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{C2238B36-BA0A-432D-9381-A638B6509BFD}</ProjectGuid>
     <RootNamespace>mergeSort_vs2022</RootNamespace>
     <ProjectName>mergeSort</ProjectName>
     <CudaToolkitCustomDir />

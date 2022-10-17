@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{BB6B0F30-11A2-4F86-A5CF-9FE12402A016}</ProjectGuid>
     <RootNamespace>simpleCUDA2GL_vs2022</RootNamespace>
     <ProjectName>simpleCUDA2GL</ProjectName>
     <CudaToolkitCustomDir />
@@ -99,7 +99,6 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Platform)'=='Win32'">
     <Link>
-      
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Platform)'=='x64'">
@@ -110,7 +109,6 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <CudaCompile Include="simpleCUDA2GL.cu" />
-
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

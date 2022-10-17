@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{2B3D1487-1FCF-4D2A-BDA5-CFABB810B0BB}</ProjectGuid>
     <RootNamespace>matrixMul_nvrtc_vs2022</RootNamespace>
     <ProjectName>matrixMul_nvrtc</ProjectName>
     <CudaToolkitCustomDir />
@@ -63,13 +63,14 @@
       <OutputFile>$(OutDir)/matrixMul_nvrtc.exe</OutputFile>
     </Link>
     <CudaCompile>
-      <CodeGeneration></CodeGeneration>
+      <CodeGeneration>
+      </CodeGeneration>
       <AdditionalOptions>-Xcompiler "/wd 4819"  --threads 0 </AdditionalOptions>
       <Include>./;../../../Common</Include>
       <Defines>WIN32</Defines>
     </CudaCompile>
     <PostBuildEvent>
-        <Command>copy "$(CudaToolkitDir)include\cooperative_groups.h" .
+      <Command>copy "$(CudaToolkitDir)include\cooperative_groups.h" .
 mkdir .\cooperative_groups
 xcopy /y /e /s "$(CudaToolkitDir)include\cooperative_groups" .\cooperative_groups
         </Command>

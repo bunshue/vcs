@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{03E6D45F-65E3-4ECE-83D6-7E121464BE7A}</ProjectGuid>
     <RootNamespace>convolutionTexture_vs2022</RootNamespace>
     <ProjectName>convolutionTexture</ProjectName>
     <CudaToolkitCustomDir />

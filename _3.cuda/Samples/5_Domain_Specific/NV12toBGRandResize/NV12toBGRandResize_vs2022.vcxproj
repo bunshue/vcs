@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{4CE53159-EE8D-4BF6-A3FA-51936452F729}</ProjectGuid>
     <RootNamespace>NV12toBGRandResize_vs2022</RootNamespace>
     <ProjectName>NV12toBGRandResize</ProjectName>
     <CudaToolkitCustomDir />

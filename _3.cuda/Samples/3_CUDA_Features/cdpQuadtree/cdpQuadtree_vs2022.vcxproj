@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{F241F12C-2A8E-4467-BAF7-9A763EFB1D59}</ProjectGuid>
     <RootNamespace>cdpQuadtree_vs2022</RootNamespace>
     <ProjectName>cdpQuadtree</ProjectName>
     <CudaToolkitCustomDir />
@@ -100,7 +100,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <CudaCompile Include="cdpQuadtree.cu" />
-
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

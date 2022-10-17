@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{997E0757-EA74-4A4E-A0FC-47D8C8831A15}</ProjectGuid>
+    <ProjectGuid>{C33509EC-FA29-495A-BF08-4DFF7F047CE1}</ProjectGuid>
     <RootNamespace>bilateralFilter_vs2022</RootNamespace>
     <ProjectName>bilateralFilter</ProjectName>
     <CudaToolkitCustomDir />
@@ -99,7 +99,6 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Platform)'=='Win32'">
     <Link>
-      
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Platform)'=='x64'">
@@ -112,7 +111,6 @@
     <ClCompile Include="bilateralFilter_cpu.cpp" />
     <CudaCompile Include="bilateral_kernel.cu" />
     <ClCompile Include="bmploader.cpp" />
-
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
