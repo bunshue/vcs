@@ -325,6 +325,7 @@ void display()
 
 void idle()
 {
+    //printf("i");
     glutPostRedisplay();
 }
 
@@ -726,10 +727,10 @@ int main(int argc, char** argv)
     else
     {
         glutDisplayFunc(display);   //設定callback function
+        glutReshapeFunc(reshape);   //設定callback function
         glutKeyboardFunc(keyboard); //設定callback function
         glutMouseFunc(mouse);       //設定callback function
         glutMotionFunc(motion);     //設定callback function
-        glutReshapeFunc(reshape);   //設定callback function
         glutIdleFunc(idle);         //設定callback function
 
         initPixelBuffer();

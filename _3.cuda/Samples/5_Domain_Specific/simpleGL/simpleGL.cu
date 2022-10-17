@@ -45,10 +45,12 @@
 #define THRESHOLD          0.30f
 #define REFRESH_DELAY     10 //ms
 
+#define abs(a, b)	(((a) > (b)) ? (a - b) : (b - a))
+
 ////////////////////////////////////////////////////////////////////////////////
 // constants
-const unsigned int window_width = 512;
-const unsigned int window_height = 512;
+const unsigned int window_width = 600;
+const unsigned int window_height = 600;
 
 const unsigned int mesh_width = 256;
 const unsigned int mesh_height = 256;
@@ -66,6 +68,8 @@ int mouse_old_y;
 int mouse_buttons = 0;
 float rotate_x = 0.0;
 float rotate_y = 0.0;
+float rotate_x_old = 1.0;
+float rotate_y_old = 1.0;
 float translate_z = -3.0;
 
 StopWatchInterface* timer = NULL;
@@ -107,16 +111,35 @@ __global__ void simple_vbo_kernel(float4* pos, unsigned int width, unsigned int 
     // calculate uv coordinates
     float u = x / (float)width;
     float v = y / (float)height;
-    u = u * 2.0f - 1.0f;
-    v = v * 2.0f - 1.0f;
+    float w = 0;
 
-    //time = 0;
-    // calculate simple sine wave pattern
-    float freq = 4.0f;
-    float w = sinf(u * freq + time) * cosf(v * freq + time) * 0.5f;
+    float cx = (float)width / 2;
+    float cy = (float)height / 2;
 
-    // write output vertex
-    pos[y * width + x] = make_float4(u, w, v, 1.0f);
+    //printf("(%d, %d) ", width, height);
+    //printf("(%d, %d) ", x, y);
+
+    float dx = abs(x, cx);
+    float dy = abs(y, cy);
+    float freq = 20.0f;
+    time = 0;
+
+    if ((dx < 80) && (dy < 80))
+    {
+        w = cosf(dx * dy / width / height * freq) / 2;
+    }
+    else
+    {
+        w = 0;
+    }
+
+    float alpha = 1.0f;
+    if (((x % 5) != 0) && ((y % 5) != 0))
+    {
+        alpha = 0.0f;
+    }
+
+    pos[y * width + x] = make_float4(u, v, w, alpha);
 }
 
 void launch_kernel(float4* pos, unsigned int mesh_width, unsigned int mesh_height, float time)
@@ -126,6 +149,15 @@ void launch_kernel(float4* pos, unsigned int mesh_width, unsigned int mesh_heigh
     // execute the kernel
     dim3 block(8, 8, 1);
     dim3 grid(mesh_width / block.x, mesh_height / block.y, 1);
+    //                32                    32             1
+
+    //                   256             256
+    printf("mesh_width = %d mesh_height = %d t = %f, ", mesh_width, mesh_height, time);
+    //                8            8            1
+    printf("block.x = %d block.y = %d block.z = %d, ", block.x, block.y, block.z);
+
+    //mesh_width = 256
+    //mesh_height = 256
     simple_vbo_kernel << < grid, block >> > (pos, mesh_width, mesh_height, time);
 }
 
@@ -212,7 +244,19 @@ void runCuda(struct cudaGraphicsResource** vbo_resource)
     //    dim3 grid(mesh_width / block.x, mesh_height / block.y, 1);
     //    kernel<<< grid, block>>>(dptr, mesh_width, mesh_height, g_fAnim);
 
+    //使用GPU
     launch_kernel(dptr, mesh_width, mesh_height, g_fAnim);
+
+    //使用CPU
+    //TBD
+    /*
+    //總是無法用CPU的方式改寫資料
+    int i;
+    for (i = 0; i < 10; i++)
+    {
+        dptr[i] = make_float4(0.3f, 0.5f, 0.7f, 1.0f);
+    }
+    */
 
     // unmap buffer object
     checkCudaErrors(cudaGraphicsUnmapResources(1, vbo_resource, 0));
@@ -287,14 +331,22 @@ void display()
     glRotatef(rotate_x, 1.0, 0.0, 0.0);
     glRotatef(rotate_y, 0.0, 1.0, 0.0);
 
+    if ((rotate_x_old != rotate_x) && (rotate_y_old != rotate_y))
+    {
+        //printf("rx = %f, ry = %f ", rotate_x, rotate_y);
+        rotate_x_old = rotate_x;
+        rotate_y_old = rotate_y;
+
+    }
+
     // render from the vbo
     glBindBuffer(GL_ARRAY_BUFFER, vbo);
     glVertexPointer(4, GL_FLOAT, 0, 0);
 
     glEnableClientState(GL_VERTEX_ARRAY);
-    //glColor3f(1.0, 0.0, 0.0); //紅色
+    glColor3f(1.0, 0.0, 0.0); //紅色
     //glColor3f(0.0, 1.0, 0.0); //綠色
-    glColor3f(0.0, 0.0, 1.0);   //藍色
+    //glColor3f(0.0, 0.0, 1.0);   //藍色
     glDrawArrays(GL_POINTS, 0, mesh_width * mesh_height);
     glDisableClientState(GL_VERTEX_ARRAY);
 
@@ -310,6 +362,8 @@ void timerEvent(int value)
 {
     if (glutGetWindow())
     {
+        //在這裡呼叫重新畫圖
+        //printf("d-");
         glutPostRedisplay();
         glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
     }

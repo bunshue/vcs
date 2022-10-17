@@ -163,7 +163,8 @@ void mainMenu(int i);
 ////////////////////////////////////////////////////////////////////////////////
 //! Run the Cuda part of the computation
 ////////////////////////////////////////////////////////////////////////////////
-void process(int width, int height, int radius) {
+void process(int width, int height, int radius)
+{
     cudaArray* in_array;
     unsigned int* out_data;
 

@@ -58,6 +58,12 @@ void motion(int x, int y)
 {
 }
 
+void idle()
+{
+    //printf("i");
+    //glutPostRedisplay();
+}
+
 void mainMenu(int i) { keyboard((unsigned char)i, 0, 0); }
 
 void initMenus()
@@ -95,6 +101,7 @@ int main(int argc, char** argv)
 
     glutMouseFunc(mouse);		//設定callback function
     glutMotionFunc(motion);		//設定callback function
+    glutIdleFunc(idle);         //設定callback function
 
     initMenus();        //設定表單按鈕
 
