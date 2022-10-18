@@ -148,7 +148,7 @@ void display(void)
 
         //or
         glClearColor(1.0f, 1.0f, 1.0f, 1.0f);   // 設置清除窗口背景色為白色
-        glClear(GL_COLOR_BUFFER_BIT);// 進行窗口清理
+        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
         glFlush();       // 刷新OpenGL中的命令列和，使所有尚未被行的命令行
 
         //設定預設大小...
@@ -163,22 +163,22 @@ void display(void)
 
         //glClearColor(1.0, 0.0, 0.0, 1.0);   //清除背景 設定顏色
 
+        //畫一個矩形 R
         glColor4f(1.0, 0.0, 0.0, 1.0);  //設置畫筆顏色為 R
+        //左下x,左下y,右上x,右上y,
         glRectf(-0.9f, -0.9f, -0.3f, 0.9f);//畫一個矩形
 
+        ////畫一個矩形 G
         glColor4f(0.0, 1.0, 0.0, 1.0);  //設置畫筆顏色為 G
+        //左下x,左下y,右上x,右上y,
         glRectf(-0.4f, -0.8f, 0.4f, 0.8f);//畫一個矩形
 
+        //畫一個矩形 B
         glColor4f(0.0, 0.0, 1.0, 1.0);  //設置畫筆顏色為 B
+        //左下x,左下y,右上x,右上y,
         glRectf(0.3f, -0.7f, 0.7f, 0.7f);//畫一個矩形
 
-        //畫一個矩形
-        glColor4f(1.0, 1.0, 1.0, 1.0);  //設置畫筆顏色為 White
-        //左下x,左下y,右上x,右上y,
-        glRectf(0.5f, 0.0f, 0.65f, 0.15f);
-
         //drawText1();
-
         drawText2();
 
         glFlush();//保證前面的OpenGL命令立即執行   glFlush​​負責刷新繪制緩沖器，保證繪圖命令立即執行。
@@ -400,7 +400,7 @@ void display(void)
         //畫茶壺
         glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
 
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
         glColor3f(1.0, 0, 0);
 
         glutWireTeapot(3);  //線框茶壺
@@ -411,7 +411,7 @@ void display(void)
     else if (display_mode == 9)
     {
         //display_mode = 9  //畫矩形
-        glClear(GL_COLOR_BUFFER_BIT);/* clear all pixels   */
+        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
         glColor3f(1.0, 1.0, 1.0);
         glBegin(GL_POLYGON);/* draw white polygon with corners at(0.25, 0.25, 0.0) and (0.75, 0.75, 0.0)*/
         {

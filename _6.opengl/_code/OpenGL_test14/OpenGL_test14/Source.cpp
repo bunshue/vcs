@@ -94,11 +94,12 @@ int main(int argc, char** argv)
 
     glutCreateWindow("畫顏色色塊");	//開啟視窗 並顯示出視窗 Title
 
+    //init();       //TBD
     glutDisplayFunc(display);	//設定callback function
     glutReshapeFunc(reshape);	//設定callback function
     glutKeyboardFunc(keyboard);	//設定callback function
+    //glutKeyboardUpFunc(keyup);  //設定callback function TBD
     glutSpecialFunc(special);   //設定callback function
-
     glutMouseFunc(mouse);		//設定callback function
     glutMotionFunc(motion);		//設定callback function
     glutIdleFunc(idle);         //設定callback function

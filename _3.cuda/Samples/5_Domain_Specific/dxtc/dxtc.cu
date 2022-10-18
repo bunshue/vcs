@@ -753,7 +753,7 @@ int main(int argc, char** argv)
 
             if (cmp != 0.0f)
             {
-                printf("Deviation at (%4d,%4d):\t%f rms\n", x / 4, y / 4, float(cmp) / 16 / 3);
+                printf("Deviation at (%4d, %4d):\t%f rms\n", x / 4, y / 4, float(cmp) / 16 / 3);
             }
             rms += cmp;
         }

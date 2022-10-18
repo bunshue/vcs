@@ -26,9 +26,11 @@ __device__ int sumReduction(thread_group g, int* x, int val) {
         g.sync();
 
         if (lane < i)
+        {
             // active threads perform summation of their value with
             // their partner's value
             val += x[lane + i];
+        }
 
         // synchronize all threads in group
         g.sync();

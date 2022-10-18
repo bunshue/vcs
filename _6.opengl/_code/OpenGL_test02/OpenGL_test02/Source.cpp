@@ -149,7 +149,7 @@ void display(void)
     {
         //display_mode = 5
             // 清除之前幀數據
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
         // 繪制三角形
         glBegin(GL_TRIANGLES);
@@ -171,51 +171,6 @@ void display(void)
     else if (display_mode == 6)
     {
         //display_mode = 6  //畫
-
-        float mat[16];
-        int i;
-
-        glEnable(GL_DEPTH_TEST);
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-        glClearDepth(1.0);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
-        glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
-        glGetFloatv(GL_PROJECTION_MATRIX, mat);
-        /*
-        for (i = 0; i < 16; i++)
-        {
-            printf("%10.7f", mat[i]);
-            if ((i + 1) % 4) printf(" ");
-            else printf("\n");
-        }
-        */
-        glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
-
-        glColor3f(1.0f, 0.0f, 0.0f); //在右上角画红色平面：应该在后面
-        glBegin(GL_POLYGON);
-        {
-            glVertex3f(0.0f, 0.0f, -1.0f + 0.001f);
-            glVertex3f(1.0f, 0.0f, -1.0f + 0.001f);
-            glVertex3f(1.0f, 1.0f, -1.0f + 0.001f);
-            glVertex3f(0.0f, 1.0f, -1.0f + 0.001f);
-        }
-        glEnd();
-
-        glColor3f(0.0f, 1.0f, 0.0f); //在左下角画绿色的平面：应该在前面
-        glBegin(GL_POLYGON);
-        {
-            glVertex3f(-1.0f, -1.0f, 1.0f - 0.001f);
-            glVertex3f(0.0f + 0.5f, -1.0f, 1.0f - 0.001f);
-            glVertex3f(0.0f + 0.5f, 0.0f + 0.5f, 1.0f - 0.001f);
-            glVertex3f(-1.0f, 0.0f + 0.5f, 1.0f - 0.001f);
-        }
-        glEnd();
-
-        glFlush();
     }
     else if (display_mode == 7)
     {

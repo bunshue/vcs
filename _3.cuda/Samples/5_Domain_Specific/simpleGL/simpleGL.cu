@@ -126,12 +126,17 @@ __global__ void simple_vbo_kernel(float4* pos, unsigned int width, unsigned int 
 
     if ((dx < 80) && (dy < 80))
     {
-        w = cosf(dx * dy / width / height * freq) / 2;
+        //w = cosf(dx * dy / width / height * freq) / 2;
+        //w = cosf((1 - u) * (1 - u) + (1 - v) * (1 - v));
     }
     else
     {
         w = 0;
     }
+    w = sqrtf((1 - u) * (1 - u) + (1 - v) * (1 - v));
+
+    //w = sqrtf(dx * dx * dy * dy / width / width / height / height);
+    //w = sqrtf(u * u + v * v);
 
     float alpha = 1.0f;
     if (((x % 5) != 0) && ((y % 5) != 0))
@@ -140,7 +145,24 @@ __global__ void simple_vbo_kernel(float4* pos, unsigned int width, unsigned int 
     }
 
     pos[y * width + x] = make_float4(u, v, w, alpha);
+
+    if ((x == 0) || (y == 0) || (x == (width - 1)) || (y == (height - 1)))
+    {
+        pos[y * width + x] = make_float4(u, v, 0.0f, 1.0f);
+    }
+
+    if ((x == width / 3) || (y == height / 3) || (x == width * 2 / 3) || (y == height * 2 / 3))
+    {
+        pos[y * width + x] = make_float4(u, v, 0.5f, 1.0f);
+    }
+
+    if ((x >= width / 3) && (y >= height / 3) && (x <= width * 2 / 3) && (y <= height * 2 / 3))
+    {
+        pos[y * width + x] = make_float4(u, v, 1.0f, 1.0f);
+    }
+
 }
+
 
 void launch_kernel(float4* pos, unsigned int mesh_width, unsigned int mesh_height, float time)
 {
@@ -152,9 +174,9 @@ void launch_kernel(float4* pos, unsigned int mesh_width, unsigned int mesh_heigh
     //                32                    32             1
 
     //                   256             256
-    printf("mesh_width = %d mesh_height = %d t = %f, ", mesh_width, mesh_height, time);
+    //printf("mesh_width = %d mesh_height = %d t = %f, ", mesh_width, mesh_height, time);
     //                8            8            1
-    printf("block.x = %d block.y = %d block.z = %d, ", block.x, block.y, block.z);
+    //printf("block.x = %d block.y = %d block.z = %d, ", block.x, block.y, block.z);
 
     //mesh_width = 256
     //mesh_height = 256
@@ -260,20 +282,6 @@ void runCuda(struct cudaGraphicsResource** vbo_resource)
 
     // unmap buffer object
     checkCudaErrors(cudaGraphicsUnmapResources(1, vbo_resource, 0));
-}
-
-#ifndef FOPEN
-#define FOPEN(fHandle,filename,mode) fopen_s(&fHandle, filename, mode)
-#endif
-
-void sdkDumpBin2(void* data, unsigned int bytes, const char* filename)
-{
-    printf("sdkDumpBin2, filename : %s\n", filename);
-    FILE* fp;
-    FOPEN(fp, filename, "wb");
-    fwrite(data, bytes, 1, fp);
-    fflush(fp);
-    fclose(fp);
 }
 
 ////////////////////////////////////////////////////////////////////////////////

@@ -1,30 +1,3 @@
-/* Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *  * Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  * Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *  * Neither the name of NVIDIA CORPORATION nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
 /**
  * Matrix multiplication: C = A * B.
  * Host code.
@@ -39,7 +12,7 @@
  * Piscataway, NJ: IEEE Press, 2008, pp. Art. 31:1-11.
  */
 
-// System includes
+ // System includes
 #include <stdio.h>
 #include <assert.h>
 
@@ -55,9 +28,8 @@
  * Matrix multiplication (CUDA Kernel) on the device: C = A * B
  * wA is A's width and wB is B's width
  */
-template <int BLOCK_SIZE> __global__ void MatrixMulCUDA(float* C, float* A,
-    float* B, int wA,
-    int wB) {
+template <int BLOCK_SIZE> __global__ void MatrixMulCUDA(float* C, float* A, float* B, int wA, int wB)
+{
     // Block index
     int bx = blockIdx.x;
     int by = blockIdx.y;
@@ -111,7 +83,8 @@ template <int BLOCK_SIZE> __global__ void MatrixMulCUDA(float* C, float* A,
         // of the block sub-matrix
 #pragma unroll
 
-        for (int k = 0; k < BLOCK_SIZE; ++k) {
+        for (int k = 0; k < BLOCK_SIZE; ++k)
+        {
             Csub += As[ty][k] * Bs[k][tx];
         }
 
@@ -195,13 +168,11 @@ int MatrixMultiply(int argc, char** argv, int block_size, const dim3& dimsA, con
     // Performs warmup operation using matrixMul CUDA kernel
     if (block_size == 16)
     {
-        MatrixMulCUDA<16>
-            << <grid, threads, 0, stream >> > (d_C, d_A, d_B, dimsA.x, dimsB.x);
+        MatrixMulCUDA<16> << <grid, threads, 0, stream >> > (d_C, d_A, d_B, dimsA.x, dimsB.x);
     }
     else
     {
-        MatrixMulCUDA<32>
-            << <grid, threads, 0, stream >> > (d_C, d_A, d_B, dimsA.x, dimsB.x);
+        MatrixMulCUDA<32> << <grid, threads, 0, stream >> > (d_C, d_A, d_B, dimsA.x, dimsB.x);
     }
 
     printf("done\n");
@@ -217,13 +188,11 @@ int MatrixMultiply(int argc, char** argv, int block_size, const dim3& dimsA, con
     {
         if (block_size == 16)
         {
-            MatrixMulCUDA<16>
-                << <grid, threads, 0, stream >> > (d_C, d_A, d_B, dimsA.x, dimsB.x);
+            MatrixMulCUDA<16> << <grid, threads, 0, stream >> > (d_C, d_A, d_B, dimsA.x, dimsB.x);
         }
         else
         {
-            MatrixMulCUDA<32>
-                << <grid, threads, 0, stream >> > (d_C, d_A, d_B, dimsA.x, dimsB.x);
+            MatrixMulCUDA<32> << <grid, threads, 0, stream >> > (d_C, d_A, d_B, dimsA.x, dimsB.x);
         }
     }
 
@@ -297,13 +266,12 @@ int main(int argc, char** argv)
 {
     printf("[Matrix Multiply Using CUDA] - Starting...\n");
 
-    if (checkCmdLineFlag(argc, (const char**)argv, "help") ||
-        checkCmdLineFlag(argc, (const char**)argv, "?")) {
+    if (checkCmdLineFlag(argc, (const char**)argv, "help") || checkCmdLineFlag(argc, (const char**)argv, "?"))
+    {
         printf("Usage -device=n (n >= 0 for deviceID)\n");
         printf("      -wA=WidthA -hA=HeightA (Width x Height of Matrix A)\n");
         printf("      -wB=WidthB -hB=HeightB (Width x Height of Matrix B)\n");
-        printf("  Note: Outer matrix dimensions of A & B matrices" \
-            " must be equal.\n");
+        printf("  Note: Outer matrix dimensions of A & B matrices must be equal.\n");
 
         exit(EXIT_SUCCESS);
     }

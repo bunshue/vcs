@@ -15,6 +15,8 @@ using namespace std;
 
 const char* program_name = "測試程式的名稱";
 
+inline bool IsAppBuiltAs64() { return sizeof(void*) == 8; }
+
 void test_write_binary_file()
 {
     //將資料寫成檔案
@@ -134,6 +136,15 @@ int main()
     }
     printf("\n");
 
+    bool os_type = IsAppBuiltAs64();
+    if (os_type == true)
+    {
+        printf("Built as a 64-bit target\n");
+    }
+    else
+    {
+        printf("Built NOT as a 64-bit target\n");
+    }
 
     
 

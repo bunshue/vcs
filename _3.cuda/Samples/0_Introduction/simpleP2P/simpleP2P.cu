@@ -40,10 +40,13 @@ int main(int argc, char** argv)
 
     if (gpu_n < 2)
     {
+        //here
         printf("Two or more GPUs with Peer-to-Peer access capability are required for %s.\n", argv[0]);
         printf("Waiving test.\n");
         exit(EXIT_WAIVED);
     }
+
+    printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
 
     // Query device properties
     cudaDeviceProp prop[64];
@@ -180,8 +183,7 @@ int main(int argc, char** argv)
 
     for (int i = 0; i < buf_size / sizeof(float); i++)
     {
-        // Re-generate input data and apply 2x '* 2.0f' computation of both
-        // kernel runs
+        // Re-generate input data and apply 2x '* 2.0f' computation of both kernel runs
         if (h0[i] != float(i % 4096) * 2.0f * 2.0f)
         {
             printf("Verification error @ element %i: val = %f, ref = %f\n", i, h0[i], (float(i % 4096) * 2.0f * 2.0f));
