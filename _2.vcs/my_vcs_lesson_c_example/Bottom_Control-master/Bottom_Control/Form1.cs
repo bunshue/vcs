@@ -22,21 +22,6 @@ namespace Bottom_Control
 
         }
 
-        private void daButton1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void daButton2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void daButton3_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void timer1_Tick(object sender, EventArgs e)
         {
             if(daProcessEllipse1.Value<100)
