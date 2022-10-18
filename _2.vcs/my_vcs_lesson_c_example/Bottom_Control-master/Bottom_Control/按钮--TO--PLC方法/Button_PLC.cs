@@ -35,7 +35,7 @@ namespace Bottom_Control.按钮__TO__PLC方法
                     {
                         Button_write_select(Button.Pattern.ToString(), mitsubishi, Button);//根据按钮模式进行写入操作
                     }
-                    else MessageBox.Show("未连接设备：" + pLC.Trim(), "Err");//推出异常提示用户
+                    else MessageBox.Show("111未连接设备：" + pLC.Trim(), "Err");//推出异常提示用户
 
                     break;
                 case "Siemens":
@@ -44,7 +44,7 @@ namespace Bottom_Control.按钮__TO__PLC方法
                     {
                         Button_write_select(Button.Pattern.ToString(), Siemens, Button);//根据按钮模式进行写入操作
                     }
-                    else MessageBox.Show("未连接设备：" + pLC.Trim(), "Err");//推出异常提示用户
+                    else MessageBox.Show("222未连接设备：" + pLC.Trim(), "Err");//推出异常提示用户
                     break;
                 case "Modbus_TCP":
                     MODBUD_TCP MODBUD_TCP = new MODBUD_TCP();//实例化接口--实现MODBUS TCP
@@ -52,7 +52,7 @@ namespace Bottom_Control.按钮__TO__PLC方法
                     {
                         Button_write_select(Button.Pattern.ToString(), "MODBUD_TCP", MODBUD_TCP, Button);//根据按钮模式进行写入操作
                     }
-                    else MessageBox.Show("未连接设备：" + pLC.Trim(), "Err");//推出异常提示用户
+                    else MessageBox.Show("333未连接设备：" + pLC.Trim(), "Err");//推出异常提示用户
                     break;
 
             }
@@ -69,7 +69,7 @@ namespace Bottom_Control.按钮__TO__PLC方法
                     {
                         Button_write_select("复归型_Off", mitsubishi, Button);//根据按钮模式进行写入操作
                     }
-                    else MessageBox.Show("未连接设备：" + pLC.Trim(), "Err");//推出异常提示用户
+                    else MessageBox.Show("444未连接设备：" + pLC.Trim(), "Err");//推出异常提示用户
 
                     break;
                 case "Siemens":
@@ -78,7 +78,7 @@ namespace Bottom_Control.按钮__TO__PLC方法
                     {
                         Button_write_select("复归型_Off", Siemens, Button);//根据按钮模式进行写入操作
                     }
-                    else MessageBox.Show("未连接设备：" + pLC.Trim(), "Err");//推出异常提示用户
+                    else MessageBox.Show("555未连接设备：" + pLC.Trim(), "Err");//推出异常提示用户
                     break;
                 case "Modbus_TCP":
                     MODBUD_TCP MODBUD_TCP = new MODBUD_TCP();//实例化接口--实现三菱仿真
@@ -86,7 +86,7 @@ namespace Bottom_Control.按钮__TO__PLC方法
                     {
                         Button_write_select("复归型_Off", "MODBUD_TCP", MODBUD_TCP, Button);//根据按钮模式进行写入操作
                     }
-                    else MessageBox.Show("未连接设备：" + pLC.Trim(), "Err");//推出异常提示用户
+                    else MessageBox.Show("666未连接设备：" + pLC.Trim(), "Err");//推出异常提示用户
                     break;
             }
             return "OK";
