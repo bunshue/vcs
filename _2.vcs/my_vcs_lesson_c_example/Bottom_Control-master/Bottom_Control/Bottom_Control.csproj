@@ -1,0 +1,317 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9634B0AC-A87F-4725-BAEF-212DDF6A3C42}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Bottom_Control</RootNamespace>
+    <AssemblyName>Bottom_Control</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Bottom_Control.xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CSkin">
+      <HintPath>..\..\自定义Uppercomputer-20200727\自定义Uppercomputer-20200727\第三方控件DLL\CSkin.dll</HintPath>
+    </Reference>
+    <Reference Include="HslCommunication">
+      <HintPath>..\..\自定义Uppercomputer-20200727\自定义Uppercomputer-20200727\第三方控件DLL\HslCommunication.dll</HintPath>
+    </Reference>
+    <Reference Include="HZH_Controls">
+      <HintPath>..\..\自定义Uppercomputer-20200727\自定义Uppercomputer-20200727\第三方控件DLL\HZH_Controls.dll</HintPath>
+    </Reference>
+    <Reference Include="SunnyUI">
+      <HintPath>..\..\自定义Uppercomputer-20200727\自定义Uppercomputer-20200727\第三方控件DLL\SunnyUI.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Windows.Forms.DataVisualization.Design" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="zxing">
+      <HintPath>dll\zxing.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing.presentation">
+      <HintPath>dll\zxing.presentation.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DAPLC_Time.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PLC.cs" />
+    <Compile Include="PLC参数设置界面\ButtonBitForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PLC参数设置界面\ButtonBitForm1.Designer.cs">
+      <DependentUpon>ButtonBitForm1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PLC参数设置界面\ComboxForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PLC参数设置界面\ComboxForm1.Designer.cs">
+      <DependentUpon>ComboxForm1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PLC参数设置界面\TextboxDForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PLC参数设置界面\TextboxDForm1.Designer.cs">
+      <DependentUpon>TextboxDForm1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PLC通讯协议\IPLC_interface.cs" />
+    <Compile Include="PLC通讯协议\Mitsubishi_realize.cs" />
+    <Compile Include="PLC通讯协议\MODBUD_TCP.cs" />
+    <Compile Include="PLC通讯协议\PLC_public_Class.cs" />
+    <Compile Include="PLC通讯协议\Siemens_realize.cs" />
+    <Compile Include="PLC通讯协议\三菱报文\message.cs" />
+    <Compile Include="PLC通讯协议\三菱报文\Mitsubishi_message.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Public_Class.cs" />
+    <Compile Include="二维码生成\IhatetheqrcodeCreate.cs" />
+    <Compile Include="基本控件\DADataGridView_PLCSQL.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="基本控件\DADataGridView_TO_PLCE.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="基本控件\DADataGridView_TO_PLCE.Designer.cs">
+      <DependentUpon>DADataGridView_TO_PLCE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="基本控件\DADataGridView_TO_SQL.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="基本控件\DAIhatetheqrcode_PLC.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="基本控件\Histogram_PLC.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="基本控件\IhatetheqrcodeSQL.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="基本控件\IhatetheqrcodeSQL.Designer.cs">
+      <DependentUpon>IhatetheqrcodeSQL.cs</DependentUpon>
+    </Compile>
+    <Compile Include="基本控件\Oscillogram_PLC.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="控件类基\Doughnut_Base.cs" />
+    <Compile Include="基本控件\DAAlarmLamp.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="基本控件\DAAnalogMeter.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="基本控件\DABottle.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="基本控件\DAButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="基本控件\DACheckBox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="基本控件\DACombox.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="基本控件\DAConduit.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="基本控件\DAConveyor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="基本控件\DADataGridView_TO_PLC.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="基本控件\DALedBulb.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="基本控件\DAMeter.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="基本控件\DAPond.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="基本控件\DAProcessEllipse.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="基本控件\DAProcessWave.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="基本控件\DARotor.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="基本控件\DASignalLamp.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="基本控件\DASwitch.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="基本控件\Doughnut_PLC.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="控件类基\DataGridViewPLC_base.cs" />
+    <Compile Include="基本控件\DATextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="基本控件\DAThermometer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="按钮--TO--PLC方法\Button_PLC.cs" />
+    <Compile Include="控件类基\Button_base.cs" />
+    <Compile Include="控件类基\Combox_base.cs" />
+    <Compile Include="控件类基\Flicker_base.cs" />
+    <Compile Include="控件类基\Histogram_base.cs" />
+    <Compile Include="控件类基\TextBox_base.cs" />
+    <Compile Include="文本--TO--PLC方法\TextBox_PLC.cs" />
+    <Compile Include="文本输入键盘\keyboard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="文本输入键盘\keyboard.Designer.cs">
+      <DependentUpon>keyboard.cs</DependentUpon>
+    </Compile>
+    <Compile Include="文本输入键盘\keyboard_Hex.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="文本输入键盘\keyboard_Hex.Designer.cs">
+      <DependentUpon>keyboard_Hex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="表格控件--TO--PLC\DataGridView_PLC.cs" />
+    <Compile Include="表格控件--TO--PLC\表格控件--TO--SQL\DADataGridView_SQL.cs" />
+    <Compile Include="设置控件\PLC_Open_Time.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PLC参数设置界面\ButtonBitForm1.resx">
+      <DependentUpon>ButtonBitForm1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PLC参数设置界面\ComboxForm1.resx">
+      <DependentUpon>ComboxForm1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PLC参数设置界面\TextboxDForm1.resx">
+      <DependentUpon>TextboxDForm1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="基本控件\DADataGridView_TO_PLCE.resx">
+      <DependentUpon>DADataGridView_TO_PLCE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="基本控件\IhatetheqrcodeSQL.resx">
+      <DependentUpon>IhatetheqrcodeSQL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="文本输入键盘\keyboard.resx">
+      <DependentUpon>keyboard.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="文本输入键盘\keyboard_Hex.resx">
+      <DependentUpon>keyboard_Hex.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="第三方控件DLL\快速访问 - 快捷方式.lnk" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="第三方控件DLL\CSkin.dll" />
+    <Content Include="第三方控件DLL\CSkin.XML" />
+    <Content Include="第三方控件DLL\CSScriptLibrary.dll" />
+    <Content Include="第三方控件DLL\HslCommunication.dll" />
+    <Content Include="第三方控件DLL\HZH_Controls.dll" />
+    <Content Include="第三方控件DLL\HZH_Controls.pdb" />
+    <Content Include="第三方控件DLL\Install_deployment.dll" />
+    <Content Include="第三方控件DLL\Install_deployment.pdb" />
+    <Content Include="第三方控件DLL\Interop.ActUtlTypeLib.dll" />
+    <Content Include="第三方控件DLL\Microsoft.Graph.Core.dll" />
+    <Content Include="第三方控件DLL\SunnyUI.dll" />
+    <Content Include="第三方控件DLL\System.Buffers.dll" />
+    <Content Include="第三方控件DLL\System.Buffers.xml" />
+    <Content Include="第三方控件DLL\UI_Library_da.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.6.1 %28x86 和 x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
