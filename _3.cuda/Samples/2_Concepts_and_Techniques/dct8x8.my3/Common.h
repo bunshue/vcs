@@ -1,5 +1,4 @@
-/**
-**************************************************************************
+/*
 * \file Common.h
 * \brief Common includes header.
 *
@@ -34,8 +33,7 @@
 
 /**
 *  log_2{BLOCK_SIZE*BLOCK_SIZE), used for quick multiplication or division by
-* the
-*  square of pixels block via shifting
+*  the square of pixels block via shifting
 */
 #define BLOCK_SIZE2_LOG2 6
 

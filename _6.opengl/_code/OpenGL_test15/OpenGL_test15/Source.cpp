@@ -11,28 +11,28 @@ void init(void)
 // 繪圖回調函數
 void display(void)
 {
-    glPushMatrix();
+	glPushMatrix();
 
 	glClearColor(1.0, 0.0, 0.0, 1.0);	//使用紅色背景
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	// 设置当前的绘制颜色 , 4 个 unsigned byte 
-	// 每个颜色的分量占一个字节
-	// 参数数据是 R 红色 G 绿色 B 蓝色 A 透明度
-	// 下面设置的含义是白色, 绘制点的时候, 每次都使用白色绘制
+	// 設置當前的繪制顏色 , 4 個 unsigned byte 
+	// 每個顏色的分量占一個字節
+	// 參數數據是 R 紅色 G 綠色 B 藍色 A 透明度
+	// 下面設置的含義是白色, 繪制點的時候, 每次都使用白色繪制
 	glColor4ub(255, 255, 255, 255);
 
-	glLineWidth(4.0f);	// 设置线的宽度
+	glLineWidth(4.0f);	// 設置線的寬度
 
-	// 绘制线时, 会将从 glBegin 到 glEnd 之间的所有的点都绘制出来
-	// 可以调用 glVertex3f 方法 成对 设置多条线
-	// 注意必须成对设置 , 如果设置奇数个点 , 最后一个点会被丢弃
-	
-	glBegin(GL_LINES);	// 绘制线段开始
+	// 繪制線時, 會將從 glBegin 到 glEnd 之間的所有的點都繪制出來
+	// 可以調用 glVertex3f 方法 成對 設置多條線
+	// 注意必須成對設置 , 如果設置奇數個點 , 最后一個點會被丟棄
+
+	glBegin(GL_LINES);	// 繪制線段開始
 
 	// glVertex3f (GLfloat x, GLfloat y, GLfloat z)
 	//畫直線, 每兩個點組成一條線
-	
+
 	glVertex3f(0.0f, 0.0f, -1.0f);
 	glVertex3f(-1.0f, 0.0f, -1.0f);
 
@@ -50,11 +50,11 @@ void display(void)
 		dy = xx + 0.8;
 		glVertex3f(-0.8f, 0.8f - dy, 0.0f);
 	}
-	glEnd();	// 绘制点结束
+	glEnd();	// 繪制點結束
 
 
 	//兩個線段組合成一個閉合三角形
-	glBegin(GL_LINE_LOOP);	// 绘制线段开始
+	glBegin(GL_LINE_LOOP);	// 繪制線段開始
 
 	glVertex3f(0.7f, 0.5f, 0.0f);
 	glVertex3f(0.7f, 0.1f, 0.0f);
@@ -62,7 +62,7 @@ void display(void)
 	glVertex3f(0.7f, 0.1f, 0.0f);
 	glVertex3f(0.3f, 0.1f, 0.0f);
 
-	glEnd();	// 绘制点结束
+	glEnd();	// 繪制點結束
 
 
 
@@ -71,18 +71,18 @@ void display(void)
 
 	glBegin(GL_LINE_LOOP);
 
-	// 绘制线 , 每两个点组成一条线
+	// 繪制線 , 每兩個點組成一條線
 // glVertex3f (GLfloat x, GLfloat y, GLfloat z)
 	glVertex3f(0.0f, -0.8f, 0.0f);
 
-	// 设置绿色 
+	// 設置綠色 
 	glColor4ub(0, 255, 0, 255);
 
 	glVertex3f(0.8f, -0.8f, 0.0f);
 
-	// 上面的设置会从 (0,0,-10) 坐标向 (-5,0,-10) 坐标绘制一条线
+	// 上面的設置會從 (0,0,-10) 坐標向 (-5,0,-10) 坐標繪制一條線
 
-	// 设置蓝色
+	// 設置藍色
 	glColor4ub(0, 0, 255, 255);
 
 	//glVertex3f(-5.0f, 0.0f, -10.0f);
@@ -90,17 +90,17 @@ void display(void)
 
 	glColor4ub(255, 255, 255, 255);
 
-	// 上面的设置会从 (-5,0,-10) 坐标向 (-5,-2,-10) 坐标绘制一条线
+	// 上面的設置會從 (-5,0,-10) 坐標向 (-5,-2,-10) 坐標繪制一條線
 
-		// 绘制点结束
+		// 繪制點結束
 	glEnd();
 
 
 
-    glPopMatrix();
+	glPopMatrix();
 
-	// 将后缓冲区绘制到前台
-    glutSwapBuffers();
+	// 將后緩沖區繪制到前臺
+	glutSwapBuffers();
 }
 
 // 窗口大小變化回調函數
@@ -148,24 +148,24 @@ void motion(int x, int y)
 
 int main(int argc, char** argv)
 {
-    glutInit(&argc, argv);
-    //glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	glutInit(&argc, argv);
+	//glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
-    glutInitWindowSize(600, 600);
-    glutInitWindowPosition(1100, 200);
+	glutInitWindowSize(600, 600);
+	glutInitWindowPosition(1100, 200);
 
-    glutCreateWindow("開啟視窗");	//開啟視窗 並顯示出視窗 Title
+	glutCreateWindow("開啟視窗");	//開啟視窗 並顯示出視窗 Title
 
 	init();
 
-    glutDisplayFunc(display);	//設定callback function
-    glutReshapeFunc(reshape);	//設定callback function
-    glutKeyboardFunc(keyboard);	//設定callback function
-    glutMouseFunc(mouse);		//設定callback function
-    glutMotionFunc(motion);		//設定callback function
+	glutDisplayFunc(display);	//設定callback function
+	glutReshapeFunc(reshape);	//設定callback function
+	glutKeyboardFunc(keyboard);	//設定callback function
+	glutMouseFunc(mouse);		//設定callback function
+	glutMotionFunc(motion);		//設定callback function
 
-    glutMainLoop();
-	
-    return 0;
+	glutMainLoop();
+
+	return 0;
 }

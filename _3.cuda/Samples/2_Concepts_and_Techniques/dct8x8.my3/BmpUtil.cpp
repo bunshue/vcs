@@ -32,11 +32,12 @@ int clamp_0_255(int x) { return (x < 0) ? 0 : ((x > 255) ? 255 : x); }
 *
 * \return The closest to the input float integer value
 */
-float round_f(float num) {
-  float NumAbs = fabs(num);
-  int NumAbsI = (int)(NumAbs + 0.5f);
-  float sign = num > 0 ? 1.0f : -1.0f;
-  return sign * NumAbsI;
+float round_f(float num)
+{
+    float NumAbs = fabs(num);
+    int NumAbsI = (int)(NumAbs + 0.5f);
+    float sign = num > 0 ? 1.0f : -1.0f;
+    return sign * NumAbsI;
 }
 
 /**
@@ -49,17 +50,17 @@ float round_f(float num) {
 *
 * \return Pointer to the created plane
 */
-byte *MallocPlaneByte(int width, int height, int *pStepBytes)
+byte* MallocPlaneByte(int width, int height, int* pStepBytes)
 {
-  byte *ptr;
-  *pStepBytes = ((int)ceil(width / 16.0f)) * 16;
-  //#ifdef __ALLOW_ALIGNED_MEMORY_MANAGEMENT
-  //  ptr = (byte *)_aligned_malloc(*pStepBytes * height, 16);
-  //#else
-  ptr = (byte *)malloc(*pStepBytes * height);
-  //#endif
-  printf("MallocPlaneByte, width = %d, strides = %d\n", width, *pStepBytes);
-  return ptr;
+    byte* ptr;
+    *pStepBytes = ((int)ceil(width / 16.0f)) * 16;
+    //#ifdef __ALLOW_ALIGNED_MEMORY_MANAGEMENT
+    //  ptr = (byte *)_aligned_malloc(*pStepBytes * height, 16);
+    //#else
+    ptr = (byte*)malloc(*pStepBytes * height);
+    //#endif
+    printf("MallocPlaneByte, width = %d, strides = %d\n", width, *pStepBytes);
+    return ptr;
 }
 
 /**
@@ -72,16 +73,16 @@ byte *MallocPlaneByte(int width, int height, int *pStepBytes)
 *
 * \return Pointer to the created plane
 */
-short *MallocPlaneShort(int width, int height, int *pStepBytes) {
-  short *ptr;
-  *pStepBytes = ((int)ceil((width * sizeof(short)) / 16.0f)) * 16;
-  //#ifdef __ALLOW_ALIGNED_MEMORY_MANAGEMENT
-  //  ptr = (float *)_aligned_malloc(*pStepBytes * height, 16);
-  //#else
-  ptr = (short *)malloc(*pStepBytes * height);
-  //#endif
-  *pStepBytes = *pStepBytes / sizeof(short);
-  return ptr;
+short* MallocPlaneShort(int width, int height, int* pStepBytes) {
+    short* ptr;
+    *pStepBytes = ((int)ceil((width * sizeof(short)) / 16.0f)) * 16;
+    //#ifdef __ALLOW_ALIGNED_MEMORY_MANAGEMENT
+    //  ptr = (float *)_aligned_malloc(*pStepBytes * height, 16);
+    //#else
+    ptr = (short*)malloc(*pStepBytes * height);
+    //#endif
+    *pStepBytes = *pStepBytes / sizeof(short);
+    return ptr;
 }
 
 /**
@@ -94,16 +95,17 @@ short *MallocPlaneShort(int width, int height, int *pStepBytes) {
 *
 * \return Pointer to the created plane
 */
-float *MallocPlaneFloat(int width, int height, int *pStepBytes) {
-  float *ptr;
-  *pStepBytes = ((int)ceil((width * sizeof(float)) / 16.0f)) * 16;
-  //#ifdef __ALLOW_ALIGNED_MEMORY_MANAGEMENT
-  //  ptr = (float *)_aligned_malloc(*pStepBytes * height, 16);
-  //#else
-  ptr = (float *)malloc(*pStepBytes * height);
-  //#endif
-  *pStepBytes = *pStepBytes / sizeof(float);
-  return ptr;
+float* MallocPlaneFloat(int width, int height, int* pStepBytes)
+{
+    float* ptr;
+    *pStepBytes = ((int)ceil((width * sizeof(float)) / 16.0f)) * 16;
+    //#ifdef __ALLOW_ALIGNED_MEMORY_MANAGEMENT
+    //  ptr = (float *)_aligned_malloc(*pStepBytes * height, 16);
+    //#else
+    ptr = (float*)malloc(*pStepBytes * height);
+    //#endif
+    *pStepBytes = *pStepBytes / sizeof(float);
+    return ptr;
 }
 
 /**
@@ -118,13 +120,15 @@ float *MallocPlaneFloat(int width, int height, int *pStepBytes) {
 *
 * \return None
 */
-void CopyByte2Float(byte *ImgSrc, int StrideB, float *ImgDst, int StrideF,
-                    ROI Size) {
-  for (int i = 0; i < Size.height; i++) {
-    for (int j = 0; j < Size.width; j++) {
-      ImgDst[i * StrideF + j] = (float)ImgSrc[i * StrideB + j];
+void CopyByte2Float(byte* ImgSrc, int StrideB, float* ImgDst, int StrideF, ROI Size)
+{
+    for (int i = 0; i < Size.height; i++)
+    {
+        for (int j = 0; j < Size.width; j++)
+        {
+            ImgDst[i * StrideF + j] = (float)ImgSrc[i * StrideB + j];
+        }
     }
-  }
 }
 
 /**
@@ -139,14 +143,15 @@ void CopyByte2Float(byte *ImgSrc, int StrideB, float *ImgDst, int StrideF,
 *
 * \return None
 */
-void CopyFloat2Byte(float *ImgSrc, int StrideF, byte *ImgDst, int StrideB,
-                    ROI Size) {
-  for (int i = 0; i < Size.height; i++) {
-    for (int j = 0; j < Size.width; j++) {
-      ImgDst[i * StrideB + j] =
-          (byte)clamp_0_255((int)(round_f(ImgSrc[i * StrideF + j])));
+void CopyFloat2Byte(float* ImgSrc, int StrideF, byte* ImgDst, int StrideB, ROI Size)
+{
+    for (int i = 0; i < Size.height; i++)
+    {
+        for (int j = 0; j < Size.width; j++)
+        {
+            ImgDst[i * StrideB + j] = (byte)clamp_0_255((int)(round_f(ImgSrc[i * StrideF + j])));
+        }
     }
-  }
 }
 
 /**
@@ -157,18 +162,20 @@ void CopyFloat2Byte(float *ImgSrc, int StrideF, byte *ImgDst, int StrideB,
 *
 * \return None
 */
-void FreePlane(void *ptr) {
-  //#ifdef __ALLOW_ALIGNED_MEMORY_MANAGEMENT
-  //  if (ptr)
-  //  {
-  //      _aligned_free(ptr);
-  //  }
-  //#else
-  if (ptr) {
-    free(ptr);
-  }
+void FreePlane(void* ptr)
+{
+    //#ifdef __ALLOW_ALIGNED_MEMORY_MANAGEMENT
+    //  if (ptr)
+    //  {
+    //      _aligned_free(ptr);
+    //  }
+    //#else
+    if (ptr)
+    {
+        free(ptr);
+    }
 
-  //#endif
+    //#endif
 }
 
 /**
@@ -182,12 +189,15 @@ void FreePlane(void *ptr) {
 *
 * \return None
 */
-void AddFloatPlane(float Value, float *ImgSrcDst, int StrideF, ROI Size) {
-  for (int i = 0; i < Size.height; i++) {
-    for (int j = 0; j < Size.width; j++) {
-      ImgSrcDst[i * StrideF + j] += Value;
+void AddFloatPlane(float Value, float* ImgSrcDst, int StrideF, ROI Size)
+{
+    for (int i = 0; i < Size.height; i++)
+    {
+        for (int j = 0; j < Size.width; j++)
+        {
+            ImgSrcDst[i * StrideF + j] += Value;
+        }
     }
-  }
 }
 
 /**
@@ -201,12 +211,15 @@ void AddFloatPlane(float Value, float *ImgSrcDst, int StrideF, ROI Size) {
 *
 * \return None
 */
-void MulFloatPlane(float Value, float *ImgSrcDst, int StrideF, ROI Size) {
-  for (int i = 0; i < Size.height; i++) {
-    for (int j = 0; j < Size.width; j++) {
-      ImgSrcDst[i * StrideF + j] *= Value;
+void MulFloatPlane(float Value, float* ImgSrcDst, int StrideF, ROI Size)
+{
+    for (int i = 0; i < Size.height; i++)
+    {
+        for (int j = 0; j < Size.width; j++)
+        {
+            ImgSrcDst[i * StrideF + j] *= Value;
+        }
     }
-  }
 }
 
 /**
@@ -219,43 +232,43 @@ void MulFloatPlane(float Value, float *ImgSrcDst, int StrideF, ROI Size) {
 *
 * \return Status code
 */
-int PreLoadBmp(char *FileName, int *Width, int *Height)
+int PreLoadBmp(char* FileName, int* Width, int* Height)
 {
-  BMPFileHeader FileHeader;
-  BMPInfoHeader InfoHeader;
-  FILE *fh;
+    BMPFileHeader FileHeader;
+    BMPInfoHeader InfoHeader;
+    FILE* fh;
 
-  if (!(fh = fopen(FileName, "rb")))
-  {
-    return 1;  // invalid filename
-  }
+    if (!(fh = fopen(FileName, "rb")))
+    {
+        return 1;  // invalid filename
+    }
 
-  fread(&FileHeader, sizeof(BMPFileHeader), 1, fh);
+    fread(&FileHeader, sizeof(BMPFileHeader), 1, fh);
 
-  if (FileHeader._bm_signature != 0x4D42)
-  {
-    return 2;  // invalid file format
-  }
+    if (FileHeader._bm_signature != 0x4D42)
+    {
+        return 2;  // invalid file format
+    }
 
-  fread(&InfoHeader, sizeof(BMPInfoHeader), 1, fh);
+    fread(&InfoHeader, sizeof(BMPInfoHeader), 1, fh);
 
-  printf("圖片位元深度 : %d 位元\n", InfoHeader._bm_color_depth);
+    printf("圖片位元深度 : %d 位元\n", InfoHeader._bm_color_depth);
 
-  if (InfoHeader._bm_color_depth != 24)
-  {
-    return 3;  // invalid color depth
-  }
+    if (InfoHeader._bm_color_depth != 24)
+    {
+        return 3;  // invalid color depth
+    }
 
-  if (InfoHeader._bm_compressed)
-  {
-    return 4;  // invalid compression property
-  }
+    if (InfoHeader._bm_compressed)
+    {
+        return 4;  // invalid compression property
+    }
 
-  *Width = InfoHeader._bm_image_width;
-  *Height = InfoHeader._bm_image_height;
+    *Width = InfoHeader._bm_image_width;
+    *Height = InfoHeader._bm_image_height;
 
-  fclose(fh);
-  return 0;
+    fclose(fh);
+    return 0;
 }
 
 //res = PreLoadBmp2(filename_read1, &ImgWidth, &ImgHeight, &ColorDepth);
@@ -363,43 +376,43 @@ int GetBmpColorDepth(char* FileName)
 */
 
 //僅支持位元深度24位元
-void LoadBmpAsGray(char *FileName, int Stride, ROI ImSize, byte *Img)
+void LoadBmpAsGray(char* FileName, int Stride, ROI ImSize, byte* Img)
 {
-  BMPFileHeader FileHeader;
-  BMPInfoHeader InfoHeader;
+    BMPFileHeader FileHeader;
+    BMPInfoHeader InfoHeader;
 
-  FILE *fh;
+    FILE* fh;
 
-  /*
-  printf("LoadBmpAsGray, filename : %s, stride = %d, W = %d, H = %d\n", FileName, Stride, ImSize.width, ImSize.height);
+    /*
+    printf("LoadBmpAsGray, filename : %s, stride = %d, W = %d, H = %d\n", FileName, Stride, ImSize.width, ImSize.height);
 
-  printf("sizeof(FileHeader) = %d\n", sizeof(FileHeader));  // 14
-  printf("sizeof(InfoHeader) = %d\n", sizeof(InfoHeader));  // 40
-  */
+    printf("sizeof(FileHeader) = %d\n", sizeof(FileHeader));  // 14
+    printf("sizeof(InfoHeader) = %d\n", sizeof(InfoHeader));  // 40
+    */
 
-  fh = fopen(FileName, "rb");
+    fh = fopen(FileName, "rb");
 
-  fread(&FileHeader, sizeof(BMPFileHeader), 1, fh);
-  fread(&InfoHeader, sizeof(BMPInfoHeader), 1, fh);
+    fread(&FileHeader, sizeof(BMPFileHeader), 1, fh);
+    fread(&InfoHeader, sizeof(BMPInfoHeader), 1, fh);
 
-  //printf("W = %d, H = %d\n", ImSize.width, ImSize.height);
+    //printf("W = %d, H = %d\n", ImSize.width, ImSize.height);
 
-  for (int j = 0; j < ImSize.height; j++)
-  {
-    for (int i = 0; i < ImSize.width; i++)
+    for (int j = 0; j < ImSize.height; j++)
     {
-      int r = 0, g = 0, b = 0;
-      fread(&b, 1, 1, fh);
-      fread(&g, 1, 1, fh);
-      fread(&r, 1, 1, fh);
+        for (int i = 0; i < ImSize.width; i++)
+        {
+            int r = 0, g = 0, b = 0;
+            fread(&b, 1, 1, fh);
+            fread(&g, 1, 1, fh);
+            fread(&r, 1, 1, fh);
 
-      int val = (313524 * r + 615514 * g + 119537 * b + 524288) >> 20;
-      Img[j * Stride + i] = (byte)clamp_0_255(val);
+            int val = (313524 * r + 615514 * g + 119537 * b + 524288) >> 20;
+            Img[j * Stride + i] = (byte)clamp_0_255(val);
+        }
     }
-  }
 
-  fclose(fh);
-  return;
+    fclose(fh);
+    return;
 }
 
 void LoadBmpAsData(char* FileName, int Stride, ROI ImSize, byte* Img, int color_depth)

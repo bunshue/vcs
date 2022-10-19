@@ -1,25 +1,16 @@
-﻿// OpenGL Graphics includes
-#include <helper_gl.h>
+﻿#include <helper_gl.h>
 #include <GL/freeglut.h>
 
 #include <stdio.h>
 #include <iostream>
 
-// 窗口大小變化回調函數
-void reshape(int w, int h)
-{
-}
-
-void mouse(int button, int state, int x, int y)
-{
-}
-
-void motion(int x, int y)
-{
-}
-
 // 繪圖回調函數
 void display(void)
+{
+}
+
+// 窗口大小變化回調函數
+void reshape(int w, int h)
 {
 }
 
@@ -53,6 +44,14 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
 	}
 }
 
+void mouse(int button, int state, int x, int y)
+{
+}
+
+void motion(int x, int y)
+{
+}
+
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
@@ -74,5 +73,3 @@ int main(int argc, char** argv)
 
     return 0;
 }
-
-

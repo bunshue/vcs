@@ -73,10 +73,8 @@ void BlackScholesGPU(float2* __restrict d_CallResult,
     {
         float callResult1, callResult2;
         float putResult1, putResult2;
-        BlackScholesBodyGPU(callResult1, putResult1, d_StockPrice[opt].x,
-            d_OptionStrike[opt].x, d_OptionYears[opt].x, Riskfree, Volatility);
-        BlackScholesBodyGPU(callResult2, putResult2, d_StockPrice[opt].y,
-            d_OptionStrike[opt].y, d_OptionYears[opt].y, Riskfree, Volatility);
+        BlackScholesBodyGPU(callResult1, putResult1, d_StockPrice[opt].x, d_OptionStrike[opt].x, d_OptionYears[opt].x, Riskfree, Volatility);
+        BlackScholesBodyGPU(callResult2, putResult2, d_StockPrice[opt].y, d_OptionStrike[opt].y, d_OptionYears[opt].y, Riskfree, Volatility);
         d_CallResult[opt] = make_float2(callResult1, callResult2);
         d_PutResult[opt] = make_float2(putResult1, putResult2);
     }

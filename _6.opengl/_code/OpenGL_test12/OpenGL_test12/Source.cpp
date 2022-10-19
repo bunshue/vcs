@@ -11,8 +11,11 @@ void init()
     glShadeModel(GL_SMOOTH);
 }
 
-void DrawMyObjects(void)
+// 繪圖回調函數
+void display(void)
 {
+    glClear(GL_COLOR_BUFFER_BIT);   // 清除之前幀數據
+
     /* draw some points */
     glBegin(GL_POINTS);
     glColor3f(1.0, 0.0, 0.0);	//紅
@@ -156,15 +159,8 @@ glVertex2f(x, y);
 }
 glEnd();
 */
-}
 
-// 繪圖回調函數
-void display(void)
-{
-    // 清除之前幀數據
-    glClear(GL_COLOR_BUFFER_BIT);
-    DrawMyObjects();
-    // 執行繪圖命令
+// 執行繪圖命令
     glFlush();
 
 }

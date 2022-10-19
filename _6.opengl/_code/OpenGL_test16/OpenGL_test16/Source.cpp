@@ -5,21 +5,87 @@
 #include <stdio.h>
 #include <iostream>
 
-// 窗口大小變化回調函數
-void reshape(int w, int h)
+int W = 400;
+int H = 400;
+// 初始化參數
+void init(void)
 {
-}
+	glClearColor(0.0, 0.0, 0.0, 0.0);
+	glColor3f(1.0, 1.0, 1.0);
 
-void mouse(int button, int state, int x, int y)
-{
-}
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
 
-void motion(int x, int y)
-{
+	//定義剪裁面
+	gluOrtho2D(-1.0, 1.0, -1.0, 1.0);	//應該是預設就是這樣的數字
 }
 
 // 繪圖回調函數
 void display(void)
+{
+	//glMatrixMode( GL_MODELVIEW );
+	//glLoadIdentity();
+
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	//畫分割線，分成四個視見區
+	glViewport(0, 0, W, H);
+
+	glBegin(GL_LINES);
+		glColor3f(1.0, 0.0, 0.0);	//紅色
+		glVertex2f(-1.0, 0);	//畫橫線
+		glVertex2f(1.0, 0);
+
+		glColor3f(0.0, 1.0, 0.0);	//綠色
+		glVertex2f(0.0, -1.0);	//畫直線
+		glVertex2f(0.0, 1.0);
+	glEnd();
+
+	//定義在左下角的區域
+	glColor3f(0.0, 1.0, 0.0);	//綠色
+	glViewport(0, 0, 200, 200);
+	glBegin(GL_POLYGON);
+		glVertex2f(-0.5, -0.5);
+		glVertex2f(-0.5, 0.5);
+		glVertex2f(0.5, 0.5);
+		glVertex2f(0.5, -0.5);
+	glEnd();
+
+	//定義在右上角的區域
+	glColor3f(0.0, 0.0, 1.0);	//藍色
+	glViewport(200, 200, 200, 200);//一定要注意，後面這兩個參數是高度和寬度，而不是座標
+	glBegin(GL_POLYGON);
+		glVertex2f(-0.5, -0.5);
+		glVertex2f(-0.5, 0.5);
+		glVertex2f(0.5, 0.5);
+		glVertex2f(0.5, -0.5);
+	glEnd();
+
+	//定義在左上角的區域
+	glColor3f(1.0, 0.0, 1.0);
+	glViewport(0, 200, 200, 200);//一定要注意，後面這兩個參數是高度和寬度，而不是座標
+	glBegin(GL_POLYGON);
+		glVertex2f(-0.5, -0.5);
+		glVertex2f(-0.5, 0.5);
+		glVertex2f(0.5, 0.5);
+		glVertex2f(0.5, -0.5);
+	glEnd();
+
+	//定義在右下角
+	glColor3f(1.0, 1.0, 0.0);
+	glViewport(200, 0, 200, 200);//一定要注意，後面這兩個參數是高度和寬度，而不是座標
+	glBegin(GL_POLYGON);
+		glVertex2f(-0.5, -0.5);
+		glVertex2f(-0.5, 0.5);
+		glVertex2f(0.5, 0.5);
+		glVertex2f(0.5, -0.5);
+	glEnd();
+
+	glFlush();
+}
+
+// 窗口大小變化回調函數
+void reshape(int w, int h)
 {
 }
 
@@ -53,16 +119,26 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
 	}
 }
 
+void mouse(int button, int state, int x, int y)
+{
+}
+
+void motion(int x, int y)
+{
+}
+
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
     //glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
-    glutInitWindowSize(600, 600);
+    glutInitWindowSize(W, H);
     glutInitWindowPosition(1100, 200);
 
     glutCreateWindow("開啟視窗");	//開啟視窗 並顯示出視窗 Title
+
+	init();
 
     glutDisplayFunc(display);	//設定callback function
     glutReshapeFunc(reshape);	//設定callback function
@@ -74,5 +150,4 @@ int main(int argc, char** argv)
 
     return 0;
 }
-
 
