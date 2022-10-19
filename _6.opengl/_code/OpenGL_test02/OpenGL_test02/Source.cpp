@@ -11,14 +11,14 @@ int display_mode = 1;
 
 void init01(void)
 {
-	glOrtho(0.0f, 300.0f, 0.0f, 300.0f, 1.0, -1.0);//設置窗口坐標系大小
-	glClearColor(0.4f, 1.f, 0.8f, 1.0f);//設置背景色
+	glOrtho(0.0f, 300.0f, 0.0f, 300.0f, 1.0, -1.0); //設置窗口坐標系大小
+	glClearColor(0.4f, 1.f, 0.8f, 1.0f);    //設置背景色
 }
 
 // 初始化參數
 void init05()
 {
-    glClearColor(0.1, 0.1, 0.4, 0.0);
+    glClearColor(0.1, 0.1, 0.4, 0.0);   //設置背景色
     glShadeModel(GL_SMOOTH);
 }
 

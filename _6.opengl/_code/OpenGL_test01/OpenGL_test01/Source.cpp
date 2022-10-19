@@ -56,21 +56,21 @@ void init01(void)
 {
     //好像做不做沒甚麼差別
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glClearColor(0.0, 0.0, 0.0, 0.0);   //設置背景色
 
-    //glClearColor(0.1, 0.1, 0.4, 0.0);
+    //glClearColor(0.1, 0.1, 0.4, 0.0); //設置背景色
     //glShadeModel(GL_SMOOTH);
 
-    //glClearColor(0.1, 0.1, 0.4, 0.0);
+    //glClearColor(0.1, 0.1, 0.4, 0.0); //設置背景色
     //glShadeModel(GL_SMOOTH);
 }
 
 //display_mode = 8  //畫茶壺
 void init08()
 {
-    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glClearColor(0.0, 0.0, 0.0, 0.0);   //設置背景色
     glMatrixMode(GL_PROJECTION);
-    glOrtho(-5, 5, -5, 5, 5, 15);
+    glOrtho(-5, 5, -5, 5, 5, 15);   //設置窗口坐標系大小
     glMatrixMode(GL_MODELVIEW);
     gluLookAt(0, 0, 10, 0, 0, 0, 0, 1, 0);
 }
@@ -79,10 +79,10 @@ void init08()
 
 void init09(void)
 {
-    glClearColor(0.0, 0.0, 0.0, 0.0);/* select clearing color   */
+    glClearColor(0.0, 0.0, 0.0, 0.0);   //設置背景色
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0);/* initialize viewing values   */
+    glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0); //設置窗口坐標系大小
 }
 
 void drawText1(void)
@@ -225,7 +225,7 @@ void display(void)
         int i;
         int n = 6;
 
-        glClearColor(0.0, 0.0, 0.0, 0.0);
+        glClearColor(0.0, 0.0, 0.0, 0.0);   //設置背景色
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
         glMatrixMode(GL_PROJECTION);
@@ -271,13 +271,13 @@ void display(void)
         int i;
 
         glEnable(GL_DEPTH_TEST);
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色
         glClearDepth(1.0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
-        glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+        glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);   //設置窗口坐標系大小
         glGetFloatv(GL_PROJECTION_MATRIX, mat);
         /*
         for (i = 0; i < 16; i++)
@@ -323,7 +323,7 @@ void display(void)
         //畫網格
         int i;
 
-        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);   //設置背景色
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
         glMatrixMode(GL_PROJECTION);

@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <iostream>
 
+void drawCoordinates(void);
+
 int mx, my; //position of mouse;
 float x_angle, y_angle; //angle of eye
 

@@ -34,7 +34,6 @@ namespace Bottom_Control
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
             this.daConveyor1 = new Bottom_Control.基本控件.DAConveyor();
             this.daAnalogMeter1 = new Bottom_Control.基本控件.DAAnalogMeter();
             this.daProcessWave1 = new Bottom_Control.基本控件.DAProcessWave();
@@ -43,8 +42,14 @@ namespace Bottom_Control
             this.daProcessEllipse1 = new Bottom_Control.基本控件.DAProcessEllipse();
             this.daSignalLamp1 = new Bottom_Control.基本控件.DASignalLamp();
             this.daThermometer1 = new Bottom_Control.基本控件.DAThermometer();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.daRotor1 = new Bottom_Control.基本控件.DARotor();
+            this.daBottle1 = new Bottom_Control.基本控件.DABottle();
+            this.daPond1 = new Bottom_Control.基本控件.DAPond();
+            this.daConduit1 = new Bottom_Control.基本控件.DAConduit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -59,7 +64,7 @@ namespace Bottom_Control
             // timer1
             // 
             this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
+            this.timer1.Interval = 200;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // tabControl1
@@ -74,6 +79,9 @@ namespace Bottom_Control
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.daConduit1);
+            this.tabPage1.Controls.Add(this.daBottle1);
+            this.tabPage1.Controls.Add(this.daPond1);
             this.tabPage1.Controls.Add(this.daConveyor1);
             this.tabPage1.Controls.Add(this.daAnalogMeter1);
             this.tabPage1.Controls.Add(this.daProcessWave1);
@@ -90,16 +98,6 @@ namespace Bottom_Control
             this.tabPage1.Text = "控件使用";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(1070, 642);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "新進測試";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
             // daConveyor1
             // 
             this.daConveyor1.ConveyorColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
@@ -107,7 +105,7 @@ namespace Bottom_Control
             this.daConveyor1.ConveyorHeight = 50;
             this.daConveyor1.ConveyorSpeed = 100;
             this.daConveyor1.Inclination = 0D;
-            this.daConveyor1.Location = new System.Drawing.Point(18, 137);
+            this.daConveyor1.Location = new System.Drawing.Point(18, 98);
             this.daConveyor1.Name = "daConveyor1";
             this.daConveyor1.Size = new System.Drawing.Size(300, 50);
             this.daConveyor1.TabIndex = 5;
@@ -128,6 +126,7 @@ namespace Bottom_Control
             this.daAnalogMeter1.PLC_Contact = "D";
             this.daAnalogMeter1.PLC_Enable = false;
             this.daAnalogMeter1.Renderer = null;
+            this.daAnalogMeter1.ScaleColor = System.Drawing.Color.Black;
             this.daAnalogMeter1.Size = new System.Drawing.Size(180, 180);
             this.daAnalogMeter1.Style = Sunny.UI.UIStyle.Custom;
             this.daAnalogMeter1.TabIndex = 11;
@@ -145,7 +144,7 @@ namespace Bottom_Control
             this.daProcessWave1.IsRadius = false;
             this.daProcessWave1.IsRectangle = false;
             this.daProcessWave1.IsShowRect = false;
-            this.daProcessWave1.Location = new System.Drawing.Point(18, 250);
+            this.daProcessWave1.Location = new System.Drawing.Point(18, 246);
             this.daProcessWave1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.daProcessWave1.MaxValue = 100;
             this.daProcessWave1.Name = "daProcessWave1";
@@ -166,7 +165,7 @@ namespace Bottom_Control
             this.daMeter1.ExternalRoundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
             this.daMeter1.FixedText = null;
             this.daMeter1.InsideRoundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
-            this.daMeter1.Location = new System.Drawing.Point(489, 220);
+            this.daMeter1.Location = new System.Drawing.Point(371, 250);
             this.daMeter1.MaxValue = new decimal(new int[] {
             100,
             0,
@@ -205,7 +204,7 @@ namespace Bottom_Control
             this.daSwitch1.Checked = false;
             this.daSwitch1.FalseColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(189)))), ((int)(((byte)(189)))));
             this.daSwitch1.FalseTextColr = System.Drawing.Color.White;
-            this.daSwitch1.Location = new System.Drawing.Point(235, 69);
+            this.daSwitch1.Location = new System.Drawing.Point(235, 48);
             this.daSwitch1.Name = "daSwitch1";
             this.daSwitch1.Pattern = Bottom_Control.Button_pattern.Regression;
             this.daSwitch1.PLC_Address = "0";
@@ -226,7 +225,7 @@ namespace Bottom_Control
             this.daProcessEllipse1.Font = new System.Drawing.Font("Arial Unicode MS", 20F);
             this.daProcessEllipse1.ForeColor = System.Drawing.Color.White;
             this.daProcessEllipse1.IsShowCoreEllipseBorder = true;
-            this.daProcessEllipse1.Location = new System.Drawing.Point(200, 250);
+            this.daProcessEllipse1.Location = new System.Drawing.Point(200, 246);
             this.daProcessEllipse1.MaxValue = 100;
             this.daProcessEllipse1.Name = "daProcessEllipse1";
             this.daProcessEllipse1.PLC_Address = "0";
@@ -254,7 +253,7 @@ namespace Bottom_Control
             this.daSignalLamp1.IsShowBorder = false;
             this.daSignalLamp1.LampColor = new System.Drawing.Color[] {
         System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))))};
-            this.daSignalLamp1.Location = new System.Drawing.Point(18, 50);
+            this.daSignalLamp1.Location = new System.Drawing.Point(18, 29);
             this.daSignalLamp1.Name = "daSignalLamp1";
             this.daSignalLamp1.O_FlickerColor = new System.Drawing.Color[] {
         System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))))};
@@ -300,6 +299,103 @@ namespace Bottom_Control
             0,
             0});
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.daRotor1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 22);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(1070, 642);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "新進測試";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // daRotor1
+            // 
+            this.daRotor1.Backdrop_OFF = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(131)))), ((int)(((byte)(229)))));
+            this.daRotor1.Backdrop_ON = System.Drawing.Color.Lime;
+            this.daRotor1.Location = new System.Drawing.Point(882, 34);
+            this.daRotor1.Name = "daRotor1";
+            this.daRotor1.Pattern = Bottom_Control.Button_pattern.selector_witch;
+            this.daRotor1.PLC_Address = "0";
+            this.daRotor1.PLC_Contact = "X";
+            this.daRotor1.PLC_Enable = false;
+            this.daRotor1.RotorAround = HZH_Controls.Controls.RotorAround.None;
+            this.daRotor1.RotorColor = System.Drawing.Color.Black;
+            this.daRotor1.Size = new System.Drawing.Size(150, 150);
+            this.daRotor1.Speed = 100;
+            this.daRotor1.TabIndex = 1;
+            // 
+            // daBottle1
+            // 
+            this.daBottle1.BottleColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
+            this.daBottle1.BottleMouthColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(105)))), ((int)(((byte)(105)))));
+            this.daBottle1.Control_Text = "50";
+            this.daBottle1.Direction = HZH_Controls.Controls.Direction.Down;
+            this.daBottle1.LiquidColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(169)))), ((int)(((byte)(243)))));
+            this.daBottle1.Location = new System.Drawing.Point(218, 418);
+            this.daBottle1.MaxValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.daBottle1.Name = "daBottle1";
+            this.daBottle1.NO = null;
+            this.daBottle1.PLC_Address = "0";
+            this.daBottle1.PLC_Contact = "D";
+            this.daBottle1.PLC_Enable = false;
+            this.daBottle1.Size = new System.Drawing.Size(100, 150);
+            this.daBottle1.TabIndex = 13;
+            this.daBottle1.Title = "瓶子1";
+            this.daBottle1.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            // 
+            // daPond1
+            // 
+            this.daPond1.Control_Text = "0";
+            this.daPond1.LiquidColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(169)))), ((int)(((byte)(243)))));
+            this.daPond1.Location = new System.Drawing.Point(18, 472);
+            this.daPond1.MaxValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.daPond1.Name = "daPond1";
+            this.daPond1.PLC_Address = "0";
+            this.daPond1.PLC_Contact = "D";
+            this.daPond1.PLC_Enable = false;
+            this.daPond1.Size = new System.Drawing.Size(150, 50);
+            this.daPond1.TabIndex = 12;
+            this.daPond1.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.daPond1.WallColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
+            this.daPond1.WallWidth = 2;
+            // 
+            // daConduit1
+            // 
+            this.daConduit1.Backdrop_OFF = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(131)))), ((int)(((byte)(229)))));
+            this.daConduit1.Backdrop_ON = System.Drawing.Color.Lime;
+            this.daConduit1.ConduitColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
+            this.daConduit1.ConduitStyle = HZH_Controls.Controls.ConduitStyle.Horizontal_None_None;
+            this.daConduit1.ConduitWidth = 50;
+            this.daConduit1.LiquidColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(169)))), ((int)(((byte)(243)))));
+            this.daConduit1.LiquidDirection = HZH_Controls.Controls.LiquidDirection.Forward;
+            this.daConduit1.LiquidSpeed = 100;
+            this.daConduit1.Location = new System.Drawing.Point(18, 173);
+            this.daConduit1.Name = "daConduit1";
+            this.daConduit1.Pattern = Bottom_Control.Button_pattern.Regression;
+            this.daConduit1.PLC_Address = "0";
+            this.daConduit1.PLC_Contact = "X";
+            this.daConduit1.PLC_Enable = false;
+            this.daConduit1.Size = new System.Drawing.Size(300, 50);
+            this.daConduit1.TabIndex = 14;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -312,6 +408,7 @@ namespace Bottom_Control
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -330,5 +427,9 @@ namespace Bottom_Control
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
+        private 基本控件.DARotor daRotor1;
+        private 基本控件.DABottle daBottle1;
+        private 基本控件.DAPond daPond1;
+        private 基本控件.DAConduit daConduit1;
     }
 }

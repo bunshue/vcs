@@ -68,6 +68,19 @@ namespace Bottom_Control
                 daAnalogMeter1.Value = 0;
             }
 
+
+            if(daPond1.Value < 100)
+                daPond1.Value++;
+            else
+                daPond1.Value = 0;
+
+            if(daBottle1.Value < 100)
+                daBottle1.Value++;
+            else
+                daBottle1.Value = 0;
+
+
+
         }
 
     }

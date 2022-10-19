@@ -35,26 +35,26 @@ void display(void)
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	glColor3f(1.0, 0.0, 0.0);
-	glRasterPos2i(100, 300);//确定当前光栅位置，x,y,z,w指定了当前光栅位置的坐标
+	glRasterPos2i(100, 300);//確定當前光柵位置，x,y,z,w指定了當前光柵位置的坐標
 	glBitmap(10, 12, 0.0, 0.0, 11.0, 0.0, rasters);
 
 	glColor3f(0.0, 1.0, 0.0);
-	glRasterPos2i(100, 200);//确定当前光栅位置，x,y,z,w指定了当前光栅位置的坐标
+	glRasterPos2i(100, 200);//確定當前光柵位置，x,y,z,w指定了當前光柵位置的坐標
 	glBitmap(10, 12, 0.0, 0.0, 11.0, 0.0, rasters);
 
 	glColor3f(0.0, 0.0, 1.0);
-	glRasterPos2i(100, 100);//确定当前光栅位置，x,y,z,w指定了当前光栅位置的坐标
+	glRasterPos2i(100, 100);//確定當前光柵位置，x,y,z,w指定了當前光柵位置的坐標
 	glBitmap(10, 12, 0.0, 0.0, 11.0, 0.0, rasters);
 
 	glColor3f(1.0, 1.0, 1.0);
-	glRasterPos2i(20, 20);//确定当前光栅位置，x,y,z,w指定了当前光栅位置的坐标
+	glRasterPos2i(20, 20);//確定當前光柵位置，x,y,z,w指定了當前光柵位置的坐標
 	glBitmap(10, 12, 0.0, 0.0, 11.0, 0.0, rasters);
 	glBitmap(10, 12, 0.0, 0.0, 11.0, 0.0, rasters);
 	glBitmap(10, 12, 0.0, 0.0, 11.0, 0.0, rasters);
 
-	//绘制由bitmap指定的位图，bitmap是一个指向位图图像的指针，位图的原点是当前光栅位置，如果当前光栅位置无效，则这个函数不会绘制任何东西。
-	//width和height表示位图的宽度和高度，xorig和yorig定义了位图的原点，他是根据当期光栅位置确定的，右上为正。
-	//xmove和ymove表示位图光栅化之后光栅坐标的x增加值和y增加值
+	//繪制由bitmap指定的位圖，bitmap是一個指向位圖圖像的指針，位圖的原點是當前光柵位置，如果當前光柵位置無效，則這個函數不會繪制任何東西。
+	//width和height表示位圖的寬度和高度，xorig和yorig定義了位圖的原點，他是根據當期光柵位置確定的，右上為正。
+	//xmove和ymove表示位圖光柵化之后光柵坐標的x增加值和y增加值
 	glFlush();
 }
 
@@ -130,5 +130,4 @@ int main(int argc, char** argv)
 
 	return 0;
 }
-
 

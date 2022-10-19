@@ -2,9 +2,9 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 
 //
-// 有关程序集的常规信息是通过下列
-// 属性集控制的。更改这些属性值可修改与程序集
-// 关联的信息。
+// Τ闽祘栋盽砏獺琌硄筁
+// 妮┦栋北э硂ㄇ妮┦э籔祘栋
+// 闽羛獺
 //
 [assembly: AssemblyTitle("")]
 [assembly: AssemblyDescription("")]
@@ -13,46 +13,47 @@ using System.Runtime.CompilerServices;
 [assembly: AssemblyProduct("")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyTrademark("")]
-[assembly: AssemblyCulture("")]		
+[assembly: AssemblyCulture("")]
 
 //
-// 程序集的版本信息由下列 4 个值组成:
+// 祘栋セ獺パ 4 舱Θ:
 //
-//      主版本
-//      次版本 
-//      内部版本号
-//      修订号
+//      セ
+//      Ωセ 
+//      ず场セ腹
+//      璹腹
 //
-// 您可以指定所有这些值，也可以使用“修订号”和“内部版本号”的默认值，方法是按
-// 如下所示使用 '*':
+// 眤﹚┮Τ硂ㄇㄏノ¨璹腹〃㎝¨ず场セ腹〃纐粄よ猭琌
+// ┮ボㄏノ '*':
 
 [assembly: AssemblyVersion("1.0.*")]
 
 //
-// 要对程序集进行签名，必须指定要使用的密钥。有关程序集签名的更多信息，请参考 
-// Microsoft .NET Framework 文档。
+// 璶癸祘栋秈︽帽ゲ斗﹚璶ㄏノ盞芲Τ闽祘栋帽獺叫把σ 
+// Microsoft .NET Framework ゅ郎
 //
-// 使用下面的属性控制用于签名的密钥。
+// ㄏノ妮┦北ノ帽盞芲
 //
-// 注意:
-//   (*) 如果未指定密钥，则程序集不会被签名。
-//   (*) KeyName 是指已经安装在计算机上的
-//      加密服务提供程序(CSP)中的密钥。KeyFile 是指包含
-//       密钥的文件。
-//   (*) 如果 KeyFile 和 KeyName 值都已指定，则 
-//       发生下列处理:
-//       (1) 如果在 CSP 中可以找到 KeyName，则使用该密钥。
-//       (2) 如果 KeyName 不存在而 KeyFile 存在，则 
-//           KeyFile 中的密钥安装到 CSP 中并且使用该密钥。
-//   (*) 要创建 KeyFile，可以使用 sn.exe(强名称)实用工具。
-//       在指定 KeyFile 时，KeyFile 的位置应该相对于
-//       项目输出目录，即
-//       %Project Directory%\obj\<configuration>。例如，如果 KeyFile 位于
-//       该项目目录，应将 AssemblyKeyFile 
-//       属性指定为 [assembly: AssemblyKeyFile("..\\..\\mykey.snk")]
-//   (*) “延迟签名”是一个高级选项 - 有关它的更多信息，请参阅 Microsoft .NET Framework
-//       文档。
+// 猔種:
+//   (*) 狦ゼ﹚盞芲玥祘栋ぃ穦砆帽
+//   (*) KeyName 琌竒杆璸衡诀
+//      盞狝叭矗ㄑ祘(CSP)い盞芲KeyFile 琌
+//       盞芲ゅン
+//   (*) 狦 KeyFile ㎝ KeyName 常﹚玥 
+//       祇ネ矪瞶:
+//       (1) 狦 CSP いт KeyName玥ㄏノ赣盞芲
+//       (2) 狦 KeyName ぃτ KeyFile 玥 
+//           KeyFile い盞芲杆 CSP いㄏノ赣盞芲
+//   (*) 璶承 KeyFileㄏノ sn.exe(眏嘿)龟ノㄣ
+//       ﹚ KeyFile KeyFile 竚莱赣癸
+//       兜ヘ块ヘ魁
+//       %Project Directory%\obj\<configuration>ㄒ狦 KeyFile 
+//       赣兜ヘヘ魁莱盢 AssemblyKeyFile 
+//       妮┦﹚ [assembly: AssemblyKeyFile("..\\..\\mykey.snk")]
+//   (*) ¨┑筐帽〃琌蔼匡兜 - Τ闽ウ獺叫把綷 Microsoft .NET Framework
+//       ゅ郎
 //
 [assembly: AssemblyDelaySign(false)]
 [assembly: AssemblyKeyFile("")]
 [assembly: AssemblyKeyName("")]
+

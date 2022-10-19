@@ -3,7 +3,7 @@ using System.Data;
 
 namespace hisonic.WinForm.HisonicControl.CourseGrid
 {
-	// 和课程表CourseTable类相关的单元格的结构
+    // ㎝揭祘CourseTable摸闽虫じ挡篶
 	#region
 	public struct CellDataStruct
 	{
