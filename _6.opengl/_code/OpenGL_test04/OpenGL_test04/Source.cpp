@@ -4,11 +4,6 @@
 #include <stdio.h>
 #include <iostream>
 
-GLubyte rasters[24] = {
-   0xc0, 0x00, 0xc0, 0x00, 0xc0, 0x00, 0xc0, 0x00, 0xc0, 0x00,
-   0xff, 0x00, 0xff, 0x00, 0xc0, 0x00, 0xc0, 0x00, 0xc0, 0x00,
-   0xff, 0xc0, 0xff, 0xc0 };
-
 void init(void)
 {
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -34,23 +29,44 @@ void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	glColor3f(1.0, 0.0, 0.0);
-	glRasterPos2i(100, 300);//確定當前光柵位置，x,y,z,w指定了當前光柵位置的坐標
-	glBitmap(10, 12, 0.0, 0.0, 11.0, 0.0, rasters);
+	glColor3f(1.0, 0.0, 0.0);	//設定顏色
 
-	glColor3f(0.0, 1.0, 0.0);
-	glRasterPos2i(100, 200);//確定當前光柵位置，x,y,z,w指定了當前光柵位置的坐標
-	glBitmap(10, 12, 0.0, 0.0, 11.0, 0.0, rasters);
+	//光柵的位置
+	glRasterPos2i(0, 0);//確定當前光柵位置，x,y,z,w指定了當前光柵位置的坐標
 
-	glColor3f(0.0, 0.0, 1.0);
-	glRasterPos2i(100, 100);//確定當前光柵位置，x,y,z,w指定了當前光柵位置的坐標
-	glBitmap(10, 12, 0.0, 0.0, 11.0, 0.0, rasters);
+	//畫一個64*64
+	int i;
+	int len = 64 / 8 * 64;
+	GLubyte rasters[64 / 8 * 64] = {
+	};
+	for (i = 0; i < len; i++)
+	{
+		if (i % 2 == 0)
+			rasters[i] = 0xff;
+		else
+			rasters[i] = 0xff;
+	}
 
-	glColor3f(1.0, 1.0, 1.0);
-	glRasterPos2i(20, 20);//確定當前光柵位置，x,y,z,w指定了當前光柵位置的坐標
-	glBitmap(10, 12, 0.0, 0.0, 11.0, 0.0, rasters);
-	glBitmap(10, 12, 0.0, 0.0, 11.0, 0.0, rasters);
-	glBitmap(10, 12, 0.0, 0.0, 11.0, 0.0, rasters);
+	float offsetx = 0.0;
+	float offsety = 0.0;
+	float dx = 100.0;
+	float dy = 100.0;
+
+	//畫完bmp後, 下次位置加上dx dy
+	glBitmap(64, 64, offsetx, offsety, dx, dy, rasters);
+	glBitmap(64, 64, offsetx, offsety, dx, dy, rasters);
+	glBitmap(64, 64, offsetx, offsety, dx, dy, rasters);
+	glBitmap(64, 64, offsetx, offsety, dx, dy, rasters);
+
+	for (i = 0; i < len; i++)
+	{
+		if (i % 2 == 0)
+			rasters[i] = 0x55;
+		else
+			rasters[i] = 0x55;
+	}
+	glBitmap(64, 64, offsetx, offsety, dx, dy, rasters);
+
 
 	//繪制由bitmap指定的位圖，bitmap是一個指向位圖圖像的指針，位圖的原點是當前光柵位置，如果當前光柵位置無效，則這個函數不會繪制任何東西。
 	//width和height表示位圖的寬度和高度，xorig和yorig定義了位圖的原點，他是根據當期光柵位置確定的，右上為正。

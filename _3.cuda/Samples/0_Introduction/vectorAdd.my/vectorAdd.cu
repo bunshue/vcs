@@ -136,12 +136,12 @@ int main(void)
     printf("Copy output data from the CUDA device to the host memory\n");
 
     printf("old\n");
-    printData(h_A, h_B, h_C, 20);
+    printData(h_A, h_B, h_C, 30);
 
     err = cudaMemcpy(h_C, d_C, size, cudaMemcpyDeviceToHost);
 
     printf("new\n");
-    printData(h_A, h_B, h_C, 20);
+    printData(h_A, h_B, h_C, 30);
 
     if (err != cudaSuccess)
     {

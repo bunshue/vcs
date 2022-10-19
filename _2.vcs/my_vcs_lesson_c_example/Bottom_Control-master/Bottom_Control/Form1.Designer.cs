@@ -34,6 +34,9 @@ namespace Bottom_Control
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.daConduit1 = new Bottom_Control.基本控件.DAConduit();
+            this.daBottle1 = new Bottom_Control.基本控件.DABottle();
+            this.daPond1 = new Bottom_Control.基本控件.DAPond();
             this.daConveyor1 = new Bottom_Control.基本控件.DAConveyor();
             this.daAnalogMeter1 = new Bottom_Control.基本控件.DAAnalogMeter();
             this.daProcessWave1 = new Bottom_Control.基本控件.DAProcessWave();
@@ -44,9 +47,8 @@ namespace Bottom_Control
             this.daThermometer1 = new Bottom_Control.基本控件.DAThermometer();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.daRotor1 = new Bottom_Control.基本控件.DARotor();
-            this.daBottle1 = new Bottom_Control.基本控件.DABottle();
-            this.daPond1 = new Bottom_Control.基本控件.DAPond();
-            this.daConduit1 = new Bottom_Control.基本控件.DAConduit();
+            this.daAlarmLamp1 = new Bottom_Control.基本控件.DAAlarmLamp();
+            this.daLedBulb1 = new Bottom_Control.基本控件.DALedBulb();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -79,6 +81,8 @@ namespace Bottom_Control
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.daLedBulb1);
+            this.tabPage1.Controls.Add(this.daAlarmLamp1);
             this.tabPage1.Controls.Add(this.daConduit1);
             this.tabPage1.Controls.Add(this.daBottle1);
             this.tabPage1.Controls.Add(this.daPond1);
@@ -97,6 +101,76 @@ namespace Bottom_Control
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "控件使用";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // daConduit1
+            // 
+            this.daConduit1.Backdrop_OFF = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(131)))), ((int)(((byte)(229)))));
+            this.daConduit1.Backdrop_ON = System.Drawing.Color.Lime;
+            this.daConduit1.ConduitColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
+            this.daConduit1.ConduitStyle = HZH_Controls.Controls.ConduitStyle.Horizontal_None_None;
+            this.daConduit1.ConduitWidth = 50;
+            this.daConduit1.LiquidColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(169)))), ((int)(((byte)(243)))));
+            this.daConduit1.LiquidDirection = HZH_Controls.Controls.LiquidDirection.Forward;
+            this.daConduit1.LiquidSpeed = 100;
+            this.daConduit1.Location = new System.Drawing.Point(18, 173);
+            this.daConduit1.Name = "daConduit1";
+            this.daConduit1.Pattern = Bottom_Control.Button_pattern.Regression;
+            this.daConduit1.PLC_Address = "0";
+            this.daConduit1.PLC_Contact = "X";
+            this.daConduit1.PLC_Enable = false;
+            this.daConduit1.Size = new System.Drawing.Size(300, 50);
+            this.daConduit1.TabIndex = 14;
+            // 
+            // daBottle1
+            // 
+            this.daBottle1.BottleColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
+            this.daBottle1.BottleMouthColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(105)))), ((int)(((byte)(105)))));
+            this.daBottle1.Control_Text = "50";
+            this.daBottle1.Direction = HZH_Controls.Controls.Direction.Down;
+            this.daBottle1.LiquidColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(169)))), ((int)(((byte)(243)))));
+            this.daBottle1.Location = new System.Drawing.Point(218, 418);
+            this.daBottle1.MaxValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.daBottle1.Name = "daBottle1";
+            this.daBottle1.NO = null;
+            this.daBottle1.PLC_Address = "0";
+            this.daBottle1.PLC_Contact = "D";
+            this.daBottle1.PLC_Enable = false;
+            this.daBottle1.Size = new System.Drawing.Size(100, 150);
+            this.daBottle1.TabIndex = 13;
+            this.daBottle1.Title = "瓶子1";
+            this.daBottle1.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
+            // 
+            // daPond1
+            // 
+            this.daPond1.Control_Text = "0";
+            this.daPond1.LiquidColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(169)))), ((int)(((byte)(243)))));
+            this.daPond1.Location = new System.Drawing.Point(18, 472);
+            this.daPond1.MaxValue = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.daPond1.Name = "daPond1";
+            this.daPond1.PLC_Address = "0";
+            this.daPond1.PLC_Contact = "D";
+            this.daPond1.PLC_Enable = false;
+            this.daPond1.Size = new System.Drawing.Size(150, 50);
+            this.daPond1.TabIndex = 12;
+            this.daPond1.Value = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.daPond1.WallColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
+            this.daPond1.WallWidth = 2;
             // 
             // daConveyor1
             // 
@@ -117,7 +191,7 @@ namespace Bottom_Control
             this.daAnalogMeter1.Control_Text = "0";
             this.daAnalogMeter1.Font = new System.Drawing.Font("微软雅黑", 12F);
             this.daAnalogMeter1.ForeColor = System.Drawing.Color.White;
-            this.daAnalogMeter1.Location = new System.Drawing.Point(489, 34);
+            this.daAnalogMeter1.Location = new System.Drawing.Point(493, 34);
             this.daAnalogMeter1.MaxValue = 100D;
             this.daAnalogMeter1.MinValue = 0D;
             this.daAnalogMeter1.Name = "daAnalogMeter1";
@@ -204,7 +278,7 @@ namespace Bottom_Control
             this.daSwitch1.Checked = false;
             this.daSwitch1.FalseColor = System.Drawing.Color.FromArgb(((int)(((byte)(189)))), ((int)(((byte)(189)))), ((int)(((byte)(189)))));
             this.daSwitch1.FalseTextColr = System.Drawing.Color.White;
-            this.daSwitch1.Location = new System.Drawing.Point(235, 48);
+            this.daSwitch1.Location = new System.Drawing.Point(247, 48);
             this.daSwitch1.Name = "daSwitch1";
             this.daSwitch1.Pattern = Bottom_Control.Button_pattern.Regression;
             this.daSwitch1.PLC_Address = "0";
@@ -326,75 +400,46 @@ namespace Bottom_Control
             this.daRotor1.Speed = 100;
             this.daRotor1.TabIndex = 1;
             // 
-            // daBottle1
+            // daAlarmLamp1
             // 
-            this.daBottle1.BottleColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
-            this.daBottle1.BottleMouthColor = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(105)))), ((int)(((byte)(105)))));
-            this.daBottle1.Control_Text = "50";
-            this.daBottle1.Direction = HZH_Controls.Controls.Direction.Down;
-            this.daBottle1.LiquidColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(169)))), ((int)(((byte)(243)))));
-            this.daBottle1.Location = new System.Drawing.Point(218, 418);
-            this.daBottle1.MaxValue = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.daBottle1.Name = "daBottle1";
-            this.daBottle1.NO = null;
-            this.daBottle1.PLC_Address = "0";
-            this.daBottle1.PLC_Contact = "D";
-            this.daBottle1.PLC_Enable = false;
-            this.daBottle1.Size = new System.Drawing.Size(100, 150);
-            this.daBottle1.TabIndex = 13;
-            this.daBottle1.Title = "瓶子1";
-            this.daBottle1.Value = new decimal(new int[] {
-            50,
-            0,
-            0,
-            0});
+            this.daAlarmLamp1.Backdrop_OFF = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(131)))), ((int)(((byte)(229)))));
+            this.daAlarmLamp1.Backdrop_ON = System.Drawing.Color.Lime;
+            this.daAlarmLamp1.Button_select = false;
+            this.daAlarmLamp1.Command = false;
+            this.daAlarmLamp1.I_FlickerColor = new System.Drawing.Color[] {
+        System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))))};
+            this.daAlarmLamp1.I_FlickerTime = 1000;
+            this.daAlarmLamp1.LampColor = new System.Drawing.Color[] {
+        System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))))};
+            this.daAlarmLamp1.Lampstand = System.Drawing.Color.FromArgb(((int)(((byte)(105)))), ((int)(((byte)(105)))), ((int)(((byte)(105)))));
+            this.daAlarmLamp1.Location = new System.Drawing.Point(167, 29);
+            this.daAlarmLamp1.Name = "daAlarmLamp1";
+            this.daAlarmLamp1.O_FlickerColor = new System.Drawing.Color[] {
+        System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))))};
+            this.daAlarmLamp1.O_FlickerTime = 1000;
+            this.daAlarmLamp1.Pattern = Bottom_Control.Button_pattern.Regression;
+            this.daAlarmLamp1.PLC_Address = "0";
+            this.daAlarmLamp1.PLC_Contact = "X";
+            this.daAlarmLamp1.PLC_Enable = false;
+            this.daAlarmLamp1.Size = new System.Drawing.Size(50, 50);
+            this.daAlarmLamp1.TabIndex = 15;
+            this.daAlarmLamp1.Text_OFF = "OFF";
+            this.daAlarmLamp1.Text_ON = "ON";
+            this.daAlarmLamp1.TwinkleSpeed = 0;
             // 
-            // daPond1
+            // daLedBulb1
             // 
-            this.daPond1.Control_Text = "0";
-            this.daPond1.LiquidColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(169)))), ((int)(((byte)(243)))));
-            this.daPond1.Location = new System.Drawing.Point(18, 472);
-            this.daPond1.MaxValue = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.daPond1.Name = "daPond1";
-            this.daPond1.PLC_Address = "0";
-            this.daPond1.PLC_Contact = "D";
-            this.daPond1.PLC_Enable = false;
-            this.daPond1.Size = new System.Drawing.Size(150, 50);
-            this.daPond1.TabIndex = 12;
-            this.daPond1.Value = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.daPond1.WallColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
-            this.daPond1.WallWidth = 2;
-            // 
-            // daConduit1
-            // 
-            this.daConduit1.Backdrop_OFF = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(131)))), ((int)(((byte)(229)))));
-            this.daConduit1.Backdrop_ON = System.Drawing.Color.Lime;
-            this.daConduit1.ConduitColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(77)))), ((int)(((byte)(59)))));
-            this.daConduit1.ConduitStyle = HZH_Controls.Controls.ConduitStyle.Horizontal_None_None;
-            this.daConduit1.ConduitWidth = 50;
-            this.daConduit1.LiquidColor = System.Drawing.Color.FromArgb(((int)(((byte)(3)))), ((int)(((byte)(169)))), ((int)(((byte)(243)))));
-            this.daConduit1.LiquidDirection = HZH_Controls.Controls.LiquidDirection.Forward;
-            this.daConduit1.LiquidSpeed = 100;
-            this.daConduit1.Location = new System.Drawing.Point(18, 173);
-            this.daConduit1.Name = "daConduit1";
-            this.daConduit1.Pattern = Bottom_Control.Button_pattern.Regression;
-            this.daConduit1.PLC_Address = "0";
-            this.daConduit1.PLC_Contact = "X";
-            this.daConduit1.PLC_Enable = false;
-            this.daConduit1.Size = new System.Drawing.Size(300, 50);
-            this.daConduit1.TabIndex = 14;
+            this.daLedBulb1.Backdrop_OFF = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(131)))), ((int)(((byte)(229)))));
+            this.daLedBulb1.Backdrop_ON = System.Drawing.Color.Lime;
+            this.daLedBulb1.Location = new System.Drawing.Point(95, 34);
+            this.daLedBulb1.Name = "daLedBulb1";
+            this.daLedBulb1.Pattern = Bottom_Control.Button_pattern.Regression;
+            this.daLedBulb1.PLC_Address = "0";
+            this.daLedBulb1.PLC_Contact = "X";
+            this.daLedBulb1.PLC_Enable = false;
+            this.daLedBulb1.Size = new System.Drawing.Size(32, 32);
+            this.daLedBulb1.TabIndex = 16;
+            this.daLedBulb1.Text = "daLedBulb1";
             // 
             // Form1
             // 
@@ -431,5 +476,7 @@ namespace Bottom_Control
         private 基本控件.DABottle daBottle1;
         private 基本控件.DAPond daPond1;
         private 基本控件.DAConduit daConduit1;
+        private 基本控件.DALedBulb daLedBulb1;
+        private 基本控件.DAAlarmLamp daAlarmLamp1;
     }
 }

@@ -22,26 +22,6 @@ void init05()
     glShadeModel(GL_SMOOTH);
 }
 
-// 窗口大小變化回調函數
-void reshape(int w, int h)
-{
-    glViewport(0, 0, w, h);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluPerspective(60.0, (GLfloat)w / (GLfloat)h, 0.1, 100000.0);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-
-}
-
-void mouse(int button, int state, int x, int y)
-{
-}
-
-void motion(int x, int y)
-{
-}
-
 // 繪圖回調函數
 void display(void)
 {
@@ -195,6 +175,18 @@ void display(void)
     }
 }
 
+// 窗口大小變化回調函數
+void reshape(int w, int h)
+{
+    glViewport(0, 0, w, h);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(60.0, (GLfloat)w / (GLfloat)h, 0.1, 100000.0);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+}
+
 void keyboard(unsigned char k, int /*x*/, int /*y*/)
 {
 	switch (k)
@@ -240,6 +232,14 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
 
     }
     glutPostRedisplay();    //將當前視窗打上標記，標記其需要再次顯示。
+}
+
+void mouse(int button, int state, int x, int y)
+{
+}
+
+void motion(int x, int y)
+{
 }
 
 int main(int argc, char** argv)

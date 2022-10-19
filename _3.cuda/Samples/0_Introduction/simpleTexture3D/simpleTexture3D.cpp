@@ -111,7 +111,6 @@ void render()
     }
 }
 
-// display results using OpenGL (called by GLUT)
 void display()
 {
     sdkStartTimer(&timer);
@@ -135,13 +134,16 @@ void display()
     computeFPS();
 }
 
-void idle()
+void reshape(int x, int y)
 {
-    if (animate)
-    {
-        w += 0.01f;
-        glutPostRedisplay();
-    }
+    glViewport(0, 0, x, y);
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(0.0, 1.0, 0.0, 1.0, 0.0, 1.0);
 }
 
 void keyboard(unsigned char key, int x, int y)
@@ -177,16 +179,13 @@ void keyboard(unsigned char key, int x, int y)
     glutPostRedisplay();
 }
 
-void reshape(int x, int y)
+void idle()
 {
-    glViewport(0, 0, x, y);
-
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glOrtho(0.0, 1.0, 0.0, 1.0, 0.0, 1.0);
+    if (animate)
+    {
+        w += 0.01f;
+        glutPostRedisplay();
+    }
 }
 
 void cleanup()
@@ -252,9 +251,9 @@ void initGL(int* argc, char** argv)
     glutCreateWindow("CUDA 3D texture");
 
     glutDisplayFunc(display);
-    glutKeyboardFunc(keyboard);
     glutReshapeFunc(reshape);
-    glutIdleFunc(idle);
+    glutKeyboardFunc(keyboard);
+    glutIdleFunc(idle); //利用idle事件進行重畫
 
     if (!isGLVersionSupported(2, 0) || !areGLExtensionsSupported("GL_ARB_pixel_buffer_object"))
     {

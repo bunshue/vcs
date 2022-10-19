@@ -10,41 +10,6 @@ void drawCoordinates(void);
 int mx, my; //position of mouse;
 float x_angle, y_angle; //angle of eye
 
-void reshape(int w, int h)
-{
-	glViewport(0, 0, w, h);
-}
-
-void mouse(int button, int state, int x, int y)
-{
-	//MouseDown
-	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
-	{
-		mx = x;
-		my = y;
-		printf("D(%d, %d) ", mx, my);
-	}
-}
-
-void motion(int x, int y)
-{
-	//MouseMove
-	int dx, dy; //offset of mouse;
-
-	dx = x - mx;
-	dy = y - my;
-
-	y_angle += dx * 0.01f;
-	x_angle += dy * 0.01f;
-
-	mx = x;
-	my = y;
-
-	printf("M(%d, %d) ", mx, my);
-
-	glutPostRedisplay();
-}
-
 void display(void)
 {
 	printf("d ");
@@ -81,7 +46,6 @@ void display(void)
 	glutSwapBuffers();
 }
 
-
 void drawCoordinates(void)
 {
 	glLineWidth(3.0f);
@@ -104,6 +68,12 @@ void drawCoordinates(void)
 	glVertex3f(0.0f, 0.0f, 1.0f);
 	glEnd();
 }
+
+void reshape(int w, int h)
+{
+	glViewport(0, 0, w, h);
+}
+
 void keyboard(unsigned char k, int /*x*/, int /*y*/)
 {
 	switch (k)
@@ -132,6 +102,36 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
 	case '?':
 		break;
 	}
+}
+
+void mouse(int button, int state, int x, int y)
+{
+	//MouseDown
+	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+	{
+		mx = x;
+		my = y;
+		printf("D(%d, %d) ", mx, my);
+	}
+}
+
+void motion(int x, int y)
+{
+	//MouseMove
+	int dx, dy; //offset of mouse;
+
+	dx = x - mx;
+	dy = y - my;
+
+	y_angle += dx * 0.01f;
+	x_angle += dy * 0.01f;
+
+	mx = x;
+	my = y;
+
+	printf("M(%d, %d) ", mx, my);
+
+	glutPostRedisplay();
 }
 
 int main(int argc, char** argv)
