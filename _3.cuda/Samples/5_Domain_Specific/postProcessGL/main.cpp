@@ -567,8 +567,7 @@ void createTextureSrc(GLuint* tex_screen, unsigned int size_x, unsigned int size
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA16F_ARB, size_x, size_y, 0, GL_RGBA, GL_UNSIGNED_BYTE, NULL);
 #else
     printf("Creating a Texture render target GL_RGBA8UI_EXT\n");
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8UI_EXT, size_x, size_y, 0,
-        GL_RGBA_INTEGER_EXT, GL_UNSIGNED_BYTE, NULL);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8UI_EXT, size_x, size_y, 0, GL_RGBA_INTEGER_EXT, GL_UNSIGNED_BYTE, NULL);
 #endif
     SDK_CHECK_ERROR_GL();
     // register this texture with CUDA
@@ -641,8 +640,7 @@ void createDepthBuffer(GLuint* depth, unsigned int size_x, unsigned int size_y)
 //    SDK_CHECK_ERROR_GL();
 //
 //  checkCudaErrors(cudaGraphicsGLRegisterImage(&cuda_tex_screen_resource,
-//  *render,
-//                        GL_RENDERBUFFER_EXT, cudaGraphicsMapFlagsReadOnly));
+//  *render, GL_RENDERBUFFER_EXT, cudaGraphicsMapFlagsReadOnly));
 //}
 
 void deleteDepthBuffer(GLuint* depth)
@@ -907,14 +905,14 @@ void runStdProgram(int argc, char** argv)
     sdkCreateTimer(&timer);
     sdkResetTimer(&timer);
 
-    // register callbacks
     glutDisplayFunc(display);
-    glutKeyboardFunc(keyboard);
     glutReshapeFunc(reshape);
+    glutKeyboardFunc(keyboard);
+
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
 
-    // create menu
     glutCreateMenu(mainMenu);
+
     glutAddMenuEntry("Toggle CUDA Post Processing (on/off) [ ]", ' ');
     glutAddMenuEntry("Toggle Animation (on/off) [a]", 'a');
     glutAddMenuEntry("Increase Blur Radius [=]", '=');
@@ -930,6 +928,7 @@ void runStdProgram(int argc, char** argv)
     // Creating the Auto-Validation Code
     if (ref_file)
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
         g_CheckRender = new CheckBackBuffer(window_width, window_height, 4);
         g_CheckRender->setPixelFormat(GL_RGBA);
         g_CheckRender->setExecPath(argv[0]);

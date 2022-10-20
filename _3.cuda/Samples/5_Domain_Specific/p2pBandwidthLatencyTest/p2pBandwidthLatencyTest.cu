@@ -30,14 +30,15 @@ P2PEngine p2p_mechanism = CE;  // By default use Copy Engine
       exit(EXIT_FAILURE);                                      \
     }                                                          \
   }
-__global__ void delay(volatile int* flag,
-    unsigned long long timeout_clocks = 10000000) {
+__global__ void delay(volatile int* flag, unsigned long long timeout_clocks = 10000000)
+{
     // Wait until the application notifies us that it has completed queuing up the
     // experiment, or timeout and exit, allowing the application to make progress
     long long int start_clock, sample_clock;
     start_clock = clock64();
 
-    while (!*flag) {
+    while (!*flag)
+    {
         sample_clock = clock64();
 
         if (sample_clock - start_clock > timeout_clocks) {
@@ -376,8 +377,7 @@ void outputBidirectionalBandwidthMatrix(int numElems, int numGPUs, bool p2p)
                 performP2PCopy(buffers[j], j, buffers[i], i, numElems, repeat, access, stream0[i]);
             }
 
-            // Notify stream0 that stream1 is complete and record the time of
-            // the total transaction
+            // Notify stream0 that stream1 is complete and record the time of the total transaction
             cudaEventRecord(stop[j], stream1[j]);
             cudaStreamWaitEvent(stream0[i], stop[j], 0);
             cudaEventRecord(stop[i], stream0[i]);

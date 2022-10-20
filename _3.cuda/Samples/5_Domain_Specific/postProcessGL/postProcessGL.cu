@@ -27,8 +27,7 @@ __device__ uchar4 getPixel(int x, int y, cudaTextureObject_t inTex)
 {
 #ifndef USE_TEXTURE_RGBA8UI
     float4 res = tex2D<float4>(inTex, x, y);
-    uchar4 ucres = make_uchar4(res.x * 255.0f, res.y * 255.0f, res.z * 255.0f,
-        res.w * 255.0f);
+    uchar4 ucres = make_uchar4(res.x * 255.0f, res.y * 255.0f, res.z * 255.0f, res.w * 255.0f);
 #else
     uchar4 ucres = tex2D<uchar4>(inTex, x, y);
 #endif
@@ -222,8 +221,7 @@ extern "C" void launch_cudaProcess(dim3 grid, dim3 block, int sbytes, cudaArray 
 
     if (radius == 4)
     {
-        printf("\n");
-        printf("postprocessGL, Throughput = %.4f MTexels/s, Time = %.5f s, Size = "
+        printf("\npostprocessGL, Throughput = %.4f MTexels/s, Time = %.5f s, Size = "
             "%.0f Texels, NumDevsUsed = %d, Workgroup = %u\n", mtexps, dSeconds, dNumTexels, 1, block.x * block.y);
     }
 

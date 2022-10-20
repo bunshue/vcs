@@ -1,5 +1,5 @@
 #pragma once
 #include<stdio.h>
 
-// 加载文件方法声明
+// 更ゅンよ猭羘
 unsigned char* LoadFileContent(const char* filePath);

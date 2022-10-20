@@ -1,20 +1,20 @@
 #include "texture.h"
 #include "utils.h"
 
-// 注意参数中的引用数据类型
-// 在该函数中 , 要修改该引用数据类型 , 并将其当做返回值返回
+// 猔種把计いまノ计沮摸
+// 赣ㄧ计い , 璶э赣まノ计沮摸 , 盢ㄤ讽暗
 unsigned char* DecodeBMP(unsigned char* bmpFileData, int& width, int& height)
 {
-	// 判定该文件是否是 bmp 文件 
-	// bmp 图像文件前两个字节是 0x4D42 
-	// 注意这里先将 unsigned char* bmpFileData 指针强转为 unsigned short* 类型指针
-	// 然后使用 * 符号取值该地址中的 short* 指针指向的内容 
-	// 就是文件的前两个字节
-	if (0x4D42 == *((unsigned short*)bmpFileData)) 
+	// ﹚赣ゅン琌琌 bmp ゅン 
+	// bmp 瓜钩ゅン玡ㄢ竊琌 0x4D42 
+	// 猔種硂柑盢 unsigned char* bmpFileData 皐眏锣 unsigned short* 摸皐
+	// 礛ㄏノ * 才腹赣い short* 皐ず甧 
+	// 碞琌ゅン玡ㄢ竊
+	if (0x4D42 == *((unsigned short*)bmpFileData))
 	{
-		// 像素数据偏移地址是从第 10 个字节开始 ( 从 0 开始计数 )
-		// 宽度是 10 , 11 字节
-		// 高度是 12 , 13 字节 
+		// 钩计沮熬簿琌眖材 10 竊秨﹍ ( 眖 0 秨﹍璸计 )
+		// 糴琌 10 , 11 竊
+		// 蔼琌 12 , 13 竊 
 
 	}
 	unsigned char* zzzz = nullptr;
@@ -22,21 +22,21 @@ unsigned char* DecodeBMP(unsigned char* bmpFileData, int& width, int& height)
 	return zzzz;
 }
 
-// 实现纹理初始化方法
-void Texture::Init(const char* imagePath) 
+// 龟瞷瞶﹍てよ猭
+void Texture::Init(const char* imagePath)
 {
-	// 从硬盘加载纹理文件到内存中
-	// 纹理图片数据放在 imageFileContent 指针指向的内存中
+	// 眖祑絃更瞶ゅンずい
+	// 瞶瓜计沮 imageFileContent 皐ずい
 	unsigned char* imageFileContent = LoadFileContent(imagePath);
 
-	// 定义解码图片的宽高
-	int width = 0; 
+	// ﹚竡秆絏瓜糴蔼
+	int width = 0;
 	int height = 0;
 
 	// 
 	//unsigned char* pixelData = DecodeBMP(imageFileContent, width, height);
 
-	// 生成 OpenGL 纹理
+	// ネΘ OpenGL 瞶
 
 
 }

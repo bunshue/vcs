@@ -133,7 +133,11 @@ __global__ void simple_vbo_kernel(float4* pos, unsigned int width, unsigned int 
     {
         w = 0;
     }
-    w = sqrtf((1 - u) * (1 - u) + (1 - v) * (1 - v));
+    //w = sqrtf((1 - u) * (1 - u) + (1 - v) * (1 - v));
+
+    //w = 2 - u * u - v * v;
+    //w /= 2;
+    w = (u + v) / 2;
 
     //w = sqrtf(dx * dx * dy * dy / width / width / height / height);
     //w = sqrtf(u * u + v * v);
@@ -160,9 +164,7 @@ __global__ void simple_vbo_kernel(float4* pos, unsigned int width, unsigned int 
     {
         pos[y * width + x] = make_float4(u, v, 1.0f, 1.0f);
     }
-
 }
-
 
 void launch_kernel(float4* pos, unsigned int mesh_width, unsigned int mesh_height, float time)
 {
@@ -339,13 +341,15 @@ void display()
     glRotatef(rotate_x, 1.0, 0.0, 0.0);
     glRotatef(rotate_y, 0.0, 1.0, 0.0);
 
+    /*
+    //debug print
     if ((rotate_x_old != rotate_x) && (rotate_y_old != rotate_y))
     {
-        //printf("rx = %f, ry = %f ", rotate_x, rotate_y);
+        printf("rx = %f, ry = %f ", rotate_x, rotate_y);
         rotate_x_old = rotate_x;
         rotate_y_old = rotate_y;
-
     }
+    */
 
     // render from the vbo
     glBindBuffer(GL_ARRAY_BUFFER, vbo);

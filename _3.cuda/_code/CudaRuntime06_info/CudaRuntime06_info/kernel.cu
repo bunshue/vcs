@@ -3,6 +3,9 @@
 
 #include <stdio.h>
 
+//#include <helper_cuda.h>
+//#include <helper_timer.h>
+
 typedef unsigned int uint;
 typedef unsigned char uchar;
 
@@ -17,6 +20,22 @@ float RandFloat(float low, float high)
 {
     float t = (float)rand() / (float)RAND_MAX;
     return (1.0f - t) * low + t * high;
+}
+
+void delay_1s(unsigned long long timeout_clocks = 1000)
+{
+    long long int start_clock = clock();
+    long long int current_clock;
+
+    while (true)
+    {
+        current_clock = clock();
+
+        if ((current_clock - start_clock) > timeout_clocks)
+        {
+            break;
+        }
+    }
 }
 
 int main()
@@ -153,8 +172,14 @@ int main()
 
 
 
+    printf("測試 delay ST\n");
 
+    for (i = 0; i < 1; i++)
+    {
+        delay_1s();
+    }
 
+    printf("測試 delay SP\n");
 
     cudaError_t cudaStatus;
 
