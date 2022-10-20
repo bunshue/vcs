@@ -340,7 +340,7 @@ int initGL(int* argc, char** argv)
     glutKeyboardFunc(keyboard);     //設定callback function
     glutMouseFunc(mouse);           //設定callback function
     glutMotionFunc(motion);         //設定callback function
-    glutIdleFunc(idle);             //設定callback function
+    glutIdleFunc(idle);		//設定callback function, 利用idle事件進行重畫
     glutCloseFunc(cleanup);         //設定callback function
 
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);    //設定timer事件

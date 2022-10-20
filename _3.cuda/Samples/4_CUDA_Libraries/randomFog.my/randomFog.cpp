@@ -354,11 +354,10 @@ int main(int argc, char** argv)
     glLineWidth(2.0f);
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
-    // Notify glut which messages we require:
     glutDisplayFunc(display);   //設定callback function
     glutReshapeFunc(reshape);   //設定callback function
     glutKeyboardFunc(keyboard); //設定callback function
-    glutIdleFunc(idle);         //設定callback function
+    glutIdleFunc(idle);		//設定callback function, 利用idle事件進行重畫
     glutCloseFunc(glutClose);   //設定callback function
 
     // Let's get started!

@@ -29,6 +29,12 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
     }
 }
 
+void keyboardup(unsigned char key, int /*x*/, int /*y*/)
+{
+    //printf("keyboardup ");
+    //keyDown[key] = false;
+}
+
 //key 枚举值，x、y是位置
 void special(int key, int x, int y)
 {
@@ -92,17 +98,17 @@ int main(int argc, char** argv)
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(1100, 200);
 
-    glutCreateWindow("畫顏色色塊");	//開啟視窗 並顯示出視窗 Title
+    glutCreateWindow("基本的OpenGL架構");	//開啟視窗 並顯示出視窗 Title
 
     //init();       //TBD
     glutDisplayFunc(display);	//設定callback function
     glutReshapeFunc(reshape);	//設定callback function
     glutKeyboardFunc(keyboard);	//設定callback function
-    //glutKeyboardUpFunc(keyup);  //設定callback function TBD
+    glutKeyboardUpFunc(keyboardup);//設定callback function
     glutSpecialFunc(special);   //設定callback function
     glutMouseFunc(mouse);		//設定callback function
     glutMotionFunc(motion);		//設定callback function
-    glutIdleFunc(idle);         //設定callback function
+    glutIdleFunc(idle);         //設定callback function, 利用idle事件進行重畫
     //cleanup TBD
     //timer TBD
     initMenus();        //設定表單按鈕

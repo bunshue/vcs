@@ -288,11 +288,13 @@ void initGL(int* argc, char** argv)
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
     glutInitWindowSize(width, height);
+    
     glutCreateWindow(sSDKsample);
+    
     glutDisplayFunc(display);
-    glutKeyboardFunc(keyboard);
     glutReshapeFunc(reshape);
-    glutIdleFunc(idle);
+    glutKeyboardFunc(keyboard);
+    glutIdleFunc(idle); //設定callback function, 利用idle事件進行重畫
 
     glutCloseFunc(cleanup);
 

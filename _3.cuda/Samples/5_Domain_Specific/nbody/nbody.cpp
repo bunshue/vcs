@@ -1305,7 +1305,7 @@ int main(int argc, char** argv)
             glutSpecialFunc(special);
             glutMouseFunc(mouse);
             glutMotionFunc(motion);
-            glutIdleFunc(idle);
+            glutIdleFunc(idle); //設定callback function, 利用idle事件進行重畫
 
             if (!useCpu)
             {
@@ -1339,7 +1339,7 @@ int main(int argc, char** argv)
             glutSpecialFunc(special);
             glutMouseFunc(mouse);
             glutMotionFunc(motion);
-            glutIdleFunc(idle);
+            glutIdleFunc(idle); //設定callback function, 利用idle事件進行重畫
 
             if (!useCpu)
             {

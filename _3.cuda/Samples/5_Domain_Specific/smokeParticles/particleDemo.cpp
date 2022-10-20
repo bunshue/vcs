@@ -118,17 +118,18 @@ GLuint floorTex = 0;
 // Define the files that are to be saved and the reference images for validation
 const char* sSDKsample = "CUDA Smoke Particles";
 
-const char* sRefBin[] = { "ref_smokePart_pos.bin", "ref_smokePart_vel.bin",
-                         NULL };
+const char* sRefBin[] = { "ref_smokePart_pos.bin", "ref_smokePart_vel.bin", NULL };
 
 void runEmitter();
 
 // initialize particle system
-void initParticles(int numParticles, bool bUseVBO, bool bUseGL) {
+void initParticles(int numParticles, bool bUseVBO, bool bUseGL)
+{
     psystem = new ParticleSystem(numParticles, bUseVBO, bUseGL);
     psystem->reset(ParticleSystem::CONFIG_RANDOM);
 
-    if (bUseVBO) {
+    if (bUseVBO)
+    {
         renderer = new SmokeRenderer(numParticles);
         renderer->setLightTarget(vec3f(0.0, 1.0, 0.0));
 
@@ -136,41 +137,46 @@ void initParticles(int numParticles, bool bUseVBO, bool bUseGL) {
     }
 }
 
-void cleanup() {
-    if (psystem) {
+void cleanup()
+{
+    if (psystem)
+    {
         delete psystem;
     }
 
-    if (renderer) {
+    if (renderer)
+    {
         delete renderer;
     }
 
-    if (floorProg) {
+    if (floorProg)
+    {
         delete floorProg;
     }
 
     sdkDeleteTimer(&timer);
 
-    if (params) {
+    if (params)
+    {
         delete params;
     }
 
-    if (floorTex) {
+    if (floorTex)
+    {
         glDeleteTextures(1, &floorTex);
     }
 }
 
-void renderScene() {
+void renderScene()
+{
     glEnable(GL_DEPTH_TEST);
     glDepthMask(GL_TRUE);
 
     // draw floor
     floorProg->enable();
     floorProg->bindTexture("tex", floorTex, GL_TEXTURE_2D, 0);
-    floorProg->bindTexture("shadowTex", renderer->getShadowTexture(),
-        GL_TEXTURE_2D, 1);
-    floorProg->setUniformfv("lightPosEye", renderer->getLightPositionEyeSpace(),
-        3);
+    floorProg->bindTexture("shadowTex", renderer->getShadowTexture(), GL_TEXTURE_2D, 1);
+    floorProg->setUniformfv("lightPosEye", renderer->getLightPositionEyeSpace(), 3);
     floorProg->setUniformfv("lightColor", lightColor, 3);
 
     // set shadow matrix as texture matrix
@@ -209,12 +215,13 @@ void renderScene() {
     glPopMatrix();
 }
 
-// main rendering loop
-void display() {
+void display()
+{
     sdkStartTimer(&timer);
 
     // move camera
-    if (cameraPos[1] > 0.0f) {
+    if (cameraPos[1] > 0.0f)
+    {
         cameraPos[1] = 0.0f;
     }
 
@@ -232,8 +239,10 @@ void display() {
     glGetFloatv(GL_MODELVIEW_MATRIX, modelView);
 
     // update the simulation
-    if (!paused) {
-        if (emitterOn) {
+    if (!paused)
+    {
+        if (emitterOn)
+        {
             runEmitter();
         }
 
@@ -258,7 +267,8 @@ void display() {
     renderScene();
 
     // draw particles
-    if (displayEnabled) {
+    if (displayEnabled)
+    {
         // render scene to offscreen buffers to get correct occlusion
         renderer->beginSceneRender(SmokeRenderer::LIGHT_BUFFER);
         renderScene();
@@ -286,13 +296,15 @@ void display() {
 
         renderer->render();
 
-        if (drawVectors) {
+        if (drawVectors)
+        {
             renderer->debugVectors();
         }
     }
 
     // display sliders
-    if (displaySliders) {
+    if (displaySliders)
+    {
         glDisable(GL_DEPTH_TEST);
         glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);  // invert color
         glEnable(GL_BLEND);
@@ -307,27 +319,27 @@ void display() {
 
     fpsCount++;
 
-    // this displays the frame rate updated every second (independent of frame
-    // rate)
-    if (fpsCount >= fpsLimit) {
+    // this displays the frame rate updated every second (independent of frame rate)
+    if (fpsCount >= fpsLimit)
+    {
         char fps[256];
         float ifps = 1.f / (sdkGetAverageTimerValue(&timer) / 1000.f);
-        sprintf(fps, "CUDA Smoke Particles (%d particles): %3.1f fps", numParticles,
-            ifps);
+        sprintf(fps, "CUDA Smoke Particles (%d particles): %3.1f fps", numParticles, ifps);
         glutSetWindowTitle(fps);
         fpsCount = 0;
         fpsLimit = (ifps > 1.f) ? (int)ifps : 1;
 
-        if (paused) {
+        if (paused)
+        {
             fpsLimit = 0;
         }
-
         sdkResetTimer(&timer);
     }
 }
 
 // GLUT callback functions
-void reshape(int w, int h) {
+void reshape(int w, int h)
+{
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPerspective(60.0, (float)w / (float)h, 0.01, 100.0);
@@ -339,30 +351,37 @@ void reshape(int w, int h) {
     renderer->setWindowSize(w, h);
 }
 
-void mouse(int button, int state, int x, int y) {
+void mouse(int button, int state, int x, int y)
+{
     int mods;
 
-    if (state == GLUT_DOWN) {
+    if (state == GLUT_DOWN)
+    {
         buttonState |= 1 << button;
     }
-    else if (state == GLUT_UP) {
+    else if (state == GLUT_UP)
+    {
         buttonState = 0;
     }
 
     mods = glutGetModifiers();
 
-    if (mods & GLUT_ACTIVE_SHIFT) {
+    if (mods & GLUT_ACTIVE_SHIFT)
+    {
         buttonState = 2;
     }
-    else if (mods & GLUT_ACTIVE_CTRL) {
+    else if (mods & GLUT_ACTIVE_CTRL)
+    {
         buttonState = 3;
     }
 
     ox = x;
     oy = y;
 
-    if (displaySliders) {
-        if (params->Mouse(x, y, button, state)) {
+    if (displaySliders)
+    {
+        if (params->Mouse(x, y, button, state))
+        {
             glutPostRedisplay();
             return;
         }
@@ -372,20 +391,23 @@ void mouse(int button, int state, int x, int y) {
 }
 
 // transform vector by matrix
-void xform(vec3f& v, vec3f& r, float* m) {
+void xform(vec3f& v, vec3f& r, float* m)
+{
     r.x = v.x * m[0] + v.y * m[4] + v.z * m[8] + m[12];
     r.y = v.x * m[1] + v.y * m[5] + v.z * m[9] + m[13];
     r.z = v.x * m[2] + v.y * m[6] + v.z * m[10] + m[14];
 }
 
 // transform vector by transpose of matrix (assuming orthonormal)
-void ixform(vec3f& v, vec3f& r, float* m) {
+void ixform(vec3f& v, vec3f& r, float* m)
+{
     r.x = v.x * m[0] + v.y * m[1] + v.z * m[2];
     r.y = v.x * m[4] + v.y * m[5] + v.z * m[6];
     r.z = v.x * m[8] + v.y * m[9] + v.z * m[10];
 }
 
-void ixformPoint(vec3f& v, vec3f& r, float* m) {
+void ixformPoint(vec3f& v, vec3f& r, float* m)
+{
     vec3f x;
     x.x = v.x - m[12];
     x.y = v.y - m[13];
@@ -393,13 +415,16 @@ void ixformPoint(vec3f& v, vec3f& r, float* m) {
     ixform(x, r, m);
 }
 
-void motion(int x, int y) {
+void motion(int x, int y)
+{
     float dx, dy;
     dx = (float)(x - ox);
     dy = (float)(y - oy);
 
-    if (displaySliders) {
-        if (params->Motion(x, y)) {
+    if (displaySliders)
+    {
+        if (params->Motion(x, y))
+        {
             ox = x;
             oy = y;
             glutPostRedisplay();
@@ -407,15 +432,19 @@ void motion(int x, int y) {
         }
     }
 
-    switch (mode) {
-    case M_VIEW: {
-        if (buttonState == 1) {
+    switch (mode)
+    {
+    case M_VIEW:
+    {
+        if (buttonState == 1)
+        {
             // left = rotate
             cameraRot[0] += dy * rotateSpeed;
             cameraRot[1] += dx * rotateSpeed;
         }
 
-        if (buttonState == 2) {
+        if (buttonState == 2)
+        {
             // middle = translate
             vec3f v = vec3f(dx * translateSpeed, -dy * translateSpeed, 0.0f);
             vec3f r;
@@ -423,23 +452,28 @@ void motion(int x, int y) {
             cameraPos += r;
         }
 
-        if (buttonState == 3) {
+        if (buttonState == 3)
+        {
             // left+middle = zoom
             vec3f v = vec3f(0.0, 0.0, dy * translateSpeed);
             vec3f r;
             ixform(v, r, modelView);
             cameraPos += r;
         }
-    } break;
+    }
+    break;
 
-    case M_MOVE_CURSOR: {
-        if (buttonState == 1) {
+    case M_MOVE_CURSOR:
+    {
+        if (buttonState == 1)
+        {
             vec3f v = vec3f(dx * cursorSpeed, -dy * cursorSpeed, 0.0f);
             vec3f r;
             ixform(v, r, modelView);
             cursorPos += r;
         }
-        else if (buttonState == 2) {
+        else if (buttonState == 2)
+        {
             vec3f v = vec3f(0.0f, 0.0f, dy * cursorSpeed);
             vec3f r;
             ixform(v, r, modelView);
@@ -448,13 +482,15 @@ void motion(int x, int y) {
     } break;
 
     case M_MOVE_LIGHT:
-        if (buttonState == 1) {
+        if (buttonState == 1)
+        {
             vec3f v = vec3f(dx * cursorSpeed, -dy * cursorSpeed, 0.0f);
             vec3f r;
             ixform(v, r, modelView);
             lightPos += r;
         }
-        else if (buttonState == 2) {
+        else if (buttonState == 2)
+        {
             vec3f v = vec3f(0.0f, 0.0f, dy * cursorSpeed);
             vec3f r;
             ixform(v, r, modelView);
@@ -540,7 +576,8 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
     case 'P':
         displayMode--;
 
-        if (displayMode < 0) {
+        if (displayMode < 0)
+        {
             displayMode = SmokeRenderer::NUM_MODES - 1;
         }
 
@@ -554,7 +591,8 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
     case '=':
         numSlices *= 2;
 
-        if (numSlices > 256) {
+        if (numSlices > 256)
+        {
             numSlices = 256;
         }
 
@@ -562,7 +600,8 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
         break;
 
     case '-':
-        if (numSlices > 1) {
+        if (numSlices > 1)
+        {
             numSlices /= 2;
         }
 
@@ -581,41 +620,45 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
     glutPostRedisplay();
 }
 
-void keyUp(unsigned char key, int /*x*/, int /*y*/)
+void keyboardup(unsigned char key, int /*x*/, int /*y*/)
 {
-    //printf("keyUp ");
+    //printf("keyboardup ");
     keyDown[key] = false;
 }
 
-void runEmitter() {
+void runEmitter()
+{
     vec3f vel = vec3f(0, emitterVel, 0);
     vec3f vx(1, 0, 0);
     vec3f vy(0, 0, 1);
     vec3f spread(emitterSpread, 0.0f, emitterSpread);
 
-    psystem->sphereEmitter(emitterIndex, cursorPosLag, vel, spread, emitterRadius,
-        ftoi(emitterRate * timestep), particleLifetime,
-        particleLifetime * 0.1f);
+    psystem->sphereEmitter(emitterIndex, cursorPosLag, vel, spread, emitterRadius, ftoi(emitterRate * timestep), particleLifetime, particleLifetime * 0.1f);
 
-    if (emitterIndex > numParticles - 1) {
+    if (emitterIndex > numParticles - 1)
+    {
         emitterIndex = 0;
     }
 }
 
-void special(int k, int x, int y) {
-    if (displaySliders) {
+void special(int k, int x, int y)
+{
+    if (displaySliders)
+    {
         params->Special(k, x, y);
     }
 }
 
-void idle(void) {
+void idle(void)
+{
     // move camera in view direction
     /*
         0   4   8   12  x
         1   5   9   13  y
         2   6   10  14  z
     */
-    if (keyDown['w']) {
+    if (keyDown['w'])
+    {
         cameraPos[0] += modelView[2] * walkSpeed;
         cameraPos[1] += modelView[6] * walkSpeed;
         cameraPos[2] += modelView[10] * walkSpeed;
@@ -627,31 +670,36 @@ void idle(void) {
         cameraPos[2] -= modelView[10] * walkSpeed;
     }
 
-    if (keyDown['a']) {
+    if (keyDown['a'])
+    {
         cameraPos[0] += modelView[0] * walkSpeed;
         cameraPos[1] += modelView[4] * walkSpeed;
         cameraPos[2] += modelView[8] * walkSpeed;
     }
 
-    if (keyDown['d']) {
+    if (keyDown['d'])
+    {
         cameraPos[0] -= modelView[0] * walkSpeed;
         cameraPos[1] -= modelView[4] * walkSpeed;
         cameraPos[2] -= modelView[8] * walkSpeed;
     }
 
-    if (keyDown['e']) {
+    if (keyDown['e'])
+    {
         cameraPos[0] += modelView[1] * walkSpeed;
         cameraPos[1] += modelView[5] * walkSpeed;
         cameraPos[2] += modelView[9] * walkSpeed;
     }
 
-    if (keyDown['q']) {
+    if (keyDown['q'])
+    {
         cameraPos[0] -= modelView[1] * walkSpeed;
         cameraPos[1] -= modelView[5] * walkSpeed;
         cameraPos[2] -= modelView[9] * walkSpeed;
     }
 
-    if (animateEmitter) {
+    if (animateEmitter)
+    {
         const float speed = 0.02f;
         cursorPos.x = sin(currentTime * speed) * 1.5f;
         cursorPos.y = 1.5f + sin(currentTime * speed * 1.3f);
@@ -666,65 +714,47 @@ void initParams() {
     // create a new parameter list
     params = new ParamListGL("misc");
 
-    params->AddParam(new Param<int>("displayed slices", numDisplayedSlices, 0,
-        256, 1, &numDisplayedSlices));
+    params->AddParam(new Param<int>("displayed slices", numDisplayedSlices, 0, 256, 1, &numDisplayedSlices));
 
-    params->AddParam(
-        new Param<float>("time step", timestep, 0.0f, 1.0f, 0.001f, &timestep));
+    params->AddParam(new Param<float>("time step", timestep, 0.0f, 1.0f, 0.001f, &timestep));
 
     SimParams& p = psystem->getParams();
-    params->AddParam(
-        new Param<float>("damping", 0.99f, 0.0f, 1.0f, 0.001f, &p.globalDamping));
-    params->AddParam(
-        new Param<float>("gravity", 0.0f, 0.01f, -0.01f, 0.0001f, &p.gravity.y));
+    params->AddParam(new Param<float>("damping", 0.99f, 0.0f, 1.0f, 0.001f, &p.globalDamping));
+    params->AddParam(new Param<float>("gravity", 0.0f, 0.01f, -0.01f, 0.0001f, &p.gravity.y));
 
-    params->AddParam(
-        new Param<float>("noise freq", 0.1f, 0.0f, 1.0f, 0.001f, &p.noiseFreq));
-    params->AddParam(new Param<float>("noise strength", 0.001f, 0.0f, 0.01f,
-        0.001f, &p.noiseAmp));
-    params->AddParam(new Param<float>("noise anim", 0.0f, -0.001f, 0.001f,
-        0.0001f, &p.noiseSpeed.y));
+    params->AddParam(new Param<float>("noise freq", 0.1f, 0.0f, 1.0f, 0.001f, &p.noiseFreq));
+    params->AddParam(new Param<float>("noise strength", 0.001f, 0.0f, 0.01f, 0.001f, &p.noiseAmp));
+    params->AddParam(new Param<float>("noise anim", 0.0f, -0.001f, 0.001f, 0.0001f, &p.noiseSpeed.y));
 
-    params->AddParam(new Param<float>("sprite size", spriteSize, 0.0f, 0.1f,
-        0.001f, &spriteSize));
-    params->AddParam(
-        new Param<float>("alpha", alpha, 0.0f, 1.0f, 0.001f, &alpha));
+    params->AddParam(new Param<float>("sprite size", spriteSize, 0.0f, 0.1f, 0.001f, &spriteSize));
+    params->AddParam(new Param<float>("alpha", alpha, 0.0f, 1.0f, 0.001f, &alpha));
 
-    params->AddParam(new Param<float>("light color r", lightColor[0], 0.0f, 1.0f,
-        0.01f, &lightColor[0]));
-    params->AddParam(new Param<float>("light color g", lightColor[1], 0.0f, 1.0f,
-        0.01f, &lightColor[1]));
-    params->AddParam(new Param<float>("light color b", lightColor[2], 0.0f, 1.0f,
-        0.01f, &lightColor[2]));
+    params->AddParam(new Param<float>("light color r", lightColor[0], 0.0f, 1.0f, 0.01f, &lightColor[0]));
+    params->AddParam(new Param<float>("light color g", lightColor[1], 0.0f, 1.0f, 0.01f, &lightColor[1]));
+    params->AddParam(new Param<float>("light color b", lightColor[2], 0.0f, 1.0f, 0.01f, &lightColor[2]));
 
-    params->AddParam(new Param<float>("atten color r", colorAttenuation[0], 0.0f,
-        1.0f, 0.01f, &colorAttenuation[0]));
-    params->AddParam(new Param<float>("atten color g", colorAttenuation[1], 0.0f,
-        1.0f, 0.01f, &colorAttenuation[1]));
-    params->AddParam(new Param<float>("atten color b", colorAttenuation[2], 0.0f,
-        1.0f, 0.01f, &colorAttenuation[2]));
-    params->AddParam(new Param<float>("shadow alpha", shadowAlpha, 0.0f, 0.1f,
-        0.001f, &shadowAlpha));
+    params->AddParam(new Param<float>("atten color r", colorAttenuation[0], 0.0f, 1.0f, 0.01f, &colorAttenuation[0]));
+    params->AddParam(new Param<float>("atten color g", colorAttenuation[1], 0.0f, 1.0f, 0.01f, &colorAttenuation[1]));
+    params->AddParam(new Param<float>("atten color b", colorAttenuation[2], 0.0f, 1.0f, 0.01f, &colorAttenuation[2]));
+    params->AddParam(new Param<float>("shadow alpha", shadowAlpha, 0.0f, 0.1f, 0.001f, &shadowAlpha));
 
-    params->AddParam(new Param<float>("blur radius", blurRadius, 0.0f, 10.0f,
-        0.1f, &blurRadius));
+    params->AddParam(new Param<float>("blur radius", blurRadius, 0.0f, 10.0f, 0.1f, &blurRadius));
 
-    params->AddParam(new Param<float>("emitter radius", emitterRadius, 0.0f, 2.0f,
-        0.01f, &emitterRadius));
-    params->AddParam(
-        new Param<uint>("emitter rate", emitterRate, 0, 10000, 1, &emitterRate));
-    params->AddParam(new Param<float>("emitter velocity", emitterVel, 0.0f, 0.1f,
-        0.001f, &emitterVel));
-    params->AddParam(new Param<float>("emitter spread", emitterSpread, 0.0f, 0.1f,
-        0.001f, &emitterSpread));
+    params->AddParam(new Param<float>("emitter radius", emitterRadius, 0.0f, 2.0f, 0.01f, &emitterRadius));
+    params->AddParam(new Param<uint>("emitter rate", emitterRate, 0, 10000, 1, &emitterRate));
+    params->AddParam(new Param<float>("emitter velocity", emitterVel, 0.0f, 0.1f, 0.001f, &emitterVel));
+    params->AddParam(new Param<float>("emitter spread", emitterSpread, 0.0f, 0.1f, 0.001f, &emitterSpread));
 
-    params->AddParam(new Param<float>("particle lifetime", particleLifetime, 0.0f,
-        1000.0f, 1.0f, &particleLifetime));
+    params->AddParam(new Param<float>("particle lifetime", particleLifetime, 0.0f, 1000.0f, 1.0f, &particleLifetime));
 }
 
-void mainMenu(int i) { keyboard((unsigned char)i, 0, 0); }
+void mainMenu(int i)
+{
+    keyboard((unsigned char)i, 0, 0);
+}
 
-void initMenus() {
+void initMenus()
+{
     glutCreateMenu(mainMenu);
     glutAddMenuEntry("Reset block [1]", '1');
     glutAddMenuEntry("Toggle emitter [2]", '2');
@@ -766,7 +796,8 @@ GLuint loadTexture(char* filename)
     unsigned int width, height;
     sdkLoadPPM4ub(filename, &data, &width, &height);
 
-    if (!data) {
+    if (!data)
+    {
         printf("Error opening file '%s'\n", filename);
         return 0;
     }
@@ -777,32 +808,30 @@ GLuint loadTexture(char* filename)
 }
 
 // initialize OpenGL
-void initGL(int* argc, char** argv) {
+void initGL(int* argc, char** argv)
+{
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGB | GLUT_DEPTH | GLUT_DOUBLE);
     glutInitWindowSize(winWidth, winHeight);
     glutCreateWindow("CUDA Smoke Particles");
 
-    if (!isGLVersionSupported(2, 0)) {
-        fprintf(stderr,
-            "The following required OpenGL extensions "
-            "missing:\n\tGL_VERSION_2_0\n\tGL_VERSION_1_5\n");
+    if (!isGLVersionSupported(2, 0))
+    {
+        fprintf(stderr, "The following required OpenGL extensions missing:\n\tGL_VERSION_2_0\n\tGL_VERSION_1_5\n");
         exit(EXIT_SUCCESS);
     }
 
-    if (!areGLExtensionsSupported("GL_ARB_multitexture "
-        "GL_ARB_vertex_buffer_object "
-        "GL_EXT_geometry_shader4")) {
-        fprintf(stderr,
-            "The following required OpenGL extensions "
-            "missing:\n\tGL_ARB_multitexture\n\tGL_ARB_vertex_buffer_"
-            "object\n\tGL_EXT_geometry_shader4.\n");
+    if (!areGLExtensionsSupported("GL_ARB_multitexture GL_ARB_vertex_buffer_object GL_EXT_geometry_shader4"))
+    {
+        fprintf(stderr, "The following required OpenGL extensions "
+            "missing:\n\tGL_ARB_multitexture\n\tGL_ARB_vertex_buffer_object\n\tGL_EXT_geometry_shader4.\n");
         exit(EXIT_SUCCESS);
     }
 
 #if defined(WIN32)
 
-    if (wglewIsSupported("WGL_EXT_swap_control")) {
+    if (wglewIsSupported("WGL_EXT_swap_control"))
+    {
         // disable vertical sync
         wglSwapIntervalEXT(0);
     }
@@ -814,14 +843,14 @@ void initGL(int* argc, char** argv) {
     // load floor texture
     char* imagePath = sdkFindFilePath("floortile.ppm", argv[0]);
 
-    if (imagePath == NULL) {
+    if (imagePath == NULL)
+    {
         fprintf(stderr, "Error finding floor image file\n");
         exit(EXIT_FAILURE);
     }
 
     floorTex = loadTexture(imagePath);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
-        GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, 16.0f);
 
     floorProg = new GLSLProgram(floorVS, floorPS);
@@ -829,28 +858,27 @@ void initGL(int* argc, char** argv) {
     glutReportErrors();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// Program main
-////////////////////////////////////////////////////////////////////////////////
 int main(int argc, char** argv)
 {
-    printf("%s Starting...\n\n", sSDKsample);
+    printf("Starting...\n\n");
 
-    printf("NOTE: The CUDA Samples are not meant for performance measurements. "
-        "Results may vary when GPU Boost is enabled.\n\n");
+    printf("NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.\n\n");
 
     if (argc > 1)
     {
-        if (checkCmdLineFlag(argc, (const char**)argv, "n")) {
+        if (checkCmdLineFlag(argc, (const char**)argv, "n"))
+        {
             numParticles = getCmdLineArgumentInt(argc, (const char**)argv, "n");
         }
 
-        if (checkCmdLineFlag(argc, (const char**)argv, "qatest")) {
+        if (checkCmdLineFlag(argc, (const char**)argv, "qatest"))
+        {
             g_bQAReadback = true;
         }
     }
 
-    if (g_bQAReadback) {
+    if (g_bQAReadback)
+    {
         // For Automated testing, we do not use OpenGL/CUDA interop
         findCudaDevice(argc, (const char**)argv);
 
@@ -863,8 +891,7 @@ int main(int argc, char** argv)
         }
 
         SimParams& params = psystem->getParams();
-        params.cursorPos =
-            make_float3(cursorPosLag.x, cursorPosLag.y, cursorPosLag.z);
+        params.cursorPos = make_float3(cursorPosLag.x, cursorPosLag.y, cursorPosLag.z);
 
         psystem->step(timestep);
 
@@ -875,21 +902,20 @@ int main(int argc, char** argv)
         sdkDumpBin(pos, numParticles * sizeof(float4), "smokeParticles_pos.bin");
         sdkDumpBin(vel, numParticles * sizeof(float4), "smokeParticles_vel.bin");
 
-        if (!sdkCompareBin2BinFloat("smokeParticles_pos.bin", sRefBin[0],
-            numParticles * sizeof(float4),
-            MAX_EPSILON_ERROR, THRESHOLD, argv[0])) {
+        if (!sdkCompareBin2BinFloat("smokeParticles_pos.bin", sRefBin[0], numParticles * sizeof(float4), MAX_EPSILON_ERROR, THRESHOLD, argv[0]))
+        {
             g_TotalErrors++;
         }
 
-        if (!sdkCompareBin2BinFloat("smokeParticles_vel.bin", sRefBin[1],
-            numParticles * sizeof(float4),
-            MAX_EPSILON_ERROR, THRESHOLD, argv[0])) {
+        if (!sdkCompareBin2BinFloat("smokeParticles_vel.bin", sRefBin[1], numParticles * sizeof(float4), MAX_EPSILON_ERROR, THRESHOLD, argv[0]))
+        {
             g_TotalErrors++;
         }
 
         delete psystem;
     }
-    else {
+    else
+    {
         // Normal smokeParticles rendering path
         // 1st initialize OpenGL context, so we can properly set the GL for CUDA.
         // This is needed to achieve optimal performance with OpenGL/CUDA interop.
@@ -902,14 +928,14 @@ int main(int argc, char** argv)
         initParams();
         initMenus();
 
-        glutDisplayFunc(display);
-        glutReshapeFunc(reshape);
-        glutKeyboardFunc(keyboard);
-        glutKeyboardUpFunc(keyUp);
-        glutMouseFunc(mouse);
-        glutMotionFunc(motion);
-        glutSpecialFunc(special);
-        glutIdleFunc(idle);
+        glutDisplayFunc(display);	//設定callback function
+        glutReshapeFunc(reshape);	//設定callback function
+        glutKeyboardFunc(keyboard);	//設定callback function
+        glutKeyboardUpFunc(keyboardup);//設定callback function
+        glutSpecialFunc(special);   //設定callback function
+        glutMouseFunc(mouse);		//設定callback function
+        glutMotionFunc(motion);		//設定callback function
+        glutIdleFunc(idle);         //設定callback function, 利用idle事件進行重畫
 
         glutMainLoop();
     }

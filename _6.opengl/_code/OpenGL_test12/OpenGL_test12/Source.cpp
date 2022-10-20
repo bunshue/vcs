@@ -29,21 +29,28 @@ void display(void)
     glEnd();
 
     //畫直線連線
+    //畫繞視窗周圍之直線連線 紅色
+    float offset = 13.0;
     glBegin(GL_LINES);
-        glColor3f(1.0, 1.0, 0.0);
-        glVertex2f(-14.0, 10.0);
-        glVertex2f(-6.0, 10.0);
+    glColor3f(1.0, 0.0, 0.0);       //紅色
+    glVertex2f(-offset, -offset);   //左下
+    glVertex2f(-offset, offset);    //左上
 
-        glColor3f(1.0, 0.0, 1.0);
-        glVertex2f(-14.0, 8.0);
-        glVertex2f(-6.0, 8.0);
+    glVertex2f(-offset, offset);    //左上
+    glVertex2f(offset, offset);     //右上
 
-        glColor3f(1.0, 0.0, 1.0);
-        glVertex2f(-14.5, 2);
-        glVertex2f(14.5, 2);
+    glVertex2f(offset, offset);     //右上
+    glVertex2f(offset, -offset);    //右下
 
-        glVertex2f(0, 14.5);
-        glVertex2f(0, -14.5);
+    glVertex2f(offset, -offset);    //右下
+    glVertex2f(-offset, -offset);   //左下
+
+    glVertex2f(0, offset);      //中上
+    glVertex2f(0, -offset);     //中下
+
+    glVertex2f(-offset, 0);     //中左
+    glVertex2f(offset, 0);      //中右
+
     glEnd();
 
     //畫線
@@ -171,6 +178,7 @@ glEnd();
 // 窗口大小變化回調函數
 void reshape(int w, int h)
 {
+    //printf("reshape is called\n");
     glViewport(0, 0, w, h);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
