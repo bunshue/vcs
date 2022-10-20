@@ -38,7 +38,7 @@ const char* sOriginal[] = { "mandelbrot.ppm", "julia.ppm", NULL };
 
 const char* sReference[] = { "Mandelbrot_fp32.ppm", "Mandelbrot_fp64.ppm", NULL };
 
-const char* sReferenceJulia[] = { "referenceJulia_fp32.ppm",                                 "referenceJulia_fp64.ppm", NULL };
+const char* sReferenceJulia[] = { "referenceJulia_fp32.ppm", "referenceJulia_fp64.ppm", NULL };
 
 bool g_isJuliaSet = false;
 bool g_isMoving = true;
@@ -256,30 +256,22 @@ void renderImage(bool bUseOpenGL, bool fp64, int mode)
             {
                 if (precisionMode)
                 {
-                    RunMandelbrotDSGold1(h_Src, imageW, imageH, crunch, x, y, xJParam,
-                        yJParam, s, colors, pass++, animationFrame,
-                        g_isJuliaSet);
+                    RunMandelbrotDSGold1(h_Src, imageW, imageH, crunch, x, y, xJParam, yJParam, s, colors, pass++, animationFrame, g_isJuliaSet);
                 }
                 else
                 {
-                    RunMandelbrotGold1(h_Src, imageW, imageH, crunch, (float)x, (float)y,
-                        (float)xJParam, (float)yJParam, (float)s, colors,
-                        pass++, animationFrame, g_isJuliaSet);
+                    RunMandelbrotGold1(h_Src, imageW, imageH, crunch, (float)x, (float)y, (float)xJParam, (float)yJParam, (float)s, colors, pass++, animationFrame, g_isJuliaSet);
                 }
             }
             else
             {
                 if (precisionMode)
                 {
-                    RunMandelbrotDSGold0(h_Src, imageW, imageH, crunch, x, y, xJParam,
-                        yJParam, s, colors, pass++, animationFrame,
-                        g_isJuliaSet);
+                    RunMandelbrotDSGold0(h_Src, imageW, imageH, crunch, x, y, xJParam, yJParam, s, colors, pass++, animationFrame, g_isJuliaSet);
                 }
                 else
                 {
-                    RunMandelbrotGold0(h_Src, imageW, imageH, crunch, (float)x, (float)y,
-                        (float)xJParam, (float)yJParam, (float)s, colors,
-                        pass++, animationFrame, g_isJuliaSet);
+                    RunMandelbrotGold0(h_Src, imageW, imageH, crunch, (float)x, (float)y, (float)xJParam, (float)yJParam, (float)s, colors, pass++, animationFrame, g_isJuliaSet);
                 }
             }
 
@@ -326,21 +318,15 @@ void renderImage(bool bUseOpenGL, bool fp64, int mode)
                 // Use the adaptive sampling version when animating.
                 if (pass && !startPass)
                 {
-                    RunMandelbrot1(d_dst, imageW, imageH, crunch, x, y, xJParam, yJParam,
-                        s, colors, pass++, animationFrame, precisionMode,
-                        numSMs, g_isJuliaSet, version);
+                    RunMandelbrot1(d_dst, imageW, imageH, crunch, x, y, xJParam, yJParam, s, colors, pass++, animationFrame, precisionMode, numSMs, g_isJuliaSet, version);
                 }
                 else
                 {
-                    RunMandelbrot0(d_dst, imageW, imageH, crunch, x, y, xJParam, yJParam,
-                        s, colors, pass++, animationFrame, precisionMode,
-                        numSMs, g_isJuliaSet, version);
+                    RunMandelbrot0(d_dst, imageW, imageH, crunch, x, y, xJParam, yJParam, s, colors, pass++, animationFrame, precisionMode, numSMs, g_isJuliaSet, version);
                 }
 
                 // Estimate the total time of the frame if one more pass is rendered
-                timeEstimate =
-                    0.1f * sdkGetTimerValue(&hTimer) *
-                    ((float)(pass + 1 - startPass) / (float)(pass - startPass));
+                timeEstimate = 0.1f * sdkGetTimerValue(&hTimer) * ((float)(pass + 1 - startPass) / (float)(pass - startPass));
             } while ((pass < 128) && (timeEstimate < 1.0f / 60.0f) && !RUN_TIMING);
 
             if (bUseOpenGL)
@@ -356,8 +342,7 @@ void renderImage(bool bUseOpenGL, bool fp64, int mode)
     }
 }
 
-// OpenGL display function
-void displayFunc(void)
+void display(void)
 {
     sdkStartTimer(&hTimer);
 
@@ -421,7 +406,7 @@ void displayFunc(void)
     glutSwapBuffers();
 
     computeFPS();
-}  // displayFunc
+}
 
 void cleanup()
 {
@@ -445,8 +430,7 @@ void cleanup()
 
 void initMenus();
 
-// OpenGL keyboard function
-void keyboardFunc(unsigned char k, int, int)
+void keyboard(unsigned char k, int, int)
 {
     int seed;
 
@@ -744,10 +728,9 @@ void keyboardFunc(unsigned char k, int, int)
     default:
         break;
     }
-}  // keyboardFunc
+}
 
-// OpenGL mouse click function
-void clickFunc(int button, int state, int x, int y)
+void mouse(int button, int state, int x, int y)
 {
     if (button == 0)
     {
@@ -783,10 +766,9 @@ void clickFunc(int button, int state, int x, int y)
     xdOff = 0.0;
     ydOff = 0.0;
     dscale = 1.0;
-}  // clickFunc
+}
 
-// OpenGL mouse motion function
-void motionFunc(int x, int y)
+void motion(int x, int y)
 {
     double fx = (double)(x - lastx) / 50.0 / (double)(imageW);
     double fy = (double)(lasty - y) / 50.0 / (double)(imageH);
@@ -817,7 +799,7 @@ void motionFunc(int x, int y)
     {
         dscale = 1.0;
     }
-}  // motionFunc
+}
 
 void timerEvent(int value)
 {
@@ -944,7 +926,7 @@ void initOpenGLBuffers(int w, int h)
     gl_Shader = compileASMShader(GL_FRAGMENT_PROGRAM_ARB, shader_code);
 }
 
-void reshapeFunc(int w, int h)
+void reshape(int w, int h)
 {
     glViewport(0, 0, w, h);
 
@@ -955,9 +937,10 @@ void reshapeFunc(int w, int h)
     glLoadIdentity();
     glOrtho(0.0, 1.0, 0.0, 1.0, 0.0, 1.0);
 
-    if (w != 0 && h != 0)  // Do not call when window is minimized that is when
-                           // width && height == 0
+    if (w != 0 && h != 0)  // Do not call when window is minimized that is when width && height == 0
+    {
         initOpenGLBuffers(w, h);
+    }
 
     imageW = w;
     imageH = h;
@@ -974,19 +957,19 @@ void initGL(int* argc, char** argv)
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
     glutInitWindowSize(imageW, imageH);
     glutInitWindowPosition(0, 0);
+
     glutCreateWindow(argv[0]);
 
-    glutDisplayFunc(displayFunc);
-    glutKeyboardFunc(keyboardFunc);
-    glutMouseFunc(clickFunc);
-    glutMotionFunc(motionFunc);
-    glutReshapeFunc(reshapeFunc);
+    glutDisplayFunc(display);	//設定callback function
+    glutReshapeFunc(reshape);	//設定callback function
+    glutKeyboardFunc(keyboard);	//設定callback function
+    glutMouseFunc(mouse);		//設定callback function
+    glutMotionFunc(motion);		//設定callback function
+
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
     initMenus();
 
-    if (!isGLVersionSupported(1, 5) ||
-        !areGLExtensionsSupported(
-            "GL_ARB_vertex_buffer_object GL_ARB_pixel_buffer_object"))
+    if (!isGLVersionSupported(1, 5) || !areGLExtensionsSupported("GL_ARB_vertex_buffer_object GL_ARB_pixel_buffer_object"))
     {
         fprintf(stderr, "Error: failed to get minimal extensions for demo\n");
         fprintf(stderr, "This sample requires:\n");
@@ -1089,8 +1072,7 @@ int runSingleTest(int argc, char** argv)
     }
 
     printf("\n[%s], %s Set, %s -> Saved File\n", dump_file,
-        (g_isJuliaSet ? "Julia" : "Mandelbrot"),
-        (haveDouble ? "(fp64 double precision)" : "(fp32 single precision)"));
+        (g_isJuliaSet ? "Julia" : "Mandelbrot"), (haveDouble ? "(fp64 double precision)" : "(fp32 single precision)"));
 
     if (!sdkComparePPM(dump_file, sdkFindFilePath(ref_file, argv[0]), MAX_EPSILON_ERROR, 0.15f, false))
     {
@@ -1109,7 +1091,8 @@ int runSingleTest(int argc, char** argv)
 }
 
 // Performance Test
-void runBenchmark(int argc, char** argv) {
+void runBenchmark(int argc, char** argv)
+{
     int N = 1000;
     // initialize Data for CUDA
     initData(argc, argv);
@@ -1119,10 +1102,8 @@ void runBenchmark(int argc, char** argv) {
     printf("Double Precision\n");
     printf("%d Iterations\n", N);
 
-    // Allocate memory for renderImage (to be able to render into a CUDA memory
-    // buffer)
-    checkCudaErrors(
-        cudaMalloc((void**)&d_dst, (imageW * imageH * sizeof(uchar4))));
+    // Allocate memory for renderImage (to be able to render into a CUDA memory buffer)
+    checkCudaErrors(cudaMalloc((void**)&d_dst, (imageW * imageH * sizeof(uchar4))));
 
     float xs, ys;
 
@@ -1139,18 +1120,16 @@ void runBenchmark(int argc, char** argv) {
     sdkStartTimer(&kernel_timer);
 
     // render Mandelbrot set and verify
-    for (int i = 0; i < N; i++) {
-        RunMandelbrot0(d_dst, imageW, imageH, crunch, x, y, xJParam, yJParam, s,
-            colors, pass++, animationFrame, 2, numSMs, g_isJuliaSet,
-            version);
+    for (int i = 0; i < N; i++)
+    {
+        RunMandelbrot0(d_dst, imageW, imageH, crunch, x, y, xJParam, yJParam, s, colors, pass++, animationFrame, 2, numSMs, g_isJuliaSet, version);
         cudaDeviceSynchronize();
     }
 
     sdkStopTimer(&hTimer);
     float ExecutionTime = sdkGetTimerValue(&kernel_timer);
 
-    float PixelsPerSecond =
-        (float)imageW * (float)imageH * N / (ExecutionTime / 1000.0f);
+    float PixelsPerSecond = (float)imageW * (float)imageH * N / (ExecutionTime / 1000.0f);
 
     printf("\nMegaPixels Per Second %.4f\n", PixelsPerSecond / 1e6);
 
@@ -1158,7 +1137,8 @@ void runBenchmark(int argc, char** argv) {
     sdkDeleteTimer(&kernel_timer);
 }
 
-void printHelp() {
+void printHelp()
+{
     printf("[Mandelbrot]\n");
     printf("\tUsage Parameters\n");
     printf("\t-device=n        (requires to be in non-graphics mode)\n");
@@ -1167,9 +1147,6 @@ void printHelp() {
     printf("\t-fp64            (run in double precision mode)\n");
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// Main program
-////////////////////////////////////////////////////////////////////////////////
 int main(int argc, char** argv)
 {
     printf("Starting...\n");
@@ -1189,15 +1166,13 @@ int main(int argc, char** argv)
         printf("XXXXXXX\n");
         mode = getCmdLineArgumentInt(argc, (const char**)argv, "mode");
         g_isJuliaSet = mode;
-
     }
     else
     {
         g_isJuliaSet = 0;
     }
 
-    // Set the initial parameters for either Mandelbrot and Julia sets and reset
-    // all parameters
+    // Set the initial parameters for either Mandelbrot and Julia sets and reset all parameters
     if (g_isJuliaSet)  // settings for Julia
     {
         printf("XXXXXXX\n");
@@ -1250,8 +1225,7 @@ int main(int argc, char** argv)
 
         exit(g_TotalErrors == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
     }
-    // use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
+    // use command-line specified CUDA device, otherwise use device with highest Gflops/s
     else if (checkCmdLineFlag(argc, (const char**)argv, "device"))
     {
         printf("XXXXXXX\n");

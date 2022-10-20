@@ -232,11 +232,14 @@ void initGL(int* argc, char** argv)
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
     glutInitWindowSize(windowSize.x, windowSize.y);
+
     glutCreateWindow("New Window");
-    glutDisplayFunc(display);
-    glutKeyboardFunc(keyboard);
-    glutReshapeFunc(reshape);
-    glutIdleFunc(idle);
+
+    glutDisplayFunc(display);	//設定callback function
+    glutReshapeFunc(reshape);	//設定callback function
+    glutKeyboardFunc(keyboard);	//設定callback function
+
+    glutIdleFunc(idle);	//設定callback function, 利用idle事件進行重畫
 
     if (!isGLVersionSupported(2, 0) || !areGLExtensionsSupported("GL_ARB_pixel_buffer_object"))
     {
@@ -349,7 +352,7 @@ int main(int argc, char** argv)
 
     loadImageData(argv[0]);
 
-    if (ref_file!= NULL)
+    if (ref_file != NULL)
     {
         printf("XXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
         runAutoTest(ref_file, argv[0]);

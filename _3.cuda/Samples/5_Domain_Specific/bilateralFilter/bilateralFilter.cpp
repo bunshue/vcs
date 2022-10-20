@@ -84,8 +84,7 @@ void computeFPS()
     {
         char fps[256];
         float ifps = 1.0f / (sdkGetAverageTimerValue(&timer) / 1000.0f);
-        sprintf(fps,
-            "CUDA Bilateral Filter: %3.f fps (radius=%d, iter=%d, euclidean=%.2f, gaussian=%.2f)",
+        sprintf(fps,            "CUDA Bilateral Filter: %3.f fps (radius=%d, iter=%d, euclidean=%.2f, gaussian=%.2f)",
             ifps, filter_radius, iterations, (double)euclidean_delta, (double)gaussian_delta);
 
         glutSetWindowTitle(fps);
@@ -101,7 +100,6 @@ void computeFPS()
     }
 }
 
-// display results using OpenGL
 void display()
 {
     sdkStartTimer(&timer);
@@ -153,6 +151,18 @@ void display()
     sdkStopTimer(&timer);
 
     computeFPS();
+}
+
+void reshape(int x, int y)
+{
+    glViewport(0, 0, x, y);
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(0.0, 1.0, 0.0, 1.0, 0.0, 1.0);
 }
 
 /*
@@ -253,18 +263,6 @@ void timerEvent(int value)
         glutPostRedisplay();
         glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
     }
-}
-
-void reshape(int x, int y)
-{
-    glViewport(0, 0, x, y);
-
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glOrtho(0.0, 1.0, 0.0, 1.0, 0.0, 1.0);
 }
 
 void initCuda()
@@ -396,11 +394,11 @@ void initGL(int argc, char** argv)
     glutInitWindowSize(width, height);
 
     glutCreateWindow("CUDA Bilateral Filter");
-    glutDisplayFunc(display);
 
-    glutKeyboardFunc(keyboard);
-    glutReshapeFunc(reshape);
-    // glutIdleFunc(idle);
+    glutDisplayFunc(display);	//設定callback function
+    glutReshapeFunc(reshape);	//設定callback function
+    glutKeyboardFunc(keyboard);	//設定callback function
+
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
 
     if (!isGLVersionSupported(2, 0) || !areGLExtensionsSupported("GL_ARB_vertex_buffer_object GL_ARB_pixel_buffer_object"))

@@ -250,10 +250,11 @@ void initGL(int* argc, char** argv)
 
     glutCreateWindow("CUDA 3D texture");
 
-    glutDisplayFunc(display);
-    glutReshapeFunc(reshape);
-    glutKeyboardFunc(keyboard);
-    glutIdleFunc(idle); //利用idle事件進行重畫
+    glutDisplayFunc(display);	//設定callback function
+    glutReshapeFunc(reshape);	//設定callback function
+    glutKeyboardFunc(keyboard);	//設定callback function
+
+    glutIdleFunc(idle); //設定callback function, 利用idle事件進行重畫
 
     if (!isGLVersionSupported(2, 0) || !areGLExtensionsSupported("GL_ARB_pixel_buffer_object"))
     {
@@ -291,7 +292,6 @@ int main(int argc, char** argv)
     initGL(&argc, argv);  //開啟CUDA3D Texture
 
     // OpenGL buffers
-
     initGLBuffers();
 
     loadVolumeData(image_filename);

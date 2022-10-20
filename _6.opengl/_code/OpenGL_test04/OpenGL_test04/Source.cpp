@@ -77,8 +77,7 @@ void display(void)
 // 窗口大小變化回調函數
 void reshape(int w, int h)
 {
-	//glViewport(0, 0, w, h);
-	glViewport(0, 0, (GLsizei)w, (GLsizei)h);
+	glViewport(0, 0, w, h);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(0, w, 0, h, -1.0, 1.0);
@@ -95,23 +94,6 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
 		//離開視窗
 		glutDestroyWindow(glutGetWindow());
 		return;
-
-	case '1':
-		printf("1\n");
-		break;
-
-	case '2':
-		printf("2\n");
-		break;
-
-	case '3':
-		break;
-
-	case '4':
-		break;
-
-	case '?':
-		break;
 	}
 }
 

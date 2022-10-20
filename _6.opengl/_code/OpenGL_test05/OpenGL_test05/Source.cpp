@@ -24,13 +24,13 @@ void display(void)
     //畫一個矩形 R
     glColor4f(1.0, 0.0, 0.0, 1.0);  //設置畫筆顏色為 R
 
-    float ww = 1.0f/2;
-    float hh = 1.0f/2;
+    float ww = 1.0f / 2;
+    float hh = 1.0f / 2;
 
     float x_st = 0.0f;
     float y_st = 0.0f;
-    float dx = 1.0f/2;
-    float dy = 1.0f/2;
+    float dx = 1.0f / 2;
+    float dy = 1.0f / 2;
     for (x_st = -1.0; x_st < 1.0; x_st += dx)
     {
         y_st = x_st;
@@ -55,23 +55,6 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
         //離開視窗
         glutDestroyWindow(glutGetWindow());
         return;
-
-    case '1':
-        printf("1\n");
-        break;
-
-    case '2':
-        printf("2\n");
-        break;
-
-    case '3':
-        break;
-
-    case '4':
-        break;
-
-    case '?':
-        break;
     }
 }
 

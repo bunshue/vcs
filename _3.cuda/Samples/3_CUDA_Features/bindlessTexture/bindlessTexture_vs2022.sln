@@ -1,7 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2022
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bindlessTexture", "bindlessTexture_vs2022.vcxproj", "{997E0757-EA74-4A4E-A0FC-47D8C8831A15}"
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32802.463
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "bindlessTexture", "bindlessTexture_vs2022.vcxproj", "{A3962677-796D-43D4-9E72-A6F2FDC5C1B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,12 +11,15 @@ Global
 		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{997E0757-EA74-4A4E-A0FC-47D8C8831A15}.Debug|x64.ActiveCfg = Debug|x64
-		{997E0757-EA74-4A4E-A0FC-47D8C8831A15}.Debug|x64.Build.0 = Debug|x64
-		{997E0757-EA74-4A4E-A0FC-47D8C8831A15}.Release|x64.ActiveCfg = Release|x64
-		{997E0757-EA74-4A4E-A0FC-47D8C8831A15}.Release|x64.Build.0 = Release|x64
+		{A3962677-796D-43D4-9E72-A6F2FDC5C1B6}.Debug|x64.ActiveCfg = Debug|x64
+		{A3962677-796D-43D4-9E72-A6F2FDC5C1B6}.Debug|x64.Build.0 = Debug|x64
+		{A3962677-796D-43D4-9E72-A6F2FDC5C1B6}.Release|x64.ActiveCfg = Release|x64
+		{A3962677-796D-43D4-9E72-A6F2FDC5C1B6}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {92A0E118-1DCA-4E85-A13B-4EF85EEF295E}
 	EndGlobalSection
 EndGlobal

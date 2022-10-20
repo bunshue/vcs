@@ -1,5 +1,4 @@
 /*
- *
  * Sobol Quasi-random Number Generator example
  *
  * Based on CUDA code submitted by Mike Giles, Oxford University, United Kingdom

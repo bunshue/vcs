@@ -545,11 +545,11 @@ void runGraphicsTest(int argc, char** argv)
 
     findCudaDevice(argc, (const char**)argv);
 
-    glutDisplayFunc(display);
-    glutReshapeFunc(reshape);
-    glutKeyboardFunc(keyboard);
-    glutMouseFunc(mouse);
-    glutMotionFunc(motion);
+    glutDisplayFunc(display);	//設定callback function
+    glutReshapeFunc(reshape);	//設定callback function
+    glutKeyboardFunc(keyboard);	//設定callback function
+    glutMouseFunc(mouse);		//設定callback function
+    glutMotionFunc(motion);		//設定callback function
 
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
 

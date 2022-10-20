@@ -1,7 +1,4 @@
-/*
- * This sample implements a conjugate gradient solver on GPU
- * using CUBLAS and CUSPARSE
- */
+// This sample implements a conjugate gradient solver on GPU using CUBLAS and CUSPARSE
 
  // includes, system
 #include <stdio.h>

@@ -88,13 +88,15 @@ void display(void)
 void drawCoordinates(void)
 {
 	glBegin(GL_LINES);
-	glColor3f(1.0f, 0.0f, 0.0f); //画红色的x轴
+	glColor3f(1.0f, 0.0f, 0.0f); //畫紅色的x軸
 	glVertex3f(0.0f, 0.0f, 0.0f);
 	glVertex3f(1.0f, 0.0f, 0.0f);
-	glColor3f(0.0, 1.0, 0.0); //画绿色的y轴
+
+	glColor3f(0.0, 1.0, 0.0); //畫綠色的y軸
 	glVertex3f(0.0f, 0.0f, 0.0f);
 	glVertex3f(0.0f, 1.0f, 0.0f);
-	glColor3f(0.0, 0.0, 1.0); //画蓝色的z轴
+
+	glColor3f(0.0, 0.0, 1.0); //畫藍色的z軸
 	glVertex3f(0.0f, 0.0f, 0.0f);
 	glVertex3f(0.0f, 0.0f, 1.0f);
 	glEnd();
@@ -121,7 +123,7 @@ void drawTetrahedron(void)	//畫四面體
 	glVertex3fv(pnt[tetra[2][1]]);
 	glVertex3fv(pnt[tetra[2][2]]);
 
-	glColor3f(0.0f, 1.0f, 1.0f);	glVertex3fv(pnt[tetra[3][0]]); //补色
+	glColor3f(0.0f, 1.0f, 1.0f);	glVertex3fv(pnt[tetra[3][0]]); //補色
 	glColor3f(1.0f, 0.0f, 1.0f);	glVertex3fv(pnt[tetra[3][1]]);
 	glColor3f(1.0f, 1.0f, 0.0f);	glVertex3fv(pnt[tetra[3][2]]);
 	glEnd();

@@ -207,9 +207,25 @@ void display()
     computeFPS();
 }
 
-void idle()
+int iDivUp(int a, int b) { return (a % b != 0) ? (a / b + 1) : (a / b); }
+
+void reshape(int w, int h)
 {
-    glutPostRedisplay();
+    width = w;
+    height = h;
+    initPixelBuffer();
+
+    // calculate new grid size
+    gridSize = dim3(iDivUp(width, blockSize.x), iDivUp(height, blockSize.y));
+
+    glViewport(0, 0, w, h);
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(0.0, 1.0, 0.0, 1.0, 0.0, 1.0);
 }
 
 void keyboard(unsigned char key, int x, int y)
@@ -314,25 +330,9 @@ void motion(int x, int y)
     glutPostRedisplay();
 }
 
-int iDivUp(int a, int b) { return (a % b != 0) ? (a / b + 1) : (a / b); }
-
-void reshape(int w, int h)
+void idle()
 {
-    width = w;
-    height = h;
-    initPixelBuffer();
-
-    // calculate new grid size
-    gridSize = dim3(iDivUp(width, blockSize.x), iDivUp(height, blockSize.y));
-
-    glViewport(0, 0, w, h);
-
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glOrtho(0.0, 1.0, 0.0, 1.0, 0.0, 1.0);
+    glutPostRedisplay();
 }
 
 void cleanup()
@@ -425,8 +425,7 @@ void runSingleTest(const char* ref_file, const char* exec_path)
     checkCudaErrors(cudaMalloc((void**)&d_output, width * height * sizeof(uint)));
     checkCudaErrors(cudaMemset(d_output, 0, width * height * sizeof(uint)));
 
-    float modelView[16] = { 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
-                           0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 4.0f, 1.0f };
+    float modelView[16] = { 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,                           0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 4.0f, 1.0f };
 
     invViewMatrix[0] = modelView[0];
     invViewMatrix[1] = modelView[4];
@@ -454,7 +453,6 @@ void runSingleTest(const char* ref_file, const char* exec_path)
             cudaDeviceSynchronize();
             sdkStartTimer(&timer);
         }
-
         render_kernel(gridSize, blockSize, d_output, width, height, density, brightness, transferOffset, transferScale);
     }
 
@@ -506,8 +504,7 @@ int main(int argc, char** argv)
     else
     {
         // First initialize OpenGL context, so we can properly set the GL for CUDA.
-        // This is necessary in order to achieve optimal performance with
-        // OpenGL/CUDA interop.
+        // This is necessary in order to achieve optimal performance with OpenGL/CUDA interop.
         initGL(&argc, argv);
 
         findCudaDevice(argc, (const char**)argv);
@@ -584,12 +581,13 @@ int main(int argc, char** argv)
     }
     else
     {
-        glutDisplayFunc(display);
-        glutReshapeFunc(reshape);
-        glutKeyboardFunc(keyboard);
-        glutMouseFunc(mouse);
-        glutMotionFunc(motion);
-        glutIdleFunc(idle);
+        glutDisplayFunc(display);	//設定callback function
+        glutReshapeFunc(reshape);	//設定callback function
+        glutKeyboardFunc(keyboard);	//設定callback function
+        glutMouseFunc(mouse);		//設定callback function
+        glutMotionFunc(motion);		//設定callback function
+
+        glutIdleFunc(idle);	//設定callback function, 利用idle事件進行重畫
 
         initPixelBuffer();
 

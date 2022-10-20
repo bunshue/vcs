@@ -103,7 +103,8 @@ int main(int argc, char** argv)
     glutMouseFunc(mouse);		//設定callback function
     glutMotionFunc(motion);		//設定callback function
     glutIdleFunc(idle);         //設定callback function
-
+    //cleanup TBD
+    //timer TBD
     initMenus();        //設定表單按鈕
 
     glutMainLoop();

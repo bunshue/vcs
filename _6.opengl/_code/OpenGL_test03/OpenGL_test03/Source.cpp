@@ -1,5 +1,4 @@
-﻿// OpenGL Graphics includes
-#include <helper_gl.h>
+﻿#include <helper_gl.h>
 #include <GL/freeglut.h>
 
 #include <stdio.h>
@@ -12,7 +11,7 @@ float x_angle, y_angle; //angle of eye
 
 void display(void)
 {
-	printf("d ");
+	//printf("d ");
 	int rect[4];
 	float w, h;
 
@@ -48,7 +47,7 @@ void display(void)
 
 void drawCoordinates(void)
 {
-	glLineWidth(3.0f);
+	glLineWidth(10.0f);	//設定線寬
 
 	glColor3f(1.0f, 0.0f, 0.0f); //畫紅色的x軸
 	glBegin(GL_LINES);
@@ -84,23 +83,6 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
 		//離開視窗
 		glutDestroyWindow(glutGetWindow());
 		return;
-
-	case '1':
-		printf("1\n");
-		break;
-
-	case '2':
-		printf("2\n");
-		break;
-
-	case '3':
-		break;
-
-	case '4':
-		break;
-
-	case '?':
-		break;
 	}
 }
 
@@ -129,8 +111,7 @@ void motion(int x, int y)
 	mx = x;
 	my = y;
 
-	printf("M(%d, %d) ", mx, my);
-
+	//printf("M(%d, %d) ", mx, my);
 	glutPostRedisplay();
 }
 

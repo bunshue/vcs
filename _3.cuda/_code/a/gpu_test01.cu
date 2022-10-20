@@ -23,7 +23,7 @@ int main(void)
   
   float *x, *y;
 
-  // Allocate Unified Memory ¡V accessible from CPU or GPU
+  // Allocate Unified Memory - accessible from CPU or GPU
   cudaMallocManaged(&x, N*sizeof(float));
   cudaMallocManaged(&y, N*sizeof(float));
 

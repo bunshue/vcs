@@ -4,29 +4,29 @@
 #include "texture.h"
 #include "utils.h"
 
-// 导入 OpenGL 的个头文件 , 必须先导入 windows.h 头文件之后再导入 opengl 头文件
+// 導入 OpenGL 的個頭文件 , 必須先導入 windows.h 頭文件之后再導入 opengl 頭文件
 #include <gl/GL.h>
 #include <gl/GLU.h>
 
-// 链接 OpenGL 库
+// 鏈接 OpenGL 庫
 #pragma comment(lib, "opengl32.lib")
 #pragma comment(lib, "glu32.lib")
 
 #define MAX_LOADSTRING 100
 
-// 全局变量:
-HINSTANCE hInst;                                // 当前实例
-WCHAR szTitle[MAX_LOADSTRING];                  // 标题栏文本
-WCHAR szWindowClass[MAX_LOADSTRING];            // 主窗口类名 
+// 全局變量:
+HINSTANCE hInst;                                // 當前實例
+WCHAR szTitle[MAX_LOADSTRING];                  // 標題欄文本
+WCHAR szWindowClass[MAX_LOADSTRING];            // 主窗口類名 
 
-// 此代码模块中包含的函数的前向声明:
+// 此代碼模塊中包含的函數的前向聲明:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 
-// 窗口设备
-// 提取到全局变量中 
+// 窗口設備
+// 提取到全局變量中 
 HDC dc = NULL;
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
@@ -37,98 +37,96 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
 
-    // TODO: 在此处放置代码。
+    // TODO: 在此處放置代碼。
 
     // 初始化全局字符串
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_OPENGL, szWindowClass, MAX_LOADSTRING);
 
-    // 注册窗口
+    // 注冊窗口
     MyRegisterClass(hInstance);
 
-    // 执行应用程序初始化:
-    // 创建窗口
+    // 執行應用程序初始化:
+    // 創建窗口
     if (!InitInstance(hInstance, nCmdShow))
     {
         return FALSE;
     }
 
-    // 下面的逻辑是一个死循环 , 避免让窗口退出 
+    // 下面的邏輯是一個死循環 , 避免讓窗口退出 
 
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_OPENGL));
 
     MSG msg;
 
-    // 读取文件内容
-    // 绝对路径 : "D:\\002_Project\\006_Visual_Studio\\OpenGL\\OpenGL\\test.txt"
-    // Visual Studio 2019 中使用相对路径读取不到文件
-    char* str = (char*)LoadFileContent("D:\\002_Project\\006_Visual_Studio\\OpenGL\\OpenGL\\test.txt");
+    // 讀取文件內容
+    // Visual Studio 2019 中使用相對路徑讀取不到文件
+    char* str = (char*)LoadFileContent("C:\\_git\\vcs\\_6.opengl\\OpenGL - master\\test.txt");
     printf("%s\n", str);
 
-
-    // 只显示正面 , 不显示背面
+    // 只顯示正面 , 不顯示背面
     //glEnable(GL_CULL_FACE);
 
-    // 设置顺时针方向 CW : Clock Wind 顺时针方向
-    // 默认是 GL_CCW : Counter Clock Wind 逆时针方向 
+    // 設置順時針方向 CW : Clock Wind 順時針方向
+    // 默認是 GL_CCW : Counter Clock Wind 逆時針方向 
     //glFrontFace(GL_CW);
 
-    // 默认模式, 填充模式 , 如果不设置就默认为填充模式
+    // 默認模式, 填充模式 , 如果不設置就默認為填充模式
     //glPolygonMode(GL_FRONT, GL_FILL);
 
-    // 设置线框模式 
-    // 设置了该模式后 , 之后的所有图形都会变成线
+    // 設置線框模式 
+    // 設置了該模式后 , 之后的所有圖形都會變成線
     //glPolygonMode(GL_FRONT, GL_LINE);
 
-    // 设置点模式 
-    // 设置了该模式后 , 之后的所有图形都会变成点
+    // 設置點模式 
+    // 設置了該模式后 , 之后的所有圖形都會變成點
     //glPolygonMode(GL_FRONT, GL_POINT);
 
-    // 将方形的点变为圆点
+    // 將方形的點變為圓點
     //glEnable(GL_POINT_SMOOTH);
     //glEnable(GL_BLEND);
 
-    // 设置光源颜色 , 黑色 
+    // 設置光源顏色 , 黑色 
     float blackColor[] = { 0.0f, 0.0f, 0.0f, 1.0f };
     float whiteColor[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 
-    // 设置环境光 
+    // 設置環境光 
     glLightfv(GL_LIGHT0, GL_AMBIENT, whiteColor);
 
-    // 设置漫反射光
+    // 設置漫反射光
     glLightfv(GL_LIGHT0, GL_DIFFUSE, whiteColor);
 
-    // 设置镜面反射光 
+    // 設置鏡面反射光 
     glLightfv(GL_LIGHT0, GL_SPECULAR, whiteColor);
 
-    // 设置光源位置 , 最后一位设置成 0 代表该光源无限远
+    // 設置光源位置 , 最后一位設置成 0 代表該光源無限遠
     float lightPosition[] = { 0.0f, 1.0f, 0.0f, 0.0f };
-    // 设置光源位置 , y 轴无限远位置 
+    // 設置光源位置 , y 軸無限遠位置 
     glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
 
-    // 设置材质
+    // 設置材質
     float blackMat[] = { 0.0f, 0.0f, 0.0f, 1.0f };
     float greenMat[] = { 0.0f, 1.0f, 0.0f, 1.0f };
     float blueMat[] = { 0.0f, 0.0f, 1.0f, 1.0f };
     float whiteMat[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 
-    // 设置环境光反射材质 , 这里设置为黑色 , 不反射光 , 全都吸收
+    // 設置環境光反射材質 , 這里設置為黑色 , 不反射光 , 全都吸收
     glMaterialfv(GL_FRONT, GL_AMBIENT, greenMat);
 
-    // 设置漫反射光反射材质 , 这里设置为黑色 , 不反射光 , 全都吸收
+    // 設置漫反射光反射材質 , 這里設置為黑色 , 不反射光 , 全都吸收
     glMaterialfv(GL_FRONT, GL_DIFFUSE, blueMat);
 
-    // 设置镜面反射光反射材质 , 这里设置为黑色 , 不反射光 , 全都吸收
+    // 設置鏡面反射光反射材質 , 這里設置為黑色 , 不反射光 , 全都吸收
     glMaterialfv(GL_FRONT, GL_SPECULAR, blueMat);
 
 
-    // 启用光照
+    // 啟用光照
     glEnable(GL_LIGHTING);
 
-    // 设置光源 , 0 号光源使用的是默认材质
+    // 設置光源 , 0 號光源使用的是默認材質
     glEnable(GL_LIGHT0);
 
-    // 主消息循环:
+    // 主消息循環:
     while (GetMessage(&msg, nullptr, 0, 0))
     {
         if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
@@ -137,86 +135,86 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
             DispatchMessage(&msg);
         }
 
-        // 渲染场景
+        // 渲染場景
 
-        // 设置单位矩阵
+        // 設置單位矩陣
         glLoadIdentity();
 
-        // 矩阵压栈 
+        // 矩陣壓棧 
         //glPushMatrix();
 
-        // 矩阵缩放
-        // 缩放的是下面设置的点的坐标
-        // 每个参数都影响 x , y , z 分量
+        // 矩陣縮放
+        // 縮放的是下面設置的點的坐標
+        // 每個參數都影響 x , y , z 分量
         //glScalef(2.0f, 2.0f, 1.0f);
 
-        // 矩阵旋转
+        // 矩陣旋轉
         // glRotatef (GLfloat angle, GLfloat x, GLfloat y, GLfloat z);
-        // 第 1 个参数是旋转角度 , 后面三个参数的值代表是否绕该轴旋转 , 
-        // 如果对应值设置为 1 , 则绕该轴旋转 
-        // 这里设置的是绕 z 轴旋转 30 度
+        // 第 1 個參數是旋轉角度 , 后面三個參數的值代表是否繞該軸旋轉 , 
+        // 如果對應值設置為 1 , 則繞該軸旋轉 
+        // 這里設置的是繞 z 軸旋轉 30 度
         //glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
 
-        // 平移变换 
-        // 设置 xyz 三个方向平移的值
+        // 平移變換 
+        // 設置 xyz 三個方向平移的值
         //glTranslatef(0.0f, -2.0f, 0.0f);
 
-        // 清除缓冲区 , 
-        // 使用之前设置的 glClearColor(1.0, 0.0, 0.0, 1.0) 擦除颜色缓冲区
-        // 红色背景
+        // 清除緩沖區 , 
+        // 使用之前設置的 glClearColor(1.0, 0.0, 0.0, 1.0) 擦除顏色緩沖區
+        // 紅色背景
         glClear(GL_COLOR_BUFFER_BIT);
 
-        // 设置当前的绘制颜色 , 4 个 unsigned byte 
-        // 每个颜色的分量占一个字节
-        // 参数数据是 R 红色 G 绿色 B 蓝色 A 透明度
-        // 下面设置的含义是白色, 绘制点的时候, 每次都使用白色绘制
+        // 設置當前的繪制顏色 , 4 個 unsigned byte 
+        // 每個顏色的分量占一個字節
+        // 參數數據是 R 紅色 G 綠色 B 藍色 A 透明度
+        // 下面設置的含義是白色, 繪制點的時候, 每次都使用白色繪制
         glColor4ub(255, 255, 255, 255);
 
-        // 设置当前点的大小
+        // 設置當前點的大小
         glPointSize(5.0f);
 
-        // 设置线的宽度 
+        // 設置線的寬度 
         glLineWidth(5.0f);
 
-        //glBegin(GL_POINTS);	// 绘制点
-        //glBegin(GL_LINES);	// 绘制线
-        //glBegin(GL_LINE_STRIP);// 绘制前后连接的点组成的线
-        //glBegin(GL_LINE_LOOP); // 绘制前后连接的点组成的线 , 并且收尾相连
-        //glBegin(GL_TRIANGLES); // 绘制多个三角形
-        //glBegin(GL_TRIANGLE_STRIP); // 绘制 GL_TRIANGLE_STRIP 三角形
-        //glBegin(GL_TRIANGLE_FAN);	// 绘制三角形扇
+        //glBegin(GL_POINTS);	// 繪制點
+        //glBegin(GL_LINES);	// 繪制線
+        //glBegin(GL_LINE_STRIP);// 繪制前后連接的點組成的線
+        //glBegin(GL_LINE_LOOP); // 繪制前后連接的點組成的線 , 并且收尾相連
+        //glBegin(GL_TRIANGLES); // 繪制多個三角形
+        //glBegin(GL_TRIANGLE_STRIP); // 繪制 GL_TRIANGLE_STRIP 三角形
+        //glBegin(GL_TRIANGLE_FAN);	// 繪制三角形扇
 
-        // 绘制三角形
+        // 繪制三角形
         glBegin(GL_TRIANGLES);
 
-        // 设置法线
+        // 設置法線
         glNormal3f(0.0f, -1.0f, 0.0f);
 
-        // 1. 设置白色 , glVertex3f (GLfloat x, GLfloat y, GLfloat z)
+        // 1. 設置白色 , glVertex3f (GLfloat x, GLfloat y, GLfloat z)
         glColor4ub(255, 255, 255, 255);
         glVertex3f(-1.0f, -0.5f, -2.0f);
 
-        // 设置法线
+        // 設置法線
         glNormal3f(0.0f, 1.0f, 0.0f);
 
-        // 2. 设置绿色 
+        // 2. 設置綠色 
         glColor4ub(0, 255, 0, 255);
         glVertex3f(1.0f, -0.5f, -2.0f);
 
-        // 设置法线
+        // 設置法線
         glNormal3f(0.0f, 1.0f, 0.0f);
 
-        // 3. 设置蓝色
+        // 3. 設置藍色
         glColor4ub(0, 0, 255, 255);
         glVertex3f(0.0f, -0.5f, -10.0f);
 
-        // 绘制三角形结束
+        // 繪制三角形結束
         glEnd();
 
-        // 矩阵出栈 
+        // 矩陣出棧 
         //glPopMatrix();
 
-        // 将后缓冲区绘制到前台
+        // 將后緩沖區繪制到前臺
         SwapBuffers(dc);
 
     }
@@ -227,149 +225,149 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
 
 //
-//  函数: MyRegisterClass()
+//  函數: MyRegisterClass()
 //
-//  目标: 注册窗口类。
+//  目標: 注冊窗口類。
 //
 ATOM MyRegisterClass(HINSTANCE hInstance)
 {
-    // 注册窗口的结构体
+    // 注冊窗口的結構體
     WNDCLASSEXW wcex;
 
-    // 设置结构体的大小
+    // 設置結構體的大小
     wcex.cbSize = sizeof(WNDCLASSEX);
-    // 窗口风格 , CS 是 Class Style 缩写 , VREDRAW 垂直重绘 , HREDRAW 水平重绘
+    // 窗口風格 , CS 是 Class Style 縮寫 , VREDRAW 垂直重繪 , HREDRAW 水平重繪
     wcex.style = CS_HREDRAW | CS_VREDRAW;
-    // 消息响应函数 , 鼠标点击窗口 , 或打字字后的回调函数
+    // 消息響應函數 , 鼠標點擊窗口 , 或打字字后的回調函數
     wcex.lpfnWndProc = WndProc;
-    // 不需要额外的空间
+    // 不需要額外的空間
     wcex.cbClsExtra = 0;
-    // 不需要额外的空间
+    // 不需要額外的空間
     wcex.cbWndExtra = 0;
-    // 设置程序的实例, 通过桌面程序入口函数传入
+    // 設置程序的實例, 通過桌面程序入口函數傳入
     wcex.hInstance = hInstance;
-    // 生成的程序在文件夹中的样式 , 可执行程序的图标
+    // 生成的程序在文件夾中的樣式 , 可執行程序的圖標
     wcex.hIcon = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_OPENGL));
-    // 设置鼠标光标样式
+    // 設置鼠標光標樣式
     wcex.hCursor = LoadCursor(nullptr, IDC_ARROW);
-    // 设置背景
+    // 設置背景
     //wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
     wcex.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
-    // 菜单
+    // 菜單
     wcex.lpszMenuName = MAKEINTRESOURCEW(IDC_OPENGL);
-    // 窗口的唯一标识符
+    // 窗口的唯一標識符
     wcex.lpszClassName = szWindowClass;
-    // 设置窗口运行后显示在右上角的图标
+    // 設置窗口運行后顯示在右上角的圖標
     wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
-    // 设置完上述参数后 , 最后调用该方法注册窗口
+    // 設置完上述參數后 , 最后調用該方法注冊窗口
     return RegisterClassExW(&wcex);
 }
 
 //
-//   函数: InitInstance(HINSTANCE, int)
+//   函數: InitInstance(HINSTANCE, int)
 //
-//   目标: 保存实例句柄并创建主窗口
+//   目標: 保存實例句柄并創建主窗口
 //
-//   注释:
+//   注釋:
 //
-//        在此函数中，我们在全局变量中保存实例句柄并
-//        创建和显示主程序窗口。
+//        在此函數中，我們在全局變量中保存實例句柄并
+//        創建和顯示主程序窗口。
 //
 BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
-    hInst = hInstance; // 将实例句柄存储在全局变量中
+    hInst = hInstance; // 將實例句柄存儲在全局變量中
 
-    // 创建窗口的核心逻辑
+    // 創建窗口的核心邏輯
     HWND hWnd = CreateWindowW(
-        szWindowClass,       // 窗口主类
-        szTitle,             // 窗口标题名称
-        WS_OVERLAPPEDWINDOW, // 窗口风格
-        100,                // x 坐标
-        100,                // y 坐标
-        800,                 // 宽度
+        szWindowClass,       // 窗口主類
+        szTitle,             // 窗口標題名稱
+        WS_OVERLAPPEDWINDOW, // 窗口風格
+        100,                // x 坐標
+        100,                // y 坐標
+        800,                 // 寬度
         600,                 // 高度
         nullptr,             // 父窗口 
-        nullptr,             // 菜单
-        hInstance,           // 程序实体
+        nullptr,             // 菜單
+        hInstance,           // 程序實體
         nullptr);
 
-    // 如果创建失败 , 直接退出
+    // 如果創建失敗 , 直接退出
     if (!hWnd)
     {
         return FALSE;
     }
 
 
-    // 创建 OpenGL 的渲染上下文
+    // 創建 OpenGL 的渲染上下文
 
-    // 获取窗口设备 
+    // 獲取窗口設備 
     dc = GetDC(hWnd);
 
-    // 颜色描述符, 像素格式描述符 , 选取 OpenGL 渲染的像素格式
+    // 顏色描述符, 像素格式描述符 , 選取 OpenGL 渲染的像素格式
     PIXELFORMATDESCRIPTOR pfd;
 
-    // 将 PIXELFORMATDESCRIPTOR 结构体清空
+    // 將 PIXELFORMATDESCRIPTOR 結構體清空
     memset(&pfd, 0, sizeof(PIXELFORMATDESCRIPTOR));
 
-    // 填充结构体
+    // 填充結構體
 
-    // 设置版本号
+    // 設置版本號
     pfd.nVersion = 1;
-    // 结构体大小
+    // 結構體大小
     pfd.nSize = sizeof(PIXELFORMATDESCRIPTOR);
-    // 颜色缓冲区 32 位
+    // 顏色緩沖區 32 位
     pfd.cColorBits = 32;
-    // 深度缓冲区 24 位
+    // 深度緩沖區 24 位
     pfd.cDepthBits = 24;
     pfd.cStencilBits = 8;
-    // 颜色格式
+    // 顏色格式
     pfd.iPixelType = PFD_TYPE_RGBA;
     pfd.iLayerType = PFD_MAIN_PLANE;
 
-    // 分别设置 绘制到桌面窗口 , OpenGL 支持 , 双缓冲 标志位 
-    // 双缓冲区可以让画面更流畅 
+    // 分別設置 繪制到桌面窗口 , OpenGL 支持 , 雙緩沖 標志位 
+    // 雙緩沖區可以讓畫面更流暢 
     pfd.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
 
-    // 选择像素格式 , 如果返回 -1 , 说明选择像素格式失败 , 一般情况下该选择是成功的 
+    // 選擇像素格式 , 如果返回 -1 , 說明選擇像素格式失敗 , 一般情況下該選擇是成功的 
     int pixelFormat = ChoosePixelFormat(dc, &pfd);
 
-    // 设置像素格式
+    // 設置像素格式
     SetPixelFormat(dc, pixelFormat, &pfd);
 
-    // 创建 OpenGL 上下文对象 , 注意该操作必须在设置完像素格式后进行操作
+    // 創建 OpenGL 上下文對象 , 注意該操作必須在設置完像素格式后進行操作
     HGLRC rc = wglCreateContext(dc);
 
-    // 设置 OpenGL 上下文对象 , 将 rc 和 dc 作为当前的渲染设备
+    // 設置 OpenGL 上下文對象 , 將 rc 和 dc 作為當前的渲染設備
     wglMakeCurrent(dc, rc);
 
-    // 设置清除缓冲区背景颜色
+    // 設置清除緩沖區背景顏色
     // glClearColor (GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha)
-    // 对应的参数是 红色 , 绿色 , 蓝色 , 透明度
-    // 这里设置的是红色
+    // 對應的參數是 紅色 , 綠色 , 藍色 , 透明度
+    // 這里設置的是紅色
     glClearColor(1.0, 0.0, 0.0, 1.0);
 
 
-    // 矩阵环境初始化 , 主要是投影矩阵和模型矩阵 
+    // 矩陣環境初始化 , 主要是投影矩陣和模型矩陣 
 
-    // ( 选中投影矩阵 ) 设置矩阵模式 , 告知 GPU 当前要操作的矩阵是投影矩阵
+    // ( 選中投影矩陣 ) 設置矩陣模式 , 告知 GPU 當前要操作的矩陣是投影矩陣
     glMatrixMode(GL_PROJECTION);
-    // ( 给投影矩阵设置值 ) 向投影矩阵设置参数
-    // 参数一 : 50.0f 是摄像机的视口角度
-    // 参数二 : 800.0f / 600.0f 是窗口的宽高比
-    // 参数三 : 0.1f , 可视的最近的距离
-    // 参数四 : 1000.0f , 可视的最远距离
+    // ( 給投影矩陣設置值 ) 向投影矩陣設置參數
+    // 參數一 : 50.0f 是攝像機的視口角度
+    // 參數二 : 800.0f / 600.0f 是窗口的寬高比
+    // 參數三 : 0.1f , 可視的最近的距離
+    // 參數四 : 1000.0f , 可視的最遠距離
     gluPerspective(50.0f, 800.0f / 600.0f, 0.1f, 1000.0f);
 
-    // 上述设置好了摄像机的参数 , 具体的摄像机能看什么东西 , 就需要模型视图矩阵设置
+    // 上述設置好了攝像機的參數 , 具體的攝像機能看什么東西 , 就需要模型視圖矩陣設置
 
-    // ( 选中模型矩阵 )
+    // ( 選中模型矩陣 )
     glMatrixMode(GL_MODELVIEW);
-    // ( 设置模型矩阵值 ) , 这里设置的是单位矩阵
+    // ( 設置模型矩陣值 ) , 這里設置的是單位矩陣
     glLoadIdentity();
 
 
-    // 显示窗口
+    // 顯示窗口
     ShowWindow(hWnd, nCmdShow);
     UpdateWindow(hWnd);
 
@@ -377,13 +375,13 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 }
 
 //
-//  函数: WndProc(HWND, UINT, WPARAM, LPARAM)
+//  函數: WndProc(HWND, UINT, WPARAM, LPARAM)
 //
-//  目标: 处理主窗口的消息。
+//  目標: 處理主窗口的消息。
 //
-//  WM_COMMAND  - 处理应用程序菜单
-//  WM_PAINT    - 绘制主窗口
-//  WM_DESTROY  - 发送退出消息并返回
+//  WM_COMMAND  - 處理應用程序菜單
+//  WM_PAINT    - 繪制主窗口
+//  WM_DESTROY  - 發送退出消息并返回
 //
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
@@ -393,7 +391,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_COMMAND:
     {
         int wmId = LOWORD(wParam);
-        // 分析菜单选择:
+        // 分析菜單選擇:
         switch (wmId)
         {
         case IDM_ABOUT:
@@ -411,7 +409,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hWnd, &ps);
-        // TODO: 在此处添加使用 hdc 的任何绘图代码...
+        // TODO: 在此處添加使用 hdc 的任何繪圖代碼...
         EndPaint(hWnd, &ps);
     }
     break;
@@ -424,7 +422,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     return 0;
 }
 
-// “关于”框的消息处理程序。
+// “關于”框的消息處理程序。
 INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
     UNREFERENCED_PARAMETER(lParam);

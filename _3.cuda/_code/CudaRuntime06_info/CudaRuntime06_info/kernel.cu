@@ -191,6 +191,19 @@ int main()
         return 1;
     }
 
+    printf("測試 clock rate ST\n");
+    cudaDeviceProp  prop;
+    cudaGetDeviceProperties(&prop, 0);
+    clock_t clock_rate = prop.clockRate;
+
+    printf("clock_rate          %10d\n", clock_rate);
+
+    cudaDeviceSynchronize();
+
+    cudaDeviceReset();
+    printf("測試 clock rate SP\n");
+
+
     return 0;
 }
 
