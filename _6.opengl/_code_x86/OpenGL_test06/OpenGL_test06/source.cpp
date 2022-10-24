@@ -1,16 +1,12 @@
-// OpenGL Graphics includes
 #include <iostream>
 #include <helper_gl.h>
 
-//#include "cuda_runtime.h"
-//#include "device_launch_parameters.h"
+//#include <GL/freeglut.h>	//64位元用的
+#include <GL/glut.h>		//32位元用的
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
-#include <GL/glut.h>      //32 bits
-//#include <GL/freeglut.h>    //64 bits
 
 GLenum doubleBuffer;
 GLint thing1, thing2, thing3, thing4;
@@ -50,38 +46,6 @@ static void Init(void)
     glEndList();
 }
 
-static void reshape(int width, int height)
-{
-    glViewport(0, 0, width, height);
-
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-}
-
-static void keyboard(unsigned char key, int x, int y)
-{
-    switch (key)
-    {
-    case '1':
-        printf("畫實心色塊\n");
-        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-        glutPostRedisplay();	//重做display()
-        break;
-    case '2':
-        printf("畫空心色塊(外框)\n");
-        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        glutPostRedisplay();	//重做display()
-        break;
-    case 'r':
-        printf("重畫 alpha = %f ", alpha);
-        glutPostRedisplay();	//重做display()
-        break;
-    case 27:
-        exit(0);
-    }
-}
 
 static void display(void)
 {
@@ -129,6 +93,39 @@ static void display(void)
     }
 }
 
+static void reshape(int width, int height)
+{
+    glViewport(0, 0, width, height);
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+}
+
+static void keyboard(unsigned char key, int x, int y)
+{
+    switch (key)
+    {
+    case '1':
+        printf("畫實心色塊\n");
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        glutPostRedisplay();	//重做display()
+        break;
+    case '2':
+        printf("畫空心色塊(外框)\n");
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        glutPostRedisplay();	//重做display()
+        break;
+    case 'r':
+        printf("重畫 alpha = %f ", alpha);
+        glutPostRedisplay();	//重做display()
+        break;
+    case 27:
+        exit(0);
+    }
+}
+
 int main(int argc, char** argv)
 {
     GLenum type;
@@ -139,10 +136,10 @@ int main(int argc, char** argv)
     type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
     glutInitDisplayMode(type);	//設定Single Buffer 或是 Double Buffer
 
-    glutInitWindowSize(600, 600);
-    glutInitWindowPosition(1100, 200);
+	glutInitWindowSize(600, 600);       // 設定視窗大小
+    glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
-    glutCreateWindow("顏色重疊測試");
+    glutCreateWindow("顏色重疊測試");	// 設定視窗標題
 
     Init();
 
@@ -150,7 +147,11 @@ int main(int argc, char** argv)
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
 
-    glutMainLoop();
+	printf("按1 2 3 控制\n");
+
+	glutMainLoop();	// 開始主循環繪制
+
+	return 0;
 }
 
 

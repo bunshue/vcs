@@ -55,10 +55,12 @@ int main(int argc, char** argv)
 
     // Kernel configuration, where a two-dimensional grid and three-dimensional blocks are configured.
 
-    dim3 dimGrid(3, 3);     //MXN個block
-    dim3 dimBlock(2, 2, 2); //每個block內有AXBXC個thread
+    dim3 dimGrid(3, 3);     //MXN 個 block
+    dim3 dimBlock(2, 2, 2); //每個 block 內有 A * B * C 個 thread
 
     testKernel << <dimGrid, dimBlock >> > (10);
+    //所以 總共會執行 (3*3)*(2*2*2) = 72 次
+    //                 0~8    0~7
 
     cudaDeviceSynchronize();
 

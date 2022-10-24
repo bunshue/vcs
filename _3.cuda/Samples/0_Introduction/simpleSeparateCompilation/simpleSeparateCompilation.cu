@@ -12,7 +12,7 @@
 #include <helper_cuda.h>
 
 // Device library includes.
-#include "simpleDeviceLibrary.cuh"
+//#include "simpleDeviceLibrary.cuh"
 
 using std::cout;
 using std::endl;
@@ -27,6 +27,16 @@ typedef float (*deviceFunc)(float);
 ////////////////////////////////////////////////////////////////////////////////
 // Auto-Verification Code
 bool testResult = true;
+
+__device__ float multiplyByTwo(float number)
+{
+    return number * 2.0f;
+}
+
+__device__ float divideByTwo(float number)
+{
+    return number * 0.5f;
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // Static device pointers to __device__ functions.
@@ -74,8 +84,7 @@ int main(int argc, char** argv)
 
         checkCudaErrors(cudaMemcpy(dVector, &hVector[0], kVectorSize * sizeof(float), cudaMemcpyHostToDevice));
 
-        // Kernel configuration, where a one-dimensional
-        // grid and one-dimensional blocks are configured.
+        // Kernel configuration, where a one-dimensional grid and one-dimensional blocks are configured.
         const int nThreads = 1024;
         const int nBlocks = 1;
 
@@ -110,7 +119,10 @@ int main(int argc, char** argv)
         }
 
         // Free resources.
-        if (dVector) checkCudaErrors(cudaFree(dVector));
+        if (dVector)
+        {
+            checkCudaErrors(cudaFree(dVector));
+        }
     }
     catch (...)
     {

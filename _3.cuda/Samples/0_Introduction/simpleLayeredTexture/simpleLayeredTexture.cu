@@ -44,8 +44,7 @@ __global__ void transformKernel(float* g_odata, int width, int height, int layer
 ////////////////////////////////////////////////////////////////////////////////
 int main(int argc, char** argv)
 {
-    // use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
+    // use command-line specified CUDA device, otherwise use device with highest Gflops/s
     int devID = findCudaDevice(argc, (const char**)argv);
 
     bool bResult = true;

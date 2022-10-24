@@ -484,9 +484,9 @@ inline bool sdkWriteFile(const char* filename, const T* data, unsigned int len,
     //    if (append) {
     std::fstream fh(filename, std::fstream::out | std::fstream::ate);
 
-    if (verbose) {
-        std::cerr << "sdkWriteFile() : Open file " << filename
-            << " for write/append." << std::endl;
+    if (verbose)
+    {
+        std::cerr << "sdkWriteFile() : Open file " << filename << " for write/append." << std::endl;
     }
 
     /*    } else {
@@ -499,8 +499,10 @@ inline bool sdkWriteFile(const char* filename, const T* data, unsigned int len,
     */
 
     // check if filestream is valid
-    if (!fh.good()) {
-        if (verbose) {
+    if (!fh.good())
+    {
+        if (verbose)
+        {
             std::cerr << "sdkWriteFile() : Opening file failed." << std::endl;
         }
 
@@ -516,8 +518,10 @@ inline bool sdkWriteFile(const char* filename, const T* data, unsigned int len,
     }
 
     // Check if writing succeeded
-    if (!fh.good()) {
-        if (verbose) {
+    if (!fh.good())
+    {
+        if (verbose)
+        {
             std::cerr << "sdkWriteFile() : Writing file failed." << std::endl;
         }
 
@@ -539,15 +543,15 @@ inline bool sdkWriteFile(const char* filename, const T* data, unsigned int len,
 //! @param epsilon    epsilon to use for the comparison
 //////////////////////////////////////////////////////////////////////////////
 template <class T, class S>
-inline bool compareData(const T* reference, const T* data,
-    const unsigned int len, const S epsilon,
-    const float threshold) {
+inline bool compareData(const T* reference, const T* data, const unsigned int len, const S epsilon, const float threshold)
+{
     assert(epsilon >= 0);
 
     bool result = true;
     unsigned int error_count = 0;
 
-    for (unsigned int i = 0; i < len; ++i) {
+    for (unsigned int i = 0; i < len; ++i)
+    {
         float diff = static_cast<float>(reference[i]) - static_cast<float>(data[i]);
         bool comp = (diff <= epsilon) && (diff >= -epsilon);
         result &= comp;
@@ -566,16 +570,16 @@ inline bool compareData(const T* reference, const T* data,
 #endif
     }
 
-    if (threshold == 0.0f) {
+    if (threshold == 0.0f)
+    {
         return (result) ? true : false;
     }
-    else {
-        if (error_count) {
-            printf("%4.2f(%%) of bytes mismatched (count=%d)\n",
-                static_cast<float>(error_count) * 100 / static_cast<float>(len),
-                error_count);
+    else
+    {
+        if (error_count)
+        {
+            printf("%4.2f(%%) of bytes mismatched (count=%d)\n", static_cast<float>(error_count) * 100 / static_cast<float>(len), error_count);
         }
-
         return (len * threshold > error_count) ? true : false;
     }
 }
@@ -594,9 +598,8 @@ inline bool compareData(const T* reference, const T* data,
 //! @param epsilon    threshold % of (# of bytes) for pass/fail
 //////////////////////////////////////////////////////////////////////////////
 template <class T, class S>
-inline bool compareDataAsFloatThreshold(const T* reference, const T* data,
-    const unsigned int len, const S epsilon,
-    const float threshold) {
+inline bool compareDataAsFloatThreshold(const T* reference, const T* data, const unsigned int len, const S epsilon, const float threshold)
+{
     assert(epsilon >= 0);
 
     // If we set epsilon to be 0, let's set a minimum threshold
@@ -604,31 +607,33 @@ inline bool compareDataAsFloatThreshold(const T* reference, const T* data,
     int error_count = 0;
     bool result = true;
 
-    for (unsigned int i = 0; i < len; ++i) {
-        float diff =
-            fabs(static_cast<float>(reference[i]) - static_cast<float>(data[i]));
+    for (unsigned int i = 0; i < len; ++i)
+    {
+        float diff = fabs(static_cast<float>(reference[i]) - static_cast<float>(data[i]));
         bool comp = (diff < max_error);
         result &= comp;
 
-        if (!comp) {
+        if (!comp)
+        {
             error_count++;
         }
     }
 
-    if (threshold == 0.0f) {
-        if (error_count) {
+    if (threshold == 0.0f)
+    {
+        if (error_count)
+        {
             printf("total # of errors = %d\n", error_count);
         }
 
         return (error_count == 0) ? true : false;
     }
-    else {
-        if (error_count) {
-            printf("%4.2f(%%) of bytes mismatched (count=%d)\n",
-                static_cast<float>(error_count) * 100 / static_cast<float>(len),
-                error_count);
+    else
+    {
+        if (error_count)
+        {
+            printf("%4.2f(%%) of bytes mismatched (count=%d)\n", static_cast<float>(error_count) * 100 / static_cast<float>(len), error_count);
         }
-
         return ((len * threshold > error_count) ? true : false);
     }
 }

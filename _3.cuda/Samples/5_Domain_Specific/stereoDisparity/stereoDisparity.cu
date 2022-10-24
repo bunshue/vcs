@@ -207,8 +207,10 @@ int main(int argc, char** argv)
     printf("GPU image: <%s>\n", fnameOut);
     sdkSavePGM(fnameOut, dispOut, w, h);
 
+    long long int start_clock = clock();
+
     // compute reference solution
-    printf("Computing CPU reference...\n\nwait...\n\n");
+    printf("Computing CPU reference...\n\nwait...about 40 sec\n\n");
     cpu_gold_stereo((unsigned int*)h_img0, (unsigned int*)h_img1, (unsigned int*)h_odata, w, h, minDisp, maxDisp);
     unsigned int cpuCheckSum = 0;
 
@@ -254,6 +256,10 @@ int main(int argc, char** argv)
     }
 
     sdkDeleteTimer(&timer);
+
+    long long int current_clock = clock();
+
+    printf("¸g¾ú®É¶¡ : %d.%3d ¬í\n", (current_clock - start_clock) / 1000, (current_clock - start_clock) % 1000);
 
     exit((checkSum == cpuCheckSum) ? EXIT_SUCCESS : EXIT_FAILURE);
 }

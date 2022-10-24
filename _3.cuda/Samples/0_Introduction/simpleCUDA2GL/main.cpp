@@ -124,9 +124,14 @@ void generateCUDAImage()
 
     // calculate grid size
     dim3 block(16, 16, 1);
-    // dim3 block(16, 16, 1);
     dim3 grid(image_width / block.x, image_height / block.y, 1);
     // execute CUDA kernel
+
+    //printf("num_bytes = %d\n", num_bytes);    //1048576
+    //printf("image_width = %d\n", image_width);    //512
+
+    //printf("image_width = %d\timage_height = %d\n", image_width, image_height); //512 X 512
+    //printf("block.x = %d\tblock.y = %d\n", block.x, block.y);   //16, 16
     launch_cudaProcess(grid, block, 0, out_data, image_width);
 
     // CUDA generated data in cuda memory or in a mapped PBO made of BGRA 8 bits

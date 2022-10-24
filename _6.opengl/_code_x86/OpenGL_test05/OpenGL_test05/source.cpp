@@ -1,23 +1,14 @@
-﻿// OpenGL Graphics includes
-#include <helper_gl.h>
-
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-
-//#include <GL/freeglut.h>	//64位元用的
+﻿//#include <GL/freeglut.h>	//64位元用的
 #include <GL/glut.h>		//32位元用的
 
-//  main.cpp
-//  opengl_progress_struct
-
-//#include <GLUT/GLUT.h>
-//#include <OpenGL/OpenGL.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 // 初始化參數
 void init()
 {
-    glClearColor(0.1, 0.1, 0.4, 0.0);
+    //glClearColor(0.0, 0.0, 0.0, 1.0);
     glShadeModel(GL_SMOOTH);
 }
 
@@ -28,16 +19,17 @@ void display()
     // 清除之前幀數據
     glClear(GL_COLOR_BUFFER_BIT);
 
-    // 繪制三角形
+    // 繪制三角形	3D
     glBegin(GL_TRIANGLES);
+	float dd = 2.5f;
     glColor3f(1, 0, 0);     //紅
-    glVertex3f(-2, -2, -5); //左下
+		glVertex3f(-dd, -dd, -5); //左下
 
     glColor3f(0, 1, 0);     //綠
-    glVertex3f(2, -2, -5);  //右下
+		glVertex3f(dd, -dd, -5);  //右下
 
     glColor3f(0, 0, 1);     //藍
-    glVertex3f(0, 2, -5);   //上
+		glVertex3f(0, dd, -5);   //上
     glEnd();
 
     // 執行繪圖命令
@@ -64,24 +56,8 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
     case 'Q':
         //離開視窗
         glutDestroyWindow(glutGetWindow());
+		exit(0);
         return;
-
-    case '1':
-        printf("1\n");
-        break;
-
-    case '2':
-        printf("2\n");
-        break;
-
-    case '3':
-        break;
-
-    case '4':
-        break;
-
-    case '?':
-        break;
     }
 }
 
@@ -91,11 +67,10 @@ int main(int argc, char** argv)
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
-    // 初始化窗口
-    glutInitWindowSize(600, 600);
-    glutInitWindowPosition(1100, 200);
+    glutInitWindowSize(600, 600);       // 設定視窗大小
+    glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
-    glutCreateWindow("Color Map");
+    glutCreateWindow("Color Map");		// 設定視窗標題
 
     init();
 
@@ -103,8 +78,8 @@ int main(int argc, char** argv)
     glutReshapeFunc(reshape);	//設定callback function
     glutKeyboardFunc(keyboard);	//設定callback function
 
-    // 開始主循環繪制
-    glutMainLoop();
+    glutMainLoop();	// 開始主循環繪制
+
     return 0;
 }
 
