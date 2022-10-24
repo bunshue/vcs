@@ -204,7 +204,7 @@ void renderScene()
     floorProg->disable();
 
     glMatrixMode(GL_TEXTURE);
-    glLoadIdentity();
+    glLoadIdentity();	//設置單位矩陣
 
     // draw light
     glMatrixMode(GL_MODELVIEW);
@@ -231,7 +231,7 @@ void display()
 
     // view transform
     glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
+    glLoadIdentity();	//設置單位矩陣
     glRotatef(cameraRotLag[0], 1.0, 0.0, 0.0);
     glRotatef(cameraRotLag[1], 0.0, 1.0, 0.0);
     glTranslatef(cameraPosLag[0], cameraPosLag[1], cameraPosLag[2]);
@@ -341,7 +341,7 @@ void display()
 void reshape(int w, int h)
 {
     glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
+    glLoadIdentity();	//設置單位矩陣
     gluPerspective(60.0, (float)w / (float)h, 0.01, 100.0);
 
     glMatrixMode(GL_MODELVIEW);

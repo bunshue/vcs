@@ -248,7 +248,7 @@ void display_thisframe(float time_delta) {
 
   // set view matrix: broken, it doesn't work in OpenGL ES! Must put into shader
   // glMatrixMode(GL_MODELVIEW);
-  // glLoadIdentity();
+  // glLoadIdentity();	//³]¸m³æ¦ì¯x°}
   // glTranslatef(0.0, 0.0, translate_z);
   // glRotatef(rotate_x, 1.0, 0.0, 0.0);
   // glRotatef(rotate_y, 0.0, 1.0, 0.0);

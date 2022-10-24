@@ -931,10 +931,10 @@ void reshape(int w, int h)
     glViewport(0, 0, w, h);
 
     glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
+    glLoadIdentity();	//設置單位矩陣
 
     glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
+    glLoadIdentity();	//設置單位矩陣
     glOrtho(0.0, 1.0, 0.0, 1.0, 0.0, 1.0);
 
     if (w != 0 && h != 0)  // Do not call when window is minimized that is when width && height == 0

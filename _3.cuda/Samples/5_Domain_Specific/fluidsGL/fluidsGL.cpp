@@ -303,10 +303,10 @@ void reshape(int x, int y)
     wHeight = y;
     glViewport(0, 0, x, y);
     glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
+    glLoadIdentity();	//設置單位矩陣
     glOrtho(0, 1, 1, 0, 0, 1);
     glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
+    glLoadIdentity();	//設置單位矩陣
     glutPostRedisplay();
 }
 

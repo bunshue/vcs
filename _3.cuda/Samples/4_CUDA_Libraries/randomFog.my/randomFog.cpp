@@ -162,7 +162,7 @@ void drawPoints(void)
 
 void drawText(void)
 {
-    glLoadIdentity();
+    glLoadIdentity();	//設置單位矩陣
     glRasterPos2f(-1.2f, 1.2f);
 
     string infoString = "This is a lion-mouse.";
@@ -189,7 +189,7 @@ void reshape(int x, int y)
 
     // Set a new projection matrix
     glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
+    glLoadIdentity();	//設置單位矩陣
 
     // Adjust fit
     if (y > x)
@@ -224,7 +224,7 @@ void display(void)
 {
     //printf("d");
     glClear(GL_COLOR_BUFFER_BIT);
-    glLoadIdentity();
+    glLoadIdentity();	//設置單位矩陣
     glTranslatef(0.0f, 0.0f, -4.0f);
     //glRotatef(g_yRotated, 0.0f, 1.0f, 0.0f);
     //glRotatef(g_xRotated, 1.0f, 0.0f, 0.0f);

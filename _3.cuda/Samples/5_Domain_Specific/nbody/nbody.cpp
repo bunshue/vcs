@@ -612,7 +612,7 @@ void display()
         // view transform
         {
             glMatrixMode(GL_MODELVIEW);
-            glLoadIdentity();
+            glLoadIdentity();	//設置單位矩陣
 
             for (int c = 0; c < 3; ++c)
             {
@@ -719,7 +719,7 @@ void display()
 
 void reshape(int w, int h) {
     glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
+    glLoadIdentity();	//設置單位矩陣
     gluPerspective(60.0, (float)w / (float)h, 0.1, 1000.0);
 
     glMatrixMode(GL_MODELVIEW);

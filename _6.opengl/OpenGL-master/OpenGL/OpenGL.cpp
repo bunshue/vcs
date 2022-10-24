@@ -137,8 +137,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
         // 渲染場景
 
-        // 設置單位矩陣
-        glLoadIdentity();
+        glLoadIdentity();   //設置單位矩陣
 
         // 矩陣壓棧 
         //glPushMatrix();
@@ -184,29 +183,23 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         //glBegin(GL_TRIANGLE_STRIP); // 繪制 GL_TRIANGLE_STRIP 三角形
         //glBegin(GL_TRIANGLE_FAN);	// 繪制三角形扇
 
-        // 繪制三角形
+                            // 繪制三角形
         glBegin(GL_TRIANGLES);
 
         // 設置法線
         glNormal3f(0.0f, -1.0f, 0.0f);
-
-        // 1. 設置白色 , glVertex3f (GLfloat x, GLfloat y, GLfloat z)
-        glColor4ub(255, 255, 255, 255);
-        glVertex3f(-1.0f, -0.5f, -2.0f);
+        glColor4ub(255, 0, 0, 255);     //R
+        glVertex3f(-1.0f, -0.9f, -2.0f);    //左下
 
         // 設置法線
         glNormal3f(0.0f, 1.0f, 0.0f);
-
-        // 2. 設置綠色 
-        glColor4ub(0, 255, 0, 255);
-        glVertex3f(1.0f, -0.5f, -2.0f);
+        glColor4ub(0, 255, 0, 255);     //G
+        glVertex3f(1.0f, -0.9f, -2.0f); //右下
 
         // 設置法線
         glNormal3f(0.0f, 1.0f, 0.0f);
-
-        // 3. 設置藍色
-        glColor4ub(0, 0, 255, 255);
-        glVertex3f(0.0f, -0.5f, -10.0f);
+        glColor4ub(0, 0, 255, 255);     //B
+        glVertex3f(0.0f, 2.5f, -10.0f); //上
 
         // 繪制三角形結束
         glEnd();
@@ -216,9 +209,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
         // 將后緩沖區繪制到前臺
         SwapBuffers(dc);
-
     }
-
     return (int)msg.wParam;
 }
 
@@ -343,8 +334,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     // glClearColor (GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha)
     // 對應的參數是 紅色 , 綠色 , 藍色 , 透明度
     // 這里設置的是紅色
-    glClearColor(1.0, 0.0, 0.0, 1.0);
-
+    glClearColor(1.0, 0.0, 0.0, 1.0);   //設置背景顏色 R
 
     // 矩陣環境初始化 , 主要是投影矩陣和模型矩陣 
 
@@ -362,8 +352,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     // ( 選中模型矩陣 )
     glMatrixMode(GL_MODELVIEW);
     // ( 設置模型矩陣值 ) , 這里設置的是單位矩陣
-    glLoadIdentity();
-
+    glLoadIdentity();   //設置單位矩陣
 
     // 顯示窗口
     ShowWindow(hWnd, nCmdShow);

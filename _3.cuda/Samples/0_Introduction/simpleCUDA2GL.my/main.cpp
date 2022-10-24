@@ -174,11 +174,11 @@ void displayImage(GLuint texture)
 
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();
-    glLoadIdentity();
+    glLoadIdentity();	//設置單位矩陣
     glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
 
     glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
+    glLoadIdentity();	//設置單位矩陣
 
     glViewport(0, 0, window_width, window_height);
 
@@ -372,7 +372,7 @@ bool initGL(int* argc, char** argv)
 
     // projection
     glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
+    glLoadIdentity();	//設置單位矩陣
     gluPerspective(60.0, (GLfloat)window_width / (GLfloat)window_height, 0.1f, 10.0f);
 
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);

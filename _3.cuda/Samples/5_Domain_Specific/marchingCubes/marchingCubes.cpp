@@ -830,7 +830,7 @@ void display()
 
         // set view matrix
         glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
+        glLoadIdentity();	//設置單位矩陣
         glTranslatef(translate.x, translate.y, translate.z);
         glRotatef(rotate.x, 1.0, 0.0, 0.0);
         glRotatef(rotate.y, 0.0, 1.0, 0.0);
@@ -974,7 +974,7 @@ void idle()
 void reshape(int w, int h)
 {
     glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
+    glLoadIdentity();	//設置單位矩陣
     gluPerspective(60.0, (float)w / (float)h, 0.1, 10.0);
 
     glMatrixMode(GL_MODELVIEW);
