@@ -55,7 +55,6 @@ static int fpsLimit = 1;
 StopWatchInterface* timer = NULL;
 
 extern "C" void launch_cudaProcess(dim3 grid, dim3 block, int sbytes, unsigned int* g_odata, int imgw);
-extern "C" void launch_cudaProcess2(unsigned int* g_odata, int imgw);
 
 void FreeResource();
 void Cleanup(int iExitCode);
@@ -144,9 +143,6 @@ void generateCUDAImage()
     //printf("image_width = %d\timage_height = %d\n", image_width, image_height); //512 X 512
     //printf("block.x = %d\tblock.y = %d\n", block.x, block.y);   //16, 16
     launch_cudaProcess(grid, block, 0, out_data, image_width);
-
-    //launch_cudaProcess2(out_data, image_width);
-
 
     // CUDA generated data in cuda memory or in a mapped PBO made of BGRA 8 bits
     // 2 solutions, here :

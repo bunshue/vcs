@@ -53,7 +53,6 @@ static int fpsCount = 0;
 static int fpsLimit = 1;
 StopWatchInterface* timer = NULL;
 
-////////////////////////////////////////////////////////////////////////////////
 extern "C" void launch_cudaProcess(dim3 grid, dim3 block, int sbytes, unsigned int* g_odata, int imgw);
 
 void FreeResource();
@@ -125,6 +124,12 @@ void generateCUDAImage()
     // calculate grid size
     dim3 block(16, 16, 1);
     dim3 grid(image_width / block.x, image_height / block.y, 1);
+    /*
+    printf("image_width = %d\timage_height = %d\n", image_width, image_height); //512 X 512
+    printf("block.x = %d\tblock.y = %d\tblock.z = %d\n", block.x, block.y, block.z);   //16, 16, 1
+    printf("grid.x = %d\tgrid.y = %d\tgrid.z = %d\n", grid.x, grid.y, grid.z);          //512/16=32, 512/16=32, 1
+    */
+
     // execute CUDA kernel
 
     //printf("num_bytes = %d\n", num_bytes);    //1048576
@@ -280,9 +285,6 @@ void deleteTexture(GLuint* tex)
     *tex = 0;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//!
-////////////////////////////////////////////////////////////////////////////////
 void FreeResource()
 {
     printf("離開程式時, FreeResource\n");

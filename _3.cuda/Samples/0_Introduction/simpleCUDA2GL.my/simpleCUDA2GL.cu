@@ -141,10 +141,4 @@ extern "C" void launch_cudaProcess(dim3 grid, dim3 block, int sbytes, unsigned i
 	//cudaProcess2 << <1, 1, 0 >> > (g_odata, imgw);
 }
 
-extern "C" void launch_cudaProcess2(unsigned int* g_odata, int imgw)
-{
-	//cudaProcess2 << <1, 1, 0 >> > (g_odata, imgw);
-}
-
-
 

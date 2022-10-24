@@ -87,8 +87,7 @@ void fillupMatrix(T_ELEM* A, int lda, int rows, int cols, int seed)
     {
         for (int i = 0; i < rows; i++)
         {
-            A[i + lda * j] = cuGet<T_ELEM>(
-                ((double)(((lda * i + j + seed) % 253) + 1)) / 256.0, ((double)((((cols * i + j) + 123 + seed) % 253) + 1)) / 256.0);
+            A[i + lda * j] = cuGet<T_ELEM>(((double)(((lda * i + j + seed) % 253) + 1)) / 256.0, ((double)((((cols * i + j) + 123 + seed) % 253) + 1)) / 256.0);
         }
     }
 }
@@ -192,8 +191,7 @@ static inline cublasStatus_t cublasXgemmBatched(
 }
 
 static inline cublasStatus_t cublasXgemmBatched(cublasHandle_t handle, cublasOperation_t transa, cublasOperation_t transb,
-    int m, int n, int k, double* alpha, const double* Aarray[], int lda, const double* Barray[], int ldb, double* beta, double* Carray[], int ldc,
-    int batchCount)
+    int m, int n, int k, double* alpha, const double* Aarray[], int lda, const double* Barray[], int ldb, double* beta, double* Carray[], int ldc, int batchCount)
 {
 #if CUDART_VERSION >= 4010
     return cublasDgemmBatched(handle, transa, transb, m, n, k, alpha, Aarray, lda,
@@ -258,13 +256,10 @@ static int processArgs(int argc, char* argv[], struct gemmOpts* opts)
 }
 
 template <typename T_ELEM>
-static int TESTGEN(gemm)(const struct gemmOpts* opts, int matrixM, int matrixN,
-    int matrixK, int& numTests, struct gemmTestParams<T_ELEM>* params)
+static int TESTGEN(gemm)(const struct gemmOpts* opts, int matrixM, int matrixN, int matrixK, int& numTests, struct gemmTestParams<T_ELEM>* params)
 {
-    static T_ELEM alpha[] = { cuGet<T_ELEM>(0, 0), cuGet<T_ELEM>(-1, -1),
-                             cuGet<T_ELEM>(1, -2), cuGet<T_ELEM>(2, -1),                             cuGet<T_ELEM>(0, -3) };
-    static T_ELEM beta[] = { cuGet<T_ELEM>(0, 0), cuGet<T_ELEM>(-1, -1),
-                            cuGet<T_ELEM>(1, -2), cuGet<T_ELEM>(2, -1),                            cuGet<T_ELEM>(0, -3) };
+    static T_ELEM alpha[] = { cuGet<T_ELEM>(0, 0), cuGet<T_ELEM>(-1, -1), cuGet<T_ELEM>(1, -2), cuGet<T_ELEM>(2, -1), cuGet<T_ELEM>(0, -3) };
+    static T_ELEM beta[] = { cuGet<T_ELEM>(0, 0), cuGet<T_ELEM>(-1, -1), cuGet<T_ELEM>(1, -2), cuGet<T_ELEM>(2, -1), cuGet<T_ELEM>(0, -3) };
 
 #define NBR_ALPHAS (sizeof(alpha) / sizeof(alpha[0]))
 #define NBR_BETAS (sizeof(beta) / sizeof(beta[0]))
@@ -405,7 +400,8 @@ int test_gemm_loop(struct gemmOpts& opts, float err, double max_relative_error, 
     B = (T_ELEM*)malloc(matrixSizeB * sizeof(B[0]));
     C = (T_ELEM*)malloc(matrixSizeC * sizeof(C[0]));
 
-    if ((!A) || (!B) || (!C)) {
+    if ((!A) || (!B) || (!C))
+    {
         CLEANUP();
         fprintf(stderr, "!!!! system memory allocation error\n");
         return CUBLASTEST_FAILED;
@@ -478,8 +474,7 @@ int test_gemm_loop(struct gemmOpts& opts, float err, double max_relative_error, 
             cublasSetStream(handle, streamArray[0]);
             status1 = cublasXgemmBatched(handle, params.transa, params.transb,
                 params.m, params.n, params.k, &params.alpha,
-                (const T_ELEM**)devPtrA_dev, rowsA,
-                (const T_ELEM**)devPtrB_dev, rowsB,
+                (const T_ELEM**)devPtrA_dev, rowsA, (const T_ELEM**)devPtrB_dev, rowsB,
                 &params.beta, devPtrC_dev, rowsC, opts.N);
 
             if (status1 != CUBLAS_STATUS_SUCCESS)

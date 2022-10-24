@@ -38,9 +38,8 @@
 #define THRESHOLD 0.15f
 #define REFRESH_DELAY 10  // ms
 
-////////////////////////////////////////////////////////////////////////////////
-// constants
-unsigned int windowW = 512, windowH = 512;
+unsigned int windowW = 512;
+unsigned int windowH = 512;
 
 const unsigned int meshSize = 256;
 const unsigned int spectrumW = meshSize + 4;
@@ -159,8 +158,7 @@ int main(int argc, char** argv)
     }
     else
     {
-        printf(
-            "Left mouse button          - rotate\n"
+        printf(            "Left mouse button          - rotate\n"
             "Middle mouse button        - pan\n"
             "Right mouse button         - zoom\n"
             "'w' key                    - toggle wireframe\n");
@@ -231,8 +229,7 @@ void runGraphicsTest(int argc, char** argv)
     }
 
     // First initialize OpenGL context, so we can properly set the GL for CUDA.
-    // This is necessary in order to achieve optimal performance with OpenGL/CUDA
-    // interop.
+    // This is necessary in order to achieve optimal performance with OpenGL/CUDA interop.
     if (false == initGL(&argc, argv))
     {
         return;

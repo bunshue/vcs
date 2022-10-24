@@ -14,7 +14,7 @@ void init(void)
 	glColor3f(1.0, 1.0, 1.0);
 
 	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
+	glLoadIdentity();	//設置單位矩陣
 
 	//定義剪裁面
 	gluOrtho2D(-1.0, 1.0, -1.0, 1.0);	//應該是預設就是這樣的數字
@@ -24,7 +24,7 @@ void init(void)
 void display(void)
 {
 	//glMatrixMode( GL_MODELVIEW );
-	//glLoadIdentity();
+	//glLoadIdentity();	//設置單位矩陣
 
 	glClear(GL_COLOR_BUFFER_BIT);
 
@@ -34,21 +34,41 @@ void display(void)
 	glViewport(viewportx, viewporty, W, H);		//視口設定為全部視窗
 												//後面這兩個參數是高度和寬度，而不是座標
 	glBegin(GL_LINES);
+	//畫紅色橫線
 	glColor3f(1.0, 0.0, 0.0);	//紅色
 	glVertex2f(-1.0, 0);	//畫橫線
 	glVertex2f(1.0, 0);
 
+	//畫綠色直線
 	glColor3f(0.0, 1.0, 0.0);	//綠色
 	glVertex2f(0.0, -1.0);	//畫直線
 	glVertex2f(0.0, 1.0);
 	glEnd();
 
-	//定義在左下角的區域, 綠色方塊
-	glColor3f(0.0, 1.0, 0.0);	//綠色
+	/* 畫一個範圍矩形, TBD
+	//畫一個矩形 B
+	glColor3f(0.0, 0.0, 1.0);	//設置畫筆顏色為 B
+	//左下x,左下y,右上x,右上y,
+	glRectf(-0.9f, -0.9f, -0.3f, 0.9f);//畫一個矩形
+	*/
 
+	//定義在左下角的區域, 紅色方塊
+	glColor3f(1.0, 0.0, 0.0);	//紅色
 	viewportx = 0;
 	viewporty = 0;
 	glViewport(viewportx, viewporty, W / 2, H / 2);	//視口設定為全部視窗的左下四分之一
+	glBegin(GL_POLYGON);
+	glVertex2f(-0.5, -0.5);
+	glVertex2f(-0.5, 0.5);
+	glVertex2f(0.5, 0.5);
+	glVertex2f(0.5, -0.5);
+	glEnd();
+
+	//定義在左上角的區域, 綠色方塊
+	glColor3f(0.0, 1.0, 0.0);	//綠色
+	viewportx = 0;
+	viewporty = H / 2;
+	glViewport(viewportx, viewporty, W / 2, H / 2);//視口設定為全部視窗的左上四分之一
 	glBegin(GL_POLYGON);
 	glVertex2f(-0.5, -0.5);
 	glVertex2f(-0.5, 0.5);
@@ -61,18 +81,6 @@ void display(void)
 	viewportx = W / 2;
 	viewporty = H / 2;
 	glViewport(viewportx, viewporty, W / 2, H / 2);	//視口設定為全部視窗的右上四分之一
-	glBegin(GL_POLYGON);
-	glVertex2f(-0.5, -0.5);
-	glVertex2f(-0.5, 0.5);
-	glVertex2f(0.5, 0.5);
-	glVertex2f(0.5, -0.5);
-	glEnd();
-
-	//定義在左上角的區域, 桃紅色方塊
-	glColor3f(1.0, 0.0, 1.0);	//桃紅色
-	viewportx = 0;
-	viewporty = H / 2;
-	glViewport(viewportx, viewporty, W / 2, H / 2);//視口設定為全部視窗的左上四分之一
 	glBegin(GL_POLYGON);
 	glVertex2f(-0.5, -0.5);
 	glVertex2f(-0.5, 0.5);

@@ -2,8 +2,7 @@
 // This sample demonstrates how HyperQ allows supporting devices to avoid false
 // dependencies between kernels in different streams.
 //
-// - Devices without HyperQ will run a maximum of two kernels at a time (one
-//   kernel_A and one kernel_B).
+// - Devices without HyperQ will run a maximum of two kernels at a time (one kernel_A and one kernel_B).
 // - Devices with HyperQ will run up to 32 kernels simultaneously.
 
 #include <cooperative_groups.h>
@@ -13,8 +12,7 @@ namespace cg = cooperative_groups;
 #include <helper_cuda.h>
 #include <helper_functions.h>
 
-// This subroutine does no real work but runs for at least the specified number
-// of clock ticks.
+// This subroutine does no real work but runs for at least the specified number of clock ticks.
 __device__ void clock_block(clock_t* d_o, clock_t clock_count)
 {
     unsigned int start_clock = (unsigned int)clock();
@@ -42,12 +40,13 @@ __device__ void clock_block(clock_t* d_o, clock_t clock_count)
 }
 
 // We create two identical kernels calling clock_block(), we create two so that
-// we can identify dependencies in the profile timeline ("kernel_B" is always
-// dependent on "kernel_A" in the same stream).
+// we can identify dependencies in the profile timeline
+// ("kernel_B" is always dependent on "kernel_A" in the same stream).
 __global__ void kernel_A(clock_t* d_o, clock_t clock_count)
 {
     clock_block(d_o, clock_count);
 }
+
 __global__ void kernel_B(clock_t* d_o, clock_t clock_count)
 {
     clock_block(d_o, clock_count);
@@ -176,8 +175,7 @@ int main(int argc, char** argv)
     sum << <1, 32 >> > (d_a, 2 * nstreams);
     checkCudaErrors(cudaMemcpy(a, d_a, sizeof(clock_t), cudaMemcpyDeviceToHost));
 
-    // stop_event will have been recorded but including the synchronize here to
-    // prevent copy/paste errors!
+    // stop_event will have been recorded but including the synchronize here to prevent copy/paste errors!
     checkCudaErrors(cudaEventSynchronize(stop_event));
     checkCudaErrors(cudaEventElapsedTime(&elapsed_time, start_event, stop_event));
 
