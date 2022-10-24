@@ -3,6 +3,6 @@
 class Texture
 {
 public:
-	// 加载纹理方法 
+	// 更瞶よ猭 
 	void Init(const char* imagePath);
 };

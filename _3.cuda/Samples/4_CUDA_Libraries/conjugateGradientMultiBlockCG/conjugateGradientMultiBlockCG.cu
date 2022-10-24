@@ -159,8 +159,7 @@ void cpuConjugateGrad(int* I, int* J, float* val, float* x, float* Ax, float* p,
     }
 }
 
-__device__ void gpuSpMV(int* I, int* J, float* val, int nnz, int num_rows, float alpha, float* inputVecX, float* outputVecY,
-    cg::thread_block& cta, const cg::grid_group& grid)
+__device__ void gpuSpMV(int* I, int* J, float* val, int nnz, int num_rows, float alpha, float* inputVecX, float* outputVecY, cg::thread_block& cta, const cg::grid_group& grid)
 {
     for (int i = grid.thread_rank(); i < num_rows; i += grid.size())
     {
@@ -330,8 +329,7 @@ bool areAlmostEqual(float a, float b, float maxRelDiff)
     else
     {
         printf("maxRelDiff = %.8e\n", maxRelDiff);
-        printf("diff %.8e > largest * maxRelDiff %.8e therefore %.8e and %.8e are not same\n",
-            diff, largest * maxRelDiff, a, b);
+        printf("diff %.8e > largest * maxRelDiff %.8e therefore %.8e and %.8e are not same\n", diff, largest * maxRelDiff, a, b);
         return false;
     }
 }
@@ -406,7 +404,8 @@ int main(int argc, char** argv)
     float* p_cpu = reinterpret_cast<float*>(malloc(sizeof(float) * N));
     float* x_cpu = reinterpret_cast<float*>(malloc(sizeof(float) * N));
 
-    for (int i = 0; i < N; i++) {
+    for (int i = 0; i < N; i++)
+    {
         r_cpu[i] = 1.0;
         Ax_cpu[i] = x_cpu[i] = 0.0;
     }

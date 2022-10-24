@@ -22,11 +22,11 @@ unsigned char* LoadFileContent(const char* filePath)
 		// 成功返回 0 , 失敗返回非 0
 		fseek(pFile, 0, SEEK_END);
 
-		// 獲取文件指針位置 , 當前文件指針位于文件尾部
+		// 獲取文件指針位置 , 當前文件指針位於文件尾部
 		// 當前的文件指針位置就是文件的字節長度
 		int nLen = ftell(pFile);
 
-		// 如果文件長度大于 0 , 才去讀取文件
+		// 如果文件長度大於 0 , 才去讀取文件
 		if (nLen > 0)
 		{
 			// 將文件指針 FILE* pFile 移到文件的開始位置
@@ -42,7 +42,7 @@ unsigned char* LoadFileContent(const char* filePath)
 			// 將讀取的數據存儲到 fileContent 指向的內存中
 			fread(fileContent, sizeof(unsigned char), nLen, pFile);
 
-			// 最后第 nLen + 1 個元素 , 索引是 nLen , 設置為 '\0'
+			// 最後第 nLen + 1 個元素 , 索引是 nLen , 設置為 '\0'
 			fileContent[nLen] = '\0';
 		}
 

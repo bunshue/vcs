@@ -61,6 +61,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     // 讀取文件內容
     // Visual Studio 2019 中使用相對路徑讀取不到文件
+
     char* str = (char*)LoadFileContent("C:\\_git\\vcs\\_6.opengl\\OpenGL - master\\test.txt");
     printf("%s\n", str);
 

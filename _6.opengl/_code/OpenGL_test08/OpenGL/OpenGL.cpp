@@ -1,8 +1,4 @@
-﻿// OpenGL.cpp : 定義應用程序的入口點。
-// 窗口程序入口
-// 代碼提交測試
-
-#include "framework.h"
+﻿#include "framework.h"
 #include "OpenGL.h"
 
 #include "texture.h"
@@ -64,10 +60,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     MSG msg;
 
     // 讀取文件內容
-    // 絕對路徑 : "D:\\002_Project\\006_Visual_Studio\\OpenGL\\OpenGL\\test.txt"
     // Visual Studio 2019 中使用相對路徑讀取不到文件
 
-    //char* str = (char*)LoadFileContent("D:\\002_Project\\006_Visual_Studio\\OpenGL\\OpenGL\\test.txt");
     char* str = (char*)LoadFileContent("C:\\_git\\vcs\\_6.opengl\\_code\\OpenGL_test08\\test.txt");
 
     printf("%s\n", str);
@@ -145,8 +139,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
         // 渲染場景
 
-        // 設置單位矩陣
-        glLoadIdentity();
+        glLoadIdentity();   //設置單位矩陣
 
         // 矩陣壓棧 
         //glPushMatrix();
@@ -353,8 +346,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     // glClearColor (GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha)
     // 對應的參數是 紅色 , 綠色 , 藍色 , 透明度
     // 這里設置的是紅色
-    glClearColor(1.0, 0.0, 0.0, 1.0);
-
+    glClearColor(1.0, 0.0, 0.0, 1.0);   //設置背景顏色 R
 
     // 矩陣環境初始化 , 主要是投影矩陣和模型矩陣 
 
@@ -372,8 +364,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     // ( 選中模型矩陣 )
     glMatrixMode(GL_MODELVIEW);
     // ( 設置模型矩陣值 ) , 這里設置的是單位矩陣
-    glLoadIdentity();
-
+    glLoadIdentity();   //設置單位矩陣
 
     // 顯示窗口
     ShowWindow(hWnd, nCmdShow);
@@ -430,7 +421,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     return 0;
 }
 
-// “關于”框的消息處理程序。
+// “關於”框的消息處理程序。
 INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 {
     UNREFERENCED_PARAMETER(lParam);
