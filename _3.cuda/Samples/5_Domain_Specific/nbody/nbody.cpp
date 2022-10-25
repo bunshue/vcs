@@ -1312,7 +1312,7 @@ int main(int argc, char** argv)
                 checkCudaErrors(cudaEventRecord(startEvent, 0));
             }
 
-            glutMainLoop();
+            glutMainLoop();	//開始主循環繪製
         }
 
     }
@@ -1346,7 +1346,7 @@ int main(int argc, char** argv)
                 checkCudaErrors(cudaEventRecord(startEvent, 0));
             }
 
-            glutMainLoop();
+            glutMainLoop();	//開始主循環繪製
         }
     }
 

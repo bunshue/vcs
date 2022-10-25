@@ -360,8 +360,7 @@ int main(int argc, char** argv)
     glutIdleFunc(idle);		//設定callback function, 利用idle事件進行重畫
     glutCloseFunc(glutClose);   //設定callback function
 
-    // Let's get started!
-    glutMainLoop();
+    glutMainLoop();	//開始主循環繪製
 
     exit(EXIT_SUCCESS);
 }

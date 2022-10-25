@@ -739,8 +739,7 @@ int main(int argc, char** argv)
 
             glutCloseFunc(glutClose);
 
-            // Let's get started!
-            glutMainLoop();
+            glutMainLoop();	//開始主循環繪製
         }
     }
     catch (runtime_error& e) {

@@ -385,8 +385,7 @@ int main(int argc, char** argv)
     // run the cuda part
     runCuda(&cuda_vbo_resource);
 
-    // start rendering mainloop
-    glutMainLoop();
+    glutMainLoop();	//開始主循環繪製
 
     exit(EXIT_SUCCESS);
 }

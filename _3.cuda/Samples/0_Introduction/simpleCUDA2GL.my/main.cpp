@@ -418,8 +418,7 @@ int main(int argc, char** argv)
 
     printf("按滑鼠右鍵 或 ESC 結束\n\n");
 
-    // start rendering mainloop
-    glutMainLoop();
+    glutMainLoop();	//開始主循環繪製
 
     // Normally unused return path
     Cleanup(EXIT_SUCCESS);

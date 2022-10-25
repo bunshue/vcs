@@ -444,5 +444,5 @@ int main(int argc, char** argv)
     glutCloseFunc(cleanup);
 
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
-    glutMainLoop();
+    glutMainLoop();	//開始主循環繪製
 }

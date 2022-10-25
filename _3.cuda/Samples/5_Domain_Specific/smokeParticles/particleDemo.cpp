@@ -937,7 +937,7 @@ int main(int argc, char** argv)
         glutMotionFunc(motion);		//設定callback function
         glutIdleFunc(idle);         //設定callback function, 利用idle事件進行重畫
 
-        glutMainLoop();
+        glutMainLoop();	//開始主循環繪製
     }
 
     exit(g_TotalErrors > 0 ? EXIT_FAILURE : EXIT_SUCCESS);

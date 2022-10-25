@@ -486,7 +486,8 @@ int main(int argc, char** argv)
     }
 
     initGLBuffers();
-    glutMainLoop();
+    
+    glutMainLoop();	//開始主循環繪製
 
     exit(EXIT_SUCCESS);
 }

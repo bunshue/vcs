@@ -523,5 +523,5 @@ int main(int argc, char** argv)
 
     //glutFullScreen();   //全螢幕顯示
 
-    glutMainLoop();
+    glutMainLoop();	//開始主循環繪製
 }

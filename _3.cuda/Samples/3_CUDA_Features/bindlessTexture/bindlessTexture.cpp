@@ -365,6 +365,6 @@ int main(int argc, char** argv)
 
     glutCloseFunc(cleanup_all);
 
-    glutMainLoop();
+    glutMainLoop();	//開始主循環繪製
 }
 

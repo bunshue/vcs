@@ -560,8 +560,7 @@ void runGraphicsTest(int argc, char** argv)
 
     sdkCreateTimer(&timer);
 
-    // start rendering mainloop
-    glutMainLoop();
+    glutMainLoop();	//開始主循環繪製
 }
 
 #define DEBUG_BUFFERS 0

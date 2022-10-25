@@ -301,5 +301,5 @@ int main(int argc, char** argv)
     sdkCreateTimer(&timer);
     sdkStartTimer(&timer);
 
-    glutMainLoop();
+    glutMainLoop();	//開始主循環繪製
 }

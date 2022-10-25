@@ -943,8 +943,7 @@ void runStdProgram(int argc, char** argv)
         "\t[-] : Decrease Blur Radius\n"
         "\t[esc] - Quit\n\n");
 
-    // start rendering mainloop
-    glutMainLoop();
+	glutMainLoop();	//開始主循環繪製
 
     // Normally unused return path
     Cleanup(EXIT_SUCCESS);

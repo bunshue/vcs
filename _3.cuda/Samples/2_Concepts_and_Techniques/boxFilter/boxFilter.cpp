@@ -480,5 +480,5 @@ int main(int argc, char** argv)
         "Press 'a' or  'A' to change animation ON/OFF\n\n");
 
     // Main OpenGL loop that will run visualization for every vsync
-    glutMainLoop();
+    glutMainLoop();	//開始主循環繪製
 }

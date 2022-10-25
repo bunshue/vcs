@@ -1,8 +1,7 @@
 /*
   3D texture sample
 
-  This sample loads a 3D volume from disk and displays slices through it
-  using 3D texture lookups.
+  This sample loads a 3D volume from disk and displays slices through it using 3D texture lookups.
 */
 
 #include <stdlib.h>
@@ -301,7 +300,7 @@ int main(int argc, char** argv)
 
     glutCloseFunc(cleanup);
 
-    glutMainLoop();
+    glutMainLoop();	//開始主循環繪製
 
     exit(EXIT_SUCCESS);
 }

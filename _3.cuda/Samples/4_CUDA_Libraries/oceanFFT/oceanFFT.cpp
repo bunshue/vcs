@@ -276,8 +276,7 @@ void runGraphicsTest(int argc, char** argv)
 
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
 
-    // start rendering mainloop
-    glutMainLoop();
+    glutMainLoop();	//開始主循環繪製
 }
 
 float urand() { return rand() / (float)RAND_MAX; }

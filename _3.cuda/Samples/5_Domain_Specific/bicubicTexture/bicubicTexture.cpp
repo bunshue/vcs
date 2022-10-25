@@ -747,7 +747,8 @@ int main(int argc, char** argv)
 
         // This runs the CUDA kernel (bicubicFiltering) + OpenGL visualization
         initialize(argc, argv);
-        glutMainLoop();
+        
+        glutMainLoop();	//開始主循環繪製
     }
 
     exit(EXIT_SUCCESS);

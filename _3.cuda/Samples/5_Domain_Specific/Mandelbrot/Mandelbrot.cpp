@@ -1273,6 +1273,6 @@ int main(int argc, char** argv)
 
     setVSync(0);
 
-    glutMainLoop();
+    glutMainLoop();	//開始主循環繪製
 }
 

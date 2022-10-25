@@ -737,7 +737,7 @@ int main(int argc, char** argv)
         glutIdleFunc(idle);		//設定callback function, 利用idle事件進行重畫
         glutCloseFunc(cleanup);
 
-        glutMainLoop();
+        glutMainLoop();	//開始主循環繪製
     }
 
     if (psystem)
