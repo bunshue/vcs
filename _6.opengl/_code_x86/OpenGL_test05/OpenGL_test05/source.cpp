@@ -19,7 +19,7 @@ void display()
     // 清除之前幀數據
     glClear(GL_COLOR_BUFFER_BIT);
 
-    // 繪制三角形	3D
+    // 繪製三角形	3D
     glBegin(GL_TRIANGLES);
 	float dd = 2.5f;
     glColor3f(1, 0, 0);     //紅
@@ -78,7 +78,7 @@ int main(int argc, char** argv)
     glutReshapeFunc(reshape);	//設定callback function
     glutKeyboardFunc(keyboard);	//設定callback function
 
-    glutMainLoop();	// 開始主循環繪制
+    glutMainLoop();	//開始主循環繪製
 
     return 0;
 }

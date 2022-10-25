@@ -3,31 +3,31 @@
 #ifndef PARAMGL_H
 #define PARAMGL_H
 
-#if defined(__APPLE__) || defined(MACOSX)
-#include <GLUT/glut.h>
-#else
 #include <GL/freeglut.h>
-#endif
 
 #include <param.h>
 #include <string.h>
 
-inline void beginWinCoords(void) {
+inline void beginWinCoords(void)
+{
+  //兩個Matrix push
   glMatrixMode(GL_MODELVIEW);
-  glPushMatrix();
+  glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
   glLoadIdentity();	//設置單位矩陣
   glTranslatef(0.0, (GLfloat)(glutGet(GLUT_WINDOW_HEIGHT) - 1.0), 0.0);
   glScalef(1.0, -1.0, 1.0);
 
   glMatrixMode(GL_PROJECTION);
-  glPushMatrix();
+  glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
   glLoadIdentity();	//設置單位矩陣
   glOrtho(0, glutGet(GLUT_WINDOW_WIDTH), 0, glutGet(GLUT_WINDOW_HEIGHT), -1, 1);
 
   glMatrixMode(GL_MODELVIEW);
 }
 
-inline void endWinCoords(void) {
+inline void endWinCoords(void)
+{
+  //兩個Matrix pop
   glMatrixMode(GL_PROJECTION);
   glPopMatrix();
 

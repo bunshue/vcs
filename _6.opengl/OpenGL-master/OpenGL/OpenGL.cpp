@@ -141,7 +141,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         glLoadIdentity();   //設置單位矩陣
 
         // 矩陣壓棧 
-        //glPushMatrix();
+        //glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
 
         // 矩陣縮放
         // 縮放的是下面設置的點的坐標
@@ -164,75 +164,68 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         // 紅色背景
         glClear(GL_COLOR_BUFFER_BIT);
 
-        // 設置當前的繪制顏色 , 4 個 unsigned byte 
+        // 設置當前的繪製顏色 , 4 個 unsigned byte 
         // 每個顏色的分量占一個字節
         // 參數數據是 R 紅色 G 綠色 B 藍色 A 透明度
-        // 下面設置的含義是白色, 繪制點的時候, 每次都使用白色繪制
+        // 下面設置的含義是白色, 繪製點的時候, 每次都使用白色繪製
         glColor4ub(255, 255, 255, 255);
 
         // 設置當前點的大小
         glPointSize(5.0f);
 
-        // 設置線的寬度 
-        glLineWidth(5.0f);
+        glLineWidth(5.0f);	//設定線寬
 
-        //glBegin(GL_POINTS);	// 繪制點
-        //glBegin(GL_LINES);	// 繪制線
-        //glBegin(GL_LINE_STRIP);// 繪制前后連接的點組成的線
-        //glBegin(GL_LINE_LOOP); // 繪制前后連接的點組成的線 , 并且收尾相連
-        //glBegin(GL_TRIANGLES); // 繪制多個三角形
-        //glBegin(GL_TRIANGLE_STRIP); // 繪制 GL_TRIANGLE_STRIP 三角形
-        //glBegin(GL_TRIANGLE_FAN);	// 繪制三角形扇
+        //glBegin(GL_POINTS);	//繪製點
+        //glBegin(GL_LINES);	//繪製線
+        //glBegin(GL_LINE_STRIP);//繪製前后連接的點組成的線
+        //glBegin(GL_LINE_LOOP); //繪製前后連接的點組成的線 , 并且收尾相連
+        //glBegin(GL_TRIANGLES); //繪製多個三角形
+        //glBegin(GL_TRIANGLE_STRIP); //繪製 GL_TRIANGLE_STRIP 三角形
+        //glBegin(GL_TRIANGLE_FAN);	//繪製三角形扇
 
-                            // 繪制三角形
+	// 繪製三角形
         glBegin(GL_TRIANGLES);
 
         //old
-        // 設置法線
-        glNormal3f(0.0f, -1.0f, 0.0f);
+        glNormal3f(0.0f, -1.0f, 0.0f);	//設置法線
 
         // 1. 設置白色 , glVertex3f (GLfloat x, GLfloat y, GLfloat z)
         glColor4ub(255, 255, 255, 255);
         glVertex3f(-1.0f, -0.5f, -2.0f);
 
-        // 設置法線
-        glNormal3f(0.0f, 1.0f, 0.0f);
+        glNormal3f(0.0f, 1.0f, 0.0f);	//設置法線
 
         // 2. 設置綠色 
         glColor4ub(0, 255, 0, 255);
         glVertex3f(1.0f, -0.5f, -2.0f);
 
-        // 設置法線
-        glNormal3f(0.0f, 1.0f, 0.0f);
+        glNormal3f(0.0f, 1.0f, 0.0f);	//設置法線
 
         // 3. 設置藍色
         glColor4ub(0, 0, 255, 255);
         glVertex3f(0.0f, -0.5f, -10.0f);
 
         /* new
-        // 設置法線
-        glNormal3f(0.0f, -1.0f, 0.0f);
+        glNormal3f(0.0f, -1.0f, 0.0f);	//設置法線
         glColor4ub(255, 0, 0, 255);     //R
         glVertex3f(-1.0f, -0.9f, -2.0f);    //左下
 
-        // 設置法線
-        glNormal3f(0.0f, 1.0f, 0.0f);
+        glNormal3f(0.0f, 1.0f, 0.0f);	//設置法線
         glColor4ub(0, 255, 0, 255);     //G
         glVertex3f(1.0f, -0.9f, -2.0f); //右下
 
-        // 設置法線
-        glNormal3f(0.0f, 1.0f, 0.0f);
+        glNormal3f(0.0f, 1.0f, 0.0f);	//設置法線
         glColor4ub(0, 0, 255, 255);     //B
         glVertex3f(0.0f, 2.5f, -10.0f); //上
         */
 
-        // 繪制三角形結束
+        // 繪製三角形結束
         glEnd();
 
         // 矩陣出棧 
         //glPopMatrix();
 
-        // 將后緩沖區繪制到前臺
+        // 將后緩沖區繪製到前臺
         SwapBuffers(dc);
     }
     return (int)msg.wParam;
@@ -339,7 +332,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     pfd.iPixelType = PFD_TYPE_RGBA;
     pfd.iLayerType = PFD_MAIN_PLANE;
 
-    // 分別設置 繪制到桌面窗口 , OpenGL 支持 , 雙緩沖 標志位 
+    // 分別設置 繪製到桌面窗口 , OpenGL 支持 , 雙緩沖 標志位 
     // 雙緩沖區可以讓畫面更流暢 
     pfd.dwFlags = PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER;
 
@@ -392,7 +385,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 //  目標: 處理主窗口的消息。
 //
 //  WM_COMMAND  - 處理應用程序菜單
-//  WM_PAINT    - 繪制主窗口
+//  WM_PAINT    - 繪製主窗口
 //  WM_DESTROY  - 發送退出消息并返回
 //
 //

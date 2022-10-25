@@ -10,8 +10,9 @@ int H = 600;
 // 初始化參數
 void init(void)
 {
-	glClearColor(0.0, 0.0, 0.0, 0.0);
-	glColor3f(1.0, 1.0, 1.0);
+	glClearColor(0.3, 0.3, 0.3, 1.0);	//設置背景色
+
+	//glColor3f(1.0, 1.0, 1.0);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();	//設置單位矩陣

@@ -6,8 +6,10 @@
 
 void drawCoordinates(void);
 
-int mx, my; //position of mouse;
-float x_angle, y_angle; //angle of eye
+int mx; //position of mouse;
+int my; //position of mouse;
+float x_angle;	 //angle of eye
+float y_angle;	 //angle of eye
 
 void display(void)
 {
@@ -51,20 +53,20 @@ void drawCoordinates(void)
 
 	glColor3f(1.0f, 0.0f, 0.0f); //畫紅色的x軸
 	glBegin(GL_LINES);
-	glVertex3f(0.0f, 0.0f, 0.0f);
-	glVertex3f(1.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
+	glVertex3f(1.0f, 0.0f, 0.0f);	//x軸 1,0,0
 	glEnd();
 
 	glColor3f(0.0, 1.0, 0.0); //畫綠色的y軸
 	glBegin(GL_LINES);
-	glVertex3f(0.0f, 0.0f, 0.0f);
-	glVertex3f(0.0f, 1.0f, 0.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
+	glVertex3f(0.0f, 1.0f, 0.0f);	//y軸 0,1,0
 	glEnd();
 
 	glColor3f(0.0, 0.0, 1.0); //畫藍色的z軸
 	glBegin(GL_LINES);
-	glVertex3f(0.0f, 0.0f, 0.0f);
-	glVertex3f(0.0f, 0.0f, 1.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
+	glVertex3f(0.0f, 0.0f, 1.0f);	//z軸 0,0,1
 	glEnd();
 }
 
@@ -115,6 +117,16 @@ void motion(int x, int y)
 	glutPostRedisplay();
 }
 
+void idle()
+{
+	//printf("i");
+
+	x_angle += 0.1f;
+	y_angle += 0.1f;
+
+	glutPostRedisplay();
+}
+
 int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
@@ -130,6 +142,7 @@ int main(int argc, char** argv)
 	glutKeyboardFunc(keyboard);	//設定callback function
 	glutMouseFunc(mouse);		//設定callback function
 	glutMotionFunc(motion);		//設定callback function
+	glutIdleFunc(idle);         //設定callback function, 利用idle事件進行重畫
 
 	glutMainLoop();
 

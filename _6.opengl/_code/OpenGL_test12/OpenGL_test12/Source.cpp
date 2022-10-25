@@ -92,9 +92,9 @@ void display(void)
     glEnd();
 
     //畫多邊形
-    float cx = 0.0f;
-    float cy = 9.0f;
-    float r = 4.0f;
+    float cx = 6.0f;
+    float cy = 6.0f;
+    float r = 6.0f;
     glBegin(GL_POLYGON);
     glColor3f(0.5, 0.3, 0.7);
     for (int angle = 0; angle < 360; angle += 36)
@@ -150,7 +150,7 @@ void display(void)
     glEnd();
 
     //畫三角形帶
-    x_st = 0.0;
+    x_st = 4.0;
     y_st = -5.0;
     dd = 2.0;
     glBegin(GL_TRIANGLE_STRIP);
@@ -170,7 +170,7 @@ void display(void)
     glEnd();
 
     //畫三角形扇
-    x_st = 0.0;
+    x_st = 2.0;
     y_st = -8.0;
     dd = 2.0;
     glBegin(GL_TRIANGLE_FAN);
@@ -188,7 +188,7 @@ void display(void)
     glVertex2f(x_st, y_st - dd);
     glEnd();
 
-    x_st = 8.0f;
+    x_st = 10.0f;
     y_st = -12.0f;
     dd = 2.5;
     glBegin(GL_QUAD_STRIP); //多邊形帶
@@ -245,14 +245,6 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
     }
 }
 
-void mouse(int button, int state, int x, int y)
-{
-}
-
-void motion(int x, int y)
-{
-}
-
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
@@ -262,17 +254,15 @@ int main(int argc, char** argv)
     glutInitWindowSize(600, 600);		//設定視窗大小, 直接拉大內容
     glutInitWindowPosition(1100, 200);	//視窗起始位置
 
-    glutCreateWindow("幾何圖形繪制");	//開啟視窗 並顯示出視窗 Title
+    glutCreateWindow("幾何圖形繪製");	//開啟視窗 並顯示出視窗 Title
 
     init();
 
     glutDisplayFunc(display);	//設定callback function
     glutReshapeFunc(reshape);	//設定callback function
     glutKeyboardFunc(keyboard);	//設定callback function
-    glutMouseFunc(mouse);		//設定callback function
-    glutMotionFunc(motion);		//設定callback function
 
-    glutMainLoop();     // 開始主循環繪制
+    glutMainLoop();     // 開始主循環繪製
 
     return 0;
 }

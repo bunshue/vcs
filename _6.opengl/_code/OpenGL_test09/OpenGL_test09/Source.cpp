@@ -39,7 +39,8 @@ void display(void)
 {
     // 清除之前幀數據
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glPushMatrix();
+    
+    glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
     glTranslatef(0.0f, 0.0f, -5.0f);
     glRotated(angle, 1, 1, 0);
     DrawBox();
@@ -54,7 +55,7 @@ void display(void)
     glutPostRedisplay();
 }
 
-/** 繪制木箱 */
+/** 繪製木箱 */
 void DrawBox()
 {
     glEnable(GL_TEXTURE_2D);
@@ -62,46 +63,46 @@ void DrawBox()
     /** 選擇紋理 */
     //glBindTexture(GL_TEXTURE_2D, tex2D);	//綁定紋理
 
-    /** 開始繪制四邊形 */
+    /** 開始繪製四邊形 */
     glBegin(GL_QUADS);
 
     /// 前側面
-    glNormal3f(0.0f, 0.0f, 1.0f);                               /**指定法線指向觀察者 */
+    glNormal3f(0.0f, 0.0f, 1.0f);                               /**指定法線指向觀察者 */	//設置法線
     glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);
     glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, -1.0f, 1.0f);
     glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, 1.0f);
     glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, 1.0f);
 
     /// 后側面
-    glNormal3f(0.0f, 0.0f, -1.0f);                              /** 指定法線背向觀察者 */
+    glNormal3f(0.0f, 0.0f, -1.0f);                              /** 指定法線背向觀察者 */	//設置法線
     glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
     glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, 1.0f, -1.0f);
     glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, -1.0f);
     glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, -1.0f, -1.0f);
 
     /// 頂面
-    glNormal3f(0.0f, 1.0f, 0.0f);                               /**指定法線向上 */
+    glNormal3f(0.0f, 1.0f, 0.0f);                               /**指定法線向上 */	//設置法線
     glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 1.0f, 1.0f);
     glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 1.0f, 1.0f);
     glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, -1.0f);
     glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, -1.0f);
 
     /// 底面
-    glNormal3f(0.0f, -1.0f, 0.0f);                              /** 指定法線朝下 */
+    glNormal3f(0.0f, -1.0f, 0.0f);                              /** 指定法線朝下 */	//設置法線
     glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);
     glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, -1.0f, 1.0f);
     glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, -1.0f, -1.0f);
     glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
 
     /// 右側面
-    glNormal3f(1.0f, 0.0f, 0.0f);                               /**指定法線朝右 */
+    glNormal3f(1.0f, 0.0f, 0.0f);                               /**指定法線朝右 */	//設置法線
     glTexCoord2f(0.0f, 0.0f); glVertex3f(1.0f, -1.0f, -1.0f);
     glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 1.0f, -1.0f);
     glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, 1.0f);
     glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, -1.0f, 1.0f);
 
     /// 左側面
-    glNormal3f(-1.0f, 0.0f, 0.0f);                              /**指定法線朝左 */
+    glNormal3f(-1.0f, 0.0f, 0.0f);                              /**指定法線朝左 */	//設置法線
     glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
     glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, 1.0f, -1.0f);
     glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, 1.0f, 1.0f);
@@ -185,7 +186,7 @@ int main(int argc, char** argv)
     glutMotionFunc(motion);		//設定callback function
     glutIdleFunc(idle);			//設定callback function
 
-    glutMainLoop(); // 開始主循環繪制
+    glutMainLoop(); // 開始主循環繪製
 
     return 0;
 }

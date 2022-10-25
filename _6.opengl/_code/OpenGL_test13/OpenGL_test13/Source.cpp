@@ -26,42 +26,42 @@ void display(void)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glColor3d(1, 0, 0);
 
-	glPushMatrix();
+	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
 	glTranslated(-2.4, 1.2, -6);
 	glRotated(60, 1, 0, 0);
 	glRotated(a, 0, 0, 1);
 	glutSolidSphere(1, slices, stacks);
 	glPopMatrix();
 
-	glPushMatrix();
+	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
 	glTranslated(0, 1.2, -6);
 	glRotated(60, 1, 0, 0);
 	glRotated(a, 0, 0, 1);
 	glutSolidCone(1, 1, slices, stacks);
 	glPopMatrix();
 
-	glPushMatrix();
+	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
 	glTranslated(2.4, 1.2, -6);
 	glRotated(60, 1, 0, 0);
 	glRotated(a, 0, 0, 1);
 	glutSolidTorus(0.2, 0.8, slices, stacks);
 	glPopMatrix();
 
-	glPushMatrix();
+	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
 	glTranslated(-2.4, -1.2, -6);
 	glRotated(60, 1, 0, 0);
 	glRotated(a, 0, 0, 1);
 	glutWireSphere(1, slices, stacks);
 	glPopMatrix();
 
-	glPushMatrix();
+	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
 	glTranslated(0, -1.2, -6);
 	glRotated(60, 1, 0, 0);
 	glRotated(a, 0, 0, 1);
 	glutWireCone(1, 1, slices, stacks);
 	glPopMatrix();
 
-	glPushMatrix();
+	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
 	glTranslated(2.4, -1.2, -6);
 	glRotated(60, 1, 0, 0);
 	glRotated(a, 0, 0, 1);
@@ -69,7 +69,6 @@ void display(void)
 	glPopMatrix();
 
 	glutSwapBuffers();
-
 }
 
 // 窗口大小變化回調函數
@@ -84,7 +83,6 @@ void reshape(int w, int h)
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();	//設置單位矩陣
-
 }
 
 void keyboard(unsigned char k, int /*x*/, int /*y*/)
@@ -115,14 +113,6 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
 	glutPostRedisplay();
 }
 
-void mouse(int button, int state, int x, int y)
-{
-}
-
-void motion(int x, int y)
-{
-}
-
 static void idle(void)
 {
 	glutPostRedisplay();
@@ -143,8 +133,6 @@ int main(int argc, char** argv)
 	glutDisplayFunc(display);	//設定callback function
 	glutReshapeFunc(reshape);	//設定callback function
 	glutKeyboardFunc(keyboard);	//設定callback function
-	glutMouseFunc(mouse);		//設定callback function
-	glutMotionFunc(motion);		//設定callback function
 	glutIdleFunc(idle);			//設定callback function
 
 	glClearColor(1, 1, 1, 1);

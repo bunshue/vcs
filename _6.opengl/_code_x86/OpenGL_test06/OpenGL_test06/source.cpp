@@ -49,7 +49,7 @@ static void Init(void)
 
 static void display(void)
 {
-    glPushMatrix();
+    glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
 
     glScalef(0.8, 0.8, 0.8);	//X Y Z所佔整個視窗的比例 最大為1.0 就是100%
 

@@ -43,29 +43,13 @@ void display(void)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glColor3f(0.0f, 1.0f, 0.0f);//設置繪圖顏色
-        glRectf(100.0f, 100.0f, 200.0f, 200.0f);//繪制矩形
+        glRectf(100.0f, 100.0f, 200.0f, 200.0f);//繪製矩形
 
         glFlush();//刷新緩沖
         glutSwapBuffers();
     }
     else if (display_mode == 2)
     {
-        //display_mode = 2  //畫 彩色三角形
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        glPushMatrix();
-        glBegin(GL_TRIANGLES);          // 開始畫三角形
-        {
-            glColor3f(1.0f, 0.0f, 0.0f);         // 設定輸出色為紅色
-            glVertex2f(0.0f, 1.0f);           //(x1,y1)=(0, 1)
-            glColor3f(0.0f, 1.0f, 0.0f);         // 設定輸出色為綠色
-            glVertex2f(0.87f, -0.5f);            //(x2,y2)=(0.87,-0.5)
-            glColor3f(0.0f, 0.0f, 1.0f);         // 設定輸出色為藍色
-            glVertex2f(-0.87f, -0.5f);           //(x3,y3)=(-0.87,-0.5)
-        }
-        glEnd();                               // 結束畫三角形
-        glPopMatrix();
-        glutSwapBuffers();
     }
     else if (display_mode == 3)
     {
@@ -131,7 +115,7 @@ void display(void)
             // 清除之前幀數據
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
-        // 繪制三角形
+        // 繪製三角形
         glBegin(GL_TRIANGLES);
         {
             glColor3f(1, 0, 0);     //紅
@@ -262,7 +246,7 @@ int main(int argc, char** argv)
 	glutMouseFunc(mouse);		//設定callback function
 	glutMotionFunc(motion);		//設定callback function
 
-	glutMainLoop();
+	glutMainLoop();	//開始主循環繪製
 
 	return 0;
 }

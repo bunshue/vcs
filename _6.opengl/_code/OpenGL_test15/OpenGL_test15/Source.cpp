@@ -4,31 +4,27 @@
 #include <stdio.h>
 #include <iostream>
 
-void init(void)
-{
-}
-
 // 繪圖回調函數
 void display(void)
 {
-	glPushMatrix();
+	glPushMatrix();		//這個 Matrix Push/Pop 好像沒什麼用??
 
 	glClearColor(1.0, 0.0, 0.0, 1.0);	//使用紅色背景
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	// 設置當前的繪制顏色 , 4 個 unsigned byte 
+	// 設置當前的繪製顏色 , 4 個 unsigned byte 
 	// 每個顏色的分量占一個字節
 	// 參數數據是 R 紅色 G 綠色 B 藍色 A 透明度
-	// 下面設置的含義是白色, 繪制點的時候, 每次都使用白色繪制
+	// 下面設置的含義是白色, 繪製點的時候, 每次都使用白色繪製
 	glColor4ub(255, 255, 255, 255);
 
-	glLineWidth(4.0f);	// 設置線的寬度
+	glLineWidth(4.0f);	//設定線寬
 
-	// 繪制線時, 會將從 glBegin 到 glEnd 之間的所有的點都繪制出來
+	// 繪製線時, 會將從 glBegin 到 glEnd 之間的所有的點都繪製出來
 	// 可以調用 glVertex3f 方法 成對 設置多條線
 	// 注意必須成對設置 , 如果設置奇數個點 , 最后一個點會被丟棄
 
-	glBegin(GL_LINES);	// 繪制線段開始
+	glBegin(GL_LINES);	// 繪製線段開始
 
 	// glVertex3f (GLfloat x, GLfloat y, GLfloat z)
 	//畫直線, 每兩個點組成一條線
@@ -50,11 +46,10 @@ void display(void)
 		dy = xx + 0.8;
 		glVertex3f(-0.8f, 0.8f - dy, 0.0f);
 	}
-	glEnd();	// 繪制點結束
-
+	glEnd();	// 繪製點結束
 
 	//兩個線段組合成一個閉合三角形
-	glBegin(GL_LINE_LOOP);	// 繪制線段開始
+	glBegin(GL_LINE_LOOP);	// 繪製線段開始
 
 	glVertex3f(0.7f, 0.5f, 0.0f);
 	glVertex3f(0.7f, 0.1f, 0.0f);
@@ -62,16 +57,16 @@ void display(void)
 	glVertex3f(0.7f, 0.1f, 0.0f);
 	glVertex3f(0.3f, 0.1f, 0.0f);
 
-	glEnd();	// 繪制點結束
-
+	glEnd();	// 繪製點結束
 
 
 	//繪製彩色的線
-	glLineWidth(12.0f);
+
+	glLineWidth(12.0f);	//設定線寬
 
 	glBegin(GL_LINE_LOOP);
 
-	// 繪制線 , 每兩個點組成一條線
+	// 繪製線 , 每兩個點組成一條線
 // glVertex3f (GLfloat x, GLfloat y, GLfloat z)
 	glVertex3f(0.0f, -0.8f, 0.0f);
 
@@ -80,7 +75,7 @@ void display(void)
 
 	glVertex3f(0.8f, -0.8f, 0.0f);
 
-	// 上面的設置會從 (0,0,-10) 坐標向 (-5,0,-10) 坐標繪制一條線
+	// 上面的設置會從 (0,0,-10) 坐標向 (-5,0,-10) 坐標繪製一條線
 
 	// 設置藍色
 	glColor4ub(0, 0, 255, 255);
@@ -90,22 +85,15 @@ void display(void)
 
 	glColor4ub(255, 255, 255, 255);
 
-	// 上面的設置會從 (-5,0,-10) 坐標向 (-5,-2,-10) 坐標繪制一條線
+	// 上面的設置會從 (-5,0,-10) 坐標向 (-5,-2,-10) 坐標繪製一條線
 
-		// 繪制點結束
+		// 繪製點結束
 	glEnd();
-
-
 
 	glPopMatrix();
 
-	// 將后緩沖區繪制到前臺
+	// 將后緩沖區繪製到前臺
 	glutSwapBuffers();
-}
-
-// 窗口大小變化回調函數
-void reshape(int w, int h)
-{
 }
 
 void keyboard(unsigned char k, int /*x*/, int /*y*/)
@@ -132,13 +120,10 @@ int main(int argc, char** argv)
 
 	glutCreateWindow("開啟視窗");	//開啟視窗 並顯示出視窗 Title
 
-	init();
-
 	glutDisplayFunc(display);	//設定callback function
-	glutReshapeFunc(reshape);	//設定callback function
 	glutKeyboardFunc(keyboard);	//設定callback function
 
-	glutMainLoop();
+	glutMainLoop();	//開始主循環繪製
 
 	return 0;
 }

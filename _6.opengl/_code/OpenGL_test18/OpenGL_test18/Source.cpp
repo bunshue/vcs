@@ -4,54 +4,44 @@
 #include <stdio.h>
 #include <iostream>
 
-// 初始化參數
-void init(void)
-{
-
-}
-
 // 繪圖回調函數
 void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
 
-    // 設置當前的繪制顏色 , 4 個 unsigned byte 
+    // 設置當前的繪製顏色 , 4 個 unsigned byte 
     // 每個顏色的分量占一個字節
     // 參數數據是 R 紅色 G 綠色 B 藍色 A 透明度
-    // 下面設置的含義是白色, 繪制點的時候, 每次都使用白色繪制
+    // 下面設置的含義是白色, 繪製點的時候, 每次都使用白色繪製
     glColor4ub(255, 255, 255, 255);
 
     // 設置當前點的大小
     glPointSize(5.0f);
 
-    // 設置線的寬度 
-    glLineWidth(5.0f);
+    glLineWidth(5.0f);	//設定線寬
 
-    // 繪制三角形
+    // 繪製三角形
     glBegin(GL_TRIANGLES);
 
-    // 設置法線
-    glNormal3f(0.0f, -1.0f, 0.0f);
+    glNormal3f(0.0f, -1.0f, 0.0f);	//設置法線
     glColor4ub(255, 0, 0, 255);     //R
     glVertex3f(-1.0f, -0.9f, -2.0f);    //左下
 
-    // 設置法線
-    glNormal3f(0.0f, 1.0f, 0.0f);
+    glNormal3f(0.0f, 1.0f, 0.0f);	//設置法線
     glColor4ub(0, 255, 0, 255);     //G
     glVertex3f(1.0f, -0.9f, -2.0f); //右下
 
-    // 設置法線
-    glNormal3f(0.0f, 1.0f, 0.0f);
+    glNormal3f(0.0f, 1.0f, 0.0f);	//設置法線
     glColor4ub(0, 0, 255, 255);     //B
     glVertex3f(0.0f, 2.5f, -10.0f); //上
 
-    // 繪制三角形結束
+    // 繪製三角形結束
     glEnd();
 
     // 矩陣出棧 
     //glPopMatrix();
 
-    // 將后緩沖區繪制到前臺
+    // 將后緩沖區繪製到前臺
     glutSwapBuffers();
 
 }
@@ -111,14 +101,6 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
 	}
 }
 
-void mouse(int button, int state, int x, int y)
-{
-}
-
-void motion(int x, int y)
-{
-}
-
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
@@ -130,15 +112,11 @@ int main(int argc, char** argv)
 
     glutCreateWindow("開啟視窗");	//開啟視窗 並顯示出視窗 Title
 
-    init();
-
     glutDisplayFunc(display);	//設定callback function
     glutReshapeFunc(reshape);	//設定callback function
     glutKeyboardFunc(keyboard);	//設定callback function
-    glutMouseFunc(mouse);		//設定callback function
-    glutMotionFunc(motion);		//設定callback function
 
-    glutMainLoop();
+    glutMainLoop();	//開始主循環繪製
 
     return 0;
 }

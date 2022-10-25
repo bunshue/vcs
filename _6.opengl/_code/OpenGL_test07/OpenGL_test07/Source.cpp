@@ -96,7 +96,7 @@ int main(int argc, char** argv)
     glutMotionFunc(motion);		//設定callback function
     glutIdleFunc(idle);			//設定callback function
 
-    glutMainLoop();     // 開始主循環繪制
+    glutMainLoop();     // 開始主循環繪製
 
     return 0;
 }

@@ -90,7 +90,7 @@ void drawText1(void)
     using std::string;
     using std::stringstream;
 
-    glPushMatrix();
+    glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
     glLoadIdentity();	//設置單位矩陣
     glRasterPos2f(-0.8f, 0.6f);
 
@@ -181,7 +181,7 @@ void display(void)
         //drawText1();
         drawText2();
 
-        glFlush();//保證前面的OpenGL命令立即執行   glFlush​​負責刷新繪制緩沖器，保證繪圖命令立即執行。
+        glFlush();//保證前面的OpenGL命令立即執行   glFlush​​負責刷新繪製緩沖器，保證繪圖命令立即執行。
     }
     else if (display_mode == 2)
     {
@@ -381,7 +381,10 @@ void display(void)
     }
     else if (display_mode == 7)
     {
-        glPushMatrix();
+        //display_mode = 7  //畫 彩色三角形
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
         glBegin(GL_TRIANGLES);          // 開始畫三角形
         {
             glColor3f(1.0f, 0.0f, 0.0f);         // 設定輸出色為紅色
@@ -554,7 +557,7 @@ int main(int argc, char* argv[])
     //设置一组浮点数来表示红色
     GLfloat vRed[] = { 1.0,1.00,0.0,0.5f };
 
-    glutMainLoop();     // Enter the event-processing loop
+    glutMainLoop();	//開始主循環繪製     // Enter the event-processing loop
 
     return 0;
 }

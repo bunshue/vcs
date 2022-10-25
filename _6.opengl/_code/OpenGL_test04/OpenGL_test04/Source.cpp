@@ -19,7 +19,7 @@ glWindowPos(Type x, Type y, Type z);
 //用窗口坐標指定當前光柵位置，不必進行矩陣變換、裁剪、或紋理坐標生成。z值被變換為由glDepthRange()設置的當前近側平面值和遠側平面值
 
 void glBitmap(GLsizei, GLsizei height, GLfloat xorig, GLfloat yorig, GLfloat, GLfloat, const GLubyte* bitmap);
-//繪制由bitmap指定的位圖，bitmap是一個指向位圖圖像的指針，位圖的原點是當前光柵位置，如果當前光柵位置無效，則這個函數不會繪制任何東西。
+//繪製由bitmap指定的位圖，bitmap是一個指向位圖圖像的指針，位圖的原點是當前光柵位置，如果當前光柵位置無效，則這個函數不會繪製任何東西。
 //width和height表示位圖的寬度和高度，xorig和yorig定義了位圖的原點，他是根據當期光柵位置確定的，右上為正。
 //xmove和ymove表示位圖光柵化之后光柵坐標的x增加值和y增加值
 */
@@ -68,7 +68,7 @@ void display(void)
 	glBitmap(64, 64, offsetx, offsety, dx, dy, rasters);
 
 
-	//繪制由bitmap指定的位圖，bitmap是一個指向位圖圖像的指針，位圖的原點是當前光柵位置，如果當前光柵位置無效，則這個函數不會繪制任何東西。
+	//繪製由bitmap指定的位圖，bitmap是一個指向位圖圖像的指針，位圖的原點是當前光柵位置，如果當前光柵位置無效，則這個函數不會繪製任何東西。
 	//width和height表示位圖的寬度和高度，xorig和yorig定義了位圖的原點，他是根據當期光柵位置確定的，右上為正。
 	//xmove和ymove表示位圖光柵化之后光柵坐標的x增加值和y增加值
 	glFlush();
@@ -124,7 +124,7 @@ int main(int argc, char** argv)
 	glutMouseFunc(mouse);		//設定callback function
 	glutMotionFunc(motion);		//設定callback function
 
-	glutMainLoop();
+	glutMainLoop();	//開始主循環繪製
 
 	return 0;
 }

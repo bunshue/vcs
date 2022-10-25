@@ -69,6 +69,7 @@ namespace vcs_DrAP
         private const int SEARCH_MODE_OPENGL = 0x04;	//search opengl code, 搜尋opengl內的關鍵字
 
         int search_mode = SEARCH_MODE_VCS;
+        bool flag_show_30_message = false;
 
         List<String> old_search_path = new List<String>();
 
@@ -1613,7 +1614,11 @@ namespace vcs_DrAP
             {
                 if (fileinfos.Count >= 30)
                 {
-                    richTextBox1.Text += "滿30結束\n";
+                    if (flag_show_30_message == false)
+                    {
+                        flag_show_30_message = true;
+                        richTextBox1.Text += "滿30結束\n";
+                    }
                     return;
                 }
             }
@@ -2830,11 +2835,14 @@ namespace vcs_DrAP
             flag_function = FUNCTION_SEARCH_TEXT;
             Application.DoEvents();
 
+            richTextBox1.Text += "搜尋開始\t";
+            richTextBox2.Text += "搜尋開始\t";
+
             if (mode == SEARCH_MODE_VCS)
             {
                 search_mode = SEARCH_MODE_VCS;
-                richTextBox1.Text += "搜尋開始vcs\t" + textBox3.Text + "\n";
-                richTextBox2.Text += "搜尋開始vcs\t" + textBox3.Text + "\n";
+                richTextBox1.Text += "vcs\t";
+                richTextBox2.Text += "vcs\t";
 
                 bt_search_pattern_vcs.BackgroundImage = null;
                 bt_search_pattern_vcs.BackColor = Color.Red;
@@ -2843,8 +2851,8 @@ namespace vcs_DrAP
             else if (mode == SEARCH_MODE_PYTHON)
             {
                 search_mode = SEARCH_MODE_PYTHON;
-                richTextBox1.Text += "搜尋開始python\n";
-                richTextBox2.Text += "搜尋開始python\n\n";
+                richTextBox1.Text += "python\t";
+                richTextBox2.Text += "python\t";
 
                 bt_search_pattern_python.BackgroundImage = null;
                 bt_search_pattern_python.BackColor = Color.Red;
@@ -2853,8 +2861,8 @@ namespace vcs_DrAP
             else if (mode == SEARCH_MODE_MATLAB)
             {
                 search_mode = SEARCH_MODE_MATLAB;
-                richTextBox1.Text += "搜尋開始matlab\n";
-                richTextBox2.Text += "搜尋開始matlab\n\n";
+                richTextBox1.Text += "matlab\t";
+                richTextBox2.Text += "matlab\t";
 
                 bt_search_pattern_matlab.BackgroundImage = null;
                 bt_search_pattern_matlab.BackColor = Color.Red;
@@ -2863,8 +2871,8 @@ namespace vcs_DrAP
             else if (mode == SEARCH_MODE_CUDA)
             {
                 search_mode = SEARCH_MODE_CUDA;
-                richTextBox1.Text += "搜尋開始cuda\n";
-                richTextBox2.Text += "搜尋開始cuda\n\n";
+                richTextBox1.Text += "cuda\t";
+                richTextBox2.Text += "cuda\t";
 
                 bt_search_pattern_cuda.BackgroundImage = null;
                 bt_search_pattern_cuda.BackColor = Color.Red;
@@ -2873,8 +2881,8 @@ namespace vcs_DrAP
             else if (mode == SEARCH_MODE_OPENGL)
             {
                 search_mode = SEARCH_MODE_OPENGL;
-                richTextBox1.Text += "搜尋開始opengl\n";
-                richTextBox2.Text += "搜尋開始opengl\n\n";
+                richTextBox1.Text += "opengl\t";
+                richTextBox2.Text += "opengl\t";
 
                 bt_search_pattern_opengl.BackgroundImage = null;
                 bt_search_pattern_opengl.BackColor = Color.Red;
@@ -2884,9 +2892,13 @@ namespace vcs_DrAP
             {
                 //其他搜尋模式
             }
+            richTextBox1.Text += textBox3.Text + "\n";
+            richTextBox2.Text += textBox3.Text + "\n";
 
             bt_start_files.BackgroundImage = vcs_DrAP.Properties.Resources.ultraedit;
             Application.DoEvents();
+
+            flag_show_30_message = false;
 
             if (textBox3.Text == "")
             {

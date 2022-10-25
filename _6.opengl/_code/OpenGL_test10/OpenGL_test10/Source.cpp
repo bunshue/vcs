@@ -71,11 +71,13 @@ void display(void)
 	eyez = -x * sin(-y_angle * M_PI / 180.0) + z * cos(-y_angle * M_PI / 180.0);
 	gluLookAt(eyex, eyey, eyez, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 	drawCoordinates();
-	glPushMatrix();
+	
+	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
 	glTranslatef(-1.0f, 0.0f, 0.0f);
 	glutWireTeapot(0.5);
 	glPopMatrix();
-	glPushMatrix();
+	
+	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
 	glTranslatef(1.0f, 0.0f, 0.0f);
 	glScalef(0.5f, 0.5f, 0.5f);
 	drawTetrahedron();	//畫四面體

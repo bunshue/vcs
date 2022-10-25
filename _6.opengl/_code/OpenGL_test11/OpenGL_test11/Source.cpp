@@ -56,13 +56,15 @@ void display(void)
 	glutWireTeapot(0.5); //顯示茶壺
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
-	glPushMatrix(); //下壓堆棧并復制棧頂
+	
+	glPushMatrix(); //下壓堆棧并復制棧頂	//這個 Matrix Push/Pop 好像沒什麼用??
 	glTranslatef(1.0f, 0.0f, 0.0f); //對應變換陣T4
 	glScalef(0.5f, 0.5f, 0.5f); //對應變換陣T5
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_yellow);
 	drawTetrahedron(); //顯示直角四面體，設某個三角形的頂點為v1'、v2'、v3'，考慮這三點經受的變換
 	glPopMatrix(); //上彈堆棧，棧頂被放棄
-	glPushMatrix();
+	
+	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
 	glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, 1);
 	glTranslatef(-1.0f, 0.0f, 0.0f); //對應變換陣T6
 	glRotatef(-90.0f, 1.0f, 0.0f, 0.0f); //對應變換陣T7
@@ -99,25 +101,25 @@ void drawTetrahedron(void)
 	float pnt[4][3] = { {0.0,0.0,0.0},{1.0,0.0,0.0}, {0.0,1.0,0.0}, {0.0,0.0,1.0} };
 	int tetra[4][3] = { {0,2,1}, {0,3,2}, {0,1,3}, {1,2,3} };
 
-	glNormal3f(0.0f, 0.0f, -1.0f);
+	glNormal3f(0.0f, 0.0f, -1.0f);	//設置法線
 	glBegin(GL_POLYGON); //X-Y
 	glVertex3fv(pnt[tetra[0][0]]);
 	glVertex3fv(pnt[tetra[0][1]]);
 	glVertex3fv(pnt[tetra[0][2]]);
 	glEnd();
-	glNormal3f(-1.0f, 0.0f, 0.0f);
+	glNormal3f(-1.0f, 0.0f, 0.0f);	//設置法線
 	glBegin(GL_POLYGON); //Y-Z
 	glVertex3fv(pnt[tetra[1][0]]);
 	glVertex3fv(pnt[tetra[1][1]]);
 	glVertex3fv(pnt[tetra[1][2]]);
 	glEnd();
-	glNormal3f(0.0f, -1.0f, 0.0f);
+	glNormal3f(0.0f, -1.0f, 0.0f);	//設置法線
 	glBegin(GL_POLYGON); //Z-X
 	glVertex3fv(pnt[tetra[2][0]]);
 	glVertex3fv(pnt[tetra[2][1]]);
 	glVertex3fv(pnt[tetra[2][2]]);
 	glEnd();
-	glNormal3f(1.0f, 1.0f, 1.0f);
+	glNormal3f(1.0f, 1.0f, 1.0f);	//設置法線
 	glBegin(GL_POLYGON); //slope
 	glVertex3fv(pnt[tetra[3][0]]);
 	glVertex3fv(pnt[tetra[3][1]]);
