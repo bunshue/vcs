@@ -43,7 +43,7 @@ void display(void)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
+	glLoadIdentity();	//設置單位矩陣
 
 	if (h < 1)
 	{
@@ -52,7 +52,7 @@ void display(void)
 	gluPerspective(30.0, w / h, 0.1, 20.0);
 
 	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+	glLoadIdentity();	//設置單位矩陣
 
 	//glTranslated(0.0, 0.0, -dist);
 	//glRotatef(x_angle, 1.0f, 0.0f, 0.0f);

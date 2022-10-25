@@ -1,3 +1,7 @@
+//#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 #include "texture.h"
 #include "utils.h"
 
@@ -5,6 +9,10 @@
 // 在該函數中 , 要修改該引用數據類型 , 並將其當做返回值返回
 unsigned char* DecodeBMP(unsigned char* bmpFileData, int& width, int& height)
 {
+	unsigned char* ret;
+
+	ret = (unsigned char*)malloc(sizeof(unsigned char));
+
 	// 判定該文件是否是 bmp 文件 
 	// bmp 圖像文件前兩個字節是 0x4D42 
 	// 注意這裡先將 unsigned char* bmpFileData 指針強轉為 unsigned short* 類型指針
@@ -17,9 +25,9 @@ unsigned char* DecodeBMP(unsigned char* bmpFileData, int& width, int& height)
 		// 高度是 12 , 13 字節 
 
 	}
-	unsigned char* zzzz = nullptr;
+	ret = 0;
 
-	return zzzz;
+	return ret;
 }
 
 // 實現紋理初始化方法
@@ -34,7 +42,7 @@ void Texture::Init(const char* imagePath)
 	int height = 0;
 
 	// 
-	//unsigned char* pixelData = DecodeBMP(imageFileContent, width, height);
+	unsigned char* pixelData = DecodeBMP(imageFileContent, width, height);
 
 	// 生成 OpenGL 紋理
 

@@ -78,6 +78,8 @@
             this.bt_test2 = new System.Windows.Forms.Button();
             this.bt_save_file_data = new System.Windows.Forms.Button();
             this.bt_clear3 = new System.Windows.Forms.Button();
+            this.bt_search_pattern_opengl = new System.Windows.Forms.Button();
+            this.bt_open_dir2 = new System.Windows.Forms.Button();
             this.bt_search_pattern_cuda = new System.Windows.Forms.Button();
             this.bt_copy_rtb_data = new System.Windows.Forms.Button();
             this.bt_setup = new System.Windows.Forms.Button();
@@ -89,7 +91,6 @@
             this.bt_start_files = new System.Windows.Forms.Button();
             this.bt_open_dir = new System.Windows.Forms.Button();
             this.bt_save_data = new System.Windows.Forms.Button();
-            this.bt_open_dir2 = new System.Windows.Forms.Button();
             this.groupBox_video.SuspendLayout();
             this.groupBox_file.SuspendLayout();
             this.SuspendLayout();
@@ -644,6 +645,30 @@
             this.bt_clear3.UseVisualStyleBackColor = true;
             this.bt_clear3.Click += new System.EventHandler(this.bt_clear3_Click);
             // 
+            // bt_search_pattern_opengl
+            // 
+            this.bt_search_pattern_opengl.BackgroundImage = global::vcs_DrAP.Properties.Resources.opengl;
+            this.bt_search_pattern_opengl.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_search_pattern_opengl.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_search_pattern_opengl.Location = new System.Drawing.Point(1528, 59);
+            this.bt_search_pattern_opengl.Name = "bt_search_pattern_opengl";
+            this.bt_search_pattern_opengl.Size = new System.Drawing.Size(50, 50);
+            this.bt_search_pattern_opengl.TabIndex = 60;
+            this.bt_search_pattern_opengl.UseVisualStyleBackColor = true;
+            this.bt_search_pattern_opengl.Click += new System.EventHandler(this.bt_search_pattern_opengl_Click);
+            // 
+            // bt_open_dir2
+            // 
+            this.bt_open_dir2.BackgroundImage = global::vcs_DrAP.Properties.Resources.open_folder;
+            this.bt_open_dir2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_open_dir2.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_open_dir2.Location = new System.Drawing.Point(1590, 60);
+            this.bt_open_dir2.Name = "bt_open_dir2";
+            this.bt_open_dir2.Size = new System.Drawing.Size(50, 50);
+            this.bt_open_dir2.TabIndex = 59;
+            this.bt_open_dir2.UseVisualStyleBackColor = true;
+            this.bt_open_dir2.Click += new System.EventHandler(this.bt_open_dir2_Click);
+            // 
             // bt_search_pattern_cuda
             // 
             this.bt_search_pattern_cuda.BackColor = System.Drawing.Color.White;
@@ -778,23 +803,12 @@
             this.bt_save_data.UseVisualStyleBackColor = true;
             this.bt_save_data.Click += new System.EventHandler(this.bt_save_data_Click);
             // 
-            // bt_open_dir2
-            // 
-            this.bt_open_dir2.BackgroundImage = global::vcs_DrAP.Properties.Resources.open_folder;
-            this.bt_open_dir2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.bt_open_dir2.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_open_dir2.Location = new System.Drawing.Point(1528, 60);
-            this.bt_open_dir2.Name = "bt_open_dir2";
-            this.bt_open_dir2.Size = new System.Drawing.Size(50, 50);
-            this.bt_open_dir2.TabIndex = 59;
-            this.bt_open_dir2.UseVisualStyleBackColor = true;
-            this.bt_open_dir2.Click += new System.EventHandler(this.bt_open_dir2_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1886, 1008);
+            this.Controls.Add(this.bt_search_pattern_opengl);
             this.Controls.Add(this.bt_open_dir2);
             this.Controls.Add(this.bt_search_pattern_cuda);
             this.Controls.Add(this.bt_clear3);
@@ -922,6 +936,7 @@
         private System.Windows.Forms.Button bt_clear3;
         private System.Windows.Forms.Button bt_search_pattern_cuda;
         private System.Windows.Forms.Button bt_open_dir2;
+        private System.Windows.Forms.Button bt_search_pattern_opengl;
     }
 }
 

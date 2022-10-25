@@ -3,12 +3,14 @@
 // 加載文件方法
 unsigned char* LoadFileContent(const char* filePath)
 {
-	unsigned char* fileContent = nullptr;
-	/*
+	printf("AAAAAAAAAAAAAAAAAAAAAAAA\n");
 	// 該指針指向的內存空間存儲文件內容
+	unsigned char* fileContent = nullptr;
 
 	// 打開文件
-	FILE* pFile = fopen(filePath, "rb");
+	//FILE* pFile = fopen(filePath, "rb");
+	FILE* pFile;
+	fopen_s(&pFile, filePath, "rb");
 
 	//printf("打開文件 pFile : %p", pFile);
 
@@ -47,7 +49,6 @@ unsigned char* LoadFileContent(const char* filePath)
 		// 關閉文件
 		fclose(pFile);
 	}
-		*/
 
 	return fileContent;
 }

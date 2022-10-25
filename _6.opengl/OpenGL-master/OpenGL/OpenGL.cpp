@@ -187,6 +187,29 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                             // 繪制三角形
         glBegin(GL_TRIANGLES);
 
+        //old
+        // 設置法線
+        glNormal3f(0.0f, -1.0f, 0.0f);
+
+        // 1. 設置白色 , glVertex3f (GLfloat x, GLfloat y, GLfloat z)
+        glColor4ub(255, 255, 255, 255);
+        glVertex3f(-1.0f, -0.5f, -2.0f);
+
+        // 設置法線
+        glNormal3f(0.0f, 1.0f, 0.0f);
+
+        // 2. 設置綠色 
+        glColor4ub(0, 255, 0, 255);
+        glVertex3f(1.0f, -0.5f, -2.0f);
+
+        // 設置法線
+        glNormal3f(0.0f, 1.0f, 0.0f);
+
+        // 3. 設置藍色
+        glColor4ub(0, 0, 255, 255);
+        glVertex3f(0.0f, -0.5f, -10.0f);
+
+        /* new
         // 設置法線
         glNormal3f(0.0f, -1.0f, 0.0f);
         glColor4ub(255, 0, 0, 255);     //R
@@ -201,6 +224,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         glNormal3f(0.0f, 1.0f, 0.0f);
         glColor4ub(0, 0, 255, 255);     //B
         glVertex3f(0.0f, 2.5f, -10.0f); //上
+        */
 
         // 繪制三角形結束
         glEnd();

@@ -123,6 +123,16 @@ namespace vcs_DrAP.Properties {
         /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
+        internal static System.Drawing.Bitmap opengl {
+            get {
+                object obj = ResourceManager.GetObject("opengl", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
         internal static System.Drawing.Bitmap potplayer {
             get {
                 object obj = ResourceManager.GetObject("potplayer", resourceCulture);

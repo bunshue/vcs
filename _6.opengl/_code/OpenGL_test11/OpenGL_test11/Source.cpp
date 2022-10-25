@@ -35,40 +35,40 @@ void display(void)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity(); //对应单位阵I
+	glLoadIdentity();	//設置單位矩陣
 
 	if (h < 1)
 	{
 		h = 1;
 	}
-	gluPerspective(30.0, w / h, 0.1, 20.0); //对应变换阵T0
+	gluPerspective(30.0, w / h, 0.1, 20.0); //對應變換陣T0
 
 	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity(); //对应单位阵I
+	glLoadIdentity();	//設置單位矩陣
 
 	glLightfv(GL_LIGHT0, GL_POSITION, lit_position);
-	glTranslated(0.0, 0.0, -dist); //对应变换阵T1
-	glRotatef(x_angle, 1.0f, 0.0f, 0.0f); //对应变换阵T2
-	glRotatef(y_angle, 0.0f, 1.0f, 0.0f);  //对应变换阵T3
+	glTranslated(0.0, 0.0, -dist); //對應變換陣T1
+	glRotatef(x_angle, 1.0f, 0.0f, 0.0f); //對應變換陣T2
+	glRotatef(y_angle, 0.0f, 1.0f, 0.0f);  //對應變換陣T3
 	glDisable(GL_LIGHTING);
 	//glLightfv(GL_LIGHT0, GL_POSITION, lit_position);
-	drawCoordinates(); //显示坐标轴，设X轴的两端点为v1、v2，考虑这两点经受的变换
-	glutWireTeapot(0.5); //显示茶壶
+	drawCoordinates(); //顯示坐標軸，設X軸的兩端點為v1、v2，考慮這兩點經受的變換
+	glutWireTeapot(0.5); //顯示茶壺
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
-	glPushMatrix(); //下压堆栈并复制栈顶
-	glTranslatef(1.0f, 0.0f, 0.0f); //对应变换阵T4
-	glScalef(0.5f, 0.5f, 0.5f); //对应变换阵T5
+	glPushMatrix(); //下壓堆棧并復制棧頂
+	glTranslatef(1.0f, 0.0f, 0.0f); //對應變換陣T4
+	glScalef(0.5f, 0.5f, 0.5f); //對應變換陣T5
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_yellow);
-	drawTetrahedron(); //显示直角四面体，设某个三角形的顶点为v1'、v2'、v3'，考虑这三点经受的变换
-	glPopMatrix(); //上弹堆栈，栈顶被放弃
+	drawTetrahedron(); //顯示直角四面體，設某個三角形的頂點為v1'、v2'、v3'，考慮這三點經受的變換
+	glPopMatrix(); //上彈堆棧，棧頂被放棄
 	glPushMatrix();
 	glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, 1);
-	glTranslatef(-1.0f, 0.0f, 0.0f); //对应变换阵T6
-	glRotatef(-90.0f, 1.0f, 0.0f, 0.0f); //对应变换阵T7
+	glTranslatef(-1.0f, 0.0f, 0.0f); //對應變換陣T6
+	glRotatef(-90.0f, 1.0f, 0.0f, 0.0f); //對應變換陣T7
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_cyan);
 	glMaterialfv(GL_BACK, GL_DIFFUSE, mat_yellow);
-	glutSolidCone(0.4, 1.0, 100, 10); //显示圆锥体
+	glutSolidCone(0.4, 1.0, 100, 10); //顯示圓錐體
 	glPopMatrix();
 
 	glFlush();
@@ -77,17 +77,17 @@ void display(void)
 
 void drawCoordinates(void)
 {
-	glColor3f(1.0f, 0.0f, 0.0f); //画红色的x轴
+	glColor3f(1.0f, 0.0f, 0.0f); //畫紅色的x軸
 	glBegin(GL_LINES);
 	glVertex3f(0.0f, 0.0f, 0.0f);
 	glVertex3f(1.0f, 0.0f, 0.0f);
 	glEnd();
-	glColor3f(0.0, 1.0, 0.0); //画绿色的y轴
+	glColor3f(0.0, 1.0, 0.0); //畫綠色的y軸
 	glBegin(GL_LINES);
 	glVertex3f(0.0f, 0.0f, 0.0f);
 	glVertex3f(0.0f, 1.0f, 0.0f);
 	glEnd();
-	glColor3f(0.0, 0.0, 1.0); //画蓝色的z轴
+	glColor3f(0.0, 0.0, 1.0); //畫藍色的z軸
 	glBegin(GL_LINES);
 	glVertex3f(0.0f, 0.0f, 0.0f);
 	glVertex3f(0.0f, 0.0f, 1.0f);

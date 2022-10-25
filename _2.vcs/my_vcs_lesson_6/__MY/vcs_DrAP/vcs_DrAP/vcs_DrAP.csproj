@@ -120,6 +120,7 @@
     <None Include="img\setup.png" />
     <None Include="img\clipboard.png" />
     <None Include="img\cuda.png" />
+    <None Include="img\opengl.bmp" />
     <Content Include="MediaInfo.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

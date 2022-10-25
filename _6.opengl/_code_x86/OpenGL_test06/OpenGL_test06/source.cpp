@@ -98,9 +98,9 @@ static void reshape(int width, int height)
     glViewport(0, 0, width, height);
 
     glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
+    glLoadIdentity();	//設置單位矩陣
     glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
+    glLoadIdentity();	//設置單位矩陣
 }
 
 static void keyboard(unsigned char key, int x, int y)

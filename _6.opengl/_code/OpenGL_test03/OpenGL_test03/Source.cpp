@@ -23,7 +23,7 @@ void display(void)
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
+	glLoadIdentity();	//設置單位矩陣
 
 	if (w > h)
 	{
@@ -35,7 +35,7 @@ void display(void)
 	}
 
 	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+	glLoadIdentity();	//設置單位矩陣
 
 	glRotatef(x_angle, 1.0f, 0.0f, 0.0f);
 	glRotatef(y_angle, 0.0f, 1.0f, 0.0f);

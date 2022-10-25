@@ -94,10 +94,10 @@ void reshape(int w, int h)
    printf("目前視窗大小為%dX%d\n",w,h);
    glViewport(0, 0, w, h);            //當視窗長寬改變時，畫面也跟著變
    glMatrixMode(GL_PROJECTION);
-   glLoadIdentity();
+   glLoadIdentity();	//設置單位矩陣
    glOrtho(-10,10,-10,10,-10,10);      //正交投影
    glMatrixMode(GL_MODELVIEW);
-   glLoadIdentity();
+   glLoadIdentity();	//設置單位矩陣
 } 
 
 //獲取鍵盤輸入

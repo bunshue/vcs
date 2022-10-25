@@ -73,7 +73,7 @@ void display(void)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glMatrixMode(GL_MODELVIEW);                        // 選擇模型觀察矩陣
-        glLoadIdentity();                                  // 重置模型觀察矩陣   
+        glLoadIdentity();                                  // 重置模型觀察矩陣  //設置單位矩陣 
         glMatrixMode(GL_PROJECTION);                        // 選擇投影矩陣     
         glLoadIdentity();
 
@@ -180,10 +180,10 @@ void reshape(int w, int h)
 {
     glViewport(0, 0, w, h);
     glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
+    glLoadIdentity();	//設置單位矩陣
     gluPerspective(60.0, (GLfloat)w / (GLfloat)h, 0.1, 100000.0);
     glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
+    glLoadIdentity();	//設置單位矩陣
 
 }
 

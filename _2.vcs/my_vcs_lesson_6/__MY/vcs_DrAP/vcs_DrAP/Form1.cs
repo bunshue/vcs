@@ -60,11 +60,14 @@ namespace vcs_DrAP
         string default_python_path = @"C:\_git\vcs\_4.cmpp\_python_test";
         string default_matlab_path = @"C:\_git\vcs\_4.cmpp\_matlab1_test";
         string default_cuda_path = @"C:\_git\vcs\_3.cuda";
+        string default_opengl_path = @"C:\_git\vcs\_6.opengl";
 
         private const int SEARCH_MODE_VCS = 0x00;	    //search vcs code, 搜尋vcs內的關鍵字
         private const int SEARCH_MODE_PYTHON = 0x01;	//search python code, 搜尋python內的關鍵字
         private const int SEARCH_MODE_MATLAB = 0x02;	//search matlab code, 搜尋matlab內的關鍵字
         private const int SEARCH_MODE_CUDA = 0x03;	//search cuda code, 搜尋cuda內的關鍵字
+        private const int SEARCH_MODE_OPENGL = 0x04;	//search opengl code, 搜尋opengl內的關鍵字
+
         int search_mode = SEARCH_MODE_VCS;
 
         List<String> old_search_path = new List<String>();
@@ -257,7 +260,8 @@ namespace vcs_DrAP
             bt_search_pattern_matlab.Location = new Point(x_st + dx, y_st);
             bt_search_pattern_python.Location = new Point(x_st, y_st + dy);
             bt_search_pattern_cuda.Location = new Point(x_st + dx, y_st + dy);
-            checkBox8.Location = new Point(x_st + dx*2, y_st + dy);
+            bt_search_pattern_opengl.Location = new Point(x_st + dx * 2, y_st + dy);
+            checkBox8.Location = new Point(x_st + dx * 3, y_st + dy);
 
             bt_open_dir2.Location = new Point(x_st + dx * 2, y_st);
             bt_save_file_data.Location = new Point(x_st + dx * 3, y_st);
@@ -1627,6 +1631,8 @@ namespace vcs_DrAP
                 pattern = ".m";
             else if (search_mode == SEARCH_MODE_CUDA)
                 pattern = ".cu";
+            else if (search_mode == SEARCH_MODE_OPENGL)
+                pattern = ".cpp";
             else
                 pattern = ".cs";
 
@@ -1659,6 +1665,22 @@ namespace vcs_DrAP
             if (res == false)   //cuda加搜尋 .h 檔案
             {
                 if (search_mode == SEARCH_MODE_CUDA) //cuda 加搜尋 .h
+                {
+                    res = fi.FullName.ToLower().Replace(" ", "").EndsWith(".h");
+                }
+            }
+
+            if (res == false)   //opengl加搜尋 .c 檔案
+            {
+                if (search_mode == SEARCH_MODE_OPENGL) //opengl 加搜尋 .c
+                {
+                    res = fi.FullName.ToLower().Replace(" ", "").EndsWith(".c");
+                }
+            }
+
+            if (res == false)   //opengl加搜尋 .h 檔案
+            {
+                if (search_mode == SEARCH_MODE_OPENGL) //opengl 加搜尋 .h
                 {
                     res = fi.FullName.ToLower().Replace(" ", "").EndsWith(".h");
                 }
@@ -2792,6 +2814,12 @@ namespace vcs_DrAP
             return;
         }
 
+        private void bt_search_pattern_opengl_Click(object sender, EventArgs e)
+        {
+            do_search_mode(SEARCH_MODE_OPENGL);
+            return;
+        }
+
         void do_search_mode(int mode)
         {
             string path = string.Empty;
@@ -2841,6 +2869,16 @@ namespace vcs_DrAP
                 bt_search_pattern_cuda.BackgroundImage = null;
                 bt_search_pattern_cuda.BackColor = Color.Red;
                 path = default_cuda_path;
+            }
+            else if (mode == SEARCH_MODE_OPENGL)
+            {
+                search_mode = SEARCH_MODE_OPENGL;
+                richTextBox1.Text += "搜尋開始opengl\n";
+                richTextBox2.Text += "搜尋開始opengl\n\n";
+
+                bt_search_pattern_opengl.BackgroundImage = null;
+                bt_search_pattern_opengl.BackColor = Color.Red;
+                path = default_opengl_path;
             }
             else
             {
@@ -2894,6 +2932,11 @@ namespace vcs_DrAP
             {
                 bt_search_pattern_cuda.BackColor = System.Drawing.SystemColors.ControlLight;
                 bt_search_pattern_cuda.BackgroundImage = vcs_DrAP.Properties.Resources.cuda;
+            }
+            else if (mode == SEARCH_MODE_OPENGL)
+            {
+                bt_search_pattern_opengl.BackColor = System.Drawing.SystemColors.ControlLight;
+                bt_search_pattern_opengl.BackgroundImage = vcs_DrAP.Properties.Resources.opengl;
             }
             else
             {
@@ -3150,4 +3193,3 @@ namespace vcs_DrAP
 
     }
 }
-

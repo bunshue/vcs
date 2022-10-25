@@ -79,11 +79,11 @@ void reshape(int w, int h)
 
 	glViewport(0, 0, w, h);
 	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
+	glLoadIdentity();	//設置單位矩陣
 	glFrustum(-ar, ar, -1.0, 1.0, 2.0, 100.0);
 
 	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+	glLoadIdentity();	//設置單位矩陣
 
 }
 

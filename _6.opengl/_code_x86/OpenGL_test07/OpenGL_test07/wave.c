@@ -432,7 +432,7 @@ static void keyboard(unsigned char key, int x, int y)
 	    glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_EYE_LINEAR);
 	    glPushMatrix();
 	    glMatrixMode(GL_MODELVIEW);
-	    glLoadIdentity();
+	    glLoadIdentity();	//³]¸m³æ¦ì¯x°}
 	    glTexGenfv(GL_S, GL_EYE_PLANE, map);
 	    glTexGenfv(GL_T, GL_EYE_PLANE, map);
 	    glPopMatrix();

@@ -15,7 +15,7 @@ void display(void)
 	glClearColor(1, 1, 1, 0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3f(0, 0, 1.0); //畫筆藍色   
-	glLoadIdentity();  //加載單位矩陣   
+	glLoadIdentity();	//設置單位矩陣
 
 
 	gluLookAt(xx, yy, zz, 0, 0, 0, 1.0, 0.0, 0);
@@ -43,10 +43,10 @@ void reshape(int w, int h)
 {
 	glViewport(0, 0, (GLsizei)w, (GLsizei)h);
 	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
+	glLoadIdentity();	//設置單位矩陣
 	gluPerspective(60.0, (GLfloat)w / (GLfloat)h, 4, 10.0);
 	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+	glLoadIdentity();	//設置單位矩陣
 	//gluLookAt(0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 }
 

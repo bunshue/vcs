@@ -81,7 +81,7 @@ void init09(void)
 {
     glClearColor(0.0, 0.0, 0.0, 0.0);   //設置背景色
     glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
+    glLoadIdentity();	//設置單位矩陣
     glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0); //設置窗口坐標系大小
 }
 
@@ -91,7 +91,7 @@ void drawText1(void)
     using std::stringstream;
 
     glPushMatrix();
-    glLoadIdentity();
+    glLoadIdentity();	//設置單位矩陣
     glRasterPos2f(-0.8f, 0.6f);
 
     string infoString;
@@ -229,11 +229,11 @@ void display(void)
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
         glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
+        glLoadIdentity();	//設置單位矩陣
         gluOrtho2D(0.0, NGRID, 0.0, NGRID); //窗口坐標範圍
 
         glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
+        glLoadIdentity();	//設置單位矩陣
 
         //畫網格
         glColor3f(0.0f, 1.0f, 0.0f); //綠色
@@ -276,7 +276,7 @@ void display(void)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
+        glLoadIdentity();	//設置單位矩陣
         glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);   //設置窗口坐標系大小
         glGetFloatv(GL_PROJECTION_MATRIX, mat);
         /*
@@ -294,7 +294,7 @@ void display(void)
         }
         */
         glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
+        glLoadIdentity();	//設置單位矩陣
 
         glColor3f(1.0f, 0.0f, 0.0f); //在右上角畫紅色平面：應該在後面
         glBegin(GL_POLYGON);
@@ -327,11 +327,11 @@ void display(void)
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
         glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();
+        glLoadIdentity();	//設置單位矩陣
         gluOrtho2D(-1.0, 11.0, -1.0, 11.0); //窗口坐標範圍
 
         glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
+        glLoadIdentity();	//設置單位矩陣
 
         //畫10*10網格
         glColor3f(0.0f, 1.0f, 0.0f); //綠色

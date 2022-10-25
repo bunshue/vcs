@@ -5,52 +5,6 @@
 extern "C" {
 #endif
 
-/******************************************************************************
-
- Copyright NVIDIA Corporation 2006
-
- TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, THIS SOFTWARE IS PROVIDED
- *AS IS* AND NVIDIA AND ITS SUPPLIERS DISCLAIM ALL WARRANTIES, EITHER EXPRESS
- OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF
- MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.  IN NO EVENT SHALL
- NVIDIA OR ITS SUPPLIERS BE LIABLE FOR ANY SPECIAL, INCIDENTAL, INDIRECT, OR
- CONSEQUENTIAL DAMAGES WHATSOEVER (INCLUDING, WITHOUT LIMITATION, DAMAGES FOR
- LOSS OF BUSINESS PROFITS, BUSINESS INTERRUPTION, LOSS OF BUSINESS INFORMATION,
- OR ANY OTHER PECUNIARY LOSS) ARISING OUT OF THE USE OF OR INABILITY TO USE
- THIS SOFTWARE, EVEN IF NVIDIA HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH
- DAMAGES.
-
-******************************************************************************/
-
-/*
-** License Applicability. Except to the extent portions of this file are
-** made subject to an alternative license as permitted in the SGI Free
-** Software License B, Version 1.1 (the "License"), the contents of this
-** file are subject only to the provisions of the License. You may not use
-** this file except in compliance with the License. You may obtain a copy
-** of the License at Silicon Graphics, Inc., attn: Legal Services, 1600
-** Amphitheatre Parkway, Mountain View, CA 94043-1351, or at:
-**
-** http://oss.sgi.com/projects/FreeB
-**
-** Note that, as provided in the License, the Software is distributed on an
-** "AS IS" basis, with ALL EXPRESS AND IMPLIED WARRANTIES AND CONDITIONS
-** DISCLAIMED, INCLUDING, WITHOUT LIMITATION, ANY IMPLIED WARRANTIES AND
-** CONDITIONS OF MERCHANTABILITY, SATISFACTORY QUALITY, FITNESS FOR A
-** PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
-**
-** Original Code. The Original Code is: OpenGL Sample Implementation,
-** Version 1.2.1, released January 26, 2000, developed by Silicon Graphics,
-** Inc. The Original Code is Copyright (c) 1991-2004 Silicon Graphics, Inc.
-** Copyright in any portions created by third parties is as indicated
-** elsewhere herein. All Rights Reserved.
-**
-** Additional Notice Provisions: This software was created using the
-** OpenGL(R) version 1.2.1 Sample Implementation published by SGI, but has
-** not been independently verified as being compliant with the OpenGL(R)
-** version 1.2.1 Specification.
-*/
-
 #if defined(WIN32) || defined(_WIN32) || defined(WIN64) || defined(_WIN64) && !defined(APIENTRY) && !defined(__CYGWIN__) && !defined(__SCITECH_SNAP__)
 #define WIN32_LEAN_AND_MEAN 1
 #include <windows.h>

@@ -177,10 +177,10 @@ void reshape(int w, int h)
 {
     glViewport(0, 0, w, h);
     glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
+    glLoadIdentity();	//設置單位矩陣
     gluPerspective(60.0, (GLfloat)w / (GLfloat)h, 0.1, 100000.0);
     glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
+    glLoadIdentity();	//設置單位矩陣
     gluLookAt(0, 0, 10, 0, 0, -1, 0, 1, 0);
 }
 
