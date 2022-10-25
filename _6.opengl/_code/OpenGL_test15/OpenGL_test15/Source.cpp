@@ -22,7 +22,7 @@ void display(void)
 
 	// 繪製線時, 會將從 glBegin 到 glEnd 之間的所有的點都繪製出來
 	// 可以調用 glVertex3f 方法 成對 設置多條線
-	// 注意必須成對設置 , 如果設置奇數個點 , 最后一個點會被丟棄
+	// 注意必須成對設置 , 如果設置奇數個點 , 最後一個點會被丟棄
 
 	glBegin(GL_LINES);	// 繪製線段開始
 
@@ -92,7 +92,7 @@ void display(void)
 
 	glPopMatrix();
 
-	// 將后緩沖區繪製到前臺
+	// 將後緩沖區繪製到前臺
 	glutSwapBuffers();
 }
 

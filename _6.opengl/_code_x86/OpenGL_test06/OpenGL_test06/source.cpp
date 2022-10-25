@@ -149,7 +149,7 @@ int main(int argc, char** argv)
 
 	printf("按1 2 3 控制\n");
 
-	glutMainLoop();	// 開始主循環繪制
+	glutMainLoop();	//開始主循環繪製
 
 	return 0;
 }

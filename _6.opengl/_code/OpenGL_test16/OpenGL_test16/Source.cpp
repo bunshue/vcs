@@ -139,7 +139,7 @@ int main(int argc, char** argv)
 	glutReshapeFunc(reshape);	//設定callback function
 	glutKeyboardFunc(keyboard);	//設定callback function
 
-	glutMainLoop();
+	glutMainLoop();	//開始主循環繪製
 
 	return 0;
 }

@@ -56,7 +56,6 @@ void display(void)
     glMaterialfv(GL_FRONT, GL_SHININESS, low_shininess);
     glMaterialfv(GL_FRONT, GL_EMISSION, no_mat);
     glutSolidSphere(1.0, 20, 20);
-
     glPopMatrix();
 
     /* 第一行第三列繪製的球有漫反射光和鏡面光，并有很亮的高光，而無環境光 。*/
@@ -168,8 +167,8 @@ void display(void)
     glMaterialfv(GL_FRONT, GL_EMISSION, mat_emission);
     glutSolidSphere(1.0, 20, 20);
     glPopMatrix();
-    // 執行繪圖命令
-    glFlush();
+
+    glFlush();  // 執行繪圖命令
 }
 
 // 窗口大小變化回調函數
@@ -194,23 +193,6 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
         //離開視窗
         glutDestroyWindow(glutGetWindow());
         return;
-
-    case '1':
-        printf("1\n");
-        break;
-
-    case '2':
-        printf("2\n");
-        break;
-
-    case '3':
-        break;
-
-    case '4':
-        break;
-
-    case '?':
-        break;
     }
 }
 
@@ -232,7 +214,7 @@ int main(int argc, char** argv)
     glutReshapeFunc(reshape);	//設定callback function
     glutKeyboardFunc(keyboard);	//設定callback function
 
-    glutMainLoop();	// 開始主循環繪製
+    glutMainLoop();	//開始主循環繪製
 
     return 0;
 }

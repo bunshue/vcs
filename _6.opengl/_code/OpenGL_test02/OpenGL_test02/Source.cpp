@@ -1,5 +1,4 @@
-﻿// OpenGL Graphics includes
-#include <helper_gl.h>
+﻿#include <helper_gl.h>
 #include <GL/freeglut.h>
 
 #include <stdio.h>
@@ -7,35 +6,33 @@
 
 int display_mode = 1;
 
-//display_mode = 01  //畫矩形
-
+// 初始化參數
 void init01(void)
 {
-	glOrtho(0.0f, 300.0f, 0.0f, 300.0f, 1.0, -1.0); //設置窗口坐標系大小
-	glClearColor(0.4f, 1.f, 0.8f, 1.0f);    //設置背景色
+    glOrtho(0.0f, 300.0f, 0.0f, 300.0f, 1.0, -1.0); //設置窗口坐標系大小
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);    //設置背景色
 }
 
 // 初始化參數
 void init05()
 {
-    glClearColor(0.1, 0.1, 0.4, 0.0);   //設置背景色
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);    //設置背景色
     glShadeModel(GL_SMOOTH);
 }
 
 // 繪圖回調函數
 void display(void)
 {
-	if (display_mode == 0)
-	{
-		glClear(GL_COLOR_BUFFER_BIT);   //清除背景
+    if (display_mode == 0)
+    {
+        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
-		//or
-		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);   // 設置清除窗口背景色為白色
-		glClear(GL_COLOR_BUFFER_BIT);   //清除背景
-		glFlush();       // 刷新OpenGL中的命令列和，使所有尚未被行的命令行
+        //or
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);    //設置背景色
+        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
-		//設定預設大小...
-	}
+        //設定預設大小...
+    }
     else if (display_mode == 1)
     {
         //display_mode = 1  //畫
@@ -44,9 +41,6 @@ void display(void)
 
         glColor3f(0.0f, 1.0f, 0.0f);//設置繪圖顏色
         glRectf(100.0f, 100.0f, 200.0f, 200.0f);//繪製矩形
-
-        glFlush();//刷新緩沖
-        glutSwapBuffers();
     }
     else if (display_mode == 2)
     {
@@ -75,8 +69,6 @@ void display(void)
         }
         glEnd();
         glDisable(GL_TEXTURE_2D);
-
-        glutSwapBuffers();
     }
     else if (display_mode == 4)
     {
@@ -106,13 +98,12 @@ void display(void)
             glVertex2f(0.0f, 0.8f);
         }
         glEnd();
-
-        glFlush();
     }
     else if (display_mode == 5)
     {
         //display_mode = 5
-            // 清除之前幀數據
+
+        // 清除之前幀數據
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
         // 繪製三角形
@@ -128,9 +119,6 @@ void display(void)
             glVertex3f(0, 2, -5);   //上
         }
         glEnd();
-
-        // 執行繪圖命令
-        glFlush();
     }
     else if (display_mode == 6)
     {
@@ -145,18 +133,22 @@ void display(void)
     }
     else if (display_mode == 8)
     {
-    //display_mode = 8  //畫
+        //display_mode = 8  //畫
 
     }
     else if (display_mode == 9)
     {
-    //display_mode = 9  //畫
+        //display_mode = 9  //畫
 
     }
     else
     {
         printf("XXXXXXXXXXXXXXXXXXXXX\n");
     }
+    glFlush();      //刷新OpenGL中的命令列和，使所有尚未被行的命令行
+    //glFlush();      //刷新緩沖
+    //glFlush();      //執行繪圖命令
+    glutSwapBuffers();
 }
 
 // 窗口大小變化回調函數
@@ -168,19 +160,18 @@ void reshape(int w, int h)
     gluPerspective(60.0, (GLfloat)w / (GLfloat)h, 0.1, 100000.0);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();	//設置單位矩陣
-
 }
 
 void keyboard(unsigned char k, int /*x*/, int /*y*/)
 {
-	switch (k)
-	{
-	case 27:
-	case 'q':
-	case 'Q':
-		//離開視窗
-		glutDestroyWindow(glutGetWindow());
-		return;
+    switch (k)
+    {
+    case 27:
+    case 'q':
+    case 'Q':
+        //離開視窗
+        glutDestroyWindow(glutGetWindow());
+        return;
     case '0':
         display_mode = 0;
         break;
@@ -228,27 +219,27 @@ void motion(int x, int y)
 
 int main(int argc, char** argv)
 {
-	glutInit(&argc, argv);
+    glutInit(&argc, argv);
     //glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
     //glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);    //宣告顯示模式為 Single Buffer 和 RGBA
 
-	glutInitWindowSize(600, 600);		//設定視窗大小, 直接拉大內容
-	glutInitWindowPosition(1100, 200);	//視窗起始位置
+    glutInitWindowSize(600, 600);		//設定視窗大小, 直接拉大內容
+    glutInitWindowPosition(1100, 200);	//視窗起始位置
 
     glutCreateWindow("簡單2D OpenGL畫圖 0 ~ 9");    // 設定視窗標題
 
     init01();
 
-	glutDisplayFunc(display);	//設定callback function
-	glutReshapeFunc(reshape);	//設定callback function
-	glutKeyboardFunc(keyboard);	//設定callback function
-	glutMouseFunc(mouse);		//設定callback function
-	glutMotionFunc(motion);		//設定callback function
+    glutDisplayFunc(display);	//設定callback function
+    glutReshapeFunc(reshape);	//設定callback function
+    glutKeyboardFunc(keyboard);	//設定callback function
+    glutMouseFunc(mouse);		//設定callback function
+    glutMotionFunc(motion);		//設定callback function
 
-	glutMainLoop();	//開始主循環繪製
+    glutMainLoop();	//開始主循環繪製
 
-	return 0;
+    return 0;
 }
 
 

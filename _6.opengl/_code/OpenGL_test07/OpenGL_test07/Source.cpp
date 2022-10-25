@@ -5,20 +5,7 @@
 #include <iostream>
 
 // 初始化參數
-void init01(void)
-{
-    //好像做不做沒甚麼差別
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    glClearColor(0.0, 0.0, 0.0, 0.0);
-
-    //glClearColor(0.1, 0.1, 0.4, 0.0);
-    //glShadeModel(GL_SMOOTH);
-
-    //glClearColor(0.1, 0.1, 0.4, 0.0);
-    //glShadeModel(GL_SMOOTH);
-}
-
-void init08()
+void init()
 {
     glClearColor(0.0, 0.0, 0.0, 0.0);
     glMatrixMode(GL_PROJECTION);
@@ -87,7 +74,7 @@ int main(int argc, char** argv)
 
     glutCreateWindow("開啟視窗");	//開啟視窗 並顯示出視窗 Title
 
-    init08();
+    init();
 
     glutDisplayFunc(display);	//設定callback function
     glutReshapeFunc(reshape);	//設定callback function
@@ -96,7 +83,7 @@ int main(int argc, char** argv)
     glutMotionFunc(motion);		//設定callback function
     glutIdleFunc(idle);			//設定callback function
 
-    glutMainLoop();     // 開始主循環繪製
+    glutMainLoop();	//開始主循環繪製
 
     return 0;
 }

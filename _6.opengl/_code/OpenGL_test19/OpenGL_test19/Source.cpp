@@ -69,7 +69,7 @@ int main(int argc, char** argv)
     glutMouseFunc(mouse);		//設定callback function
     glutMotionFunc(motion);		//設定callback function
 
-    glutMainLoop();
+    glutMainLoop();	//開始主循環繪製
 
     return 0;
 }

@@ -630,6 +630,6 @@ int main(int argc, char** argv)
 	glutKeyboardFunc(keyboard);     //設定callback function
 	glutIdleFunc(display);
 
-	glutMainLoop();
+	glutMainLoop();	//開始主循環繪製
 }
 

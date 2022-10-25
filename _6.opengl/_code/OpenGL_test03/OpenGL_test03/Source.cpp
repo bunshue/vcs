@@ -51,20 +51,17 @@ void drawCoordinates(void)
 {
 	glLineWidth(10.0f);	//設定線寬
 
-	glColor3f(1.0f, 0.0f, 0.0f); //畫紅色的x軸
 	glBegin(GL_LINES);
+
+	glColor3f(1.0f, 0.0f, 0.0f); //畫紅色的x軸
 	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
 	glVertex3f(1.0f, 0.0f, 0.0f);	//x軸 1,0,0
-	glEnd();
 
 	glColor3f(0.0, 1.0, 0.0); //畫綠色的y軸
-	glBegin(GL_LINES);
 	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
 	glVertex3f(0.0f, 1.0f, 0.0f);	//y軸 0,1,0
-	glEnd();
 
 	glColor3f(0.0, 0.0, 1.0); //畫藍色的z軸
-	glBegin(GL_LINES);
 	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
 	glVertex3f(0.0f, 0.0f, 1.0f);	//z軸 0,0,1
 	glEnd();
@@ -144,7 +141,7 @@ int main(int argc, char** argv)
 	glutMotionFunc(motion);		//設定callback function
 	glutIdleFunc(idle);         //設定callback function, 利用idle事件進行重畫
 
-	glutMainLoop();
+	glutMainLoop();	//開始主循環繪製
 
 	return 0;
 }

@@ -59,7 +59,7 @@ int main(int argc, char** argv)
     glutDisplayFunc(display);	//設定callback function
     glutKeyboardFunc(keyboard);	//設定callback function
 
-    glutMainLoop(); // 開始主循環繪製
+    glutMainLoop();	//開始主循環繪製
 
     return 0;
 }

@@ -41,7 +41,7 @@ void display(void)
     // 矩陣出棧 
     //glPopMatrix();
 
-    // 將后緩沖區繪製到前臺
+    // 將後緩沖區繪製到前臺
     glutSwapBuffers();
 
 }

@@ -4,7 +4,7 @@
 #include "texture.h"
 #include "utils.h"
 
-// 導入 OpenGL 的個頭文件 , 必須先導入 windows.h 頭文件之后再導入 opengl 頭文件
+// 導入 OpenGL 的個頭文件 , 必須先導入 windows.h 頭文件之後再導入 opengl 頭文件
 #include <gl/GL.h>
 #include <gl/GLU.h>
 
@@ -76,11 +76,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     //glPolygonMode(GL_FRONT, GL_FILL);
 
     // 設置線框模式 
-    // 設置了該模式后 , 之后的所有圖形都會變成線
+    // 設置了該模式後 , 之後的所有圖形都會變成線
     //glPolygonMode(GL_FRONT, GL_LINE);
 
     // 設置點模式 
-    // 設置了該模式后 , 之后的所有圖形都會變成點
+    // 設置了該模式後 , 之後的所有圖形都會變成點
     //glPolygonMode(GL_FRONT, GL_POINT);
 
     // 將方形的點變為圓點
@@ -100,7 +100,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     // 設置鏡面反射光 
     glLightfv(GL_LIGHT0, GL_SPECULAR, whiteColor);
 
-    // 設置光源位置 , 最后一位設置成 0 代表該光源無限遠
+    // 設置光源位置 , 最後一位設置成 0 代表該光源無限遠
     float lightPosition[] = { 0.0f, 1.0f, 0.0f, 0.0f };
     // 設置光源位置 , y 軸無限遠位置 
     glLightfv(GL_LIGHT0, GL_POSITION, lightPosition);
@@ -150,7 +150,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
         // 矩陣旋轉
         // glRotatef (GLfloat angle, GLfloat x, GLfloat y, GLfloat z);
-        // 第 1 個參數是旋轉角度 , 后面三個參數的值代表是否繞該軸旋轉 , 
+        // 第 1 個參數是旋轉角度 , 後面三個參數的值代表是否繞該軸旋轉 , 
         // 如果對應值設置為 1 , 則繞該軸旋轉 
         // 這里設置的是繞 z 軸旋轉 30 度
         //glRotatef(90.0f, 0.0f, 0.0f, 1.0f);
@@ -177,8 +177,8 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
         //glBegin(GL_POINTS);	//繪製點
         //glBegin(GL_LINES);	//繪製線
-        //glBegin(GL_LINE_STRIP);//繪製前后連接的點組成的線
-        //glBegin(GL_LINE_LOOP); //繪製前后連接的點組成的線 , 并且收尾相連
+        //glBegin(GL_LINE_STRIP);//繪製前後連接的點組成的線
+        //glBegin(GL_LINE_LOOP); //繪製前後連接的點組成的線 , 并且收尾相連
         //glBegin(GL_TRIANGLES); //繪製多個三角形
         //glBegin(GL_TRIANGLE_STRIP); //繪製 GL_TRIANGLE_STRIP 三角形
         //glBegin(GL_TRIANGLE_FAN);	//繪製三角形扇
@@ -225,7 +225,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         // 矩陣出棧 
         //glPopMatrix();
 
-        // 將后緩沖區繪製到前臺
+        // 將後緩沖區繪製到前臺
         SwapBuffers(dc);
     }
     return (int)msg.wParam;
@@ -245,7 +245,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.cbSize = sizeof(WNDCLASSEX);
     // 窗口風格 , CS 是 Class Style 縮寫 , VREDRAW 垂直重繪 , HREDRAW 水平重繪
     wcex.style = CS_HREDRAW | CS_VREDRAW;
-    // 消息響應函數 , 鼠標點擊窗口 , 或打字字后的回調函數
+    // 消息響應函數 , 鼠標點擊窗口 , 或打字字後的回調函數
     wcex.lpfnWndProc = WndProc;
     // 不需要額外的空間
     wcex.cbClsExtra = 0;
@@ -264,10 +264,10 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.lpszMenuName = MAKEINTRESOURCEW(IDC_OPENGL);
     // 窗口的唯一標識符
     wcex.lpszClassName = szWindowClass;
-    // 設置窗口運行后顯示在右上角的圖標
+    // 設置窗口運行後顯示在右上角的圖標
     wcex.hIconSm = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
-    // 設置完上述參數后 , 最后調用該方法注冊窗口
+    // 設置完上述參數後 , 最後調用該方法注冊窗口
     return RegisterClassExW(&wcex);
 }
 
@@ -342,7 +342,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     // 設置像素格式
     SetPixelFormat(dc, pixelFormat, &pfd);
 
-    // 創建 OpenGL 上下文對象 , 注意該操作必須在設置完像素格式后進行操作
+    // 創建 OpenGL 上下文對象 , 注意該操作必須在設置完像素格式後進行操作
     HGLRC rc = wglCreateContext(dc);
 
     // 設置 OpenGL 上下文對象 , 將 rc 和 dc 作為當前的渲染設備

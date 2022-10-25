@@ -157,7 +157,7 @@ int main(int argc, char** argv)
 	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
 	glMaterialfv(GL_FRONT, GL_SHININESS, high_shininess);
 
-	glutMainLoop();
+	glutMainLoop();	//開始主循環繪製
 
 	return 0;
 }

@@ -14,9 +14,11 @@
 
 #include <iostream>
 
-int mx, my; //position of mouse
+int mx;	//position of mouse
+int my;	//position of mouse
 int m_state = 0; //mouse usage
-float x_angle = 0.0f, y_angle = 0.0f; //angle of eye
+float x_angle = 0.0f;	//angle of eye
+float y_angle = 0.0f;	//angle of eye
 float dist = 10.0f; //distance from the eye
 
 void drawCoordinates(void);
@@ -71,12 +73,14 @@ void display(void)
 	eyez = -x * sin(-y_angle * M_PI / 180.0) + z * cos(-y_angle * M_PI / 180.0);
 	gluLookAt(eyex, eyey, eyez, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 	drawCoordinates();
-	
+
+	glLineWidth(1.0f);	//設定線寬
+
 	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
 	glTranslatef(-1.0f, 0.0f, 0.0f);
 	glutWireTeapot(0.5);
 	glPopMatrix();
-	
+
 	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
 	glTranslatef(1.0f, 0.0f, 0.0f);
 	glScalef(0.5f, 0.5f, 0.5f);
@@ -89,18 +93,20 @@ void display(void)
 
 void drawCoordinates(void)
 {
+	glLineWidth(4.0f);	//設定線寬
+
 	glBegin(GL_LINES);
 	glColor3f(1.0f, 0.0f, 0.0f); //畫紅色的x軸
-	glVertex3f(0.0f, 0.0f, 0.0f);
-	glVertex3f(1.0f, 0.0f, 0.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
+	glVertex3f(1.0f, 0.0f, 0.0f);	//x軸 1,0,0
 
 	glColor3f(0.0, 1.0, 0.0); //畫綠色的y軸
-	glVertex3f(0.0f, 0.0f, 0.0f);
-	glVertex3f(0.0f, 1.0f, 0.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
+	glVertex3f(0.0f, 1.0f, 0.0f);	//y軸 0,1,0
 
 	glColor3f(0.0, 0.0, 1.0); //畫藍色的z軸
-	glVertex3f(0.0f, 0.0f, 0.0f);
-	glVertex3f(0.0f, 0.0f, 1.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
+	glVertex3f(0.0f, 0.0f, 1.0f);	//z軸 0,0,1
 	glEnd();
 }
 
@@ -224,7 +230,7 @@ int main(int argc, char** argv)
 	glutMouseFunc(mouse);		//設定callback function
 	glutMotionFunc(motion);		//設定callback function
 
-	glutMainLoop();
+	glutMainLoop();	//開始主循環繪製
 
 	return 0;
 }

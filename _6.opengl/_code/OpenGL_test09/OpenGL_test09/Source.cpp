@@ -39,15 +39,14 @@ void display(void)
 {
     // 清除之前幀數據
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    
+
     glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
     glTranslatef(0.0f, 0.0f, -5.0f);
     glRotated(angle, 1, 1, 0);
     DrawBox();
     glPopMatrix();
 
-    // 執行繪圖命令
-    glFlush();
+    glFlush();  // 執行繪圖命令
 
     //angle++;
     angle += 0.1;
@@ -73,7 +72,7 @@ void DrawBox()
     glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, 1.0f);
     glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, 1.0f);
 
-    /// 后側面
+    /// 後側面
     glNormal3f(0.0f, 0.0f, -1.0f);                              /** 指定法線背向觀察者 */	//設置法線
     glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
     glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, 1.0f, -1.0f);
@@ -124,40 +123,15 @@ void reshape(int w, int h)
 
 void keyboard(unsigned char k, int /*x*/, int /*y*/)
 {
-	switch (k)
-	{
-	case 27:
-	case 'q':
-	case 'Q':
-		//離開視窗
-		glutDestroyWindow(glutGetWindow());
-		return;
-
-	case '1':
-		printf("1\n");
-		break;
-
-	case '2':
-		printf("2\n");
-		break;
-
-	case '3':
-		break;
-
-	case '4':
-		break;
-
-	case '?':
-		break;
-	}
-}
-
-void mouse(int button, int state, int x, int y)
-{
-}
-
-void motion(int x, int y)
-{
+    switch (k)
+    {
+    case 27:
+    case 'q':
+    case 'Q':
+        //離開視窗
+        glutDestroyWindow(glutGetWindow());
+        return;
+    }
 }
 
 static void idle(void)
@@ -182,11 +156,9 @@ int main(int argc, char** argv)
     glutDisplayFunc(display);	//設定callback function
     glutReshapeFunc(reshape);	//設定callback function
     glutKeyboardFunc(keyboard);	//設定callback function
-    glutMouseFunc(mouse);		//設定callback function
-    glutMotionFunc(motion);		//設定callback function
     glutIdleFunc(idle);			//設定callback function
 
-    glutMainLoop(); // 開始主循環繪製
+    glutMainLoop();	//開始主循環繪製
 
     return 0;
 }

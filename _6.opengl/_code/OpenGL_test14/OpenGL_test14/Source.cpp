@@ -70,7 +70,10 @@ void idle()
     //glutPostRedisplay();
 }
 
-void mainMenu(int i) { keyboard((unsigned char)i, 0, 0); }
+void mainMenu(int i)
+{
+    keyboard((unsigned char)i, 0, 0);
+}
 
 void initMenus()
 {
@@ -113,7 +116,7 @@ int main(int argc, char** argv)
     //timer TBD
     initMenus();        //設定表單按鈕
 
-    glutMainLoop();
+    glutMainLoop();	//開始主循環繪製
 
     return 0;
 }

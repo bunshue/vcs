@@ -7,9 +7,11 @@
 void drawCoordinates(void);
 void drawTetrahedron(void);
 
-int mx, my; //position of mouse
+int mx; //position of mouse
+int my; //position of mouse
 int m_state = 0; //mouse usage
-float x_angle = 0.0f, y_angle = 0.0f; //angle of eye
+float x_angle = 0.0f;	//angle of eye
+float y_angle = 0.0f;	//angle of eye
 float dist = 10.0f; //distance from the eye
 
 void init(void)
@@ -79,20 +81,21 @@ void display(void)
 
 void drawCoordinates(void)
 {
+	//glLineWidth(10.0f);	//設定線寬
+
+	glBegin(GL_LINES);
+
 	glColor3f(1.0f, 0.0f, 0.0f); //畫紅色的x軸
-	glBegin(GL_LINES);
-	glVertex3f(0.0f, 0.0f, 0.0f);
-	glVertex3f(1.0f, 0.0f, 0.0f);
-	glEnd();
+	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
+	glVertex3f(1.0f, 0.0f, 0.0f);	//x軸 1,0,0
+
 	glColor3f(0.0, 1.0, 0.0); //畫綠色的y軸
-	glBegin(GL_LINES);
-	glVertex3f(0.0f, 0.0f, 0.0f);
-	glVertex3f(0.0f, 1.0f, 0.0f);
-	glEnd();
+	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
+	glVertex3f(0.0f, 1.0f, 0.0f);	//y軸 0,1,0
+
 	glColor3f(0.0, 0.0, 1.0); //畫藍色的z軸
-	glBegin(GL_LINES);
-	glVertex3f(0.0f, 0.0f, 0.0f);
-	glVertex3f(0.0f, 0.0f, 1.0f);
+	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
+	glVertex3f(0.0f, 0.0f, 1.0f);	//z軸 0,0,1
 	glEnd();
 }
 
@@ -107,18 +110,21 @@ void drawTetrahedron(void)
 	glVertex3fv(pnt[tetra[0][1]]);
 	glVertex3fv(pnt[tetra[0][2]]);
 	glEnd();
+
 	glNormal3f(-1.0f, 0.0f, 0.0f);	//設置法線
 	glBegin(GL_POLYGON); //Y-Z
 	glVertex3fv(pnt[tetra[1][0]]);
 	glVertex3fv(pnt[tetra[1][1]]);
 	glVertex3fv(pnt[tetra[1][2]]);
 	glEnd();
+
 	glNormal3f(0.0f, -1.0f, 0.0f);	//設置法線
 	glBegin(GL_POLYGON); //Z-X
 	glVertex3fv(pnt[tetra[2][0]]);
 	glVertex3fv(pnt[tetra[2][1]]);
 	glVertex3fv(pnt[tetra[2][2]]);
 	glEnd();
+
 	glNormal3f(1.0f, 1.0f, 1.0f);	//設置法線
 	glBegin(GL_POLYGON); //slope
 	glVertex3fv(pnt[tetra[3][0]]);
@@ -143,25 +149,11 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
 		//離開視窗
 		glutDestroyWindow(glutGetWindow());
 		return;
-
 	case '0':
 		m_state = 0;
 		break;
 	case '1':
 		m_state = 1;
-		break;
-
-	case '2':
-		printf("2\n");
-		break;
-
-	case '3':
-		break;
-
-	case '4':
-		break;
-
-	case '?':
 		break;
 	}
 }
@@ -221,7 +213,7 @@ int main(int argc, char** argv)
 	glutMouseFunc(mouse);		//設定callback function
 	glutMotionFunc(motion);		//設定callback function
 
-	glutMainLoop();
+	glutMainLoop();	//開始主循環繪製
 
 	return 0;
 }

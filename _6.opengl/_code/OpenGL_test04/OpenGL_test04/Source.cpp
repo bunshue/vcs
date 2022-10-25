@@ -21,7 +21,7 @@ glWindowPos(Type x, Type y, Type z);
 void glBitmap(GLsizei, GLsizei height, GLfloat xorig, GLfloat yorig, GLfloat, GLfloat, const GLubyte* bitmap);
 //繪製由bitmap指定的位圖，bitmap是一個指向位圖圖像的指針，位圖的原點是當前光柵位置，如果當前光柵位置無效，則這個函數不會繪製任何東西。
 //width和height表示位圖的寬度和高度，xorig和yorig定義了位圖的原點，他是根據當期光柵位置確定的，右上為正。
-//xmove和ymove表示位圖光柵化之后光柵坐標的x增加值和y增加值
+//xmove和ymove表示位圖光柵化之後光柵坐標的x增加值和y增加值
 */
 
 // 繪圖回調函數
@@ -67,10 +67,9 @@ void display(void)
 	}
 	glBitmap(64, 64, offsetx, offsety, dx, dy, rasters);
 
-
 	//繪製由bitmap指定的位圖，bitmap是一個指向位圖圖像的指針，位圖的原點是當前光柵位置，如果當前光柵位置無效，則這個函數不會繪製任何東西。
 	//width和height表示位圖的寬度和高度，xorig和yorig定義了位圖的原點，他是根據當期光柵位置確定的，右上為正。
-	//xmove和ymove表示位圖光柵化之后光柵坐標的x增加值和y增加值
+	//xmove和ymove表示位圖光柵化之後光柵坐標的x增加值和y增加值
 	glFlush();
 }
 
