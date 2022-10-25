@@ -193,8 +193,10 @@ int main(int argc, char** argv)
     // number of warping iterations
     const int nWarpIters = 3;
 
+    printf("\n¥Î CPU ºâ, ºC\n");
     ComputeFlowGold(h_source, h_target, width, height, stride, alpha, nLevels, nWarpIters, nSolverIters, h_uGold, h_vGold);
 
+    printf("\n¥Î GPU ºâ, §Ö\n");
     ComputeFlowCUDA(h_source, h_target, width, height, stride, alpha, nLevels, nWarpIters, nSolverIters, h_u, h_v);
 
     // compare results (L1 norm)

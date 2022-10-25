@@ -131,13 +131,13 @@ public:
     static void Create() { m_singleton = new NBodyDemo; }
     static void Destroy() { delete m_singleton; }
 
-    static void init(int numBodies, int numDevices, int blockSize, bool usePBO,
-        bool useHostMem, bool useP2P, bool useCpu, int devID) {
-        m_singleton->_init(numBodies, numDevices, blockSize, usePBO, useHostMem,
-            useP2P, useCpu, devID);
+    static void init(int numBodies, int numDevices, int blockSize, bool usePBO, bool useHostMem, bool useP2P, bool useCpu, int devID)
+    {
+        m_singleton->_init(numBodies, numDevices, blockSize, usePBO, useHostMem, useP2P, useCpu, devID);
     }
 
-    static void reset(int numBodies, NBodyConfig config) {
+    static void reset(int numBodies, NBodyConfig config)
+    {
         m_singleton->_reset(numBodies, config);
     }
 
@@ -170,25 +170,19 @@ public:
 
         if (useHostMem)
         {
-            // This event sync is required because we are rendering from the host
-            // memory that CUDA is
-            // writing.  If we don't wait until CUDA is done updating it, we will
-            // render partially
+            // This event sync is required because we are rendering from the host memory that CUDA is
+            // writing.  If we don't wait until CUDA is done updating it, we will render partially
             // updated data, resulting in a jerky frame rate.
             if (!useCpu)
             {
                 cudaEventSynchronize(hostMemSyncEvent);
             }
 
-            m_singleton->m_renderer->setPositions(
-                m_singleton->m_nbody->getArray(BODYSYSTEM_POSITION),
-                m_singleton->m_nbody->getNumBodies());
+            m_singleton->m_renderer->setPositions(m_singleton->m_nbody->getArray(BODYSYSTEM_POSITION), m_singleton->m_nbody->getNumBodies());
         }
         else
         {
-            m_singleton->m_renderer->setPBO(
-                m_singleton->m_nbody->getCurrentReadBuffer(),
-                m_singleton->m_nbody->getNumBodies(), (sizeof(T) > 4));
+            m_singleton->m_renderer->setPBO(m_singleton->m_nbody->getCurrentReadBuffer(), m_singleton->m_nbody->getNumBodies(), (sizeof(T) > 4));
         }
 
         // display particles
@@ -247,42 +241,52 @@ private:
         m_hVel(0),
         m_hColor(0) {}
 
-    ~NBodyDemo() {
-        if (m_nbodyCpu) {
+    ~NBodyDemo()
+    {
+        if (m_nbodyCpu)
+        {
             delete m_nbodyCpu;
         }
 
-        if (m_nbodyCuda) {
+        if (m_nbodyCuda)
+        {
             delete m_nbodyCuda;
         }
 
-        if (m_hPos) {
+        if (m_hPos)
+        {
             delete[] m_hPos;
         }
 
-        if (m_hVel) {
+        if (m_hVel)
+        {
             delete[] m_hVel;
         }
 
-        if (m_hColor) {
+        if (m_hColor)
+        {
             delete[] m_hColor;
         }
 
         sdkDeleteTimer(&demoTimer);
 
-        if (!benchmark && !compareToCPU) delete m_renderer;
+        if (!benchmark && !compareToCPU)
+        {
+            delete m_renderer;
+        }
     }
 
-    void _init(int numBodies, int numDevices, int blockSize, bool bUsePBO,
-        bool useHostMem, bool useP2P, bool useCpu, int devID) {
-        if (useCpu) {
+    void _init(int numBodies, int numDevices, int blockSize, bool bUsePBO, bool useHostMem, bool useP2P, bool useCpu, int devID)
+    {
+        if (useCpu)
+        {
             m_nbodyCpu = new BodySystemCPU<T>(numBodies);
             m_nbody = m_nbodyCpu;
             m_nbodyCuda = 0;
         }
-        else {
-            m_nbodyCuda = new BodySystemCUDA<T>(numBodies, numDevices, blockSize,
-                bUsePBO, useHostMem, useP2P, devID);
+        else
+        {
+            m_nbodyCuda = new BodySystemCUDA<T>(numBodies, numDevices, blockSize, bUsePBO, useHostMem, useP2P, devID);
             m_nbody = m_nbodyCuda;
             m_nbodyCpu = 0;
         }
@@ -295,17 +299,20 @@ private:
         m_nbody->setSoftening(activeParams.m_softening);
         m_nbody->setDamping(activeParams.m_damping);
 
-        if (useCpu) {
+        if (useCpu)
+        {
             sdkCreateTimer(&timer);
             sdkStartTimer(&timer);
         }
-        else {
+        else
+        {
             checkCudaErrors(cudaEventCreate(&startEvent));
             checkCudaErrors(cudaEventCreate(&stopEvent));
             checkCudaErrors(cudaEventCreate(&hostMemSyncEvent));
         }
 
-        if (!benchmark && !compareToCPU) {
+        if (!benchmark && !compareToCPU)
+        {
             m_renderer = new ParticleRenderer;
             _resetRenderer();
         }
@@ -314,25 +321,29 @@ private:
         sdkStartTimer(&demoTimer);
     }
 
-    void _reset(int numBodies, NBodyConfig config) {
-        if (tipsyFile == "") {
-            randomizeBodies(config, m_hPos, m_hVel, m_hColor,
-                activeParams.m_clusterScale, activeParams.m_velocityScale,
-                numBodies, true);
+    void _reset(int numBodies, NBodyConfig config)
+    {
+        if (tipsyFile == "")
+        {
+            randomizeBodies(config, m_hPos, m_hVel, m_hColor, activeParams.m_clusterScale, activeParams.m_velocityScale, numBodies, true);
             setArrays(m_hPos, m_hVel);
         }
-        else {
+        else
+        {
             m_nbody->loadTipsyFile(tipsyFile);
             ::numBodies = m_nbody->getNumBodies();
         }
     }
 
-    void _resetRenderer() {
-        if (fp64) {
+    void _resetRenderer()
+    {
+        if (fp64)
+        {
             float color[4] = { 0.4f, 0.8f, 0.1f, 1.0f };
             m_renderer->setBaseColor(color);
         }
-        else {
+        else
+        {
             float color[4] = { 1.0f, 0.6f, 0.3f, 1.0f };
             m_renderer->setBaseColor(color);
         }
@@ -341,7 +352,8 @@ private:
         m_renderer->setSpriteSize(activeParams.m_pointSize);
     }
 
-    void _selectDemo(int index) {
+    void _selectDemo(int index)
+    {
         assert(index < numDemos);
 
         activeParams = demoParams[index];
@@ -352,13 +364,13 @@ private:
         sdkResetTimer(&demoTimer);
     }
 
-    bool _compareResults(int numBodies) {
+    bool _compareResults(int numBodies)
+    {
         assert(m_nbodyCuda);
 
         bool passed = true;
 
         m_nbody->update(0.001f);
-
         {
             m_nbodyCpu = new BodySystemCPU<T>(numBodies);
 
@@ -372,65 +384,74 @@ private:
 
             T tolerance = 0.0005f;
 
-            for (int i = 0; i < numBodies; i++) {
-                if (fabs(cpuPos[i] - cudaPos[i]) > tolerance) {
+            for (int i = 0; i < numBodies; i++)
+            {
+                if (fabs(cpuPos[i] - cudaPos[i]) > tolerance)
+                {
                     passed = false;
                     printf("Error: (host)%f != (device)%f\n", cpuPos[i], cudaPos[i]);
                 }
             }
         }
-        if (passed) {
+        if (passed)
+        {
             printf("  OK\n");
         }
         return passed;
     }
 
-    void _runBenchmark(int iterations) {
+    void _runBenchmark(int iterations)
+    {
         // once without timing to prime the device
-        if (!useCpu) {
+        if (!useCpu)
+        {
             m_nbody->update(activeParams.m_timestep);
         }
 
-        if (useCpu) {
+        if (useCpu)
+        {
             sdkCreateTimer(&timer);
             sdkStartTimer(&timer);
         }
-        else {
+        else
+        {
             checkCudaErrors(cudaEventRecord(startEvent, 0));
         }
 
-        for (int i = 0; i < iterations; ++i) {
+        for (int i = 0; i < iterations; ++i)
+        {
             m_nbody->update(activeParams.m_timestep);
         }
 
         float milliseconds = 0;
 
-        if (useCpu) {
+        if (useCpu)
+        {
             sdkStopTimer(&timer);
             milliseconds = sdkGetTimerValue(&timer);
             sdkStartTimer(&timer);
         }
-        else {
+        else
+        {
             checkCudaErrors(cudaEventRecord(stopEvent, 0));
             checkCudaErrors(cudaEventSynchronize(stopEvent));
-            checkCudaErrors(
-                cudaEventElapsedTime(&milliseconds, startEvent, stopEvent));
+            checkCudaErrors(cudaEventElapsedTime(&milliseconds, startEvent, stopEvent));
         }
 
         double interactionsPerSecond = 0;
         double gflops = 0;
         computePerfStats(interactionsPerSecond, gflops, milliseconds, iterations);
 
-        printf("%d bodies, total time for %d iterations: %.3f ms\n", numBodies,
-            iterations, milliseconds);
+        printf("%d bodies, total time for %d iterations: %.3f ms\n", numBodies, iterations, milliseconds);
         printf("= %.3f billion interactions per second\n", interactionsPerSecond);
-        printf("= %.3f %s-precision GFLOP/s at %d flops per interaction\n", gflops,
-            (sizeof(T) > 4) ? "double" : "single", flopsPerInteraction);
+        printf("= %.3f %s-precision GFLOP/s at %d flops per interaction\n", gflops, (sizeof(T) > 4) ? "double" : "single", flopsPerInteraction);
     }
 };
 
-void finalize() {
-    if (!useCpu) {
+void finalize()
+{
+    if (!useCpu)
+    {
         checkCudaErrors(cudaEventDestroy(startEvent));
         checkCudaErrors(cudaEventDestroy(stopEvent));
         checkCudaErrors(cudaEventDestroy(hostMemSyncEvent));
@@ -438,7 +459,10 @@ void finalize() {
 
     NBodyDemo<float>::Destroy();
 
-    if (bSupportDouble) NBodyDemo<double>::Destroy();
+    if (bSupportDouble)
+    {
+        NBodyDemo<double>::Destroy();
+    }
 }
 
 template <>
@@ -447,7 +471,8 @@ template <>
 NBodyDemo<float>* NBodyDemo<float>::m_singleton = 0;
 
 template <typename T_new, typename T_old>
-void switchDemoPrecision() {
+void switchDemoPrecision()
+{
     cudaDeviceSynchronize();
 
     fp64 = !fp64;
@@ -462,7 +487,8 @@ void switchDemoPrecision() {
     T_new* newPos = new T_new[numBodies * 4];
     T_new* newVel = new T_new[numBodies * 4];
 
-    for (int i = 0; i < numBodies * 4; i++) {
+    for (int i = 0; i < numBodies * 4; i++)
+    {
         newPos[i] = (T_new)oldPos[i];
         newVel[i] = (T_new)oldVel[i];
     }
@@ -478,10 +504,12 @@ void switchDemoPrecision() {
 }
 
 // check for OpenGL errors
-inline void checkGLErrors(const char* s) {
+inline void checkGLErrors(const char* s)
+{
     GLenum error;
 
-    while ((error = glGetError()) != GL_NO_ERROR) {
+    while ((error = glGetError()) != GL_NO_ERROR)
+    {
         fprintf(stderr, "%s: error - %s\n", s, (char*)gluErrorString(error));
     }
 }
@@ -489,8 +517,7 @@ inline void checkGLErrors(const char* s) {
 void initGL(int* argc, char** argv)
 {
     // First initialize OpenGL context, so we can properly set the GL for CUDA.
-    // This is necessary in order to achieve optimal performance with OpenGL/CUDA
-    // interop.
+    // This is necessary in order to achieve optimal performance with OpenGL/CUDA interop.
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGB | GLUT_DEPTH | GLUT_DOUBLE);
     glutInitWindowSize(720, 480);
@@ -501,18 +528,14 @@ void initGL(int* argc, char** argv)
         glutFullScreen();   //全螢幕顯示
     }
 
-    else if (!isGLVersionSupported(2, 0) ||
-        !areGLExtensionsSupported("GL_ARB_multitexture "
-            "GL_ARB_vertex_buffer_object")) {
+    else if (!isGLVersionSupported(2, 0) || !areGLExtensionsSupported("GL_ARB_multitexture "            "GL_ARB_vertex_buffer_object"))
+    {
         fprintf(stderr, "Required OpenGL extensions missing.");
         exit(EXIT_FAILURE);
     }
-    else {
-#if defined(WIN32)
+    else
+    {
         wglSwapIntervalEXT(0);
-#elif defined(LINUX)
-        glxSwapIntervalSGI(0);
-#endif
     }
 
     glEnable(GL_DEPTH_TEST);
@@ -521,7 +544,8 @@ void initGL(int* argc, char** argv)
     checkGLErrors("initGL");
 }
 
-void initParameters() {
+void initParameters()
+{
     // create a new parameter list
     paramlist = new ParamListGL("sliders");
     paramlist->SetBarColorInner(0.8f, 0.8f, 0.0f);
@@ -529,56 +553,53 @@ void initParameters() {
     // add some parameters to the list
 
     // Point Size
-    paramlist->AddParam(new Param<float>("Point Size", activeParams.m_pointSize,
-        0.001f, 10.0f, 0.01f,
-        &activeParams.m_pointSize));
+    paramlist->AddParam(new Param<float>("Point Size", activeParams.m_pointSize, 0.001f, 10.0f, 0.01f, &activeParams.m_pointSize));
 
     // Velocity Damping
-    paramlist->AddParam(new Param<float>("Velocity Damping",
-        activeParams.m_damping, 0.5f, 1.0f,
-        .0001f, &(activeParams.m_damping)));
+    paramlist->AddParam(new Param<float>("Velocity Damping", activeParams.m_damping, 0.5f, 1.0f, .0001f, &(activeParams.m_damping)));
     // Softening Factor
-    paramlist->AddParam(new Param<float>("Softening Factor",
-        activeParams.m_softening, 0.001f, 1.0f,
-        .0001f, &(activeParams.m_softening)));
+    paramlist->AddParam(new Param<float>("Softening Factor", activeParams.m_softening, 0.001f, 1.0f, .0001f, &(activeParams.m_softening)));
     // Time step size
-    paramlist->AddParam(new Param<float>("Time Step", activeParams.m_timestep,
-        0.0f, 1.0f, .0001f,
-        &(activeParams.m_timestep)));
+    paramlist->AddParam(new Param<float>("Time Step", activeParams.m_timestep, 0.0f, 1.0f, .0001f, &(activeParams.m_timestep)));
     // Cluster scale (only affects starting configuration
-    paramlist->AddParam(new Param<float>("Cluster Scale",
-        activeParams.m_clusterScale, 0.0f, 10.0f,
-        0.01f, &(activeParams.m_clusterScale)));
+    paramlist->AddParam(new Param<float>("Cluster Scale", activeParams.m_clusterScale, 0.0f, 10.0f, 0.01f, &(activeParams.m_clusterScale)));
 
     // Velocity scale (only affects starting configuration)
-    paramlist->AddParam(
-        new Param<float>("Velocity Scale", activeParams.m_velocityScale, 0.0f,
-            1000.0f, 0.1f, &activeParams.m_velocityScale));
+    paramlist->AddParam(new Param<float>("Velocity Scale", activeParams.m_velocityScale, 0.0f, 1000.0f, 0.1f, &activeParams.m_velocityScale));
 }
 
-void selectDemo(int activeDemo) {
-    if (fp64) {
+void selectDemo(int activeDemo)
+{
+    if (fp64)
+    {
         NBodyDemo<double>::selectDemo(activeDemo);
     }
-    else {
+    else
+    {
         NBodyDemo<float>::selectDemo(activeDemo);
     }
 }
 
-void updateSimulation() {
-    if (fp64) {
+void updateSimulation()
+{
+    if (fp64)
+    {
         NBodyDemo<double>::updateSimulation();
     }
-    else {
+    else
+    {
         NBodyDemo<float>::updateSimulation();
     }
 }
 
-void displayNBodySystem() {
-    if (fp64) {
+void displayNBodySystem()
+{
+    if (fp64)
+    {
         NBodyDemo<double>::display();
     }
-    else {
+    else
+    {
         NBodyDemo<float>::display();
     }
 }
@@ -592,7 +613,8 @@ void display()
     // update the simulation
     if (!bPause)
     {
-        if (cycleDemo && (sdkGetTimerValue(&demoTimer) > demoTime)) {
+        if (cycleDemo && (sdkGetTimerValue(&demoTimer) > demoTime))
+        {
             activeDemo = (activeDemo + 1) % numDemos;
             selectDemo(activeDemo);
         }
@@ -645,7 +667,8 @@ void display()
             {
                 sprintf(msg1, "%0.2f billion interactions per second", interactionsPerSecond);
             }
-            else {
+            else
+            {
                 sprintf(msg1, "%0.2f GFLOP/s", gflops);
             }
 
@@ -679,37 +702,38 @@ void display()
         float milliseconds = 1;
 
         // stop timer
-        if (useCpu) {
+        if (useCpu)
+        {
             milliseconds = sdkGetTimerValue(&timer);
             sdkResetTimer(&timer);
         }
-        else {
+        else
+        {
             checkCudaErrors(cudaEventRecord(stopEvent, 0));
             checkCudaErrors(cudaEventSynchronize(stopEvent));
-            checkCudaErrors(
-                cudaEventElapsedTime(&milliseconds, startEvent, stopEvent));
+            checkCudaErrors(cudaEventElapsedTime(&milliseconds, startEvent, stopEvent));
         }
 
         milliseconds /= (float)fpsCount;
         computePerfStats(interactionsPerSecond, gflops, milliseconds, 1);
 
         ifps = 1.f / (milliseconds / 1000.f);
-        sprintf(fps,
-            "CUDA N-Body (%d bodies): "
+        sprintf(fps, "CUDA N-Body (%d bodies): "
             "%0.1f fps | %0.1f BIPS | %0.1f GFLOP/s | %s",
-            numBodies, ifps, interactionsPerSecond, gflops,
-            fp64 ? "double precision" : "single precision");
+            numBodies, ifps, interactionsPerSecond, gflops, fp64 ? "double precision" : "single precision");
 
         glutSetWindowTitle(fps);
         fpsCount = 0;
         fpsLimit = (ifps > 1.f) ? (int)ifps : 1;
 
-        if (bPause) {
+        if (bPause)
+        {
             fpsLimit = 0;
         }
 
         // restart timer
-        if (!useCpu) {
+        if (!useCpu)
+        {
             checkCudaErrors(cudaEventRecord(startEvent, 0));
         }
     }
@@ -717,7 +741,8 @@ void display()
     glutReportErrors();
 }
 
-void reshape(int w, int h) {
+void reshape(int w, int h)
+{
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();	//設置單位矩陣
     gluPerspective(60.0, (float)w / (float)h, 0.1, 1000.0);
@@ -726,38 +751,48 @@ void reshape(int w, int h) {
     glViewport(0, 0, w, h);
 }
 
-void updateParams() {
-    if (fp64) {
+void updateParams()
+{
+    if (fp64)
+    {
         NBodyDemo<double>::updateParams();
     }
-    else {
+    else
+    {
         NBodyDemo<float>::updateParams();
     }
 }
 
-void mouse(int button, int state, int x, int y) {
-    if (bShowSliders) {
+void mouse(int button, int state, int x, int y)
+{
+    if (bShowSliders)
+    {
         // call list mouse function
-        if (paramlist->Mouse(x, y, button, state)) {
+        if (paramlist->Mouse(x, y, button, state))
+        {
             updateParams();
         }
     }
 
     int mods;
 
-    if (state == GLUT_DOWN) {
+    if (state == GLUT_DOWN)
+    {
         buttonState |= 1 << button;
     }
-    else if (state == GLUT_UP) {
+    else if (state == GLUT_UP)
+    {
         buttonState = 0;
     }
 
     mods = glutGetModifiers();
 
-    if (mods & GLUT_ACTIVE_SHIFT) {
+    if (mods & GLUT_ACTIVE_SHIFT)
+    {
         buttonState = 2;
     }
-    else if (mods & GLUT_ACTIVE_CTRL) {
+    else if (mods & GLUT_ACTIVE_CTRL)
+    {
         buttonState = 3;
     }
 
@@ -925,18 +960,21 @@ void special(int key, int x, int y)
     glutPostRedisplay();
 }
 
-void idle(void) { glutPostRedisplay(); }
+void idle(void)
+{
+    glutPostRedisplay();
+}
 
 void showHelp()
 {
     printf("\t-fullscreen       (run n-body simulation in fullscreen mode)\n");
-    printf(        "\t-fp64             (use double precision floating point values for simulation)\n");
+    printf("\t-fp64             (use double precision floating point values for simulation)\n");
     printf("\t-hostmem          (stores simulation data in host memory)\n");
     printf("\t-benchmark        (run benchmark to measure performance) \n");
-    printf(        "\t-numbodies=<N>    (number of bodies (>= 1) to run in simulation) \n");
-    printf(        "\t-device=<d>       (where d=0,1,2.... for the CUDA device to use)\n");
-    printf(        "\t-numdevices=<i>   (where i=(number of CUDA devices > 0) to use for simulation)\n");
-    printf(        "\t-compare          (compares simulation results running once on the default GPU and once on the CPU)\n");
+    printf("\t-numbodies=<N>    (number of bodies (>= 1) to run in simulation) \n");
+    printf("\t-device=<d>       (where d=0,1,2.... for the CUDA device to use)\n");
+    printf("\t-numdevices=<i>   (where i=(number of CUDA devices > 0) to use for simulation)\n");
+    printf("\t-compare          (compares simulation results running once on the default GPU and once on the CPU)\n");
     printf("\t-cpu              (run n-body simulation on the CPU)\n");
     printf("\t-tipsy=<file.bin> (load a tipsy model file for simulation)\n\n");
 }
@@ -955,10 +993,10 @@ int main(int argc, char** argv)
         return 0;
     }
 
-    printf(        "Run \"nbody -benchmark [-numbodies=<numBodies>]\" to measure performance.\n");
+    printf("Run \"nbody -benchmark [-numbodies=<numBodies>]\" to measure performance.\n");
     showHelp();
 
-    printf(        "NOTE: The CUDA Samples are not meant for performance measurements. "
+    printf("NOTE: The CUDA Samples are not meant for performance measurements. "
         "Results may vary when GPU Boost is enabled.\n\n");
 
     bFullscreen = (checkCmdLineFlag(argc, (const char**)argv, "fullscreen") != 0);
@@ -970,7 +1008,7 @@ int main(int argc, char** argv)
 
     benchmark = (checkCmdLineFlag(argc, (const char**)argv, "benchmark") != 0);
 
-    compareToCPU =        ((checkCmdLineFlag(argc, (const char**)argv, "compare") != 0) ||            (checkCmdLineFlag(argc, (const char**)argv, "qatest") != 0));
+    compareToCPU = ((checkCmdLineFlag(argc, (const char**)argv, "compare") != 0) || (checkCmdLineFlag(argc, (const char**)argv, "qatest") != 0));
 
     QATest = (checkCmdLineFlag(argc, (const char**)argv, "qatest") != 0);
     useHostMem = (checkCmdLineFlag(argc, (const char**)argv, "hostmem") != 0);
@@ -982,11 +1020,11 @@ int main(int argc, char** argv)
 
     if (checkCmdLineFlag(argc, (const char**)argv, "numdevices"))
     {
-        numDevsRequested =            getCmdLineArgumentInt(argc, (const char**)argv, "numdevices");
+        numDevsRequested = getCmdLineArgumentInt(argc, (const char**)argv, "numdevices");
 
         if (numDevsRequested < 1)
         {
-            printf(                "Error: \"number of CUDA devices\" specified %d is invalid.  Value should be >= 1\n",
+            printf("Error: \"number of CUDA devices\" specified %d is invalid.  Value should be >= 1\n",
                 numDevsRequested);
             exit(bTestResults ? EXIT_SUCCESS : EXIT_FAILURE);
         }
@@ -1002,7 +1040,7 @@ int main(int argc, char** argv)
 
     if (numDevsAvailable < numDevsRequested)
     {
-        printf("Error: only %d Devices available, %d requested.  Exiting.\n",            numDevsAvailable, numDevsRequested);
+        printf("Error: only %d Devices available, %d requested.  Exiting.\n", numDevsAvailable, numDevsRequested);
         exit(EXIT_FAILURE);
     }
 
@@ -1011,7 +1049,8 @@ int main(int argc, char** argv)
         // If user did not explicitly request host memory to be used, we default to P2P.
         // We fallback to host memory, if any of GPUs does not support P2P.
         bool allGPUsSupportP2P = true;
-        if (!useHostMem) {
+        if (!useHostMem)
+        {
             // Enable P2P only in one direction, as every peer will access gpu0
             for (int i = 1; i < numDevsRequested; ++i)
             {
@@ -1033,8 +1072,8 @@ int main(int argc, char** argv)
     }
 
     printf("> %s mode\n", bFullscreen ? "Fullscreen" : "Windowed");
-    printf("> Simulation data stored in %s memory\n",        useHostMem ? "system" : "video");
-    printf("> %s precision floating point simulation\n",        fp64 ? "Double" : "Single");
+    printf("> Simulation data stored in %s memory\n", useHostMem ? "system" : "video");
+    printf("> %s precision floating point simulation\n", fp64 ? "Double" : "Single");
     printf("> %d Devices used for simulation\n", numDevsRequested);
 
     int devID;
@@ -1082,7 +1121,6 @@ int main(int argc, char** argv)
             {
                 customGPU = true;
             }
-
             devID = findCudaDevice(argc, (const char**)argv);
         }
 
@@ -1098,7 +1136,6 @@ int main(int argc, char** argv)
             printf("MultiGPU n-body requires CUDA 4.0 or later\n");
             exit(EXIT_SUCCESS);
         }
-
 #endif
 
         // Initialize devices
@@ -1112,7 +1149,7 @@ int main(int argc, char** argv)
         {
             cudaDeviceProp props;
             checkCudaErrors(cudaGetDeviceProperties(&props, devID));
-            printf("> Compute %d.%d CUDA device: [%s]\n", props.major, props.minor,                props.name);
+            printf("> Compute %d.%d CUDA device: [%s]\n", props.major, props.minor, props.name);
         }
         else
         {
@@ -1121,7 +1158,7 @@ int main(int argc, char** argv)
                 cudaDeviceProp props;
                 checkCudaErrors(cudaGetDeviceProperties(&props, i));
 
-                printf("> Compute %d.%d CUDA device: [%s]\n", props.major, props.minor,                    props.name);
+                printf("> Compute %d.%d CUDA device: [%s]\n", props.major, props.minor, props.name);
 
                 if (useHostMem)
                 {
@@ -1140,7 +1177,7 @@ int main(int argc, char** argv)
 
                     checkCudaErrors(cudaSetDeviceFlags(cudaDeviceMapHost));
 #else
-                    fprintf(stderr,                        "This CUDART version does not support <cudaDeviceProp.canMapHostMemory> field\n");
+                    fprintf(stderr, "This CUDART version does not support <cudaDeviceProp.canMapHostMemory> field\n");
                     exit(EXIT_SUCCESS);
 #endif
                 }
@@ -1158,7 +1195,7 @@ int main(int argc, char** argv)
 
         if (fp64 && !bSupportDouble)
         {
-            fprintf(stderr,                "One or more of the requested devices does not support double precision floating-point\n");
+            fprintf(stderr, "One or more of the requested devices does not support double precision floating-point\n");
             exit(EXIT_SUCCESS);
         }
     }
@@ -1199,7 +1236,7 @@ int main(int argc, char** argv)
         {
             cudaDeviceProp props;
             checkCudaErrors(cudaGetDeviceProperties(&props, i));
-            numBodies +=                blockSize * (props.major >= 2 ? 4 : 1) * props.multiProcessorCount;
+            numBodies += blockSize * (props.major >= 2 ? 4 : 1) * props.multiProcessorCount;
         }
     }
 
@@ -1209,13 +1246,13 @@ int main(int argc, char** argv)
 
         if (numBodies < 1)
         {
-            printf(                "Error: \"number of bodies\" specified %d is invalid.  Value should be >= 1\n",                numBodies);
+            printf("Error: \"number of bodies\" specified %d is invalid.  Value should be >= 1\n", numBodies);
             exit(bTestResults ? EXIT_SUCCESS : EXIT_FAILURE);
         }
         else if (numBodies % blockSize)
         {
             int newNumBodies = ((numBodies / blockSize) + 1) * blockSize;
-            printf(                "Warning: \"number of bodies\" specified %d is not a multiple of %d.\n",                numBodies, blockSize);
+            printf("Warning: \"number of bodies\" specified %d is not a multiple of %d.\n", numBodies, blockSize);
             printf("Rounding up to the nearest multiple: %d.\n", newNumBodies);
             numBodies = newNumBodies;
         }
@@ -1234,45 +1271,47 @@ int main(int argc, char** argv)
         bShowSliders = false;
     }
 
-    if (numBodies <= 1024) {
+    if (numBodies <= 1024)
+    {
         activeParams.m_clusterScale = 1.52f;
         activeParams.m_velocityScale = 2.f;
     }
-    else if (numBodies <= 2048) {
+    else if (numBodies <= 2048)
+    {
         activeParams.m_clusterScale = 1.56f;
         activeParams.m_velocityScale = 2.64f;
     }
-    else if (numBodies <= 4096) {
+    else if (numBodies <= 4096)
+    {
         activeParams.m_clusterScale = 1.68f;
         activeParams.m_velocityScale = 2.98f;
     }
-    else if (numBodies <= 8192) {
+    else if (numBodies <= 8192)
+    {
         activeParams.m_clusterScale = 1.98f;
         activeParams.m_velocityScale = 2.9f;
     }
-    else if (numBodies <= 16384) {
+    else if (numBodies <= 16384)
+    {
         activeParams.m_clusterScale = 1.54f;
         activeParams.m_velocityScale = 8.f;
     }
-    else if (numBodies <= 32768) {
+    else if (numBodies <= 32768)
+    {
         activeParams.m_clusterScale = 1.44f;
         activeParams.m_velocityScale = 11.f;
     }
 
-    // Create the demo -- either double (fp64) or float (fp32, default)
-    // implementation
+    // Create the demo -- either double (fp64) or float (fp32, default) implementation
     NBodyDemo<float>::Create();
 
-    NBodyDemo<float>::init(numBodies, numDevsRequested, blockSize,
-        !(benchmark || compareToCPU || useHostMem), useHostMem,
-        useP2P, useCpu, devID);
+    NBodyDemo<float>::init(numBodies, numDevsRequested, blockSize, !(benchmark || compareToCPU || useHostMem), useHostMem, useP2P, useCpu, devID);
     NBodyDemo<float>::reset(numBodies, NBODY_CONFIG_SHELL);
 
-    if (bSupportDouble) {
+    if (bSupportDouble)
+    {
         NBodyDemo<double>::Create();
-        NBodyDemo<double>::init(numBodies, numDevsRequested, blockSize,
-            !(benchmark || compareToCPU || useHostMem),
-            useHostMem, useP2P, useCpu, devID);
+        NBodyDemo<double>::init(numBodies, numDevsRequested, blockSize, !(benchmark || compareToCPU || useHostMem), useHostMem, useP2P, useCpu, devID);
         NBodyDemo<double>::reset(numBodies, NBODY_CONFIG_SHELL);
     }
 

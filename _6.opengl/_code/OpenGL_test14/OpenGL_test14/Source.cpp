@@ -4,6 +4,8 @@
 #include <stdio.h>
 #include <iostream>
 
+#define REFRESH_DELAY 1000  // ms
+
 // 繪圖回調函數
 void display(void)
 {
@@ -75,6 +77,13 @@ void mainMenu(int i)
     keyboard((unsigned char)i, 0, 0);
 }
 
+void timerEvent(int value)
+{
+    printf("經過1秒 ");
+    glutPostRedisplay();
+    glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
+}
+
 void initMenus()
 {
     glutCreateMenu(mainMenu);   //選單管理
@@ -114,6 +123,8 @@ int main(int argc, char** argv)
     glutIdleFunc(idle);         //設定callback function, 利用idle事件進行重畫
     //cleanup TBD
     //timer TBD
+    glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
+
     initMenus();        //設定表單按鈕
 
     glutMainLoop();	//開始主循環繪製

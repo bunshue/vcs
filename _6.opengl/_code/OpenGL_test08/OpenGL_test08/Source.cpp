@@ -64,6 +64,19 @@ void display(void)
 	glPopMatrix();
 	glColor3f(1.0, 1.0, 1.0);
 
+	//暫放
+	glColor3f(1.0, 0.0, 1.0);
+	glBegin(GL_QUADS);
+	//glTexCoord2f(0.0f, 0.0f);
+	glVertex2f(0.0f, 0.0f);
+	//glTexCoord2f(0.5f, 0.0f);
+	glVertex2f(0.5f, 0.0f);
+	//glTexCoord2f(0.5f, 0.5f);
+	glVertex2f(0.5f, 0.5f);
+	//glTexCoord2f(0.0f, 0.5f);
+	glVertex2f(0.0f, 0.5f);
+	glEnd();
+
 
 	glutSwapBuffers();
 	glFlush();

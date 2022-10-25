@@ -388,6 +388,7 @@ void display(void)
     glEnable(GL_FRAGMENT_PROGRAM_ARB);
     glDisable(GL_DEPTH_TEST);
 
+    //畫一個白色區域, 綁定紋理 用
     glBegin(GL_QUADS);
     glTexCoord2f(0.0f, 0.0f);
     glVertex2f(0.0f, 0.0f);
@@ -849,12 +850,12 @@ static const char* shader_code =
 "TEX result.color, fragment.texcoord, texture[0], 2D; \n"
 "END";
 
-GLuint compileASMShader(GLenum program_type, const char* code) {
+GLuint compileASMShader(GLenum program_type, const char* code)
+{
     GLuint program_id;
     glGenProgramsARB(1, &program_id);
     glBindProgramARB(program_type, program_id);
-    glProgramStringARB(program_type, GL_PROGRAM_FORMAT_ASCII_ARB,
-        (GLsizei)strlen(code), (GLubyte*)code);
+    glProgramStringARB(program_type, GL_PROGRAM_FORMAT_ASCII_ARB, (GLsizei)strlen(code), (GLubyte*)code);
 
     GLint error_pos;
     glGetIntegerv(GL_PROGRAM_ERROR_POSITION_ARB, &error_pos);
@@ -863,8 +864,7 @@ GLuint compileASMShader(GLenum program_type, const char* code) {
     {
         const GLubyte* error_string;
         error_string = glGetString(GL_PROGRAM_ERROR_STRING_ARB);
-        fprintf(stderr, "Program error at position: %d\n%s\n", (int)error_pos,
-            error_string);
+        fprintf(stderr, "Program error at position: %d\n%s\n", (int)error_pos, error_string);
         return 0;
     }
 
@@ -996,16 +996,19 @@ void initData(int argc, char** argv)
     // initialize some of the arguments
     if (checkCmdLineFlag(argc, (const char**)argv, "xOff"))
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXX\n");;
         xOff = getCmdLineArgumentFloat(argc, (const char**)argv, "xOff");
     }
 
     if (checkCmdLineFlag(argc, (const char**)argv, "yOff"))
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXX\n");;
         yOff = getCmdLineArgumentFloat(argc, (const char**)argv, "yOff");
     }
 
     if (checkCmdLineFlag(argc, (const char**)argv, "scale"))
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXX\n");;
         scale = getCmdLineArgumentFloat(argc, (const char**)argv, "xOff");
     }
 
@@ -1033,6 +1036,7 @@ int runSingleTest(int argc, char** argv)
 
     if (checkCmdLineFlag(argc, (const char**)argv, "fp64"))
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXX\n");;
         haveDouble = true;
     }
 
@@ -1048,6 +1052,7 @@ int runSingleTest(int argc, char** argv)
 
     if (g_isJuliaSet)
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXX\n");;
         char* ref_path = sdkFindFilePath("params.txt", argv[0]);
         startJulia(ref_path);
 
@@ -1154,7 +1159,7 @@ int main(int argc, char** argv)
     // parse command line arguments
     if (checkCmdLineFlag(argc, (const char**)argv, "help"))
     {
-        printf("XXXXXXX\n");
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXX\n");;
         printHelp();
         exit(EXIT_SUCCESS);
     }
@@ -1163,7 +1168,7 @@ int main(int argc, char** argv)
 
     if (checkCmdLineFlag(argc, (const char**)argv, "mode"))
     {
-        printf("XXXXXXX\n");
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXX\n");;
         mode = getCmdLineArgumentInt(argc, (const char**)argv, "mode");
         g_isJuliaSet = mode;
     }
@@ -1175,7 +1180,7 @@ int main(int argc, char** argv)
     // Set the initial parameters for either Mandelbrot and Julia sets and reset all parameters
     if (g_isJuliaSet)  // settings for Julia
     {
-        printf("XXXXXXX\n");
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXX\n");;
         char* ref_path = sdkFindFilePath("params.txt", argv[0]);
         startJulia(ref_path);
     }
@@ -1200,11 +1205,10 @@ int main(int argc, char** argv)
 
     if (checkCmdLineFlag(argc, (const char**)argv, "file"))
     {
-        printf("XXXXXXX\n");
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXX\n");;
         fpsLimit = frameCheckNumber;
 
-        // use command-line specified CUDA device, otherwise use device with highest
-        // Gflops/s
+        // use command-line specified CUDA device, otherwise use device with highest Gflops/s
         findCudaDevice(argc, (const char**)argv);  // no OpenGL usage
 
         // We run the Automated Testing code path
@@ -1214,10 +1218,9 @@ int main(int argc, char** argv)
     }
     else if (checkCmdLineFlag(argc, (const char**)argv, "benchmark"))
     {
-        printf("XXXXXXX\n");
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXX\n");;
         // run benchmark
-        // use command-line specified CUDA device, otherwise use device with highest
-        // Gflops/s
+        // use command-line specified CUDA device, otherwise use device with highest Gflops/s
         findCudaDevice(argc, (const char**)argv);
 
         // We run the Automated Performance Test
@@ -1228,7 +1231,7 @@ int main(int argc, char** argv)
     // use command-line specified CUDA device, otherwise use device with highest Gflops/s
     else if (checkCmdLineFlag(argc, (const char**)argv, "device"))
     {
-        printf("XXXXXXX\n");
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXX\n");;
         printf("[%s]\n", argv[0]);
         printf("   Does not explicitly support -device=n in OpenGL mode\n");
         printf("   To use -device=n, the sample must be running w/o OpenGL\n\n");
@@ -1240,9 +1243,8 @@ int main(int argc, char** argv)
     // Otherwise it succeeds, we will continue to run this sample
     initData(argc, argv);
 
-    // Initialize OpenGL context first before the CUDA context is created.  This
-    // is needed
-    // to achieve optimal performance with OpenGL/CUDA interop.
+    // Initialize OpenGL context first before the CUDA context is created.
+    // This is needed to achieve optimal performance with OpenGL/CUDA interop.
     initGL(&argc, argv);
     initOpenGLBuffers(imageW, imageH);
 

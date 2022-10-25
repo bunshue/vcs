@@ -84,8 +84,7 @@ static CUT_THREADPROC solverThread(TOptionPlan* plan)
     // Start the timer
     sdkStartTimer(&hTimer[plan->device]);
 
-    // Allocate intermediate memory for MC integrator and initialize
-    // RNG states
+    // Allocate intermediate memory for MC integrator and initialize RNG states
     initMonteCarloGPU(plan);
 
     // Main computation
@@ -131,8 +130,7 @@ static void multiSolver(TOptionPlan* plan, int nPlans)
         cudaDeviceProp deviceProp;
         checkCudaErrors(cudaGetDeviceProperties(&deviceProp, plan[i].device));
 
-        // Allocate intermediate memory for MC integrator
-        // and initialize RNG state
+        // Allocate intermediate memory for MC integrator and initialize RNG state
         initMonteCarloGPU(&plan[i]);
     }
 
@@ -204,6 +202,7 @@ int main(int argc, char** argv)
 
     if (checkCmdLineFlag(argc, (const char**)argv, "qatest"))
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
         bqatest = true;
     }
 
@@ -212,6 +211,7 @@ int main(int argc, char** argv)
 
     if (checkCmdLineFlag(argc, (const char**)argv, "h") || checkCmdLineFlag(argc, (const char**)argv, "help"))
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
         usage();
         exit(EXIT_SUCCESS);
     }

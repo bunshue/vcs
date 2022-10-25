@@ -388,6 +388,7 @@ int main(int argc, char** argv)
     // automated build testing harness
     if (checkCmdLineFlag(argc, (const char**)argv, "file"))
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXX\n");
         getCmdLineArgumentString(argc, (const char**)argv, "file", &ref_file);
     }
 

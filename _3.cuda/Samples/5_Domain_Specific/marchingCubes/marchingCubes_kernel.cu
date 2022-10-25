@@ -100,8 +100,7 @@ __device__ float tangle(float x, float y, float z)
     x *= 3.0f;
     y *= 3.0f;
     z *= 3.0f;
-    return (x * x * x * x - 5.0f * x * x + y * y * y * y - 5.0f * y * y +
-        z * z * z * z - 5.0f * z * z + 11.8f) * 0.2f + 0.5f;
+    return (x * x * x * x - 5.0f * x * x + y * y * y * y - 5.0f * y * y + z * z * z * z - 5.0f * z * z + 11.8f) * 0.2f + 0.5f;
 }
 
 // evaluate field function at point
@@ -130,8 +129,7 @@ __device__ float sampleVolume(cudaTextureObject_t volumeTex, uchar* data, uint3 
     return tex1Dfetch<float>(volumeTex, i);
 }
 
-// compute position in 3d grid from 1d index
-// only works for power of 2 sizes
+// compute position in 3d grid from 1d index only works for power of 2 sizes
 __device__ uint3 calcGridPos(uint i, uint3 gridSizeShift, uint3 gridSizeMask)
 {
     uint3 gridPos;
@@ -141,14 +139,10 @@ __device__ uint3 calcGridPos(uint i, uint3 gridSizeShift, uint3 gridSizeMask)
     return gridPos;
 }
 
-// classify voxel based on number of vertices it will generate
-// one thread per voxel
-__global__ void classifyVoxel(uint* voxelVerts, uint* voxelOccupied,
-    uchar* volume, uint3 gridSize,
-    uint3 gridSizeShift, uint3 gridSizeMask,
-    uint numVoxels, float3 voxelSize, float isoValue,
-    cudaTextureObject_t numVertsTex,
-    cudaTextureObject_t volumeTex)
+// classify voxel based on number of vertices it will generate one thread per voxel
+__global__ void classifyVoxel(uint* voxelVerts, uint* voxelOccupied, uchar* volume, uint3 gridSize,
+    uint3 gridSizeShift, uint3 gridSizeMask, uint numVoxels, float3 voxelSize, float isoValue,
+    cudaTextureObject_t numVertsTex, cudaTextureObject_t volumeTex)
 {
     uint blockId = __mul24(blockIdx.y, gridDim.x) + blockIdx.x;
     uint i = __mul24(blockId, blockDim.x) + threadIdx.x;
@@ -205,15 +199,11 @@ __global__ void classifyVoxel(uint* voxelVerts, uint* voxelOccupied,
 }
 
 extern "C" void launch_classifyVoxel(dim3 grid, dim3 threads, uint * voxelVerts,
-    uint * voxelOccupied, uchar * volume,
-    uint3 gridSize, uint3 gridSizeShift,
-    uint3 gridSizeMask, uint numVoxels,
-    float3 voxelSize, float isoValue)
+    uint * voxelOccupied, uchar * volume, uint3 gridSize, uint3 gridSizeShift,
+    uint3 gridSizeMask, uint numVoxels, float3 voxelSize, float isoValue)
 {
     // calculate number of vertices need per voxel
-    classifyVoxel << <grid, threads >> > (voxelVerts, voxelOccupied, volume, gridSize,
-        gridSizeShift, gridSizeMask, numVoxels,
-        voxelSize, isoValue, numVertsTex, volumeTex);
+    classifyVoxel << <grid, threads >> > (voxelVerts, voxelOccupied, volume, gridSize, gridSizeShift, gridSizeMask, numVoxels, voxelSize, isoValue, numVertsTex, volumeTex);
     getLastCudaError("classifyVoxel failed");
 }
 
@@ -229,10 +219,8 @@ __global__ void compactVoxels(uint* compactedVoxelArray, uint* voxelOccupied, ui
     }
 }
 
-extern "C" void launch_compactVoxels(dim3 grid, dim3 threads,
-    uint * compactedVoxelArray,
-    uint * voxelOccupied,
-    uint * voxelOccupiedScan, uint numVoxels)
+extern "C" void launch_compactVoxels(dim3 grid, dim3 threads, uint * compactedVoxelArray,
+    uint * voxelOccupied, uint * voxelOccupiedScan, uint numVoxels)
 {
     compactVoxels << <grid, threads >> > (compactedVoxelArray, voxelOccupied, voxelOccupiedScan, numVoxels);
     getLastCudaError("compactVoxels failed");
@@ -258,11 +246,9 @@ __device__ void vertexInterp2(float isolevel, float3 p0, float3 p1, float4 f0, f
 
 // generate triangles for each voxel using marching cubes
 // interpolates normals from field function
-__global__ void generateTriangles(
-    float4* pos, float4* norm, uint* compactedVoxelArray, uint* numVertsScanned,
+__global__ void generateTriangles(float4* pos, float4* norm, uint* compactedVoxelArray, uint* numVertsScanned,
     uint3 gridSize, uint3 gridSizeShift, uint3 gridSizeMask, float3 voxelSize,
-    float isoValue, uint activeVoxels, uint maxVerts,
-    cudaTextureObject_t triTex, cudaTextureObject_t numVertsTex)
+    float isoValue, uint activeVoxels, uint maxVerts, cudaTextureObject_t triTex, cudaTextureObject_t numVertsTex)
 {
     uint blockId = __mul24(blockIdx.y, gridDim.x) + blockIdx.x;
     uint i = __mul24(blockId, blockDim.x) + threadIdx.x;
@@ -328,73 +314,38 @@ __global__ void generateTriangles(
     __shared__ float3 vertlist[12 * NTHREADS];
     __shared__ float3 normlist[12 * NTHREADS];
 
-    vertexInterp2(isoValue, v[0], v[1], field[0], field[1], vertlist[threadIdx.x],
-        normlist[threadIdx.x]);
-    vertexInterp2(isoValue, v[1], v[2], field[1], field[2],
-        vertlist[threadIdx.x + NTHREADS],
-        normlist[threadIdx.x + NTHREADS]);
-    vertexInterp2(isoValue, v[2], v[3], field[2], field[3],
-        vertlist[threadIdx.x + (NTHREADS * 2)],
-        normlist[threadIdx.x + (NTHREADS * 2)]);
-    vertexInterp2(isoValue, v[3], v[0], field[3], field[0],
-        vertlist[threadIdx.x + (NTHREADS * 3)],
-        normlist[threadIdx.x + (NTHREADS * 3)]);
-    vertexInterp2(isoValue, v[4], v[5], field[4], field[5],
-        vertlist[threadIdx.x + (NTHREADS * 4)],
-        normlist[threadIdx.x + (NTHREADS * 4)]);
-    vertexInterp2(isoValue, v[5], v[6], field[5], field[6],
-        vertlist[threadIdx.x + (NTHREADS * 5)],
-        normlist[threadIdx.x + (NTHREADS * 5)]);
-    vertexInterp2(isoValue, v[6], v[7], field[6], field[7],
-        vertlist[threadIdx.x + (NTHREADS * 6)],
-        normlist[threadIdx.x + (NTHREADS * 6)]);
-    vertexInterp2(isoValue, v[7], v[4], field[7], field[4],
-        vertlist[threadIdx.x + (NTHREADS * 7)],
-        normlist[threadIdx.x + (NTHREADS * 7)]);
-    vertexInterp2(isoValue, v[0], v[4], field[0], field[4],
-        vertlist[threadIdx.x + (NTHREADS * 8)],
-        normlist[threadIdx.x + (NTHREADS * 8)]);
-    vertexInterp2(isoValue, v[1], v[5], field[1], field[5],
-        vertlist[threadIdx.x + (NTHREADS * 9)],
-        normlist[threadIdx.x + (NTHREADS * 9)]);
-    vertexInterp2(isoValue, v[2], v[6], field[2], field[6],
-        vertlist[threadIdx.x + (NTHREADS * 10)],
-        normlist[threadIdx.x + (NTHREADS * 10)]);
-    vertexInterp2(isoValue, v[3], v[7], field[3], field[7],
-        vertlist[threadIdx.x + (NTHREADS * 11)],
-        normlist[threadIdx.x + (NTHREADS * 11)]);
+    vertexInterp2(isoValue, v[0], v[1], field[0], field[1], vertlist[threadIdx.x], normlist[threadIdx.x]);
+    vertexInterp2(isoValue, v[1], v[2], field[1], field[2], vertlist[threadIdx.x + NTHREADS], normlist[threadIdx.x + NTHREADS]);
+    vertexInterp2(isoValue, v[2], v[3], field[2], field[3], vertlist[threadIdx.x + (NTHREADS * 2)], normlist[threadIdx.x + (NTHREADS * 2)]);
+    vertexInterp2(isoValue, v[3], v[0], field[3], field[0], vertlist[threadIdx.x + (NTHREADS * 3)], normlist[threadIdx.x + (NTHREADS * 3)]);
+    vertexInterp2(isoValue, v[4], v[5], field[4], field[5], vertlist[threadIdx.x + (NTHREADS * 4)], normlist[threadIdx.x + (NTHREADS * 4)]);
+    vertexInterp2(isoValue, v[5], v[6], field[5], field[6], vertlist[threadIdx.x + (NTHREADS * 5)], normlist[threadIdx.x + (NTHREADS * 5)]);
+    vertexInterp2(isoValue, v[6], v[7], field[6], field[7], vertlist[threadIdx.x + (NTHREADS * 6)], normlist[threadIdx.x + (NTHREADS * 6)]);
+    vertexInterp2(isoValue, v[7], v[4], field[7], field[4], vertlist[threadIdx.x + (NTHREADS * 7)], normlist[threadIdx.x + (NTHREADS * 7)]);
+    vertexInterp2(isoValue, v[0], v[4], field[0], field[4], vertlist[threadIdx.x + (NTHREADS * 8)], normlist[threadIdx.x + (NTHREADS * 8)]);
+    vertexInterp2(isoValue, v[1], v[5], field[1], field[5], vertlist[threadIdx.x + (NTHREADS * 9)], normlist[threadIdx.x + (NTHREADS * 9)]);
+    vertexInterp2(isoValue, v[2], v[6], field[2], field[6], vertlist[threadIdx.x + (NTHREADS * 10)], normlist[threadIdx.x + (NTHREADS * 10)]);
+    vertexInterp2(isoValue, v[3], v[7], field[3], field[7], vertlist[threadIdx.x + (NTHREADS * 11)], normlist[threadIdx.x + (NTHREADS * 11)]);
     __syncthreads();
 
 #else
     float3 vertlist[12];
     float3 normlist[12];
 
-    vertexInterp2(isoValue, v[0], v[1], field[0], field[1], vertlist[0],
-        normlist[0]);
-    vertexInterp2(isoValue, v[1], v[2], field[1], field[2], vertlist[1],
-        normlist[1]);
-    vertexInterp2(isoValue, v[2], v[3], field[2], field[3], vertlist[2],
-        normlist[2]);
-    vertexInterp2(isoValue, v[3], v[0], field[3], field[0], vertlist[3],
-        normlist[3]);
+    vertexInterp2(isoValue, v[0], v[1], field[0], field[1], vertlist[0], normlist[0]);
+    vertexInterp2(isoValue, v[1], v[2], field[1], field[2], vertlist[1], normlist[1]);
+    vertexInterp2(isoValue, v[2], v[3], field[2], field[3], vertlist[2], normlist[2]);
+    vertexInterp2(isoValue, v[3], v[0], field[3], field[0], vertlist[3], normlist[3]);
 
-    vertexInterp2(isoValue, v[4], v[5], field[4], field[5], vertlist[4],
-        normlist[4]);
-    vertexInterp2(isoValue, v[5], v[6], field[5], field[6], vertlist[5],
-        normlist[5]);
-    vertexInterp2(isoValue, v[6], v[7], field[6], field[7], vertlist[6],
-        normlist[6]);
-    vertexInterp2(isoValue, v[7], v[4], field[7], field[4], vertlist[7],
-        normlist[7]);
+    vertexInterp2(isoValue, v[4], v[5], field[4], field[5], vertlist[4], normlist[4]);
+    vertexInterp2(isoValue, v[5], v[6], field[5], field[6], vertlist[5], normlist[5]);
+    vertexInterp2(isoValue, v[6], v[7], field[6], field[7], vertlist[6], normlist[6]);
+    vertexInterp2(isoValue, v[7], v[4], field[7], field[4], vertlist[7], normlist[7]);
 
-    vertexInterp2(isoValue, v[0], v[4], field[0], field[4], vertlist[8],
-        normlist[8]);
-    vertexInterp2(isoValue, v[1], v[5], field[1], field[5], vertlist[9],
-        normlist[9]);
-    vertexInterp2(isoValue, v[2], v[6], field[2], field[6], vertlist[10],
-        normlist[10]);
-    vertexInterp2(isoValue, v[3], v[7], field[3], field[7], vertlist[11],
-        normlist[11]);
+    vertexInterp2(isoValue, v[0], v[4], field[0], field[4], vertlist[8], normlist[8]);
+    vertexInterp2(isoValue, v[1], v[5], field[1], field[5], vertlist[9], normlist[9]);
+    vertexInterp2(isoValue, v[2], v[6], field[2], field[6], vertlist[10], normlist[10]);
+    vertexInterp2(isoValue, v[3], v[7], field[3], field[7], vertlist[11], normlist[11]);
 #endif
 
     // output triangle vertices
@@ -410,8 +361,7 @@ __global__ void generateTriangles(
         {
 #if USE_SHARED
             pos[index] = make_float4(vertlist[(edge * NTHREADS) + threadIdx.x], 1.0f);
-            norm[index] =
-                make_float4(normlist[(edge * NTHREADS) + threadIdx.x], 0.0f);
+            norm[index] = make_float4(normlist[(edge * NTHREADS) + threadIdx.x], 0.0f);
 #else
             pos[index] = make_float4(vertlist[edge], 1.0f);
             norm[index] = make_float4(normlist[edge], 0.0f);
@@ -420,16 +370,13 @@ __global__ void generateTriangles(
     }
 }
 
-extern "C" void launch_generateTriangles(
-    dim3 grid, dim3 threads, float4 * pos, float4 * norm,
+extern "C" void launch_generateTriangles(dim3 grid, dim3 threads, float4 * pos, float4 * norm,
     uint * compactedVoxelArray, uint * numVertsScanned, uint3 gridSize,
-    uint3 gridSizeShift, uint3 gridSizeMask, float3 voxelSize, float isoValue,
-    uint activeVoxels, uint maxVerts)
+    uint3 gridSizeShift, uint3 gridSizeMask, float3 voxelSize, float isoValue, uint activeVoxels, uint maxVerts)
 {
     generateTriangles << <grid, NTHREADS >> > (
         pos, norm, compactedVoxelArray, numVertsScanned, gridSize, gridSizeShift,
-        gridSizeMask, voxelSize, isoValue, activeVoxels, maxVerts, triTex,
-        numVertsTex);
+        gridSizeMask, voxelSize, isoValue, activeVoxels, maxVerts, triTex, numVertsTex);
     getLastCudaError("generateTriangles failed");
 }
 
@@ -438,18 +385,15 @@ __device__ float3 calcNormal(float3* v0, float3* v1, float3* v2)
 {
     float3 edge0 = *v1 - *v0;
     float3 edge1 = *v2 - *v0;
-    // note - it's faster to perform normalization in vertex shader rather than
-    // here
+    // note - it's faster to perform normalization in vertex shader rather than here
     return cross(edge0, edge1);
 }
 
 // version that calculates flat surface normal for each triangle
-__global__ void generateTriangles2(
-    float4* pos, float4* norm, uint* compactedVoxelArray, uint* numVertsScanned,
+__global__ void generateTriangles2(float4* pos, float4* norm, uint* compactedVoxelArray, uint* numVertsScanned,
     uchar* volume, uint3 gridSize, uint3 gridSizeShift, uint3 gridSizeMask,
     float3 voxelSize, float isoValue, uint activeVoxels, uint maxVerts,
-    cudaTextureObject_t triTex, cudaTextureObject_t numVertsTex,
-    cudaTextureObject_t volumeTex)
+    cudaTextureObject_t triTex, cudaTextureObject_t numVertsTex, cudaTextureObject_t volumeTex)
 {
     uint blockId = __mul24(blockIdx.y, gridDim.x) + blockIdx.x;
     uint i = __mul24(blockId, blockDim.x) + threadIdx.x;
@@ -524,30 +468,18 @@ __global__ void generateTriangles2(
   // use shared memory to avoid using local
     __shared__ float3 vertlist[12 * NTHREADS];
 
-    vertlist[threadIdx.x] =
-        vertexInterp(isoValue, v[0], v[1], field[0], field[1]);
-    vertlist[NTHREADS + threadIdx.x] =
-        vertexInterp(isoValue, v[1], v[2], field[1], field[2]);
-    vertlist[(NTHREADS * 2) + threadIdx.x] =
-        vertexInterp(isoValue, v[2], v[3], field[2], field[3]);
-    vertlist[(NTHREADS * 3) + threadIdx.x] =
-        vertexInterp(isoValue, v[3], v[0], field[3], field[0]);
-    vertlist[(NTHREADS * 4) + threadIdx.x] =
-        vertexInterp(isoValue, v[4], v[5], field[4], field[5]);
-    vertlist[(NTHREADS * 5) + threadIdx.x] =
-        vertexInterp(isoValue, v[5], v[6], field[5], field[6]);
-    vertlist[(NTHREADS * 6) + threadIdx.x] =
-        vertexInterp(isoValue, v[6], v[7], field[6], field[7]);
-    vertlist[(NTHREADS * 7) + threadIdx.x] =
-        vertexInterp(isoValue, v[7], v[4], field[7], field[4]);
-    vertlist[(NTHREADS * 8) + threadIdx.x] =
-        vertexInterp(isoValue, v[0], v[4], field[0], field[4]);
-    vertlist[(NTHREADS * 9) + threadIdx.x] =
-        vertexInterp(isoValue, v[1], v[5], field[1], field[5]);
-    vertlist[(NTHREADS * 10) + threadIdx.x] =
-        vertexInterp(isoValue, v[2], v[6], field[2], field[6]);
-    vertlist[(NTHREADS * 11) + threadIdx.x] =
-        vertexInterp(isoValue, v[3], v[7], field[3], field[7]);
+    vertlist[threadIdx.x] = vertexInterp(isoValue, v[0], v[1], field[0], field[1]);
+    vertlist[NTHREADS + threadIdx.x] = vertexInterp(isoValue, v[1], v[2], field[1], field[2]);
+    vertlist[(NTHREADS * 2) + threadIdx.x] = vertexInterp(isoValue, v[2], v[3], field[2], field[3]);
+    vertlist[(NTHREADS * 3) + threadIdx.x] = vertexInterp(isoValue, v[3], v[0], field[3], field[0]);
+    vertlist[(NTHREADS * 4) + threadIdx.x] = vertexInterp(isoValue, v[4], v[5], field[4], field[5]);
+    vertlist[(NTHREADS * 5) + threadIdx.x] = vertexInterp(isoValue, v[5], v[6], field[5], field[6]);
+    vertlist[(NTHREADS * 6) + threadIdx.x] = vertexInterp(isoValue, v[6], v[7], field[6], field[7]);
+    vertlist[(NTHREADS * 7) + threadIdx.x] = vertexInterp(isoValue, v[7], v[4], field[7], field[4]);
+    vertlist[(NTHREADS * 8) + threadIdx.x] = vertexInterp(isoValue, v[0], v[4], field[0], field[4]);
+    vertlist[(NTHREADS * 9) + threadIdx.x] = vertexInterp(isoValue, v[1], v[5], field[1], field[5]);
+    vertlist[(NTHREADS * 10) + threadIdx.x] = vertexInterp(isoValue, v[2], v[6], field[2], field[6]);
+    vertlist[(NTHREADS * 11) + threadIdx.x] = vertexInterp(isoValue, v[3], v[7], field[3], field[7]);
     __syncthreads();
 #else
 
@@ -572,7 +504,8 @@ __global__ void generateTriangles2(
     // output triangle vertices
     uint numVerts = tex1Dfetch<uint>(numVertsTex, cubeindex);
 
-    for (int i = 0; i < numVerts; i += 3) {
+    for (int i = 0; i < numVerts; i += 3)
+    {
         uint index = numVertsScanned[voxel] + i;
 
         float3* v[3];
@@ -601,7 +534,8 @@ __global__ void generateTriangles2(
         // calculate triangle surface normal
         float3 n = calcNormal(v[0], v[1], v[2]);
 
-        if (index < (maxVerts - 3)) {
+        if (index < (maxVerts - 3))
+        {
             pos[index] = make_float4(*v[0], 1.0f);
             norm[index] = make_float4(n, 0.0f);
 
@@ -614,20 +548,17 @@ __global__ void generateTriangles2(
     }
 }
 
-extern "C" void launch_generateTriangles2(
-    dim3 grid, dim3 threads, float4 * pos, float4 * norm,
+extern "C" void launch_generateTriangles2(dim3 grid, dim3 threads, float4 * pos, float4 * norm,
     uint * compactedVoxelArray, uint * numVertsScanned, uchar * volume,
-    uint3 gridSize, uint3 gridSizeShift, uint3 gridSizeMask, float3 voxelSize,
-    float isoValue, uint activeVoxels, uint maxVerts) {
-    generateTriangles2 << <grid, NTHREADS >> > (
-        pos, norm, compactedVoxelArray, numVertsScanned, volume, gridSize,
-        gridSizeShift, gridSizeMask, voxelSize, isoValue, activeVoxels, maxVerts,
-        triTex, numVertsTex, volumeTex);
+    uint3 gridSize, uint3 gridSizeShift, uint3 gridSizeMask, float3 voxelSize, float isoValue, uint activeVoxels, uint maxVerts)
+{
+    generateTriangles2 << <grid, NTHREADS >> > (pos, norm, compactedVoxelArray, numVertsScanned, volume, gridSize,
+        gridSizeShift, gridSizeMask, voxelSize, isoValue, activeVoxels, maxVerts, triTex, numVertsTex, volumeTex);
     getLastCudaError("generateTriangles2 failed");
 }
 
-extern "C" void ThrustScanWrapper(unsigned int* output, unsigned int* input,
-    unsigned int numElements) {
+extern "C" void ThrustScanWrapper(unsigned int* output, unsigned int* input, unsigned int numElements)
+{
     thrust::exclusive_scan(thrust::device_ptr<unsigned int>(input),
         thrust::device_ptr<unsigned int>(input + numElements),
         thrust::device_ptr<unsigned int>(output));

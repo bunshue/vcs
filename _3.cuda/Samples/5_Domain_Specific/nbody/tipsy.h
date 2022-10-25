@@ -17,9 +17,9 @@ struct gas_particle
     Real rho;
     Real temp;
     Real hsmooth;
-    Real metals ;
-    Real phi ;
-} ;
+    Real metals;
+    Real phi;
+};
 
 //struct gas_particle *gas_particles;
 
@@ -29,8 +29,8 @@ struct dark_particle
     Real pos[MAXDIM];
     Real vel[MAXDIM];
     Real eps;
-    int phi ;
-} ;
+    int phi;
+};
 
 //struct dark_particle *dark_particles;
 
@@ -39,35 +39,35 @@ struct star_particle
     Real mass;
     Real pos[MAXDIM];
     Real vel[MAXDIM];
-    Real metals ;
-    Real tform ;
+    Real metals;
+    Real tform;
     Real eps;
-    int phi ;
-} ;
+    int phi;
+};
 
 //struct star_particle *star_particles;
 
 struct dump
 {
-    double time ;
-    int nbodies ;
-    int ndim ;
-    int nsph ;
-    int ndark ;
-    int nstar ;
-} ;
+    double time;
+    int nbodies;
+    int ndim;
+    int nsph;
+    int ndark;
+    int nstar;
+};
 
-typedef struct dump header ;
+typedef struct dump header;
 
 template <typename real4>
-void read_tipsy_file(vector<real4> &bodyPositions,
-                     vector<real4> &bodyVelocities,
-                     vector<int> &bodiesIDs,
-                     const std::string &fileName,
-                     int &NTotal,
-                     int &NFirst,
-                     int &NSecond,
-                     int &NThird)
+void read_tipsy_file(vector<real4>& bodyPositions,
+    vector<real4>& bodyVelocities,
+    vector<int>& bodiesIDs,
+    const std::string& fileName,
+    int& NTotal,
+    int& NFirst,
+    int& NSecond,
+    int& NThird)
 {
     /*
        Read in our custom version of the tipsy file format written by
@@ -89,7 +89,7 @@ void read_tipsy_file(vector<real4> &bodyPositions,
     }
 
     dump  h;
-    inputFile.read((char *)&h, sizeof(h));
+    inputFile.read((char*)&h, sizeof(h));
 
     int idummy;
     real4 positions;
@@ -97,10 +97,10 @@ void read_tipsy_file(vector<real4> &bodyPositions,
 
 
     //Read tipsy header
-    NTotal        = h.nbodies;
-    NFirst        = h.ndark;
-    NSecond       = h.nstar;
-    NThird        = h.nsph;
+    NTotal = h.nbodies;
+    NFirst = h.ndark;
+    NSecond = h.nstar;
+    NThird = h.nsph;
 
     //Start reading
     int particleCount = 0;
@@ -108,33 +108,33 @@ void read_tipsy_file(vector<real4> &bodyPositions,
     dark_particle d;
     star_particle s;
 
-    for (int i=0; i < NTotal; i++)
+    for (int i = 0; i < NTotal; i++)
     {
         if (i < NFirst)
         {
-            inputFile.read((char *)&d, sizeof(d));
-            velocity.w        = d.eps;
-            positions.w       = d.mass;
-            positions.x       = d.pos[0];
-            positions.y       = d.pos[1];
-            positions.z       = d.pos[2];
-            velocity.x        = d.vel[0];
-            velocity.y        = d.vel[1];
-            velocity.z        = d.vel[2];
-            idummy            = d.phi;
+            inputFile.read((char*)&d, sizeof(d));
+            velocity.w = d.eps;
+            positions.w = d.mass;
+            positions.x = d.pos[0];
+            positions.y = d.pos[1];
+            positions.z = d.pos[2];
+            velocity.x = d.vel[0];
+            velocity.y = d.vel[1];
+            velocity.z = d.vel[2];
+            idummy = d.phi;
         }
         else
         {
-            inputFile.read((char *)&s, sizeof(s));
-            velocity.w        = s.eps;
-            positions.w       = s.mass;
-            positions.x       = s.pos[0];
-            positions.y       = s.pos[1];
-            positions.z       = s.pos[2];
-            velocity.x        = s.vel[0];
-            velocity.y        = s.vel[1];
-            velocity.z        = s.vel[2];
-            idummy            = s.phi;
+            inputFile.read((char*)&s, sizeof(s));
+            velocity.w = s.eps;
+            positions.w = s.mass;
+            positions.x = s.pos[0];
+            positions.y = s.pos[1];
+            positions.z = s.pos[2];
+            velocity.x = s.vel[0];
+            velocity.y = s.vel[1];
+            velocity.z = s.vel[2];
+            idummy = s.phi;
         }
 
         bodyPositions.push_back(positions);

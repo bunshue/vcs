@@ -95,8 +95,7 @@ static __global__ void MonteCarloOneBlockPerOption(curandState* __restrict rngSt
             s_Sum2Call[iSum] = sumCall.Confidence;
         }
 
-        // Reduce shared memory accumulators
-        // and write final result to global memory
+        // Reduce shared memory accumulators and write final result to global memory
         cg::sync(cta);
         sumReduce<real, SUM_N, THREAD_N>(s_SumCall, s_Sum2Call, cta, tile32, &d_CallValue[optionIndex]);
     }

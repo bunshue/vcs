@@ -4,8 +4,7 @@
   This sample extracts a geometric isosurface from a volume dataset using
   the marching cubes algorithm. It uses the scan (prefix sum) function from
   the Thrust library to perform stream compaction.  Similar techniques can
-  be used for other problems that require a variable-sized output per
-  thread.
+  be used for other problems that require a variable-sized output per thread.
 
   For more information on marching cubes see:
   http://local.wasp.uwa.edu.au/~pbourke/geometry/polygonise/
@@ -28,13 +27,11 @@
 
   2. Scan "voxelOccupied" array (using Thrust scan)
   Read back the total number of occupied voxels from GPU to CPU.
-  This is the sum of the last value of the exclusive scan and the last
-  input value.
+  This is the sum of the last value of the exclusive scan and the last input value.
 
   3. Execute "compactVoxels" kernel
   This compacts the voxelOccupied array to get rid of empty voxels.
-  This allows us to run the complex "generateTriangles" kernel on only
-  the occupied voxels.
+  This allows us to run the complex "generateTriangles" kernel on only the occupied voxels.
 
   4. Scan voxelVertices array
   This gives the start address for the vertex data for each voxel.
@@ -176,9 +173,6 @@ int g_Index = 0;
 unsigned int frameCount = 0;
 bool g_bValidate = false;
 
-int* pArgc = NULL;
-char** pArgv = NULL;
-
 // forward declarations
 void runGraphicsTest(int argc, char** argv);
 void runAutoTest(int argc, char** argv);
@@ -196,11 +190,11 @@ void createVBO(GLuint* vbo, unsigned int size);
 void deleteVBO(GLuint* vbo, struct cudaGraphicsResource** cuda_resource);
 
 void display();
+void reshape(int w, int h);
 void keyboard(unsigned char key, int x, int y);
 void mouse(int button, int state, int x, int y);
 void motion(int x, int y);
 void idle();
-void reshape(int w, int h);
 
 void mainMenu(int i);
 
@@ -341,18 +335,11 @@ void runAutoTest(int argc, char** argv)
         printf("-dump=2 <check voxel>\n");
         exit(EXIT_SUCCESS);
     }
-
     exit(bTestResult ? EXIT_SUCCESS : EXIT_FAILURE);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// Program main
-////////////////////////////////////////////////////////////////////////////////
 int main(int argc, char** argv)
 {
-    pArgc = &argc;
-    pArgv = argv;
-
     printf("Starting...\n");
 
     if (checkCmdLineFlag(argc, (const char**)argv, "file") && checkCmdLineFlag(argc, (const char**)argv, "dump"))
@@ -510,7 +497,7 @@ void cleanup()
 
 void initMenus()
 {
-    glutCreateMenu(mainMenu);
+    glutCreateMenu(mainMenu);   //選單管理
     glutAddMenuEntry("Toggle animation [ ]", ' ');
     glutAddMenuEntry("Increment isovalue [+]", '+');
     glutAddMenuEntry("Decrement isovalue [-]", '-');
@@ -581,8 +568,7 @@ void computeIsosurface()
     }
 
     // calculate number of vertices need per voxel
-    launch_classifyVoxel(grid, threads, d_voxelVerts, d_voxelOccupied, d_volume,
-        gridSize, gridSizeShift, gridSizeMask, numVoxels, voxelSize, isoValue);
+    launch_classifyVoxel(grid, threads, d_voxelVerts, d_voxelOccupied, d_volume, gridSize, gridSizeShift, gridSizeMask, numVoxels, voxelSize, isoValue);
 #if DEBUG_BUFFERS
     printf("voxelVerts:\n");
     dumpBuffer(d_voxelVerts, numVoxels, sizeof(uint));
@@ -602,10 +588,8 @@ void computeIsosurface()
     // the scan result plus the last value in the input array
     {
         uint lastElement, lastScanElement;
-        checkCudaErrors(cudaMemcpy((void*)&lastElement,
-            (void*)(d_voxelOccupied + numVoxels - 1), sizeof(uint), cudaMemcpyDeviceToHost));
-        checkCudaErrors(cudaMemcpy((void*)&lastScanElement,
-            (void*)(d_voxelOccupiedScan + numVoxels - 1), sizeof(uint), cudaMemcpyDeviceToHost));
+        checkCudaErrors(cudaMemcpy((void*)&lastElement, (void*)(d_voxelOccupied + numVoxels - 1), sizeof(uint), cudaMemcpyDeviceToHost));
+        checkCudaErrors(cudaMemcpy((void*)&lastScanElement, (void*)(d_voxelOccupiedScan + numVoxels - 1), sizeof(uint), cudaMemcpyDeviceToHost));
         activeVoxels = lastElement + lastScanElement;
     }
 
@@ -633,10 +617,8 @@ void computeIsosurface()
     // readback total number of vertices
     {
         uint lastElement, lastScanElement;
-        checkCudaErrors(cudaMemcpy((void*)&lastElement,
-            (void*)(d_voxelVerts + numVoxels - 1), sizeof(uint), cudaMemcpyDeviceToHost));
-        checkCudaErrors(cudaMemcpy((void*)&lastScanElement,
-            (void*)(d_voxelVertsScan + numVoxels - 1), sizeof(uint), cudaMemcpyDeviceToHost));
+        checkCudaErrors(cudaMemcpy((void*)&lastElement, (void*)(d_voxelVerts + numVoxels - 1), sizeof(uint), cudaMemcpyDeviceToHost));
+        checkCudaErrors(cudaMemcpy((void*)&lastScanElement, (void*)(d_voxelVertsScan + numVoxels - 1), sizeof(uint), cudaMemcpyDeviceToHost));
         totalVerts = lastElement + lastScanElement;
     }
 
@@ -810,9 +792,6 @@ void renderIsosurface()
     glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//! Display callback
-////////////////////////////////////////////////////////////////////////////////
 void display()
 {
     sdkStartTimer(&timer);
@@ -862,9 +841,16 @@ void display()
     computeFPS();
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//! Keyboard events handler
-////////////////////////////////////////////////////////////////////////////////
+void reshape(int w, int h)
+{
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();	//設置單位矩陣
+    gluPerspective(60.0, (float)w / (float)h, 0.1, 10.0);
+
+    glMatrixMode(GL_MODELVIEW);
+    glViewport(0, 0, w, h);
+}
+
 void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
     switch (key)
@@ -921,9 +907,6 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
     }
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//! Mouse event handlers
-////////////////////////////////////////////////////////////////////////////////
 void mouse(int button, int state, int x, int y)
 {
     if (state == GLUT_DOWN)
@@ -970,14 +953,7 @@ void idle()
     glutPostRedisplay();
 }
 
-void reshape(int w, int h)
+void mainMenu(int i)
 {
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();	//設置單位矩陣
-    gluPerspective(60.0, (float)w / (float)h, 0.1, 10.0);
-
-    glMatrixMode(GL_MODELVIEW);
-    glViewport(0, 0, w, h);
+    keyboard((unsigned char)i, 0, 0);
 }
-
-void mainMenu(int i) { keyboard((unsigned char)i, 0, 0); }
