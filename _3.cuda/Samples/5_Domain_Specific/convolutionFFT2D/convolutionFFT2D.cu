@@ -101,13 +101,12 @@ extern "C" void padDataClampToBorder(float* d_Dst, float* d_Src, int fftH, int f
 // Modulate Fourier image of padded data by Fourier image of padded kernel
 // and normalize by FFT size
 ////////////////////////////////////////////////////////////////////////////////
-extern "C" void modulateAndNormalize(fComplex * d_Dst, fComplex * d_Src, int fftH,
-    int fftW, int padding) {
+extern "C" void modulateAndNormalize(fComplex * d_Dst, fComplex * d_Src, int fftH, int fftW, int padding)
+{
     assert(fftW % 2 == 0);
     const int dataSize = fftH * (fftW / 2 + padding);
 
-    modulateAndNormalize_kernel << <iDivUp(dataSize, 256), 256 >> > (
-        d_Dst, d_Src, dataSize, 1.0f / (float)(fftW * fftH));
+    modulateAndNormalize_kernel << <iDivUp(dataSize, 256), 256 >> > (d_Dst, d_Src, dataSize, 1.0f / (float)(fftW * fftH));
     getLastCudaError("modulateAndNormalize() execution failed\n");
 }
 

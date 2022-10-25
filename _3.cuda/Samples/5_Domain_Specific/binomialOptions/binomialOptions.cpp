@@ -16,21 +16,21 @@
 #include "binomialOptions_common.h"
 #include "realtype.h"
 
-////////////////////////////////////////////////////////////////////////////////
-// Black-Scholes formula for binomial tree results validation
-////////////////////////////////////////////////////////////////////////////////
-extern "C" void BlackScholesCall(real &callResult, TOptionData optionData);
+ ////////////////////////////////////////////////////////////////////////////////
+ // Black-Scholes formula for binomial tree results validation
+ ////////////////////////////////////////////////////////////////////////////////
+extern "C" void BlackScholesCall(real & callResult, TOptionData optionData);
 
 ////////////////////////////////////////////////////////////////////////////////
 // Process single option on CPU
 // Note that CPU code is for correctness testing only and not for benchmarking.
 ////////////////////////////////////////////////////////////////////////////////
-extern "C" void binomialOptionsCPU(real &callResult, TOptionData optionData);
+extern "C" void binomialOptionsCPU(real & callResult, TOptionData optionData);
 
 ////////////////////////////////////////////////////////////////////////////////
 // Process an array of OptN options on GPU
 ////////////////////////////////////////////////////////////////////////////////
-extern "C" void binomialOptionsGPU(real *callValue, TOptionData *optionData,                                   int optN);
+extern "C" void binomialOptionsGPU(real * callValue, TOptionData * optionData, int optN);
 
 ////////////////////////////////////////////////////////////////////////////////
 // Helper function, returning uniformly distributed
@@ -38,139 +38,139 @@ extern "C" void binomialOptionsGPU(real *callValue, TOptionData *optionData,    
 ////////////////////////////////////////////////////////////////////////////////
 real randData(real low, real high)
 {
-  real t = (real)rand() / (real)RAND_MAX;
-  return ((real)1.0 - t) * low + t * high;
+    real t = (real)rand() / (real)RAND_MAX;
+    return ((real)1.0 - t) * low + t * high;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
 // Main program
 ////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char **argv)
+int main(int argc, char** argv)
 {
-  printf("Starting...\n");
+    printf("Starting...\n");
 
-  int devID = findCudaDevice(argc, (const char **)argv);
+    int devID = findCudaDevice(argc, (const char**)argv);
 
-  const int OPT_N = MAX_OPTIONS;
+    const int OPT_N = MAX_OPTIONS;
 
-  TOptionData optionData[MAX_OPTIONS];
-  real callValueBS[MAX_OPTIONS], callValueGPU[MAX_OPTIONS],
-      callValueCPU[MAX_OPTIONS];
+    TOptionData optionData[MAX_OPTIONS];
+    real callValueBS[MAX_OPTIONS], callValueGPU[MAX_OPTIONS], callValueCPU[MAX_OPTIONS];
 
-  real sumDelta, sumRef, gpuTime, errorVal;
+    real sumDelta, sumRef, gpuTime, errorVal;
 
-  StopWatchInterface *hTimer = NULL;
-  int i;
+    StopWatchInterface* hTimer = NULL;
+    int i;
 
-  sdkCreateTimer(&hTimer);
+    sdkCreateTimer(&hTimer);
 
-  printf("Generating input data...\n");
-  // Generate options set
-  srand(123);
+    printf("Generating input data...\n");
+    // Generate options set
+    srand(123);
 
-  for (i = 0; i < OPT_N; i++)
-  {
-    optionData[i].S = randData(5.0f, 30.0f);
-    optionData[i].X = randData(1.0f, 100.0f);
-    optionData[i].T = randData(0.25f, 10.0f);
-    optionData[i].R = 0.06f;
-    optionData[i].V = 0.10f;
-    BlackScholesCall(callValueBS[i], optionData[i]);
-  }
+    for (i = 0; i < OPT_N; i++)
+    {
+        optionData[i].S = randData(5.0f, 30.0f);
+        optionData[i].X = randData(1.0f, 100.0f);
+        optionData[i].T = randData(0.25f, 10.0f);
+        optionData[i].R = 0.06f;
+        optionData[i].V = 0.10f;
+        BlackScholesCall(callValueBS[i], optionData[i]);
+    }
 
-  printf("Running GPU binomial tree...\n");
-  checkCudaErrors(cudaDeviceSynchronize());
-  sdkResetTimer(&hTimer);
-  sdkStartTimer(&hTimer);
+    printf("\nRunning GPU binomial tree... immediately\n");
 
-  binomialOptionsGPU(callValueGPU, optionData, OPT_N);
+    checkCudaErrors(cudaDeviceSynchronize());
+    sdkResetTimer(&hTimer);
+    sdkStartTimer(&hTimer);
 
-  checkCudaErrors(cudaDeviceSynchronize());
-  sdkStopTimer(&hTimer);
-  gpuTime = sdkGetTimerValue(&hTimer);
-  printf("Options count            : %i     \n", OPT_N);
-  printf("Time steps               : %i     \n", NUM_STEPS);
-  printf("binomialOptionsGPU() time: %f msec\n", gpuTime);
-  printf("Options per second       : %f     \n", OPT_N / (gpuTime * 0.001));
+    binomialOptionsGPU(callValueGPU, optionData, OPT_N);
 
-  printf("Running CPU binomial tree...\n");
+    checkCudaErrors(cudaDeviceSynchronize());
+    sdkStopTimer(&hTimer);
+    gpuTime = sdkGetTimerValue(&hTimer);
+    printf("Options count            : %i     \n", OPT_N);
+    printf("Time steps               : %i     \n", NUM_STEPS);
+    printf("binomialOptionsGPU() time: %f msec\n", gpuTime);
+    printf("Options per second       : %f     \n", OPT_N / (gpuTime * 0.001));
 
-  for (i = 0; i < OPT_N; i++)
-  {
-    binomialOptionsCPU(callValueCPU[i], optionData[i]);
-  }
+    printf("\nRunning CPU binomial tree... wait...\n");
 
-  printf("Comparing the results...\n");
-  sumDelta = 0;
-  sumRef = 0;
-  printf("GPU binomial vs. Black-Scholes\n");
+    for (i = 0; i < OPT_N; i++)
+    {
+        binomialOptionsCPU(callValueCPU[i], optionData[i]);
+    }
 
-  for (i = 0; i < OPT_N; i++)
-  {
-    sumDelta += fabs(callValueBS[i] - callValueGPU[i]);
-    sumRef += fabs(callValueBS[i]);
-  }
+    printf("Comparing the results...\n");
+    sumDelta = 0;
+    sumRef = 0;
+    printf("GPU binomial vs. Black-Scholes\n");
 
-  if (sumRef > 1E-5)
-  {
-    printf("L1 norm: %E\n", (double)(sumDelta / sumRef));
-  }
-  else
-  {
-    printf("Avg. diff: %E\n", (double)(sumDelta / (real)OPT_N));
-  }
+    for (i = 0; i < OPT_N; i++)
+    {
+        sumDelta += fabs(callValueBS[i] - callValueGPU[i]);
+        sumRef += fabs(callValueBS[i]);
+    }
 
-  printf("CPU binomial vs. Black-Scholes\n");
-  sumDelta = 0;
-  sumRef = 0;
+    if (sumRef > 1E-5)
+    {
+        printf("L1 norm: %E\n", (double)(sumDelta / sumRef));
+    }
+    else
+    {
+        printf("Avg. diff: %E\n", (double)(sumDelta / (real)OPT_N));
+    }
 
-  for (i = 0; i < OPT_N; i++)
-  {
-    sumDelta += fabs(callValueBS[i] - callValueCPU[i]);
-    sumRef += fabs(callValueBS[i]);
-  }
+    printf("CPU binomial vs. Black-Scholes\n");
+    sumDelta = 0;
+    sumRef = 0;
 
-  if (sumRef > 1E-5)
-  {
-    printf("L1 norm: %E\n", sumDelta / sumRef);
-  }
-  else
-  {
-    printf("Avg. diff: %E\n", (double)(sumDelta / (real)OPT_N));
-  }
+    for (i = 0; i < OPT_N; i++)
+    {
+        sumDelta += fabs(callValueBS[i] - callValueCPU[i]);
+        sumRef += fabs(callValueBS[i]);
+    }
 
-  printf("CPU binomial vs. GPU binomial\n");
-  sumDelta = 0;
-  sumRef = 0;
+    if (sumRef > 1E-5)
+    {
+        printf("L1 norm: %E\n", sumDelta / sumRef);
+    }
+    else
+    {
+        printf("Avg. diff: %E\n", (double)(sumDelta / (real)OPT_N));
+    }
 
-  for (i = 0; i < OPT_N; i++)
-  {
-    sumDelta += fabs(callValueGPU[i] - callValueCPU[i]);
-    sumRef += callValueCPU[i];
-  }
+    printf("CPU binomial vs. GPU binomial\n");
+    sumDelta = 0;
+    sumRef = 0;
 
-  if (sumRef > 1E-5)
-  {
-    printf("L1 norm: %E\n", errorVal = sumDelta / sumRef);
-  }
-  else
-  {
-    printf("Avg. diff: %E\n", (double)(sumDelta / (real)OPT_N));
-  }
+    for (i = 0; i < OPT_N; i++)
+    {
+        sumDelta += fabs(callValueGPU[i] - callValueCPU[i]);
+        sumRef += callValueCPU[i];
+    }
 
-  printf("Shutting down...\n");
+    if (sumRef > 1E-5)
+    {
+        printf("L1 norm: %E\n", errorVal = sumDelta / sumRef);
+    }
+    else
+    {
+        printf("Avg. diff: %E\n", (double)(sumDelta / (real)OPT_N));
+    }
 
-  sdkDeleteTimer(&hTimer);
+    printf("Shutting down...\n");
 
-  printf(      "\nNOTE: The CUDA Samples are not meant for performance measurements. "
-      "Results may vary when GPU Boost is enabled.\n\n");
+    sdkDeleteTimer(&hTimer);
 
-  if (errorVal > 5e-4)
-  {
-    printf("Test failed!\n");
-    exit(EXIT_FAILURE);
-  }
+    printf("\nNOTE: The CUDA Samples are not meant for performance measurements. "
+        "Results may vary when GPU Boost is enabled.\n\n");
 
-  printf("Test passed\n");
-  exit(EXIT_SUCCESS);
+    if (errorVal > 5e-4)
+    {
+        printf("Test failed!\n");
+        exit(EXIT_FAILURE);
+    }
+
+    printf("Test passed\n");
+    exit(EXIT_SUCCESS);
 }

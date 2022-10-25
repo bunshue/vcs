@@ -136,7 +136,7 @@ int main(int argc, char** argv)
     type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
     glutInitDisplayMode(type);	//設定Single Buffer 或是 Double Buffer
 
-	glutInitWindowSize(600, 600);       // 設定視窗大小
+    glutInitWindowSize(600, 600);       // 設定視窗大小
     glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
     glutCreateWindow("顏色重疊測試");	// 設定視窗標題
@@ -147,11 +147,11 @@ int main(int argc, char** argv)
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
 
-	printf("按1 2 3 控制\n");
+    printf("按1 2 3 控制\n");
 
-	glutMainLoop();	//開始主循環繪製
+    glutMainLoop();	//開始主循環繪製
 
-	return 0;
+    return 0;
 }
 
 

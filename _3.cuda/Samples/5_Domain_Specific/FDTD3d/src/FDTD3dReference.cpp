@@ -23,23 +23,23 @@ void generateRandomData(float* data, const int dimx, const int dimy, const int d
     }
 }
 
-void generatePatternData(float* data, const int dimx, const int dimy,
-    const int dimz, const float lowerBound,
-    const float upperBound) {
-    for (int iz = 0; iz < dimz; iz++) {
-        for (int iy = 0; iy < dimy; iy++) {
-            for (int ix = 0; ix < dimx; ix++) {
-                *data = (float)(lowerBound +
-                    ((float)iz / (float)dimz) * (upperBound - lowerBound));
+void generatePatternData(float* data, const int dimx, const int dimy, const int dimz, const float lowerBound, const float upperBound)
+{
+    for (int iz = 0; iz < dimz; iz++)
+    {
+        for (int iy = 0; iy < dimy; iy++)
+        {
+            for (int ix = 0; ix < dimx; ix++)
+            {
+                *data = (float)(lowerBound + ((float)iz / (float)dimz) * (upperBound - lowerBound));
                 ++data;
             }
         }
     }
 }
 
-bool fdtdReference(float* output, const float* input, const float* coeff,
-    const int dimx, const int dimy, const int dimz,
-    const int radius, const int timesteps) {
+bool fdtdReference(float* output, const float* input, const float* coeff, const int dimx, const int dimy, const int dimz, const int radius, const int timesteps)
+{
     const int outerDimx = dimx + 2 * radius;
     const int outerDimy = dimy + 2 * radius;
     const int outerDimz = dimz + 2 * radius;
@@ -56,12 +56,14 @@ bool fdtdReference(float* output, const float* input, const float* coeff,
     intermediate = (float*)calloc(volumeSize, sizeof(float));
 
     // Decide which buffer to use first (result should end up in output)
-    if ((timesteps % 2) == 0) {
+    if ((timesteps % 2) == 0)
+    {
         bufsrc = input;
         bufdst = intermediate;
         bufdstnext = output;
     }
-    else {
+    else
+    {
         bufsrc = input;
         bufdst = output;
         bufdstnext = intermediate;
@@ -70,30 +72,32 @@ bool fdtdReference(float* output, const float* input, const float* coeff,
     // Run the FDTD (naive method)
     printf(" Host FDTD loop\n");
 
-    for (int it = 0; it < timesteps; it++) {
+    for (int it = 0; it < timesteps; it++)
+    {
         printf("\tt = %d\n", it);
         const float* src = bufsrc;
         float* dst = bufdst;
 
-        for (int iz = -radius; iz < dimz + radius; iz++) {
-            for (int iy = -radius; iy < dimy + radius; iy++) {
-                for (int ix = -radius; ix < dimx + radius; ix++) {
-                    if (ix >= 0 && ix < dimx && iy >= 0 && iy < dimy && iz >= 0 &&
-                        iz < dimz) {
+        for (int iz = -radius; iz < dimz + radius; iz++)
+        {
+            for (int iy = -radius; iy < dimy + radius; iy++)
+            {
+                for (int ix = -radius; ix < dimx + radius; ix++)
+                {
+                    if (ix >= 0 && ix < dimx && iy >= 0 && iy < dimy && iz >= 0 && iz < dimz)
+                    {
                         float value = (*src) * coeff[0];
 
-                        for (int ir = 1; ir <= radius; ir++) {
+                        for (int ir = 1; ir <= radius; ir++)
+                        {
                             value += coeff[ir] * (*(src + ir) + *(src - ir));  // horizontal
-                            value += coeff[ir] * (*(src + ir * stride_y) +
-                                *(src - ir * stride_y));  // vertical
-                            value +=
-                                coeff[ir] * (*(src + ir * stride_z) +
-                                    *(src - ir * stride_z));  // in front & behind
+                            value += coeff[ir] * (*(src + ir * stride_y) + *(src - ir * stride_y));  // vertical
+                            value += coeff[ir] * (*(src + ir * stride_z) + *(src - ir * stride_z));  // in front & behind
                         }
-
                         *dst = value;
                     }
-                    else {
+                    else
+                    {
                         *dst = *src;
                     }
 
@@ -112,33 +116,42 @@ bool fdtdReference(float* output, const float* input, const float* coeff,
 
     printf("\n");
 
-    if (intermediate) free(intermediate);
+    if (intermediate)
+    {
+        free(intermediate);
+    }
 
     return true;
 }
 
-bool compareData(const float* output, const float* reference, const int dimx,
-    const int dimy, const int dimz, const int radius,
-    const float tolerance) {
-    for (int iz = -radius; iz < dimz + radius; iz++) {
-        for (int iy = -radius; iy < dimy + radius; iy++) {
-            for (int ix = -radius; ix < dimx + radius; ix++) {
-                if (ix >= 0 && ix < dimx && iy >= 0 && iy < dimy && iz >= 0 &&
-                    iz < dimz) {
+bool compareData(const float* output, const float* reference, const int dimx, const int dimy, const int dimz, const int radius, const float tolerance)
+{
+    for (int iz = -radius; iz < dimz + radius; iz++)
+    {
+        for (int iy = -radius; iy < dimy + radius; iy++)
+        {
+            for (int ix = -radius; ix < dimx + radius; ix++)
+            {
+                if (ix >= 0 && ix < dimx && iy >= 0 && iy < dimy && iz >= 0 && iz < dimz)
+                {
                     // Determine the absolute difference
                     float difference = fabs(*reference - *output);
                     float error;
 
                     // Determine the relative error
                     if (*reference != 0)
+                    {
                         error = difference / *reference;
+                    }
                     else
+                    {
                         error = difference;
+                    }
 
                     // Check the error is within the tolerance
-                    if (error > tolerance) {
-                        printf("Data error at point (%d,%d,%d)\t%f instead of %f\n", ix, iy,
-                            iz, *output, *reference);
+                    if (error > tolerance)
+                    {
+                        printf("Data error at point (%d,%d,%d)\t%f instead of %f\n", ix, iy, iz, *output, *reference);
                         return false;
                     }
                 }

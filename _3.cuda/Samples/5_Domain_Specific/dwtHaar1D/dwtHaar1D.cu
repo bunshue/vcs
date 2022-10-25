@@ -280,13 +280,11 @@ void runTest(int argc, char** argv)
         }
     }
 
-    // get the result back from the server
-    // allocate mem for the result
+    // get the result back from the server allocate mem for the result
     float* odata = (float*)malloc(smem_size);
     checkCudaErrors(cudaMemcpy(odata, d_odata, smem_size, cudaMemcpyDeviceToHost));
 
-    // post processing
-    // write file for regression test
+    // post processing write file for regression test
     if (r_fname == NULL)
     {
         fprintf(stderr, "Cannot write the output file storing the result of the wavelet decomposition.\n%s", usage);
@@ -348,8 +346,7 @@ void runTest(int argc, char** argv)
 //!          and the signal length is supported by the implementation,
 //!          otherwise false
 //! @param   len  length of input signal
-//! @param   levels  number of decomposition levels necessary to perform a full
-//!           decomposition
+//! @param   levels  number of decomposition levels necessary to perform a full decomposition
 ////////////////////////////////////////////////////////////////////////////////
 bool getLevels(unsigned int len, unsigned int* levels)
 {
@@ -368,11 +365,7 @@ bool getLevels(unsigned int len, unsigned int* levels)
     return retval;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// Program main
-////////////////////////////////////////////////////////////////////////////////
 int main(int argc, char** argv)
 {
-    // run test
     runTest(argc, argv);
 }

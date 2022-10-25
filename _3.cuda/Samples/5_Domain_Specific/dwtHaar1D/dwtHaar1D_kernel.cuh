@@ -135,16 +135,14 @@ __global__ void dwtHaar1D(float* id, float* od, float* approx_final, const unsig
     // store in shared memory for further decomposition steps in this global step
     shared[atid] = (data0 + data1) * INV_SQRT_2;
 
-    // all threads have to write approximation coefficient to shared memory before
-    // next steps can take place
+    // all threads have to write approximation coefficient to shared memory before next steps can take place
     cg::sync(cta);
 
     // early out if possible
     // the compiler removes this part from the source because dlevels is
     // a constant shader input
     // note: syncthreads in bodies of branches can lead to dead-locks unless
-    // the condition evaluates the same way for ALL threads of a block, as in
-    // this case
+    // the condition evaluates the same way for ALL threads of a block, as in this case
     if (dlevels > 1)
     {
         // offset to second element in shared element which has to be used for the

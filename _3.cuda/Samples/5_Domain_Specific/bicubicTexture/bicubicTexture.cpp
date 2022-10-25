@@ -98,17 +98,17 @@ enum eFilterMode {
 
 eFilterMode g_FilterMode = MODE_FAST_BICUBIC;
 
-bool drawCurves = false;
-
 GLuint pbo = 0;                                  // OpenGL pixel buffer object
 struct cudaGraphicsResource* cuda_pbo_resource;  // handles OpenGL-CUDA exchange
 GLuint displayTex = 0;
 GLuint bufferTex = 0;
 GLuint fprog;  // fragment program (shader)
 
-float tx = -27.75f, ty = -189.0f;  // image translation
+float tx = -27.75f; // image translation
+float ty = -189.0f; // image translation
 float scale = 0.125f;   // image scale
-float cx, cy;                 // image centre
+float cx;   //image center x
+float cy;   //image center y
 
 void display();
 void initGLBuffers();
@@ -123,29 +123,7 @@ extern "C" void loadImageData(int argc, char** argv);
 
 extern "C" void initTexture(int imageWidth, int imageHeight, uchar * h_data);
 extern "C" void freeTexture();
-extern "C" void render(int width, int height, float tx, float ty, float scale,
-    float cx, float cy, dim3 blockSize, dim3 gridSize, eFilterMode filter_mode, uchar4 * output);
-
-// w0, w1, w2, and w3 are the four cubic B-spline basis functions
-float bspline_w0(float a)
-{
-    return (1.0f / 6.0f) * (-a * a * a + 3.0f * a * a - 3.0f * a + 1.0f);
-}
-
-float bspline_w1(float a)
-{
-    return (1.0f / 6.0f) * (3.0f * a * a * a - 6.0f * a * a + 4.0f);
-}
-
-float bspline_w2(float a)
-{
-    return (1.0f / 6.0f) * (-3.0f * a * a * a + 3.0f * a * a + 3.0f * a + 1.0f);
-}
-
-__host__ __device__ float bspline_w3(float a)
-{
-    return (1.0f / 6.0f) * (a * a * a);
-}
+extern "C" void render(int width, int height, float tx, float ty, float scale, float cx, float cy, dim3 blockSize, dim3 gridSize, eFilterMode filter_mode, uchar4 * output);
 
 void computeFPS()
 {
@@ -168,19 +146,6 @@ void computeFPS()
 
         sdkResetTimer(&timer);
     }
-}
-
-void plotCurve(float (*func)(float))
-{
-    const int steps = 100;
-    glBegin(GL_LINE_STRIP);
-
-    for (int i = 0; i < steps; i++)
-    {
-        float x = i / (float)(steps - 1);
-        glVertex2f(x, func(x));
-    }
-    glEnd();
 }
 
 // display results using OpenGL (called by GLUT)
@@ -233,32 +198,6 @@ void display()
         glDisable(GL_FRAGMENT_PROGRAM_ARB);
 
         glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, 0);
-
-        if (drawCurves)
-        {
-            // draw spline curves
-            glPushMatrix();
-            glScalef(0.25, 0.25, 1.0);
-
-            glTranslatef(0.0, 2.0, 0.0);
-            glColor3f(1.0, 0.0, 0.0);
-            plotCurve(bspline_w3);
-
-            glTranslatef(1.0, 0.0, 0.0);
-            glColor3f(0.0, 1.0, 0.0);
-            plotCurve(bspline_w2);
-
-            glTranslatef(1.0, 0.0, 0.0);
-            glColor3f(0.0, 0.0, 1.0);
-            plotCurve(bspline_w1);
-
-            glTranslatef(1.0, 0.0, 0.0);
-            glColor3f(1.0, 0.0, 1.0);
-            plotCurve(bspline_w0);
-
-            glPopMatrix();
-            glColor3f(1.0, 1.0, 1.0);
-        }
     }
 
     glutSwapBuffers();
@@ -329,10 +268,6 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
         runBenchmark(500);
         break;
 
-    case 'c':
-        drawCurves ^= 1;
-        break;
-
     default:
         break;
     }
@@ -399,7 +334,7 @@ void reshape(int x, int y)
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();	//設置單位矩陣
-    
+
     glOrtho(0.0, 1.0, 0.0, 1.0, 0.0, 1.0);
 }
 
@@ -470,7 +405,10 @@ void initGLBuffers()
     gridSize = dim3(iDivUp(width, blockSize.x), iDivUp(height, blockSize.y));
 }
 
-void mainMenu(int i) { keyboard(i, 0, 0); }
+void mainMenu(int i)
+{
+    keyboard(i, 0, 0);
+}
 
 void initMenus()
 {
@@ -483,7 +421,6 @@ void initMenus()
     glutAddMenuEntry("Zoom in      [=]", '=');
     glutAddMenuEntry("Zoom out     [-]", '-');
     glutAddMenuEntry("Benchmark    [b]", 'b');
-    glutAddMenuEntry("DrawCurves   [c]", 'c');
     glutAddMenuEntry("Quit       [esc]", 27);
     glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
@@ -555,8 +492,7 @@ static const char* shaderCode =
 "INT PARAM width = program.local[0];\n"
 "INT TEMP index;\n"
 "FLR.S index, fragment.texcoord;\n"
-"MAD.S index.x, index.y, width, index.x;\n"  // compute 1D index from 2D
-                                             // coords
+"MAD.S index.x, index.y, width, index.x;\n"  // compute 1D index from 2D coords
     "TXF result.color, index.x, texture[0], BUFFER;\n"
     "END";
 #endif
@@ -607,7 +543,6 @@ void initialize(int argc, char** argv)
         "\tControls\n"
         "\t=/- : Zoom in/out\n"
         "\tb   : Run Benchmark g_FilterMode\n"
-        "\tc   : Draw Bicubic Spline Curve\n"
         "\t[esc] - Quit\n\n"
 
         "\tPress number keys to change filtering g_FilterMode:\n\n"
@@ -747,7 +682,7 @@ int main(int argc, char** argv)
 
         // This runs the CUDA kernel (bicubicFiltering) + OpenGL visualization
         initialize(argc, argv);
-        
+
         glutMainLoop();	//開始主循環繪製
     }
 

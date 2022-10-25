@@ -9,12 +9,14 @@ namespace cg = cooperative_groups;
 
 // Use power method to find the first eigenvector.
 // https://en.wikipedia.org/wiki/Power_iteration
-inline __device__ __host__ float3 firstEigenVector(float matrix[6]) {
+inline __device__ __host__ float3 firstEigenVector(float matrix[6])
+{
     // 8 iterations seems to be more than enough.
 
     float3 v = make_float3(1.0f, 1.0f, 1.0f);
 
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 8; i++)
+    {
         float x = v.x * matrix[0] + v.y * matrix[1] + v.z * matrix[2];
         float y = v.x * matrix[1] + v.y * matrix[3] + v.z * matrix[4];
         float z = v.x * matrix[2] + v.y * matrix[4] + v.z * matrix[5];
@@ -22,12 +24,11 @@ inline __device__ __host__ float3 firstEigenVector(float matrix[6]) {
         float iv = 1.0f / m;
         v = make_float3(x * iv, y * iv, z * iv);
     }
-
     return v;
 }
 
-inline __device__ void colorSums(const float3* colors, float3* sums,
-    cg::thread_group tile) {
+inline __device__ void colorSums(const float3* colors, float3* sums, cg::thread_group tile)
+{
     const int idx = threadIdx.x;
 
     sums[idx] = colors[idx];
@@ -41,8 +42,8 @@ inline __device__ void colorSums(const float3* colors, float3* sums,
     sums[idx] += sums[idx ^ 1];
 }
 
-inline __device__ float3 bestFitLine(const float3* colors, float3 color_sum,
-    cg::thread_group tile) {
+inline __device__ float3 bestFitLine(const float3* colors, float3 color_sum, cg::thread_group tile)
+{
     // Compute covariance matrix of the given colors.
     const int idx = threadIdx.x;
 
@@ -60,8 +61,10 @@ inline __device__ float3 bestFitLine(const float3* colors, float3 color_sum,
     covariance[6 * idx + 5] = diff.z * diff.z;
 
     cg::sync(tile);
-    for (int d = 8; d > 0; d >>= 1) {
-        if (idx < d) {
+    for (int d = 8; d > 0; d >>= 1)
+    {
+        if (idx < d)
+        {
             covariance[6 * idx + 0] += covariance[6 * (idx + d) + 0];
             covariance[6 * idx + 1] += covariance[6 * (idx + d) + 1];
             covariance[6 * idx + 2] += covariance[6 * (idx + d) + 2];

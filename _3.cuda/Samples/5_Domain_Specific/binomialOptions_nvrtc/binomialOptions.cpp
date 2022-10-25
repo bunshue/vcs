@@ -47,10 +47,6 @@ real randData(real low, real high)
     return ((real)1.0 - t) * low + t * high;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// Main program
-////////////////////////////////////////////////////////////////////////////////
-
 int main(int argc, char** argv)
 {
     printf("Starting...\n");
@@ -84,7 +80,7 @@ int main(int argc, char** argv)
         BlackScholesCall(callValueBS[i], optionData[i]);
     }
 
-    printf("Running GPU binomial tree...\n");
+    printf("\nRunning GPU binomial tree... immeidately\n");
 
     sdkResetTimer(&hTimer);
     sdkStartTimer(&hTimer);
@@ -100,7 +96,7 @@ int main(int argc, char** argv)
     printf("binomialOptionsGPU() time: %f msec\n", gpuTime);
     printf("Options per second       : %f     \n", OPT_N / (gpuTime * 0.001));
 
-    printf("Running CPU binomial tree...\n");
+    printf("\nRunning CPU binomial tree... wait...\n");
 
     for (i = 0; i < OPT_N; i++)
     {

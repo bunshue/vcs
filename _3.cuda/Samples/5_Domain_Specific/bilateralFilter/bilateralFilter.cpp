@@ -84,7 +84,7 @@ void computeFPS()
     {
         char fps[256];
         float ifps = 1.0f / (sdkGetAverageTimerValue(&timer) / 1000.0f);
-        sprintf(fps,            "CUDA Bilateral Filter: %3.f fps (radius=%d, iter=%d, euclidean=%.2f, gaussian=%.2f)",
+        sprintf(fps, "CUDA Bilateral Filter: %3.f fps (radius=%d, iter=%d, euclidean=%.2f, gaussian=%.2f)",
             ifps, filter_radius, iterations, (double)euclidean_delta, (double)gaussian_delta);
 
         glutSetWindowTitle(fps);
@@ -162,7 +162,7 @@ void reshape(int x, int y)
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();	//³]¸m³æ¦ì¯x°}
-    
+
     glOrtho(0.0, 1.0, 0.0, 1.0, 0.0, 1.0);
 }
 
@@ -413,8 +413,7 @@ void initGL(int argc, char** argv)
     }
 }
 
-// This test specifies a single test (where you specify radius and/or
-// iterations)
+// This test specifies a single test (where you specify radius and/or iterations)
 int runSingleTest(char* ref_file, char* exec_path)
 {
     int nTotalErrors = 0;
@@ -423,11 +422,9 @@ int runSingleTest(char* ref_file, char* exec_path)
     initCuda();
 
     unsigned int* dResult;
-    unsigned int* hResult =
-        (unsigned int*)malloc(width * height * sizeof(unsigned int));
+    unsigned int* hResult = (unsigned int*)malloc(width * height * sizeof(unsigned int));
     size_t pitch;
-    checkCudaErrors(cudaMallocPitch((void**)&dResult, &pitch,
-        width * sizeof(unsigned int), height));
+    checkCudaErrors(cudaMallocPitch((void**)&dResult, &pitch, width * sizeof(unsigned int), height));
 
     // run the sample radius
     {
@@ -533,23 +530,23 @@ int main(int argc, char** argv)
     if (argc > 1)
     {
         printf("XXXXXXXXXXXXXXXXXXXXXXXX\n");;
-        if (checkCmdLineFlag(argc, (const char**)argv, "radius")) {
-            filter_radius =
-                getCmdLineArgumentInt(argc, (const char**)argv, "radius");
+        if (checkCmdLineFlag(argc, (const char**)argv, "radius"))
+        {
+            filter_radius = getCmdLineArgumentInt(argc, (const char**)argv, "radius");
         }
 
-        if (checkCmdLineFlag(argc, (const char**)argv, "passes")) {
+        if (checkCmdLineFlag(argc, (const char**)argv, "passes"))
+        {
             iterations = getCmdLineArgumentInt(argc, (const char**)argv, "passes");
         }
 
-        if (checkCmdLineFlag(argc, (const char**)argv, "file")) {
-            getCmdLineArgumentString(argc, (const char**)argv, "file",
-                (char**)&ref_file);
+        if (checkCmdLineFlag(argc, (const char**)argv, "file"))
+        {
+            getCmdLineArgumentString(argc, (const char**)argv, "file", (char**)&ref_file);
         }
     }
 
     // load image to process
-
     printf("call loadImageData()\n");
     loadImageData(argc, argv);
 
@@ -558,8 +555,7 @@ int main(int argc, char** argv)
     if (checkCmdLineFlag(argc, (const char**)argv, "benchmark"))
     {
         printf("XXXXXXXXXXXXXXXXXXXXXXXX\n");;
-        // This is a separate mode of the sample, where we are benchmark the kernels
-        // for performance
+        // This is a separate mode of the sample, where we are benchmark the kernels for performance
         // Running CUDA kernels (bilateralfilter) in Benchmarking mode
         g_TotalErrors += runBenchmark(argc, argv);
 
@@ -568,8 +564,7 @@ int main(int argc, char** argv)
     else if (checkCmdLineFlag(argc, (const char**)argv, "radius") || checkCmdLineFlag(argc, (const char**)argv, "passes"))
     {
         printf("XXXXXXXXXXXXXXXXXXXXXXXX\n");;
-        // This overrides the default mode.  Users can specify the radius used by
-        // the filter kernel
+        // This overrides the default mode.  Users can specify the radius used by the filter kernel
         g_TotalErrors += runSingleTest(ref_file, argv[0]);
 
         exit(g_TotalErrors == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
@@ -581,8 +576,7 @@ int main(int argc, char** argv)
         printf("\n");
 
         // First initialize OpenGL context, so we can properly set the GL for CUDA.
-        // This is necessary in order to achieve optimal performance with
-        // OpenGL/CUDA interop.
+        // This is necessary in order to achieve optimal performance with OpenGL/CUDA interop.
         initGL(argc, (char**)argv);
 
         initCuda();
@@ -592,8 +586,7 @@ int main(int argc, char** argv)
         glutCloseFunc(cleanup);
 
         printf("Running Standard Demonstration with GLUT loop...\n\n");
-        printf(
-            "Press '+' and '-' to change filter width\n"
+        printf("Press '+' and '-' to change filter width\n"
             "Press ']' and '[' to change number of iterations\n"
             "Press 'e' and 'E' to change Euclidean delta\n"
             "Press 'g' and 'G' to change Gaussian delta\n"
