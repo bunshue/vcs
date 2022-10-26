@@ -24,12 +24,14 @@ float pntD[3] = {
     30.0, 60.0, 0.0
 };
 
-static void Init(void)
+void Init(void)
 {
     GLint i;
 
-    if (!rgb) {
-        for (i = 0; i < 16; i++) {
+    if (!rgb)
+	{
+        for (i = 0; i < 16; i++)
+		{
             glutSetColor(i + CI_OFFSET, i / 15.0, i / 15.0, 0.0);
         }
     }
@@ -44,54 +46,7 @@ static void Init(void)
     size = 1;
 }
 
-static void reshape(int width, int height)
-{
-    glViewport(0, 0, width, height);
-
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluOrtho2D(-175, 175, -175, 175);
-    glMatrixMode(GL_MODELVIEW);
-}
-
-static void keyboard(unsigned char key, int x, int y)
-{
-    switch (key)
-    {
-    case '1':
-        mode1 = !mode1;
-        glutPostRedisplay();
-        break;
-    case '2':
-        mode2 = !mode2;
-        glutPostRedisplay();
-        break;
-    case 27:
-        exit(0);
-    }
-}
-
-static void SpecialKey(int key, int x, int y)
-{
-    switch (key)
-    {
-    case GLUT_KEY_UP:
-        printf("你按了 上 ");
-        size++;
-        glutPostRedisplay();
-        break;
-    case GLUT_KEY_DOWN:
-        printf("你按了 下 ");
-        size--;
-        if (size < 1) {
-            size = 1;
-        }
-        glutPostRedisplay();
-        break;
-    }
-}
-
-static void display(void)
+void display(void)
 {
     GLint ci, i;
 
@@ -156,7 +111,54 @@ static void display(void)
     }
 }
 
-static void Args(int argc, char** argv)
+void reshape(int width, int height)
+{
+    glViewport(0, 0, width, height);
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(-175, 175, -175, 175);
+    glMatrixMode(GL_MODELVIEW);
+}
+
+void keyboard(unsigned char key, int x, int y)
+{
+    switch (key)
+    {
+    case '1':
+        mode1 = !mode1;
+        glutPostRedisplay();
+        break;
+    case '2':
+        mode2 = !mode2;
+        glutPostRedisplay();
+        break;
+    case 27:
+        exit(0);
+    }
+}
+
+void special(int key, int x, int y)
+{
+    switch (key)
+    {
+    case GLUT_KEY_UP:
+        printf("你按了 上 ");
+        size++;
+        glutPostRedisplay();
+        break;
+    case GLUT_KEY_DOWN:
+        printf("你按了 下 ");
+        size--;
+        if (size < 1) {
+            size = 1;
+        }
+        glutPostRedisplay();
+        break;
+    }
+}
+
+void Args(int argc, char** argv)
 {
     GLint i;
 
@@ -198,15 +200,17 @@ int main(int argc, char** argv)
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(1100, 200);
 
-    glutCreateWindow("Line Test");
+    glutCreateWindow("Line Test");	//開啟視窗 並顯示出視窗 Title
 
     Init();
 
     glutDisplayFunc(display);       //設定callback function
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
-    glutSpecialFunc(SpecialKey);    //設定callback function
+    glutSpecialFunc(special);    //設定callback function
 
-    glutMainLoop();
+    glutMainLoop();	//開始主循環繪製
+    
+    return 0;
 }
 

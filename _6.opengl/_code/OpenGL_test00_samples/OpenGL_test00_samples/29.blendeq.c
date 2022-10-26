@@ -278,7 +278,7 @@ int main(int argc, char** argv)
     type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
     glutInitDisplayMode(type);
     glutInitWindowSize(windW, windH);
-    glutCreateWindow("Blend Equation");
+    glutCreateWindow("Blend Equation");	//開啟視窗 並顯示出視窗 Title
 
     if (!QueryExtension("GL_EXT_blend_logic_op")) {
         printf("Blend_logic_op extension is not present.\n");
@@ -300,7 +300,9 @@ int main(int argc, char** argv)
     glutReshapeFunc(Reshape);
     glutKeyboardFunc(Key);
     glutDisplayFunc(Draw);
-    glutMainLoop();
+	glutMainLoop();	//開始主循環繪製
+
+	return 0;
 }
 
 #else

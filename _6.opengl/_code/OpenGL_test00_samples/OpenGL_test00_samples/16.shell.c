@@ -6,25 +6,7 @@
 
 GLenum doubleBuffer;
 
-static void reshape(int width, int height)
-{
-    glViewport(0, 0, width, height);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluPerspective(60.0, 1.0, 0.1, 1000.0);
-    glMatrixMode(GL_MODELVIEW);
-}
-
-static void keyboard(unsigned char key, int x, int y)
-{
-    switch (key)
-    {
-    case 27:
-        exit(0);
-    }
-}
-
-static void display(void)
+void display(void)
 {
     glClearColor(0.0, 0.0, 0.0, 1.0);
     glClear(GL_COLOR_BUFFER_BIT);
@@ -39,7 +21,25 @@ static void display(void)
     }
 }
 
-static void Args(int argc, char** argv)
+void reshape(int width, int height)
+{
+    glViewport(0, 0, width, height);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(60.0, 1.0, 0.1, 1000.0);
+    glMatrixMode(GL_MODELVIEW);
+}
+
+void keyboard(unsigned char key, int x, int y)
+{
+    switch (key)
+    {
+    case 27:
+        exit(0);
+    }
+}
+
+void Args(int argc, char** argv)
 {
     GLint i;
 
@@ -71,11 +71,11 @@ int main(int argc, char** argv)
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(1100, 200);
 
-    glutCreateWindow("Shell");
+    glutCreateWindow("Shell");	//開啟視窗 並顯示出視窗 Title
 
     glutDisplayFunc(display);       //設定callback function
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
 
-    glutMainLoop();
+    glutMainLoop();	//開始主循環繪製
 }

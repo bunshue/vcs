@@ -1,4 +1,3 @@
-// OpenGL Graphics includes
 //#include <helper_gl.h>
 //#include <GL/freeglut.h>
 
@@ -26,7 +25,6 @@
 #define	CHECKIMAGEHEIGHT 8
 #define	BRICKIMAGEWIDTH 16
 #define	BRICKIMAGEHEIGHT 16
-
 
 GLenum doubleBuffer;
 
@@ -918,8 +916,7 @@ float tep[7][9][2] = {
 	}
 };
 
-
-static void BendForward(void)
+void BendForward(void)
 {
 
 	glTranslatef(0.0, 1.0, 0.0);
@@ -927,7 +924,7 @@ static void BendForward(void)
 	glTranslatef(0.0, -1.0, 0.0);
 }
 
-static void BendLeft(void)
+void BendLeft(void)
 {
 
 	glRotatef(-90.0, 0, 0, 1);
@@ -936,7 +933,7 @@ static void BendLeft(void)
 	glTranslatef(0.0, -1.0, 0.0);
 }
 
-static void BendRight(void)
+void BendRight(void)
 {
 
 	glRotatef(90.0, 0, 0, 1);
@@ -945,7 +942,7 @@ static void BendRight(void)
 	glTranslatef(0.0, -1.0, 0.0);
 }
 
-static void BuildSingleCylinder(void)
+void BuildSingleCylinder(void)
 {
 
 	glNewList(singleCylinder, GL_COMPILE);
@@ -974,9 +971,8 @@ static void BuildSingleCylinder(void)
 	glEndList();
 }
 
-static void BuildDoubleCylinder(void)
+void BuildDoubleCylinder(void)
 {
-
 	glNewList(doubleCylinder, GL_COMPILE);
 
 	glBegin(GL_TRIANGLE_STRIP);
@@ -1003,9 +999,8 @@ static void BuildDoubleCylinder(void)
 	glEndList();
 }
 
-static void BuildElbow(void)
+void BuildElbow(void)
 {
-
 	glNewList(elbow, GL_COMPILE);
 
 	glBegin(GL_TRIANGLE_STRIP);
@@ -1132,9 +1127,8 @@ static void BuildElbow(void)
 	glEndList();
 }
 
-static void BuildLogo(void)
+void BuildLogo(void)
 {
-
 	glNewList(logo, GL_COMPILE);
 
 	glTranslatef(5.5, -3.5, 4.5);
@@ -1214,9 +1208,8 @@ static void BuildLogo(void)
 	glEndList();
 }
 
-static void BuildLists(void)
+void BuildLists(void)
 {
-
 	singleCylinder = glGenLists(1);
 	doubleCylinder = glGenLists(1);
 	elbow = glGenLists(1);
@@ -1285,9 +1278,32 @@ static void Init(void)
 	polyMode = GL_BACK;
 }
 
-static void reshape(int width, int height)
+void display(void)
 {
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+	glPushMatrix();
+
+	glTranslatef(0, 0, zTranslation);
+	glRotatef(30.0, 1, 0, 0);
+	glRotatef(yRotation, 0, 1, 0);
+	glClipPlane(GL_CLIP_PLANE0, plane);
+	glCallList(logo);
+
+	glPopMatrix();
+
+	if (doubleBuffer)
+	{
+		glutSwapBuffers();
+	}
+	else
+	{
+		glFlush();
+	}
+}
+
+void reshape(int width, int height)
+{
 	glViewport(0, 0, width, height);
 
 	glMatrixMode(GL_PROJECTION);
@@ -1296,7 +1312,7 @@ static void reshape(int width, int height)
 	glMatrixMode(GL_MODELVIEW);
 }
 
-static void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
@@ -1449,7 +1465,7 @@ static void keyboard(unsigned char key, int x, int y)
 	}
 }
 
-static void SpecialKey(int key, int x, int y)
+void special(int key, int x, int y)
 {
 	switch (key)
 	{
@@ -1469,31 +1485,6 @@ static void SpecialKey(int key, int x, int y)
 		plane[3] -= 2.0;
 		glutPostRedisplay();
 		break;
-	}
-}
-
-static void display(void)
-{
-
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	glPushMatrix();
-
-	glTranslatef(0, 0, zTranslation);
-	glRotatef(30.0, 1, 0, 0);
-	glRotatef(yRotation, 0, 1, 0);
-	glClipPlane(GL_CLIP_PLANE0, plane);
-	glCallList(logo);
-
-	glPopMatrix();
-
-	if (doubleBuffer)
-	{
-		glutSwapBuffers();
-	}
-	else
-	{
-		glFlush();
 	}
 }
 
@@ -1529,15 +1520,18 @@ int main(int argc, char** argv)
 	glutInitWindowSize(600, 600);
 	glutInitWindowPosition(1100, 200);
 
-	glutCreateWindow("Logo Test");
+	glutCreateWindow("Logo Test");	//開啟視窗 並顯示出視窗 Title
 
 	Init();
 
 	glutDisplayFunc(display);       //設定callback function
 	glutReshapeFunc(reshape);       //設定callback function
 	glutKeyboardFunc(keyboard);     //設定callback function
+	glutSpecialFunc(special);	//設定callback function
 
-	glutSpecialFunc(SpecialKey);
+	printf("按 上 下 左 右 控制\n");
 
-	glutMainLoop();
+	glutMainLoop();	//開始主循環繪製
+
+	return 0;
 }

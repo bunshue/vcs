@@ -1,5 +1,4 @@
-﻿// OpenGL Graphics includes
-#include <iostream>
+﻿#include <iostream>
 #include <helper_gl.h>
 
 //#include <GL/glut.h>      //32 bits
@@ -164,7 +163,7 @@ int main(int argc, char** argv)
 	glutMouseFunc(mouse);		//設定callback function
 	glutMotionFunc(motion);		//設定callback function
 
-	glutMainLoop();
+	glutMainLoop();	//開始主循環繪製
 
 	return 0;
 }

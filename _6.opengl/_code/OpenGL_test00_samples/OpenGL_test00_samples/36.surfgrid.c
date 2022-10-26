@@ -520,7 +520,7 @@ int main(int argc, char** argv)
     glutInitWindowSize(winwidth, winheight);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
     glutCreateWindow("Surfgrid: a polygon offset demo "
-        "(press right button for menu)");
+        "(press right button for menu)");	//開啟視窗 並顯示出視窗 Title
 
     /* create a menu for the right mouse button */
     glutCreateMenu(menu);
@@ -555,7 +555,9 @@ int main(int argc, char** argv)
     }
 
     init();
-    glutMainLoop();
+	glutMainLoop();	//開始主循環繪製
+
+	return 0;
 }
 
 /****************************************************************************/

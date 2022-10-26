@@ -21,11 +21,15 @@
 #define OPENGL_WIDTH 48
 #define OPENGL_HEIGHT 13
 
-GLenum rgb, doubleBuffer;
-GLint windW = 800, windH = 400;
+GLenum rgb;
+GLenum doubleBuffer;
+GLint windW = 800;
+GLint windH = 600;
 
 GLenum mode1, mode2;
-GLint boxW, boxH;
+GLint boxW;
+GLint boxH;
+
 GLubyte OpenGL_bits[] = {
    0x00, 0x03, 0x00, 0x00, 0x00, 0x00,
    0x7f, 0xfb, 0xff, 0xff, 0xff, 0x01,
@@ -42,115 +46,30 @@ GLubyte OpenGL_bits[] = {
    0x3e, 0x00, 0x00, 0xf8, 0x0c, 0x00,
 };
 
-
-static void Init(void)
+void Init(void)
 {
 
     mode1 = GL_TRUE;
     mode2 = GL_TRUE;
 }
 
-static void reshape(int width, int height)
-{
 
-    windW = width;
-    windH = height;
-}
-
-static void RotateColorMask(void)
-{
-    static GLint rotation = 0;
-
-    rotation = (rotation + 1) & 0x3;
-    switch (rotation)
-    {
-    case 0:
-        glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
-        glIndexMask(0xff);
-        break;
-    case 1:
-        glColorMask(GL_FALSE, GL_TRUE, GL_TRUE, GL_TRUE);
-        glIndexMask(0xFE);
-        break;
-    case 2:
-        glColorMask(GL_TRUE, GL_FALSE, GL_TRUE, GL_TRUE);
-        glIndexMask(0xFD);
-        break;
-    case 3:
-        glColorMask(GL_TRUE, GL_TRUE, GL_FALSE, GL_TRUE);
-        glIndexMask(0xFB);
-        break;
-    }
-}
-
-static void SetColor(int index)
-{
-    if (rgb)
-    {
-        switch (index)
-        {
-        case 0:
-            glColor3f(0.0, 0.0, 0.0);
-            break;
-        case 1:
-            glColor3f(1.0, 0.0, 0.0);
-            break;
-        case 2:
-            glColor3f(0.0, 1.0, 0.0);
-            break;
-        case 3:
-            glColor3f(1.0, 1.0, 0.0);
-            break;
-        case 4:
-            glColor3f(0.0, 0.0, 1.0);
-            break;
-        case 5:
-            glColor3f(1.0, 0.0, 1.0);
-            break;
-        case 6:
-            glColor3f(0.0, 1.0, 1.0);
-            break;
-        case 7:
-            glColor3f(1.0, 1.0, 1.0);
-            break;
-        }
-    }
-    else
-    {
-        glIndexi(index);
-    }
-}
-
-static void keyboard(unsigned char key, int x, int y)
-{
-    switch (key)
-    {
-    case '1':
-        mode1 = !mode1;
-        glutPostRedisplay();
-        break;
-    case '2':
-        mode2 = !mode2;
-        glutPostRedisplay();
-        break;
-    case '3':
-        RotateColorMask();
-        glutPostRedisplay();
-        break;
-    case 27:
-        exit(0);
-    }
-}
-
-static void Viewport(GLint row, GLint column)
+void Viewport(GLint row, GLint column)
 {
     GLint x, y;
 
     boxW = (windW - (COLS + 1) * GAP) / COLS;
     boxH = (windH - (ROWS + 1) * GAP) / ROWS;
 
+	printf("Viewport, Row = %d, Column = %d\n",row,column);
+	printf("windW = %d, windH = %d\t",windW,windH );
+	printf("COLS = %d, ROWS = %d, GAP = %d\n",COLS,ROWS,GAP );
+	printf("boxW = %d, boxH = %d\t",boxW,boxH );
+
     x = GAP + column * (boxW + GAP);
     y = GAP + row * (boxH + GAP);
+
+	printf("x = %d, y = %d\n",x,y );
 
     glViewport(x, y, boxW, boxH);
 
@@ -163,7 +82,7 @@ static void Viewport(GLint row, GLint column)
     glScissor(x, y, boxW, boxH);
 }
 
-static void Point(void)
+void Point(void)
 {
     GLint i;
 
@@ -184,7 +103,7 @@ static void Point(void)
     glEnd();
 }
 
-static void Lines(void)
+void Lines(void)
 {
     GLint i;
 
@@ -209,7 +128,7 @@ static void Lines(void)
     glEnd();
 }
 
-static void LineStrip(void)
+void LineStrip(void)
 {
 
     glBegin(GL_LINE_STRIP);
@@ -229,7 +148,7 @@ static void LineStrip(void)
     glEnd();
 }
 
-static void LineLoop(void)
+void LineLoop(void)
 {
 
     glBegin(GL_LINE_LOOP);
@@ -272,7 +191,7 @@ static void LineLoop(void)
     glEnd();
 }
 
-static void Bitmap(void)
+void Bitmap(void)
 {
 
     glBegin(GL_LINES);
@@ -298,7 +217,7 @@ static void Bitmap(void)
     glBitmap(OPENGL_WIDTH, OPENGL_HEIGHT, 0, 3, 0.0, 0.0, OpenGL_bits);
 }
 
-static void Triangles(void)
+void Triangles(void)
 {
 
     glBegin(GL_TRIANGLES);
@@ -324,7 +243,7 @@ static void Triangles(void)
     glEnd();
 }
 
-static void TriangleStrip(void)
+void TriangleStrip(void)
 {
 
     glBegin(GL_TRIANGLE_STRIP);
@@ -349,7 +268,7 @@ static void TriangleStrip(void)
     glEnd();
 }
 
-static void TriangleFan(void)
+void TriangleFan(void)
 {
     GLint vx[8][2];
     GLint x0, y0, x1, y1, x2, y2, x3, y3;
@@ -390,14 +309,14 @@ static void TriangleFan(void)
     glEnd();
 }
 
-static void Rect(void)
+void Rect(void)
 {
-
+	printf("boxW = %d, boxH = %d\n",boxW,boxH );
     (rgb) ? glColor3f(1.0, 0.0, 1.0) : glIndexi(5);
     glRecti(-boxW / 4, -boxH / 4, boxW / 4, boxH / 4);
 }
 
-static void Polygons(void)
+void Polygons(void)
 {
     GLint vx[8][2];
     GLint x0, y0, x1, y1, x2, y2, x3, y3;
@@ -436,7 +355,7 @@ static void Polygons(void)
     glEnd();
 }
 
-static void Quads(void)
+void Quads(void)
 {
 
     glBegin(GL_QUADS);
@@ -467,9 +386,8 @@ static void Quads(void)
     glEnd();
 }
 
-static void QuadStrip(void)
+void QuadStrip(void)
 {
-
     glBegin(GL_QUAD_STRIP);
     SetColor(1);
     glVertex2i(-boxW / 4, -boxH / 4);
@@ -493,9 +411,8 @@ static void QuadStrip(void)
     glEnd();
 }
 
-static void display(void)
+void display(void)
 {
-
     glViewport(0, 0, windW, windH);
     glDisable(GL_SCISSOR_TEST);
 
@@ -527,20 +444,31 @@ static void display(void)
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     }
 
+	printf("畫第(0, 0)個, Point\n");
     Viewport(0, 0); Point();
+	printf("畫第(0, 1)個, Lines\n");
     Viewport(0, 1); Lines();
+	printf("畫第(0, 2)個, LineStrip\n");
     Viewport(0, 2); LineStrip();
+	printf("畫第(0, 3)個, LineLoop\n");
     Viewport(0, 3); LineLoop();
 
+	printf("畫第(1, 0)個, Bitmap\n");
     Viewport(1, 0); Bitmap();
-
+	printf("畫第(1, 1)個, TriangleFan\n");
     Viewport(1, 1); TriangleFan();
+	printf("畫第(1, 2)個, Triangles\n");
     Viewport(1, 2); Triangles();
+	printf("畫第(1, 3)個, TriangleStrip\n");
     Viewport(1, 3); TriangleStrip();
 
+	printf("畫第(2, 0)個, Rect\n");
     Viewport(2, 0); Rect();
+	printf("畫第(2, 1)個, Polygons\n");
     Viewport(2, 1); Polygons();
+	printf("畫第(2, 2)個, Quads\n");
     Viewport(2, 2); Quads();
+	printf("畫第(2, 3)個, QuadStrip\n");
     Viewport(2, 3); QuadStrip();
 
     if (doubleBuffer)
@@ -553,7 +481,99 @@ static void display(void)
     }
 }
 
-static void Args(int argc, char** argv)
+void reshape(int width, int height)
+{
+
+    windW = width;
+    windH = height;
+}
+
+void RotateColorMask(void)
+{
+    static GLint rotation = 0;
+
+    rotation = (rotation + 1) & 0x3;
+    switch (rotation)
+    {
+    case 0:
+        glColorMask(GL_TRUE, GL_TRUE, GL_TRUE, GL_TRUE);
+        glIndexMask(0xff);
+        break;
+    case 1:
+        glColorMask(GL_FALSE, GL_TRUE, GL_TRUE, GL_TRUE);
+        glIndexMask(0xFE);
+        break;
+    case 2:
+        glColorMask(GL_TRUE, GL_FALSE, GL_TRUE, GL_TRUE);
+        glIndexMask(0xFD);
+        break;
+    case 3:
+        glColorMask(GL_TRUE, GL_TRUE, GL_FALSE, GL_TRUE);
+        glIndexMask(0xFB);
+        break;
+    }
+}
+
+void SetColor(int index)
+{
+    if (rgb)
+    {
+        switch (index)
+        {
+        case 0:
+            glColor3f(0.0, 0.0, 0.0);
+            break;
+        case 1:
+            glColor3f(1.0, 0.0, 0.0);
+            break;
+        case 2:
+            glColor3f(0.0, 1.0, 0.0);
+            break;
+        case 3:
+            glColor3f(1.0, 1.0, 0.0);
+            break;
+        case 4:
+            glColor3f(0.0, 0.0, 1.0);
+            break;
+        case 5:
+            glColor3f(1.0, 0.0, 1.0);
+            break;
+        case 6:
+            glColor3f(0.0, 1.0, 1.0);
+            break;
+        case 7:
+            glColor3f(1.0, 1.0, 1.0);
+            break;
+        }
+    }
+    else
+    {
+        glIndexi(index);
+    }
+}
+
+void keyboard(unsigned char key, int x, int y)
+{
+    switch (key)
+    {
+    case '1':
+        mode1 = !mode1;
+        glutPostRedisplay();
+        break;
+    case '2':
+        mode2 = !mode2;
+        glutPostRedisplay();
+        break;
+    case '3':
+        RotateColorMask();
+        glutPostRedisplay();
+        break;
+    case 27:
+        exit(0);
+    }
+}
+
+void Args(int argc, char** argv)
 {
     GLint i;
 

@@ -29,10 +29,7 @@ INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
 // 提取到全局變量中 
 HDC dc = NULL;
 
-int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
-    _In_opt_ HINSTANCE hPrevInstance,
-    _In_ LPWSTR    lpCmdLine,
-    _In_ int       nCmdShow)
+int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance, _In_ LPWSTR lpCmdLine, _In_ int nCmdShow)
 {
     UNREFERENCED_PARAMETER(hPrevInstance);
     UNREFERENCED_PARAMETER(lpCmdLine);
@@ -58,10 +55,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_OPENGL));
 
     MSG msg;
-
     // 讀取文件內容
-    // Visual Studio 2019 中使用相對路徑讀取不到文件
-
     char* str = (char*)LoadFileContent("C:\\_git\\vcs\\_6.opengl\\OpenGL - master\\test.txt");
     printf("%s\n", str);
 
@@ -119,7 +113,6 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     // 設置鏡面反射光反射材質 , 這里設置為黑色 , 不反射光 , 全都吸收
     glMaterialfv(GL_FRONT, GL_SPECULAR, blueMat);
-
 
     // 啟用光照
     glEnable(GL_LIGHTING);
@@ -183,29 +176,9 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         //glBegin(GL_TRIANGLE_STRIP); //繪製 GL_TRIANGLE_STRIP 三角形
         //glBegin(GL_TRIANGLE_FAN);	//繪製三角形扇
 
-	// 繪製三角形
+        //繪製三角形
         glBegin(GL_TRIANGLES);
 
-        //old
-        glNormal3f(0.0f, -1.0f, 0.0f);	//設置法線
-
-        // 1. 設置白色 , glVertex3f (GLfloat x, GLfloat y, GLfloat z)
-        glColor4ub(255, 255, 255, 255);
-        glVertex3f(-1.0f, -0.5f, -2.0f);
-
-        glNormal3f(0.0f, 1.0f, 0.0f);	//設置法線
-
-        // 2. 設置綠色 
-        glColor4ub(0, 255, 0, 255);
-        glVertex3f(1.0f, -0.5f, -2.0f);
-
-        glNormal3f(0.0f, 1.0f, 0.0f);	//設置法線
-
-        // 3. 設置藍色
-        glColor4ub(0, 0, 255, 255);
-        glVertex3f(0.0f, -0.5f, -10.0f);
-
-        /* new
         glNormal3f(0.0f, -1.0f, 0.0f);	//設置法線
         glColor4ub(255, 0, 0, 255);     //R
         glVertex3f(-1.0f, -0.9f, -2.0f);    //左下
@@ -217,23 +190,19 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
         glNormal3f(0.0f, 1.0f, 0.0f);	//設置法線
         glColor4ub(0, 0, 255, 255);     //B
         glVertex3f(0.0f, 2.5f, -10.0f); //上
-        */
 
-        // 繪製三角形結束
         glEnd();
 
         // 矩陣出棧 
         //glPopMatrix();
 
-        // 將後緩沖區繪製到前臺
-        SwapBuffers(dc);
+        SwapBuffers(dc);    // 將後緩沖區繪製到前臺
     }
     return (int)msg.wParam;
 }
 
 //
 //  函數: MyRegisterClass()
-//
 //  目標: 注冊窗口類。
 //
 ATOM MyRegisterClass(HINSTANCE hInstance)
@@ -273,11 +242,8 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
 
 //
 //   函數: InitInstance(HINSTANCE, int)
-//
 //   目標: 保存實例句柄并創建主窗口
-//
 //   注釋:
-//
 //        在此函數中，我們在全局變量中保存實例句柄并
 //        創建和顯示主程序窗口。
 //
@@ -304,7 +270,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     {
         return FALSE;
     }
-
 
     // 創建 OpenGL 的渲染上下文
 
@@ -352,7 +317,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
     // glClearColor (GLclampf red, GLclampf green, GLclampf blue, GLclampf alpha)
     // 對應的參數是 紅色 , 綠色 , 藍色 , 透明度
     // 這里設置的是紅色
-    glClearColor(1.0, 0.0, 0.0, 1.0);   //設置背景顏色 R
+    glClearColor(0.0, 0.0, 0.0, 1.0);   //設置背景顏色 黑色
 
     // 矩陣環境初始化 , 主要是投影矩陣和模型矩陣 
 
@@ -381,13 +346,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
 //
 //  函數: WndProc(HWND, UINT, WPARAM, LPARAM)
-//
 //  目標: 處理主窗口的消息。
 //
 //  WM_COMMAND  - 處理應用程序菜單
 //  WM_PAINT    - 繪製主窗口
 //  WM_DESTROY  - 發送退出消息并返回
-//
 //
 LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 {
@@ -446,3 +409,5 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     }
     return (INT_PTR)FALSE;
 }
+
+

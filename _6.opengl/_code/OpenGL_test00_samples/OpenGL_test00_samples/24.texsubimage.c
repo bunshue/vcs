@@ -252,47 +252,54 @@ usage(int argc, char** argv)
     fprintf(stderr, "\n");
 }
 
-int
-main(int argc, char** argv)
+int main(int argc, char** argv)
 {
     char* name = "TexSubImage Test";
     int i;
 
-    for (i = 1; i < argc; ++i) {
-        if (strcmp("-sb", argv[i]) == 0) {
+    for (i = 1; i < argc; ++i)
+    {
+        if (strcmp("-sb", argv[i]) == 0)
+        {
             doubleBuffered = GL_FALSE;
 
         }
-        else if (strcmp("-db", argv[i]) == 0) {
+        else if (strcmp("-db", argv[i]) == 0)
+        {
             doubleBuffered = GL_TRUE;
 
         }
-        else if (i == argc - 1 && argv[i][0] != '-') {
+        else if (i == argc - 1 && argv[i][0] != '-')
+        {
             filename = argv[i];
 
         }
-        else {
+        else
+        {
             usage(argc, argv);
             exit(EXIT_FAILURE);
         }
     }
 
-    if (filename == NULL) {
+    if (filename == NULL)
+    {
         usage(argc, argv);
         exit(EXIT_FAILURE);
     }
 
     imgLoad(filename, &imageWidth, &imageHeight, &imageData);
 
-    if (doubleBuffered) {
+    if (doubleBuffered)
+    {
         glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
     }
-    else {
+    else
+    {
         glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
     }
 
     glutInitWindowSize(winWidth, winHeight);
-    glutCreateWindow(name);
+    glutCreateWindow(name);	//開啟視窗 並顯示出視窗 Title
 
     if (!glutExtensionSupported("GL_EXT_subtexture")) {
         fprintf(stderr, "missing extension: GL_EXT_subtexture\n");
@@ -304,7 +311,9 @@ main(int argc, char** argv)
     glutKeyboardFunc(keyboard);
     glutMouseFunc(mouse);
     glutMotionFunc(motion);
-    glutMainLoop();
+	glutMainLoop();	//開始主循環繪製
+
+	return 0;
 }
 
 #else

@@ -19,7 +19,8 @@
 
 
 GLenum doubleBuffer;
-int W = 600, H = 600;
+int W = 600;
+int H = 600;
 
 RGBImageRec* image = NULL;
 
@@ -446,7 +447,8 @@ void BuildCylinder(int numEdges)
 
 	glNewList(cylinder, GL_COMPILE);
 	glBegin(GL_TRIANGLE_STRIP);
-	for (i = 0; i <= numEdges; i++) {
+	for (i = 0; i <= numEdges; i++)
+	{
 		glNormal3f(x[i], y[i], 0.0);
 		glVertex3f(x[i], y[i], bottom);
 		glVertex3f(x[i], y[i], top);
@@ -455,14 +457,16 @@ void BuildCylinder(int numEdges)
 	glBegin(GL_TRIANGLE_FAN);
 	glNormal3f(0.0, 0.0, 1.0);
 	glVertex3f(0.0, 0.0, top);
-	for (i = 0; i <= numEdges; i++) {
+	for (i = 0; i <= numEdges; i++)
+	{
 		glVertex3f(x[i], -y[i], top);
 	}
 	glEnd();
 	glBegin(GL_TRIANGLE_FAN);
 	glNormal3f(0.0, 0.0, -1.0);
 	glVertex3f(0.0, 0.0, bottom);
-	for (i = 0; i <= numEdges; i++) {
+	for (i = 0; i <= numEdges; i++)
+	{
 		glVertex3f(x[i], y[i], bottom);
 	}
 	glEnd();
@@ -480,10 +484,13 @@ void BuildTorus(float rc, int numc, float rt, int numt)
 	twopi = 2.0 * pi;
 
 	glNewList(torus, GL_COMPILE);
-	for (i = 0; i < numc; i++) {
+	for (i = 0; i < numc; i++)
+	{
 		glBegin(GL_QUAD_STRIP);
-		for (j = 0; j <= numt; j++) {
-			for (k = 0; k <= 1; k++) {
+		for (j = 0; j <= numt; j++)
+		{
+			for (k = 0; k <= 1; k++)
+			{
 				s = (i + k) % numc + 0.5;
 				t = j % numt;
 
@@ -520,8 +527,8 @@ void BuildCage(void)
 	inc = 2.0 * 4.0 * 0.1;
 
 	glNewList(cage, GL_COMPILE);
-	for (i = 0; i < 10; i++) {
-
+	for (i = 0; i < 10; i++)
+	{
 		/*
 		** Back
 		*/
@@ -602,8 +609,10 @@ void BuildCube(void)
 	int i, j;
 
 	glNewList(cube, GL_COMPILE);
-	for (i = 0; i < 6; i++) {
-		for (j = 0; j < 4; j++) {
+	for (i = 0; i < 6; i++)
+	{
+		for (j = 0; j < 4; j++)
+		{
 			glNormal3fv(n[i]);
 			glBegin(GL_POLYGON);
 			glVertex3fv(c[i][j][0]);
@@ -666,7 +675,8 @@ unsigned char* AlphaPadImage(int bufSize, unsigned char* inData, int alpha)
 	out_ptr = outData;
 	in_ptr = inData;
 
-	for (i = 0; i < bufSize; i++) {
+	for (i = 0; i < bufSize; i++)
+	{
 		*out_ptr++ = *in_ptr++;
 		*out_ptr++ = *in_ptr++;
 		*out_ptr++ = *in_ptr++;
@@ -695,7 +705,8 @@ void Init(void)
 	SetDeepestColor();
 	SetDefaultSettings();
 
-	if (numComponents == 4) {
+	if (numComponents == 4)
+	{
 		image->data = AlphaPadImage(image->sizeX * image->sizeY,
 			image->data, 128);
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
@@ -703,7 +714,8 @@ void Init(void)
 			image->sizeX, image->sizeY,
 			GL_RGBA, GL_UNSIGNED_BYTE, image->data);
 	}
-	else {
+	else
+	{
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 		gluBuild2DMipmaps(GL_TEXTURE_2D, numComponents,
 			image->sizeX, image->sizeY,
@@ -919,7 +931,7 @@ void keyboard(unsigned char key, int x, int y)
 	}
 }
 
-void SpecialKey(int key, int x, int y)
+void special(int key, int x, int y)
 {
 	switch (key)
 	{
@@ -1008,7 +1020,8 @@ int main(int argc, char** argv)
 		image = rgbImageLoad(filename);
 	}
 
-	if (image == NULL) {
+	if (image == NULL)
+	{
 		printf("No texture file.\n");
 		exit(1);
 	}
@@ -1027,9 +1040,9 @@ int main(int argc, char** argv)
 	glutDisplayFunc(display);       //設定callback function
 	glutReshapeFunc(reshape);       //設定callback function
 	glutKeyboardFunc(keyboard);     //設定callback function
-	glutSpecialFunc(SpecialKey);    //設定callback function
+	glutSpecialFunc(special);    //設定callback function
 
-	glutIdleFunc(display);
+	glutIdleFunc(display);         //設定callback function, 利用idle事件進行重畫
 
-	glutMainLoop();
+	glutMainLoop();	//開始主循環繪製
 }

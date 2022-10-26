@@ -89,7 +89,6 @@ GLubyte logo_bits[] =
    0xff, 0x66, 0x66,
 };
 
-
 static void Init(void)
 {
     if (!rgb)
@@ -110,7 +109,6 @@ static void Init(void)
 
 static void reshape(int width, int height)
 {
-
     glViewport(0, 0, width, height);
 
     glMatrixMode(GL_PROJECTION);
@@ -130,6 +128,8 @@ static void keyboard(unsigned char key, int x, int y)
 
 static void display(void)
 {
+    float x_st = 0.0f;
+    float y_st = 0.0f;
 
     glClear(GL_COLOR_BUFFER_BIT);
 
@@ -218,7 +218,7 @@ int main(int argc, char** argv)
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(1100, 200);
 
-    glutCreateWindow("Bitmap Test");
+    glutCreateWindow("Bitmap Test");	//開啟視窗 並顯示出視窗 Title
 
     Init();
 
@@ -226,5 +226,7 @@ int main(int argc, char** argv)
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
 
-    glutMainLoop();
+    glutMainLoop();	//開始主循環繪製
+
+    return 0;
 }

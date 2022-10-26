@@ -19,7 +19,7 @@ float point[3] = {
     1.0, 1.0, 0.0
 };
 
-static void Init(void)
+void Init(void)
 {
     GLint i;
 
@@ -41,71 +41,7 @@ static void Init(void)
     size = 1;
 }
 
-static void reshape(int width, int height)
-{
-
-    windW = width;
-    windH = height;
-
-    glViewport(0, 0, windW, windH);
-
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluOrtho2D(-windW / 2, windW / 2, -windH / 2, windH / 2);
-    glMatrixMode(GL_MODELVIEW);
-}
-
-static void keyboard(unsigned char key, int x, int y)
-{
-    switch (key) {
-    case '1':
-        mode = !mode;
-        glutPostRedisplay();
-        break;
-    case 'W':
-        size++;
-        glutPostRedisplay();
-        break;
-    case 'w':
-        size--;
-        if (size < 1) {
-            size = 1;
-        }
-        glutPostRedisplay();
-        break;
-    case 27:
-        exit(0);
-    }
-}
-
-static void SpecialKey(int key, int x, int y)
-{
-    switch (key)
-    {
-    case GLUT_KEY_LEFT:
-        printf("你按了 左 ");
-        point[0] -= 0.25;
-        glutPostRedisplay();
-        break;
-    case GLUT_KEY_RIGHT:
-        printf("你按了 右 ");
-        point[0] += 0.25;
-        glutPostRedisplay();
-        break;
-    case GLUT_KEY_UP:
-        printf("你按了 上 ");
-        point[1] += 0.25;
-        glutPostRedisplay();
-        break;
-    case GLUT_KEY_DOWN:
-        printf("你按了 下 ");
-        point[1] -= 0.25;
-        glutPostRedisplay();
-        break;
-    }
-}
-
-static void display(void)
+void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
 
@@ -167,7 +103,73 @@ static void display(void)
     }
 }
 
-static void Args(int argc, char** argv)
+void reshape(int width, int height)
+{
+
+    windW = width;
+    windH = height;
+
+    glViewport(0, 0, windW, windH);
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(-windW / 2, windW / 2, -windH / 2, windH / 2);
+    glMatrixMode(GL_MODELVIEW);
+}
+
+void keyboard(unsigned char key, int x, int y)
+{
+    switch (key)
+	{
+    case '1':
+        mode = !mode;
+        glutPostRedisplay();
+        break;
+    case 'W':
+        size++;
+        glutPostRedisplay();
+        break;
+    case 'w':
+        size--;
+        if (size < 1)
+		{
+            size = 1;
+        }
+        glutPostRedisplay();
+        break;
+    case 27:
+        exit(0);
+    }
+}
+
+void special(int key, int x, int y)
+{
+    switch (key)
+    {
+    case GLUT_KEY_LEFT:
+        printf("你按了 左 ");
+        point[0] -= 0.25;
+        glutPostRedisplay();
+        break;
+    case GLUT_KEY_RIGHT:
+        printf("你按了 右 ");
+        point[0] += 0.25;
+        glutPostRedisplay();
+        break;
+    case GLUT_KEY_UP:
+        printf("你按了 上 ");
+        point[1] += 0.25;
+        glutPostRedisplay();
+        break;
+    case GLUT_KEY_DOWN:
+        printf("你按了 下 ");
+        point[1] -= 0.25;
+        glutPostRedisplay();
+        break;
+    }
+}
+
+void Args(int argc, char** argv)
 {
     GLint i;
 
@@ -216,7 +218,7 @@ int main(int argc, char** argv)
     glutDisplayFunc(display);       //設定callback function
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
-    glutSpecialFunc(SpecialKey);    //設定callback function
+    glutSpecialFunc(special);    //設定callback function
 
-    glutMainLoop();
+    glutMainLoop();	//開始主循環繪製
 }

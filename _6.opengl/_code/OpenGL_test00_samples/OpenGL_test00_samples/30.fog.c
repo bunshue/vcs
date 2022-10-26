@@ -375,7 +375,7 @@ int main(int argc, char** argv)
 	glutInitWindowSize(600, 600);
 	glutInitWindowPosition(1100, 200);
 
-	glutCreateWindow("Fog Test");
+	glutCreateWindow("Fog Test");	//開啟視窗 並顯示出視窗 Title
 
 	Init();
 
@@ -384,7 +384,9 @@ int main(int argc, char** argv)
 	glutKeyboardFunc(keyboard);     //設定callback function
 	glutSpecialFunc(SpecialKey);    //設定callback function
 
-	glutMainLoop();
+	glutMainLoop();	//開始主循環繪製
+
+	return 0;
 }
 
 

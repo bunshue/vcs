@@ -1,9 +1,7 @@
 /*
-** packedpix.c: Uses packed pixel types for DrawPixels, ReadPixels,
-**              TexImage2D, and GetTexImage.
+** packedpix.c: Uses packed pixel types for DrawPixels, ReadPixels, TexImage2D, and GetTexImage.
 **
-** Use -h option to display a list of command line options. Use Key h
-** in the created window for key options.
+** Use -h option to display a list of command line options. Use Key h in the created window for key options.
 */
 
 #include <stdio.h>
@@ -80,14 +78,17 @@ static void CreateFloatImage(RGBImageRec* imageIn, ConvertImageRec* imageOut)
 
 	imageSize = imageWidth * imageHeight * sizeof(GLfloat) * 4;
 	fltImage = (float*)malloc(imageSize);
-	if (NULL == fltImage) {
+	if (NULL == fltImage)
+	{
 		fprintf(stderr, "Out of memory!\n");
 		exit(1);
 	}
 
 	ptr = fltImage;
-	for (y = 0; y < imageHeight; y++) {
-		for (x = 0; x < imageWidth; x++) {
+	for (y = 0; y < imageHeight; y++)
+	{
+		for (x = 0; x < imageWidth; x++)
+		{
 			*ptr++ = *rawData++ / 255.0;
 			/* make an alpha value by copying the green channel */
 			alpha = *ptr++ = *rawData++ / 255.0;
@@ -846,5 +847,5 @@ int main(int argc, char** argv)
 	glutReshapeFunc(reshape);       //設定callback function
 	glutKeyboardFunc(keyboard);     //設定callback function
 
-	glutMainLoop();
+	glutMainLoop();	//開始主循環繪製
 }

@@ -67,25 +67,34 @@ void Teapot(long grid)
     glNewList(teaList, GL_COMPILE);
     glPushMatrix();
     glRotatef(270.0, 1.0, 0.0, 0.0);
-    for (i = 0; i < 10; i++) {
-        for (j = 0; j < 4; j++) {
-            for (k = 0; k < 4; k++) {
-                for (l = 0; l < 3; l++) {
+    for (i = 0; i < 10; i++)
+	{
+        for (j = 0; j < 4; j++)
+		{
+            for (k = 0; k < 4; k++)
+			{
+                for (l = 0; l < 3; l++)
+				{
                     p[j][k][l] = cpData[patchData[i][j * 4 + k]][l];
                     q[j][k][l] = cpData[patchData[i][j * 4 + (3 - k)]][l];
-                    if (l == 1) {
+                    if (l == 1)
+					{
                         q[j][k][l] *= -1.0;
                     }
-                    if (i < 6) {
+                    if (i < 6)
+					{
                         r[j][k][l] = cpData[patchData[i][j * 4 + (3 - k)]][l];
-                        if (l == 0) {
+                        if (l == 0)
+						{
                             r[j][k][l] *= -1.0;
                         }
                         s[j][k][l] = cpData[patchData[i][j * 4 + k]][l];
-                        if (l == 0) {
+                        if (l == 0)
+						{
                             s[j][k][l] *= -1.0;
                         }
-                        if (l == 1) {
+                        if (l == 1)
+						{
                             s[j][k][l] *= -1.0;
                         }
                     }
@@ -98,7 +107,8 @@ void Teapot(long grid)
         glEvalMesh2(GL_FILL, 0, grid, 0, grid);
         glMap2f(GL_MAP2_VERTEX_3, 0, 1, 3, 4, 0, 1, 12, 4, &q[0][0][0]);
         glEvalMesh2(GL_FILL, 0, grid, 0, grid);
-        if (i < 6) {
+        if (i < 6)
+		{
             glMap2f(GL_MAP2_VERTEX_3, 0, 1, 3, 4, 0, 1, 12, 4, &r[0][0][0]);
             glEvalMesh2(GL_FILL, 0, grid, 0, grid);
             glMap2f(GL_MAP2_VERTEX_3, 0, 1, 3, 4, 0, 1, 12, 4, &s[0][0][0]);
@@ -110,7 +120,7 @@ void Teapot(long grid)
     glEndList();
 }
 
-static void Init(void)
+void Init(void)
 {
     float position[] = { 0.0, 3.0, 3.0, 0.0 };
     float local_view[] = { 0.0 };
@@ -141,51 +151,7 @@ static void Init(void)
     Teapot(14);
 }
 
-static void reshape(int w, int h)
-{
-
-    glViewport(0, 0, (GLint)w, (GLint)h);
-
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glOrtho(-6.0, 6.0, -6.0, 6.0, -1.0, 10.0);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-}
-
-static void keyboard(unsigned char key, int x, int y)
-{
-
-    switch (key) {
-    case 27:
-        exit(0);
-    }
-}
-
-static void SpecialKey(int key, int x, int y)
-{
-
-    switch (key) {
-    case GLUT_KEY_UP:
-        rotX -= 20.0;
-        glutPostRedisplay();
-        break;
-    case GLUT_KEY_DOWN:
-        rotX += 20.0;
-        glutPostRedisplay();
-        break;
-    case GLUT_KEY_LEFT:
-        rotY -= 20.0;
-        glutPostRedisplay();
-        break;
-    case GLUT_KEY_RIGHT:
-        rotY += 20.0;
-        glutPostRedisplay();
-        break;
-    }
-}
-
-static void display(void)
+void display(void)
 {
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -210,7 +176,51 @@ static void display(void)
     }
 }
 
-static void Args(int argc, char** argv)
+void reshape(int w, int h)
+{
+
+    glViewport(0, 0, (GLint)w, (GLint)h);
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(-6.0, 6.0, -6.0, 6.0, -1.0, 10.0);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+}
+
+void keyboard(unsigned char key, int x, int y)
+{
+    switch (key)
+    {
+    case 27:
+        exit(0);
+    }
+}
+
+void special(int key, int x, int y)
+{
+    switch (key)
+	{
+    case GLUT_KEY_UP:
+        rotX -= 20.0;
+        glutPostRedisplay();
+        break;
+    case GLUT_KEY_DOWN:
+        rotX += 20.0;
+        glutPostRedisplay();
+        break;
+    case GLUT_KEY_LEFT:
+        rotY -= 20.0;
+        glutPostRedisplay();
+        break;
+    case GLUT_KEY_RIGHT:
+        rotY += 20.0;
+        glutPostRedisplay();
+        break;
+    }
+}
+
+void Args(int argc, char** argv)
 {
     GLint i;
 
@@ -242,14 +252,14 @@ int main(int argc, char** argv)
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(1100, 200);
 
-    glutCreateWindow("TeaPot");
+    glutCreateWindow("TeaPot");		//開啟視窗 並顯示出視窗 Title
 
     Init();
 
     glutDisplayFunc(display);       //設定callback function
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
-    glutSpecialFunc(SpecialKey);    //設定callback function
+    glutSpecialFunc(special);    //設定callback function
 
-    glutMainLoop();
+    glutMainLoop();	//開始主循環繪製
 }

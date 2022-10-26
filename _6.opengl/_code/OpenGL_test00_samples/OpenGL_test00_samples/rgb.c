@@ -7,8 +7,6 @@
 
 #include "rgb.h"
 
-/******************************************************************************/
-
 typedef struct _rawImageRec {
     unsigned short imagic;
     unsigned short type;
@@ -25,9 +23,7 @@ typedef struct _rawImageRec {
     GLint* rowSize;
 } rawImageRec;
 
-/******************************************************************************/
-
-static void ConvertShort(unsigned short* array, long length)
+void ConvertShort(unsigned short* array, long length)
 {
     unsigned long b1, b2;
     unsigned char* ptr;
@@ -41,7 +37,7 @@ static void ConvertShort(unsigned short* array, long length)
     }
 }
 
-static void ConvertLong(GLuint* array, long length)
+void ConvertLong(GLuint* array, long length)
 {
     unsigned long b1, b2, b3, b4;
     unsigned char* ptr;
@@ -57,7 +53,7 @@ static void ConvertLong(GLuint* array, long length)
     }
 }
 
-static rawImageRec* RawImageOpen(char* fileName)
+rawImageRec* RawImageOpen(char* fileName)
 {
     union {
         int testWord;
@@ -140,7 +136,7 @@ static rawImageRec* RawImageOpen(char* fileName)
     return raw;
 }
 
-static void RawImageClose(rawImageRec* raw)
+void RawImageClose(rawImageRec* raw)
 {
     fclose(raw->file);
     free(raw->tmp);
@@ -152,7 +148,7 @@ static void RawImageClose(rawImageRec* raw)
     free(raw);
 }
 
-static void RawImageGetRow(rawImageRec* raw, unsigned char* buf, int y, int z)
+void RawImageGetRow(rawImageRec* raw, unsigned char* buf, int y, int z)
 {
     unsigned char* iPtr, * oPtr, pixel;
     int count;
@@ -196,7 +192,7 @@ static void RawImageGetRow(rawImageRec* raw, unsigned char* buf, int y, int z)
     }
 }
 
-static void RawImageGetData(rawImageRec* raw, RGBImageRec* final)
+void RawImageGetData(rawImageRec* raw, RGBImageRec* final)
 {
     unsigned char* ptr;
     int i, j;
@@ -247,6 +243,3 @@ RGBImageRec* rgbImageLoad(char* fileName)
 
     return final;
 }
-
-/******************************************************************************/
-

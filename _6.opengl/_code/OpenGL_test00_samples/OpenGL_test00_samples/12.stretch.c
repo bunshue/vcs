@@ -54,21 +54,20 @@ GLenum op = OP_NOOP;
 
 void DrawImage(void)
 {
-
     glRasterPos2i(0, 0);
-    glDrawPixels(image->sizeX, image->sizeY, GL_RGB, GL_UNSIGNED_BYTE,
-        image->data);
+    glDrawPixels(image->sizeX, image->sizeY, GL_RGB, GL_UNSIGNED_BYTE, image->data);
 
-    if (doubleBuffer) {
+    if (doubleBuffer)
+    {
         glutSwapBuffers();
     }
-    else {
+    else
+    {
         glFlush();
     }
 
     glRasterPos2i(0, 0);
-    glDrawPixels(image->sizeX, image->sizeY, GL_RGB, GL_UNSIGNED_BYTE,
-        image->data);
+    glDrawPixels(image->sizeX, image->sizeY, GL_RGB, GL_UNSIGNED_BYTE, image->data);
 }
 
 void DrawPoint(void)
@@ -78,15 +77,18 @@ void DrawPoint(void)
     glColor3f(1.0, 0.0, 1.0);
     glPointSize(3.0);
     glBegin(GL_POINTS);
-    for (i = 0; i < cCount; i++) {
+    for (i = 0; i < cCount; i++)
+    {
         glVertex2f(cList[i].x, cList[i].y);
     }
     glEnd();
 
-    if (doubleBuffer) {
+    if (doubleBuffer)
+    {
         glutSwapBuffers();
     }
-    else {
+    else
+    {
         glFlush();
     }
 }
@@ -145,7 +147,6 @@ void ScaleImage(int sizeX, int sizeY)
 
 void SetPoint(int x, int y)
 {
-
     cList[cCount].x = (float)x;
     cList[cCount].y = (float)y;
     cCount++;
@@ -153,7 +154,6 @@ void SetPoint(int x, int y)
 
 void Stretch(void)
 {
-
     glBegin(GL_TRIANGLES);
     glTexCoord2f(vList[0].tX, vList[0].tY);
     glVertex2f(vList[0].x, vList[0].y);
@@ -190,26 +190,48 @@ void Stretch(void)
     glVertex2f(vList[4].x, vList[4].y);
     glEnd();
 
-    if (doubleBuffer) {
+    if (doubleBuffer)
+    {
         glutSwapBuffers();
     }
-    else {
+    else
+    {
         glFlush();
     }
 
-    if (++cStep < STEPCOUNT) {
+    if (++cStep < STEPCOUNT)
+    {
         vList[4].x += vList[4].dX;
         vList[4].y += vList[4].dY;
     }
-    else {
+    else
+    {
         cIndex[0] = cIndex[1];
         cIndex[1] = cIndex[1] + 1;
-        if (cIndex[1] == cCount) {
+        if (cIndex[1] == cCount)
+        {
             cIndex[1] = 0;
         }
         vList[4].dX = (cList[cIndex[1]].x - cList[cIndex[0]].x) / STEPCOUNT;
         vList[4].dY = (cList[cIndex[1]].y - cList[cIndex[0]].y) / STEPCOUNT;
         cStep = 0;
+    }
+}
+
+
+void display(void)
+{
+    switch (op)
+    {
+    case OP_STRETCH:
+        Stretch();
+        break;
+    case OP_DRAWPOINT:
+        DrawPoint();
+        break;
+    case OP_DRAWIMAGE:
+        DrawImage();
+        break;
     }
 }
 
@@ -239,12 +261,14 @@ void mouse(int button, int state, int mouseX, int mouseY)
 {
     if (state == GLUT_DOWN)
     {
-        if (op == OP_STRETCH) {
+        if (op == OP_STRETCH)
+        {
             glDisable(GL_TEXTURE_2D);
             cCount = 0;
             op = OP_DRAWIMAGE;
         }
-        else {
+        else
+        {
             SetPoint(mouseX, imageSizeY - mouseY);
             op = OP_DRAWPOINT;
         }
@@ -252,42 +276,34 @@ void mouse(int button, int state, int mouseX, int mouseY)
     }
 }
 
-void display(void)
-{
-    switch (op) {
-    case OP_STRETCH:
-        Stretch();
-        break;
-    case OP_DRAWPOINT:
-        DrawPoint();
-        break;
-    case OP_DRAWIMAGE:
-        DrawImage();
-        break;
-    }
-}
-
-static void Args(int argc, char** argv)
+void Args(int argc, char** argv)
 {
     GLint i;
 
     doubleBuffer = GL_FALSE;
 
-    for (i = 1; i < argc; i++) {
-        if (strcmp(argv[i], "-sb") == 0) {
+    for (i = 1; i < argc; i++)
+    {
+        if (strcmp(argv[i], "-sb") == 0)
+        {
             doubleBuffer = GL_FALSE;
         }
-        else if (strcmp(argv[i], "-db") == 0) {
+        else if (strcmp(argv[i], "-db") == 0)
+        {
             doubleBuffer = GL_TRUE;
         }
-        else if (strcmp(argv[i], "-f") == 0) {
-            if (i + 1 >= argc || argv[i + 1][0] == '-') {
+        else if (strcmp(argv[i], "-f") == 0)
+        {
+            if (i + 1 >= argc || argv[i + 1][0] == '-')
+            {
                 printf("-f (No file name).\n");
                 exit(1);
             }
-            else {
+            else
+            {
                 image = rgbImageLoad(argv[++i]);
-                if (image == NULL) {
+                if (image == NULL)
+                {
                     printf("-f (Bad file name).\n");
                     exit(1);
                 }
@@ -354,12 +370,10 @@ int main(int argc, char** argv)
     op = OP_DRAWIMAGE;
 
     glutDisplayFunc(display);       //設定callback function
-    //glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
-    //glutSpecialFunc(SpecialKey);    //設定callback function
-    glutMouseFunc(mouse);
+    glutMouseFunc(mouse);	//設定callback function
 
-    glutIdleFunc(display);
+    glutIdleFunc(display);         //設定callback function, 利用idle事件進行重畫
 
-    glutMainLoop();
+    glutMainLoop();	//開始主循環繪製
 }

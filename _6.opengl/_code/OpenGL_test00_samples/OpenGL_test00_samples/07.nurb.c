@@ -25,14 +25,18 @@ typedef INREAL Point[4];
 GLenum doubleBuffer;
 
 GLenum expectedError;
-GLint rotX = 40, rotY = 40;
+GLint rotX = 40;
+GLint rotY = 40;
+
 INREAL sknots[S_NUMKNOTS] = {
 	-1.0, -1.0, -1.0, 0.0, 1.0, 2.0, 3.0, 4.0,
 	4.0, 5.0, 6.0, 7.0, 8.0, 9.0, 9.0, 9.0
 };
+
 INREAL glutnots[T_NUMKNOTS] = {
 	1.0, 1.0, 1.0, 2.0, 2.0, 2.0
 };
+
 Point ctlpoints[S_NUMPOINTS][T_NUMPOINTS] = {
 	{
 	{
@@ -180,11 +184,10 @@ Point ctlpoints[S_NUMPOINTS][T_NUMPOINTS] = {
 };
 GLUnurbsObj* theNurbs;
 
-
 static void CALLBACK ErrorCallback(GLenum which)
 {
-
-	if (which != expectedError) {
+	if (which != expectedError)
+	{
 		fprintf(stderr, "Unexpected error occured (%d):\n", which);
 		fprintf(stderr, "    %s\n", gluErrorString(which));
 	}
@@ -228,7 +231,7 @@ static void keyboard(unsigned char key, int x, int y)
 	}
 }
 
-static void SpecialKey(int key, int x, int y)
+static void special(int key, int x, int y)
 {
 	switch (key)
 	{
@@ -265,16 +268,17 @@ static void display(void)
 
 	gluBeginSurface(theNurbs);
 	gluNurbsSurface(theNurbs, S_NUMKNOTS, sknots, T_NUMKNOTS, glutnots,
-		4 * T_NUMPOINTS, 4, &ctlpoints[0][0][0], S_ORDER,
-		T_ORDER, GL_MAP2_VERTEX_4);
+		4 * T_NUMPOINTS, 4, &ctlpoints[0][0][0], S_ORDER,		T_ORDER, GL_MAP2_VERTEX_4);
 	gluEndSurface(theNurbs);
 
 	glPopMatrix();
 
-	if (doubleBuffer) {
+	if (doubleBuffer)
+	{
 		glutSwapBuffers();
 	}
-	else {
+	else
+	{
 		glFlush();
 	}
 }
@@ -311,14 +315,16 @@ int main(int argc, char** argv)
 	glutInitWindowSize(600, 600);
 	glutInitWindowPosition(1100, 200);
 
-	glutCreateWindow("NURBS Test");
+	glutCreateWindow("NURBS Test");	//開啟視窗 並顯示出視窗 Title
 
 	Init();
 
 	glutDisplayFunc(display);       //設定callback function
 	glutReshapeFunc(reshape);       //設定callback function
 	glutKeyboardFunc(keyboard);     //設定callback function
-	glutSpecialFunc(SpecialKey);    //設定callback function
+	glutSpecialFunc(special);    //設定callback function
 
-	glutMainLoop();
+	printf("按 上 下 左 右 控制\n");
+
+	glutMainLoop();	//開始主循環繪製
 }

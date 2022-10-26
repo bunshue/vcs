@@ -15,7 +15,7 @@
 GLenum doubleBuffer;
 GLint thing1, thing2, thing3, thing4;
 
-static void Init(void)
+void Init(void)
 {
     //           R    G    B     A
     glClearColor(0.0, 0.0, 0.0, 0.0);   //設定背景色(0 0 0為黑色)
@@ -49,34 +49,7 @@ static void Init(void)
     glEndList();
 }
 
-static void reshape(int width, int height)
-{
-    glViewport(0, 0, width, height);
-
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
-}
-
-static void keyboard(unsigned char key, int x, int y)
-{
-    switch (key)
-    {
-    case '1':
-        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-        glutPostRedisplay();
-        break;
-    case '2':
-        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        glutPostRedisplay();
-        break;
-    case 27:
-        exit(0);
-    }
-}
-
-static void display(void)
+void display(void)
 {
     glPushMatrix();
 
@@ -112,7 +85,34 @@ static void display(void)
     }
 }
 
-static void Args(int argc, char** argv)
+void reshape(int width, int height)
+{
+    glViewport(0, 0, width, height);
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+}
+
+void keyboard(unsigned char key, int x, int y)
+{
+    switch (key)
+    {
+    case '1':
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+        glutPostRedisplay();
+        break;
+    case '2':
+        glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+        glutPostRedisplay();
+        break;
+    case 27:
+        exit(0);
+    }
+}
+
+void Args(int argc, char** argv)
 {
     GLint i;
 
@@ -144,7 +144,7 @@ int main(int argc, char** argv)
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(1100, 200);
 
-    glutCreateWindow("顏色重疊測試");
+    glutCreateWindow("顏色重疊測試");	//開啟視窗 並顯示出視窗 Title
 
     Init();
 
@@ -152,5 +152,7 @@ int main(int argc, char** argv)
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
 
-    glutMainLoop();
+    glutMainLoop();	//開始主循環繪製
+
+    return 0;
 }

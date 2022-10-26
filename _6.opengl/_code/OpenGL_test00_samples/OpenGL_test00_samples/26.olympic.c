@@ -320,7 +320,7 @@ int main(int argc, char** argv)
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(1100, 200);
 
-    glutCreateWindow("Olympic");
+    glutCreateWindow("Olympic");	//開啟視窗 並顯示出視窗 Title
 
     Init();
     ReInit();
@@ -328,6 +328,9 @@ int main(int argc, char** argv)
     glutReshapeFunc(Reshape);
     glutKeyboardFunc(Key);
     glutDisplayFunc(DrawScene);
-    glutMainLoop();
+
+	glutMainLoop();	//開始主循環繪製
+
+	return 0;
 }
 

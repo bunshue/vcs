@@ -15,7 +15,7 @@ float point[3];
 float zoom;
 GLint x, y;
 
-static void Init(void)
+void Init(void)
 {
     glClearColor(0.0, 0.0, 0.0, 0.0);
 
@@ -24,58 +24,7 @@ static void Init(void)
     zoom = 1.8;
 }
 
-static void reshape(int width, int height)
-{
-    windW = width;
-    windH = height;
-
-    glViewport(0, 0, windW, windH);
-
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluOrtho2D(0, windW, 0, windH);
-    glMatrixMode(GL_MODELVIEW);
-}
-
-static void keyboard(unsigned char key, int x, int y)
-{
-    switch (key)
-    {
-    case 27:
-        exit(0);
-    }
-}
-
-static void SpecialKey(int key, int x, int y)
-{
-    switch (key)
-    {
-    case GLUT_KEY_UP:
-        zoom += 0.2;
-        glutPostRedisplay();
-        break;
-    case GLUT_KEY_DOWN:
-        zoom -= 0.2;
-        if (zoom < 0.2)
-        {
-            zoom = 0.2;
-        }
-        glutPostRedisplay();
-        break;
-    }
-}
-
-static void mouse(int button, int state, int mouseX, int mouseY)
-{
-    if (state == GLUT_DOWN)
-    {
-        x = mouseX;
-        y = mouseY;
-        glutPostRedisplay();
-    }
-}
-
-static void display(void)
+void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
 
@@ -103,6 +52,57 @@ static void display(void)
     else
     {
         glFlush();
+    }
+}
+
+void reshape(int width, int height)
+{
+    windW = width;
+    windH = height;
+
+    glViewport(0, 0, windW, windH);
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(0, windW, 0, windH);
+    glMatrixMode(GL_MODELVIEW);
+}
+
+void special(int key, int x, int y)
+{
+    switch (key)
+    {
+    case GLUT_KEY_UP:
+        zoom += 0.2;
+        glutPostRedisplay();
+        break;
+    case GLUT_KEY_DOWN:
+        zoom -= 0.2;
+        if (zoom < 0.2)
+        {
+            zoom = 0.2;
+        }
+        glutPostRedisplay();
+        break;
+    }
+}
+
+void keyboard(unsigned char key, int x, int y)
+{
+    switch (key)
+    {
+    case 27:
+        exit(0);
+    }
+}
+
+void mouse(int button, int state, int mouseX, int mouseY)
+{
+    if (state == GLUT_DOWN)
+    {
+        x = mouseX;
+        y = mouseY;
+        glutPostRedisplay();
     }
 }
 
@@ -167,16 +167,18 @@ int main(int argc, char** argv)
     glutInitWindowSize(windW, windH);
     glutInitWindowPosition(1100, 200);
 
-    glutCreateWindow("Copy Test");
+    glutCreateWindow("Copy Test");	//開啟視窗 並顯示出視窗 Title
 
     Init();
 
     glutDisplayFunc(display);       //設定callback function
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
-    glutSpecialFunc(SpecialKey);    //設定callback function
-    glutMouseFunc(mouse);
+    glutSpecialFunc(special);       //設定callback function
+    glutMouseFunc(mouse);           //設定callback function
 
-    glutMainLoop();
+    glutMainLoop();	//開始主循環繪製
+
+    return 0;
 }
 

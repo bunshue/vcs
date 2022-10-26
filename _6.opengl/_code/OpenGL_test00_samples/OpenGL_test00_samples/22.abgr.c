@@ -194,7 +194,7 @@ int main(int argc, char** argv)
     type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
     glutInitDisplayMode(type);
     glutInitWindowSize(400, 400);
-    glutCreateWindow("ABGR extension");
+    glutCreateWindow("ABGR extension");	//開啟視窗 並顯示出視窗 Title
 
     if (!QueryExtension("GL_EXT_abgr")) {
         printf("Couldn't find ABGR extension.\n");
@@ -206,7 +206,9 @@ int main(int argc, char** argv)
     glutReshapeFunc(Reshape);
     glutKeyboardFunc(Key);
     glutDisplayFunc(Draw);
-    glutMainLoop();
+	glutMainLoop();	//開始主循環繪製
+
+	return 0;
 }
 
 #else

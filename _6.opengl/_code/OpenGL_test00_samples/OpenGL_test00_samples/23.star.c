@@ -309,7 +309,7 @@ int main(int argc, char** argv)
     glutInitWindowSize(windW, windH);
     glutInitWindowPosition(1100, 200);
 
-    glutCreateWindow("Stars");
+    glutCreateWindow("Stars");	//開啟視窗 並顯示出視窗 Title
 
     Init();
 
@@ -320,5 +320,7 @@ int main(int argc, char** argv)
     glutIdleFunc(Idle);             //設定callback function   Idle像是display
     glutDisplayFunc(Idle);          //設定callback function   Idle像是display
 
-    glutMainLoop();
+	glutMainLoop();	//開始主循環繪製
+
+	return 0;
 }

@@ -17,39 +17,14 @@
 GLenum doubleBuffer;
 GLenum dithering = GL_FALSE;
 
-
-static void Init(void)
+void Init(void)
 {
 
     glDisable(GL_DITHER);
     glShadeModel(GL_FLAT);
 }
 
-static void Reshape(int width, int height)
-{
-
-    glViewport(0, 0, width, height);
-
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluOrtho2D(0, 400, 0, 400);
-    glMatrixMode(GL_MODELVIEW);
-}
-
-static void Key(unsigned char key, int x, int y)
-{
-
-    switch (key) {
-    case 'd':
-        dithering = !dithering;
-        glutPostRedisplay();
-        break;
-    case 27:
-        exit(0);
-    }
-}
-
-static void Draw(void)
+void display(void)
 {
     float xscale, yscale;
     GLfloat x, y;
@@ -90,17 +65,20 @@ static void Draw(void)
         glVertex2i(i, 200);
         glEnd();
     }
-    if (doubleBuffer) {
+    if (doubleBuffer)
+    {
         glutSwapBuffers();
         glDrawBuffer(GL_FRONT);	/* draw next prims in visible buffer */
     }
-    else {
+    else
+    {
         glFlush();
     }
     sleep(2);
 
     /* Redraw  the rectangles, which should erase them */
-    for (i = 0; i < 400; i += 60) {
+    for (i = 0; i < 400; i += 60)
+    {
         glBegin(GL_POLYGON);
         glVertex2i(i, 100);
         glVertex2i(i + 50, 100);
@@ -110,13 +88,38 @@ static void Draw(void)
     }
 
     glFlush();
-    if (doubleBuffer) {
+    if (doubleBuffer)
+    {
         glDrawBuffer(GL_BACK);	/* draw next frame in invisible buffer */
     }
     assert(glGetError() == GL_NO_ERROR);
 }
 
-static void Args(int argc, char** argv)
+void reshape(int width, int height)
+{
+    glViewport(0, 0, width, height);
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(0, 400, 0, 400);
+    glMatrixMode(GL_MODELVIEW);
+}
+
+void keyboard(unsigned char key, int x, int y)
+{
+
+    switch (key)
+    {
+    case 'd':
+        dithering = !dithering;
+        glutPostRedisplay();
+        break;
+    case 27:
+        exit(0);
+    }
+}
+
+void Args(int argc, char** argv)
 {
     GLint i;
 
@@ -132,7 +135,7 @@ static void Args(int argc, char** argv)
     }
 }
 
-static GLboolean QueryExtension(char* extName)
+GLboolean QueryExtension(char* extName)
 {
     /*
     ** Search for extName in the extensions string. Use of strstr()
@@ -179,10 +182,11 @@ int main(int argc, char** argv)
 
     Init();
 
-    glutReshapeFunc(Reshape);
-    glutKeyboardFunc(Key);
-    glutDisplayFunc(Draw);
-    glutMainLoop();
+	glutDisplayFunc(display);	//設定callback function
+	glutReshapeFunc(reshape);	//設定callback function
+	glutKeyboardFunc(keyboard);	//設定callback function
+    
+    glutMainLoop();	//開始主循環繪製
 }
 
 #else

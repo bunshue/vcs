@@ -700,7 +700,7 @@ int main(int argc, char** argv)
 	type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
 	glutInitDisplayMode(type);
 	glutInitWindowSize(winWidth, winHeight);
-	glutCreateWindow("Copy Texture Test");
+	glutCreateWindow("Copy Texture Test");	//開啟視窗 並顯示出視窗 Title
 
 	if (texObjEXT && !QueryExtension("GL_EXT_texture_object")) {
 		fprintf(stdout, "Warning: texture object extension not found.\n");
@@ -739,7 +739,9 @@ int main(int argc, char** argv)
 	glutKeyboardFunc(Key);
 	glutSpecialFunc(SpecialKey);
 	glutDisplayFunc(Draw);
-	glutMainLoop();
+	glutMainLoop();	//開始主循環繪製
+
+	return 0;
 }
 
 #else

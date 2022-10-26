@@ -12,7 +12,8 @@
 #include "rgb.h"
 
 GLenum doubleBuffer;
-int winW = 600, winH = 600;
+int winW = 600;
+int winH = 600;
 
 RGBImageRec* earthImage = NULL, * skyImage = NULL;
 GLint skyList, earthList;
@@ -32,7 +33,7 @@ float ln_mipmap_ln[] = { GL_LINEAR_MIPMAP_LINEAR };
 int horizon;
 float texMinX, texMinY, texMaxX, texMaxY;
 
-static void Init(void)
+void Init(void)
 {
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
@@ -71,70 +72,7 @@ static void Init(void)
 	glEndList();
 }
 
-static void reshape(int width, int height)
-{
-	winW = width;
-	winH = height;
-
-	glViewport(0, 0, winW, winH);
-
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluOrtho2D(0, winW, 0, winH);
-	glMatrixMode(GL_MODELVIEW);
-}
-
-static void keyboard(unsigned char key, int x, int y)
-{
-	switch (key)
-	{
-	case '1':
-		horizon -= 5;
-		texMinY -= 5.0 / (float)winH;
-		texMinY += 5.0 / (float)winH;
-		texMaxY += 5.0 / (float)winH;
-		glutPostRedisplay();
-		break;
-	case '2':
-		horizon += 5;
-		texMinY += 5.0 / (float)winH;
-		texMinY -= 5.0 / (float)winH;
-		texMaxY -= 5.0 / (float)winH;
-		glutPostRedisplay();
-		break;
-	case 27:
-		exit(0);
-	}
-}
-
-static void SpecialKey(int key, int x, int y)
-{
-	switch (key)
-	{
-	case GLUT_KEY_LEFT:
-		texMinX -= 5.0 / (float)winW;
-		texMaxX -= 5.0 / (float)winW;
-		glutPostRedisplay();
-		break;
-	case GLUT_KEY_RIGHT:
-		texMinX += 5.0 / (float)winW;
-		texMaxX += 5.0 / (float)winW;
-		glutPostRedisplay();
-		break;
-	case GLUT_KEY_UP:
-		texMinY += 5.0 / (float)winH;
-		texMaxY += 5.0 / (float)winH;
-		glutPostRedisplay();
-		break;
-	case GLUT_KEY_DOWN:
-		texMinY -= 5.0 / (float)winH;
-		texMaxY -= 5.0 / (float)winH;
-		glutPostRedisplay();
-		break;
-	}
-}
-
-static void display(void)
+void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 
@@ -166,48 +104,124 @@ static void display(void)
 
 	glPopMatrix();
 
-	if (doubleBuffer) {
+	if (doubleBuffer)
+	{
 		glutSwapBuffers();
 	}
-	else {
+	else
+	{
 		glFlush();
 	}
 }
 
-static void Args(int argc, char** argv)
+void reshape(int width, int height)
+{
+	winW = width;
+	winH = height;
+
+	glViewport(0, 0, winW, winH);
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluOrtho2D(0, winW, 0, winH);
+	glMatrixMode(GL_MODELVIEW);
+}
+
+void keyboard(unsigned char key, int x, int y)
+{
+	switch (key)
+	{
+	case '1':
+		horizon -= 5;
+		texMinY -= 5.0 / (float)winH;
+		texMinY += 5.0 / (float)winH;
+		texMaxY += 5.0 / (float)winH;
+		glutPostRedisplay();
+		break;
+	case '2':
+		horizon += 5;
+		texMinY += 5.0 / (float)winH;
+		texMinY -= 5.0 / (float)winH;
+		texMaxY -= 5.0 / (float)winH;
+		glutPostRedisplay();
+		break;
+	case 27:
+		exit(0);
+	}
+}
+
+void special(int key, int x, int y)
+{
+	switch (key)
+	{
+	case GLUT_KEY_LEFT:
+		texMinX -= 5.0 / (float)winW;
+		texMaxX -= 5.0 / (float)winW;
+		glutPostRedisplay();
+		break;
+	case GLUT_KEY_RIGHT:
+		texMinX += 5.0 / (float)winW;
+		texMaxX += 5.0 / (float)winW;
+		glutPostRedisplay();
+		break;
+	case GLUT_KEY_UP:
+		texMinY += 5.0 / (float)winH;
+		texMaxY += 5.0 / (float)winH;
+		glutPostRedisplay();
+		break;
+	case GLUT_KEY_DOWN:
+		texMinY -= 5.0 / (float)winH;
+		texMaxY -= 5.0 / (float)winH;
+		glutPostRedisplay();
+		break;
+	}
+}
+
+void Args(int argc, char** argv)
 {
 	GLint i;
 
 	doubleBuffer = GL_FALSE;
 
-	for (i = 1; i < argc; i++) {
-		if (strcmp(argv[i], "-sb") == 0) {
+	for (i = 1; i < argc; i++)
+	{
+		if (strcmp(argv[i], "-sb") == 0)
+		{
 			doubleBuffer = GL_FALSE;
 		}
-		else if (strcmp(argv[i], "-db") == 0) {
+		else if (strcmp(argv[i], "-db") == 0)
+		{
 			doubleBuffer = GL_TRUE;
 		}
-		else if (strcmp(argv[i], "-earth") == 0) {
-			if (i + 1 >= argc || argv[i + 1][0] == '-') {
+		else if (strcmp(argv[i], "-earth") == 0)
+		{
+			if (i + 1 >= argc || argv[i + 1][0] == '-')
+			{
 				printf("-earth (No file name).\n");
 				exit(1);
 			}
-			else {
+			else
+			{
 				earthImage = rgbImageLoad(argv[++i]);
-				if (earthImage == NULL) {
+				if (earthImage == NULL)
+				{
 					printf("-earth (Bad file name).\n");
 					exit(1);
 				}
 			}
 		}
-		else if (strcmp(argv[i], "-sky") == 0) {
-			if (i + 1 >= argc || argv[i + 1][0] == '-') {
+		else if (strcmp(argv[i], "-sky") == 0)
+		{
+			if (i + 1 >= argc || argv[i + 1][0] == '-')
+			{
 				printf("-sky (No file name).\n");
 				exit(1);
 			}
-			else {
+			else
+			{
 				skyImage = rgbImageLoad(argv[++i]);
-				if (skyImage == NULL) {
+				if (skyImage == NULL)
+				{
 					printf("-sky (Bad file name).\n");
 					exit(1);
 				}
@@ -253,14 +267,14 @@ int main(int argc, char** argv)
 	glutInitWindowSize(winW, winH);
 	glutInitWindowPosition(1100, 200);
 
-	glutCreateWindow("Two Texture Test");
+	glutCreateWindow("Two Texture Test");	//開啟視窗 並顯示出視窗 Title
 
 	Init();
 
 	glutDisplayFunc(display);       //設定callback function
 	glutReshapeFunc(reshape);       //設定callback function
 	glutKeyboardFunc(keyboard);     //設定callback function
-	glutSpecialFunc(SpecialKey);    //設定callback function
+	glutSpecialFunc(special);    //設定callback function
 
-	glutMainLoop();
+	glutMainLoop();	//開始主循環繪製
 }

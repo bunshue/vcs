@@ -70,13 +70,13 @@ GLubyte brickImage[4 * brickImageWidth * brickImageHeight] = {
 RGBImageRec* image = NULL;
 
 
-static void CALLBACK ErrorHandler(GLenum which)
+void CALLBACK ErrorHandler(GLenum which)
 {
 
 	fprintf(stderr, "Quad Error: %s\n", gluErrorString(which));
 }
 
-static void Init(void)
+void Init(void)
 {
 	static GLint colorIndexes[3] = { 0, 200, 255 };
 	static float ambient[] = { 0.1, 0.1, 0.1, 1.0 };
@@ -119,12 +119,14 @@ static void Init(void)
 	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, repeat);
 	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, nearest);
 	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, nearest);
-	if (image) {
+	if (image)
+	{
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 		gluBuild2DMipmaps(GL_TEXTURE_2D, 3, image->sizeX, image->sizeY,
 			GL_RGB, GL_UNSIGNED_BYTE, image->data);
 	}
-	else {
+	else
+	{
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 		glTexImage2D(GL_TEXTURE_2D, 0, 4, brickImageWidth, brickImageHeight,
 			0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)brickImage);
@@ -142,7 +144,44 @@ static void Init(void)
 	height = 20;
 }
 
-static void reshape(int width, int height)
+void display(void)
+{
+	glLoadIdentity();
+	glRotatef(xRotation, 1, 0, 0);
+	glRotatef(yRotation, 0, 1, 0);
+	glRotatef(zRotation, 0, 0, 1);
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	glColor3f(1.0, 1.0, 1.0);
+	switch (whichQuadric)
+	{
+	case 0:
+		glTranslatef(0, 0, -height / 20.0);
+		gluCylinder(quadObj, radius1 / 10.0, radius2 / 10.0, height / 10.0, slices, stacks);
+		break;
+	case 1:
+		gluSphere(quadObj, radius1 / 10.0, slices, stacks);
+		break;
+	case 2:
+		gluPartialDisk(quadObj, radius2 / 10.0, radius1 / 10.0, slices, stacks, angle1, angle2);
+		break;
+	case 3:
+		gluDisk(quadObj, radius2 / 10.0, radius1 / 10.0, slices, stacks);
+		break;
+	}
+
+	if (doubleBuffer)
+	{
+		glutSwapBuffers();
+	}
+	else
+	{
+		glFlush();
+	}
+}
+
+void reshape(int width, int height)
 {
 	glViewport(0, 0, width, height);
 
@@ -153,7 +192,7 @@ static void reshape(int width, int height)
 	glMatrixMode(GL_MODELVIEW);
 }
 
-static void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
@@ -315,7 +354,7 @@ static void keyboard(unsigned char key, int x, int y)
 	}
 }
 
-static void SpecialKey(int key, int x, int y)
+void special(int key, int x, int y)
 {
 	switch (key)
 	{
@@ -338,44 +377,7 @@ static void SpecialKey(int key, int x, int y)
 	}
 }
 
-static void display(void)
-{
-	glLoadIdentity();
-	glRotatef(xRotation, 1, 0, 0);
-	glRotatef(yRotation, 0, 1, 0);
-	glRotatef(zRotation, 0, 0, 1);
-
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	glColor3f(1.0, 1.0, 1.0);
-	switch (whichQuadric)
-	{
-	case 0:
-		glTranslatef(0, 0, -height / 20.0);
-		gluCylinder(quadObj, radius1 / 10.0, radius2 / 10.0, height / 10.0, slices, stacks);
-		break;
-	case 1:
-		gluSphere(quadObj, radius1 / 10.0, slices, stacks);
-		break;
-	case 2:
-		gluPartialDisk(quadObj, radius2 / 10.0, radius1 / 10.0, slices, stacks, angle1, angle2);
-		break;
-	case 3:
-		gluDisk(quadObj, radius2 / 10.0, radius1 / 10.0, slices, stacks);
-		break;
-	}
-
-	if (doubleBuffer)
-	{
-		glutSwapBuffers();
-	}
-	else
-	{
-		glFlush();
-	}
-}
-
-static void Args(int argc, char** argv)
+void Args(int argc, char** argv)
 {
 	GLint i;
 
@@ -442,7 +444,7 @@ int main(int argc, char** argv)
 	glutDisplayFunc(display);       //設定callback function
 	glutReshapeFunc(reshape);       //設定callback function
 	glutKeyboardFunc(keyboard);     //設定callback function
-	glutSpecialFunc(SpecialKey);    //設定callback function
+	glutSpecialFunc(special);    //設定callback function
 
-	glutMainLoop();
+	glutMainLoop();	//開始主循環繪製
 }
