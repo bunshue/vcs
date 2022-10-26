@@ -34,7 +34,6 @@ enum {
     WHITE
 };
 
-
 GLenum rgb, doubleBuffer;
 
 unsigned char rgb_colors[RINGS][3];
@@ -46,7 +45,6 @@ float rotAxis[RINGS][3];
 int iters[RINGS];
 GLuint theTorus;
 
-
 void FillTorus(float rc, int numc, float rt, int numt)
 {
     int i, j, k;
@@ -57,10 +55,13 @@ void FillTorus(float rc, int numc, float rt, int numt)
     pi = 3.14159265358979323846;
     twopi = 2 * pi;
 
-    for (i = 0; i < numc; i++) {
+    for (i = 0; i < numc; i++)
+    {
         glBegin(GL_QUAD_STRIP);
-        for (j = 0; j <= numt; j++) {
-            for (k = 1; k >= 0; k--) {
+        for (j = 0; j <= numt; j++)
+        {
+            for (k = 1; k >= 0; k--)
+            {
                 s = (i + k) % numc + 0.5;
                 t = j % numt;
 
@@ -81,8 +82,8 @@ void FillTorus(float rc, int numc, float rt, int numt)
 
 float Clamp(int iters_left, float t)
 {
-
-    if (iters_left < 3) {
+    if (iters_left < 3)
+    {
         return 0.0;
     }
     return (iters_left - 2) * t / iters_left;
@@ -94,9 +95,12 @@ void DrawScene(void)
     GLboolean goIdle;
 
     goIdle = GL_TRUE;
-    for (i = 0; i < RINGS; i++) {
-        if (iters[i]) {
-            for (j = 0; j < 3; j++) {
+    for (i = 0; i < RINGS; i++)
+    {
+        if (iters[i])
+        {
+            for (j = 0; j < 3; j++)
+            {
                 offsets[i][j] = Clamp(iters[i], offsets[i][j]);
             }
             angs[i] = Clamp(iters[i], angs[i]);
@@ -104,7 +108,8 @@ void DrawScene(void)
             goIdle = GL_FALSE;
         }
     }
-    if (goIdle) {
+    if (goIdle)
+    {
         glutIdleFunc(NULL);
     }
 
@@ -113,16 +118,18 @@ void DrawScene(void)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     gluLookAt(0, 0, 10, 0, 0, 0, 0, 1, 0);
 
-    for (i = 0; i < RINGS; i++) {
-        if (rgb) {
+    for (i = 0; i < RINGS; i++)
+    {
+        if (rgb)
+        {
             glColor3ubv(rgb_colors[i]);
         }
-        else {
+        else
+        {
             glIndexi(mapped_colors[i]);
         }
         glPushMatrix();
-        glTranslatef(dests[i][0] + offsets[i][0], dests[i][1] + offsets[i][1],
-            dests[i][2] + offsets[i][2]);
+        glTranslatef(dests[i][0] + offsets[i][0], dests[i][1] + offsets[i][1], dests[i][2] + offsets[i][2]);
         glRotatef(angs[i], rotAxis[i][0], rotAxis[i][1], rotAxis[i][2]);
         glCallList(theTorus);
         glPopMatrix();
@@ -130,17 +137,18 @@ void DrawScene(void)
 
     glPopMatrix();
 
-    if (doubleBuffer) {
+    if (doubleBuffer)
+    {
         glutSwapBuffers();
     }
-    else {
+    else
+    {
         glFlush();
     }
 }
 
 float MyRand(void)
 {
-
     return 10.0 * (drand48() - 0.5);
 }
 
@@ -151,7 +159,8 @@ void ReInit(void)
 
     deviation = MyRand() / 2;
     deviation = deviation * deviation;
-    for (i = 0; i < RINGS; i++) {
+    for (i = 0; i < RINGS; i++)
+    {
         offsets[i][0] = MyRand();
         offsets[i][1] = MyRand();
         offsets[i][2] = MyRand();
@@ -189,7 +198,8 @@ void Init(void)
     gettimeofday(&t, &tz);
     srand48(t.tv_usec);
     ReInit();
-    for (i = 0; i < RINGS; i++) {
+    for (i = 0; i < RINGS; i++)
+    {
         rgb_colors[i][0] = rgb_colors[i][1] = rgb_colors[i][2] = 0;
     }
     rgb_colors[BLUERING][2] = 255;
@@ -233,7 +243,8 @@ void Init(void)
     glEnable(GL_DEPTH_TEST);
     glClearDepth(1.0);
 
-    if (rgb) {
+    if (rgb)
+    {
         glClearColor(0.5, 0.5, 0.5, 0.0);
         glLightfv(GL_LIGHT0, GL_AMBIENT, light0_ambient);
         glLightfv(GL_LIGHT0, GL_DIFFUSE, light0_diffuse);
@@ -255,7 +266,8 @@ void Init(void)
         glEnable(GL_COLOR_MATERIAL);
         glShadeModel(GL_SMOOTH);
     }
-    else {
+    else
+    {
         glClearIndex(BACKGROUND);
         glShadeModel(GL_FLAT);
     }
@@ -267,14 +279,13 @@ void Init(void)
 
 void Reshape(int width, int height)
 {
-
     glViewport(0, 0, width, height);
 }
 
 void Key(unsigned char key, int x, int y)
 {
-
-    switch (key) {
+    switch (key)
+    {
     case ' ':
         ReInit();
         break;
@@ -290,17 +301,22 @@ void Args(int argc, char** argv)
     rgb = GL_TRUE;
     doubleBuffer = GL_FALSE;
 
-    for (i = 1; i < argc; i++) {
-        if (strcmp(argv[i], "-ci") == 0) {
+    for (i = 1; i < argc; i++)
+    {
+        if (strcmp(argv[i], "-ci") == 0)
+        {
             rgb = GL_FALSE;
         }
-        else if (strcmp(argv[i], "-rgb") == 0) {
+        else if (strcmp(argv[i], "-rgb") == 0)
+        {
             rgb = GL_TRUE;
         }
-        else if (strcmp(argv[i], "-sb") == 0) {
+        else if (strcmp(argv[i], "-sb") == 0)
+        {
             doubleBuffer = GL_FALSE;
         }
-        else if (strcmp(argv[i], "-db") == 0) {
+        else if (strcmp(argv[i], "-db") == 0)
+        {
             doubleBuffer = GL_TRUE;
         }
     }
@@ -329,8 +345,8 @@ int main(int argc, char** argv)
     glutKeyboardFunc(Key);
     glutDisplayFunc(DrawScene);
 
-	glutMainLoop();	//開始主循環繪製
+    glutMainLoop();	//開始主循環繪製
 
-	return 0;
+    return 0;
 }
 

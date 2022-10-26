@@ -11,10 +11,12 @@
 #define CI_ANTI_ALIAS_RED 48
 
 GLenum rgb, doubleBuffer;
-GLint windW = 600, windH = 600;
+GLint windW = 600;
+GLint windH = 600;
 
 GLenum mode;
 GLint size;
+
 float point[3] = {
     1.0, 1.0, 0.0
 };
@@ -219,6 +221,8 @@ int main(int argc, char** argv)
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
     glutSpecialFunc(special);    //設定callback function
+    
+    printf("按 上 下 左 右 控制\n");
 
     glutMainLoop();	//開始主循環繪製
 }

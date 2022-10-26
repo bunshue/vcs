@@ -29,7 +29,9 @@ float ln_mipmap_ln[] = { GL_LINEAR_MIPMAP_LINEAR };
 GLint sphereMap[] = { GL_SPHERE_MAP };
 
 GLenum doSphere = GL_FALSE;
-float xRotation = 0.0, yRotation = 0.0, zTranslate = -3.125;
+float xRotation = 0.0;
+float yRotation = 0.0;
+float zTranslate = -3.125;
 
 GLint cube;
 float c[6][4][3] = {
@@ -118,7 +120,8 @@ float c[6][4][3] = {
 	}
 	}
 };
-static float n[6][3] = {
+
+float n[6][3] = {
 	{
 	0.0, 0.0, -1.0
 	},
@@ -138,7 +141,8 @@ static float n[6][3] = {
 	0.0, -1.0, 0.0
 	}
 };
-static float t[6][4][2] = {
+
+float t[6][4][2] = {
 	{
 	{
 		1.1,  1.1
@@ -225,13 +229,13 @@ static float t[6][4][2] = {
 	},
 };
 
-
-static void BuildCube(void)
+void BuildCube(void)
 {
 	GLint i;
 
 	glNewList(cube, GL_COMPILE);
-	for (i = 0; i < 6; i++) {
+	for (i = 0; i < 6; i++)
+	{
 		glBegin(GL_POLYGON);
 		glNormal3fv(n[i]); glTexCoord2fv(t[i][0]); glVertex3fv(c[i][0]);
 		glNormal3fv(n[i]); glTexCoord2fv(t[i][1]); glVertex3fv(c[i][1]);
@@ -242,13 +246,13 @@ static void BuildCube(void)
 	glEndList();
 }
 
-static void BuildLists(void)
+void BuildLists(void)
 {
 	cube = glGenLists(1);
 	BuildCube();
 }
 
-static void Init(void)
+void Init(void)
 {
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	gluBuild2DMipmaps(GL_TEXTURE_2D, 3, image->sizeX, image->sizeY, GL_RGB, GL_UNSIGNED_BYTE, image->data);
@@ -269,9 +273,8 @@ static void Init(void)
 	tWrapMode = repeat;
 }
 
-static void reshape(int width, int height)
+void reshape(int width, int height)
 {
-
 	glViewport(0, 0, width, height);
 
 	glMatrixMode(GL_PROJECTION);
@@ -280,10 +283,10 @@ static void reshape(int width, int height)
 	glMatrixMode(GL_MODELVIEW);
 }
 
-static void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int x, int y)
 {
-
-	switch (key) {
+	switch (key)
+	{
 	case 'T':
 		zTranslate += 0.25;
 		glutPostRedisplay();
@@ -292,22 +295,22 @@ static void keyboard(unsigned char key, int x, int y)
 		zTranslate -= 0.25;
 		glutPostRedisplay();
 		break;
-
 	case 's':
 		doSphere = !doSphere;
-		if (doSphere) {
+		if (doSphere)
+		{
 			glTexGeniv(GL_S, GL_TEXTURE_GEN_MODE, sphereMap);
 			glTexGeniv(GL_T, GL_TEXTURE_GEN_MODE, sphereMap);
 			glEnable(GL_TEXTURE_GEN_S);
 			glEnable(GL_TEXTURE_GEN_T);
 		}
-		else {
+		else
+		{
 			glDisable(GL_TEXTURE_GEN_S);
 			glDisable(GL_TEXTURE_GEN_T);
 		}
 		glutPostRedisplay();
 		break;
-
 	case '0':
 		magFilter = nr;
 		glutPostRedisplay();
@@ -345,32 +348,31 @@ static void keyboard(unsigned char key, int x, int y)
 	}
 }
 
-static void SpecialKey(int key, int x, int y)
+void special(int key, int x, int y)
 {
-
-	switch (key) {
+	switch (key)
+	{
 	case GLUT_KEY_LEFT:
-		yRotation -= 0.5;
+		yRotation -= 2.5;
 		glutPostRedisplay();
 		break;
 	case GLUT_KEY_RIGHT:
-		yRotation += 0.5;
+		yRotation += 2.5;
 		glutPostRedisplay();
 		break;
 	case GLUT_KEY_UP:
-		xRotation -= 0.5;
+		xRotation -= 2.5;
 		glutPostRedisplay();
 		break;
 	case GLUT_KEY_DOWN:
-		xRotation += 0.5;
+		xRotation += 2.5;
 		glutPostRedisplay();
 		break;
 	}
 }
 
-static void display(void)
+void display(void)
 {
-
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, sWrapMode);
@@ -387,15 +389,17 @@ static void display(void)
 
 	glPopMatrix();
 
-	if (doubleBuffer) {
+	if (doubleBuffer)
+	{
 		glutSwapBuffers();
 	}
-	else {
+	else
+	{
 		glFlush();
 	}
 }
 
-static void Args(int argc, char** argv)
+void Args(int argc, char** argv)
 {
 	GLint i;
 
@@ -464,7 +468,9 @@ int main(int argc, char** argv)
 	glutDisplayFunc(display);       //設定callback function
 	glutReshapeFunc(reshape);       //設定callback function
 	glutKeyboardFunc(keyboard);     //設定callback function
-	glutSpecialFunc(SpecialKey);    //設定callback function
+	glutSpecialFunc(special);    //設定callback function
+
+	printf("按 上 下 左 右 控制\n");
 
 	glutMainLoop();	//開始主循環繪製
 

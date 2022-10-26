@@ -24,15 +24,13 @@
 
 GLenum doubleBuffer;
 GLint windW = 800, windH = 800;
-static int dithering = 0;
-static int doPrint = 1;
-static int deltaY;
+int dithering = 0;
+int doPrint = 1;
+int deltaY;
 GLuint bitmapBase;
 
-
-static void Init(void)
+void Init(void)
 {
-
     bitmapBase = glGenLists(256);
     fontCreateBitmap(bitmapBase);
 
@@ -40,9 +38,8 @@ static void Init(void)
     glShadeModel(GL_FLAT);
 }
 
-static void Reshape(int width, int height)
+void Reshape(int width, int height)
 {
-
     windW = width;
     windH = height;
 
@@ -55,10 +52,10 @@ static void Reshape(int width, int height)
     glMatrixMode(GL_MODELVIEW);
 }
 
-static void Key(unsigned char key, int x, int y)
+void Key(unsigned char key, int x, int y)
 {
-
-    switch (key) {
+    switch (key)
+    {
     case 'd':
         dithering = !dithering;
         glutPostRedisplay();
@@ -68,7 +65,7 @@ static void Key(unsigned char key, int x, int y)
     }
 }
 
-static void PrintColorStrings()
+void PrintColorStrings()
 {
     GLubyte ubbuf[3], ubcolor[3];
     int i, xleft, xright;
@@ -77,21 +74,20 @@ static void PrintColorStrings()
     xleft = 5 + windW / 4;
     xright = 5 + windW / 2;
 
-    for (i = windH - deltaY + 4; i > 0; i -= deltaY) {
+    for (i = windH - deltaY + 4; i > 0; i -= deltaY)
+    {
         glReadPixels(xleft, i + 10, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, ubbuf);
-        sprintf(colorString, "(0x%x, 0x%x, 0x%x)", ubbuf[0], ubbuf[1],
-            ubbuf[2]);
+        sprintf(colorString, "(0x%x, 0x%x, 0x%x)", ubbuf[0], ubbuf[1], ubbuf[2]);
         glRasterPos2f(xleft, i);
         fontDrawStr(bitmapBase, colorString);
         glReadPixels(xright, i + 10, 1, 1, GL_RGB, GL_UNSIGNED_BYTE, ubbuf);
-        sprintf(colorString, "(0x%x, 0x%x, 0x%x)", ubbuf[0], ubbuf[1],
-            ubbuf[2]);
+        sprintf(colorString, "(0x%x, 0x%x, 0x%x)", ubbuf[0], ubbuf[1], ubbuf[2]);
         glRasterPos2f(xright, i);
         fontDrawStr(bitmapBase, colorString);
     }
 }
 
-static void Draw(void)
+void Draw(void)
 {
     float xscale, yscale;
     GLfloat x, y;
@@ -217,37 +213,43 @@ static void Draw(void)
     glRectf(x1, i, x2, i + deltaY);
     glRectf(x1, i + 10, x2, i + 5);
 
-    if (doPrint) {
+    if (doPrint)
+    {
         glDisable(GL_BLEND);
         glColor3f(1.0, 1.0, 1.0);
         PrintColorStrings();
     }
 
-    if (doubleBuffer) {
+    if (doubleBuffer)
+    {
         glutSwapBuffers();
     }
-    else {
+    else
+    {
         glFlush();
     }
 }
 
-static void Args(int argc, char** argv)
+void Args(int argc, char** argv)
 {
     GLint i;
 
     doubleBuffer = GL_FALSE;
 
-    for (i = 1; i < argc; i++) {
-        if (strcmp(argv[i], "-sb") == 0) {
+    for (i = 1; i < argc; i++)
+    {
+        if (strcmp(argv[i], "-sb") == 0)
+        {
             doubleBuffer = GL_FALSE;
         }
-        else if (strcmp(argv[i], "-db") == 0) {
+        else if (strcmp(argv[i], "-db") == 0)
+        {
             doubleBuffer = GL_TRUE;
         }
     }
 }
 
-static GLboolean QueryExtension(char* extName)
+GLboolean QueryExtension(char* extName)
 {
     /*
     ** Search for extName in the extensions string. Use of strstr()
@@ -257,9 +259,11 @@ static GLboolean QueryExtension(char* extName)
     */
     char* p = (char*)glGetString(GL_EXTENSIONS);
     char* end = p + strlen(p);
-    while (p < end) {
+    while (p < end)
+    {
         int n = strcspn(p, " ");
-        if ((strlen(extName) == n) && (strncmp(extName, p, n) == 0)) {
+        if ((strlen(extName) == n) && (strncmp(extName, p, n) == 0))
+        {
             return GL_TRUE;
         }
         p += (n + 1);
@@ -280,17 +284,20 @@ int main(int argc, char** argv)
     glutInitWindowSize(windW, windH);
     glutCreateWindow("Blend Equation");	//開啟視窗 並顯示出視窗 Title
 
-    if (!QueryExtension("GL_EXT_blend_logic_op")) {
+    if (!QueryExtension("GL_EXT_blend_logic_op"))
+    {
         printf("Blend_logic_op extension is not present.\n");
         exit(0);
     }
 
-    if (!QueryExtension("GL_EXT_blend_minmax")) {
+    if (!QueryExtension("GL_EXT_blend_minmax"))
+    {
         printf("Blend_minmax extension is not present.\n");
         exit(0);
     }
 
-    if (!QueryExtension("GL_EXT_blend_subtract")) {
+    if (!QueryExtension("GL_EXT_blend_subtract"))
+    {
         printf("Blend_subtract extension is not present.\n");
         exit(0);
     }
@@ -300,9 +307,9 @@ int main(int argc, char** argv)
     glutReshapeFunc(Reshape);
     glutKeyboardFunc(Key);
     glutDisplayFunc(Draw);
-	glutMainLoop();	//開始主循環繪製
+    glutMainLoop();	//開始主循環繪製
 
-	return 0;
+    return 0;
 }
 
 #else

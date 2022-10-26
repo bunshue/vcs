@@ -176,6 +176,8 @@ int main(int argc, char** argv)
     glutKeyboardFunc(keyboard);     //設定callback function
     glutSpecialFunc(special);       //設定callback function
     glutMouseFunc(mouse);           //設定callback function
+    
+    printf("按 上 下控制\n");
 
     glutMainLoop();	//開始主循環繪製
 

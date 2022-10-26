@@ -30,9 +30,9 @@ typedef struct _starRec {
     float offsetX, offsetY, offsetR, rotation;
 } starRec;
 
-
 GLenum doubleBuffer;
-GLint windW = 600, windH = 600;
+GLint windW = 600;
+GLint windH = 600;
 
 GLenum flag = NORMAL;
 GLint starCount = MAXSTARS / 2;
@@ -41,37 +41,38 @@ GLint nitro = 0;
 starRec stars[MAXSTARS];
 float sinTable[MAXANGLES];
 
-
 float Sin(float angle)
 {
-
     return (sinTable[(GLint)angle]);
 }
 
 float Cos(float angle)
 {
-
     return (sinTable[((GLint)angle + (MAXANGLES / 4)) % MAXANGLES]);
 }
 
 void NewStar(GLint n, GLint d)
 {
-
-    if (rand() % 4 == 0) {
+    if (rand() % 4 == 0)
+    {
         stars[n].type = CIRCLE;
     }
-    else {
+    else
+    {
         stars[n].type = STREAK;
     }
     stars[n].x[0] = (float)(rand() % MAXPOS - MAXPOS / 2);
     stars[n].y[0] = (float)(rand() % MAXPOS - MAXPOS / 2);
     stars[n].z[0] = (float)(rand() % MAXPOS + d);
-    if (rand() % 4 == 0 && flag == WEIRD) {
+
+    if (rand() % 4 == 0 && flag == WEIRD)
+    {
         stars[n].offsetX = (float)(rand() % 100 - 100 / 2);
         stars[n].offsetY = (float)(rand() % 100 - 100 / 2);
         stars[n].offsetR = (float)(rand() % 25 - 25 / 2);
     }
-    else {
+    else
+    {
         stars[n].offsetX = 0.0;
         stars[n].offsetY = 0.0;
         stars[n].offsetR = 0.0;
@@ -95,7 +96,8 @@ void MoveStars(void)
 
     offset = speed * 60.0;
 
-    for (n = 0; n < starCount; n++) {
+    for (n = 0; n < starCount; n++)
+    {
         stars[n].x[1] = stars[n].x[0];
         stars[n].y[1] = stars[n].y[0];
         stars[n].z[1] = stars[n].z[0];
@@ -103,7 +105,8 @@ void MoveStars(void)
         stars[n].y[0] += stars[n].offsetY;
         stars[n].z[0] -= offset;
         stars[n].rotation += stars[n].offsetR;
-        if (stars[n].rotation > MAXANGLES) {
+        if (stars[n].rotation > MAXANGLES)
+        {
             stars[n].rotation = 0.0;
         }
     }
@@ -285,11 +288,14 @@ static void Args(int argc, char** argv)
 
     doubleBuffer = GL_FALSE;
 
-    for (i = 1; i < argc; i++) {
-        if (strcmp(argv[i], "-sb") == 0) {
+    for (i = 1; i < argc; i++)
+    {
+        if (strcmp(argv[i], "-sb") == 0)
+        {
             doubleBuffer = GL_FALSE;
         }
-        else if (strcmp(argv[i], "-db") == 0) {
+        else if (strcmp(argv[i], "-db") == 0)
+        {
             doubleBuffer = GL_TRUE;
         }
     }
@@ -316,11 +322,11 @@ int main(int argc, char** argv)
     //glutDisplayFunc(display);       //設定callback function
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
-    //glutSpecialFunc(SpecialKey);    //設定callback function
+    //glutSpecialFunc(special);    //設定callback function
     glutIdleFunc(Idle);             //設定callback function   Idle像是display
     glutDisplayFunc(Idle);          //設定callback function   Idle像是display
 
-	glutMainLoop();	//開始主循環繪製
+    glutMainLoop();	//開始主循環繪製
 
-	return 0;
+    return 0;
 }

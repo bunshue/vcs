@@ -31,7 +31,9 @@
 
 GLenum doubleBuffer;
 
-float rotX = 0.0, rotY = 0.0, translateZ = -1.0;
+float rotX = 0.0;
+float rotY = 0.0;
+float translateZ = -1.0;
 
 GLenum arrayType = ONE_D;
 GLenum colorType = GL_FALSE;
@@ -53,6 +55,7 @@ double point1[10 * 4] = {
     0.3,-0.5, 0.0, 1.0,
     0.4, 0.0, 0.0, 1.0,
 };
+
 double cpoint1[10 * 4] = {
     0.0, 0.0, 1.0, 1.0,
     0.3, 0.0, 0.7, 1.0,
@@ -64,6 +67,7 @@ double cpoint1[10 * 4] = {
     1.0, 1.0, 0.5, 1.0,
     1.0, 1.0, 1.0, 1.0,
 };
+
 double tpoint1[11 * 4] = {
     0.0, 0.0, 0.0, 1.0,
     0.0, 0.1, 0.0, 1.0,
@@ -76,6 +80,7 @@ double tpoint1[11 * 4] = {
     0.0, 0.8, 0.0, 1.0,
     0.0, 0.9, 0.0, 1.0,
 };
+
 double point2[2 * 3 * 4] = {
     -0.5, -0.5,  0.5, 1.0,
      0.0,  1.0,  0.5, 1.0,
@@ -84,16 +89,19 @@ double point2[2 * 3 * 4] = {
      0.0, -1.0, -0.5, 1.0,
      0.5,  0.5, -0.5, 1.0,
 };
+
 double cpoint2[2 * 2 * 4] = {
     0.0, 0.0, 0.0, 1.0,
     0.0, 0.0, 1.0, 1.0,
     0.0, 1.0, 0.0, 1.0,
     1.0, 1.0, 1.0, 1.0,
 };
+
 double tpoint2[2 * 2 * 2] = {
     0.0, 0.0, 0.0, 1.0,
     1.0, 0.0, 1.0, 1.0,
 };
+
 float textureImage[4 * 2 * 4] = {
     1.0, 1.0, 1.0, 1.0,
     1.0, 0.0, 0.0, 1.0,
@@ -105,8 +113,7 @@ float textureImage[4 * 2 * 4] = {
     1.0, 1.0, 1.0, 1.0,
 };
 
-
-static void Init(void)
+void Init(void)
 {
     static float ambient[] = { 0.1, 0.1, 0.1, 1.0 };
     static float diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
@@ -133,12 +140,9 @@ static void Init(void)
     glMap1d(GL_MAP1_VERTEX_4, 0.0, 1.0, VDIM, VORDER, point1);
     glMap1d(GL_MAP1_COLOR_4, 0.0, 1.0, CDIM, CORDER, cpoint1);
 
-    glMap2d(GL_MAP2_VERTEX_4, 0.0, 1.0, VMINOR_ORDER * VDIM, VMAJOR_ORDER, 0.0,
-        1.0, VDIM, VMINOR_ORDER, point2);
-    glMap2d(GL_MAP2_COLOR_4, 0.0, 1.0, CMINOR_ORDER * CDIM, CMAJOR_ORDER, 0.0,
-        1.0, CDIM, CMINOR_ORDER, cpoint2);
-    glMap2d(GL_MAP2_TEXTURE_COORD_2, 0.0, 1.0, TMINOR_ORDER * TDIM,
-        TMAJOR_ORDER, 0.0, 1.0, TDIM, TMINOR_ORDER, tpoint2);
+    glMap2d(GL_MAP2_VERTEX_4, 0.0, 1.0, VMINOR_ORDER * VDIM, VMAJOR_ORDER, 0.0,        1.0, VDIM, VMINOR_ORDER, point2);
+    glMap2d(GL_MAP2_COLOR_4, 0.0, 1.0, CMINOR_ORDER * CDIM, CMAJOR_ORDER, 0.0,        1.0, CDIM, CMINOR_ORDER, cpoint2);
+    glMap2d(GL_MAP2_TEXTURE_COORD_2, 0.0, 1.0, TMINOR_ORDER * TDIM,        TMAJOR_ORDER, 0.0, 1.0, TDIM, TMINOR_ORDER, tpoint2);
 
     glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
@@ -155,59 +159,64 @@ static void Init(void)
     glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, repeat);
     glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, nr);
     glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, nr);
-    glTexImage2D(GL_TEXTURE_2D, 0, 4, 2, 4, 0, GL_RGBA, GL_FLOAT,
-        (GLvoid*)textureImage);
+    glTexImage2D(GL_TEXTURE_2D, 0, 4, 2, 4, 0, GL_RGBA, GL_FLOAT, (GLvoid*)textureImage);
 }
 
-static void DrawPoints1(void)
+void DrawPoints1(void)
 {
     GLint i;
 
     glColor3f(0.0, 1.0, 0.0);
     glPointSize(2);
     glBegin(GL_POINTS);
-    for (i = 0; i < VORDER; i++) {
+    for (i = 0; i < VORDER; i++)
+    {
         glVertex4dv(&point1[i * 4]);
     }
     glEnd();
 }
 
-static void DrawPoints2(void)
+void DrawPoints2(void)
 {
     GLint i, j;
 
     glColor3f(1.0, 0.0, 1.0);
     glPointSize(2);
     glBegin(GL_POINTS);
-    for (i = 0; i < VMAJOR_ORDER; i++) {
-        for (j = 0; j < VMINOR_ORDER; j++) {
+    for (i = 0; i < VMAJOR_ORDER; i++)
+    {
+        for (j = 0; j < VMINOR_ORDER; j++)
+        {
             glVertex4dv(&point2[i * 4 * VMINOR_ORDER + j * 4]);
         }
     }
     glEnd();
 }
 
-static void DrawMapEval1(float du)
+void DrawMapEval1(float du)
 {
     float u;
 
     glColor3f(1.0, 0.0, 0.0);
     glBegin(GL_LINE_STRIP);
-    for (u = 0.0; u < 1.0; u += du) {
+    for (u = 0.0; u < 1.0; u += du)
+    {
         glEvalCoord1d(u);
     }
     glEvalCoord1d(1.0);
     glEnd();
 }
 
-static void DrawMapEval2(float du, float dv)
+void DrawMapEval2(float du, float dv)
 {
     float u, v, tmp;
 
     glColor3f(1.0, 0.0, 0.0);
-    for (v = 0.0; v < 1.0; v += dv) {
+    for (v = 0.0; v < 1.0; v += dv)
+    {
         glBegin(GL_QUAD_STRIP);
-        for (u = 0.0; u <= 1.0; u += du) {
+        for (u = 0.0; u <= 1.0; u += du)
+        {
             glEvalCoord2d(u, v);
             tmp = (v + dv < 1.0) ? (v + dv) : 1.0;
             glEvalCoord2d(u, tmp);
@@ -218,39 +227,46 @@ static void DrawMapEval2(float du, float dv)
     }
 }
 
-static void RenderEval(void)
+void RenderEval(void)
 {
-
-    if (colorType) {
+    if (colorType)
+    {
         glEnable(GL_MAP1_COLOR_4);
         glEnable(GL_MAP2_COLOR_4);
     }
-    else {
+    else
+    {
         glDisable(GL_MAP1_COLOR_4);
         glDisable(GL_MAP2_COLOR_4);
     }
 
-    if (textureType) {
+    if (textureType)
+    {
         glEnable(GL_TEXTURE_2D);
         glEnable(GL_MAP2_TEXTURE_COORD_2);
     }
-    else {
+    else
+    {
         glDisable(GL_TEXTURE_2D);
         glDisable(GL_MAP2_TEXTURE_COORD_2);
     }
 
-    if (polygonFilled) {
+    if (polygonFilled)
+    {
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
     }
-    else {
+    else
+    {
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     }
 
     glShadeModel(GL_SMOOTH);
 
-    switch (mapType) {
+    switch (mapType)
+    {
     case EVAL:
-        switch (arrayType) {
+        switch (arrayType)
+        {
         case ONE_D:
             glDisable(GL_MAP2_VERTEX_4);
             glEnable(GL_MAP1_VERTEX_4);
@@ -266,18 +282,21 @@ static void RenderEval(void)
         }
         break;
     case MESH:
-        switch (arrayType) {
+        switch (arrayType)
+        {
         case ONE_D:
             DrawPoints1();
             glDisable(GL_MAP2_VERTEX_4);
             glEnable(GL_MAP1_VERTEX_4);
             glColor3f(0.0, 0.0, 1.0);
             glMapGrid1d(40, 0.0, 1.0);
-            if (mapPoint) {
+            if (mapPoint)
+            {
                 glPointSize(2);
                 glEvalMesh1(GL_POINT, 0, 40);
             }
-            else {
+            else
+            {
                 glEvalMesh1(GL_LINE, 0, 40);
             }
             break;
@@ -287,14 +306,17 @@ static void RenderEval(void)
             glEnable(GL_MAP2_VERTEX_4);
             glColor3f(0.0, 0.0, 1.0);
             glMapGrid2d(20, 0.0, 1.0, 20, 0.0, 1.0);
-            if (mapPoint) {
+            if (mapPoint)
+            {
                 glPointSize(2);
                 glEvalMesh2(GL_POINT, 0, 20, 0, 20);
             }
-            else if (polygonFilled) {
+            else if (polygonFilled)
+            {
                 glEvalMesh2(GL_FILL, 0, 20, 0, 20);
             }
-            else {
+            else
+            {
                 glEvalMesh2(GL_LINE, 0, 20, 0, 20);
             }
             break;
@@ -303,7 +325,7 @@ static void RenderEval(void)
     }
 }
 
-static void reshape(int width, int height)
+void reshape(int width, int height)
 {
     glViewport(0, 0, width, height);
 
@@ -313,7 +335,7 @@ static void reshape(int width, int height)
     glMatrixMode(GL_MODELVIEW);
 }
 
-static void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int x, int y)
 {
     switch (key)
     {
@@ -353,17 +375,21 @@ static void keyboard(unsigned char key, int x, int y)
         break;
     case '9':
         lighting = !lighting;
-        if (lighting) {
+        if (lighting)
+        {
             glEnable(GL_LIGHTING);
             glEnable(GL_LIGHT0);
-            if (arrayType == TWO_D) {
+            if (arrayType == TWO_D)
+            {
                 glEnable(GL_AUTO_NORMAL);
             }
-            else {
+            else
+            {
                 glDisable(GL_AUTO_NORMAL);
             }
         }
-        else {
+        else
+        {
             glDisable(GL_LIGHTING);
             glDisable(GL_LIGHT0);
             glDisable(GL_AUTO_NORMAL);
@@ -375,10 +401,10 @@ static void keyboard(unsigned char key, int x, int y)
     }
 }
 
-static void SpecialKey(int key, int x, int y)
+void special(int key, int x, int y)
 {
-
-    switch (key) {
+    switch (key)
+    {
     case GLUT_KEY_LEFT:
         rotY -= 30;
         glutPostRedisplay();
@@ -398,7 +424,7 @@ static void SpecialKey(int key, int x, int y)
     }
 }
 
-static void display(void)
+void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -421,7 +447,7 @@ static void display(void)
     }
 }
 
-static void Args(int argc, char** argv)
+void Args(int argc, char** argv)
 {
     GLint i;
 
@@ -460,10 +486,12 @@ int main(int argc, char** argv)
     glutDisplayFunc(display);       //設定callback function
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
-    glutSpecialFunc(SpecialKey);    //設定callback function
+    glutSpecialFunc(special);       //設定callback function
 
-	glutMainLoop();	//開始主循環繪製
+    printf("按 上 下 左 右 控制\n");
 
-	return 0;
+    glutMainLoop();	//開始主循環繪製
+
+    return 0;
 }
 

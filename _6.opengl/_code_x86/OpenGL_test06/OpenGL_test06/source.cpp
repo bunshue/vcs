@@ -12,7 +12,7 @@ GLenum doubleBuffer;
 GLint thing1, thing2, thing3, thing4;
 float alpha = 0.5;
 
-static void Init(void)
+void Init(void)
 {
     //           R    G    B     A
     glClearColor(0.0, 0.0, 0.0, 0.0);   //設定背景色(0 0 0為黑色)
@@ -47,7 +47,7 @@ static void Init(void)
 }
 
 
-static void display(void)
+void display(void)
 {
     glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
 
@@ -93,7 +93,7 @@ static void display(void)
     }
 }
 
-static void reshape(int width, int height)
+void reshape(int width, int height)
 {
     glViewport(0, 0, width, height);
 
@@ -103,7 +103,7 @@ static void reshape(int width, int height)
     glLoadIdentity();	//設置單位矩陣
 }
 
-static void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int x, int y)
 {
     switch (key)
     {

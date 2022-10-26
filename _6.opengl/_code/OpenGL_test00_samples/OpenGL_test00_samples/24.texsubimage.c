@@ -31,12 +31,12 @@ GLubyte* baseImage = NULL;
 int imageWidth = 0, imageHeight = 0;
 GLubyte* imageData = NULL;
 
-void
-imgLoad(char* inFilename, int* outW, int* outH, GLubyte** outImg)
+void imgLoad(char* inFilename, int* outW, int* outH, GLubyte** outImg)
 {
     RGBImageRec* rgbimage;
 
-    if ((rgbimage = rgbImageLoad(inFilename)) == NULL) {
+    if ((rgbimage = rgbImageLoad(inFilename)) == NULL)
+    {
         fprintf(stderr, "unable to read %s\n", inFilename);
         exit(EXIT_FAILURE);
     }
@@ -46,17 +46,16 @@ imgLoad(char* inFilename, int* outW, int* outH, GLubyte** outImg)
     *outImg = rgbimage->data;
 }
 
-void
-checkErrors(void)
+void checkErrors(void)
 {
     GLenum error;
-    while ((error = glGetError()) != GL_NO_ERROR) {
+    while ((error = glGetError()) != GL_NO_ERROR)
+    {
         fprintf(stderr, "Error: %s\n", (char*)gluErrorString(error));
     }
 }
 
-void
-keyboard(unsigned char c, int x, int y)
+void keyboard(unsigned char c, int x, int y)
 {
     switch (c) {
     case 'l':
@@ -71,32 +70,33 @@ keyboard(unsigned char c, int x, int y)
     glutPostRedisplay();
 }
 
-void
-mouse(int button, int state, int x, int y)
+void mouse(int button, int state, int x, int y)
 {
-    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN) {
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+    {
         buttonPressed = GL_TRUE;
         curX = (float)x / winWidth;
         curY = (float)(winHeight - y) / winHeight;
     }
-    if (button == GLUT_LEFT_BUTTON && state == GLUT_UP) {
+
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_UP)
+    {
         buttonPressed = GL_FALSE;
         glutPostRedisplay();
     }
 }
 
-void
-motion(int x, int y)
+void motion(int x, int y)
 {
-    if (buttonPressed) {
+    if (buttonPressed)
+    {
         curX = (float)x / winWidth;
         curY = (float)(winHeight - y) / winHeight;
         glutPostRedisplay();
     }
 }
 
-void
-reshape(int w, int h)
+void reshape(int w, int h)
 {
     winWidth = w;
     winHeight = h;
@@ -108,8 +108,7 @@ reshape(int w, int h)
     glutPostRedisplay();
 }
 
-void
-display(void)
+void display(void)
 {
     int subX = (int)(curX * baseWidth);
     int subY = (int)(curY * baseHeight);
@@ -118,11 +117,13 @@ display(void)
 
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-    if (useLinear) {
+    if (useLinear)
+    {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     }
-    else {
+    else
+    {
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     }
@@ -130,21 +131,26 @@ display(void)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
     glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
-    if (baseImage == NULL) {
+    if (baseImage == NULL)
+    {
         int i, j;
 
         baseImage = (GLubyte*)calloc(baseHeight, 4 * baseWidth);
 
-        for (i = 0; i < baseHeight; ++i) {
+        for (i = 0; i < baseHeight; ++i)
+        {
             GLubyte* p = baseImage + 4 * baseWidth * i;
-            for (j = 0; j < baseHeight; ++j) {
-                if ((i ^ j) & 4) {
+            for (j = 0; j < baseHeight; ++j)
+            {
+                if ((i ^ j) & 4)
+                {
                     p[0] = 0x10;
                     p[1] = 0x10;
                     p[2] = 0x10;
                     p[3] = 0x10;
                 }
-                else {
+                else
+                {
                     p[0] = 0x20;
                     p[1] = 0x20;
                     p[2] = 0x20;
@@ -155,58 +161,64 @@ display(void)
         }
     }
 
-    if (useDisplayList) {
+    if (useDisplayList)
+    {
         glNewList(1, GL_COMPILE);
     }
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB,
-        baseWidth, baseHeight, 0,
-        GL_RGB, GL_UNSIGNED_BYTE, baseImage);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, baseWidth, baseHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, baseImage);
 
     /* clip subimage to base image size */
     glPixelStorei(GL_UNPACK_ROW_LENGTH, subWidth);
-    if (subX < 0) {
+    if (subX < 0)
+    {
         glPixelStorei(GL_UNPACK_SKIP_PIXELS, -subX);
         subWidth += subX;
         subX = 0;
     }
-    if (subX > baseWidth) {
+    if (subX > baseWidth)
+    {
         subX = 0;
         subWidth = 0;
     }
-    if (subX + subWidth > baseWidth) {
+    if (subX + subWidth > baseWidth)
+    {
         subWidth -= (subX + subWidth) - baseWidth;
     }
-    if (subWidth < 0) {
+    if (subWidth < 0)
+    {
         subWidth = 0;
     }
 
-    if (subY < 0) {
+    if (subY < 0)
+    {
         glPixelStorei(GL_UNPACK_SKIP_ROWS, -subY);
         subHeight += subY;
         subY = 0;
     }
-    if (subY > baseHeight) {
+    if (subY > baseHeight)
+    {
         subY = 0;
         subHeight = 0;
     }
-    if (subY + subHeight > baseHeight) {
+    if (subY + subHeight > baseHeight)
+    {
         subHeight -= (subY + subHeight) - baseHeight;
     }
-    if (subHeight < 0) {
+    if (subHeight < 0)
+    {
         subHeight = 0;
     }
 
     /* load subimage over base image */
-    glTexSubImage2DEXT(GL_TEXTURE_2D, 0,
-        subX, subY, subWidth, subHeight,
-        GL_RGB, GL_UNSIGNED_BYTE, imageData);
+    glTexSubImage2DEXT(GL_TEXTURE_2D, 0, subX, subY, subWidth, subHeight, GL_RGB, GL_UNSIGNED_BYTE, imageData);
 
     glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
     glPixelStorei(GL_UNPACK_SKIP_PIXELS, 0);
     glPixelStorei(GL_UNPACK_SKIP_ROWS, 0);
 
-    if (useDisplayList) {
+    if (useDisplayList)
+    {
         glEndList();
         glCallList(1);
     }
@@ -230,13 +242,14 @@ display(void)
 
     glDisable(GL_TEXTURE_2D);
 
-    if (doubleBuffered) {
+    if (doubleBuffered)
+    {
         glutSwapBuffers();
     }
-    else {
+    else
+    {
         glFlush();
     }
-
     checkErrors();
 }
 
@@ -262,17 +275,14 @@ int main(int argc, char** argv)
         if (strcmp("-sb", argv[i]) == 0)
         {
             doubleBuffered = GL_FALSE;
-
         }
         else if (strcmp("-db", argv[i]) == 0)
         {
             doubleBuffered = GL_TRUE;
-
         }
         else if (i == argc - 1 && argv[i][0] != '-')
         {
             filename = argv[i];
-
         }
         else
         {
@@ -301,7 +311,8 @@ int main(int argc, char** argv)
     glutInitWindowSize(winWidth, winHeight);
     glutCreateWindow(name);	//開啟視窗 並顯示出視窗 Title
 
-    if (!glutExtensionSupported("GL_EXT_subtexture")) {
+    if (!glutExtensionSupported("GL_EXT_subtexture"))
+    {
         fprintf(stderr, "missing extension: GL_EXT_subtexture\n");
         exit(EXIT_FAILURE);
     }
@@ -311,9 +322,10 @@ int main(int argc, char** argv)
     glutKeyboardFunc(keyboard);
     glutMouseFunc(mouse);
     glutMotionFunc(motion);
-	glutMainLoop();	//開始主循環繪製
 
-	return 0;
+    glutMainLoop();	//開始主循環繪製
+
+    return 0;
 }
 
 #else

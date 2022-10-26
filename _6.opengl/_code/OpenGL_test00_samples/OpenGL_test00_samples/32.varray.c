@@ -26,19 +26,21 @@
 	    printf("Error %d at line %d\n", err, __LINE__); \
 	}
 
-static GLubyte texture[768];
+GLubyte texture[768];
 
-static GLint verts[] = {
+GLint verts[] = {
     10, 10, 0,
     200, 100, 0,
     50, 200, 0
 };
-static GLfloat colors[] = {
+
+GLfloat colors[] = {
     1.0, 0.0, 0.0,
     0.0, 0.0, 1.0,
     0.5, 0.2, 0.8
 };
-static GLfloat cv[] = {
+
+GLfloat cv[] = {
     1.0, 1.0, 0.0,
     430, 30,
     1.0, 0.0, 1.0,
@@ -46,7 +48,8 @@ static GLfloat cv[] = {
     1.0, 1.0, 1.0,
     380, 200
 };
-static GLshort tv[] = {
+
+GLshort tv[] = {
     0, 0,
     5, 400,
     1, 0,
@@ -56,7 +59,8 @@ static GLshort tv[] = {
     0, 1,
     5, 495
 };
-static GLfloat verts2[] = {
+
+GLfloat verts2[] = {
     350.0, 450.0, 1.0, 1.0,
     350.0, 350.0, 1.0, 1.0,
     400.0, 325.0, 1.0, 1.0,
@@ -64,7 +68,8 @@ static GLfloat verts2[] = {
     450.0, 450.0, 1.0, 1.0,
     400.0, 475.0, 1.0, 1.0
 };
-static GLfloat norms[] = {
+
+GLfloat norms[] = {
     0, 0, 1,
     0, 0, 1,
     0, 0, 1,
@@ -74,7 +79,8 @@ static GLfloat norms[] = {
     0, 0, -1,
     0, 0, -1
 };
-static GLint verts3[] = {
+
+GLint verts3[] = {
     150, 200,
     250, 200,
     250, 300,
@@ -84,7 +90,8 @@ static GLint verts3[] = {
     350, 300,
     250, 300
 };
-static GLboolean edges[] = {
+
+GLboolean edges[] = {
     GL_TRUE, GL_FALSE, GL_TRUE, GL_TRUE, GL_FALSE, GL_TRUE
 };
 
@@ -93,8 +100,7 @@ int drawArray = 0;
 int dlist = 0; /* 0 = immediate mode, ~0 = display list */
 GLenum dlMode = GL_COMPILE;
 
-
-static void SetUpColorMap(void)
+void SetUpColorMap(void)
 {
     long i;
 
@@ -104,7 +110,7 @@ static void SetUpColorMap(void)
     }
 }
 
-static GLboolean QueryExtension(char* extName)
+GLboolean QueryExtension(char* extName)
 {
     /*
     ** Search for extName in the extensions string. Use of strstr()
@@ -124,16 +130,18 @@ static GLboolean QueryExtension(char* extName)
     return GL_FALSE;
 }
 
-static void Init(void)
+void Init(void)
 {
     int i;
 
-    if (!rgb) {
+    if (!rgb)
+    {
         SetUpColorMap();
     }
 
     /* see if Vertex array extension is supported */
-    if (!QueryExtension("GL_EXT_vertex_array")) {
+    if (!QueryExtension("GL_EXT_vertex_array"))
+    {
         printf("Couldn't find vertex array extension.\n");
         exit(0);
     }
@@ -143,21 +151,25 @@ static void Init(void)
     glShadeModel(GL_SMOOTH);
 
     /* create texture image */
-    for (i = 0; i < 192; i += 3) {
+    for (i = 0; i < 192; i += 3)
+    {
         texture[i] = 0xff; texture[i + 1] = 0xff; texture[i + 2] = 0x00;
     }
-    for (; i < 2 * 192; i += 3) {
+    for (; i < 2 * 192; i += 3)
+    {
         texture[i] = 0xff; texture[i + 1] = 0x00; texture[i + 2] = 0xff;
     }
-    for (; i < 3 * 192; i += 3) {
+    for (; i < 3 * 192; i += 3)
+    {
         texture[i] = 0x00; texture[i + 1] = 0xff; texture[i + 2] = 0xff;
     }
-    for (; i < 4 * 192; i += 3) {
+    for (; i < 4 * 192; i += 3)
+    {
         texture[i] = 0x00; texture[i + 1] = 0x00; texture[i + 2] = 0xff;
     }
 }
 
-static void reshape(int width, int height)
+void reshape(int width, int height)
 {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -166,7 +178,7 @@ static void reshape(int width, int height)
     glLoadIdentity();
 }
 
-static void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int x, int y)
 {
     switch (key)
     {
@@ -207,30 +219,26 @@ void TestGets(void)
     glGetIntegerv(GL_VERTEX_ARRAY_TYPE_EXT, &type);
     glGetIntegerv(GL_VERTEX_ARRAY_STRIDE_EXT, &stride);
     glGetIntegerv(GL_VERTEX_ARRAY_COUNT_EXT, &count);
-    printf("VERTEX_ARRAY size = %d, type = %d, stride = %d, count = %d\n\n",
-        size, type, stride, count);
+    printf("VERTEX_ARRAY size = %d, type = %d, stride = %d, count = %d\n\n", size, type, stride, count);
     CHECK_ERROR
 
         glGetIntegerv(GL_NORMAL_ARRAY_TYPE_EXT, &type);
     glGetIntegerv(GL_NORMAL_ARRAY_STRIDE_EXT, &stride);
     glGetIntegerv(GL_NORMAL_ARRAY_COUNT_EXT, &count);
-    printf("NORMAL_ARRAY type = %d, stride = %d, count = %d\n\n",
-        type, stride, count);
+    printf("NORMAL_ARRAY type = %d, stride = %d, count = %d\n\n", type, stride, count);
     CHECK_ERROR
 
         glGetIntegerv(GL_COLOR_ARRAY_SIZE_EXT, &size);
     glGetIntegerv(GL_COLOR_ARRAY_TYPE_EXT, &type);
     glGetIntegerv(GL_COLOR_ARRAY_STRIDE_EXT, &stride);
     glGetIntegerv(GL_COLOR_ARRAY_COUNT_EXT, &count);
-    printf("COLOR_ARRAY size = %d, type = %d, stride = %d, count = %d\n\n",
-        size, type, stride, count);
+    printf("COLOR_ARRAY size = %d, type = %d, stride = %d, count = %d\n\n", size, type, stride, count);
     CHECK_ERROR
 
         glGetIntegerv(GL_INDEX_ARRAY_TYPE_EXT, &type);
     glGetIntegerv(GL_INDEX_ARRAY_STRIDE_EXT, &stride);
     glGetIntegerv(GL_INDEX_ARRAY_COUNT_EXT, &count);
-    printf("INDEX_ARRAY type = %d, stride = %d, count = %d\n\n",
-        type, stride, count);
+    printf("INDEX_ARRAY type = %d, stride = %d, count = %d\n\n", type, stride, count);
     CHECK_ERROR
 
         glGetIntegerv(GL_TEXTURE_COORD_ARRAY_SIZE_EXT, &size);
@@ -262,7 +270,7 @@ void TestGets(void)
 #endif
 }
 
-static void display(void)
+void display(void)
 {
 #if GL_EXT_vertex_array
     int i;
@@ -285,15 +293,19 @@ static void display(void)
     glEnable(GL_COLOR_ARRAY_EXT);
     CHECK_ERROR
 
-        if (dlist) {
+        if (dlist)
+        {
             glNewList(1, dlMode);
         }
-    if (drawArray) {
+    if (drawArray)
+    {
         glDrawArraysEXT(GL_TRIANGLES, 0, 3);
     }
-    else {
+    else
+    {
         glBegin(GL_TRIANGLES);
-        for (i = 0; i < 3; i++) {
+        for (i = 0; i < 3; i++)
+        {
             glArrayElementEXT(i);
         }
         glEnd();
@@ -308,26 +320,32 @@ static void display(void)
         glVertexPointerEXT(2, GL_FLOAT, 20, 3, &cv[3]);
     glColorPointerEXT(3, GL_FLOAT, 20, 3, cv);
 
-    if (dlist) {
+    if (dlist)
+    {
         glNewList(2, dlMode);
     }
-    if (drawArray) {
+    if (drawArray)
+    {
         glDrawArraysEXT(GL_TRIANGLES, 0, 3);
     }
-    else {
+    else
+    {
         glBegin(GL_TRIANGLES);
-        for (i = 0; i < 3; i++) {
+        for (i = 0; i < 3; i++)
+        {
             glArrayElementEXT(i);
         }
         glEnd();
     }
-    if (dlist) {
+    if (dlist)
+    {
         glEndList();
         glCallList(2);
     }
     glDisable(GL_COLOR_ARRAY_EXT);
 
-    if (dlist) {
+    if (dlist)
+    {
         glDeleteLists(1, 2);
     }
 
@@ -337,25 +355,29 @@ static void display(void)
     glEnable(GL_VERTEX_ARRAY_EXT);
     glEnable(GL_TEXTURE_COORD_ARRAY_EXT);
 
-    if (dlist) {
+    if (dlist)
+    {
         glNewList(3, dlMode);
     }
-    glTexImage2D(GL_TEXTURE_2D, 0, 3, 16, 16, 0, GL_RGB, GL_UNSIGNED_BYTE,
-        texture);
+    glTexImage2D(GL_TEXTURE_2D, 0, 3, 16, 16, 0, GL_RGB, GL_UNSIGNED_BYTE, texture);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
-    if (drawArray) {
+    if (drawArray)
+    {
         glDrawArraysEXT(GL_POLYGON, 0, 4);
     }
-    else {
+    else
+    {
         glBegin(GL_POLYGON);
-        for (i = 0; i < 4; i++) {
+        for (i = 0; i < 4; i++)
+        {
             glArrayElementEXT(i);
         }
         glEnd();
     }
-    if (dlist) {
+    if (dlist)
+    {
         glEndList();
         glCallList(3);
     }
@@ -365,7 +387,8 @@ static void display(void)
     glEnable(GL_EDGE_FLAG_ARRAY_EXT);
     glVertexPointerEXT(4, GL_FLOAT, 0, 6, verts2);
 
-    if (dlist) {
+    if (dlist)
+    {
         glNewList(4, dlMode);
     }
     glEdgeFlagPointerEXT(0, 6, edges);
@@ -374,17 +397,21 @@ static void display(void)
     glLineWidth(4.0);
     glColor3f(1.0, 0.0, 0.0);
 
-    if (drawArray) {
+    if (drawArray)
+    {
         glDrawArraysEXT(GL_POLYGON, 0, 6);
     }
-    else {
+    else
+    {
         glBegin(GL_POLYGON);
-        for (i = 0; i < 6; i++) {
+        for (i = 0; i < 6; i++)
+        {
             glArrayElementEXT(i);
         }
         glEnd();
     }
-    if (dlist) {
+    if (dlist)
+    {
         glEndList();
         glCallList(4);
     }
@@ -416,21 +443,27 @@ static void display(void)
     glNormalPointerEXT(GL_FLOAT, 0, 8, norms);
     glEnable(GL_NORMAL_ARRAY_EXT);
 
-    if (dlist) {
+    if (dlist)
+    {
         glNewList(5, dlMode);
     }
+
     glBegin(GL_POLYGON);
-    for (i = 0; i < 4; i++) {
-        glArrayElementEXT(i);
-    }
-    glEnd();
-    glBegin(GL_POLYGON);
-    for (; i < 8; i++) {
+    for (i = 0; i < 4; i++)
+    {
         glArrayElementEXT(i);
     }
     glEnd();
 
-    if (dlist) {
+    glBegin(GL_POLYGON);
+    for (; i < 8; i++)
+    {
+        glArrayElementEXT(i);
+    }
+    glEnd();
+
+    if (dlist)
+    {
         glEndList();
         glCallList(5);
     }
@@ -450,7 +483,8 @@ static void display(void)
         float xCenter = 225;
         float yCenter = 400;
 
-        for (i = 0; i < numSteps * 2; i += 2) {
+        for (i = 0; i < numSteps * 2; i += 2)
+        {
             float angle = i / 2 * stepSize;
             float x = cos(angle);
             float y = sin(angle);
@@ -461,7 +495,8 @@ static void display(void)
             stripVertex[i][1] = innerRadius * y + yCenter;
             stripVertex[i + 1][0] = outerRadius * x + xCenter;
             stripVertex[i + 1][1] = outerRadius * y + yCenter;
-            switch ((int)sector) {
+            switch ((int)sector)
+            {
             case 0: case 3:
                 /* red fade to green */
                 r = 1.00 * (1 - fade) + 0.25 * fade;
@@ -489,21 +524,27 @@ static void display(void)
         glVertexPointerEXT(2, GL_FLOAT, 0, numSteps * 2, stripVertex);
         glColorPointerEXT(3, GL_FLOAT, 0, numSteps * 2, stripColor);
         glEnable(GL_COLOR_ARRAY_EXT);
-        if (dlist) {
+        if (dlist)
+        {
             glNewList(6, dlMode);
         }
-        if (drawArray) {
+
+        if (drawArray)
+        {
             glDrawArraysEXT(GL_TRIANGLE_STRIP, 0, numSteps * 2);
         }
-        else {
+        else
+        {
             glBegin(GL_TRIANGLE_STRIP);
-            for (i = 0; i < numSteps * 2; i += 2) {
+            for (i = 0; i < numSteps * 2; i += 2)
+            {
                 glArrayElementEXT(i);
                 glArrayElementEXT(i + 1);
             }
             glEnd();
         }
-        if (dlist) {
+        if (dlist)
+        {
             glEndList();
             glCallList(6);
         }
@@ -516,17 +557,20 @@ static void display(void)
 #endif
 }
 
-static void Args(int argc, char** argv)
+void Args(int argc, char** argv)
 {
     GLint i;
 
     rgb = GL_TRUE;
 
-    for (i = 1; i < argc; i++) {
-        if (strcmp(argv[i], "-ci") == 0) {
+    for (i = 1; i < argc; i++)
+    {
+        if (strcmp(argv[i], "-ci") == 0)
+        {
             rgb = GL_FALSE;
         }
-        else if (strcmp(argv[i], "-rgb") == 0) {
+        else if (strcmp(argv[i], "-rgb") == 0)
+        {
             rgb = GL_TRUE;
         }
     }
@@ -554,8 +598,8 @@ int main(int argc, char** argv)
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
 
-	glutMainLoop();	//開始主循環繪製
+    glutMainLoop();	//開始主循環繪製
 
-	return 0;
+    return 0;
 }
 

@@ -23,6 +23,7 @@ float zRotation = 90.0;
 float zoom = 1.0;
 GLint objectCount;
 GLint numObjects;
+
 struct object {
     float v1[2];
     float v2[2];
@@ -31,22 +32,26 @@ struct object {
 } objects[MAXOBJS];
 GLenum linePoly = GL_FALSE;
 
-
-static void InitObjects(GLint num)
+void InitObjects(GLint num)
 {
     GLint i;
     float x, y;
 
-    if (num > MAXOBJS) {
+    if (num > MAXOBJS)
+    {
         num = MAXOBJS;
     }
-    if (num < 1) {
+
+    if (num < 1)
+    {
         num = 1;
     }
     objectCount = num;
 
     srand((unsigned int)time(NULL));
-    for (i = 0; i < num; i++) {
+
+    for (i = 0; i < num; i++)
+    {
         x = (rand() % 300) - 150;
         y = (rand() % 300) - 150;
 
@@ -62,20 +67,20 @@ static void InitObjects(GLint num)
     }
 }
 
-static void Init(void)
+void Init(void)
 {
     numObjects = 10;
     InitObjects(numObjects);
     glGetIntegerv(GL_VIEWPORT, vp);
 }
 
-static void reshape(int width, int height)
+void reshape(int width, int height)
 {
     windW = width;
     windH = height;
 }
 
-static void Render(GLenum mode)
+void Render(GLenum mode)
 {
     GLint i;
 
@@ -94,7 +99,7 @@ static void Render(GLenum mode)
     }
 }
 
-static GLint DoSelect(GLint x, GLint y)
+GLint DoSelect(GLint x, GLint y)
 {
     GLint hits;
 
@@ -133,21 +138,20 @@ static GLint DoSelect(GLint x, GLint y)
     return selectBuf[(hits - 1) * 4 + 3];
 }
 
-static void RecolorTri(GLint h)
+void RecolorTri(GLint h)
 {
     objects[h].color[0] = ((rand() % 100) + 50) / 150.0;
     objects[h].color[1] = ((rand() % 100) + 50) / 150.0;
     objects[h].color[2] = ((rand() % 100) + 50) / 150.0;
 }
 
-static void DeleteTri(GLint h)
+void DeleteTri(GLint h)
 {
-
     objects[h] = objects[objectCount - 1];
     objectCount--;
 }
 
-static void GrowTri(GLint h)
+void GrowTri(GLint h)
 {
     float v[2];
     float* oldV;
@@ -179,7 +183,7 @@ static void GrowTri(GLint h)
     }
 }
 
-static void mouse(int button, int state, int mouseX, int mouseY)
+void mouse(int button, int state, int mouseX, int mouseY)
 {
     GLint hit;
 
@@ -205,7 +209,7 @@ static void mouse(int button, int state, int mouseX, int mouseY)
     }
 }
 
-static void display(void)
+void display(void)
 {
     glPushMatrix();
 
@@ -230,7 +234,7 @@ static void display(void)
     glFlush();
 }
 
-static void DumpFeedbackVert(GLint* i, GLint n)
+void DumpFeedbackVert(GLint* i, GLint n)
 {
     GLint index;
 
@@ -252,7 +256,7 @@ static void DumpFeedbackVert(GLint* i, GLint n)
     *i = index;
 }
 
-static void DrawFeedback(GLint n)
+void DrawFeedback(GLint n)
 {
     GLint i;
     GLint verts;
@@ -309,7 +313,7 @@ static void DrawFeedback(GLint n)
     printf("\n");
 }
 
-static void DoFeedback(void)
+void DoFeedback(void)
 {
     GLint x;
 
@@ -337,14 +341,15 @@ static void DoFeedback(void)
     glPopMatrix();
 
     x = glRenderMode(GL_RENDER);
-    if (x == -1) {
+    if (x == -1)
+    {
         x = MAXFEED;
     }
 
     DrawFeedback((GLint)x);
 }
 
-static void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int x, int y)
 {
     switch (key)
     {
@@ -377,16 +382,16 @@ static void keyboard(unsigned char key, int x, int y)
     }
 }
 
-static void SpecialKey(int key, int x, int y)
+void special(int key, int x, int y)
 {
     switch (key)
     {
     case GLUT_KEY_LEFT:
-        zRotation += 0.5;
+        zRotation += 2.5;
         glutPostRedisplay();
         break;
     case GLUT_KEY_RIGHT:
-        zRotation -= 0.5;
+        zRotation -= 2.5;
         glutPostRedisplay();
         break;
     }
@@ -406,11 +411,13 @@ int main(int argc, char** argv)
     glutDisplayFunc(display);       //設定callback function
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
-    glutSpecialFunc(SpecialKey);    //設定callback function
+    glutSpecialFunc(special);       //設定callback function
     glutMouseFunc(mouse);           //設定callback function
 
-	glutMainLoop();	//開始主循環繪製
+    printf("按 左 右 控制\n");
 
-	return 0;
+    glutMainLoop();	//開始主循環繪製
+
+    return 0;
 }
 

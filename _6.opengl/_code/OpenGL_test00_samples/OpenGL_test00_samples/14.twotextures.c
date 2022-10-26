@@ -61,14 +61,12 @@ void Init(void)
 
 	skyList = glGenLists(1);
 	glNewList(skyList, GL_COMPILE);
-	gluBuild2DMipmaps(GL_TEXTURE_2D, 3, skyImage->sizeX, skyImage->sizeY,
-		GL_RGB, GL_UNSIGNED_BYTE, skyImage->data);
+	gluBuild2DMipmaps(GL_TEXTURE_2D, 3, skyImage->sizeX, skyImage->sizeY, GL_RGB, GL_UNSIGNED_BYTE, skyImage->data);
 	glEndList();
 
 	earthList = glGenLists(1);
 	glNewList(earthList, GL_COMPILE);
-	gluBuild2DMipmaps(GL_TEXTURE_2D, 3, earthImage->sizeX, earthImage->sizeY,
-		GL_RGB, GL_UNSIGNED_BYTE, earthImage->data);
+	gluBuild2DMipmaps(GL_TEXTURE_2D, 3, earthImage->sizeX, earthImage->sizeY, GL_RGB, GL_UNSIGNED_BYTE, earthImage->data);
 	glEndList();
 }
 
@@ -274,7 +272,11 @@ int main(int argc, char** argv)
 	glutDisplayFunc(display);       //設定callback function
 	glutReshapeFunc(reshape);       //設定callback function
 	glutKeyboardFunc(keyboard);     //設定callback function
-	glutSpecialFunc(special);    //設定callback function
+	glutSpecialFunc(special);		//設定callback function
+
+	printf("按 上 下 左 右 控制\n");
 
 	glutMainLoop();	//開始主循環繪製
+
+	return 0;
 }

@@ -89,7 +89,7 @@ GLubyte logo_bits[] =
    0xff, 0x66, 0x66,
 };
 
-static void Init(void)
+void Init(void)
 {
     if (!rgb)
     {
@@ -107,7 +107,7 @@ static void Init(void)
     glClearIndex(0.0);
 }
 
-static void reshape(int width, int height)
+void reshape(int width, int height)
 {
     glViewport(0, 0, width, height);
 
@@ -117,7 +117,7 @@ static void reshape(int width, int height)
     glMatrixMode(GL_MODELVIEW);
 }
 
-static void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int x, int y)
 {
     switch (key)
     {
@@ -126,7 +126,7 @@ static void keyboard(unsigned char key, int x, int y)
     }
 }
 
-static void display(void)
+void display(void)
 {
     float x_st = 0.0f;
     float y_st = 0.0f;
@@ -177,7 +177,7 @@ static void display(void)
     }
 }
 
-static void Args(int argc, char** argv)
+void Args(int argc, char** argv)
 {
     GLint i;
 

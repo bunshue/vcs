@@ -20,7 +20,6 @@
 #define	brickImageWidth 16
 #define	brickImageHeight 16
 
-
 GLenum doubleBuffer;
 
 float black[3] = {
@@ -40,7 +39,9 @@ GLenum doDither = GL_TRUE;
 GLenum shade = GL_TRUE;
 GLenum texture = GL_TRUE;
 
-float xRotation = 30.0, yRotation = 30.0, zRotation = 0.0;
+float xRotation = 30.0;
+float yRotation = 30.0;
+float zRotation = 0.0;
 GLint radius1, radius2;
 GLdouble angle1, angle2;
 GLint slices, stacks;
@@ -69,10 +70,8 @@ GLubyte brickImage[4 * brickImageWidth * brickImageHeight] = {
 };
 RGBImageRec* image = NULL;
 
-
 void CALLBACK ErrorHandler(GLenum which)
 {
-
 	fprintf(stderr, "Quad Error: %s\n", gluErrorString(which));
 }
 
@@ -122,14 +121,12 @@ void Init(void)
 	if (image)
 	{
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-		gluBuild2DMipmaps(GL_TEXTURE_2D, 3, image->sizeX, image->sizeY,
-			GL_RGB, GL_UNSIGNED_BYTE, image->data);
+		gluBuild2DMipmaps(GL_TEXTURE_2D, 3, image->sizeX, image->sizeY,			GL_RGB, GL_UNSIGNED_BYTE, image->data);
 	}
 	else
 	{
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-		glTexImage2D(GL_TEXTURE_2D, 0, 4, brickImageWidth, brickImageHeight,
-			0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)brickImage);
+		glTexImage2D(GL_TEXTURE_2D, 0, 4, brickImageWidth, brickImageHeight,			0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)brickImage);
 	}
 
 	quadObj = gluNewQuadric();
@@ -426,7 +423,8 @@ int main(int argc, char** argv)
 		image = rgbImageLoad(filename);
 	}
 
-	if (image == NULL) {
+	if (image == NULL)
+	{
 		printf("No texture file.\n");
 		exit(1);
 	}
@@ -437,7 +435,7 @@ int main(int argc, char** argv)
 	glutInitWindowSize(600, 600);
 	glutInitWindowPosition(1100, 200);
 
-	glutCreateWindow("Quad Test");
+	glutCreateWindow("Quad Test");	//開啟視窗 並顯示出視窗 Title
 
 	Init();
 
@@ -446,5 +444,9 @@ int main(int argc, char** argv)
 	glutKeyboardFunc(keyboard);     //設定callback function
 	glutSpecialFunc(special);    //設定callback function
 
+	printf("按 上 下 左 右 控制\n");
+
 	glutMainLoop();	//開始主循環繪製
+
+	return 0;
 }

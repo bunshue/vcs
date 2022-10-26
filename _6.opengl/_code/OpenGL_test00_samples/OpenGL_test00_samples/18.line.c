@@ -11,15 +11,19 @@ GLenum rgb, doubleBuffer;
 
 GLenum mode1, mode2;
 GLint size;
+
 float pntA[3] = {
     -160.0, 0.0, 0.0
 };
+
 float pntB[3] = {
     -130.0, 0.0, 0.0
 };
+
 float pntC[3] = {
     -40.0, -50.0, 0.0
 };
+
 float pntD[3] = {
     30.0, 60.0, 0.0
 };
@@ -29,9 +33,9 @@ void Init(void)
     GLint i;
 
     if (!rgb)
-	{
+    {
         for (i = 0; i < 16; i++)
-		{
+        {
             glutSetColor(i + CI_OFFSET, i / 15.0, i / 15.0, 0.0);
         }
     }
@@ -209,8 +213,10 @@ int main(int argc, char** argv)
     glutKeyboardFunc(keyboard);     //設定callback function
     glutSpecialFunc(special);    //設定callback function
 
+    printf("按 上 下 控制\n");
+
     glutMainLoop();	//開始主循環繪製
-    
+
     return 0;
 }
 

@@ -593,14 +593,15 @@ GLubyte exp_bits[7][800] = {
        0x01, 0x00, 0x90, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     }
 };
+
 GLint exp_lists[7];
 
-
-static void Init(void)
+void Init(void)
 {
     GLint i;
 
-    if (!rgb) {
+    if (!rgb)
+    {
         glutSetColor(0, 0.0, 0.0, 0.0);
         glutSetColor(1, 1.0, 0.0, 0.0);
         glutSetColor(2, 0.0, 1.0, 0.0);
@@ -616,7 +617,8 @@ static void Init(void)
 
     glPixelStorei(GL_UNPACK_LSB_FIRST, GL_TRUE);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    for (i = 0; i < 7; i++) {
+    for (i = 0; i < 7; i++)
+    {
         exp_lists[i] = glGenLists(1);
         glNewList(exp_lists[i], GL_COMPILE);
         glBitmap(80, 80, 40.0, 40.0, 0.0, 0.0, exp_bits[i]);
@@ -627,9 +629,8 @@ static void Init(void)
     useLists = GL_TRUE;
 }
 
-static void reshape(int width, int height)
+void reshape(int width, int height)
 {
-
     glViewport(0, 0, width, height);
 
     glMatrixMode(GL_PROJECTION);
@@ -638,10 +639,10 @@ static void reshape(int width, int height)
     glMatrixMode(GL_MODELVIEW);
 }
 
-static void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int x, int y)
 {
-
-    switch (key) {
+    switch (key)
+    {
     case '1':
         useLists = !useLists;
         glutPostRedisplay();
@@ -655,15 +656,18 @@ static void keyboard(unsigned char key, int x, int y)
     }
 }
 
-static void display(void)
+void display(void)
 {
     GLint i, j;
 
     glClear(GL_COLOR_BUFFER_BIT);
 
-    for (i = 0; i < 7; i++) {
-        for (j = 0; j < 40; j++) {
-            switch (j % 7) {
+    for (i = 0; i < 7; i++)
+    {
+        for (j = 0; j < 40; j++)
+        {
+            switch (j % 7)
+            {
             case 0:
                 (rgb) ? glColor3f(1.0, 0.0, 0.0) : glIndexi(1);
                 break;
@@ -688,52 +692,67 @@ static void display(void)
             }
             glRasterPos3i((j * 3) % 5, (j * 3) % 8, 0);
 
-            if (useLists) {
+            if (useLists)
+            {
                 glCallList(exp_lists[i]);
             }
-            else {
+            else
+            {
                 glBitmap(80, 80, 40.0, 40.0, 0.0, 0.0, exp_bits[i]);
             }
 
-            if (doubleBuffer) {
+            if (doubleBuffer)
+            {
                 glutSwapBuffers();
             }
-            else {
+            else
+            {
                 glFlush();
             }
 
-            if (!abuse) {
+            if (!abuse)
+            {
                 break;
             }
         }
 
-        if (i == 6) {
+        if (i == 6)
+        {
             break;
         }
 
-        for (j = 0; j < 40; j++) {
+        for (j = 0; j < 40; j++)
+        {
             (rgb) ? glColor3f(0.0, 0.0, 0.0) : glIndexi(0);
             glRasterPos3i((j * 3) % 5, (j * 3) % 8, 0);
-            if (useLists) {
+            
+            if (useLists)
+            {
                 glCallList(exp_lists[i]);
             }
-            else {
+            else
+            {
                 glBitmap(80, 80, 40.0, 40.0, 0.0, 0.0, exp_bits[i]);
             }
-            if (doubleBuffer) {
+            
+            if (doubleBuffer)
+            {
                 glutSwapBuffers();
             }
-            else {
+            else
+            {
                 glFlush();
             }
-            if (!abuse) {
+            
+            if (!abuse)
+            {
                 break;
             }
         }
     }
 }
 
-static void Args(int argc, char** argv)
+void Args(int argc, char** argv)
 {
     GLint i;
 

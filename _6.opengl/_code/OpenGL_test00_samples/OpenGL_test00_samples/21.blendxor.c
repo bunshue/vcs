@@ -57,7 +57,8 @@ void display(void)
 
     /* Draw a set of rectangles across the window */
     glColor3f(0.9, 0.2, 0.8);
-    for (i = 0; i < 400; i += 60) {
+    for (i = 0; i < 400; i += 60)
+    {
         glBegin(GL_POLYGON);
         glVertex2i(i, 100);
         glVertex2i(i + 50, 100);
@@ -125,11 +126,14 @@ void Args(int argc, char** argv)
 
     doubleBuffer = GL_FALSE;
 
-    for (i = 1; i < argc; i++) {
-        if (strcmp(argv[i], "-sb") == 0) {
+    for (i = 1; i < argc; i++)
+    {
+        if (strcmp(argv[i], "-sb") == 0)
+        {
             doubleBuffer = GL_FALSE;
         }
-        else if (strcmp(argv[i], "-db") == 0) {
+        else if (strcmp(argv[i], "-db") == 0)
+        {
             doubleBuffer = GL_TRUE;
         }
     }
@@ -145,9 +149,11 @@ GLboolean QueryExtension(char* extName)
     */
     char* p = (char*)glGetString(GL_EXTENSIONS);
     char* end = p + strlen(p);
-    while (p < end) {
+    while (p < end)
+    {
         int n = strcspn(p, " ");
-        if ((strlen(extName) == n) && (strncmp(extName, p, n) == 0)) {
+        if ((strlen(extName) == n) && (strncmp(extName, p, n) == 0))
+        {
             return GL_TRUE;
         }
         p += (n + 1);
@@ -175,17 +181,18 @@ int main(int argc, char** argv)
     glutInitWindowSize(400, 400);
     glutCreateWindow("Blend XOR");
 
-    if (!QueryExtension("GL_EXT_blend_logic_op")) {
+    if (!QueryExtension("GL_EXT_blend_logic_op"))
+    {
         printf("Blend_logic_op extension is not present.\n");
         exit(0);
     }
 
     Init();
 
-	glutDisplayFunc(display);	//設定callback function
-	glutReshapeFunc(reshape);	//設定callback function
-	glutKeyboardFunc(keyboard);	//設定callback function
-    
+    glutDisplayFunc(display);	//設定callback function
+    glutReshapeFunc(reshape);	//設定callback function
+    glutKeyboardFunc(keyboard);	//設定callback function
+
     glutMainLoop();	//開始主循環繪製
 }
 

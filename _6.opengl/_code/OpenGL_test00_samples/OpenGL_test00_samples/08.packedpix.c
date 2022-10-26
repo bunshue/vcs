@@ -63,7 +63,7 @@ typedef struct _ConvertImageRec {
 ** Creates the float RGBA image from the unsigned byte RGB one that typically
 ** comes from a file.
 */
-static void CreateFloatImage(RGBImageRec* imageIn, ConvertImageRec* imageOut)
+void CreateFloatImage(RGBImageRec* imageIn, ConvertImageRec* imageOut)
 {
 	GLubyte* rawData;
 	GLint x, y;
@@ -108,7 +108,7 @@ static void CreateFloatImage(RGBImageRec* imageIn, ConvertImageRec* imageOut)
 ** into an image of imageData->type and imageData->format pointed
 ** to by imageData->newImage.
 */
-static void ConvertImage(ConvertImageRec* imageData)
+void ConvertImage(ConvertImageRec* imageData)
 {
 	GLint imageWidth = imageData->imageDataWidth;
 	GLint imageHeight = imageData->imageDataHeight;
@@ -308,8 +308,8 @@ static void ConvertImage(ConvertImageRec* imageData)
 
 ConvertImageRec imageData;
 
-static int numTypes = 6;
-static GLint components = 4;
+int numTypes = 6;
+GLint components = 4;
 
 void* tempbuf;
 
@@ -328,21 +328,21 @@ typedef struct cellStruct {
 	int y;
 } cellStruct;
 
-static cellStruct cell = { 4,6, 0,0, 0,0, 0,0 };
+cellStruct cell = { 4,6, 0,0, 0,0, 0,0 };
 
-static void updateXY(cellStruct* cell)
+void updateXY(cellStruct* cell)
 {
 	cell->x = cell->col * cell->cellSizeX;
 	cell->y = cell->row * cell->cellSizeY;
 }
 
-static void setCell(cellStruct* cell, int col, int row)
+void setCell(cellStruct* cell, int col, int row)
 {
 	cell->col = col; cell->row = row;
 	updateXY(cell);
 }
 
-static void nextCell(cellStruct* cell)
+void nextCell(cellStruct* cell)
 {
 	cell->col++;
 	if (cell->col == cell->numCols) {
@@ -360,7 +360,7 @@ static void nextCell(cellStruct* cell)
 /*
 ** Calculates the largest power of two that's less than the value.
 */
-static unsigned int maxTexSize(unsigned int value)
+unsigned int maxTexSize(unsigned int value)
 {
 	int power;
 
@@ -374,7 +374,7 @@ static unsigned int maxTexSize(unsigned int value)
 /*
 ** Makes a ramped unsigned byte RGB image.
 */
-static RGBImageRec* InitRampedImage(void)
+RGBImageRec* InitRampedImage(void)
 {
 	int i, j;
 	int sizeX = 128;
@@ -400,7 +400,7 @@ static RGBImageRec* InitRampedImage(void)
 	return rgbImage;
 }
 
-static void Init(void)
+void Init(void)
 {
 	int i;
 	GLfloat quant4[4];
@@ -455,14 +455,11 @@ static void Init(void)
 
 }
 
-
-/*----------------------------------------------------------------------*/
-
 /*
 ** Allows the caller to run through a list of types,
 ** setting the format, components, and bytesPerComp accordingly.
 */
-static void nextType(ConvertImageRec* imageData)
+void nextType(ConvertImageRec* imageData)
 {
 	/*
 	** Note that packed pixel types are designed so that
@@ -519,9 +516,7 @@ static void nextType(ConvertImageRec* imageData)
 	}
 }
 
-/*----------------------------------------------------------------------*/
-
-static void reshape(int width, int height)
+void reshape(int width, int height)
 {
 	winWidth = width; winHeight = height;
 	glViewport(0, 0, width, height);
@@ -538,19 +533,19 @@ static void reshape(int width, int height)
 	imageData.imageHeight = cell.cellSizeY - 4;
 
 	/* Make sure we don't go stomping off the edges of our image data. */
-	if (imageData.imageWidth > imageData.imageDataWidth) {
+	if (imageData.imageWidth > imageData.imageDataWidth)
+	{
 		imageData.imageWidth = imageData.imageDataWidth;
 	}
-	if (imageData.imageHeight > imageData.imageDataHeight) {
+
+	if (imageData.imageHeight > imageData.imageDataHeight)
+	{
 		imageData.imageHeight = imageData.imageDataHeight;
 	}
 }
 
-/*
-** Runs the packed pixel types through DrawPixels/ReadPixels
-** and TexImage/GetTexImage.
-*/
-static void display(void)
+//Runs the packed pixel types through DrawPixels/ReadPixels and TexImage/GetTexImage.
+void display(void)
 {
 	int i;
 
@@ -559,7 +554,6 @@ static void display(void)
 	setCell(&cell, 0, 0);
 
 	/* DrawPixels */
-
 	for (i = 0; i < numTypes; i++)
 	{
 		glRasterPos3f(0, 0, -1);
@@ -570,14 +564,12 @@ static void display(void)
 		{
 			glNewList(1, GL_COMPILE);
 			assert(glGetError() == GL_NO_ERROR);
-			glDrawPixels(imageData.imageWidth, imageData.imageHeight,
-				imageData.format, imageData.type, imageData.newImage);
+			glDrawPixels(imageData.imageWidth, imageData.imageHeight, imageData.format, imageData.type, imageData.newImage);
 			assert(glGetError() == GL_NO_ERROR);
 			glEndList();
 			assert(glGetError() == GL_NO_ERROR);
 			glCallList(1);
 			assert(glGetError() == GL_NO_ERROR);
-
 		}
 		else
 		{
@@ -589,32 +581,29 @@ static void display(void)
 	}
 
 	/* ReadPixels */
-
-	for (i = 0; i < numTypes; i++) {
-		glReadPixels(0, 0, imageData.imageWidth, imageData.imageHeight,
-			imageData.format, imageData.type, tempbuf);
+	for (i = 0; i < numTypes; i++)
+	{
+		glReadPixels(0, 0, imageData.imageWidth, imageData.imageHeight, imageData.format, imageData.type, tempbuf);
 		glRasterPos3f(0, 0, -1);
 		glBitmap(0, 0, 0, 0, cell.x, cell.y, NULL);
-		glDrawPixels(imageData.imageWidth, imageData.imageHeight,
-			imageData.format, imageData.type, tempbuf);
+		glDrawPixels(imageData.imageWidth, imageData.imageHeight, imageData.format, imageData.type, tempbuf);
 
 		nextType(&imageData);
 		nextCell(&cell);
 	}
 
 	/* TexImage */
-
 	glEnable(GL_TEXTURE_2D);
 
-	for (i = 0; i < numTypes; i++) {
+	for (i = 0; i < numTypes; i++)
+	{
 		ConvertImage(&imageData);
 
-		if (isUseDisplayLists) {
+		if (isUseDisplayLists)
+		{
 			glNewList(2, GL_COMPILE);
 			assert(glGetError() == GL_NO_ERROR);
-			glTexImage2D(GL_TEXTURE_2D, 0, components, texSizeX, texSizeY,
-				0, imageData.format, imageData.type,
-				imageData.newImage);
+			glTexImage2D(GL_TEXTURE_2D, 0, components, texSizeX, texSizeY, 0, imageData.format, imageData.type, imageData.newImage);
 
 			assert(glGetError() == GL_NO_ERROR);
 			glEndList();
@@ -622,10 +611,9 @@ static void display(void)
 
 			glCallList(2);
 		}
-		else {
-			glTexImage2D(GL_TEXTURE_2D, 0, components, texSizeX, texSizeY,
-				0, imageData.format, imageData.type,
-				imageData.newImage);
+		else
+		{
+			glTexImage2D(GL_TEXTURE_2D, 0, components, texSizeX, texSizeY, 0, imageData.format, imageData.type, imageData.newImage);
 		}
 
 		glBegin(GL_QUADS);
@@ -634,8 +622,7 @@ static void display(void)
 		glTexCoord2f(1.0, 0.0);
 		glVertex2i(cell.x + imageData.imageWidth - 1, cell.y);
 		glTexCoord2f(1.0, 1.0);
-		glVertex2i(cell.x + imageData.imageWidth - 1,
-			cell.y + imageData.imageHeight - 1);
+		glVertex2i(cell.x + imageData.imageWidth - 1, cell.y + imageData.imageHeight - 1);
 		glTexCoord2f(0.0, 1.0);
 		glVertex2i(cell.x, cell.y + imageData.imageHeight - 1);
 		glEnd();
@@ -646,21 +633,18 @@ static void display(void)
 
 	/* GetTexImage */
 
-	for (i = 0; i < numTypes; i++) {
-		glTexImage2D(GL_TEXTURE_2D, 0, 4, texSizeX, texSizeY,
-			0, GL_RGBA, GL_FLOAT, imageData.fltImage);
-		glGetTexImage(GL_TEXTURE_2D, 0, imageData.format,
-			imageData.type, tempbuf);
-		glTexImage2D(GL_TEXTURE_2D, 0, components, texSizeX, texSizeY,
-			0, imageData.format, imageData.type, tempbuf);
+	for (i = 0; i < numTypes; i++)
+	{
+		glTexImage2D(GL_TEXTURE_2D, 0, 4, texSizeX, texSizeY, 0, GL_RGBA, GL_FLOAT, imageData.fltImage);
+		glGetTexImage(GL_TEXTURE_2D, 0, imageData.format, imageData.type, tempbuf);
+		glTexImage2D(GL_TEXTURE_2D, 0, components, texSizeX, texSizeY, 0, imageData.format, imageData.type, tempbuf);
 		glBegin(GL_QUADS);
 		glTexCoord2f(0.0, 0.0);
 		glVertex2i(cell.x, cell.y);
 		glTexCoord2f(1.0, 0.0);
 		glVertex2i(cell.x + imageData.imageWidth - 1, cell.y);
 		glTexCoord2f(1.0, 1.0);
-		glVertex2i(cell.x + imageData.imageWidth - 1,
-			cell.y + imageData.imageHeight - 1);
+		glVertex2i(cell.x + imageData.imageWidth - 1, cell.y + imageData.imageHeight - 1);
 		glTexCoord2f(0.0, 1.0);
 		glVertex2i(cell.x, cell.y + imageData.imageHeight - 1);
 		glEnd();
@@ -678,9 +662,7 @@ static void display(void)
 	}
 }
 
-/*----------------------------------------------------------------------*/
-
-static char* keyList[][2] = {
+char* keyList[][2] = {
 	{"R", "Reset draw routine"},
 	{"d", "toggle use of display lists"},
 	{"",""},
@@ -689,7 +671,7 @@ static char* keyList[][2] = {
 	{NULL, NULL}
 };
 
-static void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int x, int y)
 {
 	int i;
 
@@ -723,9 +705,7 @@ static void keyboard(unsigned char key, int x, int y)
 	}
 }
 
-/*----------------------------------------------------------------------*/
-
-static char* argList[][2] = {
+char* argList[][2] = {
 	{"-sb", "single buffered"},
 	{"-db", "double buffered"},
 	{"-f filename", "filename for texture"},
@@ -735,31 +715,40 @@ static char* argList[][2] = {
 	{NULL, NULL}
 };
 
-static void Args(int argc, char** argv)
+void Args(int argc, char** argv)
 {
 	GLint i;
 
-	for (i = 1; i < argc; i++) {
-		if (strcmp(argv[i], "-sb") == 0) {
+	for (i = 1; i < argc; i++)
+	{
+		if (strcmp(argv[i], "-sb") == 0)
+		{
 			doubleBuffer = GL_FALSE;
 		}
-		else if (strcmp(argv[i], "-db") == 0) {
+		else if (strcmp(argv[i], "-db") == 0)
+		{
 			doubleBuffer = GL_TRUE;
 		}
-		else if (strcmp(argv[i], "-f") == 0) {
-			if (i + 1 >= argc || argv[i + 1][0] == '-') {
+		else if (strcmp(argv[i], "-f") == 0)
+		{
+			if (i + 1 >= argc || argv[i + 1][0] == '-')
+			{
 				printf("-f (No file name).\n");
 				exit(1);
 			}
-			else {
+			else
+			{
 				rgbFile = argv[++i];
 			}
 		}
-		else if (strcmp(argv[i], "-nq") == 0) {
+		else if (strcmp(argv[i], "-nq") == 0)
+		{
 			queryExts = GL_FALSE;
 		}
-		else if (strcmp(argv[i], "-h") == 0) {
-			for (i = 0; argList[i][0] != NULL; i++) {
+		else if (strcmp(argv[i], "-h") == 0)
+		{
+			for (i = 0; argList[i][0] != NULL; i++)
+			{
 				printf("%-30s %s\n", argList[i][0], argList[i][1]);
 			}
 			exit(0);
@@ -767,9 +756,7 @@ static void Args(int argc, char** argv)
 	}
 }
 
-/*----------------------------------------------------------------------*/
-
-static GLboolean QueryExtension(char* extName)
+GLboolean QueryExtension(char* extName)
 {
 	/*
 	** Search for extName in the extensions string. Use of strstr()
@@ -784,23 +771,24 @@ static GLboolean QueryExtension(char* extName)
 	extNameLen = strlen(extName);
 
 	p = (char*)glGetString(GL_EXTENSIONS);
-	if (NULL == p) {
+	if (NULL == p)
+	{
 		return GL_FALSE;
 	}
 
 	end = p + strlen(p);
 
-	while (p < end) {
+	while (p < end)
+	{
 		int n = strcspn(p, " ");
-		if ((extNameLen == n) && (strncmp(extName, p, n) == 0)) {
+		if ((extNameLen == n) && (strncmp(extName, p, n) == 0))
+		{
 			return GL_TRUE;
 		}
 		p += (n + 1);
 	}
 	return GL_FALSE;
 }
-
-/*----------------------------------------------------------------------*/
 
 int main(int argc, char** argv)
 {
@@ -813,12 +801,15 @@ int main(int argc, char** argv)
 	** The image is loaded before the window is opened to
 	** allow sizing the window based on the image size.
 	*/
-	if (NULL == rgbFile) {
+	if (NULL == rgbFile)
+	{
 		fileImage = InitRampedImage();
 	}
-	else {
+	else
+	{
 		fileImage = rgbImageLoad(rgbFile);
-		if (NULL == fileImage) {
+		if (NULL == fileImage)
+		{
 			fprintf(stdout, "Warning: file %s not found.\n", rgbFile);
 			fileImage = InitRampedImage();
 		}
@@ -836,7 +827,8 @@ int main(int argc, char** argv)
 
 	glutCreateWindow("Packed Pixel Test");
 
-	if (queryExts && !QueryExtension("GL_EXT_packed_pixels")) {
+	if (queryExts && !QueryExtension("GL_EXT_packed_pixels"))
+	{
 		fprintf(stdout, "Warning: packed pixel extension not found.\n");
 		exit(0);
 	}
@@ -848,4 +840,6 @@ int main(int argc, char** argv)
 	glutKeyboardFunc(keyboard);     //設定callback function
 
 	glutMainLoop();	//開始主循環繪製
+
+	return 0;
 }

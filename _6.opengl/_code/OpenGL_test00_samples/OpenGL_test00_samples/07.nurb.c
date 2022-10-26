@@ -184,7 +184,7 @@ Point ctlpoints[S_NUMPOINTS][T_NUMPOINTS] = {
 };
 GLUnurbsObj* theNurbs;
 
-static void CALLBACK ErrorCallback(GLenum which)
+void CALLBACK ErrorCallback(GLenum which)
 {
 	if (which != expectedError)
 	{
@@ -193,9 +193,8 @@ static void CALLBACK ErrorCallback(GLenum which)
 	}
 }
 
-static void Init(void)
+void Init(void)
 {
-
 	theNurbs = gluNewNurbsRenderer();
 	gluNurbsCallback(theNurbs, GLU_ERROR, ErrorCallback);
 
@@ -211,7 +210,7 @@ static void Init(void)
 	glColor3f(1.0, 1.0, 1.0);
 }
 
-static void reshape(int width, int height)
+void reshape(int width, int height)
 {
 	glViewport(0, 0, width, height);
 
@@ -222,7 +221,7 @@ static void reshape(int width, int height)
 	glMatrixMode(GL_MODELVIEW);
 }
 
-static void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
@@ -231,7 +230,7 @@ static void keyboard(unsigned char key, int x, int y)
 	}
 }
 
-static void special(int key, int x, int y)
+void special(int key, int x, int y)
 {
 	switch (key)
 	{
@@ -254,7 +253,7 @@ static void special(int key, int x, int y)
 	}
 }
 
-static void display(void)
+void display(void)
 {
 
 	glClear(GL_COLOR_BUFFER_BIT);
@@ -267,8 +266,7 @@ static void display(void)
 	glTranslatef(-4.0, -4.5, -2.5);
 
 	gluBeginSurface(theNurbs);
-	gluNurbsSurface(theNurbs, S_NUMKNOTS, sknots, T_NUMKNOTS, glutnots,
-		4 * T_NUMPOINTS, 4, &ctlpoints[0][0][0], S_ORDER,		T_ORDER, GL_MAP2_VERTEX_4);
+	gluNurbsSurface(theNurbs, S_NUMKNOTS, sknots, T_NUMKNOTS, glutnots, 4 * T_NUMPOINTS, 4, &ctlpoints[0][0][0], S_ORDER, T_ORDER, GL_MAP2_VERTEX_4);
 	gluEndSurface(theNurbs);
 
 	glPopMatrix();
@@ -283,7 +281,7 @@ static void display(void)
 	}
 }
 
-static void Args(int argc, char** argv)
+void Args(int argc, char** argv)
 {
 	GLint i;
 
@@ -327,4 +325,6 @@ int main(int argc, char** argv)
 	printf("按 上 下 左 右 控制\n");
 
 	glutMainLoop();	//開始主循環繪製
+
+	return 0;
 }

@@ -23,7 +23,7 @@ GLenum doubleBuffer;
 GLubyte ubImage[65536];
 
 
-static void Init(void)
+void Init(void)
 {
     int i, j;
     GLubyte* img;
@@ -33,25 +33,32 @@ static void Init(void)
 
     /* Create image */
     img = ubImage;
-    for (j = 0; j < 32 * imgWidth; j++) {
+    for (j = 0; j < 32 * imgWidth; j++)
+    {
         *img++ = 0xff;
         *img++ = 0x00;
         *img++ = 0x00;
         *img++ = 0xff;
     }
-    for (j = 0; j < 32 * imgWidth; j++) {
+
+    for (j = 0; j < 32 * imgWidth; j++)
+    {
         *img++ = 0xff;
         *img++ = 0x00;
         *img++ = 0xff;
         *img++ = 0x00;
     }
-    for (j = 0; j < 32 * imgWidth; j++) {
+
+    for (j = 0; j < 32 * imgWidth; j++)
+    {
         *img++ = 0xff;
         *img++ = 0xff;
         *img++ = 0x00;
         *img++ = 0x00;
     }
-    for (j = 0; j < 32 * imgWidth; j++) {
+
+    for (j = 0; j < 32 * imgWidth; j++)
+    {
         *img++ = 0x00;
         *img++ = 0xff;
         *img++ = 0x00;
@@ -59,9 +66,8 @@ static void Init(void)
     }
 }
 
-static void Reshape(int width, int height)
+void reshape(int width, int height)
 {
-
     glViewport(0, 0, width, height);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
@@ -69,10 +75,10 @@ static void Reshape(int width, int height)
     glMatrixMode(GL_MODELVIEW);
 }
 
-static void Key(unsigned char key, int x, int y)
+void Key(unsigned char key, int x, int y)
 {
-
-    switch (key) {
+    switch (key)
+    {
     case 27:
         exit(0);
     }
@@ -82,11 +88,11 @@ void TexFunc(void)
 {
     GLenum err;
 
-    glTexImage2D(GL_TEXTURE_2D, 0, 3, 128, 128, 0, GL_ABGR_EXT,
-        GL_UNSIGNED_BYTE, ubImage);
+    glTexImage2D(GL_TEXTURE_2D, 0, 3, 128, 128, 0, GL_ABGR_EXT, GL_UNSIGNED_BYTE, ubImage);
 
     err = glGetError();
-    if (err) {
+    if (err)
+    {
         printf("err %d\n", err);
     }
 
@@ -94,7 +100,8 @@ void TexFunc(void)
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     err = glGetError();
-    if (err) {
+    if (err)
+    {
         printf("err %d\n", err);
     }
 
@@ -120,12 +127,13 @@ void TexFunc(void)
 
     glDisable(GL_TEXTURE_2D);
     err = glGetError();
-    if (err) {
+    if (err)
+    {
         printf("err %d\n", err);
     }
 }
 
-static void Draw(void)
+void Draw(void)
 {
 
     glClearColor(0.0, 0.0, 0.0, 1.0);
@@ -139,31 +147,36 @@ static void Draw(void)
 
     TexFunc();
 
-    if (doubleBuffer) {
+    if (doubleBuffer)
+    {
         glutSwapBuffers();
     }
-    else {
+    else
+    {
         glFlush();
     }
 }
 
-static void Args(int argc, char** argv)
+void Args(int argc, char** argv)
 {
     GLint i;
 
     doubleBuffer = GL_FALSE;
 
-    for (i = 1; i < argc; i++) {
-        if (strcmp(argv[i], "-sb") == 0) {
+    for (i = 1; i < argc; i++)
+    {
+        if (strcmp(argv[i], "-sb") == 0)
+        {
             doubleBuffer = GL_FALSE;
         }
-        else if (strcmp(argv[i], "-db") == 0) {
+        else if (strcmp(argv[i], "-db") == 0)
+        {
             doubleBuffer = GL_TRUE;
         }
     }
 }
 
-static GLboolean QueryExtension(char* extName)
+GLboolean QueryExtension(char* extName)
 {
     /*
     ** Search for extName in the extensions string. Use of strstr()
@@ -173,9 +186,11 @@ static GLboolean QueryExtension(char* extName)
     */
     char* p = (char*)glGetString(GL_EXTENSIONS);
     char* end = p + strlen(p);
-    while (p < end) {
+    while (p < end)
+    {
         int n = strcspn(p, " ");
-        if ((strlen(extName) == n) && (strncmp(extName, p, n) == 0)) {
+        if ((strlen(extName) == n) && (strncmp(extName, p, n) == 0))
+        {
             return GL_TRUE;
         }
         p += (n + 1);
@@ -194,21 +209,24 @@ int main(int argc, char** argv)
     type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
     glutInitDisplayMode(type);
     glutInitWindowSize(400, 400);
+
     glutCreateWindow("ABGR extension");	//開啟視窗 並顯示出視窗 Title
 
-    if (!QueryExtension("GL_EXT_abgr")) {
+    if (!QueryExtension("GL_EXT_abgr"))
+    {
         printf("Couldn't find ABGR extension.\n");
         exit(0);
     }
 
     Init();
 
-    glutReshapeFunc(Reshape);
-    glutKeyboardFunc(Key);
     glutDisplayFunc(Draw);
-	glutMainLoop();	//開始主循環繪製
+    glutReshapeFunc(reshape);
+    glutKeyboardFunc(Key);
 
-	return 0;
+    glutMainLoop();	//開始主循環繪製
+
+    return 0;
 }
 
 #else

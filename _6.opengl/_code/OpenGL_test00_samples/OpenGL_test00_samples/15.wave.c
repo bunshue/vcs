@@ -60,8 +60,7 @@ GLubyte contourTexture2[] = {
 	255, 127, 127, 127,
 };
 
-
-static void display(void)
+void display(void)
 {
 	struct coord* coord;
 	struct facet* facet;
@@ -148,10 +147,12 @@ static void display(void)
 		glEnd();
 	}
 
-	if (doubleBuffer) {
+	if (doubleBuffer)
+	{
 		glutSwapBuffers();
 	}
-	else {
+	else
+	{
 		glFlush();
 	}
 }
@@ -172,8 +173,10 @@ static void SetColorMap(void)
 	colorIndexes2[1] = 1 + (GLint)((entries - 1) * 0.8);
 	colorIndexes2[2] = entries - 1;
 
-	for (i = 0; i < 2; i++) {
-		switch (i) {
+	for (i = 0; i < 2; i++)
+	{
+		switch (i)
+		{
 		case 0:
 			color = green;
 			indexes = colorIndexes1;
@@ -184,17 +187,15 @@ static void SetColorMap(void)
 			break;
 		}
 
-		for (j = indexes[0]; j < indexes[1]; j++) {
-			percent = 0.2 + 0.8 * (j - indexes[0]) /
-				(float)(indexes[1] - indexes[0]);
-			glutSetColor(j, percent * color[0], percent * color[1],
-				percent * color[2]);
+		for (j = indexes[0]; j < indexes[1]; j++)
+		{
+			percent = 0.2 + 0.8 * (j - indexes[0]) / (float)(indexes[1] - indexes[0]);
+			glutSetColor(j, percent * color[0], percent * color[1], percent * color[2]);
 		}
-		for (j = indexes[1]; j <= indexes[2]; j++) {
+		for (j = indexes[1]; j <= indexes[2]; j++)
+		{
 			percent = (j - indexes[1]) / (float)(indexes[2] - indexes[1]);
-			glutSetColor(j, percent * (1 - color[0]) + color[0],
-				percent * (1 - color[1]) + color[1],
-				percent * (1 - color[2]) + color[2]);
+			glutSetColor(j, percent * (1 - color[0]) + color[0], percent * (1 - color[1]) + color[1], percent * (1 - color[2]) + color[2]);
 		}
 	}
 }
@@ -218,23 +219,26 @@ static void InitMesh(void)
 	theMesh.numCoords = numCoords;
 	theMesh.numFacets = numFacets;
 
-	theMesh.coords = (struct coord*)malloc(frames * numCoords *
-		sizeof(struct coord));
-	theMesh.facets = (struct facet*)malloc(frames * numFacets *
-		sizeof(struct facet));
-	if (theMesh.coords == NULL || theMesh.facets == NULL) {
+	theMesh.coords = (struct coord*)malloc(frames * numCoords * sizeof(struct coord));
+	theMesh.facets = (struct facet*)malloc(frames * numFacets * sizeof(struct facet));
+	if (theMesh.coords == NULL || theMesh.facets == NULL)
+	{
 		printf("Out of memory.\n");
 		exit(0);
 	}
 
-	for (frameNum = 0; frameNum < frames; frameNum++) {
-		for (i = 0; i <= widthX; i++) {
+	for (frameNum = 0; frameNum < frames; frameNum++)
+	{
+		for (i = 0; i <= widthX; i++)
+		{
 			x = i / (float)widthX;
-			for (j = 0; j <= widthY; j++) {
+			for (j = 0; j <= widthY; j++)
+			{
 				y = j / (float)widthY;
 
 				d = sqrt(x * x + y * y);
-				if (d == 0.0) {
+				if (d == 0.0)
+				{
 					d = 0.0001;
 				}
 				angle = 2 * PI * d + (2 * PI / frames * frameNum);
@@ -245,41 +249,46 @@ static void InitMesh(void)
 				coord->vertex[1] = y - 0.5;
 				coord->vertex[2] = (height - height * d) * cos(angle);
 
-				coord->normal[0] = -(height / d) * x * ((1 - d) * 2 * PI *
-					sin(angle) + cos(angle));
-				coord->normal[1] = -(height / d) * y * ((1 - d) * 2 * PI *
-					sin(angle) + cos(angle));
+				coord->normal[0] = -(height / d) * x * ((1 - d) * 2 * PI * sin(angle) + cos(angle));
+				coord->normal[1] = -(height / d) * y * ((1 - d) * 2 * PI * sin(angle) + cos(angle));
 				coord->normal[2] = -1;
 
-				d = 1.0 / sqrt(coord->normal[0] * coord->normal[0] +
-					coord->normal[1] * coord->normal[1] + 1);
+				d = 1.0 / sqrt(coord->normal[0] * coord->normal[0] + coord->normal[1] * coord->normal[1] + 1);
 				coord->normal[0] *= d;
 				coord->normal[1] *= d;
 				coord->normal[2] *= d;
 			}
 		}
-		for (i = 0; i < widthX; i++) {
-			for (j = 0; j < widthY; j++) {
+		for (i = 0; i < widthX; i++)
+		{
+			for (j = 0; j < widthY; j++)
+			{
 				facet = GETFACET(frameNum, i, j);
-				if (((i / checkerSize) % 2) ^ (j / checkerSize) % 2) {
-					if (rgb) {
+				if (((i / checkerSize) % 2) ^ (j / checkerSize) % 2)
+				{
+					if (rgb)
+					{
 						facet->color[0] = 1.0;
 						facet->color[1] = 0.2;
 						facet->color[2] = 0.2;
 					}
-					else {
+					else
+					{
 						facet->color[0] = colorIndexes1[0];
 						facet->color[1] = colorIndexes1[1];
 						facet->color[2] = colorIndexes1[2];
 					}
 				}
-				else {
-					if (rgb) {
+				else
+				{
+					if (rgb)
+					{
 						facet->color[0] = 0.2;
 						facet->color[1] = 1.0;
 						facet->color[2] = 0.2;
 					}
-					else {
+					else
+					{
 						facet->color[0] = colorIndexes2[0];
 						facet->color[1] = colorIndexes2[1];
 						facet->color[2] = colorIndexes2[2];
@@ -344,14 +353,17 @@ static void InitMaterials(void)
 	glMaterialfv(GL_BACK, GL_SHININESS, back_mat_shininess);
 	glMaterialfv(GL_BACK, GL_SPECULAR, back_mat_specular);
 	glMaterialfv(GL_BACK, GL_DIFFUSE, back_mat_diffuse);
-	if (rgb) {
+	if (rgb)
+	{
 		glColorMaterial(GL_FRONT_AND_BACK, GL_DIFFUSE);
 	}
 
-	if (rgb) {
+	if (rgb)
+	{
 		glEnable(GL_COLOR_MATERIAL);
 	}
-	else {
+	else
+	{
 		SetColorMap();
 	}
 }
@@ -366,7 +378,7 @@ static void InitTexture(void)
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 }
 
-static void Init(void)
+void Init(void)
 {
 
 	glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -388,18 +400,13 @@ static void Init(void)
 	glRotatef(35.0, 0.0, 0.0, 1.0);
 }
 
-
-
-
-
-
-
-static void reshape(int width, int height)
+void reshape(int width, int height)
 {
+
 	glViewport(0, 0, width, height);
 }
 
-static void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
@@ -409,8 +416,7 @@ static void keyboard(unsigned char key, int x, int y)
 		{
 			static GLfloat map[4] = { 0, 0, 20, 0 };
 
-			glTexImage2D(GL_TEXTURE_2D, 0, 1, 4, 4, 0, GL_LUMINANCE,
-				GL_UNSIGNED_BYTE, (GLvoid*)contourTexture1);
+			glTexImage2D(GL_TEXTURE_2D, 0, 1, 4, 4, 0, GL_LUMINANCE, GL_UNSIGNED_BYTE, (GLvoid*)contourTexture1);
 			glTexGeni(GL_S, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
 			glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
 			glTexGenfv(GL_S, GL_OBJECT_PLANE, map);
@@ -512,7 +518,7 @@ static void keyboard(unsigned char key, int x, int y)
 	}
 }
 
-static void Args(int argc, char** argv)
+void Args(int argc, char** argv)
 {
 	GLint i;
 
@@ -615,4 +621,5 @@ int main(int argc, char** argv)
 
 	glutMainLoop();	//開始主循環繪製
 
+	return 0;
 }

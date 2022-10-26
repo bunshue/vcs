@@ -11,7 +11,9 @@ GLenum doubleBuffer;
 double plane[4] = {
 	1.0, 0.0, -1.0, 0.0
 };
-float rotX = 5.0, rotY = -5.0, zTranslate = -65.0;
+float rotX = 5.0;
+float rotY = -5.0;
+float zTranslate = -65.0;
 float fogDensity = 0.02;
 
 GLint fogMode = GL_EXP;
@@ -79,7 +81,7 @@ float scp[18][3] = {
 	},
 };
 
-static void Init(void)
+void Init(void)
 {
 	static float ambient[] = { 0.1, 0.1, 0.1, 1.0 };
 	static float diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
@@ -113,8 +115,7 @@ static void Init(void)
 	glMaterialfv(GL_BACK, GL_DIFFUSE, back_mat_diffuse);
 
 	glEnable(GL_FOG);
-	printf("Fog Color\t%f,%f,%f,%f\n\n",
-		fog_color[0], fog_color[1], fog_color[2], fog_color[3]);
+	printf("Fog Color\t%f,%f,%f,%f\n\n", fog_color[0], fog_color[1], fog_color[2], fog_color[3]);
 	printf("Initial Fog Mode\tGL_EXP\n");
 	printf("Initial Fog Density\t%f\n", fogDensity);
 	printf("Type h for help.\n");
@@ -149,7 +150,7 @@ static void Init(void)
 	glEndList();
 }
 
-static void reshape(int width, int height)
+void reshape(int width, int height)
 {
 	glViewport(0, 0, width, height);
 
@@ -159,7 +160,7 @@ static void reshape(int width, int height)
 	glMatrixMode(GL_MODELVIEW);
 }
 
-static void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int x, int y)
 {
 	GLfloat getFloat[1];
 
@@ -298,10 +299,10 @@ static void keyboard(unsigned char key, int x, int y)
 	}
 }
 
-static void SpecialKey(int key, int x, int y)
+void special(int key, int x, int y)
 {
-
-	switch (key) {
+	switch (key)
+	{
 	case GLUT_KEY_UP:
 		rotX -= 5;
 		glutPostRedisplay();
@@ -321,7 +322,7 @@ static void SpecialKey(int key, int x, int y)
 	}
 }
 
-static void display(void)
+void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -346,17 +347,20 @@ static void display(void)
 	}
 }
 
-static void Args(int argc, char** argv)
+void Args(int argc, char** argv)
 {
 	GLint i;
 
 	doubleBuffer = GL_FALSE;
 
-	for (i = 1; i < argc; i++) {
-		if (strcmp(argv[i], "-sb") == 0) {
+	for (i = 1; i < argc; i++)
+	{
+		if (strcmp(argv[i], "-sb") == 0)
+		{
 			doubleBuffer = GL_FALSE;
 		}
-		else if (strcmp(argv[i], "-db") == 0) {
+		else if (strcmp(argv[i], "-db") == 0)
+		{
 			doubleBuffer = GL_TRUE;
 		}
 	}
@@ -382,7 +386,9 @@ int main(int argc, char** argv)
 	glutDisplayFunc(display);       //設定callback function
 	glutReshapeFunc(reshape);       //設定callback function
 	glutKeyboardFunc(keyboard);     //設定callback function
-	glutSpecialFunc(SpecialKey);    //設定callback function
+	glutSpecialFunc(special);    //設定callback function
+
+	printf("按 上 下 左 右 控制\n");
 
 	glutMainLoop();	//開始主循環繪製
 

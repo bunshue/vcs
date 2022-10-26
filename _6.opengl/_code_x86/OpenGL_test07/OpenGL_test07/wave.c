@@ -17,7 +17,6 @@
 #define GETCOORD(frame, x, y) (&(theMesh.coords[frame*theMesh.numCoords+(x)+(y)*(theMesh.widthX+1)]))
 #define GETFACET(frame, x, y) (&(theMesh.facets[frame*theMesh.numFacets+(x)+(y)*theMesh.widthX]))
 
-
 GLenum rgb, doubleBuffer;
 
 GLint colorIndexes1[3];
@@ -70,7 +69,7 @@ GLubyte contourTexture2[] =
     255, 127, 127, 127,
 };
 
-static void display(void)
+void display(void)
 {
     struct coord *coord;
     struct facet *facet;
@@ -165,7 +164,7 @@ static void display(void)
     }
 }
 
-static void SetColorMap(void) 
+void SetColorMap(void) 
 {
     static float green[3] = {0.2, 1.0, 0.2};
     static float red[3] = {1.0, 0.2, 0.2};
@@ -208,7 +207,7 @@ static void SetColorMap(void)
     }
 }
 
-static void InitMesh(void)
+void InitMesh(void)
 {
     struct coord *coord;
     struct facet *facet;
@@ -322,7 +321,7 @@ static void InitMesh(void)
     }
 }
 
-static void InitMaterials(void)
+void InitMaterials(void)
 {
     static float ambient[] = {0.1, 0.1, 0.1, 1.0};
     static float diffuse[] = {0.5, 1.0, 1.0, 1.0};
@@ -365,7 +364,7 @@ static void InitMaterials(void)
     }
 }
 
-static void InitTexture(void)
+void InitTexture(void)
 {
 
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -375,7 +374,7 @@ static void InitTexture(void)
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 }
 
-static void Init(void)
+void Init(void)
 {
 
     glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -397,13 +396,13 @@ static void Init(void)
     glRotatef(35.0, 0.0, 0.0, 1.0);
 }
 
-static void reshape(int width, int height)
+void reshape(int width, int height)
 {
 
     glViewport(0, 0, width, height);
 }
 
-static void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int x, int y)
 {
 	switch (key)
 {
@@ -516,7 +515,7 @@ static void keyboard(unsigned char key, int x, int y)
     }
 }
 
-static void Args(int argc, char **argv)
+void Args(int argc, char **argv)
 {
     GLint i;
 
@@ -616,4 +615,6 @@ int main(int argc, char **argv)
 	glutIdleFunc(display);
 
     glutMainLoop();	//開始主循環繪製
+    
+    return 0;
 }

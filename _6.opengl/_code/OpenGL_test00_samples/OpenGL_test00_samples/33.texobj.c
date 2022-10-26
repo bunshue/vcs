@@ -103,7 +103,8 @@ float c[6][4][3] = {
 	{ 1.0, -1.0, -1.0 }
 	}
 };
-static float n[6][3] = {
+
+float n[6][3] = {
 	{ 0.0, 0.0, -1.0 },
 	{ 1.0, 0.0, 0.0 },
 	{ 0.0, 0.0, 1.0 },
@@ -111,7 +112,8 @@ static float n[6][3] = {
 	{ 0.0, 1.0, 0.0 },
 	{ 0.0, -1.0, 0.0 }
 };
-static float t[6][4][2] = {
+
+float t[6][4][2] = {
 	{
 	{ 1.1,  1.1 },
 	{ -0.1, 1.1 },
@@ -150,37 +152,41 @@ static float t[6][4][2] = {
 	},
 };
 
-
-static void SelectTexture(GLint i)
+void SelectTexture(GLint i)
 {
 	RGBImageRec* texImage;
 
-	if (texObj) {
-		if (i < NUM_TEXTURES) {
+	if (texObj)
+	{
+		if (i < NUM_TEXTURES)
+		{
 			glBindTextureEXT(GL_TEXTURE_2D, texNames[i]);
 		}
-		else {
+		else
+		{
 			glBindTextureEXT(GL_TEXTURE_2D, 0);
 		}
 		return;
 	}
 
-	if (i >= NUM_TEXTURES) {
+	if (i >= NUM_TEXTURES)
+	{
 		i = NUM_TEXTURES - 1;
 	}
 
 	texImage = images[i];
 
-	gluBuild2DMipmaps(GL_TEXTURE_2D, 3, texImage->sizeX, texImage->sizeY,
-		GL_RGB, GL_UNSIGNED_BYTE, texImage->data);
+	gluBuild2DMipmaps(GL_TEXTURE_2D, 3, texImage->sizeX, texImage->sizeY, GL_RGB, GL_UNSIGNED_BYTE, texImage->data);
 }
 
-static void DrawCube(void)
+void DrawCube(void)
 {
 	GLint i;
 
-	for (i = 0; i < 6; i++) {
-		if (multTex) {
+	for (i = 0; i < 6; i++)
+	{
+		if (multTex)
+		{
 			SelectTexture(i);
 		}
 		glBegin(GL_POLYGON);
@@ -192,7 +198,7 @@ static void DrawCube(void)
 	}
 }
 
-static void BuildCube(void)
+void BuildCube(void)
 {
 	GLint i;
 
@@ -201,9 +207,8 @@ static void BuildCube(void)
 	glEndList();
 }
 
-static void DrawSquare(void)
+void DrawSquare(void)
 {
-
 	glBegin(GL_POLYGON);
 	glNormal3fv(n[2]); glTexCoord2fv(t[2][0]); glVertex3fv(c[2][0]);
 	glNormal3fv(n[2]); glTexCoord2fv(t[2][1]); glVertex3fv(c[2][1]);
@@ -212,14 +217,16 @@ static void DrawSquare(void)
 	glEnd();
 }
 
-static void DrawSquares(void)
+void DrawSquares(void)
 {
 	GLint i;
 	GLfloat xTranslate = 0.0;
 
 	glTranslatef(-2.0, 0.0, 0.0);
-	for (i = 0; i < 3; i++) {
-		if (multTex) {
+	for (i = 0; i < 3; i++)
+	{
+		if (multTex)
+		{
 			SelectTexture(i);
 		}
 		DrawSquare();
@@ -227,7 +234,7 @@ static void DrawSquares(void)
 	}
 }
 
-static void BuildSquare(void)
+void BuildSquare(void)
 {
 	GLint i;
 	GLfloat xTranslate = 0.0;
@@ -237,18 +244,20 @@ static void BuildSquare(void)
 	glEndList();
 }
 
-static void DoPushPopTest(void)
+void DoPushPopTest(void)
 {
 	GLfloat xTranslate = 0.0;
 
-	if (multTex) {
+	if (multTex)
+	{
 		SelectTexture(1);
 	}
 	glTranslatef(-4.0, 0.0, 0.0);
 	DrawSquare();
 
 	glPushAttrib(GL_TEXTURE_BIT);
-	if (multTex) {
+	if (multTex)
+	{
 		SelectTexture(2);
 	}
 	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, clamp);
@@ -264,10 +273,9 @@ static void DoPushPopTest(void)
 	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, clamp);
 	glTranslatef(2.0, 0.0, 0.0);
 	DrawSquare();
-
 }
 
-static void BuildPushPopTest(void)
+void BuildPushPopTest(void)
 {
 	GLfloat xTranslate = 0.0;
 
@@ -276,7 +284,7 @@ static void BuildPushPopTest(void)
 	glEndList();
 }
 
-static void BuildLists(void)
+void BuildLists(void)
 {
 
 	lists[CUBE] = glGenLists(1);
@@ -287,18 +295,18 @@ static void BuildLists(void)
 	BuildPushPopTest();
 }
 
-static void UnBuildLists(void)
+void UnBuildLists(void)
 {
 	int i;
 
-	for (i = 0; i < NUM_LIST_TYPES; i++) {
+	for (i = 0; i < NUM_LIST_TYPES; i++)
+	{
 		glDeleteLists(lists[i], 1);
 	}
 }
 
-static void Init(void)
+void Init(void)
 {
-
 	doSphere = GL_FALSE;
 	xRotation = 0.0;
 	yRotation = 0.0;
@@ -306,21 +314,21 @@ static void Init(void)
 
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-	if (multTex && texObj) {
+	if (multTex && texObj)
+	{
 		int i;
 
 		glGenTexturesEXT(NUM_TEXTURES, texNames);
-		for (i = 1; i < NUM_TEXTURES; i++) {
+		for (i = 1; i < NUM_TEXTURES; i++)
+		{
 			glBindTextureEXT(GL_TEXTURE_2D, texNames[i]);
 			gluBuild2DMipmaps(GL_TEXTURE_2D, 3, images[i]->sizeX,
-				images[i]->sizeY, GL_RGB, GL_UNSIGNED_BYTE,
-				images[i]->data);
+				images[i]->sizeY, GL_RGB, GL_UNSIGNED_BYTE, images[i]->data);
 		}
 		glBindTextureEXT(GL_TEXTURE_2D, texNames[0]);
 		glPrioritizeTexturesEXT(NUM_TEXTURES, texNames, texPriorities);
 	}
-	gluBuild2DMipmaps(GL_TEXTURE_2D, 3, images[0]->sizeX, images[0]->sizeY,
-		GL_RGB, GL_UNSIGNED_BYTE, images[0]->data);
+	gluBuild2DMipmaps(GL_TEXTURE_2D, 3, images[0]->sizeX, images[0]->sizeY,	GL_RGB, GL_UNSIGNED_BYTE, images[0]->data);
 
 	glTexEnvfv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, decal);
 	glEnable(GL_TEXTURE_2D);
@@ -339,18 +347,17 @@ static void Init(void)
 	tWrapMode = repeat;
 }
 
-static void UnInit(void)
+void UnInit(void)
 {
-
-	if (multTex && texObj) {
+	if (multTex && texObj)
+	{
 		glDeleteTexturesEXT(NUM_TEXTURES, texNames);
 	}
 	UnBuildLists();
 }
 
-static void Reshape(int width, int height)
+void Reshape(int width, int height)
 {
-
 	glViewport(0, 0, width, height);
 
 	glMatrixMode(GL_PROJECTION);
@@ -359,7 +366,7 @@ static void Reshape(int width, int height)
 	glMatrixMode(GL_MODELVIEW);
 }
 
-static char* keyList[][2] = {
+char* keyList[][2] = {
 	{"left arrow", "y rotation - 0.5"},
 	{"right arrow", "y rotation + 0.5"},
 	{"up arrow", "x rotation - 0.5"},
@@ -388,13 +395,15 @@ static char* keyList[][2] = {
 	{NULL, NULL}
 };
 
-static void Key(unsigned char key, int x, int y)
+void Key(unsigned char key, int x, int y)
 {
 	int i;
 
-	switch (key) {
+	switch (key)
+	{
 	case 'h':
-		for (i = 0; keyList[i][0] != NULL; i++) {
+		for (i = 0; keyList[i][0] != NULL; i++)
+		{
 			printf("%-20s %s\n", keyList[i][0], keyList[i][1]);
 		}
 		break;
@@ -407,28 +416,27 @@ static void Key(unsigned char key, int x, int y)
 		zTranslate -= 0.25;
 		glutPostRedisplay();
 		break;
-
 	case 's':
 		doSphere = !doSphere;
-		if (doSphere) {
+		if (doSphere)
+		{
 			glTexGeniv(GL_S, GL_TEXTURE_GEN_MODE, sphereMap);
 			glTexGeniv(GL_T, GL_TEXTURE_GEN_MODE, sphereMap);
 			glEnable(GL_TEXTURE_GEN_S);
 			glEnable(GL_TEXTURE_GEN_T);
 		}
-		else {
+		else
+		{
 			glDisable(GL_TEXTURE_GEN_S);
 			glDisable(GL_TEXTURE_GEN_T);
 		}
 		glutPostRedisplay();
 		break;
-
 	case 'r':
 		UnInit();
 		Init();
 		glutPostRedisplay();
 		break;
-
 	case 'C':
 		currentList = CUBE;
 		glutPostRedisplay();
@@ -498,10 +506,10 @@ static void Key(unsigned char key, int x, int y)
 	}
 }
 
-static void SpecialKey(int key, int x, int y)
+void special(int key, int x, int y)
 {
-
-	switch (key) {
+	switch (key)
+	{
 	case GLUT_KEY_LEFT:
 		yRotation -= 0.5;
 		glutPostRedisplay();
@@ -521,7 +529,7 @@ static void SpecialKey(int key, int x, int y)
 	}
 }
 
-static void Draw(void)
+void Draw(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 
@@ -536,8 +544,10 @@ static void Draw(void)
 	glRotatef(xRotation, 1, 0, 0);
 	glRotatef(yRotation, 0, 1, 0);
 
-	if (immed) {
-		switch (currentList) {
+	if (immed)
+	{
+		switch (currentList)
+		{
 		case SQUARE:
 			DrawSquares();
 			break;
@@ -549,21 +559,24 @@ static void Draw(void)
 			break;
 		}
 	}
-	else {
+	else
+	{
 		glCallList(lists[currentList]);
 	}
 
 	glPopMatrix();
 
-	if (doubleBuffer) {
+	if (doubleBuffer)
+	{
 		glutSwapBuffers();
 	}
-	else {
+	else
+	{
 		glFlush();
 	}
 }
 
-static char* argList[][2] = {
+char* argList[][2] = {
 	{"-sb", "single buffered"},
 	{"-db", "double buffered"},
 	{"-dr", "direct rendering"},
@@ -581,52 +594,67 @@ static char* argList[][2] = {
 	{NULL, NULL}
 };
 
-static void Args(int argc, char** argv)
+void Args(int argc, char** argv)
 {
 	GLint i;
 
 	doubleBuffer = GL_FALSE;
 
-	for (i = 1; i < argc; i++) {
-		if (strcmp(argv[i], "-sb") == 0) {
+	for (i = 1; i < argc; i++)
+	{
+		if (strcmp(argv[i], "-sb") == 0)
+		{
 			doubleBuffer = GL_FALSE;
 		}
-		else if (strcmp(argv[i], "-db") == 0) {
+		else if (strcmp(argv[i], "-db") == 0)
+		{
 			doubleBuffer = GL_TRUE;
 		}
-		else if (strcmp(argv[i], "-f") == 0) {
-			if (i + 1 >= argc || argv[i + 1][0] == '-') {
+		else if (strcmp(argv[i], "-f") == 0)
+		{
+			if (i + 1 >= argc || argv[i + 1][0] == '-')
+			{
 				printf("-f (No file name).\n");
 				exit(1);
 			}
-			else {
+			else
+			{
 				texFiles[0] = argv[++i];
 				multTex = GL_FALSE;
 			}
 		}
-		else if (strcmp(argv[i], "-flat") == 0) {
+		else if (strcmp(argv[i], "-flat") == 0)
+		{
 			currentList = SQUARE;
 		}
-		else if (strcmp(argv[i], "-texobj") == 0) {
+		else if (strcmp(argv[i], "-texobj") == 0)
+		{
 			texObj = GL_TRUE;
 		}
-		else if (strcmp(argv[i], "-notexobj") == 0) {
+		else if (strcmp(argv[i], "-notexobj") == 0)
+		{
 			texObj = GL_FALSE;
 		}
-		else if (strcmp(argv[i], "-immed") == 0) {
+		else if (strcmp(argv[i], "-immed") == 0)
+		{
 			immed = GL_TRUE;
 		}
-		else if (strcmp(argv[i], "-pushpop") == 0) {
+		else if (strcmp(argv[i], "-pushpop") == 0)
+		{
 			currentList = PUSHPOP;
 		}
-		else if (strcmp(argv[i], "-cube") == 0) {
+		else if (strcmp(argv[i], "-cube") == 0)
+		{
 			currentList = CUBE;
 		}
-		else if (strcmp(argv[i], "-nq") == 0) {
+		else if (strcmp(argv[i], "-nq") == 0)
+		{
 			queryTexobj = GL_FALSE;
 		}
-		else if (strcmp(argv[i], "-h") == 0) {
-			for (i = 0; argList[i][0] != NULL; i++) {
+		else if (strcmp(argv[i], "-h") == 0)
+		{
+			for (i = 0; argList[i][0] != NULL; i++)
+			{
 				printf("%-30s %s\n", argList[i][0], argList[i][1]);
 			}
 			exit(0);
@@ -634,7 +662,7 @@ static void Args(int argc, char** argv)
 	}
 }
 
-static GLboolean QueryExtension(char* extName)
+GLboolean QueryExtension(char* extName)
 {
 	/*
 	** Search for extName in the extensions string. Use of strstr()
@@ -646,22 +674,26 @@ static GLboolean QueryExtension(char* extName)
 	char* end;
 	int extNameLen;
 
-	if (!queryTexobj) {
+	if (!queryTexobj)
+	{
 		return GL_TRUE;
 	}
 
 	extNameLen = strlen(extName);
 
 	p = (char*)glGetString(GL_EXTENSIONS);
-	if (NULL == p) {
+	if (NULL == p)
+	{
 		return GL_FALSE;
 	}
 
 	end = p + strlen(p);
 
-	while (p < end) {
+	while (p < end)
+	{
 		int n = strcspn(p, " ");
-		if ((extNameLen == n) && (strncmp(extName, p, n) == 0)) {
+		if ((extNameLen == n) && (strncmp(extName, p, n) == 0))
+		{
 			return GL_TRUE;
 		}
 		p += (n + 1);
@@ -689,15 +721,20 @@ int main(int argc, char** argv)
 	}
 
 	images[0] = rgbImageLoad(texFiles[0]);
-	if (images[0] == NULL) {
+	if (images[0] == NULL)
+	{
 		printf("Bad texture file.\n");
 		exit(1);
 	}
-	if (multTex) {
+	
+	if (multTex)
+	{
 		int i;
-		for (i = 1; i < NUM_TEXTURES; i++) {
+		for (i = 1; i < NUM_TEXTURES; i++)
+		{
 			images[i] = rgbImageLoad(texFiles[i]);
-			if (images[i] == NULL) {
+			if (images[i] == NULL)
+			{
 				printf("Bad texture file.\n");
 				exit(1);
 			}
@@ -706,10 +743,13 @@ int main(int argc, char** argv)
 
 	Init();
 
+	glutDisplayFunc(Draw);
 	glutReshapeFunc(Reshape);
 	glutKeyboardFunc(Key);
-	glutSpecialFunc(SpecialKey);
-	glutDisplayFunc(Draw);
+	glutSpecialFunc(special);
+	
+	printf("按 上 下 左 右 控制\n");
+	
 	glutMainLoop();	//開始主循環繪製
 
 	return 0;

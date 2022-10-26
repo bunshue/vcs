@@ -37,7 +37,7 @@ float p0[3] = { -125,-80, 0 };
 float p1[3] = { -125, 80, 0 };
 float p2[3] = { 172,  0, 0 };
 
-static void Init(void)
+void Init(void)
 {
 	float r, g, b;
 	float percent1, percent2;
@@ -80,133 +80,8 @@ static void Init(void)
 	glEnable(GL_SCISSOR_TEST);
 }
 
-static void reshape(int width, int height)
-{
-	windW = (GLint)width;
-	windH = (GLint)height;
-}
 
-static void keyboard(unsigned char key, int x, int y)
-{
-	switch (key)
-	{
-	case 'Z':
-		zoom *= 0.75;
-		glutPostRedisplay();
-		break;
-	case 'z':
-		zoom /= 0.75;
-		if (zoom > 10)
-		{
-			zoom = 10;
-		}
-		glutPostRedisplay();
-		break;
-	case '1':
-		glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
-		glutPostRedisplay();
-		break;
-	case '2':
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-		glutPostRedisplay();
-		break;
-	case '3':
-		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-		glutPostRedisplay();
-		break;
-	case '4':
-		state = POINT;
-		glutPostRedisplay();
-		break;
-	case '5':
-		state = LINE;
-		glutPostRedisplay();
-		break;
-	case '6':
-		state = SOLID;
-		glutPostRedisplay();
-		break;
-	case '7':
-		culling = !culling;
-		glutPostRedisplay();
-		break;
-	case '8':
-		winding = !winding;
-		glutPostRedisplay();
-		break;
-	case '9':
-		face = !face;
-		glutPostRedisplay();
-		break;
-	case 'v':
-		showVerticies = !showVerticies;
-		glutPostRedisplay();
-		break;
-	case 's':
-		shade = !shade;
-		(shade) ? glShadeModel(GL_SMOOTH) : glShadeModel(GL_FLAT);
-		glutPostRedisplay();
-		break;
-	case 'h':
-		hideBottomTriangle = !hideBottomTriangle;
-		glutPostRedisplay();
-		break;
-	case 'o':
-		outline = !outline;
-		glutPostRedisplay();
-		break;
-	case 'm':
-		dithering = !dithering;
-		glutPostRedisplay();
-		break;
-	case '0':
-		aaMode = !aaMode;
-		if (aaMode)
-		{
-			glEnable(GL_POLYGON_SMOOTH);
-			glEnable(GL_BLEND);
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-			if (!rgb)
-			{
-				color1 = 32;
-				color2 = 128;
-				color3 = 224;
-			}
-		}
-		else
-		{
-			glDisable(GL_POLYGON_SMOOTH);
-			glDisable(GL_BLEND);
-			if (!rgb)
-			{
-				color1 = 18;
-				color2 = 24;
-				color3 = 30;
-			}
-		}
-		glutPostRedisplay();
-		break;
-	case 27:
-		exit(0);
-	}
-}
-
-static void SpecialKey(int key, int x, int y)
-{
-	switch (key)
-	{
-	case GLUT_KEY_LEFT:
-		zRotation += 0.5;
-		glutPostRedisplay();
-		break;
-	case GLUT_KEY_RIGHT:
-		zRotation -= 0.5;
-		glutPostRedisplay();
-		break;
-	}
-}
-
-static void BeginPrim(void)
+void BeginPrim(void)
 {
 	switch (state)
 	{
@@ -222,12 +97,12 @@ static void BeginPrim(void)
 	}
 }
 
-static void EndPrim(void)
+void EndPrim(void)
 {
 	glEnd();
 }
 
-static void display(void)
+void display(void)
 {
 	float scaleX, scaleY;
 
@@ -344,7 +219,133 @@ static void display(void)
 	}
 }
 
-static void Args(int argc, char** argv)
+void reshape(int width, int height)
+{
+	windW = (GLint)width;
+	windH = (GLint)height;
+}
+
+void keyboard(unsigned char key, int x, int y)
+{
+	switch (key)
+	{
+	case 'Z':
+		zoom *= 0.75;
+		glutPostRedisplay();
+		break;
+	case 'z':
+		zoom /= 0.75;
+		if (zoom > 10)
+		{
+			zoom = 10;
+		}
+		glutPostRedisplay();
+		break;
+	case '1':
+		glPolygonMode(GL_FRONT_AND_BACK, GL_POINT);
+		glutPostRedisplay();
+		break;
+	case '2':
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glutPostRedisplay();
+		break;
+	case '3':
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+		glutPostRedisplay();
+		break;
+	case '4':
+		state = POINT;
+		glutPostRedisplay();
+		break;
+	case '5':
+		state = LINE;
+		glutPostRedisplay();
+		break;
+	case '6':
+		state = SOLID;
+		glutPostRedisplay();
+		break;
+	case '7':
+		culling = !culling;
+		glutPostRedisplay();
+		break;
+	case '8':
+		winding = !winding;
+		glutPostRedisplay();
+		break;
+	case '9':
+		face = !face;
+		glutPostRedisplay();
+		break;
+	case 'v':
+		showVerticies = !showVerticies;
+		glutPostRedisplay();
+		break;
+	case 's':
+		shade = !shade;
+		(shade) ? glShadeModel(GL_SMOOTH) : glShadeModel(GL_FLAT);
+		glutPostRedisplay();
+		break;
+	case 'h':
+		hideBottomTriangle = !hideBottomTriangle;
+		glutPostRedisplay();
+		break;
+	case 'o':
+		outline = !outline;
+		glutPostRedisplay();
+		break;
+	case 'm':
+		dithering = !dithering;
+		glutPostRedisplay();
+		break;
+	case '0':
+		aaMode = !aaMode;
+		if (aaMode)
+		{
+			glEnable(GL_POLYGON_SMOOTH);
+			glEnable(GL_BLEND);
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+			if (!rgb)
+			{
+				color1 = 32;
+				color2 = 128;
+				color3 = 224;
+			}
+		}
+		else
+		{
+			glDisable(GL_POLYGON_SMOOTH);
+			glDisable(GL_BLEND);
+			if (!rgb)
+			{
+				color1 = 18;
+				color2 = 24;
+				color3 = 30;
+			}
+		}
+		glutPostRedisplay();
+		break;
+	case 27:
+		exit(0);
+	}
+}
+
+void special(int key, int x, int y)
+{
+	switch (key)
+	{
+	case GLUT_KEY_LEFT:
+		zRotation += 2.5;
+		glutPostRedisplay();
+		break;
+	case GLUT_KEY_RIGHT:
+		zRotation -= 2.5;
+		glutPostRedisplay();
+		break;
+	}
+}
+
+void Args(int argc, char** argv)
 {
 	GLint i;
 
@@ -392,7 +393,9 @@ int main(int argc, char** argv)
 	glutDisplayFunc(display);       //設定callback function
 	glutReshapeFunc(reshape);       //設定callback function
 	glutKeyboardFunc(keyboard);     //設定callback function
-	glutSpecialFunc(SpecialKey);    //設定callback function
+	glutSpecialFunc(special);    //設定callback function
+
+	printf("按 左 右 控制\n");
 
 	glutMainLoop();	//開始主循環繪製
 

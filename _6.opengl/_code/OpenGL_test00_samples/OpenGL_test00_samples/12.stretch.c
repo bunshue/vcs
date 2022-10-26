@@ -23,14 +23,12 @@
 #define MAX(a, b) (((a) > (b)) ? (a) : (b))
 #define MIN(a, b) (((a) < (b)) ? (a) : (b))
 
-
 enum {
     OP_NOOP = 0,
     OP_STRETCH,
     OP_DRAWPOINT,
     OP_DRAWIMAGE
 };
-
 
 typedef struct _cRec {
     float x, y;
@@ -42,15 +40,14 @@ typedef struct _vertexRec {
     float tX, tY;
 } vertexRec;
 
-
 GLenum doubleBuffer;
-int imageSizeX, imageSizeY;
+int imageSizeX;
+int imageSizeY;
 RGBImageRec* image = NULL;
 cRec cList[50];
 vertexRec vList[5];
 int cCount, cIndex[2], cStep;
 GLenum op = OP_NOOP;
-
 
 void DrawImage(void)
 {
@@ -95,7 +92,6 @@ void DrawPoint(void)
 
 void InitVList(void)
 {
-
     vList[0].x = 0.0;
     vList[0].y = 0.0;
     vList[0].dX = 0.0;
@@ -137,8 +133,7 @@ void ScaleImage(int sizeX, int sizeY)
     GLubyte* buf;
 
     buf = (GLubyte*)malloc(3 * sizeX * sizeY);
-    gluScaleImage(GL_RGB, image->sizeX, image->sizeY, GL_UNSIGNED_BYTE,
-        image->data, sizeX, sizeY, GL_UNSIGNED_BYTE, buf);
+    gluScaleImage(GL_RGB, image->sizeX, image->sizeY, GL_UNSIGNED_BYTE, image->data, sizeX, sizeY, GL_UNSIGNED_BYTE, buf);
     free(image->data);
     image->data = buf;
     image->sizeX = sizeX;
@@ -217,7 +212,6 @@ void Stretch(void)
         cStep = 0;
     }
 }
-
 
 void display(void)
 {
@@ -360,8 +354,7 @@ int main(int argc, char** argv)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-    glTexImage2D(GL_TEXTURE_2D, 0, 3, image->sizeX, image->sizeY, 0,
-        GL_RGB, GL_UNSIGNED_BYTE, (unsigned char*)image->data);
+    glTexImage2D(GL_TEXTURE_2D, 0, 3, image->sizeX, image->sizeY, 0, GL_RGB, GL_UNSIGNED_BYTE, (unsigned char*)image->data);
 
     cCount = 0;
     cIndex[0] = 0;
@@ -376,4 +369,6 @@ int main(int argc, char** argv)
     glutIdleFunc(display);         //設定callback function, 利用idle事件進行重畫
 
     glutMainLoop();	//開始主循環繪製
+
+    return 0;
 }

@@ -7,7 +7,8 @@
 
 GLenum doubleBuffer;
 
-float rotX = 0.0, rotY = 0.0;
+float rotX = 0.0;
+float rotY = 0.0;
 int teaList;
 
 long patchData[][16] = {
@@ -57,7 +58,6 @@ float cpData[][3] = {
     {0,-1.5,0.075},{0,-1.425,0},{1.5,-0.84,0.075},{0.84,-1.5,0.075}
 };
 
-
 void Teapot(long grid)
 {
     float p[4][4][3], q[4][4][3], r[4][4][3], s[4][4][3];
@@ -68,33 +68,33 @@ void Teapot(long grid)
     glPushMatrix();
     glRotatef(270.0, 1.0, 0.0, 0.0);
     for (i = 0; i < 10; i++)
-	{
+    {
         for (j = 0; j < 4; j++)
-		{
+        {
             for (k = 0; k < 4; k++)
-			{
+            {
                 for (l = 0; l < 3; l++)
-				{
+                {
                     p[j][k][l] = cpData[patchData[i][j * 4 + k]][l];
                     q[j][k][l] = cpData[patchData[i][j * 4 + (3 - k)]][l];
                     if (l == 1)
-					{
+                    {
                         q[j][k][l] *= -1.0;
                     }
                     if (i < 6)
-					{
+                    {
                         r[j][k][l] = cpData[patchData[i][j * 4 + (3 - k)]][l];
                         if (l == 0)
-						{
+                        {
                             r[j][k][l] *= -1.0;
                         }
                         s[j][k][l] = cpData[patchData[i][j * 4 + k]][l];
                         if (l == 0)
-						{
+                        {
                             s[j][k][l] *= -1.0;
                         }
                         if (l == 1)
-						{
+                        {
                             s[j][k][l] *= -1.0;
                         }
                     }
@@ -108,7 +108,7 @@ void Teapot(long grid)
         glMap2f(GL_MAP2_VERTEX_3, 0, 1, 3, 4, 0, 1, 12, 4, &q[0][0][0]);
         glEvalMesh2(GL_FILL, 0, grid, 0, grid);
         if (i < 6)
-		{
+        {
             glMap2f(GL_MAP2_VERTEX_3, 0, 1, 3, 4, 0, 1, 12, 4, &r[0][0][0]);
             glEvalMesh2(GL_FILL, 0, grid, 0, grid);
             glMap2f(GL_MAP2_VERTEX_3, 0, 1, 3, 4, 0, 1, 12, 4, &s[0][0][0]);
@@ -200,7 +200,7 @@ void keyboard(unsigned char key, int x, int y)
 void special(int key, int x, int y)
 {
     switch (key)
-	{
+    {
     case GLUT_KEY_UP:
         rotX -= 20.0;
         glutPostRedisplay();
@@ -261,5 +261,9 @@ int main(int argc, char** argv)
     glutKeyboardFunc(keyboard);     //設定callback function
     glutSpecialFunc(special);    //設定callback function
 
+    printf("按 上 下 左 右 控制\n");
+
     glutMainLoop();	//開始主循環繪製
+
+    return 0;
 }
