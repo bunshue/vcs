@@ -17,7 +17,6 @@
 #define TRUE  1
 #define PI    3.14159265358979323846
 
-
 GLenum doubleBuffer;
 int W = 600;
 int H = 600;
@@ -433,19 +432,20 @@ GLfloat identity[16] = {
 	0, 0, 0, 1,
 };
 
-
 void BuildCylinder(int numEdges)
 {
 	int i, top = 1.0, bottom = -1.0;
 	float x[100], y[100], angle;
 
-	for (i = 0; i <= numEdges; i++) {
+	for (i = 0; i <= numEdges; i++)
+	{
 		angle = i * 2.0 * PI / numEdges;
 		x[i] = cosf(angle);
 		y[i] = sinf(angle);
 	}
 
 	glNewList(cylinder, GL_COMPILE);
+
 	glBegin(GL_TRIANGLE_STRIP);
 	for (i = 0; i <= numEdges; i++)
 	{
@@ -454,6 +454,7 @@ void BuildCylinder(int numEdges)
 		glVertex3f(x[i], y[i], top);
 	}
 	glEnd();
+
 	glBegin(GL_TRIANGLE_FAN);
 	glNormal3f(0.0, 0.0, 1.0);
 	glVertex3f(0.0, 0.0, top);
@@ -462,6 +463,7 @@ void BuildCylinder(int numEdges)
 		glVertex3f(x[i], -y[i], top);
 	}
 	glEnd();
+
 	glBegin(GL_TRIANGLE_FAN);
 	glNormal3f(0.0, 0.0, -1.0);
 	glVertex3f(0.0, 0.0, bottom);
@@ -470,6 +472,7 @@ void BuildCylinder(int numEdges)
 		glVertex3f(x[i], y[i], bottom);
 	}
 	glEnd();
+
 	glEndList();
 }
 
@@ -627,7 +630,6 @@ void BuildCube(void)
 
 void BuildLists(void)
 {
-
 	cube = glGenLists(1);
 	BuildCube();
 
@@ -657,7 +659,6 @@ void SetDeepestColor(void)
 
 void SetDefaultSettings(void)
 {
-
 	magFilter = nearest;
 	minFilter = nearest;
 	sWrapMode = repeat;
@@ -707,19 +708,14 @@ void Init(void)
 
 	if (numComponents == 4)
 	{
-		image->data = AlphaPadImage(image->sizeX * image->sizeY,
-			image->data, 128);
+		image->data = AlphaPadImage(image->sizeX * image->sizeY, image->data, 128);
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-		gluBuild2DMipmaps(GL_TEXTURE_2D, numComponents,
-			image->sizeX, image->sizeY,
-			GL_RGBA, GL_UNSIGNED_BYTE, image->data);
+		gluBuild2DMipmaps(GL_TEXTURE_2D, numComponents, image->sizeX, image->sizeY, GL_RGBA, GL_UNSIGNED_BYTE, image->data);
 	}
 	else
 	{
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-		gluBuild2DMipmaps(GL_TEXTURE_2D, numComponents,
-			image->sizeX, image->sizeY,
-			GL_RGB, GL_UNSIGNED_BYTE, image->data);
+		gluBuild2DMipmaps(GL_TEXTURE_2D, numComponents, image->sizeX, image->sizeY, GL_RGB, GL_UNSIGNED_BYTE, image->data);
 	}
 
 	glFogf(GL_FOG_DENSITY, 0.125);
@@ -771,14 +767,17 @@ void Init(void)
 
 void ReInit(void)
 {
-
-	if (genericObject == torus) {
+	if (genericObject == torus)
+	{
 		glEnable(GL_DEPTH_TEST);
 	}
-	else {
+	else
+	{
 		glDisable(GL_DEPTH_TEST);
 	}
-	if (isFogged) {
+
+	if (isFogged)
+	{
 		textureEnvironment = modulate;
 	}
 
@@ -795,7 +794,8 @@ void display(void)
 	glMatrixMode(GL_MODELVIEW);
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	if (isFogged) {
+	if (isFogged)
+	{
 		glEnable(GL_FOG);
 	}
 	glColor3f(1.0, 1.0, 1.0);
@@ -809,13 +809,15 @@ void display(void)
 	glRotatef(xRotation, 1, 0, 0);
 	glRotatef(yRotation, 0, 1, 0);
 
-	if (isLit == TRUE) {
+	if (isLit == TRUE)
+	{
 		glEnable(GL_LIGHTING);
 		glEnable(GL_LIGHT0);
 	}
 
 	glEnable(GL_TEXTURE_2D);
-	if (isFogged) {
+	if (isFogged)
+	{
 		glDisable(GL_FOG);
 	}
 	glPolygonMode(GL_FRONT, GL_FILL);
@@ -824,7 +826,8 @@ void display(void)
 
 	glPopMatrix();
 
-	if (autoRotate) {
+	if (autoRotate)
+	{
 		xRotation += .75;
 		yRotation += .375;
 	}
@@ -1016,7 +1019,7 @@ int main(int argc, char** argv)
 
 	if (image == NULL)
 	{
-		char* filename = "1.rgb";
+		char* filename = "data//1.rgb";
 		image = rgbImageLoad(filename);
 	}
 
@@ -1033,19 +1036,19 @@ int main(int argc, char** argv)
 	glutInitWindowSize(W, H);
 	glutInitWindowPosition(1100, 200);
 
-	glutCreateWindow("Texture Test");
+	glutCreateWindow("Texture Test");	//開啟視窗 並顯示出視窗 Title
 
 	Init();
 
 	glutDisplayFunc(display);       //設定callback function
 	glutReshapeFunc(reshape);       //設定callback function
 	glutKeyboardFunc(keyboard);     //設定callback function
-	glutSpecialFunc(special);    //設定callback function
-	glutIdleFunc(display);         //設定callback function, 利用idle事件進行重畫
-	
+	glutSpecialFunc(special);		//設定callback function
+	glutIdleFunc(display);			//設定callback function, 利用idle事件進行重畫
+
 	printf("按 上 下 左 右 控制\n");
 
 	glutMainLoop();	//開始主循環繪製
-	
+
 	return 0;
 }

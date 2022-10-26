@@ -9,8 +9,9 @@
 #define	LINE 2
 #define	POINT 3
 
-GLenum rgb, doubleBuffer;
-GLint windW = 800, windH = 400;
+GLenum rgb;
+GLint windW = 800;
+GLint windH = 400;
 
 GLenum dithering = GL_TRUE;
 GLenum showVerticies = GL_TRUE;
@@ -209,14 +210,7 @@ void display(void)
 
 	glPopMatrix();
 
-	if (doubleBuffer)
-	{
-		glutSwapBuffers();
-	}
-	else
-	{
-		glFlush();
-	}
+	glFlush();
 }
 
 void reshape(int width, int height)
@@ -350,7 +344,6 @@ void Args(int argc, char** argv)
 	GLint i;
 
 	rgb = GL_TRUE;
-	doubleBuffer = GL_FALSE;
 
 	for (i = 1; i < argc; i++)
 	{
@@ -361,14 +354,6 @@ void Args(int argc, char** argv)
 		else if (strcmp(argv[i], "-rgb") == 0)
 		{
 			rgb = GL_TRUE;
-		}
-		else if (strcmp(argv[i], "-sb") == 0)
-		{
-			doubleBuffer = GL_FALSE;
-		}
-		else if (strcmp(argv[i], "-db") == 0)
-		{
-			doubleBuffer = GL_TRUE;
 		}
 	}
 }
@@ -381,8 +366,9 @@ int main(int argc, char** argv)
 	Args(argc, argv);
 
 	type = (rgb) ? GLUT_RGB : GLUT_INDEX;
-	type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
+	type |= GLUT_SINGLE;
 	glutInitDisplayMode(type);
+
 	glutInitWindowSize(windW, windH);
 	glutInitWindowPosition(1100, 200);
 
@@ -393,7 +379,7 @@ int main(int argc, char** argv)
 	glutDisplayFunc(display);       //設定callback function
 	glutReshapeFunc(reshape);       //設定callback function
 	glutKeyboardFunc(keyboard);     //設定callback function
-	glutSpecialFunc(special);    //設定callback function
+	glutSpecialFunc(special);		//設定callback function
 
 	printf("按 左 右 控制\n");
 

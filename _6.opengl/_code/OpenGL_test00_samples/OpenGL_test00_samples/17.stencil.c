@@ -5,8 +5,6 @@
 //#include <GL/glut.h>      //32 bits
 #include <GL/freeglut.h>    //64 bits
 
-GLenum doubleBuffer;
-
 void Init(void)
 {
     glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -55,16 +53,7 @@ void display(void)
     glVertex3i(3, -2, 0);
     glEnd();
 
-    if (doubleBuffer)
-    {
-        printf("Double Buffer ");
-        glutSwapBuffers();
-    }
-    else
-    {
-        printf("Single Buffer ");
-        glFlush();
-    }
+    glFlush();
 }
 
 void reshape(int width, int height)
@@ -86,34 +75,14 @@ void keyboard(unsigned char key, int x, int y)
     }
 }
 
-void Args(int argc, char** argv)
-{
-    GLint i;
-
-    doubleBuffer = GL_FALSE;
-
-    for (i = 1; i < argc; i++)
-    {
-        if (strcmp(argv[i], "-sb") == 0)
-        {
-            doubleBuffer = GL_FALSE;
-        }
-        else if (strcmp(argv[i], "-db") == 0)
-        {
-            doubleBuffer = GL_TRUE;
-        }
-    }
-}
-
 int main(int argc, char** argv)
 {
     GLenum type;
 
     glutInit(&argc, argv);
-    Args(argc, argv);
 
     type = GLUT_RGB | GLUT_STENCIL;
-    type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
+    type |= GLUT_SINGLE;
 
     glutInitDisplayMode(type);
     glutInitWindowSize(600, 600);
@@ -126,6 +95,8 @@ int main(int argc, char** argv)
     glutDisplayFunc(display);       //設定callback function
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
+
+    printf("僅顯示, 無控制, 按 Esc 離開\n");
 
     glutMainLoop();	//開始主循環繪製
 

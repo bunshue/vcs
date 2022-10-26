@@ -30,7 +30,6 @@ typedef struct _starRec {
     float offsetX, offsetY, offsetR, rotation;
 } starRec;
 
-GLenum doubleBuffer;
 GLint windW = 600;
 GLint windH = 600;
 
@@ -270,48 +269,15 @@ void Idle(void)
         }
     }
 
-    if (doubleBuffer)
-    {
-        //printf("Double Buffer ");
-        glutSwapBuffers();
-    }
-    else
-    {
-        //printf("Single Buffer ");
-        glFlush();
-    }
-}
-
-static void Args(int argc, char** argv)
-{
-    GLint i;
-
-    doubleBuffer = GL_FALSE;
-
-    for (i = 1; i < argc; i++)
-    {
-        if (strcmp(argv[i], "-sb") == 0)
-        {
-            doubleBuffer = GL_FALSE;
-        }
-        else if (strcmp(argv[i], "-db") == 0)
-        {
-            doubleBuffer = GL_TRUE;
-        }
-    }
+    glFlush();
 }
 
 int main(int argc, char** argv)
 {
-    GLenum type;
-
     glutInit(&argc, argv);
-    Args(argc, argv);
 
-    type = GLUT_RGB;
-    type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
+    glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
 
-    glutInitDisplayMode(type);
     glutInitWindowSize(windW, windH);
     glutInitWindowPosition(1100, 200);
 

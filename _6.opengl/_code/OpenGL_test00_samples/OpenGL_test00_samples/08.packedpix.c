@@ -25,7 +25,6 @@
 #define NUM_IMAGES 4
 char* rgbFile = NULL;
 
-GLboolean doubleBuffer = GL_FALSE;
 GLboolean queryExts = GL_TRUE;
 
 int winWidth = 300;
@@ -654,12 +653,7 @@ void display(void)
 	}
 	glDisable(GL_TEXTURE_2D);
 
-	if (doubleBuffer) {
-		glutSwapBuffers();
-	}
-	else {
-		glFlush();
-	}
+	glFlush();
 }
 
 char* keyList[][2] = {
@@ -721,15 +715,7 @@ void Args(int argc, char** argv)
 
 	for (i = 1; i < argc; i++)
 	{
-		if (strcmp(argv[i], "-sb") == 0)
-		{
-			doubleBuffer = GL_FALSE;
-		}
-		else if (strcmp(argv[i], "-db") == 0)
-		{
-			doubleBuffer = GL_TRUE;
-		}
-		else if (strcmp(argv[i], "-f") == 0)
+		if (strcmp(argv[i], "-f") == 0)
 		{
 			if (i + 1 >= argc || argv[i + 1][0] == '-')
 			{
@@ -819,9 +805,8 @@ int main(int argc, char** argv)
 	winWidth = cell.numCols * cell.cellSizeX - 4;
 	winHeight = cell.numRows * cell.cellSizeY - 4;
 
-	type = GLUT_RGB;
-	type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
-	glutInitDisplayMode(type);
+	glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
+
 	glutInitWindowSize(winWidth, winHeight);
 	glutInitWindowPosition(1100, 200);
 

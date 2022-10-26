@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="32.varray.c" />
+    <ClCompile Include="28.tri.c" />
     <ClCompile Include="rgb.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

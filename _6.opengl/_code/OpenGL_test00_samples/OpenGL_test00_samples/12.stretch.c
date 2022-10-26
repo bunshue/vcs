@@ -315,7 +315,7 @@ int main(int argc, char** argv)
 
     if (image == NULL)
     {
-        char* filename = "1.rgb";
+        char* filename = "data//1.rgb";
         image = rgbImageLoad(filename);
     }
 
@@ -338,7 +338,7 @@ int main(int argc, char** argv)
     glutInitWindowSize(imageSizeX, imageSizeY);
     glutInitWindowPosition(1100, 200);
 
-    glutCreateWindow("Stretch");
+    glutCreateWindow("Stretch");    //開啟視窗 並顯示出視窗 Title
 
     glViewport(0, 0, imageSizeX, imageSizeY);
     gluOrtho2D(0, imageSizeX, 0, imageSizeY);
@@ -364,7 +364,7 @@ int main(int argc, char** argv)
 
     glutDisplayFunc(display);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
-    glutMouseFunc(mouse);	//設定callback function
+    glutMouseFunc(mouse);           //設定callback function
 
     glutIdleFunc(display);         //設定callback function, 利用idle事件進行重畫
 

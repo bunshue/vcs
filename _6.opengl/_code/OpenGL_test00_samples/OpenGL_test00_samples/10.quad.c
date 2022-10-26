@@ -121,12 +121,12 @@ void Init(void)
 	if (image)
 	{
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-		gluBuild2DMipmaps(GL_TEXTURE_2D, 3, image->sizeX, image->sizeY,			GL_RGB, GL_UNSIGNED_BYTE, image->data);
+		gluBuild2DMipmaps(GL_TEXTURE_2D, 3, image->sizeX, image->sizeY, GL_RGB, GL_UNSIGNED_BYTE, image->data);
 	}
 	else
 	{
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-		glTexImage2D(GL_TEXTURE_2D, 0, 4, brickImageWidth, brickImageHeight,			0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)brickImage);
+		glTexImage2D(GL_TEXTURE_2D, 0, 4, brickImageWidth, brickImageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)brickImage);
 	}
 
 	quadObj = gluNewQuadric();
@@ -419,7 +419,7 @@ int main(int argc, char** argv)
 
 	if (image == NULL)
 	{
-		char* filename = "1.rgb";
+		char* filename = "data//1.rgb";
 		image = rgbImageLoad(filename);
 	}
 

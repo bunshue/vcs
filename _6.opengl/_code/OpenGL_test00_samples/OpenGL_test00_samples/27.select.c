@@ -14,7 +14,8 @@
 #define	LINE 2
 #define	POINT 3
 
-GLint windW = 300, windH = 300;
+GLint windW = 300;
+GLint windH = 300;
 
 GLuint selectBuf[MAXSELECT];
 GLfloat feedBuf[MAXFEED];
@@ -30,6 +31,7 @@ struct object {
     float v3[2];
     float color[3];
 } objects[MAXOBJS];
+
 GLenum linePoly = GL_FALSE;
 
 void InitObjects(GLint num)

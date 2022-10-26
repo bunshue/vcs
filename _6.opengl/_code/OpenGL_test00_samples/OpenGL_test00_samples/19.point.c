@@ -10,7 +10,7 @@
 #define CI_ANTI_ALIAS_YELLOW 32
 #define CI_ANTI_ALIAS_RED 48
 
-GLenum rgb, doubleBuffer;
+GLenum rgb;
 GLint windW = 600;
 GLint windH = 600;
 
@@ -87,27 +87,17 @@ void display(void)
 
     glDisable(GL_POINT_SMOOTH);
 
-    glPointSize(1);
+    glPointSize(20);
     (rgb) ? glColor3f(0.0, 1.0, 0.0) : glIndexi(2);
     glBegin(GL_POINTS);
     glVertex3fv(point);
     glEnd();
 
-    if (doubleBuffer)
-    {
-        printf("Double Buffer ");
-        glutSwapBuffers();
-    }
-    else
-    {
-        printf("Single Buffer ");
-        glFlush();
-    }
+    glFlush();
 }
 
 void reshape(int width, int height)
 {
-
     windW = width;
     windH = height;
 
@@ -149,23 +139,23 @@ void special(int key, int x, int y)
     switch (key)
     {
     case GLUT_KEY_LEFT:
-        printf("你按了 左 ");
-        point[0] -= 0.25;
+        //printf("你按了 左 ");
+        point[0] -= 2.25;
         glutPostRedisplay();
         break;
     case GLUT_KEY_RIGHT:
-        printf("你按了 右 ");
-        point[0] += 0.25;
+        //printf("你按了 右 ");
+        point[0] += 2.25;
         glutPostRedisplay();
         break;
     case GLUT_KEY_UP:
-        printf("你按了 上 ");
-        point[1] += 0.25;
+        //printf("你按了 上 ");
+        point[1] += 2.25;
         glutPostRedisplay();
         break;
     case GLUT_KEY_DOWN:
-        printf("你按了 下 ");
-        point[1] -= 0.25;
+        //printf("你按了 下 ");
+        point[1] -= 2.25;
         glutPostRedisplay();
         break;
     }
@@ -176,7 +166,6 @@ void Args(int argc, char** argv)
     GLint i;
 
     rgb = GL_TRUE;
-    doubleBuffer = GL_FALSE;
 
     for (i = 1; i < argc; i++)
     {
@@ -187,14 +176,6 @@ void Args(int argc, char** argv)
         else if (strcmp(argv[i], "-rgb") == 0)
         {
             rgb = GL_TRUE;
-        }
-        else if (strcmp(argv[i], "-sb") == 0)
-        {
-            doubleBuffer = GL_FALSE;
-        }
-        else if (strcmp(argv[i], "-db") == 0)
-        {
-            doubleBuffer = GL_TRUE;
         }
     }
 }
@@ -207,7 +188,7 @@ int main(int argc, char** argv)
     Args(argc, argv);
 
     type = (rgb) ? GLUT_RGB : GLUT_INDEX;
-    type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
+    type |= GLUT_SINGLE;
 
     glutInitDisplayMode(type);
     glutInitWindowSize(windW, windH);

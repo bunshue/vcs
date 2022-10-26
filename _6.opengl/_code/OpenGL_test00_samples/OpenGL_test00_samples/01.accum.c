@@ -1,4 +1,3 @@
-// OpenGL Graphics includes
 //#include <helper_gl.h>
 //#include <GL/freeglut.h>
 
@@ -151,6 +150,8 @@ int main(int argc, char** argv)
     glutDisplayFunc(display);       //設定callback function
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
+
+    printf("按 1 2 控制\n");
 
     glutMainLoop();	//開始主循環繪製
 

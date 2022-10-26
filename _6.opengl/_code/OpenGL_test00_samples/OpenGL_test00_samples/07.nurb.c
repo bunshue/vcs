@@ -210,6 +210,33 @@ void Init(void)
 	glColor3f(1.0, 1.0, 1.0);
 }
 
+void display(void)
+{
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	glPushMatrix();
+
+	glTranslatef(4.0, 4.5, 2.5);
+	glRotatef(rotY, 1, 0, 0);
+	glRotatef(rotX, 0, 1, 0);
+	glTranslatef(-4.0, -4.5, -2.5);
+
+	gluBeginSurface(theNurbs);
+	gluNurbsSurface(theNurbs, S_NUMKNOTS, sknots, T_NUMKNOTS, glutnots, 4 * T_NUMPOINTS, 4, &ctlpoints[0][0][0], S_ORDER, T_ORDER, GL_MAP2_VERTEX_4);
+	gluEndSurface(theNurbs);
+
+	glPopMatrix();
+
+	if (doubleBuffer)
+	{
+		glutSwapBuffers();
+	}
+	else
+	{
+		glFlush();
+	}
+}
+
 void reshape(int width, int height)
 {
 	glViewport(0, 0, width, height);
@@ -250,34 +277,6 @@ void special(int key, int x, int y)
 		rotY += 5;
 		glutPostRedisplay();
 		break;
-	}
-}
-
-void display(void)
-{
-
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	glPushMatrix();
-
-	glTranslatef(4.0, 4.5, 2.5);
-	glRotatef(rotY, 1, 0, 0);
-	glRotatef(rotX, 0, 1, 0);
-	glTranslatef(-4.0, -4.5, -2.5);
-
-	gluBeginSurface(theNurbs);
-	gluNurbsSurface(theNurbs, S_NUMKNOTS, sknots, T_NUMKNOTS, glutnots, 4 * T_NUMPOINTS, 4, &ctlpoints[0][0][0], S_ORDER, T_ORDER, GL_MAP2_VERTEX_4);
-	gluEndSurface(theNurbs);
-
-	glPopMatrix();
-
-	if (doubleBuffer)
-	{
-		glutSwapBuffers();
-	}
-	else
-	{
-		glFlush();
 	}
 }
 

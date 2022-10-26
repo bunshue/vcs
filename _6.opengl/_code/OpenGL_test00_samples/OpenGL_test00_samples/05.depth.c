@@ -189,6 +189,8 @@ int main(int argc, char** argv)
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
 
+    printf("按 1 2 控制\n");
+
     glutMainLoop();	//開始主循環繪製
 
     return 0;

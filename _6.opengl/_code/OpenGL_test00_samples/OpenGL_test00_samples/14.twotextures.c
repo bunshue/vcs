@@ -15,10 +15,15 @@ GLenum doubleBuffer;
 int winW = 600;
 int winH = 600;
 
-RGBImageRec* earthImage = NULL, * skyImage = NULL;
-GLint skyList, earthList;
+RGBImageRec* earthImage = NULL;
+RGBImageRec* skyImage = NULL;
+GLint skyList;
+GLint earthList;
 
-float* minFilter, * magFilter, * sWrapMode, * tWrapMode;
+float* minFilter;
+float* magFilter;
+float* sWrapMode;
+float* tWrapMode;
 float decal[] = { GL_DECAL };
 float modulate[] = { GL_MODULATE };
 float repeat[] = { GL_REPEAT };
@@ -31,7 +36,10 @@ float ln_mipmap_nr[] = { GL_LINEAR_MIPMAP_NEAREST };
 float ln_mipmap_ln[] = { GL_LINEAR_MIPMAP_LINEAR };
 
 int horizon;
-float texMinX, texMinY, texMaxX, texMaxY;
+float texMinX;
+float texMinY;
+float texMaxX;
+float texMaxY;
 
 void Init(void)
 {
@@ -237,7 +245,7 @@ int main(int argc, char** argv)
 
 	if (earthImage == NULL)
 	{
-		char* filename = "1.rgb";
+		char* filename = "data//1.rgb";
 		earthImage = rgbImageLoad(filename);
 	}
 
@@ -249,7 +257,7 @@ int main(int argc, char** argv)
 
 	if (skyImage == NULL)
 	{
-		char* filename = "2.rgb";
+		char* filename = "data//2.rgb";
 		skyImage = rgbImageLoad(filename);
 	}
 

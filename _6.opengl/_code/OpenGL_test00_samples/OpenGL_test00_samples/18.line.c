@@ -7,7 +7,7 @@
 
 #define CI_OFFSET 16
 
-GLenum rgb, doubleBuffer;
+GLenum rgb;
 
 GLenum mode1, mode2;
 GLint size;
@@ -103,16 +103,7 @@ void display(void)
 
     glPopMatrix();
 
-    if (doubleBuffer)
-    {
-        printf("Double Buffer ");
-        glutSwapBuffers();
-    }
-    else
-    {
-        printf("Single Buffer ");
-        glFlush();
-    }
+    glFlush();
 }
 
 void reshape(int width, int height)
@@ -147,14 +138,15 @@ void special(int key, int x, int y)
     switch (key)
     {
     case GLUT_KEY_UP:
-        printf("你按了 上 ");
+        //printf("你按了 上 ");
         size++;
         glutPostRedisplay();
         break;
     case GLUT_KEY_DOWN:
-        printf("你按了 下 ");
+        //printf("你按了 下 ");
         size--;
-        if (size < 1) {
+        if (size < 1)
+        {
             size = 1;
         }
         glutPostRedisplay();
@@ -167,7 +159,6 @@ void Args(int argc, char** argv)
     GLint i;
 
     rgb = GL_TRUE;
-    doubleBuffer = GL_FALSE;
 
     for (i = 1; i < argc; i++)
     {
@@ -178,14 +169,6 @@ void Args(int argc, char** argv)
         else if (strcmp(argv[i], "-rgb") == 0)
         {
             rgb = GL_TRUE;
-        }
-        else if (strcmp(argv[i], "-sb") == 0)
-        {
-            doubleBuffer = GL_FALSE;
-        }
-        else if (strcmp(argv[i], "-db") == 0)
-        {
-            doubleBuffer = GL_TRUE;
         }
     }
 }
@@ -198,7 +181,7 @@ int main(int argc, char** argv)
     Args(argc, argv);
 
     type = (rgb) ? GLUT_RGB : GLUT_INDEX;
-    type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
+    type |= GLUT_SINGLE;
 
     glutInitDisplayMode(type);
     glutInitWindowSize(600, 600);
@@ -211,9 +194,9 @@ int main(int argc, char** argv)
     glutDisplayFunc(display);       //設定callback function
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
-    glutSpecialFunc(special);    //設定callback function
+    glutSpecialFunc(special);       //設定callback function
 
-    printf("按 上 下 控制\n");
+    printf("按 上 下 控制, 按上變粗線, 按下變細線\n");
 
     glutMainLoop();	//開始主循環繪製
 

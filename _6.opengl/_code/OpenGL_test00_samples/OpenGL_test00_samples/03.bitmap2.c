@@ -629,33 +629,6 @@ void Init(void)
     useLists = GL_TRUE;
 }
 
-void reshape(int width, int height)
-{
-    glViewport(0, 0, width, height);
-
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluOrtho2D(-175, 175, -175, 175);
-    glMatrixMode(GL_MODELVIEW);
-}
-
-void keyboard(unsigned char key, int x, int y)
-{
-    switch (key)
-    {
-    case '1':
-        useLists = !useLists;
-        glutPostRedisplay();
-        break;
-    case '2':
-        abuse = !abuse;
-        glutPostRedisplay();
-        break;
-    case 27:
-        exit(0);
-    }
-}
-
 void display(void)
 {
     GLint i, j;
@@ -725,7 +698,7 @@ void display(void)
         {
             (rgb) ? glColor3f(0.0, 0.0, 0.0) : glIndexi(0);
             glRasterPos3i((j * 3) % 5, (j * 3) % 8, 0);
-            
+
             if (useLists)
             {
                 glCallList(exp_lists[i]);
@@ -734,7 +707,7 @@ void display(void)
             {
                 glBitmap(80, 80, 40.0, 40.0, 0.0, 0.0, exp_bits[i]);
             }
-            
+
             if (doubleBuffer)
             {
                 glutSwapBuffers();
@@ -743,12 +716,39 @@ void display(void)
             {
                 glFlush();
             }
-            
+
             if (!abuse)
             {
                 break;
             }
         }
+    }
+}
+
+void reshape(int width, int height)
+{
+    glViewport(0, 0, width, height);
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(-175, 175, -175, 175);
+    glMatrixMode(GL_MODELVIEW);
+}
+
+void keyboard(unsigned char key, int x, int y)
+{
+    switch (key)
+    {
+    case '1':
+        useLists = !useLists;
+        glutPostRedisplay();
+        break;
+    case '2':
+        abuse = !abuse;
+        glutPostRedisplay();
+        break;
+    case 27:
+        exit(0);
     }
 }
 
@@ -800,6 +800,8 @@ int main(int argc, char** argv)
     glutDisplayFunc(display);       //設定callback function
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
+
+    printf("按 1 2 控制\n");
 
     glutMainLoop();	//開始主循環繪製
 

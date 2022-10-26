@@ -444,7 +444,7 @@ int main(int argc, char** argv)
 
 	if (image == NULL)
 	{
-		char* filename = "1.rgb";
+		char* filename = "data//1.rgb";
 		image = rgbImageLoad(filename);
 	}
 

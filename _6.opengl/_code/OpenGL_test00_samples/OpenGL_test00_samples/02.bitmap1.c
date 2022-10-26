@@ -8,7 +8,7 @@
 #define OPENGL_WIDTH 24
 #define OPENGL_HEIGHT 13
 
-GLenum rgb, doubleBuffer;
+GLenum rgb;
 
 float boxA[3] =
 {
@@ -167,14 +167,7 @@ void display(void)
     glBitmap(OPENGL_WIDTH, OPENGL_HEIGHT, OPENGL_WIDTH, 0.0, OPENGL_WIDTH, 0.0, OpenGL_bits1);
     glBitmap(OPENGL_WIDTH, OPENGL_HEIGHT, OPENGL_WIDTH, 0.0, OPENGL_WIDTH, 0.0, OpenGL_bits2);
 
-    if (doubleBuffer)
-    {
-        glutSwapBuffers();
-    }
-    else
-    {
-        glFlush();
-    }
+    glFlush();
 }
 
 void Args(int argc, char** argv)
@@ -182,7 +175,6 @@ void Args(int argc, char** argv)
     GLint i;
 
     rgb = GL_TRUE;
-    doubleBuffer = GL_FALSE;
 
     for (i = 1; i < argc; i++)
     {
@@ -193,14 +185,6 @@ void Args(int argc, char** argv)
         else if (strcmp(argv[i], "-rgb") == 0)
         {
             rgb = GL_TRUE;
-        }
-        else if (strcmp(argv[i], "-sb") == 0)
-        {
-            doubleBuffer = GL_FALSE;
-        }
-        else if (strcmp(argv[i], "-db") == 0)
-        {
-            doubleBuffer = GL_TRUE;
         }
     }
 }
@@ -213,8 +197,9 @@ int main(int argc, char** argv)
     Args(argc, argv);
 
     type = (rgb) ? GLUT_RGB : GLUT_INDEX;
-    type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
+    type |= GLUT_SINGLE;
     glutInitDisplayMode(type);
+
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(1100, 200);
 
@@ -225,6 +210,8 @@ int main(int argc, char** argv)
     glutDisplayFunc(display);       //設定callback function
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
+
+    printf("僅顯示, 無控制, 按 Esc 離開\n");
 
     glutMainLoop();	//開始主循環繪製
 

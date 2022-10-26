@@ -153,7 +153,6 @@ void Init(void)
 
 void display(void)
 {
-
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     glPushMatrix();
@@ -178,7 +177,6 @@ void display(void)
 
 void reshape(int w, int h)
 {
-
     glViewport(0, 0, (GLint)w, (GLint)h);
 
     glMatrixMode(GL_PROJECTION);

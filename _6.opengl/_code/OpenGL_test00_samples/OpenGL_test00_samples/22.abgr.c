@@ -19,9 +19,7 @@
 
 #if defined(GL_EXT_abgr)
 
-GLenum doubleBuffer;
 GLubyte ubImage[65536];
-
 
 void Init(void)
 {
@@ -147,33 +145,7 @@ void Draw(void)
 
     TexFunc();
 
-    if (doubleBuffer)
-    {
-        glutSwapBuffers();
-    }
-    else
-    {
-        glFlush();
-    }
-}
-
-void Args(int argc, char** argv)
-{
-    GLint i;
-
-    doubleBuffer = GL_FALSE;
-
-    for (i = 1; i < argc; i++)
-    {
-        if (strcmp(argv[i], "-sb") == 0)
-        {
-            doubleBuffer = GL_FALSE;
-        }
-        else if (strcmp(argv[i], "-db") == 0)
-        {
-            doubleBuffer = GL_TRUE;
-        }
-    }
+    glFlush();
 }
 
 GLboolean QueryExtension(char* extName)
@@ -200,14 +172,9 @@ GLboolean QueryExtension(char* extName)
 
 int main(int argc, char** argv)
 {
-    GLenum type;
-
     glutInit(&argc, argv);
-    Args(argc, argv);
 
-    type = GLUT_RGB;
-    type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
-    glutInitDisplayMode(type);
+    glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
     glutInitWindowSize(400, 400);
 
     glutCreateWindow("ABGR extension");	//開啟視窗 並顯示出視窗 Title

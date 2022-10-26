@@ -44,9 +44,9 @@ GLuint texNames[NUM_TEXTURES];
 GLfloat texPriorities[NUM_TEXTURES] = { 0.1, 0.2, 0.3 };
 RGBImageRec* images[NUM_TEXTURES];
 char* texFiles[NUM_TEXTURES] = {
-	"1.rgb",
-	"2.rgb",
-	"3.rgb",
+	"data//1.rgb",
+	"data//2.rgb",
+	"data//3.rgb",
 };
 
 float* minFilter, * magFilter, * sWrapMode, * tWrapMode;

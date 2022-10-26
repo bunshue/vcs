@@ -1,4 +1,3 @@
-// OpenGL Graphics includes
 //#include <helper_gl.h>
 //#include <GL/freeglut.h>
 
@@ -150,15 +149,15 @@ void Viewport(GLint row, GLint column)
     boxW = (windW - (COLS + 1) * GAP) / COLS;
     boxH = (windH - (ROWS + 1) * GAP) / ROWS;
 
-	printf("Viewport, Row = %d, Column = %d\n",row,column);
-	printf("windW = %d, windH = %d\t",windW,windH );
-	printf("COLS = %d, ROWS = %d, GAP = %d\n",COLS,ROWS,GAP );
-	printf("boxW = %d, boxH = %d\t",boxW,boxH );
+    printf("Viewport, Row = %d, Column = %d\n", row, column);
+    printf("windW = %d, windH = %d\t", windW, windH);
+    printf("COLS = %d, ROWS = %d, GAP = %d\n", COLS, ROWS, GAP);
+    printf("boxW = %d, boxH = %d\t", boxW, boxH);
 
     x = GAP + column * (boxW + GAP);
     y = GAP + row * (boxH + GAP);
 
-	printf("x = %d, y = %d\n",x,y );
+    printf("x = %d, y = %d\n", x, y);
 
     glViewport(x, y, boxW, boxH);
 
@@ -396,7 +395,7 @@ static void TriangleFan(void)
 
 static void Rect(void)
 {
-	printf("boxW = %d, boxH = %d\n",boxW,boxH );
+    printf("boxW = %d, boxH = %d\n", boxW, boxH);
     (rgb) ? glColor3f(1.0, 0.0, 1.0) : glIndexi(5);
     glRecti(-boxW / 4, -boxH / 4, boxW / 4, boxH / 4);
 }
@@ -528,31 +527,31 @@ void display(void)
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     }
 
-	printf("畫第(0, 0)個, Point\n");
+    printf("畫第(0, 0)個, Point\n");
     Viewport(0, 0); Point();
-	printf("畫第(0, 1)個, Lines\n");
+    printf("畫第(0, 1)個, Lines\n");
     Viewport(0, 1); Lines();
-	printf("畫第(0, 2)個, LineStrip\n");
+    printf("畫第(0, 2)個, LineStrip\n");
     Viewport(0, 2); LineStrip();
-	printf("畫第(0, 3)個, LineLoop\n");
+    printf("畫第(0, 3)個, LineLoop\n");
     Viewport(0, 3); LineLoop();
 
-	printf("畫第(1, 0)個, Bitmap\n");
+    printf("畫第(1, 0)個, Bitmap\n");
     Viewport(1, 0); Bitmap();
-	printf("畫第(1, 1)個, TriangleFan\n");
+    printf("畫第(1, 1)個, TriangleFan\n");
     Viewport(1, 1); TriangleFan();
-	printf("畫第(1, 2)個, Triangles\n");
+    printf("畫第(1, 2)個, Triangles\n");
     Viewport(1, 2); Triangles();
-	printf("畫第(1, 3)個, TriangleStrip\n");
+    printf("畫第(1, 3)個, TriangleStrip\n");
     Viewport(1, 3); TriangleStrip();
 
-	printf("畫第(2, 0)個, Rect\n");
+    printf("畫第(2, 0)個, Rect\n");
     Viewport(2, 0); Rect();
-	printf("畫第(2, 1)個, Polygons\n");
+    printf("畫第(2, 1)個, Polygons\n");
     Viewport(2, 1); Polygons();
-	printf("畫第(2, 2)個, Quads\n");
+    printf("畫第(2, 2)個, Quads\n");
     Viewport(2, 2); Quads();
-	printf("畫第(2, 3)個, QuadStrip\n");
+    printf("畫第(2, 3)個, QuadStrip\n");
     Viewport(2, 3); QuadStrip();
 
     if (doubleBuffer)
@@ -614,6 +613,8 @@ int main(int argc, char** argv)
     glutDisplayFunc(display);       //設定callback function
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
+
+    printf("按 1 2 3 控制\n");
 
     glutMainLoop();
 
