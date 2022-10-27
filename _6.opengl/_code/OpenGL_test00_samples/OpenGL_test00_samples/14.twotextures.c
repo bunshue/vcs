@@ -179,11 +179,8 @@ int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
 
-	if (earthImage == NULL)
-	{
-		char* filename = "data//1.rgb";
-		earthImage = rgbImageLoad(filename);
-	}
+	char* filename1 = "data//1.rgb";
+	earthImage = rgbImageLoad(filename1);
 
 	if (earthImage == NULL)
 	{
@@ -191,11 +188,8 @@ int main(int argc, char** argv)
 		exit(1);
 	}
 
-	if (skyImage == NULL)
-	{
-		char* filename = "data//2.rgb";
-		skyImage = rgbImageLoad(filename);
-	}
+	char* filename2 = "data//2.rgb";
+	skyImage = rgbImageLoad(filename2);
 
 	if (skyImage == NULL)
 	{

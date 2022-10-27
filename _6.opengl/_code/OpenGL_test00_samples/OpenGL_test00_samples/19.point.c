@@ -112,7 +112,7 @@ void reshape(int width, int height)
 void keyboard(unsigned char key, int x, int y)
 {
     switch (key)
-	{
+    {
     case '1':
         mode = !mode;
         glutPostRedisplay();
@@ -124,7 +124,7 @@ void keyboard(unsigned char key, int x, int y)
     case 'w':
         size--;
         if (size < 1)
-		{
+        {
             size = 1;
         }
         glutPostRedisplay();
@@ -202,7 +202,7 @@ int main(int argc, char** argv)
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
     glutSpecialFunc(special);    //設定callback function
-    
+
     printf("按 上 下 左 右 控制\n");
 
     glutMainLoop();	//開始主循環繪製

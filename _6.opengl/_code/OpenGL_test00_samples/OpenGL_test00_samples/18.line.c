@@ -8,8 +8,8 @@
 #define CI_OFFSET 16
 
 GLenum rgb;
-
-GLenum mode1, mode2;
+GLenum mode1;
+GLenum mode2;
 GLint size;
 
 float pntA[3] = {
@@ -57,6 +57,7 @@ void display(void)
     glClear(GL_COLOR_BUFFER_BIT);
 
     glLineWidth(size);
+    printf("%d ", size);
 
     if (mode1)
     {
@@ -202,4 +203,3 @@ int main(int argc, char** argv)
 
     return 0;
 }
-

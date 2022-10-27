@@ -65,11 +65,11 @@ namespace vcs_Button
         private void Form1_Load(object sender, EventArgs e)
         {
             //加選
-            //this.button1.UseVisualStyleBackColor = true;
+            //this.button1a.UseVisualStyleBackColor = true;
 
-            // Shape the button.  Button1
+            // Shape the button.  button1a
             // Define the points in the polygonal path.
-            Point[] pts = {
+            Point[] pts1 = {
                 new Point( 20,  60),
                 new Point(140,  60),
                 new Point(140,  20),
@@ -80,20 +80,68 @@ namespace vcs_Button
             };
 
             // Make the GraphicsPath.
-            GraphicsPath polygon_path = new GraphicsPath(FillMode.Winding);
-            polygon_path.AddPolygon(pts);
+            GraphicsPath polygon_path1 = new GraphicsPath(FillMode.Winding);
+            polygon_path1.AddPolygon(pts1);
 
             // Convert the GraphicsPath into a Region.
-            Region polygon_region = new Region(polygon_path);
+            Region polygon_region1 = new Region(polygon_path1);
 
             // Constrain the button to the region.
-            button1.Region = polygon_region;
+            button1a.Region = polygon_region1;
 
             // Make the button big enough to hold the whole region.
-            button1.SetBounds(
-                button1.Location.X,
-                button1.Location.Y,
-                pts[3].X + 5, pts[4].Y + 5);	//SetBounds : 設定控件的位置與大小
+            button1a.SetBounds(
+                button1a.Location.X,
+                button1a.Location.Y,
+                pts1[3].X + 5, pts1[4].Y + 5);	//SetBounds : 設定控件的位置與大小
+
+
+
+            // Shape the button.  button1b
+            // Define the points in the polygonal path.
+            int cx = 128 / 2;
+            int cy = 128 / 2;
+            int r = 128 / 2;
+            Point[] pts2 = {
+                new Point( cx+(int)(r*Math.Cos(Math.PI*0/180)),  cy+(int)(r*Math.Sin(Math.PI*0/180))),
+                new Point( cx+(int)(r*Math.Cos(Math.PI*20/180)),  cy+(int)(r*Math.Sin(Math.PI*20/180))),
+                new Point( cx+(int)(r*Math.Cos(Math.PI*40/180)),  cy+(int)(r*Math.Sin(Math.PI*40/180))),
+                new Point( cx+(int)(r*Math.Cos(Math.PI*60/180)),  cy+(int)(r*Math.Sin(Math.PI*60/180))),
+                new Point( cx+(int)(r*Math.Cos(Math.PI*80/180)),  cy+(int)(r*Math.Sin(Math.PI*80/180))),
+                new Point( cx+(int)(r*Math.Cos(Math.PI*100/180)),  cy+(int)(r*Math.Sin(Math.PI*100/180))),
+                new Point( cx+(int)(r*Math.Cos(Math.PI*120/180)),  cy+(int)(r*Math.Sin(Math.PI*120/180))),
+                new Point( cx+(int)(r*Math.Cos(Math.PI*140/180)),  cy+(int)(r*Math.Sin(Math.PI*140/180))),
+                new Point( cx+(int)(r*Math.Cos(Math.PI*160/180)),  cy+(int)(r*Math.Sin(Math.PI*160/180))),
+                new Point( cx+(int)(r*Math.Cos(Math.PI*180/180)),  cy+(int)(r*Math.Sin(Math.PI*180/180))),
+                new Point( cx+(int)(r*Math.Cos(Math.PI*200/180)),  cy+(int)(r*Math.Sin(Math.PI*200/180))),
+                new Point( cx+(int)(r*Math.Cos(Math.PI*220/180)),  cy+(int)(r*Math.Sin(Math.PI*220/180))),
+                new Point( cx+(int)(r*Math.Cos(Math.PI*240/180)),  cy+(int)(r*Math.Sin(Math.PI*240/180))),
+                new Point( cx+(int)(r*Math.Cos(Math.PI*260/180)),  cy+(int)(r*Math.Sin(Math.PI*260/180))),
+                new Point( cx+(int)(r*Math.Cos(Math.PI*280/180)),  cy+(int)(r*Math.Sin(Math.PI*280/180))),
+                new Point( cx+(int)(r*Math.Cos(Math.PI*300/180)),  cy+(int)(r*Math.Sin(Math.PI*300/180))),
+                new Point( cx+(int)(r*Math.Cos(Math.PI*320/180)),  cy+(int)(r*Math.Sin(Math.PI*320/180))),
+                new Point( cx+(int)(r*Math.Cos(Math.PI*340/180)),  cy+(int)(r*Math.Sin(Math.PI*340/180)))
+            };
+
+            // Make the GraphicsPath.
+            GraphicsPath polygon_path2 = new GraphicsPath(FillMode.Winding);
+            polygon_path2.AddPolygon(pts2);
+
+            // Convert the GraphicsPath into a Region.
+            Region polygon_region2 = new Region(polygon_path2);
+
+            // Constrain the button to the region.
+            button1b.Region = polygon_region2;
+
+            // Make the button big enough to hold the whole region.
+            button1b.SetBounds(
+                button1b.Location.X,
+                button1b.Location.Y,
+                200, 200);	//SetBounds : 設定控件的位置與大小
+
+
+
+
 
             //文字化按鈕 button4 ST
             GraphicsPath gpstirng = new GraphicsPath();
@@ -153,9 +201,25 @@ namespace vcs_Button
             bt_exit.BringToFront();     //移到最上層
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void button1a_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "向右\n";
+        }
+
+        private void button1b_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "圓形button\n";
+        }
+
+        //在Button上畫圖
+        private void button1b_Paint(object sender, PaintEventArgs e)
+        {
+            string filename = @"C:\______test_files\__pic\_icon\Recording.bmp";
+            Bitmap bmp;//實例Bitmap對像
+            bmp = new Bitmap(filename);
+            Graphics g = e.Graphics;
+            TextureBrush myBrush = new TextureBrush(bmp);
+            g.FillRectangle(myBrush, this.ClientRectangle);
         }
 
         private void OnOffButton_Click(object sender, EventArgs e)
@@ -370,7 +434,6 @@ namespace vcs_Button
             }
             btn_word_34.BackgroundImage = bitmap2;
         }
+
     }
 }
-
-

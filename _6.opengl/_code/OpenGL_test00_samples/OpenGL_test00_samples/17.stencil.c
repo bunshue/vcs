@@ -7,7 +7,7 @@
 
 void Init(void)
 {
-    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glClearColor(1.0, 1.0, 0.0, 0.0);   //¶À¦â­I´º
 
     glClearStencil(0);
     glStencilMask(1);
@@ -77,14 +77,9 @@ void keyboard(unsigned char key, int x, int y)
 
 int main(int argc, char** argv)
 {
-    GLenum type;
-
     glutInit(&argc, argv);
 
-    type = GLUT_RGB | GLUT_STENCIL;
-    type |= GLUT_SINGLE;
-
-    glutInitDisplayMode(type);
+    glutInitDisplayMode(GLUT_RGB | GLUT_STENCIL | GLUT_SINGLE);
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(1100, 200);
 

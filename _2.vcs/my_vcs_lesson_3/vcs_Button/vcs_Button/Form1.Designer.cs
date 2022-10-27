@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
+            this.button1a = new System.Windows.Forms.Button();
             this.OnOffButton = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
@@ -57,20 +57,21 @@
             this.btn_word_01 = new System.Windows.Forms.Button();
             this.btn_word_00 = new System.Windows.Forms.Button();
             this.button18 = new System.Windows.Forms.Button();
+            this.button1b = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button1
+            // button1a
             // 
-            this.button1.BackColor = System.Drawing.Color.Pink;
-            this.button1.Font = new System.Drawing.Font("標楷體", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button1.Location = new System.Drawing.Point(12, 12);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(116, 65);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "向右";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.button1a.BackColor = System.Drawing.Color.Pink;
+            this.button1a.Font = new System.Drawing.Font("標楷體", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button1a.Location = new System.Drawing.Point(12, 12);
+            this.button1a.Name = "button1a";
+            this.button1a.Size = new System.Drawing.Size(116, 65);
+            this.button1a.TabIndex = 0;
+            this.button1a.Text = "向右";
+            this.button1a.UseVisualStyleBackColor = true;
+            this.button1a.Click += new System.EventHandler(this.button1a_Click);
             // 
             // OnOffButton
             // 
@@ -101,7 +102,7 @@
             // bt3
             // 
             this.bt3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt3.Location = new System.Drawing.Point(240, 302);
+            this.bt3.Location = new System.Drawing.Point(225, 455);
             this.bt3.Name = "bt3";
             this.bt3.Size = new System.Drawing.Size(195, 40);
             this.bt3.TabIndex = 37;
@@ -112,7 +113,7 @@
             // bt1
             // 
             this.bt1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt1.Location = new System.Drawing.Point(240, 170);
+            this.bt1.Location = new System.Drawing.Point(225, 347);
             this.bt1.Name = "bt1";
             this.bt1.Size = new System.Drawing.Size(195, 40);
             this.bt1.TabIndex = 36;
@@ -123,7 +124,7 @@
             // bt2
             // 
             this.bt2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt2.Location = new System.Drawing.Point(240, 236);
+            this.bt2.Location = new System.Drawing.Point(225, 400);
             this.bt2.Name = "bt2";
             this.bt2.Size = new System.Drawing.Size(195, 40);
             this.bt2.TabIndex = 35;
@@ -135,7 +136,7 @@
             // 
             this.button2.BackColor = System.Drawing.Color.Pink;
             this.button2.Font = new System.Drawing.Font("標楷體", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button2.Location = new System.Drawing.Point(240, 363);
+            this.button2.Location = new System.Drawing.Point(225, 511);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(259, 224);
             this.button2.TabIndex = 38;
@@ -146,7 +147,7 @@
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button3.Location = new System.Drawing.Point(240, 12);
+            this.button3.Location = new System.Drawing.Point(225, 189);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(195, 40);
             this.button3.TabIndex = 39;
@@ -158,7 +159,7 @@
             // 
             this.button4.BackColor = System.Drawing.Color.Blue;
             this.button4.ForeColor = System.Drawing.Color.Blue;
-            this.button4.Location = new System.Drawing.Point(240, 58);
+            this.button4.Location = new System.Drawing.Point(225, 235);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(195, 97);
             this.button4.TabIndex = 40;
@@ -389,11 +390,24 @@
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
+            // button1b
+            // 
+            this.button1b.BackColor = System.Drawing.Color.Pink;
+            this.button1b.Font = new System.Drawing.Font("標楷體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button1b.Location = new System.Drawing.Point(270, 12);
+            this.button1b.Name = "button1b";
+            this.button1b.Size = new System.Drawing.Size(116, 65);
+            this.button1b.TabIndex = 170;
+            this.button1b.UseVisualStyleBackColor = true;
+            this.button1b.Click += new System.EventHandler(this.button1b_Click);
+            this.button1b.Paint += new System.Windows.Forms.PaintEventHandler(this.button1b_Paint);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1206, 744);
+            this.Controls.Add(this.button1b);
             this.Controls.Add(this.button18);
             this.Controls.Add(this.btn_word_34);
             this.Controls.Add(this.btn_word_30);
@@ -421,7 +435,7 @@
             this.Controls.Add(this.bt2);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.button1a);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -434,7 +448,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button1a;
         private System.Windows.Forms.Button OnOffButton;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.RichTextBox richTextBox1;
@@ -463,6 +477,7 @@
         private System.Windows.Forms.Button btn_word_01;
         private System.Windows.Forms.Button btn_word_00;
         private System.Windows.Forms.Button button18;
+        private System.Windows.Forms.Button button1b;
     }
 }
 
