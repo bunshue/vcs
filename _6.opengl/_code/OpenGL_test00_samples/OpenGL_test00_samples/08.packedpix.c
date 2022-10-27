@@ -20,8 +20,6 @@
 
 #include "rgb.h"
 
-/*----------------------------------------------------------------------*/
-
 #define NUM_IMAGES 4
 char* rgbFile = NULL;
 
@@ -33,8 +31,6 @@ int winHeight = 300;
 RGBImageRec* fileImage;
 
 GLboolean isUseDisplayLists = GL_FALSE;
-
-/*----------------------------------------------------------------------*/
 
 /*
 ** This code is used to create an image of specified type and format
@@ -303,18 +299,14 @@ void ConvertImage(ConvertImageRec* imageData)
 	imageData->newImage = newImage;
 	imageData->imageSize = imageSize;
 }
-/*----------------------------------------------------------------------*/
 
 ConvertImageRec imageData;
 
 int numTypes = 6;
 GLint components = 4;
-
 void* tempbuf;
-
-GLuint texSizeX, texSizeY;
-
-/*----------------------------------------------------------------------*/
+GLuint texSizeX;
+GLuint texSizeY;
 
 typedef struct cellStruct {
 	int numRows;
@@ -354,25 +346,23 @@ void nextCell(cellStruct* cell)
 	updateXY(cell);
 }
 
-/*----------------------------------------------------------------------*/
-
-/*
-** Calculates the largest power of two that's less than the value.
-*/
+//Calculates the largest power of two that's less than the value.
 unsigned int maxTexSize(unsigned int value)
 {
 	int power;
 
 	glGetIntegerv(GL_MAX_TEXTURE_SIZE, &power);
-	if (value < power) {
-		while (!(power & value)) power >>= 1;
+	if (value < power)
+	{
+		while (!(power & value))
+		{
+			power >>= 1;
+		}
 	}
 	return power;
 }
 
-/*
-** Makes a ramped unsigned byte RGB image.
-*/
+//Makes a ramped unsigned byte RGB image.
 RGBImageRec* InitRampedImage(void)
 {
 	int i, j;
@@ -404,17 +394,13 @@ void Init(void)
 	int i;
 	GLfloat quant4[4];
 
-	/*
-	** Create a float RGBA image from the file data.
-	*/
+	//Create a float RGBA image from the file data.
 	CreateFloatImage(fileImage, &imageData);
 	free(fileImage->data);
 	free(fileImage);
 	fileImage = NULL;
 
-	/*
-	** Now create a working image with the float image.
-	*/
+	//Now create a working image with the float image.
 	imageData.type = GL_FLOAT;
 	imageData.format = GL_RGBA;
 	imageData.newImage = NULL;
@@ -422,18 +408,15 @@ void Init(void)
 	imageData.bytesPerComp = 4;
 	ConvertImage(&imageData);
 
-	/*
-	** Allocate a buffer to read images into.
-	*/
+	//Allocate a buffer to read images into.
 	tempbuf = malloc(imageData.imageSize + 3);
-	if (NULL == tempbuf) {
+	if (NULL == tempbuf)
+	{
 		fprintf(stderr, "Out of memory!\n");
 		exit(1);
 	}
 
-	/*
-	** Find the largest texture size that will work with this image.
-	*/
+	//Find the largest texture size that will work with this image.
 	texSizeX = maxTexSize((unsigned int)imageData.imageWidth);
 	texSizeY = maxTexSize((unsigned int)imageData.imageHeight);
 
@@ -451,7 +434,6 @@ void Init(void)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
 	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-
 }
 
 /*
@@ -469,7 +451,8 @@ void nextType(ConvertImageRec* imageData)
 	** imageData->components is used to compute the image size.
 	** components is passed to TexImage.
 	*/
-	switch (imageData->type) {
+	switch (imageData->type)
+	{
 	case GL_FLOAT:
 		imageData->type = GL_UNSIGNED_BYTE_3_3_2_EXT;
 		imageData->format = GL_RGB;
@@ -525,13 +508,13 @@ void reshape(int width, int height)
 	glMatrixMode(GL_MODELVIEW);
 	glScissor(0, 0, width, height);
 
-	/* Update the cell sizes to match the new window size. */
+	//Update the cell sizes to match the new window size.
 	cell.cellSizeX = width / cell.numCols;
 	cell.cellSizeY = height / cell.numRows;
 	imageData.imageWidth = cell.cellSizeX - 4;
 	imageData.imageHeight = cell.cellSizeY - 4;
 
-	/* Make sure we don't go stomping off the edges of our image data. */
+	//Make sure we don't go stomping off the edges of our image data.
 	if (imageData.imageWidth > imageData.imageDataWidth)
 	{
 		imageData.imageWidth = imageData.imageDataWidth;
@@ -552,7 +535,7 @@ void display(void)
 
 	setCell(&cell, 0, 0);
 
-	/* DrawPixels */
+	//DrawPixels
 	for (i = 0; i < numTypes; i++)
 	{
 		glRasterPos3f(0, 0, -1);
@@ -579,7 +562,7 @@ void display(void)
 		nextCell(&cell);
 	}
 
-	/* ReadPixels */
+	//ReadPixels
 	for (i = 0; i < numTypes; i++)
 	{
 		glReadPixels(0, 0, imageData.imageWidth, imageData.imageHeight, imageData.format, imageData.type, tempbuf);
@@ -591,7 +574,7 @@ void display(void)
 		nextCell(&cell);
 	}
 
-	/* TexImage */
+	//TexImage
 	glEnable(GL_TEXTURE_2D);
 
 	for (i = 0; i < numTypes; i++)
@@ -630,8 +613,7 @@ void display(void)
 		nextCell(&cell);
 	}
 
-	/* GetTexImage */
-
+	//GetTexImage
 	for (i = 0; i < numTypes; i++)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, 4, texSizeX, texSizeY, 0, GL_RGBA, GL_FLOAT, imageData.fltImage);
@@ -828,3 +810,4 @@ int main(int argc, char** argv)
 
 	return 0;
 }
+

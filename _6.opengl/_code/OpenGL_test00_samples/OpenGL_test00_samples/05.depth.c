@@ -14,9 +14,10 @@
 #define CI_OFFSET_1 16
 #define CI_OFFSET_2 32
 
-GLenum rgb, doubleBuffer;
+GLenum rgb;
+GLenum antiAlias;
+GLenum stipple;
 
-GLenum antiAlias, stipple;
 GLubyte stippleBits[32 * 4] = {
     0xAA, 0xAA, 0xAA, 0xAA, 0x55, 0x55, 0x55, 0x55,
     0xAA, 0xAA, 0xAA, 0xAA, 0x55, 0x55, 0x55, 0x55,
@@ -102,14 +103,7 @@ void display(void)
     glVertex3f(0.9, 0.0, -25.0);
     glEnd();
 
-    if (doubleBuffer)
-    {
-        glutSwapBuffers();
-    }
-    else
-    {
-        glFlush();
-    }
+    glFlush();
 }
 
 void reshape(int width, int height)
@@ -144,7 +138,6 @@ void Args(int argc, char** argv)
     GLint i;
 
     rgb = GL_TRUE;
-    doubleBuffer = GL_FALSE;
 
     for (i = 1; i < argc; i++)
     {
@@ -155,14 +148,6 @@ void Args(int argc, char** argv)
         else if (strcmp(argv[i], "-rgb") == 0)
         {
             rgb = GL_TRUE;
-        }
-        else if (strcmp(argv[i], "-sb") == 0)
-        {
-            doubleBuffer = GL_FALSE;
-        }
-        else if (strcmp(argv[i], "-db") == 0)
-        {
-            doubleBuffer = GL_TRUE;
         }
     }
 }
@@ -176,8 +161,9 @@ int main(int argc, char** argv)
 
     type = GLUT_DEPTH;
     type |= (rgb) ? GLUT_RGB : GLUT_INDEX;
-    type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
+    type |= GLUT_SINGLE;
     glutInitDisplayMode(type);
+
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(1100, 200);
 

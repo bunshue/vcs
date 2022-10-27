@@ -594,7 +594,7 @@ namespace vcs_Draw_Bitmap
             Bitmap bitmap2 = (Bitmap)Image.FromFile(filename);	//給不透明使用
             Bitmap bitmap3 = (Bitmap)Image.FromFile(filename);	//給透明使用
 
-            ////使用默認的透明顏色進行透明設定, 可重複設定
+            //使用默認的透明顏色進行透明設定, 可重複設定
             bitmap3.MakeTransparent(Color.Pink);
             bitmap3.MakeTransparent(Color.Blue);
 

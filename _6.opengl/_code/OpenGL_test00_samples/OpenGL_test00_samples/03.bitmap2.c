@@ -787,6 +787,8 @@ int main(int argc, char** argv)
     glutInit(&argc, argv);
     Args(argc, argv);
 
+    // SB/DB 效果不一樣
+
     type = (rgb) ? GLUT_RGB : GLUT_INDEX;
     type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
     glutInitDisplayMode(type);

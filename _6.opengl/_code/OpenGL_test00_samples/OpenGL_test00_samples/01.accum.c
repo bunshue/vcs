@@ -11,8 +11,10 @@
 //#include <GL/glut.h>      //32 bits
 #include <GL/freeglut.h>    //64 bits
 
-GLenum doubleBuffer;
-GLint thing1, thing2, thing3, thing4;
+GLint thing1;
+GLint thing2;
+GLint thing3;
+GLint thing4;
 
 void Init(void)
 {
@@ -74,14 +76,7 @@ void display(void)
 
     glPopMatrix();
 
-    if (doubleBuffer)
-    {
-        glutSwapBuffers();
-    }
-    else
-    {
-        glFlush();
-    }
+    glFlush();
 }
 
 void reshape(int width, int height)
@@ -111,34 +106,14 @@ void keyboard(unsigned char key, int x, int y)
     }
 }
 
-void Args(int argc, char** argv)
-{
-    GLint i;
-
-    doubleBuffer = GL_FALSE;
-
-    for (i = 1; i < argc; i++)
-    {
-        if (strcmp(argv[i], "-sb") == 0)
-        {
-            doubleBuffer = GL_FALSE;
-        }
-        else if (strcmp(argv[i], "-db") == 0)
-        {
-            doubleBuffer = GL_TRUE;
-        }
-    }
-}
-
 int main(int argc, char** argv)
 {
     GLenum type;
 
     glutInit(&argc, argv);
-    Args(argc, argv);
 
     type = GLUT_RGB | GLUT_ACCUM;
-    type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
+    type |= GLUT_SINGLE;
     glutInitDisplayMode(type);
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(1100, 200);

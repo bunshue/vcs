@@ -21,7 +21,6 @@
 #define OPENGL_HEIGHT 13
 
 GLenum rgb;
-GLenum doubleBuffer;
 GLint windW = 800;
 GLint windH = 600;
 
@@ -554,14 +553,7 @@ void display(void)
     printf("畫第(2, 3)個, QuadStrip\n");
     Viewport(2, 3); QuadStrip();
 
-    if (doubleBuffer)
-    {
-        glutSwapBuffers();
-    }
-    else
-    {
-        glFlush();
-    }
+    glFlush();
 }
 
 void Args(int argc, char** argv)
@@ -569,7 +561,6 @@ void Args(int argc, char** argv)
     GLint i;
 
     rgb = GL_TRUE;
-    doubleBuffer = GL_FALSE;
 
     for (i = 1; i < argc; i++)
     {
@@ -580,14 +571,6 @@ void Args(int argc, char** argv)
         else if (strcmp(argv[i], "-rgb") == 0)
         {
             rgb = GL_TRUE;
-        }
-        else if (strcmp(argv[i], "-sb") == 0)
-        {
-            doubleBuffer = GL_FALSE;
-        }
-        else if (strcmp(argv[i], "-db") == 0)
-        {
-            doubleBuffer = GL_TRUE;
         }
     }
 }
@@ -600,7 +583,7 @@ int main(int argc, char** argv)
     Args(argc, argv);
 
     type = (rgb) ? GLUT_RGB : GLUT_INDEX;
-    type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
+    type |= GLUT_SINGLE;
     glutInitDisplayMode(type);
 
     glutInitWindowSize(windW, windH);
@@ -616,7 +599,7 @@ int main(int argc, char** argv)
 
     printf("按 1 2 3 控制\n");
 
-    glutMainLoop();
+    glutMainLoop();	//開始主循環繪製
 
     return 0;
 }

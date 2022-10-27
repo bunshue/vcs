@@ -26,8 +26,6 @@
 #define	BRICKIMAGEWIDTH 16
 #define	BRICKIMAGEHEIGHT 16
 
-GLenum doubleBuffer;
-
 float black[3] = { 0.0, 0.0, 0.0 };
 float white[3] = { 1.0, 1.0, 1.0 };
 float gray[3] = { 0.5, 0.5, 0.5 };
@@ -1292,14 +1290,7 @@ void display(void)
 
 	glPopMatrix();
 
-	if (doubleBuffer)
-	{
-		glutSwapBuffers();
-	}
-	else
-	{
-		glFlush();
-	}
+	glFlush();
 }
 
 void reshape(int width, int height)
@@ -1488,35 +1479,16 @@ void special(int key, int x, int y)
 	}
 }
 
-static void Args(int argc, char** argv)
-{
-	GLint i;
-
-	doubleBuffer = GL_FALSE;
-
-	for (i = 1; i < argc; i++)
-	{
-		if (strcmp(argv[i], "-sb") == 0)
-		{
-			doubleBuffer = GL_FALSE;
-		}
-		else if (strcmp(argv[i], "-db") == 0)
-		{
-			doubleBuffer = GL_TRUE;
-		}
-	}
-}
-
 int main(int argc, char** argv)
 {
 	GLenum type;
 
 	glutInit(&argc, argv);
-	Args(argc, argv);
 
 	type = GLUT_RGB | GLUT_DEPTH;
-	type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
+	type |= GLUT_SINGLE;
 	glutInitDisplayMode(type);
+
 	glutInitWindowSize(600, 600);
 	glutInitWindowPosition(1100, 200);
 

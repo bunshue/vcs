@@ -10,26 +10,31 @@
 
 GLenum rgb;
 
+//boxA位置, 中
 float boxA[3] =
 {
     0, 0, 0
 };
 
+//boxB位置, 左
 float boxB[3] =
 {
     -100, 0, 0
 };
 
+//boxC位置, 右
 float boxC[3] =
 {
     100, 0, 0
 };
 
+//boxD位置, 上
 float boxD[3] =
 {
     0, 95, 0
 };
 
+//boxE位置, 下
 float boxE[3] =
 {
     0, -105, 0
@@ -103,27 +108,8 @@ void Init(void)
         glutSetColor(7, 1.0, 1.0, 1.0);
     }
 
-    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glClearColor(0.0, 0.0, 0.0, 0.0);   //黑色
     glClearIndex(0.0);
-}
-
-void reshape(int width, int height)
-{
-    glViewport(0, 0, width, height);
-
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluOrtho2D(-175, 175, -175, 175);
-    glMatrixMode(GL_MODELVIEW);
-}
-
-void keyboard(unsigned char key, int x, int y)
-{
-    switch (key)
-    {
-    case 27:
-        exit(0);
-    }
 }
 
 void display(void)
@@ -133,7 +119,7 @@ void display(void)
 
     glClear(GL_COLOR_BUFFER_BIT);
 
-    glRasterPos3fv(boxA);
+    glRasterPos3fv(boxA);   //設定位置, 中
     glPixelStorei(GL_UNPACK_ROW_LENGTH, 24);
     glPixelStorei(GL_UNPACK_SKIP_PIXELS, 8);
     glPixelStorei(GL_UNPACK_SKIP_ROWS, 2);
@@ -147,27 +133,50 @@ void display(void)
     glPixelStorei(GL_UNPACK_LSB_FIRST, GL_TRUE);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-    (rgb) ? glColor3f(1.0, 1.0, 1.0) : glIndexi(7);
-    glRasterPos3fv(boxB);
+    //                Red
+    (rgb) ? glColor3f(1.0, 0.0, 0.0) : glIndexi(7);
+    glRasterPos3fv(boxB);   //設定位置, 左
     glBitmap(OPENGL_WIDTH, OPENGL_HEIGHT, OPENGL_WIDTH, 0.0, OPENGL_WIDTH, 0.0, OpenGL_bits1);
     glBitmap(OPENGL_WIDTH, OPENGL_HEIGHT, OPENGL_WIDTH, 0.0, OPENGL_WIDTH, 0.0, OpenGL_bits2);
 
-    (rgb) ? glColor3f(0.0, 1.0, 1.0) : glIndexi(6);
-    glRasterPos3fv(boxC);
+    //                Green
+    (rgb) ? glColor3f(0.0, 1.0, 0.0) : glIndexi(6);
+    glRasterPos3fv(boxC);   //設定位置, 右
     glBitmap(OPENGL_WIDTH, OPENGL_HEIGHT, OPENGL_WIDTH, 0.0, OPENGL_WIDTH, 0.0, OpenGL_bits1);
     glBitmap(OPENGL_WIDTH, OPENGL_HEIGHT, OPENGL_WIDTH, 0.0, OPENGL_WIDTH, 0.0, OpenGL_bits2);
 
-    (rgb) ? glColor3f(1.0, 0.0, 1.0) : glIndexi(5);
-    glRasterPos3fv(boxD);
+    //                Blue
+    (rgb) ? glColor3f(0.0, 0.0, 1.0) : glIndexi(5);
+    glRasterPos3fv(boxD);   //設定位置, 上
     glBitmap(OPENGL_WIDTH, OPENGL_HEIGHT, OPENGL_WIDTH, 0.0, OPENGL_WIDTH, 0.0, OpenGL_bits1);
     glBitmap(OPENGL_WIDTH, OPENGL_HEIGHT, OPENGL_WIDTH, 0.0, OPENGL_WIDTH, 0.0, OpenGL_bits2);
 
+    //                Yellow
     (rgb) ? glColor3f(1.0, 1.0, 0.0) : glIndexi(3);
-    glRasterPos3fv(boxE);
+    glRasterPos3fv(boxE);   //設定位置, 下
     glBitmap(OPENGL_WIDTH, OPENGL_HEIGHT, OPENGL_WIDTH, 0.0, OPENGL_WIDTH, 0.0, OpenGL_bits1);
     glBitmap(OPENGL_WIDTH, OPENGL_HEIGHT, OPENGL_WIDTH, 0.0, OPENGL_WIDTH, 0.0, OpenGL_bits2);
 
     glFlush();
+}
+
+void reshape(int width, int height)
+{
+    glViewport(0, 0, width, height);
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(-125, 125, -125, 125);   //顯示範圍 x(-125 ~ 125), y(-125 ~ 125)
+    glMatrixMode(GL_MODELVIEW);
+}
+
+void keyboard(unsigned char key, int x, int y)
+{
+    switch (key)
+    {
+    case 27:
+        exit(0);
+    }
 }
 
 void Args(int argc, char** argv)
@@ -195,6 +204,8 @@ int main(int argc, char** argv)
 
     glutInit(&argc, argv);
     Args(argc, argv);
+
+    //不同RGB模式, 看起來不一樣
 
     type = (rgb) ? GLUT_RGB : GLUT_INDEX;
     type |= GLUT_SINGLE;

@@ -22,8 +22,6 @@
 
 typedef INREAL Point[4];
 
-GLenum doubleBuffer;
-
 GLenum expectedError;
 GLint rotX = 40;
 GLint rotY = 40;
@@ -227,14 +225,7 @@ void display(void)
 
 	glPopMatrix();
 
-	if (doubleBuffer)
-	{
-		glutSwapBuffers();
-	}
-	else
-	{
-		glFlush();
-	}
+	glFlush();
 }
 
 void reshape(int width, int height)
@@ -280,35 +271,12 @@ void special(int key, int x, int y)
 	}
 }
 
-void Args(int argc, char** argv)
-{
-	GLint i;
-
-	doubleBuffer = GL_FALSE;
-
-	for (i = 1; i < argc; i++)
-	{
-		if (strcmp(argv[i], "-sb") == 0)
-		{
-			doubleBuffer = GL_FALSE;
-		}
-		else if (strcmp(argv[i], "-db") == 0)
-		{
-			doubleBuffer = GL_TRUE;
-		}
-	}
-}
-
 int main(int argc, char** argv)
 {
-	GLenum type;
-
 	glutInit(&argc, argv);
-	Args(argc, argv);
 
-	type = GLUT_RGB;
-	type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
-	glutInitDisplayMode(type);
+	glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
+
 	glutInitWindowSize(600, 600);
 	glutInitWindowPosition(1100, 200);
 
@@ -316,10 +284,10 @@ int main(int argc, char** argv)
 
 	Init();
 
-	glutDisplayFunc(display);       //設定callback function
-	glutReshapeFunc(reshape);       //設定callback function
-	glutKeyboardFunc(keyboard);     //設定callback function
-	glutSpecialFunc(special);    //設定callback function
+	glutDisplayFunc(display);		//設定callback function
+	glutReshapeFunc(reshape);		//設定callback function
+	glutKeyboardFunc(keyboard);		//設定callback function
+	glutSpecialFunc(special);		//設定callback function
 
 	printf("按 上 下 左 右 控制\n");
 

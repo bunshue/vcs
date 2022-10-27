@@ -40,13 +40,15 @@ typedef struct _vertexRec {
     float tX, tY;
 } vertexRec;
 
-GLenum doubleBuffer;
 int imageSizeX;
 int imageSizeY;
+
 RGBImageRec* image = NULL;
 cRec cList[50];
 vertexRec vList[5];
-int cCount, cIndex[2], cStep;
+int cCount;
+int cIndex[2];
+int cStep;
 GLenum op = OP_NOOP;
 
 void DrawImage(void)
@@ -54,17 +56,7 @@ void DrawImage(void)
     glRasterPos2i(0, 0);
     glDrawPixels(image->sizeX, image->sizeY, GL_RGB, GL_UNSIGNED_BYTE, image->data);
 
-    if (doubleBuffer)
-    {
-        glutSwapBuffers();
-    }
-    else
-    {
-        glFlush();
-    }
-
-    glRasterPos2i(0, 0);
-    glDrawPixels(image->sizeX, image->sizeY, GL_RGB, GL_UNSIGNED_BYTE, image->data);
+    glFlush();
 }
 
 void DrawPoint(void)
@@ -80,14 +72,7 @@ void DrawPoint(void)
     }
     glEnd();
 
-    if (doubleBuffer)
-    {
-        glutSwapBuffers();
-    }
-    else
-    {
-        glFlush();
-    }
+    glFlush();
 }
 
 void InitVList(void)
@@ -185,14 +170,7 @@ void Stretch(void)
     glVertex2f(vList[4].x, vList[4].y);
     glEnd();
 
-    if (doubleBuffer)
-    {
-        glutSwapBuffers();
-    }
-    else
-    {
-        glFlush();
-    }
+    glFlush();
 
     if (++cStep < STEPCOUNT)
     {
@@ -274,19 +252,9 @@ void Args(int argc, char** argv)
 {
     GLint i;
 
-    doubleBuffer = GL_FALSE;
-
     for (i = 1; i < argc; i++)
     {
-        if (strcmp(argv[i], "-sb") == 0)
-        {
-            doubleBuffer = GL_FALSE;
-        }
-        else if (strcmp(argv[i], "-db") == 0)
-        {
-            doubleBuffer = GL_TRUE;
-        }
-        else if (strcmp(argv[i], "-f") == 0)
+        if (strcmp(argv[i], "-f") == 0)
         {
             if (i + 1 >= argc || argv[i + 1][0] == '-')
             {
@@ -332,9 +300,9 @@ int main(int argc, char** argv)
 
     printf("imageSizeX = %d, imageSizeY = %d\n", imageSizeX, imageSizeY);
 
-    type = GLUT_RGB;
-    type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
+    type = GLUT_RGB | GLUT_SINGLE;
     glutInitDisplayMode(type);
+
     glutInitWindowSize(imageSizeX, imageSizeY);
     glutInitWindowPosition(1100, 200);
 
@@ -362,11 +330,10 @@ int main(int argc, char** argv)
     cStep = 0;
     op = OP_DRAWIMAGE;
 
-    glutDisplayFunc(display);       //設定callback function
-    glutKeyboardFunc(keyboard);     //設定callback function
-    glutMouseFunc(mouse);           //設定callback function
-
-    glutIdleFunc(display);         //設定callback function, 利用idle事件進行重畫
+    glutDisplayFunc(display);   //設定callback function
+    glutKeyboardFunc(keyboard); //設定callback function
+    glutMouseFunc(mouse);       //設定callback function
+    glutIdleFunc(display);      //設定callback function, 利用idle事件進行重畫
 
     glutMainLoop();	//開始主循環繪製
 

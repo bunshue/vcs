@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="28.tri.c" />
+    <ClCompile Include="14.twotextures.c" />
     <ClCompile Include="rgb.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

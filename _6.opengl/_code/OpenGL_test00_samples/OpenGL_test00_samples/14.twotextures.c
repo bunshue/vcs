@@ -11,7 +11,6 @@
 
 #include "rgb.h"
 
-GLenum doubleBuffer;
 int winW = 600;
 int winH = 600;
 
@@ -110,14 +109,7 @@ void display(void)
 
 	glPopMatrix();
 
-	if (doubleBuffer)
-	{
-		glutSwapBuffers();
-	}
-	else
-	{
-		glFlush();
-	}
+	glFlush();
 }
 
 void reshape(int width, int height)
@@ -183,65 +175,9 @@ void special(int key, int x, int y)
 	}
 }
 
-void Args(int argc, char** argv)
-{
-	GLint i;
-
-	doubleBuffer = GL_FALSE;
-
-	for (i = 1; i < argc; i++)
-	{
-		if (strcmp(argv[i], "-sb") == 0)
-		{
-			doubleBuffer = GL_FALSE;
-		}
-		else if (strcmp(argv[i], "-db") == 0)
-		{
-			doubleBuffer = GL_TRUE;
-		}
-		else if (strcmp(argv[i], "-earth") == 0)
-		{
-			if (i + 1 >= argc || argv[i + 1][0] == '-')
-			{
-				printf("-earth (No file name).\n");
-				exit(1);
-			}
-			else
-			{
-				earthImage = rgbImageLoad(argv[++i]);
-				if (earthImage == NULL)
-				{
-					printf("-earth (Bad file name).\n");
-					exit(1);
-				}
-			}
-		}
-		else if (strcmp(argv[i], "-sky") == 0)
-		{
-			if (i + 1 >= argc || argv[i + 1][0] == '-')
-			{
-				printf("-sky (No file name).\n");
-				exit(1);
-			}
-			else
-			{
-				skyImage = rgbImageLoad(argv[++i]);
-				if (skyImage == NULL)
-				{
-					printf("-sky (Bad file name).\n");
-					exit(1);
-				}
-			}
-		}
-	}
-}
-
 int main(int argc, char** argv)
 {
-	GLenum type;
-
 	glutInit(&argc, argv);
-	Args(argc, argv);
 
 	if (earthImage == NULL)
 	{
@@ -267,9 +203,8 @@ int main(int argc, char** argv)
 		exit(1);
 	}
 
-	type = GLUT_RGB;
-	type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
-	glutInitDisplayMode(type);
+	glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
+
 	glutInitWindowSize(winW, winH);
 	glutInitWindowPosition(1100, 200);
 

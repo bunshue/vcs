@@ -17,7 +17,6 @@
 #define TRUE  1
 #define PI    3.14159265358979323846
 
-GLenum doubleBuffer;
 int W = 600;
 int H = 600;
 
@@ -832,14 +831,7 @@ void display(void)
 		yRotation += .375;
 	}
 
-	if (doubleBuffer)
-	{
-		glutSwapBuffers();
-	}
-	else
-	{
-		glFlush();
-	}
+	glutSwapBuffers();
 }
 
 void reshape(int width, int height)
@@ -969,20 +961,11 @@ void Args(int argc, char** argv)
 {
 	GLint i;
 
-	doubleBuffer = GL_FALSE;
 	numComponents = 4;
 
 	for (i = 1; i < argc; i++)
 	{
-		if (strcmp(argv[i], "-sb") == 0)
-		{
-			doubleBuffer = GL_FALSE;
-		}
-		else if (strcmp(argv[i], "-db") == 0)
-		{
-			doubleBuffer = GL_TRUE;
-		}
-		else if (strcmp(argv[i], "-f") == 0)
+		if (strcmp(argv[i], "-f") == 0)
 		{
 			if (i + 1 >= argc || argv[i + 1][0] == '-')
 			{
@@ -1012,8 +995,6 @@ void Args(int argc, char** argv)
 
 int main(int argc, char** argv)
 {
-	GLenum type;
-
 	glutInit(&argc, argv);
 	Args(argc, argv);
 
@@ -1029,10 +1010,8 @@ int main(int argc, char** argv)
 		exit(1);
 	}
 
-	type = GLUT_RGB | GLUT_DEPTH;
-	type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
+	glutInitDisplayMode(GLUT_RGB | GLUT_DEPTH | GLUT_DOUBLE);
 
-	glutInitDisplayMode(type);
 	glutInitWindowSize(W, H);
 	glutInitWindowPosition(1100, 200);
 

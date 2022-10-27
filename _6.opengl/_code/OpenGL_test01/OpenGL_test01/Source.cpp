@@ -561,7 +561,3 @@ int main(int argc, char* argv[])
 
     return 0;
 }
-
-//glutSwapBuffers();	//Double buffer用, 把後臺快取的內容交換到前臺顯示。
-//glFlush();		//Single buffer用, 把後臺快取的內容交換到前臺顯示。
-

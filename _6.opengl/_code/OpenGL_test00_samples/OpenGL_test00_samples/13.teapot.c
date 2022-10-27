@@ -5,8 +5,6 @@
 //#include <GL/glut.h>      //32 bits
 #include <GL/freeglut.h>    //64 bits
 
-GLenum doubleBuffer;
-
 float rotX = 0.0;
 float rotY = 0.0;
 int teaList;
@@ -165,14 +163,7 @@ void display(void)
 
     glPopMatrix();
 
-    if (doubleBuffer)
-    {
-        glutSwapBuffers();
-    }
-    else
-    {
-        glFlush();
-    }
+    glFlush();
 }
 
 void reshape(int w, int h)
@@ -218,35 +209,15 @@ void special(int key, int x, int y)
     }
 }
 
-void Args(int argc, char** argv)
-{
-    GLint i;
-
-    doubleBuffer = GL_FALSE;
-
-    for (i = 1; i < argc; i++)
-    {
-        if (strcmp(argv[i], "-sb") == 0)
-        {
-            doubleBuffer = GL_FALSE;
-        }
-        else if (strcmp(argv[i], "-db") == 0)
-        {
-            doubleBuffer = GL_TRUE;
-        }
-    }
-}
-
 int main(int argc, char** argv)
 {
     GLenum type;
 
     glutInit(&argc, argv);
-    Args(argc, argv);
 
-    type = GLUT_RGB | GLUT_DEPTH;
-    type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
+    type = GLUT_RGB | GLUT_DEPTH | GLUT_SINGLE;
     glutInitDisplayMode(type);
+
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(1100, 200);
 
@@ -257,7 +228,7 @@ int main(int argc, char** argv)
     glutDisplayFunc(display);       //設定callback function
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
-    glutSpecialFunc(special);    //設定callback function
+    glutSpecialFunc(special);       //設定callback function
 
     printf("按 上 下 左 右 控制\n");
 

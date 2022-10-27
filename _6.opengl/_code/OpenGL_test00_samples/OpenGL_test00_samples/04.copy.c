@@ -7,14 +7,14 @@
 
 #include "rgb.h"
 
-GLenum doubleBuffer;
 GLint windW = 600;
 GLint windH = 600;
 
 RGBImageRec* image = NULL;
 float point[3];
 float zoom;
-GLint x, y;
+GLint x;
+GLint y;
 
 void Init(void)
 {
@@ -46,14 +46,7 @@ void display(void)
     glPixelZoom(zoom, zoom);
     glCopyPixels((windW / 2) - (image->sizeX / 2), (windH / 2) - (image->sizeY / 2), image->sizeX, image->sizeY, GL_COLOR);
 
-    if (doubleBuffer)
-    {
-        glutSwapBuffers();
-    }
-    else
-    {
-        glFlush();
-    }
+    glFlush();
 }
 
 void reshape(int width, int height)
@@ -78,12 +71,11 @@ void special(int key, int x, int y)
         glutPostRedisplay();
         break;
     case GLUT_KEY_DOWN:
-        zoom -= 0.2;
-        if (zoom < 0.2)
+        if (zoom >= 0.4)
         {
-            zoom = 0.2;
+            zoom -= 0.2;
+            glutPostRedisplay();
         }
-        glutPostRedisplay();
         break;
     }
 }
@@ -111,19 +103,9 @@ static void Args(int argc, char** argv)
 {
     GLint i;
 
-    doubleBuffer = GL_FALSE;
-
     for (i = 1; i < argc; i++)
     {
-        if (strcmp(argv[i], "-sb") == 0)
-        {
-            doubleBuffer = GL_FALSE;
-        }
-        else if (strcmp(argv[i], "-db") == 0)
-        {
-            doubleBuffer = GL_TRUE;
-        }
-        else if (strcmp(argv[i], "-f") == 0)
+        if (strcmp(argv[i], "-f") == 0)
         {
             if (i + 1 >= argc || argv[i + 1][0] == '-')
             {
@@ -163,7 +145,7 @@ int main(int argc, char** argv)
     }
 
     type = GLUT_RGB;
-    type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
+    type |= GLUT_SINGLE;
     glutInitDisplayMode(type);
     glutInitWindowSize(windW, windH);
     glutInitWindowPosition(1100, 200);
@@ -178,7 +160,7 @@ int main(int argc, char** argv)
     glutSpecialFunc(special);       //設定callback function
     glutMouseFunc(mouse);           //設定callback function
 
-    printf("按 上 下控制\n");
+    printf("先滑鼠點一下, 再按 上 下控制\n");
 
     glutMainLoop();	//開始主循環繪製
 
