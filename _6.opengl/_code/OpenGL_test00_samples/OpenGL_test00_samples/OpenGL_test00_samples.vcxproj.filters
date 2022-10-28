@@ -18,7 +18,7 @@
     <ClCompile Include="rgb.c">
       <Filter>來源檔案</Filter>
     </ClCompile>
-    <ClCompile Include="01.accum.c">
+    <ClCompile Include="11.sphere.c">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>

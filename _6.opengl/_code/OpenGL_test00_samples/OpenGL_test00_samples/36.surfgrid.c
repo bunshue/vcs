@@ -555,9 +555,9 @@ int main(int argc, char** argv)
     }
 
     init();
-	glutMainLoop();	//開始主循環繪製
+    glutMainLoop();	//開始主循環繪製
 
-	return 0;
+    return 0;
 }
 
 /****************************************************************************/

@@ -2889,7 +2889,6 @@ namespace vcs_Draw1
             {
                 open_new_file();
             }
-
         }
 
         private void button50_Click(object sender, EventArgs e)
@@ -2898,7 +2897,6 @@ namespace vcs_Draw1
             Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
             Graphics g = Graphics.FromImage(bitmap1);
             g.Clear(Color.White);
-
 
             //　寫文字的筆刷，透明度為100,藍色
             Brush b = new SolidBrush(Color.FromArgb(100, Color.Blue));
@@ -3104,4 +3102,3 @@ namespace vcs_Draw1
         }
     }
 }
-

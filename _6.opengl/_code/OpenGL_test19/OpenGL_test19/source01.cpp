@@ -88,13 +88,12 @@ void display()
 	}
 
 	glFlush();
-	glutSwapBuffers();
 }
 
 // 窗口大小變化回調函數, 負責視窗及繪圖內容的比例
 void reshape(int w, int h)
 {
-	printf("目前視窗大小為%dX%d\n", w, h);
+	//printf("目前視窗大小為 %d X %d\n", w, h);
 	glViewport(0, 0, w, h);            //當視窗長寬改變時，畫面也跟著變
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();	//設置單位矩陣
@@ -122,8 +121,8 @@ void keyboard(unsigned char key, int x, int y)
 int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-	//glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
+
+	glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
 
 	glutInitWindowSize(600, 600);       // 設定視窗大小
 	glutInitWindowPosition(1100, 200);  // 設定視窗位置
@@ -133,6 +132,8 @@ int main(int argc, char** argv)
 	glutDisplayFunc(display);       //設定callback function
 	glutReshapeFunc(reshape);       //設定callback function
 	glutKeyboardFunc(keyboard);     //設定callback function
+
+	printf("僅顯示, 無控制, 按 Esc 離開\n");
 
 	glutMainLoop();	//開始主循環繪製
 

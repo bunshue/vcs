@@ -10,8 +10,8 @@
 #define	POINT 3
 
 GLenum rgb;
-GLint windW = 800;
-GLint windH = 400;
+GLint windW = 600;
+GLint windH = 600;
 
 GLenum dithering = GL_TRUE;
 GLenum showVerticies = GL_TRUE;
@@ -28,11 +28,6 @@ GLint color1, color2, color3;
 
 float zRotation = 90.0;
 float zoom = 1.0;
-
-float boxA[3] = { -100, -100, 0 };
-float boxB[3] = { 100, -100, 0 };
-float boxC[3] = { 100,  100, 0 };
-float boxD[3] = { -100,  100, 0 };
 
 float p0[3] = { -125,-80, 0 };
 float p1[3] = { -125, 80, 0 };
@@ -111,7 +106,7 @@ void display(void)
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluOrtho2D(-175, 175, -175, 175);
+	gluOrtho2D(-175, 175, -175, 175);	//窗口座標範圍, 2D
 	glMatrixMode(GL_MODELVIEW);
 
 	glScissor(0, 0, windW, windH);
@@ -124,12 +119,17 @@ void display(void)
 
 	glClear(GL_COLOR_BUFFER_BIT);
 
+	//用 GL_LINE_LOOP 畫一個空心矩形
 	(rgb) ? glColor3f(0.0, 1.0, 0.0) : glIndexi(2);
+	float point1[3] = { -140, -140, 0 };	//左下
+	float point2[3] = { 140, -140, 0 };		//右下
+	float point3[3] = { 140,  140, 0 };		//右上
+	float point4[3] = { -140,  140, 0 };	//左上
 	glBegin(GL_LINE_LOOP);
-	glVertex3fv(boxA);
-	glVertex3fv(boxB);
-	glVertex3fv(boxC);
-	glVertex3fv(boxD);
+	glVertex3fv(point1);	//左下
+	glVertex3fv(point2);	//右下
+	glVertex3fv(point3);	//右上
+	glVertex3fv(point4);	//左上
 	glEnd();
 
 	if (!hideBottomTriangle)
@@ -166,7 +166,7 @@ void display(void)
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluOrtho2D(-100, 100, -100, 100);
+	gluOrtho2D(-100, 100, -100, 100);	//窗口座標範圍, 2D
 	glMatrixMode(GL_MODELVIEW);
 
 	glScissor(scaleX, scaleY, windW - 2 * scaleX, windH - 2 * scaleY);

@@ -13,15 +13,15 @@ void init(void)
 /*
 void glRasterPos4d(GLdouble x, GLdouble y, GLdouble z = 0, GLdouble w = 1);
 void glRasterPos4dv(const GLdouble* v);
-//確定當前光柵位置，x,y,z,w指定了當前光柵位置的坐標
+//確定當前光柵位置，x,y,z,w指定了當前光柵位置的座標
 
 glWindowPos(Type x, Type y, Type z);
-//用窗口坐標指定當前光柵位置，不必進行矩陣變換、裁剪、或紋理坐標生成。z值被變換為由glDepthRange()設置的當前近側平面值和遠側平面值
+//用窗口座標指定當前光柵位置，不必進行矩陣變換、裁剪、或紋理座標生成。z值被變換為由glDepthRange()設置的當前近側平面值和遠側平面值
 
 void glBitmap(GLsizei, GLsizei height, GLfloat xorig, GLfloat yorig, GLfloat, GLfloat, const GLubyte* bitmap);
 //繪製由bitmap指定的位圖，bitmap是一個指向位圖圖像的指針，位圖的原點是當前光柵位置，如果當前光柵位置無效，則這個函數不會繪製任何東西。
 //width和height表示位圖的寬度和高度，xorig和yorig定義了位圖的原點，他是根據當期光柵位置確定的，右上為正。
-//xmove和ymove表示位圖光柵化之後光柵坐標的x增加值和y增加值
+//xmove和ymove表示位圖光柵化之後光柵座標的x增加值和y增加值
 */
 
 // 繪圖回調函數
@@ -32,7 +32,7 @@ void display(void)
 	glColor3f(1.0, 0.0, 0.0);	//設定顏色
 
 	//光柵的位置
-	glRasterPos2i(0, 0);//確定當前光柵位置，x,y,z,w指定了當前光柵位置的坐標
+	glRasterPos2i(0, 0);//確定當前光柵位置，x,y,z,w指定了當前光柵位置的座標
 
 	//畫一個64*64
 	int i;
@@ -69,7 +69,7 @@ void display(void)
 
 	//繪製由bitmap指定的位圖，bitmap是一個指向位圖圖像的指針，位圖的原點是當前光柵位置，如果當前光柵位置無效，則這個函數不會繪製任何東西。
 	//width和height表示位圖的寬度和高度，xorig和yorig定義了位圖的原點，他是根據當期光柵位置確定的，右上為正。
-	//xmove和ymove表示位圖光柵化之後光柵坐標的x增加值和y增加值
+	//xmove和ymove表示位圖光柵化之後光柵座標的x增加值和y增加值
 	glFlush();
 }
 

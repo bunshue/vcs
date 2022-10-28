@@ -585,8 +585,8 @@ int main(int argc, char** argv)
 
     type = GLUT_SINGLE;
     type |= (rgb) ? GLUT_RGB : GLUT_INDEX;
-
     glutInitDisplayMode(type);
+
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(1100, 200);
 

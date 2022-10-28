@@ -20,21 +20,6 @@
 #define	brickImageWidth 16
 #define	brickImageHeight 16
 
-GLenum doubleBuffer;
-
-float black[3] = {
-	0.0, 0.0, 0.0
-};
-float blue[3] = {
-	0.0, 0.0, 1.0
-};
-float gray[3] = {
-	0.5, 0.5, 0.5
-};
-float white[3] = {
-	1.0, 1.0, 1.0
-};
-
 GLenum doDither = GL_TRUE;
 GLenum shade = GL_TRUE;
 GLenum texture = GL_TRUE;
@@ -169,15 +154,7 @@ void display(void)
 		gluDisk(quadObj, radius2 / 10.0, radius1 / 10.0, slices, stacks);
 		break;
 	}
-
-	if (doubleBuffer)
-	{
-		glutSwapBuffers();
-	}
-	else
-	{
-		glFlush();
-	}
+	glFlush();
 }
 
 void reshape(int width, int height)
@@ -380,19 +357,9 @@ void Args(int argc, char** argv)
 {
 	GLint i;
 
-	doubleBuffer = GL_FALSE;
-
 	for (i = 1; i < argc; i++)
 	{
-		if (strcmp(argv[i], "-sb") == 0)
-		{
-			doubleBuffer = GL_FALSE;
-		}
-		else if (strcmp(argv[i], "-db") == 0)
-		{
-			doubleBuffer = GL_TRUE;
-		}
-		else if (strcmp(argv[i], "-f") == 0)
+		if (strcmp(argv[i], "-f") == 0)
 		{
 			if (i + 1 >= argc || argv[i + 1][0] == '-')
 			{
@@ -414,8 +381,6 @@ void Args(int argc, char** argv)
 
 int main(int argc, char** argv)
 {
-	GLenum type;
-
 	glutInit(&argc, argv);
 	Args(argc, argv);
 
@@ -431,9 +396,8 @@ int main(int argc, char** argv)
 		exit(1);
 	}
 
-	type = GLUT_RGB | GLUT_DEPTH;
-	type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
-	glutInitDisplayMode(type);
+	glutInitDisplayMode(GLUT_RGB | GLUT_DEPTH | GLUT_SINGLE);
+
 	glutInitWindowSize(600, 600);
 	glutInitWindowPosition(1100, 200);
 

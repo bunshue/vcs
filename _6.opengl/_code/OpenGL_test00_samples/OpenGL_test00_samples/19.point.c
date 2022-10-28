@@ -61,6 +61,26 @@ void display(void)
     glVertex2f(0, windH / 2);
     glEnd();
 
+    //畫視窗範圍
+    glBegin(GL_LINE_STRIP);
+    //左線
+    glVertex2f(-windW / 2 + 10, -windH / 2 + 10); //左下
+    glVertex2f(-windW / 2 + 10, windH / 2 - 10);  //左上
+
+    //上線
+    glVertex2f(-windW / 2 + 10, windH / 2 - 10);  //左上
+    glVertex2f(windW / 2 - 10, windH / 2 - 10);  //右上
+
+    //右線
+    glVertex2f(windW / 2 - 10, windH / 2 - 10);  //右上
+    glVertex2f(windW / 2 - 10, -windH / 2 + 10); //右下
+
+    //下線
+    glVertex2f(windW / 2 - 10, -windH / 2 + 10); //右下
+    glVertex2f(-windW / 2 + 10, -windH / 2 + 10); //左下
+
+    glEnd();
+
     if (mode)
     {
         glEnable(GL_BLEND);
@@ -105,7 +125,7 @@ void reshape(int width, int height)
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluOrtho2D(-windW / 2, windW / 2, -windH / 2, windH / 2);
+    gluOrtho2D(-windW / 2, windW / 2, -windH / 2, windH / 2);	//窗口座標範圍, 2D
     glMatrixMode(GL_MODELVIEW);
 }
 
@@ -140,22 +160,22 @@ void special(int key, int x, int y)
     {
     case GLUT_KEY_LEFT:
         //printf("你按了 左 ");
-        point[0] -= 2.25;
+        point[0] -= 5.0;
         glutPostRedisplay();
         break;
     case GLUT_KEY_RIGHT:
         //printf("你按了 右 ");
-        point[0] += 2.25;
+        point[0] += 5.0;
         glutPostRedisplay();
         break;
     case GLUT_KEY_UP:
         //printf("你按了 上 ");
-        point[1] += 2.25;
+        point[1] += 5.0;
         glutPostRedisplay();
         break;
     case GLUT_KEY_DOWN:
         //printf("你按了 下 ");
-        point[1] -= 2.25;
+        point[1] -= 5.0;
         glutPostRedisplay();
         break;
     }

@@ -121,7 +121,7 @@ void reshape(int width, int height)
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluOrtho2D(0, winW, 0, winH);
+	gluOrtho2D(0, winW, 0, winH);	//µ¡¤f®y¼Ð½d³ò, 2D
 	glMatrixMode(GL_MODELVIEW);
 }
 

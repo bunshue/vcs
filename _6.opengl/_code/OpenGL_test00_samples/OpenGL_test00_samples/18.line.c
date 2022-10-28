@@ -87,15 +87,14 @@ void display(void)
     {
         glRotatef(5.0, 0, 0, 1);
 
-        (rgb) ? glColor3f(1.0, 1.0, 0.0) : glIndexi(ci);
+        (rgb) ? glColor3f(1.0, 0.0, 0.0) : glIndexi(ci);    //設定顏色
         glBegin(GL_LINE_STRIP);
         glVertex3fv(pntA);
         glVertex3fv(pntB);
         glEnd();
 
-        glPointSize(1);
-
-        (rgb) ? glColor3f(0.0, 1.0, 0.0) : glIndexi(2);
+        glPointSize(10);
+        (rgb) ? glColor3f(0.0, 1.0, 0.0) : glIndexi(2);     //設定顏色
         glBegin(GL_POINTS);
         glVertex3fv(pntA);
         glVertex3fv(pntB);
@@ -113,7 +112,7 @@ void reshape(int width, int height)
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluOrtho2D(-175, 175, -175, 175);
+    gluOrtho2D(-175, 175, -175, 175);	//窗口座標範圍, 2D
     glMatrixMode(GL_MODELVIEW);
 }
 
@@ -183,8 +182,8 @@ int main(int argc, char** argv)
 
     type = (rgb) ? GLUT_RGB : GLUT_INDEX;
     type |= GLUT_SINGLE;
-
     glutInitDisplayMode(type);
+
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(1100, 200);
 

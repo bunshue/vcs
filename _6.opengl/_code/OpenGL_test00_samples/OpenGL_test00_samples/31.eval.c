@@ -29,8 +29,6 @@
 #define EVAL 3
 #define MESH 4
 
-GLenum doubleBuffer;
-
 float rotX = 0.0;
 float rotY = 0.0;
 float translateZ = -1.0;
@@ -140,9 +138,9 @@ void Init(void)
     glMap1d(GL_MAP1_VERTEX_4, 0.0, 1.0, VDIM, VORDER, point1);
     glMap1d(GL_MAP1_COLOR_4, 0.0, 1.0, CDIM, CORDER, cpoint1);
 
-    glMap2d(GL_MAP2_VERTEX_4, 0.0, 1.0, VMINOR_ORDER * VDIM, VMAJOR_ORDER, 0.0,        1.0, VDIM, VMINOR_ORDER, point2);
-    glMap2d(GL_MAP2_COLOR_4, 0.0, 1.0, CMINOR_ORDER * CDIM, CMAJOR_ORDER, 0.0,        1.0, CDIM, CMINOR_ORDER, cpoint2);
-    glMap2d(GL_MAP2_TEXTURE_COORD_2, 0.0, 1.0, TMINOR_ORDER * TDIM,        TMAJOR_ORDER, 0.0, 1.0, TDIM, TMINOR_ORDER, tpoint2);
+    glMap2d(GL_MAP2_VERTEX_4, 0.0, 1.0, VMINOR_ORDER * VDIM, VMAJOR_ORDER, 0.0, 1.0, VDIM, VMINOR_ORDER, point2);
+    glMap2d(GL_MAP2_COLOR_4, 0.0, 1.0, CMINOR_ORDER * CDIM, CMAJOR_ORDER, 0.0, 1.0, CDIM, CMINOR_ORDER, cpoint2);
+    glMap2d(GL_MAP2_TEXTURE_COORD_2, 0.0, 1.0, TMINOR_ORDER * TDIM, TMAJOR_ORDER, 0.0, 1.0, TDIM, TMINOR_ORDER, tpoint2);
 
     glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
@@ -437,45 +435,15 @@ void display(void)
 
     glPopMatrix();
 
-    if (doubleBuffer)
-    {
-        glutSwapBuffers();
-    }
-    else
-    {
-        glFlush();
-    }
-}
-
-void Args(int argc, char** argv)
-{
-    GLint i;
-
-    doubleBuffer = GL_FALSE;
-
-    for (i = 1; i < argc; i++)
-    {
-        if (strcmp(argv[i], "-sb") == 0)
-        {
-            doubleBuffer = GL_FALSE;
-        }
-        else if (strcmp(argv[i], "-db") == 0)
-        {
-            doubleBuffer = GL_TRUE;
-        }
-    }
+    glFlush();
 }
 
 int main(int argc, char** argv)
 {
-    GLenum type;
-
     glutInit(&argc, argv);
-    Args(argc, argv);
 
-    type = GLUT_RGB | GLUT_DEPTH;
-    type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
-    glutInitDisplayMode(type);
+    glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE | GLUT_DEPTH);
+
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(1100, 200);
 

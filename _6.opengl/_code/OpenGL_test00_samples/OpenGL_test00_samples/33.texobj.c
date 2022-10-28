@@ -327,7 +327,7 @@ void Init(void)
 		glBindTextureEXT(GL_TEXTURE_2D, texNames[0]);
 		glPrioritizeTexturesEXT(NUM_TEXTURES, texNames, texPriorities);
 	}
-	gluBuild2DMipmaps(GL_TEXTURE_2D, 3, images[0]->sizeX, images[0]->sizeY,	GL_RGB, GL_UNSIGNED_BYTE, images[0]->data);
+	gluBuild2DMipmaps(GL_TEXTURE_2D, 3, images[0]->sizeX, images[0]->sizeY, GL_RGB, GL_UNSIGNED_BYTE, images[0]->data);
 
 	glTexEnvfv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, decal);
 	glEnable(GL_TEXTURE_2D);	//啟用2D紋理映射
@@ -713,7 +713,8 @@ int main(int argc, char** argv)
 	glutInitWindowSize(300, 300);
 	glutCreateWindow("Texture Test");	//開啟視窗 並顯示出視窗 Title
 
-	if (texObj && !QueryExtension("GL_EXT_texture_object")) {
+	if (texObj && !QueryExtension("GL_EXT_texture_object"))
+	{
 		fprintf(stdout, "Warning: texture object extension not found.\n");
 		fprintf(stdout, "         Disabling texture objects.\n");
 		texObj = GL_FALSE;
@@ -725,7 +726,7 @@ int main(int argc, char** argv)
 		printf("Bad texture file.\n");
 		exit(1);
 	}
-	
+
 	if (multTex)
 	{
 		int i;
@@ -746,9 +747,9 @@ int main(int argc, char** argv)
 	glutReshapeFunc(Reshape);
 	glutKeyboardFunc(Key);
 	glutSpecialFunc(special);
-	
+
 	printf("按 上 下 左 右 控制\n");
-	
+
 	glutMainLoop();	//開始主循環繪製
 
 	return 0;

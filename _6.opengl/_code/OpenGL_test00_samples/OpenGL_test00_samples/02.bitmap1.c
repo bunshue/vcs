@@ -166,7 +166,7 @@ void reshape(int width, int height)
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluOrtho2D(-125, 125, -125, 125);   //顯示範圍 x(-125 ~ 125), y(-125 ~ 125)
+    gluOrtho2D(-125, 125, -125, 125);   //窗口座標範圍, 2D	//顯示範圍 x(-125 ~ 125), y(-125 ~ 125)
     glMatrixMode(GL_MODELVIEW);
 }
 

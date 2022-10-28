@@ -37,7 +37,8 @@ float linear_mipmap_nearest[] = { GL_LINEAR_MIPMAP_NEAREST };
 float linear_mipmap_linear[] = { GL_LINEAR_MIPMAP_LINEAR };
 GLint sphereMap[] = { GL_SPHERE_MAP };
 
-float xRotation = 0.0, yRotation = 0.0;
+float xRotation = 0.0;
+float yRotation = 0.0;
 float zTranslate = -4.0;
 GLenum autoRotate = TRUE;
 GLenum deepestColor = GLUT_GREEN;
@@ -433,8 +434,13 @@ GLfloat identity[16] = {
 
 void BuildCylinder(int numEdges)
 {
-	int i, top = 1.0, bottom = -1.0;
-	float x[100], y[100], angle;
+	int i;
+	int top = 1.0;
+	int bottom = -1.0;
+
+	float x[100];
+	float y[100];
+	float angle;
 
 	for (i = 0; i <= numEdges; i++)
 	{
@@ -1012,8 +1018,8 @@ int main(int argc, char** argv)
 
 	glutInitDisplayMode(GLUT_RGB | GLUT_DEPTH | GLUT_DOUBLE);
 
-	glutInitWindowSize(W, H);
-	glutInitWindowPosition(1100, 200);
+	glutInitWindowSize(W, H);			// 設定視窗大小
+	glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
 	glutCreateWindow("Texture Test");	//開啟視窗 並顯示出視窗 Title
 

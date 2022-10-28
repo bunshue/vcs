@@ -118,7 +118,7 @@ GLint DoSelect(GLint x, GLint y)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluPickMatrix(x, windH - y, 4, 4, vp);
-    gluOrtho2D(-175, 175, -175, 175);
+    gluOrtho2D(-175, 175, -175, 175);	//µ¡¤f®y¼Ð½d³ò, 2D
     glMatrixMode(GL_MODELVIEW);
 
     glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -220,7 +220,7 @@ void display(void)
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluOrtho2D(-175, 175, -175, 175);
+    gluOrtho2D(-175, 175, -175, 175);	//µ¡¤f®y¼Ð½d³ò, 2D
     glMatrixMode(GL_MODELVIEW);
 
     glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -329,7 +329,7 @@ void DoFeedback(void)
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluOrtho2D(-175, 175, -175, 175);
+    gluOrtho2D(-175, 175, -175, 175);	//µ¡¤f®y¼Ð½d³ò, 2D
     glMatrixMode(GL_MODELVIEW);
 
     glClearColor(0.0, 0.0, 0.0, 0.0);
@@ -403,6 +403,7 @@ int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
+
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(1100, 200);
 

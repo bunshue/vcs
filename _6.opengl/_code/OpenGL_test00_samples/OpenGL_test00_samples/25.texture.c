@@ -11,8 +11,6 @@
 
 #include "rgb.h"
 
-GLenum doubleBuffer;
-
 RGBImageRec* image = NULL;
 
 float* minFilter, * magFilter, * sWrapMode, * tWrapMode;
@@ -389,33 +387,16 @@ void display(void)
 
 	glPopMatrix();
 
-	if (doubleBuffer)
-	{
-		glutSwapBuffers();
-	}
-	else
-	{
-		glFlush();
-	}
+	glFlush();
 }
 
 void Args(int argc, char** argv)
 {
 	GLint i;
 
-	doubleBuffer = GL_FALSE;
-
 	for (i = 1; i < argc; i++)
 	{
-		if (strcmp(argv[i], "-sb") == 0)
-		{
-			doubleBuffer = GL_FALSE;
-		}
-		else if (strcmp(argv[i], "-db") == 0)
-		{
-			doubleBuffer = GL_TRUE;
-		}
-		else if (strcmp(argv[i], "-f") == 0)
+		if (strcmp(argv[i], "-f") == 0)
 		{
 			if (i + 1 >= argc || argv[i + 1][0] == '-')
 			{
@@ -437,8 +418,6 @@ void Args(int argc, char** argv)
 
 int main(int argc, char** argv)
 {
-	GLenum type;
-
 	glutInit(&argc, argv);
 	Args(argc, argv);
 
@@ -454,10 +433,8 @@ int main(int argc, char** argv)
 		exit(1);
 	}
 
-	type = GLUT_RGB;
-	type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
+	glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
 
-	glutInitDisplayMode(type);
 	glutInitWindowSize(600, 600);
 	glutInitWindowPosition(1100, 200);
 
@@ -468,7 +445,7 @@ int main(int argc, char** argv)
 	glutDisplayFunc(display);       //設定callback function
 	glutReshapeFunc(reshape);       //設定callback function
 	glutKeyboardFunc(keyboard);     //設定callback function
-	glutSpecialFunc(special);    //設定callback function
+	glutSpecialFunc(special);		//設定callback function
 
 	printf("按 上 下 左 右 控制\n");
 

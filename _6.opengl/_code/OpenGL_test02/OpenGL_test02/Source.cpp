@@ -9,7 +9,7 @@ int display_mode = 1;
 // 初始化參數
 void init01(void)
 {
-    glOrtho(0.0f, 300.0f, 0.0f, 300.0f, 1.0, -1.0); //設置窗口坐標系大小
+    glOrtho(0.0f, 300.0f, 0.0f, 300.0f, 1.0, -1.0); //設置窗口座標系大小
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);    //設置背景色
 }
 

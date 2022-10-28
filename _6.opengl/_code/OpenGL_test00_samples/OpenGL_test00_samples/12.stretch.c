@@ -309,7 +309,7 @@ int main(int argc, char** argv)
     glutCreateWindow("Stretch");    //開啟視窗 並顯示出視窗 Title
 
     glViewport(0, 0, imageSizeX, imageSizeY);
-    gluOrtho2D(0, imageSizeX, 0, imageSizeY);
+    gluOrtho2D(0, imageSizeX, 0, imageSizeY);	//窗口座標範圍, 2D
     glClearColor(0.0, 0.0, 0.0, 0.0);
 
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);

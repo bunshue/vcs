@@ -1,8 +1,7 @@
 /*
 ** texobj.c: Draws textured polygons using the texture object extension.
 **
-** Default operation: Draws three squares using a different texture for
-** each square.
+** Default operation: Draws three squares using a different texture for each square.
 **
 ** Use -h option to display a list of command line options. Use Key h
 ** in the created window for key options.
@@ -355,7 +354,7 @@ void Init(void)
 		glBindTextureEXT(GL_TEXTURE_2D, texNames[0]);
 		glPrioritizeTexturesEXT(NUM_TEXTURES, texNames, texPriorities);
 	}
-	gluBuild2DMipmaps(GL_TEXTURE_2D, 3, images[0]->sizeX, images[0]->sizeY,	GL_RGB, GL_UNSIGNED_BYTE, images[0]->data);
+	gluBuild2DMipmaps(GL_TEXTURE_2D, 3, images[0]->sizeX, images[0]->sizeY, GL_RGB, GL_UNSIGNED_BYTE, images[0]->data);
 
 	glFrontFace(GL_CCW);
 	glCullFace(GL_FRONT);
@@ -772,9 +771,9 @@ int main(int argc, char** argv)
 	glutKeyboardFunc(Key);
 	glutSpecialFunc(special);
 	glutDisplayFunc(Draw);
-	
+
 	printf("按 上 下 左 右 控制\n");
-	
+
 	glutMainLoop();	//開始主循環繪製
 
 	return 0;

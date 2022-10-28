@@ -83,11 +83,11 @@ void keyboard(unsigned char key, int x, int y)
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
-    
+
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
-    glutInitWindowSize(600, 600);
-    glutInitWindowPosition(1100, 200);
+    glutInitWindowSize(600, 600);       // 設定視窗大小
+    glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
     glutCreateWindow("開啟視窗");	//開啟視窗 並顯示出視窗 Title
 

@@ -70,7 +70,7 @@ void init08()
 {
     glClearColor(0.0, 0.0, 0.0, 0.0);   //設置背景色
     glMatrixMode(GL_PROJECTION);
-    glOrtho(-5, 5, -5, 5, 5, 15);   //設置窗口坐標系大小
+    glOrtho(-5, 5, -5, 5, 5, 15);   //設置窗口座標系大小
     glMatrixMode(GL_MODELVIEW);
     gluLookAt(0, 0, 10, 0, 0, 0, 0, 1, 0);
 }
@@ -82,7 +82,7 @@ void init09(void)
     glClearColor(0.0, 0.0, 0.0, 0.0);   //設置背景色
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();	//設置單位矩陣
-    glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0); //設置窗口坐標系大小
+    glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0); //設置窗口座標系大小
 }
 
 void drawText1(void)
@@ -139,6 +139,22 @@ void drawText2(void)
     glPrintShadowed(-1.2, -1.2, "222Write Something to Screen", GLUT_BITMAP_TIMES_ROMAN_24, color);
 }
 
+void draw_window_boundary(float dd)
+{
+    //用 GL_LINE_LOOP 畫一個空心矩形
+    glColor3f(0.0, 1.0, 0.0);
+    float point1[3] = { -dd, -dd, 0 };	//左下
+    float point2[3] = { dd, -dd, 0 };		//右下
+    float point3[3] = { dd,  dd, 0 };		//右上
+    float point4[3] = { -dd,  dd, 0 };	//左上
+    glBegin(GL_LINE_LOOP);
+    glVertex3fv(point1);	//左下
+    glVertex3fv(point2);	//右下
+    glVertex3fv(point3);	//右上
+    glVertex3fv(point4);	//左上
+    glEnd();
+}
+
 // 繪圖回調函數
 void display(void)
 {
@@ -179,6 +195,8 @@ void display(void)
 
         //drawText1();
         drawText2();
+
+        draw_window_boundary(0.9);
     }
     else if (display_mode == 2)
     {
@@ -213,6 +231,7 @@ void display(void)
             glVertex2f(-0.2f, 0.2f);
         }
         glEnd();
+        draw_window_boundary(0.9);
     }
     else if (display_mode == 3)
     {
@@ -224,7 +243,7 @@ void display(void)
 
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();	//設置單位矩陣
-        gluOrtho2D(0.0, NGRID, 0.0, NGRID); //窗口坐標範圍
+        gluOrtho2D(0.0, NGRID, 0.0, NGRID); //窗口座標範圍, 2D
 
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();	//設置單位矩陣
@@ -256,6 +275,7 @@ void display(void)
             }
             glEnd();
         }
+        draw_window_boundary(5.5);
     }
     else if (display_mode == 4)
     {
@@ -270,7 +290,7 @@ void display(void)
 
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();	//設置單位矩陣
-        glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);   //設置窗口坐標系大小
+        glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);   //設置窗口座標系大小
         glGetFloatv(GL_PROJECTION_MATRIX, mat);
         /*
         for (i = 0; i < 16; i++)
@@ -319,7 +339,7 @@ void display(void)
 
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();	//設置單位矩陣
-        gluOrtho2D(-1.0, 11.0, -1.0, 11.0); //窗口坐標範圍
+        gluOrtho2D(-1.0, 11.0, -1.0, 11.0); //窗口座標範圍, 2D
 
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();	//設置單位矩陣
@@ -506,18 +526,18 @@ int main(int argc, char* argv[])
 
     /*
     設定圖形顯示模式。引數mode的可選值為：
-        GLUT_RGBA：             當未指明GLUT - RGBA或GLUT - INDEX時，是預設使用的模式。表明欲建立RGBA模式的視窗。
-        GLUT_RGB：               與GLUT - RGBA作用相同。
-        GLUT_INDEX：           指明為顏色索引模式。
-        GLUT_SINGLE：         只使用單快取
-        GLUT_DOUBLE：        使用雙快取。以避免把計算機作圖的過程都表現出來，或者為了平滑地實現動畫。
-        GLUT_ACCUM：          讓視窗使用累加的快取。
-        GLUT_ALPHA：           讓顏色緩衝區使用alpha元件。
-        GLUT_DEPTH：           使用深度快取。
-        GLUT_STENCIL：        使用模板快取。
-        GLUT_MULTISAMPLE：讓視窗支援多例程。
-        GLUT_STEREO：          使視窗支援立體。
-        GLUT_LUMINACE : luminance是亮度的意思。但是很遺憾，在多數OpenGL平臺上，不被支援。
+    GLUT_RGBA：      當未指明GLUT - RGBA或GLUT - INDEX時，是預設使用的模式。表明欲建立RGBA模式的視窗。
+    GLUT_RGB：       與GLUT - RGBA作用相同。
+    GLUT_INDEX：     指明為顏色索引模式。
+    GLUT_SINGLE：    只使用單快取
+    GLUT_DOUBLE：    使用雙快取。以避免把計算機作圖的過程都表現出來，或者為了平滑地實現動畫。
+    GLUT_DEPTH：     使用深度快取。
+    GLUT_ACCUM：     讓視窗使用累加的快取。
+    GLUT_ALPHA：     讓顏色緩衝區使用alpha元件。
+    GLUT_STENCIL：   使用模板快取。
+    GLUT_MULTISAMPLE：讓視窗支援多例程。
+    GLUT_STEREO：    使視窗支援立體。
+    GLUT_LUMINACE:  luminance是亮度的意思。但是很遺憾，在多數OpenGL平臺上，不被支援。
     */
 
     glutInitWindowSize(600, 600);       // 設定視窗大小
@@ -541,7 +561,7 @@ int main(int argc, char* argv[])
     //glutWireTeapot(200);
     //glutWireTeapot(3);
 
-    //设置一组浮点数来表示红色
+    //設置一組浮點數來表示紅色
     GLfloat vRed[] = { 1.0,1.00,0.0,0.5f };
 
     glutMainLoop();	//開始主循環繪製     // Enter the event-processing loop

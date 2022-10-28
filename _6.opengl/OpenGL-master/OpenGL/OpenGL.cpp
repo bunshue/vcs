@@ -137,7 +137,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
         //glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
 
         // 矩陣縮放
-        // 縮放的是下面設置的點的坐標
+        // 縮放的是下面設置的點的座標
         // 每個參數都影響 x , y , z 分量
         //glScalef(2.0f, 2.0f, 1.0f);
 
@@ -256,8 +256,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
         szWindowClass,       // 窗口主類
         szTitle,             // 窗口標題名稱
         WS_OVERLAPPEDWINDOW, // 窗口風格
-        100,                // x 坐標
-        100,                // y 坐標
+        100,                // x 座標
+        100,                // y 座標
         800,                 // 寬度
         600,                 // 高度
         nullptr,             // 父窗口 

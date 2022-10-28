@@ -54,7 +54,7 @@ void display(void)
 	glRotatef(y_angle, 0.0f, 1.0f, 0.0f);  //對應變換陣T3
 	glDisable(GL_LIGHTING);
 	//glLightfv(GL_LIGHT0, GL_POSITION, lit_position);
-	drawCoordinates(); //顯示坐標軸，設X軸的兩端點為v1、v2，考慮這兩點經受的變換
+	drawCoordinates(); //顯示座標軸，設X軸的兩端點為v1、v2，考慮這兩點經受的變換
 	glutWireTeapot(0.5); //顯示茶壺
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
