@@ -14,9 +14,9 @@ void reshape(int w, int h)
 {
 }
 
-void keyboard(unsigned char k, int /*x*/, int /*y*/)
+void keyboard(unsigned char key, int x, int y)
 {
-	switch (k)
+	switch (key)
 	{
 	case 27:
 	case 'q':

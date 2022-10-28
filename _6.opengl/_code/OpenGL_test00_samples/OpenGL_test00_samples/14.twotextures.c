@@ -199,8 +199,8 @@ int main(int argc, char** argv)
 
 	glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
 
-	glutInitWindowSize(winW, winH);
-	glutInitWindowPosition(1100, 200);
+	glutInitWindowSize(winW, winH);		// 設定視窗大小
+	glutInitWindowPosition(1100, 200);	// 設定視窗位置
 
 	glutCreateWindow("Two Texture Test");	//開啟視窗 並顯示出視窗 Title
 

@@ -427,7 +427,7 @@ void reshape(int w, int h)
     glViewport(0, 0, w, h);
 }
 
-static void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int x, int y)
 {
     switch (key)
     {
@@ -501,7 +501,6 @@ int main(int argc, char* argv[])
     //初始化GLUT庫，這個函數只是傳說命令參數并且初始化glut庫
     glutInit(&argc, argv);
 
-    //glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
     //glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);    //宣告顯示模式為 Single Buffer 和 RGBA
 

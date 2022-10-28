@@ -117,9 +117,9 @@ void drawCoordinates(void)
 	glEnd();
 }
 
-void keyboard(unsigned char k, int /*x*/, int /*y*/)
+void keyboard(unsigned char key, int x, int y)
 {
-	switch (k)
+	switch (key)
 	{
 	case 27:
 	case 'q':
@@ -150,7 +150,9 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
 int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
+	
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+	
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(1100, 200);
 	glutCreateWindow("開啟視窗");	//開啟視窗 並顯示出視窗 Title

@@ -161,9 +161,9 @@ void reshape(int w, int h)
     glLoadIdentity();	//設置單位矩陣
 }
 
-void keyboard(unsigned char k, int /*x*/, int /*y*/)
+void keyboard(unsigned char key, int x, int y)
 {
-    switch (k)
+    switch (key)
     {
     case 27:
     case 'q':
@@ -219,7 +219,6 @@ void motion(int x, int y)
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
-    //glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
     //glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);    //宣告顯示模式為 Single Buffer 和 RGBA
 

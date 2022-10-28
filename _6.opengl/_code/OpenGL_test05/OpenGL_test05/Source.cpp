@@ -32,9 +32,9 @@ void display(void)
     glFlush();//保證前面的OpenGL命令立即執行   glFlush​​負責刷新繪製緩沖器，保證繪圖命令立即執行。
 }
 
-void keyboard(unsigned char k, int /*x*/, int /*y*/)
+void keyboard(unsigned char key, int x, int y)
 {
-    switch (k)
+    switch (key)
     {
     case 27:
     case 'q':
@@ -48,7 +48,7 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
-    //glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+    
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
     glutInitWindowSize(600, 600);		//設定視窗大小, 直接拉大內容

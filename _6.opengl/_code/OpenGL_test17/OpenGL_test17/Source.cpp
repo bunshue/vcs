@@ -17,7 +17,6 @@ void display(void)
 	glColor3f(0, 0, 1.0); //畫筆藍色   
 	glLoadIdentity();	//設置單位矩陣
 
-
 	gluLookAt(xx, yy, zz, 0, 0, 0, 1.0, 0.0, 0);
 
 	xx += 0.01;
@@ -50,9 +49,9 @@ void reshape(int w, int h)
 	//gluLookAt(0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 }
 
-void keyboard(unsigned char k, int /*x*/, int /*y*/)
+void keyboard(unsigned char key, int x, int y)
 {
-	switch (k)
+	switch (key)
 	{
 	case 27:
 	case 'q':
@@ -104,8 +103,7 @@ void idle()
 int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
-	//glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-	//glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+	
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 
 	glutInitWindowSize(600, 600);

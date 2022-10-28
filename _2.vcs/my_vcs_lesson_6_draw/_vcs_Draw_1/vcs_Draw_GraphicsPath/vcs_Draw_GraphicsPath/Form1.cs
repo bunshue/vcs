@@ -37,6 +37,9 @@ namespace vcs_Draw_GraphicsPath
             this.FormBorderStyle = FormBorderStyle.None;
             this.Region = null;
             SetWindowRegion();
+
+            //繪製圓角按鈕
+            SetButtonRegion();
         }
 
         void show_item_location()
@@ -80,6 +83,20 @@ namespace vcs_Draw_GraphicsPath
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        public void SetButtonRegion()
+        {
+            GraphicsPath ButtonPath;
+            ButtonPath = new GraphicsPath();
+            Rectangle rect = new Rectangle(0, 0, this.button13.Width, this.button13.Height);
+            ButtonPath = GetRoundedRectPath(rect, 70);
+            this.button13.Region = new Region(ButtonPath);
+
+            Bitmap bmp = new Bitmap(@"C:\______test_files\__pic\BMW.jfif");
+
+            button13.BackgroundImageLayout = ImageLayout.Zoom;
+            button13.BackgroundImage = bmp;
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -794,4 +811,3 @@ namespace vcs_Draw_GraphicsPath
         }
     }
 }
-

@@ -47,9 +47,9 @@ void reshape(int w, int h)
     glLoadIdentity();	//設置單位矩陣
 }
 
-void keyboard(unsigned char k, int /*x*/, int /*y*/)
+void keyboard(unsigned char key, int x, int y)
 {
-    switch (k)
+    switch (key)
     {
     case 27:
     case 'q':

@@ -87,9 +87,9 @@ void reshape(int w, int h)
 {
 }
 
-void keyboard(unsigned char k, int /*x*/, int /*y*/)
+void keyboard(unsigned char key, int x, int y)
 {
-	switch (k)
+	switch (key)
 	{
 	case 27:
 	case 'q':
@@ -128,7 +128,7 @@ void motion(int x, int y)
 int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
-	//glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+	
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
 	glutInitWindowSize(600, 600);
