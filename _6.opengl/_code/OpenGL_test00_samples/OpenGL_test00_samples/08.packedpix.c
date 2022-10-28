@@ -180,9 +180,10 @@ void ConvertImage(ConvertImageRec* imageData)
 		GLushort* data = newImage;
 		GLfloat* invalue;
 
-		for (i = 0; i < imageHeight; i++) {
-			for (j = 0; j < imageWidth; j++) {
-
+		for (i = 0; i < imageHeight; i++)
+		{
+			for (j = 0; j < imageWidth; j++)
+			{
 				/* first bitfield */
 				invalue = myImage++;
 				*data = ((GLushort)(*invalue * 15) << 12) & 0xF000;
@@ -210,9 +211,10 @@ void ConvertImage(ConvertImageRec* imageData)
 		GLushort* data = newImage;
 		GLfloat* invalue;
 
-		for (i = 0; i < imageHeight; i++) {
-			for (j = 0; j < imageWidth; j++) {
-
+		for (i = 0; i < imageHeight; i++)
+		{
+			for (j = 0; j < imageWidth; j++)
+			{
 				/* first bitfield */
 				invalue = myImage++;
 				*data = ((GLushort)(*invalue * 31) << 11) & 0xF800;
@@ -240,17 +242,17 @@ void ConvertImage(ConvertImageRec* imageData)
 		GLuint* data = newImage;
 		GLfloat* invalue;
 
-		for (i = 0; i < imageHeight; i++) {
-			for (j = 0; j < imageWidth; j++) {
-
+		for (i = 0; i < imageHeight; i++)
+		{
+			for (j = 0; j < imageWidth; j++)
+			{
 				/* first bitfield */
 				invalue = myImage++;
 				*data = ((GLuint)(*invalue * 255) << 24) & 0xFF000000;
 
 				/* second bitfield */
 				invalue = myImage++;
-				*data |= ((GLushort)(*invalue * 255) << 16) &
-					0x00FF0000;
+				*data |= ((GLushort)(*invalue * 255) << 16) & 0x00FF0000;
 
 				/* third bitfield */
 				invalue = myImage++;
@@ -271,8 +273,10 @@ void ConvertImage(ConvertImageRec* imageData)
 		GLuint* data = newImage;
 		GLfloat* invalue;
 
-		for (i = 0; i < imageHeight; i++) {
-			for (j = 0; j < imageWidth; j++) {
+		for (i = 0; i < imageHeight; i++)
+		{
+			for (j = 0; j < imageWidth; j++)
+			{
 
 				/* first bitfield */
 				invalue = myImage++;
@@ -336,10 +340,12 @@ void setCell(cellStruct* cell, int col, int row)
 void nextCell(cellStruct* cell)
 {
 	cell->col++;
-	if (cell->col == cell->numCols) {
+	if (cell->col == cell->numCols)
+	{
 		cell->col = 0;
 		cell->row++;
-		if (cell->row == cell->numRows) {
+		if (cell->row == cell->numRows)
+		{
 			cell->row = 0;
 		}
 	}
@@ -376,8 +382,10 @@ RGBImageRec* InitRampedImage(void)
 	byteImage = (GLubyte*)malloc(imageSize);
 	pImg = byteImage;
 
-	for (i = 0; i < sizeX; i++) {
-		for (j = 0; j < sizeY; j++) {
+	for (i = 0; i < sizeX; i++)
+	{
+		for (j = 0; j < sizeY; j++)
+		{
 			*pImg++ = 255 * (float)i / sizeX;
 			*pImg++ = 255 * (1 - (float)j / sizeY);
 			*pImg++ = 255 * (1 - (float)i / sizeX);
@@ -765,10 +773,7 @@ int main(int argc, char** argv)
 	glutInit(&argc, argv);
 	Args(argc, argv);
 
-	/*
-	** The image is loaded before the window is opened to
-	** allow sizing the window based on the image size.
-	*/
+	//The image is loaded before the window is opened to allow sizing the window based on the image size.
 	if (NULL == rgbFile)
 	{
 		fileImage = InitRampedImage();

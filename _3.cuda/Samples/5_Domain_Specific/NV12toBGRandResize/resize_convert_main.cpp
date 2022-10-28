@@ -96,8 +96,11 @@ int parseCmdLine(int argc, char* argv[])
     {
         // Run using default arguments
 
+        printf("here\n");
+
         g_ctx.input_nv12_file = sdkFindFilePath("test1920x1080.nv12", argv[0]);
-        if (g_ctx.input_nv12_file == NULL) {
+        if (g_ctx.input_nv12_file == NULL)
+        {
             printf("Cannot find input file test1920x1080.nv12\n Exiting\n");
             return EXIT_FAILURE;
         }

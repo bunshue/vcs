@@ -38,13 +38,15 @@ float white[3] = {
 GLenum doDither = GL_TRUE;
 GLenum shade = GL_TRUE;
 GLenum texture = GL_TRUE;
-
 float xRotation = 30.0;
 float yRotation = 30.0;
 float zRotation = 0.0;
-GLint radius1, radius2;
-GLdouble angle1, angle2;
-GLint slices, stacks;
+GLint radius1;
+GLint radius2;
+GLdouble angle1;
+GLdouble angle2;
+GLint slices;
+GLint stacks;
 GLint height;
 GLint orientation = GLU_OUTSIDE;
 GLint whichQuadric;

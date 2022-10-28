@@ -38,12 +38,14 @@ GLenum shade;
 GLenum doStipple;
 
 double plane[4] = { 1.0, 0.0, -1.0, 0.0 };
-float xRotation = 30.0, yRotation = 30.0;
+float xRotation = 30.0;
+float yRotation = 30.0;
 float zTranslation = -15.0;
 
 GLint singleCylinder;
 GLint doubleCylinder;
-GLint elbow, logo;
+GLint elbow;
+GLint logo;
 
 GLubyte checkImage[3 * CHECKIMAGEWIDTH * CHECKIMAGEHEIGHT] = {
 	BL, BL, BL, WH, WH, WH, BL, BL, BL, WH, WH, WH, BL, BL, BL, WH,
@@ -59,6 +61,7 @@ GLubyte checkImage[3 * CHECKIMAGEWIDTH * CHECKIMAGEHEIGHT] = {
 	WH, WH, BL, BL, BL, WH, WH, WH, WH, WH, WH, BL, BL, BL, WH, WH,
 	WH, BL, BL, BL, WH, WH, WH, BL, BL, BL, WH, WH, WH, BL, BL, BL,
 };
+
 GLubyte brickImage[4 * BRICKIMAGEWIDTH * BRICKIMAGEHEIGHT] = {
 	RD, RD, RD, RD, RD, RD, RD, RD, RD, WT, RD, RD, RD, RD, RD, RD,
 	RD, RD, RD, RD, RD, RD, RD, RD, RD, WT, RD, RD, RD, RD, RD, RD,
@@ -933,7 +936,6 @@ void BendLeft(void)
 
 void BendRight(void)
 {
-
 	glRotatef(90.0, 0, 0, 1);
 	glTranslatef(0.0, 1.0, 0.0);
 	glRotatef(90.0, 1, 0, 0);
@@ -942,7 +944,6 @@ void BendRight(void)
 
 void BuildSingleCylinder(void)
 {
-
 	glNewList(singleCylinder, GL_COMPILE);
 
 	glBegin(GL_TRIANGLE_STRIP);
@@ -1261,8 +1262,7 @@ static void Init(void)
 	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, repeat);
 	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, nearest);
 	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, nearest);
-	glTexImage2D(GL_TEXTURE_2D, 0, 3, CHECKIMAGEWIDTH, CHECKIMAGEHEIGHT, 0,
-		GL_RGB, GL_UNSIGNED_BYTE, (GLvoid*)checkImage);
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, CHECKIMAGEWIDTH, CHECKIMAGEHEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, (GLvoid*)checkImage);
 	glEnable(GL_TEXTURE_2D);	//±Ò¥Î2D¯¾²z¬M®g
 
 	glCullFace(GL_BACK);
@@ -1423,9 +1423,7 @@ void keyboard(unsigned char key, int x, int y)
 		glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, repeat);
 		glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, nearest);
 		glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, nearest);
-		glTexImage2D(GL_TEXTURE_2D, 0, 4, BRICKIMAGEWIDTH,
-			BRICKIMAGEHEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE,
-			(GLvoid*)brickImage);
+		glTexImage2D(GL_TEXTURE_2D, 0, 4, BRICKIMAGEWIDTH, BRICKIMAGEHEIGHT, 0, GL_RGBA, GL_UNSIGNED_BYTE, (GLvoid*)brickImage);
 		glutPostRedisplay();
 		break;
 	case 's':
@@ -1434,9 +1432,7 @@ void keyboard(unsigned char key, int x, int y)
 		glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, repeat);
 		glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, nearest);
 		glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, nearest);
-		glTexImage2D(GL_TEXTURE_2D, 0, 3, CHECKIMAGEWIDTH,
-			CHECKIMAGEHEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE,
-			(GLvoid*)checkImage);
+		glTexImage2D(GL_TEXTURE_2D, 0, 3, CHECKIMAGEWIDTH, CHECKIMAGEHEIGHT, 0, GL_RGB, GL_UNSIGNED_BYTE, (GLvoid*)checkImage);
 		glutPostRedisplay();
 		break;
 	case 'd':
@@ -1481,13 +1477,9 @@ void special(int key, int x, int y)
 
 int main(int argc, char** argv)
 {
-	GLenum type;
-
 	glutInit(&argc, argv);
 
-	type = GLUT_RGB | GLUT_DEPTH;
-	type |= GLUT_SINGLE;
-	glutInitDisplayMode(type);
+	glutInitDisplayMode(GLUT_RGB | GLUT_DEPTH | GLUT_SINGLE);
 
 	glutInitWindowSize(600, 600);
 	glutInitWindowPosition(1100, 200);

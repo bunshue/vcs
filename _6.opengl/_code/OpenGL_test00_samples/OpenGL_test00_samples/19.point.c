@@ -189,8 +189,8 @@ int main(int argc, char** argv)
 
     type = (rgb) ? GLUT_RGB : GLUT_INDEX;
     type |= GLUT_SINGLE;
-
     glutInitDisplayMode(type);
+
     glutInitWindowSize(windW, windH);
     glutInitWindowPosition(1100, 200);
 
@@ -201,7 +201,7 @@ int main(int argc, char** argv)
     glutDisplayFunc(display);       //設定callback function
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
-    glutSpecialFunc(special);    //設定callback function
+    glutSpecialFunc(special);       //設定callback function
 
     printf("按 上 下 左 右 控制\n");
 

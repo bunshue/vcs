@@ -29,8 +29,7 @@ static char* sSDKSample = "simpleD3D10";
 IDXGIAdapter* g_pCudaCapableAdapter = NULL;  // Adapter to use
 ID3D10Device* g_pd3dDevice = NULL;           // Our rendering device
 IDXGISwapChain* g_pSwapChain = NULL;         // The swap chain of the window
-ID3D10RenderTargetView* g_pSwapChainRTV =
-NULL;  // The Render target view on the swap chain ( used for clear)
+ID3D10RenderTargetView* g_pSwapChainRTV = NULL;  // The Render target view on the swap chain ( used for clear)
 
 ID3D10InputLayout* g_pInputLayout = NULL;
 ID3D10Effect* g_pSimpleEffect = NULL;
@@ -297,10 +296,8 @@ void runTest(int argc, char** argv, char* ref_file)
     int xBorder = ::GetSystemMetrics(SM_CXSIZEFRAME);
     int yMenu = ::GetSystemMetrics(SM_CYMENU);
     int yBorder = ::GetSystemMetrics(SM_CYSIZEFRAME);
-    HWND hWnd = CreateWindow(
-        wc.lpszClassName, "CUDA/D3D10 simpleD3D10", WS_OVERLAPPEDWINDOW, 0, 0,
-        g_WindowWidth + 2 * xBorder, g_WindowHeight + 2 * yBorder + yMenu, NULL,
-        NULL, wc.hInstance, NULL);
+    HWND hWnd = CreateWindow(wc.lpszClassName, "CUDA/D3D10 simpleD3D10", WS_OVERLAPPEDWINDOW, 0, 0,
+        g_WindowWidth + 2 * xBorder, g_WindowHeight + 2 * yBorder + yMenu, NULL, NULL, wc.hInstance, NULL);
 
     // Initialize Direct3D
     if (SUCCEEDED(InitD3D(hWnd)))
@@ -310,8 +307,7 @@ void runTest(int argc, char** argv, char* ref_file)
         {
             // Initialize interoperability between CUDA and Direct3D
             // Register vertex buffer with CUDA
-            // DEPRECATED: cudaD3D10RegisterResource(g_pVB,
-            // cudaD3D10RegisterFlagsNone);
+            // DEPRECATED: cudaD3D10RegisterResource(g_pVB, cudaD3D10RegisterFlagsNone);
             cudaGraphicsD3D10RegisterResource(&cuda_VB_resource, g_pVB, cudaD3D10RegisterFlagsNone);
             getLastCudaError("cudaGraphicsD3D10RegisterResource (g_pVB) failed");
 
@@ -397,10 +393,7 @@ void runCuda()
     getLastCudaError("cudaGraphicsUnmapResource failed");
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//! Check if the result is correct or write data to file for external
-//! regression testing
-////////////////////////////////////////////////////////////////////////////////
+// Check if the result is correct or write data to file for external regression testing
 bool SaveResult(int argc, char** argv)
 {
     // Map vertex buffer
@@ -441,8 +434,7 @@ HRESULT InitD3D(HWND hWnd)
     sd.Windowed = TRUE;
 
     // Create device and swapchain
-    HRESULT hr = sFnPtr_D3D10CreateDeviceAndSwapChain(
-        g_pCudaCapableAdapter, D3D10_DRIVER_TYPE_HARDWARE, NULL, 0,
+    HRESULT hr = sFnPtr_D3D10CreateDeviceAndSwapChain(g_pCudaCapableAdapter, D3D10_DRIVER_TYPE_HARDWARE, NULL, 0,
         D3D10_SDK_VERSION, &sd, &g_pSwapChain, &g_pd3dDevice);
     AssertOrQuit(SUCCEEDED(hr));
     g_pCudaCapableAdapter->Release();
@@ -507,9 +499,7 @@ HRESULT InitD3D(HWND hWnd)
         // Create the input layout
         D3D10_PASS_DESC PassDesc;
         g_pSimpleTechnique->GetPassByIndex(0)->GetDesc(&PassDesc);
-        hr = g_pd3dDevice->CreateInputLayout(
-            layout, numElements, PassDesc.pIAInputSignature,
-            PassDesc.IAInputSignatureSize, &g_pInputLayout);
+        hr = g_pd3dDevice->CreateInputLayout(layout, numElements, PassDesc.pIAInputSignature, PassDesc.IAInputSignatureSize, &g_pInputLayout);
         AssertOrQuit(SUCCEEDED(hr));
 
         // Setup Input Layout, apply effect and draw points
@@ -649,7 +639,8 @@ VOID Render()
 //-----------------------------------------------------------------------------
 LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
-    switch (msg) {
+    switch (msg)
+    {
     case WM_DESTROY:
     case WM_KEYDOWN:
         if (msg != WM_KEYDOWN || wParam == 27)

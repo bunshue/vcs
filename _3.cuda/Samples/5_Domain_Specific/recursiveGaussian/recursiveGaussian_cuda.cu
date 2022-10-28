@@ -14,8 +14,7 @@
   the filter width.
 
   The GPU processes columns of the image in parallel. To avoid uncoalesced reads
-  for the row pass we transpose the image and then transpose it back again
-  afterwards.
+  for the row pass we transpose the image and then transpose it back again afterwards.
 
   The implementation is based on code from the CImg library:
   http://cimg.sourceforge.net/

@@ -494,7 +494,6 @@ HRESULT DeviceLostHandler()
             }
         }
     }
-
     return hr;
 }
 
@@ -523,8 +522,7 @@ HRESULT Render()
         {
             fprintf(stderr, "TestCooperativeLevel = %08x failed, will attempt to reset\n", hr);
 
-            // if the device was truly lost, (i.e., a fullscreen device just lost
-            // focus), wait
+            // if the device was truly lost, (i.e., a fullscreen device just lost focus), wait
             // until we g_et it back
 
             if (hr == D3DERR_DEVICELOST)

@@ -127,8 +127,6 @@ static void Args(int argc, char** argv)
 
 int main(int argc, char** argv)
 {
-    GLenum type;
-
     glutInit(&argc, argv);
     Args(argc, argv);
 
@@ -144,9 +142,7 @@ int main(int argc, char** argv)
         exit(1);
     }
 
-    type = GLUT_RGB;
-    type |= GLUT_SINGLE;
-    glutInitDisplayMode(type);
+    glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
     glutInitWindowSize(windW, windH);
     glutInitWindowPosition(1100, 200);
 

@@ -52,8 +52,7 @@ HRESULT CheckRenderD3D9::SurfaceToPPM(IDirect3DDevice9* pDevice, IDirect3DSurfac
     D3DSURFACE_DESC pDesc;
     pSurface->GetDesc(&pDesc);
 
-    // $$ For now only support common 8bit formats.  TODO: support for more
-    // complex formats via conversion?
+    // $$ For now only support common 8bit formats.  TODO: support for more complex formats via conversion?
     if (!(pDesc.Format == D3DFMT_A8R8G8B8 || pDesc.Format == D3DFMT_X8R8G8B8))
     {
         return E_INVALIDARG;

@@ -544,11 +544,11 @@ void reshape(int w, int h)
     window_height = h;
 }
 
-void mainMenu(int i) { keyboard((unsigned char)i, 0, 0); }
+void mainMenu(int i)
+{
+    keyboard((unsigned char)i, 0, 0);
+}
 
-////////////////////////////////////////////////////////////////////////////////
-//!
-////////////////////////////////////////////////////////////////////////////////
 void createTextureSrc(GLuint* tex_screen, unsigned int size_x, unsigned int size_y)
 {
     // create a texture
@@ -574,9 +574,6 @@ void createTextureSrc(GLuint* tex_screen, unsigned int size_x, unsigned int size
     checkCudaErrors(cudaGraphicsGLRegisterImage(&cuda_tex_screen_resource, *tex_screen, GL_TEXTURE_2D, cudaGraphicsMapFlagsReadOnly));
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//!
-////////////////////////////////////////////////////////////////////////////////
 void createTextureDst(GLuint* tex_cudaResult, unsigned int size_x, unsigned int size_y)
 {
     // create a texture
@@ -694,8 +691,7 @@ int main(int argc, char** argv)
     pArgc = &argc;
     pArgv = argv;
 
-    // use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
+    // use command-line specified CUDA device, otherwise use device with highest Gflops/s
     if (checkCmdLineFlag(argc, (const char**)argv, "device"))
     {
         printf("XXXXXXXXXX\n");
@@ -855,9 +851,6 @@ void initCUDABuffers() {
 }
 #endif
 
-////////////////////////////////////////////////////////////////////////////////
-//!
-////////////////////////////////////////////////////////////////////////////////
 void initGLBuffers()
 {
     // create pbo
@@ -943,7 +936,7 @@ void runStdProgram(int argc, char** argv)
         "\t[-] : Decrease Blur Radius\n"
         "\t[esc] - Quit\n\n");
 
-	glutMainLoop();	//開始主循環繪製
+    glutMainLoop();	//開始主循環繪製
 
     // Normally unused return path
     Cleanup(EXIT_SUCCESS);

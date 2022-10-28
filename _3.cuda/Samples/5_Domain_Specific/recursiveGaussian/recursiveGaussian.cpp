@@ -288,9 +288,9 @@ void initGL(int* argc, char** argv)
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
     glutInitWindowSize(width, height);
-    
+
     glutCreateWindow(sSDKsample);
-    
+
     glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     glutKeyboardFunc(keyboard);
@@ -486,7 +486,7 @@ int main(int argc, char** argv)
     }
 
     initGLBuffers();
-    
+
     glutMainLoop();	//開始主循環繪製
 
     exit(EXIT_SUCCESS);

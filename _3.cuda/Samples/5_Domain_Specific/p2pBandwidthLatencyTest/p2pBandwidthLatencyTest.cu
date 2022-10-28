@@ -352,8 +352,7 @@ void outputBidirectionalBandwidthMatrix(int numElems, int numGPUs, bool p2p)
             cudaCheckError();
 
             // Force stream1 not to start until stream0 does, in order to ensure
-            // the events on stream0 fully encompass the time needed for all
-            // operations
+            // the events on stream0 fully encompass the time needed for all operations
             cudaEventRecord(start[i], stream0[i]);
             cudaStreamWaitEvent(stream1[j], start[i], 0);
 

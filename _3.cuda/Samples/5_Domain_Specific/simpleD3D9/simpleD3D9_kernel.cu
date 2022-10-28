@@ -1,5 +1,5 @@
-// This example demonstrates how to use the CUDA Direct3D bindings with the
-// runtime API.
+// This example demonstrates how to use the CUDA Direct3D bindings with the runtime API.
+
 // Device code.
 
 #ifndef _SIMPLED3D_KERNEL_CU_
@@ -44,7 +44,8 @@ extern "C" void simpleD3DKernel(float4 * pos, unsigned int width, unsigned int h
 
     error = cudaGetLastError();
 
-    if (error != cudaSuccess) {
+    if (error != cudaSuccess)
+    {
         printf("kernel() failed to launch error = %d\n", error);
     }
 }
