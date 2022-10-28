@@ -11,6 +11,7 @@
 //#include <GL/glut.h>      //32 bits
 #include <GL/freeglut.h>    //64 bits
 
+float alpha = 0.5;
 GLint thing1;
 GLint thing2;
 GLint thing3;
@@ -50,27 +51,38 @@ void Init(void)
     glEndList();
 }
 
+// 繪圖回調函數
 void display(void)
 {
-    glPushMatrix();
+    glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
 
-    glScalef(0.8, 0.8, 1.0);
+    glScalef(0.8, 0.8, 0.8);	//X Y Z所佔整個視窗的比例 最大為1.0 就是100%
 
     glClear(GL_COLOR_BUFFER_BIT);
     glCallList(thing1);
-    glAccum(GL_LOAD, 0.5);
+    glAccum(GL_LOAD, alpha);
 
     glClear(GL_COLOR_BUFFER_BIT);
     glCallList(thing2);
-    glAccum(GL_ACCUM, 0.5);
+    glAccum(GL_ACCUM, alpha);
 
     glClear(GL_COLOR_BUFFER_BIT);
     glCallList(thing3);
-    glAccum(GL_ACCUM, 0.5);
+    glAccum(GL_ACCUM, alpha);
 
     glClear(GL_COLOR_BUFFER_BIT);
     glCallList(thing4);
-    glAccum(GL_ACCUM, 0.5);
+    glAccum(GL_ACCUM, alpha);
+
+    //char mesg[20];
+    //sprintf(mesg, "Alpha = %3.3f", alpha);
+    //glutSetWindowTitle(mesg);
+
+    alpha += 0.1;
+    if (alpha > 1.01)
+    {
+        alpha = 0;
+    }
 
     glAccum(GL_RETURN, 1.0);
 
@@ -79,14 +91,15 @@ void display(void)
     glFlush();
 }
 
+// 窗口大小變化回調函數
 void reshape(int width, int height)
 {
     glViewport(0, 0, width, height);
 
     glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
+    glLoadIdentity();	//設置單位矩陣
     glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
+    glLoadIdentity();	//設置單位矩陣
 }
 
 void keyboard(unsigned char key, int x, int y)
@@ -94,12 +107,18 @@ void keyboard(unsigned char key, int x, int y)
     switch (key)
     {
     case '1':
+        printf("畫實心色塊\n");
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-        glutPostRedisplay();
+        glutPostRedisplay();	//重做display()
         break;
     case '2':
+        printf("畫空心色塊(外框)\n");
         glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-        glutPostRedisplay();
+        glutPostRedisplay();	//重做display()
+        break;
+    case 'r':
+        printf("重畫 alpha = %f ", alpha);
+        glutPostRedisplay();	//重做display()
         break;
     case 27:
         exit(0);
@@ -108,15 +127,12 @@ void keyboard(unsigned char key, int x, int y)
 
 int main(int argc, char** argv)
 {
-    GLenum type;
-
     glutInit(&argc, argv);
 
-    type = GLUT_RGB | GLUT_ACCUM;
-    type |= GLUT_SINGLE;
-    glutInitDisplayMode(type);
-    glutInitWindowSize(600, 600);
-    glutInitWindowPosition(1100, 200);
+    glutInitDisplayMode(GLUT_RGB | GLUT_ACCUM | GLUT_SINGLE);
+
+    glutInitWindowSize(600, 600);       // 設定視窗大小
+    glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
     glutCreateWindow("顏色重疊測試");	//開啟視窗 並顯示出視窗 Title
 
@@ -126,7 +142,7 @@ int main(int argc, char** argv)
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
 
-    printf("按 1 2 控制\n");
+    printf("按 1 2 r 控制\n");
 
     glutMainLoop();	//開始主循環繪製
 

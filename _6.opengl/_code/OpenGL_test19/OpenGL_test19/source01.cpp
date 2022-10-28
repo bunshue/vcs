@@ -21,8 +21,8 @@ void display()
 	float dd;
 
 	glBegin(GL_QUADS);	//畫矩形
-		//逆時針為空心
-		//畫一個白色外框
+	//逆時針為空心
+	//畫一個白色外框
 	dd = 9.5f;
 	glVertex3f(-dd, dd, 0.0f);	//左上
 	glVertex3f(-dd, -dd, 0.0f);	//左下
@@ -38,7 +38,8 @@ void display()
 	glVertex3f(-dd, -dd, 0.0f);	//左下
 	glEnd();
 
-	glBegin(GL_TRIANGLES);	//畫三角形 2D
+	//畫三角形 2D
+	glBegin(GL_TRIANGLES);
 	glColor3f(1.0, 0.0, 0.0);	//R
 	//逆時針為空心
 	glVertex2f(2.0, 4.0);	//左下
@@ -46,8 +47,9 @@ void display()
 	glVertex2f(5.0, 9.0);	//上
 	glEnd();
 
-	glBegin(GL_TRIANGLES);	//畫三角形 3D
-		//逆時針為空心
+	//畫三角形 3D
+	glBegin(GL_TRIANGLES);
+	//逆時針為空心
 	for (dd = 7.0f; dd <= 9.0f; dd += 1.0f)
 	{
 		glColor3f(1, 0, 0);	//R

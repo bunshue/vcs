@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="11.sphere.c" />
+    <ClCompile Include="01.accum.c" />
     <ClCompile Include="rgb.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
