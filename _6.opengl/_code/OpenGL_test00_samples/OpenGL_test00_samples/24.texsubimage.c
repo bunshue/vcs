@@ -226,7 +226,7 @@ void display(void)
     glClear(GL_COLOR_BUFFER_BIT);
 
     /* draw a textured polygon the size of the window */
-    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_TEXTURE_2D);	//±Ò¥Î2D¯¾²z¬M®g
 
     glColor3f(1.0, 1.0, 1.0);
     glBegin(GL_QUADS);

@@ -57,7 +57,7 @@ void display(void)
 /** 繪製木箱 */
 void DrawBox()
 {
-    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_TEXTURE_2D);	//啟用2D紋理映射
 
     /** 選擇紋理 */
     //glBindTexture(GL_TEXTURE_2D, tex2D);	//綁定紋理

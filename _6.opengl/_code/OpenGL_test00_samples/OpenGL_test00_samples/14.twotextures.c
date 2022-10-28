@@ -54,7 +54,7 @@ void Init(void)
 	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, minFilter);
 	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, sWrapMode);
 	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, tWrapMode);
-	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_TEXTURE_2D);	//±Ò¥Î2D¯¾²z¬M®g
 
 	glClearColor(0.0, 0.0, 0.0, 0.0);
 

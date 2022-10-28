@@ -351,7 +351,7 @@ void display(void)
 
     glVertexPointerEXT(2, GL_SHORT, 8, 4, &tv[2]);
     glTexCoordPointerEXT(2, GL_SHORT, 8, 4, tv);
-    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_TEXTURE_2D);	//±Ò¥Î2D¯¾²z¬M®g
     glEnable(GL_VERTEX_ARRAY_EXT);
     glEnable(GL_TEXTURE_COORD_ARRAY_EXT);
 

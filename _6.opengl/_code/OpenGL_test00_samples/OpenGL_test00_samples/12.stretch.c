@@ -218,7 +218,7 @@ void keyboard(unsigned char key, int x, int y)
             cIndex[0] = 0;
             cIndex[1] = 1;
             cStep = 0;
-            glEnable(GL_TEXTURE_2D);
+            glEnable(GL_TEXTURE_2D);	//±Ò¥Î2D¯¾²z¬M®g
             op = OP_STRETCH;
         }
         glutPostRedisplay();

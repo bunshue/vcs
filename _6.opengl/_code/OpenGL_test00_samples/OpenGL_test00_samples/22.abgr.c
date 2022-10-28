@@ -104,7 +104,7 @@ void TexFunc(void)
     }
 
     glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_DECAL);
-    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_TEXTURE_2D);	//±Ò¥Î2D¯¾²z¬M®g
 
     glBegin(GL_POLYGON);
     glTexCoord2f(1.0, 1.0); glVertex3f(-0.2, 0.8, -100.0);
@@ -113,8 +113,7 @@ void TexFunc(void)
     glTexCoord2f(1.0, 0.0); glVertex3f(-0.2, 0.2, -100.0);
     glEnd();
 
-    glTexImage2D(GL_TEXTURE_2D, 0, 3, 128, 128, 0, GL_RGBA,
-        GL_UNSIGNED_BYTE, ubImage);
+    glTexImage2D(GL_TEXTURE_2D, 0, 3, 128, 128, 0, GL_RGBA, GL_UNSIGNED_BYTE, ubImage);
 
     glBegin(GL_POLYGON);
     glTexCoord2f(1.0, 1.0); glVertex3f(0.8, 0.8, -2.0);

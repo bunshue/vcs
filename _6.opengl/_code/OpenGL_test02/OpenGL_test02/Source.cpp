@@ -145,9 +145,8 @@ void display(void)
     {
         printf("XXXXXXXXXXXXXXXXXXXXX\n");
     }
-    glFlush();      //刷新OpenGL中的命令列和，使所有尚未被行的命令行
-    //glFlush();      //刷新緩沖
-    //glFlush();      //執行繪圖命令
+
+    glFlush();      //執行繪圖命令
     glutSwapBuffers();
 }
 

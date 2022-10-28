@@ -149,9 +149,8 @@ void display(void)
         //or
         glClearColor(1.0f, 1.0f, 1.0f, 1.0f);   // 設置清除窗口背景色為白色
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
-        glFlush();       // 刷新OpenGL中的命令列和，使所有尚未被行的命令行
 
-        //設定預設大小...
+        //設定預設大小...  TBD
     }
     else if (display_mode == 1)
     {
@@ -180,8 +179,6 @@ void display(void)
 
         //drawText1();
         drawText2();
-
-        glFlush();//保證前面的OpenGL命令立即執行   glFlush​​負責刷新繪製緩沖器，保證繪圖命令立即執行。
     }
     else if (display_mode == 2)
     {
@@ -216,9 +213,6 @@ void display(void)
             glVertex2f(-0.2f, 0.2f);
         }
         glEnd();
-
-        //強制刷新緩存區
-        glFlush();
     }
     else if (display_mode == 3)
     {
@@ -262,7 +256,6 @@ void display(void)
             }
             glEnd();
         }
-        glFlush();
     }
     else if (display_mode == 4)
     {
@@ -315,8 +308,6 @@ void display(void)
             glVertex3f(-1.0f, 0.0f + 0.5f, 1.0f - 0.001f);
         }
         glEnd();
-
-        glFlush();
     }
     else if (display_mode == 5)
     {
@@ -374,7 +365,6 @@ void display(void)
             }
             glEnd();
         }
-        glFlush();
     }
     else if (display_mode == 6)
     {
@@ -396,7 +386,6 @@ void display(void)
         }
         glEnd();                               // 結束畫三角形
         glPopMatrix();
-        glutSwapBuffers();
     }
     else if (display_mode == 8)
     {
@@ -408,8 +397,6 @@ void display(void)
 
         glutWireTeapot(3);  //線框茶壺
         //glutSolidTeapot(3);  //實心茶壺
-
-        glFlush();
     }
     else if (display_mode == 9)
     {
@@ -424,13 +411,14 @@ void display(void)
             glVertex3f(0.25, 0.75, 0.0);
         }
         glEnd();
-        glFlush();/* start processing buffered OpenGL routines   */
     }
     else
     {
         printf("XXXXXXXXXXXXXXXXXXXXX\n");
     }
 
+    glFlush();  //強制刷新緩存區
+    glutSwapBuffers();  // 將後緩沖區繪製到前臺
 }
 
 // 窗口大小變化回調函數

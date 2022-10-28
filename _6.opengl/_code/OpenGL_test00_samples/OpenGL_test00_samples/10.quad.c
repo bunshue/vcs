@@ -310,7 +310,7 @@ void keyboard(unsigned char key, int x, int y)
 		if (texture)
 		{
 			gluQuadricTexture(quadObj, GL_TRUE);
-			glEnable(GL_TEXTURE_2D);
+			glEnable(GL_TEXTURE_2D);	//±Ò¥Î2D¯¾²z¬M®g
 		}
 		else
 		{

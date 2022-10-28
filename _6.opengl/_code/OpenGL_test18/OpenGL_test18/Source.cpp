@@ -41,9 +41,7 @@ void display(void)
     // 矩陣出棧 
     //glPopMatrix();
 
-    // 將後緩沖區繪製到前臺
-    glutSwapBuffers();
-
+    glFlush();  //強制刷新緩存區
 }
 
 // 窗口大小變化回調函數
@@ -52,7 +50,6 @@ void reshape(int w, int h)
     glClearColor(1.0, 0.0, 0.0, 1.0);   //設置背景顏色 R
 
 // 矩陣環境初始化 , 主要是投影矩陣和模型矩陣 
-
 // ( 選中投影矩陣 ) 設置矩陣模式 , 告知 GPU 當前要操作的矩陣是投影矩陣
     glMatrixMode(GL_PROJECTION);
     // ( 給投影矩陣設置值 ) 向投影矩陣設置參數
@@ -68,43 +65,24 @@ void reshape(int w, int h)
     glMatrixMode(GL_MODELVIEW);
     // ( 設置模型矩陣值 ) , 這里設置的是單位矩陣
     glLoadIdentity();   //設置單位矩陣
-
 }
 
 void keyboard(unsigned char k, int /*x*/, int /*y*/)
 {
-	switch (k)
-	{
-	case 27:
-	case 'q':
-	case 'Q':
-		//離開視窗
-		glutDestroyWindow(glutGetWindow());
-		return;
-
-	case '1':
-		printf("1\n");
-		break;
-
-	case '2':
-		printf("2\n");
-		break;
-
-	case '3':
-		break;
-
-	case '4':
-		break;
-
-	case '?':
-		break;
-	}
+    switch (k)
+    {
+    case 27:
+    case 'q':
+    case 'Q':
+        //離開視窗
+        glutDestroyWindow(glutGetWindow());
+        return;
+    }
 }
 
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
-    //glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
     glutInitWindowSize(600, 600);

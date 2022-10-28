@@ -242,7 +242,7 @@ void RenderEval(void)
 
     if (textureType)
     {
-        glEnable(GL_TEXTURE_2D);
+        glEnable(GL_TEXTURE_2D);	//±Ò¥Î2D¯¾²z¬M®g
         glEnable(GL_MAP2_TEXTURE_COORD_2);
     }
     else

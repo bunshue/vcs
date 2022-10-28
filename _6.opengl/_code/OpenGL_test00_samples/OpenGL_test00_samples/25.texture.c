@@ -257,7 +257,7 @@ void Init(void)
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 	gluBuild2DMipmaps(GL_TEXTURE_2D, 3, image->sizeX, image->sizeY, GL_RGB, GL_UNSIGNED_BYTE, image->data);
 	glTexEnvfv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, decal);
-	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_TEXTURE_2D);	//±Ò¥Î2D¯¾²z¬M®g
 
 	glFrontFace(GL_CCW);
 	glCullFace(GL_FRONT);

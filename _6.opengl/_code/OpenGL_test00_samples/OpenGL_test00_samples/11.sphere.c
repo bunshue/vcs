@@ -748,7 +748,7 @@ void Init(void)
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
 
-	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_TEXTURE_2D);	//±Ò¥Î2D¯¾²z¬M®g
 	glTexGeniv(GL_S, GL_TEXTURE_GEN_MODE, sphereMap);
 	glTexGeniv(GL_T, GL_TEXTURE_GEN_MODE, sphereMap);
 	glEnable(GL_TEXTURE_GEN_S);
@@ -814,7 +814,7 @@ void display(void)
 		glEnable(GL_LIGHT0);
 	}
 
-	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_TEXTURE_2D);	//±Ò¥Î2D¯¾²z¬M®g
 	if (isFogged)
 	{
 		glDisable(GL_FOG);

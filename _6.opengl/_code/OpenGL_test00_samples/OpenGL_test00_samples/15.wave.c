@@ -421,7 +421,7 @@ void keyboard(unsigned char key, int x, int y)
 			glTexGeni(GL_T, GL_TEXTURE_GEN_MODE, GL_OBJECT_LINEAR);
 			glTexGenfv(GL_S, GL_OBJECT_PLANE, map);
 			glTexGenfv(GL_T, GL_OBJECT_PLANE, map);
-			glEnable(GL_TEXTURE_2D);
+			glEnable(GL_TEXTURE_2D);	//±Ò¥Î2D¯¾²z¬M®g
 			glEnable(GL_TEXTURE_GEN_S);
 			glEnable(GL_TEXTURE_GEN_T);
 		}

@@ -339,17 +339,18 @@ void Init(void)
 
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_TEXTURE_2D);	//±Ò¥Î2D¯¾²z¬M®g
 	glTexEnvfv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, decal);
 
-	if (multTex && texObjEXT) {
+	if (multTex && texObjEXT)
+	{
 		int i;
 
 		glGenTexturesEXT(NUM_TEXTURES, texNames);
-		for (i = 1; i < NUM_TEXTURES; i++) {
+		for (i = 1; i < NUM_TEXTURES; i++)
+		{
 			glBindTextureEXT(GL_TEXTURE_2D, texNames[i]);
-			gluBuild2DMipmaps(GL_TEXTURE_2D, 3, images[i]->sizeX,
-				images[i]->sizeY, GL_RGB, GL_UNSIGNED_BYTE, images[i]->data);
+			gluBuild2DMipmaps(GL_TEXTURE_2D, 3, images[i]->sizeX, images[i]->sizeY, GL_RGB, GL_UNSIGNED_BYTE, images[i]->data);
 		}
 		glBindTextureEXT(GL_TEXTURE_2D, texNames[0]);
 		glPrioritizeTexturesEXT(NUM_TEXTURES, texNames, texPriorities);

@@ -1,8 +1,7 @@
 /*
 ** texobj.c: Draws textured polygons using the texture object extension.
 **
-** Default operation: Draws three squares using a different texture for
-** each square.
+** Default operation: Draws three squares using a different texture for each square.
 **
 ** Use -h option to display a list of command line options. Use Key h
 ** in the created window for key options.
@@ -331,7 +330,7 @@ void Init(void)
 	gluBuild2DMipmaps(GL_TEXTURE_2D, 3, images[0]->sizeX, images[0]->sizeY,	GL_RGB, GL_UNSIGNED_BYTE, images[0]->data);
 
 	glTexEnvfv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, decal);
-	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_TEXTURE_2D);	//±Ò¥Î2D¯¾²z¬M®g
 
 	glFrontFace(GL_CCW);
 	glCullFace(GL_FRONT);

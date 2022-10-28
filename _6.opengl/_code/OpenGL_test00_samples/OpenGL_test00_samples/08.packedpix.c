@@ -575,7 +575,7 @@ void display(void)
 	}
 
 	//TexImage
-	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_TEXTURE_2D);	//±Ò¥Î2D¯¾²z¬M®g
 
 	for (i = 0; i < numTypes; i++)
 	{

@@ -1263,7 +1263,7 @@ static void Init(void)
 	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, nearest);
 	glTexImage2D(GL_TEXTURE_2D, 0, 3, CHECKIMAGEWIDTH, CHECKIMAGEHEIGHT, 0,
 		GL_RGB, GL_UNSIGNED_BYTE, (GLvoid*)checkImage);
-	glEnable(GL_TEXTURE_2D);
+	glEnable(GL_TEXTURE_2D);	//±Ò¥Î2D¯¾²z¬M®g
 
 	glCullFace(GL_BACK);
 	glEnable(GL_CULL_FACE);
@@ -1418,7 +1418,7 @@ void keyboard(unsigned char key, int x, int y)
 		glutPostRedisplay();
 		break;
 	case 'a':
-		glEnable(GL_TEXTURE_2D);
+		glEnable(GL_TEXTURE_2D);	//±Ò¥Î2D¯¾²z¬M®g
 		glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, repeat);
 		glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, repeat);
 		glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, nearest);
@@ -1429,7 +1429,7 @@ void keyboard(unsigned char key, int x, int y)
 		glutPostRedisplay();
 		break;
 	case 's':
-		glEnable(GL_TEXTURE_2D);
+		glEnable(GL_TEXTURE_2D);	//±Ò¥Î2D¯¾²z¬M®g
 		glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, repeat);
 		glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, repeat);
 		glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, nearest);
