@@ -85,7 +85,7 @@ void init09(void)
     glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0); //設置窗口座標系大小
 }
 
-void drawText1(void)
+void drawString1(void)
 {
     using std::string;
     using std::stringstream;
@@ -126,7 +126,7 @@ inline void glPrintShadowed(int x, int y, const char* s, void* font, float* colo
     glPrint(x, y, s, font);
 }
 
-void drawText2(void)
+void drawString2(void)
 {
     glPrint(-1.2, 0, "111Write Something to Screen", GLUT_BITMAP_TIMES_ROMAN_24);
 
@@ -193,8 +193,8 @@ void display(void)
         //左下x,左下y,右上x,右上y,
         glRectf(0.3f, -0.7f, 0.7f, 0.7f);//畫一個矩形
 
-        //drawText1();
-        drawText2();
+        //drawString1();
+        drawString2();
 
         draw_window_boundary(0.9);
     }

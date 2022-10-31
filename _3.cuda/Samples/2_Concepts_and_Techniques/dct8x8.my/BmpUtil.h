@@ -1,5 +1,4 @@
-/**
-**************************************************************************
+/*
 * \file BmpUtil.h
 * \brief Contains basic image operations declaration.
 *
@@ -60,7 +59,7 @@ typedef struct {
 #pragma pack()
 #endif
 
-/**
+/*
 * \brief Simple 2D size / region_of_interest structure
 *
 *  Simple 2D size / region_of_interest structure

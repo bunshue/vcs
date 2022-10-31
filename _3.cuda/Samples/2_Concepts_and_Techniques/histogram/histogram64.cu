@@ -21,12 +21,14 @@ typedef uint4 data_t;
 // Main computation pass: compute gridDim.x partial histograms
 ////////////////////////////////////////////////////////////////////////////////
 // Count a byte into shared-memory storage
-inline __device__ void addByte(uchar* s_ThreadBase, uint data) {
+inline __device__ void addByte(uchar* s_ThreadBase, uint data)
+{
     s_ThreadBase[UMUL(data, HISTOGRAM64_THREADBLOCK_SIZE)]++;
 }
 
 // Count four bytes of a word
-inline __device__ void addWord(uchar* s_ThreadBase, uint data) {
+inline __device__ void addWord(uchar* s_ThreadBase, uint data)
+{
     // Only higher 6 bits of each byte matter, as this is a 64-bin histogram
     addByte(s_ThreadBase, (data >> 2) & 0x3FU);
     addByte(s_ThreadBase, (data >> 10) & 0x3FU);
@@ -34,19 +36,17 @@ inline __device__ void addWord(uchar* s_ThreadBase, uint data) {
     addByte(s_ThreadBase, (data >> 26) & 0x3FU);
 }
 
-__global__ void histogram64Kernel(uint* d_PartialHistograms, data_t* d_Data,
-    uint dataCount) {
+__global__ void histogram64Kernel(uint* d_PartialHistograms, data_t* d_Data, uint dataCount)
+{
     // Handle to thread block group
     cg::thread_block cta = cg::this_thread_block();
     // Encode thread index in order to avoid bank conflicts in s_Hist[] access:
-    // each group of SHARED_MEMORY_BANKS threads accesses consecutive shared
-    // memory banks
+    // each group of SHARED_MEMORY_BANKS threads accesses consecutive shared memory banks
     // and the same bytes [0..3] within the banks
     // Because of this permutation block size should be a multiple of 4 *
     // SHARED_MEMORY_BANKS
     const uint threadPos = ((threadIdx.x & ~(SHARED_MEMORY_BANKS * 4 - 1)) << 0) |
-        ((threadIdx.x & (SHARED_MEMORY_BANKS - 1)) << 2) |
-        ((threadIdx.x & (SHARED_MEMORY_BANKS * 3)) >> 4);
+        ((threadIdx.x & (SHARED_MEMORY_BANKS - 1)) << 2) | ((threadIdx.x & (SHARED_MEMORY_BANKS * 3)) >> 4);
 
     // Per-thread histogram storage
     __shared__ uchar s_Hist[HISTOGRAM64_THREADBLOCK_SIZE * HISTOGRAM64_BIN_COUNT];
@@ -61,8 +61,7 @@ __global__ void histogram64Kernel(uint* d_PartialHistograms, data_t* d_Data,
     }
 
     // Read data from global memory and submit to the shared-memory histogram
-    // Since histogram counters are byte-sized, every single thread can't do more
-    // than 255 submission
+    // Since histogram counters are byte-sized, every single thread can't do more than 255 submission
     cg::sync(cta);
 
     for (uint pos = UMAD(blockIdx.x, blockDim.x, threadIdx.x); pos < dataCount; pos += UMUL(blockDim.x, gridDim.x))
@@ -141,6 +140,7 @@ __global__ void mergeHistogram64Kernel(uint* d_Histogram, uint* d_PartialHistogr
 // histogram64kernel() intermediate results buffer
 // MAX_PARTIAL_HISTOGRAM64_COUNT == 32768 and HISTOGRAM64_THREADBLOCK_SIZE == 64
 // amounts to max. 480MB of input data
+
 static const uint MAX_PARTIAL_HISTOGRAM64_COUNT = 32768;
 static uint* d_PartialHistograms;
 

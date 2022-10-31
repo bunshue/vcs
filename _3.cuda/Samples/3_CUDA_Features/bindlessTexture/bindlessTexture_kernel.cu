@@ -38,10 +38,8 @@ float highestLod = 1.0f;
 #define MAX(a, b) ((a > b) ? a : b)
 #endif
 
-//////////////////////////////////////////////////////////////////////////
-
-__host__ __device__ __inline__ uint2 encodeTextureObject(
-    cudaTextureObject_t obj) {
+__host__ __device__ __inline__ uint2 encodeTextureObject(cudaTextureObject_t obj)
+{
     return make_uint2((uint)(obj & 0xFFFFFFFF), (uint)(obj >> 32));
 }
 
@@ -60,9 +58,7 @@ __device__ __inline__ uchar4 to_uchar4(float4 vec)
     return make_uchar4((uchar)vec.x, (uchar)vec.y, (uchar)vec.z, (uchar)vec.w);
 }
 
-//////////////////////////////////////////////////////////////////////////
 // Rendering
-
 // the atlas texture stores the 64 bit cudaTextureObjects
 // we use it for "virtual" texturing
 
@@ -105,13 +101,10 @@ extern "C" void renderAtlasImage(dim3 gridSize, dim3 blockSize, uchar4 * d_outpu
 #endif
 
     d_render << <gridSize, blockSize >> > (d_output, imageW, imageH, lod, atlasImage.textureObject);
-
     checkCudaErrors(cudaGetLastError());
 }
 
-//////////////////////////////////////////////////////////////////////////
 // MipMap Generation
-
 //  A key benefit of using the new surface objects is that we don't need any
 //  global binding points anymore. We can directly pass them as function arguments.
 
@@ -126,13 +119,10 @@ __global__ void d_mipmap(cudaSurfaceObject_t mipOutput, cudaTextureObject_t mipI
     if ((x < imageW) && (y < imageH))
     {
         // take the average of 4 samples
-
         // we are using the normalized access to make sure non-power-of-two textures
         // behave well when downsized.
-        float4 color = (tex2D<float4>(mipInput, (x + 0) * px, (y + 0) * py)) +
-            (tex2D<float4>(mipInput, (x + 1) * px, (y + 0) * py)) +
-            (tex2D<float4>(mipInput, (x + 1) * px, (y + 1) * py)) +
-            (tex2D<float4>(mipInput, (x + 0) * px, (y + 1) * py));
+        float4 color = (tex2D<float4>(mipInput, (x + 0) * px, (y + 0) * py)) + (tex2D<float4>(mipInput, (x + 1) * px, (y + 0) * py)) +
+            (tex2D<float4>(mipInput, (x + 1) * px, (y + 1) * py)) + (tex2D<float4>(mipInput, (x + 0) * px, (y + 1) * py));
 
         color /= 4.0;
         color *= 255.0;
@@ -246,9 +236,7 @@ uint getMipMapLevels(cudaExtent size)
     return levels;
 }
 
-//////////////////////////////////////////////////////////////////////////
 // Initalization
-
 extern "C" void randomizeAtlas()
 {
     uint2* h_data = (uint2*)atlasImage.h_data;

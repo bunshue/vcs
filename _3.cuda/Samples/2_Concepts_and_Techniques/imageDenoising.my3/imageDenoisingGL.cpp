@@ -202,8 +202,8 @@ void initOpenGLBuffers()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
-    /*
-    for (int i = 0; i < imageW * imageH; i++)
+    /* 修改圖像資料
+    for (int i = 0; i < imageW * imageH / 3; i++)
     {
         h_Src1[i].x = h_Src1[i].x / 2;
         h_Src1[i].y = h_Src1[i].y / 2;

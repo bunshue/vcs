@@ -1,5 +1,4 @@
-/**
-**************************************************************************
+/*
 * \file BmpUtil.h
 * \brief Contains basic image operations declaration.
 *
@@ -60,7 +59,7 @@ typedef struct {
 #pragma pack()
 #endif
 
-/**
+/*
 * \brief Simple 2D size / region_of_interest structure
 *
 *  Simple 2D size / region_of_interest structure
@@ -81,10 +80,8 @@ float round_f(float num);
 byte *MallocPlaneByte(int width, int height, int *pStepBytes);
 short *MallocPlaneShort(int width, int height, int *pStepBytes);
 float *MallocPlaneFloat(int width, int height, int *pStepBytes);
-void CopyByte2Float(byte *ImgSrc, int StrideB, float *ImgDst, int StrideF,
-                    ROI Size);
-void CopyFloat2Byte(float *ImgSrc, int StrideF, byte *ImgDst, int StrideB,
-                    ROI Size);
+    void CopyByte2Float(byte* ImgSrc, int StrideB, float* ImgDst, int StrideF, ROI Size);
+    void CopyFloat2Byte(float* ImgSrc, int StrideF, byte* ImgDst, int StrideB, ROI Size);
 void FreePlane(void *ptr);
 void AddFloatPlane(float Value, float *ImgSrcDst, int StrideF, ROI Size);
 void MulFloatPlane(float Value, float *ImgSrcDst, int StrideF, ROI Size);

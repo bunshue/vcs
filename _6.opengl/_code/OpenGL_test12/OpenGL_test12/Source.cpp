@@ -10,7 +10,39 @@
 void init()
 {
     glClearColor(0.0, 0.0, 0.0, 1.0);   //黑色背景
-    glShadeModel(GL_SMOOTH);
+    glShadeModel(GL_SMOOTH);            //指定兩點間其他顏色的過渡模式 GL_SMOOTH/GL_FLAT
+                                        //GL_SMOOTH會出現過渡效果，GL_FLAT 則只是以指定的某一點的單一色繪制其他所有點
+                                        //GL_SMOOTH:會采納每個頂點的顏色，非頂點的部分根據周邊頂點的顏色采取平滑過渡的模式，對于線段圖元，線段上各點的顏色會根據兩頂點的顏色通過插值得到。
+                                        //GL_FLAT : 固定著色，取圖元中某個頂點的顏色來填充整個圖元。
+}
+
+//寫字的函數
+inline void glPrint(int x, int y, const char* s, void* font)
+{
+    glRasterPos2f((GLfloat)x, (GLfloat)y);
+    int len = (int)strlen(s);
+
+    for (int i = 0; i < len; i++)
+    {
+        glutBitmapCharacter(font, s[i]);
+    }
+}
+
+/* 看不出shadowed效果
+inline void glPrintShadowed(int x, int y, const char* s, void* font, float* color)
+{
+    glColor3f(0.0, 0.0, 1.0);
+    glPrint(x - 0.9, y - 1.0, s, font);
+
+    glColor3fv((GLfloat*)color);
+    glPrint(x, y, s, font);
+}
+*/
+
+void drawString(const char* str, void* font, float* color, float x_st, float y_st)
+{
+    glColor3fv((GLfloat*)color);
+    glPrint(x_st, y_st, str, font);
 }
 
 // 繪圖回調函數
@@ -209,7 +241,10 @@ void display(void)
     glVertex2f(x_st, y_st + dd * 4);  //正上
     glEnd();
 
-
+    float color[4] = { 0.0f, 1.0f, 0.0f, 1.0f };
+    x_st = -1.2;
+    y_st = 0;
+    drawString("Write Something", GLUT_BITMAP_TIMES_ROMAN_24, color, x_st, y_st);
 
     glFlush();  // 執行繪圖命令
 }
@@ -237,19 +272,13 @@ void keyboard(unsigned char key, int x, int y)
         //離開視窗
         glutDestroyWindow(glutGetWindow());
         return;
-    case '1':
-        printf("1\n");
-        break;
-    case '?':
-        break;
     }
 }
 
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
-    
-    //glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
     glutInitWindowSize(600, 600);		//設定視窗大小, 直接拉大內容
@@ -262,6 +291,8 @@ int main(int argc, char** argv)
     glutDisplayFunc(display);	//設定callback function
     glutReshapeFunc(reshape);	//設定callback function
     glutKeyboardFunc(keyboard);	//設定callback function
+
+    printf("僅顯示, 無控制, 按 Esc 離開\n");
 
     glutMainLoop();	//開始主循環繪製
 

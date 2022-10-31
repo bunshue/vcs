@@ -171,7 +171,7 @@ void reshape(int x, int y)
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();	//³]¸m³æ¦ì¯x°}
-    
+
     glOrtho(0.0, 1.0, 0.0, 1.0, 0.0, 1.0);
 }
 

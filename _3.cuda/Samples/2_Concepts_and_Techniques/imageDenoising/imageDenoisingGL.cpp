@@ -1,14 +1,4 @@
- /*
-  * This sample demonstrates two adaptive image denoising techniques:
-  * KNN and NLM, based on computation of both geometric and color distance
-  * between texels. While both techniques are already implemented in the
-  * DirectX SDK using shaders, massively speeded up variation
-  * of the latter technique, taking advantage of shared memory, is implemented
-  * in addition to DirectX counterparts.
-  * See supplied whitepaper for more explanations.
-  */
-
-  // OpenGL Graphics includes
+// OpenGL Graphics includes
 #include <helper_gl.h>
 #include <GL/freeglut.h>
 
@@ -28,15 +18,12 @@
 
 const char* sSDKsample = "CUDA ImageDenoising";
 
-const char* filterMode[] = { "Passthrough", "KNN method", "NLM method",
-                            "Quick NLM(NLM2) method", NULL };
+const char* filterMode[] = { "Passthrough", "KNN method", "NLM method", "Quick NLM(NLM2) method", NULL };
 
 // Define the files that are to be save and the reference images for validation
-const char* sOriginal[] = { "image_passthru.ppm", "image_knn.ppm",
-                           "image_nlm.ppm", "image_nlm2.ppm", NULL };
+const char* sOriginal[] = { "image_passthru.ppm", "image_knn.ppm", "image_nlm.ppm", "image_nlm2.ppm", NULL };
 
-const char* sReference[] = { "ref_passthru.ppm", "ref_knn.ppm", "ref_nlm.ppm",
-                            "ref_nlm2.ppm", NULL };
+const char* sReference[] = { "ref_passthru.ppm", "ref_knn.ppm", "ref_nlm.ppm", "ref_nlm2.ppm", NULL };
 
 ////////////////////////////////////////////////////////////////////////////////
 // Global data handlers and parameters
@@ -100,44 +87,46 @@ void computeFPS()
     }
 }
 
-void runImageFilters(TColor* d_dst) {
-    switch (g_Kernel) {
+void runImageFilters(TColor* d_dst)
+{
+    switch (g_Kernel)
+    {
     case 0:
         cuda_Copy(d_dst, imageW, imageH, texImage);
         break;
 
     case 1:
-        if (!g_Diag) {
-            cuda_KNN(d_dst, imageW, imageH, 1.0f / (knnNoise * knnNoise), lerpC,
-                texImage);
+        if (!g_Diag)
+        {
+            cuda_KNN(d_dst, imageW, imageH, 1.0f / (knnNoise * knnNoise), lerpC, texImage);
         }
-        else {
-            cuda_KNNdiag(d_dst, imageW, imageH, 1.0f / (knnNoise * knnNoise), lerpC,
-                texImage);
+        else
+        {
+            cuda_KNNdiag(d_dst, imageW, imageH, 1.0f / (knnNoise * knnNoise), lerpC, texImage);
         }
 
         break;
 
     case 2:
-        if (!g_Diag) {
-            cuda_NLM(d_dst, imageW, imageH, 1.0f / (nlmNoise * nlmNoise), lerpC,
-                texImage);
+        if (!g_Diag)
+        {
+            cuda_NLM(d_dst, imageW, imageH, 1.0f / (nlmNoise * nlmNoise), lerpC, texImage);
         }
-        else {
-            cuda_NLMdiag(d_dst, imageW, imageH, 1.0f / (nlmNoise * nlmNoise), lerpC,
-                texImage);
+        else
+        {
+            cuda_NLMdiag(d_dst, imageW, imageH, 1.0f / (nlmNoise * nlmNoise), lerpC, texImage);
         }
 
         break;
 
     case 3:
-        if (!g_Diag) {
-            cuda_NLM2(d_dst, imageW, imageH, 1.0f / (nlmNoise * nlmNoise), lerpC,
-                texImage);
+        if (!g_Diag)
+        {
+            cuda_NLM2(d_dst, imageW, imageH, 1.0f / (nlmNoise * nlmNoise), lerpC, texImage);
         }
-        else {
-            cuda_NLM2diag(d_dst, imageW, imageH, 1.0f / (nlmNoise * nlmNoise),
-                lerpC, texImage);
+        else
+        {
+            cuda_NLM2diag(d_dst, imageW, imageH, 1.0f / (nlmNoise * nlmNoise), lerpC, texImage);
         }
 
         break;
@@ -146,19 +135,20 @@ void runImageFilters(TColor* d_dst) {
     getLastCudaError("Filtering kernel execution failed.\n");
 }
 
-void displayFunc(void) {
+void displayFunc(void)
+{
     sdkStartTimer(&timer);
     TColor* d_dst = NULL;
     size_t num_bytes;
 
-    if (frameCounter++ == 0) {
+    if (frameCounter++ == 0)
+    {
         sdkResetTimer(&timer);
     }
 
     checkCudaErrors(cudaGraphicsMapResources(1, &cuda_pbo_resource, 0));
     getLastCudaError("cudaGraphicsMapResources failed");
-    checkCudaErrors(cudaGraphicsResourceGetMappedPointer(
-        (void**)&d_dst, &num_bytes, cuda_pbo_resource));
+    checkCudaErrors(cudaGraphicsResourceGetMappedPointer((void**)&d_dst, &num_bytes, cuda_pbo_resource));
     getLastCudaError("cudaGraphicsResourceGetMappedPointer failed");
 
     runImageFilters(d_dst);
@@ -169,8 +159,7 @@ void displayFunc(void) {
     {
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, imageW, imageH, GL_RGBA,
-            GL_UNSIGNED_BYTE, BUFFER_DATA(0));
+        glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, imageW, imageH, GL_RGBA, GL_UNSIGNED_BYTE, BUFFER_DATA(0));
         glBegin(GL_TRIANGLES);
         glTexCoord2f(0, 0);
         glVertex2f(-1, -1);
@@ -182,10 +171,12 @@ void displayFunc(void) {
         glFinish();
     }
 
-    if (frameCounter == frameN) {
+    if (frameCounter == frameN)
+    {
         frameCounter = 0;
 
-        if (g_FPS) {
+        if (g_FPS)
+        {
             printf("FPS: %3.1f\n", frameN / (sdkGetTimerValue(&timer) * 0.001));
             g_FPS = false;
         }
@@ -199,24 +190,24 @@ void displayFunc(void) {
     computeFPS();
 }
 
-void timerEvent(int value) {
-    if (glutGetWindow()) {
+void timerEvent(int value)
+{
+    if (glutGetWindow())
+    {
         glutPostRedisplay();
         glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
     }
 }
 
-void keyboard(unsigned char k, int /*x*/, int /*y*/) {
-    switch (k) {
+void keyboard(unsigned char k, int /*x*/, int /*y*/)
+{
+    switch (k)
+    {
     case 27:
     case 'q':
     case 'Q':
-#if defined(__APPLE__) || defined(MACOSX)
-        exit(EXIT_SUCCESS);
-#else
         glutDestroyWindow(glutGetWindow());
         return;
-#endif
 
     case '1':
         printf("Passthrough.\n");
@@ -278,27 +269,26 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/) {
     }
 }
 
-int initGL(int* argc, char** argv) {
+int initGL(int* argc, char** argv)
+{
     printf("Initializing GLUT...\n");
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
     glutInitWindowSize(imageW, imageH);
     glutInitWindowPosition(512 - imageW / 2, 384 - imageH / 2);
     glutCreateWindow(argv[0]);
-    glutDisplayFunc(displayFunc);
-    glutKeyboardFunc(keyboard);
-    glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
+
+    glutDisplayFunc(displayFunc);   //設定callback function
+    glutKeyboardFunc(keyboard);     //設定callback function
+
+    glutTimerFunc(REFRESH_DELAY, timerEvent, 0);    //設定timer事件
+
     printf("OpenGL window created.\n");
 
-#if defined(__APPLE__) || defined(MACOSX)
-    atexit(cleanup);
-#else
     glutCloseFunc(cleanup);
-#endif
 
-    if (!isGLVersionSupported(1, 5) ||
-        !areGLExtensionsSupported(
-            "GL_ARB_vertex_buffer_object GL_ARB_pixel_buffer_object")) {
+    if (!isGLVersionSupported(1, 5) || !areGLExtensionsSupported("GL_ARB_vertex_buffer_object GL_ARB_pixel_buffer_object"))
+    {
         fprintf(stderr, "Error: failed to get minimal extensions for demo\n");
         fprintf(stderr, "This sample requires:\n");
         fprintf(stderr, "  OpenGL version 1.5\n");
@@ -317,28 +307,29 @@ static const char* shader_code =
 "TEX result.color, fragment.texcoord, texture[0], 2D; \n"
 "END";
 
-GLuint compileASMShader(GLenum program_type, const char* code) {
+GLuint compileASMShader(GLenum program_type, const char* code)
+{
     GLuint program_id;
     glGenProgramsARB(1, &program_id);
     glBindProgramARB(program_type, program_id);
-    glProgramStringARB(program_type, GL_PROGRAM_FORMAT_ASCII_ARB,
-        (GLsizei)strlen(code), (GLubyte*)code);
+    glProgramStringARB(program_type, GL_PROGRAM_FORMAT_ASCII_ARB, (GLsizei)strlen(code), (GLubyte*)code);
 
     GLint error_pos;
     glGetIntegerv(GL_PROGRAM_ERROR_POSITION_ARB, &error_pos);
 
-    if (error_pos != -1) {
+    if (error_pos != -1)
+    {
         const GLubyte* error_string;
         error_string = glGetString(GL_PROGRAM_ERROR_STRING_ARB);
-        fprintf(stderr, "Program error at position: %d\n%s\n", (int)error_pos,
-            error_string);
+        fprintf(stderr, "Program error at position: %d\n%s\n", (int)error_pos, error_string);
         return 0;
     }
 
     return program_id;
 }
 
-void initOpenGLBuffers() {
+void initOpenGLBuffers()
+{
     printf("Creating GL texture...\n");
     glEnable(GL_TEXTURE_2D);
     glGenTextures(1, &gl_Tex);	//生成紋理對象
@@ -347,26 +338,24 @@ void initOpenGLBuffers() {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, imageW, imageH, 0, GL_RGBA,
-        GL_UNSIGNED_BYTE, h_Src);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, imageW, imageH, 0, GL_RGBA, GL_UNSIGNED_BYTE, h_Src);
     printf("Texture created.\n");
 
     printf("Creating PBO...\n");
     glGenBuffers(1, &gl_PBO);
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, gl_PBO);
-    glBufferData(GL_PIXEL_UNPACK_BUFFER_ARB, imageW * imageH * 4, h_Src,
-        GL_STREAM_COPY);
+    glBufferData(GL_PIXEL_UNPACK_BUFFER_ARB, imageW * imageH * 4, h_Src, GL_STREAM_COPY);
     // While a PBO is registered to CUDA, it can't be used
     // as the destination for OpenGL drawing calls.
     // But in our particular case OpenGL is only used
     // to display the content of the PBO, specified by CUDA kernels,
     // so we need to register/unregister it only once.
     // DEPRECATED: checkCudaErrors(cudaGLRegisterBufferObject(gl_PBO) );
-    checkCudaErrors(cudaGraphicsGLRegisterBuffer(
-        &cuda_pbo_resource, gl_PBO, cudaGraphicsMapFlagsWriteDiscard));
+    checkCudaErrors(cudaGraphicsGLRegisterBuffer(&cuda_pbo_resource, gl_PBO, cudaGraphicsMapFlagsWriteDiscard));
     GLenum gl_error = glGetError();
 
-    if (gl_error != GL_NO_ERROR) {
+    if (gl_error != GL_NO_ERROR)
+    {
 #if defined(WIN32) || defined(_WIN32) || defined(WIN64) || defined(_WIN64)
         char tmpStr[512];
         // NOTE: "%s(%i) : " allows Visual Studio to directly jump to the file at
@@ -387,7 +376,8 @@ void initOpenGLBuffers() {
     shader = compileASMShader(GL_FRAGMENT_PROGRAM_ARB, shader_code);
 }
 
-void cleanup() {
+void cleanup()
+{
     free(h_Src);
     checkCudaErrors(CUDA_FreeArray());
     checkCudaErrors(cudaGraphicsUnregisterResource(cuda_pbo_resource));
@@ -397,21 +387,19 @@ void cleanup() {
     sdkDeleteTimer(&timer);
 }
 
-void runAutoTest(int argc, char** argv, const char* filename,
-    int kernel_param) {
+void runAutoTest(int argc, char** argv, const char* filename, int kernel_param)
+{
     printf("[%s] - (automated testing w/ readback)\n", sSDKsample);
 
     int devID = findCudaDevice(argc, (const char**)argv);
 
-    // First load the image, so we know what the size of the image (imageW and
-    // imageH)
+    // First load the image, so we know what the size of the image (imageW and imageH)
     printf("Allocating host and CUDA memory and loading image file...\n");
     const char* image_path = sdkFindFilePath("portrait_noise.bmp", argv[0]);
 
-    if (image_path == NULL) {
-        printf(
-            "imageDenoisingGL was unable to find and load image file "
-            "<portrait_noise.bmp>.\nExiting...\n");
+    if (image_path == NULL)
+    {
+        printf("imageDenoisingGL was unable to find and load image file <portrait_noise.bmp>.\nExiting...\n");
         exit(EXIT_FAILURE);
     }
 
@@ -422,8 +410,7 @@ void runAutoTest(int argc, char** argv, const char* filename,
 
     TColor* d_dst = NULL;
     unsigned char* h_dst = NULL;
-    checkCudaErrors(
-        cudaMalloc((void**)&d_dst, imageW * imageH * sizeof(TColor)));
+    checkCudaErrors(cudaMalloc((void**)&d_dst, imageW * imageH * sizeof(TColor)));
     h_dst = (unsigned char*)malloc(imageH * imageW * 4);
 
     {
@@ -434,8 +421,7 @@ void runAutoTest(int argc, char** argv, const char* filename,
 
         checkCudaErrors(cudaDeviceSynchronize());
 
-        checkCudaErrors(cudaMemcpy(h_dst, d_dst, imageW * imageH * sizeof(TColor),
-            cudaMemcpyDeviceToHost));
+        checkCudaErrors(cudaMemcpy(h_dst, d_dst, imageW * imageH * sizeof(TColor), cudaMemcpyDeviceToHost));
         sdkSavePPM4ub(filename, h_dst, imageW, imageH);
     }
 
@@ -445,8 +431,7 @@ void runAutoTest(int argc, char** argv, const char* filename,
     checkCudaErrors(cudaFree(d_dst));
     free(h_dst);
 
-    printf("\n[%s] -> Kernel %d, Saved: %s\n", sSDKsample, kernel_param,
-        filename);
+    printf("\n[%s] -> Kernel %d, Saved: %s\n", sSDKsample, kernel_param, filename);
 
     exit(g_TotalErrors == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
 }
@@ -457,24 +442,26 @@ int main(int argc, char** argv)
 
     printf("%s Starting...\n\n", sSDKsample);
 
-    if (checkCmdLineFlag(argc, (const char**)argv, "file")) {
-        getCmdLineArgumentString(argc, (const char**)argv, "file",
-            (char**)&dump_file);
+    if (checkCmdLineFlag(argc, (const char**)argv, "file"))
+    {
+        getCmdLineArgumentString(argc, (const char**)argv, "file", (char**)&dump_file);
 
         int kernel = 1;
 
-        if (checkCmdLineFlag(argc, (const char**)argv, "kernel")) {
+        if (checkCmdLineFlag(argc, (const char**)argv, "kernel"))
+        {
             kernel = getCmdLineArgumentInt(argc, (const char**)argv, "kernel");
         }
 
         runAutoTest(argc, argv, dump_file, kernel);
     }
-    else {
+    else
+    {
         printf("[%s]\n", sSDKsample);
 
-        // use command-line specified CUDA device, otherwise use device with highest
-        // Gflops/s
-        if (checkCmdLineFlag(argc, (const char**)argv, "device")) {
+        // use command-line specified CUDA device, otherwise use device with highest Gflops/s
+        if (checkCmdLineFlag(argc, (const char**)argv, "device"))
+        {
             printf("[%s]\n", argv[0]);
             printf("   Does not explicitly support -device=n in OpenGL mode\n");
             printf("   To use -device=n, the sample must be running w/o OpenGL\n\n");
@@ -483,15 +470,13 @@ int main(int argc, char** argv)
             exit(EXIT_SUCCESS);
         }
 
-        // First load the image, so we know what the size of the image (imageW and
-        // imageH)
+        // First load the image, so we know what the size of the image (imageW and imageH)
         printf("Allocating host and CUDA memory and loading image file...\n");
         const char* image_path = sdkFindFilePath("portrait_noise.bmp", argv[0]);
 
-        if (image_path == NULL) {
-            printf(
-                "imageDenoisingGL was unable to find and load image file "
-                "<portrait_noise.bmp>.\nExiting...\n");
+        if (image_path == NULL)
+        {
+            printf("imageDenoisingGL was unable to find and load image file <portrait_noise.bmp>.\nExiting...\n");
             exit(EXIT_FAILURE);
         }
 

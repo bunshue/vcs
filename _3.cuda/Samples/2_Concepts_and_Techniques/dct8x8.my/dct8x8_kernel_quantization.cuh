@@ -91,7 +91,8 @@ __global__ void CUDAkernelQuantizationShort(short *SrcDst, int Stride) {
     curCoef += curQuant >> 1;
     curCoef /= curQuant;
     curCoef = -curCoef;
-  } else {
+    }
+    else {
     curCoef += curQuant >> 1;
     curCoef /= curQuant;
   }

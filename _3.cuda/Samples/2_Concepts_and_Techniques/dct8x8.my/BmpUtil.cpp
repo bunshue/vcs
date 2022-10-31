@@ -32,7 +32,8 @@ int clamp_0_255(int x) { return (x < 0) ? 0 : ((x > 255) ? 255 : x); }
 *
 * \return The closest to the input float integer value
 */
-float round_f(float num) {
+float round_f(float num)
+{
   float NumAbs = fabs(num);
   int NumAbsI = (int)(NumAbs + 0.5f);
   float sign = num > 0 ? 1.0f : -1.0f;
@@ -94,7 +95,8 @@ short *MallocPlaneShort(int width, int height, int *pStepBytes) {
 *
 * \return Pointer to the created plane
 */
-float *MallocPlaneFloat(int width, int height, int *pStepBytes) {
+float* MallocPlaneFloat(int width, int height, int* pStepBytes)
+{
   float *ptr;
   *pStepBytes = ((int)ceil((width * sizeof(float)) / 16.0f)) * 16;
   //#ifdef __ALLOW_ALIGNED_MEMORY_MANAGEMENT
@@ -118,10 +120,12 @@ float *MallocPlaneFloat(int width, int height, int *pStepBytes) {
 *
 * \return None
 */
-void CopyByte2Float(byte *ImgSrc, int StrideB, float *ImgDst, int StrideF,
-                    ROI Size) {
-  for (int i = 0; i < Size.height; i++) {
-    for (int j = 0; j < Size.width; j++) {
+void CopyByte2Float(byte* ImgSrc, int StrideB, float* ImgDst, int StrideF, ROI Size)
+{
+    for (int i = 0; i < Size.height; i++)
+    {
+        for (int j = 0; j < Size.width; j++)
+        {
       ImgDst[i * StrideF + j] = (float)ImgSrc[i * StrideB + j];
     }
   }
@@ -139,12 +143,13 @@ void CopyByte2Float(byte *ImgSrc, int StrideB, float *ImgDst, int StrideF,
 *
 * \return None
 */
-void CopyFloat2Byte(float *ImgSrc, int StrideF, byte *ImgDst, int StrideB,
-                    ROI Size) {
-  for (int i = 0; i < Size.height; i++) {
-    for (int j = 0; j < Size.width; j++) {
-      ImgDst[i * StrideB + j] =
-          (byte)clamp_0_255((int)(round_f(ImgSrc[i * StrideF + j])));
+void CopyFloat2Byte(float* ImgSrc, int StrideF, byte* ImgDst, int StrideB, ROI Size)
+{
+    for (int i = 0; i < Size.height; i++)
+    {
+        for (int j = 0; j < Size.width; j++)
+        {
+            ImgDst[i * StrideB + j] = (byte)clamp_0_255((int)(round_f(ImgSrc[i * StrideF + j])));
     }
   }
 }
@@ -157,14 +162,16 @@ void CopyFloat2Byte(float *ImgSrc, int StrideF, byte *ImgDst, int StrideB,
 *
 * \return None
 */
-void FreePlane(void *ptr) {
+void FreePlane(void* ptr)
+{
   //#ifdef __ALLOW_ALIGNED_MEMORY_MANAGEMENT
   //  if (ptr)
   //  {
   //      _aligned_free(ptr);
   //  }
   //#else
-  if (ptr) {
+    if (ptr)
+    {
     free(ptr);
   }
 
@@ -182,9 +189,12 @@ void FreePlane(void *ptr) {
 *
 * \return None
 */
-void AddFloatPlane(float Value, float *ImgSrcDst, int StrideF, ROI Size) {
-  for (int i = 0; i < Size.height; i++) {
-    for (int j = 0; j < Size.width; j++) {
+void AddFloatPlane(float Value, float* ImgSrcDst, int StrideF, ROI Size)
+{
+    for (int i = 0; i < Size.height; i++)
+    {
+        for (int j = 0; j < Size.width; j++)
+        {
       ImgSrcDst[i * StrideF + j] += Value;
     }
   }
@@ -201,9 +211,12 @@ void AddFloatPlane(float Value, float *ImgSrcDst, int StrideF, ROI Size) {
 *
 * \return None
 */
-void MulFloatPlane(float Value, float *ImgSrcDst, int StrideF, ROI Size) {
-  for (int i = 0; i < Size.height; i++) {
-    for (int j = 0; j < Size.width; j++) {
+void MulFloatPlane(float Value, float* ImgSrcDst, int StrideF, ROI Size)
+{
+    for (int i = 0; i < Size.height; i++)
+    {
+        for (int j = 0; j < Size.width; j++)
+        {
       ImgSrcDst[i * StrideF + j] *= Value;
     }
   }

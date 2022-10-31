@@ -108,18 +108,15 @@ void runImageFilters(TColor* d_dst)
     case 11:
         printf("Copy ims 01\n");
 
-
         g_Kernel = 0;
         break;
 
     case 13:
         printf("Copy ims 03\n");
 
-
         g_Kernel = 0;
         break;
     }
-
     getLastCudaError("Filtering kernel execution failed.\n");
 }
 
@@ -317,6 +314,7 @@ void initOpenGLBuffers()
     }
     */
 
+    //在這裡把影像設定到pBox....
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, imageW, imageH, 0, GL_RGBA, GL_UNSIGNED_BYTE, h_Src1);
 
     printf("Texture created.\n");
@@ -377,9 +375,7 @@ void runAutoTest(int argc, char** argv, const char* filename, int kernel_param)
 
     if (image_path == NULL)
     {
-        printf(
-            "imageDenoisingGL was unable to find and load image file "
-            "<portrait_noise.bmp>.\nExiting...\n");
+        printf("imageDenoisingGL was unable to find and load image file <portrait_noise.bmp>.\nExiting...\n");
         exit(EXIT_FAILURE);
     }
 
@@ -399,8 +395,7 @@ void runAutoTest(int argc, char** argv, const char* filename, int kernel_param)
 
         checkCudaErrors(cudaDeviceSynchronize());
 
-        checkCudaErrors(cudaMemcpy(h_dst, d_dst, imageW * imageH * sizeof(TColor),
-            cudaMemcpyDeviceToHost));
+        checkCudaErrors(cudaMemcpy(h_dst, d_dst, imageW * imageH * sizeof(TColor), cudaMemcpyDeviceToHost));
         sdkSavePPM4ub(filename, h_dst, imageW, imageH);
     }
 

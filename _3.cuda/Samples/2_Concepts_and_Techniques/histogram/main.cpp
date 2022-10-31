@@ -1,7 +1,4 @@
-/*
-* This sample implements 64-bin histogram calculation
-* of arbitrary-sized 8-bit data array
-*/
+//This sample implements 64-bin histogram calculation of arbitrary-sized 8-bit data array
 
 // CUDA Runtime
 #include <cuda_runtime.h>
@@ -30,17 +27,14 @@ int main(int argc, char** argv)
     deviceProp.major = 0;
     deviceProp.minor = 0;
 
-    // set logfile name and start logs
     printf("Starting...\n");
 
-    // Use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
+    // Use command-line specified CUDA device, otherwise use device with highest Gflops/s
     int dev = findCudaDevice(argc, (const char**)argv);
 
     checkCudaErrors(cudaGetDeviceProperties(&deviceProp, dev));
 
-    printf("CUDA device [%s] has %d Multi-Processors, Compute %d.%d\n",
-        deviceProp.name, deviceProp.multiProcessorCount, deviceProp.major, deviceProp.minor);
+    printf("CUDA device [%s] has %d Multi-Processors, Compute %d.%d\n", deviceProp.name, deviceProp.multiProcessorCount, deviceProp.major, deviceProp.minor);
 
     sdkCreateTimer(&hTimer);
 
@@ -76,8 +70,7 @@ int main(int argc, char** argv)
         printf("Starting up 64-bin histogram...\n\n");
         initHistogram64();
 
-        printf("Running 64-bin GPU histogram for %u bytes (%u runs)...\n\n",
-            byteCount, numRuns);
+        printf("Running 64-bin GPU histogram for %u bytes (%u runs)...\n\n", byteCount, numRuns);
 
         for (int iter = -1; iter < numRuns; iter++)
         {
@@ -96,8 +89,7 @@ int main(int argc, char** argv)
         sdkStopTimer(&hTimer);
         double dAvgSecs = 1.0e-3 * (double)sdkGetTimerValue(&hTimer) / (double)numRuns;
         printf("histogram64() time (average) : %.5f sec, %.4f MB/sec\n\n", dAvgSecs, ((double)byteCount * 1.0e-6) / dAvgSecs);
-        printf("histogram64, Throughput = %.4f MB/s, Time = %.5f s, Size = %u Bytes, "
-            "NumDevsUsed = %u, Workgroup = %u\n",
+        printf("histogram64, Throughput = %.4f MB/s, Time = %.5f s, Size = %u Bytes, NumDevsUsed = %u, Workgroup = %u\n",
             (1.0e-6 * (double)byteCount / dAvgSecs), dAvgSecs, byteCount, 1, HISTOGRAM64_THREADBLOCK_SIZE);
 
         printf("\nValidating GPU results...\n");
@@ -145,8 +137,7 @@ int main(int argc, char** argv)
         sdkStopTimer(&hTimer);
         double dAvgSecs = 1.0e-3 * (double)sdkGetTimerValue(&hTimer) / (double)numRuns;
         printf("histogram256() time (average) : %.5f sec, %.4f MB/sec\n\n", dAvgSecs, ((double)byteCount * 1.0e-6) / dAvgSecs);
-        printf("histogram256, Throughput = %.4f MB/s, Time = %.5f s, Size = %u Bytes, "
-            "NumDevsUsed = %u, Workgroup = %u\n",
+        printf("histogram256, Throughput = %.4f MB/s, Time = %.5f s, Size = %u Bytes, NumDevsUsed = %u, Workgroup = %u\n",
             (1.0e-6 * (double)byteCount / dAvgSecs), dAvgSecs, byteCount, 1, HISTOGRAM256_THREADBLOCK_SIZE);
 
         printf("\nValidating GPU results...\n");
@@ -180,8 +171,7 @@ int main(int argc, char** argv)
     free(h_HistogramCPU);
     free(h_Data);
 
-    printf("\nNOTE: The CUDA Samples are not meant for performance measurements. "
-        "Results may vary when GPU Boost is enabled.\n\n");
+    printf("\nNOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.\n\n");
 
     printf("Test Summary\n");
 

@@ -15,14 +15,14 @@ int iDivUp(int a, int b) { return ((a % b) != 0) ? (a / b + 1) : (a / b); }
 
 __device__ float lerpf(float a, float b, float c) { return a + (b - a) * c; }
 
-__device__ float vecLen(float4 a, float4 b) {
-    return ((b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y) +
-        (b.z - a.z) * (b.z - a.z));
+__device__ float vecLen(float4 a, float4 b)
+{
+    return ((b.x - a.x) * (b.x - a.x) + (b.y - a.y) * (b.y - a.y) + (b.z - a.z) * (b.z - a.z));
 }
 
-__device__ TColor make_color(float r, float g, float b, float a) {
-    return ((int)(a * 255.0f) << 24) | ((int)(b * 255.0f) << 16) |
-        ((int)(g * 255.0f) << 8) | ((int)(r * 255.0f) << 0);
+__device__ TColor make_color(float r, float g, float b, float a)
+{
+    return ((int)(a * 255.0f) << 24) | ((int)(b * 255.0f) << 16) | ((int)(g * 255.0f) << 8) | ((int)(r * 255.0f) << 0);
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -45,9 +45,7 @@ extern "C" cudaError_t CUDA_MallocArray(uchar4 * *h_Src, int imageW, int imageH)
     cudaError_t error;
 
     error = cudaMallocArray(&a_Src, &uchar4tex, imageW, imageH);
-    error = cudaMemcpy2DToArray(a_Src, 0, 0, *h_Src, sizeof(uchar4) * imageW,
-        sizeof(uchar4) * imageW, imageH,
-        cudaMemcpyHostToDevice);
+    error = cudaMemcpy2DToArray(a_Src, 0, 0, *h_Src, sizeof(uchar4) * imageW, sizeof(uchar4) * imageW, imageH, cudaMemcpyHostToDevice);
 
     cudaResourceDesc texRes;
     memset(&texRes, 0, sizeof(cudaResourceDesc));
