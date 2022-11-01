@@ -4,7 +4,8 @@
 #include <stdio.h>
 #include <iostream>
 
-void drawCoordinates(void);
+void draw_coordinates(float len);
+
 void drawTetrahedron(void);
 
 int mx; //position of mouse
@@ -54,7 +55,7 @@ void display(void)
 	glRotatef(y_angle, 0.0f, 1.0f, 0.0f);  //對應變換陣T3
 	glDisable(GL_LIGHTING);
 	//glLightfv(GL_LIGHT0, GL_POSITION, lit_position);
-	drawCoordinates(); //顯示座標軸，設X軸的兩端點為v1、v2，考慮這兩點經受的變換
+	draw_coordinates(1.0);	//顯示座標軸，設X軸的兩端點為v1、v2，考慮這兩點經受的變換
 	glutWireTeapot(0.5); //顯示茶壺
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
@@ -79,23 +80,26 @@ void display(void)
 	glutSwapBuffers();
 }
 
-void drawCoordinates(void)
+void draw_coordinates(float len)
 {
-	//glLineWidth(10.0f);	//設定線寬
-
-	glBegin(GL_LINES);
+	glLineWidth(3.0f);	//設定線寬
 
 	glColor3f(1.0f, 0.0f, 0.0f); //畫紅色的x軸
+	glBegin(GL_LINES);
 	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
-	glVertex3f(1.0f, 0.0f, 0.0f);	//x軸 1,0,0
+	glVertex3f(len, 0.0f, 0.0f);	//x軸 len,0,0
+	glEnd();
 
 	glColor3f(0.0, 1.0, 0.0); //畫綠色的y軸
+	glBegin(GL_LINES);
 	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
-	glVertex3f(0.0f, 1.0f, 0.0f);	//y軸 0,1,0
+	glVertex3f(0.0f, len, 0.0f);	//y軸 0,len,0
+	glEnd();
 
 	glColor3f(0.0, 0.0, 1.0); //畫藍色的z軸
+	glBegin(GL_LINES);
 	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
-	glVertex3f(0.0f, 0.0f, 1.0f);	//z軸 0,0,1
+	glVertex3f(0.0f, 0.0f, len);	//z軸 0,0,len
 	glEnd();
 }
 

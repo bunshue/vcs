@@ -59,10 +59,12 @@ void DrawImage(void)
     glDrawPixels(image->sizeX, image->sizeY, GL_RGB, GL_UNSIGNED_BYTE,
         image->data);
 
-    if (doubleBuffer) {
+    if (doubleBuffer)
+    {
         glutSwapBuffers();
     }
-    else {
+    else
+    {
         glFlush();
     }
 
@@ -76,17 +78,20 @@ void DrawPoint(void)
     int i;
 
     glColor3f(1.0, 0.0, 1.0);
-    glPointSize(3.0);
+    glPointSize(3.0f); 	//設定點的大小, N X N
     glBegin(GL_POINTS);
-    for (i = 0; i < cCount; i++) {
+    for (i = 0; i < cCount; i++)
+    {
         glVertex2f(cList[i].x, cList[i].y);
     }
     glEnd();
 
-    if (doubleBuffer) {
+    if (doubleBuffer)
+    {
         glutSwapBuffers();
     }
-    else {
+    else
+    {
         glFlush();
     }
 }

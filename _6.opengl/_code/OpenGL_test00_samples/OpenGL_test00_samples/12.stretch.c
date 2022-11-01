@@ -64,7 +64,7 @@ void DrawPoint(void)
     int i;
 
     glColor3f(1.0, 0.0, 1.0);
-    glPointSize(3.0);
+    glPointSize(3.0f); 	//設定點的大小, N X N
     glBegin(GL_POINTS);
     for (i = 0; i < cCount; i++)
     {

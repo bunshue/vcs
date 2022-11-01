@@ -1,4 +1,4 @@
-//演示了OpenGL背面剔除，深度测试，和多边形模式
+//演示了OpenGL背面剔除，深度測試，和多邊形模式
 #include "GLTools.h"
 #include "GLMatrixStack.h"
 #include "GLFrame.h"
@@ -13,10 +13,10 @@
 #include <GL/glut.h>
 #endif
 
-////设置角色帧，作为相机
+////設置角色幀，作為相機
 GLFrame             viewFrame;
 GLFrame             cameraFrame;
-//使用GLFrustum类来设置透视投影
+//使用GLFrustum類來設置透視投影
 GLFrustum           viewFrustum;
 GLTriangleBatch     torusBatch;
 GLMatrixStack       modelViewMatix;
@@ -24,22 +24,22 @@ GLMatrixStack       projectionMatrix;
 GLGeometryTransform transformPipeline;
 GLShaderManager     shaderManager;
 
-//标记：背面剔除、深度测试
+//標記：背面剔除、深度測試
 int iCull = 0;
 int iDepth = 0;
 
-//渲染场景
+//渲染場景
 void RenderScene()
 {
-    //1.清除窗口和深度缓冲区
-    //可以给学员演示一下不清空颜色/深度缓冲区时.渲染会造成什么问题. 残留数据
+    //1.清除窗口和深度緩沖區
+    //可以給學員演示一下不清空顏色/深度緩沖區時.渲染會造成什么問題. 殘留數據
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     
-    //开启/关闭正背面剔除功能
+    //開啟/關閉正背面剔除功能
     if (iCull) {
         glEnable(GL_CULL_FACE);
-        //以下两行是默认的，可以不写
+        //以下兩行是默認的，可以不寫
         glFrontFace(GL_CCW);
         glCullFace(GL_BACK);
     }else
@@ -53,25 +53,25 @@ void RenderScene()
         glDisable(GL_DEPTH_TEST);
     }
     
-    //2.把摄像机矩阵压入模型矩阵中
+    //2.把攝像機矩陣壓入模型矩陣中
 //    modelViewMatix.PushMatrix(viewFrame);
     
-    //3.设置绘图颜色
+    //3.設置繪圖顏色
     GLfloat vRed[] = { 1.0f, 1.0f, 0.0f, 1.0f };
     
     //4.
-    //使用平面着色器
-    //参数1：平面着色器
-    //参数2：模型视图投影矩阵
-    //参数3：颜色
+    //使用平面著色器
+    //參數1：平面著色器
+    //參數2：模型視圖投影矩陣
+    //參數3：顏色
    // shaderManager.UseStockShader(GLT_SHADER_FLAT, transformPipeline.GetModelViewProjectionMatrix(), vRed);
     
-    //使用默认光源着色器
-    //通过光源、阴影效果跟提现立体效果
-    //参数1：GLT_SHADER_DEFAULT_LIGHT 默认光源着色器
-    //参数2：模型视图矩阵
-    //参数3：投影矩阵
-    //参数4：基本颜色值
+    //使用默認光源著色器
+    //通過光源、陰影效果跟提現立體效果
+    //參數1：GLT_SHADER_DEFAULT_LIGHT 默認光源著色器
+    //參數2：模型視圖矩陣
+    //參數3：投影矩陣
+    //參數4：基本顏色值
 //    shaderManager.UseStockShader(GLT_SHADER_DEFAULT_LIGHT, transformPipeline.GetModelViewMatrix(), transformPipeline.GetProjectionMatrix(), vRed);
     
     modelViewMatix.PushMatrix();
@@ -87,46 +87,46 @@ void RenderScene()
     
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     
-    //5.绘制
+    //5.繪制
     torusBatch.Draw();
 
-    //6.出栈 绘制完成恢复
+    //6.出棧 繪制完成恢復
     modelViewMatix.PopMatrix();
     
-    //7.交换缓存区
+    //7.交換緩存區
     glutSwapBuffers();
 }
 
 void SetupRC()
 {
-    //1.设置背景颜色
+    //1.設置背景顏色
     glClearColor(0.3f, 0.3f, 0.3f, 1.0f );
     
-    //2.初始化着色器管理器
+    //2.初始化著色器管理器
     shaderManager.InitializeStockShaders();
     
-    //3.将相机向后移动7个单元：肉眼到物体之间的距离
+    //3.將相機向后移動7個單元：肉眼到物體之間的距離
 //    viewFrame.MoveForward(7.0);
     cameraFrame.MoveForward(-10.0);
     
-    //4.创建一个甜甜圈
-    //参数1：GLTriangleBatch 容器帮助类
-    //参数2：外边缘半径
-    //参数3：内边缘半径
-    //参数4、5：主半径和从半径的细分单元数量
+    //4.創建一個甜甜圈
+    //參數1：GLTriangleBatch 容器幫助類
+    //參數2：外邊緣半徑
+    //參數3：內邊緣半徑
+    //參數4、5：主半徑和從半徑的細分單元數量
     gltMakeTorus(torusBatch, 1.0f, 0.3f, 52, 26);
     
-    //5.点的大小(方便点填充时,肉眼观察)
-    glPointSize(4.0f);
+    //5.點的大小(方便點填充時,肉眼觀察)
+    glPointSize(4.0f); 	//設定點的大小, N X N
 }
 
-//键位设置，通过不同的键位对其进行设置
-//控制Camera的移动，从而改变视口
+//鍵位設置，通過不同的鍵位對其進行設置
+//控制Camera的移動，從而改變視口
 void SpecialKeys(int key, int x, int y)
 {
-    //1.判断方向
+    //1.判斷方向
     if(key == GLUT_KEY_UP)
-        //2.根据方向调整观察者位置
+        //2.根據方向調整觀察者位置
         viewFrame.RotateWorld(m3dDegToRad(-5.0), 1.0f, 0.0f, 0.0f);
     
     if(key == GLUT_KEY_DOWN)
@@ -142,24 +142,24 @@ void SpecialKeys(int key, int x, int y)
     glutPostRedisplay();
 }
 
-//窗口改变
+//窗口改變
 void ChangeSize(int w, int h)
 {
-    //1.防止h变为0
+    //1.防止h變為0
     if(h == 0)
         h = 1;
     
-    //2.设置视口窗口尺寸
+    //2.設置視口窗口尺寸
     glViewport(0, 0, w, h);
     
-    //3.setPerspective函数的参数是一个从顶点方向看去的视场角度（用角度值表示）
-    // 设置透视模式，初始化其透视矩阵
+    //3.setPerspective函數的參數是一個從頂點方向看去的視場角度（用角度值表示）
+    // 設置透視模式，初始化其透視矩陣
     viewFrustum.SetPerspective(35.0f, float(w)/float(h), 1.0f, 100.0f);
     
-    //4.把透视矩阵加载到透视矩阵对阵中
+    //4.把透視矩陣加載到透視矩陣對陣中
     projectionMatrix.LoadMatrix(viewFrustum.GetProjectionMatrix());
     
-    //5.初始化渲染管线
+    //5.初始化渲染管線
     transformPipeline.SetMatrixStacks(modelViewMatix, projectionMatrix);
 }
 
@@ -201,13 +201,13 @@ int main(int argc, char* argv[])
     glutSpecialFunc(SpecialKeys);
     glutDisplayFunc(RenderScene);
     
-    //添加右击菜单栏
+    //添加右擊菜單欄
     glutCreateMenu(ProcessMenu);
-    glutAddMenuEntry("深度测试",1);
+    glutAddMenuEntry("深度測試",1);
     glutAddMenuEntry("正背面剔除",2);
-    glutAddMenuEntry("颜色填充", 3);
-    glutAddMenuEntry("线填充", 4);
-    glutAddMenuEntry("点填充", 5);
+    glutAddMenuEntry("顏色填充", 3);
+    glutAddMenuEntry("線填充", 4);
+    glutAddMenuEntry("點填充", 5);
     glutAttachMenu(GLUT_RIGHT_BUTTON);
     
     GLenum err = glewInit();

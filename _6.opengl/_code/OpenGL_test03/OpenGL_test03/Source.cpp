@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <iostream>
 
-void drawCoordinates(void);
+void draw_coordinates(float len);
 
 int mx; //position of mouse;
 int my; //position of mouse;
@@ -41,29 +41,32 @@ void display(void)
 
 	glRotatef(x_angle, 1.0f, 0.0f, 0.0f);
 	glRotatef(y_angle, 0.0f, 1.0f, 0.0f);
-	drawCoordinates();
+	draw_coordinates(1.0);
 
 	glFlush();
 	glutSwapBuffers();
 }
 
-void drawCoordinates(void)
+void draw_coordinates(float len)
 {
-	glLineWidth(10.0f);	//設定線寬
-
-	glBegin(GL_LINES);
+	glLineWidth(3.0f);	//設定線寬
 
 	glColor3f(1.0f, 0.0f, 0.0f); //畫紅色的x軸
+	glBegin(GL_LINES);
 	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
-	glVertex3f(1.0f, 0.0f, 0.0f);	//x軸 1,0,0
+	glVertex3f(len, 0.0f, 0.0f);	//x軸 len,0,0
+	glEnd();
 
 	glColor3f(0.0, 1.0, 0.0); //畫綠色的y軸
+	glBegin(GL_LINES);
 	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
-	glVertex3f(0.0f, 1.0f, 0.0f);	//y軸 0,1,0
+	glVertex3f(0.0f, len, 0.0f);	//y軸 0,len,0
+	glEnd();
 
 	glColor3f(0.0, 0.0, 1.0); //畫藍色的z軸
+	glBegin(GL_LINES);
 	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
-	glVertex3f(0.0f, 0.0f, 1.0f);	//z軸 0,0,1
+	glVertex3f(0.0f, 0.0f, len);	//z軸 0,0,len
 	glEnd();
 }
 

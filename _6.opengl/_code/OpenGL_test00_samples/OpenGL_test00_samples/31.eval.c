@@ -165,7 +165,7 @@ void DrawPoints1(void)
     GLint i;
 
     glColor3f(0.0, 1.0, 0.0);
-    glPointSize(2);
+    glPointSize(2.0f); 	//è¨­å®šé»çš„å¤§å°, N X N
     glBegin(GL_POINTS);
     for (i = 0; i < VORDER; i++)
     {
@@ -179,7 +179,7 @@ void DrawPoints2(void)
     GLint i, j;
 
     glColor3f(1.0, 0.0, 1.0);
-    glPointSize(2);
+    glPointSize(2.0f); 	//è¨­å®šé»çš„å¤§å°, N X N
     glBegin(GL_POINTS);
     for (i = 0; i < VMAJOR_ORDER; i++)
     {
@@ -240,7 +240,7 @@ void RenderEval(void)
 
     if (textureType)
     {
-        glEnable(GL_TEXTURE_2D);	//±Ò¥Î2D¯¾²z¬M®g
+        glEnable(GL_TEXTURE_2D);	//å•Ÿç”¨2Dç´‹ç†æ˜ å°„
         glEnable(GL_MAP2_TEXTURE_COORD_2);
     }
     else
@@ -290,7 +290,7 @@ void RenderEval(void)
             glMapGrid1d(40, 0.0, 1.0);
             if (mapPoint)
             {
-                glPointSize(2);
+                glPointSize(2.0f); 	//è¨­å®šé»çš„å¤§å°, N X N
                 glEvalMesh1(GL_POINT, 0, 40);
             }
             else
@@ -306,7 +306,7 @@ void RenderEval(void)
             glMapGrid2d(20, 0.0, 1.0, 20, 0.0, 1.0);
             if (mapPoint)
             {
-                glPointSize(2);
+                glPointSize(2.0f); 	//è¨­å®šé»çš„å¤§å°, N X N
                 glEvalMesh2(GL_POINT, 0, 20, 0, 20);
             }
             else if (polygonFilled)
@@ -447,18 +447,18 @@ int main(int argc, char** argv)
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(1100, 200);
 
-    glutCreateWindow("Evaluator Test");	//¶}±Òµøµ¡ ¨ÃÅã¥Ü¥Xµøµ¡ Title
+    glutCreateWindow("Evaluator Test");	//é–‹å•Ÿè¦–çª— ä¸¦é¡¯ç¤ºå‡ºè¦–çª— Title
 
     Init();
 
-    glutDisplayFunc(display);       //³]©wcallback function
-    glutReshapeFunc(reshape);       //³]©wcallback function
-    glutKeyboardFunc(keyboard);     //³]©wcallback function
-    glutSpecialFunc(special);       //³]©wcallback function
+    glutDisplayFunc(display);       //è¨­å®šcallback function
+    glutReshapeFunc(reshape);       //è¨­å®šcallback function
+    glutKeyboardFunc(keyboard);     //è¨­å®šcallback function
+    glutSpecialFunc(special);       //è¨­å®šcallback function
 
-    printf("«ö ¤W ¤U ¥ª ¥k ±±¨î\n");
+    printf("æŒ‰ ä¸Š ä¸‹ å·¦ å³ æ§åˆ¶\n");
 
-    glutMainLoop();	//¶}©l¥D´`ÀôÃ¸»s
+    glutMainLoop();	//é–‹å§‹ä¸»å¾ªç’°ç¹ªè£½
 
     return 0;
 }

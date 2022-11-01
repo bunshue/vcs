@@ -21,7 +21,7 @@ float x_angle = 0.0f;	//angle of eye
 float y_angle = 0.0f;	//angle of eye
 float dist = 10.0f; //distance from the eye
 
-void drawCoordinates(void);
+void draw_coordinates(float len);
 void drawTetrahedron(void);
 
 void init(void)
@@ -72,7 +72,7 @@ void display(void)
 	eyey = y;
 	eyez = -x * sin(-y_angle * M_PI / 180.0) + z * cos(-y_angle * M_PI / 180.0);
 	gluLookAt(eyex, eyey, eyez, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
-	drawCoordinates();
+	draw_coordinates(1.0);
 
 	glLineWidth(1.0f);	//設定線寬
 
@@ -91,22 +91,26 @@ void display(void)
 	glutSwapBuffers();
 }
 
-void drawCoordinates(void)
+void draw_coordinates(float len)
 {
-	glLineWidth(4.0f);	//設定線寬
+	glLineWidth(3.0f);	//設定線寬
 
-	glBegin(GL_LINES);
 	glColor3f(1.0f, 0.0f, 0.0f); //畫紅色的x軸
+	glBegin(GL_LINES);
 	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
-	glVertex3f(1.0f, 0.0f, 0.0f);	//x軸 1,0,0
+	glVertex3f(len, 0.0f, 0.0f);	//x軸 len,0,0
+	glEnd();
 
 	glColor3f(0.0, 1.0, 0.0); //畫綠色的y軸
+	glBegin(GL_LINES);
 	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
-	glVertex3f(0.0f, 1.0f, 0.0f);	//y軸 0,1,0
+	glVertex3f(0.0f, len, 0.0f);	//y軸 0,len,0
+	glEnd();
 
 	glColor3f(0.0, 0.0, 1.0); //畫藍色的z軸
+	glBegin(GL_LINES);
 	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
-	glVertex3f(0.0f, 0.0f, 1.0f);	//z軸 0,0,1
+	glVertex3f(0.0f, 0.0f, len);	//z軸 0,0,len
 	glEnd();
 }
 

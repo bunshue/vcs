@@ -136,7 +136,7 @@ static void display(void)
         glDisable(GL_POINT_SMOOTH);
     }
 
-    glPointSize(size);
+    glPointSize(size); 	//設定點的大小, N X N
     if (mode)
     {
         (rgb) ? glColor3f(1.0, 0.0, 0.0) : glIndexi(CI_ANTI_ALIAS_RED);
@@ -151,7 +151,7 @@ static void display(void)
 
     glDisable(GL_POINT_SMOOTH);
 
-    glPointSize(1);
+    glPointSize(1.0f); 	//設定點的大小, N X N
     (rgb) ? glColor3f(0.0, 1.0, 0.0) : glIndexi(2);
     glBegin(GL_POINTS);
     glVertex3fv(point);

@@ -164,9 +164,10 @@ static void DrawPoints1(void)
     GLint i;
 
     glColor3f(0.0, 1.0, 0.0);
-    glPointSize(2);
+    glPointSize(2.0f); 	//設定點的大小, N X N
     glBegin(GL_POINTS);
-    for (i = 0; i < VORDER; i++) {
+    for (i = 0; i < VORDER; i++)
+    {
         glVertex4dv(&point1[i * 4]);
     }
     glEnd();
@@ -177,7 +178,7 @@ static void DrawPoints2(void)
     GLint i, j;
 
     glColor3f(1.0, 0.0, 1.0);
-    glPointSize(2);
+    glPointSize(2.0f); 	//設定點的大小, N X N
     glBegin(GL_POINTS);
     for (i = 0; i < VMAJOR_ORDER; i++) {
         for (j = 0; j < VMINOR_ORDER; j++) {
@@ -273,11 +274,13 @@ static void RenderEval(void)
             glEnable(GL_MAP1_VERTEX_4);
             glColor3f(0.0, 0.0, 1.0);
             glMapGrid1d(40, 0.0, 1.0);
-            if (mapPoint) {
-                glPointSize(2);
+            if (mapPoint)
+            {
+                glPointSize(2.0f); 	//設定點的大小, N X N
                 glEvalMesh1(GL_POINT, 0, 40);
             }
-            else {
+            else
+            {
                 glEvalMesh1(GL_LINE, 0, 40);
             }
             break;
@@ -287,14 +290,17 @@ static void RenderEval(void)
             glEnable(GL_MAP2_VERTEX_4);
             glColor3f(0.0, 0.0, 1.0);
             glMapGrid2d(20, 0.0, 1.0, 20, 0.0, 1.0);
-            if (mapPoint) {
-                glPointSize(2);
+            if (mapPoint)
+            {
+                glPointSize(2.0f); 	//設定點的大小, N X N
                 glEvalMesh2(GL_POINT, 0, 20, 0, 20);
             }
-            else if (polygonFilled) {
+            else if (polygonFilled)
+            {
                 glEvalMesh2(GL_FILL, 0, 20, 0, 20);
             }
-            else {
+            else
+            {
                 glEvalMesh2(GL_LINE, 0, 20, 0, 20);
             }
             break;

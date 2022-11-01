@@ -163,8 +163,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance, _In_opt_ HINSTANCE hPrevInstance
         // 下面設置的含義是白色, 繪製點的時候, 每次都使用白色繪製
         glColor4ub(255, 255, 255, 255);
 
-        // 設置當前點的大小
-        glPointSize(5.0f);
+        glPointSize(5.0f); 	//設定點的大小, N X N
 
         glLineWidth(5.0f);	//設定線寬
 

@@ -6,16 +6,6 @@
 
 #define PI_F             3.141592654F
 
-// 初始化參數
-void init()
-{
-    glClearColor(0.0, 0.0, 0.0, 1.0);   //黑色背景
-    glShadeModel(GL_SMOOTH);            //指定兩點間其他顏色的過渡模式 GL_SMOOTH/GL_FLAT
-                                        //GL_SMOOTH會出現過渡效果，GL_FLAT 則只是以指定的某一點的單一色繪制其他所有點
-                                        //GL_SMOOTH:會采納每個頂點的顏色，非頂點的部分根據周邊頂點的顏色采取平滑過渡的模式，對于線段圖元，線段上各點的顏色會根據兩頂點的顏色通過插值得到。
-                                        //GL_FLAT : 固定著色，取圖元中某個頂點的顏色來填充整個圖元。
-}
-
 //寫字的函數
 inline void glPrint(int x, int y, const char* s, void* font)
 {
@@ -45,6 +35,23 @@ void drawString(const char* str, void* font, float* color, float x_st, float y_s
     glPrint(x_st, y_st, str, font);
 }
 
+void draw_window_boundary(float* color, float dd)
+{
+    //用 GL_LINE_LOOP 畫一個空心矩形
+    //glColor3f(0.0, 1.0, 0.0);
+    glColor3fv((GLfloat*)color);
+    float point1[3] = { -dd, -dd, 0 };	//左下
+    float point2[3] = { dd, -dd, 0 };		//右下
+    float point3[3] = { dd,  dd, 0 };		//右上
+    float point4[3] = { -dd,  dd, 0 };	//左上
+    glBegin(GL_LINE_LOOP);
+    glVertex3fv(point1);	//左下
+    glVertex3fv(point2);	//右下
+    glVertex3fv(point3);	//右上
+    glVertex3fv(point4);	//左上
+    glEnd();
+}
+
 // 繪圖回調函數
 void display(void)
 {
@@ -53,7 +60,15 @@ void display(void)
     float x_st = 0.0f;
     float y_st = 12.0f;
     float dd = 0;
+
     //畫點
+    glPointSize(50.0f);	//設定點的大小, N X N
+    glBegin(GL_POINTS);
+    glColor3f(1.0, 0.0, 0.0);	//紅
+    glVertex2f(0, 0);
+    glEnd();
+
+    glPointSize(2.0f); 	//設定點的大小, N X N
     glBegin(GL_POINTS);
     for (x_st = -14.0; x_st < -5.0f; x_st += 0.5f)
     {
@@ -69,22 +84,14 @@ void display(void)
     glEnd();
 
     //畫直線連線
-    //畫繞視窗周圍之直線連線 紅色
     float offset = 13.0;
+
+    //畫視窗邊界
+    float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
+    draw_window_boundary(color_yellow, offset);
+
+    //畫中心十字
     glBegin(GL_LINES);
-    glColor3f(1.0, 0.0, 0.0);       //紅色
-    glVertex2f(-offset, -offset);   //左下
-    glVertex2f(-offset, offset);    //左上
-
-    glVertex2f(-offset, offset);    //左上
-    glVertex2f(offset, offset);     //右上
-
-    glVertex2f(offset, offset);     //右上
-    glVertex2f(offset, -offset);    //右下
-
-    glVertex2f(offset, -offset);    //右下
-    glVertex2f(-offset, -offset);   //左下
-
     glVertex2f(0, offset);      //中上
     glVertex2f(0, -offset);     //中下
 
@@ -254,12 +261,22 @@ void reshape(int w, int h)
 {
     //printf("reshape is called\n");
     glViewport(0, 0, w, h);
+
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();   //設置單位矩陣
     gluPerspective(60.0, (GLfloat)w / (GLfloat)h, 0.1, 100000.0);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();   //設置單位矩陣
+
     gluLookAt(0, 0, 25, 0, 0, -1, 0, 1, 0);
+    //eyex, eyey, eyez, centerx, centery, centerz, upx, upy, upz
+    //第一組eyex, eyey, eyez 相機在世界坐標的位置
+    //第二組centerx, centery, centerz 相機鏡頭對準的物體在世界坐標的位置
+    //第三組upx, upy, upz 相機向上的方向在世界坐標中的方向
+    //你把相機想象成為你自己的腦袋：
+    //第一組數據就是腦袋的位置
+    //第二組數據就是眼睛看的物體的位置
+    //第三組就是頭頂朝向的方向（因為你可以歪著頭看同一個物體）。
 }
 
 void keyboard(unsigned char key, int x, int y)
@@ -281,12 +298,10 @@ int main(int argc, char** argv)
 
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
-    glutInitWindowSize(600, 600);		//設定視窗大小, 直接拉大內容
-    glutInitWindowPosition(1100, 200);	//視窗起始位置
+    glutInitWindowSize(1200, 600);		//設定視窗大小, 直接拉大內容
+    glutInitWindowPosition(600, 200);	//視窗起始位置
 
     glutCreateWindow("幾何圖形繪製");	//開啟視窗 並顯示出視窗 Title
-
-    init();
 
     glutDisplayFunc(display);	//設定callback function
     glutReshapeFunc(reshape);	//設定callback function

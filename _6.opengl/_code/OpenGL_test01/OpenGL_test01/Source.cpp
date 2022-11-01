@@ -139,10 +139,11 @@ void drawString2(void)
     glPrintShadowed(-1.2, -1.2, "222Write Something to Screen", GLUT_BITMAP_TIMES_ROMAN_24, color);
 }
 
-void draw_window_boundary(float dd)
+void draw_window_boundary(float* color, float dd)
 {
     //用 GL_LINE_LOOP 畫一個空心矩形
-    glColor3f(0.0, 1.0, 0.0);
+    //glColor3f(0.0, 1.0, 0.0);
+    glColor3fv((GLfloat*)color);
     float point1[3] = { -dd, -dd, 0 };	//左下
     float point2[3] = { dd, -dd, 0 };		//右下
     float point3[3] = { dd,  dd, 0 };		//右上
@@ -196,7 +197,9 @@ void display(void)
         //drawString1();
         drawString2();
 
-        draw_window_boundary(0.9);
+        //畫視窗邊界
+        float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
+        draw_window_boundary(color_yellow, 0.9);
     }
     else if (display_mode == 2)
     {
@@ -231,7 +234,11 @@ void display(void)
             glVertex2f(-0.2f, 0.2f);
         }
         glEnd();
-        draw_window_boundary(0.9);
+
+        //畫視窗邊界
+        float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
+        draw_window_boundary(color_yellow, 0.9);
+
     }
     else if (display_mode == 3)
     {
@@ -254,7 +261,7 @@ void display(void)
 
         //畫控制點
         glColor3f(1.0f, 0.0f, 0.0f); //紅色
-        glPointSize(10.0f); //點大小
+        glPointSize(20.0f); 	//設定點的大小, N X N
         for (i = 0; i <= n; i++)
         {
             glBegin(GL_POINTS);
@@ -275,7 +282,10 @@ void display(void)
             }
             glEnd();
         }
-        draw_window_boundary(5.5);
+
+        //畫視窗邊界
+        float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
+        draw_window_boundary(color_yellow, 5.5);
     }
     else if (display_mode == 4)
     {
@@ -368,7 +378,7 @@ void display(void)
 
         //在對角線畫點
         glColor3f(1.0f, 1.0f, 1.0f); //白色
-        glPointSize(10.0f); //點大小
+        glPointSize(10.0f); 	//設定點的大小, N X N
         glBegin(GL_POINTS);
         {
             for (i = 0; i <= 10; i++)
@@ -568,3 +578,4 @@ int main(int argc, char* argv[])
 
     return 0;
 }
+

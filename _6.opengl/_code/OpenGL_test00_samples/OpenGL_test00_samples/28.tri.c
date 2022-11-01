@@ -176,7 +176,7 @@ void display(void)
 	glScalef(zoom, zoom, zoom);
 	glRotatef(zRotation, 0, 0, 1);
 
-	glPointSize(10);
+	glPointSize(10.0f); 	//設定點的大小, N X N
 	glLineWidth(5);
 	glEnable(GL_POINT_SMOOTH);
 	glEnable(GL_LINE_STIPPLE);
@@ -192,7 +192,7 @@ void display(void)
 	glVertex3fv(p2);
 	EndPrim();
 
-	glPointSize(1);
+	glPointSize(1.0f); 	//設定點的大小, N X N
 	glLineWidth(1);
 	glDisable(GL_POINT_SMOOTH);
 	glDisable(GL_LINE_STIPPLE);

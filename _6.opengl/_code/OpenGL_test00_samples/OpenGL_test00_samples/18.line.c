@@ -93,7 +93,7 @@ void display(void)
         glVertex3fv(pntB);
         glEnd();
 
-        glPointSize(10);
+        glPointSize(10.0f); 	//設定點的大小, N X N
         (rgb) ? glColor3f(0.0, 1.0, 0.0) : glIndexi(2);     //設定顏色
         glBegin(GL_POINTS);
         glVertex3fv(pntA);
