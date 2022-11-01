@@ -1,47 +1,78 @@
-﻿#include <helper_gl.h>
-#include <GL/freeglut.h>
+﻿//#include <helper_gl.h>
+//#include <GL/freeglut.h>
+
+//#include "cuda_runtime.h"
+//#include "device_launch_parameters.h"
 
 #include <stdio.h>
-#include <iostream>
+#include <stdlib.h>
+#include <string.h>
+
+//#include <GL/glut.h>      //32 bits
+#include <GL/freeglut.h>    //64 bits
+
+void draw_boundary(float* color, float dd)
+{
+    //用 GL_LINE_LOOP 畫一個空心矩形
+    glColor3fv((GLfloat*)color);    //設定顏色
+    float point1[3] = { -dd, -dd, 0 };	//左下
+    float point2[3] = { dd, -dd, 0 };	//右下
+    float point3[3] = { dd,  dd, 0 };	//右上
+    float point4[3] = { -dd,  dd, 0 };	//左上
+    glBegin(GL_LINE_LOOP);
+    glVertex3fv(point1);	//左下
+    glVertex3fv(point2);	//右下
+    glVertex3fv(point3);	//右上
+    glVertex3fv(point4);	//左上
+    glEnd();
+}
 
 // 繪圖回調函數
 void display(void)
 {
+    glClear(GL_COLOR_BUFFER_BIT);   //清除背景
+
+    //畫視窗邊界
+    float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
+    draw_boundary(color_yellow, 0.9);
+
+    glFlush();  // 執行繪圖命令
 }
 
 // 窗口大小變化回調函數
 void reshape(int w, int h)
 {
+    glViewport(0, 0, w, h);
 }
 
 void keyboard(unsigned char key, int x, int y)
 {
-	switch (key)
-	{
-	case 27:
-	case 'q':
-	case 'Q':
-		//離開視窗
-		glutDestroyWindow(glutGetWindow());
-		return;
+    switch (key)
+    {
+    case 27:
+    case 'q':
+    case 'Q':
+        //離開視窗
+        glutDestroyWindow(glutGetWindow());
+        return;
 
-	case '1':
-		printf("1\n");
-		break;
+    case '1':
+        printf("1\n");
+        break;
 
-	case '2':
-		printf("2\n");
-		break;
+    case '2':
+        printf("2\n");
+        break;
 
-	case '3':
-		break;
+    case '3':
+        break;
 
-	case '4':
-		break;
+    case '4':
+        break;
 
-	case '?':
-		break;
-	}
+    case '?':
+        break;
+    }
 }
 
 void mouse(int button, int state, int x, int y)
@@ -54,22 +85,26 @@ void motion(int x, int y)
 
 int main(int argc, char** argv)
 {
-	glutInit(&argc, argv);
-	//glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    //初始化GLUT庫，這個函數只是傳說命令參數并且初始化glut庫
+    glutInit(&argc, argv);
 
-	glutInitWindowSize(600, 600);
-	glutInitWindowPosition(1100, 200);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);    //宣告顯示模式為 Single Buffer 和 RGBA
 
-	glutCreateWindow("開啟視窗");	//開啟視窗 並顯示出視窗 Title
+    glutInitWindowSize(600, 600);       // 設定視窗大小
+    glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
-	glutDisplayFunc(display);	//設定callback function
-	glutReshapeFunc(reshape);	//設定callback function
-	glutKeyboardFunc(keyboard);	//設定callback function
-	glutMouseFunc(mouse);		//設定callback function
-	glutMotionFunc(motion);		//設定callback function
+    glutCreateWindow("OpenGL測試");	//開啟視窗 並顯示出視窗 Title
 
-	glutMainLoop();	//開始主循環繪製
+    glutDisplayFunc(display);   //設定callback function
+    glutReshapeFunc(reshape);   //設定callback function
+    glutKeyboardFunc(keyboard); //設定callback function
+    glutMouseFunc(mouse);       //設定callback function
+    glutMotionFunc(motion);     //設定callback function
 
-	return 0;
+    printf("僅顯示, 無控制, 按 Esc 離開\n");
+
+    glutMainLoop();	//開始主循環繪製
+
+    return 0;
 }
+
