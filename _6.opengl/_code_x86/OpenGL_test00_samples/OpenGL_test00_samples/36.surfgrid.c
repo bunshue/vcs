@@ -478,7 +478,7 @@ void menu(int item)
         vsegments++;
         createlists();
         break;
-    case '\033': /* ESC key: quit */
+    case 27:
         exit(0);
         break;
     }
@@ -537,7 +537,7 @@ int main(int argc, char** argv)
     glutAddMenuEntry("U: increment u segments", 'U');
     glutAddMenuEntry("v: decrement v segments", 'v');
     glutAddMenuEntry("V: increment v segments", 'V');
-    glutAddMenuEntry("<esc>: exit program", '\033');
+    glutAddMenuEntry("<esc>: exit program", 27);
     glutAttachMenu(GLUT_RIGHT_BUTTON);
 
     /* set callbacks */

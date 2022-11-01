@@ -111,27 +111,6 @@ double second(void) {
   }
 }
 
-#elif defined(__linux__) || defined(__QNX__)
-#include <stddef.h>
-#include <sys/resource.h>
-#include <sys/time.h>
-double second(void) {
-  struct timeval tv;
-  gettimeofday(&tv, NULL);
-  return (double)tv.tv_sec + (double)tv.tv_usec / 1000000.0;
-}
-
-#elif defined(__APPLE__)
-#include <stddef.h>
-#include <sys/resource.h>
-#include <sys/sysctl.h>
-#include <sys/time.h>
-#include <sys/types.h>
-double second(void) {
-  struct timeval tv;
-  gettimeofday(&tv, NULL);
-  return (double)tv.tv_sec + (double)tv.tv_usec / 1000000.0;
-}
 #else
 #error unsupported platform
 #endif

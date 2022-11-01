@@ -6,12 +6,8 @@
 #include "GLGeometryTransform.h"
 
 #include <math.h>
-#ifdef __APPLE__
-#include <glut/glut.h>
-#else
 #define FREEGLUT_STATIC
 #include <GL/glut.h>
-#endif
 
 ////設置角色幀，作為相機
 GLFrame             viewFrame;

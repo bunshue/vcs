@@ -6,11 +6,7 @@
 #ifndef PARAMGL_H
 #define PARAMGL_H
 
-#if defined(__APPLE__) || defined(MACOSX)
-#include <GLUT/glut.h>
-#else
 #include <GL/freeglut.h>
-#endif
 
 #include <param.h>
 #include <string.h>

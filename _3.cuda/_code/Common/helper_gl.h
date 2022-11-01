@@ -6,14 +6,7 @@
     #include <GL/glew.h>
 #endif
 
-#if defined(__APPLE__) || defined(MACOSX)
-    #include <OpenGL/gl.h>
-#else
-    #include <GL/gl.h>
-    #ifdef __linux__
-    #include <GL/glx.h>
-    #endif /* __linux__ */
-#endif
+#include <GL/gl.h>
 
 #include <iostream>
 #include <cstdio>

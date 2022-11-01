@@ -337,7 +337,7 @@ void display()
     }
 }
 
-// GLUT callback functions
+// 窗口大小變化回調函數
 void reshape(int w, int h)
 {
     glMatrixMode(GL_PROJECTION);
@@ -382,12 +382,11 @@ void mouse(int button, int state, int x, int y)
     {
         if (params->Mouse(x, y, button, state))
         {
-            glutPostRedisplay();
+            glutPostRedisplay();    //將當前視窗打上標記，標記其需要再次顯示。
             return;
         }
     }
-
-    glutPostRedisplay();
+    glutPostRedisplay();    //將當前視窗打上標記，標記其需要再次顯示。
 }
 
 // transform vector by matrix
@@ -427,7 +426,7 @@ void motion(int x, int y)
         {
             ox = x;
             oy = y;
-            glutPostRedisplay();
+            glutPostRedisplay();    //將當前視窗打上標記，標記其需要再次顯示。
             return;
         }
     }
@@ -499,125 +498,123 @@ void motion(int x, int y)
 
         break;
     }
-
     ox = x;
     oy = y;
-    glutPostRedisplay();
+    glutPostRedisplay();    //將當前視窗打上標記，標記其需要再次顯示。
 }
 
-// commented out to remove unused parameter warnings in Linux
-void keyboard(unsigned char key, int /*x*/, int /*y*/)
+void keyboard(unsigned char key, int x, int y)
 {
     switch (key)
     {
-    case ' ':
-        paused = !paused;
-        break;
+    case 27:
+            cleanup();
+            exit(EXIT_SUCCESS);
+            break;
 
-    case 13:
-        psystem->step(timestep);
-        renderer->setPositionBuffer(psystem->getPosBuffer());
-        renderer->setVelocityBuffer(psystem->getVelBuffer());
-        break;
+        case ' ':
+            paused = !paused;
+            break;
 
-    case '\033':
-        cleanup();
-        exit(EXIT_SUCCESS);
-        break;
+        case 13:
+            psystem->step(timestep);
+            renderer->setPositionBuffer(psystem->getPosBuffer());
+            renderer->setVelocityBuffer(psystem->getVelBuffer());
+            break;
 
-    case 'v':
-        mode = M_VIEW;
-        animateEmitter = true;
-        break;
+        case 'v':
+            mode = M_VIEW;
+            animateEmitter = true;
+            break;
 
-    case 'm':
-        mode = M_MOVE_CURSOR;
-        animateEmitter = false;
-        break;
+        case 'm':
+            mode = M_MOVE_CURSOR;
+            animateEmitter = false;
+            break;
 
-    case 'l':
-        mode = M_MOVE_LIGHT;
-        break;
+        case 'l':
+            mode = M_MOVE_LIGHT;
+            break;
 
-    case 'r':
-        displayEnabled = !displayEnabled;
-        break;
+        case 'r':
+            displayEnabled = !displayEnabled;
+            break;
 
-    case '1':
-        psystem->reset(ParticleSystem::CONFIG_RANDOM);
-        break;
+        case '1':
+            psystem->reset(ParticleSystem::CONFIG_RANDOM);
+            break;
 
-    case '2':
-        emitterOn ^= 1;
-        break;
+        case '2':
+            emitterOn ^= 1;
+            break;
 
-    case 'W':
-        wireframe = !wireframe;
-        break;
+        case 'W':
+            wireframe = !wireframe;
+            break;
 
-    case 'h':
-        displaySliders = !displaySliders;
-        break;
+        case 'h':
+            displaySliders = !displaySliders;
+            break;
 
-    case 'o':
-        sort ^= 1;
-        psystem->setSorting(sort);
-        break;
+        case 'o':
+            sort ^= 1;
+            psystem->setSorting(sort);
+            break;
 
-    case 'D':
-        displayLightBuffer ^= 1;
-        break;
+        case 'D':
+            displayLightBuffer ^= 1;
+            break;
 
-    case 'p':
-        displayMode = (displayMode + 1) % SmokeRenderer::NUM_MODES;
-        renderer->setDisplayMode((SmokeRenderer::DisplayMode)displayMode);
-        break;
+        case 'p':
+            displayMode = (displayMode + 1) % SmokeRenderer::NUM_MODES;
+            renderer->setDisplayMode((SmokeRenderer::DisplayMode)displayMode);
+            break;
 
-    case 'P':
-        displayMode--;
+        case 'P':
+            displayMode--;
 
-        if (displayMode < 0)
-        {
-            displayMode = SmokeRenderer::NUM_MODES - 1;
-        }
+            if (displayMode < 0)
+            {
+                displayMode = SmokeRenderer::NUM_MODES - 1;
+            }
 
-        renderer->setDisplayMode((SmokeRenderer::DisplayMode)displayMode);
-        break;
+            renderer->setDisplayMode((SmokeRenderer::DisplayMode)displayMode);
+            break;
 
-    case 'V':
-        drawVectors ^= 1;
-        break;
+        case 'V':
+            drawVectors ^= 1;
+            break;
 
-    case '=':
-        numSlices *= 2;
+        case '=':
+            numSlices *= 2;
 
-        if (numSlices > 256)
-        {
-            numSlices = 256;
-        }
+            if (numSlices > 256)
+            {
+                numSlices = 256;
+            }
 
-        numDisplayedSlices = numSlices;
-        break;
+            numDisplayedSlices = numSlices;
+            break;
 
-    case '-':
-        if (numSlices > 1)
-        {
-            numSlices /= 2;
-        }
+        case '-':
+            if (numSlices > 1)
+            {
+                numSlices /= 2;
+            }
 
-        numDisplayedSlices = numSlices;
-        break;
+            numDisplayedSlices = numSlices;
+            break;
 
-    case 'b':
-        doBlur ^= 1;
-        renderer->setDoBlur(doBlur);
-        break;
+        case 'b':
+            doBlur ^= 1;
+            renderer->setDoBlur(doBlur);
+            break;
     }
 
     printf("numSlices = %d\n", numSlices);
     keyDown[key] = true;
 
-    glutPostRedisplay();
+    glutPostRedisplay();    //將當前視窗打上標記，標記其需要再次顯示。
 }
 
 void keyboardup(unsigned char key, int /*x*/, int /*y*/)
@@ -706,7 +703,7 @@ void idle(void)
         cursorPos.z = cos(currentTime * speed) * 1.5f;
     }
 
-    glutPostRedisplay();
+    glutPostRedisplay();    //將當前視窗打上標記，標記其需要再次顯示。
 }
 
 // initialize sliders
