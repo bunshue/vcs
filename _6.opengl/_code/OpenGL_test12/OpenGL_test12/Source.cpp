@@ -35,7 +35,7 @@ void drawString(const char* str, void* font, float* color, float x_st, float y_s
     glPrint(x_st, y_st, str, font);
 }
 
-void draw_window_boundary(float* color, float dd)
+void draw_boundary(float* color, float dd)
 {
     //用 GL_LINE_LOOP 畫一個空心矩形
     //glColor3f(0.0, 1.0, 0.0);
@@ -88,7 +88,7 @@ void display(void)
 
     //畫視窗邊界
     float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
-    draw_window_boundary(color_yellow, offset);
+    draw_boundary(color_yellow, offset);
 
     //畫中心十字
     glBegin(GL_LINES);

@@ -5,9 +5,12 @@
 #include <iostream>
 
 //eyex, eyey, eyez, centerx, centery, centerz
-float upx = 0;
-float upy = 1.0;
-float upz = 0;
+double eyex = 0.0;
+double eyey = 0.0;
+double eyez = 5.0;
+double upx = 0;
+double upy = 1.0;
+double upz = 0;
 
 void init(void)
 {
@@ -45,7 +48,7 @@ void display(void)
 
 	glLoadIdentity();  //加载单位矩阵
 
-	gluLookAt(0.0, 0.0, 5.0, 0.0, 0.0, 0.0, upx, upy, upz);
+	gluLookAt(eyex, eyey, eyez, 0.0, 0.0, 0.0, upx, upy, upz);
 
 	draw_coordinates(2.0);
 
@@ -67,7 +70,7 @@ void reshape(int w, int h)
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	gluLookAt(0.0, 0.0, 5.0, 0.0, 0.0, 0.0, upx, upy, upz);
+	gluLookAt(eyex, eyey, eyez, 0.0, 0.0, 0.0, upx, upy, upz);
 }
 
 void keyboard(unsigned char key, int x, int y)
@@ -86,7 +89,7 @@ void keyboard(unsigned char key, int x, int y)
 		upx = 0;
 		upy = 1.0;
 		upz = 0;
-		gluLookAt(0.0, 0.0, 5.0, 0.0, 0.0, 0.0, upx, upy, upz);
+		gluLookAt(eyex, eyey, eyez, 0.0, 0.0, 0.0, upx, upy, upz);
 		glutPostRedisplay();    //將當前視窗打上標記，標記其需要再次顯示。
 		break;
 
@@ -95,7 +98,7 @@ void keyboard(unsigned char key, int x, int y)
 		upx = 0;
 		upy = -1.0;
 		upz = 0;
-		gluLookAt(0.0, 0.0, 5.0, 0.0, 0.0, 0.0, upx, upy, upz);
+		gluLookAt(eyex, eyey, eyez, 0.0, 0.0, 0.0, upx, upy, upz);
 		glutPostRedisplay();    //將當前視窗打上標記，標記其需要再次顯示。
 		break;
 
@@ -103,7 +106,7 @@ void keyboard(unsigned char key, int x, int y)
 		upx = 1.0;
 		upy = 0;
 		upz = 0;
-		gluLookAt(0.0, 0.0, 5.0, 0.0, 0.0, 0.0, upx, upy, upz);
+		gluLookAt(eyex, eyey, eyez, 0.0, 0.0, 0.0, upx, upy, upz);
 		glutPostRedisplay();    //將當前視窗打上標記，標記其需要再次顯示。
 		break;
 

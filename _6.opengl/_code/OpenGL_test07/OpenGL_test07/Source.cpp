@@ -18,8 +18,6 @@ void init()
 void display(void)
 {
     //畫茶壺
-    glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
-
     glClear(GL_COLOR_BUFFER_BIT);
     glColor3f(1.0, 0, 0);
 

@@ -4,36 +4,69 @@
 #include <stdio.h>
 #include <iostream>
 
-double xx = -5.0;
-double yy = 5.0;
-double zz = -5.0;
+//eyex, eyey, eyez, centerx, centery, centerz
+double eyex = -5.0;
+double eyey = 5.0;
+double eyez = -5.0;
+double upx = 0;
+double upy = 1.0;
+double upz = 0;
+
+void draw_coordinates(float len)
+{
+	glLineWidth(3.0f);	//設定線寬
+
+	glColor3f(1.0f, 0.0f, 0.0f); //畫紅色的x軸
+	glBegin(GL_LINES);
+	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
+	glVertex3f(len, 0.0f, 0.0f);	//x軸 len,0,0
+	glEnd();
+
+	glColor3f(0.0, 1.0, 0.0); //畫綠色的y軸
+	glBegin(GL_LINES);
+	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
+	glVertex3f(0.0f, len, 0.0f);	//y軸 0,len,0
+	glEnd();
+
+	glColor3f(0.0, 0.0, 1.0); //畫藍色的z軸
+	glBegin(GL_LINES);
+	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
+	glVertex3f(0.0f, 0.0f, len);	//z軸 0,0,len
+	glEnd();
+}
 
 // 繪圖回調函數
 void display(void)
 {
-	printf("d");
+	//printf("d");
 	glClearColor(1, 1, 1, 0);
 	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3f(0, 0, 1.0); //畫筆藍色   
 	glLoadIdentity();	//設置單位矩陣
 
-	gluLookAt(xx, yy, zz, 0, 0, 0, 1.0, 0.0, 0);
+	gluLookAt(eyex, eyey, eyez, 0, 0, 0, 1.0, 0.0, 0);
 
-	xx += 0.01;
-	if (xx > 5.0)
-		xx = -5.0;
+	eyex += 0.01;
+	if (eyex > 5.0)
+		eyex = -5.0;
 
 	/*
-	yy += 0.01;
-	if (yy > 8.0)
-		yy = 5.0;
+	eyey += 0.01;
+	if (eyey > 8.0)
+		eyey = 5.0;
 	*/
 
-	zz += 0.01;
-	if (zz > 5.0)
-		zz = -5.0;
+	eyez += 0.01;
+	if (eyez > 5.0)
+		eyez = -5.0;
+
+	draw_coordinates(3.0);
+
+	glColor3f(1.0f, 1.0f, 0.0f); //Yellow
+	glLineWidth(1.0f);
 
 	glutWireTeapot(1.3);
+
 	glutSwapBuffers();
 }
 
@@ -103,14 +136,13 @@ void idle()
 int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
-	
+
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 
 	glutInitWindowSize(600, 600);
 	glutInitWindowPosition(1100, 200);
 
-	//glutCreateWindow("開啟視窗");	//開啟視窗 並顯示出視窗 Title
-	glutCreateWindow("gluPerspective ( X, X, 4,10 )");
+	glutCreateWindow("gluLookAt 測試");	//開啟視窗 並顯示出視窗 Title
 
 	glutDisplayFunc(display);	//設定callback function
 	glutReshapeFunc(reshape);	//設定callback function

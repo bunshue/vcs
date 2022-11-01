@@ -11,6 +11,7 @@ int my; //position of mouse;
 float x_angle;	 //angle of eye
 float y_angle;	 //angle of eye
 
+// 繪圖回調函數
 void display(void)
 {
 	//printf("d ");
@@ -70,6 +71,7 @@ void draw_coordinates(float len)
 	glEnd();
 }
 
+// 窗口大小變化回調函數
 void reshape(int w, int h)
 {
 	glViewport(0, 0, w, h);

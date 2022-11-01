@@ -119,10 +119,10 @@ inline void glPrint(int x, int y, const char* s, void* font)
 
 inline void glPrintShadowed(int x, int y, const char* s, void* font, float* color)
 {
-    glColor3f(0.0, 0.0, 0.0);
+    glColor3f(0.0, 0.0, 0.0);   //設定顏色 Black
     glPrint(x - 1, y - 1, s, font);
 
-    glColor3fv((GLfloat*)color);
+    glColor3fv((GLfloat*)color);    //設定顏色
     glPrint(x, y, s, font);
 }
 
@@ -139,14 +139,13 @@ void drawString2(void)
     glPrintShadowed(-1.2, -1.2, "222Write Something to Screen", GLUT_BITMAP_TIMES_ROMAN_24, color);
 }
 
-void draw_window_boundary(float* color, float dd)
+void draw_boundary(float* color, float dd)
 {
     //用 GL_LINE_LOOP 畫一個空心矩形
-    //glColor3f(0.0, 1.0, 0.0);
-    glColor3fv((GLfloat*)color);
+    glColor3fv((GLfloat*)color);    //設定顏色
     float point1[3] = { -dd, -dd, 0 };	//左下
-    float point2[3] = { dd, -dd, 0 };		//右下
-    float point3[3] = { dd,  dd, 0 };		//右上
+    float point2[3] = { dd, -dd, 0 };	//右下
+    float point3[3] = { dd,  dd, 0 };	//右上
     float point4[3] = { -dd,  dd, 0 };	//左上
     glBegin(GL_LINE_LOOP);
     glVertex3fv(point1);	//左下
@@ -199,15 +198,14 @@ void display(void)
 
         //畫視窗邊界
         float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
-        draw_window_boundary(color_yellow, 0.9);
+        draw_boundary(color_yellow, 0.9);
     }
     else if (display_mode == 2)
     {
         glClearColor(0.5f, 0.5f, 0.5f, 0.0f);   //設定背景 與 透明度
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
-        //設置顏色
-        glColor3f(0.2f, 0.6f, 0.5f);
+        glColor3f(0.2f, 0.6f, 0.5f);    //設定顏色
 
         //開始渲染
         glBegin(GL_POLYGON);
@@ -227,7 +225,7 @@ void display(void)
         //畫矩形
         glBegin(GL_QUADS);              //矩形
         {
-            glColor3f(1.0f, 0.0f, 0.0f); // R
+            glColor3f(1.0f, 0.0f, 0.0f); //設定顏色, R
             glVertex2f(-0.2f, -0.2f);    // x, y
             glVertex2f(0.2f, -0.2f);
             glVertex2f(0.2f, 0.2f);
@@ -237,7 +235,7 @@ void display(void)
 
         //畫視窗邊界
         float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
-        draw_window_boundary(color_yellow, 0.9);
+        draw_boundary(color_yellow, 0.9);
 
     }
     else if (display_mode == 3)
@@ -256,11 +254,11 @@ void display(void)
         glLoadIdentity();	//設置單位矩陣
 
         //畫網格
-        glColor3f(0.0f, 1.0f, 0.0f); //綠色
+        glColor3f(0.0f, 1.0f, 0.0f);    //設定顏色 G
         drawGrid(0, NGRID, 0, NGRID);
 
         //畫控制點
-        glColor3f(1.0f, 0.0f, 0.0f); //紅色
+        glColor3f(1.0f, 0.0f, 0.0f);    //設定顏色 R
         glPointSize(20.0f); 	//設定點的大小, N X N
         for (i = 0; i <= n; i++)
         {
@@ -272,7 +270,7 @@ void display(void)
         }
 
         //畫折線
-        glColor3f(1.0f, 1.0f, 1.0f); //白色
+        glColor3f(1.0f, 1.0f, 1.0f);    //設定顏色 White
         for (i = 0; i < n; i++)
         {
             glBegin(GL_LINES);
@@ -285,7 +283,7 @@ void display(void)
 
         //畫視窗邊界
         float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
-        draw_window_boundary(color_yellow, 5.5);
+        draw_boundary(color_yellow, 5.5);
     }
     else if (display_mode == 4)
     {
@@ -319,7 +317,7 @@ void display(void)
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();	//設置單位矩陣
 
-        glColor3f(1.0f, 0.0f, 0.0f); //在右上角畫紅色平面：應該在後面
+        glColor3f(1.0f, 0.0f, 0.0f);    //設定顏色 R //在右上角畫紅色平面：應該在後面
         glBegin(GL_POLYGON);
         {
             glVertex3f(0.0f, 0.0f, -1.0f + 0.001f);
@@ -329,7 +327,7 @@ void display(void)
         }
         glEnd();
 
-        glColor3f(0.0f, 1.0f, 0.0f); //在左下角畫綠色的平面：應該在前面
+        glColor3f(0.0f, 1.0f, 0.0f);    //設定顏色 G //在左下角畫綠色的平面：應該在前面
         glBegin(GL_POLYGON);
         {
             glVertex3f(-1.0f, -1.0f, 1.0f - 0.001f);
@@ -355,7 +353,7 @@ void display(void)
         glLoadIdentity();	//設置單位矩陣
 
         //畫10*10網格
-        glColor3f(0.0f, 1.0f, 0.0f); //綠色
+        glColor3f(0.0f, 1.0f, 0.0f);    //設定顏色 G
         for (i = 0; i <= 10; i++) //11條水平線
         {
             glBegin(GL_LINES);
@@ -377,7 +375,7 @@ void display(void)
         glEnd();
 
         //在對角線畫點
-        glColor3f(1.0f, 1.0f, 1.0f); //白色
+        glColor3f(1.0f, 1.0f, 1.0f);    //設定顏色 White
         glPointSize(10.0f); 	//設定點的大小, N X N
         glBegin(GL_POINTS);
         {
@@ -407,14 +405,14 @@ void display(void)
         glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
         glBegin(GL_TRIANGLES);          // 開始畫三角形
         {
-            glColor3f(1.0f, 0.0f, 0.0f);         // 設定輸出色為紅色
-            glVertex2f(0.0f, 1.0f);           //(x1,y1)=(0, 1)
-            glColor3f(0.0f, 1.0f, 0.0f);         // 設定輸出色為綠色
-            glVertex2f(0.87f, -0.5f);            //(x2,y2)=(0.87,-0.5)
-            glColor3f(0.0f, 0.0f, 1.0f);         // 設定輸出色為藍色
-            glVertex2f(-0.87f, -0.5f);           //(x3,y3)=(-0.87,-0.5)
+            glColor3f(1.0f, 0.0f, 0.0f);    //設定顏色 R
+            glVertex2f(0.0f, 1.0f);         //(x1,y1)=(0, 1)
+            glColor3f(0.0f, 1.0f, 0.0f);    //設定顏色 G
+            glVertex2f(0.87f, -0.5f);       //(x2,y2)=(0.87,-0.5)
+            glColor3f(0.0f, 0.0f, 1.0f);    //設定顏色 B
+            glVertex2f(-0.87f, -0.5f);      //(x3,y3)=(-0.87,-0.5)
         }
-        glEnd();                               // 結束畫三角形
+        glEnd();    // 結束畫三角形
         glPopMatrix();
     }
     else if (display_mode == 8)
@@ -423,7 +421,8 @@ void display(void)
         glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
 
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
-        glColor3f(1.0, 0, 0);
+
+        glColor3f(1.0, 0, 0);   //設定顏色 R
 
         glutWireTeapot(3);  //線框茶壺
         //glutSolidTeapot(3);  //實心茶壺
@@ -432,7 +431,8 @@ void display(void)
     {
         //display_mode = 9  //畫矩形
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
-        glColor3f(1.0, 1.0, 1.0);
+
+        glColor3f(1.0, 1.0, 1.0);   //設定顏色 White
         glBegin(GL_POLYGON);/* draw white polygon with corners at(0.25, 0.25, 0.0) and (0.75, 0.75, 0.0)*/
         {
             glVertex3f(0.25, 0.25, 0.0);
