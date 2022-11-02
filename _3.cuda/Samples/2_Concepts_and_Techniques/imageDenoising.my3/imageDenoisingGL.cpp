@@ -10,7 +10,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-//#include "imageDenoising.h"
 
 // includes, project
 #include <helper_functions.h>  // includes for helper utility functions
@@ -18,28 +17,65 @@
 
 typedef unsigned int TColor;
 
-extern "C" cudaError_t CUDA_MallocArray(uchar4 * *h_Src, int imageW, int imageH);
-extern "C" cudaError_t CUDA_FreeArray();
+////////////////////////////////////////////////////////////////////////////////
+// Global data handlers and parameters
+////////////////////////////////////////////////////////////////////////////////
+// Texture object and channel descriptor for image texture
+cudaTextureObject_t texImage;
+
+cudaChannelFormatDesc uchar4tex = cudaCreateChannelDesc<uchar4>();
+
+cudaArray* a_Src;   // CUDA array descriptor
+
+cudaError_t CUDA_MallocArray(uchar4 * * src_image, int width, int height)
+{
+    cudaError_t error;
+
+    error = cudaMallocArray(&a_Src, &uchar4tex, width, height);
+    error = cudaMemcpy2DToArray(a_Src, 0, 0, *src_image, sizeof(uchar4) * width, sizeof(uchar4) * width, height, cudaMemcpyHostToDevice);
+
+    cudaResourceDesc texRes;
+    memset(&texRes, 0, sizeof(cudaResourceDesc));
+
+    texRes.resType = cudaResourceTypeArray;
+    texRes.res.array.array = a_Src;
+
+    cudaTextureDesc texDescr;
+    memset(&texDescr, 0, sizeof(cudaTextureDesc));
+
+    texDescr.normalizedCoords = false;
+    texDescr.filterMode = cudaFilterModeLinear;
+    texDescr.addressMode[0] = cudaAddressModeWrap;
+    texDescr.addressMode[1] = cudaAddressModeWrap;
+    texDescr.readMode = cudaReadModeNormalizedFloat;
+
+    checkCudaErrors(cudaCreateTextureObject(&texImage, &texRes, &texDescr, NULL));
+
+    return error;
+}
+
+cudaError_t CUDA_FreeArray()
+{
+    return cudaFreeArray(a_Src);
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // Global data handlers and parameters
 ////////////////////////////////////////////////////////////////////////////////
 // OpenGL PBO and texture "names"
-GLuint gl_PBO, gl_Tex;
+GLuint gl_PBO;
+GLuint gl_Tex;
 struct cudaGraphicsResource* cuda_pbo_resource;  // handles OpenGL-CUDA exchange
+                                                
 // Source image on the host side
-
-uchar4* h_Src1;
-uchar4* h_Src2;
-int imageW;
-int imageH;
+uchar4* source_image;
+int W;
+int H;
 
 StopWatchInterface* timer = NULL;
 
 #define BUFFER_DATA(i) ((char *)0 + i)
-#define MAX_EPSILON_ERROR 5
 #define REFRESH_DELAY 10  // ms
-void cleanup();
 
 void display(void)
 {
@@ -63,7 +99,9 @@ void display(void)
     {
         glClear(GL_COLOR_BUFFER_BIT);
 
-        glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, imageW, imageH, GL_RGBA, GL_UNSIGNED_BYTE, BUFFER_DATA(0));
+        glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, W, H, GL_RGBA, GL_UNSIGNED_BYTE, BUFFER_DATA(0));
+
+        //以下這段為必要
         glBegin(GL_TRIANGLES);
         glTexCoord2f(0, 0);
         glVertex2f(-1, -1);
@@ -72,6 +110,7 @@ void display(void)
         glTexCoord2f(0, 2);
         glVertex2f(-1, +3);
         glEnd();
+
         glFinish();
     }
     glutSwapBuffers();
@@ -89,9 +128,9 @@ void timerEvent(int value)
     }
 }
 
-void keyboard(unsigned char k, int /*x*/, int /*y*/)
+void keyboard(unsigned char key, int x, int y)
 {
-    switch (k)
+    switch (key)
     {
     case 27:
     case 'q':
@@ -99,13 +138,17 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
         //離開視窗
         glutDestroyWindow(glutGetWindow());
         return;
-
-    case '*':
-        break;
-
-    case '?':
-        break;
     }
+}
+
+void cleanup()
+{
+    printf("cleanup()\n");
+
+    free(source_image);
+    checkCudaErrors(CUDA_FreeArray());
+    checkCudaErrors(cudaGraphicsUnregisterResource(cuda_pbo_resource));
+    sdkDeleteTimer(&timer);
 }
 
 int initGL(int* argc, char** argv)
@@ -115,20 +158,20 @@ int initGL(int* argc, char** argv)
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
 
-    glutInitWindowSize(imageW, imageH); // 設定視窗大小
-    glutInitWindowPosition(512 - imageW / 2, 384 - imageH / 2); // 設定視窗位置
+    glutInitWindowSize(W, H); // 設定視窗大小
+    glutInitWindowPosition(1100, 200); // 設定視窗位置
 
     glutCreateWindow("Image Denoising");	//開啟視窗 並顯示出視窗 Title
 
     glutDisplayFunc(display);   //設定callback function
     glutKeyboardFunc(keyboard); //設定callback function
+    glutCloseFunc(cleanup);     //設定callback function
 
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);    //設定timer事件
 
     printf("OpenGL window created.\n");
 
-    glutCloseFunc(cleanup);
-
+    //以下這段為必要
     if (!isGLVersionSupported(1, 5) || !areGLExtensionsSupported("GL_ARB_vertex_buffer_object GL_ARB_pixel_buffer_object"))
     {
         fprintf(stderr, "Error: failed to get minimal extensions for demo\n");
@@ -155,24 +198,24 @@ void initOpenGLBuffers()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 
     /* 修改圖像資料
-    for (int i = 0; i < imageW * imageH / 3; i++)
+    for (int i = 0; i < W * H / 3; i++)
     {
-        h_Src1[i].x = h_Src1[i].x / 2;
-        h_Src1[i].y = h_Src1[i].y / 2;
-        h_Src1[i].z = h_Src1[i].z / 2;
-        h_Src1[i].w = h_Src1[i].w / 2;
+        source_image[i].x = source_image[i].x / 2;
+        source_image[i].y = source_image[i].y / 2;
+        source_image[i].z = source_image[i].z / 2;
+        source_image[i].w = source_image[i].w / 2;
     }
     */
 
     //在這裡把影像設定到pBox....
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, imageW, imageH, 0, GL_RGBA, GL_UNSIGNED_BYTE, h_Src1);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, W, H, 0, GL_RGBA, GL_UNSIGNED_BYTE, source_image);
 
     printf("Texture created.\n");
 
     printf("Creating PBO...\n");
     glGenBuffers(1, &gl_PBO);
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, gl_PBO);
-    glBufferData(GL_PIXEL_UNPACK_BUFFER_ARB, imageW * imageH * 4, h_Src1, GL_STREAM_COPY);
+    glBufferData(GL_PIXEL_UNPACK_BUFFER_ARB, W * H * 4, source_image, GL_STREAM_COPY);
 
     checkCudaErrors(cudaGraphicsGLRegisterBuffer(&cuda_pbo_resource, gl_PBO, cudaGraphicsMapFlagsWriteDiscard));
     GLenum gl_error = glGetError();
@@ -181,8 +224,7 @@ void initOpenGLBuffers()
     {
         char tmpStr[512];
         // NOTE: "%s(%i) : " allows Visual Studio to directly jump to the file at
-        // the right line when the user double clicks on the error line in the
-        // Output pane. Like any compile error.
+        // the right line when the user double clicks on the error line in the output pane. Like any compile error.
         sprintf_s(tmpStr, 255, "\n%s(%i) : GL Error : %s\n\n", __FILE__, __LINE__, gluErrorString(gl_error));
         OutputDebugString(tmpStr);
 
@@ -193,60 +235,31 @@ void initOpenGLBuffers()
     printf("PBO created.\n");
 }
 
-void cleanup()
-{
-    printf("cleanup()\n");
-
-    free(h_Src1);
-    free(h_Src2);
-    checkCudaErrors(CUDA_FreeArray());
-    checkCudaErrors(cudaGraphicsUnregisterResource(cuda_pbo_resource));
-    sdkDeleteTimer(&timer);
-}
-
 int main(int argc, char** argv)
 {
-    /*
-    //讀取圖片資料
-    const char* filename_read1 = "C:\\______test_files\\ims01.24.bmp"; //24 bits
-    const char* filename_read2 = "C:\\______test_files\\ims03.24.bmp"; //24 bits
-
-    imageW = 0;
-    imageH = 0;
-    LoadBMPFile(&h_Src1, &imageW, &imageH, filename_read1);
-    printf("filename : %s\tW = %d\tH = %d\n", filename_read1, imageW, imageH);
-
-    imageW = 0;
-    imageH = 0;
-    LoadBMPFile(&h_Src2, &imageW, &imageH, filename_read2);
-    printf("filename : %s\tW = %d\tH = %d\n", filename_read2, imageW, imageH);
-    */
-
     //自製圖片資料
-    imageW = 640;
-    imageH = 480;
+    W = 640;
+    H = 480;
 
-    h_Src1 = (uchar4*)malloc(imageW * imageH * 4);
-    h_Src2 = (uchar4*)malloc(imageW * imageH * 4);
+    source_image = (uchar4*)malloc(W * H * 4);
 
     int i;
     int j;
 
-    for (j = 0; j < imageH; j++)
+    for (j = 0; j < H; j++)
     {
-        for (i = 0; i < imageW; i++)
+        for (i = 0; i < W; i++)
         {
-            h_Src1[imageW * j + i].x = (i * j) % 256;   //R
-            h_Src1[imageW * j + i].y = (i * j) % 256;   //G
-            h_Src1[imageW * j + i].z = (i * j) % 256;   //B
+            source_image[W * j + i].x = (i * j) % 256;   //R
+            source_image[W * j + i].y = (i * j) % 256;   //G
+            source_image[W * j + i].z = (i * j) % 256;   //B
         }
     }
 
     initGL(&argc, argv);
     findCudaDevice(argc, (const char**)argv);
 
-    checkCudaErrors(CUDA_MallocArray(&h_Src1, imageW, imageH));
-    checkCudaErrors(CUDA_MallocArray(&h_Src2, imageW, imageH));
+    checkCudaErrors(CUDA_MallocArray(&source_image, W, H));
 
     initOpenGLBuffers();
 
@@ -257,3 +270,4 @@ int main(int argc, char** argv)
 
     return 0;
 }
+

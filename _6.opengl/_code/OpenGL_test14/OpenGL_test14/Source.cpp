@@ -40,6 +40,10 @@ void display(void)
     float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
     draw_boundary(color_yellow, 0.9);
 
+    glColor3f(1.0, 0.0, 0.0);   //設定顏色 R
+    float dd = 0.1f;
+    glRectf(-dd, -dd, dd, dd);  //實心矩形
+
     glFlush();  // 執行繪圖命令
 }
 
@@ -103,6 +107,11 @@ void idle()
     //glutPostRedisplay();
 }
 
+void cleanup()
+{
+    printf("cleanup()\n");
+}
+
 void mainMenu(int i)
 {
     keyboard((unsigned char)i, 0, 0);
@@ -134,7 +143,7 @@ void initMenus()
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
-    
+
     //glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
 
@@ -152,7 +161,7 @@ int main(int argc, char** argv)
     glutMouseFunc(mouse);		//設定callback function
     glutMotionFunc(motion);		//設定callback function
     glutIdleFunc(idle);         //設定callback function, 利用idle事件進行重畫
-    //cleanup TBD
+    glutCloseFunc(cleanup);     //設定callback function
     //timer TBD
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
 

@@ -101,7 +101,7 @@ void display(void)
 
     //畫線
     //畫直線連線
-    glBegin(GL_LINE_STRIP);
+    glBegin(GL_LINE_STRIP);	//繪製前後連接的點組成的線
     glColor3f(0.0, 1.0, 0.0);
     for (x_st = -14.0; x_st <= -5.0f; x_st += 0.5f)
     {
@@ -110,6 +110,16 @@ void display(void)
         else
             y_st = 10.0f;
 
+        glVertex2f(x_st, y_st);
+    }
+    glEnd();
+
+    //畫正弦波
+    glBegin(GL_LINE_STRIP);	//繪製前後連接的點組成的線
+    glColor3f(0.0, 1.0, 1.0);
+    for (x_st = -14.0; x_st <= -5.0f; x_st += 0.1f)
+    {
+        y_st = sin(x_st * 2) + 1.0;
         glVertex2f(x_st, y_st);
     }
     glEnd();

@@ -125,8 +125,8 @@ int main(int argc, char** argv)
 	//glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 
-	glutInitWindowSize(640, 480);
-	glutInitWindowPosition(1100, 200);
+	glutInitWindowSize(640, 480);		// 設定視窗大小
+	glutInitWindowPosition(1100, 200);	// 設定視窗位置
 
 	glutCreateWindow("球體旋轉");	//開啟視窗 並顯示出視窗 Title
 

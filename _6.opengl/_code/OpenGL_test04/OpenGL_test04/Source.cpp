@@ -70,7 +70,8 @@ void display(void)
 	//繪製由bitmap指定的位圖，bitmap是一個指向位圖圖像的指針，位圖的原點是當前光柵位置，如果當前光柵位置無效，則這個函數不會繪製任何東西。
 	//width和height表示位圖的寬度和高度，xorig和yorig定義了位圖的原點，他是根據當期光柵位置確定的，右上為正。
 	//xmove和ymove表示位圖光柵化之後光柵座標的x增加值和y增加值
-	glFlush();
+
+	glFlush();  // 執行繪圖命令
 }
 
 // 窗口大小變化回調函數
@@ -79,7 +80,7 @@ void reshape(int w, int h)
 	glViewport(0, 0, w, h);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();	//設置單位矩陣
-	glOrtho(0, w, 0, h, -1.0, 1.0);
+	glOrtho(0, w, 0, h, -1.0, 1.0);	//改變投影變換	//改變窗口座標範圍, 3D
 	glMatrixMode(GL_MODELVIEW);
 }
 
@@ -96,22 +97,14 @@ void keyboard(unsigned char key, int x, int y)
 	}
 }
 
-void mouse(int button, int state, int x, int y)
-{
-}
-
-void motion(int x, int y)
-{
-}
-
 int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
 	
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
-	glutInitWindowSize(600, 600);
-	glutInitWindowPosition(1100, 200);
+	glutInitWindowSize(600, 600);       // 設定視窗大小
+	glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
 	glutCreateWindow("開啟視窗");	//開啟視窗 並顯示出視窗 Title
 
@@ -120,8 +113,8 @@ int main(int argc, char** argv)
 	glutDisplayFunc(display);	//設定callback function
 	glutReshapeFunc(reshape);	//設定callback function
 	glutKeyboardFunc(keyboard);	//設定callback function
-	glutMouseFunc(mouse);		//設定callback function
-	glutMotionFunc(motion);		//設定callback function
+
+	printf("僅顯示, 無控制, 按 Esc 離開\n");
 
 	glutMainLoop();	//開始主循環繪製
 

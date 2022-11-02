@@ -12,7 +12,7 @@ void display(void)
     //glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);   //設置窗口座標系大小, 3D
     gluOrtho2D(-1.0, 1.0, -1.0, 1.0); //窗口座標範圍, 2D
 
-    //畫一個矩形 R
+    //畫一個實心矩形 G
     //glColor4f(1.0, 0.0, 0.0, 1.0);  //設置畫筆顏色為 R, RGBA
     glColor3f(0.0, 1.0, 0.0);   //設置畫筆顏色為 G, RGB
 
@@ -26,10 +26,10 @@ void display(void)
     for (x_st = -1.0; x_st < 1.0; x_st += dx)
     {
         y_st = x_st;
-        glRectf(x_st, y_st, x_st + ww, y_st + hh);  //畫一個矩形
+        glRectf(x_st, y_st, x_st + ww, y_st + hh);  //畫一個實心矩形
     }
 
-    glFlush();//保證前面的OpenGL命令立即執行   glFlush​​負責刷新繪製緩沖器，保證繪圖命令立即執行。
+    glFlush();  // 執行繪圖命令
 }
 
 void keyboard(unsigned char key, int x, int y)
@@ -48,11 +48,11 @@ void keyboard(unsigned char key, int x, int y)
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
-    
+
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
-    glutInitWindowSize(600, 600);		//設定視窗大小, 直接拉大內容
-    glutInitWindowPosition(1100, 200);	//視窗起始位置
+    glutInitWindowSize(600, 600);       // 設定視窗大小
+    glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
     glutCreateWindow("開啟視窗");	//開啟視窗 並顯示出視窗 Title
 

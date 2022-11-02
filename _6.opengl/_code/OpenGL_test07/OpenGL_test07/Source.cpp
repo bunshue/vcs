@@ -18,19 +18,13 @@ void init()
 void display(void)
 {
     //畫茶壺
-    glClear(GL_COLOR_BUFFER_BIT);
+    //glClear(GL_COLOR_BUFFER_BIT);
     glColor3f(1.0, 0, 0);
 
     glutWireTeapot(2);  //線框茶壺
     //glutSolidTeapot(3);  //實心茶壺
 
-    glFlush();
-}
-
-// 窗口大小變化回調函數
-void reshape(int w, int h)
-{
-    glViewport(0, 0, w, h);
+    glFlush();  // 執行繪圖命令
 }
 
 void keyboard(unsigned char key, int x, int y)
@@ -48,19 +42,6 @@ void keyboard(unsigned char key, int x, int y)
     }
 }
 
-void mouse(int button, int state, int x, int y)
-{
-}
-
-void motion(int x, int y)
-{
-}
-
-static void idle(void)
-{
-    glutPostRedisplay();
-}
-
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
@@ -75,11 +56,7 @@ int main(int argc, char** argv)
     init();
 
     glutDisplayFunc(display);	//設定callback function
-    glutReshapeFunc(reshape);	//設定callback function
     glutKeyboardFunc(keyboard);	//設定callback function
-    glutMouseFunc(mouse);		//設定callback function
-    glutMotionFunc(motion);		//設定callback function
-    glutIdleFunc(idle);			//設定callback function
 
     glutMainLoop();	//開始主循環繪製
 
