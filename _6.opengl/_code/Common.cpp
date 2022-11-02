@@ -1,0 +1,100 @@
+﻿#include <helper_gl.h>
+#include <GL/freeglut.h>
+
+#include <stdio.h>
+#include <iostream>
+
+void draw_coordinates(float len)
+{
+	glLineWidth(3.0f);	//設定線寬
+
+	glColor3f(1.0f, 0.0f, 0.0f); //畫紅色的x軸
+	glBegin(GL_LINES);
+	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
+	glVertex3f(len, 0.0f, 0.0f);	//x軸 len,0,0
+	glEnd();
+
+	glColor3f(0.0, 1.0, 0.0); //畫綠色的y軸
+	glBegin(GL_LINES);
+	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
+	glVertex3f(0.0f, len, 0.0f);	//y軸 0,len,0
+	glEnd();
+
+	glColor3f(0.0, 0.0, 1.0); //畫藍色的z軸
+	glBegin(GL_LINES);
+	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
+	glVertex3f(0.0f, 0.0f, len);	//z軸 0,0,len
+	glEnd();
+}
+
+void draw_boundary(float* color, float dd)
+{
+    //用 GL_LINE_LOOP 畫一個空心矩形
+    glColor3fv((GLfloat*)color);    //設定顏色
+    float point1[3] = { -dd, -dd, 0 };	//左下
+    float point2[3] = { dd, -dd, 0 };	//右下
+    float point3[3] = { dd,  dd, 0 };	//右上
+    float point4[3] = { -dd,  dd, 0 };	//左上
+    glBegin(GL_LINE_LOOP);
+    glVertex3fv(point1);	//左下
+    glVertex3fv(point2);	//右下
+    glVertex3fv(point3);	//右上
+    glVertex3fv(point4);	//左上
+    glEnd();
+
+    //畫中心十字
+    glBegin(GL_LINES);
+    glVertex3f(-dd, 0.0f, 0.0f);    //左
+    glVertex3f(dd, 0.0f, 0.0f);     //右
+    glVertex3f(0.0f, dd, 0.0f);     //上
+    glVertex3f(0.0f, -dd, 0.0f);    //下
+    glEnd();
+}
+
+void draw_teapot(float* color, float width, double size)
+{
+    //畫一個茶壺
+    glColor3fv((GLfloat*)color);    //設定顏色
+
+    glLineWidth(width);
+    glutWireTeapot(size);
+}
+
+
+void keyboard0(unsigned char key, int x, int y)
+{
+    switch (key)
+    {
+    case 27:
+    case 'q':
+    case 'Q':
+        //離開視窗
+        glutDestroyWindow(glutGetWindow());
+        return;
+
+    case '1':
+        printf("1\n");
+        break;
+
+    case '2':
+        printf("2\n");
+        break;
+
+    case '3':
+        break;
+
+    case '4':
+        break;
+
+    case '?':
+        break;
+    }
+}
+
+void mouse0(int button, int state, int x, int y)
+{
+}
+
+void motion0(int x, int y)
+{
+}
