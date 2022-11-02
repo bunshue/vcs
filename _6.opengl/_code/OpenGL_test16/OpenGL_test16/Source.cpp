@@ -54,7 +54,7 @@ void display(void)
 	viewportx = 0;
 	viewporty = 0;
 	glViewport(viewportx, viewporty, W / 2, H / 2);	//視口設定為全部視窗的左下四分之一
-	glBegin(GL_POLYGON);
+	glBegin(GL_POLYGON);	//畫實心多邊形
 	glVertex2f(-0.5, -0.5);
 	glVertex2f(-0.5, 0.5);
 	glVertex2f(0.5, 0.5);
@@ -66,7 +66,7 @@ void display(void)
 	viewportx = 0;
 	viewporty = H / 2;
 	glViewport(viewportx, viewporty, W / 2, H / 2);//視口設定為全部視窗的左上四分之一
-	glBegin(GL_POLYGON);
+	glBegin(GL_POLYGON);	//畫實心多邊形
 	glVertex2f(-0.5, -0.5);
 	glVertex2f(-0.5, 0.5);
 	glVertex2f(0.5, 0.5);
@@ -78,7 +78,7 @@ void display(void)
 	viewportx = W / 2;
 	viewporty = H / 2;
 	glViewport(viewportx, viewporty, W / 2, H / 2);	//視口設定為全部視窗的右上四分之一
-	glBegin(GL_POLYGON);
+	glBegin(GL_POLYGON);	//畫實心多邊形
 	glVertex2f(-0.5, -0.5);
 	glVertex2f(-0.5, 0.5);
 	glVertex2f(0.5, 0.5);
@@ -90,7 +90,7 @@ void display(void)
 	viewportx = W / 2;
 	viewporty = 0;
 	glViewport(viewportx, viewporty, W / 2, H / 2);	//視口設定為全部視窗的右下四分之一
-	glBegin(GL_POLYGON);
+	glBegin(GL_POLYGON);	//畫實心多邊形
 	glVertex2f(-0.5, -0.5);
 	glVertex2f(-0.5, 0.5);
 	glVertex2f(0.5, 0.5);
@@ -98,11 +98,6 @@ void display(void)
 	glEnd();
 
 	glFlush();
-}
-
-// 窗口大小變化回調函數
-void reshape(int w, int h)
-{
 }
 
 void keyboard(unsigned char key, int x, int y)
@@ -132,8 +127,9 @@ int main(int argc, char** argv)
 	init();
 
 	glutDisplayFunc(display);	//設定callback function
-	glutReshapeFunc(reshape);	//設定callback function
 	glutKeyboardFunc(keyboard);	//設定callback function
+
+	printf("僅顯示, 無控制, 按 Esc 離開\n");
 
 	glutMainLoop();	//開始主循環繪製
 

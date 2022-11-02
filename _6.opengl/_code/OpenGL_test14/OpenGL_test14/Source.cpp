@@ -40,9 +40,15 @@ void display(void)
     float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
     draw_boundary(color_yellow, 0.9);
 
+    //畫一個實心矩形
     glColor3f(1.0, 0.0, 0.0);   //設定顏色 R
     float dd = 0.1f;
     glRectf(-dd, -dd, dd, dd);  //實心矩形
+
+    //畫一個茶壺
+    glColor3f(1.0f, 1.0f, 0.0f); //Yellow
+    glLineWidth(1.0f);
+    glutWireTeapot(0.3);
 
     glFlush();  // 執行繪圖命令
 }
