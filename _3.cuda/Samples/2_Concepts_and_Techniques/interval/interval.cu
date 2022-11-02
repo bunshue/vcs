@@ -1,14 +1,13 @@
- /* Example of program using the interval_gpu<T> template class and operators:
-  * Search for roots of a function using an interval Newton method.
-   *
-  * Use the command-line argument "--n=<N>" to select which GPU implementation to
-  * use,
-  * otherwise the naive implementation will be used by default.
-  * 0: the naive implementation
-  * 1: the optimized implementation
-  * 2: the recursive implementation
+/* Example of program using the interval_gpu<T> template class and operators:
+ * Search for roots of a function using an interval Newton method.
   *
-  */
+ * Use the command-line argument "--n=<N>" to select which GPU implementation to use,
+ * otherwise the naive implementation will be used by default.
+ * 0: the naive implementation
+ * 1: the optimized implementation
+ * 2: the recursive implementation
+ *
+ */
 
 #include <iostream>
 #include <stdio.h>

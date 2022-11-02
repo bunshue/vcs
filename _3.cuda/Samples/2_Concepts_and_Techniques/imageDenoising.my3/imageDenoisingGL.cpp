@@ -31,20 +31,17 @@ struct cudaGraphicsResource* cuda_pbo_resource;  // handles OpenGL-CUDA exchange
 
 uchar4* h_Src1;
 uchar4* h_Src2;
-int imageW, imageH;
+int imageW;
+int imageH;
 
-////////////////////////////////////////////////////////////////////////////////
-// Main program
-////////////////////////////////////////////////////////////////////////////////
 StopWatchInterface* timer = NULL;
 
 #define BUFFER_DATA(i) ((char *)0 + i)
-
 #define MAX_EPSILON_ERROR 5
 #define REFRESH_DELAY 10  // ms
 void cleanup();
 
-void displayFunc(void)
+void display(void)
 {
     //printf("dis ");
 
@@ -103,55 +100,7 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
         glutDestroyWindow(glutGetWindow());
         return;
 
-    case '1':
-        printf("Passthrough.\n");
-        break;
-
-    case '2':
-        printf("KNN method \n");
-        break;
-
-    case '3':
-        printf("NLM method\n");
-        break;
-
-    case '4':
-        printf("Quick NLM(NLM2) method\n");
-        break;
-
-    case 'c':
-        printf("Change some data\n");
-        break;
-
-    case 'a':
-        printf("Copy ims 01\n");
-        break;
-
-    case 'b':
-        printf("Copy ims 03\n");
-        break;
-
     case '*':
-        break;
-
-    case 'n':
-        printf("Decrease noise level.\n");
-        break;
-
-    case 'N':
-        printf("Increase noise level.\n");
-        break;
-
-    case 'l':
-        printf("Decrease LERP quotient.\n");
-        break;
-
-    case 'L':
-        printf("Increase LERP quotient.\n");
-        break;
-
-    case 'f':
-    case 'F':
         break;
 
     case '?':
@@ -162,14 +111,17 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
 int initGL(int* argc, char** argv)
 {
     printf("Initializing GLUT...\n");
+
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
-    glutInitWindowSize(imageW, imageH);
-    glutInitWindowPosition(512 - imageW / 2, 384 - imageH / 2);
-    glutCreateWindow(argv[0]);
 
-    glutDisplayFunc(displayFunc);   //設定callback function
-    glutKeyboardFunc(keyboard);     //設定callback function
+    glutInitWindowSize(imageW, imageH); // 設定視窗大小
+    glutInitWindowPosition(512 - imageW / 2, 384 - imageH / 2); // 設定視窗位置
+
+    glutCreateWindow("Image Denoising");	//開啟視窗 並顯示出視窗 Title
+
+    glutDisplayFunc(display);   //設定callback function
+    glutKeyboardFunc(keyboard); //設定callback function
 
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);    //設定timer事件
 
@@ -297,9 +249,11 @@ int main(int argc, char** argv)
     checkCudaErrors(CUDA_MallocArray(&h_Src2, imageW, imageH));
 
     initOpenGLBuffers();
-    glutSetWindowTitle("ims pic");
+
     sdkCreateTimer(&timer);
     sdkStartTimer(&timer);
 
     glutMainLoop();	//開始主循環繪製
+
+    return 0;
 }

@@ -70,6 +70,7 @@ void cleanup();
 
 void computeFPS()
 {
+    //printf("computeFPS ");
     frameCount++;
     fpsCount++;
 
@@ -89,6 +90,7 @@ void computeFPS()
 
 void runImageFilters(TColor* d_dst)
 {
+    //printf("%d ", g_Kernel);
     switch (g_Kernel)
     {
     case 0:
@@ -135,7 +137,7 @@ void runImageFilters(TColor* d_dst)
     getLastCudaError("Filtering kernel execution failed.\n");
 }
 
-void displayFunc(void)
+void display(void)
 {
     sdkStartTimer(&timer);
     TColor* d_dst = NULL;
@@ -149,6 +151,7 @@ void displayFunc(void)
     checkCudaErrors(cudaGraphicsMapResources(1, &cuda_pbo_resource, 0));
     getLastCudaError("cudaGraphicsMapResources failed");
     checkCudaErrors(cudaGraphicsResourceGetMappedPointer((void**)&d_dst, &num_bytes, cuda_pbo_resource));
+    //printf("(%d) ", num_bytes);
     getLastCudaError("cudaGraphicsResourceGetMappedPointer failed");
 
     runImageFilters(d_dst);
@@ -192,10 +195,11 @@ void displayFunc(void)
 
 void timerEvent(int value)
 {
+    //printf("timer ");
     if (glutGetWindow())
     {
         glutPostRedisplay();
-        glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
+        glutTimerFunc(REFRESH_DELAY, timerEvent, 0);    //設定timer事件
     }
 }
 
@@ -206,6 +210,7 @@ void keyboard(unsigned char k, int /*x*/, int /*y*/)
     case 27:
     case 'q':
     case 'Q':
+        //離開視窗
         glutDestroyWindow(glutGetWindow());
         return;
 
@@ -274,16 +279,16 @@ int initGL(int* argc, char** argv)
     printf("Initializing GLUT...\n");
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
-    glutInitWindowSize(imageW, imageH);
-    glutInitWindowPosition(512 - imageW / 2, 384 - imageH / 2);
-    glutCreateWindow(argv[0]);
 
-    glutDisplayFunc(displayFunc);   //設定callback function
-    glutKeyboardFunc(keyboard);     //設定callback function
+    glutInitWindowSize(imageW, imageH); // 設定視窗大小
+    glutInitWindowPosition(512 - imageW / 2, 384 - imageH / 2); // 設定視窗位置
+
+    glutCreateWindow("Image Denoising");	//開啟視窗 並顯示出視窗 Title
+
+    glutDisplayFunc(display);   //設定callback function
+    glutKeyboardFunc(keyboard); //設定callback function
 
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);    //設定timer事件
-
-    printf("OpenGL window created.\n");
 
     glutCloseFunc(cleanup);
 
@@ -345,10 +350,8 @@ void initOpenGLBuffers()
     glGenBuffers(1, &gl_PBO);
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, gl_PBO);
     glBufferData(GL_PIXEL_UNPACK_BUFFER_ARB, imageW * imageH * 4, h_Src, GL_STREAM_COPY);
-    // While a PBO is registered to CUDA, it can't be used
-    // as the destination for OpenGL drawing calls.
-    // But in our particular case OpenGL is only used
-    // to display the content of the PBO, specified by CUDA kernels,
+    // While a PBO is registered to CUDA, it can't be used as the destination for OpenGL drawing calls.
+    // But in our particular case OpenGL is only used to display the content of the PBO, specified by CUDA kernels,
     // so we need to register/unregister it only once.
     // DEPRECATED: checkCudaErrors(cudaGLRegisterBufferObject(gl_PBO) );
     checkCudaErrors(cudaGraphicsGLRegisterBuffer(&cuda_pbo_resource, gl_PBO, cudaGraphicsMapFlagsWriteDiscard));
@@ -356,15 +359,11 @@ void initOpenGLBuffers()
 
     if (gl_error != GL_NO_ERROR)
     {
-#if defined(WIN32) || defined(_WIN32) || defined(WIN64) || defined(_WIN64)
         char tmpStr[512];
         // NOTE: "%s(%i) : " allows Visual Studio to directly jump to the file at
-        // the right line when the user double clicks on the error line in the
-        // Output pane. Like any compile error.
-        sprintf_s(tmpStr, 255, "\n%s(%i) : GL Error : %s\n\n", __FILE__, __LINE__,
-            gluErrorString(gl_error));
+        // the right line when the user double clicks on the error line in the output pane. Like any compile error.
+        sprintf_s(tmpStr, 255, "\n%s(%i) : GL Error : %s\n\n", __FILE__, __LINE__, gluErrorString(gl_error));
         OutputDebugString(tmpStr);
-#endif
         fprintf(stderr, "GL Error in file '%s' in line %d :\n", __FILE__, __LINE__);
         fprintf(stderr, "%s\n", gluErrorString(gl_error));
         exit(EXIT_FAILURE);
@@ -389,6 +388,7 @@ void cleanup()
 
 void runAutoTest(int argc, char** argv, const char* filename, int kernel_param)
 {
+    printf("XXXXXXXXXX  runAutoTest runAutoTest runAutoTest runAutoTest\n");
     printf("[%s] - (automated testing w/ readback)\n", sSDKsample);
 
     int devID = findCudaDevice(argc, (const char**)argv);
@@ -452,7 +452,7 @@ int main(int argc, char** argv)
         {
             kernel = getCmdLineArgumentInt(argc, (const char**)argv, "kernel");
         }
-
+        printf("runAutoTest runAutoTest runAutoTest\n");
         runAutoTest(argc, argv, dump_file, kernel);
     }
     else
@@ -505,5 +505,7 @@ int main(int argc, char** argv)
     sdkStartTimer(&timer);
 
     glutMainLoop();	//開始主循環繪製
+
+    return 0;
 }
 

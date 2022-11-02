@@ -120,10 +120,8 @@ void runImageFilters(TColor* d_dst)
     getLastCudaError("Filtering kernel execution failed.\n");
 }
 
-void displayFunc(void)
+void display(void)
 {
-    //printf("dis ");
-
     sdkStartTimer(&timer);
     TColor* d_dst = NULL;
     size_t num_bytes;
@@ -183,7 +181,6 @@ void timerEvent(int value)
     //printf("timer ");
     if (glutGetWindow())
     {
-        //printf("glutGetWindow ");
         glutPostRedisplay();
         glutTimerFunc(REFRESH_DELAY, timerEvent, 0);    //設定timer事件
     }
@@ -266,16 +263,16 @@ int initGL(int* argc, char** argv)
     printf("Initializing GLUT...\n");
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
-    glutInitWindowSize(imageW, imageH);
-    glutInitWindowPosition(512 - imageW / 2, 384 - imageH / 2);
-    glutCreateWindow(argv[0]);
 
-    glutDisplayFunc(displayFunc);   //設定callback function
+    glutInitWindowSize(imageW, imageH); // 設定視窗大小
+    glutInitWindowPosition(512 - imageW / 2, 384 - imageH / 2); // 設定視窗位置
+
+    glutCreateWindow("Image Denoising");	//開啟視窗 並顯示出視窗 Title
+
+    glutDisplayFunc(display);   //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
 
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);    //設定timer事件
-
-    printf("OpenGL window created.\n");
 
     glutCloseFunc(cleanup);
 
@@ -323,10 +320,8 @@ void initOpenGLBuffers()
     glGenBuffers(1, &gl_PBO);
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, gl_PBO);
     glBufferData(GL_PIXEL_UNPACK_BUFFER_ARB, imageW * imageH * 4, h_Src1, GL_STREAM_COPY);
-    // While a PBO is registered to CUDA, it can't be used
-    // as the destination for OpenGL drawing calls.
-    // But in our particular case OpenGL is only used
-    // to display the content of the PBO, specified by CUDA kernels,
+    // While a PBO is registered to CUDA, it can't be used as the destination for OpenGL drawing calls.
+    // But in our particular case OpenGL is only used to display the content of the PBO, specified by CUDA kernels,
     // so we need to register/unregister it only once.
     // DEPRECATED: checkCudaErrors(cudaGLRegisterBufferObject(gl_PBO) );
     checkCudaErrors(cudaGraphicsGLRegisterBuffer(&cuda_pbo_resource, gl_PBO, cudaGraphicsMapFlagsWriteDiscard));
@@ -336,8 +331,7 @@ void initOpenGLBuffers()
     {
         char tmpStr[512];
         // NOTE: "%s(%i) : " allows Visual Studio to directly jump to the file at
-        // the right line when the user double clicks on the error line in the
-        // Output pane. Like any compile error.
+        // the right line when the user double clicks on the error line in the output pane. Like any compile error.
         sprintf_s(tmpStr, 255, "\n%s(%i) : GL Error : %s\n\n", __FILE__, __LINE__, gluErrorString(gl_error));
         OutputDebugString(tmpStr);
 
