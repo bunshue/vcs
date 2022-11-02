@@ -10,10 +10,6 @@ int H = 600;
 // 初始化參數
 void init(void)
 {
-	glClearColor(0.3, 0.3, 0.3, 1.0);	//設置背景色
-
-	//glColor3f(1.0, 1.0, 1.0);
-
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();	//設置單位矩陣
 
@@ -128,8 +124,8 @@ int main(int argc, char** argv)
 	
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
-	glutInitWindowSize(W, H);
-	glutInitWindowPosition(1100, 200);
+	glutInitWindowSize(W, H);			// 設定視窗大小
+	glutInitWindowPosition(1100, 200);	// 設定視窗位置
 
 	glutCreateWindow("開啟視窗");	//開啟視窗 並顯示出視窗 Title
 

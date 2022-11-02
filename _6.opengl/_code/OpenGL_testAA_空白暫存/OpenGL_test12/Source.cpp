@@ -25,6 +25,14 @@ void draw_boundary(float* color, float dd)
     glVertex3fv(point3);	//右上
     glVertex3fv(point4);	//左上
     glEnd();
+
+    //畫中心十字
+    glBegin(GL_LINES);
+    glVertex3f(-dd, 0.0f, 0.0f);    //左
+    glVertex3f(dd, 0.0f, 0.0f);     //右
+    glVertex3f(0.0f, dd, 0.0f);     //上
+    glVertex3f(0.0f, -dd, 0.0f);    //下
+    glEnd();
 }
 
 // 繪圖回調函數

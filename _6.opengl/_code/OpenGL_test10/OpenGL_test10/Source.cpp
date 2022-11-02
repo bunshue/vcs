@@ -29,6 +29,35 @@ void init(void)
 	glEnable(GL_DEPTH_TEST);
 }
 
+void draw_boundary(float* color, float dd)
+{
+	//用 GL_LINE_LOOP 畫一個空心矩形
+	glColor3fv((GLfloat*)color);    //設定顏色
+	float point1[3] = { -dd, -dd, 0 };	//左下
+	float point2[3] = { dd, -dd, 0 };	//右下
+	float point3[3] = { dd,  dd, 0 };	//右上
+	float point4[3] = { -dd,  dd, 0 };	//左上
+	glBegin(GL_LINE_LOOP);
+	glVertex3fv(point1);	//左下
+	glVertex3fv(point2);	//右下
+	glVertex3fv(point3);	//右上
+	glVertex3fv(point4);	//左上
+	glEnd();
+
+	//畫中心十字
+	glBegin(GL_LINES);
+	glColor3f(1.0, 0.0, 0.0);		//R
+	glVertex3f(-dd, 0.0f, 0.0f);    //左
+	glVertex3f(dd, 0.0f, 0.0f);     //右
+	glColor3f(0.0, 1.0, 0.0);		//G
+	glVertex3f(0.0f, dd, 0.0f);     //上
+	glVertex3f(0.0f, -dd, 0.0f);    //下
+	glColor3f(0.0, 0.0, 1.0);		//B
+	glVertex3f(0.0f, 0.0f, 0.0f);	//中
+	glVertex3f(0.0f, 0.0f, dd);		//前
+	glEnd();
+}
+
 // 繪圖回調函數
 void display(void)
 {
@@ -40,9 +69,13 @@ void display(void)
 	w = rect[2];
 	h = rect[3];
 
-	glClearColor(1.0f, 1.0f, 1.0f, 0.0f);
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	//畫視窗邊界
+	glLineWidth(3.0f);	//設定線寬
+	float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
+	draw_boundary(color_yellow, 2.5);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();	//設置單位矩陣
@@ -72,22 +105,23 @@ void display(void)
 	eyey = y;
 	eyez = -x * sin(-y_angle * M_PI / 180.0) + z * cos(-y_angle * M_PI / 180.0);
 	gluLookAt(eyex, eyey, eyez, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+
 	draw_coordinates(1.0);
 
 	glLineWidth(1.0f);	//設定線寬
 
 	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
-	glTranslatef(-1.0f, 0.0f, 0.0f);
+	//glTranslatef(-1.0f, 0.0f, 0.0f);	//平移至指定地方(累積)
 	glutWireTeapot(0.5);
 	glPopMatrix();
 
 	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
-	glTranslatef(1.0f, 0.0f, 0.0f);
-	glScalef(0.5f, 0.5f, 0.5f);
+	glTranslatef(1.0f, 0.0f, 0.0f);	//平移至指定地方(累積)
+	glScalef(0.5f, 0.5f, 0.5f);		//縮放各方向顯示比例
 	drawTetrahedron();	//畫四面體
 	glPopMatrix();
 
-	glFlush();
+	glFlush();  // 執行繪圖命令
 	glutSwapBuffers();
 }
 
@@ -214,7 +248,7 @@ void motion(int x, int y)
 int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
-	
+
 	//glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 

@@ -46,40 +46,26 @@ void display(void)
 	glScalef(0.25, 0.25, 1.0);
 
 	glTranslatef(0.0, 2.0, 0.0);
-	glColor3f(1.0, 0.0, 0.0);
+	glColor3f(1.0, 0.0, 0.0);	//R
 	plotCurve(bspline_w3);
 
 	glTranslatef(1.0, 0.0, 0.0);
-	glColor3f(0.0, 1.0, 0.0);
+	glColor3f(0.0, 1.0, 0.0);	//G
 	plotCurve(bspline_w2);
 
 	glTranslatef(1.0, 0.0, 0.0);
-	glColor3f(0.0, 0.0, 1.0);
+	glColor3f(0.0, 0.0, 1.0);	//B
 	plotCurve(bspline_w1);
 
 	glTranslatef(1.0, 0.0, 0.0);
-	glColor3f(1.0, 0.0, 1.0);
+	glColor3f(1.0, 1.0, 0.0);	//Yellow
 	plotCurve(bspline_w0);
 
 	glPopMatrix();
 	glColor3f(1.0, 1.0, 1.0);
 
-	//暫放
-	glColor3f(1.0, 0.0, 1.0);
-	glBegin(GL_QUADS);
-	//glTexCoord2f(0.0f, 0.0f);
-	glVertex2f(0.0f, 0.0f);
-	//glTexCoord2f(0.5f, 0.0f);
-	glVertex2f(0.5f, 0.0f);
-	//glTexCoord2f(0.5f, 0.5f);
-	glVertex2f(0.5f, 0.5f);
-	//glTexCoord2f(0.0f, 0.5f);
-	glVertex2f(0.0f, 0.5f);
-	glEnd();
-
-
 	glutSwapBuffers();
-	glFlush();
+	glFlush();  // 執行繪圖命令
 }
 
 // 窗口大小變化回調函數

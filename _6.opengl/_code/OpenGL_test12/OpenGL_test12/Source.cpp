@@ -298,8 +298,8 @@ int main(int argc, char** argv)
 
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
-    glutInitWindowSize(1200, 600);		//設定視窗大小, 直接拉大內容
-    glutInitWindowPosition(600, 200);	//視窗起始位置
+    glutInitWindowSize(1200, 600);		// 設定視窗大小
+    glutInitWindowPosition(600, 200);	// 設定視窗位置
 
     glutCreateWindow("幾何圖形繪製");	//開啟視窗 並顯示出視窗 Title
 

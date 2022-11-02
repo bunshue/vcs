@@ -7,17 +7,25 @@
 void draw_boundary(float* color, float dd)
 {
 	//用 GL_LINE_LOOP 畫一個空心矩形
-	//glColor3f(0.0, 1.0, 0.0);
-	glColor3fv((GLfloat*)color);
+	glColor3fv((GLfloat*)color);    //設定顏色
 	float point1[3] = { -dd, -dd, 0 };	//左下
-	float point2[3] = { dd, -dd, 0 };		//右下
-	float point3[3] = { dd,  dd, 0 };		//右上
+	float point2[3] = { dd, -dd, 0 };	//右下
+	float point3[3] = { dd,  dd, 0 };	//右上
 	float point4[3] = { -dd,  dd, 0 };	//左上
 	glBegin(GL_LINE_LOOP);
 	glVertex3fv(point1);	//左下
 	glVertex3fv(point2);	//右下
 	glVertex3fv(point3);	//右上
 	glVertex3fv(point4);	//左上
+	glEnd();
+
+	//畫中心十字
+	glBegin(GL_LINES);
+	glVertex3f(-dd, 0.0f, 0.0f);    //左
+	glVertex3f(dd, 0.0f, 0.0f);     //右
+	glVertex3f(0.0f, dd, 0.0f);     //上
+	glVertex3f(0.0f, -dd, 0.0f);    //下
+
 	glEnd();
 }
 
@@ -56,9 +64,10 @@ void display(void)
 	// 每個顏色的分量占一個字節
 	// 參數數據是 R 紅色 G 綠色 B 藍色 A 透明度
 	// 下面設置的含義是白色, 繪製點的時候, 每次都使用白色繪製
-	glColor4ub(255, 255, 255, 255);
+	glColor4ub(255, 255, 255, 255);	//設定顏色 White
 
 	//畫視窗邊界
+	glLineWidth(5.0f);	//設定線寬
 	float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
 	draw_boundary(color_yellow, 0.9);
 
@@ -105,7 +114,6 @@ void display(void)
 
 	glEnd();	// 繪製點結束
 
-
 	//繪製彩色的線
 
 	glLineWidth(12.0f);	//設定線寬
@@ -113,18 +121,15 @@ void display(void)
 	glBegin(GL_LINE_LOOP);
 
 	// 繪製線 , 每兩個點組成一條線
-// glVertex3f (GLfloat x, GLfloat y, GLfloat z)
 	glVertex3f(0.0f, -0.8f, 0.0f);
 
-	// 設置綠色 
-	glColor4ub(0, 255, 0, 255);
+	glColor4ub(0, 255, 0, 255);	//設定顏色 G
 
 	glVertex3f(0.8f, -0.8f, 0.0f);
 
 	// 上面的設置會從 (0,0,-10) 座標向 (-5,0,-10) 座標繪製一條線
 
-	// 設置藍色
-	glColor4ub(0, 0, 255, 255);
+	glColor4ub(0, 0, 255, 255);	//設定顏色 B
 
 	//glVertex3f(-5.0f, 0.0f, -10.0f);
 	glVertex3f(0.8f, 0.3f, 0.0f);
@@ -133,13 +138,11 @@ void display(void)
 
 	// 上面的設置會從 (-5,0,-10) 座標向 (-5,-2,-10) 座標繪製一條線
 
-		// 繪製點結束
-	glEnd();
+	glEnd();	// 繪製點結束
 
 	glPopMatrix();
 
-	// 將後緩沖區繪製到前臺
-	glutSwapBuffers();
+	glFlush();  // 執行繪圖命令
 }
 
 void keyboard(unsigned char key, int x, int y)
@@ -161,13 +164,15 @@ int main(int argc, char** argv)
 	
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
-	glutInitWindowSize(600, 600);
-	glutInitWindowPosition(1100, 200);
+	glutInitWindowSize(600, 600);       // 設定視窗大小
+	glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
 	glutCreateWindow("開啟視窗");	//開啟視窗 並顯示出視窗 Title
 
 	glutDisplayFunc(display);	//設定callback function
 	glutKeyboardFunc(keyboard);	//設定callback function
+
+	printf("僅顯示, 無控制, 按 Esc 離開\n");
 
 	glutMainLoop();	//開始主循環繪製
 
