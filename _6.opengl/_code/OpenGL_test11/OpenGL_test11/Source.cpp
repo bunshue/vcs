@@ -5,8 +5,6 @@
 #include <iostream>
 #include "../../Common.h"
 
-void drawTetrahedron(void);
-
 int mx; //position of mouse
 int my; //position of mouse
 int m_state = 0; //mouse usage
@@ -55,7 +53,11 @@ void display(void)
 	glDisable(GL_LIGHTING);
 	//glLightfv(GL_LIGHT0, GL_POSITION, lit_position);
 	draw_coordinates(1.0);	//顯示座標軸，設X軸的兩端點為v1、v2，考慮這兩點經受的變換
-	glutWireTeapot(0.5); //顯示茶壺
+
+	//畫一個茶壺
+	float color_red[4] = { 1.0f, 0.0f, 0.0f, 1.0f };
+	draw_teapot(color_red, 1.0, 0.5);
+
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	
@@ -63,7 +65,7 @@ void display(void)
 	glTranslatef(1.0f, 0.0f, 0.0f); //對應變換陣T4
 	glScalef(0.5f, 0.5f, 0.5f); //對應變換陣T5
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_yellow);
-	drawTetrahedron(); //顯示直角四面體，設某個三角形的頂點為v1'、v2'、v3'，考慮這三點經受的變換
+	draw_tetrahedron2(); //顯示直角四面體，設某個三角形的頂點為v1'、v2'、v3'，考慮這三點經受的變換
 	glPopMatrix(); //上彈堆棧，棧頂被放棄
 	
 	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
@@ -77,46 +79,6 @@ void display(void)
 
 	glFlush();
 	glutSwapBuffers();
-}
-
-void drawTetrahedron(void)
-{
-	float pnt[4][3] = { {0.0,0.0,0.0},{1.0,0.0,0.0}, {0.0,1.0,0.0}, {0.0,0.0,1.0} };
-	int tetra[4][3] = { {0,2,1}, {0,3,2}, {0,1,3}, {1,2,3} };
-
-	glNormal3f(0.0f, 0.0f, -1.0f);	//設置法線
-	glBegin(GL_POLYGON); //X-Y
-	glVertex3fv(pnt[tetra[0][0]]);
-	glVertex3fv(pnt[tetra[0][1]]);
-	glVertex3fv(pnt[tetra[0][2]]);
-	glEnd();
-
-	glNormal3f(-1.0f, 0.0f, 0.0f);	//設置法線
-	glBegin(GL_POLYGON); //Y-Z
-	glVertex3fv(pnt[tetra[1][0]]);
-	glVertex3fv(pnt[tetra[1][1]]);
-	glVertex3fv(pnt[tetra[1][2]]);
-	glEnd();
-
-	glNormal3f(0.0f, -1.0f, 0.0f);	//設置法線
-	glBegin(GL_POLYGON); //Z-X
-	glVertex3fv(pnt[tetra[2][0]]);
-	glVertex3fv(pnt[tetra[2][1]]);
-	glVertex3fv(pnt[tetra[2][2]]);
-	glEnd();
-
-	glNormal3f(1.0f, 1.0f, 1.0f);	//設置法線
-	glBegin(GL_POLYGON); //slope
-	glVertex3fv(pnt[tetra[3][0]]);
-	glVertex3fv(pnt[tetra[3][1]]);
-	glVertex3fv(pnt[tetra[3][2]]);
-	glEnd();
-}
-
-// 窗口大小變化回調函數
-void reshape(int w, int h)
-{
-	glViewport(0, 0, w, h);
 }
 
 void keyboard(unsigned char key, int x, int y)
@@ -188,7 +150,7 @@ int main(int argc, char** argv)
 	printf("1 keydown means control the distance of the eye\n");
 
 	glutDisplayFunc(display);	//設定callback function
-	glutReshapeFunc(reshape);	//設定callback function
+	glutReshapeFunc(reshape0);	//設定callback function
 	glutKeyboardFunc(keyboard);	//設定callback function
 	glutMouseFunc(mouse);		//設定callback function
 	glutMotionFunc(motion);		//設定callback function

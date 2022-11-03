@@ -21,8 +21,6 @@ float x_angle = 0.0f;	//angle of eye
 float y_angle = 0.0f;	//angle of eye
 float dist = 10.0f; //distance from the eye
 
-void drawTetrahedron(void);
-
 void init(void)
 {
 	glEnable(GL_DEPTH_TEST);
@@ -82,50 +80,21 @@ void display(void)
 
 	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
 	//glTranslatef(-1.0f, 0.0f, 0.0f);	//平移至指定地方(累積)
-	glutWireTeapot(0.5);
+
+	//畫一個茶壺
+	float color_red[4] = { 1.0f, 0.0f, 0.0f, 1.0f };
+	draw_teapot(color_red, 1.0, 0.5);
+
 	glPopMatrix();
 
 	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
 	glTranslatef(1.0f, 0.0f, 0.0f);	//平移至指定地方(累積)
 	glScalef(0.5f, 0.5f, 0.5f);		//縮放各方向顯示比例
-	drawTetrahedron();	//畫四面體
+	draw_tetrahedron();	//畫四面體
 	glPopMatrix();
 
 	glFlush();  // 執行繪圖命令
 	glutSwapBuffers();
-}
-
-void drawTetrahedron(void)	//畫四面體
-{
-	float pnt[4][3] = { {0.0,0.0,0.0}, {1.0,0.0,0.0}, {0.0,1.0,0.0}, {0.0,0.0,1.0} };
-	int tetra[4][3] = { {0,2,1}, {0,3,2}, {0,1,3}, {1,2,3} };
-
-	glBegin(GL_TRIANGLES);
-	glColor3f(1.0f, 0.0f, 0.0f);
-	glVertex3fv(pnt[tetra[0][0]]);
-	glVertex3fv(pnt[tetra[0][1]]);
-	glVertex3fv(pnt[tetra[0][2]]);
-
-	glColor3f(0.0f, 1.0f, 0.0f);
-	glVertex3fv(pnt[tetra[1][0]]);
-	glVertex3fv(pnt[tetra[1][1]]);
-	glVertex3fv(pnt[tetra[1][2]]);
-
-	glColor3f(0.0f, 0.0f, 1.0f);
-	glVertex3fv(pnt[tetra[2][0]]);
-	glVertex3fv(pnt[tetra[2][1]]);
-	glVertex3fv(pnt[tetra[2][2]]);
-
-	glColor3f(0.0f, 1.0f, 1.0f);	glVertex3fv(pnt[tetra[3][0]]); //補色
-	glColor3f(1.0f, 0.0f, 1.0f);	glVertex3fv(pnt[tetra[3][1]]);
-	glColor3f(1.0f, 1.0f, 0.0f);	glVertex3fv(pnt[tetra[3][2]]);
-	glEnd();
-}
-
-// 窗口大小變化回調函數
-void reshape(int w, int h)
-{
-	glViewport(0, 0, w, h);
 }
 
 void keyboard(unsigned char key, int x, int y)
@@ -210,7 +179,7 @@ int main(int argc, char** argv)
 	printf("1 keydown means control the distance of the eye\n");
 
 	glutDisplayFunc(display);	//設定callback function
-	glutReshapeFunc(reshape);	//設定callback function
+	glutReshapeFunc(reshape0);	//設定callback function
 	glutKeyboardFunc(keyboard);	//設定callback function
 	glutMouseFunc(mouse);		//設定callback function
 	glutMotionFunc(motion);		//設定callback function

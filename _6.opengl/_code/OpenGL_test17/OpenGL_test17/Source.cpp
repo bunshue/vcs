@@ -40,10 +40,9 @@ void display(void)
 
 	draw_coordinates(3.0);
 
-	glColor3f(1.0f, 1.0f, 0.0f); //Yellow
-	glLineWidth(1.0f);
-
-	glutWireTeapot(1.3);
+	//畫一個茶壺
+	float color_red[4] = { 1.0f, 0.0f, 0.0f, 1.0f };
+	draw_teapot(color_red, 1.0, 1.2);
 
 	glutSwapBuffers();
 }

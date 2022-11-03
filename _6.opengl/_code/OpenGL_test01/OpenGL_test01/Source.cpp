@@ -417,12 +417,6 @@ void display(void)
     glutSwapBuffers();  // 將後緩沖區繪製到前臺
 }
 
-// 窗口大小變化回調函數
-void reshape(int w, int h)
-{
-    glViewport(0, 0, w, h);
-}
-
 void keyboard(unsigned char key, int x, int y)
 {
     switch (key)
@@ -530,14 +524,8 @@ int main(int argc, char* argv[])
     glutSetCursor(GLUT_CURSOR_DESTROY); //改變視窗上的鼠標標記
 
     glutDisplayFunc(display);       //設定callback function, 註冊顯示函數 // Register display callback handler for window re-paint
-    glutReshapeFunc(reshape);       //設定callback function
+    glutReshapeFunc(reshape0);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
-
-    //glutWireTeapot(200);
-    //glutWireTeapot(3);
-
-    //設置一組浮點數來表示紅色
-    GLfloat vRed[] = { 1.0,1.00,0.0,0.5f };
 
     glutMainLoop();	//開始主循環繪製     // Enter the event-processing loop
 

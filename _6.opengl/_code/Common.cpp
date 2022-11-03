@@ -66,6 +66,76 @@ void draw_teapot(float* color, float width, double size)
     //glutSolidTeapot(size);  //實心茶壺
 }
 
+void draw_tetrahedron(void)	//畫四面體
+{
+    float pnt[4][3] = { {0.0,0.0,0.0}, {1.0,0.0,0.0}, {0.0,1.0,0.0}, {0.0,0.0,1.0} };
+    int tetra[4][3] = { {0,2,1}, {0,3,2}, {0,1,3}, {1,2,3} };
+
+    glBegin(GL_TRIANGLES);
+    glColor3f(1.0f, 0.0f, 0.0f);
+    glVertex3fv(pnt[tetra[0][0]]);
+    glVertex3fv(pnt[tetra[0][1]]);
+    glVertex3fv(pnt[tetra[0][2]]);
+
+    glColor3f(0.0f, 1.0f, 0.0f);
+    glVertex3fv(pnt[tetra[1][0]]);
+    glVertex3fv(pnt[tetra[1][1]]);
+    glVertex3fv(pnt[tetra[1][2]]);
+
+    glColor3f(0.0f, 0.0f, 1.0f);
+    glVertex3fv(pnt[tetra[2][0]]);
+    glVertex3fv(pnt[tetra[2][1]]);
+    glVertex3fv(pnt[tetra[2][2]]);
+
+    glColor3f(0.0f, 1.0f, 1.0f);	glVertex3fv(pnt[tetra[3][0]]); //補色
+    glColor3f(1.0f, 0.0f, 1.0f);	glVertex3fv(pnt[tetra[3][1]]);
+    glColor3f(1.0f, 1.0f, 0.0f);	glVertex3fv(pnt[tetra[3][2]]);
+    glEnd();
+}
+
+void draw_tetrahedron2(void)
+{
+    float pnt[4][3] = { {0.0,0.0,0.0},{1.0,0.0,0.0}, {0.0,1.0,0.0}, {0.0,0.0,1.0} };
+    int tetra[4][3] = { {0,2,1}, {0,3,2}, {0,1,3}, {1,2,3} };
+
+    glNormal3f(0.0f, 0.0f, -1.0f);	//設置法線
+    glBegin(GL_POLYGON); //X-Y
+    glVertex3fv(pnt[tetra[0][0]]);
+    glVertex3fv(pnt[tetra[0][1]]);
+    glVertex3fv(pnt[tetra[0][2]]);
+    glEnd();
+
+    glNormal3f(-1.0f, 0.0f, 0.0f);	//設置法線
+    glBegin(GL_POLYGON); //Y-Z
+    glVertex3fv(pnt[tetra[1][0]]);
+    glVertex3fv(pnt[tetra[1][1]]);
+    glVertex3fv(pnt[tetra[1][2]]);
+    glEnd();
+
+    glNormal3f(0.0f, -1.0f, 0.0f);	//設置法線
+    glBegin(GL_POLYGON); //Z-X
+    glVertex3fv(pnt[tetra[2][0]]);
+    glVertex3fv(pnt[tetra[2][1]]);
+    glVertex3fv(pnt[tetra[2][2]]);
+    glEnd();
+
+    glNormal3f(1.0f, 1.0f, 1.0f);	//設置法線
+    glBegin(GL_POLYGON); //slope
+    glVertex3fv(pnt[tetra[3][0]]);
+    glVertex3fv(pnt[tetra[3][1]]);
+    glVertex3fv(pnt[tetra[3][2]]);
+    glEnd();
+}
+
+
+//OpenGL 之基本 callback function
+
+// 窗口大小變化回調函數
+void reshape0(int w, int h)
+{
+    glViewport(0, 0, w, h);
+}
+
 void keyboard0(unsigned char key, int x, int y)
 {
     //printf("你所按按鍵的碼是%x\t此時視窗內的滑鼠座標是(%d,%d)\n", key, x, y);

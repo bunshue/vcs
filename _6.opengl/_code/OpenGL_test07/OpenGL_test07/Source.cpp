@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <iostream>
+#include "../../Common.h"
 
 // 初始化參數
 void init()
@@ -17,29 +18,11 @@ void init()
 // 繪圖回調函數
 void display(void)
 {
-    //畫茶壺
-    //glClear(GL_COLOR_BUFFER_BIT);
-    glColor3f(1.0, 0, 0);
-
-    glutWireTeapot(2);  //線框茶壺
-    //glutSolidTeapot(3);  //實心茶壺
+    //畫一個茶壺
+    float color_red[4] = { 1.0f, 0.0f, 0.0f, 1.0f };
+    draw_teapot(color_red, 1.0, 2.0);
 
     glFlush();  // 執行繪圖命令
-}
-
-void keyboard(unsigned char key, int x, int y)
-{
-    switch (key)
-    {
-    case 27:
-    case 'q':
-    case 'Q':
-        //離開視窗
-        glutDestroyWindow(glutGetWindow());
-        return;
-    case '?':
-        break;
-    }
 }
 
 int main(int argc, char** argv)
@@ -55,8 +38,8 @@ int main(int argc, char** argv)
 
     init();
 
-    glutDisplayFunc(display);	//設定callback function
-    glutKeyboardFunc(keyboard);	//設定callback function
+    glutDisplayFunc(display);	    //設定callback function
+    glutKeyboardFunc(keyboard0);	//設定callback function
 
     glutMainLoop();	//開始主循環繪製
 
