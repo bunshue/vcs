@@ -72,60 +72,43 @@ uchar4* source_image;
 int W;
 int H;
 
-StopWatchInterface* timer = NULL;
-
 #define BUFFER_DATA(i) ((char *)0 + i)
 #define REFRESH_DELAY 10  // ms
 
 void display(void)
 {
-    //printf("dis ");
+    printf("dis ");
 
-    sdkStartTimer(&timer);
     TColor* d_dst = NULL;
     size_t num_bytes;
 
     checkCudaErrors(cudaGraphicsMapResources(1, &cuda_pbo_resource, 0));
     getLastCudaError("cudaGraphicsMapResources failed");
     checkCudaErrors(cudaGraphicsResourceGetMappedPointer((void**)&d_dst, &num_bytes, cuda_pbo_resource));
-    //printf("(%d) ", num_bytes);
     getLastCudaError("cudaGraphicsResourceGetMappedPointer failed");
 
-    //runImageFilters(d_dst);
+    //printf("(%d) ", num_bytes);
 
     checkCudaErrors(cudaGraphicsUnmapResources(1, &cuda_pbo_resource, 0));
 
-    // Common display code path
-    {
-        glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT);
 
-        glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, W, H, GL_RGBA, GL_UNSIGNED_BYTE, BUFFER_DATA(0));
+    glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, W, H, GL_RGBA, GL_UNSIGNED_BYTE, BUFFER_DATA(0));
 
-        //以下這段為必要
-        glBegin(GL_TRIANGLES);
-        glTexCoord2f(0, 0);
-        glVertex2f(-1, -1);
-        glTexCoord2f(2, 0);
-        glVertex2f(+3, -1);
-        glTexCoord2f(0, 2);
-        glVertex2f(-1, +3);
-        glEnd();
+    //以下這段為必要
+    glBegin(GL_TRIANGLES);
+    glTexCoord2f(0, 0);
+    glVertex2f(-1, -1);
+    glTexCoord2f(2, 0);
+    glVertex2f(+3, -1);
+    glTexCoord2f(0, 2);
+    glVertex2f(-1, +3);
+    glEnd();
 
-        glFinish();
-    }
+    glFinish();
+
     glutSwapBuffers();
     glutReportErrors();
-}
-
-void timerEvent(int value)
-{
-    //printf("timer ");
-    if (glutGetWindow())
-    {
-        //printf("glutGetWindow ");
-        glutPostRedisplay();
-        glutTimerFunc(REFRESH_DELAY, timerEvent, 0);    //設定timer事件
-    }
 }
 
 void keyboard(unsigned char key, int x, int y)
@@ -148,7 +131,6 @@ void cleanup()
     free(source_image);
     checkCudaErrors(CUDA_FreeArray());
     checkCudaErrors(cudaGraphicsUnregisterResource(cuda_pbo_resource));
-    sdkDeleteTimer(&timer);
 }
 
 int initGL(int* argc, char** argv)
@@ -167,21 +149,9 @@ int initGL(int* argc, char** argv)
     glutKeyboardFunc(keyboard); //設定callback function
     glutCloseFunc(cleanup);     //設定callback function
 
-    glutTimerFunc(REFRESH_DELAY, timerEvent, 0);    //設定timer事件
-
     printf("OpenGL window created.\n");
 
-    //以下這段為必要
-    if (!isGLVersionSupported(1, 5) || !areGLExtensionsSupported("GL_ARB_vertex_buffer_object GL_ARB_pixel_buffer_object"))
-    {
-        fprintf(stderr, "Error: failed to get minimal extensions for demo\n");
-        fprintf(stderr, "This sample requires:\n");
-        fprintf(stderr, "  OpenGL version 1.5\n");
-        fprintf(stderr, "  GL_ARB_vertex_buffer_object\n");
-        fprintf(stderr, "  GL_ARB_pixel_buffer_object\n");
-        fflush(stderr);
-        return false;
-    }
+    glewInit();
 
     return 0;
 }
@@ -192,6 +162,8 @@ void initOpenGLBuffers()
     glEnable(GL_TEXTURE_2D);
     glGenTextures(1, &gl_Tex);	//生成紋理對象
     glBindTexture(GL_TEXTURE_2D, gl_Tex);	//綁定紋理
+
+    //紋理濾波參數設置
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
@@ -208,6 +180,7 @@ void initOpenGLBuffers()
     */
 
     //在這裡把影像設定到pBox....
+    //設置紋理數據
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA8, W, H, 0, GL_RGBA, GL_UNSIGNED_BYTE, source_image);
 
     printf("Texture created.\n");
@@ -262,9 +235,6 @@ int main(int argc, char** argv)
     checkCudaErrors(CUDA_MallocArray(&source_image, W, H));
 
     initOpenGLBuffers();
-
-    sdkCreateTimer(&timer);
-    sdkStartTimer(&timer);
 
     glutMainLoop();	//開始主循環繪製
 

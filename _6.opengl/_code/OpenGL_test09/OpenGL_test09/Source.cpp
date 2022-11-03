@@ -116,19 +116,6 @@ void reshape(int w, int h)
     glLoadIdentity();	//設置單位矩陣
 }
 
-void keyboard(unsigned char key, int x, int y)
-{
-    switch (key)
-    {
-    case 27:
-    case 'q':
-    case 'Q':
-        //離開視窗
-        glutDestroyWindow(glutGetWindow());
-        return;
-    }
-}
-
 static void idle(void)
 {
     glutPostRedisplay();
@@ -150,7 +137,7 @@ int main(int argc, char** argv)
 
     glutDisplayFunc(display);	//設定callback function
     glutReshapeFunc(reshape);	//設定callback function
-    glutKeyboardFunc(keyboard);	//設定callback function
+    glutKeyboardFunc(keyboard0);    //設定callback function
     glutIdleFunc(idle);			//設定callback function
 
     glutMainLoop();	//開始主循環繪製

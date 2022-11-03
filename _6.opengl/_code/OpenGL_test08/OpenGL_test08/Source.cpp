@@ -51,20 +51,14 @@ void display(void)
     float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
     draw_boundary(color_yellow, 0.9);
 
+    //畫數學函數曲線
     float color_red[4] = { 1.0f, 0.0f, 0.0f, 1.0f };
-
     float x_st = -PI / 4;
     float x_sp = PI / 4;
     int steps = 30;
     plotCurve(my_function, color_red, x_st, x_sp, steps);
 
     glFlush();  // 執行繪圖命令
-}
-
-// 窗口大小變化回調函數
-void reshape(int w, int h)
-{
-    glViewport(0, 0, w, h);
 }
 
 int main(int argc, char** argv)
@@ -80,7 +74,7 @@ int main(int argc, char** argv)
     glutCreateWindow("OpenGL測試");	//開啟視窗 並顯示出視窗 Title
 
     glutDisplayFunc(display);   //設定callback function
-    glutReshapeFunc(reshape);   //設定callback function
+    glutReshapeFunc(reshape0);   //設定callback function
     glutKeyboardFunc(keyboard0); //設定callback function
     glutMouseFunc(mouse0);       //設定callback function
     glutMotionFunc(motion0);     //設定callback function

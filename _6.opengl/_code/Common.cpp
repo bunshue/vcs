@@ -127,6 +127,56 @@ void draw_tetrahedron2(void)
     glEnd();
 }
 
+inline void glPrint(float x, float y, const char* s, void* font)
+{
+    glRasterPos2f((GLfloat)x, (GLfloat)y);
+    int len = (int)strlen(s);
+
+    for (int i = 0; i < len; i++)
+    {
+        glutBitmapCharacter(font, s[i]);
+    }
+}
+
+inline void glPrintShadowed(float x, float y, const char* s, void* font, float* color)
+{
+    //背景字
+    glColor3f(1.0, 1.0, 1.0);   //設定顏色 White
+    glPrint(x, y, s, font);
+
+    //前景字
+    glColor3fv((GLfloat*)color);    //設定顏色
+    glPrint(x + 0.01, y + 0.01, s, font);
+}
+
+void draw_string1(const char* str, float* color, void* font, float x_st, float y_st)
+{
+    //int len = (int)strlen(str);
+    //printf("取得字串 [%s], 長度 %d\n", str, len);
+
+    glColor3fv((GLfloat*)color);    //設定顏色
+    glPrint(x_st, y_st, str, font);
+}
+
+void draw_string2(const char* str, float* color, void* font, float x_st, float y_st)
+{
+    glColor3fv((GLfloat*)color);    //設定顏色
+    glPrintShadowed(x_st, y_st, str, font, color);
+}
+
+//實心三角形
+void draw_triangle(float* color, float width, float x1, float y1, float x2, float y2, float x3, float y3)
+{
+    glColor3fv((GLfloat*)color);    //設定顏色
+    glLineWidth(width);	//設定線寬
+
+    glBegin(GL_TRIANGLES);
+    glVertex2f(x1, y1);
+    glVertex2f(x2, y2);
+    glVertex2f(x3, y3);
+    glEnd();
+}
+
 
 //OpenGL 之基本 callback function
 

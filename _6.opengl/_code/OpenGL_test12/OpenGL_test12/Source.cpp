@@ -7,35 +7,6 @@
 
 #define PI_F             3.141592654F
 
-//寫字的函數
-inline void glPrint(int x, int y, const char* s, void* font)
-{
-    glRasterPos2f((GLfloat)x, (GLfloat)y);
-    int len = (int)strlen(s);
-
-    for (int i = 0; i < len; i++)
-    {
-        glutBitmapCharacter(font, s[i]);
-    }
-}
-
-/* 看不出shadowed效果
-inline void glPrintShadowed(int x, int y, const char* s, void* font, float* color)
-{
-    glColor3f(0.0, 0.0, 1.0);
-    glPrint(x - 0.9, y - 1.0, s, font);
-
-    glColor3fv((GLfloat*)color);
-    glPrint(x, y, s, font);
-}
-*/
-
-void drawString(const char* str, void* font, float* color, float x_st, float y_st)
-{
-    glColor3fv((GLfloat*)color);
-    glPrint(x_st, y_st, str, font);
-}
-
 // 繪圖回調函數
 void display(void)
 {
@@ -73,15 +44,6 @@ void display(void)
     //畫視窗邊界
     float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
     draw_boundary(color_yellow, offset);
-
-    //畫中心十字
-    glBegin(GL_LINES);
-    glVertex2f(0, offset);      //中上
-    glVertex2f(0, -offset);     //中下
-
-    glVertex2f(-offset, 0);     //中左
-    glVertex2f(offset, 0);      //中右
-    glEnd();
 
     //畫線
     //畫直線連線
@@ -245,7 +207,8 @@ void display(void)
     float color[4] = { 0.0f, 1.0f, 0.0f, 1.0f };
     x_st = -1.2;
     y_st = 0;
-    drawString("Write Something", GLUT_BITMAP_TIMES_ROMAN_24, color, x_st, y_st);
+    const char str[30] = "Write Something";
+    draw_string1(str, color, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
 
     glFlush();  // 執行繪圖命令
 }

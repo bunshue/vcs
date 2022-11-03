@@ -40,13 +40,13 @@ namespace vcs_Remove_Bin_Obj
             checkBox10.Location = new Point(x_st, y_st + dy * 7);
             button1.Location = new Point(x_st, y_st + dy * 8);
 
-            checkBox5.Location = new Point(x_st, y_st + dy * 10);
-            checkBox6.Location = new Point(x_st, y_st + dy * 11);
+            checkBox5.Location = new Point(x_st, y_st + dy * 11);
+            checkBox6.Location = new Point(x_st, y_st + dy * 12);
 
-            button2.Location = new Point(x_st, y_st + dy * 12);
-            button3.Location = new Point(x_st, y_st + dy * 13 + 40);
-            button4.Location = new Point(x_st+115, y_st + dy * 12);
-            cb_debug.Location = new Point(x_st+115, y_st + dy * 13 + 40);
+            button2.Location = new Point(x_st, y_st + dy * 13);
+            button3.Location = new Point(x_st, y_st + dy * 14 + 40);
+            button4.Location = new Point(x_st+115, y_st + dy * 13);
+            groupBox_remove.Location = new Point(x_st + 115, y_st + dy * 8);
 
             lb_main_mesg.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 1);
@@ -87,10 +87,20 @@ namespace vcs_Remove_Bin_Obj
 
             string path = string.Empty;
 
-            if (cb_debug.Checked == true)
+            if (rb_remove_vcs.Checked==true)
             {
+                richTextBox1.Text += "清理 vcs\n";
+                path = search_path;
+            }
+            else if (rb_remove_cuda.Checked == true)
+            {
+                richTextBox1.Text += "清理 CUDA\n";
                 path = @"C:\_git\vcs\_3.cuda";
-                //path = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6_draw";
+            }
+            else if (rb_remove_opengl.Checked == true)
+            {
+                richTextBox1.Text += "清理 Open GL\n";
+                path = @"C:\_git\vcs\_6.opengl";
             }
             else
             {
@@ -204,6 +214,13 @@ namespace vcs_Remove_Bin_Obj
                                 richTextBox1.Text += subdirectory + "\n";   //僅顯示
                             if (checkBox8.Checked == true)
                                 folder_name.Add(subdirectory);              //加入刪除準備
+                        }
+                        else if (subdirectory.EndsWith("\\Debug"))
+                        {
+                            if (checkBox3.Checked == true)
+                                richTextBox1.Text += subdirectory + "\n";
+                            if (checkBox1.Checked == true)
+                                folder_name.Add(subdirectory);
                         }
                         DirectoryInfo di = new DirectoryInfo(subdirectory);
                         ProcessDirectory(subdirectory);

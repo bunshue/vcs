@@ -150,13 +150,12 @@ namespace __HelperGL {
 
     static int isGLVersionSupported(unsigned reqMajor, unsigned reqMinor)
     {
-#if defined(WIN32) || defined(_WIN32) || defined(WIN64) || defined(_WIN64)
         if (glewInit() != GLEW_OK)
         {
             std::cerr << "glewInit() failed!" << std::endl;
             return 0;
         }
-#endif
+
         std::string version ((const char *) glGetString (GL_VERSION));
         std::stringstream stream (version);
         unsigned major, minor;

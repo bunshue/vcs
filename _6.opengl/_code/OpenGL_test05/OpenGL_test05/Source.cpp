@@ -21,6 +21,15 @@ void display(void)
     float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
     draw_boundary(color_yellow, 0.9);
 
+    float width = 3;
+    float x1 = 0;
+    float y1 = 0.3;
+    float x2 = 0.3;
+    float y2 = -0.3;
+    float x3 = -0.3;
+    float y3 = -0.3;
+    draw_triangle(color_yellow, width, x1, y1, x2, y2, x3, y3);
+
     glFlush();  // 執行繪圖命令
 }
 

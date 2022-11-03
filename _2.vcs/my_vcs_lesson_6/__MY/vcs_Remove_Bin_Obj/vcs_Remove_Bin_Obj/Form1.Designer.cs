@@ -46,7 +46,11 @@
             this.checkBox10 = new System.Windows.Forms.CheckBox();
             this.button2 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.cb_debug = new System.Windows.Forms.CheckBox();
+            this.groupBox_remove = new System.Windows.Forms.GroupBox();
+            this.rb_remove_vcs = new System.Windows.Forms.RadioButton();
+            this.rb_remove_cuda = new System.Windows.Forms.RadioButton();
+            this.rb_remove_opengl = new System.Windows.Forms.RadioButton();
+            this.groupBox_remove.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -123,7 +127,7 @@
             // button3
             // 
             this.button3.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button3.Location = new System.Drawing.Point(15, 567);
+            this.button3.Location = new System.Drawing.Point(12, 613);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(104, 52);
             this.button3.TabIndex = 8;
@@ -137,7 +141,7 @@
             this.checkBox5.Checked = true;
             this.checkBox5.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBox5.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox5.Location = new System.Drawing.Point(15, 391);
+            this.checkBox5.Location = new System.Drawing.Point(12, 437);
             this.checkBox5.Name = "checkBox5";
             this.checkBox5.Size = new System.Drawing.Size(180, 31);
             this.checkBox5.TabIndex = 10;
@@ -148,7 +152,7 @@
             // 
             this.checkBox6.AutoSize = true;
             this.checkBox6.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.checkBox6.Location = new System.Drawing.Point(15, 441);
+            this.checkBox6.Location = new System.Drawing.Point(12, 487);
             this.checkBox6.Name = "checkBox6";
             this.checkBox6.Size = new System.Drawing.Size(180, 31);
             this.checkBox6.TabIndex = 9;
@@ -230,7 +234,7 @@
             // button2
             // 
             this.button2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button2.Location = new System.Drawing.Point(15, 492);
+            this.button2.Location = new System.Drawing.Point(12, 538);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(104, 52);
             this.button2.TabIndex = 140;
@@ -241,7 +245,7 @@
             // button4
             // 
             this.button4.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button4.Location = new System.Drawing.Point(135, 492);
+            this.button4.Location = new System.Drawing.Point(132, 538);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(104, 52);
             this.button4.TabIndex = 141;
@@ -249,23 +253,56 @@
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
-            // cb_debug
+            // groupBox_remove
             // 
-            this.cb_debug.AutoSize = true;
-            this.cb_debug.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_debug.Location = new System.Drawing.Point(135, 588);
-            this.cb_debug.Name = "cb_debug";
-            this.cb_debug.Size = new System.Drawing.Size(94, 31);
-            this.cb_debug.TabIndex = 142;
-            this.cb_debug.Text = "debug";
-            this.cb_debug.UseVisualStyleBackColor = true;
+            this.groupBox_remove.Controls.Add(this.rb_remove_opengl);
+            this.groupBox_remove.Controls.Add(this.rb_remove_cuda);
+            this.groupBox_remove.Controls.Add(this.rb_remove_vcs);
+            this.groupBox_remove.Location = new System.Drawing.Point(132, 335);
+            this.groupBox_remove.Name = "groupBox_remove";
+            this.groupBox_remove.Size = new System.Drawing.Size(104, 97);
+            this.groupBox_remove.TabIndex = 144;
+            this.groupBox_remove.TabStop = false;
+            this.groupBox_remove.Text = "清理範圍";
+            // 
+            // rb_remove_vcs
+            // 
+            this.rb_remove_vcs.AutoSize = true;
+            this.rb_remove_vcs.Checked = true;
+            this.rb_remove_vcs.Location = new System.Drawing.Point(20, 20);
+            this.rb_remove_vcs.Name = "rb_remove_vcs";
+            this.rb_remove_vcs.Size = new System.Drawing.Size(38, 16);
+            this.rb_remove_vcs.TabIndex = 0;
+            this.rb_remove_vcs.TabStop = true;
+            this.rb_remove_vcs.Text = "vcs";
+            this.rb_remove_vcs.UseVisualStyleBackColor = true;
+            // 
+            // rb_remove_cuda
+            // 
+            this.rb_remove_cuda.AutoSize = true;
+            this.rb_remove_cuda.Location = new System.Drawing.Point(20, 45);
+            this.rb_remove_cuda.Name = "rb_remove_cuda";
+            this.rb_remove_cuda.Size = new System.Drawing.Size(45, 16);
+            this.rb_remove_cuda.TabIndex = 1;
+            this.rb_remove_cuda.Text = "cuda";
+            this.rb_remove_cuda.UseVisualStyleBackColor = true;
+            // 
+            // rb_remove_opengl
+            // 
+            this.rb_remove_opengl.AutoSize = true;
+            this.rb_remove_opengl.Location = new System.Drawing.Point(20, 70);
+            this.rb_remove_opengl.Name = "rb_remove_opengl";
+            this.rb_remove_opengl.Size = new System.Drawing.Size(55, 16);
+            this.rb_remove_opengl.TabIndex = 2;
+            this.rb_remove_opengl.Text = "opengl";
+            this.rb_remove_opengl.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(928, 643);
-            this.Controls.Add(this.cb_debug);
+            this.ClientSize = new System.Drawing.Size(928, 675);
+            this.Controls.Add(this.groupBox_remove);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.checkBox10);
@@ -287,6 +324,8 @@
             this.Name = "Form1";
             this.Text = "刪除檔案";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.groupBox_remove.ResumeLayout(false);
+            this.groupBox_remove.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -311,7 +350,10 @@
         private System.Windows.Forms.CheckBox checkBox10;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.CheckBox cb_debug;
+        private System.Windows.Forms.GroupBox groupBox_remove;
+        private System.Windows.Forms.RadioButton rb_remove_opengl;
+        private System.Windows.Forms.RadioButton rb_remove_cuda;
+        private System.Windows.Forms.RadioButton rb_remove_vcs;
     }
 }
 

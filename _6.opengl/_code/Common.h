@@ -4,7 +4,9 @@ void draw_teapot(float* color, float width, double size);
 void draw_tetrahedron(void);	//畫四面體
 void draw_tetrahedron2(void);
 
-
+void draw_string1(const char* str, float* color, void* font, float x_st, float y_st);	//無陰影
+void draw_string2(const char* str, float* color, void* font, float x_st, float y_st);	//有陰影
+void draw_triangle(float* color, float width, float x1, float y1, float x2, float y2, float x3, float y3);
 
 void reshape0(int w, int h);
 void keyboard0(unsigned char key, int x, int y);

@@ -76,60 +76,6 @@ void init09(void)
     glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0); //設置窗口座標系大小
 }
 
-void drawString1(void)
-{
-    using std::string;
-    using std::stringstream;
-
-    glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
-    glLoadIdentity();	//設置單位矩陣
-    glRasterPos2f(-0.8f, 0.6f);
-
-    string infoString;
-    stringstream ss;
-    ss << "Write Something to Screen";
-    infoString.append(ss.str());
-
-    for (unsigned int i = 0; i < infoString.size(); i++)
-    {
-        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, infoString[i]);
-    }
-    glPopMatrix();
-}
-
-inline void glPrint(int x, int y, const char* s, void* font)
-{
-    glRasterPos2f((GLfloat)x, (GLfloat)y);
-    int len = (int)strlen(s);
-
-    for (int i = 0; i < len; i++)
-    {
-        glutBitmapCharacter(font, s[i]);
-    }
-}
-
-inline void glPrintShadowed(int x, int y, const char* s, void* font, float* color)
-{
-    glColor3f(0.0, 0.0, 0.0);   //設定顏色 Black
-    glPrint(x - 1, y - 1, s, font);
-
-    glColor3fv((GLfloat*)color);    //設定顏色
-    glPrint(x, y, s, font);
-}
-
-void drawString2(void)
-{
-    glPrint(-1.2, 0, "111Write Something to Screen", GLUT_BITMAP_TIMES_ROMAN_24);
-
-    float* color = new float[4];
-    color[0] = 0.0f;
-    color[1] = 1.0f;
-    color[2] = 0.0f;
-    color[3] = 1.0f;
-
-    glPrintShadowed(-1.2, -1.2, "222Write Something to Screen", GLUT_BITMAP_TIMES_ROMAN_24, color);
-}
-
 // 繪圖回調函數
 void display(void)
 {
@@ -168,8 +114,16 @@ void display(void)
         //左下x,左下y,右上x,右上y,
         glRectf(0.3f, -0.7f, 0.7f, 0.7f);//畫一個矩形
 
-        //drawString1();
-        drawString2();
+        float color_cc[4] = { 0.0f, 1.0f, 1.0f, 1.0f };
+        float x_st = -0.9;
+        float y_st = 0.1;
+        const char str1[30] = "draw_string_test 1";
+        draw_string1(str1, color_cc, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
+
+        x_st = -0.9;
+        y_st = -0.1;
+        const char str2[30] = "draw_string_test 2";
+        draw_string2(str2, color_cc, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
 
         //畫視窗邊界
         float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
