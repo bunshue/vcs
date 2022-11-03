@@ -679,25 +679,7 @@ bool initGL(int* argc, char** argv)
     printf("vertShaderPath : %s\n", vertShaderPath);
     printf("fragShaderPath : %s\n", fragShaderPath);
 
-    // initialize necessary OpenGL extensions
-
-    if (!isGLVersionSupported(2, 0))
-    {
-        fprintf(stderr, "ERROR: Support for necessary OpenGL extensions missing.");
-        fflush(stderr);
-        return false;
-    }
-
-    if (!areGLExtensionsSupported(
-        "GL_ARB_vertex_buffer_object GL_ARB_pixel_buffer_object")) {
-        fprintf(stderr, "Error: failed to get minimal extensions for demo\n");
-        fprintf(stderr, "This sample requires:\n");
-        fprintf(stderr, "  OpenGL version 1.5\n");
-        fprintf(stderr, "  GL_ARB_vertex_buffer_object\n");
-        fprintf(stderr, "  GL_ARB_pixel_buffer_object\n");
-        cleanup();
-        exit(EXIT_FAILURE);
-    }
+glewInit();
 
     // default initialization
     glClearColor(0.0, 0.0, 0.0, 1.0);

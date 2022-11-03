@@ -242,11 +242,7 @@ void initGL(int* argc, char** argv)
 
     glutIdleFunc(idle);	//設定callback function, 利用idle事件進行重畫
 
-    if (!isGLVersionSupported(2, 0) || !areGLExtensionsSupported("GL_ARB_pixel_buffer_object"))
-    {
-        fprintf(stderr, "Required OpenGL extensions are missing.");
-        exit(EXIT_FAILURE);
-    }
+glewInit();
 }
 
 void runAutoTest(const char* ref_file, char* exec_path)

@@ -812,18 +812,7 @@ void initGL(int* argc, char** argv)
     glutInitWindowSize(winWidth, winHeight);
     glutCreateWindow("CUDA Smoke Particles");
 
-    if (!isGLVersionSupported(2, 0))
-    {
-        fprintf(stderr, "The following required OpenGL extensions missing:\n\tGL_VERSION_2_0\n\tGL_VERSION_1_5\n");
-        exit(EXIT_SUCCESS);
-    }
-
-    if (!areGLExtensionsSupported("GL_ARB_multitexture GL_ARB_vertex_buffer_object GL_EXT_geometry_shader4"))
-    {
-        fprintf(stderr, "The following required OpenGL extensions "
-            "missing:\n\tGL_ARB_multitexture\n\tGL_ARB_vertex_buffer_object\n\tGL_EXT_geometry_shader4.\n");
-        exit(EXIT_SUCCESS);
-    }
+glewInit();
 
 #if defined(WIN32)
 

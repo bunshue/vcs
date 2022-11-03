@@ -664,6 +664,7 @@ int main(int argc, char** argv)
             // Initialize GL
             glutInit(&argc, argv);
             glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+            
             // TODO use width/height?
             glutInitWindowSize(1000, 1000);     //設定視窗大小, 直接拉大內容
             glutInitWindowPosition(900, 50);    //視窗起始位置
@@ -671,11 +672,7 @@ int main(int argc, char** argv)
                     // Create a window with rendering context and everything else we need
             glutCreateWindow("Random Fog");
 
-            if (!isGLVersionSupported(2, 0))
-            {
-                fprintf(stderr, "This sample requires at least OpenGL 2.0\n");
-                exit(EXIT_WAIVED);
-            }
+glewInit();
 
             // Select CUDA device with OpenGL interoperability
             findCudaDevice(argc, (const char**)argv);

@@ -402,15 +402,7 @@ void initGL(int argc, char** argv)
 
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
 
-    if (!isGLVersionSupported(2, 0) || !areGLExtensionsSupported("GL_ARB_vertex_buffer_object GL_ARB_pixel_buffer_object"))
-    {
-        printf("Error: failed to get minimal extensions for demo\n");
-        printf("This sample requires:\n");
-        printf("  OpenGL version 2.0\n");
-        printf("  GL_ARB_vertex_buffer_object\n");
-        printf("  GL_ARB_pixel_buffer_object\n");
-        exit(EXIT_FAILURE);
-    }
+glewInit();
 }
 
 // This test specifies a single test (where you specify radius and/or iterations)

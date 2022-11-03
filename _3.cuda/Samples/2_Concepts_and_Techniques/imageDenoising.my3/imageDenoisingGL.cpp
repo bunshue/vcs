@@ -27,7 +27,7 @@ cudaChannelFormatDesc uchar4tex = cudaCreateChannelDesc<uchar4>();
 
 cudaArray* a_Src;   // CUDA array descriptor
 
-cudaError_t CUDA_MallocArray(uchar4 * * src_image, int width, int height)
+cudaError_t CUDA_MallocArray(uchar4** src_image, int width, int height)
 {
     cudaError_t error;
 
@@ -66,7 +66,7 @@ cudaError_t CUDA_FreeArray()
 GLuint gl_PBO;
 GLuint gl_Tex;
 struct cudaGraphicsResource* cuda_pbo_resource;  // handles OpenGL-CUDA exchange
-                                                
+
 // Source image on the host side
 uchar4* source_image;
 int W;
@@ -126,7 +126,7 @@ void keyboard(unsigned char key, int x, int y)
 
 void cleanup()
 {
-    printf("cleanup()\n");
+    printf("\ncleanup()\n");
 
     free(source_image);
     checkCudaErrors(CUDA_FreeArray());
@@ -191,21 +191,17 @@ void initOpenGLBuffers()
     glBufferData(GL_PIXEL_UNPACK_BUFFER_ARB, W * H * 4, source_image, GL_STREAM_COPY);
 
     checkCudaErrors(cudaGraphicsGLRegisterBuffer(&cuda_pbo_resource, gl_PBO, cudaGraphicsMapFlagsWriteDiscard));
+
     GLenum gl_error = glGetError();
-
-    if (gl_error != GL_NO_ERROR)
+    if (gl_error == GL_NO_ERROR)
     {
-        char tmpStr[512];
-        // NOTE: "%s(%i) : " allows Visual Studio to directly jump to the file at
-        // the right line when the user double clicks on the error line in the output pane. Like any compile error.
-        sprintf_s(tmpStr, 255, "\n%s(%i) : GL Error : %s\n\n", __FILE__, __LINE__, gluErrorString(gl_error));
-        OutputDebugString(tmpStr);
-
-        fprintf(stderr, "GL Error in file '%s' in line %d :\n", __FILE__, __LINE__);
-        fprintf(stderr, "%s\n", gluErrorString(gl_error));
+        printf("PBO created.\n");
+    }
+    else
+    {
+        printf("error");
         exit(EXIT_FAILURE);
     }
-    printf("PBO created.\n");
 }
 
 int main(int argc, char** argv)
@@ -219,6 +215,7 @@ int main(int argc, char** argv)
     int i;
     int j;
 
+    //在這裡製作圖片資料
     for (j = 0; j < H; j++)
     {
         for (i = 0; i < W; i++)

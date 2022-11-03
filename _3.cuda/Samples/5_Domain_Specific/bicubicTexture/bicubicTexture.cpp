@@ -586,26 +586,7 @@ void initGL(int* argc, char** argv)
 
     initMenus();
 
-    if (!isGLVersionSupported(2, 0) || !areGLExtensionsSupported("GL_ARB_pixel_buffer_object"))
-    {
-        fprintf(stderr, "Required OpenGL extensions are missing.");
-        exit(EXIT_FAILURE);
-    }
-
-#if USE_BUFFER_TEX
-
-    if (!areGLExtensionsSupported("GL_EXT_texture_buffer_object")) {
-        fprintf(stderr,
-            "OpenGL extension: GL_EXT_texture_buffer_object missing.\n");
-        exit(EXIT_FAILURE);
-    }
-
-    if (!areGLExtensionsSupported("GL_NV_gpu_program4")) {
-        fprintf(stderr, "OpenGL extension: GL_NV_gpu_program4 missing.\n");
-        exit(EXIT_FAILURE);
-    }
-
-#endif
+glewInit();
 }
 
 void loadImageData(int argc, char** argv)

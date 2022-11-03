@@ -340,14 +340,7 @@ bool initGL(int* argc, char** argv)
 
     iGLUTWindowHandle = glutCreateWindow("CUDA OpenGL post-processing");
 
-    //以下為必要
-    // initialize necessary OpenGL extensions
-    if (!isGLVersionSupported(2, 0) || !areGLExtensionsSupported("GL_ARB_pixel_buffer_object GL_EXT_framebuffer_object"))
-    {
-        printf("ERROR: Support for necessary OpenGL extensions missing.");
-        fflush(stderr);
-        return false;
-    }
+    glewInit();
 
     glClearColor(0.5, 0.5, 0.5, 1.0);
 

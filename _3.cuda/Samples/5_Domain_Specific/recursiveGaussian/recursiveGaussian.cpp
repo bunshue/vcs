@@ -301,11 +301,7 @@ void initGL(int* argc, char** argv)
     printf("Press '+' and '-' to change filter width\n");
     printf("0, 1, 2 - change filter order\n");
 
-    if (!isGLVersionSupported(2, 0) || !areGLExtensionsSupported("GL_ARB_vertex_buffer_object GL_ARB_pixel_buffer_object"))
-    {
-        fprintf(stderr, "Required OpenGL extensions missing.");
-        exit(EXIT_FAILURE);
-    }
+glewInit();
 }
 
 void benchmark(int iterations)

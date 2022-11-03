@@ -699,15 +699,11 @@ bool initGL(int* argc, char** argv)
     // Create GL context
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
+    
     glutInitWindowSize(window_width, window_height);
     glutCreateWindow("CUDA Marching Cubes");
 
-    if (!isGLVersionSupported(2, 0))
-    {
-        fprintf(stderr, "ERROR: Support for necessary OpenGL extensions missing.");
-        fflush(stderr);
-        return false;
-    }
+glewInit();
 
     // default initialization
     glClearColor(0.1f, 0.2f, 0.3f, 1.0f);

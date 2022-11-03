@@ -321,16 +321,7 @@ void initGL(int* argc, char** argv)
     glutInitWindowSize(wWidth, wHeight);
     glutCreateWindow("Function Pointers [CUDA Edge Detection]n");
 
-    if (!isGLVersionSupported(1, 5) || !areGLExtensionsSupported("GL_ARB_vertex_buffer_object GL_ARB_pixel_buffer_object"))
-    {
-        fprintf(stderr, "Error: failed to get minimal extensions for demo\n");
-        fprintf(stderr, "This sample requires:\n");
-        fprintf(stderr, "  OpenGL version 1.5\n");
-        fprintf(stderr, "  GL_ARB_vertex_buffer_object\n");
-        fprintf(stderr, "  GL_ARB_pixel_buffer_object\n");
-
-        exit(EXIT_WAIVED);
-    }
+glewInit();
 }
 
 void runAutoTest(int argc, char* argv[])

@@ -140,11 +140,7 @@ void initGL(int* argc, char** argv)
 
     glutCreateWindow("CUDA Particles");
 
-    if (!isGLVersionSupported(2, 0) || !areGLExtensionsSupported("GL_ARB_multitexture GL_ARB_vertex_buffer_object"))
-    {
-        fprintf(stderr, "Required OpenGL extensions missing.");
-        exit(EXIT_FAILURE);
-    }
+glewInit();
 
 #if defined(WIN32)
 

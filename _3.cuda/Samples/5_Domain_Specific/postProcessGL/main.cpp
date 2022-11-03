@@ -950,13 +950,7 @@ bool initGL(int* argc, char** argv)
     glutInitWindowSize(window_width, window_height);
     iGLUTWindowHandle = glutCreateWindow("CUDA OpenGL post-processing");
 
-    // initialize necessary OpenGL extensions
-    if (!isGLVersionSupported(2, 0) || !areGLExtensionsSupported("GL_ARB_pixel_buffer_object GL_EXT_framebuffer_object"))
-    {
-        printf("ERROR: Support for necessary OpenGL extensions missing.");
-        fflush(stderr);
-        return false;
-    }
+glewInit();
 
     // default initialization
 #ifndef USE_TEXTURE_RGBA8UI

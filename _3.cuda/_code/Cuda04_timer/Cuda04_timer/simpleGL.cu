@@ -142,13 +142,7 @@ bool initGL(int* argc, char** argv)
     glutKeyboardFunc(keyboard);     //設定callback function
     glutMotionFunc(motion);         //設定callback function
 
-    // initialize necessary OpenGL extensions
-    if (!isGLVersionSupported(2, 0))
-    {
-        fprintf(stderr, "ERROR: Support for necessary OpenGL extensions missing.");
-        fflush(stderr);
-        return false;
-    }
+    glewInit();
 
     // default initialization
     //glClearColor(0.0, 0.0, 0.0, 1.0);   //黑色背景

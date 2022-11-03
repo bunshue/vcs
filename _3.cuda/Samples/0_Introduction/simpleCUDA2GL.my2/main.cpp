@@ -176,10 +176,8 @@ void generateCUDAImage()
     }
 
 
-    // CUDA generated data in cuda memory or in a mapped PBO made of BGRA 8 bits
-    // 2 solutions, here :
-    // - use glTexSubImage2D(), there is the potential to loose performance in
-    // possible hidden conversion
+    // CUDA generated data in cuda memory or in a mapped PBO made of BGRA 8 bits 2 solutions, here :
+    // - use glTexSubImage2D(), there is the potential to loose performance in possible hidden conversion
     // - map the texture and blit the result thanks to CUDA API
     checkCudaErrors(cudaGraphicsUnmapResources(1, &cuda_pbo_dest_resource, 0));
     glBindBuffer(GL_PIXEL_UNPACK_BUFFER_ARB, pbo_dest);
@@ -323,9 +321,6 @@ void deleteTexture(GLuint* tex)
     *tex = 0;
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//!
-////////////////////////////////////////////////////////////////////////////////
 void FreeResource()
 {
     printf("離開程式時, FreeResource\n");
@@ -381,14 +376,7 @@ bool initGL(int* argc, char** argv)
 
     iGLUTWindowHandle = glutCreateWindow("CUDA OpenGL post-processing");
 
-    //以下為必要
-    // initialize necessary OpenGL extensions
-    if (!isGLVersionSupported(2, 0) || !areGLExtensionsSupported("GL_ARB_pixel_buffer_object GL_EXT_framebuffer_object"))
-    {
-        printf("ERROR: Support for necessary OpenGL extensions missing.");
-        fflush(stderr);
-        return false;
-    }
+    glewInit();
 
     glClearColor(0.5, 0.5, 0.5, 1.0);
 

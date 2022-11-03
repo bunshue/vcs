@@ -313,11 +313,7 @@ int main(int argc, char** argv)
     // Create a window with rendering context and everything else we need
     glutCreateWindow("Random Fog");
 
-    if (!isGLVersionSupported(2, 0))
-    {
-        fprintf(stderr, "This sample requires at least OpenGL 2.0\n");
-        exit(EXIT_WAIVED);
-    }
+glewInit();
 
     // Select CUDA device with OpenGL interoperability
     findCudaDevice(argc, (const char**)argv);

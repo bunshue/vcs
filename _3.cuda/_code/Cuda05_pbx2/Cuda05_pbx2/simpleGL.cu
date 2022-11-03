@@ -162,6 +162,7 @@ bool initGL(int* argc, char** argv)
 {
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
+
     glutInitWindowSize(window_width, window_height);
     glutInitWindowPosition(1100, 200);
 
@@ -173,13 +174,7 @@ bool initGL(int* argc, char** argv)
 
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
 
-    // initialize necessary OpenGL extensions
-    if (!isGLVersionSupported(2, 0))
-    {
-        fprintf(stderr, "ERROR: Support for necessary OpenGL extensions missing.");
-        fflush(stderr);
-        return false;
-    }
+    glewInit();
 
     // default initialization
     //glClearColor(0.0, 0.0, 0.0, 1.0);   //¶Â¦â­I´º

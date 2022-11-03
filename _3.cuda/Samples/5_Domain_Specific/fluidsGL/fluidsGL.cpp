@@ -344,19 +344,7 @@ int initGL(int* argc, char** argv)
     glutMouseFunc(mouse);
     glutMotionFunc(motion);
 
-    if (!isGLVersionSupported(1, 5))
-    {
-        fprintf(stderr, "ERROR: Support for OpenGL 1.5 is missing");
-        fflush(stderr);
-        return false;
-    }
-
-    if (!areGLExtensionsSupported("GL_ARB_vertex_buffer_object"))
-    {
-        fprintf(stderr, "ERROR: Support for necessary OpenGL extensions missing.");
-        fflush(stderr);
-        return false;
-    }
+glewInit();
 
     return true;
 }

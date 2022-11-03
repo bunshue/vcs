@@ -969,15 +969,8 @@ void initGL(int* argc, char** argv)
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
     initMenus();
 
-    if (!isGLVersionSupported(1, 5) || !areGLExtensionsSupported("GL_ARB_vertex_buffer_object GL_ARB_pixel_buffer_object"))
-    {
-        fprintf(stderr, "Error: failed to get minimal extensions for demo\n");
-        fprintf(stderr, "This sample requires:\n");
-        fprintf(stderr, "  OpenGL version 1.5\n");
-        fprintf(stderr, "  GL_ARB_vertex_buffer_object\n");
-        fprintf(stderr, "  GL_ARB_pixel_buffer_object\n");
-        exit(EXIT_SUCCESS);
-    }
+glewInit();
+
     printf("OpenGL window created.\n");
 }
 

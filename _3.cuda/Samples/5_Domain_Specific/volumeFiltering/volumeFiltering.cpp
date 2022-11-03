@@ -489,11 +489,7 @@ void initGL(int* argc, char** argv)
     glutInitWindowSize(width, height);
     glutCreateWindow("CUDA 3D Volume Filtering");
 
-    if (!isGLVersionSupported(2, 0) || !areGLExtensionsSupported("GL_ARB_pixel_buffer_object"))
-    {
-        printf("Required OpenGL extensions are missing.");
-        exit(EXIT_SUCCESS);
-    }
+glewInit();
 }
 
 void initPixelBuffer()
