@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <iostream>
+#include "../../Common.h"
 
 // 繪圖回調函數
 void display(void)
@@ -66,19 +67,6 @@ void reshape(int w, int h)
     glLoadIdentity();   //設置單位矩陣
 }
 
-void keyboard(unsigned char key, int x, int y)
-{
-    switch (key)
-    {
-    case 27:
-    case 'q':
-    case 'Q':
-        //離開視窗
-        glutDestroyWindow(glutGetWindow());
-        return;
-    }
-}
-
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
@@ -92,7 +80,7 @@ int main(int argc, char** argv)
 
     glutDisplayFunc(display);	//設定callback function
     glutReshapeFunc(reshape);	//設定callback function
-    glutKeyboardFunc(keyboard);	//設定callback function
+    glutKeyboardFunc(keyboard0);	//設定callback function
 
     glutMainLoop();	//開始主循環繪製
 

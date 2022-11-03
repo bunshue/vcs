@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "../../Common.h"
 
 //#include <GL/glut.h>      //32 bits
 #include <GL/freeglut.h>    //64 bits
@@ -63,16 +64,6 @@ void init01(void)
 
     //glClearColor(0.1, 0.1, 0.4, 0.0); //設置背景色
     //glShadeModel(GL_SMOOTH);
-}
-
-//display_mode = 8  //畫茶壺
-void init08()
-{
-    glClearColor(0.0, 0.0, 0.0, 0.0);   //設置背景色
-    glMatrixMode(GL_PROJECTION);
-    glOrtho(-5, 5, -5, 5, 5, 15);   //設置窗口座標系大小
-    glMatrixMode(GL_MODELVIEW);
-    gluLookAt(0, 0, 10, 0, 0, 0, 0, 1, 0);
 }
 
 //display_mode = 9  //畫矩形
@@ -137,22 +128,6 @@ void drawString2(void)
     color[3] = 1.0f;
 
     glPrintShadowed(-1.2, -1.2, "222Write Something to Screen", GLUT_BITMAP_TIMES_ROMAN_24, color);
-}
-
-void draw_boundary(float* color, float dd)
-{
-    //用 GL_LINE_LOOP 畫一個空心矩形
-    glColor3fv((GLfloat*)color);    //設定顏色
-    float point1[3] = { -dd, -dd, 0 };	//左下
-    float point2[3] = { dd, -dd, 0 };	//右下
-    float point3[3] = { dd,  dd, 0 };	//右上
-    float point4[3] = { -dd,  dd, 0 };	//左上
-    glBegin(GL_LINE_LOOP);
-    glVertex3fv(point1);	//左下
-    glVertex3fv(point2);	//右下
-    glVertex3fv(point3);	//右上
-    glVertex3fv(point4);	//左上
-    glEnd();
 }
 
 // 繪圖回調函數
@@ -417,15 +392,6 @@ void display(void)
     }
     else if (display_mode == 8)
     {
-        //畫茶壺
-        glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
-
-        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
-
-        glColor3f(1.0, 0, 0);   //設定顏色 R
-
-        glutWireTeapot(3);  //線框茶壺
-        //glutSolidTeapot(3);  //實心茶壺
     }
     else if (display_mode == 9)
     {
@@ -509,7 +475,6 @@ void keyboard(unsigned char key, int x, int y)
         break;
     case '8':
         display_mode = 8;
-        init08();
         break;
     case '9':
         display_mode = 9;

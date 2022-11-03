@@ -3,40 +3,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-
-#include <stdio.h>
 #include <iostream>
-
-void draw_boundary(float* color, float dd)
-{
-	//用 GL_LINE_LOOP 畫一個空心矩形
-	//glColor3f(0.0, 1.0, 0.0);
-	glColor3fv((GLfloat*)color);
-
-	//方法一, 使用 GL_QUADS
-	glBegin(GL_QUADS);	//畫矩形
-	//逆時針為空心
-	//畫一個白色外框
-	glVertex3f(-dd, dd, 0.0f);	//左上
-	glVertex3f(-dd, -dd, 0.0f);	//左下
-	glVertex3f(dd, -dd, 0.0f);	//右下
-	glVertex3f(dd, dd, 0.0f);	//右上
-	glEnd();
-
-	/*
-	//方法二, 使用 GL_LINE_LOOP
-	float point1[3] = { -dd, -dd, 0 };	//左下
-	float point2[3] = { dd, -dd, 0 };		//右下
-	float point3[3] = { dd,  dd, 0 };		//右上
-	float point4[3] = { -dd,  dd, 0 };	//左上
-	glBegin(GL_LINE_LOOP);
-	glVertex3fv(point1);	//左下
-	glVertex3fv(point2);	//右下
-	glVertex3fv(point3);	//右上
-	glVertex3fv(point4);	//左上
-	glEnd();
-	*/
-}
+#include "../../Common.h"
 
 // 繪圖回調函數
 void display()
@@ -139,22 +107,6 @@ void reshape(int w, int h)
 	glLoadIdentity();	//設置單位矩陣
 }
 
-void keyboard(unsigned char key, int x, int y)
-{
-	//printf("你所按按鍵的碼是%x\t此時視窗內的滑鼠座標是(%d,%d)\n", key, x, y);
-
-	switch (key)
-	{
-	case 27:
-	case 'q':
-	case 'Q':
-		//離開視窗
-		glutDestroyWindow(glutGetWindow());
-		exit(0);
-		return;
-	}
-}
-
 int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
@@ -168,7 +120,7 @@ int main(int argc, char** argv)
 
 	glutDisplayFunc(display);       //設定callback function
 	glutReshapeFunc(reshape);       //設定callback function
-	glutKeyboardFunc(keyboard);     //設定callback function
+	glutKeyboardFunc(keyboard0);	//設定callback function
 
 	printf("僅顯示, 無控制, 按 Esc 離開\n");
 

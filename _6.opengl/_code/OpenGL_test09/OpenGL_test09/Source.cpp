@@ -3,59 +3,11 @@
 
 #include <stdio.h>
 #include <iostream>
-
-void DrawBox();
+#include "../../Common.h"
 
 float angle;
 
-// 初始化參數
-void init()
-{
-    glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
-    glClearColor(0.1, 0.1, 0.4, 0.0);
-    glShadeModel(GL_SMOOTH);
-
-    //CBMPLoader bmpLoader;
-    //bmpLoader.LoadBmp("/123-bmp.bmp");
-
-    //glGenTextures(1, &tex2D);	//生成紋理對象
-    //glBindTexture(GL_TEXTURE_2D, tex2D);	//綁定紋理
-
-    // 紋理濾波參數設置
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-
-    // 設置紋理數據
-    //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, bmpLoader.imageWidth, bmpLoader.imageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, bmpLoader.image);
-
-    angle = 0;
-}
-
-// 繪圖回調函數
-void display(void)
-{
-    // 清除之前幀數據
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
-    glTranslatef(0.0f, 0.0f, -5.0f);
-    glRotated(angle, 1, 1, 0);
-    DrawBox();
-    glPopMatrix();
-
-    glFlush();  // 執行繪圖命令
-
-    //angle++;
-    angle += 0.1;
-
-    glutPostRedisplay();
-}
-
-/** 繪製木箱 */
-void DrawBox()
+void DrawBox()  //繪製木箱
 {
     glEnable(GL_TEXTURE_2D);	//啟用2D紋理映射
 
@@ -108,6 +60,49 @@ void DrawBox()
     glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, -1.0f, 1.0f);
     glEnd();
     glDisable(GL_TEXTURE_2D);
+}
+
+// 初始化參數
+void init()
+{
+    glEnable(GL_DEPTH_TEST);
+    glDepthFunc(GL_LESS);
+    glClearColor(0.1, 0.1, 0.4, 0.0);
+    glShadeModel(GL_SMOOTH);
+
+    //CBMPLoader bmpLoader;
+    //bmpLoader.LoadBmp("/123-bmp.bmp");
+
+    //glGenTextures(1, &tex2D);	//生成紋理對象
+    //glBindTexture(GL_TEXTURE_2D, tex2D);	//綁定紋理
+
+    // 紋理濾波參數設置
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+
+    // 設置紋理數據
+    //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, bmpLoader.imageWidth, bmpLoader.imageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, bmpLoader.image);
+
+    angle = 0;
+}
+
+// 繪圖回調函數
+void display(void)
+{
+    // 清除之前幀數據
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
+    glTranslatef(0.0f, 0.0f, -5.0f);
+    glRotated(angle, 1, 1, 0);
+    DrawBox();
+    glPopMatrix();
+
+    glFlush();  // 執行繪圖命令
+
+    angle += 0.05;
 }
 
 // 窗口大小變化回調函數

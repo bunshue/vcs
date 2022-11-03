@@ -22,18 +22,17 @@ void init(void)
 void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
-	glColor3f(1.0, 1.0, 1.0); //画笔白色
+	glColor3f(1.0, 1.0, 1.0); //畫筆白色
 
-	glLoadIdentity();  //加载单位矩阵
+	glLoadIdentity();  //加載單位矩陣
 
 	gluLookAt(eyex, eyey, eyez, 0.0, 0.0, 0.0, upx, upy, upz);
 
 	draw_coordinates(2.0);
 
-	glColor3f(1.0f, 1.0f, 1.0f); //白色線
-	glLineWidth(1.0f);
-
-	glutWireTeapot(1.6);
+	//畫一個茶壺
+	float color_red[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
+	draw_teapot(color_red, 1.0, 1.6);
 
 	glutSwapBuffers();
 }
@@ -96,14 +95,6 @@ void keyboard(unsigned char key, int x, int y)
 	}
 }
 
-void mouse(int button, int state, int x, int y)
-{
-}
-
-void motion(int x, int y)
-{
-}
-
 int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
@@ -119,8 +110,8 @@ int main(int argc, char** argv)
 	glutDisplayFunc(display);	//設定callback function
 	glutReshapeFunc(reshape);	//設定callback function
 	glutKeyboardFunc(keyboard);	//設定callback function
-	glutMouseFunc(mouse);		//設定callback function
-	glutMotionFunc(motion);		//設定callback function
+	glutMouseFunc(mouse0);		//設定callback function
+	glutMotionFunc(motion0);	//設定callback function
 
 	glutMainLoop();	//開始主循環繪製
 

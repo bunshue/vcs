@@ -4,9 +4,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-
 #include <math.h>
 #include <windows.h>
+#include "../../Common.h"
 
 #define _USE_MATH_DEFINES
 
@@ -21,41 +21,11 @@ float x_angle = 0.0f;	//angle of eye
 float y_angle = 0.0f;	//angle of eye
 float dist = 10.0f; //distance from the eye
 
-void draw_coordinates(float len);
 void drawTetrahedron(void);
 
 void init(void)
 {
 	glEnable(GL_DEPTH_TEST);
-}
-
-void draw_boundary(float* color, float dd)
-{
-	//用 GL_LINE_LOOP 畫一個空心矩形
-	glColor3fv((GLfloat*)color);    //設定顏色
-	float point1[3] = { -dd, -dd, 0 };	//左下
-	float point2[3] = { dd, -dd, 0 };	//右下
-	float point3[3] = { dd,  dd, 0 };	//右上
-	float point4[3] = { -dd,  dd, 0 };	//左上
-	glBegin(GL_LINE_LOOP);
-	glVertex3fv(point1);	//左下
-	glVertex3fv(point2);	//右下
-	glVertex3fv(point3);	//右上
-	glVertex3fv(point4);	//左上
-	glEnd();
-
-	//畫中心十字
-	glBegin(GL_LINES);
-	glColor3f(1.0, 0.0, 0.0);		//R
-	glVertex3f(-dd, 0.0f, 0.0f);    //左
-	glVertex3f(dd, 0.0f, 0.0f);     //右
-	glColor3f(0.0, 1.0, 0.0);		//G
-	glVertex3f(0.0f, dd, 0.0f);     //上
-	glVertex3f(0.0f, -dd, 0.0f);    //下
-	glColor3f(0.0, 0.0, 1.0);		//B
-	glVertex3f(0.0f, 0.0f, 0.0f);	//中
-	glVertex3f(0.0f, 0.0f, dd);		//前
-	glEnd();
 }
 
 // 繪圖回調函數
@@ -123,29 +93,6 @@ void display(void)
 
 	glFlush();  // 執行繪圖命令
 	glutSwapBuffers();
-}
-
-void draw_coordinates(float len)
-{
-	glLineWidth(3.0f);	//設定線寬
-
-	glColor3f(1.0f, 0.0f, 0.0f); //畫紅色的x軸
-	glBegin(GL_LINES);
-	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
-	glVertex3f(len, 0.0f, 0.0f);	//x軸 len,0,0
-	glEnd();
-
-	glColor3f(0.0, 1.0, 0.0); //畫綠色的y軸
-	glBegin(GL_LINES);
-	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
-	glVertex3f(0.0f, len, 0.0f);	//y軸 0,len,0
-	glEnd();
-
-	glColor3f(0.0, 0.0, 1.0); //畫藍色的z軸
-	glBegin(GL_LINES);
-	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
-	glVertex3f(0.0f, 0.0f, len);	//z軸 0,0,len
-	glEnd();
 }
 
 void drawTetrahedron(void)	//畫四面體

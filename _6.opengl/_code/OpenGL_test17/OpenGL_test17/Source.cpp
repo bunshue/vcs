@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <iostream>
+#include "../../Common.h"
 
 //eyex, eyey, eyez, centerx, centery, centerz
 double eyex = -5.0;
@@ -11,29 +12,6 @@ double eyez = -5.0;
 double upx = 0;
 double upy = 1.0;
 double upz = 0;
-
-void draw_coordinates(float len)
-{
-	glLineWidth(3.0f);	//設定線寬
-
-	glColor3f(1.0f, 0.0f, 0.0f); //畫紅色的x軸
-	glBegin(GL_LINES);
-	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
-	glVertex3f(len, 0.0f, 0.0f);	//x軸 len,0,0
-	glEnd();
-
-	glColor3f(0.0, 1.0, 0.0); //畫綠色的y軸
-	glBegin(GL_LINES);
-	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
-	glVertex3f(0.0f, len, 0.0f);	//y軸 0,len,0
-	glEnd();
-
-	glColor3f(0.0, 0.0, 1.0); //畫藍色的z軸
-	glBegin(GL_LINES);
-	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
-	glVertex3f(0.0f, 0.0f, len);	//z軸 0,0,len
-	glEnd();
-}
 
 // 繪圖回調函數
 void display(void)
@@ -119,14 +97,6 @@ void keyboard(unsigned char key, int x, int y)
 	}
 }
 
-void mouse(int button, int state, int x, int y)
-{
-}
-
-void motion(int x, int y)
-{
-}
-
 void idle()
 {
 	//printf("i");
@@ -147,9 +117,9 @@ int main(int argc, char** argv)
 	glutDisplayFunc(display);	//設定callback function
 	glutReshapeFunc(reshape);	//設定callback function
 	glutKeyboardFunc(keyboard);	//設定callback function
-	glutMouseFunc(mouse);		//設定callback function
-	glutMotionFunc(motion);		//設定callback function
-	glutIdleFunc(idle);         //設定callback function, 利用idle事件進行重畫
+	glutMouseFunc(mouse0);		//設定callback function
+	glutMotionFunc(motion0);	//設定callback function
+	glutIdleFunc(idle);			//設定callback function, 利用idle事件進行重畫
 
 	glutMainLoop();	//開始主循環繪製
 

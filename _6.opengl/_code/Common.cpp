@@ -44,10 +44,15 @@ void draw_boundary(float* color, float dd)
 
     //畫中心十字
     glBegin(GL_LINES);
+    glColor3f(1.0, 0.0, 0.0);		//R
     glVertex3f(-dd, 0.0f, 0.0f);    //左
     glVertex3f(dd, 0.0f, 0.0f);     //右
+    glColor3f(0.0, 1.0, 0.0);		//G
     glVertex3f(0.0f, dd, 0.0f);     //上
     glVertex3f(0.0f, -dd, 0.0f);    //下
+    glColor3f(0.0, 0.0, 1.0);		//B
+    glVertex3f(0.0f, 0.0f, 0.0f);	//中
+    glVertex3f(0.0f, 0.0f, dd);		//前
     glEnd();
 }
 
@@ -57,12 +62,14 @@ void draw_teapot(float* color, float width, double size)
     glColor3fv((GLfloat*)color);    //設定顏色
 
     glLineWidth(width);
-    glutWireTeapot(size);
+    glutWireTeapot(size);  //線框茶壺
+    //glutSolidTeapot(size);  //實心茶壺
 }
-
 
 void keyboard0(unsigned char key, int x, int y)
 {
+    //printf("你所按按鍵的碼是%x\t此時視窗內的滑鼠座標是(%d,%d)\n", key, x, y);
+
     switch (key)
     {
     case 27:

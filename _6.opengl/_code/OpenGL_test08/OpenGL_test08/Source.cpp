@@ -8,35 +8,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include <math.h>
+#include "../../Common.h"
 
 //#include <GL/glut.h>      //32 bits
 #include <GL/freeglut.h>    //64 bits
 
 #define PI    3.14159265358979323846
-
-void draw_boundary(float* color, float dd)
-{
-    //用 GL_LINE_LOOP 畫一個空心矩形
-    glColor3fv((GLfloat*)color);    //設定顏色
-    float point1[3] = { -dd, -dd, 0 };	//左下
-    float point2[3] = { dd, -dd, 0 };	//右下
-    float point3[3] = { dd,  dd, 0 };	//右上
-    float point4[3] = { -dd,  dd, 0 };	//左上
-    glBegin(GL_LINE_LOOP);
-    glVertex3fv(point1);	//左下
-    glVertex3fv(point2);	//右下
-    glVertex3fv(point3);	//右上
-    glVertex3fv(point4);	//左上
-    glEnd();
-
-    //畫中心十字
-    glBegin(GL_LINES);
-    glVertex3f(-dd, 0.0f, 0.0f);    //左
-    glVertex3f(dd, 0.0f, 0.0f);     //右
-    glVertex3f(0.0f, dd, 0.0f);     //上
-    glVertex3f(0.0f, -dd, 0.0f);    //下
-    glEnd();
-}
 
 float my_function(float a)
 {
@@ -90,44 +67,6 @@ void reshape(int w, int h)
     glViewport(0, 0, w, h);
 }
 
-void keyboard(unsigned char key, int x, int y)
-{
-    switch (key)
-    {
-    case 27:
-    case 'q':
-    case 'Q':
-        //離開視窗
-        glutDestroyWindow(glutGetWindow());
-        return;
-
-    case '1':
-        printf("1\n");
-        break;
-
-    case '2':
-        printf("2\n");
-        break;
-
-    case '3':
-        break;
-
-    case '4':
-        break;
-
-    case '?':
-        break;
-    }
-}
-
-void mouse(int button, int state, int x, int y)
-{
-}
-
-void motion(int x, int y)
-{
-}
-
 int main(int argc, char** argv)
 {
     //初始化GLUT庫，這個函數只是傳說命令參數并且初始化glut庫
@@ -142,9 +81,9 @@ int main(int argc, char** argv)
 
     glutDisplayFunc(display);   //設定callback function
     glutReshapeFunc(reshape);   //設定callback function
-    glutKeyboardFunc(keyboard); //設定callback function
-    glutMouseFunc(mouse);       //設定callback function
-    glutMotionFunc(motion);     //設定callback function
+    glutKeyboardFunc(keyboard0); //設定callback function
+    glutMouseFunc(mouse0);       //設定callback function
+    glutMotionFunc(motion0);     //設定callback function
 
     printf("僅顯示, 無控制, 按 Esc 離開\n");
 

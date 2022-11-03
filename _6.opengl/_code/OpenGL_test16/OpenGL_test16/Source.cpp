@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <iostream>
+#include "../../Common.h"
 
 int W = 600;
 int H = 600;
@@ -100,19 +101,6 @@ void display(void)
 	glFlush();
 }
 
-void keyboard(unsigned char key, int x, int y)
-{
-	switch (key)
-	{
-	case 27:
-	case 'q':
-	case 'Q':
-		//離開視窗
-		glutDestroyWindow(glutGetWindow());
-		return;
-	}
-}
-
 int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
@@ -127,7 +115,7 @@ int main(int argc, char** argv)
 	init();
 
 	glutDisplayFunc(display);	//設定callback function
-	glutKeyboardFunc(keyboard);	//設定callback function
+	glutKeyboardFunc(keyboard0);	//設定callback function
 
 	printf("僅顯示, 無控制, 按 Esc 離開\n");
 
