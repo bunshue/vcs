@@ -350,7 +350,7 @@ bool initGL(int* argc, char** argv)
 
     iGLUTWindowHandle = glutCreateWindow("CUDA OpenGL post-processing");
 
-    glewInit();
+    glewInit();	//OpenGL Extension Wrangler Library （GLEW） 跨平台C/C++擴展庫 初始化
 
     glClearColor(0.5, 0.5, 0.5, 1.0);
 

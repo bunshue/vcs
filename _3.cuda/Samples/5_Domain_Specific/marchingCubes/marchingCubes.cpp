@@ -703,7 +703,7 @@ bool initGL(int* argc, char** argv)
     glutInitWindowSize(window_width, window_height);
     glutCreateWindow("CUDA Marching Cubes");
 
-glewInit();
+glewInit();	//OpenGL Extension Wrangler Library （GLEW） 跨平台C/C++擴展庫 初始化
 
     // default initialization
     glClearColor(0.1f, 0.2f, 0.3f, 1.0f);

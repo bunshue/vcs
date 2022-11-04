@@ -969,7 +969,7 @@ void initGL(int* argc, char** argv)
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
     initMenus();
 
-glewInit();
+glewInit();	//OpenGL Extension Wrangler Library （GLEW） 跨平台C/C++擴展庫 初始化
 
     printf("OpenGL window created.\n");
 }

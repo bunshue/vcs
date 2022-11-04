@@ -402,7 +402,7 @@ void initGL(int argc, char** argv)
 
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
 
-glewInit();
+glewInit();	//OpenGL Extension Wrangler Library （GLEW） 跨平台C/C++擴展庫 初始化
 }
 
 // This test specifies a single test (where you specify radius and/or iterations)

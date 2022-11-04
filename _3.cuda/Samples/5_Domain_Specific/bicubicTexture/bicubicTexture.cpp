@@ -586,7 +586,7 @@ void initGL(int* argc, char** argv)
 
     initMenus();
 
-glewInit();
+glewInit();	//OpenGL Extension Wrangler Library （GLEW） 跨平台C/C++擴展庫 初始化
 }
 
 void loadImageData(int argc, char** argv)

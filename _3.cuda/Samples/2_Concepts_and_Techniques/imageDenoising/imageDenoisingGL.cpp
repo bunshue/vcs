@@ -293,7 +293,7 @@ int initGL(int* argc, char** argv)
 
     printf("OpenGL window created.\n");
 
-    glewInit();
+    glewInit();	//OpenGL Extension Wrangler Library （GLEW） 跨平台C/C++擴展庫 初始化
 
     return 0;
 }

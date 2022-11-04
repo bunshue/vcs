@@ -334,13 +334,14 @@ bool initGL(int* argc, char** argv)
     printf("argc = %d, argv = %s\n\n", *argc, argv[0]);
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_ALPHA | GLUT_DOUBLE | GLUT_DEPTH);
+    
     printf("window_width = %d, window_height = %d\n", window_width, window_height);
     glutInitWindowSize(window_width, window_height);
     glutInitWindowPosition(1100, 200);
 
     iGLUTWindowHandle = glutCreateWindow("CUDA OpenGL post-processing");
 
-    glewInit();
+    glewInit();	//OpenGL Extension Wrangler Library （GLEW） 跨平台C/C++擴展庫 初始化
 
     glClearColor(0.5, 0.5, 0.5, 1.0);
 

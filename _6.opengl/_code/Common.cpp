@@ -6,25 +6,25 @@
 
 void draw_coordinates(float len)
 {
-	glLineWidth(3.0f);	//設定線寬
+    glLineWidth(3.0f);	//設定線寬
 
-	glColor3f(1.0f, 0.0f, 0.0f); //畫紅色的x軸
-	glBegin(GL_LINES);
-	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
-	glVertex3f(len, 0.0f, 0.0f);	//x軸 len,0,0
-	glEnd();
+    glColor3f(1.0f, 0.0f, 0.0f); //畫紅色的x軸
+    glBegin(GL_LINES);
+    glVertex3f(0.0f, 0.0f, 0.0f);	//原點
+    glVertex3f(len, 0.0f, 0.0f);	//x軸 len,0,0
+    glEnd();
 
-	glColor3f(0.0, 1.0, 0.0); //畫綠色的y軸
-	glBegin(GL_LINES);
-	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
-	glVertex3f(0.0f, len, 0.0f);	//y軸 0,len,0
-	glEnd();
+    glColor3f(0.0, 1.0, 0.0); //畫綠色的y軸
+    glBegin(GL_LINES);
+    glVertex3f(0.0f, 0.0f, 0.0f);	//原點
+    glVertex3f(0.0f, len, 0.0f);	//y軸 0,len,0
+    glEnd();
 
-	glColor3f(0.0, 0.0, 1.0); //畫藍色的z軸
-	glBegin(GL_LINES);
-	glVertex3f(0.0f, 0.0f, 0.0f);	//原點
-	glVertex3f(0.0f, 0.0f, len);	//z軸 0,0,len
-	glEnd();
+    glColor3f(0.0, 0.0, 1.0); //畫藍色的z軸
+    glBegin(GL_LINES);
+    glVertex3f(0.0f, 0.0f, 0.0f);	//原點
+    glVertex3f(0.0f, 0.0f, len);	//z軸 0,0,len
+    glEnd();
 }
 
 void draw_boundary(float* color, float dd)

@@ -321,7 +321,7 @@ void initGL(int* argc, char** argv)
     glutInitWindowSize(wWidth, wHeight);
     glutCreateWindow("Function Pointers [CUDA Edge Detection]n");
 
-glewInit();
+glewInit();	//OpenGL Extension Wrangler Library （GLEW） 跨平台C/C++擴展庫 初始化
 }
 
 void runAutoTest(int argc, char* argv[])

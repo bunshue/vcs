@@ -242,7 +242,7 @@ void initGL(int* argc, char** argv)
 
     glutIdleFunc(idle);	//設定callback function, 利用idle事件進行重畫
 
-glewInit();
+glewInit();	//OpenGL Extension Wrangler Library （GLEW） 跨平台C/C++擴展庫 初始化
 }
 
 void runAutoTest(const char* ref_file, char* exec_path)

@@ -672,7 +672,7 @@ int main(int argc, char** argv)
                     // Create a window with rendering context and everything else we need
             glutCreateWindow("Random Fog");
 
-glewInit();
+glewInit();	//OpenGL Extension Wrangler Library （GLEW） 跨平台C/C++擴展庫 初始化
 
             // Select CUDA device with OpenGL interoperability
             findCudaDevice(argc, (const char**)argv);

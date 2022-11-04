@@ -335,16 +335,17 @@ int initGL(int* argc, char** argv)
 {
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
+    
     glutInitWindowSize(wWidth, wHeight);
     glutCreateWindow("Compute Stable Fluids");
 
-    glutDisplayFunc(display);
-    glutReshapeFunc(reshape);
-    glutKeyboardFunc(keyboard);
-    glutMouseFunc(mouse);
-    glutMotionFunc(motion);
+    glutDisplayFunc(display);	//設定callback function
+    glutReshapeFunc(reshape);	//設定callback function
+    glutKeyboardFunc(keyboard);	//設定callback function
+    glutMouseFunc(mouse);	//設定callback function
+    glutMotionFunc(motion);	//設定callback function
 
-glewInit();
+glewInit();	//OpenGL Extension Wrangler Library （GLEW） 跨平台C/C++擴展庫 初始化
 
     return true;
 }

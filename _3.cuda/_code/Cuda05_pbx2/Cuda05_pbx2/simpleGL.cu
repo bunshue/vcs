@@ -174,7 +174,7 @@ bool initGL(int* argc, char** argv)
 
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
 
-    glewInit();
+    glewInit();	//OpenGL Extension Wrangler Library （GLEW） 跨平台C/C++擴展庫 初始化
 
     // default initialization
     //glClearColor(0.0, 0.0, 0.0, 1.0);   //黑色背景
