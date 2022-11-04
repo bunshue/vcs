@@ -61,7 +61,7 @@ void draw_teapot(float* color, float width, double size)
     //畫一個茶壺
     glColor3fv((GLfloat*)color);    //設定顏色
 
-    glLineWidth(width);
+    glLineWidth(width);     //設定線寬
     glutWireTeapot(size);  //線框茶壺
     //glutSolidTeapot(size);  //實心茶壺
 }

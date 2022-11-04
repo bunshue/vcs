@@ -3,6 +3,8 @@
 #include <string.h>
 #include <assert.h>
 
+#include "../../Common.h"
+
 //#include <GL/glut.h>      //32 bits
 #include <GL/freeglut.h>    //64 bits
 
@@ -146,6 +148,24 @@ void Init(void)
 	glNormal3fv(scp[16]); glVertex3fv(scp[17]);
 	glEnd();
 	glEndList();
+}
+
+void display(void)
+{
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	glPushMatrix();
+
+	glTranslatef(0, 0, zTranslate);
+	glRotatef(rotY, 0, 1, 0);
+	glRotatef(rotX, 1, 0, 0);
+	glScalef(1.0, 1.0, 10.0);
+
+	glCallList(cubeList);
+
+	glPopMatrix();
+
+	glFlush();
 }
 
 void reshape(int width, int height)
@@ -298,7 +318,11 @@ void keyboard(unsigned char key, int x, int y)
 		printf("ESC\texit\n");
 		break;
 	case 27:
-		exit(0);
+	case 'q':
+	case 'Q':
+		//離開視窗
+		glutDestroyWindow(glutGetWindow());
+		return;
 	}
 }
 
@@ -325,32 +349,14 @@ void special(int key, int x, int y)
 	}
 }
 
-void display(void)
-{
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	glPushMatrix();
-
-	glTranslatef(0, 0, zTranslate);
-	glRotatef(rotY, 0, 1, 0);
-	glRotatef(rotX, 1, 0, 0);
-	glScalef(1.0, 1.0, 10.0);
-
-	glCallList(cubeList);
-
-	glPopMatrix();
-
-	glFlush();
-}
-
 int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
 
 	glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE | GLUT_DEPTH);
 
-	glutInitWindowSize(600, 600);
-	glutInitWindowPosition(1100, 200);
+	glutInitWindowSize(600, 600);       // 設定視窗大小
+	glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
 	glutCreateWindow("Fog Test");	//開啟視窗 並顯示出視窗 Title
 
@@ -367,5 +373,3 @@ int main(int argc, char** argv)
 
 	return 0;
 }
-
-

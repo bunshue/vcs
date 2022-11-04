@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "../../Common.h"
 
 //#include <GL/glut.h>      //32 bits
 #include <GL/freeglut.h>    //64 bits
@@ -320,7 +321,11 @@ void keyboard(unsigned char key, int x, int y)
 		glutPostRedisplay();
 		break;
 	case 27:
-		exit(0);
+	case 'q':
+	case 'Q':
+		//離開視窗
+		glutDestroyWindow(glutGetWindow());
+		return;
 	}
 }
 
@@ -369,8 +374,8 @@ int main(int argc, char** argv)
 	type |= GLUT_SINGLE;
 	glutInitDisplayMode(type);
 
-	glutInitWindowSize(windW, windH);
-	glutInitWindowPosition(1100, 200);
+	glutInitWindowSize(windW, windH);	// 設定視窗大小
+	glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
 	glutCreateWindow("Triangle Test");	//開啟視窗 並顯示出視窗 Title
 

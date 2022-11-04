@@ -12,6 +12,67 @@
 //#include <GL/glut.h>      //32 bits
 #include <GL/freeglut.h>    //64 bits
 
+void draw_point_test(void)
+{
+    //畫點
+    glPointSize(20.0f);	//設定點的大小, N X N
+    glBegin(GL_POINTS);
+    for (float i = 1; i < 8; i+=2)
+    {
+        float j = i * 1/10;
+
+        glColor3f(1.0, 0.0, 0.0);	//紅
+
+        glVertex2f(-j, -j);
+        glVertex2f(-j, 0);
+        glVertex2f(-j, j);
+        glVertex2f(0, j);
+        glVertex2f(j, j);
+        glVertex2f(j, 0);
+        glVertex2f(j, -j);
+        glVertex2f(0, -j);
+    }
+    glEnd();
+}
+
+typedef struct _cRec {
+    float x, y;
+} cRec;
+
+int cCount = 0;
+cRec cList[10];
+
+
+void SetPoint(float x, float y)
+{
+    if (cCount < 10)
+    {
+        cList[cCount].x = x;
+        cList[cCount].y = y;
+        cCount++;
+    }
+}
+
+void DrawPoint(void)
+{
+    int i;
+
+    for (i = 0; i < 10; i++)
+    {
+        SetPoint(((float)i) / 10, ((float)i) / 10);
+    }
+
+    glColor3f(1.0, 1.0, 0.0);
+    glPointSize(10.0f); 	//設定點的大小, N X N
+    glBegin(GL_POINTS);
+    for (i = 0; i < cCount; i++)
+    {
+        glVertex2f(cList[i].x, cList[i].y);
+    }
+    glEnd();
+
+    glFlush();
+}
 // 繪圖回調函數
 void display(void)
 {
@@ -28,7 +89,11 @@ void display(void)
     float y2 = -0.3;
     float x3 = -0.3;
     float y3 = -0.3;
-    draw_triangle(color_yellow, width, x1, y1, x2, y2, x3, y3);
+    //draw_triangle(color_yellow, width, x1, y1, x2, y2, x3, y3);
+
+    draw_point_test();
+
+    DrawPoint();
 
     glFlush();  // 執行繪圖命令
 }

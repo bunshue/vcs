@@ -7,6 +7,8 @@
 //#include <GL/glut.h>      //32 bits
 #include <GL/freeglut.h>    //64 bits
 
+#include "../../Common.h"
+
 #define MAXOBJS 10000
 #define MAXSELECT 100
 #define MAXFEED 300
@@ -213,6 +215,9 @@ void mouse(int button, int state, int mouseX, int mouseY)
 
 void display(void)
 {
+    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glClear(GL_COLOR_BUFFER_BIT);
+
     glPushMatrix();
 
     glViewport(0, 0, windW, windH);
@@ -222,9 +227,6 @@ void display(void)
     glLoadIdentity();
     gluOrtho2D(-175, 175, -175, 175);	//窗口座標範圍, 2D
     glMatrixMode(GL_MODELVIEW);
-
-    glClearColor(0.0, 0.0, 0.0, 0.0);
-    glClear(GL_COLOR_BUFFER_BIT);
 
     glScalef(zoom, zoom, zoom);
     glRotatef(zRotation, 0, 0, 1);
@@ -380,7 +382,11 @@ void keyboard(unsigned char key, int x, int y)
         glutPostRedisplay();
         break;
     case 27:
-        exit(0);
+    case 'q':
+    case 'Q':
+        //離開視窗
+        glutDestroyWindow(glutGetWindow());
+        return;
     }
 }
 
@@ -404,8 +410,8 @@ int main(int argc, char** argv)
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
 
-    glutInitWindowSize(600, 600);
-    glutInitWindowPosition(1100, 200);
+    glutInitWindowSize(600, 600);       // 設定視窗大小
+    glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
     glutCreateWindow("Select Test");	//開啟視窗 並顯示出視窗 Title
 
@@ -418,6 +424,7 @@ int main(int argc, char** argv)
     glutMouseFunc(mouse);           //設定callback function
 
     printf("按 左 右 控制\n");
+    printf("用滑鼠點選三角形\n");
 
     glutMainLoop();	//開始主循環繪製
 

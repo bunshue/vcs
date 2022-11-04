@@ -150,7 +150,11 @@ void keyboard(unsigned char key, int x, int y)
         glutPostRedisplay();
         break;
     case 27:
-        exit(0);
+    case 'q':
+    case 'Q':
+        //Â÷¶}µøµ¡
+        glutDestroyWindow(glutGetWindow());
+        return;
     }
 }
 

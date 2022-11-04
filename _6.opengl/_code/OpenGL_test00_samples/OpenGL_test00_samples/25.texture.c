@@ -342,7 +342,11 @@ void keyboard(unsigned char key, int x, int y)
 		glutPostRedisplay();
 		break;
 	case 27:
-		exit(0);
+	case 'q':
+	case 'Q':
+		//離開視窗
+		glutDestroyWindow(glutGetWindow());
+		return;
 	}
 }
 
@@ -351,19 +355,19 @@ void special(int key, int x, int y)
 	switch (key)
 	{
 	case GLUT_KEY_LEFT:
-		yRotation -= 2.5;
+		yRotation -= 4.5;
 		glutPostRedisplay();
 		break;
 	case GLUT_KEY_RIGHT:
-		yRotation += 2.5;
+		yRotation += 4.5;
 		glutPostRedisplay();
 		break;
 	case GLUT_KEY_UP:
-		xRotation -= 2.5;
+		xRotation -= 4.5;
 		glutPostRedisplay();
 		break;
 	case GLUT_KEY_DOWN:
-		xRotation += 2.5;
+		xRotation += 4.5;
 		glutPostRedisplay();
 		break;
 	}
@@ -435,8 +439,8 @@ int main(int argc, char** argv)
 
 	glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
 
-	glutInitWindowSize(600, 600);
-	glutInitWindowPosition(1100, 200);
+	glutInitWindowSize(600, 600);       // 設定視窗大小
+	glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
 	glutCreateWindow("Texture Test");	//開啟視窗 並顯示出視窗 Title
 

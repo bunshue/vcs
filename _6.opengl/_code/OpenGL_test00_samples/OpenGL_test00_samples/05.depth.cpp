@@ -164,8 +164,8 @@ int main(int argc, char** argv)
     type |= GLUT_SINGLE;
     glutInitDisplayMode(type);
 
-    glutInitWindowSize(600, 600);
-    glutInitWindowPosition(1100, 200);
+    glutInitWindowSize(600, 600);       // 設定視窗大小
+    glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
     glutCreateWindow("Depth Test");	//開啟視窗 並顯示出視窗 Title
 

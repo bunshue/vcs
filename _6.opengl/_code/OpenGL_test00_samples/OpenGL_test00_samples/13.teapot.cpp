@@ -5,6 +5,8 @@
 //#include <GL/glut.h>      //32 bits
 #include <GL/freeglut.h>    //64 bits
 
+#include "../../Common.h"
+
 float rotX = 0.0;
 float rotY = 0.0;
 int teaList;
@@ -177,15 +179,6 @@ void reshape(int w, int h)
     glLoadIdentity();
 }
 
-void keyboard(unsigned char key, int x, int y)
-{
-    switch (key)
-    {
-    case 27:
-        exit(0);
-    }
-}
-
 void special(int key, int x, int y)
 {
     switch (key)
@@ -218,8 +211,8 @@ int main(int argc, char** argv)
     type = GLUT_RGB | GLUT_DEPTH | GLUT_SINGLE;
     glutInitDisplayMode(type);
 
-    glutInitWindowSize(600, 600);
-    glutInitWindowPosition(1100, 200);
+    glutInitWindowSize(600, 600);       // 設定視窗大小
+    glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
     glutCreateWindow("TeaPot");		//開啟視窗 並顯示出視窗 Title
 
@@ -227,7 +220,7 @@ int main(int argc, char** argv)
 
     glutDisplayFunc(display);       //設定callback function
     glutReshapeFunc(reshape);       //設定callback function
-    glutKeyboardFunc(keyboard);     //設定callback function
+    glutKeyboardFunc(keyboard0);     //設定callback function
     glutSpecialFunc(special);       //設定callback function
 
     printf("按 上 下 左 右 控制\n");

@@ -2,6 +2,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <math.h>
+#include "../../Common.h"
 
 //#include <GL/glut.h>      //32 bits
 #include <GL/freeglut.h>    //64 bits
@@ -165,7 +166,7 @@ void DrawPoints1(void)
     GLint i;
 
     glColor3f(0.0, 1.0, 0.0);
-    glPointSize(2.0f); 	//設定點的大小, N X N
+    glPointSize(20.0f); 	//設定點的大小, N X N
     glBegin(GL_POINTS);
     for (i = 0; i < VORDER; i++)
     {
@@ -323,6 +324,26 @@ void RenderEval(void)
     }
 }
 
+void display(void)
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glPushMatrix();
+
+    glTranslatef(0.0, 0.0, translateZ);
+    glRotatef(rotX, 1, 0, 0);
+    glRotatef(rotY, 0, 1, 0);
+
+    float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
+    draw_boundary(color_yellow, 0.9);
+
+    RenderEval();
+
+    glPopMatrix();
+
+    glFlush();
+}
+
 void reshape(int width, int height)
 {
     glViewport(0, 0, width, height);
@@ -422,30 +443,14 @@ void special(int key, int x, int y)
     }
 }
 
-void display(void)
-{
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    glPushMatrix();
-
-    glTranslatef(0.0, 0.0, translateZ);
-    glRotatef(rotX, 1, 0, 0);
-    glRotatef(rotY, 0, 1, 0);
-    RenderEval();
-
-    glPopMatrix();
-
-    glFlush();
-}
-
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
 
     glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE | GLUT_DEPTH);
 
-    glutInitWindowSize(600, 600);
-    glutInitWindowPosition(1100, 200);
+    glutInitWindowSize(600, 600);       // 設定視窗大小
+    glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
     glutCreateWindow("Evaluator Test");	//開啟視窗 並顯示出視窗 Title
 
@@ -456,7 +461,8 @@ int main(int argc, char** argv)
     glutKeyboardFunc(keyboard);     //設定callback function
     glutSpecialFunc(special);       //設定callback function
 
-    printf("按 上 下 左 右 控制\n");
+    //printf("按 上 下 左 右 控制\n");
+    printf("Press UP DOWN LEFT RIGHT to control\n");
 
     glutMainLoop();	//開始主循環繪製
 

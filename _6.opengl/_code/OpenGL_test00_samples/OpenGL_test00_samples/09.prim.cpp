@@ -50,12 +50,6 @@ void Init(void)
     mode2 = GL_TRUE;
 }
 
-void reshape(int width, int height)
-{
-    windW = width;
-    windH = height;
-}
-
 void RotateColorMask(void)
 {
     static GLint rotation = 0;
@@ -120,27 +114,6 @@ static void SetColor(int index)
     }
 }
 
-void keyboard(unsigned char key, int x, int y)
-{
-    switch (key)
-    {
-    case '1':
-        mode1 = !mode1;
-        glutPostRedisplay();
-        break;
-    case '2':
-        mode2 = !mode2;
-        glutPostRedisplay();
-        break;
-    case '3':
-        RotateColorMask();
-        glutPostRedisplay();
-        break;
-    case 27:
-        exit(0);
-    }
-}
-
 void Viewport(GLint row, GLint column)
 {
     GLint x, y;
@@ -173,10 +146,12 @@ static void Point(void)
 {
     GLint i;
 
+    //畫點
+    glPointSize(5.0f);	//設定點的大小, N X N
     glBegin(GL_POINTS);
     for (i = 1; i < 8; i++)
     {
-        GLint j = i * 2;
+        GLint j = i * 10;
         SetColor(i);
 
         glVertex2i(-j, -j);
@@ -554,6 +529,33 @@ void display(void)
     Viewport(2, 3); QuadStrip();
 
     glFlush();
+}
+
+void reshape(int width, int height)
+{
+    windW = width;
+    windH = height;
+}
+
+void keyboard(unsigned char key, int x, int y)
+{
+    switch (key)
+    {
+    case '1':
+        mode1 = !mode1;
+        glutPostRedisplay();
+        break;
+    case '2':
+        mode2 = !mode2;
+        glutPostRedisplay();
+        break;
+    case '3':
+        RotateColorMask();
+        glutPostRedisplay();
+        break;
+    case 27:
+        exit(0);
+    }
 }
 
 void Args(int argc, char** argv)

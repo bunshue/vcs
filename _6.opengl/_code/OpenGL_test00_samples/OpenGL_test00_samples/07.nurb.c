@@ -241,10 +241,33 @@ void reshape(int width, int height)
 
 void keyboard(unsigned char key, int x, int y)
 {
+	//printf("你所按按鍵的碼是%x\t此時視窗內的滑鼠座標是(%d,%d)\n", key, x, y);
+
 	switch (key)
 	{
 	case 27:
-		exit(0);
+	case 'q':
+	case 'Q':
+		//離開視窗
+		glutDestroyWindow(glutGetWindow());
+		return;
+
+	case '1':
+		printf("1\n");
+		break;
+
+	case '2':
+		printf("2\n");
+		break;
+
+	case '3':
+		break;
+
+	case '4':
+		break;
+
+	case '?':
+		break;
 	}
 }
 

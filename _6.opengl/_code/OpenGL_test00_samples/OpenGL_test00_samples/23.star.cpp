@@ -3,6 +3,7 @@
 #include <string.h>
 #include <math.h>
 #include <time.h>
+#include "../../Common.h"
 
 //#include <GL/glut.h>      //32 bits
 #include <GL/freeglut.h>    //64 bits
@@ -269,6 +270,13 @@ void Idle(void)
         }
     }
 
+
+    //畫視窗邊界
+    float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
+    draw_boundary(color_yellow, 580);
+
+
+
     glFlush();
 }
 
@@ -278,8 +286,8 @@ int main(int argc, char** argv)
 
     glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
 
-    glutInitWindowSize(windW, windH);
-    glutInitWindowPosition(1100, 200);
+    glutInitWindowSize(windW, windH);   // 設定視窗大小
+    glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
     glutCreateWindow("Stars");	//開啟視窗 並顯示出視窗 Title
 

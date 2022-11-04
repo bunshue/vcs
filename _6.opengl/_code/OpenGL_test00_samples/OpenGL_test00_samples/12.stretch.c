@@ -49,10 +49,11 @@ vertexRec vList[5];
 int cCount;
 int cIndex[2];
 int cStep;
-GLenum op = OP_NOOP;
+GLenum operation_mode = OP_NOOP;
 
 void DrawImage(void)
 {
+    //printf("DrawImage()\n");
     glRasterPos2i(0, 0);
     glDrawPixels(image->sizeX, image->sizeY, GL_RGB, GL_UNSIGNED_BYTE, image->data);
 
@@ -61,6 +62,8 @@ void DrawImage(void)
 
 void DrawPoint(void)
 {
+    //printf("DrawPoint()\n");
+
     int i;
 
     glColor3f(1.0, 0.0, 1.0);
@@ -134,6 +137,7 @@ void SetPoint(int x, int y)
 
 void Stretch(void)
 {
+    //printf("Stretch()\n");
     glBegin(GL_TRIANGLES);
     glTexCoord2f(vList[0].tX, vList[0].tY);
     glVertex2f(vList[0].x, vList[0].y);
@@ -193,7 +197,7 @@ void Stretch(void)
 
 void display(void)
 {
-    switch (op)
+    switch (operation_mode)
     {
     case OP_STRETCH:
         Stretch();
@@ -212,15 +216,45 @@ void keyboard(unsigned char key, int x, int y)
     switch (key)
     {
     case ' ':
-        if (cCount > 1)
+        operation_mode++;
+        if (operation_mode > 3)
         {
-            InitVList();
-            cIndex[0] = 0;
-            cIndex[1] = 1;
-            cStep = 0;
-            glEnable(GL_TEXTURE_2D);	//啟用2D紋理映射
-            op = OP_STRETCH;
+            operation_mode = 0;
         }
+        printf("operation_mode = %d\t", operation_mode);
+        if (operation_mode == OP_NOOP)
+        {
+            printf("NO Operation\n");
+        }
+        else if (operation_mode == OP_STRETCH)
+        {
+            printf("STRETCH\n");
+        }
+        else if (operation_mode == OP_DRAWPOINT)
+        {
+            printf("DRAWPOINT\n");
+        }
+        else if (operation_mode == OP_DRAWIMAGE)
+        {
+            printf("DRAWIMAGE\n");
+        }
+        else
+        {
+            printf("XXXXXXXX\n");
+        }
+
+        if (operation_mode == OP_STRETCH)
+        {
+            if (cCount > 1)
+            {
+                InitVList();
+                cIndex[0] = 0;
+                cIndex[1] = 1;
+                cStep = 0;
+                glEnable(GL_TEXTURE_2D);	//啟用2D紋理映射
+            }
+        }
+
         glutPostRedisplay();
         break;
     case 27:
@@ -233,16 +267,16 @@ void mouse(int button, int state, int mouseX, int mouseY)
 {
     if (state == GLUT_DOWN)
     {
-        if (op == OP_STRETCH)
+        if (operation_mode == OP_STRETCH)
         {
             glDisable(GL_TEXTURE_2D);
             cCount = 0;
-            op = OP_DRAWIMAGE;
+            operation_mode = OP_DRAWIMAGE;
         }
         else
         {
             SetPoint(mouseX, imageSizeY - mouseY);
-            op = OP_DRAWPOINT;
+            operation_mode = OP_DRAWPOINT;
         }
         glutPostRedisplay();
     }
@@ -328,12 +362,14 @@ int main(int argc, char** argv)
     cIndex[0] = 0;
     cIndex[1] = 0;
     cStep = 0;
-    op = OP_DRAWIMAGE;
+    operation_mode = OP_DRAWIMAGE;
 
     glutDisplayFunc(display);   //設定callback function
     glutKeyboardFunc(keyboard); //設定callback function
     glutMouseFunc(mouse);       //設定callback function
     glutIdleFunc(display);      //設定callback function, 利用idle事件進行重畫
+
+    printf("operation_mode = %d\n", operation_mode);
 
     glutMainLoop();	//開始主循環繪製
 

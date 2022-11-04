@@ -5,6 +5,8 @@
 //#include <GL/glut.h>      //32 bits
 #include <GL/freeglut.h>    //64 bits
 
+#include "../../Common.h"
+
 void Init(void)
 {
     glClearColor(1.0, 1.0, 0.0, 0.0);   //黃色背景
@@ -66,22 +68,14 @@ void reshape(int width, int height)
     glMatrixMode(GL_MODELVIEW);
 }
 
-void keyboard(unsigned char key, int x, int y)
-{
-    switch (key)
-    {
-    case 27:
-        exit(0);
-    }
-}
-
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
 
     glutInitDisplayMode(GLUT_RGB | GLUT_STENCIL | GLUT_SINGLE);
-    glutInitWindowSize(600, 600);
-    glutInitWindowPosition(1100, 200);
+
+    glutInitWindowSize(600, 600);       // 設定視窗大小
+    glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
     glutCreateWindow("Stencil Test");	//開啟視窗 並顯示出視窗 Title
 
@@ -89,7 +83,7 @@ int main(int argc, char** argv)
 
     glutDisplayFunc(display);       //設定callback function
     glutReshapeFunc(reshape);       //設定callback function
-    glutKeyboardFunc(keyboard);     //設定callback function
+    glutKeyboardFunc(keyboard0);     //設定callback function
 
     printf("僅顯示, 無控制, 按 Esc 離開\n");
 

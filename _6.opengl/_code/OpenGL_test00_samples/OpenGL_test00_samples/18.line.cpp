@@ -129,7 +129,11 @@ void keyboard(unsigned char key, int x, int y)
         glutPostRedisplay();
         break;
     case 27:
-        exit(0);
+    case 'q':
+    case 'Q':
+        //離開視窗
+        glutDestroyWindow(glutGetWindow());
+        return;
     }
 }
 
@@ -184,8 +188,8 @@ int main(int argc, char** argv)
     type |= GLUT_SINGLE;
     glutInitDisplayMode(type);
 
-    glutInitWindowSize(600, 600);
-    glutInitWindowPosition(1100, 200);
+    glutInitWindowSize(600, 600);       // 設定視窗大小
+    glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
     glutCreateWindow("Line Test");	//開啟視窗 並顯示出視窗 Title
 

@@ -21,7 +21,7 @@
     <ClCompile Include="..\..\Common.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
-    <ClCompile Include="06.logo.cpp">
+    <ClCompile Include="09.prim.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>

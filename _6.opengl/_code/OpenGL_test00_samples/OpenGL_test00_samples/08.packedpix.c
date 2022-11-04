@@ -794,10 +794,10 @@ int main(int argc, char** argv)
 
 	glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
 
-	glutInitWindowSize(winWidth, winHeight);
-	glutInitWindowPosition(1100, 200);
+	glutInitWindowSize(winWidth, winHeight);	// 設定視窗大小
+	glutInitWindowPosition(1100, 200);			// 設定視窗位置
 
-	glutCreateWindow("Packed Pixel Test");
+	glutCreateWindow("Packed Pixel Test");		//開啟視窗 並顯示出視窗 Title
 
 	if (queryExts && !QueryExtension("GL_EXT_packed_pixels"))
 	{

@@ -3,8 +3,7 @@
 **
 ** Default operation: Draws three squares using a different texture for each square.
 **
-** Use -h option to display a list of command line options. Use Key h
-** in the created window for key options.
+** Use -h option to display a list of command line options. Use Key h in the created window for key options.
 */
 
 #include <stdio.h>
