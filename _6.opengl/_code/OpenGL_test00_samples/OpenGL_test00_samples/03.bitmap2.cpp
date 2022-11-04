@@ -1,4 +1,3 @@
-// OpenGL Graphics includes
 //#include <helper_gl.h>
 //#include <GL/freeglut.h>
 
@@ -9,15 +8,18 @@
 #include <string.h>
 #include <stdlib.h>
 
-#include <GL/glut.h>      //32 bits
-//#include <GL/freeglut.h>    //64 bits
+//#include <GL/glut.h>      //32 bits
+#include <GL/freeglut.h>    //64 bits
 
 #define EXP_WIDTH 80
 #define EXP_HEIGHT 80
 
-GLenum rgb, doubleBuffer;
+GLenum rgb;
+GLenum doubleBuffer;
 
-GLenum useLists, abuse;
+GLenum useLists;
+GLenum abuse;
+
 GLubyte exp_bits[7][800] = {
     {
        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
@@ -594,14 +596,15 @@ GLubyte exp_bits[7][800] = {
        0x01, 0x00, 0x90, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     }
 };
+
 GLint exp_lists[7];
 
-
-static void Init(void)
+void Init(void)
 {
     GLint i;
 
-    if (!rgb) {
+    if (!rgb)
+    {
         glutSetColor(0, 0.0, 0.0, 0.0);
         glutSetColor(1, 1.0, 0.0, 0.0);
         glutSetColor(2, 0.0, 1.0, 0.0);
@@ -617,7 +620,8 @@ static void Init(void)
 
     glPixelStorei(GL_UNPACK_LSB_FIRST, GL_TRUE);
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    for (i = 0; i < 7; i++) {
+    for (i = 0; i < 7; i++)
+    {
         exp_lists[i] = glGenLists(1);
         glNewList(exp_lists[i], GL_COMPILE);
         glBitmap(80, 80, 40.0, 40.0, 0.0, 0.0, exp_bits[i]);
@@ -628,43 +632,19 @@ static void Init(void)
     useLists = GL_TRUE;
 }
 
-static void reshape(int width, int height)
+void display(void)
 {
-
-    glViewport(0, 0, width, height);
-
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluOrtho2D(-175, 175, -175, 175);
-    glMatrixMode(GL_MODELVIEW);
-}
-
-static void keyboard(unsigned char key, int x, int y)
-{
-
-    switch (key) {
-    case '1':
-        useLists = !useLists;
-        glutPostRedisplay();
-        break;
-    case '2':
-        abuse = !abuse;
-        glutPostRedisplay();
-        break;
-    case 27:
-        exit(0);
-    }
-}
-
-static void display(void)
-{
-    GLint i, j;
+    GLint i;
+    GLint j;
 
     glClear(GL_COLOR_BUFFER_BIT);
 
-    for (i = 0; i < 7; i++) {
-        for (j = 0; j < 40; j++) {
-            switch (j % 7) {
+    for (i = 0; i < 7; i++)
+    {
+        for (j = 0; j < 40; j++)
+        {
+            switch (j % 7)
+            {
             case 0:
                 (rgb) ? glColor3f(1.0, 0.0, 0.0) : glIndexi(1);
                 break;
@@ -689,69 +669,116 @@ static void display(void)
             }
             glRasterPos3i((j * 3) % 5, (j * 3) % 8, 0);
 
-            if (useLists) {
+            if (useLists)
+            {
                 glCallList(exp_lists[i]);
             }
-            else {
+            else
+            {
                 glBitmap(80, 80, 40.0, 40.0, 0.0, 0.0, exp_bits[i]);
             }
 
-            if (doubleBuffer) {
+            if (doubleBuffer)
+            {
                 glutSwapBuffers();
             }
-            else {
+            else
+            {
                 glFlush();
             }
 
-            if (!abuse) {
+            if (!abuse)
+            {
                 break;
             }
         }
 
-        if (i == 6) {
+        if (i == 6)
+        {
             break;
         }
 
-        for (j = 0; j < 40; j++) {
+        for (j = 0; j < 40; j++)
+        {
             (rgb) ? glColor3f(0.0, 0.0, 0.0) : glIndexi(0);
             glRasterPos3i((j * 3) % 5, (j * 3) % 8, 0);
-            if (useLists) {
+
+            if (useLists)
+            {
                 glCallList(exp_lists[i]);
             }
-            else {
+            else
+            {
                 glBitmap(80, 80, 40.0, 40.0, 0.0, 0.0, exp_bits[i]);
             }
-            if (doubleBuffer) {
+
+            if (doubleBuffer)
+            {
                 glutSwapBuffers();
             }
-            else {
+            else
+            {
                 glFlush();
             }
-            if (!abuse) {
+
+            if (!abuse)
+            {
                 break;
             }
         }
     }
 }
 
-static void Args(int argc, char** argv)
+void reshape(int width, int height)
+{
+    glViewport(0, 0, width, height);
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(-175, 175, -175, 175);	//窗口座標範圍, 2D
+    glMatrixMode(GL_MODELVIEW);
+}
+
+void keyboard(unsigned char key, int x, int y)
+{
+    switch (key)
+    {
+    case '1':
+        useLists = !useLists;
+        glutPostRedisplay();
+        break;
+    case '2':
+        abuse = !abuse;
+        glutPostRedisplay();
+        break;
+    case 27:
+        exit(0);
+    }
+}
+
+void Args(int argc, char** argv)
 {
     GLint i;
 
     rgb = GL_TRUE;
     doubleBuffer = GL_FALSE;
 
-    for (i = 1; i < argc; i++) {
-        if (strcmp(argv[i], "-ci") == 0) {
+    for (i = 1; i < argc; i++)
+    {
+        if (strcmp(argv[i], "-ci") == 0)
+        {
             rgb = GL_FALSE;
         }
-        else if (strcmp(argv[i], "-rgb") == 0) {
+        else if (strcmp(argv[i], "-rgb") == 0)
+        {
             rgb = GL_TRUE;
         }
-        else if (strcmp(argv[i], "-sb") == 0) {
+        else if (strcmp(argv[i], "-sb") == 0)
+        {
             doubleBuffer = GL_FALSE;
         }
-        else if (strcmp(argv[i], "-db") == 0) {
+        else if (strcmp(argv[i], "-db") == 0)
+        {
             doubleBuffer = GL_TRUE;
         }
     }
@@ -764,13 +791,16 @@ int main(int argc, char** argv)
     glutInit(&argc, argv);
     Args(argc, argv);
 
+    // SB/DB 效果不一樣
+
     type = (rgb) ? GLUT_RGB : GLUT_INDEX;
     type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
     glutInitDisplayMode(type);
+
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(1100, 200);
 
-    glutCreateWindow("Bitmap Test");
+    glutCreateWindow("Bitmap Test");	//開啟視窗 並顯示出視窗 Title
 
     Init();
 
@@ -778,5 +808,9 @@ int main(int argc, char** argv)
     glutReshapeFunc(reshape);       //設定callback function
     glutKeyboardFunc(keyboard);     //設定callback function
 
-    glutMainLoop();
+    printf("按 1 2 控制\n");
+
+    glutMainLoop();	//開始主循環繪製
+
+    return 0;
 }

@@ -19,7 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="01.accum.c" />
+    <ClCompile Include="..\..\Common.cpp" />
+    <ClCompile Include="02.bitmap1.cpp" />
     <ClCompile Include="rgb.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

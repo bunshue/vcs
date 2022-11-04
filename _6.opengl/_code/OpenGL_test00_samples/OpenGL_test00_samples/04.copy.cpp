@@ -143,6 +143,7 @@ int main(int argc, char** argv)
     }
 
     glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
+
     glutInitWindowSize(windW, windH);
     glutInitWindowPosition(1100, 200);
 

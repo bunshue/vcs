@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include "../../Common.h"
 
 //#include <GL/glut.h>      //32 bits
 #include <GL/freeglut.h>    //64 bits
@@ -170,15 +171,6 @@ void reshape(int width, int height)
     glMatrixMode(GL_MODELVIEW);
 }
 
-void keyboard(unsigned char key, int x, int y)
-{
-    switch (key)
-    {
-    case 27:
-        exit(0);
-    }
-}
-
 void Args(int argc, char** argv)
 {
     GLint i;
@@ -220,7 +212,7 @@ int main(int argc, char** argv)
 
     glutDisplayFunc(display);       //設定callback function
     glutReshapeFunc(reshape);       //設定callback function
-    glutKeyboardFunc(keyboard);     //設定callback function
+    glutKeyboardFunc(keyboard0);     //設定callback function
 
     printf("僅顯示, 無控制, 按 Esc 離開\n");
 

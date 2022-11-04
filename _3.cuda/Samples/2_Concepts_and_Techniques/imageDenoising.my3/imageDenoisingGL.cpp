@@ -152,6 +152,7 @@ int initGL(int* argc, char** argv)
     printf("OpenGL window created.\n");
 
     glewInit();
+    printf("GLEW Version %s\n", glewGetString(GLEW_VERSION));
 
     return 0;
 }

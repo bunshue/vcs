@@ -412,18 +412,20 @@ static GLboolean queryExtension(char* extName)
 }
 
 /*
-** what to do when a menu item is selected. This function also handles
-** keystroke events.
+** what to do when a menu item is selected. This function also handles keystroke events.
 */
 void menu(int item)
 {
-    switch (item) {
+    switch (item)
+    {
     case 'p':
-        if (glIsEnabled(GL_POLYGON_OFFSET_EXT)) {
+        if (glIsEnabled(GL_POLYGON_OFFSET_EXT))
+        {
             glDisable(GL_POLYGON_OFFSET_EXT);
             printf("disabling polygon offset\n");
         }
-        else {
+        else
+        {
             glEnable(GL_POLYGON_OFFSET_EXT);
             printf("enabling polygon offset\n");
         }
@@ -452,10 +454,12 @@ void menu(int item)
         break;
     case 's':
         smooth = !smooth;
-        if (smooth) {
+        if (smooth)
+        {
             glShadeModel(GL_SMOOTH);
         }
-        else {
+        else
+        {
             glShadeModel(GL_FLAT);
         }
         break;
@@ -492,7 +496,9 @@ void key(unsigned char key, int x, int y)
 void animate()
 {
     if (!tracking && (spindx != 0 || spindy != 0))
+    {
         redraw();
+    }
 }
 
 int main(int argc, char** argv)
@@ -501,9 +507,12 @@ int main(int argc, char** argv)
 
     glutInit(&argc, argv); /* initialize glut, processing arguments */
 
-    for (i = 1; i < argc; i++) {
-        if (argv[i][0] == '-') {
-            switch (argv[i][1]) {
+    for (i = 1; i < argc; i++)
+    {
+        if (argv[i][0] == '-')
+        {
+            switch (argv[i][1])
+            {
             case 'f':
                 fullscreen = 1;
                 break;
@@ -512,15 +521,15 @@ int main(int argc, char** argv)
                 break;
             }
         }
-        else {
+        else
+        {
             usage();
         }
     }
 
     glutInitWindowSize(winwidth, winheight);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
-    glutCreateWindow("Surfgrid: a polygon offset demo "
-        "(press right button for menu)");	//開啟視窗 並顯示出視窗 Title
+    glutCreateWindow("Surfgrid: a polygon offset demo (press right button for menu)");	//開啟視窗 並顯示出視窗 Title
 
     /* create a menu for the right mouse button */
     glutCreateMenu(menu);
@@ -540,7 +549,6 @@ int main(int argc, char** argv)
     glutAddMenuEntry("<esc>: exit program", 27);
     glutAttachMenu(GLUT_RIGHT_BUTTON);
 
-    /* set callbacks */
     glutKeyboardFunc(key);
     glutDisplayFunc(redraw);
     glutReshapeFunc(reshape);
@@ -548,10 +556,9 @@ int main(int argc, char** argv)
     glutMotionFunc(move);
     glutIdleFunc(animate);
 
-    if (!queryExtension("GL_EXT_polygon_offset")) {
-        printf("Warning: "
-            "GL_EXT_polygon_offset not supported on this machine... "
-            "trying anyway\n");
+    if (!queryExtension("GL_EXT_polygon_offset"))
+    {
+        printf("Warning: GL_EXT_polygon_offset not supported on this machine... trying anyway\n");
     }
 
     init();
