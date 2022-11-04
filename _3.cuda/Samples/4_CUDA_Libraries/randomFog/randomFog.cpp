@@ -16,14 +16,11 @@
 #include <iomanip>
 #include <math.h>
 
-// Includes
 #include "rng.h"
+#include "../../../../_6.opengl/_code/Common.h"
 
 // standard utility and system includes
 #include <helper_timer.h>
-
-// SDK information
-static const char* printfFile = "randomFog.txt";
 
 // RNG instance
 RNG* g_pRng = NULL;
@@ -230,13 +227,12 @@ void drawPoints(void)
 }
 
 void drawText(void)
-{   //³o­ÓdrawText¤w¸g·h¥X¦Ü½d¨Ò¤F
+{
     using std::string;
     using std::stringstream;
 
     glPushMatrix();
     glLoadIdentity();	//³]¸m³æ¦ì¯x°}
-    glRasterPos2f(-1.2f, 1.2f);
 
     string infoString;
     stringstream ss;
@@ -247,10 +243,10 @@ void drawText(void)
     ss << " points=" << g_nVerticesPopulated;
     infoString.append(ss.str());
 
-    for (unsigned int i = 0; i < infoString.size(); i++)
-    {
-        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, infoString[i]);
-    }
+    float color[4] = { 0.0f, 1.0f, 0.0f, 1.0f };
+    float x_st = -1.2;
+    float y_st = 1.2f;
+    draw_string1s(infoString, color, GLUT_BITMAP_HELVETICA_12, x_st, y_st);
 
     glPopMatrix();
 }
@@ -565,12 +561,13 @@ void keyboard(unsigned char key, int x, int y)
         reCreate();
         break;
 
-        // Quit
     case 27:
     case 'q':
     case 'Q':
+        //Â÷¶}µøµ¡
         glutDestroyWindow(glutGetWindow());
         return;
+        break;
     }
 }
 
@@ -664,15 +661,15 @@ int main(int argc, char** argv)
             // Initialize GL
             glutInit(&argc, argv);
             glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-            
+
             // TODO use width/height?
             glutInitWindowSize(1000, 1000);     //³]©wµøµ¡¤j¤p, ª½±µ©Ô¤j¤º®e
             glutInitWindowPosition(900, 50);    //µøµ¡°_©l¦ì¸m
 
-                    // Create a window with rendering context and everything else we need
+            // Create a window with rendering context and everything else we need
             glutCreateWindow("Random Fog");
 
-glewInit();	//OpenGL Extension Wrangler Library ¡]GLEW¡^ ¸ó¥­¥xC/C++ÂX®i®w ªì©l¤Æ
+            glewInit();	//OpenGL Extension Wrangler Library ¡]GLEW¡^ ¸ó¥­¥xC/C++ÂX®i®w ªì©l¤Æ
 
             // Select CUDA device with OpenGL interoperability
             findCudaDevice(argc, (const char**)argv);
@@ -714,8 +711,7 @@ glewInit();	//OpenGL Extension Wrangler Library ¡]GLEW¡^ ¸ó¥­¥xC/C++ÂX®i®w ªì©l¤
             glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
             // Enable the vertex array functionality:
             glEnableClientState(GL_VERTEX_ARRAY);
-            // Enable the color array functionality (so we can specify a color for
-            // each vertex)
+            // Enable the color array functionality (so we can specify a color for each vertex)
             glEnableClientState(GL_COLOR_ARRAY);
             // Pass the vertex pointer:
             glVertexPointer(3,  // 3 components per vertex (x,y,z)
@@ -724,22 +720,23 @@ glewInit();	//OpenGL Extension Wrangler Library ¡]GLEW¡^ ¸ó¥­¥xC/C++ÂX®i®w ªì©l¤
             glColorPointer(3,  // 3 components per vertex (r,g,b)
                 GL_FLOAT, sizeof(SVertex),
                 &g_pVertices[0].r);  // Pointer to the first color
- // Point size for point mode
+
+            // Point size for point mode
             glPointSize(1.0f);
             glLineWidth(2.0f);
             glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-            
-            glutDisplayFunc(display);
-            glutReshapeFunc(reshape);
-            glutKeyboardFunc(keyboard);
-            glutIdleFunc(idle);		//³]©wcallback function, §Q¥Îidle¨Æ¥ó¶i¦æ­«µe
 
-            glutCloseFunc(glutClose);
+            glutDisplayFunc(display);   //³]©wcallback function
+            glutReshapeFunc(reshape);   //³]©wcallback function
+            glutKeyboardFunc(keyboard); //³]©wcallback function
+            glutIdleFunc(idle);         //³]©wcallback function, §Q¥Îidle¨Æ¥ó¶i¦æ­«µe
+            glutCloseFunc(glutClose);   //³]©wcallback function
 
             glutMainLoop();	//¶}©l¥D´`ÀôÃ¸»s
         }
     }
-    catch (runtime_error& e) {
+    catch (runtime_error& e)
+    {
         printf("runtime error (%s)\n", e.what());
     }
 

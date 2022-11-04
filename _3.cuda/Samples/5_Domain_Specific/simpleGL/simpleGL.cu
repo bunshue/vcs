@@ -18,6 +18,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
+#include <iostream>
 
 #include "../../../../_6.opengl/_code/Common.h"
 
@@ -329,6 +330,10 @@ void display()
     runCuda(&cuda_vbo_resource);
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    //畫視窗邊界
+    float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
+    draw_boundary(color_yellow, 1.5);
 
     // set view matrix
     glMatrixMode(GL_MODELVIEW);

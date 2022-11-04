@@ -158,6 +158,18 @@ void draw_string1(const char* str, float* color, void* font, float x_st, float y
     glPrint(x_st, y_st, str, font);
 }
 
+void draw_string1s(std::string str, float* color, void* font, float x_st, float y_st)
+{
+    glColor3fv((GLfloat*)color);    //設定顏色
+
+    glRasterPos2f(x_st, y_st);
+
+    for (int i = 0; i < str.size(); i++)
+    {
+        glutBitmapCharacter(font, str[i]);
+    }
+}
+
 void draw_string2(const char* str, float* color, void* font, float x_st, float y_st)
 {
     glColor3fv((GLfloat*)color);    //設定顏色

@@ -16,27 +16,27 @@
 #include <iomanip>
 #include <math.h>
 
-// Includes
 #include "rng.h"
+#include "../../../../_6.opengl/_code/Common.h"
 
 // standard utility and system includes
 #include <helper_timer.h>
 
 // RNG instance
-RNG *g_pRng = NULL;
+RNG* g_pRng = NULL;
 
 // CheckRender instance (for QA)
-CheckRender *g_pCheckRender = NULL;
+CheckRender* g_pCheckRender = NULL;
 
 // Simple struct which contains the position and color of a vertex
 struct SVertex
 {
-  GLfloat x, y, z;
-  GLfloat r, g, b;
+    GLfloat x, y, z;
+    GLfloat r, g, b;
 };
 
 // Data for the vertices
-SVertex *g_pVertices = NULL;
+SVertex* g_pVertices = NULL;
 int g_nVertices;           // Size of the vertex array
 int g_nVerticesPopulated;  // Number currently populated
 
@@ -69,14 +69,14 @@ void createSphere(void)
         float rho;
         float theta;
 
-            r = g_pRng->getNextU01();
-            r = powf(r, 1.f / 3.f);
+        r = g_pRng->getNextU01();
+        r = powf(r, 1.f / 3.f);
 
-            for (int j = 0; j < nSkip3; j++)
-            {
-                printf("XXXXXXXX\n");
-                g_pRng->getNextU01();
-            }
+        for (int j = 0; j < nSkip3; j++)
+        {
+            printf("XXXXXXXX\n");
+            g_pRng->getNextU01();
+        }
 
         rho = g_pRng->getNextU01() * PI * 2.0f;
 
@@ -156,20 +156,7 @@ void drawPoints(void)
         glDrawArrays(GL_LINE_STRIP, 200002, 2);
         glDrawArrays(GL_LINE_STRIP, 200004, 2);
     }
-
     glDrawArrays(GL_POINTS, 0, g_nVerticesPopulated);
-}
-
-void drawText(void)
-{
-    glLoadIdentity();	//設置單位矩陣
-    glRasterPos2f(-1.2f, 1.2f);
-
-    string infoString = "This is a lion-mouse.";
-    for (unsigned int i = 0; i < infoString.size(); i++)
-    {
-        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, infoString[i]);
-    }
 }
 
 void reshape(int x, int y)
@@ -229,7 +216,6 @@ void display(void)
     //glRotatef(g_yRotated, 0.0f, 1.0f, 0.0f);
     //glRotatef(g_xRotated, 1.0f, 0.0f, 0.0f);
     drawPoints();
-    drawText();
     glFlush();
     glutSwapBuffers();
 }
@@ -251,7 +237,6 @@ void reCreate(void)
     default:
         break;
     }
-
     display();
 }
 
@@ -292,12 +277,13 @@ void keyboard(unsigned char key, int x, int y)
         display();
         break;
 
-        // Quit
     case 27:
     case 'q':
     case 'Q':
+        //離開視窗
         glutDestroyWindow(glutGetWindow());
         return;
+        break;
     }
 }
 
@@ -306,6 +292,7 @@ int main(int argc, char** argv)
     // Initialize GL
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+
     // TODO use width/height?
     glutInitWindowSize(1000, 1000);     //設定視窗大小, 直接拉大內容
     glutInitWindowPosition(900, 50);    //視窗起始位置
@@ -313,7 +300,7 @@ int main(int argc, char** argv)
     // Create a window with rendering context and everything else we need
     glutCreateWindow("Random Fog");
 
-glewInit();	//OpenGL Extension Wrangler Library （GLEW） 跨平台C/C++擴展庫 初始化
+    glewInit();	//OpenGL Extension Wrangler Library （GLEW） 跨平台C/C++擴展庫 初始化
 
     // Select CUDA device with OpenGL interoperability
     findCudaDevice(argc, (const char**)argv);
@@ -335,8 +322,7 @@ glewInit();	//OpenGL Extension Wrangler Library （GLEW） 跨平台C/C++擴展�
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     // Enable the vertex array functionality:
     glEnableClientState(GL_VERTEX_ARRAY);
-    // Enable the color array functionality (so we can specify a color for
-    // each vertex)
+    // Enable the color array functionality (so we can specify a color for each vertex)
     glEnableClientState(GL_COLOR_ARRAY);
     // Pass the vertex pointer:
     glVertexPointer(3,  // 3 components per vertex (x,y,z)
@@ -345,7 +331,8 @@ glewInit();	//OpenGL Extension Wrangler Library （GLEW） 跨平台C/C++擴展�
     glColorPointer(3,  // 3 components per vertex (r,g,b)
         GL_FLOAT, sizeof(SVertex),
         &g_pVertices[0].r);  // Pointer to the first color
-// Point size for point mode
+
+    // Point size for point mode
     glPointSize(1.0f);
     glLineWidth(2.0f);
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -353,7 +340,7 @@ glewInit();	//OpenGL Extension Wrangler Library （GLEW） 跨平台C/C++擴展�
     glutDisplayFunc(display);   //設定callback function
     glutReshapeFunc(reshape);   //設定callback function
     glutKeyboardFunc(keyboard); //設定callback function
-    glutIdleFunc(idle);		//設定callback function, 利用idle事件進行重畫
+    glutIdleFunc(idle);         //設定callback function, 利用idle事件進行重畫
     glutCloseFunc(glutClose);   //設定callback function
 
     glutMainLoop();	//開始主循環繪製
