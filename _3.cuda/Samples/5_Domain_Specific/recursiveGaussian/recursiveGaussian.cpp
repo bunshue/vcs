@@ -287,21 +287,23 @@ void initGL(int* argc, char** argv)
 {
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
-    glutInitWindowSize(width, height);
 
-    glutCreateWindow(sSDKsample);
+    glutInitWindowSize(width, height);  // 設定視窗大小
+    glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
-    glutDisplayFunc(display);
-    glutReshapeFunc(reshape);
-    glutKeyboardFunc(keyboard);
-    glutIdleFunc(idle); //設定callback function, 利用idle事件進行重畫
+    glutCreateWindow(sSDKsample);       //開啟視窗 並顯示出視窗 Title
+
+    glutDisplayFunc(display);           //設定callback function
+    glutReshapeFunc(reshape);           //設定callback function
+    glutKeyboardFunc(keyboard);         //設定callback function
+    glutIdleFunc(idle);                 //設定callback function, 利用idle事件進行重畫
 
     glutCloseFunc(cleanup);
 
     printf("Press '+' and '-' to change filter width\n");
     printf("0, 1, 2 - change filter order\n");
 
-glewInit();
+    glewInit();
 }
 
 void benchmark(int iterations)
@@ -378,9 +380,6 @@ bool runSingleTest(const char* ref_file, const char* exec_path)
     return (nTotalErrors == 0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-// Program main
-////////////////////////////////////////////////////////////////////////////////
 int main(int argc, char** argv)
 {
     char* ref_file = NULL;
@@ -391,6 +390,7 @@ int main(int argc, char** argv)
     // use command-line specified CUDA device, otherwise use device with highest Gflops/s
     if (argc > 1)
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
         if (checkCmdLineFlag(argc, (const char**)argv, "file"))
         {
             getCmdLineArgumentString(argc, (const char**)argv, "file", &ref_file);
@@ -403,6 +403,7 @@ int main(int argc, char** argv)
 
     if (getCmdLineArgumentString(argc, (const char**)argv, "image", &filename))
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
         image_filename = filename;
     }
 
@@ -411,14 +412,18 @@ int main(int argc, char** argv)
 
     if (image_path == NULL)
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
         fprintf(stderr, "Error unable to find and load image file: '%s'\n", image_filename);
         exit(EXIT_FAILURE);
     }
+
+    printf("Open file : %s\n", image_path);
 
     sdkLoadPPM4ub(image_path, (unsigned char**)&h_img, &width, &height);
 
     if (!h_img)
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
         printf("Error unable to load PPM file: '%s'\n", image_path);
         exit(EXIT_FAILURE);
     }
@@ -427,11 +432,13 @@ int main(int argc, char** argv)
 
     if (checkCmdLineFlag(argc, (const char**)argv, "threads"))
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
         nthreads = getCmdLineArgumentInt(argc, (const char**)argv, "threads");
     }
 
     if (checkCmdLineFlag(argc, (const char**)argv, "sigma"))
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
         sigma = getCmdLineArgumentFloat(argc, (const char**)argv, "sigma");
     }
 
@@ -444,6 +451,7 @@ int main(int argc, char** argv)
 
     if (!strncmp("Tesla", prop.name, 5))
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
         printf("Tesla card detected, running the test in benchmark mode (no OpenGL display)\n");
         //        runBenchmark = true;
         runBenchmark = true;
@@ -452,10 +460,12 @@ int main(int argc, char** argv)
     // Benchmark or AutoTest mode detected, no OpenGL
     if (runBenchmark == true || ref_file != NULL)
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
         findCudaDevice(argc, (const char**)argv);
     }
     else
     {
+        //here
         // First initialize OpenGL context, and then select CUDA device.
         initGL(&argc, argv);
         findCudaDevice(argc, (const char**)argv);
@@ -465,6 +475,7 @@ int main(int argc, char** argv)
 
     if (ref_file)
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
         printf("(Automated Testing)\n");
         bool testPassed = runSingleTest(ref_file, argv[0]);
 
@@ -474,6 +485,7 @@ int main(int argc, char** argv)
 
     if (runBenchmark)
     {
+        printf("XXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n");
         printf("(Run Benchmark)\n");
         benchmark(100);
 
@@ -485,5 +497,5 @@ int main(int argc, char** argv)
 
     glutMainLoop();	//開始主循環繪製
 
-    exit(EXIT_SUCCESS);
+    return 0;
 }

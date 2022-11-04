@@ -106,10 +106,6 @@ void deletePBO(GLuint* pbo)
     *pbo = 0;
 }
 
-const GLenum fbo_targets[] = {
-    GL_COLOR_ATTACHMENT0_EXT, GL_COLOR_ATTACHMENT1_EXT,
-    GL_COLOR_ATTACHMENT2_EXT, GL_COLOR_ATTACHMENT3_EXT };
-
 // copy image and process using CUDA
 void generateCUDAImage()
 {
@@ -137,12 +133,12 @@ void generateCUDAImage()
 
     //printf("image_width = %d\timage_height = %d\n", image_width, image_height); //512 X 512
     //printf("block.x = %d\tblock.y = %d\n", block.x, block.y);   //16, 16
+
+    //使用原本的CUDA方法 製作 out_data 資料
     launch_cudaProcess(grid, block, 0, out_data, image_width);
 
-    // CUDA generated data in cuda memory or in a mapped PBO made of BGRA 8 bits
-    // 2 solutions, here :
-    // - use glTexSubImage2D(), there is the potential to loose performance in
-    // possible hidden conversion
+    // CUDA generated data in cuda memory or in a mapped PBO made of BGRA 8 bits 2 solutions, here :
+    // - use glTexSubImage2D(), there is the potential to loose performance in possible hidden conversion
     // - map the texture and blit the result thanks to CUDA API
 
     checkCudaErrors(cudaGraphicsUnmapResources(1, &cuda_pbo_dest_resource, 0));
@@ -232,15 +228,16 @@ void timerEvent(int value)
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//! Keyboard events handler
-////////////////////////////////////////////////////////////////////////////////
-void keyboard(unsigned char key, int /*x*/, int /*y*/)
+void keyboard(unsigned char key, int x, int y)
 {
     switch (key)
     {
-    case (27):
-        Cleanup(EXIT_SUCCESS);
+    case 27:
+    case 'q':
+    case 'Q':
+        //離開視窗
+        glutDestroyWindow(glutGetWindow());
+        return;
         break;
 
     case ' ':
@@ -334,10 +331,10 @@ bool initGL(int* argc, char** argv)
     printf("argc = %d, argv = %s\n\n", *argc, argv[0]);
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_ALPHA | GLUT_DOUBLE | GLUT_DEPTH);
-    
+
     printf("window_width = %d, window_height = %d\n", window_width, window_height);
-    glutInitWindowSize(window_width, window_height);
-    glutInitWindowPosition(1100, 200);
+    glutInitWindowSize(window_width, window_height);    // 設定視窗大小
+    glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
     iGLUTWindowHandle = glutCreateWindow("CUDA OpenGL post-processing");
 

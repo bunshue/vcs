@@ -109,6 +109,9 @@
   <ItemGroup>
     <CudaCompile Include="simpleGL.cu" />
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\..\..\_6.opengl\_code\Common.cpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
     <Import Project="$(CUDAPropsPath)\CUDA 11.7.targets" />

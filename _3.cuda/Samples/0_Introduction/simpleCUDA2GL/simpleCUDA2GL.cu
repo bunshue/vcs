@@ -18,10 +18,10 @@ __global__ void cudaProcess(unsigned int* g_odata, int imgw)
 {
 	extern __shared__ uchar4 sdata[];
 
-	int tx = threadIdx.x;
-	int ty = threadIdx.y;
-	int bw = blockDim.x;
-	int bh = blockDim.y;
+	int tx = threadIdx.x;	//0~15
+	int ty = threadIdx.y;	//0~15
+	int bw = blockDim.x;	//16
+	int bh = blockDim.y;	//16
 	int x = blockIdx.x * bw + tx;
 	int y = blockIdx.y * bh + ty;
 

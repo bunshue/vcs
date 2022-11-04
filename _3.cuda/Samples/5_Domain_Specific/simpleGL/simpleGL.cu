@@ -19,6 +19,8 @@
 #include <string.h>
 #include <math.h>
 
+#include "../../../../_6.opengl/_code/Common.h"
+
 #ifdef _WIN32
 #  define WINDOWS_LEAN_AND_MEAN
 #  define NOMINMAX
@@ -91,7 +93,6 @@ void deleteVBO(GLuint* vbo, struct cudaGraphicsResource* vbo_res);
 
 // rendering callbacks
 void display();
-void keyboard(unsigned char key, int x, int y);
 void mouse(int button, int state, int x, int y);
 void motion(int x, int y);
 void timerEvent(int value);
@@ -211,20 +212,20 @@ bool initGL(int* argc, char** argv)
 {
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
-    glutInitWindowSize(window_width, window_height);
-    glutInitWindowPosition(1100, 200);
+
+    glutInitWindowSize(window_width, window_height);    // 設定視窗大小
+    glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
     glutCreateWindow("Cuda GL Interop (VBO)");
 
     glutDisplayFunc(display);       //設定callback function
-    glutKeyboardFunc(keyboard);     //設定callback function
+    glutKeyboardFunc(keyboard0);    //設定callback function
+    glutMouseFunc(mouse);           //設定callback function
     glutMotionFunc(motion);         //設定callback function
 
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
 
-    // initialize necessary OpenGL extensions
-    
-    glewInit();
+    glewInit(); // initialize necessary OpenGL extensions
 
     // default initialization
     //glClearColor(0.0, 0.0, 0.0, 1.0);   //黑色背景
@@ -387,23 +388,6 @@ void cleanup()
     }
 }
 
-void keyboard(unsigned char key, int /*x*/, int /*y*/)
-{
-    switch (key)
-    {
-    case 13:
-        printf("\n");
-        break;
-
-    case 27:
-    case 'q':
-    case 'Q':
-        //離開視窗
-        glutDestroyWindow(glutGetWindow());
-        return;
-    }
-}
-
 void mouse(int button, int state, int x, int y)
 {
     if (state == GLUT_DOWN)
@@ -448,20 +432,8 @@ int main(int argc, char** argv)
     // Create the CUTIL timer
     sdkCreateTimer(&timer);
 
-    // use command-line specified CUDA device, otherwise use device with highest Gflops/s
-    int devID = findCudaDevice(argc, (const char**)argv);
-
-    // First initialize OpenGL context, so we can properly set the GL for CUDA.
-    // This is necessary in order to achieve optimal performance with OpenGL/CUDA interop.
-    if (false == initGL(&argc, argv))
-    {
-        return false;
-    }
-
-    glutDisplayFunc(display);
-    glutKeyboardFunc(keyboard);
-    glutMouseFunc(mouse);
-    glutMotionFunc(motion);
+    initGL(&argc, argv);
+    findCudaDevice(argc, (const char**)argv);
 
     glutCloseFunc(cleanup);
 
@@ -473,6 +445,6 @@ int main(int argc, char** argv)
 
     glutMainLoop();	//開始主循環繪製
 
-    exit(EXIT_SUCCESS);
+    return 0;
 }
 

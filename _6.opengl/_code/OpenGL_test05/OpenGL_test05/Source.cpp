@@ -114,6 +114,7 @@ void keyboard(unsigned char key, int x, int y)
         //離開視窗
         glutDestroyWindow(glutGetWindow());
         return;
+        break;
 
     case '1':
         printf("1\n");

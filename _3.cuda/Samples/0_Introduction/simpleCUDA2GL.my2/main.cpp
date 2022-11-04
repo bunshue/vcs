@@ -54,7 +54,7 @@ static int fpsCount = 0;
 static int fpsLimit = 1;
 StopWatchInterface* timer = NULL;
 
-extern "C" void launch_cudaProcess(dim3 grid, dim3 block, int sbytes, int* g_odata, int imgw);
+extern "C" void launch_cudaProcess(dim3 grid, dim3 block, int sbytes, unsigned int* g_odata, int imgw);
 
 void FreeResource();
 void Cleanup(int iExitCode);
@@ -74,7 +74,6 @@ void idle();
 void keyboard(unsigned char key, int x, int y);
 void reshape(int w, int h);
 void mainMenu(int i);
-void initGLBuffers();
 
 ////////////////////////////////////////////////////////////////////////////////
 //! Create PBO
@@ -113,22 +112,21 @@ int ratio = 10;
 
 void generateCUDAImage()
 {
+    printf("g");
     // run the Cuda kernel
-    int* out_data;
+    unsigned int* out_data;
 
     checkCudaErrors(cudaGraphicsMapResources(1, &cuda_pbo_dest_resource, 0));
     size_t num_bytes;
     checkCudaErrors(cudaGraphicsResourceGetMappedPointer((void**)&out_data, &num_bytes, cuda_pbo_dest_resource));
 
-    // printf("CUDA mapped pointer of pbo_out: May access %ld bytes, expected %d\n",
-    // num_bytes, size_tex_data);
+    // printf("CUDA mapped pointer of pbo_out: May access %ld bytes, expected %d\n", num_bytes, size_tex_data);
 
     // calculate grid size
-    //dim3 block(16, 16, 1);
-    //dim3 block(16, 16, 1);
+    dim3 block(16, 16, 1);
 
     //dim3 grid(image_width / block.x, image_height / block.y, 1);
-    //dim3 grid(16, 16, 1);
+    dim3 grid(16, 16, 1);
 
     /*
     printf("image_width = %d\timage_height = %d\n", image_width, image_height); //512 X 512
@@ -144,18 +142,10 @@ void generateCUDAImage()
     //printf("image_width = %d\timage_height = %d\n", image_width, image_height); //512 X 512
     //printf("block.x = %d\tblock.y = %d\n", block.x, block.y);   //16, 16
 
+    //使用原本的CUDA方法 製作 out_data 資料
     //launch_cudaProcess(grid, block, 0, out_data, image_width);
 
-    const char* filename_read1 = "C:\\______test_files\\ims01.24.bmp"; //24 bits
-    const char* filename_read2 = "C:\\______test_files\\ims03.24.bmp"; //24 bits
-
-    /*
-    int imageW = 0;
-    int imageH = 0;
-    LoadBMPFile(&h_Src1, &imageW, &imageH, filename_read1);
-    printf("filename : %s\tW = %d\tH = %d\n", filename_read1, imageW, imageH);
-    */
-
+    //改方法 製作 out_data 資料
     cudaError_t cudaStatus;
     int a[256 * 256];
     int i;
@@ -174,7 +164,6 @@ void generateCUDAImage()
         printf("cudaMemcpy failed!\n");
         return;
     }
-
 
     // CUDA generated data in cuda memory or in a mapped PBO made of BGRA 8 bits 2 solutions, here :
     // - use glTexSubImage2D(), there is the potential to loose performance in possible hidden conversion
@@ -268,15 +257,16 @@ void timerEvent(int value)
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
 }
 
-////////////////////////////////////////////////////////////////////////////////
-//! Keyboard events handler
-////////////////////////////////////////////////////////////////////////////////
-void keyboard(unsigned char key, int /*x*/, int /*y*/)
+void keyboard(unsigned char key, int x, int y)
 {
     switch (key)
     {
-    case (27):
-        Cleanup(EXIT_SUCCESS);
+    case 27:
+    case 'q':
+    case 'Q':
+        //離開視窗
+        glutDestroyWindow(glutGetWindow());
+        return;
         break;
 
     case ' ':
@@ -371,8 +361,8 @@ bool initGL(int* argc, char** argv)
     glutInit(argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_ALPHA | GLUT_DOUBLE | GLUT_DEPTH);
     printf("window_width = %d, window_height = %d\n", window_width, window_height);
-    glutInitWindowSize(window_width, window_height);
-    glutInitWindowPosition(1100, 200);
+    glutInitWindowSize(window_width, window_height);    // 設定視窗大小
+    glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
     iGLUTWindowHandle = glutCreateWindow("CUDA OpenGL post-processing");
 

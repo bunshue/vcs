@@ -10,8 +10,7 @@
   IIR (infinite impulse response) filter, since its response to an input impulse
   can last forever.
 
-  The main advantage of this method is that the execution time is independent of
-  the filter width.
+  The main advantage of this method is that the execution time is independent of the filter width.
 
   The GPU processes columns of the image in parallel. To avoid uncoalesced reads
   for the row pass we transpose the image and then transpose it back again afterwards.
