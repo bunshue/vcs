@@ -12,6 +12,51 @@
 //#include <GL/glut.h>      //32 bits
 #include <GL/freeglut.h>    //64 bits
 
+typedef struct _cRec {
+    float x, y;
+} cRec;
+
+cRec cList[50];
+int cCount = 0;
+
+void SetPoint(float x, float y)
+{
+    cList[cCount].x = x;
+    cList[cCount].y = y;
+    cCount++;
+}
+
+void DrawPoint(void)
+{
+    int i;
+
+    printf("DrawPoint()\n");
+
+    printf("Make some data\n");
+
+    cCount = 0;
+
+    float x;
+    float y;
+    for (i = 0; i < 50; i++)
+    {
+        x = -1.0 + 2.0 * i / 50;
+        y = sin(x * 4) / 2;
+        SetPoint(x, y);
+    }
+
+    glColor3f(1.0, 0.0, 1.0);
+    glPointSize(10.0f); 	//設定點的大小, N X N
+    glBegin(GL_POINTS);
+    for (i = 0; i < cCount; i++)
+    {
+        glVertex2f(cList[i].x, cList[i].y);
+    }
+    glEnd();
+
+    glFlush();
+}
+
 // 繪圖回調函數
 void display(void)
 {
@@ -21,8 +66,7 @@ void display(void)
     float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
     draw_boundary(color_yellow, 0.9);
 
-    float color_red[4] = { 1.0f, 0.0f, 0.0f, 1.0f };
-    draw_teapot(color_red, 1, 0.3);
+    DrawPoint();
 
     glFlush();  // 執行繪圖命令
 }

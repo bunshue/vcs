@@ -21,6 +21,14 @@ void display(void)
     float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
     draw_boundary(color_yellow, 0.9);
 
+    //畫一個實心矩形
+    glColor3f(0.0, 1.0, 1.0);   //設定顏色 cc
+    float dd = 0.3f;
+    glRectf(-dd, -dd, dd, dd);  //實心矩形
+
+    float color_red[4] = { 1.0f, 0.0f, 0.0f, 1.0f };
+    draw_teapot(color_red, 1, 0.3);
+
     glFlush();  // 執行繪圖命令
 }
 

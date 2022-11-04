@@ -35,44 +35,6 @@ void draw_point_test(void)
     glEnd();
 }
 
-typedef struct _cRec {
-    float x, y;
-} cRec;
-
-int cCount = 0;
-cRec cList[10];
-
-
-void SetPoint(float x, float y)
-{
-    if (cCount < 10)
-    {
-        cList[cCount].x = x;
-        cList[cCount].y = y;
-        cCount++;
-    }
-}
-
-void DrawPoint(void)
-{
-    int i;
-
-    for (i = 0; i < 10; i++)
-    {
-        SetPoint(((float)i) / 10, ((float)i) / 10);
-    }
-
-    glColor3f(1.0, 1.0, 0.0);
-    glPointSize(10.0f); 	//設定點的大小, N X N
-    glBegin(GL_POINTS);
-    for (i = 0; i < cCount; i++)
-    {
-        glVertex2f(cList[i].x, cList[i].y);
-    }
-    glEnd();
-
-    glFlush();
-}
 // 繪圖回調函數
 void display(void)
 {
@@ -93,7 +55,33 @@ void display(void)
 
     draw_point_test();
 
-    DrawPoint();
+    //畫多邊形
+    glColor3f(0.2f, 0.6f, 0.5f);    //設定顏色
+    glBegin(GL_POLYGON);
+    {
+        //多邊形的頂點數：數越大越趨近于圓
+        const int n = 10;
+        const GLfloat R = 0.3f;
+        const GLfloat pi = 3.1415926f;
+        for (int i = 0; i < n; i++)
+        {
+            glVertex2f(R * cos(2 * pi / n * i), R * sin(2 * pi / n * i));
+        }
+    }
+    glEnd();
+
+    //畫實心矩形
+    float dd = 0.15;
+    glBegin(GL_QUADS);              //矩形
+    {
+        glColor3f(0.0f, 0.0f, 1.0f); //設定顏色, B
+        glVertex2f(-dd, -dd);    // x, y
+        glVertex2f(dd, -dd);
+        glVertex2f(dd, dd);
+        glVertex2f(-dd, dd);
+    }
+    glEnd();
+
 
     glFlush();  // 執行繪圖命令
 }

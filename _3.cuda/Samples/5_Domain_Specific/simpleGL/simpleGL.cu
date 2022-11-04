@@ -13,20 +13,12 @@
     Host code
 */
 
-// includes, system
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
-#include <iostream>
 
 #include "../../../../_6.opengl/_code/Common.h"
-
-#ifdef _WIN32
-#  define WINDOWS_LEAN_AND_MEAN
-#  define NOMINMAX
-#  include <windows.h>
-#endif
 
 // OpenGL Graphics includes
 #include <helper_gl.h>
@@ -44,17 +36,12 @@
 
 #include <vector_types.h>
 
-#define MAX_EPSILON_ERROR 10.0f
-#define THRESHOLD          0.30f
 #define REFRESH_DELAY     10 //ms
 
 #define abs(a, b)	(((a) > (b)) ? (a - b) : (b - a))
 
-////////////////////////////////////////////////////////////////////////////////
-// constants
 const unsigned int window_width = 600;
 const unsigned int window_height = 600;
-
 const unsigned int mesh_width = 256;
 const unsigned int mesh_height = 256;
 
@@ -226,18 +213,15 @@ bool initGL(int* argc, char** argv)
 
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
 
-    glewInit(); // initialize necessary OpenGL extensions
+    glewInit();     //OpenGL Extension Wrangler Library （GLEW） 跨平台C/C++擴展庫 初始化
 
-    // default initialization
     //glClearColor(0.0, 0.0, 0.0, 1.0);   //黑色背景
     glClearColor(1.0, 1.0, 0.0, 1.0);   //黃色背景
 
     glDisable(GL_DEPTH_TEST);
 
-    // viewport
     glViewport(0, 0, window_width, window_height);
 
-    // projection
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();	//設置單位矩陣
     gluPerspective(60.0, (GLfloat)window_width / (GLfloat)window_height, 0.1, 10.0);
@@ -323,7 +307,8 @@ void deleteVBO(GLuint* vbo, struct cudaGraphicsResource* vbo_res)
 
 void display()
 {
-    //printf("d ");
+    //printf("disp");
+
     sdkStartTimer(&timer);
 
     // run CUDA kernel to generate vertex positions
@@ -377,7 +362,7 @@ void timerEvent(int value)
     if (glutGetWindow())
     {
         //在這裡呼叫重新畫圖
-        //printf("d-");
+        //printf("t");
         glutPostRedisplay();
         glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
     }
@@ -385,6 +370,7 @@ void timerEvent(int value)
 
 void cleanup()
 {
+    printf("cleanup\n");
     sdkDeleteTimer(&timer);
 
     if (vbo)
@@ -434,7 +420,6 @@ int main(int argc, char** argv)
 {
     printf("Starting...\n");
 
-    // Create the CUTIL timer
     sdkCreateTimer(&timer);
 
     initGL(&argc, argv);

@@ -57,12 +57,9 @@ void init01(void)
 {
     //好像做不做沒甚麼差別
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    glClearColor(0.0, 0.0, 0.0, 0.0);   //設置背景色
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
 
-    //glClearColor(0.1, 0.1, 0.4, 0.0); //設置背景色
-    //glShadeModel(GL_SMOOTH);
-
-    //glClearColor(0.1, 0.1, 0.4, 0.0); //設置背景色
+    //glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
     //glShadeModel(GL_SMOOTH);
 }
 
@@ -70,7 +67,7 @@ void init01(void)
 
 void init09(void)
 {
-    glClearColor(0.0, 0.0, 0.0, 0.0);   //設置背景色
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();	//設置單位矩陣
     glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0); //設置窗口座標系大小
@@ -81,23 +78,22 @@ void display(void)
 {
     if (display_mode == 0)
     {
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
-        //or
-        glClearColor(1.0f, 1.0f, 1.0f, 1.0f);   // 設置清除窗口背景色為白色
-        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
+        printf("無畫面, TBD, display_mode = %d\n", display_mode);
 
         //設定預設大小...  TBD
     }
     else if (display_mode == 1)
     {
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
+        //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        //glClearColor(0.1f, 0.2f, 1.f, 1.f); //清除背景 設定顏色
-
-        //glClearColor(1.0, 0.0, 0.0, 1.0);   //清除背景 設定顏色
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();	//設置單位矩陣
+        gluOrtho2D(-1, 1, -1, 1); //窗口座標範圍, 2D
 
         //畫一個矩形 R
         glColor4f(1.0, 0.0, 0.0, 1.0);  //設置畫筆顏色為 R
@@ -131,53 +127,33 @@ void display(void)
     }
     else if (display_mode == 2)
     {
-        glClearColor(0.5f, 0.5f, 0.5f, 0.0f);   //設定背景 與 透明度
-        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
+        //display_mode = 7  //畫 彩色三角形
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        glColor3f(0.2f, 0.6f, 0.5f);    //設定顏色
-
-        //開始渲染
-        glBegin(GL_POLYGON);
+        glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
+        glBegin(GL_TRIANGLES);          // 開始畫三角形
         {
-            //多邊形的頂點數：數越大越趨近于圓
-            const int n = 10;
-            const GLfloat R = 0.5f;
-            const GLfloat pi = 3.1415926f;
-            for (int i = 0; i < n; i++)
-            {
-                glVertex2f(R * cos(2 * pi / n * i), R * sin(2 * pi / n * i));
-            }
+            glColor3f(1.0f, 0.0f, 0.0f);    //設定顏色 R
+            glVertex2f(0.0f, 1.0f);         //(x1,y1)=(0, 1)
+            glColor3f(0.0f, 1.0f, 0.0f);    //設定顏色 G
+            glVertex2f(0.87f, -0.5f);       //(x2,y2)=(0.87,-0.5)
+            glColor3f(0.0f, 0.0f, 1.0f);    //設定顏色 B
+            glVertex2f(-0.87f, -0.5f);      //(x3,y3)=(-0.87,-0.5)
         }
-        //結束渲染
-        glEnd();
-
-        //畫矩形
-        glBegin(GL_QUADS);              //矩形
-        {
-            glColor3f(1.0f, 0.0f, 0.0f); //設定顏色, R
-            glVertex2f(-0.2f, -0.2f);    // x, y
-            glVertex2f(0.2f, -0.2f);
-            glVertex2f(0.2f, 0.2f);
-            glVertex2f(-0.2f, 0.2f);
-        }
-        glEnd();
-
-        //畫視窗邊界
-        float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
-        draw_boundary(color_yellow, 0.9);
-
+        glEnd();    // 結束畫三角形
+        glPopMatrix();
     }
     else if (display_mode == 3)
     {
         int i;
         int n = 6;
 
-        glClearColor(0.0, 0.0, 0.0, 0.0);   //設置背景色
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();	//設置單位矩陣
-        gluOrtho2D(0.0, NGRID, 0.0, NGRID); //窗口座標範圍, 2D
+        gluOrtho2D(-1, NGRID + 1, -1, NGRID + 1); //窗口座標範圍, 2D
 
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();	//設置單位矩陣
@@ -209,69 +185,13 @@ void display(void)
             }
             glEnd();
         }
-
-        //畫視窗邊界
-        float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
-        draw_boundary(color_yellow, 5.5);
     }
     else if (display_mode == 4)
-    {
-        //畫顏色色塊
-        float mat[16];
-        int i;
-
-        glEnable(GL_DEPTH_TEST);
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色
-        glClearDepth(1.0);
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();	//設置單位矩陣
-        glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);   //設置窗口座標系大小
-        glGetFloatv(GL_PROJECTION_MATRIX, mat);
-        /*
-        for (i = 0; i < 16; i++)
-        {
-            printf("%10.7f", mat[i]);
-            if ((i + 1) % 4)
-            {
-                printf(" ");
-            }
-            else
-            {
-                printf("\n");
-            }
-        }
-        */
-        glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();	//設置單位矩陣
-
-        glColor3f(1.0f, 0.0f, 0.0f);    //設定顏色 R //在右上角畫紅色平面：應該在後面
-        glBegin(GL_POLYGON);
-        {
-            glVertex3f(0.0f, 0.0f, -1.0f + 0.001f);
-            glVertex3f(1.0f, 0.0f, -1.0f + 0.001f);
-            glVertex3f(1.0f, 1.0f, -1.0f + 0.001f);
-            glVertex3f(0.0f, 1.0f, -1.0f + 0.001f);
-        }
-        glEnd();
-
-        glColor3f(0.0f, 1.0f, 0.0f);    //設定顏色 G //在左下角畫綠色的平面：應該在前面
-        glBegin(GL_POLYGON);
-        {
-            glVertex3f(-1.0f, -1.0f, 1.0f - 0.001f);
-            glVertex3f(0.0f + 0.5f, -1.0f, 1.0f - 0.001f);
-            glVertex3f(0.0f + 0.5f, 0.0f + 0.5f, 1.0f - 0.001f);
-            glVertex3f(-1.0f, 0.0f + 0.5f, 1.0f - 0.001f);
-        }
-        glEnd();
-    }
-    else if (display_mode == 5)
     {
         //畫網格
         int i;
 
-        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);   //設置背景色
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
         glMatrixMode(GL_PROJECTION);
@@ -323,29 +243,85 @@ void display(void)
             glEnd();
         }
     }
+    else if (display_mode == 5)
+    {
+
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
+        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
+
+        printf("無畫面, TBD, display_mode = %d\n", display_mode);
+
+    }
     else if (display_mode == 6)
     {
+
+        //畫顏色色塊
+        float mat[16];
+        int i;
+
+        glEnable(GL_DEPTH_TEST);
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
+        glClearDepth(1.0);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();	//設置單位矩陣
+        glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);   //設置窗口座標系大小
+        glGetFloatv(GL_PROJECTION_MATRIX, mat);
+        /*
+        for (i = 0; i < 16; i++)
+        {
+            printf("%10.7f", mat[i]);
+            if ((i + 1) % 4)
+            {
+                printf(" ");
+            }
+            else
+            {
+                printf("\n");
+            }
+        }
+        */
+        glMatrixMode(GL_MODELVIEW);
+        glLoadIdentity();	//設置單位矩陣
+
+        glColor3f(1.0f, 0.0f, 0.0f);    //設定顏色 R //在右上角畫紅色平面：應該在後面
+        glBegin(GL_POLYGON);
+        {
+            glVertex3f(0.0f, 0.0f, -1.0f + 0.001f);
+            glVertex3f(1.0f, 0.0f, -1.0f + 0.001f);
+            glVertex3f(1.0f, 1.0f, -1.0f + 0.001f);
+            glVertex3f(0.0f, 1.0f, -1.0f + 0.001f);
+        }
+        glEnd();
+
+        glColor3f(0.0f, 1.0f, 0.0f);    //設定顏色 G //在左下角畫綠色的平面：應該在前面
+        glBegin(GL_POLYGON);
+        {
+            glVertex3f(-1.0f, -1.0f, 1.0f - 0.001f);
+            glVertex3f(0.0f + 0.5f, -1.0f, 1.0f - 0.001f);
+            glVertex3f(0.0f + 0.5f, 0.0f + 0.5f, 1.0f - 0.001f);
+            glVertex3f(-1.0f, 0.0f + 0.5f, 1.0f - 0.001f);
+        }
+        glEnd();
+
+
     }
     else if (display_mode == 7)
     {
-        //display_mode = 7  //畫 彩色三角形
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
+        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
-        glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
-        glBegin(GL_TRIANGLES);          // 開始畫三角形
-        {
-            glColor3f(1.0f, 0.0f, 0.0f);    //設定顏色 R
-            glVertex2f(0.0f, 1.0f);         //(x1,y1)=(0, 1)
-            glColor3f(0.0f, 1.0f, 0.0f);    //設定顏色 G
-            glVertex2f(0.87f, -0.5f);       //(x2,y2)=(0.87,-0.5)
-            glColor3f(0.0f, 0.0f, 1.0f);    //設定顏色 B
-            glVertex2f(-0.87f, -0.5f);      //(x3,y3)=(-0.87,-0.5)
-        }
-        glEnd();    // 結束畫三角形
-        glPopMatrix();
+        printf("無畫面, TBD, display_mode = %d\n", display_mode);
+
+
     }
     else if (display_mode == 8)
     {
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
+        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
+
+        printf("無畫面, TBD, display_mode = %d\n", display_mode);
     }
     else if (display_mode == 9)
     {
