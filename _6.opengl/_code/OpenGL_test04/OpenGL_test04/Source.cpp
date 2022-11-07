@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <iostream>
+#include "../../Common.h"
 
 void init(void)
 {
@@ -84,19 +85,6 @@ void reshape(int w, int h)
 	glMatrixMode(GL_MODELVIEW);
 }
 
-void keyboard(unsigned char key, int x, int y)
-{
-	switch (key)
-	{
-	case 27:
-	case 'q':
-	case 'Q':
-		//離開視窗
-		glutDestroyWindow(glutGetWindow());
-		return;
-	}
-}
-
 int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
@@ -112,7 +100,7 @@ int main(int argc, char** argv)
 
 	glutDisplayFunc(display);	//設定callback function
 	glutReshapeFunc(reshape);	//設定callback function
-	glutKeyboardFunc(keyboard);	//設定callback function
+	glutKeyboardFunc(keyboard0);	//設定callback function
 
 	printf("僅顯示, 無控制, 按 Esc 離開\n");
 

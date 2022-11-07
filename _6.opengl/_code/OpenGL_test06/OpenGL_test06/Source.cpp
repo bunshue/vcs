@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <iostream>
+#include "../../Common.h"
 
 // 初始化參數
 void init()
@@ -11,7 +12,8 @@ void init()
     GLfloat diffuse[] = { 1.0, 1.0, 1.0, 1.0 };
     //    GLfloat specular[] = { 1.0, 1.0, 1.0, 1.0 };
     GLfloat position[] = { 0.0, 0, -1.0, 0.0 };
-    glEnable(GL_DEPTH_TEST);
+
+    glEnable(GL_DEPTH_TEST);    //有沒有這項設定 差很多
     glDepthFunc(GL_LESS);
     glLightfv(GL_LIGHT0, GL_AMBIENT, ambient);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse);
@@ -183,19 +185,6 @@ void reshape(int w, int h)
     gluLookAt(0, 0, 10, 0, 0, -1, 0, 1, 0);
 }
 
-void keyboard(unsigned char key, int x, int y)
-{
-    switch (key)
-    {
-    case 27:
-    case 'q':
-    case 'Q':
-        //離開視窗
-        glutDestroyWindow(glutGetWindow());
-        return;
-    }
-}
-
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
@@ -211,7 +200,9 @@ int main(int argc, char** argv)
 
     glutDisplayFunc(display);	//設定callback function
     glutReshapeFunc(reshape);	//設定callback function
-    glutKeyboardFunc(keyboard);	//設定callback function
+    glutKeyboardFunc(keyboard0);	//設定callback function
+
+    printf("僅顯示, 無控制, 按 Esc 離開\n");
 
     glutMainLoop();	//開始主循環繪製
 

@@ -9,7 +9,7 @@
  *
  */
 
-// OpenGL Graphics includes
+ // OpenGL Graphics includes
 #define HELPERGL_EXTERN_GL_FUNC_IMPLEMENTATION
 #include <helper_gl.h>
 
@@ -45,7 +45,7 @@ ParticleSystem::ParticleSystem(uint numParticles, uint3 gridSize, bool bUseOpenG
     m_timer(NULL),
     m_solverIterations(1)
 {
-    m_numGridCells = m_gridSize.x*m_gridSize.y*m_gridSize.z;
+    m_numGridCells = m_gridSize.x * m_gridSize.y * m_gridSize.z;
     //    float3 worldSize = make_float3(2.0f, 2.0f, 2.0f);
 
     m_gridSortBits = 18;    // increase this for larger grids
@@ -95,11 +95,11 @@ ParticleSystem::createVBO(uint size)
 
 inline float lerp(float a, float b, float t)
 {
-    return a + t*(b-a);
+    return a + t * (b - a);
 }
 
 // create a color ramp
-void colorRamp(float t, float *r)
+void colorRamp(float t, float* r)
 {
     const int ncolors = 7;
     float c[ncolors][3] =
@@ -112,12 +112,12 @@ void colorRamp(float t, float *r)
         { 0.0, 0.0, 1.0, },
         { 1.0, 0.0, 1.0, },
     };
-    t = t * (ncolors-1);
-    int i = (int) t;
+    t = t * (ncolors - 1);
+    int i = (int)t;
     float u = t - floorf(t);
-    r[0] = lerp(c[i][0], c[i+1][0], u);
-    r[1] = lerp(c[i][1], c[i+1][1], u);
-    r[2] = lerp(c[i][2], c[i+1][2], u);
+    r[0] = lerp(c[i][0], c[i + 1][0], u);
+    r[1] = lerp(c[i][1], c[i + 1][1], u);
+    r[2] = lerp(c[i][2], c[i + 1][2], u);
 }
 
 void
@@ -128,16 +128,16 @@ ParticleSystem::_initialize(int numParticles)
     m_numParticles = numParticles;
 
     // allocate host storage
-    m_hPos = new float[m_numParticles*4];
-    m_hVel = new float[m_numParticles*4];
-    memset(m_hPos, 0, m_numParticles*4*sizeof(float));
-    memset(m_hVel, 0, m_numParticles*4*sizeof(float));
+    m_hPos = new float[m_numParticles * 4];
+    m_hVel = new float[m_numParticles * 4];
+    memset(m_hPos, 0, m_numParticles * 4 * sizeof(float));
+    memset(m_hVel, 0, m_numParticles * 4 * sizeof(float));
 
     m_hCellStart = new uint[m_numGridCells];
-    memset(m_hCellStart, 0, m_numGridCells*sizeof(uint));
+    memset(m_hCellStart, 0, m_numGridCells * sizeof(uint));
 
     m_hCellEnd = new uint[m_numGridCells];
-    memset(m_hCellEnd, 0, m_numGridCells*sizeof(uint));
+    memset(m_hCellEnd, 0, m_numGridCells * sizeof(uint));
 
     // allocate GPU data
     unsigned int memSize = sizeof(float) * 4 * m_numParticles;
@@ -149,49 +149,49 @@ ParticleSystem::_initialize(int numParticles)
     }
     else
     {
-        checkCudaErrors(cudaMalloc((void **)&m_cudaPosVBO, memSize)) ;
+        checkCudaErrors(cudaMalloc((void**)&m_cudaPosVBO, memSize));
     }
 
-    allocateArray((void **)&m_dVel, memSize);
+    allocateArray((void**)&m_dVel, memSize);
 
-    allocateArray((void **)&m_dSortedPos, memSize);
-    allocateArray((void **)&m_dSortedVel, memSize);
+    allocateArray((void**)&m_dSortedPos, memSize);
+    allocateArray((void**)&m_dSortedVel, memSize);
 
-    allocateArray((void **)&m_dGridParticleHash, m_numParticles*sizeof(uint));
-    allocateArray((void **)&m_dGridParticleIndex, m_numParticles*sizeof(uint));
+    allocateArray((void**)&m_dGridParticleHash, m_numParticles * sizeof(uint));
+    allocateArray((void**)&m_dGridParticleIndex, m_numParticles * sizeof(uint));
 
-    allocateArray((void **)&m_dCellStart, m_numGridCells*sizeof(uint));
-    allocateArray((void **)&m_dCellEnd, m_numGridCells*sizeof(uint));
+    allocateArray((void**)&m_dCellStart, m_numGridCells * sizeof(uint));
+    allocateArray((void**)&m_dCellEnd, m_numGridCells * sizeof(uint));
 
     if (m_bUseOpenGL)
     {
-        m_colorVBO = createVBO(m_numParticles*4*sizeof(float));
+        m_colorVBO = createVBO(m_numParticles * 4 * sizeof(float));
         registerGLBufferObject(m_colorVBO, &m_cuda_colorvbo_resource);
 
         // fill color buffer
         glBindBuffer(GL_ARRAY_BUFFER, m_colorVBO);
-        float *data = (float *) glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
-        float *ptr = data;
+        float* data = (float*)glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY);
+        float* ptr = data;
 
-        for (uint i=0; i<m_numParticles; i++)
+        for (uint i = 0; i < m_numParticles; i++)
         {
-            float t = i / (float) m_numParticles;
+            float t = i / (float)m_numParticles;
 #if 0
-            *ptr++ = rand() / (float) RAND_MAX;
-            *ptr++ = rand() / (float) RAND_MAX;
-            *ptr++ = rand() / (float) RAND_MAX;
+            * ptr++ = rand() / (float)RAND_MAX;
+            *ptr++ = rand() / (float)RAND_MAX;
+            *ptr++ = rand() / (float)RAND_MAX;
 #else
             colorRamp(t, ptr);
-            ptr+=3;
+            ptr += 3;
 #endif
-            *ptr++ = 1.0f;
+            * ptr++ = 1.0f;
         }
 
         glUnmapBuffer(GL_ARRAY_BUFFER);
     }
     else
     {
-        checkCudaErrors(cudaMalloc((void **)&m_cudaColorVBO, sizeof(float)*numParticles*4));
+        checkCudaErrors(cudaMalloc((void**)&m_cudaColorVBO, sizeof(float) * numParticles * 4));
     }
 
     sdkCreateTimer(&m_timer);
@@ -206,10 +206,10 @@ ParticleSystem::_finalize()
 {
     assert(m_bInitialized);
 
-    delete [] m_hPos;
-    delete [] m_hVel;
-    delete [] m_hCellStart;
-    delete [] m_hCellEnd;
+    delete[] m_hPos;
+    delete[] m_hVel;
+    delete[] m_hCellStart;
+    delete[] m_hCellEnd;
 
     freeArray(m_dVel);
     freeArray(m_dSortedPos);
@@ -224,8 +224,8 @@ ParticleSystem::_finalize()
     {
         unregisterGLBufferObject(m_cuda_colorvbo_resource);
         unregisterGLBufferObject(m_cuda_posvbo_resource);
-        glDeleteBuffers(1, (const GLuint *)&m_posVbo);
-        glDeleteBuffers(1, (const GLuint *)&m_colorVBO);
+        glDeleteBuffers(1, (const GLuint*)&m_posVbo);
+        glDeleteBuffers(1, (const GLuint*)&m_colorVBO);
     }
     else
     {
@@ -240,15 +240,15 @@ ParticleSystem::update(float deltaTime)
 {
     assert(m_bInitialized);
 
-    float *dPos;
+    float* dPos;
 
     if (m_bUseOpenGL)
     {
-        dPos = (float *) mapGLBufferObject(&m_cuda_posvbo_resource);
+        dPos = (float*)mapGLBufferObject(&m_cuda_posvbo_resource);
     }
     else
     {
-        dPos = (float *) m_cudaPosVBO;
+        dPos = (float*)m_cudaPosVBO;
     }
 
     // update constants
@@ -307,11 +307,11 @@ void
 ParticleSystem::dumpGrid()
 {
     // dump grid information
-    copyArrayFromDevice(m_hCellStart, m_dCellStart, 0, sizeof(uint)*m_numGridCells);
-    copyArrayFromDevice(m_hCellEnd, m_dCellEnd, 0, sizeof(uint)*m_numGridCells);
+    copyArrayFromDevice(m_hCellStart, m_dCellStart, 0, sizeof(uint) * m_numGridCells);
+    copyArrayFromDevice(m_hCellEnd, m_dCellEnd, 0, sizeof(uint) * m_numGridCells);
     uint maxCellSize = 0;
 
-    for (uint i=0; i<m_numGridCells; i++)
+    for (uint i = 0; i < m_numGridCells; i++)
     {
         if (m_hCellStart[i] != 0xffffffff)
         {
@@ -332,105 +332,105 @@ void
 ParticleSystem::dumpParticles(uint start, uint count)
 {
     // debug
-    copyArrayFromDevice(m_hPos, 0, &m_cuda_posvbo_resource, sizeof(float)*4*count);
-    copyArrayFromDevice(m_hVel, m_dVel, 0, sizeof(float)*4*count);
+    copyArrayFromDevice(m_hPos, 0, &m_cuda_posvbo_resource, sizeof(float) * 4 * count);
+    copyArrayFromDevice(m_hVel, m_dVel, 0, sizeof(float) * 4 * count);
 
-    for (uint i=start; i<start+count; i++)
+    for (uint i = start; i < start + count; i++)
     {
         //        printf("%d: ", i);
-        printf("pos: (%.4f, %.4f, %.4f, %.4f)\n", m_hPos[i*4+0], m_hPos[i*4+1], m_hPos[i*4+2], m_hPos[i*4+3]);
-        printf("vel: (%.4f, %.4f, %.4f, %.4f)\n", m_hVel[i*4+0], m_hVel[i*4+1], m_hVel[i*4+2], m_hVel[i*4+3]);
+        printf("pos: (%.4f, %.4f, %.4f, %.4f)\n", m_hPos[i * 4 + 0], m_hPos[i * 4 + 1], m_hPos[i * 4 + 2], m_hPos[i * 4 + 3]);
+        printf("vel: (%.4f, %.4f, %.4f, %.4f)\n", m_hVel[i * 4 + 0], m_hVel[i * 4 + 1], m_hVel[i * 4 + 2], m_hVel[i * 4 + 3]);
     }
 }
 
-float *
+float*
 ParticleSystem::getArray(ParticleArray array)
 {
     assert(m_bInitialized);
 
-    float *hdata = 0;
-    float *ddata = 0;
-    struct cudaGraphicsResource *cuda_vbo_resource = 0;
+    float* hdata = 0;
+    float* ddata = 0;
+    struct cudaGraphicsResource* cuda_vbo_resource = 0;
 
     switch (array)
     {
-        default:
-        case POSITION:
-            hdata = m_hPos;
-            ddata = m_dPos;
-            cuda_vbo_resource = m_cuda_posvbo_resource;
-            break;
+    default:
+    case POSITION:
+        hdata = m_hPos;
+        ddata = m_dPos;
+        cuda_vbo_resource = m_cuda_posvbo_resource;
+        break;
 
-        case VELOCITY:
-            hdata = m_hVel;
-            ddata = m_dVel;
-            break;
+    case VELOCITY:
+        hdata = m_hVel;
+        ddata = m_dVel;
+        break;
     }
 
-    copyArrayFromDevice(hdata, ddata, &cuda_vbo_resource, m_numParticles*4*sizeof(float));
+    copyArrayFromDevice(hdata, ddata, &cuda_vbo_resource, m_numParticles * 4 * sizeof(float));
     return hdata;
 }
 
 void
-ParticleSystem::setArray(ParticleArray array, const float *data, int start, int count)
+ParticleSystem::setArray(ParticleArray array, const float* data, int start, int count)
 {
     assert(m_bInitialized);
 
     switch (array)
     {
-        default:
-        case POSITION:
-            {
-                if (m_bUseOpenGL)
-                {
-                    unregisterGLBufferObject(m_cuda_posvbo_resource);
-                    glBindBuffer(GL_ARRAY_BUFFER, m_posVbo);
-                    glBufferSubData(GL_ARRAY_BUFFER, start*4*sizeof(float), count*4*sizeof(float), data);
-                    glBindBuffer(GL_ARRAY_BUFFER, 0);
-                    registerGLBufferObject(m_posVbo, &m_cuda_posvbo_resource);
-                }
-                else
-                {
-                    copyArrayToDevice(m_cudaPosVBO, data, start*4*sizeof(float), count*4*sizeof(float));
-                }
-            }
-            break;
+    default:
+    case POSITION:
+    {
+        if (m_bUseOpenGL)
+        {
+            unregisterGLBufferObject(m_cuda_posvbo_resource);
+            glBindBuffer(GL_ARRAY_BUFFER, m_posVbo);
+            glBufferSubData(GL_ARRAY_BUFFER, start * 4 * sizeof(float), count * 4 * sizeof(float), data);
+            glBindBuffer(GL_ARRAY_BUFFER, 0);
+            registerGLBufferObject(m_posVbo, &m_cuda_posvbo_resource);
+        }
+        else
+        {
+            copyArrayToDevice(m_cudaPosVBO, data, start * 4 * sizeof(float), count * 4 * sizeof(float));
+        }
+    }
+    break;
 
-        case VELOCITY:
-            copyArrayToDevice(m_dVel, data, start*4*sizeof(float), count*4*sizeof(float));
-            break;
+    case VELOCITY:
+        copyArrayToDevice(m_dVel, data, start * 4 * sizeof(float), count * 4 * sizeof(float));
+        break;
     }
 }
 
 inline float frand()
 {
-    return rand() / (float) RAND_MAX;
+    return rand() / (float)RAND_MAX;
 }
 
 void
-ParticleSystem::initGrid(uint *size, float spacing, float jitter, uint numParticles)
+ParticleSystem::initGrid(uint* size, float spacing, float jitter, uint numParticles)
 {
     srand(1973);
 
-    for (uint z=0; z<size[2]; z++)
+    for (uint z = 0; z < size[2]; z++)
     {
-        for (uint y=0; y<size[1]; y++)
+        for (uint y = 0; y < size[1]; y++)
         {
-            for (uint x=0; x<size[0]; x++)
+            for (uint x = 0; x < size[0]; x++)
             {
-                uint i = (z*size[1]*size[0]) + (y*size[0]) + x;
+                uint i = (z * size[1] * size[0]) + (y * size[0]) + x;
 
                 if (i < numParticles)
                 {
-                    m_hPos[i*4] = (spacing * x) + m_params.particleRadius - 1.0f + (frand()*2.0f-1.0f)*jitter;
-                    m_hPos[i*4+1] = (spacing * y) + m_params.particleRadius - 1.0f + (frand()*2.0f-1.0f)*jitter;
-                    m_hPos[i*4+2] = (spacing * z) + m_params.particleRadius - 1.0f + (frand()*2.0f-1.0f)*jitter;
-                    m_hPos[i*4+3] = 1.0f;
+                    m_hPos[i * 4] = (spacing * x) + m_params.particleRadius - 1.0f + (frand() * 2.0f - 1.0f) * jitter;
+                    m_hPos[i * 4 + 1] = (spacing * y) + m_params.particleRadius - 1.0f + (frand() * 2.0f - 1.0f) * jitter;
+                    m_hPos[i * 4 + 2] = (spacing * z) + m_params.particleRadius - 1.0f + (frand() * 2.0f - 1.0f) * jitter;
+                    m_hPos[i * 4 + 3] = 1.0f;
 
-                    m_hVel[i*4] = 0.0f;
-                    m_hVel[i*4+1] = 0.0f;
-                    m_hVel[i*4+2] = 0.0f;
-                    m_hVel[i*4+3] = 0.0f;
+                    m_hVel[i * 4] = 0.0f;
+                    m_hVel[i * 4 + 1] = 0.0f;
+                    m_hVel[i * 4 + 2] = 0.0f;
+                    m_hVel[i * 4 + 3] = 0.0f;
                 }
             }
         }
@@ -442,38 +442,38 @@ ParticleSystem::reset(ParticleConfig config)
 {
     switch (config)
     {
-        default:
-        case CONFIG_RANDOM:
-            {
-                int p = 0, v = 0;
+    default:
+    case CONFIG_RANDOM:
+    {
+        int p = 0, v = 0;
 
-                for (uint i=0; i < m_numParticles; i++)
-                {
-                    float point[3];
-                    point[0] = frand();
-                    point[1] = frand();
-                    point[2] = frand();
-                    m_hPos[p++] = 2 * (point[0] - 0.5f);
-                    m_hPos[p++] = 2 * (point[1] - 0.5f);
-                    m_hPos[p++] = 2 * (point[2] - 0.5f);
-                    m_hPos[p++] = 1.0f; // radius
-                    m_hVel[v++] = 0.0f;
-                    m_hVel[v++] = 0.0f;
-                    m_hVel[v++] = 0.0f;
-                    m_hVel[v++] = 0.0f;
-                }
-            }
-            break;
+        for (uint i = 0; i < m_numParticles; i++)
+        {
+            float point[3];
+            point[0] = frand();
+            point[1] = frand();
+            point[2] = frand();
+            m_hPos[p++] = 2 * (point[0] - 0.5f);
+            m_hPos[p++] = 2 * (point[1] - 0.5f);
+            m_hPos[p++] = 2 * (point[2] - 0.5f);
+            m_hPos[p++] = 1.0f; // radius
+            m_hVel[v++] = 0.0f;
+            m_hVel[v++] = 0.0f;
+            m_hVel[v++] = 0.0f;
+            m_hVel[v++] = 0.0f;
+        }
+    }
+    break;
 
-        case CONFIG_GRID:
-            {
-                float jitter = m_params.particleRadius*0.01f;
-                uint s = (int) ceilf(powf((float) m_numParticles, 1.0f / 3.0f));
-                uint gridSize[3];
-                gridSize[0] = gridSize[1] = gridSize[2] = s;
-                initGrid(gridSize, m_params.particleRadius*2.0f, jitter, m_numParticles);
-            }
-            break;
+    case CONFIG_GRID:
+    {
+        float jitter = m_params.particleRadius * 0.01f;
+        uint s = (int)ceilf(powf((float)m_numParticles, 1.0f / 3.0f));
+        uint gridSize[3];
+        gridSize[0] = gridSize[1] = gridSize[2] = s;
+        initGrid(gridSize, m_params.particleRadius * 2.0f, jitter, m_numParticles);
+    }
+    break;
     }
 
     setArray(POSITION, m_hPos, 0, m_numParticles);
@@ -481,33 +481,33 @@ ParticleSystem::reset(ParticleConfig config)
 }
 
 void
-ParticleSystem::addSphere(int start, float *pos, float *vel, int r, float spacing)
+ParticleSystem::addSphere(int start, float* pos, float* vel, int r, float spacing)
 {
     uint index = start;
 
-    for (int z=-r; z<=r; z++)
+    for (int z = -r; z <= r; z++)
     {
-        for (int y=-r; y<=r; y++)
+        for (int y = -r; y <= r; y++)
         {
-            for (int x=-r; x<=r; x++)
+            for (int x = -r; x <= r; x++)
             {
-                float dx = x*spacing;
-                float dy = y*spacing;
-                float dz = z*spacing;
-                float l = sqrtf(dx*dx + dy*dy + dz*dz);
-                float jitter = m_params.particleRadius*0.01f;
+                float dx = x * spacing;
+                float dy = y * spacing;
+                float dz = z * spacing;
+                float l = sqrtf(dx * dx + dy * dy + dz * dz);
+                float jitter = m_params.particleRadius * 0.01f;
 
-                if ((l <= m_params.particleRadius*2.0f*r) && (index < m_numParticles))
+                if ((l <= m_params.particleRadius * 2.0f * r) && (index < m_numParticles))
                 {
-                    m_hPos[index*4]   = pos[0] + dx + (frand()*2.0f-1.0f)*jitter;
-                    m_hPos[index*4+1] = pos[1] + dy + (frand()*2.0f-1.0f)*jitter;
-                    m_hPos[index*4+2] = pos[2] + dz + (frand()*2.0f-1.0f)*jitter;
-                    m_hPos[index*4+3] = pos[3];
+                    m_hPos[index * 4] = pos[0] + dx + (frand() * 2.0f - 1.0f) * jitter;
+                    m_hPos[index * 4 + 1] = pos[1] + dy + (frand() * 2.0f - 1.0f) * jitter;
+                    m_hPos[index * 4 + 2] = pos[2] + dz + (frand() * 2.0f - 1.0f) * jitter;
+                    m_hPos[index * 4 + 3] = pos[3];
 
-                    m_hVel[index*4]   = vel[0];
-                    m_hVel[index*4+1] = vel[1];
-                    m_hVel[index*4+2] = vel[2];
-                    m_hVel[index*4+3] = vel[3];
+                    m_hVel[index * 4] = vel[0];
+                    m_hVel[index * 4 + 1] = vel[1];
+                    m_hVel[index * 4 + 2] = vel[2];
+                    m_hVel[index * 4 + 3] = vel[3];
                     index++;
                 }
             }

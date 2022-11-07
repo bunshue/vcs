@@ -140,7 +140,7 @@ void initGL(int* argc, char** argv)
 
     glutCreateWindow("CUDA Particles");
 
-glewInit();	//OpenGL Extension Wrangler Library （GLEW） 跨平台C/C++擴展庫 初始化
+    glewInit();	//OpenGL Extension Wrangler Library （GLEW） 跨平台C/C++擴展庫 初始化
 
 #if defined(WIN32)
 

@@ -10,14 +10,7 @@ int display_mode = 1;
 void init01(void)
 {
     glOrtho(0.0f, 300.0f, 0.0f, 300.0f, 1.0, -1.0); //設置窗口座標系大小
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);    //設置背景色
-}
-
-// 初始化參數
-void init05()
-{
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);    //設置背景色
-    glShadeModel(GL_SMOOTH);
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
 }
 
 // 繪圖回調函數
@@ -28,7 +21,7 @@ void display(void)
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
         //or
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);    //設置背景色
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
         //設定預設大小...
@@ -37,88 +30,26 @@ void display(void)
     {
         //display_mode = 1  //畫
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glColor3f(0.0f, 1.0f, 0.0f);//設置繪圖顏色
         glRectf(100.0f, 100.0f, 200.0f, 200.0f);//繪製矩形
     }
     else if (display_mode == 2)
     {
+        //display_mode = 2
     }
     else if (display_mode == 3)
     {
-        //display_mode = 3  //畫矩形
-        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        glMatrixMode(GL_MODELVIEW);                        // 選擇模型觀察矩陣
-        glLoadIdentity();                                  // 重置模型觀察矩陣  //設置單位矩陣 
-        glMatrixMode(GL_PROJECTION);                        // 選擇投影矩陣     
-        glLoadIdentity();
-
-        glEnable(GL_TEXTURE_2D);    //啟用2D紋理映射
-        glBegin(GL_QUADS);
-        {
-            glTexCoord2f(0.0f, 0.0f);
-            glVertex3f(-0.5f, -0.5f, 0.0f);
-            glTexCoord2f(1.0f, 0.0f);
-            glVertex3f(0.5f, -0.5f, 0.0f);
-            glTexCoord2f(1.0f, 1.0f);
-            glVertex3f(0.5f, 0.5f, 0.0f);
-            glTexCoord2f(0.0f, 1.0f);
-            glVertex3f(-0.5f, 0.5f, 0.0f);
-        }
-        glEnd();
-        glDisable(GL_TEXTURE_2D);
+        //display_mode = 3
     }
     else if (display_mode == 4)
     {
-        //display_mode = 4  //畫 矩形 + 四邊形
-
-        //Single/Double buffer 會不一樣
-        //glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
-        //glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-
-        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
-
-        glRectf(-0.5f, -0.5f, 0.5f, 0.5f);
-
-        glColor4f(1.0, 0.0, 0.0, 1.0);  //設置畫筆顏色為 R
-        glBegin(GL_QUADS);
-        {
-            glTexCoord2f(0.8f, 0.0f);
-            glVertex2f(0.8f, 0.0f);
-
-            glTexCoord2f(0.0f, -0.8f);
-            glVertex2f(0.0f, -0.8f);
-
-            glTexCoord2f(-0.8f, 0.0f);
-            glVertex2f(-0.8f, 0.0f);
-
-            glTexCoord2f(0.0f, 0.8f);
-            glVertex2f(0.0f, 0.8f);
-        }
-        glEnd();
+        //display_mode = 4
     }
     else if (display_mode == 5)
     {
         //display_mode = 5
-
-        // 清除之前幀數據
-        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
-
-        // 繪製三角形
-        glBegin(GL_TRIANGLES);
-        {
-            glColor3f(1, 0, 0);     //紅
-            glVertex3f(-2, -2, -5); //左下
-
-            glColor3f(0, 1, 0);     //綠
-            glVertex3f(2, -2, -5);  //右下
-
-            glColor3f(0, 0, 1);     //藍
-            glVertex3f(0, 2, -5);   //上
-        }
-        glEnd();
     }
     else if (display_mode == 6)
     {
@@ -127,19 +58,14 @@ void display(void)
     else if (display_mode == 7)
     {
         //display_mode = 7  //畫
-
-
-
     }
     else if (display_mode == 8)
     {
         //display_mode = 8  //畫
-
     }
     else if (display_mode == 9)
     {
         //display_mode = 9  //畫
-
     }
     else
     {
@@ -189,7 +115,6 @@ void keyboard(unsigned char key, int x, int y)
         break;
     case '5':
         display_mode = 5;
-        init05();
         break;
     case '6':
         display_mode = 6;
