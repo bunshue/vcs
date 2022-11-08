@@ -6,25 +6,44 @@
 
 void draw_coordinates(float len)
 {
+    float dd = len / 10;
     glLineWidth(3.0f);	//設定線寬
 
     glColor3f(1.0f, 0.0f, 0.0f); //畫紅色的x軸
     glBegin(GL_LINES);
     glVertex3f(0.0f, 0.0f, 0.0f);	//原點
     glVertex3f(len, 0.0f, 0.0f);	//x軸 len,0,0
+    glVertex3f(len, 0.0f, 0.0f);	//x軸 len,0,0
+    glVertex3f(len - dd, 0.0f + dd, 0.0f);	//x軸 len,0,0
+    glVertex3f(len, 0.0f, 0.0f);	//x軸 len,0,0
+    glVertex3f(len - dd, 0.0f - dd, 0.0f);	//x軸 len,0,0
     glEnd();
+    glRasterPos3f(len, 0.05, 0);
+    glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'x');
 
     glColor3f(0.0, 1.0, 0.0); //畫綠色的y軸
     glBegin(GL_LINES);
     glVertex3f(0.0f, 0.0f, 0.0f);	//原點
     glVertex3f(0.0f, len, 0.0f);	//y軸 0,len,0
+    glVertex3f(0.0f, len, 0.0f);	//y軸 0,len,0
+    glVertex3f(0.0f - dd, len - dd, 0.0f);	//y軸 0,len,0
+    glVertex3f(0.0f, len, 0.0f);	//y軸 0,len,0
+    glVertex3f(0.0f + dd, len - dd, 0.0f);	//y軸 0,len,0
     glEnd();
+    glRasterPos3f(0, len, 0);
+    glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'y');
 
     glColor3f(0.0, 0.0, 1.0); //畫藍色的z軸
     glBegin(GL_LINES);
     glVertex3f(0.0f, 0.0f, 0.0f);	//原點
     glVertex3f(0.0f, 0.0f, len);	//z軸 0,0,len
+    glVertex3f(0.0f, 0.0f, len);	//z軸 0,0,len
+    glVertex3f(0.0f - dd, 0.0f, len - dd);	//z軸 0,0,len
+    glVertex3f(0.0f, 0.0f, len);	//z軸 0,0,len
+    glVertex3f(0.0f + dd, 0.0f, len - dd);	//z軸 0,0,len
     glEnd();
+    glRasterPos3f(0, 0, len);
+    glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'z');
 }
 
 void draw_boundary(float* color, float dd)

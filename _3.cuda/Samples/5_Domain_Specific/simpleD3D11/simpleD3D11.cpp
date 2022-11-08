@@ -1,33 +1,5 @@
-/* Copyright (c) 2022, NVIDIA CORPORATION. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *  * Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- *  * Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in the
- *    documentation and/or other materials provided with the distribution.
- *  * Neither the name of NVIDIA CORPORATION nor the names of its
- *    contributors may be used to endorse or promote products derived
- *    from this software without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS ``AS IS'' AND ANY
- * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
- * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- * PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- * CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- * EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- * PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- * PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY
- * OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
- * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
- * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
-/* This example demonstrates how to use the CUDA-D3D11 External Resource Interoperability APIs
-*  to update D3D11 buffers from CUDA and synchronize between D3D11 and CUDA with Keyed Mutexes.
- */
+// This example demonstrates how to use the CUDA-D3D11 External Resource Interoperability APIs
+// to update D3D11 buffers from CUDA and synchronize between D3D11 and CUDA with Keyed Mutexes.
 
 #pragma warning(disable: 4312)
 
@@ -50,25 +22,25 @@
 
 #define MAX_EPSILON 10
 
-static char *SDK_name = "simpleD3D11";
+static char* SDK_name = "simpleD3D11";
 
 //-----------------------------------------------------------------------------
 // Global variables
 //-----------------------------------------------------------------------------
-IDXGIAdapter1          *g_pCudaCapableAdapter = NULL;  // Adapter to use
-ID3D11Device           *g_pd3dDevice = NULL; // Our rendering device
-ID3D11DeviceContext    *g_pd3dDeviceContext = NULL;
-IDXGISwapChain         *g_pSwapChain = NULL; // The swap chain of the window
-ID3D11RenderTargetView *g_pSwapChainRTV = NULL; //The Render target view on the swap chain ( used for clear)
-ID3D11RasterizerState  *g_pRasterState = NULL;
-ID3D11InputLayout      *g_pInputLayout = NULL;
-ID3D11VertexShader     *g_pVertexShader;
-ID3D11PixelShader      *g_pPixelShader;
-ID3D11InputLayout      *g_pLayout;
-ID3D11Buffer           *g_VertexBuffer;
-IDXGIKeyedMutex        *g_pKeyedMutex11;
+IDXGIAdapter1* g_pCudaCapableAdapter = NULL;  // Adapter to use
+ID3D11Device* g_pd3dDevice = NULL; // Our rendering device
+ID3D11DeviceContext* g_pd3dDeviceContext = NULL;
+IDXGISwapChain* g_pSwapChain = NULL; // The swap chain of the window
+ID3D11RenderTargetView* g_pSwapChainRTV = NULL; //The Render target view on the swap chain ( used for clear)
+ID3D11RasterizerState* g_pRasterState = NULL;
+ID3D11InputLayout* g_pInputLayout = NULL;
+ID3D11VertexShader* g_pVertexShader;
+ID3D11PixelShader* g_pPixelShader;
+ID3D11InputLayout* g_pLayout;
+ID3D11Buffer* g_VertexBuffer;
+IDXGIKeyedMutex* g_pKeyedMutex11;
 
-Vertex *d_VertexBufPtr = NULL;
+Vertex* d_VertexBufPtr = NULL;
 cudaExternalMemory_t extMemory;
 cudaExternalSemaphore_t extSemaphore;
 
@@ -104,11 +76,8 @@ static const char g_simpleShaders[] =
         return 1; \
     }
 
-bool g_bDone   = false;
+bool g_bDone = false;
 bool g_bPassed = true;
-
-int *pArgc = NULL;
-char **pArgv = NULL;
 
 const unsigned int g_WindowWidth = 720;
 const unsigned int g_WindowHeight = 720;
@@ -149,17 +118,17 @@ bool findCUDADevice()
     return true;
 }
 
-bool findDXDevice(char *dev_name)
+bool findDXDevice(char* dev_name)
 {
     HRESULT hr = S_OK;
     cudaError cuStatus;
     int cuda_dev = -1;
 
     // Iterate through the candidate adapters
-    IDXGIFactory1 *pFactory;
-    hr = sFnPtr_CreateDXGIFactory(__uuidof(IDXGIFactory1), (void **)(&pFactory));
+    IDXGIFactory1* pFactory;
+    hr = sFnPtr_CreateDXGIFactory(__uuidof(IDXGIFactory1), (void**)(&pFactory));
 
-    if (! SUCCEEDED(hr))
+    if (!SUCCEEDED(hr))
     {
         printf("> No DXGI Factory created.\n");
         return false;
@@ -170,7 +139,7 @@ bool findDXDevice(char *dev_name)
     for (; !g_pCudaCapableAdapter; ++adapter)
     {
         // Get a candidate DXGI adapter
-        IDXGIAdapter1 *pAdapter = NULL;
+        IDXGIAdapter1* pAdapter = NULL;
 
         hr = pFactory->EnumAdapters1(adapter, &pAdapter);
 
@@ -196,7 +165,7 @@ bool findDXDevice(char *dev_name)
         pAdapter->Release();
     }
 
-    printf("> Found %d D3D11 Adapater(s).\n", (int) adapter);
+    printf("> Found %d D3D11 Adapater(s).\n", (int)adapter);
 
     pFactory->Release();
 
@@ -219,19 +188,12 @@ bool findDXDevice(char *dev_name)
     return true;
 }
 
-
-////////////////////////////////////////////////////////////////////////////////
-// Program main
-////////////////////////////////////////////////////////////////////////////////
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
     char device_name[256];
-    char *ref_file = NULL;
+    char* ref_file = NULL;
 
-    pArgc = &argc;
-    pArgv = argv;
-
-    printf("[%s] - Starting...\n", SDK_name);
+    printf("Starting...\n");
 
     if (!findCUDADevice())                   // Search for CUDA GPU
     {
@@ -257,8 +219,10 @@ int main(int argc, char *argv[])
     if (argc > 1)
     {
         // automatied build testing harness
-        if (checkCmdLineFlag(argc, (const char **)argv, "file"))
-            getCmdLineArgumentString(argc, (const char **)argv, "file", &ref_file);
+        if (checkCmdLineFlag(argc, (const char**)argv, "file"))
+        {
+            getCmdLineArgumentString(argc, (const char**)argv, "file", &ref_file);
+        }
     }
 
     //
@@ -268,7 +232,7 @@ int main(int argc, char *argv[])
     WNDCLASSEX wc = { sizeof(WNDCLASSEX), CS_CLASSDC, MsgProc, 0L, 0L,
                       GetModuleHandle(NULL), NULL, NULL, NULL, NULL,
                       "CUDA SDK", NULL
-                    };
+    };
     RegisterClassEx(&wc);
 
     // Create the application's window
@@ -276,8 +240,8 @@ int main(int argc, char *argv[])
     int yMenu = ::GetSystemMetrics(SM_CYMENU);
     int yBorder = ::GetSystemMetrics(SM_CYSIZEFRAME);
     HWND hWnd = CreateWindow(wc.lpszClassName, "CUDA/D3D11 InterOP",
-                             WS_OVERLAPPEDWINDOW, 0, 0, g_WindowWidth + 2*xBorder, g_WindowHeight+ 2*yBorder+yMenu,
-                             NULL, NULL, wc.hInstance, NULL);
+        WS_OVERLAPPEDWINDOW, 0, 0, g_WindowWidth + 2 * xBorder, g_WindowHeight + 2 * yBorder + yMenu,
+        NULL, NULL, wc.hInstance, NULL);
 
     ShowWindow(hWnd, SW_SHOWDEFAULT);
     UpdateWindow(hWnd);
@@ -302,7 +266,7 @@ int main(int argc, char *argv[])
         MSG msg;
         ZeroMemory(&msg, sizeof(msg));
 
-        while (msg.message!=WM_QUIT)
+        while (msg.message != WM_QUIT)
         {
             if (PeekMessage(&msg, NULL, 0U, 0U, PM_REMOVE))
             {
@@ -315,15 +279,15 @@ int main(int argc, char *argv[])
 
                 if (ref_file)
                 {
-                    for (int count=0; count<g_iFrameToCompare; count++)
+                    for (int count = 0; count < g_iFrameToCompare; count++)
                     {
                         Render();
                     }
 
-                    const char *cur_image_path = "simpleD3D11.ppm";
+                    const char* cur_image_path = "simpleD3D11.ppm";
 
                     // Save a reference of our current test run image
-                    CheckRenderD3D11::ActiveRenderTargetToPPM(g_pd3dDevice,cur_image_path);
+                    CheckRenderD3D11::ActiveRenderTargetToPPM(g_pd3dDevice, cur_image_path);
 
                     // compare to offical reference image, printing PASS or FAIL.
                     g_bPassed = CheckRenderD3D11::PPMvsPPM(cur_image_path, ref_file, argv[0], MAX_EPSILON, 0.15f);
@@ -349,14 +313,10 @@ int main(int argc, char *argv[])
     // Unregister windows class
     UnregisterClass(wc.lpszClassName, wc.hInstance);
 
-    //
-    // and exit
-    //
     printf("> %s running on %s exiting...\n", SDK_name, device_name);
 
     exit(g_bPassed ? EXIT_SUCCESS : EXIT_FAILURE);
 }
-
 
 //-----------------------------------------------------------------------------
 // Name: InitD3D()
@@ -390,19 +350,19 @@ HRESULT InitD3D(HWND hWnd)
     D3D_FEATURE_LEVEL flRes;
     // Create device and swapchain
     hr = sFnPtr_D3D11CreateDeviceAndSwapChain(
-             g_pCudaCapableAdapter,
-             D3D_DRIVER_TYPE_UNKNOWN,//D3D_DRIVER_TYPE_HARDWARE,
-             NULL, //HMODULE Software
-             0, //UINT Flags
-             tour_fl, // D3D_FEATURE_LEVEL* pFeatureLevels
-             2, //FeatureLevels
-             D3D11_SDK_VERSION, //UINT SDKVersion
-             &sd, // DXGI_SWAP_CHAIN_DESC* pSwapChainDesc
-             &g_pSwapChain, //IDXGISwapChain** ppSwapChain
-             &g_pd3dDevice, //ID3D11Device** ppDevice
-             &flRes, //D3D_FEATURE_LEVEL* pFeatureLevel
-             &g_pd3dDeviceContext//ID3D11DeviceContext** ppImmediateContext
-         );
+        g_pCudaCapableAdapter,
+        D3D_DRIVER_TYPE_UNKNOWN,//D3D_DRIVER_TYPE_HARDWARE,
+        NULL, //HMODULE Software
+        0, //UINT Flags
+        tour_fl, // D3D_FEATURE_LEVEL* pFeatureLevels
+        2, //FeatureLevels
+        D3D11_SDK_VERSION, //UINT SDKVersion
+        &sd, // DXGI_SWAP_CHAIN_DESC* pSwapChainDesc
+        &g_pSwapChain, //IDXGISwapChain** ppSwapChain
+        &g_pd3dDevice, //ID3D11Device** ppDevice
+        &flRes, //D3D_FEATURE_LEVEL* pFeatureLevel
+        &g_pd3dDeviceContext//ID3D11DeviceContext** ppImmediateContext
+    );
 
     AssertOrQuit(SUCCEEDED(hr));
 
@@ -412,8 +372,8 @@ HRESULT InitD3D(HWND hWnd)
     g_pd3dDevice->GetImmediateContext(&g_pd3dDeviceContext);
 
     // Create a render target view of the swapchain
-    ID3D11Texture2D *pBuffer;
-    hr = g_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID *)&pBuffer);
+    ID3D11Texture2D* pBuffer;
+    hr = g_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (LPVOID*)&pBuffer);
     AssertOrQuit(SUCCEEDED(hr));
 
     hr = g_pd3dDevice->CreateRenderTargetView(pBuffer, NULL, &g_pSwapChainRTV);
@@ -433,16 +393,16 @@ HRESULT InitD3D(HWND hWnd)
     g_pd3dDeviceContext->RSSetViewports(1, &vp);
 
 
-    ID3DBlob *VS;
-    ID3DBlob *PS;
-    ID3DBlob *pErrorMsgs;
+    ID3DBlob* VS;
+    ID3DBlob* PS;
+    ID3DBlob* pErrorMsgs;
     // Vertex shader
     {
-        hr = D3DCompile(g_simpleShaders, strlen(g_simpleShaders), "Memory", NULL, NULL,"VSMain", "vs_4_0", 0/*Flags1*/, 0/*Flags2*/, &VS, &pErrorMsgs);
+        hr = D3DCompile(g_simpleShaders, strlen(g_simpleShaders), "Memory", NULL, NULL, "VSMain", "vs_4_0", 0/*Flags1*/, 0/*Flags2*/, &VS, &pErrorMsgs);
 
         if (FAILED(hr))
         {
-            const char *pStr = (const char *)pErrorMsgs->GetBufferPointer();
+            const char* pStr = (const char*)pErrorMsgs->GetBufferPointer();
             printf(pStr);
         }
 
@@ -483,7 +443,7 @@ HRESULT InitD3D(HWND hWnd)
         { "COLOR", 0, DXGI_FORMAT_R32G32B32A32_FLOAT, 1, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 }
     };
 
-    hr =  g_pd3dDevice->CreateInputLayout(inputElementDescs, 2, VS->GetBufferPointer(), VS->GetBufferSize(), &g_pLayout);
+    hr = g_pd3dDevice->CreateInputLayout(inputElementDescs, 2, VS->GetBufferPointer(), VS->GetBufferSize(), &g_pLayout);
     AssertOrQuit(SUCCEEDED(hr));
     // Setup  Input Layout
     g_pd3dDeviceContext->IASetInputLayout(g_pLayout);
@@ -526,13 +486,11 @@ HRESULT InitD3D(HWND hWnd)
     return S_OK;
 }
 
-
 ////////////////////////////////////////////////////////////////////////////////
 //! Draw the final result on the screen
 ////////////////////////////////////////////////////////////////////////////////
-bool DrawScene(uint64_t &key)
+bool DrawScene(uint64_t& key)
 {
-
     HRESULT hr = S_OK;
     // Clear the backbuffer
     float ClearColor[4] = { 0.5f, 0.5f, 0.6f, 1.0f };
@@ -544,7 +502,7 @@ bool DrawScene(uint64_t &key)
     UINT stride = sizeof(Vertex);
     UINT offset = 0;
     g_pd3dDeviceContext->IASetVertexBuffers(0, 1, &g_VertexBuffer, &stride, &offset);
-    g_pd3dDeviceContext->Draw(g_WindowHeight*g_WindowWidth, 0);
+    g_pd3dDeviceContext->Draw(g_WindowHeight * g_WindowWidth, 0);
     hr = g_pKeyedMutex11->ReleaseSync(key);
     AssertOrQuit(SUCCEEDED(hr));
 
@@ -626,26 +584,26 @@ static LRESULT WINAPI MsgProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam)
 {
     switch (msg)
     {
-        case WM_KEYDOWN:
-            if (wParam==VK_ESCAPE)
-            {
-                g_bDone = true;
-                Cleanup();
-                PostQuitMessage(0);
-                return 0;
-            }
-
-            break;
-
-        case WM_DESTROY:
+    case WM_KEYDOWN:
+        if (wParam == VK_ESCAPE)
+        {
             g_bDone = true;
             Cleanup();
             PostQuitMessage(0);
             return 0;
+        }
 
-        case WM_PAINT:
-            ValidateRect(hWnd, NULL);
-            return 0;
+        break;
+
+    case WM_DESTROY:
+        g_bDone = true;
+        Cleanup();
+        PostQuitMessage(0);
+        return 0;
+
+    case WM_PAINT:
+        ValidateRect(hWnd, NULL);
+        return 0;
     }
 
     return DefWindowProc(hWnd, msg, wParam, lParam);

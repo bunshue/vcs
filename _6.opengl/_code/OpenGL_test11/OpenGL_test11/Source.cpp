@@ -30,9 +30,13 @@ void display(void)
 	w = rect[2];
 	h = rect[3];
 
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	//畫視窗邊界
+	glLineWidth(3.0f);	//設定線寬
+	float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
+	draw_boundary(color_yellow, 2.5);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();	//設置單位矩陣
@@ -74,10 +78,10 @@ void display(void)
 	glRotatef(-90.0f, 1.0f, 0.0f, 0.0f); //對應變換陣T7
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_cyan);
 	glMaterialfv(GL_BACK, GL_DIFFUSE, mat_yellow);
-	glutSolidCone(0.4, 1.0, 100, 10); //顯示圓錐體
+	glutSolidCone(0.4, 1.0, 100, 10); //畫圓錐體
 	glPopMatrix();
 
-	glFlush();
+	glFlush();  // 執行繪圖命令
 	glutSwapBuffers();
 }
 

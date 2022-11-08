@@ -39,9 +39,9 @@ void display(void)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//畫視窗邊界
-	glLineWidth(3.0f);	//設定線寬
+	glLineWidth(2.0f);	//設定線寬
 	float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
-	draw_boundary(color_yellow, 2.5);
+	//draw_boundary(color_yellow, 2.5);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();	//設置單位矩陣
@@ -72,7 +72,7 @@ void display(void)
 	eyez = -x * sin(-y_angle * M_PI / 180.0) + z * cos(-y_angle * M_PI / 180.0);
 	gluLookAt(eyex, eyey, eyez, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 
-	draw_coordinates(1.0);
+	draw_coordinates(2.0);
 
 	glLineWidth(1.0f);	//設定線寬
 
@@ -81,14 +81,8 @@ void display(void)
 
 	//畫一個茶壺
 	float color_red[4] = { 1.0f, 0.0f, 0.0f, 1.0f };
-	draw_teapot(color_red, 1.0, 0.5);
+	draw_teapot(color_red, 1.0, 1.0);
 
-	glPopMatrix();
-
-	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
-	glTranslatef(1.0f, 0.0f, 0.0f);	//平移至指定地方(累積)
-	glScalef(0.5f, 0.5f, 0.5f);		//縮放各方向顯示比例
-	draw_tetrahedron();	//畫四面體
 	glPopMatrix();
 
 	glFlush();  // 執行繪圖命令
@@ -111,19 +105,6 @@ void keyboard(unsigned char key, int x, int y)
 	case '1':
 		m_state = 1;
 		break;
-
-	case '2':
-		printf("2\n");
-		break;
-
-	case '3':
-		break;
-
-	case '4':
-		break;
-
-	case '?':
-		break;
 	}
 }
 
@@ -138,7 +119,7 @@ void mouse(int button, int state, int x, int y)
 
 void motion(int x, int y)
 {
-	GLint dx, dy; //offset of mouse;
+	int dx, dy; //offset of mouse;
 
 	dx = x - mx;
 	dy = y - my;
@@ -169,7 +150,7 @@ int main(int argc, char** argv)
 	glutInitWindowSize(600, 600);
 	glutInitWindowPosition(1100, 200);
 
-	glutCreateWindow("畫茶壺");	//開啟視窗 並顯示出視窗 Title
+	glutCreateWindow("畫茶壺與三角塊");	//開啟視窗 並顯示出視窗 Title
 
 	init();
 
