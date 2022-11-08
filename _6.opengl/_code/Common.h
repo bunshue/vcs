@@ -11,6 +11,18 @@ void draw_string1s(std::string str, float* color, void* font, float x_st, float 
 void draw_string2(const char* str, float* color, void* font, float x_st, float y_st);	//有陰影
 void draw_triangle(float* color, float width, float x1, float y1, float x2, float y2, float x3, float y3);
 
+//空心矩形, 左下為原點, 向右w, 向上h, 顏色color, 線寬width
+void draw_rectangle(float* color, float width, float x_st, float y_st, float w, float h);
+
+//實心矩形, 左下為原點, 向右w, 向上h, 顏色color, 無線寬width
+void draw_rectangle_s(float* color, float x_st, float y_st, float w, float h);
+
+//空心四邊形, 左下為原點, 向右w, 向上h, 顏色color, 線寬width
+void draw_quad(float* color, float width, float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4);
+
+//實心四邊形, 左下為原點, 向右w, 向上h, 顏色color, 無線寬width
+void draw_quad_s(float* color, float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4);
+
 void reshape0(int w, int h);
 void keyboard0(unsigned char key, int x, int y);
 void mouse0(int button, int state, int x, int y);

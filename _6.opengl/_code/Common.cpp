@@ -209,6 +209,70 @@ void draw_triangle(float* color, float width, float x1, float y1, float x2, floa
 }
 
 
+//空心矩形, 左下為原點, 向右w, 向上h, 顏色color, 線寬width
+void draw_rectangle(float* color, float width, float x_st, float y_st, float w, float h)
+{
+
+
+}
+
+//實心矩形, 左下為原點, 向右w, 向上h, 顏色color, 無線寬width
+void draw_rectangle_s(float* color, float x_st, float y_st, float w, float h)
+{
+    glColor3fv((GLfloat*)color);    //設定顏色
+
+    glEnable(GL_TEXTURE_2D);    //啟用2D紋理映射
+
+    float dd = 0.5f;
+    //GL_QUADS 使用
+    glBegin(GL_QUADS);  //畫實心四邊形
+    {
+        glTexCoord2f(x_st, y_st); //紋理座標配置
+        glVertex2f(x_st, y_st);     //左下座標
+        glTexCoord2f(x_st + w, y_st);
+        glVertex2f(x_st + w, y_st);       //右下座標
+        glTexCoord2f(x_st + w, y_st + h);
+        glVertex2f(x_st + w, y_st + h);         //右上座標
+        glTexCoord2f(x_st, y_st + h);
+        glVertex2f(x_st, y_st + h);       //左上座標
+    }
+    glEnd();
+
+    glDisable(GL_TEXTURE_2D);
+}
+
+
+//空心四邊形, 左下為原點, 向右w, 向上h, 顏色color, 線寬width
+void draw_quad(float* color, float width, float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4)
+{
+
+
+}
+
+//實心四邊形, 左下為原點, 向右w, 向上h, 顏色color, 無線寬width
+void draw_quad_s(float* color, float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4)
+{
+    glColor3fv((GLfloat*)color);    //設定顏色
+
+    glEnable(GL_TEXTURE_2D);    //啟用2D紋理映射
+
+    //GL_QUADS 使用
+    glBegin(GL_QUADS);  //畫實心四邊形
+    {
+        glTexCoord2f(x1, y1); //紋理座標配置
+        glVertex2f(x1, y1);     //第1點
+        glTexCoord2f(x2, y2);
+        glVertex2f(x2, y2);     //第2點
+        glTexCoord2f(x3, y3);
+        glVertex2f(x3, y3);//第3點
+        glTexCoord2f(x4, y4);
+        glVertex2f(x4, y4);//第4點
+    }
+    glEnd();
+
+    glDisable(GL_TEXTURE_2D);
+}
+
 //OpenGL 之基本 callback function
 
 // 窗口大小變化回調函數

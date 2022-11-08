@@ -1,17 +1,20 @@
-﻿#include <helper_gl.h>
-
-//#include "cuda_runtime.h"
-//#include "device_launch_parameters.h"
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "../../Common.h"
-
+﻿// OpenGL Graphics includes
+#include <helper_gl.h>
 //#include <GL/glut.h>      //32 bits
 #include <GL/freeglut.h>    //64 bits
 
+// CUDA utilities and system includes
+//#include <cuda_runtime.h>
+//#include <cuda_gl_interop.h>
+
+// Includes
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include <iostream>
+
+#include "../../Common.h"
+
 
 int display_mode = 1;
 
@@ -91,13 +94,13 @@ void display(void)
         glRectf(0.3f, -0.7f, 0.7f, 0.7f);//畫一個矩形
 
         float color_cc[4] = { 0.0f, 1.0f, 1.0f, 1.0f };
-        float x_st = -0.9;
-        float y_st = 0.1;
+        float x_st = -0.9f;
+        float y_st = 0.1f;
         const char str1[30] = "draw_string_test 1";
         draw_string1(str1, color_cc, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
 
-        x_st = -0.9;
-        y_st = -0.1;
+        x_st = -0.9f;
+        y_st = -0.1f;
         const char str2[30] = "draw_string_test 2";
         draw_string2(str2, color_cc, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
 
@@ -253,7 +256,7 @@ void display(void)
     }
     else if (display_mode == 5)
     {
-        //display_mode = 9  //畫實心Polygon
+        //display_mode = 5  //畫實心Polygon
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
@@ -330,67 +333,38 @@ void display(void)
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
-        glMatrixMode(GL_MODELVIEW);                        // 選擇模型觀察矩陣
-        glLoadIdentity();                                  // 重置模型觀察矩陣  //設置單位矩陣 
-        glMatrixMode(GL_PROJECTION);                        // 選擇投影矩陣     
-        glLoadIdentity();
+        float color_cc1[4] = { 0.0f, 1.0f, 1.0f, 1.0f };
+        float x_st = -0.6;
+        float y_st = -0.6;
+        float w = 1.2;
+        float h = 1.2;
+        draw_rectangle_s(color_cc1, x_st, y_st, w, h);
 
+        //畫實心矩形
         glColor3f(1.0f, 1.0f, 0.0f);    //設定顏色 Yellow
-        glEnable(GL_TEXTURE_2D);    //啟用2D紋理映射
-        glBegin(GL_QUADS);
-        {
-            glTexCoord2f(0.0f, 0.0f);
-            glVertex3f(-0.5f, -0.5f, 0.0f);
-            glTexCoord2f(1.0f, 0.0f);
-            glVertex3f(0.5f, -0.5f, 0.0f);
-            glTexCoord2f(1.0f, 1.0f);
-            glVertex3f(0.5f, 0.5f, 0.0f);
-            glTexCoord2f(0.0f, 1.0f);
-            glVertex3f(-0.5f, 0.5f, 0.0f);
-        }
-        glEnd();
-        glDisable(GL_TEXTURE_2D);
+        glRectf(-0.4f, -0.4f, 0.4f, 0.4f);
 
-
-
+        //畫實心四邊形
+        float dd = 0.5f;
+        float x1 = dd;
+        float y1 = 0;
+        float x2 = 0;
+        float y2 = -dd;
+        float x3 = -dd;
+        float y3 = 0;
+        float x4 = 0;
+        float y4 = dd;
+        float color_cc2[4] = { 1.0f, 0.0f, 0.0f, 1.0f };
+        draw_quad_s(color_cc2, x1, y1, x2, y2, x3, y3, x4, y4);
     }
     else if (display_mode == 8)
     {
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
-        //Single/Double buffer 會不一樣
-        //glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
-        //glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-
-        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
-
-        glRectf(-0.5f, -0.5f, 0.5f, 0.5f);
-
-        glColor4f(1.0, 0.0, 0.0, 1.0);  //設置畫筆顏色為 R
-        glBegin(GL_QUADS);
-        {
-            glTexCoord2f(0.8f, 0.0f);
-            glVertex2f(0.8f, 0.0f);
-
-            glTexCoord2f(0.0f, -0.8f);
-            glVertex2f(0.0f, -0.8f);
-
-            glTexCoord2f(-0.8f, 0.0f);
-            glVertex2f(-0.8f, 0.0f);
-
-            glTexCoord2f(0.0f, 0.8f);
-            glVertex2f(0.0f, 0.8f);
-        }
-        glEnd();
     }
     else if (display_mode == 9)
     {
-
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
-        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
-
-        printf("無畫面, TBD, display_mode = %d\n", display_mode);
     }
     else
     {
@@ -461,11 +435,11 @@ void keyboard(unsigned char key, int x, int y)
 
     glutPostRedisplay();    //將當前視窗打上標記，標記其需要再次顯示。
 
-    /*
     char info[10];
-    sprintf(info, "%d", (char)display_mode);
+    //sprintf(info, "%d", (char)display_mode);  //過時, x64不能用
+    sprintf_s(info, 10, "%d", display_mode);
+
     glutSetWindowTitle(info);
-    */
 }
 
 int main(int argc, char* argv[])

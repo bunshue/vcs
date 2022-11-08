@@ -4,20 +4,17 @@
 #include <stdio.h>
 #include <iostream>
 
-int display_mode = 1;
+#include "../../Common.h"
 
-// 初始化參數
-void init01(void)
-{
-    glOrtho(0.0f, 300.0f, 0.0f, 300.0f, 1.0, -1.0); //設置窗口座標系大小
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
-}
+int display_mode = 1;
 
 // 繪圖回調函數
 void display(void)
 {
     if (display_mode == 0)
     {
+        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
         //or
@@ -28,12 +25,12 @@ void display(void)
     }
     else if (display_mode == 1)
     {
-        //display_mode = 1  //畫
-        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
-        //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        //display_mode = 1
 
-        glColor3f(0.0f, 1.0f, 0.0f);//設置繪圖顏色
-        glRectf(100.0f, 100.0f, 200.0f, 200.0f);//繪製矩形
+        //畫實心矩形
+        glColor3f(1.0f, 1.0f, 0.0f);    //設定顏色 Yellow
+        glRectf(-0.4f, -0.4f, 0.4f, 0.4f);
+
     }
     else if (display_mode == 2)
     {
@@ -79,12 +76,14 @@ void display(void)
 // 窗口大小變化回調函數
 void reshape(int w, int h)
 {
+    /* 有問題
     glViewport(0, 0, w, h);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();	//設置單位矩陣
     gluPerspective(60.0, (GLfloat)w / (GLfloat)h, 0.1, 100000.0);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();	//設置單位矩陣
+    */
 }
 
 void keyboard(unsigned char key, int x, int y)
@@ -102,7 +101,6 @@ void keyboard(unsigned char key, int x, int y)
         break;
     case '1':
         display_mode = 1;
-        init01();
         break;
     case '2':
         display_mode = 2;
@@ -152,10 +150,8 @@ int main(int argc, char** argv)
 
     glutCreateWindow("簡單2D OpenGL畫圖 0 ~ 9");    // 設定視窗標題
 
-    init01();
-
     glutDisplayFunc(display);	//設定callback function
-    glutReshapeFunc(reshape);	//設定callback function
+    glutReshapeFunc(reshape0);	//設定callback function
     glutKeyboardFunc(keyboard);	//設定callback function
     glutMouseFunc(mouse);		//設定callback function
     glutMotionFunc(motion);		//設定callback function

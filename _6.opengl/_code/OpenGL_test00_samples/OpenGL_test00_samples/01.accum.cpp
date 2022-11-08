@@ -73,10 +73,11 @@ void display(void)
     glClear(GL_COLOR_BUFFER_BIT);
     glCallList(thing4);
     glAccum(GL_ACCUM, alpha);
-
-    //char mesg[20];
-    //sprintf(mesg, "Alpha = %3.3f", alpha);
-    //glutSetWindowTitle(mesg);
+    
+    char mesg[20];
+    //sprintf(mesg, "Alpha = %3.3f", alpha);	//過時, x64不能用
+    sprintf_s(mesg, 20, "Alpha = %3.3f", alpha);
+    glutSetWindowTitle(mesg);
 
     alpha += 0.1;
     if (alpha > 1.01)
