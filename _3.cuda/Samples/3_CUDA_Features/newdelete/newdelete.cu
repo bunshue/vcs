@@ -270,8 +270,7 @@ int main(int argc, char** argv)
 {
     printf("Starting...\n\n");
 
-    // use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
+    // use command-line specified CUDA device, otherwise use device with highest Gflops/s
     findCudaDevice(argc, (const char**)argv);
 
     // set the heap size for device size new/delete to 128 MB

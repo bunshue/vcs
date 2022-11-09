@@ -107,8 +107,7 @@ void runTest(int argc, char** argv)
 
     printf("%s Starting...\n\n", argv[0]);
 
-    // use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
+    // use command-line specified CUDA device, otherwise use device with highest Gflops/s
     findCudaDevice(argc, (const char**)argv);
 
     // file names, either specified as cmd line args or use default

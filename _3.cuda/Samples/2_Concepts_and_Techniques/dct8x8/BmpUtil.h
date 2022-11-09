@@ -91,6 +91,4 @@ extern "C" {
     void DumpBmpAsGray(char* FileName, byte* Img, int Stride, ROI ImSize);
     void DumpBlockF(float* PlaneF, int StrideF, char* Fname);
     void DumpBlock(byte* Plane, int Stride, char* Fname);
-    float CalculateMSE(byte* Img1, byte* Img2, int Stride, ROI Size);
-    float CalculatePSNR(byte* Img1, byte* Img2, int Stride, ROI Size);
 }

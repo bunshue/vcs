@@ -415,7 +415,8 @@ static void InitGraphicsState(void) {
 ////////////////////////////////////////////////////////////////////////////////
 //! Run a simple test for CUDA
 ////////////////////////////////////////////////////////////////////////////////
-bool runTest(int argc, char **argv, char *ref_file) {
+bool runTest(int argc, char **argv, char *ref_file)
+{
   // command line mode only
   if (ref_file != NULL) {
     // This will pick the best possible CUDA capable device
@@ -425,14 +426,12 @@ bool runTest(int argc, char **argv, char *ref_file) {
     // GLES-CUDA interop
     int devID = findIntegratedGPU();
 #else
-    // use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
+    // use command-line specified CUDA device, otherwise use device with highest Gflops/s
     int devID = findCudaDevice(argc, (const char **)argv);
 #endif
 
     // create VBO
-    checkCudaErrors(cudaMalloc((void **)&d_vbo_buffer,
-                               mesh_width * mesh_height * 4 * sizeof(float)));
+    checkCudaErrors(cudaMalloc((void **)&d_vbo_buffer,                               mesh_width * mesh_height * 4 * sizeof(float)));
 
     // run the cuda part
     runAutoTest(devID, argv, ref_file);
@@ -442,7 +441,9 @@ bool runTest(int argc, char **argv, char *ref_file) {
 
     cudaFree(d_vbo_buffer);
     d_vbo_buffer = NULL;
-  } else {
+  }
+  else
+  {
     double endTime = TIME_LIMIT;
 
     // this would use command-line specified CUDA device, note that CUDA
@@ -484,8 +485,7 @@ bool runTest(int argc, char **argv, char *ref_file) {
     // GLES-CUDA interop
     int devID = findIntegratedGPU();
 #else
-    // use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
+    // use command-line specified CUDA device, otherwise use device with highest Gflops/s
     int devID = findCudaDevice(argc, (const char **)argv);
 #endif
     InitGraphicsState();  // set up GLES stuff
@@ -501,7 +501,8 @@ bool runTest(int argc, char **argv, char *ref_file) {
     gettimeofday(&begin, NULL);
 
     // Print runtime
-    if (endTime < 0.0) {
+    if (endTime < 0.0)
+    {
       endTime = TIME_LIMIT;
       printf(" running forever...\n");
     } else {

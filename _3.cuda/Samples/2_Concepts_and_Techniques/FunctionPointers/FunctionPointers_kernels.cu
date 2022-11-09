@@ -28,11 +28,8 @@ static cudaArray* array = NULL;
 //__device__ unsigned char (*pointFunction)(unsigned char, float ) = NULL;
 // or by using typedef's like below:
 
-typedef unsigned char (*blockFunction_t)(unsigned char, unsigned char,
-    unsigned char, unsigned char,
-    unsigned char, unsigned char,
-    unsigned char, unsigned char,
-    unsigned char, float);
+typedef unsigned char (*blockFunction_t)(unsigned char, unsigned char, unsigned char, unsigned char,
+    unsigned char, unsigned char, unsigned char, unsigned char, unsigned char, float);
 
 typedef unsigned char (*pointFunction_t)(unsigned char, float);
 
@@ -70,7 +67,8 @@ __device__ unsigned char ComputeBox(unsigned char ul,  // upper left
     unsigned char ll,  // lower left
     unsigned char lm,  // lower middle
     unsigned char lr,  // lower right
-    float fscale) {
+    float fscale)
+{
     short Sum = (short)(ul + um + ur + ml + mm + mr + ll + lm + lr) / 9;
     Sum *= fscale;
     return (unsigned char)((Sum < 0) ? 0 : ((Sum > 255) ? 255 : Sum));
@@ -88,22 +86,19 @@ __device__ unsigned char Threshold(unsigned char in, float thresh)
 }
 
 // Declare function tables, one for the point function chosen, one for the
-// block function chosen.  The number of entries is determined by the
-// enum in FunctionPointers_kernels.h
+// block function chosen.  The number of entries is determined by the enum in FunctionPointers_kernels.h
 __device__ blockFunction_t blockFunction_table[LAST_BLOCK_FILTER];
 __device__ pointFunction_t pointFunction_table[LAST_POINT_FILTER];
 
 // Declare device side function pointers.  We retrieve them later with
-// cudaMemcpyFromSymbol to set our function tables above in some
-// particular order specified at runtime.
+// cudaMemcpyFromSymbol to set our function tables above in some particular order specified at runtime.
 __device__ blockFunction_t pComputeSobel = ComputeSobel;
 __device__ blockFunction_t pComputeBox = ComputeBox;
 __device__ pointFunction_t pComputeThreshold = Threshold;
 
 // Allocate host side tables to mirror the device side, and later, we
 // fill these tables with the function pointers.  This lets us send
-// the pointers to the kernel on invocation, as a method of choosing
-// which function to run.
+// the pointers to the kernel on invocation, as a method of choosing which function to run.
 blockFunction_t h_blockFunction_table[2];
 pointFunction_t h_pointFunction_table[2];
 
@@ -113,8 +108,7 @@ pointFunction_t h_pointFunction_table[2];
 // by the integer argument "blockOperation" and has access
 // to an apron around the current pixel being processed.
 // Following the block operation, a per-pixel operation,
-// pointed to by pPointFunction is performed before the final
-// pixel is produced.
+// pointed to by pPointFunction is performed before the final pixel is produced.
 __global__ void SobelShared(uchar4* pSobelOriginal, unsigned short SobelPitch,
 #ifndef FIXED_BLOCKWIDTH
     short BlockWidth, short SharedPitch,
@@ -140,9 +134,7 @@ __global__ void SobelShared(uchar4* pSobelOriginal, unsigned short SobelPitch,
 
     if (threadIdx.y < RADIUS * 2)
     {
-        //
         // copy trailing RADIUS*2 rows of pixels into shared
-        //
         SharedIdx = (blockDim.y + threadIdx.y) * SharedPitch;
 
         for (ib = threadIdx.x; ib < BlockWidth + 2 * RADIUS; ib += blockDim.x)
@@ -221,8 +213,7 @@ __global__ void SobelCopyImage(Pixel* pSobelOriginal, unsigned int Pitch, int w,
 }
 
 // Perform block and pointer filtering using texture lookups.
-// The block and point operations are determined by the
-// input argument (see comment above for "SobelShared" function)
+// The block and point operations are determined by the input argument (see comment above for "SobelShared" function)
 __global__ void SobelTex(Pixel* pSobelOriginal, unsigned int Pitch, int w, int h, float fScale, int blockOperation,
     pointFunction_t pPointOperation, cudaTextureObject_t tex)
 {
@@ -286,30 +277,26 @@ extern "C" void deleteTexture(void)
 }
 
 // Copy the pointers from the function tables to the host side
-void setupFunctionTables() {
+void setupFunctionTables()
+{
     // Dynamically assign the function table.
-    // Copy the function pointers to their appropriate locations according to the
-    // enum
+    // Copy the function pointers to their appropriate locations according to the enum
     checkCudaErrors(cudaMemcpyFromSymbol(&h_blockFunction_table[SOBEL_FILTER], pComputeSobel, sizeof(blockFunction_t)));
     checkCudaErrors(cudaMemcpyFromSymbol(&h_blockFunction_table[BOX_FILTER], pComputeBox, sizeof(blockFunction_t)));
 
-    // do the same for the point function, where the 2nd function is NULL ("no-op"
-    // filter, skipped in kernel code)
+    // do the same for the point function, where the 2nd function is NULL ("no-op" filter, skipped in kernel code)
     checkCudaErrors(cudaMemcpyFromSymbol(&h_pointFunction_table[THRESHOLD_FILTER], pComputeThreshold, sizeof(pointFunction_t)));
     h_pointFunction_table[NULL_FILTER] = NULL;
 
-    // now copy the function tables back to the device, so if we wish we can use
-    // an index into the table to choose them
+    // now copy the function tables back to the device, so if we wish we can use an index into the table to choose them
     // We have now set the order in the function table according to our enum.
     checkCudaErrors(cudaMemcpyToSymbol(blockFunction_table, h_blockFunction_table, sizeof(blockFunction_t) * LAST_BLOCK_FILTER));
     checkCudaErrors(cudaMemcpyToSymbol(pointFunction_table, h_pointFunction_table, sizeof(pointFunction_t) * LAST_POINT_FILTER));
 }
 
 // Wrapper for the __global__ call that sets up the texture and threads
-// Below two methods for selecting the image processing function to run are
-// shown.
-// BlockOperation is an integer kernel argument used as an index into the
-// blockFunction_table on the device side
+// Below two methods for selecting the image processing function to run are shown.
+// BlockOperation is an integer kernel argument used as an index into the blockFunction_table on the device side
 // pPointOp is itself a function pointer passed as a kernel argument, retrieved
 // from a host side copy of the function table
 extern "C" void sobelFilter(Pixel * odata, int iw, int ih, enum SobelDisplayMode mode, float fScale, int blockOperation, int pointOperation)

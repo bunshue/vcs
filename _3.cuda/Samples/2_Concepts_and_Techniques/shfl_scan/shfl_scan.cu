@@ -193,8 +193,7 @@ bool shuffle_simple_test(int argc, char** argv) {
 
     printf("Starting shfl_scan\n");
 
-    // use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
+    // use command-line specified CUDA device, otherwise use device with highest Gflops/s
     cuda_device = findCudaDevice(argc, (const char**)argv);
 
     cudaDeviceProp deviceProp;
@@ -370,8 +369,7 @@ int main(int argc, char* argv[]) {
 
     printf("Starting shfl_scan\n");
 
-    // use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
+    // use command-line specified CUDA device, otherwise use device with highest Gflops/s
     cuda_device = findCudaDevice(argc, (const char**)argv);
 
     cudaDeviceProp deviceProp;

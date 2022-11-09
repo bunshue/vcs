@@ -321,7 +321,7 @@ void initGL(int* argc, char** argv)
     glutInitWindowSize(wWidth, wHeight);
     glutCreateWindow("Function Pointers [CUDA Edge Detection]n");
 
-glewInit();	//OpenGL Extension Wrangler Library （GLEW） 跨平台C/C++擴展庫 初始化
+    glewInit();	//OpenGL Extension Wrangler Library （GLEW） 跨平台C/C++擴展庫 初始化
 }
 
 void runAutoTest(int argc, char* argv[])
@@ -411,8 +411,7 @@ int main(int argc, char** argv)
         runAutoTest(argc, argv);
     }
 
-    // use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
+    // use command-line specified CUDA device, otherwise use device with highest Gflops/s
     if (checkCmdLineFlag(argc, (const char**)argv, "device"))
     {
         printf("XXXXXXXXXXXXXXXXXXXXXXXX\n");
@@ -428,8 +427,7 @@ int main(int argc, char** argv)
     if (!g_bQAReadback)
     {
         // First initialize OpenGL context, so we can properly set the GL for CUDA.
-        // This is necessary in order to achieve optimal performance with
-        // OpenGL/CUDA interop.
+        // This is necessary in order to achieve optimal performance with OpenGL/CUDA interop.
         initGL(&argc, argv);
 
         int dev = findCudaDevice(argc, (const char**)argv);

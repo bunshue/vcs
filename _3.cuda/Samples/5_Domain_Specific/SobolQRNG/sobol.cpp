@@ -122,8 +122,7 @@ int main(int argc, char* argv[])
         return -1;
     }
 
-    // Use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
+    // Use command-line specified CUDA device, otherwise use device with highest Gflops/s
     findCudaDevice(argc, (const char**)argv);
 
     // Create a timer to measure performance

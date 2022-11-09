@@ -13,16 +13,7 @@
     Host code
 */
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <math.h>
-
 #include "../../../../_6.opengl/_code/Common.h"
-
-// OpenGL Graphics includes
-#include <helper_gl.h>
-#include <GL/freeglut.h>
 
 // includes, cuda
 #include <cuda_runtime.h>
@@ -37,8 +28,6 @@
 #include <vector_types.h>
 
 #define REFRESH_DELAY     10 //ms
-
-#define abs(a, b)	(((a) > (b)) ? (a - b) : (b - a))
 
 const unsigned int window_width = 600;
 const unsigned int window_height = 600;
@@ -69,8 +58,6 @@ int fpsCount = 0;        // FPS count for averaging
 int fpsLimit = 1;        // FPS limit for sampling
 float avgFPS = 0.0f;
 unsigned int frameCount = 0;
-
-#define MAX(a,b) ((a > b) ? a : b)
 
 void cleanup();
 
@@ -183,7 +170,7 @@ void computeFPS()
     {
         avgFPS = 1.f / (sdkGetAverageTimerValue(&timer) / 1000.f);
         fpsCount = 0;
-        fpsLimit = (int)MAX(avgFPS, 1.f);
+        fpsLimit = (int)max(avgFPS, 1.f);
 
         sdkResetTimer(&timer);
     }

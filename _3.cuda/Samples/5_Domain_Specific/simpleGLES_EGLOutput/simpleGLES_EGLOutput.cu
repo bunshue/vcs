@@ -445,16 +445,15 @@ bool runTest(int argc, char **argv, char *ref_file) {
   // GLES-CUDA interop
   devID = findIntegratedGPU();
 #else
-  // use command-line specified CUDA device, otherwise use device with highest
-  // Gflops/s
+  // use command-line specified CUDA device, otherwise use device with highest Gflops/s
   devID = findCudaDevice(argc, (const char **)argv);
 #endif
 
   // command line mode only
-  if (ref_file != NULL) {
+  if (ref_file != NULL)
+  {
     // create VBO
-    checkCudaErrors(cudaMalloc((void **)&d_vbo_buffer,
-                               mesh_width * mesh_height * 4 * sizeof(float)));
+    checkCudaErrors(cudaMalloc((void **)&d_vbo_buffer,                               mesh_width * mesh_height * 4 * sizeof(float)));
 
     // run the cuda part
     runAutoTest(devID, argv, ref_file);
@@ -464,7 +463,9 @@ bool runTest(int argc, char **argv, char *ref_file) {
 
     cudaFree(d_vbo_buffer);
     d_vbo_buffer = NULL;
-  } else {
+  }
+  else
+  {
     // this would use command-line specified CUDA device, note that CUDA
     // defaults to highest Gflops/s device
     if (checkCmdLineFlag(argc, (const char **)argv, "device"))

@@ -27,8 +27,7 @@ const uint height = 512;
 ////////////////////////////////////////////////////////////////////////////////
 int main(int argc, char** argv)
 {
-    // use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
+    // use command-line specified CUDA device, otherwise use device with highest Gflops/s
     int cuda_device = findCudaDevice(argc, (const char**)argv);
     // check the compute capability of the device
     int num_devices = 0;
@@ -59,7 +58,6 @@ int main(int argc, char** argv)
         //bPinGenericMemory = false;
     }
 
-
     // This will pick the best possible CUDA capable device
     //cudaDeviceProp deviceProp;
     int devID = findCudaDevice(argc, (const char**)argv);
@@ -87,18 +85,14 @@ int main(int argc, char** argv)
     }
 
     // Statistics about the GPU device
-    printf("> GPU device has %d Multi-Processors, SM %d.%d compute capabilities\n\n",
-        deviceProp.multiProcessorCount, deviceProp.major, deviceProp.minor);
+    printf("> GPU device has %d Multi-Processors, SM %d.%d compute capabilities\n\n",        deviceProp.multiProcessorCount, deviceProp.major, deviceProp.minor);
 
     int numSms = deviceProp.multiProcessorCount;
     printf("numSms = %d\n", numSms);
 
     float scale_factor = 1.0f;
 
-    scale_factor =
-        MAX((32.0f / (_ConvertSMVer2Cores(deviceProp.major, deviceProp.minor) *
-            (float)deviceProp.multiProcessorCount)),
-            1.0f);
+    scale_factor =        MAX((32.0f / (_ConvertSMVer2Cores(deviceProp.major, deviceProp.minor) *            (float)deviceProp.multiProcessorCount)),            1.0f);
     int n = 16 * 1024 * 1024;      // number of ints in the data set
     n = (int)rint((float)n / scale_factor);
 
@@ -130,7 +124,6 @@ int main(int argc, char** argv)
     }
 
     printf("warpSize = %d\n", deviceProps.warpSize);
-
 
     printf("ª©¥»¸ê°T\n");
     //printf("Header version:  %u.%u\n", NVMEDIA_2D_VERSION_MAJOR, NVMEDIA_2D_VERSION_MINOR);

@@ -89,8 +89,7 @@ int main(int argc, char** argv)
         nstreams = nkernels + 1;
     }
 
-    // use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
+    // use command-line specified CUDA device, otherwise use device with highest Gflops/s
     cuda_device = findCudaDevice(argc, (const char**)argv);
 
     cudaDeviceProp deviceProp;
@@ -104,8 +103,7 @@ int main(int argc, char** argv)
         printf("  CUDA kernel runs will be serialized\n");
     }
 
-    printf("> Detected Compute SM %d.%d hardware with %d multi-processors\n",
-        deviceProp.major, deviceProp.minor, deviceProp.multiProcessorCount);
+    printf("> Detected Compute SM %d.%d hardware with %d multi-processors\n",        deviceProp.major, deviceProp.minor, deviceProp.multiProcessorCount);
 
     // allocate host memory
     clock_t* a = 0;  // pointer to the array data in host memory

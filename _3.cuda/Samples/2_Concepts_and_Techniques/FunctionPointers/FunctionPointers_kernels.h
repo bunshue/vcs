@@ -10,10 +10,8 @@ enum SobelDisplayMode {
 	SOBELDISPLAY_SOBELSHARED
 };
 
-// Enums to set up the function table
-// note: if you change these be sure to recompile those files
-// that include this header or ensure the .h is in the
-// dependencies for the related object files
+// Enums to set up the function table note: if you change these be sure to recompile those files
+// that include this header or ensure the .h is in the dependencies for the related object files
 enum POINT_ENUM { SOBEL_FILTER = 0, BOX_FILTER, LAST_POINT_FILTER };
 
 enum BLOCK_ENUM { THRESHOLD_FILTER = 0, NULL_FILTER, LAST_BLOCK_FILTER };

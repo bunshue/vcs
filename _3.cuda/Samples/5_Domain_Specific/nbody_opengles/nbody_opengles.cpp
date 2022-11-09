@@ -922,8 +922,7 @@ int main(int argc, char **argv)
     // GLES-CUDA interop
     devID = findIntegratedGPU();
 #else
-    // use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
+    // use command-line specified CUDA device, otherwise use device with highest Gflops/s
     devID = findCudaDevice(argc, (const char **)argv);
 #endif
 
@@ -939,13 +938,17 @@ int main(int argc, char **argv)
       exit(EXIT_SUCCESS);
     }
 
-    if (customGPU || numDevsRequested == 1) {
+    if (customGPU || numDevsRequested == 1)
+    {
       cudaDeviceProp props;
       checkCudaErrors(cudaGetDeviceProperties(&props, devID));
       printf("> Compute %d.%d CUDA device: [%s]\n", props.major, props.minor,
              props.name);
-    } else {
-      for (int i = 0; i < numDevsRequested; i++) {
+    }
+    else
+    {
+      for (int i = 0; i < numDevsRequested; i++)
+      {
         cudaDeviceProp props;
         checkCudaErrors(cudaGetDeviceProperties(&props, i));
 

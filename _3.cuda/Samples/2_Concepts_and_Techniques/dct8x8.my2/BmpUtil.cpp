@@ -271,7 +271,6 @@ int PreLoadBmp(char *FileName, int *Width, int *Height)
   return 0;
 }
 
-//res = PreLoadBmp2(filename_read1, &ImgWidth, &ImgHeight, &ColorDepth);
 int PreLoadBmp2(char* FileName, int* Width, int* Height, int* Depth)
 {
     BMPFileHeader FileHeader;

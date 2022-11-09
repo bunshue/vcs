@@ -517,8 +517,7 @@ int main(int argc, char** argv)
 
     printf("Starting %s ...\n\n", argv[0]);
 
-    // use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
+    // use command-line specified CUDA device, otherwise use device with highest Gflops/s
     if (argc > 1)
     {
         printf("XXXXXXXXXXXXXXXXXXXXXXXX\n");;

@@ -10,6 +10,10 @@
 
 #define	PI	3.141592654F
 
+#define abs(a, b)	(((a) > (b)) ? (a - b) : (b - a))
+#define max(a,b)	((a > b) ? a : b)
+#define min(a,b)	((a < b) ? a : b)
+
 //常用的顏色 RGBA四碼
 float color_r[] = { 1.0f, 0.0f, 0.0f, 1.0f };
 float color_g[] = { 0.0f, 1.0f, 0.0f, 1.0f };

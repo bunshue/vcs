@@ -366,8 +366,7 @@ int main(int argc, char** argv)
         exit(EXIT_SUCCESS);
     }
 
-    // use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
+    // use command-line specified CUDA device, otherwise use device with highest Gflops/s
     devID = findCudaDevice(argc, (const char**)argv);
 
     // get number of SMs on this GPU

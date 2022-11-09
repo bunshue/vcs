@@ -523,8 +523,7 @@ void initialize(int argc, char** argv)
 
     initGL(&argc, argv);
 
-    // use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
+    // use command-line specified CUDA device, otherwise use device with highest Gflops/s
     int devID = findCudaDevice(argc, (const char**)argv);
 
     // get number of SMs on this GPU
@@ -538,9 +537,7 @@ void initialize(int argc, char** argv)
     // load image from disk
     loadImageData(argc, argv);
 
-    printf(
-        "\n"
-        "\tControls\n"
+    printf("\n\tControls\n"
         "\t=/- : Zoom in/out\n"
         "\tb   : Run Benchmark g_FilterMode\n"
         "\t[esc] - Quit\n\n"
@@ -557,7 +554,8 @@ void initialize(int argc, char** argv)
 #if USE_BUFFER_TEX
     fprog = compileASMShader(GL_FRAGMENT_PROGRAM_ARB, shaderCode);
 
-    if (!fprog) {
+    if (!fprog)
+    {
         exit(EXIT_SUCCESS);
     }
 

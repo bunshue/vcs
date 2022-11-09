@@ -354,7 +354,7 @@ int GetBmpColorDepth(char* FileName)
 
     fread(&InfoHeader, sizeof(BMPInfoHeader), 1, fh);
 
-    //printf("圖片位元深度 : %d 位元\n", InfoHeader._bm_color_depth);
+    printf("圖片位元深度 : %d 位元\n", InfoHeader._bm_color_depth);
 
     fclose(fh);
 
@@ -680,49 +680,4 @@ void DumpBlock(byte *Plane, int Stride, char *Fname)
   fclose(fp);
 }
 
-/**
-**************************************************************************
-*  This function performs evaluation of Mean Square Error between two images
-*
-* \param Img1           [IN] - Image 1
-* \param Img2           [IN] - Image 2
-* \param Stride         [IN] - Image stride
-* \param Size           [IN] - Image size
-*
-* \return Mean Square Error between images
-*/
-float CalculateMSE(byte *Img1, byte *Img2, int Stride, ROI Size)
-{
-  uint32 Acc = 0;
-
-  for (int i = 0; i < Size.height; i++)
-  {
-    for (int j = 0; j < Size.width; j++)
-    {
-      int TmpDiff = Img1[i * Stride + j] - Img2[i * Stride + j];
-      TmpDiff *= TmpDiff;
-      Acc += TmpDiff;
-    }
-  }
-
-  return ((float)Acc) / (Size.height * Size.width);
-}
-
-/**
-**************************************************************************
-*  This function performs evaluation of Peak Signal to Noise Ratio between
-*  two images
-*
-* \param Img1           [IN] - Image 1
-* \param Img2           [IN] - Image 2
-* \param Stride         [IN] - Image stride
-* \param Size           [IN] - Image size
-*
-* \return Peak Signal to Noise Ratio between images
-*/
-float CalculatePSNR(byte *Img1, byte *Img2, int Stride, ROI Size)
-{
-  float MSE = CalculateMSE(Img1, Img2, Stride, Size);
-  return 10 * log10(255 * 255 / MSE);
-}
 

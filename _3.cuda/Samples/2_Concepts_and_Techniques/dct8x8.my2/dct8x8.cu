@@ -56,16 +56,6 @@ __global__ void vecAdd(byte* a, byte* b, byte* c)
     c[i] = (a[i] + b[i]) % 256;
 }
 
-/**
-**************************************************************************
-*  Program entry point
-*
-* \param argc       [IN] - Number of command-line arguments
-* \param argv       [IN] - Array of command-line arguments
-*
-* \return Status code
-*/
-
 int main(int argc, char **argv)
 {
   // initialize CUDA

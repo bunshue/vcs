@@ -560,8 +560,7 @@ int main(int argc, char** argv)
 {
     printf("Starting...\n\n");
 
-    // use command-line specified CUDA device, otherwise use device with highest
-    // Gflops/s
+    // use command-line specified CUDA device, otherwise use device with highest Gflops/s
     findCudaDevice(argc, (const char**)argv);
 
     // Load input image.
