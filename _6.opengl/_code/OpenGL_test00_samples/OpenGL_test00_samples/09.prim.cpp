@@ -527,7 +527,7 @@ void reshape(int width, int height)
     windH = height;
 }
 
-void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
     switch (key)
     {

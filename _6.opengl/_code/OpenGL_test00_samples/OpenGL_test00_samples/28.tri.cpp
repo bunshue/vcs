@@ -220,7 +220,7 @@ void reshape(int width, int height)
 	windH = (GLint)height;
 }
 
-void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
 	switch (key)
 	{
@@ -329,7 +329,7 @@ void keyboard(unsigned char key, int x, int y)
 	}
 }
 
-void special(int key, int x, int y)
+void special(int key, int /*x*/, int /*y*/)
 {
 	switch (key)
 	{

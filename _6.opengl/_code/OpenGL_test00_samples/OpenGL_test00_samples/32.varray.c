@@ -178,7 +178,7 @@ void reshape(int width, int height)
     glLoadIdentity();
 }
 
-void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
     switch (key)
     {
@@ -351,7 +351,7 @@ void display(void)
 
     glVertexPointerEXT(2, GL_SHORT, 8, 4, &tv[2]);
     glTexCoordPointerEXT(2, GL_SHORT, 8, 4, tv);
-    glEnable(GL_TEXTURE_2D);	//±Ò¥Î2D¯¾²z¬M®g
+    glEnable(GL_TEXTURE_2D);	//å•Ÿç”¨2Dç´‹ç†æ˜ å°„
     glEnable(GL_VERTEX_ARRAY_EXT);
     glEnable(GL_TEXTURE_COORD_ARRAY_EXT);
 
@@ -590,15 +590,15 @@ int main(int argc, char** argv)
     glutInitWindowSize(600, 600);
     glutInitWindowPosition(1100, 200);
 
-    glutCreateWindow("Test");	//¶}±Òµøµ¡ ¨ÃÅã¥Ü¥Xµøµ¡ Title
+    glutCreateWindow("Test");	//é–‹å•Ÿè¦–çª— ä¸¦é¡¯ç¤ºå‡ºè¦–çª— Title
 
     Init();
 
-    glutDisplayFunc(display);       //³]©wcallback function
-    glutReshapeFunc(reshape);       //³]©wcallback function
-    glutKeyboardFunc(keyboard);     //³]©wcallback function
+    glutDisplayFunc(display);       //è¨­å®šcallback function
+    glutReshapeFunc(reshape);       //è¨­å®šcallback function
+    glutKeyboardFunc(keyboard);     //è¨­å®šcallback function
 
-    glutMainLoop();	//¶}©l¥D´`ÀôÃ¸»s
+    glutMainLoop();	//é–‹å§‹ä¸»å¾ªç’°ç¹ªè£½
 
     return 0;
 }

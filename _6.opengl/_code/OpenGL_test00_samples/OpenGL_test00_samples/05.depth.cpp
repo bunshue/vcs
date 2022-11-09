@@ -1,15 +1,5 @@
-//#include <helper_gl.h>
-//#include <GL/freeglut.h>
-
-//#include "cuda_runtime.h"
-//#include "device_launch_parameters.h"
-
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-
-//#include <GL/glut.h>      //32 bits
-#include <GL/freeglut.h>    //64 bits
+//#include "../../../_code/Common.h"    //32 bits
+#include "../../Common.h"   //64 bits
 
 #define CI_OFFSET_1 16
 #define CI_OFFSET_2 32
@@ -116,7 +106,7 @@ void reshape(int width, int height)
     glMatrixMode(GL_MODELVIEW);
 }
 
-void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
     switch (key)
     {

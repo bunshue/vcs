@@ -239,7 +239,7 @@ void reshape(int width, int height)
 	glMatrixMode(GL_MODELVIEW);
 }
 
-void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
 	//printf("你所按按鍵的碼是%x\t此時視窗內的滑鼠座標是(%d,%d)\n", key, x, y);
 
@@ -271,7 +271,7 @@ void keyboard(unsigned char key, int x, int y)
 	}
 }
 
-void special(int key, int x, int y)
+void special(int key, int /*x*/, int /*y*/)
 {
 	switch (key)
 	{

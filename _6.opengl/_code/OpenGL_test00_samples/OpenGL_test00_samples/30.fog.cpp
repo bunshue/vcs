@@ -178,7 +178,7 @@ void reshape(int width, int height)
 	glMatrixMode(GL_MODELVIEW);
 }
 
-void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
 	GLfloat getFloat[1];
 
@@ -326,7 +326,7 @@ void keyboard(unsigned char key, int x, int y)
 	}
 }
 
-void special(int key, int x, int y)
+void special(int key, int /*x*/, int /*y*/)
 {
 	switch (key)
 	{

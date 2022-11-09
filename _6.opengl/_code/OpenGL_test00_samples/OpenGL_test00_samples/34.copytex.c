@@ -337,7 +337,7 @@ void Init(void)
 
 	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-	glEnable(GL_TEXTURE_2D);	//±Ò¥Î2D¯¾²z¬M®g
+	glEnable(GL_TEXTURE_2D);	//å•Ÿç”¨2Dç´‹ç†æ˜ å°„
 	glTexEnvfv(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, decal);
 
 	if (multTex && texObjEXT)
@@ -531,7 +531,7 @@ void Key(unsigned char key, int x, int y)
 	}
 }
 
-void special(int key, int x, int y)
+void special(int key, int /*x*/, int /*y*/)
 {
 	switch (key)
 	{
@@ -731,7 +731,7 @@ int main(int argc, char** argv)
 	type |= (doubleBuffer) ? GLUT_DOUBLE : GLUT_SINGLE;
 	glutInitDisplayMode(type);
 	glutInitWindowSize(winWidth, winHeight);
-	glutCreateWindow("Copy Texture Test");	//¶}±Òµøµ¡ ¨ÃÅã¥Ü¥Xµøµ¡ Title
+	glutCreateWindow("Copy Texture Test");	//é–‹å•Ÿè¦–çª— ä¸¦é¡¯ç¤ºå‡ºè¦–çª— Title
 
 	if (texObjEXT && !QueryExtension("GL_EXT_texture_object")) {
 		fprintf(stdout, "Warning: texture object extension not found.\n");
@@ -771,9 +771,9 @@ int main(int argc, char** argv)
 	glutSpecialFunc(special);
 	glutDisplayFunc(Draw);
 
-	printf("«ö ¤W ¤U ¥ª ¥k ±±¨î\n");
+	printf("æŒ‰ ä¸Š ä¸‹ å·¦ å³ æ§åˆ¶\n");
 
-	glutMainLoop();	//¶}©l¥D´`ÀôÃ¸»s
+	glutMainLoop();	//é–‹å§‹ä¸»å¾ªç’°ç¹ªè£½
 
 	return 0;
 }

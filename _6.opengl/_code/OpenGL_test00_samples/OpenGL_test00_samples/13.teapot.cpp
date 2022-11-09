@@ -179,7 +179,7 @@ void reshape(int w, int h)
     glLoadIdentity();
 }
 
-void special(int key, int x, int y)
+void special(int key, int /*x*/, int /*y*/)
 {
     switch (key)
     {

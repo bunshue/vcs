@@ -55,9 +55,10 @@ void checkErrors(void)
     }
 }
 
-void keyboard(unsigned char c, int x, int y)
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
-    switch (c) {
+    switch (key)
+    {
     case 'l':
         useLinear = !useLinear;
         break;

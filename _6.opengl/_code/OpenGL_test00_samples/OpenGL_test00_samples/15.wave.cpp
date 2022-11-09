@@ -406,7 +406,7 @@ void reshape(int width, int height)
 	glViewport(0, 0, width, height);
 }
 
-void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
 	switch (key)
 	{

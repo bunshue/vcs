@@ -1,17 +1,5 @@
-//#include <helper_gl.h>
-//#include <GL/freeglut.h>
-
-//#include "cuda_runtime.h"
-//#include "device_launch_parameters.h"
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-//#include <GL/glut.h>      //32 bits
-#include <GL/freeglut.h>    //64 bits
-
-#define PI 3.141592654
+//#include "../../../_code/Common.h"    //32 bits
+#include "../../Common.h"   //64 bits
 
 #define	BLACK 0
 #define	GRAY 128
@@ -1303,7 +1291,7 @@ void reshape(int width, int height)
 	glMatrixMode(GL_MODELVIEW);
 }
 
-void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
 	switch (key)
 	{
@@ -1452,7 +1440,7 @@ void keyboard(unsigned char key, int x, int y)
 	}
 }
 
-void special(int key, int x, int y)
+void special(int key, int /*x*/, int /*y*/)
 {
 	switch (key)
 	{

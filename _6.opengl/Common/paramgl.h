@@ -189,7 +189,8 @@ class ParamListGL : public ParamList {
     return true;
   }
 
-  void Special(int key, int x, int y) {
+  void Special(int key, int /*x*/, int /*y*/)
+  {
     if (!m_active) return;
 
     switch (key) {

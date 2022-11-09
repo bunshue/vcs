@@ -357,7 +357,7 @@ void display(void)
     glutSwapBuffers();  // 將後緩沖區繪製到前臺
 }
 
-void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
     switch (key)
     {

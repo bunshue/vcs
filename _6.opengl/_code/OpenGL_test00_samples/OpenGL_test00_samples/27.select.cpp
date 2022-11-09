@@ -353,7 +353,7 @@ void DoFeedback(void)
     DrawFeedback((GLint)x);
 }
 
-void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
     switch (key)
     {
@@ -390,7 +390,7 @@ void keyboard(unsigned char key, int x, int y)
     }
 }
 
-void special(int key, int x, int y)
+void special(int key, int /*x*/, int /*y*/)
 {
     switch (key)
     {

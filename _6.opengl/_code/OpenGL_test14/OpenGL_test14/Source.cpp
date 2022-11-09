@@ -46,8 +46,8 @@ void keyboardup(unsigned char key, int /*x*/, int /*y*/)
     //keyDown[key] = false;
 }
 
-//key 枚举值，x、y是位置
-void special(int key, int x, int y)
+//key 枚舉值，x、y是位置
+void special(int key, int /*x*/, int /*y*/)
 {
     if (key == GLUT_KEY_UP)
     {
@@ -143,5 +143,4 @@ int main(int argc, char** argv)
 
     return 0;
 }
-
 

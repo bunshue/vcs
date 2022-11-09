@@ -62,7 +62,7 @@ void reshape(int width, int height)
     glMatrixMode(GL_MODELVIEW);
 }
 
-void special(int key, int x, int y)
+void special(int key, int /*x*/, int /*y*/)
 {
     switch (key)
     {
@@ -80,7 +80,7 @@ void special(int key, int x, int y)
     }
 }
 
-void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
     switch (key)
     {

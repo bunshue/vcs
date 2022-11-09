@@ -6,14 +6,14 @@ void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
-    draw_boundary(color_y, 0.9); //畫視窗邊界
+    draw_boundary(color_y, 0.9f); //畫視窗邊界
 
     //畫一個實心矩形
     glColor3f(0.0, 1.0, 1.0);   //設定顏色 cc
     float dd = 0.3f;
     glRectf(-dd, -dd, dd, dd);  //實心矩形
 
-    draw_teapot(color_r, 1, 0.3);
+    draw_teapot(color_r, 1, 0.3f);
 
     glFlush();  // 執行繪圖命令
 }
@@ -24,7 +24,7 @@ void reshape(int w, int h)
     glViewport(0, 0, w, h);
 }
 
-void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
     switch (key)
     {
