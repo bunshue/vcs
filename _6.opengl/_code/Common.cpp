@@ -1,6 +1,7 @@
 ﻿#include <helper_gl.h>
 #include <GL/freeglut.h>
 
+//畫座標軸
 void draw_coordinates(float len)
 {
     float dd = len / 10;
@@ -27,7 +28,7 @@ void draw_coordinates(float len)
     glVertex3f(0.0f, len, 0.0f);	//y軸 0,len,0
     glVertex3f(0.0f + dd, len - dd, 0.0f);	//y軸 0,len,0
     glEnd();
-    glRasterPos3f(0.0f, len, 0.0f);
+    glRasterPos3f(0.0f, len + dd / 3, 0.0f);
     glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'y');
 
     glColor3f(0.0, 0.0, 1.0); //畫藍色的z軸
@@ -39,7 +40,7 @@ void draw_coordinates(float len)
     glVertex3f(0.0f, 0.0f, len);	//z軸 0,0,len
     glVertex3f(0.0f + dd, 0.0f, len - dd);	//z軸 0,0,len
     glEnd();
-    glRasterPos3f(0.0f, 0.0f, len);
+    glRasterPos3f(0.0f, 0.0f, len + dd * 2);
     glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'z');
 }
 

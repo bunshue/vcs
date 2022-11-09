@@ -13,7 +13,7 @@ void display(void)
     float dd = 0.3f;
     glRectf(-dd, -dd, dd, dd);  //實心矩形
 
-    draw_teapot(color_r, 1, 0.3);
+    draw_teapot(color_r, 1, 0.3);   //畫一個茶壺
 
     glFlush();  // 執行繪圖命令
 }

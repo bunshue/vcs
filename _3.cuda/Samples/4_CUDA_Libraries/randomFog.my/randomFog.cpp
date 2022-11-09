@@ -1,6 +1,4 @@
-﻿// OpenGL Graphics includes
-#include <helper_gl.h>
-#include <GL/freeglut.h>
+﻿#include "../../../../_6.opengl/_code/Common.h"
 
 // CUDA Library Headers
 #include <curand.h>
@@ -10,17 +8,7 @@
 #include <helper_cuda.h>
 #include <rendercheck_gl.h>
 
-// System includes
-#include <stdexcept>
-#include <sstream>
-#include <iomanip>
-#include <math.h>
-
 #include "rng.h"
-#include "../../../../_6.opengl/_code/Common.h"
-
-// standard utility and system includes
-#include <helper_timer.h>
 
 // RNG instance
 RNG* g_pRng = NULL;
@@ -54,8 +42,6 @@ bool g_bShowAxes = true;
 bool g_bTenXZoom = false;
 int g_lastShapeX = 1024;
 int g_lastShapeY = 1024;
-
-const float PI = 3.14159265359f;
 
 void createSphere(void)
 {

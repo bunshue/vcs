@@ -3,9 +3,9 @@
 
 int mx;	//position of mouse
 int my;	//position of mouse
-int m_state = 0; //mouse usage
 float x_angle = 0.0f;	//angle of eye
 float y_angle = 0.0f;	//angle of eye
+int m_state = 0; //mouse usage
 float dist = 10.0f; //distance from the eye
 
 void init(void)
@@ -28,8 +28,6 @@ void display(void)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	draw_boundary(color_y, 2.5); //畫視窗邊界
-
-	glLineWidth(2.0f);	//設定線寬
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();	//設置單位矩陣
@@ -62,18 +60,14 @@ void display(void)
 
 	draw_coordinates(2.0);
 
-	glLineWidth(1.0f);	//設定線寬
-
 	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
 	//glTranslatef(-1.0f, 0.0f, 0.0f);	//平移至指定地方(累積)
 
-	//畫一個茶壺
-	draw_teapot(color_r, 1.0, 1.0);
+	draw_teapot(color_r, 1.0, 1.0);	//畫一個茶壺
 
 	glPopMatrix();
 
 	glFlush();  // 執行繪圖命令
-	glutSwapBuffers();
 }
 
 void keyboard(unsigned char key, int /*x*/, int /*y*/)
@@ -97,15 +91,18 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
 
 void mouse(int button, int state, int x, int y)
 {
+	//MouseDown
 	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
 	{
 		mx = x;
 		my = y;
+		printf("D(%d, %d) ", mx, my);
 	}
 }
 
 void motion(int x, int y)
 {
+	//MouseMove
 	int dx, dy; //offset of mouse;
 
 	dx = x - mx;
@@ -131,8 +128,7 @@ int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
 
-	//glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);    //宣告顯示模式為 Single Buffer 和 RGBA
 
 	glutInitWindowSize(600, 600);
 	glutInitWindowPosition(1100, 200);
@@ -141,14 +137,14 @@ int main(int argc, char** argv)
 
 	init();
 
-	printf("0 keydown means control the angle of the eye\n");
-	printf("1 keydown means control the distance of the eye\n");
-
 	glutDisplayFunc(display);	//設定callback function
 	glutReshapeFunc(reshape0);	//設定callback function
 	glutKeyboardFunc(keyboard);	//設定callback function
 	glutMouseFunc(mouse);		//設定callback function
 	glutMotionFunc(motion);		//設定callback function
+
+	printf("按 0 : keydown means control the angle of the eye\n");
+	printf("按 1 : keydown means control the distance of the eye\n");
 
 	glutMainLoop();	//開始主循環繪製
 

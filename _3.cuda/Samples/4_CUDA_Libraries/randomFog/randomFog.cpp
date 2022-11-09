@@ -1,6 +1,4 @@
-// OpenGL Graphics includes
-#include <helper_gl.h>
-#include <GL/freeglut.h>
+#include "../../../../_6.opengl/_code/Common.h"
 
 // CUDA Library Headers
 #include <curand.h>
@@ -10,17 +8,9 @@
 #include <helper_cuda.h>
 #include <rendercheck_gl.h>
 
-// System includes
-#include <stdexcept>
-#include <sstream>
 #include <iomanip>
-#include <math.h>
 
 #include "rng.h"
-#include "../../../../_6.opengl/_code/Common.h"
-
-// standard utility and system includes
-#include <helper_timer.h>
 
 // RNG instance
 RNG* g_pRng = NULL;
@@ -55,8 +45,6 @@ int g_lastShapeX = 1024;
 int g_lastShapeY = 1024;
 float g_xRotated = 0.0f;
 float g_yRotated = 0.0f;
-
-const float PI = 3.14159265359f;
 
 void createCube(void)
 {
@@ -244,7 +232,7 @@ void drawText(void)
     infoString.append(ss.str());
 
     float color[4] = { 0.0f, 1.0f, 0.0f, 1.0f };
-    float x_st = -1.2;
+    float x_st = -1.2f;
     float y_st = 1.2f;
     draw_string1s(infoString, color, GLUT_BITMAP_HELVETICA_12, x_st, y_st);
 
