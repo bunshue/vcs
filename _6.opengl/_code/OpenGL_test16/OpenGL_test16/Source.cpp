@@ -1,9 +1,5 @@
-﻿#include <helper_gl.h>
-#include <GL/freeglut.h>
-
-#include <stdio.h>
-#include <iostream>
-#include "../../Common.h"
+﻿//#include "../../../_code/Common.h"    //32 bits
+#include "../../Common.h"               //64 bits
 
 int W = 600;
 int H = 600;
@@ -114,7 +110,7 @@ int main(int argc, char** argv)
 
 	init();
 
-	glutDisplayFunc(display);	//設定callback function
+	glutDisplayFunc(display);		//設定callback function
 	glutKeyboardFunc(keyboard0);	//設定callback function
 
 	printf("僅顯示, 無控制, 按 Esc 離開\n");

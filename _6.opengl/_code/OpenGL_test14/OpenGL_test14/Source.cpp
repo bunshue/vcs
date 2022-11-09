@@ -1,9 +1,5 @@
-﻿#include <helper_gl.h>
-#include <GL/freeglut.h>
-
-#include <stdio.h>
-#include <iostream>
-#include "../../Common.h"
+﻿//#include "../../../_code/Common.h"    //32 bits
+#include "../../Common.h"               //64 bits
 
 #define REFRESH_DELAY 1000  // ms
 
@@ -12,7 +8,7 @@ void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
-    draw_boundary(color_y, 0.9); //畫視窗邊界
+    draw_boundary(color_y, 0.9f); //畫視窗邊界
 
     //畫一個實心矩形
     glColor3f(1.0, 0.0, 0.0);   //設定顏色 R
@@ -20,7 +16,7 @@ void display(void)
     glRectf(-dd, -dd, dd, dd);  //實心矩形
 
     //畫一個茶壺
-    draw_teapot(color_r, 1.0, 0.3);
+    draw_teapot(color_r, 1.0f, 0.3f);
 
     glFlush();  // 執行繪圖命令
 }

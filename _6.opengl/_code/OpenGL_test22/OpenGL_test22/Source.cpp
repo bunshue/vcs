@@ -1,16 +1,5 @@
-﻿//#include <helper_gl.h>
-//#include <GL/freeglut.h>
-
-//#include "cuda_runtime.h"
-//#include "device_launch_parameters.h"
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "../../Common.h"
-
-//#include <GL/glut.h>      //32 bits
-#include <GL/freeglut.h>    //64 bits
+﻿//#include "../../../_code/Common.h"    //32 bits
+#include "../../Common.h"               //64 bits
 
 // 繪圖回調函數
 void display(void)
@@ -75,7 +64,6 @@ void motion(int x, int y)
 
 int main(int argc, char** argv)
 {
-    //初始化GLUT庫，這個函數只是傳說命令參數并且初始化glut庫
     glutInit(&argc, argv);
 
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);    //宣告顯示模式為 Single Buffer 和 RGBA

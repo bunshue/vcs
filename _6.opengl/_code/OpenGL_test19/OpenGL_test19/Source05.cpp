@@ -1,11 +1,5 @@
-﻿#include <GL/freeglut.h>	//64位元用的
-//#include <GL/glut.h>		//32位元用的
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <iostream>
-#include <string.h>
+﻿//#include "../../../_code/Common.h"    //32 bits
+#include "../../Common.h"               //64 bits
 
 // 繪圖回調函數
 void display()
@@ -42,20 +36,6 @@ void reshape(int w, int h)
     glLoadIdentity();	//設置單位矩陣
 }
 
-void keyboard(unsigned char key, int /*x*/, int /*y*/)
-{
-    switch (key)
-    {
-    case 27:
-    case 'q':
-    case 'Q':
-        //離開視窗
-        glutDestroyWindow(glutGetWindow());
-        exit(0);
-        return;
-    }
-}
-
 int main(int argc, char** argv)
 {
     // 初始化顯示模式
@@ -69,7 +49,7 @@ int main(int argc, char** argv)
 
     glutDisplayFunc(display);	//設定callback function
     glutReshapeFunc(reshape);	//設定callback function
-    glutKeyboardFunc(keyboard);	//設定callback function
+    glutKeyboardFunc(keyboard0);	//設定callback function
 
     printf("僅顯示, 無控制, 按 Esc 離開\n");
 

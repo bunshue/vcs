@@ -1,9 +1,5 @@
-﻿#include <helper_gl.h>
-#include <GL/freeglut.h>
-
-#include <stdio.h>
-#include <iostream>
-#include "../../Common.h"
+﻿//#include "../../../_code/Common.h"    //32 bits
+#include "../../Common.h"               //64 bits
 
 float angle;
 
@@ -67,7 +63,7 @@ void init()
 {
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
-    glClearColor(0.1, 0.1, 0.4, 0.0);
+    glClearColor(0.1f, 0.1f, 0.4f, 0.0f);
     glShadeModel(GL_SMOOTH);
 
     //CBMPLoader bmpLoader;
@@ -102,7 +98,7 @@ void display(void)
 
     glFlush();  // 執行繪圖命令
 
-    angle += 0.05;
+    angle += 0.05f;
 }
 
 // 窗口大小變化回調函數

@@ -1,19 +1,5 @@
-﻿//#include <helper_gl.h>
-//#include <GL/freeglut.h>
-
-//#include "cuda_runtime.h"
-//#include "device_launch_parameters.h"
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
-#include "../../Common.h"
-
-//#include <GL/glut.h>      //32 bits
-#include <GL/freeglut.h>    //64 bits
-
-#define PI    3.14159265358979323846
+﻿//#include "../../../_code/Common.h"    //32 bits
+#include "../../Common.h"               //64 bits
 
 float my_function(float a)
 {
@@ -47,11 +33,11 @@ void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
-    draw_boundary(color_y, 0.9); //畫視窗邊界
+    draw_boundary(color_y, 0.9f); //畫視窗邊界
 
     //畫數學函數曲線
-    float x_st = -PI / 4;
-    float x_sp = PI / 4;
+    float x_st = -(float)PI / 4.0f;
+    float x_sp = (float)PI / 4.0f;
     int steps = 30;
     plotCurve(my_function, color_r, x_st, x_sp, steps);
 

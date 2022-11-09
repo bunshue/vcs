@@ -1,11 +1,5 @@
-﻿#include <helper_gl.h>
-#include <GL/freeglut.h>
-
-#include <stdio.h>
-#include <iostream>
-#include "../../Common.h"
-
-#define PI_F             3.141592654F
+﻿//#include "../../../_code/Common.h"    //32 bits
+#include "../../Common.h"               //64 bits
 
 // 繪圖回調函數
 void display(void)
@@ -55,7 +49,7 @@ void display(void)
     glColor3f(0.0, 1.0, 1.0);
     for (x_st = -14.0; x_st <= -5.0f; x_st += 0.1f)
     {
-        y_st = sin(x_st * 2) + 1.0;
+        y_st = sin(x_st * 2) + 1.0f;
         glVertex2f(x_st, y_st);
     }
     glEnd();
@@ -81,11 +75,11 @@ void display(void)
     float cy = 6.0f;
     float r = 6.0f;
     glBegin(GL_POLYGON);
-    glColor3f(0.5, 0.3, 0.7);
+    glColor3f(0.5f, 0.3f, 0.7f);
     for (int angle = 0; angle < 360; angle += 36)
     {
-        x_st = cx + r * cosf(2 * PI_F * angle / 360);
-        y_st = cy + r * sinf(2 * PI_F * angle / 360);
+        x_st = cx + r * cosf(2 * PI * angle / 360);
+        y_st = cy + r * sinf(2 * PI * angle / 360);
         glVertex2f(x_st, y_st);
     }
     glEnd();

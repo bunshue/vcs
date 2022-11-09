@@ -1,14 +1,4 @@
-﻿#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <iostream>
-
-#include <helper_gl.h>
-
-//#include <GL/glut.h>                  //32 bits
-//#include "../../../_code/Common.h"    //32 bits
-
-#include <GL/freeglut.h>    //64 bits
+﻿//#include "../../../_code/Common.h"    //32 bits
 #include "../../Common.h"   //64 bits
 
 int display_mode = 1;

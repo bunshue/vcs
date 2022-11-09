@@ -1,15 +1,5 @@
-//#include <helper_gl.h>
-//#include <GL/freeglut.h>
-
-//#include "cuda_runtime.h"
-//#include "device_launch_parameters.h"
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-//#include <GL/glut.h>      //32 bits
-#include <GL/freeglut.h>    //64 bits
+//#include "../../../_code/Common.h"    //32 bits
+#include "../../Common.h"   //64 bits
 
 #define PIXEL_CENTER(x) ((long)(x) + 0.5)
 

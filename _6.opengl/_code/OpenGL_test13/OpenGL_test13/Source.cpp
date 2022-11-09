@@ -1,8 +1,5 @@
-﻿#include <helper_gl.h>
-#include <GL/freeglut.h>
-
-#include <stdio.h>
-#include <iostream>
+﻿//#include "../../../_code/Common.h"    //32 bits
+#include "../../Common.h"               //64 bits
 
 static int slices = 16;
 static int stacks = 16;
@@ -121,7 +118,7 @@ static void idle(void)
 int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
-	
+
 	//glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 

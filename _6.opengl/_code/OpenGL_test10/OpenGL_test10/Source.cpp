@@ -1,16 +1,5 @@
-﻿#include <helper_gl.h>
-#include <GL/freeglut.h>
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
-#include <windows.h>
-#include "../../Common.h"
-
-#define M_PI       3.14159265358979323846   // pi
-
-#include <iostream>
+﻿//#include "../../../_code/Common.h"    //32 bits
+#include "../../Common.h"               //64 bits
 
 int mx;	//position of mouse
 int my;	//position of mouse
@@ -32,8 +21,8 @@ void display(void)
 	float w, h;
 
 	glGetIntegerv(GL_VIEWPORT, rect);
-	w = rect[2];
-	h = rect[3];
+	w = (float)rect[2];
+	h = (float)rect[3];
 
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -61,14 +50,14 @@ void display(void)
 	y = 0.0;
 	z = dist;
 	eyex = x;
-	eyey = y * cos(-x_angle * M_PI / 180.0) - z * sin(-x_angle * M_PI / 180.0);
-	eyez = y * sin(-x_angle * M_PI / 180.0) + z * cos(-x_angle * M_PI / 180.0);
+	eyey = y * cos(-x_angle * PI / 180.0) - z * sin(-x_angle * PI / 180.0);
+	eyez = y * sin(-x_angle * PI / 180.0) + z * cos(-x_angle * PI / 180.0);
 	x = eyex;
 	y = eyey;
 	z = eyez;
-	eyex = x * cos(-y_angle * M_PI / 180.0) + z * sin(-y_angle * M_PI / 180.0);
+	eyex = x * cos(-y_angle * PI / 180.0) + z * sin(-y_angle * PI / 180.0);
 	eyey = y;
-	eyez = -x * sin(-y_angle * M_PI / 180.0) + z * cos(-y_angle * M_PI / 180.0);
+	eyez = -x * sin(-y_angle * PI / 180.0) + z * cos(-y_angle * PI / 180.0);
 	gluLookAt(eyex, eyey, eyez, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 
 	draw_coordinates(2.0);

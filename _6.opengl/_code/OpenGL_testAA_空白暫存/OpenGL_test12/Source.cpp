@@ -1,23 +1,12 @@
-﻿//#include <helper_gl.h>
-//#include <GL/freeglut.h>
-
-//#include "cuda_runtime.h"
-//#include "device_launch_parameters.h"
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "../../Common.h"
-
-//#include <GL/glut.h>      //32 bits
-#include <GL/freeglut.h>    //64 bits
+﻿//#include "../../../_code/Common.h"    //32 bits
+#include "../../Common.h"               //64 bits
 
 // 繪圖回調函數
 void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
-    draw_boundary(color_y, 0.9); //畫視窗邊界
+    draw_boundary(color_y, 0.9f); //畫視窗邊界
 
     //畫一個實心矩形
     glColor3f(0.0, 1.0, 1.0);   //設定顏色 cc
@@ -35,7 +24,7 @@ void reshape(int w, int h)
     glViewport(0, 0, w, h);
 }
 
-void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
     switch (key)
     {
@@ -75,7 +64,6 @@ void motion(int x, int y)
 
 int main(int argc, char** argv)
 {
-    //初始化GLUT庫，這個函數只是傳說命令參數并且初始化glut庫
     glutInit(&argc, argv);
 
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);    //宣告顯示模式為 Single Buffer 和 RGBA

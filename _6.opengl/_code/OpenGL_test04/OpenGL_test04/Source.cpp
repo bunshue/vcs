@@ -1,9 +1,5 @@
-﻿#include <helper_gl.h>
-#include <GL/freeglut.h>
-
-#include <stdio.h>
-#include <iostream>
-#include "../../Common.h"
+﻿//#include "../../../_code/Common.h"    //32 bits
+#include "../../Common.h"   //64 bits
 
 void init(void)
 {

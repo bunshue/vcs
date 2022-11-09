@@ -1,10 +1,5 @@
-#include <GL/freeglut.h>	//64位元用的
-//#include <GL/glut.h>		//32位元用的
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <iostream>
-#include "../../Common.h"
+//#include "../../../_code/Common.h"    //32 bits
+#include "../../Common.h"               //64 bits
 
 // 繪圖回調函數
 void display()
@@ -17,7 +12,7 @@ void display()
 
 	glPolygonMode(GL_FRONT, GL_LINE);
 
-	draw_boundary(color_y, 9.6); //畫視窗邊界
+	draw_boundary(color_y, 9.6f); //畫視窗邊界
 
 	float dd;
 	glColor3f(1.0, 1.0, 1.0);	//White

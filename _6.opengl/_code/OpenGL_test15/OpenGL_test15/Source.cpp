@@ -1,9 +1,5 @@
-﻿#include <helper_gl.h>
-#include <GL/freeglut.h>
-
-#include <stdio.h>
-#include <iostream>
-#include "../../Common.h"
+﻿//#include "../../../_code/Common.h"    //32 bits
+#include "../../Common.h"               //64 bits
 
 // 繪圖回調函數
 void display(void)
@@ -19,9 +15,9 @@ void display(void)
 	// 下面設置的含義是白色, 繪製點的時候, 每次都使用白色繪製
 	glColor4ub(255, 255, 255, 255);	//設定顏色 White
 
-	draw_boundary(color_y, 0.9); //畫視窗邊界
+	draw_boundary(color_y, 0.9f); //畫視窗邊界
 
-	draw_coordinates(0.9);
+	draw_coordinates(0.9f);
 
 	glLineWidth(4.0f);	//設定線寬
 
@@ -46,9 +42,9 @@ void display(void)
 	float dy = 0.0f;
 	for (xx = -0.8f; xx <= 0.8f; xx += 0.1f)
 	{
-		dx = xx + 0.8;
+		dx = xx + 0.8f;
 		glVertex3f(-0.8f + dx, -0.8f, 0.0f);
-		dy = xx + 0.8;
+		dy = xx + 0.8f;
 		glVertex3f(-0.8f, 0.8f - dy, 0.0f);
 	}
 	glEnd();	// 繪製點結束
@@ -73,18 +69,18 @@ void display(void)
 	// 繪製線 , 每兩個點組成一條線
 	glVertex3f(0.0f, -0.8f, 0.0f);
 
-	glColor4ub(0, 255, 0, 255);	//設定顏色 G
+	glColor4ub(0, 255, 0, 255);	//設定顏色 G, 用256制
 
 	glVertex3f(0.8f, -0.8f, 0.0f);
 
 	// 上面的設置會從 (0,0,-10) 座標向 (-5,0,-10) 座標繪製一條線
 
-	glColor4ub(0, 0, 255, 255);	//設定顏色 B
+	glColor4ub(0, 0, 255, 255);	//設定顏色 B, 用256制
 
 	//glVertex3f(-5.0f, 0.0f, -10.0f);
 	glVertex3f(0.8f, 0.3f, 0.0f);
 
-	glColor4ub(255, 255, 255, 255);
+	glColor4ub(255, 255, 255, 255);//設定顏色 White
 
 	// 上面的設置會從 (-5,0,-10) 座標向 (-5,-2,-10) 座標繪製一條線
 
@@ -93,19 +89,6 @@ void display(void)
 	glPopMatrix();
 
 	glFlush();  // 執行繪圖命令
-}
-
-void keyboard(unsigned char key, int x, int y)
-{
-	switch (key)
-	{
-	case 27:
-	case 'q':
-	case 'Q':
-		//離開視窗
-		glutDestroyWindow(glutGetWindow());
-		return;
-	}
 }
 
 int main(int argc, char** argv)
@@ -120,7 +103,7 @@ int main(int argc, char** argv)
 	glutCreateWindow("開啟視窗");	//開啟視窗 並顯示出視窗 Title
 
 	glutDisplayFunc(display);	//設定callback function
-	glutKeyboardFunc(keyboard);	//設定callback function
+	glutKeyboardFunc(keyboard0);	//設定callback function
 
 	printf("僅顯示, 無控制, 按 Esc 離開\n");
 

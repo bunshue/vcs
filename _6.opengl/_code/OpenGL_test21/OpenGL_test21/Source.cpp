@@ -1,16 +1,5 @@
-﻿//#include <helper_gl.h>
-//#include <GL/freeglut.h>
-
-//#include "cuda_runtime.h"
-//#include "device_launch_parameters.h"
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include "../../Common.h"
-
-//#include <GL/glut.h>      //32 bits
-#include <GL/freeglut.h>    //64 bits
+﻿//#include "../../../_code/Common.h"    //32 bits
+#include "../../Common.h"               //64 bits
 
 typedef struct _cRec {
     float x, y;

@@ -1,9 +1,5 @@
-﻿#include <helper_gl.h>
-#include <GL/freeglut.h>
-
-#include <stdio.h>
-#include <iostream>
-#include "../../Common.h"
+﻿//#include "../../../_code/Common.h"    //32 bits
+#include "../../Common.h"   //64 bits
 
 int mx; //position of mouse;
 int my; //position of mouse;
@@ -41,7 +37,7 @@ void display(void)
 
 	glRotatef(x_angle, 1.0f, 0.0f, 0.0f);
 	glRotatef(y_angle, 0.0f, 1.0f, 0.0f);
-	draw_coordinates(1.0);
+	draw_coordinates(0.9f);
 
 	glFlush();
 	glutSwapBuffers();

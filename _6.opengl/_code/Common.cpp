@@ -1,9 +1,6 @@
 ﻿#include <helper_gl.h>
 #include <GL/freeglut.h>
 
-#include <stdio.h>
-#include <iostream>
-
 void draw_coordinates(float len)
 {
     float dd = len / 10;
@@ -18,7 +15,7 @@ void draw_coordinates(float len)
     glVertex3f(len, 0.0f, 0.0f);	//x軸 len,0,0
     glVertex3f(len - dd, 0.0f - dd, 0.0f);	//x軸 len,0,0
     glEnd();
-    glRasterPos3f(len, 0.05, 0);
+    glRasterPos3f(len, 0.05f, 0.0f);
     glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'x');
 
     glColor3f(0.0, 1.0, 0.0); //畫綠色的y軸
@@ -30,7 +27,7 @@ void draw_coordinates(float len)
     glVertex3f(0.0f, len, 0.0f);	//y軸 0,len,0
     glVertex3f(0.0f + dd, len - dd, 0.0f);	//y軸 0,len,0
     glEnd();
-    glRasterPos3f(0, len, 0);
+    glRasterPos3f(0.0f, len, 0.0f);
     glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'y');
 
     glColor3f(0.0, 0.0, 1.0); //畫藍色的z軸
@@ -42,7 +39,7 @@ void draw_coordinates(float len)
     glVertex3f(0.0f, 0.0f, len);	//z軸 0,0,len
     glVertex3f(0.0f + dd, 0.0f, len - dd);	//z軸 0,0,len
     glEnd();
-    glRasterPos3f(0, 0, len);
+    glRasterPos3f(0.0f, 0.0f, len);
     glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'z');
 }
 
@@ -166,7 +163,7 @@ inline void glPrintShadowed(float x, float y, const char* s, void* font, float* 
 
     //前景字
     glColor3fv((GLfloat*)color);    //設定顏色
-    glPrint(x + 0.01, y + 0.01, s, font);
+    glPrint(x + 0.01f, y + 0.01f, s, font);
 }
 
 void draw_string1(const char* str, float* color, void* font, float x_st, float y_st)
@@ -239,6 +236,24 @@ void draw_point(float* color, float size, float x_st, float y_st)
 //空心矩形, 左下為原點, 向右w, 向上h, 顏色color, 線寬width
 void draw_rectangle(float* color, float width, float x_st, float y_st, float w, float h)
 {
+    //TBD
+    /*
+    //用 GL_LINE_LOOP 畫一個空心矩形
+//glColor3f(0.0, 1.0, 0.0);
+    glColor3fv((GLfloat*)color);
+
+    //方法一, 使用 GL_QUADS
+    glBegin(GL_QUADS);	//畫矩形
+    //逆時針為空心
+    //畫一個白色外框
+    glVertex3f(-dd, dd, 0.0f);	//左上
+    glVertex3f(-dd, -dd, 0.0f);	//左下
+    glVertex3f(dd, -dd, 0.0f);	//右下
+    glVertex3f(dd, dd, 0.0f);	//右上
+    glEnd();
+    */
+
+
 
 
 }
@@ -308,7 +323,7 @@ void reshape0(int w, int h)
     glViewport(0, 0, w, h);
 }
 
-void keyboard0(unsigned char key, int x, int y)
+void keyboard0(unsigned char key, int /*x*/, int /*y*/)
 {
     //printf("你所按按鍵的碼是%x\t此時視窗內的滑鼠座標是(%d,%d)\n", key, x, y);
 

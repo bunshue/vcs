@@ -1,17 +1,27 @@
-﻿#include <iostream>
+﻿#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <iostream>
+
+#include <helper_gl.h>
+
+//#include <GL/glut.h>		//32 bits
+#include <GL/freeglut.h>	//64 bits
+
+#define	PI	3.141592654F
 
 //常用的顏色 RGBA四碼
-float color_r[4] = { 1.0f, 0.0f, 0.0f, 1.0f };
-float color_g[4] = { 0.0f, 1.0f, 0.0f, 1.0f };
-float color_b[4] = { 0.0f, 0.0f, 1.0f, 1.0f };
-float color_y[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
-float color_m[4] = { 1.0f, 0.0f, 1.0f, 1.0f };	//Magenta, 洋紅色、品紅色、紅紫色
-float color_c[4] = { 0.0f, 1.0f, 1.0f, 1.0f };	//Cyan, 青色
-float color_black[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
-float color_white[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
-float color_silver[4] = { 0.75f, 0.75f, 0.75f, 1.0f };
-float color_gray[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
-float color_purple[4] = { 0.5f, 0.0f, 0.5f, 1.0f };
+float color_r[] = { 1.0f, 0.0f, 0.0f, 1.0f };
+float color_g[] = { 0.0f, 1.0f, 0.0f, 1.0f };
+float color_b[] = { 0.0f, 0.0f, 1.0f, 1.0f };
+float color_y[] = { 1.0f, 1.0f, 0.0f, 1.0f };
+float color_m[] = { 1.0f, 0.0f, 1.0f, 1.0f };	//Magenta, 洋紅色、品紅色、紅紫色
+float color_c[] = { 0.0f, 1.0f, 1.0f, 1.0f };	//Cyan, 青色
+float color_black[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+float color_white[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+float color_silver[] = { 0.75f, 0.75f, 0.75f, 1.0f };
+float color_gray[] = { 0.5f, 0.5f, 0.5f, 1.0f };
+float color_purple[] = { 0.5f, 0.0f, 0.5f, 1.0f };
 
 void draw_coordinates(float len);
 void draw_boundary(float* color, float dd);

@@ -1,9 +1,5 @@
-﻿#include <helper_gl.h>
-#include <GL/freeglut.h>
-
-#include <stdio.h>
-#include <iostream>
-#include "../../Common.h"
+﻿//#include "../../../_code/Common.h"    //32 bits
+#include "../../Common.h"               //64 bits
 
 int mx; //position of mouse
 int my; //position of mouse
@@ -14,7 +10,7 @@ float dist = 10.0f; //distance from the eye
 
 void init(void)
 {
-	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_DEPTH_TEST);	//有無打開, 差很大
 }
 
 // 繪圖回調函數
@@ -27,16 +23,14 @@ void display(void)
 	float w, h;
 
 	glGetIntegerv(GL_VIEWPORT, rect);
-	w = rect[2];
-	h = rect[3];
+	w = (float)rect[2];
+	h = (float)rect[3];
 
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	draw_boundary(color_y, 2.5); //畫視窗邊界
 	
-	glLineWidth(3.0f);	//設定線寬
-
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();	//設置單位矩陣
 

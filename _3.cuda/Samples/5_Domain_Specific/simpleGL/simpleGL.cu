@@ -316,9 +316,7 @@ void display()
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    //畫視窗邊界
-    float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
-    draw_boundary(color_yellow, 1.5);
+    draw_boundary(color_y, 1.5f);    //畫視窗邊界
 
     // set view matrix
     glMatrixMode(GL_MODELVIEW);
@@ -418,8 +416,6 @@ void motion(int x, int y)
 
 int main(int argc, char** argv)
 {
-    printf("Starting...\n");
-
     sdkCreateTimer(&timer);
 
     initGL(&argc, argv);
@@ -432,6 +428,8 @@ int main(int argc, char** argv)
 
     // run the cuda part
     runCuda(&cuda_vbo_resource);
+
+    printf("用滑鼠拖曳控制\n");
 
     glutMainLoop();	//開始主循環繪製
 
