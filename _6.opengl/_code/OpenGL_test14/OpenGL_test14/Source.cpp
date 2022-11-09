@@ -12,9 +12,7 @@ void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
-    //畫視窗邊界
-    float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
-    draw_boundary(color_yellow, 0.9);
+    draw_boundary(color_y, 0.9); //畫視窗邊界
 
     //畫一個實心矩形
     glColor3f(1.0, 0.0, 0.0);   //設定顏色 R
@@ -22,8 +20,7 @@ void display(void)
     glRectf(-dd, -dd, dd, dd);  //實心矩形
 
     //畫一個茶壺
-    float color_red[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
-    draw_teapot(color_red, 1.0, 0.3);
+    draw_teapot(color_r, 1.0, 0.3);
 
     glFlush();  // 執行繪圖命令
 }

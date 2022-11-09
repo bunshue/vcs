@@ -46,6 +46,7 @@ void draw_coordinates(float len)
     glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'z');
 }
 
+//畫視窗邊界
 void draw_boundary(float* color, float dd)
 {
     //用 GL_LINE_LOOP 畫一個空心矩形

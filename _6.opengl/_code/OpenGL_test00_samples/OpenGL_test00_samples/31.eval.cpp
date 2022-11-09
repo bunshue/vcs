@@ -334,8 +334,7 @@ void display(void)
     glRotatef(rotX, 1, 0, 0);
     glRotatef(rotY, 0, 1, 0);
 
-    float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
-    draw_boundary(color_yellow, 0.9);
+    draw_boundary(color_y, 0.9); //畫視窗邊界
 
     RenderEval();
 

@@ -1,12 +1,14 @@
-﻿//#include <GL/freeglut.h>	//64位元用的
-#include <GL/glut.h>		//32位元用的
-
-#include <stdio.h>
+﻿#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "../../../_code/Common.h"
-
 #include <iostream>
+
+#include <GL/glut.h>                  //32 bits
+#include "../../../_code/Common.h"    //32 bits
+
+//#include <GL/freeglut.h>    //64 bits
+//#include "../../Common.h"   //64 bits
+
 
 int display_mode = 1;
 
@@ -85,20 +87,17 @@ void display(void)
         //左下x,左下y,右上x,右上y,
         glRectf(0.3f, -0.7f, 0.7f, 0.7f);//畫一個矩形
 
-        float color_cc[4] = { 0.0f, 1.0f, 1.0f, 1.0f };
         float x_st = -0.9;
         float y_st = 0.1;
         const char str1[30] = "draw_string_test 1";
-        draw_string1(str1, color_cc, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
+        draw_string1(str1, color_c, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
 
         x_st = -0.9;
         y_st = -0.1;
         const char str2[30] = "draw_string_test 2";
-        draw_string2(str2, color_cc, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
+        draw_string2(str2, color_c, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
 
-        //畫視窗邊界
-        float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
-        draw_boundary(color_yellow, 0.9);
+        draw_boundary(color_y, 0.9); //畫視窗邊界
     }
     else if (display_mode == 2)
     {

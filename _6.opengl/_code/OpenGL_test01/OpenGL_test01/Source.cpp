@@ -1,20 +1,15 @@
-﻿// OpenGL Graphics includes
-#include <helper_gl.h>
-//#include <GL/glut.h>      //32 bits
-#include <GL/freeglut.h>    //64 bits
-
-// CUDA utilities and system includes
-//#include <cuda_runtime.h>
-//#include <cuda_gl_interop.h>
-
-// Includes
-#include <stdio.h>
+﻿#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <iostream>
 
-#include "../../Common.h"
+#include <helper_gl.h>
 
+//#include <GL/glut.h>                  //32 bits
+//#include "../../../_code/Common.h"    //32 bits
+
+#include <GL/freeglut.h>    //64 bits
+#include "../../Common.h"   //64 bits
 
 int display_mode = 1;
 
@@ -93,20 +88,17 @@ void display(void)
         //左下x,左下y,右上x,右上y,
         glRectf(0.3f, -0.7f, 0.7f, 0.7f);//畫一個矩形
 
-        float color_cc[4] = { 0.0f, 1.0f, 1.0f, 1.0f };
         float x_st = -0.9f;
         float y_st = 0.1f;
         const char str1[30] = "draw_string_test 1";
-        draw_string1(str1, color_cc, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
+        draw_string1(str1, color_c, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
 
         x_st = -0.9f;
         y_st = -0.1f;
         const char str2[30] = "draw_string_test 2";
-        draw_string2(str2, color_cc, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
+        draw_string2(str2, color_c, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
 
-        //畫視窗邊界
-        float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
-        draw_boundary(color_yellow, 0.9);
+        draw_boundary(color_y, 0.9); //畫視窗邊界
     }
     else if (display_mode == 2)
     {
@@ -265,11 +257,13 @@ void display(void)
         glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0); //設置窗口座標系大小
 
         glColor3f(1.0, 1.0, 0.0);   //設定顏色 Yellow
-        glBegin(GL_POLYGON);/* draw yellow polygon with corners at(0.25, 0.25, 0.0) and (0.75, 0.75, 0.0)*/
+
+        glBegin(GL_POLYGON);    //實心多邊形
         {
             glVertex3f(0.25, 0.25, 0.0);
             glVertex3f(0.75, 0.25, 0.0);
             glVertex3f(0.75, 0.75, 0.0);
+            glVertex3f(0.5, 1.0, 0.0);
             glVertex3f(0.25, 0.75, 0.0);
         }
         glEnd();
@@ -333,12 +327,11 @@ void display(void)
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
-        float color_cc1[4] = { 0.0f, 1.0f, 1.0f, 1.0f };
         float x_st = -0.6;
         float y_st = -0.6;
         float w = 1.2;
         float h = 1.2;
-        draw_rectangle_s(color_cc1, x_st, y_st, w, h);
+        draw_rectangle_s(color_c, x_st, y_st, w, h);
 
         //畫實心矩形
         glColor3f(1.0f, 1.0f, 0.0f);    //設定顏色 Yellow
@@ -354,8 +347,7 @@ void display(void)
         float y3 = 0;
         float x4 = 0;
         float y4 = dd;
-        float color_cc2[4] = { 1.0f, 0.0f, 0.0f, 1.0f };
-        draw_quad_s(color_cc2, x1, y1, x2, y2, x3, y3, x4, y4);
+        draw_quad_s(color_r, x1, y1, x2, y2, x3, y3, x4, y4);
     }
     else if (display_mode == 8)
     {

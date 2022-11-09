@@ -19,10 +19,7 @@ void display(void)
 	// 下面設置的含義是白色, 繪製點的時候, 每次都使用白色繪製
 	glColor4ub(255, 255, 255, 255);	//設定顏色 White
 
-	//畫視窗邊界
-	glLineWidth(5.0f);	//設定線寬
-	float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
-	draw_boundary(color_yellow, 0.9);
+	draw_boundary(color_y, 0.9); //畫視窗邊界
 
 	draw_coordinates(0.9);
 

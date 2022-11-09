@@ -47,16 +47,13 @@ void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
-    //畫視窗邊界
-    float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
-    draw_boundary(color_yellow, 0.9);
+    draw_boundary(color_y, 0.9); //畫視窗邊界
 
     //畫數學函數曲線
-    float color_red[4] = { 1.0f, 0.0f, 0.0f, 1.0f };
     float x_st = -PI / 4;
     float x_sp = PI / 4;
     int steps = 30;
-    plotCurve(my_function, color_red, x_st, x_sp, steps);
+    plotCurve(my_function, color_r, x_st, x_sp, steps);
 
     glFlush();  // 執行繪圖命令
 }

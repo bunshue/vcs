@@ -19,8 +19,7 @@ void init()
 void display(void)
 {
     //畫一個茶壺
-    float color_red[4] = { 1.0f, 0.0f, 0.0f, 1.0f };
-    draw_teapot(color_red, 1.0, 2.0);
+    draw_teapot(color_r, 1.0, 2.0);
 
     glFlush();  // 執行繪圖命令
 }

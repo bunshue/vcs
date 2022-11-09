@@ -40,9 +40,7 @@ void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
-    //畫視窗邊界
-    float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
-    draw_boundary(color_yellow, 0.9);
+    draw_boundary(color_y, 0.9); //畫視窗邊界
 
     float width = 3;
     float x1 = 0;
@@ -51,7 +49,7 @@ void display(void)
     float y2 = -0.3;
     float x3 = -0.3;
     float y3 = -0.3;
-    //draw_triangle(color_yellow, width, x1, y1, x2, y2, x3, y3);
+    //draw_triangle(color_y, width, x1, y1, x2, y2, x3, y3);
 
     draw_point_test();
 

@@ -1,5 +1,18 @@
 ﻿#include <iostream>
 
+//常用的顏色 RGBA四碼
+float color_r[4] = { 1.0f, 0.0f, 0.0f, 1.0f };
+float color_g[4] = { 0.0f, 1.0f, 0.0f, 1.0f };
+float color_b[4] = { 0.0f, 0.0f, 1.0f, 1.0f };
+float color_y[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
+float color_m[4] = { 1.0f, 0.0f, 1.0f, 1.0f };	//Magenta, 洋紅色、品紅色、紅紫色
+float color_c[4] = { 0.0f, 1.0f, 1.0f, 1.0f };	//Cyan, 青色
+float color_black[4] = { 0.0f, 0.0f, 0.0f, 1.0f };
+float color_white[4] = { 1.0f, 1.0f, 1.0f, 1.0f };
+float color_silver[4] = { 0.75f, 0.75f, 0.75f, 1.0f };
+float color_gray[4] = { 0.5f, 0.5f, 0.5f, 1.0f };
+float color_purple[4] = { 0.5f, 0.0f, 0.5f, 1.0f };
+
 void draw_coordinates(float len);
 void draw_boundary(float* color, float dd);
 void draw_teapot(float* color, float width, double size);

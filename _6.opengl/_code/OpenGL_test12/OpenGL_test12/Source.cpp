@@ -7,11 +7,6 @@
 
 #define PI_F             3.141592654F
 
-float color_r[4] = { 1.0f, 0.0f, 0.0f, 1.0f };
-float color_g[4] = { 0.0f, 1.0f, 0.0f, 1.0f };
-float color_b[4] = { 0.0f, 0.0f, 1.0f, 1.0f };
-float color_y[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
-
 // 繪圖回調函數
 void display(void)
 {
@@ -38,10 +33,7 @@ void display(void)
     }
 
     //畫直線連線
-    float offset = 13.0;
-
-    //畫視窗邊界
-    draw_boundary(color_y, offset);
+    draw_boundary(color_y, 13.0); //畫視窗邊界
 
     //畫線
     //畫直線連線
@@ -110,7 +102,6 @@ void display(void)
     float y3 = cy - dd;
     float x4 = cx - dd;
     float y4 = cy;
-    float color_cc2[4] = { 0.7f, 0.5f, 0.2f, 1.0f };
     draw_quad_s(color_r, x1, y1, x2, y2, x3, y3, x4, y4);
 
     x_st = -9.0;

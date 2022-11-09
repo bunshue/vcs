@@ -38,10 +38,9 @@ void display(void)
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	//畫視窗邊界
+	draw_boundary(color_y, 2.5); //畫視窗邊界
+
 	glLineWidth(2.0f);	//設定線寬
-	float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
-	//draw_boundary(color_yellow, 2.5);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();	//設置單位矩陣
@@ -80,8 +79,7 @@ void display(void)
 	//glTranslatef(-1.0f, 0.0f, 0.0f);	//平移至指定地方(累積)
 
 	//畫一個茶壺
-	float color_red[4] = { 1.0f, 0.0f, 0.0f, 1.0f };
-	draw_teapot(color_red, 1.0, 1.0);
+	draw_teapot(color_r, 1.0, 1.0);
 
 	glPopMatrix();
 
