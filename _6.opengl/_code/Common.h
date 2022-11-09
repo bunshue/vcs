@@ -9,7 +9,14 @@ void draw_tetrahedron2(void);
 void draw_string1(const char* str, float* color, void* font, float x_st, float y_st);	//無陰影
 void draw_string1s(std::string str, float* color, void* font, float x_st, float y_st);	//無陰影
 void draw_string2(const char* str, float* color, void* font, float x_st, float y_st);	//有陰影
+
+//空心三角形
 void draw_triangle(float* color, float width, float x1, float y1, float x2, float y2, float x3, float y3);
+
+//實心三角形
+void draw_triangle_s(float* color, float x1, float y1, float x2, float y2, float x3, float y3);
+
+void draw_point(float* color, float size, float x_st, float y_st);
 
 //空心矩形, 左下為原點, 向右w, 向上h, 顏色color, 線寬width
 void draw_rectangle(float* color, float width, float x_st, float y_st, float w, float h);

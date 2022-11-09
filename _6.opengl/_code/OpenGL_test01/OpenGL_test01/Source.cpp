@@ -388,7 +388,7 @@ void keyboard(unsigned char key, int x, int y)
         {
             full_screen = 1;
             printf("全螢幕\n");
-            glutFullScreen();
+            glutFullScreen();   //全螢幕顯示
         }
         else
         {

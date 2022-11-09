@@ -7,6 +7,11 @@
 
 #define PI_F             3.141592654F
 
+float color_r[4] = { 1.0f, 0.0f, 0.0f, 1.0f };
+float color_g[4] = { 0.0f, 1.0f, 0.0f, 1.0f };
+float color_b[4] = { 0.0f, 0.0f, 1.0f, 1.0f };
+float color_y[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
+
 // 繪圖回調函數
 void display(void)
 {
@@ -17,33 +22,26 @@ void display(void)
     float dd = 0;
 
     //畫點
-    glPointSize(50.0f);	//設定點的大小, N X N
-    glBegin(GL_POINTS);
-    glColor3f(1.0, 0.0, 0.0);	//紅
-    glVertex2f(0, 0);
-    glEnd();
+    float size = 50.0;  //設定點的大小, N X N
+    x_st = 0.0f;
+    y_st = 0.0f;
+    draw_point(color_r, size, x_st, y_st);
 
-    glPointSize(2.0f); 	//設定點的大小, N X N
-    glBegin(GL_POINTS);
+    size = 2.0f;    //設定點的大小, N X N
+    x_st = 0.0f;
+    y_st = 12.0f;
     for (x_st = -14.0; x_st < -5.0f; x_st += 0.5f)
     {
-        glColor3f(1.0, 0.0, 0.0);	//紅
-        glVertex2f(x_st, y_st);
-
-        glColor3f(0.0, 1.0, 0.0);	//綠
-        glVertex2f(x_st, y_st - 0.5f);
-
-        glColor3f(1.0, 1.0, 0);	//黃
-        glVertex2f(x_st, y_st - 1.0f);
+        draw_point(color_r, size, x_st, y_st);
+        draw_point(color_g, size, x_st, y_st - 0.5f);
+        draw_point(color_b, size, x_st, y_st - 1.0f);
     }
-    glEnd();
 
     //畫直線連線
     float offset = 13.0;
 
     //畫視窗邊界
-    float color_yellow[4] = { 1.0f, 1.0f, 0.0f, 1.0f };
-    draw_boundary(color_yellow, offset);
+    draw_boundary(color_y, offset);
 
     //畫線
     //畫直線連線
@@ -100,49 +98,31 @@ void display(void)
     }
     glEnd();
 
-    //畫四邊形, 4個頂點為一組
-    glBegin(GL_QUADS);
-    glColor3f(0.7, 0.5, 0.2);
+    //畫實心四邊形, 4個頂點為一組
     cx = -4.0f;
     cy = -2.0f;
     dd = 2.0f;
-    glVertex2f(cx, cy + dd);  //上
-    glVertex2f(cx + dd, cy);  //右
-    glVertex2f(cx, cy - dd);  //下
-    glVertex2f(cx - dd, cy);  //左
+    float x1 = cx;  //第1點
+    float y1 = cy + dd;
+    float x2 = cx + dd;
+    float y2 = cy;
+    float x3 = cx;
+    float y3 = cy - dd;
+    float x4 = cx - dd;
+    float y4 = cy;
+    float color_cc2[4] = { 0.7f, 0.5f, 0.2f, 1.0f };
+    draw_quad_s(color_r, x1, y1, x2, y2, x3, y3, x4, y4);
 
-    glColor3f(0.5, 0.7, 0.2);
-    cx = -4.0f;
-    cy = -2.0f - 4.0f;
-    dd = 2.0f;
-    glVertex2f(cx, cy + dd);  //上
-    glVertex2f(cx - dd, cy);  //左
-    glVertex2f(cx, cy - dd);  //下
-    glVertex2f(cx + dd, cy);  //右
-
-    glEnd();
-
-    //畫三角形, 三個頂點為一組
-    glBegin(GL_TRIANGLES);
-    glColor3f(0.2, 0.5, 0.7);
     x_st = -9.0;
     y_st = -0.0;
-    dd = 3.0;
-    glVertex2f(x_st, y_st);    //上
-    glVertex2f(x_st - dd, y_st - dd);   //左下
-    glVertex2f(x_st + dd, y_st - dd);   //右下
-
-    y_st -= dd;
-    glVertex2f(x_st, y_st);    //上
-    glVertex2f(x_st - dd, y_st - dd);   //左下
-    glVertex2f(x_st + dd, y_st - dd);   //右下
-
-    y_st -= dd;
-    glVertex2f(x_st, y_st);    //上
-    glVertex2f(x_st - dd, y_st - dd);   //左下
-    glVertex2f(x_st + dd, y_st - dd);   //右下
-
-    glEnd();
+    dd = 5.0;
+    x1 = x_st;    //第1點
+    y1 = y_st;
+    x2 = x_st - dd / 2;
+    y2 = y_st - dd;
+    x3 = x_st + dd / 2;
+    y3 = y_st - dd;
+    draw_triangle_s(color_g, x1, y1, x2, y2, x3, y3);
 
     //畫三角形帶
     x_st = 4.0;
@@ -204,11 +184,10 @@ void display(void)
     glVertex2f(x_st, y_st + dd * 4);  //正上
     glEnd();
 
-    float color[4] = { 0.0f, 1.0f, 0.0f, 1.0f };
     x_st = -1.2;
     y_st = 0;
     const char str[30] = "Write Something";
-    draw_string1(str, color, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
+    draw_string1(str, color_g, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
 
     glFlush();  // 執行繪圖命令
 }

@@ -195,12 +195,16 @@ void draw_string2(const char* str, float* color, void* font, float x_st, float y
     glPrintShadowed(x_st, y_st, str, font, color);
 }
 
-//實心三角形
+//空心三角形
 void draw_triangle(float* color, float width, float x1, float y1, float x2, float y2, float x3, float y3)
 {
+    //TBD
+    return;
+
     glColor3fv((GLfloat*)color);    //設定顏色
     glLineWidth(width);	//設定線寬
 
+    //畫實心三角形, 三個頂點為一組
     glBegin(GL_TRIANGLES);
     glVertex2f(x1, y1);
     glVertex2f(x2, y2);
@@ -208,6 +212,28 @@ void draw_triangle(float* color, float width, float x1, float y1, float x2, floa
     glEnd();
 }
 
+//實心三角形
+void draw_triangle_s(float* color, float x1, float y1, float x2, float y2, float x3, float y3)
+{
+    glColor3fv((GLfloat*)color);    //設定顏色
+
+    //畫實心三角形, 三個頂點為一組
+    glBegin(GL_TRIANGLES);
+    glVertex2f(x1, y1);
+    glVertex2f(x2, y2);
+    glVertex2f(x3, y3);
+    glEnd();
+}
+
+void draw_point(float* color, float size, float x_st, float y_st)
+{
+    //畫點
+    glColor3fv((GLfloat*)color);    //設定顏色
+    glPointSize(size);	            //設定點的大小, N X N
+    glBegin(GL_POINTS);
+    glVertex2f(x_st, y_st);
+    glEnd();
+}
 
 //空心矩形, 左下為原點, 向右w, 向上h, 顏色color, 線寬width
 void draw_rectangle(float* color, float width, float x_st, float y_st, float w, float h)
