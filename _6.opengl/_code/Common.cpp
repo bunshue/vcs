@@ -1,5 +1,7 @@
 ﻿#include <helper_gl.h>
-#include <GL/freeglut.h>
+
+//#include <GL/glut.h>		//32 bits
+#include <GL/freeglut.h>	//64 bits
 
 //畫座標軸
 void draw_coordinates(float len)

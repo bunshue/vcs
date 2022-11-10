@@ -11,7 +11,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="19.point.c" />
+    <ClCompile Include="15.wave.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8E8E57C8-7DBC-4B8E-8472-AB906C6D6BFA}</ProjectGuid>

@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="19.point.c">
+    <ClCompile Include="15.wave.c">
       <Filter>原始程式檔</Filter>
     </ClCompile>
   </ItemGroup>

@@ -127,19 +127,14 @@ void display(void)
         int i;
         int n = 10;
 
-        double pnts[][2] = {
-        0, 5,
-        1, 3,
-        2, 7,
-        3, 4,
-        4, 0,
-        5, 6,
-        6, 2,
-        7, 10,
-        8, 4,
-        9, 3,
-        10, 7
+        float pnts[11][2] = {
         };
+
+        for (i = 0; i <= n; i++)
+        {
+            pnts[i][0] = i;
+            pnts[i][1] = sin((float)i / 1) * 5 + 5;
+        }
 
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
@@ -162,7 +157,7 @@ void display(void)
         {
             glBegin(GL_POINTS);
             {
-                glVertex2d(pnts[i][0], pnts[i][1]);
+                glVertex2f(pnts[i][0], pnts[i][1]);
             }
             glEnd();
         }
@@ -244,17 +239,21 @@ void display(void)
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();	//設置單位矩陣
-        glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0); //設置窗口座標系大小
+        //glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0); //設置窗口座標系大小, 若不設置, 預設為 (-1,1,-1,1,-1,1)
 
         glColor3f(1.0, 1.0, 0.0);   //設定顏色 Yellow
 
+        float cx = 0.0;
+        float cy = 0.0;
+        float r = 0.9;
+        float angle = 18;
         glBegin(GL_POLYGON);    //實心多邊形
         {
-            glVertex3f(0.25, 0.25, 0.0);
-            glVertex3f(0.75, 0.25, 0.0);
-            glVertex3f(0.75, 0.75, 0.0);
-            glVertex3f(0.5, 1.0, 0.0);
-            glVertex3f(0.25, 0.75, 0.0);
+            glVertex3f(cx + r * cos(PI * (angle + 0) / 180), cy + r * sin(PI * (angle + 0) / 180), 0.0);
+            glVertex3f(cx + r * cos(PI * (angle + 72) / 180), cy + r * sin(PI * (angle + 72) / 180), 0.0);
+            glVertex3f(cx + r * cos(PI * (angle + 144) / 180), cy + r * sin(PI * (angle + 144) / 180), 0.0);
+            glVertex3f(cx + r * cos(PI * (angle + 216) / 180), cy + r * sin(PI * (angle + 216) / 180), 0.0);
+            glVertex3f(cx + r * cos(PI * (angle + 288) / 180), cy + r * sin(PI * (angle + 288) / 180), 0.0);
         }
         glEnd();
     }
@@ -316,6 +315,10 @@ void display(void)
     {
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
+
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();	//設置單位矩陣
+        gluOrtho2D(-1, 1, -1, 1); //窗口座標範圍, 2D
 
         float x_st = -0.6;
         float y_st = -0.6;
