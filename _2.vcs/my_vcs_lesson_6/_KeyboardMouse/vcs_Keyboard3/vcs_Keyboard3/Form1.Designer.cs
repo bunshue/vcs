@@ -76,7 +76,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(705, 12);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(287, 478);
+            this.richTextBox1.Size = new System.Drawing.Size(479, 478);
             this.richTextBox1.TabIndex = 3;
             this.richTextBox1.Text = "";
             // 
@@ -482,7 +482,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1003, 497);
+            this.ClientSize = new System.Drawing.Size(1196, 497);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox_keyboard);
             this.Name = "Form1";

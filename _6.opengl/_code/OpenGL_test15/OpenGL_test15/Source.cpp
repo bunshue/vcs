@@ -4,110 +4,91 @@
 // 繪圖回調函數
 void display(void)
 {
-	glPushMatrix();		//這個 Matrix Push/Pop 好像沒什麼用??
+    glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
-	glClearColor(1.0, 0.0, 0.0, 1.0);	//使用紅色背景
-	glClear(GL_COLOR_BUFFER_BIT);
+    draw_boundary(color_y, 0.9f); //畫視窗邊界
 
-	// 設置當前的繪製顏色 , 4 個 unsigned byte 
-	// 每個顏色的分量占一個字節
-	// 參數數據是 R 紅色 G 綠色 B 藍色 A 透明度
-	// 下面設置的含義是白色, 繪製點的時候, 每次都使用白色繪製
-	glColor4ub(255, 255, 255, 255);	//設定顏色 White
+    //畫一個實心矩形
+    glColor3f(0.0, 1.0, 1.0);   //設定顏色 cc
+    float dd = 0.3f;
+    glRectf(-dd, -dd, dd, dd);  //實心矩形
 
-	draw_boundary(color_y, 0.9f); //畫視窗邊界
+    draw_teapot(color_r, 1, 0.3);   //畫一個茶壺
 
-	draw_coordinates(0.9f);
+    float x_st = -0.7f;
+    float y_st = 0.5f;
+    const char str1[30] = "Empty example";
+    draw_string1(str1, color_r, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
 
-	glLineWidth(4.0f);	//設定線寬
+    glFlush();  // 執行繪圖命令
+}
 
-	// 繪製線時, 會將從 glBegin 到 glEnd 之間的所有的點都繪製出來
-	// 可以調用 glVertex3f 方法 成對 設置多條線
-	// 注意必須成對設置 , 如果設置奇數個點 , 最後一個點會被丟棄
+// 窗口大小變化回調函數
+void reshape(int w, int h)
+{
+    glViewport(0, 0, w, h);
+}
 
-	glBegin(GL_LINES);	// 繪製線段開始
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
+{
+    switch (key)
+    {
+    case 27:
+    case 'q':
+    case 'Q':
+        //離開視窗
+        glutDestroyWindow(glutGetWindow());
+        return;
 
-	// glVertex3f (GLfloat x, GLfloat y, GLfloat z)
-	//畫直線, 每兩個點組成一條線
+    case '1':
+        printf("1\n");
+        break;
 
-	glVertex3f(0.0f, 0.0f, -1.0f);
-	glVertex3f(-1.0f, 0.0f, -1.0f);
+    case '2':
+        printf("2\n");
+        break;
 
-	glVertex3f(-0.8f, -0.8f, 0.0f);
-	glVertex3f(0.8f, 0.8f, 0.0f);
+    case '3':
+        break;
 
-	float xx = 0.0f;
-	float yy = 0.0f;
-	float dx = 0.0f;
-	float dy = 0.0f;
-	for (xx = -0.8f; xx <= 0.8f; xx += 0.1f)
-	{
-		dx = xx + 0.8f;
-		glVertex3f(-0.8f + dx, -0.8f, 0.0f);
-		dy = xx + 0.8f;
-		glVertex3f(-0.8f, 0.8f - dy, 0.0f);
-	}
-	glEnd();	// 繪製點結束
+    case '4':
+        break;
 
-	//兩個線段組合成一個閉合三角形
-	glBegin(GL_LINE_LOOP);	// 繪製線段開始
+    case '?':
+        break;
+    }
+}
 
-	glVertex3f(0.7f, 0.5f, 0.0f);
-	glVertex3f(0.7f, 0.1f, 0.0f);
+void mouse(int button, int state, int x, int y)
+{
+}
 
-	glVertex3f(0.7f, 0.1f, 0.0f);
-	glVertex3f(0.3f, 0.1f, 0.0f);
-
-	glEnd();	// 繪製點結束
-
-	//繪製彩色的線
-
-	glLineWidth(12.0f);	//設定線寬
-
-	glBegin(GL_LINE_LOOP);
-
-	// 繪製線 , 每兩個點組成一條線
-	glVertex3f(0.0f, -0.8f, 0.0f);
-
-	glColor4ub(0, 255, 0, 255);	//設定顏色 G, 用256制
-
-	glVertex3f(0.8f, -0.8f, 0.0f);
-
-	// 上面的設置會從 (0,0,-10) 座標向 (-5,0,-10) 座標繪製一條線
-
-	glColor4ub(0, 0, 255, 255);	//設定顏色 B, 用256制
-
-	//glVertex3f(-5.0f, 0.0f, -10.0f);
-	glVertex3f(0.8f, 0.3f, 0.0f);
-
-	glColor4ub(255, 255, 255, 255);//設定顏色 White
-
-	// 上面的設置會從 (-5,0,-10) 座標向 (-5,-2,-10) 座標繪製一條線
-
-	glEnd();	// 繪製點結束
-
-	glPopMatrix();
-
-	glFlush();  // 執行繪圖命令
+void motion(int x, int y)
+{
 }
 
 int main(int argc, char** argv)
 {
-	glutInit(&argc, argv);
-	
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    glutInit(&argc, argv);
 
-	glutInitWindowSize(600, 600);       // 設定視窗大小
-	glutInitWindowPosition(1100, 200);  // 設定視窗位置
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);    //宣告顯示模式為 Single Buffer 和 RGBA
 
-	glutCreateWindow("開啟視窗");	//開啟視窗 並顯示出視窗 Title
+    glutInitWindowSize(600, 600);       // 設定視窗大小
+    glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
-	glutDisplayFunc(display);	//設定callback function
-	glutKeyboardFunc(keyboard0);	//設定callback function
+    glutCreateWindow("OpenGL測試");	//開啟視窗 並顯示出視窗 Title
 
-	printf("僅顯示, 無控制, 按 Esc 離開\n");
+    glutDisplayFunc(display);   //設定callback function
+    glutReshapeFunc(reshape);   //設定callback function
+    glutKeyboardFunc(keyboard); //設定callback function
+    glutMouseFunc(mouse);       //設定callback function
+    glutMotionFunc(motion);     //設定callback function
 
-	glutMainLoop();	//開始主循環繪製
+    printf("僅顯示, 無控制, 按 Esc 離開\n");
+    printf("\n空白範例\n");
 
-	return 0;
+    glutMainLoop();	//開始主循環繪製
+
+    return 0;
 }
+

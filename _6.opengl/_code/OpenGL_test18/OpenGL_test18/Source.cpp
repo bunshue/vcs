@@ -4,81 +4,91 @@
 // 繪圖回調函數
 void display(void)
 {
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
-    // 設置當前的繪製顏色 , 4 個 unsigned byte 
-    // 每個顏色的分量占一個字節
-    // 參數數據是 R 紅色 G 綠色 B 藍色 A 透明度
-    // 下面設置的含義是白色, 繪製點的時候, 每次都使用白色繪製
-    glColor4ub(255, 255, 255, 255);
+    draw_boundary(color_y, 0.9f); //畫視窗邊界
 
-    glPointSize(5.0f); 	//設定點的大小, N X N
+    //畫一個實心矩形
+    glColor3f(0.0, 1.0, 1.0);   //設定顏色 cc
+    float dd = 0.3f;
+    glRectf(-dd, -dd, dd, dd);  //實心矩形
 
-    glLineWidth(5.0f);	//設定線寬
+    draw_teapot(color_r, 1, 0.3);   //畫一個茶壺
 
-    // 繪製三角形
-    glBegin(GL_TRIANGLES);
+    float x_st = -0.7f;
+    float y_st = 0.5f;
+    const char str1[30] = "Empty example";
+    draw_string1(str1, color_r, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
 
-    glNormal3f(0.0f, -1.0f, 0.0f);	//設置法線
-    glColor4ub(255, 0, 0, 255);     //R
-    glVertex3f(-1.0f, -0.9f, -2.0f);    //左下
-
-    glNormal3f(0.0f, 1.0f, 0.0f);	//設置法線
-    glColor4ub(0, 255, 0, 255);     //G
-    glVertex3f(1.0f, -0.9f, -2.0f); //右下
-
-    glNormal3f(0.0f, 1.0f, 0.0f);	//設置法線
-    glColor4ub(0, 0, 255, 255);     //B
-    glVertex3f(0.0f, 2.5f, -10.0f); //上
-
-    // 繪製三角形結束
-    glEnd();
-
-    // 矩陣出棧 
-    //glPopMatrix();
-
-    glFlush();  //強制刷新緩存區
+    glFlush();  // 執行繪圖命令
 }
 
 // 窗口大小變化回調函數
 void reshape(int w, int h)
 {
-    glClearColor(1.0, 0.0, 0.0, 1.0);   //設置背景顏色 R
+    glViewport(0, 0, w, h);
+}
 
-// 矩陣環境初始化 , 主要是投影矩陣和模型矩陣 
-// ( 選中投影矩陣 ) 設置矩陣模式 , 告知 GPU 當前要操作的矩陣是投影矩陣
-    glMatrixMode(GL_PROJECTION);
-    // ( 給投影矩陣設置值 ) 向投影矩陣設置參數
-    // 參數一 : 50.0f 是攝像機的視口角度
-    // 參數二 : 800.0f / 600.0f 是窗口的寬高比
-    // 參數三 : 0.1f , 可視的最近的距離
-    // 參數四 : 1000.0f , 可視的最遠距離
-    gluPerspective(50.0f, 800.0f / 600.0f, 0.1f, 1000.0f);
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
+{
+    switch (key)
+    {
+    case 27:
+    case 'q':
+    case 'Q':
+        //離開視窗
+        glutDestroyWindow(glutGetWindow());
+        return;
 
-    // 上述設置好了攝像機的參數 , 具體的攝像機能看什么東西 , 就需要模型視圖矩陣設置
+    case '1':
+        printf("1\n");
+        break;
 
-    // ( 選中模型矩陣 )
-    glMatrixMode(GL_MODELVIEW);
-    // ( 設置模型矩陣值 ) , 這里設置的是單位矩陣
-    glLoadIdentity();   //設置單位矩陣
+    case '2':
+        printf("2\n");
+        break;
+
+    case '3':
+        break;
+
+    case '4':
+        break;
+
+    case '?':
+        break;
+    }
+}
+
+void mouse(int button, int state, int x, int y)
+{
+}
+
+void motion(int x, int y)
+{
 }
 
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
 
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);    //宣告顯示模式為 Single Buffer 和 RGBA
 
     glutInitWindowSize(600, 600);       // 設定視窗大小
     glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
-    glutCreateWindow("開啟視窗");	//開啟視窗 並顯示出視窗 Title
+    glutCreateWindow("OpenGL測試");	//開啟視窗 並顯示出視窗 Title
 
-    glutDisplayFunc(display);	//設定callback function
-    glutReshapeFunc(reshape);	//設定callback function
-    glutKeyboardFunc(keyboard0);	//設定callback function
+    glutDisplayFunc(display);   //設定callback function
+    glutReshapeFunc(reshape);   //設定callback function
+    glutKeyboardFunc(keyboard); //設定callback function
+    glutMouseFunc(mouse);       //設定callback function
+    glutMotionFunc(motion);     //設定callback function
+
+    printf("僅顯示, 無控制, 按 Esc 離開\n");
+    printf("\n空白範例\n");
 
     glutMainLoop();	//開始主循環繪製
 
     return 0;
 }
+

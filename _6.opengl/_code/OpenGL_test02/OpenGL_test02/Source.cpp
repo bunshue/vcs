@@ -30,6 +30,42 @@ void display(void)
     else if (display_mode == 2)
     {
         //display_mode = 2
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        // 設置當前的繪製顏色 , 4 個 unsigned byte 
+        // 每個顏色的分量占一個字節
+        // 參數數據是 R 紅色 G 綠色 B 藍色 A 透明度
+        // 下面設置的含義是白色, 繪製點的時候, 每次都使用白色繪製
+        glColor4ub(255, 255, 255, 255);
+
+        glPointSize(5.0f); 	//設定點的大小, N X N
+
+        glLineWidth(5.0f);	//設定線寬
+
+        float dd = 0.6f;
+        // 繪製三角形
+        glBegin(GL_TRIANGLES);
+
+        glNormal3f(0.0f, -1.0f, 0.0f);	//設置法線
+        glColor4ub(255, 0, 0, 255);     //R
+        glVertex3f(-dd, -dd, 0);    //左下
+
+        glNormal3f(0.0f, 1.0f, 0.0f);	//設置法線
+        glColor4ub(0, 255, 0, 255);     //G
+        glVertex3f(dd, -dd, 0); //右下
+
+        glNormal3f(0.0f, 1.0f, 0.0f);	//設置法線
+        glColor4ub(0, 0, 255, 255);     //B
+        glVertex3f(0.0f, dd, 0); //上
+
+        // 繪製三角形結束
+        glEnd();
+
+        // 矩陣出棧 
+        //glPopMatrix();
+
+        glFlush();  //強制刷新緩存區
+
     }
     else if (display_mode == 3)
     {

@@ -13,7 +13,12 @@ void display(void)
     float dd = 0.3f;
     glRectf(-dd, -dd, dd, dd);  //實心矩形
 
-    draw_teapot(color_r, 1, 0.3f);
+    draw_teapot(color_r, 1, 0.3);   //畫一個茶壺
+
+    float x_st = -0.7f;
+    float y_st = 0.5f;
+    const char str1[30] = "Empty example";
+    draw_string1(str1, color_r, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
 
     glFlush();  // 執行繪圖命令
 }
@@ -80,6 +85,7 @@ int main(int argc, char** argv)
     glutMotionFunc(motion);     //設定callback function
 
     printf("僅顯示, 無控制, 按 Esc 離開\n");
+    printf("\n空白範例\n");
 
     glutMainLoop();	//開始主循環繪製
 
