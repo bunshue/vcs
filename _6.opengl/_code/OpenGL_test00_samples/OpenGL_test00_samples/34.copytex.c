@@ -419,7 +419,7 @@ char* keyList[][2] = {
 	{NULL, NULL}
 };
 
-void Key(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
 	int i;
 
@@ -767,7 +767,7 @@ int main(int argc, char** argv)
 	Init();
 
 	glutReshapeFunc(Reshape);
-	glutKeyboardFunc(Key);
+	glutKeyboardFunc(keyboard);
 	glutSpecialFunc(special);
 	glutDisplayFunc(Draw);
 

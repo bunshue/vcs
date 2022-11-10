@@ -82,7 +82,7 @@ void reshape(int w, int h)
 	glLoadIdentity();	//設置單位矩陣
 }
 
-void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
 	switch (key)
 	{

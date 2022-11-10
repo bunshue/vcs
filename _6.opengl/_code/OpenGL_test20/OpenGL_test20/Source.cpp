@@ -45,7 +45,7 @@ void reshape(int w, int h)
 	gluLookAt(eyex, eyey, eyez, 0.0, 0.0, 0.0, upx, upy, upz);
 }
 
-void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
 	switch (key)
 	{

@@ -61,6 +61,7 @@ namespace vcs_Keyboard3
             lb_N.Location = new Point(x_st + dx * 5, y_st + dy * 2);
             lb_M.Location = new Point(x_st + dx * 6, y_st + dy * 2);
             lb_backspace.Location = new Point(x_st + dx * 7, y_st + dy * 2);
+            lb_clear.Location = new Point(x_st + dx * 7, y_st + dy * 3);
 
             x_st = 450;
             y_st = 30;
@@ -79,10 +80,10 @@ namespace vcs_Keyboard3
             groupBox_keyboard.Size = new Size(600, 220);
 
             lb_backspace.Click += new EventHandler(lb_backspace_Click);
+            lb_clear.Click += new EventHandler(lb_clear_Click);
             lb_OK.Click += new EventHandler(lb_OK_Click);
 
             setup_keyboard_keys(this.groupBox_keyboard.Controls);
-
         }
 
         void lb_Click(object sender, EventArgs e)
@@ -90,7 +91,6 @@ namespace vcs_Keyboard3
             Label l = (Label)sender;
             tb_input.Text += l.Name.Substring(3, 1);
             tb_input.SelectionStart = tb_input.Text.Length;
-
         }
 
         void lb_backspace_Click(object sender, EventArgs e)
@@ -100,6 +100,11 @@ namespace vcs_Keyboard3
             Label l = (Label)sender;
             tb_input.Text = tb_input.Text.Substring(0, tb_input.Text.Length - 1);
             tb_input.SelectionStart = tb_input.Text.Length;
+        }
+
+        void lb_clear_Click(object sender, EventArgs e)
+        {
+            tb_input.Clear();
         }
 
         void lb_OK_Click(object sender, EventArgs e)
@@ -121,7 +126,7 @@ namespace vcs_Keyboard3
                     //改 backcolor.size.text font alignment...
                     //((Label)c).Size = new Size(((Label)c).Size.Width / 2, ((Label)c).Size.Height / 2);    //設定大小
                     ((Label)c).BackColor = Color.Lime;
-                    ((Label)c).Font = new Font("標楷體", 14, FontStyle.Bold);  //建立字體對象
+                    ((Label)c).Font = new Font("標楷體", 18, FontStyle.Bold);  //建立字體對象
                     ((Label)c).TextAlign = ContentAlignment.MiddleCenter;
 
                     if (((Label)c).Name.Length == 4)
@@ -130,10 +135,30 @@ namespace vcs_Keyboard3
                         ((Label)c).Click += new EventHandler(lb_Click);
                     }
 
+                    //richTextBox1.Text += ((Label)c).Name + "\t" + ((Label)c).Name.Length.ToString() + "\n";
+
+                    //lb_backspace	12
+                    if (((Label)c).Name.Length == 12)
+                    {
+                        ((Label)c).Font = new Font("標楷體", 8, FontStyle.Bold);  //建立字體對象
+                    }
+
+                    //lb_OK	5
+                    if (((Label)c).Name.Length == 5)
+                    {
+                        ((Label)c).Font = new Font("標楷體", 18, FontStyle.Bold);  //建立字體對象
+                    }
+
+                    //lb_clear	8
+                    if (((Label)c).Name.Length == 8)
+                    {
+                        ((Label)c).Font = new Font("標楷體", 14, FontStyle.Bold);  //建立字體對象
+                    }
+
+
                 }
                 //richTextBox1.Text += "\n";
             }
         }
-
     }
 }

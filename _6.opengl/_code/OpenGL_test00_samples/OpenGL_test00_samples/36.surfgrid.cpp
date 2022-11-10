@@ -488,7 +488,7 @@ void menu(int item)
     }
 }
 
-void key(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
     menu((int)key);
 }
@@ -549,7 +549,7 @@ int main(int argc, char** argv)
     glutAddMenuEntry("<esc>: exit program", 27);
     glutAttachMenu(GLUT_RIGHT_BUTTON);
 
-    glutKeyboardFunc(key);
+    glutKeyboardFunc(keyboard);
     glutDisplayFunc(redraw);
     glutReshapeFunc(reshape);
     glutMouseFunc(button);

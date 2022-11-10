@@ -58,7 +58,7 @@ void draw_quad(float* color, float width, float x1, float y1, float x2, float y2
 void draw_quad_s(float* color, float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4);
 
 void reshape0(int w, int h);
-void keyboard0(unsigned char key, int x, int y);
+void keyboard0(unsigned char key, int /*x*/, int /*y*/);
 void mouse0(int button, int state, int x, int y);
 void motion0(int x, int y);
 

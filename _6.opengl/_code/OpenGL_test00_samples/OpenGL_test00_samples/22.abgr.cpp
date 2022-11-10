@@ -73,7 +73,7 @@ void reshape(int width, int height)
     glMatrixMode(GL_MODELVIEW);
 }
 
-void Key(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
     switch (key)
     {
@@ -188,7 +188,7 @@ int main(int argc, char** argv)
 
     glutDisplayFunc(Draw);
     glutReshapeFunc(reshape);
-    glutKeyboardFunc(Key);
+    glutKeyboardFunc(keyboard);
 
     glutMainLoop();	//開始主循環繪製
 

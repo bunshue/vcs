@@ -69,6 +69,7 @@
             this.lb_5 = new System.Windows.Forms.Label();
             this.lb_4 = new System.Windows.Forms.Label();
             this.lb_2 = new System.Windows.Forms.Label();
+            this.lb_clear = new System.Windows.Forms.Label();
             this.groupBox_keyboard.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -83,6 +84,7 @@
             // groupBox_keyboard
             // 
             this.groupBox_keyboard.BackColor = System.Drawing.Color.Pink;
+            this.groupBox_keyboard.Controls.Add(this.lb_clear);
             this.groupBox_keyboard.Controls.Add(this.tb_input);
             this.groupBox_keyboard.Controls.Add(this.lb_OK);
             this.groupBox_keyboard.Controls.Add(this.lb_G);
@@ -133,7 +135,7 @@
             this.tb_input.Font = new System.Drawing.Font("新細明體", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.tb_input.Location = new System.Drawing.Point(8, 163);
             this.tb_input.Name = "tb_input";
-            this.tb_input.Size = new System.Drawing.Size(257, 36);
+            this.tb_input.Size = new System.Drawing.Size(300, 36);
             this.tb_input.TabIndex = 2;
             // 
             // lb_OK
@@ -478,6 +480,15 @@
             this.lb_2.TabIndex = 39;
             this.lb_2.Text = "2";
             // 
+            // lb_clear
+            // 
+            this.lb_clear.BackColor = System.Drawing.SystemColors.Control;
+            this.lb_clear.Location = new System.Drawing.Point(343, 163);
+            this.lb_clear.Name = "lb_clear";
+            this.lb_clear.Size = new System.Drawing.Size(70, 35);
+            this.lb_clear.TabIndex = 76;
+            this.lb_clear.Text = "Clear";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -537,6 +548,7 @@
         private System.Windows.Forms.Label lb_5;
         private System.Windows.Forms.Label lb_4;
         private System.Windows.Forms.Label lb_2;
+        private System.Windows.Forms.Label lb_clear;
     }
 }
 
