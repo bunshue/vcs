@@ -8,19 +8,23 @@ void display(void)
 {
     if (display_mode == 0)
     {
-        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
-        //or
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
-        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
+        printf("無畫面, TBD, display_mode = %d\n", display_mode);
 
-        //設定預設大小...
+        //設定預設大小...  TBD
     }
     else if (display_mode == 1)
     {
         //display_mode = 1
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
+        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
+        //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();	//設置單位矩陣
+        gluOrtho2D(-1, 1, -1, 1); //窗口座標範圍, 2D
 
         //畫實心矩形
         glColor3f(1.0f, 1.0f, 0.0f);    //設定顏色 Yellow
@@ -30,7 +34,13 @@ void display(void)
     else if (display_mode == 2)
     {
         //display_mode = 2
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
+        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
+        //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();	//設置單位矩陣
+        gluOrtho2D(-1, 1, -1, 1); //窗口座標範圍, 2D
 
         // 設置當前的繪製顏色 , 4 個 unsigned byte 
         // 每個顏色的分量占一個字節
@@ -186,8 +196,8 @@ void display(void)
         printf("XXXXXXXXXXXXXXXXXXXXX\n");
     }
 
-    glFlush();      //執行繪圖命令
-    glutSwapBuffers();
+    glFlush();  //強制刷新緩存區
+    glutSwapBuffers();  // 將後緩沖區繪製到前臺
 }
 
 // 窗口大小變化回調函數
@@ -208,9 +218,6 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
     switch (key)
     {
     case 27:
-    case 'q':
-    case 'Q':
-        //離開視窗
         glutDestroyWindow(glutGetWindow());
         return;
     case '0':
@@ -246,14 +253,12 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
 
     }
     glutPostRedisplay();    //將當前視窗打上標記，標記其需要再次顯示。
-}
 
-void mouse(int button, int state, int x, int y)
-{
-}
+    char info[10];
+    //sprintf(info, "%d", (char)display_mode);  //過時, x64不能用
+    sprintf_s(info, 10, "%d", display_mode);
 
-void motion(int x, int y)
-{
+    glutSetWindowTitle(info);
 }
 
 int main(int argc, char** argv)
@@ -270,8 +275,8 @@ int main(int argc, char** argv)
     glutDisplayFunc(display);	//設定callback function
     glutReshapeFunc(reshape0);	//設定callback function
     glutKeyboardFunc(keyboard);	//設定callback function
-    glutMouseFunc(mouse);		//設定callback function
-    glutMotionFunc(motion);		//設定callback function
+    glutMouseFunc(mouse0);		//設定callback function
+    glutMotionFunc(motion0);    //設定callback function
 
     glutMainLoop();	//開始主循環繪製
 

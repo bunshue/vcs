@@ -169,7 +169,7 @@ void display(void)
     glVertex2f(x_st, y_st + dd * 4);  //正上
     glEnd();
 
-    x_st = -1.2;
+    x_st = -1.2f;
     y_st = 0;
     const char str[30] = "Write Something";
     draw_string1(str, color_g, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
