@@ -23,6 +23,19 @@ namespace vcs_Keyboard3
 
         void setup_keyboard()
         {
+            groupBox_keyboard.Size = new Size(600, 220);
+            groupBox_keyboard.BackColor = Color.Pink;
+            groupBox_keyboard.Text = "";
+
+            lb_backspace.Click += new EventHandler(lb_backspace_Click);
+            lb_clear.Click += new EventHandler(lb_clear_Click);
+            lb_OK.Click += new EventHandler(lb_OK_Click);
+
+            setup_keyboard_keys(this.groupBox_keyboard.Controls);
+        }
+
+        public void setup_keyboard_keys(Control.ControlCollection cc)
+        {
             int x_st = 20;
             int y_st = 30;
             int w = 35;
@@ -40,6 +53,7 @@ namespace vcs_Keyboard3
             lb_O.Location = new Point(x_st + dx * 8, y_st + dy * 0);
             lb_P.Location = new Point(x_st + dx * 9, y_st + dy * 0);
             tb_input.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            tb_input.Size = new Size(300, 36);
 
             x_st += 20;
             lb_A.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -77,54 +91,16 @@ namespace vcs_Keyboard3
             lb_0.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             lb_OK.Location = new Point(x_st + dx * 1, y_st + dy * 3);
 
-            groupBox_keyboard.Size = new Size(600, 220);
-
-            lb_backspace.Click += new EventHandler(lb_backspace_Click);
-            lb_clear.Click += new EventHandler(lb_clear_Click);
-            lb_OK.Click += new EventHandler(lb_OK_Click);
-
-            setup_keyboard_keys(this.groupBox_keyboard.Controls);
-        }
-
-        void lb_Click(object sender, EventArgs e)
-        {
-            Label l = (Label)sender;
-            tb_input.Text += l.Name.Substring(3, 1);
-            tb_input.SelectionStart = tb_input.Text.Length;
-        }
-
-        void lb_backspace_Click(object sender, EventArgs e)
-        {
-            if (tb_input.Text.Length <= 0)
-                return;
-            Label l = (Label)sender;
-            tb_input.Text = tb_input.Text.Substring(0, tb_input.Text.Length - 1);
-            tb_input.SelectionStart = tb_input.Text.Length;
-        }
-
-        void lb_clear_Click(object sender, EventArgs e)
-        {
-            tb_input.Clear();
-        }
-
-        void lb_OK_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "你輸入了 : " + tb_input.Text.ToString() + "\n";
-            tb_input.Text = "";
-        }
-
-        public void setup_keyboard_keys(Control.ControlCollection cc)
-        {
             foreach (Control c in cc)  //撈出所有控件
             {
                 //richTextBox1.Text += c.GetType().Name;
 
-                if (c.GetType().Name == "Label")   //判斷是否為 Button 控件
+                if (c.GetType().Name == "Label")   //判斷是否為 Label 控件
                 {
                     //richTextBox1.Text += "\t" + ((Label)c).Name + "\t" + ((Label)c).Text + "\t" + ((Label)c).Size.Width.ToString() + " X " + ((Label)c).Size.Height.ToString();
 
                     //改 backcolor.size.text font alignment...
-                    //((Label)c).Size = new Size(((Label)c).Size.Width / 2, ((Label)c).Size.Height / 2);    //設定大小
+                    ((Label)c).Size = new Size(w, h);  //設定大小
                     ((Label)c).BackColor = Color.Lime;
                     ((Label)c).Font = new Font("標楷體", 18, FontStyle.Bold);  //建立字體對象
                     ((Label)c).TextAlign = ContentAlignment.MiddleCenter;
@@ -141,24 +117,56 @@ namespace vcs_Keyboard3
                     if (((Label)c).Name.Length == 12)
                     {
                         ((Label)c).Font = new Font("標楷體", 8, FontStyle.Bold);  //建立字體對象
+                        ((Label)c).Size = new Size(w * 2 + 5, h);  //設定大小
+                        ((Label)c).Text = "Backspace";
                     }
 
                     //lb_OK	5
                     if (((Label)c).Name.Length == 5)
                     {
                         ((Label)c).Font = new Font("標楷體", 18, FontStyle.Bold);  //建立字體對象
+                        ((Label)c).Size = new Size(w * 2 + 5, h);  //設定大小
+                        ((Label)c).Text = "OK";
                     }
 
                     //lb_clear	8
                     if (((Label)c).Name.Length == 8)
                     {
                         ((Label)c).Font = new Font("標楷體", 14, FontStyle.Bold);  //建立字體對象
+                        ((Label)c).Size = new Size(w * 2 + 5, h);  //設定大小
+                        ((Label)c).Text = "Clear";
                     }
 
 
                 }
                 //richTextBox1.Text += "\n";
             }
+        }
+
+        void lb_Click(object sender, EventArgs e)
+        {
+            Label lb = (Label)sender;
+            tb_input.Text += lb.Name.Substring(3, 1);
+            tb_input.SelectionStart = tb_input.Text.Length;
+        }
+
+        void lb_backspace_Click(object sender, EventArgs e)
+        {
+            if (tb_input.Text.Length <= 0)
+                return;
+            tb_input.Text = tb_input.Text.Substring(0, tb_input.Text.Length - 1);
+            tb_input.SelectionStart = tb_input.Text.Length;
+        }
+
+        void lb_clear_Click(object sender, EventArgs e)
+        {
+            tb_input.Clear();
+        }
+
+        void lb_OK_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "你輸入了 : " + tb_input.Text.ToString() + "\n";
+            tb_input.Text = "";
         }
     }
 }

@@ -247,7 +247,7 @@ namespace vcs_Keyboard4
 
                     //richTextBox1.Text += ((Button)c).Name + "\t" + ((Button)c).Name.Length.ToString() + "\n";
 
-                    //lb_backspace	12
+                    //bt_backspace	12
                     if (((Button)c).Name.Length == 12)
                     {
                         ((Button)c).Font = new Font("標楷體", 8, FontStyle.Bold);  //建立字體對象
@@ -255,7 +255,7 @@ namespace vcs_Keyboard4
                         ((Button)c).Text = "Backspace";
                     }
 
-                    //lb_OK	5
+                    //bt_OK	5
                     if (((Button)c).Name.Length == 5)
                     {
                         ((Button)c).Font = new Font("標楷體", 18, FontStyle.Bold);  //建立字體對象
@@ -263,7 +263,7 @@ namespace vcs_Keyboard4
                         ((Button)c).Text = "OK";
                     }
 
-                    //lb_clear	8
+                    //bt_clear	8
                     if (((Button)c).Name.Length == 8)
                     {
                         ((Button)c).Font = new Font("標楷體", 14, FontStyle.Bold);  //建立字體對象
@@ -279,7 +279,6 @@ namespace vcs_Keyboard4
 
         private void btn_Click(object sender, EventArgs e)
         {
-            //richTextBox1.Text += "你按了 : " + ((Button)sender).Name + "\n";
             Button bt = (Button)sender;
             tb_input.Text += bt.Name.Substring(3, 1);
             tb_input.SelectionStart = tb_input.Text.Length;
@@ -290,7 +289,6 @@ namespace vcs_Keyboard4
         {
             if (tb_input.Text.Length <= 0)
                 return;
-            Button bt = (Button)sender;
             tb_input.Text = tb_input.Text.Substring(0, tb_input.Text.Length - 1);
             tb_input.SelectionStart = tb_input.Text.Length;
         }

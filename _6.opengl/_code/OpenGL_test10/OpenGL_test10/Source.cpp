@@ -58,7 +58,7 @@ void display(void)
 	eyez = -x * sin(-y_angle * PI / 180.0) + z * cos(-y_angle * PI / 180.0);
 	gluLookAt(eyex, eyey, eyez, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 
-	draw_coordinates(2.0);
+	draw_coordinates(2.0);	//畫座標軸
 
 	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
 	//glTranslatef(-1.0f, 0.0f, 0.0f);	//平移至指定地方(累積)
@@ -68,6 +68,12 @@ void display(void)
 	glPopMatrix();
 
 	glFlush();  // 執行繪圖命令
+
+	//顯示資訊
+	char info[20];
+	sprintf_s(info, 20, "(%3.1f,   %3.1f)", x_angle, y_angle);
+
+	glutSetWindowTitle(info);
 }
 
 void keyboard(unsigned char key, int /*x*/, int /*y*/)
@@ -121,6 +127,7 @@ void motion(int x, int y)
 	mx = x;
 	my = y;
 
+	//printf("M(%d, %d) ", mx, my);
 	glutPostRedisplay();
 }
 
