@@ -59,16 +59,15 @@ namespace vcs_Keyboard2
         void label44_Click(object sender, EventArgs e)
         {
             Label l = (Label)sender;
-            textBox1.Text = textBox1.Text.Substring(0,textBox1.Text.Length-1);
+            textBox1.Text = textBox1.Text.Substring(0, textBox1.Text.Length - 1);
             textBox1.SelectionStart = textBox1.Text.Length;
         }
 
         void lbl_Click(object sender, EventArgs e)
         {
-            Label l = (Label)sender;          
+            Label l = (Label)sender;
             textBox1.Text += l.Name.Substring(4, 1);
             textBox1.SelectionStart = textBox1.Text.Length;
-           
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -77,3 +76,4 @@ namespace vcs_Keyboard2
         }
     }
 }
+

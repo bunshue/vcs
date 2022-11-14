@@ -12,6 +12,10 @@ namespace vcs_Keyboard
     {
         Label[] labelList = new Label[27]; // A ~ Z和空白鍵
 
+        Color groupBox_keyboard_backcolor = Color.LightSalmon;
+        Color key_color = Color.Pink;
+        Color key_press_color = Color.Red;
+
         public Form1()
         {
             InitializeComponent();
@@ -19,6 +23,16 @@ namespace vcs_Keyboard
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            setup_keyboard();
+        }
+
+        void setup_keyboard()
+        {
+            groupBox_keyboard.Location = new Point(10, 10);
+            groupBox_keyboard.Size = new Size(600, 220);
+            groupBox_keyboard.BackColor = groupBox_keyboard_backcolor;
+            groupBox_keyboard.Text = "";
+
             // 在27個按鍵的 Tag 放入 代表的 KeyCode
             label1.Tag = Keys.Q; label2.Tag = Keys.W; label3.Tag = Keys.E;
             label4.Tag = Keys.R; label5.Tag = Keys.T; label6.Tag = Keys.Y;
@@ -51,7 +65,7 @@ namespace vcs_Keyboard
             {
                 if (e.KeyCode == (Keys)labelList[i].Tag)
                 {
-                    labelList[i].BackColor = Color.Red; // 將被按下的按鍵 變為紅色
+                    labelList[i].BackColor = key_press_color; // 將被按下的按鍵 變為紅色
                 }
             }
             if (e.KeyCode == Keys.Return)
@@ -75,10 +89,11 @@ namespace vcs_Keyboard
             {
                 if (e.KeyCode == (Keys)labelList[i].Tag)
                 {
-                    labelList[i].BackColor = Color.Pink; // 將被放開的按鍵 變為粉紅色
+                    labelList[i].BackColor = key_color; // 將被放開的按鍵 變為粉紅色
                 }
             }
         }
     }
 }
+
 

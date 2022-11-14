@@ -11,6 +11,10 @@ namespace vcs_Keyboard4
 {
     public partial class Form1 : Form
     {
+        Color groupBox_keyboard_backcolor = Color.LightSalmon;
+        Color key_color = Color.Lime;
+        Color key_press_color = Color.Green;
+
         GroupBox groupBox_keyboard = new GroupBox();
 
         Button bt_A = new Button();
@@ -66,8 +70,9 @@ namespace vcs_Keyboard4
 
         void setup_keyboard()
         {
+            groupBox_keyboard.Location = new Point(10, 10);
             groupBox_keyboard.Size = new Size(600, 220);
-            groupBox_keyboard.BackColor = Color.Pink;
+            groupBox_keyboard.BackColor = groupBox_keyboard_backcolor;
             groupBox_keyboard.Text = "";
             this.Controls.Add(groupBox_keyboard);
 
@@ -114,9 +119,15 @@ namespace vcs_Keyboard4
             bt_backspace.Name = "bt_backspace";
             bt_clear.Name = "bt_clear";
             bt_OK.Name = "bt_OK";
-            bt_backspace.Click += new EventHandler(bt_backspace_Click);
-            bt_clear.Click += new EventHandler(bt_clear_Click);
-            bt_OK.Click += new EventHandler(bt_OK_Click);
+
+            bt_backspace.MouseDown += new MouseEventHandler(bt_backspace_MouseDown);
+            bt_backspace.MouseUp += new MouseEventHandler(bt_backspace_MouseUp);
+
+            bt_clear.MouseDown += new MouseEventHandler(bt_clear_MouseDown);
+            bt_clear.MouseUp += new MouseEventHandler(bt_clear_MouseUp);
+
+            bt_OK.MouseDown += new MouseEventHandler(bt_OK_MouseDown);
+            bt_OK.MouseUp += new MouseEventHandler(bt_OK_MouseUp);
 
             this.groupBox_keyboard.Controls.Add(bt_A);
             this.groupBox_keyboard.Controls.Add(bt_B);
@@ -128,7 +139,6 @@ namespace vcs_Keyboard4
             this.groupBox_keyboard.Controls.Add(bt_H);
             this.groupBox_keyboard.Controls.Add(bt_I);
             this.groupBox_keyboard.Controls.Add(bt_J);
-
 
             this.groupBox_keyboard.Controls.Add(bt_K);
             this.groupBox_keyboard.Controls.Add(bt_L);
@@ -234,7 +244,7 @@ namespace vcs_Keyboard4
 
                     //改 backcolor.size.text font alignment...
                     ((Button)c).Size = new Size(w, h);  //設定大小
-                    ((Button)c).BackColor = Color.Lime;
+                    ((Button)c).BackColor = key_color;
                     ((Button)c).Font = new Font("標楷體", 18, FontStyle.Bold);  //建立字體對象
                     ((Button)c).TextAlign = ContentAlignment.MiddleCenter;
 
@@ -242,7 +252,9 @@ namespace vcs_Keyboard4
                     {
                         //richTextBox1.Text += ((Button)c).Name + "\n";
                         ((Button)c).Text = ((Button)c).Name[3].ToString();
-                        ((Button)c).Click += new EventHandler(btn_Click);
+                        //((Button)c).Click += new EventHandler(btn_Click);
+                        ((Button)c).MouseDown += new MouseEventHandler(bt_MouseDown);
+                        ((Button)c).MouseUp += new MouseEventHandler(bt_MouseUp);
                     }
 
                     //richTextBox1.Text += ((Button)c).Name + "\t" + ((Button)c).Name.Length.ToString() + "\n";
@@ -270,38 +282,70 @@ namespace vcs_Keyboard4
                         ((Button)c).Size = new Size(w * 2 + 5, h);  //設定大小
                         ((Button)c).Text = "Clear";
                     }
-
-
                 }
                 //richTextBox1.Text += "\n";
             }
         }
 
-        private void btn_Click(object sender, EventArgs e)
+        void bt_backspace_MouseDown(object sender, MouseEventArgs e)
         {
-            Button bt = (Button)sender;
-            tb_input.Text += bt.Name.Substring(3, 1);
-            tb_input.SelectionStart = tb_input.Text.Length;
+            bt_backspace.BackColor = key_press_color;
 
-        }
-
-        private void bt_backspace_Click(object sender, EventArgs e)
-        {
             if (tb_input.Text.Length <= 0)
                 return;
             tb_input.Text = tb_input.Text.Substring(0, tb_input.Text.Length - 1);
             tb_input.SelectionStart = tb_input.Text.Length;
         }
 
-        private void bt_clear_Click(object sender, EventArgs e)
+        void bt_backspace_MouseUp(object sender, MouseEventArgs e)
         {
+            bt_backspace.BackColor = key_color;
+        }
+
+        void bt_clear_MouseDown(object sender, MouseEventArgs e)
+        {
+            bt_clear.BackColor = key_press_color;
             tb_input.Clear();
         }
 
-        private void bt_OK_Click(object sender, EventArgs e)
+        void bt_clear_MouseUp(object sender, MouseEventArgs e)
         {
-            richTextBox1.Text += "你輸入了 : " + tb_input.Text.ToString() + "\n";
+            bt_clear.BackColor = key_color;
+        }
+
+        void bt_OK_MouseDown(object sender, MouseEventArgs e)
+        {
+            bt_OK.BackColor = key_press_color;
+
+            if (tb_input.Text.Length <= 0)
+            {
+                richTextBox1.Text += "未輸入資料\n";
+            }
+            else
+            {
+                richTextBox1.Text += "你輸入了 : " + tb_input.Text.ToString() + "\n";
+            }
             tb_input.Text = "";
+        }
+
+        void bt_OK_MouseUp(object sender, MouseEventArgs e)
+        {
+            bt_OK.BackColor = key_color;
+        }
+
+        void bt_MouseDown(object sender, MouseEventArgs e)
+        {
+            Button bt = (Button)sender;
+            tb_input.Text += bt.Name.Substring(3, 1);
+            tb_input.SelectionStart = tb_input.Text.Length;
+
+            bt.BackColor = key_press_color;
+        }
+
+        void bt_MouseUp(object sender, MouseEventArgs e)
+        {
+            Button bt = (Button)sender;
+            bt.BackColor = key_color;
         }
     }
 }

@@ -11,6 +11,10 @@ namespace vcs_Keyboard3
 {
     public partial class Form1 : Form
     {
+        Color groupBox_keyboard_backcolor = Color.LightSalmon;
+        Color key_color = Color.Lime;
+        Color key_press_color = Color.Green;
+
         public Form1()
         {
             InitializeComponent();
@@ -23,13 +27,19 @@ namespace vcs_Keyboard3
 
         void setup_keyboard()
         {
+            groupBox_keyboard.Location = new Point(10, 10);
             groupBox_keyboard.Size = new Size(600, 220);
-            groupBox_keyboard.BackColor = Color.Pink;
+            groupBox_keyboard.BackColor = groupBox_keyboard_backcolor;
             groupBox_keyboard.Text = "";
 
-            lb_backspace.Click += new EventHandler(lb_backspace_Click);
-            lb_clear.Click += new EventHandler(lb_clear_Click);
-            lb_OK.Click += new EventHandler(lb_OK_Click);
+            lb_backspace.MouseDown += new MouseEventHandler(lb_backspace_MouseDown);
+            lb_backspace.MouseUp += new MouseEventHandler(lb_backspace_MouseUp);
+
+            lb_clear.MouseDown += new MouseEventHandler(lb_clear_MouseDown);
+            lb_clear.MouseUp += new MouseEventHandler(lb_clear_MouseUp);
+
+            lb_OK.MouseDown += new MouseEventHandler(lb_OK_MouseDown);
+            lb_OK.MouseUp += new MouseEventHandler(lb_OK_MouseUp);
 
             setup_keyboard_keys(this.groupBox_keyboard.Controls);
         }
@@ -101,14 +111,15 @@ namespace vcs_Keyboard3
 
                     //改 backcolor.size.text font alignment...
                     ((Label)c).Size = new Size(w, h);  //設定大小
-                    ((Label)c).BackColor = Color.Lime;
+                    ((Label)c).BackColor = key_color;
                     ((Label)c).Font = new Font("標楷體", 18, FontStyle.Bold);  //建立字體對象
                     ((Label)c).TextAlign = ContentAlignment.MiddleCenter;
 
                     if (((Label)c).Name.Length == 4)
                     {
                         //richTextBox1.Text += ((Label)c).Name + "\n";
-                        ((Label)c).Click += new EventHandler(lb_Click);
+                        ((Label)c).MouseDown += new MouseEventHandler(lb_MouseDown);
+                        ((Label)c).MouseUp += new MouseEventHandler(lb_MouseUp);
                     }
 
                     //richTextBox1.Text += ((Label)c).Name + "\t" + ((Label)c).Name.Length.ToString() + "\n";
@@ -136,37 +147,70 @@ namespace vcs_Keyboard3
                         ((Label)c).Size = new Size(w * 2 + 5, h);  //設定大小
                         ((Label)c).Text = "Clear";
                     }
-
-
                 }
                 //richTextBox1.Text += "\n";
             }
         }
 
-        void lb_Click(object sender, EventArgs e)
+        void lb_backspace_MouseDown(object sender, MouseEventArgs e)
         {
-            Label lb = (Label)sender;
-            tb_input.Text += lb.Name.Substring(3, 1);
-            tb_input.SelectionStart = tb_input.Text.Length;
-        }
+            lb_backspace.BackColor = key_press_color;
 
-        void lb_backspace_Click(object sender, EventArgs e)
-        {
             if (tb_input.Text.Length <= 0)
                 return;
             tb_input.Text = tb_input.Text.Substring(0, tb_input.Text.Length - 1);
             tb_input.SelectionStart = tb_input.Text.Length;
         }
 
-        void lb_clear_Click(object sender, EventArgs e)
+        void lb_backspace_MouseUp(object sender, MouseEventArgs e)
         {
+            lb_backspace.BackColor = key_color;
+        }
+
+        void lb_clear_MouseDown(object sender, MouseEventArgs e)
+        {
+            lb_clear.BackColor = key_press_color;
             tb_input.Clear();
         }
 
-        void lb_OK_Click(object sender, EventArgs e)
+        void lb_clear_MouseUp(object sender, MouseEventArgs e)
         {
-            richTextBox1.Text += "你輸入了 : " + tb_input.Text.ToString() + "\n";
+            lb_clear.BackColor = key_color;
+        }
+
+        void lb_OK_MouseDown(object sender, MouseEventArgs e)
+        {
+            lb_OK.BackColor = key_press_color;
+
+            if (tb_input.Text.Length <= 0)
+            {
+                richTextBox1.Text += "未輸入資料\n";
+            }
+            else
+            {
+                richTextBox1.Text += "你輸入了 : " + tb_input.Text.ToString() + "\n";
+            }
             tb_input.Text = "";
+        }
+
+        void lb_OK_MouseUp(object sender, MouseEventArgs e)
+        {
+            lb_OK.BackColor = key_color;
+        }
+
+        void lb_MouseDown(object sender, MouseEventArgs e)
+        {
+            Label lb = (Label)sender;
+            tb_input.Text += lb.Name.Substring(3, 1);
+            tb_input.SelectionStart = tb_input.Text.Length;
+
+            lb.BackColor = key_press_color;
+        }
+
+        void lb_MouseUp(object sender, MouseEventArgs e)
+        {
+            Label lb = (Label)sender;
+            lb.BackColor = key_color;
         }
     }
 }

@@ -30,6 +30,7 @@
         {
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox_keyboard = new System.Windows.Forms.GroupBox();
+            this.lb_clear = new System.Windows.Forms.Label();
             this.tb_input = new System.Windows.Forms.TextBox();
             this.lb_OK = new System.Windows.Forms.Label();
             this.lb_G = new System.Windows.Forms.Label();
@@ -69,15 +70,14 @@
             this.lb_5 = new System.Windows.Forms.Label();
             this.lb_4 = new System.Windows.Forms.Label();
             this.lb_2 = new System.Windows.Forms.Label();
-            this.lb_clear = new System.Windows.Forms.Label();
             this.groupBox_keyboard.SuspendLayout();
             this.SuspendLayout();
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(705, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(700, 10);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(479, 478);
+            this.richTextBox1.Size = new System.Drawing.Size(500, 500);
             this.richTextBox1.TabIndex = 3;
             this.richTextBox1.Text = "";
             // 
@@ -124,11 +124,20 @@
             this.groupBox_keyboard.Controls.Add(this.lb_5);
             this.groupBox_keyboard.Controls.Add(this.lb_4);
             this.groupBox_keyboard.Controls.Add(this.lb_2);
-            this.groupBox_keyboard.Location = new System.Drawing.Point(12, 12);
+            this.groupBox_keyboard.Location = new System.Drawing.Point(10, 10);
             this.groupBox_keyboard.Name = "groupBox_keyboard";
             this.groupBox_keyboard.Size = new System.Drawing.Size(687, 309);
             this.groupBox_keyboard.TabIndex = 2;
             this.groupBox_keyboard.TabStop = false;
+            // 
+            // lb_clear
+            // 
+            this.lb_clear.BackColor = System.Drawing.SystemColors.Control;
+            this.lb_clear.Location = new System.Drawing.Point(343, 163);
+            this.lb_clear.Name = "lb_clear";
+            this.lb_clear.Size = new System.Drawing.Size(70, 35);
+            this.lb_clear.TabIndex = 76;
+            this.lb_clear.Text = "Clear";
             // 
             // tb_input
             // 
@@ -480,20 +489,11 @@
             this.lb_2.TabIndex = 39;
             this.lb_2.Text = "2";
             // 
-            // lb_clear
-            // 
-            this.lb_clear.BackColor = System.Drawing.SystemColors.Control;
-            this.lb_clear.Location = new System.Drawing.Point(343, 163);
-            this.lb_clear.Name = "lb_clear";
-            this.lb_clear.Size = new System.Drawing.Size(70, 35);
-            this.lb_clear.TabIndex = 76;
-            this.lb_clear.Text = "Clear";
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1196, 497);
+            this.ClientSize = new System.Drawing.Size(1214, 521);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox_keyboard);
             this.Name = "Form1";

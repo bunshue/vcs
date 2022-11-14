@@ -73,9 +73,6 @@ void display(void)
 
         // 矩陣出棧 
         //glPopMatrix();
-
-        glFlush();  //強制刷新緩存區
-
     }
     else if (display_mode == 3)
     {
@@ -168,8 +165,6 @@ void display(void)
     else if (display_mode == 4)
     {
         //display_mode = 4
-
-
     }
     else if (display_mode == 5)
     {
