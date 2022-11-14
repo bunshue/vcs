@@ -45,7 +45,7 @@ void display(void)
 	glRotatef(x_angle, 1.0f, 0.0f, 0.0f);
 	glRotatef(y_angle, 0.0f, 1.0f, 0.0f);
 
-	draw_boundary(color_y, 0.9); //畫視窗邊界
+	draw_boundary(color_y, 0.9f); //畫視窗邊界
 
 	draw_coordinates(0.9f);	//畫座標軸
 

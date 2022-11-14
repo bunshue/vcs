@@ -27,7 +27,7 @@ void display(void)
 	glClearDepth(1.0);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	draw_boundary(color_y, 2.5); //畫視窗邊界
+	draw_boundary(color_y, 2.5f); //畫視窗邊界
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();	//設置單位矩陣

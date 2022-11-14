@@ -1,18 +1,14 @@
 ﻿//#include "../../../_code/Common.h"    //32 bits
 #include "../../Common.h"               //64 bits
 
-typedef struct _cRec {
-    float x, y;
-} cRec;
-
-cRec cList[50];
-int cCount = 0;
+Point pt[50];
+int pt_count = 0;
 
 void SetPoint(float x, float y)
 {
-    cList[cCount].x = x;
-    cList[cCount].y = y;
-    cCount++;
+    pt[pt_count].x = x;
+    pt[pt_count].y = y;
+    pt_count++;
 }
 
 void DrawPoint(void)
@@ -23,13 +19,13 @@ void DrawPoint(void)
 
     printf("Make some data\n");
 
-    cCount = 0;
+    pt_count = 0;
 
     float x;
     float y;
     for (i = 0; i < 50; i++)
     {
-        x = -1.0 + 2.0 * i / 50;
+        x = -1.0f + 2.0f * (float)i / 50;
         y = sin(x * 4) / 2;
         SetPoint(x, y);
     }
@@ -37,13 +33,13 @@ void DrawPoint(void)
     glColor3f(1.0, 0.0, 1.0);
     glPointSize(10.0f); 	//設定點的大小, N X N
     glBegin(GL_POINTS);
-    for (i = 0; i < cCount; i++)
+    for (i = 0; i < pt_count; i++)
     {
-        glVertex2f(cList[i].x, cList[i].y);
+        glVertex2f(pt[i].x, pt[i].y);
     }
     glEnd();
 
-    glFlush();
+    glFlush();  // 執行繪圖命令
 }
 
 // 繪圖回調函數
@@ -51,7 +47,7 @@ void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
-    draw_boundary(color_y, 0.9); //畫視窗邊界
+    draw_boundary(color_y, 0.9f); //畫視窗邊界
 
     DrawPoint();
 

@@ -14,6 +14,27 @@
 //#define max(a,b)	((a > b) ? a : b)
 //#define min(a,b)	((a < b) ? a : b)
 
+typedef struct _Point
+{
+    float x;
+	float y;
+} Point;
+
+typedef struct _Point3
+{
+    float x;
+	float y;
+	float z;
+} Point3;
+
+struct Color
+{
+    float r;
+	float g;
+	float b;
+	float a;
+};
+
 //常用的顏色 RGBA四碼
 float color_r[] = { 1.0f, 0.0f, 0.0f, 1.0f };
 float color_g[] = { 0.0f, 1.0f, 0.0f, 1.0f };

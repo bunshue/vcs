@@ -30,17 +30,6 @@ void drawGrid(int xmin, int xmax, int ymin, int ymax)
     }
 }
 
-// 初始化參數
-void init01(void)
-{
-    //好像做不做沒甚麼差別
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
-
-    //glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
-    //glShadeModel(GL_SMOOTH);
-}
-
 void draw_point_test(void)
 {
     //畫點
@@ -64,6 +53,24 @@ void draw_point_test(void)
     glEnd();
 }
 
+void reset_default_setting()
+{
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
+    glClear(GL_COLOR_BUFFER_BIT);   //清除背景
+    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();	//設置單位矩陣
+    gluOrtho2D(-1, 1, -1, 1); //窗口座標範圍, 2D
+
+    glLineWidth(1.0f);	//設定線寬
+
+    char info[10];
+    //sprintf(info, "%d", (char)display_mode);  //過時, x64不能用
+    sprintf_s(info, 10, "%d", display_mode);
+    glutSetWindowTitle(info);
+}
+
 // 繪圖回調函數
 void display(void)
 {
@@ -78,13 +85,7 @@ void display(void)
     }
     else if (display_mode == 1)
     {
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
-        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
-        //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();	//設置單位矩陣
-        gluOrtho2D(-1, 1, -1, 1); //窗口座標範圍, 2D
+        reset_default_setting();
 
         //畫一個矩形 R
         glColor4f(1.0, 0.0, 0.0, 1.0);  //設置畫筆顏色為 R
@@ -117,13 +118,7 @@ void display(void)
     {
         //display_mode = 2  //畫 彩色三角形
 
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
-        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
-        //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();	//設置單位矩陣
-        gluOrtho2D(-1, 1, -1, 1); //窗口座標範圍, 2D
+        reset_default_setting();
 
         glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
         // 繪製三角形
@@ -286,13 +281,17 @@ void display(void)
         float mat[16];
 
         //glEnable(GL_DEPTH_TEST);	//若Enable, 會留下痕跡
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
+
         glClearDepth(1.0);
+
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();	//設置單位矩陣
         glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);   //設置窗口座標系大小
+
+
         glGetFloatv(GL_PROJECTION_MATRIX, mat);
         /*
         int i;
@@ -331,17 +330,10 @@ void display(void)
             glVertex3f(-1.0f, 0.0f + 0.5f, 1.0f - 0.001f);
         }
         glEnd();
-
-
     }
     else if (display_mode == 7)
     {
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
-        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
-
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();	//設置單位矩陣
-        gluOrtho2D(-1, 1, -1, 1); //窗口座標範圍, 2D
+        reset_default_setting();
 
         float x_st = -0.6f;
         float y_st = -0.6f;
@@ -367,12 +359,7 @@ void display(void)
     }
     else if (display_mode == 8)
     {
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
-        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
-
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();	//設置單位矩陣
-        gluOrtho2D(-1, 1, -1, 1); //窗口座標範圍, 2D
+        reset_default_setting();
 
         draw_boundary(color_y, 0.9f); //畫視窗邊界
 
@@ -416,99 +403,90 @@ void display(void)
     }
     else if (display_mode == 9)
     {
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
-    glClear(GL_COLOR_BUFFER_BIT);   //清除背景
+        reset_default_setting();
 
-    //glClearColor(1.0, 0.0, 0.0, 1.0);	//使用紅色背景
+        glPushMatrix();		//這個 Matrix Push/Pop 好像沒什麼用??
 
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();	//設置單位矩陣
-    gluOrtho2D(-1, 1, -1, 1); //窗口座標範圍, 2D
+        // 設置當前的繪製顏色 , 4 個 unsigned byte 
+        // 每個顏色的分量占一個字節
+        // 參數數據是 R 紅色 G 綠色 B 藍色 A 透明度
+        // 下面設置的含義是白色, 繪製點的時候, 每次都使用白色繪製
+        glColor4ub(255, 255, 255, 255);	//設定顏色 White
 
-    glPushMatrix();		//這個 Matrix Push/Pop 好像沒什麼用??
+        draw_boundary(color_y, 0.9f); //畫視窗邊界
 
-    // 設置當前的繪製顏色 , 4 個 unsigned byte 
-    // 每個顏色的分量占一個字節
-    // 參數數據是 R 紅色 G 綠色 B 藍色 A 透明度
-    // 下面設置的含義是白色, 繪製點的時候, 每次都使用白色繪製
-    glColor4ub(255, 255, 255, 255);	//設定顏色 White
+        draw_coordinates(0.9f);
 
-    draw_boundary(color_y, 0.9f); //畫視窗邊界
+        glLineWidth(4.0f);	//設定線寬
 
-    draw_coordinates(0.9f);
+        // 繪製線時, 會將從 glBegin 到 glEnd 之間的所有的點都繪製出來
+        // 可以調用 glVertex3f 方法 成對 設置多條線
+        // 注意必須成對設置 , 如果設置奇數個點 , 最後一個點會被丟棄
 
-    glLineWidth(4.0f);	//設定線寬
+        glBegin(GL_LINES);	// 繪製線段開始
 
-    // 繪製線時, 會將從 glBegin 到 glEnd 之間的所有的點都繪製出來
-    // 可以調用 glVertex3f 方法 成對 設置多條線
-    // 注意必須成對設置 , 如果設置奇數個點 , 最後一個點會被丟棄
+        // glVertex3f (GLfloat x, GLfloat y, GLfloat z)
+        //畫直線, 每兩個點組成一條線
 
-    glBegin(GL_LINES);	// 繪製線段開始
+        glVertex3f(0.0f, 0.0f, -1.0f);
+        glVertex3f(-1.0f, 0.0f, -1.0f);
 
-    // glVertex3f (GLfloat x, GLfloat y, GLfloat z)
-    //畫直線, 每兩個點組成一條線
+        glVertex3f(-0.8f, -0.8f, 0.0f);
+        glVertex3f(0.8f, 0.8f, 0.0f);
 
-    glVertex3f(0.0f, 0.0f, -1.0f);
-    glVertex3f(-1.0f, 0.0f, -1.0f);
+        float xx = 0.0f;
+        float yy = 0.0f;
+        float dx = 0.0f;
+        float dy = 0.0f;
+        for (xx = -0.8f; xx <= 0.8f; xx += 0.1f)
+        {
+            dx = xx + 0.8f;
+            glVertex3f(-0.8f + dx, -0.8f, 0.0f);
+            dy = xx + 0.8f;
+            glVertex3f(-0.8f, 0.8f - dy, 0.0f);
+        }
+        glEnd();	// 繪製點結束
 
-    glVertex3f(-0.8f, -0.8f, 0.0f);
-    glVertex3f(0.8f, 0.8f, 0.0f);
+        //兩個線段組合成一個閉合三角形
+        glBegin(GL_LINE_LOOP);	// 繪製線段開始
 
-    float xx = 0.0f;
-    float yy = 0.0f;
-    float dx = 0.0f;
-    float dy = 0.0f;
-    for (xx = -0.8f; xx <= 0.8f; xx += 0.1f)
-    {
-        dx = xx + 0.8f;
-        glVertex3f(-0.8f + dx, -0.8f, 0.0f);
-        dy = xx + 0.8f;
-        glVertex3f(-0.8f, 0.8f - dy, 0.0f);
-    }
-    glEnd();	// 繪製點結束
+        glVertex3f(0.7f, 0.5f, 0.0f);
+        glVertex3f(0.7f, 0.1f, 0.0f);
 
-    //兩個線段組合成一個閉合三角形
-    glBegin(GL_LINE_LOOP);	// 繪製線段開始
+        glVertex3f(0.7f, 0.1f, 0.0f);
+        glVertex3f(0.3f, 0.1f, 0.0f);
 
-    glVertex3f(0.7f, 0.5f, 0.0f);
-    glVertex3f(0.7f, 0.1f, 0.0f);
+        glEnd();	// 繪製點結束
 
-    glVertex3f(0.7f, 0.1f, 0.0f);
-    glVertex3f(0.3f, 0.1f, 0.0f);
+        //繪製彩色的線
 
-    glEnd();	// 繪製點結束
+        glLineWidth(12.0f);	//設定線寬
 
-    //繪製彩色的線
+        glBegin(GL_LINE_LOOP);
 
-    glLineWidth(12.0f);	//設定線寬
+        // 繪製線 , 每兩個點組成一條線
+        glVertex3f(0.0f, -0.8f, 0.0f);
 
-    glBegin(GL_LINE_LOOP);
+        glColor4ub(0, 255, 0, 255);	//設定顏色 G, 用256制
 
-    // 繪製線 , 每兩個點組成一條線
-    glVertex3f(0.0f, -0.8f, 0.0f);
+        glVertex3f(0.8f, -0.8f, 0.0f);
 
-    glColor4ub(0, 255, 0, 255);	//設定顏色 G, 用256制
+        // 上面的設置會從 (0,0,-10) 座標向 (-5,0,-10) 座標繪製一條線
 
-    glVertex3f(0.8f, -0.8f, 0.0f);
+        glColor4ub(0, 0, 255, 255);	//設定顏色 B, 用256制
 
-    // 上面的設置會從 (0,0,-10) 座標向 (-5,0,-10) 座標繪製一條線
+        //glVertex3f(-5.0f, 0.0f, -10.0f);
+        glVertex3f(0.8f, 0.3f, 0.0f);
 
-    glColor4ub(0, 0, 255, 255);	//設定顏色 B, 用256制
+        glColor4ub(255, 255, 255, 255);//設定顏色 White
 
-    //glVertex3f(-5.0f, 0.0f, -10.0f);
-    glVertex3f(0.8f, 0.3f, 0.0f);
+        // 上面的設置會從 (-5,0,-10) 座標向 (-5,-2,-10) 座標繪製一條線
 
-    glColor4ub(255, 255, 255, 255);//設定顏色 White
+        glEnd();	// 繪製點結束
 
-    // 上面的設置會從 (-5,0,-10) 座標向 (-5,-2,-10) 座標繪製一條線
+        glPopMatrix();
 
-    glEnd();	// 繪製點結束
-
-    glPopMatrix();
-
-
-
-
+        glLineWidth(1.0f);	//設定線寬
     }
     else
     {
@@ -549,7 +527,6 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
         break;
     case '1':
         display_mode = 1;
-        init01();
         break;
     case '2':
         display_mode = 2;
@@ -578,12 +555,6 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
     }
 
     glutPostRedisplay();    //將當前視窗打上標記，標記其需要再次顯示。
-
-    char info[10];
-    //sprintf(info, "%d", (char)display_mode);  //過時, x64不能用
-    sprintf_s(info, 10, "%d", display_mode);
-
-    glutSetWindowTitle(info);
 }
 
 int main(int argc, char* argv[])
@@ -619,8 +590,6 @@ int main(int argc, char* argv[])
     //printf("當前視窗的標記符 = %d\n", res);
     //printf("取得視窗寬度 : %d\n", glutGet(GLUT_WINDOW_WIDTH));
     //printf("取得視窗高度 : %d\n", glutGet(GLUT_WINDOW_HEIGHT));
-
-    init01();
 
     glutSetCursor(GLUT_CURSOR_DESTROY); //改變視窗上的鼠標標記
 

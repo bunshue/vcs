@@ -270,7 +270,7 @@ void Idle(void)
         }
     }
 
-    draw_boundary(color_y, 580); //畫視窗邊界
+    draw_boundary(color_y, 580.0f); //畫視窗邊界
 
     glFlush();
 }

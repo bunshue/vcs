@@ -27,7 +27,7 @@ void display(void)
     }
 
     //畫直線連線
-    draw_boundary(color_y, 13.0); //畫視窗邊界
+    draw_boundary(color_y, 13.0f); //畫視窗邊界
 
     //畫線
     //畫直線連線
