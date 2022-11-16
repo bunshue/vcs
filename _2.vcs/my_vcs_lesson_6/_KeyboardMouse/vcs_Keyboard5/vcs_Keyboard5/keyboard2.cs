@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace vcs_Keyboard4
+namespace vcs_Keyboard5
 {
-    public partial class Form1 : Form
+    public partial class keyboard2 : UserControl
     {
         Color groupBox_keyboard_backcolor = Color.LightSalmon;
         Color key_color = Color.Lime;
@@ -58,12 +58,12 @@ namespace vcs_Keyboard4
         Button bt_OK = new Button();
         TextBox tb_input = new TextBox();
 
-        public Form1()
+        public keyboard2()
         {
             InitializeComponent();
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void keyboard2_Load(object sender, EventArgs e)
         {
             setup_keyboard();
         }

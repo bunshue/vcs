@@ -81,9 +81,20 @@ void draw_teapot(float* color, float width, double size)
     //畫一個茶壺
     glColor3fv((GLfloat*)color);    //設定顏色
 
-    glLineWidth(width);     //設定線寬
-    glutWireTeapot(size);  //線框茶壺
-    //glutSolidTeapot(size);  //實心茶壺
+    glLineWidth(width);         //設定線寬
+    glutWireTeapot(size);       //畫茶壺, 線框
+    //glutSolidTeapot(size);    //畫茶壺, 實心
+}
+
+void draw_cone(float* color, GLdouble base, GLdouble height, GLint slices, GLint stacks)
+{
+    //畫一個圓錐體
+    glColor3fv((GLfloat*)color);    //設定顏色
+
+    //glLineWidth(width);     //設定線寬
+
+    glutWireCone(base, height, slices, stacks); //畫圓錐體, 線框
+    //glutSolidCone(base, height, slices, stacks); //畫圓錐體, 實心
 }
 
 void draw_tetrahedron(void)	//畫四面體

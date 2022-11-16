@@ -8,11 +8,6 @@ float y_angle = 0.0f;	//angle of eye
 int m_state = 0; //mouse usage
 float dist = 10.0f; //distance from the eye
 
-void init(void)
-{
-	glEnable(GL_DEPTH_TEST);
-}
-
 // 繪圖回調函數
 void display(void)
 {
@@ -49,7 +44,15 @@ void display(void)
 
 	draw_coordinates(0.9f);	//畫座標軸
 
-	draw_teapot(color_c, 1.0, 0.2);	//畫一個茶壺
+	draw_teapot(color_c, 1.0, 0.5);	//畫一個茶壺
+
+	GLdouble base = 0.25;
+	GLdouble height = 1.0;
+	GLint slices = 100;
+	GLint stacks = 10;
+	draw_cone(color_r, base, height, slices, stacks); //畫圓錐體
+
+	glutWireOctahedron();
 
 	glFlush();  // 執行繪圖命令
 
@@ -124,9 +127,7 @@ int main(int argc, char** argv)
 	glutInitWindowSize(600, 600);
 	glutInitWindowPosition(1100, 200);
 
-	glutCreateWindow("開啟視窗");	//開啟視窗 並顯示出視窗 Title
-
-	//init();
+	glutCreateWindow("手動移動座標系範例");	//開啟視窗 並顯示出視窗 Title
 
 	glutDisplayFunc(display);	//設定callback function
 	glutReshapeFunc(reshape0);	//設定callback function

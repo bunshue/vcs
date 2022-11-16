@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{24047142-279B-4092-8EC7-B75015D9BB46}</ProjectGuid>
+    <ProjectGuid>{1763578F-934D-4465-883B-0604D6A53C31}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>vcs_Keyboard3</RootNamespace>
-    <AssemblyName>vcs_Keyboard3</AssemblyName>
+    <RootNamespace>vcs_Keyboard5</RootNamespace>
+    <AssemblyName>vcs_Keyboard5</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
@@ -52,10 +52,28 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="keyboard1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="keyboard1.Designer.cs">
+      <DependentUpon>keyboard1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="keyboard2.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="keyboard2.Designer.cs">
+      <DependentUpon>keyboard2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="keyboard1.resx">
+      <DependentUpon>keyboard1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="keyboard2.resx">
+      <DependentUpon>keyboard2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

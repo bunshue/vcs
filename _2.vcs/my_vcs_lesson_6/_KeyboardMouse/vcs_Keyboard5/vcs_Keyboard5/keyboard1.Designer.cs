@@ -1,13 +1,13 @@
-﻿namespace vcs_Keyboard3
+﻿namespace vcs_Keyboard5
 {
-    partial class Form1
+    partial class keyboard1
     {
-        /// <summary>
+        /// <summary> 
         /// 設計工具所需的變數。
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
+        /// <summary> 
         /// 清除任何使用中的資源。
         /// </summary>
         /// <param name="disposing">如果應該處置 Managed 資源則為 true，否則為 false。</param>
@@ -20,15 +20,14 @@
             base.Dispose(disposing);
         }
 
-        #region Windows Form 設計工具產生的程式碼
+        #region 元件設計工具產生的程式碼
 
-        /// <summary>
+        /// <summary> 
         /// 此為設計工具支援所需的方法 - 請勿使用程式碼編輯器
         /// 修改這個方法的內容。
         /// </summary>
         private void InitializeComponent()
         {
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox_keyboard = new System.Windows.Forms.GroupBox();
             this.lb_clear = new System.Windows.Forms.Label();
             this.tb_input = new System.Windows.Forms.TextBox();
@@ -70,16 +69,9 @@
             this.lb_5 = new System.Windows.Forms.Label();
             this.lb_4 = new System.Windows.Forms.Label();
             this.lb_2 = new System.Windows.Forms.Label();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox_keyboard.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(700, 10);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(500, 500);
-            this.richTextBox1.TabIndex = 3;
-            this.richTextBox1.Text = "";
             // 
             // groupBox_keyboard
             // 
@@ -127,7 +119,7 @@
             this.groupBox_keyboard.Location = new System.Drawing.Point(10, 10);
             this.groupBox_keyboard.Name = "groupBox_keyboard";
             this.groupBox_keyboard.Size = new System.Drawing.Size(687, 309);
-            this.groupBox_keyboard.TabIndex = 2;
+            this.groupBox_keyboard.TabIndex = 3;
             this.groupBox_keyboard.TabStop = false;
             // 
             // lb_clear
@@ -489,16 +481,23 @@
             this.lb_2.TabIndex = 39;
             this.lb_2.Text = "2";
             // 
-            // Form1
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(700, 10);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(500, 200);
+            this.richTextBox1.TabIndex = 4;
+            this.richTextBox1.Text = "";
+            // 
+            // keyboard1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1214, 521);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox_keyboard);
-            this.Name = "Form1";
-            this.Text = "Form1";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Name = "keyboard1";
+            this.Size = new System.Drawing.Size(1230, 250);
+            this.Load += new System.EventHandler(this.keyboard1_Load);
             this.groupBox_keyboard.ResumeLayout(false);
             this.groupBox_keyboard.PerformLayout();
             this.ResumeLayout(false);
@@ -507,8 +506,8 @@
 
         #endregion
 
-        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.GroupBox groupBox_keyboard;
+        private System.Windows.Forms.Label lb_clear;
         private System.Windows.Forms.TextBox tb_input;
         private System.Windows.Forms.Label lb_OK;
         private System.Windows.Forms.Label lb_G;
@@ -548,7 +547,6 @@
         private System.Windows.Forms.Label lb_5;
         private System.Windows.Forms.Label lb_4;
         private System.Windows.Forms.Label lb_2;
-        private System.Windows.Forms.Label lb_clear;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
-

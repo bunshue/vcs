@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace vcs_Keyboard3
+namespace vcs_Keyboard5
 {
     static class Program
     {

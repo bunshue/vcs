@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace vcs_Keyboard4.Properties
+namespace vcs_Keyboard5.Properties
 {
 
 

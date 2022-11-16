@@ -51,8 +51,7 @@ void display(void)
 	//glLightfv(GL_LIGHT0, GL_POSITION, lit_position);
 	draw_coordinates(1.0);	//顯示座標軸，設X軸的兩端點為v1、v2，考慮這兩點經受的變換
 
-	//畫一個茶壺
-	draw_teapot(color_r, 1.0, 0.5);
+	draw_teapot(color_r, 1.0, 0.5);	//畫一個茶壺
 
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
@@ -70,7 +69,16 @@ void display(void)
 	glRotatef(-90.0f, 1.0f, 0.0f, 0.0f); //對應變換陣T7
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_cyan);
 	glMaterialfv(GL_BACK, GL_DIFFUSE, mat_yellow);
+
 	glutSolidCone(0.4, 1.0, 100, 10); //畫圓錐體
+
+	GLdouble base = 0.5;
+	GLdouble height = 1.0;
+	GLint slices = 100;
+	GLint stacks = 10;
+	draw_cone(color_y, base, height, slices, stacks); //畫圓錐體
+	//顏色沒有套用到
+
 	glPopMatrix();
 
 	glFlush();  // 執行繪圖命令

@@ -3,13 +3,30 @@
 
 int display_mode = 1;
 
+void reset_default_setting()
+{
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
+    glClear(GL_COLOR_BUFFER_BIT);   //清除背景
+    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();	//設置單位矩陣
+    gluOrtho2D(-1, 1, -1, 1); //窗口座標範圍, 2D
+
+    glLineWidth(1.0f);	//設定線寬
+
+    char info[10];
+    //sprintf(info, "%d", (char)display_mode);  //過時, x64不能用
+    sprintf_s(info, 10, "%d", display_mode);
+    glutSetWindowTitle(info);
+}
+
 // 繪圖回調函數
 void display(void)
 {
     if (display_mode == 0)
     {
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
-        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
+        reset_default_setting();
 
         printf("無畫面, TBD, display_mode = %d\n", display_mode);
 
@@ -18,9 +35,8 @@ void display(void)
     else if (display_mode == 1)
     {
         //display_mode = 1
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
-        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
-        //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+        reset_default_setting();
 
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();	//設置單位矩陣
@@ -33,10 +49,9 @@ void display(void)
     }
     else if (display_mode == 2)
     {
-        //display_mode = 2
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
-        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
-        //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        //display_mode = 2  //畫 彩色三角形
+
+        reset_default_setting();
 
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();	//設置單位矩陣
@@ -52,24 +67,23 @@ void display(void)
 
         glLineWidth(5.0f);	//設定線寬
 
-        float dd = 0.6f;
         // 繪製三角形
         glBegin(GL_TRIANGLES);
+        {
+            float dd = 0.5f;
+            glNormal3f(0.0f, 1.0f, 0.0f);	//設置法線
+            glColor4ub(0, 0, 255, 255);     //B
+            glVertex3f(0.0f, dd, 0); //上
 
-        glNormal3f(0.0f, -1.0f, 0.0f);	//設置法線
-        glColor4ub(255, 0, 0, 255);     //R
-        glVertex3f(-dd, -dd, 0);    //左下
+            glNormal3f(0.0f, 1.0f, 0.0f);	//設置法線
+            glColor4ub(0, 255, 0, 255);     //G
+            glVertex3f(dd, -dd, 0); //右下
 
-        glNormal3f(0.0f, 1.0f, 0.0f);	//設置法線
-        glColor4ub(0, 255, 0, 255);     //G
-        glVertex3f(dd, -dd, 0); //右下
-
-        glNormal3f(0.0f, 1.0f, 0.0f);	//設置法線
-        glColor4ub(0, 0, 255, 255);     //B
-        glVertex3f(0.0f, dd, 0); //上
-
-        // 繪製三角形結束
-        glEnd();
+            glNormal3f(0.0f, -1.0f, 0.0f);	//設置法線
+            glColor4ub(255, 0, 0, 255);     //R
+            glVertex3f(-dd, -dd, 0);    //左下
+        }
+        glEnd();    // 結束畫三角形
 
         // 矩陣出棧 
         //glPopMatrix();
@@ -78,13 +92,9 @@ void display(void)
     {
         //display_mode = 3
 
-        glOrtho(-10, 10, -10, 10, -10, 10);      //正交投影
+        reset_default_setting();
 
-            /*
-    //用黃色塗背景	要兩行一起寫，若不寫，則是以黑色為背景
-   glClearColor(1.0, 1.0, 0.0, 1.0);
-    glClear(GL_COLOR_BUFFER_BIT| GL_DEPTH_BUFFER_BIT);	//清除背景
-   */
+        glOrtho(-10, 10, -10, 10, -10, 10);      //正交投影
 
         glPolygonMode(GL_FRONT, GL_LINE);
 
@@ -164,7 +174,71 @@ void display(void)
     }
     else if (display_mode == 4)
     {
-        //display_mode = 4
+        /*
+        void glRasterPos4d(GLdouble x, GLdouble y, GLdouble z = 0, GLdouble w = 1);
+        void glRasterPos4dv(const GLdouble* v);
+        //確定當前光柵位置，x,y,z,w指定了當前光柵位置的座標
+
+        glWindowPos(Type x, Type y, Type z);
+        //用窗口座標指定當前光柵位置，不必進行矩陣變換、裁剪、或紋理座標生成。z值被變換為由glDepthRange()設置的當前近側平面值和遠側平面值
+
+        void glBitmap(GLsizei, GLsizei height, GLfloat xorig, GLfloat yorig, GLfloat, GLfloat, const GLubyte* bitmap);
+        //繪製由bitmap指定的位圖，bitmap是一個指向位圖圖像的指針，位圖的原點是當前光柵位置，如果當前光柵位置無效，則這個函數不會繪製任何東西。
+        //width和height表示位圖的寬度和高度，xorig和yorig定義了位圖的原點，他是根據當期光柵位置確定的，右上為正。
+        //xmove和ymove表示位圖光柵化之後光柵座標的x增加值和y增加值
+        */
+
+        //display_mode = 4  測試Bipmap畫圖
+
+        reset_default_setting();
+
+        glOrtho(0, 600, 0, 600, -1.0, 1.0);	//改變投影變換	//改變窗口座標範圍, 3D
+
+        glColor3f(1.0, 0.0, 0.0);	//設定顏色
+
+        //光柵的位置
+        glRasterPos2i(0, 0);//確定當前光柵位置，x,y,z,w指定了當前光柵位置的座標
+
+        //畫一個64*64
+        int i;
+        int len = 64 / 8 * 64;
+        GLubyte rasters[64 / 8 * 64] = {
+        };
+        for (i = 0; i < len; i++)
+        {
+            if (i % 2 == 0)
+                rasters[i] = 0xff;
+            else
+                rasters[i] = 0xff;
+        }
+
+        float offsetx = 0.0;
+        float offsety = 0.0;
+        float dx = 100.0;
+        float dy = 100.0;
+
+        //畫完bmp後, 下次位置加上dx dy
+        glBitmap(64, 64, offsetx, offsety, dx, dy, rasters);
+        glBitmap(64, 64, offsetx, offsety, dx, dy, rasters);
+        glBitmap(64, 64, offsetx, offsety, dx, dy, rasters);
+        glBitmap(64, 64, offsetx, offsety, dx, dy, rasters);
+
+        for (i = 0; i < len; i++)
+        {
+            if (i % 2 == 0)
+                rasters[i] = 0x55;
+            else
+                rasters[i] = 0x55;
+        }
+        glBitmap(64, 64, offsetx, offsety, dx, dy, rasters);
+
+        //繪製由bitmap指定的位圖，bitmap是一個指向位圖圖像的指針，位圖的原點是當前光柵位置，如果當前光柵位置無效，則這個函數不會繪製任何東西。
+        //width和height表示位圖的寬度和高度，xorig和yorig定義了位圖的原點，他是根據當期光柵位置確定的，右上為正。
+        //xmove和ymove表示位圖光柵化之後光柵座標的x增加值和y增加值
+
+        glFlush();  // 執行繪圖命令
+
+
     }
     else if (display_mode == 5)
     {

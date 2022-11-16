@@ -1,107 +1,94 @@
 ﻿//#include "../../../_code/Common.h"    //32 bits
-#include "../../Common.h"   //64 bits
-
-void init(void)
-{
-	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-	glClearColor(0.0, 0.0, 0.0, 0.0);
-}
-
-/*
-void glRasterPos4d(GLdouble x, GLdouble y, GLdouble z = 0, GLdouble w = 1);
-void glRasterPos4dv(const GLdouble* v);
-//確定當前光柵位置，x,y,z,w指定了當前光柵位置的座標
-
-glWindowPos(Type x, Type y, Type z);
-//用窗口座標指定當前光柵位置，不必進行矩陣變換、裁剪、或紋理座標生成。z值被變換為由glDepthRange()設置的當前近側平面值和遠側平面值
-
-void glBitmap(GLsizei, GLsizei height, GLfloat xorig, GLfloat yorig, GLfloat, GLfloat, const GLubyte* bitmap);
-//繪製由bitmap指定的位圖，bitmap是一個指向位圖圖像的指針，位圖的原點是當前光柵位置，如果當前光柵位置無效，則這個函數不會繪製任何東西。
-//width和height表示位圖的寬度和高度，xorig和yorig定義了位圖的原點，他是根據當期光柵位置確定的，右上為正。
-//xmove和ymove表示位圖光柵化之後光柵座標的x增加值和y增加值
-*/
+#include "../../Common.h"               //64 bits
 
 // 繪圖回調函數
 void display(void)
 {
-	glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
-	glColor3f(1.0, 0.0, 0.0);	//設定顏色
+    draw_boundary(color_y, 0.9f); //畫視窗邊界
 
-	//光柵的位置
-	glRasterPos2i(0, 0);//確定當前光柵位置，x,y,z,w指定了當前光柵位置的座標
+    //畫一個實心矩形
+    glColor3f(0.0, 1.0, 1.0);   //設定顏色 cc
+    float dd = 0.3f;
+    glRectf(-dd, -dd, dd, dd);  //實心矩形
 
-	//畫一個64*64
-	int i;
-	int len = 64 / 8 * 64;
-	GLubyte rasters[64 / 8 * 64] = {
-	};
-	for (i = 0; i < len; i++)
-	{
-		if (i % 2 == 0)
-			rasters[i] = 0xff;
-		else
-			rasters[i] = 0xff;
-	}
+    draw_teapot(color_r, 1, 0.3);   //畫一個茶壺
 
-	float offsetx = 0.0;
-	float offsety = 0.0;
-	float dx = 100.0;
-	float dy = 100.0;
+    float x_st = -0.7f;
+    float y_st = 0.5f;
+    const char str1[30] = "Empty example";
+    draw_string1(str1, color_r, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
 
-	//畫完bmp後, 下次位置加上dx dy
-	glBitmap(64, 64, offsetx, offsety, dx, dy, rasters);
-	glBitmap(64, 64, offsetx, offsety, dx, dy, rasters);
-	glBitmap(64, 64, offsetx, offsety, dx, dy, rasters);
-	glBitmap(64, 64, offsetx, offsety, dx, dy, rasters);
-
-	for (i = 0; i < len; i++)
-	{
-		if (i % 2 == 0)
-			rasters[i] = 0x55;
-		else
-			rasters[i] = 0x55;
-	}
-	glBitmap(64, 64, offsetx, offsety, dx, dy, rasters);
-
-	//繪製由bitmap指定的位圖，bitmap是一個指向位圖圖像的指針，位圖的原點是當前光柵位置，如果當前光柵位置無效，則這個函數不會繪製任何東西。
-	//width和height表示位圖的寬度和高度，xorig和yorig定義了位圖的原點，他是根據當期光柵位置確定的，右上為正。
-	//xmove和ymove表示位圖光柵化之後光柵座標的x增加值和y增加值
-
-	glFlush();  // 執行繪圖命令
+    glFlush();  // 執行繪圖命令
 }
 
 // 窗口大小變化回調函數
 void reshape(int w, int h)
 {
-	glViewport(0, 0, w, h);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();	//設置單位矩陣
-	glOrtho(0, w, 0, h, -1.0, 1.0);	//改變投影變換	//改變窗口座標範圍, 3D
-	glMatrixMode(GL_MODELVIEW);
+    glViewport(0, 0, w, h);
+}
+
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
+{
+    switch (key)
+    {
+    case 27:
+    case 'q':
+    case 'Q':
+        //離開視窗
+        glutDestroyWindow(glutGetWindow());
+        return;
+
+    case '1':
+        printf("1\n");
+        break;
+
+    case '2':
+        printf("2\n");
+        break;
+
+    case '3':
+        break;
+
+    case '4':
+        break;
+
+    case '?':
+        break;
+    }
+}
+
+void mouse(int button, int state, int x, int y)
+{
+}
+
+void motion(int x, int y)
+{
 }
 
 int main(int argc, char** argv)
 {
-	glutInit(&argc, argv);
-	
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    glutInit(&argc, argv);
 
-	glutInitWindowSize(600, 600);       // 設定視窗大小
-	glutInitWindowPosition(1100, 200);  // 設定視窗位置
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);    //宣告顯示模式為 Single Buffer 和 RGBA
 
-	glutCreateWindow("開啟視窗");	//開啟視窗 並顯示出視窗 Title
+    glutInitWindowSize(600, 600);       // 設定視窗大小
+    glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
-	init();
+    glutCreateWindow("OpenGL測試");	//開啟視窗 並顯示出視窗 Title
 
-	glutDisplayFunc(display);	//設定callback function
-	glutReshapeFunc(reshape);	//設定callback function
-	glutKeyboardFunc(keyboard0);	//設定callback function
+    glutDisplayFunc(display);   //設定callback function
+    glutReshapeFunc(reshape);   //設定callback function
+    glutKeyboardFunc(keyboard); //設定callback function
+    glutMouseFunc(mouse);       //設定callback function
+    glutMotionFunc(motion);     //設定callback function
 
-	printf("僅顯示, 無控制, 按 Esc 離開\n");
+    printf("僅顯示, 無控制, 按 Esc 離開\n");
+    printf("\n空白範例\n");
 
-	glutMainLoop();	//開始主循環繪製
+    glutMainLoop();	//開始主循環繪製
 
-	return 0;
+    return 0;
 }
 

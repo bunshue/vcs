@@ -51,6 +51,7 @@ float color_purple[] = { 0.5f, 0.0f, 0.5f, 1.0f };
 void draw_coordinates(float len);
 void draw_boundary(float* color, float dd);
 void draw_teapot(float* color, float width, double size);
+void draw_cone(float* color, GLdouble base, GLdouble height, GLint slices, GLint stacks);
 void draw_tetrahedron(void);	//畫四面體
 void draw_tetrahedron2(void);
 

@@ -8,11 +8,6 @@ float y_angle = 0.0f;	//angle of eye
 int m_state = 0; //mouse usage
 float dist = 10.0f; //distance from the eye
 
-void init(void)
-{
-	glEnable(GL_DEPTH_TEST);
-}
-
 // 繪圖回調函數
 void display(void)
 {
@@ -24,8 +19,8 @@ void display(void)
 	w = (float)rect[2];
 	h = (float)rect[3];
 
-	glClearDepth(1.0);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
 
 	draw_boundary(color_y, 2.5f); //畫視窗邊界
 
@@ -60,12 +55,7 @@ void display(void)
 
 	draw_coordinates(2.0);	//畫座標軸
 
-	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
-	//glTranslatef(-1.0f, 0.0f, 0.0f);	//平移至指定地方(累積)
-
 	draw_teapot(color_r, 1.0, 1.0);	//畫一個茶壺
-
-	glPopMatrix();
 
 	glFlush();  // 執行繪圖命令
 
@@ -140,9 +130,7 @@ int main(int argc, char** argv)
 	glutInitWindowSize(600, 600);
 	glutInitWindowPosition(1100, 200);
 
-	glutCreateWindow("畫茶壺與三角塊");	//開啟視窗 並顯示出視窗 Title
-
-	init();
+	glutCreateWindow("手動移動座標系範例");	//開啟視窗 並顯示出視窗 Title
 
 	glutDisplayFunc(display);	//設定callback function
 	glutReshapeFunc(reshape0);	//設定callback function
