@@ -30,8 +30,8 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.keyboard11 = new vcs_Keyboard5.keyboard1();
             this.keyboard21 = new vcs_Keyboard5.keyboard2();
+            this.keyboard11 = new vcs_Keyboard5.keyboard1();
             this.SuspendLayout();
             // 
             // label1
@@ -54,29 +54,29 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "label2";
             // 
-            // keyboard11
-            // 
-            this.keyboard11.Location = new System.Drawing.Point(20, 40);
-            this.keyboard11.Name = "keyboard11";
-            this.keyboard11.Size = new System.Drawing.Size(1230, 250);
-            this.keyboard11.TabIndex = 2;
-            // 
             // keyboard21
             // 
-            this.keyboard21.Location = new System.Drawing.Point(20, 280);
+            this.keyboard21.Location = new System.Drawing.Point(22, 319);
             this.keyboard21.Name = "keyboard21";
-            this.keyboard21.Size = new System.Drawing.Size(1230, 250);
-            this.keyboard21.TabIndex = 1;
+            this.keyboard21.Size = new System.Drawing.Size(600, 260);
+            this.keyboard21.TabIndex = 6;
+            // 
+            // keyboard11
+            // 
+            this.keyboard11.Location = new System.Drawing.Point(22, 53);
+            this.keyboard11.Name = "keyboard11";
+            this.keyboard11.Size = new System.Drawing.Size(600, 260);
+            this.keyboard11.TabIndex = 5;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1234, 595);
+            this.ClientSize = new System.Drawing.Size(1234, 660);
+            this.Controls.Add(this.keyboard21);
+            this.Controls.Add(this.keyboard11);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.keyboard11);
-            this.Controls.Add(this.keyboard21);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -87,10 +87,10 @@
 
         #endregion
 
-        private keyboard2 keyboard21;
-        private keyboard1 keyboard11;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
+        private keyboard1 keyboard11;
+        private keyboard2 keyboard21;
     }
 }
 

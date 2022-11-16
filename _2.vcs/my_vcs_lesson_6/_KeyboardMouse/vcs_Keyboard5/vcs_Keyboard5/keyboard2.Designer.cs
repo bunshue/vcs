@@ -28,24 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
-            // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(700, 10);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(500, 200);
-            this.richTextBox1.TabIndex = 5;
-            this.richTextBox1.Text = "";
             // 
             // keyboard2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.richTextBox1);
             this.Name = "keyboard2";
-            this.Size = new System.Drawing.Size(1230, 250);
+            this.Size = new System.Drawing.Size(100, 100);
             this.Load += new System.EventHandler(this.keyboard2_Load);
             this.ResumeLayout(false);
 
@@ -53,6 +43,5 @@
 
         #endregion
 
-        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

@@ -86,16 +86,39 @@ void draw_teapot(float* color, float width, double size)
     //glutSolidTeapot(size);    //畫茶壺, 實心
 }
 
-void draw_cone(float* color, GLdouble base, GLdouble height, GLint slices, GLint stacks)
+void draw_cone(float* color, float width, GLdouble base, GLdouble height, GLint slices, GLint stacks)
 {
     //畫一個圓錐體
     glColor3fv((GLfloat*)color);    //設定顏色
 
-    //glLineWidth(width);     //設定線寬
+    glLineWidth(width);     //設定線寬
 
     glutWireCone(base, height, slices, stacks); //畫圓錐體, 線框
     //glutSolidCone(base, height, slices, stacks); //畫圓錐體, 實心
 }
+
+void draw_cube(float* color, float width, GLdouble size)
+{
+    //畫一個立方體
+    glColor3fv((GLfloat*)color);    //設定顏色
+
+    glLineWidth(width);     //設定線寬
+
+    glutWireCube(size);     //畫立方體, 線框
+    //glutSolidCube(size);   //畫立方體, 實心
+}
+
+/*
+* 
+glutWireCube(1.0);//绘制立方体线框图
+
+FGAPI void    FGAPIENTRY glutWireCube(GLdouble size);
+FGAPI void    FGAPIENTRY glutSolidCube(GLdouble size);
+FGAPI void    FGAPIENTRY glutWireSphere(GLdouble radius, GLint slices, GLint stacks);
+FGAPI void    FGAPIENTRY glutSolidSphere(GLdouble radius, GLint slices, GLint stacks);
+FGAPI void    FGAPIENTRY glutWireCone(GLdouble base, GLdouble height, GLint slices, GLint stacks);
+FGAPI void    FGAPIENTRY glutSolidCone(GLdouble base, GLdouble height, GLint slices, GLint stacks);
+*/
 
 void draw_tetrahedron(void)	//畫四面體
 {

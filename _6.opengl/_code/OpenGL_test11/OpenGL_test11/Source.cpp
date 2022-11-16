@@ -76,7 +76,9 @@ void display(void)
 	GLdouble height = 1.0;
 	GLint slices = 100;
 	GLint stacks = 10;
-	draw_cone(color_y, base, height, slices, stacks); //畫圓錐體
+	float width = 3;
+
+	draw_cone(color_y, width, base, height, slices, stacks); //畫圓錐體
 	//顏色沒有套用到
 
 	glPopMatrix();

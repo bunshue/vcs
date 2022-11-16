@@ -50,8 +50,13 @@ void display(void)
 	GLdouble height = 1.0;
 	GLint slices = 100;
 	GLint stacks = 10;
-	draw_cone(color_r, base, height, slices, stacks); //畫圓錐體
+	float width = 5;
 
+	draw_cone(color_r, width, base, height, slices, stacks); //畫圓錐體
+
+	draw_cube(color_g, 2, 0.9);
+
+	glLineWidth(10);     //設定線寬
 	glutWireOctahedron();
 
 	glFlush();  // 執行繪圖命令

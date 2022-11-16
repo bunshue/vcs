@@ -69,7 +69,6 @@
             this.lb_5 = new System.Windows.Forms.Label();
             this.lb_4 = new System.Windows.Forms.Label();
             this.lb_2 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.groupBox_keyboard.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -481,22 +480,13 @@
             this.lb_2.TabIndex = 39;
             this.lb_2.Text = "2";
             // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(700, 10);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(500, 200);
-            this.richTextBox1.TabIndex = 4;
-            this.richTextBox1.Text = "";
-            // 
             // keyboard1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox_keyboard);
             this.Name = "keyboard1";
-            this.Size = new System.Drawing.Size(1230, 250);
+            this.Size = new System.Drawing.Size(100, 100);
             this.Load += new System.EventHandler(this.keyboard1_Load);
             this.groupBox_keyboard.ResumeLayout(false);
             this.groupBox_keyboard.PerformLayout();
@@ -547,6 +537,5 @@
         private System.Windows.Forms.Label lb_5;
         private System.Windows.Forms.Label lb_4;
         private System.Windows.Forms.Label lb_2;
-        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }

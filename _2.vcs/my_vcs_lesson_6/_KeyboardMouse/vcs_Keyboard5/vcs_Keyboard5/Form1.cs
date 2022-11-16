@@ -27,16 +27,14 @@ namespace vcs_Keyboard5
             label2.Text = "螢幕鍵盤, 使用 Button";
             int x_st = 20;
             int y_st = 20;
-            int dy = 260;
-            label1.Location = new Point(x_st, y_st+dy*0);
-            keyboard11.Location = new Point(x_st, y_st + dy * 0 + 20);
+            int dy = 300;
+            label1.Location = new Point(x_st, y_st + dy * 0);
+            keyboard11.Location = new Point(x_st, y_st + dy * 0 + 30);
 
-            label2.Location = new Point(x_st, y_st + dy *1);
-            keyboard21.Location = new Point(x_st, y_st + dy * 1 + 20);
+            label2.Location = new Point(x_st, y_st + dy * 1);
+            keyboard21.Location = new Point(x_st, y_st + dy * 1 + 30);
 
 
         }
     }
 }
-
-

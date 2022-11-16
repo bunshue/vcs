@@ -15,6 +15,8 @@ namespace vcs_Keyboard5
         Color key_color = Color.Lime;
         Color key_press_color = Color.Green;
 
+        Label lb_result = new Label();
+
         public keyboard1()
         {
             InitializeComponent();
@@ -22,13 +24,14 @@ namespace vcs_Keyboard5
 
         private void keyboard1_Load(object sender, EventArgs e)
         {
+            this.Size = new Size(600, 260);
             setup_keyboard();
         }
 
         void setup_keyboard()
         {
             groupBox_keyboard.Location = new Point(10, 10);
-            groupBox_keyboard.Size = new Size(600, 220);
+            groupBox_keyboard.Size = new Size(600, 240);
             groupBox_keyboard.BackColor = groupBox_keyboard_backcolor;
             groupBox_keyboard.Text = "";
 
@@ -40,6 +43,13 @@ namespace vcs_Keyboard5
 
             lb_OK.MouseDown += new MouseEventHandler(lb_OK_MouseDown);
             lb_OK.MouseUp += new MouseEventHandler(lb_OK_MouseUp);
+
+            lb_result.Text = "";
+            lb_result.Font = new Font("標楷體", 22);
+            lb_result.ForeColor = Color.Black;
+            lb_result.BackColor = Color.Pink;
+            lb_result.AutoSize = true;
+            this.groupBox_keyboard.Controls.Add(lb_result);
 
             setup_keyboard_keys(this.groupBox_keyboard.Controls);
         }
@@ -64,6 +74,8 @@ namespace vcs_Keyboard5
             lb_P.Location = new Point(x_st + dx * 9, y_st + dy * 0);
             tb_input.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             tb_input.Size = new Size(300, 36);
+
+            lb_result.Location = new Point(x_st + dx * 0, y_st + dy * 4);
 
             x_st += 20;
             lb_A.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -184,11 +196,11 @@ namespace vcs_Keyboard5
 
             if (tb_input.Text.Length <= 0)
             {
-                richTextBox1.Text += "未輸入資料\n";
+                lb_result.Text = "未輸入資料";
             }
             else
             {
-                richTextBox1.Text += "你輸入了 : " + tb_input.Text.ToString() + "\n";
+                lb_result.Text = "你輸入了 : " + tb_input.Text.ToString();
             }
             tb_input.Text = "";
         }
