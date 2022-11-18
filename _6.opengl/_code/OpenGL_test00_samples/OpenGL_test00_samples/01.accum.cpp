@@ -65,7 +65,7 @@ void display(void)
     
     char mesg[20];
     //sprintf(mesg, "Alpha = %3.3f", alpha);	//過時, x64不能用
-    sprintf_s(mesg, 20, "Alpha = %3.3f", alpha);
+    sprintf_s(mesg, sizeof(info), "Alpha = %3.3f", alpha);
     glutSetWindowTitle(mesg);
 
     alpha += 0.1;

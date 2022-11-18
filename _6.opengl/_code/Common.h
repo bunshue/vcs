@@ -38,9 +38,9 @@ struct Color
 //供旋轉座標系用
 int mx;	//position of mouse
 int my;	//position of mouse
+int m_state; //mouse usage
 float x_angle;	//angle of eye
 float y_angle;	//angle of eye
-int m_state; //mouse usage
 float dist; //distance from the eye
 
 //常用的顏色 RGBA四碼

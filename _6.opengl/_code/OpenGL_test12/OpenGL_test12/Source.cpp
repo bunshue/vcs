@@ -1,29 +1,15 @@
 ﻿#include "../../Common.h"
 
+//畫圖基本圖元類型
+
 // 繪圖回調函數
 void display(void)
 {
-    glClear(GL_COLOR_BUFFER_BIT);   // 清除之前幀數據
-
     float x_st = 0.0f;
-    float y_st = 12.0f;
-    float dd = 0;
+    float y_st = 0.0f;
+    float dd = 0.0f;
 
-    //畫點
-    float size = 50.0;  //設定點的大小, N X N
-    x_st = 0.0f;
-    y_st = 0.0f;
-    draw_point(color_r, size, x_st, y_st);
-
-    size = 2.0f;    //設定點的大小, N X N
-    x_st = 0.0f;
-    y_st = 12.0f;
-    for (x_st = -14.0; x_st < -5.0f; x_st += 0.5f)
-    {
-        draw_point(color_r, size, x_st, y_st);
-        draw_point(color_g, size, x_st, y_st - 0.5f);
-        draw_point(color_b, size, x_st, y_st - 1.0f);
-    }
+    glClear(GL_COLOR_BUFFER_BIT);   // 清除之前幀數據
 
     //畫直線連線
     draw_boundary(color_y, 13.0f); //畫視窗邊界
@@ -82,31 +68,6 @@ void display(void)
         glVertex2f(x_st, y_st);
     }
     glEnd();
-
-    //畫實心四邊形, 4個頂點為一組
-    cx = -4.0f;
-    cy = -2.0f;
-    dd = 2.0f;
-    float x1 = cx;  //第1點
-    float y1 = cy + dd;
-    float x2 = cx + dd;
-    float y2 = cy;
-    float x3 = cx;
-    float y3 = cy - dd;
-    float x4 = cx - dd;
-    float y4 = cy;
-    draw_quad_s(color_r, x1, y1, x2, y2, x3, y3, x4, y4);
-
-    x_st = -9.0;
-    y_st = -0.0;
-    dd = 5.0;
-    x1 = x_st;    //第1點
-    y1 = y_st;
-    x2 = x_st - dd / 2;
-    y2 = y_st - dd;
-    x3 = x_st + dd / 2;
-    y3 = y_st - dd;
-    draw_triangle_s(color_g, x1, y1, x2, y2, x3, y3);
 
     //畫三角形帶
     x_st = 4.0;
@@ -167,11 +128,6 @@ void display(void)
     glColor3f(1.0, 1.0, 0.0);   //黃區
     glVertex2f(x_st, y_st + dd * 4);  //正上
     glEnd();
-
-    x_st = -1.2f;
-    y_st = 0;
-    const char str[30] = "Write Something";
-    draw_string1(str, color_g, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
 
     glFlush();  // 執行繪圖命令
 }

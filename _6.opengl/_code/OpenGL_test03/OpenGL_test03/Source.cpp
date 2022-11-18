@@ -55,8 +55,7 @@ void display(void)
 
 	//顯示資訊
 	char info[20];
-	sprintf_s(info, 20, "(%3.1f,   %3.1f)", x_angle, y_angle);
-
+	sprintf_s(info, sizeof(info), "(%3.1f,   %3.1f)", x_angle, y_angle);
 	glutSetWindowTitle(info);
 }
 

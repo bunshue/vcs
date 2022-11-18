@@ -582,7 +582,7 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
 
     char info[10];
     //sprintf(info, "%d", (char)display_mode);  //過時, x64不能用
-    sprintf_s(info, 10, "%d", display_mode);
+    sprintf_s(info, sizeof(info), "%d", display_mode);
 
     glutSetWindowTitle(info);
 }

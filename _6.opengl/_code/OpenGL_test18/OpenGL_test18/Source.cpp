@@ -1,5 +1,7 @@
 ﻿#include "../../Common.h"
 
+#define REFRESH_DELAY 1000  // ms
+
 // 繪圖回調函數
 void display(void)
 {
@@ -66,6 +68,13 @@ void motion(int x, int y)
 {
 }
 
+void timerEvent(int value)
+{
+    printf("經過1秒 ");
+    glutPostRedisplay();
+    glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
+}
+
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
@@ -82,6 +91,7 @@ int main(int argc, char** argv)
     glutKeyboardFunc(keyboard); //設定callback function
     glutMouseFunc(mouse);       //設定callback function
     glutMotionFunc(motion);     //設定callback function
+    glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
 
     printf("僅顯示, 無控制, 按 Esc 離開\n");
     printf("\n空白範例\n");

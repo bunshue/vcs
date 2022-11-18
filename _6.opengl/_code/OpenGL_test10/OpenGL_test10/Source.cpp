@@ -46,12 +46,12 @@ void display(void)
 
 	//畫點
 	glColor3fv(color_r);    //設定顏色
-	glPointSize(size);	            //設定點的大小, N X N
+	glPointSize(size);		//設定點的大小, N X N
 	glBegin(GL_POINTS);
 	{
-		for (y_st = -1; y_st <= 1; y_st += 0.04f)
+		for (y_st = -r; y_st <= r; y_st += 0.03f)
 		{
-			for (x_st = -1; x_st <= 1; x_st += 0.04f)
+			for (x_st = -r; x_st <= r; x_st += 0.03f)
 			{
 				z_st = sqrt(r * r - x_st * x_st - y_st * y_st);
 				glVertex3f(x_st, y_st, z_st);
@@ -61,12 +61,24 @@ void display(void)
 	}
 	glEnd();
 
+	// 繪製三角形	3D
+	glBegin(GL_TRIANGLES);
+	float dd = 0.5f;
+	glColor3f(1, 0, 0);     //紅
+	glVertex3f(-dd, -dd, 0.3f); //左下
+
+	glColor3f(0, 1, 0);     //綠
+	glVertex3f(dd, -dd, 0.0f);  //右下
+
+	glColor3f(0, 0, 1);     //藍
+	glVertex3f(0, dd, -0.3f);   //上
+	glEnd();
+
 	glFlush();  // 執行繪圖命令
 
 	//顯示資訊
 	char info[20];
-	sprintf_s(info, 20, "(%3.1f,   %3.1f)", x_angle, y_angle);
-
+	sprintf_s(info, sizeof(info), "(%3.1f,   %3.1f)", x_angle, y_angle);
 	glutSetWindowTitle(info);
 }
 

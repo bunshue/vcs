@@ -2,6 +2,8 @@
 
 #define REFRESH_DELAY 1000  // ms
 
+int time_elapsed = 0;
+
 // 繪圖回調函數
 void display(void)
 {
@@ -16,6 +18,12 @@ void display(void)
 
     //畫一個茶壺
     draw_teapot(color_r, 1.0f, 0.3f);
+
+
+    char info[20];
+    //sprintf(info, "%d", (char)display_mode);  //過時, x64不能用
+    sprintf_s(info, sizeof(info), "經過 %d 秒", time_elapsed);
+    glutSetWindowTitle(info);
 
     glFlush();  // 執行繪圖命令
 }
@@ -92,7 +100,8 @@ void mainMenu(int i)
 
 void timerEvent(int value)
 {
-    printf("經過1秒 ");
+    time_elapsed++;
+    printf("%d ", time_elapsed);
     glutPostRedisplay();
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
 }

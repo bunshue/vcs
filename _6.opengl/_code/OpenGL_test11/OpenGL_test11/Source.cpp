@@ -1,12 +1,5 @@
 ﻿#include "../../Common.h"
 
-int mx; //position of mouse
-int my; //position of mouse
-int m_state = 0; //mouse usage
-float x_angle = 0.0f;	//angle of eye
-float y_angle = 0.0f;	//angle of eye
-float dist = 10.0f; //distance from the eye
-
 void init(void)
 {
 	glEnable(GL_DEPTH_TEST);	//有無打開, 差很大
@@ -71,15 +64,6 @@ void display(void)
 
 	glutSolidCone(0.4, 1.0, 100, 10); //畫圓錐體
 
-	GLdouble base = 0.5;
-	GLdouble height = 1.0;
-	GLint slices = 100;
-	GLint stacks = 10;
-	float width = 3;
-
-	draw_cone(color_y, width, base, height, slices, stacks); //畫圓錐體
-	//顏色沒有套用到
-
 	glPopMatrix();
 
 	glFlush();  // 執行繪圖命令
@@ -139,6 +123,11 @@ void motion(int x, int y)
 
 int main(int argc, char** argv)
 {
+	m_state = 0;
+	x_angle = 0.0f;
+	y_angle = 0.0f;
+	dist = 10.0f;
+
 	glutInit(&argc, argv);
 	
 	//glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
