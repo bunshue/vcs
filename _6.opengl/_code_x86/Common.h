@@ -5,8 +5,8 @@
 
 #include <helper_gl.h>
 
-//#include <GL/glut.h>		//32 bits
-#include <GL/freeglut.h>	//64 bits
+#include <GL/glut.h>		//32 bits
+//#include <GL/freeglut.h>	//64 bits
 
 #define	PI	3.141592654F
 

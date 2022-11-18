@@ -1,5 +1,4 @@
-﻿//#include "../../../_code/Common.h"    //32 bits
-#include "../../Common.h"               //64 bits
+﻿#include "../../Common.h"
 
 static int slices = 16;
 static int stacks = 16;

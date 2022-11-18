@@ -1,5 +1,4 @@
-//#include "../../../_code/Common.h"    //32 bits
-#include "../../Common.h"   //64 bits
+#include "../../Common.h"
 
 #define EXP_WIDTH 80
 #define EXP_HEIGHT 80

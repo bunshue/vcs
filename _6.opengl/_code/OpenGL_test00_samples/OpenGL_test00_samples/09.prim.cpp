@@ -1,5 +1,4 @@
-//#include "../../../_code/Common.h"    //32 bits
-#include "../../Common.h"   //64 bits
+#include "../../Common.h"
 
 #define PIXEL_CENTER(x) ((long)(x) + 0.5)
 
@@ -14,7 +13,8 @@ GLenum rgb;
 GLint windW = 800;
 GLint windH = 600;
 
-GLenum mode1, mode2;
+GLenum mode1;
+GLenum mode2;
 GLint boxW;
 GLint boxH;
 
@@ -132,7 +132,7 @@ void Viewport(GLint row, GLint column)
     glScissor(x, y, boxW, boxH);
 }
 
-static void Point(void)
+static void draw_point(void)
 {
     GLint i;
 
@@ -492,7 +492,7 @@ void display(void)
     }
 
     printf("畫第(0, 0)個, Point\n");
-    Viewport(0, 0); Point();
+    Viewport(0, 0); draw_point();
     printf("畫第(0, 1)個, Lines\n");
     Viewport(0, 1); Lines();
     printf("畫第(0, 2)個, LineStrip\n");

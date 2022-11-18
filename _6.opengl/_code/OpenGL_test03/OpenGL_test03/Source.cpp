@@ -1,12 +1,4 @@
-﻿//#include "../../../_code/Common.h"    //32 bits
-#include "../../Common.h"   //64 bits
-
-int mx;	//position of mouse
-int my;	//position of mouse
-float x_angle = 0.0f;	//angle of eye
-float y_angle = 0.0f;	//angle of eye
-int m_state = 0; //mouse usage
-float dist = 10.0f; //distance from the eye
+﻿#include "../../Common.h"
 
 // 繪圖回調函數
 void display(void)
@@ -125,6 +117,11 @@ void motion(int x, int y)
 
 int main(int argc, char** argv)
 {
+	x_angle = 0.0f;	//angle of eye
+	y_angle = 0.0f;	//angle of eye
+	m_state = 0; //mouse usage
+	dist = 10.0f; //distance from the eye
+
 	glutInit(&argc, argv);
 
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);    //宣告顯示模式為 Single Buffer 和 RGBA

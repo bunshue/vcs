@@ -262,7 +262,6 @@ namespace vcs_Keyboard5
                     {
                         //richTextBox1.Text += ((Button)c).Name + "\n";
                         ((Button)c).Text = ((Button)c).Name[3].ToString();
-                        //((Button)c).Click += new EventHandler(btn_Click);
                         ((Button)c).MouseDown += new MouseEventHandler(bt_MouseDown);
                         ((Button)c).MouseUp += new MouseEventHandler(bt_MouseUp);
                     }

@@ -15,6 +15,48 @@ namespace vcs_Keyboard5
         Color key_color = Color.Lime;
         Color key_press_color = Color.Green;
 
+        GroupBox groupBox_keyboard = new GroupBox();
+
+        Label lb_A = new Label();
+        Label lb_B = new Label();
+        Label lb_C = new Label();
+        Label lb_D = new Label();
+        Label lb_E = new Label();
+        Label lb_F = new Label();
+        Label lb_G = new Label();
+        Label lb_H = new Label();
+        Label lb_I = new Label();
+        Label lb_J = new Label();
+        Label lb_K = new Label();
+        Label lb_L = new Label();
+        Label lb_M = new Label();
+        Label lb_N = new Label();
+        Label lb_O = new Label();
+        Label lb_P = new Label();
+        Label lb_Q = new Label();
+        Label lb_R = new Label();
+        Label lb_S = new Label();
+        Label lb_T = new Label();
+        Label lb_U = new Label();
+        Label lb_V = new Label();
+        Label lb_W = new Label();
+        Label lb_X = new Label();
+        Label lb_Y = new Label();
+        Label lb_Z = new Label();
+        Label lb_1 = new Label();
+        Label lb_2 = new Label();
+        Label lb_3 = new Label();
+        Label lb_4 = new Label();
+        Label lb_5 = new Label();
+        Label lb_6 = new Label();
+        Label lb_7 = new Label();
+        Label lb_8 = new Label();
+        Label lb_9 = new Label();
+        Label lb_0 = new Label();
+        Label lb_backspace = new Label();
+        Label lb_clear = new Label();
+        Label lb_OK = new Label();
+        TextBox tb_input = new TextBox();
         Label lb_result = new Label();
 
         public keyboard1()
@@ -34,6 +76,51 @@ namespace vcs_Keyboard5
             groupBox_keyboard.Size = new Size(600, 240);
             groupBox_keyboard.BackColor = groupBox_keyboard_backcolor;
             groupBox_keyboard.Text = "";
+            this.Controls.Add(groupBox_keyboard);
+
+            lb_A.Name = "lb_A";
+            lb_B.Name = "lb_B";
+            lb_C.Name = "lb_C";
+            lb_D.Name = "lb_D";
+            lb_E.Name = "lb_E";
+            lb_F.Name = "lb_F";
+            lb_G.Name = "lb_G";
+            lb_H.Name = "lb_H";
+            lb_I.Name = "lb_I";
+            lb_J.Name = "lb_J";
+
+            lb_K.Name = "lb_K";
+            lb_L.Name = "lb_L";
+            lb_M.Name = "lb_M";
+            lb_N.Name = "lb_N";
+            lb_O.Name = "lb_O";
+            lb_P.Name = "lb_P";
+            lb_Q.Name = "lb_Q";
+            lb_R.Name = "lb_R";
+            lb_S.Name = "lb_S";
+            lb_T.Name = "lb_T";
+
+            lb_U.Name = "lb_U";
+            lb_V.Name = "lb_V";
+            lb_W.Name = "lb_W";
+            lb_X.Name = "lb_X";
+            lb_Y.Name = "lb_Y";
+            lb_Z.Name = "lb_Z";
+
+            lb_1.Name = "lb_1";
+            lb_2.Name = "lb_2";
+            lb_3.Name = "lb_3";
+            lb_4.Name = "lb_4";
+            lb_5.Name = "lb_5";
+            lb_6.Name = "lb_6";
+            lb_7.Name = "lb_7";
+            lb_8.Name = "lb_8";
+            lb_9.Name = "lb_9";
+            lb_0.Name = "lb_0";
+
+            lb_backspace.Name = "lb_backspace";
+            lb_clear.Name = "lb_clear";
+            lb_OK.Name = "lb_OK";
 
             lb_backspace.MouseDown += new MouseEventHandler(lb_backspace_MouseDown);
             lb_backspace.MouseUp += new MouseEventHandler(lb_backspace_MouseUp);
@@ -44,10 +131,54 @@ namespace vcs_Keyboard5
             lb_OK.MouseDown += new MouseEventHandler(lb_OK_MouseDown);
             lb_OK.MouseUp += new MouseEventHandler(lb_OK_MouseUp);
 
+            this.groupBox_keyboard.Controls.Add(lb_A);
+            this.groupBox_keyboard.Controls.Add(lb_B);
+            this.groupBox_keyboard.Controls.Add(lb_C);
+            this.groupBox_keyboard.Controls.Add(lb_D);
+            this.groupBox_keyboard.Controls.Add(lb_E);
+            this.groupBox_keyboard.Controls.Add(lb_F);
+            this.groupBox_keyboard.Controls.Add(lb_G);
+            this.groupBox_keyboard.Controls.Add(lb_H);
+            this.groupBox_keyboard.Controls.Add(lb_I);
+            this.groupBox_keyboard.Controls.Add(lb_J);
+
+            this.groupBox_keyboard.Controls.Add(lb_K);
+            this.groupBox_keyboard.Controls.Add(lb_L);
+            this.groupBox_keyboard.Controls.Add(lb_M);
+            this.groupBox_keyboard.Controls.Add(lb_N);
+            this.groupBox_keyboard.Controls.Add(lb_O);
+            this.groupBox_keyboard.Controls.Add(lb_P);
+            this.groupBox_keyboard.Controls.Add(lb_Q);
+            this.groupBox_keyboard.Controls.Add(lb_R);
+            this.groupBox_keyboard.Controls.Add(lb_S);
+            this.groupBox_keyboard.Controls.Add(lb_T);
+
+            this.groupBox_keyboard.Controls.Add(lb_U);
+            this.groupBox_keyboard.Controls.Add(lb_V);
+            this.groupBox_keyboard.Controls.Add(lb_W);
+            this.groupBox_keyboard.Controls.Add(lb_X);
+            this.groupBox_keyboard.Controls.Add(lb_Y);
+            this.groupBox_keyboard.Controls.Add(lb_Z);
+
+            this.groupBox_keyboard.Controls.Add(lb_1);
+            this.groupBox_keyboard.Controls.Add(lb_2);
+            this.groupBox_keyboard.Controls.Add(lb_3);
+            this.groupBox_keyboard.Controls.Add(lb_4);
+            this.groupBox_keyboard.Controls.Add(lb_5);
+            this.groupBox_keyboard.Controls.Add(lb_6);
+            this.groupBox_keyboard.Controls.Add(lb_7);
+            this.groupBox_keyboard.Controls.Add(lb_8);
+            this.groupBox_keyboard.Controls.Add(lb_9);
+            this.groupBox_keyboard.Controls.Add(lb_0);
+
+            this.groupBox_keyboard.Controls.Add(lb_backspace);
+            this.groupBox_keyboard.Controls.Add(lb_clear);
+            this.groupBox_keyboard.Controls.Add(lb_OK);
+            this.groupBox_keyboard.Controls.Add(tb_input);
+
             lb_result.Text = "";
             lb_result.Font = new Font("標楷體", 22);
             lb_result.ForeColor = Color.Black;
-            lb_result.BackColor = Color.Pink;
             lb_result.AutoSize = true;
             this.groupBox_keyboard.Controls.Add(lb_result);
 
@@ -130,6 +261,7 @@ namespace vcs_Keyboard5
                     if (((Label)c).Name.Length == 4)
                     {
                         //richTextBox1.Text += ((Label)c).Name + "\n";
+                        ((Label)c).Text = ((Label)c).Name[3].ToString();
                         ((Label)c).MouseDown += new MouseEventHandler(lb_MouseDown);
                         ((Label)c).MouseUp += new MouseEventHandler(lb_MouseUp);
                     }
