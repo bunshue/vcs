@@ -5,20 +5,30 @@ void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
-    draw_boundary(color_y, 0.9f); //畫視窗邊界
+    gluOrtho2D(-2.0, 2.0, -2.0, 2.0);   //窗口座標範圍, 2D	//顯示範圍 x(-125 ~ 125), y(-125 ~ 125)
 
-    //畫一個實心矩形
-    glColor3f(0.0, 1.0, 1.0);   //設定顏色 cc
-    float dd = 0.3f;
-    glRectf(-dd, -dd, dd, dd);  //實心矩形
+    draw_boundary(color_y, 3.8f); //畫視窗邊界
 
-    draw_teapot(color_r, 1, 0.3);   //畫一個茶壺
+    int i;
+    int j;
+    for (j = 0; j < 5; j++)
+    {
+        glPushMatrix();
 
-    float x_st = -0.7f;
-    float y_st = 0.5f;
-    const char str1[30] = "Empty example";
-    draw_string1(str1, color_r, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
+        //glScalef(1.0f, 0.5f, 1.0f);		//縮放各方向顯示比例, 例如y軸減半
 
+        glTranslatef(-0.9f, -0.9f + j * 0.45f, 0.0f);	//平移至指定地方(累積)
+
+        for (i = 0; i < 5; i++)
+        {
+            //glScalef(0.8f, 1.0f, 1.0f);		//縮放各方向顯示比例, 例如x軸越來越窄
+
+            draw_teapot(color_r, 1, 0.07f);   //畫一個茶壺
+            glTranslatef(0.45f, 0.0f, 0.0f);	//平移至指定地方(累積)
+        }
+
+        glPopMatrix();
+    }
     glFlush();  // 執行繪圖命令
 }
 
@@ -75,7 +85,7 @@ int main(int argc, char** argv)
     glutInitWindowSize(600, 600);       // 設定視窗大小
     glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
-    glutCreateWindow("OpenGL測試");	//開啟視窗 並顯示出視窗 Title
+    glutCreateWindow("Translate用法");	//開啟視窗 並顯示出視窗 Title
 
     glutDisplayFunc(display);   //設定callback function
     glutReshapeFunc(reshape);   //設定callback function
@@ -84,7 +94,7 @@ int main(int argc, char** argv)
     glutMotionFunc(motion);     //設定callback function
 
     printf("僅顯示, 無控制, 按 Esc 離開\n");
-    printf("\n空白範例\n");
+    printf("\nTranslate用法\n");
 
     glutMainLoop();	//開始主循環繪製
 

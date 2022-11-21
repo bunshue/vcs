@@ -1,5 +1,7 @@
 ﻿#include "../../Common.h"
 
+#define REFRESH_DELAY 1000  // ms
+
 int display_mode = 1;
 
 void reset_default_setting()
@@ -125,6 +127,11 @@ void display(void)
 
         draw_math_function2();
     }
+    else if (display_mode == 3)
+    {
+
+
+    }
 
     glFlush();  // 執行繪圖命令
 }
@@ -177,6 +184,21 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
     glutSetWindowTitle(info);
 }
 
+void timerEvent(int value)
+{
+    //printf("%d ", display_mode);
+
+    if (display_mode == 3)
+    {
+        printf("經過1秒 ");
+        //glutPostRedisplay();
+        
+    }
+
+    glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
+
+}
+
 int main(int argc, char** argv)
 {
     //初始化GLUT庫，這個函數只是傳說命令參數并且初始化glut庫
@@ -194,6 +216,7 @@ int main(int argc, char** argv)
     glutKeyboardFunc(keyboard); //設定callback function
     glutMouseFunc(mouse0);      //設定callback function
     glutMotionFunc(motion0);    //設定callback function
+    glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
 
     printf("按 1 2 控制\n");
 
