@@ -29,7 +29,7 @@ void display(void)
     size = 10.0f;    //設定點的大小, N X N
     x_st = 0.0f;
     y_st = 0.8f;
-    for (x_st = -0.9; x_st < -0.3f; x_st += 0.05f)
+    for (x_st = -0.9f; x_st < -0.3f; x_st += 0.05f)
     {
         draw_point(color_r, size, x_st, y_st);
         draw_point(color_g, size, x_st, y_st - 0.08f);
@@ -53,8 +53,8 @@ void display(void)
     float y4 = cy;
     draw_quad_s(color_r, x1, y1, x2, y2, x3, y3, x4, y4);
 
-    x_st = -0.6;
-    y_st = -0.4;
+    x_st = -0.6f;
+    y_st = -0.4f;
     dd = 0.2f;
     x1 = x_st;    //第1點
     y1 = y_st;
@@ -64,13 +64,14 @@ void display(void)
     y3 = y_st - dd;
     draw_triangle_s(color_g, x1, y1, x2, y2, x3, y3);
 
-
     GLdouble base = 0.2;
     GLdouble height = 0.6;
     GLint slices = 100;
     GLint stacks = 10;
     float width = 1.0f;
     draw_cone(color_y, width, base, height, slices, stacks); //畫圓錐體
+
+    draw_cube(color_g, 2, 0.9);
 
     glFlush();  // 執行繪圖命令
 }

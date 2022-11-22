@@ -24,6 +24,7 @@ void display(void)
 
 	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
 	glTranslated(-2.4, 1.2, -6);
+	draw_coordinates(1.1f);     //畫座標軸
 	glRotated(60, 1, 0, 0);
 	glRotated(a, 0, 0, 1);
 	glutSolidSphere(1, slices, stacks);
@@ -31,6 +32,7 @@ void display(void)
 
 	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
 	glTranslated(0, 1.2, -6);
+	draw_coordinates(1.1f);     //畫座標軸
 	glRotated(60, 1, 0, 0);
 	glRotated(a, 0, 0, 1);
 	glutSolidCone(1, 1, slices, stacks);
@@ -38,6 +40,7 @@ void display(void)
 
 	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
 	glTranslated(2.4, 1.2, -6);
+	draw_coordinates(1.1f);     //畫座標軸
 	glRotated(60, 1, 0, 0);
 	glRotated(a, 0, 0, 1);
 	glutSolidTorus(0.2, 0.8, slices, stacks);
@@ -45,6 +48,7 @@ void display(void)
 
 	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
 	glTranslated(-2.4, -1.2, -6);
+	draw_coordinates(1.1f);     //畫座標軸
 	glRotated(60, 1, 0, 0);
 	glRotated(a, 0, 0, 1);
 	glutWireSphere(1, slices, stacks);
@@ -52,6 +56,7 @@ void display(void)
 
 	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
 	glTranslated(0, -1.2, -6);
+	draw_coordinates(1.1f);     //畫座標軸
 	glRotated(60, 1, 0, 0);
 	glRotated(a, 0, 0, 1);
 	glutWireCone(1, 1, slices, stacks);
@@ -59,6 +64,7 @@ void display(void)
 
 	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
 	glTranslated(2.4, -1.2, -6);
+	draw_coordinates(1.1f);     //畫座標軸
 	glRotated(60, 1, 0, 0);
 	glRotated(a, 0, 0, 1);
 	glutWireTorus(0.2, 0.8, slices, stacks);

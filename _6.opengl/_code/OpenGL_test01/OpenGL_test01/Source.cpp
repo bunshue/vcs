@@ -414,7 +414,7 @@ void display(void)
 
         draw_boundary(color_y, 0.9f); //畫視窗邊界
 
-        draw_coordinates(0.9f);
+        draw_coordinates(0.9f);     //畫座標軸
 
         glLineWidth(4.0f);	//設定線寬
 

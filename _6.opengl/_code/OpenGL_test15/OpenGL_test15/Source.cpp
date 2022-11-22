@@ -5,9 +5,11 @@ void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
-    gluOrtho2D(-2.0, 2.0, -2.0, 2.0);   //窗口座標範圍, 2D	//顯示範圍 x(-125 ~ 125), y(-125 ~ 125)
+    //gluOrtho2D(-2.0, 2.0, -2.0, 2.0);   //窗口座標範圍, 2D	//顯示範圍 x(-125 ~ 125), y(-125 ~ 125)
+    //draw_boundary(color_y, 3.8f); //畫視窗邊界
 
-    draw_boundary(color_y, 3.8f); //畫視窗邊界
+    draw_coordinates(1.1f);     //畫座標軸
+    draw_boundary(color_y, 0.9f); //畫視窗邊界
 
     int i;
     int j;

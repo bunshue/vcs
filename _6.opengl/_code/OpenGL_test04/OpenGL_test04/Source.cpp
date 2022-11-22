@@ -14,8 +14,6 @@ void display(void)
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glClear(GL_COLOR_BUFFER_BIT);
 
-	draw_boundary(color_y, 2.5f); //畫視窗邊界
-
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();	//設置單位矩陣
 
@@ -45,9 +43,19 @@ void display(void)
 	eyez = -x * sin(-y_angle * PI / 180.0) + z * cos(-y_angle * PI / 180.0);
 	gluLookAt(eyex, eyey, eyez, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 
+	//真正畫圖部分 ST
+
+	draw_boundary(color_y, 2.3f); //畫視窗邊界
+
 	draw_coordinates(2.0);	//畫座標軸
 
-	draw_teapot(color_r, 1.0, 1.0);	//畫一個茶壺
+	draw_teapot(color_c, 1.0, 0.5);	//畫一個茶壺
+
+	glLineWidth(5);     //設定線寬
+	glColor3f(1.0, 1.0, 1.0);   //設定顏色
+	glutWireOctahedron();
+
+	//真正畫圖部分 SP
 
 	glFlush();  // 執行繪圖命令
 

@@ -3,7 +3,7 @@
 // 繪圖回調函數
 void display(void)
 {
-	double x, y, z, eyex, eyey, eyez;
+	//double x, y, z, eyex, eyey, eyez;
 	int rect[4];
 	float w, h;
 
@@ -32,24 +32,19 @@ void display(void)
 	glRotatef(x_angle, 1.0f, 0.0f, 0.0f);
 	glRotatef(y_angle, 0.0f, 1.0f, 0.0f);
 
+	//真正畫圖部分 ST
+
 	draw_boundary(color_y, 0.9f); //畫視窗邊界
 
 	draw_coordinates(0.9f);	//畫座標軸
 
 	draw_teapot(color_c, 1.0, 0.5);	//畫一個茶壺
 
-	GLdouble base = 0.25;
-	GLdouble height = 1.0;
-	GLint slices = 100;
-	GLint stacks = 10;
-	float width = 5;
-
-	draw_cone(color_r, width, base, height, slices, stacks); //畫圓錐體
-
-	draw_cube(color_g, 2, 0.9);
-
-	glLineWidth(10);     //設定線寬
+	glLineWidth(5);     //設定線寬
+	glColor3f(1.0, 1.0, 1.0);   //設定顏色
 	glutWireOctahedron();
+
+	//真正畫圖部分 SP
 
 	glFlush();  // 執行繪圖命令
 
