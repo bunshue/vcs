@@ -53,11 +53,19 @@ namespace vcs_Keyboard5
         Label lb_8 = new Label();
         Label lb_9 = new Label();
         Label lb_0 = new Label();
+        Label lb_period = new Label();
         Label lb_backspace = new Label();
+        Label lb_esc = new Label();
+        Label lb_caps_lock = new Label();
+        Label lb_shift = new Label();
+        Label lb_space = new Label();
         Label lb_clear = new Label();
         Label lb_OK = new Label();
         TextBox tb_input = new TextBox();
         Label lb_result = new Label();
+
+        bool flag_caps_lock = false;
+        bool flag_caps_lock_once = false;
 
         public keyboard1()
         {
@@ -66,16 +74,18 @@ namespace vcs_Keyboard5
 
         private void keyboard1_Load(object sender, EventArgs e)
         {
-            this.Size = new Size(600, 260);
+            this.Size = new Size(630, 230);
+            this.BackColor = Color.Pink;
             setup_keyboard();
         }
 
         void setup_keyboard()
         {
             groupBox_keyboard.Location = new Point(10, 10);
-            groupBox_keyboard.Size = new Size(600, 240);
+            //groupBox_keyboard.Size = new Size(630, 240);
             groupBox_keyboard.BackColor = groupBox_keyboard_backcolor;
             groupBox_keyboard.Text = "";
+            groupBox_keyboard.Dock = DockStyle.Fill;
             this.Controls.Add(groupBox_keyboard);
 
             lb_A.Name = "lb_A";
@@ -118,12 +128,32 @@ namespace vcs_Keyboard5
             lb_9.Name = "lb_9";
             lb_0.Name = "lb_0";
 
+            lb_period.Name = "lb_period";
             lb_backspace.Name = "lb_backspace";
+            lb_esc.Name = "lb_esc";
+            lb_caps_lock.Name = "lb_caps_lock";
+            lb_shift.Name = "lb_shift";
+            lb_space.Name = "lb_space";
             lb_clear.Name = "lb_clear";
             lb_OK.Name = "lb_OK";
 
+            lb_period.MouseDown += new MouseEventHandler(lb_MouseDown);
+            lb_period.MouseUp += new MouseEventHandler(lb_MouseUp);
+
             lb_backspace.MouseDown += new MouseEventHandler(lb_backspace_MouseDown);
             lb_backspace.MouseUp += new MouseEventHandler(lb_backspace_MouseUp);
+
+            lb_esc.MouseDown += new MouseEventHandler(lb_esc_MouseDown);
+            lb_esc.MouseUp += new MouseEventHandler(lb_esc_MouseUp);
+
+            lb_caps_lock.MouseDown += new MouseEventHandler(lb_caps_lock_MouseDown);
+            lb_caps_lock.MouseUp += new MouseEventHandler(lb_caps_lock_MouseUp);
+
+            lb_shift.MouseDown += new MouseEventHandler(lb_shift_MouseDown);
+            lb_shift.MouseUp += new MouseEventHandler(lb_shift_MouseUp);
+
+            lb_space.MouseDown += new MouseEventHandler(lb_MouseDown);
+            lb_space.MouseUp += new MouseEventHandler(lb_MouseUp);
 
             lb_clear.MouseDown += new MouseEventHandler(lb_clear_MouseDown);
             lb_clear.MouseUp += new MouseEventHandler(lb_clear_MouseUp);
@@ -171,7 +201,12 @@ namespace vcs_Keyboard5
             this.groupBox_keyboard.Controls.Add(lb_9);
             this.groupBox_keyboard.Controls.Add(lb_0);
 
+            this.groupBox_keyboard.Controls.Add(lb_period);
             this.groupBox_keyboard.Controls.Add(lb_backspace);
+            this.groupBox_keyboard.Controls.Add(lb_esc);
+            this.groupBox_keyboard.Controls.Add(lb_caps_lock);
+            this.groupBox_keyboard.Controls.Add(lb_shift);
+            this.groupBox_keyboard.Controls.Add(lb_space);
             this.groupBox_keyboard.Controls.Add(lb_clear);
             this.groupBox_keyboard.Controls.Add(lb_OK);
             this.groupBox_keyboard.Controls.Add(tb_input);
@@ -187,7 +222,7 @@ namespace vcs_Keyboard5
 
         public void setup_keyboard_keys(Control.ControlCollection cc)
         {
-            int x_st = 20;
+            int x_st = 70;
             int y_st = 30;
             int w = 35;
             int h = 35;
@@ -203,8 +238,6 @@ namespace vcs_Keyboard5
             lb_I.Location = new Point(x_st + dx * 7, y_st + dy * 0);
             lb_O.Location = new Point(x_st + dx * 8, y_st + dy * 0);
             lb_P.Location = new Point(x_st + dx * 9, y_st + dy * 0);
-            tb_input.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            tb_input.Size = new Size(300, 36);
 
             lb_result.Location = new Point(x_st + dx * 0, y_st + dy * 4);
 
@@ -227,10 +260,17 @@ namespace vcs_Keyboard5
             lb_B.Location = new Point(x_st + dx * 4, y_st + dy * 2);
             lb_N.Location = new Point(x_st + dx * 5, y_st + dy * 2);
             lb_M.Location = new Point(x_st + dx * 6, y_st + dy * 2);
-            lb_backspace.Location = new Point(x_st + dx * 7, y_st + dy * 2);
+            lb_period.Location = new Point(x_st + dx * 7, y_st + dy * 2);
+            lb_backspace.Location = new Point(x_st + dx * 8, y_st + dy * 2);
+            lb_esc.Location = new Point(x_st + dx * 0 - 95, y_st + dy * 0);
+            lb_caps_lock.Location = new Point(x_st + dx * 0 - 95, y_st + dy * 1);
+            lb_shift.Location = new Point(x_st + dx * 0 - 95, y_st + dy * 2);
+            lb_space.Location = new Point(x_st + dx * 5, y_st + dy * 3);
             lb_clear.Location = new Point(x_st + dx * 7, y_st + dy * 3);
+            tb_input.Location = new Point(x_st + dx * 0 - 95, y_st + dy * 3);
+            tb_input.Size = new Size(280, 36);
 
-            x_st = 450;
+            x_st = 500;
             y_st = 30;
             lb_1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             lb_2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
@@ -261,31 +301,65 @@ namespace vcs_Keyboard5
                     if (((Label)c).Name.Length == 4)
                     {
                         //richTextBox1.Text += ((Label)c).Name + "\n";
-                        ((Label)c).Text = ((Label)c).Name[3].ToString();
+                        setup_key_text(flag_caps_lock ^ flag_caps_lock_once);
                         ((Label)c).MouseDown += new MouseEventHandler(lb_MouseDown);
                         ((Label)c).MouseUp += new MouseEventHandler(lb_MouseUp);
                     }
 
                     //richTextBox1.Text += ((Label)c).Name + "\t" + ((Label)c).Name.Length.ToString() + "\n";
 
-                    //lb_backspace	12
-                    if (((Label)c).Name.Length == 12)
+                    if (((Label)c).Name == "lb_period")
                     {
                         ((Label)c).Font = new Font("標楷體", 8, FontStyle.Bold);  //建立字體對象
-                        ((Label)c).Size = new Size(w * 2 + 5, h);  //設定大小
-                        ((Label)c).Text = "Backspace";
+                        ((Label)c).Size = new Size(w, h);  //設定大小
+                        ((Label)c).Text = ".";
                     }
 
-                    //lb_OK	5
-                    if (((Label)c).Name.Length == 5)
+                    if (((Label)c).Name == "lb_backspace")
+                    {
+                        ((Label)c).Font = new Font("標楷體", 8, FontStyle.Bold);  //建立字體對象
+                        ((Label)c).Size = new Size(w * 2 - 10, h);  //設定大小
+                        ((Label)c).Text = "Back space";
+                    }
+
+                    if (((Label)c).Name == "lb_esc")
+                    {
+                        ((Label)c).Font = new Font("標楷體", 8, FontStyle.Bold);  //建立字體對象
+                        ((Label)c).Size = new Size(w, h);  //設定大小
+                        ((Label)c).Text = "Esc";
+                    }
+
+                    if (((Label)c).Name == "lb_caps_lock")
+                    {
+                        ((Label)c).Font = new Font("標楷體", 8, FontStyle.Bold);  //建立字體對象
+                        ((Label)c).Size = new Size(w * 2 - 10, h);  //設定大小
+                        ((Label)c).Text = "Caps Lock";
+                    }
+
+                    if (((Label)c).Name == "lb_shift")
+                    {
+                        ((Label)c).Font = new Font("標楷體", 8, FontStyle.Bold);  //建立字體對象
+                        ((Label)c).Size = new Size(w * 2 - 10, h);  //設定大小
+                        ((Label)c).Text = "Shift";
+                    }
+
+                    //lb_OK
+                    if (((Label)c).Name == "lb_OK")
                     {
                         ((Label)c).Font = new Font("標楷體", 18, FontStyle.Bold);  //建立字體對象
                         ((Label)c).Size = new Size(w * 2 + 5, h);  //設定大小
                         ((Label)c).Text = "OK";
                     }
 
-                    //lb_clear	8
-                    if (((Label)c).Name.Length == 8)
+                    //lb_space
+                    if (((Label)c).Name == "lb_space")
+                    {
+                        ((Label)c).Size = new Size(w * 2 + 5, h);  //設定大小
+                        ((Label)c).Text = "";
+                    }
+
+                    //lb_clear
+                    if (((Label)c).Name == "lb_clear")
                     {
                         ((Label)c).Font = new Font("標楷體", 14, FontStyle.Bold);  //建立字體對象
                         ((Label)c).Size = new Size(w * 2 + 5, h);  //設定大小
@@ -293,6 +367,30 @@ namespace vcs_Keyboard5
                     }
                 }
                 //richTextBox1.Text += "\n";
+            }
+        }
+
+        void setup_key_text(bool caps_on)
+        {
+            foreach (Control c in this.groupBox_keyboard.Controls)  //撈出所有控件
+            {
+                //richTextBox1.Text += c.GetType().Name;
+
+                if (c.GetType().Name == "Label")   //判斷是否為 Label 控件
+                {
+                    if (((Label)c).Name.Length == 4)
+                    {
+                        //richTextBox1.Text += ((Label)c).Name + "\n";
+                        if (caps_on == true)
+                        {
+                            ((Label)c).Text = ((Label)c).Name[3].ToString();
+                        }
+                        else
+                        {
+                            ((Label)c).Text = ((Label)c).Name[3].ToString().ToLower();
+                        }
+                    }
+                }
             }
         }
 
@@ -309,6 +407,52 @@ namespace vcs_Keyboard5
         void lb_backspace_MouseUp(object sender, MouseEventArgs e)
         {
             lb_backspace.BackColor = key_color;
+        }
+
+        void lb_esc_MouseDown(object sender, MouseEventArgs e)
+        {
+            lb_esc.BackColor = key_press_color;
+
+            //TBD
+        }
+
+        void lb_esc_MouseUp(object sender, MouseEventArgs e)
+        {
+            lb_esc.BackColor = key_color;
+        }
+
+        void lb_caps_lock_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (flag_caps_lock == false)
+            {
+                flag_caps_lock = true;
+                lb_caps_lock.BackColor = key_press_color;
+            }
+            else
+            {
+                flag_caps_lock = false;
+                lb_caps_lock.BackColor = key_color;
+            }
+            flag_caps_lock_once = false;
+            lb_shift.BackColor = key_color;
+            setup_key_text(flag_caps_lock ^ flag_caps_lock_once);
+        }
+
+        void lb_caps_lock_MouseUp(object sender, MouseEventArgs e)
+        {
+            //nothing
+        }
+
+        void lb_shift_MouseDown(object sender, MouseEventArgs e)
+        {
+            lb_shift.BackColor = key_press_color;
+            flag_caps_lock_once = true;
+            setup_key_text(flag_caps_lock ^ flag_caps_lock_once);
+        }
+
+        void lb_shift_MouseUp(object sender, MouseEventArgs e)
+        {
+            //nothing
         }
 
         void lb_clear_MouseDown(object sender, MouseEventArgs e)
@@ -332,7 +476,7 @@ namespace vcs_Keyboard5
             }
             else
             {
-                lb_result.Text = "你輸入了 : " + tb_input.Text.ToString();
+                lb_result.Text = "你輸入了 : " + tb_input.Text.ToString().Replace("_", " ");
             }
             tb_input.Text = "";
         }
@@ -345,10 +489,36 @@ namespace vcs_Keyboard5
         void lb_MouseDown(object sender, MouseEventArgs e)
         {
             Label lb = (Label)sender;
-            tb_input.Text += lb.Name.Substring(3, 1);
+
+            if (lb.Name == "lb_period")
+            {
+                tb_input.Text += ".";
+            }
+            else if (lb.Name == "lb_space")
+            {
+                tb_input.Text += "_";
+            }
+            else
+            {
+                if (flag_caps_lock ^ flag_caps_lock_once)
+                {
+                    tb_input.Text += lb.Name.Substring(3, 1);
+                }
+                else
+                {
+                    tb_input.Text += lb.Name.Substring(3, 1).ToLower();
+                }
+            }
+
             tb_input.SelectionStart = tb_input.Text.Length;
 
             lb.BackColor = key_press_color;
+            if (flag_caps_lock_once == true)
+            {
+                flag_caps_lock_once = false;
+                lb_shift.BackColor = key_color;
+                setup_key_text(flag_caps_lock ^ flag_caps_lock_once);
+            }
         }
 
         void lb_MouseUp(object sender, MouseEventArgs e)

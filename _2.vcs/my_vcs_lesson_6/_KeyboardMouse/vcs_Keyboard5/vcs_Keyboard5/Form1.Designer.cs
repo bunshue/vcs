@@ -89,8 +89,8 @@
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private keyboard1 keyboard11;
         private keyboard2 keyboard21;
+        private keyboard1 keyboard11;
     }
 }
 

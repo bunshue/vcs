@@ -35,7 +35,7 @@ namespace Bottom_Control.按钮__TO__PLC方法
                     {
                         Button_write_select(Button.Pattern.ToString(), mitsubishi, Button);//根据按钮模式进行写入操作
                     }
-                    else MessageBox.Show("111未连接设备：" + pLC.Trim(), "Err");//推出异常提示用户
+                    else MessageBox.Show("1111未连接设备：" + pLC.Trim(), "Err");//推出异常提示用户
 
                     break;
                 case "Siemens":
@@ -44,7 +44,7 @@ namespace Bottom_Control.按钮__TO__PLC方法
                     {
                         Button_write_select(Button.Pattern.ToString(), Siemens, Button);//根据按钮模式进行写入操作
                     }
-                    else MessageBox.Show("222未连接设备：" + pLC.Trim(), "Err");//推出异常提示用户
+                    else MessageBox.Show("2222未连接设备：" + pLC.Trim(), "Err");//推出异常提示用户
                     break;
                 case "Modbus_TCP":
                     MODBUD_TCP MODBUD_TCP = new MODBUD_TCP();//实例化接口--实现MODBUS TCP
@@ -52,7 +52,7 @@ namespace Bottom_Control.按钮__TO__PLC方法
                     {
                         Button_write_select(Button.Pattern.ToString(), "MODBUD_TCP", MODBUD_TCP, Button);//根据按钮模式进行写入操作
                     }
-                    else MessageBox.Show("333未连接设备：" + pLC.Trim(), "Err");//推出异常提示用户
+                    else MessageBox.Show("3333未连接设备：" + pLC.Trim(), "Err");//推出异常提示用户
                     break;
 
             }
@@ -184,6 +184,8 @@ namespace Bottom_Control.按钮__TO__PLC方法
         /// 定时刷新控件
         /// </summary>
         /// <param name="button"></param>
+        /// 
+        int cccc = 0;
         public void Refresh(Control button,PLC Plc)//根据PLC类型读取--按钮类
         {
             Button_state button_State =Button_state.Off;//按钮状态
@@ -191,9 +193,15 @@ namespace Bottom_Control.按钮__TO__PLC方法
             switch (Plc)
             {
                 case PLC.Mitsubishi:
+                    //MessageBox.Show("AAAAAA");
+
+                    Console.WriteLine("refresh "+cccc.ToString() );
+                    cccc++;
+
                     IPLC_interface mitsubishi = new Mitsubishi_realize();//实例化接口--实现三菱在线访问
                     if (mitsubishi.PLC_ready)//PLC是否准备完成
                     {
+                        Console.WriteLine("read_M");
                         List<bool> data = mitsubishi.PLC_read_M_bit(button_base.PLC_Contact, button_base.PLC_Address);//读取状态
                         button_State = data[0] == true ? Button_state.ON : Button_state.Off;
                         button_state(button, button_State);

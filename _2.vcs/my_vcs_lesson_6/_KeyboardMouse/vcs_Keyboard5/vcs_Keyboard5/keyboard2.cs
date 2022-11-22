@@ -53,11 +53,19 @@ namespace vcs_Keyboard5
         Button bt_8 = new Button();
         Button bt_9 = new Button();
         Button bt_0 = new Button();
+        Button bt_period = new Button();
         Button bt_backspace = new Button();
+        Button bt_esc = new Button();
+        Button bt_caps_lock = new Button();
+        Button bt_shift = new Button();
+        Button bt_space = new Button();
         Button bt_clear = new Button();
         Button bt_OK = new Button();
         TextBox tb_input = new TextBox();
         Label lb_result = new Label();
+
+        bool flag_caps_lock = false;
+        bool flag_caps_lock_once = false;
 
         public keyboard2()
         {
@@ -66,16 +74,18 @@ namespace vcs_Keyboard5
 
         private void keyboard2_Load(object sender, EventArgs e)
         {
-            this.Size = new Size(600, 260);
+            this.Size = new Size(630, 230);
+            this.BackColor = Color.Pink;
             setup_keyboard();
         }
 
         void setup_keyboard()
         {
             groupBox_keyboard.Location = new Point(10, 10);
-            groupBox_keyboard.Size = new Size(600, 240);
+            //groupBox_keyboard.Size = new Size(630, 240);
             groupBox_keyboard.BackColor = groupBox_keyboard_backcolor;
             groupBox_keyboard.Text = "";
+            groupBox_keyboard.Dock = DockStyle.Fill;
             this.Controls.Add(groupBox_keyboard);
 
             bt_A.Name = "bt_A";
@@ -118,12 +128,32 @@ namespace vcs_Keyboard5
             bt_9.Name = "bt_9";
             bt_0.Name = "bt_0";
 
+            bt_period.Name = "bt_period";
             bt_backspace.Name = "bt_backspace";
+            bt_esc.Name = "bt_esc";
+            bt_caps_lock.Name = "bt_caps_lock";
+            bt_shift.Name = "bt_shift";
+            bt_space.Name = "bt_space";
             bt_clear.Name = "bt_clear";
             bt_OK.Name = "bt_OK";
 
+            bt_period.MouseDown += new MouseEventHandler(bt_MouseDown);
+            bt_period.MouseUp += new MouseEventHandler(bt_MouseUp);
+
             bt_backspace.MouseDown += new MouseEventHandler(bt_backspace_MouseDown);
             bt_backspace.MouseUp += new MouseEventHandler(bt_backspace_MouseUp);
+
+            bt_esc.MouseDown += new MouseEventHandler(bt_esc_MouseDown);
+            bt_esc.MouseUp += new MouseEventHandler(bt_esc_MouseUp);
+
+            bt_caps_lock.MouseDown += new MouseEventHandler(bt_caps_lock_MouseDown);
+            bt_caps_lock.MouseUp += new MouseEventHandler(bt_caps_lock_MouseUp);
+
+            bt_shift.MouseDown += new MouseEventHandler(bt_shift_MouseDown);
+            bt_shift.MouseUp += new MouseEventHandler(bt_shift_MouseUp);
+
+            bt_space.MouseDown += new MouseEventHandler(bt_MouseDown);
+            bt_space.MouseUp += new MouseEventHandler(bt_MouseUp);
 
             bt_clear.MouseDown += new MouseEventHandler(bt_clear_MouseDown);
             bt_clear.MouseUp += new MouseEventHandler(bt_clear_MouseUp);
@@ -171,7 +201,12 @@ namespace vcs_Keyboard5
             this.groupBox_keyboard.Controls.Add(bt_9);
             this.groupBox_keyboard.Controls.Add(bt_0);
 
+            this.groupBox_keyboard.Controls.Add(bt_period);
             this.groupBox_keyboard.Controls.Add(bt_backspace);
+            this.groupBox_keyboard.Controls.Add(bt_esc);
+            this.groupBox_keyboard.Controls.Add(bt_caps_lock);
+            this.groupBox_keyboard.Controls.Add(bt_shift);
+            this.groupBox_keyboard.Controls.Add(bt_space);
             this.groupBox_keyboard.Controls.Add(bt_clear);
             this.groupBox_keyboard.Controls.Add(bt_OK);
             this.groupBox_keyboard.Controls.Add(tb_input);
@@ -187,7 +222,7 @@ namespace vcs_Keyboard5
 
         public void setup_keyboard_keys(Control.ControlCollection cc)
         {
-            int x_st = 20;
+            int x_st = 70;
             int y_st = 30;
             int w = 35;
             int h = 35;
@@ -203,8 +238,6 @@ namespace vcs_Keyboard5
             bt_I.Location = new Point(x_st + dx * 7, y_st + dy * 0);
             bt_O.Location = new Point(x_st + dx * 8, y_st + dy * 0);
             bt_P.Location = new Point(x_st + dx * 9, y_st + dy * 0);
-            tb_input.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            tb_input.Size = new Size(300, 36);
 
             lb_result.Location = new Point(x_st + dx * 0, y_st + dy * 4);
 
@@ -227,10 +260,17 @@ namespace vcs_Keyboard5
             bt_B.Location = new Point(x_st + dx * 4, y_st + dy * 2);
             bt_N.Location = new Point(x_st + dx * 5, y_st + dy * 2);
             bt_M.Location = new Point(x_st + dx * 6, y_st + dy * 2);
-            bt_backspace.Location = new Point(x_st + dx * 7, y_st + dy * 2);
+            bt_period.Location = new Point(x_st + dx * 7, y_st + dy * 2);
+            bt_backspace.Location = new Point(x_st + dx * 8, y_st + dy * 2);
+            bt_esc.Location = new Point(x_st + dx * 0 - 95, y_st + dy * 0);
+            bt_caps_lock.Location = new Point(x_st + dx * 0 - 95, y_st + dy * 1);
+            bt_shift.Location = new Point(x_st + dx * 0 - 95, y_st + dy * 2);
+            bt_space.Location = new Point(x_st + dx * 5, y_st + dy * 3);
             bt_clear.Location = new Point(x_st + dx * 7, y_st + dy * 3);
+            tb_input.Location = new Point(x_st + dx * 0 - 95, y_st + dy * 3);
+            tb_input.Size = new Size(280, 36);
 
-            x_st = 450;
+            x_st = 500;
             y_st = 30;
             bt_1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             bt_2.Location = new Point(x_st + dx * 1, y_st + dy * 0);
@@ -261,31 +301,65 @@ namespace vcs_Keyboard5
                     if (((Button)c).Name.Length == 4)
                     {
                         //richTextBox1.Text += ((Button)c).Name + "\n";
-                        ((Button)c).Text = ((Button)c).Name[3].ToString();
+                        setup_key_text(flag_caps_lock ^ flag_caps_lock_once);
                         ((Button)c).MouseDown += new MouseEventHandler(bt_MouseDown);
                         ((Button)c).MouseUp += new MouseEventHandler(bt_MouseUp);
                     }
 
                     //richTextBox1.Text += ((Button)c).Name + "\t" + ((Button)c).Name.Length.ToString() + "\n";
 
-                    //bt_backspace	12
-                    if (((Button)c).Name.Length == 12)
+                    if (((Button)c).Name == "bt_period")
                     {
                         ((Button)c).Font = new Font("標楷體", 8, FontStyle.Bold);  //建立字體對象
-                        ((Button)c).Size = new Size(w * 2 + 5, h);  //設定大小
-                        ((Button)c).Text = "Backspace";
+                        ((Button)c).Size = new Size(w, h);  //設定大小
+                        ((Button)c).Text = ".";
                     }
 
-                    //bt_OK	5
-                    if (((Button)c).Name.Length == 5)
+                    if (((Button)c).Name == "bt_backspace")
+                    {
+                        ((Button)c).Font = new Font("標楷體", 8, FontStyle.Bold);  //建立字體對象
+                        ((Button)c).Size = new Size(w * 2 - 10, h);  //設定大小
+                        ((Button)c).Text = "Back space";
+                    }
+
+                    if (((Button)c).Name == "bt_esc")
+                    {
+                        ((Button)c).Font = new Font("標楷體", 8, FontStyle.Bold);  //建立字體對象
+                        ((Button)c).Size = new Size(w, h);  //設定大小
+                        ((Button)c).Text = "Esc";
+                    }
+
+                    if (((Button)c).Name == "bt_caps_lock")
+                    {
+                        ((Button)c).Font = new Font("標楷體", 8, FontStyle.Bold);  //建立字體對象
+                        ((Button)c).Size = new Size(w * 2 - 10, h);  //設定大小
+                        ((Button)c).Text = "Caps Lock";
+                    }
+
+                    if (((Button)c).Name == "bt_shift")
+                    {
+                        ((Button)c).Font = new Font("標楷體", 8, FontStyle.Bold);  //建立字體對象
+                        ((Button)c).Size = new Size(w * 2 - 10, h);  //設定大小
+                        ((Button)c).Text = "Shift";
+                    }
+
+                    //bt_OK
+                    if (((Button)c).Name == "bt_OK")
                     {
                         ((Button)c).Font = new Font("標楷體", 18, FontStyle.Bold);  //建立字體對象
                         ((Button)c).Size = new Size(w * 2 + 5, h);  //設定大小
                         ((Button)c).Text = "OK";
                     }
 
-                    //bt_clear	8
-                    if (((Button)c).Name.Length == 8)
+                    //bt_space
+                    if (((Button)c).Name == "bt_space")
+                    {
+                        ((Button)c).Size = new Size(w * 2 + 5, h);  //設定大小
+                        ((Button)c).Text = "";
+                    }
+
+                    //bt_clear
+                    if (((Button)c).Name == "bt_clear")
                     {
                         ((Button)c).Font = new Font("標楷體", 14, FontStyle.Bold);  //建立字體對象
                         ((Button)c).Size = new Size(w * 2 + 5, h);  //設定大小
@@ -293,6 +367,30 @@ namespace vcs_Keyboard5
                     }
                 }
                 //richTextBox1.Text += "\n";
+            }
+        }
+
+        void setup_key_text(bool caps_on)
+        {
+            foreach (Control c in this.groupBox_keyboard.Controls)  //撈出所有控件
+            {
+                //richTextBox1.Text += c.GetType().Name;
+
+                if (c.GetType().Name == "Button")   //判斷是否為 Button 控件
+                {
+                    if (((Button)c).Name.Length == 4)
+                    {
+                        //richTextBox1.Text += ((Button)c).Name + "\n";
+                        if (caps_on == true)
+                        {
+                            ((Button)c).Text = ((Button)c).Name[3].ToString();
+                        }
+                        else
+                        {
+                            ((Button)c).Text = ((Button)c).Name[3].ToString().ToLower();
+                        }
+                    }
+                }
             }
         }
 
@@ -309,6 +407,52 @@ namespace vcs_Keyboard5
         void bt_backspace_MouseUp(object sender, MouseEventArgs e)
         {
             bt_backspace.BackColor = key_color;
+        }
+
+        void bt_esc_MouseDown(object sender, MouseEventArgs e)
+        {
+            bt_esc.BackColor = key_press_color;
+
+            //TBD
+        }
+
+        void bt_esc_MouseUp(object sender, MouseEventArgs e)
+        {
+            bt_esc.BackColor = key_color;
+        }
+
+        void bt_caps_lock_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (flag_caps_lock == false)
+            {
+                flag_caps_lock = true;
+                bt_caps_lock.BackColor = key_press_color;
+            }
+            else
+            {
+                flag_caps_lock = false;
+                bt_caps_lock.BackColor = key_color;
+            }
+            flag_caps_lock_once = false;
+            bt_shift.BackColor = key_color;
+            setup_key_text(flag_caps_lock ^ flag_caps_lock_once);
+        }
+
+        void bt_caps_lock_MouseUp(object sender, MouseEventArgs e)
+        {
+            //nothing
+        }
+
+        void bt_shift_MouseDown(object sender, MouseEventArgs e)
+        {
+            bt_shift.BackColor = key_press_color;
+            flag_caps_lock_once = true;
+            setup_key_text(flag_caps_lock ^ flag_caps_lock_once);
+        }
+
+        void bt_shift_MouseUp(object sender, MouseEventArgs e)
+        {
+            //nothing
         }
 
         void bt_clear_MouseDown(object sender, MouseEventArgs e)
@@ -332,7 +476,7 @@ namespace vcs_Keyboard5
             }
             else
             {
-                lb_result.Text = "你輸入了 : " + tb_input.Text.ToString();
+                lb_result.Text = "你輸入了 : " + tb_input.Text.ToString().Replace("_", " ");
             }
             tb_input.Text = "";
         }
@@ -345,10 +489,36 @@ namespace vcs_Keyboard5
         void bt_MouseDown(object sender, MouseEventArgs e)
         {
             Button bt = (Button)sender;
-            tb_input.Text += bt.Name.Substring(3, 1);
+
+            if (bt.Name == "bt_period")
+            {
+                tb_input.Text += ".";
+            }
+            else if (bt.Name == "bt_space")
+            {
+                tb_input.Text += "_";
+            }
+            else
+            {
+                if (flag_caps_lock ^ flag_caps_lock_once)
+                {
+                    tb_input.Text += bt.Name.Substring(3, 1);
+                }
+                else
+                {
+                    tb_input.Text += bt.Name.Substring(3, 1).ToLower();
+                }
+            }
+
             tb_input.SelectionStart = tb_input.Text.Length;
 
             bt.BackColor = key_press_color;
+            if (flag_caps_lock_once == true)
+            {
+                flag_caps_lock_once = false;
+                bt_shift.BackColor = key_color;
+                setup_key_text(flag_caps_lock ^ flag_caps_lock_once);
+            }
         }
 
         void bt_MouseUp(object sender, MouseEventArgs e)

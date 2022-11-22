@@ -30,11 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.daButton3 = new Bottom_Control.DAButton();
+            this.daButton2 = new Bottom_Control.DAButton();
             this.daButton1 = new Bottom_Control.DAButton();
             this.plC_Open_Time1 = new Bottom_Control.设置控件.PLC_Open_Time();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.daButton2 = new Bottom_Control.DAButton();
-            this.daButton3 = new Bottom_Control.DAButton();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -49,6 +49,46 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "PC";
+            // 
+            // daButton3
+            // 
+            this.daButton3.BackColor = System.Drawing.Color.Transparent;
+            this.daButton3.Backdrop_OFF = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(131)))), ((int)(((byte)(229)))));
+            this.daButton3.Backdrop_ON = System.Drawing.Color.Lime;
+            this.daButton3.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.daButton3.DownBack = null;
+            this.daButton3.Location = new System.Drawing.Point(35, 382);
+            this.daButton3.MouseBack = null;
+            this.daButton3.Name = "daButton3";
+            this.daButton3.NormlBack = null;
+            this.daButton3.Pattern = Bottom_Control.Button_pattern.selector_witch;
+            this.daButton3.PLC_Address = "20";
+            this.daButton3.PLC_Contact = "Y";
+            this.daButton3.PLC_Enable = true;
+            this.daButton3.Size = new System.Drawing.Size(100, 100);
+            this.daButton3.TabIndex = 2;
+            this.daButton3.Text = "接收";
+            this.daButton3.UseVisualStyleBackColor = false;
+            // 
+            // daButton2
+            // 
+            this.daButton2.BackColor = System.Drawing.Color.Transparent;
+            this.daButton2.Backdrop_OFF = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(131)))), ((int)(((byte)(229)))));
+            this.daButton2.Backdrop_ON = System.Drawing.Color.Lime;
+            this.daButton2.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.daButton2.DownBack = null;
+            this.daButton2.Location = new System.Drawing.Point(35, 216);
+            this.daButton2.MouseBack = null;
+            this.daButton2.Name = "daButton2";
+            this.daButton2.NormlBack = null;
+            this.daButton2.Pattern = Bottom_Control.Button_pattern.selector_witch;
+            this.daButton2.PLC_Address = "20";
+            this.daButton2.PLC_Contact = "Y";
+            this.daButton2.PLC_Enable = true;
+            this.daButton2.Size = new System.Drawing.Size(100, 100);
+            this.daButton2.TabIndex = 1;
+            this.daButton2.Text = "發送命令";
+            this.daButton2.UseVisualStyleBackColor = false;
             // 
             // daButton1
             // 
@@ -74,6 +114,7 @@
             // 
             this.plC_Open_Time1.Interval = 500;
             this.plC_Open_Time1.Mitsubishi_Open = true;
+            this.plC_Open_Time1.MitsubishiIP = "192.168.3.39";
             this.plC_Open_Time1.ModBusIP = "192.168.3.20";
             this.plC_Open_Time1.siemensPLCS = HslCommunication.Profinet.SiemensPLCS.S200Smart;
             // 
@@ -84,46 +125,6 @@
             this.richTextBox1.Size = new System.Drawing.Size(352, 567);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
-            // 
-            // daButton2
-            // 
-            this.daButton2.BackColor = System.Drawing.Color.Transparent;
-            this.daButton2.Backdrop_OFF = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(131)))), ((int)(((byte)(229)))));
-            this.daButton2.Backdrop_ON = System.Drawing.Color.Lime;
-            this.daButton2.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.daButton2.DownBack = null;
-            this.daButton2.Location = new System.Drawing.Point(35, 216);
-            this.daButton2.MouseBack = null;
-            this.daButton2.Name = "daButton2";
-            this.daButton2.NormlBack = null;
-            this.daButton2.Pattern = Bottom_Control.Button_pattern.selector_witch;
-            this.daButton2.PLC_Address = "20";
-            this.daButton2.PLC_Contact = "Y";
-            this.daButton2.PLC_Enable = true;
-            this.daButton2.Size = new System.Drawing.Size(100, 100);
-            this.daButton2.TabIndex = 1;
-            this.daButton2.Text = "發送命令";
-            this.daButton2.UseVisualStyleBackColor = false;
-            // 
-            // daButton3
-            // 
-            this.daButton3.BackColor = System.Drawing.Color.Transparent;
-            this.daButton3.Backdrop_OFF = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(131)))), ((int)(((byte)(229)))));
-            this.daButton3.Backdrop_ON = System.Drawing.Color.Lime;
-            this.daButton3.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.daButton3.DownBack = null;
-            this.daButton3.Location = new System.Drawing.Point(35, 382);
-            this.daButton3.MouseBack = null;
-            this.daButton3.Name = "daButton3";
-            this.daButton3.NormlBack = null;
-            this.daButton3.Pattern = Bottom_Control.Button_pattern.selector_witch;
-            this.daButton3.PLC_Address = "20";
-            this.daButton3.PLC_Contact = "Y";
-            this.daButton3.PLC_Enable = true;
-            this.daButton3.Size = new System.Drawing.Size(100, 100);
-            this.daButton3.TabIndex = 2;
-            this.daButton3.Text = "接收";
-            this.daButton3.UseVisualStyleBackColor = false;
             // 
             // Form2
             // 

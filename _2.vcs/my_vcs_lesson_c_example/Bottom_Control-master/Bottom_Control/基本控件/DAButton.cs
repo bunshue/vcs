@@ -118,7 +118,7 @@ namespace Bottom_Control
         /// </summary>
         [Description("按钮刷新定时器"), Category("PLC-按钮参数")]
         [DefaultValue(typeof(string), "PLC_time")]
-        public System.Windows.Forms.Timer PLC_time { get; } = new System.Windows.Forms.Timer() { Enabled = true, Interval = 200 };
+        public System.Windows.Forms.Timer PLC_time { get; } = new System.Windows.Forms.Timer() { Enabled = true, Interval = 2000 };
         /// <summary>
         /// PLC通讯协议对象
         /// </summary>
@@ -126,6 +126,7 @@ namespace Bottom_Control
         #endregion
         public DAButton()
         {
+            //MessageBox.Show("AAAAAAAAAAAAAAAAAAAAAAAA");
             plc = new Button_PLC();
             PLC_time.Start();
             PLC_time.Tick += new EventHandler(Time_tick);
@@ -133,19 +134,31 @@ namespace Bottom_Control
 
         protected override void OnMouseDown(MouseEventArgs e)//重写点击事件
         {
-            if (!plc_Enable || Button_select) return;//用户不开启PLC功能
+            Console.WriteLine("MouseDown");
+            if (!plc_Enable || Button_select)
+            {
+                Console.WriteLine("xxxxxxxxxxx");
+                return;//用户不开启PLC功能
+            }
+            Console.WriteLine("22222");
             this.BeginInvoke((EventHandler)delegate
             {
+                Console.WriteLine("33333");
                 plc.plc(this);
             });
         }
         protected override void OnMouseUp(MouseEventArgs e)//重写松开事件
         {
-            if (!plc_Enable || Button_select) return;//用户不开启PLC功能
+            if (!plc_Enable || Button_select)
+            {
+                return;//用户不开启PLC功能
+            }
             this.BeginInvoke((MethodInvoker)delegate
             {
                 if (plc.state)
+                {
                     plc.plc(this, plc.state);
+                }
             });
         }
         protected override void Dispose(bool disposing)//释放托管资源
@@ -161,11 +174,16 @@ namespace Bottom_Control
         /// <param name="e"></param>
         private void Time_tick(object send, EventArgs e)
         {
-            if (!plc_Enable||this.IsDisposed|| this.Created==false) return;//用户不开启PLC功能
+            if (!plc_Enable || this.IsDisposed || this.Created == false)
+            {
+                Console.WriteLine("xxxxxxxxxxxxxxxxxxxxxxxx 用户不开启PLC功能");
+                return;//用户不开启PLC功能
+            }
             lock (this)
             {
                 this.BeginInvoke((EventHandler)delegate
                 {
+                    Console.WriteLine("plc.Refresh .... "); //here
                     plc.Refresh(this, this.Plc);
                 });
             }

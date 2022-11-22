@@ -35,7 +35,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Name = "keyboard1";
-            this.Size = new System.Drawing.Size(766, 445);
+            this.Size = new System.Drawing.Size(100, 100);
             this.Load += new System.EventHandler(this.keyboard1_Load);
             this.ResumeLayout(false);
 
