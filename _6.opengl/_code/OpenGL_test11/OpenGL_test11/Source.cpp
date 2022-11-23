@@ -1,40 +1,10 @@
 ﻿#include "../../Common.h"
 
-// 繪圖回調函數
-void display(void)
+void draw_something()
 {
-	float lit_position[] = { 0.0f, 0.0f, 1.0f, 0.0f };
 	float mat_yellow[] = { 1.0f, 1.0f, 0.0f, 1.0f };
 	float mat_cyan[] = { 0.0f, 1.0f, 1.0f, 1.0f };
-	int rect[4];
-	float w, h;
 
-	glGetIntegerv(GL_VIEWPORT, rect);
-	w = (float)rect[2];
-	h = (float)rect[3];
-
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	draw_boundary(color_y, 2.5f); //畫視窗邊界
-
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();	//設置單位矩陣
-
-	if (h < 1)
-	{
-		h = 1;
-	}
-	gluPerspective(30.0, w / h, 0.1, 20.0); //對應變換陣T0
-
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();	//設置單位矩陣
-
-	glLightfv(GL_LIGHT0, GL_POSITION, lit_position);
-	glTranslated(0.0, 0.0, -dist); //對應變換陣T1
-	glRotatef(x_angle, 1.0f, 0.0f, 0.0f); //對應變換陣T2
-	glRotatef(y_angle, 0.0f, 1.0f, 0.0f);  //對應變換陣T3
-	glDisable(GL_LIGHTING);
-	//glLightfv(GL_LIGHT0, GL_POSITION, lit_position);
 	draw_coordinates(1.0);	//顯示座標軸，設X軸的兩端點為v1、v2，考慮這兩點經受的變換
 
 	draw_teapot(color_r, 1.0, 0.5);	//畫一個茶壺
@@ -63,64 +33,46 @@ void display(void)
 	glFlush();  // 執行繪圖命令
 }
 
-void keyboard(unsigned char key, int /*x*/, int /*y*/)
+// 繪圖回調函數
+void display(void)
 {
-	switch (key)
+	int rect[4];
+	float w, h;
+
+	glGetIntegerv(GL_VIEWPORT, rect);
+	w = (float)rect[2];
+	h = (float)rect[3];
+
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	draw_boundary(color_y, 2.5f); //畫視窗邊界
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();	//設置單位矩陣
+
+	if (h < 1)
 	{
-	case 27:
-	case 'q':
-	case 'Q':
-		//離開視窗
-		glutDestroyWindow(glutGetWindow());
-		return;
-	case '0':
-		m_state = 0;
-		break;
-	case '1':
-		m_state = 1;
-		break;
+		h = 1;
 	}
-}
+	gluPerspective(30.0, w / h, 0.1, 20.0); //對應變換陣T0
 
-void mouse(int button, int state, int x, int y)
-{
-	if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
-	{
-		mx = x;
-		my = y;
-	}
-}
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();	//設置單位矩陣
 
-void motion(int x, int y)
-{
-	int dx, dy; //offset of mouse;
+	float lit_position[] = { 0.0f, 0.0f, 1.0f, 0.0f };
 
-	dx = x - mx;
-	dy = y - my;
+	glLightfv(GL_LIGHT0, GL_POSITION, lit_position);
+	glTranslated(0.0, 0.0, -dist); //對應變換陣T1
+	glRotatef(x_angle, 1.0f, 0.0f, 0.0f); //對應變換陣T2
+	glRotatef(y_angle, 0.0f, 1.0f, 0.0f);  //對應變換陣T3
+	glDisable(GL_LIGHTING);
+	//glLightfv(GL_LIGHT0, GL_POSITION, lit_position);
 
-	if (m_state == 0)
-	{
-		y_angle += dx * 0.1f;
-		x_angle += dy * 0.1f;
-	}
-	else if (m_state == 1)
-	{
-		dist += (dx + dy) * 0.01f;
-	}
-
-	mx = x;
-	my = y;
-
-	glutPostRedisplay();
+	draw_something();
 }
 
 int main(int argc, char** argv)
 {
-	m_state = 0;
-	x_angle = 0.0f;
-	y_angle = 0.0f;
-	dist = 10.0f;
-
 	glutInit(&argc, argv);
 
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
@@ -135,9 +87,9 @@ int main(int argc, char** argv)
 
 	glutDisplayFunc(display);	//設定callback function
 	glutReshapeFunc(reshape0);	//設定callback function
-	glutKeyboardFunc(keyboard);	//設定callback function
-	glutMouseFunc(mouse);		//設定callback function
-	glutMotionFunc(motion);		//設定callback function
+	glutKeyboardFunc(keyboard_r);	//設定callback function
+	glutMouseFunc(mouse_r);		//設定callback function
+	glutMotionFunc(motion_r);		//設定callback function
 
 	glutMainLoop();	//開始主循環繪製
 

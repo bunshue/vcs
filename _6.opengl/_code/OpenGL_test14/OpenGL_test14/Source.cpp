@@ -4,11 +4,8 @@
 
 int time_elapsed = 0;
 
-// 繪圖回調函數
-void display(void)
+void draw_something()
 {
-    glClear(GL_COLOR_BUFFER_BIT);   //清除背景
-
     draw_boundary(color_y, 0.9f); //畫視窗邊界
 
     //畫一個實心矩形
@@ -19,13 +16,20 @@ void display(void)
     //畫一個茶壺
     draw_teapot(color_r, 1.0f, 0.3f);
 
+    glFlush();  // 執行繪圖命令
+}
+
+// 繪圖回調函數
+void display(void)
+{
+    glClear(GL_COLOR_BUFFER_BIT);   //清除背景
+
+    draw_something();
 
     char info[20];
     //sprintf(info, "%d", (char)display_mode);  //過時, x64不能用
     sprintf_s(info, sizeof(info), "經過 %d 秒", time_elapsed);
     glutSetWindowTitle(info);
-
-    glFlush();  // 執行繪圖命令
 }
 
 // 窗口大小變化回調函數

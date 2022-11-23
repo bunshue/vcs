@@ -36,12 +36,12 @@ struct Color
 };
 
 //供旋轉座標系用
-int mx;	//position of mouse
-int my;	//position of mouse
-int m_state; //mouse usage
-float x_angle;	//angle of eye
-float y_angle;	//angle of eye
-float dist; //distance from the eye
+extern int mx;	//position of mouse
+extern int my;	//position of mouse
+extern int m_state; //mouse usage
+extern float x_angle;	//angle of eye
+extern float y_angle;	//angle of eye
+extern float dist; //distance from the eye
 
 //常用的顏色 RGBA四碼
 float color_r[] = { 1.0f, 0.0f, 0.0f, 1.0f };
@@ -93,4 +93,9 @@ void keyboard0(unsigned char key, int /*x*/, int /*y*/);
 void mouse0(int button, int state, int x, int y);
 void motion0(int x, int y);
 
+//供旋轉座標系用
+void keyboard_r(unsigned char key, int /*x*/, int /*y*/);
+void mouse_r(int button, int state, int x, int y);
+void motion_r(int x, int y);
+void setup_rotation();
 

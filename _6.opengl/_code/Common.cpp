@@ -3,6 +3,14 @@
 //#include <GL/glut.h>		//32 bits
 #include <GL/freeglut.h>	//64 bits
 
+//供旋轉座標系用
+int mx;	//position of mouse
+int my;	//position of mouse
+int m_state = 0; //mouse usage
+float x_angle = 0.0f;	//angle of eye
+float y_angle = 0.0f;	//angle of eye
+float dist = 10.0f; //distance from the eye
+
 //畫座標軸
 void draw_coordinates(float len)
 {
@@ -398,4 +406,97 @@ void mouse0(int button, int state, int x, int y)
 
 void motion0(int x, int y)
 {
+}
+
+//供旋轉座標系用
+void keyboard_r(unsigned char key, int /*x*/, int /*y*/)
+{
+    switch (key)
+    {
+    case 27:
+    case 'q':
+    case 'Q':
+        //離開視窗
+        glutDestroyWindow(glutGetWindow());
+        return;
+    case '0':
+        m_state = 0;
+        break;
+    case '1':
+        m_state = 1;
+        break;
+    }
+}
+
+void mouse_r(int button, int state, int x, int y)
+{
+    //MouseDown
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+    {
+        mx = x;
+        my = y;
+        printf("D(%d, %d) ", mx, my);
+    }
+}
+
+void motion_r(int x, int y)
+{
+    //MouseMove
+    int dx, dy; //offset of mouse;
+
+    dx = x - mx;
+    dy = y - my;
+
+    if (m_state == 0)
+    {
+        y_angle += dx * 0.1f;
+        x_angle += dy * 0.1f;
+    }
+    else if (m_state == 1)
+    {
+        dist += (dx + dy) * 0.01f;
+    }
+
+    mx = x;
+    my = y;
+
+    //printf("M(%d, %d) ", mx, my);
+    glutPostRedisplay();
+}
+
+void setup_rotation()
+{
+    //double x, y, z, eyex, eyey, eyez;
+    int rect[4];
+    float w, h;
+
+    glGetIntegerv(GL_VIEWPORT, rect);
+    w = (float)rect[2];
+    h = (float)rect[3];
+
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();	//設置單位矩陣
+
+    if (w > h)
+    {
+        glOrtho(-w / h, w / h, -1.0f, 1.0f, -1.0f, 1.0f);
+    }
+    else
+    {
+        glOrtho(-1.0f, 1.0f, -h / w, h / w, -1.0f, 1.0f);
+    }
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();	//設置單位矩陣
+
+    glRotatef(x_angle, 1.0f, 0.0f, 0.0f);
+    glRotatef(y_angle, 0.0f, 1.0f, 0.0f);
+
+    //顯示資訊
+    char info[20];
+    sprintf_s(info, sizeof(info), "(%3.1f,   %3.1f)", x_angle, y_angle);
+    glutSetWindowTitle(info);
 }
