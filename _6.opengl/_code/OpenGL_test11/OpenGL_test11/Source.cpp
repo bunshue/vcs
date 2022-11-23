@@ -1,10 +1,5 @@
 ﻿#include "../../Common.h"
 
-void init(void)
-{
-	glEnable(GL_DEPTH_TEST);	//有無打開, 差很大
-}
-
 // 繪圖回調函數
 void display(void)
 {
@@ -18,11 +13,10 @@ void display(void)
 	w = (float)rect[2];
 	h = (float)rect[3];
 
-	glClearDepth(1.0);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT);
 
 	draw_boundary(color_y, 2.5f); //畫視窗邊界
-	
+
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();	//設置單位矩陣
 
@@ -47,14 +41,14 @@ void display(void)
 
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
-	
+
 	glPushMatrix(); //下壓堆棧并復制棧頂	//這個 Matrix Push/Pop 好像沒什麼用??
 	glTranslatef(1.0f, 0.0f, 0.0f); //對應變換陣T4
 	glScalef(0.5f, 0.5f, 0.5f); //對應變換陣T5
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_yellow);
 	draw_tetrahedron2(); //顯示直角四面體，設某個三角形的頂點為v1'、v2'、v3'，考慮這三點經受的變換
 	glPopMatrix(); //上彈堆棧，棧頂被放棄
-	
+
 	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
 	glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, 1);
 	glTranslatef(-1.0f, 0.0f, 0.0f); //對應變換陣T6
@@ -67,7 +61,6 @@ void display(void)
 	glPopMatrix();
 
 	glFlush();  // 執行繪圖命令
-	glutSwapBuffers();
 }
 
 void keyboard(unsigned char key, int /*x*/, int /*y*/)
@@ -129,16 +122,13 @@ int main(int argc, char** argv)
 	dist = 10.0f;
 
 	glutInit(&argc, argv);
-	
-	//glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
 	glutInitWindowSize(600, 600);
 	glutInitWindowPosition(1100, 200);
 
 	glutCreateWindow("畫茶壺圓椎三角塊");	//開啟視窗 並顯示出視窗 Title
-
-	init();
 
 	printf("0 keydown means control the angle of the eye\n");
 	printf("1 keydown means control the distance of the eye\n");

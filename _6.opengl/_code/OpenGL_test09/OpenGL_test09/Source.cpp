@@ -1,6 +1,6 @@
 ﻿#include "../../Common.h"
 
-float angle;
+float angle = 0;
 
 void DrawBox()  //繪製木箱
 {
@@ -53,6 +53,7 @@ void DrawBox()  //繪製木箱
     glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, 1.0f, -1.0f);
     glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, 1.0f, 1.0f);
     glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, -1.0f, 1.0f);
+
     glEnd();
     glDisable(GL_TEXTURE_2D);
 }
@@ -79,8 +80,6 @@ void init()
 
     // 設置紋理數據
     //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, bmpLoader.imageWidth, bmpLoader.imageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, bmpLoader.image);
-
-    angle = 0;
 }
 
 // 繪圖回調函數

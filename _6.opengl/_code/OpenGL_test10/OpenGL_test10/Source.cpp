@@ -1,37 +1,7 @@
 ﻿#include "../../Common.h"
 
-// 繪圖回調函數
-void display(void)
+void draw_something()
 {
-	double x, y, z, eyex, eyey, eyez;
-	int rect[4];
-	float w, h;
-
-	glGetIntegerv(GL_VIEWPORT, rect);
-	w = (float)rect[2];
-	h = (float)rect[3];
-
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
-
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();	//設置單位矩陣
-
-	if (w > h)
-	{
-		glOrtho(-w / h, w / h, -1.0f, 1.0f, -1.0f, 1.0f);
-	}
-	else
-	{
-		glOrtho(-1.0f, 1.0f, -h / w, h / w, -1.0f, 1.0f);
-	}
-
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();	//設置單位矩陣
-
-	glRotatef(x_angle, 1.0f, 0.0f, 0.0f);
-	glRotatef(y_angle, 0.0f, 1.0f, 0.0f);
-
 	draw_boundary(color_y, 0.9f); //畫視窗邊界
 
 	draw_coordinates(0.9f);	//畫座標軸
@@ -80,6 +50,41 @@ void display(void)
 	char info[20];
 	sprintf_s(info, sizeof(info), "(%3.1f,   %3.1f)", x_angle, y_angle);
 	glutSetWindowTitle(info);
+}
+
+// 繪圖回調函數
+void display(void)
+{
+	//double x, y, z, eyex, eyey, eyez;
+	int rect[4];
+	float w, h;
+
+	glGetIntegerv(GL_VIEWPORT, rect);
+	w = (float)rect[2];
+	h = (float)rect[3];
+
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();	//設置單位矩陣
+
+	if (w > h)
+	{
+		glOrtho(-w / h, w / h, -1.0f, 1.0f, -1.0f, 1.0f);
+	}
+	else
+	{
+		glOrtho(-1.0f, 1.0f, -h / w, h / w, -1.0f, 1.0f);
+	}
+
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();	//設置單位矩陣
+
+	glRotatef(x_angle, 1.0f, 0.0f, 0.0f);
+	glRotatef(y_angle, 0.0f, 1.0f, 0.0f);
+
+	draw_something();
 }
 
 void keyboard(unsigned char key, int /*x*/, int /*y*/)

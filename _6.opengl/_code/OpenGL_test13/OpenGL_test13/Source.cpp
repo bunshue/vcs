@@ -19,58 +19,64 @@ void display(void)
 	const double t = glutGet(GLUT_ELAPSED_TIME) / 1000.0;
 	const double a = t * 90.0;
 
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glClear(GL_COLOR_BUFFER_BIT);
 	glColor3d(1, 0, 0);
 
-	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
+	glPushMatrix();
 	glTranslated(-2.4, 1.2, -6);
 	draw_coordinates(1.1f);     //畫座標軸
+	glColor3d(1, 0, 0);
 	glRotated(60, 1, 0, 0);
-	glRotated(a, 0, 0, 1);
-	glutSolidSphere(1, slices, stacks);
+	glRotated(a, 0, 0, 1);	//轉動
+	glutSolidSphere(1, slices, stacks);	//畫 實心 球
 	glPopMatrix();
 
-	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
+	glPushMatrix();
 	glTranslated(0, 1.2, -6);
 	draw_coordinates(1.1f);     //畫座標軸
+	glColor3d(1, 0, 0);
 	glRotated(60, 1, 0, 0);
-	glRotated(a, 0, 0, 1);
-	glutSolidCone(1, 1, slices, stacks);
+	glRotated(a, 0, 0, 1);	//轉動
+	glutSolidCone(1, 1, slices, stacks);	//畫 實心 圓錐
 	glPopMatrix();
 
-	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
+	glPushMatrix();
 	glTranslated(2.4, 1.2, -6);
 	draw_coordinates(1.1f);     //畫座標軸
+	glColor3d(1, 0, 0);
 	glRotated(60, 1, 0, 0);
-	glRotated(a, 0, 0, 1);
-	glutSolidTorus(0.2, 0.8, slices, stacks);
+	glRotated(a, 0, 0, 1);	//轉動
+	glutSolidTorus(0.2, 0.8, slices, stacks);	//畫 實心 環形曲面
 	glPopMatrix();
 
-	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
+	glPushMatrix();
 	glTranslated(-2.4, -1.2, -6);
 	draw_coordinates(1.1f);     //畫座標軸
+	glColor3d(1, 0, 0);
 	glRotated(60, 1, 0, 0);
-	glRotated(a, 0, 0, 1);
-	glutWireSphere(1, slices, stacks);
+	glRotated(a, 0, 0, 1);	//轉動
+	glutWireSphere(1, slices, stacks);		//畫 網格 球
 	glPopMatrix();
 
-	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
+	glPushMatrix();
 	glTranslated(0, -1.2, -6);
 	draw_coordinates(1.1f);     //畫座標軸
+	glColor3d(1, 0, 0);
 	glRotated(60, 1, 0, 0);
-	glRotated(a, 0, 0, 1);
-	glutWireCone(1, 1, slices, stacks);
+	glRotated(a, 0, 0, 1);	//轉動
+	glutWireCone(1, 1, slices, stacks);	//畫 網格 圓錐
 	glPopMatrix();
 
-	glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
+	glPushMatrix();
 	glTranslated(2.4, -1.2, -6);
 	draw_coordinates(1.1f);     //畫座標軸
+	glColor3d(1, 0, 0);
 	glRotated(60, 1, 0, 0);
-	glRotated(a, 0, 0, 1);
-	glutWireTorus(0.2, 0.8, slices, stacks);
+	glRotated(a, 0, 0, 1);	//轉動
+	glutWireTorus(0.2, 0.8, slices, stacks);	//畫 網格 環形曲面
 	glPopMatrix();
 
-	glutSwapBuffers();
+	glFlush();  // 執行繪圖命令
 }
 
 // 窗口大小變化回調函數
@@ -124,8 +130,7 @@ int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
 
-	//glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
+	glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
 
 	glutInitWindowSize(640, 480);		// 設定視窗大小
 	glutInitWindowPosition(1100, 200);	// 設定視窗位置
@@ -140,9 +145,6 @@ int main(int argc, char** argv)
 	glClearColor(1, 1, 1, 1);
 	glEnable(GL_CULL_FACE);
 	glCullFace(GL_BACK);
-
-	glEnable(GL_DEPTH_TEST);
-	glDepthFunc(GL_LESS);
 
 	glEnable(GL_LIGHT0);
 	glEnable(GL_NORMALIZE);

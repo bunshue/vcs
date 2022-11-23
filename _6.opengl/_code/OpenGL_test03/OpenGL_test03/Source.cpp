@@ -1,5 +1,25 @@
 ﻿#include "../../Common.h"
 
+void draw_something()
+{
+	draw_boundary(color_y, 0.9f); //畫視窗邊界
+
+	draw_coordinates(0.9f);	//畫座標軸
+
+	draw_teapot(color_c, 1.0, 0.5);	//畫一個茶壺
+
+	glLineWidth(5);     //設定線寬
+	glColor3f(1.0, 1.0, 1.0);   //設定顏色
+	glutWireOctahedron();
+
+	glFlush();  // 執行繪圖命令
+
+	//顯示資訊
+	char info[20];
+	sprintf_s(info, sizeof(info), "(%3.1f,   %3.1f)", x_angle, y_angle);
+	glutSetWindowTitle(info);
+}
+
 // 繪圖回調函數
 void display(void)
 {
@@ -32,26 +52,7 @@ void display(void)
 	glRotatef(x_angle, 1.0f, 0.0f, 0.0f);
 	glRotatef(y_angle, 0.0f, 1.0f, 0.0f);
 
-	//真正畫圖部分 ST
-
-	draw_boundary(color_y, 0.9f); //畫視窗邊界
-
-	draw_coordinates(0.9f);	//畫座標軸
-
-	draw_teapot(color_c, 1.0, 0.5);	//畫一個茶壺
-
-	glLineWidth(5);     //設定線寬
-	glColor3f(1.0, 1.0, 1.0);   //設定顏色
-	glutWireOctahedron();
-
-	//真正畫圖部分 SP
-
-	glFlush();  // 執行繪圖命令
-
-	//顯示資訊
-	char info[20];
-	sprintf_s(info, sizeof(info), "(%3.1f,   %3.1f)", x_angle, y_angle);
-	glutSetWindowTitle(info);
+	draw_something();
 }
 
 void keyboard(unsigned char key, int /*x*/, int /*y*/)
