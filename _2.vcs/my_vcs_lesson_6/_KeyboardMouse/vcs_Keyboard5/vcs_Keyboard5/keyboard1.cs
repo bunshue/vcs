@@ -74,7 +74,7 @@ namespace vcs_Keyboard5
 
         private void keyboard1_Load(object sender, EventArgs e)
         {
-            this.Size = new Size(630, 230);
+            this.Size = new Size(660, 230);
             this.BackColor = Color.Pink;
             setup_keyboard();
         }
@@ -268,9 +268,11 @@ namespace vcs_Keyboard5
             lb_space.Location = new Point(x_st + dx * 5, y_st + dy * 3);
             lb_clear.Location = new Point(x_st + dx * 7, y_st + dy * 3);
             tb_input.Location = new Point(x_st + dx * 0 - 95, y_st + dy * 3);
+            tb_input.Multiline = true;
+            tb_input.Font = new Font("標楷體", 22);
             tb_input.Size = new Size(280, 36);
 
-            x_st = 500;
+            x_st = 520;
             y_st = 30;
             lb_1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             lb_2.Location = new Point(x_st + dx * 1, y_st + dy * 0);

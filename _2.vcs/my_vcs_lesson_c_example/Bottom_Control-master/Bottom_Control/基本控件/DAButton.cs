@@ -183,7 +183,7 @@ namespace Bottom_Control
             {
                 this.BeginInvoke((EventHandler)delegate
                 {
-                    Console.WriteLine("plc.Refresh .... "); //here
+                    Console.WriteLine("\nButton plc.Refresh .... "); //here
                     plc.Refresh(this, this.Plc);
                 });
             }

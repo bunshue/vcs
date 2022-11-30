@@ -189,6 +189,65 @@ void draw_tetrahedron2(void)
     glEnd();
 }
 
+//繪製木箱
+void draw_box(float* color)
+{
+    glColor3fv((GLfloat*)color);    //設定顏色
+
+    glEnable(GL_TEXTURE_2D);	//啟用2D紋理映射
+
+/** 選擇紋理 */
+//glBindTexture(GL_TEXTURE_2D, tex2D);	//綁定紋理
+
+/** 開始繪製四邊形 */
+    glBegin(GL_QUADS);
+
+    /// 前側面
+    glNormal3f(0.0f, 0.0f, 1.0f);                               /**指定法線指向觀察者 */	//設置法線
+    glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);
+    glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, -1.0f, 1.0f);
+    glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, 1.0f);
+    glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, 1.0f);
+
+    /// 後側面
+    glNormal3f(0.0f, 0.0f, -1.0f);                              /** 指定法線背向觀察者 */	//設置法線
+    glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
+    glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, 1.0f, -1.0f);
+    glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, -1.0f);
+    glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, -1.0f, -1.0f);
+
+    /// 頂面
+    glNormal3f(0.0f, 1.0f, 0.0f);                               /**指定法線向上 */	//設置法線
+    glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 1.0f, 1.0f);
+    glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 1.0f, 1.0f);
+    glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, -1.0f);
+    glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, -1.0f);
+
+    /// 底面
+    glNormal3f(0.0f, -1.0f, 0.0f);                              /** 指定法線朝下 */	//設置法線
+    glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);
+    glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, -1.0f, 1.0f);
+    glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, -1.0f, -1.0f);
+    glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
+
+    /// 右側面
+    glNormal3f(1.0f, 0.0f, 0.0f);                               /**指定法線朝右 */	//設置法線
+    glTexCoord2f(0.0f, 0.0f); glVertex3f(1.0f, -1.0f, -1.0f);
+    glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 1.0f, -1.0f);
+    glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, 1.0f);
+    glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, -1.0f, 1.0f);
+
+    /// 左側面
+    glNormal3f(-1.0f, 0.0f, 0.0f);                              /**指定法線朝左 */	//設置法線
+    glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
+    glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, 1.0f, -1.0f);
+    glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, 1.0f, 1.0f);
+    glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, -1.0f, 1.0f);
+
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+}
+
 inline void glPrint(float x, float y, const char* s, void* font)
 {
     glRasterPos2f((GLfloat)x, (GLfloat)y);
@@ -328,6 +387,31 @@ void draw_rectangle_s(float* color, float x_st, float y_st, float w, float h)
     glDisable(GL_TEXTURE_2D);
 }
 
+//實心矩形, 左下為原點, 向右w, 向上h, 顏色color, 無線寬width
+void draw_rectangle_si(GLint index, float x_st, float y_st, float w, float h)
+{
+    glIndexi(index);            //設定顏色
+    //glColor3fv((GLfloat*)color);    //設定顏色
+
+    glEnable(GL_TEXTURE_2D);    //啟用2D紋理映射
+
+    float dd = 0.5f;
+    //GL_QUADS 使用
+    glBegin(GL_QUADS);  //畫實心四邊形
+    {
+        glTexCoord2f(x_st, y_st); //紋理座標配置
+        glVertex2f(x_st, y_st);     //左下座標
+        glTexCoord2f(x_st + w, y_st);
+        glVertex2f(x_st + w, y_st);       //右下座標
+        glTexCoord2f(x_st + w, y_st + h);
+        glVertex2f(x_st + w, y_st + h);         //右上座標
+        glTexCoord2f(x_st, y_st + h);
+        glVertex2f(x_st, y_st + h);       //左上座標
+    }
+    glEnd();
+
+    glDisable(GL_TEXTURE_2D);
+}
 
 //空心四邊形, 左下為原點, 向右w, 向上h, 顏色color, 線寬width
 void draw_quad(float* color, float width, float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4)

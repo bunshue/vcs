@@ -1,3 +1,5 @@
+/* avoid Windows warnings (for example: strcpy, fscanf, etc.) */
+#define _CRT_SECURE_NO_WARNINGS
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -147,6 +149,20 @@ int main()
     }
 
     
+    char filename[128];
+    const char* bmpName[] = { "back","front","top","left","right" };
+    for (int i = 0; i < 5; i++)
+    {
+        sprintf(filename, "data/%s", bmpName[i]);
+        strcat(filename, ".bmp");
+        printf("%s\n", filename);
+    }
+
+    const char* fileName[] = { "data/terrain.bmp","data/detail.bmp" };
+    for (int i = 0; i < 2; i++)
+    {
+        printf("%s\n", fileName[i]);
+    }
 
     return 0;
 }

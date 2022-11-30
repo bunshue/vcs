@@ -2,68 +2,12 @@
 
 float angle = 0;
 
-void DrawBox()  //繪製木箱
-{
-    glEnable(GL_TEXTURE_2D);	//啟用2D紋理映射
-
-    /** 選擇紋理 */
-    //glBindTexture(GL_TEXTURE_2D, tex2D);	//綁定紋理
-
-    /** 開始繪製四邊形 */
-    glBegin(GL_QUADS);
-
-    /// 前側面
-    glNormal3f(0.0f, 0.0f, 1.0f);                               /**指定法線指向觀察者 */	//設置法線
-    glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);
-    glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, -1.0f, 1.0f);
-    glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, 1.0f);
-    glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, 1.0f);
-
-    /// 後側面
-    glNormal3f(0.0f, 0.0f, -1.0f);                              /** 指定法線背向觀察者 */	//設置法線
-    glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
-    glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, 1.0f, -1.0f);
-    glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, -1.0f);
-    glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, -1.0f, -1.0f);
-
-    /// 頂面
-    glNormal3f(0.0f, 1.0f, 0.0f);                               /**指定法線向上 */	//設置法線
-    glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 1.0f, 1.0f);
-    glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 1.0f, 1.0f);
-    glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, -1.0f);
-    glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, -1.0f);
-
-    /// 底面
-    glNormal3f(0.0f, -1.0f, 0.0f);                              /** 指定法線朝下 */	//設置法線
-    glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);
-    glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, -1.0f, 1.0f);
-    glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, -1.0f, -1.0f);
-    glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
-
-    /// 右側面
-    glNormal3f(1.0f, 0.0f, 0.0f);                               /**指定法線朝右 */	//設置法線
-    glTexCoord2f(0.0f, 0.0f); glVertex3f(1.0f, -1.0f, -1.0f);
-    glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 1.0f, -1.0f);
-    glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, 1.0f);
-    glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, -1.0f, 1.0f);
-
-    /// 左側面
-    glNormal3f(-1.0f, 0.0f, 0.0f);                              /**指定法線朝左 */	//設置法線
-    glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
-    glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, 1.0f, -1.0f);
-    glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, 1.0f, 1.0f);
-    glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, -1.0f, 1.0f);
-
-    glEnd();
-    glDisable(GL_TEXTURE_2D);
-}
-
 // 初始化參數
 void init()
 {
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
-    glClearColor(0.1f, 0.1f, 0.4f, 0.0f);
+    glClearColor(0.1f, 0.1f, 0.4f, 0.0f);   //設定背景色
     glShadeModel(GL_SMOOTH);
 
     //CBMPLoader bmpLoader;
@@ -88,15 +32,21 @@ void display(void)
     // 清除之前幀數據
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
+    glPushMatrix();
     glTranslatef(0.0f, 0.0f, -5.0f);
     glRotated(angle, 1, 1, 0);
-    DrawBox();
+
+    draw_coordinates(2.0);
+
+    draw_teapot(color_r, 1.0, 1.6);	//畫一個茶壺
+
+    draw_box(color_g);  //繪製木箱
+
     glPopMatrix();
 
     glFlush();  // 執行繪圖命令
 
-    angle += 0.05f;
+    angle += 0.02f;
 }
 
 // 窗口大小變化回調函數

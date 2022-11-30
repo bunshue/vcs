@@ -33,7 +33,7 @@ void ConvertShort(unsigned short* array, long length)
     {
         b1 = *ptr++;
         b2 = *ptr++;
-        *array++ = (b1 << 8) | (b2);
+        *array++ = (unsigned short)((b1 << 8) | (b2));
     }
 }
 

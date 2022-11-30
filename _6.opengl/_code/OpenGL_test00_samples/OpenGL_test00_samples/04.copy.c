@@ -22,15 +22,15 @@ void Init(void)
 
     x = 0;
     y = windH;
-    zoom = 1.8;
+    zoom = 1.8f;
 }
 
 void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
 
-    point[0] = (windW / 2) - (image->sizeX / 2);
-    point[1] = (windH / 2) - (image->sizeY / 2);
+    point[0] = (float)((windW / 2) - (image->sizeX / 2));
+    point[1] = (float)((windH / 2) - (image->sizeY / 2));
     point[2] = 0;
     glRasterPos3fv(point);
 
@@ -62,25 +62,25 @@ void reshape(int width, int height)
     glMatrixMode(GL_MODELVIEW);
 }
 
-void special(int key, int /*x*/, int /*y*/)
+void special(int key, int x, int y)
 {
     switch (key)
     {
     case GLUT_KEY_UP:
-        zoom += 0.2;
+        zoom += 0.2f;
         glutPostRedisplay();
         break;
     case GLUT_KEY_DOWN:
         if (zoom >= 0.4)
         {
-            zoom -= 0.2;
+            zoom -= 0.2f;
             glutPostRedisplay();
         }
         break;
     }
 }
 
-void keyboard(unsigned char key, int /*x*/, int /*y*/)
+void keyboard(unsigned char key, int x, int y)
 {
     switch (key)
     {

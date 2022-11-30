@@ -25,8 +25,7 @@ void display(void)
 
 	draw_coordinates(2.0);
 
-	//畫一個茶壺
-	draw_teapot(color_r, 1.0, 1.6);
+	draw_teapot(color_r, 1.0, 1.6);	//畫一個茶壺
 
 	glutSwapBuffers();
 }

@@ -201,10 +201,19 @@ namespace Bottom_Control.按钮__TO__PLC方法
                     IPLC_interface mitsubishi = new Mitsubishi_realize();//实例化接口--实现三菱在线访问
                     if (mitsubishi.PLC_ready)//PLC是否准备完成
                     {
-                        Console.WriteLine("read_M");
+                        Console.WriteLine("read_M, name = " + button_base.PLC_Contact + ", id = " + button_base.PLC_Address);
+                        
                         List<bool> data = mitsubishi.PLC_read_M_bit(button_base.PLC_Contact, button_base.PLC_Address);//读取状态
+
+                        Console.WriteLine("len = " + data.Count.ToString() + ", data = " + data[0].ToString());
+
                         button_State = data[0] == true ? Button_state.ON : Button_state.Off;
                         button_state(button, button_State);
+
+                        //string dddd = mitsubishi.PLC_read_D_register(button_base.PLC_Contact, button_base.PLC_Address, numerical_format.Hex_16_Bit);
+                        string dddd = mitsubishi.PLC_read_D_register("M", "10000", numerical_format.Unsigned_16_Bit);
+                        Console.WriteLine("data : " + dddd);
+
                     }
                     break;
                 case PLC.Siemens:

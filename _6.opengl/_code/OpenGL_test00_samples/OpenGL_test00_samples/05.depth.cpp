@@ -1,9 +1,5 @@
 #include "../../Common.h"
 
-#define CI_OFFSET_1 16
-#define CI_OFFSET_2 32
-
-GLenum rgb;
 GLenum antiAlias;
 GLenum stipple;
 
@@ -30,17 +26,7 @@ void Init(void)
 {
     GLint i;
 
-    if (!rgb)
-    {
-        for (i = 0; i < 16; i++)
-        {
-            glutSetColor(i + CI_OFFSET_1, 0.0, 0.0, i / 15.0);
-            glutSetColor(i + CI_OFFSET_2, 0.0, i / 15.0, 0.0);
-        }
-    }
-
     glClearColor(0.0, 0.0, 0.0, 0.0);
-    glClearIndex(0.0);
 
     glPolygonStipple(stippleBits);
 
@@ -50,14 +36,10 @@ void Init(void)
 
 void display(void)
 {
-    GLint ci1, ci2;
-
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     if (antiAlias)
     {
-        ci1 = CI_OFFSET_1;
-        ci2 = CI_OFFSET_2;
         glBlendFunc(GL_SRC_ALPHA, GL_ONE);
         glEnable(GL_BLEND);
         glEnable(GL_POLYGON_SMOOTH);
@@ -65,8 +47,6 @@ void display(void)
     }
     else
     {
-        ci1 = 4;
-        ci2 = 2;
         glDisable(GL_BLEND);
         glDisable(GL_POLYGON_SMOOTH);
         glEnable(GL_DEPTH_TEST);
@@ -82,11 +62,11 @@ void display(void)
     }
 
     glBegin(GL_TRIANGLES);
-    (rgb) ? glColor3f(0.0, 0.0, 1.0) : glIndexi(ci1);
+    glColor3f(0.0, 0.0, 1.0);
     glVertex3f(0.9, -0.9, -30.0);
     glVertex3f(0.9, 0.9, -30.0);
     glVertex3f(-0.9, 0.0, -30.0);
-    (rgb) ? glColor3f(0.0, 1.0, 0.0) : glIndexi(ci2);
+    glColor3f(0.0, 1.0, 0.0);
     glVertex3f(-0.9, -0.9, -40.0);
     glVertex3f(-0.9, 0.9, -40.0);
     glVertex3f(0.9, 0.0, -25.0);
@@ -122,34 +102,14 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
     }
 }
 
-void Args(int argc, char** argv)
-{
-    GLint i;
-
-    rgb = GL_TRUE;
-
-    for (i = 1; i < argc; i++)
-    {
-        if (strcmp(argv[i], "-ci") == 0)
-        {
-            rgb = GL_FALSE;
-        }
-        else if (strcmp(argv[i], "-rgb") == 0)
-        {
-            rgb = GL_TRUE;
-        }
-    }
-}
-
 int main(int argc, char** argv)
 {
     GLenum type;
 
     glutInit(&argc, argv);
-    Args(argc, argv);
 
     type = GLUT_DEPTH;
-    type |= (rgb) ? GLUT_RGB : GLUT_INDEX;
+    type |= GLUT_RGB;
     type |= GLUT_SINGLE;
     glutInitDisplayMode(type);
 
