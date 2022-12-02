@@ -1,93 +1,220 @@
 ﻿#include "../../Common.h"
 
-// 繪圖回調函數
-void display(void)
+
+
+/* $Id: bounce.c,v 3.0 1998/02/14 18:42:29 brianp Exp $ */
+
+/*
+ * Bouncing ball demo.  Color index mode only!
+ *
+ * This program is in the public domain
+ *
+ * Brian Paul
+ */
+
+ /* Conversion to GLUT by Mark J. Kilgard */
+
+ /*
+  * $Log: bounce.c,v $
+  * Revision 3.0  1998/02/14 18:42:29  brianp
+  * initial rev
+  *
+  */
+
+
+//#include <math.h>
+//#include <stdlib.h>
+//#include <GL/glut.h>
+
+#define COS(X)   cos( (X) * 3.14159/180.0 )
+#define SIN(X)   sin( (X) * 3.14159/180.0 )
+
+#define RED 1
+#define WHITE 2
+#define CYAN 3
+
+GLuint Ball;
+GLenum Mode;
+GLfloat Zrot = 0.0, Zstep = 6.0;
+GLfloat Xpos = 0.0, Ypos = 1.0;
+GLfloat Xvel = 0.2, Yvel = 0.0;
+GLfloat Xmin = -4.0, Xmax = 4.0;
+GLfloat Ymin = -3.8, Ymax = 4.0;
+GLfloat G = -0.1;
+
+static GLuint
+make_ball(void)
 {
-    glClear(GL_COLOR_BUFFER_BIT);   //清除背景
+    GLuint list;
+    GLfloat a, b;
+    GLfloat da = 18.0, db = 18.0;
+    GLfloat radius = 1.0;
+    GLuint color;
+    GLfloat x, y, z;
 
-    draw_boundary(color_y, 0.9f); //畫視窗邊界
+    list = glGenLists(1);
 
-    //畫一個實心矩形
-    glColor3f(0.0, 1.0, 1.0);   //設定顏色 cc
-    float dd = 0.3f;
-    glRectf(-dd, -dd, dd, dd);  //實心矩形
+    glNewList(list, GL_COMPILE);
 
-    draw_teapot(color_r, 1, 0.3);   //畫一個茶壺
+    color = 0;
+    for (a = -90.0; a + da <= 90.0; a += da) {
 
-    float x_st = -0.7f;
-    float y_st = 0.5f;
-    const char str1[30] = "Empty example";
-    draw_string1(str1, color_r, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
+        glBegin(GL_QUAD_STRIP);
+        for (b = 0.0; b <= 360.0; b += db) {
 
-    glFlush();  // 執行繪圖命令
+            if (color) {
+                glIndexi(RED);
+            }
+            else {
+                glIndexi(WHITE);
+            }
+
+            x = COS(b) * COS(a);
+            y = SIN(b) * COS(a);
+            z = SIN(a);
+            glVertex3f(x, y, z);
+
+            x = radius * COS(b) * COS(a + da);
+            y = radius * SIN(b) * COS(a + da);
+            z = radius * SIN(a + da);
+            glVertex3f(x, y, z);
+
+            color = 1 - color;
+        }
+        glEnd();
+
+    }
+
+    glEndList();
+
+    return list;
 }
 
-// 窗口大小變化回調函數
-void reshape(int w, int h)
+static void
+reshape(int width, int height)
 {
-    glViewport(0, 0, w, h);
+    glViewport(0, 0, (GLint)width, (GLint)height);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    glOrtho(-6.0, 6.0, -6.0, 6.0, -6.0, 6.0);
+    glMatrixMode(GL_MODELVIEW);
 }
 
-void keyboard(unsigned char key, int /*x*/, int /*y*/)
+/* ARGSUSED1 */
+static void
+key(unsigned char k, int x, int y)
 {
-    switch (key)
-    {
-    case 27:
-    case 'q':
-    case 'Q':
-        //離開視窗
-        glutDestroyWindow(glutGetWindow());
-        return;
-
-    case '1':
-        printf("1\n");
-        break;
-
-    case '2':
-        printf("2\n");
-        break;
-
-    case '3':
-        break;
-
-    case '4':
-        break;
-
-    case '?':
-        break;
+    switch (k) {
+    case 27:  /* Escape */
+        exit(0);
     }
 }
 
-void mouse(int button, int state, int x, int y)
+static void
+draw(void)
 {
+    GLint i;
+
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    glIndexi(CYAN);
+    glBegin(GL_LINES);
+    for (i = -5; i <= 5; i++) {
+        glVertex2i(i, -5);
+        glVertex2i(i, 5);
+    }
+    for (i = -5; i <= 5; i++) {
+        glVertex2i(-5, i);
+        glVertex2i(5, i);
+    }
+    for (i = -5; i <= 5; i++) {
+        glVertex2i(i, -5);
+        glVertex2f(i * 1.15, -5.9);
+    }
+    glVertex2f(-5.3, -5.35);
+    glVertex2f(5.3, -5.35);
+    glVertex2f(-5.75, -5.9);
+    glVertex2f(5.75, -5.9);
+    glEnd();
+
+    glPushMatrix();
+    glTranslatef(Xpos, Ypos, 0.0);
+    glScalef(2.0, 2.0, 2.0);
+    glRotatef(8.0, 0.0, 0.0, 1.0);
+    glRotatef(90.0, 1.0, 0.0, 0.0);
+    glRotatef(Zrot, 0.0, 0.0, 1.0);
+
+    glCallList(Ball);
+
+    glPopMatrix();
+
+    glFlush();
+    glutSwapBuffers();
 }
 
-void motion(int x, int y)
+static void
+idle(void)
 {
+    static float vel0 = -100.0;
+
+    Zrot += Zstep;
+
+    Xpos += Xvel;
+    if (Xpos >= Xmax) {
+        Xpos = Xmax;
+        Xvel = -Xvel;
+        Zstep = -Zstep;
+    }
+    if (Xpos <= Xmin) {
+        Xpos = Xmin;
+        Xvel = -Xvel;
+        Zstep = -Zstep;
+    }
+    Ypos += Yvel;
+    Yvel += G;
+    if (Ypos < Ymin) {
+        Ypos = Ymin;
+        if (vel0 == -100.0)
+            vel0 = fabs(Yvel);
+        Yvel = vel0;
+    }
+    glutPostRedisplay();
 }
 
-int main(int argc, char** argv)
+void
+visible(int vis)
+{
+    if (vis == GLUT_VISIBLE)
+        glutIdleFunc(idle);
+    else
+        glutIdleFunc(NULL);
+}
+
+int main(int argc, char* argv[])
 {
     glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_INDEX | GLUT_DOUBLE);
 
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);    //宣告顯示模式為 Single Buffer 和 RGBA
+    glutCreateWindow("Bounce");
+    Ball = make_ball();
+    glCullFace(GL_BACK);
+    glEnable(GL_CULL_FACE);
+    glDisable(GL_DITHER);
+    glShadeModel(GL_FLAT);
 
-    glutInitWindowSize(600, 600);       // 設定視窗大小
-    glutInitWindowPosition(1100, 200);  // 設定視窗位置
+    glutDisplayFunc(draw);
+    glutReshapeFunc(reshape);
+    glutVisibilityFunc(visible);
+    glutKeyboardFunc(key);
 
-    glutCreateWindow("OpenGL測試");	//開啟視窗 並顯示出視窗 Title
+    glutSetColor(RED, 1.0, 0.0, 0.0);
+    glutSetColor(WHITE, 1.0, 1.0, 1.0);
+    glutSetColor(CYAN, 0.0, 1.0, 1.0);
 
-    glutDisplayFunc(display);   //設定callback function
-    glutReshapeFunc(reshape);   //設定callback function
-    glutKeyboardFunc(keyboard); //設定callback function
-    glutMouseFunc(mouse);       //設定callback function
-    glutMotionFunc(motion);     //設定callback function
-
-    printf("僅顯示, 無控制, 按 Esc 離開\n");
-    printf("\n空白範例\n");
-
-    glutMainLoop();	//開始主循環繪製
-
-    return 0;
+    glutMainLoop();
+    return 0;             /* ANSI C requires main to return int. */
 }
+
+
+
 
