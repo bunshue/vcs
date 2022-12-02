@@ -26,6 +26,11 @@ namespace Bottom_Control.表格控件__TO__PLC
     {
         public List<string> plc(TextBox_base textBox, DataGridViewPLC_base dataGridView,int Idx)//根据PLC类型写入
         {
+            Console.WriteLine("\nDataGridView_PLC .... ");
+            Console.WriteLine("\nDataGridView_PLC .... ");
+            Console.WriteLine("\nDataGridView_PLC .... ");
+            Console.WriteLine("\nDataGridView_PLC .... ");
+
             List<string> Data = new List<string>();
             switch (textBox.Plc)
             {

@@ -35,7 +35,10 @@ namespace Bottom_Control.按钮__TO__PLC方法
                     {
                         Button_write_select(Button.Pattern.ToString(), mitsubishi, Button);//根据按钮模式进行写入操作
                     }
-                    else MessageBox.Show("1111未连接设备：" + pLC.Trim(), "Err");//推出异常提示用户
+                    else
+                    {
+                        MessageBox.Show("1111未连接设备：" + pLC.Trim(), "Err");//推出异常提示用户
+                    }
 
                     break;
                 case "Siemens":
@@ -214,6 +217,10 @@ namespace Bottom_Control.按钮__TO__PLC方法
                         string dddd = mitsubishi.PLC_read_D_register("M", "10000", numerical_format.Unsigned_16_Bit);
                         Console.WriteLine("data : " + dddd);
 
+                    }
+                    else
+                    {
+                        Console.WriteLine("三菱PLC 不 ready");
                     }
                     break;
                 case PLC.Siemens:
