@@ -11,7 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <GL/glew.h>
-#include <GL/glut.h>
+ //#include <GL/glut.h>
 #include <math.h>
 #include <time.h>
 
@@ -19,43 +19,49 @@
 
 GLuint program;
 GLint timeParam;
-GLfloat myTime, timeInc=0.075;
+GLfloat myTime, timeInc = 0.075;
 
-void display (void);
-void gfxinit ();
-void shader_init ();
+void display(void);
+void gfxinit();
+void shader_init();
 void keyboard(unsigned char key, int x, int y);
-void idleFunc (void);
-void sleep (clock_t wait);
+void idleFunc(void);
+void sleep(clock_t wait);
 
-void main(int argc, char **argv)
+int main(int argc, char** argv)
 {
 	GLenum err;
-	
+
 	glutInit(&argc, argv);
 	glutInitWindowSize(SIZE, SIZE);
 	glutInitWindowPosition(50, 100);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutCreateWindow("Maxwell's Shader Triangle");
-	glutDisplayFunc(display);
+
+	glutDisplayFunc(display);   //設定callback function
+	glutReshapeFunc(reshape0);   //設定callback function
+	//glutKeyboardFunc(keyboard0); //設定callback function
 	glutKeyboardFunc(keyboard);
 	glutIdleFunc(idleFunc);
+
 	gfxinit();
 	err = glewInit();
 	if (err != GLEW_OK) printf("GLEW error\n");
 	printf("Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
-	if (glewGetExtension("GL_ARB_fragment_shader")      != GL_TRUE ||
-		glewGetExtension("GL_ARB_vertex_shader")        != GL_TRUE ||
-		glewGetExtension("GL_ARB_shader_objects")       != GL_TRUE ||
+	if (glewGetExtension("GL_ARB_fragment_shader") != GL_TRUE ||
+		glewGetExtension("GL_ARB_vertex_shader") != GL_TRUE ||
+		glewGetExtension("GL_ARB_shader_objects") != GL_TRUE ||
 		glewGetExtension("GL_ARB_shading_language_100") != GL_TRUE)
 	{
 		printf("Driver does not support OpenGL Shading Language\n");
 		exit(1);
 	}
-	glutMainLoop();
+	glutMainLoop();	//開始主循環繪製
+
+	return 0;
 }
 
-void display (void)
+void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 	glBegin(GL_TRIANGLES);
@@ -79,38 +85,38 @@ void gfxinit()
 	glClearColor(1.0, 1.0, 1.0, 1.0);
 }
 
-void idleFunc (void)
+void idleFunc(void)
 {
-    myTime += timeInc;
-	glUniform1f (timeParam, myTime);
-	glutPostRedisplay ();
-	sleep (25);
+	myTime += timeInc;
+	glUniform1f(timeParam, myTime);
+	glutPostRedisplay();
+	sleep(25);
 }
 
 void keyboard(unsigned char key, int x, int y)
 {
 	static int useShader = 0;
-	
+
 	switch (key) {
- 	   case 's':
-		  useShader = !useShader;
-		  if (useShader)
-		  {
+	case 's':
+		useShader = !useShader;
+		if (useShader)
+		{
 			shader_init();
-			timeParam = glGetUniformLocation (program, "time");
+			timeParam = glGetUniformLocation(program, "time");
 			myTime = 0.0;
-			glutIdleFunc (idleFunc);
-		  }
- 		  else
-		  {
-		    glutIdleFunc (NULL);
+			glutIdleFunc(idleFunc);
+		}
+		else
+		{
+			glutIdleFunc(NULL);
 			glUseProgram(0);
-		    glutPostRedisplay();
-		  }
-		  break;
-	   case 27:	// exit if esc is pushed
-		  exit(0);
-		  break;
+			glutPostRedisplay();
+		}
+		break;
+	case 27:	// exit if esc is pushed
+		exit(0);
+		break;
 	}
 }
 
@@ -119,7 +125,7 @@ void shader_init()
 	GLint param;
 	GLuint vshader, fshader;
 
-	static const char *vcode = {
+	static const char* vcode = {
 "/* vertex shader that moves vertex locations sinusoidally */"
 "uniform float time; /* value provided by application program */"
 "void main()"
@@ -129,8 +135,8 @@ void shader_init()
 " gl_Position = vec4(s, s, s, 1.0) * (gl_ModelViewProjectionMatrix * gl_Vertex);"
 "}"
 	};
-	
-	static const char *fcode = {
+
+	static const char* fcode = {
 "void main()"
 "{"
 "	gl_FragColor = vec4(0.8471, 0.7490, 0.8471, 1.0);"
@@ -166,7 +172,7 @@ void shader_init()
 }
 
 /* Pauses for a specified number of milliseconds. */
-void sleep (clock_t wait)
+void sleep(clock_t wait)
 {
 	clock_t goal;
 	goal = wait + clock();

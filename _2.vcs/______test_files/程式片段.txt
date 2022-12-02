@@ -1,4 +1,36 @@
 
+
+
+vcs+ 內嵌外部程式
+
+
+vcs
+map + 方圓 XX 公里 把圓畫出來
+
+
+
+vcs
+listBox1.Items.Count > 0);
+
+            if (listBox1.SelectedItems.Count > 0)
+
+
+移除多選的項目
+            while (listBox1.SelectedIndices.Count > 0)
+            {
+                listBox1.Items.RemoveAt(listBox1.SelectedIndices[0]);
+            }
+            
+
+listBox屬性
+            listBox1.SelectionMode = SelectionMode.MultiExtended;
+            listBox1.HorizontalScrollbar = true;
+
+
+
+
+
+
 —index of hemoglobin (IHb) imaging
 
 

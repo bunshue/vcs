@@ -13,43 +13,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <GL/glew.h>
-#include <GL/glut.h>
 #include <math.h>
 
 #define SIZE 400  /* the size, in pixels, of the square window to open */
 
-void display (void);
-void gfxinit ();
-void shader_init ();
+void display(void);
+void gfxinit();
+void shader_init();
 void keyboard(unsigned char key, int x, int y);
 
-void main(int argc, char **argv)
-{
-	GLenum err;
-	
-	glutInit(&argc, argv);
-	glutInitWindowSize(SIZE, SIZE);
-	glutInitWindowPosition(50, 100);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-	glutCreateWindow("Maxwell's Shader Triangle");
-	glutDisplayFunc(display);
-	glutKeyboardFunc(keyboard);
-	gfxinit();
-	err = glewInit();
-	if (err != GLEW_OK) printf("GLEW error\n");
-	printf("Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
-	if (glewGetExtension("GL_ARB_fragment_shader")      != GL_TRUE ||
-		glewGetExtension("GL_ARB_vertex_shader")        != GL_TRUE ||
-		glewGetExtension("GL_ARB_shader_objects")       != GL_TRUE ||
-		glewGetExtension("GL_ARB_shading_language_100") != GL_TRUE)
-	{
-		printf("Driver does not support OpenGL Shading Language\n");
-		exit(1);
-	}
-	glutMainLoop();
-}
-
-void display (void)
+void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 	glBegin(GL_TRIANGLES);
@@ -76,19 +49,19 @@ void gfxinit()
 void keyboard(unsigned char key, int x, int y)
 {
 	static int useShader = 0;
-	
+
 	switch (key) {
- 	   case 's':
-		  useShader = !useShader;
-		  if (useShader)
+	case 's':
+		useShader = !useShader;
+		if (useShader)
 			shader_init();
- 		  else
+		else
 			glUseProgram(0);
-		  glutPostRedisplay();
-		  break;
-	   case 27:	// exit if esc is pushed
-		  exit(0);
-		  break;
+		glutPostRedisplay();
+		break;
+	case 27:	// exit if esc is pushed
+		exit(0);
+		break;
 	}
 }
 
@@ -96,16 +69,16 @@ void shader_init()
 {
 	GLint param;
 	GLuint vshader, fshader, program;
-	
-	static const char *vcode = {
+
+	static const char* vcode = {
 "void main()"
 "{"
 " gl_Position = gl_ProjectionMatrix * gl_ModelViewMatrix * gl_Vertex;"
 " gl_Position.y *= 0.75;"
 "}"
 	};
-	
-	static const char *fcode = {
+
+	static const char* fcode = {
 "void main()"
 "{"
 "	gl_FragColor = vec4(0.8471, 0.7490, 0.8471, 1.0);"
@@ -140,3 +113,35 @@ void shader_init()
 	glUseProgram(program);
 }
 
+int main(int argc, char** argv)
+{
+	GLenum err;
+
+	glutInit(&argc, argv);
+	glutInitWindowSize(SIZE, SIZE);
+	glutInitWindowPosition(50, 100);
+	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+	glutCreateWindow("Maxwell's Shader Triangle");
+
+	glutDisplayFunc(display);   //設定callback function
+	glutReshapeFunc(reshape0);   //設定callback function
+	//glutKeyboardFunc(keyboard0); //設定callback function
+
+	glutKeyboardFunc(keyboard);
+
+	gfxinit();
+	err = glewInit();
+	if (err != GLEW_OK) printf("GLEW error\n");
+	printf("Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
+	if (glewGetExtension("GL_ARB_fragment_shader") != GL_TRUE ||
+		glewGetExtension("GL_ARB_vertex_shader") != GL_TRUE ||
+		glewGetExtension("GL_ARB_shader_objects") != GL_TRUE ||
+		glewGetExtension("GL_ARB_shading_language_100") != GL_TRUE)
+	{
+		printf("Driver does not support OpenGL Shading Language\n");
+		exit(1);
+	}
+	glutMainLoop();	//開始主循環繪製
+
+	return 0;
+}

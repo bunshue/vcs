@@ -50,21 +50,29 @@ void keys(unsigned char key, int x, int y);
 void myReshape(int w, int h);
 void sleep (clock_t wait);
 
-void main(int argc, char **argv)
+int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(300, 300);
     glutInitWindowPosition (100, 50);
     glutCreateWindow("Color Cube with Shadow");
+    
+    glutDisplayFunc(display);   //設定callback function
+    //glutReshapeFunc(reshape0);   //設定callback function
+    //glutKeyboardFunc(keyboard0); //設定callback function
+    
     glutReshapeFunc(myReshape);
-    glutDisplayFunc(display);
+
 	glutIdleFunc(spinCube);
 	glutMouseFunc(mouse);
 	glutKeyboardFunc(keys);
 	glEnable(GL_DEPTH_TEST);
     colorcube ();
-    glutMainLoop();
+
+    glutMainLoop();	//開始主循環繪製
+
+    return 0;
 }
 
 // This function sets up the vertex arrays for the color cube and initializes other graphics
