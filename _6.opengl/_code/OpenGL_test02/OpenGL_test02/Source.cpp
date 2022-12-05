@@ -330,18 +330,11 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
 
 int main(int argc, char** argv)
 {
-    glutInit(&argc, argv);
-    //glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);    //宣告顯示模式為 Single Buffer 和 RGBA
+    const char* windowName = "簡單2D OpenGL畫圖 0 ~ 9";
+    const char* message = "簡單2D OpenGL畫圖 0 ~ 9\n";
 
-    glutInitWindowSize(600, 600);		//設定視窗大小, 直接拉大內容
-    glutInitWindowPosition(1100, 200);	//視窗起始位置
+    common_setup(argc, argv, windowName, message, display, reshape0, keyboard);
 
-    glutCreateWindow("簡單2D OpenGL畫圖 0 ~ 9");    // 設定視窗標題
-
-    glutDisplayFunc(display);	//設定callback function
-    glutReshapeFunc(reshape0);	//設定callback function
-    glutKeyboardFunc(keyboard);	//設定callback function
     glutMouseFunc(mouse0);		//設定callback function
     glutMotionFunc(motion0);    //設定callback function
 

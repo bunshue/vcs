@@ -192,28 +192,17 @@ void timerEvent(int value)
     {
         printf("經過1秒 ");
         //glutPostRedisplay();
-        
+
     }
-
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
-
 }
 
 int main(int argc, char** argv)
 {
-    //初始化GLUT庫，這個函數只是傳說命令參數并且初始化glut庫
-    glutInit(&argc, argv);
+    const char* windowName = "OpenGL測試";
+    const char* message = "OpenGL測試\n";
+    common_setup(argc, argv, windowName, message, display, reshape0, keyboard);
 
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);    //宣告顯示模式為 Single Buffer 和 RGBA
-
-    glutInitWindowSize(600, 600);       // 設定視窗大小
-    glutInitWindowPosition(1100, 200);  // 設定視窗位置
-
-    glutCreateWindow("OpenGL測試");	//開啟視窗 並顯示出視窗 Title
-
-    glutDisplayFunc(display);   //設定callback function
-    glutReshapeFunc(reshape0);  //設定callback function
-    glutKeyboardFunc(keyboard); //設定callback function
     glutMouseFunc(mouse0);      //設定callback function
     glutMotionFunc(motion0);    //設定callback function
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);

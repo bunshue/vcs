@@ -93,6 +93,7 @@ void draw_quad(float* color, float width, float x1, float y1, float x2, float y2
 //實心四邊形, 左下為原點, 向右w, 向上h, 顏色color, 無線寬width
 void draw_quad_s(float* color, float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4);
 
+void display0(void);
 void reshape0(int w, int h);
 void keyboard0(unsigned char key, int /*x*/, int /*y*/);
 void mouse0(int button, int state, int x, int y);
@@ -103,4 +104,12 @@ void keyboard_r(unsigned char key, int /*x*/, int /*y*/);
 void mouse_r(int button, int state, int x, int y);
 void motion_r(int x, int y);
 void setup_rotation();
+
+void common_setup(int argc, char** argv, const char* windowName, const char* message, void (*disp)(void), void (*resh)(int, int), void (*key)(unsigned char, int, int));
+
+
+
+
+
+
 

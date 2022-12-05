@@ -73,21 +73,13 @@ void display(void)
 
 int main(int argc, char** argv)
 {
-	glutInit(&argc, argv);
-
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-
-	glutInitWindowSize(600, 600);
-	glutInitWindowPosition(1100, 200);
-
-	glutCreateWindow("畫茶壺圓椎三角塊");	//開啟視窗 並顯示出視窗 Title
+	const char* windowName = "畫茶壺圓椎三角塊";
+	const char* message = "畫茶壺圓椎三角塊\n";
+	common_setup(argc, argv, windowName, message, display, reshape0, keyboard_r);
 
 	printf("0 keydown means control the angle of the eye\n");
 	printf("1 keydown means control the distance of the eye\n");
 
-	glutDisplayFunc(display);	//設定callback function
-	glutReshapeFunc(reshape0);	//設定callback function
-	glutKeyboardFunc(keyboard_r);	//設定callback function
 	glutMouseFunc(mouse_r);		//設定callback function
 	glutMotionFunc(motion_r);		//設定callback function
 

@@ -157,23 +157,11 @@ void reshape(int w, int h)
 
 int main(int argc, char** argv)
 {
-    glutInit(&argc, argv);
-
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
-
-    glutInitWindowSize(1200, 600);		// 設定視窗大小
-    glutInitWindowPosition(600, 200);	// 設定視窗位置
-
-    glutCreateWindow("幾何圖形繪製");	//開啟視窗 並顯示出視窗 Title
-
-    glutDisplayFunc(display);	//設定callback function
-    glutReshapeFunc(reshape);	//設定callback function
-    glutKeyboardFunc(keyboard0);	//設定callback function
-
-    printf("僅顯示, 無控制, 按 Esc 離開\n");
+    const char* windowName = "幾何圖形繪製";
+    const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
+    common_setup(argc, argv, windowName, message, display, reshape, keyboard0);
 
     glutMainLoop();	//開始主循環繪製
 
     return 0;
 }
-

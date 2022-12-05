@@ -56,18 +56,10 @@ void display(void)
 
 int main(int argc, char** argv)
 {
-	glutInit(&argc, argv);
+	const char* windowName = "手動移動座標系範例";
+	const char* message = "手動移動座標系範例\n";
+	common_setup(argc, argv, windowName, message, display, reshape0, keyboard_r);
 
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);    //宣告顯示模式為 Single Buffer 和 RGBA
-
-	glutInitWindowSize(600, 600);
-	glutInitWindowPosition(1100, 200);
-
-	glutCreateWindow("手動移動座標系範例");	//開啟視窗 並顯示出視窗 Title
-
-	glutDisplayFunc(display);	//設定callback function
-	glutReshapeFunc(reshape0);	//設定callback function
-	glutKeyboardFunc(keyboard_r);	//設定callback function
 	glutMouseFunc(mouse_r);		//設定callback function
 	glutMotionFunc(motion_r);		//設定callback function
 

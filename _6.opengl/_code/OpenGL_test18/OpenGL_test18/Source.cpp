@@ -196,6 +196,7 @@ int main(int argc, char* argv[])
     glutInitDisplayMode(GLUT_INDEX | GLUT_DOUBLE);
 
     glutCreateWindow("Bounce");
+
     Ball = make_ball();
     glCullFace(GL_BACK);
     glEnable(GL_CULL_FACE);

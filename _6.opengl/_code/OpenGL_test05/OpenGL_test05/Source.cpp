@@ -122,23 +122,14 @@ void motion(int x, int y)
 
 int main(int argc, char** argv)
 {
-    glutInit(&argc, argv);
+    const char* windowName = "我的Common使用範例";
+    const char* message = "我的Common使用範例\n";
+    common_setup(argc, argv, windowName, message, display, reshape, keyboard);
 
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);    //宣告顯示模式為 Single Buffer 和 RGBA
-
-    glutInitWindowSize(600, 600);       // 設定視窗大小
-    glutInitWindowPosition(1100, 200);  // 設定視窗位置
-
-    glutCreateWindow("OpenGL測試");	//開啟視窗 並顯示出視窗 Title
-
-    glutDisplayFunc(display);   //設定callback function
-    glutReshapeFunc(reshape);   //設定callback function
-    glutKeyboardFunc(keyboard); //設定callback function
     glutMouseFunc(mouse);       //設定callback function
     glutMotionFunc(motion);     //設定callback function
 
     printf("僅顯示, 無控制, 按 Esc 離開\n");
-    printf("\n我的Common使用範例\n");
 
     glutMainLoop();	//開始主循環繪製
 

@@ -558,32 +558,9 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
 
 int main(int argc, char* argv[])
 {
-    //初始化GLUT庫，這個函數只是傳說命令參數并且初始化glut庫
-    glutInit(&argc, argv);
-
-    //glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);    //宣告顯示模式為 Single Buffer 和 RGBA
-
-    /*
-    設定圖形顯示模式。引數mode的可選值為：
-    GLUT_RGBA：      當未指明GLUT - RGBA或GLUT - INDEX時，是預設使用的模式。表明欲建立RGBA模式的視窗。
-    GLUT_RGB：       與GLUT - RGBA作用相同。
-    GLUT_INDEX：     指明為顏色索引模式。
-    GLUT_SINGLE：    只使用單快取
-    GLUT_DOUBLE：    使用雙快取。以避免把計算機作圖的過程都表現出來，或者為了平滑地實現動畫。
-    GLUT_DEPTH：     使用深度快取。
-    GLUT_ACCUM：     讓視窗使用累加的快取。
-    GLUT_ALPHA：     讓顏色緩衝區使用alpha元件。
-    GLUT_STENCIL：   使用模板快取。
-    GLUT_MULTISAMPLE：讓視窗支援多例程。
-    GLUT_STEREO：    使視窗支援立體。
-    GLUT_LUMINACE:  luminance是亮度的意思。但是很遺憾，在多數OpenGL平臺上，不被支援。
-    */
-
-    glutInitWindowSize(600, 600);       // 設定視窗大小
-    glutInitWindowPosition(1100, 200);  // 設定視窗位置
-
-    glutCreateWindow("簡單2D OpenGL畫圖 0 ~ 9");    // 設定視窗標題
+    const char* windowName = "簡單2D OpenGL畫圖 0 ~ 9";
+    const char* message = "簡單2D OpenGL畫圖 0 ~ 9\n";
+    common_setup(argc, argv, windowName, message, display, reshape0, keyboard);
 
     //int res = glutGetWindow();
     //printf("當前視窗的標記符 = %d\n", res);
@@ -591,10 +568,6 @@ int main(int argc, char* argv[])
     //printf("取得視窗高度 : %d\n", glutGet(GLUT_WINDOW_HEIGHT));
 
     glutSetCursor(GLUT_CURSOR_DESTROY); //改變視窗上的鼠標標記
-
-    glutDisplayFunc(display);       //設定callback function, 註冊顯示函數 // Register display callback handler for window re-paint
-    glutReshapeFunc(reshape0);       //設定callback function
-    glutKeyboardFunc(keyboard);     //設定callback function
 
     glutMainLoop();	//開始主循環繪製     // Enter the event-processing loop
 
