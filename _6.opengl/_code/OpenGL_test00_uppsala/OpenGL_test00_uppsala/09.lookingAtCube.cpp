@@ -1,13 +1,12 @@
 /* This program is modified from the rotating cube program to demonstrate
-   the synthetic camera approach to viewing a scene.
-*/
+   the synthetic camera approach to viewing a scene. */
 
 #include "../../Common.h"
 
-//#include <stdlib.h>
-//#include <GL/glut.h>
+   //#include <stdlib.h>
+   //#include <GL/glut.h>
 
-// Vertices of the cube, centered at the origin.
+   // Vertices of the cube, centered at the origin.
 GLfloat vertices[][3] = { {-1.0,-1.0,-1.0}, {1.0,-1.0,-1.0}, {1.0,1.0,-1.0},
     {-1.0,1.0,-1.0}, {-1.0,-1.0,1.0}, {1.0,-1.0,1.0}, {1.0,1.0,1.0}, {-1.0,1.0,1.0} };
 
@@ -96,9 +95,11 @@ int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-    glutInitWindowSize(500, 500);
-    glutInitWindowPosition(100, 50);
-    glutCreateWindow("Color Cube");
+
+    glutInitWindowSize(600, 600);       // 設定視窗大小
+    glutInitWindowPosition(1100, 200);  // 設定視窗位置
+
+    glutCreateWindow("Color Cube");	//開啟視窗 並顯示出視窗 Title
 
     glutDisplayFunc(display);   //設定callback function
     //glutReshapeFunc(reshape0);   //設定callback function

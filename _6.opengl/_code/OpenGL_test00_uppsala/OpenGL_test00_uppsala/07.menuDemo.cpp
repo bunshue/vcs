@@ -47,8 +47,7 @@ void instructions()
 
 void display(void)
 /* This is the callback function that gets executed every time the display
-   needs to be updated.
-*/
+   needs to be updated. */
 {
     int i;
 

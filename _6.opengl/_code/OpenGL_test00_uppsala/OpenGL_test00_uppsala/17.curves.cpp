@@ -8,11 +8,6 @@
 
 #include "../../Common.h"
 
-#include <stdlib.h>
-#include <fstream>
-#include <iostream>
-#include <string.h>
-
  /* Drawing constants. */
 #define WINDOW_SIZE  540  /* initial size of window                             */
 #define BORDER        10  /* border width in each viewport                      */
@@ -42,33 +37,6 @@ void spline();
 void gfxinit();
 void display(void);
 void reshape(int width, int height);
-
-using namespace std;
-
-int main(int argc, char** argv)
-{
-    /* Get input data. */
-
-    interact();
-
-    /* Set graphics window parameters. */
-
-    glutInit(&argc, argv);
-    glutInitWindowSize(WindowSizeX, WindowSizeY);
-    glutInitWindowPosition(100, 0);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-    glutCreateWindow("Curve Fitting");
-
-    glutDisplayFunc(display);   //設定callback function
- //glutReshapeFunc(reshape0);   //設定callback function
-    glutKeyboardFunc(keyboard0); //設定callback function
-
-    gfxinit();
-    glutMainLoop();	//開始主循環繪製
-
-    return 0;
-}
-
 
 void gfxinit()
 /* This is the routine that generates the image to be displayed. */
@@ -457,4 +425,27 @@ void spline()
         glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, title[i]);
     }
     glEndList();
+}
+
+int main(int argc, char** argv)
+{
+    /* Get input data. */
+    interact();
+
+    /* Set graphics window parameters. */
+
+    glutInit(&argc, argv);
+    glutInitWindowSize(WindowSizeX, WindowSizeY);
+    glutInitWindowPosition(100, 0);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+    glutCreateWindow("Curve Fitting");
+
+    glutDisplayFunc(display);   //設定callback function
+ //glutReshapeFunc(reshape0);   //設定callback function
+    glutKeyboardFunc(keyboard0); //設定callback function
+
+    gfxinit();
+    glutMainLoop();	//開始主循環繪製
+
+    return 0;
 }

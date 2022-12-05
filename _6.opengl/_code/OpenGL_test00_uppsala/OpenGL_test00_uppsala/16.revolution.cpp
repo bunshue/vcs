@@ -5,10 +5,6 @@
 
 #include "../../Common.h"
 
-#include <iostream>
-#include <math.h>
-
-#define WINDOWSIZE 400
 #define R  2.0f
 #define M_PI 3.141592654
 
@@ -235,13 +231,11 @@ int main(int argc, char** argv)
     /* Set graphics window parameters. */
 
     glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 
     glutInitWindowSize(600, 600);       // 設定視窗大小
     glutInitWindowPosition(1100, 200);  // 設定視窗位置
-    glutInitWindowSize(WINDOWSIZE, WINDOWSIZE);
-    glutInitWindowPosition(300, 300);
 
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutCreateWindow("Surfaces of Revolution");
 
     glutDisplayFunc(display);   //設定callback function

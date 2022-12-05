@@ -158,9 +158,11 @@ int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-	glutInitWindowSize(400, 400);
-	glutInitWindowPosition(100, 50);
-	glutCreateWindow("colorcube");
+
+	glutInitWindowSize(600, 600);       // 設定視窗大小
+	glutInitWindowPosition(1100, 200);  // 設定視窗位置
+
+	glutCreateWindow("colorcube");	//開啟視窗 並顯示出視窗 Title
 
 	glutDisplayFunc(display);   //設定callback function
 	//glutReshapeFunc(reshape0);   //設定callback function

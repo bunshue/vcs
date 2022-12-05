@@ -4,34 +4,12 @@
  *  texture is rendered as stripes on the teapot.
  */
 
- /* Modified April 15, 1996 by Cary Laxer
-  * Changed texture to a 2-d pattern, using a cross stripe pattern.
-  */
-
-  /* Modified January 16, 1997 by Cary Laxer
-   * Changed from aux to glut window interface.
-   */
-
-   /* Modified October 25, 2004 by Cary Laxer
-    * Added ability to use a Targa file as a texture map. Code for this taken
-    * from "OpenGL Super Bible" (Third Edition) by Wright and Lipchak.
-    */
-
-    /* Modified November 23, 2007 by Cary Laxer
-     * Updated file open to fopen_s for more secure file operation.
-     */
-
 #include "../../Common.h"
-
-#include <stdlib.h>
-#include <stdio.h>
-#include <malloc.h>
-#include <GL/glext.h>
 
 #define	ImageWidth 64
 #define ImageLength 64
 
-     // Define targa header.
+ // Define targa header.
 #pragma pack(1)
 typedef struct
 {
@@ -65,30 +43,6 @@ void myReshape(int w, int h);
 void imageMenu(int whichImage);
 GLbyte* gltLoadTGA(const char* szFileName, GLint* iWidth, GLint* iHeight, GLint* iComponents, GLenum* eFormat);
 
-int main(int argc, char** argv)
-{
-    glutInit(&argc, argv);
-    glutInitWindowSize(300, 300);
-    glutInitWindowPosition(250, 300);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-    glutCreateWindow("Texture Generation");
-
-    glutDisplayFunc(display);   //設定callback function
-    //glutReshapeFunc(reshape0);   //設定callback function
-    glutKeyboardFunc(keyboard0); //設定callback function
-    glutReshapeFunc(myReshape);
-    glutCreateMenu(imageMenu);
-    glutAddMenuEntry("Striped teapot", 1);
-    glutAddMenuEntry("Stone teapot", 2);
-    glutAddMenuEntry("Exit program", 3);
-    glutAttachMenu(GLUT_RIGHT_BUTTON);
-    gfxinit();
-
-    glutMainLoop();	//開始主循環繪製
-
-    return 0;
-}
-
 void makeImage(void)
 {
     int i, j, w2, l2, cond;
@@ -96,12 +50,15 @@ void makeImage(void)
     w2 = ImageWidth >> 2;
     l2 = ImageLength >> 2;
     for (i = 0; i < ImageLength; i++)
-        for (j = 0; j < ImageWidth; j++) {
+    {
+        for (j = 0; j < ImageWidth; j++)
+        {
             cond = (i < l2) || (j < w2);
             Image[i][j][0] = cond ? 255 : 0;
             Image[i][j][1] = (!cond) ? 255 : 0;
             Image[i][j][2] = 0;
         }
+    }
 }
 
 void gfxinit(void)
@@ -186,9 +143,13 @@ void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     if (image == 1)
+    {
         glCallList(1);
+    }
     else
+    {
         glCallList(2);
+    }
     glutSwapBuffers();
 }
 
@@ -200,11 +161,13 @@ void myReshape(int w, int h)
     glLoadIdentity();
 
     if (w <= h)
-        glOrtho(-3.5, 3.5, -3.5 * (GLfloat)h / (GLfloat)w,
-            3.5 * (GLfloat)h / (GLfloat)w, -3.5, 3.5);
+    {
+        glOrtho(-3.5, 3.5, -3.5 * (GLfloat)h / (GLfloat)w, 3.5 * (GLfloat)h / (GLfloat)w, -3.5, 3.5);
+    }
     else
-        glOrtho(-3.5 * (GLfloat)w / (GLfloat)h,
-            3.5 * (GLfloat)w / (GLfloat)h, -3.5, 3.5, -3.5, 3.5);
+    {
+        glOrtho(-3.5 * (GLfloat)w / (GLfloat)h, 3.5 * (GLfloat)w / (GLfloat)h, -3.5, 3.5, -3.5, 3.5);
+    }
 }
 
 /* This function changes the image based on the user's menu selection. */
@@ -248,31 +211,24 @@ GLbyte* gltLoadTGA(const char* szFileName, GLint* iWidth, GLint* iHeight, GLint*
     // Attempt to open the file
     fopen_s(&pFile, szFileName, "rb");
     if (pFile == NULL)
+    {
         return NULL;
+    }
 
     // Read in header (binary)
     fread(&tgaHeader, 18/* sizeof(TGAHEADER)*/, 1, pFile);
 
-    // Do byte swap for big vs little endian
-#ifdef __APPLE__
-    BYTE_SWAP(tgaHeader.colorMapStart);
-    BYTE_SWAP(tgaHeader.colorMapLength);
-    BYTE_SWAP(tgaHeader.xstart);
-    BYTE_SWAP(tgaHeader.ystart);
-    BYTE_SWAP(tgaHeader.width);
-    BYTE_SWAP(tgaHeader.height);
-#endif
-
-
     // Get width, height, and depth of texture
-    * iWidth = tgaHeader.width;
+    *iWidth = tgaHeader.width;
     *iHeight = tgaHeader.height;
     sDepth = tgaHeader.bits / 8;
 
     // Put some validity checks here. Very simply, I only understand
     // or care about 8, 24, or 32 bit targa's.
     if (tgaHeader.bits != 8 && tgaHeader.bits != 24 && tgaHeader.bits != 32)
+    {
         return NULL;
+    }
 
     // Calculate size of image buffer
     lImageSize = tgaHeader.width * tgaHeader.height * sDepth;
@@ -280,7 +236,9 @@ GLbyte* gltLoadTGA(const char* szFileName, GLint* iWidth, GLint* iHeight, GLint*
     // Allocate memory and check for success
     pBits = (GLbyte*)malloc(lImageSize * sizeof(GLbyte));
     if (pBits == NULL)
+    {
         return NULL;
+    }
 
     // Read in the bits
     // Check for read error. This should catch RLE or other 
@@ -308,10 +266,38 @@ GLbyte* gltLoadTGA(const char* szFileName, GLint* iWidth, GLint* iHeight, GLint*
         break;
     };
 
-
     // Done with File
     fclose(pFile);
 
     // Return pointer to image data
     return pBits;
 }
+
+int main(int argc, char** argv)
+{
+    glutInit(&argc, argv);
+
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+
+    glutInitWindowSize(600, 600);       // 設定視窗大小
+    glutInitWindowPosition(1100, 200);  // 設定視窗位置
+
+    glutCreateWindow("Texture Generation");	//開啟視窗 並顯示出視窗 Title
+
+    glutDisplayFunc(display);   //設定callback function
+    //glutReshapeFunc(reshape0);   //設定callback function
+    glutKeyboardFunc(keyboard0); //設定callback function
+    glutReshapeFunc(myReshape);
+    glutCreateMenu(imageMenu);
+    glutAddMenuEntry("Striped teapot", 1);
+    glutAddMenuEntry("Stone teapot", 2);
+    glutAddMenuEntry("Exit program", 3);
+    glutAttachMenu(GLUT_RIGHT_BUTTON);
+    gfxinit();
+
+    glutMainLoop();	//開始主循環繪製
+
+    return 0;
+}
+
+

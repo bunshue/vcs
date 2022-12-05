@@ -5,8 +5,6 @@ modes: wire frame, constant, and interpolative shading */
 
 /* mode 0 = wire frame, mode 1 = constant shading, mode 2 = interpolative shading */
 
-/* Updated October 16, 2000, by Cary Laxer to convert I/O to C++. */
-
 #include "../../Common.h"
 
 typedef double point[3];
@@ -193,9 +191,11 @@ int main(int argc, char** argv)
     cin >> n;
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-    glutInitWindowSize(500, 500);
-    glutInitWindowPosition(100, 100);
-    glutCreateWindow("Sphere");
+
+    glutInitWindowSize(600, 600);       // 設定視窗大小
+    glutInitWindowPosition(1100, 200);  // 設定視窗位置
+
+    glutCreateWindow("Sphere");	//開啟視窗 並顯示出視窗 Title
 
     myinit();
 

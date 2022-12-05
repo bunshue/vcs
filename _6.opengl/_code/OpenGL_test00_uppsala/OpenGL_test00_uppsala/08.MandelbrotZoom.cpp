@@ -25,8 +25,70 @@ void change_colors(int ncolors);
 GLushort zSqrPointColor(double cx, double cy);
 void interact(void);
 void calcMandelbrot();
-void mouseFunc(int button, int state, int x, int y);
-void mouseMove(int x, int y);
+
+void mouse(int button, int state, int x, int y)
+{
+	double xrange, yrange;
+	int temp;
+	strstream title;
+
+	/* This routine is the callback function for mouse events. */
+
+	switch (button)
+	{
+	case GLUT_LEFT_BUTTON:
+		if (state == GLUT_DOWN)  // start dragging
+		{
+			glEnable(GL_INDEX_LOGIC_OP);
+			glLogicOp(GL_XOR);
+			glIndexi(63);
+			xmin = xmax = x;
+			ymin = ymax = H - y;
+		}
+		else  // stop dragging; zoom in on selected region
+		{
+			glDisable(GL_INDEX_LOGIC_OP);
+			xrange = maxX - minX;
+			yrange = maxY - minY;
+			if (xmax < xmin)
+			{
+				temp = xmax; xmax = xmin; xmin = temp;
+			}
+			if (ymax < ymin)
+			{
+				temp = ymax; ymax = ymin; ymin = temp;
+			}
+			maxX = minX + ((double)xmax / W) * xrange;
+			minX = minX + ((double)xmin / W) * xrange;
+			maxY = minY + ((double)ymax / H) * yrange;
+			minY = minY + ((double)ymin / H) * yrange;
+			glDeleteLists(1, 1);
+			glClear(GL_COLOR_BUFFER_BIT);
+			glFlush();
+			if (maxIterations < color_size - 20)
+				maxIterations += 20;
+			else
+				maxIterations = color_size;
+			change_colors(maxIterations);
+			calcMandelbrot();
+			title << "Mandelbrot Set - " << maxIterations << " Iterations";
+			glutSetWindowTitle(title.str());
+			glutPostRedisplay();
+		}
+	}
+}
+
+void motion(int x, int y)
+{
+	/* This routine is the callback function for mouse drag events. It draws the
+	   rubberbanding triangle. */
+
+	glRecti(xmin, ymin, xmax, ymax);
+	xmax = x;
+	ymax = H - y;
+	glRecti(xmin, ymin, xmax, ymax);
+	glFlush();
+}
 
 int main(int argc, char** argv)
 {
@@ -49,8 +111,8 @@ int main(int argc, char** argv)
 	glutDisplayFunc(display);   //設定callback function
 	glutReshapeFunc(reshape0);   //設定callback function
 	glutKeyboardFunc(keyboard0); //設定callback function
-	glutMouseFunc(mouseFunc);
-	glutMotionFunc(mouseMove);
+	glutMouseFunc(mouse);		//設定callback function
+	glutMotionFunc(motion);		//設定callback function
 
 	gfxinit();
 
@@ -174,68 +236,3 @@ void calcMandelbrot()
 	glDrawPixels(W, H, GL_COLOR_INDEX, GL_UNSIGNED_SHORT, points);
 	glEndList();
 }
-
-void mouseFunc(int button, int state, int x, int y)
-{
-	double xrange, yrange;
-	int temp;
-	strstream title;
-
-	/* This routine is the callback function for mouse events. */
-
-	switch (button)
-	{
-	case GLUT_LEFT_BUTTON:
-		if (state == GLUT_DOWN)  // start dragging
-		{
-			glEnable(GL_INDEX_LOGIC_OP);
-			glLogicOp(GL_XOR);
-			glIndexi(63);
-			xmin = xmax = x;
-			ymin = ymax = H - y;
-		}
-		else  // stop dragging; zoom in on selected region
-		{
-			glDisable(GL_INDEX_LOGIC_OP);
-			xrange = maxX - minX;
-			yrange = maxY - minY;
-			if (xmax < xmin)
-			{
-				temp = xmax; xmax = xmin; xmin = temp;
-			}
-			if (ymax < ymin)
-			{
-				temp = ymax; ymax = ymin; ymin = temp;
-			}
-			maxX = minX + ((double)xmax / W) * xrange;
-			minX = minX + ((double)xmin / W) * xrange;
-			maxY = minY + ((double)ymax / H) * yrange;
-			minY = minY + ((double)ymin / H) * yrange;
-			glDeleteLists(1, 1);
-			glClear(GL_COLOR_BUFFER_BIT);
-			glFlush();
-			if (maxIterations < color_size - 20)
-				maxIterations += 20;
-			else
-				maxIterations = color_size;
-			change_colors(maxIterations);
-			calcMandelbrot();
-			title << "Mandelbrot Set - " << maxIterations << " Iterations";
-			glutSetWindowTitle(title.str());
-			glutPostRedisplay();
-		}
-	}
-}
-
-void mouseMove(int x, int y)
-{
-	/* This routine is the callback function for mouse drag events. It draws the
-	   rubberbanding triangle. */
-
-	glRecti(xmin, ymin, xmax, ymax);
-	xmax = x;
-	ymax = H - y;
-	glRecti(xmin, ymin, xmax, ymax);
-	glFlush();
-}
-

@@ -3,15 +3,10 @@
  *  This program draws several overlapping filled polygons
  *  to demonstrate the effect order has on alpha blending results.
  */
- /*  Modified by Cary Laxer, January 19, 1998, to use glut interface rather than aux.
-  */
 
 #include "../../Common.h"
 
-  //#include <stdlib.h>
-  //#include <GL/glut.h>
-
-  /*  Initialize alpha blending function.  */
+ /*  Initialize alpha blending function.  */
 
 void myinit(void)
 {
@@ -58,12 +53,12 @@ void reshape(int w, int h)
 
 /*  Main Loop
  *  Open window with initial window size, title bar,
- *  RGBA display mode, and handle input events.
- */
+ *  RGBA display mode, and handle input events.  */
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
+
     glutInitWindowSize(600, 600);       // 設定視窗大小
     glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
