@@ -15,11 +15,6 @@
 double points[MAX_POINTS + 2][3], minx, maxx, miny, maxy, xrange, yrange;
 int number_of_points = 0;
 
-void interact();
-void gfxinit();
-void display(void);
-void reshape(int width, int height);
-
 void gfxinit()
 /* This is the routine that generates the image to be displayed. */
 {
@@ -140,17 +135,19 @@ int main(int argc, char** argv)
     /* Set graphics window parameters. */
 
     glutInit(&argc, argv);
-    glutInitWindowSize(WINDOW_SIZE, WINDOW_SIZE);
-    glutInitWindowPosition(100, 0);
+    glutInitWindowSize(WINDOW_SIZE, WINDOW_SIZE);   // 設定視窗大小
+    glutInitWindowPosition(1100, 200);  // 設定視窗位置
+
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+
     glutCreateWindow("Curve Fitting with Evaluators");
 
     glutDisplayFunc(display);   //設定callback function
-    //glutReshapeFunc(reshape0);   //設定callback function
+    glutReshapeFunc(reshape);   //設定callback function
     glutKeyboardFunc(keyboard0); //設定callback function
 
-    glutReshapeFunc(reshape);
     gfxinit();
+
     glutMainLoop();	//開始主循環繪製
 
     return 0;

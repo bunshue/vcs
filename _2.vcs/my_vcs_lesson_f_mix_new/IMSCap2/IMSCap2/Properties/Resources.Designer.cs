@@ -103,6 +103,26 @@ namespace IMSCap2.Properties {
         /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
+        internal static System.Drawing.Bitmap image_ims {
+            get {
+                object obj = ResourceManager.GetObject("image_ims", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap image_ims_small {
+            get {
+                object obj = ResourceManager.GetObject("image_ims_small", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
         internal static System.Drawing.Bitmap image_name {
             get {
                 object obj = ResourceManager.GetObject("image_name", resourceCulture);

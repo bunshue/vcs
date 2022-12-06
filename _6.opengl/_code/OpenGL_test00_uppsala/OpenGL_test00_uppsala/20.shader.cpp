@@ -17,7 +17,6 @@
 
 #define SIZE 400  /* the size, in pixels, of the square window to open */
 
-void display(void);
 void gfxinit();
 void shader_init();
 void keyboard(unsigned char key, int x, int y);
@@ -90,26 +89,38 @@ void shader_init()
 	glCompileShader(vshader);
 	glGetShaderiv(vshader, GL_COMPILE_STATUS, &param);
 	if (param == GL_TRUE)
+	{
 		printf("Vertex shader successfully compiled\n");
+	}
 	else
+	{
 		printf("Vertex shader did not compile\n");
+	}
 	fshader = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fshader, 1, &fcode, NULL);
 	glCompileShader(fshader);
 	glGetShaderiv(fshader, GL_COMPILE_STATUS, &param);
 	if (param != GL_FALSE)
+	{
 		printf("Fragment shader successfully compiled\n");
+	}
 	else
+	{
 		printf("Fragment shader did not compile\n");
+	}
 	program = glCreateProgram();
 	glAttachShader(program, vshader);
 	glAttachShader(program, fshader);
 	glLinkProgram(program);
 	glGetShaderiv(program, GL_LINK_STATUS, &param);
 	if (param != GL_FALSE)
+	{
 		printf("Program successfully linked\n");
+	}
 	else
+	{
 		printf("Program did not link\n");
+	}
 	glUseProgram(program);
 }
 
@@ -118,9 +129,12 @@ int main(int argc, char** argv)
 	GLenum err;
 
 	glutInit(&argc, argv);
-	glutInitWindowSize(SIZE, SIZE);
-	glutInitWindowPosition(50, 100);
+
+	glutInitWindowSize(SIZE, SIZE);		// 設定視窗大小
+	glutInitWindowPosition(1100, 200);  // 設定視窗位置
+
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+
 	glutCreateWindow("Maxwell's Shader Triangle");
 
 	glutDisplayFunc(display);   //設定callback function
@@ -130,6 +144,7 @@ int main(int argc, char** argv)
 	glutKeyboardFunc(keyboard);
 
 	gfxinit();
+
 	err = glewInit();
 	if (err != GLEW_OK) printf("GLEW error\n");
 	printf("Status: Using GLEW %s\n", glewGetString(GLEW_VERSION));
@@ -141,6 +156,7 @@ int main(int argc, char** argv)
 		printf("Driver does not support OpenGL Shading Language\n");
 		exit(1);
 	}
+
 	glutMainLoop();	//開始主循環繪製
 
 	return 0;

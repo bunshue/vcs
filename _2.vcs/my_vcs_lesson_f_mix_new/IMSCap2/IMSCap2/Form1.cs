@@ -11,8 +11,35 @@ namespace IMSCap2
 {
     public partial class Form1 : Form
     {
-        Color background_color = Color.White;
-        Color key_press_color = Color.Green;
+        private const int S_OK = 0;     //system return OK
+        private const int S_FALSE = 1;     //system return FALSE
+        private const int LAYER0_WIDTH = 1920;
+        private const int LAYER0_HEIGHT = 1080;
+        private const int LAYER1_WIDTH = 1216;
+        private const int LAYER1_HEIGHT = 912;
+        private const int LAYER2_WIDTH = 640;
+        private const int LAYER2_HEIGHT = 480;
+        //private const int LAYER3_WIDTH = 1920;
+        //private const int LAYER3_HEIGHT = 1080;
+        private const int LAYER1_START_X = (LAYER0_WIDTH - LAYER1_WIDTH - BORDER_X);
+        private const int LAYER1_START_Y = BORDER_Y;
+        private const int LAYER2_START_X = BORDER_X;
+        private const int LAYER2_START_Y = (LAYER0_HEIGHT - LAYER2_HEIGHT - BORDER_Y);
+        private const int BORDER_X = 16;
+        private const int BORDER_Y = 16;
+        private const int OFFSET_X = 70;
+        private const int WIDTH1 = 150;
+        private const int WIDTH2 = 370;
+        private const int THICK1 = 40;
+        private const int CAMERA_INFO_POS_X1 = 670;
+        private const int CAMERA_INFO_POS_X2 = CAMERA_INFO_POS_X1 + 550;
+        private const int CAMERA_INFO_POS_X3 = CAMERA_INFO_POS_X1 + 740;
+        private const int CAMERA_INFO_POS_Y1 = 950 - 11;
+        private const int CAMERA_INFO_POS_Y2 = 950 - 11 + 34;
+        private const int CAMERA_INFO_POS_Y3 = 950 - 11 + 68;
+        private const int ICON_LINEWDITH = 5; //設定按鈕畫線線寬
+        private const int ICON_W = 50; //設定按鈕大小 W
+        private const int ICON_H = 50; //設定按鈕大小 H
 
         //第一群Label, 指示用Label
         Label lb_1_id = new Label();
@@ -45,6 +72,14 @@ namespace IMSCap2
         Label lb_serial = new Label();
         Label lb_version = new Label();
 
+        Color background_color = Color.White;
+        Font font = new Font("新細明體", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+
+        //Font font = new Font("Times New Roman", 18, FontStyle.Bold));
+        //((Label)c).Font = new Font("Courier New", 18, FontStyle.Bold);  //建立字體對象
+        //((Label)c).Font = new Font("Arial", 18, FontStyle.Bold);  //建立字體對象
+        //((Label)c).Font = new Font("Times New Roman", 18, FontStyle.Bold);  //建立字體對象
+        //this.lb_ims2.Font = new System.Drawing.Font("新細明體", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
 
         public Form1()
         {
@@ -53,11 +88,14 @@ namespace IMSCap2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.BackColor = Color.Black;
+            show_item_location();
+        }
+
+        void setup_controls()
+        {
+            //this.BackColor = Color.Black;
             int w = 160;
             int h = 40;
-            int x_st = 20;
-            int y_st = 20;
             int dx = w + 5;
             int dy = h + 5;
 
@@ -77,18 +115,6 @@ namespace IMSCap2
             lb_1_date.Text = "12/05/2022 Mon";
             lb_1_time.Text = "13:53:55";
 
-            x_st = 20;
-            y_st = 20;
-            dx = w + 5;
-            dy = h + 5;
-            lb_1_id.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            lb_1_name.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            lb_1_sex.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            lb_1_birthday.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            lb_1_age.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            lb_1_date.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            lb_1_time.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-
             this.Controls.Add(lb_1_id);
             this.Controls.Add(lb_1_name);
             this.Controls.Add(lb_1_sex);
@@ -103,22 +129,6 @@ namespace IMSCap2
             lb_2_birthday.Name = "lb_2_birthday";
             lb_2_age.Name = "lb_2_age";
 
-            lb_2_id.Text = "ID NO:";
-            lb_2_name.Text = "NAME:";
-            lb_2_sex.Text = "SEX:";
-            lb_2_birthday.Text = "Birthday:";
-            lb_2_age.Text = "Age:";
-
-            x_st = 220;
-            y_st = 20;
-            dx = w + 5;
-            dy = h + 5;
-            lb_2_id.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            lb_2_name.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            lb_2_sex.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            lb_2_birthday.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            lb_2_age.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-
             this.Controls.Add(lb_2_id);
             this.Controls.Add(lb_2_name);
             this.Controls.Add(lb_2_sex);
@@ -130,22 +140,6 @@ namespace IMSCap2
             tb_sex.Name = "tb_sex";
             tb_birthday.Name = "tb_birthday";
             tb_age.Name = "tb_age";
-
-            tb_id.Text = "ID NO:";
-            tb_name.Text = "NAME:";
-            tb_sex.Text = "SEX:";
-            tb_birthday.Text = "Birthday:";
-            tb_age.Text = "Age:";
-
-            x_st = 420;
-            y_st = 20;
-            dx = w + 5;
-            dy = h + 5;
-            tb_id.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            tb_name.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            tb_sex.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            tb_birthday.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            tb_age.Location = new Point(x_st + dx * 0, y_st + dy * 4);
 
             this.Controls.Add(tb_id);
             this.Controls.Add(tb_name);
@@ -167,18 +161,6 @@ namespace IMSCap2
             bt_age.Text = "Age:";
             */
 
-            x_st = 620;
-            y_st = 20;
-            w = 64;
-            h = 64;
-            dx = w + 10;
-            dy = h + 10;
-            bt_id.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            bt_name.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            bt_sex.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            bt_birthday.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            bt_age.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-
             this.Controls.Add(bt_id);
             this.Controls.Add(bt_name);
             this.Controls.Add(bt_sex);
@@ -192,14 +174,11 @@ namespace IMSCap2
             bt_age.BackgroundImage = Properties.Resources.image_age;
 
 
-
             bt_id.BackgroundImageLayout = ImageLayout.Zoom;
             bt_name.BackgroundImageLayout = ImageLayout.Zoom;
             bt_sex.BackgroundImageLayout = ImageLayout.Zoom;
             bt_birthday.BackgroundImageLayout = ImageLayout.Zoom;
             bt_age.BackgroundImageLayout = ImageLayout.Zoom;
-
-
 
 
             //控件的共通設定
@@ -216,12 +195,7 @@ namespace IMSCap2
                         h = 40;
 
                         ((Label)c).Size = new Size(w, h);  //設定大小
-                        //((Label)c).Font = new Font("Courier New", 18, FontStyle.Bold);  //建立字體對象
-                        //((Label)c).Font = new Font("Arial", 18, FontStyle.Bold);  //建立字體對象
-                        ((Label)c).Font = new Font("Times New Roman", 18, FontStyle.Bold);  //建立字體對象
-
-
-
+                        ((Label)c).Font = font;
                         ((Label)c).TextAlign = ContentAlignment.MiddleLeft;
                         ((Label)c).ForeColor = Color.White;
                     }
@@ -232,7 +206,7 @@ namespace IMSCap2
 
                         ((Label)c).Size = new Size(w, h);  //設定大小
                         ((Label)c).BackColor = background_color;
-                        ((Label)c).Font = new Font("Courier New", 18, FontStyle.Bold);  //建立字體對象
+                        ((Label)c).Font = font;
                         ((Label)c).TextAlign = ContentAlignment.MiddleLeft;
                     }
                 }
@@ -243,7 +217,7 @@ namespace IMSCap2
 
                     ((TextBox)c).Size = new Size(w, h);  //設定大小
                     ((TextBox)c).BackColor = background_color;
-                    ((TextBox)c).Font = new Font("Courier New", 18, FontStyle.Bold);  //建立字體對象
+                    ((TextBox)c).Font = font;
                     ((TextBox)c).TextAlign = HorizontalAlignment.Left;
                 }
                 else if (c.GetType().Name == "Button")   //判斷是否為 Button 控件
@@ -253,11 +227,209 @@ namespace IMSCap2
 
                     ((Button)c).Size = new Size(w, h);  //設定大小
                     ((Button)c).BackColor = background_color;
-                    //((Button)c).Font = new Font("Courier New", 18, FontStyle.Bold);  //建立字體對象
+                    //((TextBox)c).Font = font;
                     //((Button)c).TextAlign = ContentAlignment.MiddleLeft;
                 }
             }
+
+            int x;
+            int y;
+            int THICK1 = 40;
+            //int OFFSET = WIDTH1;    //useless
+
+            x = BORDER_X;
+            y = BORDER_Y + THICK1 * 0;
+            x = OFFSET_X + BORDER_X;
+            lb_1_id.Location = new Point(x, y);
+            x += 150;
+            tb_id.Size = new Size(300, 30);
+            tb_id.Location = new Point(x+200, y);
+            lb_2_id.Location = new Point(x, y);
+
+            x = BORDER_X;
+            y = BORDER_Y + THICK1 * 1;
+            x = OFFSET_X + BORDER_X;
+            y = BORDER_Y + THICK1 * 1;
+            lb_1_name.Location = new Point(x, y);
+            x += 150;
+            tb_name.Size = new Size(300, 30);
+            tb_name.Location = new Point(x+200, y);
+            lb_2_name.Location = new Point(x, y);
+
+            x = BORDER_X;
+            y = BORDER_Y + THICK1 * 3;
+            x = OFFSET_X + BORDER_X;
+            y = BORDER_Y + THICK1 * 3;
+            lb_1_sex.Location = new Point(x, y);
+            x += 150;
+            tb_sex.Size = new Size(300, 30);
+            tb_sex.Location = new Point(x+200, y);
+            lb_2_sex.Location = new Point(x, y);
+
+            x = BORDER_X;
+            y = BORDER_Y + THICK1 * 4;
+            x = OFFSET_X + BORDER_X;
+            y = BORDER_Y + THICK1 * 4;
+            lb_1_birthday.Location = new Point(x, y);
+            x += 150;
+            tb_birthday.Size = new Size(300, 30);
+            tb_birthday.Location = new Point(x+200, y);
+            lb_2_birthday.Location = new Point(x, y);
+
+            x = OFFSET_X + BORDER_X;
+            y = BORDER_Y + THICK1 * 5;
+            lb_1_age.Location = new Point(x, y);
+            x += 150;
+            tb_age.Size = new Size(300, 30);
+            tb_age.Location = new Point(x + 200, y);
+            lb_2_age.Location = new Point(x, y);
+
+            string[] Day = new string[] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
+            string weekday = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
+
+            string current_date = DateTime.Now.ToString("MM/dd/yyyy ") + weekday;
+            //richTextBox1.Text += current_date + "\n";
+            string current_time = DateTime.Now.ToString("HH:mm:ss");
+            //richTextBox1.Text += current_time + "\n";
+
+            x = BORDER_X;
+            y = BORDER_Y + THICK1 * 7;
+            lb_1_date.Location = new Point(x, y);
+            lb_1_date.Text = current_date;
+
+            x = BORDER_X;
+            y = BORDER_Y + THICK1 * 8;
+            lb_1_time.Location = new Point(x, y);
+            lb_1_time.Text = current_time;
+
+            /*
+            x = BORDER_X;
+            y = BORDER_Y + THICK1 * 10;
+            lb_main_mesg1.Location = new Point(x, y);
+            lb_main_mesg1.Text = "";
+            */
+
+            x = BORDER_X + 350;
+            y = BORDER_Y + THICK1 * 13;
+            lb_ims1.Location = new Point(x, y);
+
+            x = 1920 - BORDER_X * 1 - 200;
+            y = 1080 - BORDER_Y * 2 - 5;
+            lb_ims2.Location = new Point(x, y);
+
+            /*
+            textBox0.Visible = false;
+            textBox1.Visible = false;
+            textBox3.Visible = false;
+            label0_data.Text = "";
+            label1_data.Text = "";
+            label2_data.Text = "";
+            label3_data.Text = "";
+            label4_data.Text = "";
+            label0_data.Visible = false;
+            label1_data.Visible = false;
+            label2_data.Visible = false;
+            label3_data.Visible = false;
+            label4_data.Visible = false;
+            */
+
+
+            int x_st = BORDER_X;
+            int y_st = 20;
+
+            x_st = BORDER_X; ;
+            y_st = BORDER_Y + THICK1 * 15;
+            w = 64;
+            h = 64;
+            dx = w + 10;
+            dy = h + 10;
+            bt_id.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            bt_name.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            bt_sex.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            bt_birthday.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            bt_age.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+
+
+            lb_2_id.Text = "A123456789";
+            lb_2_name.Text = "NAME:";
+            lb_2_sex.Text = "SEX:";
+            lb_2_birthday.Text = "Birthday:";
+            lb_2_age.Text = "Age:";
+
+            tb_id.Text = "A123456789";
+            tb_name.Text = "大胃王";
+            tb_sex.Text = "男";
+            tb_birthday.Text = "09/03/2112";
+            tb_age.Text = "-90";
+
+        }
+
+        void show_item_location()
+        {
+            int W = LAYER0_WIDTH;
+            int H = LAYER0_HEIGHT;
+
+            this.FormBorderStyle = FormBorderStyle.None;
+            this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
+            this.BackColor = Color.Black;
+            this.Size = new Size(W, H);
+
+            int w = 640 * 19 / 10;
+            int h = 480 * 19 / 10;
+
+            pictureBox1.Size = new Size(w, h);
+            pictureBox1.BackColor = Color.Gray;
+            pictureBox1.Location = new Point(LAYER1_START_X, LAYER1_START_Y);
+            pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox1.BackgroundImage = Properties.Resources.image_ims;
+
+            pictureBox2.Size = new Size(LAYER2_WIDTH, LAYER2_HEIGHT);
+            pictureBox2.BackColor = Color.Gray;
+            pictureBox2.Location = new Point(LAYER2_START_X, LAYER2_START_Y);
+            pictureBox2.Visible = false;
+
+
+            pictureBox3.Size = new Size(261, 75);
+            //pictureBox3.BackColor = Color.Gray;
+            Image ims_small = Properties.Resources.image_ims_small;
+            pictureBox3.Image = ims_small;
+            pictureBox3.Location = new Point(LAYER0_WIDTH - ims_small.Width - BORDER_X * 1, LAYER0_HEIGHT - ims_small.Height - BORDER_Y * 2 - 15);
+            pictureBox3.Visible = true;
+
+            /*
+                            richTextBox1.Visible = false;
+                            bt_clear.Visible = false;
+                            lb_fps.Visible = false;
+                            lb_main_mesg1.Visible = false;
+                            groupBox1.Visible = false;
+            */
+
+            setup_controls();
+        }
+
+        void Update_Clock()
+        {
+            string[] Day = new string[] { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
+            string weekday = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
+
+            string current_date = DateTime.Now.ToString("MM/dd/yyyy ") + weekday;
+            //richTextBox1.Text += current_date + "\n";
+            string current_time = DateTime.Now.ToString("HH:mm:ss");
+            //richTextBox1.Text += current_time + "\n";
+
+            lb_1_date.Text = current_date;
+            lb_1_time.Text = current_time;
+            /*
+            label5.Text = current_date;
+            label6.Text = current_time;
+            label5b.Text = current_date;
+            label6b.Text = current_time;
+            */
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            Update_Clock();
         }
     }
 }
-

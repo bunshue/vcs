@@ -9,7 +9,7 @@
 #include "../../Common.h"
 
  /* Drawing constants. */
-#define WINDOW_SIZE  540  /* initial size of window                             */
+#define WINDOW_SIZE  600  /* initial size of window                             */
 #define BORDER        10  /* border width in each viewport                      */
 #define MAX_POINTS   100  /* maximum number of control points                   */
 #define MARK_FACTOR 0.35  /* scale factor for 'x' that marks each control point */
@@ -26,6 +26,7 @@
 
 double px[MAX_POINTS], py[MAX_POINTS], minx, maxx, miny, maxy, markd;
 int number_of_points = 0;
+
 int WindowSizeX = WINDOW_SIZE, WindowSizeY = WINDOW_SIZE;
 int WindowSizeY3 = WINDOW_SIZE / 3;
 
@@ -435,16 +436,19 @@ int main(int argc, char** argv)
     /* Set graphics window parameters. */
 
     glutInit(&argc, argv);
-    glutInitWindowSize(WindowSizeX, WindowSizeY);
-    glutInitWindowPosition(100, 0);
+    glutInitWindowSize(WindowSizeX, WindowSizeY);   // 設定視窗大小
+    glutInitWindowPosition(1100, 200);  // 設定視窗位置
+
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+
     glutCreateWindow("Curve Fitting");
 
     glutDisplayFunc(display);   //設定callback function
- //glutReshapeFunc(reshape0);   //設定callback function
+    glutReshapeFunc(reshape);   //設定callback function
     glutKeyboardFunc(keyboard0); //設定callback function
 
     gfxinit();
+
     glutMainLoop();	//開始主循環繪製
 
     return 0;
