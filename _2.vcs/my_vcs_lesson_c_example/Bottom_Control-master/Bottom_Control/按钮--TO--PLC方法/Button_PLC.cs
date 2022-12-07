@@ -25,6 +25,8 @@ namespace Bottom_Control.按钮__TO__PLC方法
         public bool state = false;//定义标志位--复归型按钮-判断状态
         public string plc(Button_base Button)//根据PLC类型写入
         {
+            //MessageBox.Show("aaaaaaaaaaaaaaaaaaaa");
+            //Console.Write("kkkkkkkkkkkkkkkkkkkkk");
             string pLC = Button.Plc.ToString();
             switch (pLC)
             {
@@ -37,7 +39,7 @@ namespace Bottom_Control.按钮__TO__PLC方法
                     }
                     else
                     {
-                        MessageBox.Show("1111未连接设备：" + pLC.Trim(), "Err");//推出异常提示用户
+                        //MessageBox.Show("1111未连接设备：" + pLC.Trim(), "Err");//推出异常提示用户
                     }
 
                     break;
@@ -216,7 +218,6 @@ namespace Bottom_Control.按钮__TO__PLC方法
                         //string dddd = mitsubishi.PLC_read_D_register(button_base.PLC_Contact, button_base.PLC_Address, numerical_format.Hex_16_Bit);
                         string dddd = mitsubishi.PLC_read_D_register("M", "10000", numerical_format.Unsigned_16_Bit);
                         Console.WriteLine("data : " + dddd);
-
                     }
                     else
                     {
