@@ -32,6 +32,9 @@ namespace Bottom_Control
             lb_main_mesg1.Visible = true;
             lb_main_mesg1.Text = "";
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            bt_copy_to_clipboard.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width * 2, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            bt_copy_to_clipboard.BackgroundImage = Properties.Resources.clipboard;
+            bt_copy_to_clipboard.BackgroundImageLayout = ImageLayout.Zoom;
             cb_random.Checked = true;
         }
 
@@ -444,6 +447,14 @@ namespace Bottom_Control
             richTextBox1.Clear();
         }
 
+        private void bt_copy_to_clipboard_Click(object sender, EventArgs e)
+        {
+            //C# – 複製資料到剪貼簿
+            //Clipboard.SetData(DataFormats.Text, richTextBox1.Text + "\n");
+            Clipboard.SetDataObject(richTextBox1.Text + "\n");      //建議用此
+            richTextBox1.Text += "已複製資料到系統剪貼簿\n";
+        }
+
         private void bt_erase_d_Click(object sender, EventArgs e)
         {
             tb_data_d.Text = "";
@@ -533,7 +544,7 @@ namespace Bottom_Control
             show_main_message1("讀取: " + contact_point + contact_address, S_OK, 30);
 
             bool ret = read_data_from_plc_m_bit(contact_point, contact_address);
-            if(ret==true)
+            if (ret == true)
             {
                 tb_data_m.BackColor = Color.Lime;
                 tb_data_m.Text = "High";
@@ -651,14 +662,21 @@ namespace Bottom_Control
         bool flag_plc_test = false;
         private void button6_Click(object sender, EventArgs e)
         {
+            int i;
+            string contact_point = String.Empty;
+            string contact_address = String.Empty;
+            bool ret = false;
+
             richTextBox1.Text += "測試PLC作業流程\n";
 
             flag_plc_test = true;
 
-            string contact_point = "M";
-            string contact_address = "10000";
-            int i;
-            bool ret = false;
+            richTextBox1.Text += "(1) PLC 把資料放在 D2000\n";
+            richTextBox1.Text += "(2a) PLC 拉高 M10000, 供PC讀取, 通知條碼內容已備便\n";
+            richTextBox1.Text += "(2b) PC 讀取 M10000 狀態\n";
+            contact_point = "M";
+            contact_address = "10000";
+            ret = false;
             for (i = 0; i < 1000; i++)
             {
                 ret = read_data_from_plc_m_bit(contact_point, contact_address);
@@ -668,13 +686,15 @@ namespace Bottom_Control
 
                 if (ret == false)
                 {
-                    richTextBox1.Text += "取得 M10000 為 OFF  ";
+                    //richTextBox1.Text += "取得 M10000 為 OFF  ";
+                    richTextBox1.Text += "OFF  ";
                     delay(500);
                 }
                 else
                 {
                     richTextBox1.Text += "\n取得 M10000 為 ON\n";
-                    richTextBox1.Text += "讀取 D2000 資料\n";
+
+                    richTextBox1.Text += "(3a) PC 讀取 D2000 資料\n";
 
                     show_main_message1("讀取 D2000", S_OK, 30);
                     contact_point = "D";
@@ -684,9 +704,9 @@ namespace Bottom_Control
                     {
                         richTextBox1.Text += "取得 D2000 資料 : " + data_read + "\n";
 
-                        richTextBox1.Text += "將 取得 D2000 資料 寫到 D8000\n";
-
                         richTextBox1.Text += "len = " + data_read.Length.ToString() + "\n";
+
+                        richTextBox1.Text += "(3b) PC 將 從 D2000 取得的資料 寫到 D8000\n";
 
                         string data_to_write = data_read.Substring(0, 16);
 
@@ -700,8 +720,7 @@ namespace Bottom_Control
 
                         write_data_to_plc_d_register(contact_point, contact_address, data_to_write);
 
-
-                        richTextBox1.Text += "將 M12000 拉 High\n";
+                        richTextBox1.Text += "(4) PLC 拉高 M12000, 供PLC讀取\n";
 
                         contact_point = "M";
                         contact_address = "12000";
@@ -716,6 +735,31 @@ namespace Bottom_Control
 
                         write_data_to_plc_m_bit(contact_point, contact_address, button_State);
 
+                        richTextBox1.Text += "(5) PLC 拉高 M10001, 供PC讀取, 通知開始做色調\n";
+                        contact_point = "M";
+                        contact_address = "10001";
+
+                        contact_point = "M";
+                        contact_address = "10000";
+                        ret = false;
+                        for (i = 0; i < 1000; i++)
+                        {
+                            ret = read_data_from_plc_m_bit(contact_point, contact_address);
+
+                            if (ret == false)
+                            {
+                                richTextBox1.Text += "取得 M10001 為 OFF  ";
+                                richTextBox1.Text += "OFF  ";
+                                delay(500);
+                            }
+                            else
+                            {
+                                richTextBox1.Text += "\n取得 M10001 為 ON\n";
+                                break;
+                            }
+                        }
+
+                        richTextBox1.Text += "AAAAAAAAAAAAAAAAAAA\n";
 
 
 
@@ -723,11 +767,7 @@ namespace Bottom_Control
 
 
 
-
-
-
-
-                    }
+                            }
                     else
                     {
                         richTextBox1.Text += "未取得 D2000 資料\n";

@@ -295,6 +295,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="img\clipboard.png" />
     <Content Include="第三方控件DLL\CSkin.dll" />
     <Content Include="第三方控件DLL\CSkin.XML" />
     <Content Include="第三方控件DLL\CSScriptLibrary.dll" />
