@@ -54,6 +54,12 @@ namespace IMSCap2
         Label lb_2_sex = new Label();
         Label lb_2_birthday = new Label();
         Label lb_2_age = new Label();
+        Label lb_2_id2 = new Label();
+        Label lb_2_name2 = new Label();
+        Label lb_2_sex2 = new Label();
+        Label lb_2_birthday2 = new Label();
+        Label lb_2_age2 = new Label();
+        Label lb_2_endoscope2 = new Label();
 
         TextBox tb_id = new TextBox();
         TextBox tb_name = new TextBox();
@@ -66,11 +72,15 @@ namespace IMSCap2
         Button bt_sex = new Button();
         Button bt_birthday = new Button();
         Button bt_age = new Button();
+        Button bt_endoscope = new Button();
+        Button bt_record = new Button();
+        Button bt_capture = new Button();
+        Button bt_setup = new Button();
 
         Label lb_1_date = new Label();
         Label lb_1_time = new Label();
         Label lb_serial = new Label();
-        Label lb_version = new Label();
+        Label lb_version = new Label();     //可能沒有用了
 
         Color background_color = Color.White;
         Font font = new Font("新細明體", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
@@ -106,6 +116,7 @@ namespace IMSCap2
             lb_1_age.Name = "lb_1_age";
             lb_1_date.Name = "lb_1_date";
             lb_1_time.Name = "lb_1_time";
+            lb_serial.Name = "lb_serial";
 
             lb_1_id.Text = "ID NO:";
             lb_1_name.Text = "NAME:";
@@ -114,6 +125,7 @@ namespace IMSCap2
             lb_1_age.Text = "Age:";
             lb_1_date.Text = "12/05/2022 Mon";
             lb_1_time.Text = "13:53:55";
+            lb_serial.Text = "EGD NO:  N2201001A0001";
 
             this.Controls.Add(lb_1_id);
             this.Controls.Add(lb_1_name);
@@ -122,6 +134,7 @@ namespace IMSCap2
             this.Controls.Add(lb_1_age);
             this.Controls.Add(lb_1_date);
             this.Controls.Add(lb_1_time);
+            this.Controls.Add(lb_serial);
 
             lb_2_id.Name = "lb_2_id";
             lb_2_name.Name = "lb_2_name";
@@ -129,11 +142,24 @@ namespace IMSCap2
             lb_2_birthday.Name = "lb_2_birthday";
             lb_2_age.Name = "lb_2_age";
 
+            lb_2_id2.Name = "lb_2_id";
+            lb_2_name2.Name = "lb_2_name";
+            lb_2_sex2.Name = "lb_2_sex";
+            lb_2_birthday2.Name = "lb_2_birthday";
+            lb_2_age2.Name = "lb_2_age";
+            lb_2_endoscope2.Name = "lb_2_endoscope2";
+
             this.Controls.Add(lb_2_id);
             this.Controls.Add(lb_2_name);
             this.Controls.Add(lb_2_sex);
             this.Controls.Add(lb_2_birthday);
             this.Controls.Add(lb_2_age);
+            this.Controls.Add(lb_2_id2);
+            this.Controls.Add(lb_2_name2);
+            this.Controls.Add(lb_2_sex2);
+            this.Controls.Add(lb_2_birthday2);
+            this.Controls.Add(lb_2_age2);
+            this.Controls.Add(lb_2_endoscope2);
 
             tb_id.Name = "tb_id";
             tb_name.Name = "tb_name";
@@ -152,6 +178,10 @@ namespace IMSCap2
             bt_sex.Name = "bt_sex";
             bt_birthday.Name = "bt_birthday";
             bt_age.Name = "bt_age";
+            bt_endoscope.Name = "bt_endoscope";
+            bt_record.Name = "bt_record";
+            bt_capture.Name = "bt_capture";
+            bt_setup.Name = "bt_setup";
 
             /*
             bt_id.Text = "ID NO:";
@@ -159,6 +189,10 @@ namespace IMSCap2
             bt_sex.Text = "SEX:";
             bt_birthday.Text = "Birthday:";
             bt_age.Text = "Age:";
+            bt_endoscope.Text ="EGD No.";
+            bt_record.Text = Record";
+            bt_capture.Text ="Capture";
+            bt_setup.Text = "Setup";
             */
 
             this.Controls.Add(bt_id);
@@ -166,20 +200,30 @@ namespace IMSCap2
             this.Controls.Add(bt_sex);
             this.Controls.Add(bt_birthday);
             this.Controls.Add(bt_age);
+            this.Controls.Add(bt_endoscope);
+            this.Controls.Add(bt_record);
+            this.Controls.Add(bt_capture);
+            this.Controls.Add(bt_setup);
 
             bt_id.BackgroundImage = Properties.Resources.image_id;
             bt_name.BackgroundImage = Properties.Resources.image_name;
             bt_sex.BackgroundImage = Properties.Resources.image_sex_male;
             bt_birthday.BackgroundImage = Properties.Resources.image_birthday;
             bt_age.BackgroundImage = Properties.Resources.image_age;
-
+            bt_endoscope.BackgroundImage = Properties.Resources.image_endoscope;
+            bt_record.BackgroundImage = Properties.Resources.image_record;
+            bt_capture.BackgroundImage = Properties.Resources.image_capture;
+            bt_setup.BackgroundImage = Properties.Resources.image_setup1;
 
             bt_id.BackgroundImageLayout = ImageLayout.Zoom;
             bt_name.BackgroundImageLayout = ImageLayout.Zoom;
             bt_sex.BackgroundImageLayout = ImageLayout.Zoom;
             bt_birthday.BackgroundImageLayout = ImageLayout.Zoom;
             bt_age.BackgroundImageLayout = ImageLayout.Zoom;
-
+            bt_endoscope.BackgroundImageLayout = ImageLayout.Zoom;
+            bt_record.BackgroundImageLayout = ImageLayout.Zoom;
+            bt_capture.BackgroundImageLayout = ImageLayout.Zoom;
+            bt_setup.BackgroundImageLayout = ImageLayout.Zoom;
 
             //控件的共通設定
 
@@ -191,8 +235,8 @@ namespace IMSCap2
                 {
                     if (((Label)c).Name[3] == '1')
                     {
-                        w = 160;
-                        h = 40;
+                        w = 120;
+                        h = 35;
 
                         ((Label)c).Size = new Size(w, h);  //設定大小
                         ((Label)c).Font = font;
@@ -201,19 +245,30 @@ namespace IMSCap2
                     }
                     else if (((Label)c).Name[3] == '2')
                     {
-                        w = 160;
-                        h = 40;
+                        w = 180;
+                        h = 35;
 
                         ((Label)c).Size = new Size(w, h);  //設定大小
-                        ((Label)c).BackColor = background_color;
                         ((Label)c).Font = font;
                         ((Label)c).TextAlign = ContentAlignment.MiddleLeft;
+                        ((Label)c).ForeColor = Color.White;
+                        //((Label)c).BackColor = Color.Pink;
+                    }
+                    else if (((Label)c).Name == "lb_serial")
+                    {
+                        w = 350;
+                        h = 35;
+
+                        ((Label)c).Size = new Size(w, h);  //設定大小
+                        ((Label)c).Font = font;
+                        ((Label)c).TextAlign = ContentAlignment.MiddleLeft;
+                        ((Label)c).ForeColor = Color.White;
                     }
                 }
                 else if (c.GetType().Name == "TextBox")   //判斷是否為 TextBox 控件
                 {
-                    w = 160;
-                    h = 40;
+                    w = 230;
+                    h = 35;
 
                     ((TextBox)c).Size = new Size(w, h);  //設定大小
                     ((TextBox)c).BackColor = background_color;
@@ -242,8 +297,8 @@ namespace IMSCap2
             x = OFFSET_X + BORDER_X;
             lb_1_id.Location = new Point(x, y);
             x += 150;
-            tb_id.Size = new Size(300, 30);
-            tb_id.Location = new Point(x+200, y);
+            //tb_id.Size = new Size(300, 30);
+            tb_id.Location = new Point(x + 200, y);
             lb_2_id.Location = new Point(x, y);
 
             x = BORDER_X;
@@ -252,8 +307,8 @@ namespace IMSCap2
             y = BORDER_Y + THICK1 * 1;
             lb_1_name.Location = new Point(x, y);
             x += 150;
-            tb_name.Size = new Size(300, 30);
-            tb_name.Location = new Point(x+200, y);
+            //tb_name.Size = new Size(300, 30);
+            tb_name.Location = new Point(x + 200, y);
             lb_2_name.Location = new Point(x, y);
 
             x = BORDER_X;
@@ -262,8 +317,8 @@ namespace IMSCap2
             y = BORDER_Y + THICK1 * 3;
             lb_1_sex.Location = new Point(x, y);
             x += 150;
-            tb_sex.Size = new Size(300, 30);
-            tb_sex.Location = new Point(x+200, y);
+            //tb_sex.Size = new Size(300, 30);
+            tb_sex.Location = new Point(x + 200, y);
             lb_2_sex.Location = new Point(x, y);
 
             x = BORDER_X;
@@ -272,15 +327,15 @@ namespace IMSCap2
             y = BORDER_Y + THICK1 * 4;
             lb_1_birthday.Location = new Point(x, y);
             x += 150;
-            tb_birthday.Size = new Size(300, 30);
-            tb_birthday.Location = new Point(x+200, y);
+            //tb_birthday.Size = new Size(300, 30);
+            tb_birthday.Location = new Point(x + 200, y);
             lb_2_birthday.Location = new Point(x, y);
 
             x = OFFSET_X + BORDER_X;
             y = BORDER_Y + THICK1 * 5;
             lb_1_age.Location = new Point(x, y);
             x += 150;
-            tb_age.Size = new Size(300, 30);
+            //tb_age.Size = new Size(300, 30);
             tb_age.Location = new Point(x + 200, y);
             lb_2_age.Location = new Point(x, y);
 
@@ -301,6 +356,10 @@ namespace IMSCap2
             y = BORDER_Y + THICK1 * 8;
             lb_1_time.Location = new Point(x, y);
             lb_1_time.Text = current_time;
+
+            x = BORDER_X;
+            y = BORDER_Y + THICK1 * 9;
+            lb_serial.Location = new Point(x, y);
 
             /*
             x = BORDER_X;
@@ -333,7 +392,6 @@ namespace IMSCap2
             label4_data.Visible = false;
             */
 
-
             int x_st = BORDER_X;
             int y_st = 20;
 
@@ -348,20 +406,38 @@ namespace IMSCap2
             bt_sex.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             bt_birthday.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             bt_age.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            bt_endoscope.Location = new Point(x_st + dx * 0, y_st + dy * 5);
 
+            lb_2_id2.Location = new Point(x_st + dx * 0 + 80, y_st + dy * 0);
+            lb_2_name2.Location = new Point(x_st + dx * 0 + 80, y_st + dy * 1);
+            lb_2_sex2.Location = new Point(x_st + dx * 0 + 80, y_st + dy * 2);
+            lb_2_birthday2.Location = new Point(x_st + dx * 0 + 80, y_st + dy * 3);
+            lb_2_age2.Location = new Point(x_st + dx * 0 + 80, y_st + dy * 4);
+            lb_2_endoscope2.Location = new Point(x_st + dx * 0 + 80, y_st + dy * 5);
 
-            lb_2_id.Text = "A123456789";
-            lb_2_name.Text = "NAME:";
-            lb_2_sex.Text = "SEX:";
-            lb_2_birthday.Text = "Birthday:";
-            lb_2_age.Text = "Age:";
+            bt_record.Location = new Point(x_st + dx * 7, y_st + dy * 0);
+            bt_capture.Location = new Point(x_st + dx * 7, y_st + dy * 1);
+            bt_setup.Location = new Point(x_st + dx * 7, y_st + dy * 2);
 
-            tb_id.Text = "A123456789";
-            tb_name.Text = "大胃王";
-            tb_sex.Text = "男";
-            tb_birthday.Text = "09/03/2112";
-            tb_age.Text = "-90";
+            lb_2_id.Text = "D021120903";
+            lb_2_name.Text = "哆啦A夢";
+            lb_2_sex.Text = "男";
+            lb_2_birthday.Text = "9/3/2112";
+            lb_2_age.Text = "-90";
+            lb_2_id2.Text = "D021120903";
+            lb_2_name2.Text = "哆啦A夢";
+            lb_2_sex2.Text = "男";
+            lb_2_birthday2.Text = "9/3/2112";
+            lb_2_age2.Text = "-90";
 
+            lb_2_endoscope2.Size = new Size(340, 35);
+            lb_2_endoscope2.Text = "EGD NO: N2201001A0001";
+
+            tb_id.Text = "D021141202";
+            tb_name.Text = "哆啦美";
+            tb_sex.Text = "女";
+            tb_birthday.Text = "12/2/2114";
+            tb_age.Text = "-92";
         }
 
         void show_item_location()

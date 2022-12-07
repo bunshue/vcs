@@ -93,6 +93,16 @@ namespace IMSCap2.Properties {
         /// <summary>
         ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
         /// </summary>
+        internal static System.Drawing.Bitmap image_endoscope {
+            get {
+                object obj = ResourceManager.GetObject("image_endoscope", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
         internal static System.Drawing.Bitmap image_id {
             get {
                 object obj = ResourceManager.GetObject("image_id", resourceCulture);
@@ -136,6 +146,26 @@ namespace IMSCap2.Properties {
         internal static System.Drawing.Bitmap image_record {
             get {
                 object obj = ResourceManager.GetObject("image_record", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap image_setup1 {
+            get {
+                object obj = ResourceManager.GetObject("image_setup1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查詢類型 System.Drawing.Bitmap 的當地語系化資源。
+        /// </summary>
+        internal static System.Drawing.Bitmap image_setup2 {
+            get {
+                object obj = ResourceManager.GetObject("image_setup2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
