@@ -30,6 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.button6 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label7 = new System.Windows.Forms.Label();
             this.bt_erase_m = new System.Windows.Forms.Button();
@@ -65,20 +66,27 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.daButton1 = new Bottom_Control.DAButton();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer_display = new System.Windows.Forms.Timer(this.components);
             this.bt_clear = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
+            this.daButton1 = new Bottom_Control.DAButton();
             this.plC_Open_Time1 = new Bottom_Control.设置控件.PLC_Open_Time();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.rb_high = new System.Windows.Forms.RadioButton();
+            this.rb_low = new System.Windows.Forms.RadioButton();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.button7);
+            this.groupBox1.Controls.Add(this.button6);
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.lb_main_mesg1);
@@ -104,8 +112,19 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "PC";
             // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(688, 66);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(96, 42);
+            this.button6.TabIndex = 147;
+            this.button6.Text = "Test PLC";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.groupBox4);
             this.groupBox3.Controls.Add(this.label7);
             this.groupBox3.Controls.Add(this.bt_erase_m);
             this.groupBox3.Controls.Add(this.label8);
@@ -117,7 +136,7 @@
             this.groupBox3.Controls.Add(this.tb_data_m);
             this.groupBox3.Location = new System.Drawing.Point(412, 278);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(372, 164);
+            this.groupBox3.Size = new System.Drawing.Size(403, 164);
             this.groupBox3.TabIndex = 146;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "讀寫 M bit";
@@ -157,7 +176,7 @@
             // 
             // bt_write_m
             // 
-            this.bt_write_m.Location = new System.Drawing.Point(308, 92);
+            this.bt_write_m.Location = new System.Drawing.Point(340, 26);
             this.bt_write_m.Margin = new System.Windows.Forms.Padding(2);
             this.bt_write_m.Name = "bt_write_m";
             this.bt_write_m.Size = new System.Drawing.Size(50, 50);
@@ -178,7 +197,7 @@
             // 
             // bt_read_m
             // 
-            this.bt_read_m.Location = new System.Drawing.Point(308, 26);
+            this.bt_read_m.Location = new System.Drawing.Point(286, 26);
             this.bt_read_m.Margin = new System.Windows.Forms.Padding(2);
             this.bt_read_m.Name = "bt_read_m";
             this.bt_read_m.Size = new System.Drawing.Size(50, 50);
@@ -216,7 +235,7 @@
             this.tb_data_m.Name = "tb_data_m";
             this.tb_data_m.Size = new System.Drawing.Size(198, 33);
             this.tb_data_m.TabIndex = 140;
-            this.tb_data_m.Text = "0123456789";
+            this.tb_data_m.Text = "Low";
             // 
             // groupBox2
             // 
@@ -485,26 +504,6 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // daButton1
-            // 
-            this.daButton1.BackColor = System.Drawing.Color.Transparent;
-            this.daButton1.Backdrop_OFF = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(131)))), ((int)(((byte)(229)))));
-            this.daButton1.Backdrop_ON = System.Drawing.Color.Lime;
-            this.daButton1.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.daButton1.DownBack = null;
-            this.daButton1.Location = new System.Drawing.Point(24, 25);
-            this.daButton1.MouseBack = null;
-            this.daButton1.Name = "daButton1";
-            this.daButton1.NormlBack = null;
-            this.daButton1.Pattern = Bottom_Control.Button_pattern.selector_witch;
-            this.daButton1.PLC_Address = "20";
-            this.daButton1.PLC_Contact = "Y";
-            this.daButton1.PLC_Enable = true;
-            this.daButton1.Size = new System.Drawing.Size(83, 77);
-            this.daButton1.TabIndex = 0;
-            this.daButton1.Text = "連接PLC";
-            this.daButton1.UseVisualStyleBackColor = false;
-            // 
             // richTextBox1
             // 
             this.richTextBox1.Location = new System.Drawing.Point(856, 37);
@@ -533,6 +532,37 @@
             this.bt_clear.UseVisualStyleBackColor = true;
             this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
             // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(688, 114);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(96, 42);
+            this.button7.TabIndex = 148;
+            this.button7.Text = "Test PLC break";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.button7.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button7_MouseDown);
+            // 
+            // daButton1
+            // 
+            this.daButton1.BackColor = System.Drawing.Color.Transparent;
+            this.daButton1.Backdrop_OFF = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(131)))), ((int)(((byte)(229)))));
+            this.daButton1.Backdrop_ON = System.Drawing.Color.Lime;
+            this.daButton1.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.daButton1.DownBack = null;
+            this.daButton1.Location = new System.Drawing.Point(24, 25);
+            this.daButton1.MouseBack = null;
+            this.daButton1.Name = "daButton1";
+            this.daButton1.NormlBack = null;
+            this.daButton1.Pattern = Bottom_Control.Button_pattern.selector_witch;
+            this.daButton1.PLC_Address = "20";
+            this.daButton1.PLC_Contact = "Y";
+            this.daButton1.PLC_Enable = true;
+            this.daButton1.Size = new System.Drawing.Size(83, 77);
+            this.daButton1.TabIndex = 0;
+            this.daButton1.Text = "連接PLC";
+            this.daButton1.UseVisualStyleBackColor = false;
+            // 
             // plC_Open_Time1
             // 
             this.plC_Open_Time1.Interval = 500;
@@ -540,6 +570,38 @@
             this.plC_Open_Time1.MitsubishiIP = "192.168.3.39";
             this.plC_Open_Time1.ModBusIP = "192.168.3.20";
             this.plC_Open_Time1.siemensPLCS = HslCommunication.Profinet.SiemensPLCS.S200Smart;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.rb_low);
+            this.groupBox4.Controls.Add(this.rb_high);
+            this.groupBox4.Location = new System.Drawing.Point(309, 79);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(81, 74);
+            this.groupBox4.TabIndex = 145;
+            this.groupBox4.TabStop = false;
+            // 
+            // rb_high
+            // 
+            this.rb_high.AutoSize = true;
+            this.rb_high.Checked = true;
+            this.rb_high.Location = new System.Drawing.Point(17, 21);
+            this.rb_high.Name = "rb_high";
+            this.rb_high.Size = new System.Drawing.Size(46, 16);
+            this.rb_high.TabIndex = 0;
+            this.rb_high.TabStop = true;
+            this.rb_high.Text = "High";
+            this.rb_high.UseVisualStyleBackColor = true;
+            // 
+            // rb_low
+            // 
+            this.rb_low.AutoSize = true;
+            this.rb_low.Location = new System.Drawing.Point(17, 43);
+            this.rb_low.Name = "rb_low";
+            this.rb_low.Size = new System.Drawing.Size(44, 16);
+            this.rb_low.TabIndex = 1;
+            this.rb_low.Text = "Low";
+            this.rb_low.UseVisualStyleBackColor = true;
             // 
             // Form2
             // 
@@ -559,6 +621,8 @@
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -607,5 +671,10 @@
         private System.Windows.Forms.TextBox tb_contact_address_m;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox tb_data_m;
+        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.Button button7;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.RadioButton rb_low;
+        private System.Windows.Forms.RadioButton rb_high;
     }
 }
