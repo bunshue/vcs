@@ -5,12 +5,6 @@
 the viewer, whose position can be altered by the x,X,y,Y,z, and Z keys.
 The perspective view is set in the reshape callback */
 
-/* Modified by Cary Laxer, October 20, 1997, to turn rotation on and off via the s key. */
-
-/* Modified by Cary Laxer, October 4, 2000, to use vertex arrays. */
-
-/* Modified by Cary Laxer, October 18, 2004, to put a sleep function in to slow down rotation. */
-
 #include "../../Common.h"
 
 // Vertices of the cube, centered at the origin.
@@ -35,7 +29,6 @@ void spinCube(void);
 void mouse(int btn, int state, int x, int y);
 void keys(unsigned char key, int x, int y);
 void myReshape(int w, int h);
-void sleep(clock_t wait);
 
 // This function sets up the vertex arrays for the color cube.
 void colorcube(void)
@@ -143,15 +136,6 @@ void myReshape(int w, int h)
 	glLoadIdentity();
 	gluPerspective(45.0, (double)w / (double)h, 2.0, 20.0);
 	glMatrixMode(GL_MODELVIEW);
-}
-
-/* Pauses for a specified number of milliseconds. */
-void sleep(clock_t wait)
-{
-	clock_t goal;
-	goal = wait + clock();
-	while (goal > clock())
-		;
 }
 
 int main(int argc, char** argv)

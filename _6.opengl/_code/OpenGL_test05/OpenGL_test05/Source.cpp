@@ -131,6 +131,18 @@ int main(int argc, char** argv)
 
     printf("僅顯示, 無控制, 按 Esc 離開\n");
 
+    printf("1\n");
+    sleep(100);    //暫停 xx msec
+    printf("2\n");
+    sleep(100);
+
+    printf("3\n");
+    sleep(100);
+
+    printf("4\n");
+    sleep(100);
+    printf("5\n");
+
     glutMainLoop();	//開始主循環繪製
 
     return 0;

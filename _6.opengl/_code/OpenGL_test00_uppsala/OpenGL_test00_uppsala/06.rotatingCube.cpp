@@ -1,6 +1,5 @@
 /********************************************************************************
  * rotatingCube.c                                                               *
- *                                                                              *
  * This program demonstrates a rotating cube with colored sides. It also        *
  * demonstrate use of homogeneous coordinate transformations and vertex arrays  *
  * for representing the cube from Chapter 4 of the Edward Angel computer        *
@@ -33,7 +32,6 @@ void display(void);
 void spinCube(void);
 void mouse(int btn, int state, int x, int y);
 void keyboard(unsigned char key, int x, int y);
-void sleep(clock_t wait);
 
 // This function sets up the vertex arrays for the color cube and the projection matrix.
 void colorcube(void)
@@ -103,21 +101,14 @@ void keyboard(unsigned char key, int x, int y)
 	}
 }
 
-/* Pauses for a specified number of milliseconds. */
-void sleep(clock_t wait)
-{
-	clock_t goal;
-	goal = wait + clock();
-	while (goal > clock())
-		;
-}
-
 int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-	glutInitWindowSize(500, 500);
-	glutInitWindowPosition(100, 50);
+
+	glutInitWindowSize(600, 600);       // 設定視窗大小
+	glutInitWindowPosition(1100, 200);  // 設定視窗位置
+
 	glutCreateWindow("Rotating Color Cube");
 
 	glutDisplayFunc(display);   //設定callback function

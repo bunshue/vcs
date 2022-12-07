@@ -35,7 +35,6 @@ void spinCube(void);
 void mouse(int btn, int state, int x, int y);
 void keys(unsigned char key, int x, int y);
 void myReshape(int w, int h);
-void sleep(clock_t wait);
 
 // This function sets up the vertex arrays for the color cube and initializes other graphics parameters.
 void colorcube(void)
@@ -172,15 +171,6 @@ void myReshape(int w, int h)
 	glLoadIdentity();
 	gluPerspective(50.0, (double)w / (double)h, 2.0, 20.0);
 	glMatrixMode(GL_MODELVIEW);
-}
-
-/* Pauses for a specified number of milliseconds. */
-void sleep(clock_t wait)
-{
-	clock_t goal;
-	goal = wait + clock();
-	while (goal > clock())
-		;
 }
 
 int main(int argc, char** argv)

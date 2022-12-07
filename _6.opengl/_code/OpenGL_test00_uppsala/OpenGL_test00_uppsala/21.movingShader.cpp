@@ -6,6 +6,8 @@
  * shader from chapter 9 of the Angel text.                                   *
  ******************************************************************************/
 
+ //還不能用
+
 #include "../../Common.h"
 
 #include <stdio.h>
@@ -26,7 +28,6 @@ void gfxinit();
 void shader_init();
 void keyboard(unsigned char key, int x, int y);
 void idleFunc(void);
-void sleep(clock_t wait);
 
 int main(int argc, char** argv)
 {
@@ -35,6 +36,7 @@ int main(int argc, char** argv)
 	glutInit(&argc, argv);
 	glutInitWindowSize(SIZE, SIZE);
 	glutInitWindowPosition(50, 100);
+
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 	glutCreateWindow("Maxwell's Shader Triangle");
 
@@ -97,7 +99,8 @@ void keyboard(unsigned char key, int x, int y)
 {
 	static int useShader = 0;
 
-	switch (key) {
+	switch (key)
+	{
 	case 's':
 		useShader = !useShader;
 		if (useShader)
@@ -148,33 +151,37 @@ void shader_init()
 	glCompileShader(vshader);
 	glGetShaderiv(vshader, GL_COMPILE_STATUS, &param);
 	if (param == GL_TRUE)
+	{
 		printf("Vertex shader successfully compiled\n");
+	}
 	else
+	{
 		printf("Vertex shader did not compile\n");
+	}
 	fshader = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fshader, 1, &fcode, NULL);
 	glCompileShader(fshader);
 	glGetShaderiv(fshader, GL_COMPILE_STATUS, &param);
 	if (param != GL_FALSE)
+	{
 		printf("Fragment shader successfully compiled\n");
+	}
 	else
+	{
 		printf("Fragment shader did not compile\n");
+	}
 	program = glCreateProgram();
 	glAttachShader(program, vshader);
 	glAttachShader(program, fshader);
 	glLinkProgram(program);
 	glGetShaderiv(program, GL_LINK_STATUS, &param);
 	if (param != GL_FALSE)
+	{
 		printf("Program successfully linked\n");
+	}
 	else
+	{
 		printf("Program did not link\n");
+	}
 	glUseProgram(program);
-}
-
-/* Pauses for a specified number of milliseconds. */
-void sleep(clock_t wait)
-{
-	clock_t goal;
-	goal = wait + clock();
-	while (goal > clock());
 }

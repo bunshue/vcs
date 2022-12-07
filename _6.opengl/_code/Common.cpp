@@ -642,3 +642,13 @@ void common_setup(int argc, char** argv, const char* windowName, const char* mes
 
     printf(message);
 }
+
+/* Pauses for a specified number of milliseconds. */
+void sleep(clock_t wait)
+{
+    clock_t goal;
+    goal = wait + clock();
+    while (goal > clock())
+        ;
+}
+

@@ -19,11 +19,6 @@ namespace Bottom_Control
         private const int S_OK = 0;     //system return OK
         private const int S_FALSE = 1;     //system return FALSE
 
-        public enum Button_state
-        {
-            Off, ON
-        }
-
         public Form2()
         {
             InitializeComponent();
@@ -111,21 +106,6 @@ namespace Bottom_Control
             {
                 richTextBox1.Text += "三菱PLC ready\n";
 
-                //Button_write_select(Button.Pattern.ToString(), mitsubishi, Button);//根据按钮模式进行写入操作
-
-                richTextBox1.Text += "read_M, name = " + daButton1.PLC_Contact + ", id = " + daButton1.PLC_Address + "\n";
-
-                List<bool> data = mitsubishi.PLC_read_M_bit(daButton1.PLC_Contact, daButton1.PLC_Address);//读取状态
-
-                richTextBox1.Text += "len = " + data.Count.ToString() + ", data = " + data[0].ToString() + "\n";
-
-                Button_state button_State = Button_state.Off;//按钮状态
-
-                button_State = data[0] == true ? Button_state.ON : Button_state.Off;
-                //button_state(button, button_State);
-
-                richTextBox1.Text += "button_State = " + button_State.ToString() + "\n";
-
                 //string dddd = mitsubishi.PLC_read_D_register(button_base.PLC_Contact, button_base.PLC_Address, numerical_format.Hex_16_Bit);
                 //string dddd = mitsubishi.PLC_read_D_register("M", "10000", numerical_format.Signed_16_Bit);
                 string dddd = mitsubishi.PLC_read_D_register("Y", "20", numerical_format.Signed_16_Bit);
@@ -137,7 +117,7 @@ namespace Bottom_Control
                 richTextBox1.Text += "\n\n觸點 : " + contact_point + "\t位址 : " + contact_address + "\n";
                 tb_contact_address.Text = "觸點 : " + contact_point + "\t位址 : " + contact_address;
 
-                data = mitsubishi.PLC_read_M_bit(contact_point, contact_address);
+                List<bool> data = mitsubishi.PLC_read_M_bit(contact_point, contact_address);    //讀取狀態
                 richTextBox1.Text += "len = " + data.Count.ToString() + ", data = " + data[0].ToString() + "\n";
                 richTextBox1.Text += "\n";
 
@@ -204,19 +184,6 @@ namespace Bottom_Control
             {
                 richTextBox1.Text += "三菱PLC ready\n";
 
-                richTextBox1.Text += "read_M, name = " + daButton1.PLC_Contact + ", id = " + daButton1.PLC_Address + "\n";
-
-                List<bool> data = mitsubishi.PLC_read_M_bit(daButton1.PLC_Contact, daButton1.PLC_Address);//读取状态
-
-                richTextBox1.Text += "len = " + data.Count.ToString() + ", data = " + data[0].ToString() + "\n";
-
-                Button_state button_State = Button_state.Off;//按钮状态
-
-                button_State = data[0] == true ? Button_state.ON : Button_state.Off;
-                //button_state(button, button_State);
-
-                richTextBox1.Text += "button_State = " + button_State.ToString() + "\n";
-
                 //string dddd = mitsubishi.PLC_read_D_register(button_base.PLC_Contact, button_base.PLC_Address, numerical_format.Hex_16_Bit);
                 //string dddd = mitsubishi.PLC_read_D_register("M", "10000", numerical_format.Signed_16_Bit);
 
@@ -246,7 +213,7 @@ namespace Bottom_Control
                 richTextBox1.Text += "\n\n觸點 : " + contact_point + "\t位址 : " + contact_address + "\n";
                 tb_contact_address.Text = "觸點 : " + contact_point + "\t位址 : " + contact_address;
 
-                List<bool> data = mitsubishi.PLC_read_M_bit(contact_point, contact_address);
+                List<bool> data = mitsubishi.PLC_read_M_bit(contact_point, contact_address);    //讀取狀態
                 richTextBox1.Text += "len = " + data.Count.ToString() + ", data = " + data[0].ToString() + "\n";
 
                 if (data[0] == true)
@@ -311,17 +278,6 @@ namespace Bottom_Control
         private const int N = 11;
         int y1_value = 0;
         int[] y1_data = new int[N];
-        int x_st = 0;
-        int x_step = 0;
-        int h_st = 0;
-        int ratio_vr = 0;
-        int ratio_duty = 0;
-        int ratio_rpm = 0;
-        int control_data2 = 0;
-        int control_data3 = 0;
-        int board_number = 0;
-        int loop = 0;
-        int loop_old = -1;
 
         void updata_status_data()
         {
@@ -407,11 +363,15 @@ namespace Bottom_Control
             {
                 richTextBox1.Text += "三菱PLC ready\n";
 
-                richTextBox1.Text += "read_M, name = " + daButton1.PLC_Contact + ", id = " + daButton1.PLC_Address + "\n";
+                string contact_point = "Y";
+                string contact_address = "20";
+                //richTextBox1.Text += "\n\n觸點 : " + contact_point + "\t位址 : " + contact_address + "\n";
+                //tb_contact_address.Text = "觸點 : " + contact_point + "\t位址 : " + contact_address;
 
-                List<bool> data = mitsubishi.PLC_read_M_bit(daButton1.PLC_Contact, daButton1.PLC_Address);//读取状态
-
-                richTextBox1.Text += "len = " + data.Count.ToString() + ", data = " + data[0].ToString() + "\n";
+                List<bool> data = mitsubishi.PLC_read_M_bit(contact_point, contact_address);    //讀取狀態
+                //richTextBox1.Text += "len = " + data.Count.ToString() + ", data = " + data[0].ToString() + "\n";
+                //richTextBox1.Text += "\n";
+                //richTextBox1.Text += "len = " + data.Count.ToString() + ", data = " + data[0].ToString() + "\n";
 
                 if (data[0] == true)
                 {
@@ -536,7 +496,7 @@ namespace Bottom_Control
                 show_main_message1("無資料", S_OK, 30);
                 return;
             }
-            if (write_data=="無資料")
+            if (write_data == "無資料")
             {
                 show_main_message1("無資料", S_OK, 30);
                 return;
@@ -554,3 +514,4 @@ namespace Bottom_Control
         }
     }
 }
+
