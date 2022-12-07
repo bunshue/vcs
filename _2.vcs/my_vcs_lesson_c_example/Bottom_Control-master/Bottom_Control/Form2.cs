@@ -20,11 +20,6 @@ namespace Bottom_Control
         private const int S_OK = 0;     //system return OK
         private const int S_FALSE = 1;     //system return FALSE
 
-        public enum Button_state
-        {
-            Off, ON
-        }
-
         public Form2()
         {
             InitializeComponent();
@@ -45,7 +40,7 @@ namespace Bottom_Control
             show_main_message1("讀取 D2000", S_OK, 30);
             string contact_point = "D";
             string contact_address = "2000";
-            read_data_from_plc(contact_point, contact_address);
+            read_data_from_plc_d_register(contact_point, contact_address);
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -56,7 +51,7 @@ namespace Bottom_Control
             string write_data = tb_data_to_write.Text;
             tb_data_to_write.Text = "";
 
-            write_data_to_plc(contact_point, contact_address, write_data);
+            write_data_to_plc_d_register(contact_point, contact_address, write_data);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -64,7 +59,7 @@ namespace Bottom_Control
             show_main_message1("讀取 D8000", S_OK, 30);
             string contact_point = "D";
             string contact_address = "8000";
-            read_data_from_plc(contact_point, contact_address);
+            read_data_from_plc_d_register(contact_point, contact_address);
         }
 
         private void bt_generate_Click(object sender, EventArgs e)
@@ -122,12 +117,6 @@ namespace Bottom_Control
 
                 richTextBox1.Text += "len = " + data.Count.ToString() + ", data = " + data[0].ToString() + "\n";
 
-                Button_state button_State = Button_state.Off;//按钮状态
-
-                button_State = data[0] == true ? Button_state.ON : Button_state.Off;
-                //button_state(button, button_State);
-                //richTextBox1.Text += "button_State = " + button_State.ToString() + "\n";
-
                 string dddd = mitsubishi.PLC_read_D_register("Y", "20", numerical_format.Signed_16_Bit);
                 richTextBox1.Text += "len = " + dddd.Length.ToString() + "\t";
                 richTextBox1.Text += "data : " + dddd[0] + "\n";
@@ -144,7 +133,7 @@ namespace Bottom_Control
                 dddd = mitsubishi.PLC_read_D_register(contact_point, contact_address, numerical_format.String_32_Bit);
 
                 tb_data_read.Text = dddd;
-                tb_data.Text = dddd;
+                tb_data_d.Text = dddd;
 
                 richTextBox1.Text += "b len = " + dddd.Length.ToString() + "\t";
                 richTextBox1.Text += "data : " + dddd + "\n";
@@ -210,12 +199,6 @@ namespace Bottom_Control
 
                 richTextBox1.Text += "len = " + data.Count.ToString() + ", data = " + data[0].ToString() + "\n";
 
-                Button_state button_State = Button_state.Off;//按钮状态
-
-                button_State = data[0] == true ? Button_state.ON : Button_state.Off;
-                //button_state(button, button_State);
-                //richTextBox1.Text += "button_State = " + button_State.ToString() + "\n";
-
                 string contact_point = "Y";
                 string contact_address = "20";
                 richTextBox1.Text += "\n觸點 : " + contact_point + "\t位址 : " + contact_address + "\n";
@@ -232,7 +215,7 @@ namespace Bottom_Control
 
         }
 
-        void read_data_from_plc(string contact_point, string contact_address)
+        void read_data_from_plc_d_register(string contact_point, string contact_address)
         {
             IPLC_interface mitsubishi = new Mitsubishi_realize();//实例化接口--实现三菱在线访问
             if (mitsubishi.PLC_ready)//PLC是否准备完成
@@ -249,7 +232,7 @@ namespace Bottom_Control
                 {
                     string dddd = mitsubishi.PLC_read_D_register(contact_point, contact_address, numerical_format.String_32_Bit);
                     tb_data_read.Text = dddd;
-                    tb_data.Text = dddd;
+                    tb_data_d.Text = dddd;
 
                     richTextBox1.Text += "b len = " + dddd.Length.ToString() + "\t";
                     richTextBox1.Text += "data : " + dddd + "\n";
@@ -257,7 +240,7 @@ namespace Bottom_Control
                 else
                 {
                     tb_data_read.Text = "無資料";
-                    tb_data.Text = "無資料";
+                    tb_data_d.Text = "無資料";
 
                 }
             }
@@ -266,12 +249,12 @@ namespace Bottom_Control
                 //richTextBox1.Text += "三菱PLC 不 ready\n";
             }
         }
-        void write_data_to_plc(string contact_point, string contact_address, string write_data)
+        void write_data_to_plc_d_register(string contact_point, string contact_address, string write_data)
         {
             if (write_data.Length == 0)
             {
                 tb_data_read.Text = "無寫入資料";
-                tb_data.Text = "無寫入資料";
+                tb_data_d.Text = "無寫入資料";
                 return;
             }
 
@@ -459,15 +442,15 @@ namespace Bottom_Control
             richTextBox1.Clear();
         }
 
-        private void bt_erase_Click(object sender, EventArgs e)
+        private void bt_erase_d_Click(object sender, EventArgs e)
         {
-            tb_data.Text = "";
+            tb_data_d.Text = "";
         }
 
-        private void bt_read_Click(object sender, EventArgs e)
+        private void bt_read_d_Click(object sender, EventArgs e)
         {
-            string contact_point = tb_contact_point.Text;
-            string contact_address = tb_contact_address2.Text;
+            string contact_point = tb_contact_point_d.Text;
+            string contact_address = tb_contact_address_d.Text;
 
             if (contact_point.Length <= 0)
             {
@@ -482,15 +465,15 @@ namespace Bottom_Control
 
             show_main_message1("讀取: " + contact_point + contact_address, S_OK, 30);
 
-            read_data_from_plc(contact_point, contact_address);
+            read_data_from_plc_d_register(contact_point, contact_address);
         }
 
-        private void bt_write_Click(object sender, EventArgs e)
+        private void bt_write_d_Click(object sender, EventArgs e)
         {
-            string contact_point = tb_contact_point.Text;
-            string contact_address = tb_contact_address2.Text;
-            string write_data = tb_data.Text;
-            tb_data.Text = "";
+            string contact_point = tb_contact_point_d.Text;
+            string contact_address = tb_contact_address_d.Text;
+            string write_data = tb_data_d.Text;
+            tb_data_d.Text = "";
 
             if (contact_point.Length <= 0)
             {
@@ -520,7 +503,131 @@ namespace Bottom_Control
 
             show_main_message1("寫入: " + contact_point + contact_address + ", 資料: " + write_data, S_OK, 30);
 
-            write_data_to_plc(contact_point, contact_address, write_data);
+            write_data_to_plc_d_register(contact_point, contact_address, write_data);
+        }
+
+        private void bt_erase_m_Click(object sender, EventArgs e)
+        {
+            tb_data_m.Text = "";
+        }
+
+        private void bt_read_m_Click(object sender, EventArgs e)
+        {
+            string contact_point = tb_contact_point_m.Text;
+            string contact_address = tb_contact_address_m.Text;
+
+            if (contact_point.Length <= 0)
+            {
+                show_main_message1("無觸點", S_OK, 30);
+                return;
+            }
+            if (contact_address.Length <= 0)
+            {
+                show_main_message1("無位址", S_OK, 30);
+                return;
+            }
+
+            show_main_message1("讀取: " + contact_point + contact_address, S_OK, 30);
+
+            read_data_from_plc_m_bit(contact_point, contact_address);
+
+        }
+
+        private void bt_write_m_Click(object sender, EventArgs e)
+        {
+            string contact_point = tb_contact_point_m.Text;
+            string contact_address = tb_contact_address_m.Text;
+            string write_data = tb_data_m.Text;
+            tb_data_m.Text = "";
+
+            if (contact_point.Length <= 0)
+            {
+                show_main_message1("無觸點", S_OK, 30);
+                return;
+            }
+            if (contact_address.Length <= 0)
+            {
+                show_main_message1("無位址", S_OK, 30);
+                return;
+            }
+            if (write_data.Length <= 0)
+            {
+                show_main_message1("無資料", S_OK, 30);
+                return;
+            }
+            if (write_data == "無資料")
+            {
+                show_main_message1("無資料", S_OK, 30);
+                return;
+            }
+            if (write_data == "無寫入資料")
+            {
+                show_main_message1("無資料", S_OK, 30);
+                return;
+            }
+
+            show_main_message1("寫入: " + contact_point + contact_address + ", 資料: " + write_data, S_OK, 30);
+
+            write_data_to_plc_m_bit(contact_point, contact_address, write_data);
+        }
+
+        void read_data_from_plc_m_bit(string contact_point, string contact_address)
+        {
+            IPLC_interface mitsubishi = new Mitsubishi_realize();//实例化接口--实现三菱在线访问
+            if (mitsubishi.PLC_ready)//PLC是否准备完成
+            {
+                //richTextBox1.Text += "三菱PLC ready\n";
+
+                richTextBox1.Text += "\n觸點 : " + contact_point + "\t位址 : " + contact_address + "\n";
+                tb_contact_address.Text = "觸點 : " + contact_point + "\t位址 : " + contact_address;
+
+                List<bool> data = mitsubishi.PLC_read_M_bit(contact_point, contact_address);    //讀取狀態
+                richTextBox1.Text += "len = " + data.Count.ToString() + ", data = " + data[0].ToString() + "\n";
+
+                if (data[0] == true)
+                {
+                    tb_data_read.Text = "True";
+                    tb_data_m.Text = "True";
+                }
+                else
+                {
+                    tb_data_read.Text = "False";
+                    tb_data_m.Text = "False";
+                }
+            }
+            else
+            {
+                //richTextBox1.Text += "三菱PLC 不 ready\n";
+            }
+        }
+        void write_data_to_plc_m_bit(string contact_point, string contact_address, string write_data)
+        {
+            if (write_data.Length == 0)
+            {
+                tb_data_read.Text = "無寫入資料";
+                tb_data_m.Text = "無寫入資料";
+                return;
+            }
+
+            IPLC_interface mitsubishi = new Mitsubishi_realize();//实例化接口--实现三菱在线访问
+            if (mitsubishi.PLC_ready)//PLC是否准备完成
+            {
+                //richTextBox1.Text += "三菱PLC ready\n";
+
+                richTextBox1.Text += "\n觸點 : " + contact_point + "\t位址 : " + contact_address + "\n";
+                tb_contact_address.Text = "觸點 : " + contact_point + "\t位址 : " + contact_address;
+                /*
+                                string dddd = mitsubishi.PLC_write_M_bit(contact_point, contact_address, write_data, numerical_format.String_32_Bit);
+
+                                richTextBox1.Text += "cccc len = " + dddd.Length.ToString() + "\t";
+                                richTextBox1.Text += "data : " + dddd + "\n";
+                                richTextBox1.Text += "\n";
+                */
+            }
+            else
+            {
+                //richTextBox1.Text += "三菱PLC 不 ready\n";
+            }
         }
     }
 }

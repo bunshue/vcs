@@ -30,6 +30,27 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.bt_erase_m = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.bt_write_m = new System.Windows.Forms.Button();
+            this.tb_contact_point_m = new System.Windows.Forms.TextBox();
+            this.bt_read_m = new System.Windows.Forms.Button();
+            this.tb_contact_address_m = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.tb_data_m = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.bt_erase_d = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.bt_write_d = new System.Windows.Forms.Button();
+            this.tb_contact_point_d = new System.Windows.Forms.TextBox();
+            this.bt_read_d = new System.Windows.Forms.Button();
+            this.tb_contact_address_d = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.tb_data_d = new System.Windows.Forms.TextBox();
+            this.lb_main_mesg1 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button5 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -44,37 +65,22 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.daButton1 = new Bottom_Control.DAButton();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.lb_main_mesg1 = new System.Windows.Forms.Label();
             this.timer_display = new System.Windows.Forms.Timer(this.components);
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.tb_contact_point = new System.Windows.Forms.TextBox();
-            this.tb_contact_address2 = new System.Windows.Forms.TextBox();
-            this.tb_data = new System.Windows.Forms.TextBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.bt_read = new System.Windows.Forms.Button();
-            this.bt_write = new System.Windows.Forms.Button();
             this.bt_clear = new System.Windows.Forms.Button();
-            this.bt_erase = new System.Windows.Forms.Button();
-            this.daButton1 = new Bottom_Control.DAButton();
             this.plC_Open_Time1 = new Bottom_Control.设置控件.PLC_Open_Time();
             this.groupBox1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.bt_erase);
-            this.groupBox1.Controls.Add(this.bt_write);
-            this.groupBox1.Controls.Add(this.bt_read);
-            this.groupBox1.Controls.Add(this.label6);
-            this.groupBox1.Controls.Add(this.tb_data);
-            this.groupBox1.Controls.Add(this.tb_contact_address2);
-            this.groupBox1.Controls.Add(this.tb_contact_point);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.groupBox3);
+            this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.lb_main_mesg1);
             this.groupBox1.Controls.Add(this.pictureBox1);
             this.groupBox1.Controls.Add(this.button5);
@@ -93,17 +99,256 @@
             this.groupBox1.Controls.Add(this.daButton1);
             this.groupBox1.Location = new System.Drawing.Point(12, 21);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(838, 673);
+            this.groupBox1.Size = new System.Drawing.Size(838, 737);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "PC";
             // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.label7);
+            this.groupBox3.Controls.Add(this.bt_erase_m);
+            this.groupBox3.Controls.Add(this.label8);
+            this.groupBox3.Controls.Add(this.bt_write_m);
+            this.groupBox3.Controls.Add(this.tb_contact_point_m);
+            this.groupBox3.Controls.Add(this.bt_read_m);
+            this.groupBox3.Controls.Add(this.tb_contact_address_m);
+            this.groupBox3.Controls.Add(this.label9);
+            this.groupBox3.Controls.Add(this.tb_data_m);
+            this.groupBox3.Location = new System.Drawing.Point(412, 278);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(372, 164);
+            this.groupBox3.TabIndex = 146;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "讀寫 M bit";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label7.Location = new System.Drawing.Point(18, 30);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(52, 21);
+            this.label7.TabIndex = 136;
+            this.label7.Text = "觸點";
+            // 
+            // bt_erase_m
+            // 
+            this.bt_erase_m.Location = new System.Drawing.Point(271, 109);
+            this.bt_erase_m.Margin = new System.Windows.Forms.Padding(2);
+            this.bt_erase_m.Name = "bt_erase_m";
+            this.bt_erase_m.Size = new System.Drawing.Size(33, 33);
+            this.bt_erase_m.TabIndex = 144;
+            this.bt_erase_m.Text = "X";
+            this.bt_erase_m.UseVisualStyleBackColor = true;
+            this.bt_erase_m.Click += new System.EventHandler(this.bt_erase_m_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label8.Location = new System.Drawing.Point(18, 73);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(52, 21);
+            this.label8.TabIndex = 137;
+            this.label8.Text = "位址";
+            // 
+            // bt_write_m
+            // 
+            this.bt_write_m.Location = new System.Drawing.Point(308, 92);
+            this.bt_write_m.Margin = new System.Windows.Forms.Padding(2);
+            this.bt_write_m.Name = "bt_write_m";
+            this.bt_write_m.Size = new System.Drawing.Size(50, 50);
+            this.bt_write_m.TabIndex = 143;
+            this.bt_write_m.Text = "寫入";
+            this.bt_write_m.UseVisualStyleBackColor = true;
+            this.bt_write_m.Click += new System.EventHandler(this.bt_write_m_Click);
+            // 
+            // tb_contact_point_m
+            // 
+            this.tb_contact_point_m.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_contact_point_m.Location = new System.Drawing.Point(74, 26);
+            this.tb_contact_point_m.Margin = new System.Windows.Forms.Padding(2);
+            this.tb_contact_point_m.Name = "tb_contact_point_m";
+            this.tb_contact_point_m.Size = new System.Drawing.Size(198, 33);
+            this.tb_contact_point_m.TabIndex = 138;
+            this.tb_contact_point_m.Text = "M";
+            // 
+            // bt_read_m
+            // 
+            this.bt_read_m.Location = new System.Drawing.Point(308, 26);
+            this.bt_read_m.Margin = new System.Windows.Forms.Padding(2);
+            this.bt_read_m.Name = "bt_read_m";
+            this.bt_read_m.Size = new System.Drawing.Size(50, 50);
+            this.bt_read_m.TabIndex = 142;
+            this.bt_read_m.Text = "讀取";
+            this.bt_read_m.UseVisualStyleBackColor = true;
+            this.bt_read_m.Click += new System.EventHandler(this.bt_read_m_Click);
+            // 
+            // tb_contact_address_m
+            // 
+            this.tb_contact_address_m.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_contact_address_m.Location = new System.Drawing.Point(74, 68);
+            this.tb_contact_address_m.Margin = new System.Windows.Forms.Padding(2);
+            this.tb_contact_address_m.Name = "tb_contact_address_m";
+            this.tb_contact_address_m.Size = new System.Drawing.Size(198, 33);
+            this.tb_contact_address_m.TabIndex = 139;
+            this.tb_contact_address_m.Text = "10000";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label9.Location = new System.Drawing.Point(18, 112);
+            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(52, 21);
+            this.label9.TabIndex = 141;
+            this.label9.Text = "資料";
+            // 
+            // tb_data_m
+            // 
+            this.tb_data_m.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_data_m.Location = new System.Drawing.Point(74, 109);
+            this.tb_data_m.Margin = new System.Windows.Forms.Padding(2);
+            this.tb_data_m.Name = "tb_data_m";
+            this.tb_data_m.Size = new System.Drawing.Size(198, 33);
+            this.tb_data_m.TabIndex = 140;
+            this.tb_data_m.Text = "0123456789";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.bt_erase_d);
+            this.groupBox2.Controls.Add(this.label5);
+            this.groupBox2.Controls.Add(this.bt_write_d);
+            this.groupBox2.Controls.Add(this.tb_contact_point_d);
+            this.groupBox2.Controls.Add(this.bt_read_d);
+            this.groupBox2.Controls.Add(this.tb_contact_address_d);
+            this.groupBox2.Controls.Add(this.label6);
+            this.groupBox2.Controls.Add(this.tb_data_d);
+            this.groupBox2.Location = new System.Drawing.Point(24, 278);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(372, 164);
+            this.groupBox2.TabIndex = 145;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "讀寫 D register";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label4.Location = new System.Drawing.Point(18, 30);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(52, 21);
+            this.label4.TabIndex = 136;
+            this.label4.Text = "觸點";
+            // 
+            // bt_erase_d
+            // 
+            this.bt_erase_d.Location = new System.Drawing.Point(271, 109);
+            this.bt_erase_d.Margin = new System.Windows.Forms.Padding(2);
+            this.bt_erase_d.Name = "bt_erase_d";
+            this.bt_erase_d.Size = new System.Drawing.Size(33, 33);
+            this.bt_erase_d.TabIndex = 144;
+            this.bt_erase_d.Text = "X";
+            this.bt_erase_d.UseVisualStyleBackColor = true;
+            this.bt_erase_d.Click += new System.EventHandler(this.bt_erase_d_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label5.Location = new System.Drawing.Point(18, 73);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(52, 21);
+            this.label5.TabIndex = 137;
+            this.label5.Text = "位址";
+            // 
+            // bt_write_d
+            // 
+            this.bt_write_d.Location = new System.Drawing.Point(308, 92);
+            this.bt_write_d.Margin = new System.Windows.Forms.Padding(2);
+            this.bt_write_d.Name = "bt_write_d";
+            this.bt_write_d.Size = new System.Drawing.Size(50, 50);
+            this.bt_write_d.TabIndex = 143;
+            this.bt_write_d.Text = "寫入";
+            this.bt_write_d.UseVisualStyleBackColor = true;
+            this.bt_write_d.Click += new System.EventHandler(this.bt_write_d_Click);
+            // 
+            // tb_contact_point_d
+            // 
+            this.tb_contact_point_d.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_contact_point_d.Location = new System.Drawing.Point(74, 26);
+            this.tb_contact_point_d.Margin = new System.Windows.Forms.Padding(2);
+            this.tb_contact_point_d.Name = "tb_contact_point_d";
+            this.tb_contact_point_d.Size = new System.Drawing.Size(198, 33);
+            this.tb_contact_point_d.TabIndex = 138;
+            this.tb_contact_point_d.Text = "D";
+            // 
+            // bt_read_d
+            // 
+            this.bt_read_d.Location = new System.Drawing.Point(308, 26);
+            this.bt_read_d.Margin = new System.Windows.Forms.Padding(2);
+            this.bt_read_d.Name = "bt_read_d";
+            this.bt_read_d.Size = new System.Drawing.Size(50, 50);
+            this.bt_read_d.TabIndex = 142;
+            this.bt_read_d.Text = "讀取";
+            this.bt_read_d.UseVisualStyleBackColor = true;
+            this.bt_read_d.Click += new System.EventHandler(this.bt_read_d_Click);
+            // 
+            // tb_contact_address_d
+            // 
+            this.tb_contact_address_d.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_contact_address_d.Location = new System.Drawing.Point(74, 68);
+            this.tb_contact_address_d.Margin = new System.Windows.Forms.Padding(2);
+            this.tb_contact_address_d.Name = "tb_contact_address_d";
+            this.tb_contact_address_d.Size = new System.Drawing.Size(198, 33);
+            this.tb_contact_address_d.TabIndex = 139;
+            this.tb_contact_address_d.Text = "2000";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.label6.Location = new System.Drawing.Point(18, 112);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(52, 21);
+            this.label6.TabIndex = 141;
+            this.label6.Text = "資料";
+            // 
+            // tb_data_d
+            // 
+            this.tb_data_d.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_data_d.Location = new System.Drawing.Point(74, 109);
+            this.tb_data_d.Margin = new System.Windows.Forms.Padding(2);
+            this.tb_data_d.Name = "tb_data_d";
+            this.tb_data_d.Size = new System.Drawing.Size(198, 33);
+            this.tb_data_d.TabIndex = 140;
+            this.tb_data_d.Text = "0123456789";
+            // 
+            // lb_main_mesg1
+            // 
+            this.lb_main_mesg1.AutoSize = true;
+            this.lb_main_mesg1.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_main_mesg1.ForeColor = System.Drawing.Color.Red;
+            this.lb_main_mesg1.Location = new System.Drawing.Point(121, 25);
+            this.lb_main_mesg1.Name = "lb_main_mesg1";
+            this.lb_main_mesg1.Size = new System.Drawing.Size(78, 24);
+            this.lb_main_mesg1.TabIndex = 135;
+            this.lb_main_mesg1.Text = "mesg1";
+            // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(24, 423);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Location = new System.Drawing.Point(24, 457);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(593, 232);
+            this.pictureBox1.Size = new System.Drawing.Size(760, 263);
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
             // 
@@ -130,7 +375,7 @@
             // bt_generate
             // 
             this.bt_generate.Location = new System.Drawing.Point(554, 172);
-            this.bt_generate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bt_generate.Margin = new System.Windows.Forms.Padding(2);
             this.bt_generate.Name = "bt_generate";
             this.bt_generate.Size = new System.Drawing.Size(43, 43);
             this.bt_generate.TabIndex = 11;
@@ -142,7 +387,7 @@
             // 
             this.cb_random.AutoSize = true;
             this.cb_random.Location = new System.Drawing.Point(604, 185);
-            this.cb_random.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cb_random.Margin = new System.Windows.Forms.Padding(2);
             this.cb_random.Name = "cb_random";
             this.cb_random.Size = new System.Drawing.Size(48, 16);
             this.cb_random.TabIndex = 10;
@@ -154,7 +399,7 @@
             this.tb_contact_address.Enabled = false;
             this.tb_contact_address.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.tb_contact_address.Location = new System.Drawing.Point(271, 142);
-            this.tb_contact_address.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_contact_address.Margin = new System.Windows.Forms.Padding(2);
             this.tb_contact_address.Name = "tb_contact_address";
             this.tb_contact_address.Size = new System.Drawing.Size(275, 33);
             this.tb_contact_address.TabIndex = 9;
@@ -185,7 +430,7 @@
             // 
             this.tb_data_read.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.tb_data_read.Location = new System.Drawing.Point(271, 222);
-            this.tb_data_read.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_data_read.Margin = new System.Windows.Forms.Padding(2);
             this.tb_data_read.Name = "tb_data_read";
             this.tb_data_read.Size = new System.Drawing.Size(275, 33);
             this.tb_data_read.TabIndex = 6;
@@ -205,7 +450,7 @@
             // 
             this.tb_data_to_write.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.tb_data_to_write.Location = new System.Drawing.Point(271, 182);
-            this.tb_data_to_write.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_data_to_write.Margin = new System.Windows.Forms.Padding(2);
             this.tb_data_to_write.Name = "tb_data_to_write";
             this.tb_data_to_write.Size = new System.Drawing.Size(275, 33);
             this.tb_data_to_write.TabIndex = 4;
@@ -240,141 +485,6 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(856, 37);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(352, 567);
-            this.richTextBox1.TabIndex = 2;
-            this.richTextBox1.Text = "";
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // lb_main_mesg1
-            // 
-            this.lb_main_mesg1.AutoSize = true;
-            this.lb_main_mesg1.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_main_mesg1.ForeColor = System.Drawing.Color.Red;
-            this.lb_main_mesg1.Location = new System.Drawing.Point(121, 25);
-            this.lb_main_mesg1.Name = "lb_main_mesg1";
-            this.lb_main_mesg1.Size = new System.Drawing.Size(78, 24);
-            this.lb_main_mesg1.TabIndex = 135;
-            this.lb_main_mesg1.Text = "mesg1";
-            // 
-            // timer_display
-            // 
-            this.timer_display.Tick += new System.EventHandler(this.timer_display_Tick);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label4.Location = new System.Drawing.Point(30, 301);
-            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(52, 21);
-            this.label4.TabIndex = 136;
-            this.label4.Text = "觸點";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label5.Location = new System.Drawing.Point(30, 344);
-            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(52, 21);
-            this.label5.TabIndex = 137;
-            this.label5.Text = "位址";
-            // 
-            // tb_contact_point
-            // 
-            this.tb_contact_point.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_contact_point.Location = new System.Drawing.Point(86, 297);
-            this.tb_contact_point.Margin = new System.Windows.Forms.Padding(2);
-            this.tb_contact_point.Name = "tb_contact_point";
-            this.tb_contact_point.Size = new System.Drawing.Size(198, 33);
-            this.tb_contact_point.TabIndex = 138;
-            this.tb_contact_point.Text = "D";
-            // 
-            // tb_contact_address2
-            // 
-            this.tb_contact_address2.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_contact_address2.Location = new System.Drawing.Point(86, 339);
-            this.tb_contact_address2.Margin = new System.Windows.Forms.Padding(2);
-            this.tb_contact_address2.Name = "tb_contact_address2";
-            this.tb_contact_address2.Size = new System.Drawing.Size(198, 33);
-            this.tb_contact_address2.TabIndex = 139;
-            this.tb_contact_address2.Text = "2000";
-            // 
-            // tb_data
-            // 
-            this.tb_data.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_data.Location = new System.Drawing.Point(86, 380);
-            this.tb_data.Margin = new System.Windows.Forms.Padding(2);
-            this.tb_data.Name = "tb_data";
-            this.tb_data.Size = new System.Drawing.Size(198, 33);
-            this.tb_data.TabIndex = 140;
-            this.tb_data.Text = "0123456789";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label6.Location = new System.Drawing.Point(30, 383);
-            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(52, 21);
-            this.label6.TabIndex = 141;
-            this.label6.Text = "資料";
-            // 
-            // bt_read
-            // 
-            this.bt_read.Location = new System.Drawing.Point(320, 297);
-            this.bt_read.Margin = new System.Windows.Forms.Padding(2);
-            this.bt_read.Name = "bt_read";
-            this.bt_read.Size = new System.Drawing.Size(50, 50);
-            this.bt_read.TabIndex = 142;
-            this.bt_read.Text = "讀取";
-            this.bt_read.UseVisualStyleBackColor = true;
-            this.bt_read.Click += new System.EventHandler(this.bt_read_Click);
-            // 
-            // bt_write
-            // 
-            this.bt_write.Location = new System.Drawing.Point(320, 363);
-            this.bt_write.Margin = new System.Windows.Forms.Padding(2);
-            this.bt_write.Name = "bt_write";
-            this.bt_write.Size = new System.Drawing.Size(50, 50);
-            this.bt_write.TabIndex = 143;
-            this.bt_write.Text = "寫入";
-            this.bt_write.UseVisualStyleBackColor = true;
-            this.bt_write.Click += new System.EventHandler(this.bt_write_Click);
-            // 
-            // bt_clear
-            // 
-            this.bt_clear.Location = new System.Drawing.Point(1158, 576);
-            this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(50, 28);
-            this.bt_clear.TabIndex = 136;
-            this.bt_clear.Text = "Clear";
-            this.bt_clear.UseVisualStyleBackColor = true;
-            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
-            // 
-            // bt_erase
-            // 
-            this.bt_erase.Location = new System.Drawing.Point(283, 380);
-            this.bt_erase.Margin = new System.Windows.Forms.Padding(2);
-            this.bt_erase.Name = "bt_erase";
-            this.bt_erase.Size = new System.Drawing.Size(33, 33);
-            this.bt_erase.TabIndex = 144;
-            this.bt_erase.Text = "X";
-            this.bt_erase.UseVisualStyleBackColor = true;
-            this.bt_erase.Click += new System.EventHandler(this.bt_erase_Click);
-            // 
             // daButton1
             // 
             this.daButton1.BackColor = System.Drawing.Color.Transparent;
@@ -395,6 +505,34 @@
             this.daButton1.Text = "連接PLC";
             this.daButton1.UseVisualStyleBackColor = false;
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(856, 37);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(352, 721);
+            this.richTextBox1.TabIndex = 2;
+            this.richTextBox1.Text = "";
+            // 
+            // timer1
+            // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // timer_display
+            // 
+            this.timer_display.Tick += new System.EventHandler(this.timer_display_Tick);
+            // 
+            // bt_clear
+            // 
+            this.bt_clear.Location = new System.Drawing.Point(1158, 576);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(50, 28);
+            this.bt_clear.TabIndex = 136;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
             // plC_Open_Time1
             // 
             this.plC_Open_Time1.Interval = 500;
@@ -407,7 +545,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1220, 706);
+            this.ClientSize = new System.Drawing.Size(1220, 770);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox1);
@@ -416,6 +554,10 @@
             this.Load += new System.EventHandler(this.Form2_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
@@ -444,15 +586,26 @@
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label lb_main_mesg1;
         private System.Windows.Forms.Timer timer_display;
-        private System.Windows.Forms.Button bt_write;
-        private System.Windows.Forms.Button bt_read;
+        private System.Windows.Forms.Button bt_write_d;
+        private System.Windows.Forms.Button bt_read_d;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox tb_data;
-        private System.Windows.Forms.TextBox tb_contact_address2;
-        private System.Windows.Forms.TextBox tb_contact_point;
+        private System.Windows.Forms.TextBox tb_data_d;
+        private System.Windows.Forms.TextBox tb_contact_address_d;
+        private System.Windows.Forms.TextBox tb_contact_point_d;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button bt_clear;
-        private System.Windows.Forms.Button bt_erase;
+        private System.Windows.Forms.Button bt_erase_d;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Button bt_erase_m;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button bt_write_m;
+        private System.Windows.Forms.TextBox tb_contact_point_m;
+        private System.Windows.Forms.Button bt_read_m;
+        private System.Windows.Forms.TextBox tb_contact_address_m;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox tb_data_m;
     }
 }

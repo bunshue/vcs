@@ -86,7 +86,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAPLC_Time.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -128,117 +127,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Public_Class.cs" />
-    <Compile Include="二维码生成\IhatetheqrcodeCreate.cs" />
-    <Compile Include="基本控件\DADataGridView_PLCSQL.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="基本控件\DADataGridView_TO_PLCE.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="基本控件\DADataGridView_TO_PLCE.Designer.cs">
-      <DependentUpon>DADataGridView_TO_PLCE.cs</DependentUpon>
-    </Compile>
-    <Compile Include="基本控件\DADataGridView_TO_SQL.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="基本控件\DAIhatetheqrcode_PLC.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="基本控件\Histogram_PLC.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="基本控件\IhatetheqrcodeSQL.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="基本控件\IhatetheqrcodeSQL.Designer.cs">
-      <DependentUpon>IhatetheqrcodeSQL.cs</DependentUpon>
-    </Compile>
-    <Compile Include="基本控件\Oscillogram_PLC.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="控件类基\Doughnut_Base.cs" />
-    <Compile Include="基本控件\DAAlarmLamp.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="基本控件\DAAnalogMeter.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="基本控件\DABottle.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="基本控件\DAButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="基本控件\DACheckBox.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="基本控件\DACombox.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="基本控件\DAConduit.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="基本控件\DAConveyor.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="基本控件\DADataGridView_TO_PLC.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="基本控件\DALedBulb.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="基本控件\DAMeter.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="基本控件\DAPond.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="基本控件\DAProcessEllipse.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="基本控件\DAProcessWave.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="基本控件\DARotor.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="基本控件\DASignalLamp.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="基本控件\DASwitch.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="基本控件\Doughnut_PLC.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="控件类基\DataGridViewPLC_base.cs" />
-    <Compile Include="基本控件\DATextBox.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="基本控件\DAThermometer.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="按钮--TO--PLC方法\Button_PLC.cs" />
-    <Compile Include="控件类基\Button_base.cs" />
-    <Compile Include="控件类基\Combox_base.cs" />
-    <Compile Include="控件类基\Flicker_base.cs" />
-    <Compile Include="控件类基\Histogram_base.cs" />
-    <Compile Include="控件类基\TextBox_base.cs" />
-    <Compile Include="文本--TO--PLC方法\TextBox_PLC.cs" />
-    <Compile Include="文本输入键盘\keyboard.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="文本输入键盘\keyboard.Designer.cs">
-      <DependentUpon>keyboard.cs</DependentUpon>
-    </Compile>
-    <Compile Include="文本输入键盘\keyboard_Hex.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="文本输入键盘\keyboard_Hex.Designer.cs">
-      <DependentUpon>keyboard_Hex.cs</DependentUpon>
-    </Compile>
-    <Compile Include="表格控件--TO--PLC\DataGridView_PLC.cs" />
-    <Compile Include="表格控件--TO--PLC\表格控件--TO--SQL\DADataGridView_SQL.cs" />
     <Compile Include="设置控件\PLC_Open_Time.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -267,18 +155,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="基本控件\DADataGridView_TO_PLCE.resx">
-      <DependentUpon>DADataGridView_TO_PLCE.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="基本控件\IhatetheqrcodeSQL.resx">
-      <DependentUpon>IhatetheqrcodeSQL.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="文本输入键盘\keyboard.resx">
-      <DependentUpon>keyboard.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="文本输入键盘\keyboard_Hex.resx">
-      <DependentUpon>keyboard_Hex.cs</DependentUpon>
-    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

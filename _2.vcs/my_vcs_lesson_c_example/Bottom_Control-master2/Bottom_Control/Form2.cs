@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using Bottom_Control.PLC通讯协议;
-using Bottom_Control.基本控件;
 using CCWin.SkinClass;
 
 namespace Bottom_Control
