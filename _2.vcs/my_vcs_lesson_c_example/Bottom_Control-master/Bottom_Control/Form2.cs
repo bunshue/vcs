@@ -704,7 +704,7 @@ namespace Bottom_Control
                     {
                         richTextBox1.Text += "取得 D2000 資料 : " + data_read + "\n";
 
-                        richTextBox1.Text += "len = " + data_read.Length.ToString() + "\n";
+                        richTextBox1.Text += "\nlen = " + data_read.Length.ToString() + "\n";
 
                         richTextBox1.Text += "(3b) PC 將 從 D2000 取得的資料 寫到 D8000\n";
 
@@ -720,7 +720,7 @@ namespace Bottom_Control
 
                         write_data_to_plc_d_register(contact_point, contact_address, data_to_write);
 
-                        richTextBox1.Text += "(4) PLC 拉高 M12000, 供PLC讀取\n";
+                        richTextBox1.Text += "(4) PC 拉高 M12000, 供PLC讀取\n";
 
                         contact_point = "M";
                         contact_address = "12000";
@@ -735,12 +735,10 @@ namespace Bottom_Control
 
                         write_data_to_plc_m_bit(contact_point, contact_address, button_State);
 
-                        richTextBox1.Text += "(5) PLC 拉高 M10001, 供PC讀取, 通知開始做色調\n";
+                        richTextBox1.Text += "(5a) PLC 拉高 M10001, 供PC讀取, 通知開始做色調\n";
+                        richTextBox1.Text += "(5b) PC 讀取 M10001 狀態\n";
                         contact_point = "M";
                         contact_address = "10001";
-
-                        contact_point = "M";
-                        contact_address = "10000";
                         ret = false;
                         for (i = 0; i < 1000; i++)
                         {
@@ -755,6 +753,42 @@ namespace Bottom_Control
                             else
                             {
                                 richTextBox1.Text += "\n取得 M10001 為 ON\n";
+
+                                richTextBox1.Text += "(6) PC 拉高 M12001, 供PLC讀取, 通知PC已開始做色調\n";
+
+                                contact_point = "M";
+                                contact_address = "12001";
+
+                                button_State = Button_state.ON;
+
+                                tb_data_m.Text = "";
+                                tb_data_m.BackColor = Color.White;
+
+                                show_main_message1("寫入: " + contact_point + contact_address + ", 資料: " + button_State, S_OK, 30);
+                                write_data_to_plc_m_bit(contact_point, contact_address, button_State);
+
+                                richTextBox1.Text += "\n\n\nPC開始做色調\n\n\n\n";
+
+                                richTextBox1.Text += "(7) PC 做完色調, 將結果碼寫在 D8010\n";
+                                //TBD
+
+
+                                richTextBox1.Text += "(8) PC 拉高 M12002, 供PLC讀取, 通知PC已做完色調\n";
+
+                                contact_point = "M";
+                                contact_address = "12002";
+
+                                button_State = Button_state.ON;
+
+                                tb_data_m.Text = "";
+                                tb_data_m.BackColor = Color.White;
+
+                                show_main_message1("寫入: " + contact_point + contact_address + ", 資料: " + button_State, S_OK, 30);
+                                write_data_to_plc_m_bit(contact_point, contact_address, button_State);
+
+
+                                richTextBox1.Text += "測試PLC作業流程完成\n";
+
                                 break;
                             }
                         }
@@ -767,7 +801,7 @@ namespace Bottom_Control
 
 
 
-                            }
+                    }
                     else
                     {
                         richTextBox1.Text += "未取得 D2000 資料\n";
