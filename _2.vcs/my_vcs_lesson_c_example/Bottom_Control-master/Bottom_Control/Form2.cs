@@ -43,6 +43,7 @@ namespace Bottom_Control
             bt_copy_to_clipboard.BackgroundImageLayout = ImageLayout.Zoom;
             cb_random.Checked = true;
 
+            lb_plc_mesg.Location = new Point(groupBox_plc_status.Location.X + 200, groupBox_plc_status.Location.Y + 155);
 
             int x_st = 10;
             int y_st = 15;
@@ -75,6 +76,11 @@ namespace Bottom_Control
             pbx_m12001.BackgroundImage = Properties.Resources.ball_gray;
             pbx_m12002.BackgroundImage = Properties.Resources.ball_gray;
 
+            pbx_plc_status.Size = new Size(w*3, h*3);
+            pbx_plc_status.Location = new Point(x_st + dx * 2-90, y_st + dy * 3 - 30);
+            pbx_plc_status.BackgroundImageLayout = ImageLayout.Zoom;
+            pbx_plc_status.BackgroundImage = Properties.Resources.ball_green;
+
             x_st = 40;
             lb_plc_pc0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             lb_plc_pc1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -97,14 +103,15 @@ namespace Bottom_Control
             lb_pc_plc0.Text = "M12000 PC -> PLC 收到動作要求";
             lb_pc_plc1.Text = "M12001 PC -> PLC 確認開始";
             lb_pc_plc2.Text = "M12002 PC -> PLC 動作完成";
-            lb_plc_pc3a.Text = "ID資料";
+            lb_plc_pc3a.Text = "ID資料    D2000";
             lb_plc_pc4a.Text = "收到結果D2010";
-            lb_plc_pc3b.Text = "N2201001A0001";
-            lb_plc_pc4b.Text = "AABB";
-            lb_pc_plc3a.Text = "ID資料";
+            lb_plc_pc3b.Text = "";
+            lb_plc_pc4b.Text = "";
+            lb_pc_plc3a.Text = "ID資料    D8000";
             lb_pc_plc4a.Text = "檢測結果D8010";
-            lb_pc_plc3b.Text = "N2201001A0001";
-            lb_pc_plc4b.Text = "CCDD";
+            lb_pc_plc3b.Text = "";
+            lb_pc_plc4b.Text = "";
+            lb_plc_mesg.Text = "";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -187,13 +194,13 @@ namespace Bottom_Control
             IPLC_interface mitsubishi = new Mitsubishi_realize();//实例化接口--实现三菱在线访问
             if (mitsubishi.PLC_ready)//PLC是否准备完成
             {
-                //richTextBox1.Text += "三菱PLC ready\n";
+                //richTextBox1.Text += "三菱PLC ready 1\n";
 
-                richTextBox1.Text += "\n觸點 : " + contact_point + "\t位址 : " + contact_address + "\n";
+                //richTextBox1.Text += "\n觸點 : " + contact_point + "\t位址 : " + contact_address + "\n";
                 tb_contact_address.Text = "觸點 : " + contact_point + "\t位址 : " + contact_address;
 
                 List<bool> data = mitsubishi.PLC_read_M_bit(contact_point, contact_address);    //讀取狀態
-                richTextBox1.Text += "len = " + data.Count.ToString() + ", data = " + data[0].ToString() + "\n";
+                //richTextBox1.Text += "len = " + data.Count.ToString() + ", data = " + data[0].ToString() + "\n";
 
                 if (data[0] == true)
                 {
@@ -201,8 +208,8 @@ namespace Bottom_Control
                     tb_data_read.Text = dddd;
                     tb_data_d.Text = dddd;
                     data_read = dddd;
-                    richTextBox1.Text += "b len = " + dddd.Length.ToString() + "\t";
-                    richTextBox1.Text += "data : " + dddd + "\n";
+                    //richTextBox1.Text += "b len = " + dddd.Length.ToString() + "\t";
+                    //richTextBox1.Text += "data : " + dddd + "\n";
                 }
                 else
                 {
@@ -229,7 +236,7 @@ namespace Bottom_Control
             IPLC_interface mitsubishi = new Mitsubishi_realize();//实例化接口--实现三菱在线访问
             if (mitsubishi.PLC_ready)//PLC是否准备完成
             {
-                //richTextBox1.Text += "三菱PLC ready\n";
+                //richTextBox1.Text += "三菱PLC ready 2\n";
 
                 richTextBox1.Text += "\n觸點 : " + contact_point + "\t位址 : " + contact_address + "\n";
                 tb_contact_address.Text = "觸點 : " + contact_point + "\t位址 : " + contact_address;
@@ -248,12 +255,40 @@ namespace Bottom_Control
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            update_plc_data_status_data();
+            bool plc_power_status = check_plc_power_status();
+            //bool plc_power_status = true;
 
+            if (plc_power_status == false)
+            {
+                lb_plc_pc3b.Text = "";
+                lb_plc_pc4b.Text = "";
+                lb_pc_plc3b.Text = "";
+                lb_pc_plc4b.Text = "";
+                pbx_m10000.BackgroundImage = Properties.Resources.ball_gray;
+                pbx_m10001.BackgroundImage = Properties.Resources.ball_gray;
+                pbx_m10002.BackgroundImage = Properties.Resources.ball_gray;
+                pbx_m12000.BackgroundImage = Properties.Resources.ball_gray;
+                pbx_m12001.BackgroundImage = Properties.Resources.ball_gray;
+                pbx_m12002.BackgroundImage = Properties.Resources.ball_gray;
+                lb_plc_mesg.Text = "三菱PLC 不 Ready";
+                lb_plc_mesg.Visible = true;
+                groupBox_plc_status.Enabled = false;
+                pictureBox1.Enabled = false;
+                return;
+            }
+            else
+            {
+                lb_plc_mesg.Text = "";
+                lb_plc_mesg.Visible = false;
+                groupBox_plc_status.Enabled = true;
+                pictureBox1.Enabled = true;
+            }
+
+            update_plc_data_status_data();
             draw_status();
         }
 
-        private const int N = 11;
+        private const int N = 16;
         int m10000_value = 0;
         int m10001_value = 0;
         int m10002_value = 0;
@@ -267,6 +302,37 @@ namespace Bottom_Control
         int[] m12000_data = new int[N];
         int[] m12001_data = new int[N];
         int[] m12002_data = new int[N];
+
+        bool check_plc_power_status()
+        {
+            bool plc_power_status = false;
+            //讀取 PLC狀態
+            IPLC_interface mitsubishi = new Mitsubishi_realize();//实例化接口--实现三菱在线访问
+            if (mitsubishi.PLC_ready == true)   //PLC是否准备完成
+            {
+                plc_power_status = true;
+                /* 目前無法判斷 PLC_read_M_bit 是讀不到資料 還是資料為True/False
+                richTextBox1.Text += "check_plc_power_status\n";
+                //richTextBox1.Text += "三菱PLC ready 3\n";
+                List<bool> data = mitsubishi.PLC_read_M_bit("M", "10000");//读取状态
+                richTextBox1.Text += "aaaa len = " + data.Count.ToString() + ", data = " + data[0].ToString() + "\n";
+
+                if (data[0] == true)
+                {
+                    plc_power_status = true;
+                }
+                else
+                {
+                    plc_power_status = false;
+                }
+                */
+            }
+            else
+            {
+                plc_power_status = false;
+            }
+            return plc_power_status;
+        }
 
         void update_plc_data_status_data()
         {
@@ -466,6 +532,38 @@ namespace Bottom_Control
             {
                 pbx_m12002.BackgroundImage = Properties.Resources.ball_gray;
             }
+
+            string contact_point = "D";
+            string contact_address = "2000";
+            show_main_message1("讀取: " + contact_point + contact_address, S_OK, 30);
+            string data_read = read_data_from_plc_d_register(contact_point, contact_address);
+            //richTextBox1.Text += "\nD2000 len = " + data_read.Length.ToString() + "\n";
+            //richTextBox1.Text += "data : |" + data_read + "|\n";
+            lb_plc_pc3b.Text = data_read;
+
+            contact_point = "D";
+            contact_address = "2010";
+            show_main_message1("讀取: " + contact_point + contact_address, S_OK, 30);
+            data_read = read_data_from_plc_d_register(contact_point, contact_address);
+            //richTextBox1.Text += "\nD8000 len = " + data_read.Length.ToString() + "\n";
+            //richTextBox1.Text += "data : |" + data_read + "|\n";
+            lb_plc_pc4b.Text = data_read;
+
+            contact_point = "D";
+            contact_address = "8000";
+            show_main_message1("讀取: " + contact_point + contact_address, S_OK, 30);
+            data_read = read_data_from_plc_d_register(contact_point, contact_address);
+            //richTextBox1.Text += "\nD8000 len = " + data_read.Length.ToString() + "\n";
+            //richTextBox1.Text += "data : |" + data_read + "|\n";
+            lb_pc_plc3b.Text = data_read;
+
+            contact_point = "D";
+            contact_address = "8010";
+            show_main_message1("讀取: " + contact_point + contact_address, S_OK, 30);
+            data_read = read_data_from_plc_d_register(contact_point, contact_address);
+            //richTextBox1.Text += "\nD8000 len = " + data_read.Length.ToString() + "\n";
+            //richTextBox1.Text += "data : |" + data_read + "|\n";
+            lb_pc_plc4b.Text = data_read;
         }
 
         void draw_status()
@@ -570,7 +668,7 @@ namespace Bottom_Control
             IPLC_interface mitsubishi = new Mitsubishi_realize();//实例化接口--实现三菱在线访问
             if (mitsubishi.PLC_ready)//PLC是否准备完成
             {
-                //richTextBox1.Text += "三菱PLC ready\n";
+                //richTextBox1.Text += "三菱PLC ready 4\n";
                 List<bool> data = mitsubishi.PLC_read_M_bit("M", address.ToString());//读取状态
                 //richTextBox1.Text += "len = " + data.Count.ToString() + ", data = " + data[0].ToString() + "\n";
 
@@ -793,7 +891,7 @@ namespace Bottom_Control
             IPLC_interface mitsubishi = new Mitsubishi_realize();//实例化接口--实现三菱在线访问
             if (mitsubishi.PLC_ready)//PLC是否准备完成
             {
-                //richTextBox1.Text += "三菱PLC ready\n";
+                //richTextBox1.Text += "三菱PLC ready 5\n";
 
                 //richTextBox1.Text += "\n觸點 : " + contact_point + "\t位址 : " + contact_address + "\n";
                 tb_contact_address.Text = "觸點 : " + contact_point + "\t位址 : " + contact_address;
@@ -826,7 +924,7 @@ namespace Bottom_Control
             IPLC_interface mitsubishi = new Mitsubishi_realize();//实例化接口--实现三菱在线访问
             if (mitsubishi.PLC_ready)//PLC是否准备完成
             {
-                //richTextBox1.Text += "三菱PLC ready\n";
+                //richTextBox1.Text += "三菱PLC ready 6\n";
 
                 richTextBox1.Text += "\n觸點 : " + contact_point + "\t位址 : " + contact_address + "\n";
                 tb_contact_address.Text = "觸點 : " + contact_point + "\t位址 : " + contact_address;
@@ -900,6 +998,8 @@ namespace Bottom_Control
                     {
                         richTextBox1.Text += "取得 D2000 資料 : " + data_read + "\n";
 
+                        delay(500);
+
                         richTextBox1.Text += "\nlen = " + data_read.Length.ToString() + "\n";
 
                         richTextBox1.Text += "(3b) PC 將 從 D2000 取得的資料 寫到 D8000\n";
@@ -916,6 +1016,8 @@ namespace Bottom_Control
 
                         write_data_to_plc_d_register(contact_point, contact_address, data_to_write);
 
+                        delay(500);
+
                         richTextBox1.Text += "(4) PC 拉高 M12000, 供PLC讀取\n";
 
                         contact_point = "M";
@@ -930,6 +1032,8 @@ namespace Bottom_Control
                         show_main_message1("寫入: " + contact_point + contact_address + ", 資料: " + button_State, S_OK, 30);
 
                         write_data_to_plc_m_bit(contact_point, contact_address, button_State);
+
+                        delay(500);
 
                         richTextBox1.Text += "(5a) PLC 拉高 M10001, 供PC讀取, 通知開始做色調\n";
                         richTextBox1.Text += "(5b) PC 讀取 M10001 狀態\n";
@@ -948,6 +1052,8 @@ namespace Bottom_Control
                             }
                             else
                             {
+                                delay(500);
+
                                 richTextBox1.Text += "\n取得 M10001 為 ON\n";
 
                                 richTextBox1.Text += "(6) PC 拉高 M12001, 供PLC讀取, 通知PC已開始做色調\n";
@@ -963,7 +1069,10 @@ namespace Bottom_Control
                                 show_main_message1("寫入: " + contact_point + contact_address + ", 資料: " + button_State, S_OK, 30);
                                 write_data_to_plc_m_bit(contact_point, contact_address, button_State);
 
-                                richTextBox1.Text += "\n\n\nPC開始做色調\n\n\n\n";
+                                richTextBox1.Text += "\n\n\nPC開始做色調........\n\n\n\n";
+                                delay(500);
+                                delay(500);
+                                delay(500);
 
                                 richTextBox1.Text += "(7) PC 做完色調, 將結果碼寫在 D8010\n";
 
@@ -977,6 +1086,8 @@ namespace Bottom_Control
                                 write_data_to_plc_d_register(contact_point, contact_address, write_data);
 
                                 richTextBox1.Text += "(8) PC 拉高 M12002, 供PLC讀取, 通知PC已做完色調\n";
+
+                                delay(500);
 
                                 contact_point = "M";
                                 contact_address = "12002";
@@ -1041,7 +1152,7 @@ namespace Bottom_Control
 
         private void bt_pause_Click(object sender, EventArgs e)
         {
-            if(bt_pause.Text == "暫停")
+            if (bt_pause.Text == "暫停")
             {
                 bt_pause.Text = "繼續";
                 timer1.Enabled = false;
