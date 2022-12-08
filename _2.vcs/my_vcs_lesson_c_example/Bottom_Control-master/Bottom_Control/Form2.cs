@@ -132,8 +132,8 @@ namespace Bottom_Control
                     tb_data_read.Text = dddd;
                     tb_data_d.Text = dddd;
                     data_read = dddd;
-                    //richTextBox1.Text += "b len = " + dddd.Length.ToString() + "\t";
-                    //richTextBox1.Text += "data : " + dddd + "\n";
+                    richTextBox1.Text += "b len = " + dddd.Length.ToString() + "\t";
+                    richTextBox1.Text += "data : " + dddd + "\n";
                 }
                 else
                 {
@@ -858,8 +858,15 @@ namespace Bottom_Control
                                 richTextBox1.Text += "\n\n\nPC開始做色調\n\n\n\n";
 
                                 richTextBox1.Text += "(7) PC 做完色調, 將結果碼寫在 D8010\n";
-                                //TBD
 
+                                Random r = new Random();
+                                int color_result = r.Next(0, 20);
+                                richTextBox1.Text += "色調結果: 0x" + color_result.ToString("X2") + " = " + color_result.ToString() + "\n";
+                                contact_point = "D";
+                                contact_address = "8010";
+                                string write_data = color_result.ToString();
+                                show_main_message1("寫入: " + contact_point + contact_address + ", 資料: " + write_data, S_OK, 30);
+                                write_data_to_plc_d_register(contact_point, contact_address, write_data);
 
                                 richTextBox1.Text += "(8) PC 拉高 M12002, 供PLC讀取, 通知PC已做完色調\n";
 
@@ -922,6 +929,20 @@ namespace Bottom_Control
         {
             richTextBox1.Text += "設定 中斷\n";
             flag_plc_test = false;
+        }
+
+        private void bt_pause_Click(object sender, EventArgs e)
+        {
+            if(bt_pause.Text == "暫停")
+            {
+                bt_pause.Text = "繼續";
+                timer1.Enabled = false;
+            }
+            else
+            {
+                bt_pause.Text = "暫停";
+                timer1.Enabled = true;
+            }
         }
     }
 }
