@@ -288,7 +288,6 @@ namespace Bottom_Control
 
             bool status = get_plc_data_status();
 
-            //y1_value = rrrr;
             if (status == true)
             {
                 y1_value = 1;
@@ -299,6 +298,7 @@ namespace Bottom_Control
                 y1_value = 0;
 
             }
+            y1_value = rrrr;
 
             for (int i = 0; i < (N - 1); i++)
             {

@@ -75,6 +75,7 @@
             this.timer_display = new System.Windows.Forms.Timer(this.components);
             this.bt_clear = new System.Windows.Forms.Button();
             this.bt_copy_to_clipboard = new System.Windows.Forms.Button();
+            this.cb_debug = new System.Windows.Forms.CheckBox();
             this.daButton1 = new Bottom_Control.DAButton();
             this.plC_Open_Time1 = new Bottom_Control.设置控件.PLC_Open_Time();
             this.groupBox1.SuspendLayout();
@@ -86,6 +87,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.cb_debug);
             this.groupBox1.Controls.Add(this.button7);
             this.groupBox1.Controls.Add(this.button6);
             this.groupBox1.Controls.Add(this.groupBox3);
@@ -421,7 +423,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(96, 42);
             this.button5.TabIndex = 13;
-            this.button5.Text = "讀取 Y20";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -431,7 +432,6 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(96, 42);
             this.button4.TabIndex = 12;
-            this.button4.Text = "Test";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -585,6 +585,17 @@
             this.bt_copy_to_clipboard.UseVisualStyleBackColor = true;
             this.bt_copy_to_clipboard.Click += new System.EventHandler(this.bt_copy_to_clipboard_Click);
             // 
+            // cb_debug
+            // 
+            this.cb_debug.AutoSize = true;
+            this.cb_debug.Location = new System.Drawing.Point(720, 694);
+            this.cb_debug.Margin = new System.Windows.Forms.Padding(2);
+            this.cb_debug.Name = "cb_debug";
+            this.cb_debug.Size = new System.Drawing.Size(55, 16);
+            this.cb_debug.TabIndex = 149;
+            this.cb_debug.Text = "Debug";
+            this.cb_debug.UseVisualStyleBackColor = true;
+            // 
             // daButton1
             // 
             this.daButton1.BackColor = System.Drawing.Color.Transparent;
@@ -688,5 +699,6 @@
         private System.Windows.Forms.RadioButton rb_low;
         private System.Windows.Forms.RadioButton rb_high;
         private System.Windows.Forms.Button bt_copy_to_clipboard;
+        private System.Windows.Forms.CheckBox cb_debug;
     }
 }

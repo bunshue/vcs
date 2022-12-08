@@ -106,116 +106,10 @@ namespace Bottom_Control
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //讀取 D2000
-            IPLC_interface mitsubishi = new Mitsubishi_realize();//实例化接口--实现三菱在线访问
-            if (mitsubishi.PLC_ready)//PLC是否准备完成
-            {
-                //richTextBox1.Text += "三菱PLC ready\n";
-
-                //Button_write_select(Button.Pattern.ToString(), mitsubishi, Button);//根据按钮模式进行写入操作
-
-                richTextBox1.Text += "read_M, name = " + daButton1.PLC_Contact + ", id = " + daButton1.PLC_Address + "\n";
-
-                List<bool> data = mitsubishi.PLC_read_M_bit(daButton1.PLC_Contact, daButton1.PLC_Address);//读取状态
-
-                richTextBox1.Text += "len = " + data.Count.ToString() + ", data = " + data[0].ToString() + "\n";
-
-                string dddd = mitsubishi.PLC_read_D_register("Y", "20", numerical_format.Signed_16_Bit);
-                richTextBox1.Text += "len = " + dddd.Length.ToString() + "\t";
-                richTextBox1.Text += "data : " + dddd[0] + "\n";
-
-                string contact_point = "D";
-                string contact_address = "2000";
-                richTextBox1.Text += "\n觸點 : " + contact_point + "\t位址 : " + contact_address + "\n";
-                tb_contact_address.Text = "觸點 : " + contact_point + "\t位址 : " + contact_address;
-
-                data = mitsubishi.PLC_read_M_bit(contact_point, contact_address);
-                richTextBox1.Text += "len = " + data.Count.ToString() + ", data = " + data[0].ToString() + "\n";
-                richTextBox1.Text += "\n";
-
-                dddd = mitsubishi.PLC_read_D_register(contact_point, contact_address, numerical_format.String_32_Bit);
-
-                tb_data_read.Text = dddd;
-                tb_data_d.Text = dddd;
-
-                richTextBox1.Text += "b len = " + dddd.Length.ToString() + "\t";
-                richTextBox1.Text += "data : " + dddd + "\n";
-                richTextBox1.Text += "\n";
-                richTextBox1.Text += "data[0] : " + dddd[0].ToString("X8") + "\n";
-                richTextBox1.Text += "data[1] : " + dddd[1].ToString() + "\n";
-                richTextBox1.Text += "data[2] : " + dddd[2] + "\n";
-                richTextBox1.Text += "data[3] : " + dddd[3].ToString("X8") + "\n";
-                richTextBox1.Text += "data[4] : " + dddd[4].ToString("X8") + "\n";
-                richTextBox1.Text += "data[5] : " + dddd[5].ToString("X8") + "\n";
-                richTextBox1.Text += "data[6] : " + dddd[6].ToString("X8") + "\n";
-                richTextBox1.Text += "data[7] : " + dddd[7].ToString("X8") + "\n";
-                richTextBox1.Text += "data[8] : " + dddd[8].ToString("X8") + "\n";
-                richTextBox1.Text += "data[9] : " + dddd[9].ToString("X8") + "\n";
-                richTextBox1.Text += "data[10] : " + dddd[10].ToString("X8") + "\n";
-                richTextBox1.Text += "data[11] : " + dddd[11].ToString() + "\n";
-                richTextBox1.Text += "data[12] : " + dddd[12] + "\n";
-                richTextBox1.Text += "data[13] : " + dddd[13].ToString("X8") + "\n";
-                richTextBox1.Text += "data[14] : " + dddd[14].ToString("X8") + "\n";
-                richTextBox1.Text += "data[15] : " + dddd[15].ToString("X8") + "\n";
-                richTextBox1.Text += "data[16] : " + dddd[16].ToString("X8") + "\n";
-                richTextBox1.Text += "data[17] : " + dddd[17].ToString("X8") + "\n";
-                richTextBox1.Text += "data[18] : " + dddd[18].ToString("X8") + "\n";
-                richTextBox1.Text += "data[19] : " + dddd[19].ToString("X8") + "\n";
-                richTextBox1.Text += "\n";
-
-                int format = 0;
-                for (format = 0; format < 15; format++)
-                {
-                    dddd = mitsubishi.PLC_read_D_register(contact_point, contact_address, (numerical_format)format);
-                    richTextBox1.Text += "format = " + format.ToString() + ", len = " + dddd.Length.ToString() + "\t";
-                    richTextBox1.Text += "data : " + dddd + "\n";
-                    if (dddd.Length > 1)
-                    {
-                        int i;
-                        int len = dddd.Length;
-                        for (i = 0; i < len; i++)
-                        {
-                            richTextBox1.Text += "data[" + i.ToString() + "] = " + dddd[i].ToString() + "\n";
-                        }
-
-                    }
-                }
-            }
-            else
-            {
-                //richTextBox1.Text += "三菱PLC 不 ready\n";
-            }
-
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //讀取 Y20
-            IPLC_interface mitsubishi = new Mitsubishi_realize();//实例化接口--实现三菱在线访问
-            if (mitsubishi.PLC_ready)//PLC是否准备完成
-            {
-                //richTextBox1.Text += "三菱PLC ready\n";
-
-                richTextBox1.Text += "read_M, name = " + daButton1.PLC_Contact + ", id = " + daButton1.PLC_Address + "\n";
-
-                List<bool> data = mitsubishi.PLC_read_M_bit(daButton1.PLC_Contact, daButton1.PLC_Address);//读取状态
-
-                richTextBox1.Text += "len = " + data.Count.ToString() + ", data = " + data[0].ToString() + "\n";
-
-                string contact_point = "Y";
-                string contact_address = "20";
-                richTextBox1.Text += "\n觸點 : " + contact_point + "\t位址 : " + contact_address + "\n";
-                tb_contact_address.Text = "觸點 : " + contact_point + "\t位址 : " + contact_address;
-
-                string dddd = mitsubishi.PLC_read_D_register(contact_point, contact_address, numerical_format.Signed_16_Bit);
-                richTextBox1.Text += "len = " + dddd.Length.ToString() + "\t";
-                richTextBox1.Text += "data : " + dddd[0] + "\n";
-            }
-            else
-            {
-                //richTextBox1.Text += "三菱PLC 不 ready\n";
-            }
-
         }
 
         string read_data_from_plc_d_register(string contact_point, string contact_address)
@@ -285,39 +179,185 @@ namespace Bottom_Control
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            updata_status_data();
+            update_plc_data_status_data();
 
             draw_status();
         }
 
         private const int N = 11;
-        int y1_value = 0;
-        int[] y1_data = new int[N];
-        void updata_status_data()
+        int m10000_value = 0;
+        int m10001_value = 0;
+        int m10002_value = 0;
+        int m12000_value = 0;
+        int m12001_value = 0;
+        int m12002_value = 0;
+
+        int[] m10000_data = new int[N];
+        int[] m10001_data = new int[N];
+        int[] m10002_data = new int[N];
+        int[] m12000_data = new int[N];
+        int[] m12001_data = new int[N];
+        int[] m12002_data = new int[N];
+
+        void update_plc_data_status_data()
         {
+            int i;
+            int rrrr;
             Random r = new Random();
-            int rrrr = r.Next(0, 2);
-            //richTextBox1.Text += rrrr.ToString() + " ";
+            bool status;
 
-            bool status = get_plc_data_status();
 
-            //y1_value = rrrr;
+            //M10000
+            status = get_plc_data_status(10000);
             if (status == true)
             {
-                y1_value = 1;
-
+                m10000_value = 1;
             }
             else
             {
-                y1_value = 0;
-
+                m10000_value = 0;
             }
 
-            for (int i = 0; i < (N - 1); i++)
+            if (cb_debug.Checked == true)
             {
-                y1_data[i] = y1_data[i + 1];
+                rrrr = r.Next(0, 2);
+                //richTextBox1.Text += rrrr.ToString() + " ";
+                m10000_value = rrrr;
             }
-            y1_data[N - 1] = y1_value;
+
+            for (i = 0; i < (N - 1); i++)
+            {
+                m10000_data[i] = m10000_data[i + 1];
+            }
+            m10000_data[N - 1] = m10000_value;
+
+
+
+            //M10001
+            status = get_plc_data_status(10001);
+            if (status == true)
+            {
+                m10001_value = 1;
+            }
+            else
+            {
+                m10001_value = 0;
+            }
+
+            if (cb_debug.Checked == true)
+            {
+                rrrr = r.Next(0, 2);
+                //richTextBox1.Text += rrrr.ToString() + " ";
+                m10001_value = rrrr;
+            }
+
+            for (i = 0; i < (N - 1); i++)
+            {
+                m10001_data[i] = m10001_data[i + 1];
+            }
+            m10001_data[N - 1] = m10001_value;
+
+
+            //M10002
+            status = get_plc_data_status(10002);
+            if (status == true)
+            {
+                m10002_value = 1;
+            }
+            else
+            {
+                m10002_value = 0;
+            }
+
+            if (cb_debug.Checked == true)
+            {
+                rrrr = r.Next(0, 2);
+                //richTextBox1.Text += rrrr.ToString() + " ";
+                m10002_value = rrrr;
+            }
+
+            for (i = 0; i < (N - 1); i++)
+            {
+                m10002_data[i] = m10002_data[i + 1];
+            }
+            m10002_data[N - 1] = m10002_value;
+
+
+
+            //M12000
+            status = get_plc_data_status(12000);
+            if (status == true)
+            {
+                m12000_value = 1;
+            }
+            else
+            {
+                m12000_value = 0;
+            }
+
+            if (cb_debug.Checked == true)
+            {
+                rrrr = r.Next(0, 2);
+                //richTextBox1.Text += rrrr.ToString() + " ";
+                m12000_value = rrrr;
+            }
+
+            for (i = 0; i < (N - 1); i++)
+            {
+                m12000_data[i] = m12000_data[i + 1];
+            }
+            m12000_data[N - 1] = m12000_value;
+
+
+
+            //M12001
+            status = get_plc_data_status(12001);
+            if (status == true)
+            {
+                m12001_value = 1;
+            }
+            else
+            {
+                m12001_value = 0;
+            }
+
+            if (cb_debug.Checked == true)
+            {
+                rrrr = r.Next(0, 2);
+                //richTextBox1.Text += rrrr.ToString() + " ";
+                m12001_value = rrrr;
+            }
+
+            for (i = 0; i < (N - 1); i++)
+            {
+                m12001_data[i] = m12001_data[i + 1];
+            }
+            m12001_data[N - 1] = m12001_value;
+
+
+            //M12002
+            status = get_plc_data_status(12002);
+            if (status == true)
+            {
+                m12002_value = 1;
+            }
+            else
+            {
+                m12002_value = 0;
+            }
+
+            if (cb_debug.Checked == true)
+            {
+                rrrr = r.Next(0, 2);
+                //richTextBox1.Text += rrrr.ToString() + " ";
+                m12002_value = rrrr;
+            }
+
+            for (i = 0; i < (N - 1); i++)
+            {
+                m12002_data[i] = m12002_data[i + 1];
+            }
+            m12002_data[N - 1] = m12002_value;
         }
 
         void draw_status()
@@ -353,29 +393,77 @@ namespace Bottom_Control
             Point[] curvePoints = new Point[N];    //一維陣列內有 N 個Point
 
             int i;
+            int dd = 8;
+            //畫M10000
             for (i = 0; i < N; i++)
             {
                 curvePoints[i].X = x_st + step * i;
-                curvePoints[i].Y = H - y_st - (h / 1) * y1_data[i] - 5;
+                curvePoints[i].Y = H - y_st - (h / 7) * m10000_data[i] - 5 - (h / 7) * 5 - dd * 5;
             }
-            // Draw lines between original points to screen.
+            g.DrawLines(grayPen, curvePoints);   //畫直線
+            g.DrawString("M10000", new Font("標楷體", 15), new SolidBrush(Color.Green), new PointF(x_st - 70, H - y_st - (h / 7) * 1 - 5 - (h / 7) * 5 - dd * 5));
+
+            //畫M10001
+            for (i = 0; i < N; i++)
+            {
+                curvePoints[i].X = x_st + step * i;
+                curvePoints[i].Y = H - y_st - (h / 7) * m10001_data[i] - 5 - (h / 7) * 4 - dd * 4;
+            }
             g.DrawLines(redPen, curvePoints);   //畫直線
-            // Draw curve to screen.
-            //g.DrawCurve(redPen, curvePoints); //畫曲線
+            g.DrawString("M10001", new Font("標楷體", 15), new SolidBrush(Color.Green), new PointF(x_st - 70, H - y_st - (h / 7) * 1 - 5 - (h / 7) * 4 - dd * 4));
+
+            //畫M10002
+            for (i = 0; i < N; i++)
+            {
+                curvePoints[i].X = x_st + step * i;
+                curvePoints[i].Y = H - y_st - (h / 7) * m10002_data[i] - 5 - (h / 7) * 3 - dd * 3;
+            }
+            g.DrawLines(redPen, curvePoints);   //畫直線
+            g.DrawString("M10002", new Font("標楷體", 15), new SolidBrush(Color.Green), new PointF(x_st - 70, H - y_st - (h / 7) * 1 - 5 - (h / 7) * 3 - dd * 3));
+
+            //畫M12000
+            for (i = 0; i < N; i++)
+            {
+                curvePoints[i].X = x_st + step * i;
+                curvePoints[i].Y = H - y_st - (h / 7) * m12000_data[i] - 5 - (h / 7) * 2 - dd * 2;
+            }
+            g.DrawLines(redPen, curvePoints);   //畫直線
+            g.DrawString("M12000", new Font("標楷體", 15), new SolidBrush(Color.Green), new PointF(x_st - 70, H - y_st - (h / 7) * 1 - 5 - (h / 7) * 2 - dd * 2));
+
+            //畫M12001
+            for (i = 0; i < N; i++)
+            {
+                curvePoints[i].X = x_st + step * i;
+                curvePoints[i].Y = H - y_st - (h / 7) * m12001_data[i] - 5 - (h / 7) * 1 - dd * 1;
+            }
+            g.DrawLines(redPen, curvePoints);   //畫直線
+            g.DrawString("M12001", new Font("標楷體", 15), new SolidBrush(Color.Green), new PointF(x_st - 70, H - y_st - (h / 7) * 1 - 5 - (h / 7) * 1 - dd * 1));
+
+            //畫M12002
+            for (i = 0; i < N; i++)
+            {
+                curvePoints[i].X = x_st + step * i;
+                curvePoints[i].Y = H - y_st - (h / 7) * m12002_data[i] - 5 - (h / 7) * 0 - dd * 0;
+            }
+            g.DrawLines(redPen, curvePoints);   //畫直線
+            g.DrawString("M12002", new Font("標楷體", 15), new SolidBrush(Color.Green), new PointF(x_st - 70, H - y_st - (h / 7) * 1 - 5 - (h / 7) * 0 - dd * 0));
+
+
+
 
             pictureBox1.Image = bitmap1;
 
             g.Dispose();
         }
 
-        bool get_plc_data_status()
+        bool get_plc_data_status(int address)
         {
             //讀取 M10000 看資料是否 Ready
             IPLC_interface mitsubishi = new Mitsubishi_realize();//实例化接口--实现三菱在线访问
             if (mitsubishi.PLC_ready)//PLC是否准备完成
             {
                 //richTextBox1.Text += "三菱PLC ready\n";
-                List<bool> data = mitsubishi.PLC_read_M_bit("M", "10000");//读取状态
+                List<bool> data = mitsubishi.PLC_read_M_bit("M", address.ToString());//读取状态
                 //richTextBox1.Text += "len = " + data.Count.ToString() + ", data = " + data[0].ToString() + "\n";
 
                 if (data[0] == true)
@@ -834,7 +922,6 @@ namespace Bottom_Control
         {
             richTextBox1.Text += "設定 中斷\n";
             flag_plc_test = false;
-
         }
     }
 }

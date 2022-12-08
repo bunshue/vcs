@@ -146,12 +146,6 @@
     <Content Include="第三方控件DLL\CSkin.dll" />
     <Content Include="第三方控件DLL\CSkin.XML" />
     <Content Include="第三方控件DLL\CSScriptLibrary.dll" />
-    <Content Include="第三方控件DLL\Install_deployment.dll" />
-    <Content Include="第三方控件DLL\Install_deployment.pdb" />
-    <Content Include="第三方控件DLL\Interop.ActUtlTypeLib.dll" />
-    <Content Include="第三方控件DLL\Microsoft.Graph.Core.dll" />
-    <Content Include="第三方控件DLL\System.Buffers.dll" />
-    <Content Include="第三方控件DLL\System.Buffers.xml" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
