@@ -27,12 +27,6 @@ GLint axis = 2;
 
 int spinning = 0;
 
-void colorcube(void);
-void display(void);
-void spinCube(void);
-void mouse(int btn, int state, int x, int y);
-void keyboard(unsigned char key, int x, int y);
-
 // This function sets up the vertex arrays for the color cube and the projection matrix.
 void colorcube(void)
 {
@@ -60,7 +54,7 @@ void display(void)
 
 // This function spins the cube around the current axis by incrementing the angle of
 // rotation by 2 degrees.
-void spinCube(void)
+void idle(void)
 {
 	if (spinning)
 	{
@@ -95,6 +89,12 @@ void mouse(int btn, int state, int x, int y)
 // This is the keyboard callback function. It starts and stops spinning.
 void keyboard(unsigned char key, int x, int y)
 {
+	if (key == 27)
+	{
+		//離開視窗
+		glutDestroyWindow(glutGetWindow());
+		return;
+	}
 	if (key == 's')
 	{
 		spinning = !spinning;
@@ -115,8 +115,9 @@ int main(int argc, char** argv)
 	glutReshapeFunc(reshape0);   //設定callback function
 	//glutKeyboardFunc(keyboard0); //設定callback function
 	glutKeyboardFunc(keyboard);
-	glutIdleFunc(spinCube);
+	glutIdleFunc(idle);
 	glutMouseFunc(mouse);
+
 	glEnable(GL_DEPTH_TEST);
 	glShadeModel(GL_FLAT);
 

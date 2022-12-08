@@ -10,6 +10,8 @@
 
 void myinit(void)
 {
+    gluOrtho2D(-1.0, 1.0, -1.0, 1.0);
+
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glShadeModel(GL_FLAT);
@@ -20,17 +22,17 @@ void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
 
-    glColor4f(1.0, 1.0, 0.0, 0.75);
-    glRectf(0.0, 0.0, 0.5, 1.0);
+    glColor4f(1.0, 0.0, 0.0, 0.5); //R
+    glRectf(-0.6, -0.2, 0.6, 0.8);
 
-    glColor4f(0.0, 1.0, 1.0, 0.75);
-    glRectf(0.0, 0.0, 1.0, 0.5);
-    /*	draw colored polygons in reverse order in upper right  */
-    glColor4f(0.0, 1.0, 1.0, 0.75);
-    glRectf(0.5, 0.5, 1.0, 1.0);
+    glColor4f(0.0, 1.0, 0.0, 0.5); //G
+    glRectf(-0.8, -0.8, 0.2, 0.5);
 
-    glColor4f(1.0, 1.0, 0.0, 0.75);
-    glRectf(0.5, 0.5, 1.0, 1.0);
+    glColor4f(0.0, 0.0, 1.0, 0.5); //B
+    glRectf(-0.2, -0.8, 0.8, 0.5);
+
+    glColor4f(1.0, 0.0, 0.0, 1.0);
+    glRectf(0.33, 0.33, 0.66, 0.66);
 
     glutSwapBuffers();
 }
@@ -40,14 +42,7 @@ void reshape(int w, int h)
     glViewport(0, 0, w, h);
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    if (w <= h)
-    {
-        gluOrtho2D(0.0, 1.0, 0.0, (GLfloat)h / (GLfloat)w);
-    }
-    else
-    {
-        gluOrtho2D(0.0, (GLfloat)w / (GLfloat)h, 0.0, 1.0);
-    }
+
     glMatrixMode(GL_MODELVIEW);
 }
 

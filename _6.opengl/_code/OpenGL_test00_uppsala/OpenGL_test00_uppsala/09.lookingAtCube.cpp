@@ -3,9 +3,6 @@
 
 #include "../../Common.h"
 
-   //#include <stdlib.h>
-   //#include <GL/glut.h>
-
    // Vertices of the cube, centered at the origin.
 GLfloat vertices[][3] = { {-1.0,-1.0,-1.0}, {1.0,-1.0,-1.0}, {1.0,1.0,-1.0},
     {-1.0,1.0,-1.0}, {-1.0,-1.0,1.0}, {1.0,-1.0,1.0}, {1.0,1.0,1.0}, {-1.0,1.0,1.0} };
@@ -16,11 +13,6 @@ GLfloat colors[][3] = { {0.0,0.0,0.0}, {1.0,0.0,0.0}, {1.0,1.0,0.0}, {0.0,1.0,0.
 
 // Indices of the vertices to make up the six faces of the cube.
 GLubyte cubeIndices[24] = { 0,3,2,1, 2,3,7,6, 0,4,7,3, 1,2,6,5, 4,5,6,7, 0,1,5,4 };
-
-void colorcube(void);
-void viewMenu(int code);
-void display(void);
-void myReshape(int w, int h);
 
 // This function sets up the vertex arrays for the color cube.
 void colorcube(void)
@@ -75,7 +67,7 @@ void display(void)
 
 // This is the reshape callback function. It resets the viewport to the entire window and
 // the projection matrix to keep the cube centered in the window.
-void myReshape(int w, int h)
+void reshape(int w, int h)
 {
     glViewport(0, 0, w, h);
     glMatrixMode(GL_PROJECTION);
@@ -102,10 +94,9 @@ int main(int argc, char** argv)
     glutCreateWindow("Color Cube");	//開啟視窗 並顯示出視窗 Title
 
     glutDisplayFunc(display);   //設定callback function
-    //glutReshapeFunc(reshape0);   //設定callback function
+    glutReshapeFunc(reshape);   //設定callback function
     glutKeyboardFunc(keyboard0); //設定callback function
 
-    glutReshapeFunc(myReshape);
     glEnable(GL_DEPTH_TEST);
     colorcube();
 
@@ -130,5 +121,3 @@ int main(int argc, char** argv)
 
     return 0;
 }
-
-

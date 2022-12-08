@@ -18,7 +18,7 @@
     <ClCompile Include="..\..\Common.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
-    <ClCompile Include="11.rotatingCubeShadow.cpp">
+    <ClCompile Include="13.alpha.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>

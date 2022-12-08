@@ -7,9 +7,8 @@
  // 無用 看語法
 
 #include "../../Common.h"
-
-#include <math.h>
-#include <iostream>
+//#include <math.h>
+//#include <iostream>
 #include <strstream>
 #include <stdlib.h>
 
@@ -19,12 +18,83 @@ int maxIterations, xmin, xmax, ymin, ymax, color_size;
 int W;
 int H;
 
+/*
 void display(void);
 void gfxinit(void);
 void change_colors(int ncolors);
 GLushort zSqrPointColor(double cx, double cy);
 void interact(void);
 void calcMandelbrot();
+*/
+
+void change_colors(int ncolors)
+/* This routine changes the colormap to equally spaced colors. */
+{
+	double incr = 330.0 / ncolors, f, h, s = 1.0;
+	int ih, i;
+	GLfloat p1, p2, p3, v = 1.0;
+
+	glutSetColor(63, 1, 1, 1);
+	for (i = 64, h = 0.0; i < 64 + ncolors; i++, h += incr)
+	{
+		ih = (int)(h / 60.0);
+		f = h / 60.0 - ih;
+		p1 = v * (1 - s);
+		p2 = v * (1 - s * f);
+		p3 = v * (1 - s * (1 - f));
+		switch (ih)
+		{
+		case 0: glutSetColor(i, v, p3, p1);  break;
+		case 1: glutSetColor(i, p2, v, p1);  break;
+		case 2: glutSetColor(i, p1, v, p3);  break;
+		case 3: glutSetColor(i, p1, p2, v);  break;
+		case 4: glutSetColor(i, p3, p1, v);  break;
+		case 5: glutSetColor(i, v, p1, p2);  break;
+		}
+	}
+}
+
+GLushort zSqrPointColor(double cx, double cy)
+/* This routine determines the color to place at point (x, y) for the
+   iteration F(z) = z^2 + c. */
+{
+	GLushort i;
+	double newzx, newzy, x, y;
+
+	x = y = 0.0;
+	for (i = 0; i < maxIterations; i++)
+	{
+		newzx = x * x - y * y + cx;
+		newzy = 2 * x * y + cy;
+		if (newzx * newzx + newzy * newzy > 4) return 64 + i;
+		x = newzx;
+		y = newzy;
+	}
+	return (0);  /* Black */
+}
+
+void calcMandelbrot()
+{
+	/* This routine calculates the points to be displayed. */
+
+	double x, y;
+	int i, j;
+	GLushort* p;
+
+	dx = (maxX - minX) / (W - 1);
+	dy = (maxY - minY) / (H - 1);
+	for (j = 0, y = minY, p = points; j < H; j++, y += dy)
+	{
+		for (i = 0, x = minX; i < W; i++, x += dx, p++)
+		{
+			*p = zSqrPointColor(x, y);
+		}
+	}
+	glNewList(1, GL_COMPILE);
+	glDrawPixels(W, H, GL_COLOR_INDEX, GL_UNSIGNED_SHORT, points);
+	glEndList();
+}
+
 
 void mouse(int button, int state, int x, int y)
 {
@@ -90,37 +160,6 @@ void motion(int x, int y)
 	glFlush();
 }
 
-int main(int argc, char** argv)
-{
-	strstream title;
-
-	/* Get user input parameters for generating the Mandelbrot set. */
-
-	interact();
-
-	title << "Mandelbrot Set - " << maxIterations << " Iterations";
-
-	/* Set graphics window characteristics and open the window. */
-
-	glutInit(&argc, argv);
-	glutInitWindowSize(W, H);
-	glutInitWindowPosition(100, 50);
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_INDEX);
-	glutCreateWindow(title.str());
-
-	glutDisplayFunc(display);   //設定callback function
-	glutReshapeFunc(reshape0);   //設定callback function
-	glutKeyboardFunc(keyboard0); //設定callback function
-	glutMouseFunc(mouse);		//設定callback function
-	glutMotionFunc(motion);		//設定callback function
-
-	gfxinit();
-
-	glutMainLoop();	//開始主循環繪製
-
-	return 0;
-}
-
 void display(void)
 /* This is the callback function that gets executed every time the display
    needs to be updated.
@@ -154,52 +193,6 @@ void gfxinit()
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 }
 
-void change_colors(int ncolors)
-/* This routine changes the colormap to equally spaced colors. */
-{
-	double incr = 330.0 / ncolors, f, h, s = 1.0;
-	int ih, i;
-	GLfloat p1, p2, p3, v = 1.0;
-
-	glutSetColor(63, 1, 1, 1);
-	for (i = 64, h = 0.0; i < 64 + ncolors; i++, h += incr)
-	{
-		ih = (int)(h / 60.0);
-		f = h / 60.0 - ih;
-		p1 = v * (1 - s);
-		p2 = v * (1 - s * f);
-		p3 = v * (1 - s * (1 - f));
-		switch (ih)
-		{
-		case 0: glutSetColor(i, v, p3, p1);  break;
-		case 1: glutSetColor(i, p2, v, p1);  break;
-		case 2: glutSetColor(i, p1, v, p3);  break;
-		case 3: glutSetColor(i, p1, p2, v);  break;
-		case 4: glutSetColor(i, p3, p1, v);  break;
-		case 5: glutSetColor(i, v, p1, p2);  break;
-		}
-	}
-}
-
-GLushort zSqrPointColor(double cx, double cy)
-/* This routine determines the color to place at point (x, y) for the
-   iteration F(z) = z^2 + c. */
-{
-	GLushort i;
-	double newzx, newzy, x, y;
-
-	x = y = 0.0;
-	for (i = 0; i < maxIterations; i++)
-	{
-		newzx = x * x - y * y + cx;
-		newzy = 2 * x * y + cy;
-		if (newzx * newzx + newzy * newzy > 4) return 64 + i;
-		x = newzx;
-		y = newzy;
-	}
-	return (0);  /* Black */
-}
-
 void interact(void)
 {
 	cout << endl << "How many iterations to test for convergence?  ";
@@ -215,24 +208,35 @@ void interact(void)
 	points = (GLushort*)calloc(W * H, sizeof(GLushort));
 }
 
-void calcMandelbrot()
+int main(int argc, char** argv)
 {
-	/* This routine calculates the points to be displayed. */
+	strstream title;
 
-	double x, y;
-	int i, j;
-	GLushort* p;
+	/* Get user input parameters for generating the Mandelbrot set. */
 
-	dx = (maxX - minX) / (W - 1);
-	dy = (maxY - minY) / (H - 1);
-	for (j = 0, y = minY, p = points; j < H; j++, y += dy)
-	{
-		for (i = 0, x = minX; i < W; i++, x += dx, p++)
-		{
-			*p = zSqrPointColor(x, y);
-		}
-	}
-	glNewList(1, GL_COMPILE);
-	glDrawPixels(W, H, GL_COLOR_INDEX, GL_UNSIGNED_SHORT, points);
-	glEndList();
+	interact();
+
+	title << "Mandelbrot Set - " << maxIterations << " Iterations";
+
+	/* Set graphics window characteristics and open the window. */
+
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_SINGLE | GLUT_INDEX);
+
+	glutInitWindowSize(W, H);
+	glutInitWindowPosition(100, 50);
+
+	glutCreateWindow(title.str());
+
+	glutDisplayFunc(display);   //設定callback function
+	glutReshapeFunc(reshape0);   //設定callback function
+	glutKeyboardFunc(keyboard0); //設定callback function
+	glutMouseFunc(mouse);		//設定callback function
+	glutMotionFunc(motion);		//設定callback function
+
+	gfxinit();
+
+	glutMainLoop();	//開始主循環繪製
+
+	return 0;
 }

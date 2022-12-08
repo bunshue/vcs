@@ -29,6 +29,12 @@ namespace Bottom_Control
         {
             this.plC_Open_Time1.Enabled = true;
             this.plC_Open_Time1.Start();
+
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
             lb_main_mesg1.Visible = true;
             lb_main_mesg1.Text = "";
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -36,6 +42,69 @@ namespace Bottom_Control
             bt_copy_to_clipboard.BackgroundImage = Properties.Resources.clipboard;
             bt_copy_to_clipboard.BackgroundImageLayout = ImageLayout.Zoom;
             cb_random.Checked = true;
+
+
+            int x_st = 10;
+            int y_st = 15;
+            int dx = 400;
+            int dy = 30;
+            int w = 30;
+            int h = 30;
+            pbx_m10000.Size = new Size(w, h);
+            pbx_m10001.Size = new Size(w, h);
+            pbx_m10002.Size = new Size(w, h);
+            pbx_m12000.Size = new Size(w, h);
+            pbx_m12001.Size = new Size(w, h);
+            pbx_m12002.Size = new Size(w, h);
+            pbx_m10000.Location = new Point(x_st + dx * 0, y_st + dy * 0 - 5);
+            pbx_m10001.Location = new Point(x_st + dx * 0, y_st + dy * 1 - 5);
+            pbx_m10002.Location = new Point(x_st + dx * 0, y_st + dy * 2 - 5);
+            pbx_m12000.Location = new Point(x_st + dx * 1, y_st + dy * 0 - 5);
+            pbx_m12001.Location = new Point(x_st + dx * 1, y_st + dy * 1 - 5);
+            pbx_m12002.Location = new Point(x_st + dx * 1, y_st + dy * 2 - 5);
+            pbx_m10000.BackgroundImageLayout = ImageLayout.Zoom;
+            pbx_m10001.BackgroundImageLayout = ImageLayout.Zoom;
+            pbx_m10002.BackgroundImageLayout = ImageLayout.Zoom;
+            pbx_m12000.BackgroundImageLayout = ImageLayout.Zoom;
+            pbx_m12001.BackgroundImageLayout = ImageLayout.Zoom;
+            pbx_m12002.BackgroundImageLayout = ImageLayout.Zoom;
+            pbx_m10000.BackgroundImage = Properties.Resources.ball_gray;
+            pbx_m10001.BackgroundImage = Properties.Resources.ball_gray;
+            pbx_m10002.BackgroundImage = Properties.Resources.ball_gray;
+            pbx_m12000.BackgroundImage = Properties.Resources.ball_gray;
+            pbx_m12001.BackgroundImage = Properties.Resources.ball_gray;
+            pbx_m12002.BackgroundImage = Properties.Resources.ball_gray;
+
+            x_st = 40;
+            lb_plc_pc0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            lb_plc_pc1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            lb_plc_pc2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            lb_plc_pc3a.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            lb_plc_pc4a.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            lb_plc_pc3b.Location = new Point(x_st + dx * 0 + 160, y_st + dy * 3);
+            lb_plc_pc4b.Location = new Point(x_st + dx * 0 + 160, y_st + dy * 4);
+            lb_pc_plc0.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            lb_pc_plc1.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            lb_pc_plc2.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            lb_pc_plc3a.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            lb_pc_plc4a.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            lb_pc_plc3b.Location = new Point(x_st + dx * 1 + 160, y_st + dy * 3);
+            lb_pc_plc4b.Location = new Point(x_st + dx * 1 + 160, y_st + dy * 4);
+
+            lb_plc_pc0.Text = "M10000 PLC -> PC 動作要求";
+            lb_plc_pc1.Text = "M10001 PLC -> PC 確認完成";
+            lb_plc_pc2.Text = "M10002 PLC -> PC 收到動作完成";
+            lb_pc_plc0.Text = "M12000 PC -> PLC 收到動作要求";
+            lb_pc_plc1.Text = "M12001 PC -> PLC 確認開始";
+            lb_pc_plc2.Text = "M12002 PC -> PLC 動作完成";
+            lb_plc_pc3a.Text = "ID資料";
+            lb_plc_pc4a.Text = "收到結果D2010";
+            lb_plc_pc3b.Text = "N2201001A0001";
+            lb_plc_pc4b.Text = "AABB";
+            lb_pc_plc3a.Text = "ID資料";
+            lb_pc_plc4a.Text = "檢測結果D8010";
+            lb_pc_plc3b.Text = "N2201001A0001";
+            lb_pc_plc4b.Text = "CCDD";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -206,7 +275,6 @@ namespace Bottom_Control
             Random r = new Random();
             bool status;
 
-
             //M10000
             status = get_plc_data_status(10000);
             if (status == true)
@@ -221,7 +289,6 @@ namespace Bottom_Control
             if (cb_debug.Checked == true)
             {
                 rrrr = r.Next(0, 2);
-                //richTextBox1.Text += rrrr.ToString() + " ";
                 m10000_value = rrrr;
             }
 
@@ -231,7 +298,14 @@ namespace Bottom_Control
             }
             m10000_data[N - 1] = m10000_value;
 
-
+            if (m10000_value == 1)
+            {
+                pbx_m10000.BackgroundImage = Properties.Resources.ball_green;
+            }
+            else
+            {
+                pbx_m10000.BackgroundImage = Properties.Resources.ball_gray;
+            }
 
             //M10001
             status = get_plc_data_status(10001);
@@ -247,7 +321,6 @@ namespace Bottom_Control
             if (cb_debug.Checked == true)
             {
                 rrrr = r.Next(0, 2);
-                //richTextBox1.Text += rrrr.ToString() + " ";
                 m10001_value = rrrr;
             }
 
@@ -257,6 +330,14 @@ namespace Bottom_Control
             }
             m10001_data[N - 1] = m10001_value;
 
+            if (m10001_value == 1)
+            {
+                pbx_m10001.BackgroundImage = Properties.Resources.ball_green;
+            }
+            else
+            {
+                pbx_m10001.BackgroundImage = Properties.Resources.ball_gray;
+            }
 
             //M10002
             status = get_plc_data_status(10002);
@@ -272,7 +353,6 @@ namespace Bottom_Control
             if (cb_debug.Checked == true)
             {
                 rrrr = r.Next(0, 2);
-                //richTextBox1.Text += rrrr.ToString() + " ";
                 m10002_value = rrrr;
             }
 
@@ -282,7 +362,14 @@ namespace Bottom_Control
             }
             m10002_data[N - 1] = m10002_value;
 
-
+            if (m10002_value == 1)
+            {
+                pbx_m10002.BackgroundImage = Properties.Resources.ball_green;
+            }
+            else
+            {
+                pbx_m10002.BackgroundImage = Properties.Resources.ball_gray;
+            }
 
             //M12000
             status = get_plc_data_status(12000);
@@ -298,7 +385,6 @@ namespace Bottom_Control
             if (cb_debug.Checked == true)
             {
                 rrrr = r.Next(0, 2);
-                //richTextBox1.Text += rrrr.ToString() + " ";
                 m12000_value = rrrr;
             }
 
@@ -308,7 +394,14 @@ namespace Bottom_Control
             }
             m12000_data[N - 1] = m12000_value;
 
-
+            if (m12000_value == 1)
+            {
+                pbx_m12000.BackgroundImage = Properties.Resources.ball_green;
+            }
+            else
+            {
+                pbx_m12000.BackgroundImage = Properties.Resources.ball_gray;
+            }
 
             //M12001
             status = get_plc_data_status(12001);
@@ -324,7 +417,6 @@ namespace Bottom_Control
             if (cb_debug.Checked == true)
             {
                 rrrr = r.Next(0, 2);
-                //richTextBox1.Text += rrrr.ToString() + " ";
                 m12001_value = rrrr;
             }
 
@@ -334,6 +426,14 @@ namespace Bottom_Control
             }
             m12001_data[N - 1] = m12001_value;
 
+            if (m12001_value == 1)
+            {
+                pbx_m12001.BackgroundImage = Properties.Resources.ball_green;
+            }
+            else
+            {
+                pbx_m12001.BackgroundImage = Properties.Resources.ball_gray;
+            }
 
             //M12002
             status = get_plc_data_status(12002);
@@ -349,7 +449,6 @@ namespace Bottom_Control
             if (cb_debug.Checked == true)
             {
                 rrrr = r.Next(0, 2);
-                //richTextBox1.Text += rrrr.ToString() + " ";
                 m12002_value = rrrr;
             }
 
@@ -358,6 +457,15 @@ namespace Bottom_Control
                 m12002_data[i] = m12002_data[i + 1];
             }
             m12002_data[N - 1] = m12002_value;
+
+            if (m12002_value == 1)
+            {
+                pbx_m12002.BackgroundImage = Properties.Resources.ball_green;
+            }
+            else
+            {
+                pbx_m12002.BackgroundImage = Properties.Resources.ball_gray;
+            }
         }
 
         void draw_status()

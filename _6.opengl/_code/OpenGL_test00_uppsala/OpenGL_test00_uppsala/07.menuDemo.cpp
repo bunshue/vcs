@@ -9,15 +9,6 @@
 
 #define SIZE 300
 
-void instructions();
-void gfxinit();
-void display(void);
-void colorMenu(int id);
-void sizeMenu(int id);
-void mainMenu(int id);
-void mouseFunc(int button, int state, int x, int y);
-void reshape(GLsizei w, GLsizei h);
-
 int pointsChosen, x_st, y_st, numberOfLists = 0;
 GLsizei ysize;
 
@@ -36,63 +27,8 @@ void gfxinit()
     ysize = SIZE - 1;
 }
 
-void instructions()
-/* This function displays the instructions to the user. */
-{
-    cout << "This is a simple program to demonstrate menus in OpenGL and glut." << endl;
-    cout << "Press the right mouse button over the graphics window to display the menu." << endl;
-    cout << "Click the left mouse button twice to define two endpoints of a line segment" << endl;
-    cout << "to be drawn." << endl;
-}
-
-void display(void)
-/* This is the callback function that gets executed every time the display
-   needs to be updated. */
-{
-    int i;
-
-    glClear(GL_COLOR_BUFFER_BIT);
-    for (i = 1; i <= numberOfLists; i++)
-    {
-        glCallList(i);
-    }
-    glFlush();
-}
-
-void mainMenu(int id)
-/* This is the callback function for the main menu. */
-{
-    double lineWidth, color[4];
-
-    switch (id)
-    {
-    case 1: /* reset default values */
-        glNewList(++numberOfLists, GL_COMPILE_AND_EXECUTE);
-        glColor3d(0.0, 0.0, 0.0);
-        glLineWidth(1.0);
-        glEndList();
-        break;
-    case 2: /* clear the screen */
-        glDeleteLists(1, numberOfLists);
-        numberOfLists = 0;
-        glGetDoublev(GL_LINE_WIDTH, &lineWidth);
-        glGetDoublev(GL_CURRENT_COLOR, color);
-        glNewList(++numberOfLists, GL_COMPILE);
-        glColor4dv(color);
-        glLineWidth(lineWidth);
-        glEndList();
-        glutPostRedisplay();
-        break;
-    case 3: /* exit the program */
-        exit(0);
-        break;
-    default: /* in case none of the above occur */
-        break;
-    }
-}
-
-void colorMenu(int id)
 /* This is the callback function for the color menu. */
+void colorMenu(int id)
 {
     glNewList(++numberOfLists, GL_COMPILE_AND_EXECUTE);
     switch (id)
@@ -137,6 +73,84 @@ void sizeMenu(int id)
     glEndList();
 }
 
+void mainMenu(int id)
+/* This is the callback function for the main menu. */
+{
+    double lineWidth, color[4];
+
+    switch (id)
+    {
+    case 1: /* reset default values */
+        glNewList(++numberOfLists, GL_COMPILE_AND_EXECUTE);
+        glColor3d(0.0, 0.0, 0.0);
+        glLineWidth(1.0);
+        glEndList();
+        break;
+    case 2: /* clear the screen */
+        glDeleteLists(1, numberOfLists);
+        numberOfLists = 0;
+        glGetDoublev(GL_LINE_WIDTH, &lineWidth);
+        glGetDoublev(GL_CURRENT_COLOR, color);
+        glNewList(++numberOfLists, GL_COMPILE);
+        glColor4dv(color);
+        glLineWidth(lineWidth);
+        glEndList();
+        glutPostRedisplay();
+        break;
+    case 3: /* exit the program */
+        exit(0);
+        break;
+    default: /* in case none of the above occur */
+        break;
+    }
+}
+
+void initMenus()
+{
+    int color_menu, size_menu;
+
+    /* Create the menu structure and attach it to the right mouse button. */
+    color_menu = glutCreateMenu(colorMenu);
+    glutAddMenuEntry("Red", 1);
+    glutAddMenuEntry("Green", 2);
+    glutAddMenuEntry("Blue", 3);
+    glutAddMenuEntry("Black", 4);
+    size_menu = glutCreateMenu(sizeMenu);
+    glutAddMenuEntry("1", 1);
+    glutAddMenuEntry("2", 2);
+    glutAddMenuEntry("3", 3);
+    glutCreateMenu(mainMenu);
+    glutAddSubMenu("Color", color_menu);
+    glutAddSubMenu("Size", size_menu);
+    glutAddMenuEntry("Reset defaults", 1);
+    glutAddMenuEntry("Clear window", 2);
+    glutAddMenuEntry("Exit", 3);
+    glutAttachMenu(GLUT_RIGHT_BUTTON);
+}
+
+void instructions()
+/* This function displays the instructions to the user. */
+{
+    cout << "This is a simple program to demonstrate menus in OpenGL and glut." << endl;
+    cout << "Press the right mouse button over the graphics window to display the menu." << endl;
+    cout << "Click the left mouse button twice to define two endpoints of a line segment" << endl;
+    cout << "to be drawn." << endl;
+}
+
+void display(void)
+/* This is the callback function that gets executed every time the display
+   needs to be updated. */
+{
+    int i;
+
+    glClear(GL_COLOR_BUFFER_BIT);
+    for (i = 1; i <= numberOfLists; i++)
+    {
+        glCallList(i);
+    }
+    glFlush();
+}
+
 void mouseFunc(int button, int state, int x, int y)
 /* This is the callback function that gets executed when a mouse button is pressed. */
 {
@@ -177,16 +191,16 @@ void reshape(GLsizei w, GLsizei h)
 
 int main(int argc, char** argv)
 {
-    int color_menu, size_menu;
-
     instructions();
 
     /* Set graphics window parameters. */
 
     glutInit(&argc, argv);
-    glutInitWindowSize(SIZE, SIZE);
-    glutInitWindowPosition(200, 150);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+
+    glutInitWindowSize(SIZE, SIZE);     // 設定視窗大小
+    glutInitWindowPosition(1100, 200);  // 設定視窗位置
+
     glutCreateWindow("Menu Demonstration");
 
     /* Register all callback functions. */
@@ -199,28 +213,10 @@ int main(int argc, char** argv)
 
     glutMouseFunc(mouseFunc);
 
-    /* Create the menu structure and attach it to the right mouse button. */
-
-    color_menu = glutCreateMenu(colorMenu);
-    glutAddMenuEntry("Red", 1);
-    glutAddMenuEntry("Green", 2);
-    glutAddMenuEntry("Blue", 3);
-    glutAddMenuEntry("Black", 4);
-    size_menu = glutCreateMenu(sizeMenu);
-    glutAddMenuEntry("1", 1);
-    glutAddMenuEntry("2", 2);
-    glutAddMenuEntry("3", 3);
-    glutCreateMenu(mainMenu);
-    glutAddSubMenu("Color", color_menu);
-    glutAddSubMenu("Size", size_menu);
-    glutAddMenuEntry("Reset defaults", 1);
-    glutAddMenuEntry("Clear window", 2);
-    glutAddMenuEntry("Exit", 3);
-    glutAttachMenu(GLUT_RIGHT_BUTTON);
-
     /* Initialize the graphics and enter the event loop. */
-
     gfxinit();
+
+    initMenus();        //設定表單按鈕
 
     glutMainLoop();	//開始主循環繪製
 

@@ -16,13 +16,6 @@
 
 #define BUFSIZE 512
 
-void myinit(void);
-void drawSquares(GLenum mode);
-void processHits(GLint hits, GLuint buffer[]);
-void pickSquares(int button, int state, int x, int y);
-void display(void);
-void reshape(int w, int h);
-
 int board[3][3];	/*  amount of color for each square	*/
 
 /*	Clear color value for every square on the board	    */
@@ -52,7 +45,10 @@ void drawSquares(GLenum mode)
 
     for (i = 0; i < 3; i++)
     {
-        if (mode == GL_SELECT) glLoadName(i);
+        if (mode == GL_SELECT)
+        {
+            glLoadName(i);
+        }
         for (j = 0; j < 3; j++)
         {
             if (mode == GL_SELECT)
@@ -69,8 +65,7 @@ void drawSquares(GLenum mode)
     }
 }
 
-/*  processHits() prints out the contents of the
- *  selection array. */
+// processHits() prints out the contents of the selection array.
 void processHits(GLint hits, GLuint buffer[])
 {
     GLint i;
@@ -110,11 +105,9 @@ void processHits(GLint hits, GLuint buffer[])
     }
 }
 
-/*  pickSquares() sets up selection mode, name stack,
- *  and projection matrix for picking.  Then the
- *  objects are drawn.
- */
-void pickSquares(int button, int state, int x, int y)
+/*  mouse() sets up selection mode, name stack,
+ *  and projection matrix for picking.  Then the objects are drawn. */
+void mouse(int button, int state, int x, int y)
 {
     GLuint selectBuf[BUFSIZE];
     GLint hits;
@@ -166,9 +159,11 @@ int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-    glutInitWindowPosition(100, 100);
-    glutInitWindowSize(300, 300);
-    glutCreateWindow(argv[0]);
+
+    glutInitWindowSize(600, 600);       // 設定視窗大小
+    glutInitWindowPosition(1100, 200);  // 設定視窗位置
+
+    glutCreateWindow("點選方塊");
 
     myinit();
 
@@ -176,7 +171,7 @@ int main(int argc, char** argv)
     glutReshapeFunc(reshape);   //設定callback function
     glutKeyboardFunc(keyboard0); //設定callback function
 
-    glutMouseFunc(pickSquares);
+    glutMouseFunc(mouse);		//設定callback function
 
     glutMainLoop();	//開始主循環繪製
 

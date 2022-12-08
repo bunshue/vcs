@@ -23,13 +23,6 @@ GLint axis = 2;                     /* initial axis of rotation */
 GLdouble viewer[] = { 0.0, 0.0, 5.0 }; /* initial viewer location  */
 bool rotating = true;               /* rotating initially on    */
 
-void colorcube(void);
-void display(void);
-void spinCube(void);
-void mouse(int btn, int state, int x, int y);
-void keys(unsigned char key, int x, int y);
-void myReshape(int w, int h);
-
 // This function sets up the vertex arrays for the color cube.
 void colorcube(void)
 {
@@ -62,7 +55,7 @@ void display(void)
 }
 
 /* This function is the idle callback. It spins the cube 2 degrees about the selected axis. */
-void spinCube(void)
+void idle(void)
 {
 	if (rotating)
 	{
@@ -95,8 +88,14 @@ void mouse(int btn, int state, int x, int y)
 
 /* This is the keyboard callback function. Keys change the viewer's position as well as turn
    rotation on and off. */
-void keys(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int x, int y)
 {
+	if (key == 27)
+	{
+		//離開視窗
+		glutDestroyWindow(glutGetWindow());
+		return;
+	}
 	if (key == 'x')
 	{
 		viewer[0] -= 1.0;
@@ -129,7 +128,7 @@ void keys(unsigned char key, int x, int y)
 }
 
 /* This is the reshape callback function. It produces a perspective projection of the cube. */
-void myReshape(int w, int h)
+void reshape(int w, int h)
 {
 	glViewport(0, 0, w, h);
 	glMatrixMode(GL_PROJECTION);
@@ -149,13 +148,10 @@ int main(int argc, char** argv)
 	glutCreateWindow("colorcube");	//開啟視窗 並顯示出視窗 Title
 
 	glutDisplayFunc(display);   //設定callback function
-	//glutReshapeFunc(reshape0);   //設定callback function
-	//glutKeyboardFunc(keyboard0); //設定callback function
-
-	glutReshapeFunc(myReshape);
-	glutIdleFunc(spinCube);
+	glutReshapeFunc(reshape);	//設定callback function
+	glutKeyboardFunc(keyboard);	//設定callback function
+	glutIdleFunc(idle);         //設定callback function, 利用idle事件進行重畫
 	glutMouseFunc(mouse);
-	glutKeyboardFunc(keys);
 
 	glEnable(GL_DEPTH_TEST);
 	glShadeModel(GL_FLAT);

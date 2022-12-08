@@ -296,6 +296,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="img\clipboard.png" />
+    <None Include="img\ball\ball_blue.png" />
+    <None Include="img\ball\ball_gray.png" />
+    <None Include="img\ball\ball_green.png" />
+    <None Include="img\ball\ball_green2.png" />
+    <None Include="img\ball\ball_orange.png" />
+    <None Include="img\ball\ball_purple.png" />
+    <None Include="img\ball\ball_red.png" />
+    <None Include="img\ball\ball_red2.png" />
+    <None Include="img\ball\ball_yellow.png" />
     <Content Include="第三方控件DLL\CSkin.dll" />
     <Content Include="第三方控件DLL\CSkin.XML" />
     <Content Include="第三方控件DLL\CSScriptLibrary.dll" />

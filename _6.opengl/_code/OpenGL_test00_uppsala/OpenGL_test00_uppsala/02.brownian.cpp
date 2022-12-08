@@ -18,9 +18,9 @@ point points[POINTS];
 int Arand, Nrand;
 double GaussAdd, GaussFac, winLimit;
 
-void InitGauss(int seed)
 /* Routine for initializing the Gaussian random number generator. This is an
  * implementation of algorithm InitGauss on page 77 of "The Science of Fractal Images".   */
+void InitGauss(int seed)
 {
     Nrand = 4;
     Arand = RANDMAX;
@@ -29,20 +29,22 @@ void InitGauss(int seed)
     SEED(seed);
 }
 
-double Gauss()
 /* Routine to generate a Gaussian random number. This is an implementation of
  * algorithm Gauss on page 77 of "The Science of Fractal Images."  */
+double Gauss()
 {
     double sum;
     int i;
-
     sum = 0.0;
-    for (i = 1; i <= Nrand; i++) sum += (double)RANDNUM();
+    for (i = 1; i <= Nrand; i++)
+    {
+        sum += (double)RANDNUM();
+    }
     return (GaussFac * sum - GaussAdd);
 }
 
+//This is the routine that generates the image to be displayed.
 void gfxinit()
-/* This is the routine that generates the image to be displayed. */
 {
     int i;
 
@@ -53,7 +55,10 @@ void gfxinit()
     glColor3f(0.0, 0.0, 0.0);         /* Draw in black.                     */
     glNewList(1, GL_COMPILE);
     glBegin(GL_LINE_STRIP);        /* Draw a line defined by some points.*/
-    for (i = 0; i < POINTS; i++) glVertex2fv(points[i]);
+    for (i = 0; i < POINTS; i++)
+    {
+        glVertex2fv(points[i]);
+    }
     glEnd();
     glEndList();
 }

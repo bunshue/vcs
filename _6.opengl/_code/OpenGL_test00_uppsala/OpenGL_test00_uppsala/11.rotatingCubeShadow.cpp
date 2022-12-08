@@ -29,13 +29,6 @@ GLfloat light[3] = { 0.0, 10.0, 0.0 }; /* position of light            */
 GLfloat m[16];                       /* shadow transformation matrix */
 bool rotating = false;               /* rotating initially off       */
 
-void colorcube(void);
-void display(void);
-void spinCube(void);
-void mouse(int btn, int state, int x, int y);
-void keys(unsigned char key, int x, int y);
-void myReshape(int w, int h);
-
 // This function sets up the vertex arrays for the color cube and initializes other graphics parameters.
 void colorcube(void)
 {
@@ -53,7 +46,7 @@ void colorcube(void)
 		m[i] = 0.0;   // set up shadow projection matrix
 	}
 	m[0] = m[5] = m[10] = 1.0;
-	m[7] = -1.0 / light[1];
+	m[7] = (GLfloat)(-1.0 / light[1]);
 }
 
 // This function is the display callback. It draws the cube from the current viewing point.
@@ -94,7 +87,7 @@ void display(void)
 }
 
 /* This function is the idle callback. It spins the cube 2 degrees about the selected axis. */
-void spinCube(void)
+void idle(void)
 {
 	if (rotating)
 	{
@@ -130,8 +123,13 @@ void mouse(int btn, int state, int x, int y)
 
 /* This is the keyboard callback function. Keys change the viewer's position as well as turn
    rotation on and off. */
-void keys(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
+	if (key == 27)
+	{
+		glutDestroyWindow(glutGetWindow());
+		return;
+	}
 	if (key == 'x')
 	{
 		viewer[0] -= 1.0;
@@ -164,7 +162,8 @@ void keys(unsigned char key, int x, int y)
 }
 
 /* This is the reshape callback function. It produces a perspective projection of the cube. */
-void myReshape(int w, int h)
+// 窗口大小變化回調函數
+void reshape(int w, int h)
 {
 	glViewport(0, 0, w, h);
 	glMatrixMode(GL_PROJECTION);
@@ -184,14 +183,13 @@ int main(int argc, char** argv)
 	glutCreateWindow("Color Cube with Shadow");	//開啟視窗 並顯示出視窗 Title
 
 	glutDisplayFunc(display);   //設定callback function
-	//glutReshapeFunc(reshape0);   //設定callback function
-	//glutKeyboardFunc(keyboard0); //設定callback function
-	glutReshapeFunc(myReshape);
-	glutKeyboardFunc(keys);
-	glutMouseFunc(mouse);
-	glutIdleFunc(spinCube);
+	glutReshapeFunc(reshape);   //設定callback function
+	glutKeyboardFunc(keyboard); //設定callback function
+	glutMouseFunc(mouse);		//設定callback function
+	glutIdleFunc(idle);			//設定callback function
 
 	glEnable(GL_DEPTH_TEST);
+
 	colorcube();
 
 	glutMainLoop();	//開始主循環繪製

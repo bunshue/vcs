@@ -86,6 +86,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAPLC_Time.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,6 +100,24 @@
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
     <Compile Include="PLC.cs" />
+    <Compile Include="PLC参数设置界面\ButtonBitForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PLC参数设置界面\ButtonBitForm1.Designer.cs">
+      <DependentUpon>ButtonBitForm1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PLC参数设置界面\ComboxForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PLC参数设置界面\ComboxForm1.Designer.cs">
+      <DependentUpon>ComboxForm1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PLC参数设置界面\TextboxDForm1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PLC参数设置界面\TextboxDForm1.Designer.cs">
+      <DependentUpon>TextboxDForm1.cs</DependentUpon>
+    </Compile>
     <Compile Include="PLC通讯协议\IPLC_interface.cs" />
     <Compile Include="PLC通讯协议\Mitsubishi_realize.cs" />
     <Compile Include="PLC通讯协议\MODBUD_TCP.cs" />
@@ -109,6 +128,14 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Public_Class.cs" />
+    <Compile Include="二维码生成\IhatetheqrcodeCreate.cs" />
+    <Compile Include="控件类基\Doughnut_Base.cs" />
+    <Compile Include="控件类基\DataGridViewPLC_base.cs" />
+    <Compile Include="控件类基\Button_base.cs" />
+    <Compile Include="控件类基\Combox_base.cs" />
+    <Compile Include="控件类基\Flicker_base.cs" />
+    <Compile Include="控件类基\Histogram_base.cs" />
+    <Compile Include="控件类基\TextBox_base.cs" />
     <Compile Include="设置控件\PLC_Open_Time.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -117,6 +144,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PLC参数设置界面\ButtonBitForm1.resx">
+      <DependentUpon>ButtonBitForm1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PLC参数设置界面\ComboxForm1.resx">
+      <DependentUpon>ComboxForm1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PLC参数设置界面\TextboxDForm1.resx">
+      <DependentUpon>TextboxDForm1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -138,6 +174,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="第三方控件DLL\快速访问 - 快捷方式.lnk" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -146,6 +183,17 @@
     <Content Include="第三方控件DLL\CSkin.dll" />
     <Content Include="第三方控件DLL\CSkin.XML" />
     <Content Include="第三方控件DLL\CSScriptLibrary.dll" />
+    <Content Include="第三方控件DLL\HslCommunication.dll" />
+    <Content Include="第三方控件DLL\HZH_Controls.dll" />
+    <Content Include="第三方控件DLL\HZH_Controls.pdb" />
+    <Content Include="第三方控件DLL\Install_deployment.dll" />
+    <Content Include="第三方控件DLL\Install_deployment.pdb" />
+    <Content Include="第三方控件DLL\Interop.ActUtlTypeLib.dll" />
+    <Content Include="第三方控件DLL\Microsoft.Graph.Core.dll" />
+    <Content Include="第三方控件DLL\SunnyUI.dll" />
+    <Content Include="第三方控件DLL\System.Buffers.dll" />
+    <Content Include="第三方控件DLL\System.Buffers.xml" />
+    <Content Include="第三方控件DLL\UI_Library_da.dll" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">

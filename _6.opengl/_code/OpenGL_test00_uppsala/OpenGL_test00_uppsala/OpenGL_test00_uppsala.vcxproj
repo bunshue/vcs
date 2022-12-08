@@ -20,7 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Common.cpp" />
-    <ClCompile Include="11.rotatingCubeShadow.cpp" />
+    <ClCompile Include="13.alpha.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

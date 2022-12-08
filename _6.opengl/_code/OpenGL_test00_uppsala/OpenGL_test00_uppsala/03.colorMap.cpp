@@ -4,14 +4,10 @@
 
 #include "../../Common.h"
 
- //#include <iostream>
- //#include <stdlib.h>
- //#include <GL/glut.h>
+#define SIZE 600
 
-#define SIZE 300
-
+ /* This is the routine that initializes some graphics parameters. */
 void gfxinit()
-/* This is the routine that initializes some graphics parameters. */
 {
     int i, index = 0;
 
@@ -55,10 +51,8 @@ void gfxinit()
     glEndList();
 }
 
+// This is the callback function that gets executed every time the display needs to be updated.
 void display(void)
-/* This is the callback function that gets executed every time the display
-   needs to be updated.
-*/
 {
     glClear(GL_COLOR_BUFFER_BIT);
     glCallList(1);
@@ -70,9 +64,11 @@ int main(int argc, char** argv)
     /* Set graphics window parameters. */
 
     glutInit(&argc, argv);
-    glutInitWindowSize(SIZE, SIZE);
-    glutInitWindowPosition(200, 150);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_INDEX);
+
+    glutInitWindowSize(SIZE, SIZE);     // 設定視窗大小
+    glutInitWindowPosition(1100, 200);  // 設定視窗位置
+
     glutCreateWindow("Color Map");
 
     glutDisplayFunc(display);   //設定callback function
@@ -87,4 +83,3 @@ int main(int argc, char** argv)
 
     return 0;
 }
-

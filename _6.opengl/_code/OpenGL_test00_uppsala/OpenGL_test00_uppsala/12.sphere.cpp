@@ -19,17 +19,9 @@ static GLfloat theta[] = { 0.0,0.0,0.0 };
 int n;
 int mode;
 
-void triangle(point a, point b, point c);
-void normal(point p);
-void divide_triangle(point a, point b, point c, int m);
-void tetrahedron(int m);
-void display(void);
-void myReshape(int w, int h);
-void myinit();
-
-void triangle(point a, point b, point c)
 /* display one triangle using a line loop for wire frame, a single
 normal for constant shading, or three normals for interpolative shading */
+void triangle(point a, point b, point c)
 {
     if (mode == 0)
     {
@@ -58,8 +50,8 @@ normal for constant shading, or three normals for interpolative shading */
     glEnd();
 }
 
-void normal(point p)
 /* normalize a vector */
+void normal(point p)
 {
     double d = 0.0;
     int i;
@@ -77,9 +69,9 @@ void normal(point p)
     }
 }
 
-void divide_triangle(point a, point b, point c, int m)
 /* triangle subdivision using vertex numbers
 righthand rule applied to create outward pointing faces */
+void divide_triangle(point a, point b, point c, int m)
 {
     point v1, v2, v3;
     int j;
@@ -111,8 +103,8 @@ righthand rule applied to create outward pointing faces */
     }
 }
 
-void tetrahedron(int m)
 /* Apply triangle subdivision to faces of tetrahedron */
+void tetrahedron(int m)
 {
     divide_triangle(v[0], v[1], v[2], m);
     divide_triangle(v[3], v[2], v[1], m);
@@ -120,8 +112,8 @@ void tetrahedron(int m)
     divide_triangle(v[0], v[2], v[3], m);
 }
 
-void display(void)
 /* Displays all three modes, side by side */
+void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
@@ -136,7 +128,7 @@ void display(void)
     glutSwapBuffers();
 }
 
-void myReshape(int w, int h)
+void reshape(int w, int h)
 {
     glViewport(0, 0, w, h);
     glMatrixMode(GL_PROJECTION);
@@ -200,7 +192,7 @@ int main(int argc, char** argv)
     myinit();
 
     glutDisplayFunc(display);   //設定callback function
-    //glutReshapeFunc(reshape0);   //設定callback function
+    glutReshapeFunc(reshape);   //設定callback function
     glutKeyboardFunc(keyboard0); //設定callback function
 
     glutMainLoop();	//開始主循環繪製

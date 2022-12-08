@@ -1,3 +1,5 @@
+//滑鼠框選四邊形
+
 #include "../../Common.h"
 
 #define RED 110
@@ -7,15 +9,8 @@
 int transp_color;
 GLint pt1x = 0, pt2x = 0, pt1y = 0, pt2y = 0;
 
-void instructions();
-void gfxinit();
-void display(void);
-void mouseFunc(int button, int state, int x, int y);
-void mouseMoveFunc(int x, int y);
-
+// This function presents the instructions on how to use this program to the user.
 void instructions()
-/* This function presents the instructions on how to use this program to the
-   user. */
 {
 	printf("\nInstructions on using the rubberband program:\n");
 	printf("   To create a rubberbanded area, press and drag the LEFT mouse button.\n");
@@ -23,11 +18,10 @@ void instructions()
 	printf("   To quit the program, choose CLOSE or EXIT from the window menu.\n");
 }
 
+// This routine handles the initialization of the graphics.
 void gfxinit()
-/* This routine handles the initialization of the graphics. */
 {
 	/* Set window for normal plane. */
-
 	glutSetColor(RED, 1.0, 0.0, 0.0);
 	glClearIndex(RED);
 	glMatrixMode(GL_PROJECTION);
@@ -41,26 +35,22 @@ void gfxinit()
 	glutSetColor(WHITE, 1.0, 1.0, 1.0);
 
 	/* Make sure we're drawing in the normal plane to begin with. */
-
 	glutUseLayer(GLUT_NORMAL);
 }
 
+// This is the function that gets executed when the normal display needs to be updated.
 void display(void)
-/* This is the function that gets executed when the normal display needs to be
-   updated. */
 {
 	glClear(GL_COLOR_BUFFER_BIT);
 
 	glIndexi(WHITE);
 	glRecti(pt1x, pt1y, pt2x, pt2y);
 
-
-
 	glRecti(-0.5, -0.5, 0.3, 0.3);
 }
 
-void mouseFunc(int button, int state, int x, int y)
-/* This is the function that gets called whenever a mouse button event occurs. */
+// This is the function that gets called whenever a mouse button event occurs.
+void mouse(int button, int state, int x, int y)
 {
 	switch (button)
 	{
@@ -73,7 +63,9 @@ void mouseFunc(int button, int state, int x, int y)
 			pt2y = pt1y = SIZE - y;           /*       where mouse is            */
 		}
 		else			                     /* left mouse button was let go */
+		{
 			glutUseLayer(GLUT_NORMAL);       /* rubberbanding finished; use */
+		}
 		break;                               /*       normal draw plane     */
 	case GLUT_RIGHT_BUTTON:
 		if (state == GLUT_DOWN)           /* right mouse button was pressed */
@@ -85,12 +77,13 @@ void mouseFunc(int button, int state, int x, int y)
 	}
 }
 
-void mouseMoveFunc(int x, int y)
-/* This is the function that gets called whenever the mouse is moved. */
+// This is the function that gets called whenever the mouse is moved.
+void motion(int x, int y)
 {
 	glIndexi(transp_color);  		               /* set erase color */
 	glRecti(pt1x, pt1y, pt2x, pt2y);            /* redraw the box to erase it */
-	pt2x = x;  pt2y = SIZE - y;    /* set corner at current mouse position */
+	pt2x = x;									/* set corner at current mouse position */
+	pt2y = SIZE - y;
 	glIndexi(WHITE);                          /* change to draw color */
 	glRecti(pt1x, pt1y, pt2x, pt2y);                          /* draw new box */
 }
@@ -98,14 +91,14 @@ void mouseMoveFunc(int x, int y)
 int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
-	glutInitWindowSize(SIZE, SIZE);
-	glutInitWindowPosition(250, 300);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_INDEX);
+
+	glutInitWindowSize(SIZE, SIZE);       // 設定視窗大小
+	glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
 	glutCreateWindow("Rubberbanding");
 
 	/* Present instructions to the user. */
-
 	instructions();
 
 	//transp_color = glutLayerGet(GLUT_TRANSPARENT_INDEX);
@@ -118,18 +111,14 @@ int main(int argc, char** argv)
 	glutReshapeFunc(reshape0);   //設定callback function
 	glutKeyboardFunc(keyboard0); //設定callback function
 
-	glutMouseFunc(mouseFunc);		   /* callback for mouse button events */
-	glutMotionFunc(mouseMoveFunc);	   /* callback for mouse drag events   */
+	glutMouseFunc(mouse);		//設定callback function, callback for mouse button events
+	glutMotionFunc(motion);		//設定callback function, callback for mouse drag events
 
 	/* Set up initial graphics and enter the event handling loop. */
-
 	gfxinit();
 
 	glutMainLoop();	//開始主循環繪製
 
 	return 0;
 }
-
-
-
 
