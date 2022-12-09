@@ -34,7 +34,7 @@ void display(void)
     glColor4f(1.0, 0.0, 0.0, 1.0);
     glRectf(0.33, 0.33, 0.66, 0.66);
 
-    glFlush();  // 執行繪圖命令
+    glutSwapBuffers();
 }
 
 void reshape(int w, int h)
@@ -46,10 +46,13 @@ void reshape(int w, int h)
     glMatrixMode(GL_MODELVIEW);
 }
 
+/*  Main Loop
+ *  Open window with initial window size, title bar,
+ *  RGBA display mode, and handle input events.  */
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA);
 
     glutInitWindowSize(600, 600);       // 設定視窗大小
     glutInitWindowPosition(1100, 200);  // 設定視窗位置
@@ -61,8 +64,6 @@ int main(int argc, char** argv)
     glutKeyboardFunc(keyboard0); //設定callback function
 
     myinit();
-
-    printf("僅顯示, 無控制, 按 Esc 離開\n");
 
     glutMainLoop();	//開始主循環繪製
 

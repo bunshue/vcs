@@ -11,14 +11,6 @@
 double M_PI_2 = M_PI / 2.0;
 float TwoR = 2.0 * R;
 
-void gfxinit(void);
-void sphere(void);
-void sphere_profile(void);
-void goblet(void);
-void goblet_profile(void);
-void figureMenu(int figure);
-void display(void);
-
 void gfxinit(void)
 {
     /* Set graphics background and foreground colors. */
@@ -27,26 +19,26 @@ void gfxinit(void)
     glColor3f(0.0, 0.0, 0.0);          /* Draw in black.             */
 }
 
-float spherex(float u, float v)
 /* This function evaluates the x(u, v) function for the sphere. */
+float spherex(float u, float v)
 {
     return R * cos(v) * cos(u);
 }
 
-float spherey(float u, float v)
 /* This function evaluates the y(u, v) function for the sphere. */
+float spherey(float u, float v)
 {
     return R * sin(v);
 }
 
-float spherez(float u, float v)
 /* This function evaluates the z(u, v) function for the sphere. */
+float spherez(float u, float v)
 {
     return R * cos(v) * sin(u);
 }
 
-void sphere(void)
 /* This function draws a sphere as a surface of revolution. */
+void sphere(void)
 {
     float u, v;
 
@@ -56,7 +48,9 @@ void sphere(void)
     {
         glBegin(GL_LINE_STRIP);
         for (v = -M_PI_2; v < M_PI_2 + 0.005; v += 0.01)
+        {
             glVertex3f(spherex(u, v), spherey(u, v), spherez(u, v));
+        }
         glEnd();
     }
 
@@ -66,7 +60,9 @@ void sphere(void)
     {
         glBegin(GL_LINE_STRIP);
         for (u = 0.0; u < 2 * M_PI + 0.005; u += 0.01)
+        {
             glVertex3f(spherex(u, v), spherey(u, v), spherez(u, v));
+        }
         glEnd();
     }
     glEnd();
@@ -79,72 +75,106 @@ void sphere_profile(void)
 
     glBegin(GL_LINE_STRIP);
     for (v = -M_PI_2; v < M_PI_2 + 0.005; v += 0.01)
+    {
         glVertex2f(spherex(0.0, v), spherey(0.0, v));
+    }
     glEnd();
 }
 
-float gobletx(float v)
 /* This function evaluates the x(v) function for the goblet. */
+float gobletx(float v)
 {
-    if (v >= 0.95) return R;
-    if (v >= 0.8) return R - (0.95 - v) / 0.15 * 0.75 * R;
-    if (v >= 0.3) return R / 4;
-    if (v >= 0.2) return R / 4 + (0.3 - v) / 0.1 * R;
-    if (v >= 0.1) return 0.15 * R * cos(-M_PI_2 + 10.0 * (v - 0.1) * M_PI) + 1.25 * R;
+    if (v >= 0.95)
+    {
+        return R;
+    }
+    if (v >= 0.8)
+    {
+        return R - (0.95 - v) / 0.15 * 0.75 * R;
+    }
+    if (v >= 0.3)
+    {
+        return R / 4;
+    }
+    if (v >= 0.2)
+    {
+        return R / 4 + (0.3 - v) / 0.1 * R;
+    }
+    if (v >= 0.1)
+    {
+        return 0.15 * R * cos(-M_PI_2 + 10.0 * (v - 0.1) * M_PI) + 1.25 * R;
+    }
     return 0.15 * R * cos(M_PI_2 + 10.0 * v * M_PI) + 1.25 * R;
 }
 
-float goblety(float v)
 /* This function evaluates the y(v) function for the goblet. */
+float goblety(float v)
 {
-    if (v >= 0.95) return 3 * R * (0.5 - v);
-    if (v >= 0.8) return -3 * R * 0.45;
-    if (v >= 0.3) return 3 * R * (0.35 - v);
-    if (v >= 0.2) return 3 * R * (0.05);
-    if (v >= 0.1) return -0.15 * R * sin(-M_PI_2 + 10.0 * (v - 0.1) * M_PI) + 0.3 * R;
+    if (v >= 0.95)
+    {
+        return 3 * R * (0.5 - v);
+    }
+    if (v >= 0.8)
+    {
+        return -3 * R * 0.45;
+    }
+    if (v >= 0.3)
+    {
+        return 3 * R * (0.35 - v);
+    }
+    if (v >= 0.2)
+    {
+        return 3 * R * (0.05);
+    }
+    if (v >= 0.1)
+    {
+        return -0.15 * R * sin(-M_PI_2 + 10.0 * (v - 0.1) * M_PI) + 0.3 * R;
+    }
     return 0.15 * R * sin(M_PI_2 + 10.0 * v * M_PI) + 0.6 * R;
 }
 
-float gobletxuv(float u, float v)
 /* This function evaluates the x(u, v) function for the goblet. */
+float gobletxuv(float u, float v)
 {
     return gobletx(v) * cos(u);
 }
 
-float gobletyuv(float u, float v)
 /* This function evaluates the y(u, v) function for the goblet. */
+float gobletyuv(float u, float v)
 {
     return goblety(v);
 }
 
-float gobletzuv(float u, float v)
 /* This function evaluates the z(u, v) function for the goblet. */
+float gobletzuv(float u, float v)
 {
     return gobletx(v) * sin(u);
 }
 
-void goblet(void)
 /* This function draws a goblet as a surface of revolution. */
+void goblet(void)
 {
     float u, v;
 
     /* Draw the end meridians (constant u values). */
-
     for (u = 0.0; u < 2 * M_PI + M_PI / 10; u += M_PI_2)
     {
         glBegin(GL_LINE_STRIP);
         for (v = 0.0; v < 1.005; v += 0.01)
+        {
             glVertex3f(gobletxuv(u, v), gobletyuv(u, v), gobletzuv(u, v));
+        }
         glEnd();
     }
 
     /* Draw the parallels (constant v values). */
-
     for (v = 0.0; v < 1.025; v += 0.05)
     {
         glBegin(GL_LINE_STRIP);
         for (u = 0.0; u < 2 * M_PI + 0.005; u += 0.01)
+        {
             glVertex3f(gobletxuv(u, v), gobletyuv(u, v), gobletzuv(u, v));
+        }
         glEnd();
         if (fabs(v - 0.2) < 1e-6) v = 0.25;
         if (fabs(v - 0.3) < 1e-6) v = 0.75;
@@ -152,21 +182,22 @@ void goblet(void)
     }
 }
 
-void goblet_profile(void)
 /* This function draws the profile of the goblet. */
+void goblet_profile(void)
 {
     float v;
 
     glBegin(GL_LINE_STRIP);
     for (v = 0.0; v < 1.005; v += 0.01)
+    {
         glVertex2f(gobletx(v), goblety(v));
+    }
     glEnd();
 }
 
-void figureMenu(int figure)
 /* This is the callback function for the menu selection to determine which
-   figure to draw on the screen.
-*/
+   figure to draw on the screen. */
+void figureMenu(int figure)
 {
     float xview, yview, zview, nearPlane, farPlane, dist, angle, fovy;
 
@@ -174,6 +205,8 @@ void figureMenu(int figure)
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
+
+    printf("你按了 %d\n", figure);
     if (figure < 5) // set up orthographic projection
     {
         glOrtho(-TwoR, TwoR, -TwoR, TwoR, -TwoR, TwoR);
@@ -188,9 +221,13 @@ void figureMenu(int figure)
         cin >> nearPlane >> farPlane;
         dist = sqrt(xview * xview + yview * yview + zview * zview);
         if (figure == 5)
+        {
             angle = 2.0 * atan2(R, dist);
+        }
         else
+        {
             angle = 2.0 * atan2(1.5f * R, dist);
+        }
         fovy = 180.0 * angle / M_PI;
         gluPerspective(fovy, 1.0, nearPlane, farPlane);
         glMatrixMode(GL_MODELVIEW);
@@ -217,8 +254,8 @@ void figureMenu(int figure)
     glutPostRedisplay();
 }
 
-void display(void)
 /* This is the callback function that gets executed every time the display needs to be updated. */
+void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
     glCallList(1);
@@ -227,9 +264,6 @@ void display(void)
 
 int main(int argc, char** argv)
 {
-
-    /* Set graphics window parameters. */
-
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 
@@ -243,7 +277,6 @@ int main(int argc, char** argv)
     glutKeyboardFunc(keyboard0); //設定callback function
 
    /* Create the menu structure for which figure to display. */
-
     glutCreateMenu(figureMenu);
 
     glutAddMenuEntry("Sphere (orthographic)", 1);

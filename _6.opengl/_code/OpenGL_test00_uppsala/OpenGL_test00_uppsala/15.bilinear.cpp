@@ -11,14 +11,7 @@
 
 #include "../../Common.h"
 
- //#include <iostream>
- //#include <GL/glut.h>
-
 float x[2][2], y[2][2], z[2][2];
-
-void input(void);
-void gfxinit(void);
-void display(void);
 
 void input(void)
 {
@@ -50,8 +43,7 @@ void gfxinit(void)
 
     glNewList(1, GL_COMPILE);
 
-    /* Draw the rulings of u (constant u values) at values of 0.0, 0.1, 0.2,
-       ..., 1.0. */
+    /* Draw the rulings of u (constant u values) at values of 0.0, 0.1, 0.2, ..., 1.0. */
 
     glBegin(GL_LINES);
     for (u = 0.0; u < 1.001; u += 0.1)
@@ -63,8 +55,7 @@ void gfxinit(void)
         glVertex2f(x2, y2);
     }
 
-    /* Draw the rulings of v (constant v values) at values of 0.0, 0.1, 0.2,
-       ..., 1.0. */
+    /* Draw the rulings of v (constant v values) at values of 0.0, 0.1, 0.2, ..., 1.0. */
 
     for (v = 0.0; v < 1.001; v += 0.1)
     {
@@ -80,8 +71,6 @@ void gfxinit(void)
 }
 
 void display(void)
-/* This is the callback function that gets executed every time the display
-   needs to be updated. */
 {
     glClear(GL_COLOR_BUFFER_BIT);
     glCallList(1);
@@ -91,17 +80,14 @@ void display(void)
 int main(int argc, char** argv)
 {
     /* Get input values from user. */
-
     input();
 
     /* Set graphics window parameters. */
-
     glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 
     glutInitWindowSize(400, 400);       // 設定視窗大小
     glutInitWindowPosition(1100, 200);  // 設定視窗位置
-
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 
     glutCreateWindow("Bilinear Patch");
 
@@ -115,5 +101,3 @@ int main(int argc, char** argv)
 
     return 0;
 }
-
-

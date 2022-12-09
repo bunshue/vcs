@@ -1,6 +1,5 @@
 /*****************************************************************************
  *  curves.cpp                                                               *
- *                                                                           *
  *     This program fits a set of data with three different curve fitting    *
  *  algorithms:  Lagrange interpolation, Bezier curves, and uniform cubic    *
  *  B-splines.                                                               *
@@ -25,43 +24,15 @@
 #define SPLINE_TITLE_LIST   7
 
 double px[MAX_POINTS], py[MAX_POINTS], minx, maxx, miny, maxy, markd;
+
 int number_of_points = 0;
 
-int WindowSizeX = WINDOW_SIZE, WindowSizeY = WINDOW_SIZE;
+int WindowSizeX = WINDOW_SIZE;
+int WindowSizeY = WINDOW_SIZE;
 int WindowSizeY3 = WINDOW_SIZE / 3;
 
-void interact();
-void mark_points();
-void Lagrange_interpolate();
-void Bezier();
-void spline();
-void gfxinit();
-void display(void);
-void reshape(int width, int height);
-
-void gfxinit()
-/* This is the routine that generates the image to be displayed. */
-{
-    glClearColor(1.0, 1.0, 1.0, 0.0); /* Make the background white. */
-
-    /* Generate the three different curves for displaying. */
-
-    mark_points();          /* Generate the data marks display list.            */
-    Lagrange_interpolate(); /* Generate the lines for Lagrange interpolation.   */
-    Bezier();               /* Generate the lines for Bezier approximation.     */
-    spline();               /* Generate the lines for the spline approximation. */
-}
-
-void reshape(int width, int height)
-/* This is the callback function that gets executed every time the display size has changed. */
-{
-    WindowSizeX = width;
-    WindowSizeY = height;
-    WindowSizeY3 = height / 3;
-}
-
-void display(void)
 /* This is the callback function that gets executed every time the display needs to be updated. */
+void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
     glViewport(0, 0, WindowSizeX, WindowSizeY);
@@ -111,8 +82,16 @@ void display(void)
     glutSwapBuffers();
 }
 
-void interact(void)
+/* This is the callback function that gets executed every time the display size has changed. */
+void reshape(int width, int height)
+{
+    WindowSizeX = width;
+    WindowSizeY = height;
+    WindowSizeY3 = height / 3;
+}
+
 /* This function gets the input data for the program to process. */
+void interact(void)
 {
     ifstream points_file;
 
@@ -168,8 +147,8 @@ void interact(void)
     }
 }
 
-void mark_points()
 /* This routine makes a mark for each data point in the arrays. */
+void mark_points()
 {
     int i;
 
@@ -187,8 +166,8 @@ void mark_points()
     glEndList();
 }
 
-double B(int n, double t)
 /* Evaluates the blending functions for Lagrange interpolation. */
+double B(int n, double t)
 {
     switch (n)
     {
@@ -204,8 +183,8 @@ double B(int n, double t)
     return 0.0;  // default case, should never happen
 }
 
-void Lagrange_interpolate()
 /* This procedure does Lagrange interpolation of the data. */
+void Lagrange_interpolate()
 {
     int i;
     double t, x, y, b1, b2, b3, b4;
@@ -216,7 +195,6 @@ void Lagrange_interpolate()
     glBegin(GL_LINE_STRIP);
 
     /* Handle first set of 4 points between t=-1 and t=0 separately. */
-
     for (t = -1.0; t < DELTA_T / 2.0; t += DELTA_T)
     {
         b1 = B(1, t);
@@ -229,7 +207,6 @@ void Lagrange_interpolate()
     }
 
     /* Handle middle segments. */
-
     for (i = 1; i <= number_of_points - 3; i++)
     {
         for (t = DELTA_T; t < 1.0 + DELTA_T / 2.0; t += DELTA_T)
@@ -245,7 +222,6 @@ void Lagrange_interpolate()
     }
 
     /* Handle the last set of 4 points between t=1.0 and t=2.0 separately. */
-
     for (t = 1.0 + DELTA_T; t < 2.0 + DELTA_T / 2.0; t += DELTA_T)
     {
         b1 = B(1, t);
@@ -272,8 +248,8 @@ void Lagrange_interpolate()
     glEndList();
 }
 
-void Bezier()
 /* This function approximates the data with Bezier curves. */
+void Bezier()
 {
     int i, n;
     double ax, bx, cx, dx, ay, by, dy, cy, t, x, y;
@@ -297,7 +273,6 @@ void Bezier()
     }
 
     /* Construct Bezier curves for each grouping of four points. */
-
     glNewList(BEZIER_LIST, GL_COMPILE);
     glColor3f(0.0, 0.0, 0.0);  /* Draw curve in black. */
     glBegin(GL_LINE_STRIP);
@@ -323,7 +298,6 @@ void Bezier()
     glEndList();
 
     /* Render the title into a display list. */
-
     glNewList(BEZIER_TITLE_LIST, GL_COMPILE);
     glColor3f(0.0, 0.0, 0.0);  /* Draw title in black. */
     for (i = 0; i < (int)strlen(title); i++)
@@ -333,8 +307,8 @@ void Bezier()
     glEndList();
 }
 
-double b(double t)
 /* This function evaluates the uniform cubic B-spline. */
+double b(double t)
 {
     double tp2, tp1, tm2, tm1;
 
@@ -374,8 +348,8 @@ double b(double t)
     }
 }
 
-void spline()
 /* This function approximates the data with spline curves. */
+void spline()
 {
     double xs[MAX_POINTS + 4], ys[MAX_POINTS + 4];
     double x, y, t, bt1, bt2, bt3, bt4;
@@ -428,18 +402,29 @@ void spline()
     glEndList();
 }
 
+/* This is the routine that generates the image to be displayed. */
+void gfxinit()
+{
+    glClearColor(1.0, 1.0, 1.0, 0.0); /* Make the background white. */
+
+    /* Generate the three different curves for displaying. */
+
+    mark_points();          /* Generate the data marks display list.            */
+    Lagrange_interpolate(); /* Generate the lines for Lagrange interpolation.   */
+    Bezier();               /* Generate the lines for Bezier approximation.     */
+    spline();               /* Generate the lines for the spline approximation. */
+}
+
 int main(int argc, char** argv)
 {
     /* Get input data. */
     interact();
 
-    /* Set graphics window parameters. */
-
     glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+
     glutInitWindowSize(WindowSizeX, WindowSizeY);   // 設定視窗大小
     glutInitWindowPosition(1100, 200);  // 設定視窗位置
-
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 
     glutCreateWindow("Curve Fitting");
 
@@ -448,6 +433,8 @@ int main(int argc, char** argv)
     glutKeyboardFunc(keyboard0); //設定callback function
 
     gfxinit();
+
+    printf("僅顯示, 無控制, 按 Esc 離開\n");
 
     glutMainLoop();	//開始主循環繪製
 

@@ -1,9 +1,5 @@
-/*****************************************************************************
- * evaluator.cpp                                                             *
- *                                                                           *
- *     This program fits a set of data with a Bezier curve using OpenGL      *
- * evaluators.                                                               *
- *****************************************************************************/
+//evaluator.cpp
+//This program fits a set of data with a Bezier curve using OpenGL evaluators
 
 #include "../../Common.h"
 
@@ -15,8 +11,8 @@
 double points[MAX_POINTS + 2][3], minx, maxx, miny, maxy, xrange, yrange;
 int number_of_points = 0;
 
-void gfxinit()
 /* This is the routine that generates the image to be displayed. */
+void gfxinit()
 {
     int i, j;
 
@@ -24,7 +20,6 @@ void gfxinit()
     glEnable(GL_MAP1_VERTEX_3);
 
     /* Generate the display list for the points. */
-
     glNewList(1, GL_COMPILE);
     glColor3d(1.0, 0.0, 0.0);
     glPointSize(4.0);
@@ -53,8 +48,8 @@ void gfxinit()
     glEndList();
 }
 
-void reshape(int width, int height)
 /* This is the callback function that gets executed every time the display size has changed. */
+void reshape(int width, int height)
 {
     glViewport(0, 0, width, height);
     glMatrixMode(GL_PROJECTION);
@@ -62,8 +57,8 @@ void reshape(int width, int height)
     gluOrtho2D(minx - 0.05 * xrange, maxx + 0.05 * xrange, miny - 0.05 * yrange, maxy + 0.05 * yrange);
 }
 
-void display(void)
 /* This is the callback function that gets executed every time the display needs to be updated. */
+void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
     glCallList(1);
@@ -71,13 +66,12 @@ void display(void)
     glutSwapBuffers();
 }
 
-void interact(void)
 /* This function gets the input data for the program to process. */
+void interact(void)
 {
     ifstream points_file;
 
     /* Open data file. */
-
     points_file.open("data/17.points.dat", ios::in);
     if (!points_file.is_open())
     {
@@ -86,7 +80,6 @@ void interact(void)
     }
 
     /* Read file into arrays, determining maximum and minimum values and ranges. */
-
     maxx = maxy = -1.0e38;
     minx = miny = 1.0e38;
     while (points_file >> points[number_of_points][0] >> points[number_of_points][1])
@@ -129,22 +122,19 @@ void interact(void)
 int main(int argc, char** argv)
 {
     /* Get input data. */
-
     interact();
 
-    /* Set graphics window parameters. */
-
     glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+
     glutInitWindowSize(WINDOW_SIZE, WINDOW_SIZE);   // 設定視窗大小
     glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
-
     glutCreateWindow("Curve Fitting with Evaluators");
 
-    glutDisplayFunc(display);   //設定callback function
-    glutReshapeFunc(reshape);   //設定callback function
-    glutKeyboardFunc(keyboard0); //設定callback function
+    glutDisplayFunc(display);       //設定callback function
+    glutReshapeFunc(reshape);       //設定callback function
+    glutKeyboardFunc(keyboard0);    //設定callback function
 
     gfxinit();
 

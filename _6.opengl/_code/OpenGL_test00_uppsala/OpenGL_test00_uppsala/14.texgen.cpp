@@ -38,8 +38,6 @@ GLfloat tgenparams[] = { 0.0, 0.0, 1.0, 0.0 };
 
 void makeImage(void);
 void gfxinit(void);
-void display(void);
-void myReshape(int w, int h);
 void imageMenu(int whichImage);
 GLbyte* gltLoadTGA(const char* szFileName, GLint* iWidth, GLint* iHeight, GLint* iComponents, GLenum* eFormat);
 
@@ -150,11 +148,10 @@ void display(void)
     {
         glCallList(2);
     }
-    glutSwapBuffers();
+    glFlush();  // 執行繪圖命令
 }
 
-/* The reshape callback function. */
-void myReshape(int w, int h)
+void reshape(int w, int h)
 {
     glViewport(0, 0, w, h);
     glMatrixMode(GL_PROJECTION);
@@ -277,7 +274,7 @@ int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
 
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
 
     glutInitWindowSize(600, 600);       // 設定視窗大小
     glutInitWindowPosition(1100, 200);  // 設定視窗位置
@@ -285,15 +282,18 @@ int main(int argc, char** argv)
     glutCreateWindow("Texture Generation");	//開啟視窗 並顯示出視窗 Title
 
     glutDisplayFunc(display);   //設定callback function
-    //glutReshapeFunc(reshape0);   //設定callback function
+    glutReshapeFunc(reshape);   //設定callback function
     glutKeyboardFunc(keyboard0); //設定callback function
-    glutReshapeFunc(myReshape);
+
     glutCreateMenu(imageMenu);
     glutAddMenuEntry("Striped teapot", 1);
     glutAddMenuEntry("Stone teapot", 2);
     glutAddMenuEntry("Exit program", 3);
     glutAttachMenu(GLUT_RIGHT_BUTTON);
+
     gfxinit();
+
+    printf("選單控制, 按 Esc 離開\n");
 
     glutMainLoop();	//開始主循環繪製
 
