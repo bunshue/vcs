@@ -8,6 +8,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+using System.IO;
+using System.Diagnostics;
+using System.Drawing.Imaging;
+
 using Bottom_Control.PLC通讯协议;
 using Bottom_Control.基本控件;
 using Bottom_Control.按钮__TO__PLC方法;
@@ -41,9 +45,15 @@ namespace Bottom_Control
             bt_copy_to_clipboard.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width * 2, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
             bt_copy_to_clipboard.BackgroundImage = Properties.Resources.clipboard;
             bt_copy_to_clipboard.BackgroundImageLayout = ImageLayout.Zoom;
+            bt_save.BackgroundImage = Properties.Resources.save;
+            bt_save.BackgroundImageLayout = ImageLayout.Zoom;
+            bt_open_folder.BackgroundImage = Properties.Resources.open_folder;
+            bt_open_folder.BackgroundImageLayout = ImageLayout.Zoom;
+
             cb_random.Checked = true;
 
             lb_plc_mesg.Location = new Point(groupBox_plc_status.Location.X + 200, groupBox_plc_status.Location.Y + 155);
+            cb_debug.Location = new Point(groupBox_plc_status.Location.X + groupBox_plc_status.Width - 60, groupBox_plc_status.Location.Y - 15);
 
             int x_st = 10;
             int y_st = 15;
@@ -76,10 +86,10 @@ namespace Bottom_Control
             pbx_m12001.BackgroundImage = Properties.Resources.ball_gray;
             pbx_m12002.BackgroundImage = Properties.Resources.ball_gray;
 
-            pbx_plc_status.Size = new Size(w*3, h*3);
-            pbx_plc_status.Location = new Point(x_st + dx * 2-90, y_st + dy * 3 - 30);
+            pbx_plc_status.Size = new Size(w * 3, h * 3);
+            pbx_plc_status.Location = new Point(x_st + dx * 2 - 90, y_st + dy * 3 - 30);
             pbx_plc_status.BackgroundImageLayout = ImageLayout.Zoom;
-            pbx_plc_status.BackgroundImage = Properties.Resources.ball_green;
+            pbx_plc_status.BackgroundImage = Properties.Resources.ball_gray;
 
             x_st = 40;
             lb_plc_pc0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -112,6 +122,16 @@ namespace Bottom_Control
             lb_pc_plc3b.Text = "";
             lb_pc_plc4b.Text = "";
             lb_plc_mesg.Text = "";
+
+            bt_pause.BackgroundImageLayout = ImageLayout.Zoom;
+            if (timer1.Enabled == true)
+            {
+                bt_pause.BackgroundImage = Properties.Resources.pause;
+            }
+            else
+            {
+                bt_pause.BackgroundImage = Properties.Resources.play;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -258,6 +278,11 @@ namespace Bottom_Control
             bool plc_power_status = check_plc_power_status();
             //bool plc_power_status = true;
 
+            if (cb_debug.Checked == true)
+            {
+                plc_power_status = true;
+            }
+
             if (plc_power_status == false)
             {
                 lb_plc_pc3b.Text = "";
@@ -270,6 +295,7 @@ namespace Bottom_Control
                 pbx_m12000.BackgroundImage = Properties.Resources.ball_gray;
                 pbx_m12001.BackgroundImage = Properties.Resources.ball_gray;
                 pbx_m12002.BackgroundImage = Properties.Resources.ball_gray;
+                pbx_plc_status.BackgroundImage = Properties.Resources.ball_gray;
                 lb_plc_mesg.Text = "三菱PLC 不 Ready";
                 lb_plc_mesg.Visible = true;
                 groupBox_plc_status.Enabled = false;
@@ -282,6 +308,7 @@ namespace Bottom_Control
                 lb_plc_mesg.Visible = false;
                 groupBox_plc_status.Enabled = true;
                 pictureBox1.Enabled = true;
+                pbx_plc_status.BackgroundImage = Properties.Resources.ball_green2;
             }
 
             update_plc_data_status_data();
@@ -595,66 +622,178 @@ namespace Bottom_Control
 
             // Create pens.
             Pen redPen = new Pen(Color.Red, 3);
-            Pen grayPen = new Pen(Color.Gray, 5);
+            //Pen grayPen = new Pen(Color.Gray, 9);
+            List<Point> points = new List<Point>();
             Point[] curvePoints = new Point[N];    //一維陣列內有 N 個Point
 
             int i;
+            int x;
+            int y;
             int dd = 8;
+            int pt_new = 0;
+            int pt_old = 0;
+
             //畫M10000
+            points.Clear();
+            pt_old = m10000_data[0];
             for (i = 0; i < N; i++)
             {
                 curvePoints[i].X = x_st + step * i;
                 curvePoints[i].Y = H - y_st - (h / 7) * m10000_data[i] - 5 - (h / 7) * 5 - dd * 5;
+
+                if (i > 0)
+                {
+                    pt_new = m10000_data[i];
+                    if (pt_new != pt_old)
+                    {
+                        x = x_st + step * i;
+                        y = H - y_st - (h / 7) * pt_old - 5 - (h / 7) * 5 - dd * 5;
+                        points.Add(new Point(x, y));
+                        pt_old = pt_new;
+                    }
+                }
+                x = x_st + step * i;
+                y = H - y_st - (h / 7) * m10000_data[i] - 5 - (h / 7) * 5 - dd * 5;
+                points.Add(new Point(x, y));
             }
-            g.DrawLines(grayPen, curvePoints);   //畫直線
+            //g.DrawLines(grayPen, curvePoints);   //畫直線
+            g.DrawLines(redPen, points.ToArray());  //畫直線
             g.DrawString("M10000", new Font("標楷體", 15), new SolidBrush(Color.Green), new PointF(x_st - 70, H - y_st - (h / 7) * 1 - 5 - (h / 7) * 5 - dd * 5));
 
             //畫M10001
+            points.Clear();
+            pt_old = m10001_data[0];
             for (i = 0; i < N; i++)
             {
                 curvePoints[i].X = x_st + step * i;
                 curvePoints[i].Y = H - y_st - (h / 7) * m10001_data[i] - 5 - (h / 7) * 4 - dd * 4;
+
+                if (i > 0)
+                {
+                    pt_new = m10001_data[i];
+                    if (pt_new != pt_old)
+                    {
+                        x = x_st + step * i;
+                        y = H - y_st - (h / 7) * pt_old - 5 - (h / 7) * 4 - dd * 4;
+                        points.Add(new Point(x, y));
+                        pt_old = pt_new;
+                    }
+                }
+                x = x_st + step * i;
+                y = H - y_st - (h / 7) * m10001_data[i] - 5 - (h / 7) * 4 - dd * 4;
+                points.Add(new Point(x, y));
             }
-            g.DrawLines(redPen, curvePoints);   //畫直線
+            //g.DrawLines(grayPen, curvePoints);   //畫直線
+            g.DrawLines(redPen, points.ToArray());  //畫直線
             g.DrawString("M10001", new Font("標楷體", 15), new SolidBrush(Color.Green), new PointF(x_st - 70, H - y_st - (h / 7) * 1 - 5 - (h / 7) * 4 - dd * 4));
 
             //畫M10002
+            points.Clear();
+            pt_old = m10002_data[0];
             for (i = 0; i < N; i++)
             {
                 curvePoints[i].X = x_st + step * i;
                 curvePoints[i].Y = H - y_st - (h / 7) * m10002_data[i] - 5 - (h / 7) * 3 - dd * 3;
+
+                if (i > 0)
+                {
+                    pt_new = m10002_data[i];
+                    if (pt_new != pt_old)
+                    {
+                        x = x_st + step * i;
+                        y = H - y_st - (h / 7) * pt_old - 5 - (h / 7) * 3 - dd * 3;
+                        points.Add(new Point(x, y));
+                        pt_old = pt_new;
+                    }
+                }
+                x = x_st + step * i;
+                y = H - y_st - (h / 7) * m10002_data[i] - 5 - (h / 7) * 3 - dd * 3;
+                points.Add(new Point(x, y));
             }
-            g.DrawLines(redPen, curvePoints);   //畫直線
+            //g.DrawLines(grayPen, curvePoints);   //畫直線
+            g.DrawLines(redPen, points.ToArray());  //畫直線
             g.DrawString("M10002", new Font("標楷體", 15), new SolidBrush(Color.Green), new PointF(x_st - 70, H - y_st - (h / 7) * 1 - 5 - (h / 7) * 3 - dd * 3));
 
             //畫M12000
+            points.Clear();
+            pt_old = m12000_data[0];
             for (i = 0; i < N; i++)
             {
                 curvePoints[i].X = x_st + step * i;
                 curvePoints[i].Y = H - y_st - (h / 7) * m12000_data[i] - 5 - (h / 7) * 2 - dd * 2;
+
+                if (i > 0)
+                {
+                    pt_new = m12000_data[i];
+                    if (pt_new != pt_old)
+                    {
+                        x = x_st + step * i;
+                        y = H - y_st - (h / 7) * pt_old - 5 - (h / 7) * 2 - dd * 2;
+                        points.Add(new Point(x, y));
+                        pt_old = pt_new;
+                    }
+                }
+                x = x_st + step * i;
+                y = H - y_st - (h / 7) * m12000_data[i] - 5 - (h / 7) * 2 - dd * 2;
+                points.Add(new Point(x, y));
             }
-            g.DrawLines(redPen, curvePoints);   //畫直線
+            //g.DrawLines(grayPen, curvePoints);   //畫直線
+            g.DrawLines(redPen, points.ToArray());  //畫直線
             g.DrawString("M12000", new Font("標楷體", 15), new SolidBrush(Color.Green), new PointF(x_st - 70, H - y_st - (h / 7) * 1 - 5 - (h / 7) * 2 - dd * 2));
 
             //畫M12001
+            points.Clear();
+            pt_old = m12001_data[0];
             for (i = 0; i < N; i++)
             {
                 curvePoints[i].X = x_st + step * i;
                 curvePoints[i].Y = H - y_st - (h / 7) * m12001_data[i] - 5 - (h / 7) * 1 - dd * 1;
+
+                if (i > 0)
+                {
+                    pt_new = m12001_data[i];
+                    if (pt_new != pt_old)
+                    {
+                        x = x_st + step * i;
+                        y = H - y_st - (h / 7) * pt_old - 5 - (h / 7) * 1 - dd * 1;
+                        points.Add(new Point(x, y));
+                        pt_old = pt_new;
+                    }
+                }
+                x = x_st + step * i;
+                y = H - y_st - (h / 7) * m12001_data[i] - 5 - (h / 7) * 1 - dd * 1;
+                points.Add(new Point(x, y));
             }
-            g.DrawLines(redPen, curvePoints);   //畫直線
+            //g.DrawLines(grayPen, curvePoints);   //畫直線
+            g.DrawLines(redPen, points.ToArray());  //畫直線
             g.DrawString("M12001", new Font("標楷體", 15), new SolidBrush(Color.Green), new PointF(x_st - 70, H - y_st - (h / 7) * 1 - 5 - (h / 7) * 1 - dd * 1));
 
             //畫M12002
+            points.Clear();
+            pt_old = m12002_data[0];
             for (i = 0; i < N; i++)
             {
                 curvePoints[i].X = x_st + step * i;
                 curvePoints[i].Y = H - y_st - (h / 7) * m12002_data[i] - 5 - (h / 7) * 0 - dd * 0;
+
+                if (i > 0)
+                {
+                    pt_new = m12002_data[i];
+                    if (pt_new != pt_old)
+                    {
+                        x = x_st + step * i;
+                        y = H - y_st - (h / 7) * pt_old - 5 - (h / 7) * 0 - dd * 0;
+                        points.Add(new Point(x, y));
+                        pt_old = pt_new;
+                    }
+                }
+                x = x_st + step * i;
+                y = H - y_st - (h / 7) * m12002_data[i] - 5 - (h / 7) * 0 - dd * 0;
+                points.Add(new Point(x, y));
             }
-            g.DrawLines(redPen, curvePoints);   //畫直線
+            //g.DrawLines(grayPen, curvePoints);   //畫直線
+            g.DrawLines(redPen, points.ToArray());  //畫直線
             g.DrawString("M12002", new Font("標楷體", 15), new SolidBrush(Color.Green), new PointF(x_st - 70, H - y_st - (h / 7) * 1 - 5 - (h / 7) * 0 - dd * 0));
-
-
 
 
             pictureBox1.Image = bitmap1;
@@ -1152,16 +1291,73 @@ namespace Bottom_Control
 
         private void bt_pause_Click(object sender, EventArgs e)
         {
-            if (bt_pause.Text == "暫停")
+            if (timer1.Enabled == true)
             {
-                bt_pause.Text = "繼續";
                 timer1.Enabled = false;
+                bt_pause.BackgroundImage = Properties.Resources.play;
             }
             else
             {
-                bt_pause.Text = "暫停";
                 timer1.Enabled = true;
+                bt_pause.BackgroundImage = Properties.Resources.pause;
             }
+        }
+
+        private void bt_save_Click(object sender, EventArgs e)
+        {
+            save_image_to_drive(); //用時間檔名存檔 不檢查序號
+        }
+
+        private void bt_open_folder_Click(object sender, EventArgs e)
+        {
+            //取得目前所在路徑
+            string currentPath = Directory.GetCurrentDirectory();
+            richTextBox1.Text += "目前所在路徑: " + currentPath + "\n";
+            //開啟檔案總管
+            Process.Start(currentPath);
+        }
+        void save_image_to_drive() //用時間檔名存檔 不檢查序號
+        {
+            show_main_message1("存檔中...", S_OK, 10);
+            delay(10);
+
+            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+
+            if (bitmap1 != null)
+            {
+                IntPtr pHdc;
+                Graphics g = Graphics.FromImage(bitmap1);
+                Pen p = new Pen(Color.Red, 1);
+                SolidBrush drawBrush = new SolidBrush(Color.Yellow);
+                Font drawFont = new Font("Arial", 6, FontStyle.Bold, GraphicsUnit.Millimeter);
+                pHdc = g.GetHdc();
+
+                g.ReleaseHdc();
+                g.Dispose();
+
+                string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+                try
+                {
+                    bitmap1.Save(filename, ImageFormat.Bmp);
+
+                    richTextBox1.Text += "存檔成功\n";
+                    richTextBox1.Text += "已存檔 : " + filename + "\n";
+                    show_main_message1("已存檔BMP", S_OK, 30);
+                }
+                catch (Exception ex)
+                {
+                    richTextBox1.Text += "xxx錯誤訊息e39 : " + ex.Message + "\n";
+                    show_main_message1("存檔失敗", S_OK, 30);
+                    //show_main_message1("存檔失敗 : " + ex.Message, S_OK, 30);
+                }
+            }
+            else
+            {
+                richTextBox1.Text += "無圖可存\n";
+                show_main_message1("無圖可存a", S_FALSE, 30);
+                show_main_message1("無圖可存a", S_FALSE, 30);
+            }
+            return;
         }
     }
 }
