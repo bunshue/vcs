@@ -32,6 +32,8 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lb_plc_mesg = new System.Windows.Forms.Label();
             this.groupBox_plc_status = new System.Windows.Forms.GroupBox();
+            this.bt_open_folder = new System.Windows.Forms.Button();
+            this.pbx_plc_status = new System.Windows.Forms.PictureBox();
             this.bt_save = new System.Windows.Forms.Button();
             this.lb_pc_plc4b = new System.Windows.Forms.Label();
             this.lb_pc_plc3b = new System.Windows.Forms.Label();
@@ -39,10 +41,16 @@
             this.lb_plc_pc3b = new System.Windows.Forms.Label();
             this.bt_pause = new System.Windows.Forms.Button();
             this.lb_pc_plc4a = new System.Windows.Forms.Label();
-            this.cb_debug = new System.Windows.Forms.CheckBox();
             this.lb_pc_plc3a = new System.Windows.Forms.Label();
             this.lb_plc_pc4a = new System.Windows.Forms.Label();
             this.lb_plc_pc3a = new System.Windows.Forms.Label();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pbx_m12002 = new System.Windows.Forms.PictureBox();
+            this.pbx_m12001 = new System.Windows.Forms.PictureBox();
+            this.pbx_m12000 = new System.Windows.Forms.PictureBox();
+            this.pbx_m10002 = new System.Windows.Forms.PictureBox();
+            this.pbx_m10001 = new System.Windows.Forms.PictureBox();
+            this.pbx_m10000 = new System.Windows.Forms.PictureBox();
             this.lb_pc_plc2 = new System.Windows.Forms.Label();
             this.lb_pc_plc1 = new System.Windows.Forms.Label();
             this.lb_pc_plc0 = new System.Windows.Forms.Label();
@@ -54,6 +62,7 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
+            this.daButton1 = new Bottom_Control.DAButton();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -90,29 +99,15 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tb_data_d = new System.Windows.Forms.TextBox();
             this.lb_main_mesg1 = new System.Windows.Forms.Label();
+            this.cb_debug = new System.Windows.Forms.CheckBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer_display = new System.Windows.Forms.Timer(this.components);
             this.bt_clear = new System.Windows.Forms.Button();
             this.bt_copy_to_clipboard = new System.Windows.Forms.Button();
-            this.bt_open_folder = new System.Windows.Forms.Button();
-            this.pbx_plc_status = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.pbx_m12002 = new System.Windows.Forms.PictureBox();
-            this.pbx_m12001 = new System.Windows.Forms.PictureBox();
-            this.pbx_m12000 = new System.Windows.Forms.PictureBox();
-            this.pbx_m10002 = new System.Windows.Forms.PictureBox();
-            this.pbx_m10001 = new System.Windows.Forms.PictureBox();
-            this.pbx_m10000 = new System.Windows.Forms.PictureBox();
-            this.daButton1 = new Bottom_Control.DAButton();
             this.plC_Open_Time1 = new Bottom_Control.设置控件.PLC_Open_Time();
             this.groupBox1.SuspendLayout();
             this.groupBox_plc_status.SuspendLayout();
-            this.groupBox6.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_plc_status)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_m12002)).BeginInit();
@@ -121,6 +116,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pbx_m10002)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_m10001)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_m10000)).BeginInit();
+            this.groupBox6.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -179,13 +179,31 @@
             this.groupBox_plc_status.Controls.Add(this.lb_plc_pc0);
             this.groupBox_plc_status.Location = new System.Drawing.Point(10, 439);
             this.groupBox_plc_status.Name = "groupBox_plc_status";
-            this.groupBox_plc_status.Size = new System.Drawing.Size(816, 450);
+            this.groupBox_plc_status.Size = new System.Drawing.Size(900, 450);
             this.groupBox_plc_status.TabIndex = 152;
             this.groupBox_plc_status.TabStop = false;
             // 
+            // bt_open_folder
+            // 
+            this.bt_open_folder.Location = new System.Drawing.Point(819, 274);
+            this.bt_open_folder.Margin = new System.Windows.Forms.Padding(2);
+            this.bt_open_folder.Name = "bt_open_folder";
+            this.bt_open_folder.Size = new System.Drawing.Size(50, 50);
+            this.bt_open_folder.TabIndex = 167;
+            this.bt_open_folder.UseVisualStyleBackColor = true;
+            this.bt_open_folder.Click += new System.EventHandler(this.bt_open_folder_Click);
+            // 
+            // pbx_plc_status
+            // 
+            this.pbx_plc_status.Location = new System.Drawing.Point(406, 21);
+            this.pbx_plc_status.Name = "pbx_plc_status";
+            this.pbx_plc_status.Size = new System.Drawing.Size(30, 30);
+            this.pbx_plc_status.TabIndex = 166;
+            this.pbx_plc_status.TabStop = false;
+            // 
             // bt_save
             // 
-            this.bt_save.Location = new System.Drawing.Point(735, 327);
+            this.bt_save.Location = new System.Drawing.Point(819, 328);
             this.bt_save.Margin = new System.Windows.Forms.Padding(2);
             this.bt_save.Name = "bt_save";
             this.bt_save.Size = new System.Drawing.Size(50, 50);
@@ -243,7 +261,7 @@
             // 
             // bt_pause
             // 
-            this.bt_pause.Location = new System.Drawing.Point(735, 381);
+            this.bt_pause.Location = new System.Drawing.Point(819, 382);
             this.bt_pause.Margin = new System.Windows.Forms.Padding(2);
             this.bt_pause.Name = "bt_pause";
             this.bt_pause.Size = new System.Drawing.Size(50, 50);
@@ -261,17 +279,6 @@
             this.lb_pc_plc4a.Size = new System.Drawing.Size(78, 21);
             this.lb_pc_plc4a.TabIndex = 160;
             this.lb_pc_plc4a.Text = "M10000";
-            // 
-            // cb_debug
-            // 
-            this.cb_debug.AutoSize = true;
-            this.cb_debug.Location = new System.Drawing.Point(766, 420);
-            this.cb_debug.Margin = new System.Windows.Forms.Padding(2);
-            this.cb_debug.Name = "cb_debug";
-            this.cb_debug.Size = new System.Drawing.Size(55, 16);
-            this.cb_debug.TabIndex = 149;
-            this.cb_debug.Text = "Debug";
-            this.cb_debug.UseVisualStyleBackColor = true;
             // 
             // lb_pc_plc3a
             // 
@@ -305,6 +312,63 @@
             this.lb_plc_pc3a.Size = new System.Drawing.Size(78, 21);
             this.lb_plc_pc3a.TabIndex = 157;
             this.lb_plc_pc3a.Text = "M10000";
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Location = new System.Drawing.Point(10, 171);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(874, 274);
+            this.pictureBox1.TabIndex = 14;
+            this.pictureBox1.TabStop = false;
+            // 
+            // pbx_m12002
+            // 
+            this.pbx_m12002.Location = new System.Drawing.Point(370, 102);
+            this.pbx_m12002.Name = "pbx_m12002";
+            this.pbx_m12002.Size = new System.Drawing.Size(30, 30);
+            this.pbx_m12002.TabIndex = 156;
+            this.pbx_m12002.TabStop = false;
+            // 
+            // pbx_m12001
+            // 
+            this.pbx_m12001.Location = new System.Drawing.Point(370, 60);
+            this.pbx_m12001.Name = "pbx_m12001";
+            this.pbx_m12001.Size = new System.Drawing.Size(30, 30);
+            this.pbx_m12001.TabIndex = 155;
+            this.pbx_m12001.TabStop = false;
+            // 
+            // pbx_m12000
+            // 
+            this.pbx_m12000.Location = new System.Drawing.Point(370, 21);
+            this.pbx_m12000.Name = "pbx_m12000";
+            this.pbx_m12000.Size = new System.Drawing.Size(30, 30);
+            this.pbx_m12000.TabIndex = 154;
+            this.pbx_m12000.TabStop = false;
+            // 
+            // pbx_m10002
+            // 
+            this.pbx_m10002.Location = new System.Drawing.Point(334, 102);
+            this.pbx_m10002.Name = "pbx_m10002";
+            this.pbx_m10002.Size = new System.Drawing.Size(30, 30);
+            this.pbx_m10002.TabIndex = 153;
+            this.pbx_m10002.TabStop = false;
+            // 
+            // pbx_m10001
+            // 
+            this.pbx_m10001.Location = new System.Drawing.Point(334, 60);
+            this.pbx_m10001.Name = "pbx_m10001";
+            this.pbx_m10001.Size = new System.Drawing.Size(30, 30);
+            this.pbx_m10001.TabIndex = 152;
+            this.pbx_m10001.TabStop = false;
+            // 
+            // pbx_m10000
+            // 
+            this.pbx_m10000.Location = new System.Drawing.Point(334, 21);
+            this.pbx_m10000.Name = "pbx_m10000";
+            this.pbx_m10000.Size = new System.Drawing.Size(30, 30);
+            this.pbx_m10000.TabIndex = 151;
+            this.pbx_m10000.TabStop = false;
             // 
             // lb_pc_plc2
             // 
@@ -391,6 +455,7 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(96, 42);
             this.button4.TabIndex = 12;
+            this.button4.Text = "測試m_status";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -423,6 +488,26 @@
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             this.button7.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button7_MouseDown);
+            // 
+            // daButton1
+            // 
+            this.daButton1.BackColor = System.Drawing.Color.Transparent;
+            this.daButton1.Backdrop_OFF = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(131)))), ((int)(((byte)(229)))));
+            this.daButton1.Backdrop_ON = System.Drawing.Color.Lime;
+            this.daButton1.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.daButton1.DownBack = null;
+            this.daButton1.Location = new System.Drawing.Point(22, 120);
+            this.daButton1.MouseBack = null;
+            this.daButton1.Name = "daButton1";
+            this.daButton1.NormlBack = null;
+            this.daButton1.Pattern = Bottom_Control.Button_pattern.selector_witch;
+            this.daButton1.PLC_Address = "20";
+            this.daButton1.PLC_Contact = "Y";
+            this.daButton1.PLC_Enable = true;
+            this.daButton1.Size = new System.Drawing.Size(72, 72);
+            this.daButton1.TabIndex = 0;
+            this.daButton1.Text = "連接PLC";
+            this.daButton1.UseVisualStyleBackColor = false;
             // 
             // groupBox5
             // 
@@ -828,6 +913,17 @@
             this.lb_main_mesg1.TabIndex = 135;
             this.lb_main_mesg1.Text = "mesg1";
             // 
+            // cb_debug
+            // 
+            this.cb_debug.AutoSize = true;
+            this.cb_debug.Location = new System.Drawing.Point(766, 420);
+            this.cb_debug.Margin = new System.Windows.Forms.Padding(2);
+            this.cb_debug.Name = "cb_debug";
+            this.cb_debug.Size = new System.Drawing.Size(55, 16);
+            this.cb_debug.TabIndex = 149;
+            this.cb_debug.Text = "Debug";
+            this.cb_debug.UseVisualStyleBackColor = true;
+            // 
             // richTextBox1
             // 
             this.richTextBox1.Location = new System.Drawing.Point(1020, 10);
@@ -865,101 +961,6 @@
             this.bt_copy_to_clipboard.UseVisualStyleBackColor = true;
             this.bt_copy_to_clipboard.Click += new System.EventHandler(this.bt_copy_to_clipboard_Click);
             // 
-            // bt_open_folder
-            // 
-            this.bt_open_folder.Location = new System.Drawing.Point(735, 273);
-            this.bt_open_folder.Margin = new System.Windows.Forms.Padding(2);
-            this.bt_open_folder.Name = "bt_open_folder";
-            this.bt_open_folder.Size = new System.Drawing.Size(50, 50);
-            this.bt_open_folder.TabIndex = 167;
-            this.bt_open_folder.UseVisualStyleBackColor = true;
-            this.bt_open_folder.Click += new System.EventHandler(this.bt_open_folder_Click);
-            // 
-            // pbx_plc_status
-            // 
-            this.pbx_plc_status.Location = new System.Drawing.Point(406, 21);
-            this.pbx_plc_status.Name = "pbx_plc_status";
-            this.pbx_plc_status.Size = new System.Drawing.Size(30, 30);
-            this.pbx_plc_status.TabIndex = 166;
-            this.pbx_plc_status.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Location = new System.Drawing.Point(10, 171);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(787, 274);
-            this.pictureBox1.TabIndex = 14;
-            this.pictureBox1.TabStop = false;
-            // 
-            // pbx_m12002
-            // 
-            this.pbx_m12002.Location = new System.Drawing.Point(370, 102);
-            this.pbx_m12002.Name = "pbx_m12002";
-            this.pbx_m12002.Size = new System.Drawing.Size(30, 30);
-            this.pbx_m12002.TabIndex = 156;
-            this.pbx_m12002.TabStop = false;
-            // 
-            // pbx_m12001
-            // 
-            this.pbx_m12001.Location = new System.Drawing.Point(370, 60);
-            this.pbx_m12001.Name = "pbx_m12001";
-            this.pbx_m12001.Size = new System.Drawing.Size(30, 30);
-            this.pbx_m12001.TabIndex = 155;
-            this.pbx_m12001.TabStop = false;
-            // 
-            // pbx_m12000
-            // 
-            this.pbx_m12000.Location = new System.Drawing.Point(370, 21);
-            this.pbx_m12000.Name = "pbx_m12000";
-            this.pbx_m12000.Size = new System.Drawing.Size(30, 30);
-            this.pbx_m12000.TabIndex = 154;
-            this.pbx_m12000.TabStop = false;
-            // 
-            // pbx_m10002
-            // 
-            this.pbx_m10002.Location = new System.Drawing.Point(334, 102);
-            this.pbx_m10002.Name = "pbx_m10002";
-            this.pbx_m10002.Size = new System.Drawing.Size(30, 30);
-            this.pbx_m10002.TabIndex = 153;
-            this.pbx_m10002.TabStop = false;
-            // 
-            // pbx_m10001
-            // 
-            this.pbx_m10001.Location = new System.Drawing.Point(334, 60);
-            this.pbx_m10001.Name = "pbx_m10001";
-            this.pbx_m10001.Size = new System.Drawing.Size(30, 30);
-            this.pbx_m10001.TabIndex = 152;
-            this.pbx_m10001.TabStop = false;
-            // 
-            // pbx_m10000
-            // 
-            this.pbx_m10000.Location = new System.Drawing.Point(334, 21);
-            this.pbx_m10000.Name = "pbx_m10000";
-            this.pbx_m10000.Size = new System.Drawing.Size(30, 30);
-            this.pbx_m10000.TabIndex = 151;
-            this.pbx_m10000.TabStop = false;
-            // 
-            // daButton1
-            // 
-            this.daButton1.BackColor = System.Drawing.Color.Transparent;
-            this.daButton1.Backdrop_OFF = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(131)))), ((int)(((byte)(229)))));
-            this.daButton1.Backdrop_ON = System.Drawing.Color.Lime;
-            this.daButton1.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.daButton1.DownBack = null;
-            this.daButton1.Location = new System.Drawing.Point(22, 120);
-            this.daButton1.MouseBack = null;
-            this.daButton1.Name = "daButton1";
-            this.daButton1.NormlBack = null;
-            this.daButton1.Pattern = Bottom_Control.Button_pattern.selector_witch;
-            this.daButton1.PLC_Address = "20";
-            this.daButton1.PLC_Contact = "Y";
-            this.daButton1.PLC_Enable = true;
-            this.daButton1.Size = new System.Drawing.Size(72, 72);
-            this.daButton1.TabIndex = 0;
-            this.daButton1.Text = "連接PLC";
-            this.daButton1.UseVisualStyleBackColor = false;
-            // 
             // plC_Open_Time1
             // 
             this.plC_Open_Time1.Interval = 500;
@@ -984,6 +985,14 @@
             this.groupBox1.PerformLayout();
             this.groupBox_plc_status.ResumeLayout(false);
             this.groupBox_plc_status.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pbx_plc_status)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbx_m12002)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbx_m12001)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbx_m12000)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbx_m10002)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbx_m10001)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbx_m10000)).EndInit();
             this.groupBox6.ResumeLayout(false);
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
@@ -993,14 +1002,6 @@
             this.groupBox4.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbx_plc_status)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbx_m12002)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbx_m12001)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbx_m12000)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbx_m10002)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbx_m10001)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbx_m10000)).EndInit();
             this.ResumeLayout(false);
 
         }
