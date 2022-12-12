@@ -1137,9 +1137,11 @@ namespace Bottom_Control
 
             flag_plc_test = true;
 
+            richTextBox1.Text += "(0) PC 啟動完成, 偵測PLC之M10000信號\n";
             richTextBox1.Text += "(1) PLC 把資料放在 D2000\n";
             richTextBox1.Text += "(2a) PLC 拉高 M10000, 供PC讀取, 通知條碼內容已備便\n";
-            richTextBox1.Text += "(2b) PC 讀取 M10000 狀態\n";
+
+            richTextBox1.Text += "(3a) PC 讀取 M10000 狀態\t";
             contact_address = "10000";
             ret = false;
             for (i = 0; i < 1000; i++)
@@ -1158,9 +1160,10 @@ namespace Bottom_Control
                 }
                 else
                 {
-                    richTextBox1.Text += "\n取得 M10000 為 ON\n";
+                    richTextBox1.Text += "\tON\n";
+                    richTextBox1.Text += "\n(3b) PC 取得 M10000 為 ON\n";
 
-                    richTextBox1.Text += "(3a) PC 讀取 D2000 資料\n";
+                    richTextBox1.Text += "(3c) PC 讀取 D2000 資料\n";
 
                     show_main_message1("讀取 D2000", S_OK, 30);
                     contact_address = "2000";
@@ -1173,7 +1176,7 @@ namespace Bottom_Control
 
                         richTextBox1.Text += "\nlen = " + data_read.Length.ToString() + "\n";
 
-                        richTextBox1.Text += "(3b) PC 將 從 D2000 取得的資料 寫到 D8000\n";
+                        richTextBox1.Text += "(3d) PC 將 從 D2000 取得的資料 寫到 D8000\n";
 
                         string data_to_write = data_read.Substring(0, 16);
 
@@ -1188,21 +1191,18 @@ namespace Bottom_Control
 
                         delay(500);
 
-                        richTextBox1.Text += "(4) PC 拉高 M12000, 供PLC讀取\n";
+                        richTextBox1.Text += "(4) PC 拉高 M12000, 通知PLC, PC動作已完成\n";
 
                         contact_address = "12000";
-
-                        tb_data_m.Text = "";
-                        tb_data_m.BackColor = Color.White;
-
-                        show_main_message1("寫入: M" + contact_address + ", 資料: " + HIGH, S_OK, 30);
-
                         set_plc_m_status(contact_address, HIGH);
 
                         delay(500);
 
-                        richTextBox1.Text += "(5a) PLC 拉高 M10001, 供PC讀取, 通知開始做色調\n";
-                        richTextBox1.Text += "(5b) PC 讀取 M10001 狀態\n";
+                        richTextBox1.Text += "(5a) PLC收到 PC訊號 M12000 ON時,PLC確認資料一致\n";
+                        richTextBox1.Text += "(5b) PLC 拉高 M10001, 供PC讀取, 通知開始做色調\n";
+
+                        richTextBox1.Text += "(6a) PC 讀取 M10001 狀態\t";
+
                         contact_address = "10001";
                         ret = false;
                         for (i = 0; i < 1000; i++)
@@ -1212,7 +1212,7 @@ namespace Bottom_Control
 
                             if (ret == false)
                             {
-                                richTextBox1.Text += "取得 M10001 為 OFF  ";
+                                //richTextBox1.Text += "取得 M10001 為 OFF  ";
                                 richTextBox1.Text += "OFF  ";
                                 delay(500);
                             }
@@ -1220,24 +1220,21 @@ namespace Bottom_Control
                             {
                                 delay(500);
 
-                                richTextBox1.Text += "\n取得 M10001 為 ON\n";
+                                richTextBox1.Text += "\tON\n";
+                                richTextBox1.Text += "\n(6b) PC 取得 M10001 為 ON\n";
 
-                                richTextBox1.Text += "(6) PC 拉高 M12001, 供PLC讀取, 通知PC已開始做色調\n";
+                                richTextBox1.Text += "(6c) PC 拉高 M12001, 供PLC讀取, 通知PC已開始做色調\n";
 
                                 contact_address = "12001";
-
-                                tb_data_m.Text = "";
-                                tb_data_m.BackColor = Color.White;
-
-                                show_main_message1("寫入: M" + contact_address + ", 資料: " + HIGH, S_OK, 30);
                                 set_plc_m_status(contact_address, HIGH);
 
-                                richTextBox1.Text += "\n\n\nPC開始做色調........\n\n\n\n";
-                                delay(500);
-                                delay(500);
-                                delay(500);
-
-                                richTextBox1.Text += "(7) PC 做完色調, 將結果碼寫在 D8010\n";
+                                richTextBox1.Text += "\nPC開始做色調........";
+                                for(i=0;i<10;i++)
+                                {
+                                    delay(200);
+                                    richTextBox1.Text += "...";
+                                }
+                                richTextBox1.Text += "\n(7) PC 做完色調, 將結果碼寫在 D8010\n";
 
                                 Random r = new Random();
                                 int color_result = r.Next(0, 20);
@@ -1252,18 +1249,13 @@ namespace Bottom_Control
                                 delay(500);
 
                                 contact_address = "12002";
-
-                                tb_data_m.Text = "";
-                                tb_data_m.BackColor = Color.White;
-
-                                show_main_message1("寫入: M" + contact_address + ", 資料: " + HIGH, S_OK, 30);
                                 set_plc_m_status(contact_address, HIGH);
 
+                                delay(500);
 
-                                richTextBox1.Text += "(9) PLC偵測到 PC 拉高 M12002, PLC設定 M10002為ON\n";
+                                richTextBox1.Text += "(9) PLC偵測到 PC之動作完成信號 M12002, PLC設定 M10002為ON\n";
 
-                                richTextBox1.Text += "PC 讀取 M10002\n";
-
+                                richTextBox1.Text += "(10a) PC 讀取 M10002 狀態\t";
                                 contact_address = "10002";
                                 ret = false;
                                 for (i = 0; i < 1000; i++)
@@ -1271,9 +1263,12 @@ namespace Bottom_Control
                                     ret = get_plc_m_status(contact_address);
                                     //richTextBox1.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
 
+                                    //richTextBox1.Text += "測試PLC作業流程\t" + i.ToString() + "\t" + DateTime.Now.ToString() + "\n";
+                                    //richTextBox1.Text += ret.ToString() + "\n";
+
                                     if (ret == false)
                                     {
-                                        richTextBox1.Text += "取得 M10002 為 OFF  ";
+                                        //richTextBox1.Text += "取得 M10002 為 OFF  ";
                                         richTextBox1.Text += "OFF  ";
                                         delay(500);
                                     }
@@ -1281,11 +1276,10 @@ namespace Bottom_Control
                                     {
                                         delay(500);
 
-                                        richTextBox1.Text += "\n取得 M10002 為 ON\n";
+                                        richTextBox1.Text += "\tON\n";
+                                        richTextBox1.Text += "\n(10b) PC 取得 M10002 為 ON\n";
 
-                                        richTextBox1.Text += "(10a) PC檢測 M10002 和 M12002\n";
-
-
+                                        richTextBox1.Text += "(10c) PC檢測 M10002 和 M12002\n";
                                         contact_address = "10002";
                                         ret = get_plc_m_status(contact_address);
                                         richTextBox1.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
@@ -1294,22 +1288,23 @@ namespace Bottom_Control
                                         ret = get_plc_m_status(contact_address);
                                         richTextBox1.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
 
+
                                         //檢測兩者皆回ON, TBD
                                         delay(500);
 
-                                        richTextBox1.Text += "(10a) PC 清除 D8000 ~ D8006 資料\n";
+                                        richTextBox1.Text += "(10d) PC 清除 D8000 ~ D8006 資料\n";
 
                                         //TBD
                                         delay(500);
 
-                                        richTextBox1.Text += "(10a) PC 令 M12000 為 OFF\n";
+                                        richTextBox1.Text += "(10e) PC 令 (收到動作要求信號)M12000 為 OFF\n";
 
                                         contact_address = "12000";
                                         show_main_message1("寫入: M" + contact_address + ", 資料: " + LOW, S_OK, 30);
                                         set_plc_m_status(contact_address, LOW);
                                         delay(500);
 
-                                        richTextBox1.Text += "(10a) PC 令 M12001 為 OFF\n";
+                                        richTextBox1.Text += "(10f) PC 令 (動作執行信號)M12001 為 OFF\n";
 
                                         contact_address = "12001";
                                         show_main_message1("寫入: M" + contact_address + ", 資料: " + LOW, S_OK, 30);
@@ -1317,25 +1312,28 @@ namespace Bottom_Control
 
                                         delay(500);
 
-                                        richTextBox1.Text += "(10b) PLC 清除 D2000 ~ D2006 資料\n";
-                                        richTextBox1.Text += "(10b) PC 令 M10000 為 OFF\n";
-                                        richTextBox1.Text += "(10b) PC 令 M10001 為 OFF\n";
+                                        richTextBox1.Text += "(10g) PLC 清除 D2000 ~ D2006 資料\n";
+                                        richTextBox1.Text += "(10h) PC 令 (動作要求訊號)M10000 為 OFF\n";
+                                        richTextBox1.Text += "(10i) PC 令 (動作開始要求訊號)M10001 為 OFF\n";
 
                                         delay(500);
 
-                                        richTextBox1.Text += "(11a) PC檢測 M10002\n";
+                                        richTextBox1.Text += "(11a) PC檢測 (PLC動作完成信號)M10002\n";
+                                        //當PC收到PLC收到動作完成訊號M10002 ON之後,結果碼D8010資料清除
+                                        //PC->PLC動作完成訊號M12002 OFF
+
+                                        //又要polling
 
                                         contact_address = "10002";
                                         ret = get_plc_m_status(contact_address);
                                         richTextBox1.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
 
-                                        richTextBox1.Text += "PC 清除 D8010資料\n";
+                                        richTextBox1.Text += "(11b) PC 清除 D8010資料\n";
                                         contact_address = "8010";
                                         data_to_write = "";
                                         set_plc_d_data(contact_address, data_to_write);
 
-                                        richTextBox1.Text += "(11a) PC 清除 D8010 資料 完成\n";//清除完成
-                                        richTextBox1.Text += "(11a) PC 令 M10002 為 OFF\n";
+                                        richTextBox1.Text += "(11c) PC 令 M10002 為 OFF\n";
 
                                         contact_address = "12002";
                                         show_main_message1("寫入: M" + contact_address + ", 資料: " + LOW, S_OK, 30);
@@ -1343,13 +1341,15 @@ namespace Bottom_Control
 
                                         delay(500);
 
-                                        richTextBox1.Text += "(12) PLC 收到 PC 設定 M12002 為 OFF, PLC 設定 M10002為OFF\n";
+                                        richTextBox1.Text += "(12a) PLC 收到 PC 設定 M12002 為 OFF, PLC 設定 M10002為OFF\n";
 
-                                        richTextBox1.Text += "(12) PC檢測 M10002\n";
+                                        richTextBox1.Text += "(12b) PC檢測 M10002\n";
 
                                         contact_address = "10002";
                                         ret = get_plc_m_status(contact_address);
                                         richTextBox1.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
+
+                                        //查到OFF才算結束
 
                                         break;
 
