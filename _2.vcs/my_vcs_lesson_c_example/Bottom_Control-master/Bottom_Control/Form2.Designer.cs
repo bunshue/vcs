@@ -474,7 +474,7 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(96, 42);
             this.button6.TabIndex = 147;
-            this.button6.Text = "Test PLC";
+            this.button6.Text = "PLC交握測試";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -484,7 +484,7 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(96, 42);
             this.button7.TabIndex = 148;
-            this.button7.Text = "Test PLC break";
+            this.button7.Text = "PLC交握測試 break";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             this.button7.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button7_MouseDown);
