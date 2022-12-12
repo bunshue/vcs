@@ -231,6 +231,58 @@ namespace Bottom_Control
             contact_address = "12002";
             ret = get_plc_m_status(contact_address);
             richTextBox1.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
+
+            contact_address = "8000";
+            ret = get_plc_m_status(contact_address);
+            richTextBox1.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
+
+            contact_address = "8001";
+            ret = get_plc_m_status(contact_address);
+            richTextBox1.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
+
+            contact_address = "8002";
+            ret = get_plc_m_status(contact_address);
+            richTextBox1.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
+
+            contact_address = "8012";
+            ret = get_plc_m_status(contact_address);
+            richTextBox1.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
+
+            contact_address = "8013";
+            ret = get_plc_m_status(contact_address);
+            richTextBox1.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
+
+            string data_read;
+            contact_address = "8013";
+            data_read = get_plc_d_data(contact_address);
+            richTextBox1.Text += "讀取 D" + contact_address + "\t結果 : " + data_read + "\n";
+
+            contact_address = "8014";
+            data_read = get_plc_d_data(contact_address);
+            richTextBox1.Text += "讀取 D" + contact_address + "\t結果 : " + data_read + "\n";
+
+            contact_address = "8015";
+            data_read = get_plc_d_data(contact_address);
+            richTextBox1.Text += "讀取 D" + contact_address + "\t結果 : " + data_read + "\n";
+
+            contact_address = "8016";
+            data_read = get_plc_d_data(contact_address);
+            richTextBox1.Text += "讀取 D" + contact_address + "\t結果 : " + data_read + "\n";
+
+            contact_address = "8017";
+            data_read = get_plc_d_data(contact_address);
+            richTextBox1.Text += "讀取 D" + contact_address + "\t結果 : " + data_read + "\n";
+
+            contact_address = "8018";
+            data_read = get_plc_d_data(contact_address);
+            richTextBox1.Text += "讀取 D" + contact_address + "\t結果 : " + data_read + "\n";
+
+            contact_address = "8019";
+            data_read = get_plc_d_data(contact_address);
+            richTextBox1.Text += "讀取 D" + contact_address + "\t結果 : " + data_read + "\n";
+
+
+
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -348,7 +400,7 @@ namespace Bottom_Control
             draw_status();
         }
 
-        private const int N = 21;
+        private const int N = 41;
         int m10000_value = 0;
         int m10001_value = 0;
         int m10002_value = 0;
@@ -1002,7 +1054,7 @@ namespace Bottom_Control
         {
             string contact_point = "M";
 
-            if (contact_address.Length != 5)
+            if ((contact_address.Length != 4) && (contact_address.Length != 5))
             {
                 show_main_message1("位址錯誤", S_OK, 30);
                 richTextBox1.Text += "位址錯誤 : " + contact_address + "\n";
@@ -1277,7 +1329,10 @@ namespace Bottom_Control
                                         ret = get_plc_m_status(contact_address);
                                         richTextBox1.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
 
-                                        //PC 清除 D8010資料 TBD
+                                        richTextBox1.Text += "PC 清除 D8010資料\n";
+                                        contact_address = "8010";
+                                        data_to_write = "";
+                                        set_plc_d_data(contact_address, data_to_write);
 
                                         richTextBox1.Text += "(11a) PC 清除 D8010 資料 完成\n";//清除完成
                                         richTextBox1.Text += "(11a) PC 令 M10002 為 OFF\n";
