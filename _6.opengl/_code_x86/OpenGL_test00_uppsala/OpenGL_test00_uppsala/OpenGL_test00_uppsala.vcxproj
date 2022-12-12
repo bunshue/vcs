@@ -11,7 +11,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="02.brownian.cpp" />
+    <ClCompile Include="..\..\Common.cpp" />
+    <ClCompile Include="12.sphere.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{E079F9BF-7A6F-4539-893E-D2EB6A57A10E}</ProjectGuid>

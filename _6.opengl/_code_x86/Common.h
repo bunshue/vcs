@@ -2,11 +2,16 @@
 #include <stdlib.h>
 #include <string.h>
 #include <iostream>
+#include <fstream>
+#include <time.h>
+//#include <math.h>
 
 #include <helper_gl.h>
 
 #include <GL/glut.h>		//32 bits
 //#include <GL/freeglut.h>	//64 bits
+
+using namespace std;
 
 #define	PI	3.141592654F
 
@@ -36,12 +41,12 @@ struct Color
 };
 
 //供旋轉座標系用
-int mx;	//position of mouse
-int my;	//position of mouse
-float x_angle;	//angle of eye
-float y_angle;	//angle of eye
-int m_state; //mouse usage
-float dist; //distance from the eye
+extern int mx;	//position of mouse
+extern int my;	//position of mouse
+extern int m_state; //mouse usage
+extern float x_angle;	//angle of eye
+extern float y_angle;	//angle of eye
+extern float dist; //distance from the eye
 
 //常用的顏色 RGBA四碼
 float color_r[] = { 1.0f, 0.0f, 0.0f, 1.0f };
@@ -63,6 +68,7 @@ void draw_cone(float* color, float width, GLdouble base, GLdouble height, GLint 
 void draw_cube(float* color, float width, GLdouble size);
 void draw_tetrahedron(void);	//畫四面體
 void draw_tetrahedron2(void);
+void draw_box(float* color);	//繪製木箱
 
 void draw_string1(const char* str, float* color, void* font, float x_st, float y_st);	//無陰影
 void draw_string1s(std::string str, float* color, void* font, float x_st, float y_st);	//無陰影
@@ -81,6 +87,7 @@ void draw_rectangle(float* color, float width, float x_st, float y_st, float w, 
 
 //實心矩形, 左下為原點, 向右w, 向上h, 顏色color, 無線寬width
 void draw_rectangle_s(float* color, float x_st, float y_st, float w, float h);
+void draw_rectangle_si(GLint index, float x_st, float y_st, float w, float h);
 
 //空心四邊形, 左下為原點, 向右w, 向上h, 顏色color, 線寬width
 void draw_quad(float* color, float width, float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4);
@@ -88,9 +95,24 @@ void draw_quad(float* color, float width, float x1, float y1, float x2, float y2
 //實心四邊形, 左下為原點, 向右w, 向上h, 顏色color, 無線寬width
 void draw_quad_s(float* color, float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4);
 
+void display0(void);
 void reshape0(int w, int h);
 void keyboard0(unsigned char key, int /*x*/, int /*y*/);
 void mouse0(int button, int state, int x, int y);
 void motion0(int x, int y);
+
+//供旋轉座標系用
+void keyboard_r(unsigned char key, int /*x*/, int /*y*/);
+void mouse_r(int button, int state, int x, int y);
+void motion_r(int x, int y);
+void setup_rotation();
+
+//其他共用
+void common_setup(int argc, char** argv, const char* windowName, const char* message, void (*disp)(void), void (*resh)(int, int), void (*key)(unsigned char, int, int));
+void sleep(clock_t wait);
+
+
+
+
 
 

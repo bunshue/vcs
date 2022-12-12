@@ -3,6 +3,16 @@
 #include <GL/glut.h>		//32 bits
 //#include <GL/freeglut.h>	//64 bits
 
+#include <time.h>
+
+//供旋轉座標系用
+int mx;	//position of mouse
+int my;	//position of mouse
+int m_state = 0; //mouse usage
+float x_angle = 0.0f;	//angle of eye
+float y_angle = 0.0f;	//angle of eye
+float dist = 10.0f; //distance from the eye
+
 //畫座標軸
 void draw_coordinates(float len)
 {
@@ -181,6 +191,65 @@ void draw_tetrahedron2(void)
     glEnd();
 }
 
+//繪製木箱
+void draw_box(float* color)
+{
+    glColor3fv((GLfloat*)color);    //設定顏色
+
+    glEnable(GL_TEXTURE_2D);	//啟用2D紋理映射
+
+/** 選擇紋理 */
+//glBindTexture(GL_TEXTURE_2D, tex2D);	//綁定紋理
+
+/** 開始繪製四邊形 */
+    glBegin(GL_QUADS);
+
+    /// 前側面
+    glNormal3f(0.0f, 0.0f, 1.0f);                               /**指定法線指向觀察者 */	//設置法線
+    glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);
+    glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, -1.0f, 1.0f);
+    glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, 1.0f);
+    glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, 1.0f);
+
+    /// 後側面
+    glNormal3f(0.0f, 0.0f, -1.0f);                              /** 指定法線背向觀察者 */	//設置法線
+    glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
+    glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, 1.0f, -1.0f);
+    glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, -1.0f);
+    glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, -1.0f, -1.0f);
+
+    /// 頂面
+    glNormal3f(0.0f, 1.0f, 0.0f);                               /**指定法線向上 */	//設置法線
+    glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, 1.0f, 1.0f);
+    glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 1.0f, 1.0f);
+    glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, -1.0f);
+    glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, 1.0f, -1.0f);
+
+    /// 底面
+    glNormal3f(0.0f, -1.0f, 0.0f);                              /** 指定法線朝下 */	//設置法線
+    glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, 1.0f);
+    glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, -1.0f, 1.0f);
+    glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, -1.0f, -1.0f);
+    glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
+
+    /// 右側面
+    glNormal3f(1.0f, 0.0f, 0.0f);                               /**指定法線朝右 */	//設置法線
+    glTexCoord2f(0.0f, 0.0f); glVertex3f(1.0f, -1.0f, -1.0f);
+    glTexCoord2f(1.0f, 0.0f); glVertex3f(1.0f, 1.0f, -1.0f);
+    glTexCoord2f(1.0f, 1.0f); glVertex3f(1.0f, 1.0f, 1.0f);
+    glTexCoord2f(0.0f, 1.0f); glVertex3f(1.0f, -1.0f, 1.0f);
+
+    /// 左側面
+    glNormal3f(-1.0f, 0.0f, 0.0f);                              /**指定法線朝左 */	//設置法線
+    glTexCoord2f(0.0f, 0.0f); glVertex3f(-1.0f, -1.0f, -1.0f);
+    glTexCoord2f(1.0f, 0.0f); glVertex3f(-1.0f, 1.0f, -1.0f);
+    glTexCoord2f(1.0f, 1.0f); glVertex3f(-1.0f, 1.0f, 1.0f);
+    glTexCoord2f(0.0f, 1.0f); glVertex3f(-1.0f, -1.0f, 1.0f);
+
+    glEnd();
+    glDisable(GL_TEXTURE_2D);
+}
+
 inline void glPrint(float x, float y, const char* s, void* font)
 {
     glRasterPos2f((GLfloat)x, (GLfloat)y);
@@ -320,6 +389,31 @@ void draw_rectangle_s(float* color, float x_st, float y_st, float w, float h)
     glDisable(GL_TEXTURE_2D);
 }
 
+//實心矩形, 左下為原點, 向右w, 向上h, 顏色color, 無線寬width
+void draw_rectangle_si(GLint index, float x_st, float y_st, float w, float h)
+{
+    glIndexi(index);            //設定顏色
+    //glColor3fv((GLfloat*)color);    //設定顏色
+
+    glEnable(GL_TEXTURE_2D);    //啟用2D紋理映射
+
+    float dd = 0.5f;
+    //GL_QUADS 使用
+    glBegin(GL_QUADS);  //畫實心四邊形
+    {
+        glTexCoord2f(x_st, y_st); //紋理座標配置
+        glVertex2f(x_st, y_st);     //左下座標
+        glTexCoord2f(x_st + w, y_st);
+        glVertex2f(x_st + w, y_st);       //右下座標
+        glTexCoord2f(x_st + w, y_st + h);
+        glVertex2f(x_st + w, y_st + h);         //右上座標
+        glTexCoord2f(x_st, y_st + h);
+        glVertex2f(x_st, y_st + h);       //左上座標
+    }
+    glEnd();
+
+    glDisable(GL_TEXTURE_2D);
+}
 
 //空心四邊形, 左下為原點, 向右w, 向上h, 顏色color, 線寬width
 void draw_quad(float* color, float width, float x1, float y1, float x2, float y2, float x3, float y3, float x4, float y4)
@@ -353,6 +447,28 @@ void draw_quad_s(float* color, float x1, float y1, float x2, float y2, float x3,
 }
 
 //OpenGL 之基本 callback function
+
+// 繪圖回調函數
+void display0(void)
+{
+    glClear(GL_COLOR_BUFFER_BIT);   //清除背景
+
+    //draw_boundary(color_y, 0.9f); //畫視窗邊界
+
+    //畫一個實心矩形
+    glColor3f(0.0, 1.0, 1.0);   //設定顏色 cc
+    float dd = 0.3f;
+    glRectf(-dd, -dd, dd, dd);  //實心矩形
+
+    //draw_teapot(color_r, 1, 0.3);   //畫一個茶壺
+
+    float x_st = -0.7f;
+    float y_st = 0.5f;
+    const char str1[30] = "Empty example";
+    //draw_string1(str1, color_r, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
+
+    glFlush();  // 執行繪圖命令
+}
 
 // 窗口大小變化回調函數
 void reshape0(int w, int h)
@@ -399,3 +515,142 @@ void mouse0(int button, int state, int x, int y)
 void motion0(int x, int y)
 {
 }
+
+//供旋轉座標系用
+void keyboard_r(unsigned char key, int /*x*/, int /*y*/)
+{
+    switch (key)
+    {
+    case 27:
+    case 'q':
+    case 'Q':
+        //離開視窗
+        glutDestroyWindow(glutGetWindow());
+        return;
+    case '0':
+        m_state = 0;
+        break;
+    case '1':
+        m_state = 1;
+        break;
+    }
+}
+
+void mouse_r(int button, int state, int x, int y)
+{
+    //MouseDown
+    if (button == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
+    {
+        mx = x;
+        my = y;
+        printf("D(%d, %d) ", mx, my);
+    }
+}
+
+void motion_r(int x, int y)
+{
+    //MouseMove
+    int dx, dy; //offset of mouse;
+
+    dx = x - mx;
+    dy = y - my;
+
+    if (m_state == 0)
+    {
+        y_angle += dx * 0.1f;
+        x_angle += dy * 0.1f;
+    }
+    else if (m_state == 1)
+    {
+        dist += (dx + dy) * 0.01f;
+    }
+
+    mx = x;
+    my = y;
+
+    //printf("M(%d, %d) ", mx, my);
+    glutPostRedisplay();
+}
+
+void setup_rotation()
+{
+    //double x, y, z, eyex, eyey, eyez;
+    int rect[4];
+    float w, h;
+
+    glGetIntegerv(GL_VIEWPORT, rect);
+    w = (float)rect[2];
+    h = (float)rect[3];
+
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();	//設置單位矩陣
+
+    if (w > h)
+    {
+        glOrtho(-w / h, w / h, -1.0f, 1.0f, -1.0f, 1.0f);
+    }
+    else
+    {
+        glOrtho(-1.0f, 1.0f, -h / w, h / w, -1.0f, 1.0f);
+    }
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();	//設置單位矩陣
+
+    glRotatef(x_angle, 1.0f, 0.0f, 0.0f);
+    glRotatef(y_angle, 0.0f, 1.0f, 0.0f);
+
+    //顯示資訊
+    char info[20];
+    sprintf_s(info, sizeof(info), "(%3.1f,   %3.1f)", x_angle, y_angle);
+    glutSetWindowTitle(info);
+}
+
+void common_setup(int argc, char** argv, const char* windowName, const char* message, void (*disp)(void), void (*resh)(int, int), void (*key)(unsigned char, int, int))
+{
+    //初始化GLUT庫，這個函數只是傳說命令參數并且初始化glut庫
+    glutInit(&argc, argv);
+
+    //glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);    //宣告顯示模式為 Single Buffer 和 RGBA
+
+    /*
+    設定圖形顯示模式。引數mode的可選值為：
+    GLUT_RGBA：      當未指明GLUT - RGBA或GLUT - INDEX時，是預設使用的模式。表明欲建立RGBA模式的視窗。
+    GLUT_RGB：       與GLUT - RGBA作用相同。
+    GLUT_INDEX：     指明為顏色索引模式。
+    GLUT_SINGLE：    只使用單快取
+    GLUT_DOUBLE：    使用雙快取。以避免把計算機作圖的過程都表現出來，或者為了平滑地實現動畫。
+    GLUT_DEPTH：     使用深度快取。
+    GLUT_ACCUM：     讓視窗使用累加的快取。
+    GLUT_ALPHA：     讓顏色緩衝區使用alpha元件。
+    GLUT_STENCIL：   使用模板快取。
+    GLUT_MULTISAMPLE：讓視窗支援多例程。
+    GLUT_STEREO：    使視窗支援立體。
+    GLUT_LUMINACE:  luminance是亮度的意思。但是很遺憾，在多數OpenGL平臺上，不被支援。
+    */
+
+    glutInitWindowSize(600, 600);       // 設定視窗大小
+    glutInitWindowPosition(1100, 200);  // 設定視窗位置
+
+    glutCreateWindow(windowName);	//開啟視窗 並顯示出視窗 Title
+
+    glutDisplayFunc(disp);  //設定callback function, 註冊顯示函數 // Register display callback handler for window re-paint
+    glutReshapeFunc(resh);	//設定callback function
+    glutKeyboardFunc(key);	//設定callback function
+
+    printf(message);
+}
+
+/* Pauses for a specified number of milliseconds. */
+void sleep(clock_t wait)
+{
+    clock_t goal;
+    goal = wait + clock();
+    while (goal > clock())
+        ;
+}
+

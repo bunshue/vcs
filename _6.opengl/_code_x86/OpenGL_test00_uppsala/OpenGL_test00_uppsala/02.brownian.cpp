@@ -4,17 +4,7 @@
  * Gaussian random numbers are summed to simulate the Brownian motion.                 *
  ***************************************************************************************/
 
-//#include "../../Common.h"
-
-//#include <GL/freeglut.h>	//64位元用的
-#include <GL/glut.h>		//32位元用的
-
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#include <time.h>
-#include <math.h>
+#include "../../Common.h"
 
 #define POINTS     200
 
@@ -110,8 +100,8 @@ int main(int argc, char** argv)
     glutCreateWindow("布朗運動");
 
     glutDisplayFunc(display);   //設定callback function
-    //glutReshapeFunc(reshape0);   //設定callback function
-    //glutKeyboardFunc(keyboard0); //設定callback function
+    glutReshapeFunc(reshape0);   //設定callback function
+    glutKeyboardFunc(keyboard0); //設定callback function
 
     gfxinit();
 
