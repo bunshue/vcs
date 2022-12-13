@@ -4,7 +4,6 @@
 #include "../../Common.h"
 
  /* Drawing constants. */
-#define WINDOW_SIZE 540  /* initial size of window                    */
 #define MAX_POINTS  100  /* maximum number of control points          */
 #define STEPS        20  /* number of steps to draw each segment over */
 
@@ -63,7 +62,8 @@ void display(void)
     glClear(GL_COLOR_BUFFER_BIT);
     glCallList(1);
     glCallList(2);
-    glutSwapBuffers();
+
+    glFlush();  // 執行繪圖命令
 }
 
 /* This function gets the input data for the program to process. */
@@ -125,9 +125,9 @@ int main(int argc, char** argv)
     interact();
 
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
-    glutInitWindowSize(WINDOW_SIZE, WINDOW_SIZE);   // 設定視窗大小
+    glutInitWindowSize(600, 600);       // 設定視窗大小
     glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
     glutCreateWindow("Curve Fitting with Evaluators");
@@ -137,6 +137,7 @@ int main(int argc, char** argv)
     glutKeyboardFunc(keyboard0);    //設定callback function
 
     gfxinit();
+    printf("僅顯示, 無控制, 按 Esc 離開\n");
 
     glutMainLoop();	//開始主循環繪製
 

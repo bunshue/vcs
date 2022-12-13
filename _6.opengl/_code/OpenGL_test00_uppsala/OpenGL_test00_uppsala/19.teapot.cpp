@@ -78,37 +78,38 @@ void display(void)
     {
         glCallList(i);
     }
-    glutSwapBuffers();
+    glFlush();  // 執行繪圖命令
 }
 
-void arrows(int key, int x, int y)
+//key 枚舉值，x、y是位置
 /* This function handles rotation via the arrow keys. */
+void special(int key, int /*x*/, int /*y*/)
 {
     switch (key)
     {
     case GLUT_KEY_DOWN: /* rotate around the x-axis in a negative direction */
-        theta[0] -= 2.0;
+        theta[0] -= 4.0;
         if (theta[0] < 0.0)
         {
             theta[0] += 360.0;
         }
         break;
     case GLUT_KEY_UP: /* rotate around the x-axis in a positive direction */
-        theta[0] += 2.0;
+        theta[0] += 4.0;
         if (theta[0] > 360.0)
         {
             theta[0] -= 360.0;
         }
         break;
     case GLUT_KEY_RIGHT: /* rotate around the z-axis in a negative direction */
-        theta[2] -= 2.0;
+        theta[2] -= 4.0;
         if (theta[2] < 0.0)
         {
             theta[2] += 360.0;
         }
         break;
     case GLUT_KEY_LEFT: /* rotate around the z-axis in a positive direction */
-        theta[2] += 2.0;
+        theta[2] += 4.0;
         if (theta[2] > 360.0)
         {
             theta[2] -= 360.0;
@@ -166,27 +167,25 @@ void interact(void)
 int main(int argc, char** argv)
 {
     /* Get input data. */
-
     interact();
 
-    /* Set graphics window parameters. */
-
     glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
     glutInitWindowSize(WINDOW_SIZE, WINDOW_SIZE);   // 設定視窗大小
+    //glutInitWindowSize(600, 600);       // 設定視窗大小
     glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
     glutCreateWindow("Utah Teapot");
 
     glutDisplayFunc(display);   //設定callback function
     glutReshapeFunc(reshape);   //設定callback function
     glutKeyboardFunc(keyboard0); //設定callback function
-    glutSpecialFunc(arrows);
+    glutSpecialFunc(special);   //設定callback function
 
     gfxinit();
 
-    printf("用方向鍵控制\n");
+    printf("按 上 下 左 右 方向鍵控制\n");
 
     glutMainLoop();	//開始主循環繪製
 

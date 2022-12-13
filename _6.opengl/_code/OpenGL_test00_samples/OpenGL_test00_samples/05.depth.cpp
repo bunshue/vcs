@@ -72,7 +72,7 @@ void display(void)
     glVertex3f(0.9, 0.0, -25.0);
     glEnd();
 
-    glFlush();
+    glFlush();  // 執行繪圖命令
 }
 
 void reshape(int width, int height)
@@ -104,14 +104,9 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
 
 int main(int argc, char** argv)
 {
-    GLenum type;
-
     glutInit(&argc, argv);
 
-    type = GLUT_DEPTH;
-    type |= GLUT_RGB;
-    type |= GLUT_SINGLE;
-    glutInitDisplayMode(type);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
 
     glutInitWindowSize(600, 600);       // 設定視窗大小
     glutInitWindowPosition(1100, 200);  // 設定視窗位置

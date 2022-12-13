@@ -80,11 +80,16 @@ void display()
 
 void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
+    //printf("你所按按鍵的碼是%x\t此時視窗內的滑鼠座標是(%d,%d)\n", key, x, y);
+
     switch (key)
     {
-    case (27):
-        exit(0);
-        break;
+    case 27:
+    case 'q':
+    case 'Q':
+        //離開視窗
+        glutDestroyWindow(glutGetWindow());
+        return;
     }
 }
 
