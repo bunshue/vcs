@@ -53,6 +53,9 @@ namespace Bottom_Control
             bt_open_folder.BackgroundImage = Properties.Resources.open_folder;
             bt_open_folder.BackgroundImageLayout = ImageLayout.Zoom;
 
+            lb_main_mesg1.Location = new Point(10, 330);
+            lb_read_write_plc.Location = new Point(10+250, 320);
+
             cb_random.Checked = true;
 
             lb_plc_mesg.Location = new Point(groupBox_plc_status.Location.X + 200, groupBox_plc_status.Location.Y + 155);
@@ -125,6 +128,7 @@ namespace Bottom_Control
             lb_pc_plc3b.Text = "";
             lb_pc_plc4b.Text = "";
             lb_plc_mesg.Text = "";
+            lb_read_write_plc.Text = "";
 
             bt_pause.BackgroundImageLayout = ImageLayout.Zoom;
             if (timer1.Enabled == true)
@@ -137,48 +141,26 @@ namespace Bottom_Control
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            show_main_message1("讀取 D2000", S_OK, 30);
-            string contact_address = "2000";
-            string data_read = get_plc_d_data(contact_address);
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            show_main_message1("寫入 D8000", S_OK, 30);
-            string contact_address = "8000";
-            string write_data = tb_data_to_write.Text;
-            tb_data_to_write.Text = "";
-
-            set_plc_d_data(contact_address, write_data);
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            show_main_message1("讀取 D8000", S_OK, 30);
-            string contact_address = "8000";
-            string data_read = get_plc_d_data(contact_address);
-        }
-
         private void bt_generate_Click(object sender, EventArgs e)
         {
+            string random_data = string.Empty;
             if (cb_random.Checked == true)
             {
-                make_random_data();
+                random_data = make_random_data();
             }
             else
             {
-                string finalString1 = "A1234567B1234";
-                richTextBox1.Text += "相機序號：" + finalString1 + "\n";
-                tb_data_to_write.Text = finalString1;
+                random_data = "A1234567B1234";
             }
+            richTextBox1.Text += "相機序號：" + random_data + "\n";
+            tb_data_d.Text = random_data;
         }
 
-        void make_random_data()
+        string make_random_data()
         {
             //[C#] 產生一組亂數
             //最後產生的finalString就是我們要的亂數,至於亂數長度,你可以調整第二行中8這個數字,如果沒改就是長度8的亂數.
+            string random_data = string.Empty;
             var chars1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             var chars2 = "0123456789";
             var stringChars1 = new char[13];
@@ -194,10 +176,8 @@ namespace Bottom_Control
                     stringChars1[i] = chars2[random.Next(chars2.Length)];
                 }
             }
-            var finalString1 = new String(stringChars1);
-            richTextBox1.Text += "相機序號：" + finalString1 + "\n";
-            tb_data_to_write.Text = finalString1;
-            return;
+            random_data = new String(stringChars1);
+            return random_data;
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -300,7 +280,7 @@ namespace Bottom_Control
                 //richTextBox1.Text += "三菱PLC ready 1\n";
 
                 //richTextBox1.Text += "\n觸點 : " + contact_point + "\t位址 : " + contact_address + "\n";
-                tb_contact_address.Text = "觸點 : " + contact_point + "\t位址 : " + contact_address;
+                lb_read_write_plc.Text = "觸點 : " + contact_point + "\t位址 : " + contact_address;
 
                 List<bool> data = mitsubishi.PLC_read_M_bit(contact_point, contact_address);    //讀取狀態
                 //richTextBox1.Text += "len = " + data.Count.ToString() + ", data = " + data[0].ToString() + "\n";
@@ -308,7 +288,6 @@ namespace Bottom_Control
                 if (data[0] == true)
                 {
                     string dddd = mitsubishi.PLC_read_D_register(contact_point, contact_address, numerical_format.String_32_Bit);
-                    tb_data_read.Text = dddd;
                     tb_data_d.Text = dddd;
                     data_read = dddd;
                     //richTextBox1.Text += "b len = " + dddd.Length.ToString() + "\t";
@@ -316,9 +295,7 @@ namespace Bottom_Control
                 }
                 else
                 {
-                    tb_data_read.Text = "無資料";
                     tb_data_d.Text = "無資料";
-
                 }
             }
             else
@@ -333,7 +310,6 @@ namespace Bottom_Control
 
             if (write_data.Length == 0)
             {
-                tb_data_read.Text = "無寫入資料";
                 tb_data_d.Text = "無寫入資料";
                 richTextBox1.Text += "清除資料\t觸點 : " + contact_point + "\t位址 : " + contact_address + "\n";
                 //目前這個地方有問題
@@ -346,7 +322,7 @@ namespace Bottom_Control
                 //richTextBox1.Text += "三菱PLC ready 2\n";
 
                 //richTextBox1.Text += "\n觸點 : " + contact_point + "\t位址 : " + contact_address + "\n";
-                tb_contact_address.Text = "觸點 : " + contact_point + "\t位址 : " + contact_address;
+                lb_read_write_plc.Text = "觸點 : " + contact_point + "\t位址 : " + contact_address;
 
                 string dddd = mitsubishi.PLC_write_D_register(contact_point, contact_address, write_data, numerical_format.String_32_Bit);
 
@@ -1070,20 +1046,18 @@ namespace Bottom_Control
                 //richTextBox1.Text += "三菱PLC ready 5\n";
 
                 //richTextBox1.Text += "\n觸點 : " + contact_point + "\t位址 : " + contact_address + "\n";
-                tb_contact_address.Text = "觸點 : " + contact_point + "\t位址 : " + contact_address;
+                lb_read_write_plc.Text = "觸點 : " + contact_point + "\t位址 : " + contact_address;
 
                 List<bool> data = mitsubishi.PLC_read_M_bit(contact_point, contact_address);    //讀取狀態
                 //richTextBox1.Text += "len = " + data.Count.ToString() + ", data = " + data[0].ToString() + "\n";
 
                 if (data[0] == true)
                 {
-                    tb_data_read.Text = "True";
                     tb_data_m.Text = "True";
                     ret = true;
                 }
                 else
                 {
-                    tb_data_read.Text = "False";
                     tb_data_m.Text = "False";
                     ret = false;
                 }
@@ -1104,7 +1078,7 @@ namespace Bottom_Control
                 //richTextBox1.Text += "三菱PLC ready 6\n";
 
                 //richTextBox1.Text += "\n觸點 : M\t位址 : " + contact_address + "\n";
-                tb_contact_address.Text = "觸點 : M\t位址 : " + contact_address;
+                lb_read_write_plc.Text = "觸點 : M\t位址 : " + contact_address;
 
                 List<bool> data = mitsubishi.PLC_write_M_bit("M", contact_address, write_data);
             }
@@ -1310,8 +1284,6 @@ namespace Bottom_Control
 
             show_main_message1("寫入 D8000", S_OK, 30);
             contact_address = "8000";
-            //write_data = tb_data_to_write.Text;
-            //tb_data_to_write.Text = "";
 
             set_plc_d_data(contact_address, data_to_write);
 
