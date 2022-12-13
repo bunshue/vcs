@@ -14,7 +14,6 @@ using System.Drawing.Imaging;
 
 using Bottom_Control.PLC通讯协议;
 using Bottom_Control.基本控件;
-using Bottom_Control.按钮__TO__PLC方法;
 using CCWin.SkinClass;
 using Bottom_Control;
 
@@ -1242,6 +1241,22 @@ namespace Bottom_Control
             button6.BackColor = Color.Red;
 
             richTextBox1.Text += "測試PLC作業流程 ST\t" + DateTime.Now.ToString() + "\n";
+
+            richTextBox1.Text += "(0) PC 啟動完成, 檢查PLC是否已開機\n";
+
+            while (ret == false)
+            {
+                ret = check_plc_power_status();
+                if (ret == true)
+                {
+                    richTextBox1.Text += "(0) 三菱PLC 已 Ready, 繼續\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "(0) 三菱PLC 不 Ready, 等待\n";
+                    delay(500);
+                }
+            }
 
             richTextBox1.Text += "(0) PC 啟動完成, 檢查所有 M1XXXX 信號 是否皆為 LOW\n";
 
