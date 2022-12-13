@@ -1,12 +1,5 @@
-/*****************************************************************************
- * This program demonstrates the color map in OpenGL and glut.               *
- *****************************************************************************/
-
 #include "../../Common.h"
 
-#define SIZE 600
-
- /* This is the routine that initializes some graphics parameters. */
 void gfxinit()
 {
     int i, index = 0;
@@ -33,9 +26,11 @@ void gfxinit()
     for (i = 0; i < 8; i++, index++)
     {
         glIndexi(index);
-        cout << "Color " << index << " = (" << glutGetColor(index, GLUT_RED)
-            << ", " << glutGetColor(index, GLUT_GREEN) << ", "
-            << glutGetColor(index, GLUT_BLUE) << ")" << endl;
+
+        //或許 glutGetColor 功能已失效
+        printf("a Color %d = (%d, %d, %d)\n", index, glutGetColor(index, GLUT_RED),
+            glutGetColor(index, GLUT_GREEN), glutGetColor(index, GLUT_BLUE));
+
         glRecti(i, 0, i + 1, 1);
     }
     /* loaded color map entries */
@@ -43,9 +38,11 @@ void gfxinit()
     for (i = 0; i < 8; i++, index++)
     {
         glIndexi(index);
-        cout << "Color " << index << " = (" << glutGetColor(index, GLUT_RED)
-            << ", " << glutGetColor(index, GLUT_GREEN) << ", "
-            << glutGetColor(index, GLUT_BLUE) << ")" << endl;
+
+        //或許 glutGetColor 功能已失效
+        printf("b Color %d = (%d, %d, %d)\n", index, glutGetColor(index, GLUT_RED),
+            glutGetColor(index, GLUT_GREEN), glutGetColor(index, GLUT_BLUE));
+
         glRecti(i, 1, i + 1, 2);
     }
     glEndList();
@@ -61,12 +58,10 @@ void display(void)
 
 int main(int argc, char** argv)
 {
-    /* Set graphics window parameters. */
-
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_INDEX);
 
-    glutInitWindowSize(SIZE, SIZE);     // 設定視窗大小
+    glutInitWindowSize(600, 600);       // 設定視窗大小
     glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
     glutCreateWindow("Color Map");

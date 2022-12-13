@@ -41,6 +41,7 @@ void myinit(void)
  */
 void drawSquares(GLenum mode)
 {
+    //printf("drawSquares\t");
     GLuint i, j;
 
     for (i = 0; i < 3; i++)
@@ -75,7 +76,8 @@ void processHits(GLint hits, GLuint buffer[])
     GLuint names = 0;
     GLuint* ptr;
 
-    cout << "hits = " << hits << endl;
+    printf("hits = %d\t", hits);
+
     ptr = (GLuint*)buffer;
     for (i = 0; i < hits; i++)
     {	/*  for each hit  */
@@ -139,7 +141,7 @@ void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
     drawSquares(GL_RENDER);
-    glutSwapBuffers();
+    glFlush();  // 執行繪圖命令
 }
 
 void reshape(int w, int h)
@@ -158,7 +160,7 @@ void reshape(int w, int h)
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
     glutInitWindowSize(600, 600);       // 設定視窗大小
     glutInitWindowPosition(1100, 200);  // 設定視窗位置
@@ -170,7 +172,6 @@ int main(int argc, char** argv)
     glutDisplayFunc(display);   //設定callback function
     glutReshapeFunc(reshape);   //設定callback function
     glutKeyboardFunc(keyboard0); //設定callback function
-
     glutMouseFunc(mouse);		//設定callback function
 
     glutMainLoop();	//開始主循環繪製

@@ -113,8 +113,7 @@ int main(int argc, char** argv)
 
 	glutDisplayFunc(display);   //設定callback function
 	glutReshapeFunc(reshape0);   //設定callback function
-	//glutKeyboardFunc(keyboard0); //設定callback function
-	glutKeyboardFunc(keyboard);
+	glutKeyboardFunc(keyboard);	//設定callback function
 	glutIdleFunc(idle);
 	glutMouseFunc(mouse);
 

@@ -137,9 +137,9 @@ void instructions()
     cout << "to be drawn." << endl;
 }
 
-void display(void)
 /* This is the callback function that gets executed every time the display
    needs to be updated. */
+void display(void)
 {
     int i;
 
@@ -151,10 +151,11 @@ void display(void)
     glFlush();
 }
 
-void mouseFunc(int button, int state, int x, int y)
 /* This is the callback function that gets executed when a mouse button is pressed. */
+void mouse(int button, int state, int x, int y)
 {
     if ((button == GLUT_LEFT_BUTTON) && (state == GLUT_DOWN))
+    {
         if (pointsChosen == 0)
         {
             x_st = x;
@@ -172,10 +173,11 @@ void mouseFunc(int button, int state, int x, int y)
             glFlush();
             pointsChosen = 0;
         }
+    }
 }
 
-void reshape(GLsizei w, GLsizei h)
 /* This function gets called whenever the window is resized. */
+void reshape(GLsizei w, GLsizei h)
 {
     /* Adjust the clipping rectangle. */
 
@@ -203,15 +205,10 @@ int main(int argc, char** argv)
 
     glutCreateWindow("Menu Demonstration");
 
-    /* Register all callback functions. */
-
     glutDisplayFunc(display);   //設定callback function
-    //glutReshapeFunc(reshape0);   //設定callback function
+    glutReshapeFunc(reshape);   //設定callback function
     glutKeyboardFunc(keyboard0); //設定callback function
-
-    glutReshapeFunc(reshape);
-
-    glutMouseFunc(mouseFunc);
+    glutMouseFunc(mouse);   //設定callback function
 
     /* Initialize the graphics and enter the event loop. */
     gfxinit();

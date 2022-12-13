@@ -96,7 +96,7 @@ int main(int argc, char** argv)
 	glutInitWindowSize(SIZE, SIZE);       // 設定視窗大小
 	glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
-	glutCreateWindow("Rubberbanding");
+	glutCreateWindow("Rubberbanding 滑鼠框選四邊形");
 
 	/* Present instructions to the user. */
 	instructions();
@@ -110,15 +110,14 @@ int main(int argc, char** argv)
 	glutDisplayFunc(display);   //設定callback function
 	glutReshapeFunc(reshape0);   //設定callback function
 	glutKeyboardFunc(keyboard0); //設定callback function
-
 	glutMouseFunc(mouse);		//設定callback function, callback for mouse button events
 	glutMotionFunc(motion);		//設定callback function, callback for mouse drag events
 
-	/* Set up initial graphics and enter the event handling loop. */
 	gfxinit();
+
+	printf("\n滑鼠框選四邊形\n");
 
 	glutMainLoop();	//開始主循環繪製
 
 	return 0;
 }
-
