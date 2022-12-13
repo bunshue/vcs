@@ -14,7 +14,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="21.movingShader.cpp" />
+    <ClCompile Include="20.texproxy.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{90E3781A-C504-4A09-9547-5AACCD052590}</ProjectGuid>

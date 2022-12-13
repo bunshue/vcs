@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Bottom_Control.PLC参数设置界面;
 
 namespace Bottom_Control
 {

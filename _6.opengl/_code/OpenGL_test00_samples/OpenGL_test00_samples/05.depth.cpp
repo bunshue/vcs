@@ -24,8 +24,6 @@ GLubyte stippleBits[32 * 4] = {
 
 void Init(void)
 {
-    GLint i;
-
     glClearColor(0.0, 0.0, 0.0, 0.0);
 
     glPolygonStipple(stippleBits);
@@ -63,13 +61,13 @@ void display(void)
 
     glBegin(GL_TRIANGLES);
     glColor3f(0.0, 0.0, 1.0);
-    glVertex3f(0.9, -0.9, -30.0);
-    glVertex3f(0.9, 0.9, -30.0);
-    glVertex3f(-0.9, 0.0, -30.0);
+    glVertex3f(0.9f, -0.9f, -30.0f);
+    glVertex3f(0.9f, 0.9f, -30.0);
+    glVertex3f(-0.9f, 0.0f, -30.0f);
     glColor3f(0.0, 1.0, 0.0);
-    glVertex3f(-0.9, -0.9, -40.0);
-    glVertex3f(-0.9, 0.9, -40.0);
-    glVertex3f(0.9, 0.0, -25.0);
+    glVertex3f(-0.9f, -0.9f, -40.0f);
+    glVertex3f(-0.9f, 0.9f, -40.0f);
+    glVertex3f(0.9f, 0.0f, -25.0f);
     glEnd();
 
     glFlush();  // ∞ı¶Ê√∏πœ©R•O

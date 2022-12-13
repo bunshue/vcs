@@ -7,7 +7,7 @@
 
 #include "../../Common.h"
 
-#define SIZE 300
+#define SIZE 600
 
 int pointsChosen, x_st, y_st, numberOfLists = 0;
 GLsizei ysize;
@@ -133,12 +133,10 @@ void instructions()
 {
     cout << "This is a simple program to demonstrate menus in OpenGL and glut." << endl;
     cout << "Press the right mouse button over the graphics window to display the menu." << endl;
-    cout << "Click the left mouse button twice to define two endpoints of a line segment" << endl;
-    cout << "to be drawn." << endl;
+    cout << "Click the left mouse button twice to define two endpoints of a line segment to be drawn." << endl;
 }
 
-/* This is the callback function that gets executed every time the display
-   needs to be updated. */
+/* This is the callback function that gets executed every time the display needs to be updated. */
 void display(void)
 {
     int i;
