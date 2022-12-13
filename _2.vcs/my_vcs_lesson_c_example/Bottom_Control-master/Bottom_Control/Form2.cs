@@ -287,6 +287,7 @@ namespace Bottom_Control
 
         private void button5_Click(object sender, EventArgs e)
         {
+            get_all_plc_m_status();
         }
 
         string get_plc_d_data(string contact_address)
@@ -1243,16 +1244,19 @@ namespace Bottom_Control
             richTextBox1.Text += "測試PLC作業流程 ST\t" + DateTime.Now.ToString() + "\n";
 
             richTextBox1.Text += "(0) PC 啟動完成, 檢查所有 M1XXXX 信號 是否皆為 LOW\n";
-            ret = check_all_plc_m_status_low();
-            if (ret == true)
+
+            while (ret == false)
             {
-                richTextBox1.Text += "(0) 所有 M1XXXX 信號 皆為 LOW, 繼續\n";
-            }
-            else
-            {
-                richTextBox1.Text += "(0) 有 M1XXXX 信號 不為 LOW, 離開\n";
-                button6.BackColor = Color.White;
-                return;
+                ret = check_all_plc_m_status_low();
+                if (ret == true)
+                {
+                    richTextBox1.Text += "(0) 所有 M1XXXX 信號 皆為 LOW, 繼續\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "(0) 有 M1XXXX 信號 不為 LOW, 等待\n";
+                    delay(500);
+                }
             }
 
             flag_plc_test = true;
@@ -1368,7 +1372,7 @@ namespace Bottom_Control
 
             richTextBox1.Text += "(10b) PC 清除 D8000 ~ D8006 資料\n";
             contact_address = "8000";
-            data_to_write = "";
+            data_to_write = " ";
             set_plc_d_data(contact_address, data_to_write);
 
             richTextBox1.Text += "(10c) PC 令 (收到動作要求信號)M12000 為 OFF\n";
@@ -1403,7 +1407,7 @@ namespace Bottom_Control
 
             richTextBox1.Text += "(11c) PC 清除 D8010資料\n";
             contact_address = "8010";
-            data_to_write = "";
+            data_to_write = " ";
             set_plc_d_data(contact_address, data_to_write);
 
             richTextBox1.Text += "(11d) PC 令 M12002 為 OFF\n";
@@ -1509,6 +1513,23 @@ namespace Bottom_Control
                 show_main_message1("無圖可存a", S_FALSE, 30);
             }
             return;
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            string contact_address = string.Empty;
+
+            richTextBox1.Text += "[M status] M12000 LOW\n";
+            contact_address = "12000";
+            set_plc_m_status(contact_address, LOW);
+
+            richTextBox1.Text += "[M status] M12001 LOW\n";
+            contact_address = "12001";
+            set_plc_m_status(contact_address, LOW);
+
+            richTextBox1.Text += "[M status] M12002 LOW\n";
+            contact_address = "12002";
+            set_plc_m_status(contact_address, LOW);
         }
     }
 }

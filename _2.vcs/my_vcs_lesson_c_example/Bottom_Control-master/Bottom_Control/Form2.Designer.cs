@@ -62,7 +62,6 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.daButton1 = new Bottom_Control.DAButton();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -105,6 +104,8 @@
             this.timer_display = new System.Windows.Forms.Timer(this.components);
             this.bt_clear = new System.Windows.Forms.Button();
             this.bt_copy_to_clipboard = new System.Windows.Forms.Button();
+            this.button8 = new System.Windows.Forms.Button();
+            this.daButton1 = new Bottom_Control.DAButton();
             this.plC_Open_Time1 = new Bottom_Control.设置控件.PLC_Open_Time();
             this.groupBox1.SuspendLayout();
             this.groupBox_plc_status.SuspendLayout();
@@ -438,6 +439,7 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.button8);
             this.groupBox6.Controls.Add(this.button4);
             this.groupBox6.Controls.Add(this.button5);
             this.groupBox6.Controls.Add(this.button6);
@@ -445,7 +447,7 @@
             this.groupBox6.Controls.Add(this.daButton1);
             this.groupBox6.Location = new System.Drawing.Point(576, 10);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(250, 200);
+            this.groupBox6.Size = new System.Drawing.Size(358, 200);
             this.groupBox6.TabIndex = 151;
             this.groupBox6.TabStop = false;
             // 
@@ -465,6 +467,7 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(96, 42);
             this.button5.TabIndex = 13;
+            this.button5.Text = "Get M1X00X status";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
@@ -488,26 +491,6 @@
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             this.button7.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button7_MouseDown);
-            // 
-            // daButton1
-            // 
-            this.daButton1.BackColor = System.Drawing.Color.Transparent;
-            this.daButton1.Backdrop_OFF = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(131)))), ((int)(((byte)(229)))));
-            this.daButton1.Backdrop_ON = System.Drawing.Color.Lime;
-            this.daButton1.ControlState = CCWin.SkinClass.ControlState.Normal;
-            this.daButton1.DownBack = null;
-            this.daButton1.Location = new System.Drawing.Point(22, 120);
-            this.daButton1.MouseBack = null;
-            this.daButton1.Name = "daButton1";
-            this.daButton1.NormlBack = null;
-            this.daButton1.Pattern = Bottom_Control.Button_pattern.selector_witch;
-            this.daButton1.PLC_Address = "20";
-            this.daButton1.PLC_Contact = "Y";
-            this.daButton1.PLC_Enable = true;
-            this.daButton1.Size = new System.Drawing.Size(72, 72);
-            this.daButton1.TabIndex = 0;
-            this.daButton1.Text = "連接PLC";
-            this.daButton1.UseVisualStyleBackColor = false;
             // 
             // groupBox5
             // 
@@ -961,6 +944,36 @@
             this.bt_copy_to_clipboard.UseVisualStyleBackColor = true;
             this.bt_copy_to_clipboard.Click += new System.EventHandler(this.bt_copy_to_clipboard_Click);
             // 
+            // button8
+            // 
+            this.button8.Location = new System.Drawing.Point(231, 24);
+            this.button8.Name = "button8";
+            this.button8.Size = new System.Drawing.Size(96, 42);
+            this.button8.TabIndex = 149;
+            this.button8.Text = "Rest M1200X";
+            this.button8.UseVisualStyleBackColor = true;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
+            // 
+            // daButton1
+            // 
+            this.daButton1.BackColor = System.Drawing.Color.Transparent;
+            this.daButton1.Backdrop_OFF = System.Drawing.Color.FromArgb(((int)(((byte)(74)))), ((int)(((byte)(131)))), ((int)(((byte)(229)))));
+            this.daButton1.Backdrop_ON = System.Drawing.Color.Lime;
+            this.daButton1.ControlState = CCWin.SkinClass.ControlState.Normal;
+            this.daButton1.DownBack = null;
+            this.daButton1.Location = new System.Drawing.Point(22, 120);
+            this.daButton1.MouseBack = null;
+            this.daButton1.Name = "daButton1";
+            this.daButton1.NormlBack = null;
+            this.daButton1.Pattern = Bottom_Control.Button_pattern.selector_witch;
+            this.daButton1.PLC_Address = "20";
+            this.daButton1.PLC_Contact = "Y";
+            this.daButton1.PLC_Enable = true;
+            this.daButton1.Size = new System.Drawing.Size(72, 72);
+            this.daButton1.TabIndex = 0;
+            this.daButton1.Text = "連接PLC";
+            this.daButton1.UseVisualStyleBackColor = false;
+            // 
             // plC_Open_Time1
             // 
             this.plC_Open_Time1.Interval = 500;
@@ -1085,5 +1098,6 @@
         private System.Windows.Forms.PictureBox pbx_plc_status;
         private System.Windows.Forms.Button bt_save;
         private System.Windows.Forms.Button bt_open_folder;
+        private System.Windows.Forms.Button button8;
     }
 }
