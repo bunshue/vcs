@@ -155,6 +155,8 @@ static void displayTextureSizeInfo(void)
 
 int main(int argc, char** argv)
 {
+	glutInit(&argc, argv);
+
 	char* name = "Texture Proxy Test";
 
 	glutInitDisplayMode(GLUT_RGB);
@@ -163,13 +165,14 @@ int main(int argc, char** argv)
 	if (!glutExtensionSupported("GL_EXT_texture"))
 	{
 		fprintf(stderr, "missing extension: GL_EXT_texture\n");
-		exit(EXIT_FAILURE);
+		//exit(EXIT_FAILURE);
 	}
 
 	displayTextureSizeInfo();
 	exit(EXIT_SUCCESS);
 }
 #else
+
 int main(int argc, char** argv)
 {
 	printf("Couldn't find GL_EXT_texture extension.\n");
