@@ -92,13 +92,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Public_Class.cs" />
-    <Compile Include="控件类基\Doughnut_Base.cs" />
-    <Compile Include="控件类基\DataGridViewPLC_base.cs" />
-    <Compile Include="控件类基\Button_base.cs" />
-    <Compile Include="控件类基\Combox_base.cs" />
-    <Compile Include="控件类基\Flicker_base.cs" />
-    <Compile Include="控件类基\Histogram_base.cs" />
-    <Compile Include="控件类基\TextBox_base.cs" />
     <Compile Include="设置控件\PLC_Open_Time.cs">
       <SubType>Component</SubType>
     </Compile>

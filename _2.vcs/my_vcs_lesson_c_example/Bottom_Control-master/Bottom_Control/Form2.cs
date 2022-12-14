@@ -13,7 +13,6 @@ using System.Diagnostics;
 using System.Drawing.Imaging;
 
 using Bottom_Control.PLC通讯协议;
-using Bottom_Control.基本控件;
 using CCWin.SkinClass;
 using Bottom_Control;
 
@@ -53,8 +52,7 @@ namespace Bottom_Control
             bt_open_folder.BackgroundImage = Properties.Resources.open_folder;
             bt_open_folder.BackgroundImageLayout = ImageLayout.Zoom;
 
-            lb_main_mesg1.Location = new Point(10, 330);
-            lb_read_write_plc.Location = new Point(10+250, 320);
+            lb_main_mesg1.Location = new Point(400, 182);
 
             cb_random.Checked = true;
 
@@ -63,7 +61,7 @@ namespace Bottom_Control
 
             int x_st = 10;
             int y_st = 15;
-            int dx = 450;
+            int dx = 470;
             int dy = 30;
             int w = 30;
             int h = 30;
@@ -93,7 +91,7 @@ namespace Bottom_Control
             pbx_m12002.BackgroundImage = Properties.Resources.ball_gray;
 
             pbx_plc_status.Size = new Size(w * 3, h * 3);
-            pbx_plc_status.Location = new Point(x_st + dx * 2 - 110, y_st + dy * 3 - 30);
+            pbx_plc_status.Location = new Point(x_st + dx * 2 - 80, y_st + dy * 3 - 70);
             pbx_plc_status.BackgroundImageLayout = ImageLayout.Zoom;
             pbx_plc_status.BackgroundImage = Properties.Resources.ball_gray;
 
@@ -103,6 +101,8 @@ namespace Bottom_Control
             lb_plc_pc2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             lb_plc_pc3a.Location = new Point(x_st + dx * 0, y_st + dy * 3);
             lb_plc_pc4a.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            lb_read_write_plc.Location = new Point(x_st + dx * 0 + 220, y_st + dy * 5 - 5);
+
             lb_plc_pc3b.Location = new Point(x_st + dx * 0 + 160, y_st + dy * 3);
             lb_plc_pc4b.Location = new Point(x_st + dx * 0 + 160, y_st + dy * 4);
             lb_pc_plc0.Location = new Point(x_st + dx * 1, y_st + dy * 0);
@@ -1206,13 +1206,12 @@ namespace Bottom_Control
         }
 
         bool flag_plc_test = false;
-        private void button6_Click(object sender, EventArgs e)
+
+        void do_PC_PLC_Communication(object sender, EventArgs e)
         {
             int i;
             string contact_address = String.Empty;
             bool ret = false;
-
-            button6.BackColor = Color.Red;
 
             richTextBox1.Text += "測試PLC作業流程 ST\t" + DateTime.Now.ToString() + "\n";
 
@@ -1415,6 +1414,15 @@ namespace Bottom_Control
             richTextBox1.Text += "\n(12b) PC 取得 M10002 為 LOW\n";
 
             richTextBox1.Text += "測試PLC作業流程 SP\t" + DateTime.Now.ToString() + "\tOK\n\n\n";
+
+            button6.BackColor = Color.White;
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            button6.BackColor = Color.Red;
+
+            do_PC_PLC_Communication(sender, e);
 
             button6.BackColor = Color.White;
         }

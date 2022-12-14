@@ -63,8 +63,6 @@
             this.button5 = new System.Windows.Forms.Button();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
-            this.cb_random = new System.Windows.Forms.CheckBox();
-            this.bt_generate = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.rb_low = new System.Windows.Forms.RadioButton();
@@ -85,7 +83,9 @@
             this.bt_write_d = new System.Windows.Forms.Button();
             this.tb_contact_point_d = new System.Windows.Forms.TextBox();
             this.bt_read_d = new System.Windows.Forms.Button();
+            this.cb_random = new System.Windows.Forms.CheckBox();
             this.tb_contact_address_d = new System.Windows.Forms.TextBox();
+            this.bt_generate = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.tb_data_d = new System.Windows.Forms.TextBox();
             this.lb_main_mesg1 = new System.Windows.Forms.Label();
@@ -97,6 +97,8 @@
             this.bt_copy_to_clipboard = new System.Windows.Forms.Button();
             this.plC_Open_Time1 = new Bottom_Control.设置控件.PLC_Open_Time();
             this.lb_read_write_plc = new System.Windows.Forms.Label();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox_plc_status.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_plc_status)).BeginInit();
@@ -111,11 +113,12 @@
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.lb_read_write_plc);
+            this.groupBox1.Controls.Add(this.groupBox5);
             this.groupBox1.Controls.Add(this.lb_plc_mesg);
             this.groupBox1.Controls.Add(this.groupBox_plc_status);
             this.groupBox1.Controls.Add(this.groupBox6);
@@ -125,7 +128,7 @@
             this.groupBox1.Controls.Add(this.cb_debug);
             this.groupBox1.Location = new System.Drawing.Point(10, 10);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1000, 900);
+            this.groupBox1.Size = new System.Drawing.Size(1000, 840);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
@@ -134,7 +137,7 @@
             this.lb_plc_mesg.AutoSize = true;
             this.lb_plc_mesg.Font = new System.Drawing.Font("Arial", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_plc_mesg.ForeColor = System.Drawing.Color.Red;
-            this.lb_plc_mesg.Location = new System.Drawing.Point(174, 317);
+            this.lb_plc_mesg.Location = new System.Drawing.Point(552, 172);
             this.lb_plc_mesg.Name = "lb_plc_mesg";
             this.lb_plc_mesg.Size = new System.Drawing.Size(138, 44);
             this.lb_plc_mesg.TabIndex = 153;
@@ -142,6 +145,7 @@
             // 
             // groupBox_plc_status
             // 
+            this.groupBox_plc_status.Controls.Add(this.lb_read_write_plc);
             this.groupBox_plc_status.Controls.Add(this.bt_open_folder);
             this.groupBox_plc_status.Controls.Add(this.pbx_plc_status);
             this.groupBox_plc_status.Controls.Add(this.bt_save);
@@ -167,15 +171,15 @@
             this.groupBox_plc_status.Controls.Add(this.lb_plc_pc2);
             this.groupBox_plc_status.Controls.Add(this.lb_plc_pc1);
             this.groupBox_plc_status.Controls.Add(this.lb_plc_pc0);
-            this.groupBox_plc_status.Location = new System.Drawing.Point(10, 380);
+            this.groupBox_plc_status.Location = new System.Drawing.Point(10, 320);
             this.groupBox_plc_status.Name = "groupBox_plc_status";
-            this.groupBox_plc_status.Size = new System.Drawing.Size(900, 450);
+            this.groupBox_plc_status.Size = new System.Drawing.Size(980, 505);
             this.groupBox_plc_status.TabIndex = 152;
             this.groupBox_plc_status.TabStop = false;
             // 
             // bt_open_folder
             // 
-            this.bt_open_folder.Location = new System.Drawing.Point(819, 274);
+            this.bt_open_folder.Location = new System.Drawing.Point(904, 294);
             this.bt_open_folder.Margin = new System.Windows.Forms.Padding(2);
             this.bt_open_folder.Name = "bt_open_folder";
             this.bt_open_folder.Size = new System.Drawing.Size(50, 50);
@@ -193,7 +197,7 @@
             // 
             // bt_save
             // 
-            this.bt_save.Location = new System.Drawing.Point(819, 328);
+            this.bt_save.Location = new System.Drawing.Point(904, 348);
             this.bt_save.Margin = new System.Windows.Forms.Padding(2);
             this.bt_save.Name = "bt_save";
             this.bt_save.Size = new System.Drawing.Size(50, 50);
@@ -251,7 +255,7 @@
             // 
             // bt_pause
             // 
-            this.bt_pause.Location = new System.Drawing.Point(819, 382);
+            this.bt_pause.Location = new System.Drawing.Point(904, 402);
             this.bt_pause.Margin = new System.Windows.Forms.Padding(2);
             this.bt_pause.Name = "bt_pause";
             this.bt_pause.Size = new System.Drawing.Size(50, 50);
@@ -305,10 +309,10 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(10, 171);
+            this.pictureBox1.Location = new System.Drawing.Point(10, 192);
             this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(874, 274);
+            this.pictureBox1.Size = new System.Drawing.Size(960, 300);
             this.pictureBox1.TabIndex = 14;
             this.pictureBox1.TabStop = false;
             // 
@@ -428,20 +432,19 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.button1);
             this.groupBox6.Controls.Add(this.button8);
             this.groupBox6.Controls.Add(this.button4);
             this.groupBox6.Controls.Add(this.button5);
-            this.groupBox6.Controls.Add(this.button6);
-            this.groupBox6.Controls.Add(this.button7);
             this.groupBox6.Location = new System.Drawing.Point(10, 180);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(358, 134);
+            this.groupBox6.Size = new System.Drawing.Size(220, 120);
             this.groupBox6.TabIndex = 151;
             this.groupBox6.TabStop = false;
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(231, 24);
+            this.button8.Location = new System.Drawing.Point(110, 70);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(96, 42);
             this.button8.TabIndex = 149;
@@ -451,7 +454,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(22, 24);
+            this.button4.Location = new System.Drawing.Point(10, 20);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(96, 42);
             this.button4.TabIndex = 12;
@@ -461,7 +464,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(129, 24);
+            this.button5.Location = new System.Drawing.Point(10, 70);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(96, 42);
             this.button5.TabIndex = 13;
@@ -471,7 +474,7 @@
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(22, 72);
+            this.button6.Location = new System.Drawing.Point(25, 29);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(96, 42);
             this.button6.TabIndex = 147;
@@ -481,7 +484,7 @@
             // 
             // button7
             // 
-            this.button7.Location = new System.Drawing.Point(129, 72);
+            this.button7.Location = new System.Drawing.Point(140, 29);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(96, 42);
             this.button7.TabIndex = 148;
@@ -489,28 +492,6 @@
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             this.button7.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button7_MouseDown);
-            // 
-            // cb_random
-            // 
-            this.cb_random.AutoSize = true;
-            this.cb_random.Location = new System.Drawing.Point(361, 117);
-            this.cb_random.Margin = new System.Windows.Forms.Padding(2);
-            this.cb_random.Name = "cb_random";
-            this.cb_random.Size = new System.Drawing.Size(48, 16);
-            this.cb_random.TabIndex = 10;
-            this.cb_random.Text = "亂數";
-            this.cb_random.UseVisualStyleBackColor = true;
-            // 
-            // bt_generate
-            // 
-            this.bt_generate.Location = new System.Drawing.Point(313, 100);
-            this.bt_generate.Margin = new System.Windows.Forms.Padding(2);
-            this.bt_generate.Name = "bt_generate";
-            this.bt_generate.Size = new System.Drawing.Size(43, 43);
-            this.bt_generate.TabIndex = 11;
-            this.bt_generate.Text = "產生";
-            this.bt_generate.UseVisualStyleBackColor = true;
-            this.bt_generate.Click += new System.EventHandler(this.bt_generate_Click);
             // 
             // groupBox3
             // 
@@ -524,9 +505,9 @@
             this.groupBox3.Controls.Add(this.tb_contact_address_m);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.tb_data_m);
-            this.groupBox3.Location = new System.Drawing.Point(520, 10);
+            this.groupBox3.Location = new System.Drawing.Point(518, 10);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(414, 164);
+            this.groupBox3.Size = new System.Drawing.Size(470, 160);
             this.groupBox3.TabIndex = 146;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "讀寫 M bit";
@@ -674,7 +655,7 @@
             this.groupBox2.Controls.Add(this.tb_data_d);
             this.groupBox2.Location = new System.Drawing.Point(10, 10);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(505, 164);
+            this.groupBox2.Size = new System.Drawing.Size(470, 160);
             this.groupBox2.TabIndex = 145;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "讀寫 D register";
@@ -714,7 +695,7 @@
             // 
             // bt_write_d
             // 
-            this.bt_write_d.Location = new System.Drawing.Point(437, 92);
+            this.bt_write_d.Location = new System.Drawing.Point(406, 93);
             this.bt_write_d.Margin = new System.Windows.Forms.Padding(2);
             this.bt_write_d.Name = "bt_write_d";
             this.bt_write_d.Size = new System.Drawing.Size(50, 50);
@@ -735,7 +716,7 @@
             // 
             // bt_read_d
             // 
-            this.bt_read_d.Location = new System.Drawing.Point(437, 26);
+            this.bt_read_d.Location = new System.Drawing.Point(406, 26);
             this.bt_read_d.Margin = new System.Windows.Forms.Padding(2);
             this.bt_read_d.Name = "bt_read_d";
             this.bt_read_d.Size = new System.Drawing.Size(50, 50);
@@ -743,6 +724,17 @@
             this.bt_read_d.Text = "讀取";
             this.bt_read_d.UseVisualStyleBackColor = true;
             this.bt_read_d.Click += new System.EventHandler(this.bt_read_d_Click);
+            // 
+            // cb_random
+            // 
+            this.cb_random.AutoSize = true;
+            this.cb_random.Location = new System.Drawing.Point(361, 117);
+            this.cb_random.Margin = new System.Windows.Forms.Padding(2);
+            this.cb_random.Name = "cb_random";
+            this.cb_random.Size = new System.Drawing.Size(48, 16);
+            this.cb_random.TabIndex = 10;
+            this.cb_random.Text = "亂數";
+            this.cb_random.UseVisualStyleBackColor = true;
             // 
             // tb_contact_address_d
             // 
@@ -753,6 +745,17 @@
             this.tb_contact_address_d.Size = new System.Drawing.Size(198, 33);
             this.tb_contact_address_d.TabIndex = 139;
             this.tb_contact_address_d.Text = "2000";
+            // 
+            // bt_generate
+            // 
+            this.bt_generate.Location = new System.Drawing.Point(313, 100);
+            this.bt_generate.Margin = new System.Windows.Forms.Padding(2);
+            this.bt_generate.Name = "bt_generate";
+            this.bt_generate.Size = new System.Drawing.Size(43, 43);
+            this.bt_generate.TabIndex = 11;
+            this.bt_generate.Text = "產生";
+            this.bt_generate.UseVisualStyleBackColor = true;
+            this.bt_generate.Click += new System.EventHandler(this.bt_generate_Click);
             // 
             // label6
             // 
@@ -780,7 +783,7 @@
             this.lb_main_mesg1.AutoSize = true;
             this.lb_main_mesg1.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lb_main_mesg1.ForeColor = System.Drawing.Color.Red;
-            this.lb_main_mesg1.Location = new System.Drawing.Point(16, 317);
+            this.lb_main_mesg1.Location = new System.Drawing.Point(401, 180);
             this.lb_main_mesg1.Name = "lb_main_mesg1";
             this.lb_main_mesg1.Size = new System.Drawing.Size(78, 24);
             this.lb_main_mesg1.TabIndex = 135;
@@ -801,7 +804,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(1020, 10);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(400, 899);
+            this.richTextBox1.Size = new System.Drawing.Size(400, 840);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             // 
@@ -817,7 +820,7 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(1137, 588);
+            this.bt_clear.Location = new System.Drawing.Point(1227, 552);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(64, 64);
             this.bt_clear.TabIndex = 136;
@@ -827,7 +830,7 @@
             // 
             // bt_copy_to_clipboard
             // 
-            this.bt_copy_to_clipboard.Location = new System.Drawing.Point(1067, 588);
+            this.bt_copy_to_clipboard.Location = new System.Drawing.Point(1157, 552);
             this.bt_copy_to_clipboard.Name = "bt_copy_to_clipboard";
             this.bt_copy_to_clipboard.Size = new System.Drawing.Size(64, 64);
             this.bt_copy_to_clipboard.TabIndex = 137;
@@ -845,19 +848,38 @@
             // lb_read_write_plc
             // 
             this.lb_read_write_plc.AutoSize = true;
-            this.lb_read_write_plc.Font = new System.Drawing.Font("Arial", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_read_write_plc.ForeColor = System.Drawing.Color.Black;
-            this.lb_read_write_plc.Location = new System.Drawing.Point(336, 317);
+            this.lb_read_write_plc.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_read_write_plc.Location = new System.Drawing.Point(18, 139);
+            this.lb_read_write_plc.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lb_read_write_plc.Name = "lb_read_write_plc";
-            this.lb_read_write_plc.Size = new System.Drawing.Size(138, 44);
-            this.lb_read_write_plc.TabIndex = 154;
-            this.lb_read_write_plc.Text = "mesg1";
+            this.lb_read_write_plc.Size = new System.Drawing.Size(88, 21);
+            this.lb_read_write_plc.TabIndex = 168;
+            this.lb_read_write_plc.Text = "RW_PLC";
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.button6);
+            this.groupBox5.Controls.Add(this.button7);
+            this.groupBox5.Location = new System.Drawing.Point(244, 209);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(678, 105);
+            this.groupBox5.TabIndex = 152;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "PLC交握測試";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(110, 20);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(96, 42);
+            this.button1.TabIndex = 150;
+            this.button1.UseVisualStyleBackColor = true;
             // 
             // Form2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1424, 921);
+            this.ClientSize = new System.Drawing.Size(1429, 862);
             this.Controls.Add(this.bt_copy_to_clipboard);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
@@ -884,6 +906,7 @@
             this.groupBox4.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -958,5 +981,7 @@
         private System.Windows.Forms.Button bt_open_folder;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Label lb_read_write_plc;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.Button button1;
     }
 }
