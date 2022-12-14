@@ -36,11 +36,6 @@ int image = 1;  /* default to striped teapot */
 GLfloat sgenparams[] = { 1.0, 0.0, 0.0, 0.0 };
 GLfloat tgenparams[] = { 0.0, 0.0, 1.0, 0.0 };
 
-void makeImage(void);
-void gfxinit(void);
-void imageMenu(int whichImage);
-GLbyte* gltLoadTGA(const char* szFileName, GLint* iWidth, GLint* iHeight, GLint* iComponents, GLenum* eFormat);
-
 void makeImage(void)
 {
     int i, j, w2, l2, cond;
@@ -57,6 +52,91 @@ void makeImage(void)
             Image[i][j][2] = 0;
         }
     }
+}
+
+////////////////////////////////////////////////////////////////////
+// Allocate memory and load targa bits. Returns pointer to new buffer,
+// height, and width of texture, and the OpenGL format of data.
+// Call free() on buffer when finished!
+// This only works on pretty vanilla targas... 8, 24, or 32 bit color
+// only, no palettes, no RLE encoding.
+GLbyte* gltLoadTGA(const char* szFileName, GLint* iWidth, GLint* iHeight, GLint* iComponents, GLenum* eFormat)
+{
+    FILE* pFile;			// File pointer
+    TGAHEADER tgaHeader;		// TGA file header
+    unsigned long lImageSize;		// Size in bytes of image
+    short sDepth;			// Pixel depth;
+    GLbyte* pBits = NULL;          // Pointer to bits
+
+    // Default/Failed values
+    *iWidth = 0;
+    *iHeight = 0;
+    *eFormat = GL_BGR_EXT;
+    *iComponents = GL_RGB8;
+
+    // Attempt to open the file
+    fopen_s(&pFile, szFileName, "rb");
+    if (pFile == NULL)
+    {
+        return NULL;
+    }
+
+    // Read in header (binary)
+    fread(&tgaHeader, 18/* sizeof(TGAHEADER)*/, 1, pFile);
+
+    // Get width, height, and depth of texture
+    *iWidth = tgaHeader.width;
+    *iHeight = tgaHeader.height;
+    sDepth = tgaHeader.bits / 8;
+
+    // Put some validity checks here. Very simply, I only understand
+    // or care about 8, 24, or 32 bit targa's.
+    if (tgaHeader.bits != 8 && tgaHeader.bits != 24 && tgaHeader.bits != 32)
+    {
+        return NULL;
+    }
+
+    // Calculate size of image buffer
+    lImageSize = tgaHeader.width * tgaHeader.height * sDepth;
+
+    // Allocate memory and check for success
+    pBits = (GLbyte*)malloc(lImageSize * sizeof(GLbyte));
+    if (pBits == NULL)
+    {
+        return NULL;
+    }
+
+    // Read in the bits
+    // Check for read error. This should catch RLE or other 
+    // weird formats that I don't want to recognize
+    if (fread(pBits, lImageSize, 1, pFile) != 1)
+    {
+        free(pBits);
+        return NULL;
+    }
+
+    // Set OpenGL format expected
+    switch (sDepth)
+    {
+    case 3:     // Most likely case
+        *eFormat = GL_BGR_EXT;
+        *iComponents = GL_RGB8;
+        break;
+    case 4:
+        *eFormat = GL_BGRA_EXT;
+        *iComponents = GL_RGBA8;
+        break;
+    case 1:
+        *eFormat = GL_LUMINANCE;
+        *iComponents = GL_LUMINANCE8;
+        break;
+    };
+
+    // Done with File
+    fclose(pFile);
+
+    // Return pointer to image data
+    return pBits;
 }
 
 void gfxinit(void)
@@ -167,107 +247,22 @@ void reshape(int w, int h)
     }
 }
 
-/* This function changes the image based on the user's menu selection. */
-void imageMenu(int whichImage)
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
-    switch (whichImage)
+    switch (key)
     {
-    case 1: /* Striped teapot */
+    case 27:
+        glutDestroyWindow(glutGetWindow());
+        return;
+        break;
+    case '1': /* Striped teapot */
         image = 1;
-        glutPostRedisplay();
         break;
-    case 2: /* Stone teapot */
+    case '2': /* Stone teapot */
         image = 2;
-        glutPostRedisplay();
         break;
-    case 3: /* Exit program */
-        exit(0);
     }
-}
-
-////////////////////////////////////////////////////////////////////
-// Allocate memory and load targa bits. Returns pointer to new buffer,
-// height, and width of texture, and the OpenGL format of data.
-// Call free() on buffer when finished!
-// This only works on pretty vanilla targas... 8, 24, or 32 bit color
-// only, no palettes, no RLE encoding.
-GLbyte* gltLoadTGA(const char* szFileName, GLint* iWidth, GLint* iHeight, GLint* iComponents, GLenum* eFormat)
-{
-    FILE* pFile;			// File pointer
-    TGAHEADER tgaHeader;		// TGA file header
-    unsigned long lImageSize;		// Size in bytes of image
-    short sDepth;			// Pixel depth;
-    GLbyte* pBits = NULL;          // Pointer to bits
-
-    // Default/Failed values
-    *iWidth = 0;
-    *iHeight = 0;
-    *eFormat = GL_BGR_EXT;
-    *iComponents = GL_RGB8;
-
-    // Attempt to open the file
-    fopen_s(&pFile, szFileName, "rb");
-    if (pFile == NULL)
-    {
-        return NULL;
-    }
-
-    // Read in header (binary)
-    fread(&tgaHeader, 18/* sizeof(TGAHEADER)*/, 1, pFile);
-
-    // Get width, height, and depth of texture
-    *iWidth = tgaHeader.width;
-    *iHeight = tgaHeader.height;
-    sDepth = tgaHeader.bits / 8;
-
-    // Put some validity checks here. Very simply, I only understand
-    // or care about 8, 24, or 32 bit targa's.
-    if (tgaHeader.bits != 8 && tgaHeader.bits != 24 && tgaHeader.bits != 32)
-    {
-        return NULL;
-    }
-
-    // Calculate size of image buffer
-    lImageSize = tgaHeader.width * tgaHeader.height * sDepth;
-
-    // Allocate memory and check for success
-    pBits = (GLbyte*)malloc(lImageSize * sizeof(GLbyte));
-    if (pBits == NULL)
-    {
-        return NULL;
-    }
-
-    // Read in the bits
-    // Check for read error. This should catch RLE or other 
-    // weird formats that I don't want to recognize
-    if (fread(pBits, lImageSize, 1, pFile) != 1)
-    {
-        free(pBits);
-        return NULL;
-    }
-
-    // Set OpenGL format expected
-    switch (sDepth)
-    {
-    case 3:     // Most likely case
-        *eFormat = GL_BGR_EXT;
-        *iComponents = GL_RGB8;
-        break;
-    case 4:
-        *eFormat = GL_BGRA_EXT;
-        *iComponents = GL_RGBA8;
-        break;
-    case 1:
-        *eFormat = GL_LUMINANCE;
-        *iComponents = GL_LUMINANCE8;
-        break;
-    };
-
-    // Done with File
-    fclose(pFile);
-
-    // Return pointer to image data
-    return pBits;
+    glutPostRedisplay();    //將當前視窗打上標記，標記其需要再次顯示。
 }
 
 int main(int argc, char** argv)
@@ -283,17 +278,11 @@ int main(int argc, char** argv)
 
     glutDisplayFunc(display);   //設定callback function
     glutReshapeFunc(reshape);   //設定callback function
-    glutKeyboardFunc(keyboard0); //設定callback function
-
-    glutCreateMenu(imageMenu);
-    glutAddMenuEntry("Striped teapot", 1);
-    glutAddMenuEntry("Stone teapot", 2);
-    glutAddMenuEntry("Exit program", 3);
-    glutAttachMenu(GLUT_RIGHT_BUTTON);
+    glutKeyboardFunc(keyboard); //設定callback function
 
     gfxinit();
 
-    printf("選單控制, 按 Esc 離開\n");
+    printf("按 1 2 切換, 按 Esc 離開\n");
 
     glutMainLoop();	//開始主循環繪製
 

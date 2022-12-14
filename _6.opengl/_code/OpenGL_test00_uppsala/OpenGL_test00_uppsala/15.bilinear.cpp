@@ -13,22 +13,6 @@
 
 float x[2][2], y[2][2], z[2][2];
 
-void input(void)
-{
-    cout << "Bilinear Patches" << endl << endl;
-    cout << "Please enter the four points in the following sequence." << endl;
-    cout << "The first two points define the v=0 edge and the last two points" << endl;
-    cout << "define the v=1 edge." << endl << endl;
-    cout << "Enter coordinates of p[0][0]:  ";
-    cin >> x[0][0] >> y[0][0] >> z[0][0];
-    cout << "Enter coordinates of p[1][0]:  ";
-    cin >> x[1][0] >> y[1][0] >> z[1][0];
-    cout << "Enter coordinates of p[0][1]:  ";
-    cin >> x[0][1] >> y[0][1] >> z[0][1];
-    cout << "Enter coordinates of p[1][1]:  ";
-    cin >> x[1][1] >> y[1][1] >> z[1][1];
-}
-
 void gfxinit(void)
 {
     float u, u1, v, v1, x1, y1, x2, y2;
@@ -74,19 +58,51 @@ void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
     glCallList(1);
-    glutSwapBuffers();
+    glFlush();  // 執行繪圖命令
 }
 
 int main(int argc, char** argv)
 {
-    /* Get input values from user. */
-    input();
+    cout << "Bilinear Patches" << endl << endl;
+    cout << "Please enter the four points in the following sequence." << endl;
+    cout << "The first two points define the v=0 edge and the last two points" << endl;
+    cout << "define the v=1 edge." << endl << endl;
+    /*
+    cout << "Enter coordinates of p[0][0]:  ";
+    cin >> x[0][0] >> y[0][0] >> z[0][0];
+    cout << "Enter coordinates of p[1][0]:  ";
+    cin >> x[1][0] >> y[1][0] >> z[1][0];
+    cout << "Enter coordinates of p[0][1]:  ";
+    cin >> x[0][1] >> y[0][1] >> z[0][1];
+    cout << "Enter coordinates of p[1][1]:  ";
+    cin >> x[1][1] >> y[1][1] >> z[1][1];
+    */
+
+    //第一條線之起點, 左下
+    x[0][0] = -8;
+    y[0][0] = -8;
+    z[0][0] = -8;   //z先不管
+
+    //第一條線之終點, 右下
+    x[0][1] = 8;
+    y[0][1] = -8;
+    z[0][1] = 8;    //z先不管
+
+    //第二條線之起點, 左上
+    x[1][0] = -5;
+    y[1][0] = 8;
+    z[1][0] = 2;    //z先不管
+
+    //第二條線之終點, 右上
+    x[1][1] = 5;
+    y[1][1] = 5;
+    z[1][1] = -3;   //z先不管
 
     /* Set graphics window parameters. */
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
-    glutInitWindowSize(400, 400);       // 設定視窗大小
+    glutInitWindowSize(600, 600);       // 設定視窗大小
     glutInitWindowPosition(1100, 200);  // 設定視窗位置
 
     glutCreateWindow("Bilinear Patch");
@@ -96,6 +112,8 @@ int main(int argc, char** argv)
     glutKeyboardFunc(keyboard0); //設定callback function
 
     gfxinit();
+
+    printf("僅顯示, 無控制, 按 Esc 離開\n");
 
     glutMainLoop();	//開始主循環繪製
 

@@ -23,46 +23,12 @@ void colorcube(void)
     glColorPointer(3, GL_FLOAT, 0, colors);
 }
 
-// This function handles the menu choices during the program's execution. The menu choices
-// change the view in which the cube is seen.
-void viewMenu(int code)
-{
-    switch (code)
-    {
-    case 1: /* positive x-axis */
-        glLoadIdentity();
-        gluLookAt(2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
-        break;
-    case 2: /* negative x-axis */
-        glLoadIdentity();
-        gluLookAt(-2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
-        break;
-    case 3: /* positive y-axis */
-        glLoadIdentity();
-        gluLookAt(0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0);
-        break;
-    case 4: /* negative y-axis */
-        glLoadIdentity();
-        gluLookAt(0.0, -2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0);
-        break;
-    case 5: /* positive z-axis */
-        glLoadIdentity();
-        gluLookAt(0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
-        break;
-    case 6: /* negative z-axis */
-        glLoadIdentity();
-        gluLookAt(0.0, 0.0, -2.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
-        break;
-    }
-    glutPostRedisplay();
-}
-
 // This function is the display callback. It draws the cube from the current viewing point.
 void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glDrawElements(GL_QUADS, 24, GL_UNSIGNED_BYTE, cubeIndices);
-    glutSwapBuffers();
+    glFlush();  // 執行繪圖命令
 }
 
 // This is the reshape callback function. It resets the viewport to the entire window and
@@ -83,10 +49,46 @@ void reshape(int w, int h)
     glMatrixMode(GL_MODELVIEW);
 }
 
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
+{
+    switch (key)
+    {
+    case 27:
+        glutDestroyWindow(glutGetWindow());
+        return;
+        break;
+    case '1': /* positive x-axis */
+        glLoadIdentity();
+        gluLookAt(2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+        break;
+    case '2': /* negative x-axis */
+        glLoadIdentity();
+        gluLookAt(-2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+        break;
+    case '3': /* positive y-axis */
+        glLoadIdentity();
+        gluLookAt(0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0);
+        break;
+    case '4': /* negative y-axis */
+        glLoadIdentity();
+        gluLookAt(0.0, -2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0);
+        break;
+    case '5': /* positive z-axis */
+        glLoadIdentity();
+        gluLookAt(0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+        break;
+    case '6': /* negative z-axis */
+        glLoadIdentity();
+        gluLookAt(0.0, 0.0, -2.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+        break;
+    }
+    glutPostRedisplay();    //將當前視窗打上標記，標記其需要再次顯示。
+}
+
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
 
     glutInitWindowSize(600, 600);       // 設定視窗大小
     glutInitWindowPosition(1100, 200);  // 設定視窗位置
@@ -95,28 +97,17 @@ int main(int argc, char** argv)
 
     glutDisplayFunc(display);   //設定callback function
     glutReshapeFunc(reshape);   //設定callback function
-    glutKeyboardFunc(keyboard0); //設定callback function
+    glutKeyboardFunc(keyboard); //設定callback function
 
     glEnable(GL_DEPTH_TEST);
     colorcube();
 
-    /* Create menu for changing views. */
-
-    glutCreateMenu(viewMenu);
-    glutAddMenuEntry("Positive x-axis", 1);
-    glutAddMenuEntry("Negative x-axis", 2);
-    glutAddMenuEntry("Positive y-axis", 3);
-    glutAddMenuEntry("Negative y-axis", 4);
-    glutAddMenuEntry("Positive z-axis", 5);
-    glutAddMenuEntry("Negative z-axis", 6);
-    glutAttachMenu(GLUT_RIGHT_BUTTON);
-
     /* Set initial view to positive x-axis. */
-
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     gluLookAt(2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 
+    printf("按 1 ~ 6 由各個方向去看方塊\n");
     glutMainLoop();	//開始主循環繪製
 
     return 0;

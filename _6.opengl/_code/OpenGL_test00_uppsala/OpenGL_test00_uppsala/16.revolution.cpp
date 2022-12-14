@@ -259,13 +259,14 @@ void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
     glCallList(1);
-    glutSwapBuffers();
+    //glutSwapBuffers();
+    glFlush();  // 執行繪圖命令
 }
 
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
     glutInitWindowSize(600, 600);       // 設定視窗大小
     glutInitWindowPosition(1100, 200);  // 設定視窗位置

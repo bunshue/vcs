@@ -79,7 +79,7 @@ void display(void)
     glCallList(MARK_LIST);
     glCallList(SPLINE_LIST);
 
-    glutSwapBuffers();
+    glFlush();  // 執行繪圖命令
 }
 
 /* This is the callback function that gets executed every time the display size has changed. */
@@ -421,7 +421,7 @@ int main(int argc, char** argv)
     interact();
 
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
     glutInitWindowSize(WindowSizeX, WindowSizeY);   // 設定視窗大小
     glutInitWindowPosition(1100, 200);  // 設定視窗位置

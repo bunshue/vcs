@@ -37,7 +37,7 @@ void gfxinit(void)
             }
         }
         glNewList(k + 1, GL_COMPILE);
-        glColor3d(0.0, 1.0, 0.0);
+        glColor3d(1.0, 0.0, 0.0);
         glMap2d(GL_MAP2_VERTEX_3, 0.0, 1.0, 12, 4, 0.0, 1.0, 3, 4, coords);
         glMapGrid2d(STEPS, 0.0, 1.0, STEPS, 0.0, 1.0);
         glEvalMesh2(GL_FILL, 0, STEPS, 0, STEPS);
@@ -63,9 +63,6 @@ void reshape(int width, int height)
 }
 
 void display(void)
-/* This is the callback function that gets executed every time the display
-   needs to be updated.
-*/
 {
     int i;
 
@@ -119,8 +116,8 @@ void special(int key, int /*x*/, int /*y*/)
     glutPostRedisplay();
 }
 
-void interact(void)
 /* This function gets the input data for the program to process. */
+void interact(void)
 {
     ifstream patches_file, vertices_file;
     int i, j;

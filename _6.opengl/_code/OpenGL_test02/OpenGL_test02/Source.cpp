@@ -20,6 +20,14 @@ void reset_default_setting()
     glutSetWindowTitle(info);
 }
 
+void gfxinit()
+{
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(-0.1, 1.1, -0.1, 1.1);
+    glClearColor(1.0, 1.0, 1.0, 1.0);
+}
+
 // 繪圖回調函數
 void display(void)
 {
@@ -242,6 +250,23 @@ void display(void)
     else if (display_mode == 5)
     {
         //display_mode = 5
+
+        //Maxwell's Triangle
+
+        glClear(GL_COLOR_BUFFER_BIT);
+        glBegin(GL_TRIANGLES);
+        {
+            glColor3f(1.0, 0.0, 0.0);
+            glVertex2f(0.0, 0.0);
+            glColor3f(0.0, 1.0, 0.0);
+            glVertex2f(1.0, 0.0);
+            glColor3f(0.0, 0.0, 1.0);
+            glVertex2f(0.5f, (float)sqrt(3.0) * 0.5f);
+        }
+        glEnd();
+        glFlush();  // 執行繪圖命令
+
+
     }
     else if (display_mode == 6)
     {
@@ -305,6 +330,7 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
         break;
     case '5':
         display_mode = 5;
+        gfxinit();
         break;
     case '6':
         display_mode = 6;
