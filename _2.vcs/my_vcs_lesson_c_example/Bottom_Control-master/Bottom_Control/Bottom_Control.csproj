@@ -86,10 +86,10 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="PLC通讯协议\IPLC_interface.cs" />
+    <Compile Include="PLC通讯协议\mitsubishi\message.cs" />
+    <Compile Include="PLC通讯协议\mitsubishi\Mitsubishi_message.cs" />
     <Compile Include="PLC通讯协议\Mitsubishi_realize.cs" />
     <Compile Include="PLC通讯协议\PLC_public_Class.cs" />
-    <Compile Include="PLC通讯协议\三菱报文\message.cs" />
-    <Compile Include="PLC通讯协议\三菱报文\Mitsubishi_message.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Public_Class.cs" />
