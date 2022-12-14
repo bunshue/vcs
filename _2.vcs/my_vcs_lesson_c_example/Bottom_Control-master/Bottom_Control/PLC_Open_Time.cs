@@ -47,59 +47,11 @@ namespace Bottom_Control.设置控件
         [DefaultValue(typeof(bool), "false")]
         public bool Mitsubishi_Open { get; set; } = false;
         #endregion
-        #region 西门子PLC配置属性
-        [Description("根据PLC 提供的IP进行填写 西门子PLC需要在以太网配置勾选S7协议"), Category("西门子PLC参数")]
-        [DefaultValue(typeof(string), "192.168.3.10")]
-        public string SiemensIP
-        {
-            get => Siemens_ip.ToString();
-            set
-            {
-                Siemens_ip = IPAddress.TryParse(value, out Siemens_ip) ? Siemens_ip = IPAddress.Parse(value) : Siemens_ip = IPAddress.Parse("192.168.3.10");
-            }
-        }
-        [Description("根据PLC 选择具体PLC型号"), Category("西门子PLC参数")]
-        public SiemensPLCS siemensPLCS { get; set; } = SiemensPLCS.S200Smart;
-        private IPAddress Siemens_ip = IPAddress.Parse("192.168.3.10");
-        [Description("根据PLC 提供的端口进行填写 西门子PLC需要在以太网配置勾选S7协议"), Category("西门子PLC参数")]
-        [DefaultValue(typeof(int), "102")]
-        public int SiemensPort { get; } = 102;
-        [Description("是否打开或者启用该PLC"), Category("西门子PLC参数")]
-        [DefaultValue(typeof(bool), "false")]
-        public bool Siemens_Open { get; set; } = false;
-        #endregion
-        #region MODBUS tcp 配置属性
-        [Description("根据PLC 提供的IP进行填写 三菱PLC需要在以太网配置里拖拽出modbus设备并且配置好IP与端口 西门子需要配置MODBUS FB"), Category("MODBUS PLC参数")]
-        [DefaultValue(typeof(string), "192.168.3.10")]
-        public string ModBusIP
-        {
-            get => ModBus_ip.ToString();
-            set
-            {
-                ModBus_ip = IPAddress.TryParse(value, out ModBus_ip) ? ModBus_ip = IPAddress.Parse(value) : ModBus_ip = IPAddress.Parse("192.168.3.20");
-            }
-        }
-        private IPAddress ModBus_ip = IPAddress.Parse("192.168.3.20");
-        [Description("根据PLC 提供的端口进行填写 三菱PLC需要在以太网配置里拖拽出modbus设备并且配置好IP与端口 西门子需要配置MODBUS FB"), Category("MODBUS PLC参数")]
-        [DefaultValue(typeof(int), "102")]
-        public int ModBusPort { get; } = 502;
-        [Description("是否打开或者启用该PLC"), Category("MODBUS PLC参数")]
-        [DefaultValue(typeof(bool), "false")]
-        public bool ModBus_Open { get; set; } = false;
-        #endregion
         #region PLC通讯对象
         /// <summary>
         /// 三菱通讯对象
         /// </summary>
         static IPLC_interface Mitsubishi = new Mitsubishi_realize();
-        /// <summary>
-        /// 西门子通讯对象
-        /// </summary>
-        static IPLC_interface Siemens = new Siemens_realize();
-        /// <summary>
-        /// MODBUS tcp通讯对象
-        /// </summary>
-        static MODBUD_TCP MODBUS;
         /// <summary>
         /// 全局锁 指示该控件只能添加一个 
         /// </summary>
@@ -135,8 +87,6 @@ namespace Bottom_Control.设置控件
             mutex = new System.Threading.Mutex();
             //配置PLC参数
             Mitsubishi.IPEndPoint = new IPEndPoint(Mitsubishi_ip, MitsubishiPort);
-            Siemens.IPEndPoint = new IPEndPoint(Siemens_ip, SiemensPort);
-            MODBUS = new MODBUD_TCP(new IPEndPoint(ModBus_ip, ModBusPort), "502");
         }
         protected override void OnTick(EventArgs e)//重写定时器到达事件
         {
@@ -152,22 +102,6 @@ namespace Bottom_Control.设置控件
                         Mitsubishi.PLC_open();
                         if (Mitsubishi.PLCerr_content != null)
                             this.PLC_errEvent(Mitsubishi.PLCerr_content, new EventArgs());
-                    }
-                    if (Siemens_Open & !Siemens.PLC_ready)
-                    {
-                        Siemens.IPEndPoint.Address = Siemens_ip;
-                        Siemens = new Siemens_realize(Siemens.IPEndPoint, siemensPLCS);
-                        Siemens.PLC_open();
-                        if (Siemens.PLCerr_content != null)
-                            this.PLC_errEvent(Siemens.PLCerr_content, new EventArgs());
-                    }
-                    if (ModBus_Open & !MODBUD_TCP.IPLC_interface_PLC_ready)
-                    {
-                        MODBUD_TCP.IPEndPoint.Address = ModBus_ip;
-                        MODBUD_TCP.IPEndPoint.Port = ModBusPort;
-                        MODBUD_TCP.IPLC_interface_PLC_open();
-                        if (MODBUD_TCP.IPLC_interface_PLCerr_content != null)
-                            this.PLC_errEvent(MODBUD_TCP.IPLC_interface_PLCerr_content, new EventArgs());
                     }
                 });
             }

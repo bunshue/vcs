@@ -842,8 +842,6 @@
             this.plC_Open_Time1.Interval = 500;
             this.plC_Open_Time1.Mitsubishi_Open = true;
             this.plC_Open_Time1.MitsubishiIP = "192.168.3.39";
-            this.plC_Open_Time1.ModBusIP = "192.168.3.20";
-            this.plC_Open_Time1.siemensPLCS = HslCommunication.Profinet.SiemensPLCS.S200Smart;
             // 
             // lb_read_write_plc
             // 

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using System.IO;
-using System.Diagnostics;
+using System.Diagnostics;       //for Process, Stopwatch
 using System.Drawing.Imaging;
 
 using Bottom_Control.PLC通讯协议;
@@ -25,6 +25,8 @@ namespace Bottom_Control
 
         private const Button_state HIGH = Button_state.ON;
         private const Button_state LOW = Button_state.Off;
+
+        Stopwatch stopwatch = new Stopwatch();
 
         public Form2()
         {
@@ -1259,6 +1261,11 @@ namespace Bottom_Control
             polling_m_status(contact_address, HIGH);
             richTextBox1.Text += "\n(3b) PC 取得 M10000 為 ON\n";
 
+            //開始計時
+            richTextBox1.Text += "時間1 : " + DateTime.Now.ToString() + "\n";
+            stopwatch = new Stopwatch();
+            stopwatch.Start();
+
             richTextBox1.Text += "(3c) PC 讀取 D2000 資料\n";
 
             show_main_message1("讀取 D2000", S_OK, 30);
@@ -1415,7 +1422,10 @@ namespace Bottom_Control
 
             richTextBox1.Text += "測試PLC作業流程 SP\t" + DateTime.Now.ToString() + "\tOK\n\n\n";
 
-            button6.BackColor = Color.White;
+            stopwatch.Stop();
+            richTextBox1.Text += "PLC交握測試 完成時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
+            richTextBox1.Text += "時間2 : " + DateTime.Now.ToString() + "\n";
+
         }
 
         private void button6_Click(object sender, EventArgs e)
