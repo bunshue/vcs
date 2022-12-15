@@ -181,21 +181,16 @@ int main(int argc, char** argv)
 {
     cout << "Enter number of levels of recursion: ";
     cin >> n;
-    glutInit(&argc, argv);
+
+    const char* windowName = "Sphere";
+    const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
+
+    common_setup(argc, argv, windowName, message, display, reshape, keyboard0);
+
+    //先保留
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 
-    glutInitWindowSize(600, 600);       // 設定視窗大小
-    glutInitWindowPosition(1100, 200);  // 設定視窗位置
-
-    glutCreateWindow("Sphere");	//開啟視窗 並顯示出視窗 Title
-
     myinit();
-
-    glutDisplayFunc(display);   //設定callback function
-    glutReshapeFunc(reshape);   //設定callback function
-    glutKeyboardFunc(keyboard0); //設定callback function
-
-    printf("僅顯示, 無控制, 按 Esc 離開\n");
 
     glutMainLoop();	//開始主循環繪製
 

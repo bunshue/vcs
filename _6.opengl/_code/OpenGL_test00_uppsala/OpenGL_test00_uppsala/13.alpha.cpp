@@ -23,16 +23,16 @@ void display(void)
     glClear(GL_COLOR_BUFFER_BIT);
 
     glColor4f(1.0, 0.0, 0.0, 0.5); //R
-    glRectf(-0.6, -0.2, 0.6, 0.8);
+    glRectf(-0.6f, -0.2f, 0.6f, 0.8f);
 
     glColor4f(0.0, 1.0, 0.0, 0.5); //G
-    glRectf(-0.8, -0.8, 0.2, 0.5);
+    glRectf(-0.8f, -0.8f, 0.2f, 0.5f);
 
     glColor4f(0.0, 0.0, 1.0, 0.5); //B
-    glRectf(-0.2, -0.8, 0.8, 0.5);
+    glRectf(-0.2f, -0.8f, 0.8f, 0.5f);
 
     glColor4f(1.0, 0.0, 0.0, 1.0);
-    glRectf(0.33, 0.33, 0.66, 0.66);
+    glRectf(0.33f, 0.33f, 0.66f, 0.66f);
 
     glFlush();  // 執行繪圖命令
 }
@@ -48,21 +48,15 @@ void reshape(int w, int h)
 
 int main(int argc, char** argv)
 {
-    glutInit(&argc, argv);
+    const char* windowName = "Alpha Blending";
+    const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
+
+    common_setup(argc, argv, windowName, message, display, reshape, keyboard0);
+
+    //先保留
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA);
 
-    glutInitWindowSize(600, 600);       // 設定視窗大小
-    glutInitWindowPosition(1100, 200);  // 設定視窗位置
-
-    glutCreateWindow("Alpha Blending");
-
-    glutDisplayFunc(display);   //設定callback function
-    glutReshapeFunc(reshape);   //設定callback function
-    glutKeyboardFunc(keyboard0); //設定callback function
-
     myinit();
-
-    printf("僅顯示, 無控制, 按 Esc 離開\n");
 
     glutMainLoop();	//開始主循環繪製
 

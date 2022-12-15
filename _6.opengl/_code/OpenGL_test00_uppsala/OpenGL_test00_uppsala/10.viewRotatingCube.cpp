@@ -139,17 +139,14 @@ void reshape(int w, int h)
 
 int main(int argc, char** argv)
 {
-	glutInit(&argc, argv);
+	const char* windowName = "Color Cube";
+	const char* message = "滑鼠控制, 按S啟停, 按 Esc 離開\n";
+
+	common_setup(argc, argv, windowName, message, display, reshape, keyboard);
+
+	//先保留
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 
-	glutInitWindowSize(600, 600);       // 設定視窗大小
-	glutInitWindowPosition(1100, 200);  // 設定視窗位置
-
-	glutCreateWindow("colorcube");	//開啟視窗 並顯示出視窗 Title
-
-	glutDisplayFunc(display);   //設定callback function
-	glutReshapeFunc(reshape);	//設定callback function
-	glutKeyboardFunc(keyboard);	//設定callback function
 	glutIdleFunc(idle);         //設定callback function, 利用idle事件進行重畫
 	glutMouseFunc(mouse);
 

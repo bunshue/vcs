@@ -67,16 +67,15 @@ void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
     glCallList(1);
-    glFlush();
+    glFlush();  // 執行繪圖命令
 }
 
-int main(int argc, char** argv)
+void make_data()
 {
     float displacement;
     int i;
 
     // Begin by computing the vertices for the line as the sum of Gaussian random variables.
-
     InitGauss((int)time(NULL));
     displacement = 0.0f;
     points[0][0] = points[0][1] = 0.0;
@@ -87,15 +86,16 @@ int main(int argc, char** argv)
         points[i][1] = displacement;
     }
     winLimit = 2.0 * sqrt((double)POINTS);
+    return;
+}
 
-    /* Set graphics window parameters. */
-
+int main(int argc, char** argv)
+{
     glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
     glutInitWindowSize(600, 600);       // 設定視窗大小
     glutInitWindowPosition(1100, 200);  // 設定視窗位置
-
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
     glutCreateWindow("布朗運動");
 
@@ -103,6 +103,7 @@ int main(int argc, char** argv)
     glutReshapeFunc(reshape0);   //設定callback function
     glutKeyboardFunc(keyboard0); //設定callback function
 
+    make_data();
     gfxinit();
 
     printf("僅顯示, 無控制, 按 Esc 離開\n");

@@ -2,14 +2,14 @@
 
 void gfxinit()
 {
-    int i, index = 0;
+    int i;
+    int index = 0;
 
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluOrtho2D(0.0, 8.0, 0.0, 2.0);
 
     /* Set the true colors in entries 10-17 for comparison. */
-
     glutSetColor(10, 0.0, 0.0, 0.0);  /* black   */
     glutSetColor(11, 1.0, 0.0, 0.0);  /* red     */
     glutSetColor(12, 0.0, 1.0, 0.0);  /* green   */
@@ -53,13 +53,13 @@ void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
     glCallList(1);
-    glutSwapBuffers();
+    glFlush();  // 執行繪圖命令
 }
 
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_INDEX);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_INDEX);
 
     glutInitWindowSize(600, 600);       // 設定視窗大小
     glutInitWindowPosition(1100, 200);  // 設定視窗位置
@@ -70,7 +70,9 @@ int main(int argc, char** argv)
     glutReshapeFunc(reshape0);   //設定callback function
     glutKeyboardFunc(keyboard0); //設定callback function
 
-    cout << "Number of bits in color index = " << glutGet(GLUT_WINDOW_BUFFER_SIZE) << endl;
+    printf("Number of bits in color index = %d\n", glutGet(GLUT_WINDOW_BUFFER_SIZE));
+
+    printf("Single Buffer 可以看到畫面閃爍, Double Buffer則無\n");
 
     gfxinit();
 

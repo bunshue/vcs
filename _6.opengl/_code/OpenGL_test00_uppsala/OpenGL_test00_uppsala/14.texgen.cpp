@@ -267,22 +267,15 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
 
 int main(int argc, char** argv)
 {
-    glutInit(&argc, argv);
+    const char* windowName = "Texture Generation";
+    const char* message = "按 1 2 切換, 按 Esc 離開\n";
 
+    common_setup(argc, argv, windowName, message, display, reshape, keyboard);
+
+    //先保留
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
 
-    glutInitWindowSize(600, 600);       // 設定視窗大小
-    glutInitWindowPosition(1100, 200);  // 設定視窗位置
-
-    glutCreateWindow("Texture Generation");	//開啟視窗 並顯示出視窗 Title
-
-    glutDisplayFunc(display);   //設定callback function
-    glutReshapeFunc(reshape);   //設定callback function
-    glutKeyboardFunc(keyboard); //設定callback function
-
     gfxinit();
-
-    printf("按 1 2 切換, 按 Esc 離開\n");
 
     glutMainLoop();	//開始主循環繪製
 

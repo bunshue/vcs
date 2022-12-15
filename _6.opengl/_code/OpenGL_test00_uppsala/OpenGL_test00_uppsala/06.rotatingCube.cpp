@@ -103,17 +103,11 @@ void keyboard(unsigned char key, int x, int y)
 
 int main(int argc, char** argv)
 {
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+	const char* windowName = "Rotating Color Cube";
+	const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
 
-	glutInitWindowSize(600, 600);       // 設定視窗大小
-	glutInitWindowPosition(1100, 200);  // 設定視窗位置
+	common_setup(argc, argv, windowName, message, display, reshape0, keyboard);
 
-	glutCreateWindow("Rotating Color Cube");
-
-	glutDisplayFunc(display);   //設定callback function
-	glutReshapeFunc(reshape0);   //設定callback function
-	glutKeyboardFunc(keyboard);	//設定callback function
 	glutIdleFunc(idle);
 	glutMouseFunc(mouse);
 

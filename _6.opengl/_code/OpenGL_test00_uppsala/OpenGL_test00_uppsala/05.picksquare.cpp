@@ -2,8 +2,7 @@
  *  picksquare.cpp
  *  Use of multiple names and picking are demonstrated.
  *  A 3x3 grid of squares is drawn.  When the left mouse
- *  button is pressed, all squares under the cursor position
- *  have their color changed.
+ *  button is pressed, all squares under the cursor position have their color changed.
  *
  *  This is Listing 12-3 on pages 366-368 of the "OpenGL Programming
  *  Guide". It has been modified (by Cary Laxer on September 23, 1997)
@@ -139,7 +138,7 @@ void mouse(int button, int state, int x, int y)
 
 void display(void)
 {
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT);   //清除背景
     drawSquares(GL_RENDER);
     glFlush();  // 執行繪圖命令
 }
@@ -154,24 +153,16 @@ void reshape(int w, int h)
 
 /*  Main Loop
  *  Open window with initial window size, title bar,
- *  RGBA display mode, and handle input events.
- */
-
+ *  RGBA display mode, and handle input events.   */
 int main(int argc, char** argv)
 {
-    glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    const char* windowName = "點選方塊";
+    const char* message = "按滑鼠點選方塊, 按 Esc 離開\n";
 
-    glutInitWindowSize(600, 600);       // 設定視窗大小
-    glutInitWindowPosition(1100, 200);  // 設定視窗位置
-
-    glutCreateWindow("點選方塊");
+    common_setup(argc, argv, windowName, message, display, reshape, keyboard0);
 
     myinit();
 
-    glutDisplayFunc(display);   //設定callback function
-    glutReshapeFunc(reshape);   //設定callback function
-    glutKeyboardFunc(keyboard0); //設定callback function
     glutMouseFunc(mouse);		//設定callback function
 
     glutMainLoop();	//開始主循環繪製

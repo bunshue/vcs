@@ -18,7 +18,7 @@
     <ClCompile Include="..\..\Common.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
-    <ClCompile Include="02.brownian.cpp">
+    <ClCompile Include="14.texgen.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>

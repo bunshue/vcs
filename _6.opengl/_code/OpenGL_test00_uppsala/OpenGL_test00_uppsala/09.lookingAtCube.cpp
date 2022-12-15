@@ -87,17 +87,13 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
 
 int main(int argc, char** argv)
 {
-    glutInit(&argc, argv);
+    const char* windowName = "Color Cube";
+    const char* message = "按 1 ~ 6 由各個方向去看方塊, 按 Esc 離開\n";
+
+    common_setup(argc, argv, windowName, message, display, reshape, keyboard);
+
+    //先保留
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
-
-    glutInitWindowSize(600, 600);       // 設定視窗大小
-    glutInitWindowPosition(1100, 200);  // 設定視窗位置
-
-    glutCreateWindow("Color Cube");	//開啟視窗 並顯示出視窗 Title
-
-    glutDisplayFunc(display);   //設定callback function
-    glutReshapeFunc(reshape);   //設定callback function
-    glutKeyboardFunc(keyboard); //設定callback function
 
     glEnable(GL_DEPTH_TEST);
     colorcube();
@@ -107,7 +103,6 @@ int main(int argc, char** argv)
     glLoadIdentity();
     gluLookAt(2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 
-    printf("按 1 ~ 6 由各個方向去看方塊\n");
     glutMainLoop();	//開始主循環繪製
 
     return 0;

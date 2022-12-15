@@ -7,7 +7,10 @@
 #define SIZE 500
 
 int transp_color;
-GLint pt1x = 0, pt2x = 0, pt1y = 0, pt2y = 0;
+GLint pt1x = 0;
+GLint pt2x = 0;
+GLint pt1y = 0;
+GLint pt2y = 0;
 
 // This function presents the instructions on how to use this program to the user.
 void instructions()
@@ -46,7 +49,7 @@ void display(void)
 	glIndexi(WHITE);
 	glRecti(pt1x, pt1y, pt2x, pt2y);
 
-	glRecti(-0.5, -0.5, 0.3, 0.3);
+	glRectf(-0.5f, -0.5f, 0.3f, 0.3f);	//test
 }
 
 // This is the function that gets called whenever a mouse button event occurs.
@@ -70,7 +73,7 @@ void mouse(int button, int state, int x, int y)
 	case GLUT_RIGHT_BUTTON:
 		if (state == GLUT_DOWN)           /* right mouse button was pressed */
 		{
-			glClearIndex(transp_color);                  /* set clear color */
+			glClearIndex((float)transp_color);                  /* set clear color */
 			glClear(GL_COLOR_BUFFER_BIT);        /* clear the overlay plane */
 		}
 		break;
@@ -82,6 +85,7 @@ void motion(int x, int y)
 {
 	glIndexi(transp_color);  		               /* set erase color */
 	glRecti(pt1x, pt1y, pt2x, pt2y);            /* redraw the box to erase it */
+
 	pt2x = x;									/* set corner at current mouse position */
 	pt2y = SIZE - y;
 	glIndexi(WHITE);                          /* change to draw color */
@@ -98,24 +102,21 @@ int main(int argc, char** argv)
 
 	glutCreateWindow("Rubberbanding 滑鼠框選四邊形");
 
-	/* Present instructions to the user. */
 	instructions();
 
 	//transp_color = glutLayerGet(GLUT_TRANSPARENT_INDEX);
 	transp_color = 3;
 	glutUseLayer(GLUT_NORMAL);
 
-	/* Register the callback functions. */
-
-	glutDisplayFunc(display);   //設定callback function
-	glutReshapeFunc(reshape0);   //設定callback function
-	glutKeyboardFunc(keyboard0); //設定callback function
+	glutDisplayFunc(display);	//設定callback function
+	glutReshapeFunc(reshape0);	//設定callback function
+	glutKeyboardFunc(keyboard0);	//設定callback function
 	glutMouseFunc(mouse);		//設定callback function, callback for mouse button events
 	glutMotionFunc(motion);		//設定callback function, callback for mouse drag events
 
 	gfxinit();
 
-	printf("\n滑鼠框選四邊形\n");
+	printf("\n滑鼠框選四邊形, 滑鼠分左右鍵\n");
 
 	glutMainLoop();	//開始主循環繪製
 
