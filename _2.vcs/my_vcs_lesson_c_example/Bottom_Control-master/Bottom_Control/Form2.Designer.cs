@@ -30,8 +30,12 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.button6 = new System.Windows.Forms.Button();
+            this.button7 = new System.Windows.Forms.Button();
             this.lb_plc_mesg = new System.Windows.Forms.Label();
             this.groupBox_plc_status = new System.Windows.Forms.GroupBox();
+            this.lb_read_write_plc = new System.Windows.Forms.Label();
             this.bt_open_folder = new System.Windows.Forms.Button();
             this.pbx_plc_status = new System.Windows.Forms.PictureBox();
             this.bt_save = new System.Windows.Forms.Button();
@@ -58,11 +62,10 @@
             this.lb_plc_pc1 = new System.Windows.Forms.Label();
             this.lb_plc_pc0 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.rb_low = new System.Windows.Forms.RadioButton();
@@ -95,11 +98,11 @@
             this.timer_display = new System.Windows.Forms.Timer(this.components);
             this.bt_clear = new System.Windows.Forms.Button();
             this.bt_copy_to_clipboard = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.plC_Open_Time1 = new Bottom_Control.设置控件.PLC_Open_Time();
-            this.lb_read_write_plc = new System.Windows.Forms.Label();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
+            this.groupBox5.SuspendLayout();
             this.groupBox_plc_status.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_plc_status)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -113,7 +116,6 @@
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -131,6 +133,38 @@
             this.groupBox1.Size = new System.Drawing.Size(1000, 840);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
+            // 
+            // groupBox5
+            // 
+            this.groupBox5.Controls.Add(this.button6);
+            this.groupBox5.Controls.Add(this.button7);
+            this.groupBox5.Location = new System.Drawing.Point(344, 209);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(578, 105);
+            this.groupBox5.TabIndex = 152;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "PLC交握測試";
+            // 
+            // button6
+            // 
+            this.button6.Location = new System.Drawing.Point(17, 29);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(96, 42);
+            this.button6.TabIndex = 147;
+            this.button6.Text = "PLC交握測試";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
+            // button7
+            // 
+            this.button7.Location = new System.Drawing.Point(119, 29);
+            this.button7.Name = "button7";
+            this.button7.Size = new System.Drawing.Size(96, 42);
+            this.button7.TabIndex = 148;
+            this.button7.Text = "PLC交握測試 break";
+            this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
+            this.button7.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button7_MouseDown);
             // 
             // lb_plc_mesg
             // 
@@ -176,6 +210,17 @@
             this.groupBox_plc_status.Size = new System.Drawing.Size(980, 505);
             this.groupBox_plc_status.TabIndex = 152;
             this.groupBox_plc_status.TabStop = false;
+            // 
+            // lb_read_write_plc
+            // 
+            this.lb_read_write_plc.AutoSize = true;
+            this.lb_read_write_plc.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_read_write_plc.Location = new System.Drawing.Point(18, 139);
+            this.lb_read_write_plc.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lb_read_write_plc.Name = "lb_read_write_plc";
+            this.lb_read_write_plc.Size = new System.Drawing.Size(88, 21);
+            this.lb_read_write_plc.TabIndex = 168;
+            this.lb_read_write_plc.Text = "RW_PLC";
             // 
             // bt_open_folder
             // 
@@ -432,15 +477,26 @@
             // 
             // groupBox6
             // 
+            this.groupBox6.Controls.Add(this.button3);
+            this.groupBox6.Controls.Add(this.button2);
             this.groupBox6.Controls.Add(this.button1);
             this.groupBox6.Controls.Add(this.button8);
             this.groupBox6.Controls.Add(this.button4);
             this.groupBox6.Controls.Add(this.button5);
             this.groupBox6.Location = new System.Drawing.Point(10, 180);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(220, 120);
+            this.groupBox6.Size = new System.Drawing.Size(328, 120);
             this.groupBox6.TabIndex = 151;
             this.groupBox6.TabStop = false;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(110, 20);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(96, 42);
+            this.button1.TabIndex = 150;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button8
             // 
@@ -471,27 +527,6 @@
             this.button5.Text = "Get M1X00X status";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(25, 29);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(96, 42);
-            this.button6.TabIndex = 147;
-            this.button6.Text = "PLC交握測試";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(140, 29);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(96, 42);
-            this.button7.TabIndex = 148;
-            this.button7.Text = "PLC交握測試 break";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            this.button7.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button7_MouseDown);
             // 
             // groupBox3
             // 
@@ -837,41 +872,29 @@
             this.bt_copy_to_clipboard.UseVisualStyleBackColor = true;
             this.bt_copy_to_clipboard.Click += new System.EventHandler(this.bt_copy_to_clipboard_Click);
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(212, 21);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(96, 42);
+            this.button2.TabIndex = 151;
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(213, 69);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(96, 42);
+            this.button3.TabIndex = 152;
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
             // plC_Open_Time1
             // 
             this.plC_Open_Time1.Interval = 500;
             this.plC_Open_Time1.Mitsubishi_Open = true;
             this.plC_Open_Time1.MitsubishiIP = "192.168.3.39";
-            // 
-            // lb_read_write_plc
-            // 
-            this.lb_read_write_plc.AutoSize = true;
-            this.lb_read_write_plc.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_read_write_plc.Location = new System.Drawing.Point(18, 139);
-            this.lb_read_write_plc.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lb_read_write_plc.Name = "lb_read_write_plc";
-            this.lb_read_write_plc.Size = new System.Drawing.Size(88, 21);
-            this.lb_read_write_plc.TabIndex = 168;
-            this.lb_read_write_plc.Text = "RW_PLC";
-            // 
-            // groupBox5
-            // 
-            this.groupBox5.Controls.Add(this.button6);
-            this.groupBox5.Controls.Add(this.button7);
-            this.groupBox5.Location = new System.Drawing.Point(244, 209);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(678, 105);
-            this.groupBox5.TabIndex = 152;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "PLC交握測試";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(110, 20);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(96, 42);
-            this.button1.TabIndex = 150;
-            this.button1.UseVisualStyleBackColor = true;
             // 
             // Form2
             // 
@@ -887,6 +910,7 @@
             this.Load += new System.EventHandler(this.Form2_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
             this.groupBox_plc_status.ResumeLayout(false);
             this.groupBox_plc_status.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_plc_status)).EndInit();
@@ -904,7 +928,6 @@
             this.groupBox4.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -981,5 +1004,7 @@
         private System.Windows.Forms.Label lb_read_write_plc;
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
     }
 }

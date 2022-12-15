@@ -54,7 +54,7 @@ namespace Bottom_Control
             bt_open_folder.BackgroundImage = Properties.Resources.open_folder;
             bt_open_folder.BackgroundImageLayout = ImageLayout.Zoom;
 
-            lb_main_mesg1.Location = new Point(400, 182);
+            lb_main_mesg1.Location = new Point(450, 182);
 
             cb_random.Checked = true;
 
@@ -1108,6 +1108,12 @@ namespace Bottom_Control
             bool ret = false;
             for (i = 0; i < 1000; i++)
             {
+                if (flag_break_plc_test == true)
+                {
+                    richTextBox1.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
+                    break;
+                }
+
                 ret = get_plc_m_status(contact_address);
                 if (ret == false)
                 {
@@ -1168,11 +1174,13 @@ namespace Bottom_Control
 
             //richTextBox1.Text += "測試 get_plc_m_status()\n";
 
+            /* 不用檢查 M10000
             contact_address = "10000";
             ret = get_plc_m_status(contact_address);
             //richTextBox1.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
             if (ret == true)
                 all_plc_m_status = false;
+            */
 
             contact_address = "10001";
             ret = get_plc_m_status(contact_address);
@@ -1207,7 +1215,7 @@ namespace Bottom_Control
             return all_plc_m_status;
         }
 
-        bool flag_plc_test = false;
+        bool flag_break_plc_test = false;
 
         void do_PC_PLC_Communication(object sender, EventArgs e)
         {
@@ -1221,7 +1229,13 @@ namespace Bottom_Control
 
             while (ret == false)
             {
+                if (flag_break_plc_test == true)
+                {
+                    richTextBox1.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
+                    return;
+                }
                 ret = check_plc_power_status();
+
                 if (ret == true)
                 {
                     richTextBox1.Text += "(0) 三菱PLC 已 Ready, 繼續\n";
@@ -1237,6 +1251,11 @@ namespace Bottom_Control
 
             while (ret == false)
             {
+                if (flag_break_plc_test == true)
+                {
+                    richTextBox1.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
+                    return;
+                }
                 ret = check_all_plc_m_status_low();
                 if (ret == true)
                 {
@@ -1249,16 +1268,19 @@ namespace Bottom_Control
                 }
             }
 
-            flag_plc_test = true;
-
             richTextBox1.Text += "(0) PC 啟動完成, 偵測PLC之M10000信號\n";
             richTextBox1.Text += "(1) PLC 把資料放在 D2000\n";
             richTextBox1.Text += "(2a) PLC 拉高 M10000, 供PC讀取, 通知條碼內容已備便\n";
-            richTextBox1.Text += "[M status] M10000 HIGH\n";
+            //richTextBox1.Text += "[M status] M10000 HIGH\n";
 
             richTextBox1.Text += "(3a) PC 讀取 M10000 狀態\t=>\t";
             contact_address = "10000";
             polling_m_status(contact_address, HIGH);
+            if (flag_break_plc_test == true)
+            {
+                richTextBox1.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
+                return;
+            }
             richTextBox1.Text += "\n(3b) PC 取得 M10000 為 ON\n";
 
             //開始計時
@@ -1296,7 +1318,7 @@ namespace Bottom_Control
             delay(500);
 
             richTextBox1.Text += "(4) PC 拉高 M12000, 通知PLC, PC動作已完成\n";
-            richTextBox1.Text += "[M status] M12000 HIGH\n";
+            //richTextBox1.Text += "[M status] M12000 HIGH\n";
 
             contact_address = "12000";
             timer1_Tick(sender, e);
@@ -1306,15 +1328,21 @@ namespace Bottom_Control
 
             richTextBox1.Text += "(5a) PLC收到 PC訊號 M12000 ON時,PLC確認資料一致\n";
             richTextBox1.Text += "(5b) PLC 拉高 M10001, 供PC讀取, 通知開始做色調\n";
-            richTextBox1.Text += "[M status] M10001 HIGH\n";
+            //richTextBox1.Text += "[M status] M10001 HIGH\n";
 
             richTextBox1.Text += "(6a) PC 讀取 M10001 狀態\t=>\t";
             contact_address = "10001";
             polling_m_status(contact_address, HIGH);
+            if (flag_break_plc_test == true)
+            {
+                richTextBox1.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
+                return;
+            }
+
             richTextBox1.Text += "\n(6b) PC 取得 M10001 為 ON\n";
 
             richTextBox1.Text += "(6c) PC 拉高 M12001, 供PLC讀取, 通知PC已開始做色調\n";
-            richTextBox1.Text += "[M status] M12001 HIGH\n";
+            //richTextBox1.Text += "[M status] M12001 HIGH\n";
 
             contact_address = "12001";
             set_plc_m_status(contact_address, HIGH);
@@ -1336,7 +1364,7 @@ namespace Bottom_Control
             set_plc_d_data(contact_address, write_data);
 
             richTextBox1.Text += "(8) PC 拉高 M12002, 供PLC讀取, 通知PC已做完色調\n";
-            richTextBox1.Text += "[M status] M12002 HIGH\n";
+            //richTextBox1.Text += "[M status] M12002 HIGH\n";
 
             delay(500);
 
@@ -1347,18 +1375,30 @@ namespace Bottom_Control
             delay(200);
 
             richTextBox1.Text += "(9) PLC偵測到 PC之動作完成信號 M12002, PLC設定 M10002為ON\n";
-            richTextBox1.Text += "[M status] M10002 HIGH\n";
+            //richTextBox1.Text += "[M status] M10002 HIGH\n";
 
             richTextBox1.Text += "(10a) PC 檢測 M10002 和 M12002\n";
 
             richTextBox1.Text += "(10a1) PC 讀取 M10002 狀態\t=>\t";
             contact_address = "10002";
             polling_m_status(contact_address, HIGH);
+            if (flag_break_plc_test == true)
+            {
+                richTextBox1.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
+                return;
+            }
+
             richTextBox1.Text += "\n(10a2) PC 取得 M10002 為 ON\n";
 
             richTextBox1.Text += "(10a3) PC 讀取 M12002 狀態\t=>\t";
             contact_address = "12002";
             polling_m_status(contact_address, HIGH);
+            if (flag_break_plc_test == true)
+            {
+                richTextBox1.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
+                return;
+            }
+
             richTextBox1.Text += "\n(10a4) PC 取得 M12002 為 ON\n";
 
             delay(500);
@@ -1369,17 +1409,17 @@ namespace Bottom_Control
             set_plc_d_data(contact_address, data_to_write);
 
             richTextBox1.Text += "(10c) PC 令 (收到動作要求信號)M12000 為 OFF\n";
-            richTextBox1.Text += "[M status] M12000 LOW\n";
+            //richTextBox1.Text += "[M status] M12000 LOW\n";
             contact_address = "12000";
             set_plc_m_status(contact_address, LOW);
 
             richTextBox1.Text += "(10d) PC 令 (動作執行信號)M12001 為 OFF\n";
-            richTextBox1.Text += "[M status] M12001 LOW\n";
+            //richTextBox1.Text += "[M status] M12001 LOW\n";
             contact_address = "12001";
             set_plc_m_status(contact_address, LOW);
 
-            richTextBox1.Text += "[M status] M10000 LOW\n";
-            richTextBox1.Text += "[M status] M10001 LOW\n";
+            //richTextBox1.Text += "[M status] M10000 LOW\n";
+            //richTextBox1.Text += "[M status] M10001 LOW\n";
 
             delay(500);
 
@@ -1396,6 +1436,12 @@ namespace Bottom_Control
             richTextBox1.Text += "(11a) PC 讀取 M10002 狀態\t=>\t";
             contact_address = "10002";
             polling_m_status(contact_address, HIGH);
+            if (flag_break_plc_test == true)
+            {
+                richTextBox1.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
+                return;
+            }
+
             richTextBox1.Text += "\n(11b) PC 取得 M10002 為 ON\n";
 
             richTextBox1.Text += "(11c) PC 清除 D8010資料\n";
@@ -1404,7 +1450,7 @@ namespace Bottom_Control
             set_plc_d_data(contact_address, data_to_write);
 
             richTextBox1.Text += "(11d) PC 令 M12002 為 OFF\n";
-            richTextBox1.Text += "[M status] M12002 LOW\n";
+            //richTextBox1.Text += "[M status] M12002 LOW\n";
             contact_address = "12002";
             set_plc_m_status(contact_address, LOW);
 
@@ -1418,6 +1464,12 @@ namespace Bottom_Control
             richTextBox1.Text += "(12b) PC 讀取 M10002 狀態\t=>\t";
             contact_address = "10002";
             polling_m_status(contact_address, LOW);
+            if (flag_break_plc_test == true)
+            {
+                richTextBox1.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
+                return;
+            }
+
             richTextBox1.Text += "\n(12b) PC 取得 M10002 為 LOW\n";
 
             richTextBox1.Text += "測試PLC作業流程 SP\t" + DateTime.Now.ToString() + "\tOK\n\n\n";
@@ -1432,21 +1484,50 @@ namespace Bottom_Control
         {
             button6.BackColor = Color.Red;
 
-            do_PC_PLC_Communication(sender, e);
+            int cnt = 1;
+            while (true)
+            {
+                if (flag_break_plc_test == true)
+                {
+                    richTextBox1.Text += "使用者中斷PLC測試, 結束\n";
+                    break;
+                }
+                richTextBox1.Text += "第 " + (cnt++).ToString() + " 次測試\n";
+                do_PC_PLC_Communication(sender, e);
+                if (flag_break_plc_test == true)
+                {
+                    richTextBox1.Text += "使用者中斷PLC測試, 結束\n";
+                    break;
+                }
+                delay(1000);
+            }
 
             button6.BackColor = Color.White;
+            button7.BackColor = Color.White;
+
+            if (flag_break_plc_test == true)
+            {
+                flag_break_plc_test = false;
+
+                richTextBox1.Text += "\n測試PLC作業流程 SP\t" + DateTime.Now.ToString() + "\t使用者中斷\n\n";
+
+                stopwatch.Stop();
+                richTextBox1.Text += "時間3 : " + DateTime.Now.ToString() + "\n";
+            }
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "設定 中斷\n";
-            flag_plc_test = false;
+            button7.BackColor = Color.Red;
+            flag_break_plc_test = true;
         }
 
         private void button7_MouseDown(object sender, MouseEventArgs e)
         {
             richTextBox1.Text += "設定 中斷\n";
-            flag_plc_test = false;
+            button7.BackColor = Color.Red;
+            flag_break_plc_test = true;
         }
 
         private void bt_pause_Click(object sender, EventArgs e)
@@ -1535,6 +1616,21 @@ namespace Bottom_Control
             richTextBox1.Text += "[M status] M12002 LOW\n";
             contact_address = "12002";
             set_plc_m_status(contact_address, LOW);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

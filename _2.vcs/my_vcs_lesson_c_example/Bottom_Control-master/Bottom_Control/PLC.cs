@@ -92,8 +92,18 @@ namespace Bottom_Control
     /// </summary>
     public enum numerical_format
     {
-        BCD_16_Bit, BCD_32_Bit, Hex_16_Bit, Hex_32_Bit, Binary_16_Bit, Binary_32_Bit, Unsigned_16_Bit, Signed_16_Bit
-            , Unsigned_32_Bit, Signed_32_Bit, Float_32_Bit, String_32_Bit
+        BCD_16_Bit,     //0
+        BCD_32_Bit,
+        Hex_16_Bit,
+        Hex_32_Bit,
+        Binary_16_Bit,
+        Binary_32_Bit,      //5
+        Unsigned_16_Bit,
+        Signed_16_Bit,
+        Unsigned_32_Bit,
+        Signed_32_Bit,
+        Float_32_Bit,       //10
+        String_32_Bit       //11
     }
     /// <summary>
     /// 数值显示类型
