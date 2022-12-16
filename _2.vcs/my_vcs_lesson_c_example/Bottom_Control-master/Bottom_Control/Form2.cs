@@ -336,6 +336,128 @@ namespace Bottom_Control
             }
         }
 
+        void set_plc_d_data_bcd16(string contact_address, string write_data)
+        {
+            string contact_point = "D";
+
+            if (write_data.Length == 0)
+            {
+                tb_data_d.Text = "無寫入資料";
+                richTextBox1.Text += "清除資料\t觸點 : " + contact_point + "\t位址 : " + contact_address + "\n";
+                //目前這個地方有問題
+                //return;
+            }
+
+            IPLC_interface mitsubishi = new Mitsubishi_realize();//实例化接口--实现三菱在线访问
+            if (mitsubishi.PLC_ready)//PLC是否准备完成
+            {
+                //richTextBox1.Text += "三菱PLC ready 2\n";
+
+                //richTextBox1.Text += "\n觸點 : " + contact_point + "\t位址 : " + contact_address + "\n";
+                lb_read_write_plc.Text = "觸點 : " + contact_point + "\t位址 : " + contact_address;
+
+                string dddd = mitsubishi.PLC_write_D_register(contact_point, contact_address, write_data, numerical_format.BCD_16_Bit);
+
+                //richTextBox1.Text += "cccc len = " + dddd.Length.ToString() + "\tdata : " + dddd + "\n\n";
+            }
+            else
+            {
+                //richTextBox1.Text += "三菱PLC 不 ready\n";
+            }
+        }
+
+        void erase_plc_d_data(string contact_address, int length)
+        {
+            string contact_point = "D";
+            int contact_address_d = int.Parse(contact_address);
+            //richTextBox1.Text += "contact_address_d = " + contact_address_d + ", len = " + length.ToString() + "\n";
+
+            if (length < 1)
+            {
+                richTextBox1.Text += "清除資料 長度錯誤, 至少要 1\n";
+                return;
+            }
+
+            //richTextBox1.Text += "清除資料\t觸點 : " + contact_point + "\t位址 : " + contact_address + "\t長度 : " + length.ToString() + "\n";
+
+            IPLC_interface mitsubishi = new Mitsubishi_realize();//实例化接口--实现三菱在线访问
+            if (mitsubishi.PLC_ready)//PLC是否准备完成
+            {
+                //richTextBox1.Text += "三菱PLC ready 2\n";
+
+                string write_data = "0";
+                for (int i = 0; i < length; i++)
+                {
+                    string dddd = mitsubishi.PLC_write_D_register(contact_point, (contact_address_d + i).ToString(), write_data, numerical_format.BCD_16_Bit);
+                }
+            }
+            else
+            {
+                //richTextBox1.Text += "三菱PLC 不 ready\n";
+            }
+        }
+
+        void print_plc_d_data(string contact_address)
+        {
+            string contact_point = "D";
+            string data_read = "";
+
+            IPLC_interface mitsubishi = new Mitsubishi_realize();//实例化接口--实现三菱在线访问
+            if (mitsubishi.PLC_ready)//PLC是否准备完成
+            {
+                //richTextBox1.Text += "三菱PLC ready 1\n";
+
+                //richTextBox1.Text += "\n觸點 : " + contact_point + "\t位址 : " + contact_address + "\n";
+
+                List<bool> data = mitsubishi.PLC_read_M_bit(contact_point, contact_address);    //讀取狀態
+                //richTextBox1.Text += "len = " + data.Count.ToString() + ", data = " + data[0].ToString() + "\n";
+
+                data[0] = true; //一律打印
+
+                if (data[0] == true)
+                {
+                    string dddd = mitsubishi.PLC_read_D_register(contact_point, contact_address, numerical_format.String_32_Bit);
+                    tb_data_d.Text = dddd;
+                    data_read = dddd;
+
+                    //richTextBox1.Text += "\nb len = " + dddd.Length.ToString() + "\n";
+                    //richTextBox1.Text += "data1 : " + dddd + "\n";
+                    //richTextBox1.Text += "\n";
+                    int len = dddd.Length;
+
+                    for (int i = 0; i < len; i++)
+                    {
+                        richTextBox1.Text += ((int)dddd[i]).ToString("X2").PadLeft(3);
+                    }
+                    richTextBox1.Text += "\n";
+
+                    for (int i = 0; i < len; i++)
+                    {
+                        int vv = (int)dddd[i];
+
+                        if ((vv < 32) || (vv > 126))
+                        {
+                            richTextBox1.Text += " --";
+                        }
+                        else
+                        {
+                            richTextBox1.Text += ((char)vv).ToString().PadLeft(3);
+                        }
+                    }
+                    richTextBox1.Text += "\n";
+
+                }
+                else
+                {
+                    tb_data_d.Text = "無資料";
+                }
+            }
+            else
+            {
+                //richTextBox1.Text += "三菱PLC 不 ready\n";
+            }
+        }
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             bool plc_power_status = check_plc_power_status();
@@ -632,28 +754,28 @@ namespace Bottom_Control
             }
 
             contact_address = "2000";
-            show_main_message1("讀取: M" + contact_address, S_OK, 30);
+            show_main_message1("讀取: D" + contact_address, S_OK, 30);
             string data_read = get_plc_d_data(contact_address);
             //richTextBox1.Text += "\nD2000 len = " + data_read.Length.ToString() + "\n";
             //richTextBox1.Text += "data : |" + data_read + "|\n";
             lb_plc_pc3b.Text = data_read;
 
             contact_address = "2010";
-            show_main_message1("讀取: M" + contact_address, S_OK, 30);
+            show_main_message1("讀取: D" + contact_address, S_OK, 30);
             data_read = get_plc_d_data(contact_address);
             //richTextBox1.Text += "\nD8000 len = " + data_read.Length.ToString() + "\n";
             //richTextBox1.Text += "data : |" + data_read + "|\n";
             lb_plc_pc4b.Text = data_read;
 
             contact_address = "8000";
-            show_main_message1("讀取: M" + contact_address, S_OK, 30);
+            show_main_message1("讀取: D" + contact_address, S_OK, 30);
             data_read = get_plc_d_data(contact_address);
             //richTextBox1.Text += "\nD8000 len = " + data_read.Length.ToString() + "\n";
             //richTextBox1.Text += "data : |" + data_read + "|\n";
             lb_pc_plc3b.Text = data_read;
 
             contact_address = "8010";
-            show_main_message1("讀取: M" + contact_address, S_OK, 30);
+            show_main_message1("讀取: D" + contact_address, S_OK, 30);
             data_read = get_plc_d_data(contact_address);
             //richTextBox1.Text += "\nD8000 len = " + data_read.Length.ToString() + "\n";
             //richTextBox1.Text += "data : |" + data_read + "|\n";
@@ -1312,7 +1434,6 @@ namespace Bottom_Control
 
             show_main_message1("寫入 D8000", S_OK, 30);
             contact_address = "8000";
-
             set_plc_d_data(contact_address, data_to_write);
 
             delay(500);
@@ -1356,12 +1477,12 @@ namespace Bottom_Control
             richTextBox1.Text += "\n\n(7) PC 做完色調, 將結果碼寫在 D8010\t";
 
             Random r = new Random();
-            int color_result = r.Next(0, 20);
+            int color_result = r.Next(0, 10);
             richTextBox1.Text += "色調結果: 0x" + color_result.ToString("X2") + " = " + color_result.ToString() + "\n";
             contact_address = "8010";
             string write_data = color_result.ToString();
             show_main_message1("寫入: D" + contact_address + ", 資料: " + write_data, S_OK, 30);
-            set_plc_d_data(contact_address, write_data);
+            set_plc_d_data_bcd16(contact_address, write_data);
 
             richTextBox1.Text += "(8) PC 拉高 M12002, 供PLC讀取, 通知PC已做完色調\n";
             //richTextBox1.Text += "[M status] M12002 HIGH\n";
@@ -1403,10 +1524,8 @@ namespace Bottom_Control
 
             delay(500);
 
-            richTextBox1.Text += "(10b) PC 清除 D8000 ~ D8006 資料\n";
-            contact_address = "8000";
-            data_to_write = " ";
-            set_plc_d_data(contact_address, data_to_write);
+            richTextBox1.Text += "(10b) PC 清除 D8000 ~ D8007 資料\n";
+            erase_plc_d_data(contact_address, 8);
 
             richTextBox1.Text += "(10c) PC 令 (收到動作要求信號)M12000 為 OFF\n";
             //richTextBox1.Text += "[M status] M12000 LOW\n";
@@ -1445,9 +1564,8 @@ namespace Bottom_Control
             richTextBox1.Text += "\n(11b) PC 取得 M10002 為 ON\n";
 
             richTextBox1.Text += "(11c) PC 清除 D8010資料\n";
-            contact_address = "8010";
-            data_to_write = " ";
-            set_plc_d_data(contact_address, data_to_write);
+            //contact_address = "8010";
+            //erase_plc_d_data(contact_address, 1);
 
             richTextBox1.Text += "(11d) PC 令 M12002 為 OFF\n";
             //richTextBox1.Text += "[M status] M12002 LOW\n";
@@ -1620,16 +1738,29 @@ namespace Bottom_Control
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            string contact_address = "8010";
+            int length = 1;
+            erase_plc_d_data(contact_address, length);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            //Print D2000
+            string contact_address = "8010";
+            print_plc_d_data(contact_address);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "\n\n(7) PC 做完色調, 將結果碼寫在 D8010\t";
+
+            Random r = new Random();
+            int color_result = r.Next(0, 20);
+            richTextBox1.Text += "色調結果: 0x" + color_result.ToString("X2") + " = " + color_result.ToString() + "\n";
+            string contact_address = "8010";
+            string write_data = color_result.ToString();
+            show_main_message1("寫入: D" + contact_address + ", 資料: " + write_data, S_OK, 30);
+            set_plc_d_data_bcd16(contact_address, write_data);
 
         }
     }

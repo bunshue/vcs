@@ -62,6 +62,8 @@
             this.lb_plc_pc1 = new System.Windows.Forms.Label();
             this.lb_plc_pc0 = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
@@ -98,8 +100,6 @@
             this.timer_display = new System.Windows.Forms.Timer(this.components);
             this.bt_clear = new System.Windows.Forms.Button();
             this.bt_copy_to_clipboard = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.plC_Open_Time1 = new Bottom_Control.设置控件.PLC_Open_Time();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
@@ -489,12 +489,33 @@
             this.groupBox6.TabIndex = 151;
             this.groupBox6.TabStop = false;
             // 
+            // button3
+            // 
+            this.button3.Location = new System.Drawing.Point(213, 69);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(96, 42);
+            this.button3.TabIndex = 152;
+            this.button3.Text = "寫D8010";
+            this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(212, 21);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(96, 42);
+            this.button2.TabIndex = 151;
+            this.button2.Text = "Print D2000";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // button1
             // 
             this.button1.Location = new System.Drawing.Point(110, 20);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(96, 42);
             this.button1.TabIndex = 150;
+            this.button1.Text = "Erase";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -871,24 +892,6 @@
             this.bt_copy_to_clipboard.TabIndex = 137;
             this.bt_copy_to_clipboard.UseVisualStyleBackColor = true;
             this.bt_copy_to_clipboard.Click += new System.EventHandler(this.bt_copy_to_clipboard_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(212, 21);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(96, 42);
-            this.button2.TabIndex = 151;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(213, 69);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(96, 42);
-            this.button3.TabIndex = 152;
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // plC_Open_Time1
             // 
