@@ -1,9 +1,7 @@
 /****************************************************************************
  * bilinear.cpp                                                             *
- *                                                                          *
  *    This graphics program constructs a bilinear patch for a surface       *
  * defined by four corners.                                                 *
- *                                                                          *
  * NOTE:  At this time the z component of the surface is ignored, giving a  *
  *        parallel projection onto the x,y-plane, which is assumed to be    *
  *        the display device.                                               *
@@ -98,22 +96,12 @@ int main(int argc, char** argv)
     y[1][1] = 5;
     z[1][1] = -3;   //z先不管
 
-    /* Set graphics window parameters. */
-    glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    const char* windowName = "Bilinear Patch";
+    const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
 
-    glutInitWindowSize(600, 600);       // 設定視窗大小
-    glutInitWindowPosition(1100, 200);  // 設定視窗位置
-
-    glutCreateWindow("Bilinear Patch");
-
-    glutDisplayFunc(display);   //設定callback function
-    glutReshapeFunc(reshape0);   //設定callback function
-    glutKeyboardFunc(keyboard0); //設定callback function
+    common_setup(argc, argv, windowName, message, display, reshape0, keyboard0);
 
     gfxinit();
-
-    printf("僅顯示, 無控制, 按 Esc 離開\n");
 
     glutMainLoop();	//開始主循環繪製
 

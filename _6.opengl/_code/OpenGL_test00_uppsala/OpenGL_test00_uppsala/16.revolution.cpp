@@ -259,27 +259,18 @@ void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
     glCallList(1);
-    //glutSwapBuffers();
     glFlush();  // 執行繪圖命令
 }
 
 int main(int argc, char** argv)
 {
-    glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    const char* windowName = "Surfaces of Revolution";
+    const char* message = "按 滑鼠右鍵選單 切換, 按 Esc 離開\n";
 
-    glutInitWindowSize(600, 600);       // 設定視窗大小
-    glutInitWindowPosition(1100, 200);  // 設定視窗位置
+    common_setup(argc, argv, windowName, message, display, reshape0, keyboard0);
 
-    glutCreateWindow("Surfaces of Revolution");
-
-    glutDisplayFunc(display);   //設定callback function
-    glutReshapeFunc(reshape0);   //設定callback function
-    glutKeyboardFunc(keyboard0); //設定callback function
-
-   /* Create the menu structure for which figure to display. */
+    //滑鼠右鍵選單
     glutCreateMenu(figureMenu);
-
     glutAddMenuEntry("Sphere (orthographic)", 1);
     glutAddMenuEntry("Sphere (perspective)", 5);
     glutAddMenuEntry("Sphere (profile only)", 2);

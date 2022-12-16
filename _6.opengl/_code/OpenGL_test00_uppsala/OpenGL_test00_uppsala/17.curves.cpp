@@ -420,6 +420,13 @@ int main(int argc, char** argv)
     /* Get input data. */
     interact();
 
+    /*
+        const char* windowName = "Curve Fitting";
+        const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
+
+        common_setup(argc, argv, windowName, message, display, reshape, keyboard);
+    */
+
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
 
