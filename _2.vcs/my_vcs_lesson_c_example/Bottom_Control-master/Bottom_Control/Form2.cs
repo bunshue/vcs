@@ -15,6 +15,7 @@ using System.Drawing.Imaging;
 using Bottom_Control.PLC通讯协议;
 using CCWin.SkinClass;
 using Bottom_Control;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace Bottom_Control
 {
@@ -115,6 +116,12 @@ namespace Bottom_Control
             lb_pc_plc3b.Location = new Point(x_st + dx * 1 + 160, y_st + dy * 3);
             lb_pc_plc4b.Location = new Point(x_st + dx * 1 + 160, y_st + dy * 4);
 
+            x_st = 230;
+            y_st = 20;
+            pictureBox_plc.Location = new Point(x_st, y_st);
+            pictureBox_plc.Size = new Size(330, groupBox_plc.Height - 30);
+            //pictureBox_plc.BackColor = Color.Pink;
+
             lb_plc_pc0.Text = "M10000 PLC -> PC 動作要求";
             lb_plc_pc1.Text = "M10001 PLC -> PC 確認完成";
             lb_plc_pc2.Text = "M10002 PLC -> PC 收到動作完成";
@@ -141,6 +148,17 @@ namespace Bottom_Control
             {
                 bt_pause.BackgroundImage = Properties.Resources.play;
             }
+        }
+        private void Form2_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+
+        }
+        private void Form2_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            //C# 強制關閉 Process
+            Process.GetCurrentProcess().Kill();
+
         }
 
         private void bt_generate_Click(object sender, EventArgs e)
@@ -1230,7 +1248,7 @@ namespace Bottom_Control
             bool ret = false;
             for (i = 0; i < 1000; i++)
             {
-                if (flag_break_plc_test == true)
+                if (flag_plc_test_break == true)
                 {
                     richTextBox1.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
                     break;
@@ -1337,7 +1355,8 @@ namespace Bottom_Control
             return all_plc_m_status;
         }
 
-        bool flag_break_plc_test = false;
+        bool flag_plc_test = false;
+        bool flag_plc_test_break = false;
 
         void do_PC_PLC_Communication(object sender, EventArgs e)
         {
@@ -1351,7 +1370,7 @@ namespace Bottom_Control
 
             while (ret == false)
             {
-                if (flag_break_plc_test == true)
+                if (flag_plc_test_break == true)
                 {
                     richTextBox1.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
                     return;
@@ -1373,7 +1392,7 @@ namespace Bottom_Control
 
             while (ret == false)
             {
-                if (flag_break_plc_test == true)
+                if (flag_plc_test_break == true)
                 {
                     richTextBox1.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
                     return;
@@ -1398,7 +1417,7 @@ namespace Bottom_Control
             richTextBox1.Text += "(3a) PC 讀取 M10000 狀態\t=>\t";
             contact_address = "10000";
             polling_m_status(contact_address, HIGH);
-            if (flag_break_plc_test == true)
+            if (flag_plc_test_break == true)
             {
                 richTextBox1.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
                 return;
@@ -1454,7 +1473,7 @@ namespace Bottom_Control
             richTextBox1.Text += "(6a) PC 讀取 M10001 狀態\t=>\t";
             contact_address = "10001";
             polling_m_status(contact_address, HIGH);
-            if (flag_break_plc_test == true)
+            if (flag_plc_test_break == true)
             {
                 richTextBox1.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
                 return;
@@ -1469,7 +1488,7 @@ namespace Bottom_Control
             set_plc_m_status(contact_address, HIGH);
 
             richTextBox1.Text += "\nPC開始做色調........";
-            for (i = 0; i < 40; i++)
+            for (i = 0; i < 30; i++)
             {
                 delay(50);
                 richTextBox1.Text += ". ";
@@ -1503,7 +1522,7 @@ namespace Bottom_Control
             richTextBox1.Text += "(10a1) PC 讀取 M10002 狀態\t=>\t";
             contact_address = "10002";
             polling_m_status(contact_address, HIGH);
-            if (flag_break_plc_test == true)
+            if (flag_plc_test_break == true)
             {
                 richTextBox1.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
                 return;
@@ -1514,7 +1533,7 @@ namespace Bottom_Control
             richTextBox1.Text += "(10a3) PC 讀取 M12002 狀態\t=>\t";
             contact_address = "12002";
             polling_m_status(contact_address, HIGH);
-            if (flag_break_plc_test == true)
+            if (flag_plc_test_break == true)
             {
                 richTextBox1.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
                 return;
@@ -1555,7 +1574,7 @@ namespace Bottom_Control
             richTextBox1.Text += "(11a) PC 讀取 M10002 狀態\t=>\t";
             contact_address = "10002";
             polling_m_status(contact_address, HIGH);
-            if (flag_break_plc_test == true)
+            if (flag_plc_test_break == true)
             {
                 richTextBox1.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
                 return;
@@ -1582,7 +1601,7 @@ namespace Bottom_Control
             richTextBox1.Text += "(12b) PC 讀取 M10002 狀態\t=>\t";
             contact_address = "10002";
             polling_m_status(contact_address, LOW);
-            if (flag_break_plc_test == true)
+            if (flag_plc_test_break == true)
             {
                 richTextBox1.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
                 return;
@@ -1600,19 +1619,20 @@ namespace Bottom_Control
 
         private void button6_Click(object sender, EventArgs e)
         {
+            flag_plc_test = true;
             button6.BackColor = Color.Red;
 
             int cnt = 1;
             while (true)
             {
-                if (flag_break_plc_test == true)
+                if (flag_plc_test_break == true)
                 {
                     richTextBox1.Text += "使用者中斷PLC測試, 結束\n";
                     break;
                 }
                 richTextBox1.Text += "第 " + (cnt++).ToString() + " 次測試\n";
                 do_PC_PLC_Communication(sender, e);
-                if (flag_break_plc_test == true)
+                if (flag_plc_test_break == true)
                 {
                     richTextBox1.Text += "使用者中斷PLC測試, 結束\n";
                     break;
@@ -1623,9 +1643,11 @@ namespace Bottom_Control
             button6.BackColor = Color.White;
             button7.BackColor = Color.White;
 
-            if (flag_break_plc_test == true)
+            flag_plc_test = false;
+
+            if (flag_plc_test_break == true)
             {
-                flag_break_plc_test = false;
+                flag_plc_test_break = false;
 
                 richTextBox1.Text += "\n測試PLC作業流程 SP\t" + DateTime.Now.ToString() + "\t使用者中斷\n\n";
 
@@ -1638,14 +1660,14 @@ namespace Bottom_Control
         {
             richTextBox1.Text += "設定 中斷\n";
             button7.BackColor = Color.Red;
-            flag_break_plc_test = true;
+            flag_plc_test_break = true;
         }
 
         private void button7_MouseDown(object sender, MouseEventArgs e)
         {
             richTextBox1.Text += "設定 中斷\n";
             button7.BackColor = Color.Red;
-            flag_break_plc_test = true;
+            flag_plc_test_break = true;
         }
 
         private void bt_pause_Click(object sender, EventArgs e)
@@ -1763,5 +1785,6 @@ namespace Bottom_Control
             set_plc_d_data_bcd16(contact_address, write_data);
 
         }
+
     }
 }

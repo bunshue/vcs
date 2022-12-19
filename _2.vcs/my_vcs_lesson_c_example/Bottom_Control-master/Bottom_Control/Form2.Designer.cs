@@ -30,7 +30,8 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.groupBox_plc = new System.Windows.Forms.GroupBox();
+            this.pictureBox_plc = new System.Windows.Forms.PictureBox();
             this.button6 = new System.Windows.Forms.Button();
             this.button7 = new System.Windows.Forms.Button();
             this.lb_plc_mesg = new System.Windows.Forms.Label();
@@ -102,7 +103,8 @@
             this.bt_copy_to_clipboard = new System.Windows.Forms.Button();
             this.plC_Open_Time1 = new Bottom_Control.设置控件.PLC_Open_Time();
             this.groupBox1.SuspendLayout();
-            this.groupBox5.SuspendLayout();
+            this.groupBox_plc.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_plc)).BeginInit();
             this.groupBox_plc_status.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_plc_status)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -120,7 +122,7 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.groupBox5);
+            this.groupBox1.Controls.Add(this.groupBox_plc);
             this.groupBox1.Controls.Add(this.lb_plc_mesg);
             this.groupBox1.Controls.Add(this.groupBox_plc_status);
             this.groupBox1.Controls.Add(this.groupBox6);
@@ -134,16 +136,25 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
-            // groupBox5
+            // groupBox_plc
             // 
-            this.groupBox5.Controls.Add(this.button6);
-            this.groupBox5.Controls.Add(this.button7);
-            this.groupBox5.Location = new System.Drawing.Point(344, 209);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(578, 105);
-            this.groupBox5.TabIndex = 152;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "PLC交握測試";
+            this.groupBox_plc.Controls.Add(this.pictureBox_plc);
+            this.groupBox_plc.Controls.Add(this.button6);
+            this.groupBox_plc.Controls.Add(this.button7);
+            this.groupBox_plc.Location = new System.Drawing.Point(344, 209);
+            this.groupBox_plc.Name = "groupBox_plc";
+            this.groupBox_plc.Size = new System.Drawing.Size(578, 105);
+            this.groupBox_plc.TabIndex = 152;
+            this.groupBox_plc.TabStop = false;
+            this.groupBox_plc.Text = "PLC交握測試";
+            // 
+            // pictureBox_plc
+            // 
+            this.pictureBox_plc.Location = new System.Drawing.Point(230, 29);
+            this.pictureBox_plc.Name = "pictureBox_plc";
+            this.pictureBox_plc.Size = new System.Drawing.Size(100, 50);
+            this.pictureBox_plc.TabIndex = 149;
+            this.pictureBox_plc.TabStop = false;
             // 
             // button6
             // 
@@ -910,10 +921,13 @@
             this.Controls.Add(this.groupBox1);
             this.Name = "Form2";
             this.Text = "PC Console";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form2_FormClosing);
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form2_FormClosed);
             this.Load += new System.EventHandler(this.Form2_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
+            this.groupBox_plc.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_plc)).EndInit();
             this.groupBox_plc_status.ResumeLayout(false);
             this.groupBox_plc_status.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_plc_status)).EndInit();
@@ -1005,9 +1019,10 @@
         private System.Windows.Forms.Button bt_open_folder;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Label lb_read_write_plc;
-        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.GroupBox groupBox_plc;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.PictureBox pictureBox_plc;
     }
 }
