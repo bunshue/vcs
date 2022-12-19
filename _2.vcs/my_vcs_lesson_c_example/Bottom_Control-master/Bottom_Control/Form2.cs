@@ -478,8 +478,18 @@ namespace Bottom_Control
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            if (flag_plc_test == true)
+            {
+                pictureBox_plc.BackColor = Color.White;
+            }
+            else
+            {
+                pictureBox_plc.BackColor = SystemColors.ControlLight;
+            }
+            update_plc_test_status_data();
+            draw_plc_test_status();
+
             bool plc_power_status = check_plc_power_status();
-            //bool plc_power_status = true;
 
             if (cb_debug.Checked == true)
             {
@@ -519,6 +529,7 @@ namespace Bottom_Control
         }
 
         private const int N = 31;
+        int plc_test_status_data_value = 0;
         int m10000_value = 0;
         int m10001_value = 0;
         int m10002_value = 0;
@@ -526,6 +537,7 @@ namespace Bottom_Control
         int m12001_value = 0;
         int m12002_value = 0;
 
+        int[] plc_test_status_data = new int[N];
         int[] m10000_data = new int[N];
         int[] m10001_data = new int[N];
         int[] m10002_data = new int[N];
@@ -564,6 +576,118 @@ namespace Bottom_Control
             return plc_power_status;
         }
 
+        void update_plc_test_status_data()
+        {
+            int i;
+            int rrrr;
+            Random r = new Random();
+
+            if (flag_plc_test == false)
+            {
+                plc_test_status_data_value = 0;
+            }
+            else
+            {
+                if (flag_plc_test_busy == false)
+                {
+                    plc_test_status_data_value = 1;
+                }
+                else
+                {
+                    plc_test_status_data_value = 2; //busy
+                }
+            }
+
+            if (cb_debug.Checked == true)
+            {
+                rrrr = r.Next(0, 3);
+                plc_test_status_data_value = rrrr;
+            }
+
+            for (i = 0; i < (N - 1); i++)
+            {
+                plc_test_status_data[i] = plc_test_status_data[i + 1];
+            }
+            plc_test_status_data[N - 1] = plc_test_status_data_value;
+        }
+
+        void draw_plc_test_status()
+        {
+            int W = pictureBox_plc.Width;
+            int H = pictureBox_plc.Height;
+
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);
+
+            if (flag_plc_test == false)
+            {
+                g.Clear(SystemColors.ControlLight);
+            }
+            else
+            {
+                g.Clear(Color.White);
+            }
+
+            //畫X軸 Y軸
+            Point px1 = new Point(W * 10 / 100, H * 90 / 100);
+            Point px2 = new Point(W * 90 / 100, H * 90 / 100);
+            g.DrawLine(new Pen(Brushes.Black, 5), px1, px2);
+            Point py1 = new Point(W * 10 / 100, H * 90 / 100);
+            Point py2 = new Point(W * 10 / 100, H * 10 / 100);
+            g.DrawLine(new Pen(Brushes.Black, 5), py1, py2);
+
+            int x_st = W * 10 / 100;
+            int x_sp = W * 90 / 100;
+            int y_st = H * 10 / 100;
+            int y_sp = H * 90 / 100;
+            int w = x_sp - x_st;
+            int h = y_sp - y_st;
+            int hh = h * 5 / 10;
+            int step = w / (N - 1);
+
+            //richTextBox1.Text += "step  = " + step.ToString() + " ";
+
+            // Create pens.
+            Pen redPen = new Pen(Color.Red, 3);
+            //Pen grayPen = new Pen(Color.Gray, 9);
+            List<Point> points = new List<Point>();
+
+            int i;
+            int x;
+            int y;
+            int dd = 8;
+            int pt_new = 0;
+            int pt_old = 0;
+
+            //畫 PLC status
+            points.Clear();
+            pt_old = plc_test_status_data[0];
+            for (i = 0; i < N; i++)
+            {
+                if (i > 0)
+                {
+                    pt_new = plc_test_status_data[i];
+                    if (pt_new != pt_old)
+                    {
+                        x = x_st + step * i;
+                        y = H - y_st - hh * pt_old;
+                        points.Add(new Point(x, y));
+                        pt_old = pt_new;
+                    }
+                }
+
+                x = x_st + step * i;
+                y = H - y_st - hh * plc_test_status_data[i];
+                //y = H - y_st - (h / 2) * plc_test_status_data[i] - 5 - (h / 7) * 5 - dd * 5;
+                points.Add(new Point(x, y));
+            }
+            g.DrawLines(redPen, points.ToArray());  //畫直線
+            //g.DrawString("PLC", new Font("標楷體", 15), new SolidBrush(Color.Green), new PointF(x_st - 20, H - 50));
+
+            pictureBox_plc.Image = bitmap1;
+
+            g.Dispose();
+        }
         void update_plc_data_status_data()
         {
             int i;
@@ -831,7 +955,6 @@ namespace Bottom_Control
             Pen redPen = new Pen(Color.Red, 3);
             //Pen grayPen = new Pen(Color.Gray, 9);
             List<Point> points = new List<Point>();
-            Point[] curvePoints = new Point[N];    //一維陣列內有 N 個Point
 
             int i;
             int x;
@@ -845,9 +968,6 @@ namespace Bottom_Control
             pt_old = m10000_data[0];
             for (i = 0; i < N; i++)
             {
-                curvePoints[i].X = x_st + step * i;
-                curvePoints[i].Y = H - y_st - (h / 7) * m10000_data[i] - 5 - (h / 7) * 5 - dd * 5;
-
                 if (i > 0)
                 {
                     pt_new = m10000_data[i];
@@ -863,7 +983,6 @@ namespace Bottom_Control
                 y = H - y_st - (h / 7) * m10000_data[i] - 5 - (h / 7) * 5 - dd * 5;
                 points.Add(new Point(x, y));
             }
-            //g.DrawLines(grayPen, curvePoints);   //畫直線
             g.DrawLines(redPen, points.ToArray());  //畫直線
             g.DrawString("M10000", new Font("標楷體", 15), new SolidBrush(Color.Green), new PointF(x_st - 70, H - y_st - (h / 7) * 1 - 5 - (h / 7) * 5 - dd * 5));
 
@@ -872,9 +991,6 @@ namespace Bottom_Control
             pt_old = m10001_data[0];
             for (i = 0; i < N; i++)
             {
-                curvePoints[i].X = x_st + step * i;
-                curvePoints[i].Y = H - y_st - (h / 7) * m10001_data[i] - 5 - (h / 7) * 4 - dd * 4;
-
                 if (i > 0)
                 {
                     pt_new = m10001_data[i];
@@ -890,7 +1006,6 @@ namespace Bottom_Control
                 y = H - y_st - (h / 7) * m10001_data[i] - 5 - (h / 7) * 4 - dd * 4;
                 points.Add(new Point(x, y));
             }
-            //g.DrawLines(grayPen, curvePoints);   //畫直線
             g.DrawLines(redPen, points.ToArray());  //畫直線
             g.DrawString("M10001", new Font("標楷體", 15), new SolidBrush(Color.Green), new PointF(x_st - 70, H - y_st - (h / 7) * 1 - 5 - (h / 7) * 4 - dd * 4));
 
@@ -899,9 +1014,6 @@ namespace Bottom_Control
             pt_old = m10002_data[0];
             for (i = 0; i < N; i++)
             {
-                curvePoints[i].X = x_st + step * i;
-                curvePoints[i].Y = H - y_st - (h / 7) * m10002_data[i] - 5 - (h / 7) * 3 - dd * 3;
-
                 if (i > 0)
                 {
                     pt_new = m10002_data[i];
@@ -917,7 +1029,6 @@ namespace Bottom_Control
                 y = H - y_st - (h / 7) * m10002_data[i] - 5 - (h / 7) * 3 - dd * 3;
                 points.Add(new Point(x, y));
             }
-            //g.DrawLines(grayPen, curvePoints);   //畫直線
             g.DrawLines(redPen, points.ToArray());  //畫直線
             g.DrawString("M10002", new Font("標楷體", 15), new SolidBrush(Color.Green), new PointF(x_st - 70, H - y_st - (h / 7) * 1 - 5 - (h / 7) * 3 - dd * 3));
 
@@ -926,9 +1037,6 @@ namespace Bottom_Control
             pt_old = m12000_data[0];
             for (i = 0; i < N; i++)
             {
-                curvePoints[i].X = x_st + step * i;
-                curvePoints[i].Y = H - y_st - (h / 7) * m12000_data[i] - 5 - (h / 7) * 2 - dd * 2;
-
                 if (i > 0)
                 {
                     pt_new = m12000_data[i];
@@ -944,7 +1052,6 @@ namespace Bottom_Control
                 y = H - y_st - (h / 7) * m12000_data[i] - 5 - (h / 7) * 2 - dd * 2;
                 points.Add(new Point(x, y));
             }
-            //g.DrawLines(grayPen, curvePoints);   //畫直線
             g.DrawLines(redPen, points.ToArray());  //畫直線
             g.DrawString("M12000", new Font("標楷體", 15), new SolidBrush(Color.Green), new PointF(x_st - 70, H - y_st - (h / 7) * 1 - 5 - (h / 7) * 2 - dd * 2));
 
@@ -953,9 +1060,6 @@ namespace Bottom_Control
             pt_old = m12001_data[0];
             for (i = 0; i < N; i++)
             {
-                curvePoints[i].X = x_st + step * i;
-                curvePoints[i].Y = H - y_st - (h / 7) * m12001_data[i] - 5 - (h / 7) * 1 - dd * 1;
-
                 if (i > 0)
                 {
                     pt_new = m12001_data[i];
@@ -971,7 +1075,6 @@ namespace Bottom_Control
                 y = H - y_st - (h / 7) * m12001_data[i] - 5 - (h / 7) * 1 - dd * 1;
                 points.Add(new Point(x, y));
             }
-            //g.DrawLines(grayPen, curvePoints);   //畫直線
             g.DrawLines(redPen, points.ToArray());  //畫直線
             g.DrawString("M12001", new Font("標楷體", 15), new SolidBrush(Color.Green), new PointF(x_st - 70, H - y_st - (h / 7) * 1 - 5 - (h / 7) * 1 - dd * 1));
 
@@ -980,9 +1083,6 @@ namespace Bottom_Control
             pt_old = m12002_data[0];
             for (i = 0; i < N; i++)
             {
-                curvePoints[i].X = x_st + step * i;
-                curvePoints[i].Y = H - y_st - (h / 7) * m12002_data[i] - 5 - (h / 7) * 0 - dd * 0;
-
                 if (i > 0)
                 {
                     pt_new = m12002_data[i];
@@ -998,10 +1098,8 @@ namespace Bottom_Control
                 y = H - y_st - (h / 7) * m12002_data[i] - 5 - (h / 7) * 0 - dd * 0;
                 points.Add(new Point(x, y));
             }
-            //g.DrawLines(grayPen, curvePoints);   //畫直線
             g.DrawLines(redPen, points.ToArray());  //畫直線
             g.DrawString("M12002", new Font("標楷體", 15), new SolidBrush(Color.Green), new PointF(x_st - 70, H - y_st - (h / 7) * 1 - 5 - (h / 7) * 0 - dd * 0));
-
 
             pictureBox1.Image = bitmap1;
 
@@ -1356,6 +1454,7 @@ namespace Bottom_Control
         }
 
         bool flag_plc_test = false;
+        bool flag_plc_test_busy = false;
         bool flag_plc_test_break = false;
 
         void do_PC_PLC_Communication(object sender, EventArgs e)
@@ -1364,6 +1463,7 @@ namespace Bottom_Control
             string contact_address = String.Empty;
             bool ret = false;
 
+            flag_plc_test_busy = false;
             richTextBox1.Text += "測試PLC作業流程 ST\t" + DateTime.Now.ToString() + "\n";
 
             richTextBox1.Text += "(0) PC 啟動完成, 檢查PLC是否已開機\n";
@@ -1423,6 +1523,7 @@ namespace Bottom_Control
                 return;
             }
             richTextBox1.Text += "\n(3b) PC 取得 M10000 為 ON\n";
+            flag_plc_test_busy = true;
 
             //開始計時
             richTextBox1.Text += "時間1 : " + DateTime.Now.ToString() + "\n";
@@ -1614,12 +1715,15 @@ namespace Bottom_Control
             stopwatch.Stop();
             richTextBox1.Text += "PLC交握測試 完成時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
             richTextBox1.Text += "時間2 : " + DateTime.Now.ToString() + "\n";
+            flag_plc_test_busy = false;
 
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             flag_plc_test = true;
+            flag_plc_test_busy = false;
+            flag_plc_test_break = false;
             button6.BackColor = Color.Red;
 
             int cnt = 1;
@@ -1643,8 +1747,6 @@ namespace Bottom_Control
             button6.BackColor = Color.White;
             button7.BackColor = Color.White;
 
-            flag_plc_test = false;
-
             if (flag_plc_test_break == true)
             {
                 flag_plc_test_break = false;
@@ -1654,6 +1756,9 @@ namespace Bottom_Control
                 stopwatch.Stop();
                 richTextBox1.Text += "時間3 : " + DateTime.Now.ToString() + "\n";
             }
+            flag_plc_test = false;
+            flag_plc_test_busy = false;
+            flag_plc_test_break = false;
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -1783,8 +1888,6 @@ namespace Bottom_Control
             string write_data = color_result.ToString();
             show_main_message1("寫入: D" + contact_address + ", 資料: " + write_data, S_OK, 30);
             set_plc_d_data_bcd16(contact_address, write_data);
-
         }
-
     }
 }
