@@ -7,11 +7,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using CCWin.SkinClass;
 using HslCommunication;
 using HslCommunication.Profinet;
 
-namespace vcs_PLC_Communication1.PLC_protocol
+namespace vcs_PLC_Communication1.PLC_Communication
 {
     /// <summary>
     /// 采用3E帧通讯协议--open-读取-写入--继承接口IPLC_interface
@@ -32,7 +31,7 @@ namespace vcs_PLC_Communication1.PLC_protocol
         /// <summary>
         /// 互斥锁(Mutex)，用于多线程中防止两条线程同时对一个公共资源进行读写的机制
         /// </summary>
-        static Mutex mutex= new Mutex();//实例化互斥锁(Mutex);//定义互斥锁名称
+        static Mutex mutex = new Mutex();//实例化互斥锁(Mutex);//定义互斥锁名称
         //实现接口的属性
         /// <summary>
         ///  三菱 Mitsubishi PLC状态
@@ -68,7 +67,7 @@ namespace vcs_PLC_Communication1.PLC_protocol
                     // 切断连接
                     melsec_net.ConnectClose();
                     return "链接PLC异常";//尝试连接PLC，如果连接成功则返回值为0
-                }               
+                }
             }
             catch (Exception e)
             {
@@ -123,11 +122,24 @@ namespace vcs_PLC_Communication1.PLC_protocol
                     mutex.WaitOne(100);
                     // 写bool变量
                     if (Name != "Y")
-                        writeResultRender(melsec_net.WriteIntoPLC(Name.Trim() + id.Trim(), Convert.ToBoolean(button_State.ToInt32())), Name.Trim() + id.Trim());//写入自定地址变量状态
+                    {
+                        bool write_data = false;
+                        if (button_State == Button_state.ON)
+                        {
+                            write_data = true;
+                        }
+                        else
+                        {
+                            write_data = false;
+                        }
+                        OperateResult operateResult = melsec_net.WriteIntoPLC(Name.Trim() + id.Trim(), write_data);
+                        writeResultRender(operateResult, Name.Trim() + id.Trim());//写入自定地址变量状态
+                    }
                     else
                     {
+                        Console.WriteLine("XXXXXXXXXXXXXXXXXXXX\n");
                         //Q系列不需要转换-如果需要对接Q系列 需要把这个判断注释掉
-                        OperateResult<byte[]> read = melsec_net.ReadFromServerCore(this.Write_bit(mitsubishi.message_bit.Y, Convert.ToInt32(id), button_State==Button_state.ON?true:false));
+                        OperateResult<byte[]> read = melsec_net.ReadFromServerCore(this.Write_bit(mitsubishi.message_bit.Y, Convert.ToInt32(id), button_State == Button_state.ON ? true : false));
                         readResultRender(read, Name.Trim() + id.Trim(), ref result);
                         result = read.IsSuccess ? "TRUE" : "FALSE";
                     }
@@ -146,7 +158,7 @@ namespace vcs_PLC_Communication1.PLC_protocol
         /// <returns></returns>
         string IPLC_interface.PLC_read_D_register(string Name, string id, numerical_format format)//读寄存器--转换相应类型
         {
-            string result = "0";//定义获取数据变量        
+            string result = "0";//定义获取数据变量
             lock (this)
             {
                 try
@@ -165,14 +177,20 @@ namespace vcs_PLC_Communication1.PLC_protocol
                             readResultRender(melsec_net.ReadIntFromPLC(Name.Trim() + id.Trim()), Name.Trim() + id.Trim(), ref result);
                             break;
                         case numerical_format.Binary_16_Bit:
+                            /*
+                            // 不支持
                             // 读取16位二进制数
                             String data_1 = Convert.ToString(result.ToInt32(), 2);
                             readResultRender(melsec_net.ReadShortFromPLC(Name.Trim() + id.Trim()), Name.Trim() + id.Trim(), ref result);
+                            */
                             break;
                         case numerical_format.Binary_32_Bit:
+                            /*
+                            // 不支持
                             // 读取32位二进制数
                             String data_2 = Convert.ToString(result.ToInt32(), 2);
                             readResultRender(melsec_net.ReadIntFromPLC(Name.Trim() + id.Trim()), Name.Trim() + id.Trim(), ref result);
+                            */
                             break;
                         case numerical_format.Float_32_Bit:
                             // 读取float变量
@@ -197,7 +215,7 @@ namespace vcs_PLC_Communication1.PLC_protocol
                             readResultRender(melsec_net.ReadUIntFromPLC(Name.Trim() + id.Trim()), Name.Trim() + id.Trim(), ref result);
                             break;
                         case numerical_format.String_32_Bit:
-                            readResultRender(melsec_net.ReadStringFromPLC(Name.Trim() + id.Trim(),10), Name.Trim() + id.Trim(), ref result);
+                            readResultRender(melsec_net.ReadStringFromPLC(Name.Trim() + id.Trim(), 10), Name.Trim() + id.Trim(), ref result);
                             break;
                     }
                     mutex.ReleaseMutex();
@@ -259,7 +277,7 @@ namespace vcs_PLC_Communication1.PLC_protocol
                     }
                     mutex.ReleaseMutex();
                 }
-                catch {  }
+                catch { }
             }
             return result;//返回数据
         }
@@ -274,7 +292,7 @@ namespace vcs_PLC_Communication1.PLC_protocol
         {
             if (result.IsSuccess)
             {
-               data=result.Content.ToString();//获取回传的数据
+                data = result.Content.ToString();//获取回传的数据
             }
             else
             {
@@ -289,7 +307,7 @@ namespace vcs_PLC_Communication1.PLC_protocol
         /// <param name="address"></param>
         private void writeResultRender(OperateResult result, string address)
         {
-            if (result.IsSuccess!=true)
+            if (result.IsSuccess != true)
             {
                 PLC_ready = false;//读取异常
             }

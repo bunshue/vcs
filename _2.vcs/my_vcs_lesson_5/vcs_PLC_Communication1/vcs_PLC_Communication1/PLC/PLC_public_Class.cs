@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using CCWin.SkinClass;
-using vcs_PLC_Communication1.PLC_protocol.mitsubishi;
+using vcs_PLC_Communication1.PLC_Communication.mitsubishi;
 
-namespace vcs_PLC_Communication1.PLC_protocol
+namespace vcs_PLC_Communication1.PLC_Communication
 {
     /// <summary>
     /// 本类是共用类 

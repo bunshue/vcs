@@ -12,7 +12,8 @@ using System.IO;
 using System.Diagnostics;       //for Process, Stopwatch
 using System.Drawing.Imaging;
 
-using vcs_PLC_Communication1.PLC_protocol;
+using vcs_PLC_Communication1.PLC_Communication;
+using HslCommunication.Profinet;
 
 namespace vcs_PLC_Communication1
 {
@@ -705,7 +706,7 @@ namespace vcs_PLC_Communication1
                 points.Add(new Point(x, y));
             }
             g.DrawLines(redPen, points.ToArray());  //畫直線
-            //g.DrawString("PLC", new Font("標楷體", 15), new SolidBrush(Color.Green), new PointF(x_st - 20, H - 50));
+            g.DrawString(flag_plc_test_count.ToString(), new Font("標楷體", 15), new SolidBrush(Color.Green), new PointF(x_st - 20, H - 50));
 
             pictureBox_plc.Image = bitmap1;
 
@@ -1479,6 +1480,7 @@ namespace vcs_PLC_Communication1
         bool flag_plc_test = false;
         bool flag_plc_test_busy = false;
         bool flag_plc_test_break = false;
+        int flag_plc_test_count = 0;
 
         void do_PC_PLC_Communication(object sender, EventArgs e)
         {
@@ -1547,6 +1549,7 @@ namespace vcs_PLC_Communication1
             }
             richTextBox1.Text += "\n(3b) PC 取得 M10000 為 ON\n";
             flag_plc_test_busy = true;
+            flag_plc_test_count++;
 
             //開始計時
             richTextBox1.Text += "時間1 : " + DateTime.Now.ToString() + "\n";
@@ -1747,6 +1750,7 @@ namespace vcs_PLC_Communication1
             flag_plc_test = true;
             flag_plc_test_busy = false;
             flag_plc_test_break = false;
+            flag_plc_test_count = 0;
             button6.BackColor = Color.Red;
 
             int cnt = 1;

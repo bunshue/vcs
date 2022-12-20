@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace vcs_PLC_Communication1.PLC_protocol.mitsubishi
+namespace vcs_PLC_Communication1.PLC_Communication.mitsubishi
 {
     /// <summary>
     /// 可访问设备的软元件-类型是bit位

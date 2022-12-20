@@ -5,7 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace vcs_PLC_Communication1.PLC_protocol
+namespace vcs_PLC_Communication1.PLC_Communication
 {
     /// <summary>
     /// PLC实现接口--规范定义的方法名称Mitsubishi_realize

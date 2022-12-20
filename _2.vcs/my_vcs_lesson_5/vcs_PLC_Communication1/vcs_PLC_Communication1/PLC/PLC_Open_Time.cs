@@ -8,7 +8,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.ComponentModel;
 
-using vcs_PLC_Communication1.PLC_protocol;
+using vcs_PLC_Communication1.PLC_Communication;
 
 namespace vcs_PLC_Communication1.SetupControls
 {

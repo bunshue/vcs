@@ -53,11 +53,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="CSkin">
-      <HintPath>..\..\自定义Uppercomputer-20200727\自定义Uppercomputer-20200727\第三方控件DLL\CSkin.dll</HintPath>
-    </Reference>
-    <Reference Include="HslCommunication">
-      <HintPath>..\..\自定义Uppercomputer-20200727\自定义Uppercomputer-20200727\第三方控件DLL\HslCommunication.dll</HintPath>
+    <Reference Include="HslCommunication, Version=4.3.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\HslCommunication.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -83,10 +81,10 @@
     <Compile Include="PLC\PLC_Open_Time.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="PLC_protocol\IPLC_interface.cs" />
-    <Compile Include="PLC_protocol\mitsubishi\Mitsubishi_message.cs" />
-    <Compile Include="PLC_protocol\Mitsubishi_realize.cs" />
-    <Compile Include="PLC_protocol\PLC_public_Class.cs" />
+    <Compile Include="PLC\IPLC_interface.cs" />
+    <Compile Include="PLC\Mitsubishi_message.cs" />
+    <Compile Include="PLC\Mitsubishi_realize.cs" />
+    <Compile Include="PLC\PLC_public_Class.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form2.resx">
@@ -114,7 +112,6 @@
     <None Include="img\ball\ball_red.png" />
     <None Include="img\ball\ball_red2.png" />
     <None Include="img\ball\ball_yellow.png" />
-    <None Include="img\folder_open.png" />
     <None Include="img\save.png" />
     <None Include="img\open_folder.png" />
     <None Include="img\pause.png" />
@@ -132,11 +129,8 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="PLC\PLC_protocol\mitsubishi\" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="dll\CSkin.dll" />
     <Content Include="dll\HslCommunication.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
