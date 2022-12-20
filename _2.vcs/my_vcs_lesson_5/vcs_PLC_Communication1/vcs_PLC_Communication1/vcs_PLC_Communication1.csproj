@@ -80,11 +80,10 @@
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
-    <Compile Include="PLC_Open_Time.cs">
+    <Compile Include="PLC\PLC_Open_Time.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="PLC_protocol\IPLC_interface.cs" />
-    <Compile Include="PLC_protocol\mitsubishi\message.cs" />
     <Compile Include="PLC_protocol\mitsubishi\Mitsubishi_message.cs" />
     <Compile Include="PLC_protocol\Mitsubishi_realize.cs" />
     <Compile Include="PLC_protocol\PLC_public_Class.cs" />
@@ -133,7 +132,9 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="PLC\PLC_protocol\mitsubishi\" />
+  </ItemGroup>
   <ItemGroup>
     <Content Include="dll\CSkin.dll" />
     <Content Include="dll\HslCommunication.dll" />

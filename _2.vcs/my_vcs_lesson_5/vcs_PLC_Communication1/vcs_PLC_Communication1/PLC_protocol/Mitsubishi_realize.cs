@@ -23,8 +23,6 @@ namespace vcs_PLC_Communication1.PLC_protocol
         /// </summary>
         public IPEndPoint IPEndPoint { get; set; }//IP地址
         static private bool PLC_ready;//内部PLC状态
-        static private int PLCerr_code;//内部报警代码
-        static private string PLCerr_content;//内部报警内容
         //三菱3E帧类--
         /// <summary>
         /// 三菱3E帧类
@@ -40,23 +38,6 @@ namespace vcs_PLC_Communication1.PLC_protocol
         ///  三菱 Mitsubishi PLC状态
         /// </summary>
         bool IPLC_interface.PLC_ready { get => PLC_ready; } //PLC状态
-        /// <summary>
-        ///  三菱 Mitsubishi  PLC报警代码
-        /// </summary>
-        int IPLC_interface.PLCerr_code { get => PLCerr_code; }//PLC报警代码
-        /// <summary>
-        /// 三菱 Mitsubishi   PLC报警内容
-        /// </summary>
-        string IPLC_interface.PLCerr_content { get => PLCerr_content; }//PLC报警内容
-        /// <summary>
-        /// 三菱 Mitsubishi 初始化---open
-        /// </summary>
-        /// <param name="iPEndPoint"></param>
-        public Mitsubishi_realize(IPEndPoint iPEndPoint)//构造函数---初始化---open
-        {
-            this.IPEndPoint = iPEndPoint;//获取IP地址
-            melsec_net = new MelsecNet();//实例化对象
-        }
         public Mitsubishi_realize()//构造函数---多态
         {
 
@@ -71,13 +52,11 @@ namespace vcs_PLC_Communication1.PLC_protocol
             try
             {
                 //利用三菱3E帧实现
-                PLCerr_content = null;
                 melsec_net.PLCIpAddress = IPEndPoint.Address;//获取设置的IP
                 melsec_net.PortRead = IPEndPoint.Port;//获取设置的端口
                 melsec_net.ConnectClose();//切换通讯模式
                 melsec_net.ConnectTimeout = 500;
                 OperateResult connect = melsec_net.ConnectServer();//获取操作结果
-                retry = 0;
                 if (connect.IsSuccess)//判断是否连接成功
                 {
                     PLC_ready = true;//PLC开放正常
@@ -285,55 +264,17 @@ namespace vcs_PLC_Communication1.PLC_protocol
             return result;//返回数据
         }
         /// <summary>
-        ///  三菱 Mitsubishi 批量读取寄存器
-        /// </summary>
-        /// <param name="Name"></param>
-        /// <param name="id"></param>
-        /// <param name="format"></param>
-        /// <param name="Index"></param>
-        /// <returns></returns>
-        List<int> IPLC_interface.PLC_read_D_register_bit(string Name, string id, numerical_format format, string Index)//批量读取寄存器
-        {
-            List<int> Data = new List<int>();
-            lock (this)
-            {
-                try
-                {
-                    mutex.WaitOne(500);
-                    Data = Mitsubishi_to_Index_numerical(Name, id.ToInt32(), format, Index.ToInt32(), this);//批量读取寄存器并且返回数据
-                    mutex.ReleaseMutex();
-                }
-                catch { }
-            }
-            return Data;
-        }
-        /// <summary>
-        /// 三菱 Mitsubishi  批量写入寄存器
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        List<int> IPLC_interface.PLC_write_D_register_bit(string id)
-        {
-            return new List<int>() { 1 };
-        }
-        /// <summary>
-        /// 定义消息以弹出不在弹窗
-        /// </summary>
-        static bool Message_run = false;
-        static int retry;
-        /// <summary>
         /// 统一的读取结果的数据解析，显示
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="result"></param>
         /// <param name="address"></param>
-        /// <param name="textBox"></param>
+        /// <param name="data"></param>
         private void readResultRender<T>(OperateResult<T> result, string address, ref string data)
         {
             if (result.IsSuccess)
             {
                data=result.Content.ToString();//获取回传的数据
-               retry = 0;
             }
             else
             {
@@ -351,7 +292,6 @@ namespace vcs_PLC_Communication1.PLC_protocol
             if (result.IsSuccess!=true)
             {
                 PLC_ready = false;//读取异常
-                PLCerr_content = DateTime.Now.ToString("[HH:mm:ss] ") + $"[{address}] 写入失败{Environment.NewLine}原因：{result.ToMessageShowString()}";
             }
         }
         /// <summary>
@@ -361,9 +301,6 @@ namespace vcs_PLC_Communication1.PLC_protocol
         private void err(Exception e)
         {
             PLC_ready = false;//PLC开放异常
-            PLCerr_code = e.HResult;
-            PLCerr_content = e.Message;
-            Message_run = true;
         }
     }
 }

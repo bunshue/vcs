@@ -21,14 +21,6 @@ namespace vcs_PLC_Communication1.PLC_protocol
         /// </summary>
         bool PLC_ready { get; }//PLC准备好
         /// <summary>
-        /// PLC报警代码
-        /// </summary>
-        int PLCerr_code { get; }//PLC报警代码
-        /// <summary>
-        /// PLC报警内容
-        /// </summary>
-        string PLCerr_content { get; }//PLC报警内容
-        /// <summary>
         /// 打开PLC
         /// </summary>
         /// <returns></returns>
@@ -65,17 +57,5 @@ namespace vcs_PLC_Communication1.PLC_protocol
         /// <param name="format"></param>
         /// <returns></returns>
         string PLC_write_D_register(string Name, string id, string content, numerical_format format);//读写--字
-        /// <summary>
-        /// 读取--字--多个读取-自动判断类型改变地址索引
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        List<int> PLC_read_D_register_bit(string Name, string id, numerical_format format, string Index);//读取--字--多个读取
-        /// <summary>
-        /// 读写--字
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        List<int> PLC_write_D_register_bit(string id);//读写--字
     }
 }

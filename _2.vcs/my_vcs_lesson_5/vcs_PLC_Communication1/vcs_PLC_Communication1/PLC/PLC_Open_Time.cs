@@ -61,10 +61,6 @@ namespace vcs_PLC_Communication1.SetupControls
         /// </summary>
         private bool lock_err;
         /// <summary>
-        /// PLC触发报警事件
-        /// </summary>
-        public event EventHandler PLC_errEvent;
-        /// <summary>
         /// 指示定时器是否在运行
         /// </summary>
         public static bool Time_run;
@@ -100,8 +96,6 @@ namespace vcs_PLC_Communication1.SetupControls
                         Mitsubishi.IPEndPoint.Address = Mitsubishi_ip;
                         Mitsubishi.IPEndPoint.Port = MitsubishiPort;
                         Mitsubishi.PLC_open();
-                        if (Mitsubishi.PLCerr_content != null)
-                            this.PLC_errEvent(Mitsubishi.PLCerr_content, new EventArgs());
                     }
                 });
             }

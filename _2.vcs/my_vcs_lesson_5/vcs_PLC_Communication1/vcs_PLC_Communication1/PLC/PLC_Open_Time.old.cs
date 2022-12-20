@@ -109,10 +109,6 @@ namespace Bottom_Control.设置控件
         /// </summary>
         private bool lock_err;
         /// <summary>
-        /// PLC触发报警事件
-        /// </summary>
-        public event EventHandler PLC_errEvent;
-        /// <summary>
         /// 指示定时器是否在运行
         /// </summary>
         public static bool Time_run;
