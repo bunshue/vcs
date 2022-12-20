@@ -76,19 +76,6 @@ namespace vcs_PLC_Communication1.PLC_protocol.mitsubishi
             return BytesLHToBytesHL(Data);
         }
         /// <summary>
-        /// 字读取
-        /// </summary>
-        /// <param name="message_Word">需要读取的类型</param>
-        /// <param name="location">起始位置</param>
-        /// <param name="number">读取个数需要少于255</param>
-        /// <returns></returns>
-        protected virtual  byte[] Read_Word(message_Word message_Word,int location, byte number)
-        {
-            string length = "0C00";//请求长度真实数据是000C 转换成10进制是13个字节
-            string Data = $"{Secondary_head}{Station_number}{length}{Time}{Batch_read_command_Word}{Int_to_String(location)}{Convert.ToString((int)message_Word, 16)}{ number_to_String(number)}{End}" ;//获取默认头部帧
-            return BytesLHToBytesHL(Data);
-        }
-        /// <summary>
         /// bit位写入
         /// </summary>
         /// <param name="message_Bit">需要写入的类型</param>
@@ -107,34 +94,6 @@ namespace vcs_PLC_Communication1.PLC_protocol.mitsubishi
             var DATQ = Convert.ToInt32(location.ToString(), 8);//Q系列不需要装换8进制
             string Data1 = $"{Secondary_head}{Station_number}{length}{Time}{Batch_write_command_bit}{Int_to_String(DATQ)}{Convert.ToString((int)message_Bit, 16)}{number_to_String(Convert.ToByte(len))}{End}{bool_to_string(new bool[] { number })}";//获取默认头部帧
             return BytesLHToBytesHL(Data1);
-        }
-        /// <summary>
-        /// 多线圈写入
-        /// </summary>
-        /// <param name="message_Bit">需要写入的类型</param>
-        /// <param name="location">起始位置</param>
-        /// <param name="number">需要写入的数据</param>
-        /// <returns></returns>
-        protected virtual byte[] Write_multi_bit(message_bit message_Bit, int location, bool[] number)
-        {
-            int len = number.Length;
-            string length = $"{number_to_String(Convert.ToByte((number.Length % 2 == 1 ? number.Length + 1 : number.Length )/2+ 12))}00";//请求长度真实数据标准12个加上要写入的长度等于真实长度
-            string Data = $"{Secondary_head}{Station_number}{length}{Time}{Batch_write_command_bit}{Int_to_String(location)}{Convert.ToString((int)message_Bit, 16)}{number_to_String(Convert.ToByte(len))}{End}{bool_to_string(number)}";//获取默认头部帧
-            return BytesLHToBytesHL(Data);
-        }
-        /// <summary>
-        /// 字写入
-        /// </summary>
-        /// <param name="message_Word">需要写入的类型</param>
-        /// <param name="location">起始位置</param>
-        /// <param name="number">需要写入的数据</param>
-        /// <returns></returns>
-        protected virtual byte[] Write_Word(message_Word message_Word, int location, byte[] number)
-        {
-            int len = number.Length % 2 == 1 ? number.Length + 1 : number.Length;
-            string length = $"{number_to_String(Convert.ToByte(len + 12))}00";//请求长度真实数据标准12个加上要写入的长度等于真实长度
-            string Data = $"{Secondary_head}{Station_number}{length}{Time}{Batch_write_command_Word}{Int_to_String(location)}{Convert.ToString((int)message_Word, 16)}{number_to_String(Convert.ToByte(len/2))}{End}{byet_to_String(number)}";//获取默认头部帧
-            return BytesLHToBytesHL(Data);
         }
         /// <summary>
         /// 强制执行操作模式
@@ -171,58 +130,8 @@ namespace vcs_PLC_Communication1.PLC_protocol.mitsubishi
         /// 对象设备使CPU模块的ERR LED熄灯或使缓冲存储器中存储的出错信息
         /// 出错代码初始化的功能。
         /// </summary>
-        private const string Remote_Err_Rest = "17160000";
 
-        /// <summary>
-        /// 对远程PLC执行Run运行操作--不强制执行
-        /// </summary>
-        /// <returns></returns>
-        public virtual byte[] PLC_Run_remote()
-        {
-            string length = $"0A00";//请求长度
-            string Data = $"{Secondary_head}{Station_number}{length}{Time}{Remote_Run}{Mandatory_OFF}{Eliminate}{End}";//获取默认头部帧
-            return BytesLHToBytesHL(Data);
-        }
-        /// <summary>
-        /// 对远程PLC执行Stop停止操作
-        /// </summary>
-        /// <returns></returns>
-        public virtual byte[] PLC_Stop_remote()
-        {
-            string length = $"0800";//请求长度
-            string Data = $"{Secondary_head}{Station_number}{length}{Time}{Remote_Stop}{Eliminate}{End}";//获取默认头部帧
-            return BytesLHToBytesHL(Data);
-        }
-        /// <summary>
-        /// 对远程PLC进行Pause操作
-        /// </summary>
-        /// <returns></returns>
-        public virtual byte[] PLC_Pause_remote()
-        {
-            string length = $"0800";//请求长度
-            string Data = $"{Secondary_head}{Station_number}{length}{Time}{Remote_Pause}{Eliminate}{End}";//获取默认头部帧
-            return BytesLHToBytesHL(Data);
-        }
-        /// <summary>
-        /// 对远程PLC进行Rest复位操作
-        /// </summary>
-        /// <returns></returns>
-        public virtual byte[] PLC_Rest_remote()
-        {
-            string length = $"0800";//请求长度
-            string Data = $"{Secondary_head}{Station_number}{length}{Time}{Remote_Rest}{Eliminate}{End}";//获取默认头部帧
-            return BytesLHToBytesHL(Data);
-        }
-        /// <summary>
-        /// 对远程PLC进行 出错代码的初始化复位操作
-        /// </summary>
-        /// <returns></returns> 
-        public virtual byte[] PLC_Rrr_Rest_remote()
-        {
-            string length = $"0600";//请求长度
-            string Data = $"{Secondary_head}{Station_number}{length}{Time}{Remote_Err_Rest}";//获取默认头部帧
-            return BytesLHToBytesHL(Data);
-        }
+        private const string Remote_Err_Rest = "17160000";
         /// <summary>
         /// 把bool布尔状态转换成string字符串
         /// </summary>
@@ -236,21 +145,6 @@ namespace vcs_PLC_Communication1.PLC_protocol.mitsubishi
             if (Data.Length % 2 == 1)
                 Data += "0";
             return Data;
-        }
-        /// <summary>
-        /// 把需要的数据翻转并且转换成字符串
-        /// </summary>
-        /// <param name="number"></param>
-        /// <returns></returns>
-        private string byet_to_String(byte[] number)
-        {
-            Array.Reverse(number);
-            string Data_1 = string.Empty;
-            foreach (var i in number)
-                Data_1 += number_to_String(i);
-            if (number.Length % 2 == 1)
-                Data_1 += "00";
-            return Data_1;
         }
         /// <summary>
         /// 把需要写入的长度转换成16进制并且自动补0

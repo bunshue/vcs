@@ -80,7 +80,6 @@
     <Compile Include="Form2.Designer.cs">
       <DependentUpon>Form2.cs</DependentUpon>
     </Compile>
-    <Compile Include="PLC.cs" />
     <Compile Include="PLC_Open_Time.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -137,9 +136,7 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="dll\CSkin.dll" />
-    <Content Include="dll\CSScriptLibrary.dll" />
     <Content Include="dll\HslCommunication.dll" />
-    <Content Include="dll\HZH_Controls.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

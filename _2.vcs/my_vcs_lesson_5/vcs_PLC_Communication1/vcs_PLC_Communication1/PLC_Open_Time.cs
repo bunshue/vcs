@@ -9,7 +9,6 @@ using System.Net.Sockets;
 using System.ComponentModel;
 
 using vcs_PLC_Communication1.PLC_protocol;
-using HslCommunication.Profinet;
 
 namespace vcs_PLC_Communication1.SetupControls
 {
