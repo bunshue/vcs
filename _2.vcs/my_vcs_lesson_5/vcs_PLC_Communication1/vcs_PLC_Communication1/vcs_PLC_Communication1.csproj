@@ -74,7 +74,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DAPLC_Time.cs" />
     <Compile Include="Form2.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -92,7 +91,6 @@
     <Compile Include="PLC_protocol\PLC_public_Class.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Public_Class.cs" />
     <EmbeddedResource Include="Form2.resx">
       <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
@@ -106,19 +104,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="packages.config" />
-    <None Include="Properties\Settings.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="img\clipboard.png" />
@@ -155,9 +140,6 @@
     <Content Include="dll\CSScriptLibrary.dll" />
     <Content Include="dll\HslCommunication.dll" />
     <Content Include="dll\HZH_Controls.dll" />
-    <Content Include="dll\Install_deployment.dll" />
-    <Content Include="dll\Interop.ActUtlTypeLib.dll" />
-    <Content Include="dll\Microsoft.Graph.Core.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

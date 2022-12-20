@@ -655,7 +655,6 @@ namespace vcs_PLC_Communication1
             int i;
             int x;
             int y;
-            int dd = 8;
             int pt_new = 0;
             int pt_old = 0;
 

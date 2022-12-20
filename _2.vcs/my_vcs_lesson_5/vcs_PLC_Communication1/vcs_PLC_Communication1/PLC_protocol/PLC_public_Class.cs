@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using vcs_PLC_Communication1.PLC_protocol.mitsubishi;
+
 using CCWin.SkinClass;
-//using HslCommunication;
-//using HslCommunication.Profinet;
+using vcs_PLC_Communication1.PLC_protocol.mitsubishi;
 
 namespace vcs_PLC_Communication1.PLC_protocol
 {
@@ -87,138 +86,6 @@ namespace vcs_PLC_Communication1.PLC_protocol
                 if (i < transform.Length) taran[i] = transform[i]; else taran[i] = transform_1[i - transform.Length];
             }
             return BitConverter.ToSingle(taran, 0);//转换成浮点小数
-        }
-        /// <summary>
-        /// BOOL转INT类型
-        /// </summary>
-        /// <param name="barray"></param>
-        /// <returns></returns>
-        public int ConvertBoolArrayToInt(bool[] barray)//BOOL转INT类型
-        {
-            int result = 0;
-            if (barray != null)
-            {
-                int len = barray.Length;
-
-                if (len < 33)
-                {
-                    foreach (bool b in barray)
-                    {
-                        result = (result << 1) + (b ? 1 : 0);
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("bool数组长度大于32，整数只有32位。");
-                }
-            }
-            else
-            {
-                Console.WriteLine("bool数组为空。");
-            }
-            return result;
-        }
-        /// <summary>
-        /// 转换类型---shorot--string
-        /// </summary>
-        /// <param name="Name"></param>
-        /// <param name="format"></param>
-        /// <returns></returns>
-        public string Mitsubishi_to_numerical(int[] Name, numerical_format format)//转换类型---shorot--string
-        {
-            string numerical = Name[0].ToString();//初始化寄存器
-            try
-            {
-                switch (format)
-                {
-                    case numerical_format.BCD_16_Bit:
-                        numerical = Hex_to_BCD(Name[0]).ToString();//转换成BCD吗
-                        break;
-                    case numerical_format.BCD_32_Bit:
-                        numerical = Hex_to_BCD(merge(new short[] { (short)Name[0], (short)Name[1] })).ToString();//转换成BCD吗
-                        break;
-                    case numerical_format.Binary_16_Bit:
-                        numerical = Convert.ToString(Name[0], 2);//转换成16位二进制数
-                        break;
-                    case numerical_format.Binary_32_Bit:
-                        numerical = Convert.ToString(merge(new short[] { (short)Name[0], (short)Name[1] }), 2);//转换成32位二进制数
-                        break;
-                    case numerical_format.Float_32_Bit:
-                        numerical = merge_to_Double(new short[] { (short)Name[0], (short)Name[1] }).ToString();//转换成浮点小数
-                        break;
-                    case numerical_format.Hex_16_Bit:
-                        numerical = Convert.ToUInt32(Name[0]).ToString("X");//16进制转换--16位
-                        break;
-                    case numerical_format.Hex_32_Bit:
-                        numerical = merge(new short[] { (short)Name[0], (short)Name[1] }).ToString("X");//16进制转换-32位
-                        break;
-                    case numerical_format.Signed_16_Bit:
-                        numerical = Convert.ToInt16(Name[0]).ToString();//有符号-16位
-                        break;
-                    case numerical_format.Signed_32_Bit:
-                        numerical = Convert.ToInt32(merge(new short[] { (short)Name[0], (short)Name[1] })).ToString();//有符号 32位
-                        break;
-                    case numerical_format.Unsigned_16_Bit:
-                        numerical = Convert.ToUInt16(Name[0]).ToString();//无符号-16位
-                        break;
-                    case numerical_format.Unsigned_32_Bit:
-                        numerical = Convert.ToUInt32(merge(new short[] { (short)Name[0], (short)Name[1] })).ToString();//无符号-32位
-                        break;
-                }
-            }
-            catch { }
-            return numerical;//返回数据
-        }
-        /// <summary>
-        /// 转换类型---string--shorot
-        /// </summary>
-        /// <param name="Name"></param>
-        /// <param name="format"></param>
-        /// <returns></returns>
-        public short[] numerical_to_Mitsubishi(string Name, numerical_format format)//转换类型---string--shorot
-        {
-            short[] numerical =new short[32];//初始化寄存器
-            try
-            {
-                switch (format)
-                {
-                    case numerical_format.BCD_16_Bit:
-                        numerical = bit32_to_bit32(stringToShort(Name, numerical));//string-转short
-                        break;
-                    case numerical_format.BCD_32_Bit:
-                        numerical = stringToShort(Name, numerical);//string-转short
-                        break;
-                    case numerical_format.Binary_16_Bit:
-                        numerical = bit32_to_bit32(stringToShort(Convert.ToInt32(Name, 2).ToString(), numerical));//16位二进制数-转short
-                        break;
-                    case numerical_format.Binary_32_Bit:
-                        numerical = stringToShort(Convert.ToInt32(Name, 2).ToString(), numerical);//16位二进制数-转short
-                        break;
-                    case numerical_format.Float_32_Bit:
-                        numerical = float_to_short(Convert.ToSingle(Name));//浮点小数-转short
-                        break;
-                    case numerical_format.Hex_16_Bit:
-                        numerical = bit32_to_bit32(stringToShort(Convert.ToInt32(Name, 16).ToString(), numerical));//16位二进制数-转short
-                        break;
-                    case numerical_format.Hex_32_Bit:
-                        numerical = stringToShort(Convert.ToInt32(Name, 16).ToString(), numerical);//16位二进制数-转short
-                        break;
-                    case numerical_format.Signed_16_Bit:
-                        numerical = bit32_to_bit32(stringToShort(Convert.ToInt32(Name).ToString(), numerical));//16位二进制数-转short
-                        break;
-                    case numerical_format.Signed_32_Bit:
-                        numerical = stringToShort(Convert.ToInt32(Name).ToString(), numerical);//16位二进制数-转short
-                        break;
-                    case numerical_format.Unsigned_16_Bit:
-                        numerical = bit32_to_bit32(stringToShort(Convert.ToInt32(Name).ToString(), numerical));//16位二进制数-转short
-                        break;
-                    case numerical_format.Unsigned_32_Bit:
-                        numerical = stringToShort(Convert.ToInt32(Name).ToString(), numerical);//16位二进制数-转short
-                        break;
-                }
-            }
-            catch { }
-            return numerical;//返回数据
         }
         /// <summary>
         /// 转换类型---shorot--list<int>根据需要读取个数返回泛型表--三菱专用
