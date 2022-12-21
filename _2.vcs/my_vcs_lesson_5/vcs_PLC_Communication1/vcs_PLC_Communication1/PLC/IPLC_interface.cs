@@ -7,54 +7,54 @@ using System.Text;
 namespace vcs_PLC_Communication1.PLC_Communication
 {
     /// <summary>
-    /// PLC实现接口--规范定义的方法名称Mitsubishi_realize
+    /// PLC實現接口--規範定義的方法名稱Mitsubishi_realize
     /// </summary>
-    public interface IPLC_interface//规范定义的方法名称
+    public interface IPLC_interface//規範定義的方法名稱
     {
         /// <summary>
-        /// PLC IP与端口
+        /// PLC IP與端口
         /// </summary>
         IPEndPoint IPEndPoint { get; set; }
         /// <summary>
-        /// PLC准备好
+        /// PLC準備好
         /// </summary>
-        bool PLC_ready { get; }//PLC准备好
+        bool PLC_ready { get; }//PLC準備好
         /// <summary>
-        /// 打开PLC
+        /// 打開PLC
         /// </summary>
         /// <returns></returns>
-        string PLC_open();//打开PLC
+        string PLC_open();//打開PLC
         /// <summary>
-        /// 读取--位
+        /// 讀取--位
         /// </summary>
         /// <param name="Name"></param>
         /// <param name="id"></param>
         /// <returns></returns>
-        List<bool> PLC_read_M_bit(string Name, string id);//读取--位
+        List<bool> PLC_read_M_bit(string Name, string id);//讀取--位
         /// <summary>
-        /// /写入--位
+        /// /寫入--位
         /// </summary>
         /// <param name="Name"></param>
         /// <param name="id"></param>
         /// <param name="button_State"></param>
         /// <returns></returns>
-        List<bool> PLC_write_M_bit(string Name, string id, Button_state button_State);//写入--位
+        List<bool> PLC_write_M_bit(string Name, string id, Button_state button_State);//寫入--位
         /// <summary>
-        /// /读取--字
+        /// /讀取--字
         /// </summary>
         /// <param name="Name"></param>
         /// <param name="id"></param>
         /// <param name="format"></param>
         /// <returns></returns>
-        string PLC_read_D_register(string Name, string id, numerical_format format);//读取--字
+        string PLC_read_D_register(string Name, string id, numerical_format format);//讀取--字
         /// <summary>
-        /// 读写--字
+        /// 讀寫--字
         /// </summary>
         /// <param name="Name"></param>
         /// <param name="id"></param>
         /// <param name="content"></param>
         /// <param name="format"></param>
         /// <returns></returns>
-        string PLC_write_D_register(string Name, string id, string content, numerical_format format);//读写--字
+        string PLC_write_D_register(string Name, string id, string content, numerical_format format);//讀寫--字
     }
 }

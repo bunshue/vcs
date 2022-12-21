@@ -16,14 +16,14 @@ using vcs_PLC_Communication1.PLC_Communication;
 namespace vcs_PLC_Communication1
 {
     /// <summary>
-    ///  PLC--按钮状态
+    ///  PLC--按鈕狀態
     /// </summary>
     public enum Button_state
     {
         Off, ON
     }
     /// <summary>
-    /// 数值显示类型
+    /// 數值顯示類型
     /// </summary>
     public enum numerical_format
     {
@@ -317,8 +317,8 @@ namespace vcs_PLC_Communication1
             string contact_point = "D";
             string data_read = "";
 
-            IPLC_interface mitsubishi = new Mitsubishi_realize();//实例化接口--实现三菱在线访问
-            if (mitsubishi.PLC_ready)//PLC是否准备完成
+            IPLC_interface mitsubishi = new Mitsubishi_realize();//實例化接口--實現三菱在線訪問
+            if (mitsubishi.PLC_ready)//PLC是否準備完成
             {
                 //richTextBox1.Text += "三菱PLC ready 1\n";
 
@@ -359,8 +359,8 @@ namespace vcs_PLC_Communication1
                 //return;
             }
 
-            IPLC_interface mitsubishi = new Mitsubishi_realize();//实例化接口--实现三菱在线访问
-            if (mitsubishi.PLC_ready)//PLC是否准备完成
+            IPLC_interface mitsubishi = new Mitsubishi_realize();//實例化接口--實現三菱在線訪問
+            if (mitsubishi.PLC_ready)//PLC是否準備完成
             {
                 //richTextBox1.Text += "三菱PLC ready 2\n";
 
@@ -389,8 +389,8 @@ namespace vcs_PLC_Communication1
                 //return;
             }
 
-            IPLC_interface mitsubishi = new Mitsubishi_realize();//实例化接口--实现三菱在线访问
-            if (mitsubishi.PLC_ready)//PLC是否准备完成
+            IPLC_interface mitsubishi = new Mitsubishi_realize();//實例化接口--實現三菱在線訪問
+            if (mitsubishi.PLC_ready)//PLC是否準備完成
             {
                 //richTextBox1.Text += "三菱PLC ready 2\n";
 
@@ -421,8 +421,8 @@ namespace vcs_PLC_Communication1
 
             //richTextBox1.Text += "清除資料\t觸點 : " + contact_point + "\t位址 : " + contact_address + "\t長度 : " + length.ToString() + "\n";
 
-            IPLC_interface mitsubishi = new Mitsubishi_realize();//实例化接口--实现三菱在线访问
-            if (mitsubishi.PLC_ready)//PLC是否准备完成
+            IPLC_interface mitsubishi = new Mitsubishi_realize();//實例化接口--實現三菱在線訪問
+            if (mitsubishi.PLC_ready)//PLC是否準備完成
             {
                 //richTextBox1.Text += "三菱PLC ready 2\n";
 
@@ -443,8 +443,8 @@ namespace vcs_PLC_Communication1
             string contact_point = "D";
             string data_read = "";
 
-            IPLC_interface mitsubishi = new Mitsubishi_realize();//实例化接口--实现三菱在线访问
-            if (mitsubishi.PLC_ready)//PLC是否准备完成
+            IPLC_interface mitsubishi = new Mitsubishi_realize();//實例化接口--實現三菱在線訪問
+            if (mitsubishi.PLC_ready)//PLC是否準備完成
             {
                 //richTextBox1.Text += "三菱PLC ready 1\n";
 
@@ -572,14 +572,14 @@ namespace vcs_PLC_Communication1
         {
             bool plc_power_status = false;
             //讀取 PLC狀態
-            IPLC_interface mitsubishi = new Mitsubishi_realize();//实例化接口--实现三菱在线访问
-            if (mitsubishi.PLC_ready == true)   //PLC是否准备完成
+            IPLC_interface mitsubishi = new Mitsubishi_realize();//實例化接口--實現三菱在線訪問
+            if (mitsubishi.PLC_ready == true)   //PLC是否準備完成
             {
                 plc_power_status = true;
                 /* 目前無法判斷 PLC_read_M_bit 是讀不到資料 還是資料為True/False
                 richTextBox1.Text += "check_plc_power_status\n";
                 //richTextBox1.Text += "三菱PLC ready 3\n";
-                List<bool> data = mitsubishi.PLC_read_M_bit("M", "10000");//读取状态
+                List<bool> data = mitsubishi.PLC_read_M_bit("M", "10000");//讀取狀態
                 richTextBox1.Text += "aaaa len = " + data.Count.ToString() + ", data = " + data[0].ToString() + "\n";
 
                 if (data[0] == true)
@@ -1302,8 +1302,8 @@ namespace vcs_PLC_Communication1
             show_main_message1("讀取: " + contact_point + contact_address, S_OK, 30);
 
             bool ret = false;
-            IPLC_interface mitsubishi = new Mitsubishi_realize();//实例化接口--实现三菱在线访问
-            if (mitsubishi.PLC_ready)//PLC是否准备完成
+            IPLC_interface mitsubishi = new Mitsubishi_realize();//實例化接口--實現三菱在線訪問
+            if (mitsubishi.PLC_ready)//PLC是否準備完成
             {
                 //richTextBox1.Text += "三菱PLC ready 5\n";
 
@@ -1334,8 +1334,8 @@ namespace vcs_PLC_Communication1
 
         void set_plc_m_status(string contact_address, Button_state write_data)
         {
-            IPLC_interface mitsubishi = new Mitsubishi_realize();//实例化接口--实现三菱在线访问
-            if (mitsubishi.PLC_ready)//PLC是否准备完成
+            IPLC_interface mitsubishi = new Mitsubishi_realize();//實例化接口--實現三菱在線訪問
+            if (mitsubishi.PLC_ready)//PLC是否準備完成
             {
                 //richTextBox1.Text += "三菱PLC ready 6\n";
 
@@ -1621,7 +1621,7 @@ namespace vcs_PLC_Communication1
             richTextBox1.Text += "\n\n(7) PC 做完色調, 將結果碼寫在 D8010\t";
 
             Random r = new Random();
-            int color_result = r.Next(0, 10);
+            int color_result = r.Next(1, 20);
             richTextBox1.Text += "色調結果: 0x" + color_result.ToString("X2") + " = " + color_result.ToString() + "\n";
             contact_address = "8010";
             string write_data = color_result.ToString();
@@ -1916,3 +1916,4 @@ namespace vcs_PLC_Communication1
         }
     }
 }
+
