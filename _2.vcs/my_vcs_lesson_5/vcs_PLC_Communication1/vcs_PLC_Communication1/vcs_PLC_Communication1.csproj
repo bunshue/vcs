@@ -82,9 +82,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="PLC\IPLC_interface.cs" />
-    <Compile Include="PLC\Mitsubishi_message.cs" />
     <Compile Include="PLC\Mitsubishi_realize.cs" />
-    <Compile Include="PLC\PLC_public_Class.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form2.resx">

@@ -4,7 +4,6 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using HslCommunication;
@@ -15,7 +14,7 @@ namespace vcs_PLC_Communication1.PLC_Communication
     /// <summary>
     /// 采用3E帧通讯协议--open-读取-写入--继承接口IPLC_interface
     /// </summary>
-    class Mitsubishi_realize : PLC_public_Class, IPLC_interface
+    class Mitsubishi_realize : IPLC_interface
     {
         /// <summary>
         /// IP地址
@@ -89,22 +88,18 @@ namespace vcs_PLC_Communication1.PLC_Communication
                 try
                 {
                     mutex.WaitOne(100);
+
                     // 读取bool变量 重写方法
-                    if (Name != "Y")
-                        readResultRender(melsec_net.ReadBoolFromPLC(Name.Trim() + id.Trim()), Name.Trim() + id.Trim(), ref result);//读取自定地址变量状态
-                    else
-                    {
-                        OperateResult<byte[]> read = melsec_net.ReadFromServerCore(this.Read_bit(mitsubishi.message_bit.Y, Convert.ToInt32(id), 1));
-                        readResultRender(read, Name.Trim() + id.Trim(), ref result);
-                        if (read.IsSuccess)
-                            result = this.Analysis(read.Content, Convert.ToInt32(id)) ? "TRUE" : "FALSE";
-                    }
+                    //不是Y的寫法
+                    readResultRender(melsec_net.ReadBoolFromPLC(Name.Trim() + id.Trim()), Name.Trim() + id.Trim(), ref result);//读取自定地址变量状态
+
                     mutex.ReleaseMutex();//解锁
                 }
                 catch { }
             }
             return new List<bool>() { Convert.ToBoolean(result ?? "FALSE") };//返回数据
         }
+
         /// <summary>
         ///  三菱 Mitsubishi  写入PLC
         /// </summary>
@@ -120,35 +115,29 @@ namespace vcs_PLC_Communication1.PLC_Communication
                 try
                 {
                     mutex.WaitOne(100);
-                    // 写bool变量
-                    if (Name != "Y")
+
+                    //不是Y的寫法
+                    bool write_data = false;
+                    if (button_State == Button_state.ON)
                     {
-                        bool write_data = false;
-                        if (button_State == Button_state.ON)
-                        {
-                            write_data = true;
-                        }
-                        else
-                        {
-                            write_data = false;
-                        }
-                        OperateResult operateResult = melsec_net.WriteIntoPLC(Name.Trim() + id.Trim(), write_data);
-                        writeResultRender(operateResult, Name.Trim() + id.Trim());//写入自定地址变量状态
+                        write_data = true;
                     }
                     else
                     {
-                        Console.WriteLine("XXXXXXXXXXXXXXXXXXXX\n");
-                        //Q系列不需要转换-如果需要对接Q系列 需要把这个判断注释掉
-                        OperateResult<byte[]> read = melsec_net.ReadFromServerCore(this.Write_bit(mitsubishi.message_bit.Y, Convert.ToInt32(id), button_State == Button_state.ON ? true : false));
-                        readResultRender(read, Name.Trim() + id.Trim(), ref result);
-                        result = read.IsSuccess ? "TRUE" : "FALSE";
+                        write_data = false;
                     }
+                    //bool write_data = (button_State == Button_state.ON) ? true : false;
+
+                    OperateResult operateResult = melsec_net.WriteIntoPLC(Name.Trim() + id.Trim(), write_data);
+                    writeResultRender(operateResult, Name.Trim() + id.Trim());//写入自定地址变量状态
+
                     mutex.ReleaseMutex();//解锁
                 }
                 catch { }
             }
             return new List<bool>() { Convert.ToBoolean(result ?? "FALSE") };//返回数据
         }
+
         /// <summary>
         ///  三菱 Mitsubishi 读寄存器
         /// </summary>

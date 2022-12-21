@@ -5,7 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 using System.IO;
@@ -13,7 +12,6 @@ using System.Diagnostics;       //for Process, Stopwatch
 using System.Drawing.Imaging;
 
 using vcs_PLC_Communication1.PLC_Communication;
-using HslCommunication.Profinet;
 
 namespace vcs_PLC_Communication1
 {

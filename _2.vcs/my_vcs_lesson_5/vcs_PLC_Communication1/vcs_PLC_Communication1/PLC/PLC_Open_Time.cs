@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+
 using System.Net;
 using System.Net.Sockets;
 using System.ComponentModel;
@@ -86,18 +86,15 @@ namespace vcs_PLC_Communication1.SetupControls
         }
         protected override void OnTick(EventArgs e)//重写定时器到达事件
         {
-            lock(this)
+            lock (this)
             {
-                Task.Run(() =>
+                //配置PLC参数
+                if (Mitsubishi_Open & !Mitsubishi.PLC_ready)
                 {
-                    //配置PLC参数
-                    if (Mitsubishi_Open & !Mitsubishi.PLC_ready)
-                    {
-                        Mitsubishi.IPEndPoint.Address = Mitsubishi_ip;
-                        Mitsubishi.IPEndPoint.Port = MitsubishiPort;
-                        Mitsubishi.PLC_open();
-                    }
-                });
+                    Mitsubishi.IPEndPoint.Address = Mitsubishi_ip;
+                    Mitsubishi.IPEndPoint.Port = MitsubishiPort;
+                    Mitsubishi.PLC_open();
+                }
             }
         }
         protected override void Dispose(bool disposing)//重写释放托管资源方法
