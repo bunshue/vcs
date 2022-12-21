@@ -124,20 +124,12 @@ int main(int argc, char** argv)
     /* Get input data. */
     interact();
 
-    glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    const char* windowName = "Curve Fitting with Evaluators";
+    const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
 
-    glutInitWindowSize(600, 600);       // 設定視窗大小
-    glutInitWindowPosition(1100, 200);  // 設定視窗位置
-
-    glutCreateWindow("Curve Fitting with Evaluators");
-
-    glutDisplayFunc(display);       //設定callback function
-    glutReshapeFunc(reshape);       //設定callback function
-    glutKeyboardFunc(keyboard0);    //設定callback function
+    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard0);
 
     gfxinit();
-    printf("僅顯示, 無控制, 按 Esc 離開\n");
 
     glutMainLoop();	//開始主循環繪製
 

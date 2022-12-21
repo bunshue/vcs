@@ -141,8 +141,7 @@ int main(int argc, char** argv)
 {
 	const char* windowName = "Color Cube";
 	const char* message = "·Æ¹«±±¨î, «öS±Ò°±, «ö Esc Â÷¶}\n";
-
-	common_setup(argc, argv, windowName, message, display, reshape, keyboard);
+	common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard);
 
 	//¥ý«O¯d
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);

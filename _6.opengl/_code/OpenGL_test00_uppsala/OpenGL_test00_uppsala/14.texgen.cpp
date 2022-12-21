@@ -269,8 +269,7 @@ int main(int argc, char** argv)
 {
     const char* windowName = "Texture Generation";
     const char* message = "«ö 1 2 ¤Á´«, «ö Esc Â÷¶}\n";
-
-    common_setup(argc, argv, windowName, message, display, reshape, keyboard);
+    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard);
 
     //¥ý«O¯d
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);

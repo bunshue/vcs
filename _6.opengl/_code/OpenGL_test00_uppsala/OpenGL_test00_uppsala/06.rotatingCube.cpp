@@ -105,8 +105,7 @@ int main(int argc, char** argv)
 {
 	const char* windowName = "Rotating Color Cube";
 	const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
-
-	common_setup(argc, argv, windowName, message, display, reshape0, keyboard);
+	common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard);
 
 	glutIdleFunc(idle);
 	glutMouseFunc(mouse);

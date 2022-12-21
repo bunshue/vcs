@@ -91,22 +91,17 @@ void make_data()
 
 int main(int argc, char** argv)
 {
-    glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    const char* windowName = "布朗運動";
+    const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
+    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard0);
 
-    glutInitWindowSize(600, 600);       // 設定視窗大小
-    glutInitWindowPosition(1100, 200);  // 設定視窗位置
-
-    glutCreateWindow("布朗運動");
-
+/*
     glutDisplayFunc(display);   //設定callback function
     glutReshapeFunc(reshape0);   //設定callback function
     glutKeyboardFunc(keyboard0); //設定callback function
-
+*/
     make_data();
     gfxinit();
-
-    printf("僅顯示, 無控制, 按 Esc 離開\n");
 
     glutMainLoop();	//開始主循環繪製
 

@@ -89,8 +89,7 @@ int main(int argc, char** argv)
 {
     const char* windowName = "Color Cube";
     const char* message = "按 1 ~ 6 由各個方向去看方塊, 按 Esc 離開\n";
-
-    common_setup(argc, argv, windowName, message, display, reshape, keyboard);
+    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard);
 
     //先保留
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);

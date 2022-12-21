@@ -7,7 +7,6 @@
 #include "../../Common.h"
 
  /* Drawing constants. */
-#define WINDOW_SIZE 540  /* initial size of window                    */
 #define STEPS        10  /* number of steps to draw each segment over */
 #define PATCHES      32  /* number of surfaces in the teapot          */
 #define VERTICES    306  /* number of control points                  */
@@ -166,23 +165,13 @@ int main(int argc, char** argv)
     /* Get input data. */
     interact();
 
-    glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);
+    const char* windowName = "猶太茶壺";
+    const char* message = "猶太茶壺, 按 上 下 左 右 方向鍵控制, 按 Esc 離開\n";
+    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard0);
 
-    glutInitWindowSize(WINDOW_SIZE, WINDOW_SIZE);   // 設定視窗大小
-    //glutInitWindowSize(600, 600);       // 設定視窗大小
-    glutInitWindowPosition(1100, 200);  // 設定視窗位置
-
-    glutCreateWindow("Utah Teapot");
-
-    glutDisplayFunc(display);   //設定callback function
-    glutReshapeFunc(reshape);   //設定callback function
-    glutKeyboardFunc(keyboard0); //設定callback function
     glutSpecialFunc(special);   //設定callback function
 
     gfxinit();
-
-    printf("按 上 下 左 右 方向鍵控制\n");
 
     glutMainLoop();	//開始主循環繪製
 

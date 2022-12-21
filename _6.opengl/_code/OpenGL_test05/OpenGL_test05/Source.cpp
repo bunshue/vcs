@@ -124,7 +124,7 @@ int main(int argc, char** argv)
 {
     const char* windowName = "我的Common使用範例";
     const char* message = "我的Common使用範例\n";
-    common_setup(argc, argv, windowName, message, display, reshape, keyboard);
+    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard);
 
     glutMouseFunc(mouse);       //設定callback function
     glutMotionFunc(motion);     //設定callback function

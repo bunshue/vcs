@@ -201,7 +201,7 @@ int main(int argc, char** argv)
 {
     const char* windowName = "OpenGL測試";
     const char* message = "OpenGL測試\n";
-    common_setup(argc, argv, windowName, message, display, reshape0, keyboard);
+    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard);
 
     glutMouseFunc(mouse0);      //設定callback function
     glutMotionFunc(motion0);    //設定callback function

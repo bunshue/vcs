@@ -58,7 +58,7 @@ int main(int argc, char** argv)
 {
 	const char* windowName = "手動移動座標系範例";
 	const char* message = "手動移動座標系範例\n";
-	common_setup(argc, argv, windowName, message, display, reshape0, keyboard_r);
+	common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard_r);
 
 	glutMouseFunc(mouse_r);		//設定callback function
 	glutMotionFunc(motion_r);		//設定callback function

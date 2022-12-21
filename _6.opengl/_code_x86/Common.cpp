@@ -609,13 +609,20 @@ void setup_rotation()
     glutSetWindowTitle(info);
 }
 
-void common_setup(int argc, char** argv, const char* windowName, const char* message, void (*disp)(void), void (*resh)(int, int), void (*key)(unsigned char, int, int))
+void common_setup(int argc, char** argv, const char* windowName, const char* message, const int display_mode, const int window_width, const int window_height, const int x_st, const int y_st, void (*disp)(void), void (*resh)(int, int), void (*key)(unsigned char, int, int))
 {
     //初始化GLUT庫，這個函數只是傳說命令參數并且初始化glut庫
     glutInit(&argc, argv);
 
     //glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
+    if (display_mode == 0)
+    {
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);    //宣告顯示模式為 Single Buffer 和 RGBA
+    }
+    else
+    {
+        glutInitDisplayMode(GLUT_SINGLE | GLUT_INDEX);    //宣告顯示模式為 Single Buffer 和 RGBA
+    }
 
     /*
     設定圖形顯示模式。引數mode的可選值為：
@@ -633,8 +640,8 @@ void common_setup(int argc, char** argv, const char* windowName, const char* mes
     GLUT_LUMINACE:  luminance是亮度的意思。但是很遺憾，在多數OpenGL平臺上，不被支援。
     */
 
-    glutInitWindowSize(600, 600);       // 設定視窗大小
-    glutInitWindowPosition(1100, 200);  // 設定視窗位置
+    glutInitWindowSize(window_width, window_height);       // 設定視窗大小
+    glutInitWindowPosition(x_st, y_st);  // 設定視窗位置
 
     glutCreateWindow(windowName);	//開啟視窗 並顯示出視窗 Title
 

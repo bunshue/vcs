@@ -109,8 +109,7 @@ int main(int argc, char** argv)
 {
     const char* windowName = "點選兩點連線";
     const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
-
-    common_setup(argc, argv, windowName, message, display, reshape, keyboard);
+    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard);
 
     glutMouseFunc(mouse);       //設定callback function
     glutMotionFunc(motion);     //設定callback function

@@ -266,8 +266,7 @@ int main(int argc, char** argv)
 {
     const char* windowName = "Surfaces of Revolution";
     const char* message = "«ö ·Æ¹«¥kÁä¿ï³æ ¤Á´«, «ö Esc Â÷¶}\n";
-
-    common_setup(argc, argv, windowName, message, display, reshape0, keyboard0);
+    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard0);
 
     //·Æ¹«¥kÁä¿ï³æ
     glutCreateMenu(figureMenu);
