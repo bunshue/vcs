@@ -35,7 +35,14 @@ namespace vcs_PLC_Communication1.PLC_Communication
         /// <summary>
         ///  三菱 Mitsubishi PLC狀態
         /// </summary>
-        bool IPLC_interface.PLC_ready { get => PLC_ready; } //PLC狀態
+        bool IPLC_interface.PLC_ready   //PLC狀態
+        {
+            get
+            {
+                return PLC_ready;
+            }
+        }
+
         public Mitsubishi_realize()//構造函數---多態
         {
 

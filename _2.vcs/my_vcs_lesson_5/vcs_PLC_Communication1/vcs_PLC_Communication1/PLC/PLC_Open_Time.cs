@@ -5,8 +5,6 @@ using System.Text;
 using System.Windows.Forms;
 
 using System.Net;
-//using System.Net.Sockets;
-//using System.Threading;
 using System.ComponentModel;
 
 using vcs_PLC_Communication1.PLC_Communication;
@@ -37,8 +35,8 @@ namespace vcs_PLC_Communication1.SetupControls
         }
 
         private IPAddress Mitsubishi_ip = IPAddress.Parse("192.168.3.39");
-        public int MitsubishiPort { get; set; } = 4999;
-        public bool Mitsubishi_Open { get; set; } = false;
+        public int MitsubishiPort = 4999;
+        public bool Mitsubishi_Open = false;
 
         #region PLC通訊對象
         /// <summary>
@@ -69,7 +67,6 @@ namespace vcs_PLC_Communication1.SetupControls
             //配置該控件默認參數
             this.Enabled = false;
             this.Interval = 500;
-            //mutex = new Mutex();
             //配置PLC參數
             Mitsubishi.IPEndPoint = new IPEndPoint(Mitsubishi_ip, MitsubishiPort);
         }
