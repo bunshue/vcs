@@ -344,7 +344,7 @@ namespace vcs_PLC_Communication1
                 lb_plc_mesg.Text = "三菱PLC 不 Ready";
                 lb_plc_mesg.Visible = true;
                 groupBox_plc_status.Enabled = false;
-                pictureBox1.Enabled = false;
+                pictureBox_plc_status.Enabled = false;
                 return;
             }
             else
@@ -352,7 +352,7 @@ namespace vcs_PLC_Communication1
                 lb_plc_mesg.Text = "";
                 lb_plc_mesg.Visible = false;
                 groupBox_plc_status.Enabled = true;
-                pictureBox1.Enabled = true;
+                pictureBox_plc_status.Enabled = true;
                 pbx_plc_status.BackgroundImage = Properties.Resources.ball_green2;
             }
 
@@ -758,8 +758,8 @@ namespace vcs_PLC_Communication1
 
         void draw_status()
         {
-            int W = pictureBox1.Width;
-            int H = pictureBox1.Height;
+            int W = pictureBox_plc_status.Width;
+            int H = pictureBox_plc_status.Height;
 
             Bitmap bitmap1 = new Bitmap(W, H);
             Graphics g = Graphics.FromImage(bitmap1);
@@ -933,7 +933,7 @@ namespace vcs_PLC_Communication1
             g.DrawLines(redPen, points.ToArray());  //畫直線
             g.DrawString("M12002", new Font("標楷體", 15), new SolidBrush(Color.Green), new PointF(x_st - 70, H - y_st - (h / 7) * 1 - 5 - (h / 7) * 0 - dd * 0));
 
-            pictureBox1.Image = bitmap1;
+            pictureBox_plc_status.Image = bitmap1;
 
             g.Dispose();
         }
@@ -1002,6 +1002,7 @@ namespace vcs_PLC_Communication1
             show_main_message1("讀取: M" + contact_address, S_OK, 30);
 
             string data_read = get_plc_d_data(contact_address);
+            tb_data_d.Text = data_read;
         }
 
         private void bt_write_d_Click(object sender, EventArgs e)
@@ -1067,7 +1068,6 @@ namespace vcs_PLC_Communication1
                 tb_data_m.BackColor = Color.Gray;
                 tb_data_m.Text = "Low";
             }
-
         }
 
         private void bt_write_m_Click(object sender, EventArgs e)
@@ -1455,7 +1455,7 @@ namespace vcs_PLC_Communication1
             show_main_message1("存檔中...", S_OK, 10);
             delay(10);
 
-            Bitmap bitmap1 = (Bitmap)pictureBox1.Image;
+            Bitmap bitmap1 = (Bitmap)pictureBox_plc_status.Image;
 
             if (bitmap1 != null)
             {

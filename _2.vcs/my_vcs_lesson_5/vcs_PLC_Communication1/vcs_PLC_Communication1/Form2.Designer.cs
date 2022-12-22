@@ -49,7 +49,7 @@
             this.lb_pc_plc3a = new System.Windows.Forms.Label();
             this.lb_plc_pc4a = new System.Windows.Forms.Label();
             this.lb_plc_pc3a = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBox_plc_status = new System.Windows.Forms.PictureBox();
             this.pbx_m12002 = new System.Windows.Forms.PictureBox();
             this.pbx_m12001 = new System.Windows.Forms.PictureBox();
             this.pbx_m12000 = new System.Windows.Forms.PictureBox();
@@ -107,7 +107,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox_plc)).BeginInit();
             this.groupBox_plc_status.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_plc_status)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_plc_status)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_m12002)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_m12001)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_m12000)).BeginInit();
@@ -203,7 +203,7 @@
             this.groupBox_plc_status.Controls.Add(this.lb_pc_plc3a);
             this.groupBox_plc_status.Controls.Add(this.lb_plc_pc4a);
             this.groupBox_plc_status.Controls.Add(this.lb_plc_pc3a);
-            this.groupBox_plc_status.Controls.Add(this.pictureBox1);
+            this.groupBox_plc_status.Controls.Add(this.pictureBox_plc_status);
             this.groupBox_plc_status.Controls.Add(this.pbx_m12002);
             this.groupBox_plc_status.Controls.Add(this.pbx_m12001);
             this.groupBox_plc_status.Controls.Add(this.pbx_m12000);
@@ -363,14 +363,14 @@
             this.lb_plc_pc3a.TabIndex = 157;
             this.lb_plc_pc3a.Text = "M10000";
             // 
-            // pictureBox1
+            // pictureBox_plc_status
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(10, 192);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(960, 300);
-            this.pictureBox1.TabIndex = 14;
-            this.pictureBox1.TabStop = false;
+            this.pictureBox_plc_status.Location = new System.Drawing.Point(10, 192);
+            this.pictureBox_plc_status.Margin = new System.Windows.Forms.Padding(2);
+            this.pictureBox_plc_status.Name = "pictureBox_plc_status";
+            this.pictureBox_plc_status.Size = new System.Drawing.Size(960, 300);
+            this.pictureBox_plc_status.TabIndex = 14;
+            this.pictureBox_plc_status.TabStop = false;
             // 
             // pbx_m12002
             // 
@@ -931,7 +931,7 @@
             this.groupBox_plc_status.ResumeLayout(false);
             this.groupBox_plc_status.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_plc_status)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_plc_status)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_m12002)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_m12001)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbx_m12000)).EndInit();
@@ -958,7 +958,7 @@
         private System.Windows.Forms.CheckBox cb_random;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox_plc_status;
         private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.Label lb_main_mesg1;
         private System.Windows.Forms.Timer timer_display;
