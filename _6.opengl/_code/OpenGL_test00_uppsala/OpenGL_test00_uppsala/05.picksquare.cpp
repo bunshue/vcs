@@ -151,9 +151,6 @@ void reshape(int w, int h)
     gluOrtho2D(0.0, 3.0, 0.0, 3.0);
 }
 
-/*  Main Loop
- *  Open window with initial window size, title bar,
- *  RGBA display mode, and handle input events.   */
 int main(int argc, char** argv)
 {
     const char* windowName = "ÂI¿ï¤è¶ô";

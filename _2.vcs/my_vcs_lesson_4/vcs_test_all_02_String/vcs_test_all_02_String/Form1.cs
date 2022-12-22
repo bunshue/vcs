@@ -109,24 +109,30 @@ namespace vcs_test_all_02_String
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //字串轉拜列
-            richTextBox1.Text += "字串 轉 拜列\n";
+            richTextBox1.Text += "字串 轉 拜列, GetBytes\n";
 
-            string str = "this is a lion-mouse.";
+            string str1 = "lion-mouse";
+            richTextBox1.Text += "字串1 : " + str1 + "\n";
+            byte[] byte_array1 = Encoding.ASCII.GetBytes(str1);
 
-            richTextBox1.Text += "字串 : " + str + "\n";
-
-            byte[] byte_array = Encoding.ASCII.GetBytes(str);
-
-            int len = byte_array.Length;
-            richTextBox1.Text += "拜列長度 : " + len.ToString() + "\n";
+            richTextBox1.Text += "拜列長度 : " + byte_array1.Length.ToString() + "\n";
             richTextBox1.Text += "拜列內容 :\n";
             int i;
-            for (i = 0; i < len; i++)
+            for (i = 0; i < byte_array1.Length; i++)
             {
-                richTextBox1.Text += "i = " + i.ToString() + "\t" + (char)byte_array[i] + "\t" + byte_array[i].ToString("X2") + "\n";
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + (char)byte_array1[i] + "\t" + byte_array1[i].ToString("X2") + "\n";
 
             }
+
+            richTextBox1.Text += "\n拜列 轉 字串, GetString\n";
+            byte[] byte_array2 = new byte[10];
+            for (i = 0; i < byte_array2.Length; i++)
+            {
+                byte_array2[i] = (byte)(0x41 + i);
+            }
+            richTextBox1.Text += "拜列長度 : " + byte_array2.Length.ToString() + "\n";
+            string str2 = Encoding.ASCII.GetString(byte_array2);
+            richTextBox1.Text += "字串2 : " + str2 + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -788,7 +794,7 @@ namespace vcs_test_all_02_String
             ToString("0.00");
             */
 
-
+            /*
             double dis1 = 150000000000.0 / 340.0 / 60.0 / 60.0 / 24.0;
             //label4.Text = dis.ToString("#,###,###,###.##") + " 天";
 
@@ -798,8 +804,7 @@ namespace vcs_test_all_02_String
 
             //txtValue.Text = pi.ToString("F15");		//小數點以下15位
             //txtError.Text = error.ToString("E");		//科學符號
-
-
+            */
         }
 
         private void button25_Click(object sender, EventArgs e)
@@ -945,14 +950,10 @@ namespace vcs_test_all_02_String
             Console.WriteLine("八進制 44 的十進制表示: " + Convert.ToInt32("44", 8));
             //十六進制轉十進制
             Console.WriteLine("十六進制 CC的十進制表示: " + Convert.ToInt32("CC", 16));
-
-
-
         }
 
         private void button32_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button33_Click(object sender, EventArgs e)
@@ -1145,4 +1146,3 @@ namespace vcs_test_all_02_String
         }
     }
 }
-

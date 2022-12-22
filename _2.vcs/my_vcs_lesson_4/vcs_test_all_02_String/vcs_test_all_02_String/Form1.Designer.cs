@@ -318,7 +318,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(180, 50);
             this.button0.TabIndex = 47;
-            this.button0.Text = "字串轉拜列";
+            this.button0.Text = "字串 拜列 互轉";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
