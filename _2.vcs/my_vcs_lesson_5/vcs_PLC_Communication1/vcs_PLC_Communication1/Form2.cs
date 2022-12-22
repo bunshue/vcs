@@ -41,7 +41,6 @@ namespace vcs_PLC_Communication1
         String_32_Bit       //11
     }
 
-
     public partial class Form2 : Form
     {
         private const int S_OK = 0;     //system return OK
@@ -52,6 +51,30 @@ namespace vcs_PLC_Communication1
 
         Stopwatch stopwatch = new Stopwatch();
 
+        Label lb_plc_pc0 = new Label();
+        Label lb_plc_pc1 = new Label();
+        Label lb_plc_pc2 = new Label();
+        Label lb_plc_pc3a = new Label();
+        Label lb_plc_pc4a = new Label();
+        Label lb_plc_pc3b = new Label();
+        Label lb_plc_pc4b = new Label();
+        Label lb_pc_plc0 = new Label();
+        Label lb_pc_plc1 = new Label();
+        Label lb_pc_plc2 = new Label();
+        Label lb_pc_plc3a = new Label();
+        Label lb_pc_plc4a = new Label();
+        Label lb_pc_plc3b = new Label();
+        Label lb_pc_plc4b = new Label();
+        Label lb_read_write_plc = new Label();
+        PictureBox pbx_m10000 = new PictureBox();
+        PictureBox pbx_m10001 = new PictureBox();
+        PictureBox pbx_m10002 = new PictureBox();
+        PictureBox pbx_m12000 = new PictureBox();
+        PictureBox pbx_m12001 = new PictureBox();
+        PictureBox pbx_m12002 = new PictureBox();
+        PictureBox pbx_plc_status = new PictureBox();
+        PictureBox pictureBox_plc_status = new PictureBox();
+
         public Form2()
         {
             InitializeComponent();
@@ -59,10 +82,119 @@ namespace vcs_PLC_Communication1
 
         private void Form2_Load(object sender, EventArgs e)
         {
+            this.plC_Open_Time1.MitsubishiIP = "192.168.3.39";
+            this.plC_Open_Time1.Interval = 500;
             this.plC_Open_Time1.Enabled = true;
+            this.plC_Open_Time1.Mitsubishi_Open = true;
             this.plC_Open_Time1.Start();
 
+            add_automation_controls();
+
             show_item_location();
+        }
+
+        void add_automation_controls()
+        {
+            // 實例化控件
+            lb_plc_pc0.Text = "";
+            lb_plc_pc0.Font = new Font("新細明體", 16);
+            lb_plc_pc0.ForeColor = Color.Black;
+            lb_plc_pc0.AutoSize = true;
+            this.groupBox_plc_status.Controls.Add(lb_plc_pc0);     // 將控件加入表單
+
+            lb_plc_pc1.Text = "";
+            lb_plc_pc1.Font = new Font("新細明體", 16);
+            lb_plc_pc1.ForeColor = Color.Black;
+            lb_plc_pc1.AutoSize = true;
+            this.groupBox_plc_status.Controls.Add(lb_plc_pc1);     // 將控件加入表單
+
+            lb_plc_pc2.Text = "";
+            lb_plc_pc2.Font = new Font("新細明體", 16);
+            lb_plc_pc2.ForeColor = Color.Black;
+            lb_plc_pc2.AutoSize = true;
+            this.groupBox_plc_status.Controls.Add(lb_plc_pc2);     // 將控件加入表單
+
+            lb_plc_pc3a.Text = "";
+            lb_plc_pc3a.Font = new Font("新細明體", 16);
+            lb_plc_pc3a.ForeColor = Color.Black;
+            lb_plc_pc3a.AutoSize = true;
+            this.groupBox_plc_status.Controls.Add(lb_plc_pc3a);     // 將控件加入表單
+
+            lb_plc_pc4a.Text = "";
+            lb_plc_pc4a.Font = new Font("新細明體", 16);
+            lb_plc_pc4a.ForeColor = Color.Black;
+            lb_plc_pc4a.AutoSize = true;
+            this.groupBox_plc_status.Controls.Add(lb_plc_pc4a);     // 將控件加入表單
+
+            lb_plc_pc3b.Text = "";
+            lb_plc_pc3b.Font = new Font("新細明體", 16);
+            lb_plc_pc3b.ForeColor = Color.Blue;
+            lb_plc_pc3b.AutoSize = true;
+            this.groupBox_plc_status.Controls.Add(lb_plc_pc3b);     // 將控件加入表單
+
+            lb_plc_pc4b.Text = "";
+            lb_plc_pc4b.Font = new Font("新細明體", 16);
+            lb_plc_pc4b.ForeColor = Color.Blue;
+            lb_plc_pc4b.AutoSize = true;
+            this.groupBox_plc_status.Controls.Add(lb_plc_pc4b);     // 將控件加入表單
+
+            // 實例化控件
+            lb_pc_plc0.Text = "";
+            lb_pc_plc0.Font = new Font("新細明體", 16);
+            lb_pc_plc0.ForeColor = Color.Black;
+            lb_pc_plc0.AutoSize = true;
+            this.groupBox_plc_status.Controls.Add(lb_pc_plc0);     // 將控件加入表單
+
+            lb_pc_plc1.Text = "";
+            lb_pc_plc1.Font = new Font("新細明體", 16);
+            lb_pc_plc1.ForeColor = Color.Black;
+            lb_pc_plc1.AutoSize = true;
+            this.groupBox_plc_status.Controls.Add(lb_pc_plc1);     // 將控件加入表單
+
+            lb_pc_plc2.Text = "";
+            lb_pc_plc2.Font = new Font("新細明體", 16);
+            lb_pc_plc2.ForeColor = Color.Black;
+            lb_pc_plc2.AutoSize = true;
+            this.groupBox_plc_status.Controls.Add(lb_pc_plc2);     // 將控件加入表單
+
+            lb_pc_plc3a.Text = "";
+            lb_pc_plc3a.Font = new Font("新細明體", 16);
+            lb_pc_plc3a.ForeColor = Color.Black;
+            lb_pc_plc3a.AutoSize = true;
+            this.groupBox_plc_status.Controls.Add(lb_pc_plc3a);     // 將控件加入表單
+
+            lb_pc_plc4a.Text = "";
+            lb_pc_plc4a.Font = new Font("新細明體", 16);
+            lb_pc_plc4a.ForeColor = Color.Black;
+            lb_pc_plc4a.AutoSize = true;
+            this.groupBox_plc_status.Controls.Add(lb_pc_plc4a);     // 將控件加入表單
+
+            lb_pc_plc3b.Text = "";
+            lb_pc_plc3b.Font = new Font("新細明體", 16);
+            lb_pc_plc3b.ForeColor = Color.Blue;
+            lb_pc_plc3b.AutoSize = true;
+            this.groupBox_plc_status.Controls.Add(lb_pc_plc3b);     // 將控件加入表單
+
+            lb_pc_plc4b.Text = "";
+            lb_pc_plc4b.Font = new Font("新細明體", 16);
+            lb_pc_plc4b.ForeColor = Color.Blue;
+            lb_pc_plc4b.AutoSize = true;
+            this.groupBox_plc_status.Controls.Add(lb_pc_plc4b);     // 將控件加入表單
+
+            lb_read_write_plc.Text = "";
+            lb_read_write_plc.Font = new Font("新細明體", 16);
+            lb_read_write_plc.ForeColor = Color.Black;
+            lb_read_write_plc.AutoSize = true;
+            this.groupBox_plc_status.Controls.Add(lb_read_write_plc);     // 將控件加入表單
+
+            this.groupBox_plc_status.Controls.Add(pbx_m10000);	// 將控件加入表單
+            this.groupBox_plc_status.Controls.Add(pbx_m10001);	// 將控件加入表單
+            this.groupBox_plc_status.Controls.Add(pbx_m10002);	// 將控件加入表單
+            this.groupBox_plc_status.Controls.Add(pbx_m12000);	// 將控件加入表單
+            this.groupBox_plc_status.Controls.Add(pbx_m12001);	// 將控件加入表單
+            this.groupBox_plc_status.Controls.Add(pbx_m12002);	// 將控件加入表單
+            this.groupBox_plc_status.Controls.Add(pbx_plc_status);  // 將控件加入表單
+            this.groupBox_plc_status.Controls.Add(pictureBox_plc_status);  // 將控件加入表單
         }
 
         void show_item_location()
@@ -115,11 +247,12 @@ namespace vcs_PLC_Communication1
             pbx_m12000.BackgroundImage = Properties.Resources.ball_gray;
             pbx_m12001.BackgroundImage = Properties.Resources.ball_gray;
             pbx_m12002.BackgroundImage = Properties.Resources.ball_gray;
-
             pbx_plc_status.Size = new Size(w * 3, h * 3);
             pbx_plc_status.Location = new Point(x_st + dx * 2 - 80, y_st + dy * 3 - 70);
             pbx_plc_status.BackgroundImageLayout = ImageLayout.Zoom;
             pbx_plc_status.BackgroundImage = Properties.Resources.ball_gray;
+            pictureBox_plc_status.Location = new Point(10, 192);
+            pictureBox_plc_status.Size = new Size(960, 300);
 
             x_st = 40;
             lb_plc_pc0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -138,6 +271,10 @@ namespace vcs_PLC_Communication1
             lb_pc_plc4a.Location = new Point(x_st + dx * 1, y_st + dy * 4);
             lb_pc_plc3b.Location = new Point(x_st + dx * 1 + 160, y_st + dy * 3);
             lb_pc_plc4b.Location = new Point(x_st + dx * 1 + 160, y_st + dy * 4);
+
+            bt_open_folder.Location = new Point(904, 294);
+            bt_save.Location = new Point(904, 348);
+            bt_pause.Location = new Point(904, 402);
 
             x_st = 230;
             y_st = 20;
