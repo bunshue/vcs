@@ -30,15 +30,7 @@
         {
             this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox_plc = new System.Windows.Forms.GroupBox();
-            this.pictureBox_plc = new System.Windows.Forms.PictureBox();
-            this.button6 = new System.Windows.Forms.Button();
-            this.button7 = new System.Windows.Forms.Button();
             this.lb_plc_mesg = new System.Windows.Forms.Label();
-            this.groupBox_plc_status = new System.Windows.Forms.GroupBox();
-            this.bt_open_folder = new System.Windows.Forms.Button();
-            this.bt_save = new System.Windows.Forms.Button();
-            this.bt_pause = new System.Windows.Forms.Button();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -72,7 +64,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tb_data_d = new System.Windows.Forms.TextBox();
             this.lb_main_mesg1 = new System.Windows.Forms.Label();
-            this.cb_debug = new System.Windows.Forms.CheckBox();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer_display = new System.Windows.Forms.Timer(this.components);
@@ -80,9 +71,6 @@
             this.bt_copy_to_clipboard = new System.Windows.Forms.Button();
             this.plC_Open_Time1 = new vcs_PLC_Communication1.SetupControls.PLC_Open_Time();
             this.groupBox1.SuspendLayout();
-            this.groupBox_plc.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_plc)).BeginInit();
-            this.groupBox_plc_status.SuspendLayout();
             this.groupBox6.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
@@ -91,60 +79,16 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.groupBox_plc);
             this.groupBox1.Controls.Add(this.lb_plc_mesg);
-            this.groupBox1.Controls.Add(this.groupBox_plc_status);
             this.groupBox1.Controls.Add(this.groupBox6);
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.lb_main_mesg1);
-            this.groupBox1.Controls.Add(this.cb_debug);
-            this.groupBox1.Location = new System.Drawing.Point(10, 10);
+            this.groupBox1.Location = new System.Drawing.Point(21, 22);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1000, 840);
+            this.groupBox1.Size = new System.Drawing.Size(1378, 227);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
-            // 
-            // groupBox_plc
-            // 
-            this.groupBox_plc.Controls.Add(this.pictureBox_plc);
-            this.groupBox_plc.Controls.Add(this.button6);
-            this.groupBox_plc.Controls.Add(this.button7);
-            this.groupBox_plc.Location = new System.Drawing.Point(344, 209);
-            this.groupBox_plc.Name = "groupBox_plc";
-            this.groupBox_plc.Size = new System.Drawing.Size(578, 105);
-            this.groupBox_plc.TabIndex = 152;
-            this.groupBox_plc.TabStop = false;
-            this.groupBox_plc.Text = "PLC交握測試";
-            // 
-            // pictureBox_plc
-            // 
-            this.pictureBox_plc.Location = new System.Drawing.Point(230, 29);
-            this.pictureBox_plc.Name = "pictureBox_plc";
-            this.pictureBox_plc.Size = new System.Drawing.Size(100, 50);
-            this.pictureBox_plc.TabIndex = 149;
-            this.pictureBox_plc.TabStop = false;
-            // 
-            // button6
-            // 
-            this.button6.Location = new System.Drawing.Point(17, 29);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(96, 42);
-            this.button6.TabIndex = 147;
-            this.button6.Text = "PLC交握測試";
-            this.button6.UseVisualStyleBackColor = true;
-            this.button6.Click += new System.EventHandler(this.button6_Click);
-            // 
-            // button7
-            // 
-            this.button7.Location = new System.Drawing.Point(119, 29);
-            this.button7.Name = "button7";
-            this.button7.Size = new System.Drawing.Size(96, 42);
-            this.button7.TabIndex = 148;
-            this.button7.Text = "PLC交握測試 break";
-            this.button7.UseVisualStyleBackColor = true;
-            this.button7.Click += new System.EventHandler(this.button7_Click);
-            this.button7.MouseDown += new System.Windows.Forms.MouseEventHandler(this.button7_MouseDown);
             // 
             // lb_plc_mesg
             // 
@@ -157,47 +101,6 @@
             this.lb_plc_mesg.TabIndex = 153;
             this.lb_plc_mesg.Text = "mesg1";
             // 
-            // groupBox_plc_status
-            // 
-            this.groupBox_plc_status.Controls.Add(this.bt_open_folder);
-            this.groupBox_plc_status.Controls.Add(this.bt_save);
-            this.groupBox_plc_status.Controls.Add(this.bt_pause);
-            this.groupBox_plc_status.Location = new System.Drawing.Point(10, 320);
-            this.groupBox_plc_status.Name = "groupBox_plc_status";
-            this.groupBox_plc_status.Size = new System.Drawing.Size(980, 505);
-            this.groupBox_plc_status.TabIndex = 152;
-            this.groupBox_plc_status.TabStop = false;
-            // 
-            // bt_open_folder
-            // 
-            this.bt_open_folder.Location = new System.Drawing.Point(22, 39);
-            this.bt_open_folder.Margin = new System.Windows.Forms.Padding(2);
-            this.bt_open_folder.Name = "bt_open_folder";
-            this.bt_open_folder.Size = new System.Drawing.Size(50, 50);
-            this.bt_open_folder.TabIndex = 167;
-            this.bt_open_folder.UseVisualStyleBackColor = true;
-            this.bt_open_folder.Click += new System.EventHandler(this.bt_open_folder_Click);
-            // 
-            // bt_save
-            // 
-            this.bt_save.Location = new System.Drawing.Point(22, 100);
-            this.bt_save.Margin = new System.Windows.Forms.Padding(2);
-            this.bt_save.Name = "bt_save";
-            this.bt_save.Size = new System.Drawing.Size(50, 50);
-            this.bt_save.TabIndex = 165;
-            this.bt_save.UseVisualStyleBackColor = true;
-            this.bt_save.Click += new System.EventHandler(this.bt_save_Click);
-            // 
-            // bt_pause
-            // 
-            this.bt_pause.Location = new System.Drawing.Point(20, 168);
-            this.bt_pause.Margin = new System.Windows.Forms.Padding(2);
-            this.bt_pause.Name = "bt_pause";
-            this.bt_pause.Size = new System.Drawing.Size(50, 50);
-            this.bt_pause.TabIndex = 146;
-            this.bt_pause.UseVisualStyleBackColor = true;
-            this.bt_pause.Click += new System.EventHandler(this.bt_pause_Click);
-            // 
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.button3);
@@ -206,7 +109,7 @@
             this.groupBox6.Controls.Add(this.button8);
             this.groupBox6.Controls.Add(this.button4);
             this.groupBox6.Controls.Add(this.button5);
-            this.groupBox6.Location = new System.Drawing.Point(10, 180);
+            this.groupBox6.Location = new System.Drawing.Point(1000, 10);
             this.groupBox6.Name = "groupBox6";
             this.groupBox6.Size = new System.Drawing.Size(328, 120);
             this.groupBox6.TabIndex = 151;
@@ -284,7 +187,7 @@
             this.groupBox3.Controls.Add(this.tb_contact_address_m);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.tb_data_m);
-            this.groupBox3.Location = new System.Drawing.Point(518, 10);
+            this.groupBox3.Location = new System.Drawing.Point(500, 10);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Size = new System.Drawing.Size(470, 160);
             this.groupBox3.TabIndex = 146;
@@ -568,22 +471,11 @@
             this.lb_main_mesg1.TabIndex = 135;
             this.lb_main_mesg1.Text = "mesg1";
             // 
-            // cb_debug
-            // 
-            this.cb_debug.AutoSize = true;
-            this.cb_debug.Location = new System.Drawing.Point(766, 420);
-            this.cb_debug.Margin = new System.Windows.Forms.Padding(2);
-            this.cb_debug.Name = "cb_debug";
-            this.cb_debug.Size = new System.Drawing.Size(55, 16);
-            this.cb_debug.TabIndex = 149;
-            this.cb_debug.Text = "Debug";
-            this.cb_debug.UseVisualStyleBackColor = true;
-            // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(1020, 10);
+            this.richTextBox1.Location = new System.Drawing.Point(896, 282);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(400, 840);
+            this.richTextBox1.Size = new System.Drawing.Size(50, 50);
             this.richTextBox1.TabIndex = 2;
             this.richTextBox1.Text = "";
             // 
@@ -599,9 +491,9 @@
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(1227, 552);
+            this.bt_clear.Location = new System.Drawing.Point(1008, 282);
             this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(64, 64);
+            this.bt_clear.Size = new System.Drawing.Size(50, 50);
             this.bt_clear.TabIndex = 136;
             this.bt_clear.Text = "Clear";
             this.bt_clear.UseVisualStyleBackColor = true;
@@ -609,9 +501,9 @@
             // 
             // bt_copy_to_clipboard
             // 
-            this.bt_copy_to_clipboard.Location = new System.Drawing.Point(1157, 552);
+            this.bt_copy_to_clipboard.Location = new System.Drawing.Point(952, 282);
             this.bt_copy_to_clipboard.Name = "bt_copy_to_clipboard";
-            this.bt_copy_to_clipboard.Size = new System.Drawing.Size(64, 64);
+            this.bt_copy_to_clipboard.Size = new System.Drawing.Size(50, 50);
             this.bt_copy_to_clipboard.TabIndex = 137;
             this.bt_copy_to_clipboard.UseVisualStyleBackColor = true;
             this.bt_copy_to_clipboard.Click += new System.EventHandler(this.bt_copy_to_clipboard_Click);
@@ -625,7 +517,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1429, 862);
+            this.ClientSize = new System.Drawing.Size(1468, 862);
             this.Controls.Add(this.bt_copy_to_clipboard);
             this.Controls.Add(this.bt_clear);
             this.Controls.Add(this.richTextBox1);
@@ -637,9 +529,6 @@
             this.Load += new System.EventHandler(this.Form2_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox_plc.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox_plc)).EndInit();
-            this.groupBox_plc_status.ResumeLayout(false);
             this.groupBox6.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -684,24 +573,15 @@
         private System.Windows.Forms.TextBox tb_contact_address_m;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox tb_data_m;
-        private System.Windows.Forms.Button button6;
-        private System.Windows.Forms.Button button7;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.RadioButton rb_low;
         private System.Windows.Forms.RadioButton rb_high;
         private System.Windows.Forms.Button bt_copy_to_clipboard;
-        private System.Windows.Forms.CheckBox cb_debug;
-        private System.Windows.Forms.Button bt_pause;
         private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.GroupBox groupBox_plc_status;
         private System.Windows.Forms.Label lb_plc_mesg;
-        private System.Windows.Forms.Button bt_save;
-        private System.Windows.Forms.Button bt_open_folder;
         private System.Windows.Forms.Button button8;
-        private System.Windows.Forms.GroupBox groupBox_plc;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.PictureBox pictureBox_plc;
     }
 }
