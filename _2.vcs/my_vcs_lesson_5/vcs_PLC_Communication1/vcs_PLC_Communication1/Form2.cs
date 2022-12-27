@@ -54,8 +54,8 @@ namespace vcs_PLC_Communication1
         Panel panel_plc = new Panel();
 
         GroupBox groupBox_plc = new GroupBox();
-        Button button6 = new Button();
-        Button button7 = new Button();
+        Button bt_plc_test = new Button();
+        Button bt_plc_test_break = new Button();
         PictureBox pictureBox_plc = new PictureBox();
         CheckBox cb_debug = new CheckBox();
 
@@ -87,6 +87,10 @@ namespace vcs_PLC_Communication1
         PictureBox pbx_plc_status = new PictureBox();
         PictureBox pictureBox_plc_status = new PictureBox();
 
+        Button bt_copy_to_clipboard = new Button();
+        Button bt_clear = new Button();
+        RichTextBox richTextBox1 = new RichTextBox();
+
         public Form2()
         {
             InitializeComponent();
@@ -109,7 +113,7 @@ namespace vcs_PLC_Communication1
         {
             // 實例化控件
             panel_plc.BackColor = Color.LightYellow;
-            panel_plc.Size = new Size(1000, 650);
+            panel_plc.Size = new Size(1500, 650);
             panel_plc.Location = new Point(10, 10);
             this.Controls.Add(panel_plc);     // 將控件加入表單
 
@@ -119,30 +123,31 @@ namespace vcs_PLC_Communication1
             this.panel_plc.Controls.Add(groupBox_plc);     // 將控件加入表單
 
             // 實例化按鈕
-            button6.Width = 50;
-            button6.Height = 50;
-            button6.Text = "PLC交握測試";
-            button6.Name = "bt_plc_test";
-            button6.Location = new Point(17, 29);
+            bt_plc_test.Width = 50;
+            bt_plc_test.Height = 50;
+            bt_plc_test.Text = "PLC交握測試";
+            bt_plc_test.Name = "bt_plc_test";
+            bt_plc_test.Location = new Point(17, 29);
             // 加入按鈕事件
-            //button6.Click += new EventHandler(button6_Click);   //same
-            button6.Click += button6_Click;
+            //bt_plc_test.Click += new EventHandler(bt_plc_test_Click);   //same
+            bt_plc_test.Click += bt_plc_test_Click;
             // 將按鈕加入表單
-            //this.AcceptButton = button6;
-            this.groupBox_plc.Controls.Add(button6);     // 將控件加入表單
+            //this.AcceptButton = bt_plc_test;
+            this.groupBox_plc.Controls.Add(bt_plc_test);     // 將控件加入表單
 
             // 實例化按鈕
-            button7.Width = 50;
-            button7.Height = 50;
-            button7.Text = "PLC交握測試 break";
-            button7.Name = "bt_plc_test_break";
-            button7.Location = new Point(119, 29);
+            bt_plc_test_break.Width = 50;
+            bt_plc_test_break.Height = 50;
+            bt_plc_test_break.Text = "PLC交握測試 break";
+            bt_plc_test_break.Name = "bt_plc_test_break";
+            bt_plc_test_break.Location = new Point(119, 29);
             // 加入按鈕事件
-            //button7.Click += new EventHandler(button7_Click);   //same
-            button7.Click += button7_Click;
+            //bt_plc_test_break.Click += new EventHandler(bt_plc_test_break_Click);   //same
+            bt_plc_test_break.Click += bt_plc_test_break_Click;
+            bt_plc_test_break.MouseDown += bt_plc_test_break_MouseDown;
             // 將按鈕加入表單
-            //this.AcceptButton = button7;
-            this.groupBox_plc.Controls.Add(button7);     // 將控件加入表單
+            //this.AcceptButton = bt_plc_test_break;
+            this.groupBox_plc.Controls.Add(bt_plc_test_break);     // 將控件加入表單
 
             pictureBox_plc.Location = new Point(230, 29);
             pictureBox_plc.Name = "pictureBox_plc";
@@ -156,9 +161,43 @@ namespace vcs_PLC_Communication1
             cb_debug.Size = new Size(55, 16);
             this.groupBox_plc.Controls.Add(cb_debug);     // 將控件加入表單
 
+            richTextBox1.Text = "";
+            richTextBox1.Name = "richTextBox1";
+            richTextBox1.Location = new Point(1100, 10);
+            richTextBox1.Size = new Size(380, 600);
+            this.panel_plc.Controls.Add(richTextBox1);
+
+            // 實例化按鈕
+            bt_copy_to_clipboard.Width = 50;
+            bt_copy_to_clipboard.Height = 50;
+            bt_copy_to_clipboard.Text = "";
+            bt_copy_to_clipboard.Name = "bt_copy_to_clipboard";
+            bt_copy_to_clipboard.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_copy_to_clipboard.Size.Width * 2, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_copy_to_clipboard.Size.Height);
+            // 加入按鈕事件
+            //bt_copy_to_clipboard.Click += new EventHandler(bt_copy_to_clipboard_Click);   //same
+            bt_copy_to_clipboard.Click += bt_copy_to_clipboard_Click;
+            // 將按鈕加入表單
+            //this.AcceptButton = bt_copy_to_clipboard;
+            this.panel_plc.Controls.Add(bt_copy_to_clipboard);     // 將控件加入表單
+            bt_copy_to_clipboard.BringToFront();
+
+            // 實例化按鈕
+            bt_clear.Width = 50;
+            bt_clear.Height = 50;
+            bt_clear.Text = "Clear";
+            bt_clear.Name = "bt_clear";
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            // 加入按鈕事件
+            //bt_clear.Click += new EventHandler(bt_clear_Click);   //same
+            bt_clear.Click += bt_clear_Click;
+            // 將按鈕加入表單
+            //this.AcceptButton = bt_clear;
+            this.panel_plc.Controls.Add(bt_clear);     // 將控件加入表單
+            bt_clear.BringToFront();
+
             groupBox_plc_status.Text = "";
             groupBox_plc_status.Size = new Size(980, 505);
-            groupBox_plc_status.Location= new Point(10, 120);
+            groupBox_plc_status.Location = new Point(10, 120);
             this.panel_plc.Controls.Add(groupBox_plc_status);     // 將控件加入表單
 
             lb_plc_pc0.Text = "";
@@ -301,14 +340,10 @@ namespace vcs_PLC_Communication1
         void show_item_location()
         {
             this.Size = new Size(1600, 980);
-            richTextBox1.Location = new Point(this.Size.Width - 400, 10);
-            richTextBox1.Size = new Size(380, 700);
 
             groupBox1.Location = new Point(10, 700);
             lb_main_mesg1.Visible = true;
             lb_main_mesg1.Text = "";
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-            bt_copy_to_clipboard.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width * 2, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
             bt_copy_to_clipboard.BackgroundImage = Properties.Resources.clipboard;
             bt_copy_to_clipboard.BackgroundImageLayout = ImageLayout.Zoom;
             bt_save.BackgroundImage = Properties.Resources.save;
@@ -1616,13 +1651,13 @@ namespace vcs_PLC_Communication1
 
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void bt_plc_test_Click(object sender, EventArgs e)
         {
             flag_plc_test = true;
             flag_plc_test_busy = false;
             flag_plc_test_break = false;
             flag_plc_test_count = 0;
-            button6.BackColor = Color.Red;
+            bt_plc_test.BackColor = Color.Red;
 
             int cnt = 1;
             while (true)
@@ -1642,8 +1677,8 @@ namespace vcs_PLC_Communication1
                 delay(1000);
             }
 
-            button6.BackColor = Color.White;
-            button7.BackColor = Color.White;
+            bt_plc_test.BackColor = Color.White;
+            bt_plc_test_break.BackColor = Color.White;
 
             if (flag_plc_test_break == true)
             {
@@ -1659,17 +1694,17 @@ namespace vcs_PLC_Communication1
             flag_plc_test_break = false;
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private void bt_plc_test_break_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "設定 中斷\n";
-            button7.BackColor = Color.Red;
+            bt_plc_test_break.BackColor = Color.Red;
             flag_plc_test_break = true;
         }
 
-        private void button7_MouseDown(object sender, MouseEventArgs e)
+        private void bt_plc_test_break_MouseDown(object sender, MouseEventArgs e)
         {
             richTextBox1.Text += "設定 中斷\n";
-            button7.BackColor = Color.Red;
+            bt_plc_test_break.BackColor = Color.Red;
             flag_plc_test_break = true;
         }
 

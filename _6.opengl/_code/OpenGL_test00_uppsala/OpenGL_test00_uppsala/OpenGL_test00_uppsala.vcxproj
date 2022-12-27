@@ -20,7 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Common.cpp" />
-    <ClCompile Include="05.picksquare.cpp" />
+    <ClCompile Include="09.lookingAtCube.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

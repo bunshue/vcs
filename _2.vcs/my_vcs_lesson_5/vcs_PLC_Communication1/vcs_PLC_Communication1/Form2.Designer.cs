@@ -64,11 +64,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tb_data_d = new System.Windows.Forms.TextBox();
             this.lb_main_mesg1 = new System.Windows.Forms.Label();
-            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.timer_display = new System.Windows.Forms.Timer(this.components);
-            this.bt_clear = new System.Windows.Forms.Button();
-            this.bt_copy_to_clipboard = new System.Windows.Forms.Button();
             this.plC_Open_Time1 = new vcs_PLC_Communication1.SetupControls.PLC_Open_Time();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -471,14 +468,6 @@
             this.lb_main_mesg1.TabIndex = 135;
             this.lb_main_mesg1.Text = "mesg1";
             // 
-            // richTextBox1
-            // 
-            this.richTextBox1.Location = new System.Drawing.Point(896, 282);
-            this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(50, 50);
-            this.richTextBox1.TabIndex = 2;
-            this.richTextBox1.Text = "";
-            // 
             // timer1
             // 
             this.timer1.Enabled = true;
@@ -488,25 +477,6 @@
             // timer_display
             // 
             this.timer_display.Tick += new System.EventHandler(this.timer_display_Tick);
-            // 
-            // bt_clear
-            // 
-            this.bt_clear.Location = new System.Drawing.Point(1008, 282);
-            this.bt_clear.Name = "bt_clear";
-            this.bt_clear.Size = new System.Drawing.Size(50, 50);
-            this.bt_clear.TabIndex = 136;
-            this.bt_clear.Text = "Clear";
-            this.bt_clear.UseVisualStyleBackColor = true;
-            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
-            // 
-            // bt_copy_to_clipboard
-            // 
-            this.bt_copy_to_clipboard.Location = new System.Drawing.Point(952, 282);
-            this.bt_copy_to_clipboard.Name = "bt_copy_to_clipboard";
-            this.bt_copy_to_clipboard.Size = new System.Drawing.Size(50, 50);
-            this.bt_copy_to_clipboard.TabIndex = 137;
-            this.bt_copy_to_clipboard.UseVisualStyleBackColor = true;
-            this.bt_copy_to_clipboard.Click += new System.EventHandler(this.bt_copy_to_clipboard_Click);
             // 
             // plC_Open_Time1
             // 
@@ -518,9 +488,6 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1468, 862);
-            this.Controls.Add(this.bt_copy_to_clipboard);
-            this.Controls.Add(this.bt_clear);
-            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.groupBox1);
             this.Name = "Form2";
             this.Text = "PC Console";
@@ -544,7 +511,6 @@
 
         private SetupControls.PLC_Open_Time plC_Open_Time1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button bt_generate;
         private System.Windows.Forms.CheckBox cb_random;
         private System.Windows.Forms.Button button4;
@@ -560,7 +526,6 @@
         private System.Windows.Forms.TextBox tb_contact_point_d;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Button bt_clear;
         private System.Windows.Forms.Button bt_erase_d;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.GroupBox groupBox3;
@@ -576,7 +541,6 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.RadioButton rb_low;
         private System.Windows.Forms.RadioButton rb_high;
-        private System.Windows.Forms.Button bt_copy_to_clipboard;
         private System.Windows.Forms.GroupBox groupBox6;
         private System.Windows.Forms.Label lb_plc_mesg;
         private System.Windows.Forms.Button button8;
