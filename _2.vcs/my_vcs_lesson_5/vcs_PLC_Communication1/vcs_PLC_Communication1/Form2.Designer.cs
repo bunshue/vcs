@@ -28,9 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lb_plc_mesg = new System.Windows.Forms.Label();
             this.groupBox6 = new System.Windows.Forms.GroupBox();
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -52,20 +50,17 @@
             this.label9 = new System.Windows.Forms.Label();
             this.tb_data_m = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cb_random = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.bt_erase_d = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.bt_write_d = new System.Windows.Forms.Button();
             this.tb_contact_point_d = new System.Windows.Forms.TextBox();
             this.bt_read_d = new System.Windows.Forms.Button();
-            this.cb_random = new System.Windows.Forms.CheckBox();
             this.tb_contact_address_d = new System.Windows.Forms.TextBox();
             this.bt_generate = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.tb_data_d = new System.Windows.Forms.TextBox();
-            this.lb_main_mesg1 = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.timer_display = new System.Windows.Forms.Timer(this.components);
             this.plC_Open_Time1 = new vcs_PLC_Communication1.SetupControls.PLC_Open_Time();
             this.groupBox1.SuspendLayout();
             this.groupBox6.SuspendLayout();
@@ -76,47 +71,34 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.lb_plc_mesg);
             this.groupBox1.Controls.Add(this.groupBox6);
             this.groupBox1.Controls.Add(this.groupBox3);
             this.groupBox1.Controls.Add(this.groupBox2);
-            this.groupBox1.Controls.Add(this.lb_main_mesg1);
             this.groupBox1.Location = new System.Drawing.Point(21, 22);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1378, 227);
+            this.groupBox1.Size = new System.Drawing.Size(950, 180);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
-            // 
-            // lb_plc_mesg
-            // 
-            this.lb_plc_mesg.AutoSize = true;
-            this.lb_plc_mesg.Font = new System.Drawing.Font("Arial", 27.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_plc_mesg.ForeColor = System.Drawing.Color.Red;
-            this.lb_plc_mesg.Location = new System.Drawing.Point(552, 172);
-            this.lb_plc_mesg.Name = "lb_plc_mesg";
-            this.lb_plc_mesg.Size = new System.Drawing.Size(138, 44);
-            this.lb_plc_mesg.TabIndex = 153;
-            this.lb_plc_mesg.Text = "mesg1";
             // 
             // groupBox6
             // 
             this.groupBox6.Controls.Add(this.button3);
+            this.groupBox6.Controls.Add(this.button4);
             this.groupBox6.Controls.Add(this.button2);
             this.groupBox6.Controls.Add(this.button1);
             this.groupBox6.Controls.Add(this.button8);
-            this.groupBox6.Controls.Add(this.button4);
             this.groupBox6.Controls.Add(this.button5);
-            this.groupBox6.Location = new System.Drawing.Point(1000, 10);
+            this.groupBox6.Location = new System.Drawing.Point(730, 10);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(328, 120);
+            this.groupBox6.Size = new System.Drawing.Size(210, 160);
             this.groupBox6.TabIndex = 151;
             this.groupBox6.TabStop = false;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(213, 69);
+            this.button3.Location = new System.Drawing.Point(10, 65);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(96, 42);
+            this.button3.Size = new System.Drawing.Size(90, 40);
             this.button3.TabIndex = 152;
             this.button3.Text = "寫D8010";
             this.button3.UseVisualStyleBackColor = true;
@@ -124,9 +106,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(212, 21);
+            this.button2.Location = new System.Drawing.Point(110, 20);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(96, 42);
+            this.button2.Size = new System.Drawing.Size(90, 40);
             this.button2.TabIndex = 151;
             this.button2.Text = "Print D2000";
             this.button2.UseVisualStyleBackColor = true;
@@ -134,9 +116,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(110, 20);
+            this.button1.Location = new System.Drawing.Point(10, 20);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(96, 42);
+            this.button1.Size = new System.Drawing.Size(90, 40);
             this.button1.TabIndex = 150;
             this.button1.Text = "Erase";
             this.button1.UseVisualStyleBackColor = true;
@@ -144,9 +126,9 @@
             // 
             // button8
             // 
-            this.button8.Location = new System.Drawing.Point(110, 70);
+            this.button8.Location = new System.Drawing.Point(110, 110);
             this.button8.Name = "button8";
-            this.button8.Size = new System.Drawing.Size(96, 42);
+            this.button8.Size = new System.Drawing.Size(90, 40);
             this.button8.TabIndex = 149;
             this.button8.Text = "Rest M1200X";
             this.button8.UseVisualStyleBackColor = true;
@@ -154,9 +136,9 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(10, 20);
+            this.button4.Location = new System.Drawing.Point(110, 65);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(96, 42);
+            this.button4.Size = new System.Drawing.Size(90, 40);
             this.button4.TabIndex = 12;
             this.button4.Text = "測試m_status";
             this.button4.UseVisualStyleBackColor = true;
@@ -164,9 +146,9 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(10, 70);
+            this.button5.Location = new System.Drawing.Point(10, 110);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(96, 42);
+            this.button5.Size = new System.Drawing.Size(90, 40);
             this.button5.TabIndex = 13;
             this.button5.Text = "Get M1X00X status";
             this.button5.UseVisualStyleBackColor = true;
@@ -184,9 +166,9 @@
             this.groupBox3.Controls.Add(this.tb_contact_address_m);
             this.groupBox3.Controls.Add(this.label9);
             this.groupBox3.Controls.Add(this.tb_data_m);
-            this.groupBox3.Location = new System.Drawing.Point(500, 10);
+            this.groupBox3.Location = new System.Drawing.Point(370, 10);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(470, 160);
+            this.groupBox3.Size = new System.Drawing.Size(350, 160);
             this.groupBox3.TabIndex = 146;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "讀寫 M bit";
@@ -195,7 +177,7 @@
             // 
             this.groupBox4.Controls.Add(this.rb_low);
             this.groupBox4.Controls.Add(this.rb_high);
-            this.groupBox4.Location = new System.Drawing.Point(309, 79);
+            this.groupBox4.Location = new System.Drawing.Point(256, 79);
             this.groupBox4.Name = "groupBox4";
             this.groupBox4.Size = new System.Drawing.Size(81, 74);
             this.groupBox4.TabIndex = 145;
@@ -227,7 +209,7 @@
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label7.Location = new System.Drawing.Point(18, 30);
+            this.label7.Location = new System.Drawing.Point(10, 30);
             this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(52, 21);
@@ -236,7 +218,7 @@
             // 
             // bt_erase_m
             // 
-            this.bt_erase_m.Location = new System.Drawing.Point(271, 109);
+            this.bt_erase_m.Location = new System.Drawing.Point(218, 109);
             this.bt_erase_m.Margin = new System.Windows.Forms.Padding(2);
             this.bt_erase_m.Name = "bt_erase_m";
             this.bt_erase_m.Size = new System.Drawing.Size(33, 33);
@@ -249,7 +231,7 @@
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label8.Location = new System.Drawing.Point(18, 73);
+            this.label8.Location = new System.Drawing.Point(10, 73);
             this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(52, 21);
@@ -258,7 +240,7 @@
             // 
             // bt_write_m
             // 
-            this.bt_write_m.Location = new System.Drawing.Point(340, 26);
+            this.bt_write_m.Location = new System.Drawing.Point(287, 26);
             this.bt_write_m.Margin = new System.Windows.Forms.Padding(2);
             this.bt_write_m.Name = "bt_write_m";
             this.bt_write_m.Size = new System.Drawing.Size(50, 50);
@@ -270,16 +252,16 @@
             // tb_contact_point_m
             // 
             this.tb_contact_point_m.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_contact_point_m.Location = new System.Drawing.Point(74, 26);
+            this.tb_contact_point_m.Location = new System.Drawing.Point(66, 26);
             this.tb_contact_point_m.Margin = new System.Windows.Forms.Padding(2);
             this.tb_contact_point_m.Name = "tb_contact_point_m";
-            this.tb_contact_point_m.Size = new System.Drawing.Size(198, 33);
+            this.tb_contact_point_m.Size = new System.Drawing.Size(150, 33);
             this.tb_contact_point_m.TabIndex = 138;
             this.tb_contact_point_m.Text = "M";
             // 
             // bt_read_m
             // 
-            this.bt_read_m.Location = new System.Drawing.Point(286, 26);
+            this.bt_read_m.Location = new System.Drawing.Point(233, 26);
             this.bt_read_m.Margin = new System.Windows.Forms.Padding(2);
             this.bt_read_m.Name = "bt_read_m";
             this.bt_read_m.Size = new System.Drawing.Size(50, 50);
@@ -291,10 +273,10 @@
             // tb_contact_address_m
             // 
             this.tb_contact_address_m.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_contact_address_m.Location = new System.Drawing.Point(74, 68);
+            this.tb_contact_address_m.Location = new System.Drawing.Point(66, 68);
             this.tb_contact_address_m.Margin = new System.Windows.Forms.Padding(2);
             this.tb_contact_address_m.Name = "tb_contact_address_m";
-            this.tb_contact_address_m.Size = new System.Drawing.Size(198, 33);
+            this.tb_contact_address_m.Size = new System.Drawing.Size(150, 33);
             this.tb_contact_address_m.TabIndex = 139;
             this.tb_contact_address_m.Text = "10000";
             // 
@@ -302,7 +284,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label9.Location = new System.Drawing.Point(18, 112);
+            this.label9.Location = new System.Drawing.Point(10, 112);
             this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(52, 21);
@@ -312,38 +294,49 @@
             // tb_data_m
             // 
             this.tb_data_m.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_data_m.Location = new System.Drawing.Point(74, 109);
+            this.tb_data_m.Location = new System.Drawing.Point(66, 109);
             this.tb_data_m.Margin = new System.Windows.Forms.Padding(2);
             this.tb_data_m.Name = "tb_data_m";
-            this.tb_data_m.Size = new System.Drawing.Size(198, 33);
+            this.tb_data_m.Size = new System.Drawing.Size(150, 33);
             this.tb_data_m.TabIndex = 140;
             this.tb_data_m.Text = "Low";
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.cb_random);
             this.groupBox2.Controls.Add(this.label4);
             this.groupBox2.Controls.Add(this.bt_erase_d);
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.bt_write_d);
             this.groupBox2.Controls.Add(this.tb_contact_point_d);
             this.groupBox2.Controls.Add(this.bt_read_d);
-            this.groupBox2.Controls.Add(this.cb_random);
             this.groupBox2.Controls.Add(this.tb_contact_address_d);
             this.groupBox2.Controls.Add(this.bt_generate);
             this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Controls.Add(this.tb_data_d);
             this.groupBox2.Location = new System.Drawing.Point(10, 10);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(470, 160);
+            this.groupBox2.Size = new System.Drawing.Size(350, 160);
             this.groupBox2.TabIndex = 145;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "讀寫 D register";
+            // 
+            // cb_random
+            // 
+            this.cb_random.AutoSize = true;
+            this.cb_random.Location = new System.Drawing.Point(250, 138);
+            this.cb_random.Margin = new System.Windows.Forms.Padding(2);
+            this.cb_random.Name = "cb_random";
+            this.cb_random.Size = new System.Drawing.Size(48, 16);
+            this.cb_random.TabIndex = 10;
+            this.cb_random.Text = "亂數";
+            this.cb_random.UseVisualStyleBackColor = true;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label4.Location = new System.Drawing.Point(18, 30);
+            this.label4.Location = new System.Drawing.Point(6, 30);
             this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(52, 21);
@@ -352,7 +345,7 @@
             // 
             // bt_erase_d
             // 
-            this.bt_erase_d.Location = new System.Drawing.Point(276, 109);
+            this.bt_erase_d.Location = new System.Drawing.Point(214, 109);
             this.bt_erase_d.Margin = new System.Windows.Forms.Padding(2);
             this.bt_erase_d.Name = "bt_erase_d";
             this.bt_erase_d.Size = new System.Drawing.Size(33, 33);
@@ -365,7 +358,7 @@
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label5.Location = new System.Drawing.Point(18, 73);
+            this.label5.Location = new System.Drawing.Point(6, 73);
             this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(52, 21);
@@ -374,7 +367,7 @@
             // 
             // bt_write_d
             // 
-            this.bt_write_d.Location = new System.Drawing.Point(406, 93);
+            this.bt_write_d.Location = new System.Drawing.Point(294, 93);
             this.bt_write_d.Margin = new System.Windows.Forms.Padding(2);
             this.bt_write_d.Name = "bt_write_d";
             this.bt_write_d.Size = new System.Drawing.Size(50, 50);
@@ -386,16 +379,16 @@
             // tb_contact_point_d
             // 
             this.tb_contact_point_d.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_contact_point_d.Location = new System.Drawing.Point(74, 26);
+            this.tb_contact_point_d.Location = new System.Drawing.Point(62, 26);
             this.tb_contact_point_d.Margin = new System.Windows.Forms.Padding(2);
             this.tb_contact_point_d.Name = "tb_contact_point_d";
-            this.tb_contact_point_d.Size = new System.Drawing.Size(198, 33);
+            this.tb_contact_point_d.Size = new System.Drawing.Size(150, 33);
             this.tb_contact_point_d.TabIndex = 138;
             this.tb_contact_point_d.Text = "D";
             // 
             // bt_read_d
             // 
-            this.bt_read_d.Location = new System.Drawing.Point(406, 26);
+            this.bt_read_d.Location = new System.Drawing.Point(294, 26);
             this.bt_read_d.Margin = new System.Windows.Forms.Padding(2);
             this.bt_read_d.Name = "bt_read_d";
             this.bt_read_d.Size = new System.Drawing.Size(50, 50);
@@ -404,30 +397,19 @@
             this.bt_read_d.UseVisualStyleBackColor = true;
             this.bt_read_d.Click += new System.EventHandler(this.bt_read_d_Click);
             // 
-            // cb_random
-            // 
-            this.cb_random.AutoSize = true;
-            this.cb_random.Location = new System.Drawing.Point(361, 117);
-            this.cb_random.Margin = new System.Windows.Forms.Padding(2);
-            this.cb_random.Name = "cb_random";
-            this.cb_random.Size = new System.Drawing.Size(48, 16);
-            this.cb_random.TabIndex = 10;
-            this.cb_random.Text = "亂數";
-            this.cb_random.UseVisualStyleBackColor = true;
-            // 
             // tb_contact_address_d
             // 
             this.tb_contact_address_d.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_contact_address_d.Location = new System.Drawing.Point(74, 68);
+            this.tb_contact_address_d.Location = new System.Drawing.Point(62, 68);
             this.tb_contact_address_d.Margin = new System.Windows.Forms.Padding(2);
             this.tb_contact_address_d.Name = "tb_contact_address_d";
-            this.tb_contact_address_d.Size = new System.Drawing.Size(198, 33);
+            this.tb_contact_address_d.Size = new System.Drawing.Size(150, 33);
             this.tb_contact_address_d.TabIndex = 139;
             this.tb_contact_address_d.Text = "2000";
             // 
             // bt_generate
             // 
-            this.bt_generate.Location = new System.Drawing.Point(313, 100);
+            this.bt_generate.Location = new System.Drawing.Point(248, 89);
             this.bt_generate.Margin = new System.Windows.Forms.Padding(2);
             this.bt_generate.Name = "bt_generate";
             this.bt_generate.Size = new System.Drawing.Size(43, 43);
@@ -440,7 +422,7 @@
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.label6.Location = new System.Drawing.Point(18, 112);
+            this.label6.Location = new System.Drawing.Point(6, 112);
             this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(52, 21);
@@ -450,33 +432,12 @@
             // tb_data_d
             // 
             this.tb_data_d.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_data_d.Location = new System.Drawing.Point(74, 109);
+            this.tb_data_d.Location = new System.Drawing.Point(62, 109);
             this.tb_data_d.Margin = new System.Windows.Forms.Padding(2);
             this.tb_data_d.Name = "tb_data_d";
-            this.tb_data_d.Size = new System.Drawing.Size(198, 33);
+            this.tb_data_d.Size = new System.Drawing.Size(150, 33);
             this.tb_data_d.TabIndex = 140;
             this.tb_data_d.Text = "0123456789";
-            // 
-            // lb_main_mesg1
-            // 
-            this.lb_main_mesg1.AutoSize = true;
-            this.lb_main_mesg1.Font = new System.Drawing.Font("Arial", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_main_mesg1.ForeColor = System.Drawing.Color.Red;
-            this.lb_main_mesg1.Location = new System.Drawing.Point(401, 180);
-            this.lb_main_mesg1.Name = "lb_main_mesg1";
-            this.lb_main_mesg1.Size = new System.Drawing.Size(78, 24);
-            this.lb_main_mesg1.TabIndex = 135;
-            this.lb_main_mesg1.Text = "mesg1";
-            // 
-            // timer1
-            // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
-            // 
-            // timer_display
-            // 
-            this.timer_display.Tick += new System.EventHandler(this.timer_display_Tick);
             // 
             // plC_Open_Time1
             // 
@@ -495,7 +456,6 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form2_FormClosed);
             this.Load += new System.EventHandler(this.Form2_Load);
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.groupBox6.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
@@ -515,9 +475,6 @@
         private System.Windows.Forms.CheckBox cb_random;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Timer timer1;
-        private System.Windows.Forms.Label lb_main_mesg1;
-        private System.Windows.Forms.Timer timer_display;
         private System.Windows.Forms.Button bt_write_d;
         private System.Windows.Forms.Button bt_read_d;
         private System.Windows.Forms.Label label6;
@@ -542,7 +499,6 @@
         private System.Windows.Forms.RadioButton rb_low;
         private System.Windows.Forms.RadioButton rb_high;
         private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.Label lb_plc_mesg;
         private System.Windows.Forms.Button button8;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button3;

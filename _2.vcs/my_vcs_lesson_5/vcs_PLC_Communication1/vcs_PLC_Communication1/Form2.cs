@@ -90,6 +90,10 @@ namespace vcs_PLC_Communication1
         Button bt_copy_to_clipboard = new Button();
         Button bt_clear = new Button();
         RichTextBox richTextBox1 = new RichTextBox();
+        Label lb_main_mesg1 = new Label();
+        Label lb_main_mesg2 = new Label();
+        Timer timer_plc_status = new Timer();
+        Timer timer_display = new Timer();
 
         public Form2()
         {
@@ -113,21 +117,21 @@ namespace vcs_PLC_Communication1
         {
             // 實例化控件
             panel_plc.BackColor = Color.LightYellow;
-            panel_plc.Size = new Size(1500, 650);
+            panel_plc.Size = new Size(1380, 720);
             panel_plc.Location = new Point(10, 10);
             this.Controls.Add(panel_plc);     // 將控件加入表單
 
             groupBox_plc.Text = "";
-            groupBox_plc.Size = new Size(800, 100);
+            groupBox_plc.Size = new Size(700, 100);
             groupBox_plc.Location = new Point(10, 10);
             this.panel_plc.Controls.Add(groupBox_plc);     // 將控件加入表單
 
             // 實例化按鈕
-            bt_plc_test.Width = 50;
-            bt_plc_test.Height = 50;
+            bt_plc_test.Width = 90;
+            bt_plc_test.Height = 70;
             bt_plc_test.Text = "PLC交握測試";
             bt_plc_test.Name = "bt_plc_test";
-            bt_plc_test.Location = new Point(17, 29);
+            bt_plc_test.Location = new Point(10, 20);
             // 加入按鈕事件
             //bt_plc_test.Click += new EventHandler(bt_plc_test_Click);   //same
             bt_plc_test.Click += bt_plc_test_Click;
@@ -136,25 +140,22 @@ namespace vcs_PLC_Communication1
             this.groupBox_plc.Controls.Add(bt_plc_test);     // 將控件加入表單
 
             // 實例化按鈕
-            bt_plc_test_break.Width = 50;
-            bt_plc_test_break.Height = 50;
+            bt_plc_test_break.Width = 90;
+            bt_plc_test_break.Height = 70;
             bt_plc_test_break.Text = "PLC交握測試 break";
             bt_plc_test_break.Name = "bt_plc_test_break";
-            bt_plc_test_break.Location = new Point(119, 29);
+            bt_plc_test_break.Location = new Point(110, 20);
             // 加入按鈕事件
             //bt_plc_test_break.Click += new EventHandler(bt_plc_test_break_Click);   //same
             bt_plc_test_break.Click += bt_plc_test_break_Click;
             bt_plc_test_break.MouseDown += bt_plc_test_break_MouseDown;
-            // 將按鈕加入表單
-            //this.AcceptButton = bt_plc_test_break;
             this.groupBox_plc.Controls.Add(bt_plc_test_break);     // 將控件加入表單
 
-            pictureBox_plc.Location = new Point(230, 29);
+            pictureBox_plc.Location = new Point(210, 15);
             pictureBox_plc.Name = "pictureBox_plc";
-            pictureBox_plc.Size = new Size(100, 50);
+            pictureBox_plc.Size = new Size(400, 75);
             this.groupBox_plc.Controls.Add(pictureBox_plc);     // 將控件加入表單
 
-            //cb_debug.AutoSize = true;
             cb_debug.Location = new Point(groupBox_plc.Width - 60, groupBox_plc.Height - 30);
             cb_debug.Name = "cb_debug";
             cb_debug.Text = "Debug";
@@ -163,11 +164,33 @@ namespace vcs_PLC_Communication1
 
             richTextBox1.Text = "";
             richTextBox1.Name = "richTextBox1";
-            richTextBox1.Location = new Point(1100, 10);
-            richTextBox1.Size = new Size(380, 600);
+            richTextBox1.Location = new Point(1020, 10);
+            richTextBox1.Size = new Size(350, 700);
             this.panel_plc.Controls.Add(richTextBox1);
 
-            // 實例化按鈕
+            lb_main_mesg1.AutoSize = true;
+            lb_main_mesg1.Name = "lb_main_mesg1";
+            lb_main_mesg1.Text = "";
+            lb_main_mesg1.Font = new Font("Arial", 18.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            lb_main_mesg1.ForeColor = Color.Red;
+            lb_main_mesg1.Size = new System.Drawing.Size(78, 24);
+            lb_main_mesg1.Location = new Point(groupBox_plc.Location.X + groupBox_plc.Width + 20, groupBox_plc.Location.Y);
+            this.panel_plc.Controls.Add(lb_main_mesg1);     // 將控件加入表單
+
+            lb_main_mesg2.AutoSize = true;
+            lb_main_mesg2.Name = "lb_main_mesg2";
+            lb_main_mesg2.Text = "";
+            lb_main_mesg2.Font = new Font("Arial", 18.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            lb_main_mesg2.ForeColor = Color.Red;
+            lb_main_mesg2.Size = new System.Drawing.Size(138, 44);
+            lb_main_mesg2.Location = new Point(groupBox_plc.Location.X + groupBox_plc.Width + 20, groupBox_plc.Location.Y + 50);
+            this.panel_plc.Controls.Add(lb_main_mesg2);     // 將控件加入表單
+
+            timer_plc_status.Enabled = true;
+            timer_plc_status.Interval = 1000;
+            timer_plc_status.Tick += new System.EventHandler(timer_plc_status_Tick);
+            timer_display.Tick += new System.EventHandler(timer_display_Tick);
+
             bt_copy_to_clipboard.Width = 50;
             bt_copy_to_clipboard.Height = 50;
             bt_copy_to_clipboard.Text = "";
@@ -196,7 +219,7 @@ namespace vcs_PLC_Communication1
             bt_clear.BringToFront();
 
             groupBox_plc_status.Text = "";
-            groupBox_plc_status.Size = new Size(980, 505);
+            groupBox_plc_status.Size = new Size(1000, 590);
             groupBox_plc_status.Location = new Point(10, 120);
             this.panel_plc.Controls.Add(groupBox_plc_status);     // 將控件加入表單
 
@@ -298,8 +321,6 @@ namespace vcs_PLC_Communication1
             // 加入按鈕事件
             //bt_open_folder.Click += new EventHandler(bt_open_folder_Click);   //same
             bt_open_folder.Click += bt_open_folder_Click;
-            // 將按鈕加入表單
-            //this.AcceptButton = bt_open_folder;
 
             // 實例化按鈕
             bt_save.Width = 50;
@@ -309,8 +330,6 @@ namespace vcs_PLC_Communication1
             // 加入按鈕事件
             //bt_save.Click += new EventHandler(bt_save_Click);   //same
             bt_save.Click += bt_save_Click;
-            // 將按鈕加入表單
-            //this.AcceptButton = bt_save;
 
             // 實例化按鈕
             bt_pause.Width = 50;
@@ -320,8 +339,29 @@ namespace vcs_PLC_Communication1
             // 加入按鈕事件
             //bt_pause.Click += new EventHandler(bt_pause_Click);   //same
             bt_pause.Click += bt_pause_Click;
-            // 將按鈕加入表單
-            //this.AcceptButton = bt_pause;
+
+            int w = 30;
+            int h = 30;
+            pbx_plc_status.Size = new Size(w * 3, h * 3);
+            pbx_plc_status.Location = new Point(groupBox_plc_status.Location.X + groupBox_plc_status.Width - 120, 30);
+            pbx_plc_status.BackgroundImageLayout = ImageLayout.Zoom;
+            pbx_plc_status.BackgroundImage = Properties.Resources.ball_gray;
+
+            pictureBox_plc_status.Location = new Point(10, 180);
+            pictureBox_plc_status.Size = new Size(980, 400);
+            pictureBox_plc_status.BackColor = Color.Pink;
+
+            bt_copy_to_clipboard.BackgroundImage = Properties.Resources.clipboard;
+            bt_copy_to_clipboard.BackgroundImageLayout = ImageLayout.Zoom;
+            bt_open_folder.BackgroundImage = Properties.Resources.open_folder;
+            bt_open_folder.BackgroundImageLayout = ImageLayout.Zoom;
+            bt_save.BackgroundImage = Properties.Resources.save;
+            bt_save.BackgroundImageLayout = ImageLayout.Zoom;
+            bt_pause.BackgroundImageLayout = ImageLayout.Zoom;
+
+            bt_open_folder.Location = new Point(930, 410);
+            bt_save.Location = new Point(930, 465);
+            bt_pause.Location = new Point(930, 520);
 
             this.groupBox_plc_status.Controls.Add(lb_read_write_plc);   // 將控件加入表單
             this.groupBox_plc_status.Controls.Add(bt_open_folder);      // 將控件加入表單
@@ -339,23 +379,7 @@ namespace vcs_PLC_Communication1
 
         void show_item_location()
         {
-            this.Size = new Size(1600, 980);
-
-            groupBox1.Location = new Point(10, 700);
-            lb_main_mesg1.Visible = true;
-            lb_main_mesg1.Text = "";
-            bt_copy_to_clipboard.BackgroundImage = Properties.Resources.clipboard;
-            bt_copy_to_clipboard.BackgroundImageLayout = ImageLayout.Zoom;
-            bt_save.BackgroundImage = Properties.Resources.save;
-            bt_save.BackgroundImageLayout = ImageLayout.Zoom;
-            bt_open_folder.BackgroundImage = Properties.Resources.open_folder;
-            bt_open_folder.BackgroundImageLayout = ImageLayout.Zoom;
-
-            lb_main_mesg1.Location = new Point(450, 182);
-
             cb_random.Checked = true;
-
-            lb_plc_mesg.Location = new Point(groupBox_plc_status.Location.X + 200, groupBox_plc_status.Location.Y + 155);
 
             int x_st = 10;
             int y_st = 15;
@@ -387,12 +411,6 @@ namespace vcs_PLC_Communication1
             pbx_m12000.BackgroundImage = Properties.Resources.ball_gray;
             pbx_m12001.BackgroundImage = Properties.Resources.ball_gray;
             pbx_m12002.BackgroundImage = Properties.Resources.ball_gray;
-            pbx_plc_status.Size = new Size(w * 3, h * 3);
-            pbx_plc_status.Location = new Point(x_st + dx * 2 - 80, y_st + dy * 3 - 70);
-            pbx_plc_status.BackgroundImageLayout = ImageLayout.Zoom;
-            pbx_plc_status.BackgroundImage = Properties.Resources.ball_gray;
-            pictureBox_plc_status.Location = new Point(10, 192);
-            pictureBox_plc_status.Size = new Size(960, 300);
 
             x_st = 40;
             lb_plc_pc0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -412,16 +430,6 @@ namespace vcs_PLC_Communication1
             lb_pc_plc3b.Location = new Point(x_st + dx * 1 + 160, y_st + dy * 3);
             lb_pc_plc4b.Location = new Point(x_st + dx * 1 + 160, y_st + dy * 4);
 
-            bt_open_folder.Location = new Point(904, 294);
-            bt_save.Location = new Point(904, 348);
-            bt_pause.Location = new Point(904, 402);
-
-            x_st = 230;
-            y_st = 20;
-            pictureBox_plc.Location = new Point(x_st, y_st);
-            pictureBox_plc.Size = new Size(330, groupBox_plc.Height - 30);
-            //pictureBox_plc.BackColor = Color.Pink;
-
             lb_plc_pc0.Text = "M10000 PLC -> PC 動作要求";
             lb_plc_pc1.Text = "M10001 PLC -> PC 確認完成";
             lb_plc_pc2.Text = "M10002 PLC -> PC 收到動作完成";
@@ -436,11 +444,9 @@ namespace vcs_PLC_Communication1
             lb_pc_plc4a.Text = "檢測結果D8010";
             lb_pc_plc3b.Text = "";
             lb_pc_plc4b.Text = "";
-            lb_plc_mesg.Text = "";
             lb_read_write_plc.Text = "";
 
-            bt_pause.BackgroundImageLayout = ImageLayout.Zoom;
-            if (timer1.Enabled == true)
+            if (timer_plc_status.Enabled == true)
             {
                 bt_pause.BackgroundImage = Properties.Resources.pause;
             }
@@ -449,13 +455,15 @@ namespace vcs_PLC_Communication1
                 bt_pause.BackgroundImage = Properties.Resources.play;
             }
 
+            this.Size = new Size(1420, 980);
+            groupBox1.Location = new Point(10, 750);
+
             //設定執行後的表單起始位置
             this.StartPosition = FormStartPosition.Manual;
             this.Location = new Point(10, 10);
 
             // C# 設定視窗載入位置 
             //this.StartPosition = FormStartPosition.CenterScreen; //居中顯示
-
         }
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -593,7 +601,7 @@ namespace vcs_PLC_Communication1
             get_all_plc_m_status();
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void timer_plc_status_Tick(object sender, EventArgs e)
         {
             if (flag_plc_test == true)
             {
@@ -626,16 +634,16 @@ namespace vcs_PLC_Communication1
                 pbx_m12001.BackgroundImage = Properties.Resources.ball_gray;
                 pbx_m12002.BackgroundImage = Properties.Resources.ball_gray;
                 pbx_plc_status.BackgroundImage = Properties.Resources.ball_gray;
-                lb_plc_mesg.Text = "三菱PLC 不 Ready";
-                lb_plc_mesg.Visible = true;
+                lb_main_mesg2.Text = "三菱PLC 不 Ready";
+                lb_main_mesg2.Visible = true;
                 groupBox_plc_status.Enabled = false;
                 pictureBox_plc_status.Enabled = false;
                 return;
             }
             else
             {
-                lb_plc_mesg.Text = "";
-                lb_plc_mesg.Visible = false;
+                lb_main_mesg2.Text = "";
+                lb_main_mesg2.Visible = false;
                 groupBox_plc_status.Enabled = true;
                 pictureBox_plc_status.Enabled = true;
                 pbx_plc_status.BackgroundImage = Properties.Resources.ball_green2;
@@ -1245,15 +1253,7 @@ namespace vcs_PLC_Communication1
                 {
                     lb_main_mesg1.Text = "";
                 }
-                /*
-                if (timer_display_show_main_mesg_count >= (timer_display_show_main_mesg_count_target * 2))
-                {
-                    //lb_main_mesg.Text = "";
-                    lb_main_mesg2.Text = "";
-                }
-                */
             }
-
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -1494,7 +1494,7 @@ namespace vcs_PLC_Communication1
             //richTextBox1.Text += "[M status] M12000 HIGH\n";
 
             contact_address = "12000";
-            timer1_Tick(sender, e);
+            timer_plc_status_Tick(sender, e);
             set_plc_m_status(contact_address, HIGH);
 
             delay(200);
@@ -1542,7 +1542,7 @@ namespace vcs_PLC_Communication1
             delay(500);
 
             contact_address = "12002";
-            timer1_Tick(sender, e);
+            timer_plc_status_Tick(sender, e);
             set_plc_m_status(contact_address, HIGH);
 
             delay(200);
@@ -1710,14 +1710,14 @@ namespace vcs_PLC_Communication1
 
         private void bt_pause_Click(object sender, EventArgs e)
         {
-            if (timer1.Enabled == true)
+            if (timer_plc_status.Enabled == true)
             {
-                timer1.Enabled = false;
+                timer_plc_status.Enabled = false;
                 bt_pause.BackgroundImage = Properties.Resources.play;
             }
             else
             {
-                timer1.Enabled = true;
+                timer_plc_status.Enabled = true;
                 bt_pause.BackgroundImage = Properties.Resources.pause;
             }
         }
