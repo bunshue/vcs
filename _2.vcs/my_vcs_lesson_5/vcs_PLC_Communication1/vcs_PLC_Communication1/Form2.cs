@@ -49,7 +49,23 @@ namespace vcs_PLC_Communication1
         private const Button_state HIGH = Button_state.ON;
         private const Button_state LOW = Button_state.Off;
 
-        Stopwatch stopwatch = new Stopwatch();
+        private const int BORDER = 10;
+        private const int PLC_PANEL_WIDTH = 1380;
+        private const int PLC_PANEL_HEIGHT = 720;
+        private const int PLC_RTB_WIDTH = 350;
+        private const int PLC_RTB_HEIGHT = PLC_PANEL_HEIGHT - BORDER * 2;
+        private const int PLC_GBOX_WIDTH = PLC_PANEL_WIDTH - PLC_RTB_WIDTH - BORDER * 3;
+        private const int PLC_GBOX_HEIGHT = PLC_PANEL_HEIGHT - BORDER * 2;
+        private const int PLC_BTN_WIDTH = 50;
+        private const int PLC_BTN_HEIGHT = 50;
+
+        //Panel PLC initial location
+        private const int PANEL_PLC_DEFAULT_POSITION_X = BORDER;
+        private const int PANEL_PLC_DEFAULT_POSITION_Y = BORDER;
+        int panel_plc_position_x_old = PANEL_PLC_DEFAULT_POSITION_X;
+        int panel_plc_position_y_old = PANEL_PLC_DEFAULT_POSITION_Y;
+
+        Stopwatch stopwatch_plc = new Stopwatch();
 
         Panel panel_plc = new Panel();
 
@@ -58,8 +74,6 @@ namespace vcs_PLC_Communication1
         Button bt_plc_test_break = new Button();
         PictureBox pictureBox_plc = new PictureBox();
         CheckBox cb_debug = new CheckBox();
-
-        GroupBox groupBox_plc_status = new GroupBox();
         Label lb_plc_pc0 = new Label();
         Label lb_plc_pc1 = new Label();
         Label lb_plc_pc2 = new Label();
@@ -89,11 +103,11 @@ namespace vcs_PLC_Communication1
 
         Button bt_copy_to_clipboard = new Button();
         Button bt_clear = new Button();
-        RichTextBox richTextBox1 = new RichTextBox();
-        Label lb_main_mesg1 = new Label();
-        Label lb_main_mesg2 = new Label();
+        RichTextBox richTextBox_plc = new RichTextBox();
+        Label lb_plc_main_mesg1 = new Label();
+        Label lb_plc_main_mesg2 = new Label();
         Timer timer_plc_status = new Timer();
-        Timer timer_display = new Timer();
+        Timer timer_plc_display = new Timer();
 
         public Form2()
         {
@@ -117,13 +131,54 @@ namespace vcs_PLC_Communication1
         {
             // 實例化控件
             panel_plc.BackColor = Color.LightYellow;
-            panel_plc.Size = new Size(1380, 720);
-            panel_plc.Location = new Point(10, 10);
+            panel_plc.Size = new Size(PLC_PANEL_WIDTH, PLC_PANEL_HEIGHT);
+            panel_plc.Location = new Point(BORDER, BORDER);
+            panel_plc.MouseDown += Panel_plc_MouseDown;
+            panel_plc.MouseMove += Panel_plc_MouseMove;
+            panel_plc.MouseUp += Panel_plc_MouseUp;
             this.Controls.Add(panel_plc);     // 將控件加入表單
 
+            richTextBox_plc.Text = "";
+            richTextBox_plc.Name = "richTextBox_plc";
+            richTextBox_plc.Location = new Point(PLC_PANEL_WIDTH - PLC_RTB_WIDTH - BORDER, BORDER);
+            richTextBox_plc.Size = new Size(PLC_RTB_WIDTH, PLC_RTB_HEIGHT);
+            this.panel_plc.Controls.Add(richTextBox_plc);
+
+            timer_plc_status.Enabled = true;
+            timer_plc_status.Interval = 1000;
+            timer_plc_status.Tick += new System.EventHandler(timer_plc_status_Tick);
+            timer_plc_display.Tick += new System.EventHandler(timer_plc_display_Tick);
+
+            bt_copy_to_clipboard.Width = PLC_BTN_WIDTH;
+            bt_copy_to_clipboard.Height = PLC_BTN_HEIGHT;
+            bt_copy_to_clipboard.Text = "";
+            bt_copy_to_clipboard.Name = "bt_copy_to_clipboard";
+            bt_copy_to_clipboard.Location = new Point(richTextBox_plc.Location.X + richTextBox_plc.Size.Width - bt_copy_to_clipboard.Size.Width * 2, richTextBox_plc.Location.Y + richTextBox_plc.Size.Height - bt_copy_to_clipboard.Size.Height);
+            // 加入按鈕事件
+            //bt_copy_to_clipboard.Click += new EventHandler(bt_copy_to_clipboard_Click);   //same
+            bt_copy_to_clipboard.Click += bt_copy_to_clipboard_Click;
+            // 將按鈕加入表單
+            //this.AcceptButton = bt_copy_to_clipboard;
+            this.panel_plc.Controls.Add(bt_copy_to_clipboard);     // 將控件加入表單
+            bt_copy_to_clipboard.BringToFront();
+
+            // 實例化按鈕
+            bt_clear.Width = PLC_BTN_WIDTH;
+            bt_clear.Height = PLC_BTN_HEIGHT;
+            bt_clear.Text = "Clear";
+            bt_clear.Name = "bt_clear";
+            bt_clear.Location = new Point(richTextBox_plc.Location.X + richTextBox_plc.Size.Width - bt_clear.Size.Width, richTextBox_plc.Location.Y + richTextBox_plc.Size.Height - bt_clear.Size.Height);
+            // 加入按鈕事件
+            //bt_clear.Click += new EventHandler(bt_clear_Click);   //same
+            bt_clear.Click += bt_clear_Click;
+            // 將按鈕加入表單
+            //this.AcceptButton = bt_clear;
+            this.panel_plc.Controls.Add(bt_clear);     // 將控件加入表單
+            bt_clear.BringToFront();
+
             groupBox_plc.Text = "";
-            groupBox_plc.Size = new Size(700, 100);
-            groupBox_plc.Location = new Point(10, 10);
+            groupBox_plc.Size = new Size(PLC_GBOX_WIDTH, PLC_GBOX_HEIGHT);
+            groupBox_plc.Location = new Point(BORDER, BORDER);
             this.panel_plc.Controls.Add(groupBox_plc);     // 將控件加入表單
 
             // 實例化按鈕
@@ -156,157 +211,114 @@ namespace vcs_PLC_Communication1
             pictureBox_plc.Size = new Size(400, 75);
             this.groupBox_plc.Controls.Add(pictureBox_plc);     // 將控件加入表單
 
-            cb_debug.Location = new Point(groupBox_plc.Width - 60, groupBox_plc.Height - 30);
+            cb_debug.Location = new Point(650, 80);
             cb_debug.Name = "cb_debug";
             cb_debug.Text = "Debug";
             cb_debug.Size = new Size(55, 16);
             this.groupBox_plc.Controls.Add(cb_debug);     // 將控件加入表單
 
-            richTextBox1.Text = "";
-            richTextBox1.Name = "richTextBox1";
-            richTextBox1.Location = new Point(1020, 10);
-            richTextBox1.Size = new Size(350, 700);
-            this.panel_plc.Controls.Add(richTextBox1);
+            lb_plc_main_mesg1.AutoSize = true;
+            lb_plc_main_mesg1.Name = "lb_plc_main_mesg1";
+            lb_plc_main_mesg1.Text = "";
+            lb_plc_main_mesg1.Font = new Font("Arial", 18.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            lb_plc_main_mesg1.ForeColor = Color.Red;
+            lb_plc_main_mesg1.Size = new System.Drawing.Size(78, 24);
+            lb_plc_main_mesg1.Location = new Point(groupBox_plc.Location.X + groupBox_plc.Width - 250, 10);
+            this.groupBox_plc.Controls.Add(lb_plc_main_mesg1);     // 將控件加入表單
 
-            lb_main_mesg1.AutoSize = true;
-            lb_main_mesg1.Name = "lb_main_mesg1";
-            lb_main_mesg1.Text = "";
-            lb_main_mesg1.Font = new Font("Arial", 18.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            lb_main_mesg1.ForeColor = Color.Red;
-            lb_main_mesg1.Size = new System.Drawing.Size(78, 24);
-            lb_main_mesg1.Location = new Point(groupBox_plc.Location.X + groupBox_plc.Width + 20, groupBox_plc.Location.Y);
-            this.panel_plc.Controls.Add(lb_main_mesg1);     // 將控件加入表單
-
-            lb_main_mesg2.AutoSize = true;
-            lb_main_mesg2.Name = "lb_main_mesg2";
-            lb_main_mesg2.Text = "";
-            lb_main_mesg2.Font = new Font("Arial", 18.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            lb_main_mesg2.ForeColor = Color.Red;
-            lb_main_mesg2.Size = new System.Drawing.Size(138, 44);
-            lb_main_mesg2.Location = new Point(groupBox_plc.Location.X + groupBox_plc.Width + 20, groupBox_plc.Location.Y + 50);
-            this.panel_plc.Controls.Add(lb_main_mesg2);     // 將控件加入表單
-
-            timer_plc_status.Enabled = true;
-            timer_plc_status.Interval = 1000;
-            timer_plc_status.Tick += new System.EventHandler(timer_plc_status_Tick);
-            timer_display.Tick += new System.EventHandler(timer_display_Tick);
-
-            bt_copy_to_clipboard.Width = 50;
-            bt_copy_to_clipboard.Height = 50;
-            bt_copy_to_clipboard.Text = "";
-            bt_copy_to_clipboard.Name = "bt_copy_to_clipboard";
-            bt_copy_to_clipboard.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_copy_to_clipboard.Size.Width * 2, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_copy_to_clipboard.Size.Height);
-            // 加入按鈕事件
-            //bt_copy_to_clipboard.Click += new EventHandler(bt_copy_to_clipboard_Click);   //same
-            bt_copy_to_clipboard.Click += bt_copy_to_clipboard_Click;
-            // 將按鈕加入表單
-            //this.AcceptButton = bt_copy_to_clipboard;
-            this.panel_plc.Controls.Add(bt_copy_to_clipboard);     // 將控件加入表單
-            bt_copy_to_clipboard.BringToFront();
-
-            // 實例化按鈕
-            bt_clear.Width = 50;
-            bt_clear.Height = 50;
-            bt_clear.Text = "Clear";
-            bt_clear.Name = "bt_clear";
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-            // 加入按鈕事件
-            //bt_clear.Click += new EventHandler(bt_clear_Click);   //same
-            bt_clear.Click += bt_clear_Click;
-            // 將按鈕加入表單
-            //this.AcceptButton = bt_clear;
-            this.panel_plc.Controls.Add(bt_clear);     // 將控件加入表單
-            bt_clear.BringToFront();
-
-            groupBox_plc_status.Text = "";
-            groupBox_plc_status.Size = new Size(1000, 590);
-            groupBox_plc_status.Location = new Point(10, 120);
-            this.panel_plc.Controls.Add(groupBox_plc_status);     // 將控件加入表單
+            lb_plc_main_mesg2.AutoSize = true;
+            lb_plc_main_mesg2.Name = "lb_plc_main_mesg2";
+            lb_plc_main_mesg2.Text = "";
+            lb_plc_main_mesg2.Font = new Font("Arial", 18.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            lb_plc_main_mesg2.ForeColor = Color.Red;
+            lb_plc_main_mesg2.Size = new System.Drawing.Size(138, 44);
+            lb_plc_main_mesg2.Location = new Point(groupBox_plc.Location.X + groupBox_plc.Width - 250, 50 + 10);
+            this.groupBox_plc.Controls.Add(lb_plc_main_mesg2);     // 將控件加入表單
 
             lb_plc_pc0.Text = "";
             lb_plc_pc0.Font = new Font("新細明體", 16);
             lb_plc_pc0.ForeColor = Color.Black;
             lb_plc_pc0.AutoSize = true;
-            this.groupBox_plc_status.Controls.Add(lb_plc_pc0);     // 將控件加入表單
+            this.groupBox_plc.Controls.Add(lb_plc_pc0);     // 將控件加入表單
 
             lb_plc_pc1.Text = "";
             lb_plc_pc1.Font = new Font("新細明體", 16);
             lb_plc_pc1.ForeColor = Color.Black;
             lb_plc_pc1.AutoSize = true;
-            this.groupBox_plc_status.Controls.Add(lb_plc_pc1);     // 將控件加入表單
+            this.groupBox_plc.Controls.Add(lb_plc_pc1);     // 將控件加入表單
 
             lb_plc_pc2.Text = "";
             lb_plc_pc2.Font = new Font("新細明體", 16);
             lb_plc_pc2.ForeColor = Color.Black;
             lb_plc_pc2.AutoSize = true;
-            this.groupBox_plc_status.Controls.Add(lb_plc_pc2);     // 將控件加入表單
+            this.groupBox_plc.Controls.Add(lb_plc_pc2);     // 將控件加入表單
 
             lb_plc_pc3a.Text = "";
             lb_plc_pc3a.Font = new Font("新細明體", 16);
             lb_plc_pc3a.ForeColor = Color.Black;
             lb_plc_pc3a.AutoSize = true;
-            this.groupBox_plc_status.Controls.Add(lb_plc_pc3a);     // 將控件加入表單
+            this.groupBox_plc.Controls.Add(lb_plc_pc3a);     // 將控件加入表單
 
             lb_plc_pc4a.Text = "";
             lb_plc_pc4a.Font = new Font("新細明體", 16);
             lb_plc_pc4a.ForeColor = Color.Black;
             lb_plc_pc4a.AutoSize = true;
-            this.groupBox_plc_status.Controls.Add(lb_plc_pc4a);     // 將控件加入表單
+            this.groupBox_plc.Controls.Add(lb_plc_pc4a);     // 將控件加入表單
 
             lb_plc_pc3b.Text = "";
             lb_plc_pc3b.Font = new Font("新細明體", 16);
             lb_plc_pc3b.ForeColor = Color.Blue;
             lb_plc_pc3b.AutoSize = true;
-            this.groupBox_plc_status.Controls.Add(lb_plc_pc3b);     // 將控件加入表單
+            this.groupBox_plc.Controls.Add(lb_plc_pc3b);     // 將控件加入表單
 
             lb_plc_pc4b.Text = "";
             lb_plc_pc4b.Font = new Font("新細明體", 16);
             lb_plc_pc4b.ForeColor = Color.Blue;
             lb_plc_pc4b.AutoSize = true;
-            this.groupBox_plc_status.Controls.Add(lb_plc_pc4b);     // 將控件加入表單
+            this.groupBox_plc.Controls.Add(lb_plc_pc4b);     // 將控件加入表單
 
             // 實例化控件
             lb_pc_plc0.Text = "";
             lb_pc_plc0.Font = new Font("新細明體", 16);
             lb_pc_plc0.ForeColor = Color.Black;
             lb_pc_plc0.AutoSize = true;
-            this.groupBox_plc_status.Controls.Add(lb_pc_plc0);     // 將控件加入表單
+            this.groupBox_plc.Controls.Add(lb_pc_plc0);     // 將控件加入表單
 
             lb_pc_plc1.Text = "";
             lb_pc_plc1.Font = new Font("新細明體", 16);
             lb_pc_plc1.ForeColor = Color.Black;
             lb_pc_plc1.AutoSize = true;
-            this.groupBox_plc_status.Controls.Add(lb_pc_plc1);     // 將控件加入表單
+            this.groupBox_plc.Controls.Add(lb_pc_plc1);     // 將控件加入表單
 
             lb_pc_plc2.Text = "";
             lb_pc_plc2.Font = new Font("新細明體", 16);
             lb_pc_plc2.ForeColor = Color.Black;
             lb_pc_plc2.AutoSize = true;
-            this.groupBox_plc_status.Controls.Add(lb_pc_plc2);     // 將控件加入表單
+            this.groupBox_plc.Controls.Add(lb_pc_plc2);     // 將控件加入表單
 
             lb_pc_plc3a.Text = "";
             lb_pc_plc3a.Font = new Font("新細明體", 16);
             lb_pc_plc3a.ForeColor = Color.Black;
             lb_pc_plc3a.AutoSize = true;
-            this.groupBox_plc_status.Controls.Add(lb_pc_plc3a);     // 將控件加入表單
+            this.groupBox_plc.Controls.Add(lb_pc_plc3a);     // 將控件加入表單
 
             lb_pc_plc4a.Text = "";
             lb_pc_plc4a.Font = new Font("新細明體", 16);
             lb_pc_plc4a.ForeColor = Color.Black;
             lb_pc_plc4a.AutoSize = true;
-            this.groupBox_plc_status.Controls.Add(lb_pc_plc4a);     // 將控件加入表單
+            this.groupBox_plc.Controls.Add(lb_pc_plc4a);     // 將控件加入表單
 
             lb_pc_plc3b.Text = "";
             lb_pc_plc3b.Font = new Font("新細明體", 16);
             lb_pc_plc3b.ForeColor = Color.Blue;
             lb_pc_plc3b.AutoSize = true;
-            this.groupBox_plc_status.Controls.Add(lb_pc_plc3b);     // 將控件加入表單
+            this.groupBox_plc.Controls.Add(lb_pc_plc3b);     // 將控件加入表單
 
             lb_pc_plc4b.Text = "";
             lb_pc_plc4b.Font = new Font("新細明體", 16);
             lb_pc_plc4b.ForeColor = Color.Blue;
             lb_pc_plc4b.AutoSize = true;
-            this.groupBox_plc_status.Controls.Add(lb_pc_plc4b);     // 將控件加入表單
+            this.groupBox_plc.Controls.Add(lb_pc_plc4b);     // 將控件加入表單
 
             lb_read_write_plc.Text = "";
             lb_read_write_plc.Font = new Font("新細明體", 16);
@@ -314,8 +326,8 @@ namespace vcs_PLC_Communication1
             lb_read_write_plc.AutoSize = true;
 
             // 實例化按鈕
-            bt_open_folder.Width = 50;
-            bt_open_folder.Height = 50;
+            bt_open_folder.Width = PLC_BTN_WIDTH;
+            bt_open_folder.Height = PLC_BTN_HEIGHT;
             bt_open_folder.Text = "";
             bt_open_folder.Name = "bt_save";
             // 加入按鈕事件
@@ -323,8 +335,8 @@ namespace vcs_PLC_Communication1
             bt_open_folder.Click += bt_open_folder_Click;
 
             // 實例化按鈕
-            bt_save.Width = 50;
-            bt_save.Height = 50;
+            bt_save.Width = PLC_BTN_WIDTH;
+            bt_save.Height = PLC_BTN_HEIGHT;
             bt_save.Text = "";
             bt_save.Name = "bt_save";
             // 加入按鈕事件
@@ -332,58 +344,17 @@ namespace vcs_PLC_Communication1
             bt_save.Click += bt_save_Click;
 
             // 實例化按鈕
-            bt_pause.Width = 50;
-            bt_pause.Height = 50;
+            bt_pause.Width = PLC_BTN_WIDTH;
+            bt_pause.Height = PLC_BTN_HEIGHT;
             bt_pause.Text = "";
             bt_pause.Name = "bt_save";
             // 加入按鈕事件
             //bt_pause.Click += new EventHandler(bt_pause_Click);   //same
             bt_pause.Click += bt_pause_Click;
 
-            int w = 30;
-            int h = 30;
-            pbx_plc_status.Size = new Size(w * 3, h * 3);
-            pbx_plc_status.Location = new Point(groupBox_plc_status.Location.X + groupBox_plc_status.Width - 120, 30);
-            pbx_plc_status.BackgroundImageLayout = ImageLayout.Zoom;
-            pbx_plc_status.BackgroundImage = Properties.Resources.ball_gray;
-
-            pictureBox_plc_status.Location = new Point(10, 180);
-            pictureBox_plc_status.Size = new Size(980, 400);
-            pictureBox_plc_status.BackColor = Color.Pink;
-
-            bt_copy_to_clipboard.BackgroundImage = Properties.Resources.clipboard;
-            bt_copy_to_clipboard.BackgroundImageLayout = ImageLayout.Zoom;
-            bt_open_folder.BackgroundImage = Properties.Resources.open_folder;
-            bt_open_folder.BackgroundImageLayout = ImageLayout.Zoom;
-            bt_save.BackgroundImage = Properties.Resources.save;
-            bt_save.BackgroundImageLayout = ImageLayout.Zoom;
-            bt_pause.BackgroundImageLayout = ImageLayout.Zoom;
-
-            bt_open_folder.Location = new Point(930, 410);
-            bt_save.Location = new Point(930, 465);
-            bt_pause.Location = new Point(930, 520);
-
-            this.groupBox_plc_status.Controls.Add(lb_read_write_plc);   // 將控件加入表單
-            this.groupBox_plc_status.Controls.Add(bt_open_folder);      // 將控件加入表單
-            this.groupBox_plc_status.Controls.Add(bt_save);     // 將控件加入表單
-            this.groupBox_plc_status.Controls.Add(bt_pause);	// 將控件加入表單
-            this.groupBox_plc_status.Controls.Add(pbx_m10000);	// 將控件加入表單
-            this.groupBox_plc_status.Controls.Add(pbx_m10001);	// 將控件加入表單
-            this.groupBox_plc_status.Controls.Add(pbx_m10002);	// 將控件加入表單
-            this.groupBox_plc_status.Controls.Add(pbx_m12000);	// 將控件加入表單
-            this.groupBox_plc_status.Controls.Add(pbx_m12001);	// 將控件加入表單
-            this.groupBox_plc_status.Controls.Add(pbx_m12002);	// 將控件加入表單
-            this.groupBox_plc_status.Controls.Add(pbx_plc_status);  // 將控件加入表單
-            this.groupBox_plc_status.Controls.Add(pictureBox_plc_status);  // 將控件加入表單
-        }
-
-        void show_item_location()
-        {
-            cb_random.Checked = true;
-
             int x_st = 10;
-            int y_st = 15;
-            int dx = 470;
+            int y_st = 110;
+            int dx = PLC_GBOX_WIDTH * 45 / 100;
             int dy = 30;
             int w = 30;
             int h = 30;
@@ -446,6 +417,20 @@ namespace vcs_PLC_Communication1
             lb_pc_plc4b.Text = "";
             lb_read_write_plc.Text = "";
 
+            pbx_plc_status.Size = new Size(w * 3, h * 3);
+            pbx_plc_status.Location = new Point(groupBox_plc.Location.X + groupBox_plc.Width - w * 4, h * 5);
+            pbx_plc_status.BackgroundImageLayout = ImageLayout.Zoom;
+            pbx_plc_status.BackgroundImage = Properties.Resources.ball_gray;
+            pictureBox_plc_status.Location = new Point(BORDER, y_st + dy * 5);
+            pictureBox_plc_status.Size = new Size(PLC_PANEL_WIDTH - PLC_RTB_WIDTH - BORDER * 5, PLC_GBOX_HEIGHT - pictureBox_plc_status.Location.Y - BORDER);
+
+            bt_copy_to_clipboard.BackgroundImage = Properties.Resources.clipboard;
+            bt_copy_to_clipboard.BackgroundImageLayout = ImageLayout.Zoom;
+            bt_open_folder.BackgroundImage = Properties.Resources.open_folder;
+            bt_open_folder.BackgroundImageLayout = ImageLayout.Zoom;
+            bt_save.BackgroundImage = Properties.Resources.save;
+            bt_save.BackgroundImageLayout = ImageLayout.Zoom;
+            bt_pause.BackgroundImageLayout = ImageLayout.Zoom;
             if (timer_plc_status.Enabled == true)
             {
                 bt_pause.BackgroundImage = Properties.Resources.pause;
@@ -455,8 +440,62 @@ namespace vcs_PLC_Communication1
                 bt_pause.BackgroundImage = Properties.Resources.play;
             }
 
-            this.Size = new Size(1420, 980);
-            groupBox1.Location = new Point(10, 750);
+            bt_open_folder.Location = new Point(pictureBox_plc_status.Location.X + pictureBox_plc_status.Width - bt_open_folder.Width, pictureBox_plc_status.Location.Y + pictureBox_plc_status.Height - bt_open_folder.Height * 3);
+            bt_save.Location = new Point(pictureBox_plc_status.Location.X + pictureBox_plc_status.Width - bt_save.Width, pictureBox_plc_status.Location.Y + pictureBox_plc_status.Height - bt_save.Height * 2);
+            bt_pause.Location = new Point(pictureBox_plc_status.Location.X + pictureBox_plc_status.Width - bt_pause.Width, pictureBox_plc_status.Location.Y + pictureBox_plc_status.Height - bt_pause.Height * 1);
+
+            this.groupBox_plc.Controls.Add(lb_read_write_plc);   // 將控件加入表單
+            this.groupBox_plc.Controls.Add(bt_open_folder);      // 將控件加入表單
+            this.groupBox_plc.Controls.Add(bt_save);     // 將控件加入表單
+            this.groupBox_plc.Controls.Add(bt_pause);	// 將控件加入表單
+            this.groupBox_plc.Controls.Add(pbx_m10000);	// 將控件加入表單
+            this.groupBox_plc.Controls.Add(pbx_m10001);	// 將控件加入表單
+            this.groupBox_plc.Controls.Add(pbx_m10002);	// 將控件加入表單
+            this.groupBox_plc.Controls.Add(pbx_m12000);	// 將控件加入表單
+            this.groupBox_plc.Controls.Add(pbx_m12001);	// 將控件加入表單
+            this.groupBox_plc.Controls.Add(pbx_m12002);	// 將控件加入表單
+            this.groupBox_plc.Controls.Add(pbx_plc_status);  // 將控件加入表單
+            this.groupBox_plc.Controls.Add(pictureBox_plc_status);  // 將控件加入表單
+        }
+
+
+        bool flag_panel_plc_mouse_down = false;
+        private void Panel_plc_MouseDown(object sender, MouseEventArgs e)
+        {
+            flag_panel_plc_mouse_down = true;
+            //richTextBox_plc.Text += "Down : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
+            panel_plc_position_x_old = e.X;
+            panel_plc_position_y_old = e.Y;
+        }
+        private void Panel_plc_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (flag_panel_plc_mouse_down == true)
+            {
+                //richTextBox_plc.Text += "Up : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
+                int dx = e.X - panel_plc_position_x_old;
+                int dy = e.Y - panel_plc_position_y_old;
+
+                //richTextBox_plc.Text += "dx, dy : (" + dx.ToString() + ", " + dy.ToString() + ")\n";
+                panel_plc.Location = new Point(panel_plc.Location.X + dx, panel_plc.Location.Y + dy);
+            }
+        }
+        private void Panel_plc_MouseUp(object sender, MouseEventArgs e)
+        {
+            flag_panel_plc_mouse_down = false;
+            //richTextBox_plc.Text += "Up : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
+            int dx = e.X - panel_plc_position_x_old;
+            int dy = e.Y - panel_plc_position_y_old;
+
+            //richTextBox_plc.Text += "dx, dy : (" + dx.ToString() + ", " + dy.ToString() + ")\n";
+            panel_plc.Location = new Point(panel_plc.Location.X + dx, panel_plc.Location.Y + dy);
+        }
+
+        void show_item_location()
+        {
+            cb_random.Checked = true;
+
+            this.Size = new Size(PLC_PANEL_WIDTH + BORDER * 4, PLC_PANEL_HEIGHT + groupBox1.Height + BORDER * 6);
+            groupBox1.Location = new Point(BORDER, PLC_PANEL_HEIGHT + BORDER * 1);
 
             //設定執行後的表單起始位置
             this.StartPosition = FormStartPosition.Manual;
@@ -487,7 +526,7 @@ namespace vcs_PLC_Communication1
             {
                 random_data = "A1234567B1234";
             }
-            richTextBox1.Text += "相機序號：" + random_data + "\n";
+            richTextBox_plc.Text += "相機序號：" + random_data + "\n";
             tb_data_d.Text = random_data;
         }
 
@@ -517,83 +556,83 @@ namespace vcs_PLC_Communication1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "測試 get_plc_m_status()\n";
+            richTextBox_plc.Text += "測試 get_plc_m_status()\n";
 
             string contact_address = "10000";
             bool ret = false;
 
             contact_address = "10000";
             ret = get_plc_m_status(contact_address);
-            richTextBox1.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
+            richTextBox_plc.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
 
             contact_address = "10001";
             ret = get_plc_m_status(contact_address);
-            richTextBox1.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
+            richTextBox_plc.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
 
             contact_address = "10002";
             ret = get_plc_m_status(contact_address);
-            richTextBox1.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
+            richTextBox_plc.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
 
             contact_address = "12000";
             ret = get_plc_m_status(contact_address);
-            richTextBox1.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
+            richTextBox_plc.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
 
             contact_address = "12001";
             ret = get_plc_m_status(contact_address);
-            richTextBox1.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
+            richTextBox_plc.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
 
             contact_address = "12002";
             ret = get_plc_m_status(contact_address);
-            richTextBox1.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
+            richTextBox_plc.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
 
             contact_address = "8000";
             ret = get_plc_m_status(contact_address);
-            richTextBox1.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
+            richTextBox_plc.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
 
             contact_address = "8001";
             ret = get_plc_m_status(contact_address);
-            richTextBox1.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
+            richTextBox_plc.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
 
             contact_address = "8002";
             ret = get_plc_m_status(contact_address);
-            richTextBox1.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
+            richTextBox_plc.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
 
             contact_address = "8012";
             ret = get_plc_m_status(contact_address);
-            richTextBox1.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
+            richTextBox_plc.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
 
             contact_address = "8013";
             ret = get_plc_m_status(contact_address);
-            richTextBox1.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
+            richTextBox_plc.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
 
             string data_read;
             contact_address = "8013";
             data_read = get_plc_d_data(contact_address);
-            richTextBox1.Text += "讀取 D" + contact_address + "\t結果 : " + data_read + "\n";
+            richTextBox_plc.Text += "讀取 D" + contact_address + "\t結果 : " + data_read + "\n";
 
             contact_address = "8014";
             data_read = get_plc_d_data(contact_address);
-            richTextBox1.Text += "讀取 D" + contact_address + "\t結果 : " + data_read + "\n";
+            richTextBox_plc.Text += "讀取 D" + contact_address + "\t結果 : " + data_read + "\n";
 
             contact_address = "8015";
             data_read = get_plc_d_data(contact_address);
-            richTextBox1.Text += "讀取 D" + contact_address + "\t結果 : " + data_read + "\n";
+            richTextBox_plc.Text += "讀取 D" + contact_address + "\t結果 : " + data_read + "\n";
 
             contact_address = "8016";
             data_read = get_plc_d_data(contact_address);
-            richTextBox1.Text += "讀取 D" + contact_address + "\t結果 : " + data_read + "\n";
+            richTextBox_plc.Text += "讀取 D" + contact_address + "\t結果 : " + data_read + "\n";
 
             contact_address = "8017";
             data_read = get_plc_d_data(contact_address);
-            richTextBox1.Text += "讀取 D" + contact_address + "\t結果 : " + data_read + "\n";
+            richTextBox_plc.Text += "讀取 D" + contact_address + "\t結果 : " + data_read + "\n";
 
             contact_address = "8018";
             data_read = get_plc_d_data(contact_address);
-            richTextBox1.Text += "讀取 D" + contact_address + "\t結果 : " + data_read + "\n";
+            richTextBox_plc.Text += "讀取 D" + contact_address + "\t結果 : " + data_read + "\n";
 
             contact_address = "8019";
             data_read = get_plc_d_data(contact_address);
-            richTextBox1.Text += "讀取 D" + contact_address + "\t結果 : " + data_read + "\n";
+            richTextBox_plc.Text += "讀取 D" + contact_address + "\t結果 : " + data_read + "\n";
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -634,18 +673,18 @@ namespace vcs_PLC_Communication1
                 pbx_m12001.BackgroundImage = Properties.Resources.ball_gray;
                 pbx_m12002.BackgroundImage = Properties.Resources.ball_gray;
                 pbx_plc_status.BackgroundImage = Properties.Resources.ball_gray;
-                lb_main_mesg2.Text = "三菱PLC 不 Ready";
-                lb_main_mesg2.Visible = true;
-                groupBox_plc_status.Enabled = false;
-                pictureBox_plc_status.Enabled = false;
+                lb_plc_main_mesg2.Text = "三菱PLC 不 Ready";
+                lb_plc_main_mesg2.Visible = true;
+                //groupBox_plc.Enabled = false;
+                //pictureBox_plc_status.Enabled = false;
                 return;
             }
             else
             {
-                lb_main_mesg2.Text = "";
-                lb_main_mesg2.Visible = false;
-                groupBox_plc_status.Enabled = true;
-                pictureBox_plc_status.Enabled = true;
+                lb_plc_main_mesg2.Text = "";
+                lb_plc_main_mesg2.Visible = false;
+                //groupBox_plc.Enabled = true;
+                //pictureBox_plc_status.Enabled = true;
                 pbx_plc_status.BackgroundImage = Properties.Resources.ball_green2;
             }
 
@@ -679,10 +718,10 @@ namespace vcs_PLC_Communication1
             {
                 plc_power_status = true;
                 /* 目前無法判斷 PLC_read_M_bit 是讀不到資料 還是資料為True/False
-                richTextBox1.Text += "check_plc_power_status\n";
-                //richTextBox1.Text += "三菱PLC ready 3\n";
+                richTextBox_plc.Text += "check_plc_power_status\n";
+                //richTextBox_plc.Text += "三菱PLC ready 3\n";
                 List<bool> data = mitsubishi.PLC_read_M_bit("M", "10000");//讀取狀態
-                richTextBox1.Text += "aaaa len = " + data.Count.ToString() + ", data = " + data[0].ToString() + "\n";
+                richTextBox_plc.Text += "aaaa len = " + data.Count.ToString() + ", data = " + data[0].ToString() + "\n";
 
                 if (data[0] == true)
                 {
@@ -770,7 +809,7 @@ namespace vcs_PLC_Communication1
             int hh = h * 5 / 10;
             int step = w / (N - 1);
 
-            //richTextBox1.Text += "step  = " + step.ToString() + " ";
+            //richTextBox_plc.Text += "step  = " + step.ToString() + " ";
 
             // Create pens.
             Pen redPen = new Pen(Color.Red, 3);
@@ -1023,29 +1062,29 @@ namespace vcs_PLC_Communication1
             contact_address = "2000";
             show_main_message1("讀取: D" + contact_address, S_OK, 30);
             string data_read = get_plc_d_data(contact_address);
-            //richTextBox1.Text += "\nD2000 len = " + data_read.Length.ToString() + "\n";
-            //richTextBox1.Text += "data : |" + data_read + "|\n";
+            //richTextBox_plc.Text += "\nD2000 len = " + data_read.Length.ToString() + "\n";
+            //richTextBox_plc.Text += "data : |" + data_read + "|\n";
             lb_plc_pc3b.Text = data_read;
 
             contact_address = "2010";
             show_main_message1("讀取: D" + contact_address, S_OK, 30);
             data_read = get_plc_d_data(contact_address);
-            //richTextBox1.Text += "\nD8000 len = " + data_read.Length.ToString() + "\n";
-            //richTextBox1.Text += "data : |" + data_read + "|\n";
+            //richTextBox_plc.Text += "\nD8000 len = " + data_read.Length.ToString() + "\n";
+            //richTextBox_plc.Text += "data : |" + data_read + "|\n";
             lb_plc_pc4b.Text = data_read;
 
             contact_address = "8000";
             show_main_message1("讀取: D" + contact_address, S_OK, 30);
             data_read = get_plc_d_data(contact_address);
-            //richTextBox1.Text += "\nD8000 len = " + data_read.Length.ToString() + "\n";
-            //richTextBox1.Text += "data : |" + data_read + "|\n";
+            //richTextBox_plc.Text += "\nD8000 len = " + data_read.Length.ToString() + "\n";
+            //richTextBox_plc.Text += "data : |" + data_read + "|\n";
             lb_pc_plc3b.Text = data_read;
 
             contact_address = "8010";
             show_main_message1("讀取: D" + contact_address, S_OK, 30);
             data_read = get_plc_d_data(contact_address);
-            //richTextBox1.Text += "\nD8000 len = " + data_read.Length.ToString() + "\n";
-            //richTextBox1.Text += "data : |" + data_read + "|\n";
+            //richTextBox_plc.Text += "\nD8000 len = " + data_read.Length.ToString() + "\n";
+            //richTextBox_plc.Text += "data : |" + data_read + "|\n";
             lb_pc_plc4b.Text = data_read;
         }
 
@@ -1074,7 +1113,7 @@ namespace vcs_PLC_Communication1
             int h = y_sp - y_st;
             int step = w / (N - 1);
 
-            //richTextBox1.Text += "step  = " + step.ToString() + " ";
+            //richTextBox_plc.Text += "step  = " + step.ToString() + " ";
 
             // Create pens.
             Pen redPen = new Pen(Color.Red, 3);
@@ -1231,42 +1270,42 @@ namespace vcs_PLC_Communication1
             g.Dispose();
         }
 
-        int timer_display_show_main_mesg_count = 0;
-        int timer_display_show_main_mesg_count_target = 0;
+        int timer_plc_display_show_main_mesg_count = 0;
+        int timer_plc_display_show_main_mesg_count_target = 0;
 
         void show_main_message1(string mesg, int number, int timeout)
         {
-            lb_main_mesg1.Text = mesg;
+            lb_plc_main_mesg1.Text = mesg;
             //playSound(number);
 
-            timer_display_show_main_mesg_count = 0;
-            timer_display_show_main_mesg_count_target = timeout;   //timeout in 0.1 sec
-            timer_display.Enabled = true;
+            timer_plc_display_show_main_mesg_count = 0;
+            timer_plc_display_show_main_mesg_count_target = timeout;   //timeout in 0.1 sec
+            timer_plc_display.Enabled = true;
         }
 
-        private void timer_display_Tick(object sender, EventArgs e)
+        private void timer_plc_display_Tick(object sender, EventArgs e)
         {
-            if (timer_display_show_main_mesg_count < timer_display_show_main_mesg_count_target)      //display main message timeout
+            if (timer_plc_display_show_main_mesg_count < timer_plc_display_show_main_mesg_count_target)      //display main message timeout
             {
-                timer_display_show_main_mesg_count++;
-                if (timer_display_show_main_mesg_count >= timer_display_show_main_mesg_count_target)
+                timer_plc_display_show_main_mesg_count++;
+                if (timer_plc_display_show_main_mesg_count >= timer_plc_display_show_main_mesg_count_target)
                 {
-                    lb_main_mesg1.Text = "";
+                    lb_plc_main_mesg1.Text = "";
                 }
             }
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
-            richTextBox1.Clear();
+            richTextBox_plc.Clear();
         }
 
         private void bt_copy_to_clipboard_Click(object sender, EventArgs e)
         {
             //C# – 複製資料到剪貼簿
-            //Clipboard.SetData(DataFormats.Text, richTextBox1.Text + "\n");
-            Clipboard.SetDataObject(richTextBox1.Text + "\n");      //建議用此
-            richTextBox1.Text += "已複製資料到系統剪貼簿\n";
+            //Clipboard.SetData(DataFormats.Text, richTextBox_plc.Text + "\n");
+            Clipboard.SetDataObject(richTextBox_plc.Text + "\n");      //建議用此
+            richTextBox_plc.Text += "已複製資料到系統剪貼簿\n";
         }
 
         private void bt_erase_d_Click(object sender, EventArgs e)
@@ -1341,7 +1380,7 @@ namespace vcs_PLC_Communication1
             show_main_message1("讀取: M" + contact_address, S_OK, 30);
 
             bool ret = get_plc_m_status(contact_address);
-            //richTextBox1.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
+            //richTextBox_plc.Text += "讀取 M" + contact_address + "\t結果 : " + ret.ToString() + "\n";
 
             if (ret == true)
             {
@@ -1395,74 +1434,74 @@ namespace vcs_PLC_Communication1
             bool ret = false;
 
             flag_plc_test_busy = false;
-            richTextBox1.Text += "測試PLC作業流程 ST\t" + DateTime.Now.ToString() + "\n";
+            richTextBox_plc.Text += "測試PLC作業流程 ST\t" + DateTime.Now.ToString() + "\n";
 
-            richTextBox1.Text += "(0) PC 啟動完成, 檢查PLC是否已開機\n";
+            richTextBox_plc.Text += "(0) PC 啟動完成, 檢查PLC是否已開機\n";
 
             while (ret == false)
             {
                 if (flag_plc_test_break == true)
                 {
-                    richTextBox1.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
+                    richTextBox_plc.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
                     return;
                 }
                 ret = check_plc_power_status();
 
                 if (ret == true)
                 {
-                    richTextBox1.Text += "(0) 三菱PLC 已 Ready, 繼續\n";
+                    richTextBox_plc.Text += "(0) 三菱PLC 已 Ready, 繼續\n";
                 }
                 else
                 {
-                    richTextBox1.Text += "(0) 三菱PLC 不 Ready, 等待\n";
+                    richTextBox_plc.Text += "(0) 三菱PLC 不 Ready, 等待\n";
                     delay(500);
                 }
             }
 
-            richTextBox1.Text += "(0) PC 啟動完成, 檢查所有 M1XXXX 信號 是否皆為 LOW\n";
+            richTextBox_plc.Text += "(0) PC 啟動完成, 檢查所有 M1XXXX 信號 是否皆為 LOW\n";
 
             while (ret == false)
             {
                 if (flag_plc_test_break == true)
                 {
-                    richTextBox1.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
+                    richTextBox_plc.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
                     return;
                 }
                 ret = check_all_plc_m_status_low();
                 if (ret == true)
                 {
-                    richTextBox1.Text += "(0) 所有 M1XXXX 信號 皆為 LOW, 繼續\n";
+                    richTextBox_plc.Text += "(0) 所有 M1XXXX 信號 皆為 LOW, 繼續\n";
                 }
                 else
                 {
-                    richTextBox1.Text += "(0) 有 M1XXXX 信號 不為 LOW, 等待\n";
+                    richTextBox_plc.Text += "(0) 有 M1XXXX 信號 不為 LOW, 等待\n";
                     delay(500);
                 }
             }
 
-            richTextBox1.Text += "(0) PC 啟動完成, 偵測PLC之M10000信號\n";
-            richTextBox1.Text += "(1) PLC 把資料放在 D2000\n";
-            richTextBox1.Text += "(2a) PLC 拉高 M10000, 供PC讀取, 通知條碼內容已備便\n";
-            //richTextBox1.Text += "[M status] M10000 HIGH\n";
+            richTextBox_plc.Text += "(0) PC 啟動完成, 偵測PLC之M10000信號\n";
+            richTextBox_plc.Text += "(1) PLC 把資料放在 D2000\n";
+            richTextBox_plc.Text += "(2a) PLC 拉高 M10000, 供PC讀取, 通知條碼內容已備便\n";
+            //richTextBox_plc.Text += "[M status] M10000 HIGH\n";
 
-            richTextBox1.Text += "(3a) PC 讀取 M10000 狀態\t=>\t";
+            richTextBox_plc.Text += "(3a) PC 讀取 M10000 狀態\t=>\t";
             contact_address = "10000";
             polling_m_status(contact_address, HIGH);
             if (flag_plc_test_break == true)
             {
-                richTextBox1.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
+                richTextBox_plc.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
                 return;
             }
-            richTextBox1.Text += "\n(3b) PC 取得 M10000 為 ON\n";
+            richTextBox_plc.Text += "\n(3b) PC 取得 M10000 為 ON\n";
             flag_plc_test_busy = true;
             flag_plc_test_count++;
 
             //開始計時
-            richTextBox1.Text += "時間1 : " + DateTime.Now.ToString() + "\n";
-            stopwatch = new Stopwatch();
-            stopwatch.Start();
+            richTextBox_plc.Text += "時間1 : " + DateTime.Now.ToString() + "\n";
+            stopwatch_plc = new Stopwatch();
+            stopwatch_plc.Start();
 
-            richTextBox1.Text += "(3c) PC 讀取 D2000 資料\n";
+            richTextBox_plc.Text += "(3c) PC 讀取 D2000 資料\n";
 
             show_main_message1("讀取 D2000", S_OK, 30);
             contact_address = "2000";
@@ -1473,16 +1512,16 @@ namespace vcs_PLC_Communication1
                 data_read = get_plc_d_data(contact_address);
             }
 
-            richTextBox1.Text += "取得 D2000 資料 : " + data_read + "\n";
-            //richTextBox1.Text += "\nlen = " + data_read.Length.ToString() + "\n";
+            richTextBox_plc.Text += "取得 D2000 資料 : " + data_read + "\n";
+            //richTextBox_plc.Text += "\nlen = " + data_read.Length.ToString() + "\n";
 
             delay(500);
 
-            richTextBox1.Text += "\n(3d) PC 將 從 D2000 取得的資料 寫到 D8000\n";
+            richTextBox_plc.Text += "\n(3d) PC 將 從 D2000 取得的資料 寫到 D8000\n";
 
             string data_to_write = data_read.Substring(0, 16);
 
-            //richTextBox1.Text += "欲寫入 D8000 資料 : " + data_to_write + ", len = " + data_to_write.Length.ToString() + "\n";
+            //richTextBox_plc.Text += "欲寫入 D8000 資料 : " + data_to_write + ", len = " + data_to_write.Length.ToString() + "\n";
 
             show_main_message1("寫入 D8000", S_OK, 30);
             contact_address = "8000";
@@ -1490,8 +1529,8 @@ namespace vcs_PLC_Communication1
 
             delay(500);
 
-            richTextBox1.Text += "(4) PC 拉高 M12000, 通知PLC, PC動作已完成\n";
-            //richTextBox1.Text += "[M status] M12000 HIGH\n";
+            richTextBox_plc.Text += "(4) PC 拉高 M12000, 通知PLC, PC動作已完成\n";
+            //richTextBox_plc.Text += "[M status] M12000 HIGH\n";
 
             contact_address = "12000";
             timer_plc_status_Tick(sender, e);
@@ -1499,45 +1538,45 @@ namespace vcs_PLC_Communication1
 
             delay(200);
 
-            richTextBox1.Text += "(5a) PLC收到 PC訊號 M12000 ON時,PLC確認資料一致\n";
-            richTextBox1.Text += "(5b) PLC 拉高 M10001, 供PC讀取, 通知開始做色調\n";
-            //richTextBox1.Text += "[M status] M10001 HIGH\n";
+            richTextBox_plc.Text += "(5a) PLC收到 PC訊號 M12000 ON時,PLC確認資料一致\n";
+            richTextBox_plc.Text += "(5b) PLC 拉高 M10001, 供PC讀取, 通知開始做色調\n";
+            //richTextBox_plc.Text += "[M status] M10001 HIGH\n";
 
-            richTextBox1.Text += "(6a) PC 讀取 M10001 狀態\t=>\t";
+            richTextBox_plc.Text += "(6a) PC 讀取 M10001 狀態\t=>\t";
             contact_address = "10001";
             polling_m_status(contact_address, HIGH);
             if (flag_plc_test_break == true)
             {
-                richTextBox1.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
+                richTextBox_plc.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
                 return;
             }
 
-            richTextBox1.Text += "\n(6b) PC 取得 M10001 為 ON\n";
+            richTextBox_plc.Text += "\n(6b) PC 取得 M10001 為 ON\n";
 
-            richTextBox1.Text += "(6c) PC 拉高 M12001, 供PLC讀取, 通知PC已開始做色調\n";
-            //richTextBox1.Text += "[M status] M12001 HIGH\n";
+            richTextBox_plc.Text += "(6c) PC 拉高 M12001, 供PLC讀取, 通知PC已開始做色調\n";
+            //richTextBox_plc.Text += "[M status] M12001 HIGH\n";
 
             contact_address = "12001";
             set_plc_m_status(contact_address, HIGH);
 
-            richTextBox1.Text += "\nPC開始做色調........";
+            richTextBox_plc.Text += "\nPC開始做色調........";
             for (i = 0; i < 30; i++)
             {
                 delay(50);
-                richTextBox1.Text += ". ";
+                richTextBox_plc.Text += ". ";
             }
-            richTextBox1.Text += "\n\n(7) PC 做完色調, 將結果碼寫在 D8010\t";
+            richTextBox_plc.Text += "\n\n(7) PC 做完色調, 將結果碼寫在 D8010\t";
 
             Random r = new Random();
             int color_result = r.Next(1, 20);
-            richTextBox1.Text += "色調結果: 0x" + color_result.ToString("X2") + " = " + color_result.ToString() + "\n";
+            richTextBox_plc.Text += "色調結果: 0x" + color_result.ToString("X2") + " = " + color_result.ToString() + "\n";
             contact_address = "8010";
             string write_data = color_result.ToString();
             show_main_message1("寫入: D" + contact_address + ", 資料: " + write_data, S_OK, 30);
             set_plc_d_data_bcd16(contact_address, write_data);
 
-            richTextBox1.Text += "(8) PC 拉高 M12002, 供PLC讀取, 通知PC已做完色調\n";
-            //richTextBox1.Text += "[M status] M12002 HIGH\n";
+            richTextBox_plc.Text += "(8) PC 拉高 M12002, 供PLC讀取, 通知PC已做完色調\n";
+            //richTextBox_plc.Text += "[M status] M12002 HIGH\n";
 
             delay(500);
 
@@ -1547,80 +1586,80 @@ namespace vcs_PLC_Communication1
 
             delay(200);
 
-            richTextBox1.Text += "(9) PLC偵測到 PC之動作完成信號 M12002, PLC設定 M10002為ON\n";
-            //richTextBox1.Text += "[M status] M10002 HIGH\n";
+            richTextBox_plc.Text += "(9) PLC偵測到 PC之動作完成信號 M12002, PLC設定 M10002為ON\n";
+            //richTextBox_plc.Text += "[M status] M10002 HIGH\n";
 
-            richTextBox1.Text += "(10a) PC 檢測 M10002 和 M12002\n";
+            richTextBox_plc.Text += "(10a) PC 檢測 M10002 和 M12002\n";
 
-            richTextBox1.Text += "(10a1) PC 讀取 M10002 狀態\t=>\t";
+            richTextBox_plc.Text += "(10a1) PC 讀取 M10002 狀態\t=>\t";
             contact_address = "10002";
             polling_m_status(contact_address, HIGH);
             if (flag_plc_test_break == true)
             {
-                richTextBox1.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
+                richTextBox_plc.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
                 return;
             }
 
-            richTextBox1.Text += "\n(10a2) PC 取得 M10002 為 ON\n";
+            richTextBox_plc.Text += "\n(10a2) PC 取得 M10002 為 ON\n";
 
-            richTextBox1.Text += "(10a3) PC 讀取 M12002 狀態\t=>\t";
+            richTextBox_plc.Text += "(10a3) PC 讀取 M12002 狀態\t=>\t";
             contact_address = "12002";
             polling_m_status(contact_address, HIGH);
             if (flag_plc_test_break == true)
             {
-                richTextBox1.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
+                richTextBox_plc.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
                 return;
             }
 
-            richTextBox1.Text += "\n(10a4) PC 取得 M12002 為 ON\n";
+            richTextBox_plc.Text += "\n(10a4) PC 取得 M12002 為 ON\n";
 
             delay(500);
 
-            richTextBox1.Text += "(10b) PC 清除 D8000 ~ D8007 資料\n";
+            richTextBox_plc.Text += "(10b) PC 清除 D8000 ~ D8007 資料\n";
             erase_plc_d_data(contact_address, 8);
 
-            richTextBox1.Text += "(10c) PC 令 (收到動作要求信號)M12000 為 OFF\n";
-            //richTextBox1.Text += "[M status] M12000 LOW\n";
+            richTextBox_plc.Text += "(10c) PC 令 (收到動作要求信號)M12000 為 OFF\n";
+            //richTextBox_plc.Text += "[M status] M12000 LOW\n";
             contact_address = "12000";
             set_plc_m_status(contact_address, LOW);
 
-            richTextBox1.Text += "(10d) PC 令 (動作執行信號)M12001 為 OFF\n";
-            //richTextBox1.Text += "[M status] M12001 LOW\n";
+            richTextBox_plc.Text += "(10d) PC 令 (動作執行信號)M12001 為 OFF\n";
+            //richTextBox_plc.Text += "[M status] M12001 LOW\n";
             contact_address = "12001";
             set_plc_m_status(contact_address, LOW);
 
-            //richTextBox1.Text += "[M status] M10000 LOW\n";
-            //richTextBox1.Text += "[M status] M10001 LOW\n";
+            //richTextBox_plc.Text += "[M status] M10000 LOW\n";
+            //richTextBox_plc.Text += "[M status] M10001 LOW\n";
 
             delay(500);
 
-            richTextBox1.Text += "(10e) PLC 清除 D2000 ~ D2006 資料\n";
-            richTextBox1.Text += "(10f) PC 令 (動作要求訊號)M10000 為 OFF\n";
-            richTextBox1.Text += "(10g) PC 令 (動作開始要求訊號)M10001 為 OFF\n";
+            richTextBox_plc.Text += "(10e) PLC 清除 D2000 ~ D2006 資料\n";
+            richTextBox_plc.Text += "(10f) PC 令 (動作要求訊號)M10000 為 OFF\n";
+            richTextBox_plc.Text += "(10g) PC 令 (動作開始要求訊號)M10001 為 OFF\n";
 
             delay(500);
 
-            richTextBox1.Text += "(11a) PC 檢測 (PLC動作完成信號)M10002\n";
+            richTextBox_plc.Text += "(11a) PC 檢測 (PLC動作完成信號)M10002\n";
             //當PC收到PLC收到動作完成訊號M10002 ON之後,結果碼D8010資料清除
             //PC->PLC動作完成訊號M12002 OFF
 
-            richTextBox1.Text += "(11a) PC 讀取 M10002 狀態\t=>\t";
+            richTextBox_plc.Text += "(11a) PC 讀取 M10002 狀態\t=>\t";
             contact_address = "10002";
             polling_m_status(contact_address, HIGH);
             if (flag_plc_test_break == true)
             {
-                richTextBox1.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
+                richTextBox_plc.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
                 return;
             }
 
-            richTextBox1.Text += "\n(11b) PC 取得 M10002 為 ON\n";
+            richTextBox_plc.Text += "\n(11b) PC 取得 M10002 為 ON\n";
 
-            richTextBox1.Text += "(11c) PC 清除 D8010資料\n";
+            richTextBox_plc.Text += "(11c) PC 清除 D8010資料\n";
             //contact_address = "8010";
             //erase_plc_d_data(contact_address, 1);
 
-            richTextBox1.Text += "(11d) PC 令 M12002 為 OFF\n";
-            //richTextBox1.Text += "[M status] M12002 LOW\n";
+            richTextBox_plc.Text += "(11d) PC 令 M12002 為 OFF\n";
+            //richTextBox_plc.Text += "[M status] M12002 LOW\n";
             contact_address = "12002";
             set_plc_m_status(contact_address, LOW);
 
@@ -1628,25 +1667,25 @@ namespace vcs_PLC_Communication1
 
             get_all_plc_m_status();
 
-            richTextBox1.Text += "(12a) PLC 收到 PC 設定 M12002 為 OFF, PLC 設定 M10002為OFF\n";
-            richTextBox1.Text += "[M status] M10002 LOW\n";
+            richTextBox_plc.Text += "(12a) PLC 收到 PC 設定 M12002 為 OFF, PLC 設定 M10002為OFF\n";
+            richTextBox_plc.Text += "[M status] M10002 LOW\n";
 
-            richTextBox1.Text += "(12b) PC 讀取 M10002 狀態\t=>\t";
+            richTextBox_plc.Text += "(12b) PC 讀取 M10002 狀態\t=>\t";
             contact_address = "10002";
             polling_m_status(contact_address, LOW);
             if (flag_plc_test_break == true)
             {
-                richTextBox1.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
+                richTextBox_plc.Text += "PLC測試中斷 PLC測試中斷 PLC測試中斷\n";
                 return;
             }
 
-            richTextBox1.Text += "\n(12b) PC 取得 M10002 為 LOW\n";
+            richTextBox_plc.Text += "\n(12b) PC 取得 M10002 為 LOW\n";
 
-            richTextBox1.Text += "測試PLC作業流程 SP\t" + DateTime.Now.ToString() + "\tOK\n\n\n";
+            richTextBox_plc.Text += "測試PLC作業流程 SP\t" + DateTime.Now.ToString() + "\tOK\n\n\n";
 
-            stopwatch.Stop();
-            richTextBox1.Text += "PLC交握測試 完成時間: " + stopwatch.ElapsedMilliseconds.ToString() + " msec\n";
-            richTextBox1.Text += "時間2 : " + DateTime.Now.ToString() + "\n";
+            stopwatch_plc.Stop();
+            richTextBox_plc.Text += "PLC交握測試 完成時間: " + stopwatch_plc.ElapsedMilliseconds.ToString() + " msec\n";
+            richTextBox_plc.Text += "時間2 : " + DateTime.Now.ToString() + "\n";
             flag_plc_test_busy = false;
 
         }
@@ -1664,14 +1703,14 @@ namespace vcs_PLC_Communication1
             {
                 if (flag_plc_test_break == true)
                 {
-                    richTextBox1.Text += "使用者中斷PLC測試, 結束\n";
+                    richTextBox_plc.Text += "使用者中斷PLC測試, 結束\n";
                     break;
                 }
-                richTextBox1.Text += "第 " + (cnt++).ToString() + " 次測試\n";
+                richTextBox_plc.Text += "第 " + (cnt++).ToString() + " 次測試\n";
                 do_PC_PLC_Communication(sender, e);
                 if (flag_plc_test_break == true)
                 {
-                    richTextBox1.Text += "使用者中斷PLC測試, 結束\n";
+                    richTextBox_plc.Text += "使用者中斷PLC測試, 結束\n";
                     break;
                 }
                 delay(1000);
@@ -1684,10 +1723,10 @@ namespace vcs_PLC_Communication1
             {
                 flag_plc_test_break = false;
 
-                richTextBox1.Text += "\n測試PLC作業流程 SP\t" + DateTime.Now.ToString() + "\t使用者中斷\n\n";
+                richTextBox_plc.Text += "\n測試PLC作業流程 SP\t" + DateTime.Now.ToString() + "\t使用者中斷\n\n";
 
-                stopwatch.Stop();
-                richTextBox1.Text += "時間3 : " + DateTime.Now.ToString() + "\n";
+                stopwatch_plc.Stop();
+                richTextBox_plc.Text += "時間3 : " + DateTime.Now.ToString() + "\n";
             }
             flag_plc_test = false;
             flag_plc_test_busy = false;
@@ -1696,14 +1735,14 @@ namespace vcs_PLC_Communication1
 
         private void bt_plc_test_break_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "設定 中斷\n";
+            richTextBox_plc.Text += "設定 中斷\n";
             bt_plc_test_break.BackColor = Color.Red;
             flag_plc_test_break = true;
         }
 
         private void bt_plc_test_break_MouseDown(object sender, MouseEventArgs e)
         {
-            richTextBox1.Text += "設定 中斷\n";
+            richTextBox_plc.Text += "設定 中斷\n";
             bt_plc_test_break.BackColor = Color.Red;
             flag_plc_test_break = true;
         }
@@ -1731,7 +1770,7 @@ namespace vcs_PLC_Communication1
         {
             //取得目前所在路徑
             string currentPath = Directory.GetCurrentDirectory();
-            richTextBox1.Text += "目前所在路徑: " + currentPath + "\n";
+            richTextBox_plc.Text += "目前所在路徑: " + currentPath + "\n";
             //開啟檔案總管
             Process.Start(currentPath);
         }
@@ -1759,20 +1798,20 @@ namespace vcs_PLC_Communication1
                 {
                     bitmap1.Save(filename, ImageFormat.Bmp);
 
-                    richTextBox1.Text += "存檔成功\n";
-                    richTextBox1.Text += "已存檔 : " + filename + "\n";
+                    richTextBox_plc.Text += "存檔成功\n";
+                    richTextBox_plc.Text += "已存檔 : " + filename + "\n";
                     show_main_message1("已存檔BMP", S_OK, 30);
                 }
                 catch (Exception ex)
                 {
-                    richTextBox1.Text += "xxx錯誤訊息e39 : " + ex.Message + "\n";
+                    richTextBox_plc.Text += "xxx錯誤訊息e39 : " + ex.Message + "\n";
                     show_main_message1("存檔失敗", S_OK, 30);
                     //show_main_message1("存檔失敗 : " + ex.Message, S_OK, 30);
                 }
             }
             else
             {
-                richTextBox1.Text += "無圖可存\n";
+                richTextBox_plc.Text += "無圖可存\n";
                 show_main_message1("無圖可存a", S_FALSE, 30);
                 show_main_message1("無圖可存a", S_FALSE, 30);
             }
@@ -1783,15 +1822,15 @@ namespace vcs_PLC_Communication1
         {
             string contact_address = string.Empty;
 
-            richTextBox1.Text += "[M status] M12000 LOW\n";
+            richTextBox_plc.Text += "[M status] M12000 LOW\n";
             contact_address = "12000";
             set_plc_m_status(contact_address, LOW);
 
-            richTextBox1.Text += "[M status] M12001 LOW\n";
+            richTextBox_plc.Text += "[M status] M12001 LOW\n";
             contact_address = "12001";
             set_plc_m_status(contact_address, LOW);
 
-            richTextBox1.Text += "[M status] M12002 LOW\n";
+            richTextBox_plc.Text += "[M status] M12002 LOW\n";
             contact_address = "12002";
             set_plc_m_status(contact_address, LOW);
         }
@@ -1812,11 +1851,11 @@ namespace vcs_PLC_Communication1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "\n\n(7) PC 做完色調, 將結果碼寫在 D8010\t";
+            richTextBox_plc.Text += "\n\n(7) PC 做完色調, 將結果碼寫在 D8010\t";
 
             Random r = new Random();
             int color_result = r.Next(0, 20);
-            richTextBox1.Text += "色調結果: 0x" + color_result.ToString("X2") + " = " + color_result.ToString() + "\n";
+            richTextBox_plc.Text += "色調結果: 0x" + color_result.ToString("X2") + " = " + color_result.ToString() + "\n";
             string contact_address = "8010";
             string write_data = color_result.ToString();
             show_main_message1("寫入: D" + contact_address + ", 資料: " + write_data, S_OK, 30);
