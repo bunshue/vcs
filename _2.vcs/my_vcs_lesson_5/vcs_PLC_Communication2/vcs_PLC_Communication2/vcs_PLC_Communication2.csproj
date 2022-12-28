@@ -34,6 +34,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HslCommunication, Version=4.3.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>dll\HslCommunication.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -52,6 +56,14 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="PLC.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PLC\IPLC_interface.cs" />
+    <Compile Include="PLC\Mitsubishi_realize.cs" />
+    <Compile Include="PLC\PLC_Open_Time.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -65,6 +77,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -76,6 +89,27 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="dll\HslCommunication.dll" />
+    <Content Include="img\ball\ball_blue.png" />
+    <Content Include="img\ball\ball_gray.png" />
+    <Content Include="img\ball\ball_green.png" />
+    <Content Include="img\ball\ball_green2.png" />
+    <Content Include="img\ball\ball_orange.png" />
+    <Content Include="img\ball\ball_purple.png" />
+    <Content Include="img\ball\ball_red.png" />
+    <Content Include="img\ball\ball_red2.png" />
+    <Content Include="img\ball\ball_yellow.png" />
+    <Content Include="img\clipboard.png" />
+    <Content Include="img\face1.png" />
+    <Content Include="img\face2.png" />
+    <Content Include="img\face3.png" />
+    <Content Include="img\open_folder.png" />
+    <Content Include="img\pause.png" />
+    <Content Include="img\play.png" />
+    <Content Include="img\save.png" />
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

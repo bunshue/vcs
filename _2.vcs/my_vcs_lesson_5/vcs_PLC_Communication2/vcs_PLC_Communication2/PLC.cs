@@ -11,9 +11,9 @@ using System.IO;
 using System.Diagnostics;       //for Process, Stopwatch
 using System.Drawing.Imaging;
 
-using vcs_PLC_Communication1.PLC_Communication;
+using vcs_PLC_Communication2.PLC_Communication;
 
-namespace vcs_PLC_Communication1
+namespace vcs_PLC_Communication2
 {
     /// <summary>
     ///  PLC--按鈕狀態
@@ -41,10 +41,11 @@ namespace vcs_PLC_Communication1
         String_32_Bit       //11
     }
 
-    public partial class Form2 : Form
+    public partial class Form1 : Form
     {
         private const int S_OK = 0;     //system return OK
-        private const int S_FALSE = 1;  //system return FALSE
+        private const int S_FALSE = 1;     //system return FALSE
+
         private const Button_state HIGH = Button_state.ON;
         private const Button_state LOW = Button_state.Off;
         private const int BORDER = 10;
@@ -555,6 +556,11 @@ namespace vcs_PLC_Communication1
 
         bool check_plc_power_status()
         {
+            if (flag_use_plc_simulator == true)
+            {
+                return true;
+            }
+
             bool plc_power_status = false;
             //讀取 PLC狀態
             IPLC_interface mitsubishi = new Mitsubishi_realize();//實例化接口--實現三菱在線訪問
@@ -1306,6 +1312,11 @@ namespace vcs_PLC_Communication1
 
         bool get_plc_m_status(string contact_address)
         {
+            if (flag_use_plc_simulator == true)
+            {
+                return true;
+            }
+
             string contact_point = "M";
 
             if ((contact_address.Length != 4) && (contact_address.Length != 5))

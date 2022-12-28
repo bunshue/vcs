@@ -15,37 +15,9 @@ using vcs_PLC_Communication1.PLC_Communication;
 
 namespace vcs_PLC_Communication1
 {
-    /// <summary>
-    ///  PLC--按鈕狀態
-    /// </summary>
-    public enum Button_state
-    {
-        Off, ON
-    }
-    /// <summary>
-    /// 數值顯示類型
-    /// </summary>
-    public enum numerical_format
-    {
-        BCD_16_Bit,     //0
-        BCD_32_Bit,
-        Hex_16_Bit,
-        Hex_32_Bit,
-        Binary_16_Bit,
-        Binary_32_Bit,      //5
-        Unsigned_16_Bit,
-        Signed_16_Bit,
-        Unsigned_32_Bit,
-        Signed_32_Bit,
-        Float_32_Bit,       //10
-        String_32_Bit       //11
-    }
 
     public partial class Form2 : Form
     {
-        private const int S_OK = 0;     //system return OK
-        private const int S_FALSE = 1;     //system return FALSE
-
         public Form2()
         {
             InitializeComponent();
@@ -368,6 +340,62 @@ namespace vcs_PLC_Communication1
             string write_data = color_result.ToString();
             show_plc_main_message1("寫入: D" + contact_address + ", 資料: " + write_data, S_OK, 30);
             set_plc_d_data_bcd16(contact_address, write_data);
+        }
+
+        //delay 10000 約 10秒
+        //C# 不lag的延遲時間
+        private void delay(int delay_milliseconds)
+        {
+            delay_milliseconds *= 2;
+            DateTime time_before = DateTime.Now;
+            while (((TimeSpan)(DateTime.Now - time_before)).TotalMilliseconds < delay_milliseconds)
+            {
+                Application.DoEvents();
+            }
+        }
+
+        void save_image_to_drive() //用時間檔名存檔 不檢查序號
+        {
+            show_plc_main_message1("存檔中...", S_OK, 10);
+            delay(10);
+
+            Bitmap bitmap1 = (Bitmap)pictureBox_plc_status.Image;
+
+            if (bitmap1 != null)
+            {
+                IntPtr pHdc;
+                Graphics g = Graphics.FromImage(bitmap1);
+                Pen p = new Pen(Color.Red, 1);
+                SolidBrush drawBrush = new SolidBrush(Color.Yellow);
+                Font drawFont = new Font("Arial", 6, FontStyle.Bold, GraphicsUnit.Millimeter);
+                pHdc = g.GetHdc();
+
+                g.ReleaseHdc();
+                g.Dispose();
+
+                string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
+                try
+                {
+                    bitmap1.Save(filename, ImageFormat.Bmp);
+
+                    richTextBox_plc.Text += "存檔成功\n";
+                    richTextBox_plc.Text += "已存檔 : " + filename + "\n";
+                    show_plc_main_message1("已存檔BMP", S_OK, 30);
+                }
+                catch (Exception ex)
+                {
+                    richTextBox_plc.Text += "xxx錯誤訊息e39 : " + ex.Message + "\n";
+                    show_plc_main_message1("存檔失敗", S_OK, 30);
+                    //show_plc_main_message1("存檔失敗 : " + ex.Message, S_OK, 30);
+                }
+            }
+            else
+            {
+                richTextBox_plc.Text += "無圖可存\n";
+                show_plc_main_message1("無圖可存a", S_FALSE, 30);
+                show_plc_main_message1("無圖可存a", S_FALSE, 30);
+            }
+            return;
         }
     }
 }

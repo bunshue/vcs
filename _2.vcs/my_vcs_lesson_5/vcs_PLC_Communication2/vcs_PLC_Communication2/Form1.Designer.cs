@@ -28,7 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.plC_Open_Time1 = new vcs_PLC_Communication2.SetupControls.PLC_Open_Time();
             this.SuspendLayout();
+            // 
+            // plC_Open_Time1
+            // 
+            this.plC_Open_Time1.Interval = 500;
+            this.plC_Open_Time1.MitsubishiIP = "192.168.3.39";
             // 
             // Form1
             // 
@@ -37,11 +43,15 @@
             this.ClientSize = new System.Drawing.Size(981, 638);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private SetupControls.PLC_Open_Time plC_Open_Time1;
     }
 }
 
