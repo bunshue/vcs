@@ -43,6 +43,7 @@ namespace vcs_PLC_Communication2
 
     public partial class Form1 : Form
     {
+        bool flag_use_plc_simulator = false;
         private const int S_OK = 0;     //system return OK
         private const int S_FALSE = 1;     //system return FALSE
 
@@ -57,6 +58,7 @@ namespace vcs_PLC_Communication2
         private const int PLC_GBOX_HEIGHT = PLC_PANEL_HEIGHT - BORDER * 2;
         private const int PLC_BTN_WIDTH = 50;
         private const int PLC_BTN_HEIGHT = 50;
+        private const int DELAY_TIME = 5;
 
         //Panel PLC initial location
         private const int PANEL_PLC_DEFAULT_POSITION_X = BORDER;
@@ -107,6 +109,7 @@ namespace vcs_PLC_Communication2
         Label lb_plc_main_mesg2 = new Label();
         Timer timer_plc_status = new Timer();
         Timer timer_plc_display = new Timer();
+        Timer timer_plc_simulator = new Timer();
 
 
         bool flag_plc_test = false;
@@ -135,6 +138,21 @@ namespace vcs_PLC_Communication2
             timer_plc_status.Interval = 1000;
             timer_plc_status.Tick += new System.EventHandler(timer_plc_status_Tick);
             timer_plc_display.Tick += new System.EventHandler(timer_plc_display_Tick);
+
+            if (flag_use_plc_simulator == true)
+            {
+                this.plC_Open_Time1.Enabled = false;
+                this.plC_Open_Time1.Mitsubishi_Open = false;
+                this.plC_Open_Time1.Stop();
+
+                timer_plc_simulator.Enabled = true;
+            }
+            else
+            {
+                timer_plc_simulator.Enabled = false;
+            }
+            timer_plc_simulator.Interval = 1000;
+            timer_plc_simulator.Tick += new System.EventHandler(timer_plc_simulator_Tick);
 
             bt_copy_to_clipboard.Width = PLC_BTN_WIDTH;
             bt_copy_to_clipboard.Height = PLC_BTN_HEIGHT;
@@ -556,12 +574,13 @@ namespace vcs_PLC_Communication2
 
         bool check_plc_power_status()
         {
+            bool plc_power_status = false;
+
             if (flag_use_plc_simulator == true)
             {
-                return true;
+                return check_plc_simulator_power_status();
             }
 
-            bool plc_power_status = false;
             //讀取 PLC狀態
             IPLC_interface mitsubishi = new Mitsubishi_realize();//實例化接口--實現三菱在線訪問
             if (mitsubishi.PLC_ready == true)   //PLC是否準備完成
@@ -743,6 +762,7 @@ namespace vcs_PLC_Communication2
             {
                 pbx_m10000.BackgroundImage = Properties.Resources.ball_gray;
             }
+            delay(DELAY_TIME);
 
             //M10001
             contact_address = "10001";
@@ -776,6 +796,7 @@ namespace vcs_PLC_Communication2
             {
                 pbx_m10001.BackgroundImage = Properties.Resources.ball_gray;
             }
+            delay(DELAY_TIME);
 
             //M10002
             contact_address = "10002";
@@ -809,6 +830,7 @@ namespace vcs_PLC_Communication2
             {
                 pbx_m10002.BackgroundImage = Properties.Resources.ball_gray;
             }
+            delay(DELAY_TIME);
 
             //M12000
             contact_address = "12000";
@@ -842,6 +864,7 @@ namespace vcs_PLC_Communication2
             {
                 pbx_m12000.BackgroundImage = Properties.Resources.ball_gray;
             }
+            delay(DELAY_TIME);
 
             //M12001
             contact_address = "12001";
@@ -875,6 +898,7 @@ namespace vcs_PLC_Communication2
             {
                 pbx_m12001.BackgroundImage = Properties.Resources.ball_gray;
             }
+            delay(DELAY_TIME);
 
             //M12002
             contact_address = "12002";
@@ -908,6 +932,7 @@ namespace vcs_PLC_Communication2
             {
                 pbx_m12002.BackgroundImage = Properties.Resources.ball_gray;
             }
+            delay(DELAY_TIME);
 
             contact_address = "2000";
             show_plc_main_message1("讀取: D" + contact_address, S_OK, 30);
@@ -915,6 +940,7 @@ namespace vcs_PLC_Communication2
             //richTextBox_plc.Text += "\nD2000 len = " + data_read.Length.ToString() + "\n";
             //richTextBox_plc.Text += "data : |" + data_read + "|\n";
             lb_plc_pc3b.Text = data_read;
+            delay(DELAY_TIME);
 
             contact_address = "2010";
             show_plc_main_message1("讀取: D" + contact_address, S_OK, 30);
@@ -922,6 +948,7 @@ namespace vcs_PLC_Communication2
             //richTextBox_plc.Text += "\nD8000 len = " + data_read.Length.ToString() + "\n";
             //richTextBox_plc.Text += "data : |" + data_read + "|\n";
             lb_plc_pc4b.Text = data_read;
+            delay(DELAY_TIME);
 
             contact_address = "8000";
             show_plc_main_message1("讀取: D" + contact_address, S_OK, 30);
@@ -929,6 +956,7 @@ namespace vcs_PLC_Communication2
             //richTextBox_plc.Text += "\nD8000 len = " + data_read.Length.ToString() + "\n";
             //richTextBox_plc.Text += "data : |" + data_read + "|\n";
             lb_pc_plc3b.Text = data_read;
+            delay(DELAY_TIME);
 
             contact_address = "8010";
             show_plc_main_message1("讀取: D" + contact_address, S_OK, 30);
@@ -1136,6 +1164,11 @@ namespace vcs_PLC_Communication2
 
         string get_plc_d_data(string contact_address)
         {
+            if (flag_use_plc_simulator == true)
+            {
+                return get_plc_simulator_d_data(contact_address);
+            }
+
             string contact_point = "D";
             string data_read = "";
 
@@ -1167,6 +1200,12 @@ namespace vcs_PLC_Communication2
 
         void set_plc_d_data(string contact_address, string write_data)
         {
+            if (flag_use_plc_simulator == true)
+            {
+                set_plc_simulator_d_data(contact_address, write_data);
+                return;
+            }
+
             string contact_point = "D";
 
             if (write_data.Length == 0)
@@ -1314,7 +1353,7 @@ namespace vcs_PLC_Communication2
         {
             if (flag_use_plc_simulator == true)
             {
-                return true;
+                return get_plc_simulator_m_status(contact_address);
             }
 
             string contact_point = "M";
@@ -1354,6 +1393,12 @@ namespace vcs_PLC_Communication2
 
         void set_plc_m_status(string contact_address, Button_state write_data)
         {
+            if (flag_use_plc_simulator == true)
+            {
+                set_plc_simulator_m_status(contact_address, write_data);
+                return;
+            }
+
             IPLC_interface mitsubishi = new Mitsubishi_realize();//實例化接口--實現三菱在線訪問
             if (mitsubishi.PLC_ready)//PLC是否準備完成
             {
@@ -1497,7 +1542,6 @@ namespace vcs_PLC_Communication2
         }
         void do_PC_PLC_Communication(object sender, EventArgs e)
         {
-            int i;
             string contact_address = String.Empty;
             bool ret = false;
 
@@ -1548,7 +1592,7 @@ namespace vcs_PLC_Communication2
             }
 
             richTextBox_plc.Text += "(0) PC 啟動完成, 偵測PLC之M10000信號\n";
-            richTextBox_plc.Text += "(1) PLC 把資料放在 D2000\n";
+            richTextBox_plc.Text += "(1) PLC 把相機序號資料放在 D2000\n";
             richTextBox_plc.Text += "(2a) PLC 拉高 M10000, 供PC讀取, 通知條碼內容已備便\n";
             //richTextBox_plc.Text += "[M status] M10000 HIGH\n";
 
@@ -1628,7 +1672,15 @@ namespace vcs_PLC_Communication2
             set_plc_m_status(contact_address, HIGH);
 
             richTextBox_plc.Text += "\nPC開始做色調........";
-            for (i = 0; i < 30; i++)
+
+            //真的做AWB
+            //int color_result = do_awb(sender, e);
+            int color_result = 5;
+            //check_awb_result(color_result);
+
+            /*
+            //假的做AWB
+            for (int i = 0; i < 30; i++)
             {
                 delay(50);
                 richTextBox_plc.Text += ". ";
@@ -1637,8 +1689,10 @@ namespace vcs_PLC_Communication2
 
             Random r = new Random();
             int color_result = r.Next(1, 20);
+            */
             richTextBox_plc.Text += "色調結果: 0x" + color_result.ToString("X2") + " = " + color_result.ToString() + "\n";
             contact_address = "8010";
+
             string write_data = color_result.ToString();
             show_plc_main_message1("寫入: D" + contact_address + ", 資料: " + write_data, S_OK, 30);
             set_plc_d_data_bcd16(contact_address, write_data);
@@ -1702,8 +1756,8 @@ namespace vcs_PLC_Communication2
             delay(500);
 
             richTextBox_plc.Text += "(10e) PLC 清除 D2000 ~ D2006 資料\n";
-            richTextBox_plc.Text += "(10f) PC 令 (動作要求訊號)M10000 為 OFF\n";
-            richTextBox_plc.Text += "(10g) PC 令 (動作開始要求訊號)M10001 為 OFF\n";
+            richTextBox_plc.Text += "(10f) PLC 令 (動作要求訊號)M10000 為 OFF\n";
+            richTextBox_plc.Text += "(10g) PLC 令 (動作開始要求訊號)M10001 為 OFF\n";
 
             delay(500);
 
@@ -1733,8 +1787,6 @@ namespace vcs_PLC_Communication2
 
             delay(500);
 
-            get_all_plc_m_status();
-
             richTextBox_plc.Text += "(12a) PLC 收到 PC 設定 M12002 為 OFF, PLC 設定 M10002為OFF\n";
             richTextBox_plc.Text += "[M status] M10002 LOW\n";
 
@@ -1747,8 +1799,8 @@ namespace vcs_PLC_Communication2
                 return;
             }
 
-            richTextBox_plc.Text += "\n(12b) PC 取得 M10002 為 LOW\n";
-
+            richTextBox_plc.Text += "\n(12c) PC 取得 M10002 為 LOW\n";
+            get_all_plc_m_status();
             richTextBox_plc.Text += "測試PLC作業流程 SP\t" + DateTime.Now.ToString() + "\tOK\n\n\n";
 
             stopwatch_plc.Stop();
@@ -1840,6 +1892,445 @@ namespace vcs_PLC_Communication2
             richTextBox_plc.Text += "目前所在路徑: " + currentPath + "\n";
             //開啟檔案總管
             Process.Start(currentPath);
+        }
+
+        int plc_simulator_step = 0;
+        int plc_simulator_count = 0;
+        //bool plc_simulator_power_status = false;
+        int m10000_simulator_value = 0;
+        int m10001_simulator_value = 0;
+        int m10002_simulator_value = 0;
+        int m12000_simulator_value = 0;
+        int m12001_simulator_value = 0;
+        int m12002_simulator_value = 0;
+        string d2000_simulator_data = "D2000-DATAD2000-DATA";
+        string d2010_simulator_data = "D2010-DATAD2010-DATA";
+        string d8000_simulator_data = "D8000-DATAD8000-DATA";
+        string d8010_simulator_data = "D8010-DATAD8010-DATA";
+
+        private void timer_plc_simulator_Tick(object sender, EventArgs e)
+        {
+            if (flag_plc_test == false)
+            {
+                return;
+            }
+            do_plc_simulation();
+            plc_simulator_count++;
+        }
+
+        void do_plc_simulation()
+        {
+            //richTextBox_plc.Text += "S" + plc_simulator_step.ToString() + "_" + plc_simulator_count.ToString() + " ";
+
+            string contact_address = string.Empty;
+            bool status = false;
+
+            if (plc_simulator_step == 0)    //PLC Power OFF
+            {
+                if (plc_simulator_count < 5)
+                {
+                    //richTextBox_plc.Text += "PLC OFF ";
+                }
+                else
+                {
+                    //richTextBox_plc.Text += "PLC ON\n";
+                    plc_simulator_count = 0;
+                    plc_simulator_step = 1;
+
+                    //設定M10000 10001 10002 信號為0
+                    contact_address = "10000";
+                    set_plc_m_status(contact_address, LOW);
+                    contact_address = "10001";
+                    set_plc_m_status(contact_address, LOW);
+                    contact_address = "10002";
+                    set_plc_m_status(contact_address, LOW);
+                }
+            }
+            else if (plc_simulator_step == 1)   //PLC Power ON
+            {
+                if (plc_simulator_count < 5)
+                {
+                    //檢查M10000 10001 10002 M12000 12001 12002 信號是否皆為0
+                    contact_address = "10000";
+                    status = get_plc_m_status(contact_address);
+                    if (status == true)
+                    {
+                        richTextBox_plc.Text += "M10000 不該為 HIGH\n";
+                        plc_simulator_count = 0;
+                    }
+                    contact_address = "10001";
+                    status = get_plc_m_status(contact_address);
+                    if (status == true)
+                    {
+                        richTextBox_plc.Text += "M10001 不該為 HIGH\n";
+                        plc_simulator_count = 0;
+                    }
+                    contact_address = "10002";
+                    status = get_plc_m_status(contact_address);
+                    if (status == true)
+                    {
+                        richTextBox_plc.Text += "M10002 不該為 HIGH\n";
+                        plc_simulator_count = 0;
+                    }
+                    contact_address = "12000";
+                    status = get_plc_m_status(contact_address);
+                    if (status == true)
+                    {
+                        richTextBox_plc.Text += "M12000 不該為 HIGH\n";
+                        plc_simulator_count = 0;
+                    }
+                    contact_address = "12001";
+                    status = get_plc_m_status(contact_address);
+                    if (status == true)
+                    {
+                        richTextBox_plc.Text += "M12001 不該為 HIGH\n";
+                        plc_simulator_count = 0;
+                    }
+                    contact_address = "12002";
+                    status = get_plc_m_status(contact_address);
+                    if (status == true)
+                    {
+                        richTextBox_plc.Text += "M12002 不該為 HIGH\n";
+                        plc_simulator_count = 0;
+                    }
+                }
+                else
+                {
+                    richTextBox_plc.Text += "\n[PLC] 開始PLC測試\n";
+                    plc_simulator_count = 0;
+                    plc_simulator_step = 2;
+
+                    richTextBox_plc.Text += "[PLC] 把相機序號資料放在 D2000\n";
+
+                    contact_address = "2000";
+                    string write_data = "A123456789B1234";
+                    show_plc_main_message1("PLC 寫入: D" + contact_address + ", 資料: " + write_data, S_OK, 30);
+                    set_plc_d_data_bcd16(contact_address, write_data);
+
+                    richTextBox_plc.Text += "[PLC] PLC 拉高 M10000, 供PC讀取, 通知條碼內容已備便\n";
+                    richTextBox_plc.Text += "[PLC] 令 M10000 為 HIGH\n";
+                    contact_address = "10000";
+                    set_plc_m_status(contact_address, HIGH);
+                }
+            }
+            else if (plc_simulator_step == 2)   //開始PLC測試
+            {
+                if (plc_simulator_count < 3)
+                {
+
+                }
+                else
+                {
+                    //richTextBox_plc.Text += "[PLC] PLC 檢查 M12000 是否為HIGH, 若是, 代表PC已備便\n";
+                    bool ret = false;
+                    contact_address = "12000";
+                    ret = get_plc_m_status(contact_address);
+                    if (ret == false)
+                    {
+                        richTextBox_plc.Text += "[PLC] PLC 檢查 PC 未備便 ";
+                        return;
+                    }
+                    else
+                    {
+                        richTextBox_plc.Text += "\n[PLC] PLC 檢查 PC 已備便\n";
+                        richTextBox_plc.Text += "[PLC] PLC 拉高 M10001, 供PC讀取, 通知開始做色調\n";
+
+                        plc_simulator_count = 0;
+                        plc_simulator_step = 3;
+
+                        contact_address = "10001";
+                        set_plc_m_status(contact_address, HIGH);
+                    }
+                }
+            }
+            else if (plc_simulator_step == 3)   //PLC等待PC做色調
+            {
+                if (plc_simulator_count < 3)
+                {
+
+                }
+                else
+                {
+                    //richTextBox_plc.Text += "[PLC] PLC 檢查 M12002 是否為 HIGH, 若是, 代表PC已做完色調\n";
+                    bool ret = false;
+                    contact_address = "12002";
+                    ret = get_plc_m_status(contact_address);
+                    if (ret == false)
+                    {
+                        //richTextBox_plc.Text += "[PLC] PLC 檢查 PC 未完成色調 ";
+                        return;
+                    }
+                    else
+                    {
+                        richTextBox_plc.Text += "\n[PLC] PLC 檢查 PC 已完成色調完成信號 M12002, PLC設定 M10002為ON\n";
+
+                        plc_simulator_count = 0;
+                        plc_simulator_step = 4;
+
+                        contact_address = "10002";
+                        set_plc_m_status(contact_address, HIGH);
+                    }
+                }
+            }
+            else if (plc_simulator_step == 4)
+            {
+                if (plc_simulator_count < 3)
+                {
+
+                }
+                else
+                {
+                    //richTextBox_plc.Text += "[PLC] PLC 檢查 M12001 是否為 LOW, 若是, 代表PC已做完\n";
+                    bool ret = false;
+                    contact_address = "12001";
+                    ret = get_plc_m_status(contact_address);
+                    if (ret == true)
+                    {
+                        //richTextBox_plc.Text += "[PLC] PLC 檢查 PC 未完成 ";
+                        return;
+                    }
+                    else
+                    {
+                        richTextBox_plc.Text += "\n[PLC] PLC 檢查 PC 之動作完成信號 M12001 為 LOW, PLC設定 M10002 為 HIGH\n";
+
+                        plc_simulator_count = 0;
+                        plc_simulator_step = 5;
+
+                        contact_address = "10002";
+                        set_plc_m_status(contact_address, HIGH);
+                    }
+                }
+            }
+            else if (plc_simulator_step == 5)
+            {
+                if (plc_simulator_count < 3)
+                {
+
+                }
+                else
+                {
+                    //richTextBox_plc.Text += "[PLC] PLC 檢查 M12002 是否為 LOW, 若是, 代表PC已做完\n";
+                    bool ret = false;
+                    contact_address = "12002";
+                    ret = get_plc_m_status(contact_address);
+                    if (ret == true)
+                    {
+                        //richTextBox_plc.Text += "[PLC] PLC 檢查 PC 未完成 ";
+                        return;
+                    }
+                    else
+                    {
+                        richTextBox_plc.Text += "\n[PLC] PLC 檢查 PC之動作完成信號 M12002 為 LOW\n";
+                        richTextBox_plc.Text += "[PLC] PLC設定 M10002 為 LOW\n";
+                        contact_address = "10002";
+                        set_plc_m_status(contact_address, LOW);
+                        richTextBox_plc.Text += "[PLC] PLC設定 M10001 為 LOW\n";
+                        contact_address = "10001";
+                        set_plc_m_status(contact_address, LOW);
+                        richTextBox_plc.Text += "[PLC] PLC設定 M10000 為 LOW\n";
+                        contact_address = "10000";
+                        set_plc_m_status(contact_address, LOW);
+
+                        plc_simulator_count = 0;
+                        plc_simulator_step = 6;
+
+                    }
+
+                }
+            }
+            else if (plc_simulator_step == 6)
+            {
+                richTextBox_plc.Text += plc_simulator_step.ToString() + " ";
+                get_all_plc_m_status();
+                //收尾
+
+                if (plc_simulator_count < 3)
+                {
+
+                }
+                else
+                {
+                }
+            }
+            else if (plc_simulator_step == 7)
+            {
+                richTextBox_plc.Text += plc_simulator_step.ToString() + " ";
+                if (plc_simulator_count < 3)
+                {
+
+                }
+                else
+                {
+                }
+            }
+        }
+
+        bool check_plc_simulator_power_status()
+        {
+            if (plc_simulator_step == 0)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        bool get_plc_simulator_m_status(string contact_address)
+        {
+            if ((contact_address.Length != 4) && (contact_address.Length != 5))
+            {
+                show_plc_main_message1("位址錯誤", S_OK, 30);
+                richTextBox_plc.Text += "位址錯誤 : " + contact_address + "\n";
+                return false;
+            }
+
+            bool ret = false;
+
+            if (cb_debug.Checked == true)
+            {
+                int rrrr;
+                Random r = new Random();
+
+                rrrr = r.Next(0, 2);
+
+                if (rrrr == 0)
+                {
+                    ret = false;
+                }
+                else
+                {
+                    ret = true;
+                }
+            }
+            else
+            {
+                int m_status = 0;
+                if (contact_address == "10000")
+                {
+                    m_status = m10000_simulator_value;
+                }
+                else if (contact_address == "10001")
+                {
+                    m_status = m10001_simulator_value;
+                }
+                else if (contact_address == "10002")
+                {
+                    m_status = m10002_simulator_value;
+                }
+                else if (contact_address == "12000")
+                {
+                    m_status = m12000_simulator_value;
+                }
+                else if (contact_address == "12001")
+                {
+                    m_status = m12001_simulator_value;
+                }
+                else if (contact_address == "12002")
+                {
+                    m_status = m12002_simulator_value;
+                }
+                else
+                {
+                    richTextBox_plc.Text += "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX 1\n";
+                }
+                if (m_status == 0)
+                {
+                    ret = false;
+                }
+                else
+                {
+                    ret = true;
+                }
+            }
+            return ret;
+        }
+
+        void set_plc_simulator_m_status(string contact_address, Button_state write_data)
+        {
+            //richTextBox_plc.Text += "模擬寫了 M" + contact_address + ", 資料為: " + write_data.ToString() + "\n";
+            if (contact_address == "10000")
+            {
+                m10000_simulator_value = (int)write_data;
+            }
+            else if (contact_address == "10001")
+            {
+                m10001_simulator_value = (int)write_data;
+            }
+            else if (contact_address == "10002")
+            {
+                m10002_simulator_value = (int)write_data;
+            }
+            else if (contact_address == "12000")
+            {
+                m12000_simulator_value = (int)write_data;
+            }
+            else if (contact_address == "12001")
+            {
+                m12001_simulator_value = (int)write_data;
+            }
+            else if (contact_address == "12002")
+            {
+                m12002_simulator_value = (int)write_data;
+            }
+            else
+            {
+                richTextBox_plc.Text += "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX 2\n";
+            }
+        }
+
+        string get_plc_simulator_d_data(string contact_address)
+        {
+            string plc_simulator_d_data = string.Empty;
+
+            if (contact_address == "2000")
+            {
+                plc_simulator_d_data = d2000_simulator_data;
+            }
+            else if (contact_address == "2010")
+            {
+                plc_simulator_d_data = d2010_simulator_data;
+            }
+            else if (contact_address == "8000")
+            {
+                plc_simulator_d_data = d8000_simulator_data;
+            }
+            else if (contact_address == "8010")
+            {
+                plc_simulator_d_data = d8010_simulator_data;
+            }
+            else
+            {
+                richTextBox_plc.Text += "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX 3\n";
+            }
+            return plc_simulator_d_data;
+        }
+
+        void set_plc_simulator_d_data(string contact_address, string write_data)
+        {
+            //richTextBox_plc.Text += "模擬寫了 D" + contact_address + ", 資料為: " + write_data.ToString() + "\n";
+
+            if (contact_address == "2000")
+            {
+                d2000_simulator_data = write_data;
+            }
+            else if (contact_address == "2010")
+            {
+                d2010_simulator_data = write_data;
+            }
+            else if (contact_address == "8000")
+            {
+                d8000_simulator_data = write_data;
+            }
+            else if (contact_address == "8010")
+            {
+                d8010_simulator_data = write_data;
+            }
+            else
+            {
+                richTextBox_plc.Text += "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX 4\n";
+            }
         }
     }
 }

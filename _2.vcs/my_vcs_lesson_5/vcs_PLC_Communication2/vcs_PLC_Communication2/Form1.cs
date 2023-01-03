@@ -17,8 +17,6 @@ namespace vcs_PLC_Communication2
 {
     public partial class Form1 : Form
     {
-        bool flag_use_plc_simulator = false;
-
         public Form1()
         {
             InitializeComponent();
