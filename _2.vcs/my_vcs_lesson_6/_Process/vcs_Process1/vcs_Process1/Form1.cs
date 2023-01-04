@@ -38,10 +38,10 @@ namespace vcs_Process1
             int dx;
             int dy;
             //button
-            x_st = 12;
-            y_st = 12;
-            dx = 160 + 10;
-            dy = 70 + 10;
+            x_st = 10;
+            y_st = 10;
+            dx = 150 + 10;
+            dy = 60 + 10;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -94,8 +94,11 @@ namespace vcs_Process1
             bt_system1.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 10);
             bt_system2.Location = new Point(x_st + dx * 0, y_st + dy * 2 + 10);
 
-            richTextBox1.Location = new Point(x_st + dx * 5 + 70, y_st + dy * 0);
+            richTextBox1.Size = new Size(360, 700);
+            richTextBox1.Location = new Point(x_st + dx * 5 + 30, y_st + dy * 0);
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            this.Size = new Size(1230, 760);
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -114,8 +117,9 @@ namespace vcs_Process1
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //開啟imsLink
             Process process = new Process();
-            process = Process.Start(@"C:\_git\vcs\_2.vcs\ims\imsLink\bin\Debug\imsLink.exe");
+            process = Process.Start(@"C:\_git\ims1\iMS_Link\iMS_Link\bin\Debug\iMS_Link.exe");
             richTextBox1.Text += "ProcessName : " + process.ProcessName + "\n";
             richTextBox1.Text += "SessionId : " + process.SessionId.ToString() + "\n";
             richTextBox1.Text += "StartTime : " + process.StartTime + "\n";
@@ -212,7 +216,7 @@ namespace vcs_Process1
         private void button5_Click(object sender, EventArgs e)
         {
             //關閉計算機(偽)
-            System.Diagnostics.Process myProcess = new System.Diagnostics.Process();
+            Process myProcess = new Process();
             myProcess.StartInfo.FileName = "cmd.exe";//启动cmd命令
             myProcess.StartInfo.UseShellExecute = false;//是否使用系统外壳程序启动进程
             myProcess.StartInfo.RedirectStandardInput = true;//是否从流中读取
@@ -227,7 +231,7 @@ namespace vcs_Process1
         {
             //重啟計算機(偽)
             //重啟計算機
-            System.Diagnostics.Process myProcess = new System.Diagnostics.Process();
+            Process myProcess = new Process();
             myProcess.StartInfo.FileName = "cmd.exe";//启动cmd命令
             myProcess.StartInfo.UseShellExecute = false;//是否使用系统外壳程序启动进程
             myProcess.StartInfo.RedirectStandardInput = true;//是否从流中读取
@@ -249,7 +253,6 @@ namespace vcs_Process1
             下面介紹一種常用的在C#程序中調用CMD.exe程序，並且不顯示命令行窗口界面，來完成CMD中各種功能的簡單方法。
             */
 
-
             Process p = new Process();
             p.StartInfo.FileName = "cmd.exe";//要執行的程序名稱
             p.StartInfo.UseShellExecute = false;
@@ -258,9 +261,12 @@ namespace vcs_Process1
             p.StartInfo.CreateNoWindow = true;//不顯示程序窗口
             p.Start();//啟動程序
             //向CMD窗口發送輸入信息：
-            p.StandardInput.WriteLine("shutdown -r t 10"); //10秒後重啟（C#中可不好做哦）
+            //p.StandardInput.WriteLine("shutdown -r t 10"); //10秒後重啟（C#中可不好做哦）
+            p.StandardInput.WriteLine("ver"); //10秒後重啟（C#中可不好做哦）
             //獲取CMD窗口的輸出信息：
             string sOutput = p.StandardOutput.ReadToEnd();
+
+            richTextBox1.Text += sOutput + "\n";
 
             //有啦以下代碼，就可以神不知鬼不覺的操作CMD啦。總之，Process類是一個非常有用的類，它十分方便的利用第三方的程序擴展了C#的功能。
         }
@@ -280,7 +286,6 @@ namespace vcs_Process1
                     // Given that is is started without a window so you cannot terminate it 
                     // on the desktop, it must terminate itself or you can do it programmatically
                     // from this application using the Kill method.
-
                 }
             }
             catch (Exception ex)
@@ -291,20 +296,6 @@ namespace vcs_Process1
 
         private void button9_Click(object sender, EventArgs e)
         {
-            //呼叫系統內建小鍵盤     fail
-            //Process.Start("" + Environment.SystemDirectory + "/osk.exe");
-
-
-            //開啟檔案 由預設程式開啟
-            //Process.Start("C:\\______test_files\\my_text_file.txt");
-
-
-            //開啟程式
-            //Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL");
-
-
-            //呼叫外部的Exe文件
-            //Process.Start(textBox1.Text);  //呼叫 *.exe
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -320,51 +311,12 @@ namespace vcs_Process1
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //Process類使用小例
-
-            string exe_filename = "notepad.exe";
-            Process myProcess = new Process();
-            try
-            {
-                myProcess.StartInfo.UseShellExecute = false;
-                myProcess.StartInfo.FileName = exe_filename;
-                myProcess.StartInfo.CreateNoWindow = true;
-                myProcess.Start();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
 
 
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            //用預設的程式開啟檔案
-            string filename = "C:\\______test_files\\aaaaaaa.txt";
-
-            if (File.Exists(filename) == false)
-            {
-                MessageBox.Show("檔案: " + filename + "不存在，無法開啟。\n");
-                return;
-            }
-            else
-            {
-                Process.Start(filename);
-            }
-
-            //用預設的程式開啟檔案
-            filename = @"C:\______test_files\__pic\_gif\sky.gif";
-
-            Process.Start("explorer.exe", filename);
-            //Process.Start(filename);    //same
-
-            //開啟一個程式
-            //Process newprocess = Process.Start(filename);
-
-
-
         }
 
         private void button13_Click(object sender, EventArgs e)

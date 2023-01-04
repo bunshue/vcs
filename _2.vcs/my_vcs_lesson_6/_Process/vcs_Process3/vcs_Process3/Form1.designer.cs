@@ -59,9 +59,9 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(11, 5);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 12);
+            this.label1.Size = new System.Drawing.Size(99, 12);
             this.label1.TabIndex = 2;
-            this.label1.Text = "程序列表：";
+            this.label1.Text = "有視窗 之 Process :";
             // 
             // richTextBox1
             // 

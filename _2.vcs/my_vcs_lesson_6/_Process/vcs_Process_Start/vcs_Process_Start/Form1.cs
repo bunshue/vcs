@@ -9,6 +9,54 @@ using System.Windows.Forms;
 
 using System.Diagnostics;       //for Process
 
+/*
+
+準備中
+
+
+//呼叫系統內建小鍵盤     fail
+//Process.Start("" + Environment.SystemDirectory + "/osk.exe");
+
+
+//開啟檔案 由預設程式開啟
+//Process.Start("C:\\______test_files\\my_text_file.txt");
+
+
+//開啟程式
+//Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL");
+
+
+//呼叫外部的Exe文件
+//Process.Start(textBox1.Text);  //呼叫 *.exe
+
+
+            //用預設的程式開啟檔案
+            string filename = "C:\\______test_files\\aaaaaaa.txt";
+
+            if (File.Exists(filename) == false)
+            {
+                MessageBox.Show("檔案: " + filename + "不存在，無法開啟。\n");
+                return;
+            }
+            else
+            {
+                Process.Start(filename);
+            }
+
+            //用預設的程式開啟檔案
+            filename = @"C:\______test_files\__pic\_gif\sky.gif";
+
+            Process.Start("explorer.exe", filename);
+            //Process.Start(filename);    //same
+
+            //開啟一個程式
+            //Process newprocess = Process.Start(filename);
+
+
+
+
+ */
+
 namespace vcs_Process_Start
 {
     public partial class Form1 : Form
@@ -291,6 +339,21 @@ namespace vcs_Process_Start
 
         private void button26_Click(object sender, EventArgs e)
         {
+            //Process類使用小例
+
+            string exe_filename = "notepad.exe";
+            Process myProcess = new Process();
+            try
+            {
+                myProcess.StartInfo.UseShellExecute = false;
+                myProcess.StartInfo.FileName = exe_filename;
+                myProcess.StartInfo.CreateNoWindow = true;
+                myProcess.Start();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
 
         }
 
