@@ -30,34 +30,48 @@
         {
             this.components = new System.ComponentModel.Container();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.timer_stopwatch = new System.Windows.Forms.Timer(this.components);
+            this.timer_countdown = new System.Windows.Forms.Timer(this.components);
+            this.timer_clock = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(390, 12);
+            this.richTextBox1.Location = new System.Drawing.Point(300, 10);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(334, 590);
+            this.richTextBox1.Size = new System.Drawing.Size(300, 500);
             this.richTextBox1.TabIndex = 0;
             this.richTextBox1.Text = "";
             // 
-            // timer1
+            // timer_stopwatch
             // 
-            this.timer1.Enabled = true;
-            this.timer1.Interval = 1000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.timer_stopwatch.Tick += new System.EventHandler(this.timer_stopwatch_Tick);
+            // 
+            // timer_countdown
+            // 
+            this.timer_countdown.Interval = 1000;
+            this.timer_countdown.Tick += new System.EventHandler(this.timer_countdown_Tick);
+            // 
+            // timer_clock
+            // 
+            this.timer_clock.Enabled = true;
+            this.timer_clock.Interval = 1000;
+            this.timer_clock.Tick += new System.EventHandler(this.timer_clock_Tick);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(736, 614);
+            this.ClientSize = new System.Drawing.Size(604, 511);
             this.Controls.Add(this.richTextBox1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDoubleClick);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
             this.ResumeLayout(false);
 
         }
@@ -65,7 +79,9 @@
         #endregion
 
         private System.Windows.Forms.RichTextBox richTextBox1;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer timer_stopwatch;
+        private System.Windows.Forms.Timer timer_countdown;
+        private System.Windows.Forms.Timer timer_clock;
     }
 }
 

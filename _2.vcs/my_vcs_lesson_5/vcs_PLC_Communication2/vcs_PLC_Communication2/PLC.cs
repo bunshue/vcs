@@ -328,7 +328,7 @@ namespace vcs_PLC_Communication2
             bt_open_folder.Width = PLC_BTN_WIDTH;
             bt_open_folder.Height = PLC_BTN_HEIGHT;
             bt_open_folder.Text = "";
-            bt_open_folder.Name = "bt_save";
+            bt_open_folder.Name = "bt_open_folder";
             // 加入按鈕事件
             //bt_open_folder.Click += new EventHandler(bt_open_folder_Click);   //same
             bt_open_folder.Click += bt_open_folder_Click;
@@ -346,7 +346,7 @@ namespace vcs_PLC_Communication2
             bt_pause.Width = PLC_BTN_WIDTH;
             bt_pause.Height = PLC_BTN_HEIGHT;
             bt_pause.Text = "";
-            bt_pause.Name = "bt_save";
+            bt_pause.Name = "bt_pause";
             // 加入按鈕事件
             //bt_pause.Click += new EventHandler(bt_pause_Click);   //same
             bt_pause.Click += bt_pause_Click;

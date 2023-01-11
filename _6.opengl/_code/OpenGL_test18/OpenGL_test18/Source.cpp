@@ -90,8 +90,7 @@ make_ball(void)
     return list;
 }
 
-static void
-reshape(int width, int height)
+static void reshape(int width, int height)
 {
     glViewport(0, 0, (GLint)width, (GLint)height);
     glMatrixMode(GL_PROJECTION);
@@ -101,8 +100,7 @@ reshape(int width, int height)
 }
 
 /* ARGSUSED1 */
-static void
-key(unsigned char k, int x, int y)
+static void key(unsigned char k, int x, int y)
 {
     switch (k) {
     case 27:  /* Escape */
@@ -119,15 +117,18 @@ draw(void)
 
     glIndexi(CYAN);
     glBegin(GL_LINES);
-    for (i = -5; i <= 5; i++) {
+    for (i = -5; i <= 5; i++)
+    {
         glVertex2i(i, -5);
         glVertex2i(i, 5);
     }
-    for (i = -5; i <= 5; i++) {
+    for (i = -5; i <= 5; i++)
+    {
         glVertex2i(-5, i);
         glVertex2i(5, i);
     }
-    for (i = -5; i <= 5; i++) {
+    for (i = -5; i <= 5; i++)
+    {
         glVertex2i(i, -5);
         glVertex2f(i * 1.15, -5.9);
     }
@@ -148,46 +149,53 @@ draw(void)
 
     glPopMatrix();
 
-    glFlush();
     glutSwapBuffers();
+
+    glFlush();  // 執行繪圖命令
 }
 
-static void
-idle(void)
+void idle(void)
 {
     static float vel0 = -100.0;
 
     Zrot += Zstep;
 
     Xpos += Xvel;
-    if (Xpos >= Xmax) {
+    if (Xpos >= Xmax)
+    {
         Xpos = Xmax;
         Xvel = -Xvel;
         Zstep = -Zstep;
     }
-    if (Xpos <= Xmin) {
+    if (Xpos <= Xmin)
+    {
         Xpos = Xmin;
         Xvel = -Xvel;
         Zstep = -Zstep;
     }
     Ypos += Yvel;
     Yvel += G;
-    if (Ypos < Ymin) {
+    if (Ypos < Ymin)
+    {
         Ypos = Ymin;
         if (vel0 == -100.0)
             vel0 = fabs(Yvel);
         Yvel = vel0;
     }
+
     glutPostRedisplay();
 }
 
-void
-visible(int vis)
+void visible(int vis)
 {
     if (vis == GLUT_VISIBLE)
+    {
         glutIdleFunc(idle);
+    }
     else
+    {
         glutIdleFunc(NULL);
+    }
 }
 
 int main(int argc, char* argv[])
@@ -213,9 +221,7 @@ int main(int argc, char* argv[])
     glutSetColor(CYAN, 0.0, 1.0, 1.0);
 
     glutMainLoop();
-    return 0;             /* ANSI C requires main to return int. */
+    return 0;
 }
-
-
 
 

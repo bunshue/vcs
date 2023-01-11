@@ -1454,6 +1454,86 @@ namespace vcs_GMap
             markersOverlay.Markers.Add(Circle);
 
             gMapControl1.Overlays.Add(markersOverlay);
+
+            //畫36平方公里, 6公里平方
+            double longitude_west = 0;
+            double longitude_east = 0;
+            double latitude_north = 0;
+            double latitude_south = 0;
+
+            longitude_new = longitude;
+            for (double dd = 0; dd < 0.04; dd += 0.0002)
+            {
+                longitude_new = longitude + dd; //經度
+                double distance = getDistance(new PointLatLng(latitude, longitude), new PointLatLng(latitude, longitude_new));
+                richTextBox1.Text += "右, 距離 : " + distance.ToString() + "\n";
+                if (distance > 6 / 2)
+                    break;
+            }
+            richTextBox1.Text += "取得右邊界 : " + longitude_new.ToString() + "\n";
+            longitude_east = longitude_new;
+
+            longitude_new = longitude;
+            for (double dd = 0.04; dd > 0; dd -= 0.0002)
+            {
+                longitude_new = longitude - dd; //經度
+                double distance = getDistance(new PointLatLng(latitude, longitude), new PointLatLng(latitude, longitude_new));
+                richTextBox1.Text += "左, 距離 : " + distance.ToString() + "\n";
+                if (distance < 6 / 2)
+                    break;
+            }
+            richTextBox1.Text += "取得左邊界 : " + longitude_new.ToString() + "\n";
+            longitude_west = longitude_new;
+
+
+            //latitude
+            double latitude_new = latitude;
+            for (double dd = 0; dd < 0.04; dd += 0.0002)
+            {
+                latitude_new = latitude + dd; //緯度
+                double distance = getDistance(new PointLatLng(latitude, longitude), new PointLatLng(latitude_new, longitude));
+                richTextBox1.Text += "上, 距離 : " + distance.ToString() + "\n";
+                if (distance > 6 / 2)
+                    break;
+            }
+            richTextBox1.Text += "取得上邊界 : " + latitude_new.ToString() + "\n";
+            latitude_north = latitude_new;
+
+            latitude_new = latitude;
+            for (double dd = 0.04; dd > 0; dd -= 0.0002)
+            {
+                latitude_new = latitude - dd; //緯度
+                double distance = getDistance(new PointLatLng(latitude, longitude), new PointLatLng(latitude_new, longitude));
+                richTextBox1.Text += "下, 距離 : " + distance.ToString() + "\n";
+                if (distance < 6 / 2)
+                    break;
+            }
+            richTextBox1.Text += "取得下邊界 : " + latitude_new.ToString() + "\n";
+            latitude_south = latitude_new;
+
+            GMapDrawRectangle myRectangle = null;
+
+            List<PointLatLng> points = new List<PointLatLng>();
+            points = new List<PointLatLng>();
+
+            points.Add(new PointLatLng(latitude_north, longitude_west));    //左上
+            points.Add(new PointLatLng(latitude_north, longitude_east));    //右上
+            points.Add(new PointLatLng(latitude_south, longitude_east));    //右下
+            points.Add(new PointLatLng(latitude_south, longitude_west));    //左下
+
+
+            /*
+            double ddd = 0.01;
+            points.Add(new PointLatLng(latitude - ddd, longitude + ddd));    //左上
+            points.Add(new PointLatLng(latitude + ddd, longitude + ddd));    //右上
+            points.Add(new PointLatLng(latitude + ddd, longitude - ddd));    //右下
+            points.Add(new PointLatLng(latitude - ddd, longitude - ddd));    //左下
+            */
+
+            myRectangle = new GMapDrawRectangle(points, "BBBB");
+            markersOverlay.Polygons.Add(myRectangle);
+
+
             gMapControl1.Refresh();
         }
 
