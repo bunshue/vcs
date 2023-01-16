@@ -148,7 +148,19 @@ namespace vcs_GMap
 
             richTextBox1.Size = new Size(W, H);
             richTextBox1.Location = new Point(x_st + dx, y_st + H);
+
+            int BTN_WIDTH = 50;
+            int BTN_HEIGHT = 50;
+            bt_clear.Width = BTN_WIDTH;
+            bt_clear.Height = BTN_HEIGHT;
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+
+            bt_open_folder.Width = BTN_WIDTH;
+            bt_open_folder.Height = BTN_HEIGHT;
+            bt_open_folder.Text = "";
+            bt_open_folder.BackgroundImage = Properties.Resources.open_folder;
+            bt_open_folder.BackgroundImageLayout = ImageLayout.Zoom;
+            bt_open_folder.Location = new Point(bt_clear.Location.X - BTN_WIDTH, bt_clear.Location.Y);
 
             x_st = 20;
             y_st = 15;
@@ -530,6 +542,15 @@ namespace vcs_GMap
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
+
+        private void bt_open_folder_Click(object sender, EventArgs e)
+        {
+            //取得目前所在路徑
+            string currentPath = Directory.GetCurrentDirectory();
+            richTextBox1.Text += "目前所在路徑: " + currentPath + "\n";
+            //開啟檔案總管
+            Process.Start(currentPath);
         }
 
         void setup_controls()
@@ -4208,7 +4229,6 @@ namespace vcs_GMap
             }
             drawDistance.IsEnable = false;
         }
-
     }
 
     public class Piecearea

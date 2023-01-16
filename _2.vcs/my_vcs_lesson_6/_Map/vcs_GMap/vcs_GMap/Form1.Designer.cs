@@ -187,6 +187,7 @@
             this.rb_map02 = new System.Windows.Forms.RadioButton();
             this.rb_map01 = new System.Windows.Forms.RadioButton();
             this.rb_map00 = new System.Windows.Forms.RadioButton();
+            this.bt_open_folder = new System.Windows.Forms.Button();
             this.groupBox_map.SuspendLayout();
             this.groupBox_location.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
@@ -1911,11 +1912,21 @@
             this.rb_map00.Text = "正中";
             this.rb_map00.UseVisualStyleBackColor = true;
             // 
+            // bt_open_folder
+            // 
+            this.bt_open_folder.Location = new System.Drawing.Point(28, 184);
+            this.bt_open_folder.Name = "bt_open_folder";
+            this.bt_open_folder.Size = new System.Drawing.Size(71, 30);
+            this.bt_open_folder.TabIndex = 48;
+            this.bt_open_folder.UseVisualStyleBackColor = true;
+            this.bt_open_folder.Click += new System.EventHandler(this.bt_open_folder_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1157, 657);
+            this.Controls.Add(this.bt_open_folder);
             this.Controls.Add(this.groupBox_map2);
             this.Controls.Add(this.groupBox_map_control2);
             this.Controls.Add(this.groupBox_map_control1);
@@ -2108,6 +2119,7 @@
         private System.Windows.Forms.RadioButton rb_location16;
         private System.Windows.Forms.RadioButton rb_location15;
         private System.Windows.Forms.RadioButton rb_location14;
+        private System.Windows.Forms.Button bt_open_folder;
     }
 }
 

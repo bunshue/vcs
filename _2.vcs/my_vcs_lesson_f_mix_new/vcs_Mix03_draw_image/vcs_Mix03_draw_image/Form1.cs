@@ -885,7 +885,7 @@ namespace vcs_Mix03_draw_image
         }
 
         //C#編程 jpg縮略圖函數 使用
-        
+
         /// <summary>
         /// 生成jpg縮略圖字節,本人的小軟件中需要用到的功能，所以自己做了一個函數，和大家分享
         /// 為什麼要生成字節而不是文件，這是為了方便後續處理啦^_^
@@ -999,21 +999,348 @@ namespace vcs_Mix03_draw_image
         private void button16_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //畫邊框1
+
+            Pen bluePen = new Pen(Color.Blue, 8);
+            Pen redPen = new Pen(Color.Red, 8);
+            List<Point> points1 = new List<Point>();
+            points1.Clear();
+            points1.Add(new Point(0, 0));
+            points1.Add(new Point(1, 0));
+            points1.Add(new Point(2, 0));
+            points1.Add(new Point(3, 0));
+            points1.Add(new Point(3, 1));
+            points1.Add(new Point(3, 2));
+            points1.Add(new Point(4, 2));
+            points1.Add(new Point(5, 2));
+            points1.Add(new Point(6, 2));
+            points1.Add(new Point(6, 1));
+            points1.Add(new Point(6, 0));
+            points1.Add(new Point(5, 0));
+            points1.Add(new Point(4, 0));
+            points1.Add(new Point(4, 1));
+            points1.Add(new Point(4, 2));
+            points1.Add(new Point(4, 3));
+            points1.Add(new Point(5, 3));
+            points1.Add(new Point(6, 3));
+            points1.Add(new Point(6, 4));
+            points1.Add(new Point(6, 5));
+            points1.Add(new Point(6, 6));
+
+            List<Point> points2 = new List<Point>();
+            points2.Clear();
+            points2.Add(new Point(0, 1));
+            points2.Add(new Point(1, 1));
+            points2.Add(new Point(2, 1));
+            points2.Add(new Point(3, 1));
+            points2.Add(new Point(4, 1));
+            points2.Add(new Point(5, 1));
+            points2.Add(new Point(5, 2));
+            points2.Add(new Point(5, 3));
+            points2.Add(new Point(5, 4));
+            points2.Add(new Point(5, 5));
+            points2.Add(new Point(5, 6));
+
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+
+            int i;
+            int step = 50;
+            int offset_x = 100;
+            int offset_y = 100;
+
+            List<Point> points_draw = new List<Point>();
+            points_draw.Clear();
+            for (i = 0; i < points1.Count; i++)
+            {
+                points_draw.Add(new Point(offset_x + points1[i].X * step, offset_y + points1[i].Y * step));
+            }
+            g.DrawLines(bluePen, points_draw.ToArray());  //畫直線
+
+            points_draw.Clear();
+            for (i = 0; i < points2.Count; i++)
+            {
+                points_draw.Add(new Point(offset_x + points2[i].X * step, offset_y + points2[i].Y * step));
+            }
+            g.DrawLines(redPen, points_draw.ToArray());  //畫直線
+
+            pictureBox1.Image = bitmap1;
+
+            g.Dispose();
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //畫邊框2
+
+            int x_st = 0;
+            int y_st = 0;
+
+            Pen bluePen = new Pen(Color.Blue, 8);
+            List<Point> points1 = new List<Point>();
+            points1.Clear();
+            points1.Add(new Point(0, 0));
+            points1.Add(new Point(20, 0));
+            points1.Add(new Point(20, 5));
+            points1.Add(new Point(15, 5));
+
+            x_st = 22;
+            y_st = 0;
+            int dd = 5;
+
+            List<Point> points2 = new List<Point>();
+            points2.Clear();
+            points2.Add(new Point(x_st, y_st));
+            points2.Add(new Point(x_st + dd, y_st));
+            points2.Add(new Point(x_st + dd, y_st + dd));
+            points2.Add(new Point(x_st, y_st + dd));
+            points2.Add(new Point(x_st, y_st));
+
+            List<Point> points3 = new List<Point>();
+            points3.Clear();
+            points3.Add(new Point(x_st, y_st + dd + 2 + 5));
+            points3.Add(new Point(x_st, y_st + dd + 2));
+            points3.Add(new Point(x_st + dd, y_st + dd + 2));
+            points3.Add(new Point(x_st + dd, y_st + dd + 2 + 15));
+
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+
+            int i;
+            int step = 20;
+            int offset_x = 100;
+            int offset_y = 100;
+
+            List<Point> points_draw = new List<Point>();
+            points_draw.Clear();
+            for (i = 0; i < points1.Count; i++)
+            {
+                points_draw.Add(new Point(offset_x + points1[i].X * step, offset_y + points1[i].Y * step));
+            }
+            g.DrawLines(bluePen, points_draw.ToArray());  //畫直線
+
+            points_draw.Clear();
+            for (i = 0; i < points2.Count; i++)
+            {
+                points_draw.Add(new Point(offset_x + points2[i].X * step, offset_y + points2[i].Y * step));
+            }
+            g.DrawLines(bluePen, points_draw.ToArray());  //畫直線
+
+
+            points_draw.Clear();
+            for (i = 0; i < points3.Count; i++)
+            {
+                points_draw.Add(new Point(offset_x + points3[i].X * step, offset_y + points3[i].Y * step));
+            }
+            g.DrawLines(bluePen, points_draw.ToArray());  //畫直線
+
+            pictureBox1.Image = bitmap1;
+
+            g.Dispose();
+
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //畫邊框3
+
+            Point corner = new Point(15, 0); //最右上角的點
+
+            Pen bluePen = new Pen(Color.Blue, 8);
+            Pen redPen = new Pen(Color.Red, 8);
+            List<Point> points1 = new List<Point>();
+            points1.Clear();
+            points1.Add(new Point(corner.X - 15 + 0, corner.Y + 0));
+            points1.Add(new Point(corner.X - 15 + 7, corner.Y + 0));
+            points1.Add(new Point(corner.X - 15 + 7, corner.Y + 1));
+            points1.Add(new Point(corner.X - 15 + 8, corner.Y + 1));
+            points1.Add(new Point(corner.X - 15 + 9, corner.Y + 1));
+            points1.Add(new Point(corner.X - 15 + 9, corner.Y + 0));
+            points1.Add(new Point(corner.X - 15 + 8, corner.Y + 0));
+            points1.Add(new Point(corner.X - 15 + 8, corner.Y + 1));
+            points1.Add(new Point(corner.X - 15 + 8, corner.Y + 2));
+            points1.Add(new Point(corner.X - 15 + 9, corner.Y + 2));
+            points1.Add(new Point(corner.X - 15 + 10, corner.Y + 2));
+            points1.Add(new Point(corner.X - 15 + 10, corner.Y + 1));
+            points1.Add(new Point(corner.X - 15 + 10, corner.Y + 0));
+            points1.Add(new Point(corner.X - 15 + 11, corner.Y + 0));
+            points1.Add(new Point(corner.X - 15 + 12, corner.Y + 0));
+            points1.Add(new Point(corner.X - 15 + 12, corner.Y + 1));
+            points1.Add(new Point(corner.X - 15 + 12, corner.Y + 2));
+            points1.Add(new Point(corner.X - 15 + 12, corner.Y + 3));
+            points1.Add(new Point(corner.X - 15 + 13, corner.Y + 3));
+            points1.Add(new Point(corner.X - 15 + 14, corner.Y + 3));
+            points1.Add(new Point(corner.X - 15 + 15, corner.Y + 3));
+            points1.Add(new Point(corner.X - 15 + 15, corner.Y + 4));
+            points1.Add(new Point(corner.X - 15 + 15, corner.Y + 5));
+            points1.Add(new Point(corner.X - 15 + 14, corner.Y + 5));
+            points1.Add(new Point(corner.X - 15 + 13, corner.Y + 5));
+            points1.Add(new Point(corner.X - 15 + 13, corner.Y + 6));
+            points1.Add(new Point(corner.X - 15 + 13, corner.Y + 7));
+            points1.Add(new Point(corner.X - 15 + 14, corner.Y + 7));
+            points1.Add(new Point(corner.X - 15 + 15, corner.Y + 7));
+            points1.Add(new Point(corner.X - 15 + 15, corner.Y + 6));
+            points1.Add(new Point(corner.X - 15 + 14, corner.Y + 6));
+            points1.Add(new Point(corner.X - 15 + 14, corner.Y + 7));
+            points1.Add(new Point(corner.X - 15 + 14, corner.Y + 8));
+            points1.Add(new Point(corner.X - 15 + 15, corner.Y + 8));
+            points1.Add(new Point(corner.X - 15 + 15, corner.Y + 8 + 10));
+
+            List<Point> points2 = new List<Point>();
+            points2.Clear();
+            points2.Add(new Point(corner.X + 0, corner.Y + 0));
+            points2.Add(new Point(corner.X - 1, corner.Y + 0));
+            points2.Add(new Point(corner.X - 2, corner.Y + 0));
+            points2.Add(new Point(corner.X - 2, corner.Y + 1));
+            points2.Add(new Point(corner.X - 2, corner.Y + 2));
+            points2.Add(new Point(corner.X - 2, corner.Y + 3));
+            points2.Add(new Point(corner.X - 2, corner.Y + 4));
+            points2.Add(new Point(corner.X - 1, corner.Y + 4));
+            points2.Add(new Point(corner.X - 1, corner.Y + 3));
+            points2.Add(new Point(corner.X - 1, corner.Y + 2));
+            points2.Add(new Point(corner.X - 1, corner.Y + 1));
+            points2.Add(new Point(corner.X - 2, corner.Y + 1));
+            points2.Add(new Point(corner.X - 3, corner.Y + 1));
+            points2.Add(new Point(corner.X - 4, corner.Y + 1));
+            points2.Add(new Point(corner.X - 4, corner.Y + 2));
+            points2.Add(new Point(corner.X - 3, corner.Y + 2));
+            points2.Add(new Point(corner.X - 2, corner.Y + 2));
+            points2.Add(new Point(corner.X - 1, corner.Y + 2));
+            points2.Add(new Point(corner.X - 0, corner.Y + 2));
+            points2.Add(new Point(corner.X - 0, corner.Y + 1));
+            points2.Add(new Point(corner.X - 0, corner.Y + 0));
+            points2.Add(new Point(corner.X - 1, corner.Y + 0));
+
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+
+            int i;
+            int step = 20;
+            int offset_x = 100;
+            int offset_y = 100;
+
+            List<Point> points_draw = new List<Point>();
+            points_draw.Clear();
+            for (i = 0; i < points1.Count; i++)
+            {
+                points_draw.Add(new Point(offset_x + points1[i].X * step, offset_y + points1[i].Y * step));
+            }
+            g.DrawLines(bluePen, points_draw.ToArray());  //畫直線
+
+            points_draw.Clear();
+            for (i = 0; i < points2.Count; i++)
+            {
+                points_draw.Add(new Point(offset_x + points2[i].X * step, offset_y + points2[i].Y * step));
+            }
+            g.DrawLines(redPen, points_draw.ToArray());  //畫直線
+
+
+            pictureBox1.Image = bitmap1;
+
+            g.Dispose();
+
+
+            points1.Clear();
+
+            /*
+            points1 = new List<Point>
+            {
+                new Point(0,0),
+                new Point(0,0),
+                new Point(0,0),
+                new Point(0,0),
+                new Point(0,0),
+                new Point(0,0),
+                new Point(0,0),
+                new Point(0,0),
+                new Point(0,0)
+            };
+            */
+
+            for (i = 0; i < points1.Count; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + points1[i].ToString() + "\n";
+            }
+
+
+
         }
 
         private void button19_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //畫邊框4
+
+            Point corner = new Point(15, 0); //最右上角的點
+
+            Pen bluePen = new Pen(Color.Blue, 8);
+            List<Point> points1 = new List<Point>();
+            points1.Clear();
+            points1.Add(new Point(corner.X - 15, corner.Y + 0));
+            points1.Add(new Point(corner.X - 3, corner.Y + 0));
+            points1.Add(new Point(corner.X - 2, corner.Y + 0));
+            points1.Add(new Point(corner.X - 2, corner.Y + 1));
+            points1.Add(new Point(corner.X - 2, corner.Y + 2));
+            points1.Add(new Point(corner.X - 2, corner.Y + 3));
+            points1.Add(new Point(corner.X - 1, corner.Y + 3));
+            points1.Add(new Point(corner.X - 1, corner.Y + 2));
+            points1.Add(new Point(corner.X - 1, corner.Y + 1));
+            points1.Add(new Point(corner.X - 1, corner.Y + 0));
+            points1.Add(new Point(corner.X - 0, corner.Y + 0));
+            points1.Add(new Point(corner.X - 0, corner.Y + 1));
+            points1.Add(new Point(corner.X - 1, corner.Y + 1));
+            points1.Add(new Point(corner.X - 2, corner.Y + 1));
+            points1.Add(new Point(corner.X - 3, corner.Y + 1));
+            points1.Add(new Point(corner.X - 3, corner.Y + 2));
+            points1.Add(new Point(corner.X - 2, corner.Y + 2));
+            points1.Add(new Point(corner.X - 1, corner.Y + 2));
+            points1.Add(new Point(corner.X - 0, corner.Y + 2));
+            points1.Add(new Point(corner.X - 0, corner.Y + 3));
+            points1.Add(new Point(corner.X - 0, corner.Y + 15));
+
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);
+            g.Clear(Color.White);
+
+            int i;
+            int step = 20;
+            int offset_x = 100;
+            int offset_y = 100;
+
+            List<Point> points_draw = new List<Point>();
+            points_draw.Clear();
+            for (i = 0; i < points1.Count; i++)
+            {
+                points_draw.Add(new Point(offset_x + points1[i].X * step, offset_y + points1[i].Y * step));
+            }
+            g.DrawLines(bluePen, points_draw.ToArray());  //畫直線
+
+
+            pictureBox1.Image = bitmap1;
+
+            g.Dispose();
+
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -1410,4 +1737,3 @@ namespace vcs_Mix03_draw_image
         }
     }
 }
-

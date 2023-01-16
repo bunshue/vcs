@@ -103,5 +103,8 @@
       <Name>GMapTools</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="img\open_folder.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

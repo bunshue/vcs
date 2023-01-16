@@ -33,6 +33,7 @@
             this.timer_stopwatch = new System.Windows.Forms.Timer(this.components);
             this.timer_countdown = new System.Windows.Forms.Timer(this.components);
             this.timer_clock = new System.Windows.Forms.Timer(this.components);
+            this.timer_rgb = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // richTextBox1
@@ -58,6 +59,11 @@
             this.timer_clock.Interval = 1000;
             this.timer_clock.Tick += new System.EventHandler(this.timer_clock_Tick);
             // 
+            // timer_rgb
+            // 
+            this.timer_rgb.Enabled = true;
+            this.timer_rgb.Tick += new System.EventHandler(this.timer_rgb_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -70,6 +76,8 @@
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDoubleClick);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
+            this.MouseEnter += new System.EventHandler(this.Form1_MouseEnter);
+            this.MouseLeave += new System.EventHandler(this.Form1_MouseLeave);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
             this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
             this.ResumeLayout(false);
@@ -82,6 +90,7 @@
         private System.Windows.Forms.Timer timer_stopwatch;
         private System.Windows.Forms.Timer timer_countdown;
         private System.Windows.Forms.Timer timer_clock;
+        private System.Windows.Forms.Timer timer_rgb;
     }
 }
 
