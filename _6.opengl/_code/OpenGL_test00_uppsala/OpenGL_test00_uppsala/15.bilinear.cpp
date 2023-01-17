@@ -28,9 +28,9 @@ void gfxinit(void)
     /* Draw the rulings of u (constant u values) at values of 0.0, 0.1, 0.2, ..., 1.0. */
 
     glBegin(GL_LINES);
-    for (u = 0.0; u < 1.001; u += 0.1)
+    for (u = 0.0f; u < 1.001f; u += 0.1f)
     {
-        u1 = 1.0 - u;
+        u1 = 1.0f - u;
         x1 = u1 * x[0][0] + u * x[1][0];   y1 = u1 * y[0][0] + u * y[1][0];
         x2 = u1 * x[0][1] + u * x[1][1];   y2 = u1 * y[0][1] + u * y[1][1];
         glVertex2f(x1, y1);
@@ -39,9 +39,9 @@ void gfxinit(void)
 
     /* Draw the rulings of v (constant v values) at values of 0.0, 0.1, 0.2, ..., 1.0. */
 
-    for (v = 0.0; v < 1.001; v += 0.1)
+    for (v = 0.0f; v < 1.001f; v += 0.1f)
     {
-        v1 = 1.0 - v;
+        v1 = 1.0f - v;
         x1 = v1 * x[0][0] + v * x[0][1];   y1 = v1 * y[0][0] + v * y[0][1];
         x2 = v1 * x[1][0] + v * x[1][1];   y2 = v1 * y[1][0] + v * y[1][1];
         glVertex2f(x1, y1);

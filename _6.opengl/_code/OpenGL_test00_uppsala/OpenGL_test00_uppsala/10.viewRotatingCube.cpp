@@ -12,11 +12,14 @@ GLfloat vertices[][3] = { {-1.0,-1.0,-1.0}, {1.0,-1.0,-1.0}, {1.0,1.0,-1.0},
 	{-1.0,1.0,-1.0}, {-1.0,-1.0,1.0}, {1.0,-1.0,1.0}, {1.0,1.0,1.0}, {-1.0,1.0,1.0} };
 
 // Colors of the vertices.
-GLfloat colors[][3] = { {0.0,0.0,0.0}, {1.0,0.0,0.0}, {1.0,1.0,0.0}, {0.0,1.0,0.0},
-	{0.0,0.0,1.0}, {1.0,0.0,1.0}, {1.0,1.0,1.0}, {0.0,1.0,1.0} };
+GLfloat vertex_color[][3] = {						//沒用到 R B
+	{1.0,0.0,0.0}, {0.0,1.0,0.0}, {0.0,0.0,1.0},	//R G B
+	{1.0,1.0,0.0}, {0.0,1.0,1.0}, {1.0,0.0,1.0},	//黃 天青 桃紅
+	{0.0,0.0,0.0}, {1.0,1.0,1.0} };					//黑 白
 
 // Indices of the vertices to make up the six faces of the cube.
-GLubyte cubeIndices[24] = { 0,3,2,1, 2,3,7,6, 0,4,7,3, 1,2,6,5, 4,5,6,7, 0,1,5,4 };
+//							   下          後        左         右         上          前
+GLubyte cubeIndices[24] = { 0,3,2,1,   2,3,7,6,   0,4,7,3,   1,2,6,5,   4,5,6,7,    0,1,5,4 };
 
 GLfloat theta[] = { 0.0, 0.0, 0.0 };  /* initial rotation angles  */
 GLint axis = 2;                     /* initial axis of rotation */
@@ -29,7 +32,7 @@ void colorcube(void)
 	glEnableClientState(GL_COLOR_ARRAY);
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_FLOAT, 0, vertices);
-	glColorPointer(3, GL_FLOAT, 0, colors);
+	glColorPointer(3, GL_FLOAT, 0, vertex_color);
 }
 
 // This function is the display callback. It draws the cube from the current viewing point.

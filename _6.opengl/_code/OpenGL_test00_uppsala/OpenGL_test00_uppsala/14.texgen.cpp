@@ -78,6 +78,7 @@ GLbyte* gltLoadTGA(const char* szFileName, GLint* iWidth, GLint* iHeight, GLint*
     fopen_s(&pFile, szFileName, "rb");
     if (pFile == NULL)
     {
+        printf("XXXXXX 1 無此檔案\n");
         return NULL;
     }
 
@@ -93,6 +94,7 @@ GLbyte* gltLoadTGA(const char* szFileName, GLint* iWidth, GLint* iHeight, GLint*
     // or care about 8, 24, or 32 bit targa's.
     if (tgaHeader.bits != 8 && tgaHeader.bits != 24 && tgaHeader.bits != 32)
     {
+        printf("XXXXXX 2\n");
         return NULL;
     }
 
@@ -103,6 +105,7 @@ GLbyte* gltLoadTGA(const char* szFileName, GLint* iWidth, GLint* iHeight, GLint*
     pBits = (GLbyte*)malloc(lImageSize * sizeof(GLbyte));
     if (pBits == NULL)
     {
+        printf("XXXXXX 3\n");
         return NULL;
     }
 
@@ -111,6 +114,7 @@ GLbyte* gltLoadTGA(const char* szFileName, GLint* iWidth, GLint* iHeight, GLint*
     // weird formats that I don't want to recognize
     if (fread(pBits, lImageSize, 1, pFile) != 1)
     {
+        printf("XXXXXX 4\n");
         free(pBits);
         return NULL;
     }
@@ -205,7 +209,13 @@ void gfxinit(void)
     /* Code for the stone teapot. */
 
     glNewList(2, GL_COMPILE);
-    pBytes = (GLubyte*)gltLoadTGA("data/14.stone.tga", &iWidth, &iHeight, &iComponents, &eFormat);
+    pBytes = (GLubyte*)gltLoadTGA("data/14.brick.tga", &iWidth, &iHeight, &iComponents, &eFormat);
+    //printf("pBytes = %p\n", pBytes);
+    if (pBytes == NULL)
+    {
+        printf("開啟tga圖檔失敗\n");
+    }
+
     glTexImage2D(GL_TEXTURE_2D, 0, iComponents, iWidth, iHeight, 0, eFormat, GL_UNSIGNED_BYTE, pBytes);
     free(pBytes);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);

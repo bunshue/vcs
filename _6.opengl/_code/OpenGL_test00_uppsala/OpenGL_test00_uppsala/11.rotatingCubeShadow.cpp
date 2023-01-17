@@ -11,16 +11,32 @@ The perspective view is set in the reshape callback */
 GLfloat vertices[][3] = { {-1.0,1.0,-1.0}, {1.0,1.0,-1.0}, {1.0,3.0,-1.0},
 	{-1.0,3.0,-1.0}, {-1.0,1.0,1.0}, {1.0,1.0,1.0}, {1.0,3.0,1.0}, {-1.0,3.0,1.0} };
 
+/*
 // Colors of the vertices.
-GLfloat colors[][3] = { {0.0,0.0,0.0}, {1.0,0.0,0.0}, {1.0,1.0,0.0}, {0.0,1.0,0.0},
-	{0.0,0.0,1.0}, {1.0,0.0,1.0}, {1.0,1.0,1.0}, {0.0,1.0,1.0} };
+GLfloat vertex_color[][3] = {						//沒用到 R B
+	{1.0,0.0,0.0}, {0.0,1.0,0.0}, {0.0,0.0,1.0},	//R G B
+	{1.0,1.0,0.0}, {0.0,1.0,1.0}, {1.0,0.0,1.0},	//黃 天青 桃紅
+	{0.0,0.0,0.0}, {1.0,1.0,1.0}					//黑 白
+};
+*/
+
+// Colors of the vertices.
+GLfloat vertex_color[][3] = {
+	{0.0,0.0,0.0}, {1.0,0.0,0.0}, {1.0,1.0,0.0},	//黑 紅 黃
+	{0.0,1.0,0.0}, {0.0,0.0,1.0}, {1.0,0.0,1.0},	//綠 藍 桃紅
+	{1.0,1.0,1.0}, {0.0,1.0,1.0}					//白 天青
+};
 
 // Shadow colors.
-GLfloat shadowcolors[][3] = { {0.0,0.0,0.0}, {0.0,0.0,0.0}, {0.0,0.0,0.0}, {0.0,0.0,0.0},
-{0.0,0.0,0.0}, {0.0,0.0,0.0}, {0.0,0.0,0.0}, {0.0,0.0,0.0} };
+GLfloat shadowcolors[][3] = {
+	{0.0,0.0,0.0}, {0.0,0.0,0.0}, {0.0,0.0,0.0},
+	{0.0,0.0,0.0}, {0.0,0.0,0.0}, {0.0,0.0,0.0},
+	{0.0,0.0,0.0}, {0.0,0.0,0.0}
+};
 
 // Indices of the vertices to make up the six faces of the cube.
-GLubyte cubeIndices[24] = { 0,3,2,1, 2,3,7,6, 0,4,7,3, 1,2,6,5, 4,5,6,7, 0,1,5,4 };
+//							   下          後        左         右         上          前
+GLubyte cubeIndices[24] = { 0,3,2,1,   2,3,7,6,   0,4,7,3,   1,2,6,5,   4,5,6,7,    0,1,5,4 };
 
 GLfloat theta[] = { 0.0, 0.0, 0.0 };   /* initial rotation angles      */
 GLint axis = 1;                      /* initial axis of rotation     */
@@ -68,7 +84,7 @@ void display(void)
 
 	/* Draw the cube */
 
-	glColorPointer(3, GL_FLOAT, 0, colors);
+	glColorPointer(3, GL_FLOAT, 0, vertex_color);
 	glDrawElements(GL_QUADS, 24, GL_UNSIGNED_BYTE, cubeIndices);
 
 	/* Draw the shadow */
