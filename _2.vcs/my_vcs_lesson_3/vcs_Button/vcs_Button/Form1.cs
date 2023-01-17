@@ -164,11 +164,11 @@ namespace vcs_Button
             btn_word_23.Text = "";
             btn_word_24.Text = "";
 
-            btn_word_20.BackgroundImage = new Bitmap(@"C:\______test_files\__pic\_臨江仙\26幾.jpeg");
-            btn_word_21.BackgroundImage = new Bitmap(@"C:\______test_files\__pic\_臨江仙\27度.jpeg");
-            btn_word_22.BackgroundImage = new Bitmap(@"C:\______test_files\__pic\_臨江仙\28夕.jpeg");
-            btn_word_23.BackgroundImage = new Bitmap(@"C:\______test_files\__pic\_臨江仙\29陽.jpeg");
-            btn_word_24.BackgroundImage = new Bitmap(@"C:\______test_files\__pic\_臨江仙\30紅.jpeg");
+            btn_word_20.BackgroundImage = new Bitmap(@"C:\______test_files\__pic\_書畫字圖\_臨江仙\26幾.jpeg");
+            btn_word_21.BackgroundImage = new Bitmap(@"C:\______test_files\__pic\_書畫字圖\_臨江仙\27度.jpeg");
+            btn_word_22.BackgroundImage = new Bitmap(@"C:\______test_files\__pic\_書畫字圖\_臨江仙\28夕.jpeg");
+            btn_word_23.BackgroundImage = new Bitmap(@"C:\______test_files\__pic\_書畫字圖\_臨江仙\29陽.jpeg");
+            btn_word_24.BackgroundImage = new Bitmap(@"C:\______test_files\__pic\_書畫字圖\_臨江仙\30紅.jpeg");
         }
 
         private void bt_exit_Click(object sender, EventArgs e)

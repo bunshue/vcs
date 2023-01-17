@@ -20,161 +20,6 @@ namespace vcs_Mix03_draw_image
 {
     public partial class Form1 : Form
     {
-        List<Point> pattern1a = new List<Point>
-            {
-            new Point(-15, 0),
-            new Point(-8, 0),
-            new Point(-8, 1),
-            new Point(-7, 1),
-            new Point(-6, 1),
-            new Point(-6, 0),
-            new Point(-7, 0),
-            new Point(-7, 1),
-            new Point(-7, 2),
-            new Point(-6, 2),
-            new Point(-5, 2),
-            new Point(-5, 1),
-            new Point(-5, 0),
-            new Point(-4, 0),
-            new Point(-3, 0),
-            new Point(-3, 1),
-            new Point(-3, 2),
-            new Point(-3, 3),
-            new Point(-2, 3),
-            new Point(-1, 3),
-            new Point(0, 3),
-            new Point(0, 4),
-            new Point(0, 5),
-            new Point(-1, 5),
-            new Point(-2, 5),
-            new Point(-2, 6),
-            new Point(-2, 7),
-            new Point(-1, 7),
-            new Point(0, 7),
-            new Point(0, 6),
-            new Point(-1, 6),
-            new Point(-1, 7),
-            new Point(-1, 8),
-            new Point(0, 8),
-            new Point(0, 15)
-            };
-
-        List<Point> pattern1b = new List<Point>
-            {
-            new Point(0, 0),
-            new Point(-1, 0),
-            new Point(-2, 0),
-            new Point(-2, 1),
-            new Point(-2, 2),
-            new Point(-2, 3),
-            new Point(-2, 4),
-            new Point(-1, 4),
-            new Point(-1, 3),
-            new Point(-1, 2),
-            new Point(-1, 1),
-            new Point(-2, 1),
-            new Point(-3, 1),
-            new Point(-4, 1),
-            new Point(-4, 2),
-            new Point(-3, 2),
-            new Point(-2, 2),
-            new Point(-1, 2),
-            new Point(-0, 2),
-            new Point(-0, 1),
-            new Point(-0, 0),
-            new Point(-1, 0)
-            };
-
-        List<Point> pattern2 = new List<Point>
-            {
-            new Point(-15, 0),
-            new Point(-3, 0),
-            new Point(-2, 0),
-            new Point(-2, 1),
-            new Point(-2, 2),
-            new Point(-2, 3),
-            new Point(-1, 3),
-            new Point(-1, 2),
-            new Point(-1, 1),
-            new Point(-1, 0),
-            new Point(-0, 0),
-            new Point(-0, 1),
-            new Point(-1, 1),
-            new Point(-2, 1),
-            new Point(-3, 1),
-            new Point(-3, 2),
-            new Point(-2, 2),
-            new Point(-1, 2),
-            new Point(-0, 2),
-            new Point(-0, 3),
-            new Point(-0, 15)
-            };
-
-        List<Point> pattern3a = new List<Point>
-            {
-            new Point(-15, 0),
-            new Point(-6, 0),
-            new Point(-5, 0),
-            new Point(-4, 0),
-            new Point(-3, 0),
-            new Point(-3, 1),
-            new Point(-3, 2),
-            new Point(-2, 2),
-            new Point(-1, 2),
-            new Point(0, 2),
-            new Point(0, 1),
-            new Point(0, 0),
-            new Point(-1, 0),
-            new Point(-2, 0),
-            new Point(-2, 1),
-            new Point(-2, 2),
-            new Point(-2, 3),
-            new Point(-1, 3),
-            new Point(0, 3),
-            new Point(0, 4),
-            new Point(0, 5),
-            new Point(0, 6),
-            new Point(0, 15)
-            };
-
-        List<Point> pattern3b = new List<Point>
-            {
-            new Point(-15, 1),
-            new Point(-6, 1),
-            new Point(-5, 1),
-            new Point(-4, 1),
-            new Point(-3, 1),
-            new Point(-2, 1),
-            new Point(-1, 1),
-            new Point(-1, 2),
-            new Point(-1, 3),
-            new Point(-1, 4),
-            new Point(-1, 5),
-            new Point(-1, 6),
-            new Point(-1, 15)
-            };
-
-        List<Point> pattern4a = new List<Point>
-            {
-            new Point(-15, 1),
-            new Point(-1, 6),
-            new Point(-1, 15)
-            };
-
-        List<Point> pattern4b = new List<Point>
-            {
-            new Point(-15, 1),
-            new Point(-1, 6),
-            new Point(-1, 15)
-            };
-
-        List<Point> pattern4c = new List<Point>
-            {
-            new Point(-15, 1),
-            new Point(-1, 6),
-            new Point(-1, 15)
-            };
-
         public Form1()
         {
             InitializeComponent();
@@ -1154,226 +999,21 @@ namespace vcs_Mix03_draw_image
         private void button16_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //畫邊框1
-            int i;
-           Point corner = new Point(15, 0); //最右上角的點
-            Pen bluePen = new Pen(Color.Blue, 8);
-            Pen redPen = new Pen(Color.Red, 8);
-
-            List<Point> points1 = new List<Point>();
-            points1.Clear();
-            for (i = 0; i < pattern3a.Count; i++)
-            {
-                points1.Add(new Point(corner.X + pattern3a[i].X, corner.Y + pattern3a[i].Y));
-            }
-
-            List<Point> points2 = new List<Point>();
-            points2.Clear();
-            for (i = 0; i < pattern3b.Count; i++)
-            {
-                points2.Add(new Point(corner.X + pattern3b[i].X, corner.Y + pattern3b[i].Y));
-            }
-
-            int W = pictureBox1.Width;
-            int H = pictureBox1.Height;
-
-            Bitmap bitmap1 = new Bitmap(W, H);
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
-
-            int step = 20;
-            int offset_x = 100;
-            int offset_y = 100;
-
-            List<Point> points_draw = new List<Point>();
-            points_draw.Clear();
-            for (i = 0; i < points1.Count; i++)
-            {
-                points_draw.Add(new Point(offset_x + points1[i].X * step, offset_y + points1[i].Y * step));
-            }
-            g.DrawLines(bluePen, points_draw.ToArray());  //畫直線
-
-            points_draw.Clear();
-            for (i = 0; i < points2.Count; i++)
-            {
-                points_draw.Add(new Point(offset_x + points2[i].X * step, offset_y + points2[i].Y * step));
-            }
-            g.DrawLines(redPen, points_draw.ToArray());  //畫直線
-
-            pictureBox1.Image = bitmap1;
-            g.Dispose();
         }
 
         private void button17_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //畫邊框2
-            int i;
-            Point corner = new Point(15, 0); //最右上角的點
-
-            int x_st = 0;
-            int y_st = 0;
-
-            Pen bluePen = new Pen(Color.Blue, 8);
-            List<Point> points1 = new List<Point>();
-            points1.Clear();
-            points1.Add(new Point(0, 0));
-            points1.Add(new Point(20, 0));
-            points1.Add(new Point(20, 5));
-            points1.Add(new Point(15, 5));
-
-            x_st = 22;
-            y_st = 0;
-            int dd = 5;
-
-            List<Point> points2 = new List<Point>();
-            points2.Clear();
-            points2.Add(new Point(x_st, y_st));
-            points2.Add(new Point(x_st + dd, y_st));
-            points2.Add(new Point(x_st + dd, y_st + dd));
-            points2.Add(new Point(x_st, y_st + dd));
-            points2.Add(new Point(x_st, y_st));
-
-            List<Point> points3 = new List<Point>();
-            points3.Clear();
-            points3.Add(new Point(x_st, y_st + dd + 2 + 5));
-            points3.Add(new Point(x_st, y_st + dd + 2));
-            points3.Add(new Point(x_st + dd, y_st + dd + 2));
-            points3.Add(new Point(x_st + dd, y_st + dd + 2 + 15));
-
-            int W = pictureBox1.Width;
-            int H = pictureBox1.Height;
-
-            Bitmap bitmap1 = new Bitmap(W, H);
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
-
-            int step = 20;
-            int offset_x = 100;
-            int offset_y = 100;
-
-            List<Point> points_draw = new List<Point>();
-            points_draw.Clear();
-            for (i = 0; i < points1.Count; i++)
-            {
-                points_draw.Add(new Point(offset_x + points1[i].X * step, offset_y + points1[i].Y * step));
-            }
-            g.DrawLines(bluePen, points_draw.ToArray());  //畫直線
-
-            points_draw.Clear();
-            for (i = 0; i < points2.Count; i++)
-            {
-                points_draw.Add(new Point(offset_x + points2[i].X * step, offset_y + points2[i].Y * step));
-            }
-            g.DrawLines(bluePen, points_draw.ToArray());  //畫直線
-
-
-            points_draw.Clear();
-            for (i = 0; i < points3.Count; i++)
-            {
-                points_draw.Add(new Point(offset_x + points3[i].X * step, offset_y + points3[i].Y * step));
-            }
-            g.DrawLines(bluePen, points_draw.ToArray());  //畫直線
-
-            pictureBox1.Image = bitmap1;
-
-            g.Dispose();
         }
 
         private void button18_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //畫邊框3
-            int i;
-            Point corner = new Point(15, 0); //最右上角的點
-            Pen bluePen = new Pen(Color.Blue, 8);
-            Pen redPen = new Pen(Color.Red, 8);
-            List<Point> points1 = new List<Point>();
-            points1.Clear();
-            for (i = 0; i < pattern1a.Count; i++)
-            {
-                points1.Add(new Point(corner.X + pattern1a[i].X, corner.Y + pattern1a[i].Y));
-            }
-
-            List<Point> points2 = new List<Point>();
-            points2.Clear();
-            for (i = 0; i < pattern1b.Count; i++)
-            {
-                points2.Add(new Point(corner.X + pattern1b[i].X, corner.Y + pattern1b[i].Y));
-            }
-
-            int W = pictureBox1.Width;
-            int H = pictureBox1.Height;
-
-            Bitmap bitmap1 = new Bitmap(W, H);
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
-
-            int step = 20;
-            int offset_x = 100;
-            int offset_y = 100;
-
-            List<Point> points_draw = new List<Point>();
-            points_draw.Clear();
-            for (i = 0; i < points1.Count; i++)
-            {
-                points_draw.Add(new Point(offset_x + points1[i].X * step, offset_y + points1[i].Y * step));
-            }
-            g.DrawLines(bluePen, points_draw.ToArray());  //畫直線
-
-            points_draw.Clear();
-            for (i = 0; i < points2.Count; i++)
-            {
-                points_draw.Add(new Point(offset_x + points2[i].X * step, offset_y + points2[i].Y * step));
-            }
-            g.DrawLines(redPen, points_draw.ToArray());  //畫直線
-
-            pictureBox1.Image = bitmap1;
-            g.Dispose();
         }
 
         private void button19_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //畫邊框4
-            int i;
-            Point corner = new Point(15, 0); //最右上角的點
-            Pen bluePen = new Pen(Color.Blue, 8);
-            Pen redPen = new Pen(Color.Red, 8);
-            List<Point> points1 = new List<Point>();
-            points1.Clear();
-            for (i = 0; i < pattern2.Count; i++)
-            {
-                points1.Add(new Point(corner.X + pattern2[i].X, corner.Y + pattern2[i].Y));
-            }
-
-            int W = pictureBox1.Width;
-            int H = pictureBox1.Height;
-
-            Bitmap bitmap1 = new Bitmap(W, H);
-            Graphics g = Graphics.FromImage(bitmap1);
-            g.Clear(Color.White);
-
-            int step = 20;
-            int offset_x = 100;
-            int offset_y = 100;
-
-            List<Point> points_draw = new List<Point>();
-            points_draw.Clear();
-            for (i = 0; i < points1.Count; i++)
-            {
-                points_draw.Add(new Point(offset_x + points1[i].X * step, offset_y + points1[i].Y * step));
-            }
-            g.DrawLines(bluePen, points_draw.ToArray());  //畫直線
-
-
-            pictureBox1.Image = bitmap1;
-
-            g.Dispose();
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -1575,7 +1215,7 @@ namespace vcs_Mix03_draw_image
         {
             show_button_text(sender);
 
-            string foldername = @"C:\______test_files\__pic\_peony1";
+            string foldername = @"C:\______test_files\__pic\_書畫字圖\_peony1";
 
             filenames.Clear();
 
@@ -1631,7 +1271,7 @@ namespace vcs_Mix03_draw_image
             show_button_text(sender);
             //取得一層jpg檔
 
-            string foldername = @"C:\______test_files\__pic\_peony1";
+            string foldername = @"C:\______test_files\__pic\_書畫字圖\_peony1";
             string[] filenames = Directory.GetFiles(foldername, "*.jpg");
 
 

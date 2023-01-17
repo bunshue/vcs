@@ -875,7 +875,7 @@ namespace vcs_DynamicAddRemoveControls1
         private void DynamicGenerateButton10()
         {
 
-            string foldername = @"C:\______test_files\__pic\_臨江仙";
+            string foldername = @"C:\______test_files\__pic\_書畫字圖\_臨江仙";
 
             int x_st = 900;
             int y_st = 350;

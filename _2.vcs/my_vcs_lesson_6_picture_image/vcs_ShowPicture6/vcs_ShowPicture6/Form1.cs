@@ -13,7 +13,7 @@ namespace vcs_ShowPicture6
 {
     public partial class Form1 : Form
     {
-                            string foldername = @"C:\______test_files\__pic\_peony1";
+                            string foldername = @"C:\______test_files\__pic\_書畫字圖\_peony1";
 
         List<String> filenames = new List<String>();
 

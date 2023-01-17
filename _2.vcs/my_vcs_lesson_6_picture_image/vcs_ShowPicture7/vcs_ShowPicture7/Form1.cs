@@ -15,7 +15,7 @@ namespace vcs_ShowPicture7
     {
         bool debug_mode = false;
 
-        //string foldername = @"C:\______test_files\__pic\_peony1";
+        //string foldername = @"C:\______test_files\__pic\_書畫字圖\_peony1";
         string foldername = @"C:\______test_files\__pic\_MU";
 
         // The list of files we will pick from.

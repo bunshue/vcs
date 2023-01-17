@@ -981,6 +981,7 @@
             this.button66.Name = "button66";
             this.button66.Size = new System.Drawing.Size(135, 45);
             this.button66.TabIndex = 100;
+            this.button66.Text = "畫邊框1";
             this.button66.UseVisualStyleBackColor = true;
             this.button66.Click += new System.EventHandler(this.button66_Click);
             // 
@@ -991,6 +992,7 @@
             this.button67.Name = "button67";
             this.button67.Size = new System.Drawing.Size(135, 45);
             this.button67.TabIndex = 101;
+            this.button67.Text = "畫邊框2";
             this.button67.UseVisualStyleBackColor = true;
             this.button67.Click += new System.EventHandler(this.button67_Click);
             // 
@@ -1001,6 +1003,7 @@
             this.button68.Name = "button68";
             this.button68.Size = new System.Drawing.Size(135, 45);
             this.button68.TabIndex = 102;
+            this.button68.Text = "畫邊框3";
             this.button68.UseVisualStyleBackColor = true;
             this.button68.Click += new System.EventHandler(this.button68_Click);
             // 
@@ -1011,6 +1014,7 @@
             this.button69.Name = "button69";
             this.button69.Size = new System.Drawing.Size(135, 45);
             this.button69.TabIndex = 103;
+            this.button69.Text = "畫邊框4";
             this.button69.UseVisualStyleBackColor = true;
             this.button69.Click += new System.EventHandler(this.button69_Click);
             // 

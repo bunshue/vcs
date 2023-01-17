@@ -143,7 +143,7 @@ namespace vcs_PictureSlideShow6
                 bool flag = false;
                 //string folder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bgImages");
                 //string folder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "bgImages");
-                string foldername = @"C:\______test_files\__pic\_peony1";
+                string foldername = @"C:\______test_files\__pic\_書畫字圖\_peony1";
 
                 DirectoryInfo di = new DirectoryInfo(foldername);
                 FileInfo[] fi = di.GetFiles();
