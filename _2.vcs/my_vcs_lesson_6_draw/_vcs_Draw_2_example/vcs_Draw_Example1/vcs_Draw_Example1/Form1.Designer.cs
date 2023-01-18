@@ -1035,6 +1035,7 @@
             this.button71.Name = "button71";
             this.button71.Size = new System.Drawing.Size(135, 45);
             this.button71.TabIndex = 105;
+            this.button71.Text = "畫List";
             this.button71.UseVisualStyleBackColor = true;
             this.button71.Click += new System.EventHandler(this.button71_Click);
             // 

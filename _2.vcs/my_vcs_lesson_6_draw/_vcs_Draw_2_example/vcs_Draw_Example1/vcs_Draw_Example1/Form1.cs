@@ -7471,6 +7471,90 @@ namespace vcs_Draw_Example1
             new Point(0, 15)
             };
 
+        List<Point> pattern_recursive = new List<Point>
+            {
+            new Point(0, 0),
+            new Point(1, 0),
+            new Point(1, -1),
+            new Point(0, -1),
+            new Point(-1, -1),
+            new Point(-1, 0),
+            new Point(-1, 1),
+            new Point(0, 1),
+            new Point(1, 1),
+            new Point(2, 1),
+            new Point(2, 0),
+            new Point(2, -1),
+            new Point(2, -2),
+            new Point(1, -2),
+            new Point(0, -2),
+            new Point(-1, -2),
+            new Point(-2, -2),
+            new Point(-2, -1),
+            new Point(-2, 0),
+            new Point(-2, 1),
+            new Point(-2, 2),
+            new Point(-1, 2),
+            new Point(0, 2),
+            new Point(1, 2),
+            new Point(2, 2),
+            new Point(3, 2),
+            new Point(3, 1),
+            new Point(3, 0),
+            new Point(3, -1),
+            new Point(3, -2),
+            new Point(3, -3),
+            new Point(2, -3),
+            new Point(1, -3),
+            new Point(0, -3),
+            new Point(-1, -3),
+            new Point(-2, -3),
+            new Point(-3, -3),
+            new Point(-3, -2),
+            new Point(-3, -1),
+            new Point(-3, 0),
+            new Point(-3, 1),
+            new Point(-3, 2),
+            new Point(-3, 3),
+            new Point(-2, 3),
+            new Point(-1, 3),
+            new Point(0, 3),
+            new Point(1, 3),
+            new Point(2, 3),
+            new Point(3, 3),
+            new Point(4, 3),
+            new Point(4, 2),
+            new Point(4, 1),
+            new Point(4, 0),
+            new Point(4, -1),
+            new Point(4, -2),
+            new Point(4, -3),
+            new Point(4, -4),
+            new Point(3, -4),
+            new Point(2, -4),
+            new Point(1, -4),
+            new Point(0, -4),
+            new Point(-1, -4),
+            new Point(-2, -4),
+            new Point(-3, -4),
+            new Point(-4, -4),
+            new Point(-4, -3),
+            new Point(-4, -2),
+            new Point(-4, -1),
+            new Point(-4, 0),
+            new Point(-4, 1),
+            new Point(-4, 2),
+            new Point(-4, 3),
+            new Point(-4, 4),
+
+
+
+
+
+            new Point(15, 0)
+            };
+
+
         private void button66_Click(object sender, EventArgs e)
         {
             //畫邊框1
@@ -7713,6 +7797,47 @@ namespace vcs_Draw_Example1
 
         private void button71_Click(object sender, EventArgs e)
         {
+            //畫邊框2
+
+            int i;
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+            Bitmap bitmap1 = new Bitmap(W, H);
+            Graphics g = Graphics.FromImage(bitmap1);
+            Pen bluePen = new Pen(Color.Blue, 8);
+            Pen redPen = new Pen(Color.Red, 8);
+
+            int step = 30;
+            int offset_x = 100;
+            int offset_y = 100;
+
+            Point corner = new Point(8, 6); //最右上角的點
+            List<Point> points_draw1 = new List<Point>();
+            List<Point> points_draw2 = new List<Point>();
+            int x1 = 0;
+            int y1 = 0;
+            int x2 = 0;
+            int y2 = 0;
+
+            for (i = 0; i < pattern_recursive.Count; i++)
+            {
+                x1 = corner.X + pattern_recursive[i].X;
+                y1 = corner.Y + pattern_recursive[i].Y;
+
+                x2 = offset_x + x1 * step;
+                y2 = offset_y + y1 * step;
+
+                points_draw1.Add(new Point(x2, y2));
+            }
+            if (points_draw1.Count > 1)
+            {
+                g.DrawLines(bluePen, points_draw1.ToArray());  //畫直線
+            }
+
+            pictureBox1.Image = bitmap1;
+
+            g.Dispose();
+
 
         }
 
