@@ -13,6 +13,10 @@ namespace vcs_Draw_2D_Matrix
     {
         private List<Point> Points = new List<Point>();
 
+        Graphics g;
+        int W = 0;
+        int H = 0;
+
         public Form1()
         {
             InitializeComponent();
@@ -512,30 +516,10 @@ namespace vcs_Draw_2D_Matrix
         {0,1,0,0,0,0,0,0,1,1}
         };
 
-        void draw_2d_pattern(int[,] pattern)
+        void draw_2d_pattern(int[,] pattern, int offset_x, int offset_y, int brick_size)
         {
             //richTextBox1.Text += "二維陣列內容\n";
             //PrintArray(pattern);
-
-            Graphics g;
-            Pen p;
-            SolidBrush sb;
-            Bitmap bitmap1;
-
-            int W = pictureBox1.ClientSize.Width;
-            int H = pictureBox1.ClientSize.Height;
-
-            //----開新的Bitmap----
-            bitmap1 = new Bitmap(W, H);
-            //----使用上面的Bitmap畫圖----
-            g = Graphics.FromImage(bitmap1);
-
-            p = new Pen(Color.Red, 10);     // 設定畫筆為紅色、粗細為 10 點。
-            sb = new SolidBrush(Color.Blue);
-            g.Clear(Color.White);
-            pictureBox1.Image = bitmap1;
-
-            g.Clear(Color.White);
 
             int ROW = pattern.GetUpperBound(0) + 1;//獲取指定維度的上限，在 上一個1就是列數
             int COL = pattern.GetLength(1);//獲取指定維中的元 個數，這裡也就是列數了。（1表示的是第二維，0是第一維）
@@ -546,7 +530,6 @@ namespace vcs_Draw_2D_Matrix
             richTextBox1.Text += "length = " + length.ToString() + "\n";
             */
 
-            int dd = 40;
             int x_st = 0;
             int y_st = 0;
             SolidBrush redBrush = new SolidBrush(Color.Red);
@@ -560,34 +543,45 @@ namespace vcs_Draw_2D_Matrix
 
                     //richTextBox1.Text += "(" + c.ToString() + ", " + r.ToString() + ")\t";
                     //g.DrawRectangle(Pens.Red, 100, 100, 200, 200);
-                    x_st = c * dd;
-                    y_st = r * dd;
+                    x_st = offset_x + c * brick_size;
+                    y_st = offset_y + r * brick_size;
                     if (pattern[r, c] == 1)
                     {
-                        g.FillRectangle(redBrush, x_st, y_st, dd, dd);
+                        g.FillRectangle(redBrush, x_st, y_st, brick_size, brick_size);
                     }
                     else
                     {
-                        g.FillRectangle(blackBrush, x_st, y_st, dd, dd);
+                        g.FillRectangle(blackBrush, x_st, y_st, brick_size, brick_size);
                     }
                 }
                 //richTextBox1.Text += "\n";
             }
             //richTextBox1.Text += "\n";
-
-            pictureBox1.Image = bitmap1;
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //二維陣列的宣告與使用
-            //int[,] pattern0 = new int[3, 8];    //Row = 3, Column = 8
+            W = pictureBox1.ClientSize.Width;
+            H = pictureBox1.ClientSize.Height;
 
-            int[,] pattern;
+            Bitmap bitmap1 = new Bitmap(W, H);
+            g = Graphics.FromImage(bitmap1);
 
-            pattern = pattern0;
+            g.Clear(Color.White);
+            pictureBox1.Image = bitmap1;
 
-            draw_2d_pattern(pattern);
+            int x_st = 20;
+            int y_st = 20;
+            int dx = 170;
+            int dy = 230;
+            int brick_size = 15;
+            draw_2d_pattern(pattern0, x_st + dx * 0, y_st + dy * 0, brick_size);
+            draw_2d_pattern(pattern1, x_st + dx * 1, y_st + dy * 0, brick_size);
+            draw_2d_pattern(pattern2, x_st + dx * 2, y_st + dy * 0, brick_size);
+            draw_2d_pattern(pattern3, x_st + dx * 3, y_st + dy * 0, brick_size);
+            draw_2d_pattern(pattern4, x_st + dx * 0, y_st + dy * 1, brick_size);
+            draw_2d_pattern(pattern5, x_st + dx * 1, y_st + dy * 1, brick_size);
+            draw_2d_pattern(pattern6, x_st + dx * 2, y_st + dy * 1, brick_size);
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -988,25 +982,6 @@ namespace vcs_Draw_2D_Matrix
 
         private void button5_Click(object sender, EventArgs e)
         {
-            timer_running_man.Enabled = !timer_running_man.Enabled;
-        }
-
-        int cnt = 0;
-        private void timer_running_man_Tick(object sender, EventArgs e)
-        {
-            switch (cnt % 7)
-            {
-                case 0: draw_2d_pattern(pattern0); ; break;
-                case 1: draw_2d_pattern(pattern1); ; break;
-                case 2: draw_2d_pattern(pattern2); ; break;
-                case 3: draw_2d_pattern(pattern3); ; break;
-                case 4: draw_2d_pattern(pattern4); ; break;
-                case 5: draw_2d_pattern(pattern5); ; break;
-                case 6: draw_2d_pattern(pattern6); ; break;
-
-                default: richTextBox1.Text += "XXXXXXXX"; break;
-            }
-            cnt++;
         }
 
         private void PrintArray<T>(T[,] arr)
@@ -2009,6 +1984,5 @@ namespace vcs_Draw_2D_Matrix
             awb_r[223] = 1245; awb_b[223] = 1948;//right_left_point_cnt[223]=0;down_up_point_cnt[223]=0;awb_block[223]=32;	//for vcs2b
             awb_r[224] = 1247; awb_b[224] = 1896;//right_left_point_cnt[224]=0;down_up_point_cnt[224]=0;awb_block[224]=32;	//for vcs2b
         }
-
     }
 }

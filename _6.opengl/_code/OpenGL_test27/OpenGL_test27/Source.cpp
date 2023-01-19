@@ -55,14 +55,16 @@ void motion(int x, int y)
 
 int main(int argc, char** argv)
 {
-    const char* windowName = "OpenGL測試";
+    const char* windowName = "全螢幕範例";
     const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
     common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard);
 
     glutMouseFunc(mouse);       //設定callback function
     glutMotionFunc(motion);     //設定callback function
 
-    printf("\n空白範例\n");
+    printf("\n全螢幕範例\n");
+
+    glutFullScreen();   //全螢幕顯示
 
     glutMainLoop();	//開始主循環繪製
 
