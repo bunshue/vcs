@@ -19,6 +19,7 @@ void gfxinit()
     glEnable(GL_MAP1_VERTEX_3);
 
     /* Generate the display list for the points. */
+    //在 List 1 製作第1張圖
     glNewList(1, GL_COMPILE);
     glColor3d(1.0, 0.0, 0.0);
     glPointSize(4.0);
@@ -31,7 +32,7 @@ void gfxinit()
     glEndList();
 
     /* Generate the display list for the curve. */
-
+    //在 List 2 製作第1張圖
     glNewList(2, GL_COMPILE);
     glColor3d(0.0, 0.0, 0.0);
     for (j = 0; j < number_of_points; j += 3)
@@ -60,8 +61,9 @@ void reshape(int width, int height)
 void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
-    glCallList(1);
-    glCallList(2);
+
+    glCallList(1);  //顯示第1張圖
+    glCallList(2);  //顯示第2張圖
 
     glFlush();  // 執行繪圖命令
 }
@@ -69,11 +71,13 @@ void display(void)
 /* This function gets the input data for the program to process. */
 void interact(void)
 {
+    printf("讀取資料 ST\n");
+
     ifstream points_file;
 
     /* Open data file. */
     points_file.open("data/17.points.dat", ios::in);
-    if (!points_file.is_open())
+    if (points_file.is_open() == false)
     {
         cerr << "Data file 'points.dat' not found." << endl;
         exit(EXIT_FAILURE);
@@ -117,6 +121,7 @@ void interact(void)
     points[number_of_points + 1][0] = points[number_of_points][0] = points[number_of_points - 1][0];
     points[number_of_points + 1][1] = points[number_of_points][1] = points[number_of_points - 1][1];
     points[number_of_points + 1][2] = points[number_of_points][2] = 0.0;
+    printf("讀取資料 SP, 共取得 %d 點資料\n", number_of_points);
 }
 
 int main(int argc, char** argv)

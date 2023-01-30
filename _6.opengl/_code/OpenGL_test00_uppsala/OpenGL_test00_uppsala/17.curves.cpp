@@ -93,22 +93,23 @@ void reshape(int width, int height)
 /* This function gets the input data for the program to process. */
 void interact(void)
 {
+    printf("讀取資料 ST\n");
+
     ifstream points_file;
 
     /* Open data file. */
 
     points_file.open("data/17.points.dat", ios::in);
-    if (!points_file.is_open())
+    if (points_file.is_open() == false)
     {
         cerr << "Data file 'points.dat' not found." << endl;
         exit(EXIT_FAILURE);
     }
 
     /* Read file into arrays, determining maximum and minimum values. */
-
     maxx = maxy = -1.0e38;
     minx = miny = 1.0e38;
-    while (points_file >> px[number_of_points] >> py[number_of_points])
+    while (points_file >> px[number_of_points] >> py[number_of_points]) //C++之讀取檔案資料
     {
         if (px[number_of_points] < minx)
         {
@@ -145,17 +146,17 @@ void interact(void)
     {
         markd = (maxy - miny) / number_of_points * MARK_FACTOR;
     }
+    printf("讀取資料 SP, 共取得 %d 點資料\n", number_of_points);
 }
 
 /* This routine makes a mark for each data point in the arrays. */
 void mark_points()
 {
-    int i;
-
+    //在 List MARK_LIST 製作第 MARK_LIST 張圖, MARK_LIST = 1
     glNewList(MARK_LIST, GL_COMPILE);
     glColor3f(1.0, 0.0, 0.0);  /* Draw the marks in red. */
     glBegin(GL_LINES);
-    for (i = 0; i < number_of_points; i++)
+    for (int i = 0; i < number_of_points; i++)
     {
         glVertex2d(px[i] - markd, py[i] - markd);
         glVertex2d(px[i] + markd, py[i] + markd);
@@ -190,6 +191,7 @@ void Lagrange_interpolate()
     double t, x, y, b1, b2, b3, b4;
     char title[] = "Lagrange Interpolation";
 
+    //在 List LAGRANGE_LIST 製作第 LAGRANGE_LIST 張圖, LAGRANGE_LIST = 2
     glNewList(LAGRANGE_LIST, GL_COMPILE);
     glColor3f(0.0, 0.0, 0.0);  /* Draw curve in black. */
     glBegin(GL_LINE_STRIP);
@@ -239,6 +241,7 @@ void Lagrange_interpolate()
 
     /* Render the title into a display list. */
 
+    //在 List LAGRANGE_TITLE_LIST 製作第 LAGRANGE_TITLE_LIST 張圖, LAGRANGE_TITLE_LIST = 5
     glNewList(LAGRANGE_TITLE_LIST, GL_COMPILE);
     glColor3f(0.0, 0.0, 0.0);  /* Draw title in black. */
     for (i = 0; i < (int)strlen(title); i++)
@@ -273,6 +276,7 @@ void Bezier()
     }
 
     /* Construct Bezier curves for each grouping of four points. */
+    //在 List BEZIER_LIST 製作第 BEZIER_LIST 張圖, BEZIER_LIST = 3
     glNewList(BEZIER_LIST, GL_COMPILE);
     glColor3f(0.0, 0.0, 0.0);  /* Draw curve in black. */
     glBegin(GL_LINE_STRIP);
@@ -298,6 +302,7 @@ void Bezier()
     glEndList();
 
     /* Render the title into a display list. */
+    //在 List BEZIER_TITLE_LIST 製作第 BEZIER_TITLE_LIST 張圖, BEZIER_TITLE_LIST = 6
     glNewList(BEZIER_TITLE_LIST, GL_COMPILE);
     glColor3f(0.0, 0.0, 0.0);  /* Draw title in black. */
     for (i = 0; i < (int)strlen(title); i++)
@@ -371,6 +376,7 @@ void spline()
 
     /* Compute the values to plot. */
 
+    //在 List SPLINE_LIST 製作第 SPLINE_LIST 張圖, SPLINE_LIST = 4
     glNewList(SPLINE_LIST, GL_COMPILE);
     glColor3f(0.0, 0.0, 0.0);  /* Draw curve in black. */
     glBegin(GL_LINE_STRIP);
@@ -393,6 +399,7 @@ void spline()
 
     /* Render the title into a display list. */
 
+    //在 List SPLINE_TITLE_LIST 製作第 SPLINE_TITLE_LIST 張圖, SPLINE_TITLE_LIST = 7
     glNewList(SPLINE_TITLE_LIST, GL_COMPILE);
     glColor3f(0.0, 0.0, 0.0);  /* Draw title in black. */
     for (i = 0; i < (int)strlen(title); i++)
@@ -419,7 +426,7 @@ int main(int argc, char** argv)
 {
     /* Get input data. */
     interact();
-    
+
     const char* windowName = "Curve Fitting";
     const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
     common_setup(argc, argv, windowName, message, 0, WindowSizeX, WindowSizeY, 1100, 200, display, reshape, keyboard0);

@@ -118,11 +118,12 @@ void special(int key, int /*x*/, int /*y*/)
 /* This function gets the input data for the program to process. */
 void interact(void)
 {
-    ifstream patches_file, vertices_file;
-    int i, j;
+    ifstream patches_file;
+    ifstream vertices_file;
+    int i;
+    int j;
 
     /* Open data files. */
-
     printf("開啟檔案: data/19.teapot.patches\n");
     patches_file.open("data/19.teapot.patches", ios::in);
     if (patches_file.fail())
@@ -141,20 +142,17 @@ void interact(void)
     }
 
     /* Read files into arrays. */
-
     for (i = 1; i <= VERTICES; i++)
     {
-        vertices_file >> points[i][0] >> points[i][1] >> points[i][2];
+        vertices_file >> points[i][0] >> points[i][1] >> points[i][2];  //C++之讀取檔案資料
     }
     for (i = 0; i < PATCHES; i++)
     {
         for (j = 0; j < 16; j++)
         {
-            patches_file >> patch_vertices[i][j];
+            patches_file >> patch_vertices[i][j];   //C++之讀取檔案資料
         }
     }
-
-    /* Close files. */
 
     vertices_file.close();
     patches_file.close();

@@ -271,10 +271,10 @@ int main(int argc, char** argv)
     //·Æ¹«¥kÁä¿ï³æ
     glutCreateMenu(figureMenu);
     glutAddMenuEntry("Sphere (orthographic)", 1);
-    glutAddMenuEntry("Sphere (perspective)", 5);
+    glutAddMenuEntry("Sphere (perspective) XXX", 5);
     glutAddMenuEntry("Sphere (profile only)", 2);
     glutAddMenuEntry("Goblet (orthographic)", 3);
-    glutAddMenuEntry("Goblet (perspective)", 6);
+    glutAddMenuEntry("Goblet (perspective) XXX", 6);
     glutAddMenuEntry("Goblet (profile only)", 4);
     glutAttachMenu(GLUT_RIGHT_BUTTON);
 

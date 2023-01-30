@@ -1,4 +1,4 @@
-/*  texgen.c
+﻿/*  texgen.c
  *  This program draws a texture mapped teapot with
  *  automatically generated texture coordinates.  The
  *  texture is rendered as stripes on the teapot.
@@ -78,7 +78,7 @@ GLbyte* gltLoadTGA(const char* szFileName, GLint* iWidth, GLint* iHeight, GLint*
     fopen_s(&pFile, szFileName, "rb");
     if (pFile == NULL)
     {
-        printf("XXXXXX 1 �L���ɮ�\n");
+        printf("XXXXXX 1 無此檔案\n");
         return NULL;
     }
 
@@ -100,6 +100,7 @@ GLbyte* gltLoadTGA(const char* szFileName, GLint* iWidth, GLint* iHeight, GLint*
 
     // Calculate size of image buffer
     lImageSize = tgaHeader.width * tgaHeader.height * sDepth;
+    printf("W = %d, H = %d, Size = %d\n", tgaHeader.width, tgaHeader.height, lImageSize);
 
     // Allocate memory and check for success
     pBits = (GLbyte*)malloc(lImageSize * sizeof(GLbyte));
@@ -154,7 +155,8 @@ void gfxinit(void)
     GLfloat  sourceLight[] = { 0.5f, 0.5f, 0.5f, 1.0f };
     GLfloat	 lightPos[] = { 0.0f, 0.0f, 5.0f, 1.0f };
 
-    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glClearColor(1.0, 1.0, 0.0, 0.0);		//設定背景顏色
+
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
@@ -182,10 +184,9 @@ void gfxinit(void)
     // Set material properties to follow glColor values
     glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 
+    //在 List 1 製作第1張圖
     /* Code for striped teapot. */
-
     makeImage();  /* make the striped texture pattern */
-
     glNewList(1, GL_COMPILE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -200,21 +201,24 @@ void gfxinit(void)
     glEnable(GL_TEXTURE_GEN_T);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    glRotatef(45.0, 0.0, 0.0, 1.0);
+    glRotatef(30.0, 0.0, 0.0, 1.0);   //逆時針旋轉30度
     glutSolidTeapot(2.0);
     glDisable(GL_TEXTURE_GEN_S);
     glDisable(GL_TEXTURE_GEN_T);
     glEndList();
 
+    //在 List 2 製作第2張圖
     /* Code for the stone teapot. */
-
     glNewList(2, GL_COMPILE);
-    pBytes = (GLubyte*)gltLoadTGA("data/14.brick.tga", &iWidth, &iHeight, &iComponents, &eFormat);
-    //printf("pBytes = %p\n", pBytes);
+    pBytes = (GLubyte*)gltLoadTGA("data/14.marble.tga", &iWidth, &iHeight, &iComponents, &eFormat);
+    printf("pBytes = %p\n", pBytes);
     if (pBytes == NULL)
     {
-        printf("�}��tga���ɥ���\n");
+        printf("開啟tga圖檔失敗\n");
     }
+
+    //試著修改圖片內容
+    //memset(pBytes, 0, sizeof(GLubyte) * 128*128);   //给*p指定的前100字节大小的内存空间设置为(只支持0, 1，以字节为单位赋初始值)
 
     glTexImage2D(GL_TEXTURE_2D, 0, iComponents, iWidth, iHeight, 0, eFormat, GL_UNSIGNED_BYTE, pBytes);
     free(pBytes);
@@ -232,13 +236,13 @@ void display(void)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     if (image == 1)
     {
-        glCallList(1);
+        glCallList(1);  //顯示第1張圖
     }
     else
     {
-        glCallList(2);
+        glCallList(2);  //顯示第2張圖
     }
-    glFlush();  // ����ø�ϩR�O
+    glFlush();  // 執行繪圖命令
 }
 
 void reshape(int w, int h)
@@ -272,21 +276,21 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
         image = 2;
         break;
     }
-    glutPostRedisplay();    //�N���e�������W�аO�A�аO��ݭn�A����ܡC
+    glutPostRedisplay();    //將當前視窗打上標記，標記其需要再次顯示。
 }
 
 int main(int argc, char** argv)
 {
     const char* windowName = "Texture Generation";
-    const char* message = "�� 1 2 ����, �� Esc ���}\n";
+    const char* message = "按 1 2 切換, 按 Esc 離開\n";
     common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard);
 
-    //���O�d
+    //先保留
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
 
     gfxinit();
 
-    glutMainLoop();	//�}�l�D�`��ø�s
+    glutMainLoop();	//開始主循環繪製
 
     return 0;
 }

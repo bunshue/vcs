@@ -17,12 +17,13 @@ void gfxinit(void)
 
     /* Initialize graphics mode.  Assume all coordinates are in [-10,10]. */
 
-    glClearColor(1.0, 1.0, 1.0, 0.0);  /* Make the background white. */
-    glColor3f(0.0, 0.0, 0.0);          /* Draw in black.             */
+    glClearColor(1.0, 1.0, 1.0, 0.0);  //背景白色
+    glColor3f(1.0, 0.0, 0.0);          //畫紅線
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluOrtho2D(-10.0, 10.0, -10.0, 10.0);
 
+    //在 List 1 製作第1張圖
     glNewList(1, GL_COMPILE);
 
     /* Draw the rulings of u (constant u values) at values of 0.0, 0.1, 0.2, ..., 1.0. */
@@ -55,7 +56,7 @@ void gfxinit(void)
 void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
-    glCallList(1);
+    glCallList(1);  //顯示第1張圖
     glFlush();  // 執行繪圖命令
 }
 
