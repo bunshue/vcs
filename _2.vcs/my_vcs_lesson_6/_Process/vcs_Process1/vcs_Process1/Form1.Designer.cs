@@ -445,6 +445,7 @@
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(150, 60);
             this.button31.TabIndex = 32;
+            this.button31.Text = "Process 測試";
             this.button31.UseVisualStyleBackColor = true;
             this.button31.Click += new System.EventHandler(this.button31_Click);
             // 
@@ -455,6 +456,7 @@
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(150, 60);
             this.button32.TabIndex = 33;
+            this.button32.Text = "檢查本程式是否已在執行中";
             this.button32.UseVisualStyleBackColor = true;
             this.button32.Click += new System.EventHandler(this.button32_Click);
             // 
@@ -465,6 +467,7 @@
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(150, 60);
             this.button33.TabIndex = 34;
+            this.button33.Text = "調用外部程序";
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
@@ -475,6 +478,7 @@
             this.button34.Name = "button34";
             this.button34.Size = new System.Drawing.Size(150, 60);
             this.button34.TabIndex = 35;
+            this.button34.Text = "開啟外部程式";
             this.button34.UseVisualStyleBackColor = true;
             this.button34.Click += new System.EventHandler(this.button34_Click);
             // 
@@ -485,6 +489,7 @@
             this.button35.Name = "button35";
             this.button35.Size = new System.Drawing.Size(150, 60);
             this.button35.TabIndex = 36;
+            this.button35.Text = "test";
             this.button35.UseVisualStyleBackColor = true;
             this.button35.Click += new System.EventHandler(this.button35_Click);
             // 

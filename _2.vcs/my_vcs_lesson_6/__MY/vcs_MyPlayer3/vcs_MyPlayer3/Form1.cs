@@ -1349,6 +1349,10 @@ namespace vcs_MyPlayer3
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
             //openFileDialog1.InitialDirectory = "c:\\";  //預設開啟的路徑
             openFileDialog1.Multiselect = false;    //單選
+            if (openFileDialog1.InitialDirectory == "")
+            {
+                openFileDialog1.InitialDirectory = Application.StartupPath;
+            }
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 /*
@@ -1392,6 +1396,10 @@ namespace vcs_MyPlayer3
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
             //openFileDialog1.InitialDirectory = "c:\\";  //預設開啟的路徑
             openFileDialog1.Multiselect = false;    //單選
+            if (openFileDialog1.InitialDirectory == "")
+            {
+                openFileDialog1.InitialDirectory = Application.StartupPath;
+            }
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 /*
@@ -1483,6 +1491,10 @@ namespace vcs_MyPlayer3
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
             //openFileDialog1.InitialDirectory = "c:\\";  //預設開啟的路徑
             openFileDialog1.Multiselect = false;    //單選
+            if (openFileDialog1.InitialDirectory == "")
+            {
+                openFileDialog1.InitialDirectory = Application.StartupPath;
+            }
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 /*

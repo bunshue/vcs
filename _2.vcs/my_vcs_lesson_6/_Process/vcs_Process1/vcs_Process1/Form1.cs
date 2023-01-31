@@ -14,12 +14,32 @@ using System.Runtime.InteropServices;   //for DllImport
 using System.Text.RegularExpressions;
 using System.Drawing.Imaging;           //for PixelFormat
 
+/*
+Start 啟動進程資源將其與process類關聯
+
+Kill立即關閉進程
+
+waitforExit 在等待關聯進程的退出
+
+Close 釋放與此關聯的所有進程 
+*/
+
 namespace vcs_Process1
 {
     public partial class Form1 : Form
     {
         Process myProcess = new Process();
         int cnt = 0;
+
+        //c#調用系統資源
+        //引入API函數
+        [DllImportAttribute("user32.dll")]
+        public static extern int FindWindow(string ClassName, string WindowName);
+        [DllImport("user32.dll")]
+        public static extern int ShowWindow(int handle, int cmdShow);
+
+        private const int SW_HIDE = 0;//API參數表示隱藏窗口
+        private const int SW_SHOW = 5;//API參數表示用當前的大小和位置顯示窗口
 
         public Form1()
         {
@@ -721,31 +741,276 @@ namespace vcs_Process1
 
         private void button31_Click(object sender, EventArgs e)
         {
+            //Process 測試
+
+            //進程, 我們可以把計算機中每一個運行的應用程序當作是一個進程
+
+            ///獲得當前程序中正在運行的進程
+            Process[] pros = Process.GetProcesses();
+            foreach (var item in pros)
+            {　　　　//item.Kill(); //關閉所有進程.　　　　//item.ProcessName; //進程名
+                //Console.Write(item.ToString());
+                richTextBox1.Text += "取得目前Process : " + item.ToString() + "\n";
+
+            }
+
+
+            //使用預設程式打開指定文件
+            string filename = @"C:\______test_files\__RW\_txt\琵琶行.txt";
+            ProcessStartInfo pro = new ProcessStartInfo(filename);
+            Process pr = new Process();
+            pr.StartInfo = pro;
+            pr.Start();
+
+
 
         }
 
         private void button32_Click(object sender, EventArgs e)
         {
+            //檢查本程式是否已在執行中
+            Process[] processes = Process.GetProcessesByName(Application.CompanyName);
 
+            richTextBox1.Text += "processes.Length = " + processes.Length.ToString() + "\n";
+            if (processes.Length > 1)
+            {
+                richTextBox1.Text += "本程式已在執行中\n";
+                MessageBox.Show("應用程序已經在運行中。");
+                //Thread.Sleep(1000);
+                //System.Environment.Exit(1);
+            }
+            else
+            {
+                richTextBox1.Text += "本程式尚未被其他執行\n";
+                //Application.EnableVisualStyles();
+                //Application.SetCompatibleTextRenderingDefault(false);
+                //Application.Run(new Form1());
+            }
+            
         }
 
         private void button33_Click(object sender, EventArgs e)
         {
+            //調用外部程序
 
+            string filename = @"C:\______test_files\__RW\_txt\琵琶行.txt";
+
+            //聲明一個程序信息類
+            ProcessStartInfo Info = new ProcessStartInfo();
+
+            //設置外部程序名
+            Info.FileName = "notepad.exe";
+
+            //設置外部程序的啟動參數（命令行參數）為test.txt
+            Info.Arguments = filename;
+
+            //設置外部程序工作目錄為  C:
+            Info.WorkingDirectory = "C:\\";
+
+            //聲明一個程序類
+            Process Proc;
+
+            try
+            {
+                //啟動外部程序
+                Proc = Process.Start(Info);
+            }
+            catch (System.ComponentModel.Win32Exception ex)
+            {
+                Console.WriteLine("系統找不到指定的程序文件。{0}", ex);
+                return;
+            }
+
+            //打印出外部程序的開始執行時間
+            Console.WriteLine("外部程序的開始執行時間：{0}", Proc.StartTime);
+
+            //等待3秒鐘
+            Proc.WaitForExit(3000);
+
+            //如果這個外部程序沒有結束運行則對其強行終止
+            if (Proc.HasExited == false)
+            {
+                Console.WriteLine("由主程序強行終止外部程序的運行！");
+                Proc.Kill();
+            }
+            else
+            {
+                Console.WriteLine("由外部程序正常退出！");
+            }
+            Console.WriteLine("外部程序的結束運行時間：{0}", Proc.ExitTime);
+            Console.WriteLine("外部程序在結束運行時的返回值：{0}", Proc.ExitCode);
         }
 
         private void button34_Click(object sender, EventArgs e)
         {
+            //開啟外部程式
+
+            /*
+            //打開Word
+            Process.Start(@"C:\Program Files\Microsoft Office\OFFICE15\winword.exe");
+
+            //打開Excel
+            Process.Start(@"C:\Program Files\Microsoft Office\OFFICE15\excel.exe");
+
+            //打開Access fail
+            //Process.Start(@"C:\Program Files\Microsoft Office\OFFICE15\msaccess.exe");
+
+            //打開PowerPoint
+            Process.Start(@"C:\Program Files\Microsoft Office\OFFICE15\powerpnt.exe");
+
+            //打開OutLook
+            Process.Start(@"C:\Program Files\Microsoft Office\OFFICE15\outlook.exe");
+            */
+
+            /*
+            //打開播放器() 
+            Process.Start("mplayer2.exe");
+
+            //打開資源管理器() 
+            Process.Start("explorer.exe");
+
+            //打開任務管理器() 
+            Process.Start("taskmgr.exe");
+
+            //打開事件檢視器() 
+            Process.Start("eventvwr.exe");
+
+            //打開系統信息() fail
+            //Process.Start("winmsd.exe");
+
+            //打開備份還原() fail
+            //Process.Start("ntbackup.exe");
+
+            //打開Windows版本() 
+            Process.Start("winver.exe"); 
+            */
+
+            /*
+            //打開控制面板() 
+            Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL");
+
+            //打開控制面板輔助選項鍵盤() 
+            Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL access.cpl,,1");
+
+            //打開控制面板輔助選項聲音() 
+            Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL access.cpl,,2");
+
+            //打開控制面板輔助選項顯示() 
+            Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL access.cpl,,3");
+
+            //打開控制面板輔助選項鼠標() 
+            Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL access.cpl,,4");
+
+            //打開控制面板輔助選項常規() 
+            Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL access.cpl,,5");
+
+            //打開控制面板添加新硬件向導() 
+            Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL sysdm.cpl @1");
+
+            //打開控制面板添加新打印機向導() 
+            Process.Start("rundll32.exe", "shell32.dll,SHHelpShortcuts_RunDLL AddPrinter");
+            */
+
+            /*
+            //打開控制面板添加刪除程序安裝卸載面板() 
+            Process.Start("rundll32.exe", "shell32.dll,shell32.dll,Control_RunDLL appwiz.cpl,,1");
+
+            //打開控制面板添加刪除程序安裝Windows面板() 
+            Process.Start("rundll32.exe", "shell32.dll,shell32.dll,Control_RunDLL appwiz.cpl,,2");
+
+            //打開控制面板添加刪除程序啟動盤面板() 
+            Process.Start("rundll32.exe", "shell32.dll,shell32.dll,Control_RunDLL appwiz.cpl,,3");
+
+            //打開建立快捷方式對話框() 
+            Process.Start("rundll32.exe", " appwiz.cpl,NewLinkHere %1");
+
+            //打開日期時間選項() 
+            Process.Start("rundll32.exe", " shell32.dll,Control_RunDLL timedate.cpl,,0");
+
+            //打開時區選項() 
+            Process.Start("rundll32.exe", " shell32.dll,Control_RunDLL timedate.cpl,,1");
+
+            //建立公文包() 
+            Process.Start("rundll32.exe", " syncui.dll,Briefcase_Create");
+
+            //打開復制軟碟窗口() 
+            Process.Start("rundll32.exe", " diskcopy.dll,DiskCopyRunDll");
+
+            //打開新建撥號連接() 
+            Process.Start("rundll32.exe", " rnaui.dll,RnaWizard");
+
+            //打開顯示屬性背景() 
+            Process.Start("rundll32.exe", " shell32.dll,Control_RunDLL desk.cpl,,0");
+
+            //打開顯示屬性屏幕保護() 
+            Process.Start("rundll32.exe", " shell32.dll,Control_RunDLL desk.cpl,,1");
+
+            //打開顯示屬性外觀() 
+            Process.Start("rundll32.exe", " shell32.dll,Control_RunDLL desk.cpl,,2");
+
+            //打開顯示屬性屬性() 
+            Process.Start("rundll32.exe", " shell32.dll,Control_RunDLL desk.cpl,,3");
+            */
+
 
         }
 
         private void button35_Click(object sender, EventArgs e)
         {
+            //取得系統處理器數目
+            int cnt = Environment.ProcessorCount;
+            richTextBox1.Text += "cnt = " + cnt.ToString() + "\n";
+
+            //通過C#還可以指定當前線程的運行在哪個CPU上。
+
+            Process p = Process.GetCurrentProcess();
+            p.ProcessorAffinity = (IntPtr)0x0001;
+
+            //Process.ProcessorAffinity 設置當前CPU的屏蔽字，0x0001表示選用一號CPU，0x0002表示選用2號CPU。
+
 
         }
 
         private void button36_Click(object sender, EventArgs e)
         {
+            string exe_filename = "cmd.exe";
+
+            //創建一個進程
+            Process pc = new Process();
+            pc.StartInfo.FileName = exe_filename;
+            pc.StartInfo.UseShellExecute = false;
+            pc.StartInfo.RedirectStandardOutput = true;
+            pc.StartInfo.RedirectStandardError = true;
+            pc.StartInfo.CreateNoWindow = false;
+
+            richTextBox1.Text += "啟動程式\n";
+            pc.Start(); //啟動進程
+
+            //準備讀出輸出流和錯誤流
+            string outputData = string.Empty;
+            string errorData = string.Empty;
+            pc.BeginOutputReadLine();
+            pc.BeginErrorReadLine();
+
+            pc.OutputDataReceived += (ss, ee) =>
+            {
+                outputData += ee.Data;
+            };
+
+            pc.ErrorDataReceived += (ss, ee) =>
+            {
+                errorData += ee.Data;
+            };
+
+            //等待退出
+            pc.WaitForExit();
+
+            //關閉進程
+            pc.Close();
+
+            richTextBox1.Text += "使用者關閉程式\n";
+
+
 
         }
 
