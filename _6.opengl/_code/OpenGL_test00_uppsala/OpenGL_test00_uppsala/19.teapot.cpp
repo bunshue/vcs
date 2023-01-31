@@ -67,9 +67,9 @@ void display(void)
 
     glClear(GL_COLOR_BUFFER_BIT);
     glLoadIdentity();
-    glRotatef(theta[0], 1.0, 0.0, 0.0);
-    glRotatef(theta[1], 0.0, 1.0, 0.0);
-    glRotatef(theta[2], 0.0, 0.0, 1.0);
+    glRotatef(theta[0], 1.0, 0.0, 0.0); //旋轉 X 軸
+    glRotatef(theta[1], 0.0, 1.0, 0.0); //旋轉 Y 軸
+    glRotatef(theta[2], 0.0, 0.0, 1.0); //旋轉 Z 軸
     for (i = 1; i <= PATCHES; i++)
     {
         glCallList(i);
@@ -77,13 +77,13 @@ void display(void)
     glFlush();  // 執行繪圖命令
 }
 
-//key 枚舉值，x、y是位置
-/* This function handles rotation via the arrow keys. */
+//key 枚舉值，x、y是位置, 接收 方向鍵 與 PageUp PageDown鍵
 void special(int key, int /*x*/, int /*y*/)
 {
     switch (key)
     {
     case GLUT_KEY_DOWN: /* rotate around the x-axis in a negative direction */
+        printf("下 ");
         theta[0] -= 4.0;
         if (theta[0] < 0.0)
         {
@@ -91,13 +91,31 @@ void special(int key, int /*x*/, int /*y*/)
         }
         break;
     case GLUT_KEY_UP: /* rotate around the x-axis in a positive direction */
+        printf("上 ");
         theta[0] += 4.0;
         if (theta[0] > 360.0)
         {
             theta[0] -= 360.0;
         }
         break;
+    case GLUT_KEY_PAGE_UP: /* rotate around the y-axis in a negative direction */
+        printf("PU ");
+        theta[1] -= 4.0;
+        if (theta[1] < 0.0)
+        {
+            theta[1] += 360.0;
+        }
+        break;
+    case GLUT_KEY_PAGE_DOWN: /* rotate around the y-axis in a positive direction */
+        printf("PD ");
+        theta[1] += 4.0;
+        if (theta[1] > 360.0)
+        {
+            theta[1] -= 360.0;
+        }
+        break;
     case GLUT_KEY_RIGHT: /* rotate around the z-axis in a negative direction */
+        printf("右 ");
         theta[2] -= 4.0;
         if (theta[2] < 0.0)
         {
@@ -105,6 +123,7 @@ void special(int key, int /*x*/, int /*y*/)
         }
         break;
     case GLUT_KEY_LEFT: /* rotate around the z-axis in a positive direction */
+        printf("左 ");
         theta[2] += 4.0;
         if (theta[2] > 360.0)
         {
@@ -118,20 +137,12 @@ void special(int key, int /*x*/, int /*y*/)
 /* This function gets the input data for the program to process. */
 void interact(void)
 {
-    ifstream patches_file;
     ifstream vertices_file;
+    ifstream patches_file;
     int i;
     int j;
 
-    /* Open data files. */
-    printf("開啟檔案: data/19.teapot.patches\n");
-    patches_file.open("data/19.teapot.patches", ios::in);
-    if (patches_file.fail())
-    {
-        printf("找不到檔案: data/19.teapot.patches\n");
-        exit(EXIT_FAILURE);
-    }
-
+    //開啟檔案
     printf("開啟檔案: data/19.teapot.vertices\n");
     vertices_file.open("data/19.teapot.vertices", ios::in);
     if (vertices_file.fail())
@@ -141,7 +152,15 @@ void interact(void)
         exit(EXIT_FAILURE);
     }
 
-    /* Read files into arrays. */
+    printf("開啟檔案: data/19.teapot.patches\n");
+    patches_file.open("data/19.teapot.patches", ios::in);
+    if (patches_file.fail())
+    {
+        printf("找不到檔案: data/19.teapot.patches\n");
+        exit(EXIT_FAILURE);
+    }
+
+    //讀取檔案資料
     for (i = 1; i <= VERTICES; i++)
     {
         vertices_file >> points[i][0] >> points[i][1] >> points[i][2];  //C++之讀取檔案資料
@@ -160,11 +179,10 @@ void interact(void)
 
 int main(int argc, char** argv)
 {
-    /* Get input data. */
-    interact();
+    interact();		//讀取資料
 
     const char* windowName = "猶太茶壺";
-    const char* message = "猶太茶壺, 按 上 下 左 右 方向鍵控制, 按 Esc 離開\n";
+    const char* message = "猶太茶壺, 按 上 下 左 右 PageUp PageDown 控制, 按 Esc 離開\n";
     common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard0);
 
     glutSpecialFunc(special);   //設定callback function

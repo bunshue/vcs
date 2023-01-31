@@ -327,13 +327,13 @@ alias vcd2="cd /mnt/cdrom2"
 
 
 alias diffcode="echo;echo Go to diff code area;cd /home/user/_diff_code;pwd;echo;"
-alias ct="echo;echo Go to C test area;cd   /cygdrive/d/___source_code/_git/part3/vcs/_7.linux/_ctest_linux;pwd;echo;"
-alias ctok="echo;echo Go to C test OK area;cd /cygdrive/d/___source_code/_git/part3/vcs/_7.linux/_ctest_linux/_ok_template;echo;pwd;echo"
-alias mt="echo;echo Go to makefile test area;cd   /cygdrive/d/___source_code/_git/part3/vcs/_7.linux/_ctest_linux/_Makefile_test;echo;pwd;echo"
-alias pt="echo;echo Go to perl test area;cd   /cygdrive/d/___source_code/_git/part3/vcs/_7.linux/_ctest_linux/_ptest;echo;pwd;echo"
-alias st="echo;echo Go to shell test area;cd   /cygdrive/d/___source_code/_git/part3/vcs/_7.linux/_ctest_linux/_stest;echo;pwd;echo"
-alias gt="echo;echo Go to g test area;cd   /cygdrive/d/___source_code/_git/part3/vcs/_7.linux/_ctest_linux/_gtest;echo;pwd;echo"
-alias lt="echo;echo Go to linux test area;cd   /cygdrive/d/___source_code/_git/part3/vcs/_7.linux/_ctest_linux/ltest;echo;pwd;echo"
+alias ct="echo;echo Go to C test area;cd   /home/user/_ctest_linux;pwd;echo;"
+alias ctok="echo;echo Go to C test OK area;cd /home/user/_ctest_linux/_ok_template;echo;pwd;echo"
+alias mt="echo;echo Go to makefile test area;cd   /home/user/_ctest_linux/_Makefile_test;echo;pwd;echo"
+alias pt="echo;echo Go to perl test area;cd   /home/user/_ctest_linux/_ptest;echo;pwd;echo"
+alias st="echo;echo Go to shell test area;cd   /home/user/_ctest_linux/_stest;echo;pwd;echo"
+alias gt="echo;echo Go to g test area;cd   /home/user/_ctest_linux/_gtest;echo;pwd;echo"
+alias lt="echo;echo Go to linux test area;cd   /home/user/_ctest_linux/ltest;echo;pwd;echo"
 alias dvd="echo;echo Go to cs6257 directory;cd  /cs6257;echo;pwd;echo;"
 alias cs="echo;echo Go to cs6257 directory;cd  /cs6257;echo;pwd;echo;"
 alias pa="echo;echo Go to PA63 directory;cd  /cs6257/SAMPO_PA_vincent_test;echo;pwd;echo;"
@@ -370,12 +370,12 @@ alias e1="eject  /dev/hdc"
 alias e2="eject  /dev/hdd"
 alias et1="eject /dev/hdc -t"
 alias et2="eject /dev/hdd -t"
-alias open="/cygdrive/d/___source_code/_git/part3/vcs/_7.linux/_ctest_linux/common/my_open_tray"
-alias close="/cygdrive/d/___source_code/_git/part3/vcs/_7.linux/_ctest_linux/common/my_close_tray"
-alias open1="/cygdrive/d/___source_code/_git/part3/vcs/_7.linux/_ctest_linux/common/my_open_tray"
-alias close1="/cygdrive/d/___source_code/_git/part3/vcs/_7.linux/_ctest_linux/common/my_close_tray"
-alias open2="/cygdrive/d/___source_code/_git/part3/vcs/_7.linux/_ctest_linux/common/my_open_tray2"
-alias close2="/cygdrive/d/___source_code/_git/part3/vcs/_7.linux/_ctest_linux/common/my_close_tray2"
+alias open="/home/user/_ctest_linux/common/my_open_tray"
+alias close="/home/user/_ctest_linux/common/my_close_tray"
+alias open1="/home/user/_ctest_linux/common/my_open_tray"
+alias close1="/home/user/_ctest_linux/common/my_close_tray"
+alias open2="/home/user/_ctest_linux/common/my_open_tray2"
+alias close2="/home/user/_ctest_linux/common/my_close_tray2"
 alias dm="dmesg"
 alias dmc="dmesg -c && echo  && echo Dump-Message cleaned && echo "
 alias cpr="cp -r"
@@ -434,7 +434,7 @@ mkdir  /home/user/_backup_system_data;
 mkdir  /home/user/_backup_system_data/130;
 cp /etc/profile.d/alias.sh /home/user/_backup_system_data/130;
 cp -r /home/user/myy /home/user/_backup_system_data/130;
-cp -r /cygdrive/d/___source_code/_git/part3/vcs/_7.linux/_ctest_linux/ /home/user/_backup_system_data/130;
+cp -r /home/user/_ctest_linux/ /home/user/_backup_system_data/130;
 zip -r _backup_system_data.zip _backup_system_data/
 echo Backup to /home/user/_backup_system_data;
 echo Backup-zip-data: _backup_system_data.zip;

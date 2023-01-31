@@ -28,9 +28,13 @@ void gfxinit()
         glIndexi(index);
 
         //或許 glutGetColor 功能已失效
-        printf("a Color %d = (%d, %d, %d)\n", index, glutGetColor(index, GLUT_RED),
-            glutGetColor(index, GLUT_GREEN), glutGetColor(index, GLUT_BLUE));
-
+        printf("a Color %d = (%d, %d, %d)\n",
+            index,
+            glutGetColor(index, GLUT_RED),
+            glutGetColor(index, GLUT_GREEN),
+            glutGetColor(index, GLUT_BLUE)
+        );
+        printf("預設 index = %d\n", index);
         glRecti(i, 0, i + 1, 1);
     }
     /* loaded color map entries */
@@ -40,9 +44,14 @@ void gfxinit()
         glIndexi(index);
 
         //或許 glutGetColor 功能已失效
-        printf("b Color %d = (%d, %d, %d)\n", index, glutGetColor(index, GLUT_RED),
-            glutGetColor(index, GLUT_GREEN), glutGetColor(index, GLUT_BLUE));
+        printf("b Color %d = (%d, %d, %d)\n",
+            index,
+            glutGetColor(index, GLUT_RED),
+            glutGetColor(index, GLUT_GREEN),
+            glutGetColor(index, GLUT_BLUE)
+        );
 
+        printf("修改 index = %d\n", index);
         glRecti(i, 1, i + 1, 2);
     }
     glEndList();
@@ -53,13 +62,15 @@ void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
     glCallList(1);
-    glFlush();  // 執行繪圖命令
+    glutSwapBuffers();  // 執行繪圖命令
+    //glFlush();          // 執行繪圖命令
 }
 
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_INDEX);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_INDEX);
+    //glutInitDisplayMode(GLUT_SINGLE | GLUT_INDEX);
 
     glutInitWindowSize(600, 600);       // 設定視窗大小
     glutInitWindowPosition(1100, 200);  // 設定視窗位置

@@ -25,12 +25,17 @@ void instructions()
 void gfxinit()
 {
 	/* Set window for normal plane. */
+
 	glutSetColor(RED, 1.0, 0.0, 0.0);
 	glClearIndex(RED);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluOrtho2D(0.0, SIZE - 1, 0.0, SIZE - 1);
 
+	/* Set window for overlay plane. Make sure rubberbanding rectangle is drawn
+	   in outline only and that the outline color is white. */
+
+	glutUseLayer(GLUT_OVERLAY);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	gluOrtho2D(0.0, SIZE - 1, 0.0, SIZE - 1);
@@ -38,6 +43,7 @@ void gfxinit()
 	glutSetColor(WHITE, 1.0, 1.0, 1.0);
 
 	/* Make sure we're drawing in the normal plane to begin with. */
+
 	glutUseLayer(GLUT_NORMAL);
 }
 
@@ -45,11 +51,12 @@ void gfxinit()
 void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT);
+}
 
+void overlayDisplay(void)
+{
 	glIndexi(WHITE);
 	glRecti(pt1x, pt1y, pt2x, pt2y);
-
-	glRectf(-0.5f, -0.5f, 0.3f, 0.3f);	//test
 }
 
 // This is the function that gets called whenever a mouse button event occurs.
@@ -60,6 +67,7 @@ void mouse(int button, int state, int x, int y)
 	case GLUT_LEFT_BUTTON:
 		if (state == GLUT_DOWN)            /* left mouse button was pressed */
 		{
+			glutUseLayer(GLUT_OVERLAY); /* start rubberbanding; use overlay */
 			glIndexi(transp_color);       /* set color for clearing overlay */
 			glRecti(pt1x, pt1y, pt2x, pt2y);              /* clear the existing box */
 			pt2x = pt1x = x; 	              /* set corners of new rectangle to */
@@ -73,8 +81,10 @@ void mouse(int button, int state, int x, int y)
 	case GLUT_RIGHT_BUTTON:
 		if (state == GLUT_DOWN)           /* right mouse button was pressed */
 		{
+			glutUseLayer(GLUT_OVERLAY);              /* go to overlay plane */
 			glClearIndex((float)transp_color);                  /* set clear color */
 			glClear(GL_COLOR_BUFFER_BIT);        /* clear the overlay plane */
+			glutUseLayer(GLUT_NORMAL);       /* return to normal draw plane */
 		}
 		break;
 	}
@@ -86,8 +96,8 @@ void motion(int x, int y)
 	glIndexi(transp_color);  		               /* set erase color */
 	glRecti(pt1x, pt1y, pt2x, pt2y);            /* redraw the box to erase it */
 
-	pt2x = x;									/* set corner at current mouse position */
-	pt2y = SIZE - y;
+	pt2x = x;
+	pt2y = SIZE - y;    /* set corner at current mouse position */
 	glIndexi(WHITE);                          /* change to draw color */
 	glRecti(pt1x, pt1y, pt2x, pt2y);                          /* draw new box */
 }
@@ -96,14 +106,15 @@ int main(int argc, char** argv)
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_INDEX);
-
 	glutInitWindowSize(SIZE, SIZE);       // 設定視窗大小
 	glutInitWindowPosition(1100, 200);  // 設定視窗位置
+
 
 	glutCreateWindow("Rubberbanding 滑鼠框選四邊形");
 
 	instructions();
 
+	glutEstablishOverlay();
 	//transp_color = glutLayerGet(GLUT_TRANSPARENT_INDEX);
 	transp_color = 3;
 	glutUseLayer(GLUT_NORMAL);
@@ -114,6 +125,8 @@ int main(int argc, char** argv)
 	glutMouseFunc(mouse);		//設定callback function, callback for mouse button events
 	glutMotionFunc(motion);		//設定callback function, callback for mouse drag events
 
+	glutOverlayDisplayFunc(overlayDisplay);/* callback for overlay plane   */
+
 	gfxinit();
 
 	printf("\n滑鼠框選四邊形, 滑鼠分左右鍵\n");
@@ -122,3 +135,4 @@ int main(int argc, char** argv)
 
 	return 0;
 }
+

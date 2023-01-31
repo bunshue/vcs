@@ -104,7 +104,7 @@ void keyboard(unsigned char key, int x, int y)
 int main(int argc, char** argv)
 {
 	const char* windowName = "Rotating Color Cube";
-	const char* message = "度陪ボ, 礚北,  Esc 瞒秨\n";
+	const char* message = "菲公籔s北,  Esc 瞒秨\n";
 	common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard);
 
 	glutIdleFunc(idle);

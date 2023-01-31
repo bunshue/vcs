@@ -117,7 +117,7 @@ void draw_cube(float* color, float width, GLdouble size)
 }
 
 /*
-* 
+*
 glutWireCube(1.0);//绘制立方体线框图
 
 FGAPI void    FGAPIENTRY glutWireCube(GLdouble size);
@@ -196,10 +196,10 @@ void draw_box(float* color)
 
     glEnable(GL_TEXTURE_2D);	//啟用2D紋理映射
 
-/** 選擇紋理 */
-//glBindTexture(GL_TEXTURE_2D, tex2D);	//綁定紋理
+    /** 選擇紋理 */
+    //glBindTexture(GL_TEXTURE_2D, tex2D);	//綁定紋理
 
-/** 開始繪製四邊形 */
+    /** 開始繪製四邊形 */
     glBegin(GL_QUADS);
 
     /// 前側面

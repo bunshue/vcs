@@ -75,7 +75,7 @@ void interact(void)
 
     ifstream points_file;
 
-    /* Open data file. */
+    //開啟檔案
     points_file.open("data/17.points.dat", ios::in);
     if (points_file.is_open() == false)
     {
@@ -83,6 +83,7 @@ void interact(void)
         exit(EXIT_FAILURE);
     }
 
+    //讀取檔案資料
     /* Read file into arrays, determining maximum and minimum values and ranges. */
     maxx = maxy = -1.0e38;
     minx = miny = 1.0e38;
@@ -126,8 +127,7 @@ void interact(void)
 
 int main(int argc, char** argv)
 {
-    /* Get input data. */
-    interact();
+    interact();		//讀取資料
 
     const char* windowName = "Curve Fitting with Evaluators";
     const char* message = "僅顯示, 無控制, 按 Esc 離開\n";

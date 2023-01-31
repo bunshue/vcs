@@ -97,8 +97,7 @@ void interact(void)
 
     ifstream points_file;
 
-    /* Open data file. */
-
+    //開啟檔案
     points_file.open("data/17.points.dat", ios::in);
     if (points_file.is_open() == false)
     {
@@ -106,6 +105,7 @@ void interact(void)
         exit(EXIT_FAILURE);
     }
 
+    //讀取檔案資料
     /* Read file into arrays, determining maximum and minimum values. */
     maxx = maxy = -1.0e38;
     minx = miny = 1.0e38;
@@ -167,28 +167,10 @@ void mark_points()
     glEndList();
 }
 
-/* Evaluates the blending functions for Lagrange interpolation. */
-double B(int n, double t)
-{
-    switch (n)
-    {
-    case 1: return -t * (t - 1.0) * (t - 2.0) / 6.0;
-        break;
-    case 2: return (t + 1.0) * (t - 1.0) * (t - 2.0) / 2.0;
-        break;
-    case 3: return -(t + 1.0) * t * (t - 2.0) / 2.0;
-        break;
-    case 4: return (t + 1.0) * t * (t - 1.0) / 6.0;
-        break;
-    }
-    return 0.0;  // default case, should never happen
-}
-
 /* This procedure does Lagrange interpolation of the data. */
 void Lagrange_interpolate()
 {
     int i;
-    double t, x, y, b1, b2, b3, b4;
     char title[] = "Lagrange Interpolation";
 
     //在 List LAGRANGE_LIST 製作第 LAGRANGE_LIST 張圖, LAGRANGE_LIST = 2
@@ -196,211 +178,12 @@ void Lagrange_interpolate()
     glColor3f(0.0, 0.0, 0.0);  /* Draw curve in black. */
     glBegin(GL_LINE_STRIP);
 
-    /* Handle first set of 4 points between t=-1 and t=0 separately. */
-    for (t = -1.0; t < DELTA_T / 2.0; t += DELTA_T)
-    {
-        b1 = B(1, t);
-        b2 = B(2, t);
-        b3 = B(3, t);
-        b4 = B(4, t);
-        x = px[0] * b1 + px[1] * b2 + px[2] * b3 + px[3] * b4;
-        y = py[0] * b1 + py[1] * b2 + py[2] * b3 + py[3] * b4;
-        glVertex2d(x, y);
-    }
-
-    /* Handle middle segments. */
-    for (i = 1; i <= number_of_points - 3; i++)
-    {
-        for (t = DELTA_T; t < 1.0 + DELTA_T / 2.0; t += DELTA_T)
-        {
-            b1 = B(1, t);
-            b2 = B(2, t);
-            b3 = B(3, t);
-            b4 = B(4, t);
-            x = px[i - 1] * b1 + px[i] * b2 + px[i + 1] * b3 + px[i + 2] * b4;
-            y = py[i - 1] * b1 + py[i] * b2 + py[i + 1] * b3 + py[i + 2] * b4;
-            glVertex2d(x, y);
-        }
-    }
-
-    /* Handle the last set of 4 points between t=1.0 and t=2.0 separately. */
-    for (t = 1.0 + DELTA_T; t < 2.0 + DELTA_T / 2.0; t += DELTA_T)
-    {
-        b1 = B(1, t);
-        b2 = B(2, t);
-        b3 = B(3, t);
-        b4 = B(4, t);
-        x = px[number_of_points - 4] * b1 + px[number_of_points - 3] * b2 +
-            px[number_of_points - 2] * b3 + px[number_of_points - 1] * b4;
-        y = py[number_of_points - 4] * b1 + py[number_of_points - 3] * b2 +
-            py[number_of_points - 2] * b3 + py[number_of_points - 1] * b4;
-        glVertex2d(x, y);
-    }
     glEnd();
     glEndList();
 
-    /* Render the title into a display list. */
-
+    //顯示標題
     //在 List LAGRANGE_TITLE_LIST 製作第 LAGRANGE_TITLE_LIST 張圖, LAGRANGE_TITLE_LIST = 5
     glNewList(LAGRANGE_TITLE_LIST, GL_COMPILE);
-    glColor3f(0.0, 0.0, 0.0);  /* Draw title in black. */
-    for (i = 0; i < (int)strlen(title); i++)
-    {
-        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, title[i]);
-    }
-    glEndList();
-}
-
-/* This function approximates the data with Bezier curves. */
-void Bezier()
-{
-    int i, n;
-    double ax, bx, cx, dx, ay, by, dy, cy, t, x, y;
-    double delta_t = DELTA_T / 4.0;
-    char title[] = "Bezier Approximation";
-
-    /* Make sure number of points is one more than a multiple of 3. */
-
-    switch (number_of_points % 3)
-    {
-    case 0: px[number_of_points] = px[number_of_points - 1];
-        py[number_of_points] = py[number_of_points - 1];
-        n = number_of_points + 1;
-        break;
-    case 1: n = number_of_points;
-        break;
-    case 2: n = number_of_points + 2;
-        px[n - 1] = px[n - 2] = px[number_of_points - 1];
-        py[n - 1] = py[n - 2] = py[number_of_points - 1];
-        break;
-    }
-
-    /* Construct Bezier curves for each grouping of four points. */
-    //在 List BEZIER_LIST 製作第 BEZIER_LIST 張圖, BEZIER_LIST = 3
-    glNewList(BEZIER_LIST, GL_COMPILE);
-    glColor3f(0.0, 0.0, 0.0);  /* Draw curve in black. */
-    glBegin(GL_LINE_STRIP);
-    for (i = 0; i < n - 1; i += 3)
-    {
-        ax = -px[i] + 3.0 * (px[i + 1] - px[i + 2]) + px[i + 3];
-        ay = -py[i] + 3.0 * (py[i + 1] - py[i + 2]) + py[i + 3];
-        bx = 3.0 * (px[i] - 2.0 * px[i + 1] + px[i + 2]);
-        by = 3.0 * (py[i] - 2.0 * py[i + 1] + py[i + 2]);
-        cx = -3.0 * (px[i] - px[i + 1]);
-        cy = -3.0 * (py[i] - py[i + 1]);
-        x = dx = px[i];
-        y = dy = py[i];
-        glVertex2d(x, y);
-        for (t = delta_t; t < 1.0 + delta_t / 2.0; t += delta_t)
-        {
-            x = ((ax * t + bx) * t + cx) * t + dx;
-            y = ((ay * t + by) * t + cy) * t + dy;
-            glVertex2d(x, y);
-        }
-    }
-    glEnd();
-    glEndList();
-
-    /* Render the title into a display list. */
-    //在 List BEZIER_TITLE_LIST 製作第 BEZIER_TITLE_LIST 張圖, BEZIER_TITLE_LIST = 6
-    glNewList(BEZIER_TITLE_LIST, GL_COMPILE);
-    glColor3f(0.0, 0.0, 0.0);  /* Draw title in black. */
-    for (i = 0; i < (int)strlen(title); i++)
-    {
-        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, title[i]);
-    }
-    glEndList();
-}
-
-/* This function evaluates the uniform cubic B-spline. */
-double b(double t)
-{
-    double tp2, tp1, tm2, tm1;
-
-    if (t <= -2.0)
-    {
-        return 0.0;
-    }
-    else if (t <= -1.0)
-    {
-        tp2 = t + 2.0;
-        return tp2 * tp2 * tp2 / 6.0;
-    }
-    else if (t <= 0.0)
-    {
-        tp2 = t + 2.0;
-        tp1 = t + 1.0;
-        tp2 = tp2 * tp2 * tp2 / 6.0;
-        tp1 = 2.0 * tp1 * tp1 * tp1 / 3.0;
-        return tp2 - tp1;
-    }
-    else if (t <= 1.0)
-    {
-        tm1 = 1.0 - t;
-        tm2 = 2.0 - t;
-        tm1 = 2.0 * tm1 * tm1 * tm1 / 3.0;
-        tm2 = tm2 * tm2 * tm2 / 6.0;
-        return tm2 - tm1;
-    }
-    else if (t <= 2.0)
-    {
-        tm2 = 2.0 - t;
-        return tm2 * tm2 * tm2 / 6.0;
-    }
-    else
-    {
-        return 0.0;
-    }
-}
-
-/* This function approximates the data with spline curves. */
-void spline()
-{
-    double xs[MAX_POINTS + 4], ys[MAX_POINTS + 4];
-    double x, y, t, bt1, bt2, bt3, bt4;
-    int i;
-    char title[] = "Spline Approximation";
-
-    /* Load local arrays with data and make the two endpoints multiple so that
-     * they are interpolated. */
-
-    xs[0] = xs[1] = px[0];
-    ys[0] = ys[1] = py[0];
-    for (i = 0; i < number_of_points; i++)
-    {
-        xs[i + 2] = px[i];
-        ys[i + 2] = py[i];
-    }
-    xs[number_of_points + 2] = xs[number_of_points + 3] = px[number_of_points - 1];
-    ys[number_of_points + 2] = ys[number_of_points + 3] = py[number_of_points - 1];
-
-    /* Compute the values to plot. */
-
-    //在 List SPLINE_LIST 製作第 SPLINE_LIST 張圖, SPLINE_LIST = 4
-    glNewList(SPLINE_LIST, GL_COMPILE);
-    glColor3f(0.0, 0.0, 0.0);  /* Draw curve in black. */
-    glBegin(GL_LINE_STRIP);
-    glVertex2d(px[0], py[0]);
-    for (i = 0; i <= number_of_points; i++)
-    {
-        for (t = DELTA_T; t < 1.0 + DELTA_T / 2.0; t += DELTA_T)
-        {
-            bt1 = b(t - 2.0);
-            bt2 = b(t - 1.0);
-            bt3 = b(t);
-            bt4 = b(t + 1.0);
-            x = xs[i] * bt4 + xs[i + 1] * bt3 + xs[i + 2] * bt2 + xs[i + 3] * bt1;
-            y = ys[i] * bt4 + ys[i + 1] * bt3 + ys[i + 2] * bt2 + ys[i + 3] * bt1;
-            glVertex2d(x, y);
-        }
-    }
-    glEnd();
-    glEndList();
-
-    /* Render the title into a display list. */
-
-    //在 List SPLINE_TITLE_LIST 製作第 SPLINE_TITLE_LIST 張圖, SPLINE_TITLE_LIST = 7
-    glNewList(SPLINE_TITLE_LIST, GL_COMPILE);
     glColor3f(0.0, 0.0, 0.0);  /* Draw title in black. */
     for (i = 0; i < (int)strlen(title); i++)
     {
@@ -417,15 +200,13 @@ void gfxinit()
     /* Generate the three different curves for displaying. */
 
     mark_points();          /* Generate the data marks display list.            */
+
     Lagrange_interpolate(); /* Generate the lines for Lagrange interpolation.   */
-    Bezier();               /* Generate the lines for Bezier approximation.     */
-    spline();               /* Generate the lines for the spline approximation. */
 }
 
 int main(int argc, char** argv)
 {
-    /* Get input data. */
-    interact();
+    interact();		//讀取資料
 
     const char* windowName = "Curve Fitting";
     const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
