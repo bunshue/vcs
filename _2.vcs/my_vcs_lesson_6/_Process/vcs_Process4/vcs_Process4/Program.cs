@@ -8,7 +8,7 @@ namespace vcs_Process4
     static class Program
     {
         /// <summary>
-        /// 应用程序的主入口点。
+        /// 應用程序的主入口點。
         /// </summary>
         [STAThread]
         static void Main()

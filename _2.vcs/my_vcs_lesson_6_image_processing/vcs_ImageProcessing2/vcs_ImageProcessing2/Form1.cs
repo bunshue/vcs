@@ -15,6 +15,10 @@ namespace vcs_ImageProcessing2
 {
     public partial class Form1 : Form
     {
+        string filename1 = @"C:\______test_files\picture1.jpg";
+        string filename2 = @"C:\______test_files\bear.jpg";
+        string filename3 = @"C:\______test_files\fakecolor.jpg";    //偽色彩處理
+
         public Form1()
         {
             InitializeComponent();
@@ -24,8 +28,7 @@ namespace vcs_ImageProcessing2
         {
             show_item_location();
 
-            string filename = @"C:\______test_files\picture1.jpg";
-            pictureBox1.Image = Bitmap.FromFile(filename);
+            pictureBox1.Image = Bitmap.FromFile(filename1);
             PictureToSepia1();  //To Sepia 方法一
             //PictureToSepia2();  //To Sepia 方法二
             PictureToGray1();
@@ -117,7 +120,7 @@ namespace vcs_ImageProcessing2
             pictureBox17.Size = new Size(W, H);
             pictureBox18.Size = new Size(W, H);
             pictureBox19.Size = new Size(W, H);
-            pictureBox20.Size = new Size(W+110, H+100);
+            pictureBox20.Size = new Size(W + 110, H + 100);
             pictureBox20.BackColor = Color.Pink;
 
             pictureBox1.Location = new Point(x_st + dx * 0, y_st + dy * 0);
@@ -141,7 +144,7 @@ namespace vcs_ImageProcessing2
             pictureBox17.Location = new Point(x_st + dx * 2, y_st + dy * 2);
             pictureBox18.Location = new Point(x_st + dx * 3, y_st + dy * 2);
             pictureBox19.Location = new Point(x_st + dx * 4, y_st + dy * 2);
-            pictureBox20.Location = new Point(x_st + dx * 5-30, y_st + dy * 2);
+            pictureBox20.Location = new Point(x_st + dx * 5 - 30, y_st + dy * 2);
 
             label1.Location = new Point(x_st + dx * 0, y_st + dy * 0 - 25);
             label2.Location = new Point(x_st + dx * 1, y_st + dy * 0 - 25);
@@ -346,15 +349,13 @@ namespace vcs_ImageProcessing2
         private void PictureToGray1()
         {
             //SetPixel 彩色轉灰階
-            string filename = @"C:\______test_files\picture1.jpg";
-            color_to_gray_1(filename);
+            color_to_gray_1(filename1);
         }
 
         private void PictureToGray2()
         {
             //Marshal 彩色轉灰階
-            string filename = @"C:\______test_files\picture1.jpg";
-            color_to_gray_2(filename);
+            color_to_gray_2(filename1);
         }
 
         void color_to_gray_1(string filename)
@@ -487,8 +488,7 @@ namespace vcs_ImageProcessing2
         private void PictureToGray3()
         {
             //灰度處理
-            string filename = @"C:\______test_files\picture1.jpg";
-            Bitmap bitmap1 = new Bitmap(filename);
+            Bitmap bitmap1 = new Bitmap(filename1);
             pictureBox1.Image = bitmap1;
             Bitmap bitmap2 = 灰度處理(bitmap1);
             pictureBox5.Image = bitmap2;
@@ -572,15 +572,13 @@ namespace vcs_ImageProcessing2
         private void PictureToGray4()
         {
             //將圖片改為灰階 Grayscale
-            string filename = @"C:\______test_files\bear.jpg";
-            ConvertFile(filename, false);
+            ConvertFile(filename2, false);
         }
 
         private void PictureToGray5()
         {
             //將圖片改為灰階 Average
-            string filename = @"C:\______test_files\bear.jpg";
-            ConvertFile(filename, true);
+            ConvertFile(filename2, true);
         }
 
         // Convert a file.
@@ -647,9 +645,7 @@ namespace vcs_ImageProcessing2
                     byte r = bm32.GetRed(x, y);
                     byte g = bm32.GetGreen(x, y);
                     byte b = bm32.GetBlue(x, y);
-                    byte gray = (use_average ?
-                        (byte)((r + g + b) / 3) :
-                        (byte)(0.3 * r + 0.5 * g + 0.2 * b));
+                    byte gray = (use_average ? (byte)((r + g + b) / 3) : (byte)(0.3 * r + 0.5 * g + 0.2 * b));
                     bm32.SetPixel(x, y, gray, gray, gray, 255);
                 }
             }
@@ -753,7 +749,6 @@ namespace vcs_ImageProcessing2
             return bm;
         }
 
-
         private void bt_clear_Click(object sender, EventArgs e)
         {
             pictureBox1.Image = null;
@@ -801,7 +796,6 @@ namespace vcs_ImageProcessing2
             }
             // Return the result.
             return bmp;
-
         }
 
         private void PictureToBlur()
@@ -816,7 +810,6 @@ namespace vcs_ImageProcessing2
             int W = bitmap1.Width;
             int H = bitmap1.Height;
             Bitmap bitmap2 = new Bitmap(W, H);
-
 
             for (int j = 0; j < H; j++)
             {
@@ -936,11 +929,7 @@ namespace vcs_ImageProcessing2
 
         private void show_mono_color_picture()
         {
-            //image path
-            string filename = @"C:\______test_files\picture1.jpg";
-
-            //read image
-            Bitmap bmp = new Bitmap(filename);
+            Bitmap bmp = new Bitmap(filename1);
 
             //load original image in picturebox1
             //pictureBox1.Image = Image.FromFile(filename);
@@ -1052,7 +1041,7 @@ namespace vcs_ImageProcessing2
         {
             //二值化圖片
             richTextBox1.Text += "PictureToBinary\n";
-            pictureBox18.Image = OtsuThreshold(new Bitmap("c:\\______test_files\\picture1.jpg"));
+            pictureBox18.Image = OtsuThreshold(new Bitmap(filename1));
         }
 
         #region 二值化
@@ -1233,7 +1222,7 @@ namespace vcs_ImageProcessing2
         private void PictureTo8BitGrayScale()
         {
             richTextBox1.Text += "PictureTo8BitGrayScale\n";
-            pictureBox19.Image = RGB2Gray(new Bitmap("c:\\______test_files\\picture1.jpg"));
+            pictureBox19.Image = RGB2Gray(new Bitmap(filename1));
         }
 
         /// 建立8位灰度影像
@@ -1323,14 +1312,11 @@ namespace vcs_ImageProcessing2
             pictureBox2.Image = bitmap1;
             */
 
-            string filename = @"C:\______test_files\fakecolor.jpg";
-            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
+            Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename3);	//Bitmap.FromFile出來的是Image格式
             Bitmap bitmap2 = gcTrans(bitmap1, true, 255 / 10);
             pictureBox20.Image = bitmap2;
 
             //考慮把 bitmap1 和 bitmap2 同時畫在 pictureBox 裏
-
-
         }
 
         //偽彩色圖像處理 ST
@@ -1428,7 +1414,5 @@ namespace vcs_ImageProcessing2
             }
         }
         //偽彩色圖像處理 SP
-
-
     }
 }

@@ -26,7 +26,7 @@ namespace vcs_Process4
             {
                 listView1.Items.Clear();
                 Process[] MyProcesses = Process.GetProcesses();
-                tsslInfo.Text = "进程总数：" + MyProcesses.Length.ToString();
+                tsslInfo.Text = "進程總數：" + MyProcesses.Length.ToString();
                 string[] Minfo = new string[6];
                 foreach (Process MyProcess in MyProcesses)
                 {
@@ -53,11 +53,11 @@ namespace vcs_Process4
             getProcessInfo();
         }
 
-        private void 结束进程ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 結束進程ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             try
             {
-                if (MessageBox.Show("警告:终止进程会导致不希望发生的结果，\r包括数据丢失和系统不稳定。在被终止前，\r进程将没有机会保存其状态和数据。确实\r想终止该进程吗?", "任务管理器警告", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
+                if (MessageBox.Show("警告:終止進程會導致不希望發生的結果，\r包括數據丟失和系統不穩定。在被終止前，\r進程將沒有機會保存其狀態和數據。確實\r想終止該進程嗎?", "任務管理器警告", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes)
                 {
                     string ProcessName = listView1.SelectedItems[0].Text;
                     Process[] MyProcess = Process.GetProcessesByName(ProcessName);
@@ -72,19 +72,19 @@ namespace vcs_Process4
                 string ProcessName = listView1.SelectedItems[0].Text;
                 Process[] MyProcess1 = Process.GetProcessesByName(ProcessName);
                 Process MyProcess = new Process();
-                //设定程序名
+                //設定程序名
                 MyProcess.StartInfo.FileName = "cmd.exe";
-                //关闭Shell的使用
+                //關閉Shell的使用
                 MyProcess.StartInfo.UseShellExecute = false;
-                //重定向标准输入
+                //重定向標準輸入
                 MyProcess.StartInfo.RedirectStandardInput = true;
-                //重定向标准输出
+                //重定向標準輸出
                 MyProcess.StartInfo.RedirectStandardOutput = true;
-                //重定向错误输出
+                //重定向錯誤輸出
                 MyProcess.StartInfo.RedirectStandardError = true;
-                //设置不显示窗口
+                //設置不顯示窗口
                 MyProcess.StartInfo.CreateNoWindow = true;
-                //执行强制结束命令
+                //執行強制結束命令
                 MyProcess.Start();
                 MyProcess.StandardInput.WriteLine("ntsd -c q -p " + (MyProcess1[0].Id).ToString());
                 MyProcess.StandardInput.WriteLine("Exit");
@@ -99,15 +99,15 @@ namespace vcs_Process4
             switch (i)
             {
                 case 0: MyProcess[0].PriorityClass = ProcessPriorityClass.Idle; break;//低
-                case 1: MyProcess[0].PriorityClass = ProcessPriorityClass.Normal; break;//标准
+                case 1: MyProcess[0].PriorityClass = ProcessPriorityClass.Normal; break;//標準
                 case 2: MyProcess[0].PriorityClass = ProcessPriorityClass.High; break;//高
-                case 3: MyProcess[0].PriorityClass = ProcessPriorityClass.RealTime; break;//实时
-                case 4: MyProcess[0].PriorityClass = ProcessPriorityClass.AboveNormal; break;//高于标准
-                case 5: MyProcess[0].PriorityClass = ProcessPriorityClass.BelowNormal; break;//低于标准
+                case 3: MyProcess[0].PriorityClass = ProcessPriorityClass.RealTime; break;//實時
+                case 4: MyProcess[0].PriorityClass = ProcessPriorityClass.AboveNormal; break;//高于標準
+                case 5: MyProcess[0].PriorityClass = ProcessPriorityClass.BelowNormal; break;//低于標準
             }
             getProcessInfo();
         }
-        private void 实时ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 實時ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SetBasePriority(3);
         }
@@ -117,17 +117,17 @@ namespace vcs_Process4
             SetBasePriority(2);
         }
 
-        private void 高于标准ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 高于標準ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SetBasePriority(4);
         }
 
-        private void 标准ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 標準ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SetBasePriority(1);
         }
 
-        private void 低于标准ToolStripMenuItem_Click(object sender, EventArgs e)
+        private void 低于標準ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SetBasePriority(5);
         }

@@ -25,8 +25,8 @@ namespace vcs_ImageProcessing3
         string filename = @"C:\______test_files\elephant.jpg";
         //string filename = @"C:\______test_files\picture1.jpg";
         //string filename = @"C:\______test_files\isinbaeva.jpg";
-
         //string filename = @"C:\______test_files\naruto.jpg";
+
         Stopwatch sw = new Stopwatch();
 
         public Form1()

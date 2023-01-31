@@ -216,15 +216,16 @@ namespace vcs_Process1
         private void button5_Click(object sender, EventArgs e)
         {
             //關閉計算機(偽)
+            string exe_filename = "cmd.exe";
             Process myProcess = new Process();
-            myProcess.StartInfo.FileName = "cmd.exe";//启动cmd命令
-            myProcess.StartInfo.UseShellExecute = false;//是否使用系统外壳程序启动进程
-            myProcess.StartInfo.RedirectStandardInput = true;//是否从流中读取
-            myProcess.StartInfo.RedirectStandardOutput = true;//是否写入流
-            myProcess.StartInfo.RedirectStandardError = true;//是否将错误信息写入流
-            myProcess.StartInfo.CreateNoWindow = true;//是否在新窗口中启动进程
-            //myProcess.Start();//启动进程
-            //myProcess.StandardInput.WriteLine("shutdown -s -t 0");//执行关机命令
+            myProcess.StartInfo.FileName = exe_filename;    //啟動命令
+            myProcess.StartInfo.UseShellExecute = false;    //是否使用系統外殼程序啟動進程
+            myProcess.StartInfo.RedirectStandardInput = true;//是否從流中讀取
+            myProcess.StartInfo.RedirectStandardOutput = true;//是否寫入流
+            myProcess.StartInfo.RedirectStandardError = true;//是否將錯誤信息寫入流
+            myProcess.StartInfo.CreateNoWindow = true;//是否在新窗口中啟動進程
+            //myProcess.Start();//啟動進程
+            //myProcess.StandardInput.WriteLine("shutdown -s -t 0");//執行關機命令
         }
 
         private void button6_Click(object sender, EventArgs e)
@@ -232,14 +233,14 @@ namespace vcs_Process1
             //重啟計算機(偽)
             //重啟計算機
             Process myProcess = new Process();
-            myProcess.StartInfo.FileName = "cmd.exe";//启动cmd命令
-            myProcess.StartInfo.UseShellExecute = false;//是否使用系统外壳程序启动进程
-            myProcess.StartInfo.RedirectStandardInput = true;//是否从流中读取
-            myProcess.StartInfo.RedirectStandardOutput = true;//是否写入流
-            myProcess.StartInfo.RedirectStandardError = true;//是否将错误信息写入流
-            myProcess.StartInfo.CreateNoWindow = true;//是否在新窗口中启动进程
-            //myProcess.Start();//启动进程
-            //myProcess.StandardInput.WriteLine("shutdown -r -t 0");//执行重启计算机命令
+            myProcess.StartInfo.FileName = "cmd.exe";//啟動cmd命令
+            myProcess.StartInfo.UseShellExecute = false;//是否使用系統外殼程序啟動進程
+            myProcess.StartInfo.RedirectStandardInput = true;//是否從流中讀取
+            myProcess.StartInfo.RedirectStandardOutput = true;//是否寫入流
+            myProcess.StartInfo.RedirectStandardError = true;//是否將錯誤信息寫入流
+            myProcess.StartInfo.CreateNoWindow = true;//是否在新窗口中啟動進程
+            //myProcess.Start();//啟動進程
+            //myProcess.StandardInput.WriteLine("shutdown -r -t 0");//執行重啟計算機命令
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -277,9 +278,9 @@ namespace vcs_Process1
             {
                 using (Process process = new Process())
                 {
+                    string exe_filename = @"C:\_git\ims1\iMS_Link\iMS_Link\bin\Debug\iMS_Link.exe";
                     process.StartInfo.UseShellExecute = false;
-                    // You can start any process, HelloWorld is a do-nothing example.
-                    process.StartInfo.FileName = @"C:\_git\vcs\_2.vcs\ims\imsLink\bin\Debug\imsLink.exe";
+                    process.StartInfo.FileName = exe_filename;
                     process.StartInfo.CreateNoWindow = true;
                     process.Start();
                     // This code assumes the process you are starting will terminate itself. 
@@ -429,7 +430,7 @@ namespace vcs_Process1
 
         private void button17_Click(object sender, EventArgs e)
         {
-            //在c#中，如果启动了外部程序，一般也可以通过退出码来确认程序的运行状态：
+            //在c#中，如果啟動了外部程序，一般也可以通過退出碼來確認程序的運行狀態：
 
             Process p = Process.Start(@"C:\_git\vcs\_2.vcs\ims\imsLink\bin\Debug\imsLink.exe");
 
@@ -685,6 +686,36 @@ namespace vcs_Process1
 
         private void button30_Click(object sender, EventArgs e)
         {
+            //Process 測試 from M$
+            // Get the current process.
+            Process currentProcess = Process.GetCurrentProcess();
+
+            // Get all processes running on the local computer.
+            Process[] localAll = Process.GetProcesses();
+
+            // Get all instances of Notepad running on the local computer.
+            // This will return an empty array if notepad isn't running.
+            Process[] localByName = Process.GetProcessesByName("notepad");
+
+            // Get a process on the local computer, using the process id.
+            // This will throw an exception if there is no such process.
+            //Process localById = Process.GetProcessById(5);
+
+            // Get processes running on a remote computer. Note that this
+            // and all the following calls will timeout and throw an exception
+            // if "myComputer" and 169.0.0.0 do not exist on your local network.
+
+            // Get all processes on a remote computer.
+            //Process[] remoteAll = Process.GetProcesses("myComputer");
+
+            // Get all instances of Notepad running on the specific computer, using machine name.
+            //Process[] remoteByName = Process.GetProcessesByName("notepad", "myComputer");
+
+            // Get all instances of Notepad running on the specific computer, using IP address.
+            //Process[] ipByName = Process.GetProcessesByName("notepad", "169.0.0.0");
+
+            // Get a process on a remote computer, using the process id and machine name.
+            //Process remoteById = Process.GetProcessById(2345, "myComputer");
 
         }
 
@@ -774,5 +805,4 @@ p.WaitForExit(2000); //等待20秒
 }
 p.Dispose();
 */
-
 

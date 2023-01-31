@@ -13,22 +13,17 @@ using System.Diagnostics;       //for Process
 
 準備中
 
-
 //呼叫系統內建小鍵盤     fail
 //Process.Start("" + Environment.SystemDirectory + "/osk.exe");
-
 
 //開啟檔案 由預設程式開啟
 //Process.Start("C:\\______test_files\\my_text_file.txt");
 
-
 //開啟程式
 //Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL");
 
-
 //呼叫外部的Exe文件
 //Process.Start(textBox1.Text);  //呼叫 *.exe
-
 
             //用預設的程式開啟檔案
             string filename = "C:\\______test_files\\aaaaaaa.txt";
@@ -51,9 +46,6 @@ using System.Diagnostics;       //for Process
 
             //開啟一個程式
             //Process newprocess = Process.Start(filename);
-
-
-
 
  */
 
@@ -84,8 +76,8 @@ namespace vcs_Process_Start
             dy = 62;
 
             groupBox1.Location = new Point(10, 10);
-            groupBox2.Location = new Point(10 + dx * 3+40, 10);
-            groupBox3.Location = new Point(10 + dx * 4+100, 10);
+            groupBox2.Location = new Point(10 + dx * 3 + 40, 10);
+            groupBox3.Location = new Point(10 + dx * 4 + 100, 10);
             richTextBox1.Location = new Point(10 + dx * 5 + 160, 10);
 
 
@@ -314,8 +306,9 @@ namespace vcs_Process_Start
         private void button24_Click(object sender, EventArgs e)
         {
             //檔案總管 C槽
+            string exe_filename = "explorer.exe";   //檔案總管
             ProcessStartInfo processStartInfo = new ProcessStartInfo();
-            processStartInfo.FileName = "explorer.exe";  //資源管理器
+            processStartInfo.FileName = exe_filename;
             processStartInfo.Arguments = @"C:\";
             Process.Start(processStartInfo);
         }
@@ -345,8 +338,8 @@ namespace vcs_Process_Start
             Process myProcess = new Process();
             try
             {
-                myProcess.StartInfo.UseShellExecute = false;
                 myProcess.StartInfo.FileName = exe_filename;
+                myProcess.StartInfo.UseShellExecute = false;
                 myProcess.StartInfo.CreateNoWindow = true;
                 myProcess.Start();
             }
@@ -377,8 +370,6 @@ namespace vcs_Process_Start
             //開啟Notepad程序
             process1.StartInfo.FileName = "notepad.exe";
             process1.Start();
-
-
         }
 
         private void button41_Click(object sender, EventArgs e)
@@ -392,8 +383,6 @@ namespace vcs_Process_Start
                 instance.WaitForExit(3000);
                 instance.Close();
             }
-
         }
     }
 }
-
