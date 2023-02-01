@@ -5,7 +5,7 @@ using System.Text;
 
 using System.Drawing;
 
-namespace vcs_Clock7_LED
+namespace vcs_Clock1
 {
     class LedText
     {

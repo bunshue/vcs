@@ -9,9 +9,9 @@ using System.Windows.Forms;
 
 using System.Drawing.Drawing2D;
 
-namespace vcs_Clock7_LED
+namespace vcs_Clock1
 {
-    public partial class Form1 : Form
+    public partial class Form_CountDown : Form
     {
         bool flag_countdown_start = false;
 
@@ -38,7 +38,7 @@ namespace vcs_Clock7_LED
         Brush bg_brush = Brushes.Black;
         Brush used_brush = Brushes.Lime;
 
-        public Form1()
+        public Form_CountDown()
         {
             InitializeComponent();
 
@@ -47,9 +47,10 @@ namespace vcs_Clock7_LED
                 //一段時間以後的寫法
                 EventDate = DateTime.Now + new TimeSpan(0, 0, 10, 0);    //現在時間 + 1天13時42分59秒
             }
+
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void Form_CountDown_Load(object sender, EventArgs e)
         {
             if (flag_operation_mode == MODE_0)  //測試模式
             {
@@ -110,7 +111,7 @@ namespace vcs_Clock7_LED
                 dx = 150;
                 W = 100;
                 H = 40;
-               
+
                 // 實例化按鈕
                 nud1 = new NumericUpDown();
                 nud1.Name = "nud1";
@@ -201,7 +202,7 @@ namespace vcs_Clock7_LED
                 //btn3.Click += new EventHandler(button_Click);   //same
                 btn3.Click += button_Click;
                 this.pictureBox1.Controls.Add(btn3);    // 將此控件加入pictureBox中
-                
+
                 lb_time.Text = "設定時間 : " + nud1.Value.ToString() + "時 " + nud3.Value.ToString() + "分 " + nud3.Value.ToString() + "秒" + "\n";
             }
             else
@@ -568,6 +569,7 @@ namespace vcs_Clock7_LED
         {
             richTextBox1.Text += "A";
             pictureBox1.Refresh();
+
         }
 
     }

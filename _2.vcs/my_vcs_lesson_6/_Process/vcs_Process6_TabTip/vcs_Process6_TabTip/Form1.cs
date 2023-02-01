@@ -16,7 +16,6 @@ namespace vcs_Process6_TabTip
     {
         string keyboardPath = @"C:\Program Files\Common Files\Microsoft Shared\ink\TabTip.exe";
         Process myProcess = new Process();
-
         int focus_at = 0;
 
         public Form1()
@@ -27,22 +26,6 @@ namespace vcs_Process6_TabTip
         private void Form1_Load(object sender, EventArgs e)
         {
             richTextBox4.Text += keyboardPath + "\n";
-        }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            if (focus_at == 1)
-            {
-                richTextBox1.Focus();
-            }
-            else if (focus_at == 2)
-            {
-                richTextBox2.Focus();
-            }
-            else if (focus_at == 3)
-            {
-                richTextBox3.Focus();
-            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -64,6 +47,27 @@ namespace vcs_Process6_TabTip
             focus_at = 3;
             remove_osd_keyboard();
             myProcess = Process.Start(keyboardPath);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            remove_osd_keyboard();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (focus_at == 1)
+            {
+                richTextBox1.Focus();
+            }
+            else if (focus_at == 2)
+            {
+                richTextBox2.Focus();
+            }
+            else if (focus_at == 3)
+            {
+                richTextBox3.Focus();
+            }
         }
 
         void remove_osd_keyboard()
@@ -93,11 +97,6 @@ namespace vcs_Process6_TabTip
             {
                 richTextBox4.Text += "無已開啟之螢幕鍵盤\n";
             }
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            remove_osd_keyboard();
         }
     }
 }

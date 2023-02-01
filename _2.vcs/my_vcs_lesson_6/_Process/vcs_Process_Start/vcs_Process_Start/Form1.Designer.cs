@@ -127,6 +127,7 @@
             this.button39.Size = new System.Drawing.Size(150, 50);
             this.button39.TabIndex = 29;
             this.button39.UseVisualStyleBackColor = true;
+            this.button39.Click += new System.EventHandler(this.button39_Click);
             // 
             // button38
             // 
@@ -136,6 +137,7 @@
             this.button38.Size = new System.Drawing.Size(150, 50);
             this.button38.TabIndex = 28;
             this.button38.UseVisualStyleBackColor = true;
+            this.button38.Click += new System.EventHandler(this.button38_Click);
             // 
             // button37
             // 
@@ -145,6 +147,7 @@
             this.button37.Size = new System.Drawing.Size(150, 50);
             this.button37.TabIndex = 27;
             this.button37.UseVisualStyleBackColor = true;
+            this.button37.Click += new System.EventHandler(this.button37_Click);
             // 
             // button36
             // 
@@ -154,6 +157,7 @@
             this.button36.Size = new System.Drawing.Size(150, 50);
             this.button36.TabIndex = 26;
             this.button36.UseVisualStyleBackColor = true;
+            this.button36.Click += new System.EventHandler(this.button36_Click);
             // 
             // button35
             // 
@@ -163,6 +167,7 @@
             this.button35.Size = new System.Drawing.Size(150, 50);
             this.button35.TabIndex = 25;
             this.button35.UseVisualStyleBackColor = true;
+            this.button35.Click += new System.EventHandler(this.button35_Click);
             // 
             // button34
             // 
@@ -172,6 +177,7 @@
             this.button34.Size = new System.Drawing.Size(150, 50);
             this.button34.TabIndex = 24;
             this.button34.UseVisualStyleBackColor = true;
+            this.button34.Click += new System.EventHandler(this.button34_Click);
             // 
             // button33
             // 
@@ -180,7 +186,9 @@
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(150, 50);
             this.button33.TabIndex = 23;
+            this.button33.Text = "打開控制面板3";
             this.button33.UseVisualStyleBackColor = true;
+            this.button33.Click += new System.EventHandler(this.button33_Click);
             // 
             // button32
             // 
@@ -189,7 +197,9 @@
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(150, 50);
             this.button32.TabIndex = 22;
+            this.button32.Text = "打開控制面板2";
             this.button32.UseVisualStyleBackColor = true;
+            this.button32.Click += new System.EventHandler(this.button32_Click);
             // 
             // button31
             // 
@@ -198,7 +208,9 @@
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(150, 50);
             this.button31.TabIndex = 21;
+            this.button31.Text = "打開控制面板1";
             this.button31.UseVisualStyleBackColor = true;
+            this.button31.Click += new System.EventHandler(this.button31_Click);
             // 
             // button30
             // 
@@ -207,7 +219,9 @@
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(150, 50);
             this.button30.TabIndex = 20;
+            this.button30.Text = "打開註冊表";
             this.button30.UseVisualStyleBackColor = true;
+            this.button30.Click += new System.EventHandler(this.button30_Click);
             // 
             // button19
             // 
@@ -288,7 +302,6 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(150, 50);
             this.button12.TabIndex = 12;
-            this.button12.Text = "打開註冊表";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -397,7 +410,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(150, 50);
             this.button2.TabIndex = 2;
-            this.button2.Text = "EXCEL";
+            this.button2.Text = "開啟Office程式   (偽)";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 

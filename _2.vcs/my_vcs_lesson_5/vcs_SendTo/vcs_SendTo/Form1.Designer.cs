@@ -47,10 +47,9 @@
             this.label1.Font = new System.Drawing.Font("標楷體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.label1.Location = new System.Drawing.Point(18, 26);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(569, 114);
+            this.label1.Size = new System.Drawing.Size(49, 19);
             this.label1.TabIndex = 1;
-            this.label1.Text = "檔案總管 右鍵 傳送到 XXX, 可用XXX開啟檔案\r\n\r\n拉一個捷徑到\r\n%APPDATA%\\Microsoft\\Windows\\SendTo\r\n或\r\nC:\\U" +
-                "sers\\070601\\AppData\\Roaming\\Microsoft\\Windows\\SendTo";
+            this.label1.Text = "mesg";
             // 
             // Form1
             // 

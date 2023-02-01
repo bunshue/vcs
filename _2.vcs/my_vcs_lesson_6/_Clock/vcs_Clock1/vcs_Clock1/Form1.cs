@@ -19,7 +19,7 @@ namespace vcs_Clock1
         private const int MODE_0 = 0x00;   //時間模式
         private const int MODE_1 = 0x01;   //碼表模式
         private const int MODE_2 = 0x02;   //離開
-        private const int MODE_3 = 0x03;   //大螢幕
+        private const int MODE_3 = 0x03;   //倒數計時
         private const int MODE_4 = 0x04;   //RGB模式
         private const int MODE_5 = 0x05;   //最上層切換
 
@@ -132,12 +132,13 @@ namespace vcs_Clock1
                 g.DrawLine(new Pen(Brushes.Gray, 3), px1, px2);
 
                 Font f2 = new Font("標楷體", 12);
-                g.DrawString(" 時鐘", f2, b, W * 0 / 3, H / 2 - 17);
-                g.DrawString(" 馬表", f2, b, W * 1 / 3, H / 2 - 17);
-                g.DrawString(" 離開", f2, b, W * 2 / 3, H / 2 - 17);
-                g.DrawString(" 倒數時", f2, b, W * 0 / 3, H / 2);
-                g.DrawString(" RGB", f2, b, W * 1 / 3, H / 2);
-                g.DrawString(" 最上層", f2, b, W * 2 / 3, H / 2);
+                Brush b2 = new SolidBrush(Color.Red);
+                g.DrawString(" 時鐘", f2, b2, W * 0 / 3, 10);
+                g.DrawString(" 馬表", f2, b2, W * 1 / 3, 10);
+                g.DrawString(" 離開", f2, b2, W * 2 / 3, 10);
+                g.DrawString(" 倒計時", f2, b2, W * 0 / 3, H - 25);
+                g.DrawString(" RGB", f2, b2, W * 1 / 3, H - 25);
+                g.DrawString(" 最上層", f2, b2, W * 2 / 3, H - 25);
 
                 //其他 全螢幕 雙倍螢幕
             }
@@ -236,7 +237,7 @@ namespace vcs_Clock1
             {
                 if (xx < W / 3) //左
                 {
-                    richTextBox1.Text += "三 大螢幕";
+                    richTextBox1.Text += "三 倒數計時";
                     flag_operation_mode = MODE_3;
                 }
                 else if (xx < W * 2 / 3) //中

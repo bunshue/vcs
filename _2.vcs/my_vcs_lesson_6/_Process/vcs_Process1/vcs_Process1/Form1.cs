@@ -31,16 +31,6 @@ namespace vcs_Process1
         Process myProcess = new Process();
         int cnt = 0;
 
-        //c#調用系統資源
-        //引入API函數
-        [DllImportAttribute("user32.dll")]
-        public static extern int FindWindow(string ClassName, string WindowName);
-        [DllImport("user32.dll")]
-        public static extern int ShowWindow(int handle, int cmdShow);
-
-        private const int SW_HIDE = 0;//API參數表示隱藏窗口
-        private const int SW_SHOW = 5;//API參數表示用當前的大小和位置顯示窗口
-
         public Form1()
         {
             InitializeComponent();
@@ -843,116 +833,6 @@ namespace vcs_Process1
 
         private void button34_Click(object sender, EventArgs e)
         {
-            //開啟外部程式
-
-            /*
-            //打開Word
-            Process.Start(@"C:\Program Files\Microsoft Office\OFFICE15\winword.exe");
-
-            //打開Excel
-            Process.Start(@"C:\Program Files\Microsoft Office\OFFICE15\excel.exe");
-
-            //打開Access fail
-            //Process.Start(@"C:\Program Files\Microsoft Office\OFFICE15\msaccess.exe");
-
-            //打開PowerPoint
-            Process.Start(@"C:\Program Files\Microsoft Office\OFFICE15\powerpnt.exe");
-
-            //打開OutLook
-            Process.Start(@"C:\Program Files\Microsoft Office\OFFICE15\outlook.exe");
-            */
-
-            /*
-            //打開播放器() 
-            Process.Start("mplayer2.exe");
-
-            //打開資源管理器() 
-            Process.Start("explorer.exe");
-
-            //打開任務管理器() 
-            Process.Start("taskmgr.exe");
-
-            //打開事件檢視器() 
-            Process.Start("eventvwr.exe");
-
-            //打開系統信息() fail
-            //Process.Start("winmsd.exe");
-
-            //打開備份還原() fail
-            //Process.Start("ntbackup.exe");
-
-            //打開Windows版本() 
-            Process.Start("winver.exe"); 
-            */
-
-            /*
-            //打開控制面板() 
-            Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL");
-
-            //打開控制面板輔助選項鍵盤() 
-            Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL access.cpl,,1");
-
-            //打開控制面板輔助選項聲音() 
-            Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL access.cpl,,2");
-
-            //打開控制面板輔助選項顯示() 
-            Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL access.cpl,,3");
-
-            //打開控制面板輔助選項鼠標() 
-            Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL access.cpl,,4");
-
-            //打開控制面板輔助選項常規() 
-            Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL access.cpl,,5");
-
-            //打開控制面板添加新硬件向導() 
-            Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL sysdm.cpl @1");
-
-            //打開控制面板添加新打印機向導() 
-            Process.Start("rundll32.exe", "shell32.dll,SHHelpShortcuts_RunDLL AddPrinter");
-            */
-
-            /*
-            //打開控制面板添加刪除程序安裝卸載面板() 
-            Process.Start("rundll32.exe", "shell32.dll,shell32.dll,Control_RunDLL appwiz.cpl,,1");
-
-            //打開控制面板添加刪除程序安裝Windows面板() 
-            Process.Start("rundll32.exe", "shell32.dll,shell32.dll,Control_RunDLL appwiz.cpl,,2");
-
-            //打開控制面板添加刪除程序啟動盤面板() 
-            Process.Start("rundll32.exe", "shell32.dll,shell32.dll,Control_RunDLL appwiz.cpl,,3");
-
-            //打開建立快捷方式對話框() 
-            Process.Start("rundll32.exe", " appwiz.cpl,NewLinkHere %1");
-
-            //打開日期時間選項() 
-            Process.Start("rundll32.exe", " shell32.dll,Control_RunDLL timedate.cpl,,0");
-
-            //打開時區選項() 
-            Process.Start("rundll32.exe", " shell32.dll,Control_RunDLL timedate.cpl,,1");
-
-            //建立公文包() 
-            Process.Start("rundll32.exe", " syncui.dll,Briefcase_Create");
-
-            //打開復制軟碟窗口() 
-            Process.Start("rundll32.exe", " diskcopy.dll,DiskCopyRunDll");
-
-            //打開新建撥號連接() 
-            Process.Start("rundll32.exe", " rnaui.dll,RnaWizard");
-
-            //打開顯示屬性背景() 
-            Process.Start("rundll32.exe", " shell32.dll,Control_RunDLL desk.cpl,,0");
-
-            //打開顯示屬性屏幕保護() 
-            Process.Start("rundll32.exe", " shell32.dll,Control_RunDLL desk.cpl,,1");
-
-            //打開顯示屬性外觀() 
-            Process.Start("rundll32.exe", " shell32.dll,Control_RunDLL desk.cpl,,2");
-
-            //打開顯示屬性屬性() 
-            Process.Start("rundll32.exe", " shell32.dll,Control_RunDLL desk.cpl,,3");
-            */
-
-
         }
 
         private void button35_Click(object sender, EventArgs e)

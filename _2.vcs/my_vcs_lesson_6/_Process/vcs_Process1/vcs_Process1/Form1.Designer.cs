@@ -478,7 +478,6 @@
             this.button34.Name = "button34";
             this.button34.Size = new System.Drawing.Size(150, 60);
             this.button34.TabIndex = 35;
-            this.button34.Text = "開啟外部程式";
             this.button34.UseVisualStyleBackColor = true;
             this.button34.Click += new System.EventHandler(this.button34_Click);
             // 
