@@ -1,26 +1,18 @@
 ﻿#include "../../Common.h"
 
-
-
 /* $Id: bounce.c,v 3.0 1998/02/14 18:42:29 brianp Exp $ */
-
 /*
  * Bouncing ball demo.  Color index mode only!
- *
  * This program is in the public domain
- *
  * Brian Paul
  */
 
  /* Conversion to GLUT by Mark J. Kilgard */
-
  /*
   * $Log: bounce.c,v $
   * Revision 3.0  1998/02/14 18:42:29  brianp
   * initial rev
-  *
   */
-
 
 //#include <math.h>
 //#include <stdlib.h>
@@ -57,15 +49,17 @@ make_ball(void)
     glNewList(list, GL_COMPILE);
 
     color = 0;
-    for (a = -90.0; a + da <= 90.0; a += da) {
-
+    for (a = -90.0; a + da <= 90.0; a += da)
+    {
         glBegin(GL_QUAD_STRIP);
-        for (b = 0.0; b <= 360.0; b += db) {
-
-            if (color) {
+        for (b = 0.0; b <= 360.0; b += db)
+        {
+            if (color)
+            {
                 glIndexi(RED);
             }
-            else {
+            else
+            {
                 glIndexi(WHITE);
             }
 
@@ -82,11 +76,8 @@ make_ball(void)
             color = 1 - color;
         }
         glEnd();
-
     }
-
     glEndList();
-
     return list;
 }
 
@@ -102,7 +93,8 @@ static void reshape(int width, int height)
 /* ARGSUSED1 */
 static void key(unsigned char k, int x, int y)
 {
-    switch (k) {
+    switch (k)
+    {
     case 27:  /* Escape */
         exit(0);
     }
@@ -215,10 +207,6 @@ int main(int argc, char* argv[])
     glutReshapeFunc(reshape);
     glutVisibilityFunc(visible);
     glutKeyboardFunc(key);
-
-    glutSetColor(RED, 1.0, 0.0, 0.0);
-    glutSetColor(WHITE, 1.0, 1.0, 1.0);
-    glutSetColor(CYAN, 0.0, 1.0, 1.0);
 
     glutMainLoop();
     return 0;

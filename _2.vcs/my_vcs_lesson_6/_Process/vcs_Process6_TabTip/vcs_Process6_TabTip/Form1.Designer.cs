@@ -36,10 +36,14 @@
             this.button2 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.button4 = new System.Windows.Forms.Button();
+            this.richTextBox4 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // timer1
             // 
+            this.timer1.Enabled = true;
+            this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // richTextBox3
@@ -96,11 +100,31 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // button4
+            // 
+            this.button4.Location = new System.Drawing.Point(12, 295);
+            this.button4.Name = "button4";
+            this.button4.Size = new System.Drawing.Size(107, 52);
+            this.button4.TabIndex = 12;
+            this.button4.Text = "關閉螢幕鍵盤";
+            this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
+            // 
+            // richTextBox4
+            // 
+            this.richTextBox4.Location = new System.Drawing.Point(125, 295);
+            this.richTextBox4.Name = "richTextBox4";
+            this.richTextBox4.Size = new System.Drawing.Size(942, 211);
+            this.richTextBox4.TabIndex = 13;
+            this.richTextBox4.Text = "";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1084, 495);
+            this.ClientSize = new System.Drawing.Size(1078, 515);
+            this.Controls.Add(this.richTextBox4);
+            this.Controls.Add(this.button4);
             this.Controls.Add(this.richTextBox3);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.richTextBox2);
@@ -123,6 +147,8 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.RichTextBox richTextBox4;
     }
 }
 

@@ -123,7 +123,8 @@ int main(int argc, char** argv)
     printf("僅顯示, 無控制, 按 Esc 離開\n");
     printf("\n空白範例\n");
 
-    if (!glutGet(GLUT_DISPLAY_MODE_POSSIBLE)) {
+    if (!glutGet(GLUT_DISPLAY_MODE_POSSIBLE))
+    {
         printf("UNRESOLVED: test9 (your OpenGL lacks color index support)\n");
         //exit(0);
     }

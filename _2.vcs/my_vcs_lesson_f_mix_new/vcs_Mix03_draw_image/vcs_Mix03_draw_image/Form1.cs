@@ -106,6 +106,132 @@ namespace vcs_Mix03_draw_image
         private void button1_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+
+            //逐點製作圖檔
+            /*
+            int dd = 1;    //相隔
+            int nx = 256 / dd;
+            int ny = 256 / dd;
+            int nz = 256 / dd;
+
+            int total_points = nx * ny * nz;  //共有？點
+
+            richTextBox1.Text += "相隔 : " + dd.ToString() + "\n";
+            richTextBox1.Text += "nx : " + nx.ToString() + "\n";
+            richTextBox1.Text += "ny : " + ny.ToString() + "\n";
+            richTextBox1.Text += "nz : " + nz.ToString() + "\n";
+            richTextBox1.Text += "共有 : " + total_points.ToString() + " 點\n";
+
+            richTextBox1.Text += "sqrt = " + Math.Sqrt(total_points).ToString() + "\n";
+
+            //int W = (int)Math.Sqrt(total_points);
+            //int H = (int)Math.Sqrt(total_points);
+            int W = 2048;
+            int H = total_points / W;
+
+            richTextBox1.Text += "圖片寬度 : " + W.ToString() + "\n";
+            richTextBox1.Text += "圖片高度 : " + H.ToString() + "\n";
+
+            Bitmap bitmap1 = new Bitmap(W, H);
+
+            int i;
+            int j;
+            int k;
+            int xx;
+            int yy;
+            int index = 0;
+
+            for (k = 0; k < 256; k += dd)
+            {
+                for (j = 0; j < 256; j += dd)
+                {
+                    for (i = 0; i < 256; i += dd)
+                    {
+
+                        xx = index % W;
+                        yy = index / W;
+
+             
+             //richTextBox1.Text += "(" + xx.ToString() + "," + yy.ToString() + ")";
+                        //if ((index % 16) == 15)
+                          //  richTextBox1.Text += "\n";
+                        
+
+                        bitmap1.SetPixel(xx, yy, Color.FromArgb(255, i, j, k));
+
+
+
+                        index++;
+
+                    }
+
+                }
+
+            }
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "total = " + index.ToString() + "\n";
+
+            bitmap1.Save("all_color.bmp", ImageFormat.Bmp);
+
+            pictureBox1.Image = bitmap1;
+            */
+
+
+            //逐點製作圖檔
+            int dd = 1;    //相隔
+            int nx = 256 / dd;
+            int ny = 256 / dd;
+
+            int total_points = nx * ny; ;  //共有？點
+
+            richTextBox1.Text += "相隔 : " + dd.ToString() + "\n";
+            richTextBox1.Text += "nx : " + nx.ToString() + "\n";
+            richTextBox1.Text += "ny : " + ny.ToString() + "\n";
+            richTextBox1.Text += "共有 : " + total_points.ToString() + " 點\n";
+
+            //richTextBox1.Text += "sqrt = " + Math.Sqrt(total_points).ToString() + "\n";
+
+            //int W = (int)Math.Sqrt(total_points);
+            //int H = (int)Math.Sqrt(total_points);
+            int W = 256;
+            int H = total_points / W;
+
+            richTextBox1.Text += "圖片寬度 : " + W.ToString() + "\n";
+            richTextBox1.Text += "圖片高度 : " + H.ToString() + "\n";
+
+            Bitmap bitmap1 = new Bitmap(W, H);
+
+            int i;
+            int j;
+            int k;
+            int xx;
+            int yy;
+            int index = 0;
+
+            //for(x=1,y=1,z=1; x+y+z<15; z++)
+
+            for (j = 0; j < 256; j += dd)
+            {
+                for (i = 0; i < 256; i += dd)
+                {
+
+                    bitmap1.SetPixel(i, j, Color.FromArgb(255, i, i, i));
+
+                    index++;
+
+                }
+            }
+
+            richTextBox1.Text += "\n";
+
+            richTextBox1.Text += "total = " + index.ToString() + "\n";
+
+            bitmap1.Save("all_color.bmp", ImageFormat.Bmp);
+
+            pictureBox1.Image = bitmap1;
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -794,7 +920,7 @@ namespace vcs_Mix03_draw_image
             this.pictureBox1.Image = bitmap;
 
             //保存圖片
-            bitmap.Save("abc.bmp", System.Drawing.Imaging.ImageFormat.Bmp);
+            bitmap.Save("abc.bmp", ImageFormat.Bmp);
         }
 
         private void button12_Click(object sender, EventArgs e)
