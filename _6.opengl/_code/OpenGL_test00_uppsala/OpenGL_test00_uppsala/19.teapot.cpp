@@ -15,13 +15,17 @@ double points[VERTICES + 1][3];
 int patch_vertices[PATCHES][16];
 static GLfloat theta[] = { 270.0, 0.0, 180.0 };
 
-void gfxinit(void)
 /* This is the routine that generates the image to be displayed. */
+void gfxinit(void)
 {
-    int i, j, k, vertex;
-    double coords[48], * p;
+    int i;
+    int j;
+    int k;
+    int vertex;
+    double coords[48];
+    double* p;
 
-    glClearColor(1.0, 1.0, 1.0, 0.0); /* Make the background white. */
+    glClearColor(1.0, 1.0, 1.0, 0.0);   //背景為白色
     glEnable(GL_MAP2_VERTEX_3);
 
     /* Generate the display lists for the surfaces. */
@@ -36,7 +40,7 @@ void gfxinit(void)
             }
         }
         glNewList(k + 1, GL_COMPILE);
-        glColor3d(1.0, 0.0, 0.0);
+        glColor3d(1.0, 0.0, 0.0);   //紅色
         glMap2d(GL_MAP2_VERTEX_3, 0.0, 1.0, 12, 4, 0.0, 1.0, 3, 4, coords);
         glMapGrid2d(STEPS, 0.0, 1.0, STEPS, 0.0, 1.0);
         glEvalMesh2(GL_FILL, 0, STEPS, 0, STEPS);
@@ -45,7 +49,6 @@ void gfxinit(void)
 }
 
 void reshape(int width, int height)
-/* This is the callback function that gets executed every time the display size has changed. */
 {
     glViewport(0, 0, width, height);
     glMatrixMode(GL_PROJECTION);
@@ -63,14 +66,12 @@ void reshape(int width, int height)
 
 void display(void)
 {
-    int i;
-
     glClear(GL_COLOR_BUFFER_BIT);
     glLoadIdentity();
     glRotatef(theta[0], 1.0, 0.0, 0.0); //旋轉 X 軸
     glRotatef(theta[1], 0.0, 1.0, 0.0); //旋轉 Y 軸
     glRotatef(theta[2], 0.0, 0.0, 1.0); //旋轉 Z 軸
-    for (i = 1; i <= PATCHES; i++)
+    for (int i = 1; i <= PATCHES; i++)
     {
         glCallList(i);
     }

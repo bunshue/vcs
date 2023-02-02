@@ -38,6 +38,8 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.richTextBox4 = new System.Windows.Forms.RichTextBox();
+            this.button5 = new System.Windows.Forms.Button();
+            this.bt_clear = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // timer1
@@ -53,6 +55,7 @@
             this.richTextBox3.Size = new System.Drawing.Size(942, 52);
             this.richTextBox3.TabIndex = 11;
             this.richTextBox3.Text = "";
+            this.richTextBox3.MouseDown += new System.Windows.Forms.MouseEventHandler(this.richTextBox3_MouseDown);
             // 
             // button3
             // 
@@ -71,6 +74,7 @@
             this.richTextBox2.Size = new System.Drawing.Size(942, 52);
             this.richTextBox2.TabIndex = 9;
             this.richTextBox2.Text = "";
+            this.richTextBox2.MouseDown += new System.Windows.Forms.MouseEventHandler(this.richTextBox2_MouseDown);
             // 
             // button2
             // 
@@ -89,6 +93,7 @@
             this.richTextBox1.Size = new System.Drawing.Size(942, 52);
             this.richTextBox1.TabIndex = 7;
             this.richTextBox1.Text = "";
+            this.richTextBox1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.richTextBox1_MouseDown);
             // 
             // button1
             // 
@@ -118,11 +123,34 @@
             this.richTextBox4.TabIndex = 13;
             this.richTextBox4.Text = "";
             // 
+            // button5
+            // 
+            this.button5.Location = new System.Drawing.Point(12, 369);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(107, 52);
+            this.button5.TabIndex = 14;
+            this.button5.Text = "螢幕鍵盤Info";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // bt_clear
+            // 
+            this.bt_clear.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_clear.Location = new System.Drawing.Point(1006, 476);
+            this.bt_clear.Name = "bt_clear";
+            this.bt_clear.Size = new System.Drawing.Size(60, 30);
+            this.bt_clear.TabIndex = 50;
+            this.bt_clear.Text = "Clear";
+            this.bt_clear.UseVisualStyleBackColor = true;
+            this.bt_clear.Click += new System.EventHandler(this.bt_clear_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1078, 515);
+            this.Controls.Add(this.bt_clear);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.richTextBox4);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.richTextBox3);
@@ -149,6 +177,8 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.RichTextBox richTextBox4;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button bt_clear;
     }
 }
 

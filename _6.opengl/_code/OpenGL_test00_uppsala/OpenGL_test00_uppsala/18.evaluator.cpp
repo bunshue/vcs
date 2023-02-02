@@ -7,7 +7,13 @@
 #define MAX_POINTS  100  /* maximum number of control points          */
 #define STEPS        20  /* number of steps to draw each segment over */
 
-double points[MAX_POINTS + 2][3], minx, maxx, miny, maxy, xrange, yrange;
+double points[MAX_POINTS + 2][3];
+double minx;
+double maxx;
+double miny;
+double maxy;
+double xrange;
+double yrange;
 int number_of_points = 0;
 
 /* This is the routine that generates the image to be displayed. */

@@ -4,7 +4,7 @@ void gfxinit1()
 {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluOrtho2D(0.0, 12.0, 0.0, 12.0);   //X軸0~10, Y軸0~10, 左下為原點
+    gluOrtho2D(0.0, 12.0, 0.0, 12.0);   //窗口座標範圍2D, 顯示範圍 : X軸(0 ~ 12) Y軸(0 ~ 12), 左下為原點
 
     glNewList(1, GL_COMPILE);
     for (int index = 0; index < 30; index++)

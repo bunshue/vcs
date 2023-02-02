@@ -10,7 +10,7 @@
 
 void myinit(void)
 {
-    gluOrtho2D(-1.0, 1.0, -1.0, 1.0);
+    gluOrtho2D(-1.0, 1.0, -1.0, 1.0);   //窗口座標範圍2D, 顯示範圍 : X軸(-1.0 ~ 1.0) Y軸(-1.0 ~ 1.0), 左下為原點
 
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
@@ -51,9 +51,6 @@ int main(int argc, char** argv)
     const char* windowName = "Alpha Blending";
     const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
     common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard0);
-
-    //先保留
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA);
 
     myinit();
 

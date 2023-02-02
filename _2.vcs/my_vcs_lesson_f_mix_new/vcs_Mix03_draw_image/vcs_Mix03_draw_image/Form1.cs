@@ -205,9 +205,9 @@ namespace vcs_Mix03_draw_image
 
             int i;
             int j;
-            int k;
-            int xx;
-            int yy;
+            //int k;
+            //int xx;
+            //int yy;
             int index = 0;
 
             //for(x=1,y=1,z=1; x+y+z<15; z++)
@@ -639,6 +639,14 @@ namespace vcs_Mix03_draw_image
         private void button9_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            pictureBox1.Size = new Size(1800, 950);
+            pictureBox1.Location = new Point(0, 0);
+            pictureBox1.BringToFront();
+            this.Size = new Size(1850, 1000);
+            this.Location = new Point(50, 50);
+
+            timer1.Enabled = true;
         }
 
         private void button10_Click(object sender, EventArgs e)
@@ -1484,6 +1492,49 @@ namespace vcs_Mix03_draw_image
         private void button29_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+        }
+
+        int W = 0;
+        int H = 0;
+        int cx = 0;
+        int cy = 0;
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            W = pictureBox1.Width;
+            H = pictureBox1.Height;
+
+            richTextBox1.Text += "圖片寬度 : " + W.ToString() + "\n";
+            richTextBox1.Text += "圖片高度 : " + H.ToString() + "\n";
+
+            cx += 5;
+            cy += 5;
+            if (cx > W)
+                cx = 0;
+            if (cy > H)
+                cy = 0;
+
+            Bitmap bitmap1 = new Bitmap(W, H);
+
+            int i;
+            int j;
+
+            for (j = 0; j < H; j++)
+            {
+                for (i = 0; i < W; i++)
+                {
+                    int dist = (int)Math.Sqrt((i - cx) * (i - cx) + (j - cy) * (j - cy));
+                    if (dist > 255)
+                        dist = 255;
+
+                    bitmap1.SetPixel(i, j, Color.FromArgb(255, dist, dist, 128));
+
+
+                }
+            }
+
+
+            pictureBox1.Image = bitmap1;
+
         }
     }
 

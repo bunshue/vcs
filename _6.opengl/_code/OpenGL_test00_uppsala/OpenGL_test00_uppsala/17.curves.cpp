@@ -16,14 +16,15 @@
 
 /* Display list constants. */
 #define MARK_LIST           1
-#define LAGRANGE_LIST       2
-#define BEZIER_LIST         3
-#define SPLINE_LIST         4
 #define LAGRANGE_TITLE_LIST 5
-#define BEZIER_TITLE_LIST   6
-#define SPLINE_TITLE_LIST   7
 
-double px[MAX_POINTS], py[MAX_POINTS], minx, maxx, miny, maxy, markd;
+double px[MAX_POINTS];
+double py[MAX_POINTS];
+double minx;
+double maxx;
+double miny;
+double maxy;
+double markd;
 
 int number_of_points = 0;
 
@@ -38,11 +39,11 @@ void display(void)
     glViewport(0, 0, WindowSizeX, WindowSizeY);
 
     /* Draw line separators between viewports. */
-
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluOrtho2D(0, WindowSizeX, 0, WindowSizeY);
     glColor3f(0.0, 0.0, 0.0);  /* Draw separator lines in black. */
+
     glBegin(GL_LINES);
     glVertex2i(0, WindowSizeY3);
     glVertex2i(WindowSizeX, WindowSizeY3);
@@ -51,33 +52,22 @@ void display(void)
     glEnd();
 
     /* Place titles. */
-
     glRasterPos2i(BORDER, 2 * WindowSizeY3 + BORDER);
     glCallList(LAGRANGE_TITLE_LIST);
-    glRasterPos2i(BORDER, WindowSizeY3 + BORDER);
-    glCallList(BEZIER_TITLE_LIST);
-    glRasterPos2i(BORDER, BORDER);
-    glCallList(SPLINE_TITLE_LIST);
 
     /* Do Lagrange interpolation in top third of window. */
-
     glLoadIdentity();
     gluOrtho2D(minx - markd, maxx + markd, miny - 2.0 * markd, maxy + 2.0 * markd);
     glViewport(BORDER, 2 * WindowSizeY3 + BORDER, WindowSizeX - 2 * BORDER, WindowSizeY3 - 2 * BORDER);
-    glCallList(MARK_LIST);
-    glCallList(LAGRANGE_LIST);
+    glCallList(MARK_LIST);      //1
 
     /* Do Bezier curve in middle third of window. */
-
     glViewport(BORDER, WindowSizeY3 + BORDER, WindowSizeX - 2 * BORDER, WindowSizeY3 - 2 * BORDER);
-    glCallList(MARK_LIST);
-    glCallList(BEZIER_LIST);
-
+    glCallList(MARK_LIST);      //1
+    
     /* Do spline curve in bottom third of window. */
-
     glViewport(BORDER, BORDER, WindowSizeX - 2 * BORDER, WindowSizeY3 - 2 * BORDER);
-    glCallList(MARK_LIST);
-    glCallList(SPLINE_LIST);
+    glCallList(MARK_LIST);      //1
 
     glFlush();  // 執行繪圖命令
 }
@@ -137,7 +127,6 @@ void interact(void)
     points_file.close();
 
     /* Determine length of line segments for making 'x' marks. */
-
     if (maxx - minx > maxy - miny)
     {
         markd = (maxx - minx) / number_of_points * MARK_FACTOR;
@@ -155,6 +144,7 @@ void mark_points()
     //在 List MARK_LIST 製作第 MARK_LIST 張圖, MARK_LIST = 1
     glNewList(MARK_LIST, GL_COMPILE);
     glColor3f(1.0, 0.0, 0.0);  /* Draw the marks in red. */
+
     glBegin(GL_LINES);
     for (int i = 0; i < number_of_points; i++)
     {
@@ -164,6 +154,7 @@ void mark_points()
         glVertex2d(px[i] + markd, py[i] - markd);
     }
     glEnd();
+
     glEndList();
 }
 
@@ -173,17 +164,9 @@ void Lagrange_interpolate()
     int i;
     char title[] = "Lagrange Interpolation";
 
-    //在 List LAGRANGE_LIST 製作第 LAGRANGE_LIST 張圖, LAGRANGE_LIST = 2
-    glNewList(LAGRANGE_LIST, GL_COMPILE);
-    glColor3f(0.0, 0.0, 0.0);  /* Draw curve in black. */
-    glBegin(GL_LINE_STRIP);
-
-    glEnd();
-    glEndList();
-
     //顯示標題
     //在 List LAGRANGE_TITLE_LIST 製作第 LAGRANGE_TITLE_LIST 張圖, LAGRANGE_TITLE_LIST = 5
-    glNewList(LAGRANGE_TITLE_LIST, GL_COMPILE);
+    glNewList(LAGRANGE_TITLE_LIST, GL_COMPILE); //5
     glColor3f(0.0, 0.0, 0.0);  /* Draw title in black. */
     for (i = 0; i < (int)strlen(title); i++)
     {
@@ -200,7 +183,6 @@ void gfxinit()
     /* Generate the three different curves for displaying. */
 
     mark_points();          /* Generate the data marks display list.            */
-
     Lagrange_interpolate(); /* Generate the lines for Lagrange interpolation.   */
 }
 

@@ -38,6 +38,7 @@ GLfloat tgenparams[] = { 0.0, 0.0, 1.0, 0.0 };
 
 void makeImage(void)
 {
+    printf("makeImage,  W = %d, H = %d\n", ImageWidth, ImageLength);
     int i, j, w2, l2, cond;
 
     w2 = ImageWidth >> 2;
@@ -50,6 +51,12 @@ void makeImage(void)
             Image[i][j][0] = cond ? 255 : 0;
             Image[i][j][1] = (!cond) ? 255 : 0;
             Image[i][j][2] = 0;
+
+            /* debug 顯示單一色
+            Image[i][j][0] = 255;
+            Image[i][j][1] = 0;
+            Image[i][j][2] = 0;
+            */
         }
     }
 }
@@ -100,7 +107,7 @@ GLbyte* gltLoadTGA(const char* szFileName, GLint* iWidth, GLint* iHeight, GLint*
 
     // Calculate size of image buffer
     lImageSize = tgaHeader.width * tgaHeader.height * sDepth;
-    printf("W = %d, H = %d, Size = %d\n", tgaHeader.width, tgaHeader.height, lImageSize);
+    printf("gltLoadTGA, W = %d, H = %d, Size = %d\n", tgaHeader.width, tgaHeader.height, lImageSize);
 
     // Allocate memory and check for success
     pBits = (GLbyte*)malloc(lImageSize * sizeof(GLbyte));

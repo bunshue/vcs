@@ -9,7 +9,9 @@
 
 #include "../../Common.h"
 
-float x[2][2], y[2][2], z[2][2];
+float x[2][2];
+float y[2][2];
+float z[2][2];
 
 void gfxinit(void)
 {
@@ -32,8 +34,10 @@ void gfxinit(void)
     for (u = 0.0f; u < 1.001f; u += 0.1f)
     {
         u1 = 1.0f - u;
-        x1 = u1 * x[0][0] + u * x[1][0];   y1 = u1 * y[0][0] + u * y[1][0];
-        x2 = u1 * x[0][1] + u * x[1][1];   y2 = u1 * y[0][1] + u * y[1][1];
+        x1 = u1 * x[0][0] + u * x[1][0];
+        y1 = u1 * y[0][0] + u * y[1][0];
+        x2 = u1 * x[0][1] + u * x[1][1];
+        y2 = u1 * y[0][1] + u * y[1][1];
         glVertex2f(x1, y1);
         glVertex2f(x2, y2);
     }
@@ -43,8 +47,10 @@ void gfxinit(void)
     for (v = 0.0f; v < 1.001f; v += 0.1f)
     {
         v1 = 1.0f - v;
-        x1 = v1 * x[0][0] + v * x[0][1];   y1 = v1 * y[0][0] + v * y[0][1];
-        x2 = v1 * x[1][0] + v * x[1][1];   y2 = v1 * y[1][0] + v * y[1][1];
+        x1 = v1 * x[0][0] + v * x[0][1];
+        y1 = v1 * y[0][0] + v * y[0][1];
+        x2 = v1 * x[1][0] + v * x[1][1];
+        y2 = v1 * y[1][0] + v * y[1][1];
         glVertex2f(x1, y1);
         glVertex2f(x2, y2);
     }
