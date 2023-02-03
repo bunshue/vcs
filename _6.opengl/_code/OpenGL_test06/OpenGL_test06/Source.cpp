@@ -4,7 +4,7 @@ void gfxinit1()
 {
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluOrtho2D(0.0, 12.0, 0.0, 12.0);   //窗口座標範圍2D, 顯示範圍 : X軸(0 ~ 12) Y軸(0 ~ 12), 左下為原點
+    gluOrtho2D(-1.0, 12.0, -0.2, 12.0);   //窗口座標範圍2D, 顯示範圍 : X軸(0 ~ 12) Y軸(0 ~ 12), 左下為原點
 
     glNewList(1, GL_COMPILE);
     for (int index = 0; index < 30; index++)
@@ -53,13 +53,12 @@ void gfxinit2()
 // 繪圖回調函數
 void display(void)
 {
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
     glCallList(1);
 
-    glutSwapBuffers();  // 執行繪圖命令
-    //glFlush();          // 執行繪圖命令
-
+    glutSwapBuffers();  // 執行繪圖命令   不會閃爍
+    //glFlush();  // 執行繪圖命令 會閃爍
 
     /*
     glClear(GL_COLOR_BUFFER_BIT);   //清除背景
@@ -67,10 +66,9 @@ void display(void)
 
     glCallList(2);
 
-    glutSwapBuffers();  // 執行繪圖命令
-    //glFlush();          // 執行繪圖命令
+    glutSwapBuffers();  // 執行繪圖命令   不會閃爍
+    //glFlush();        // 執行繪圖命令 會閃爍
     */
-
 }
 
 int main(int argc, char** argv)
@@ -78,7 +76,7 @@ int main(int argc, char** argv)
     glutInit(&argc, argv);
 
     //glutInitDisplayMode(GLUT_SINGLE | GLUT_INDEX);    //宣告顯示模式為 Single Buffer 和 INDEX
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_INDEX);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_INDEX);      //宣告顯示模式為 Double Buffer 和 INDEX
 
     glutInitWindowSize(600, 600);       // 設定視窗大小
     glutInitWindowPosition(1100, 200);  // 設定視窗位置

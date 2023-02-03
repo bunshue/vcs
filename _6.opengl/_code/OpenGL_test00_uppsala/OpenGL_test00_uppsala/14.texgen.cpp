@@ -30,7 +30,7 @@ typedef struct
 
 GLubyte Image[ImageLength][ImageWidth][3];
 
-int image = 1;  /* default to striped teapot */
+int image_type = 1;     //1 : 線條的, 2: 圖片的
 
 /* glTexGen stuff */
 GLfloat sgenparams[] = { 1.0, 0.0, 0.0, 0.0 };
@@ -191,9 +191,8 @@ void gfxinit(void)
     // Set material properties to follow glColor values
     glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 
-    //在 List 1 製作第1張圖
-    /* Code for striped teapot. */
-    makeImage();  /* make the striped texture pattern */
+    //在 List 1 製作第1張圖   //線條的茶壺
+    makeImage();
     glNewList(1, GL_COMPILE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -214,8 +213,7 @@ void gfxinit(void)
     glDisable(GL_TEXTURE_GEN_T);
     glEndList();
 
-    //在 List 2 製作第2張圖
-    /* Code for the stone teapot. */
+    //在 List 2 製作第2張圖   //圖片的茶壺
     glNewList(2, GL_COMPILE);
     pBytes = (GLubyte*)gltLoadTGA("data/14.marble.tga", &iWidth, &iHeight, &iComponents, &eFormat);
     printf("pBytes = %p\n", pBytes);
@@ -241,11 +239,11 @@ void gfxinit(void)
 void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    if (image == 1)
+    if (image_type == 1)    //線條的
     {
         glCallList(1);  //顯示第1張圖
     }
-    else
+    else if (image_type == 2)    //圖片的
     {
         glCallList(2);  //顯示第2張圖
     }
@@ -276,11 +274,11 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
         glutDestroyWindow(glutGetWindow());
         return;
         break;
-    case '1': /* Striped teapot */
-        image = 1;
+    case '1':
+        image_type = 1;  //線條的
         break;
-    case '2': /* Stone teapot */
-        image = 2;
+    case '2':
+        image_type = 2;  //圖片的
         break;
     }
     glutPostRedisplay();    //將當前視窗打上標記，標記其需要再次顯示。

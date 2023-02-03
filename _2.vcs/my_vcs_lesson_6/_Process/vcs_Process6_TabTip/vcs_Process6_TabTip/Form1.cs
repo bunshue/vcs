@@ -17,7 +17,7 @@ namespace vcs_Process6_TabTip
         //win10的虛擬鍵盤是一個程式，即c:\Program Files\Common Files\Microsoft Shared\ink\TabTip.exe
         string keyboardPath = @"C:\Program Files\Common Files\Microsoft Shared\ink\TabTip.exe";
 
-        Process myProcess = new Process();
+        Process process = new Process();
         int focus_at = 0;
 
         public Form1()
@@ -77,39 +77,39 @@ namespace vcs_Process6_TabTip
 
             string program_name = "TabTip";
 
-            Process[] MyProcesses = Process.GetProcessesByName(program_name);//需要監控的程序名，該方法帶出該程序所有用到的進程
-            foreach (Process myprocess in MyProcesses)
+            Process[] processes = Process.GetProcessesByName(program_name);//需要監控的程序名，該方法帶出該程序所有用到的進程
+            foreach (Process process in processes)
             {
-                richTextBox4.Text += "取得程式 : " + myprocess.ProcessName + "\n";
+                richTextBox4.Text += "取得程式 : " + process.ProcessName + "\n";
 
-                if (myprocess.ProcessName.ToLower() == program_name.ToLower())
+                if (process.ProcessName.ToLower() == program_name.ToLower())
                 {
                     richTextBox4.Text += "取得螢幕鍵盤程式 : " + program_name + "\n";
-                    richTextBox4.Text += "取得螢幕鍵盤程式 : " + myprocess.ProcessName + "\n";
-                    richTextBox4.Text += "取得螢幕鍵盤程式 : " + myprocess.BasePriority.ToString() + "\n";
-                    //richTextBox4.Text += "取得螢幕鍵盤程式 : " + myprocess.ExitTime.ToLongDateString() + "\n";
-                    //richTextBox4.Text += "取得螢幕鍵盤程式 : " + myprocess.HasExited.ToString() + "\n";
-                    richTextBox4.Text += "取得螢幕鍵盤程式 : " + myprocess.Id + "\n";
-                    richTextBox4.Text += "取得螢幕鍵盤程式 : " + myprocess.MachineName + "\n";
-                    richTextBox4.Text += "取得螢幕鍵盤程式 : " + myprocess.MainWindowTitle + "\n";
+                    richTextBox4.Text += "取得螢幕鍵盤程式 : " + process.ProcessName + "\n";
+                    richTextBox4.Text += "取得螢幕鍵盤程式 : " + process.BasePriority.ToString() + "\n";
+                    //richTextBox4.Text += "取得螢幕鍵盤程式 : " + process.ExitTime.ToLongDateString() + "\n";
+                    //richTextBox4.Text += "取得螢幕鍵盤程式 : " + process.HasExited.ToString() + "\n";
+                    richTextBox4.Text += "取得螢幕鍵盤程式 : " + process.Id + "\n";
+                    richTextBox4.Text += "取得螢幕鍵盤程式 : " + process.MachineName + "\n";
+                    richTextBox4.Text += "取得螢幕鍵盤程式 : " + process.MainWindowTitle + "\n";
 
-                    //richTextBox4.Text += "取得螢幕鍵盤程式 : " + myprocess.Modules.Count.ToString() +"\n";
-                    //richTextBox4.Text += "取得螢幕鍵盤程式 : " + myprocess.ProcessorAffinity.ToString() + "\n";
-                    richTextBox4.Text += "取得螢幕鍵盤程式 : " + myprocess.SessionId + "\n";
-                    richTextBox4.Text += "取得螢幕鍵盤程式 : " + myprocess.Site + "\n";
-                    richTextBox4.Text += "取得螢幕鍵盤程式 : " + myprocess.StartInfo.CreateNoWindow.ToString() + "\n";
-                    richTextBox4.Text += "取得螢幕鍵盤程式 : " + myprocess.StartTime + "\n";
-                    richTextBox4.Text += "取得螢幕鍵盤程式 : " + myprocess.Threads + "\n";
-                    richTextBox4.Text += "取得螢幕鍵盤程式 : " + myprocess.TotalProcessorTime + "\n";
+                    //richTextBox4.Text += "取得螢幕鍵盤程式 : " + process.Modules.Count.ToString() +"\n";
+                    //richTextBox4.Text += "取得螢幕鍵盤程式 : " + process.ProcessorAffinity.ToString() + "\n";
+                    richTextBox4.Text += "取得螢幕鍵盤程式 : " + process.SessionId + "\n";
+                    richTextBox4.Text += "取得螢幕鍵盤程式 : " + process.Site + "\n";
+                    richTextBox4.Text += "取得螢幕鍵盤程式 : " + process.StartInfo.CreateNoWindow.ToString() + "\n";
+                    richTextBox4.Text += "取得螢幕鍵盤程式 : " + process.StartTime + "\n";
+                    richTextBox4.Text += "取得螢幕鍵盤程式 : " + process.Threads + "\n";
+                    richTextBox4.Text += "取得螢幕鍵盤程式 : " + process.TotalProcessorTime + "\n";
 
-                    richTextBox4.Text += "取得螢幕鍵盤程式 : " + myprocess.StartInfo.CreateNoWindow.ToString() + "\n";
+                    richTextBox4.Text += "取得螢幕鍵盤程式 : " + process.StartInfo.CreateNoWindow.ToString() + "\n";
 
-                    myprocess.StartInfo.CreateNoWindow = true;
-                    richTextBox4.Text += "取得螢幕鍵盤程式 : " + myprocess.StartInfo.CreateNoWindow.ToString() + "\n";
+                    process.StartInfo.CreateNoWindow = true;
+                    richTextBox4.Text += "取得螢幕鍵盤程式 : " + process.StartInfo.CreateNoWindow.ToString() + "\n";
 
-                    myprocess.Kill();
+                    process.Kill();
 
-                    richTextBox4.Text += "取得螢幕鍵盤程式 : " + myprocess.StartInfo.CreateNoWindow.ToString() + "\n";
+                    richTextBox4.Text += "取得螢幕鍵盤程式 : " + process.StartInfo.CreateNoWindow.ToString() + "\n";
 
                 }
             }
@@ -138,12 +138,12 @@ namespace vcs_Process6_TabTip
             bool flag_close_osd_keyboard = false;
             string program_name = "TabTip";
 
-            Process[] MyProcesses = Process.GetProcessesByName(program_name);//需要監控的程序名，該方法帶出該程序所有用到的進程
-            foreach (Process myprocess in MyProcesses)
+            Process[] processes = Process.GetProcessesByName(program_name);//需要監控的程序名，該方法帶出該程序所有用到的進程
+            foreach (Process process in processes)
             {
-                if (myprocess.ProcessName.ToLower() == program_name.ToLower())
+                if (process.ProcessName.ToLower() == program_name.ToLower())
                 {
-                    myprocess.Kill();
+                    process.Kill();
                     //richTextBox4.Text += "關閉程式 : " + program_name + "\n";
                     flag_close_osd_keyboard = true;
                 }
@@ -160,9 +160,9 @@ namespace vcs_Process6_TabTip
             */
 
             bool flag_close_osd_keyboard = false;
-            foreach (var myprocess in Process.GetProcessesByName("TabTip"))
+            foreach (var process in Process.GetProcessesByName("TabTip"))
             {
-                myprocess.Kill();
+                process.Kill();
                 flag_close_osd_keyboard = true;
             }
             if (flag_close_osd_keyboard == true)
@@ -180,7 +180,7 @@ namespace vcs_Process6_TabTip
         {
             focus_at = rtb;
             remove_osd_keyboard();
-            myProcess = Process.Start(keyboardPath);
+            process = Process.Start(keyboardPath);
 
             if (rtb == 1)
                 richTextBox1.SelectAll();
@@ -189,6 +189,5 @@ namespace vcs_Process6_TabTip
             else if (rtb == 3)
                 richTextBox3.SelectAll();
         }
-
     }
 }

@@ -6,8 +6,7 @@
 
 #include "../../Common.h"
 
-#define POINTS     200
-
+#define POINTS     360
 #define SEED srand
 #define RANDNUM rand
 #define RANDMAX RAND_MAX
@@ -15,8 +14,11 @@
 typedef GLfloat point[2];
 
 point points[POINTS];
-int Arand, Nrand;
-double GaussAdd, GaussFac, winLimit;
+int Arand;
+int Nrand;
+double GaussAdd;
+double GaussFac;
+double winLimit;
 
 /* Routine for initializing the Gaussian random number generator. This is an
  * implementation of algorithm InitGauss on page 77 of "The Science of Fractal Images".   */
@@ -43,39 +45,13 @@ double Gauss()
     return (GaussFac * sum - GaussAdd);
 }
 
-//This is the routine that generates the image to be displayed.
-void gfxinit()
-{
-    int i;
-
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluOrtho2D(0.0, (double)(POINTS - 1), -winLimit, winLimit);
-
-    glClearColor(1.0, 1.0, 1.0, 0.0);   //背景白色
-    glColor3f(1.0, 0.0, 0.0);           //畫筆紅色
-
-    glNewList(1, GL_COMPILE);
-    glBegin(GL_LINE_STRIP);        /* Draw a line defined by some points.*/
-    for (i = 0; i < POINTS; i++)
-    {
-        glVertex2fv(points[i]);
-    }
-    glEnd();
-    glEndList();
-}
-
-void display(void)
-{
-    glClear(GL_COLOR_BUFFER_BIT);
-    glCallList(1);
-    glFlush();  // 執行繪圖命令
-}
-
-void make_data()
+void make_gaussian_data()
 {
     float displacement;
     int i;
+
+    points[0][0] = 0.0f;
+    points[0][1] = 0.0f;
 
     // Begin by computing the vertices for the line as the sum of Gaussian random variables.
     InitGauss((int)time(NULL));
@@ -86,34 +62,108 @@ void make_data()
         displacement += (float)Gauss();
         points[i][0] = (float)i;
         points[i][1] = displacement;
+        //points[i][1] = (float)i/10;     //debug
     }
     winLimit = 2.0 * sqrt((double)POINTS);
+    printf("winLimit = %f\n", winLimit);
+
+    points[POINTS / 2][1] = 20.0f;     //故意造一個特大點
+
     return;
+}
+
+void make_sine_data()
+{
+    int i;
+
+    points[0][0] = 0.0f;
+    points[0][1] = 0.0f;
+    for (i = 1; i < POINTS; i++)
+    {
+        points[i][0] = (float)i;
+        points[i][1] = 25.0f * sin(PI * (float)i / 180);
+    }
+    winLimit = 2.0 * sqrt((double)POINTS);
+    printf("winLimit = %f\n", winLimit);
+
+    points[POINTS / 2][1] = 20.0f;     //故意造一個特大點
+
+    return;
+}
+
+void print_data()
+{
+    int i;
+    printf("共 %d 筆資料, 內容:\n", POINTS);
+    for (i = 0; i < POINTS; i++)
+    {
+        printf("(%d, %f)", (int)(points[i][0]), points[i][1]);
+        if (i % 6 == 5)
+            printf("\n");
+        else
+            printf(" ");
+    }
+    printf("\n");
+    return;
+}
+
+void display(void)
+{
+    make_gaussian_data();    //製作資料
+    //make_sine_data();    //製作資料
+
+    //print_data();
+
+    glClear(GL_COLOR_BUFFER_BIT);   //全圖黑色
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluOrtho2D(0.0, (double)(POINTS - 1), -winLimit, winLimit);
+
+    //printf("窗口座標範圍2D, 顯示範圍 : X軸(%f ~ %f) Y軸(%f ~ %f), 左下為原點\n", 0.0, (double)(POINTS - 1), -winLimit, winLimit);
+
+    glClearColor(1.0, 1.0, 1.0, 0.0);   //背景白色
+    glColor3f(1.0, 0.0, 0.0);           //畫筆紅色
+
+    glBegin(GL_LINE_STRIP);        /* Draw a line defined by some points.*/
+    for (int i = 0; i < POINTS; i++)
+    {
+        glVertex2fv(points[i]);
+    }
+    glEnd();
+
+    glFlush();  // 執行繪圖命令
+}
+
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
+{
+    switch (key)
+    {
+    case 27:
+        glutDestroyWindow(glutGetWindow());
+        return;
+        break;
+    case 'r':
+        glutPostRedisplay();    //將當前視窗打上標記，標記其需要再次顯示。
+        break;
+    case '2':
+        break;
+    }
+    
+}
+
+void idle(void)
+{
+
 }
 
 int main(int argc, char** argv)
 {
     const char* windowName = "布朗運動";
     const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
-    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard0);
+    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard);
 
-    make_data();    //製作資料
-
-    printf("資料內容:\n");
-    int i;
-    for (i = 0; i < POINTS; i++)
-    {
-        printf("(%d, %f)", (int)(points[i][0]), points[i][1]);
-        if (i % 8 == 7)
-            printf("\n");
-        else
-            printf(" ");
-    }
-    printf("\n");
-
-    points[100][1] = 50.0f;     //故意造一個特大點
-
-    gfxinit();
+    glutIdleFunc(idle);
 
     glutMainLoop();	//開始主循環繪製
 

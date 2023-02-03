@@ -1,45 +1,36 @@
 ﻿#include "../../Common.h"
 
-/* $Id: bounce.c,v 3.0 1998/02/14 18:42:29 brianp Exp $ */
 /*
  * Bouncing ball demo.  Color index mode only!
  * This program is in the public domain
- * Brian Paul
  */
 
- /* Conversion to GLUT by Mark J. Kilgard */
- /*
-  * $Log: bounce.c,v $
-  * Revision 3.0  1998/02/14 18:42:29  brianp
-  * initial rev
-  */
-
-//#include <math.h>
-//#include <stdlib.h>
-//#include <GL/glut.h>
-
-#define COS(X)   cos( (X) * 3.14159/180.0 )
-#define SIN(X)   sin( (X) * 3.14159/180.0 )
-
-#define RED 1
-#define WHITE 2
-#define CYAN 3
+#define COS(X)   cos( (X) * PI / 180.0 )
+#define SIN(X)   sin( (X) * PI / 180.0 )
+#define RED     1
+#define WHITE   2
+#define CYAN    3
 
 GLuint Ball;
 GLenum Mode;
-GLfloat Zrot = 0.0, Zstep = 6.0;
-GLfloat Xpos = 0.0, Ypos = 1.0;
-GLfloat Xvel = 0.2, Yvel = 0.0;
-GLfloat Xmin = -4.0, Xmax = 4.0;
-GLfloat Ymin = -3.8, Ymax = 4.0;
-GLfloat G = -0.1;
+GLfloat Zrot = 0.0f;
+GLfloat Zstep = 6.0f;
+GLfloat Xpos = 0.0f;
+GLfloat Ypos = 1.0f;
+GLfloat Xvel = 0.2f;
+GLfloat Yvel = 0.0f;
+GLfloat Xmin = -4.0f;
+GLfloat Xmax = 4.0f;
+GLfloat Ymin = -3.8f;
+GLfloat Ymax = 4.0f;
+GLfloat G = -0.1f;
 
-static GLuint
-make_ball(void)
+static GLuint make_ball(void)
 {
     GLuint list;
     GLfloat a, b;
-    GLfloat da = 18.0, db = 18.0;
+    GLfloat da = 18.0;
+    GLfloat db = 18.0;
     GLfloat radius = 1.0;
     GLuint color;
     GLfloat x, y, z;
@@ -90,18 +81,7 @@ static void reshape(int width, int height)
     glMatrixMode(GL_MODELVIEW);
 }
 
-/* ARGSUSED1 */
-static void key(unsigned char k, int x, int y)
-{
-    switch (k)
-    {
-    case 27:  /* Escape */
-        exit(0);
-    }
-}
-
-static void
-draw(void)
+void display(void)
 {
     GLint i;
 
@@ -171,7 +151,9 @@ void idle(void)
     {
         Ypos = Ymin;
         if (vel0 == -100.0)
+        {
             vel0 = fabs(Yvel);
+        }
         Yvel = vel0;
     }
 
@@ -182,10 +164,12 @@ void visible(int vis)
 {
     if (vis == GLUT_VISIBLE)
     {
+        printf("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA here\n");
         glutIdleFunc(idle);
     }
     else
     {
+        printf("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB\n");
         glutIdleFunc(NULL);
     }
 }
@@ -203,12 +187,13 @@ int main(int argc, char* argv[])
     glDisable(GL_DITHER);
     glShadeModel(GL_FLAT);
 
-    glutDisplayFunc(draw);
+    glutDisplayFunc(display);
     glutReshapeFunc(reshape);
     glutVisibilityFunc(visible);
-    glutKeyboardFunc(key);
+    glutKeyboardFunc(keyboard0);
 
-    glutMainLoop();
+    glutMainLoop();	//開始主循環繪製
+
     return 0;
 }
 

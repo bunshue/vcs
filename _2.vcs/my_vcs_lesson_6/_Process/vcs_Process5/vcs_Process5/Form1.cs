@@ -15,7 +15,7 @@ namespace vcs_Process5
     {
         string program_name = "AMCAP";
 
-        private Process[] MyProcesses;
+        private Process[] processes;
         bool flag_EnableRaisingEvents = false;
 
         public Form1()
@@ -31,7 +31,7 @@ namespace vcs_Process5
             richTextBox1.Text += "偵測程式 : " + program_name + "\n";
         }
 
-        private void myprocess_Exited(object sender, EventArgs e)//被觸發的程序
+        private void process_exited(object sender, EventArgs e)//被觸發的程序
         {
             richTextBox1.Text += "偵測到程式 " + program_name + " 被關閉了\n";
             flag_EnableRaisingEvents = false;
@@ -39,18 +39,18 @@ namespace vcs_Process5
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            MyProcesses = Process.GetProcessesByName(program_name);//需要監控的程序名，該方法帶出該程序所有用到的進程
-            foreach (Process myprocess in MyProcesses)
+            processes = Process.GetProcessesByName(program_name);//需要監控的程序名，該方法帶出該程序所有用到的進程
+            foreach (Process process in processes)
             {
-                //richTextBox1.Text += myprocess.ProcessName + "\r\n";
+                //richTextBox1.Text += process.ProcessName + "\r\n";
                 if (flag_EnableRaisingEvents == false)
                 {
-                    if (myprocess.ProcessName.ToLower() == program_name.ToLower())
+                    if (process.ProcessName.ToLower() == program_name.ToLower())
                     {
                         flag_EnableRaisingEvents = true;
                         richTextBox1.Text += "偵測到程式 " + program_name + " 被開啟\n";
-                        myprocess.EnableRaisingEvents = true;//設置進程終止時觸發的時間
-                        myprocess.Exited += new EventHandler(myprocess_Exited);//發現外部程序關閉即觸發方法myprocess_Exited
+                        process.EnableRaisingEvents = true;//設置進程終止時觸發的時間
+                        process.Exited += new EventHandler(process_exited);//發現外部程序關閉即觸發方法process_exited
                     }
                 }
             }

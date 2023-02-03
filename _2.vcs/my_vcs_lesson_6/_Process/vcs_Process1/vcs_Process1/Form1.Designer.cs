@@ -228,7 +228,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(150, 60);
             this.button13.TabIndex = 13;
-            this.button13.Text = "列出正在執行的任務";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -294,7 +293,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(150, 60);
             this.button0.TabIndex = 19;
-            this.button0.Text = "檢索系統中正在執行的任務";
+            this.button0.Text = "列出系統正在執行的任務";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 

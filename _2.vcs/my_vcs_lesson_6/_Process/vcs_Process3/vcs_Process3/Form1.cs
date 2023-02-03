@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+
 using System.Diagnostics;
 
 namespace vcs_Process3
@@ -20,37 +21,38 @@ namespace vcs_Process3
         private void Form1_Load(object sender, EventArgs e)
         {
             listBox1.Items.Clear();
-            Process[] myProcesses = Process.GetProcesses();
-            richTextBox1.Text += "len = " + myProcesses.Length.ToString() + "\n";
-            foreach (Process myProcess in myProcesses)
+
+            richTextBox1.Text += "取得所有程序\n";
+            Process[] processes = Process.GetProcesses(); //取得所有程序
+            richTextBox1.Text += "系統中有： " + processes.Length.ToString() + " 個程序\n";
+
+            foreach (Process process in processes)
             {
-                //richTextBox1.Text += "A\t" + myProcess.ProcessName + "\t";
-                if (myProcess.MainWindowTitle.Length > 0)
+                //richTextBox1.Text += "A\t" + process.ProcessName + "\t";
+                if (process.MainWindowTitle.Length > 0)
                 {
-                    //僅列出 有 視窗Process
-                    listBox1.Items.Add(myProcess.ProcessName.ToString().Trim());
-                    richTextBox1.Text += "取得 有 視窗Process : " + myProcess.ProcessName.ToString().Trim() + "\n";
+                    //僅列出 有視窗 的Process
+                    listBox1.Items.Add(process.ProcessName.ToString().Trim());
+                    richTextBox1.Text += "取得 有視窗 的Process : " + process.ProcessName.ToString().Trim() + "\n";
                 }
                 else
                 {
-                    richTextBox1.Text += "取得 無 視窗Process : " + myProcess.ProcessName.ToString().Trim() + "\n";
-
+                    //richTextBox1.Text += "取得 無視窗 的Process : " + process.ProcessName.ToString().Trim() + "\n";
                 }
             }
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Process[] myProcesses = Process.GetProcessesByName(listBox1.SelectedItem.ToString().Trim());
-            foreach (Process myProcess in myProcesses)
+            richTextBox1.Text += "欲關閉程序名稱 : " + listBox1.SelectedItem.ToString().Trim() + "\n";
+            Process[] processes = Process.GetProcessesByName(listBox1.SelectedItem.ToString().Trim());
+            foreach (Process process in processes)
             {
-                myProcess.CloseMainWindow();
+                process.CloseMainWindow();
             }
-
-            //remove this process in listbox
             listBox1.Items.Remove(listBox1.SelectedItem);//從listBox1中移除listBox1中選定的項
 
-            MessageBox.Show("程序已關閉", "訊息", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            richTextBox1.Text += "程序已關閉\n";
         }
     }
 }

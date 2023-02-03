@@ -75,17 +75,15 @@ void processHits(GLint hits, GLuint buffer[])
     GLuint names = 0;
     GLuint* ptr;
 
-    printf("hits = %d\t", hits);
-
     ptr = (GLuint*)buffer;
     for (i = 0; i < hits; i++)
     {	/*  for each hit  */
         names = *ptr;
         cout << " number of names for this hit = " << names << endl;
         ptr++;
-        cout << "  z1 is " << *ptr;
+        cout << "  z1 is " << *ptr << "\t";
         ptr++;
-        cout << "; z2 is " << *ptr << endl;
+        cout << "; z2 is " << *ptr << "\t";
         ptr++;
         cout << "   names are ";
         for (j = 0; j < names; j++)
@@ -101,9 +99,10 @@ void processHits(GLint hits, GLuint buffer[])
             }
             ptr++;
         }
-        cout << endl;
+        cout << "\n\n";
         board[ii][jj] = (board[ii][jj] + 1) % 3;
     }
+    //printf("\n");
 }
 
 /*  mouse() sets up selection mode, name stack,
@@ -131,6 +130,7 @@ void mouse(int button, int state, int x, int y)
         glMatrixMode(GL_PROJECTION);
         glPopMatrix();
         hits = glRenderMode(GL_RENDER);
+        printf("hits = %d\t", hits);
         processHits(hits, selectBuf);
         glutPostRedisplay();
     }

@@ -1,71 +1,71 @@
-ï»¿#include "../../Common.h"
+#include "../../Common.h"
 
-void gfxinit()
-{
-    int i, index = 0;
-
-    gluOrtho2D(-1.0, 9.0, -0.2, 2.2);
-
-    /* Generate the colors on the screen. */
-    glNewList(1, GL_COMPILE);
-    /* default color map entries */
-    for (i = 0; i < 8; i++, index++)
-    {
-        printf("index = %d\n", index);
-        glIndexi(index);
-        printf("Color %d = (%f, %f, %f)\n", index, glutGetColor(index, GLUT_RED), glutGetColor(index, GLUT_GREEN), glutGetColor(index, GLUT_BLUE));
-        cout << "Color " << index << " = (" << glutGetColor(index, GLUT_RED)
-            << ", " << glutGetColor(index, GLUT_GREEN) << ", "
-            << glutGetColor(index, GLUT_BLUE) << ")" << endl;
-        glRecti(i, 0, i + 1, 1);  //ä¸‹æŽ’
-    }
-
-    index += 2;
-    for (i = 0; i < 8; i++, index++)
-    {
-        printf("---index = %d\n", index);
-        glIndexi(index);
-        printf("Color %d = (%f, %f, %f)\n", index, glutGetColor(index, GLUT_RED), glutGetColor(index, GLUT_GREEN), glutGetColor(index, GLUT_BLUE));
-        cout << "Color " << index << " = (" << glutGetColor(index, GLUT_RED)
-            << ", " << glutGetColor(index, GLUT_GREEN) << ", "
-            << glutGetColor(index, GLUT_BLUE) << ")" << endl;
-        glRecti(i, 1, i + 1, 2);    //ä¸ŠæŽ’
-    }
-    glEndList();
-}
-
-// ç¹ªåœ–å›žèª¿å‡½æ•¸
+// Ã¸¹Ï¦^½Õ¨ç¼Æ
 void display(void)
 {
-    glClear(GL_COLOR_BUFFER_BIT);   //æ¸…é™¤èƒŒæ™¯
-    glCallList(1);
+    glClear(GL_COLOR_BUFFER_BIT);   //²M°£­I´º
 
-    glutSwapBuffers();  // åŸ·è¡Œç¹ªåœ–å‘½ä»¤   ä¸æœƒé–ƒçˆ
-    //glFlush();  // åŸ·è¡Œç¹ªåœ–å‘½ä»¤ æœƒé–ƒçˆ
+    draw_boundary(color_y, 0.9f); //µeµøµ¡Ãä¬É
+
+    //µe¤@­Ó¹ê¤ß¯x§Î
+    glColor3f(0.0, 1.0, 1.0);   //³]©wÃC¦â cc
+    float dd = 0.3f;
+    glRectf(-dd, -dd, dd, dd);  //¹ê¤ß¯x§Î
+
+    draw_teapot(color_r, 1, 0.3);   //µe¤@­Ó¯ù³ý
+
+    float x_st = -0.7f;
+    float y_st = 0.5f;
+    const char str1[30] = "Empty example";
+    draw_string1(str1, color_r, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
+
+    glFlush();  // °õ¦æÃ¸¹Ï©R¥O
+}
+
+// µ¡¤f¤j¤pÅÜ¤Æ¦^½Õ¨ç¼Æ
+void reshape(int w, int h)
+{
+    glViewport(0, 0, w, h);
+}
+
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
+{
+    switch (key)
+    {
+    case 27:
+    case 'q':
+    case 'Q':
+        //Â÷¶}µøµ¡
+        glutDestroyWindow(glutGetWindow());
+        return;
+
+    case '1':
+        printf("1\n");
+        break;
+    }
+}
+
+void mouse(int button, int state, int x, int y)
+{
+}
+
+void motion(int x, int y)
+{
 }
 
 int main(int argc, char** argv)
 {
-    glutInit(&argc, argv);
+    const char* windowName = "OpenGL´ú¸Õ";
+    const char* message = "¶ÈÅã¥Ü, µL±±¨î, «ö Esc Â÷¶}\n";
+    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard);
 
-    //glutInitDisplayMode(GLUT_SINGLE | GLUT_INDEX);    //å®£å‘Šé¡¯ç¤ºæ¨¡å¼ç‚º Single Buffer å’Œ INDEX
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_INDEX);    //å®£å‘Šé¡¯ç¤ºæ¨¡å¼ç‚º Double Buffer å’Œ INDEX
+    glutMouseFunc(mouse);       //³]©wcallback function
+    glutMotionFunc(motion);     //³]©wcallback function
 
-    glutInitWindowSize(600, 600);       // è¨­å®šè¦–çª—å¤§å°
-    glutInitWindowPosition(1100, 200);  // è¨­å®šè¦–çª—ä½ç½®
+    printf("\nªÅ¥Õ½d¨Ò\n");
 
-    glutCreateWindow("OpenGLæ¸¬è©¦");	//é–‹å•Ÿè¦–çª— ä¸¦é¡¯ç¤ºå‡ºè¦–çª— Title
+    glutMainLoop();	//¶}©l¥D´`ÀôÃ¸»s
 
-    glutDisplayFunc(display);   //è¨­å®šcallback function
-    glutReshapeFunc(reshape0);   //è¨­å®šcallback function
-    glutKeyboardFunc(keyboard0); //è¨­å®šcallback function
-
-    printf("åƒ…é¡¯ç¤º, ç„¡æŽ§åˆ¶, æŒ‰ Esc é›¢é–‹\n");
-    printf("\nç©ºç™½ç¯„ä¾‹\n");
-
-    gfxinit();
-
-    glutMainLoop();	//é–‹å§‹ä¸»å¾ªç’°ç¹ªè£½
     return 0;
 }
 

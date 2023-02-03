@@ -7455,6 +7455,44 @@ namespace vcs_Draw_Example1
             new Point(0, 15)
             };
 
+        List<Point> pattern4 = new List<Point>
+            {
+            new Point(0, 0),
+            new Point(1, 0),
+            new Point(1, 1),
+            new Point(1, 2),
+            new Point(1, 3),
+            new Point(1, 4),
+            new Point(2, 4),
+            new Point(2, 3),
+            new Point(2, 2),
+            new Point(2, 1),
+            new Point(2, 0),
+            new Point(3, 0),
+            new Point(3, 1),
+            new Point(3, 2),
+            new Point(3, 3),
+            new Point(3, 4),
+            new Point(4, 4),
+            new Point(4, 3),
+            new Point(3, 3),
+            new Point(2, 3),
+            new Point(1, 3),
+            new Point(0, 3),
+            new Point(0, 2),
+            new Point(1, 2),
+            new Point(2, 2),
+            new Point(3, 2),
+            new Point(4, 2),
+            new Point(4, 1),
+            new Point(3, 1),
+            new Point(2, 1),
+            new Point(1, 1),
+            new Point(0, 1),
+            new Point(0, 0),
+            new Point(1, 0)
+            };
+
         void draw_frame_style(List<Point> pattern, int offset_x, int offset_y, int step)
         {
             //畫邊框
@@ -7513,6 +7551,7 @@ namespace vcs_Draw_Example1
             draw_frame_style(pattern1, x_st + dx * 1, y_st + dy * 1, step);
             draw_frame_style(pattern2, x_st + dx * 2, y_st + dy * 2, step);
             draw_frame_style(pattern3, x_st + dx * 3, y_st + dy * 3, step);
+            draw_frame_style(pattern4, -250, 50, step);
 
             pictureBox1.Image = bitmap1;
         }
