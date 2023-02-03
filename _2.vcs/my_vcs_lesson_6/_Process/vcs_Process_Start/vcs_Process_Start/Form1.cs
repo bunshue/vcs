@@ -118,16 +118,16 @@ namespace vcs_Process_Start
             button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
             button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
 
-            button30.Location = new Point(x_st + dx * 2, y_st + dy * 0);
-            button31.Location = new Point(x_st + dx * 2, y_st + dy * 1);
-            button32.Location = new Point(x_st + dx * 2, y_st + dy * 2);
-            button33.Location = new Point(x_st + dx * 2, y_st + dy * 3);
-            button34.Location = new Point(x_st + dx * 2, y_st + dy * 4);
-            button35.Location = new Point(x_st + dx * 2, y_st + dy * 5);
-            button36.Location = new Point(x_st + dx * 2, y_st + dy * 6);
-            button37.Location = new Point(x_st + dx * 2, y_st + dy * 7);
-            button38.Location = new Point(x_st + dx * 2, y_st + dy * 8);
-            button39.Location = new Point(x_st + dx * 2, y_st + dy * 9);
+            button30.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button31.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button32.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button33.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button34.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button35.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button36.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button37.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button38.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button39.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
             button20.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button21.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -210,7 +210,17 @@ namespace vcs_Process_Start
         private void button7_Click(object sender, EventArgs e)
         {
             //開啟imsLink
-            Process.Start(@"C:\_git\ims1\iMS_Link\iMS_Link\bin\Debug\iMS_Link.exe");
+            //Process.Start(@"C:\_git\ims1\iMS_Link\iMS_Link\bin\Debug\iMS_Link.exe");
+
+            //or
+
+            //開啟imsLink
+            Process process = new Process();
+            process = Process.Start(@"C:\_git\ims1\iMS_Link\iMS_Link\bin\Debug\iMS_Link.exe");
+            richTextBox1.Text += "ProcessName : " + process.ProcessName + "\n";
+            richTextBox1.Text += "SessionId : " + process.SessionId.ToString() + "\n";
+            richTextBox1.Text += "StartTime : " + process.StartTime + "\n";
+            richTextBox1.Text += "Id : " + process.Id.ToString() + "\n";
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -292,66 +302,17 @@ namespace vcs_Process_Start
         {
             //用Adobe開啟pdf檔案
             string filename = "C:\\______test_files\\__RW\\_pdf\\note_Linux_workstation.pdf";
-            Process process;
+            Process process = new Process();
             process = Process.Start(filename);
-
             process.WaitForExit();  //需等開啟的程式結束後才可以回到表單
         }
 
         private void button23_Click(object sender, EventArgs e)
         {
-            //開啟記事本, 指名檔案
-
-            //啟動一個外部程序
-
-            ////////////聲明一個程序信息類，指定啟動進程是的參數信息     
-            ProcessStartInfo Info = new ProcessStartInfo();
-
-            //設置外部程序名
-            Info.FileName = "notepad.exe";
-            //設置外部程序的啟動參數（命令行參數）為test.txt
-            Info.Arguments = "file_to_save.txt";
-            //設置外部程序工作目錄為  C:\
-            Info.WorkingDirectory = @"C:\______test_files";
-            ///////////聲明一個程序類,也就是創建一個進程
-            Process Proc;
-            try
-            {
-                //     //啟動外部程序
-                Proc = Process.Start(Info);
-            }
-            catch (System.ComponentModel.Win32Exception ex)
-            {
-                Console.WriteLine("系統找不到指定的程序文件。\r{0}", ex);
-                return;
-            }
-            //打印出外部程序的開始執行時間
-            Console.WriteLine("外部程序的開始執行時間：{0}", Proc.StartTime);
-            //等待3秒鐘
-            Proc.WaitForExit(3000);
-
-            //如果這個外部程序沒有結束運行則對其強行終止
-            if (Proc.HasExited == false)
-            {
-                Console.WriteLine("由主程序強行終止外部程序的運行！");
-                Proc.Kill();
-            }
-            else
-            {
-                Console.WriteLine("由外部程序正常退出！");
-            }
-            Console.WriteLine("外部程序的結束運行時間：{0}", Proc.ExitTime);
-            Console.WriteLine("外部程序在結束運行時的返回值：{0}", Proc.ExitCode);
         }
 
         private void button24_Click(object sender, EventArgs e)
         {
-            //檔案總管 C槽
-            string exe_filename = "explorer.exe";   //檔案總管
-            ProcessStartInfo processStartInfo = new ProcessStartInfo();
-            processStartInfo.FileName = exe_filename;
-            processStartInfo.Arguments = @"C:\";
-            Process.Start(processStartInfo);
         }
 
         private void button25_Click(object sender, EventArgs e)
@@ -376,19 +337,18 @@ namespace vcs_Process_Start
             //Process類使用小例
 
             string exe_filename = "notepad.exe";
-            Process myProcess = new Process();
+            Process process = new Process();
             try
             {
-                myProcess.StartInfo.FileName = exe_filename;
-                myProcess.StartInfo.UseShellExecute = false;
-                myProcess.StartInfo.CreateNoWindow = true;
-                myProcess.Start();
+                process.StartInfo.FileName = exe_filename;
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.CreateNoWindow = true;
+                process.Start();
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
             }
-
         }
 
         private void button27_Click(object sender, EventArgs e)
@@ -408,28 +368,201 @@ namespace vcs_Process_Start
 
         private void button30_Click(object sender, EventArgs e)
         {
+            //開啟記事本, 指名檔案
+
+            //ProcessStartInfo 0
+
+            //啟動一個外部程序
+
+            ////////////聲明一個程序信息類，指定啟動進程是的參數信息     
+            ProcessStartInfo processStartInfo = new ProcessStartInfo();
+
+            //設置外部程序名
+            processStartInfo.FileName = "notepad.exe";
+            //設置外部程序的啟動參數（命令行參數）為test.txt
+            processStartInfo.Arguments = "file_to_save.txt";
+            //設置外部程序工作目錄為  C:\
+            processStartInfo.WorkingDirectory = @"C:\______test_files";
+
+            ///////////聲明一個程序類,也就是創建一個進程
+            Process Proc;
+            try
+            {
+                //     //啟動外部程序
+                Proc = Process.Start(processStartInfo);
+            }
+            catch (System.ComponentModel.Win32Exception ex)
+            {
+                Console.WriteLine("系統找不到指定的程序文件。\r{0}", ex);
+                return;
+            }
+            //打印出外部程序的開始執行時間
+            Console.WriteLine("外部程序的開始執行時間：{0}", Proc.StartTime);
+            //等待3秒鐘
+            Proc.WaitForExit(3000);
+
+            //如果這個外部程序沒有結束運行則對其強行終止
+            if (Proc.HasExited == false)
+            {
+                Console.WriteLine("由主程序強行終止外部程序的運行！");
+                Proc.Kill();
+            }
+            else
+            {
+                Console.WriteLine("由外部程序正常退出！");
+            }
+            Console.WriteLine("外部程序的結束運行時間：{0}", Proc.ExitTime);
+            Console.WriteLine("外部程序在結束運行時的返回值：{0}", Proc.ExitCode);
+
         }
 
         private void button31_Click(object sender, EventArgs e)
         {
+            //ProcessStartInfo 1
+
+            //檔案總管 C槽
+            string exe_filename = "explorer.exe";   //檔案總管
+            ProcessStartInfo processStartInfo = new ProcessStartInfo();
+            processStartInfo.FileName = exe_filename;
+            processStartInfo.Arguments = @"C:\";
+            Process.Start(processStartInfo);
+
         }
 
         private void button32_Click(object sender, EventArgs e)
         {
+            //ProcessStartInfo 2
+            //啟動一個外部程序
+            ProcessStartInfo processStartInfo = new ProcessStartInfo();
+            processStartInfo.FileName = "notepad.exe";  //設置外部程序名
+            processStartInfo.Arguments = "article.txt"; //設置外部程序的啟動參數（命令行參數）為test.txt
+            processStartInfo.WorkingDirectory = @"C:\______test_files\__RW\_txt";   //設置外部程序工作目錄
+
+            //創建一個進程
+            Process process = new Process();
+            try
+            {////啟動外部程序//
+                process = Process.Start(processStartInfo);
+            }
+            catch (Win32Exception ex)
+            {
+                Console.WriteLine("系統找不到指定的程序文件。\r{0}", ex);
+                return;
+            }   //打印出外部程序的開始執行時間
+            Console.WriteLine("外部程序的開始執行時間：{0}", process.StartTime);
+
+            //等待3秒鐘
+            process.WaitForExit(3000);
+
+            //如果這個外部程序沒有結束運行則對其強行終止
+            if (process.HasExited == false)
+            {
+                Console.WriteLine("由主程序強行終止外部程序的運行！");
+                process.Kill();
+            }
+            else
+            {
+                Console.WriteLine("由外部程序正常退出！");
+            }
+            Console.WriteLine("外部程序的結束運行時間：{0}", process.ExitTime);
+            Console.WriteLine("外部程序在結束運行時的返回值：{0}", process.ExitCode);
         }
 
         private void button33_Click(object sender, EventArgs e)
         {
+            //ProcessStartInfo 3
+            //使用預設程式打開指定文件
+
+            string filename = @"C:\______test_files\__RW\_txt\poem.txt";
+            //string filename = @"C:\______test_files\__RW\_txt\琵琶行.txt";
+
+            ProcessStartInfo pro = new ProcessStartInfo(filename);
+            Process process = new Process();
+            process.StartInfo = pro;
+            process.Start();
+
+
+
+
         }
 
         private void button34_Click(object sender, EventArgs e)
         {
+
+            //調用外部程序
+
+            string filename = @"C:\______test_files\__RW\_txt\琵琶行.txt";
+
+            //聲明一個程序信息類
+            ProcessStartInfo processStartInfo = new ProcessStartInfo();
+
+            //設置外部程序名
+            processStartInfo.FileName = "notepad.exe";
+
+            //設置外部程序的啟動參數（命令行參數）為test.txt
+            processStartInfo.Arguments = filename;
+
+            //設置外部程序工作目錄為  C:
+            processStartInfo.WorkingDirectory = "C:\\";
+
+            //聲明一個程序類
+            Process Proc = new Process();
+
+            try
+            {
+                //啟動外部程序
+                Proc = Process.Start(processStartInfo);
+            }
+            catch (Win32Exception ex)
+            {
+                Console.WriteLine("系統找不到指定的程序文件。{0}", ex);
+                return;
+            }
+
+            //打印出外部程序的開始執行時間
+            Console.WriteLine("外部程序的開始執行時間：{0}", Proc.StartTime);
+
+            //等待3秒鐘
+            Proc.WaitForExit(3000);
+
+            //如果這個外部程序沒有結束運行則對其強行終止
+            if (Proc.HasExited == false)
+            {
+                Console.WriteLine("由主程序強行終止外部程序的運行！");
+                Proc.Kill();
+            }
+            else
+            {
+                Console.WriteLine("由外部程序正常退出！");
+            }
+            Console.WriteLine("外部程序的結束運行時間：{0}", Proc.ExitTime);
+            Console.WriteLine("外部程序在結束運行時的返回值：{0}", Proc.ExitCode);
+
 
         }
 
         private void button35_Click(object sender, EventArgs e)
         {
 
+            //c# 執行外部程式(.exe，.bat…)
+
+            string exe_filename = "cmd.exe";    //要執行的程序名稱
+            Process process = new Process();
+            //Process類有一個StartInfo屬性，這個是ProcessStartInfo類，包括了一些屬性和方法，下面用到了幾個屬性：
+            process.StartInfo.FileName = exe_filename; //設定要啟動的程式
+            //process.StartInfo.Arguments = "/c" + FullBatPath; //設定程式執行參數" /c " 執行完以下命令後停止
+            process.StartInfo.UseShellExecute = false; //關閉Shell的使用
+            process.StartInfo.RedirectStandardInput = true; //重定向標準輸入
+            process.StartInfo.RedirectStandardOutput = true; //重定向標準輸出
+            process.StartInfo.RedirectStandardError = true; //重定向錯誤輸出
+            process.StartInfo.CreateNoWindow = false; //true設置不顯示窗口
+            process.StartInfo.RedirectStandardError = true;
+            process.Start(); //啟動
+            while (!process.HasExited)
+            {
+                process.WaitForExit(2000); //等待20秒
+            }
+            process.Dispose();
         }
 
         private void button36_Click(object sender, EventArgs e)
@@ -462,13 +595,12 @@ namespace vcs_Process_Start
         private void button41_Click(object sender, EventArgs e)
         {
             //關閉Notepad程序
-            Process[] myProcesses;
-            myProcesses = Process.GetProcessesByName("Notepad");
-            foreach (Process instance in myProcesses)
+            Process[] processes = Process.GetProcessesByName("Notepad");
+            foreach (Process process in processes)
             {
-                instance.CloseMainWindow();
-                instance.WaitForExit(3000);
-                instance.Close();
+                process.CloseMainWindow();
+                process.WaitForExit(3000);
+                process.Close();
             }
         }
 
@@ -572,7 +704,6 @@ namespace vcs_Process_Start
 
             //打開顯示屬性屬性() 
             Process.Start("rundll32.exe", " shell32.dll,Control_RunDLL desk.cpl,,3");
-
         }
     }
 }

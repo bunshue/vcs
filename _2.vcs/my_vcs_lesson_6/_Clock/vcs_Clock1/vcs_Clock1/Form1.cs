@@ -13,20 +13,23 @@ namespace vcs_Clock1
 {
     public partial class Form1 : Form
     {
-        bool flag_debug = false;
+        bool flag_debug = true;
         int flag_operation_mode = MODE_0;
 
-        private const int MODE_0 = 0x00;   //時間模式
-        private const int MODE_1 = 0x01;   //碼表模式
+        private const int MODE_0 = 0x00;   //時鐘
+        private const int MODE_1 = 0x01;   //TBD
         private const int MODE_2 = 0x02;   //離開
-        private const int MODE_3 = 0x03;   //倒數計時
-        private const int MODE_4 = 0x04;   //RGB模式
-        private const int MODE_5 = 0x05;   //最上層切換
+        private const int MODE_3 = 0x03;   //馬表
+        private const int MODE_4 = 0x04;   //全螢幕
+        private const int MODE_5 = 0x05;   //TBD
+        private const int MODE_6 = 0x06;   //倒數計時
+        private const int MODE_7 = 0x07;   //RGB
+        private const int MODE_8 = 0x08;   //最上層
 
         int flag_stopwatch_mode = -1;
-        private const int MODE_1a = 0x00;   //碼表模式a, 歸零, 等待開始
-        private const int MODE_1b = 0x01;   //碼表模式b, 開始計數
-        private const int MODE_1c = 0x02;   //碼表模式c, 暫停
+        private const int MODE_3a = 0x00;   //馬表模式a, 歸零, 等待開始
+        private const int MODE_3b = 0x01;   //馬表模式b, 開始計數
+        private const int MODE_3c = 0x02;   //馬表模式c, 暫停
 
         private const int S_OK = 0;     //system return OK
         private const int S_FALSE = 1;     //system return FALSE
@@ -121,82 +124,90 @@ namespace vcs_Clock1
                 //richTextBox1.Text += "Y";
                 //Point px1 = new Point(W * 10 / 100, H * 90 / 100);
                 //Point px2 = new Point(W * 90 / 100, H * 90 / 100);
-                Point px1 = new Point(0, H / 2);
-                Point px2 = new Point(W, H / 2);
-                g.DrawLine(new Pen(Brushes.Gray, 3), px1, px2);
+                Point px1 = new Point(0, H * 1 / 3);
+                Point px2 = new Point(W, H * 1 / 3);
+                g.DrawLine(new Pen(Brushes.Gray, 3), px1, px2);     //水平線 上
+                px1 = new Point(0, H * 2 / 3);
+                px2 = new Point(W, H * 2 / 3);
+                g.DrawLine(new Pen(Brushes.Gray, 3), px1, px2);     //水平線 下
                 px1 = new Point(W * 1 / 3, 0);
                 px2 = new Point(W * 1 / 3, H);
-                g.DrawLine(new Pen(Brushes.Gray, 3), px1, px2);
+                g.DrawLine(new Pen(Brushes.Gray, 3), px1, px2);     //垂直線 左
                 px1 = new Point(W * 2 / 3, 0);
                 px2 = new Point(W * 2 / 3, H);
-                g.DrawLine(new Pen(Brushes.Gray, 3), px1, px2);
+                g.DrawLine(new Pen(Brushes.Gray, 3), px1, px2);     //垂直線 右
 
                 Font f2 = new Font("標楷體", 12);
                 Brush b2 = new SolidBrush(Color.Red);
                 g.DrawString(" 時鐘", f2, b2, W * 0 / 3, 10);
-                g.DrawString(" 馬表", f2, b2, W * 1 / 3, 10);
+                g.DrawString("     ", f2, b2, W * 1 / 3, 10);
                 g.DrawString(" 離開", f2, b2, W * 2 / 3, 10);
+                g.DrawString(" 馬表", f2, b2, W * 0 / 3, 40);
+                g.DrawString(" 全螢幕", f2, b2, W * 1 / 3, 40);
+                g.DrawString("     ", f2, b2, W * 2 / 3, 40);
                 g.DrawString(" 倒計時", f2, b2, W * 0 / 3, H - 25);
                 g.DrawString(" RGB", f2, b2, W * 1 / 3, H - 25);
                 g.DrawString(" 最上層", f2, b2, W * 2 / 3, H - 25);
-
-                //其他 全螢幕 雙倍螢幕
             }
-
-            if ((flag_operation_mode == MODE_0) || (flag_operation_mode == MODE_3) || (flag_operation_mode == MODE_5))
+            else
             {
-                //string dt = DateTime.Now.ToString("yyyyMMdd_HHmmss");
-                //string dt = DateTime.Now.ToString();
-                //string dt = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
-                string dt = DateTime.Now.ToString("HH:mm:ss");
+                if ((flag_operation_mode == MODE_0) || (flag_operation_mode == MODE_6) || (flag_operation_mode == MODE_8))
+                {
+                    //string dt = DateTime.Now.ToString("yyyyMMdd_HHmmss");
+                    //string dt = DateTime.Now.ToString();
+                    //string dt = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                    string dt = DateTime.Now.ToString("HH:mm:ss");
 
-                g.DrawString(dt, f, b, 10, 28);
+                    g.DrawString(dt, f, b, 10, 28);
+                }
+                else if (flag_operation_mode == MODE_3)
+                {
+                    g.DrawString(stopwatch_text, f, b, 10, 10);
+                }
+                else if (flag_operation_mode == MODE_7)
+                {
+                    int x_st = 5;
+                    int y_st = 10;
+                    int dx = 48;
+                    int dy = 32;
+
+                    Brush rr = new SolidBrush(Color.Red);
+                    Brush gg = new SolidBrush(Color.Green);
+                    Brush bb = new SolidBrush(Color.Blue);
+                    Brush yy = new SolidBrush(Color.Gold);
+                    Brush uu = new SolidBrush(Color.Blue);
+                    Brush vv = new SolidBrush(Color.Red);
+
+                    Font frgb = new Font("標楷體", 20, FontStyle.Bold);
+
+                    g.DrawString(rgb_color.R.ToString(), frgb, rr, x_st + dx * 0, y_st + dy * 0);
+                    g.DrawString(rgb_color.G.ToString(), frgb, gg, x_st + dx * 1, y_st + dy * 0);
+                    g.DrawString(rgb_color.B.ToString(), frgb, bb, x_st + dx * 2, y_st + dy * 0);
+
+                    RGB pp = new RGB(rgb_color.R, rgb_color.G, rgb_color.B);
+                    YUV yyy = new YUV();
+                    yyy = RGBToYUV(pp);
+
+                    g.DrawString(((int)yyy.Y).ToString(), frgb, yy, x_st + dx * 0, y_st + dy * 1);
+                    g.DrawString(((int)yyy.U).ToString(), frgb, uu, x_st + dx * 1, y_st + dy * 1);
+                    g.DrawString(((int)yyy.V).ToString(), frgb, vv, x_st + dx * 2, y_st + dy * 1);
+
+                    frgb = new Font("標楷體", 14, FontStyle.Bold);
+                    Point pt = new Point(Control.MousePosition.X, Control.MousePosition.Y);
+                    g.DrawString("(" + pt.X.ToString() + ", " + pt.Y.ToString() + ")", frgb, gg, x_st + dx * 0, y_st + dy * 2 - 2);
+
+                    int w = 35;
+                    g.FillRectangle(new SolidBrush(rgb_color), W - w - 10, 10, w, H - 20);
+                }
             }
-            else if (flag_operation_mode == MODE_1)
-            {
-                g.DrawString(stopwatch_text, f, b, 10, 10);
-            }
-            else if (flag_operation_mode == MODE_4)
-            {
-                int x_st = 5;
-                int y_st = 10;
-                int dx = 48;
-                int dy = 32;
-
-                Brush rr = new SolidBrush(Color.Red);
-                Brush gg = new SolidBrush(Color.Green);
-                Brush bb = new SolidBrush(Color.Blue);
-                Brush yy = new SolidBrush(Color.Gold);
-                Brush uu = new SolidBrush(Color.Blue);
-                Brush vv = new SolidBrush(Color.Red);
-
-                Font frgb = new Font("標楷體", 20, FontStyle.Bold);
-
-                g.DrawString(rgb_color.R.ToString(), frgb, rr, x_st + dx * 0, y_st + dy * 0);
-                g.DrawString(rgb_color.G.ToString(), frgb, gg, x_st + dx * 1, y_st + dy * 0);
-                g.DrawString(rgb_color.B.ToString(), frgb, bb, x_st + dx * 2, y_st + dy * 0);
-
-                RGB pp = new RGB(rgb_color.R, rgb_color.G, rgb_color.B);
-                YUV yyy = new YUV();
-                yyy = RGBToYUV(pp);
-
-                g.DrawString(((int)yyy.Y).ToString(), frgb, yy, x_st + dx * 0, y_st + dy * 1);
-                g.DrawString(((int)yyy.U).ToString(), frgb, uu, x_st + dx * 1, y_st + dy * 1);
-                g.DrawString(((int)yyy.V).ToString(), frgb, vv, x_st + dx * 2, y_st + dy * 1);
-
-                frgb = new Font("標楷體", 14, FontStyle.Bold);
-                Point pt = new Point(Control.MousePosition.X, Control.MousePosition.Y);
-                g.DrawString("(" + pt.X.ToString() + ", " + pt.Y.ToString() + ")", frgb, gg, x_st + dx * 0, y_st + dy * 2 - 2);
-
-                int w = 35;
-                g.FillRectangle(new SolidBrush(rgb_color), W - w - 10, 10, w, H - 20);
-            }
-
             g.DrawRectangle(p, linewidth / 2, linewidth / 2, W - linewidth, H - linewidth);
         }
 
         private void timer_clock_Tick(object sender, EventArgs e)
         {
+            if (flag_form1_mouse_inside == true)
+                return;
+
             this.Invalidate();
         }
 
@@ -205,11 +216,11 @@ namespace vcs_Clock1
             richTextBox1.Text += "(" + e.X.ToString() + ", " + e.Y.ToString() + ") ";
             int xx = e.X;
             int yy = e.Y;
-            if (yy < H / 2) //上排
+            if (yy < H / 3) //上排
             {
                 if (xx < W / 3) //左
                 {
-                    richTextBox1.Text += "零 時間模式";
+                    richTextBox1.Text += "零 時鐘\n";
                     timer_clock.Enabled = true;
                     timer_stopwatch.Enabled = false;
                     timer_countdown.Enabled = false;
@@ -218,37 +229,64 @@ namespace vcs_Clock1
                 }
                 else if (xx < W * 2 / 3) //中
                 {
-                    richTextBox1.Text += "一 碼表模式";
-                    timer_clock.Enabled = false;
-                    timer_stopwatch.Enabled = false;
-                    timer_countdown.Enabled = false;
-                    flag_operation_mode = MODE_1;
-
-                    do_stopwatch();
+                    richTextBox1.Text += "一 TBD\n";
                 }
                 else  //右
                 {
-                    richTextBox1.Text += "二 離開";
+                    richTextBox1.Text += "二 離開\n";
                     flag_operation_mode = MODE_2;
                     Application.Exit();
+                }
+            }
+            else if (yy < H * 2 / 3) //中排
+            {
+                if (xx < W / 3) //左
+                {
+                    richTextBox1.Text += "三 馬表\n";
+                    timer_clock.Enabled = false;
+                    timer_stopwatch.Enabled = false;
+                    timer_countdown.Enabled = false;
+                    flag_operation_mode = MODE_3;
+
+                    do_stopwatch();
+                }
+                else if (xx < W * 2 / 3) //中
+                {
+                    richTextBox1.Text += "四 全螢幕\n";
+                    /*
+                    timer_clock.Enabled = false;
+                    timer_stopwatch.Enabled = false;
+                    timer_countdown.Enabled = false;
+                    flag_operation_mode = MODE_3;
+
+                    do_stopwatch();
+                    */
+                }
+                else  //右
+                {
+                    richTextBox1.Text += "五 TBD\n";
+                    /*
+                    flag_operation_mode = MODE_2;
+                    Application.Exit();
+                    */
                 }
             }
             else   //下排
             {
                 if (xx < W / 3) //左
                 {
-                    richTextBox1.Text += "三 倒數計時";
-                    flag_operation_mode = MODE_3;
+                    richTextBox1.Text += "六 倒數計時\n";
+                    flag_operation_mode = MODE_6;
                 }
                 else if (xx < W * 2 / 3) //中
                 {
-                    richTextBox1.Text += "四 RGB模式";
-                    flag_operation_mode = MODE_4;
+                    richTextBox1.Text += "七 RGB\n";
+                    flag_operation_mode = MODE_7;
                 }
                 else  //右
                 {
-                    richTextBox1.Text += "五 最上層切換";
-                    flag_operation_mode = MODE_5;
+                    richTextBox1.Text += "八 最上層\n";
+                    flag_operation_mode = MODE_8;
                     if (this.TopMost == false)
                         this.TopMost = true;
                     else
@@ -256,7 +294,7 @@ namespace vcs_Clock1
                 }
             }
 
-            if (flag_operation_mode != MODE_1)
+            if (flag_operation_mode != MODE_3)
             {
                 flag_stopwatch_mode = -1;
             }
@@ -266,27 +304,27 @@ namespace vcs_Clock1
         {
             if (flag_stopwatch_mode == -1)
             {
-                flag_stopwatch_mode = MODE_1a;  //歸零, 等待開始
+                flag_stopwatch_mode = MODE_3a;  //歸零, 等待開始
                 richTextBox1.Text += "歸零, 等待開始\n";
                 stopwatch_text = "00:00:00.0";
                 this.Invalidate();
             }
-            else if (flag_stopwatch_mode == MODE_1a)
+            else if (flag_stopwatch_mode == MODE_3a)
             {
-                flag_stopwatch_mode = MODE_1b;  //開始計數
+                flag_stopwatch_mode = MODE_3b;  //開始計數
                 richTextBox1.Text += "開始計數\n";
                 timer_stopwatch.Enabled = true;
                 StartTime = DateTime.Now;
             }
-            else if (flag_stopwatch_mode == MODE_1b)
+            else if (flag_stopwatch_mode == MODE_3b)
             {
-                flag_stopwatch_mode = MODE_1c;  //暫停
+                flag_stopwatch_mode = MODE_3c;  //暫停
                 richTextBox1.Text += "暫停\n";
                 timer_stopwatch.Enabled = false;
             }
-            else if (flag_stopwatch_mode == MODE_1c)
+            else if (flag_stopwatch_mode == MODE_3c)
             {
-                flag_stopwatch_mode = MODE_1a;  //歸零, 等待開始
+                flag_stopwatch_mode = MODE_3a;  //歸零, 等待開始
                 richTextBox1.Text += "歸零, 等待開始\n";
                 stopwatch_text = "00:00:00.0";
                 this.Invalidate();
@@ -294,9 +332,7 @@ namespace vcs_Clock1
             else
             {
                 richTextBox1.Text += "XXXXXXXXXXXXXXXXXXXXXXXX\n";
-
             }
-
         }
 
         private DateTime StartTime;
@@ -493,20 +529,16 @@ namespace vcs_Clock1
                 }
             }
              * */
-
-
         }
 
         private void Form1_MouseEnter(object sender, EventArgs e)
         {
             flag_form1_mouse_inside = true;
-
         }
 
         private void Form1_MouseLeave(object sender, EventArgs e)
         {
             flag_form1_mouse_inside = false;
-
         }
     }
 }

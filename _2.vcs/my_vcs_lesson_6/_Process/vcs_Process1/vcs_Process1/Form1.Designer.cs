@@ -86,7 +86,6 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(150, 60);
             this.button1.TabIndex = 0;
-            this.button1.Text = "開啟程式";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -347,7 +346,6 @@
             this.button22.Name = "button22";
             this.button22.Size = new System.Drawing.Size(150, 60);
             this.button22.TabIndex = 24;
-            this.button22.Text = "啟動一個外部程序";
             this.button22.UseVisualStyleBackColor = true;
             this.button22.Click += new System.EventHandler(this.button22_Click);
             // 
@@ -380,7 +378,6 @@
             this.button25.Name = "button25";
             this.button25.Size = new System.Drawing.Size(150, 60);
             this.button25.TabIndex = 26;
-            this.button25.Text = "打開指定文件";
             this.button25.UseVisualStyleBackColor = true;
             this.button25.Click += new System.EventHandler(this.button25_Click);
             // 
@@ -466,7 +463,6 @@
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(150, 60);
             this.button33.TabIndex = 34;
-            this.button33.Text = "調用外部程序";
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);
             // 

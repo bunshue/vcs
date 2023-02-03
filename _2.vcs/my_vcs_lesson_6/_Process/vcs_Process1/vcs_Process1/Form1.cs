@@ -120,7 +120,9 @@ namespace vcs_Process1
         {
             richTextBox1.Text += "取得所有程序\n";
             Process[] processes = Process.GetProcesses(); //取得所有程序
-            richTextBox1.Text += "系統中有： " + processes.Length.ToString() + " 個程序\n";
+            richTextBox1.Text += "系統中有： " + processes.Length.ToString() + " 個程序\n\n";
+
+            richTextBox1.Text += "僅列出 有視窗 的Process\n\n";
 
             foreach (Process process in processes)
             {
@@ -128,8 +130,12 @@ namespace vcs_Process1
                 if (process.MainWindowTitle.Length > 0)
                 {
                     //僅列出 有視窗 的Process
-                    richTextBox1.Text += "取得 有視窗 的Process : " + process.ProcessName.ToString().Trim() + "\n";
-                    richTextBox1.Text += "任務名：" + process.MainWindowTitle + "\n";   //取得處理序的主視窗標題
+                    richTextBox1.Text += "處理序的名稱 :\t" + process.ProcessName.ToString().Trim() + "\n";//取得處理序的名稱
+                    richTextBox1.Text += "主視窗標題 :\t" + process.MainWindowTitle + "\n";   //取得處理序的主視窗標題
+                    richTextBox1.Text += "處理序啟動的時間 :\t" + process.StartTime.ToString() + "\n";   //取得處理序的主視窗標題
+                    richTextBox1.Text += "這個處理序的總處理器時間 :\t" + process.TotalProcessorTime.ToString() + "\n";   //取得處理序的主視窗標題
+
+                    richTextBox1.Text += "\n";
                 }
                 else
                 {
@@ -137,28 +143,27 @@ namespace vcs_Process1
                 }
             }
 
-            /*
+            richTextBox1.Text += "\n\n\n";
+
             int length = processes.Length;
             for (int index = 0; index < length; index++)
             {
-                richTextBox1.Text += String.Format("{0} \tID:{1}", processes[index].ProcessName, processes[index].Id) + "\n";
+                if (processes[index].MainWindowTitle.Length > 0)
+                {
+                    richTextBox1.Text += String.Format("Name: {0} \tID: {1}", processes[index].ProcessName, processes[index].Id) + "\n\n";
+                }
             }
-            */
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //開啟imsLink
-            Process process = new Process();
-            process = Process.Start(@"C:\_git\ims1\iMS_Link\iMS_Link\bin\Debug\iMS_Link.exe");
-            richTextBox1.Text += "ProcessName : " + process.ProcessName + "\n";
-            richTextBox1.Text += "SessionId : " + process.SessionId.ToString() + "\n";
-            richTextBox1.Text += "StartTime : " + process.StartTime + "\n";
-            richTextBox1.Text += "Id : " + process.Id.ToString() + "\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            return;
+
+            //應該是要指名關閉哪個程式
             if ((myProcess != null) && (!myProcess.HasExited))
             {
                 myProcess.Kill();
@@ -250,31 +255,35 @@ namespace vcs_Process1
         private void button5_Click(object sender, EventArgs e)
         {
             //關閉計算機(偽)
-            string exe_filename = "cmd.exe";
-            Process myProcess = new Process();
-            myProcess.StartInfo.FileName = exe_filename;    //啟動命令
-            myProcess.StartInfo.UseShellExecute = false;    //是否使用系統外殼程序啟動進程
-            myProcess.StartInfo.RedirectStandardInput = true;//是否從流中讀取
-            myProcess.StartInfo.RedirectStandardOutput = true;//是否寫入流
-            myProcess.StartInfo.RedirectStandardError = true;//是否將錯誤信息寫入流
-            myProcess.StartInfo.CreateNoWindow = true;//是否在新窗口中啟動進程
-            //myProcess.Start();//啟動進程
-            //myProcess.StandardInput.WriteLine("shutdown -s -t 0");//執行關機命令
+            string exe_filename = "cmd.exe";    //要執行的程序名稱
+            Process process = new Process();
+            process.StartInfo.FileName = exe_filename;    //設定要啟動的程式
+            process.StartInfo.UseShellExecute = false;    //是否使用系統外殼程序啟動進程
+            process.StartInfo.RedirectStandardInput = true;//是否從流中讀取
+            process.StartInfo.RedirectStandardOutput = true;//是否寫入流
+            process.StartInfo.RedirectStandardError = true;//是否將錯誤信息寫入流
+            process.StartInfo.CreateNoWindow = true;//是否在新窗口中啟動進程
+
+            //偽執行
+            //process.Start();//啟動進程
+            //process.StandardInput.WriteLine("shutdown -s -t 0");//執行關機命令
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             //重啟計算機(偽)
-            //重啟計算機
-            Process myProcess = new Process();
-            myProcess.StartInfo.FileName = "cmd.exe";//啟動cmd命令
-            myProcess.StartInfo.UseShellExecute = false;//是否使用系統外殼程序啟動進程
-            myProcess.StartInfo.RedirectStandardInput = true;//是否從流中讀取
-            myProcess.StartInfo.RedirectStandardOutput = true;//是否寫入流
-            myProcess.StartInfo.RedirectStandardError = true;//是否將錯誤信息寫入流
-            myProcess.StartInfo.CreateNoWindow = true;//是否在新窗口中啟動進程
-            //myProcess.Start();//啟動進程
-            //myProcess.StandardInput.WriteLine("shutdown -r -t 0");//執行重啟計算機命令
+            string exe_filename = "cmd.exe";    //要執行的程序名稱
+            Process process = new Process();
+            process.StartInfo.FileName = exe_filename;  //設定要啟動的程式
+            process.StartInfo.UseShellExecute = false;  //是否使用系統外殼程序啟動進程
+            process.StartInfo.RedirectStandardInput = true;//是否從流中讀取
+            process.StartInfo.RedirectStandardOutput = true;//是否寫入流
+            process.StartInfo.RedirectStandardError = true;//是否將錯誤信息寫入流
+            process.StartInfo.CreateNoWindow = true;//是否在新窗口中啟動進程
+
+            //偽執行
+            //process.Start();//啟動進程
+            //process.StandardInput.WriteLine("shutdown -r -t 0");//執行重啟計算機命令
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -288,8 +297,9 @@ namespace vcs_Process1
             下面介紹一種常用的在C#程序中調用CMD.exe程序，並且不顯示命令行窗口界面，來完成CMD中各種功能的簡單方法。
             */
 
+            string exe_filename = "cmd.exe";    //要執行的程序名稱
             Process process = new Process();
-            process.StartInfo.FileName = "cmd.exe";//要執行的程序名稱
+            process.StartInfo.FileName = exe_filename;  //設定要啟動的程式
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardInput = true;//可能接受來自調用程序的輸入信息
             process.StartInfo.RedirectStandardOutput = true;//由調用程序獲取輸出信息
@@ -312,9 +322,9 @@ namespace vcs_Process1
             {
                 using (Process process = new Process())
                 {
-                    string exe_filename = @"C:\_git\ims1\iMS_Link\iMS_Link\bin\Debug\iMS_Link.exe";
+                    string exe_filename = @"C:\_git\ims1\iMS_Link\iMS_Link\bin\Debug\iMS_Link.exe"; //要執行的程序名稱
+                    process.StartInfo.FileName = exe_filename;  //設定要啟動的程式
                     process.StartInfo.UseShellExecute = false;
-                    process.StartInfo.FileName = exe_filename;
                     process.StartInfo.CreateNoWindow = true;
                     process.Start();
                     // This code assumes the process you are starting will terminate itself. 
@@ -538,7 +548,7 @@ namespace vcs_Process1
 
             //呼叫外部程式 並帶有參數的用法
             Process process = new Process();
-            process.StartInfo.FileName = @"C:\Windows\explorer.exe";
+            process.StartInfo.FileName = @"C:\Windows\explorer.exe";    //設定要啟動的程式
             process.StartInfo.Arguments = @"/n,/e,D:\";
             process.Start();
         }
@@ -553,40 +563,6 @@ namespace vcs_Process1
 
         private void button22_Click(object sender, EventArgs e)
         {
-            //啟動一個外部程序
-            ProcessStartInfo Info = new ProcessStartInfo();
-            Info.FileName = "notepad.exe";  //設置外部程序名
-            Info.Arguments = "article.txt"; //設置外部程序的啟動參數（命令行參數）為test.txt
-            Info.WorkingDirectory = @"C:\______test_files\__RW\_txt";   //設置外部程序工作目錄
-
-            //創建一個進程
-            Process Proc;
-            try
-            {////啟動外部程序//
-                Proc = Process.Start(Info);
-            }
-            catch (Win32Exception ex)
-            {
-                Console.WriteLine("系統找不到指定的程序文件。\r{0}", ex);
-                return;
-            }   //打印出外部程序的開始執行時間
-            Console.WriteLine("外部程序的開始執行時間：{0}", Proc.StartTime);
-
-            //等待3秒鐘
-            Proc.WaitForExit(3000);
-
-            //如果這個外部程序沒有結束運行則對其強行終止
-            if (Proc.HasExited == false)
-            {
-                Console.WriteLine("由主程序強行終止外部程序的運行！");
-                Proc.Kill();
-            }
-            else
-            {
-                Console.WriteLine("由外部程序正常退出！");
-            }
-            Console.WriteLine("外部程序的結束運行時間：{0}", Proc.ExitTime);
-            Console.WriteLine("外部程序在結束運行時的返回值：{0}", Proc.ExitCode);
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -632,16 +608,6 @@ namespace vcs_Process1
 
         private void button25_Click(object sender, EventArgs e)
         {
-            //使用預設程式打開指定文件
-
-            string filename = @"C:\______test_files\__RW\_txt\poem.txt";
-            //string filename = @"C:\______test_files\__RW\_txt\琵琶行.txt";
-
-            ProcessStartInfo pro = new ProcessStartInfo(filename);
-            Process pr = new Process();
-            pr.StartInfo = pro;
-            pr.Start();
-
         }
 
         private void button26_Click(object sender, EventArgs e)
@@ -664,17 +630,16 @@ namespace vcs_Process1
         //C#殺死進程
         private void KillProcess(string processName)
         {
-            Process myproc = new Process();
             //得到所有打開的進程
             try
             {
                 //foreach (Process processes in Process.GetProcesses())  //取得所有程序
-                foreach (Process thisproc in Process.GetProcessesByName(processName))   //指明特定名稱的程序
+                foreach (Process process in Process.GetProcessesByName(processName))   //指明特定名稱的程序
                 {
-                    richTextBox1.Text += "get process : " + thisproc.ProcessName + "\n";
-                    if (!thisproc.CloseMainWindow())
+                    richTextBox1.Text += "get process : " + process.ProcessName + "\n";
+                    if (!process.CloseMainWindow())
                     {
-                        //thisproc.Kill();
+                        //process.Kill();
                         richTextBox1.Text += "殺死進程 : " + processName + "\n";
                     }
                 }
@@ -768,59 +733,10 @@ namespace vcs_Process1
                 //Application.SetCompatibleTextRenderingDefault(false);
                 //Application.Run(new Form1());
             }
-
         }
 
         private void button33_Click(object sender, EventArgs e)
         {
-            //調用外部程序
-
-            string filename = @"C:\______test_files\__RW\_txt\琵琶行.txt";
-
-            //聲明一個程序信息類
-            ProcessStartInfo Info = new ProcessStartInfo();
-
-            //設置外部程序名
-            Info.FileName = "notepad.exe";
-
-            //設置外部程序的啟動參數（命令行參數）為test.txt
-            Info.Arguments = filename;
-
-            //設置外部程序工作目錄為  C:
-            Info.WorkingDirectory = "C:\\";
-
-            //聲明一個程序類
-            Process Proc;
-
-            try
-            {
-                //啟動外部程序
-                Proc = Process.Start(Info);
-            }
-            catch (Win32Exception ex)
-            {
-                Console.WriteLine("系統找不到指定的程序文件。{0}", ex);
-                return;
-            }
-
-            //打印出外部程序的開始執行時間
-            Console.WriteLine("外部程序的開始執行時間：{0}", Proc.StartTime);
-
-            //等待3秒鐘
-            Proc.WaitForExit(3000);
-
-            //如果這個外部程序沒有結束運行則對其強行終止
-            if (Proc.HasExited == false)
-            {
-                Console.WriteLine("由主程序強行終止外部程序的運行！");
-                Proc.Kill();
-            }
-            else
-            {
-                Console.WriteLine("由外部程序正常退出！");
-            }
-            Console.WriteLine("外部程序的結束運行時間：{0}", Proc.ExitTime);
-            Console.WriteLine("外部程序在結束運行時的返回值：{0}", Proc.ExitCode);
         }
 
         private void button34_Click(object sender, EventArgs e)
@@ -845,45 +761,42 @@ namespace vcs_Process1
 
         private void button36_Click(object sender, EventArgs e)
         {
-            string exe_filename = "cmd.exe";
+            string exe_filename = "cmd.exe";    //要執行的程序名稱
 
             //創建一個進程
-            Process pc = new Process();
-            pc.StartInfo.FileName = exe_filename;
-            pc.StartInfo.UseShellExecute = false;
-            pc.StartInfo.RedirectStandardOutput = true;
-            pc.StartInfo.RedirectStandardError = true;
-            pc.StartInfo.CreateNoWindow = false;
+            Process process = new Process();
+            process.StartInfo.FileName = exe_filename;  //設定要啟動的程式
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.RedirectStandardError = true;
+            process.StartInfo.CreateNoWindow = false;
 
             richTextBox1.Text += "啟動程式\n";
-            pc.Start(); //啟動進程
+            process.Start(); //啟動進程
 
             //準備讀出輸出流和錯誤流
             string outputData = string.Empty;
             string errorData = string.Empty;
-            pc.BeginOutputReadLine();
-            pc.BeginErrorReadLine();
+            process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
 
-            pc.OutputDataReceived += (ss, ee) =>
+            process.OutputDataReceived += (ss, ee) =>
             {
                 outputData += ee.Data;
             };
 
-            pc.ErrorDataReceived += (ss, ee) =>
+            process.ErrorDataReceived += (ss, ee) =>
             {
                 errorData += ee.Data;
             };
 
             //等待退出
-            pc.WaitForExit();
+            process.WaitForExit();
 
             //關閉進程
-            pc.Close();
+            process.Close();
 
             richTextBox1.Text += "使用者關閉程式\n";
-
-
-
         }
 
         private void button37_Click(object sender, EventArgs e)
@@ -920,26 +833,3 @@ namespace vcs_Process1
         }
     }
 }
-
-
-/*
-c# 執行外部程式(.exe，.bat…)
-
-Process process = new Process();
-//Process類有一個StartInfo屬性，這個是ProcessStartInfo類，包括了一些屬性和方法，下面用到了幾個屬性：
-process.StartInfo.FileName = "cmd.exe"; //設定程序名
-process.StartInfo.Arguments = "/c" + FullBatPath; //設定程式執行參數" /c " 執行完以下命令後停止
-process.StartInfo.UseShellExecute = false; //關閉Shell的使用
-process.StartInfo.RedirectStandardInput = true; //重定向標準輸入
-process.StartInfo.RedirectStandardOutput = true; //重定向標準輸出
-process.StartInfo.RedirectStandardError = true; //重定向錯誤輸出
-process.StartInfo.CreateNoWindow = false; //true設置不顯示窗口
-process.StartInfo.RedirectStandardError = true;
-process.Start(); //啟動
-while (!process.HasExited)
-{
-process.WaitForExit(2000); //等待20秒
-}
-process.Dispose();
-*/
-

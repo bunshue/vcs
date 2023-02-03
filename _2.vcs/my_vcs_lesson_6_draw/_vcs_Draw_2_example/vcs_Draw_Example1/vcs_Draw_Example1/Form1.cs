@@ -2638,9 +2638,9 @@ namespace vcs_Draw_Example1
             int y_st;
             int w;
             int h;
-            pictureBox1.Location = new Point(10, 10);
-            pictureBox1.Size = new Size(W + 50, H + 50);  //改變圖框大小
-            pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+            //pictureBox1.Location = new Point(10, 10);
+            //pictureBox1.Size = new Size(W + 50, H + 50);  //改變圖框大小
+            //pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
 
             Graphics g;
 
@@ -2763,9 +2763,9 @@ namespace vcs_Draw_Example1
             int y_st;
             int w;
             int h;
-            pictureBox1.Location = new Point(10, 10);
-            pictureBox1.Size = new Size(W + 50 + 250, H + 50);  //改變圖框大小
-            pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
+            //pictureBox1.Location = new Point(10, 10);
+            //pictureBox1.Size = new Size(W + 50 + 250, H + 50);  //改變圖框大小
+            //pictureBox1.SizeMode = PictureBoxSizeMode.Normal;
 
             Graphics g;
 
@@ -3215,8 +3215,8 @@ namespace vcs_Draw_Example1
             Pen greenPen = new Pen(Color.Green, 3);
             Pen blackPen = new Pen(Color.Black, 3);
 
-            pictureBox1.Width = width;
-            pictureBox1.Height = height;
+            //pictureBox1.Width = width;
+            //pictureBox1.Height = height;
 
             if (bitmap1 == null)
                 bitmap1 = new Bitmap(width, height);
@@ -4060,7 +4060,7 @@ namespace vcs_Draw_Example1
         //Pie Chart 1 ST
         private void button25_Click(object sender, EventArgs e)
         {
-            pictureBox1.Size = new Size(400, 400);
+            //pictureBox1.Size = new Size(400, 400);
             // Brushes used to fill pie slices.
             Brush[] SliceBrushes =
             {
@@ -4166,7 +4166,7 @@ namespace vcs_Draw_Example1
             int W = 230;
             int H = 230;
 
-            pictureBox1.Size = new Size(W * 2, H * 5 / 4);
+            //pictureBox1.Size = new Size(W * 2, H * 5 / 4);
 
             // Brushes used to fill pie slices.
             Brush[] SliceBrushes =
@@ -4806,7 +4806,7 @@ namespace vcs_Draw_Example1
             int W = 230;
             int H = 230;
 
-            pictureBox1.Size = new Size(W * 2, H * 2);
+            //pictureBox1.Size = new Size(W * 2, H * 2);
 
             // Brushes used to fill pie slices.
             Brush[] SliceBrushes =
@@ -4871,7 +4871,7 @@ namespace vcs_Draw_Example1
             int W = 230;
             int H = 230;
 
-            pictureBox1.Size = new Size(W * 2, H * 2);
+            //pictureBox1.Size = new Size(W * 2, H * 2);
 
             // Draw pie slices.
 

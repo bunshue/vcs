@@ -44,10 +44,6 @@
 vcs+ 內嵌外部程式
 
 
-vcs
-map + 方圓 XX 公里 把圓畫出來
-
-
 
 vcs
 listBox1.Items.Count > 0);

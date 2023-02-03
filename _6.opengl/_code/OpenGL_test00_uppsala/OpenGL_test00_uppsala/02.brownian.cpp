@@ -65,13 +65,14 @@ void make_gaussian_data()
         //points[i][1] = (float)i/10;     //debug
     }
     winLimit = 2.0 * sqrt((double)POINTS);
-    printf("winLimit = %f\n", winLimit);
+    //printf("winLimit = %f\n", winLimit);
 
     points[POINTS / 2][1] = 20.0f;     //故意造一個特大點
 
     return;
 }
 
+int t = 0;
 void make_sine_data()
 {
     int i;
@@ -81,10 +82,11 @@ void make_sine_data()
     for (i = 1; i < POINTS; i++)
     {
         points[i][0] = (float)i;
-        points[i][1] = 25.0f * sin(PI * (float)i / 180);
+        points[i][1] = 25.0f * sin(PI * (float)(i + t) / 180);
     }
+    t++;
     winLimit = 2.0 * sqrt((double)POINTS);
-    printf("winLimit = %f\n", winLimit);
+    //printf("winLimit = %f\n", winLimit);
 
     points[POINTS / 2][1] = 20.0f;     //故意造一個特大點
 
@@ -149,12 +151,11 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
     case '2':
         break;
     }
-    
 }
 
 void idle(void)
 {
-
+    glutPostRedisplay();    //將當前視窗打上標記，標記其需要再次顯示。
 }
 
 int main(int argc, char** argv)
@@ -163,7 +164,7 @@ int main(int argc, char** argv)
     const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
     common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard);
 
-    glutIdleFunc(idle);
+    //glutIdleFunc(idle);
 
     glutMainLoop();	//開始主循環繪製
 
