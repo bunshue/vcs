@@ -1,4 +1,12 @@
 
+vcs標準版大集合
+TBGBMBKB
+轉出與全部轉出
+儲存圖檔
+移動控件mousedown-mousemove-mouseup
+
+
+
 
 準備自建函式庫用
         Bitmap color_to_gray(Bitmap bitmap1)

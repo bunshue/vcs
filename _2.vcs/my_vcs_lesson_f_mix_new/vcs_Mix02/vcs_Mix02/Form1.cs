@@ -110,40 +110,6 @@ namespace vcs_Mix02
         private void button0_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-
-            //獲取系統進程的用戶名
-            foreach (Process p in Process.GetProcesses())
-            {
-                //Console.Write(p.ProcessName);
-                //Console.Write("----");
-                //Console.WriteLine(GetProcessUserName(p.Id));
-
-                richTextBox1.Text += p.ProcessName + "\t" + GetProcessUserName(p.Id) + "\n";
-            }
-        }
-
-        private static string GetProcessUserName(int pID)
-        {
-            string text1 = null;
-            SelectQuery query1 = new SelectQuery("Select * from Win32_Process WHERE processID=" + pID);
-            ManagementObjectSearcher searcher1 = new ManagementObjectSearcher(query1);
-            try
-            {
-                foreach (ManagementObject disk in searcher1.Get())
-                {
-                    ManagementBaseObject inPar = null;
-                    ManagementBaseObject outPar = null;
-                    inPar = disk.GetMethodParameters("GetOwner");
-                    outPar = disk.InvokeMethod("GetOwner", inPar, null);
-                    text1 = outPar["User"].ToString();
-                    break;
-                }
-            }
-            catch
-            {
-                text1 = "SYSTEM";
-            }
-            return text1;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -469,7 +435,6 @@ namespace vcs_Mix02
             show_button_text(sender);
 
             //在winform中查找控件
-
 
             //調用
             for (int i = 1; i <= 5; i++)

@@ -3,12 +3,6 @@
  *  Use of multiple names and picking are demonstrated.
  *  A 3x3 grid of squares is drawn.  When the left mouse
  *  button is pressed, all squares under the cursor position have their color changed.
- *
- *  This is Listing 12-3 on pages 366-368 of the "OpenGL Programming
- *  Guide". It has been modified (by Cary Laxer on September 23, 1997)
- *  to use the glut interface rather than the aux interface, to improve
- *  readability, and to improve visibility. It has been further modified
- *  (by Cary Laxer on September 12, 2000) to change the I/O from C-style to C++.
  */
 
 #include "../../Common.h"
@@ -79,13 +73,13 @@ void processHits(GLint hits, GLuint buffer[])
     for (i = 0; i < hits; i++)
     {	/*  for each hit  */
         names = *ptr;
-        cout << " number of names for this hit = " << names << endl;
+        cout << "number of names for this hit = " << names << "\t";
         ptr++;
-        cout << "  z1 is " << *ptr << "\t";
+        //cout << "  z1 is " << *ptr << "\t";
         ptr++;
-        cout << "; z2 is " << *ptr << "\t";
+        //cout << "; z2 is " << *ptr << "\t";
         ptr++;
-        cout << "   names are ";
+        cout << "names are ";
         for (j = 0; j < names; j++)
         {	/*  for each name */
             cout << *ptr << ' ';
@@ -99,7 +93,7 @@ void processHits(GLint hits, GLuint buffer[])
             }
             ptr++;
         }
-        cout << "\n\n";
+        cout << "\n";
         board[ii][jj] = (board[ii][jj] + 1) % 3;
     }
     //printf("\n");
@@ -146,7 +140,7 @@ void display(void)
 void reshape(int w, int h)
 {
     glViewport(0, 0, w, h);
-    glMatrixMode(GL_PROJECTION);
+    glMatrixMode(GL_PROJECTION);    //¤Á´«¨ì§ë¼v¯x°}
     glLoadIdentity();
     gluOrtho2D(0.0, 3.0, 0.0, 3.0);
 }

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;    //for File
 using System.Diagnostics;       //for Process
 using System.Threading;
+using System.Management;    //for ManagementObjectSearcher
 using System.Runtime.InteropServices;   //for DllImport
 using System.Text.RegularExpressions;
 using System.Drawing.Imaging;           //for PixelFormat
@@ -354,10 +355,41 @@ namespace vcs_Process1
             richTextBox1.Text += "aaaaa9 :" + Process.GetCurrentProcess().StartTime.ToString() + "\n";
         }
 
+        private static string GetProcessUserName(int pID)
+        {
+            string text1 = null;
+            SelectQuery query1 = new SelectQuery("Select * from Win32_Process WHERE processID=" + pID);
+            ManagementObjectSearcher searcher1 = new ManagementObjectSearcher(query1);
+            try
+            {
+                foreach (ManagementObject disk in searcher1.Get())
+                {
+                    ManagementBaseObject inPar = null;
+                    ManagementBaseObject outPar = null;
+                    inPar = disk.GetMethodParameters("GetOwner");
+                    outPar = disk.InvokeMethod("GetOwner", inPar, null);
+                    text1 = outPar["User"].ToString();
+                    break;
+                }
+            }
+            catch
+            {
+                text1 = "SYSTEM";
+            }
+            return text1;
+        }
+
         private void button11_Click(object sender, EventArgs e)
         {
+            //獲取系統進程的用戶名
+            foreach (Process p in Process.GetProcesses())
+            {
+                //Console.Write(p.ProcessName);
+                //Console.Write("----");
+                //Console.WriteLine(GetProcessUserName(p.Id));
 
-
+                richTextBox1.Text += p.ProcessName + "\t" + GetProcessUserName(p.Id) + "\n";
+            }
         }
 
         private void button12_Click(object sender, EventArgs e)

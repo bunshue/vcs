@@ -246,6 +246,47 @@ namespace vcs_System1
             }
 
 
+            ShowPowerStatus1();
+            ShowPowerStatus2();
+        }
+
+        private void ShowPowerStatus1()
+        {
+            // Get the current charge percent.
+            PowerStatus status = SystemInformation.PowerStatus;
+            int percent = (int)(status.BatteryLifePercent * 100);
+
+            richTextBox1.Text += percent.ToString() + "%" + "\n";
+            richTextBox1.Text += status.PowerLineStatus.ToString() + "\n";
+            richTextBox1.Text += status.BatteryChargeStatus.ToString() + "\n";
+            richTextBox1.Text += status.BatteryFullLifetime.ToString() + "\n";
+            richTextBox1.Text += status.BatteryLifePercent.ToString() + "\n";
+            richTextBox1.Text += status.BatteryLifeRemaining.ToString() + "\n";
+        }
+
+        private void ShowPowerStatus2()
+        {
+            PowerStatus status = SystemInformation.PowerStatus;
+            richTextBox1.Text += "Charge Status:\t" + status.BatteryChargeStatus.ToString() + "\n";
+
+            if (status.BatteryFullLifetime == -1)
+            {
+                richTextBox1.Text += "Full Lifetime:\t" + "Unknown" + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "Full Lifetime (sec):\t" + status.BatteryFullLifetime.ToString() + "\n";
+            }
+            richTextBox1.Text += "Charge:\t\t" + status.BatteryLifePercent.ToString("P0") + "\n";
+            if (status.BatteryLifeRemaining == -1)
+            {
+                richTextBox1.Text += "Life Remaining:\t" + "Unknown" + "\n";
+            }
+            else
+            {
+                richTextBox1.Text += "Life Remaining (sec):\t" + status.BatteryLifeRemaining.ToString() + "\n";
+            }
+            richTextBox1.Text += "Line Status:\t" + status.PowerLineStatus.ToString() + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -279,8 +320,9 @@ namespace vcs_System1
                 }
             }
             else
+            {
                 MessageBox.Show("系統版本：" + myOS.VersionString + " " + myOS.ServicePack);
-
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -364,14 +406,22 @@ namespace vcs_System1
         private void button12_Click(object sender, EventArgs e)
         {
             //GetExecutingAssembly() 使用
-            richTextBox1.Text += "取得軟體版本\t";
-            richTextBox1.Text += "" + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n";
 
             //取得目前應用程式版本
             richTextBox1.Text += "VersionInfo: " + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n";
 
             richTextBox1.Text += "取得目前應用程式版本\n";
-            richTextBox1.Text += "Ver：" + FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n";
+            richTextBox1.Text += FileVersionInfo.GetVersionInfo(Assembly.GetExecutingAssembly().Location).FileVersion.ToString() + "\n";
+
+            richTextBox1.Text += "提供磁碟上實體檔案的版本資訊\n";
+            // Get the file version for the notepad.
+            FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(Environment.SystemDirectory + "\\Notepad.exe");
+
+            // Print the file name and version number.
+            richTextBox1.Text += "File: " + myFileVersionInfo.FileDescription + '\n' + "Version number: " + myFileVersionInfo.FileVersion + "\n";
+
+            richTextBox1.Text += "取得NOTEPAD版本資訊\n";
+            richTextBox1.Text += "VersionInfo: " + FileVersionInfo.GetVersionInfo(@"C:\WINDOWS\NOTEPAD.EXE").FileVersion.ToString() + "\n";
         }
 
         private void button13_Click(object sender, EventArgs e)
@@ -449,12 +499,6 @@ namespace vcs_System1
 
         private void button19_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "提供磁碟上實體檔案的版本資訊\n";
-            // Get the file version for the notepad.
-            FileVersionInfo myFileVersionInfo = FileVersionInfo.GetVersionInfo(Environment.SystemDirectory + "\\Notepad.exe");
-
-            // Print the file name and version number.
-            richTextBox1.Text += "File: " + myFileVersionInfo.FileDescription + '\n' + "Version number: " + myFileVersionInfo.FileVersion + "\n";
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -469,8 +513,6 @@ namespace vcs_System1
 
         private void button22_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "取得NOTEPAD版本資訊\n";
-            richTextBox1.Text += "VersionInfo: " + FileVersionInfo.GetVersionInfo(@"C:\WINDOWS\NOTEPAD.EXE").FileVersion.ToString() + "\n";
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -494,7 +536,9 @@ namespace vcs_System1
             var buffer = new byte[256];
 
             using (var stream = new FileStream(filePath, FileMode.Open, FileAccess.Read))
+            {
                 stream.Read(buffer, 0, 256);
+            }
 
             var offset = BitConverter.ToInt32(buffer, c_PeHeaderOffset);
             var secondsSince1970 = BitConverter.ToInt32(buffer, offset + c_LinkerTimestampOffset);
@@ -512,9 +556,7 @@ namespace vcs_System1
             StringBuilder sb = new StringBuilder();
             foreach (EncodingInfo ei in Encoding.GetEncodings())
             {
-                sb.Append(ei.CodePage).Append("\t")
-                    .Append(ei.Name).Append("\t")
-                    .Append(ei.DisplayName).Append("\r\n");
+                sb.Append(ei.CodePage).Append("\t").Append(ei.Name).Append("\t").Append(ei.DisplayName).Append("\r\n");
             }
 
             richTextBox1.Text += sb.ToString() + "\n";
@@ -760,49 +802,7 @@ namespace vcs_System1
 
         private void button41_Click(object sender, EventArgs e)
         {
-            ShowPowerStatus1();
-            ShowPowerStatus2();
         }
-
-        private void ShowPowerStatus1()
-        {
-            // Get the current charge percent.
-            PowerStatus status = SystemInformation.PowerStatus;
-            int percent = (int)(status.BatteryLifePercent * 100);
-
-            richTextBox1.Text += percent.ToString() + "%" + "\n";
-            richTextBox1.Text += status.PowerLineStatus.ToString() + "\n";
-            richTextBox1.Text += status.BatteryChargeStatus.ToString() + "\n";
-            richTextBox1.Text += status.BatteryFullLifetime.ToString() + "\n";
-            richTextBox1.Text += status.BatteryLifePercent.ToString() + "\n";
-            richTextBox1.Text += status.BatteryLifeRemaining.ToString() + "\n";
-        }
-
-        private void ShowPowerStatus2()
-        {
-            PowerStatus status = SystemInformation.PowerStatus;
-            richTextBox1.Text += "Charge Status:\t" + status.BatteryChargeStatus.ToString() + "\n";
-
-            if (status.BatteryFullLifetime == -1)
-            {
-                richTextBox1.Text += "Full Lifetime:\t" + "Unknown" + "\n";
-            }
-            else
-            {
-                richTextBox1.Text += "Full Lifetime (sec):\t" + status.BatteryFullLifetime.ToString() + "\n";
-            }
-            richTextBox1.Text += "Charge:\t\t" + status.BatteryLifePercent.ToString("P0") + "\n";
-            if (status.BatteryLifeRemaining == -1)
-            {
-                richTextBox1.Text += "Life Remaining:\t" + "Unknown" + "\n";
-            }
-            else
-            {
-                richTextBox1.Text += "Life Remaining (sec):\t" + status.BatteryLifeRemaining.ToString() + "\n";
-            }
-            richTextBox1.Text += "Line Status:\t" + status.PowerLineStatus.ToString() + "\n";
-        }
-
 
         private void button42_Click(object sender, EventArgs e)
         {
@@ -916,7 +916,7 @@ namespace vcs_System1
             richTextBox1.Text += "系統版本號：" + Environment.OSVersion.VersionString + "\n";//顯示系統版本號
 
             //讀取操作系統和CLR的版本
-            OperatingSystem os = System.Environment.OSVersion;
+            OperatingSystem os = Environment.OSVersion;
             richTextBox1.Text += "Platform: " + os.Platform + "\n";
             richTextBox1.Text += "Service Pack:" + os.ServicePack + "\n";
             richTextBox1.Text += "Version: " + os.Version + "\n";

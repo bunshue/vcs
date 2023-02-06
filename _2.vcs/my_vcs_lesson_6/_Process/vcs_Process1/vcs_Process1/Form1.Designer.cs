@@ -207,6 +207,7 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(150, 60);
             this.button11.TabIndex = 11;
+            this.button11.Text = "獲取系統進程的用戶名";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 

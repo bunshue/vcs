@@ -247,7 +247,7 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(240, 50);
             this.button12.TabIndex = 13;
-            this.button12.Text = "GetExecutingAssembly";
+            this.button12.Text = "GetExecutingAssembly 檔案的版本資訊";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -312,7 +312,6 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(240, 50);
             this.button19.TabIndex = 20;
-            this.button19.Text = "提供磁碟上實體檔案的版本資訊";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -583,7 +582,6 @@
             this.button41.Name = "button41";
             this.button41.Size = new System.Drawing.Size(240, 50);
             this.button41.TabIndex = 59;
-            this.button41.Text = "電源狀態";
             this.button41.UseVisualStyleBackColor = true;
             this.button41.Click += new System.EventHandler(this.button41_Click);
             // 

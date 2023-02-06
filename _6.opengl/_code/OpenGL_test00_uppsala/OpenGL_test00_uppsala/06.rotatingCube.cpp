@@ -9,15 +9,41 @@
 #include "../../Common.h"
 
  // Vertices of the cube, centered at the origin.
-GLfloat vertices[][3] = { {-1.0,-1.0,-1.0}, {1.0,-1.0,-1.0}, {1.0,1.0,-1.0},
-	{-1.0,1.0,-1.0}, {-1.0,-1.0,1.0}, {1.0,-1.0,1.0}, {1.0,1.0,1.0}, {-1.0,1.0,1.0} };
+GLfloat vertices[][3] =
+{
+	{-1.0, -1.0, -1.0},		//0
+	{1.0, -1.0, -1.0},		//1
+	{1.0, 1.0, -1.0},		//2
+	{-1.0, 1.0, -1.0},		//3
+	{-1.0, -1.0, 1.0},		//4
+	{1.0, -1.0, 1.0},		//5
+	{1.0, 1.0, 1.0},		//6
+	{-1.0, 1.0, 1.0}		//7
+};
 
 // Colors of the vertices.
-GLfloat colors[][3] = { {0.0,0.0,0.0}, {1.0,0.0,0.0}, {1.0,1.0,0.0}, {0.0,1.0,0.0},
-	{0.0,0.0,1.0}, {1.0,0.0,1.0}, {1.0,1.0,1.0}, {0.0,1.0,1.0} };
+GLfloat colors[][3] =
+{
+	{1.0, 1.0, 1.0},		//未用到 白色
+	{0.0, 0.0, 1.0},		//向下拉的第2面
+	{1.0, 1.0, 1.0},		//未用到 白色
+	{0.0, 0.0, 0.0},		//左面 黑
+	{1.0, 1.0, 0.0},		//向下拉的第3面
+	{1.0, 1.0, 0.0},		//右面 黃
+	{0.0, 1.0, 0.0},		//向下拉的第1面
+	{1.0, 0.0, 0.0}			//看到的正面 紅
+};
 
 // Indices of the vertices to make up the six faces of the cube.
-GLubyte cubeIndices[24] = { 0,3,2,1, 2,3,7,6, 0,4,7,3, 1,2,6,5, 4,5,6,7, 0,1,5,4 };
+GLubyte cubeIndices[24] =
+{
+	0, 3, 2, 1,		//後
+	2, 3, 7, 6,		//上
+	0, 4, 7, 3,		//左
+	1, 2, 6, 5,		//右
+	4, 5, 6, 7,		//前
+	0, 1, 5, 4		//下
+};
 
 // Angles of rotation about each axis.
 GLfloat theta[] = { 0.0, 0.0, 0.0 };
@@ -49,11 +75,29 @@ void display(void)
 	glRotatef(theta[1], 0.0, 1.0, 0.0);
 	glRotatef(theta[2], 0.0, 0.0, 1.0);
 	glDrawElements(GL_QUADS, 24, GL_UNSIGNED_BYTE, cubeIndices);
+
+	/*
+	//draw_boundary(color_y, 1.3f); //畫視窗邊界
+
+	//用 GL_LINE_LOOP 畫一個空心矩形
+	glColor3f(1.0, 0.0, 0.0);	//紅
+	float dd = 1.3f;
+	float point1[3] = { -dd, -dd, 1.0 };	//左下
+	float point2[3] = { dd, -dd, 1.0 };	//右下
+	float point3[3] = { dd,  dd, 1.0 };	//右上
+	float point4[3] = { -dd,  dd, 1.0 };	//左上
+	glBegin(GL_LINE_LOOP);
+	glVertex3fv(point1);	//左下
+	glVertex3fv(point2);	//右下
+	glVertex3fv(point3);	//右上
+	glVertex3fv(point4);	//左上
+	glEnd();
+	*/
+
 	glutSwapBuffers();
 }
 
-// This function spins the cube around the current axis by incrementing the angle of
-// rotation by 2 degrees.
+// This function spins the cube around the current axis by incrementing the angle of rotation by 2 degrees.
 void idle(void)
 {
 	if (spinning)
