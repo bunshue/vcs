@@ -231,12 +231,10 @@ namespace vcs_Form1
         private void button6_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "顯示表單屬性\n";
-            string message = "";
-            message += "The Name is: " + this.Name + Environment.NewLine;
-            message += "The ProductName is: " + this.ProductName + Environment.NewLine;
-            message += "The ProductVersion is: " + this.ProductVersion + Environment.NewLine;
-            message += "The CompanyName is: " + this.CompanyName + Environment.NewLine;
-            MessageBox.Show(message);
+            richTextBox1.Text += "The Name is: " + this.Name + "\n";
+            richTextBox1.Text += "The ProductName is: " + this.ProductName + "\n";
+            richTextBox1.Text += "The ProductVersion is: " + this.ProductVersion + "\n";
+            richTextBox1.Text += "The CompanyName is: " + this.CompanyName + "\n";
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -248,10 +246,8 @@ namespace vcs_Form1
         private void button8_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "取得目前表單大小\n";
-            string message = "";
-            message += "Width : " + this.Width + Environment.NewLine;
-            message += "Height : " + this.Height + Environment.NewLine;
-            MessageBox.Show(message);
+            richTextBox1.Text += "Width : " + this.Width.ToString() + "\n";
+            richTextBox1.Text += "Height : " + this.Height.ToString() + "\n";
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -355,8 +351,8 @@ namespace vcs_Form1
         private void button18_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "移動表單位置\n";
-            this.Top = 30;
-            this.Left = 30;
+            this.Top += 10;
+            this.Left += 10;
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -368,15 +364,15 @@ namespace vcs_Form1
         private void button20_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "表單變大\n";
-            this.Width += 50;
-            this.Height += 50;
+            this.Width += 10;
+            this.Height += 10;
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "表單變小\n";
-            this.Width -= 50;
-            this.Height -= 50;
+            this.Width -= 10;
+            this.Height -= 10;
         }
 
         private void button22_Click(object sender, EventArgs e)
@@ -489,17 +485,10 @@ namespace vcs_Form1
 
         private void button30_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "表單變 1200 X 900\n";
-            this.Size = new Size(1200, 900);
-
-            //same
-            //Size = new Size(1200, 900);
         }
 
         private void button31_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "表單變 1000 X 700\n";
-            this.Size = new Size(1000, 700);
         }
 
         private void button32_Click(object sender, EventArgs e)
@@ -524,13 +513,18 @@ namespace vcs_Form1
         private void button36_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "改變表單大小\n";
-            this.Size = new Size(1920 / 2, 1080 / 2);
+            int W = this.Size.Width;
+            int H = this.Size.Height;
+
+            this.Size = new Size(W + 10, H + 10);
         }
 
         private void button37_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "改變表單位置\n";
-            this.Location = new Point(1920 / 2, 0);
+            int location_x = this.Location.X;
+            int location_y = this.Location.Y;
+            this.Location = new Point(location_x + 20, location_y + 20);
         }
 
         private void button38_Click(object sender, EventArgs e)

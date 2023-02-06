@@ -20,7 +20,6 @@ namespace vcs_FolderInfo
         public Form1()
         {
             InitializeComponent();
-
         }
 
         private void btn_clear_Click(object sender, EventArgs e)
@@ -39,7 +38,8 @@ namespace vcs_FolderInfo
             listView1.Columns.Add("名稱", 200, HorizontalAlignment.Center);
             listView1.Columns.Add("大小", 200, HorizontalAlignment.Center);
             listView1.Columns.Add("修改日期", 200, HorizontalAlignment.Center);
-            string filePath = @"c:/______test_files/";
+            //string filePath = @"c:/______test_files/";
+            string filePath = @"C:\______test_files\__pic\_book_magazine";
 
             /*
             richTextBox1.Text += "轉出一層,獲得指定目錄下的所有文檔：\n";
@@ -72,17 +72,12 @@ namespace vcs_FolderInfo
             richTextBox1.Text += "轉出全部,列出指定目錄下及所有子目錄及子目錄裏更深層目錄裏的文檔：\n";
             GetAllFiles(filePath);
 
-            label1.Text = "路徑：" + filePath + "\n大小：" + total_size.ToString() + " 位元組\n內含：" + no_files.ToString() + " 個檔案，" + (no_folders-1).ToString() + " 個資料夾";
+            label1.Text = "路徑：" + filePath + "\n大小：" + total_size.ToString() + " 位元組\n內含：" + no_files.ToString() + " 個檔案，" + (no_folders - 1).ToString() + " 個資料夾";
 
-
-            
-//大小：	xxxxx 位元組
-//內含：   143個檔案，18個資料夾
-
-
+            //大小：	xxxxx 位元組
+            //內含：   143個檔案，18個資料夾
 
         }
-
 
         /// <summary>
         /// 獲得指定目錄下的所有文檔
@@ -155,6 +150,5 @@ namespace vcs_FolderInfo
         {
 
         }
-
     }
 }

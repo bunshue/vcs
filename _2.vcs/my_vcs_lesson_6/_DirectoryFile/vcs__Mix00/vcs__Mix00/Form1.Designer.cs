@@ -100,7 +100,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(160, 70);
             this.button0.TabIndex = 31;
-            this.button0.Text = "遍歷文件夾實例";
+            this.button0.Text = "遍歷文件夾實例1";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 
@@ -111,7 +111,6 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(160, 70);
             this.button13.TabIndex = 30;
-            this.button13.Text = "檔案資訊";
             this.button13.UseVisualStyleBackColor = true;
             this.button13.Click += new System.EventHandler(this.button13_Click);
             // 
@@ -122,7 +121,6 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(160, 70);
             this.button12.TabIndex = 29;
-            this.button12.Text = "檔案資訊";
             this.button12.UseVisualStyleBackColor = true;
             this.button12.Click += new System.EventHandler(this.button12_Click);
             // 
@@ -133,7 +131,6 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(160, 70);
             this.button11.TabIndex = 28;
-            this.button11.Text = "找出資料夾內所有檔案";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -177,7 +174,6 @@
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(160, 70);
             this.button7.TabIndex = 24;
-            this.button7.Text = "遍歷文件夾實例";
             this.button7.UseVisualStyleBackColor = true;
             this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
@@ -188,7 +184,6 @@
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(160, 70);
             this.button6.TabIndex = 23;
-            this.button6.Text = "遍歷文件夾實例";
             this.button6.UseVisualStyleBackColor = true;
             this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
@@ -232,7 +227,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(160, 70);
             this.button2.TabIndex = 19;
-            this.button2.Text = "遍歷文件夾實例";
+            this.button2.Text = "遍歷文件夾實例3";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -240,7 +235,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(557, 201);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(594, 261);
+            this.richTextBox1.Size = new System.Drawing.Size(208, 146);
             this.richTextBox1.TabIndex = 18;
             this.richTextBox1.Text = "";
             // 
@@ -251,13 +246,13 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(160, 70);
             this.button1.TabIndex = 17;
-            this.button1.Text = "取得副檔名";
+            this.button1.Text = "遍歷文件夾實例2";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // bt_clear
             // 
-            this.bt_clear.Location = new System.Drawing.Point(1065, 304);
+            this.bt_clear.Location = new System.Drawing.Point(671, 266);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(74, 23);
             this.bt_clear.TabIndex = 35;
@@ -269,7 +264,7 @@
             // 
             this.listView1.Location = new System.Drawing.Point(557, 478);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(400, 242);
+            this.listView1.Size = new System.Drawing.Size(400, 240);
             this.listView1.TabIndex = 36;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -336,9 +331,9 @@
             // 
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 12;
-            this.listBox1.Location = new System.Drawing.Point(1003, 478);
+            this.listBox1.Location = new System.Drawing.Point(974, 478);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(378, 244);
+            this.listBox1.Size = new System.Drawing.Size(400, 244);
             this.listBox1.TabIndex = 44;
             // 
             // button16
@@ -370,7 +365,7 @@
             this.button18.Name = "button18";
             this.button18.Size = new System.Drawing.Size(160, 70);
             this.button18.TabIndex = 47;
-            this.button18.Text = "取得真實副檔名";
+            this.button18.Text = "偵測原始檔案類型";
             this.button18.UseVisualStyleBackColor = true;
             this.button18.Click += new System.EventHandler(this.button18_Click);
             // 
@@ -381,7 +376,6 @@
             this.button19.Name = "button19";
             this.button19.Size = new System.Drawing.Size(160, 70);
             this.button19.TabIndex = 48;
-            this.button19.Text = "判斷檔案格式";
             this.button19.UseVisualStyleBackColor = true;
             this.button19.Click += new System.EventHandler(this.button19_Click);
             // 
@@ -436,7 +430,6 @@
             this.button24.Name = "button24";
             this.button24.Size = new System.Drawing.Size(160, 70);
             this.button24.TabIndex = 53;
-            this.button24.Text = "加密檔案";
             this.button24.UseVisualStyleBackColor = true;
             this.button24.Click += new System.EventHandler(this.button24_Click);
             // 

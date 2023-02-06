@@ -640,11 +640,13 @@ namespace vcs_Mix03_draw_image
         {
             show_button_text(sender);
 
-            pictureBox1.Size = new Size(1800, 950);
+            pictureBox1.Size = new Size(1920, 1080);
             pictureBox1.Location = new Point(0, 0);
             pictureBox1.BringToFront();
-            this.Size = new Size(1850, 1000);
-            this.Location = new Point(50, 50);
+
+            this.FormBorderStyle = FormBorderStyle.None;
+            //this.WindowState = FormWindowState.Maximized;
+            this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
 
             timer1.Enabled = true;
         }
@@ -1531,10 +1533,10 @@ namespace vcs_Mix03_draw_image
 
                 }
             }
-
+            Graphics g = Graphics.FromImage(bitmap1);
+            //g.DrawRectangle(Pens.Red, 5, 5, this.ClientSize.Width - 10, this.ClientSize.Height - 10);
 
             pictureBox1.Image = bitmap1;
-
         }
     }
 

@@ -98,7 +98,8 @@ namespace vcs__Mix00
             button28.Location = new Point(x_st + dx * 2, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 2, y_st + dy * 9);
 
-            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 4 - 50);
+            richTextBox1.Location = new Point(x_st + dx * 3, y_st + dy * 4 - 120);
+            richTextBox1.Size = new Size(817, 330);
             listView1.Location = new Point(x_st + dx * 3, y_st + dy * 7);
             listBox1.Location = new Point(x_st + dx * 5 + 60, y_st + dy * 7);
 
@@ -113,13 +114,14 @@ namespace vcs__Mix00
 
         private void button0_Click(object sender, EventArgs e)
         {
-            //遍歷文件夾實例
+            //遍歷文件夾實例 1
             //還沒加入listView之標題
 
             listView1.Items.Clear();
 
             //遍歷文件夾實例
-            string foldername = @"C:\______test_files\__pic";
+            //string foldername = @"C:\______test_files\__pic";
+            string foldername = @"C:\______test_files\__pic\_book_magazine";
             //實例化DirectoryInfo對象
             DirectoryInfo dinfo = new DirectoryInfo(foldername);
             //獲取指定目錄下的所有子目錄及文件類型
@@ -147,64 +149,69 @@ namespace vcs__Mix00
                     listView1.Items[listView1.Items.Count - 1].SubItems.Add(finfo.Length.ToString());
                     listView1.Items[listView1.Items.Count - 1].SubItems.Add(finfo.CreationTime.ToShortDateString());
                     richTextBox1.Text += finfo.Name + "\t" + finfo.FullName + "\t" + finfo.Length.ToString() + "\t" + finfo.CreationTime.ToShortDateString() + "\n";
-
                 }
             }
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
+            //遍歷文件夾實例 2
+            //string foldername = @"C:\______test_files\__pic";
+            string foldername = @"C:\______test_files\__pic\_book_magazine";
+            DirectoryInfo TheFolder = new DirectoryInfo(foldername);
 
-            var ext = Path.GetExtension(filename);
+            richTextBox1.Text += "遍歷文件夾\n";
+            //遍歷文件夾
+            foreach (DirectoryInfo NextFolder in TheFolder.GetDirectories())
+            {
+                this.listBox1.Items.Add(NextFolder.Name);
+                richTextBox1.Text += NextFolder.Name + "\n";
+            }
+            richTextBox1.Text += "\n";
 
-
-            richTextBox1.Text += "副檔名 : " + ext + "\n";
+            richTextBox1.Text += "遍歷文件\n";
+            foreach (FileInfo NextFile in TheFolder.GetFiles())
+            {
+                this.listBox1.Items.Add(NextFile.Name);
+                richTextBox1.Text += NextFile.Name + "\n";
+            }
+            richTextBox1.Text += "\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //遍歷文件夾實例
+            //遍歷文件夾實例 3
+            //找出資料夾內所有檔案
+            //string foldername = @"C:\______test_files\__pic";
+            string foldername = @"C:\______test_files\__pic\_book_magazine";
 
-            //還沒加入listView之標題
+            // Enumerate the files.
+            DirectoryInfo dir_info = new DirectoryInfo(foldername);
 
-            listView1.Items.Clear();
-
-            //遍歷文件夾實例
-            string foldername = @"C:\______test_files\__pic";
-            //實例化DirectoryInfo對象
-            DirectoryInfo dinfo = new DirectoryInfo(foldername);
-            //獲取指定目錄下的所有子目錄及文件類型
-            FileSystemInfo[] fsinfos = dinfo.GetFileSystemInfos();
-            foreach (FileSystemInfo fsinfo in fsinfos)
+            foreach (DirectoryInfo d_info in dir_info.GetDirectories())
             {
-                if (fsinfo is DirectoryInfo)    //判斷是否文件夾
-                {
-                    //使用獲取的文件夾名稱實例化DirectoryInfo對象
-                    DirectoryInfo dirinfo = new DirectoryInfo(fsinfo.FullName);
-                    //為ListView控件添加文件夾信息
-                    listView1.Items.Add(dirinfo.Name);
-                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(dirinfo.FullName);
-                    listView1.Items[listView1.Items.Count - 1].SubItems.Add("");
-                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(dirinfo.CreationTime.ToShortDateString());
-                    richTextBox1.Text += dirinfo.Name + "\t" + dirinfo.FullName + "\t" + dirinfo.CreationTime.ToShortDateString() + "\n";
-                }
-                else
-                {
-                    //使用獲取的文件名稱實例化FileInfo對象
-                    FileInfo finfo = new FileInfo(fsinfo.FullName);
-                    //為ListView控件添加文件信息
-                    listView1.Items.Add(finfo.Name);
-                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(finfo.FullName);
-                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(finfo.Length.ToString());
-                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(finfo.CreationTime.ToShortDateString());
-                    richTextBox1.Text += finfo.Name + "\t" + finfo.FullName + "\t" + finfo.Length.ToString() + "\t" + finfo.CreationTime.ToShortDateString() + "\n";
-
-                }
+                richTextBox1.Text += d_info.FullName + "\n";
+                richTextBox1.Text += d_info.Name + "\n";
             }
 
+            richTextBox1.Text += "\n\n";
+
+            foreach (FileInfo file_info in dir_info.GetFiles())
+            {
+                try
+                {
+                    richTextBox1.Text += file_info.FullName + "\n";
+                    //richTextBox1.Text += file_info.Name + "\n";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error processing file '" +
+                        file_info.Name + "'\n" + ex.Message,
+                        "Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                }
+            } // foreach file_info
 
         }
 
@@ -251,7 +258,6 @@ namespace vcs__Mix00
 
         private void button4_Click(object sender, EventArgs e)
         {
-            //新增文件
             //新增文件
             string path = Application.StartupPath;
             string filename = textBox2.Text;
@@ -304,70 +310,32 @@ namespace vcs__Mix00
             richTextBox1.Text += "GetDirectoryName\t" + GetDirectoryName + "\n";
             richTextBox1.Text += "GetFileName\t" + GetFileName + "\n";
             richTextBox1.Text += "GetFileNameWithoutExtension\t" + GetFileNameWithoutExtension + "\n";
-            richTextBox1.Text += "GetExtension\t" + GetExtension + "\n";
+            richTextBox1.Text += "副檔名 GetExtension\t" + GetExtension + "\n";
             richTextBox1.Text += "GetPathRoot\t" + GetPathRoot + "\n";
             richTextBox1.Text += "GetRandomFileName\t" + GetRandomFileName + "\n";
 
+            //檔案資訊
+            //string filename = @"C:\______test_files\__RW\_word\word_for_vcs_ReadWrite_WORD.doc";
+
+            FileInfo fileInfo = new FileInfo(filename);
+            string fileSize = (fileInfo.Length / 1024).ToString() + " KB";
+            string temp = filename.Remove(filename.LastIndexOf('.'));
+            string fileName = Path.GetFileNameWithoutExtension(filename);
+            string fileExtension = Path.GetExtension(filename);
+
+            richTextBox1.Text += "filename = " + filename + "\n";
+            richTextBox1.Text += "fileSize = " + fileSize + "\n";
+            richTextBox1.Text += "temp = " + temp + "\n";
+            richTextBox1.Text += "fileName = " + fileName + "\n";
+            richTextBox1.Text += "fileExtension = " + fileExtension + "\n";
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //遍歷文件夾實例
-            string foldername = @"C:\______test_files\__pic";
-            DirectoryInfo TheFolder = new DirectoryInfo(foldername);
-
-            richTextBox1.Text += "遍歷文件夾\n";
-            //遍歷文件夾
-            foreach (DirectoryInfo NextFolder in TheFolder.GetDirectories())
-            {
-                this.listBox1.Items.Add(NextFolder.Name);
-                richTextBox1.Text += NextFolder.Name + "\n";
-            }
-            richTextBox1.Text += "\n";
-
-            richTextBox1.Text += "遍歷文件\n";
-            foreach (FileInfo NextFile in TheFolder.GetFiles())
-            {
-                this.listBox1.Items.Add(NextFile.Name);
-                richTextBox1.Text += NextFile.Name + "\n";
-            }
-            richTextBox1.Text += "\n";
-
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //遍歷文件夾實例
-
-            string foldername = @"C:\______test_files\__pic";
-
-            //實例化DirectoryInfo對象
-            DirectoryInfo dinfo = new DirectoryInfo(foldername);
-            //獲取指定目錄下的所有子目錄及文件類型
-            FileSystemInfo[] fsinfos = dinfo.GetFileSystemInfos();
-            foreach (FileSystemInfo fsinfo in fsinfos)
-            {
-                if (fsinfo is DirectoryInfo)    //判斷是否文件夾
-                {
-                    //使用獲取的文件夾名稱實例化DirectoryInfo對象
-                    DirectoryInfo dirinfo = new DirectoryInfo(fsinfo.FullName);
-                    //為ListView控件添加文件夾信息
-                    listView1.Items.Add(dirinfo.Name);
-                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(dirinfo.FullName);
-                    listView1.Items[listView1.Items.Count - 1].SubItems.Add("");
-                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(dirinfo.CreationTime.ToShortDateString());
-                }
-                else
-                {
-                    //使用獲取的文件名稱實例化FileInfo對象
-                    FileInfo finfo = new FileInfo(fsinfo.FullName);
-                    //為ListView控件添加文件信息
-                    listView1.Items.Add(finfo.Name);
-                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(finfo.FullName);
-                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(finfo.Length.ToString());
-                    listView1.Items[listView1.Items.Count - 1].SubItems.Add(finfo.CreationTime.ToShortDateString());
-                }
-            }
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -378,7 +346,6 @@ namespace vcs__Mix00
             FileVersionInfo myFileVersionInfo1 = FileVersionInfo.GetVersionInfo(filename);
             richTextBox1.Text += "版本號: " + myFileVersionInfo1.FileVersion + "\n";
         }
-
 
         private const int MODE1 = 0x01;
         private const int MODE2 = 0x02;
@@ -440,12 +407,11 @@ namespace vcs__Mix00
                 richTextBox1.Text += "檔案大小: " + (filesize / 1024 / 1024).ToString() + " MB\n";
                 richTextBox1.Text += "複製完畢！ 耗時: " + stopwatch.Elapsed.TotalSeconds.ToString() + " 秒\n";
                 richTextBox1.Text += "速率: " + (filesize / 1024 / 1024 / stopwatch.Elapsed.TotalSeconds).ToString() + " MB/sec\n";
-
-
             }
             else
+            {
                 richTextBox1.Text += "檔案: " + filename + " 不存在\n";
-
+            }
             richTextBox1.Text += "時間 : " + DateTime.Now.ToString() + "\n";
         }
 
@@ -461,65 +427,14 @@ namespace vcs__Mix00
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //找出資料夾內所有檔案
-            string foldername = @"C:\______test_files\__pic";
-
-            // Enumerate the files.
-            DirectoryInfo dir_info = new DirectoryInfo(foldername);
-
-            foreach (DirectoryInfo d_info in dir_info.GetDirectories())
-            {
-                richTextBox1.Text += d_info.FullName + "\n";
-                richTextBox1.Text += d_info.Name + "\n";
-            }
-
-            richTextBox1.Text += "\n\n";
-
-            foreach (FileInfo file_info in dir_info.GetFiles())
-            {
-                try
-                {
-                    richTextBox1.Text += file_info.FullName + "\n";
-                    //richTextBox1.Text += file_info.Name + "\n";
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error processing file '" +
-                        file_info.Name + "'\n" + ex.Message,
-                        "Error",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error);
-                }
-            } // foreach file_info
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            //檔案資訊
-            string filename = @"C:\______test_files\__RW\_word\word_for_vcs_ReadWrite_WORD.doc";
-
-            FileInfo fileInfo = new FileInfo(filename);
-            string fileSize = (fileInfo.Length / 1024).ToString() + " KB";
-            string temp = filename.Remove(filename.LastIndexOf('.'));
-            string fileName = Path.GetFileNameWithoutExtension(filename);
-            string fileExtension = Path.GetExtension(filename);
-
-            richTextBox1.Text += "filename = " + filename + "\n";
-            richTextBox1.Text += "fileSize = " + fileSize + "\n";
-            richTextBox1.Text += "temp = " + temp + "\n";
-            richTextBox1.Text += "fileName = " + fileName + "\n";
-            richTextBox1.Text += "fileExtension = " + fileExtension + "\n";
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
-            FileInfo fi = new FileInfo(filename);
-            //取得檔案資訊
-            //fi.CopyTo(@"C:\練習資料夾\TT2.txt");
-            //MessageBox.Show("複製成功！");
-
-            richTextBox1.Text += fi.Length.ToString() + " Bytes";
         }
 
         private void button14_Click(object sender, EventArgs e)
@@ -659,61 +574,7 @@ namespace vcs__Mix00
 
         private void button18_Click(object sender, EventArgs e)
         {
-            //取得真實副檔名
-            OpenFileDialog openFileDialog1 = new OpenFileDialog();
             //偵測原始檔案類型
-            openFileDialog1.Title = "測試讀取一個純文字檔";
-            //openFileDialog1.ShowHelp = true;
-            openFileDialog1.FileName = "";              //預設開啟的檔名
-            //openFileDialog1.DefaultExt = "*.txt";
-            //openFileDialog1.Filter = "文字檔(*.txt)|*.txt|Word檔(*.doc)|*.txt|Excel檔(*.xls)|*.txt|所有檔案(*.*)|*.*";   //存檔類型
-            //openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
-            openFileDialog1.RestoreDirectory = true;
-            //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = "c:\\______test_files";  //預設開啟的路徑
-
-            if (openFileDialog1.ShowDialog() == DialogResult.OK)
-            {
-                richTextBox1.Text += "get filename : " + openFileDialog1.FileName + "\n";
-                richTextBox1.Text += "length : " + openFileDialog1.FileName.Length.ToString() + "\n";
-
-                string builtHex = string.Empty;
-                using (Stream S = File.OpenRead(openFileDialog1.FileName))
-                {
-                    for (int i = 0; i < 8; i++)
-                    {
-                        builtHex += S.ReadByte().ToString("X2");
-
-                        /*
-                        if (ImageTypes.ContainsKey(builtHex))
-                        {
-                            string 真實副檔名 = ImageTypes[builtHex];
-                            break;
-                        }
-                        */
-                    }
-                    richTextBox1.Text += "get " + builtHex + "\n";
-
-
-                }
-
-                //richTextBox1.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
-            }
-            else
-            {
-                richTextBox1.Text += "未選取檔案\n";
-            }
-
-
-
-
-        }
-
-        //偵測原始檔案類型
-        //應改用binary read
-        private void button19_Click(object sender, EventArgs e)
-        {
-            //判斷檔案格式
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Title = "偵測原始檔案類型";
             //openFileDialog1.ShowHelp = true;
@@ -750,6 +611,8 @@ namespace vcs__Mix00
                         data[i] = S.ReadByte();
                         builtHex += data[i].ToString("X2") + " ";
 
+                        //builtHex += S.ReadByte().ToString("X2");
+
                         /*
                         if (ImageTypes.ContainsKey(builtHex))
                         {
@@ -778,6 +641,7 @@ namespace vcs__Mix00
                     else if ((data[0] == 0xFF) && (data[1] == 0xFE))
                     {
                         richTextBox1.Text += " 純文字Unicode 檔案\n";
+                        //richTextBox1.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
                     }
                     else if ((data[0] == 'I') && (data[1] == 'D') && (data[2] == '3'))
                     {
@@ -793,6 +657,10 @@ namespace vcs__Mix00
             {
                 richTextBox1.Text += "未選取檔案\n";
             }
+        }
+
+        private void button19_Click(object sender, EventArgs e)
+        {
         }
 
         private void button20_Click(object sender, EventArgs e)
@@ -923,7 +791,8 @@ namespace vcs__Mix00
             string filename = @"C:\______test_files\picture1.jpg";
             string fileTypeName = GetTypeName(filename);
 
-            richTextBox1.Text += fileTypeName + "\n";
+            richTextBox1.Text += "檔案 : " + filename + "\n";
+            richTextBox1.Text += "檔案類型 : " + fileTypeName + "\n";
         }
         //取得檔案類型 SP
 
@@ -995,11 +864,6 @@ namespace vcs__Mix00
 
         private void button24_Click(object sender, EventArgs e)
         {
-            //加密檔案, 看似無用
-            /*
-            File.Encrypt(@"aaa.cs");
-            richTextBox1.Text += "加密成功！\n";
-            */
         }
 
         private void button25_Click(object sender, EventArgs e)
@@ -1100,7 +964,7 @@ namespace vcs__Mix00
         private static string GetUniqueKey()
         {
             int maxSize = 8;
-            int minSize = 5;
+            //int minSize = 5;
             char[] chars = new char[62];
             string a;
             a = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";

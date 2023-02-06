@@ -20,7 +20,7 @@ namespace vcs_Clock1
         private const int MODE_0 = 0x00;   //測試模式
         private const int MODE_1 = 0x01;   //時鐘模式
         private const int MODE_2 = 0x02;   //倒數模式
-        private const int MODE_3 = 0x03;   //碼表模式
+        private const int MODE_3 = 0x03;   //馬表模式
         private const int MODE_4 = 0x04;   //
 
         DateTime EventDate;
@@ -228,7 +228,7 @@ namespace vcs_Clock1
             }
             else if (flag_operation_mode == MODE_3)
             {
-                this.Text = "碼表模式";
+                this.Text = "馬表模式";
             }
             else
             {
@@ -485,7 +485,7 @@ namespace vcs_Clock1
                     timer1.Enabled = false;
                 }
             }
-            else if (flag_operation_mode == MODE_3) //碼表模式
+            else if (flag_operation_mode == MODE_3) //馬表模式
             {
 
             }

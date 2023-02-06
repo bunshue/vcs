@@ -46,6 +46,10 @@ namespace vcs_Clock1
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            this.Text = "小時鐘";
+            this.ShowInTaskbar = false;     //false : 表單不顯示在 Windows 工作列中
+            this.TopMost = true;
         }
 
         void show_item_location()
@@ -277,6 +281,8 @@ namespace vcs_Clock1
                 {
                     richTextBox1.Text += "六 倒數計時\n";
                     flag_operation_mode = MODE_6;
+                    Form_CountDown fc = new Form_CountDown();
+                    fc.Show();
                 }
                 else if (xx < W * 2 / 3) //中
                 {
@@ -339,7 +345,7 @@ namespace vcs_Clock1
         string stopwatch_text = "";
         private void timer_stopwatch_Tick(object sender, EventArgs e)
         {
-            //碼表
+            //馬表
             TimeSpan elapsed = DateTime.Now - StartTime;
 
             stopwatch_text = "";

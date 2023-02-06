@@ -122,8 +122,19 @@ namespace vcs_DiskDirectoryFile1
             bt_new10.Location = new Point(x_st + dx * 0, y_st + dy * 10);
             bt_new11.Location = new Point(x_st + dx * 0, y_st + dy * 11);
             bt_new12.Location = new Point(x_st + dx * 0, y_st + dy * 12);
-
-            bt_clear.Location = new Point(x_st + dx * 5 + 6, y_st + dy * 13 + 20);
+            bt_new13.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            bt_new14.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            bt_new15.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            bt_new16.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            bt_new17.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            bt_new18.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            bt_new19.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            bt_new20.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            bt_new21.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            bt_new22.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            bt_new23.Location = new Point(x_st + dx * 1, y_st + dy * 10);
+            bt_new24.Location = new Point(x_st + dx * 1, y_st + dy * 11);
+            bt_new25.Location = new Point(x_st + dx * 1, y_st + dy * 12);
 
             x_st = 6;
             y_st = 10;
@@ -134,6 +145,11 @@ namespace vcs_DiskDirectoryFile1
             gb4_writefile.Location = new Point(x_st + dx * 3, y_st + 0);
             gb5_files.Location = new Point(x_st + dx * 4, y_st + 0);
             gb6_new.Location = new Point(x_st + dx * 5, y_st + 0);
+            richTextBox1.Location = new Point(x_st + dx * 7, y_st + 0);
+            richTextBox1.Size = new Size(400, 600);
+
+            //控件位置
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             int gw = 200;
             int gh = 535;
@@ -142,7 +158,7 @@ namespace vcs_DiskDirectoryFile1
             gb3_readfile.Size = new Size(gw, gh);
             gb4_writefile.Size = new Size(gw, gh);
             gb5_files.Size = new Size(gw, gh);
-            gb6_new.Size = new Size(gw, gh);
+            gb6_new.Size = new Size(gw * 2, gh);
 
             //最大化螢幕
             this.FormBorderStyle = FormBorderStyle.None;
@@ -2147,4 +2163,3 @@ namespace vcs_DiskDirectoryFile1
         }
     }
 }
-

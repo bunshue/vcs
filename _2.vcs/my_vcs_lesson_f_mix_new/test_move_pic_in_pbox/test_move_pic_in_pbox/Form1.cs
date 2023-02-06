@@ -25,6 +25,8 @@ namespace test_move_pic_in_pbox
         int w = 0;
         int h = 0;
 
+        PictureBox pictureBox1 = new PictureBox();
+
         public Form1()
         {
             InitializeComponent();
@@ -34,7 +36,21 @@ namespace test_move_pic_in_pbox
         {
             show_item_location();
 
+            pictureBox1.Width = 1200;
+            pictureBox1.Height = 800;
+            pictureBox1.Location = new Point(0, 0);
+            pictureBox1.BackColor = SystemColors.ControlLight;
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+
+            // 加入事件
+            pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
+            pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
+            pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
+
+            this.Controls.Add(pictureBox1);	// 將控件加入表單
+
             pt_picture_position = new Point(0, 0);
+
             W = pictureBox1.Width;
             H = pictureBox1.Height;
 
@@ -68,15 +84,11 @@ namespace test_move_pic_in_pbox
             */
 
             pictureBox1.Image = bitmap0;
-
-            pictureBox1.MouseDown += new MouseEventHandler(pictureBox1_MouseDown);
-            pictureBox1.MouseMove += new MouseEventHandler(pictureBox1_MouseMove);
-            pictureBox1.MouseUp += new MouseEventHandler(pictureBox1_MouseUp);
         }
 
         void show_item_location()
         {
-            richTextBox1.Location = new Point(1650,10);
+            richTextBox1.Location = new Point(1650, 10);
             //richTextBox1.Visible = false;
 
             pictureBox1.Size = new Size(1600, 900);
@@ -199,6 +211,7 @@ namespace test_move_pic_in_pbox
             //g = Graphics.FromImage(bitmap0);
             g.Clear(SystemColors.ControlLight);
 
+
             g.DrawImage(bitmap1, pt_picture_position.X, pt_picture_position.Y, bitmap1.Width, bitmap1.Height);
 
             /*
@@ -263,5 +276,3 @@ namespace test_move_pic_in_pbox
         }
     }
 }
-
-

@@ -237,7 +237,7 @@ namespace vcs_CheckVideoFiles
         {
             show_button_text(sender);
 
-            string foldername = @"D:\__test_files";
+            string foldername = @"C:\______test_files\_mp4";
 
             FindAllFiles(foldername);
         }
@@ -713,7 +713,7 @@ namespace vcs_CheckVideoFiles
         {
             show_button_text(sender);
             //搜尋一個資料夾內所有特定格式的檔案
-            string foldername = @"C:\______test_files";
+            string foldername = @"C:\______test_files\_mp4";
 
             ///根據路徑實例化一個對象
             var di = new DirectoryInfo(foldername);

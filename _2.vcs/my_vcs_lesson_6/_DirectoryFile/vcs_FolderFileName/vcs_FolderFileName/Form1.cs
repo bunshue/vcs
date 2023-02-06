@@ -60,8 +60,10 @@ namespace vcs_FolderFileName
             total_files = 0;
 
             if (path == String.Empty)
+            {
                 //path = "C:\\______test_files";
-                path = @"D:\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
+                path = @"D:\vcs\astro\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
+            }
 
             richTextBox1.Text += path + "\n\n";
 
@@ -129,7 +131,7 @@ namespace vcs_FolderFileName
             {
                 //Console.WriteLine("{0} is not a valid file or directory.", path);
                 richTextBox1.Text += "非合法路徑或檔案\n";
-            }     
+            }
 
 
         }
@@ -278,7 +280,7 @@ namespace vcs_FolderFileName
             listView1.View = View.Details;  //定義列表顯示的方式
             listView1.FullRowSelect = true; //整行一起選取
             listView1.Clear();
-            
+
             //設置列名稱
             listView1.Columns.Add("檔名", 700, HorizontalAlignment.Center);
             listView1.Columns.Add("容量", 150, HorizontalAlignment.Center);
@@ -313,7 +315,7 @@ namespace vcs_FolderFileName
                 //設置ListView最後一行可見
                 listView1.Items[listView1.Items.Count - 1].EnsureVisible();
             }
-        
+
         }
 
 
@@ -337,8 +339,10 @@ namespace vcs_FolderFileName
             total_files = 0;
 
             if (path == String.Empty)
+            {
                 //path = "C:\\______test_files";
-                path = @"D:\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
+                path = @"D:\vcs\astro\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
+            }
 
             richTextBox1.Text += path + "\n\n";
             if (File.Exists(path))
@@ -359,14 +363,14 @@ namespace vcs_FolderFileName
             {
                 //Console.WriteLine("{0} is not a valid file or directory.", path);
                 richTextBox1.Text += "非合法路徑或檔案\n";
-            }     
+            }
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             filetype = comboBox1.SelectedIndex;
             switch (filetype)
-            { 
+            {
                 case 0:
                     filetype2 = "*.*";
                     break;
@@ -467,7 +471,7 @@ namespace vcs_FolderFileName
                 p.StartInfo = pInfo;
                 p.Start();
             }
-           
+
 
         }
 
@@ -572,20 +576,15 @@ namespace vcs_FolderFileName
                 //C# – 複製資料到剪貼簿 累計
                 Clipboard.SetDataObject(Clipboard.GetText() + listView1.Items[i].SubItems[0].Text + "\t" + listView1.Items[i].SubItems[1].Text + "\n");      //建議用此
             }
-
-
-
-
         }
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
             //C# 限制textbox只能輸入數字
-            if(e.KeyChar.CompareTo('0')<0 || e.KeyChar.CompareTo('9')>0) //比較輸入值的範圍是否超出數字
+            if (e.KeyChar.CompareTo('0') < 0 || e.KeyChar.CompareTo('9') > 0) //比較輸入值的範圍是否超出數字
+            {
                 e.Handled = true;// Handled 為是否鎖住輸入
+            }
         }
-
-
     }
 }
-

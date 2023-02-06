@@ -7533,6 +7533,46 @@ namespace vcs_Draw_Example1
             }
         }
 
+        void draw_frame_style_index(List<Point> pattern, int offset_x, int offset_y, int step, int index)
+        {
+            //畫邊框
+            Pen bluePen = new Pen(Color.Blue, 8);
+            Pen redPen = new Pen(Color.Red, 8);
+            Point corner = new Point(15, 0); //最右上角的點
+            List<Point> points_draw = new List<Point>();
+            int x1 = 0;
+            int y1 = 0;
+            int x2 = 0;
+            int y2 = 0;
+            int i;
+
+            for (i = 0; i < index; i++)
+            {
+                if ((pattern[i].X == 9999) && (pattern[i].Y == 9999))
+                {
+                    if (points_draw.Count > 1)
+                    {
+                        g.DrawLines(bluePen, points_draw.ToArray());  //畫直線
+                    }
+                    points_draw.Clear();
+                }
+                else
+                {
+                    x1 = corner.X + pattern[i].X;
+                    y1 = corner.Y + pattern[i].Y;
+
+                    x2 = offset_x + x1 * step;
+                    y2 = offset_y + y1 * step;
+
+                    points_draw.Add(new Point(x2, y2));
+                }
+            }
+            if (points_draw.Count > 1)
+            {
+                g.DrawLines(bluePen, points_draw.ToArray());  //畫直線
+            }
+        }
+
         private void button66_Click(object sender, EventArgs e)
         {
             //畫邊框
@@ -7558,6 +7598,34 @@ namespace vcs_Draw_Example1
 
         private void button67_Click(object sender, EventArgs e)
         {
+            //動畫邊框
+
+            List<Point> pattern = pattern0;
+
+
+            int W = pictureBox1.Width;
+            int H = pictureBox1.Height;
+            bitmap1 = new Bitmap(W, H);
+            g = Graphics.FromImage(bitmap1);
+
+            int x_st = 500;
+            int y_st = 50;
+            int step = 20;
+            int dx = -120;
+            int dy = 70;
+
+            richTextBox1.Text += "len = " + pattern.Count.ToString() + "\n";
+
+            int index = 0;
+
+            for (index = 0; index < pattern.Count; index++)
+            {
+                richTextBox1.Text += "index = " + index.ToString() + " ";
+                draw_frame_style_index(pattern, x_st + dx * 0, y_st + dy * 0, step, index);
+                pictureBox1.Image = bitmap1;
+                Application.DoEvents();
+                delay(200);
+            }
         }
 
         private void button68_Click(object sender, EventArgs e)

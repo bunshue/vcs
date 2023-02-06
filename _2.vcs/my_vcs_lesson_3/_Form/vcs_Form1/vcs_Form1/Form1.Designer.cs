@@ -419,7 +419,6 @@
             this.button30.Name = "button30";
             this.button30.Size = new System.Drawing.Size(195, 60);
             this.button30.TabIndex = 31;
-            this.button30.Text = "表單變 1200 X 900";
             this.button30.UseVisualStyleBackColor = true;
             this.button30.Click += new System.EventHandler(this.button30_Click);
             // 
@@ -430,7 +429,6 @@
             this.button31.Name = "button31";
             this.button31.Size = new System.Drawing.Size(195, 60);
             this.button31.TabIndex = 30;
-            this.button31.Text = "表單變 1000 X 700";
             this.button31.UseVisualStyleBackColor = true;
             this.button31.Click += new System.EventHandler(this.button31_Click);
             // 
