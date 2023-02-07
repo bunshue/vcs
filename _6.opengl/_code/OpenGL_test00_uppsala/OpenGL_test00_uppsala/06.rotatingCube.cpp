@@ -1,11 +1,3 @@
-/********************************************************************************
- * rotatingCube.c                                                               *
- * This program demonstrates a rotating cube with colored sides. It also        *
- * demonstrate use of homogeneous coordinate transformations and vertex arrays  *
- * for representing the cube from Chapter 4 of the Edward Angel computer        *
- * graphics text, from which this code has been adapted.                        *
- ********************************************************************************/
-
 #include "../../Common.h"
 
  // Vertices of the cube, centered at the origin.
@@ -24,14 +16,14 @@ GLfloat vertices[][3] =
 // Colors of the vertices.
 GLfloat colors[][3] =
 {
-	{1.0, 1.0, 1.0},		//未用到 白色
-	{0.0, 0.0, 1.0},		//向下拉的第2面
-	{1.0, 1.0, 1.0},		//未用到 白色
-	{0.0, 0.0, 0.0},		//左面 黑
-	{1.0, 1.0, 0.0},		//向下拉的第3面
-	{1.0, 1.0, 0.0},		//右面 黃
-	{0.0, 1.0, 0.0},		//向下拉的第1面
-	{1.0, 0.0, 0.0}			//看到的正面 紅
+	{1.0, 1.0, 1.0},		//未用到 白色  XXXX
+	{0.0, 0.0, 1.0},		//後 B
+	{1.0, 1.0, 1.0},		//未用到 白色  XXXX
+	{0.0, 1.0, 1.0},		//左 Cyan天青
+	{1.0, 1.0, 0.0},		//下 Y
+	{1.0, 0.0, 1.0},		//右 Magenta桃紅
+	{0.0, 1.0, 0.0},		//上 G
+	{1.0, 0.0, 0.0}			//前 R
 };
 
 // Indices of the vertices to make up the six faces of the cube.
@@ -48,8 +40,7 @@ GLubyte cubeIndices[24] =
 // Angles of rotation about each axis.
 GLfloat theta[] = { 0.0, 0.0, 0.0 };
 
-// Current axis of rotation.
-GLint axis = 2;
+GLint axis = 0;	//0: 繞x軸旋轉, 1: 繞y軸旋轉, 2: 繞z軸旋轉
 
 int spinning = 0;
 
@@ -71,14 +62,19 @@ void display(void)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	glRotatef(theta[0], 1.0, 0.0, 0.0);
-	glRotatef(theta[1], 0.0, 1.0, 0.0);
-	glRotatef(theta[2], 0.0, 0.0, 1.0);
+
+	//未旋轉前之座標軸
+	//draw_coordinates(1.3f);     //畫座標軸
+
+	glRotatef(theta[0], 1.0, 0.0, 0.0);	//對x軸旋轉特定角度
+	glRotatef(theta[1], 0.0, 1.0, 0.0);	//對y軸旋轉特定角度
+	glRotatef(theta[2], 0.0, 0.0, 1.0);	//對z軸旋轉特定角度
 	glDrawElements(GL_QUADS, 24, GL_UNSIGNED_BYTE, cubeIndices);
 
-	/*
-	//draw_boundary(color_y, 1.3f); //畫視窗邊界
+	//已旋轉後之座標軸
+	draw_coordinates(1.5f);     //畫座標軸
 
+	/*
 	//用 GL_LINE_LOOP 畫一個空心矩形
 	glColor3f(1.0, 0.0, 0.0);	//紅
 	float dd = 1.3f;
@@ -94,15 +90,33 @@ void display(void)
 	glEnd();
 	*/
 
+	glColor3f(1.0f, 1.0f, 1.0f);
+	glRasterPos3fv((GLfloat*)vertices[0]);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '0');
+	glRasterPos3fv((GLfloat*)vertices[1]);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '1');
+	glRasterPos3fv((GLfloat*)vertices[2]);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '2');
+	glRasterPos3fv((GLfloat*)vertices[3]);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '3');
+	glRasterPos3fv((GLfloat*)vertices[4]);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '4');
+	glRasterPos3fv((GLfloat*)vertices[5]);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '5');
+	glRasterPos3fv((GLfloat*)vertices[6]);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '6');
+	glRasterPos3fv((GLfloat*)vertices[7]);
+	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '7');
+
 	glutSwapBuffers();
 }
 
 // This function spins the cube around the current axis by incrementing the angle of rotation by 2 degrees.
 void idle(void)
 {
-	if (spinning)
+	if (spinning == 1)
 	{
-		theta[axis] += 2.0;
+		theta[axis] += 1.0;
 		if (theta[axis] > 360.0)
 		{
 			theta[axis] -= 360.0;
@@ -112,47 +126,46 @@ void idle(void)
 	}
 }
 
-// This is the mouse callback function. It selects the axis to rotate around.
-void mouse(int btn, int state, int x, int y)
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
-	if (btn == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
-	{
-		axis = 0;
-	}
-	else if (btn == GLUT_MIDDLE_BUTTON && state == GLUT_DOWN)
-	{
-		axis = 1;
-	}
-	else if (btn == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
-	{
-		axis = 2;
-	}
-	spinning = 1;
-}
+	//printf("你所按按鍵的碼是%x\t此時視窗內的滑鼠座標是(%d,%d)\n", key, x, y);
 
-// This is the keyboard callback function. It starts and stops spinning.
-void keyboard(unsigned char key, int x, int y)
-{
-	if (key == 27)
+	switch (key)
 	{
+	case 27:
+	case 'q':
+	case 'Q':
 		//離開視窗
 		glutDestroyWindow(glutGetWindow());
 		return;
-	}
-	if (key == 's')
-	{
+	case 'x':
+		printf("繞 x軸 旋轉\n");
+		axis = 0;
+		spinning = 1;
+		break;
+	case 'y':
+		printf("繞 x軸 旋轉\n");
+		axis = 1;
+		spinning = 1;
+		break;
+	case 'z':
+		printf("繞 x軸 旋轉\n");
+		axis = 2;
+		spinning = 1;
+		break;
+	case 's':
 		spinning = !spinning;
+		break;
 	}
 }
 
 int main(int argc, char** argv)
 {
 	const char* windowName = "Rotating Color Cube";
-	const char* message = "按滑鼠與s控制, 按 Esc 離開\n";
+	const char* message = "按x, y, z 選擇旋轉軸, 按s啟停, 按 Esc 離開\n";
 	common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard);
 
 	glutIdleFunc(idle);
-	glutMouseFunc(mouse);
 
 	glEnable(GL_DEPTH_TEST);
 	glShadeModel(GL_FLAT);

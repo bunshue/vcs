@@ -8,8 +8,17 @@ The perspective view is set in the reshape callback */
 #include "../../Common.h"
 
 // Vertices of the cube, centered at the origin.
-GLfloat vertices[][3] = { {-1.0,-1.0,-1.0}, {1.0,-1.0,-1.0}, {1.0,1.0,-1.0},
-	{-1.0,1.0,-1.0}, {-1.0,-1.0,1.0}, {1.0,-1.0,1.0}, {1.0,1.0,1.0}, {-1.0,1.0,1.0} };
+GLfloat vertices[][3] =
+{
+	{-1.0, -1.0, -1.0},		//0
+	{1.0, -1.0, -1.0},		//1
+	{1.0, 1.0, -1.0},		//2
+	{-1.0, 1.0, -1.0},		//3
+	{-1.0, -1.0, 1.0},		//4
+	{1.0, -1.0, 1.0},		//5
+	{1.0, 1.0, 1.0},		//6
+	{-1.0, 1.0, 1.0}		//7
+};
 
 // Colors of the vertices.
 GLfloat vertex_color[][3] = {						//沒用到 R B
@@ -17,9 +26,30 @@ GLfloat vertex_color[][3] = {						//沒用到 R B
 	{1.0,1.0,0.0}, {0.0,1.0,1.0}, {1.0,0.0,1.0},	//黃 天青 桃紅
 	{0.0,0.0,0.0}, {1.0,1.0,1.0} };					//黑 白
 
+// Colors of the vertices.
+GLfloat colors[][3] =
+{
+	{1.0, 1.0, 1.0},		//未用到 白色  XXXX
+	{0.0, 0.0, 1.0},		//後 B
+	{1.0, 1.0, 1.0},		//未用到 白色  XXXX
+	{0.0, 1.0, 1.0},		//左 Cyan天青
+	{1.0, 1.0, 0.0},		//下 Y
+	{1.0, 0.0, 1.0},		//右 Magenta桃紅
+	{0.0, 1.0, 0.0},		//上 G
+	{1.0, 0.0, 0.0}			//前 R
+};
+
 // Indices of the vertices to make up the six faces of the cube.
-//							   下          後        左         右         上          前
-GLubyte cubeIndices[24] = { 0,3,2,1,   2,3,7,6,   0,4,7,3,   1,2,6,5,   4,5,6,7,    0,1,5,4 };
+GLubyte cubeIndices[24] =
+{
+	0, 3, 2, 1,		//後
+	2, 3, 7, 6,		//上
+	0, 4, 7, 3,		//左
+	1, 2, 6, 5,		//右
+	4, 5, 6, 7,		//前
+	0, 1, 5, 4		//下
+};
+
 
 GLfloat theta[] = { 0.0, 0.0, 0.0 };  /* initial rotation angles  */
 GLint axis = 2;                     /* initial axis of rotation */

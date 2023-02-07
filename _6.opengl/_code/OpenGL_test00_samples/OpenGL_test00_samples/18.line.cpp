@@ -7,10 +7,9 @@
 
 #define CI_OFFSET 16
 
-GLenum rgb;
-GLenum mode1;
-GLenum mode2;
-GLint size;
+GLenum mode1 = GL_FALSE;
+GLenum mode2 = GL_FALSE;
+GLint size = 1;
 
 float pntA[3] = {
     -160.0, 0.0, 0.0
@@ -30,24 +29,10 @@ float pntD[3] = {
 
 void Init(void)
 {
-    GLint i;
-
-    if (!rgb)
-    {
-        for (i = 0; i < 16; i++)
-        {
-            glutSetColor(i + CI_OFFSET, i / 15.0, i / 15.0, 0.0);
-        }
-    }
-
     glClearColor(0.0, 0.0, 0.0, 0.0);
 
     glLineStipple(1, 0xF0E0);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE);
-
-    mode1 = GL_FALSE;
-    mode2 = GL_FALSE;
-    size = 1;
 }
 
 void display(void)
@@ -56,10 +41,10 @@ void display(void)
 
     glClear(GL_COLOR_BUFFER_BIT);
 
-    glLineWidth(size);
+    glLineWidth((float)size);      //似乎線寬最大為10
     printf("%d ", size);
 
-    if (mode1)
+    if (mode1 == 1)
     {
         glEnable(GL_LINE_STIPPLE);
     }
@@ -68,7 +53,7 @@ void display(void)
         glDisable(GL_LINE_STIPPLE);
     }
 
-    if (mode2)
+    if (mode2 == 1)
     {
         ci = CI_OFFSET;
         glEnable(GL_LINE_SMOOTH);
@@ -87,14 +72,14 @@ void display(void)
     {
         glRotatef(5.0, 0, 0, 1);
 
-        (rgb) ? glColor3f(1.0, 0.0, 0.0) : glIndexi(ci);    //設定顏色
+        glColor3f(1.0, 0.0, 0.0);   //設定顏色  //R, 紅線
         glBegin(GL_LINE_STRIP);
         glVertex3fv(pntA);
         glVertex3fv(pntB);
         glEnd();
 
         glPointSize(10.0f); 	//設定點的大小, N X N
-        (rgb) ? glColor3f(0.0, 1.0, 0.0) : glIndexi(2);     //設定顏色
+        glColor3f(0.0, 1.0, 0.0);   //設定顏色  //G, 綠點
         glBegin(GL_POINTS);
         glVertex3fv(pntA);
         glVertex3fv(pntB);
@@ -121,11 +106,11 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
     switch (key)
     {
     case '1':
-        mode1 = !mode1;
+        mode1 = 1 - mode1;
         glutPostRedisplay();
         break;
     case '2':
-        mode2 = !mode2;
+        mode2 = 1 - mode2;
         glutPostRedisplay();
         break;
     case 27:
@@ -144,6 +129,8 @@ void special(int key, int /*x*/, int /*y*/)
     case GLUT_KEY_UP:
         //printf("你按了 上 ");
         size++;
+        if (size > 10)
+            size = 10;
         glutPostRedisplay();
         break;
     case GLUT_KEY_DOWN:
@@ -158,35 +145,11 @@ void special(int key, int /*x*/, int /*y*/)
     }
 }
 
-void Args(int argc, char** argv)
-{
-    GLint i;
-
-    rgb = GL_TRUE;
-
-    for (i = 1; i < argc; i++)
-    {
-        if (strcmp(argv[i], "-ci") == 0)
-        {
-            rgb = GL_FALSE;
-        }
-        else if (strcmp(argv[i], "-rgb") == 0)
-        {
-            rgb = GL_TRUE;
-        }
-    }
-}
-
 int main(int argc, char** argv)
 {
-    GLenum type;
-
     glutInit(&argc, argv);
-    Args(argc, argv);
 
-    type = (rgb) ? GLUT_RGB : GLUT_INDEX;
-    type |= GLUT_SINGLE;
-    glutInitDisplayMode(type);
+    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);    //宣告顯示模式為 Single Buffer 和 RGBA
 
     glutInitWindowSize(600, 600);       // 設定視窗大小
     glutInitWindowPosition(1100, 200);  // 設定視窗位置

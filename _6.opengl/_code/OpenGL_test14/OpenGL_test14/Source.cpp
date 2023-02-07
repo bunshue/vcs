@@ -1,9 +1,5 @@
 ﻿#include "../../Common.h"
 
-#define REFRESH_DELAY 1000  // ms
-
-int time_elapsed = 0;
-
 void draw_something()
 {
     draw_boundary(color_y, 0.9f); //畫視窗邊界
@@ -25,92 +21,15 @@ void display(void)
     glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
     draw_something();
-
-    char info[20];
-    //sprintf(info, "%d", (char)display_mode);  //過時, x64不能用
-    sprintf_s(info, sizeof(info), "經過 %d 秒", time_elapsed);
-    glutSetWindowTitle(info);
-}
-
-// 窗口大小變化回調函數
-void reshape(int w, int h)
-{
-
-}
-
-void keyboard(unsigned char key, int /*x*/, int /*y*/)
-{
-    switch (key)
-    {
-    case 27:
-    case 'q':
-    case 'Q':
-        //離開視窗
-        glutDestroyWindow(glutGetWindow());
-        return;
-    }
-}
-
-void keyboardup(unsigned char key, int /*x*/, int /*y*/)
-{
-    //printf("keyboardup ");
-    //keyDown[key] = false;
-}
-
-//key 枚舉值，x、y是位置
-void special(int key, int /*x*/, int /*y*/)
-{
-    if (key == GLUT_KEY_UP)
-    {
-        printf("上 ");
-    }
-    if (key == GLUT_KEY_DOWN)
-    {
-        printf("下 ");
-    }
-    if (key == GLUT_KEY_LEFT)
-    {
-        printf("左 ");
-    }
-    if (key == GLUT_KEY_RIGHT)
-    {
-        printf("右 ");
-    }
-}
-
-void mouse(int button, int state, int x, int y)
-{
-}
-
-void motion(int x, int y)
-{
-}
-
-void idle()
-{
-    //printf("i");
-    //glutPostRedisplay();
-}
-
-void cleanup()
-{
-    printf("cleanup()\n");
 }
 
 void mainMenu(int i)
 {
-    keyboard((unsigned char)i, 0, 0);
+    printf("你按了第 %c 項\n", i);
+    return;
 }
 
-void timerEvent(int value)
-{
-    time_elapsed++;
-    printf("%d ", time_elapsed);
-    glutPostRedisplay();
-    glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
-}
-
-void initMenus()
+void initMenus1()
 {
     glutCreateMenu(mainMenu);   //選單管理
     glutAddMenuEntry("Nearest      [1]", '1');  //新增一個選單條目
@@ -126,6 +45,121 @@ void initMenus()
     glutAttachMenu(GLUT_RIGHT_BUTTON);
 }
 
+/* This is the callback function for the color menu. */
+void colorMenu(int id)
+{
+    //glNewList(++numberOfLists, GL_COMPILE_AND_EXECUTE);
+    switch (id)
+    {
+    case 1: /* change color to red */
+        printf("你按了第 1 項顏色, 紅色\n");
+        glColor3d(1.0, 0.0, 0.0);
+        break;
+    case 2: /* change color to green */
+        printf("你按了第 2 項顏色, 綠色\n");
+        glColor3d(0.0, 1.0, 0.0);
+        break;
+    case 3: /* change color to blue */
+        printf("你按了第 3 項顏色, 藍色\n");
+        glColor3d(0.0, 0.0, 1.0);
+        break;
+    case 4: /* change color to black */
+        printf("你按了第 4 項顏色, 黑色\n");
+        glColor3d(0.0, 0.0, 0.0);
+        break;
+    default: /* for any case not covered above, leave color unchanged */
+        break;
+    }
+    glEndList();
+    //pointsChosen = 0;
+}
+
+void sizeMenu(int id)
+/* This is the callback function for the size menu. */
+{
+    //glNewList(++numberOfLists, GL_COMPILE_AND_EXECUTE);
+    switch (id)
+    {
+    case 1: /* change line thickness to 1 */
+        printf("你按了第 1 項大小, 1.0\n");
+        glLineWidth(1.0);
+        break;
+    case 2: /* change line thickness to 2 */
+        printf("你按了第 1 項大小, 2.0\n");
+        glLineWidth(2.0);
+        break;
+    case 3: /* change line thickness to 3 */
+        printf("你按了第 1 項大小, 3.0\n");
+        glLineWidth(3.0);
+        break;
+    default: /* for any case not covered above, leave line thickness unchanged */
+        break;
+    }
+    glEndList();
+}
+
+void initMenus2()
+{
+    int color_menu, size_menu;
+
+    /* Create the menu structure and attach it to the right mouse button. */
+    color_menu = glutCreateMenu(colorMenu);
+    glutAddMenuEntry("Red", 1);
+    glutAddMenuEntry("Green", 2);
+    glutAddMenuEntry("Blue", 3);
+    glutAddMenuEntry("Black", 4);
+    size_menu = glutCreateMenu(sizeMenu);
+
+    glutAddMenuEntry("1", 1);
+    glutAddMenuEntry("2", 2);
+    glutAddMenuEntry("3", 3);
+    glutCreateMenu(mainMenu);
+
+    glutAddSubMenu("Color, with SubMenu", color_menu);
+    glutAddSubMenu("Size, with SubMenu", size_menu);
+
+    glutAddMenuEntry("Reset defaults", 1);
+    glutAddMenuEntry("Clear window", 2);
+    glutAddMenuEntry("Exit", 3);
+    glutAttachMenu(GLUT_RIGHT_BUTTON);
+}
+
+/* 保留範例
+void mainMenu(int id)
+{
+    double lineWidth, color[4];
+
+    switch (id)
+    {
+    case 1: // reset default values
+        //glNewList(++numberOfLists, GL_COMPILE_AND_EXECUTE);
+        printf("你按了 第 1 項  Reset Default, 1.0\n");
+        glColor3d(0.0, 0.0, 0.0);
+        glLineWidth(1.0);
+        glEndList();
+        break;
+    case 2: // clear the screen
+        //glDeleteLists(1, numberOfLists);
+        //numberOfLists = 0;
+        printf("你按了 第 2 項  Clear Screen, 1.0\n");
+        glGetDoublev(GL_LINE_WIDTH, &lineWidth);
+        glGetDoublev(GL_CURRENT_COLOR, color);
+        //glNewList(++numberOfLists, GL_COMPILE);
+        glColor4dv(color);
+        glLineWidth(lineWidth);
+        glEndList();
+        glutPostRedisplay();
+        break;
+    case 3: // exit the program
+        printf("你按了 第 3 項  Exit, 1.0\n");
+        exit(0);
+        break;
+    default: // in case none of the above occur
+        break;
+    }
+}
+*/
+
 int main(int argc, char** argv)
 {
     glutInit(&argc, argv);
@@ -139,20 +173,13 @@ int main(int argc, char** argv)
     glutCreateWindow("基本的OpenGL架構");	//開啟視窗 並顯示出視窗 Title
 
     glutDisplayFunc(display);	//設定callback function
-    glutReshapeFunc(reshape);	//設定callback function
-    glutKeyboardFunc(keyboard);	//設定callback function
-    glutKeyboardUpFunc(keyboardup);//設定callback function
-    glutSpecialFunc(special);   //設定callback function
-    glutMouseFunc(mouse);		//設定callback function
-    glutMotionFunc(motion);		//設定callback function
-    glutIdleFunc(idle);         //設定callback function, 利用idle事件進行重畫
-    glutCloseFunc(cleanup);     //設定callback function
-    glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
+    glutReshapeFunc(reshape0);	//設定callback function
+    glutKeyboardFunc(keyboard0);	//設定callback function
 
-    initMenus();        //設定表單按鈕
+    //initMenus1();        //設定表單按鈕, 無次選單
+    initMenus2();        //設定表單按鈕, 有次選單
 
     glutMainLoop();	//開始主循環繪製
 
     return 0;
 }
-

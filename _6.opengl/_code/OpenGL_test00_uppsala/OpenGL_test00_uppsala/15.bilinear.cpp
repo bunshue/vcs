@@ -11,7 +11,7 @@
 
 float x[2][2];
 float y[2][2];
-float z[2][2];
+float z[2][2];  //沒用到, 預留
 
 void gfxinit(void)
 {
@@ -23,7 +23,7 @@ void gfxinit(void)
     glColor3f(1.0, 0.0, 0.0);          //畫紅線
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    gluOrtho2D(-10.0, 10.0, -10.0, 10.0);
+    gluOrtho2D(-10.0, 10.0, -10.0, 10.0);   //設定畫圖邊界 x= -10 ~ 10, y = -10 ~ 10
 
     //在 List 1 製作第1張圖
     glNewList(1, GL_COMPILE);
@@ -62,46 +62,49 @@ void gfxinit(void)
 void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
+    glColor3f(1.0, 1.0, 0.0);          //畫黃線
     glCallList(1);  //顯示第1張圖
+
+    draw_coordinates(8.0f);     //畫座標軸
+
+    //用 GL_LINE_LOOP 畫一個空心矩形
+    glColor3f(0.0, 1.0, 0.0);          //畫綠框
+    float dd = 8.2f;
+    float point1[3] = { -dd, -dd, 0 };	//左下
+    float point2[3] = { dd, -dd, 0 };	//右下
+    float point3[3] = { dd,  dd, 0 };	//右上
+    float point4[3] = { -dd,  dd, 0 };	//左上
+    glBegin(GL_LINE_LOOP);
+    glVertex3fv(point1);	//左下
+    glVertex3fv(point2);	//右下
+    glVertex3fv(point3);	//右上
+    glVertex3fv(point4);	//左上
+    glEnd();
+
     glFlush();  // 執行繪圖命令
 }
 
 int main(int argc, char** argv)
 {
-    cout << "Bilinear Patches" << endl << endl;
-    cout << "Please enter the four points in the following sequence." << endl;
-    cout << "The first two points define the v=0 edge and the last two points" << endl;
-    cout << "define the v=1 edge." << endl << endl;
-    /*
-    cout << "Enter coordinates of p[0][0]:  ";
-    cin >> x[0][0] >> y[0][0] >> z[0][0];
-    cout << "Enter coordinates of p[1][0]:  ";
-    cin >> x[1][0] >> y[1][0] >> z[1][0];
-    cout << "Enter coordinates of p[0][1]:  ";
-    cin >> x[0][1] >> y[0][1] >> z[0][1];
-    cout << "Enter coordinates of p[1][1]:  ";
-    cin >> x[1][1] >> y[1][1] >> z[1][1];
-    */
-
     //第一條線之起點, 左下
     x[0][0] = -8;
     y[0][0] = -8;
-    z[0][0] = -8;   //z先不管
+    z[0][0] = -85;   //z先不管
 
     //第一條線之終點, 右下
     x[0][1] = 8;
-    y[0][1] = -8;
-    z[0][1] = 8;    //z先不管
+    y[0][1] = -3;
+    z[0][1] = 85;    //z先不管
 
     //第二條線之起點, 左上
-    x[1][0] = -5;
+    x[1][0] = -8;
     y[1][0] = 8;
-    z[1][0] = 2;    //z先不管
+    z[1][0] = 25;    //z先不管
 
     //第二條線之終點, 右上
-    x[1][1] = 5;
-    y[1][1] = 5;
-    z[1][1] = -3;   //z先不管
+    x[1][1] = 8;
+    y[1][1] = 3;
+    z[1][1] = -35;   //z先不管
 
     const char* windowName = "Bilinear Patch";
     const char* message = "僅顯示, 無控制, 按 Esc 離開\n";

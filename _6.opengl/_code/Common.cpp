@@ -25,6 +25,10 @@ void draw_coordinates(float len)
     glVertex3f(len - dd, 0.0f + dd, 0.0f);	//x軸 len,0,0
     glVertex3f(len, 0.0f, 0.0f);	//x軸 len,0,0
     glVertex3f(len - dd, 0.0f - dd, 0.0f);	//x軸 len,0,0
+    glVertex3f(len, 0.0f, 0.0f);	//x軸 len,0,0
+    glVertex3f(len - dd, 0.0f, 0.0f + dd);	//x軸 len,0,0
+    glVertex3f(len, 0.0f, 0.0f);	//x軸 len,0,0
+    glVertex3f(len - dd, 0.0f, 0.0f - dd);	//x軸 len,0,0
     glEnd();
     glRasterPos3f(len, 0.05f, 0.0f);
     glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'x');
@@ -37,6 +41,10 @@ void draw_coordinates(float len)
     glVertex3f(0.0f - dd, len - dd, 0.0f);	//y軸 0,len,0
     glVertex3f(0.0f, len, 0.0f);	//y軸 0,len,0
     glVertex3f(0.0f + dd, len - dd, 0.0f);	//y軸 0,len,0
+    glVertex3f(0.0f, len, 0.0f);	//y軸 0,len,0
+    glVertex3f(0.0f, len - dd, 0.0f + dd);	//y軸 0,len,0
+    glVertex3f(0.0f, len, 0.0f);	//y軸 0,len,0
+    glVertex3f(0.0f, len - dd, 0.0f - dd);	//y軸 0,len,0
     glEnd();
     glRasterPos3f(0.0f, len + dd / 3, 0.0f);
     glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'y');
@@ -49,6 +57,10 @@ void draw_coordinates(float len)
     glVertex3f(0.0f - dd, 0.0f, len - dd);	//z軸 0,0,len
     glVertex3f(0.0f, 0.0f, len);	//z軸 0,0,len
     glVertex3f(0.0f + dd, 0.0f, len - dd);	//z軸 0,0,len
+    glVertex3f(0.0f, 0.0f, len);	//z軸 0,0,len
+    glVertex3f(0.0f, 0.0f - dd, len - dd);	//z軸 0,0,len
+    glVertex3f(0.0f, 0.0f, len);	//z軸 0,0,len
+    glVertex3f(0.0f, 0.0f + dd, len - dd);	//z軸 0,0,len
     glEnd();
     glRasterPos3f(0.0f, 0.0f, len + dd * 2);
     glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, 'z');

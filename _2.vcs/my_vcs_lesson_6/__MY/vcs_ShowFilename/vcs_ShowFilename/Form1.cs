@@ -21,10 +21,31 @@ namespace vcs_ShowFilename
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            show_item_location();
+        }
+
+        void show_item_location()
+        {
+            int x_st;
+            int y_st;
+            int dx;
+            int dy;
+            //button
+            x_st = 10;
+            y_st = 10;
+            dx = 160 + 10;
+            dy = 70 + 10;
+
+            button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button3.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+
             //控件位置
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
-
-
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -40,7 +61,6 @@ namespace vcs_ShowFilename
 
         string FolederName = string.Empty;
         List<MyFileInfo> fileinfos = new List<MyFileInfo>();
-        List<MyFileInfo> fileinfos_match = new List<MyFileInfo>();
 
         bool flag_need_shortname = false;
 
@@ -269,11 +289,24 @@ namespace vcs_ShowFilename
             //排序 由大到小  在return的地方多個負號
             //fileinfos.Sort((x, y) => { return -x.filesize.CompareTo(y.filesize); });
 
-
             if (fileinfos.Count == 0)
+            {
                 richTextBox1.Text += "無資料a\n";
+                return;
+            }
             else
+            {
                 richTextBox1.Text += "找到 " + fileinfos.Count.ToString() + " 筆資料c\n";
+                int i;
+                for (i = 0; i < fileinfos.Count; i++)
+                {
+
+
+                }
+
+            }
+
+
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -291,7 +324,6 @@ namespace vcs_ShowFilename
 
             //轉出一層
             fileinfos.Clear();
-            fileinfos_match.Clear();
 
             total_size = 0;
             total_files = 0;
@@ -353,10 +385,7 @@ namespace vcs_ShowFilename
             richTextBox1.Text += "檔案個數 : " + total_files.ToString() + "\n";
             richTextBox1.Text += "總容量   : " + ByteConversionTBGBMBKB(Convert.ToInt64(total_size)) + "\n";
 
-
             show_file_info();
-
-
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -372,7 +401,6 @@ namespace vcs_ShowFilename
 
             //轉出全部
             fileinfos.Clear();
-            fileinfos_match.Clear();
 
             total_size = 0;
             total_files = 0;

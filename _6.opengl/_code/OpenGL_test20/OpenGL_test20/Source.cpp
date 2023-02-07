@@ -1,5 +1,9 @@
 #include "../../Common.h"
 
+#define REFRESH_DELAY 1000  // ms
+
+int time_elapsed = 0;
+
 // 繪圖回調函數
 void display(void)
 {
@@ -20,52 +24,37 @@ void display(void)
     draw_string1(str1, color_r, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
 
     glFlush();  // 執行繪圖命令
+
+    char info[20];
+    //sprintf(info, "%d", (char)display_mode);  //過時, x64不能用
+    sprintf_s(info, sizeof(info), "經過 %d 秒", time_elapsed);
+    glutSetWindowTitle(info);
 }
 
-// 窗口大小變化回調函數
-void reshape(int w, int h)
+void keyboardup(unsigned char key, int /*x*/, int /*y*/)
 {
-    glViewport(0, 0, w, h);
+    //printf("keyboardup ");
+    //keyDown[key] = false;
 }
 
-void keyboard(unsigned char key, int /*x*/, int /*y*/)
+void timerEvent(int value)
 {
-    switch (key)
-    {
-    case 27:
-    case 'q':
-    case 'Q':
-        //離開視窗
-        glutDestroyWindow(glutGetWindow());
-        return;
-
-    case '1':
-        printf("1\n");
-        break;
-    }
-}
-
-void mouse(int button, int state, int x, int y)
-{
-}
-
-void motion(int x, int y)
-{
+    time_elapsed++;
+    //printf("%d ", time_elapsed);
+    glutPostRedisplay();
+    glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
 }
 
 int main(int argc, char** argv)
 {
     const char* windowName = "OpenGL測試";
-    const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
-    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard);
+    const char* message = "其他callback函數使用範例, 僅顯示, 無控制, 按 Esc 離開\n";
+    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard0);
 
-    glutMouseFunc(mouse);       //設定callback function
-    glutMotionFunc(motion);     //設定callback function
-
-    printf("\n空白範例\n");
+    glutKeyboardUpFunc(keyboardup);//設定callback function
+    glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
 
     glutMainLoop();	//開始主循環繪製
 
     return 0;
 }
-

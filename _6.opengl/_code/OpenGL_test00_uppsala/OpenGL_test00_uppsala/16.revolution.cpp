@@ -176,9 +176,18 @@ void goblet(void)
             glVertex3f(gobletxuv(u, v), gobletyuv(u, v), gobletzuv(u, v));
         }
         glEnd();
-        if (fabs(v - 0.2) < 1e-6) v = 0.25;
-        if (fabs(v - 0.3) < 1e-6) v = 0.75;
-        if (fabs(v - 0.8) < 1e-6) v = 0.9;
+        if (fabs(v - 0.2) < 1e-6)
+        {
+            v = 0.25;
+        }
+        if (fabs(v - 0.3) < 1e-6)
+        {
+            v = 0.75;
+        }
+        if (fabs(v - 0.8) < 1e-6)
+        {
+            v = 0.9;
+        }
     }
 }
 
@@ -195,10 +204,10 @@ void goblet_profile(void)
     glEnd();
 }
 
-/* This is the callback function for the menu selection to determine which
-   figure to draw on the screen. */
-void figureMenu(int figure)
+void show_figure(int figure)
 {
+    printf("你按了 %d\n", figure);
+
     float xview, yview, zview, nearPlane, farPlane, dist, angle, fovy;
 
     /* Initialize graphics mode and set the window based on R. */
@@ -206,7 +215,6 @@ void figureMenu(int figure)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    printf("你按了 %d\n", figure);
     if (figure < 5) // set up orthographic projection
     {
         glOrtho(-TwoR, TwoR, -TwoR, TwoR, -TwoR, TwoR);
@@ -240,21 +248,24 @@ void figureMenu(int figure)
     switch (figure)
     {
     case 1:
-    case 5: sphere();
+    case 5:
+        sphere();
         break;
-    case 2: sphere_profile();
+    case 2:
+        sphere_profile();
         break;
     case 3:
-    case 6:  goblet();
+    case 6:
+        goblet();
         break;
-    case 4: goblet_profile();
+    case 4:
+        goblet_profile();
         break;
     }
     glEndList();
     glutPostRedisplay();
 }
 
-/* This is the callback function that gets executed every time the display needs to be updated. */
 void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -262,21 +273,49 @@ void display(void)
     glFlush();  // 執行繪圖命令
 }
 
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
+{
+    //printf("你所按按鍵的碼是%x\t此時視窗內的滑鼠座標是(%d,%d)\n", key, x, y);
+    switch (key)
+    {
+    case 27:
+    case 'q':
+    case 'Q':
+        //離開視窗
+        glutDestroyWindow(glutGetWindow());
+        return;
+    case '1':
+        printf("你選擇了 1 : Sphere (orthographic)\n");
+        show_figure(1);
+        break;
+    case '2':
+        printf("你選擇了 2 : Sphere (profile only)\n");
+        show_figure(2);
+        break;
+    case '3':
+        printf("你選擇了 3 : Goblet (orthographic)\n");
+        show_figure(3);
+        break;
+    case '4':
+        printf("你選擇了 4 : Goblet (profile only)\n");
+        show_figure(4);
+        break;
+    case '5':
+        printf("你選擇了 5 : Sphere (perspective) XXX\n");
+        show_figure(5);
+        break;
+    case '6':
+        printf("你選擇了 6 : Goblet (perspective) XXX\n");
+        show_figure(6);
+        break;
+    }
+}
+
 int main(int argc, char** argv)
 {
     const char* windowName = "Surfaces of Revolution";
-    const char* message = "按 滑鼠右鍵選單 切換, 按 Esc 離開\n";
-    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard0);
-
-    //滑鼠右鍵選單
-    glutCreateMenu(figureMenu);
-    glutAddMenuEntry("Sphere (orthographic)", 1);
-    glutAddMenuEntry("Sphere (perspective) XXX", 5);
-    glutAddMenuEntry("Sphere (profile only)", 2);
-    glutAddMenuEntry("Goblet (orthographic)", 3);
-    glutAddMenuEntry("Goblet (perspective) XXX", 6);
-    glutAddMenuEntry("Goblet (profile only)", 4);
-    glutAttachMenu(GLUT_RIGHT_BUTTON);
+    const char* message = "按 1~6 選擇, 按 Esc 離開\n";
+    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard);
 
     gfxinit();
 
