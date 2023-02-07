@@ -7,9 +7,9 @@
 #include "../../Common.h"
 
  /*  Initialize alpha blending function.  */
-
 void myinit(void)
 {
+    //以下未預設值, 寫不寫都一樣
     gluOrtho2D(-1.0, 1.0, -1.0, 1.0);   //窗口座標範圍2D, 顯示範圍 : X軸(-1.0 ~ 1.0) Y軸(-1.0 ~ 1.0), 左下為原點
 
     glEnable(GL_BLEND);

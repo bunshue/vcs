@@ -3,6 +3,9 @@
 // 繪圖回調函數
 void display(void)
 {
+    //以下未預設值, 寫不寫都一樣
+    //gluOrtho2D(-1.0, 1.0, -1.0, 1.0);   //窗口座標範圍2D, 顯示範圍 : X軸(-1.0 ~ 1.0) Y軸(-1.0 ~ 1.0), 左下為原點
+
     glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
     draw_boundary(color_y, 0.9f); //畫視窗邊界

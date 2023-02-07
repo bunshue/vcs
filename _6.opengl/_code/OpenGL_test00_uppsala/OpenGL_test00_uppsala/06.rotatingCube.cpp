@@ -91,23 +91,13 @@ void display(void)
 	*/
 
 	glColor3f(1.0f, 1.0f, 1.0f);
-	glRasterPos3fv((GLfloat*)vertices[0]);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '0');
-	glRasterPos3fv((GLfloat*)vertices[1]);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '1');
-	glRasterPos3fv((GLfloat*)vertices[2]);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '2');
-	glRasterPos3fv((GLfloat*)vertices[3]);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '3');
-	glRasterPos3fv((GLfloat*)vertices[4]);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '4');
-	glRasterPos3fv((GLfloat*)vertices[5]);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '5');
-	glRasterPos3fv((GLfloat*)vertices[6]);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '6');
-	glRasterPos3fv((GLfloat*)vertices[7]);
-	glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '7');
 
+	int i;
+	for (i = 0; i < 8; i++)
+	{
+		glRasterPos3fv((GLfloat*)vertices[i]);
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '0' + i);
+	}
 	glutSwapBuffers();
 }
 
@@ -153,8 +143,8 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
 		axis = 2;
 		spinning = 1;
 		break;
-	case 's':
-		spinning = !spinning;
+	case ' ':
+		spinning = 1 - spinning;
 		break;
 	}
 }
@@ -162,7 +152,7 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
 int main(int argc, char** argv)
 {
 	const char* windowName = "Rotating Color Cube";
-	const char* message = "«öx, y, z ¿ï¾Ü±ÛÂà¶b, «ös±Ò°±, «ö Esc Â÷¶}\n";
+	const char* message = "«öx, y, z ¿ï¾Ü±ÛÂà¶b, «ö ªÅ¥ÕÁä ±Ò°±, «ö Esc Â÷¶}\n";
 	common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard);
 
 	glutIdleFunc(idle);

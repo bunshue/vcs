@@ -1,5 +1,8 @@
-/* Recursive subdivision of tetrahedron (Chapter 6). Three display
-modes: wire frame, constant, and interpolative shading */
+/*
+Recursive subdivision of tetrahedron (Chapter 6).
+Three display modes:
+wire frame, constant, and interpolative shading
+*/
 
 /*Program also illustrates defining materials and light sources in myiit() */
 
@@ -10,13 +13,17 @@ modes: wire frame, constant, and interpolative shading */
 typedef double point[3];
 
 /* initial tetrahedron */
-
-point v[] = { {0.0, 0.0, 1.0}, {0.0, 0.942809, -0.33333},
-          {-0.816497, -0.471405, -0.333333}, {0.816497, -0.471405, -0.333333} };
+point v[] =
+{
+    {0.0, 0.0, 1.0},
+    {0.0, 0.942809, -0.33333},
+    {-0.816497, -0.471405, -0.333333},
+    {0.816497, -0.471405, -0.333333}
+};
 
 static GLfloat theta[] = { 0.0,0.0,0.0 };
 
-int n;
+int n = 3;
 int mode;
 
 /* display one triangle using a line loop for wire frame, a single
@@ -117,14 +124,20 @@ void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
+
+    //畫個參考座標軸
+
     mode = 0;
     tetrahedron(n);
+
     mode = 1;
     glTranslated(-2.0, 0.0, 0.0);
     tetrahedron(n);
+
     mode = 2;
     glTranslated(4.0, 0.0, 0.0);
     tetrahedron(n);
+
     glutSwapBuffers();
 }
 
@@ -168,10 +181,10 @@ void myinit()
     glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
     glMaterialf(GL_FRONT, GL_SHININESS, mat_shininess);
 
-    glEnable(GL_SMOOTH); /*enable smooth shading */
-    glEnable(GL_LIGHTING); /* enable lighting */
-    glEnable(GL_LIGHT0);  /* enable light 0 */
-    glEnable(GL_DEPTH_TEST); /* enable z buffer */
+    glEnable(GL_SMOOTH);        //enable smooth shading
+    glEnable(GL_LIGHTING);      //enable lighting
+    glEnable(GL_LIGHT0);        //enable light 0
+    glEnable(GL_DEPTH_TEST);    //enable z buffer
 
     glClearColor(1.0, 1.0, 1.0, 1.0);
     glColor3f(0.0, 0.0, 0.0);
@@ -179,9 +192,6 @@ void myinit()
 
 int main(int argc, char** argv)
 {
-    cout << "Enter number of levels of recursion: ";
-    cin >> n;
-
     const char* windowName = "Sphere";
     const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
     common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard0);

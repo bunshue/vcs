@@ -167,6 +167,22 @@ namespace vcs_Mix00
         private void button1_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            using (Process curProcess = Process.GetCurrentProcess())
+            {
+                richTextBox1.Text += "aaaa = " + curProcess.ProcessName + "\n";
+                richTextBox1.Text += "aaaa = " + curProcess.MainModule + "\n";
+                richTextBox1.Text += "aaaa = " + curProcess.MainWindowTitle + "\n";
+                richTextBox1.Text += "aaaa = " + curProcess.ProcessorAffinity + "\n";
+                richTextBox1.Text += "處理序的名稱 :\t" + curProcess.ProcessName.ToString().Trim() + "\n";//取得處理序的名稱
+                richTextBox1.Text += "主視窗標題 :\t" + curProcess.MainWindowTitle + "\n";   //取得處理序的主視窗標題
+                richTextBox1.Text += "處理序啟動的時間 :\t" + curProcess.StartTime.ToString() + "\n";   //取得處理序的主視窗標題
+                richTextBox1.Text += "這個處理序的總處理器時間 :\t" + curProcess.TotalProcessorTime.ToString() + "\n";   //取得處理序的主視窗標題
+
+
+
+            }
+
         }
 
         private void button2_Click(object sender, EventArgs e)

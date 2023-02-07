@@ -14,10 +14,6 @@
 #define MARK_FACTOR 0.35  /* scale factor for 'x' that marks each control point */
 #define DELTA_T     0.05  /* time step factor for drawing each curve            */
 
-/* Display list constants. */
-#define MARK_LIST           1
-#define LAGRANGE_TITLE_LIST 5
-
 double px[MAX_POINTS];
 double py[MAX_POINTS];
 double minx;
@@ -42,7 +38,8 @@ void display(void)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluOrtho2D(0, WindowSizeX, 0, WindowSizeY);
-    glColor3f(0.0, 0.0, 0.0);  /* Draw separator lines in black. */
+
+    glColor3f(0.0, 0.0, 0.0);  //黑色線
 
     glBegin(GL_LINES);
     glVertex2i(0, WindowSizeY3);
@@ -51,23 +48,40 @@ void display(void)
     glVertex2i(WindowSizeX, 2 * WindowSizeY3);
     glEnd();
 
-    /* Place titles. */
-    glRasterPos2i(BORDER, 2 * WindowSizeY3 + BORDER);
-    glCallList(LAGRANGE_TITLE_LIST);
-
     /* Do Lagrange interpolation in top third of window. */
     glLoadIdentity();
     gluOrtho2D(minx - markd, maxx + markd, miny - 2.0 * markd, maxy + 2.0 * markd);
-    glViewport(BORDER, 2 * WindowSizeY3 + BORDER, WindowSizeX - 2 * BORDER, WindowSizeY3 - 2 * BORDER);
-    glCallList(MARK_LIST);      //1
+    printf("窗口座標範圍2D, 顯示範圍 : X軸(%f ~ %f) Y軸(%f ~ %f), 左下為原點\n", minx - markd, maxx + markd, miny - 2.0 * markd, maxy + 2.0 * markd);
 
-    /* Do Bezier curve in middle third of window. */
-    glViewport(BORDER, WindowSizeY3 + BORDER, WindowSizeX - 2 * BORDER, WindowSizeY3 - 2 * BORDER);
-    glCallList(MARK_LIST);      //1
-    
-    /* Do spline curve in bottom third of window. */
-    glViewport(BORDER, BORDER, WindowSizeX - 2 * BORDER, WindowSizeY3 - 2 * BORDER);
-    glCallList(MARK_LIST);      //1
+    glColor3f(0.0, 0.0, 1.0);  //藍色線
+    float dd = 0.93f;
+    float point1[3] = { 1.00f-dd, 1.00f - dd, 0 };	//左下
+    float point2[3] = { dd, 1.00f - dd, 0 };	//右下
+    float point3[3] = { dd, dd, 0 };	//右上
+    float point4[3] = { 1.00f - dd, dd, 0 };	//左上
+    glBegin(GL_LINE_LOOP);
+    glVertex3fv(point1);	//左下
+    glVertex3fv(point2);	//右下
+    glVertex3fv(point3);	//右上
+    glVertex3fv(point4);	//左上
+    glEnd();
+
+    glColor3f(1.0, 0.0, 0.0);  //紅色線
+
+    //移至上圖
+    glViewport(BORDER, BORDER + WindowSizeY3 * 2, WindowSizeX - 2 * BORDER, WindowSizeY3 - 2 * BORDER);
+    printf("glViewport 上 x_st = %d, y_st = %d, W = %d, H = %d\n", BORDER, BORDER + WindowSizeY3 * 2, WindowSizeX - 2 * BORDER, WindowSizeY3 - 2 * BORDER);
+    glCallList(1);      //1
+
+    //移至中圖
+    glViewport(BORDER, BORDER + WindowSizeY3 * 1, WindowSizeX - 2 * BORDER, WindowSizeY3 - 2 * BORDER);
+    printf("glViewport 中 x_st = %d, y_st = %d, W = %d, H = %d\n", BORDER, BORDER + WindowSizeY3 * 1, WindowSizeX - 2 * BORDER, WindowSizeY3 - 2 * BORDER);
+    glCallList(1);      //1
+
+    //移至下圖
+    glViewport(BORDER, BORDER + WindowSizeY3 * 0, WindowSizeX - 2 * BORDER, WindowSizeY3 - 2 * BORDER);
+    printf("glViewport 下 x_st = %d, y_st = %d, W = %d, H = %d\n", BORDER, BORDER + WindowSizeY3 * 0, WindowSizeX - 2 * BORDER, WindowSizeY3 - 2 * BORDER);
+    glCallList(1);      //1
 
     glFlush();  // 執行繪圖命令
 }
@@ -141,8 +155,8 @@ void interact(void)
 /* This routine makes a mark for each data point in the arrays. */
 void mark_points()
 {
-    //在 List MARK_LIST 製作第 MARK_LIST 張圖, MARK_LIST = 1
-    glNewList(MARK_LIST, GL_COMPILE);
+    //在 List 1 製作第 1 張圖
+    glNewList(1, GL_COMPILE);
     glColor3f(1.0, 0.0, 0.0);  /* Draw the marks in red. */
 
     glBegin(GL_LINES);
@@ -158,32 +172,12 @@ void mark_points()
     glEndList();
 }
 
-/* This procedure does Lagrange interpolation of the data. */
-void Lagrange_interpolate()
-{
-    int i;
-    char title[] = "Lagrange Interpolation";
-
-    //顯示標題
-    //在 List LAGRANGE_TITLE_LIST 製作第 LAGRANGE_TITLE_LIST 張圖, LAGRANGE_TITLE_LIST = 5
-    glNewList(LAGRANGE_TITLE_LIST, GL_COMPILE); //5
-    glColor3f(0.0, 0.0, 0.0);  /* Draw title in black. */
-    for (i = 0; i < (int)strlen(title); i++)
-    {
-        glutBitmapCharacter(GLUT_BITMAP_HELVETICA_12, title[i]);
-    }
-    glEndList();
-}
-
 /* This is the routine that generates the image to be displayed. */
 void gfxinit()
 {
     glClearColor(1.0, 1.0, 1.0, 0.0); /* Make the background white. */
 
-    /* Generate the three different curves for displaying. */
-
     mark_points();          /* Generate the data marks display list.            */
-    Lagrange_interpolate(); /* Generate the lines for Lagrange interpolation.   */
 }
 
 int main(int argc, char** argv)

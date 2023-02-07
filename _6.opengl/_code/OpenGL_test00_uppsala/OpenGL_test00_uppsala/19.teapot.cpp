@@ -68,9 +68,9 @@ void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
     glLoadIdentity();
-    glRotatef(theta[0], 1.0, 0.0, 0.0); //旋轉 X 軸
-    glRotatef(theta[1], 0.0, 1.0, 0.0); //旋轉 Y 軸
-    glRotatef(theta[2], 0.0, 0.0, 1.0); //旋轉 Z 軸
+    glRotatef(theta[0], 1.0, 0.0, 0.0); //對x軸旋轉特定角度
+    glRotatef(theta[1], 0.0, 1.0, 0.0); //對y軸旋轉特定角度
+    glRotatef(theta[2], 0.0, 0.0, 1.0); //對z軸旋轉特定角度
     for (int i = 1; i <= PATCHES; i++)
     {
         glCallList(i);
