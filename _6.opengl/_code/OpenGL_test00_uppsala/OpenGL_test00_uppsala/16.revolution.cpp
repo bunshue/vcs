@@ -11,14 +11,6 @@
 double M_PI_2 = M_PI / 2.0;
 float TwoR = 2.0 * R;
 
-void gfxinit(void)
-{
-    /* Set graphics background and foreground colors. */
-
-    glClearColor(1.0, 1.0, 1.0, 0.0);  /* Make the background white. */
-    glColor3f(0.0, 0.0, 0.0);          /* Draw in black.             */
-}
-
 /* This function evaluates the x(u, v) function for the sphere. */
 float spherex(float u, float v)
 {
@@ -207,6 +199,8 @@ void goblet_profile(void)
 void show_figure(int figure)
 {
     printf("你按了 %d\n", figure);
+    glClearColor(1.0, 1.0, 1.0, 0.0);   //設定背景為白色
+    glColor3f(1.0, 0.0, 0.0);           //紅色線
 
     float xview, yview, zview, nearPlane, farPlane, dist, angle, fovy;
 
@@ -215,47 +209,23 @@ void show_figure(int figure)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
 
-    if (figure < 5) // set up orthographic projection
-    {
-        glOrtho(-TwoR, TwoR, -TwoR, TwoR, -TwoR, TwoR);
-        glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
-    }
-    else // set up perspective projection
-    {
-        cout << endl << "Enter coordinates of viewing point: ";
-        cin >> xview >> yview >> zview;
-        cout << endl << "Enter near and far clipping planes: ";
-        cin >> nearPlane >> farPlane;
-        dist = sqrt(xview * xview + yview * yview + zview * zview);
-        if (figure == 5)
-        {
-            angle = 2.0 * atan2(R, dist);
-        }
-        else
-        {
-            angle = 2.0 * atan2(1.5f * R, dist);
-        }
-        fovy = 180.0 * angle / M_PI;
-        gluPerspective(fovy, 1.0, nearPlane, farPlane);
-        glMatrixMode(GL_MODELVIEW);
-        glLoadIdentity();
-        glTranslatef(0.0, 0.0, -R - 1);
-        gluLookAt(xview, yview, zview, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
-    }
+    // set up orthographic projection
+    glOrtho(-TwoR, TwoR, -TwoR, TwoR, -TwoR, TwoR);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
     glDeleteLists(1, 1);  // erase the current figure
+
     glNewList(1, GL_COMPILE);
     switch (figure)
     {
     case 1:
-    case 5:
         sphere();
         break;
     case 2:
         sphere_profile();
         break;
     case 3:
-    case 6:
         goblet();
         break;
     case 4:
@@ -300,14 +270,6 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
         printf("你選擇了 4 : Goblet (profile only)\n");
         show_figure(4);
         break;
-    case '5':
-        printf("你選擇了 5 : Sphere (perspective) XXX\n");
-        show_figure(5);
-        break;
-    case '6':
-        printf("你選擇了 6 : Goblet (perspective) XXX\n");
-        show_figure(6);
-        break;
     }
 }
 
@@ -317,7 +279,7 @@ int main(int argc, char** argv)
     const char* message = "按 1~6 選擇, 按 Esc 離開\n";
     common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard);
 
-    gfxinit();
+    show_figure(1);
 
     glutMainLoop();	//開始主循環繪製
 

@@ -168,6 +168,7 @@ namespace vcs_Mix00
         {
             show_button_text(sender);
 
+            //取得目前的Process
             using (Process curProcess = Process.GetCurrentProcess())
             {
                 richTextBox1.Text += "aaaa = " + curProcess.ProcessName + "\n";
@@ -178,6 +179,11 @@ namespace vcs_Mix00
                 richTextBox1.Text += "主視窗標題 :\t" + curProcess.MainWindowTitle + "\n";   //取得處理序的主視窗標題
                 richTextBox1.Text += "處理序啟動的時間 :\t" + curProcess.StartTime.ToString() + "\n";   //取得處理序的主視窗標題
                 richTextBox1.Text += "這個處理序的總處理器時間 :\t" + curProcess.TotalProcessorTime.ToString() + "\n";   //取得處理序的主視窗標題
+
+
+
+                //程序的退出
+                //Process.GetCurrentProcess().Kill();
 
 
 

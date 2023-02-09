@@ -16,15 +16,6 @@ GLfloat vertices[][3] =
     {-1.0, 1.0, 1.0}		//7
 };
 
-/*
-// Colors of the vertices.
-GLfloat colors[][3] =
-{
-    {0.0,1.0,1.0}, {1.0,0.0,0.0}, {1.0,0.0,0.0}, {0.0,1.0,1.0},
-    {0.0,1.0,0.0}, {0.0,1.0,0.0}, {0.0,1.0,0.0}, {0.0,1.0,0.0}
-};
-*/
-
 // Colors of the vertices.
 GLfloat colors[][3] =
 {
@@ -58,11 +49,38 @@ void colorcube(void)
     glColorPointer(3, GL_FLOAT, 0, colors);
 }
 
-// This function is the display callback. It draws the cube from the current viewing point.
 void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glDrawElements(GL_QUADS, 24, GL_UNSIGNED_BYTE, cubeIndices);
+
+    //已旋轉後之座標軸
+    draw_coordinates(1.5f);     //畫座標軸
+
+    /*
+    //用 GL_LINE_LOOP 畫一個空心矩形
+    glColor3f(1.0, 0.0, 0.0);	//紅
+    float dd = 1.3f;
+    float point1[3] = { -dd, -dd, 1.0 };	//左下
+    float point2[3] = { dd, -dd, 1.0 };	//右下
+    float point3[3] = { dd,  dd, 1.0 };	//右上
+    float point4[3] = { -dd,  dd, 1.0 };	//左上
+    glBegin(GL_LINE_LOOP);
+    glVertex3fv(point1);	//左下
+    glVertex3fv(point2);	//右下
+    glVertex3fv(point3);	//右上
+    glVertex3fv(point4);	//左上
+    glEnd();
+    */
+
+    glColor3f(1.0f, 1.0f, 1.0f);
+
+    int i;
+    for (i = 0; i < 8; i++)
+    {
+        glRasterPos3fv((GLfloat*)vertices[i]);
+        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '0' + i);
+    }
     glFlush();  // 執行繪圖命令
 }
 

@@ -142,7 +142,7 @@ void reshape(int w, int h)
     glViewport(0, 0, w, h);
     glMatrixMode(GL_PROJECTION);    //¤Á´«¨ì§ë¼v¯x°}
     glLoadIdentity();
-    gluOrtho2D(0.0, 3.0, 0.0, 3.0);
+    gluOrtho2D(-0.5, 3.5, -0.5, 3.5);
 }
 
 int main(int argc, char** argv)

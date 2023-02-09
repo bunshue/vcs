@@ -8,8 +8,17 @@ The perspective view is set in the reshape callback */
 #include "../../Common.h"
 
 // Vertices of the cube, centered at the origin.
-GLfloat vertices[][3] = { {-1.0,1.0,-1.0}, {1.0,1.0,-1.0}, {1.0,3.0,-1.0},
-	{-1.0,3.0,-1.0}, {-1.0,1.0,1.0}, {1.0,1.0,1.0}, {1.0,3.0,1.0}, {-1.0,3.0,1.0} };
+GLfloat vertices[][3] =
+{
+	{-1.0,1.0,-1.0},
+	{1.0,1.0,-1.0},
+	{1.0,3.0,-1.0},
+	{-1.0,3.0,-1.0},
+	{-1.0,1.0,1.0},
+	{1.0,1.0,1.0},
+	{1.0,3.0,1.0},
+	{-1.0,3.0,1.0}
+};
 
 /*
 // Colors of the vertices.
@@ -21,17 +30,29 @@ GLfloat vertex_color[][3] = {						//沒用到 R B
 */
 
 // Colors of the vertices.
-GLfloat vertex_color[][3] = {
-	{0.0,0.0,0.0}, {1.0,0.0,0.0}, {1.0,1.0,0.0},	//黑 紅 黃
-	{0.0,1.0,0.0}, {0.0,0.0,1.0}, {1.0,0.0,1.0},	//綠 藍 桃紅
-	{1.0,1.0,1.0}, {0.0,1.0,1.0}					//白 天青
+GLfloat vertex_color[][3] =
+{
+	{0.0,0.0,0.0},
+	{1.0,0.0,0.0},
+	{1.0,1.0,0.0},
+	{0.0,1.0,0.0},
+	{0.0,0.0,1.0},
+	{1.0,0.0,1.0},
+	{1.0,1.0,1.0},
+	{0.0,1.0,1.0}
 };
 
 // Shadow colors.
-GLfloat shadowcolors[][3] = {
-	{0.0,0.0,0.0}, {0.0,0.0,0.0}, {0.0,0.0,0.0},
-	{0.0,0.0,0.0}, {0.0,0.0,0.0}, {0.0,0.0,0.0},
-	{0.0,0.0,0.0}, {0.0,0.0,0.0}
+GLfloat shadowcolors[][3] =
+{
+	{0.0,0.0,0.0},
+	{0.0,0.0,0.0},
+	{0.0,0.0,0.0},
+	{0.0,0.0,0.0},
+	{0.0,0.0,0.0},
+	{0.0,0.0,0.0},
+	{0.0,0.0,0.0},
+	{0.0,0.0,0.0}
 };
 
 // Indices of the vertices to make up the six faces of the cube.
@@ -43,7 +64,8 @@ GLint axis = 1;                      /* initial axis of rotation     */
 GLdouble viewer[] = { 5.0, 5.0, 5.0 }; /* initial viewer location      */
 GLfloat light[3] = { 0.0, 10.0, 0.0 }; /* position of light            */
 GLfloat m[16];                       /* shadow transformation matrix */
-bool rotating = false;               /* rotating initially off       */
+
+int spinning = 0;
 
 // This function sets up the vertex arrays for the color cube and initializes other graphics parameters.
 void colorcube(void)
@@ -105,7 +127,7 @@ void display(void)
 /* This function is the idle callback. It spins the cube 2 degrees about the selected axis. */
 void idle(void)
 {
-	if (rotating)
+	if (spinning==1)
 	{
 		theta[axis] += 2.0;
 		if (theta[axis] > 360.0)
@@ -123,22 +145,20 @@ void mouse(int btn, int state, int x, int y)
 	if (btn == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
 	{
 		axis = 0;
-		rotating = true;
+		spinning = 1;
 	}
 	if (btn == GLUT_MIDDLE_BUTTON && state == GLUT_DOWN)
 	{
 		axis = 1;
-		rotating = true;
+		spinning = 1;
 	}
 	if (btn == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
 	{
 		axis = 2;
-		rotating = true;
+		spinning = 1;
 	}
 }
 
-/* This is the keyboard callback function. Keys change the viewer's position as well as turn
-   rotation on and off. */
 void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
 	if (key == 27)
@@ -172,13 +192,11 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
 	}
 	if ((key == 's') || (key == 'S'))
 	{
-		rotating = !rotating;
+		spinning = 1 - spinning;
 	}
 	glutPostRedisplay();
 }
 
-/* This is the reshape callback function. It produces a perspective projection of the cube. */
-// 窗口大小變化回調函數
 void reshape(int w, int h)
 {
 	glViewport(0, 0, w, h);

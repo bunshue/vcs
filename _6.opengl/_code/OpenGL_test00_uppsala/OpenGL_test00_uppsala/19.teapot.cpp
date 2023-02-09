@@ -68,6 +68,10 @@ void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
     glLoadIdentity();
+
+    //未旋轉前之座標軸
+    //draw_coordinates(1.3f);     //畫座標軸
+
     glRotatef(theta[0], 1.0, 0.0, 0.0); //對x軸旋轉特定角度
     glRotatef(theta[1], 0.0, 1.0, 0.0); //對y軸旋轉特定角度
     glRotatef(theta[2], 0.0, 0.0, 1.0); //對z軸旋轉特定角度
@@ -75,64 +79,11 @@ void display(void)
     {
         glCallList(i);
     }
-    glFlush();  // 執行繪圖命令
-}
 
-//key 枚舉值，x、y是位置, 接收 方向鍵 與 PageUp PageDown鍵
-void special(int key, int /*x*/, int /*y*/)
-{
-    switch (key)
-    {
-    case GLUT_KEY_DOWN: /* rotate around the x-axis in a negative direction */
-        printf("下 ");
-        theta[0] -= 4.0;
-        if (theta[0] < 0.0)
-        {
-            theta[0] += 360.0;
-        }
-        break;
-    case GLUT_KEY_UP: /* rotate around the x-axis in a positive direction */
-        printf("上 ");
-        theta[0] += 4.0;
-        if (theta[0] > 360.0)
-        {
-            theta[0] -= 360.0;
-        }
-        break;
-    case GLUT_KEY_PAGE_UP: /* rotate around the y-axis in a negative direction */
-        printf("PU ");
-        theta[1] -= 4.0;
-        if (theta[1] < 0.0)
-        {
-            theta[1] += 360.0;
-        }
-        break;
-    case GLUT_KEY_PAGE_DOWN: /* rotate around the y-axis in a positive direction */
-        printf("PD ");
-        theta[1] += 4.0;
-        if (theta[1] > 360.0)
-        {
-            theta[1] -= 360.0;
-        }
-        break;
-    case GLUT_KEY_RIGHT: /* rotate around the z-axis in a negative direction */
-        printf("右 ");
-        theta[2] -= 4.0;
-        if (theta[2] < 0.0)
-        {
-            theta[2] += 360.0;
-        }
-        break;
-    case GLUT_KEY_LEFT: /* rotate around the z-axis in a positive direction */
-        printf("左 ");
-        theta[2] += 4.0;
-        if (theta[2] > 360.0)
-        {
-            theta[2] -= 360.0;
-        }
-        break;
-    }
-    glutPostRedisplay();
+    //已旋轉後之座標軸
+    draw_coordinates(2.5f);     //畫座標軸
+
+    glFlush();  // 執行繪圖命令
 }
 
 /* This function gets the input data for the program to process. */
@@ -178,15 +129,77 @@ void interact(void)
     patches_file.close();
 }
 
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
+{
+    //printf("你所按按鍵的碼是%x\t此時視窗內的滑鼠座標是(%d,%d)\n", key, x, y);
+
+    switch (key)
+    {
+    case 27:
+    case 'q':
+    case 'Q':
+        //離開視窗
+        glutDestroyWindow(glutGetWindow());
+        return;
+    case 'X':
+        printf("繞 x軸 旋轉+\n");
+        theta[0] += 4.0;
+        if (theta[0] > 360.0)
+        {
+            theta[0] -= 360.0;
+        }
+        break;
+    case 'x':
+        printf("繞 x軸 旋轉-\n");
+        theta[0] -= 4.0;
+        if (theta[0] < 0.0)
+        {
+            theta[0] += 360.0;
+        }
+        break;
+    case 'Y':
+        printf("繞 y軸 旋轉+\n");
+        theta[1] += 4.0;
+        if (theta[1] > 360.0)
+        {
+            theta[1] -= 360.0;
+        }
+        break;
+    case 'y':
+        printf("繞 y軸 旋轉-\n");
+        theta[1] -= 4.0;
+        if (theta[1] < 0.0)
+        {
+            theta[1] += 360.0;
+        }
+        break;
+    case 'Z':
+        printf("繞 z軸 旋轉+\n");
+        theta[2] += 4.0;
+        if (theta[2] > 360.0)
+        {
+            theta[2] -= 360.0;
+        }
+        break;
+    case 'z':
+        printf("繞 z軸 旋轉-\n");
+        theta[2] -= 4.0;
+        if (theta[2] < 0.0)
+        {
+            theta[2] += 360.0;
+        }
+        break;
+    }
+    glutPostRedisplay();
+}
+
 int main(int argc, char** argv)
 {
     interact();		//讀取資料
 
     const char* windowName = "猶太茶壺";
-    const char* message = "猶太茶壺, 按 上 下 左 右 PageUp PageDown 控制, 按 Esc 離開\n";
-    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard0);
-
-    glutSpecialFunc(special);   //設定callback function
+    const char* message = "猶太茶壺, 按 X x Y y Z z 控制, 按 Esc 離開\n";
+    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard);
 
     gfxinit();
 

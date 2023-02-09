@@ -128,7 +128,12 @@ void interact(void)
     points[number_of_points + 1][0] = points[number_of_points][0] = points[number_of_points - 1][0];
     points[number_of_points + 1][1] = points[number_of_points][1] = points[number_of_points - 1][1];
     points[number_of_points + 1][2] = points[number_of_points][2] = 0.0;
+
     printf("讀取資料 SP, 共取得 %d 點資料\n", number_of_points);
+    for (int i = 0; i < number_of_points; i++)
+    {
+        printf("%0.10f  %0.10f\n", points[i][0], points[i][1]);
+    }
 }
 
 int main(int argc, char** argv)

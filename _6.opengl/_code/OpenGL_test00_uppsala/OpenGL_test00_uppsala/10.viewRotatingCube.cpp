@@ -50,11 +50,11 @@ GLubyte cubeIndices[24] =
 	0, 1, 5, 4		//¤U
 };
 
-
 GLfloat theta[] = { 0.0, 0.0, 0.0 };  /* initial rotation angles  */
 GLint axis = 2;                     /* initial axis of rotation */
 GLdouble viewer[] = { 0.0, 0.0, 5.0 }; /* initial viewer location  */
-bool rotating = true;               /* rotating initially on    */
+
+int spinning = 0;
 
 // This function sets up the vertex arrays for the color cube.
 void colorcube(void)
@@ -90,10 +90,13 @@ void display(void)
 /* This function is the idle callback. It spins the cube 2 degrees about the selected axis. */
 void idle(void)
 {
-	if (rotating)
+	if (spinning ==1)
 	{
 		theta[axis] += 2.0;
-		if (theta[axis] > 360.0) theta[axis] -= 360.0;
+		if (theta[axis] > 360.0)
+		{
+			theta[axis] -= 360.0;
+		}
 		glutPostRedisplay();
 		sleep(25);
 	}
@@ -105,22 +108,20 @@ void mouse(int btn, int state, int x, int y)
 	if (btn == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
 	{
 		axis = 0;
-		rotating = true;
+		spinning = 1;
 	}
 	if (btn == GLUT_MIDDLE_BUTTON && state == GLUT_DOWN)
 	{
 		axis = 1;
-		rotating = true;
+		spinning = 1;
 	}
 	if (btn == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
 	{
 		axis = 2;
-		rotating = true;
+		spinning = 1;
 	}
 }
 
-/* This is the keyboard callback function. Keys change the viewer's position as well as turn
-   rotation on and off. */
 void keyboard(unsigned char key, int x, int y)
 {
 	if (key == 27)
@@ -155,7 +156,7 @@ void keyboard(unsigned char key, int x, int y)
 	}
 	if ((key == 's') || (key == 'S'))
 	{
-		rotating = !rotating;
+		spinning = 1 - spinning;
 	}
 	glutPostRedisplay();
 }

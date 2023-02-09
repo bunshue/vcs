@@ -56,7 +56,6 @@ void colorcube(void)
 	glOrtho(-2.0, 2.0, -2.0, 2.0, -2.0, 2.0);
 }
 
-// This is the display callback function.
 void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -134,12 +133,12 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
 		spinning = 1;
 		break;
 	case 'y':
-		printf("Â¶ x¶b ±ÛÂà\n");
+		printf("Â¶ y¶b ±ÛÂà\n");
 		axis = 1;
 		spinning = 1;
 		break;
 	case 'z':
-		printf("Â¶ x¶b ±ÛÂà\n");
+		printf("Â¶ z¶b ±ÛÂà\n");
 		axis = 2;
 		spinning = 1;
 		break;

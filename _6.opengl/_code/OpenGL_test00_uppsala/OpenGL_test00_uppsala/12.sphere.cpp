@@ -6,7 +6,11 @@ wire frame, constant, and interpolative shading
 
 /*Program also illustrates defining materials and light sources in myiit() */
 
-/* mode 0 = wire frame, mode 1 = constant shading, mode 2 = interpolative shading */
+/*
+mode 0 = wire frame,
+mode 1 = constant shading,
+mode 2 = interpolative shading
+*/
 
 #include "../../Common.h"
 
@@ -23,7 +27,7 @@ point v[] =
 
 static GLfloat theta[] = { 0.0,0.0,0.0 };
 
-int n = 3;
+int num = 3;
 int mode;
 
 /* display one triangle using a line loop for wire frame, a single
@@ -78,11 +82,11 @@ void normal(point p)
 
 /* triangle subdivision using vertex numbers
 righthand rule applied to create outward pointing faces */
-void divide_triangle(point a, point b, point c, int m)
+void divide_triangle(point a, point b, point c, int num)
 {
     point v1, v2, v3;
     int j;
-    if (m > 0)
+    if (num > 0)
     {
         for (j = 0; j < 3; j++)
         {
@@ -99,10 +103,10 @@ void divide_triangle(point a, point b, point c, int m)
             v3[j] = b[j] + c[j];
         }
         normal(v3);
-        divide_triangle(a, v1, v2, m - 1);
-        divide_triangle(c, v2, v3, m - 1);
-        divide_triangle(b, v3, v1, m - 1);
-        divide_triangle(v1, v3, v2, m - 1);
+        divide_triangle(a, v1, v2, num - 1);
+        divide_triangle(c, v2, v3, num - 1);
+        divide_triangle(b, v3, v1, num - 1);
+        divide_triangle(v1, v3, v2, num - 1);
     }
     else
     {
@@ -111,12 +115,12 @@ void divide_triangle(point a, point b, point c, int m)
 }
 
 /* Apply triangle subdivision to faces of tetrahedron */
-void tetrahedron(int m)
+void tetrahedron(int num)
 {
-    divide_triangle(v[0], v[1], v[2], m);
-    divide_triangle(v[3], v[2], v[1], m);
-    divide_triangle(v[0], v[3], v[1], m);
-    divide_triangle(v[0], v[2], v[3], m);
+    divide_triangle(v[0], v[1], v[2], num);
+    divide_triangle(v[3], v[2], v[1], num);
+    divide_triangle(v[0], v[3], v[1], num);
+    divide_triangle(v[0], v[2], v[3], num);
 }
 
 /* Displays all three modes, side by side */
@@ -126,17 +130,19 @@ void display(void)
     glLoadIdentity();
 
     //畫個參考座標軸
+    draw_coordinates(3.5f);     //畫座標軸
 
-    mode = 0;
-    tetrahedron(n);
-
-    mode = 1;
     glTranslated(-2.0, 0.0, 0.0);
-    tetrahedron(n);
+    mode = 0;
+    tetrahedron(num);   //左圖
 
+    glTranslated(2.0, 0.0, 0.0);
+    mode = 1;
+    tetrahedron(num);   //中圖
+
+    glTranslated(2.0, 0.0, 0.0);
     mode = 2;
-    glTranslated(4.0, 0.0, 0.0);
-    tetrahedron(n);
+    tetrahedron(num); //右圖
 
     glutSwapBuffers();
 }

@@ -22,6 +22,8 @@ void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
 
+    draw_coordinates(0.85f);     //µe®y¼Ð¶b
+
     glColor4f(1.0, 0.0, 0.0, 0.5); //R
     glRectf(-0.6f, -0.2f, 0.6f, 0.8f);
 
