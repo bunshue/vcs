@@ -50,6 +50,7 @@ void plotCurve(float (*func)(float), float* color, float x_st, float x_sp, const
 
 void draw_math_function1(void)
 {
+    printf("draw_math_function1()\n");
     //畫數學函數曲線
     float x_st = -(float)PI / 4.0f;
     float x_sp = (float)PI / 4.0f;
@@ -57,33 +58,26 @@ void draw_math_function1(void)
     plotCurve(my_function, color_r, x_st, x_sp, steps);
 }
 
-Point pt[50];
+#define POINTS     50
+Point pt[POINTS];
 int pt_count = 0;
-
-void SetPoint(float x, float y)
-{
-    pt[pt_count].x = x;
-    pt[pt_count].y = y;
-    pt_count++;
-}
 
 void draw_math_function2(void)
 {
-    int i;
-
     printf("draw_math_function2()\n");
 
-    printf("Make some data\n");
-
-    pt_count = 0;
-
+    int i;
     float x;
     float y;
-    for (i = 0; i < 50; i++)
+    pt_count = 0;
+    for (i = 0; i < POINTS; i++)
     {
-        x = -1.0f + 2.0f * (float)i / 50;
+        x = -1.0f + 2.0f * (float)i / POINTS;
         y = sin(x * 4) / 2;
-        SetPoint(x, y);
+
+        pt[pt_count].x = x;
+        pt[pt_count].y = y;
+        pt_count++;
     }
 
     glColor3f(1.0, 0.0, 1.0);
@@ -96,6 +90,27 @@ void draw_math_function2(void)
     glEnd();
 
     glFlush();  // 執行繪圖命令
+}
+
+void print_data()
+{
+    printf("共 %d 筆資料, 內容:\n", POINTS);
+    for (int i = 0; i < POINTS; i++)
+    {
+        printf("(%d, %f)", (int)(pt[i].x), pt[i].y);
+        if (i % 6 == 5)
+            printf("\n");
+        else
+            printf(" ");
+    }
+    printf("\n");
+
+    for (int i = 0; i < POINTS; i++)
+    {
+        printf("%0.10f  %0.10f\n", pt[i].x, pt[i].x);
+    }
+
+    return;
 }
 
 // 繪圖回調函數

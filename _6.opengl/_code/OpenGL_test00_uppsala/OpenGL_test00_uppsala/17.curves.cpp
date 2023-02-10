@@ -2,11 +2,9 @@
 
 #define WINDOW_SIZE  600  /* initial size of window                             */
 #define BORDER        10  /* border width in each viewport                      */
-#define MAX_POINTS   100  /* maximum number of control points                   */
 
-double px[MAX_POINTS];
-double py[MAX_POINTS];
-
+#define POINTS     151
+Point points[POINTS];
 int number_of_points = 0;
 
 int WindowSizeX = WINDOW_SIZE;
@@ -74,10 +72,10 @@ void make_curve_data(void)
     }
 
     //讀取檔案資料
-    while (points_file >> px[number_of_points] >> py[number_of_points]) //C++之讀取檔案資料
+    while (points_file >> points[number_of_points].x >> points[number_of_points].y) //C++之讀取檔案資料
     {
         number_of_points++;
-        if (number_of_points == MAX_POINTS)
+        if (number_of_points == POINTS)
         {
             cout << "Data arrays are full. If any more data is present it will not be plotted." << endl;
             break;
@@ -89,7 +87,7 @@ void make_curve_data(void)
 
     for (int i = 0; i < number_of_points; i++)
     {
-        printf("%0.10f  %0.10f\n", px[i], py[i]);
+        printf("%0.10f  %0.10f\n", points[i].x, points[i].y);
     }
 }
 
@@ -102,14 +100,15 @@ void gfxinit()
     glNewList(1, GL_COMPILE);
     glColor3f(1.0, 0.0, 0.0);  /* Draw the marks in red. */
 
+    //畫X標記
     glBegin(GL_LINES);
-    double markd = 0.01f;
+    float markd = 0.01f;
     for (int i = 0; i < number_of_points; i++)
     {
-        glVertex2d(px[i] - markd, py[i] - markd);   //左下
-        glVertex2d(px[i] + markd, py[i] + markd);   //右上
-        glVertex2d(px[i] - markd, py[i] + markd);   //左上
-        glVertex2d(px[i] + markd, py[i] - markd);   //右下
+        glVertex2d(points[i].x - markd, points[i].y - markd);   //左下
+        glVertex2d(points[i].x + markd, points[i].y + markd);   //右上
+        glVertex2d(points[i].x - markd, points[i].y + markd);   //左上
+        glVertex2d(points[i].x + markd, points[i].y - markd);   //右下
     }
     glEnd();
 

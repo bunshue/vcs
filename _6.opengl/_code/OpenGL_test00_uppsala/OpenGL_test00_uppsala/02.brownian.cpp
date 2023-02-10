@@ -6,14 +6,13 @@
 
 #include "../../Common.h"
 
-#define POINTS     51
 #define SEED srand
 #define RANDNUM rand
 #define RANDMAX RAND_MAX
 
-typedef GLfloat point[2];
+#define POINTS     151
+Point points[POINTS];
 
-point points[POINTS];
 int Arand;
 int Nrand;
 double GaussAdd;
@@ -50,24 +49,23 @@ void make_gaussian_data()
     float displacement;
     int i;
 
-    points[0][0] = 0.0f;
-    points[0][1] = 0.0f;
-
     // Begin by computing the vertices for the line as the sum of Gaussian random variables.
     InitGauss((int)time(NULL));
     displacement = 0.0f;
-    points[0][0] = points[0][1] = 0.0;
+
+    points[0].x = 0.0f;
+    points[0].y = 0.0f;
     for (i = 1; i < POINTS; i++)
     {
         displacement += (float)Gauss();
-        points[i][0] = (float)i;
-        points[i][1] = displacement;
-        //points[i][1] = (float)i/10;     //debug
+        points[i].x = (float)i;
+        points[i].y = displacement;
+        //points[i].y = (float)i/10;     //debug
     }
     winLimit = 2.0 * sqrt((double)POINTS);
     //printf("winLimit = %f\n", winLimit);
 
-    points[POINTS / 2][1] = 20.0f;     //故意造一個特大點
+    points[POINTS / 2].y = 20.0f;     //故意造一個特大點
 
     return;
 }
@@ -77,18 +75,18 @@ void make_sine_data()
 {
     int i;
 
-    points[0][0] = 0.0f;
-    points[0][1] = 0.0f;
+    points[0].x = 0.0f;
+    points[0].y = 0.0f;
     for (i = 1; i < POINTS; i++)
     {
-        points[i][0] = (float)i;
-        points[i][1] = 25.0f * sin(PI * (float)(i + t) / 180);
+        points[i].x = (float)i;
+        points[i].y = 25.0f * sin(PI * (float)(i + t) / 180);
     }
     t++;
     winLimit = 2.0 * sqrt((double)POINTS);
     //printf("winLimit = %f\n", winLimit);
 
-    points[POINTS / 2][1] = 20.0f;     //故意造一個特大點
+    points[POINTS / 2].y = 20.0f;     //故意造一個特大點
 
     return;
 }
@@ -98,7 +96,7 @@ void print_data()
     printf("共 %d 筆資料, 內容:\n", POINTS);
     for (int i = 0; i < POINTS; i++)
     {
-        printf("(%d, %f)", (int)(points[i][0]), points[i][1]);
+        printf("(%d, %f)", (int)(points[i].x), points[i].y);
         if (i % 6 == 5)
             printf("\n");
         else
@@ -108,7 +106,7 @@ void print_data()
 
     for (int i = 0; i < POINTS; i++)
     {
-        printf("%0.10f  %0.10f\n", points[i][0], points[i][1]);
+        printf("%0.10f  %0.10f\n", points[i].x, points[i].y);
     }
 
     return;
@@ -137,7 +135,7 @@ void display(void)
     glBegin(GL_LINE_STRIP);        /* Draw a line defined by some points.*/
     for (int i = 0; i < POINTS; i++)
     {
-        glVertex2fv(points[i]);
+        glVertex2f(points[i].x, points[i].y);
     }
     glEnd();
 

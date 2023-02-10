@@ -1,4 +1,5 @@
-//使用 OpenGL evaluators 畫圖, 畫 Bezier curve
+//evaluator.cpp
+//This program fits a set of data with a Bezier curve using OpenGL evaluators
 
 #include "../../Common.h"
 
@@ -6,8 +7,7 @@
 #define STEPS        20  /* number of steps to draw each segment over */
 
 #define POINTS     100
-float points[POINTS + 2][3];    //多兩點給 Bezier curve 用
-//Point points[POINTS]; reserved
+Point points[POINTS];
 int number_of_points = 0;
 
 float minx;
@@ -20,38 +20,19 @@ float yrange;
 /* This is the routine that generates the image to be displayed. */
 void gfxinit()
 {
-    int i, j;
-
     glClearColor(1.0, 1.0, 1.0, 0.0); /* Make the background white. */
-    glEnable(GL_MAP1_VERTEX_3);
 
     /* Generate the display list for the points. */
     //在 List 1 製作第1張圖
     glNewList(1, GL_COMPILE);
-    glColor3f(1.0f, 0.0f, 0.0f);    //紅點
+    glColor3d(1.0, 0.0, 0.0);
     glPointSize(4.0);
     glBegin(GL_POINTS);
-    for (i = 0; i < number_of_points; i++)
+    for (int i = 0; i < number_of_points; i++)
     {
-        glVertex3fv(&points[i][0]);
+        glVertex2f(points[i].x, points[i].y);
     }
     glEnd();
-    glEndList();
-
-    /* Generate the display list for the curve. */
-    //在 List 2 製作第1張圖
-    glNewList(2, GL_COMPILE);
-    glColor3f(0.0f, 0.0f, 0.0f);   //黑線
-    for (j = 0; j < number_of_points; j += 3)
-    {
-        glMap1f(GL_MAP1_VERTEX_3, 0.0, STEPS, 3, 4, &points[j][0]);
-        glBegin(GL_LINE_STRIP);
-        for (i = 0; i <= STEPS; i++)
-        {
-            glEvalCoord1f(i);
-        }
-        glEnd();
-    }
     glEndList();
 }
 
@@ -70,7 +51,6 @@ void display(void)
     glClear(GL_COLOR_BUFFER_BIT);
 
     glCallList(1);  //顯示第1張圖
-    glCallList(2);  //顯示第2張圖
 
     glFlush();  // 執行繪圖命令
 }
@@ -94,25 +74,24 @@ void make_curve_data(void)
     /* Read file into arrays, determining maximum and minimum values and ranges. */
     maxx = maxy = -1.0e38;
     minx = miny = 1.0e38;
-    while (points_file >> points[number_of_points][0] >> points[number_of_points][1])
+    while (points_file >> points[number_of_points].x >> points[number_of_points].y)
     {
-        if (points[number_of_points][0] < minx)
+        if (points[number_of_points].x < minx)
         {
-            minx = points[number_of_points][0];
+            minx = points[number_of_points].x;
         }
-        if (points[number_of_points][0] > maxx)
+        if (points[number_of_points].x > maxx)
         {
-            maxx = points[number_of_points][0];
+            maxx = points[number_of_points].x;
         }
-        if (points[number_of_points][1] < miny)
+        if (points[number_of_points].y < miny)
         {
-            miny = points[number_of_points][1];
+            miny = points[number_of_points].y;
         }
-        if (points[number_of_points][1] > maxy)
+        if (points[number_of_points].y > maxy)
         {
-            maxy = points[number_of_points][1];
+            maxy = points[number_of_points].y;
         }
-        points[number_of_points][2] = 0.0;
         number_of_points++;
         if (number_of_points == POINTS)
         {
@@ -123,17 +102,10 @@ void make_curve_data(void)
     xrange = maxx - minx;
     yrange = maxy - miny;
 
-    /* Load two additional copies of last point to make sure the right number of
-       data points are available for a Bezier curve. */
-
-    points[number_of_points + 1][0] = points[number_of_points][0] = points[number_of_points - 1][0];
-    points[number_of_points + 1][1] = points[number_of_points][1] = points[number_of_points - 1][1];
-    points[number_of_points + 1][2] = points[number_of_points][2] = 0.0;
-
     printf("讀取資料 SP, 共取得 %d 點資料\n", number_of_points);
     for (int i = 0; i < number_of_points; i++)
     {
-        printf("%0.10f  %0.10f\n", points[i][0], points[i][1]);
+        printf("%0.10f  %0.10f\n", points[i].x, points[i].y);
     }
 }
 
