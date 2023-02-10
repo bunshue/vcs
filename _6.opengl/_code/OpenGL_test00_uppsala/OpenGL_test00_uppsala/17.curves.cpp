@@ -10,6 +10,63 @@ int number_of_points = 0;
 int WindowSizeX = WINDOW_SIZE;
 int WindowSizeY = WINDOW_SIZE;
 
+void make_data_4_file(void)
+{
+    printf("讀取資料 ST\n");
+
+    ifstream points_file;
+
+    //開啟檔案
+    points_file.open("data/17.points.dat", ios::in);
+    if (points_file.is_open() == false)
+    {
+        cerr << "Data file 'points.dat' not found." << endl;
+        exit(EXIT_FAILURE);
+    }
+
+    //讀取檔案資料
+    while (points_file >> points[number_of_points].x >> points[number_of_points].y) //C++之讀取檔案資料
+    {
+        number_of_points++;
+        if (number_of_points == POINTS)
+        {
+            cout << "Data arrays are full. If any more data is present it will not be plotted." << endl;
+            break;
+        }
+    }
+    points_file.close();
+
+    printf("讀取資料 SP, 共取得 %d 點資料\n", number_of_points);
+
+    for (int i = 0; i < number_of_points; i++)
+    {
+        printf("%0.10f  %0.10f\n", points[i].x, points[i].y);
+    }
+}
+
+void init_data_4()
+{
+    glClearColor(1.0, 1.0, 1.0, 0.0); /* Make the background white. */
+
+    //在 List 1 製作第 1 張圖
+    glNewList(1, GL_COMPILE);
+    glColor3f(1.0, 0.0, 0.0);  /* Draw the marks in red. */
+
+    //畫X標記
+    glBegin(GL_LINES);
+    float markd = 0.01f;
+    for (int i = 0; i < number_of_points; i++)
+    {
+        glVertex2d(points[i].x - markd, points[i].y - markd);   //左下
+        glVertex2d(points[i].x + markd, points[i].y + markd);   //右上
+        glVertex2d(points[i].x - markd, points[i].y + markd);   //左上
+        glVertex2d(points[i].x + markd, points[i].y - markd);   //右下
+    }
+    glEnd();
+
+    glEndList();
+}
+
 void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -56,76 +113,15 @@ void display(void)
     glFlush();  // 執行繪圖命令
 }
 
-/* This function gets the input data for the program to process. */
-void make_curve_data(void)
-{
-    printf("讀取資料 ST\n");
-
-    ifstream points_file;
-
-    //開啟檔案
-    points_file.open("data/17.points.dat", ios::in);
-    if (points_file.is_open() == false)
-    {
-        cerr << "Data file 'points.dat' not found." << endl;
-        exit(EXIT_FAILURE);
-    }
-
-    //讀取檔案資料
-    while (points_file >> points[number_of_points].x >> points[number_of_points].y) //C++之讀取檔案資料
-    {
-        number_of_points++;
-        if (number_of_points == POINTS)
-        {
-            cout << "Data arrays are full. If any more data is present it will not be plotted." << endl;
-            break;
-        }
-    }
-    points_file.close();
-
-    printf("讀取資料 SP, 共取得 %d 點資料\n", number_of_points);
-
-    for (int i = 0; i < number_of_points; i++)
-    {
-        printf("%0.10f  %0.10f\n", points[i].x, points[i].y);
-    }
-}
-
-/* This is the routine that generates the image to be displayed. */
-void gfxinit()
-{
-    glClearColor(1.0, 1.0, 1.0, 0.0); /* Make the background white. */
-
-    //在 List 1 製作第 1 張圖
-    glNewList(1, GL_COMPILE);
-    glColor3f(1.0, 0.0, 0.0);  /* Draw the marks in red. */
-
-    //畫X標記
-    glBegin(GL_LINES);
-    float markd = 0.01f;
-    for (int i = 0; i < number_of_points; i++)
-    {
-        glVertex2d(points[i].x - markd, points[i].y - markd);   //左下
-        glVertex2d(points[i].x + markd, points[i].y + markd);   //右上
-        glVertex2d(points[i].x - markd, points[i].y + markd);   //左上
-        glVertex2d(points[i].x + markd, points[i].y - markd);   //右下
-    }
-    glEnd();
-
-    glEndList();
-}
-
 int main(int argc, char** argv)
 {
-    make_curve_data();		//讀取資料
+    make_data_4_file();    //製作資料4. 讀檔案
 
     const char* windowName = "Curve Fitting";
     const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
     common_setup(argc, argv, windowName, message, 0, WindowSizeX, WindowSizeY, 1100, 200, display, reshape0, keyboard0);
 
-    gfxinit();
-
-    printf("僅顯示, 無控制, 按 Esc 離開\n");
+    init_data_4();
 
     glutMainLoop();	//開始主循環繪製
 

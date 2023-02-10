@@ -44,7 +44,7 @@ double Gauss()
     return (GaussFac * sum - GaussAdd);
 }
 
-void make_gaussian_data()
+void make_data_3_gaussian()
 {
     float displacement;
     int i;
@@ -71,13 +71,11 @@ void make_gaussian_data()
 }
 
 int t = 0;
-void make_sine_data()
+void make_data_2_sine()
 {
-    int i;
-
     points[0].x = 0.0f;
     points[0].y = 0.0f;
-    for (i = 1; i < POINTS; i++)
+    for (int i = 1; i < POINTS; i++)
     {
         points[i].x = (float)i;
         points[i].y = 25.0f * sin(PI * (float)(i + t) / 180);
@@ -114,11 +112,11 @@ void print_data()
 
 void display(void)
 {
-    make_gaussian_data();    //製作資料
-    //make_sine_data();    //製作資料
+    //make_data_1_array();    //製作資料1, 設定陣列, TBD
+    //make_data_2_sine();	//製作資料2, 計算
+    make_data_3_gaussian();//製作資料3, 高斯計算
+    //make_data_4_file();    //製作資料4. 讀檔案, TBD
 
-
-    //printf("共 %d 筆資料\n", POINTS);
     //print_data();
 
     glClear(GL_COLOR_BUFFER_BIT);   //全圖黑色
@@ -142,22 +140,6 @@ void display(void)
     glFlush();  // 執行繪圖命令
 }
 
-void keyboard(unsigned char key, int /*x*/, int /*y*/)
-{
-    switch (key)
-    {
-    case 27:
-        glutDestroyWindow(glutGetWindow());
-        return;
-        break;
-    case 'r':
-        glutPostRedisplay();    //將當前視窗打上標記，標記其需要再次顯示。
-        break;
-    case '2':
-        break;
-    }
-}
-
 void idle(void)
 {
     glutPostRedisplay();    //將當前視窗打上標記，標記其需要再次顯示。
@@ -167,7 +149,7 @@ int main(int argc, char** argv)
 {
     const char* windowName = "布朗運動";
     const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
-    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard);
+    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard0);
 
     //glutIdleFunc(idle);
 

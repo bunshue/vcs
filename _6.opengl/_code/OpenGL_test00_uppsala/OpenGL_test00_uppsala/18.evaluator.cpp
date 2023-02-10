@@ -17,66 +17,7 @@ float maxy;
 float xrange;
 float yrange;
 
-/* This is the routine that generates the image to be displayed. */
-void gfxinit()
-{
-    int i, j;
-
-    glClearColor(1.0, 1.0, 1.0, 0.0); /* Make the background white. */
-    glEnable(GL_MAP1_VERTEX_3);
-
-    /* Generate the display list for the points. */
-    //在 List 1 製作第1張圖
-    glNewList(1, GL_COMPILE);
-    glColor3f(1.0f, 0.0f, 0.0f);    //紅點
-    glPointSize(4.0);
-    glBegin(GL_POINTS);
-    for (i = 0; i < number_of_points; i++)
-    {
-        glVertex3fv(&points[i][0]);
-    }
-    glEnd();
-    glEndList();
-
-    /* Generate the display list for the curve. */
-    //在 List 2 製作第1張圖
-    glNewList(2, GL_COMPILE);
-    glColor3f(0.0f, 0.0f, 0.0f);   //黑線
-    for (j = 0; j < number_of_points; j += 3)
-    {
-        glMap1f(GL_MAP1_VERTEX_3, 0.0, STEPS, 3, 4, &points[j][0]);
-        glBegin(GL_LINE_STRIP);
-        for (i = 0; i <= STEPS; i++)
-        {
-            glEvalCoord1f(i);
-        }
-        glEnd();
-    }
-    glEndList();
-}
-
-/* This is the callback function that gets executed every time the display size has changed. */
-void reshape(int width, int height)
-{
-    glViewport(0, 0, width, height);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluOrtho2D(minx - 0.05 * xrange, maxx + 0.05 * xrange, miny - 0.05 * yrange, maxy + 0.05 * yrange);
-}
-
-/* This is the callback function that gets executed every time the display needs to be updated. */
-void display(void)
-{
-    glClear(GL_COLOR_BUFFER_BIT);
-
-    glCallList(1);  //顯示第1張圖
-    glCallList(2);  //顯示第2張圖
-
-    glFlush();  // 執行繪圖命令
-}
-
-/* This function gets the input data for the program to process. */
-void make_curve_data(void)
+void make_data_4_file(void)
 {
     printf("讀取資料 ST\n");
 
@@ -137,16 +78,74 @@ void make_curve_data(void)
     }
 }
 
+void init_data_4()
+{
+    int i, j;
+
+    glClearColor(1.0, 1.0, 1.0, 0.0); /* Make the background white. */
+    glEnable(GL_MAP1_VERTEX_3);
+
+    /* Generate the display list for the points. */
+    //在 List 1 製作第1張圖
+    glNewList(1, GL_COMPILE);
+    glColor3f(1.0f, 0.0f, 0.0f);    //紅點
+    glPointSize(4.0);
+    glBegin(GL_POINTS);
+    for (i = 0; i < number_of_points; i++)
+    {
+        glVertex3fv(&points[i][0]);
+    }
+    glEnd();
+    glEndList();
+
+    /* Generate the display list for the curve. */
+    //在 List 2 製作第1張圖
+    glNewList(2, GL_COMPILE);
+    glColor3f(0.0f, 0.0f, 0.0f);   //黑線
+    for (j = 0; j < number_of_points; j += 3)
+    {
+        glMap1f(GL_MAP1_VERTEX_3, 0.0, STEPS, 3, 4, &points[j][0]);
+        glBegin(GL_LINE_STRIP);
+        for (i = 0; i <= STEPS; i++)
+        {
+            glEvalCoord1f(i);
+        }
+        glEnd();
+    }
+    glEndList();
+}
+
+void reshape(int width, int height)
+{
+    glViewport(0, 0, width, height);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+
+    //gluOrtho2D(minx - 0.05 * xrange, maxx + 0.05 * xrange, miny - 0.05 * yrange, maxy + 0.05 * yrange);
+    //printf("%f %f %f %f\n", minx - 0.05 * xrange, maxx + 0.05 * xrange, miny - 0.05 * yrange, maxy + 0.05 * yrange);
+
+    gluOrtho2D(-0.1f, 1.1f, -0.1f, 1.1f);
+}
+
+void display(void)
+{
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    glCallList(1);  //顯示第1張圖
+    glCallList(2);  //顯示第2張圖
+
+    glFlush();  // 執行繪圖命令
+}
+
 int main(int argc, char** argv)
 {
-    make_curve_data();		//讀取資料
+    make_data_4_file();    //製作資料4. 讀檔案
 
     const char* windowName = "Curve Fitting with Evaluators";
     const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
-
     common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard0);
 
-    gfxinit();
+    init_data_4();
 
     glutMainLoop();	//開始主循環繪製
 
