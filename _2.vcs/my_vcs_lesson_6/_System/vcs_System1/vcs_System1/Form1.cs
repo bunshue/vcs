@@ -208,7 +208,7 @@ namespace vcs_System1
             {
                 // 顯示MessageBox 
                 DialogResult Result = MessageBox.Show("確定關閉表單", "表單訊息", MessageBoxButtons.YesNo);
-                if (Result == System.Windows.Forms.DialogResult.Yes)
+                if (Result == DialogResult.Yes)
                 {
                     // 關閉Form 
                     this.Close();
@@ -298,7 +298,7 @@ namespace vcs_System1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            //檢視目前系統版本
+            //取得目前Windows版本
 
             OperatingSystem myOS = Environment.OSVersion;
             if (myOS.Version.Major == 5)
@@ -323,6 +323,90 @@ namespace vcs_System1
             {
                 MessageBox.Show("系統版本：" + myOS.VersionString + " " + myOS.ServicePack);
             }
+
+            //檢視目前系統版本
+            OperatingSystem os = Environment.OSVersion;
+            richTextBox1.Text += "目前系統版本： " + os.ToString() + "\n";
+            richTextBox1.Text += "目前系統版本.Version： " + os.Version.ToString() + "\n";
+            richTextBox1.Text += "目前系統版本.Platform： " + os.Platform.ToString() + "\n";
+            richTextBox1.Text += "目前系統版本： ";
+            if (os.Version.Major == 5)
+            {
+                switch (os.Version.Minor)
+                {
+                    case 0:
+                        richTextBox1.Text += "Windows 2000 " + os.ServicePack + "\n";
+                        break;
+                    case 1:
+                        richTextBox1.Text += "Windows XP " + os.ServicePack + "\n";
+                        break;
+                    case 2:
+                        richTextBox1.Text += "Windows Server 2003 " + " " + os.ServicePack + "\n";
+                        break;
+                    default:
+                        richTextBox1.Text += os.ToString() + " " + os.ServicePack + "\n";
+                        break;
+                }
+            }
+            else
+            {
+                richTextBox1.Text += os.VersionString + " " + os.ServicePack + "\n";
+            }
+
+            //判斷 User 電腦作業系統與位元數
+            richTextBox1.Text += "Windows 作業系統 : " + GetOS() + ", " + GetBit() + "\n";
+
+
+
+
+
+
+
+
+        }
+
+
+        private static string GetOS()
+        {
+            //定義系統版本
+            Version ver = Environment.OSVersion.Version;
+            //Major主版本號,Minor副版本號
+            if (ver.Major == 5 && ver.Minor == 0)
+            {
+                return "Windows 2000";
+            }
+            else if (ver.Major == 5 && ver.Minor == 1)
+            {
+                return "Windows XP";
+            }
+            else if (ver.Major == 5 && ver.Minor == 2)
+            {
+                return "Windows 2003";
+            }
+            else if (ver.Major == 6 && ver.Minor == 0)
+            {
+                return "Windows Vista";
+            }
+            else if (ver.Major == 6 && ver.Minor == 1)
+            {
+                return "Windows7";
+            }
+            else if (ver.Major == 6 && ver.Minor == 2)
+            {
+                return "Windows10";
+            }
+            else
+            {
+                return "未知";
+            }
+        }
+
+        private static string GetBit()
+        {
+            if (Environment.Is64BitOperatingSystem)
+                return "64bit";
+            else
+                return "32bit";
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -368,8 +452,6 @@ namespace vcs_System1
         private void button6_Click(object sender, EventArgs e)
         {
             //.Net C# 取得電腦名稱
-            //Windows 及 LINUX 都正常
-
             richTextBox1.Text += "電腦名稱 1 : " + Environment.MachineName + "\n";
             richTextBox1.Text += "電腦名稱 2 : " + Dns.GetHostName() + "\n";
             richTextBox1.Text += "電腦名稱 3 : " + SystemInformation.ComputerName + "\n";
@@ -570,7 +652,6 @@ namespace vcs_System1
             AboutBox1 formab = new AboutBox1();
             formab.ShowDialog();
 
-
             //方案總管空白處按右鍵/屬性/組件資訊, 修改要顯示的程式資訊
         }
 
@@ -588,50 +669,6 @@ namespace vcs_System1
 
         private void button28_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "作業系統 : " + GetOS() + ", " + GetBit() + "\n";
-        }
-
-        private static string GetOS()
-        {
-            //定義系統版本
-            Version ver = Environment.OSVersion.Version;
-            //Major主版本號,Minor副版本號
-            if (ver.Major == 5 && ver.Minor == 0)
-            {
-                return "Windows 2000";
-            }
-            else if (ver.Major == 5 && ver.Minor == 1)
-            {
-                return "Windows XP";
-            }
-            else if (ver.Major == 5 && ver.Minor == 2)
-            {
-                return "Windows 2003";
-            }
-            else if (ver.Major == 6 && ver.Minor == 0)
-            {
-                return "Windows Vista";
-            }
-            else if (ver.Major == 6 && ver.Minor == 1)
-            {
-                return "Windows7";
-            }
-            else if (ver.Major == 6 && ver.Minor == 2)
-            {
-                return "Windows10";
-            }
-            else
-            {
-                return "未知";
-            }
-        }
-
-        private static string GetBit()
-        {
-            if (Environment.Is64BitOperatingSystem)
-                return "64bit";
-            else
-                return "32bit";
         }
 
         private void button29_Click(object sender, EventArgs e)
@@ -1181,35 +1218,6 @@ namespace vcs_System1
             richTextBox1.Text += "作業系統在" + str + "\n";
             string dir = str.Substring(0, 2);
             richTextBox1.Text += "作業系統在" + dir + "\n";
-
-            //檢視目前系統版本
-            OperatingSystem os = Environment.OSVersion;
-            richTextBox1.Text += "目前系統版本： " + os.ToString() + "\n";
-            richTextBox1.Text += "目前系統版本.Version： " + os.Version.ToString() + "\n";
-            richTextBox1.Text += "目前系統版本.Platform： " + os.Platform.ToString() + "\n";
-            richTextBox1.Text += "目前系統版本： ";
-            if (os.Version.Major == 5)
-            {
-                switch (os.Version.Minor)
-                {
-                    case 0:
-                        richTextBox1.Text += "Windows 2000 " + os.ServicePack + "\n";
-                        break;
-                    case 1:
-                        richTextBox1.Text += "Windows XP " + os.ServicePack + "\n";
-                        break;
-                    case 2:
-                        richTextBox1.Text += "Windows Server 2003 " + " " + os.ServicePack + "\n";
-                        break;
-                    default:
-                        richTextBox1.Text += os.ToString() + " " + os.ServicePack + "\n";
-                        break;
-                }
-            }
-            else
-            {
-                richTextBox1.Text += os.VersionString + " " + os.ServicePack + "\n";
-            }
         }
 
         private void button61_Click(object sender, EventArgs e)

@@ -142,7 +142,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(240, 50);
             this.button2.TabIndex = 2;
-            this.button2.Text = "檢視目前系統版本";
+            this.button2.Text = "取得目前Windows版本";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -376,7 +376,6 @@
             this.button28.Name = "button28";
             this.button28.Size = new System.Drawing.Size(240, 50);
             this.button28.TabIndex = 29;
-            this.button28.Text = "判斷 User 電腦作業系統與位元數";
             this.button28.UseVisualStyleBackColor = true;
             this.button28.Click += new System.EventHandler(this.button28_Click);
             // 

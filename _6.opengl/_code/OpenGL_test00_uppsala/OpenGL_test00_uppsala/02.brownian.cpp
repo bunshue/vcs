@@ -6,7 +6,7 @@
 
 #include "../../Common.h"
 
-#define POINTS     360
+#define POINTS     51
 #define SEED srand
 #define RANDNUM rand
 #define RANDMAX RAND_MAX
@@ -95,9 +95,8 @@ void make_sine_data()
 
 void print_data()
 {
-    int i;
     printf("共 %d 筆資料, 內容:\n", POINTS);
-    for (i = 0; i < POINTS; i++)
+    for (int i = 0; i < POINTS; i++)
     {
         printf("(%d, %f)", (int)(points[i][0]), points[i][1]);
         if (i % 6 == 5)
@@ -106,6 +105,12 @@ void print_data()
             printf(" ");
     }
     printf("\n");
+
+    for (int i = 0; i < POINTS; i++)
+    {
+        printf("%0.10f  %0.10f\n", points[i][0], points[i][1]);
+    }
+
     return;
 }
 
@@ -114,6 +119,8 @@ void display(void)
     make_gaussian_data();    //製作資料
     //make_sine_data();    //製作資料
 
+
+    //printf("共 %d 筆資料\n", POINTS);
     //print_data();
 
     glClear(GL_COLOR_BUFFER_BIT);   //全圖黑色

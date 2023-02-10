@@ -75,7 +75,7 @@ void display(void)
 }
 
 /* This function gets the input data for the program to process. */
-void interact(void)
+void make_curve_data(void)
 {
     printf("讀取資料 ST\n");
 
@@ -138,7 +138,7 @@ void interact(void)
 
 int main(int argc, char** argv)
 {
-    interact();		//讀取資料
+    make_curve_data();		//讀取資料
 
     const char* windowName = "Curve Fitting with Evaluators";
     const char* message = "僅顯示, 無控制, 按 Esc 離開\n";

@@ -154,6 +154,61 @@ namespace vcs_Process1
                     richTextBox1.Text += String.Format("Name: {0} \tID: {1}", processes[index].ProcessName, processes[index].Id) + "\n\n";
                 }
             }
+
+            richTextBox1.Text += "\n\n\n";
+            richTextBox1.Text += "獲取系統進程的用戶名\n";
+            foreach (Process p in Process.GetProcesses())
+            {
+                //Console.Write(p.ProcessName);
+                //Console.Write("----");
+                //Console.WriteLine(GetProcessUserName(p.Id));
+
+                richTextBox1.Text += p.ProcessName + "\t" + GetProcessUserName(p.Id) + "\n";
+            }
+
+            richTextBox1.Text += "\n\n\n";
+            richTextBox1.Text += "取得所有程序\n";
+
+            //取得本機端上執行中的應用程式
+            //[C#]取得本機端上，執行中有 GUI 介面的應用程式
+            //Environment.MachineName 屬性 : 取得這個本機電腦的 NetBIOS 名稱。
+            //Process.GetProcesses 方法 (String) : 為指定電腦上的每個處理序資源建立新的 Process 元件。
+            //Process.MainWindowHandle 屬性 : 取得相關處理序主視窗的視窗控制代碼。
+            foreach (Process process in Process.GetProcesses(Environment.MachineName))
+            {
+                if (process.MainWindowHandle != IntPtr.Zero)  // 判斷 MainWindowHandle 為非零值的應用程式，表示有主視窗
+                {
+                    //listBox1.Items.Add(process.ToString());
+                    richTextBox1.Text += process.ToString() + "\n";
+                }
+            }
+
+            richTextBox1.Text += "取得所有程序\n";
+
+            // 列出系統中所有的程序
+            //Process[] processes2 = Process.GetProcesses(Environment.MachineName);   //相同
+            Process[] processes2 = Process.GetProcesses();   //取得所有程序
+            richTextBox1.Text += "系統中有： " + processes2.Length.ToString() + " 個程序\n";
+
+            foreach (Process process in processes2)
+            {
+                /*
+                // 因為使用 Idle 的 StartTime 會造成錯誤，因此先排除。對其他程序取時間也會造成錯誤，故不用。
+                if (!process.ProcessName.Equals("Idle"))
+                {
+                    // 顯示程序的名稱及啟動時間
+                    richTextBox1.Text += process.ProcessName + "\t\t" + process.StartTime.ToString("yyyy/MM/dd HH:mm:ss") + "\n";
+                }
+                else
+                {
+                    richTextBox1.Text += process.ProcessName + "\t\t" + "xxxxxxxxxxxxxxxx\n";
+                }
+                */
+
+                richTextBox1.Text += process.ProcessName + "\n";
+            }
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -324,89 +379,18 @@ namespace vcs_Process1
 
         private void button5_Click(object sender, EventArgs e)
         {
-            //關閉計算機(偽)
-            string exe_filename = "cmd.exe";    //要執行的程序名稱
-            Process process = new Process();
-            process.StartInfo.FileName = exe_filename;    //設定要啟動的程式
-            process.StartInfo.UseShellExecute = false;    //是否使用系統外殼程序啟動進程
-            process.StartInfo.RedirectStandardInput = true;//是否從流中讀取
-            process.StartInfo.RedirectStandardOutput = true;//是否寫入流
-            process.StartInfo.RedirectStandardError = true;//是否將錯誤信息寫入流
-            process.StartInfo.CreateNoWindow = true;//是否在新窗口中啟動進程
-
-            //偽執行
-            //process.Start();//啟動進程
-            //process.StandardInput.WriteLine("shutdown -s -t 0");//執行關機命令
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //重啟計算機(偽)
-            string exe_filename = "cmd.exe";    //要執行的程序名稱
-            Process process = new Process();
-            process.StartInfo.FileName = exe_filename;  //設定要啟動的程式
-            process.StartInfo.UseShellExecute = false;  //是否使用系統外殼程序啟動進程
-            process.StartInfo.RedirectStandardInput = true;//是否從流中讀取
-            process.StartInfo.RedirectStandardOutput = true;//是否寫入流
-            process.StartInfo.RedirectStandardError = true;//是否將錯誤信息寫入流
-            process.StartInfo.CreateNoWindow = true;//是否在新窗口中啟動進程
-
-            //偽執行
-            //process.Start();//啟動進程
-            //process.StandardInput.WriteLine("shutdown -r -t 0");//執行重啟計算機命令
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            //隱式操作CMD命令行窗口
-            /*
-            MS的CMD命令行是一種重要的操作界面，
-            一些在C#中不那麼方便完成的功能，在CMD中幾個簡單的命令或許就可以輕松搞定，
-            如果能在C#中能完成CMD窗口的功能，那一定可以使我們的程序簡便不少。
-
-            下面介紹一種常用的在C#程序中調用CMD.exe程序，並且不顯示命令行窗口界面，來完成CMD中各種功能的簡單方法。
-            */
-
-            string exe_filename = "cmd.exe";    //要執行的程序名稱
-            Process process = new Process();
-            process.StartInfo.FileName = exe_filename;  //設定要啟動的程式
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.RedirectStandardInput = true;//可能接受來自調用程序的輸入信息
-            process.StartInfo.RedirectStandardOutput = true;//由調用程序獲取輸出信息
-            process.StartInfo.CreateNoWindow = true;//不顯示程序窗口
-            process.Start();//啟動程序
-            //向CMD窗口發送輸入信息：
-            //process.StandardInput.WriteLine("shutdown -r t 10"); //10秒後重啟（C#中可不好做哦）
-            process.StandardInput.WriteLine("ver"); //10秒後重啟（C#中可不好做哦）
-            //獲取CMD窗口的輸出信息：
-            string sOutput = process.StandardOutput.ReadToEnd();
-
-            richTextBox1.Text += sOutput + "\n";
-
-            //有啦以下代碼，就可以神不知鬼不覺的操作CMD啦。總之，Process類是一個非常有用的類，它十分方便的利用第三方的程序擴展了C#的功能。
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            try
-            {
-                using (Process process = new Process())
-                {
-                    string exe_filename = @"C:\_git\ims1\iMS_Link\iMS_Link\bin\Debug\iMS_Link.exe"; //要執行的程序名稱
-                    process.StartInfo.FileName = exe_filename;  //設定要啟動的程式
-                    process.StartInfo.UseShellExecute = false;
-                    process.StartInfo.CreateNoWindow = true;
-                    process.Start();
-                    // This code assumes the process you are starting will terminate itself. 
-                    // Given that is is started without a window so you cannot terminate it 
-                    // on the desktop, it must terminate itself or you can do it programmatically
-                    // from this application using the Kill method.
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -450,15 +434,6 @@ namespace vcs_Process1
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //獲取系統進程的用戶名
-            foreach (Process p in Process.GetProcesses())
-            {
-                //Console.Write(p.ProcessName);
-                //Console.Write("----");
-                //Console.WriteLine(GetProcessUserName(p.Id));
-
-                richTextBox1.Text += p.ProcessName + "\t" + GetProcessUserName(p.Id) + "\n";
-            }
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -471,49 +446,10 @@ namespace vcs_Process1
 
         private void button14_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "取得所有程序\n";
-
-            //取得本機端上執行中的應用程式
-            //[C#]取得本機端上，執行中有 GUI 介面的應用程式
-            //Environment.MachineName 屬性 : 取得這個本機電腦的 NetBIOS 名稱。
-            //Process.GetProcesses 方法 (String) : 為指定電腦上的每個處理序資源建立新的 Process 元件。
-            //Process.MainWindowHandle 屬性 : 取得相關處理序主視窗的視窗控制代碼。
-            foreach (Process process in Process.GetProcesses(Environment.MachineName))
-            {
-                if (process.MainWindowHandle != IntPtr.Zero)  // 判斷 MainWindowHandle 為非零值的應用程式，表示有主視窗
-                {
-                    //listBox1.Items.Add(process.ToString());
-                    richTextBox1.Text += process.ToString() + "\n";
-                }
-            }
         }
 
         private void button15_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "取得所有程序\n";
-
-            // 列出系統中所有的程序
-            //Process[] processes = Process.GetProcesses(Environment.MachineName);   //相同
-            Process[] processes = Process.GetProcesses();   //取得所有程序
-            richTextBox1.Text += "系統中有： " + processes.Length.ToString() + " 個程序\n";
-
-            foreach (Process process in processes)
-            {
-                /*
-                // 因為使用 Idle 的 StartTime 會造成錯誤，因此先排除。對其他程序取時間也會造成錯誤，故不用。
-                if (!process.ProcessName.Equals("Idle"))
-                {
-                    // 顯示程序的名稱及啟動時間
-                    richTextBox1.Text += process.ProcessName + "\t\t" + process.StartTime.ToString("yyyy/MM/dd HH:mm:ss") + "\n";
-                }
-                else
-                {
-                    richTextBox1.Text += process.ProcessName + "\t\t" + "xxxxxxxxxxxxxxxx\n";
-                }
-                */
-
-                richTextBox1.Text += process.ProcessName + "\n";
-            }
         }
 
         private void button16_Click(object sender, EventArgs e)

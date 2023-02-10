@@ -78,24 +78,37 @@ namespace vcs_Process_Start
 
         void show_item_location()
         {
-            int x_st;
-            int y_st;
-            int dx;
-            int dy;
-            //button
-            x_st = 15;
-            y_st = 22;
-            dx = 170;
-            dy = 62;
+            int BORDER = 20;
+            int x_st = BORDER;
+            int y_st = BORDER;
+            int w = 150;
+            int h = 50;
+            int dx = w + 10;
+            int dy = h + 10;
 
-            groupBox1.Location = new Point(10, 10);
-            groupBox2.Location = new Point(10 + dx * 3 + 40, 10);
-            groupBox3.Location = new Point(10 + dx * 4 + 100, 10);
-            groupBox4.Location = new Point(10 + dx * 4 + 100, 210);
+            int W = BORDER + w + BORDER;
+            int H = BORDER + h * 10 + 10 * 9 + BORDER;
 
-            richTextBox1.Location = new Point(10 + dx * 5 + 160, 10);
+            groupBox1.Size = new Size(W, H);
+            groupBox2.Size = new Size(W, H);
 
+            W = BORDER + w * 2 + BORDER;
+            groupBox5.Size = new Size(W, H);
 
+            W = BORDER + w + BORDER;
+            groupBox3.Size = new Size(W, 160);
+            groupBox4.Size = new Size(W, 300);
+
+            groupBox1.Location = new Point(x_st, y_st);
+            dx = W;
+            groupBox2.Location = new Point(x_st + dx * 1 + BORDER, y_st);
+            groupBox5.Location = new Point(x_st + dx * 2 + BORDER + BORDER, y_st);
+            groupBox3.Location = new Point(x_st + dx * 4 + BORDER, y_st);
+            groupBox4.Location = new Point(x_st + dx * 4 + BORDER, 210);
+            richTextBox1.Location = new Point(x_st + dx * 5 + BORDER + BORDER, y_st);
+
+            dx = w + 10;
+            dy = h + 10;
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button2.Location = new Point(x_st + dx * 0, y_st + dy * 2);
@@ -107,27 +120,16 @@ namespace vcs_Process_Start
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-
-            button30.Location = new Point(x_st + dx * 0, y_st + dy * 0);
-            button31.Location = new Point(x_st + dx * 0, y_st + dy * 1);
-            button32.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            button33.Location = new Point(x_st + dx * 0, y_st + dy * 3);
-            button34.Location = new Point(x_st + dx * 0, y_st + dy * 4);
-            button35.Location = new Point(x_st + dx * 0, y_st + dy * 5);
-            button36.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button37.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button38.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            button39.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 0, y_st + dy * 0);
+            button11.Location = new Point(x_st + dx * 0, y_st + dy * 1);
+            button12.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            button13.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+            button14.Location = new Point(x_st + dx * 0, y_st + dy * 4);
+            button15.Location = new Point(x_st + dx * 0, y_st + dy * 5);
+            button16.Location = new Point(x_st + dx * 0, y_st + dy * 6);
+            button17.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button18.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button19.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
             button20.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button21.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -140,6 +142,17 @@ namespace vcs_Process_Start
             button28.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
+            button30.Location = new Point(x_st + dx * 1, y_st + dy * 0);
+            button31.Location = new Point(x_st + dx * 1, y_st + dy * 1);
+            button32.Location = new Point(x_st + dx * 1, y_st + dy * 2);
+            button33.Location = new Point(x_st + dx * 1, y_st + dy * 3);
+            button34.Location = new Point(x_st + dx * 1, y_st + dy * 4);
+            button35.Location = new Point(x_st + dx * 1, y_st + dy * 5);
+            button36.Location = new Point(x_st + dx * 1, y_st + dy * 6);
+            button37.Location = new Point(x_st + dx * 1, y_st + dy * 7);
+            button38.Location = new Point(x_st + dx * 1, y_st + dy * 8);
+            button39.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+
             button40.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button41.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
@@ -151,19 +164,37 @@ namespace vcs_Process_Start
 
         private void button0_Click(object sender, EventArgs e)
         {
+            //開啟Windows小程式
             //開啟小算盤應用程式
             //Process.Start(@"C:\WINDOWS\system32\calc.exe");   same
             Process.Start("calc");  //打開計算機
-        }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
+            /*
             //開啟記事本程式
             //Process.Start("notepad.exe"); //same
             Process.Start("notepad");   //打開記事本
+
+            //小畫家
+            Process.Start("mspaint.exe");
+
+            //小作家(WordPad)
+            Process.Start("write.exe");
+
+            //啟動Windows Media Player
+            Process.Start("dvdplay.exe");
+
+            //打開Windows版本信息
+            Process.Start("winver.exe ");
+
+            //cmd命令列
+            Process.Start("cmd.exe");
+
+            //打開D槽
+            Process.Start("d:");
+            */
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             /*
             //開啟Office程式   (偽)
@@ -186,6 +217,16 @@ namespace vcs_Process_Start
             */
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            //開啟各種程式
+            Process.Start("Firefox.exe");
+
+            //開啟特定程式 1
+            Process.Start(@"C:\___small\imagesweeper5.1影像清潔工.exe");
+
+        }
+
         private void button3_Click(object sender, EventArgs e)
         {
 
@@ -193,18 +234,15 @@ namespace vcs_Process_Start
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Process.Start("Firefox.exe");
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Process.Start("dvdplay.exe");	//啟動Windows Media Player
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //打開Windows版本信息
-            Process.Start("winver.exe ");
+
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -225,8 +263,6 @@ namespace vcs_Process_Start
 
         private void button8_Click(object sender, EventArgs e)
         {
-            //打開D槽
-            Process.Start("d:");
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -236,28 +272,61 @@ namespace vcs_Process_Start
 
         private void button10_Click(object sender, EventArgs e)
         {
-            //開啟特定程式 1
-            Process.Start(@"C:\___small\imagesweeper5.1影像清潔工.exe");
+            //開啟IE, 指名網址
+            //Process.Start("IExplore.exe", "www.google.com.tw");   //same
+            Process.Start("iexplore.exe", "www.google.com.tw");
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            Process.Start("cmd.exe");
+            //開啟FireFox, 指名網址
+            Process.Start("Firefox.exe", "www.google.com.tw");
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-
+            //用Adobe開啟pdf檔案
+            string filename = "C:\\______test_files\\__RW\\_pdf\\note_Linux_workstation.pdf";
+            Process process = new Process();
+            process = Process.Start(filename);
+            process.WaitForExit();  //需等開啟的程式結束後才可以回到表單
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
-            Process.Start("mspaint.exe");
+            //檔案總管 C槽
+            //開啟檔案總管
+            String pathname = "C:\\";
+            Process.Start(pathname);
+            /*
+            if (Directory.Exists(this.FolderPath))
+            {
+                Process.Start(this.FolderPath);
+                return true;
+            }
+            else
+                return false;
+             */
         }
 
         private void button14_Click(object sender, EventArgs e)
         {
-            Process.Start("write.exe");
+            //Process類使用小例
+
+            string exe_filename = "notepad.exe";
+            Process process = new Process();
+            try
+            {
+                process.StartInfo.FileName = exe_filename;
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.CreateNoWindow = true;
+                process.Start();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -287,24 +356,14 @@ namespace vcs_Process_Start
 
         private void button20_Click(object sender, EventArgs e)
         {
-            //開啟IE, 指名網址
-            //Process.Start("IExplore.exe", "www.google.com.tw");   //same
-            Process.Start("iexplore.exe", "www.google.com.tw");
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
-            //開啟FireFox, 指名網址
-            Process.Start("Firefox.exe", "www.google.com.tw");
         }
 
         private void button22_Click(object sender, EventArgs e)
         {
-            //用Adobe開啟pdf檔案
-            string filename = "C:\\______test_files\\__RW\\_pdf\\note_Linux_workstation.pdf";
-            Process process = new Process();
-            process = Process.Start(filename);
-            process.WaitForExit();  //需等開啟的程式結束後才可以回到表單
         }
 
         private void button23_Click(object sender, EventArgs e)
@@ -317,38 +376,10 @@ namespace vcs_Process_Start
 
         private void button25_Click(object sender, EventArgs e)
         {
-            //檔案總管 C槽
-            //開啟檔案總管
-            String pathname = "C:\\";
-            Process.Start(pathname);
-            /*
-            if (Directory.Exists(this.FolderPath))
-            {
-                Process.Start(this.FolderPath);
-                return true;
-            }
-            else
-                return false;
-             */
         }
 
         private void button26_Click(object sender, EventArgs e)
         {
-            //Process類使用小例
-
-            string exe_filename = "notepad.exe";
-            Process process = new Process();
-            try
-            {
-                process.StartInfo.FileName = exe_filename;
-                process.StartInfo.UseShellExecute = false;
-                process.StartInfo.CreateNoWindow = true;
-                process.Start();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
         }
 
         private void button27_Click(object sender, EventArgs e)
@@ -537,8 +568,6 @@ namespace vcs_Process_Start
             }
             Console.WriteLine("外部程序的結束運行時間：{0}", Proc.ExitTime);
             Console.WriteLine("外部程序在結束運行時的返回值：{0}", Proc.ExitCode);
-
-
         }
 
         private void button35_Click(object sender, EventArgs e)
@@ -567,22 +596,89 @@ namespace vcs_Process_Start
 
         private void button36_Click(object sender, EventArgs e)
         {
+            //關閉計算機(偽)
+            string exe_filename = "cmd.exe";    //要執行的程序名稱
+            Process process = new Process();
+            process.StartInfo.FileName = exe_filename;    //設定要啟動的程式
+            process.StartInfo.UseShellExecute = false;    //是否使用系統外殼程序啟動進程
+            process.StartInfo.RedirectStandardInput = true;//是否從流中讀取
+            process.StartInfo.RedirectStandardOutput = true;//是否寫入流
+            process.StartInfo.RedirectStandardError = true;//是否將錯誤信息寫入流
+            process.StartInfo.CreateNoWindow = true;//是否在新窗口中啟動進程
 
+            //偽執行
+            //process.Start();//啟動進程
+            //process.StandardInput.WriteLine("shutdown -s -t 0");//執行關機命令
         }
 
         private void button37_Click(object sender, EventArgs e)
         {
+            //重啟計算機(偽)
+            string exe_filename = "cmd.exe";    //要執行的程序名稱
+            Process process = new Process();
+            process.StartInfo.FileName = exe_filename;  //設定要啟動的程式
+            process.StartInfo.UseShellExecute = false;  //是否使用系統外殼程序啟動進程
+            process.StartInfo.RedirectStandardInput = true;//是否從流中讀取
+            process.StartInfo.RedirectStandardOutput = true;//是否寫入流
+            process.StartInfo.RedirectStandardError = true;//是否將錯誤信息寫入流
+            process.StartInfo.CreateNoWindow = true;//是否在新窗口中啟動進程
 
+            //偽執行
+            //process.Start();//啟動進程
+            //process.StandardInput.WriteLine("shutdown -r -t 0");//執行重啟計算機命令
         }
 
         private void button38_Click(object sender, EventArgs e)
         {
+            //隱式操作CMD命令行窗口
+            /*
+            MS的CMD命令行是一種重要的操作界面，
+            一些在C#中不那麼方便完成的功能，在CMD中幾個簡單的命令或許就可以輕松搞定，
+            如果能在C#中能完成CMD窗口的功能，那一定可以使我們的程序簡便不少。
 
+            下面介紹一種常用的在C#程序中調用CMD.exe程序，並且不顯示命令行窗口界面，來完成CMD中各種功能的簡單方法。
+            */
+
+            string exe_filename = "cmd.exe";    //要執行的程序名稱
+            Process process = new Process();
+            process.StartInfo.FileName = exe_filename;  //設定要啟動的程式
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.RedirectStandardInput = true;//可能接受來自調用程序的輸入信息
+            process.StartInfo.RedirectStandardOutput = true;//由調用程序獲取輸出信息
+            process.StartInfo.CreateNoWindow = true;//不顯示程序窗口
+            process.Start();//啟動程序
+            //向CMD窗口發送輸入信息：
+            //process.StandardInput.WriteLine("shutdown -r t 10"); //10秒後重啟（C#中可不好做哦）
+            process.StandardInput.WriteLine("ver"); //10秒後重啟（C#中可不好做哦）
+            //獲取CMD窗口的輸出信息：
+            string sOutput = process.StandardOutput.ReadToEnd();
+
+            richTextBox1.Text += sOutput + "\n";
+
+            //有啦以下代碼，就可以神不知鬼不覺的操作CMD啦。總之，Process類是一個非常有用的類，它十分方便的利用第三方的程序擴展了C#的功能。
         }
 
         private void button39_Click(object sender, EventArgs e)
         {
-
+            try
+            {
+                using (Process process = new Process())
+                {
+                    string exe_filename = @"C:\_git\ims1\iMS_Link\iMS_Link\bin\Debug\iMS_Link.exe"; //要執行的程序名稱
+                    process.StartInfo.FileName = exe_filename;  //設定要啟動的程式
+                    process.StartInfo.UseShellExecute = false;
+                    process.StartInfo.CreateNoWindow = true;
+                    process.Start();
+                    // This code assumes the process you are starting will terminate itself. 
+                    // Given that is is started without a window so you cannot terminate it 
+                    // on the desktop, it must terminate itself or you can do it programmatically
+                    // from this application using the Kill method.
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
         }
 
         private void button40_Click(object sender, EventArgs e)
