@@ -115,6 +115,16 @@ void init_data_4()
     glEndList();
 }
 
+void display(void)
+{
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    glCallList(1);  //顯示第1張圖
+    glCallList(2);  //顯示第2張圖
+
+    glFlush();  // 執行繪圖命令
+}
+
 void reshape(int width, int height)
 {
     glViewport(0, 0, width, height);
@@ -125,16 +135,6 @@ void reshape(int width, int height)
     //printf("%f %f %f %f\n", minx - 0.05 * xrange, maxx + 0.05 * xrange, miny - 0.05 * yrange, maxy + 0.05 * yrange);
 
     gluOrtho2D(-0.1f, 1.1f, -0.1f, 1.1f);
-}
-
-void display(void)
-{
-    glClear(GL_COLOR_BUFFER_BIT);
-
-    glCallList(1);  //顯示第1張圖
-    glCallList(2);  //顯示第2張圖
-
-    glFlush();  // 執行繪圖命令
 }
 
 int main(int argc, char** argv)

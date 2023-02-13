@@ -1,6 +1,6 @@
 #include "../../Common.h"
 
- // Vertices of the cube, centered at the origin.
+// Vertices of the cube, centered at the origin.
 GLfloat vertices[][3] =
 {
 	{-1.0, -1.0, -1.0},		//0
@@ -38,11 +38,12 @@ GLubyte cubeIndices[24] =
 };
 
 // Angles of rotation about each axis.
-GLfloat theta[] = { 0.0, 0.0, 0.0 };
+GLfloat theta[] = { 0.0f, 0.0f, 0.0f };
 
 GLint axis = 0;	//0: 繞x軸旋轉, 1: 繞y軸旋轉, 2: 繞z軸旋轉
 
-int spinning = 0;
+int flag_rotating = 0;
+int flag_rotating_direction = 0;	//0: CW, 1:CCW
 
 // This function sets up the vertex arrays for the color cube and the projection matrix.
 void colorcube(void)
@@ -103,13 +104,25 @@ void display(void)
 // This function spins the cube around the current axis by incrementing the angle of rotation by 2 degrees.
 void idle(void)
 {
-	if (spinning == 1)
+	if (flag_rotating == 1)
 	{
-		theta[axis] += 1.0;
-		if (theta[axis] > 360.0)
+		if (flag_rotating_direction == 0)	//CW
 		{
-			theta[axis] -= 360.0;
+			theta[axis] += 1.0f;
+			if (theta[axis] > 360.0f)
+			{
+				theta[axis] = 0.0f;
+			}
 		}
+		else   //CCW
+		{
+			theta[axis] -= 1.0f;
+			if (theta[axis] < 0.0f)
+			{
+				theta[axis] = 360.0f;
+			}
+		}
+
 		glutPostRedisplay();
 		sleep(25);
 	}
@@ -128,22 +141,91 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
 		glutDestroyWindow(glutGetWindow());
 		return;
 	case 'x':
-		printf("繞 x軸 旋轉\n");
-		axis = 0;
-		spinning = 1;
+		flag_rotating_direction = 0;	//CW
+		if (flag_rotating == 0)
+		{
+			printf("繞 x軸 旋轉\n");
+			axis = 0;
+			flag_rotating = 1;
+		}
+		else
+		{
+			flag_rotating = 0;
+			printf("停止\n");
+		}
 		break;
 	case 'y':
-		printf("繞 y軸 旋轉\n");
-		axis = 1;
-		spinning = 1;
+		flag_rotating_direction = 0;	//CW
+		if (flag_rotating == 0)
+		{
+			printf("繞 y軸 旋轉\n");
+			axis = 1;
+			flag_rotating = 1;
+		}
+		else
+		{
+			flag_rotating = 0;
+			printf("停止\n");
+		}
 		break;
 	case 'z':
-		printf("繞 z軸 旋轉\n");
-		axis = 2;
-		spinning = 1;
+		flag_rotating_direction = 0;	//CW
+		if (flag_rotating == 0)
+		{
+			printf("繞 z軸 旋轉\n");
+			axis = 2;
+			flag_rotating = 1;
+		}
+		else
+		{
+			flag_rotating = 0;
+			printf("停止\n");
+		}
+		break;
+	case 'X':
+		flag_rotating_direction = 1;	//CCW
+		if (flag_rotating == 0)
+		{
+			printf("繞 x軸 旋轉 反轉\n");
+			axis = 0;
+			flag_rotating = 1;
+		}
+		else
+		{
+			flag_rotating = 0;
+			printf("停止\n");
+		}
+		break;
+	case 'Y':
+		flag_rotating_direction = 1;	//CCW
+		if (flag_rotating == 0)
+		{
+			printf("繞 y軸 旋轉 反轉\n");
+			axis = 1;
+			flag_rotating = 1;
+		}
+		else
+		{
+			flag_rotating = 0;
+			printf("停止\n");
+		}
+		break;
+	case 'Z':
+		flag_rotating_direction = 1;	//CCW
+		if (flag_rotating == 0)
+		{
+			printf("繞 z軸 旋轉 反轉\n");
+			axis = 2;
+			flag_rotating = 1;
+		}
+		else
+		{
+			flag_rotating = 0;
+			printf("停止\n");
+		}
 		break;
 	case ' ':
-		spinning = 1 - spinning;
+		flag_rotating = 1 - flag_rotating;
 		break;
 	}
 }
@@ -154,7 +236,7 @@ int main(int argc, char** argv)
 	const char* message = "按x, y, z 選擇旋轉軸, 按 空白鍵 啟停, 按 Esc 離開\n";
 	common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard);
 
-	glutIdleFunc(idle);
+	glutIdleFunc(idle);         //設定callback function, 利用idle事件進行重畫
 
 	glEnable(GL_DEPTH_TEST);
 	glShadeModel(GL_FLAT);

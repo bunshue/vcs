@@ -9,6 +9,10 @@ using System.Windows.Forms;
 
 using System.IO;
 using System.Diagnostics;
+using System.Management;
+using System.Globalization; //for CultureInfo
+
+using MediaInfoNET;
 
 namespace vcs_ShowFilename
 {
@@ -300,13 +304,98 @@ namespace vcs_ShowFilename
                 int i;
                 for (i = 0; i < fileinfos.Count; i++)
                 {
+                    //richTextBox1.Text += fileinfos[i].filename + "\n";
+                    richTextBox1.Text += "i = " + i.ToString() + ", filename : " + fileinfos[i].filepath + "\\" + fileinfos[i].filename + "\n";
 
+                    MediaFile f = new MediaFile(fileinfos[i].filepath + "\\" + fileinfos[i].filename);
 
+                    //richTextBox1.Text += "  影片長度: " + f.General.DurationString + "\n";
+                    //richTextBox1.Text += "  FileSize: " + f.FileSize.ToString() + "\n";
+                    //richTextBox1.Text += "  Extension: " + f.Extension + "\n";
+                    if ((f.InfoAvailable == true) && (f.Video.Count > 0))
+                    {
+                        int w = f.Video[0].Width;
+                        int h = f.Video[0].Height;
+                        //richTextBox1.Text += "  輸入大小: " + w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)" + "\n";
+                        //richTextBox1.Text += "  FPS: " + f.Video[0].FrameRate.ToString() + "\n";
+                        //richTextBox1.Text += string.Format("{0,-60}{1,-20}{2,5} X {3,5}{4,5}{5,10}",
+                        //fi.FullName, ByteConversionTBGBMBKB(Convert.ToInt64(fi.Length)), w.ToString(), h.ToString(), f.Video[0].FrameRate.ToString(), f.General.DurationString) + "\n";
+                        /*
+                        if (((cb_video_l.Checked == true) && (h >= 1080)) || ((cb_video_m.Checked == true) && (h < 1080) && (h > 480)) || ((cb_video_s.Checked == true) && (h <= 480)))
+                        {
+                            item = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
+                            if (h >= 1080)
+                                items = "大";
+                            else if (h <= 480)
+                                items = "小";
+                            else
+                                items = "中";
+                            itema = fileinfos[i].filename;
+                            itemb = fileinfos[i].filepath;
+                            itemc = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
+
+                            //i1 = new ListViewItem(fileinfos[i].filename);
+                            i1 = new ListViewItem(item);
+                            i1.UseItemStyleForSubItems = false;
+
+                            //sub_i10.Text = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
+
+                            sub_i1s.Text = items;
+                            i1.SubItems.Add(sub_i1s);
+
+                            sub_i1a.Text = itema;
+                            i1.SubItems.Add(sub_i1a);
+                            //sub_i1a.Text = fileinfos[i].filepath;
+                            //sub_i1a.Text = w.ToString() + " × " + h.ToString() + "(" + ((double)w / (double)h).ToString("N2", CultureInfo.InvariantCulture) + ":1)";
+                            sub_i1b.Text = itemb;
+                            i1.SubItems.Add(sub_i1b);
+
+                            //sub_i1a.Text = fi.Length.ToString();
+                            //sub_i1b.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
+                            sub_i1c.Text = itemc;
+                            i1.SubItems.Add(sub_i1c);
+
+                            sub_i1a.ForeColor = System.Drawing.Color.Blue;
+                            sub_i1b.ForeColor = System.Drawing.Color.Blue;
+                            sub_i1c.ForeColor = System.Drawing.Color.Blue;
+
+                            sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                            sub_i1b.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                            sub_i1c.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                        }
+                        else
+                            continue;
+                        */
+                    }
+                    else
+                    {
+                        /*
+                        if (cb_video_only.Checked == true)
+                            continue;
+
+                        if (cb_generate_text.Checked == false)
+                            continue;
+
+                        i1 = new ListViewItem(fileinfos[i].filename);
+                        i1.UseItemStyleForSubItems = false;
+
+                        richTextBox1.Text += "XXXXXXXXXXXXXXXXXXXXXXXXX1\n";
+                        //richTextBox1.Text += "xxxxx" + fileinfos[i].filename + "\t\t" + ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize)) + "\n";
+                        sub_i1a.Text = fileinfos[i].filepath;
+                        i1.SubItems.Add(sub_i1a);
+                        //sub_i1a.Text = fi.Length.ToString();
+                        sub_i1b.Text = ByteConversionTBGBMBKB(Convert.ToInt64(fileinfos[i].filesize));
+                        i1.SubItems.Add(sub_i1b);
+
+                        sub_i1a.ForeColor = System.Drawing.Color.Blue;
+                        sub_i1b.ForeColor = System.Drawing.Color.Blue;
+
+                        sub_i1a.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                        sub_i1b.Font = new System.Drawing.Font("Times New Roman", 10, System.Drawing.FontStyle.Bold);
+                        */
+                    }
                 }
-
             }
-
-
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -437,6 +526,99 @@ namespace vcs_ShowFilename
 
             show_file_info();
 
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            //尋找硬碟序號
+
+
+            //读取U盘序列号
+
+
+            int len = _serialNumber.Count;
+
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+
+            matchDriveLetterWithSerial();
+
+            len = _serialNumber.Count;
+
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+            int i;
+            for (i = 0; i < len; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + _serialNumber[i].ToString() + "\n";
+
+            }
+
+        }
+
+        private List<string> _serialNumber = new List<string>();
+
+        /// <summary>
+        /// 调用这个函数将本机所有U盘序列号存储到_serialNumber中
+        /// </summary>
+        private void matchDriveLetterWithSerial()
+        {
+            string[] diskArray;
+            string driveNumber;
+            var searcher = new ManagementObjectSearcher("SELECT * FROM Win32_LogicalDiskToPartition");
+            foreach (ManagementObject dm in searcher.Get())
+            {
+                richTextBox1.Text += "A\n";
+                getValueInQuotes(dm["Dependent"].ToString());
+                diskArray = getValueInQuotes(dm["Antecedent"].ToString()).Split(',');
+                driveNumber = diskArray[0].Remove(0, 6).Trim();
+                var disks = new ManagementObjectSearcher("SELECT * FROM Win32_DiskDrive");
+                foreach (ManagementObject disk in disks.Get())
+                {
+                    richTextBox1.Text += "B\t" + disk["Name"].ToString() + "\n";
+
+                    if (disk["Name"].ToString() == ("\\\\.\\PHYSICALDRIVE" + driveNumber) & disk["InterfaceType"].ToString() == "USB")
+                    {
+                        richTextBox1.Text += "C\t" + parseSerialFromDeviceID(disk["PNPDeviceID"].ToString()) + "\n";
+
+                        _serialNumber.Add(parseSerialFromDeviceID(disk["PNPDeviceID"].ToString()));
+                    }
+                }
+            }
+        }
+        private static string parseSerialFromDeviceID(string deviceId)
+        {
+            var splitDeviceId = deviceId.Split('\\');
+            var arrayLen = splitDeviceId.Length - 1;
+            var serialArray = splitDeviceId[arrayLen].Split('&');
+            var serial = serialArray[0];
+            return serial;
+        }
+
+        private static string getValueInQuotes(string inValue)
+        {
+            var posFoundStart = inValue.IndexOf("\"");
+            var posFoundEnd = inValue.IndexOf("\"", posFoundStart + 1);
+            var parsedValue = inValue.Substring(posFoundStart + 1, (posFoundEnd - posFoundStart) - 1);
+            return parsedValue;
         }
     }
 }

@@ -130,6 +130,8 @@ MediaInfoNET.dll
 
 參考/加入參考/瀏覽/選取\bin\Debug\MediaInfoNET.dll
 
+專案加入 MediaInfo.dll, 屬性選擇 有更新時才複製
+
 加入命名空間
 using MediaInfoNET;
 </value>

@@ -65,7 +65,8 @@ GLdouble viewer[] = { 5.0, 5.0, 5.0 }; /* initial viewer location      */
 GLfloat light[3] = { 0.0, 10.0, 0.0 }; /* position of light            */
 GLfloat m[16];                       /* shadow transformation matrix */
 
-int spinning = 0;
+int flag_rotating = 0;
+int flag_rotating_direction = 0;	//0: CW, 1:CCW
 
 // This function sets up the vertex arrays for the color cube and initializes other graphics parameters.
 void colorcube(void)
@@ -127,35 +128,45 @@ void display(void)
 /* This function is the idle callback. It spins the cube 2 degrees about the selected axis. */
 void idle(void)
 {
-	if (spinning==1)
+	if (flag_rotating ==1)
 	{
-		theta[axis] += 2.0;
-		if (theta[axis] > 360.0)
+		if (flag_rotating_direction == 0)	//CW
 		{
-			theta[axis] -= 360.0;
+			theta[axis] += 2.0f;
+			if (theta[axis] > 360.0f)
+			{
+				theta[axis] = 0.0f;
+			}
+		}
+		else   //CCW
+		{
+			theta[axis] -= 2.0f;
+			if (theta[axis] < 0.0f)
+			{
+				theta[axis] = 360.0f;
+			}
 		}
 		glutPostRedisplay();
 		sleep(25);
 	}
 }
 
-/* This is the mouse callback function. The mouse buttons determine which axis to rotate about. */
 void mouse(int btn, int state, int x, int y)
 {
 	if (btn == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
 	{
 		axis = 0;
-		spinning = 1;
+		flag_rotating = 1;
 	}
 	if (btn == GLUT_MIDDLE_BUTTON && state == GLUT_DOWN)
 	{
 		axis = 1;
-		spinning = 1;
+		flag_rotating = 1;
 	}
 	if (btn == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
 	{
 		axis = 2;
-		spinning = 1;
+		flag_rotating = 1;
 	}
 }
 
@@ -192,7 +203,7 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
 	}
 	if ((key == 's') || (key == 'S'))
 	{
-		spinning = 1 - spinning;
+		flag_rotating = 1 - flag_rotating;
 	}
 	glutPostRedisplay();
 }
@@ -210,13 +221,14 @@ int main(int argc, char** argv)
 {
 	const char* windowName = "Color Cube with Shadow";
 	const char* message = "滑鼠控制, 按S啟停, 按 Esc 離開\n";
+	//const char* message = "按x, y, z 選擇旋轉軸, 按 空白鍵 啟停, 按 Esc 離開\n";
 	common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard);
 
 	//先保留
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 
 	glutMouseFunc(mouse);		//設定callback function
-	glutIdleFunc(idle);			//設定callback function
+	glutIdleFunc(idle);         //設定callback function, 利用idle事件進行重畫
 
 	glEnable(GL_DEPTH_TEST);
 

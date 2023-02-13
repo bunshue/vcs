@@ -54,7 +54,8 @@ GLfloat theta[] = { 0.0, 0.0, 0.0 };  /* initial rotation angles  */
 GLint axis = 2;                     /* initial axis of rotation */
 GLdouble viewer[] = { 0.0, 0.0, 5.0 }; /* initial viewer location  */
 
-int spinning = 0;
+int flag_rotating = 0;
+int flag_rotating_direction = 0;	//0: CW, 1:CCW
 
 // This function sets up the vertex arrays for the color cube.
 void colorcube(void)
@@ -90,15 +91,26 @@ void display(void)
 /* This function is the idle callback. It spins the cube 2 degrees about the selected axis. */
 void idle(void)
 {
-	if (spinning ==1)
+	if (flag_rotating == 1)
 	{
-		theta[axis] += 2.0;
-		if (theta[axis] > 360.0)
+		if (flag_rotating_direction == 0)	//CW
 		{
-			theta[axis] -= 360.0;
+			theta[axis] += 2.0f;
+			if (theta[axis] > 360.0f)
+			{
+				theta[axis] = 0.0f;
+			}
+			glutPostRedisplay();
+			sleep(25);
 		}
-		glutPostRedisplay();
-		sleep(25);
+		else   //CCW
+		{
+			theta[axis] -= 2.0f;
+			if (theta[axis] < 0.0f)
+			{
+				theta[axis] = 360.0f;
+			}
+		}
 	}
 }
 
@@ -108,17 +120,17 @@ void mouse(int btn, int state, int x, int y)
 	if (btn == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
 	{
 		axis = 0;
-		spinning = 1;
+		flag_rotating = 1;
 	}
 	if (btn == GLUT_MIDDLE_BUTTON && state == GLUT_DOWN)
 	{
 		axis = 1;
-		spinning = 1;
+		flag_rotating = 1;
 	}
 	if (btn == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
 	{
 		axis = 2;
-		spinning = 1;
+		flag_rotating = 1;
 	}
 }
 
@@ -156,7 +168,7 @@ void keyboard(unsigned char key, int x, int y)
 	}
 	if ((key == 's') || (key == 'S'))
 	{
-		spinning = 1 - spinning;
+		flag_rotating = 1 - flag_rotating;
 	}
 	glutPostRedisplay();
 }
@@ -175,6 +187,7 @@ int main(int argc, char** argv)
 {
 	const char* windowName = "Color Cube";
 	const char* message = "·Æ¹«±±¨î, «öS±Ò°±, «ö Esc Â÷¶}\n";
+	//const char* message = "«öx, y, z ¿ï¾Ü±ÛÂà¶b, «ö ªÅ¥ÕÁä ±Ò°±, «ö Esc Â÷¶}\n";
 	common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard);
 
 	//¥ý«O¯d

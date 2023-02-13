@@ -15,79 +15,7 @@ double points[VERTICES + 1][3];
 int patch_vertices[PATCHES][16];
 static GLfloat theta[] = { 270.0, 0.0, 180.0 };
 
-/* This is the routine that generates the image to be displayed. */
-void gfxinit(void)
-{
-    int i;
-    int j;
-    int k;
-    int vertex;
-    double coords[48];
-    double* p;
-
-    glClearColor(1.0, 1.0, 1.0, 0.0);   //背景為白色
-    glEnable(GL_MAP2_VERTEX_3);
-
-    /* Generate the display lists for the surfaces. */
-    for (k = 0; k < PATCHES; k++)
-    {
-        for (i = 0, p = coords; i < 16; i++)
-        {
-            vertex = patch_vertices[k][i];
-            for (j = 0; j < 3; j++, p++)
-            {
-                *p = points[vertex][j];
-            }
-        }
-        glNewList(k + 1, GL_COMPILE);
-        glColor3d(1.0, 0.0, 0.0);   //紅色
-        glMap2d(GL_MAP2_VERTEX_3, 0.0, 1.0, 12, 4, 0.0, 1.0, 3, 4, coords);
-        glMapGrid2d(STEPS, 0.0, 1.0, STEPS, 0.0, 1.0);
-        glEvalMesh2(GL_FILL, 0, STEPS, 0, STEPS);
-        glEndList();
-    }
-}
-
-void reshape(int width, int height)
-{
-    glViewport(0, 0, width, height);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    if (width <= height)
-    {
-        glOrtho(-4.0, 4.0, -4.0 * (GLdouble)height / (GLdouble)width, 4.0 * (GLdouble)height / (GLdouble)width, -10.0, 10.0);
-    }
-    else
-    {
-        glOrtho(-4.0 * (GLdouble)width / (GLdouble)height, 4.0 * (GLdouble)width / (GLdouble)height, -4.0, 4.0, -10.0, 10.0);
-    }
-    glMatrixMode(GL_MODELVIEW);
-}
-
-void display(void)
-{
-    glClear(GL_COLOR_BUFFER_BIT);
-    glLoadIdentity();
-
-    //未旋轉前之座標軸
-    //draw_coordinates(1.3f);     //畫座標軸
-
-    glRotatef(theta[0], 1.0, 0.0, 0.0); //對x軸旋轉特定角度
-    glRotatef(theta[1], 0.0, 1.0, 0.0); //對y軸旋轉特定角度
-    glRotatef(theta[2], 0.0, 0.0, 1.0); //對z軸旋轉特定角度
-    for (int i = 1; i <= PATCHES; i++)
-    {
-        glCallList(i);
-    }
-
-    //已旋轉後之座標軸
-    draw_coordinates(2.5f);     //畫座標軸
-
-    glFlush();  // 執行繪圖命令
-}
-
-/* This function gets the input data for the program to process. */
-void interact(void)
+void make_teapot_data(void)
 {
     ifstream vertices_file;
     ifstream patches_file;
@@ -124,9 +52,78 @@ void interact(void)
             patches_file >> patch_vertices[i][j];   //C++之讀取檔案資料
         }
     }
-
     vertices_file.close();
     patches_file.close();
+}
+
+void init_teapot_data(void)
+{
+    int i;
+    int j;
+    int k;
+    int vertex;
+    double coords[48];
+    double* p;
+
+    glClearColor(1.0, 1.0, 1.0, 0.0);   //背景為白色
+    glEnable(GL_MAP2_VERTEX_3);
+
+    /* Generate the display lists for the surfaces. */
+    for (k = 0; k < PATCHES; k++)
+    {
+        for (i = 0, p = coords; i < 16; i++)
+        {
+            vertex = patch_vertices[k][i];
+            for (j = 0; j < 3; j++, p++)
+            {
+                *p = points[vertex][j];
+            }
+        }
+        glNewList(k + 1, GL_COMPILE);
+        glColor3d(1.0, 0.0, 0.0);   //紅色
+        glMap2d(GL_MAP2_VERTEX_3, 0.0, 1.0, 12, 4, 0.0, 1.0, 3, 4, coords);
+        glMapGrid2d(STEPS, 0.0, 1.0, STEPS, 0.0, 1.0);
+        glEvalMesh2(GL_FILL, 0, STEPS, 0, STEPS);
+        glEndList();
+    }
+}
+
+void display(void)
+{
+    glClear(GL_COLOR_BUFFER_BIT);
+    glLoadIdentity();
+
+    //未旋轉前之座標軸
+    //draw_coordinates(1.3f);     //畫座標軸
+
+    glRotatef(theta[0], 1.0, 0.0, 0.0); //對x軸旋轉特定角度
+    glRotatef(theta[1], 0.0, 1.0, 0.0); //對y軸旋轉特定角度
+    glRotatef(theta[2], 0.0, 0.0, 1.0); //對z軸旋轉特定角度
+    for (int i = 1; i <= PATCHES; i++)
+    {
+        glCallList(i);
+    }
+
+    //已旋轉後之座標軸
+    draw_coordinates(2.5f);     //畫座標軸
+
+    glFlush();  // 執行繪圖命令
+}
+
+void reshape(int width, int height)
+{
+    glViewport(0, 0, width, height);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    if (width <= height)
+    {
+        glOrtho(-4.0, 4.0, -4.0 * (GLdouble)height / (GLdouble)width, 4.0 * (GLdouble)height / (GLdouble)width, -10.0, 10.0);
+    }
+    else
+    {
+        glOrtho(-4.0 * (GLdouble)width / (GLdouble)height, 4.0 * (GLdouble)width / (GLdouble)height, -4.0, 4.0, -10.0, 10.0);
+    }
+    glMatrixMode(GL_MODELVIEW);
 }
 
 void keyboard(unsigned char key, int /*x*/, int /*y*/)
@@ -195,13 +192,13 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
 
 int main(int argc, char** argv)
 {
-    interact();		//讀取資料
+    make_teapot_data();		//讀取資料
 
     const char* windowName = "猶太茶壺";
     const char* message = "猶太茶壺, 按 X x Y y Z z 控制, 按 Esc 離開\n";
     common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard);
 
-    gfxinit();
+    init_teapot_data();
 
     glutMainLoop();	//開始主循環繪製
 
