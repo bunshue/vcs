@@ -352,77 +352,18 @@ void draw_point(float* color, float size, float x_st, float y_st)
 //空心矩形, 左下為原點, 向右w, 向上h, 顏色color, 線寬width
 void draw_rectangle(float* color, float width, float x_st, float y_st, float w, float h)
 {
-    //TBD
-    /*
-    //用 GL_LINE_LOOP 畫一個空心矩形
-//glColor3f(0.0, 1.0, 0.0);
-    glColor3fv((GLfloat*)color);
-
-    //方法一, 使用 GL_QUADS
-    glBegin(GL_QUADS);	//畫矩形
-    //逆時針為空心
-    //畫一個白色外框
-    glVertex3f(-dd, dd, 0.0f);	//左上
-    glVertex3f(-dd, -dd, 0.0f);	//左下
-    glVertex3f(dd, -dd, 0.0f);	//右下
-    glVertex3f(dd, dd, 0.0f);	//右上
-    glEnd();
-    */
-
-
-
-
+    glColor3fv((GLfloat*)color);    //設定顏色
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);    //空心矩形
+    glLineWidth(width);	//設定線寬
+    glRectf(x_st, y_st, x_st + w, y_st + h);
 }
 
 //實心矩形, 左下為原點, 向右w, 向上h, 顏色color, 無線寬width
-void draw_rectangle_s(float* color, float x_st, float y_st, float w, float h)
+void fill_rectangle(float* color, float x_st, float y_st, float w, float h)
 {
     glColor3fv((GLfloat*)color);    //設定顏色
-
-    glEnable(GL_TEXTURE_2D);    //啟用2D紋理映射
-
-    float dd = 0.5f;
-    //GL_QUADS 使用
-    glBegin(GL_QUADS);  //畫實心四邊形
-    {
-        glTexCoord2f(x_st, y_st); //紋理座標配置
-        glVertex2f(x_st, y_st);     //左下座標
-        glTexCoord2f(x_st + w, y_st);
-        glVertex2f(x_st + w, y_st);       //右下座標
-        glTexCoord2f(x_st + w, y_st + h);
-        glVertex2f(x_st + w, y_st + h);         //右上座標
-        glTexCoord2f(x_st, y_st + h);
-        glVertex2f(x_st, y_st + h);       //左上座標
-    }
-    glEnd();
-
-    glDisable(GL_TEXTURE_2D);
-}
-
-//實心矩形, 左下為原點, 向右w, 向上h, 顏色color, 無線寬width
-void draw_rectangle_si(GLint index, float x_st, float y_st, float w, float h)
-{
-    glIndexi(index);            //設定顏色
-    //glColor3fv((GLfloat*)color);    //設定顏色
-
-    glEnable(GL_TEXTURE_2D);    //啟用2D紋理映射
-
-    float dd = 0.5f;
-    //GL_QUADS 使用
-    glBegin(GL_QUADS);  //畫實心四邊形
-    {
-        glTexCoord2f(x_st, y_st); //紋理座標配置
-        glVertex2f(x_st, y_st);     //左下座標
-        glTexCoord2f(x_st + w, y_st);
-        glVertex2f(x_st + w, y_st);       //右下座標
-        glTexCoord2f(x_st + w, y_st + h);
-        glVertex2f(x_st + w, y_st + h);         //右上座標
-        glTexCoord2f(x_st, y_st + h);
-        glVertex2f(x_st, y_st + h);       //左上座標
-    }
-    glEnd();
-
-    glDisable(GL_TEXTURE_2D);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);    //實心矩形
+    glRectf(x_st, y_st, x_st + w, y_st + h);
 }
 
 //空心四邊形, 左下為原點, 向右w, 向上h, 顏色color, 線寬width

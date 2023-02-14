@@ -44,6 +44,8 @@ GLint axis = 0;	//0: 繞x軸旋轉, 1: 繞y軸旋轉, 2: 繞z軸旋轉
 
 int flag_rotating = 0;
 int flag_rotating_direction = 0;	//0: CW, 1:CCW
+float dd = 1.0f;
+float ddd = 0.06f;
 
 // This function sets up the vertex arrays for the color cube and the projection matrix.
 void colorcube(void)
@@ -73,6 +75,8 @@ void display(void)
 
 	//已旋轉後之座標軸
 	draw_coordinates(1.5f);     //畫座標軸
+
+	//draw_teapot(color_purple, 1.0f, 1.0f);	//畫茶壺
 
 	/*
 	//用 GL_LINE_LOOP 畫一個空心矩形
@@ -108,7 +112,7 @@ void idle(void)
 	{
 		if (flag_rotating_direction == 0)	//CW
 		{
-			theta[axis] += 1.0f;
+			theta[axis] += dd;
 			if (theta[axis] > 360.0f)
 			{
 				theta[axis] = 0.0f;
@@ -116,7 +120,7 @@ void idle(void)
 		}
 		else   //CCW
 		{
-			theta[axis] -= 1.0f;
+			theta[axis] -= dd;
 			if (theta[axis] < 0.0f)
 			{
 				theta[axis] = 360.0f;
@@ -224,8 +228,27 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
 			printf("停止\n");
 		}
 		break;
+	case '+':
+		dd += ddd;
+		if (dd > 20.0f)
+		{
+			dd = 10.0f;
+		}
+		break;
+	case '-':
+		if (dd > 0.1)
+		{
+			dd -= ddd;
+		}
+		break;
 	case ' ':
+	case 's':
 		flag_rotating = 1 - flag_rotating;
+		break;
+	case 'r':
+		printf("重置\n");
+		flag_rotating = 0;
+
 		break;
 	}
 }
@@ -247,3 +270,7 @@ int main(int argc, char** argv)
 
 	return 0;
 }
+
+
+//加畫茶壺做比對
+

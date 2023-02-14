@@ -3,49 +3,37 @@
 #define WINDOW_SIZE  600  /* initial size of window                             */
 #define BORDER        10  /* border width in each viewport                      */
 
-#define POINTS     151
+#define POINTS     51
 Point points[POINTS];
-int number_of_points = 0;
 
 int WindowSizeX = WINDOW_SIZE;
 int WindowSizeY = WINDOW_SIZE;
 int WindowSizeY3 = WINDOW_SIZE / 3;
 
-void make_data_4_file(void)
+int t = 0;
+void make_data_2_sine(void)
 {
-    printf("讀取資料 ST\n");
-
-    ifstream points_file;
-
-    //開啟檔案
-    points_file.open("data/17.points.dat", ios::in);
-    if (points_file.is_open() == false)
+    for (int i = 0; i < POINTS; i++)
     {
-        cerr << "Data file 'points.dat' not found." << endl;
-        exit(EXIT_FAILURE);
+        points[i].x = 0.02f * i;
+        points[i].y = sin(PI * (float)(i * 4) / 180);
+        //points[i].y = 25.0f * sin(PI * (float)(i + t) / 180);
     }
+    //t++;
 
-    //讀取檔案資料
-    while (points_file >> points[number_of_points].x >> points[number_of_points].y) //C++之讀取檔案資料
-    {
-        number_of_points++;
-        if (number_of_points == POINTS)
-        {
-            cout << "Data arrays are full. If any more data is present it will not be plotted." << endl;
-            break;
-        }
-    }
-    points_file.close();
+    printf("取得 %d 點資料\n", POINTS);
 
-    printf("讀取資料 SP, 共取得 %d 點資料\n", number_of_points);
-
-    for (int i = 0; i < number_of_points; i++)
+    for (int i = 0; i < POINTS; i++)
     {
         printf("%0.10f  %0.10f\n", points[i].x, points[i].y);
     }
+
+    points[POINTS / 8].y = 1.0f;     //故意造一個特大點
+
+    return;
 }
 
-void init_data_4()
+void init_data_2()
 {
     glClearColor(1.0, 1.0, 1.0, 0.0); /* Make the background white. */
 
@@ -56,7 +44,7 @@ void init_data_4()
     //畫X標記
     glBegin(GL_LINES);
     float markd = 0.01f;
-    for (int i = 0; i < number_of_points; i++)
+    for (int i = 0; i < POINTS; i++)
     {
         glVertex2d(points[i].x - markd, points[i].y - markd);   //左下
         glVertex2d(points[i].x + markd, points[i].y + markd);   //右上
@@ -121,12 +109,15 @@ void display(void)
     glVertex3fv(point4);	//左上
     glEnd();
 
+    draw_rectangle(color_purple, 3, 1.00f - dd, 1.00f - dd, 0.4f, 0.4f);
+
     glColor3f(1.0, 0.0, 0.0);  //紅色線
 
     //移至上圖
     glViewport(BORDER, BORDER + WindowSizeY3 * 2, WindowSizeX - 2 * BORDER, WindowSizeY3 - 2 * BORDER);
     printf("glViewport 上 x_st = %d, y_st = %d, W = %d, H = %d\n", BORDER, BORDER + WindowSizeY3 * 2, WindowSizeX - 2 * BORDER, WindowSizeY3 - 2 * BORDER);
     glCallList(1);      //1
+    //draw_rectangle(color_purple, 3, -0.9f, -0.9f, 0.4f, 0.4f);
 
     //移至中圖
     glViewport(BORDER, BORDER + WindowSizeY3 * 1, WindowSizeX - 2 * BORDER, WindowSizeY3 - 2 * BORDER);
@@ -151,13 +142,13 @@ void reshape(int width, int height)
 
 int main(int argc, char** argv)
 {
-    make_data_4_file();    //製作資料4. 讀檔案
+    make_data_2_sine();
 
     const char* windowName = "Curve Fitting";
     const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
     common_setup(argc, argv, windowName, message, 0, WindowSizeX, WindowSizeY, 1100, 200, display, reshape, keyboard0);
 
-    init_data_4();
+    init_data_2();
 
     glutMainLoop();	//開始主循環繪製
 

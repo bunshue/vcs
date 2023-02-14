@@ -139,6 +139,9 @@ void display(void)
         dd = 0.2f;
         glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);    //實心矩形
         glRectf(-dd, -dd, dd, dd);
+
+        draw_rectangle(color_purple, 3, -0.9f, -0.9f, 0.4f, 0.4f);
+        fill_rectangle(color_purple, -0.8f, -0.8f, 0.2f, 0.2f);
     }
     else if (display_mode == 2)
     {

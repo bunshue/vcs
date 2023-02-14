@@ -334,15 +334,15 @@ void display(void)
     {
         reset_default_setting();
 
+        //畫實心矩形
         float x_st = -0.6f;
         float y_st = -0.6f;
         float w = 1.2f;
         float h = 1.2f;
-        draw_rectangle_s(color_c, x_st, y_st, w, h);
+        fill_rectangle(color_c, x_st, y_st, w, h);
 
         //畫實心矩形
-        glColor3f(1.0f, 1.0f, 0.0f);    //設定顏色 Yellow
-        glRectf(-0.4f, -0.4f, 0.4f, 0.4f);
+        fill_rectangle(color_m, -0.4f, -0.4f, 0.8f, 0.8f);
 
         //畫實心四邊形
         float dd = 0.5f;

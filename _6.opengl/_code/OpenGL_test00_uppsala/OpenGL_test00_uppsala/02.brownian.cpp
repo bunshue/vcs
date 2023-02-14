@@ -32,7 +32,7 @@ void InitGauss(int seed)
 
 /* Routine to generate a Gaussian random number. This is an implementation of
  * algorithm Gauss on page 77 of "The Science of Fractal Images."  */
-double Gauss()
+double Gauss(void)
 {
     double sum;
     int i;
@@ -44,7 +44,7 @@ double Gauss()
     return (GaussFac * sum - GaussAdd);
 }
 
-void make_data_3_gaussian()
+void make_data_3_gaussian(void)
 {
     float displacement;
     int i;
@@ -71,7 +71,7 @@ void make_data_3_gaussian()
 }
 
 int t = 0;
-void make_data_2_sine()
+void make_data_2_sine(void)
 {
     points[0].x = 0.0f;
     points[0].y = 0.0f;
@@ -89,7 +89,7 @@ void make_data_2_sine()
     return;
 }
 
-void print_data()
+void print_data(void)
 {
     printf("共 %d 筆資料, 內容:\n", POINTS);
     for (int i = 0; i < POINTS; i++)
