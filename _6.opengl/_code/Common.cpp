@@ -541,10 +541,12 @@ void setup_rotation()
 
     if (w > h)
     {
+        //窗口座標範圍, 3D
         glOrtho(-w / h, w / h, -1.0f, 1.0f, -1.0f, 1.0f);
     }
     else
     {
+        //窗口座標範圍, 3D
         glOrtho(-1.0f, 1.0f, -h / w, h / w, -1.0f, 1.0f);
     }
 

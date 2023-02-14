@@ -78,27 +78,9 @@ void display(void)
 
 	//draw_teapot(color_purple, 1.0f, 1.0f);	//畫茶壺
 
-	/*
-	//用 GL_LINE_LOOP 畫一個空心矩形
-	glColor3f(1.0, 0.0, 0.0);	//紅
-	float dd = 1.3f;
-	float point1[3] = { -dd, -dd, 1.0 };	//左下
-	float point2[3] = { dd, -dd, 1.0 };	//右下
-	float point3[3] = { dd,  dd, 1.0 };	//右上
-	float point4[3] = { -dd,  dd, 1.0 };	//左上
-	glBegin(GL_LINE_LOOP);
-	glVertex3fv(point1);	//左下
-	glVertex3fv(point2);	//右下
-	glVertex3fv(point3);	//右上
-	glVertex3fv(point4);	//左上
-	glEnd();
-	*/
-
-	glColor3f(1.0f, 1.0f, 1.0f);
-
-	int i;
-	for (i = 0; i < 8; i++)
+	for (int i = 0; i < 8; i++)
 	{
+		glColor3f(1.0f, 1.0f, 1.0f);
 		glRasterPos3fv((GLfloat*)vertices[i]);
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '0' + i);
 	}
@@ -248,7 +230,10 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
 	case 'r':
 		printf("重置\n");
 		flag_rotating = 0;
-
+		theta[0] = 0.0f;
+		theta[1] = 0.0f;
+		theta[2] = 0.0f;
+		glutPostRedisplay();
 		break;
 	}
 }

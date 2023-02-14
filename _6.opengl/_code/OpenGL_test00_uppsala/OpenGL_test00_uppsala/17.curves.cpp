@@ -64,6 +64,21 @@ void init_data_4()
     }
     glEnd();
 
+    //連線
+    glBegin(GL_LINES);
+    for (int i = 0; i < (number_of_points - 1); i++)
+    {
+        glVertex2d(points[i].x, points[i].y);
+        glVertex2d(points[i + 1].x, points[i + 1].y);
+    }
+    glEnd();
+
+    //畫點
+    for (int i = 0; i < number_of_points; i++)
+    {
+        draw_point(color_b, 5, points[i].x, points[i].y);
+    }
+
     glEndList();
 }
 
@@ -77,19 +92,8 @@ void display(void)
     glLoadIdentity();   //設置單位矩陣
     gluOrtho2D(0, WindowSizeX, 0, WindowSizeY);
 
-    glColor3f(0.0, 0.0, 0.0);  //黑色線
-
-    int offset = 20;
-    glBegin(GL_LINES);
-    glVertex2i(offset, offset);
-    glVertex2i(WindowSizeX - offset, offset);
-    glVertex2i(offset, WindowSizeY - offset);
-    glVertex2i(WindowSizeX - offset, WindowSizeY - offset);
-    glVertex2i(offset, offset);
-    glVertex2i(offset, WindowSizeY - offset);
-    glVertex2i(WindowSizeX - offset, offset);
-    glVertex2i(WindowSizeX - offset, WindowSizeY - offset);
-    glEnd();
+    int offset = 25;
+    draw_rectangle(color_m, 1, offset, offset, WindowSizeX - offset*2, WindowSizeY - offset*2);    //左下開始 w h
 
     glLoadIdentity();   //設置單位矩陣
     gluOrtho2D(-0.1f, 1.1f, -0.1f, 1.1f);

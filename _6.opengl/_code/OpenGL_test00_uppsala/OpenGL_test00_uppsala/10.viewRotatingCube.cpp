@@ -21,12 +21,6 @@ GLfloat vertices[][3] =
 };
 
 // Colors of the vertices.
-GLfloat vertex_color[][3] = {						//沒用到 R B
-	{1.0,0.0,0.0}, {0.0,1.0,0.0}, {0.0,0.0,1.0},	//R G B
-	{1.0,1.0,0.0}, {0.0,1.0,1.0}, {1.0,0.0,1.0},	//黃 天青 桃紅
-	{0.0,0.0,0.0}, {1.0,1.0,1.0} };					//黑 白
-
-// Colors of the vertices.
 GLfloat colors[][3] =
 {
 	{1.0, 1.0, 1.0},		//未用到 白色  XXXX
@@ -63,7 +57,7 @@ void colorcube(void)
 	glEnableClientState(GL_COLOR_ARRAY);
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_FLOAT, 0, vertices);
-	glColorPointer(3, GL_FLOAT, 0, vertex_color);
+	glColorPointer(3, GL_FLOAT, 0, colors);
 }
 
 // This function is the display callback. It draws the cube from the current viewing point.

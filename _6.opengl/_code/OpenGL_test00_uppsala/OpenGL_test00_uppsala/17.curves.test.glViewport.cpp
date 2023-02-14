@@ -53,6 +53,10 @@ void init_data_2()
     }
     glEnd();
 
+    for (int i = 0; i < POINTS; i++)
+    {
+        //draw_point(color_r, 10, points[i].x, points[i].y);
+    }
     glEndList();
 }
 
@@ -64,24 +68,15 @@ void display(void)
     /* Draw line separators between viewports. */
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();   //設置單位矩陣
+
+    //窗口座標範圍, 2D	//顯示範圍 x(0 ~ WindowSizeX), y(0 ~ WindowSizeY)
     gluOrtho2D(0, WindowSizeX, 0, WindowSizeY);
+    //照著窗口座標範圍畫一個框
+    draw_rectangle(color_m, 1, 10.0f, 10.0f, WindowSizeX - 20, WindowSizeY - 20);    //左下開始 w h
 
     glColor3f(0.0, 0.0, 0.0);  //黑色線
 
-    //在此畫線畫框
-    /*
-    int offset = 20;
-    glBegin(GL_LINES);
-    glVertex2i(offset, offset);
-    glVertex2i(WindowSizeX - offset, offset);
-    glVertex2i(offset, WindowSizeY - offset);
-    glVertex2i(WindowSizeX - offset, WindowSizeY - offset);
-    glVertex2i(offset, offset);
-    glVertex2i(offset, WindowSizeY - offset);
-    glVertex2i(WindowSizeX - offset, offset);
-    glVertex2i(WindowSizeX - offset, WindowSizeY - offset);
-    glEnd();
-    */
+    //劃三分格線
     glBegin(GL_LINES);
     glVertex2i(0, WindowSizeY3);
     glVertex2i(WindowSizeX, WindowSizeY3);
@@ -91,25 +86,14 @@ void display(void)
 
     /* Do Lagrange interpolation in top third of window. */
     glLoadIdentity();   //設置單位矩陣
-    gluOrtho2D(-0.1f, 1.1f, -0.1f, 1.1f);
+    float dd = 0.008f;
+    //窗口座標範圍, 2D	//顯示範圍 x(0.0f ~ 1.0f), y(0.0f ~ 1.0f)
+    gluOrtho2D(0.0f - dd, 1.0f + dd, 0.0f - dd, 1.0f + dd);
+    //draw_rectangle(color_purple, 1, 0.0f+dd, 0.0f+dd, 1.0f-dd*2, 1.0f-dd*2);    //左下開始 w h
+
     //gluOrtho2D(0.0f, 1.0f, 0.0f, 1.0f);
     //gluOrtho2D(minx - markd, maxx + markd, miny - 2.0 * markd, maxy + 2.0 * markd);
     //printf("窗口座標範圍2D, 顯示範圍 : X軸(%f ~ %f) Y軸(%f ~ %f), 左下為原點\n", minx - markd, maxx + markd, miny - 2.0 * markd, maxy + 2.0 * markd);
-
-    glColor3f(0.0, 0.0, 1.0);  //藍色線
-    float dd = 0.93f;
-    float point1[3] = { 1.00f - dd, 1.00f - dd, 0 };	//左下
-    float point2[3] = { dd, 1.00f - dd, 0 };	//右下
-    float point3[3] = { dd, dd, 0 };	//右上
-    float point4[3] = { 1.00f - dd, dd, 0 };	//左上
-    glBegin(GL_LINE_LOOP);
-    glVertex3fv(point1);	//左下
-    glVertex3fv(point2);	//右下
-    glVertex3fv(point3);	//右上
-    glVertex3fv(point4);	//左上
-    glEnd();
-
-    draw_rectangle(color_purple, 3, 1.00f - dd, 1.00f - dd, 0.4f, 0.4f);
 
     glColor3f(1.0, 0.0, 0.0);  //紅色線
 
@@ -117,17 +101,19 @@ void display(void)
     glViewport(BORDER, BORDER + WindowSizeY3 * 2, WindowSizeX - 2 * BORDER, WindowSizeY3 - 2 * BORDER);
     printf("glViewport 上 x_st = %d, y_st = %d, W = %d, H = %d\n", BORDER, BORDER + WindowSizeY3 * 2, WindowSizeX - 2 * BORDER, WindowSizeY3 - 2 * BORDER);
     glCallList(1);      //1
-    //draw_rectangle(color_purple, 3, -0.9f, -0.9f, 0.4f, 0.4f);
+    draw_rectangle(color_r, 1, 0.0f, 0.0f, 1.0f, 1.0f);    //左下開始 w h
 
     //移至中圖
     glViewport(BORDER, BORDER + WindowSizeY3 * 1, WindowSizeX - 2 * BORDER, WindowSizeY3 - 2 * BORDER);
     printf("glViewport 中 x_st = %d, y_st = %d, W = %d, H = %d\n", BORDER, BORDER + WindowSizeY3 * 1, WindowSizeX - 2 * BORDER, WindowSizeY3 - 2 * BORDER);
     glCallList(1);      //1
+    draw_rectangle(color_g, 1, 0.0f, 0.0f, 1.0f, 1.0f);    //左下開始 w h
 
     //移至下圖
     glViewport(BORDER, BORDER + WindowSizeY3 * 0, WindowSizeX - 2 * BORDER, WindowSizeY3 - 2 * BORDER);
     printf("glViewport 下 x_st = %d, y_st = %d, W = %d, H = %d\n", BORDER, BORDER + WindowSizeY3 * 0, WindowSizeX - 2 * BORDER, WindowSizeY3 - 2 * BORDER);
     glCallList(1);      //1
+    draw_rectangle(color_b, 1, 0.0f, 0.0f, 1.0f, 1.0f);    //左下開始 w h
 
     glFlush();  // 執行繪圖命令
 }
