@@ -33,16 +33,6 @@ namespace vcs_Mix02
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Process p = new Process();
-            p.StartInfo.FileName = "cmd.exe";
-            p.StartInfo.UseShellExecute = false;
-            p.StartInfo.RedirectStandardInput = true;
-            p.StartInfo.RedirectStandardOutput = true;
-            p.StartInfo.RedirectStandardError = true;
-            p.StartInfo.CreateNoWindow = true;
-            p.Start();
-            p.StandardInput.WriteLine(@"netstat -a -n > c:\dddddddddd\port.txt");
-
             show_item_location();
         }
 
@@ -202,22 +192,6 @@ namespace vcs_Mix02
         private void button5_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
-            richTextBox1.Text += "取得系統開啟的端口和狀態\n";
-            try
-            {
-                string path = @"c:\dddddddddd\port.txt";
-                using (StreamReader sr = new StreamReader(path))
-                {
-                    while (sr.Peek() >= 0)
-                    {
-                        this.richTextBox1.Text += sr.ReadLine() + "\r\n";
-                    }
-                }
-            }
-            catch (Exception hy)
-            {
-                MessageBox.Show(hy.Message);
-            }
         }
 
         private void button6_Click(object sender, EventArgs e)

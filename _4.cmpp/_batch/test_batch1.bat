@@ -180,8 +180,6 @@ echo 刪除這個資料夾下所有 .xyz 檔案
 del /s *.xyz
 
 
-
-
 SET /P FolderName=請輸入文件夾名稱:
 echo 你輸入了 : %FolderName%
 

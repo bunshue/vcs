@@ -333,7 +333,6 @@
             this.button38.Name = "button38";
             this.button38.Size = new System.Drawing.Size(150, 50);
             this.button38.TabIndex = 28;
-            this.button38.Text = "隱式操作CMD命令行窗口";
             this.button38.UseVisualStyleBackColor = true;
             this.button38.Click += new System.EventHandler(this.button38_Click);
             // 

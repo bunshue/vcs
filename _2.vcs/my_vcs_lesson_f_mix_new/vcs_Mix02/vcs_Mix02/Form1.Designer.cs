@@ -269,7 +269,6 @@
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(170, 70);
             this.button5.TabIndex = 97;
-            this.button5.Text = "取得系統開啟的端口和狀態";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 

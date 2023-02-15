@@ -29,15 +29,17 @@ namespace netsend
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Process myProcess = new Process();
-            myProcess.StartInfo.FileName = "cmd.exe";
-            myProcess.StartInfo.UseShellExecute = false;
-            myProcess.StartInfo.RedirectStandardInput = true;
-            myProcess.StartInfo.RedirectStandardOutput = true;
-            myProcess.StartInfo.RedirectStandardError = true;
-            myProcess.StartInfo.CreateNoWindow = true;
-            myProcess.Start();
-            myProcess.StandardInput.WriteLine("net send " + textBox1.Text + " " + textBox2.Text);
+            Process process = new Process();    //創建一個進程用於調用外部程序
+
+            process.StartInfo.FileName = "cmd.exe";
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.RedirectStandardInput = true;
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.RedirectStandardError = true;
+            process.StartInfo.CreateNoWindow = true;
+
+            process.Start();
+            process.StandardInput.WriteLine("net send " + textBox1.Text + " " + textBox2.Text);
             MessageBox.Show("發送成功", "提示", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
     }

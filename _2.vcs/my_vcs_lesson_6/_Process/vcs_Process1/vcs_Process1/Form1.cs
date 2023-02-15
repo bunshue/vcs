@@ -798,42 +798,6 @@ namespace vcs_Process1
 
         private void button36_Click(object sender, EventArgs e)
         {
-            string exe_filename = "cmd.exe";    //要執行的程序名稱
-
-            //創建一個進程
-            Process process = new Process();
-            process.StartInfo.FileName = exe_filename;  //設定要啟動的程式
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.RedirectStandardOutput = true;
-            process.StartInfo.RedirectStandardError = true;
-            process.StartInfo.CreateNoWindow = false;
-
-            richTextBox1.Text += "啟動程式\n";
-            process.Start(); //啟動進程
-
-            //準備讀出輸出流和錯誤流
-            string outputData = string.Empty;
-            string errorData = string.Empty;
-            process.BeginOutputReadLine();
-            process.BeginErrorReadLine();
-
-            process.OutputDataReceived += (ss, ee) =>
-            {
-                outputData += ee.Data;
-            };
-
-            process.ErrorDataReceived += (ss, ee) =>
-            {
-                errorData += ee.Data;
-            };
-
-            //等待退出
-            process.WaitForExit();
-
-            //關閉進程
-            process.Close();
-
-            richTextBox1.Text += "使用者關閉程式\n";
         }
 
         private void button37_Click(object sender, EventArgs e)

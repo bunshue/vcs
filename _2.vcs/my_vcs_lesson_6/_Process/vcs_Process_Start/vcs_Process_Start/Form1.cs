@@ -253,8 +253,9 @@ namespace vcs_Process_Start
             //or
 
             //開啟imsLink
-            Process process = new Process();
+            Process process = new Process();    //創建一個進程用於調用外部程序
             process = Process.Start(@"C:\_git\ims1\iMS_Link\iMS_Link\bin\Debug\iMS_Link.exe");
+
             richTextBox1.Text += "ProcessName : " + process.ProcessName + "\n";
             richTextBox1.Text += "SessionId : " + process.SessionId.ToString() + "\n";
             richTextBox1.Text += "StartTime : " + process.StartTime + "\n";
@@ -287,7 +288,7 @@ namespace vcs_Process_Start
         {
             //用Adobe開啟pdf檔案
             string filename = "C:\\______test_files\\__RW\\_pdf\\note_Linux_workstation.pdf";
-            Process process = new Process();
+            Process process = new Process();    //創建一個進程用於調用外部程序
             process = Process.Start(filename);
             process.WaitForExit();  //需等開啟的程式結束後才可以回到表單
         }
@@ -311,10 +312,8 @@ namespace vcs_Process_Start
 
         private void button14_Click(object sender, EventArgs e)
         {
-            //Process類使用小例
-
             string exe_filename = "notepad.exe";
-            Process process = new Process();
+            Process process = new Process();    //創建一個進程用於調用外部程序
             try
             {
                 process.StartInfo.FileName = exe_filename;
@@ -469,10 +468,9 @@ namespace vcs_Process_Start
             processStartInfo.Arguments = "article.txt"; //設置外部程序的啟動參數（命令行參數）為test.txt
             processStartInfo.WorkingDirectory = @"C:\______test_files\__RW\_txt";   //設置外部程序工作目錄
 
-            //創建一個進程
-            Process process = new Process();
+            Process process = new Process();    //創建一個進程用於調用外部程序
             try
-            {////啟動外部程序//
+            {
                 process = Process.Start(processStartInfo);
             }
             catch (Win32Exception ex)
@@ -508,13 +506,9 @@ namespace vcs_Process_Start
             //string filename = @"C:\______test_files\__RW\_txt\琵琶行.txt";
 
             ProcessStartInfo pro = new ProcessStartInfo(filename);
-            Process process = new Process();
+            Process process = new Process();    //創建一個進程用於調用外部程序
             process.StartInfo = pro;
             process.Start();
-
-
-
-
         }
 
         private void button34_Click(object sender, EventArgs e)
@@ -536,8 +530,7 @@ namespace vcs_Process_Start
             //設置外部程序工作目錄為  C:
             processStartInfo.WorkingDirectory = "C:\\";
 
-            //聲明一個程序類
-            Process Proc = new Process();
+            Process Proc = new Process();   //創建一個進程用於調用外部程序
 
             try
             {
@@ -572,33 +565,13 @@ namespace vcs_Process_Start
 
         private void button35_Click(object sender, EventArgs e)
         {
-
-            //c# 執行外部程式(.exe，.bat…)
-
-            string exe_filename = "cmd.exe";    //要執行的程序名稱
-            Process process = new Process();
-            //Process類有一個StartInfo屬性，這個是ProcessStartInfo類，包括了一些屬性和方法，下面用到了幾個屬性：
-            process.StartInfo.FileName = exe_filename; //設定要啟動的程式
-            //process.StartInfo.Arguments = "/c" + FullBatPath; //設定程式執行參數" /c " 執行完以下命令後停止
-            process.StartInfo.UseShellExecute = false; //關閉Shell的使用
-            process.StartInfo.RedirectStandardInput = true; //重定向標準輸入
-            process.StartInfo.RedirectStandardOutput = true; //重定向標準輸出
-            process.StartInfo.RedirectStandardError = true; //重定向錯誤輸出
-            process.StartInfo.CreateNoWindow = false; //true設置不顯示窗口
-            process.StartInfo.RedirectStandardError = true;
-            process.Start(); //啟動
-            while (!process.HasExited)
-            {
-                process.WaitForExit(2000); //等待20秒
-            }
-            process.Dispose();
         }
 
         private void button36_Click(object sender, EventArgs e)
         {
             //關閉計算機(偽)
             string exe_filename = "cmd.exe";    //要執行的程序名稱
-            Process process = new Process();
+            Process process = new Process();    //創建一個進程用於調用外部程序
             process.StartInfo.FileName = exe_filename;    //設定要啟動的程式
             process.StartInfo.UseShellExecute = false;    //是否使用系統外殼程序啟動進程
             process.StartInfo.RedirectStandardInput = true;//是否從流中讀取
@@ -615,7 +588,7 @@ namespace vcs_Process_Start
         {
             //重啟計算機(偽)
             string exe_filename = "cmd.exe";    //要執行的程序名稱
-            Process process = new Process();
+            Process process = new Process();    //創建一個進程用於調用外部程序
             process.StartInfo.FileName = exe_filename;  //設定要啟動的程式
             process.StartInfo.UseShellExecute = false;  //是否使用系統外殼程序啟動進程
             process.StartInfo.RedirectStandardInput = true;//是否從流中讀取
@@ -630,32 +603,6 @@ namespace vcs_Process_Start
 
         private void button38_Click(object sender, EventArgs e)
         {
-            //隱式操作CMD命令行窗口
-            /*
-            MS的CMD命令行是一種重要的操作界面，
-            一些在C#中不那麼方便完成的功能，在CMD中幾個簡單的命令或許就可以輕松搞定，
-            如果能在C#中能完成CMD窗口的功能，那一定可以使我們的程序簡便不少。
-
-            下面介紹一種常用的在C#程序中調用CMD.exe程序，並且不顯示命令行窗口界面，來完成CMD中各種功能的簡單方法。
-            */
-
-            string exe_filename = "cmd.exe";    //要執行的程序名稱
-            Process process = new Process();
-            process.StartInfo.FileName = exe_filename;  //設定要啟動的程式
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.RedirectStandardInput = true;//可能接受來自調用程序的輸入信息
-            process.StartInfo.RedirectStandardOutput = true;//由調用程序獲取輸出信息
-            process.StartInfo.CreateNoWindow = true;//不顯示程序窗口
-            process.Start();//啟動程序
-            //向CMD窗口發送輸入信息：
-            //process.StandardInput.WriteLine("shutdown -r t 10"); //10秒後重啟（C#中可不好做哦）
-            process.StandardInput.WriteLine("ver"); //10秒後重啟（C#中可不好做哦）
-            //獲取CMD窗口的輸出信息：
-            string sOutput = process.StandardOutput.ReadToEnd();
-
-            richTextBox1.Text += sOutput + "\n";
-
-            //有啦以下代碼，就可以神不知鬼不覺的操作CMD啦。總之，Process類是一個非常有用的類，它十分方便的利用第三方的程序擴展了C#的功能。
         }
 
         private void button39_Click(object sender, EventArgs e)

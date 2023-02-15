@@ -36,7 +36,7 @@ namespace vcs_CommandLine1
             x_st = 12;
             y_st = 12;
             dx = 210;
-            dy = 70;
+            dy = 65;
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -46,6 +46,8 @@ namespace vcs_CommandLine1
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
+            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
+            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
             richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             richTextBox2.Location = new Point(x_st + dx * 4 - 130, y_st + dy * 1);
@@ -75,7 +77,7 @@ namespace vcs_CommandLine1
         {
             try
             {
-                //執行命令獲取該文件的一些信息 
+                //執行命令獲取該文件的一些信息
                 string command = "systeminfo";
 
                 string output;
@@ -100,40 +102,46 @@ namespace vcs_CommandLine1
         /// <param name="error">錯誤</param>
         public static void ExecuteCommand(string command, out string output, out string error)
         {
+            if (command.ToLower() == "cmd")
+            {
+                output = null;
+                error = null;
+                return;
+            }
+
             try
             {
-                //創建一個進程
-                Process pc = new Process();
-                pc.StartInfo.FileName = command;
-                pc.StartInfo.UseShellExecute = false;
-                pc.StartInfo.RedirectStandardOutput = true;
-                pc.StartInfo.RedirectStandardError = true;
-                pc.StartInfo.CreateNoWindow = true;
+                Process process = new Process();    //創建一個進程用於調用外部程序
 
-                //啟動進程
-                pc.Start();
+                process.StartInfo.FileName = command;   //設定欲執行的命令或程式名稱
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.RedirectStandardOutput = true;
+                process.StartInfo.RedirectStandardError = true;
+                process.StartInfo.CreateNoWindow = true;
+
+                process.Start();    //啟動進程
 
                 //准備讀出輸出流和錯誤流
                 string outputData = string.Empty;
                 string errorData = string.Empty;
-                pc.BeginOutputReadLine();
-                pc.BeginErrorReadLine();
+                process.BeginOutputReadLine();
+                process.BeginErrorReadLine();
 
-                pc.OutputDataReceived += (ss, ee) =>
+                process.OutputDataReceived += (ss, ee) =>
                 {
                     outputData += ee.Data;
                 };
 
-                pc.ErrorDataReceived += (ss, ee) =>
+                process.ErrorDataReceived += (ss, ee) =>
                 {
                     errorData += ee.Data;
                 };
 
                 //等待退出
-                pc.WaitForExit();
+                process.WaitForExit();
 
                 //關閉進程
-                pc.Close();
+                process.Close();
 
                 //返回流結果
                 output = outputData;
@@ -165,24 +173,23 @@ namespace vcs_CommandLine1
 
         private string RunCmd(string command)
         {
-            //實例一個Process類，啟動一個獨立進程
-            Process p = new Process();
+            Process process = new Process();    //創建一個進程用於調用外部程序
 
             //Process類有一個StartInfo屬性，這個是ProcessStartInfo類，包括了一些屬性和方法，下面我們用到了他的幾個屬性：
 
-            p.StartInfo.FileName = "cmd.exe"; //設定程序名
-            //p.StartInfo.Arguments = "/c " command; //設定程式執行參數
-            p.StartInfo.UseShellExecute = false; //關閉Shell的使用
-            p.StartInfo.RedirectStandardInput = true; //重定向標準輸入
-            p.StartInfo.RedirectStandardOutput = true; //重定向標準輸出
-            p.StartInfo.RedirectStandardError = true; //重定向錯誤輸出
-            p.StartInfo.CreateNoWindow = true; //設置不顯示窗口
+            process.StartInfo.FileName = "cmd.exe"; //設定欲執行的命令或程式名稱
+            //process.StartInfo.Arguments = "/c " command; //設定程式執行參數
+            process.StartInfo.UseShellExecute = false; //關閉Shell的使用
+            process.StartInfo.RedirectStandardInput = true; //重定向標準輸入
+            process.StartInfo.RedirectStandardOutput = true; //重定向標準輸出
+            process.StartInfo.RedirectStandardError = true; //重定向錯誤輸出
+            process.StartInfo.CreateNoWindow = true; //設置不顯示窗口
 
-            p.Start(); //啟動
+            process.Start();    //啟動進程
 
-            //p.StandardInput.WriteLine(command); //也可以用這種方式輸入要執行的命令
-            //p.StandardInput.WriteLine("exit"); //不過要記得加上Exit要不然下一行程式執行的時候會當機
-            return p.StandardOutput.ReadToEnd(); //從輸出流取得命令執行結果
+            //process.StandardInput.WriteLine(command); //也可以用這種方式輸入要執行的命令
+            //process.StandardInput.WriteLine("exit"); //不過要記得加上Exit要不然下一行程式執行的時候會當機
+            return process.StandardOutput.ReadToEnd(); //從輸出流取得命令執行結果
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -190,13 +197,15 @@ namespace vcs_CommandLine1
             //執行外部.EXE檔 並獲取結果
             //相當於輸入 cmd/netstat -an, 並獲取輸出的結果
 
-            Process process = new Process();
+            Process process = new Process();    //創建一個進程用於調用外部程序
+
             ProcessStartInfo startInfo = new ProcessStartInfo("cmd.exe");
             startInfo.UseShellExecute = false;
             process.StartInfo = startInfo;
             process.StartInfo.RedirectStandardInput = true;
             process.StartInfo.RedirectStandardOutput = true;
-            process.Start();
+
+            process.Start();    //啟動進程
 
             process.StandardInput.WriteLine("netstat -an");
             process.StandardInput.WriteLine("exit");
@@ -228,7 +237,9 @@ namespace vcs_CommandLine1
             psi.UseShellExecute = false;
             psi.FileName = exePath;
             psi.Arguments = parameters;
-            Process process = Process.Start(psi);
+
+            Process process = Process.Start(psi);   //創建一個進程用於調用外部程序
+
             StreamReader outputStreamReader = process.StandardOutput;
             StreamReader errStreamReader = process.StandardError;
             process.WaitForExit(2000);
@@ -244,13 +255,16 @@ namespace vcs_CommandLine1
         //2.異步模式
         public void exec_async(string exePath, string parameters)
         {
-            Process process = new Process();
-            process.StartInfo.FileName = exePath;
+            Process process = new Process();    //創建一個進程用於調用外部程序
+
+            process.StartInfo.FileName = exePath;   //設定欲執行的命令或程式名稱
             process.StartInfo.Arguments = parameters;
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.CreateNoWindow = true;
             process.StartInfo.RedirectStandardOutput = true;
-            process.Start();
+
+            process.Start();    //啟動進程
+
             process.BeginOutputReadLine();
             process.OutputDataReceived += new DataReceivedEventHandler(processOutputDataReceived);
         }
@@ -262,23 +276,172 @@ namespace vcs_CommandLine1
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //cmd 1
+
+            //c# 執行外部程式(.exe，.bat…)
+
+            string exe_filename = "cmd.exe";    //要執行的程序名稱
+            Process process = new Process();    //創建一個進程用於調用外部程序
+
+            //Process類有一個StartInfo屬性，這個是ProcessStartInfo類，包括了一些屬性和方法，下面用到了幾個屬性：
+            process.StartInfo.FileName = exe_filename; //設定要啟動的程式
+            //process.StartInfo.Arguments = "/c" + FullBatPath; //設定程式執行參數" /c " 執行完以下命令後停止
+            process.StartInfo.UseShellExecute = false; //關閉Shell的使用
+            process.StartInfo.RedirectStandardInput = true; //重定向標準輸入
+            process.StartInfo.RedirectStandardOutput = true; //重定向標準輸出
+            process.StartInfo.RedirectStandardError = true; //重定向錯誤輸出
+            process.StartInfo.CreateNoWindow = false; //true設置不顯示窗口
+            process.StartInfo.RedirectStandardError = true;
+            process.Start(); //啟動
+            while (!process.HasExited)
+            {
+                process.WaitForExit(1000); //等待10秒
+            }
+            process.Dispose();
 
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
+            //cmd 2
+            //隱式操作CMD命令行窗口
+            /*
+            MS的CMD命令行是一種重要的操作界面，
+            一些在C#中不那麼方便完成的功能，在CMD中幾個簡單的命令或許就可以輕松搞定，
+            如果能在C#中能完成CMD窗口的功能，那一定可以使我們的程序簡便不少。
+
+            下面介紹一種常用的在C#程序中調用CMD.exe程序，並且不顯示命令行窗口界面，來完成CMD中各種功能的簡單方法。
+            */
+
+            string exe_filename = "cmd.exe";    //要執行的程序名稱
+            Process process = new Process();    //創建一個進程用於調用外部程序
+            process.StartInfo.FileName = exe_filename;  //設定要啟動的程式
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.RedirectStandardInput = true;//可能接受來自調用程序的輸入信息
+            process.StartInfo.RedirectStandardOutput = true;//由調用程序獲取輸出信息
+            process.StartInfo.CreateNoWindow = true;//不顯示程序窗口
+            process.Start();//啟動程序
+            //向CMD窗口發送輸入信息：
+            //process.StandardInput.WriteLine("shutdown -r t 10"); //10秒後重啟（C#中可不好做哦）
+            process.StandardInput.WriteLine("ver"); //10秒後重啟（C#中可不好做哦）
+            //獲取CMD窗口的輸出信息：
+            string sOutput = process.StandardOutput.ReadToEnd();
+
+            richTextBox1.Text += sOutput + "\n";
+
+            //有啦以下代碼，就可以神不知鬼不覺的操作CMD啦。總之，Process類是一個非常有用的類，它十分方便的利用第三方的程序擴展了C#的功能。
 
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
+            //cmd 3
+
+
+            string exe_filename = "cmd.exe";    //要執行的程序名稱
+
+            Process process = new Process();    //創建一個進程用於調用外部程序
+
+            process.StartInfo.FileName = exe_filename;  //設定要啟動的程式
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.RedirectStandardError = true;
+            process.StartInfo.CreateNoWindow = false;
+
+            richTextBox1.Text += "啟動程式\n";
+            process.Start(); //啟動進程
+
+            //準備讀出輸出流和錯誤流
+            string outputData = string.Empty;
+            string errorData = string.Empty;
+            process.BeginOutputReadLine();
+            process.BeginErrorReadLine();
+
+            process.OutputDataReceived += (ss, ee) =>
+            {
+                outputData += ee.Data;
+            };
+
+            process.ErrorDataReceived += (ss, ee) =>
+            {
+                errorData += ee.Data;
+            };
+
+            //等待退出
+            process.WaitForExit();
+
+            //關閉進程
+            process.Close();
+
+            richTextBox1.Text += "使用者關閉程式\n";
 
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
+            //cmd 4
+
+            Process process = new Process();    //創建一個進程用於調用外部程序
+            process.StartInfo.FileName = "cmd.exe";
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.RedirectStandardInput = true;
+            process.StartInfo.RedirectStandardOutput = true;
+            process.StartInfo.RedirectStandardError = true;
+            process.StartInfo.CreateNoWindow = true;
+
+            process.Start();
+
+            //process.StandardInput.WriteLine(@"netstat -a -n > c:\dddddddddd\port.txt");
+            process.StandardInput.WriteLine(@"dir > some_data.txt");
+
+            
+        }
+
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            //取得系統開啟的端口和狀態
+
+            Process p = new Process();
+            p.StartInfo.FileName = "cmd.exe";
+            p.StartInfo.UseShellExecute = false;
+            p.StartInfo.RedirectStandardInput = true;
+            p.StartInfo.RedirectStandardOutput = true;
+            p.StartInfo.RedirectStandardError = true;
+            p.StartInfo.CreateNoWindow = true;
+            p.Start();
+            p.StandardInput.WriteLine(@"netstat -a -n > port.txt");
+
+
+            Application.DoEvents();
+
+
+            richTextBox1.Text += "取得系統開啟的端口和狀態\n";
+            try
+            {
+                string path = "port.txt";
+                using (StreamReader sr = new StreamReader(path))
+                {
+                    while (sr.Peek() >= 0)
+                    {
+                        this.richTextBox1.Text += sr.ReadLine() + "\r\n";
+                    }
+                }
+            }
+            catch (Exception hy)
+            {
+                MessageBox.Show(hy.Message);
+            }
+
+
 
         }
+
+        private void button9_Click(object sender, EventArgs e)
+        {
+
+        }
+
 
         private void richTextBox2_KeyUp(object sender, KeyEventArgs e)
         {
@@ -304,45 +467,50 @@ namespace vcs_CommandLine1
         /// <summary>
         /// 執行Cmd命令
         /// </summary>
-        public void ExecuteCmd(string cmd)
+        public void ExecuteCmd(string command)
         {
-            if (cmd.ToLower() == "cmd")
+            if (command.ToLower() == "cmd")
             {
                 return;
             }
 
-            //process用於調用外部程序
-            Process p = new Process();
-            p.StartInfo.FileName = "cmd.exe";   //呼叫程式 cmd.exe
-            p.StartInfo.UseShellExecute = false;    //是否指定操作系統外殼進程啟動程序
-
-            //可能接受來自調用程序的輸入信息
-
-            p.StartInfo.RedirectStandardInput = true;   //重定向標准輸入
-            p.StartInfo.RedirectStandardOutput = true;  //重定向標准輸出
-            p.StartInfo.RedirectStandardError = true;   //重定向錯誤輸出
-            p.StartInfo.CreateNoWindow = true;          //不顯示程序窗口
-            p.Start();                                  //設置自動刷新緩沖並更新   //啟動程序
-
-            //System.Threading.Thread.Sleep(1000);        //等一秒
-
-            p.StandardInput.AutoFlush = true;           //輸入命令
-            p.StandardInput.WriteLine(cmd);
-            p.StandardInput.WriteLine("exit");          //等待結束  //一定要關閉
-
-            //same
-            //richTextBox2.AppendText(p.StandardOutput.ReadToEnd());  //直接顯示出來
-
-            StreamReader reader = p.StandardOutput;//截取輸出流
-            string output = reader.ReadLine();//每次讀取一行
-
-            while (!reader.EndOfStream)
+            try
             {
-                richTextBox2.Text += output + "\n";
-                output = reader.ReadLine();
+                Process process = new Process();    //創建一個進程用於調用外部程序
+
+                process.StartInfo.FileName = "cmd.exe";     //設定欲執行的命令或程式名稱
+                process.StartInfo.UseShellExecute = false;  //是否指定操作系統外殼進程啟動程序
+
+                //可能接受來自調用程序的輸入信息
+                process.StartInfo.RedirectStandardInput = true;   //重定向標准輸入
+                process.StartInfo.RedirectStandardOutput = true;  //重定向標准輸出
+                process.StartInfo.RedirectStandardError = true;   //重定向錯誤輸出
+                process.StartInfo.CreateNoWindow = true;          //不顯示程序窗口
+
+                process.Start();    //啟動進程
+
+                //System.Threading.Thread.Sleep(1000);        //等一秒
+                process.StandardInput.AutoFlush = true;           //輸入命令
+                process.StandardInput.WriteLine(command);
+                process.StandardInput.WriteLine("exit");          //等待結束  //一定要關閉
+
+                //same
+                //richTextBox2.AppendText(process.StandardOutput.ReadToEnd());  //直接顯示出來
+
+                StreamReader reader = process.StandardOutput;//截取輸出流
+                string output = reader.ReadLine();//每次讀取一行
+
+                while (!reader.EndOfStream)
+                {
+                    richTextBox2.Text += output + "\n";
+                    output = reader.ReadLine();
+                }
+                process.WaitForExit();
+                process.Close();
             }
-            p.WaitForExit();
-            p.Close();
+            catch (Exception)
+            {
+            }
         }
     }
 }
