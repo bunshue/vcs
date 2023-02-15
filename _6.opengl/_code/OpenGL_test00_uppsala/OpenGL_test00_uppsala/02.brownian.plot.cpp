@@ -37,6 +37,43 @@ void make_data_4_file(void)
     }
 }
 
+void find_data_boundary()
+{
+    float minx = 1.0e38;
+    float maxx = -1.0e38;
+    float miny = 1.0e38;
+    float maxy = -1.0e38;
+    float xrange = 0.0f;
+    float yrange = 0.0f;
+
+    for (int i = 0; i < number_of_points; i++)
+    {
+        //printf("%0.10f  %0.10f\n", points[i].x, points[i].y);
+
+        if (points[i].x < minx)
+        {
+            minx = points[i].x;
+        }
+        if (points[i].x > maxx)
+        {
+            maxx = points[i].x;
+        }
+        if (points[i].y < miny)
+        {
+            miny = points[i].y;
+        }
+        if (points[i].y > maxy)
+        {
+            maxy = points[i].y;
+        }
+    }
+    xrange = maxx - minx;
+    yrange = maxy - miny;
+
+    printf("取得 X 範圍(%0.10f ~ %0.10f), range : %0.10f\n", minx, maxx, xrange);
+    printf("取得 Y 範圍(%0.10f ~ %0.10f), range : %0.10f\n", miny, maxy, yrange);
+}
+
 void display(void)
 {
     glClearColor(1.0, 1.0, 1.0, 0.0);   //黑色背景
@@ -58,6 +95,8 @@ void reshape(int width, int height)
 int main(int argc, char** argv)
 {
     make_data_4_file();    //製作資料4. 讀檔案
+
+    find_data_boundary();
 
     const char* windowName = "Curve Fitting with Evaluators";
     const char* message = "僅顯示, 無控制, 按 Esc 離開\n";

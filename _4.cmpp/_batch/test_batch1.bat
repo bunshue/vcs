@@ -32,7 +32,7 @@ echo Removing system garbage, done.
 
 echo 啟動某外部程式
 rem "C:\___small\DIH.exe" -startvm ubuntu
-"C:\___small\IH.exe"
+rem "C:\___small\DIH.exe"
 
 echo "啟動某外部程式之回傳碼 : " %errorlevel%
 if errorlevel 1 goto error
@@ -89,6 +89,13 @@ set pwd=%cd%
 
 echo 取得目前位置 %pwd%
 
+set pwd=%~dp0\.. 
+echo pwd : %pwd%
+
+
+
+echo SystemRoot : %SystemRoot%
+
 
 
 
@@ -107,16 +114,85 @@ echo 取得目前位置 %VIVADO%
 
 
 IF EXIST %VIVADO% (
-REM echo "%VIVADO% found"
+echo "%VIVADO% found"
+) else (
+echo "%VIVADO% not found"
+)
+
+if not defined RDI_ARGS_FUNCTION (
+  echo "%RDI_ARGS_FUNCTION% found"
+) else (
+  echo "%RDI_ARGS_FUNCTION% not found"
+)
+
+
+rem "C:\___small\DIH.exe"
+
+
+set program=C:\___small\DIH.exe
+
+echo 程式 : %program%
+
+
+
+if exist "C:\___small\DIH.exe" (
+	echo 程式 : %program% 存在
+) else (
+  	echo 程式 : %program% 不存在
 )
 
 
 
-:error
-echo *** BOOM! ***
+echo 分析預設路徑
+for %%A in ("%PATH:;=";"%") do (
+  rem echo get %%A
+)
 
 
 
+echo 將資料匯出成純文字檔
+echo 把參數內容匯出 要加echo
+@echo PATH: %PATH% >> someinfo.txt
+
+echo 執行指令把結果匯出
+rem dir /d /S %parent% >> dir.txt
+dir /d /S >> dir.txt
+
+
+echo 將此目錄下的檔案匯出1, 全檔名
+dir /s /b /on >list1.txt
+
+
+echo 將此目錄下的檔案匯出2, 簡檔名
+for /F "delims= eol=" %%A IN ('dir /S /B') do echo %%~nA >> list2.txt
+
+
+echo 將此目錄下所有.txt匯出成 xls檔
+for /F "delims= eol=" %%A IN ('dir /b /s *.txt') do echo %%~nA >> list3.xls
+
+echo 將訊息附加到一個檔案內
+echo "this is a lion-mouse." >> message.txt
+
+
+echo 刪除這個資料夾下所有 .xyz 檔案
+del /s *.xyz
+
+
+
+
+SET /P FolderName=請輸入文件夾名稱:
+echo 你輸入了 : %FolderName%
+
+cd/d %~dp0
+echo 建立資料夾 : %~dp0%FolderName%
+
+rem robocopy %1 %~dp0%FolderName% *.dwg /S
+rem robocopy %1 %~dp0%FolderName% *.pdf /S
+
+
+
+
+rem 以下固定不變
 
 goto end
 
@@ -125,5 +201,7 @@ echo *** BOOM! ***
 
 :end
 echo done!
+rem 暫停一下, 顯示 : 請按任意鍵繼續 . . .
 pause
+
 
