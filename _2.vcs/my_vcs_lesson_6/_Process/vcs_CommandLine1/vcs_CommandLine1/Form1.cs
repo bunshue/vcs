@@ -412,15 +412,13 @@ namespace vcs_CommandLine1
             p.Start();
             p.StandardInput.WriteLine(@"netstat -a -n > port.txt");
 
-
             Application.DoEvents();
-
 
             richTextBox1.Text += "取得系統開啟的端口和狀態\n";
             try
             {
                 string path = "port.txt";
-                using (StreamReader sr = new StreamReader(path))
+                using (StreamReader sr = new StreamReader(path, Encoding.Default))
                 {
                     while (sr.Peek() >= 0)
                     {
@@ -428,13 +426,10 @@ namespace vcs_CommandLine1
                     }
                 }
             }
-            catch (Exception hy)
+            catch (Exception ex)
             {
-                MessageBox.Show(hy.Message);
+                richTextBox1.Text += "錯誤訊息 : " + ex.Message + "\n";
             }
-
-
-
         }
 
         private void button9_Click(object sender, EventArgs e)

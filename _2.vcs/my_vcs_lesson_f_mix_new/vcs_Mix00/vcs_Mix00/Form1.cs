@@ -494,8 +494,31 @@ namespace vcs_Mix00
             catch { }
         }
 
+        [DllImport("kernel32.dll", EntryPoint = "GetDiskFreeSpaceEx")]
+        public static extern int GetDiskFreeSpaceEx(string lpDirectoryName, out long lpFreeBytesAvailable, out long lpTotalNumberOfBytes, out long lpTotalNumberOfFreeBytes);
         private void button10_Click(object sender, EventArgs e)
         {
+            //取得本機或網路磁碟機的磁碟訊息, 選擇磁碟或目錄
+            FolderBrowserDialog fbd = new FolderBrowserDialog();
+            if (fbd.ShowDialog() == DialogResult.OK)
+            {
+                long fb, ftb, tfb;
+                string str = fbd.SelectedPath;
+                richTextBox1.Text += "path : " + str + "\n";
+                if (GetDiskFreeSpaceEx(str, out fb, out ftb, out tfb) != 0)
+                {
+                    string strfb = Convert.ToString(fb / 1024 / 1024 / 1024) + " G";
+                    string strftb = Convert.ToString(ftb / 1024 / 1024 / 1024) + " G";
+                    string strtfb = Convert.ToString(tfb / 1024 / 1024 / 1024) + " G";
+                    richTextBox1.Text += "總空間" + strfb + "\n";
+                    richTextBox1.Text += "可用空間" + strftb + "\n";
+                    richTextBox1.Text += "總剩餘空間" + strtfb + "\n";
+                }
+                else
+                {
+                    MessageBox.Show("NO");
+                }
+            }
         }
 
         private void button11_Click(object sender, EventArgs e)

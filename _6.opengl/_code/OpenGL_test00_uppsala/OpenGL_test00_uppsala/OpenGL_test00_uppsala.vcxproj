@@ -20,7 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Common.cpp" />
-    <ClCompile Include="10.viewRotatingCube.cpp" />
+    <ClCompile Include="02.2D-plot.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
