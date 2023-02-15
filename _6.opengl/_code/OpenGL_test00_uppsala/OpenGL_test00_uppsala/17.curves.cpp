@@ -35,9 +35,48 @@ void make_data_4_file(void)
         }
     }
     points_file.close();
+}
 
+void find_data_boundary()
+{
+    float minx = 1.0e38f;
+    float maxx = -1.0e38f;
+    float miny = 1.0e38f;
+    float maxy = -1.0e38f;
+    float xrange = 0.0f;
+    float yrange = 0.0f;
+
+    for (int i = 0; i < number_of_points; i++)
+    {
+        //printf("%0.10f  %0.10f\n", points[i].x, points[i].y);
+
+        if (points[i].x < minx)
+        {
+            minx = points[i].x;
+        }
+        if (points[i].x > maxx)
+        {
+            maxx = points[i].x;
+        }
+        if (points[i].y < miny)
+        {
+            miny = points[i].y;
+        }
+        if (points[i].y > maxy)
+        {
+            maxy = points[i].y;
+        }
+    }
+    xrange = maxx - minx;
+    yrange = maxy - miny;
+
+    printf("取得 X 範圍(%0.10f ~ %0.10f), range : %0.10f\n", minx, maxx, xrange);
+    printf("取得 Y 範圍(%0.10f ~ %0.10f), range : %0.10f\n", miny, maxy, yrange);
+}
+
+void print_data(void)
+{
     printf("讀取資料 SP, 共取得 %d 點資料\n", number_of_points);
-
     for (int i = 0; i < number_of_points; i++)
     {
         printf("%0.10f  %0.10f\n", points[i].x, points[i].y);
@@ -92,8 +131,8 @@ void display(void)
     glLoadIdentity();   //設置單位矩陣
     gluOrtho2D(0, WindowSizeX, 0, WindowSizeY);
 
-    int offset = 25;
-    draw_rectangle(color_m, 1, offset, offset, WindowSizeX - offset*2, WindowSizeY - offset*2);    //左下開始 w h
+    float offset = 25.0f;
+    draw_rectangle(color_m, 1, offset, offset, (float)WindowSizeX - offset * 2, (float)WindowSizeY - offset * 2);    //左下開始 w h
 
     glLoadIdentity();   //設置單位矩陣
     gluOrtho2D(-0.1f, 1.1f, -0.1f, 1.1f);
@@ -120,6 +159,9 @@ void display(void)
 int main(int argc, char** argv)
 {
     make_data_4_file();    //製作資料4. 讀檔案
+
+    find_data_boundary();
+    print_data();
 
     const char* windowName = "Curve Fitting";
     const char* message = "僅顯示, 無控制, 按 Esc 離開\n";

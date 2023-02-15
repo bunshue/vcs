@@ -37,9 +37,7 @@ GLubyte cubeIndices[24] =
 	0, 1, 5, 4		//下
 };
 
-// Angles of rotation about each axis.
-GLfloat theta[] = { 0.0f, 0.0f, 0.0f };
-
+GLfloat theta[] = { 0.0f, 0.0f, 0.0f };	//對各軸的旋轉角度
 GLint axis = 0;	//0: 繞x軸旋轉, 1: 繞y軸旋轉, 2: 繞z軸旋轉
 
 int flag_rotating = 0;
@@ -108,7 +106,6 @@ void idle(void)
 				theta[axis] = 360.0f;
 			}
 		}
-
 		glutPostRedisplay();
 		sleep(25);
 	}

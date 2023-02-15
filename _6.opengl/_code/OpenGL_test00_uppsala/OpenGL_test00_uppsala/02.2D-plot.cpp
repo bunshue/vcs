@@ -89,6 +89,43 @@ void make_data_2_sine(void)
     return;
 }
 
+void find_data_boundary()
+{
+    float minx = 1.0e38;
+    float maxx = -1.0e38;
+    float miny = 1.0e38;
+    float maxy = -1.0e38;
+    float xrange = 0.0f;
+    float yrange = 0.0f;
+
+    for (int i = 0; i < POINTS; i++)
+    {
+        //printf("%0.10f  %0.10f\n", points[i].x, points[i].y);
+
+        if (points[i].x < minx)
+        {
+            minx = points[i].x;
+        }
+        if (points[i].x > maxx)
+        {
+            maxx = points[i].x;
+        }
+        if (points[i].y < miny)
+        {
+            miny = points[i].y;
+        }
+        if (points[i].y > maxy)
+        {
+            maxy = points[i].y;
+        }
+    }
+    xrange = maxx - minx;
+    yrange = maxy - miny;
+
+    printf("取得 X 範圍(%0.10f ~ %0.10f), range : %0.10f\n", minx, maxx, xrange);
+    printf("取得 Y 範圍(%0.10f ~ %0.10f), range : %0.10f\n", miny, maxy, yrange);
+}
+
 void print_data(void)
 {
     printf("共 %d 筆資料, 內容:\n", POINTS);
@@ -117,6 +154,7 @@ void display(void)
     make_data_3_gaussian();//製作資料3, 高斯計算
     //make_data_4_file();    //製作資料4. 讀檔案, TBD
 
+    find_data_boundary();
     //print_data();
 
     glClear(GL_COLOR_BUFFER_BIT);   //全圖黑色

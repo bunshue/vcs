@@ -57,6 +57,8 @@ void display(void)
     //已旋轉後之座標軸
     draw_coordinates(1.5f);     //畫座標軸
 
+    draw_teapot(color_purple, 1.0f, 1.5f);	//畫茶壺
+
     /*
     //用 GL_LINE_LOOP 畫一個空心矩形
     glColor3f(1.0, 0.0, 0.0);	//紅

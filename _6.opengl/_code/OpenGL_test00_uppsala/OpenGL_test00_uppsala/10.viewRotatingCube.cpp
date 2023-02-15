@@ -1,10 +1,3 @@
-/* Rotating cube with viewer movement from Chapter 5 of Ed Angel text.*/
-/* Cube definition and display similar to rotating--cube program. */
-
-/* We use the Lookat function in the display callback to point
-the viewer, whose position can be altered by the x,X,y,Y,z, and Z keys.
-The perspective view is set in the reshape callback */
-
 #include "../../Common.h"
 
 // Vertices of the cube, centered at the origin.
@@ -44,12 +37,14 @@ GLubyte cubeIndices[24] =
 	0, 1, 5, 4		//下
 };
 
-GLfloat theta[] = { 0.0, 0.0, 0.0 };  /* initial rotation angles  */
-GLint axis = 2;                     /* initial axis of rotation */
+GLfloat theta[] = { 0.0f, 0.0f, 0.0f };	//對各軸的旋轉角度
+GLint axis = 0;	//0: 繞x軸旋轉, 1: 繞y軸旋轉, 2: 繞z軸旋轉
 GLdouble viewer[] = { 0.0, 0.0, 5.0 }; /* initial viewer location  */
 
 int flag_rotating = 0;
 int flag_rotating_direction = 0;	//0: CW, 1:CCW
+float dd = 1.0f;
+float ddd = 0.06f;
 
 // This function sets up the vertex arrays for the color cube.
 void colorcube(void)
@@ -89,22 +84,22 @@ void idle(void)
 	{
 		if (flag_rotating_direction == 0)	//CW
 		{
-			theta[axis] += 2.0f;
+			theta[axis] += dd;
 			if (theta[axis] > 360.0f)
 			{
 				theta[axis] = 0.0f;
 			}
-			glutPostRedisplay();
-			sleep(25);
 		}
 		else   //CCW
 		{
-			theta[axis] -= 2.0f;
+			theta[axis] -= dd;
 			if (theta[axis] < 0.0f)
 			{
 				theta[axis] = 360.0f;
 			}
 		}
+		glutPostRedisplay();
+		sleep(25);
 	}
 }
 

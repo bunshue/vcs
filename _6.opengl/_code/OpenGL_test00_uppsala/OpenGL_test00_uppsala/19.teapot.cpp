@@ -13,7 +13,14 @@
 
 double points[VERTICES + 1][3];
 int patch_vertices[PATCHES][16];
-static GLfloat theta[] = { 270.0, 0.0, 180.0 };
+
+//GLfloat theta[] = { 270.0f, 0.0f, 180.0f };   //對各軸的旋轉角度
+GLfloat theta[] = { 0.0f, 0.0f, 0.0f };	//對各軸的旋轉角度
+GLint axis = 0;	//0: 繞x軸旋轉, 1: 繞y軸旋轉, 2: 繞z軸旋轉
+int flag_rotating = 0;
+int flag_rotating_direction = 0;	//0: CW, 1:CCW
+float dd = 1.0f;
+float ddd = 0.06f;
 
 void make_teapot_data(void)
 {
@@ -110,6 +117,11 @@ void display(void)
     glFlush();  // 執行繪圖命令
 }
 
+void idle(void)
+{
+
+}
+
 void reshape(int width, int height)
 {
     glViewport(0, 0, width, height);
@@ -199,6 +211,8 @@ int main(int argc, char** argv)
     common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard);
 
     init_teapot_data();
+
+    glutIdleFunc(idle);         //設定callback function, 利用idle事件進行重畫
 
     glutMainLoop();	//開始主循環繪製
 

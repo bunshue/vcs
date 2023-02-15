@@ -92,6 +92,8 @@ echo 取得目前位置 %pwd%
 set pwd=%~dp0\.. 
 echo pwd : %pwd%
 
+set parent=%cd%
+echo parent : %parent%
 
 
 echo SystemRoot : %SystemRoot%

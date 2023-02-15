@@ -5,6 +5,7 @@
 
 #define POINTS     51
 Point points[POINTS];
+int number_of_points = POINTS;
 
 int WindowSizeX = WINDOW_SIZE;
 int WindowSizeY = WINDOW_SIZE;
@@ -20,17 +21,54 @@ void make_data_2_sine(void)
         //points[i].y = 25.0f * sin(PI * (float)(i + t) / 180);
     }
     //t++;
+    points[POINTS / 8].y = 1.0f;     //故意造一個特大點
+    return;
+}
 
-    printf("取得 %d 點資料\n", POINTS);
+void find_data_boundary()
+{
+    float minx = 1.0e38f;
+    float maxx = -1.0e38f;
+    float miny = 1.0e38f;
+    float maxy = -1.0e38f;
+    float xrange = 0.0f;
+    float yrange = 0.0f;
 
-    for (int i = 0; i < POINTS; i++)
+    for (int i = 0; i < number_of_points; i++)
+    {
+        //printf("%0.10f  %0.10f\n", points[i].x, points[i].y);
+
+        if (points[i].x < minx)
+        {
+            minx = points[i].x;
+        }
+        if (points[i].x > maxx)
+        {
+            maxx = points[i].x;
+        }
+        if (points[i].y < miny)
+        {
+            miny = points[i].y;
+        }
+        if (points[i].y > maxy)
+        {
+            maxy = points[i].y;
+        }
+    }
+    xrange = maxx - minx;
+    yrange = maxy - miny;
+
+    printf("取得 X 範圍(%0.10f ~ %0.10f), range : %0.10f\n", minx, maxx, xrange);
+    printf("取得 Y 範圍(%0.10f ~ %0.10f), range : %0.10f\n", miny, maxy, yrange);
+}
+
+void print_data(void)
+{
+    printf("共有 %d 點資料\n", number_of_points);
+    for (int i = 0; i < number_of_points; i++)
     {
         printf("%0.10f  %0.10f\n", points[i].x, points[i].y);
     }
-
-    points[POINTS / 8].y = 1.0f;     //故意造一個特大點
-
-    return;
 }
 
 void init_data_2()
@@ -71,8 +109,10 @@ void display(void)
 
     //窗口座標範圍, 2D	//顯示範圍 x(0 ~ WindowSizeX), y(0 ~ WindowSizeY)
     gluOrtho2D(0, WindowSizeX, 0, WindowSizeY);
+
     //照著窗口座標範圍畫一個框
-    draw_rectangle(color_m, 1, 10.0f, 10.0f, WindowSizeX - 20, WindowSizeY - 20);    //左下開始 w h
+    float border = 10.0f;
+    draw_rectangle(color_m, 1, border, border, (float)WindowSizeX - border * 2, (float)WindowSizeY - border * 2);    //左下開始 w h
 
     glColor3f(0.0, 0.0, 0.0);  //黑色線
 
@@ -129,6 +169,8 @@ void reshape(int width, int height)
 int main(int argc, char** argv)
 {
     make_data_2_sine();
+    find_data_boundary();
+    print_data();
 
     const char* windowName = "Curve Fitting";
     const char* message = "僅顯示, 無控制, 按 Esc 離開\n";

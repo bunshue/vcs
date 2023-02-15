@@ -20,15 +20,6 @@ GLfloat vertices[][3] =
 	{-1.0,3.0,1.0}
 };
 
-/*
-// Colors of the vertices.
-GLfloat vertex_color[][3] = {						//沒用到 R B
-	{1.0,0.0,0.0}, {0.0,1.0,0.0}, {0.0,0.0,1.0},	//R G B
-	{1.0,1.0,0.0}, {0.0,1.0,1.0}, {1.0,0.0,1.0},	//黃 天青 桃紅
-	{0.0,0.0,0.0}, {1.0,1.0,1.0}					//黑 白
-};
-*/
-
 // Colors of the vertices.
 GLfloat vertex_color[][3] =
 {
@@ -59,11 +50,13 @@ GLfloat shadowcolors[][3] =
 //							   下          後        左         右         上          前
 GLubyte cubeIndices[24] = { 0,3,2,1,   2,3,7,6,   0,4,7,3,   1,2,6,5,   4,5,6,7,    0,1,5,4 };
 
-GLfloat theta[] = { 0.0, 0.0, 0.0 };   /* initial rotation angles      */
-GLint axis = 1;                      /* initial axis of rotation     */
+GLfloat theta[] = { 0.0f, 0.0f, 0.0f };	//對各軸的旋轉角度
+GLint axis = 0;	//0: 繞x軸旋轉, 1: 繞y軸旋轉, 2: 繞z軸旋轉
 GLdouble viewer[] = { 5.0, 5.0, 5.0 }; /* initial viewer location      */
 GLfloat light[3] = { 0.0, 10.0, 0.0 }; /* position of light            */
 GLfloat m[16];                       /* shadow transformation matrix */
+float dd = 1.0f;
+float ddd = 0.06f;
 
 int flag_rotating = 0;
 int flag_rotating_direction = 0;	//0: CW, 1:CCW
@@ -120,8 +113,6 @@ void display(void)
 	glDrawElements(GL_QUADS, 24, GL_UNSIGNED_BYTE, cubeIndices);
 	glPopMatrix();
 
-	/* Swap display buffers */
-
 	glutSwapBuffers();
 }
 
@@ -132,7 +123,7 @@ void idle(void)
 	{
 		if (flag_rotating_direction == 0)	//CW
 		{
-			theta[axis] += 2.0f;
+			theta[axis] += dd;
 			if (theta[axis] > 360.0f)
 			{
 				theta[axis] = 0.0f;
@@ -140,7 +131,7 @@ void idle(void)
 		}
 		else   //CCW
 		{
-			theta[axis] -= 2.0f;
+			theta[axis] -= dd;
 			if (theta[axis] < 0.0f)
 			{
 				theta[axis] = 360.0f;

@@ -4,7 +4,6 @@
 Point points[POINTS];
 int number_of_points = 0;
 
-/* This function gets the input data for the program to process. */
 void make_data_4_file(void)
 {
     printf("讀取資料 ST\n");
@@ -20,7 +19,7 @@ void make_data_4_file(void)
     }
 
     //讀取檔案資料
-    while (points_file >> points[number_of_points].x >> points[number_of_points].y)
+    while (points_file >> points[number_of_points].x >> points[number_of_points].y) //C++之讀取檔案資料
     {
         number_of_points++;
         if (number_of_points == POINTS)
@@ -29,20 +28,15 @@ void make_data_4_file(void)
             break;
         }
     }
-
-    printf("讀取資料 SP, 共取得 %d 點資料\n", number_of_points);
-    for (int i = 0; i < number_of_points; i++)
-    {
-        printf("%0.10f  %0.10f\n", points[i].x, points[i].y);
-    }
+    points_file.close();
 }
 
 void find_data_boundary()
 {
-    float minx = 1.0e38;
-    float maxx = -1.0e38;
-    float miny = 1.0e38;
-    float maxy = -1.0e38;
+    float minx = 1.0e38f;
+    float maxx = -1.0e38f;
+    float miny = 1.0e38f;
+    float maxy = -1.0e38f;
     float xrange = 0.0f;
     float yrange = 0.0f;
 
@@ -74,6 +68,15 @@ void find_data_boundary()
     printf("取得 Y 範圍(%0.10f ~ %0.10f), range : %0.10f\n", miny, maxy, yrange);
 }
 
+void print_data(void)
+{
+	printf("共有 %d 點資料\n", number_of_points);
+    for (int i = 0; i < number_of_points; i++)
+    {
+        printf("%0.10f  %0.10f\n", points[i].x, points[i].y);
+    }
+}
+
 void display(void)
 {
     glClearColor(1.0, 1.0, 1.0, 0.0);   //黑色背景
@@ -97,6 +100,7 @@ int main(int argc, char** argv)
     make_data_4_file();    //製作資料4. 讀檔案
 
     find_data_boundary();
+    //print_data();
 
     const char* windowName = "Curve Fitting with Evaluators";
     const char* message = "僅顯示, 無控制, 按 Esc 離開\n";

@@ -35,6 +35,7 @@ void make_data_4_file(void)
             break;
         }
     }
+    points_file.close();
 
     /* Load two additional copies of last point to make sure the right number of
        data points are available for a Bezier curve. */
@@ -42,8 +43,48 @@ void make_data_4_file(void)
     points[number_of_points + 1][0] = points[number_of_points][0] = points[number_of_points - 1][0];
     points[number_of_points + 1][1] = points[number_of_points][1] = points[number_of_points - 1][1];
     points[number_of_points + 1][2] = points[number_of_points][2] = 0.0;
+}
 
-    printf("讀取資料 SP, 共取得 %d 點資料\n", number_of_points);
+void find_data_boundary()
+{
+    float minx = 1.0e38f;
+    float maxx = -1.0e38f;
+    float miny = 1.0e38f;
+    float maxy = -1.0e38f;
+    float xrange = 0.0f;
+    float yrange = 0.0f;
+
+    for (int i = 0; i < number_of_points; i++)
+    {
+        //printf("%0.10f  %0.10f\n", points[i][0], points[i][1]);
+
+        if (points[i][0] < minx)
+        {
+            minx = points[i][0];
+        }
+        if (points[i][0] > maxx)
+        {
+            maxx = points[i][0];
+        }
+        if (points[i][1] < miny)
+        {
+            miny = points[i][1];
+        }
+        if (points[i][1] > maxy)
+        {
+            maxy = points[i][1];
+        }
+    }
+    xrange = maxx - minx;
+    yrange = maxy - miny;
+
+    printf("取得 X 範圍(%0.10f ~ %0.10f), range : %0.10f\n", minx, maxx, xrange);
+    printf("取得 Y 範圍(%0.10f ~ %0.10f), range : %0.10f\n", miny, maxy, yrange);
+}
+
+void print_data(void)
+{
+    printf("共有 %d 點資料\n", number_of_points);
     for (int i = 0; i < number_of_points; i++)
     {
         printf("%0.10f  %0.10f\n", points[i][0], points[i][1]);
@@ -56,7 +97,7 @@ void display(void)
 
     int i, j;
 
-    glClearColor(1.0, 1.0, 1.0, 0.0); /* Make the background white. */
+    glClearColor(1.0, 1.0, 1.0, 0.0);   //背景白色
     glEnable(GL_MAP1_VERTEX_3);
 
     for (i = 0; i < number_of_points; i++)
@@ -91,6 +132,9 @@ void reshape(int width, int height)
 int main(int argc, char** argv)
 {
     make_data_4_file();    //製作資料4. 讀檔案
+
+    find_data_boundary();
+    //print_data();
 
     const char* windowName = "Curve Fitting with Evaluators";
     const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
