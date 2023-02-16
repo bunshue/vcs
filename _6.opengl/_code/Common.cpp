@@ -424,7 +424,18 @@ void display0(void)
 // 窗口大小變化回調函數
 void reshape0(int w, int h)
 {
-    glViewport(0, 0, w, h);
+    //glViewport(0, 0, w, h); same
+    //以畫素為單位
+
+    //視口設定為全部視窗
+    int viewportx = 0;
+    int viewporty = 0;
+    int viewportw = w;
+    int viewporth = h;
+    glViewport(viewportx, viewporty, viewportw, viewporth);
+    //printf("把所有要畫的東西顯示在視窗的(%d ,%d)開始的(%d, %d)\n", viewportx, viewporty, viewportw, viewporth);
+
+    //glViewport(w / 2, h / 2, w / 2, h / 2); //把所有要畫的東西顯示在視窗的右上1/4處
 }
 
 void keyboard0(unsigned char key, int /*x*/, int /*y*/)

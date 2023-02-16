@@ -14,7 +14,7 @@ GLfloat vertices[][3] =
 };
 
 // Colors of the vertices.
-GLfloat colors[][3] =
+GLfloat vertex_color[][3] =
 {
 	{1.0, 1.0, 1.0},		//未用到 白色  XXXX
 	{0.0, 0.0, 1.0},		//後 B
@@ -51,7 +51,7 @@ void colorcube(void)
 	glEnableClientState(GL_COLOR_ARRAY);
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_FLOAT, 0, vertices);
-	glColorPointer(3, GL_FLOAT, 0, colors);
+	glColorPointer(3, GL_FLOAT, 0, vertex_color);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(-2.0, 2.0, -2.0, 2.0, -2.0, 2.0);
@@ -83,32 +83,6 @@ void display(void)
 		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '0' + i);
 	}
 	glutSwapBuffers();
-}
-
-// This function spins the cube around the current axis by incrementing the angle of rotation by 2 degrees.
-void idle(void)
-{
-	if (flag_rotating == 1)
-	{
-		if (flag_rotating_direction == 0)	//CW
-		{
-			theta[axis] += dd;
-			if (theta[axis] > 360.0f)
-			{
-				theta[axis] = 0.0f;
-			}
-		}
-		else   //CCW
-		{
-			theta[axis] -= dd;
-			if (theta[axis] < 0.0f)
-			{
-				theta[axis] = 360.0f;
-			}
-		}
-		glutPostRedisplay();
-		sleep(25);
-	}
 }
 
 void keyboard(unsigned char key, int /*x*/, int /*y*/)
@@ -232,6 +206,31 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
 		theta[2] = 0.0f;
 		glutPostRedisplay();
 		break;
+	}
+}
+
+void idle(void)
+{
+	if (flag_rotating == 1)
+	{
+		if (flag_rotating_direction == 0)	//CW
+		{
+			theta[axis] += dd;
+			if (theta[axis] > 360.0f)
+			{
+				theta[axis] = 0.0f;
+			}
+		}
+		else   //CCW
+		{
+			theta[axis] -= dd;
+			if (theta[axis] < 0.0f)
+			{
+				theta[axis] = 360.0f;
+			}
+		}
+		glutPostRedisplay();
+		sleep(25);
 	}
 }
 

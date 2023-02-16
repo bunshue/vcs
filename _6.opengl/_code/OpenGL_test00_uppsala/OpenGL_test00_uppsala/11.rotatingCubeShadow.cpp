@@ -1,36 +1,29 @@
-/* Rotating cube with viewer movement and shadow from Chapter 5 */
-/* Cube definition and display similar to rotating--cube program */
-
-/* We use the Lookat function in the display callback to point
-the viewer, whose position can be altered by the x,X,y,Y,z, and Z keys.
-The perspective view is set in the reshape callback */
-
 #include "../../Common.h"
 
 // Vertices of the cube, centered at the origin.
 GLfloat vertices[][3] =
 {
-	{-1.0,1.0,-1.0},
-	{1.0,1.0,-1.0},
-	{1.0,3.0,-1.0},
-	{-1.0,3.0,-1.0},
-	{-1.0,1.0,1.0},
-	{1.0,1.0,1.0},
-	{1.0,3.0,1.0},
-	{-1.0,3.0,1.0}
+	{-1.0,1.0,-1.0},	//0
+	{1.0,1.0,-1.0},		//1
+	{1.0,3.0,-1.0},		//2
+	{-1.0,3.0,-1.0},	//3
+	{-1.0,1.0,1.0},		//4
+	{1.0,1.0,1.0},		//5
+	{1.0,3.0,1.0},		//6
+	{-1.0,3.0,1.0}		//7
 };
 
 // Colors of the vertices.
 GLfloat vertex_color[][3] =
 {
-	{0.0,0.0,0.0},
-	{1.0,0.0,0.0},
-	{1.0,1.0,0.0},
-	{0.0,1.0,0.0},
-	{0.0,0.0,1.0},
-	{1.0,0.0,1.0},
-	{1.0,1.0,1.0},
-	{0.0,1.0,1.0}
+	{1.0, 1.0, 1.0},		//未用到 白色  XXXX
+	{0.0, 0.0, 1.0},		//後 B
+	{1.0, 1.0, 1.0},		//未用到 白色  XXXX
+	{0.0, 1.0, 1.0},		//左 Cyan天青
+	{1.0, 1.0, 0.0},		//下 Y
+	{1.0, 0.0, 1.0},		//右 Magenta桃紅
+	{0.0, 1.0, 0.0},		//上 G
+	{1.0, 0.0, 0.0}			//前 R
 };
 
 // Shadow colors.
@@ -163,8 +156,11 @@ void mouse(int btn, int state, int x, int y)
 
 void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
+	//printf("你所按按鍵的碼是%x\t此時視窗內的滑鼠座標是(%d,%d)\n", key, x, y);
+
 	if (key == 27)
 	{
+		//離開視窗
 		glutDestroyWindow(glutGetWindow());
 		return;
 	}

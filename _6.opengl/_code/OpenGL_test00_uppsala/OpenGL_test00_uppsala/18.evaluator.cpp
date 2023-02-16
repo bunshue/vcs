@@ -5,33 +5,41 @@
  /* Drawing constants. */
 #define STEPS        20  /* number of steps to draw each segment over */
 
+const char* data_filename = "data/17.points.dat";
+
 #define POINTS     100
+#define MAX_POINTS     100
 float points[POINTS + 2][3];    //多兩點給 Bezier curve 用
 //Point points[POINTS]; reserved
 int number_of_points = 0;
 
-void make_data_4_file(void)
-{
-    printf("讀取資料 ST\n");
+float minx = 1.0e38f;
+float maxx = -1.0e38f;
+float miny = 1.0e38f;
+float maxy = -1.0e38f;
+float xrange = 0.0f;
+float yrange = 0.0f;
 
+int make_data_4_file(const char* filename)
+{
     ifstream points_file;
 
     //開啟檔案
-    points_file.open("data/17.points.dat", ios::in);
+    points_file.open(filename, ios::in);
     if (points_file.is_open() == false)
     {
-        cerr << "Data file 'points.dat' not found." << endl;
-        exit(EXIT_FAILURE);
+        cout << "無法開啟檔案 : " << filename << endl;
+        return 1;
     }
 
     //讀取檔案資料
-    while (points_file >> points[number_of_points][0] >> points[number_of_points][1])
+    while (points_file >> points[number_of_points][0] >> points[number_of_points][1])	////C++之讀取檔案資料
     {
         points[number_of_points][2] = 0.0;
         number_of_points++;
-        if (number_of_points == POINTS)
+        if (number_of_points == MAX_POINTS)
         {
-            cout << "Data arrays are full. If any more data is present it will not be plotted." << endl;
+            cout << "到達點數上限, 先行離開" << endl;
             break;
         }
     }
@@ -43,17 +51,12 @@ void make_data_4_file(void)
     points[number_of_points + 1][0] = points[number_of_points][0] = points[number_of_points - 1][0];
     points[number_of_points + 1][1] = points[number_of_points][1] = points[number_of_points - 1][1];
     points[number_of_points + 1][2] = points[number_of_points][2] = 0.0;
+    
+    return 0;
 }
 
 void find_data_boundary()
 {
-    float minx = 1.0e38f;
-    float maxx = -1.0e38f;
-    float miny = 1.0e38f;
-    float maxy = -1.0e38f;
-    float xrange = 0.0f;
-    float yrange = 0.0f;
-
     for (int i = 0; i < number_of_points; i++)
     {
         //printf("%0.10f  %0.10f\n", points[i][0], points[i][1]);
@@ -131,7 +134,7 @@ void reshape(int width, int height)
 
 int main(int argc, char** argv)
 {
-    make_data_4_file();    //製作資料4. 讀檔案
+    make_data_4_file(data_filename);    //製作資料4. 讀檔案
 
     find_data_boundary();
     //print_data();

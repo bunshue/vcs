@@ -1,51 +1,47 @@
 #include "../../Common.h"
 
-#define WINDOW_SIZE  600  /* initial size of window                             */
-#define BORDER        10  /* border width in each viewport                      */
+const char* data_filename = "data/17.points.dat";
 
 #define POINTS     151
-Point points[POINTS];
+#define MAX_POINTS     151
+Point points[MAX_POINTS];
 int number_of_points = 0;
 
-int WindowSizeX = WINDOW_SIZE;
-int WindowSizeY = WINDOW_SIZE;
+float minx = 1.0e38f;
+float maxx = -1.0e38f;
+float miny = 1.0e38f;
+float maxy = -1.0e38f;
+float xrange = 0.0f;
+float yrange = 0.0f;
 
-void make_data_4_file(void)
+int make_data_4_file(const char* filename)
 {
-    printf("讀取資料 ST\n");
-
     ifstream points_file;
 
     //開啟檔案
-    points_file.open("data/17.points.dat", ios::in);
+    points_file.open(filename, ios::in);
     if (points_file.is_open() == false)
     {
-        cerr << "Data file 'points.dat' not found." << endl;
-        exit(EXIT_FAILURE);
+        cout << "無法開啟檔案 : " << filename << endl;
+        return 1;
     }
 
     //讀取檔案資料
     while (points_file >> points[number_of_points].x >> points[number_of_points].y) //C++之讀取檔案資料
     {
         number_of_points++;
-        if (number_of_points == POINTS)
+        if (number_of_points == MAX_POINTS)
         {
-            cout << "Data arrays are full. If any more data is present it will not be plotted." << endl;
+            cout << "到達點數上限, 先行離開" << endl;
             break;
         }
     }
     points_file.close();
+    return 0;
 }
 
 void find_data_boundary()
 {
-    float minx = 1.0e38f;
-    float maxx = -1.0e38f;
-    float miny = 1.0e38f;
-    float maxy = -1.0e38f;
-    float xrange = 0.0f;
-    float yrange = 0.0f;
-
     for (int i = 0; i < number_of_points; i++)
     {
         //printf("%0.10f  %0.10f\n", points[i].x, points[i].y);
@@ -83,13 +79,35 @@ void print_data(void)
     }
 }
 
-void init_data_4()
+void display(void)
 {
-    glClearColor(1.0, 1.0, 1.0, 0.0); /* Make the background white. */
+    glClear(GL_COLOR_BUFFER_BIT);
 
-    //在 List 1 製作第 1 張圖
-    glNewList(1, GL_COMPILE);
-    glColor3f(1.0, 0.0, 0.0);  /* Draw the marks in red. */
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();   //設置單位矩陣
+
+    //用點數為基準畫框
+    gluOrtho2D(0.0f, 600.0f, 0.0f, 600.0f); //設定座標範圍 2D
+    float offset = 25.0f;
+    draw_rectangle(color_m, 1, offset, offset, 600.0f - offset * 2, 600.0f - offset * 2);    //左下開始 w h
+
+    glLoadIdentity();   //設置單位矩陣
+    gluOrtho2D(-0.1f, 1.1f, -0.1f, 1.1f);   //設定座標範圍 2D
+    //gluOrtho2D(0.0f, 1.0f, 0.0f, 1.0f);
+
+    //用比例為基準畫框
+    glColor3f(0.0, 0.0, 1.0);  //藍色線
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);    //空心矩形
+    //glLineWidth(5.0f);	//設定線寬
+    float x_st = 0.0f;
+    float y_st = 0.0f;
+    float x_sp = 1.0f;
+    float y_sp = 1.0f;
+    glRectf(x_st, y_st, x_sp, y_sp);  //從 左下 到 右上
+
+    glClearColor(1.0, 1.0, 1.0, 0.0);   //白色背景
+
+    glColor3f(1.0, 0.0, 0.0);  //紅色線
 
     //畫X標記
     glBegin(GL_LINES);
@@ -118,56 +136,20 @@ void init_data_4()
         draw_point(color_b, 5, points[i].x, points[i].y);
     }
 
-    glEndList();
-}
-
-void display(void)
-{
-    glClear(GL_COLOR_BUFFER_BIT);
-    glViewport(0, 0, WindowSizeX, WindowSizeY);
-
-    /* Draw line separators between viewports. */
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();   //設置單位矩陣
-    gluOrtho2D(0, WindowSizeX, 0, WindowSizeY);
-
-    float offset = 25.0f;
-    draw_rectangle(color_m, 1, offset, offset, (float)WindowSizeX - offset * 2, (float)WindowSizeY - offset * 2);    //左下開始 w h
-
-    glLoadIdentity();   //設置單位矩陣
-    gluOrtho2D(-0.1f, 1.1f, -0.1f, 1.1f);
-    //gluOrtho2D(0.0f, 1.0f, 0.0f, 1.0f);
-
-    glColor3f(0.0, 0.0, 1.0);  //藍色線
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);    //空心矩形
-    //glLineWidth(5.0f);	//設定線寬
-    float x_st = 0.0f;
-    float y_st = 0.0f;
-    float x_sp = 1.0f;
-    float y_sp = 1.0f;
-    glRectf(x_st, y_st, x_sp, y_sp);  //從 左下 到 右上
-
-    glColor3f(1.0, 0.0, 0.0);  //紅色線
-
-    glViewport(BORDER, BORDER, WindowSizeX - 2 * BORDER, WindowSizeY - 2 * BORDER);
-    printf("glViewport 下 x_st = %d, y_st = %d, W = %d, H = %d\n", BORDER, BORDER, WindowSizeX - 2 * BORDER, WindowSizeY - 2 * BORDER);
-    glCallList(1);      //1
-
     glFlush();  // 執行繪圖命令
 }
 
 int main(int argc, char** argv)
 {
-    make_data_4_file();    //製作資料4. 讀檔案
+    int ret = make_data_4_file(data_filename);    //製作資料4. 讀檔案
+    printf("ret = %d\n", ret);
 
     find_data_boundary();
-    print_data();
+    //print_data();
 
     const char* windowName = "Curve Fitting";
     const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
-    common_setup(argc, argv, windowName, message, 0, WindowSizeX, WindowSizeY, 1100, 200, display, reshape0, keyboard0);
-
-    init_data_4();
+    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard0);
 
     glutMainLoop();	//開始主循環繪製
 

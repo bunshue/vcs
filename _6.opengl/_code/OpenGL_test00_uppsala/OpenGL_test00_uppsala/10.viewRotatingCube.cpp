@@ -14,7 +14,7 @@ GLfloat vertices[][3] =
 };
 
 // Colors of the vertices.
-GLfloat colors[][3] =
+GLfloat vertex_color[][3] =
 {
 	{1.0, 1.0, 1.0},		//未用到 白色  XXXX
 	{0.0, 0.0, 1.0},		//後 B
@@ -52,10 +52,9 @@ void colorcube(void)
 	glEnableClientState(GL_COLOR_ARRAY);
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glVertexPointer(3, GL_FLOAT, 0, vertices);
-	glColorPointer(3, GL_FLOAT, 0, colors);
+	glColorPointer(3, GL_FLOAT, 0, vertex_color);
 }
 
-// This function is the display callback. It draws the cube from the current viewing point.
 void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -103,7 +102,6 @@ void idle(void)
 	}
 }
 
-/* This is the mouse callback function. The mouse buttons determine which axis to rotate about. */
 void mouse(int btn, int state, int x, int y)
 {
 	if (btn == GLUT_LEFT_BUTTON && state == GLUT_DOWN)
@@ -123,8 +121,10 @@ void mouse(int btn, int state, int x, int y)
 	}
 }
 
-void keyboard(unsigned char key, int x, int y)
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
+	//printf("你所按按鍵的碼是%x\t此時視窗內的滑鼠座標是(%d,%d)\n", key, x, y);
+
 	if (key == 27)
 	{
 		//離開視窗
@@ -162,7 +162,6 @@ void keyboard(unsigned char key, int x, int y)
 	glutPostRedisplay();
 }
 
-/* This is the reshape callback function. It produces a perspective projection of the cube. */
 void reshape(int w, int h)
 {
 	glViewport(0, 0, w, h);

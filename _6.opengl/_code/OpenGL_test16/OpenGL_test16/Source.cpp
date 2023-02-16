@@ -23,9 +23,14 @@ void display(void)
 
 	int viewportx = 0;
 	int viewporty = 0;
-	//畫分割線，分成四個視見區
-	glViewport(viewportx, viewporty, W, H);		//視口設定為全部視窗
+	int viewportw = W;
+	int viewporth = H;
+
+	//畫分割線，分成四個視見區, 以畫素為單位
+	glViewport(viewportx, viewporty, viewportw, viewporth);		//視口設定為全部視窗
 												//後面這兩個參數是高度和寬度，而不是座標
+	printf("把所有要畫的東西顯示在視窗的(%d ,%d)開始的(%d, %d)\t全部\n", viewportx, viewporty, viewportw, viewporth);
+
 	glBegin(GL_LINES);
 	//畫紅色橫線
 	glColor3f(1.0, 0.0, 0.0);	//紅色
@@ -38,12 +43,7 @@ void display(void)
 	glVertex2f(0.0, 1.0);
 	glEnd();
 
-	/* 畫一個範圍矩形, TBD
-	//畫一個矩形 B
-	glColor3f(0.0, 0.0, 1.0);	//設置畫筆顏色為 B
-	//左下x,左下y,右上x,右上y,
-	glRectf(-0.9f, -0.9f, -0.3f, 0.9f);//畫一個矩形
-	*/
+	draw_rectangle(color_b, 3, -0.93f, -0.93f, 1.86f, 1.86f);    //左下開始 w h
 
 	draw_teapot(color_r, 1, 0.5 / 2);   //畫一個茶壺
 
@@ -51,7 +51,11 @@ void display(void)
 	glColor3f(1.0, 0.0, 0.0);	//紅色
 	viewportx = 0;
 	viewporty = 0;
-	glViewport(viewportx, viewporty, W / 2, H / 2);	//視口設定為全部視窗的左下四分之一
+	viewportw = W / 2;
+	viewporth = H / 2;
+	glViewport(viewportx, viewporty, viewportw, viewporth);	//視口設定為全部視窗的左下四分之一
+	printf("把所有要畫的東西顯示在視窗的(%d ,%d)開始的(%d, %d)\t左下\n", viewportx, viewporty, viewportw, viewporth);
+
 	glBegin(GL_POLYGON);	//畫實心多邊形
 	glVertex2f(-0.5, -0.5);
 	glVertex2f(-0.5, 0.5);
@@ -64,7 +68,11 @@ void display(void)
 	glColor3f(0.0, 1.0, 0.0);	//綠色
 	viewportx = 0;
 	viewporty = H / 2;
-	glViewport(viewportx, viewporty, W / 2, H / 2);//視口設定為全部視窗的左上四分之一
+	viewportw = W / 2;
+	viewporth = H / 2;
+	glViewport(viewportx, viewporty, viewportw, viewporth);	//視口設定為全部視窗的左上四分之一
+	printf("把所有要畫的東西顯示在視窗的(%d ,%d)開始的(%d, %d)\t左上\n", viewportx, viewporty, viewportw, viewporth);
+
 	glBegin(GL_POLYGON);	//畫實心多邊形
 	glVertex2f(-0.5, -0.5);
 	glVertex2f(-0.5, 0.5);
@@ -77,7 +85,11 @@ void display(void)
 	glColor3f(0.0, 0.0, 1.0);	//藍色
 	viewportx = W / 2;
 	viewporty = H / 2;
-	glViewport(viewportx, viewporty, W / 2, H / 2);	//視口設定為全部視窗的右上四分之一
+	viewportw = W / 2;
+	viewporth = H / 2;
+	glViewport(viewportx, viewporty, viewportw, viewporth);	//視口設定為全部視窗的右上四分之一
+	printf("把所有要畫的東西顯示在視窗的(%d ,%d)開始的(%d, %d)\t右上\n", viewportx, viewporty, viewportw, viewporth);
+
 	glBegin(GL_POLYGON);	//畫實心多邊形
 	glVertex2f(-0.5, -0.5);
 	glVertex2f(-0.5, 0.5);
@@ -90,7 +102,11 @@ void display(void)
 	glColor3f(1.0, 1.0, 0.0);	//黃色
 	viewportx = W / 2;
 	viewporty = 0;
-	glViewport(viewportx, viewporty, W / 2, H / 2);	//視口設定為全部視窗的右下四分之一
+	viewportw = W / 2;
+	viewporth = H / 2;
+	glViewport(viewportx, viewporty, viewportw, viewporth);	//視口設定為全部視窗的右下四分之一
+	printf("把所有要畫的東西顯示在視窗的(%d ,%d)開始的(%d, %d)\t右下\n", viewportx, viewporty, viewportw, viewporth);
+
 	glBegin(GL_POLYGON);	//畫實心多邊形
 	glVertex2f(-0.5, -0.5);
 	glVertex2f(-0.5, 0.5);

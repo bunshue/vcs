@@ -1,6 +1,3 @@
-/* This program is modified from the rotating cube program to demonstrate
-   the synthetic camera approach to viewing a scene. */
-
 #include "../../Common.h"
 
 // Vertices of the cube, centered at the origin.
@@ -17,7 +14,7 @@ GLfloat vertices[][3] =
 };
 
 // Colors of the vertices.
-GLfloat colors[][3] =
+GLfloat vertex_color[][3] =
 {
     {1.0, 1.0, 1.0},		//未用到 白色  XXXX
     {0.0, 0.0, 1.0},		//後 B
@@ -40,13 +37,22 @@ GLubyte cubeIndices[24] =
     0, 1, 5, 4		//下
 };
 
+GLfloat theta[] = { 0.0f, 0.0f, 0.0f };	//對各軸的旋轉角度
+GLint axis = 0;	//0: 繞x軸旋轉, 1: 繞y軸旋轉, 2: 繞z軸旋轉
+GLdouble viewer[] = { 0.0, 0.0, 5.0 }; /* initial viewer location  */
+
+int flag_rotating = 0;
+int flag_rotating_direction = 0;	//0: CW, 1:CCW
+float dd = 1.0f;
+float ddd = 0.06f;
+
 // This function sets up the vertex arrays for the color cube.
 void colorcube(void)
 {
     glEnableClientState(GL_COLOR_ARRAY);
     glEnableClientState(GL_VERTEX_ARRAY);
     glVertexPointer(3, GL_FLOAT, 0, vertices);
-    glColorPointer(3, GL_FLOAT, 0, colors);
+    glColorPointer(3, GL_FLOAT, 0, vertex_color);
 }
 
 void display(void)
@@ -59,26 +65,9 @@ void display(void)
 
     draw_teapot(color_purple, 1.0f, 1.5f);	//畫茶壺
 
-    /*
-    //用 GL_LINE_LOOP 畫一個空心矩形
-    glColor3f(1.0, 0.0, 0.0);	//紅
-    float dd = 1.3f;
-    float point1[3] = { -dd, -dd, 1.0 };	//左下
-    float point2[3] = { dd, -dd, 1.0 };	//右下
-    float point3[3] = { dd,  dd, 1.0 };	//右上
-    float point4[3] = { -dd,  dd, 1.0 };	//左上
-    glBegin(GL_LINE_LOOP);
-    glVertex3fv(point1);	//左下
-    glVertex3fv(point2);	//右下
-    glVertex3fv(point3);	//右上
-    glVertex3fv(point4);	//左上
-    glEnd();
-    */
-
     glColor3f(1.0f, 1.0f, 1.0f);
 
-    int i;
-    for (i = 0; i < 8; i++)
+    for (int i = 0; i < 8; i++)
     {
         glRasterPos3fv((GLfloat*)vertices[i]);
         glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '0' + i);
@@ -106,6 +95,8 @@ void reshape(int w, int h)
 
 void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
+	//printf("你所按按鍵的碼是%x\t此時視窗內的滑鼠座標是(%d,%d)\n", key, x, y);
+
     switch (key)
     {
     case 27:

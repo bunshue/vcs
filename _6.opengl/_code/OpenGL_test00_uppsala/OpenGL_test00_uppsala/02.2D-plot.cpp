@@ -1,10 +1,13 @@
 #include "../../Common.h"
 
+const char* data_filename = "data/17.points.dat";
+
 #define SEED srand
 #define RANDNUM rand
 #define RANDMAX RAND_MAX
 
-#define POINTS     151
+#define POINTS     361
+#define MAX_POINTS     361
 Point points[POINTS];
 int number_of_points = POINTS;
 
@@ -26,7 +29,7 @@ void make_data_2_sine(void)
         points[i].y = 10.0f * sin(PI * (float)(i + t) / 180);
     }
     t++;
-    points[number_of_points / 2].y = 20.0f;     //故意造一個特大點
+    //points[number_of_points / 2].y = 20.0f;     //故意造一個特大點
     return;
 }
 
@@ -78,8 +81,36 @@ void make_data_3_gaussian(void)
         points[i].y = displacement;
         //points[i].y = (float)i/10;     //debug
     }
-    points[number_of_points / 2].y = 20.0f;     //故意造一個特大點
+    //points[number_of_points / 2].y = 20.0f;     //故意造一個特大點
     return;
+}
+
+int make_data_4_file(const char* filename)
+{
+    number_of_points = 0;
+
+    ifstream points_file;
+
+    //開啟檔案
+    points_file.open(filename, ios::in);
+    if (points_file.is_open() == false)
+    {
+        cout << "無法開啟檔案 : " << filename << endl;
+        return 1;
+    }
+
+    //讀取檔案資料
+    while (points_file >> points[number_of_points].x >> points[number_of_points].y) //C++之讀取檔案資料
+    {
+        number_of_points++;
+        if (number_of_points == MAX_POINTS)
+        {
+            cout << "到達點數上限, 先行離開" << endl;
+            break;
+        }
+    }
+    points_file.close();
+    return 0;
 }
 
 void find_data_boundary()
@@ -121,8 +152,28 @@ void print_data(void)
     }
 }
 
+void reset_default_setting()
+{
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
+    glClear(GL_COLOR_BUFFER_BIT);   //清除背景
+    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();	//設置單位矩陣
+    gluOrtho2D(-1, 1, -1, 1); //窗口座標範圍, 2D
+
+    glLineWidth(1.0f);	//設定線寬
+
+    //char info[10];
+    //sprintf(info, "%d", (char)display_mode);  //過時, x64不能用
+    //sprintf_s(info, sizeof(info), "%d", display_mode);
+    //glutSetWindowTitle(info);
+}
+
 void display(void)
 {
+    reset_default_setting();
+
     glClear(GL_COLOR_BUFFER_BIT);   //全圖黑色
 
     glMatrixMode(GL_PROJECTION);
@@ -134,19 +185,62 @@ void display(void)
     glClearColor(1.0, 1.0, 1.0, 0.0);   //背景白色
     glColor3f(1.0, 0.0, 0.0);           //畫筆紅色
 
-    glBegin(GL_LINE_STRIP);        /* Draw a line defined by some points.*/
+    //畫連線
+    glBegin(GL_LINE_STRIP); //Draw a line defined by some points.
     for (int i = 0; i < number_of_points; i++)
     {
         glVertex2f(points[i].x, points[i].y);
     }
     glEnd();
 
+    //畫點
+    for (int i = 0; i < number_of_points; i++)
+    {
+        draw_point(color_g, 10, points[i].x, points[i].y);
+    }
+
+    //畫外框
     draw_rectangle(color_m, 10, minx, miny, xrange - 10, yrange - 1);    //左下開始 w h
     printf("取得 X 範圍(%0.10f ~ %0.10f), range : %0.10f\n", minx, maxx, xrange);
     printf("取得 Y 範圍(%0.10f ~ %0.10f), range : %0.10f\n", miny, maxy, yrange);
     printf("rectangle %0.10f  %0.10f  %0.10f  %0.10f\n", minx, miny, xrange - 10, yrange - 1);
 
     glFlush();  // 執行繪圖命令
+}
+
+void keyboard(unsigned char key, int /*x*/, int /*y*/)
+{
+    //printf("你所按按鍵的碼是%x\t此時視窗內的滑鼠座標是(%d,%d)\n", key, x, y);
+
+    switch (key)
+    {
+    case 27:
+    case 'q':
+    case 'Q':
+        //離開視窗
+        glutDestroyWindow(glutGetWindow());
+        return;
+
+    case '1':
+        printf("1\n");
+        break;
+
+    case '2':
+        printf("2\n");
+        break;
+
+    case '3':
+        make_data_3_gaussian();//製作資料3, 高斯計算
+        break;
+
+    case '4':
+        make_data_4_file(data_filename);    //製作資料4. 讀檔案
+        break;
+
+    case '?':
+        break;
+    }
+    glutPostRedisplay();    //將當前視窗打上標記，標記其需要再次顯示。
 }
 
 void idle(void)
@@ -157,16 +251,16 @@ void idle(void)
 int main(int argc, char** argv)
 {
     //make_data_1_array();    //製作資料1, 設定陣列, TBD
-    make_data_2_sine();	//製作資料2, 計算
+    //make_data_2_sine();	//製作資料2, 計算
     //make_data_3_gaussian();//製作資料3, 高斯計算
-    //make_data_4_file();    //製作資料4. 讀檔案, TBD
+    make_data_4_file(data_filename);    //製作資料4. 讀檔案
 
     find_data_boundary();
     //print_data();
 
     const char* windowName = "Open GL 2D 畫圖";
     const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
-    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard0);
+    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard);
 
     //glutIdleFunc(idle);
 
