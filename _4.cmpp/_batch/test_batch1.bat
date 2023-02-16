@@ -67,15 +67,15 @@ rem ----------------------------------------------------------------------------
 
 
 color 0A
-ECHO ==========================================================
-ECHO *         MagicISO Maker v5.4 Build 239              
-ECHO *                                                        * 
-ECHO *              免安裝版製作:                             *
-ECHO *                                                        *
-ECHO *                                                        *
-ECHO ==========================================================  
+echo ==========================================================
+echo *         MagicISO Maker v5.4 Build 239              
+echo *                                                        * 
+echo *              免安裝版製作:                             *
+echo *                                                        *
+echo *                                                        *
+echo ==========================================================  
 pause
-ECHO 程式執行中，請稍後...... 
+echo 程式執行中，請稍後...... 
 
 color
 
@@ -189,6 +189,11 @@ echo 建立資料夾 : %~dp0%FolderName%
 rem robocopy %1 %~dp0%FolderName% *.dwg /S
 rem robocopy %1 %~dp0%FolderName% *.pdf /S
 
+
+: 冒號開頭的是註解
+: 開啟一個command window執行另一個batch檔
+rem cmd /c start /min test_batch4.bat
+rem start/min  test_batch4.bat
 
 
 

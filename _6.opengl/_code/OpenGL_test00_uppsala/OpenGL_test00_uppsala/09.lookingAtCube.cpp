@@ -46,6 +46,11 @@ int flag_rotating_direction = 0;	//0: CW, 1:CCW
 float dd = 1.0f;
 float ddd = 0.06f;
 
+double eyex = 0.0f;
+double eyey = 0.0f;
+double eyez = 0.0f;
+double eye_distance = 2.0f;
+
 // This function sets up the vertex arrays for the color cube.
 void colorcube(void)
 {
@@ -103,30 +108,68 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
         glutDestroyWindow(glutGetWindow());
         return;
         break;
-    case '1': /* positive x-axis */
+    case 'x':
+        printf("從 正X軸 由外向內看\n");
         glLoadIdentity();
-        gluLookAt(2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+        eyex = eye_distance;
+        eyey = 0.0f;
+        eyez = 0.0f;
+        gluLookAt(eyex, eyey, eyez, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
         break;
-    case '2': /* negative x-axis */
+    case 'X':
+        printf("從 負X軸 由外向內看\n");
         glLoadIdentity();
-        gluLookAt(-2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+        eyex = -eye_distance;
+        eyey = 0.0f;
+        eyez = 0.0f;
+        gluLookAt(eyex, eyey, eyez, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
         break;
-    case '3': /* positive y-axis */
+    case 'y': /* positive y-axis */
+        printf("從 正Y軸 由外向內看\n");
         glLoadIdentity();
-        gluLookAt(0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0);
+        eyex = 0.0f;
+        eyey = eye_distance;
+        eyez = 0.0f;
+        gluLookAt(eyex, eyey, eyez, 0.0, 0.0, 0.0, 0.0, 0.0, -1.0);
         break;
-    case '4': /* negative y-axis */
+    case 'Y': /* negative y-axis */
+        printf("從 負Y軸 由外向內看\n");
         glLoadIdentity();
-        gluLookAt(0.0, -2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0);
+        eyex = 0.0f;
+        eyey = -eye_distance;
+        eyez = 0.0f;
+        gluLookAt(eyex, eyey, eyez, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0);
         break;
-    case '5': /* positive z-axis */
+    case 'z':
+        printf("從 正Z軸 由外向內看\n");
         glLoadIdentity();
-        gluLookAt(0.0, 0.0, 2.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+        eyex = 0.0f;
+        eyey = 0.0f;
+        eyez = eye_distance;
+        gluLookAt(eyex, eyey, eyez, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
         break;
-    case '6': /* negative z-axis */
+    case 'Z':
+        printf("從 負Z軸 由外向內看\n");
         glLoadIdentity();
-        gluLookAt(0.0, 0.0, -2.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+        eyex = 0.0f;
+        eyey = 0.0f;
+        eyez = -eye_distance;
+        gluLookAt(eyex, eyey, eyez, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
         break;
+        /*   TBD
+    case '+':
+        printf("Zoom in\n");
+        eye_distance -= 0.02f;
+        if (eye_distance < 0.1f)
+            eye_distance = 0.1f;
+        break;
+    case '-':
+        printf("Zoom out\n");
+        eye_distance += 0.02f;
+        if (eye_distance > 5.0f)
+            eye_distance = 5.0f;
+        break;
+        */
     }
     glutPostRedisplay();    //將當前視窗打上標記，標記其需要再次顯示。
 }
@@ -134,7 +177,7 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
 int main(int argc, char** argv)
 {
     const char* windowName = "Color Cube";
-    const char* message = "按 1 ~ 6 由各個方向去看方塊, 按 Esc 離開\n";
+    const char* message = "按 x X y Y z Z 由各個方向去看方塊, 按 Esc 離開\n";
     common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard);
 
     //先保留
@@ -146,7 +189,10 @@ int main(int argc, char** argv)
     /* Set initial view to positive x-axis. */
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    gluLookAt(2.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+
+    printf("從 正X軸 由外向內看\n");
+    eyex = eye_distance;
+    gluLookAt(eyex, eyey, eyez, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0); //正X軸
 
     glutMainLoop();	//開始主循環繪製
 

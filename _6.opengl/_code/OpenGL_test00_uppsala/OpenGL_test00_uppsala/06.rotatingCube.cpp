@@ -76,6 +76,9 @@ void display(void)
 
 	//draw_teapot(color_purple, 1.0f, 1.0f);	//µe¯ù³ý
 
+	draw_cube(color_silver, 1.0f, 2.5f);	//cubic ¥~®Ø
+	draw_cube(color_purple, 1.0f, 3.0f);	//cubic ¥~®Ø
+
 	for (int i = 0; i < 8; i++)
 	{
 		glColor3f(1.0f, 1.0f, 1.0f);

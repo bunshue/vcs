@@ -142,8 +142,20 @@ FGAPI void    FGAPIENTRY glutSolidCone(GLdouble base, GLdouble height, GLint sli
 
 void draw_tetrahedron(void)	//畫四面體
 {
-    float pnt[4][3] = { {0.0,0.0,0.0}, {1.0,0.0,0.0}, {0.0,1.0,0.0}, {0.0,0.0,1.0} };
-    int tetra[4][3] = { {0,2,1}, {0,3,2}, {0,1,3}, {1,2,3} };
+    float pnt[4][3] =
+    {
+        {0.0f, 0.0f, 0.0f},
+        {1.0f, 0.0f, 0.0f},
+        {0.0f, 1.0f, 0.0f},
+        {0.0f, 0.0f, 1.0f}
+    };
+    int tetra[4][3] =
+    {
+        {0, 2, 1},
+        {0, 3, 2},
+        {0, 1, 3},
+        {1, 2, 3}
+    };
 
     glBegin(GL_TRIANGLES);
     glColor3f(1.0f, 0.0f, 0.0f);
@@ -169,8 +181,20 @@ void draw_tetrahedron(void)	//畫四面體
 
 void draw_tetrahedron2(void)
 {
-    float pnt[4][3] = { {0.0,0.0,0.0},{1.0,0.0,0.0}, {0.0,1.0,0.0}, {0.0,0.0,1.0} };
-    int tetra[4][3] = { {0,2,1}, {0,3,2}, {0,1,3}, {1,2,3} };
+    float pnt[4][3] =
+    {
+        {0.0f, 0.0f, 0.0f},
+        {1.0f, 0.0f, 0.0f},
+        {0.0f, 1.0f, 0.0f},
+        {0.0f, 0.0f, 1.0f}
+    };
+    int tetra[4][3] =
+    {
+        {0, 2, 1},
+        {0, 3, 2},
+        {0, 1, 3},
+        {1, 2, 3}
+    };
 
     glNormal3f(0.0f, 0.0f, -1.0f);	//設置法線
     glBegin(GL_POLYGON); //X-Y

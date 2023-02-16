@@ -8,7 +8,7 @@ const char* data_filename = "data/17.points.dat";
 
 #define POINTS     361
 #define MAX_POINTS     361
-Point points[POINTS];
+Point points[MAX_POINTS];
 int number_of_points = POINTS;
 
 float minx = 1.0e38f;
@@ -175,23 +175,49 @@ void display(void)
     reset_default_setting();
 
     glClear(GL_COLOR_BUFFER_BIT);   //全圖黑色
+    glClearColor(1.0, 1.0, 1.0, 0.0);   //白色背景
 
     glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
+    glLoadIdentity();   //設置單位矩陣
 
+    //gluOrtho2D(-0.5f, 1.1f, -0.5f, 1.1f);   //設定座標範圍 2D
     gluOrtho2D(minx, maxx, miny, maxy);
     printf("窗口座標範圍2D, 顯示範圍 : X軸(%f ~ %f) Y軸(%f ~ %f), 左下為原點\n", minx, maxx, miny, maxy);
 
     glClearColor(1.0, 1.0, 1.0, 0.0);   //背景白色
     glColor3f(1.0, 0.0, 0.0);           //畫筆紅色
 
+    //畫X標記
+    glBegin(GL_LINES);
+    float markd = 0.01f;
+    for (int i = 0; i < number_of_points; i++)
+    {
+        glVertex2d(points[i].x - markd, points[i].y - markd);   //左下
+        glVertex2d(points[i].x + markd, points[i].y + markd);   //右上
+        glVertex2d(points[i].x - markd, points[i].y + markd);   //左上
+        glVertex2d(points[i].x + markd, points[i].y - markd);   //右下
+    }
+    glEnd();
+
     //畫連線
-    glBegin(GL_LINE_STRIP); //Draw a line defined by some points.
+    glBegin(GL_LINE_STRIP);
     for (int i = 0; i < number_of_points; i++)
     {
         glVertex2f(points[i].x, points[i].y);
     }
     glEnd();
+
+    /*
+    //待比較
+    //畫連線
+    glBegin(GL_LINES);
+    for (int i = 0; i < (number_of_points - 1); i++)
+    {
+        glVertex2d(points[i].x, points[i].y);
+        glVertex2d(points[i + 1].x, points[i + 1].y);
+    }
+    glEnd();
+    */
 
     //畫點
     for (int i = 0; i < number_of_points; i++)
@@ -200,7 +226,7 @@ void display(void)
     }
 
     //畫外框
-    draw_rectangle(color_m, 10, minx, miny, xrange - 10, yrange - 1);    //左下開始 w h
+    //draw_rectangle(color_m, 10, minx, miny, xrange - 10, yrange - 1);    //左下開始 w h
     printf("取得 X 範圍(%0.10f ~ %0.10f), range : %0.10f\n", minx, maxx, xrange);
     printf("取得 Y 範圍(%0.10f ~ %0.10f), range : %0.10f\n", miny, maxy, yrange);
     printf("rectangle %0.10f  %0.10f  %0.10f  %0.10f\n", minx, miny, xrange - 10, yrange - 1);
