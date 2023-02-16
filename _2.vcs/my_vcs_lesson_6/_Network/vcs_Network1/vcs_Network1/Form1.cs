@@ -422,75 +422,49 @@ namespace vcs_Network1
             //檢測網絡連接問題，都是通過與外網（或者局域網服務器）傳遞信息檢測的。
 
             //string ip = "10.1.148.1";
-            string ip = "192.192.132.229";
+            //string ip = "192.192.132.229";
+            string ip = "www.google.com";
 
             string strRst = CmdPing(ip);
 
-            //MessageBox.Show(strRst);
-
-            string str = CmdPingh(ip);
-            MessageBox.Show(str);
+            richTextBox1.Text += strRst;
         }
 
-        private static string CmdPing(string strIp)//方法1
+        private static string CmdPing(string ip_address)//方法1
         {
-            Process p = new Process();
-            p.StartInfo.FileName = "cmd.exe";
-            p.StartInfo.UseShellExecute = false;
-            p.StartInfo.RedirectStandardInput = true;
-            p.StartInfo.RedirectStandardOutput = true;
-            p.StartInfo.RedirectStandardError = true;
-            p.StartInfo.CreateNoWindow = true;
-            string pingrst;
-            p.Start();
-
-            p.StandardInput.WriteLine("ping -n 1 " + strIp);
-            p.StandardInput.WriteLine("exit");
-            string strRst = p.StandardOutput.ReadToEnd();
-            if (strRst.IndexOf("(0% loss)") != -1)
-                pingrst = "連接";
-            else if (strRst.IndexOf("Destination host unreachable.") != -1)
-                pingrst = "無法到達目的主機";
-            else if (strRst.IndexOf("Request timed out.") != -1)
-                pingrst = "超時";
-            else if (strRst.IndexOf("Unknown host") != -1)
-                pingrst = "無法解析主機";
-            else
-                pingrst = strRst;
-            p.Close();
-            return pingrst;
-        }
-
-        public static string CmdPingh(string _strHost)   //與上面的方法一樣，不同寫法而已
-        {
-            string m_strHost = _strHost;
             Process process = new Process();
+
             process.StartInfo.FileName = "cmd.exe";
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardInput = true;
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.RedirectStandardError = true;
             process.StartInfo.CreateNoWindow = true;
-            string pingrst = string.Empty;
-            process.StartInfo.Arguments = "ping   " + m_strHost + "   -n   1";
+
+            //process.StartInfo.Arguments = "ping -n   1" + ip_address;
             process.Start();
-            process.StandardInput.AutoFlush = true;
-            string temp = "ping   " + m_strHost + "   -n   1";
+            //process.StandardInput.AutoFlush = true;
+
+            string ping_result = string.Empty;
+
+            string temp = "ping -n 1 " + ip_address;
             process.StandardInput.WriteLine(temp);
+
             process.StandardInput.WriteLine("exit");
             string strRst = process.StandardOutput.ReadToEnd();
-            if (strRst.IndexOf("(0%   loss)") != -1)
-                pingrst = "連接";
-            else if (strRst.IndexOf("Destination   host   unreachable.") != -1)
-                pingrst = "無法到達目的主機";
-            else if (strRst.IndexOf("Request   timed   out.") != -1)
-                pingrst = "超時";
-            else if (strRst.IndexOf("Unknown   host") != -1)
-                pingrst = "無法解析主機";
+            if (strRst.IndexOf("(0% loss)") != -1)
+                ping_result = "連接";
+            else if (strRst.IndexOf("Destination host unreachable.") != -1)
+                ping_result = "無法到達目的主機";
+            else if (strRst.IndexOf("Request timed out.") != -1)
+                ping_result = "超時";
+            else if (strRst.IndexOf("Unknown host") != -1)
+                ping_result = "無法解析主機";
             else
-                pingrst = strRst;
+                ping_result = strRst;
             process.Close();
-            return pingrst;
+
+            return ping_result;
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -617,9 +591,9 @@ namespace vcs_Network1
                 psi.RedirectStandardOutput = true;
                 psi.UseShellExecute = false;
 
-                Process p = Process.Start(psi);
+                Process process = Process.Start(psi);
 
-                return p.StandardOutput.ReadToEnd();
+                return process.StandardOutput.ReadToEnd();
             }
 
             return string.Empty;
@@ -668,7 +642,5 @@ namespace vcs_Network1
         {
 
         }
-
     }
 }
-

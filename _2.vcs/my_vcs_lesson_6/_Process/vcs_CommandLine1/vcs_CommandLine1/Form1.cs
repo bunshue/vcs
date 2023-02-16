@@ -100,9 +100,9 @@ namespace vcs_CommandLine1
         /// <param name="command">需要執行的Command</param>
         /// <param name="output">輸出</param>
         /// <param name="error">錯誤</param>
-        public static void ExecuteCommand(string command, out string output, out string error)
+        public static void ExecuteCommand(string exe_filename, out string output, out string error)
         {
-            if (command.ToLower() == "cmd")
+            if (exe_filename.ToLower() == "cmd")
             {
                 output = null;
                 error = null;
@@ -113,7 +113,7 @@ namespace vcs_CommandLine1
             {
                 Process process = new Process();    //創建一個進程用於調用外部程序
 
-                process.StartInfo.FileName = command;   //設定欲執行的命令或程式名稱
+                process.StartInfo.FileName = exe_filename; //設定要啟動的程式
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.RedirectStandardOutput = true;
                 process.StartInfo.RedirectStandardError = true;
@@ -253,11 +253,11 @@ namespace vcs_CommandLine1
         }
 
         //2.異步模式
-        public void exec_async(string exePath, string parameters)
+        public void exec_async(string exe_filename, string parameters)
         {
             Process process = new Process();    //創建一個進程用於調用外部程序
 
-            process.StartInfo.FileName = exePath;   //設定欲執行的命令或程式名稱
+            process.StartInfo.FileName = exe_filename; //設定要啟動的程式
             process.StartInfo.Arguments = parameters;
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.CreateNoWindow = true;
@@ -283,7 +283,6 @@ namespace vcs_CommandLine1
             string exe_filename = "cmd.exe";    //要執行的程序名稱
             Process process = new Process();    //創建一個進程用於調用外部程序
 
-            //Process類有一個StartInfo屬性，這個是ProcessStartInfo類，包括了一些屬性和方法，下面用到了幾個屬性：
             process.StartInfo.FileName = exe_filename; //設定要啟動的程式
             //process.StartInfo.Arguments = "/c" + FullBatPath; //設定程式執行參數" /c " 執行完以下命令後停止
             process.StartInfo.UseShellExecute = false; //關閉Shell的使用
@@ -315,6 +314,7 @@ namespace vcs_CommandLine1
 
             string exe_filename = "cmd.exe";    //要執行的程序名稱
             Process process = new Process();    //創建一個進程用於調用外部程序
+
             process.StartInfo.FileName = exe_filename;  //設定要啟動的程式
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardInput = true;//可能接受來自調用程序的輸入信息
@@ -337,9 +337,7 @@ namespace vcs_CommandLine1
         {
             //cmd 3
 
-
             string exe_filename = "cmd.exe";    //要執行的程序名稱
-
             Process process = new Process();    //創建一個進程用於調用外部程序
 
             process.StartInfo.FileName = exe_filename;  //設定要啟動的程式
@@ -381,8 +379,9 @@ namespace vcs_CommandLine1
         {
             //cmd 4
 
+            string exe_filename = "cmd.exe";    //要執行的程序名稱
             Process process = new Process();    //創建一個進程用於調用外部程序
-            process.StartInfo.FileName = "cmd.exe";
+            process.StartInfo.FileName = exe_filename; //設定要啟動的程式
             process.StartInfo.UseShellExecute = false;
             process.StartInfo.RedirectStandardInput = true;
             process.StartInfo.RedirectStandardOutput = true;
@@ -434,9 +433,41 @@ namespace vcs_CommandLine1
 
         private void button9_Click(object sender, EventArgs e)
         {
+            //關閉與重啟計算機(偽)
 
+            //關閉
+            shutdown_computer(0);
+
+            //重啟
+            shutdown_computer(1);
         }
 
+        void shutdown_computer(int cmd)
+        {
+            string exe_filename = "cmd.exe";    //要執行的程序名稱
+            Process process = new Process();    //創建一個進程用於調用外部程序
+
+            process.StartInfo.FileName = exe_filename;  //設定要啟動的程式
+            process.StartInfo.UseShellExecute = false;  //是否使用系統外殼程序啟動進程
+            process.StartInfo.RedirectStandardInput = true;//是否從流中讀取
+            process.StartInfo.RedirectStandardOutput = true;//是否寫入流
+            process.StartInfo.RedirectStandardError = true;//是否將錯誤信息寫入流
+            process.StartInfo.CreateNoWindow = true;//是否在新窗口中啟動進程
+
+            //偽執行
+            //process.Start();//啟動進程
+
+            if (cmd == 0)
+            {
+                richTextBox1.Text += "關閉計算機(偽)\n";
+                //process.StandardInput.WriteLine("shutdown -s -t 0");//執行關機命令
+            }
+            else if (cmd == 1)
+            {
+                richTextBox1.Text += "重啟計算機(偽)\n";
+                //process.StandardInput.WriteLine("shutdown -r -t 0");//執行重啟計算機命令
+            }
+        }
 
         private void richTextBox2_KeyUp(object sender, KeyEventArgs e)
         {

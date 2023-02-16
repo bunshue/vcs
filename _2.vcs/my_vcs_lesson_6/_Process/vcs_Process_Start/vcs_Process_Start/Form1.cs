@@ -569,36 +569,12 @@ namespace vcs_Process_Start
 
         private void button36_Click(object sender, EventArgs e)
         {
-            //關閉計算機(偽)
-            string exe_filename = "cmd.exe";    //要執行的程序名稱
-            Process process = new Process();    //創建一個進程用於調用外部程序
-            process.StartInfo.FileName = exe_filename;    //設定要啟動的程式
-            process.StartInfo.UseShellExecute = false;    //是否使用系統外殼程序啟動進程
-            process.StartInfo.RedirectStandardInput = true;//是否從流中讀取
-            process.StartInfo.RedirectStandardOutput = true;//是否寫入流
-            process.StartInfo.RedirectStandardError = true;//是否將錯誤信息寫入流
-            process.StartInfo.CreateNoWindow = true;//是否在新窗口中啟動進程
-
-            //偽執行
-            //process.Start();//啟動進程
-            //process.StandardInput.WriteLine("shutdown -s -t 0");//執行關機命令
+            
         }
 
         private void button37_Click(object sender, EventArgs e)
         {
-            //重啟計算機(偽)
-            string exe_filename = "cmd.exe";    //要執行的程序名稱
-            Process process = new Process();    //創建一個進程用於調用外部程序
-            process.StartInfo.FileName = exe_filename;  //設定要啟動的程式
-            process.StartInfo.UseShellExecute = false;  //是否使用系統外殼程序啟動進程
-            process.StartInfo.RedirectStandardInput = true;//是否從流中讀取
-            process.StartInfo.RedirectStandardOutput = true;//是否寫入流
-            process.StartInfo.RedirectStandardError = true;//是否將錯誤信息寫入流
-            process.StartInfo.CreateNoWindow = true;//是否在新窗口中啟動進程
-
-            //偽執行
-            //process.Start();//啟動進程
-            //process.StandardInput.WriteLine("shutdown -r -t 0");//執行重啟計算機命令
+            
         }
 
         private void button38_Click(object sender, EventArgs e)

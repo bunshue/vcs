@@ -343,7 +343,6 @@
             this.button37.Name = "button37";
             this.button37.Size = new System.Drawing.Size(150, 50);
             this.button37.TabIndex = 27;
-            this.button37.Text = "重啟計算機(偽)";
             this.button37.UseVisualStyleBackColor = true;
             this.button37.Click += new System.EventHandler(this.button37_Click);
             // 
@@ -354,7 +353,6 @@
             this.button36.Name = "button36";
             this.button36.Size = new System.Drawing.Size(150, 50);
             this.button36.TabIndex = 26;
-            this.button36.Text = "關閉計算機(偽)";
             this.button36.UseVisualStyleBackColor = true;
             this.button36.Click += new System.EventHandler(this.button36_Click);
             // 
