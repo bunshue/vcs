@@ -569,13 +569,15 @@ namespace vcs_FFMPEG
 
             using (Process process = new Process()) //創建一個進程用於調用外部程序
             {
-                process.StartInfo.UseShellExecute = false;
-                process.StartInfo.CreateNoWindow = true;
-                process.StartInfo.RedirectStandardOutput = true;
                 process.StartInfo.FileName = exePath;
                 process.StartInfo.Arguments = parameters;
+                process.StartInfo.UseShellExecute = false;  //false, 關閉Shell的使用, 是否指定操作系統外殼進程啟動程序, 可能接受來自調用程序的輸入信息
+                process.StartInfo.RedirectStandardInput = true; //重定向標準輸入, 可能接受來自調用程序的輸入信息
+                process.StartInfo.RedirectStandardOutput = true; //重定向標準輸出, 由調用程序獲取輸出信息
+                process.StartInfo.RedirectStandardError = true; //重定向錯誤輸出
+                process.StartInfo.CreateNoWindow = true; //true, 設置不顯示程式窗口, 用T/F測不出差異
 
-                process.Start();
+                process.Start();    //啟動程式
 
                 process.WaitForExit();
 
@@ -669,7 +671,7 @@ namespace vcs_FFMPEG
 
             try
             {
-                Process.Start(startInfo);
+                Process.Start(startInfo);   //啟動程式
             }
             catch
             {
@@ -811,16 +813,18 @@ namespace vcs_FFMPEG
         /// <param name="arg">執行參數</param>
         public static void ExcuteProcess(string exe, string arg)
         {
-            using (var process = new Process())
+            using (Process process = new Process())
             {
                 process.StartInfo.FileName = exe;
                 process.StartInfo.Arguments = arg;
-                process.StartInfo.UseShellExecute = false;    //輸出信息重定向  
-                process.StartInfo.CreateNoWindow = true;
-                process.StartInfo.RedirectStandardError = true;
-                process.StartInfo.RedirectStandardOutput = true;
+                process.StartInfo.UseShellExecute = false;  //false, 關閉Shell的使用, 是否指定操作系統外殼進程啟動程序, 可能接受來自調用程序的輸入信息
+                process.StartInfo.RedirectStandardInput = true; //重定向標準輸入, 可能接受來自調用程序的輸入信息
+                process.StartInfo.RedirectStandardOutput = true; //重定向標準輸出, 由調用程序獲取輸出信息
+                process.StartInfo.RedirectStandardError = true; //重定向錯誤輸出
+                process.StartInfo.CreateNoWindow = true; //true, 設置不顯示程式窗口, 用T/F測不出差異
 
-                process.Start();                    //啟動線程  
+                process.Start();    //啟動程式
+
                 process.BeginOutputReadLine();
                 process.BeginErrorReadLine();
                 process.WaitForExit();//等待進程結束                                        
@@ -958,14 +962,15 @@ namespace vcs_FFMPEG
             try
             {
                 Process process = new Process();    //創建一個進程用於調用外部程序
-                process.StartInfo.FileName = command;
-                process.StartInfo.UseShellExecute = false;
-                process.StartInfo.RedirectStandardOutput = true;
-                process.StartInfo.RedirectStandardError = true;
-                process.StartInfo.CreateNoWindow = true;
 
-                //啓動進程
-                process.Start();
+                process.StartInfo.FileName = command;
+                process.StartInfo.UseShellExecute = false;  //false, 關閉Shell的使用, 是否指定操作系統外殼進程啟動程序, 可能接受來自調用程序的輸入信息
+                process.StartInfo.RedirectStandardInput = true; //重定向標準輸入, 可能接受來自調用程序的輸入信息
+                process.StartInfo.RedirectStandardOutput = true; //重定向標準輸出, 由調用程序獲取輸出信息
+                process.StartInfo.RedirectStandardError = true; //重定向錯誤輸出
+                process.StartInfo.CreateNoWindow = true; //true, 設置不顯示程式窗口, 用T/F測不出差異
+
+                process.Start();    //啟動程式
 
                 //準備讀出輸出流和錯誤流
                 string outputData = string.Empty;
@@ -1061,15 +1066,16 @@ namespace vcs_FFMPEG
             string duration = "";
             using (Process process = new Process()) //創建一個進程用於調用外部程序
             {
-                process.StartInfo.UseShellExecute = false;
-                process.StartInfo.ErrorDialog = false;
-                process.StartInfo.RedirectStandardError = true;
-
                 process.StartInfo.FileName = ffmpeg_filename;   //FFMPEG程式所在地
-
                 process.StartInfo.Arguments = " -i " + fileName;
+                process.StartInfo.UseShellExecute = false;  //false, 關閉Shell的使用, 是否指定操作系統外殼進程啟動程序, 可能接受來自調用程序的輸入信息
+                process.StartInfo.RedirectStandardInput = true; //重定向標準輸入, 可能接受來自調用程序的輸入信息
+                process.StartInfo.RedirectStandardOutput = true; //重定向標準輸出, 由調用程序獲取輸出信息
+                process.StartInfo.RedirectStandardError = true; //重定向錯誤輸出
+                process.StartInfo.CreateNoWindow = true; //true, 設置不顯示程式窗口, 用T/F測不出差異
+                process.StartInfo.ErrorDialog = false;
 
-                process.Start();
+                process.Start();    //啟動程式
 
                 StreamReader errorreader = process.StandardError;
                 process.WaitForExit(1000);

@@ -1412,10 +1412,10 @@ namespace vcs_DrAP
                 }
 
                 /*
-                using (Process p = new Process())
+                using (Process process = new Process())
                 {
-                    p.StartInfo = pInfo;
-                    p.Start();
+                    process.StartInfo = pInfo;
+                    process.Start();
                 }
                 */
             }

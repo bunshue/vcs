@@ -466,13 +466,11 @@ namespace vcs_FolderFileName
             richTextBox1.Text += "target : " + target + "\n";
             richTextBox1.Text += "all_filename : " + all_filename + "\n";
 
-            using (Process p = new Process())
+            using (Process process = new Process())
             {
-                p.StartInfo = pInfo;
-                p.Start();
+                process.StartInfo = pInfo;
+                process.Start();
             }
-
-
         }
 
         private void listView1_KeyDown(object sender, KeyEventArgs e)
@@ -542,15 +540,12 @@ namespace vcs_FolderFileName
                 richTextBox1.Text += "target : " + target + "\n";
                 richTextBox1.Text += "all_filename : " + all_filename + "\n";
 
-                using (Process p = new Process())
+                using (Process process = new Process())
                 {
-                    p.StartInfo = pInfo;
-                    p.Start();
+                    process.StartInfo = pInfo;
+                    process.Start();
                 }
-
             }
-
-
         }
 
         private void button6_Click(object sender, EventArgs e)

@@ -82,45 +82,22 @@ namespace vcs_Process_CommandLine
         private void button1_Click(object sender, EventArgs e)
         {
             //關閉與重啟計算機(偽)
-            //關閉與重啟計算機(偽)
 
+            /*
             //關閉
-            shutdown_computer(0);
+            string exe_filename = "cmd.exe";    //要執行的程式名稱
+            string command1 = "shutdown -s -t 0";             //向要執行的程式發送的命令    //執行關機命令 0秒後
+
+            richTextBox1.Text += "關閉計算機(偽)\n";
+            //偽執行
+            //run_command_line_process(exe_filename, command1);
 
             //重啟
-            shutdown_computer(1);
-        }
-
-        void shutdown_computer(int cmd)
-        {
-            string exe_filename = "cmd.exe";    //要執行的程序名稱
-            Process process = new Process();    //創建一個進程用於調用外部程序
-
-            process.StartInfo.FileName = exe_filename;  //設定要啟動的程式
-
-            process.StartInfo.UseShellExecute = false;  //是否使用系統外殼程序啟動進程
-            process.StartInfo.RedirectStandardInput = true;//是否從流中讀取
-            process.StartInfo.RedirectStandardOutput = true;//是否寫入流
-            process.StartInfo.RedirectStandardError = true;//是否將錯誤信息寫入流
-            process.StartInfo.CreateNoWindow = true;//是否在新窗口中啟動進程
-
-            process.Start();    //啟動程式
-
-            if (cmd == 0)
-            {
-                richTextBox1.Text += "關閉計算機(偽)\n";
-                //偽執行
-                //向要啟動的程式發送輸入信息
-                //process.StandardInput.WriteLine("shutdown -s -t 0");//執行關機命令 0秒後
-            }
-            else if (cmd == 1)
-            {
-                richTextBox1.Text += "重啟計算機(偽)\n";
-                //偽執行
-                //向要啟動的程式發送輸入信息
-                //process.StandardInput.WriteLine("shutdown -r -t 0");//執行重啟計算機命令 0秒後
-            }
-            process.StandardInput.WriteLine("exit");	//一定要關閉, 不然會當機
+            string command2 = "shutdown -r -t 0";             //向要執行的程式發送的命令    //執行重啟計算機命令 0秒後
+            richTextBox1.Text += "重啟計算機(偽)\n";
+            //偽執行
+            //run_command_line_process(exe_filename, command2);
+            */
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -135,17 +112,17 @@ namespace vcs_Process_CommandLine
             start_info.RedirectStandardError = true;
 
             // Make the process and set its start information.
-            using (Process proc = new Process())
+            using (Process process = new Process())
             {
-                proc.StartInfo = start_info;
+                process.StartInfo = start_info;
 
                 // Start the process.
-                proc.Start();
+                process.Start();
 
                 // Attach to stdout and stderr.
-                using (StreamReader std_out = proc.StandardOutput)
+                using (StreamReader std_out = process.StandardOutput)
                 {
-                    using (StreamReader std_err = proc.StandardError)
+                    using (StreamReader std_err = process.StandardError)
                     {
                         // Display the results.
                         richTextBox1.Text += "輸出 :\n" + std_out.ReadToEnd() + "\n";
@@ -154,7 +131,7 @@ namespace vcs_Process_CommandLine
                         // Clean up.
                         std_err.Close();
                         std_out.Close();
-                        proc.Close();
+                        process.Close();
                     }
                 }
             }
@@ -162,10 +139,60 @@ namespace vcs_Process_CommandLine
 
         private void button3_Click(object sender, EventArgs e)
         {
+            //檢測網絡連接（主要是局域網）
+            //檢測網絡連接問題，都是通過與外網（或者局域網服務器）傳遞信息檢測的。
+
+            //string ip = "10.1.148.1";
+            //string ip = "192.192.132.229";
+            string ip_address = "www.google.com";
+
+            string exe_filename = "cmd.exe";    //要執行的程式名稱
+            string command = "ping -n 1 " + ip_address;
+
+            string output_data = run_command_line_process(exe_filename, command);
+
+            string ping_result = string.Empty;
+
+            if (output_data.IndexOf("(0% loss)") != -1)
+                ping_result = "連接";
+            else if (output_data.IndexOf("Destination host unreachable.") != -1)
+                ping_result = "無法到達目的主機";
+            else if (output_data.IndexOf("Request timed out.") != -1)
+                ping_result = "超時";
+            else if (output_data.IndexOf("Unknown host") != -1)
+                ping_result = "無法解析主機";
+            else
+                ping_result = output_data;
+
+            richTextBox1.Text += ping_result;
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //調用系統IPCONFIG獲取本機局域網IP以及其他相關信息
+
+            //執行一條command命令 並取得其結果
+            string exe_filename = "cmd.exe";    //要執行的程式名稱
+            string command = "ipconfig /all";             //向要執行的程式發送的命令
+            //string command = "ver";             //向要執行的程式發送的命令
+            string output_data = string.Empty;
+
+            output_data = run_command_line_process2(exe_filename, command);
+            richTextBox1.Text += output_data + "\n";
+        }
+
+        string run_command_line_process2(string exe_filename, string command)
+        {
+            //調用ipconfig ,並傳入參數: /all 
+            ProcessStartInfo psi = new ProcessStartInfo("ipconfig", "/all");
+
+            psi.CreateNoWindow = true;
+            psi.RedirectStandardOutput = true;
+            psi.UseShellExecute = false;
+
+            Process process = Process.Start(psi);
+
+            return process.StandardOutput.ReadToEnd();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -197,12 +224,16 @@ namespace vcs_Process_CommandLine
             //process.StartInfo.Arguments = "/c " command; //設定程式執行參數
             //process.StartInfo.Arguments = command; //也可直接把command寫在這裡, 就不用後面的 StandardInput.WriteLine 了
             //process.StartInfo.Arguments = "/c" + FullBatPath; //設定程式執行參數" /c " 執行完以下命令後停止
+            //process.StartInfo.Arguments = "ping -n   1" + ip_address;
+            //process.StandardInput.AutoFlush = true;
 
             process.StartInfo.UseShellExecute = false;  //false, 關閉Shell的使用, 是否指定操作系統外殼進程啟動程序, 可能接受來自調用程序的輸入信息
             process.StartInfo.RedirectStandardInput = true; //重定向標準輸入, 可能接受來自調用程序的輸入信息
             process.StartInfo.RedirectStandardOutput = true; //重定向標準輸出, 由調用程序獲取輸出信息
             process.StartInfo.RedirectStandardError = true; //重定向錯誤輸出
             process.StartInfo.CreateNoWindow = true; //true, 設置不顯示程式窗口, 用T/F測不出差異
+            //psi.CreateNoWindow = true; //若為false，則會出現cmd的黑窗體 
+            process.StartInfo.ErrorDialog = false;
 
             process.Start();    //啟動程式
 
@@ -218,8 +249,6 @@ namespace vcs_Process_CommandLine
             process.Close();	//關閉進程
 
             return output_data;
-
-
         }
 
         /*  tmp

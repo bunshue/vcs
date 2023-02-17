@@ -319,7 +319,7 @@ namespace vcs_Process_Start
                 process.StartInfo.FileName = exe_filename;
                 process.StartInfo.UseShellExecute = false;
                 process.StartInfo.CreateNoWindow = true;
-                process.Start();
+                process.Start();    //啟動程式
             }
             catch (Exception ex)
             {
@@ -456,7 +456,6 @@ namespace vcs_Process_Start
             processStartInfo.FileName = exe_filename;
             processStartInfo.Arguments = @"C:\";
             Process.Start(processStartInfo);
-
         }
 
         private void button32_Click(object sender, EventArgs e)
@@ -505,15 +504,14 @@ namespace vcs_Process_Start
             string filename = @"C:\______test_files\__RW\_txt\poem.txt";
             //string filename = @"C:\______test_files\__RW\_txt\琵琶行.txt";
 
-            ProcessStartInfo pro = new ProcessStartInfo(filename);
+            ProcessStartInfo psi = new ProcessStartInfo(filename);
             Process process = new Process();    //創建一個進程用於調用外部程序
-            process.StartInfo = pro;
-            process.Start();
+            process.StartInfo = psi;
+            process.Start();    //啟動程式
         }
 
         private void button34_Click(object sender, EventArgs e)
         {
-
             //調用外部程序
 
             string filename = @"C:\______test_files\__RW\_txt\琵琶行.txt";
@@ -530,12 +528,12 @@ namespace vcs_Process_Start
             //設置外部程序工作目錄為  C:
             processStartInfo.WorkingDirectory = "C:\\";
 
-            Process Proc = new Process();   //創建一個進程用於調用外部程序
+            Process process = new Process();   //創建一個進程用於調用外部程序
 
             try
             {
                 //啟動外部程序
-                Proc = Process.Start(processStartInfo);
+                process = Process.Start(processStartInfo);
             }
             catch (Win32Exception ex)
             {
@@ -544,23 +542,23 @@ namespace vcs_Process_Start
             }
 
             //打印出外部程序的開始執行時間
-            Console.WriteLine("外部程序的開始執行時間：{0}", Proc.StartTime);
+            Console.WriteLine("外部程序的開始執行時間：{0}", process.StartTime);
 
             //等待3秒鐘
-            Proc.WaitForExit(3000);
+            process.WaitForExit(3000);
 
             //如果這個外部程序沒有結束運行則對其強行終止
-            if (Proc.HasExited == false)
+            if (process.HasExited == false)
             {
                 Console.WriteLine("由主程序強行終止外部程序的運行！");
-                Proc.Kill();
+                process.Kill();
             }
             else
             {
                 Console.WriteLine("由外部程序正常退出！");
             }
-            Console.WriteLine("外部程序的結束運行時間：{0}", Proc.ExitTime);
-            Console.WriteLine("外部程序在結束運行時的返回值：{0}", Proc.ExitCode);
+            Console.WriteLine("外部程序的結束運行時間：{0}", process.ExitTime);
+            Console.WriteLine("外部程序在結束運行時的返回值：{0}", process.ExitCode);
         }
 
         private void button35_Click(object sender, EventArgs e)
@@ -591,7 +589,7 @@ namespace vcs_Process_Start
                     process.StartInfo.FileName = exe_filename;  //設定要啟動的程式
                     process.StartInfo.UseShellExecute = false;
                     process.StartInfo.CreateNoWindow = true;
-                    process.Start();
+                    process.Start();    //啟動程式
                     // This code assumes the process you are starting will terminate itself. 
                     // Given that is is started without a window so you cannot terminate it 
                     // on the desktop, it must terminate itself or you can do it programmatically

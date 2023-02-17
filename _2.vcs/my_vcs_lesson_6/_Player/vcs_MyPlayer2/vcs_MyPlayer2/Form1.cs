@@ -174,10 +174,10 @@ namespace vcs_MyPlayer2
             richTextBox1.Text += "target : " + target + "\n";
             richTextBox1.Text += "all_filename : " + all_filename + "\n";
 
-            using (Process p = new Process())
+            using (Process process = new Process())
             {
-                p.StartInfo = pInfo;
-                p.Start();
+                process.StartInfo = pInfo;
+                process.Start();    //啟動程式
             }
         }
     }

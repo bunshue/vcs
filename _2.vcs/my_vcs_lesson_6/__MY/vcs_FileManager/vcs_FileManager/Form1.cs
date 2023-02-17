@@ -1175,7 +1175,7 @@ namespace vcs_FileManager
         {
             richTextBox1.Text += "撈出資料夾多層檔案\n";
             //從一個資料夾中撈出所有檔案 標準版
-            
+
             if (listBox1.Items.Count == 0)
             {
                 richTextBox2.Text += "未選擇資料夾\n";
@@ -1548,10 +1548,10 @@ namespace vcs_FileManager
             }
 
             /*
-            using (Process p = new Process())
+            using (Process process = new Process())
             {
-                p.StartInfo = pInfo;
-                p.Start();
+                process.StartInfo = pInfo;
+                process.Start();
             }
             */
         }
@@ -1626,16 +1626,13 @@ namespace vcs_FileManager
             }
 
             /*
-            using (Process p = new Process())
+            using (Process process = new Process())
             {
-                p.StartInfo = pInfo;
-                p.Start();
+                process.StartInfo = pInfo;
+                process.Start();
             }
             */
-
-
         }
-
 
         private void listView1_KeyDown(object sender, KeyEventArgs e)
         {

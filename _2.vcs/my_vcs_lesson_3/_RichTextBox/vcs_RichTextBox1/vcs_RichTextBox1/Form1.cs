@@ -688,10 +688,25 @@ namespace vcs_RichTextBox1
 
         private void button32_Click(object sender, EventArgs e)
         {
+            //richTextBox 游標跳至指定位置
+
+            //跳至前面
+            richTextBox1.Focus();
+            richTextBox1.Select(0, 0);
+
+            //跳至最後面
+            richTextBox1.Focus();
+            richTextBox1.Select(richTextBox1.Text.Length, 0);
         }
 
         private void button33_Click(object sender, EventArgs e)
         {
+            //richTextBox 選取部分
+
+            int len = richTextBox1.Text.Length;
+
+            richTextBox1.Focus();
+            richTextBox1.Select(len / 3, len / 3);
         }
 
         private void button34_Click(object sender, EventArgs e)

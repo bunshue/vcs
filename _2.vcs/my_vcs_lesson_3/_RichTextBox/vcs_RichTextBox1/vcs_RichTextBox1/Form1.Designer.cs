@@ -795,11 +795,12 @@
             // 
             // button32
             // 
-            this.button32.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button32.Font = new System.Drawing.Font("新細明體", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.button32.Location = new System.Drawing.Point(495, 98);
             this.button32.Name = "button32";
             this.button32.Size = new System.Drawing.Size(220, 40);
             this.button32.TabIndex = 58;
+            this.button32.Text = "richTextBox 游標跳至指定位置";
             this.button32.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button32.UseVisualStyleBackColor = true;
             this.button32.Click += new System.EventHandler(this.button32_Click);
@@ -811,6 +812,7 @@
             this.button33.Name = "button33";
             this.button33.Size = new System.Drawing.Size(220, 40);
             this.button33.TabIndex = 59;
+            this.button33.Text = "richTextBox 選取部分";
             this.button33.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.button33.UseVisualStyleBackColor = true;
             this.button33.Click += new System.EventHandler(this.button33_Click);

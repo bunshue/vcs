@@ -181,7 +181,6 @@
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(200, 60);
             this.button11.TabIndex = 12;
-            this.button11.Text = "檢測網絡連接（主要是局域網）";
             this.button11.UseVisualStyleBackColor = true;
             this.button11.Click += new System.EventHandler(this.button11_Click);
             // 
@@ -273,7 +272,6 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(200, 60);
             this.button15.TabIndex = 53;
-            this.button15.Text = "調用系統IPCONFIG獲取本機局域網IP以及其他相關信息";
             this.button15.UseVisualStyleBackColor = true;
             this.button15.Click += new System.EventHandler(this.button15_Click);
             // 

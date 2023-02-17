@@ -418,53 +418,6 @@ namespace vcs_Network1
 
         private void button11_Click(object sender, EventArgs e)
         {
-            //檢測網絡連接（主要是局域網）
-            //檢測網絡連接問題，都是通過與外網（或者局域網服務器）傳遞信息檢測的。
-
-            //string ip = "10.1.148.1";
-            //string ip = "192.192.132.229";
-            string ip = "www.google.com";
-
-            string strRst = CmdPing(ip);
-
-            richTextBox1.Text += strRst;
-        }
-
-        private static string CmdPing(string ip_address)//方法1
-        {
-            Process process = new Process();
-
-            process.StartInfo.FileName = "cmd.exe";
-            process.StartInfo.UseShellExecute = false;
-            process.StartInfo.RedirectStandardInput = true;
-            process.StartInfo.RedirectStandardOutput = true;
-            process.StartInfo.RedirectStandardError = true;
-            process.StartInfo.CreateNoWindow = true;
-
-            //process.StartInfo.Arguments = "ping -n   1" + ip_address;
-            process.Start();
-            //process.StandardInput.AutoFlush = true;
-
-            string ping_result = string.Empty;
-
-            string temp = "ping -n 1 " + ip_address;
-            process.StandardInput.WriteLine(temp);
-
-            process.StandardInput.WriteLine("exit");
-            string strRst = process.StandardOutput.ReadToEnd();
-            if (strRst.IndexOf("(0% loss)") != -1)
-                ping_result = "連接";
-            else if (strRst.IndexOf("Destination host unreachable.") != -1)
-                ping_result = "無法到達目的主機";
-            else if (strRst.IndexOf("Request timed out.") != -1)
-                ping_result = "超時";
-            else if (strRst.IndexOf("Unknown host") != -1)
-                ping_result = "無法解析主機";
-            else
-                ping_result = strRst;
-            process.Close();
-
-            return ping_result;
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -569,34 +522,6 @@ namespace vcs_Network1
 
         private void button15_Click(object sender, EventArgs e)
         {
-            //調用系統IPCONFIG獲取本機局域網IP以及其他相關信息
-            string result = GetIPConfigReturns();
-            richTextBox1.Text += "  " + result + "\n";
-        }
-
-        /// <summary> 
-        /// 獲取IPCONFIG返回值 
-        /// </summary> 
-        /// <returns>返回 IPCONFIG輸出</returns> 
-        public static string GetIPConfigReturns()
-        {
-            string version = Environment.OSVersion.VersionString;
-
-            if (version.Contains("Windows"))
-            {
-                //調用ipconfig ,並傳入參數: /all 
-                ProcessStartInfo psi = new ProcessStartInfo("ipconfig", "/all");
-
-                psi.CreateNoWindow = true; //若為false，則會出現cmd的黑窗體 
-                psi.RedirectStandardOutput = true;
-                psi.UseShellExecute = false;
-
-                Process process = Process.Start(psi);
-
-                return process.StandardOutput.ReadToEnd();
-            }
-
-            return string.Empty;
         }
 
         private void button16_Click(object sender, EventArgs e)
