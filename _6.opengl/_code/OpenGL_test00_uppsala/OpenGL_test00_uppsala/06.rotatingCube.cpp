@@ -17,13 +17,13 @@ GLfloat vertices[][3] =
 GLfloat vertex_color[][3] =
 {
 	{1.0, 1.0, 1.0},		//未用到 白色  XXXX
-	{0.0, 0.0, 1.0},		//後 B
+	{0.0, 0.0, 1.0},		//-z 後 藍
 	{1.0, 1.0, 1.0},		//未用到 白色  XXXX
-	{0.0, 1.0, 1.0},		//左 Cyan天青
-	{1.0, 1.0, 0.0},		//下 Y
-	{1.0, 0.0, 1.0},		//右 Magenta桃紅
-	{0.0, 1.0, 0.0},		//上 G
-	{1.0, 0.0, 0.0}			//前 R
+	{0.0, 1.0, 1.0},		//-x 左 Cyan 天青
+	{1.0, 1.0, 0.0},		//-y 下 黃
+	{1.0, 0.0, 1.0},		//+x 右 Magenta桃紅
+	{0.0, 1.0, 0.0},		//+y 上 綠
+	{1.0, 0.0, 0.0}			//+z 前 紅
 };
 
 // Indices of the vertices to make up the six faces of the cube.
@@ -74,7 +74,7 @@ void display(void)
 	//已旋轉後之座標軸
 	draw_coordinates(1.5f);     //畫座標軸
 
-	//draw_teapot(color_purple, 1.0f, 1.0f);	//畫茶壺
+	draw_teapot(color_purple, 1.0f, 1.0f);	//畫茶壺
 
 	draw_cube(color_silver, 1.0f, 2.5f);	//cubic 外框
 	draw_cube(color_purple, 1.0f, 3.0f);	//cubic 外框
@@ -254,7 +254,3 @@ int main(int argc, char** argv)
 
 	return 0;
 }
-
-
-//加畫茶壺做比對
-

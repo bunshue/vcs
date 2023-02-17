@@ -588,8 +588,8 @@ void setup_rotation()
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();	//設置單位矩陣
 
-    glRotatef(x_angle, 1.0f, 0.0f, 0.0f);
-    glRotatef(y_angle, 0.0f, 1.0f, 0.0f);
+    glRotatef(x_angle, 1.0f, 0.0f, 0.0f);   //對x軸旋轉特定角度 x_angle
+    glRotatef(y_angle, 0.0f, 1.0f, 0.0f);   //對y軸旋轉特定角度 y_angle
 
     //顯示資訊
     char info[20];

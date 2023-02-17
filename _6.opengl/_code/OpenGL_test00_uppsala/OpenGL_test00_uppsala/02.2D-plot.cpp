@@ -1,5 +1,7 @@
 #include "../../Common.h"
 
+int display_mode = 3;
+
 const char* data_filename = "data/17.points.dat";
 
 #define SEED srand
@@ -21,6 +23,7 @@ float yrange = 0.0f;
 int t = 0;
 void make_data_2_sine(void)
 {
+    number_of_points = 361;
     points[0].x = 0.0f;
     points[0].y = 0.0f;
     for (int i = 1; i < number_of_points; i++)
@@ -65,6 +68,8 @@ double Gauss(void)
 
 void make_data_3_gaussian(void)
 {
+    number_of_points = 100;
+
     float displacement;
     int i;
 
@@ -115,6 +120,13 @@ int make_data_4_file(const char* filename)
 
 void find_data_boundary()
 {
+    minx = 1.0e38f;
+    maxx = -1.0e38f;
+    miny = 1.0e38f;
+    maxy = -1.0e38f;
+    xrange = 0.0f;
+    yrange = 0.0f;
+
     for (int i = 0; i < number_of_points; i++)
     {
         //printf("%0.10f  %0.10f\n", points[i].x, points[i].y);
@@ -164,74 +176,111 @@ void reset_default_setting()
 
     glLineWidth(1.0f);	//設定線寬
 
-    //char info[10];
+    char info[10];
     //sprintf(info, "%d", (char)display_mode);  //過時, x64不能用
-    //sprintf_s(info, sizeof(info), "%d", display_mode);
-    //glutSetWindowTitle(info);
+    sprintf_s(info, sizeof(info), "%d", display_mode);
+    glutSetWindowTitle(info);
 }
 
 void display(void)
 {
-    reset_default_setting();
-
-    glClear(GL_COLOR_BUFFER_BIT);   //全圖黑色
-    glClearColor(1.0, 1.0, 1.0, 0.0);   //白色背景
-
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();   //設置單位矩陣
-
-    //gluOrtho2D(-0.5f, 1.1f, -0.5f, 1.1f);   //設定座標範圍 2D
-    gluOrtho2D(minx, maxx, miny, maxy);
-    printf("窗口座標範圍2D, 顯示範圍 : X軸(%f ~ %f) Y軸(%f ~ %f), 左下為原點\n", minx, maxx, miny, maxy);
-
-    glClearColor(1.0, 1.0, 1.0, 0.0);   //背景白色
-    glColor3f(1.0, 0.0, 0.0);           //畫筆紅色
-
-    //畫X標記
-    glBegin(GL_LINES);
-    float markd = 0.01f;
-    for (int i = 0; i < number_of_points; i++)
+    if (display_mode == 0)
     {
-        glVertex2d(points[i].x - markd, points[i].y - markd);   //左下
-        glVertex2d(points[i].x + markd, points[i].y + markd);   //右上
-        glVertex2d(points[i].x - markd, points[i].y + markd);   //左上
-        glVertex2d(points[i].x + markd, points[i].y - markd);   //右下
-    }
-    glEnd();
 
-    //畫連線
-    glBegin(GL_LINE_STRIP);
-    for (int i = 0; i < number_of_points; i++)
+    }
+    else if (display_mode == 1)
     {
-        glVertex2f(points[i].x, points[i].y);
+        //make_data_1_array();    //製作資料1, 設定陣列, TBD
     }
-    glEnd();
-
-    /*
-    //待比較
-    //畫連線
-    glBegin(GL_LINES);
-    for (int i = 0; i < (number_of_points - 1); i++)
+    else if (display_mode == 2)
     {
-        glVertex2d(points[i].x, points[i].y);
-        glVertex2d(points[i + 1].x, points[i + 1].y);
+        make_data_2_sine();	//製作資料2, 計算
     }
-    glEnd();
-    */
-
-    //畫點
-    for (int i = 0; i < number_of_points; i++)
+    else if (display_mode == 3)
     {
-        draw_point(color_g, 10, points[i].x, points[i].y);
+        make_data_3_gaussian();//製作資料3, 高斯計算
     }
+    else if (display_mode == 4)
+    {
+        make_data_4_file(data_filename);    //製作資料4. 讀檔案
+    }
+    find_data_boundary();
+    //print_data();
 
-    //畫外框
-    //draw_rectangle(color_m, 10, minx, miny, xrange - 10, yrange - 1);    //左下開始 w h
-    printf("取得 X 範圍(%0.10f ~ %0.10f), range : %0.10f\n", minx, maxx, xrange);
-    printf("取得 Y 範圍(%0.10f ~ %0.10f), range : %0.10f\n", miny, maxy, yrange);
-    printf("rectangle %0.10f  %0.10f  %0.10f  %0.10f\n", minx, miny, xrange - 10, yrange - 1);
+    if (display_mode == 0)
+    {
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
+        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
-    glFlush();  // 執行繪圖命令
+        printf("無畫面, TBD, display_mode = %d\n", display_mode);
+
+        //設定預設大小...  TBD
+    }
+    else
+    {
+        reset_default_setting();
+
+        glClear(GL_COLOR_BUFFER_BIT);   //全圖黑色
+        glClearColor(1.0, 1.0, 1.0, 0.0);   //白色背景
+
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();   //設置單位矩陣
+
+        //gluOrtho2D(-0.5f, 1.1f, -0.5f, 1.1f);   //設定座標範圍 2D
+        gluOrtho2D(minx, maxx, miny, maxy);
+        printf("窗口座標範圍2D, 顯示範圍 : X軸(%f ~ %f) Y軸(%f ~ %f), 左下為原點\n", minx, maxx, miny, maxy);
+
+        glClearColor(1.0, 1.0, 1.0, 0.0);   //背景白色
+        glColor3f(1.0, 0.0, 0.0);           //畫筆紅色
+
+        //畫X標記
+        glBegin(GL_LINES);
+        float markd = 0.01f;
+        for (int i = 0; i < number_of_points; i++)
+        {
+            glVertex2d(points[i].x - markd, points[i].y - markd);   //左下
+            glVertex2d(points[i].x + markd, points[i].y + markd);   //右上
+            glVertex2d(points[i].x - markd, points[i].y + markd);   //左上
+            glVertex2d(points[i].x + markd, points[i].y - markd);   //右下
+        }
+        glEnd();
+
+        //畫連線
+        glBegin(GL_LINE_STRIP);
+        for (int i = 0; i < number_of_points; i++)
+        {
+            glVertex2f(points[i].x, points[i].y);
+        }
+        glEnd();
+
+        /*
+        //待比較
+        //畫連線
+        glBegin(GL_LINES);
+        for (int i = 0; i < (number_of_points - 1); i++)
+        {
+            glVertex2d(points[i].x, points[i].y);
+            glVertex2d(points[i + 1].x, points[i + 1].y);
+        }
+        glEnd();
+        */
+
+        //畫點
+        for (int i = 0; i < number_of_points; i++)
+        {
+            draw_point(color_g, 10, points[i].x, points[i].y);
+        }
+
+        //畫外框
+        //draw_rectangle(color_m, 10, minx, miny, xrange - 10, yrange - 1);    //左下開始 w h
+        printf("取得 X 範圍(%0.10f ~ %0.10f), range : %0.10f\n", minx, maxx, xrange);
+        printf("取得 Y 範圍(%0.10f ~ %0.10f), range : %0.10f\n", miny, maxy, yrange);
+        printf("rectangle %0.10f  %0.10f  %0.10f  %0.10f\n", minx, miny, xrange - 10, yrange - 1);
+
+        glFlush();  // 執行繪圖命令
+    }
+    glFlush();  //強制刷新緩存區
+    glutSwapBuffers();  // 將後緩沖區繪製到前臺
 }
 
 void keyboard(unsigned char key, int /*x*/, int /*y*/)
@@ -246,23 +295,36 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
         //離開視窗
         glutDestroyWindow(glutGetWindow());
         return;
-
+    case '0':
+        display_mode = 0;
+        break;
     case '1':
-        printf("1\n");
+        display_mode = 1;
         break;
-
     case '2':
-        printf("2\n");
+        display_mode = 2;
         break;
-
     case '3':
-        make_data_3_gaussian();//製作資料3, 高斯計算
+        display_mode = 3;
         break;
-
     case '4':
-        make_data_4_file(data_filename);    //製作資料4. 讀檔案
+        display_mode = 4;
         break;
-
+    case '5':
+        display_mode = 5;
+        break;
+    case '6':
+        display_mode = 6;
+        break;
+    case '7':
+        display_mode = 7;
+        break;
+    case '8':
+        display_mode = 8;
+        break;
+    case '9':
+        display_mode = 9;
+        break;
     case '?':
         break;
     }
@@ -276,14 +338,6 @@ void idle(void)
 
 int main(int argc, char** argv)
 {
-    //make_data_1_array();    //製作資料1, 設定陣列, TBD
-    //make_data_2_sine();	//製作資料2, 計算
-    //make_data_3_gaussian();//製作資料3, 高斯計算
-    make_data_4_file(data_filename);    //製作資料4. 讀檔案
-
-    find_data_boundary();
-    //print_data();
-
     const char* windowName = "Open GL 2D 畫圖";
     const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
     common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard);

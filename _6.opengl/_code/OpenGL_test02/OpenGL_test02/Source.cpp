@@ -97,6 +97,100 @@ void gfxinit1()
     glClearColor(1.0, 1.0, 1.0, 1.0);
 }
 
+#define R  2.0f
+#define M_PI 3.141592654
+
+double M_PI_2 = M_PI / 2.0;
+float TwoR = 2.0 * R;
+
+/* This function evaluates the x(u, v) function for the sphere. */
+float spherex(float u, float v)
+{
+    return R * cos(v) * cos(u);
+}
+
+/* This function evaluates the y(u, v) function for the sphere. */
+float spherey(float u, float v)
+{
+    return R * sin(v);
+}
+
+/* This function evaluates the z(u, v) function for the sphere. */
+float spherez(float u, float v)
+{
+    return R * cos(v) * sin(u);
+}
+
+/* This function draws a sphere as a surface of revolution. */
+void sphere(void)
+{
+    float u, v;
+
+    /* Draw the meridians (constant u values). */
+
+    for (u = 0.0; u < 2 * M_PI + M_PI / 10; u += M_PI / 5)
+    {
+        glBegin(GL_LINE_STRIP);
+        for (v = -M_PI_2; v < M_PI_2 + 0.005; v += 0.01)
+        {
+            glVertex3f(spherex(u, v), spherey(u, v), spherez(u, v));
+        }
+        glEnd();
+    }
+
+    /* Draw the parallels (constant v values). */
+
+    for (v = -M_PI_2; v < M_PI_2 + M_PI / 20; v += M_PI / 10)
+    {
+        glBegin(GL_LINE_STRIP);
+        for (u = 0.0; u < 2 * M_PI + 0.005; u += 0.01)
+        {
+            glVertex3f(spherex(u, v), spherey(u, v), spherez(u, v));
+        }
+        glEnd();
+    }
+    glEnd();
+}
+
+void show_figure()
+{
+    glClearColor(1.0, 1.0, 1.0, 0.0);   //設定背景為白色
+    glColor3f(1.0, 0.0, 0.0);           //紅色線
+
+    float xview, yview, zview, nearPlane, farPlane, dist, angle, fovy;
+
+    /* Initialize graphics mode and set the window based on R. */
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+
+    // set up orthographic projection
+    glOrtho(-TwoR, TwoR, -TwoR, TwoR, -TwoR, TwoR);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+
+    glDeleteLists(1, 1);  // erase the current figure
+
+    glNewList(1, GL_COMPILE);
+
+    sphere();
+
+    glEndList();
+    glutPostRedisplay();
+}
+
+/*  Initialize alpha blending function.  */
+void gfxinit8(void)
+{
+    //以下未預設值, 寫不寫都一樣
+    gluOrtho2D(-1.0, 1.0, -1.0, 1.0);   //窗口座標範圍2D, 顯示範圍 : X軸(-1.0 ~ 1.0) Y軸(-1.0 ~ 1.0), 左下為原點
+
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glShadeModel(GL_FLAT);
+    glClearColor(0.0, 0.0, 0.0, 0.0);
+}
+
 // 繪圖回調函數
 void display(void)
 {
@@ -381,19 +475,40 @@ void display(void)
         glEnd();
 
         glFlush();  // 執行繪圖命令
-
-
-
-
-
     }
     else if (display_mode == 7)
     {
-        //display_mode = 7  //畫
+        //display_mode = 7  //畫 sphere
+        glClear(GL_COLOR_BUFFER_BIT);
+        glCallList(1);
+        glFlush();  // 執行繪圖命令
+
+        show_figure();
     }
     else if (display_mode == 8)
     {
-        //display_mode = 8  //畫
+        //display_mode = 8  //畫 alpha blending
+
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        glMatrixMode(GL_PROJECTION);
+        glLoadIdentity();
+
+        glMatrixMode(GL_MODELVIEW);
+
+        draw_coordinates(0.85f);     //畫座標軸
+
+        glColor4f(1.0, 0.0, 0.0, 0.5); //R
+        glRectf(-0.6f, -0.2f, 0.6f, 0.8f);
+
+        glColor4f(0.0, 1.0, 0.0, 0.5); //G
+        glRectf(-0.8f, -0.8f, 0.2f, 0.5f);
+
+        glColor4f(0.0, 0.0, 1.0, 0.5); //B
+        glRectf(-0.2f, -0.8f, 0.8f, 0.5f);
+
+        glColor4f(1.0, 0.0, 0.0, 1.0);
+        glRectf(0.33f, 0.33f, 0.66f, 0.66f);
     }
     else if (display_mode == 9)
     {
@@ -404,6 +519,7 @@ void display(void)
         printf("XXXXXXXXXXXXXXXXXXXXX\n");
     }
 
+    glFlush();  // 執行繪圖命令
     glFlush();  //強制刷新緩存區
     glutSwapBuffers();  // 將後緩沖區繪製到前臺
 }
@@ -458,6 +574,7 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
         break;
     case '8':
         display_mode = 8;
+        gfxinit8();
         break;
     case '9':
         display_mode = 9;

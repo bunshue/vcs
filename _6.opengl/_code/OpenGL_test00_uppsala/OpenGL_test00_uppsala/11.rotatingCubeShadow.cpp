@@ -17,13 +17,13 @@ GLfloat vertices[][3] =
 GLfloat vertex_color[][3] =
 {
 	{1.0, 1.0, 1.0},		//未用到 白色  XXXX
-	{0.0, 0.0, 1.0},		//後 B
+	{0.0, 0.0, 1.0},		//-z 後 藍
 	{1.0, 1.0, 1.0},		//未用到 白色  XXXX
-	{0.0, 1.0, 1.0},		//左 Cyan天青
-	{1.0, 1.0, 0.0},		//下 Y
-	{1.0, 0.0, 1.0},		//右 Magenta桃紅
-	{0.0, 1.0, 0.0},		//上 G
-	{1.0, 0.0, 0.0}			//前 R
+	{0.0, 1.0, 1.0},		//-x 左 Cyan 天青
+	{1.0, 1.0, 0.0},		//-y 下 黃
+	{1.0, 0.0, 1.0},		//+x 右 Magenta桃紅
+	{0.0, 1.0, 0.0},		//+y 上 綠
+	{1.0, 0.0, 0.0}			//+z 前 紅
 };
 
 // Shadow colors.
@@ -88,20 +88,22 @@ void display(void)
 	glLoadIdentity();
 	gluLookAt(eyex, eyey, eyez, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 
-	/* Rotate cube */
-
-	glRotatef(theta[0], 1.0, 0.0, 0.0);
-	glRotatef(theta[1], 0.0, 1.0, 0.0);
-	glRotatef(theta[2], 0.0, 0.0, 1.0);
+	glRotatef(theta[0], 1.0, 0.0, 0.0);	//對x軸旋轉特定角度
+	glRotatef(theta[1], 0.0, 1.0, 0.0);	//對y軸旋轉特定角度
+	glRotatef(theta[2], 0.0, 0.0, 1.0);	//對z軸旋轉特定角度
 	glTranslatef(0.0, -2.0, 0.0);
-
-	/* Draw the cube */
 
 	glColorPointer(3, GL_FLOAT, 0, vertex_color);
 	glDrawElements(GL_QUADS, 24, GL_UNSIGNED_BYTE, cubeIndices);
 
-	/* Draw the shadow */
+	/*
+	//已旋轉後之座標軸
+	draw_coordinates(1.5f);     //畫座標軸
 
+	draw_teapot(color_purple, 1.0f, 1.0f);	//畫茶壺
+	*/
+
+	/* Draw the shadow */
 	glPushMatrix();
 	glTranslatef(light[0], light[1], light[2]);
 	glMultMatrixf(m);
@@ -113,30 +115,13 @@ void display(void)
 	glutSwapBuffers();
 }
 
-/* This function is the idle callback. It spins the cube 2 degrees about the selected axis. */
-void idle(void)
+void reshape(int w, int h)
 {
-	if (flag_rotating ==1)
-	{
-		if (flag_rotating_direction == 0)	//CW
-		{
-			theta[axis] += dd;
-			if (theta[axis] > 360.0f)
-			{
-				theta[axis] = 0.0f;
-			}
-		}
-		else   //CCW
-		{
-			theta[axis] -= dd;
-			if (theta[axis] < 0.0f)
-			{
-				theta[axis] = 360.0f;
-			}
-		}
-		glutPostRedisplay();
-		sleep(25);
-	}
+	glViewport(0, 0, w, h);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	gluPerspective(50.0, (double)w / (double)h, 2.0, 20.0);
+	glMatrixMode(GL_MODELVIEW);
 }
 
 void keyboard(unsigned char key, int /*x*/, int /*y*/)
@@ -297,13 +282,29 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
 	glutPostRedisplay();
 }
 
-void reshape(int w, int h)
+void idle(void)
 {
-	glViewport(0, 0, w, h);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(50.0, (double)w / (double)h, 2.0, 20.0);
-	glMatrixMode(GL_MODELVIEW);
+	if (flag_rotating == 1)
+	{
+		if (flag_rotating_direction == 0)	//CW
+		{
+			theta[axis] += dd;
+			if (theta[axis] > 360.0f)
+			{
+				theta[axis] = 0.0f;
+			}
+		}
+		else   //CCW
+		{
+			theta[axis] -= dd;
+			if (theta[axis] < 0.0f)
+			{
+				theta[axis] = 360.0f;
+			}
+		}
+		glutPostRedisplay();
+		sleep(25);
+	}
 }
 
 int main(int argc, char** argv)

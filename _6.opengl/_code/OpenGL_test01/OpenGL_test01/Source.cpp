@@ -498,9 +498,14 @@ void display(void)
 
 void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
+    //printf("你所按按鍵的碼是%x\t此時視窗內的滑鼠座標是(%d,%d)\n", key, x, y);
+
     switch (key)
     {
     case 27:
+    case 'q':
+    case 'Q':
+        //離開視窗
         glutDestroyWindow(glutGetWindow());
         return;
         break;
@@ -552,7 +557,6 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
         display_mode = 9;
         break;
     }
-
     glutPostRedisplay();    //將當前視窗打上標記，標記其需要再次顯示。
 }
 

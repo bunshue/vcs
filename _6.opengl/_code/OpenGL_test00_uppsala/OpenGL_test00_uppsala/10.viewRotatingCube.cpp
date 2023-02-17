@@ -17,13 +17,13 @@ GLfloat vertices[][3] =
 GLfloat vertex_color[][3] =
 {
 	{1.0, 1.0, 1.0},		//未用到 白色  XXXX
-	{0.0, 0.0, 1.0},		//後 B
+	{0.0, 0.0, 1.0},		//-z 後 藍
 	{1.0, 1.0, 1.0},		//未用到 白色  XXXX
-	{0.0, 1.0, 1.0},		//左 Cyan天青
-	{1.0, 1.0, 0.0},		//下 Y
-	{1.0, 0.0, 1.0},		//右 Magenta桃紅
-	{0.0, 1.0, 0.0},		//上 G
-	{1.0, 0.0, 0.0}			//前 R
+	{0.0, 1.0, 1.0},		//-x 左 Cyan 天青
+	{1.0, 1.0, 0.0},		//-y 下 黃
+	{1.0, 0.0, 1.0},		//+x 右 Magenta桃紅
+	{0.0, 1.0, 0.0},		//+y 上 綠
+	{1.0, 0.0, 0.0}			//+z 前 紅
 };
 
 // Indices of the vertices to make up the six faces of the cube.
@@ -64,48 +64,32 @@ void display(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	/* Update viewer position in modelview matrix */
-
 	glLoadIdentity();
 
-	gluLookAt(eyex, eyey, eyez, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+	gluLookAt(eyex, eyey, eyez, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
 
-	/* Rotate cube */
-
-	glRotatef(theta[0], 1.0, 0.0, 0.0);
-	glRotatef(theta[1], 0.0, 1.0, 0.0);
-	glRotatef(theta[2], 0.0, 0.0, 1.0);
-
-	/* Draw the cube and switch buffers */
+	glRotatef(theta[0], 1.0f, 0.0f, 0.0f);	//對x軸旋轉特定角度
+	glRotatef(theta[1], 0.0f, 1.0f, 0.0f);	//對y軸旋轉特定角度
+	glRotatef(theta[2], 0.0f, 0.0f, 1.0f);	//對z軸旋轉特定角度
 
 	glDrawElements(GL_QUADS, 24, GL_UNSIGNED_BYTE, cubeIndices);
-	glutSwapBuffers();
-}
 
-/* This function is the idle callback. It spins the cube 2 degrees about the selected axis. */
-void idle(void)
-{
-	if (flag_rotating == 1)
+	//已旋轉後之座標軸
+	draw_coordinates(1.5f);     //畫座標軸
+
+	draw_teapot(color_purple, 1.0f, 1.0f);	//畫茶壺
+
+	//draw_cube(color_silver, 1.0f, 2.5f);	//cubic 外框
+	//draw_cube(color_purple, 1.0f, 3.0f);	//cubic 外框
+
+	for (int i = 0; i < 8; i++)
 	{
-		if (flag_rotating_direction == 0)	//CW
-		{
-			theta[axis] += dd;
-			if (theta[axis] > 360.0f)
-			{
-				theta[axis] = 0.0f;
-			}
-		}
-		else   //CCW
-		{
-			theta[axis] -= dd;
-			if (theta[axis] < 0.0f)
-			{
-				theta[axis] = 360.0f;
-			}
-		}
-		glutPostRedisplay();
-		sleep(25);
+		glColor3f(1.0f, 1.0f, 1.0f);
+		glRasterPos3fv((GLfloat*)vertices[i]);
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '0' + i);
 	}
+
+	glutSwapBuffers();
 }
 
 void keyboard(unsigned char key, int /*x*/, int /*y*/)
@@ -273,6 +257,31 @@ void reshape(int w, int h)
 	glLoadIdentity();
 	gluPerspective(45.0, (double)w / (double)h, 2.0, 20.0);
 	glMatrixMode(GL_MODELVIEW);
+}
+
+void idle(void)
+{
+	if (flag_rotating == 1)
+	{
+		if (flag_rotating_direction == 0)	//CW
+		{
+			theta[axis] += dd;
+			if (theta[axis] > 360.0f)
+			{
+				theta[axis] = 0.0f;
+			}
+		}
+		else   //CCW
+		{
+			theta[axis] -= dd;
+			if (theta[axis] < 0.0f)
+			{
+				theta[axis] = 360.0f;
+			}
+		}
+		glutPostRedisplay();
+		sleep(25);
+	}
 }
 
 int main(int argc, char** argv)
