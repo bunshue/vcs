@@ -636,17 +636,16 @@ namespace vcs_RichTextBox1
             richTextBox_rtf.SaveFile(rtf_filename);
 
             // We will open rtf_filename with wordpad.exe.
-            ProcessStartInfo start_info =
-                new ProcessStartInfo("wordpad.exe", rtf_filename);
+            ProcessStartInfo start_info = new ProcessStartInfo("wordpad.exe", rtf_filename);
             start_info.WindowStyle = ProcessWindowStyle.Maximized;
 
             // Open wordpad.
-            Process proc = new Process();
-            proc.StartInfo = start_info;
-            proc.Start();
+            Process process = new Process();
+            process.StartInfo = start_info;
+            process.Start();
 
             // Wait for wordpad to finish.
-            proc.WaitForExit();
+            process.WaitForExit();
 
             // Reload the file.
             richTextBox_rtf.LoadFile(rtf_filename);

@@ -77,10 +77,10 @@ namespace WindowsFormsApplication0119a
         //在cmd控制台輸入命令，
         private void create(string str)
         {
-            //process用於調用外部程序
-            Process process = new Process();
-            //調用cmd.exe
-            process.StartInfo.FileName = "cmd.exe";
+		string exe_filename = "cmd.exe";    //要執行的程序名稱
+            Process process = new Process();    //創建一個進程用於調用外部程序
+
+            process.StartInfo.FileName = exe_filename;  //設定要啟動的程式
             //是否指定操作系統外殼進程啟動程序
             process.StartInfo.UseShellExecute = false;
             //可能接受來自調用程序的輸入信息

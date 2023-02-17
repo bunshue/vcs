@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
+using System.IO;
 using System.Diagnostics;       //for Process
 
 namespace vcs_Process_CommandLine
@@ -21,6 +22,8 @@ namespace vcs_Process_CommandLine
         private void Form1_Load(object sender, EventArgs e)
         {
             show_item_location();
+
+            richTextBox2.KeyUp += new KeyEventHandler(richTextBox2_KeyUp);
         }
 
         void show_item_location()
@@ -32,11 +35,10 @@ namespace vcs_Process_CommandLine
             //button
             x_st = 15;
             y_st = 22;
-            dx = 170;
-            dy = 62;
+            dx = 200;
+            dy = 70;
 
             groupBox1.Location = new Point(10, 10);
-            richTextBox1.Location = new Point(10 + dx * 2 + 60, 10);
 
             button0.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button1.Location = new Point(x_st + dx * 0, y_st + dy * 1);
@@ -45,41 +47,117 @@ namespace vcs_Process_CommandLine
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             button5.Location = new Point(x_st + dx * 0, y_st + dy * 5);
             button6.Location = new Point(x_st + dx * 0, y_st + dy * 6);
-            button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
-            button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
-            button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
-            button10.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button11.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button12.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button13.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button14.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button15.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button16.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button17.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button18.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button19.Location = new Point(x_st + dx * 1, y_st + dy * 9);
+            richTextBox1.Location = new Point(10 + dx * 1 + 60, 10);
+            richTextBox2.Location = new Point(10 + dx * 4 - 90 + 60, 10 + 30);
+            label1.Location = new Point(10 + dx * 4 - 90 + 60, 10);
 
             //控件位置
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            bt_clear2.Location = new Point(richTextBox2.Location.X + richTextBox2.Size.Width - bt_clear2.Size.Width, richTextBox2.Location.Y + richTextBox2.Size.Height - bt_clear2.Size.Height);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
         {
             richTextBox1.Clear();
+        }
 
+        private void bt_clear2_Click(object sender, EventArgs e)
+        {
+            richTextBox2.Clear();
         }
 
         private void button0_Click(object sender, EventArgs e)
         {
+            //執行一條command命令 並取得其結果
+            string exe_filename = "cmd.exe";    //要執行的程式名稱
+            string command = "systeminfo";             //向要執行的程式發送的命令
+            //string command = "ver";             //向要執行的程式發送的命令
+            string output_data = string.Empty;
+
+            output_data = run_command_line_process(exe_filename, command);
+            richTextBox1.Text += output_data + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            //關閉與重啟計算機(偽)
+            //關閉與重啟計算機(偽)
+
+            //關閉
+            shutdown_computer(0);
+
+            //重啟
+            shutdown_computer(1);
+        }
+
+        void shutdown_computer(int cmd)
+        {
+            string exe_filename = "cmd.exe";    //要執行的程序名稱
+            Process process = new Process();    //創建一個進程用於調用外部程序
+
+            process.StartInfo.FileName = exe_filename;  //設定要啟動的程式
+
+            process.StartInfo.UseShellExecute = false;  //是否使用系統外殼程序啟動進程
+            process.StartInfo.RedirectStandardInput = true;//是否從流中讀取
+            process.StartInfo.RedirectStandardOutput = true;//是否寫入流
+            process.StartInfo.RedirectStandardError = true;//是否將錯誤信息寫入流
+            process.StartInfo.CreateNoWindow = true;//是否在新窗口中啟動進程
+
+            process.Start();    //啟動程式
+
+            if (cmd == 0)
+            {
+                richTextBox1.Text += "關閉計算機(偽)\n";
+                //偽執行
+                //向要啟動的程式發送輸入信息
+                //process.StandardInput.WriteLine("shutdown -s -t 0");//執行關機命令 0秒後
+            }
+            else if (cmd == 1)
+            {
+                richTextBox1.Text += "重啟計算機(偽)\n";
+                //偽執行
+                //向要啟動的程式發送輸入信息
+                //process.StandardInput.WriteLine("shutdown -r -t 0");//執行重啟計算機命令 0秒後
+            }
+            process.StandardInput.WriteLine("exit");	//一定要關閉, 不然會當機
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //執行CommandLine指令, 並取回結果
+            string filename = Path.GetFullPath(Path.Combine(Application.StartupPath, "..\\..\\hello.bat"));
+
+            ProcessStartInfo start_info = new ProcessStartInfo(filename);
+            start_info.UseShellExecute = false;
+            start_info.CreateNoWindow = true;
+            start_info.RedirectStandardOutput = true;
+            start_info.RedirectStandardError = true;
+
+            // Make the process and set its start information.
+            using (Process proc = new Process())
+            {
+                proc.StartInfo = start_info;
+
+                // Start the process.
+                proc.Start();
+
+                // Attach to stdout and stderr.
+                using (StreamReader std_out = proc.StandardOutput)
+                {
+                    using (StreamReader std_err = proc.StandardError)
+                    {
+                        // Display the results.
+                        richTextBox1.Text += "輸出 :\n" + std_out.ReadToEnd() + "\n";
+                        richTextBox1.Text += "錯誤 :\n" + std_err.ReadToEnd() + "\n";
+
+                        // Clean up.
+                        std_err.Close();
+                        std_out.Close();
+                        proc.Close();
+                    }
+                }
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -98,59 +176,183 @@ namespace vcs_Process_CommandLine
         {
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        //標準版Process使用
+        string run_command_line_process(string exe_filename, string command)
         {
+            //隱式操作CMD命令行窗口
+            /*
+            MS的CMD命令行是一種重要的操作界面，
+            一些在C#中不那麼方便完成的功能，在CMD中幾個簡單的命令或許就可以輕松搞定，
+            如果能在C#中能完成CMD窗口的功能，那一定可以使我們的程序簡便不少。
+
+            下面介紹一種常用的在C#程序中調用CMD.exe程序，並且不顯示命令行窗口界面，來完成CMD中各種功能的簡單方法。
+            */
+
+            //string exe_filename = "cmd.exe";    //要執行的程式名稱
+            string output_data = string.Empty;
+
+            Process process = new Process();    //創建一個進程用於調用外部程序
+
+            process.StartInfo.FileName = exe_filename;  //設定要啟動的程式
+            //process.StartInfo.Arguments = "/c " command; //設定程式執行參數
+            //process.StartInfo.Arguments = command; //也可直接把command寫在這裡, 就不用後面的 StandardInput.WriteLine 了
+            //process.StartInfo.Arguments = "/c" + FullBatPath; //設定程式執行參數" /c " 執行完以下命令後停止
+
+            process.StartInfo.UseShellExecute = false;  //false, 關閉Shell的使用, 是否指定操作系統外殼進程啟動程序, 可能接受來自調用程序的輸入信息
+            process.StartInfo.RedirectStandardInput = true; //重定向標準輸入, 可能接受來自調用程序的輸入信息
+            process.StartInfo.RedirectStandardOutput = true; //重定向標準輸出, 由調用程序獲取輸出信息
+            process.StartInfo.RedirectStandardError = true; //重定向錯誤輸出
+            process.StartInfo.CreateNoWindow = true; //true, 設置不顯示程式窗口, 用T/F測不出差異
+
+            process.Start();    //啟動程式
+
+            //向要啟動的程式發送輸入信息
+            process.StandardInput.WriteLine(command);
+
+            process.StandardInput.WriteLine("exit");	//一定要關閉, 不然會當機
+
+            //獲取要啟動的程式的輸出信息
+            output_data = process.StandardOutput.ReadToEnd();	//從輸出流取得命令執行結果
+
+            process.WaitForExit();	//等待退出
+            process.Close();	//關閉進程
+
+            return output_data;
+
+
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        /*  tmp
+        C#中的Process類可方便的調用外部程序，所以我們可以通過調用cmd.exe程序
+        加入參數 "/c " 要執行的命令來執行一個DOS命令
+        （/c代表執行參數指定的命令後關閉cmd.exe /k參數則不關閉cmd.exe）
+        */
+        /*
+
+                            //psi.WindowStyle = ProcessWindowStyle.Hidden;
+
+                    //獲取要啟動的程式的輸出信息
+                    StreamReader outputStreamReader = process.StandardOutput;
+                    StreamReader errStreamReader = process.StandardError;
+                    process.WaitForExit(2000);
+                    if (process.HasExited)
+                    {
+                        string output = outputStreamReader.ReadToEnd();
+                        string error = errStreamReader.ReadToEnd();
+
+                        richTextBox1.Text += "output:\n" + output + "\n";
+                        richTextBox1.Text += "error:\n" + error + "\n";
+                    }
+                */
+
+        /*
+                            process.Start();    //啟動程式
+
+                    while (!process.HasExited)
+                    {
+                        richTextBox1.Text += "a ";
+                        process.WaitForExit(1000); //等待10秒
+                    }
+                    process.Dispose();
+        */
+
+        public void exec_async(string exe_filename, string parameters)
         {
+            Process process = new Process();    //創建一個進程用於調用外部程序
+
+            process.StartInfo.FileName = exe_filename; //設定要啟動的程式
+            process.StartInfo.Arguments = parameters;
+
+            process.StartInfo.UseShellExecute = false;  //false, 關閉Shell的使用, 是否指定操作系統外殼進程啟動程序, 可能接受來自調用程序的輸入信息
+            process.StartInfo.RedirectStandardInput = true; //重定向標準輸入, 可能接受來自調用程序的輸入信息
+            process.StartInfo.RedirectStandardOutput = true; //重定向標準輸出, 由調用程序獲取輸出信息
+            process.StartInfo.RedirectStandardError = true; //重定向錯誤輸出
+            process.StartInfo.CreateNoWindow = true; //true, 設置不顯示程式窗口
+
+            process.Start();    //啟動程式
+
+            process.BeginOutputReadLine();
+            process.OutputDataReceived += new DataReceivedEventHandler(processOutputDataReceived);
         }
 
-        private void button9_Click(object sender, EventArgs e)
+        private void processOutputDataReceived(object sender, DataReceivedEventArgs e)
         {
+            Console.WriteLine("取得資料: " + e.Data);
         }
 
-        private void button10_Click(object sender, EventArgs e)
+        private void richTextBox2_KeyUp(object sender, KeyEventArgs e)
         {
+            if (e.KeyCode == Keys.Enter)
+            {
+                int count = richTextBox2.Lines.Length;
+                if (count == 0)
+                {
+                    return;
+                }
+
+                while (count > 0 && (string.IsNullOrEmpty(richTextBox2.Lines[count - 1])))
+                {
+                    count--;
+                }
+                if (count > 0)// && !string.IsNullOrEmpty(richTextBox2.Lines[count - 1]))
+                {
+                    ExecuteCmd(richTextBox2.Lines[count - 1]);
+                }
+            }
         }
 
-        private void button11_Click(object sender, EventArgs e)
+        /// <summary>
+        /// 執行Cmd命令
+        /// </summary>
+        public void ExecuteCmd(string command)
         {
-        }
+            if (command.ToLower() == "cmd")
+            {
+                return;
+            }
 
-        private void button12_Click(object sender, EventArgs e)
-        {
-        }
+            try
+            {
+                Process process = new Process();    //創建一個進程用於調用外部程序
 
-        private void button13_Click(object sender, EventArgs e)
-        {
-        }
+                process.StartInfo.FileName = "cmd.exe";     //設定欲執行的命令或程式名稱
+                process.StartInfo.UseShellExecute = false;  //是否指定操作系統外殼進程啟動程序
 
-        private void button14_Click(object sender, EventArgs e)
-        {
-        }
+                //可能接受來自調用程序的輸入信息
+                process.StartInfo.RedirectStandardInput = true;   //重定向標准輸入
+                process.StartInfo.RedirectStandardOutput = true;  //重定向標准輸出
+                process.StartInfo.RedirectStandardError = true;   //重定向錯誤輸出
+                process.StartInfo.CreateNoWindow = true;          //不顯示程序窗口
 
-        private void button15_Click(object sender, EventArgs e)
-        {
-        }
+                process.Start();    //啟動程式
 
-        private void button16_Click(object sender, EventArgs e)
-        {
-        }
+                //System.Threading.Thread.Sleep(1000);        //等一秒
+                process.StandardInput.AutoFlush = true;           //輸入命令
 
-        private void button17_Click(object sender, EventArgs e)
-        {
-        }
+                //向要啟動的程式發送輸入信息
+                process.StandardInput.WriteLine(command);
+                process.StandardInput.WriteLine("exit");	//一定要關閉, 不然會當機
 
-        private void button18_Click(object sender, EventArgs e)
-        {
-        }
+                //same
+                //獲取要啟動的程式的輸出信息
+                string output_data = process.StandardOutput.ReadToEnd();	//從輸出流取得命令執行結果
+                richTextBox2.Text += output_data + "\n";
 
-        private void button19_Click(object sender, EventArgs e)
-        {
-        }
+                //獲取要啟動的程式的輸出信息
+                StreamReader reader = process.StandardOutput;//截取輸出流
+                string output = reader.ReadLine();//每次讀取一行
 
+                while (!reader.EndOfStream)
+                {
+                    richTextBox2.Text += output + "\n";
+                    output = reader.ReadLine();
+                }
+                process.WaitForExit();
+                process.Close();
+            }
+            catch (Exception)
+            {
+            }
+        }
     }
 }
-
-

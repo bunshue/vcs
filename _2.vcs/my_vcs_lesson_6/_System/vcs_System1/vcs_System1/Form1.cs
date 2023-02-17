@@ -31,6 +31,8 @@ namespace vcs_System1
 {
     public partial class Form1 : Form
     {
+        DateTime start_time = DateTime.Now;
+
         public Form1()
         {
             InitializeComponent();
@@ -126,27 +128,11 @@ namespace vcs_System1
             button58.Location = new Point(x_st + dx * 4, y_st + dy * 10);
             button59.Location = new Point(x_st + dx * 4, y_st + dy * 11);
 
-            button60.Location = new Point(x_st + dx * 5, y_st + dy * 0);
-            button61.Location = new Point(x_st + dx * 5, y_st + dy * 1);
-            button62.Location = new Point(x_st + dx * 5, y_st + dy * 2);
-            button63.Location = new Point(x_st + dx * 5, y_st + dy * 3);
-            button64.Location = new Point(x_st + dx * 5, y_st + dy * 4);
-            button65.Location = new Point(x_st + dx * 5, y_st + dy * 5);
-            button66.Location = new Point(x_st + dx * 5, y_st + dy * 6);
-            button67.Location = new Point(x_st + dx * 5, y_st + dy * 7);
-            button68.Location = new Point(x_st + dx * 5, y_st + dy * 8);
-            button69.Location = new Point(x_st + dx * 5, y_st + dy * 9);
-            button70.Location = new Point(x_st + dx * 5, y_st + dy * 10);
-            button71.Location = new Point(x_st + dx * 5, y_st + dy * 11);
-
-            label6.Location = new Point(x_st + dx * 3, y_st + dy * 12 + 30);
-
             groupBox1.Location = new Point(x_st + dx * 0, y_st + dy * 14);
             groupBox2.Location = new Point(x_st + dx * 1, y_st + dy * 14);
 
-            richTextBox1.Location = new Point(x_st + dx * 6, y_st + dy * 0);
-            richTextBox1.Size = new Size(420, 600);
-            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            richTextBox1.Location = new Point(x_st + dx * 5, y_st + dy * 0);
+            richTextBox1.Size = new Size(660, 1040);
 
             dy = 0;
 
@@ -167,6 +153,9 @@ namespace vcs_System1
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
             bt_exit_setup();
+
+            //控件位置
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
         }
 
         private void bt_exit_Click(object sender, EventArgs e)
@@ -291,9 +280,7 @@ namespace vcs_System1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //還不清楚這個的用法
-
-            richTextBox1.Text += "開機時間 : " + (Environment.TickCount / 1000).ToString() + " 秒" + "\n";
+            richTextBox1.Text += "電腦開機時間 : " + (Environment.TickCount / 1000).ToString() + " 秒\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -443,6 +430,8 @@ namespace vcs_System1
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //取得程式啟動時間
+            richTextBox1.Text += "程式開啟時間: " + (DateTime.Now - start_time).ToString() + " 秒\n";
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -451,11 +440,6 @@ namespace vcs_System1
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //.Net C# 取得電腦名稱
-            richTextBox1.Text += "電腦名稱 1 : " + Environment.MachineName + "\n";
-            richTextBox1.Text += "電腦名稱 2 : " + Dns.GetHostName() + "\n";
-            richTextBox1.Text += "電腦名稱 3 : " + SystemInformation.ComputerName + "\n";
-            richTextBox1.Text += "電腦名稱 4 : " + Environment.GetEnvironmentVariable("COMPUTERNAME") + "\n";
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -518,9 +502,21 @@ namespace vcs_System1
             System.Net.IPHostEntry IPHost = System.Net.Dns.GetHostEntry(Environment.MachineName);
             if (IPHost.AddressList.Length > 0)
             {
-                richTextBox1.Text += "電腦本機IP " + IPHost.AddressList[0].ToString() + "\n";
+                richTextBox1.Text += "1電腦本機IP : " + IPHost.AddressList[0].ToString() + "\n";
                 //MessageBox.Show(IPHost.AddressList[0].ToString(), "電腦本機IP");
             }
+
+
+            string hostName = Dns.GetHostName(); //獲取主機名稱
+            IPAddress[] addresses = Dns.GetHostAddresses(hostName); //解析主機IP地址
+
+            string[] IP = new string[addresses.Length]; //轉換為字符串形式
+            for (int i = 0; i < addresses.Length; i++)
+            {
+                IP[i] = addresses[i].ToString();
+                richTextBox1.Text += "2電腦本機IP : " + IP[i] + "\n";
+            }
+
         }
 
         private void button15_Click(object sender, EventArgs e)
@@ -562,17 +558,11 @@ namespace vcs_System1
 
         private void button17_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "\r\n主機名:" + Dns.GetHostName() + "\n"; //獲取主機名稱
-
-            string hostName = Dns.GetHostName(); //獲取主機名稱
-            IPAddress[] addresses = Dns.GetHostAddresses(hostName); //解析主機IP地址
-
-            string[] IP = new string[addresses.Length]; //轉換為字符串形式
-            for (int i = 0; i < addresses.Length; i++)
-            {
-                IP[i] = addresses[i].ToString();
-                richTextBox1.Text += "get ip addr : " + IP[i] + "\n";
-            }
+            //取得電腦名稱
+            richTextBox1.Text += "電腦名稱 1 : " + Environment.MachineName + "\n";
+            richTextBox1.Text += "電腦名稱 2 : " + Dns.GetHostName() + "\n";
+            richTextBox1.Text += "電腦名稱 3 : " + SystemInformation.ComputerName + "\n";
+            richTextBox1.Text += "電腦名稱 4 : " + Environment.GetEnvironmentVariable("COMPUTERNAME") + "\n";
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -688,10 +678,10 @@ namespace vcs_System1
         {
             // part 1
             ListView lv = new ListView();
-            lv.Left = 955;
-            lv.Top = 10;
-            lv.Width = 330;
-            lv.Height = 400;
+            lv.Left = 900;
+            lv.Top = 680;
+            lv.Width = 360;
+            lv.Height = 380;
             lv.BackColor = Color.Pink;
             this.Controls.Add(lv);
             this.Size = new Size(this.Size.Width + 330, this.Size.Height);
@@ -1032,14 +1022,77 @@ namespace vcs_System1
 
         private void button54_Click(object sender, EventArgs e)
         {
+            //Environment 類別
+            richTextBox1.Text += "Environment 類別\n";
+
+            richTextBox1.Text += "處理序的命令列：" + Environment.CommandLine + "\n";
+            richTextBox1.Text += "工作目錄的完整路徑：" + Environment.CurrentDirectory + "\n";
+            richTextBox1.Text += "處理序的結束代碼：" + Environment.ExitCode + "\n";
+            richTextBox1.Text += "是否正常關機：" + Environment.HasShutdownStarted + "\n";
+            richTextBox1.Text += "NetBIOS名稱：" + Environment.MachineName + "\n";
+            richTextBox1.Text += "環境定義的新字串：" + Environment.NewLine + "\n";
+            richTextBox1.Text += "作業系統平臺：" + Environment.OSVersion.Platform + "\n";
+            richTextBox1.Text += "Service Pack版本：" + Environment.OSVersion.ServicePack + "\n";
+            richTextBox1.Text += "作業系統版本：" + Environment.OSVersion.Version + "\n";
+            richTextBox1.Text += "串連字串表示：" + Environment.OSVersion.VersionString + "\n";
+            richTextBox1.Text += "處理器數目：" + Environment.ProcessorCount + "\n";
+            richTextBox1.Text += "堆疊追蹤資訊：" + Environment.StackTrace + "\n";
+            richTextBox1.Text += "系統目錄完整路徑：" + Environment.SystemDirectory + "\n";
+            richTextBox1.Text += "系統啟動後的毫秒數：" + Environment.TickCount + "\n";
+            richTextBox1.Text += "使用者網域名稱：" + Environment.UserDomainName + "\n";
+            richTextBox1.Text += "處理序是否與使用者互動：" + Environment.UserInteractive + "\n";
+            richTextBox1.Text += "使用者名稱：" + Environment.UserName + "\n";
+            richTextBox1.Text += "Version：" + Environment.Version + "\n";
+            richTextBox1.Text += "組件元件值：" + Environment.Version.Build + "\n";
+            richTextBox1.Text += "主要元件值：" + Environment.Version.Major + "\n";
+            richTextBox1.Text += "修訂編號的高 16 位元：" + Environment.Version.MajorRevision + "\n";
+            richTextBox1.Text += "次要元件值：" + Environment.Version.Minor + "\n";
+            richTextBox1.Text += "修訂編號的低 16 位元：" + Environment.Version.MinorRevision + "\n";
+            richTextBox1.Text += "修訂元件值：" + Environment.Version.Revision + "\n";
+            richTextBox1.Text += "實際記憶體數量：" + Environment.WorkingSet + "\n";
+
+            string strFinal;
+            string strQuery = "系統磁碟機：%SystemDrive% 與 系統根目錄：%SystemRoot%";
+            strFinal = Environment.ExpandEnvironmentVariables(strQuery);
+            richTextBox1.Text += strFinal + "\n";
+
+            string[] arguments = Environment.GetCommandLineArgs();
+            richTextBox1.Text += "取得命令列的Args: " + string.Join(", ", arguments) + "\n";
+
+            richTextBox1.Text += "系統特殊資料夾的路徑：" + Environment.GetFolderPath(Environment.SpecialFolder.System) + "\n";
+
+            string[] drives = Environment.GetLogicalDrives();
+            richTextBox1.Text += "系統磁碟機：" + string.Join(", ", drives) + "\n";
+
+            //作業系統位置
+            string str = Environment.GetEnvironmentVariable("SystemRoot");
+            richTextBox1.Text += "作業系統在" + str + "\n";
+            string dir = str.Substring(0, 2);
+            richTextBox1.Text += "作業系統在" + dir + "\n";
+
         }
 
         private void button55_Click(object sender, EventArgs e)
         {
+            //取得系統環境變數
+            richTextBox1.Text += "環境變數" + "\t\t\t" + "變數值" + "\n";
+            foreach (DictionaryEntry DEntry in Environment.GetEnvironmentVariables())
+            {
+                richTextBox1.Text += DEntry.Key.ToString() + "\t" + DEntry.Value.ToString() + "\n";
+            }
         }
 
         private void button56_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "UserAppDataRegistry使用\n";
+
+            richTextBox1.Text += "把數值寫進系統變數AAAA\n";
+            Application.UserAppDataRegistry.SetValue("AAAA", 123);
+
+            richTextBox1.Text += "把系統變數AAAA的內容讀出來\n";
+            int result;
+            result = (int)Application.UserAppDataRegistry.GetValue("AAAA");
+            richTextBox1.Text += "結果 : " + result.ToString() + "\n";
         }
 
         private void button57_Click(object sender, EventArgs e)
@@ -1131,7 +1184,8 @@ namespace vcs_System1
             var psi = new ProcessStartInfo("shutdown", "/s /t 0");
             psi.CreateNoWindow = true;
             psi.UseShellExecute = false;
-            Process.Start(psi);
+            //偽執行
+            //Process.Start(psi);
         }
 
         // Reboot.
@@ -1140,153 +1194,39 @@ namespace vcs_System1
             var psi = new ProcessStartInfo("shutdown", "/r /t 0");
             psi.CreateNoWindow = true;
             psi.UseShellExecute = false;
-            Process.Start(psi);
+            //偽執行
+            //Process.Start(psi);
         }
 
         // Log off.
         private void btnLogOff_Click(object sender, EventArgs e)
         {
-            ExitWindowsEx(0, 0);
+            //偽執行
+            //ExitWindowsEx(0, 0);
         }
 
         // Lock.
         private void btnLock_Click(object sender, EventArgs e)
         {
-            LockWorkStation();
+            //偽執行
+            //LockWorkStation();
         }
 
         // Hibernate.
         private void btnHibernate_Click(object sender, EventArgs e)
         {
-            Application.SetSuspendState(PowerState.Hibernate, true, true);
+            //偽執行
+            //Application.SetSuspendState(PowerState.Hibernate, true, true);
         }
 
         // Sleep.
         private void btnSleep_Click(object sender, EventArgs e)
         {
-            Application.SetSuspendState(PowerState.Suspend, true, true);
+            //偽執行
+            //Application.SetSuspendState(PowerState.Suspend, true, true);
         }
 
         #endregion
-
-        private void button60_Click(object sender, EventArgs e)
-        {
-            //Environment 類別
-            richTextBox1.Text += "Environment 類別\n";
-
-            richTextBox1.Text += "處理序的命令列：" + Environment.CommandLine + "\n";
-            richTextBox1.Text += "工作目錄的完整路徑：" + Environment.CurrentDirectory + "\n";
-            richTextBox1.Text += "處理序的結束代碼：" + Environment.ExitCode + "\n";
-            richTextBox1.Text += "是否正常關機：" + Environment.HasShutdownStarted + "\n";
-            richTextBox1.Text += "NetBIOS名稱：" + Environment.MachineName + "\n";
-            richTextBox1.Text += "環境定義的新字串：" + Environment.NewLine + "\n";
-            richTextBox1.Text += "作業系統平臺：" + Environment.OSVersion.Platform + "\n";
-            richTextBox1.Text += "Service Pack版本：" + Environment.OSVersion.ServicePack + "\n";
-            richTextBox1.Text += "作業系統版本：" + Environment.OSVersion.Version + "\n";
-            richTextBox1.Text += "串連字串表示：" + Environment.OSVersion.VersionString + "\n";
-            richTextBox1.Text += "處理器數目：" + Environment.ProcessorCount + "\n";
-            richTextBox1.Text += "堆疊追蹤資訊：" + Environment.StackTrace + "\n";
-            richTextBox1.Text += "系統目錄完整路徑：" + Environment.SystemDirectory + "\n";
-            richTextBox1.Text += "系統啟動後的毫秒數：" + Environment.TickCount + "\n";
-            richTextBox1.Text += "使用者網域名稱：" + Environment.UserDomainName + "\n";
-            richTextBox1.Text += "處理序是否與使用者互動：" + Environment.UserInteractive + "\n";
-            richTextBox1.Text += "使用者名稱：" + Environment.UserName + "\n";
-            richTextBox1.Text += "Version：" + Environment.Version + "\n";
-            richTextBox1.Text += "組件元件值：" + Environment.Version.Build + "\n";
-            richTextBox1.Text += "主要元件值：" + Environment.Version.Major + "\n";
-            richTextBox1.Text += "修訂編號的高 16 位元：" + Environment.Version.MajorRevision + "\n";
-            richTextBox1.Text += "次要元件值：" + Environment.Version.Minor + "\n";
-            richTextBox1.Text += "修訂編號的低 16 位元：" + Environment.Version.MinorRevision + "\n";
-            richTextBox1.Text += "修訂元件值：" + Environment.Version.Revision + "\n";
-            richTextBox1.Text += "實際記憶體數量：" + Environment.WorkingSet + "\n";
-
-            string strFinal;
-            string strQuery = "系統磁碟機：%SystemDrive% 與 系統根目錄：%SystemRoot%";
-            strFinal = Environment.ExpandEnvironmentVariables(strQuery);
-            richTextBox1.Text += strFinal + "\n";
-
-            string[] arguments = Environment.GetCommandLineArgs();
-            richTextBox1.Text += "取得命令列的Args: " + string.Join(", ", arguments) + "\n";
-
-            richTextBox1.Text += "系統特殊資料夾的路徑：" + Environment.GetFolderPath(Environment.SpecialFolder.System) + "\n";
-
-            string[] drives = Environment.GetLogicalDrives();
-            richTextBox1.Text += "系統磁碟機：" + string.Join(", ", drives) + "\n";
-
-            //作業系統位置
-            string str = Environment.GetEnvironmentVariable("SystemRoot");
-            richTextBox1.Text += "作業系統在" + str + "\n";
-            string dir = str.Substring(0, 2);
-            richTextBox1.Text += "作業系統在" + dir + "\n";
-        }
-
-        private void button61_Click(object sender, EventArgs e)
-        {
-            //取得系統環境變數
-            richTextBox1.Text += "環境變數" + "\t\t\t" + "變數值" + "\n";
-            foreach (DictionaryEntry DEntry in Environment.GetEnvironmentVariables())
-            {
-                richTextBox1.Text += DEntry.Key.ToString() + "\t" + DEntry.Value.ToString() + "\n";
-            }
-        }
-
-        private void button62_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Text += "UserAppDataRegistry使用\n";
-
-            richTextBox1.Text += "把數值寫進系統變數AAAA\n";
-            Application.UserAppDataRegistry.SetValue("AAAA", 123);
-
-            richTextBox1.Text += "把系統變數AAAA的內容讀出來\n";
-            int result;
-            result = (int)Application.UserAppDataRegistry.GetValue("AAAA");
-            richTextBox1.Text += "結果 : " + result.ToString() + "\n";
-        }
-
-        private void button63_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button64_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button65_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button66_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button67_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button68_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button69_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button70_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button71_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void timer3_Tick(object sender, EventArgs e)
         {

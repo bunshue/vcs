@@ -567,17 +567,19 @@ namespace vcs_FFMPEG
         {
             string result = String.Empty;
 
-            using (Process p = new Process())
+            using (Process process = new Process()) //創建一個進程用於調用外部程序
             {
-                p.StartInfo.UseShellExecute = false;
-                p.StartInfo.CreateNoWindow = true;
-                p.StartInfo.RedirectStandardOutput = true;
-                p.StartInfo.FileName = exePath;
-                p.StartInfo.Arguments = parameters;
-                p.Start();
-                p.WaitForExit();
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.CreateNoWindow = true;
+                process.StartInfo.RedirectStandardOutput = true;
+                process.StartInfo.FileName = exePath;
+                process.StartInfo.Arguments = parameters;
 
-                result = p.StandardOutput.ReadToEnd();
+                process.Start();
+
+                process.WaitForExit();
+
+                result = process.StandardOutput.ReadToEnd();
             }
             return result;
         }
@@ -809,18 +811,19 @@ namespace vcs_FFMPEG
         /// <param name="arg">執行參數</param>
         public static void ExcuteProcess(string exe, string arg)
         {
-            using (var p = new Process())
+            using (var process = new Process())
             {
-                p.StartInfo.FileName = exe;
-                p.StartInfo.Arguments = arg;
-                p.StartInfo.UseShellExecute = false;    //輸出信息重定向  
-                p.StartInfo.CreateNoWindow = true;
-                p.StartInfo.RedirectStandardError = true;
-                p.StartInfo.RedirectStandardOutput = true;
-                p.Start();                    //啟動線程  
-                p.BeginOutputReadLine();
-                p.BeginErrorReadLine();
-                p.WaitForExit();//等待進程結束                                        
+                process.StartInfo.FileName = exe;
+                process.StartInfo.Arguments = arg;
+                process.StartInfo.UseShellExecute = false;    //輸出信息重定向  
+                process.StartInfo.CreateNoWindow = true;
+                process.StartInfo.RedirectStandardError = true;
+                process.StartInfo.RedirectStandardOutput = true;
+
+                process.Start();                    //啟動線程  
+                process.BeginOutputReadLine();
+                process.BeginErrorReadLine();
+                process.WaitForExit();//等待進程結束                                        
             }
 
         }
@@ -954,38 +957,37 @@ namespace vcs_FFMPEG
             //richTextBox1.Text += "cmd : " + command + "\n";
             try
             {
-                //創建一個進程
-                Process p = new Process();
-                p.StartInfo.FileName = command;
-                p.StartInfo.UseShellExecute = false;
-                p.StartInfo.RedirectStandardOutput = true;
-                p.StartInfo.RedirectStandardError = true;
-                p.StartInfo.CreateNoWindow = true;
+                Process process = new Process();    //創建一個進程用於調用外部程序
+                process.StartInfo.FileName = command;
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.RedirectStandardOutput = true;
+                process.StartInfo.RedirectStandardError = true;
+                process.StartInfo.CreateNoWindow = true;
 
                 //啓動進程
-                p.Start();
+                process.Start();
 
                 //準備讀出輸出流和錯誤流
                 string outputData = string.Empty;
                 string errorData = string.Empty;
-                p.BeginOutputReadLine();
-                p.BeginErrorReadLine();
+                process.BeginOutputReadLine();
+                process.BeginErrorReadLine();
 
-                p.OutputDataReceived += (ss, ee) =>
+                process.OutputDataReceived += (ss, ee) =>
                 {
                     outputData += ee.Data;
                 };
 
-                p.ErrorDataReceived += (ss, ee) =>
+                process.ErrorDataReceived += (ss, ee) =>
                 {
                     errorData += ee.Data;
                 };
 
                 //等待退出
-                p.WaitForExit();
+                process.WaitForExit();
 
                 //關閉進程
-                p.Close();
+                process.Close();
 
                 //返回流結果
                 output = outputData;
@@ -1057,19 +1059,20 @@ namespace vcs_FFMPEG
         public string Fromffmpeg(string fileName)
         {
             string duration = "";
-            using (Process pro = new Process())
+            using (Process process = new Process()) //創建一個進程用於調用外部程序
             {
-                pro.StartInfo.UseShellExecute = false;
-                pro.StartInfo.ErrorDialog = false;
-                pro.StartInfo.RedirectStandardError = true;
+                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.ErrorDialog = false;
+                process.StartInfo.RedirectStandardError = true;
 
-                pro.StartInfo.FileName = ffmpeg_filename;   //FFMPEG程式所在地
+                process.StartInfo.FileName = ffmpeg_filename;   //FFMPEG程式所在地
 
-                pro.StartInfo.Arguments = " -i " + fileName;
+                process.StartInfo.Arguments = " -i " + fileName;
 
-                pro.Start();
-                StreamReader errorreader = pro.StandardError;
-                pro.WaitForExit(1000);
+                process.Start();
+
+                StreamReader errorreader = process.StandardError;
+                process.WaitForExit(1000);
 
                 string result = errorreader.ReadToEnd();
                 if (string.IsNullOrEmpty(result) == false)

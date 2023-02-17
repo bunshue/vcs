@@ -72,6 +72,7 @@ namespace vcs_Process4
             {
                 string ProcessName = listView1.SelectedItems[0].Text;
                 Process[] processes = Process.GetProcessesByName(ProcessName);
+                
                 Process process = new Process();
                 //設定程序名
                 process.StartInfo.FileName = "cmd.exe";
@@ -86,6 +87,7 @@ namespace vcs_Process4
                 //設置不顯示窗口
                 process.StartInfo.CreateNoWindow = true;
                 //執行強制結束命令
+                
                 process.Start();
                 process.StandardInput.WriteLine("ntsd -c q -p " + (processes[0].Id).ToString());
                 process.StandardInput.WriteLine("Exit");

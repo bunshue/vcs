@@ -123,7 +123,7 @@ namespace vcs_test_all_00_Usually
 
             //button
             x_st = 20;
-            y_st = 30;
+            y_st = 20;
             dx = 160;
             dy = 70;
 
@@ -137,6 +137,7 @@ namespace vcs_test_all_00_Usually
             button7.Location = new Point(x_st + dx * 0, y_st + dy * 7);
             button8.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button9.Location = new Point(x_st + dx * 0, y_st + dy * 9);
+            button10.Location = new Point(x_st + dx * 4, y_st + dy * 0);
 
             label1.Location = new Point(x_st + dx * 2, y_st + dy * 0);
             label2.Location = new Point(x_st + dx * 2, y_st + dy * 0 + 30);
@@ -410,7 +411,7 @@ namespace vcs_test_all_00_Usually
             }
             catch (Exception ex)
             {
-                //richTextBox1.Text += "xxx錯誤訊息n : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息n : " + ex.Message + "\n";
             }
 
             Graphics g = Graphics.FromImage(bm);
@@ -424,7 +425,7 @@ namespace vcs_test_all_00_Usually
             }
             catch (Exception ex)
             {
-                //richTextBox1.Text += "xxx錯誤訊息m : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息m : " + ex.Message + "\n";
                 GC.Collect();       //回收資源
                 return;
             }
@@ -443,7 +444,7 @@ namespace vcs_test_all_00_Usually
             }
             catch (Exception ex)
             {
-                //richTextBox1.Text += "xxx錯誤訊息a : " + ex.Message + "\n";
+                richTextBox1.Text += "xxx錯誤訊息a : " + ex.Message + "\n";
             }
             GC.Collect();       //回收資源
         }
@@ -454,51 +455,9 @@ namespace vcs_test_all_00_Usually
         }
         //WebCam SP
 
-        //移動PictureBox ST
-        //pictureBox1 initial location
-        private const int PB3_DEFAULT_POSITION_X = 180;
-        private const int PB3_DEFAULT_POSITION_Y = 10;
-        int pictureBox1_position_x_old = PB3_DEFAULT_POSITION_X;
-        int pictureBox1_position_y_old = PB3_DEFAULT_POSITION_Y;
-
-        bool flag_pictureBox1_mouse_down = false;
-        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
-        {
-            flag_pictureBox1_mouse_down = true;
-            //richTextBox1.Text += "Down : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
-            pictureBox1_position_x_old = e.X;
-            pictureBox1_position_y_old = e.Y;
-        }
-
-        private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
-        {
-            if (flag_pictureBox1_mouse_down == true)
-            {
-                //richTextBox1.Text += "Up : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
-                int dx = e.X - pictureBox1_position_x_old;
-                int dy = e.Y - pictureBox1_position_y_old;
-
-                //richTextBox1.Text += "dx, dy : (" + dx.ToString() + ", " + dy.ToString() + ")\n";
-                pictureBox1.Location = new Point(pictureBox1.Location.X + dx, pictureBox1.Location.Y + dy);
-            }
-        }
-
-        private void pictureBox1_MouseUp(object sender, MouseEventArgs e)
-        {
-            flag_pictureBox1_mouse_down = false;
-            //richTextBox1.Text += "Up : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
-            int dx = e.X - pictureBox1_position_x_old;
-            int dy = e.Y - pictureBox1_position_y_old;
-
-            //richTextBox1.Text += "dx, dy : (" + dx.ToString() + ", " + dy.ToString() + ")\n";
-            pictureBox1.Location = new Point(pictureBox1.Location.X + dx, pictureBox1.Location.Y + dy);
-        }
-        //移動PictureBox SP
-
         //顯示訊息 ST
         int timer_display_show_main_mesg_count = 0;
         int timer_display_show_main_mesg_count_target = 0;
-
 
         void show_main_message1(string mesg, int number, int timeout)
         {
@@ -573,6 +532,71 @@ namespace vcs_test_all_00_Usually
         {
 
         }
+
+        //建立無邊框移動之pictureBox ST
+        private void button10_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "建立無邊框移動之pictureBox\n";
+
+            pbox.Width = 305;
+            pbox.Height = 400;
+            pbox.Location = new Point(PBOX_DEFAULT_POSITION_X, PBOX_DEFAULT_POSITION_Y);
+            pbox.BackColor = Color.White;
+            //pbox.SizeMode = PictureBoxSizeMode.Zoom;
+            pbox.BringToFront();
+
+            //讀取圖檔
+            string filename = @"C:\______test_files\picture1.jpg";
+            pbox.Image = Image.FromFile(filename);
+
+            pbox.MouseDown += new MouseEventHandler(pbox_MouseDown);    // 加入事件
+            pbox.MouseMove += new MouseEventHandler(pbox_MouseMove);    // 加入事件
+            pbox.MouseUp += new MouseEventHandler(pbox_MouseUp);        // 加入事件
+
+            this.Controls.Add(pbox);	// 將控件加入表單
+            button10.Enabled = false;
+        }
+
+        //pbox initial location
+        PictureBox pbox = new PictureBox();
+        private const int PBOX_DEFAULT_POSITION_X = 500;
+        private const int PBOX_DEFAULT_POSITION_Y = 200;
+        int pbox_position_x_old = PBOX_DEFAULT_POSITION_X;
+        int pbox_position_y_old = PBOX_DEFAULT_POSITION_Y;
+
+        bool flag_pbox_mouse_down = false;
+        private void pbox_MouseDown(object sender, MouseEventArgs e)
+        {
+            flag_pbox_mouse_down = true;
+            //richTextBox1.Text += "Down : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
+            pbox_position_x_old = e.X;
+            pbox_position_y_old = e.Y;
+        }
+
+        private void pbox_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (flag_pbox_mouse_down == true)
+            {
+                //richTextBox1.Text += "Up : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
+                int dx = e.X - pbox_position_x_old;
+                int dy = e.Y - pbox_position_y_old;
+
+                //richTextBox1.Text += "dx, dy : (" + dx.ToString() + ", " + dy.ToString() + ")\n";
+                pbox.Location = new Point(pbox.Location.X + dx, pbox.Location.Y + dy);
+            }
+        }
+
+        private void pbox_MouseUp(object sender, MouseEventArgs e)
+        {
+            flag_pbox_mouse_down = false;
+            //richTextBox1.Text += "Up : (" + e.X.ToString() + ", " + e.Y.ToString() + ")\n";
+            int dx = e.X - pbox_position_x_old;
+            int dy = e.Y - pbox_position_y_old;
+
+            //richTextBox1.Text += "dx, dy : (" + dx.ToString() + ", " + dy.ToString() + ")\n";
+            pbox.Location = new Point(pbox.Location.X + dx, pbox.Location.Y + dy);
+        }
+        //建立無邊框移動之pictureBox SP
     }
 
     //3Form1之外
