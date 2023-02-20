@@ -80,13 +80,13 @@ echo 程式執行中，請稍後......
 color
 
 
+echo 設定與取得變數
+
 set message=this is a lion-mouse
 
 echo 設定參數 %message%
 
-
 set pwd=%cd%
-
 echo 取得目前位置 %pwd%
 
 set pwd=%~dp0\.. 
@@ -97,7 +97,7 @@ echo parent : %parent%
 
 
 echo SystemRoot : %SystemRoot%
-
+echo windows dir %windir%
 
 
 
@@ -120,6 +120,7 @@ echo "%VIVADO% found"
 ) else (
 echo "%VIVADO% not found"
 )
+
 
 if not defined RDI_ARGS_FUNCTION (
   echo "%RDI_ARGS_FUNCTION% found"

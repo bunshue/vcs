@@ -1,26 +1,19 @@
 ﻿#include "../../Common.h"
 
+int window_width = 0;
+int window_height = 0;
+
 // 繪圖回調函數
 void display(void)
 {
-    //以下未預設值, 寫不寫都一樣
-    //gluOrtho2D(-1.0, 1.0, -1.0, 1.0);   //窗口座標範圍2D, 顯示範圍 : X軸(-1.0 ~ 1.0) Y軸(-1.0 ~ 1.0), 左下為原點
-
     glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
-    draw_boundary(color_y, 0.9f); //畫視窗邊界
-
-    //畫一個實心矩形
-    glColor3f(0.0, 1.0, 1.0);   //設定顏色 cc
-    float dd = 0.3f;
-    glRectf(-dd, -dd, dd, dd);  //實心矩形
+    draw_coordinates(0.8f);
 
     draw_teapot(color_r, 1, 0.3);   //畫一個茶壺
+    draw_rectangle(color_y, 1, -0.3f, -0.3f, 0.6f, 0.6f);
 
-    float x_st = -0.7f;
-    float y_st = 0.5f;
-    const char str1[30] = "Empty example";
-    draw_string1(str1, color_r, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
+    draw_rectangle(color_y, 1, -0.95f, -0.95f, 1.90f, 1.90f);
 
     glFlush();  // 執行繪圖命令
 }
@@ -28,7 +21,16 @@ void display(void)
 // 窗口大小變化回調函數
 void reshape(int w, int h)
 {
-    glViewport(0, 0, w, h);
+    window_width = w;
+    window_height = h;
+
+    //視口設定為全部視窗
+    int viewportx = 0;
+    int viewporty = 0;
+    int viewportw = window_width;
+    int viewporth = window_height;
+    glViewport(viewportx, viewporty, viewportw, viewporth);
+    //printf("把所有要畫的東西顯示在視窗的(%d ,%d)開始的(%d, %d)\n", viewportx, viewporty, viewportw, viewporth);
 }
 
 void keyboard(unsigned char key, int /*x*/, int /*y*/)
@@ -41,11 +43,28 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
         //離開視窗
         glutDestroyWindow(glutGetWindow());
         return;
-
-    case '1':
+    case '+':
+        printf("0\n");
+        gluOrtho2D(-0.5, 0.5, -0.5, 0.5);   //窗口座標範圍2D, 顯示範圍 : X軸(-1.0 ~ 1.0) Y軸(-1.0 ~ 1.0), 左下為原點
+        break;
+    case '-':
         printf("1\n");
+        gluOrtho2D(-2.0f, 2.0f, -2.0f, 2.0f);
+        break;
+
+    case 'V':
+        printf("V\n");
+        int viewportx = 0;
+        int viewporty = 0;
+        int viewportw = window_width;
+        int viewporth = window_height;
+        glViewport(viewportx, viewporty, viewportw, viewporth);
+        //printf("把所有要畫的東西顯示在視窗的(%d ,%d)開始的(%d, %d)\n", viewportx, viewporty, viewportw, viewporth);
+
+
         break;
     }
+    glutPostRedisplay();
 }
 
 void mouse(int button, int state, int x, int y)

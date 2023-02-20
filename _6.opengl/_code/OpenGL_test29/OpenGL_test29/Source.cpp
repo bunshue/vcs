@@ -1,5 +1,86 @@
 ﻿#include "../../Common.h"
 
+void drawOneLine(GLfloat x1, GLfloat y1, GLfloat x2, GLfloat y2)
+{
+    glBegin(GL_LINES);
+    glVertex2f((x1), (y1));
+    glVertex2f((x2), (y2));
+    glEnd();
+}
+
+void drawLineWithArray()
+{
+    GLint vertices[] = { -1,-1,1,1 };
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glVertexPointer(2, GL_INT, 0, vertices);
+    glBegin(GL_LINES);  //每兩個Element為一組
+    glArrayElement(0);
+    glArrayElement(1);
+    glEnd();
+
+}
+
+void drawTwoLineWithArray()
+{
+    //每2點為一組
+    GLint vertices[] =
+    {
+        -1,-1,
+        1,1,
+        -1,1,
+        1,-1
+    };
+    //每3點為一組
+    GLfloat colors[] =
+    {
+        1.0, 0.0, 0.0,  //紅
+        0.0, 1.0, 0.0,  //綠
+        0.0, 0.0, 1.0,  //藍
+        1.0, 1.0, 0.0   //黃
+    };
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_COLOR_ARRAY);
+    glVertexPointer(2, GL_INT, 0, vertices);    //從 vertices 陣列找起, 每2點為一組
+    glColorPointer(3, GL_FLOAT, 0, colors);     //從 colors 陣列找起, 每3點為一組
+    glBegin(GL_LINES);  //每兩個Element為一組
+    glArrayElement(0);
+    glArrayElement(1);
+    glArrayElement(2);
+    glArrayElement(3);
+    glEnd();
+}
+
+void drawTwoLineWithArray2()
+{
+    //每2點為一組
+    GLfloat vertices[] =
+    {
+        -0.8f,-0.8f,
+        0.8f,-0.8f,
+        0.8f,0.8f,
+        -0.8f,0.8f
+    };
+    //每3點為一組
+    GLfloat colors[] =
+    {
+        1.0, 0.0, 0.0,  //紅
+        0.0, 1.0, 0.0,  //綠
+        0.0, 0.0, 1.0,  //藍
+        1.0, 1.0, 0.0   //黃
+    };
+
+    GLubyte index[] = { 0,1,1,2,2,3,3,0 };
+
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_COLOR_ARRAY);
+    glVertexPointer(2, GL_FLOAT, 0, vertices);    //從 vertices 陣列找起, 每2點為一組
+    glColorPointer(3, GL_FLOAT, 0, colors);     //從 colors 陣列找起, 每3點為一組
+
+    glDrawElements(GL_LINES, 8, GL_UNSIGNED_BYTE, index);   //從 index 陣列 裡面找出 8 個索引數
+    //用 GL_LINES 就是每2個組成一條直線 => 共4條線
+
+}
+
 // 繪圖回調函數
 void display(void)
 {
@@ -7,17 +88,17 @@ void display(void)
 
     draw_boundary(color_y, 0.9f); //畫視窗邊界
 
-    //畫一個實心矩形
-    glColor3f(0.0, 1.0, 1.0);   //設定顏色 cc
-    float dd = 0.3f;
-    glRectf(-dd, -dd, dd, dd);  //實心矩形
+    float x1 = -0.3f;
+    float y1 = -0.3f;
+    float x2 = 0.6f;
+    float y2 = 0.2f;
 
-    draw_teapot(color_r, 1, 0.3);   //畫一個茶壺
+    drawOneLine(x1, y1, x2, y2);
 
-    float x_st = -0.7f;
-    float y_st = 0.5f;
-    const char str1[30] = "Empty example";
-    draw_string1(str1, color_r, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
+    //drawLineWithArray();
+
+    //drawTwoLineWithArray();
+    drawTwoLineWithArray2();
 
     glFlush();  // 執行繪圖命令
 }

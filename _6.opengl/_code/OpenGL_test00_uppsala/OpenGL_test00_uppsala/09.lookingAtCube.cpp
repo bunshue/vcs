@@ -1,6 +1,7 @@
 #include "../../Common.h"
 
 // Vertices of the cube, centered at the origin.
+//每3點為一組
 GLfloat vertices[][3] =
 {
     {-1.0, -1.0, -1.0},		//0
@@ -14,27 +15,28 @@ GLfloat vertices[][3] =
 };
 
 // Colors of the vertices.
+//每3點為一組
 GLfloat vertex_color[][3] =
 {
     {1.0, 1.0, 1.0},		//未用到 白色  XXXX
-	{0.0, 0.0, 1.0},		//-z 後 藍
+    {0.0, 0.0, 1.0},		//-z 後 藍
     {1.0, 1.0, 1.0},		//未用到 白色  XXXX
-	{0.0, 1.0, 1.0},		//-x 左 Cyan 天青
-	{1.0, 1.0, 0.0},		//-y 下 黃
-	{1.0, 0.0, 1.0},		//+x 右 Magenta桃紅
-	{0.0, 1.0, 0.0},		//+y 上 綠
-	{1.0, 0.0, 0.0}			//+z 前 紅
+    {0.0, 1.0, 1.0},		//-x 左 Cyan 天青
+    {1.0, 1.0, 0.0},		//-y 下 黃
+    {1.0, 0.0, 1.0},		//+x 右 Magenta桃紅
+    {0.0, 1.0, 0.0},		//+y 上 綠
+    {1.0, 0.0, 0.0}			//+z 前 紅
 };
 
 // Indices of the vertices to make up the six faces of the cube.
 GLubyte cubeIndices[24] =
 {
-    0, 3, 2, 1,		//後
-    2, 3, 7, 6,		//上
-    0, 4, 7, 3,		//左
-    1, 2, 6, 5,		//右
-    4, 5, 6, 7,		//前
-    0, 1, 5, 4		//下
+    0, 3, 2, 1,		//後, -z軸
+    2, 3, 7, 6,		//上, +y軸
+    0, 4, 7, 3,		//左, -x軸
+    1, 2, 6, 5,		//右, +x軸
+    4, 5, 6, 7,		//前, +z軸
+    0, 1, 5, 4		//下, -y軸
 };
 
 GLfloat theta[] = { 0.0f, 0.0f, 0.0f };	//對各軸的旋轉角度
@@ -56,14 +58,15 @@ void colorcube(void)
 {
     glEnableClientState(GL_COLOR_ARRAY);
     glEnableClientState(GL_VERTEX_ARRAY);
-    glVertexPointer(3, GL_FLOAT, 0, vertices);
-    glColorPointer(3, GL_FLOAT, 0, vertex_color);
+    glVertexPointer(3, GL_FLOAT, 0, vertices);		//從 vertices 陣列找起, 每3點為一組, 共8個頂點
+    glColorPointer(3, GL_FLOAT, 0, vertex_color);	//從 vertex_color 陣列找起, 每3點為一組, 共8種顏色, 用到其中6種
 }
 
 void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    glDrawElements(GL_QUADS, 24, GL_UNSIGNED_BYTE, cubeIndices);
+    glDrawElements(GL_QUADS, 24, GL_UNSIGNED_BYTE, cubeIndices);	//從 cubeIndices 陣列 裡面找出 24 個索引數
+    //用GL_QUADS就是每4個組成一個四邊形 => 共6個面
 
     //已旋轉後之座標軸
     draw_coordinates(1.5f);     //畫座標軸
@@ -100,14 +103,16 @@ void reshape(int w, int h)
 
 void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
-	//printf("你所按按鍵的碼是%x\t此時視窗內的滑鼠座標是(%d,%d)\n", key, x, y);
+    //printf("你所按按鍵的碼是%x\t此時視窗內的滑鼠座標是(%d,%d)\n", key, x, y);
 
     switch (key)
     {
     case 27:
+    case 'q':
+    case 'Q':
+        //離開視窗
         glutDestroyWindow(glutGetWindow());
         return;
-        break;
     case 'x':
         printf("從 正X軸 由外向內看\n");
         glLoadIdentity();
