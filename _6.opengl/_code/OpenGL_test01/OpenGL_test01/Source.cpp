@@ -4,6 +4,8 @@ int display_mode = 1;
 
 int full_screen = 0;
 
+int POLYGON_EDGE = 3;
+
 #define NGRID 10
 
 void drawGrid(int xmin, int xmax, int ymin, int ymax)
@@ -263,16 +265,17 @@ void display(void)
         float cx = 0.0f;
         float cy = 0.0f;
         float r = 0.9f;
-        float angle = 18.0f;
+        float angle_offset = 18;
         glBegin(GL_POLYGON);    //實心多邊形
         {
-            glVertex3f(cx + r * cos(PI * (angle + 0) / 180), cy + r * sin(PI * (angle + 0) / 180), 0.0);
-            glVertex3f(cx + r * cos(PI * (angle + 72) / 180), cy + r * sin(PI * (angle + 72) / 180), 0.0);
-            glVertex3f(cx + r * cos(PI * (angle + 144) / 180), cy + r * sin(PI * (angle + 144) / 180), 0.0);
-            glVertex3f(cx + r * cos(PI * (angle + 216) / 180), cy + r * sin(PI * (angle + 216) / 180), 0.0);
-            glVertex3f(cx + r * cos(PI * (angle + 288) / 180), cy + r * sin(PI * (angle + 288) / 180), 0.0);
+            for (float theta = angle_offset; theta < (angle_offset + 360.0f); theta += (360.0f / POLYGON_EDGE))
+            {
+                glVertex3f(cx + r * cos(PI * theta / 180), cy + r * sin(PI * theta / 180), 0.0);
+                //printf("theta = %f x = %f, y = %f\n", theta, cx + r * cos(PI * theta / 180), cy + r * sin(PI * theta / 180));
+            }
         }
         glEnd();
+        POLYGON_EDGE++;
     }
     else if (display_mode == 6)
     {
