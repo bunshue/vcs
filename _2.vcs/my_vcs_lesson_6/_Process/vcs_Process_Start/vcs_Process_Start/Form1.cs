@@ -91,8 +91,6 @@ namespace vcs_Process_Start
 
             groupBox1.Size = new Size(W, H);
             groupBox2.Size = new Size(W, H);
-
-            W = BORDER + w * 2 + BORDER;
             groupBox5.Size = new Size(W, H);
 
             W = BORDER + w + BORDER;
@@ -102,10 +100,11 @@ namespace vcs_Process_Start
             groupBox1.Location = new Point(x_st, y_st);
             dx = W;
             groupBox2.Location = new Point(x_st + dx * 1 + BORDER, y_st);
-            groupBox5.Location = new Point(x_st + dx * 2 + BORDER + BORDER, y_st);
-            groupBox3.Location = new Point(x_st + dx * 4 + BORDER, y_st);
-            groupBox4.Location = new Point(x_st + dx * 4 + BORDER, 210);
-            richTextBox1.Location = new Point(x_st + dx * 5 + BORDER + BORDER, y_st);
+            groupBox5.Location = new Point(x_st + dx * 2 + BORDER * 2, y_st);
+            groupBox3.Location = new Point(x_st + dx * 3 + BORDER * 3, y_st);
+            groupBox4.Location = new Point(x_st + dx * 3 + BORDER * 3, 210);
+            richTextBox1.Size = new Size(400, H);
+            richTextBox1.Location = new Point(x_st + dx * 4 + BORDER * 4, y_st);
 
             dx = w + 10;
             dy = h + 10;
@@ -142,17 +141,6 @@ namespace vcs_Process_Start
             button28.Location = new Point(x_st + dx * 0, y_st + dy * 8);
             button29.Location = new Point(x_st + dx * 0, y_st + dy * 9);
 
-            button30.Location = new Point(x_st + dx * 1, y_st + dy * 0);
-            button31.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            button32.Location = new Point(x_st + dx * 1, y_st + dy * 2);
-            button33.Location = new Point(x_st + dx * 1, y_st + dy * 3);
-            button34.Location = new Point(x_st + dx * 1, y_st + dy * 4);
-            button35.Location = new Point(x_st + dx * 1, y_st + dy * 5);
-            button36.Location = new Point(x_st + dx * 1, y_st + dy * 6);
-            button37.Location = new Point(x_st + dx * 1, y_st + dy * 7);
-            button38.Location = new Point(x_st + dx * 1, y_st + dy * 8);
-            button39.Location = new Point(x_st + dx * 1, y_st + dy * 9);
-
             button40.Location = new Point(x_st + dx * 0, y_st + dy * 0);
             button41.Location = new Point(x_st + dx * 0, y_st + dy * 1);
 
@@ -160,6 +148,13 @@ namespace vcs_Process_Start
             button43.Location = new Point(x_st + dx * 0, y_st + dy * 1);
             button44.Location = new Point(x_st + dx * 0, y_st + dy * 2);
             button45.Location = new Point(x_st + dx * 0, y_st + dy * 3);
+
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
         }
 
         private void button0_Click(object sender, EventArgs e)
@@ -355,49 +350,6 @@ namespace vcs_Process_Start
 
         private void button20_Click(object sender, EventArgs e)
         {
-        }
-
-        private void button21_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button22_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button23_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button24_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button25_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button26_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button27_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button28_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button29_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button30_Click(object sender, EventArgs e)
-        {
             //開啟記事本, 指名檔案
 
             //ProcessStartInfo 0
@@ -443,10 +395,9 @@ namespace vcs_Process_Start
             }
             Console.WriteLine("外部程序的結束運行時間：{0}", Proc.ExitTime);
             Console.WriteLine("外部程序在結束運行時的返回值：{0}", Proc.ExitCode);
-
         }
 
-        private void button31_Click(object sender, EventArgs e)
+        private void button21_Click(object sender, EventArgs e)
         {
             //ProcessStartInfo 1
 
@@ -458,7 +409,7 @@ namespace vcs_Process_Start
             Process.Start(processStartInfo);
         }
 
-        private void button32_Click(object sender, EventArgs e)
+        private void button22_Click(object sender, EventArgs e)
         {
             //ProcessStartInfo 2
             //啟動一個外部程序
@@ -496,7 +447,7 @@ namespace vcs_Process_Start
             Console.WriteLine("外部程序在結束運行時的返回值：{0}", process.ExitCode);
         }
 
-        private void button33_Click(object sender, EventArgs e)
+        private void button23_Click(object sender, EventArgs e)
         {
             //ProcessStartInfo 3
             //使用預設程式打開指定文件
@@ -510,8 +461,9 @@ namespace vcs_Process_Start
             process.Start();    //啟動程式
         }
 
-        private void button34_Click(object sender, EventArgs e)
+        private void button24_Click(object sender, EventArgs e)
         {
+            //ProcessStartInfo 4
             //調用外部程序
 
             string filename = @"C:\______test_files\__RW\_txt\琵琶行.txt";
@@ -559,28 +511,13 @@ namespace vcs_Process_Start
             }
             Console.WriteLine("外部程序的結束運行時間：{0}", process.ExitTime);
             Console.WriteLine("外部程序在結束運行時的返回值：{0}", process.ExitCode);
+
+
         }
 
-        private void button35_Click(object sender, EventArgs e)
+        private void button25_Click(object sender, EventArgs e)
         {
-        }
-
-        private void button36_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void button37_Click(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void button38_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button39_Click(object sender, EventArgs e)
-        {
+            //ProcessStartInfo 5
             try
             {
                 using (Process process = new Process())
@@ -600,6 +537,26 @@ namespace vcs_Process_Start
             {
                 Console.WriteLine(ex.Message);
             }
+
+        }
+
+        private void button26_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void button27_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button28_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button29_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void button40_Click(object sender, EventArgs e)
@@ -722,5 +679,6 @@ namespace vcs_Process_Start
             //打開顯示屬性屬性() 
             Process.Start("rundll32.exe", " shell32.dll,Control_RunDLL desk.cpl,,3");
         }
+
     }
 }

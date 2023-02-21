@@ -373,6 +373,18 @@ void draw_point(float* color, float size, float x_st, float y_st)
     glEnd();
 }
 
+//兩點直線, 顏色color, 線寬width, (x1, y1) - (x2, y2)
+void draw_line(float* color, float width, float x1, float y1, float x2, float y2)
+{
+    glColor3fv((GLfloat*)color);    //設定顏色
+    glLineWidth(width);	//設定線寬
+
+    glBegin(GL_LINES);   //開始繪製線段
+    glVertex2f(x1, y1);     //設置線段的點
+    glVertex2f(x2, y2);
+    glEnd();     //結束繪製線段
+}
+
 //空心矩形, 左下為原點, 向右w, 向上h, 顏色color, 線寬width
 void draw_rectangle(float* color, float width, float x_st, float y_st, float w, float h)
 {

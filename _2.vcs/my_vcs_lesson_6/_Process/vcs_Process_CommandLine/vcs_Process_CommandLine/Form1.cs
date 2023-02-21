@@ -107,7 +107,7 @@ namespace vcs_Process_CommandLine
 
             ProcessStartInfo start_info = new ProcessStartInfo(filename);
             start_info.UseShellExecute = false;
-            start_info.CreateNoWindow = true;
+            start_info.CreateNoWindow = true;   //true: 設置不顯示程式窗口, false: 出現cmd的黑窗體
             start_info.RedirectStandardOutput = true;
             start_info.RedirectStandardError = true;
 
@@ -116,24 +116,20 @@ namespace vcs_Process_CommandLine
             {
                 process.StartInfo = start_info;
 
-                // Start the process.
-                process.Start();
+                process.Start();    //啟動程式
 
-                // Attach to stdout and stderr.
-                using (StreamReader std_out = process.StandardOutput)
-                {
-                    using (StreamReader std_err = process.StandardError)
-                    {
-                        // Display the results.
-                        richTextBox1.Text += "輸出 :\n" + std_out.ReadToEnd() + "\n";
-                        richTextBox1.Text += "錯誤 :\n" + std_err.ReadToEnd() + "\n";
+                //從輸出流取得命令執行結果
+                StreamReader output_sr = process.StandardOutput;
+                string output_data = output_sr.ReadToEnd();
+                StreamReader error_sr = process.StandardError;
+                string error_data = error_sr.ReadToEnd();
+                richTextBox1.Text += "輸出 :\n" + output_data + "\n";
+                richTextBox1.Text += "錯誤 :\n" + error_data + "\n";
 
-                        // Clean up.
-                        std_err.Close();
-                        std_out.Close();
-                        process.Close();
-                    }
-                }
+                // Clean up.
+                output_sr.Close();
+                error_sr.Close();
+                process.Close();
             }
         }
 
@@ -186,13 +182,21 @@ namespace vcs_Process_CommandLine
             //調用ipconfig ,並傳入參數: /all 
             ProcessStartInfo psi = new ProcessStartInfo("ipconfig", "/all");
 
-            psi.CreateNoWindow = true;
+            psi.CreateNoWindow = true;      //true: 設置不顯示程式窗口, false: 出現cmd的黑窗體
             psi.RedirectStandardOutput = true;
             psi.UseShellExecute = false;
 
             Process process = Process.Start(psi);
 
-            return process.StandardOutput.ReadToEnd();
+            //從輸出流取得命令執行結果
+            StreamReader output_sr = process.StandardOutput;
+            string output_data = output_sr.ReadToEnd();
+            StreamReader error_sr = process.StandardError;
+            string error_data = error_sr.ReadToEnd();
+            //richTextBox1.Text += "輸出 :\n" + output_data + "\n";
+            //richTextBox1.Text += "錯誤 :\n" + error_data + "\n";
+
+            return output_data;
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -201,39 +205,39 @@ namespace vcs_Process_CommandLine
 
         private void button6_Click(object sender, EventArgs e)
         {
+            richTextBox1.Text += "test process\n";
+
+            //執行一條command命令 並取得其結果
+            string exe_filename = "cmd.exe";    //要執行的程式名稱
+            string command = "systeminfo";             //向要執行的程式發送的命令
+            //string command = "/k ver";             //向要執行的程式發送的命令
+            string output_data = string.Empty;
+
+            output_data = run_command_line_process(exe_filename, command);
+            richTextBox1.Text += output_data + "\n";
+
+
         }
 
         //標準版Process使用
         string run_command_line_process(string exe_filename, string command)
         {
-            //隱式操作CMD命令行窗口
-            /*
-            MS的CMD命令行是一種重要的操作界面，
-            一些在C#中不那麼方便完成的功能，在CMD中幾個簡單的命令或許就可以輕松搞定，
-            如果能在C#中能完成CMD窗口的功能，那一定可以使我們的程序簡便不少。
-
-            下面介紹一種常用的在C#程序中調用CMD.exe程序，並且不顯示命令行窗口界面，來完成CMD中各種功能的簡單方法。
-            */
-
             //string exe_filename = "cmd.exe";    //要執行的程式名稱
-            string output_data = string.Empty;
 
             Process process = new Process();    //創建一個進程用於調用外部程序
 
             process.StartInfo.FileName = exe_filename;  //設定要啟動的程式
-            //process.StartInfo.Arguments = "/c " command; //設定程式執行參數
-            //process.StartInfo.Arguments = command; //也可直接把command寫在這裡, 就不用後面的 StandardInput.WriteLine 了
-            //process.StartInfo.Arguments = "/c" + FullBatPath; //設定程式執行參數" /c " 執行完以下命令後停止
-            //process.StartInfo.Arguments = "ping -n   1" + ip_address;
+            //process.StartInfo.Arguments = "/c " + command; //設定程式執行參數, 也可直接把command寫在這裡, 就不用後面的 StandardInput.WriteLine 了, 要加/c
+            //process.StartInfo.Arguments = "/c systeminfo";  //可, 要加/c
             //process.StandardInput.AutoFlush = true;
 
             process.StartInfo.UseShellExecute = false;  //false, 關閉Shell的使用, 是否指定操作系統外殼進程啟動程序, 可能接受來自調用程序的輸入信息
             process.StartInfo.RedirectStandardInput = true; //重定向標準輸入, 可能接受來自調用程序的輸入信息
             process.StartInfo.RedirectStandardOutput = true; //重定向標準輸出, 由調用程序獲取輸出信息
             process.StartInfo.RedirectStandardError = true; //重定向錯誤輸出
-            process.StartInfo.CreateNoWindow = true; //true, 設置不顯示程式窗口, 用T/F測不出差異
-            //psi.CreateNoWindow = true; //若為false，則會出現cmd的黑窗體 
+            process.StartInfo.CreateNoWindow = true; //true: 設置不顯示程式窗口, false: 出現cmd的黑窗體
             process.StartInfo.ErrorDialog = false;
+            //process.StartInfo.WindowStyle = ProcessWindowStyle.Normal;  //測不出來
 
             process.Start();    //啟動程式
 
@@ -242,8 +246,13 @@ namespace vcs_Process_CommandLine
 
             process.StandardInput.WriteLine("exit");	//一定要關閉, 不然會當機
 
-            //獲取要啟動的程式的輸出信息
-            output_data = process.StandardOutput.ReadToEnd();	//從輸出流取得命令執行結果
+            //從輸出流取得命令執行結果
+            StreamReader output_sr = process.StandardOutput;
+            string output_data = output_sr.ReadToEnd();
+            StreamReader error_sr = process.StandardError;
+            string error_data = error_sr.ReadToEnd();
+            //richTextBox1.Text += "輸出 :\n" + output_data + "\n";
+            //richTextBox1.Text += "錯誤 :\n" + error_data + "\n";
 
             process.WaitForExit();	//等待退出
             process.Close();	//關閉進程
@@ -251,28 +260,6 @@ namespace vcs_Process_CommandLine
             return output_data;
         }
 
-        /*  tmp
-        C#中的Process類可方便的調用外部程序，所以我們可以通過調用cmd.exe程序
-        加入參數 "/c " 要執行的命令來執行一個DOS命令
-        （/c代表執行參數指定的命令後關閉cmd.exe /k參數則不關閉cmd.exe）
-        */
-        /*
-
-                            //psi.WindowStyle = ProcessWindowStyle.Hidden;
-
-                    //獲取要啟動的程式的輸出信息
-                    StreamReader outputStreamReader = process.StandardOutput;
-                    StreamReader errStreamReader = process.StandardError;
-                    process.WaitForExit(2000);
-                    if (process.HasExited)
-                    {
-                        string output = outputStreamReader.ReadToEnd();
-                        string error = errStreamReader.ReadToEnd();
-
-                        richTextBox1.Text += "output:\n" + output + "\n";
-                        richTextBox1.Text += "error:\n" + error + "\n";
-                    }
-                */
 
         /*
                             process.Start();    //啟動程式
@@ -296,7 +283,7 @@ namespace vcs_Process_CommandLine
             process.StartInfo.RedirectStandardInput = true; //重定向標準輸入, 可能接受來自調用程序的輸入信息
             process.StartInfo.RedirectStandardOutput = true; //重定向標準輸出, 由調用程序獲取輸出信息
             process.StartInfo.RedirectStandardError = true; //重定向錯誤輸出
-            process.StartInfo.CreateNoWindow = true; //true, 設置不顯示程式窗口
+            process.StartInfo.CreateNoWindow = true; //true: 設置不顯示程式窗口, false: 出現cmd的黑窗體
 
             process.Start();    //啟動程式
 
@@ -351,7 +338,7 @@ namespace vcs_Process_CommandLine
                 process.StartInfo.RedirectStandardInput = true;   //重定向標准輸入
                 process.StartInfo.RedirectStandardOutput = true;  //重定向標准輸出
                 process.StartInfo.RedirectStandardError = true;   //重定向錯誤輸出
-                process.StartInfo.CreateNoWindow = true;          //不顯示程序窗口
+                process.StartInfo.CreateNoWindow = true;            //true: 設置不顯示程式窗口, false: 出現cmd的黑窗體
 
                 process.Start();    //啟動程式
 
@@ -364,14 +351,21 @@ namespace vcs_Process_CommandLine
 
                 //same
                 //獲取要啟動的程式的輸出信息
-                string output_data = process.StandardOutput.ReadToEnd();	//從輸出流取得命令執行結果
-                richTextBox2.Text += output_data + "\n";
+                //從輸出流取得命令執行結果
+                StreamReader output_sr = process.StandardOutput;
+                string output_data = output_sr.ReadToEnd();
+                StreamReader error_sr = process.StandardError;
+                string error_data = error_sr.ReadToEnd();
+                //richTextBox1.Text += "輸出 :\n" + output_data + "\n";
+                //richTextBox1.Text += "錯誤 :\n" + error_data + "\n";
 
+                richTextBox2.Text += output_data + "\n";
                 //獲取要啟動的程式的輸出信息
-                StreamReader reader = process.StandardOutput;//截取輸出流
+                //從輸出流取得命令執行結果
+                StreamReader reader = process.StandardOutput;
                 string output = reader.ReadLine();//每次讀取一行
 
-                while (!reader.EndOfStream)
+                while (!reader.EndOfStream) //怎知輸出已到結尾?!?!
                 {
                     richTextBox2.Text += output + "\n";
                     output = reader.ReadLine();

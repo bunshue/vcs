@@ -7,13 +7,20 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 
-namespace howto_get_form_or_control_image
+//完全不用改
+
+namespace vcs_FormSendData
 {
-    public partial class SampleForm : Form
+    public partial class ImageForm : Form
     {
-        public SampleForm()
+        public ImageForm()
         {
             InitializeComponent();
+        }
+
+        private void ImageForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
