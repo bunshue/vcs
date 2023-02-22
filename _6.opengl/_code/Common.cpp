@@ -440,19 +440,21 @@ void display0(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
-    //draw_boundary(color_y, 0.9f); //畫視窗邊界
+    float color_y[] = { 1.0f, 1.0f, 0.0f, 1.0f };
+    draw_boundary(color_y, 0.9f); //畫視窗邊界
 
     //畫一個實心矩形
     glColor3f(0.0, 1.0, 1.0);   //設定顏色 cc
     float dd = 0.3f;
     glRectf(-dd, -dd, dd, dd);  //實心矩形
 
-    //draw_teapot(color_r, 1, 0.3);   //畫一個茶壺
+    float color_r[] = { 1.0f, 0.0f, 0.0f, 1.0f };
+    draw_teapot(color_r, 1, 0.3);   //畫一個茶壺
 
     float x_st = -0.7f;
     float y_st = 0.5f;
     const char str1[30] = "Empty example";
-    //draw_string1(str1, color_r, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
+    draw_string1(str1, color_r, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
 
     glFlush();  // 執行繪圖命令
 }

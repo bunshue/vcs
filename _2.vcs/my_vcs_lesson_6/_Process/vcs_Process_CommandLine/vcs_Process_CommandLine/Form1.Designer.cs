@@ -87,7 +87,6 @@
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(200, 60);
             this.button4.TabIndex = 4;
-            this.button4.Text = "調用系統IPCONFIG獲取本機局域網IP以及其他相關信息";
             this.button4.UseVisualStyleBackColor = true;
             this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
@@ -109,7 +108,7 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(200, 60);
             this.button2.TabIndex = 2;
-            this.button2.Text = "執行CommandLine指令, 並取回結果";
+            this.button2.Text = "關閉與重啟計算機(偽)";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
@@ -120,7 +119,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(200, 60);
             this.button1.TabIndex = 1;
-            this.button1.Text = "關閉與重啟計算機(偽)";
+            this.button1.Text = "執行CommandLine指令, 並取回結果 2";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -131,7 +130,7 @@
             this.button0.Name = "button0";
             this.button0.Size = new System.Drawing.Size(200, 60);
             this.button0.TabIndex = 0;
-            this.button0.Text = "執行一條command命令 並取得其結果";
+            this.button0.Text = "執行CommandLine指令, 並取回結果 1";
             this.button0.UseVisualStyleBackColor = true;
             this.button0.Click += new System.EventHandler(this.button0_Click);
             // 

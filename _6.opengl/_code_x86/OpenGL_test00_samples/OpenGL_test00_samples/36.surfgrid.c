@@ -178,7 +178,7 @@ float torusnurbpts[];
 float torusbezierpts[];
 
 
-void move(int x, int y)
+void motion(int x, int y)
 {
     int dx, dy;
     int aspindx, aspindy;
@@ -545,7 +545,7 @@ int main(int argc, char** argv)
     glutDisplayFunc(redraw);
     glutReshapeFunc(reshape);
     glutMouseFunc(button);
-    glutMotionFunc(move);
+    glutMotionFunc(motion);
     glutIdleFunc(animate);
 
     if (!queryExtension("GL_EXT_polygon_offset")) {

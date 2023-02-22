@@ -216,7 +216,7 @@ void display(void)
 
         //設定預設大小...  TBD
     }
-    else
+    else if (display_mode <5)
     {
         reset_default_setting();
 
@@ -278,6 +278,16 @@ void display(void)
         printf("rectangle %0.10f  %0.10f  %0.10f  %0.10f\n", minx, miny, xrange - 10, yrange - 1);
 
         glFlush();  // 執行繪圖命令
+    }
+    else if (display_mode == 5)
+    {
+        reset_default_setting();
+
+
+
+
+
+
     }
     glFlush();  //強制刷新緩存區
     glutSwapBuffers();  // 將後緩沖區繪製到前臺
@@ -348,4 +358,6 @@ int main(int argc, char** argv)
 
     return 0;
 }
+
+
 
