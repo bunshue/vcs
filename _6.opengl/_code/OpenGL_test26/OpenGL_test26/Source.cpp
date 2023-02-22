@@ -4,7 +4,8 @@ GLubyte ubImage[65536];
 
 void setup_pixel_data()
 {
-    int i, j;
+    int i = 0;
+    int j = 0;
 
     GLubyte* img;
     GLsizei imgWidth = 128;
@@ -44,6 +45,7 @@ void setup_pixel_data()
     }
 
     glNewList(1, GL_COMPILE);
+    //            w    h     format        type            pixels
     glDrawPixels(128, 128, GL_ABGR_EXT, GL_UNSIGNED_BYTE, ubImage);
     glEndList();
 }

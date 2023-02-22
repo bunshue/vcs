@@ -2,13 +2,10 @@
 
 int list_number = 1;
 
-void glLIstInit()
+void Init_List()
 {
     glNewList(1, GL_COMPILE);
-    glBegin(GL_LINES);
-    glVertex2f(-0.9f, -0.9f);
-    glVertex2f(0.9f, 0.9f);
-    glEnd();
+    draw_teapot(color_r, 1, 0.5);   //畫一個茶壺
     glEndList();
 
     glNewList(2, GL_COMPILE);
@@ -22,7 +19,6 @@ void glLIstInit()
     dd = 0.6f;
     glRectf(-dd, -dd, dd, dd);  //實心矩形
     glEndList();
-
 }
 
 // 繪圖回調函數
@@ -35,12 +31,6 @@ void display(void)
     glCallList(list_number);
 
     glFlush();  // 執行繪圖命令
-}
-
-// 窗口大小變化回調函數
-void reshape(int w, int h)
-{
-    glViewport(0, 0, w, h);
 }
 
 void keyboard(unsigned char key, int /*x*/, int /*y*/)
@@ -79,20 +69,11 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
 
 int main(int argc, char** argv)
 {
-    glutInit(&argc, argv);
+    const char* windowName = "glList 測試, 3種list, 用 1~3 切換";
+    const char* message = "glList 測試, 3種list, 用 1~3 切換\n";
+    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard);
 
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);    //宣告顯示模式為 Single Buffer 和 RGBA
-
-    glutInitWindowSize(600, 600);       // 設定視窗大小
-    glutInitWindowPosition(1100, 200);  // 設定視窗位置
-
-    glutCreateWindow("glList 測試");	//開啟視窗 並顯示出視窗 Title
-
-    glLIstInit();
-
-    glutDisplayFunc(display);   //設定callback function
-    glutReshapeFunc(reshape);   //設定callback function
-    glutKeyboardFunc(keyboard); //設定callback function
+    Init_List();
 
     printf("僅顯示, 無控制, 按 Esc 離開\n");
     printf("\nglList 測試\n");

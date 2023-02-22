@@ -5,46 +5,19 @@ void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
-    draw_boundary(color_m, 0.95f); //畫視窗邊界
     draw_boundary(color_y, 0.9f); //畫視窗邊界
 
-    //使用 GL_QUAD_STRIP
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    glBegin(GL_QUAD_STRIP);
-    glVertex3f(0.1f, 0.0f, 0.0f);   //v1
-    glVertex3f(0.1f, 0.8f, 0.0f);   //v2
-    glVertex3f(0.4f, 0.0f, 0.0f);   //v3
-    glVertex3f(0.4f, 0.8f, 0.0f);   //v4
-    glVertex3f(0.7f, 0.0f, 0.0f);   //v5
-    glVertex3f(0.7f, 0.8f, 0.0f);   //v6
-    glEnd();
+    //畫一個實心矩形
+    glColor3f(0.0, 1.0, 1.0);   //設定顏色 cc
+    float dd = 0.3f;
+    glRectf(-dd, -dd, dd, dd);  //實心矩形
 
-    // 设置线的宽度 
+    draw_teapot(color_r, 1, 0.3);   //畫一個茶壺
 
-    glLineWidth(5.0f);
-
-    glBegin(GL_QUAD_STRIP);		// 绘制四边形
-
-    glColor4ub(255, 0, 0, 255);	//R
-    glVertex3f(-0.6f, -0.8f, 0.0f);
-
-    glColor4ub(0, 255, 0, 255);	//G
-    glVertex3f(-0.3f, -0.8f, 0.0f);
-
-    glColor4ub(0, 0, 255, 255);	//B
-    glVertex3f(0.0f, 0.0f, 0.0f);
-
-    glColor4ub(255, 255, 0, 255);	//Y
-    glVertex3f(-0.3f, 0.8f, 0.0f);
-
-    glColor4ub(255, 0, 255, 255);	//M
-    glVertex3f(-0.6f, 0.8f, 0.0f);
-
-    glColor4ub(0, 255, 255, 255);	//C
-    glVertex3f(-0.8f, 0.0f, 0.0f);
-
-    glEnd();
-
+    float x_st = -0.7f;
+    float y_st = 0.5f;
+    const char str1[30] = "Empty example";
+    draw_string1(str1, color_r, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
 
     glFlush();  // 執行繪圖命令
 }
@@ -95,4 +68,6 @@ int main(int argc, char** argv)
 
     return 0;
 }
+
+
 

@@ -81,52 +81,13 @@ void display(void)
     glFlush();  // 執行繪圖命令
 }
 
-// 窗口大小變化回調函數
-void reshape(int w, int h)
-{
-    glViewport(0, 0, w, h);
-}
-
-void keyboard(unsigned char key, int /*x*/, int /*y*/)
-{
-    switch (key)
-    {
-    case 27:
-    case 'q':
-    case 'Q':
-        //離開視窗
-        glutDestroyWindow(glutGetWindow());
-        return;
-
-    case '1':
-        printf("1\n");
-        break;
-    }
-}
-
-void mouse(int button, int state, int x, int y)
-{
-}
-
-void motion(int x, int y)
-{
-}
-
 int main(int argc, char** argv)
 {
     const char* windowName = "OpenGL測試";
     const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
-    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard);
-
-    glutMouseFunc(mouse);       //設定callback function
-    glutMotionFunc(motion);     //設定callback function
-
-    printf("\n空白範例\n");
+    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard0);
 
     init();
-
-
-
 
     glutMainLoop();	//開始主循環繪製
 

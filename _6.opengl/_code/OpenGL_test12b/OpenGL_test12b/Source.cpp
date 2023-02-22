@@ -14,60 +14,6 @@ void display(void)
     //畫直線連線
     draw_boundary(color_y, 13.0f); //畫視窗邊界
 
-    //畫線
-    //畫直線連線
-    glBegin(GL_LINE_STRIP);	//繪製前後連接的點組成的線
-    glColor3f(0.0, 1.0, 0.0);
-    for (x_st = -14.0; x_st <= -5.0f; x_st += 0.5f)
-    {
-        if (y_st != 7.0f)
-            y_st = 7.0f;
-        else
-            y_st = 10.0f;
-
-        glVertex2f(x_st, y_st);
-    }
-    glEnd();
-
-    //畫正弦波
-    glBegin(GL_LINE_STRIP);	//繪製前後連接的點組成的線
-    glColor3f(0.0, 1.0, 1.0);
-    for (x_st = -14.0; x_st <= -5.0f; x_st += 0.1f)
-    {
-        y_st = sin(x_st * 2) + 1.0f;
-        glVertex2f(x_st, y_st);
-    }
-    glEnd();
-
-    //畫線
-    //畫封閉曲線
-    glBegin(GL_LINE_LOOP);
-    glColor3f(0.0, 1.0, 0.0);
-    for (x_st = -14.0; x_st <= -5.0f; x_st += 0.5f)
-    {
-        if (y_st != 4.0f)
-            y_st = 4.0f;
-        else
-            y_st = 7.0f;
-
-        glVertex2f(x_st, y_st);
-    }
-    glVertex2f(-5.0, 3.0);
-    glEnd();
-
-    //畫多邊形
-    float cx = 6.0f;
-    float cy = 6.0f;
-    float r = 6.0f;
-    glBegin(GL_POLYGON);
-    glColor3f(0.5f, 0.3f, 0.7f);
-    for (int angle = 0; angle < 360; angle += 36)
-    {
-        x_st = cx + r * cosf(2 * PI * angle / 360);
-        y_st = cy + r * sinf(2 * PI * angle / 360);
-        glVertex2f(x_st, y_st);
-    }
-    glEnd();
 
     //畫三角形帶
     x_st = 4.0;

@@ -59,24 +59,6 @@ void reshape(GLsizei w, GLsizei h)
     glViewport(0, 0, w, h);
 }
 
-void keyboard(unsigned char key, int /*x*/, int /*y*/)
-{
-    switch (key)
-    {
-    case 27:
-    case 'q':
-    case 'Q':
-        //離開視窗
-        glutDestroyWindow(glutGetWindow());
-        return;
-
-    case '1':
-        printf("1\n");
-        break;
-    }
-}
-
-/* This is the callback function that gets executed when a mouse button is pressed. */
 void mouse(int button, int state, int x, int y)
 {
     if ((button == GLUT_LEFT_BUTTON) && (state == GLUT_DOWN))
@@ -86,6 +68,7 @@ void mouse(int button, int state, int x, int y)
             x_st = x;
             y_st = ysize - y;
             pointsChosen = 1;
+            printf("第1點(%d, %d) ", x_st, y_st);
         }
         else
         {
@@ -97,26 +80,24 @@ void mouse(int button, int state, int x, int y)
             glEndList();
             glFlush();
             pointsChosen = 0;
+            printf("第2點(%d, %d) ", x, ysize - y);
         }
     }
-}
-
-void motion(int x, int y)
-{
 }
 
 int main(int argc, char** argv)
 {
     const char* windowName = "點選兩點連線";
     const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
-    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard);
+    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard0);
 
     glutMouseFunc(mouse);       //設定callback function
-    glutMotionFunc(motion);     //設定callback function
 
     gfxinit();
 
     printf("\n點選兩點連線\n");
+
+    printf("\n有誤差\n");
 
     glutMainLoop();	//開始主循環繪製
 

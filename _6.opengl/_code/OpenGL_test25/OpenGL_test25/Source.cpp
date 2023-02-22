@@ -1,8 +1,7 @@
 ﻿#include "../../Common.h"
 
-int board[3][3];	/*  amount of color for each square	*/
+int board[3][3];
 
-/*	Clear color value for every square on the board	    */
 void myinit(void)
 {
     int i, j;
@@ -17,12 +16,6 @@ void myinit(void)
     glClearColor(0.0, 0.0, 0.0, 0.0);
 }
 
-/*  The nine squares are drawn.  In selection mode, each
- *  square is given two names:  one for the row and the
- *  other for the column on the grid.  The color of each
- *  square is determined by its position on the grid, and
- *  the value in the board[][] array.
- */
 void drawSquares(GLenum mode)
 {
     GLuint i, j;
@@ -68,16 +61,15 @@ void reshape(int w, int h)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluOrtho2D(0.0, 3.0, 0.0, 3.0);
-    //gluOrtho2D(-3.0, 3.0, -3.0, 3.0);
 }
 
 int main(int argc, char** argv)
 {
-    const char* windowName = "OpenGL測試";
+    const char* windowName = "九宮格";
     const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
     common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard0);
 
-    printf("\n空白範例\n");
+    printf("\n九宮格\n");
 
     myinit();
 
