@@ -29,12 +29,8 @@ namespace xCh5_4_2_11
 
         private void button2_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process localById =
-    System.Diagnostics.Process.GetProcessById(10196);
-            MessageBox.Show(
-               "電腦名稱：" + localById.MachineName +
-               Environment.NewLine +
-               "處理序名稱：" + localById.ProcessName);
+            System.Diagnostics.Process localById = System.Diagnostics.Process.GetProcessById(10196);
+            MessageBox.Show("電腦名稱：" + localById.MachineName + Environment.NewLine + "處理序名稱：" + localById.ProcessName);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -77,7 +73,7 @@ namespace xCh5_4_2_11
 
         private void button6_Click(object sender, EventArgs e)
         {
-            string fileName = @"D:\Process元件.docx";
+            string fileName = @"C:\______test_files\__RW\_word\bmp_format.docx";
             ProcessStartInfo startInfo = new ProcessStartInfo(fileName);
 
             if (File.Exists(fileName))
@@ -88,6 +84,9 @@ namespace xCh5_4_2_11
                     listBox1.Items.Add(string.Format("  {0}. {1}", i.ToString(), verb));
                     i++;
                 }
+            }
+            else
+            {
             }
         }
     }

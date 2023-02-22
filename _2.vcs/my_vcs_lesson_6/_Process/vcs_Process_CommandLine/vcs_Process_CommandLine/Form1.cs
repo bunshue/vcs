@@ -72,16 +72,18 @@ namespace vcs_Process_CommandLine
             //執行一條command命令 並取得其結果
             string exe_filename = "cmd.exe";    //要執行的程式名稱
             string command = "systeminfo";             //向要執行的程式發送的命令
-            //string command = "ver";             //向要執行的程式發送的命令
+            //string command = "ipconfig /all";             //向要執行的程式發送的命令
             string output_data = string.Empty;
 
-            output_data = run_command_line_process(exe_filename, command);
+            output_data = run_command_line_process(exe_filename, command);//程式+命令, 程式+命令+參數
             richTextBox1.Text += output_data + "\n";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             //關閉與重啟計算機(偽)
+
+            //僅執行命令, 不管結果
 
             /*
             //關閉
@@ -103,34 +105,10 @@ namespace vcs_Process_CommandLine
         private void button2_Click(object sender, EventArgs e)
         {
             //執行CommandLine指令, 並取回結果
-            string filename = Path.GetFullPath(Path.Combine(Application.StartupPath, "..\\..\\hello.bat"));
+            string filename = @"..\..\hello.bat";
 
-            ProcessStartInfo start_info = new ProcessStartInfo(filename);
-            start_info.UseShellExecute = false;
-            start_info.CreateNoWindow = true;   //true: 設置不顯示程式窗口, false: 出現cmd的黑窗體
-            start_info.RedirectStandardOutput = true;
-            start_info.RedirectStandardError = true;
-
-            // Make the process and set its start information.
-            using (Process process = new Process())
-            {
-                process.StartInfo = start_info;
-
-                process.Start();    //啟動程式
-
-                //從輸出流取得命令執行結果
-                StreamReader output_sr = process.StandardOutput;
-                string output_data = output_sr.ReadToEnd();
-                StreamReader error_sr = process.StandardError;
-                string error_data = error_sr.ReadToEnd();
-                richTextBox1.Text += "輸出 :\n" + output_data + "\n";
-                richTextBox1.Text += "錯誤 :\n" + error_data + "\n";
-
-                // Clean up.
-                output_sr.Close();
-                error_sr.Close();
-                process.Close();
-            }
+            string output_data = run_command_line_process_psi(filename, null);  //若是batch檔案, 直接傳入即可
+            richTextBox1.Text += output_data + "\n";
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -168,25 +146,32 @@ namespace vcs_Process_CommandLine
             //調用系統IPCONFIG獲取本機局域網IP以及其他相關信息
 
             //執行一條command命令 並取得其結果
-            string exe_filename = "cmd.exe";    //要執行的程式名稱
-            string command = "ipconfig /all";             //向要執行的程式發送的命令
-            //string command = "ver";             //向要執行的程式發送的命令
-            string output_data = string.Empty;
-
-            output_data = run_command_line_process2(exe_filename, command);
+            //調用ipconfig ,並傳入參數: /all 
+            string command1 = "ipconfig";
+            string command2 = "/all";
+            string output_data = run_command_line_process_psi(command1, command2);
             richTextBox1.Text += output_data + "\n";
         }
 
-        string run_command_line_process2(string exe_filename, string command)
+        string run_command_line_process_psi(string cmd1, string cmd2)
         {
-            //調用ipconfig ,並傳入參數: /all 
-            ProcessStartInfo psi = new ProcessStartInfo("ipconfig", "/all");
+            //不用另外設定 "cmd.exe"
+
+            ProcessStartInfo psi = new ProcessStartInfo(cmd1, cmd2);
 
             psi.CreateNoWindow = true;      //true: 設置不顯示程式窗口, false: 出現cmd的黑窗體
-            psi.RedirectStandardOutput = true;
+            psi.RedirectStandardInput = true; //重定向標準輸入, 可能接受來自調用程序的輸入信息
+            psi.RedirectStandardOutput = true; //重定向標準輸出, 由調用程序獲取輸出信息
+            psi.RedirectStandardError = true; //重定向錯誤輸出
+
             psi.UseShellExecute = false;
 
-            Process process = Process.Start(psi);
+            //Process process = Process.Start(psi); //same, 拆成以下3行
+
+            Process process = new Process();
+            process.StartInfo = psi;
+            process.Start();    //啟動程式
+
 
             //從輸出流取得命令執行結果
             StreamReader output_sr = process.StandardOutput;
@@ -195,6 +180,11 @@ namespace vcs_Process_CommandLine
             string error_data = error_sr.ReadToEnd();
             //richTextBox1.Text += "輸出 :\n" + output_data + "\n";
             //richTextBox1.Text += "錯誤 :\n" + error_data + "\n";
+
+            // Clean up.
+            output_sr.Close();
+            error_sr.Close();
+            process.Close();
 
             return output_data;
         }
@@ -205,18 +195,6 @@ namespace vcs_Process_CommandLine
 
         private void button6_Click(object sender, EventArgs e)
         {
-            richTextBox1.Text += "test process\n";
-
-            //執行一條command命令 並取得其結果
-            string exe_filename = "cmd.exe";    //要執行的程式名稱
-            string command = "systeminfo";             //向要執行的程式發送的命令
-            //string command = "/k ver";             //向要執行的程式發送的命令
-            string output_data = string.Empty;
-
-            output_data = run_command_line_process(exe_filename, command);
-            richTextBox1.Text += output_data + "\n";
-
-
         }
 
         //標準版Process使用

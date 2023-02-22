@@ -77,8 +77,9 @@ int main(int argc, char** argv)
 	const char* message = "畫茶壺圓椎三角塊\n";
 	common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard_r);
 
-	printf("0 keydown means control the angle of the eye\n");
-	printf("1 keydown means control the distance of the eye\n");
+	printf("0: 旋轉模式, 改變觀察者眼睛角度\n");
+	printf("1: 放大模式, 改變觀察者眼睛距離\n");
+	printf("用滑鼠操作\n");
 
 	glutMouseFunc(mouse_r);		//設定callback function
 	glutMotionFunc(motion_r);		//設定callback function

@@ -4,14 +4,14 @@
 //每3點為一組
 GLfloat vertices[][3] =
 {
-	{-1.0 ,1.0, -1.0},		//0
-	{1.0, 1.0, -1.0},		//1
-	{1.0, 3.0, -1.0},		//2
-	{-1.0, 3.0, -1.0},		//3
-	{-1.0, 1.0, 1.0},		//4
-	{1.0, 1.0, 1.0},		//5
-	{1.0, 3.0, 1.0},		//6
-	{-1.0, 3.0, 1.0}		//7
+	{-1.0, -1.0, -1.0},		//0
+	{1.0, -1.0, -1.0},		//1
+	{1.0, 1.0, -1.0},		//2
+	{-1.0, 1.0, -1.0},		//3
+	{-1.0, -1.0, 1.0},		//4
+	{1.0, -1.0, 1.0},		//5
+	{1.0, 1.0, 1.0},		//6
+	{-1.0, 1.0, 1.0}		//7
 };
 
 // Colors of the vertices.
@@ -48,12 +48,6 @@ int flag_rotating_direction = 0;	//0: CW, 1:CCW
 float dd = 1.0f;
 float ddd = 0.06f;
 
-//啟始時的視點
-double eyex = 5.0f;
-double eyey = 5.0f;
-double eyez = 5.0f;
-//double eye_distance = 5.0f;
-
 void display(void)
 {
 	//設定cubic之頂點與顏色
@@ -62,32 +56,35 @@ void display(void)
 	glEnableClientState(GL_COLOR_ARRAY);
 	glColorPointer(3, GL_FLOAT, 0, vertex_color);	//從 vertex_color 陣列找起, 每3點為一組, 共8種顏色, 用到其中6種
 
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glClearColor(1.0, 1.0, 1.0, 0.0);  //設定背景色為白色
-
-	/* Update viewer position in modelview matrix */
-
+	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluLookAt(eyex, eyey, eyez, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+	glOrtho(-2.0, 2.0, -2.0, 2.0, -2.0, 2.0);
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
 
 	glRotatef(theta[0], 1.0, 0.0, 0.0);	//對x軸旋轉特定角度
 	glRotatef(theta[1], 0.0, 1.0, 0.0);	//對y軸旋轉特定角度
 	glRotatef(theta[2], 0.0, 0.0, 1.0);	//對z軸旋轉特定角度
-	glTranslatef(0.0, -2.0, 0.0);
-
 	glDrawElements(GL_QUADS, 24, GL_UNSIGNED_BYTE, cubeIndices);	//從 cubeIndices 陣列 裡面找出 24 個索引數
 	//用GL_QUADS就是每4個組成一個四邊形 => 共6個面
 
-	glutSwapBuffers();
-}
+	//已旋轉後之座標軸
+	draw_coordinates(1.5f);     //畫座標軸
 
-void reshape(int w, int h)
-{
-	glViewport(0, 0, w, h);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(50.0, (double)w / (double)h, 2.0, 20.0);
-	glMatrixMode(GL_MODELVIEW);
+	draw_teapot(color_purple, 1.0f, 1.0f);	//畫茶壺
+
+	draw_cube(color_silver, 1.0f, 2.5f);	//cubic 外框
+	draw_cube(color_purple, 1.0f, 3.0f);	//cubic 外框
+
+	for (int i = 0; i < 8; i++)
+	{
+		glColor3f(1.0f, 1.0f, 1.0f);
+		glRasterPos3fv((GLfloat*)vertices[i]);
+		glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '0' + i);
+	}
+	glutSwapBuffers();
 }
 
 void keyboard(unsigned char key, int /*x*/, int /*y*/)
@@ -186,48 +183,6 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
 			printf("停止\n");
 		}
 		break;
-	case '+':
-		printf("In ");
-		if (axis == 0)
-		{
-			eyex -= 0.5f;
-			if (eyex < 0.5f)
-				eyex = 0.5f;
-		}
-		else if (axis == 1)
-		{
-			eyey -= 0.5f;
-			if (eyey < 0.5f)
-				eyey = 0.5f;
-		}
-		else if (axis == 2)
-		{
-			eyez -= 0.5f;
-			if (eyez < 0.5f)
-				eyez = 0.5f;
-		}
-		break;
-	case '-':
-		printf("Out ");
-		if (axis == 0)
-		{
-			eyex += 0.5f;
-			if (eyex > 15.0f)
-				eyex = 15.0f;
-		}
-		else if (axis == 1)
-		{
-			eyey += 0.5f;
-			if (eyey > 15.0f)
-				eyey = 15.0f;
-		}
-		else if (axis == 2)
-		{
-			eyez += 0.5f;
-			if (eyez > 15.0f)
-				eyez = 15.0f;
-		}
-		break;
 	case ' ':
 	case 's':
 		flag_rotating = 1 - flag_rotating;
@@ -275,10 +230,9 @@ void idle(void)
 
 int main(int argc, char** argv)
 {
-	const char* windowName = "Color Cube";
-	const char* message = "滑鼠控制, 按S啟停, 按 Esc 離開\n";
-	//const char* message = "按x, y, z 選擇旋轉軸, 按 空白鍵 啟停, 按 Esc 離開\n";
-	common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard);
+	const char* windowName = "Rotating Color Cube";
+	const char* message = "按x, y, z 選擇旋轉軸, 按 空白鍵 啟停, 按 Esc 離開\n";
+	common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard);
 
 	//先保留
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);

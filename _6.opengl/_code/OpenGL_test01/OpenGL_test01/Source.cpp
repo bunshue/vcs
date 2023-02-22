@@ -4,7 +4,7 @@ int display_mode = 1;
 
 int full_screen = 0;
 
-int POLYGON_EDGE = 3;
+int num_polygon_edge = 3;
 
 #define NGRID 10
 
@@ -117,9 +117,9 @@ void display(void)
     }
     else if (display_mode == 2)
     {
-        //display_mode = 2  //畫 彩色三角形
-
         reset_default_setting();
+
+        //display_mode = 2  //畫 彩色三角形
 
         glPushMatrix();	//這個 Matrix Push/Pop 好像沒什麼用??
         // 繪製三角形
@@ -143,6 +143,8 @@ void display(void)
     }
     else if (display_mode == 3)
     {
+        reset_default_setting();
+
         int i;
         int n = 10;
 
@@ -195,6 +197,8 @@ void display(void)
     }
     else if (display_mode == 4)
     {
+        reset_default_setting();
+
         //畫網格
         int i;
 
@@ -252,6 +256,8 @@ void display(void)
     }
     else if (display_mode == 5)
     {
+        reset_default_setting();
+
         //display_mode = 5  //畫實心Polygon
         glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
@@ -268,17 +274,19 @@ void display(void)
         float angle_offset = 18;
         glBegin(GL_POLYGON);    //實心多邊形
         {
-            for (float theta = angle_offset; theta < (angle_offset + 360.0f); theta += (360.0f / POLYGON_EDGE))
+            for (float theta = angle_offset; theta < (angle_offset + 360.0f); theta += (360.0f / num_polygon_edge))
             {
                 glVertex3f(cx + r * cos(PI * theta / 180), cy + r * sin(PI * theta / 180), 0.0);
                 //printf("theta = %f x = %f, y = %f\n", theta, cx + r * cos(PI * theta / 180), cy + r * sin(PI * theta / 180));
             }
         }
         glEnd();
-        POLYGON_EDGE++;
+        num_polygon_edge++;
     }
     else if (display_mode == 6)
     {
+        reset_default_setting();
+
         //畫顏色色塊
         float mat[16];
 

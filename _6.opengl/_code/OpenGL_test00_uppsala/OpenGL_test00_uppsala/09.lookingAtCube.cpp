@@ -54,17 +54,14 @@ double eyey = 0.0f;
 double eyez = 0.0f;
 double eye_distance = 2.0f;
 
-// This function sets up the vertex arrays for the color cube.
-void colorcube(void)
-{
-    glEnableClientState(GL_COLOR_ARRAY);
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glVertexPointer(3, GL_FLOAT, 0, vertices);		//從 vertices 陣列找起, 每3點為一組, 共8個頂點
-    glColorPointer(3, GL_FLOAT, 0, vertex_color);	//從 vertex_color 陣列找起, 每3點為一組, 共8種顏色, 用到其中6種
-}
-
 void display(void)
 {
+    //設定cubic之頂點與顏色
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glVertexPointer(3, GL_FLOAT, 0, vertices);		//從 vertices 陣列找起, 每3點為一組, 共8個頂點
+    glEnableClientState(GL_COLOR_ARRAY);
+    glColorPointer(3, GL_FLOAT, 0, vertex_color);	//從 vertex_color 陣列找起, 每3點為一組, 共8種顏色, 用到其中6種
+
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glDrawElements(GL_QUADS, 24, GL_UNSIGNED_BYTE, cubeIndices);	//從 cubeIndices 陣列 裡面找出 24 個索引數
     //用GL_QUADS就是每4個組成一個四邊形 => 共6個面
@@ -190,7 +187,6 @@ int main(int argc, char** argv)
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
 
     glEnable(GL_DEPTH_TEST);
-    colorcube();
 
     /* Set initial view to positive x-axis. */
     glMatrixMode(GL_MODELVIEW);

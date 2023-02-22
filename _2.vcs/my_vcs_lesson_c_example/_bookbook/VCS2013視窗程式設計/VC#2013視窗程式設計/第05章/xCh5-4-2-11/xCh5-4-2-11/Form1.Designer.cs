@@ -41,21 +41,23 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.process1 = new System.Diagnostics.Process();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // listBox1
             // 
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(339, 50);
+            this.listBox1.ItemHeight = 12;
+            this.listBox1.Location = new System.Drawing.Point(291, 46);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(156, 108);
+            this.listBox1.Size = new System.Drawing.Size(307, 184);
             this.listBox1.TabIndex = 15;
             // 
             // button6
             // 
-            this.button6.Location = new System.Drawing.Point(420, 12);
+            this.button6.Location = new System.Drawing.Point(360, 11);
             this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(75, 23);
+            this.button6.Size = new System.Drawing.Size(64, 21);
             this.button6.TabIndex = 14;
             this.button6.Text = "button6";
             this.button6.UseVisualStyleBackColor = true;
@@ -63,9 +65,9 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(339, 12);
+            this.button5.Location = new System.Drawing.Point(291, 11);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.Size = new System.Drawing.Size(64, 21);
             this.button5.TabIndex = 13;
             this.button5.Text = "button5";
             this.button5.UseVisualStyleBackColor = true;
@@ -73,9 +75,9 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(258, 12);
+            this.button4.Location = new System.Drawing.Point(221, 11);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.Size = new System.Drawing.Size(64, 21);
             this.button4.TabIndex = 12;
             this.button4.Text = "button4";
             this.button4.UseVisualStyleBackColor = true;
@@ -88,9 +90,9 @@
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
-            this.listView1.Location = new System.Drawing.Point(15, 50);
+            this.listView1.Location = new System.Drawing.Point(13, 46);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(318, 198);
+            this.listView1.Size = new System.Drawing.Size(273, 183);
             this.listView1.TabIndex = 11;
             this.listView1.UseCompatibleStateImageBehavior = false;
             this.listView1.View = System.Windows.Forms.View.Details;
@@ -117,9 +119,9 @@
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(177, 12);
+            this.button3.Location = new System.Drawing.Point(152, 11);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(64, 21);
             this.button3.TabIndex = 10;
             this.button3.Text = "button3";
             this.button3.UseVisualStyleBackColor = true;
@@ -127,9 +129,9 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(96, 12);
+            this.button2.Location = new System.Drawing.Point(82, 11);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(64, 21);
             this.button2.TabIndex = 9;
             this.button2.Text = "button2";
             this.button2.UseVisualStyleBackColor = true;
@@ -137,9 +139,9 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(15, 12);
+            this.button1.Location = new System.Drawing.Point(13, 11);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(64, 21);
             this.button1.TabIndex = 8;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
@@ -155,11 +157,20 @@
             this.process1.StartInfo.UserName = "";
             this.process1.SynchronizingObject = this;
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Location = new System.Drawing.Point(13, 235);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(585, 201);
+            this.richTextBox1.TabIndex = 16;
+            this.richTextBox1.Text = "";
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(511, 260);
+            this.ClientSize = new System.Drawing.Size(610, 448);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.button6);
             this.Controls.Add(this.button5);
@@ -189,6 +200,7 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Diagnostics.Process process1;
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 

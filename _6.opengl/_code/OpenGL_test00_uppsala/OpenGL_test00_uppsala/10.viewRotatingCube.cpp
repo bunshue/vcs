@@ -54,17 +54,14 @@ double eyey = 0.0f;
 double eyez = 5.0f;
 //double eye_distance = 5.0f;
 
-// This function sets up the vertex arrays for the color cube.
-void colorcube(void)
-{
-	glEnableClientState(GL_COLOR_ARRAY);
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glVertexPointer(3, GL_FLOAT, 0, vertices);		//從 vertices 陣列找起, 每3點為一組, 共8個頂點
-	glColorPointer(3, GL_FLOAT, 0, vertex_color);	//從 vertex_color 陣列找起, 每3點為一組, 共8種顏色, 用到其中6種
-}
-
 void display(void)
 {
+	//設定cubic之頂點與顏色
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(3, GL_FLOAT, 0, vertices);		//從 vertices 陣列找起, 每3點為一組, 共8個頂點
+	glEnableClientState(GL_COLOR_ARRAY);
+	glColorPointer(3, GL_FLOAT, 0, vertex_color);	//從 vertex_color 陣列找起, 每3點為一組, 共8種顏色, 用到其中6種
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	glLoadIdentity();
@@ -302,7 +299,6 @@ int main(int argc, char** argv)
 
 	glEnable(GL_DEPTH_TEST);
 	glShadeModel(GL_FLAT);
-	colorcube();
 
 	glutMainLoop();	//開始主循環繪製
 

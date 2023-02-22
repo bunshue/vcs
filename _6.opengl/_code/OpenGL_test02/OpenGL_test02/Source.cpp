@@ -38,7 +38,7 @@ void gfxinit2(void)
     gluOrtho2D(-10.0, 10.0, -10.0, 10.0);   //設定畫圖邊界 x= -10 ~ 10, y = -10 ~ 10
 
     //在 List 1 製作第1張圖
-    glNewList(1, GL_COMPILE);
+    glNewList(1, GL_COMPILE);   //for bilinear patch
 
     /* Draw the rulings of u (constant u values) at values of 0.0, 0.1, 0.2, ..., 1.0. */
 
@@ -171,7 +171,7 @@ void show_figure()
 
     glDeleteLists(1, 1);  // erase the current figure
 
-    glNewList(1, GL_COMPILE);
+    glNewList(2, GL_COMPILE);   //for sphere
 
     sphere();
 
@@ -204,9 +204,9 @@ void display(void)
     }
     else if (display_mode == 1)
     {
-        //display_mode = 1
-
         reset_default_setting();
+
+        //display_mode = 1
 
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();	//設置單位矩陣
@@ -239,55 +239,36 @@ void display(void)
     }
     else if (display_mode == 2)
     {
-        //display_mode = 2  //畫 彩色三角形
-
         reset_default_setting();
 
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();	//設置單位矩陣
-        gluOrtho2D(-1, 1, -1, 1); //窗口座標範圍, 2D
-
-        // 設置當前的繪製顏色 , 4 個 unsigned byte 
-        // 每個顏色的分量占一個字節
-        // 參數數據是 R 紅色 G 綠色 B 藍色 A 透明度
-        // 下面設置的含義是白色, 繪製點的時候, 每次都使用白色繪製
-        glColor4ub(255, 255, 255, 255);
-
-        glPointSize(5.0f); 	//設定點的大小, N X N
-
-        glLineWidth(5.0f);	//設定線寬
+        //display_mode = 2  //畫 彩色三角形 Maxwell's Triangle
 
         // 繪製三角形
         glBegin(GL_TRIANGLES);
         {
             float dd = 0.5f;
             glNormal3f(0.0f, 1.0f, 0.0f);	//設置法線
-            glColor4ub(0, 0, 255, 255);     //B
+            glColor4ub(0, 0, 255, 255);     //B 上
             glVertex3f(0.0f, dd, 0); //上
 
             glNormal3f(0.0f, 1.0f, 0.0f);	//設置法線
-            glColor4ub(0, 255, 0, 255);     //G
+            glColor4ub(0, 255, 0, 255);     //G 右下
             glVertex3f(dd, -dd, 0); //右下
 
             glNormal3f(0.0f, -1.0f, 0.0f);	//設置法線
-            glColor4ub(255, 0, 0, 255);     //R
+            glColor4ub(255, 0, 0, 255);     //R 左下
             glVertex3f(-dd, -dd, 0);    //左下
         }
         glEnd();    // 結束畫三角形
-
-        // 矩陣出棧 
-        //glPopMatrix();
     }
     else if (display_mode == 3)
     {
-        //display_mode = 3
-
         reset_default_setting();
 
+        //display_mode = 3
+
         glOrtho(-10, 10, -10, 10, -10, 10);      //正交投影
-
         glPolygonMode(GL_FRONT, GL_LINE);
-
         draw_boundary(color_y, 9.6f); //畫視窗邊界
 
         float dd;
@@ -364,6 +345,8 @@ void display(void)
     }
     else if (display_mode == 4)
     {
+        reset_default_setting();
+
         /*
         void glRasterPos4d(GLdouble x, GLdouble y, GLdouble z = 0, GLdouble w = 1);
         void glRasterPos4dv(const GLdouble* v);
@@ -379,8 +362,6 @@ void display(void)
         */
 
         //display_mode = 4  測試Bipmap畫圖
-
-        reset_default_setting();
 
         glOrtho(0, 600, 0, 600, -1.0, 1.0);	//改變投影變換	//改變窗口座標範圍, 3D
 
@@ -432,58 +413,56 @@ void display(void)
     }
     else if (display_mode == 5)
     {
-        //display_mode = 5
+        reset_default_setting();
 
-        //Maxwell's Triangle
+        //display_mode = 5  //畫 彩色三角形 Maxwell's Triangle
 
-        glClear(GL_COLOR_BUFFER_BIT);
+        glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);    //實心矩形
+        //glClear(GL_COLOR_BUFFER_BIT);
         glBegin(GL_TRIANGLES);
         {
-            glColor3f(1.0, 0.0, 0.0);
-            glVertex2f(0.0, 0.0);
-            glColor3f(0.0, 1.0, 0.0);
-            glVertex2f(1.0, 0.0);
-            glColor3f(0.0, 0.0, 1.0);
-            glVertex2f(0.5f, (float)sqrt(3.0) * 0.5f);
+            float dd = 0.5f;
+            //glNormal3f(0.0f, 1.0f, 0.0f);	//設置法線
+            glColor4ub(0, 0, 255, 255);     //B 上
+            glVertex3f(0.0f, dd, 0); //上
+
+            //glNormal3f(0.0f, 1.0f, 0.0f);	//設置法線
+            glColor4ub(0, 255, 0, 255);     //G 右下
+            glVertex3f(dd, -dd, 0); //右下
+
+            //glNormal3f(0.0f, -1.0f, 0.0f);	//設置法線
+            glColor4ub(255, 0, 0, 255);     //R 左下
+            glVertex3f(-dd, -dd, 0);    //左下
         }
         glEnd();
         glFlush();  // 執行繪圖命令
-
-
     }
     else if (display_mode == 6)
     {
-        //display_mode = 6  //畫
+        //reset_default_setting();
+
+        //display_mode = 6  //畫 binear patch
+
         glClear(GL_COLOR_BUFFER_BIT);
         glColor3f(1.0, 1.0, 0.0);          //畫黃線
         glCallList(1);  //顯示第1張圖
 
         draw_coordinates(8.0f);     //畫座標軸
-
-        //用 GL_LINE_LOOP 畫一個空心矩形
-        glColor3f(0.0, 1.0, 0.0);          //畫綠框
-        float dd = 8.2f;
-        float point1[3] = { -dd, -dd, 0 };	//左下
-        float point2[3] = { dd, -dd, 0 };	//右下
-        float point3[3] = { dd,  dd, 0 };	//右上
-        float point4[3] = { -dd,  dd, 0 };	//左上
-        glBegin(GL_LINE_LOOP);
-        glVertex3fv(point1);	//左下
-        glVertex3fv(point2);	//右下
-        glVertex3fv(point3);	//右上
-        glVertex3fv(point4);	//左上
-        glEnd();
+        draw_rectangle(color_g, 2.0f, -8.2f, -8.2f, 16.4f, 16.4f);
 
         glFlush();  // 執行繪圖命令
     }
     else if (display_mode == 7)
     {
+        //reset_default_setting();
+
         //display_mode = 7  //畫 sphere
-        glClear(GL_COLOR_BUFFER_BIT);
-        glCallList(1);
-        glFlush();  // 執行繪圖命令
 
         show_figure();
+
+        glClear(GL_COLOR_BUFFER_BIT);
+        glCallList(2);
+        glFlush();  // 執行繪圖命令
     }
     else if (display_mode == 8)
     {
@@ -522,19 +501,6 @@ void display(void)
     glFlush();  // 執行繪圖命令
     glFlush();  //強制刷新緩存區
     glutSwapBuffers();  // 將後緩沖區繪製到前臺
-}
-
-// 窗口大小變化回調函數
-void reshape(int w, int h)
-{
-    /* 有問題
-    glViewport(0, 0, w, h);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();	//設置單位矩陣
-    gluPerspective(60.0, (GLfloat)w / (GLfloat)h, 0.1, 100000.0);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();	//設置單位矩陣
-    */
 }
 
 void keyboard(unsigned char key, int /*x*/, int /*y*/)
