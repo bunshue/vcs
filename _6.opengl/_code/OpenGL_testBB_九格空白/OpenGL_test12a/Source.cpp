@@ -2,6 +2,8 @@
 
 int display_mode = 1;
 
+int full_screen = 0;
+
 void reset_default_setting()
 {
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
@@ -20,80 +22,123 @@ void reset_default_setting()
     glutSetWindowTitle(info);
 }
 
+void display1()
+{
+    reset_default_setting();
+
+    //畫一個矩形 R
+    glColor4f(1.0, 0.0, 0.0, 1.0);  //設置畫筆顏色為 R
+    //左下x,左下y,右上x,右上y,
+    glRectf(-0.9f, -0.9f, -0.3f, 0.9f);//畫一個矩形
+
+    ////畫一個矩形 G
+    glColor4f(0.0, 1.0, 0.0, 1.0);  //設置畫筆顏色為 G
+    //左下x,左下y,右上x,右上y,
+    glRectf(-0.4f, -0.8f, 0.4f, 0.8f);//畫一個矩形
+
+    //畫一個矩形 B
+    glColor4f(0.0, 0.0, 1.0, 1.0);  //設置畫筆顏色為 B
+    //左下x,左下y,右上x,右上y,
+    glRectf(0.3f, -0.7f, 0.7f, 0.7f);//畫一個矩形
+
+    float x_st = -0.9f;
+    float y_st = 0.1f;
+    const char str1[30] = "draw_string_test 1";
+    draw_string1(str1, color_c, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
+
+    x_st = -0.9f;
+    y_st = -0.1f;
+    const char str2[30] = "draw_string_test 2";
+    draw_string2(str2, color_c, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
+
+    draw_boundary(color_y, 0.9f); //畫視窗邊界
+
+}
+
+void display2()
+{
+
+}
+
+void display3()
+{
+
+}
+
+void display4()
+{
+
+}
+
+void display5()
+{
+
+}
+
+void display6()
+{
+
+}
+
+void display7()
+{
+
+}
+
+void display8()
+{
+
+}
+
+void display9()
+{
+
+}
+
 // 繪圖回調函數
 void display(void)
 {
     if (display_mode == 0)
     {
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
-        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
-
-        printf("無畫面, TBD, display_mode = %d\n", display_mode);
-
-        //設定預設大小...  TBD
+        reset_default_setting();
     }
     else if (display_mode == 1)
     {
-        reset_default_setting();
-
-        //畫一個矩形 R
-        glColor4f(1.0, 0.0, 0.0, 1.0);  //設置畫筆顏色為 R
-        //左下x,左下y,右上x,右上y,
-        glRectf(-0.9f, -0.9f, -0.3f, 0.9f);//畫一個矩形
-
-        ////畫一個矩形 G
-        glColor4f(0.0, 1.0, 0.0, 1.0);  //設置畫筆顏色為 G
-        //左下x,左下y,右上x,右上y,
-        glRectf(-0.4f, -0.8f, 0.4f, 0.8f);//畫一個矩形
-
-        //畫一個矩形 B
-        glColor4f(0.0, 0.0, 1.0, 1.0);  //設置畫筆顏色為 B
-        //左下x,左下y,右上x,右上y,
-        glRectf(0.3f, -0.7f, 0.7f, 0.7f);//畫一個矩形
-
-        float x_st = -0.9f;
-        float y_st = 0.1f;
-        const char str1[30] = "draw_string_test 1";
-        draw_string1(str1, color_c, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
-
-        x_st = -0.9f;
-        y_st = -0.1f;
-        const char str2[30] = "draw_string_test 2";
-        draw_string2(str2, color_c, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
-
-        draw_boundary(color_y, 0.9f); //畫視窗邊界
+        display1();
     }
     else if (display_mode == 2)
     {
-        reset_default_setting();
+        display2();
     }
     else if (display_mode == 3)
     {
-        reset_default_setting();
+        display3();
     }
     else if (display_mode == 4)
     {
-        reset_default_setting();
+        display4();
     }
     else if (display_mode == 5)
     {
-        reset_default_setting();
+        display5();
+
     }
     else if (display_mode == 6)
     {
-        reset_default_setting();
+        display6();
+
     }
     else if (display_mode == 7)
     {
-        reset_default_setting();
+        display7();
     }
     else if (display_mode == 8)
     {
-        reset_default_setting();
+        display8();
     }
     else if (display_mode == 9)
     {
-        reset_default_setting();
+        display9();
     }
     else
     {
@@ -116,6 +161,23 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
         //離開視窗
         glutDestroyWindow(glutGetWindow());
         return;
+        break;
+    case ' ':
+        if (full_screen == 0)
+        {
+            full_screen = 1;
+            printf("全螢幕\n");
+            glutFullScreen();   //全螢幕顯示
+        }
+        else
+        {
+            //恢復成一般螢幕, 有問題
+
+            full_screen = 0;
+            printf("一般螢幕\n");
+            glutInitWindowSize(600, 600);       // 設定視窗大小
+            glutInitWindowPosition(1100, 200);  // 設定視窗位置
+        }
         break;
     case '0':
         display_mode = 0;
