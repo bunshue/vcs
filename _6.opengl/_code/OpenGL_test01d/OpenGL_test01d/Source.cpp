@@ -45,6 +45,12 @@ void keyboardup(unsigned char key, int /*x*/, int /*y*/)
     //keyDown[key] = false;
 }
 
+void specialup(int key, int /*x*/, int /*y*/)
+{
+    printf("SUP ");
+    //keyDown[key] = false;
+}
+
 void mouse(int button, int state, int x, int y)
 {
     //MouseDown
@@ -111,6 +117,25 @@ void motion(int x, int y)
     //printf("M(%d, %d) ", x, y);
 }
 
+void special(int key, int /*x*/, int /*y*/)
+{
+    switch (key)
+    {
+    case GLUT_KEY_LEFT:
+        printf("左 ");
+        break;
+    case GLUT_KEY_RIGHT:
+        printf("右 ");
+        break;
+    case GLUT_KEY_UP:
+        printf("上 ");
+        break;
+    case GLUT_KEY_DOWN:
+        printf("下 ");
+        break;
+    }
+}
+
 void timerEvent(int value)
 {
     time_elapsed++;
@@ -132,7 +157,11 @@ int main(int argc, char** argv)
 
     glutMouseFunc(mouse);       //設定callback function
     glutMotionFunc(motion);     //設定callback function
+    glutSpecialFunc(special);   //設定callback function
     glutCloseFunc(cleanup);     //設定callback function
+
+    glutKeyboardUpFunc(keyboardup); //設定callback function
+    glutSpecialUpFunc(specialup); //設定callback function
 
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);    //設定timer事件
 

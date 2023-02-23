@@ -1,49 +1,33 @@
 ﻿#include "../../Common.h"
 
-#define    checkImageWidth 256
-#define    checkImageHeight 256
-GLubyte checkImage[checkImageHeight][checkImageWidth][3];
+#define    W 256
+#define    H 256
+unsigned char image_data[H][W][3];
 
 static GLfloat zoomFactor = 0.7f;
 static GLint height;
 
-void makeCheckImage(void)
+void makeImageData(void)
 {
-    /*
     int i, j, c;
 
-    for (i = 0; i < checkImageHeight; i++)
+    for (i = 0; i < H; i++)
     {
-        for (j = 0; j < checkImageWidth; j++)
-        {
-            c = ((((i & 0x8) == 0) ^ ((j & 0x8)) == 0)) * 255;
-            checkImage[i][j][0] = (GLubyte)c;
-            checkImage[i][j][1] = (GLubyte)c;
-            checkImage[i][j][2] = (GLubyte)c;
-        }
-    }
-    */
-    int i, j, c;
-
-    for (i = 0; i < checkImageHeight; i++)
-    {
-        for (j = 0; j < checkImageWidth; j++)
+        for (j = 0; j < W; j++)
         {
             c = (i + j) / 2;
-            checkImage[i][j][0] = (GLubyte)c;
-            checkImage[i][j][1] = (GLubyte)c;
-            checkImage[i][j][2] = (GLubyte)c;
+            image_data[i][j][0] = (unsigned char)c;
+            image_data[i][j][1] = (unsigned char)c;
+            image_data[i][j][2] = (unsigned char)c;
         }
     }
-
-
 }
 
 void init(void)
 {
     glClearColor(0.0, 0.0, 0.0, 0.0);
     glShadeModel(GL_FLAT);
-    makeCheckImage();
+    makeImageData();
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 }
 
@@ -54,15 +38,14 @@ void display(void)
 
     //glRasterPos2i(0, 0);
     glRasterPos2f(-0.9f, -0.9f);
-    glDrawPixels(checkImageWidth, checkImageHeight, GL_RGB, GL_UNSIGNED_BYTE, checkImage);
-    //          W                   H               format, type,           pixels
-
+    glDrawPixels(W, H, GL_RGB, GL_UNSIGNED_BYTE, image_data);
+    //           W, H, format,       type,         pixels
 
     //glPixelZoom(zoomFactor, zoomFactor);  //縮放圖片, 水平3倍, 垂直3倍
-    
+
     glRasterPos2f(0.0f, 0.0f);
     //複製圖片, 從(0,0)複製WXH
-    glCopyPixels(0, 0, checkImageWidth, checkImageHeight, GL_COLOR);    //有Zoom之後要做很久
+    glCopyPixels(0, 0, W, H, GL_COLOR);    //有Zoom之後要做很久
 
     glFlush();
 
@@ -93,4 +76,3 @@ int main(int argc, char** argv)
 
     return 0;
 }
-

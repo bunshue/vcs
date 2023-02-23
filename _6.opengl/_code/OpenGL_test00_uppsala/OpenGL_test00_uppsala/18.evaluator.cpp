@@ -111,11 +111,12 @@ void display(void)
     glColor3f(0.0f, 0.0f, 0.0f);   //¶Â½u
     for (j = 0; j < number_of_points; j += 3)
     {
+        //GLAPI void GLAPIENTRY glMap1f(GLenum target, GLfloat u1, GLfloat u2, GLint stride, GLint order, const GLfloat *points);
         glMap1f(GL_MAP1_VERTEX_3, 0.0, STEPS, 3, 4, &points[j][0]);
         glBegin(GL_LINE_STRIP);
         for (i = 0; i <= STEPS; i++)
         {
-            glEvalCoord1f(i);
+            glEvalCoord1f((float)i);
         }
         glEnd();
     }

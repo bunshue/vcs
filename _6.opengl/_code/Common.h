@@ -110,9 +110,6 @@ void setup_rotation();
 //其他共用
 void common_setup(int argc, char** argv, const char* windowName, const char* message, const int display_mode, const int window_width, const int window_height, const int x_st, const int y_st, void (*disp)(void), void (*resh)(int, int), void (*key)(unsigned char, int, int));
 void sleep(clock_t wait);
-
-
-
-
+void get_opengl_parameters();
 
 

@@ -144,8 +144,20 @@ FGAPI void    FGAPIENTRY glutSolidCone(GLdouble base, GLdouble height, GLint sli
 
 void draw_tetrahedron(void)	//畫四面體
 {
-    float pnt[4][3] = { {0.0,0.0,0.0}, {1.0,0.0,0.0}, {0.0,1.0,0.0}, {0.0,0.0,1.0} };
-    int tetra[4][3] = { {0,2,1}, {0,3,2}, {0,1,3}, {1,2,3} };
+    float pnt[4][3] =
+    {
+        {0.0f, 0.0f, 0.0f},
+        {1.0f, 0.0f, 0.0f},
+        {0.0f, 1.0f, 0.0f},
+        {0.0f, 0.0f, 1.0f}
+    };
+    int tetra[4][3] =
+    {
+        {0, 2, 1},
+        {0, 3, 2},
+        {0, 1, 3},
+        {1, 2, 3}
+    };
 
     glBegin(GL_TRIANGLES);
     glColor3f(1.0f, 0.0f, 0.0f);
@@ -171,8 +183,20 @@ void draw_tetrahedron(void)	//畫四面體
 
 void draw_tetrahedron2(void)
 {
-    float pnt[4][3] = { {0.0,0.0,0.0},{1.0,0.0,0.0}, {0.0,1.0,0.0}, {0.0,0.0,1.0} };
-    int tetra[4][3] = { {0,2,1}, {0,3,2}, {0,1,3}, {1,2,3} };
+    float pnt[4][3] =
+    {
+        {0.0f, 0.0f, 0.0f},
+        {1.0f, 0.0f, 0.0f},
+        {0.0f, 1.0f, 0.0f},
+        {0.0f, 0.0f, 1.0f}
+    };
+    int tetra[4][3] =
+    {
+        {0, 2, 1},
+        {0, 3, 2},
+        {0, 1, 3},
+        {1, 2, 3}
+    };
 
     glNormal3f(0.0f, 0.0f, -1.0f);	//設置法線
     glBegin(GL_POLYGON); //X-Y
@@ -351,6 +375,18 @@ void draw_point(float* color, float size, float x_st, float y_st)
     glEnd();
 }
 
+//兩點直線, 顏色color, 線寬width, (x1, y1) - (x2, y2)
+void draw_line(float* color, float width, float x1, float y1, float x2, float y2)
+{
+    glColor3fv((GLfloat*)color);    //設定顏色
+    glLineWidth(width);	//設定線寬
+
+    glBegin(GL_LINES);   //開始繪製線段
+    glVertex2f(x1, y1);     //設置線段的點
+    glVertex2f(x2, y2);
+    glEnd();     //結束繪製線段
+}
+
 //空心矩形, 左下為原點, 向右w, 向上h, 顏色color, 線寬width
 void draw_rectangle(float* color, float width, float x_st, float y_st, float w, float h)
 {
@@ -406,19 +442,21 @@ void display0(void)
 {
     glClear(GL_COLOR_BUFFER_BIT);   //清除背景
 
-    //draw_boundary(color_y, 0.9f); //畫視窗邊界
+    float color_y[] = { 1.0f, 1.0f, 0.0f, 1.0f };
+    draw_boundary(color_y, 0.9f); //畫視窗邊界
 
     //畫一個實心矩形
     glColor3f(0.0, 1.0, 1.0);   //設定顏色 cc
     float dd = 0.3f;
     glRectf(-dd, -dd, dd, dd);  //實心矩形
 
-    //draw_teapot(color_r, 1, 0.3);   //畫一個茶壺
+    float color_r[] = { 1.0f, 0.0f, 0.0f, 1.0f };
+    draw_teapot(color_r, 1, 0.3);   //畫一個茶壺
 
     float x_st = -0.7f;
     float y_st = 0.5f;
     const char str1[30] = "Empty example";
-    //draw_string1(str1, color_r, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
+    draw_string1(str1, color_r, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
 
     glFlush();  // 執行繪圖命令
 }
@@ -426,7 +464,18 @@ void display0(void)
 // 窗口大小變化回調函數
 void reshape0(int w, int h)
 {
-    glViewport(0, 0, w, h);
+    //glViewport(0, 0, w, h); same
+    //以畫素為單位
+
+    //視口設定為全部視窗
+    int viewportx = 0;
+    int viewporty = 0;
+    int viewportw = w;
+    int viewporth = h;
+    glViewport(viewportx, viewporty, viewportw, viewporth);
+    //printf("把所有要畫的東西顯示在視窗的(%d ,%d)開始的(%d, %d)\n", viewportx, viewporty, viewportw, viewporth);
+
+    //glViewport(w / 2, h / 2, w / 2, h / 2); //把所有要畫的東西顯示在視窗的右上1/4處
 }
 
 void keyboard0(unsigned char key, int /*x*/, int /*y*/)
@@ -543,18 +592,20 @@ void setup_rotation()
 
     if (w > h)
     {
+        //窗口座標範圍, 3D
         glOrtho(-w / h, w / h, -1.0f, 1.0f, -1.0f, 1.0f);
     }
     else
     {
+        //窗口座標範圍, 3D
         glOrtho(-1.0f, 1.0f, -h / w, h / w, -1.0f, 1.0f);
     }
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();	//設置單位矩陣
 
-    glRotatef(x_angle, 1.0f, 0.0f, 0.0f);
-    glRotatef(y_angle, 0.0f, 1.0f, 0.0f);
+    glRotatef(x_angle, 1.0f, 0.0f, 0.0f);   //對x軸旋轉特定角度 x_angle
+    glRotatef(y_angle, 0.0f, 1.0f, 0.0f);   //對y軸旋轉特定角度 y_angle
 
     //顯示資訊
     char info[20];
@@ -614,3 +665,184 @@ void sleep(clock_t wait)
         ;
 }
 
+void get_opengl_parameters()
+{
+    int value = 0;
+    printf("\ndisplay mode definitions\n\n");
+    value = glutGet(GLUT_RGB); printf("value 01 = %d\n", value);
+    value = glutGet(GLUT_RGBA); printf("value 02 = %d\n", value);
+    value = glutGet(GLUT_INDEX); printf("value 03 = %d\n", value);
+    value = glutGet(GLUT_SINGLE); printf("value 04 = %d\n", value);
+    value = glutGet(GLUT_DOUBLE); printf("value 05 = %d\n", value);
+    value = glutGet(GLUT_ACCUM); printf("value 06 = %d\n", value);
+    value = glutGet(GLUT_ALPHA); printf("value 07 = %d\n", value);
+    value = glutGet(GLUT_DEPTH); printf("value 08 = %d\n", value);
+    value = glutGet(GLUT_STENCIL); printf("value 09 = %d\n", value);
+    value = glutGet(GLUT_MULTISAMPLE); printf("value 10 = %d\n", value);
+    value = glutGet(GLUT_STEREO); printf("value 11 = %d\n", value);
+    value = glutGet(GLUT_LUMINANCE); printf("value 12 = %d\n", value);
+
+    printf("\nwindows and menu related definitions\n\n");
+    value = glutGet(GLUT_MENU_NOT_IN_USE); printf("value 01 = %d\n", value);
+    value = glutGet(GLUT_MENU_IN_USE); printf("value 02 = %d\n", value);
+    value = glutGet(GLUT_NOT_VISIBLE); printf("value 03 = %d\n", value);
+    value = glutGet(GLUT_VISIBLE); printf("value 04 = %d\n", value);
+    value = glutGet(GLUT_HIDDEN); printf("value 05 = %d\n", value);
+    value = glutGet(GLUT_FULLY_RETAINED); printf("value 06 = %d\n", value);
+    value = glutGet(GLUT_PARTIALLY_RETAINED); printf("value 07 = %d\n", value);
+    value = glutGet(GLUT_FULLY_COVERED); printf("value 08 = %d\n", value);
+
+    /*
+    printf("\nfonts definitions\n\n");
+
+    value = glutGet(GLUT_STROKE_ROMAN); printf("value 01 = %d\n", value);
+    value = glutGet(GLUT_STROKE_MONO_ROMAN); printf("value 02 = %d\n", value);
+    value = glutGet(GLUT_BITMAP_9_BY_15); printf("value 03 = %d\n", value);
+    value = glutGet(GLUT_BITMAP_8_BY_13); printf("value 04 = %d\n", value);
+    value = glutGet(GLUT_BITMAP_TIMES_ROMAN_10); printf("value 05 = %d\n", value);
+    value = glutGet(GLUT_BITMAP_TIMES_ROMAN_24); printf("value 06 = %d\n", value);
+    value = glutGet(GLUT_BITMAP_HELVETICA_10); printf("value 07 = %d\n", value);
+    value = glutGet(GLUT_BITMAP_HELVETICA_12); printf("value 08 = %d\n", value);
+    value = glutGet(GLUT_BITMAP_HELVETICA_18); printf("value 09 = %d\n", value);
+    */
+
+    printf("\nthe glutGet parameters 1\n\n");
+    value = glutGet(GLUT_WINDOW_X); printf("value 01 = %d\n", value);
+    value = glutGet(GLUT_WINDOW_Y); printf("value 02 = %d\n", value);
+    value = glutGet(GLUT_WINDOW_WIDTH); printf("value 03 = %d\n", value);
+    value = glutGet(GLUT_WINDOW_HEIGHT); printf("value 04 = %d\n", value);
+    value = glutGet(GLUT_WINDOW_BUFFER_SIZE); printf("value 05 = %d\n", value);
+    value = glutGet(GLUT_WINDOW_STENCIL_SIZE); printf("value 06 = %d\n", value);
+    value = glutGet(GLUT_WINDOW_DEPTH_SIZE); printf("value 07 = %d\n", value);
+    value = glutGet(GLUT_WINDOW_RED_SIZE); printf("value 08 = %d\n", value);
+    value = glutGet(GLUT_WINDOW_GREEN_SIZE); printf("value 09 = %d\n", value);
+    value = glutGet(GLUT_WINDOW_BLUE_SIZE); printf("value 10 = %d\n", value);
+    value = glutGet(GLUT_WINDOW_ALPHA_SIZE); printf("value 11 = %d\n", value);
+    value = glutGet(GLUT_WINDOW_ACCUM_RED_SIZE); printf("value 12 = %d\n", value);
+    value = glutGet(GLUT_WINDOW_ACCUM_GREEN_SIZE); printf("value 13 = %d\n", value);
+    value = glutGet(GLUT_WINDOW_ACCUM_BLUE_SIZE); printf("value 14 = %d\n", value);
+    value = glutGet(GLUT_WINDOW_ACCUM_ALPHA_SIZE); printf("value 15 = %d\n", value);
+    value = glutGet(GLUT_WINDOW_DOUBLEBUFFER); printf("value 16 = %d\n", value);
+    value = glutGet(GLUT_WINDOW_RGBA); printf("value 17 = %d\n", value);
+    value = glutGet(GLUT_WINDOW_PARENT); printf("value 18 = %d\n", value);
+    value = glutGet(GLUT_WINDOW_NUM_CHILDREN); printf("value 19 = %d\n", value);
+    //value = glutGet(GLUT_WINDOW_COLORMAP_SIZE);printf("value 20 = %d\n", value);
+    value = glutGet(GLUT_WINDOW_NUM_SAMPLES); printf("value 21 = %d\n", value);
+    value = glutGet(GLUT_WINDOW_STEREO); printf("value 22 = %d\n", value);
+    value = glutGet(GLUT_WINDOW_CURSOR); printf("value 23 = %d\n", value);
+
+    printf("\nthe glutGet parameters 2\n\n");
+    value = glutGet(GLUT_SCREEN_WIDTH); printf("value 01 = %d\n", value);
+    value = glutGet(GLUT_SCREEN_HEIGHT); printf("value 02 = %d\n", value);
+    value = glutGet(GLUT_SCREEN_WIDTH_MM); printf("value 03 = %d\n", value);
+    value = glutGet(GLUT_SCREEN_HEIGHT_MM); printf("value 04 = %d\n", value);
+    value = glutGet(GLUT_MENU_NUM_ITEMS); printf("value 05 = %d\n", value);
+    value = glutGet(GLUT_DISPLAY_MODE_POSSIBLE); printf("value 06 = %d\n", value);
+    value = glutGet(GLUT_INIT_WINDOW_X); printf("value 07 = %d\n", value);
+    value = glutGet(GLUT_INIT_WINDOW_Y); printf("value 08 = %d\n", value);
+    value = glutGet(GLUT_INIT_WINDOW_WIDTH); printf("value 09 = %d\n", value);
+    value = glutGet(GLUT_INIT_WINDOW_HEIGHT); printf("value 10 = %d\n", value);
+    value = glutGet(GLUT_INIT_DISPLAY_MODE); printf("value 11 = %d\n", value);
+    value = glutGet(GLUT_ELAPSED_TIME); printf("value 12 = %d\n", value);
+    value = glutGet(GLUT_WINDOW_FORMAT_ID); printf("value 13 = %d\n", value);
+    value = glutGet(GLUT_INIT_STATE); printf("value 14 = %d\n", value);
+
+    printf("\nthe glutDeviceGet parameters\n\n");
+    value = glutGet(GLUT_HAS_KEYBOARD); printf("value 01 = %d\n", value);
+    value = glutGet(GLUT_HAS_MOUSE); printf("value 02 = %d\n", value);
+    value = glutGet(GLUT_HAS_SPACEBALL); printf("value 03 = %d\n", value);
+    value = glutGet(GLUT_HAS_DIAL_AND_BUTTON_BOX); printf("value 04 = %d\n", value);
+    value = glutGet(GLUT_HAS_TABLET); printf("value 05 = %d\n", value);
+    value = glutGet(GLUT_NUM_MOUSE_BUTTONS); printf("value 06 = %d\n", value);
+    value = glutGet(GLUT_NUM_SPACEBALL_BUTTONS); printf("value 07 = %d\n", value);
+    value = glutGet(GLUT_NUM_BUTTON_BOX_BUTTONS); printf("value 08 = %d\n", value);
+    value = glutGet(GLUT_NUM_DIALS); printf("value 09 = %d\n", value);
+    value = glutGet(GLUT_NUM_TABLET_BUTTONS); printf("value 10 = %d\n", value);
+    value = glutGet(GLUT_DEVICE_IGNORE_KEY_REPEAT); printf("value 11 = %d\n", value);
+    value = glutGet(GLUT_DEVICE_KEY_REPEAT); printf("value 12 = %d\n", value);
+    value = glutGet(GLUT_HAS_JOYSTICK); printf("value 13 = %d\n", value);
+    value = glutGet(GLUT_OWNS_JOYSTICK); printf("value 14 = %d\n", value);
+    value = glutGet(GLUT_JOYSTICK_BUTTONS); printf("value 15 = %d\n", value);
+    value = glutGet(GLUT_JOYSTICK_AXES); printf("value 16 = %d\n", value);
+    value = glutGet(GLUT_JOYSTICK_POLL_RATE); printf("value 17 = %d\n", value);
+
+    printf("\nthe glutLayerGet parameters\n\n");
+    value = glutGet(GLUT_OVERLAY_POSSIBLE); printf("value 01 = %d\n", value);
+    value = glutGet(GLUT_LAYER_IN_USE); printf("value 02 = %d\n", value);
+    value = glutGet(GLUT_HAS_OVERLAY); printf("value 03 = %d\n", value);
+    value = glutGet(GLUT_TRANSPARENT_INDEX); printf("value 04 = %d\n", value);
+    value = glutGet(GLUT_NORMAL_DAMAGED); printf("value 05 = %d\n", value);
+    value = glutGet(GLUT_OVERLAY_DAMAGED); printf("value 06 = %d\n", value);
+
+    printf("\nthe glutVideoResizeGet parameters\n\n");
+
+    value = glutGet(GLUT_VIDEO_RESIZE_POSSIBLE); printf("value 01 = %d\n", value);
+    value = glutGet(GLUT_VIDEO_RESIZE_IN_USE); printf("value 02 = %d\n", value);
+    value = glutGet(GLUT_VIDEO_RESIZE_X_DELTA); printf("value 03 = %d\n", value);
+    value = glutGet(GLUT_VIDEO_RESIZE_Y_DELTA); printf("value 04 = %d\n", value);
+    value = glutGet(GLUT_VIDEO_RESIZE_WIDTH_DELTA); printf("value 05 = %d\n", value);
+    value = glutGet(GLUT_VIDEO_RESIZE_HEIGHT_DELTA); printf("value 06 = %d\n", value);
+    value = glutGet(GLUT_VIDEO_RESIZE_X); printf("value 07 = %d\n", value);
+    value = glutGet(GLUT_VIDEO_RESIZE_Y); printf("value 08 = %d\n", value);
+    value = glutGet(GLUT_VIDEO_RESIZE_WIDTH); printf("value 09 = %d\n", value);
+    value = glutGet(GLUT_VIDEO_RESIZE_HEIGHT); printf("value 10 = %d\n", value);
+
+    printf("\nthe glutUseLayer parameters\n\n");
+    value = glutGet(GLUT_NORMAL); printf("value 01 = %d\n", value);
+    value = glutGet(GLUT_OVERLAY); printf("value 02 = %d\n", value);
+
+    printf("\nthe glutGetModifiers parameters\n\n");
+    value = glutGet(GLUT_ACTIVE_SHIFT); printf("value 01 = %d\n", value);
+    value = glutGet(GLUT_ACTIVE_CTRL); printf("value 02 = %d\n", value);
+    value = glutGet(GLUT_ACTIVE_ALT); printf("value 03 = %d\n", value);
+
+    printf("\nthe glutSetCursor parameters\n\n");
+
+    value = glutGet(GLUT_CURSOR_RIGHT_ARROW); printf("value 01 = %d\n", value);
+    value = glutGet(GLUT_CURSOR_LEFT_ARROW); printf("value 02 = %d\n", value);
+    value = glutGet(GLUT_CURSOR_INFO); printf("value 03 = %d\n", value);
+    value = glutGet(GLUT_CURSOR_DESTROY); printf("value 04 = %d\n", value);
+    value = glutGet(GLUT_CURSOR_HELP); printf("value 05 = %d\n", value);
+    value = glutGet(GLUT_CURSOR_CYCLE); printf("value 06 = %d\n", value);
+    value = glutGet(GLUT_CURSOR_SPRAY); printf("value 07 = %d\n", value);
+    value = glutGet(GLUT_CURSOR_WAIT); printf("value 08 = %d\n", value);
+    value = glutGet(GLUT_CURSOR_TEXT); printf("value 09 = %d\n", value);
+    value = glutGet(GLUT_CURSOR_CROSSHAIR); printf("value 10 = %d\n", value);
+    value = glutGet(GLUT_CURSOR_UP_DOWN); printf("value 11 = %d\n", value);
+    value = glutGet(GLUT_CURSOR_LEFT_RIGHT); printf("value 12 = %d\n", value);
+    value = glutGet(GLUT_CURSOR_TOP_SIDE); printf("value 13 = %d\n", value);
+    value = glutGet(GLUT_CURSOR_BOTTOM_SIDE); printf("value 14 = %d\n", value);
+    value = glutGet(GLUT_CURSOR_LEFT_SIDE); printf("value 15 = %d\n", value);
+    value = glutGet(GLUT_CURSOR_RIGHT_SIDE); printf("value 16 = %d\n", value);
+    value = glutGet(GLUT_CURSOR_TOP_LEFT_CORNER); printf("value 17 = %d\n", value);
+    value = glutGet(GLUT_CURSOR_TOP_RIGHT_CORNER); printf("value 18 = %d\n", value);
+    value = glutGet(GLUT_CURSOR_BOTTOM_RIGHT_CORNER); printf("value 19 = %d\n", value);
+    value = glutGet(GLUT_CURSOR_BOTTOM_LEFT_CORNER); printf("value 20 = %d\n", value);
+    value = glutGet(GLUT_CURSOR_INHERIT); printf("value 21 = %d\n", value);
+    value = glutGet(GLUT_CURSOR_NONE); printf("value 22 = %d\n", value);
+    value = glutGet(GLUT_CURSOR_FULL_CROSSHAIR); printf("value 23 = %d\n", value);
+
+    printf("\nRGB color component specification definitions\n\n");
+    value = glutGet(GLUT_RED); printf("value 01 = %d\n", value);
+    value = glutGet(GLUT_GREEN); printf("value 02 = %d\n", value);
+    value = glutGet(GLUT_BLUE); printf("value 03 = %d\n", value);
+
+    printf("\nadditional keyboard and joystick definitions\n\n");
+    value = glutGet(GLUT_KEY_REPEAT_OFF); printf("value 01 = %d\n", value);
+    value = glutGet(GLUT_KEY_REPEAT_ON); printf("value 02 = %d\n", value);
+    value = glutGet(GLUT_KEY_REPEAT_DEFAULT); printf("value 03 = %d\n", value);
+
+    value = glutGet(GLUT_JOYSTICK_BUTTON_A); printf("value 04 = %d\n", value);
+    value = glutGet(GLUT_JOYSTICK_BUTTON_B); printf("value 05 = %d\n", value);
+    value = glutGet(GLUT_JOYSTICK_BUTTON_C); printf("value 06 = %d\n", value);
+    value = glutGet(GLUT_JOYSTICK_BUTTON_D); printf("value 07 = %d\n", value);
+
+    printf("\ngame mode definitions\n\n");
+    value = glutGet(GLUT_GAME_MODE_ACTIVE); printf("value 01 = %d\n", value);
+    value = glutGet(GLUT_GAME_MODE_POSSIBLE); printf("value 02 = %d\n", value);
+    value = glutGet(GLUT_GAME_MODE_WIDTH); printf("value 03 = %d\n", value);
+    value = glutGet(GLUT_GAME_MODE_HEIGHT); printf("value 04 = %d\n", value);
+    value = glutGet(GLUT_GAME_MODE_PIXEL_DEPTH); printf("value 05 = %d\n", value);
+    value = glutGet(GLUT_GAME_MODE_REFRESH_RATE); printf("value 06 = %d\n", value);
+    value = glutGet(GLUT_GAME_MODE_DISPLAY_CHANGED); printf("value 07 = %d\n", value);
+}

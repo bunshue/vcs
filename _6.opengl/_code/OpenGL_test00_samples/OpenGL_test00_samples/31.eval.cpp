@@ -460,8 +460,8 @@ int main(int argc, char** argv)
     glutKeyboardFunc(keyboard);     //設定callback function
     glutSpecialFunc(special);       //設定callback function
 
-    //printf("按 上 下 左 右 控制\n");
-    printf("Press UP DOWN LEFT RIGHT to control\n");
+    printf("按 上 下 左 右 控制\n");
+    printf("按 1 ~ 9 控制\n");
 
     glutMainLoop();	//開始主循環繪製
 

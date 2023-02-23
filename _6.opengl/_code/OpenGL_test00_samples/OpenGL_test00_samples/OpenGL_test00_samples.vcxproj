@@ -20,7 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Common.cpp" />
-    <ClCompile Include="18.line.cpp" />
+    <ClCompile Include="31.eval.cpp" />
     <ClCompile Include="rgb.c" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
