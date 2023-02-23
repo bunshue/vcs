@@ -1,8 +1,8 @@
 ﻿#include "../../Common.h"
 
-#define REFRESH_DELAY 1000  // ms
-
 int display_mode = 1;
+
+int full_screen = 0;
 
 void reset_default_setting()
 {
@@ -15,6 +15,11 @@ void reset_default_setting()
     gluOrtho2D(-1, 1, -1, 1); //窗口座標範圍, 2D
 
     glLineWidth(1.0f);	//設定線寬
+
+    char info[10];
+    //sprintf(info, "%d", (char)display_mode);  //過時, x64不能用
+    sprintf_s(info, sizeof(info), "%d", display_mode);
+    glutSetWindowTitle(info);
 }
 
 float my_function(float a)
@@ -113,51 +118,141 @@ void print_data()
     return;
 }
 
+void display1()
+{
+    reset_default_setting();
+
+    draw_boundary(color_y, 0.9f); //畫視窗邊界
+
+    draw_math_function1();
+    glFlush();  // 執行繪圖命令
+}
+
+void display2()
+{
+    reset_default_setting();
+
+    draw_boundary(color_y, 0.9f); //畫視窗邊界
+
+    draw_math_function2();
+    glFlush();  // 執行繪圖命令
+
+}
+
+void display3()
+{
+
+}
+
+void display4()
+{
+
+}
+
+void display5()
+{
+
+}
+
+void display6()
+{
+
+}
+
+void display7()
+{
+
+}
+
+void display8()
+{
+
+}
+
+void display9()
+{
+
+}
+
 // 繪圖回調函數
 void display(void)
 {
     if (display_mode == 0)
     {
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
-        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
-
-        printf("無畫面, TBD, display_mode = %d\n", display_mode);
-
-        //設定預設大小...  TBD
+        reset_default_setting();
     }
     else if (display_mode == 1)
     {
-
-        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
-
-        draw_boundary(color_y, 0.9f); //畫視窗邊界
-
-        draw_math_function1();
+        display1();
     }
     else if (display_mode == 2)
     {
-        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
-
-        draw_boundary(color_y, 0.9f); //畫視窗邊界
-
-        draw_math_function2();
+        display2();
     }
     else if (display_mode == 3)
     {
-
-
+        display3();
     }
-
+    else if (display_mode == 4)
+    {
+        display4();
+    }
+    else if (display_mode == 5)
+    {
+        display5();
+    }
+    else if (display_mode == 6)
+    {
+        display6();
+    }
+    else if (display_mode == 7)
+    {
+        display7();
+    }
+    else if (display_mode == 8)
+    {
+        display8();
+    }
+    else if (display_mode == 9)
+    {
+        display9();
+    }
+    else
+    {
+        printf("XXXXXXXXXXXXXXXXXXXXX\n");
+    }
     glFlush();  // 執行繪圖命令
+    glutSwapBuffers();  // 將後緩沖區繪製到前臺
 }
 
 void keyboard(unsigned char key, int /*x*/, int /*y*/)
 {
+    //printf("你所按按鍵的碼是%x\t此時視窗內的滑鼠座標是(%d,%d)\n", key, x, y);
+
     switch (key)
     {
     case 27:
+    case 'q':
+    case 'Q':
+        //離開視窗
         glutDestroyWindow(glutGetWindow());
         return;
+        break;
+    case ' ':
+        if (full_screen == 0)
+        {
+            full_screen = 1;
+            printf("全螢幕\n");
+            glutFullScreen();   //全螢幕顯示
+        }
+        else
+        {
+            //恢復成一般螢幕, 有問題
+            full_screen = 0;
+            printf("一般螢幕\n");
+            glutInitWindowSize(600, 600);       // 設定視窗大小
+            glutInitWindowPosition(1100, 200);  // 設定視窗位置
+        }
         break;
     case '0':
         display_mode = 0;
@@ -190,42 +285,18 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
         display_mode = 9;
         break;
     }
-
     glutPostRedisplay();    //將當前視窗打上標記，標記其需要再次顯示。
-
-    char info[10];
-    //sprintf(info, "%d", (char)display_mode);  //過時, x64不能用
-    sprintf_s(info, sizeof(info), "%d", display_mode);
-    glutSetWindowTitle(info);
-}
-
-void timerEvent(int value)
-{
-    //printf("%d ", display_mode);
-
-    if (display_mode == 3)
-    {
-        printf("經過1秒 ");
-        //glutPostRedisplay();
-
-    }
-    glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
 }
 
 int main(int argc, char** argv)
 {
-    const char* windowName = "OpenGL測試";
-    const char* message = "OpenGL測試\n";
+    const char* windowName = "簡單2D OpenGL畫圖 0 ~ 9";
+    const char* message = "簡單2D OpenGL畫圖 0 ~ 9\n";
     common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard);
-
-    glutMouseFunc(mouse0);      //設定callback function
-    glutMotionFunc(motion0);    //設定callback function
-    glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
-
-    printf("按 1 2 控制\n");
 
     glutMainLoop();	//開始主循環繪製
 
     return 0;
 }
+
 
