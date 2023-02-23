@@ -175,7 +175,7 @@ void idle(void)
 			theta[axis] += dd;
 			if (theta[axis] > 360.0f)
 			{
-				theta[axis] = 0.0f;
+				theta[axis] -= 360.0f;
 			}
 		}
 		else   //CCW
@@ -183,7 +183,7 @@ void idle(void)
 			theta[axis] -= dd;
 			if (theta[axis] < 0.0f)
 			{
-				theta[axis] = 360.0f;
+				theta[axis] += 360.0f;
 			}
 		}
 		glutPostRedisplay();

@@ -109,13 +109,18 @@ void display(void)
     }
 
     glColor3f(0.0f, 0.0f, 0.0f);   //黑線
-    for (j = 0; j < number_of_points; j += 3)
+
+    //number_of_points = 51;
+    for (j = 0; j < number_of_points; j += 3)   //每間隔2點算一次
     {
-        //GLAPI void GLAPIENTRY glMap1f(GLenum target, GLfloat u1, GLfloat u2, GLint stride, GLint order, const GLfloat *points);
+        //printf("j=%d v = %f ", j, points[j][0]);
+
+                 //target,        u1,  u2,  stride, order, *points
         glMap1f(GL_MAP1_VERTEX_3, 0.0, STEPS, 3, 4, &points[j][0]);
         glBegin(GL_LINE_STRIP);
         for (i = 0; i <= STEPS; i++)
         {
+            //0~20, 共21次
             glEvalCoord1f((float)i);
         }
         glEnd();

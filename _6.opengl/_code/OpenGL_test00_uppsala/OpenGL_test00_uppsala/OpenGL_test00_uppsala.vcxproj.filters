@@ -18,7 +18,7 @@
     <ClCompile Include="..\..\Common.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
-    <ClCompile Include="18.evaluator.cpp">
+    <ClCompile Include="01.test_syntax.cpp">
       <Filter>來源檔案</Filter>
     </ClCompile>
   </ItemGroup>

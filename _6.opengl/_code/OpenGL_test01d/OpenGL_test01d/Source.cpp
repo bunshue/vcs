@@ -106,7 +106,7 @@ void mouse(int button, int state, int x, int y)
     }
     else
     {
-        printf("button = %d, state = %d\n", button, state);
+        printf("其他滑鼠動作 %d %d @(%d, %d)\t", button, state, x, y);
     }
 }
 
