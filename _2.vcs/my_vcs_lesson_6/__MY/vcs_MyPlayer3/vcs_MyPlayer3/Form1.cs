@@ -78,6 +78,9 @@ namespace vcs_MyPlayer3
         RichTextBox richTextBox1 = new RichTextBox();
         Panel panel1 = new Panel();
 
+        Timer timer_display = new Timer();
+        Timer timer1 = new Timer();
+
         //在控件上加ToolTip
         ToolTip tooltip = new ToolTip();
 
@@ -114,6 +117,12 @@ namespace vcs_MyPlayer3
             this.richTextBox1.Location = new System.Drawing.Point(0, debug_panel_height / 2);
             this.richTextBox1.Size = new System.Drawing.Size(debug_panel_width, debug_panel_height / 2);
             this.panel1.Controls.Add(this.richTextBox1);
+
+            timer_display.Interval = 100;
+            timer_display.Tick += new EventHandler(timer_display_Tick);
+            timer1.Interval = 200;
+            timer1.Enabled = true;
+            timer1.Tick += new EventHandler(timer1_Tick);
 
             if (flag_debug_mode == false)
             {
@@ -665,6 +674,7 @@ namespace vcs_MyPlayer3
             {
                 mp3_filename = Properties.Settings.Default.mp3_filename;
                 mp3_position = Properties.Settings.Default.position;
+                //richTextBox1.Text += "取得上次的播放模式 : " + Properties.Settings.Default.mp3_playing.ToString() + "\n";
                 flag_display_mode = MODE_0;
                 if (File.Exists(mp3_filename) == true)
                 {
@@ -717,6 +727,11 @@ namespace vcs_MyPlayer3
             if (File.Exists(mp3_filename) == true)
             {
                 axWindowsMediaPlayer1.URL = mp3_filename;
+                if (Properties.Settings.Default.mp3_playing != (int)WMPLib.WMPPlayState.wmppsPlaying)
+                {
+                    axWindowsMediaPlayer1.Ctlcontrols.stop();
+                    this.panel1.BackColor = Color.LightGray;
+                }
 
                 mp3_filename_short = Path.GetFileName(mp3_filename);
                 current_directory = Path.GetDirectoryName(mp3_filename);
@@ -1329,17 +1344,20 @@ namespace vcs_MyPlayer3
             {
                 axWindowsMediaPlayer1.Ctlcontrols.pause();
                 show_main_message1("暫停", S_OK, 100);
+                this.panel1.BackColor = Color.LightGray;
             }
             else
             {
                 axWindowsMediaPlayer1.Ctlcontrols.play();
                 show_main_message1("播放", S_OK, 30);
+                this.panel1.BackColor = Color.Pink;
             }
         }
 
         void do_open_pdf()	//開啟pdf檔案
         {
             show_main_message1("開啟pdf檔案", S_OK, 30);
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Title = "開啟pdf檔案";
             openFileDialog1.FileName = "";              //預設開啟的檔名
             openFileDialog1.DefaultExt = "*.pdf";
@@ -1387,6 +1405,7 @@ namespace vcs_MyPlayer3
         void do_open_mp3()	//開啟mp3檔案
         {
             show_main_message1("開啟mp3檔案", S_OK, 30);
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Title = "開啟mp3檔案";
             openFileDialog1.FileName = "";              //預設開啟的檔名
             openFileDialog1.DefaultExt = "*.mp3";
@@ -1482,6 +1501,7 @@ namespace vcs_MyPlayer3
         void do_open_files()	//開啟 pdf或mp3 檔案
         {
             show_main_message1("開啟mp3/pdf檔案", S_OK, 30);
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
             openFileDialog1.Title = "開啟mp3/pdf檔案";
             openFileDialog1.FileName = "";              //預設開啟的檔名
             openFileDialog1.DefaultExt = "*.mp3";
@@ -1525,6 +1545,7 @@ namespace vcs_MyPlayer3
             Properties.Settings.Default.mp3_filename = mp3_filename;
             Properties.Settings.Default.position = mp3_position;
             Properties.Settings.Default.volume = mp3_volume;
+            Properties.Settings.Default.mp3_playing = (int)axWindowsMediaPlayer1.playState;
             Properties.Settings.Default.pdf_filename = pdf_filename;
             Properties.Settings.Default.pdf_page = pdf_page;
 
@@ -1561,8 +1582,8 @@ namespace vcs_MyPlayer3
             p = new Pen(foreground_color, 3);
             sb = new SolidBrush(foreground_color);
 
-            int xx;
-            int yy;
+            //int xx;
+            //int yy;
             Point[] points;
 
             if (type == ICON_PLAY_PAUSE)    //播放/暫停
@@ -1659,8 +1680,6 @@ namespace vcs_MyPlayer3
         }
     }
 }
-
-
 
 
 /*

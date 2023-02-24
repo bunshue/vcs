@@ -82,5 +82,17 @@ namespace vcs_MyPlayer3.Properties {
                 this["pdf_page"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int mp3_playing {
+            get {
+                return ((int)(this["mp3_playing"]));
+            }
+            set {
+                this["mp3_playing"] = value;
+            }
+        }
     }
 }

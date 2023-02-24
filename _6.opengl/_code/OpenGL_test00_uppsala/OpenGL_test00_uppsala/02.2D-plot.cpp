@@ -164,25 +164,7 @@ void print_data(void)
     }
 }
 
-void reset_default_setting()
-{
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
-    glClear(GL_COLOR_BUFFER_BIT);   //清除背景
-    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();	//設置單位矩陣
-    gluOrtho2D(-1, 1, -1, 1); //窗口座標範圍, 2D
-
-    glLineWidth(1.0f);	//設定線寬
-
-    char info[10];
-    //sprintf(info, "%d", (char)display_mode);  //過時, x64不能用
-    sprintf_s(info, sizeof(info), "%d", display_mode);
-    glutSetWindowTitle(info);
-}
-
-void display(void)
+void make_data(int display_mode)
 {
     if (display_mode == 0)
     {
@@ -204,93 +186,136 @@ void display(void)
     {
         make_data_4_file(data_filename);    //製作資料4. 讀檔案
     }
-    find_data_boundary();
-    //print_data();
 
+    if (display_mode < 5)
+    {
+        find_data_boundary();
+        //print_data();
+    }
+
+}
+
+void reset_default_setting()
+{
+    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
+    glClear(GL_COLOR_BUFFER_BIT);   //清除背景
+    //glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();	//設置單位矩陣
+    gluOrtho2D(-1, 1, -1, 1); //窗口座標範圍, 2D
+
+    glLineWidth(1.0f);	//設定線寬
+
+    char info[10];
+    //sprintf(info, "%d", (char)display_mode);  //過時, x64不能用
+    sprintf_s(info, sizeof(info), "%d", display_mode);
+    glutSetWindowTitle(info);
+}
+
+void display1234(void)
+{
+    reset_default_setting();
+
+    glClear(GL_COLOR_BUFFER_BIT);   //全圖黑色
+    glClearColor(1.0, 1.0, 1.0, 0.0);   //白色背景
+
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();   //設置單位矩陣
+
+    //gluOrtho2D(-0.5f, 1.1f, -0.5f, 1.1f);   //設定座標範圍 2D
+    gluOrtho2D(minx, maxx, miny, maxy);
+    printf("窗口座標範圍2D, 顯示範圍 : X軸(%f ~ %f) Y軸(%f ~ %f), 左下為原點\n", minx, maxx, miny, maxy);
+
+    glClearColor(1.0, 1.0, 1.0, 0.0);   //背景白色
+    glColor3f(1.0, 0.0, 0.0);           //畫筆紅色
+
+    //畫X標記
+    glBegin(GL_LINES);
+    float markd = 0.01f;
+    for (int i = 0; i < number_of_points; i++)
+    {
+        glVertex2d(points[i].x - markd, points[i].y - markd);   //左下
+        glVertex2d(points[i].x + markd, points[i].y + markd);   //右上
+        glVertex2d(points[i].x - markd, points[i].y + markd);   //左上
+        glVertex2d(points[i].x + markd, points[i].y - markd);   //右下
+    }
+    glEnd();
+
+    //畫連線
+    glBegin(GL_LINE_STRIP);
+    for (int i = 0; i < number_of_points; i++)
+    {
+        glVertex2f(points[i].x, points[i].y);
+    }
+    glEnd();
+
+    /*
+    //待比較
+    //畫連線
+    glBegin(GL_LINES);
+    for (int i = 0; i < (number_of_points - 1); i++)
+    {
+        glVertex2d(points[i].x, points[i].y);
+        glVertex2d(points[i + 1].x, points[i + 1].y);
+    }
+    glEnd();
+    */
+
+    //畫點
+    for (int i = 0; i < number_of_points; i++)
+    {
+        draw_point(color_g, 10, points[i].x, points[i].y);
+    }
+
+    //畫外框
+    //draw_rectangle(color_m, 10, minx, miny, xrange - 10, yrange - 1);    //左下開始 w h
+    printf("取得 X 範圍(%0.10f ~ %0.10f), range : %0.10f\n", minx, maxx, xrange);
+    printf("取得 Y 範圍(%0.10f ~ %0.10f), range : %0.10f\n", miny, maxy, yrange);
+    printf("rectangle %0.10f  %0.10f  %0.10f  %0.10f\n", minx, miny, xrange - 10, yrange - 1);
+
+    glFlush();  // 執行繪圖命令
+}
+
+void display5(void)
+{
+
+}
+
+void display6(void)
+{
+
+}
+
+void display7(void)
+{
+
+}
+
+void display8(void)
+{
+
+}
+
+void display9(void)
+{
+
+}
+
+void display(void)
+{
     if (display_mode == 0)
     {
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);   //設置背景色 與 透明度, Black
-        glClear(GL_COLOR_BUFFER_BIT);   //清除背景
-
-        printf("無畫面, TBD, display_mode = %d\n", display_mode);
-
-        //設定預設大小...  TBD
-    }
-    else if (display_mode <5)
-    {
         reset_default_setting();
-
-        glClear(GL_COLOR_BUFFER_BIT);   //全圖黑色
-        glClearColor(1.0, 1.0, 1.0, 0.0);   //白色背景
-
-        glMatrixMode(GL_PROJECTION);
-        glLoadIdentity();   //設置單位矩陣
-
-        //gluOrtho2D(-0.5f, 1.1f, -0.5f, 1.1f);   //設定座標範圍 2D
-        gluOrtho2D(minx, maxx, miny, maxy);
-        printf("窗口座標範圍2D, 顯示範圍 : X軸(%f ~ %f) Y軸(%f ~ %f), 左下為原點\n", minx, maxx, miny, maxy);
-
-        glClearColor(1.0, 1.0, 1.0, 0.0);   //背景白色
-        glColor3f(1.0, 0.0, 0.0);           //畫筆紅色
-
-        //畫X標記
-        glBegin(GL_LINES);
-        float markd = 0.01f;
-        for (int i = 0; i < number_of_points; i++)
-        {
-            glVertex2d(points[i].x - markd, points[i].y - markd);   //左下
-            glVertex2d(points[i].x + markd, points[i].y + markd);   //右上
-            glVertex2d(points[i].x - markd, points[i].y + markd);   //左上
-            glVertex2d(points[i].x + markd, points[i].y - markd);   //右下
-        }
-        glEnd();
-
-        //畫連線
-        glBegin(GL_LINE_STRIP);
-        for (int i = 0; i < number_of_points; i++)
-        {
-            glVertex2f(points[i].x, points[i].y);
-        }
-        glEnd();
-
-        /*
-        //待比較
-        //畫連線
-        glBegin(GL_LINES);
-        for (int i = 0; i < (number_of_points - 1); i++)
-        {
-            glVertex2d(points[i].x, points[i].y);
-            glVertex2d(points[i + 1].x, points[i + 1].y);
-        }
-        glEnd();
-        */
-
-        //畫點
-        for (int i = 0; i < number_of_points; i++)
-        {
-            draw_point(color_g, 10, points[i].x, points[i].y);
-        }
-
-        //畫外框
-        //draw_rectangle(color_m, 10, minx, miny, xrange - 10, yrange - 1);    //左下開始 w h
-        printf("取得 X 範圍(%0.10f ~ %0.10f), range : %0.10f\n", minx, maxx, xrange);
-        printf("取得 Y 範圍(%0.10f ~ %0.10f), range : %0.10f\n", miny, maxy, yrange);
-        printf("rectangle %0.10f  %0.10f  %0.10f  %0.10f\n", minx, miny, xrange - 10, yrange - 1);
-
-        glFlush();  // 執行繪圖命令
+    }
+    else if (display_mode < 5)
+    {
+        display1234();
     }
     else if (display_mode == 5)
     {
         reset_default_setting();
-
-
-
-
-
-
     }
-    glFlush();  //強制刷新緩存區
-    glutSwapBuffers();  // 將後緩沖區繪製到前臺
 }
 
 void keyboard(unsigned char key, int /*x*/, int /*y*/)
@@ -338,6 +363,7 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
     case '?':
         break;
     }
+    make_data(display_mode);
     glutPostRedisplay();    //將當前視窗打上標記，標記其需要再次顯示。
 }
 
@@ -354,10 +380,9 @@ int main(int argc, char** argv)
 
     //glutIdleFunc(idle);
 
+    make_data(display_mode);
+
     glutMainLoop();	//開始主循環繪製
 
     return 0;
 }
-
-
-

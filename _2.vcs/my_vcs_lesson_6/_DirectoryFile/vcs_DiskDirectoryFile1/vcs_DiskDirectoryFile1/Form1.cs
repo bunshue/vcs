@@ -330,7 +330,7 @@ namespace vcs_DiskDirectoryFile1
             else
                 richTextBox1.Text += "檔案: " + filename1 + " 存在\n";
 
-            if (System.IO.File.Exists(filename2) == false)  //確認檔案是否存在
+            if (File.Exists(filename2) == false)  //確認檔案是否存在
                 richTextBox1.Text += "檔案: " + filename2 + " 不存在\n";
             else
                 richTextBox1.Text += "檔案: " + filename2 + " 存在\n";
@@ -630,9 +630,9 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_file11_Click(object sender, EventArgs e)
         {
-            string RandomFileName = System.IO.Path.GetRandomFileName();
+            string RandomFileName = Path.GetRandomFileName();
             richTextBox1.Text += "建立隨機檔案: " + RandomFileName + "\n";
-            string TempFileName = System.IO.Path.GetTempFileName();
+            string TempFileName = Path.GetTempFileName();
             richTextBox1.Text += "建立暫存檔案: " + TempFileName + "\n";
 
         }
@@ -1140,7 +1140,7 @@ namespace vcs_DiskDirectoryFile1
                 cbuffer[i] = (byte)i;
 
             // 建立檔案串流
-            System.IO.FileStream fileStream = new FileStream(filename4, FileMode.OpenOrCreate, FileAccess.Write);
+            FileStream fileStream = new FileStream(filename4, FileMode.OpenOrCreate, FileAccess.Write);
             //byte[] byteSave = Encoding.ASCII.GetBytes(txtHTML.Text.ToString());
 
             // 以FileStream類別的Write方法將HTML內容寫入檔案中
@@ -1184,7 +1184,7 @@ namespace vcs_DiskDirectoryFile1
         {
             //string wmi_data_filename = "wmi-" + DateTime.Now.ToString("yyyy-MMdd-HHmm") + ".txt";
             string wmi_data_filename = "C:\\vcs-" + DateTime.Now.ToString("yyyy-MMdd-HHmm") + ".txt";
-            if (System.IO.File.Exists(wmi_data_filename) == false)
+            if (File.Exists(wmi_data_filename) == false)
             {
                 MessageBox.Show("檔案 " + wmi_data_filename + " 不存在，製作一個。");
                 StreamWriter sw = File.CreateText(wmi_data_filename);
@@ -1207,7 +1207,7 @@ namespace vcs_DiskDirectoryFile1
             string fullpath;
             FileStream fs;
 
-            folderpath = System.IO.Directory.GetCurrentDirectory();
+            folderpath = Directory.GetCurrentDirectory();
             richTextBox1.Text += "目前路徑: " + folderpath + "\n";
 
             // 使用現在時間建立檔案名稱
@@ -1234,20 +1234,20 @@ namespace vcs_DiskDirectoryFile1
             string path = @"C:\______test_files\";
             string fileName = "filewrite.txt";
 
-            if (!System.IO.Directory.Exists(path))
+            if (!Directory.Exists(path))
             {
                 richTextBox1.Text += "路徑不存在，建立之。\n";
-                System.IO.Directory.CreateDirectory(path);
+                Directory.CreateDirectory(path);
             }
-            if (!System.IO.File.Exists(path + fileName))
+            if (!File.Exists(path + fileName))
             {
                 richTextBox1.Text += "檔案不存在，建立之。\n";
-                FileStream fs = System.IO.File.Create(path + fileName);
+                FileStream fs = File.Create(path + fileName);
                 fs.Close();
             }
-            using (StreamWriter w = System.IO.File.AppendText(path + fileName))
+            using (StreamWriter w = File.AppendText(path + fileName))
             {
-                //System.IO.File.SetAttributes(path + fileName, FileAttributes.Hidden);//隱藏
+                //File.SetAttributes(path + fileName, FileAttributes.Hidden);//隱藏
                 w.WriteLine(richTextBox1.Text, Encoding.Default);
                 richTextBox1.Text += "寫入檔案完成\n";
             }
@@ -1357,7 +1357,7 @@ namespace vcs_DiskDirectoryFile1
                 {
                     richTextBox1.LoadFile(openFileDialog1.FileName, RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
                 }
-                catch (System.IO.FileNotFoundException)
+                catch (FileNotFoundException)
                 {
                     MessageBox.Show("找不到檔案");
                 }
@@ -1570,18 +1570,18 @@ namespace vcs_DiskDirectoryFile1
         {
             message = "";
 
-            System.IO.DriveInfo di = new System.IO.DriveInfo(@"C:\______test_files");
+            DriveInfo di = new DriveInfo(@"C:\______test_files");
 
             // Get the root directory and print out some information about it.
-            System.IO.DirectoryInfo dirInfo = di.RootDirectory;
+            DirectoryInfo dirInfo = di.RootDirectory;
             message += "data: ";
             message += dirInfo.Attributes.ToString();
             message += Environment.NewLine;
 
             // Get the files in the directory and print out some information about them.
-            System.IO.FileInfo[] fileNames = dirInfo.GetFiles("*.*");
+            FileInfo[] fileNames = dirInfo.GetFiles("*.*");
 
-            foreach (System.IO.FileInfo fi in fileNames)
+            foreach (FileInfo fi in fileNames)
             {
                 message += "data: ";
                 message += fi.Name + "   " + fi.LastAccessTime + "   " + fi.Length;
@@ -1591,9 +1591,9 @@ namespace vcs_DiskDirectoryFile1
             // Get the subdirectories directly that is under the root.
             // See "How to: Iterate Through a Directory Tree" for an example of how to
             // iterate through an entire tree.
-            System.IO.DirectoryInfo[] dirInfos = dirInfo.GetDirectories("*.*");
+            DirectoryInfo[] dirInfos = dirInfo.GetDirectories("*.*");
 
-            foreach (System.IO.DirectoryInfo d in dirInfos)
+            foreach (DirectoryInfo d in dirInfos)
             {
                 message += "data: " + "   " + d.Name;
                 message += Environment.NewLine;
@@ -1928,7 +1928,6 @@ namespace vcs_DiskDirectoryFile1
             {
                 richTextBox1.Text += filename + "\n";
             }
-
         }
 
         // Search for files matching the patterns.
