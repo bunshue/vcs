@@ -60,17 +60,121 @@ void display1(void)
     glFlush();  // 執行繪圖命令
 }
 
+#define W 128
+#define H 128
+
 void display2(void)
 {
     reset_default_setting();
 
+    int i = 0;
+    int j = 0;
+    unsigned char ubImage[W * H * 4];
+    unsigned char* img;
+
+    /* Create image */
+    img = ubImage;
+    for (j = 0; j < 32 * W; j++)
+    {
+        //紅
+        *img++ = 0xff;  //A
+        *img++ = 0x00;  //B
+        *img++ = 0x00;  //G
+        *img++ = 0xff;  //R
+    }
+
+    for (j = 0; j < 32 * W; j++)
+    {
+        //綠
+        *img++ = 0xff;  //A
+        *img++ = 0x00;  //B
+        *img++ = 0xff;  //G
+        *img++ = 0x00;  //R
+    }
+
+    for (j = 0; j < 32 * W; j++)
+    {
+        //藍
+        *img++ = 0xff;  //A
+        *img++ = 0xff;  //B
+        *img++ = 0x00;  //G
+        *img++ = 0x00;  //R
+    }
+
+    for (j = 0; j < 32 * W; j++)
+    {
+        //黃
+        *img++ = 0x00;  //A
+        *img++ = 0x00;  //B
+        *img++ = 0xff;  //G
+        *img++ = 0xff;  //R
+    }
+
+    //           w  h     format        type           pixels
+    glDrawPixels(W, H, GL_ABGR_EXT, GL_UNSIGNED_BYTE, ubImage);
+
     glFlush();  // 執行繪圖命令
+}
+
+#define    WW 256
+#define    HH 256
+unsigned char image_data[HH][WW][3];
+
+float zoomFactor = 0.7f;
+int height;
+
+void makeImageData(void)
+{
+    int i, j, c;
+
+    for (i = 0; i < HH; i++)
+    {
+        for (j = 0; j < WW; j++)
+        {
+            c = (i + j) / 2;
+            image_data[i][j][0] = (unsigned char)c;
+            image_data[i][j][1] = (unsigned char)c;
+            image_data[i][j][2] = (unsigned char)c;
+        }
+    }
 }
 
 void display3(void)
 {
     reset_default_setting();
 
+    glClearColor(0.0, 0.0, 0.0, 0.0);
+    glShadeModel(GL_FLAT);
+    makeImageData();
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
+    glClear(GL_COLOR_BUFFER_BIT);   //清除背景
+
+    //glRasterPos2i(0, 0);
+    glRasterPos2f(-0.9f, -0.9f);
+    glDrawPixels(WW, HH, GL_RGB, GL_UNSIGNED_BYTE, image_data);
+    //           W, H, format,       type,         pixels
+
+    //glPixelZoom(zoomFactor, zoomFactor);  //縮放圖片, 水平3倍, 垂直3倍
+
+    glRasterPos2f(0.0f, 0.0f);
+    //複製圖片, 從(0,0)複製WXH
+    glCopyPixels(0, 0, WW, HH, GL_COLOR);    //有Zoom之後要做很久
+
+    glFlush();
+
+    /*  TBD
+    int W = 100;
+    int H = 100;
+    GLushort* points = (GLushort*)calloc(W * H, sizeof(GLushort));
+    memset(points, 13, sizeof(GLushort) * W * H);   //给*p指定的前100字节大小的内存空间设置为(只支持0, 1，以字节为单位赋初始值)
+
+    //setup locations
+    glRasterPos2f(-0.9f, -0.9f);
+    glDrawPixels(W, H, GL_COLOR_INDEX, GL_UNSIGNED_SHORT, points);
+
+    //glDrawPixels(128, 128, GL_ABGR_EXT, GL_UNSIGNED_BYTE, ubImage);
+    */
     glFlush();  // 執行繪圖命令
 }
 

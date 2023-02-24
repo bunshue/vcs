@@ -24,72 +24,111 @@ void reset_default_setting()
 
 void display1(void)
 {
-    //畫一個矩形 R
-    glColor4f(1.0, 0.0, 0.0, 1.0);  //設置畫筆顏色為 R
-    //左下x,左下y,右上x,右上y,
-    glRectf(-0.9f, -0.9f, -0.3f, 0.9f);//畫一個矩形
+    float width = 1.0f;
+    glLineWidth(width);         //設定線寬
 
-    ////畫一個矩形 G
-    glColor4f(0.0, 1.0, 0.0, 1.0);  //設置畫筆顏色為 G
-    //左下x,左下y,右上x,右上y,
-    glRectf(-0.4f, -0.8f, 0.4f, 0.8f);//畫一個矩形
+    double size = 0.4;
 
-    //畫一個矩形 B
-    glColor4f(0.0, 0.0, 1.0, 1.0);  //設置畫筆顏色為 B
-    //左下x,左下y,右上x,右上y,
-    glRectf(0.3f, -0.7f, 0.7f, 0.7f);//畫一個矩形
+    glTranslatef(0.0f, 0.5f, 0.0f);		//平移至指定地方(累積)
+    glutWireTeapot(size);       //畫茶壺, 線框
 
-    float x_st = -0.9f;
-    float y_st = 0.1f;
-    const char str1[30] = "draw_string_test 1";
-    draw_string1(str1, color_c, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
+    glTranslatef(0.0f, -1.0f, 0.0f);		//平移至指定地方(累積)
+    glutSolidTeapot(size);    //畫茶壺, 實心
 
-    x_st = -0.9f;
-    y_st = -0.1f;
-    const char str2[30] = "draw_string_test 2";
-    draw_string2(str2, color_c, GLUT_BITMAP_TIMES_ROMAN_24, x_st, y_st);
-
-    draw_boundary(color_y, 0.9f); //畫視窗邊界
+    glTranslatef(0.0f, 0.5f, 0.0f);		//平移至指定地方(累積)
+    draw_boundary(color_y, 0.96f); //畫視窗邊界
 }
 
 void display2(void)
 {
+    double size = 0.4f;
 
+    glTranslatef(0.0f, 0.5f, 0.0f);		//平移至指定地方(累積)
+    glutWireCube(size);       //畫茶壺, 線框
+
+    glTranslatef(0.0f, -1.0f, 0.0f);		//平移至指定地方(累積)
+    glutSolidCube(size);    //畫茶壺, 實心
+
+    glTranslatef(0.0f, 0.5f, 0.0f);		//平移至指定地方(累積)
+    draw_boundary(color_y, 0.96f); //畫視窗邊界
 }
 
 void display3(void)
 {
+    double radius = 0.4f;
+    int slices = 20;
+    int stacks = 10;
 
+    glTranslatef(0.0f, 0.5f, 0.0f);		//平移至指定地方(累積)
+    glutWireSphere(radius, slices, stacks); //畫 網格 球
+
+    glTranslatef(0.0f, -1.0f, 0.0f);		//平移至指定地方(累積)
+    glutSolidSphere(radius, slices, stacks); //畫 實心 球
+
+    glTranslatef(0.0f, 0.5f, 0.0f);		//平移至指定地方(累積)
+    draw_boundary(color_y, 0.96f); //畫視窗邊界
 }
 
 void display4(void)
 {
+    double base = 0.3;
+    double height = 0.4;
+    int slices = 20;
+    int stacks = 10;
 
+    glTranslatef(0.0f, 0.5f, 0.0f);		//平移至指定地方(累積)
+    glutWireCone(base, height, slices, stacks); //畫 網格 圓錐
+
+    glTranslatef(0.0f, -1.0f, 0.0f);		//平移至指定地方(累積)
+    glutSolidCone(base, height, slices, stacks); ////畫 實心 圓錐
+
+    glTranslatef(0.0f, 0.5f, 0.0f);		//平移至指定地方(累積)
+    draw_boundary(color_y, 0.96f); //畫視窗邊界
 }
 
 void display5(void)
 {
+    GLdouble innerRadius = 0.2;
+    GLdouble outerRadius = 0.3;
+    int sides = 10;
+    int rings = 10;
 
+    glTranslatef(0.0f, 0.5f, 0.0f);		//平移至指定地方(累積)
+    glutWireTorus(innerRadius, outerRadius, sides, rings);  //畫 網格 環形曲面
+
+    glTranslatef(0.0f, -1.0f, 0.0f);		//平移至指定地方(累積)
+    glutSolidTorus(innerRadius, outerRadius, sides, rings); //畫 實心 環形曲面
+
+    glTranslatef(0.0f, 0.5f, 0.0f);		//平移至指定地方(累積)
+    draw_boundary(color_y, 0.96f); //畫視窗邊界
 }
 
 void display6(void)
 {
-
+    //無大小, 滿框
+    glutWireDodecahedron(); //無畫面
+    glutSolidDodecahedron();    //無畫面
+    glutWireOctahedron();   //ok
+    //glutSolidOctahedron();    ok
 }
 
 void display7(void)
 {
-
+    //無大小, 滿框
+    glutWireTetrahedron();
+    //glutSolidTetrahedron();
 }
 
 void display8(void)
 {
-
+    //無大小, 滿框
+    glutWireIcosahedron();
+    //glutSolidIcosahedron();
 }
 
 void display9(void)
 {
-
+    //無大小, 滿框
 }
 
 // 繪圖回調函數
@@ -211,7 +250,7 @@ int main(int argc, char* argv[])
     const char* message = "繪製基本圖元 0 ~ 9\n";
     common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard);
 
-    glutMainLoop();	//開始主循環繪製     // Enter the event-processing loop
+    glutMainLoop();	//開始主循環繪製
 
     return 0;
 }
