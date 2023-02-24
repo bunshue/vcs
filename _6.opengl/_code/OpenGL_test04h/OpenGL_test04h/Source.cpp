@@ -3,16 +3,6 @@
 static int slices = 16;
 static int stacks = 16;
 
-const GLfloat light_ambient[] = { 0.0f, 0.0f, 0.0f, 1.0f };
-const GLfloat light_diffuse[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-const GLfloat light_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-const GLfloat light_position[] = { 2.0f, 5.0f, 5.0f, 0.0f };
-
-const GLfloat mat_ambient[] = { 0.7f, 0.7f, 0.7f, 1.0f };
-const GLfloat mat_diffuse[] = { 0.8f, 0.8f, 0.8f, 1.0f };
-const GLfloat mat_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
-const GLfloat high_shininess[] = { 100.0f };
-
 // 繪圖回調函數
 void display(void)
 {
@@ -23,57 +13,12 @@ void display(void)
 	glColor3d(1, 0, 0);
 
 	glPushMatrix();
-	glTranslated(-2.4, 1.2, -6);
-	draw_coordinates(1.1f);     //畫座標軸
-	glColor3d(1, 0, 0);
-	glRotated(60, 1, 0, 0);
-	glRotated(a, 0, 0, 1);	//轉動
-	glutSolidSphere(1, slices, stacks);	//畫 實心 球
-	glPopMatrix();
-
-	glPushMatrix();
-	glTranslated(0, 1.2, -6);
-	draw_coordinates(1.1f);     //畫座標軸
-	glColor3d(1, 0, 0);
-	glRotated(60, 1, 0, 0);
-	glRotated(a, 0, 0, 1);	//轉動
-	glutSolidCone(1, 1, slices, stacks);	//畫 實心 圓錐
-	glPopMatrix();
-
-	glPushMatrix();
-	glTranslated(2.4, 1.2, -6);
-	draw_coordinates(1.1f);     //畫座標軸
-	glColor3d(1, 0, 0);
-	glRotated(60, 1, 0, 0);
-	glRotated(a, 0, 0, 1);	//轉動
-	glutSolidTorus(0.2, 0.8, slices, stacks);	//畫 實心 環形曲面
-	glPopMatrix();
-
-	glPushMatrix();
 	glTranslated(-2.4, -1.2, -6);
 	draw_coordinates(1.1f);     //畫座標軸
 	glColor3d(1, 0, 0);
 	glRotated(60, 1, 0, 0);
 	glRotated(a, 0, 0, 1);	//轉動
 	glutWireSphere(1, slices, stacks);		//畫 網格 球
-	glPopMatrix();
-
-	glPushMatrix();
-	glTranslated(0, -1.2, -6);
-	draw_coordinates(1.1f);     //畫座標軸
-	glColor3d(1, 0, 0);
-	glRotated(60, 1, 0, 0);
-	glRotated(a, 0, 0, 1);	//轉動
-	glutWireCone(1, 1, slices, stacks);	//畫 網格 圓錐
-	glPopMatrix();
-
-	glPushMatrix();
-	glTranslated(2.4, -1.2, -6);
-	draw_coordinates(1.1f);     //畫座標軸
-	glColor3d(1, 0, 0);
-	glRotated(60, 1, 0, 0);
-	glRotated(a, 0, 0, 1);	//轉動
-	glutWireTorus(0.2, 0.8, slices, stacks);	//畫 網格 環形曲面
 	glPopMatrix();
 
 	glFlush();  // 執行繪圖命令
@@ -128,38 +73,13 @@ static void idle(void)
 
 int main(int argc, char** argv)
 {
-	glutInit(&argc, argv);
+	const char* windowName = "球體旋轉";
+	const char* message = "球體旋轉, 無控制, 按 Esc 離開\n";
+	common_setup(argc, argv, windowName, message, 0, 640, 480, 1100, 200, display, reshape, keyboard);
 
-	glutInitDisplayMode(GLUT_RGB | GLUT_SINGLE);
-
-	glutInitWindowSize(640, 480);		// 設定視窗大小
-	glutInitWindowPosition(1100, 200);	// 設定視窗位置
-
-	glutCreateWindow("球體旋轉");	//開啟視窗 並顯示出視窗 Title
-
-	glutDisplayFunc(display);	//設定callback function
-	glutReshapeFunc(reshape);	//設定callback function
-	glutKeyboardFunc(keyboard);	//設定callback function
 	glutIdleFunc(idle);			//設定callback function
 
-	glClearColor(1, 1, 1, 1);
-	glEnable(GL_CULL_FACE);
-	glCullFace(GL_BACK);
-
-	glEnable(GL_LIGHT0);
-	glEnable(GL_NORMALIZE);
-	glEnable(GL_COLOR_MATERIAL);
-	glEnable(GL_LIGHTING);
-
-	glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-	glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
-	glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-
-	glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
-	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
-	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
-	glMaterialfv(GL_FRONT, GL_SHININESS, high_shininess);
+	glClearColor(1, 1, 1, 1);	//白色背景
 
 	glutMainLoop();	//開始主循環繪製
 

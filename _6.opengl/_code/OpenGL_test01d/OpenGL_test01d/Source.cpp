@@ -136,17 +136,24 @@ void special(int key, int /*x*/, int /*y*/)
     }
 }
 
+void idle(void)
+{
+    //printf("idle");
+    glutPostRedisplay();
+}
+
+void cleanup(void)
+{
+    printf("\nclean up\n");
+}
+
+
 void timerEvent(int value)
 {
     time_elapsed++;
     printf("經過 %d 秒 ", time_elapsed);
     glutPostRedisplay();
     glutTimerFunc(REFRESH_DELAY, timerEvent, 0);
-}
-
-void cleanup(void)
-{
-    printf("\nclean up\n");
 }
 
 int main(int argc, char** argv)
@@ -158,6 +165,7 @@ int main(int argc, char** argv)
     glutMouseFunc(mouse);       //設定callback function
     glutMotionFunc(motion);     //設定callback function
     glutSpecialFunc(special);   //設定callback function
+    glutIdleFunc(idle);			//設定callback function
     glutCloseFunc(cleanup);     //設定callback function
 
     glutKeyboardUpFunc(keyboardup); //設定callback function

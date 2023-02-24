@@ -2,15 +2,11 @@
 
 void draw_something()
 {
-	draw_boundary(color_y, 2.3f); //畫視窗邊界
+	//draw_coordinates(0.8f);	//畫座標軸
+	//draw_teapot(color_c, 1.0, 0.45);	//畫一個茶壺
 
 	draw_coordinates(2.0);	//畫座標軸
-
 	draw_teapot(color_c, 1.0, 0.5);	//畫一個茶壺
-
-	glLineWidth(5);     //設定線寬
-	glColor3f(1.0, 1.0, 1.0);   //設定顏色
-	glutWireOctahedron();
 
 	glFlush();  // 執行繪圖命令
 
@@ -74,8 +70,8 @@ int main(int argc, char** argv)
 	glutMouseFunc(mouse_r);		//設定callback function
 	glutMotionFunc(motion_r);		//設定callback function
 
-	printf("按 0 : keydown means control the angle of the eye\n");
-	printf("按 1 : keydown means control the distance of the eye\n");
+	printf("按 0 : 用滑鼠拖曳旋轉\n");
+	printf("按 1 : 改變視點遠近\n");
 
 	glutMainLoop();	//開始主循環繪製
 

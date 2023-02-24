@@ -486,11 +486,55 @@ void display8()
 
     glColor4f(1.0, 0.0, 0.0, 1.0);
     glRectf(0.33f, 0.33f, 0.66f, 0.66f);
+
+    glFlush();  // 執行繪圖命令
 }
 
 void display9()
 {
+    reset_default_setting();
 
+    //立體
+
+    //立體畫點
+    //畫點
+    float size = 2.0;  //設定點的大小, N X N
+    float x_st = 0.0f;
+    float y_st = 0.0f;
+    float z_st = 0.0f;
+    float r = 0.7f;
+
+    //畫點
+    glColor3fv(color_r);    //設定顏色
+    glPointSize(size);		//設定點的大小, N X N
+    glBegin(GL_POINTS);
+    {
+        for (y_st = -r; y_st <= r; y_st += 0.03f)
+        {
+            for (x_st = -r; x_st <= r; x_st += 0.03f)
+            {
+                z_st = sqrt(r * r - x_st * x_st - y_st * y_st);
+                glVertex3f(x_st, y_st, z_st);
+                //glVertex3f(x_st, y_st, -z_st);
+            }
+        }
+    }
+    glEnd();
+
+    // 繪製三角形	3D
+    glBegin(GL_TRIANGLES);
+    float dd = 0.5f;
+    glColor3f(1, 0, 0);     //紅
+    glVertex3f(-dd, -dd, 0.3f); //左下
+
+    glColor3f(0, 1, 0);     //綠
+    glVertex3f(dd, -dd, 0.0f);  //右下
+
+    glColor3f(0, 0, 1);     //藍
+    glVertex3f(0, dd, -0.3f);   //上
+    glEnd();
+
+    glFlush();  // 執行繪圖命令
 }
 
 // 繪圖回調函數
@@ -610,7 +654,6 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
     case '9':
         display_mode = 9;
         break;
-
     }
     glutPostRedisplay();    //將當前視窗打上標記，標記其需要再次顯示。
 
