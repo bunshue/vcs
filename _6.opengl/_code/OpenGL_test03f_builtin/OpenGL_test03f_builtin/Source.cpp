@@ -135,6 +135,9 @@ void display9(void)
 void display(void)
 {
     reset_default_setting();
+
+    setup_rotation();
+
     if (display_mode == 0)
     {
     }
@@ -246,9 +249,13 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
 
 int main(int argc, char* argv[])
 {
-    const char* windowName = "繪製基本圖元 0 ~ 9";
-    const char* message = "繪製基本圖元 0 ~ 9\n";
+    const char* windowName = "OpenGL預設圖形大全 0 ~ 9";
+    const char* message = "OpenGL預設圖形大全 0 ~ 9\n";
     common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard);
+
+    glutMouseFunc(mouse_r);		//設定callback function
+    glutMotionFunc(motion_r);		//設定callback function
+    printf("用滑鼠拖曳旋轉\n");
 
     glutMainLoop();	//開始主循環繪製
 

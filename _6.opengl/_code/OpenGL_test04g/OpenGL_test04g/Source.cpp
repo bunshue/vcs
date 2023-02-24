@@ -36,21 +36,9 @@ void display(void)
 
 int main(int argc, char** argv)
 {
-    glutInit(&argc, argv);
-
-    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB);    //宣告顯示模式為 Single Buffer 和 RGBA
-
-    glutInitWindowSize(600, 600);       // 設定視窗大小
-    glutInitWindowPosition(1100, 200);  // 設定視窗位置
-
-    glutCreateWindow("Translate用法");	//開啟視窗 並顯示出視窗 Title
-
-    glutDisplayFunc(display);   //設定callback function
-    glutReshapeFunc(reshape0);   //設定callback function
-    glutKeyboardFunc(keyboard0); //設定callback function
-
-    printf("僅顯示, 無控制, 按 Esc 離開\n");
-    printf("\nTranslate用法\n");
+    const char* windowName = "Translate用法";
+    const char* message = "Translate用法, 僅顯示, 無控制, 按 Esc 離開\n";
+    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard0);
 
     glutMainLoop();	//開始主循環繪製
 

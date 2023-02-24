@@ -10,15 +10,17 @@ void display(void)
 	const double a = t * 90.0;
 
 	glClear(GL_COLOR_BUFFER_BIT);
-	glColor3d(1, 0, 0);
+	glClearColor(1, 1, 1, 1);	//白色背景
+
+	glColor3d(1, 0, 0);	//紅線
 
 	glPushMatrix();
-	glTranslated(-2.4, -1.2, -6);
-	draw_coordinates(1.1f);     //畫座標軸
+	glTranslated(0, 0, -6);
+	draw_coordinates(2.5f);     //畫座標軸
 	glColor3d(1, 0, 0);
 	glRotated(60, 1, 0, 0);
 	glRotated(a, 0, 0, 1);	//轉動
-	glutWireSphere(1, slices, stacks);		//畫 網格 球
+	glutWireSphere(2.0, slices, stacks);		//畫 網格 球
 	glPopMatrix();
 
 	glFlush();  // 執行繪圖命令
@@ -75,15 +77,11 @@ int main(int argc, char** argv)
 {
 	const char* windowName = "球體旋轉";
 	const char* message = "球體旋轉, 無控制, 按 Esc 離開\n";
-	common_setup(argc, argv, windowName, message, 0, 640, 480, 1100, 200, display, reshape, keyboard);
+	common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard);
 
 	glutIdleFunc(idle);			//設定callback function
-
-	glClearColor(1, 1, 1, 1);	//白色背景
 
 	glutMainLoop();	//開始主循環繪製
 
 	return 0;
 }
-
-

@@ -106,6 +106,7 @@ void keyboard_r(unsigned char key, int /*x*/, int /*y*/);
 void mouse_r(int button, int state, int x, int y);
 void motion_r(int x, int y);
 void setup_rotation();
+void setup_rotation2();
 
 //其他共用
 void common_setup(int argc, char** argv, const char* windowName, const char* message, const int display_mode, const int window_width, const int window_height, const int x_st, const int y_st, void (*disp)(void), void (*resh)(int, int), void (*key)(unsigned char, int, int));
