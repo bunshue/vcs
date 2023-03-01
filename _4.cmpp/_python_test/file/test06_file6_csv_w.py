@@ -1,10 +1,11 @@
-#python寫資料到CSV檔
+print("python寫資料到CSV檔")
+
 import csv
 
 #寫資料到TestCSVFileW.csv中
 filename_w = "TestCSVFileW.csv"
 
-#打開一個文件
+print("打開一個csv檔案 : "+filename_w)
 csvFile = open(filename_w, 'w+', newline='')
 try:
 #寫資料

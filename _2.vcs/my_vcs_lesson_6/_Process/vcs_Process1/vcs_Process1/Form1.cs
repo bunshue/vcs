@@ -503,7 +503,7 @@ namespace vcs_Process1
         {
             //在c#中，如果啟動了外部程序，一般也可以通過退出碼來確認程序的運行狀態：
 
-            Process process = Process.Start(@"C:\_git\vcs\_2.vcs\ims\imsLink\bin\Debug\imsLink.exe");
+            Process process = Process.Start(@"C:\_git\ims1\iMS_Link\iMS_Link\bin\Debug\iMS_Link.exe");
 
             process.WaitForExit();
             if (process.ExitCode == 0)

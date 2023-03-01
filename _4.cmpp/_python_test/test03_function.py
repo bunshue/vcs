@@ -1,6 +1,12 @@
 # 自定義函數
 
 
+import my_print  #把整個 my_print.py 都引進來
+print("測試導入自定義模組")
+my_print.print_func("Python")
+
+
+
 print("自定義函數")
 
 def mycnt1():
@@ -54,10 +60,23 @@ f(10)
 
 
 
+def add(x,y):
+    return x+y
 
-import my_print  #把整個 my_print.py 都引進來
-print("測試導入自定義模組")
-my_print.print_func("Python")
+z = add(1234,5678)
+print(z)
+
+
+
+#撰寫接受任意數目引數的函式
+def avg(first, *rest):
+    return (first + sum(rest)) / (1+len(rest))
+
+a = avg(1,2)
+b = avg(1,2,3,4)
+
+print("average 1", a, "\n")
+print("average 2", b, "\n")
 
 
 

@@ -42,7 +42,9 @@ data=urllib.request.urlopen(full_url).read()
 #data=data.decode('UTF-8')
 print(data)
 
-fd = open("b2.html", "wb")
+filename = "b2.html"
+print("抓取網頁資料 並存檔成 : "+filename)
+fd = open(filename, "wb")
 fd.write(data)
 fd.close()
 
