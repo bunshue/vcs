@@ -1,3 +1,5 @@
+# print data
+
 x = 3              # an integer stored (in variable x)
 f = 3.1415926      # a floating real point (in variable f)
 name = "Python"    # a string
@@ -126,9 +128,4 @@ def mysum(n1, n2):
     return n1 + n2
 
 print(mysum(10, 20))
-
-
-import os
-os.system("ls")
-os.system("pause")
 

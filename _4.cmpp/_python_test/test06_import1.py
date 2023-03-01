@@ -1,20 +1,36 @@
-#!/usr/bin/python
-# -*- coding: UTF-8 -*-    #告訴Python直譯器檔案編碼為UTF-8
- 
-print("你好，世界")
+# 各種import
 
 
 
-#filename = raw_input('檔名：')
-filename = "TestFileR.txt" 
-f = open(filename, 'r')
-b_str = f.read()
-f.close()
 
-print(b_str)
+print("每05秒打印一字)
 
-#print(b_str.decode('utf-8')) # 這是什麼？
-#print(b_str.decode('utf-8').encode('utf-8')) # 這是什麼？
+import time
+a = 0;
+while a < 5:
+    a += 1;
+    print("hello")
+    time.sleep(0.5)
+
+
+
+import os
+os.system("ls")
+os.system("pause")
+
+
+
+
+
+import my_print  #把整個 my_print.py 都引進來
+print("測試導入整個模組")
+my_print.print_func("Python")
+
+
+
+
+
+
 
 
 #圖形操作
@@ -37,15 +53,4 @@ r,g,b = im_sharp.split()
 #檢視圖形內嵌的EXIF資料
 exif_data = im._getexif()
 print(exif_data)
-
-
-
-
-
-
-
-
-
-
-
 

@@ -1,0 +1,37 @@
+# General IO
+
+print("歡迎光臨 Python")
+name = input('請問您的大名')
+print('Hi, %s.' % name)
+
+print("計算BMI")
+height = float(input("請輸入你的身高"))
+print ("取得身高 %s "%height )
+
+weight = float(input("請輸入你的體重"))
+print ("取得體重 %s" %weight )
+
+age = int(input("請輸入你的年齡"))
+print ("取得年齡 %s" %age )
+
+bmi = weight/(height*height);
+print ("你得 BMI 值%s" %bmi )
+
+if age<45:
+    if bmi<22:
+        print("Low")
+    else:
+        print("Medium")
+else:
+    if bmi<22:
+        print("Medium")
+    else:
+        print("High")
+    
+
+
+
+
+
+
+
