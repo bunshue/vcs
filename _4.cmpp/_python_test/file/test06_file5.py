@@ -33,34 +33,6 @@ files = os.listdir('.')
 print("列出所有檔案", files)
 
 
-
-#撰寫接受任意數目引數的函式
-def avg(first, *rest):
-    return (first + sum(rest)) / (1+len(rest))
-
-a = avg(1,2)
-b = avg(1,2,3,4)
-
-print("average 1", a, "\n")
-print("average 2", b, "\n")
-
-
-
-t = time.localtime()
-print(t)
-print("年" , t.tm_year)
-print("月" , t.tm_mon)
-print("日" , t.tm_mday)
-print("星" , t.tm_wday)
-print("時" , t.tm_hour)
-print("分" , t.tm_min)
-print("秒" , t.tm_sec)
-
-
-import sys
-print("目前路徑 : ", sys.path)
-
-
 import time
 def countdown(n):
     while n > 0:
@@ -69,16 +41,6 @@ def countdown(n):
         time.sleep(1)
 
 #countdown(1)
-
-
-def add(x,y):
-    return x+y
-
-z = add(1234,5678)
-print(z)
-
-
-
 
         
 

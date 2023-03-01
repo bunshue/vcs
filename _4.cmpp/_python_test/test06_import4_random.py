@@ -39,6 +39,18 @@ for count in range(10):
     print(random.choice(['a', 'b', 'c']))
 
 
+import random
+#values = [1,2,3,4,5,6]
+values = ['alpha','bravo','charlie','delta','echo','foxtrot']
+
+print(random.choice(values))
+print(random.choice(values))
+print(random.choice(values))
+print(random.choice(values))
+print(random.choice(values))
+print(random.choice(values))
+print(random.choice(values))
+
 
 
 

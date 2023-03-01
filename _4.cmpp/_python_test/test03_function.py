@@ -55,3 +55,11 @@ f(10)
 
 
 
+import my_print  #把整個 my_print.py 都引進來
+print("測試導入自定義模組")
+my_print.print_func("Python")
+
+
+
+
+

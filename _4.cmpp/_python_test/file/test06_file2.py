@@ -38,9 +38,3 @@ str = fo.read(10);  #讀10拜
 print("Read String is : ", str)
 # Close opend file
 fo.close()
-
-
-import os
-path = os.getcwd()
-print("current path is ", path)
-

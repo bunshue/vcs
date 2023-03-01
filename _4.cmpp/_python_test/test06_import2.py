@@ -1,6 +1,16 @@
 # 各種import
 
 
+import sys
+print("打印系統路徑")
+print(sys.path)
+
+
+import os
+os.system("ls")
+os.system("pause")
+
+
 import os
 filenames = os.listdir('.')
 print('all files:')
@@ -10,23 +20,6 @@ zz = [name for name in filenames if name.endswith(('.jpg', '.h'))]
 print('*.jpg *.h files:')
 print(zz)
 
-
-
-import random
-#values = [1,2,3,4,5,6]
-values = ['alpha','bravo','charlie','delta','echo','foxtrot']
-
-print(random.choice(values))
-print(random.choice(values))
-print(random.choice(values))
-print(random.choice(values))
-print(random.choice(values))
-print(random.choice(values))
-print(random.choice(values))
-
-
-#使用dir()內置函數返回一個包含一個模塊中定義名稱的字符串的排序列表。
-#該列表包含在一個模塊中定義的所有模塊，變量和函數的名稱。
 
 # Open a file
 fo = open("foo.txt", "w")
