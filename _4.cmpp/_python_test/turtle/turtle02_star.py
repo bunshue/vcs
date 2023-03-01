@@ -76,3 +76,4 @@ turtle.penup()
 
 turtle.done()       #最後用
 
+print("done")
