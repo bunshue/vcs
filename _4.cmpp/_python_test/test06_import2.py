@@ -11,23 +11,6 @@ print('*.jpg *.h files:')
 print(zz)
 
 
-import math
-nums = [1,2,3,4,5,6,7,8,9,10]
-result = math.fsum(nums)
-print(result)
-
-n = 16
-r = math.sqrt(n)
-print(r)
-
-
-def f(x):
-    return x**2
-
-
-
-f(10)
-
 
 import random
 #values = [1,2,3,4,5,6]
@@ -42,126 +25,8 @@ print(random.choice(values))
 print(random.choice(values))
 
 
-from datetime import datetime
-now = datetime.today()
-print(now)
-
-
-
-import time
-
-start = time.time()
-
-ticks = time.time()
-print("Number of ticks since 12:00am, January 1, 1970: ", ticks)
-
-
-time1 = time.gmtime(28800)
-time2 = time.gmtime()
-
-print(time1)
-print(time2)
-
-
-
-time3 = time.localtime(1234)
-time4 = time.localtime()
-
-print(time3)
-print(time4)
-
-
-time5 = time.asctime()
-
-print(time5)
-
-
-time6 = time.ctime()
-time7 = time.ctime(time.time())
-
-print(time6)
-print(time7)
-
-localtime = time.strftime("%Y/%m/%d %A %H:%M:%S", time.localtime(time.time()))
-print("現在是: ", localtime)
-
-
-stop = time.time()
-
-diff = stop - start
-
-print("使用時間 " + str(diff) + " 秒")
-
-
-
-
-
-import calendar
-
-# 獲取某個月的日曆，返回字串型別
-cal = calendar.month(2019, 4)
-print(cal)
-calendar.setfirstweekday(calendar.SUNDAY) # 設定日曆的第一天
-cal = calendar.month(2019, 4)
-print(cal)
-# 獲取一年的日曆
-cal = calendar.calendar(2019)
-print(cal)
-
-
-
-
-
-
-#!/usr/bin/python
-import time;  # This is required to include time module.
-
-#取得tick數
-ticks = time.time()
-print("Number of ticks since 12:00am, January 1, 1970:", ticks)
-
-
-#獲取當前時間
-localtime = time.localtime(time.time())
-print("Local current time :", localtime)
-
-
-#獲取格式化的時間
-localtime = time.asctime( time.localtime(time.time()) )
-print("Local current time :", localtime)
-
-#獲取日曆月份
-import calendar
-
-cal = calendar.month(2019, 4)
-print("Here is the calendar:")
-print(cal)
-
-
-#import datetime
-from datetime import *
-from dateutil.relativedelta import *
-
-NOW = datetime.now()
-TODAY = date.today()
-
-print(NOW)
-print(TODAY)
-
-#how old is john
-johnbirthday = datetime(1978, 4, 5, 12, 0)
-#relativedelta(NOW, johnbirthday)
-
-print(relativedelta(NOW, johnbirthday))
-
-
 #使用dir()內置函數返回一個包含一個模塊中定義名稱的字符串的排序列表。
 #該列表包含在一個模塊中定義的所有模塊，變量和函數的名稱。
-
-import math
-content = dir(math)
-print(content)
-
 
 # Open a file
 fo = open("foo.txt", "w")

@@ -44,3 +44,14 @@ def mysum(n1, n2):
 
 print(mysum(10, 20))
 
+
+
+
+def f(x):
+    return x**2
+
+f(10)
+
+
+
+

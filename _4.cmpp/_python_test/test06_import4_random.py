@@ -1,41 +1,44 @@
 import random
 
-member = ["ªá¶ı", "ªá¾ï¤l", "ªá¬c¤l", "ªáª¨"]
-housework = ["±½¦a", "©ì¦a", "¬~¦çªA", "À¿µ¡¤á"]
+member = ["èŠ±åª½", "èŠ±æ©˜å­", "èŠ±æŸšå­", "èŠ±çˆ¸"]
+housework = ["æƒåœ°", "æ‹–åœ°", "æ´—è¡£æœ", "æ“¦çª—æˆ¶"]
 random.shuffle(housework)
 for i in range(4):
-    print("%s¤µ¤Ñ­t³d%s" % (member[i], housework[i]))
+    print("%sä»Šå¤©è² è²¬%s" % (member[i], housework[i]))
     
 for count in range(20):
-    x = random.randrange(-10, 10)       #-10~9¤§¶¡ªº¾ã¼Æ
-    y = random.randrange(-10, 10)       #-10~9¤§¶¡ªº¾ã¼Æ
-    length = random.randrange(10)       #0~9¤§¶¡ªº¾ã¼Æ
-    shape = random.randrange(3, 8)      #3~7¤§¶¡ªº¾ã¼Æ
+    x = random.randrange(-10, 10)       #-10~9ä¹‹é–“çš„æ•´æ•¸
+    y = random.randrange(-10, 10)       #-10~9ä¹‹é–“çš„æ•´æ•¸
+    length = random.randrange(10)       #0~9ä¹‹é–“çš„æ•´æ•¸
+    shape = random.randrange(3, 8)      #3~7ä¹‹é–“çš„æ•´æ•¸
     print(count, x, y, length, shape)
 
 
 
 def randomAnimal():
     nouns = ["lion", "mouse", "cat", "dog"]
-    noun = random.choice(nouns)     #¦b¦Wµü¦r¦ê¤¤ÀH¾÷¿ï¨ú¤@­Ó¦r¦ê
+    noun = random.choice(nouns)     #åœ¨åè©å­—ä¸²ä¸­éš¨æ©Ÿé¸å–ä¸€å€‹å­—ä¸²
     return noun
 
 for count in range(10):
     print(randomAnimal())
 
 from random import randint
-print("1¨ì6¿ï¤@­Ó")
+print("1åˆ°6é¸ä¸€å€‹")
 for count in range(10):
     print(randint(1, 6))
 
 
 import random as R
-print("1¨ì6¿ï¤@­Ó")
+print("1åˆ°6é¸ä¸€å€‹")
 for count in range(10):
     print(R.randint(1, 6))
 
-print("¥ô¿ï¤@­Ó")
+print("ä»»é¸ä¸€å€‹")
 for count in range(10):
     print(random.choice(['a', 'b', 'c']))
+
+
+
 
 
