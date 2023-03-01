@@ -5,13 +5,16 @@ name = input('請問您的大名')
 print('Hi, %s.' % name)
 
 print("計算BMI")
-height = float(input("請輸入你的身高"))
+#height = float(input("請輸入你的身高"))
+height = 1.55
 print ("取得身高 %s "%height )
 
-weight = float(input("請輸入你的體重"))
+#weight = float(input("請輸入你的體重"))
+weight = 52
 print ("取得體重 %s" %weight )
 
-age = int(input("請輸入你的年齡"))
+#age = int(input("請輸入你的年齡"))
+age = 30
 print ("取得年齡 %s" %age )
 
 bmi = weight/(height*height);

@@ -3,6 +3,21 @@
 
 
 
+print("for迴圈")
+
+for i in range(10, 20, 3):
+    print(i)
+
+print("while迴圈")
+
+i = 10
+while i < 30:
+    print(i)
+    i += 5
+    if( i == 20):
+        break
+
+
 print("語法 : while")
 a = 0;
 story = "";

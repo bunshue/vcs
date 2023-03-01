@@ -1,8 +1,5 @@
 # for-loop while-loop if-else
 
-
-
-
 print("語法 : while")
 a = 0;
 story = "";
@@ -21,8 +18,6 @@ elif ans == "yes":
     print("Yahoo")
 else:
     print("Fine")
-    
-
 
 print("語法 : input")
 userName = input("What is your name? ")
@@ -31,10 +26,7 @@ while message != "exit":
     print(userName + ": " + message)
     message = input("Enter a message: ")
 
-
-
 print("語法 : 輸入帳號密碼")
-
 
 id = input("請輸入帳號 : (david)")
 print("使用者 : "+id)
@@ -47,14 +39,12 @@ print("密碼正確, 歡迎 " + id+ " 使用")
 
 print("語法 : 取得數字")
 number = int(input("請輸入一個數字 : "))
-print("取得數字" + %number)
+print("取得數字" + str(number))
 for nn in range(number):
     print(nn)
     #print("")
 
-
-
-
+print("List測試");
 days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
 
 for index in range(len(days)):
