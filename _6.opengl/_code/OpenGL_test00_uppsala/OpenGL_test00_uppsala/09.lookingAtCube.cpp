@@ -40,6 +40,7 @@ GLubyte cubeIndices[24] =
 };
 //以第4點為對應顏色
 
+// 繪圖回調函數
 void display(void)
 {
     //設定cubic之頂點與顏色

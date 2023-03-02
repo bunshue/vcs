@@ -20,10 +20,4 @@ story = personName + " was walking through " + place + ". " + place + " was not 
 print(story)
 
 
-            
-
-    
-
-
-
 

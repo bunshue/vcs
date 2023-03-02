@@ -2,7 +2,7 @@
 
 int display_mode = 5;
 
-const char* data_filename = "data/17.points.dat";
+const char* data_filename = "data/points.dat";
 
 #define SEED srand
 #define RANDNUM rand
@@ -448,6 +448,7 @@ void display9(void)
 
 }
 
+// 繪圖回調函數
 void display(void)
 {
     if (display_mode == 0)
@@ -538,8 +539,8 @@ void idle(void)
 
 int main(int argc, char** argv)
 {
-    const char* windowName = "Open GL 2D 畫圖";
-    const char* message = "僅顯示, 無控制, 按 Esc 離開\n";
+    const char* windowName = "簡單2D OpenGL畫圖 0 ~ 9";
+    const char* message = "簡單2D OpenGL畫圖 0 ~ 9\n";
     common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard);
 
     //glutIdleFunc(idle);

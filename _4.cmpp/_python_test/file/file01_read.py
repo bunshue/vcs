@@ -49,14 +49,6 @@ print("Read String is : ", str)
 # Close opend file
 fo.close()
 
-print("讀取遠端純文字檔")
-from urllib.request import urlopen
-
-textPage = urlopen("http://www.pythonscraping.com/pages/warandpeace/chapter1.txt")
-print(textPage.read())
-
-
-
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-    #告訴Python直譯器檔案編碼為UTF-8
 

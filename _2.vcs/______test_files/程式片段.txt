@@ -48,11 +48,6 @@ TBGBMBKB
 
 
 
-
-vcs+ 內嵌外部程式
-
-
-
 vcs
 listBox1.Items.Count > 0);
 
