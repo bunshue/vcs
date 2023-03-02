@@ -63,10 +63,12 @@ void display(void)
     glCallList(thing4);
     glAccum(GL_ACCUM, alpha);
     
+    /*
     char mesg[20];
     //sprintf(mesg, "Alpha = %3.3f", alpha);	//過時, x64不能用
     sprintf_s(mesg, sizeof(info), "Alpha = %3.3f", alpha);
     glutSetWindowTitle(mesg);
+    */
 
     alpha += 0.1;
     if (alpha > 1.01)
@@ -117,20 +119,13 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
 
 int main(int argc, char** argv)
 {
-    glutInit(&argc, argv);
+    const char* windowName = "顏色重疊測試";
+    const char* message = "顏色重疊測試\n";
+    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard);
 
     glutInitDisplayMode(GLUT_RGB | GLUT_ACCUM | GLUT_SINGLE);
 
-    glutInitWindowSize(600, 600);       // 設定視窗大小
-    glutInitWindowPosition(1100, 200);  // 設定視窗位置
-
-    glutCreateWindow("顏色重疊測試");	//開啟視窗 並顯示出視窗 Title
-
     Init();
-
-    glutDisplayFunc(display);       //設定callback function
-    glutReshapeFunc(reshape);       //設定callback function
-    glutKeyboardFunc(keyboard);     //設定callback function
 
     printf("按 1 2 r 控制\n");
 

@@ -40,12 +40,6 @@ GLubyte cubeIndices[24] =
 };
 //以第4點為對應顏色
 
-//啟始時的視點
-double eyex = 5.0f;
-double eyey = 5.0f;
-double eyez = 5.0f;
-//double eye_distance = 5.0f;
-
 // 繪圖回調函數
 void display(void)
 {
@@ -58,17 +52,15 @@ void display(void)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glClearColor(1.0, 1.0, 1.0, 0.0);  //設定背景色為白色
 
-	/* Update viewer position in modelview matrix */
-
+	//更新視角
 	glLoadIdentity();
-	gluLookAt(eyex, eyey, eyez, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+	gluLookAt(5.0f, 5.0f, 5.0f, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 
 	glTranslatef(0.0, -2.0, 0.0);
 
 	glDrawElements(GL_QUADS, 24, GL_UNSIGNED_BYTE, cubeIndices);	//從 cubeIndices 陣列 裡面找出 24 個索引數
 	//用GL_QUADS就是每4個組成一個四邊形 => 共6個面
 
-	glutSwapBuffers();
 	glFlush();  // 執行繪圖命令
 }
 

@@ -53,18 +53,6 @@ void display(void)
     glDrawElements(GL_QUADS, 24, GL_UNSIGNED_BYTE, cubeIndices);	//從 cubeIndices 陣列 裡面找出 24 個索引數
     //用GL_QUADS就是每4個組成一個四邊形 => 共6個面
 
-    //已旋轉後之座標軸
-    draw_coordinates(1.5f);     //畫座標軸
-
-    draw_teapot(color_purple, 1.0f, 1.5f);	//畫茶壺
-
-    glColor3f(1.0f, 1.0f, 1.0f);
-
-    for (int i = 0; i < 8; i++)
-    {
-        glRasterPos3fv((GLfloat*)vertices[i]);
-        glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, '0' + i);
-    }
     glFlush();  // 執行繪圖命令
 }
 
@@ -97,7 +85,6 @@ int main(int argc, char** argv)
 
     glEnable(GL_DEPTH_TEST);
 
-    /* Set initial view to positive x-axis. */
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 

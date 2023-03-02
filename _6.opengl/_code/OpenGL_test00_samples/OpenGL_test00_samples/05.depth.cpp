@@ -102,20 +102,13 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
 
 int main(int argc, char** argv)
 {
-    glutInit(&argc, argv);
+    const char* windowName = "Depth Test";
+    const char* message = "Depth Test\n";
+    common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape, keyboard);
 
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
 
-    glutInitWindowSize(600, 600);       // 設定視窗大小
-    glutInitWindowPosition(1100, 200);  // 設定視窗位置
-
-    glutCreateWindow("Depth Test");	//開啟視窗 並顯示出視窗 Title
-
     Init();
-
-    glutDisplayFunc(display);       //設定callback function
-    glutReshapeFunc(reshape);       //設定callback function
-    glutKeyboardFunc(keyboard);     //設定callback function
 
     printf("按 1 2 控制\n");
 
