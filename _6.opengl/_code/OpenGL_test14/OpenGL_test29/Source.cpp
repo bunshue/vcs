@@ -215,7 +215,7 @@ void gfxinit(void)
 
     //在 List 2 製作第2張圖   //圖片的茶壺
     glNewList(2, GL_COMPILE);
-    pBytes = (GLubyte*)gltLoadTGA("data/14.marble.tga", &iWidth, &iHeight, &iComponents, &eFormat);
+    pBytes = (GLubyte*)gltLoadTGA("data/marble.tga", &iWidth, &iHeight, &iComponents, &eFormat);
     printf("pBytes = %p\n", pBytes);
     if (pBytes == NULL)
     {
@@ -235,7 +235,7 @@ void gfxinit(void)
     glEndList();
 }
 
-/* The display callback function. */
+// 繪圖回調函數
 void display(void)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -250,6 +250,7 @@ void display(void)
     glFlush();  // 執行繪圖命令
 }
 
+// 窗口大小變化回調函數
 void reshape(int w, int h)
 {
     glViewport(0, 0, w, h);
@@ -271,6 +272,9 @@ void keyboard(unsigned char key, int /*x*/, int /*y*/)
     switch (key)
     {
     case 27:
+    case 'q':
+    case 'Q':
+        //離開視窗
         glutDestroyWindow(glutGetWindow());
         return;
         break;
@@ -299,5 +303,6 @@ int main(int argc, char** argv)
 
     return 0;
 }
+
 
 
