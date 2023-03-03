@@ -1,4 +1,4 @@
-# Python 新進測試 4 讀寫檔案
+# Python 新進測試 04 讀寫檔案
 
 file_object = open('sample.txt', 'w')
 file_object.write('this is sample of python.')

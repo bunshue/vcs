@@ -17,6 +17,9 @@ namespace vcs_Process_CommandLine
         string pathToExe = @"../../aaaa.exe";
         Process process_async = new Process();    //創建一個進程用於調用外部程序
 
+        //一維List for string
+        List<string> cmd_output_data = new List<string>();
+
         public Form1()
         {
             InitializeComponent();
@@ -155,8 +158,13 @@ namespace vcs_Process_CommandLine
         {
         }
 
+        int show_result_index = 0;
         private void button5_Click(object sender, EventArgs e)
         {
+            cmd_output_data.Clear();
+            show_result_index = 0;
+            //timer_get_result.Enabled = true;
+
             //非同步測試1
             process_async.StartInfo.FileName = pathToExe;  //設定要啟動的程式
             //process_async.StartInfo.Arguments = "/c " + command; //設定程式執行參數, 也可直接把command寫在這裡, 就不用後面的 StandardInput.WriteLine 了, 要加/c
@@ -187,15 +195,44 @@ namespace vcs_Process_CommandLine
 
         void OutputHandler(object sendingProcess, DataReceivedEventArgs outLine)
         {
-            Console.WriteLine("process.HasExited = " + process_async.HasExited.ToString());
-            // Write to console
-            Console.WriteLine(outLine.Data);
+            if (process_async.HasExited == false)
+            {
+                Console.WriteLine("process.HasExited = " + process_async.HasExited.ToString());
+                // Write to console
+                Console.WriteLine(outLine.Data);
+
+                cmd_output_data.Add(outLine.Data);
+            }
+            else
+            {
+                cmd_output_data.Add("已結束");
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
             //非同步測試2
-            richTextBox1.Text += "process_async.HasExited = " + process_async.HasExited.ToString() + "\n";
+            //richTextBox1.Text += "process_async.HasExited = " + process_async.HasExited.ToString() + "\n";
+
+            if (cmd_output_data.Count > 0)
+                richTextBox1.Text += "共有 " + cmd_output_data.Count.ToString() + " 筆資料要存\n";
+
+            int i;
+            for (i = 0; i < cmd_output_data.Count; i++)
+            {
+                //richTextBox1.Text += "cmd_output_data[" + i.ToString() + "] = " + cmd_output_data[i] + "\n";
+                if (cmd_output_data[i] == "")
+                {
+                    richTextBox1.Text += "xxxxxi = " + i.ToString() + "\t" + cmd_output_data[i].Length.ToString() + "\n";
+                }
+                else
+                {
+                    richTextBox1.Text += "i = " + i.ToString() + "\t" + cmd_output_data[i] + "\n";
+                }
+                //richTextBox1.Text += "len = " + cmd_output_data[i].Length.ToString() + "\n";
+
+            }
+
 
         }
 
@@ -391,6 +428,25 @@ namespace vcs_Process_CommandLine
             }
             catch (Exception)
             {
+            }
+        }
+
+        private void timer_get_result_Tick(object sender, EventArgs e)
+        {
+            //if (cmd_output_data.Count > 0)
+            //richTextBox1.Text += "共有 " + cmd_output_data.Count.ToString() + " 筆資料要存\n";
+
+            if (show_result_index < cmd_output_data.Count)
+            {
+                int i;
+                int count = cmd_output_data.Count - show_result_index;
+                richTextBox1.Text += count.ToString() + " ";
+                for (i = 0; i < count; i++)
+                {
+                    //richTextBox1.Text += "i = " + i.ToString() + "\t" + cmd_output_data[show_result_index] + "\n";
+                    //Application.DoEvents();
+                }
+                show_result_index = cmd_output_data.Count;
             }
         }
     }

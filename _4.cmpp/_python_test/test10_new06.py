@@ -1,4 +1,4 @@
-# Python 新進測試 6
+# Python 新進測試 06
 
 # 程式 6-1.py (Python 3.x version)
 # _*_ coding: utf-8 _*_

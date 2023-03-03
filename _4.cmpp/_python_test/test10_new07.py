@@ -1,4 +1,4 @@
-# Python 新進測試 7
+# Python 新進測試 07
 
 
 import random

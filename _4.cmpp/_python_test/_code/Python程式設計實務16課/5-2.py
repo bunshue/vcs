@@ -3,7 +3,7 @@
 
 import os, shutil, glob
 source_dir = "images/"
-disk = os.statvfs("/") 
+disk = os.statvfs("/") 	#statvfs在Windows上不能用
 freespace = disk.f_bsize * disk.f_blocks;
 pngfiles = glob.glob(source_dir+"*.png")
 jpgfiles = glob.glob(source_dir+"*.jpg")

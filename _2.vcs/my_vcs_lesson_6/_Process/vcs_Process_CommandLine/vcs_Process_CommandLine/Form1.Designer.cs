@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.button6 = new System.Windows.Forms.Button();
             this.button5 = new System.Windows.Forms.Button();
@@ -41,6 +42,7 @@
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
             this.bt_clear2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.timer_get_result = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -182,6 +184,10 @@
             this.label1.TabIndex = 34;
             this.label1.Text = "模擬Command視窗";
             // 
+            // timer_get_result
+            // 
+            this.timer_get_result.Tick += new System.EventHandler(this.timer_get_result_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -217,6 +223,7 @@
         private System.Windows.Forms.RichTextBox richTextBox2;
         private System.Windows.Forms.Button bt_clear2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Timer timer_get_result;
     }
 }
 
