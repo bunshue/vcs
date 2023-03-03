@@ -1,4 +1,13 @@
+# python import module : random
+
+
 import random
+x = random.randint(1,6)
+print(x)
+while x != 6:
+  x = random.randint(1,6)
+  print(x)
+
 
 member = ["花媽", "花橘子", "花柚子", "花爸"]
 housework = ["掃地", "拖地", "洗衣服", "擦窗戶"]

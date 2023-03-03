@@ -1,5 +1,4 @@
-# 各種import
-
+# 各種未歸類的import
 
 #圖形操作
 #需先 pip install pillow
@@ -21,22 +20,4 @@ r,g,b = im_sharp.split()
 #檢視圖形內嵌的EXIF資料
 exif_data = im._getexif()
 print(exif_data)
-
-
-
-import os.path
-filesize = os.path.getsize(filename_r)
-print("filesize : " , filesize)
-
-print("檔案時間 : ", os.path.getmtime(filename_r))
-import time
-print("檔案時間 : ", time.ctime(os.path.getmtime(filename_r)))
-
-
-print("檔案是否存在 : ", os.path.isfile(filename_r))
-
-import os
-files = os.listdir('.')
-print("列出所有檔案", files)
-
 

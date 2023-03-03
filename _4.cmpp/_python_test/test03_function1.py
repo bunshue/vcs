@@ -1,6 +1,14 @@
 # 自定義函數
 
 
+# 程式 6-2.py (Python 3 version)
+from module_files import draw_bar
+
+draw_bar.draw(10, "$")
+draw_bar.draw(6, "#")
+draw_bar.draw(15)
+
+
 import my_print  #把整個 my_print.py 都引進來
 print("測試導入自定義模組")
 my_print.print_func("Python")
@@ -78,6 +86,40 @@ b = avg(1,2,3,4)
 print("average 1", a, "\n")
 print("average 2", b, "\n")
 
+
+
+
+def japanese(month):
+    month_name = {
+        1:"睦月", 2:"如月", 3:"彌生", 4:"卯月", 5:"皐月", 6:"水無月",
+        7:"文月", 8:"葉月", 9:"長月", 10:"神無月", 11:"霜月", 12:"師走"
+    }
+    try:
+        response = month_name[month]
+    except:
+        response = '請輸入月份數字。'
+
+    return response
+
+print(japanese(5))
+
+
+
+
+def add2number(a, b):
+    global d
+    c = a + b
+    d = a + b
+    print("在函數中，(c={}, d={})".format(c,d))
+    return c
+
+c = 10
+d = 99
+print("呼叫函數前，(c={}, d={})".format(c,d))
+print("{} + {} = {}".format(2, 2, add2number(2, 2)))
+print("函數呼叫後，(c={}, d={})".format(c,d))
+
+  
 
 
 

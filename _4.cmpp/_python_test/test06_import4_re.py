@@ -1,3 +1,5 @@
+# python import module : re
+
 # _*_ coding: utf-8 _*_
 # 程式 6-3.py (Python 3.x version)
 # 計算單字在文章中出現的頻率

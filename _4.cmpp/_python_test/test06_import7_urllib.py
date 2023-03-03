@@ -1,3 +1,7 @@
+# python import module : urllib
+
+
+
 
 
 print("讀取遠端純文字檔1")

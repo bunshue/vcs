@@ -1,92 +1,47 @@
 # Python 新進測試 03
 
 
-def area(radius):
-
-	result = radius * radius * 3.14
-
-	return result
-
-
-
-
-def washingMachine():
-
-	print('注水')
-
-	print('輕柔清洗')
-
-	print('洗淨洗劑')
-
-	print('脫水')
-
-	print('烘乾')
-
-
-washingMachine()
-
-
-def washingMachine(mode):
-
-	print('注水')
-
-	if (mode == 'soft'):
-
-		print('輕柔清洗')
-
-	elif (mode == 'hard'):
-
-		print('強力清洗')
-
-	else:
-
-		print('一般清洗')
+import random
+while True:
+    x = random.randint(1,6)
+    print(x)
+    if x == 6 : break
 
 
 
 
-mode = 'soft'
+def pick(x):
+    fruits = ['Apple', 'Banana', 'Orange', 'Tomato', 'Pine Apple', 'Berry']
+    return fruits[x]
 
-if (mode == 'soft'):
-
-	print('輕柔清洗')
-
-elif (mode == 'hard'):
-
-	print('強力清洗')
-
-else:
-
-	print('一般清洗')
+alist = [1, 4, 2, 5, 0, 3, 4, 4, 2]
+choices = map(pick, alist)
+for choice in choices:
+    print(choice)
 
 
 
 
 
-import calendar
 
-print(calendar.__file__)
+while True:
+    try:
+        age = int(input("What is your age?"))
+        break
+    except:
+        print("Please enter a number")
 
-
-import requests
-api_url = 'http://weather.livedoor.com/forecast/webservice/json/v1';
-payload = {'city':'130010'}
-weather_data = requests.get(api_url, params = payload).json()
-print(weather_data['forecasts'][0]['dateLabel'] + '的天氣是：' + weather_data['forecasts'][0]['telop'])
-
-
+if age < 15:
+    print("You are too young")
 
 
-
-import requests
-
-import pprint
-
-api_url = 'http://weather.livedoor.com/forecast/webservice/json/v1?city=130010'
-
-weather_data = requests.get(api_url).json()
-
-pprint.pprint(weather_data)
+import os, sys
+try:
+    os.remove('hello.txt')
+except Exception as e:
+    print(e)
+    e_type, e_value, e_tb = sys.exc_info()
+    print("種類：{}\n訊息：{}\n資訊：{}".format(e_type, e_value, e_tb))
 
 
 

@@ -1,3 +1,5 @@
+# python import module : math
+
 import math
 
 print("圓周率 : ", math.pi)
