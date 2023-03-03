@@ -2,9 +2,10 @@
 # 程式 6-3.py (Python 3.x version)
 # 計算單字在文章中出現的頻率
 # 只列出出現超過一次以上的單字
+
 import re
 
-fp = open("sample.txt", "r")
+fp = open("article.txt", "r")
 article = fp.read()
 new_article = re.sub("[^a-zA-Z\s]", "", article)
 words = new_article.split()

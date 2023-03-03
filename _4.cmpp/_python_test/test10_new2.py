@@ -1,4 +1,4 @@
-# Python 新進測試
+# Python 新進測試 2
 
 import time
 

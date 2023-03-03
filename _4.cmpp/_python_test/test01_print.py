@@ -15,6 +15,12 @@ print(name) #字串
 print(big)  #很大的數
 print(z)    #複數
 
+print("打印數字")
+a, b = 2, 3
+print(a, b)
+a, b = b, a
+print(a, b)
+
 s = "Hello Python"
 print("字串 : " + s +", 長度 : "+str(len(s)))   # 要先轉成字串
 print("第0字元 " + s[0])     # prints "H"
