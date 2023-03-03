@@ -1,0 +1,27 @@
+<!-- base.html -->
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+	<head>
+		<title>{% block title %} {% endblock %}</title>
+	</head>
+	<body>
+		<header>
+			<a href='/'>
+				<img src='{% static "images/logo.png" %}' width=150 />
+			</a>
+		</header>
+		<h1>{% block message %} {% endblock %}</h1>
+		<nav>
+			【<a href='/'>HOME</a>】‧
+			【<a href='/list/'>現有網址列表</a>】‧
+			【<a href='/admin/'>網址管理網頁</a>】
+		</nav>
+		<hr>
+		{% block main %} {% endblock %}
+		<hr>
+		<h2>
+			<h3>現在時刻：{{ now }}</h3>
+		</h2>
+	</body>
+</html>

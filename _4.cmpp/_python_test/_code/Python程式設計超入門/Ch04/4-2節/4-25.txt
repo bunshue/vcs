@@ -1,0 +1,19 @@
+－－可複製底下指令文字快速輸入, 但仍建議初學者手動輸入會比較有印象！－－
+
+
+class snakeClass(animalBaseClass):
+
+	def __init__(self):
+
+		snake_leg = 0 
+
+		parent_class = super(snakeClass, self)
+
+		parent_class.__init__( snake_leg)
+
+		print('我是蛇')
+
+nyoro = snakeClass()
+
+nyoro.getLegsNum()
+

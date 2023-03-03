@@ -1,0 +1,9 @@
+－－可複製底下指令文字快速輸入, 但仍建議初學者手動輸入會比較有印象！－－
+
+from PIL import Image
+
+image = Image.open('sample_image/flower.jpg')
+
+image.transpose(Image.ROTATE_90).show()
+
+image.transpose(Image.ROTATE_90).save('sample_image/rotate_90.jpg')														－儲存90度旋轉的圖片

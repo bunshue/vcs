@@ -1,0 +1,7 @@
+－－可複製底下指令文字快速輸入, 但仍建議初學者手動輸入會比較有印象！－－
+
+url = 'http://weather.livedoor.com/forecast/webservice/json/v1'
+
+paload = {'city':'130010'}
+
+weather_data = requests.get(url, params = paload).json()

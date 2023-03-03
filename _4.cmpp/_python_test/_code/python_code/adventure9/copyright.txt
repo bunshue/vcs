@@ -1,0 +1,5 @@
+Copyright information
+crash.wav: Symbol 2 very short, schatzl03/freesound.org, CC Sampling+ License
+hit.wav: Snare 04, zgump/freesound.org, CC 0 Lincense
+teleport.wav: 8 Bit Laser/Lazer, lukechalaudio/freesound.org, CC 0 Lincense
+music.mp3: Dragon Warrior (Loopable), dingo1/freesound,org, CC Attribution License

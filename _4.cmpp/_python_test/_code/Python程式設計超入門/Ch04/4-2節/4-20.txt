@@ -1,0 +1,36 @@
+－－可複製底下指令文字快速輸入, 但仍建議初學者手動輸入會比較有印象！－－
+
+
+class animalBaseClass:
+
+	animallegs = 4
+
+	def walk(self):
+
+		print('走動')
+
+	def cry(self):
+
+		print('吼叫')
+
+	def getLegsNum(self):
+
+		print(self.animallegs)
+
+
+
+class dogClass(animalBaseClass):
+	
+	def __init__(self):
+
+		print('我是小狗')
+
+
+
+wanko = dogClass()
+
+wanko.walk()
+
+wanko.cry()
+
+wanko.getLegsNum()

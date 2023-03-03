@@ -1,0 +1,11 @@
+<!-- notfound.html -->
+{% extends 'base.html' %}
+{% block title %}找不到指定的網址{% endblock %}
+{% block message %}找不到您指定的網址{% endblock %}
+{% block main %}
+			<h3>
+				您指定的網址：{{ id }}<br>
+				在資料庫中找不到，請前往
+				<a href='/admin/'>管理</a>網頁 中新增資料
+			</h3>
+{% endblock %}

@@ -1,0 +1,16 @@
+<!-- listall.html -->
+{% extends 'base.html' %}
+{% block title %}列出所有資料庫中的短網址{% endblock %}
+{% block message %}所有短網址列表{% endblock %}
+{% block main %}
+<table border=1>
+	<tr><td>短網址</td><td>轉址次數</td><td>原始網址</td>
+	{% for item in all %}
+		<tr>
+			<td>{{ item.short_url }} </td>
+			<td>{{ item.count }} </td>
+			<td>{{ item.src_url}} </td>
+		</tr>
+	{% endfor %}
+</table>
+{% endblock %}

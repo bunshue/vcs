@@ -1,0 +1,11 @@
+－－可複製底下指令文字快速輸入, 但仍建議初學者手動輸入會比較有印象！－－
+
+import tkinter as tk
+
+base=tk.Tk()
+
+tk.Label(base, text='紅', bg='red', width=20).pack()
+
+tk.Label(base, text='綠', bg='green', width=20).pack()
+
+tk.Label(base, text='藍', bg='blue', width=20).pack()

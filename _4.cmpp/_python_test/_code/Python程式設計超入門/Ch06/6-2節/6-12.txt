@@ -1,0 +1,11 @@
+－－可複製底下指令文字快速輸入, 但仍建議初學者手動輸入會比較有印象！－－
+
+from PIL import Image
+
+image = Image.open('sample_image/flower.jpg')
+
+black_and_white = image.convert('1')
+
+black_and_white.show()
+
+black_and_white.save('sample_image/b_and_w.jpg')

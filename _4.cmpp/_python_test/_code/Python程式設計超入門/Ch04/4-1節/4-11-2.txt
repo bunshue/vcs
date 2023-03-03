@@ -1,0 +1,17 @@
+－－可複製底下指令文字快速輸入, 但仍建議初學者手動輸入會比較有印象！－－
+
+
+class staff:
+
+	bonus = 30000
+
+	def salary(self):
+
+		salary = 10000 + bonus
+
+		return salary
+
+yamamoto = staff()
+
+yamamoto.salary()
+

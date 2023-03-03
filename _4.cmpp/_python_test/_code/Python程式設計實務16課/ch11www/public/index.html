@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<head>
+<script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="https://cdn.firebase.com/js/client/2.4.0/firebase.js"></script>
+<meta charset='utf-8'>
+<title>統一發票對獎網</title>
+</head>
+<body>
+	<script>
+		var ref = new Firebase('https://python01.firebaseio.com/invlotto');
+
+		ref.on("value", function(snapshot) {
+
+			inv_lottos = snapshot.val();
+  			var inv_tables = "";
+			for (var key in inv_lottos) {
+
+				inv_tables += "<table width=600 border=2 align=center>";
+				inv_tables = inv_tables + "<tr><td>開獎月份</td><td>" + key + "</td></tr>";
+				inv_month = inv_lottos[key];
+				for (id in inv_month) {
+					inv_tables = inv_tables + "<tr><td>1000萬特別獎</td><td>" 
+											+ inv_month[id]['p1000w'] + "</td></tr>";
+					inv_tables = inv_tables + "<tr><td>200萬特獎</td><td>" 
+											+ inv_month[id]['p200w'] + "</td></tr>";
+					inv_tables = inv_tables + "<tr><td>20萬頭獎</td><td>";
+					for(var i in inv_month[id]['p20w']) {
+						inv_tables = inv_tables + inv_month[id]['p20w'][i] + "&nbsp;";
+					}
+					inv_tables = inv_tables + "</td></tr>";
+					inv_tables = inv_tables + "<tr><td>200元增開六獎</td><td>";
+					for(var i in inv_month[id]['p200']) {
+						inv_tables = inv_tables + inv_month[id]['p200'][i] + "&nbsp;";
+					}
+					inv_tables = inv_tables + "</td></tr>";
+				}
+				inv_tables += '</table><br>';
+			}
+			$('#inv_tables').html(inv_tables);
+
+		}, function (errorObject) {
+  			console.log("The read failed: " + errorObject.code);
+		});
+	</script>
+<center>
+<h2>統一發票對獎網</h2>
+<p>本網頁僅供參考，請以財政部稅務入口網公佈為準</p>
+</center>
+<div id='inv_tables'>
+</div>
+</body>
+</html>

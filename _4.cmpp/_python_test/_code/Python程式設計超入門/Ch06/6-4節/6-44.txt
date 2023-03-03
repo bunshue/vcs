@@ -1,0 +1,14 @@
+－－可複製底下指令文字快速輸入, 但仍建議初學者手動輸入會比較有印象！－－
+
+
+import requests
+
+from bs4 import BeautifulSoup
+
+game_raking_html = requests.get('https://acg.gamer.com.tw/billboard.php?t=2&p=Android')
+
+game_raking_html.encoding = 'UTF-8'
+
+soup = BeautifulSoup(game_raking_html.text, "html.parser")
+
+soup.find(class_='ACG-mainbox1').find(class_='ACG-maintitle').find('a').string

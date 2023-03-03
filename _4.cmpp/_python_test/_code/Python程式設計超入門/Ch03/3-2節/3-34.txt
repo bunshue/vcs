@@ -1,0 +1,18 @@
+－－可複製底下指令文字快速輸入, 但仍建議初學者手動輸入會比較有印象！－－
+
+family = ['ryo-ko', 'mako', 'satsuki']
+
+for kid in family:
+
+	print('早安！' + kid)
+
+	print('起床')
+
+	print('吃早餐')
+
+	continue
+
+	print('出門上學')
+
+
+
