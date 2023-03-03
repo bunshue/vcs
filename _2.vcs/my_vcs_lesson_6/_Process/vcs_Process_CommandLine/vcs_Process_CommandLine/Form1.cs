@@ -14,7 +14,6 @@ namespace vcs_Process_CommandLine
 {
     public partial class Form1 : Form
     {
-        string pathToExe = @"../../aaaa.exe";
         Process process_async = new Process();    //創建一個進程用於調用外部程序
 
         //一維List for string
@@ -161,15 +160,25 @@ namespace vcs_Process_CommandLine
         int show_result_index = 0;
         private void button5_Click(object sender, EventArgs e)
         {
+            //燒錄映像檔
+
+            string exe_filename = @"../../aaaa.exe";
+            string parameters = "aa bb cc dd ee";
+
+            run_command_line_process_async(exe_filename, parameters);
+        }
+
+        void run_command_line_process_async(string exe_filename, string parameters)
+        {
             cmd_output_data.Clear();
             show_result_index = 0;
             //timer_get_result.Enabled = true;
 
             //非同步測試1
-            process_async.StartInfo.FileName = pathToExe;  //設定要啟動的程式
+            process_async.StartInfo.FileName = exe_filename;  //設定要啟動的程式
             //process_async.StartInfo.Arguments = "/c " + command; //設定程式執行參數, 也可直接把command寫在這裡, 就不用後面的 StandardInput.WriteLine 了, 要加/c
             //process_async.StartInfo.Arguments = "/c systeminfo";  //可, 要加/c
-            process_async.StartInfo.Arguments = "aa bb cc dd ee";
+            process_async.StartInfo.Arguments = parameters;
             //process_async.StandardInput.AutoFlush = true;
 
             process_async.StartInfo.UseShellExecute = false;  //false, 關閉Shell的使用, 是否指定操作系統外殼進程啟動程序, 可能接受來自調用程序的輸入信息

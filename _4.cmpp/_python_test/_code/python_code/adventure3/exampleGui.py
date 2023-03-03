@@ -1,4 +1,5 @@
 import Tkinter as tk
+
 window = tk.Tk()
 
 usernameBox = tk.Entry(window)

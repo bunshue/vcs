@@ -61,3 +61,15 @@ for letter in "Hello Python":
         print('Current Letter :', letter)
    
 
+
+print("語法 : if-else")
+ans = input("Are you all right? ")
+if ans == "Yes":
+    print("Great")
+elif ans == "yes":
+    print("Yahoo")
+else:
+    print("Fine")
+    
+
+

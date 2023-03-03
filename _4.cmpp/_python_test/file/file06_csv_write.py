@@ -1,3 +1,5 @@
+#建立一個csv檔 逗號分隔值(comma-seperated values)
+
 print("python寫資料到CSV檔")
 
 import csv
@@ -7,6 +9,7 @@ filename_w = "TestCSVFileW.csv"
 
 print("打開一個csv檔案 : "+filename_w)
 csvFile = open(filename_w, 'w+', newline='')
+
 try:
 #寫資料
     writer = csv.writer(csvFile)
@@ -17,8 +20,10 @@ try:
     writer.writerow((7,8,9))
     writer.writerow(('a','b','c'))
     writer.writerow(('lion','mouse','cat','dog'))
+    writer.writerow(('number', 'number plus 2', 'number times 2'))
+    for i in range(10):
+        writer.writerow((i,i+2,i*2))
 finally:
 #關閉文件
     csvFile.close()
-
 

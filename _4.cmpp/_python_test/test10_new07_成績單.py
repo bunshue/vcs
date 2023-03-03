@@ -1,9 +1,5 @@
 # Python 新進測試 07
 
-
-
-# _*_ coding: utf-8 _*_
-# 程式 7-13 (Python 3 version )
 import os
 class_101 = dict() #記錄學生座號及姓名
 chi_score = dict() #記錄國文成績

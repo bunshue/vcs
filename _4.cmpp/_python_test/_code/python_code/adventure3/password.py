@@ -1,6 +1,6 @@
 import Tkinter as tk
-window = tk.Tk()
 
+window = tk.Tk()
 
 def checkPassword():
     password = "Oranges"

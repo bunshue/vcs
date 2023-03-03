@@ -127,4 +127,4 @@ while not done:
             done = True
     clock.tick(72)
 pygame.quit()
-print "Total points: " + str(points)
+print("Total points: " + str(points))

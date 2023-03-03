@@ -1,13 +1,12 @@
 import Tkinter as tk
 import random
-window = tk.Tk()
 
+window = tk.Tk()
 
 def randomNoun():
     nouns = ["cats", "hippos", "cakes"]
     noun = random.choice(nouns)
     return noun
-
 
 def randomVerb():
     verbs = ["eats", "likes", "hates", "has"]

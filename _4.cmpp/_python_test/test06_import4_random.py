@@ -1,14 +1,13 @@
 # python import module : random
 
-
 import random
 x = random.randint(1,6)
-print(x)
+print("取得亂數 : " + str(x))
 while x != 6:
   x = random.randint(1,6)
-  print(x)
+  print("取得亂數 : " + str(x))
 
-
+print("亂數分配工作")
 member = ["花媽", "花橘子", "花柚子", "花爸"]
 housework = ["掃地", "拖地", "洗衣服", "擦窗戶"]
 random.shuffle(housework)
@@ -21,8 +20,6 @@ for count in range(20):
     length = random.randrange(10)       #0~9之間的整數
     shape = random.randrange(3, 8)      #3~7之間的整數
     print(count, x, y, length, shape)
-
-
 
 def randomAnimal():
     nouns = ["lion", "mouse", "cat", "dog"]
@@ -47,8 +44,6 @@ print("任選一個")
 for count in range(10):
     print(random.choice(['a', 'b', 'c']))
 
-
-import random
 #values = [1,2,3,4,5,6]
 values = ['alpha','bravo','charlie','delta','echo','foxtrot']
 
@@ -61,9 +56,6 @@ print(random.choice(values))
 print(random.choice(values))
 
 print("猜數字遊戲")
-
-
-# _*_ coding: utf-8 _*_
 
 import random
 

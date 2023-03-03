@@ -1,8 +1,8 @@
 import Tkinter as tk
+
 window = tk.Tk()
 
 count = 0
-
 
 def buttonClick():
     global count

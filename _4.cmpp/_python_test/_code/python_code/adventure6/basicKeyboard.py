@@ -1,4 +1,5 @@
 import pygame
+
 pygame.init()
 # Window setup
 size = [400, 300]
@@ -12,7 +13,7 @@ while not done:
 
     #player movement
     if keys[pygame.K_w]:
-        print "Hello"
+        print("Hello")
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
