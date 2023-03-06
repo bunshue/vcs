@@ -1,0 +1,14 @@
+{'results': [
+  {'bbox': {'bottom': 126, 'left': 96, 'right': 185, 'top': 36}, 
+  'emotions': [
+    {'confidence': 0.9640155, 'label': 'Surprise'}, 
+    {'confidence': 0.014795, 'label': 'Fear'}, 
+    {'confidence': 0.0108372, 'label': 'Happy'}, 
+    {'confidence': 0.005837, 'label': 'Sad'}, 
+    {'confidence': 0.0028651, 'label': 'Neutral'}, 
+    {'confidence': 0.0011697, 'label': 'Angry'}, 
+    {'confidence': 0.0004805, 'label': 'Disgust'}
+    ], 
+  'person': 0}
+  ]
+}

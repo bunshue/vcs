@@ -1,0 +1,2830 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:dt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Author>NPOI</Author>
+  <LastAuthor>user</LastAuthor>
+  <Created>2019-11-04T11:17:52Z</Created>
+  <LastSaved>2019-11-04T03:25:10Z</LastSaved>
+  <Version>12.00</Version>
+ </DocumentProperties>
+ <CustomDocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Generator dt:dt="string">NPOI</Generator>
+  <Generator_x0020_Version dt:dt="string">2.1.1</Generator_x0020_Version>
+ </CustomDocumentProperties>
+ <ExcelWorkbook xmlns="urn:schemas-microsoft-com:office:excel">
+  <WindowHeight>6740</WindowHeight>
+  <WindowWidth>18910</WindowWidth>
+  <WindowTopX>130</WindowTopX>
+  <WindowTopY>500</WindowTopY>
+  <ProtectStructure>False</ProtectStructure>
+  <ProtectWindows>False</ProtectWindows>
+ </ExcelWorkbook>
+ <Styles>
+  <Style ss:ID="Default" ss:Name="Normal">
+   <Alignment ss:Vertical="Center"/>
+   <Borders/>
+   <Font ss:FontName="新細明體" x:CharSet="136" x:Family="Roman" ss:Size="11"
+    ss:Color="#000000"/>
+   <Interior/>
+   <NumberFormat/>
+   <Protection/>
+  </Style>
+  <Style ss:ID="m69853824">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font ss:FontName="標楷體" x:CharSet="136" x:Family="Script" ss:Size="14"
+    ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="m69853844">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font ss:FontName="標楷體" x:CharSet="136" x:Family="Script" ss:Size="12"
+    ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="m69853864">
+   <Alignment ss:Horizontal="Left" ss:Vertical="Top"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font ss:FontName="標楷體" x:CharSet="136" x:Family="Script" ss:Size="12"
+    ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="s16">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Center"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font ss:FontName="標楷體" x:CharSet="136" x:Family="Script" ss:Size="12"
+    ss:Color="#000000"/>
+  </Style>
+  <Style ss:ID="s17">
+   <Alignment ss:Horizontal="Center" ss:Vertical="Top"/>
+   <Borders>
+    <Border ss:Position="Bottom" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Left" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Right" ss:LineStyle="Continuous" ss:Weight="1"/>
+    <Border ss:Position="Top" ss:LineStyle="Continuous" ss:Weight="1"/>
+   </Borders>
+   <Font ss:FontName="標楷體" x:CharSet="136" x:Family="Script" ss:Size="12"
+    ss:Color="#000000"/>
+   <NumberFormat ss:Format="Standard"/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="住宅價格">
+  <Table ss:ExpandedColumnCount="6" ss:ExpandedRowCount="340" x:FullColumns="1"
+   x:FullRows="1" ss:DefaultColumnWidth="44" ss:DefaultRowHeight="14.5">
+   <Column ss:AutoFitWidth="0" ss:Width="100" ss:Span="3"/>
+   <Column ss:Index="5" ss:AutoFitWidth="0" ss:Width="150" ss:Span="1"/>
+   <Row ss:Height="19.5">
+    <Cell ss:MergeAcross="5" ss:StyleID="m69853824"><Data ss:Type="String">住宅價格季指數</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s16"><Data ss:Type="String">住宅價格指數類別</Data></Cell>
+    <Cell ss:StyleID="s16"><Data ss:Type="String">期別</Data></Cell>
+    <Cell ss:StyleID="s16"><Data ss:Type="String">季指數</Data></Cell>
+    <Cell ss:StyleID="s16"><Data ss:Type="String">變動率(季)(%)</Data></Cell>
+    <Cell ss:StyleID="s16"><Data ss:Type="String">標準住宅總價(萬元)</Data></Cell>
+    <Cell ss:StyleID="s16"><Data ss:Type="String">標準住宅單價(萬元/坪)</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大安區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.53</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2496</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">78.00</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大安區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.97</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.43%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2507</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">78.33</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大安區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105.01</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.98%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2556</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">79.88</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大安區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107.54</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.41%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2618</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">81.81</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大安區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108.70</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.08%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2646</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">82.69</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大安區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">110.73</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.87%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2695</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">84.23</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大安區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">111.22</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.44%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2707</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">84.60</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大安區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">112.51</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.16%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2739</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">85.59</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大安區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">114.95</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.17%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2798</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">87.44</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大安區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">115.62</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.58%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2814</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">87.95</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大安區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">114.14</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.28%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2778</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">86.82</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大安區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">112.36</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.56%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2735</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">85.47</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大安區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">109.47</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.57%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2665</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">83.27</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大安區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108.68</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.72%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2645</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">82.67</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大安區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107.49</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.09%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2616</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">81.76</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大安區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107.48</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.01%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2616</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">81.76</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大安區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104.58</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.7%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2546</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">79.55</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大安區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.58</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.91%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2497</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">78.03</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大安區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.52</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.03%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2471</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">77.23</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大安區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.12</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.38%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2437</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">76.16</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大安區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.59</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.53%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2424</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">75.76</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大安區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.24</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.65%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2440</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">76.25</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大安區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.71</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.47%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2452</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">76.61</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大安區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.40</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.3%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2420</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">75.61</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大安區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.11</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.29%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2413</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">75.39</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大安區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">98.82</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.29%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2406</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">75.17</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大安區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.95</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.16%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2457</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">76.79</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大安區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.46</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.51%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2470</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">77.18</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">信義區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">97.01</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1801</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">60.05</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">信義區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">97.08</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.07%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1803</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">60.09</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">信義區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">96.71</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.38%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1796</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">59.86</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">信義區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">98.75</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.11%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1834</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">61.12</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">信義區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.88</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.16%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1873</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">62.44</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">信義區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.32</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.42%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1919</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">63.95</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">信義區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106.27</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.86%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1973</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">65.78</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">信義區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107.50</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.16%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1996</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">66.54</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">信義區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106.44</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.99%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1976</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">65.88</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">信義區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108.13</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.59%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2008</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">66.93</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">信義區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107.56</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.53%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1997</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">66.57</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">信義區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108.18</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.58%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2009</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">66.96</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">信義區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105.96</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.05%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1968</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">65.59</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">信義區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104.02</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.83%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1931</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">64.38</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">信義區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.50</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.5%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1922</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">64.07</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">信義區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.54</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.04%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1923</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">64.09</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">信義區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.25</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.25%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1899</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">63.29</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">信義區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.99</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.72%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1912</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">63.74</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">信義區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.05</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.88%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1876</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">62.55</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">信義區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.20</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.83%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1842</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">61.40</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">信義區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.33</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.13%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1845</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">61.48</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">信義區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">97.04</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.31%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1802</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">60.06</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">信義區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">98.48</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.48%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1829</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">60.96</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">信義區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.66</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.2%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1851</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">61.69</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">信義區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.70</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.05%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1888</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">62.95</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">信義區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.86</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.16%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1891</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">63.04</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">信義區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.92</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.92%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1874</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">62.47</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">信義區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.16</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.23%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1897</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">63.24</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中正區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">96.33</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2105</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">65.80</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中正區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">96.65</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.33%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2112</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">66.02</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中正區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">94.61</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.11%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2068</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">64.62</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中正區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">96.75</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.26%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2115</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">66.08</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中正區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">97.32</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.59%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2127</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">66.47</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中正區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.34</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.08%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2171</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">67.85</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中正區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.57</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.24%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2220</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">69.38</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中正區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.25</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.32%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2213</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">69.16</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中正區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.47</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.76%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2174</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">67.94</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中正區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.99</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.53%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2207</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">68.98</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中正區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.74</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.74%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2224</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">69.49</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中正區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.18</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.42%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2255</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">70.48</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中正區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.09</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.03%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2210</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">69.05</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中正區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.74</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.35%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2202</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">68.80</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中正區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.15</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.58%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2167</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">67.72</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中正區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.94</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.81%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2228</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">69.63</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中正區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.19</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.7%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2168</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">67.75</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中正區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">98.72</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.47%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2158</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">67.43</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中正區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">98.68</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.04%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2139</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">66.86</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中正區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.07</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.41%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2187</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">68.35</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中正區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.14</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.07%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2211</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">69.08</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中正區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.64</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.49%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2221</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">69.42</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中正區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.14</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.46%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2167</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">67.71</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中正區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.37</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.25%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2216</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">69.24</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中正區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.80</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.55%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2181</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">68.16</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中正區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.52</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.28%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2175</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">67.97</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中正區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">98.70</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.82%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2157</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">67.41</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中正區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.15</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.47%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2189</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">68.40</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">83.36</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1149</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">47.87</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">84.47</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.33%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1164</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">48.50</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">87.20</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">3.23%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1202</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">50.07</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">90.45</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">3.73%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1246</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">51.94</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">93.85</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">3.76%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1293</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">53.89</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">97.06</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">3.42%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1338</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">55.73</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.62</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">3.67%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1387</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">57.77</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.00</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.37%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1406</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">58.57</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.74</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.71%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1430</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">59.57</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106.81</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.96%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1472</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">61.33</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107.47</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.62%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1481</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">61.71</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105.08</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.22%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1448</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">60.34</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105.66</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.55%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1456</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">60.67</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.16</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.37%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1422</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">59.24</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.60</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.48%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1386</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">57.77</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.28</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.67%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1410</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">58.73</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.20</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.9%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1422</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">59.26</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.81</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.32%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1389</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">57.88</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">98.12</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.67%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1352</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">56.34</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">97.64</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.49%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1346</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">56.07</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">97.94</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.31%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1350</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">56.24</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.55</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.64%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1372</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">57.16</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">98.47</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.08%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1357</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">56.54</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.69</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.25%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1388</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">57.82</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.83</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.14%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1389</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">57.89</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.86</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.96%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1376</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">57.34</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">98.07</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.79%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1351</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">56.31</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">中山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.68</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.66%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1387</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">57.81</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">松山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">97.11</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2010</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">62.82</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">松山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">96.97</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.14%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2007</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">62.73</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">松山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">97.68</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.73%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2022</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">63.19</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">松山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.36</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">3.77%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2098</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">65.57</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">松山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104.34</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.94%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2160</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">67.50</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">松山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107.98</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">3.49%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2235</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">69.85</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">松山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107.72</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.24%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2230</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">69.69</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">松山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">109.27</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.44%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2262</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">70.69</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">松山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">109.58</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.28%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2268</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">70.89</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">松山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108.61</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.89%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2248</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">70.26</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">松山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">111.00</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.2%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2298</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">71.81</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">松山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108.87</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.92%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2254</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">70.43</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">松山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106.25</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.41%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2200</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">68.73</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">松山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.28</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.8%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2138</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">66.82</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">松山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.77</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.49%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2127</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">66.48</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">松山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.01</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.74%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2112</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">65.99</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">松山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.23</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.74%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2075</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">64.84</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">松山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.63</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.6%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2063</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">64.46</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">松山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.34</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.29%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2057</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">64.27</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">松山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">98.75</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.59%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2044</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">63.88</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">松山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">97.94</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.82%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2028</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">63.36</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">松山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">98.71</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.79%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2044</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">63.86</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">松山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.09</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.41%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2093</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">65.40</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">松山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">98.99</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.08%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2049</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">64.04</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">松山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.46</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.47%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2059</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">64.34</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">松山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.21</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.76%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2116</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">66.12</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">松山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.34</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.85%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2098</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">65.56</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">松山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.06</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.7%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2153</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">67.28</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">南港區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">84.65</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1741</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">44.63</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">南港區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">84.68</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.04%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1741</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">44.65</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">南港區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">86.93</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.66%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1787</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">45.83</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">南港區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">90.17</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">3.73%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1854</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">47.54</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">南港區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">93.40</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">3.58%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1921</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">49.24</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">南港區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">97.71</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">4.61%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2009</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">51.52</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">南港區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.42</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">4.82%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2106</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">54.00</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">南港區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.23</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.79%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2123</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">54.43</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">南港區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104.90</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.62%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2157</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">55.31</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">南港區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.98</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.88%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2138</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">54.82</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">南港區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106.67</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.59%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2193</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">56.24</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">南港區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107.54</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.82%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2211</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">56.70</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">南港區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108.46</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.86%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2230</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">57.18</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">南港區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108.07</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.36%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2222</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">56.98</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">南港區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105.20</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.66%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2163</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">55.46</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">南港區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.82</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-3.21%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2094</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">53.68</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">南港區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.15</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.66%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2080</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">53.33</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">南港區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.18</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.03%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2080</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">53.34</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">南港區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104.10</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.89%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2140</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">54.88</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">南港區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.37</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.66%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2105</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">53.97</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">南港區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.05</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.29%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2078</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">53.28</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">南港區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">97.19</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-3.82%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1998</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">51.24</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">南港區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.77</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">3.68%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2072</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">53.13</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">南港區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">98.07</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.68%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2016</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">51.70</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">南港區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.68</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.64%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2050</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">52.55</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">南港區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.68</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2070</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">53.08</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">南港區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.62</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.06%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2069</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">53.05</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">南港區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.90</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.28%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2075</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">53.20</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">士林區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">96.00</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1769</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">49.13</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">士林區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">98.65</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.76%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1817</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">50.48</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">士林區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.33</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.72%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1867</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">51.86</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">士林區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.40</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.06%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1886</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">52.40</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">士林區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.26</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.14%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1884</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">52.33</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">士林區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104.22</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.92%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1920</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">53.33</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">士林區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107.25</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.91%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1976</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">54.88</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">士林區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106.18</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1956</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">54.34</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">士林區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108.93</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.59%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2007</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">55.74</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">士林區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">109.29</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.33%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2013</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">55.93</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">士林區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">112.22</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.68%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2067</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">57.43</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">士林區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">110.19</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.81%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2030</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">56.39</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">士林區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108.59</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.45%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2001</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">55.57</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">士林區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107.51</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.99%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1981</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">55.02</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">士林區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107.33</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.17%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1977</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">54.92</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">士林區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106.65</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.63%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1965</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">54.58</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">士林區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.77</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.7%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1912</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">53.10</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">士林區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.90</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.8%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1877</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">52.15</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">士林區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.74</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.14%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1856</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">51.55</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">士林區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.51</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.76%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1870</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">51.95</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">士林區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.11</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.59%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1881</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">52.25</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">士林區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.85</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.72%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1895</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">52.63</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">士林區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.88</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.92%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1859</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">51.62</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">士林區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.16</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.7%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1827</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">50.74</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">士林區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.78</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.63%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1838</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">51.06</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">士林區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.05</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.27%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1843</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">51.20</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">士林區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.48</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.43%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1888</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">52.44</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">士林區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.36</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.12%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1886</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">52.38</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">內湖區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">96.07</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1713</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">48.94</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">內湖區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">96.45</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.4%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1720</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">49.13</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">內湖區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">98.57</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.2%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1757</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">50.21</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">內湖區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">98.48</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.09%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1756</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">50.16</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">內湖區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.32</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.88%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1806</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">51.61</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">內湖區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.92</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.58%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1835</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">52.43</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">內湖區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.79</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.85%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1850</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">52.87</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">內湖區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105.80</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.94%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1886</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">53.89</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">內湖區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105.78</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.02%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1886</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">53.88</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">內湖區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106.32</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.51%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1895</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">54.15</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">內湖區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107.85</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.44%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1923</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">54.93</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">內湖區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108.07</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.2%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1927</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">55.05</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">內湖區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107.09</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.91%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1909</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">54.55</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">內湖區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106.57</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.49%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1900</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">54.29</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">內湖區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.84</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.56%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1851</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">52.89</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">內湖區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.87</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.93%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1834</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">52.40</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">內湖區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.94</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.85%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1782</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">50.91</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">內湖區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.70</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.76%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1795</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">51.30</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">內湖區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">98.65</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.04%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1759</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">50.25</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">內湖區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">98.73</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.08%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1760</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">50.29</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">內湖區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.32</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.6%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1771</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">50.59</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">內湖區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">98.86</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.46%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1763</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">50.36</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">內湖區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.40</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.56%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1790</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">51.14</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">內湖區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.52</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.88%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1774</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">50.69</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">內湖區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.17</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.65%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1786</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">51.02</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">內湖區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.58</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.41%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1811</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">51.74</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">內湖區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.70</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.1%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1831</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">52.31</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">內湖區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.85</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.83%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1816</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">51.88</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大同區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">88.35</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1300</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">44.82</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大同區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">89.17</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.93%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1312</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">45.23</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大同區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">88.71</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.52%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1305</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">45.00</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大同區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">90.00</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.45%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1324</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">45.65</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大同區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">93.25</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">3.61%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1372</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">47.30</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大同區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">96.36</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">3.34%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1418</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">48.88</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大同區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.12</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">4.94%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1488</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">51.30</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大同區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.72</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.59%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1496</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">51.60</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大同區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.24</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.47%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1489</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">51.36</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大同區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.78</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.53%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1497</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">51.63</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大同區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.90</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.08%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1529</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">52.71</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大同區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106.72</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.71%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1570</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">54.14</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大同區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106.13</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.55%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1561</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">53.84</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大同區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105.72</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.39%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1555</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">53.63</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大同區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.57</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.03%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1524</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">52.54</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大同區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.15</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.41%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1518</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">52.33</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大同區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.80</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.31%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1498</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">51.64</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大同區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.05</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.25%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1501</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">51.77</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大同區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.77</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.27%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1497</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">51.63</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大同區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.95</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.81%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1485</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">51.21</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大同區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.72</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.74%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1526</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">52.61</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大同區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.08</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.62%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1516</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">52.29</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大同區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.29</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.77%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1505</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">51.89</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大同區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.25</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.97%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1460</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">50.35</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大同區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.03</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.22%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1457</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">50.24</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大同區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.64</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">3.65%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1510</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">52.07</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大同區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.77</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.8%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1468</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">50.61</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">大同區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.74</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.98%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1511</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">52.12</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">萬華區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">91.97</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1190</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">41.02</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">萬華區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">91.60</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.4%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1185</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">40.85</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">萬華區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">93.39</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.95%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1208</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">41.65</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">萬華區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">94.32</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1220</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">42.06</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">萬華區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">96.52</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.33%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1248</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">43.05</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">萬華區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">96.88</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.37%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1253</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">43.21</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">萬華區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">98.77</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.95%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1277</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">44.05</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">萬華區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.47</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.73%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1312</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">45.25</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">萬華區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.10</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.62%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1321</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">45.54</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">萬華區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.97</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.83%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1345</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">46.37</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">萬華區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108.22</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">4.09%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1400</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">48.26</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">萬華區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107.17</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.97%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1386</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">47.80</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">萬華區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106.98</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.18%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1384</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">47.71</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">萬華區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105.71</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.19%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1367</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">47.14</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">萬華區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.65</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.95%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1341</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">46.22</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">萬華區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104.89</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.2%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1357</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">46.78</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">萬華區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.77</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.07%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1342</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">46.28</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">萬華區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.69</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.08%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1341</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">46.25</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">萬華區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104.33</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.62%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1349</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">46.53</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">萬華區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.46</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.83%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1338</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">46.14</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">萬華區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.27</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.12%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1310</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">45.16</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">萬華區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">98.62</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.62%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1275</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">43.98</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">萬華區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">97.45</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.19%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1260</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">43.46</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">萬華區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.21</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.81%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1283</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">44.24</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">萬華區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">98.39</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.83%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1272</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">43.88</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">萬華區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.60</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.25%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1301</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">44.87</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">萬華區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.32</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.28%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1297</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">44.74</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">萬華區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.67</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.35%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1302</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">44.90</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">文山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">93.84</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1429</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">42.02</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">文山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">93.49</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.37%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1423</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">41.87</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">文山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">91.92</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.68%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1400</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">41.16</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">文山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">95.51</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">3.91%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1454</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">42.77</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">文山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.10</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">3.76%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1509</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">44.38</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">文山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.13</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.04%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1525</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">44.84</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">文山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.92</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.79%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1537</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">45.19</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">文山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.93</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1552</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">45.64</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">文山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.57</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.61%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1577</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">46.38</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">文山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105.56</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.92%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1607</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">47.27</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">文山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.63</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.83%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1578</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">46.41</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">文山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104.71</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.04%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1594</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">46.89</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">文山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.50</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.16%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1576</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">46.35</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">文山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.54</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.93%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1561</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">45.92</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">文山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.56</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.93%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1531</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">45.03</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">文山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.90</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.34%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1536</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">45.19</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">文山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.40</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.49%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1513</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">44.51</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">文山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.46</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.06%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1514</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">44.54</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">文山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.38</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.08%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1513</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">44.51</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">文山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.84</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.48%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1551</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">45.61</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">文山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.59</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.74%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1562</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">45.94</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">文山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.47</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.07%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1530</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">44.99</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">文山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.64</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.16%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1548</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">45.52</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">文山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.75</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.86%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1519</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">44.67</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">文山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.00</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.75%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1507</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">44.34</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">文山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.51</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.52%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1515</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">44.56</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">文山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.84</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.34%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1551</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">45.61</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">文山區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.81</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.95%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1565</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">46.04</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">北投區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">98.92</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1322</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">42.63</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">北投區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.68</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.78%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1345</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">43.39</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">北投區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.85</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.82%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1334</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">43.03</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">北投區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.03</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.18%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1363</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">43.97</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">北投區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.55</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-1.45%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1343</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">43.34</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">北投區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.43</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.86%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1382</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">44.57</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">北投區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.50</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.9%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1369</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">44.17</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">北投區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.11</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.38%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1364</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">44.01</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">北投區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.34</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.2%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1381</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">44.54</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">北投區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.64</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.68%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1371</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">44.24</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">北投區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.02</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.37%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1376</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">44.40</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">北投區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105.65</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">2.55%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1412</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">45.53</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">北投區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">103.22</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.3%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1379</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">44.48</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">北投區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">104Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.38</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.75%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1341</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">43.26</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">北投區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.64</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.74%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1331</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">42.94</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">北投區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.31</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.68%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1354</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">43.66</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">北投區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.00</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.31%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1349</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">43.53</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">北投區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">105Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">100.71</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.29%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1345</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">43.40</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">北投區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.15</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1.43%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1365</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">44.02</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">北投區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">101.45</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.69%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1355</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">43.72</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">北投區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">102.34</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.88%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1367</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">44.10</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">北投區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">106Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.89</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-2.39%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1334</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">43.05</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">北投區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.16</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.73%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1325</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">42.74</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">北投區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">98.95</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.21%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1322</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">42.64</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">北投區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q3</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.04</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.09%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1323</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">42.68</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">北投區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">107Q4</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">98.50</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.55%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1316</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">42.45</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">北投區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108Q1</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">99.10</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">0.61%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1324</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">42.71</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:StyleID="s17"><Data ss:Type="String">北投區</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">108Q2</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">98.52</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">-0.59%</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">1316</Data></Cell>
+    <Cell ss:StyleID="s17"><Data ss:Type="String">42.46</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:MergeAcross="5" ss:StyleID="m69853844"><Data ss:Type="String">單位:指數</Data></Cell>
+   </Row>
+   <Row ss:Height="17">
+    <Cell ss:MergeAcross="5" ss:StyleID="m69853864"><Data ss:Type="String">資料來源：臺北市政府地政局</Data></Cell>
+   </Row>
+  </Table>
+  <WorksheetOptions xmlns="urn:schemas-microsoft-com:office:excel">
+   <PageSetup>
+    <Header x:Margin="0.3"/>
+    <Footer x:Margin="0.3"/>
+    <PageMargins x:Bottom="0.75" x:Left="0.7" x:Right="0.7" x:Top="0.75"/>
+   </PageSetup>
+   <Print>
+    <ValidPrinterInfo/>
+    <PaperSizeIndex>9</PaperSizeIndex>
+    <HorizontalResolution>600</HorizontalResolution>
+    <VerticalResolution>0</VerticalResolution>
+   </Print>
+   <Selected/>
+   <Panes>
+    <Pane>
+     <Number>3</Number>
+     <ActiveRow>6</ActiveRow>
+     <ActiveCol>4</ActiveCol>
+    </Pane>
+   </Panes>
+   <ProtectObjects>False</ProtectObjects>
+   <ProtectScenarios>False</ProtectScenarios>
+  </WorksheetOptions>
+ </Worksheet>
+</Workbook>

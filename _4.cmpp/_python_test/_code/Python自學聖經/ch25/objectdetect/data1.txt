@@ -1,0 +1,6 @@
+{'boxes': [
+  {'confidence': 0.6685011386871338, 'coordinates': {'x0': 11, 'x1': 250, 'y0': 10, 'y1': 181}, 'label': 'person'},
+  {'confidence': 0.5997737050056458, 'coordinates': {'x0': 24, 'x1': 140, 'y0': 90, 'y1': 179}, 'label': 'dog'}
+  ], 
+  'image': 'data://.algo/deeplearning/ObjectDetectionCOCO/temp/output.png'
+}

@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <title>傳送 POST 參數</title>
+</head>
+<body>
+	<h1> Django 網站 </h1>
+    <form method='post' action="/djpost">
+        {% csrf_token %}
+        <p>帳號：<input type='text' name='username' /></p>
+        <p>密碼：<input type='text' name='password' /></p>
+        <p><button type='submit'>確定</button></p>
+    </form>
+</body> 
+</html>

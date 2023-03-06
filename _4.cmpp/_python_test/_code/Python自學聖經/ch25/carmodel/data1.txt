@@ -1,0 +1,5 @@
+[
+  {'body_style': 'Sedan', 'confidence': '0.65', 'make': 'Mercedes-Benz', 'model': 'C-Class', 'model_year': '2015'}, 
+  {'body_style': 'Sedan', 'confidence': '0.30', 'make': 'Mercedes-Benz', 'model': 'S-Class', 'model_year': '2013'}, 
+  {'body_style': 'Sedan', 'confidence': '0.02', 'make': 'Mercedes-Benz', 'model': 'C-Class', 'model_year': '2008'}
+]
