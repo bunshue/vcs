@@ -53,13 +53,10 @@ plt.plot(listx, listy, color='red', markersize="16", marker=".") # 紅色，實�
 
 plt.xticks(rotation = 45) # 讓 x 坐標軸標題旋轉 45 度, 使得文字不會重疊
 
-
-#透過 Matplotlib 的 rcParams 設定中文字型檔：
-# 設定讓中文可順利顯示不亂碼
+#設定中文字型及負號正確顯示
+#設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-
-#但這還不足夠，若是有負數「-」則會再度出現方框亂碼，因此還需要再多設定：
-
+#設定負號
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 #將圖表呈現出來
