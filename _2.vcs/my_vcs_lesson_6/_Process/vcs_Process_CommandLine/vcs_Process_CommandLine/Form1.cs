@@ -168,17 +168,17 @@ namespace vcs_Process_CommandLine
             run_command_line_process_async(exe_filename, parameters);
         }
 
-        void run_command_line_process_async(string exe_filename, string parameters)
+        //標準版 非同步 Process使用
+        void run_command_line_process_async(string exe_filename, string command)
         {
             cmd_output_data.Clear();
             show_result_index = 0;
             //timer_get_result.Enabled = true;
 
-            //非同步測試1
             process_async.StartInfo.FileName = exe_filename;  //設定要啟動的程式
             //process_async.StartInfo.Arguments = "/c " + command; //設定程式執行參數, 也可直接把command寫在這裡, 就不用後面的 StandardInput.WriteLine 了, 要加/c
             //process_async.StartInfo.Arguments = "/c systeminfo";  //可, 要加/c
-            process_async.StartInfo.Arguments = parameters;
+            process_async.StartInfo.Arguments = command;
             //process_async.StandardInput.AutoFlush = true;
 
             process_async.StartInfo.UseShellExecute = false;  //false, 關閉Shell的使用, 是否指定操作系統外殼進程啟動程序, 可能接受來自調用程序的輸入信息
@@ -190,16 +190,18 @@ namespace vcs_Process_CommandLine
             //process_async.StartInfo.WindowStyle = ProcessWindowStyle.Normal;  //測不出來
             //process_async.StartInfo.WindowStyle = ProcessWindowStyle.Hidden,
 
-            //* Set your output and error (asynchronous) handlers
+            //設定非同步資料處理 output and error handlers
             process_async.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
             process_async.ErrorDataReceived += new DataReceivedEventHandler(OutputHandler);
 
-            //* Start process and handlers
             process_async.Start();    //啟動程式
 
+            //啟動讀取資料輸出與錯誤輸出
             process_async.BeginOutputReadLine();
             process_async.BeginErrorReadLine();
-            process_async.WaitForExit();
+            richTextBox1.Text += "等待程式結束.......\n";
+            process_async.WaitForExit();	//等待退出
+            richTextBox1.Text += "程式結束\n";
         }
 
         void OutputHandler(object sendingProcess, DataReceivedEventArgs outLine)
@@ -255,6 +257,7 @@ namespace vcs_Process_CommandLine
             process.StartInfo.FileName = exe_filename;  //設定要啟動的程式
             //process.StartInfo.Arguments = "/c " + command; //設定程式執行參數, 也可直接把command寫在這裡, 就不用後面的 StandardInput.WriteLine 了, 要加/c
             //process.StartInfo.Arguments = "/c systeminfo";  //可, 要加/c
+            //process.StartInfo.Arguments = command;
             //process.StandardInput.AutoFlush = true;
 
             process.StartInfo.UseShellExecute = false;  //false, 關閉Shell的使用, 是否指定操作系統外殼進程啟動程序, 可能接受來自調用程序的輸入信息
@@ -264,6 +267,7 @@ namespace vcs_Process_CommandLine
             process.StartInfo.CreateNoWindow = true; //true: 設置不顯示程式窗口, false: 出現cmd的黑窗體
             process.StartInfo.ErrorDialog = false;
             //process.StartInfo.WindowStyle = ProcessWindowStyle.Normal;  //測不出來
+            //process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
 
             process.Start();    //啟動程式
 

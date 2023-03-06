@@ -3,7 +3,6 @@ from urllib.error import HTTPError
 from bs4 import BeautifulSoup
 import sys
 
-
 def getTitle(url):
     try:
         html = urlopen(url)
@@ -19,6 +18,7 @@ def getTitle(url):
 
 title = getTitle("http://www.pythonscraping.com/exercises/exercise1.html")
 if title == None:
-    print("Title could not be found")
+    print("找不到網頁標題")
 else:
+    print("取得網頁標題:")
     print(title)

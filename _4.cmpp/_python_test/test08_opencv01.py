@@ -1,5 +1,3 @@
-# Python 新進測試 19
-
 import cv2
 import numpy as np
 
@@ -40,3 +38,6 @@ cv2.imshow('image', img)
 cv2.waitKey(0)  #待user輸入內容
 cv2.destroyAllWindows() #關閉視窗
 '''
+
+
+
