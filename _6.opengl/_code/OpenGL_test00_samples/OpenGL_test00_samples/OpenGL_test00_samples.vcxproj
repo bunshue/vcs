@@ -21,7 +21,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\Common.cpp" />
     <ClCompile Include="rgb.c" />
-    <ClCompile Include="u06.rotatingCube1.cpp" />
+    <ClCompile Include="u06.rotatingCube2.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

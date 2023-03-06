@@ -48,7 +48,8 @@ namespace vcs_MyPlayer3
         string pdf_filename = string.Empty;
         string mp3_filename_short = string.Empty;
         string pdf_filename_short = string.Empty;
-        string current_directory = string.Empty;
+        string current_directory_mp3 = Directory.GetCurrentDirectory();
+        string current_directory_pdf = Directory.GetCurrentDirectory();
         bool flag_already_use_webbrowser = false;
 
         int W = Screen.PrimaryScreen.WorkingArea.Width;
@@ -635,7 +636,7 @@ namespace vcs_MyPlayer3
                     mp3_filename = filename;
                     mp3_position = 0;
                     mp3_filename_short = Path.GetFileName(filename);
-                    current_directory = Path.GetDirectoryName(filename);
+                    current_directory_mp3 = Path.GetDirectoryName(filename);
 
                     flag_use_autoload_mp3_file = true;
                     flag_display_mode = MODE_0;
@@ -646,7 +647,7 @@ namespace vcs_MyPlayer3
                     {
                         pdf_filename = filename;
                         pdf_filename_short = Path.GetFileName(pdf_filename);
-                        current_directory = Path.GetDirectoryName(pdf_filename);
+                        current_directory_pdf = Path.GetDirectoryName(pdf_filename);
                         webBrowser1.Navigate(pdf_filename);
 
                         flag_use_autoload_pdf_file = true;
@@ -679,7 +680,7 @@ namespace vcs_MyPlayer3
                 if (File.Exists(mp3_filename) == true)
                 {
                     mp3_filename_short = Path.GetFileName(mp3_filename);
-                    current_directory = Path.GetDirectoryName(mp3_filename);
+                    current_directory_mp3 = Path.GetDirectoryName(mp3_filename);
                 }
             }
 
@@ -697,7 +698,7 @@ namespace vcs_MyPlayer3
                 if (File.Exists(pdf_filename) == true)
                 {
                     pdf_filename_short = Path.GetFileName(pdf_filename);
-                    current_directory = Path.GetDirectoryName(pdf_filename);
+                    current_directory_pdf = Path.GetDirectoryName(pdf_filename);
 
                     //預設
                     //webBrowser1.Navigate(pdf_filename);
@@ -734,7 +735,7 @@ namespace vcs_MyPlayer3
                 }
 
                 mp3_filename_short = Path.GetFileName(mp3_filename);
-                current_directory = Path.GetDirectoryName(mp3_filename);
+                current_directory_mp3 = Path.GetDirectoryName(mp3_filename);
                 show_main_message1("檔案 : " + mp3_filename_short.ToString(), S_OK, 30);
 
                 FileInfo f = new FileInfo(mp3_filename);
@@ -836,7 +837,8 @@ namespace vcs_MyPlayer3
             }
             else if (e.KeyData == Keys.O)
             {
-                do_open_files();    //開啟 pdf或mp3 檔案
+                richTextBox1.Text += "TBD\n";
+                do_open_files();    //開啟 pdf 或 mp3 檔案
             }
             else if (e.KeyData == Keys.M)
             {
@@ -1208,7 +1210,7 @@ namespace vcs_MyPlayer3
                 axWindowsMediaPlayer1.URL = mp3_filename;
                 axWindowsMediaPlayer1.Ctlcontrols.currentPosition = mp3_position;
                 mp3_filename_short = Path.GetFileName(mp3_filename);
-                current_directory = Path.GetDirectoryName(mp3_filename);
+                current_directory_mp3 = Path.GetDirectoryName(mp3_filename);
                 show_main_message1("檔案 : " + mp3_filename_short.ToString(), S_OK, 30);
             }
         }
@@ -1225,7 +1227,7 @@ namespace vcs_MyPlayer3
                 axWindowsMediaPlayer1.URL = mp3_filename;
                 axWindowsMediaPlayer1.Ctlcontrols.currentPosition = mp3_position;
                 mp3_filename_short = Path.GetFileName(mp3_filename);
-                current_directory = Path.GetDirectoryName(mp3_filename);
+                current_directory_mp3 = Path.GetDirectoryName(mp3_filename);
                 show_main_message1("檔案 : " + mp3_filename_short.ToString(), S_OK, 30);
             }
         }
@@ -1363,14 +1365,12 @@ namespace vcs_MyPlayer3
             openFileDialog1.DefaultExt = "*.pdf";
             openFileDialog1.Filter = "pdf檔(*.pdf)|*.pdf";
             //openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
-            openFileDialog1.RestoreDirectory = true;
+            //openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
             //openFileDialog1.InitialDirectory = "c:\\";  //預設開啟的路徑
+            openFileDialog1.InitialDirectory = current_directory_pdf;
             openFileDialog1.Multiselect = false;    //單選
-            if (openFileDialog1.InitialDirectory == "")
-            {
-                openFileDialog1.InitialDirectory = Application.StartupPath;
-            }
+
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 /*
@@ -1387,7 +1387,7 @@ namespace vcs_MyPlayer3
                 show_item_location(MODE_1);
                 pdf_filename = openFileDialog1.FileName;
                 pdf_filename_short = Path.GetFileName(pdf_filename);
-                current_directory = Path.GetDirectoryName(pdf_filename);
+                current_directory_pdf = Path.GetDirectoryName(pdf_filename);
                 webBrowser1.Navigate(pdf_filename);
                 show_main_message1("檔案 : " + pdf_filename_short.ToString(), S_OK, 30);
                 pdf_page = 0;
@@ -1397,6 +1397,7 @@ namespace vcs_MyPlayer3
             {
                 show_main_message1("未選取檔案", S_OK, 30);
                 pdf_filename = "";
+                current_directory_pdf = Directory.GetCurrentDirectory();
             }
             //this.Focus();
             this.KeyPreview = true;
@@ -1411,14 +1412,12 @@ namespace vcs_MyPlayer3
             openFileDialog1.DefaultExt = "*.mp3";
             openFileDialog1.Filter = "音樂檔案(*.mp3,*.wav,*.flac)|*.mp3;*.wav;*.flac";
             //openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
-            openFileDialog1.RestoreDirectory = true;
+            //openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
             //openFileDialog1.InitialDirectory = "c:\\";  //預設開啟的路徑
+            openFileDialog1.InitialDirectory = current_directory_mp3;
             openFileDialog1.Multiselect = false;    //單選
-            if (openFileDialog1.InitialDirectory == "")
-            {
-                openFileDialog1.InitialDirectory = Application.StartupPath;
-            }
+
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 /*
@@ -1434,7 +1433,7 @@ namespace vcs_MyPlayer3
 
                 mp3_filename = openFileDialog1.FileName;
                 mp3_filename_short = Path.GetFileName(mp3_filename);
-                current_directory = Path.GetDirectoryName(mp3_filename);
+                current_directory_mp3 = Path.GetDirectoryName(mp3_filename);
                 mp3_position = 0;
                 axWindowsMediaPlayer1.URL = mp3_filename;
                 axWindowsMediaPlayer1.Ctlcontrols.currentPosition = mp3_position;
@@ -1493,6 +1492,7 @@ namespace vcs_MyPlayer3
                 show_main_message1("未選取檔案", S_OK, 30);
                 mp3_filename = "";
                 mp3_position = 0;
+                current_directory_mp3 = Directory.GetCurrentDirectory();
             }
             //this.Focus();
             this.KeyPreview = true;
@@ -1507,14 +1507,12 @@ namespace vcs_MyPlayer3
             openFileDialog1.DefaultExt = "*.mp3";
             openFileDialog1.Filter = "開啟檔案(*.pdf,*.mp3,*.wav,*.flac)|*.pdf;*.mp3;*.wav;*.flac";
             //openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
-            openFileDialog1.RestoreDirectory = true;
+            //openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
             //openFileDialog1.InitialDirectory = "c:\\";  //預設開啟的路徑
+            openFileDialog1.InitialDirectory = current_directory_mp3;
             openFileDialog1.Multiselect = false;    //單選
-            if (openFileDialog1.InitialDirectory == "")
-            {
-                openFileDialog1.InitialDirectory = Application.StartupPath;
-            }
+
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 /*
@@ -1526,6 +1524,17 @@ namespace vcs_MyPlayer3
                 richTextBox1.Text += "size: " + f.Length.ToString() + "\n";
                 richTextBox1.Text += "Directory: " + f.Directory + "\n";
                 richTextBox1.Text += "DirectoryName: " + f.DirectoryName + "\n";
+                */
+            }
+            else
+            {
+                /*
+                show_main_message1("未選取檔案", S_OK, 30);
+                pdf_filename = "";
+                mp3_filename = "";
+                mp3_position = 0;
+                current_directory_mp3 = Directory.GetCurrentDirectory();
+                current_directory_pdf = Directory.GetCurrentDirectory();
                 */
             }
         }

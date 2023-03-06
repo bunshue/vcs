@@ -70,7 +70,8 @@ int main(int argc, char** argv)
 	common_setup(argc, argv, windowName, message, 0, 600, 600, 1100, 200, display, reshape0, keyboard0);
 
 	glEnable(GL_DEPTH_TEST);
-	glShadeModel(GL_FLAT);
+	
+	glShadeModel(GL_FLAT);	//有這行 變成純色, 沒這行 變成彩色
 
 	glutMainLoop();	//開始主循環繪製
 
