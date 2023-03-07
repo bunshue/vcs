@@ -1,3 +1,132 @@
+# Python 新進測試 15
+
+'''
+# _*_ coding: utf-8 _*_
+# 程式 8-6.py (Python 3 version)
+
+def disp_area():
+    i = 0
+    for a in climate_data:
+        print("{:>2}:{:<6}\t".format(i,a[0]), end="")
+        i += 1
+        if not (i % 5): print()
+    print()
+
+def disp_temp(data):
+    print("顯示區域:", data[0])
+    print("---------------------")
+    for i in range(1,13):
+        print("{:>2}月均溫:{:>.1f}度".format(i, float(data[i])))
+    print("本地區年均溫為{}度".format(data[13]))
+    print("---------------------")
+
+target_file = 'climate.txt'
+with open(target_file, 'r', encoding='utf-8') as fp:
+    raw_data = fp.readlines()
+climate_data=[]
+for item in raw_data:
+    climate_data.append(item.rstrip('\n').split('\t'))
+
+while True:
+    disp_area()
+    area = int(input("請輸入你要查詢平均溫度的地區：(-1結束)"))
+    if area == -1: break
+    disp_temp(climate_data[area])
+    x = input("請按Enter鍵回主選單")
+'''
+
+
+'''
+
+# _*_ coding: utf-8 _*_
+# 程式 8-7.py (Python 3 version)
+
+import json, datetime
+
+fp = open('earthquake.json','r')
+earthquakes = json.load(fp)
+
+print("過去7天全球發生重大的地震資訊：")
+for eq in earthquakes['features']:
+    print("地點:{}".format(eq['properties']['place']))
+    print("震度:{}".format(eq['properties']['mag']))
+    et = float(eq['properties']['time']) /1000.0
+    d=datetime.datetime.fromtimestamp(et).strftime('%Y-%m-%d %H:%M:%S')
+    print("時間:{}".format(d))
+
+'''
+
+'''
+# _*_ coding: utf-8 _*_
+# 程式 9-2  (Python 3 version)
+
+import requests
+
+url = 'http://udb.moe.edu.tw/Home/About'
+
+html = requests.get(url).text.splitlines()
+for i in range(0,15):
+    print(html[i])
+'''
+
+'''
+# _*_ coding: utf-8 _*_
+# 程式 9-3 (Python 3 version)
+
+import requests
+
+url = 'http://www.com.tw/exam/check_0001_NO_0_101_0_3.html'
+name = input("請輸入要查詢的姓名:")
+html = requests.get(url).text
+if name in html:
+    print("恭喜名列金榜")
+else:
+    print("不好意思，榜單中找不到{}".format(name))
+'''
+    
+'''
+# _*_ coding: utf-8 *_*
+# 程式 9-4 (Python 3 version)
+
+import requests, re
+
+regex = r"([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)"
+url = 'http://icho.chem.ntnu.edu.tw/pub/54con/54con.html'
+
+html = requests.get(url).text
+
+emails = re.findall(regex,html)
+for email in emails:
+    print(email)
+'''
+
+'''
+# _*_ coding: utf-8 _*_
+# 程式 9-8 (Python 3 version)
+
+from bs4 import BeautifulSoup
+import requests
+
+url = 'http://new.cpc.com.tw/division/mb/oil-more4.aspx'
+
+html = requests.get(url).text
+sp = BeautifulSoup(html, 'html.parser')
+data = sp.find_all('span', {'id':'Showtd'})
+rows = data[0].find_all('tr')
+
+prices = list()
+for row in rows:
+    cols = row.find_all('td')
+    if len(cols[1].text) > 0:
+        item = [cols[0].text, cols[1].text, \
+                cols[2].text, cols[3].text]
+        prices.append(item)
+for p in prices:
+    print(p)
+'''
+
+
+
 # _*_ coding: utf-8 _*_
 # 程式 10-1.py (Python 3 version)
 
@@ -108,3 +237,10 @@ while True:
         chart()
     else: break
     x = input("請按Enter鍵回主選單")
+
+
+
+
+
+
+
