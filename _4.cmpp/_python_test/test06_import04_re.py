@@ -7,7 +7,7 @@
 
 import re
 
-fp = open("article.txt", "r")
+fp = open("data\article.txt", "r")
 article = fp.read()
 new_article = re.sub("[^a-zA-Z\s]", "", article)
 words = new_article.split()

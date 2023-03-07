@@ -1,6 +1,5 @@
 # Python 新進測試 12
 
-
 import glob
 files = glob.glob("glob.py") + glob.glob("os*.py") + glob.glob("*.txt") 
 for file in files:
@@ -52,22 +51,19 @@ os.system("notepad " + file)  # 以記事本開啟 copyfile.py 檔
 
 
 import os
-dir = "myDir"
-if os.path.exists(dir):
-    os.rmdir(dir)
+foldername = "myDir"
+if os.path.exists(foldername):
+    os.rmdir(foldername)
 else:
-    print(dir + "目錄未建立!")  
-
-
-
+    print(foldername + "目錄未建立!")  
 
  
 import os
-file = "myFile.txt"
-if os.path.exists(file):
-    os.remove(file)
+filename = "myFile.txt"
+if os.path.exists(filename):
+    os.remove(filename)
 else:
-    print(file + "檔案未建立!")   
+    print(filename + "檔案未建立!")   
 
 
 import os

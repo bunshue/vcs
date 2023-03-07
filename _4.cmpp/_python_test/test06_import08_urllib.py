@@ -27,7 +27,7 @@ data = urllib.request.urlopen(url).read()
 data = data.decode('Big5')      #將bytes轉成str
 print(data)
 
-fd = open("perl.html", "w")
+fd = open("__temp\perl.html", "w")
 fd.write(data)
 fd.close()
 
@@ -81,7 +81,7 @@ data=urllib.request.urlopen(full_url).read()
 #data=data.decode('UTF-8')
 print(data)
 
-filename = "b2.html"
+filename = "__temp\b2.html"
 print("抓取網頁資料 並存檔成 : "+filename)
 fd = open(filename, "wb")
 fd.write(data)
@@ -111,7 +111,7 @@ url = "http://www.baidu.com"
 data = urllib.request.urlopen(url).read()
 print(data)
 
-fd = open("bbb.html", "wb")
+fd = open("__temp\bbb.html", "wb")
 fd.write(data)
 fd.close()
 

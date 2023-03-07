@@ -5,7 +5,7 @@
 
 
 
-fp = open("article.txt", "r")
+fp = open("data\article.txt", "r")
 zops = fp.readlines()
 fp.close()
 i=1
