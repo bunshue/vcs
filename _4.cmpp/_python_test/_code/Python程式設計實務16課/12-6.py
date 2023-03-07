@@ -15,12 +15,11 @@ def get_year_month(fullpathname):
 	fp.close()
 	return ym[0:4], ym[5:7]
 
-if len(sys.argv)<2:
-	print("Usage: python 12-6.py <source_dir>")
-	exit()
-source_dir = sys.argv[1]
+source_dir = 'source_pic'
+
 if not os.path.exists('photos'):
 	os.mkdir('photos')
+	
 allfiles = glob.glob(source_dir+'/*.jpg') + glob.glob(source_dir+'/*.png')
 
 for imagefile in allfiles:
@@ -41,3 +40,4 @@ for imagefile in allfiles:
 			filename = ori_filename.split(ext)[0] + '_' + str(i) \
 				+ ext
 			i = i + 1
+

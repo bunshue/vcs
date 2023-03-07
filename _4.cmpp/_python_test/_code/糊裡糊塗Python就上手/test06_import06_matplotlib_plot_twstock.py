@@ -29,7 +29,12 @@ stock.fetch(year, month)
 此次需求的「查詢年/查詢時間前一個月」的股票資料：
 '''
 
-stocklist = stock.fetch(now_year, last_month)
+print("now_year = " + str(now_year))
+print("last_month = " + str(last_month))
+
+#stocklist = stock.fetch(now_year, last_month)
+
+stocklist = stock.fetch(2023, 1)    #查詢 2023年1月的資料
 
 #建立 x, y 軸串列，x 軸為日期時間(date)，y 軸為收盤價(close)
 #印出 stock.data[0]，可以觀察到「close」就是收盤價的價位資料
@@ -47,7 +52,7 @@ plt.figure(figsize=(10,10)) # 設定圖表區寬高
 
 plt.xlabel('日期', fontsize="16") # 設定 x 軸標題內容及大小
 plt.ylabel('股價', fontsize="16") # 設定 y 軸標題標題內容及大小
-plt.title('Taiwan Stock', fontsize="18") # 設定圖表標題內容及大小
+plt.title('台積電(2330)', fontsize="18") # 設定圖表標題內容及大小
 
 plt.plot(listx, listy, color='red', markersize="16", marker=".") # 紅色，實線，標記大小 16，標記為「點」
 

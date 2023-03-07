@@ -1,5 +1,5 @@
 import Algorithmia
-import cv2
+import cv2	#導入 OpenCV 模組
 
 input = {
   "image": "data://tsjeng/mlbook/facedetect2.jpg",
@@ -19,6 +19,7 @@ try:
     img = cv2.imread('../media/facedetect2.jpg')  #讀取本機圖片
     rect = algo.pipe(input).result['results'][0]['bbox']  #取得臉部坐標
     cv2.rectangle(img, (rect['left'],rect['top']), (rect['right'],rect['bottom']), (0,0,255), 2)  #畫出框線
+    
     cv2.namedWindow("win")
     cv2.imshow("win", img)  #顯示圖片
     cv2.waitKey(0)  

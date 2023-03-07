@@ -12,10 +12,11 @@ photos = g.get_connections(id='me', connection_name='photos')
 photos = photos['data']
 
 for p in photos:
-	image = p['images'][0]
- 	filename = image['source'].split('/')[-1].split('?')[0]
- 	print filename
-	fp = open('fb-images/'+filename, 'wb')
-	pic = requests.get(image['source'], stream=True)
-	shutil.copyfileobj(pic.raw, fp)
-	fp.close()
+        image = p['images'][0]
+        filename = image['source'].split('/')[-1].split('?')[0]
+        print(filename)
+        fp = open('fb-images/'+filename, 'wb')
+        pic = requests.get(image['source'], stream=True)
+        shutil.copyfileobj(pic.raw, fp)
+        fp.close()
+	

@@ -12,6 +12,5 @@ posts = g.get_connections(id='me', connection_name='posts')
 posts = posts['data']
 
 for p in posts:
-	print p['id'], 
-	g.put_like(p['id'])
-	print " -> ok..."
+	print(p['id'], g.put_like(p['id']))
+	print(" -> ok...")

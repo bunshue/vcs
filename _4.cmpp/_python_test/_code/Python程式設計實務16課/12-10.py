@@ -16,5 +16,6 @@ for t in news_title:
 	title = t.find_all('a')[0]
 	headlines += title.text
 
+print('headlines')
 print(headlines)
 	

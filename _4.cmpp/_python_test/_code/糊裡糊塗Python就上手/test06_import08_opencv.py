@@ -1,7 +1,6 @@
 # python import module : OpenCV 人臉辨識
 
-#導入 OpenCV 模組
-import cv2
+import cv2	#導入 OpenCV 模組
 
 #建立 detectFace Function 並可帶入 img 圖片名稱變數
 
@@ -9,7 +8,7 @@ def detectFace(img):
 #取得將使用的檔案名稱，並讀取圖檔，接著把圖檔透過轉換函式轉為灰階影像，定義框出人臉時的框顏色
 
     filename = img.split(".")[0] # 取得檔案名稱(不添加副檔名)
-    img = cv2.imread(img) # 讀取圖檔
+    img = cv2.imread(img)	#讀取本機圖片
     grayImg = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) # 透過轉換函式轉為灰階影像
     color = (0, 255, 0)  # 定義框的顏色
 
@@ -36,7 +35,7 @@ def detectFace(img):
     # 將結果圖片輸出
     filename2 = "C:\\_git\\vcs\\_4.cmpp\\_python_test\\__temp\\" + filename + "_face.jpg"
     print(filename2)
-    cv2.imwrite(filename2, img)
+    cv2.imwrite(filename2, img)	#寫入本機圖片
 
 detectFace('human.jpg')
 

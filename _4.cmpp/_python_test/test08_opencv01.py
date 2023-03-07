@@ -1,9 +1,9 @@
-import cv2
+import cv2	#導入 OpenCV 模組
 import numpy as np
 
 filename = "C:\\______test_files\\picture1.jpg"
 
-img = cv2.imread(filename)
+img = cv2.imread(filename)	#讀取本機圖片
 
 #另存新檔
 #cv2.imwrite('aaaa.bmp', img);
@@ -15,12 +15,13 @@ h,w,d = img.shape   #d為dimension d=3 全彩 d=1 灰階
 
 print("寬 = ",w,", 高 = ",h,", D = ",d)
 
+#裁剪圖片
 
-#裁減圖片
 import matplotlib.pyplot as plt #匯入模組
 import matplotlib.image as img  #匯入模組
+
 image = img.imread(filename)
-plt.imshow(image)
+plt.imshow(image)	#顯示圖片
 plt.show()
 
 x_l, x_r = 100, 200 #保留的部分，由左而右
