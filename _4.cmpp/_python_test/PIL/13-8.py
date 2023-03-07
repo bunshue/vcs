@@ -5,7 +5,7 @@ import matplotlib.pyplot as pt
 import numpy as np
 from PIL import Image
 
-sample = Image.open('sample.jpg')
+sample = Image.open('data\sample.jpg')
 im = sample.convert('L')
 w, h = im.size
 

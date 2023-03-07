@@ -3,7 +3,7 @@
 
 from PIL import Image, ImageDraw
 
-im = Image.open('sample_s.jpg')
+im = Image.open('data\sample_s.jpg')
 w, h = im.size
 dw = ImageDraw.Draw(im)
 dw.line((0,0,w,h),width=20, fill=(255,0,0))

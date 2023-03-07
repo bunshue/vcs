@@ -3,10 +3,7 @@
 import os, sys
 from PIL import Image, ImageDraw, ImageFont
 
-if len(sys.argv)<2:
-    print("請指定要處理的圖形檔案！")
-    exit(1)
-filename = sys.argv[1]
+filename = 'data\sample.jpg'
 
 msg = input('請輸入要做浮水印的文字：')
 font_size = int(input('文字大小：'))
@@ -17,7 +14,7 @@ im_w, im_h = image_file.size
 
 im0 = Image.new('RGBA', (1,1))
 dw0 = ImageDraw.Draw(im0)
-font = ImageFont.truetype('font/wt014.ttf',font_size)
+font = ImageFont.truetype('data/ubuntu.ttf',font_size)
 fn_w, fn_h = dw0.textsize(msg, font=font)
 im = Image.new('RGBA', (fn_w, fn_h), (255,0,0,0))
 dw = ImageDraw.Draw(im)
@@ -32,5 +29,6 @@ if os.path.exists(filename+'_wm.png'):
     if ans != 'y' and ans != 'Y':
         exit(1)
 
-image_file.save(filename+'_wm.png', 'PNG')
-print('已寫入檔案：'+filename+'_wm.png')
+filename_w = '__temp\pic_with_watermark.png'
+image_file.save(filename_w, 'PNG')
+print('已寫入檔案：' + filename_w)

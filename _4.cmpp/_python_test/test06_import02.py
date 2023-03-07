@@ -1,8 +1,7 @@
 # 各種未歸類的import
 
-#圖形操作
-#需先 pip install pillow
 from PIL import Image, ImageFilter
+
 #讀取圖形
 im = Image.open('data\bear.jpg')
 #顯示圖形
