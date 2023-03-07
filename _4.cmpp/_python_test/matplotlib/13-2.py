@@ -4,7 +4,7 @@
 import matplotlib.pyplot as pt
 import numpy as np
 
-with open('popu.txt', 'r') as fp:
+with open('data\popu.txt', 'r') as fp:
 	populations = fp.readlines()
 
 city = list()

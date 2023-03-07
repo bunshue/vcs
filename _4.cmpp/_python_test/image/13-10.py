@@ -3,12 +3,13 @@
 import sys, os, glob
 from PIL import Image, ImageDraw
 
-source_dir = '.'
-target_dir = 'resized_photo'
+source_dir = 'source_pic'
+target_dir = 'resized_pic'
+
 image_width = 800
 
-if len(sys.argv) > 1:
-	source_dir = sys.argv[1]
+print("將資料夾 " + source_dir + " 內所有圖片檔調整寬度成 " + str(image_width) + " 像素")
+
 
 print('Processing: {}'.format(source_dir))
 
@@ -16,7 +17,7 @@ if not os.path.exists(source_dir):
 	print("I can't find the specified directory.")
 	exit(1)
 
-allfiles = glob.glob(source_dir+'/*.jpg') + glob.glob(source_dir+'*.png')
+allfiles = glob.glob(source_dir+'/*.jpg') + glob.glob(source_dir+'/*.png')
 if not os.path.exists(target_dir):
 	os.mkdir(target_dir)
 
@@ -32,3 +33,6 @@ for target_image in allfiles:
 	im.paste(logo, (0,0), logo)
 	im.save(target_dir+'/'+filename)
 	im.close()
+
+
+	

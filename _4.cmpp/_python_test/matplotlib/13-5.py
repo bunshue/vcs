@@ -10,14 +10,14 @@ def f1(x):
 def f2(x):
     return float(float(school[x])/float(bp[x]))
 
-with open('school.txt', 'r') as fp:
+with open('data\school.txt', 'r') as fp:
     schools = fp.readlines()
 
 school = list()
 for s in schools:
     school.append(int(s.split()[1]))
 
-with open('yrborn.txt', 'r') as fp:
+with open('data\yrborn.txt', 'r') as fp:
 	populations = fp.readlines()
 
 yrborn = dict()

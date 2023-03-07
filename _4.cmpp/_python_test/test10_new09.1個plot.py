@@ -1,8 +1,10 @@
 import numpy as np
 import matplotlib.pyplot as plt
+
 x = np.linspace(0, 10, 100)
 y = np.sin(x)
 z = np.cos(x**2)
+
 plt.figure()
 plt.plot(x, y, label="$sin(x)$", color='red', lw=2)
 plt.plot(x, z, label="$cos(x^2)$", color='b')
