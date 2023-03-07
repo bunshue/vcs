@@ -9,14 +9,14 @@ filename_r1 = "http://pythonscraping.com/files/MontyPythonAlbums.csv"
 print("讀取一個遠端csv檔案 : "+filename_r1)
 
 #本地檔案
-filename_r2 = "MontyPythonAlbums.local.csv"
-#print("讀取一個本地csv檔案 : "+filename_r2)
+filename_r2 = "data\MontyPythonAlbums.local.csv"
+print("讀取一個本地csv檔案 : "+filename_r2)
 
 #讀取遠端檔案
-data = urlopen(filename_r1).read().decode('ascii', 'ignore')
+#data = urlopen(filename_r1).read().decode('ascii', 'ignore')
 
 #讀取本地檔案
-#data = open(filename_r2).read()
+data = open(filename_r2).read()
 
 dataFile = StringIO(data)
 csvReader = csv.reader(dataFile)

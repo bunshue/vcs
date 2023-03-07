@@ -5,7 +5,7 @@ print("python寫資料到CSV檔")
 import csv
 
 #寫資料到TestCSVFileW.csv中
-filename_w = "TestCSVFileW.csv"
+filename_w = "__temp\TestCSVFileW.csv"
 
 print("打開一個csv檔案 : "+filename_w)
 csvFile = open(filename_w, 'w+', newline='')
@@ -27,3 +27,4 @@ finally:
 #關閉文件
     csvFile.close()
 
+print("寫入檔案 " + filename_w + " 完成")

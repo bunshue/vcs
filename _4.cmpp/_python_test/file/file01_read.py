@@ -1,6 +1,6 @@
 #各種讀取檔案範例
 
-filename = "poetry.txt"
+filename = "data\poetry.txt"
 print("讀取檔案 : "+filename)
 
 f = open(filename, 'r', encoding = 'utf8')
