@@ -1,5 +1,9 @@
 import matplotlib.pyplot as plt
+
+#在同一張圖 畫 兩條曲線
+
 month = [1,2,3,4,5,6,7,8,9,10,11,12]
+
 listy1 = [128,210,199,121,105,98,152,107,150,122,180,220]
 plt.plot(month, listy1, 'r-.s', lw=2, ms=10, label="Taipei")
 

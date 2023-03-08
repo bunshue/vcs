@@ -1,6 +1,9 @@
 import matplotlib.pyplot as plt
 
+#在同一張圖 畫 兩條曲線
+
 year = [2015,2016,2017,2018,2019]
+
 city1 = [128,150,199,180,150]
 plt.plot(year, city1, 'r-.s', lw=2, ms=10, label="台北")
 
