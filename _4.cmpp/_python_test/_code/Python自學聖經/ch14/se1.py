@@ -1,4 +1,5 @@
 import pandas as pd
+
 se = pd.Series([1,2,3,4,5])
 print(se)           #顯示Series
 print(se.values)    #顯示值
