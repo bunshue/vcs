@@ -15,7 +15,7 @@ def buttonClick():
     if clicks == 0:
         start = time.time()
         clicks = clicks + 1
-    elif clicks + 1 >= goal:
+    elif clicks >= goal:
         score = time.time() - start
         label.config(text="Time: " + str(score))
         clicks = 0

@@ -1,4 +1,4 @@
-import Tkinter as tk
+import tkinter as tk
 
 window = tk.Tk()
 
@@ -11,4 +11,5 @@ def buttonClick():
 
 button = tk.Button(window, text="Click me!", command=buttonClick)
 button.pack()
+
 window.mainloop()

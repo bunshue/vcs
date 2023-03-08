@@ -1,16 +1,16 @@
-import Tkinter as tk
+import tkinter as tk
 
 window = tk.Tk()
 
 def checkPassword():
-    password = "Oranges"
+    password = "1234"
     enteredPassword = passwordEntry.get()
     if password == enteredPassword:
         confirmLabel.config(text="Correct")
     else:
         confirmLabel.config(text="Incorrect")
 
-passwordLabel = tk.Label(window, text="Password:")
+passwordLabel = tk.Label(window, text="Password:(1234)")
 passwordEntry = tk.Entry(window, show="*")
 
 button = tk.Button(window, text="Enter", command=checkPassword)

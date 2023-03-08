@@ -1,5 +1,5 @@
 import random
-import Tkinter as tk
+import tkinter as tk
 
 window = tk.Tk()
 

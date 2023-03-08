@@ -1,6 +1,6 @@
 import tkinter as tk
-window = tk.Tk()
 
+window = tk.Tk()
 
 def buttonClick():
     print("Beep!")
@@ -19,6 +19,7 @@ button3.pack()
 button4 = tk.Button(window, text="Click me!", command=buttonClick)
 button4.pack()
 
-
 window.mainloop()
+
+
 

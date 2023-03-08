@@ -3,38 +3,20 @@
 #導入模組
 import matplotlib.pyplot as plt
 import twstock
-import datetime
 
-# 詢問使用者股票代碼
-#stock_code = input("請輸入將要查詢的股票代碼:")
+#股票代碼 stock_code
 
 stock_code = str(2330)
 stock = twstock.Stock(stock_code) # 建立 Stock 物件
 
-#取得查詢當年年份及上個月月份
+#使用語法：（查詢某年某月的股票資料）
+#stock.fetch(year, month)
 
-now_date = datetime.datetime.now() # 取得查詢當下的時間
-now_year = now_date.year # 取得查詢當下當年年份
+stocklist1 = stock.fetch(2023, 1)    #查詢 2023年1月的資料
+stocklist2 = stock.fetch(2023, 2)    #查詢 2023年2月的資料
 
-# 取得查詢當下上個月月份
-if(now_date.month != 1):
-    last_month = now_date.month - 1
-else:
-    last_month = 12
+stocklist = stocklist1+stocklist2;
 
-'''
-取得「查詢年/查詢時間前一個月」的股票資料
-使用語法：（查詢某年某月的股票資料）
-stock.fetch(year, month)
-此次需求的「查詢年/查詢時間前一個月」的股票資料：
-'''
-
-print("now_year = " + str(now_year))
-print("last_month = " + str(last_month))
-
-#stocklist = stock.fetch(now_year, last_month)
-
-stocklist = stock.fetch(2023, 1)    #查詢 2023年1月的資料
 
 #建立 x, y 軸串列，x 軸為日期時間(date)，y 軸為收盤價(close)
 #印出 stock.data[0]，可以觀察到「close」就是收盤價的價位資料

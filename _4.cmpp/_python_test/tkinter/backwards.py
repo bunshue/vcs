@@ -1,4 +1,4 @@
-import Tkinter as tk
+import tkinter as tk
 
 window = tk.Tk()
 
@@ -13,4 +13,5 @@ button = tk.Button(window, text="Change", command=changeString)
 
 entry.pack()
 button.pack()
+
 window.mainloop()
