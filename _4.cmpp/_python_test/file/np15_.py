@@ -1,5 +1,7 @@
 import numpy as np
-na = np.genfromtxt('scores.csv', delimiter=',', skip_header=1)
+
+na = np.genfromtxt('data\scores.csv', delimiter=',', skip_header=1)
+
 print('國文最高分數：', na[:,1].max())
 print('英文最低分數：', na[:,2].min())
 print('數學平均分數：', na[:,3].mean())

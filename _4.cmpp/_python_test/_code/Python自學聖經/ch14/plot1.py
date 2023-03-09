@@ -1,9 +1,11 @@
 import pandas as pd
 import matplotlib.pyplot as plt
-# 設定中文字型及負號正確顯示
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" #也可設mingliu或DFKai-SB
 
-plt.rcParams["axes.unicode_minus"] = False 
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 df = pd.DataFrame([[250,320,300,312,280],
                    [280,300,280,290,310],
