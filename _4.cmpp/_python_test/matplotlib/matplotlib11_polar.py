@@ -15,6 +15,7 @@ xt, yt = xticks()[0], yticks()[0]
 xticks(xt, ['' for q in range(len(xt))])
 yticks(yt, ['' for q in range(len(yt))])
 
+#¦s¹Ï©R¥O
 savefig('logarithmic_spiral.svg')
 
 show()

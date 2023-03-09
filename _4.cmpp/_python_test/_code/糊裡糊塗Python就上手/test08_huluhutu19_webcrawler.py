@@ -1,10 +1,12 @@
 # 一種可以在網路上自動抓取資料的工具，又稱「網路爬蟲」(Web Crawler)
 
+print("抓取網頁資料 1")
+import requests
+url = 'https://oldsiao.neocities.org/'
+response = requests.get(url)
+print(response.text)
 
-
-
-
-'''
+print("抓取網頁資料 2")
 import requests
 #url = 'https://httpbin.org/get?value1=1&value2=2'
 url = 'https://tw.dictionary.search.yahoo.com/?value1=lion'
@@ -12,21 +14,14 @@ url = 'https://tw.dictionary.search.yahoo.com/?value1=lion'
 response = requests.get(url)
 print(response.text)
 print(response.status_code)
+if response.status_code == requests.codes.ok:
+    print("抓取網頁OK")
+else:
+    print("抓取網頁NG")
 
-'''
-'''
-import requests
-url = 'https://httpbin.org/get?value1=1&value2=2'
-response = requests.get(url)
-print(response.text)
 
-'''
 
-import requests
-url = 'https://oldsiao.neocities.org/'
-response = requests.get(url)
 
-print(response.text)
 
 
 
@@ -54,28 +49,8 @@ print(sp.find("div"))
 print("尋找標籤「<title>」")
 print(sp.find_all("title"))
 
-
-
 import requests
 from bs4 import BeautifulSoup
-
-# 星座轉換字典
-zodiacSigns_convent = {
-    '1':'Aries',
-    '2':'Taurus',
-    '3':'Gemini',
-    '4':'Cancer',
-    '5':'Leo',
-    '6':'Virgo',
-    '7':'Libra',
-    '8':'Scorpio',
-    '9':'Sagittarius',
-    '10':'Capricorn',
-    '11':'Aquarius',
-    '12':'Pisces'
-}
-index = 7
-print(zodiacSigns_convent[str(index)])
 
 '''
 # 題問說明
@@ -107,5 +82,4 @@ if response.status_code == requests.codes.ok:
     print(sp.title)
     print("標題文字")
     print(sp.title.text)
-
 

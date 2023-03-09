@@ -42,13 +42,25 @@ def disp_data():
                 row+=1
             n+=1
 
-### 主程式從這裡開始 ###    
 
+
+# 導入套件
 import tkinter as tk
+
+# 建立主視窗
+window = tk.Tk()
+
+# 設定主視窗大小
+w = 800
+h = 600
+size = str(w)+'x'+str(h)
+window.geometry(size)
+
+# 設定主視窗標題
+title = "英文單字王"
+window.title(title)
+
 import math
-win=tk.Tk()
-win.geometry("500x300")
-win.title("英文單字王")
 
 page,pagesize=0,10
 datas=dict()
@@ -63,12 +75,12 @@ datasize=len(datas) #資料筆數
 totpage=math.ceil(datasize/pagesize) #總頁數
 
 # 單字顯示區
-frameShow = tk.Frame(win)  
+frameShow = tk.Frame(window)  
 frameShow.pack()
-labelwords = tk.Label(win, text="")
+labelwords = tk.Label(window, text="")
 labelwords.pack() 
 
-frameCommand = tk.Frame(win)  # 翻頁按鈕容器
+frameCommand = tk.Frame(window)  # 翻頁按鈕容器
 frameCommand.pack()  
 btnFirst = tk.Button(frameCommand, text="第一頁", width=8,command=First)
 btnPrev = tk.Button(frameCommand, text="上一頁", width=8,command=Prev)
@@ -80,4 +92,5 @@ btnNext.grid(row=0, column=2, padx=5, pady=5)
 btnBottom.grid(row=0, column=3, padx=5, pady=5)   
 
 First()
-win.mainloop()
+
+window.mainloop()

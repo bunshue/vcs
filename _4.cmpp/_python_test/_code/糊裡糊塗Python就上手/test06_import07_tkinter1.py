@@ -35,14 +35,18 @@ import tkinter as tk
 
 # 建立主視窗
 window = tk.Tk()
-# 設定主視窗大小
-window.geometry("800x600")
-# 設定主視窗標題
-window.title("圖形化範例-BMI測量")
 
+# 設定主視窗大小
+w = 800
+h = 600
+size = str(w)+'x'+str(h)
+window.geometry(size)
+
+# 設定主視窗標題
+title = "圖形化範例-BMI測量"
+window.title(title)
 
 #建立將使用的相關變數(回應值、身高、體重)，這邊需要在建立玩主視窗後才可以建立，否則會報錯
-
 return_msg = tk.StringVar() # BMI 回傳值
 height_msg = tk.IntVar() # 身高
 weight_msg = tk.IntVar() # 體重
@@ -50,8 +54,12 @@ weight_msg = tk.IntVar() # 體重
 
 #設定身高、體重的 Label 及 Entry
 
+font_size = 24
+w = 40
+h = 30
+
 # 設定身高 Label 
-height_label = tk.Label(window, text="請輸入身高:", foreground="red", font=("標楷體", 12), padx=30, pady=20)
+height_label = tk.Label(window, text="請輸入身高:", foreground="red", font=("標楷體", font_size), padx = w, pady = h)
 height_label.pack()
 
 # 設定身高 Entry
@@ -59,7 +67,7 @@ height_entry = tk.Entry(window, foreground="green", textvariable=height_msg)
 height_entry.pack()
 
 # 設定 Label
-weight_label = tk.Label(window, text="請輸入體重:", foreground="red", font=("標楷體", 12), padx=30, pady=20)
+weight_label = tk.Label(window, text="請輸入體重:", foreground="red", font=("標楷體", font_size), padx = w, pady = h)
 weight_label.pack()
 
 # 設定 Entry
@@ -69,16 +77,15 @@ weight_entry.pack()
 #設定回應值 Label
 
 # 設定回應值 Label
-returnMsg_label = tk.Label(window, textvariable=return_msg, foreground="red", font=("標楷體", 12), padx=30, pady=20)
+returnMsg_label = tk.Label(window, textvariable=return_msg, foreground="red", font=("標楷體", font_size), padx = w, pady = h)
 returnMsg_label.pack()
 
 #設定功能按鈕，並可觸發自行撰寫的 BMI function
 
 # 設定 Button
-bmi_button = tk.Button(window, text="BMI 測量", foreground="blue", font=("標楷體", 12), padx=30, pady=20, command=BMI)
+bmi_button = tk.Button(window, text="BMI 測量", foreground="blue", font=("標楷體", font_size), padx = w, pady = h, command=BMI)
 bmi_button.pack()
 
 #執行視窗程式需要使用到 mainloop() 函數，將此視窗加入事件監視迴圈，才會產生 GUI 視窗
-
 window.mainloop()
 

@@ -53,5 +53,12 @@ plt.title('Plot title', fontsize="18") # 設定圖表標題內容及大小
 #plt.ylim(0, 50) # 設定 y 軸座標範圍
 
 plt.legend()
-plt.show()
+
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
+plt.show()  #將圖表呈現出來
 

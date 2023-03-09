@@ -133,7 +133,7 @@ import sqlite3
 from bs4 import BeautifulSoup
 import requests
 import numpy as np
-import matplotlib.pyplot as pt
+import matplotlib.pyplot as plt
 
 def disp_menu():
     print("中油歷年油價查詢系統")
@@ -197,16 +197,16 @@ def chart():
     w = np.array(dataset[0])
     y = np.array(dataset[1])
     z = np.array(dataset[2])
-    pt.ylabel("NTD$")
-    pt.xlabel("Weeks ( {} --- {} )".format(data[0][0], data[len(data)-1][0]))
-    pt.plot(x, w, color="blue", label="92")
-    pt.plot(x, y, color="red", label="95")
-    pt.plot(x, y, color="green", label="98")
-    pt.xlim(0,len(data))
-    pt.ylim(10,40)
-    pt.title("Gasoline Prices Trend (Taiwan)")
-    pt.legend()
-    pt.show()
+    plt.ylabel("NTD$")
+    plt.xlabel("Weeks ( {} --- {} )".format(data[0][0], data[len(data)-1][0]))
+    plt.plot(x, w, color="blue", label="92")
+    plt.plot(x, y, color="red", label="95")
+    plt.plot(x, y, color="green", label="98")
+    plt.xlim(0,len(data))
+    plt.ylim(10,40)
+    plt.title("Gasoline Prices Trend (Taiwan)")
+    plt.legend()
+    plt.show()
 
 def disp_alldata():
     cursor = conn.execute('select * from prices order by gdate desc;')

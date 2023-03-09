@@ -31,6 +31,7 @@ plt.ylabel(u'縱座標', fontproperties=myfont)
 plt.title(u'三角函數', fontproperties=myfont)
 plt.grid()
 
+#存圖命令
 plt.savefig('sin_plot.svg')
 plt.savefig('sin_plot111.png')
 #plt.savefig('sin_plot.bmp')

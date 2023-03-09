@@ -1,5 +1,22 @@
 # Python 新進測試 14  tkinter
 
+'''
+# 導入套件
+import tkinter as tk
+
+# 建立主視窗
+window = tk.Tk()
+
+# 設定主視窗大小
+w = 800
+h = 600
+size = str(w)+'x'+str(h)
+window.geometry(size)
+
+# 設定主視窗標題
+title = "這是主視窗"
+window.title(title)
+'''
 
 
 '''

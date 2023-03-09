@@ -32,7 +32,7 @@ explode = (0, 0, 0, 0.08)
 
 #設定圖表區寬高
 
-plt.figure(figsize=(10,10)) # 設定圖表區寬高
+plt.figure(figsize=(8,8)) # 設定圖表區寬高
 
 #設定 pie 函數參數繪製圓餅圖
 
@@ -51,7 +51,14 @@ radius = 0.9 # 圓餅圖的半徑，預設是1
 #設定 legnd 的位置，將圖表顯示出來，並顯示圖例名稱
 
 plt.legend(loc = "right") # 設定 legnd 的位置
-plt.show()
+
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
+plt.show()  #將圖表呈現出來
 
 
 

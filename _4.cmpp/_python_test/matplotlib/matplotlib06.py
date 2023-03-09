@@ -17,8 +17,7 @@ myfont = matplotlib.font_manager.FontProperties(fname=r'C:/Windows/Fonts/msyh.tt
 plt.xlabel(u'橫座標', fontproperties=myfont)
 plt.ylabel(u'縱座標', fontproperties=myfont)
 
-
-
+#存圖命令
 plt.savefig('sin_plot.svg')
 plt.savefig('sin_plot111.png')
 #plt.savefig('sin_plot.bmp')
@@ -27,6 +26,5 @@ plt.savefig('sin_plot222.png', format='png', transparent=True, dpi=300, pad_inch
 plt.savefig('sin_plot333.png', dpi = 300)
 
 plt.show()
-
 
 

@@ -1,7 +1,7 @@
 # _*_ coding: utf-8 _*_
-# 程式 13-4 (Python 3 Version)
+# 程式 13-3 (Python 3 Version)
 
-import matplotlib.pyplot as pt
+import matplotlib.pyplot as plt
 import numpy as np
 
 with open('data\yrborn.txt', 'r') as fp:
@@ -13,7 +13,7 @@ for p in populations:
     yr, tl, boy, girl = p.split()
     yrborn[yr] = {'boy': int(boy), 'girl': int(girl)}
 
-ind = np.arange(1986,2016)
+ind = np.arange(len(yrborn))
 yrlist = sorted(list(yrborn.keys()))
 bp = list()
 bp_b = list()
@@ -25,16 +25,15 @@ for yr in yrlist:
     bp_b.append(boys)
     bp_g.append(girls)
 
-width = 0.35
-pt.subplot(211)
-pt.plot(ind, bp)
-pt.xlim(1986,2015)
-pt.title('1986 - 2015 (Total)')
+plt.subplot(211)
+plt.plot(bp)
+plt.xlim(0,len(bp)-1)
+plt.title('1986 - 2015 (Total)')
 
-pt.subplot(212)
-pt.bar(ind, bp_b, width, color='b')
-pt.bar(ind+0.35, bp_g, width, color='r')
-pt.xlim(1986,2015)
-pt.title('1986 - 2015 (Boy:Girl)')
+plt.subplot(212)
+plt.plot(bp_b)
+plt.plot(bp_g)
+plt.xlim(0,len(bp_b)-1)
+plt.title('1986 - 2015 (Boy:Girl)')
 
-pt.show()
+plt.show()

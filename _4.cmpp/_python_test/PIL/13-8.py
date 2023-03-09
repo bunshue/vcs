@@ -1,7 +1,7 @@
 # _*_ coding: utf-8 _*_
 # 程式 13-8 (Python 2 Version)
 
-import matplotlib.pyplot as pt
+import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
 
@@ -23,12 +23,13 @@ g_hist = g.histogram()
 b_hist = b.histogram()
 
 ind = np.arange(0, len(crop_hist))
-pt.plot(ind, crop_hist, color='cyan', label='cropped')
-pt.plot(ind, hist, color='black', lw=2, label='original')
-pt.plot(ind, r_hist, color='red', label='Red Plane')
-pt.plot(ind, g_hist, color='green', label='Green Plane')
-pt.plot(ind, g_hist, color='blue', label='Blue Plane')
-pt.xlim(0,255)
-pt.ylim(0,8000)
-pt.legend()
-pt.show()
+plt.plot(ind, crop_hist, color='cyan', label='cropped')
+plt.plot(ind, hist, color='black', lw=2, label='original')
+plt.plot(ind, r_hist, color='red', label='Red Plane')
+plt.plot(ind, g_hist, color='green', label='Green Plane')
+plt.plot(ind, g_hist, color='blue', label='Blue Plane')
+plt.xlim(0,255)
+plt.ylim(0,8000)
+plt.legend()
+
+plt.show()

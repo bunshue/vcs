@@ -7,7 +7,9 @@ import cv2	#導入 OpenCV 模組
 def detectFace(img):
 #取得將使用的檔案名稱，並讀取圖檔，接著把圖檔透過轉換函式轉為灰階影像，定義框出人臉時的框顏色
 
+    print(img)
     filename = img.split(".")[0] # 取得檔案名稱(不添加副檔名)
+    print(filename)
     img = cv2.imread(img)	#讀取本機圖片
     grayImg = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) # 透過轉換函式轉為灰階影像
     color = (0, 255, 0)  # 定義框的顏色
@@ -37,5 +39,8 @@ def detectFace(img):
     print(filename2)
     cv2.imwrite(filename2, img)	#寫入本機圖片
 
+
+
+print("框出照片中的人臉")
 detectFace('human.jpg')
 

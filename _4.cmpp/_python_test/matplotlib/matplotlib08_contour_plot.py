@@ -79,7 +79,6 @@ ax.set_yticks([])
 plt.tight_layout()
 plt.show()
 
+#¦s¹Ï©R¥O
 fig.savefig("Helmholtz_coil,_B_magnitude_cross_section.svg")
-##########
-
 

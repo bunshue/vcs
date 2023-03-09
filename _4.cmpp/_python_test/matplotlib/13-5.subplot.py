@@ -1,7 +1,7 @@
 # _*_ coding: utf-8 _*_
 # 程式 13-5 (Python 3 Version)
 
-import matplotlib.pyplot as pt
+import matplotlib.pyplot as plt
 import numpy as np
 
 def f1(x):
@@ -34,23 +34,25 @@ for yr in yrlist:
     bp.append(boys + girls)
 yr = range(1986, 2016)
 ind = np.arange(len(bp))
-pt.subplot(221)
-pt.plot(yr, bp, lw=2)
-pt.xlim(1986,2015)
-pt.title('1986 - 2015 (Total)')
 
-pt.subplot(222)
-pt.plot(yr, school,lw=2)
-pt.xlim(1986,2015)
-pt.title('1986 - 2015 School Numbers')
+plt.subplot(221)
+plt.plot(yr, bp, lw=2)
+plt.xlim(1986,2015)
+plt.title('1986 - 2015 (Total)')
 
-pt.subplot(223)
-pt.plot(yr, list(map(f1, ind)), lw=2)
-pt.xlim(1986,2015)
-pt.title('Person/School')
+plt.subplot(222)
+plt.plot(yr, school,lw=2)
+plt.xlim(1986,2015)
+plt.title('1986 - 2015 School Numbers')
 
-pt.subplot(224)
-pt.plot(yr, list(map(f2, ind)), lw=2, color='r')
-pt.xlim(1986,2015)
-pt.title('School/Person')
-pt.show()
+plt.subplot(223)
+plt.plot(yr, list(map(f1, ind)), lw=2)
+plt.xlim(1986,2015)
+plt.title('Person/School')
+
+plt.subplot(224)
+plt.plot(yr, list(map(f2, ind)), lw=2, color='r')
+plt.xlim(1986,2015)
+plt.title('School/Person')
+
+plt.show()

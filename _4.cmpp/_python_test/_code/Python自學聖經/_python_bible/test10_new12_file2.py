@@ -18,11 +18,11 @@ print("現在路徑："+cur_path)
 import os,shutil
 cur_path=os.path.dirname(__file__) # 取得目前路徑
 print("現在路徑："+cur_path)
-destfile= cur_path + "\\" + "test10_new1022222.py"
+destfile= cur_path + "\\__temp\\" + "ccccc.py"
 print("拷貝檔案 " + destfile)
 shutil.copy("test10_new10.py",destfile )  # 檔案複製
 print("拷貝檔案 " + destfile)
-shutil.copyfile("test10_new10.py","C:\\dddddddddd\\new.py" )  # 檔案複製
+shutil.copyfile("test10_new10.py","__temp\\test10_new10_cpd.py" )  # 檔案複製
 
 print("測試mkdir")
 import os

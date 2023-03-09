@@ -1,32 +1,20 @@
 # Python 新進測試 10
 
 
-
+'''
 sum = 0
 
 def show(n):
     print("第 " + str(n) + " 次執行迴圈")
     
+print('for迴圈測試')
 for i in range(1,11):
     show(i)
     sum += i
 print("1+2+...+10 = " + str(sum))
 
 
-
-a = 12
-b = 34
-sum = a + b
-print("總和 = " + str(sum))
-
-
-
-pw = input("請輸入密碼：")
-if(pw=="1234"):
-    print("歡迎光臨！")
-    
-    
-pw = input("請輸入密碼：")
+pw = input("請輸入密碼：(1234)")
 if(pw=="1234"):
     print("歡迎光臨！")
 else:
@@ -56,7 +44,7 @@ else:
     
     
     
-    
+print("格式化列印")
 print("姓名   座號  國文  數學  英文")
 print("%3s  %2d   %3d   %3d  %3d" % ("林大明", 1, 100, 87, 79))
 print("%3s  %2d   %3d   %3d  %3d" % ("陳阿中", 2, 74, 88, 100))
@@ -73,7 +61,6 @@ elif(score) >= 60:
     print("丙等")
 else:
     print("丁等")
-    
     
     
     
@@ -107,11 +94,9 @@ n = int(input("請輸入正整數："))
 for i in range(1, n+1):
     sum += i
 print("1 到 %d 的整數和為 %d" % (n, sum))
+'''
 
-
-
-
-
+'''
 score = []
 total = inscore = 0
 while(inscore != -1):
@@ -149,14 +134,19 @@ average = total / (person - 1)
 print("本班總成績：%d 分，平均成績：%5.2f 分" % (total, average))
 
 
+'''
 
 
 
 
+print("字典測試 1")
 
+dict1 ={
+    "david":85,
+    "lion":93,
+    "mouse":67
+    }
 
-
-dict1 = {"林小明":85, "曾山水":93, "鄭美麗":67}
 name = input("輸入學生姓名：")
 if name in dict1:  
     print(name + "的成績為 " + str(dict1[name]))
@@ -166,7 +156,7 @@ else:
     print("字典內容：" + str(dict1))
     
     
-
+print("字典測試 2")
 #item
 dict1={"金牌":26, "銀牌":34, "銅牌":30}
 item1 = list(dict1.items())
@@ -174,7 +164,7 @@ for name, num in item1:
     print("得到的 %s 數目為 %d 面" % (name, num))
 
 
-
+print("字典測試 3")
 #key-value
 dict1={"金牌":26, "銀牌":34, "銅牌":30}
 listkey = list(dict1.keys())
@@ -183,10 +173,7 @@ for i in range(len(listkey)):
     print("得到的 %s 數目為 %d 面" % (listkey[i], listvalue[i]))
 
 
-
-
-
-# dict
+print("字典測試 4")
 dict1 = {"A":"內向穩重", "B":"外向樂觀", "O":"堅強自信", "AB":"聰明自然"}
 name = input("輸入要查詢的血型:")
 blood = dict1.get(name)
@@ -195,13 +182,5 @@ if blood == None:
 else:  
     print(name + " 血型的個性為：" + str(dict1[name]))
     
-    
-    
-            
-        
-        
-        
-        
-
 
 
