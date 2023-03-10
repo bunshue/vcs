@@ -1,5 +1,3 @@
-# _*_ coding: utf-8 _*_
-# 程式 13-14 (Python 3 Version)
 import os, sys
 from PIL import Image, ImageDraw, ImageFont
 
@@ -31,4 +29,5 @@ if os.path.exists(filename+'_wm.png'):
 
 filename_w = '__temp\pic_with_watermark.png'
 image_file.save(filename_w, 'PNG')
+
 print('已寫入檔案：' + filename_w)

@@ -1,6 +1,3 @@
-# _*_ coding: utf-8 _*_
-# 程式 13-8 (Python 2 Version)
-
 import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
@@ -8,7 +5,6 @@ from PIL import Image
 sample = Image.open('data\sample.jpg')
 im = sample.convert('L')
 w, h = im.size
-
 
 crop = im.crop((w/2-300, h/2-300, w/2+300, h/2+300))
 crop_hist = crop.histogram()

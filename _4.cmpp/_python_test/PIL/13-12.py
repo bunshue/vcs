@@ -1,6 +1,3 @@
-# _*_ coding: utf-8 _*_
-# 程式 13-12 (Python 3 Version)
-
 import sys, os, glob
 from PIL import Image, ImageDraw, ImageFont
 
@@ -17,4 +14,7 @@ x = im_w/2-fn_w/2
 y = im_h/2-fn_h/2
 dw.text((x+5, y+5), str(text_msg), font=font, fill=(25,25,25))
 dw.text((x, y), str(text_msg), font=font, fill=(128,255,255))
+
 im.show()
+
+

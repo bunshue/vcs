@@ -1,6 +1,3 @@
-# _*_ coding: utf-8 _*_
-# 程式 13-10 (Python 3 Version)
-
 import sys, os, glob
 from PIL import Image, ImageDraw, ImageFont
 

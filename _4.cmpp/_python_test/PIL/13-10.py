@@ -1,5 +1,3 @@
-# _*_ coding: utf-8 _*_
-# 程式 13-10 (Python 3 Version)
 import sys, os, glob
 from PIL import Image, ImageDraw
 
@@ -10,12 +8,7 @@ image_width = 800
 
 print("將資料夾 " + source_dir + " 內所有圖片檔調整寬度成 " + str(image_width) + " 像素")
 
-
 print('Processing: {}'.format(source_dir))
-
-if not os.path.exists(source_dir):
-	print("I can't find the specified directory.")
-	exit(1)
 
 allfiles = glob.glob(source_dir+'/*.jpg') + glob.glob(source_dir+'/*.png')
 if not os.path.exists(target_dir):

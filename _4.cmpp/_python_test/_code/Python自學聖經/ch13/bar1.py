@@ -3,7 +3,11 @@ import matplotlib.pyplot as plt
 listx = ['c','c++','c#','java','python']
 listy = [45,28,38,32,50]
 
-plt.bar(listx, listy, width=0.5, color='red')
+#直式
+#plt.bar(listx, listy, width=0.5, color='red')
+
+#橫式
+plt.barh(listx, listy, height=0.5, color='red')
 
 plt.title("資訊程式課程選修人數")
 plt.xlabel("程式課程")

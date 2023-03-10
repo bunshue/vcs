@@ -1,7 +1,6 @@
 import tkinter as tk
 window = tk.Tk()
 
-
 def checkPassword():
     password = "Oranges"
     enteredPassword = passwordEntry.get()

@@ -1,5 +1,3 @@
-# _*_ coding: utf-8 _*_
-# 程式 13-13 (Python 3 Version)
 import os
 from PIL import Image, ImageDraw, ImageFont
 
@@ -23,4 +21,6 @@ if os.path.exists(filename+'.png'):
     if ans != 'y' and ans != 'Y':
         exit(1)
 im.save(filename+'.png', 'PNG')
+
 print('已寫入檔案：'+filename+'.png')
+

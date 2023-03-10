@@ -3,6 +3,9 @@
 import time
 import datetime
 
+print("測試兩事件所經歷的時間 ST")
+time_start = time.time()
+
 print("每0.3秒打印一字")
 a = 0;
 while a < 3:
@@ -223,7 +226,8 @@ print("獲取一年的日曆")
 cal = calendar.calendar(2023)
 print(cal)
 
-
+time_stop = time.time() - time_start
+print("測試兩事件所經歷的時間 SP, 經歷時間 : "+str(time_stop) + " 秒")
 
 
 
