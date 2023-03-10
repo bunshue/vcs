@@ -4,7 +4,6 @@ print("cp -r data/oswalk ___tmpdata/oswalk222")
 import shutil
 #shutil.copytree("data\oswalk", "___tmpdata\oswalk222" )  # 目錄複製
 
-
 filename_rw = '__temp\file.bin'
 
 print("建立一個檔案 binary")

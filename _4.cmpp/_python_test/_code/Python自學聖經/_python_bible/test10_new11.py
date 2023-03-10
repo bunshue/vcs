@@ -22,48 +22,12 @@ for i in range(0,3):
     print(listname[i].ljust(5), str(i+1).rjust(3), str(listchinese[i]).rjust(5), str(listmath[i]).rjust(5), str(listenglish[i]).rjust(5))
 
 
-
-import random as r
-
-while True:
-    inkey = input("按任意鍵再按[ENTER]鍵擲骰子，直接按[ENTER]鍵結束:")
-    if len(inkey) > 0:
-        num = r.randint(1,6)
-        print("你擲的骰子點數為：" + str(num))
-    else:  
-        print("遊戲結束！")
-        break
-
-
-def ctof(c):  #攝氏轉華氏
-    f = c * 1.8 + 32
-    return f
-
-inputc = float(input("請輸入攝氏溫度："))
-print("華氏溫度為：%5.1f 度" % ctof(inputc))
-
-
-
-
 date1 = "2017-8-23"
 date1 = "西元 " + date1
 date1 = date1.replace("-", " 年 ", 1)
 date1 = date1.replace("-", " 月 ", 1)
 date1 += " 日"
 print(date1)
-
-
-import random as r
-
-list1 = r.sample(range(1,50), 7)
-special = list1.pop()
-list1.sort()
-print("本期大樂透中獎號碼為：", end="")
-for i in range(0,6):
-    if i == 5:    print(str(list1[i]))
-    else:    print(str(list1[i]), end=", ")
-print("本期大樂透特別號為：" + str(special))
-
 
 innum = 0
 list1 = []

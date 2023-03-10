@@ -21,6 +21,7 @@ y = int(im_h/2 - fn_h/2)
 dw.text((0, 0), msg, font=font, fill=fill)
 image_file.paste(im, (x, y), im)
 image_file.show()
+
 filename, ext = filename.split('.')
 if os.path.exists(filename+'_wm.png'):
     ans = input('此檔案已存在，要覆寫嗎？(y/n)')

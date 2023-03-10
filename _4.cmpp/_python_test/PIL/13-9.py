@@ -8,4 +8,8 @@ dw.line((w,0,0,h),width=20, fill=(255,0,0))
 dw.ellipse((50,50,w-50,h-50),outline=(255,255,0))
 dw.text((100,100),'This is a test image')
 
-im.show()
+#im.show()
+filename = '__temp/tmppic'
+im.save(filename+'.png', 'PNG')
+print('已寫入檔案：'+filename+'.png')
+

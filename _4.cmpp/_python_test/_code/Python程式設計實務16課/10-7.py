@@ -3,6 +3,7 @@
 
 import time
 from selenium import webdriver
+
 url = 'http://drho.tw/news'
 
 web = webdriver.Firefox()

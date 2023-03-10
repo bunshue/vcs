@@ -1,6 +1,3 @@
-# _*_ coding: utf-8 _*_
-# 程式 9-5 (Python 3 version)
-
 from bs4 import BeautifulSoup
 import requests
 import sys

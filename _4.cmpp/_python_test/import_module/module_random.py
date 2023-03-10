@@ -1,6 +1,55 @@
 # python import module : random
 
 import random
+
+def randomNoun():
+    nouns = ["cats", "hippos", "cakes"]
+    noun = random.choice(nouns)
+    return noun
+
+def randomVerb():
+    verbs = ["eats", "likes", "hates", "has"]
+    verb = random.choice(verbs)
+    return verb
+
+for i in range(4):
+  verb = randomVerb()
+  noun = randomNoun()
+  sentence = "david " + verb + " " + noun
+  print(sentence)
+
+
+import random as r
+
+while True:
+    inkey = input("按任意鍵再按[ENTER]鍵擲骰子，直接按[ENTER]鍵結束:")
+    if len(inkey) > 0:
+        num = r.randint(1,6)
+        print("你擲的骰子點數為：" + str(num))
+    else:  
+        print("遊戲結束！")
+        break
+
+
+
+
+import random as r
+
+list1 = r.sample(range(1,50), 7)
+special = list1.pop()
+list1.sort()
+print("本期大樂透中獎號碼為：", end="")
+for i in range(0,6):
+    if i == 5:    print(str(list1[i]))
+    else:    print(str(list1[i]), end=", ")
+print("本期大樂透特別號為：" + str(special))
+
+
+
+maxNo=10
+result = random.randrange(1, 10)
+print("取得亂數 : " + str(result))
+
 x = random.randint(1,6)
 print("取得亂數 : " + str(x))
 while x != 6:

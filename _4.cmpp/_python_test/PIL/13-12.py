@@ -15,6 +15,10 @@ y = im_h/2-fn_h/2
 dw.text((x+5, y+5), str(text_msg), font=font, fill=(25,25,25))
 dw.text((x, y), str(text_msg), font=font, fill=(128,255,255))
 
-im.show()
+#im.show()
+filename = '__temp/tmppic'
+im.save(filename+'.png', 'PNG')
+print('已寫入檔案：'+filename+'.png')
+
 
 
