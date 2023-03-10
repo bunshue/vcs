@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+
 url = 'https://www.taiwanlottery.com.tw/'
 r = requests.get(url)
 sp = BeautifulSoup(r.text, 'html.parser')

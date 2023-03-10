@@ -1,4 +1,5 @@
 import requests
+
 url = 'https://irs.thsrc.com.tw/IMINT/'
 # 自訂表頭
 headers={

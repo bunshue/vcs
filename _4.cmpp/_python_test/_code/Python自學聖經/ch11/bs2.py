@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+
 html = '''
 <html>
   <head><meta charset="UTF-8"><title>我是網頁標題</title></head>
@@ -8,6 +9,7 @@ html = '''
   </body>
 </html>
 '''
+
 sp = BeautifulSoup(html, 'html.parser')
 print(sp.find('p'))
 print(sp.find_all('p'))

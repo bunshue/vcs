@@ -1,4 +1,5 @@
 from bs4 import BeautifulSoup
+
 html = '''
 <html>
   <head><meta charset="UTF-8"><title>我是網頁標題</title></head>
@@ -9,6 +10,7 @@ html = '''
 </html>
 '''
 sp = BeautifulSoup(html, 'html.parser')
+
 print(sp.select('img')[0].get('src'))
 print(sp.select('a')[0].get('href'))
 print(sp.select('img')[0]['src'])

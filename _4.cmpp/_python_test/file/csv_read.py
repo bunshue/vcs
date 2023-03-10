@@ -1,7 +1,7 @@
 import csv
 
 # 開啟 csv 檔案
-with open('test1.csv', newline='') as csvfile:
+with open('data/test1.csv', newline='') as csvfile:
     # 讀取 csv 檔案內容
     rows = csv.reader(csvfile)
     
@@ -10,13 +10,9 @@ with open('test1.csv', newline='') as csvfile:
         print(row)
 
 
-
-
-
-
 import csv
 # 開啟 csv 檔案
-with open('test1.csv', newline='') as csvfile:
+with open('data/test1.csv', newline='') as csvfile:
     # 讀取 csv 檔內容，將每一列轉成 dictionary
     rows = csv.DictReader(csvfile)   
     
@@ -25,7 +21,7 @@ with open('test1.csv', newline='') as csvfile:
         print(row['姓名'],row['身高'],row['體重'])
         
 import csv
-with open('test3.csv', 'w', newline='') as csvfile:
+with open('__temp/test3.csv', 'w', newline='') as csvfile:
     # 定義欄位
     fieldnames = ['姓名', '身高', '體重']
 
@@ -41,7 +37,7 @@ with open('test3.csv', 'w', newline='') as csvfile:
     
 import csv
 # 開啟輸出的 csv 檔案
-with open('test1.csv', 'w', newline='') as csvfile:
+with open('__temp/test1.csv', 'w', newline='') as csvfile:
   # 建立 csv 檔寫入物件
   writer = csv.writer(csvfile)
 
@@ -60,7 +56,7 @@ csvtable = [
         ['David', 183, 78],
 ]
 # 開啟輸出的 csv 檔案
-with open('test2.csv', 'w', newline='') as csvfile:
+with open('__temp/test2.csv', 'w', newline='') as csvfile:
   # 建立 csv 檔寫入物件
   writer = csv.writer(csvfile)
 

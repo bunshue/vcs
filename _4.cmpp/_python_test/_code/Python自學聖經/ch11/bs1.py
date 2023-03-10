@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+
 url = 'http://ehappy.tw/bsdemo1.htm'
 html = requests.get(url)
 html.encoding = 'UTF-8'

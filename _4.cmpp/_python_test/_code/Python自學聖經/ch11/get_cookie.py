@@ -1,4 +1,5 @@
 import requests
+
 url = 'https://www.ptt.cc/bbs/Gossiping/index.html'
 # 設定cookies的值
 cookies = {'over18':'1'}

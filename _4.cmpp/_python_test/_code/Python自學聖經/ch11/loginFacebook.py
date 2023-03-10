@@ -1,4 +1,5 @@
 from selenium import webdriver
+
 # 設定facebook登入資訊
 url = 'https://www.facebook.com/'
 email='你的faceook電子郵件'
@@ -12,3 +13,4 @@ driver.get(url)
 driver.find_element_by_id('email').send_keys(email) #輸入郵件
 driver.find_element_by_id('pass').send_keys(password)#輸入密碼
 driver.find_element_by_id('loginbutton').click()    # 按登入鈕
+
