@@ -1,6 +1,5 @@
 # Python 新進測試 07
 
-import os
 class_101 = dict() #記錄學生座號及姓名
 chi_score = dict() #記錄國文成績
 eng_score = dict() #記錄英文成績
@@ -9,7 +8,6 @@ subjects = ["國文", "英文", "數學"]
 scores  = [chi_score, eng_score, mat_score]
 
 def disp_menu():
-    os.system("clear")
     print("Class 101班級成績管理系統")
     print("-------------------------")
     print("1. 輸入學生姓名")
