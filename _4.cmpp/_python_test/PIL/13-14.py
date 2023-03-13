@@ -20,7 +20,7 @@ x = int(im_w/2 - fn_w/2)
 y = int(im_h/2 - fn_h/2)
 dw.text((0, 0), msg, font=font, fill=fill)
 image_file.paste(im, (x, y), im)
-image_file.show()
+#image_file.show()
 
 filename, ext = filename.split('.')
 if os.path.exists(filename+'_wm.png'):
@@ -28,7 +28,9 @@ if os.path.exists(filename+'_wm.png'):
     if ans != 'y' and ans != 'Y':
         exit(1)
 
-filename_w = '__temp\pic_with_watermark.png'
-image_file.save(filename_w, 'PNG')
+filename = '__temp/tmppic_new'
+image_file.save(filename+'.png', 'PNG')
+print('新檔存圖, 已寫入檔案：'+filename+'.png')
 
-print('已寫入檔案：' + filename_w)
+
+

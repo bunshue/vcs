@@ -1,3 +1,5 @@
+#各種檔案寫讀範例 csv 3
+
 import csv
 
 # 開啟 csv 檔案

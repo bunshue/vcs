@@ -1,3 +1,5 @@
+#各種檔案寫讀範例 csv 1
+
 #建立一個csv檔 逗號分隔值(comma-seperated values)
 
 print("python寫資料到CSV檔")

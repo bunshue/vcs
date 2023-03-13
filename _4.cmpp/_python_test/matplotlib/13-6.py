@@ -1,6 +1,3 @@
-# _*_ coding: utf-8 _*_
-# 程式 13-6 (Python 3 Version)
-
 import matplotlib.pyplot as plt
 import numpy as np
 

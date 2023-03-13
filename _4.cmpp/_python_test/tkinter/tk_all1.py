@@ -1,83 +1,50 @@
 # Python 新進測試 13 tkinter
 
-
-'''
-import tkinter as tk
-
-window=tk.Tk()
-
-tk.Label(window, text='紅', bg='red', width=20).pack()
-
-tk.Label(window, text='綠', bg='green', width=20).pack()
-
-tk.Label(window, text='藍', bg='blue', width=20).pack()
-
-
-
-
-
-
 import tkinter as tk
 
 window = tk.Tk()
+
+tk.Label(window, text='紅', bg='red', width=20).pack()
+tk.Label(window, text='綠', bg='green', width=20).pack()
+tk.Label(window, text='藍', bg='blue', width=20).pack()
+
 
 topping = {0:'海苔', 1:'水煮蛋', 2:'豆芽菜', 3:'叉燒'}
 
 check_value={}
 
 for i in range(len(topping)):
-
 	check_value[i] = tk.BooleanVar()
-
 	tk.Checkbutton(window, variable=check_value[i], text = topping[i]).pack(anchor=tk.W)
 
-
-
-
 def buy():
-
 	for i in check_value:
-
 		if check_value[i].get() == True:
-
 			print(topping[i])
 
-
-
 tk.Button(window, text='點菜', command=buy).pack()
 
 
-
-
-
-
-
-import tkinter as tk
-
-window = tk.Tk()
 
 radio_value = tk.IntVar()
-
 radio_value.set(1)
-
 lunch = {0:'A套餐',1:'B套餐',2:'C套餐'}
-
 tk.Radiobutton(text = lunch[0], variable = radio_value, value = 0).pack()
-
 tk.Radiobutton(text = lunch[1], variable = radio_value, value = 1).pack()
-
 tk.Radiobutton(text = lunch[2], variable = radio_value, value = 2).pack()
-
 def buy():
-
 	value = radio_value.get()
-
 	print(lunch[value])
-
 
 tk.Button(window, text='點菜', command=buy).pack()
 
-'''
+
+
+
+string = tk.StringVar()
+entry = tk.Entry(window, textvariable=string).pack()
+label = tk.Label(window, textvariable=string).pack()
+
 
 
 '''
@@ -97,20 +64,6 @@ if(response==True):
 else:
 	print('有問題');
 	
-
-
-
-
-import tkinter as tk
-
-window = tk.Tk()
-
-string = tk.StringVar()
-
-entry = tk.Entry(window, textvariable=string).pack()
-
-label = tk.Label(window, textvariable=string).pack()
-
 
 
 

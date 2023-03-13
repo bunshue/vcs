@@ -1,9 +1,5 @@
 # Python 新進測試 13
 
-
-
-
-
 import requests
 
 r = requests.get('http://tw.yahoo.com')

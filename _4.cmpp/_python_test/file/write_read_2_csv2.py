@@ -1,4 +1,4 @@
-#python讀取CSV檔
+#各種檔案寫讀範例 csv 2
 
 from urllib.request import urlopen
 from io import StringIO

@@ -1,3 +1,5 @@
+#各種檔案寫讀範例 csv 5
+
 import numpy as np
 
 print("讀取 .csv 檔 1")

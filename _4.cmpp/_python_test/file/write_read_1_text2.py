@@ -1,4 +1,4 @@
-#各種寫入檔案範例
+#各種檔案寫讀範例 txt 2
 
 print("附加模式寫檔案")
 filename_w = "__temp\TestFileW1.txt"

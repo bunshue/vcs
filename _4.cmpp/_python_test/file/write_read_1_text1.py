@@ -1,4 +1,4 @@
-# Python 新進測試 04 讀寫本地檔案
+#各種檔案寫讀範例 txt 1
 
 filename_rw = '__temp\sample.txt'
 

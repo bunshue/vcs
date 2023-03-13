@@ -1,15 +1,12 @@
-# _*_ coding: utf-8 _*_
-# 程式 13-1 (Python 3 Version)
-
 import matplotlib.pyplot as plt
 
-w = [1, 3, 4, 5, 9, 11]
-x = [1, 2, 3, 4, 5, 6]
-y = [20, 30, 14, 67, 42, 12]
-z = [12, 33, 43, 22, 34, 20]
+x1 = [1, 2, 3, 4, 5, 6]
+y1 = [20, 30, 14, 67, 42, 12]
+plt.plot(x1, y1, lw=2, label='Mary')
 
-plt.plot(x, y, lw=2, label='Mary')
-plt.plot(w, z, lw=2, label='Tom')
+x2 = [1, 3, 4, 5, 9, 11]
+y2 = [12, 33, 43, 22, 34, 20]
+plt.plot(x2, y2, lw=2, label='Tom')
 
 plt.xlabel('month')
 plt.ylabel('dollars (million)')

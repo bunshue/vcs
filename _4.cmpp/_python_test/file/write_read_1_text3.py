@@ -1,4 +1,4 @@
-#各種讀取檔案範例
+#各種檔案寫讀範例 txt 3
 
 filename = "data\poetry.txt"
 print("讀取檔案 : "+filename)

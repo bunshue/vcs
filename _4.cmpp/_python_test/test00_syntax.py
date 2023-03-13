@@ -45,16 +45,15 @@ print(mydict)
 #使用dir()內置函數返回一個包含一個模塊中定義名稱的字符串的排序列表。
 #該列表包含在一個模塊中定義的所有模塊，變量和函數的名稱。
 
-'''
 #查看 math
+import math
 content = dir(math)
 print("math 模組所支援的指令 : " + str(content))
-'''
-'''
+
 #查看 serial
+import serial
 content = dir(serial)
 print("serial 模組所支援的指令 : " + str(content))
-'''
 
 
 # 星座轉換字典
