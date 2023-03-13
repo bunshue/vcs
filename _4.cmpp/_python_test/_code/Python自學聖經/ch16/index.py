@@ -17,8 +17,14 @@ def showWeather(event):  #下拉選單選取選項後執行的程式
         labelVar.set('請選擇縣市！')
 
 window = Tk()
+
 window.title('縣市天氣資料')
-window.geometry('300x350')
+
+# 設定主視窗大小
+w = 300
+h = 350
+size = str(w)+'x'+str(h)
+window.geometry(size)
 
 cbVar = StringVar()
 cb = Combobox(window, textvariable=cbVar)  #下拉選單元件

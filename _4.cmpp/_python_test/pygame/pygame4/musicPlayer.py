@@ -1,13 +1,14 @@
 import pygame
 import Tkinter as tk
+
 window = tk.Tk()
+
 pygame.init()
 
 pygame.mixer.music.load("music.mp3")
 
 started = False
 playing = False
-
 
 def buttonClick():
     global playing, started
@@ -33,4 +34,5 @@ button = tk.Button(window, text="Play", command=buttonClick)
 slider.pack()
 slider.set(100)
 button.pack()
+
 window.mainloop()

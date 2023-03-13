@@ -3,10 +3,11 @@ import tkinter as tk
 import tkinter.filedialog as fd
 from PIL import ImageTk
 
-base = tk.Tk()
-base.title('QRcode Generator')
-input_area = tk.Frame(base, relief=tk.RAISED, bd=2)
-image_area = tk.Frame(base, relief=tk.SUNKEN, bd=2)
+window = tk.Tk()
+
+window.title('QRcode Generator')
+input_area = tk.Frame(window, relief=tk.RAISED, bd=2)
+image_area = tk.Frame(window, relief=tk.SUNKEN, bd=2)
 
 # 此變數用來儲存將轉換成qrcode的字串
 encode_text = tk.StringVar()
@@ -38,16 +39,16 @@ def save():
 
 # 結束選單
 def exit():
-    base.destroy()
-
+    window.destroy()
 
 # 建立選單畫面
-menubar = tk.Menu(base)
+menubar = tk.Menu(window)
 filemenu = tk.Menu(menubar)
 menubar.add_cascade(label='File', menu=filemenu)
 filemenu.add_command(label='save', command=save)
 filemenu.add_separator()
 filemenu.add_command(label='exit', command=exit)
-base.config(menu=menubar)
+window.config(menu=menubar)
 
-base.mainloop()
+window.mainloop()
+

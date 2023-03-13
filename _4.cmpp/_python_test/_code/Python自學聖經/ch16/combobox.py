@@ -7,7 +7,12 @@ def selected(event):
 window = Tk()
 
 window.title('最喜歡的運動')
-window.geometry('300x160')
+
+# 設定主視窗大小
+w = 300
+h = 160
+size = str(w)+'x'+str(h)
+window.geometry(size)
 
 cbVar = StringVar()
 cb = Combobox(window, textvariable=cbVar)

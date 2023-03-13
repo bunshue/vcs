@@ -1,6 +1,6 @@
 import tkinter as tk
-window = tk.Tk()
 
+window = tk.Tk()
 
 def sliderUpdate(something):
     red = format(redSlider.get(), 'x')
@@ -23,6 +23,5 @@ redSlider.grid(row=1, column=1)
 greenSlider.grid(row=1, column=2)
 blueSlider.grid(row=1, column=3)
 canvas.grid(row=2, column=1, columnspan=3)
-
 
 window.mainloop()

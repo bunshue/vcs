@@ -1,7 +1,4 @@
-# python import module : Tkinter
-
-
-#撰寫 BMI 計算測量的 function，並設定將顯示的 BMI 數值與評語回傳
+# Python 測試 tkinter 2
 
 def BMI():
     # BMI 計算，四捨五入取到小數第二位
@@ -10,8 +7,6 @@ def BMI():
     #回傳結果，設定 return_msg 數值及評語
     return_msg.set("BMI 計算後數值 = " + str(BMI_value) + "\n" + BMI_Status(BMI_value))
 
-
-#撰寫透過 BMI 指數，回傳相對應評語的 function
 
 # 透過 BMI 指數，回傳相對應評語
 def BMI_Status(BMI_value):
@@ -30,10 +25,8 @@ def BMI_Status(BMI_value):
             return "BMI 過高，重度肥胖"
 
 
-# 導入套件
 import tkinter as tk
 
-# 建立主視窗
 window = tk.Tk()
 
 # 設定主視窗大小
@@ -45,6 +38,7 @@ window.geometry(size)
 # 設定主視窗標題
 title = "圖形化範例-BMI測量"
 window.title(title)
+
 
 #建立將使用的相關變數(回應值、身高、體重)，這邊需要在建立玩主視窗後才可以建立，否則會報錯
 return_msg = tk.StringVar() # BMI 回傳值

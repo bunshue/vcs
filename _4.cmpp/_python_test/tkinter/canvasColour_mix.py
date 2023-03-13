@@ -18,9 +18,6 @@ window = tk.Tk()
 slider = tk.Scale(window, from_=0, to=100)
 slider.pack()
 
-
-
-
 window = Tk()
 
 var = IntVar()
@@ -37,14 +34,11 @@ window = Tk()
 w = Spinbox(window, values=(1, 2, 4, 8))
 w.pack()
 
-
-
 window = Tk()
 
 #w = Spinbox(window, from_=0, to=10)
 w = Spinbox(window, values=(1, 2, 4, 8))
 w.pack()
-
 
 window = tk.Tk()
 

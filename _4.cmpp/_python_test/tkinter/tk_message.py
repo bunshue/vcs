@@ -1,9 +1,9 @@
 import tkinter as tk
 
-master = tk.Tk()
+window = tk.Tk()
 
-#w = tk.Message(master, text="this is a relatively long message")    #自動換行
-w = tk.Message(master, text="this is a relatively long message", width=50)  #限定寬度
+#w = tk.Message(window, text="this is a relatively long message")    #自動換行
+w = tk.Message(window, text="this is a relatively long message", width=50)  #限定寬度
 w.pack()
 
-master.mainloop()
+window.mainloop()

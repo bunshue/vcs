@@ -40,7 +40,8 @@ def colourUpdate():
 
     colour = "#" + redHex + greenHex + blueHex
     canvas.config(bg=colour)
-    window.after(100, colourUpdate)
+    #window.after(100, colourUpdate)    #這行是什麼意思
+    #print('設定顏色')
 
 
 def incrementColour(colourValue, increment, direction):
@@ -77,3 +78,5 @@ canvas.grid(row=2, column=1, columnspan=3)
 button.grid(row=3, column=2)
 
 window.mainloop()
+
+

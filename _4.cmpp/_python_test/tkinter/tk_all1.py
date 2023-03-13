@@ -1,8 +1,18 @@
-# Python 新進測試 13 tkinter
+# Python 測試 tkinter 1
 
 import tkinter as tk
 
 window = tk.Tk()
+
+# 設定主視窗大小
+w = 800
+h = 600
+size = str(w)+'x'+str(h)
+window.geometry(size)
+
+# 設定主視窗標題
+title = "圖形化範例-BMI測量"
+window.title(title)
 
 tk.Label(window, text='紅', bg='red', width=20).pack()
 tk.Label(window, text='綠', bg='green', width=20).pack()
