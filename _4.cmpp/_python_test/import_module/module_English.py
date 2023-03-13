@@ -3,8 +3,6 @@ import numpy as np
 import re
 from collections import Counter
 
-
-
 with open ("C:/______test_files/Determinant.txt",'r',encoding='UTF-8') as f:
     words=f.read().lower()
 

@@ -1,8 +1,5 @@
 # python import module : numpy
 
-
-
-
 import numpy as np
 
 print("建立陣列")

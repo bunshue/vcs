@@ -1,24 +1,25 @@
-from tkinter import *
+import tkinter as tk
 
 class App:
     def __init__(self, master):
 
-        frame = Frame(master)
+        frame = tk.Frame(master)
         frame.pack()
 
-        self.button = Button(
+        self.button = tk.Button(
             frame, text="QUIT", fg="red", command=frame.quit
             )
-        self.button.pack(side=LEFT)
+        self.button.pack(side=tk.LEFT)
 
-        self.hi_there = Button(frame, text="Hello", command=self.say_hi)
-        self.hi_there.pack(side=LEFT)
+        self.hi_there = tk.Button(frame, text="Hello", command=self.say_hi)
+        self.hi_there.pack(side=tk.LEFT)
     def say_hi(self):
         print("hi there, everyone!")
 
-root = Tk()
+window = tk.Tk()
 
-app = App(root)
+app = App(window)
 
-root.mainloop()
-root.destroy() # optional; see description below
+window.mainloop()
+
+window.destroy() # optional; see description below

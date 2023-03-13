@@ -1,4 +1,5 @@
-#使用 pySerial 套件
+# 使用 pySerial 套件
+# 需 pip install pyserial
 
 import serial
 

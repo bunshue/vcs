@@ -53,6 +53,13 @@ namespace iMS_Video_Flash
             button3.Location = new Point(x_st + dx * 0, y_st + dy * 4);
             button4.Location = new Point(x_st + dx * 0, y_st + dy * 5);
 
+            Bitmap bitmap1 = new Bitmap(iMS_Video_Flash.Properties.Resources.burn);
+            bitmap1.MakeTransparent(Color.Black);     //使用默認的透明顏色進行透明設置
+            pictureBox1.Image = bitmap1;
+            pictureBox1.Size = new Size(100, 100);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.Location = new Point(x_st + dx * 7, y_st + dy * 0 - 15);
+
             richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 1);
 
             groupBox1.Size = new Size(20 + w + 20, 550);

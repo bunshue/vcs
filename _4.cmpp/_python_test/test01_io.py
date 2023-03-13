@@ -1,5 +1,8 @@
 # General IO
 
+yourName = input("What is your name? ")
+print("Hello " + yourName)
+
 print("歡迎光臨 Python")
 name = input('請問您的大名')
 print('Hi, %s.' % name)

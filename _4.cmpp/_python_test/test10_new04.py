@@ -1,10 +1,5 @@
 # Python 新進測試 04
 
-
-
-
-
-
 fp = open("data\article.txt", "r")
 zops = fp.readlines()
 fp.close()

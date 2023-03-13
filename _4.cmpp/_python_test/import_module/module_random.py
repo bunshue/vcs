@@ -18,6 +18,19 @@ for i in range(4):
   sentence = "david " + verb + " " + noun
   print(sentence)
 
+R= random.randint(0,1023) # 產生 0~1023 的亂數
+G= random.randint(0,1023) # 產生 0~1023 的亂數
+B= random.randint(0,1023) # 產生 0~1023 的亂數
+print(R,G,B)
+
+
+import random
+while True:
+    x = random.randint(1,6)
+    print(x)
+    if x == 6 : break
+
+
 
 import random as r
 

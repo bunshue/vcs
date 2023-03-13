@@ -155,6 +155,42 @@ namespace vcs_Process_CommandLine
 
         private void button4_Click(object sender, EventArgs e)
         {
+            //轉出檔案
+
+            FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
+            folderBrowserDialog1.SelectedPath = "c:\\______test_files";  //預設開啟的路徑
+
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+
+                richTextBox1.Text += "選取資料夾: " + folderBrowserDialog1.SelectedPath + "\n";
+                richTextBox1.Text += "RootFolder: " + folderBrowserDialog1.RootFolder + "\n";
+                richTextBox1.Text += "Container: " + folderBrowserDialog1.Container + "\n";
+                richTextBox1.Text += "Description: " + folderBrowserDialog1.Description + "\n";
+                richTextBox1.Text += "ShowNewFolderButton: " + folderBrowserDialog1.ShowNewFolderButton + "\n";
+                richTextBox1.Text += "Site: " + folderBrowserDialog1.Site + "\n";
+                richTextBox1.Text += "Tag: " + folderBrowserDialog1.Tag + "\n";
+
+                //執行CommandLine指令, 並取回結果 1
+
+                string exe_filename = "cmd.exe";    //要執行的程式名稱
+                //string command = "systeminfo";      //向要執行的程式發送的命令
+                //string command = "ipconfig /all"; //向要執行的程式發送的命令, 並加參數
+
+                string foldername = folderBrowserDialog1.SelectedPath;
+                FolderBrowserDialog fbd = new FolderBrowserDialog();
+
+                string command = "dir " + foldername + " /d /S >> filename.txt";
+                richTextBox1.Text += command + "\n";
+
+                string output_data = run_command_line_process(exe_filename, command);//程式+命令, 程式+命令+參數
+                richTextBox1.Text += output_data + "\n";
+            }
+            else
+            {
+                richTextBox1.Text = "未選取資料夾\n";
+            }
+            return;
         }
 
         int show_result_index = 0;

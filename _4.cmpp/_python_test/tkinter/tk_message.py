@@ -1,9 +1,9 @@
-from tkinter import *
+import tkinter as tk
 
-master = Tk()
+master = tk.Tk()
 
-#w = Message(master, text="this is a message")
-w = Message(master, text="this is a relatively long message", width=50)
+#w = tk.Message(master, text="this is a relatively long message")    #自動換行
+w = tk.Message(master, text="this is a relatively long message", width=50)  #限定寬度
 w.pack()
 
-mainloop()
+master.mainloop()

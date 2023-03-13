@@ -1,16 +1,16 @@
-from tkinter import *
+import tkinter as tk
 
-master = Tk()
+window = tk.Tk()
 
-#w = Scale(master, from_=0, to=100)
-w = Scale(master, from_=0, to=100, resolution=0.1)
+#w = tk.Scale(window, from_=0, to=100)
+w = tk.Scale(window, from_=0, to=100, resolution=0.1)
 w.pack()
 
-w = Scale(master, from_=0, to=200, orient=HORIZONTAL)
+w = tk.Scale(window, from_=0, to=200, orient=tk.HORIZONTAL)
 w.pack()
 
 print(w.get())
 
-mainloop()
+tk.mainloop()
 
 

@@ -1,6 +1,6 @@
 # while-loop
 
-print("while°j°é")
+print("whileè¿´åœˆ")
 i = 10
 while i < 30:
     print(i)
@@ -9,38 +9,69 @@ while i < 30:
         break
 
 
-print("»yªk : while")
+print("èªžæ³• : while")
 a = 0;
 story = "";
 while a < 10:
     a = a + 1;
     story += "hello" + " "
     #print("hello")
-    #print("");  #ªÅ¥Õ¤@¦æ
+    #print("");  #ç©ºç™½ä¸€è¡Œ
 print(story)
 
 
 
 
-print("»yªk : input")
+print("èªžæ³• : input")
 userName = input("What is your name? ")
-message = input("½Ð¿é¤J¤@­Ó°T®§(¿é¤JexitÂ÷¶})")
+message = input("è«‹è¼¸å…¥ä¸€å€‹è¨Šæ¯(è¼¸å…¥exité›¢é–‹)")
 while message != "exit":
     print(userName + ": " + message)
     message = input("Enter a message: ")
 
 
 
-print("»yªk : ¿é¤J±b¸¹±K½X")
+print("èªžæ³• : è¼¸å…¥å¸³è™Ÿå¯†ç¢¼")
 
 
-id = input("½Ð¿é¤J±b¸¹ : (david)")
-print("¨Ï¥ÎªÌ : "+id)
+id = input("è«‹è¼¸å…¥å¸³è™Ÿ : (david)")
+print("ä½¿ç”¨è€… : "+id)
 password = "123"
-pAttempt = input("½Ð¿é¤J±K½X : (123)")
+pAttempt = input("è«‹è¼¸å…¥å¯†ç¢¼ : (123)")
 while pAttempt != password:
-    print("±K½X¿ù»~")
-    pAttempt = input("½Ð¿é¤J±K½X : (123)")
-print("±K½X¥¿½T, Åwªï " + id+ " ¨Ï¥Î")
+    print("å¯†ç¢¼éŒ¯èª¤")
+    pAttempt = input("è«‹è¼¸å…¥å¯†ç¢¼ : (123)")
+print("å¯†ç¢¼æ­£ç¢º, æ­¡è¿Ž " + id+ " ä½¿ç”¨")
+
+
+userName = input("What is your name? ")
+message = input("Enter a message: ")
+while message != "exit":
+    print (userName + ": " + message)
+    message = input("Enter a message: ")
+
+
+a=0;
+while True:
+    print("I'm in space " + str(a))
+    a=a+1;
+    if a>5:
+        break
+   
+    
+again = "yes"
+while again == "yes":
+    praiseType = input("Select a type of praise \n a: personality \n b: appearance \n c: intelligence")
+    if praiseType == "a":
+        print("You are an interesting person")
+    elif praiseType == "b":
+        print("You are smart")
+    elif praiseType == "c":
+        print("You look good")
+    else:
+        print("That wasn't an option")
+    again = input("Would you like some more praise?")
+
+
 
 

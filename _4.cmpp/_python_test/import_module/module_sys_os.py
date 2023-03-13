@@ -143,4 +143,3 @@ os.system("notepad " + filename_r)
 
 
 
-

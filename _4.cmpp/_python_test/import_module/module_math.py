@@ -17,11 +17,3 @@ r = math.sqrt(n)
 print("16的平方根 為 : "+str(r))
 
 
-#使用dir()內置函數返回一個包含一個模塊中定義名稱的字符串的排序列表。
-#該列表包含在一個模塊中定義的所有模塊，變量和函數的名稱。
-content = dir(math)
-print("math模組所支援的指令 : " + str(content))
-
-
-
-
