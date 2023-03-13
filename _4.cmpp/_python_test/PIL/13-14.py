@@ -1,10 +1,13 @@
+#在圖上寫字
 import os, sys
 from PIL import Image, ImageDraw, ImageFont
 
 filename = 'data\sample.jpg'
 
-msg = input('請輸入要做浮水印的文字：')
-font_size = int(input('文字大小：'))
+#要做浮水印的文字
+msg = "lion-mouse"
+#文字大小
+font_size = 10
 fill = (255,255,255,100)
 
 image_file = Image.open(filename)
@@ -21,12 +24,6 @@ y = int(im_h/2 - fn_h/2)
 dw.text((0, 0), msg, font=font, fill=fill)
 image_file.paste(im, (x, y), im)
 #image_file.show()
-
-filename, ext = filename.split('.')
-if os.path.exists(filename+'_wm.png'):
-    ans = input('此檔案已存在，要覆寫嗎？(y/n)')
-    if ans != 'y' and ans != 'Y':
-        exit(1)
 
 filename = '__temp/tmppic_new'
 image_file.save(filename+'.png', 'PNG')

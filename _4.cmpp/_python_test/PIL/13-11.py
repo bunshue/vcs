@@ -1,3 +1,4 @@
+#在圖上寫字
 import sys, os, glob
 from PIL import Image, ImageDraw, ImageFont
 

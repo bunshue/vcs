@@ -1,6 +1,5 @@
 # Python 新進測試 14  tkinter
 
-# 導入套件
 import tkinter as tk
 
 # 建立主視窗
@@ -33,4 +32,3 @@ button1.grid(row=0, column=0)
 button2.grid(row=0, column=1)
 
 window.mainloop()
-

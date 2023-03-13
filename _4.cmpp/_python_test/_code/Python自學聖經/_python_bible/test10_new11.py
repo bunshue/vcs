@@ -1,11 +1,13 @@
 # Python 新進測試 11
 
-web = input("請輸入網址：")
+#web = input("請輸入網址：")
+web = 'https://www.google.com.tw/'
+
 if web.startswith("http://") or web.startswith("https://"):
     print("輸入的網址格式正確！")
 else:
     print("輸入的網址格式錯誤！")
-    
+   
     
 person = int(input("請輸入學生人數: "))
 apple = int(input("請輸入蘋果總數: "))
