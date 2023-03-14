@@ -1,6 +1,8 @@
 import random
 import pygame
+
 pygame.init()
+
 # Window setup
 size = [400, 300]
 screen = pygame.display.set_mode(size)
@@ -20,7 +22,6 @@ blue = pygame.color.Color('#8080FF')
 white = pygame.color.Color('#FFFFFF')
 black = pygame.color.Color('#000000')
 
-
 def checkOffScreenX(x):
     if x > size[0]:
         x = 0
@@ -28,14 +29,12 @@ def checkOffScreenX(x):
         x = size[0]
     return x
 
-
 def checkOffScreenY(y):
     if y > size[1]:
         y = 0
     elif y < 0:
         y = size[1]
     return y
-
 
 # Game loop
 done = False
@@ -70,4 +69,5 @@ while not done:
         if event.type == pygame.QUIT:
             done = True
     clock.tick(72)
+
 pygame.quit()

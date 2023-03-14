@@ -1,4 +1,5 @@
 import pygame
+
 pygame.init()
 
 clock = pygame.time.Clock()
@@ -14,3 +15,4 @@ while count < 200:
         hit.play()
     count += 1
     clock.tick(2)
+

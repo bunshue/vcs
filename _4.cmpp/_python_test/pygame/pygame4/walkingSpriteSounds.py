@@ -1,7 +1,7 @@
 import random
 import pygame
-pygame.init()
 
+pygame.init()
 
 def move(image1, image2):
     global count
@@ -99,4 +99,6 @@ while not done:
 
     pygame.display.flip()
     clock.tick(32)
+
 pygame.quit()
+

@@ -1,4 +1,5 @@
 import pygame
+
 pygame.init()
 
 windowSize = [400, 300]
@@ -12,4 +13,5 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
+            
 pygame.quit()

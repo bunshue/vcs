@@ -1,7 +1,7 @@
 import pygame
 import random
-pygame.init()
 
+pygame.init()
 
 def randColour():
     r = random.randint(0, 255)
@@ -41,4 +41,5 @@ while not done:
             done = True
     pygame.display.flip()
     clock.tick(60)
+
 pygame.quit()

@@ -1,5 +1,6 @@
 import math
 import pygame
+
 pygame.init()
 
 windowSize = [400, 300]
@@ -17,7 +18,6 @@ count = 0
 
 done = False
 
-
 while not done:
     screen.fill(black)
     pygame.draw.ellipse(screen, colour, [x, y, width, height])
@@ -34,3 +34,4 @@ while not done:
             done = True
     clock.tick(24)
 pygame.quit()
+

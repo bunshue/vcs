@@ -1,4 +1,5 @@
 import pygame
+
 pygame.init()
 
 screen = pygame.display.set_mode([400, 300])
@@ -17,4 +18,5 @@ while not done:
         if event.type == pygame.QUIT:
             done = True
     pygame.display.flip()
+
 pygame.quit()

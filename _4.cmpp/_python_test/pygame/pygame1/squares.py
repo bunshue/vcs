@@ -1,4 +1,5 @@
 import pygame
+
 pygame.init()
 
 width = 400
@@ -8,7 +9,7 @@ screen = pygame.display.set_mode(windowSize)
 
 colour = pygame.color.Color('#F54455')
 #[100, 100, 0]
-
+print(colour)
 
 row = 0
 done = False
@@ -18,10 +19,11 @@ while not done:
         pygame.draw.rect(screen, colour, (0, row, width, row + increment))
         pygame.display.flip()
         if colour[2] + increment < 255:
-            colour[2] += increment
+            colour[2] = colour[2] + int(increment)
         row += increment
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
+
 pygame.quit()

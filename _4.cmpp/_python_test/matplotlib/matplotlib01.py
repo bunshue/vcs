@@ -2,6 +2,7 @@ import math
 import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
+
 #a = np.linspace(0,1,100)
 a = np.linspace(-360,360,100)
 #b = np.exp(-a)
@@ -20,13 +21,4 @@ plt.ylabel(u'縱座標', fontproperties=myfont)
 plt.title(u'三角函數', fontproperties=myfont)
 plt.grid()
 
-#存圖命令
-plt.savefig('sin_plot.svg')
-plt.savefig('sin_plot111.png')
-#plt.savefig('sin_plot.bmp')
-#plt.savefig('sin_plot.jpg')
-plt.savefig('sin_plot222.png', format='png', transparent=True, dpi=300, pad_inches = 0)    #指定分辨率
-plt.savefig('sin_plot333.png', dpi = 300)
-
 plt.show()
-

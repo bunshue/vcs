@@ -1,5 +1,6 @@
 import pygame
 import random
+
 pygame.init()
 
 windowSize = [400, 300]
@@ -44,6 +45,7 @@ while not done:
             done = True
     pygame.display.flip()
     clock.tick(10)
+
 pygame.quit()
 
-print points
+print(points)

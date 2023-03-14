@@ -1,5 +1,7 @@
 import pygame
+
 pygame.init()
+
 # Window setup
 size = [400, 300]
 screen = pygame.display.set_mode(size)
@@ -41,4 +43,5 @@ while not done:
         if event.type == pygame.QUIT:
             done = True
     clock.tick(72)
+    
 pygame.quit()

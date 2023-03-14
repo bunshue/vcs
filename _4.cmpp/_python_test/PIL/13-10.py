@@ -1,3 +1,5 @@
+#調整資料夾內所有圖片檔影像寬度, 加logo
+      
 import sys, os, glob
 from PIL import Image, ImageDraw
 
@@ -29,5 +31,5 @@ for target_image in allfiles:
 	im.save(target_dir+'/'+filename)
 	im.close()
 
-
+print("完成")
 	

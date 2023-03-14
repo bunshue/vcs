@@ -99,6 +99,21 @@ button2.grid(row=0, column=1)
 
 
 
+w = tk.Canvas(window, width=200, height=100)
+w.pack()
+w.create_line(0, 0, 200, 100)
+w.create_line(0, 100, 200, 0, fill="red", dash=(4, 4))
+w.create_rectangle(50, 25, 150, 75, fill="blue")
+
+
+
+#w = tk.Message(window, text="this is a relatively long message")    #自動換行
+w = tk.Message(window, text="this is a relatively long message", width=50)  #限定寬度
+w.pack()
+
+
+
+
 '''
 import tkinter as tk
 

@@ -1,5 +1,6 @@
 import math
 import pygame
+
 pygame.init()
 
 windowSize = [400, 300]
@@ -28,6 +29,7 @@ while not done:
     count += 0.5
 
     pygame.display.flip()
+    # pygame ¦s¹Ï©R¥O
     pygame.image.save(screen, "circle" + str(fileNo) + ".png")
     fileNo += 1
 
@@ -35,4 +37,5 @@ while not done:
         if event.type == pygame.QUIT:
             done = True
     clock.tick(24)
+    
 pygame.quit()

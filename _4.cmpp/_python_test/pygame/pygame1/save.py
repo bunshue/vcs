@@ -1,5 +1,6 @@
 import random
 import pygame
+
 pygame.init()
 
 width = 400
@@ -27,5 +28,9 @@ while not done:
         if event.type == pygame.QUIT:
             done = True
     clock.tick(10)
+
+# pygame 存圖命令
 pygame.image.save(screen, "test.png")
+
 pygame.quit()
+

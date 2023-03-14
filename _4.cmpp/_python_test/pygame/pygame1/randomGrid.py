@@ -27,4 +27,5 @@ while not done:
         if event.type == pygame.QUIT:
             done = True
     clock.tick(10)
+    
 pygame.quit()

@@ -1,4 +1,5 @@
 import pygame
+
 pygame.init()
 
 windowSize = [400, 300]
@@ -16,7 +17,6 @@ btnY = (windowSize[1] - btnLength) / 2
 
 toggled = False
 pos = (0, 0)
-
 
 done = False
 while not done:
@@ -38,4 +38,5 @@ while not done:
             done = True
     pygame.display.flip()
     clock.tick(10)
+
 pygame.quit()

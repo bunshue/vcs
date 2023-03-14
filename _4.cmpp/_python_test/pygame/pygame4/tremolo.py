@@ -1,5 +1,6 @@
 import math
 import pygame
+
 pygame.mixer.init()
 
 pygame.mixer.music.load("music.mp3")
@@ -11,3 +12,4 @@ while pygame.mixer.music.get_busy():
     pygame.mixer.music.set_volume(volume)
     count += 0.2
     pygame.time.delay(200)
+
