@@ -1,3 +1,5 @@
+# plot 畫兩條線
+
 import matplotlib.pyplot as plt
 import numpy as np
 

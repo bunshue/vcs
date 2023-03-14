@@ -6,7 +6,7 @@ print("寫讀 xlsx")
 
 print("建立 xlsx")
 
-filename = '__temp/test.xlsx'
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/test.xlsx'
 
 # 建立一個工作簿     
 workbook=openpyxl.Workbook()   
@@ -47,7 +47,7 @@ for i in range(1, sheet.max_row+1):
 sheet['A3'] = 'Perry' 
 
 print("另存新檔");
-filename = '__temp/test_new.xlsx'
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/test_new.xlsx'
 workbook.save(filename)
 print("另存新檔 OK, 檔案 : " + filename)
 

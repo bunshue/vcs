@@ -6,7 +6,7 @@ import shutil
 
 filename_rw = '__temp\file.bin'
 
-print("建立一個檔案 binary")
+print("建立一個檔案 binary, 檔名 : " + filename_rw)
 content='''Hello Python
 中文字測試
 Welcome
@@ -17,7 +17,7 @@ with open(filename_rw,'wb') as f:
     f.write(content)
 
 
-print("讀取一個檔案 binary")
+print("讀取一個檔案 binary, 檔名 : " + filename_rw)
 with open(filename_rw,'rb') as f:
     content=f.read().decode("utf-8") 
     print(content) 

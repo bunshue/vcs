@@ -1,3 +1,5 @@
+# plot 畫兩條線
+
 import matplotlib.pyplot as plt
 
 x1 = [1, 2, 3, 4, 5, 6]

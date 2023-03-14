@@ -1,3 +1,5 @@
+# subplot 畫兩圖
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -12,7 +14,7 @@ for p in populations:
     yr, tl, boy, girl = p.split()
     yrborn[yr] = {'boy': int(boy), 'girl': int(girl)}
 
-ind = np.arange(len(yrborn))
+ind = np.arange(1986,2016)
 yrlist = sorted(list(yrborn.keys()))
 bp = list()
 bp_b = list()
@@ -24,15 +26,18 @@ for yr in yrlist:
     bp_b.append(boys)
     bp_g.append(girls)
 
+width = 0.35
+
 plt.subplot(211)
-plt.plot(bp)
-plt.xlim(0,len(bp)-1)
+plt.plot(ind, bp)
+plt.xlim(1986,2015)
 plt.title('1986 - 2015 (Total)')
 
 plt.subplot(212)
-plt.plot(bp_b)
-plt.plot(bp_g)
-plt.xlim(0,len(bp_b)-1)
+plt.bar(ind, bp_b, width, color='b')
+plt.bar(ind+0.35, bp_g, width, color='r')
+plt.xlim(1986,2015)
 plt.title('1986 - 2015 (Boy:Girl)')
 
 plt.show()
+

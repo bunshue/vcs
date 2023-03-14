@@ -35,10 +35,9 @@ def detectFace(img):
             cv2.rectangle(img, (x, y), (x + h, y + w), color, 2)
 
     # 將結果圖片輸出
-    filename2 = "C:\\_git\\vcs\\_4.cmpp\\_python_test\\__temp\\" + filename + "_face.jpg"
+    filename2 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/' + filename + "_face.jpg"
     print(filename2)
     cv2.imwrite(filename2, img)	#寫入本機圖片
-
 
 
 print("框出照片中的人臉")

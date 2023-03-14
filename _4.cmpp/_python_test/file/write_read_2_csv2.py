@@ -9,7 +9,8 @@ filename_r1 = "http://pythonscraping.com/files/MontyPythonAlbums.csv"
 print("讀取一個遠端csv檔案 : "+filename_r1)
 
 #本地檔案
-filename_r2 = "data\MontyPythonAlbums.local.csv"
+filename_r2 = 'C:/_git/vcs/_4.cmpp/_python_test/data/MontyPythonAlbums.local.csv'
+
 print("讀取一個本地csv檔案 : "+filename_r2)
 
 #讀取遠端檔案

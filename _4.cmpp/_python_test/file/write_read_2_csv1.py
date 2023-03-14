@@ -7,7 +7,7 @@ import csv
 
 print("python寫資料到CSV檔 1")
 
-filename_w = "__temp\TestCSVFileW.csv"
+filename_w = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/TestCSVFileW.csv'
 
 print("打開一個csv檔案 : "+filename_w)
 csvFile = open(filename_w, 'w+', newline='')
@@ -36,7 +36,8 @@ print("寫入檔案 " + filename_w + " 完成")
 import csv
 
 # 開啟 csv 檔案
-with open('data/test1.csv', newline='') as csvfile:
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/test1.csv'
+with open(filename, newline='') as csvfile:
     # 讀取 csv 檔案內容
     rows = csv.reader(csvfile)
     
@@ -47,7 +48,8 @@ with open('data/test1.csv', newline='') as csvfile:
 
 import csv
 # 開啟 csv 檔案
-with open('data/test1.csv', newline='') as csvfile:
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/test1.csv'
+with open(filename, newline='') as csvfile:
     # 讀取 csv 檔內容，將每一列轉成 dictionary
     rows = csv.DictReader(csvfile)   
     
@@ -56,7 +58,8 @@ with open('data/test1.csv', newline='') as csvfile:
         print(row['姓名'],row['身高'],row['體重'])
         
 import csv
-with open('__temp/test3.csv', 'w', newline='') as csvfile:
+filename_w = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/test3.csv'
+with open(filename_w, 'w', newline='') as csvfile:
     # 定義欄位
     fieldnames = ['姓名', '身高', '體重']
 
@@ -72,7 +75,8 @@ with open('__temp/test3.csv', 'w', newline='') as csvfile:
     
 import csv
 # 開啟輸出的 csv 檔案
-with open('__temp/test1.csv', 'w', newline='') as csvfile:
+filename_w = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/test1.csv'
+with open(filename_w, 'w', newline='') as csvfile:
   # 建立 csv 檔寫入物件
   writer = csv.writer(csvfile)
 
@@ -90,12 +94,13 @@ csvtable = [
         ['Chiou', 170, 65],
         ['David', 183, 78],
 ]
-# 開啟輸出的 csv 檔案
-with open('__temp/test2.csv', 'w', newline='') as csvfile:
-  # 建立 csv 檔寫入物件
-  writer = csv.writer(csvfile)
 
-  # 寫入二維串列資料
-  writer.writerows(csvtable)
-        
+# 開啟輸出的 csv 檔案
+filename_w = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/test2.csv'
+with open(filename_w, 'w', newline='') as csvfile:
+    # 建立 csv 檔寫入物件
+    writer = csv.writer(csvfile)
+
+    # 寫入二維串列資料
+    writer.writerows(csvtable)
 

@@ -1,5 +1,3 @@
-# -*- coding: utf-8 -*-
-
 from matplotlib.font_manager import FontProperties
 
 font = FontProperties(fname=r"c:\windows\Fonts\SimSun.ttc", size=20)
@@ -25,5 +23,3 @@ plt.legend()
 plt.grid()
 
 plt.show()
-
-

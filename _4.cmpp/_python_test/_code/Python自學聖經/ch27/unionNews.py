@@ -38,7 +38,7 @@ for t in jieba.cut(text_news, cut_all=False):  #拆解句子為字詞
         terms.append(t)
 diction = Counter(terms)
 
-font = 'msch.ttf'  #設定字型
+font = 'C:/_git/vcs/_4.cmpp/_python_test/data/msch.ttf'	#設定字型
 mask = np.array(Image.open("heart.png"))  #設定文字雲形狀 
 unioncloud = WordCloud(background_color="white",mask=mask,font_path=font)  #背景顏色預設黑色,改為白色 
 unioncloud.generate_from_frequencies(frequencies=diction)  #產生文字雲

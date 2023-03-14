@@ -1,6 +1,6 @@
 #各種檔案寫讀範例 txt 1
 
-filename_rw = '__temp\sample.txt'
+filename_rw = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/sample.txt'
 
 print("寫入檔案 : " + filename_rw)
 file_object = open(filename_rw, 'w')
@@ -34,7 +34,8 @@ with open(filename_rw, 'w') as file_object:
 	file_object.write('using with!')
 
 
-filename_rw2 = '__temp\sample2.txt'
+filename_rw2 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/sample2.txt'
+
 print("寫入檔案 : " + filename_rw2)
 fo = open(filename_rw2, "w")
 fo.write("abcdefghijklmnopqrstuvwxyz");

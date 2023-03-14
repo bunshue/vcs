@@ -1,6 +1,7 @@
 #各種檔案寫讀範例 txt 3
 
-filename = "data\poetry.txt"
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/poetry.txt'
+
 print("讀取檔案 : "+filename)
 
 f = open(filename, 'r', encoding = 'utf8')

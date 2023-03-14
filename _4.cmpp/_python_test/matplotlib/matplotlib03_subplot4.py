@@ -1,3 +1,5 @@
+# subplot 畫4圖
+
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -7,14 +9,16 @@ def f1(x):
 def f2(x):
     return float(float(school[x])/float(bp[x]))
 
-with open('data\school.txt', 'r') as fp:
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/school.txt'
+with open(filename, 'r') as fp:
     schools = fp.readlines()
 
 school = list()
 for s in schools:
     school.append(int(s.split()[1]))
 
-with open('data\yrborn.txt', 'r') as fp:
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/yrborn.txt'
+with open(filename, 'r') as fp:
 	populations = fp.readlines()
 
 yrborn = dict()

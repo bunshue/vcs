@@ -2,6 +2,8 @@ import matplotlib
 import matplotlib.pyplot as plt
 import numpy as np
 
+selected_font = 'C:/_git/vcs/_4.cmpp/_python_test/data/msch.ttf'
+
 # Data for plotting
 t = np.arange(-2.0*np.pi, 2.0*np.pi, 0.01)
 a = np.sin(t)
@@ -23,7 +25,9 @@ ax3.fill(t, c)
 #plt.plot(t, c)
 
 #plt.axis('off') #座標軸關閉
-myfont = matplotlib.font_manager.FontProperties(fname=r'C:/Windows/Fonts/msyh.ttf')
+
+myfont = matplotlib.font_manager.FontProperties(fname=selected_font)
+
 plt.xlabel(u'橫座標', fontproperties=myfont)
 plt.ylabel(u'縱座標', fontproperties=myfont)
 #plt.title('三角函數')
@@ -31,6 +35,4 @@ plt.title(u'三角函數', fontproperties=myfont)
 plt.grid()
 
 plt.show()
-
-
 

@@ -1,6 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
 
 msg = 'lion-mouse'
+selected_font = 'C:/_git/vcs/_4.cmpp/_python_test/data/ubuntu.ttf'
 
 font_size = 30; #文字大小
 font_r = 255;   #紅色值
@@ -11,7 +12,7 @@ fill = (font_r, font_g, font_b)
 
 im0 = Image.new('RGBA', (1,1))
 dw0 = ImageDraw.Draw(im0)
-font = ImageFont.truetype('data/ubuntu.ttf',font_size)
+font = ImageFont.truetype(selected_font,font_size)
 fn_w, fn_h = dw0.textsize(msg, font=font)
 
 print(fn_w)

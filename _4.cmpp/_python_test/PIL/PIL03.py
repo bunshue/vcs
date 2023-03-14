@@ -1,6 +1,7 @@
 from PIL import Image, ImageDraw, ImageFont
 
-selected_font='data/ubuntu.ttf'
+selected_font = 'C:/_git/vcs/_4.cmpp/_python_test/data/ubuntu.ttf'
+
 font_size=30
 
 mesg = 'this is a lion mouse'
@@ -19,7 +20,7 @@ draw = ImageDraw.Draw(img)
 #寫字
 draw.text((0,0), mesg, (0,0,0), font)
 
-filename = '__temp/signature.png'
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/pil_test01.png'
 img.save(filename)
 print('已寫入檔案：' + filename)
 

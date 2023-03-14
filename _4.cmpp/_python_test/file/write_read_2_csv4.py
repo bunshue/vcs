@@ -8,8 +8,10 @@ scores = {'國文':{'王小明':65,'李小美':90,'陳大同':81,'林小玉':79}
           '自然':{'王小明':83,'李小美':93,'陳大同':89,'林小玉':94},
           '社會':{'王小明':70,'李小美':56,'陳大同':94,'林小玉':80}}
 df = pd.DataFrame(scores)
-df.to_csv('__temp\score_this.csv', encoding='utf-8-sig')
 
+print("另存新檔");
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/score_this.csv'
+df.to_csv(filename, encoding='utf-8-sig')
 print("寫入完成")
 
 
@@ -18,7 +20,8 @@ print("寫入完成")
 import numpy as np
 
 print("讀取 .csv 檔 1")
-na = np.genfromtxt('data\scores.csv', delimiter=',', skip_header=1)
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/scores.csv'
+na = np.genfromtxt(filename, delimiter=',', skip_header=1)
 print("資料寬高")
 print(na.shape)
 
@@ -36,8 +39,8 @@ print('全班最高總分：',total2.max())
 
 print("讀取 .csv 檔 2")
 import pandas as pd
-
-data = pd.read_csv("data\scores2.csv", header=0, index_col=0)
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/scores2.csv'
+data = pd.read_csv(filename, header=0, index_col=0)
 print('打印資料')
 print(data)
 #print('打印資料型態')
