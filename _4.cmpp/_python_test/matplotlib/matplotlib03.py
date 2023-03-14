@@ -24,5 +24,5 @@ plt.subplot(2, 2, 4)
 plt.plot(x, y4, '.-')
 plt.title('sinc')
 
-
 plt.show()
+

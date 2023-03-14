@@ -1,4 +1,3 @@
-
 ##########
 ## Code for the 3D surface plot and the 2D random walk tajectories
 ##########
@@ -53,4 +52,3 @@ for cnt in range(3):
 ax2.legend(loc='best')
 
 plt.show()
-####################

@@ -1,10 +1,9 @@
-# _*_ coding: utf-8 _*_
-# 程式 13-3 (Python 3 Version)
-
 import matplotlib.pyplot as plt
 import numpy as np
 
-with open('data\yrborn.txt', 'r') as fp:
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/yrborn.txt'
+
+with open(filename, 'r') as fp:
 	populations = fp.readlines()
 
 yrborn = dict()

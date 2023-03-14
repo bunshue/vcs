@@ -6,7 +6,7 @@ window = tk.Tk()
 
 # 設定主視窗大小
 w = 800
-h = 600
+h = 800
 size = str(w)+'x'+str(h)
 window.geometry(size)
 
@@ -110,6 +110,24 @@ w.create_rectangle(50, 25, 150, 75, fill="blue")
 #w = tk.Message(window, text="this is a relatively long message")    #自動換行
 w = tk.Message(window, text="this is a relatively long message", width=50)  #限定寬度
 w.pack()
+
+
+
+#GroupBox之大小, 若小於內附控件大小, 則會撐大
+w = 10
+h = 10
+group = tk.LabelFrame(window, text="Group", padx=w, pady=h)
+
+#GroupBox之位置, 相較於目前表單位置
+x_st = 0
+y_st = 0
+group.pack(padx=x_st, pady=y_st)
+
+#GroupBox內 放幾個控件
+w = tk.Entry(group).pack()
+w = tk.Entry(group).pack()
+w = tk.Entry(group).pack()
+w = tk.Entry(group).pack()
 
 
 

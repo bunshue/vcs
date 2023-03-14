@@ -1,6 +1,3 @@
-# _*_ coding: utf-8 _*_
-# 程式 13-5 (Python 3 Version)
-
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -56,3 +53,4 @@ plt.xlim(1986,2015)
 plt.title('School/Person')
 
 plt.show()
+

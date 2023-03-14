@@ -119,7 +119,7 @@ xlabel("Year launched")
 ylabel("Tonnage (BOM)")
 grid(True, ls='-', c='#a0a0a0')
 
-#¦s¹Ï©R¥O
+#å­˜åœ–å‘½ä»¤
 savefig("Weight Growth of RN First Rate Line-of-Battle Ships 1630-1875.svg")
 
 show()

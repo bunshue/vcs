@@ -1,6 +1,3 @@
-##########
-## Code for the figure
-##########
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -30,7 +27,9 @@ ax.set_zlim([0, 2500])
 ax.set_xlabel("x")
 ax.set_ylabel("y")
 
-#¦s¹Ï©R¥O
-fig.savefig("Rosenbrock function.svg")
+#å­˜åœ–å‘½ä»¤
+filename = '__temp/Rosenbrock function.png'
+fig.savefig(filename)
 
 plt.show()
+

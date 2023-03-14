@@ -73,7 +73,7 @@
             this.cb_file_m = new System.Windows.Forms.CheckBox();
             this.cb_file_s = new System.Windows.Forms.CheckBox();
             this.cb_file_size = new System.Windows.Forms.CheckBox();
-            this.checkBox8 = new System.Windows.Forms.CheckBox();
+            this.cb_option1 = new System.Windows.Forms.CheckBox();
             this.bt_find_empty_folders = new System.Windows.Forms.Button();
             this.bt_test2 = new System.Windows.Forms.Button();
             this.bt_save_file_data = new System.Windows.Forms.Button();
@@ -91,6 +91,7 @@
             this.bt_start_files = new System.Windows.Forms.Button();
             this.bt_open_dir = new System.Windows.Forms.Button();
             this.bt_save_data = new System.Windows.Forms.Button();
+            this.cb_option2 = new System.Windows.Forms.CheckBox();
             this.groupBox_video.SuspendLayout();
             this.groupBox_file.SuspendLayout();
             this.SuspendLayout();
@@ -588,17 +589,17 @@
             this.cb_file_size.UseVisualStyleBackColor = true;
             this.cb_file_size.CheckedChanged += new System.EventHandler(this.cb_file_size_CheckedChanged);
             // 
-            // checkBox8
+            // cb_option1
             // 
-            this.checkBox8.AutoSize = true;
-            this.checkBox8.Checked = true;
-            this.checkBox8.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox8.Location = new System.Drawing.Point(1472, 9);
-            this.checkBox8.Name = "checkBox8";
-            this.checkBox8.Size = new System.Drawing.Size(72, 16);
-            this.checkBox8.TabIndex = 51;
-            this.checkBox8.Text = "滿30結束";
-            this.checkBox8.UseVisualStyleBackColor = true;
+            this.cb_option1.AutoSize = true;
+            this.cb_option1.Checked = true;
+            this.cb_option1.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.cb_option1.Location = new System.Drawing.Point(1472, 9);
+            this.cb_option1.Name = "cb_option1";
+            this.cb_option1.Size = new System.Drawing.Size(72, 16);
+            this.cb_option1.TabIndex = 51;
+            this.cb_option1.Text = "滿30結束";
+            this.cb_option1.UseVisualStyleBackColor = true;
             // 
             // bt_find_empty_folders
             // 
@@ -803,11 +804,23 @@
             this.bt_save_data.UseVisualStyleBackColor = true;
             this.bt_save_data.Click += new System.EventHandler(this.bt_save_data_Click);
             // 
+            // cb_option2
+            // 
+            this.cb_option2.AutoSize = true;
+            this.cb_option2.Location = new System.Drawing.Point(1472, 31);
+            this.cb_option2.Name = "cb_option2";
+            this.cb_option2.Size = new System.Drawing.Size(84, 16);
+            this.cb_option2.TabIndex = 61;
+            this.cb_option2.Text = "指定資料夾";
+            this.cb_option2.UseVisualStyleBackColor = true;
+            this.cb_option2.CheckedChanged += new System.EventHandler(this.cb_option2_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1886, 1008);
+            this.Controls.Add(this.cb_option2);
             this.Controls.Add(this.bt_search_pattern_opengl);
             this.Controls.Add(this.bt_open_dir2);
             this.Controls.Add(this.bt_search_pattern_cuda);
@@ -817,7 +830,7 @@
             this.Controls.Add(this.bt_find_empty_folders);
             this.Controls.Add(this.bt_copy_rtb_data);
             this.Controls.Add(this.bt_setup);
-            this.Controls.Add(this.checkBox8);
+            this.Controls.Add(this.cb_option1);
             this.Controls.Add(this.bt_search_pattern_matlab);
             this.Controls.Add(this.cb_file_size);
             this.Controls.Add(this.groupBox_file);
@@ -927,7 +940,7 @@
         private System.Windows.Forms.TextBox tb_file_s;
         private System.Windows.Forms.CheckBox cb_file_size;
         private System.Windows.Forms.Button bt_search_pattern_matlab;
-        private System.Windows.Forms.CheckBox checkBox8;
+        private System.Windows.Forms.CheckBox cb_option1;
         private System.Windows.Forms.Button bt_setup;
         private System.Windows.Forms.Button bt_copy_rtb_data;
         private System.Windows.Forms.Button bt_find_empty_folders;
@@ -937,6 +950,7 @@
         private System.Windows.Forms.Button bt_search_pattern_cuda;
         private System.Windows.Forms.Button bt_open_dir2;
         private System.Windows.Forms.Button bt_search_pattern_opengl;
+        private System.Windows.Forms.CheckBox cb_option2;
     }
 }
 

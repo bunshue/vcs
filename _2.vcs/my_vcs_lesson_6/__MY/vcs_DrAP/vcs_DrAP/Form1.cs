@@ -54,7 +54,8 @@ namespace vcs_DrAP
         string audio_player_path = String.Empty;
         string picture_viewer_path = String.Empty;
         string text_editor_path = String.Empty;
-        string search_path = String.Empty;
+        string search_path = @"C:\_git\vcs\_2.vcs";
+        string specified_search_path = String.Empty;
 
         string default_vcs_path = @"C:\_git\vcs\_2.vcs";
         string default_python_path = @"C:\_git\vcs\_4.cmpp\_python_test";
@@ -262,7 +263,8 @@ namespace vcs_DrAP
             bt_search_pattern_python.Location = new Point(x_st, y_st + dy);
             bt_search_pattern_cuda.Location = new Point(x_st + dx, y_st + dy);
             bt_search_pattern_opengl.Location = new Point(x_st + dx * 2, y_st + dy);
-            checkBox8.Location = new Point(x_st + dx * 3, y_st + dy);
+            cb_option1.Location = new Point(x_st + dx * 3, y_st + dy);
+            cb_option2.Location = new Point(x_st + dx * 3, y_st + dy + 20);
 
             bt_open_dir2.Location = new Point(x_st + dx * 2, y_st);
             bt_save_file_data.Location = new Point(x_st + dx * 3, y_st);
@@ -1610,7 +1612,7 @@ namespace vcs_DrAP
         // Insert logic for processing found files here.
         public void ProcessFileS(string path)
         {
-            if (checkBox8.Checked == true)
+            if (cb_option1.Checked == true)
             {
                 if (fileinfos.Count >= 30)
                 {
@@ -2911,6 +2913,9 @@ namespace vcs_DrAP
             if (path == String.Empty)
                 path = search_path;
 
+            if (cb_option2.Checked == true)
+                path = specified_search_path;
+
             richTextBox1.Text += "資料夾: " + path + "\n\n";
             if (System.IO.File.Exists(path) == true)
             {
@@ -2973,7 +2978,8 @@ namespace vcs_DrAP
             audio_player_path = Properties.Settings.Default.audio_player_path;
             picture_viewer_path = Properties.Settings.Default.picture_viewer_path;
             text_editor_path = Properties.Settings.Default.text_editor_path;
-            search_path = Properties.Settings.Default.search_path;
+            if (Properties.Settings.Default.search_path != "")
+                search_path = Properties.Settings.Default.search_path;
 
             if (System.IO.File.Exists(Properties.Settings.Default.video_player_path) == false)
             {
@@ -3202,6 +3208,28 @@ namespace vcs_DrAP
             listView1.Clear();
         }
 
-
+        private void cb_option2_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cb_option2.Checked == true)
+            {
+                richTextBox1.Text += "search_path = " + search_path + "\n";
+                folderBrowserDialog1.SelectedPath = search_path;  //預設開啟的路徑
+                if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+                {
+                    specified_search_path = folderBrowserDialog1.SelectedPath;
+                    richTextBox1.Text += "選取資料夾: " + folderBrowserDialog1.SelectedPath + "\n";
+                }
+                else
+                {
+                    richTextBox1.Text = "未選取資料夾\n";
+                    specified_search_path = String.Empty;
+                    cb_option2.Checked = false;
+                }
+            }
+            else
+            {
+                specified_search_path = String.Empty;
+            }
+        }
     }
 }

@@ -26,4 +26,3 @@ ax.set_ylim([0, 8])
 ax.grid(True)
 
 plt.show()
-####################

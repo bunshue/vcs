@@ -1,7 +1,8 @@
 import matplotlib.pyplot as plt
 import numpy as np
 
-filename = 'data\popu.txt'
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/popu.txt'
+
 with open(filename, 'r') as fp:
 	populations = fp.readlines()
 

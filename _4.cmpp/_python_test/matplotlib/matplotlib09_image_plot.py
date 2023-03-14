@@ -32,7 +32,7 @@ imshow(Z, cmap = plt.cm.prism, interpolation = 'none',
 xlabel("Re(c)")
 ylabel("Im(c)")
 
-#¦s¹Ï©R¥O
+#å­˜åœ–å‘½ä»¤
 savefig("mandelbrot_python.svg")
 
 show()

@@ -1,6 +1,4 @@
 # 日期時間操作 
-# python import module : Tkinter
-
 
 import time  # 導入 time 模組
 

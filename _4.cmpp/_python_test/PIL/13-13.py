@@ -13,6 +13,27 @@ im0 = Image.new('RGBA', (1,1))
 dw0 = ImageDraw.Draw(im0)
 font = ImageFont.truetype('data/ubuntu.ttf',font_size)
 fn_w, fn_h = dw0.textsize(msg, font=font)
+
+print(fn_w)
+print(fn_h)
+
+aaa = dw0.textlength(msg, font=font)
+print(aaa)
+
+bbb = dw0.textbbox(msg, font=font)
+print(bbb)
+
+
+'''
+hello = draw.textlength("Hello", font)
+world = draw.textlength("World", font)
+hello_world = hello + world  # not adjusted for kerning
+assert hello_world == draw.textlength("HelloWorld", font)  # may fail
+'''
+
+
+
+
 im = Image.new('RGBA', (fn_w, fn_h), (255,255,255,0))
 dw = ImageDraw.Draw(im)
 dw.text((0,0), msg, font=font, fill=fill)

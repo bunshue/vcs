@@ -1,4 +1,4 @@
-#Á³±Û¹Ï
+#èžºæ—‹åœ–
 #!/usr/bin/env python
 
 from pylab import *
@@ -15,7 +15,7 @@ xt, yt = xticks()[0], yticks()[0]
 xticks(xt, ['' for q in range(len(xt))])
 yticks(yt, ['' for q in range(len(yt))])
 
-#¦s¹Ï©R¥O
+#å­˜åœ–å‘½ä»¤
 savefig('logarithmic_spiral.svg')
 
 show()
