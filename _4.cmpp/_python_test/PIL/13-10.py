@@ -14,7 +14,9 @@ allfiles = glob.glob(source_dir+'/*.jpg') + glob.glob(source_dir+'/*.png')
 if not os.path.exists(target_dir):
 	os.mkdir(target_dir)
 
-logo = Image.open('logo.png')
+#logo = Image.open('data/burn.bmp')      #fail
+logo = Image.open('data/logo.png')
+
 logo = logo.resize((150,150))
 for target_image in allfiles:
 	pathname, filename = os.path.split(target_image)

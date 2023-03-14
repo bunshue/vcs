@@ -11,7 +11,7 @@ size = str(w)+'x'+str(h)
 window.geometry(size)
 
 # 設定主視窗標題
-title = "圖形化範例-BMI測量"
+title = "這是主視窗"
 window.title(title)
 
 tk.Label(window, text='紅', bg='red', width=20).pack()
@@ -54,6 +54,48 @@ tk.Button(window, text='點菜', command=buy).pack()
 string = tk.StringVar()
 entry = tk.Entry(window, textvariable=string).pack()
 label = tk.Label(window, textvariable=string).pack()
+
+
+
+def clickme():
+    global count
+    count += 1
+    labeltext.set("你按我 " + str(count) + " 次了！")
+    if(btntext.get() == "按我！"):
+        btntext.set("回復原來文字！")
+    else:
+        btntext.set("按我！")
+
+
+labeltext = tk.StringVar()
+btntext = tk.StringVar()
+count = 0
+label1 = tk.Label(window, fg="red", textvariable=labeltext)
+labeltext.set("歡迎光臨Tkinter！")
+label1.pack()
+
+button1 = tk.Button(window, textvariable=btntext, command=clickme)
+btntext.set("按我！")
+button1.pack()
+
+
+
+
+frame1 = tk.Frame(window)
+frame1.pack()
+
+label1=tk.Label(frame1, text="標籤一：")
+entry1 = tk.Entry(frame1)
+label1.grid(row=0, column=0)
+entry1.grid(row=0, column=1)
+
+frame2 = tk.Frame(window)
+frame2.pack()
+
+button1 = tk.Button(frame2, text="確定")
+button2 = tk.Button(frame2, text="取消")
+button1.grid(row=0, column=0)
+button2.grid(row=0, column=1)
 
 
 
