@@ -124,14 +124,6 @@ for i in range(1,13):
 #    plt.xticks(rotation=45)
 #    plt.title(label="{}月".format(i))
 
-'''
-#設定中文字型及負號正確顯示
-#設定中文字型檔
-plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
-#設定負號
-plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
-'''
-
 #    plt.plot(listx, listy)
     print(len(slist))
     time.sleep(5)
@@ -146,20 +138,29 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 #list1.append(list2)
 #list1
 #%%
-        
+
+
+#將資料寫出到csv檔        
 import csv
 with open('2019_2330.csv', 'w', newline='') as f:
     writer = csv.writer(f)
     writer.writerows(slist)
-#%%
-    
+'''
+
+
+print('讀取csv檔')
+
 import matplotlib.pyplot as plt
 import csv
 
-with open('2019_2330.csv', 'r', newline='') as f:
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/stock_data_2019_2330.csv'
+with open(filename, 'r', newline='') as f:
     datas = csv.reader(f)  
     listx = []
     listy = []
+    #debug
+    #for data in datas:
+    #    print(data)
     for data in datas:
         listx.append(data[0])
         listy.append(data[5])
@@ -175,24 +176,6 @@ with open('2019_2330.csv', 'r', newline='') as f:
 #    print(type(datas))
 #%%
 plt.figure(figsize=(20,5))
-plt.plot([x.close for x in slist])
-plt.show() 
-
-#%%
-for data in datas:
-    print(data)
-    
-#%%
-lsit1=[1,2,3,4]    
-list1[0]
-
-'''
-
-
-
-
-
-
-
-
+#plt.plot([x.close for x in slist]) //tmp comment out
+#plt.show() 
 

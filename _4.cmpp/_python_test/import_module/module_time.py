@@ -2,9 +2,26 @@
 
 import time
 import datetime
+from time import sleep
+#from time import sleep_ms
 
 print("測試兩事件所經歷的時間 ST")
 time_start = time.time()
+
+
+#取得查詢當年年份及上個月月份
+now_date = datetime.datetime.now() # 取得查詢當下的時間
+now_year = now_date.year # 取得查詢當下當年年份
+
+# 取得查詢當下上個月月份
+if(now_date.month != 1):
+    last_month = now_date.month - 1
+else:
+    last_month = 12
+
+print("now_year = " + str(now_year))
+print("last_month = " + str(last_month))
+
 
 print("每0.3秒打印一字")
 a = 0;
@@ -12,6 +29,8 @@ while a < 3:
     a += 1;
     print("hello " + str(a))
     time.sleep(0.3)
+    sleep(0.1)
+    #sleep_ms(100)
 
 def countdown(n):
     while n > 0:

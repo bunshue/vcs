@@ -1,5 +1,7 @@
 # while-loop
 
+import time
+
 print("while迴圈")
 i = 10
 while i < 30:
@@ -19,8 +21,18 @@ while a < 10:
     #print("");  #空白一行
 print(story)
 
-
-
+cnt = 0;
+while True:
+    for n in range(100,-1,-1): #燈漸亮
+        #print('a')
+        time.sleep(0.005)
+    for n in range(100):      #燈漸熄
+        #print('b')
+        time.sleep(0.005)
+    cnt = cnt + 1
+    if( cnt == 5):
+        break
+    print("change " + str(cnt))
 
 print("語法 : input")
 userName = input("What is your name? ")
@@ -28,7 +40,6 @@ message = input("請輸入一個訊息(輸入exit離開)")
 while message != "exit":
     print(userName + ": " + message)
     message = input("Enter a message: ")
-
 
 
 print("語法 : 輸入帳號密碼")

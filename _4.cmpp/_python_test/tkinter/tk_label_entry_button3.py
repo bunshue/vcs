@@ -3,22 +3,22 @@ import tkinter as tk
 window = tk.Tk()
 
 def checkPassword():
-    password = "Oranges"
-    enteredPassword = passwordEntry.get()
+    password = '1234'
+    enteredPassword = entry1.get()
     if password == enteredPassword:
-        confirmLabel.config(text="Correct")
+        label2.config(text="Correct")
     else:
-        confirmLabel.config(text="Incorrect")
+        label2.config(text="Incorrect")
 
-passwordLabel = tk.Label(window, text="Password:")
-passwordEntry = tk.Entry(window, show="*")
+label1 = tk.Label(window, text="Password:(1234)")
+entry1 = tk.Entry(window, show="*")
 
 button = tk.Button(window, text="Enter", command=checkPassword)
-confirmLabel = tk.Label(window)
+label2 = tk.Label(window)
 
-passwordLabel.pack()
-passwordEntry.pack()
+label1.pack()
+entry1.pack()
 button.pack()
-confirmLabel.pack()
+label2.pack()
 
 window.mainloop()
