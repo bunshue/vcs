@@ -40,7 +40,7 @@ dw = ImageDraw.Draw(im)
 dw.text((0,0), msg, font=font, fill=fill)
 
 #im.show()
-filename = '__temp/tmppic_new'
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/tmppic_new'
 im.save(filename+'.png', 'PNG')
 print('新檔存圖, 已寫入檔案：'+filename+'.png')
 

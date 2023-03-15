@@ -1,10 +1,13 @@
 # Python 新進測試 12
 
-print("cp -r data/oswalk ___tmpdata/oswalk222")
+#目錄拷貝
 import shutil
-#shutil.copytree("data\oswalk", "___tmpdata\oswalk222" )  # 目錄複製
+source_dir = 'C:/_git/vcs/_4.cmpp/_python_test/data/source_pic'
+dest_dir = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/source_pic'
+print('cp -r ' + source_dir + ' ' + dest_dir)
+#shutil.copytree(source_dir, dest_dir)  # 目錄複製
 
-filename_rw = '__temp\file.bin'
+filename_rw = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/file.bin'
 
 print("建立一個檔案 binary, 檔名 : " + filename_rw)
 content='''Hello Python
@@ -23,8 +26,8 @@ with open(filename_rw,'rb') as f:
     print(content) 
 
 
-filename1 = '__temp\file1.txt'
-filename2 = '__temp\file2.txt'
+filename1 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/file1.txt'
+filename2 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/file2.txt'
 
 print("建立一個檔案")
 
@@ -43,7 +46,6 @@ f=open(filename1,'rt')
 for line in f:
     print(line,end="")
 f.close()
-
 
 print("讀取檔案 " + filename1)
 with open(filename1,'r') as f:
@@ -76,6 +78,7 @@ with open(filename2,'r',encoding ='UTF-8') as f:
     str1=f.read(5)
     print(str1)  # 123中
 
+'''
 print("讀取檔案 " + filename2)
 with open(filename2,'r',encoding ='UTF-8-sig') as f:
     doc=f.readlines() 
@@ -85,7 +88,7 @@ print("讀取檔案 " + filename2)
 with open(filename2,'r',encoding ='UTF-8-sig') as f:
     str1=f.read(5)
     print(str1)  # 123中文
-
+'''
 
 print("測試fseek")
 # filename_rw 內容
@@ -94,6 +97,7 @@ print("測試fseek")
 Welcome
 '''
 
+'''
 f=open(filename_rw,'rb')
 print("目前文件索引位置：",f.tell()) #0
 f.seek(6) #移到索引第 6 (第7個字元)位置
@@ -118,7 +122,7 @@ f=open('data\fileUTF8.txt','r',encoding ='cp950')
 for line in f:
     print(line,end="")
 f.close()
-
+'''
 
 
     

@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
 
-filename = 'data\sample.jpg'
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/sample.jpg'
 
 sample = Image.open(filename)
 im = sample.convert('L')

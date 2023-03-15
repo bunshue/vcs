@@ -19,9 +19,9 @@ def colourUpdate():
     global greenDirection
     global blueDirection
 
-    redIncrement = redSlider.get()
-    greenIncrement = greenSlider.get()
-    blueIncrement = blueSlider.get()
+    redIncrement = scale1.get()
+    greenIncrement = scale2.get()
+    blueIncrement = scale3.get()
 
     red = incrementColour(red, redIncrement, redDirection)
     green = incrementColour(green, greenIncrement, greenDirection)
@@ -65,15 +65,16 @@ def updateDirection(colourValue, direction):
     else:
         return direction
 
-redSlider = tk.Scale(window, from_=0, to=20)
-greenSlider = tk.Scale(window, from_=0, to=20)
-blueSlider = tk.Scale(window, from_=0, to=20)
+scale1 = tk.Scale(window, from_=0, to=20)
+scale2 = tk.Scale(window, from_=0, to=20)
+scale3 = tk.Scale(window, from_=0, to=20)
 canvas = tk.Canvas(window, width=300, height=300)
 button = tk.Button(window, text="Go!", command=colourUpdate)
 
-redSlider.grid(row=1, column=1)
-greenSlider.grid(row=1, column=2)
-blueSlider.grid(row=1, column=3)
+#設定控件的排列位置
+scale1.grid(row=1, column=1)
+scale2.grid(row=1, column=2)
+scale3.grid(row=1, column=3)
 canvas.grid(row=2, column=1, columnspan=3)
 button.grid(row=3, column=2)
 

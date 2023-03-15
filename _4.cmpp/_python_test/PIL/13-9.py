@@ -2,11 +2,11 @@
 
 from PIL import Image, ImageDraw
 
-filename = 'data/sample_s.jpg'
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/sample_s.jpg'
 
 im = Image.open(filename)
 
-filename = '__temp/tmppic_old'
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/tmppic_old'
 im.save(filename+'.png', 'PNG')
 print('舊檔存圖, 已寫入檔案：'+filename+'.png')
 
@@ -29,6 +29,6 @@ mesg = 'This is a lion-mouse'
 dw.text((100,100), mesg)
 
 #im.show()
-filename = '__temp/tmppic_new'
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/tmppic_new'
 im.save(filename+'.png', 'PNG')
 print('新檔存圖, 已寫入檔案：'+filename+'.png')
