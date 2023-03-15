@@ -33,8 +33,6 @@ assert hello_world == draw.textlength("HelloWorld", font)  # may fail
 '''
 
 
-
-
 im = Image.new('RGBA', (fn_w, fn_h), (255,255,255,0))
 dw = ImageDraw.Draw(im)
 dw.text((0,0), msg, font=font, fill=fill)

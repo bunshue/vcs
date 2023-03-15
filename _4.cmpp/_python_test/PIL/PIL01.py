@@ -2,33 +2,34 @@
 
 from PIL import Image
 
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/flower.jpg'
-image = Image.open(filename)
-r, g, b = image.split()
-convert_image = Image.merge('RGB', (b, g, r))
+filename0 = 'C:/_git/vcs/_4.cmpp/_python_test/data/flower.jpg'
+filename1 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/rgb_to_bgr.jpg'
+filename2 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/b_and_w.jpg'
+filename3 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/gray_image.jpg'
+filename4 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/rotate_90.jpg'
+
+im = Image.open(filename0)
+r, g, b = im.split()
+convert_image = im.merge('RGB', (b, g, r))
 #convert_image.show()   #顯示圖片
-filename2 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/rgb_to_bgr.jpg'
-convert_image.save(filename2)
+convert_image.save(filename1)
 
 from PIL import Image
-image = Image.open(filename)
-black_and_white = image.convert('1')
+im = Image.open(filename0)
+black_and_white = im.convert('1')
 #black_and_white.show() #顯示圖片
-filename2 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/b_and_w.jpg'
 black_and_white.save(filename2)
 
 from PIL import Image
-image = Image.open(filename)
-gray_iamge = image.convert('L')
+im = Image.open(filename0)
+gray_iamge = im.convert('L')
 #gray_iamge.show()  #顯示圖片
-filename2 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/gray_image.jpg'
-gray_iamge.save(filename2) 
+gray_iamge.save(filename3) 
 
 from PIL import Image
-image = Image.open(filename)
-#image.transpose(Image.ROTATE_90).show()
+im = Image.open(filename0)
+#im.transpose(Image.ROTATE_90).show()
 #儲存90度旋轉的圖片#顯示圖片
-filename2 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/rotate_90.jpg'
-image.transpose(Image.ROTATE_90).save(filename2)
+im.transpose(Image.ROTATE_90).save(filename4)
 
 print("作業完成")

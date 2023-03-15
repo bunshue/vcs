@@ -3,7 +3,8 @@
 import os, sys
 from PIL import Image, ImageDraw, ImageFont
 
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/sample.jpg'
+filename1 = 'C:/_git/vcs/_4.cmpp/_python_test/data/sample.jpg'
+filename2 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/pil_test03.png'
 selected_font = 'C:/_git/vcs/_4.cmpp/_python_test/data/ubuntu.ttf'
 
 #要做浮水印的文字
@@ -12,8 +13,8 @@ msg = "lion-mouse"
 font_size = 10
 fill = (255,255,255,100)
 
-image_file = Image.open(filename)
-im_w, im_h = image_file.size
+im = Image.open(filename1)
+im_w, im_h = im.size
 
 im0 = Image.new('RGBA', (1,1))
 dw0 = ImageDraw.Draw(im0)
@@ -24,12 +25,11 @@ dw = ImageDraw.Draw(im)
 x = int(im_w/2 - fn_w/2)
 y = int(im_h/2 - fn_h/2)
 dw.text((0, 0), msg, font=font, fill=fill)
-image_file.paste(im, (x, y), im)
-#image_file.show()
+im.paste(im, (x, y), im)
+#im.show()  #顯示圖片
 
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/pil_test03.png'
-image_file.save(filename, 'PNG')
-print('新檔存圖, 已寫入檔案：' + filename)
+im.save(filename2, 'PNG')
+print('新檔存圖, 已寫入檔案：' + filename2)
 
 
 
