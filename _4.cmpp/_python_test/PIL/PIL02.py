@@ -1,24 +1,36 @@
-from PIL import Image, ImageFilter
+#調整資料夾內所有圖片檔影像寬度, 加logo
+      
+import sys, os, glob
+from PIL import Image, ImageDraw
 
-filename1 = 'C:/______test_files/orient2_RightTop.jpg'
-filename2 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/orient2_RightTopffff.jpg'
+source_dir = 'C:/_git/vcs/_4.cmpp/_python_test/data/source_pic'
+target_dir = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/resized_pic'
 
-#讀取圖形
-im = Image.open(filename1)
-#im.show()  #顯示圖片
+image_width = 800
 
-#對圖形套用過濾器
-im_sharp = im.filter(ImageFilter.SHARPEN)
+print("將資料夾 " + source_dir + " 內所有圖片檔調整寬度成 " + str(image_width) + " 像素")
 
-#儲存過濾過的圖形到新檔案
-im_sharp.save(filename2, 'JPEG')
-print("儲存過濾過的圖形, 檔案 : "+filename2);
+print('Processing: {}'.format(source_dir))
 
-#分解圖形顏色 例如RGB的紅綠藍
-r,g,b = im_sharp.split()
+allfiles = glob.glob(source_dir+'/*.jpg') + glob.glob(source_dir+'/*.png')
+if not os.path.exists(target_dir):
+	os.mkdir(target_dir)
 
-#檢視圖形內嵌的EXIF資料
-exif_data = im._getexif()
-print("取得圖片內的EXIF資料");
-print(exif_data)
+#logo_filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/burn.bmp'        #fail
+logo_filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/logo.png'
+logo = Image.open(logo_filename)
 
+logo = logo.resize((150,150))
+for target_image in allfiles:
+	pathname, filename = os.path.split(target_image)
+	print(filename)
+	if filename[0] == '.': continue  # Only for MacOS to skip the hidden files
+	im = Image.open(target_image)
+	w, h = im.size
+	im = im.resize((800, int(800/float(w) * h)))
+	im.paste(logo, (0,0), logo)
+	im.save(target_dir+'/'+filename)
+	im.close()
+
+print("完成")
+	

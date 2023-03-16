@@ -1,27 +1,40 @@
-from PIL import Image, ImageDraw, ImageFont
+import matplotlib.pyplot as plt
+import numpy as np
+from PIL import Image
 
-selected_font = 'C:/_git/vcs/_4.cmpp/_python_test/data/ubuntu.ttf'
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/sample.jpg'
 
-font_size=30
+sample = Image.open(filename)
+im = sample.convert('L')
+w, h = im.size
 
-mesg = 'this is a lion mouse'
+crop = im.crop((w/2-300, h/2-300, w/2+300, h/2+300))
 
-font = ImageFont.truetype(selected_font, font_size)
-font_size = font.getsize(mesg)
-print(font_size)
+print(w/2-300)
+print(h/2-300)
+print(w/2+300)
+print(h/2+300)
 
-width = font_size[0]
-height = font_size[1]
+crop_hist = crop.histogram()
 
-img = Image.new('RGBA', (width, height), (255, 255, 255, 0))
+ori = sample.resize((600,600))
+im = ori.convert('L')
+hist = im.histogram()
 
-draw = ImageDraw.Draw(img)
+r, g, b = ori.split()
+r_hist = r.histogram()
+g_hist = g.histogram()
+b_hist = b.histogram()
 
-#寫字
-draw.text((0,0), mesg, (0,0,0), font)
+ind = np.arange(0, len(crop_hist))
 
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/pil_test01.png'
-img.save(filename)
-print('已寫入檔案：' + filename)
+plt.plot(ind, crop_hist, color='cyan', label='cropped')
+plt.plot(ind, hist, color='black', lw=2, label='original')
+plt.plot(ind, r_hist, color='red', label='Red Plane')
+plt.plot(ind, g_hist, color='green', label='Green Plane')
+plt.plot(ind, g_hist, color='blue', label='Blue Plane')
+plt.xlim(0,255)
+plt.ylim(0,8000)
+plt.legend()
 
-
+plt.show()
