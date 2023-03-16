@@ -1,8 +1,7 @@
-# Python ·s¶i´ú¸Õ 01
+# Python æ–°é€²æ¸¬è©¦ 01
 
 
-
-
+print('map çš„ç”¨æ³•')
 def pick(x):
     fruits = ['Apple', 'Banana', 'Orange', 'Tomato', 'Pine Apple', 'Berry']
     return fruits[x]
@@ -15,28 +14,29 @@ for choice in choices:
 
 
 
+from sympy import *
+x,y,z=symbols('x y z')
+init_printing()
+Integral(sqrt(1/x),x)
 
 
-while True:
-    try:
-        age = int(input("What is your age?"))
-        break
-    except:
-        print("Please enter a number")
 
-if age < 15:
-    print("You are too young")
+# Python æ–°é€²æ¸¬è©¦ 03
 
+# _*_ coding: utf-8 _*_
+# ç¨‹å¼ 9-1  (Python 3 version)
+from urllib.parse import urlparse
 
-import os, sys
-try:
-    os.remove('hello.txt')
-except Exception as e:
-    print(e)
-    e_type, e_value, e_tb = sys.exc_info()
-    print("ºØÃþ¡G{}\n°T®§¡G{}\n¸ê°T¡G{}".format(e_type, e_value, e_tb))
+url = 'https://www.most.gov.tw/folksonomy/list?menu_id=ba3d22f3-96fd-4adf-a078-91a05b8f0166&filter_uid=none&listKeyword=&pageNum=2&pageSize=18&view_mode=listView&subSite=main&l=ch&tagUid='
 
+uc = urlparse(url)
+print("NetLoc:", uc.netloc)
+print("Path:", uc.path)
 
+q_cmds = uc.query.split('&')
+print("Query Commands:")
+for cmd in q_cmds:
+    print(cmd)
 
 
 

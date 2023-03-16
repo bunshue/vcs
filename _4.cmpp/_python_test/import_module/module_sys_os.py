@@ -3,16 +3,20 @@
 import sys
 print("列印參數")
 print(sys.argv)
-
+    
 import sys
 
 print("參數長度 = " + str(len(sys.argv)))
 print("參數長度 = {}".format(len(sys.argv)))
 
+
+#印出所有參數
 i = 0
 for arg in sys.argv:
     print("第{}個參數是:{}".format(i,arg))
     i += 1
+
+#sys.argv[1]
 
 import sys
 print("目前路徑 : ", sys.path)
@@ -134,6 +138,148 @@ print("系統命令")
 filename_r = '../data/article.txt'
 os.system("notepad " + filename_r)
 #os.system("svn checkout%s -q %s %s" % (creds, url, filename))
+
+
+import glob, os
+
+allfiles = glob.glob('*.jpg') + glob.glob('*.png')
+count = 1
+for afile in allfiles:
+	print(afile)
+	ext = afile.split('.')[-1]
+	newfilename = "{}.{}".format(str(count), ext)
+	os.rename(afile, newfilename)
+	count += 1
+print("完成...")
+
+
+import os, hashlib, glob
+
+allfiles = glob.glob('*.jpg') + glob.glob('*.png')
+
+allmd5s = dict()
+for imagefile in allfiles:
+	print(imagefile + " is processing...")
+	img_md5 = hashlib.md5(open(imagefile,'rb').read()).digest()
+	if img_md5 in allmd5s:
+		print("---------------")
+		print("以下為重覆的檔案：")
+		os.system("open " + os.path.abspath(imagefile))
+		os.system("open " + allmd5s[img_md5])
+	else:
+		allmd5s[img_md5] = 	os.path.abspath(imagefile) 
+
+
+
+import os, hashlib, glob
+
+allfiles = glob.glob('*.jpg') + glob.glob('*.png')
+
+allmd5s = dict()
+for imagefile in allfiles:
+	print(imagefile + " is processing...")
+	img_md5 = hashlib.md5(open(imagefile,'rb').read()).digest()
+	if img_md5 in allmd5s:
+		print("---------------")
+		print("以下為重覆的檔案：")
+		print(os.path.abspath(imagefile))
+		print(allmd5s[img_md5])
+	else:
+		allmd5s[img_md5] = 	os.path.abspath(imagefile) 
+
+
+
+
+import os, shutil, glob
+
+print("單層資料夾內所有檔案容量")
+
+source_dir = 'C:/______test_files/__pic/_angry_bird/'
+
+pngfiles = glob.glob(source_dir+"*.png")
+jpgfiles = glob.glob(source_dir+"*.jpg")
+giffiles = glob.glob(source_dir+"*.gif")
+allfiles = pngfiles + jpgfiles + giffiles
+
+allfilesize = 0
+for f in allfiles:
+    print("檔案 : " + f +", 大小 : " + str(os.path.getsize(f)) + " 拜")
+    allfilesize += os.path.getsize(f)
+
+print("總容量 : " + str(allfilesize))
+
+
+'''
+target_dir = source_dir + "output"
+
+print("目標資料夾 : " + target_dir)
+
+if os.path.exists(target_dir):
+  print("目的資料夾已存在")
+  exit(1)
+
+split用法 TBD
+os.mkdir(target_dir)
+imageno = 0
+for f in allfiles:
+  dirname, filename = f.split('/')
+  mainname, extname = filename.split('.')
+  targetfile = target_dir + '/' + str(imageno) + '.' + extname
+  shutil.copyfile(f, targetfile)
+  imageno += 1
+'''
+
+
+
+
+
+import os
+cur_path=os.path.dirname(__file__) # 取得目前路徑
+sample_tree=os.walk(cur_path)
+for dirname,subdir,files in sample_tree:
+    print("檔案路徑：",dirname)
+    print("目錄串列：" , subdir)   
+    print("檔案串列：",files)
+    print()
+    
+
+import os
+#異常處理
+#刪除目錄
+try:
+    os.rmdir("aaaaa");
+    print("remove directory aaaaa OK")
+except IOError:
+   print("Error: can't find file or read data")
+else:
+    print("remove directory aaaaa fail")
+
+if not os.path.exists(source_dir):
+	print("I can't find the specified directory.")
+	exit(1)
+
+
+
+if os.path.exists(filename+'.png'):
+    ans = input('此檔案已存在，要覆寫嗎？(y/n)')
+    if ans != 'y' and ans != 'Y':
+        exit(1)
+   
+    
+
+filename = '__temp/tmppic_new'
+
+filename, ext = filename.split('.')
+if os.path.exists(filename+'_wm.png'):
+    ans = input('此檔案已存在，要覆寫嗎？(y/n)')
+    if ans != 'y' and ans != 'Y':
+        exit(1)
+
+
+
+
+
+
 
 
 

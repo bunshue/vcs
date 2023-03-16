@@ -13,7 +13,12 @@ namespace vcs_Process5
 {
     public partial class Form1 : Form
     {
+        bool falg_keep_program_running = true;
+
         string program_name = "AMCAP";
+        string program_path = @"C:\Program Files (x86)\Noel Danjou\AMCap\AMCap.exe";
+
+        bool falg_program_running = false;
 
         private Process[] processes;
         bool flag_EnableRaisingEvents = false;
@@ -33,12 +38,37 @@ namespace vcs_Process5
 
         private void process_exited(object sender, EventArgs e)//被觸發的程序
         {
-            richTextBox1.Text += "偵測到程式 " + program_name + " 被關閉了\n";
+            richTextBox1.Text += "偵測到程式 " + program_name + " 被關閉, 時間 : " + DateTime.Now.ToString() + "\n";
+
             flag_EnableRaisingEvents = false;
+            falg_program_running = false;
         }
 
+        int count = 0;
         private void timer1_Tick(object sender, EventArgs e)
         {
+            if (falg_keep_program_running == true)
+            {
+                if (falg_program_running == true)
+                {
+                    //richTextBox1.Text += "O";
+                }
+                else
+                {
+                    //richTextBox1.Text += "X";
+                    count++;
+                    if (count == 100)
+                    {
+                        count = 0;
+                        richTextBox1.Text += "已100秒 開啟\n";
+
+                        //開啟imsLink
+                        Process process = new Process();    //創建一個進程用於調用外部程序
+                        process = Process.Start(program_path);
+                    }
+                }
+            }
+
             processes = Process.GetProcessesByName(program_name);//需要監控的程序名，該方法帶出該程序所有用到的進程
             foreach (Process process in processes)
             {
@@ -48,9 +78,10 @@ namespace vcs_Process5
                     if (process.ProcessName.ToLower() == program_name.ToLower())
                     {
                         flag_EnableRaisingEvents = true;
-                        richTextBox1.Text += "偵測到程式 " + program_name + " 被開啟\n";
+                        richTextBox1.Text += "偵測到程式 " + program_name + " 被開啟, 時間 : " + DateTime.Now.ToString() + "\n";
                         process.EnableRaisingEvents = true;//設置進程終止時觸發的時間
                         process.Exited += new EventHandler(process_exited);//發現外部程序關閉即觸發方法process_exited
+                        falg_program_running = true;
                     }
                 }
             }

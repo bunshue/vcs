@@ -6,6 +6,7 @@ print("各種python專用的語法")
 print(__name__)
 
 
+
 if __name__ == '__main__':
     print('happy new year !!')
 

@@ -1,5 +1,4 @@
-
-#¦±½u¹Ï
+#æ›²ç·šåœ–
 import matplotlib.pyplot as plt
 import numpy as np
 a = np.linspace(0,10,100)
@@ -7,14 +6,14 @@ b = np.exp(-a)
 plt.plot(a,b)
 plt.show()
 
-#ª½¤è¹Ï
+#ç›´æ–¹åœ–
 import matplotlib.pyplot as plt
 from numpy.random import normal,rand
 x = normal(size=200)
 plt.hist(x,bins=30)
 plt.show()
 
-#´²ÂI¹Ï
+#æ•£é»žåœ–
 import matplotlib.pyplot as plt
 from numpy.random import rand
 a = rand(100)
@@ -22,7 +21,8 @@ b = rand(100)
 plt.scatter(a,b)
 plt.show()
 
-#3D ¹Ï
+'''
+#3D åœ–
 from matplotlib import cm
 from mpl_toolkits.mplot3d import Axes3D
 import matplotlib.pyplot as plt
@@ -36,6 +36,5 @@ R = np.sqrt(X**2 + Y**2)
 Z = np.sin(R)
 surf = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=cm.coolwarm)
 plt.show()
-
-
+'''
 
