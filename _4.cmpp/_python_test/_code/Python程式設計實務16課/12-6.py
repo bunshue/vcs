@@ -1,8 +1,4 @@
-# _*_ coding: utf-8 _*_
-# 程式 12-6 (Python 2 Version)
-
 import os, time, exifread, glob, sys, shutil
-
 
 def get_year_month(fullpathname):
 	fp = open(fullpathname, 'rb')
@@ -15,15 +11,17 @@ def get_year_month(fullpathname):
 	fp.close()
 	return ym[0:4], ym[5:7]
 
-source_dir = 'source_pic'
+source_dir = 'C:/_git/vcs/_4.cmpp/_python_test/data/source_pic'
 
 if not os.path.exists('photos'):
 	os.mkdir('photos')
 	
 allfiles = glob.glob(source_dir+'/*.jpg') + glob.glob(source_dir+'/*.png')
+for imagefile in allfiles:
+        print(imagefile)
 
 for imagefile in allfiles:
-	filename = imagefile.split('/')[-1]
+	filename = imagefile.split('\\')[-1]
 	y, m = get_year_month(imagefile)
 	target_dir = 'photos/' + y +'/' + m
 	if not os.path.exists(target_dir):
@@ -40,4 +38,5 @@ for imagefile in allfiles:
 			filename = ori_filename.split(ext)[0] + '_' + str(i) \
 				+ ext
 			i = i + 1
+
 
