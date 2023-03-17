@@ -1,14 +1,8 @@
 #Contour plot
 
-##########
-## Code for the figure
-##########
-# -*- coding: utf-8 -*-
 from __future__ import division
-
 import matplotlib.pyplot as plt
 import numpy as np
-
 from matplotlib.cm import viridis as colormap  # future default colormap
 
 """
