@@ -7,19 +7,19 @@ height = 300
 windowSize = [width, height]
 screen = pygame.display.set_mode(windowSize)
 
-colour = pygame.color.Color('#F54455')
+color = pygame.color.Color('#F54455')
 #[100, 100, 0]
-print(colour)
+print(color)
 
 row = 0
 done = False
 while not done:
     increment = 255 / 100
     while row <= height:
-        pygame.draw.rect(screen, colour, (0, row, width, row + increment))
+        pygame.draw.rect(screen, color, (0, row, width, row + increment))
         pygame.display.flip()
-        if colour[2] + increment < 255:
-            colour[2] = colour[2] + int(increment)
+        if color[2] + increment < 255:
+            color[2] = color[2] + int(increment)
         row += increment
 
     for event in pygame.event.get():

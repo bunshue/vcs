@@ -1,92 +1,111 @@
-# Python 新進測試 15
-
-'''
-# _*_ coding: utf-8 _*_
-# 程式 8-6.py (Python 3 version)
-
-def disp_area():
-    i = 0
-    for a in climate_data:
-        print("{:>2}:{:<6}\t".format(i,a[0]), end="")
-        i += 1
-        if not (i % 5): print()
-    print()
-
-def disp_temp(data):
-    print("顯示區域:", data[0])
-    print("---------------------")
-    for i in range(1,13):
-        print("{:>2}月均溫:{:>.1f}度".format(i, float(data[i])))
-    print("本地區年均溫為{}度".format(data[13]))
-    print("---------------------")
-
-target_file = 'test10_new15_climate.txt'
-with open(target_file, 'r', encoding='utf-8') as fp:
-    raw_data = fp.readlines()
-climate_data=[]
-for item in raw_data:
-    climate_data.append(item.rstrip('\n').split('\t'))
-
-while True:
-    disp_area()
-    area = int(input("請輸入你要查詢平均溫度的地區：(-1結束)"))
-    if area == -1: break
-    disp_temp(climate_data[area])
-    x = input("請按Enter鍵回主選單")
-'''
+# python import module : requests
 
 
+import requests
+import codecs
 
-# _*_ coding: utf-8 _*_
-# 程式 8-7.py (Python 3 version)
-
-import json, datetime
-
-fp = open('test10_new15_earthquake.json','r')
-earthquakes = json.load(fp)
-
-print("過去7天全球發生重大的地震資訊：")
-for eq in earthquakes['features']:
-    print("地點:{}".format(eq['properties']['place']))
-    print("震度:{}".format(eq['properties']['mag']))
-    et = float(eq['properties']['time']) /1000.0
-    d=datetime.datetime.fromtimestamp(et).strftime('%Y-%m-%d %H:%M:%S')
-    print("時間:{}".format(d))
+api_base_url = 'https://zh.wikipedia.org/w/api.php'
+api_params = {'format':'xmlfm', 'action':'query', 'titles':'椎名林檎', 'prop':'revisions', 'rvprop':'content'}
+wiki_data = requests.get(api_base_url, params = api_params)
+fo = codecs.open('wiki搜尋結果1.html', 'w', 'utf-8')
+#fo = open('wiki搜尋結果222.html', 'w')
+fo.write(wiki_data.text)
+fo.close()
 
 
+import requests
+import codecs
 
-'''
-# _*_ coding: utf-8 _*_
-# 程式 9-2  (Python 3 version)
+search_word = 'lion'
+
+api_url = 'https://zh.wikipedia.org/w/api.php'
+api_params = {'format':'xmlfm', 'action':'query', 'prop':'revisions', 'rvprop':'content'}
+api_params['titles'] = search_word
+wiki_data = requests.get(api_url, params = api_params)
+fo = codecs.open('wiki搜尋結果2' + search_word + '.html', 'w', 'utf-8')
+#fo = open('bbbbb'+ search_word + '.html', 'w')
+fo.write(wiki_data.text)
+fo.close()
+
+
 
 import requests
 
-url = 'http://udb.moe.edu.tw/Home/About'
+api_url = 'http://weather.livedoor.com/forecast/webservice/json/v1';
+payload = {'city':'130010'}
+weather_data = requests.get(api_url, params = payload).json()
+print(weather_data['forecasts'][0]['dateLabel'] + '的天氣是：' + weather_data['forecasts'][0]['telop'])
 
-html = requests.get(url).text.splitlines()
-for i in range(0,15):
-    print(html[i])
-'''
+
+import requests
+
+api_url = 'http://weather.livedoor.com/forecast/webservice/json/v1'
+payload = {'city':'130010'}
+weather_data = requests.get(api_url, params = payload).json()
+print(weather_data['forecasts'][0]['dateLabel'] + '的天氣是：' + weather_data['forecasts'][0]['telop'])
+print(weather_data['forecasts'][1]['dateLabel'] + '的天氣是：' + weather_data['forecasts'][1]['telop'])
+print(weather_data['forecasts'][2]['dateLabel'] + '的天氣是：' + weather_data['forecasts'][2]['telop'])
+
+
+import requests
+
+api_url = 'http://weather.livedoor.com/forecast/webservice/json/v1'
+payload = {'city':'130010'}
+weather_data = requests.get(api_url, params = payload).json()
+for weather in weather_data['forecasts']:
+    print(weather['dateLabel'] + '的天氣是：' + weather['telop'])
+
+
+import requests
+
+api_url = 'http://weather.livedoor.com/forecast/webservice/json/v1'
+payload = {'city':'130010'}
+weather_data = requests.get(api_url, params = payload).json()
+for weather in weather_data['forecasts']:
+    print(weather)
+
+
+from urllib.request import urlopen
+from urllib.error import HTTPError
+from bs4 import BeautifulSoup
+import sys
+
+def getTitle(url):
+    try:
+        html = urlopen(url)
+    except HTTPError as e:
+        print(e)
+        return None
+    try:
+        bsObj = BeautifulSoup(html, "html.parser")
+        title = bsObj.body.h1
+    except AttributeError as e:
+        return None
+    return title
+
+title = getTitle("http://www.pythonscraping.com/exercises/exercise1.html")
+if title == None:
+    print("找不到網頁標題")
+else:
+    print("取得網頁標題:")
+    print(title)
+
+
 
 '''
-# _*_ coding: utf-8 _*_
-# 程式 9-3 (Python 3 version)
 
 import requests
 
 url = 'http://www.com.tw/exam/check_0001_NO_0_101_0_3.html'
 name = input("請輸入要查詢的姓名:")
 html = requests.get(url).text
+print(html)
 if name in html:
     print("恭喜名列金榜")
 else:
     print("不好意思，榜單中找不到{}".format(name))
 '''
-    
 '''
-# _*_ coding: utf-8 *_*
-# 程式 9-4 (Python 3 version)
-
 import requests, re
 
 regex = r"([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)"
@@ -100,9 +119,6 @@ for email in emails:
 '''
 
 '''
-# _*_ coding: utf-8 _*_
-# 程式 9-8 (Python 3 version)
-
 from bs4 import BeautifulSoup
 import requests
 
@@ -124,11 +140,7 @@ for p in prices:
     print(p)
 '''
 
-
-
-# _*_ coding: utf-8 _*_
-# 程式 10-1.py (Python 3 version)
-
+'''
 import sqlite3
 from bs4 import BeautifulSoup
 import requests
@@ -236,10 +248,10 @@ while True:
         chart()
     else: break
     x = input("請按Enter鍵回主選單")
+'''
 
 
 
 
-
-
+print('OK')
 

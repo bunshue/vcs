@@ -1,6 +1,17 @@
 # python import module : sys, os
 # python import module : DDF 磁碟檔案資料夾操作
 
+
+import os
+filename=os.path.abspath("test10_new10.py")
+if os.path.exists(filename): #檢查檔案是否存在
+    print("完整路徑名稱：" + filename)
+    print("檔案大小：" , os.path.getsize(filename))
+
+
+
+
+
 #尋找檔案
 import glob
 print('尋找目前目錄下之 *.py *.txt')
@@ -234,6 +245,58 @@ if not os.path.exists(source_dir):
 	exit(1)
 
 '''
+
+
+
+
+
+import glob, os
+
+allfiles = glob.glob('*.jpg') + glob.glob('*.png')
+count = 1
+for afile in allfiles:
+	print(afile)
+	ext = afile.split('.')[-1]
+	newfilename = "{}.{}".format(str(count), ext)
+	os.rename(afile, newfilename)
+	count += 1
+print("完成...")
+
+
+import os, hashlib, glob
+
+allfiles = glob.glob('*.jpg') + glob.glob('*.png')
+
+allmd5s = dict()
+for imagefile in allfiles:
+	print(imagefile + " is processing...")
+	img_md5 = hashlib.md5(open(imagefile,'rb').read()).digest()
+	if img_md5 in allmd5s:
+		print("---------------")
+		print("以下為重覆的檔案：")
+		os.system("open " + os.path.abspath(imagefile))
+		os.system("open " + allmd5s[img_md5])
+	else:
+		allmd5s[img_md5] = 	os.path.abspath(imagefile) 
+
+
+
+import os, hashlib, glob
+
+allfiles = glob.glob('*.jpg') + glob.glob('*.png')
+
+allmd5s = dict()
+for imagefile in allfiles:
+	print(imagefile + " is processing...")
+	img_md5 = hashlib.md5(open(imagefile,'rb').read()).digest()
+	if img_md5 in allmd5s:
+		print("---------------")
+		print("以下為重覆的檔案：")
+		print(os.path.abspath(imagefile))
+		print(allmd5s[img_md5])
+	else:
+		allmd5s[img_md5] = 	os.path.abspath(imagefile) 
+
 
 
 

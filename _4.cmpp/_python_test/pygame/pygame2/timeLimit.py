@@ -25,8 +25,7 @@ goalH = 20
 # points
 points = 0
 
-# colours
-# colours
+# colors
 red = pygame.color.Color('#FF8080')
 blue = pygame.color.Color('#8080FF')
 white = pygame.color.Color('#FFFFFF')

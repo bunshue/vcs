@@ -11,7 +11,7 @@ clock = pygame.time.Clock()
 x = size[0] / 2
 y = size[1] / 2
 
-# colours
+# colors
 red = pygame.color.Color('#FF8080')
 blue = pygame.color.Color('#8080FF')
 white = pygame.color.Color('#FFFFFF')

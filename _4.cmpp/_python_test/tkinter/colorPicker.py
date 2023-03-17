@@ -7,10 +7,10 @@ def sliderUpdate(something):
     green = scale2.get()
     blue = scale3.get()
 
-    colour = "#%02x%02x%02x" % (red, green, blue)
-    canvas.config(bg=colour)
+    color = "#%02x%02x%02x" % (red, green, blue)
+    canvas.config(bg=color)
     hexText.delete(0, tk.END)
-    hexText.insert(0, colour)
+    hexText.insert(0, color)
 
 scale1 = tk.Scale(window, from_=0, to=255, command=sliderUpdate)
 scale2 = tk.Scale(window, from_=0, to=255, command=sliderUpdate)

@@ -8,7 +8,7 @@ clock = pygame.time.Clock()
 
 black = pygame.color.Color("#000000")
 white = pygame.color.Color("#FFFFFF")
-btnColour = pygame.color.Color("#A45C8F")
+btnColor = pygame.color.Color("#A45C8F")
 
 btnWidth = 50
 btnLength = 20
@@ -25,7 +25,7 @@ while not done:
     else:
         screen.fill(white)
 
-    pygame.draw.rect(screen, btnColour, [btnX, btnY, btnWidth, btnLength])
+    pygame.draw.rect(screen, btnColor, [btnX, btnY, btnWidth, btnLength])
 
     if btnX <= pos[0] <= btnX + btnWidth and btnY <= pos[1] <= btnY + btnLength:
         toggled = not toggled

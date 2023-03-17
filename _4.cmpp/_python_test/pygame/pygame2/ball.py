@@ -16,7 +16,7 @@ y = size[1] / 2
 ballX = random.randrange(0, size[0])
 ballY = random.randrange(0, size[1])
 
-# colours
+# colors
 red = pygame.color.Color('#FF8080')
 blue = pygame.color.Color('#8080FF')
 white = pygame.color.Color('#FFFFFF')

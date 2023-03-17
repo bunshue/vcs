@@ -1,5 +1,6 @@
-import random
 import pygame
+import random
+
 pygame.init()
 
 width = 400
@@ -26,6 +27,6 @@ while not done:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             done = True
-    clock.tick(10)
+    clock.tick(30)
     
 pygame.quit()

@@ -113,8 +113,8 @@ w = tk.Label(window, text="Hello, world!")
 w.pack()
 
 print('Canvas 測試')
-colour = "#FF0000"
-canvas = tk.Canvas(window, width=300, height=50, bg=colour)
+color = "#FF0000"
+canvas = tk.Canvas(window, width=300, height=50, bg=color)
 canvas.pack()
 
 

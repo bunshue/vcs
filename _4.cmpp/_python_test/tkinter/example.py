@@ -10,7 +10,7 @@ red = 0
 green = 0
 blue = 0
 
-def colourUpdate():
+def colorUpdate():
     global red
     global green
     global blue
@@ -23,9 +23,9 @@ def colourUpdate():
     greenIncrement = scale2.get()
     blueIncrement = scale3.get()
 
-    red = incrementColour(red, redIncrement, redDirection)
-    green = incrementColour(green, greenIncrement, greenDirection)
-    blue = incrementColour(blue, blueIncrement, blueDirection)
+    red = incrementColor(red, redIncrement, redDirection)
+    green = incrementColor(green, greenIncrement, greenDirection)
+    blue = incrementColor(blue, blueIncrement, blueDirection)
 
     redDirection = updateDirection(red, redDirection)
     greenDirection = updateDirection(green, greenDirection)
@@ -38,29 +38,29 @@ def colourUpdate():
     blueHex = format(blue, 'x')
     blueHex = format(blueHex.zfill(2))
 
-    colour = "#" + redHex + greenHex + blueHex
-    canvas.config(bg=colour)
-    #window.after(100, colourUpdate)    #這行是什麼意思
+    color = "#" + redHex + greenHex + blueHex
+    canvas.config(bg=color)
+    #window.after(100, colorUpdate)    #這行是什麼意思
     #print('設定顏色')
 
 
-def incrementColour(colourValue, increment, direction):
+def incrementColor(colorValue, increment, direction):
     if direction == "up":
-        if colourValue + increment >= 255:
+        if colorValue + increment >= 255:
             return 255
         else:
-            return colourValue + increment
+            return colorValue + increment
     elif direction == "down":
-        if colourValue - increment <= 0:
+        if colorValue - increment <= 0:
             return 0
         else:
-            return colourValue - increment
+            return colorValue - increment
 
 
-def updateDirection(colourValue, direction):
-    if colourValue >= 255:
+def updateDirection(colorValue, direction):
+    if colorValue >= 255:
         return "down"
-    elif colourValue <= 0:
+    elif colorValue <= 0:
         return "up"
     else:
         return direction
@@ -69,7 +69,7 @@ scale1 = tk.Scale(window, from_=0, to=20)
 scale2 = tk.Scale(window, from_=0, to=20)
 scale3 = tk.Scale(window, from_=0, to=20)
 canvas = tk.Canvas(window, width=300, height=300)
-button = tk.Button(window, text="Go!", command=colourUpdate)
+button = tk.Button(window, text="Go!", command=colorUpdate)
 
 #設定控件的排列位置
 scale1.grid(row=1, column=1)

@@ -1,5 +1,5 @@
-import math
 import pygame
+import math
 
 pygame.init()
 
@@ -11,16 +11,16 @@ width = 200
 height = 200
 x = windowSize[0] / 2 - width / 2
 y = windowSize[1] / 2 - height / 2
-colour = colour = pygame.color.Color('#57B0F6')
-black = pygame.color.Color('#000000')
+color = pygame.color.Color('#FF0000')
+background_color = pygame.color.Color('#00FF00')
 
 count = 0
 
 done = False
 
 while not done:
-    screen.fill(black)
-    pygame.draw.ellipse(screen, colour, [x, y, width, height])
+    screen.fill(background_color)
+    pygame.draw.ellipse(screen, color, [x, y, width, height])
     width += math.cos(count) * 10
     x -= (math.cos(count) * 10) / 2
     height += math.sin(count) * 10
@@ -31,7 +31,9 @@ while not done:
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
+            print('QUIT')
             done = True
-    clock.tick(24)
+    clock.tick(20)
+    
 pygame.quit()
 

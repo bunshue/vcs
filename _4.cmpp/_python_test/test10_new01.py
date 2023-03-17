@@ -14,13 +14,6 @@ for choice in choices:
 
 
 
-from sympy import *
-x,y,z=symbols('x y z')
-init_printing()
-Integral(sqrt(1/x),x)
-
-
-
 # Python 新進測試 03
 
 # _*_ coding: utf-8 _*_
