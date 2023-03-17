@@ -23,3 +23,4 @@ plt.xticks(ind+0.5, city)
 #plt.title('台灣各縣市人口統計')
 
 plt.show()
+

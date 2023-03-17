@@ -2,8 +2,8 @@ from pylab import *
 from numpy import NaN
 
 xmin, xmax, ymin, ymax = -2, 0.8, -1.5, 1.5
-max_it = 100    # maximum number of iterations
-px     = 3000	# vertical lines
+max_it = 3    # maximum number of iterations
+px     = 300	# vertical lines
 res    = (ymax - ymin) / px   # grid resolution
 
 figure(figsize = (10, 10))
@@ -32,7 +32,6 @@ imshow(Z, cmap = plt.cm.prism, interpolation = 'none',
 xlabel("Re(c)")
 ylabel("Im(c)")
 
-#存圖命令
-savefig("mandelbrot_python.svg")
-
 show()
+
+

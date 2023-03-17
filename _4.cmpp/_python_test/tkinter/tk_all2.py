@@ -61,7 +61,55 @@ for text, mode in MODES:
 
 
 
+def changeString():
+    stringToCopy = entry.get()
+    #stringToCopy = stringToCopy[::-1]
+    #entry.delete(0, tk.END)
+    entry.insert(0, stringToCopy)
+
+entry = tk.Entry(window)
+button = tk.Button(window, text="Change", command=changeString)
+
+entry.pack()
+button.pack()
+
+class App:
+    def __init__(self, master):
+
+        frame = tk.Frame(master)
+        frame.pack()
+
+        self.button = tk.Button(
+            frame, text="QUIT", fg="red", command=frame.quit
+            )
+        self.button.pack(side=tk.LEFT)
+
+        self.hi_there = tk.Button(frame, text="Hello", command=self.say_hi)
+        self.hi_there.pack(side=tk.LEFT)
+    def say_hi(self):
+        print("hi there, everyone!")
+
+app = App(window)
+
+
+
+
+import time
+
+slider = tk.Scale(window, from_=0, to=10)
+slider.pack()
+
+label = tk.Label(window)
+label.pack()
+
+#slider.set(clicks)
+#label.config(text="Time: " + str(score))
+
+
+
 
 window.mainloop()
+
+window.destroy() # optional; see description below
 
 
