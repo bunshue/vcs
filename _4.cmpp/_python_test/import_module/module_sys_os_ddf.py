@@ -12,7 +12,7 @@ import os,shutil
 cur_path = os.path.dirname(__file__) # 取得目前路徑
 print("現在路徑："+cur_path)
 
-
+'''
 #拷貝檔案
 destfile = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/' + "ccccc.py"
 print("拷貝檔案 " + destfile)
@@ -21,7 +21,7 @@ shutil.copy("test10_new12_file2.py",destfile )  # 檔案複製
 print("拷貝檔案 " + destfile)
 destfile = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/' + "ccccc2.py"
 shutil.copyfile('test10_new12_file2.py', destfile)  # 檔案複製
-
+'''
 
 #目錄拷貝
 import shutil
@@ -150,43 +150,47 @@ for dirname,subdir,files in sample_tree:
     print("檔案串列：",files)
     print()
     
-'''
-import os
-#異常處理
-#刪除目錄
-try:
-    os.rmdir("aaaaa");
-    print("remove directory aaaaa OK")
-except IOError:
-   print("Error: can't find file or read data")
-else:
-    print("remove directory aaaaa fail")
-
-if not os.path.exists(source_dir):
-	print("I can't find the specified directory.")
-	exit(1)
-
-'''
-
-
-
 import os, shutil, glob
 
 print("單層資料夾內所有檔案容量")
 
-source_dir = 'C:/______test_files/__pic/_angry_bird/'
+source_dir = 'C:/______test_files/__pic/_peony1/'
 
 pngfiles = glob.glob(source_dir+"*.png")
 jpgfiles = glob.glob(source_dir+"*.jpg")
 giffiles = glob.glob(source_dir+"*.gif")
-allfiles = pngfiles + jpgfiles + giffiles
+bmpfiles = glob.glob(source_dir+"*.bmp")
+allfiles = pngfiles + jpgfiles + giffiles + bmpfiles
 
 allfilesize = 0
 for f in allfiles:
-    print("檔案 : " + f +", 大小 : " + str(os.path.getsize(f)) + " 拜")
     allfilesize += os.path.getsize(f)
+    print("檔案 : " + f + ", 大小 : " + str(os.path.getsize(f)) + " 拜")
 
-print("總容量 : " + str(allfilesize))
+print("總容量 : " + str(allfilesize) + " 拜")
+
+print('拷貝檔案')
+
+imageno = 1
+for f in allfiles:
+  print('全檔名 : ' + f)
+  dirname, filename = f.split('\\')
+  print('資料夾 : ' + dirname)
+  print('簡檔名 : ' + filename)
+
+  mainname, extname = filename.split('.')
+
+  print('前檔名 : ' + mainname)
+  print('副檔名 : ' + extname)
+
+  targetfolder = 'C:/_git/vcs/_4.cmpp/_python_test/__temp'
+  targetfile = targetfolder + '/' + str(imageno) + '.' + extname
+
+  print('新檔名 : ' + targetfile)
+  
+  shutil.copyfile(f, targetfile)  #會直接覆蓋舊檔
+  imageno += 1
+
 
 
 '''
@@ -211,6 +215,25 @@ for f in allfiles:
 
 
 
+
+
+'''
+import os
+#異常處理
+#刪除目錄
+try:
+    os.rmdir("aaaaa");
+    print("remove directory aaaaa OK")
+except IOError:
+   print("Error: can't find file or read data")
+else:
+    print("remove directory aaaaa fail")
+
+if not os.path.exists(source_dir):
+	print("I can't find the specified directory.")
+	exit(1)
+
+'''
 
 
 

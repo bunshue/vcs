@@ -1,29 +1,16 @@
 import tkinter as tk
-#import tkinter		#the same
-from tkinter import *	#the same
 
 window = tk.Tk()
 
-print('Label 測試')
-w = Label(window, text="Hello, world!")
-w.pack()
+# 設定主視窗大小
+w = 800
+h = 800
+size = str(w)+'x'+str(h)
+window.geometry(size)
 
-print('Canvas 測試')
-colour = "#FF0000"
-canvas = tk.Canvas(window, height=300, width=300, bg=colour)
-canvas.pack()
-
-
-print('Scale 測試')
-slider = tk.Scale(window, from_=0, to=100)
-slider.pack()
-
-
-print('Checkbutton 測試')
-var = IntVar()
-
-c = Checkbutton(window, text="Expand", variable=var)
-c.pack()
+# 設定主視窗標題
+title = "這是主視窗"
+window.title(title)
 
 
 '''

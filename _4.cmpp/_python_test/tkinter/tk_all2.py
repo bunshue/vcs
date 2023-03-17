@@ -108,6 +108,29 @@ label.pack()
 
 
 
+print('Label 測試')
+w = tk.Label(window, text="Hello, world!")
+w.pack()
+
+print('Canvas 測試')
+colour = "#FF0000"
+canvas = tk.Canvas(window, width=300, height=50, bg=colour)
+canvas.pack()
+
+
+print('Scale 測試')
+slider = tk.Scale(window, from_=0, to=100)
+slider.pack()
+
+
+print('Checkbutton 測試')
+var = tk.IntVar()
+
+c = tk.Checkbutton(window, text="Expand", variable=var)
+c.pack()
+
+
+
 window.mainloop()
 
 window.destroy() # optional; see description below

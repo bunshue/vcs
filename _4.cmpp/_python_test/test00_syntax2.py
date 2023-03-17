@@ -65,3 +65,11 @@ except Exception as e:
     e_type, e_value, e_tb = sys.exc_info()
     print("種類：{}\n訊息：{}\n資訊：{}".format(e_type, e_value, e_tb))
 
+
+print('冪次方的寫法')
+z=10
+print(z)
+z = z**0.5    #冪次方的寫法
+print(z)
+
+

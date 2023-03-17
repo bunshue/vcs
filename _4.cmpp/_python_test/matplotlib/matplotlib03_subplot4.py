@@ -17,6 +17,8 @@ school = list()
 for s in schools:
     school.append(int(s.split()[1]))
 
+#共取得??筆資料 list的用法
+
 filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/yrborn.txt'
 with open(filename, 'r') as fp:
 	populations = fp.readlines()
@@ -27,6 +29,8 @@ for p in populations:
     yr, tl, boy, girl = p.split()
     yrborn[yr] = {'boy': int(boy), 'girl': int(girl)}
 
+#共取得??筆資料 dict的用法
+    
 yrlist = sorted(list(yrborn.keys()))
 bp = list()
 for yr in yrlist:

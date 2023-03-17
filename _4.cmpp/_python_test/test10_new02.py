@@ -50,11 +50,3 @@ while(True):
 	power = power - 1
 	if(power == 0):
 		break
-
-z=10
-print(z)
-z = z**0.5    #冪次方的寫法
-print(z)
-
-
-

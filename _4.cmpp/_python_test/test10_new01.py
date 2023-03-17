@@ -39,10 +39,6 @@ for cmd in q_cmds:
     print(cmd)
 
 
-
-
-# Python 新進測試 11
-
 #web = input("請輸入網址：")
 web = 'https://www.google.com.tw/'
 
@@ -51,12 +47,13 @@ if web.startswith("http://") or web.startswith("https://"):
 else:
     print("輸入的網址格式錯誤！")
    
-    
+'''    
 person = int(input("請輸入學生人數: "))
 apple = int(input("請輸入蘋果總數: "))
 ret = divmod(apple, person)
 print("每個學生可分得蘋果 " + str(ret[0]) + " 個")
 print("蘋果剩餘 " + str(ret[1]) + " 個")
+'''
 
 listname = ["林大明", "陳阿中", "張小英"]
 listchinese = [100, 74, 82]
@@ -74,26 +71,23 @@ date1 = date1.replace("-", " 月 ", 1)
 date1 += " 日"
 print(date1)
 
-innum = 0
+print('List的用法')
 list1 = []
-while(innum != -1):
-    innum = int(input("請輸入電費 (-1：結束)："))
-    list1.append(innum)
-list1.pop()
+list1.append(123)
+list1.append(456)
+list1.append(234)
+list1.append(321)
+list1.append(101)
+#list1.pop()
+
 print("共輸入 %d 個數" % len(list1))
-print("最多電費為：%d" % max(list1))
-print("最少電費為：%d" % min(list1))
-print("電費總和為：%d" % sum(list1))
-print("電費由大到小排序為：{}".format(sorted(list1, reverse=True)))
+print("最大：%d" % max(list1))
+print("最小：%d" % min(list1))
+print("總和：%d" % sum(list1))
+print("由大到小排序為：{}".format(sorted(list1, reverse=True)))
 
 
-
-# Python 新進測試 10
-
-
-'''
 sum = 0
-
 def show(n):
     print("第 " + str(n) + " 次執行迴圈")
     
@@ -110,15 +104,7 @@ if(pw=="1234"):
 else:
     print("密碼錯誤！")
     
-    
-nat = input("請輸入國文成績：")
-math = input("請輸入數學成績：")
-eng = input("請輸入英文成績：")
-sum = int(nat) + int(math) + int(eng)  #輸入值需轉換為整數
-average = sum / 3
-print("成績總分：%d，平均成績：%5.2f" % (sum, average))
-
-
+'''
 money = int(input("請輸入購物金額："))
 if(money >= 10000):
     if(money >= 100000):
@@ -134,25 +120,6 @@ else:
     
     
     
-print("格式化列印")
-print("姓名   座號  國文  數學  英文")
-print("%3s  %2d   %3d   %3d  %3d" % ("林大明", 1, 100, 87, 79))
-print("%3s  %2d   %3d   %3d  %3d" % ("陳阿中", 2, 74, 88, 100))
-print("%3s  %2d   %3d   %3d  %3d" % ("張小英", 11, 82, 65, 8))
-
-score = int(input("請輸入成績："))
-if(score) >= 90:
-    print("優等")
-elif(score) >= 80:
-    print("甲等")
-elif(score) >= 70:
-    print("乙等")
-elif(score) >= 60:
-    print("丙等")
-else:
-    print("丁等")
-    
-    
     
 n = int(input("請輸入大樓的樓層數："))
 print("本大樓具有的樓層為：")
@@ -163,45 +130,30 @@ for i in range(1, n+1):
         continue
     print(i, end=" ")
 print()
+'''
 
-
-score = [85, 79, 93]
+score = [75, 100, 9]
 print("國文成績：%d 分" % score[0])
 print("數學成績：%d 分" % score[1])
 print("英文成績：%d 分" % score[2])
 
 
-for i in range(1,10):
+for i in range(2,10):
     for j in range(1,10):
         product = i * j
         print("%d*%d=%-2d   " % (i, j, product), end="")
     print()
 
 
-
+print('求1~N的正整數的和')
 sum = 0
 n = int(input("請輸入正整數："))
 for i in range(1, n+1):
     sum += i
 print("1 到 %d 的整數和為 %d" % (n, sum))
-'''
-
-'''
-score = []
-total = inscore = 0
-while(inscore != -1):
-    inscore = int(input("請輸入學生的成績："))
-    score.append(inscore)
-print("共有 %d 位學生" % (len(score) - 1))
-for i in range(0, len(score) - 1):
-    total += score[i]
-average = total / (len(score) - 1)
-print("本班總成績：%d 分，平均成績：%5.2f 分" % (total, average))
 
 
-
-
-
+print('求是否為質數')
 n = int(input("請輸入大於 1 的整數："))
 if(n == 2):
     print("2 是質數！")
@@ -214,7 +166,7 @@ else:
         print("%d 是質數！" % n)
 
 
-
+'''
 total = person = score = 0
 while(score != -1):
     person += 1
@@ -222,8 +174,20 @@ while(score != -1):
     score = int(input("請輸入第 %d 位學生的成績：" % person))
 average = total / (person - 1)
 print("本班總成績：%d 分，平均成績：%5.2f 分" % (total, average))
+'''
 
 
+'''
+score = []
+total = inscore = 0
+while(inscore != -1):
+    inscore = int(input("請輸入學生的成績："))
+    score.append(inscore)
+print("共有 %d 位學生" % (len(score) - 1))
+for i in range(0, len(score) - 1):
+    total += score[i]
+average = total / (len(score) - 1)
+print("本班總成績：%d 分，平均成績：%5.2f 分" % (total, average))
 '''
 
 
@@ -231,15 +195,25 @@ print("本班總成績：%d 分，平均成績：%5.2f 分" % (total, average))
 
 
 
+'''
+nat = input("請輸入國文成績：")
+math = input("請輸入數學成績：")
+eng = input("請輸入英文成績：")
+sum = int(nat) + int(math) + int(eng)  #輸入值需轉換為整數
+average = sum / 3
+print("成績總分：%d，平均成績：%5.2f" % (sum, average))
+'''
 
-
-
-
-
-
-
-
-
-
-
-
+'''
+score = int(input("請輸入成績："))
+if(score) >= 90:
+    print("優等")
+elif(score) >= 80:
+    print("甲等")
+elif(score) >= 70:
+    print("乙等")
+elif(score) >= 60:
+    print("丙等")
+else:
+    print("丁等")
+'''
