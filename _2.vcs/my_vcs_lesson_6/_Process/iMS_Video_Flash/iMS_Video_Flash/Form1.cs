@@ -192,36 +192,37 @@ namespace iMS_Video_Flash
         //非同步 Process使用
         void run_command_line_process_async(string exe_filename, string command)
         {
-            //Process process = new Process();    //創建一個進程用於調用外部程序
-            Process process = new Process
-            {
-                StartInfo = new ProcessStartInfo
-                {
-                    FileName = exe_filename, //設定要啟動的程式
-                    Arguments = command,
+            Process process_async = new Process();    //創建一個進程用於調用外部程序
 
-                    UseShellExecute = false,  //false, 關閉Shell的使用, 是否指定操作系統外殼進程啟動程序, 可能接受來自調用程序的輸入信息
-                    RedirectStandardInput = true, //重定向標準輸入, 可能接受來自調用程序的輸入信息
-                    RedirectStandardOutput = true, //重定向標準輸出, 由調用程序獲取輸出信息
-                    RedirectStandardError = true, //重定向錯誤輸出
-                    CreateNoWindow = true, //true: 設置不顯示程式窗口, false: 出現cmd的黑窗體
+            process_async.StartInfo.FileName = exe_filename;  //設定要啟動的程式
+            //process_async.StartInfo.Arguments = "/c " + command; //設定程式執行參數, 也可直接把command寫在這裡, 就不用後面的 StandardInput.WriteLine 了, 要加/c
+            //process_async.StartInfo.Arguments = "/c systeminfo";  //可, 要加/c
+            process_async.StartInfo.Arguments = command;
+            //process_async.StandardInput.AutoFlush = true;
 
-                    WindowStyle = ProcessWindowStyle.Hidden
-                },
-            };
+            process_async.StartInfo.UseShellExecute = false;  //false, 關閉Shell的使用, 是否指定操作系統外殼進程啟動程序, 可能接受來自調用程序的輸入信息
+            process_async.StartInfo.RedirectStandardInput = true; //重定向標準輸入, 可能接受來自調用程序的輸入信息
+            process_async.StartInfo.RedirectStandardOutput = true; //重定向標準輸出, 由調用程序獲取輸出信息
+            process_async.StartInfo.RedirectStandardError = true; //重定向錯誤輸出
+            process_async.StartInfo.CreateNoWindow = true; //true: 設置不顯示程式窗口, false: 出現cmd的黑窗體
+            process_async.StartInfo.ErrorDialog = false;
+            //process_async.StartInfo.WindowStyle = ProcessWindowStyle.Normal;  //測不出來
+            //process_async.StartInfo.WindowStyle = ProcessWindowStyle.Hidden,
+
+            process_async.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
 
             //設定非同步資料處理 output and error handlers
-            process.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
-            process.ErrorDataReceived += new DataReceivedEventHandler(OutputHandler);
+            process_async.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
+            process_async.ErrorDataReceived += new DataReceivedEventHandler(OutputHandler);
 
-            process.Start();    //啟動程式
+            process_async.Start();    //啟動程式
 
             //啟動讀取資料輸出與錯誤輸出
-            process.BeginOutputReadLine();
-            process.BeginErrorReadLine();
+            process_async.BeginOutputReadLine();
+            process_async.BeginErrorReadLine();
 
             richTextBox1.Text += "等待程式結束.......\n";
-            process.WaitForExit();	//等待退出
+            process_async.WaitForExit();	//等待退出
             richTextBox1.Text += "程式結束\n";
         }
 

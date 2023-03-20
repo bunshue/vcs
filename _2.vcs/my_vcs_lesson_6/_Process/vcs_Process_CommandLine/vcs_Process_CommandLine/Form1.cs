@@ -235,6 +235,7 @@ namespace vcs_Process_CommandLine
             //啟動讀取資料輸出與錯誤輸出
             process_async.BeginOutputReadLine();
             process_async.BeginErrorReadLine();
+
             richTextBox1.Text += "等待程式結束.......\n";
             process_async.WaitForExit();	//等待退出
             richTextBox1.Text += "程式結束\n";

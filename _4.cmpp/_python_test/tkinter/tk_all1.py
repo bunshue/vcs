@@ -216,4 +216,12 @@ window.config(menu=menubar)
 
 '''
 
-	
+
+
+
+window.mainloop()
+
+window.destroy() # optional; see description below
+
+
+

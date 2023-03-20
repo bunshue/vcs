@@ -1,5 +1,3 @@
-# Python 測試 tkinter 2
-
 import tkinter as tk
 
 window = tk.Tk()

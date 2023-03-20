@@ -1,4 +1,4 @@
-# Python 新進測試 14  tkinter
+# Python 測試 tkinter
 
 def choose():
     str = "你喜歡的球類運動："
@@ -188,9 +188,8 @@ window.mainloop()
 '''
 
 
-
-
-
 window.mainloop()
+
+window.destroy() # optional; see description below
 
 
