@@ -211,10 +211,6 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 
-#另存新檔
-#cv2.imwrite('aaaa.bmp', img);
- cv2.imwrite(filename2, img_resized)
-
 
 
 '''

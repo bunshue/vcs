@@ -51,8 +51,10 @@ print(fn_h)
 aaa = dw0.textlength(msg, font=font)
 print(aaa)
 
+'''
 bbb = dw0.textbbox(msg, font=font)
 print(bbb)
+'''
 
 
 '''

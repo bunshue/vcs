@@ -12,6 +12,9 @@ df = pd.DataFrame([[250,320,300,312,280],
                    [220,280,250,305,250]],
                    index=['北部','中部','南部'],
                    columns=[2015,2016,2017,2018,2019])
-df.plot(kind='pie', subplots=True, figsize=[20,20])
+df.plot(kind='pie', subplots=True, figsize=[20,20]) # 繪圖 plot
+
+plt.show()
+
 
 

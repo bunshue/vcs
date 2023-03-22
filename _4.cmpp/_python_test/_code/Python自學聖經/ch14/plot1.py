@@ -15,3 +15,6 @@ df = pd.DataFrame([[250,320,300,312,280],
 g1 = df.plot(kind='bar', title='長條圖', figsize=[10,5])
 g2 = df.plot(kind='barh', title='橫條圖', figsize=[10,5])
 g3 = df.plot(kind='bar', stacked=True, title='堆疊圖', figsize=[10,5])
+
+plt.show()
+

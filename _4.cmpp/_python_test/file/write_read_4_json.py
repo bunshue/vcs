@@ -24,9 +24,76 @@ for b_data in boundary_data['Province']:
     print("name:{}".format(b_data['name']))
 
 
-print('測試完成')
 
-    
+'''
+#抓取地震資料 用json拆解
+
+import json, requests, datetime
+
+url = 'http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson'
+r = requests.get(url)
+
+earthquakes = json.loads(r.text)
+dataset = list()
+for eq in earthquakes['features']:
+    item = dict()
+    eptime = float(eq['properties']['time']) /1000.0
+    d = datetime.datetime.fromtimestamp(eptime). \
+        strftime('%Y-%m-%d %H:%M:%S')
+    item['eqtime'] = d
+    item['mag'] = eq['properties']['mag']
+    item['place'] =  eq['properties']['place']
+    dataset.append(item)
+    #print(item)
+
+
+for data in dataset:
+        data = '(`eqtime`,`mag`,`place`) values("{}",{},"{}");'.format(data['eqtime'], data['mag'], data['place'])
+        #print(data)
+
+
+
+import json, requests, hashlib, datetime, os.path
+
+url = 'http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson'
+r = requests.get(url)
+sig = hashlib.md5(r.text.encode('utf-8')).hexdigest()
+old_sig=''
+
+if os.path.exists('eq_sig.txt'):
+    with open('eq_sig.txt', 'r') as fp:
+        old_sig = fp.read()
+    with open('eq_sig.txt', 'w') as fp:
+        fp.write(sig)
+else:
+    with open('eq_sig.txt', 'w') as fp:
+        fp.write(sig)
+
+if sig == old_sig:
+    print('資料未更新，不需要處理...')
+    exit()
+
+earthquakes = json.loads(r.text)
+dataset = list()
+for eq in earthquakes['features']:
+    item = dict()
+    eptime = float(eq['properties']['time']) /1000.0
+    d = datetime.datetime.fromtimestamp(eptime). \
+        strftime('%Y-%m-%d %H:%M:%S')
+    item['eqtime'] = d
+    item['mag'] = eq['properties']['mag']
+    item['place'] =  eq['properties']['place']
+    dataset.append(item)
+
+for data in dataset:
+    sql = 'insert into eq (`eqtime`,`mag`,`place`) values("{}",{},"{}");'.format( \
+           data['eqtime'], data['mag'], data['place'])
+    #print(sql)
+print('資料更新完成')
+
+'''
+
+print('測試完成')    
 
 
 

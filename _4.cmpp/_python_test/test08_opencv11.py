@@ -18,8 +18,15 @@ def detectFace(img):
     face_classifier = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
     
     # 調用偵測識別人臉函式
-    faceRects = face_classifier.detectMultiScale(
-        grayImg, scaleFactor=1.2, minNeighbors=3, minSize=(32, 32))
+    faceRects = face_classifier.detectMultiScale(grayImg, scaleFactor=1.2, minNeighbors=3, minSize=(32, 32))
+
+    '''
+    print('共偵測到 ' + str(len(faceRects)) + ' 張人臉')
+    for nn in range(len(faceRects)):
+        print(nn)
+        print(faceRects[nn])
+        print(faceRects[nn][0], faceRects[nn][1], faceRects[nn][2], faceRects[nn][3])
+    '''
 
     #參數
     #image 	        待檢測圖片，一般為灰階影像，以便加快偵測速度

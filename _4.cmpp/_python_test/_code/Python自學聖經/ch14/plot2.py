@@ -15,3 +15,5 @@ df = pd.DataFrame([[250,320,300,312,280],
 g1 = df.iloc[0].plot(kind='line', legend=True, xticks=range(2015,2020), title='公司分區年度銷售表', figsize=[10,5])
 g1 = df.iloc[1].plot(kind='line', legend=True, xticks=range(2015,2020))
 g1 = df.iloc[2].plot(kind='line', legend=True, xticks=range(2015,2020))
+
+plt.show()

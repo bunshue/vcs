@@ -46,7 +46,7 @@ namespace vcs_JSON
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Introduction Introduction = new Introduction
+            Introduction intro = new Introduction
             {
                 Name = "Berry",
                 Age = 18,
@@ -60,9 +60,17 @@ namespace vcs_JSON
                 }
             };
             //轉成JSON格式
-            string json = JsonConvert.SerializeObject(Introduction);
+            string json = JsonConvert.SerializeObject(intro);
             richTextBox1.Text += "將物件序列化成JSON格式\n";
             richTextBox1.Text += json + "\n";
+
+            richTextBox1.Text += "取得json物件內容\n";
+            richTextBox1.Text += "Name : " + intro.Name + "\n";
+            richTextBox1.Text += "Age : " + intro.Age + "\n";
+            richTextBox1.Text += "Marry : " + intro.Marry + "\n";
+            richTextBox1.Text += "Habit :\n";
+            foreach (string hh in intro.Habit)
+                richTextBox1.Text += hh + "\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -96,14 +104,14 @@ namespace vcs_JSON
 
         private void button3_Click(object sender, EventArgs e)
         {
-            //JSON字串
+            //JSON字串, 例如由網頁取得的資料, 擷取出可用的東西
             string Json = "{ 'Name': 'Berry', 'Age': 18, 'Marry': false, 'Habit': [ 'Sing','Dance','Code','Sleep' ] }";
 
             //轉成物件
-            Introduction Introduction = JsonConvert.DeserializeObject<Introduction>(Json);
+            Introduction intro = JsonConvert.DeserializeObject<Introduction>(Json);
 
             richTextBox1.Text += "反序列化成物件\n";
-            richTextBox1.Text += "Name : " + Introduction.Name + "\n";
+            richTextBox1.Text += "Name : " + intro.Name + "\n";
         }
 
         private void button4_Click(object sender, EventArgs e)

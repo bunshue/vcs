@@ -140,14 +140,16 @@ for i in range(2,10):
 
 print('求1~N的正整數的和')
 sum = 0
-n = int(input("請輸入正整數："))
+#n = int(input("請輸入正整數："))
+n = 1234
 for i in range(1, n+1):
     sum += i
 print("1 到 %d 的整數和為 %d" % (n, sum))
 
 
 print('求是否為質數')
-n = int(input("請輸入大於 1 的整數："))
+#n = int(input("請輸入大於 1 的整數："))
+n = 12377
 if(n == 2):
     print("2 是質數！")
 else:
@@ -210,3 +212,11 @@ elif(score) >= 60:
 else:
     print("丁等")
 '''
+
+
+
+
+
+
+
+
