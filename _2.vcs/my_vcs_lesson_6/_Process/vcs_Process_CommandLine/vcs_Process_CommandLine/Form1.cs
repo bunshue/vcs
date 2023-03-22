@@ -226,6 +226,8 @@ namespace vcs_Process_CommandLine
             //process_async.StartInfo.WindowStyle = ProcessWindowStyle.Normal;  //測不出來
             //process_async.StartInfo.WindowStyle = ProcessWindowStyle.Hidden,
 
+            process_async.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
+
             //設定非同步資料處理 output and error handlers
             process_async.OutputDataReceived += new DataReceivedEventHandler(OutputHandler);
             process_async.ErrorDataReceived += new DataReceivedEventHandler(OutputHandler);
@@ -243,6 +245,15 @@ namespace vcs_Process_CommandLine
 
         void OutputHandler(object sendingProcess, DataReceivedEventArgs outLine)
         {
+            /*
+            //目前無法做到換行, 也不能操作richTextBox的內容
+            richTextBox1.Text += outLine.Data;
+
+            //跳至最後面 fail
+            //richTextBox1.Focus();
+            //richTextBox1.Select(richTextBox1.Text.Length, 0);
+            */
+
             if (process_async.HasExited == false)
             {
                 Console.WriteLine("process.HasExited = " + process_async.HasExited.ToString());

@@ -7,6 +7,8 @@ filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/sample.jpg'
 sample = Image.open(filename)
 im = sample.convert('L')
 w, h = im.size
+print(w)
+print(h)
 
 crop = im.crop((w/2-300, h/2-300, w/2+300, h/2+300))
 
@@ -17,7 +19,8 @@ print(h/2+300)
 
 crop_hist = crop.histogram()
 
-ori = sample.resize((600,600))
+ori = sample.resize((600,600))  #修改圖像大小
+
 im = ori.convert('L')
 hist = im.histogram()
 

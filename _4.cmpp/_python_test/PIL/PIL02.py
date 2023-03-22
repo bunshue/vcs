@@ -20,7 +20,8 @@ if not os.path.exists(target_dir):
 logo_filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/logo.png'
 logo = Image.open(logo_filename)
 
-logo = logo.resize((150,150))
+logo = logo.resize((150,150))   #修改圖像大小
+
 for target_image in allfiles:
 	pathname, filename = os.path.split(target_image)
 	print(filename)
