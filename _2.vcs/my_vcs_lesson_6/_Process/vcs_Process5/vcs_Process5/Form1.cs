@@ -18,6 +18,9 @@ namespace vcs_Process5
         string program_name = "AMCAP";
         string program_path = @"C:\Program Files (x86)\Noel Danjou\AMCap\AMCap.exe";
 
+        //string program_name = "MegaDownloader";
+        //string program_path = @"C:\____backup\MegaDownloaderNoinstall_1.8_azo\MegaDownloaderNoinstall\MegaDownloader.exe";
+
         bool falg_program_running = false;
 
         private Process[] processes;
@@ -35,7 +38,7 @@ namespace vcs_Process5
             //C# 跨 Thread 存取 UI
             Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效
 
-            richTextBox1.Text += "偵測程式 : " + program_name + "\n";
+            richTextBox1.Text += "偵測程式 : " + program_name + " 開始, 時間 : " + DateTime.Now.ToString() + "\n";
         }
 
         private void process_exited(object sender, EventArgs e)//被觸發的程序
@@ -59,7 +62,7 @@ namespace vcs_Process5
                 {
                     //richTextBox1.Text += "X";
                     count++;
-                    if (count == 100)
+                    if (count == 120)
                     {
                         count = 0;
                         richTextBox1.Text += "已100秒 開啟\n";

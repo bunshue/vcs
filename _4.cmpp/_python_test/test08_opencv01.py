@@ -4,12 +4,9 @@ filename = 'C:/______test_files/_emgu/lena.jpg'
 '''
 import cv2	#導入 OpenCV 模組
 import numpy as np
-import matplotlib.pyplot as plt #匯入模組
+import matplotlib.pyplot as plt
 
 img = cv2.imread(filename)	#讀取本機圖片
-
-#另存新檔
-#cv2.imwrite('aaaa.bmp', img);
 
 shape = img.shape
 h = shape[0]    #高
@@ -27,8 +24,8 @@ cv2.destroyAllWindows()
 
 #裁剪圖片
 
-import matplotlib.pyplot as plt #匯入模組
-import matplotlib.image as img  #匯入模組
+import matplotlib.pyplot as plt
+import matplotlib.image as img
 
 image = img.imread(filename)
 
@@ -53,12 +50,11 @@ h,w,d = img.shape   #d為dimension d=3 全彩 d=1 灰階  #讀取圖片格式
 center = (w//2, h//2)
 
 #                        旋轉中心 旋轉角度 縮放比例
-P = cv2.getRotationMatrix2D(center, -30, 0.5)
+P = cv2.getRotationMatrix2D(center, -30, 0.7)
 
 rotate_img = cv2.warpAffine(img, P, (w, h))
 
-cv2.imshow('image', rotate_img)#顯示圖片
-
+cv2.imshow('Rotate CW 30 ratio = 0.7', rotate_img)#顯示圖片
 
 print('在此等待任意鍵繼續, 繼續後刪除本視窗')
 cv2.waitKey()
@@ -75,20 +71,14 @@ cv2.destroyAllWindows()
 # 5  L  INTER_LANCZOS4
 import cv2	#導入 OpenCV 模組
 import numpy as np
-import matplotlib.image as img  #匯入模組
 
-img = cv2.imread(filename)	#讀取本機圖片
-#縮放的倍率
-img_resized = cv2.resize(img, None, fx=1.50, fy=1.00, interpolation = cv2.INTER_LINEAR)
+img_original = cv2.imread(filename)	#讀取本機圖片
 
-filename2 = 'resized_img.jpg';
-cv2.imwrite(filename2, img_resized)
+#縮放的倍率 fx fy
+img_resized = cv2.resize(img_original, None, fx=1.50, fy=1.00, interpolation = cv2.INTER_LINEAR)
 
-original = cv2.imread(filename)	#讀取本機圖片
-cv2.imshow('Original Picture', original) #顯示圖片
-
-resized = cv2.imread(filename2)	#讀取本機圖片
-cv2.imshow('Resized Picture', resized) #顯示圖片
+cv2.imshow('Original Picture', img_original) #顯示圖片
+cv2.imshow('Resized Picture', img_resized) #顯示圖片
 
 print('在此等待任意鍵繼續, 繼續後刪除本視窗')
 cv2.waitKey()
@@ -96,10 +86,9 @@ cv2.destroyAllWindows()
 
 
 #影像對比與亮度調整
-
 import cv2	#導入 OpenCV 模組
 import numpy as np
-import matplotlib.image as img  #匯入模組
+import matplotlib.image as img
 
 # output_image = alpha * imput_image + beta
 def modify_contrast_and_brightness(img, alpha=1.0, beta = 0.0):
@@ -114,14 +103,13 @@ img = cv2.imread(filename)	#讀取本機圖片
 modified_image = modify_contrast_and_brightness(img, 1.5, 10.0)
 cv2.imshow('Modified Picture', modified_image) #顯示圖片
 
-'''
 
 #影像分析工具
 #影像直方圖
 
 import cv2	#導入 OpenCV 模組
 import numpy as np
-import matplotlib.pyplot as plt #匯入模組
+import matplotlib.pyplot as plt
 
 img = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
 plt.hist(img.ravel(), 256, [0,256])
@@ -134,14 +122,79 @@ plt.show()
 
 import cv2	#導入 OpenCV 模組
 import numpy as np
-import matplotlib.pyplot as plt #匯入模組
+import matplotlib.pyplot as plt
 
 img = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
 equa = cv2.equalizeHist(img)
 cv2.imshow('Histogram', equa)#顯示圖片
 plt.hist(equa.ravel(), 256, [0,256])
 plt.show()
+#均值化的影像
+#均衡化後的灰度直方圖分布
 
+'''
+
+#直方圖二值化
+# 不同模式的Threshold方法
+# cv2.THRESH_BINARY
+# cv2.THRESH_BINARY_INV
+# cv2.THRESH_TRUNC
+# cv2.THRESH_TOZERO
+# cv2.THRESH_TOZERO_INV
+
+import cv2	#導入 OpenCV 模組
+import numpy as np
+import matplotlib.pyplot as plt
+
+img = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
+ret, th1 = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
+cv2.imshow('Binary', th1)#顯示圖片
+
+
+'''
+
+#影像邊緣檢測Canny()函數
+
+import cv2	#導入 OpenCV 模組
+import numpy as np
+import matplotlib.pyplot as plt
+
+gray_img = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
+
+#執行高斯模糊化
+blur_gray = cv2.GaussianBlur(gray_img, (3,3), 0)
+threshold_1 = 30#強邊緣strong edge
+threshold_2 = 60#弱邊緣weak edge
+edges = cv2.Canny(blur_gray, threshold_1, threshold_2)
+cv2.imshow('Canny', edges)#顯示圖片
+
+
+
+
+#影像邊緣檢測Sobel()函數
+
+import cv2	#導入 OpenCV 模組
+import numpy as np
+import matplotlib.pyplot as plt
+
+def sobel(image):
+    kernel_size = (3, 3)
+    blur_img = cv2.GaussianBlur(image, kernel_size, 0)
+    #水平方向梯度
+    x =cv2.Sobel(blur_img, cv2.CV_16S, 1, 0, kernel_size)
+    abs_x = cv2.convertScaleAbs(x)
+    #垂直方向梯度
+    y =cv2.Sobel(blur_img, cv2.CV_16S, 0, 1, kernel_size)
+    abs_y = cv2.convertScaleAbs(y)
+    #合併兩個方向的梯度
+    sobel_image = cv2.addWeighted(abs_x, 0.5, abs_y, 0.5, 0)
+    return sobel_image
+
+gray_img = cv2.imread(filename)
+sobel_image = sobel(gray_img)
+cv2.imshow('Sobel', sobel_image)#顯示圖片
+
+'''
 
 
 
@@ -156,6 +209,13 @@ cv2.destroyAllWindows() #關閉視窗
 print('在此等待任意鍵繼續, 繼續後刪除本視窗')
 cv2.waitKey()
 cv2.destroyAllWindows()
+
+
+#另存新檔
+#cv2.imwrite('aaaa.bmp', img);
+ cv2.imwrite(filename2, img_resized)
+
+
 
 '''
 
