@@ -1,0 +1,84 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
+df = pd.DataFrame([[250,320,300,312,280],
+                   [280,300,280,290,310],
+                   [220,280,250,305,250]],
+                   index=['北部','中部','南部'],
+                   columns=[2015,2016,2017,2018,2019])
+g1 = df.plot(kind='bar', title='長條圖', figsize=[10,5])
+g2 = df.plot(kind='barh', title='橫條圖', figsize=[10,5])
+g3 = df.plot(kind='bar', stacked=True, title='堆疊圖', figsize=[10,5])
+
+plt.show()
+
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
+df = pd.DataFrame([[250,320,300,312,280],
+                   [280,300,280,290,310],
+                   [220,280,250,305,250]],
+                   index=['北部','中部','南部'],
+                   columns=[2015,2016,2017,2018,2019])
+g1 = df.iloc[0].plot(kind='line', legend=True, xticks=range(2015,2020), title='公司分區年度銷售表', figsize=[10,5])
+g1 = df.iloc[1].plot(kind='line', legend=True, xticks=range(2015,2020))
+g1 = df.iloc[2].plot(kind='line', legend=True, xticks=range(2015,2020))
+
+plt.show()
+
+
+
+import pandas as pd
+import matplotlib.pyplot as plt
+
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
+df = pd.DataFrame([[250,320,300,312,280],
+                   [280,300,280,290,310],
+                   [220,280,250,305,250]],
+                   index=['北部','中部','南部'],
+                   columns=[2015,2016,2017,2018,2019])
+df.plot(kind='pie', subplots=True, figsize=[20,20]) # 繪圖 plot
+
+plt.show()
+
+
+
+# 載入所需套件 import packages
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 創造一些隨機資料 create some data with random value
+ts = pd.Series(np.random.randn(1000), index=pd.date_range('1/1/2000', periods=1000))
+ts = ts.cumsum() # 計算累積值 cumulative sum
+df = pd.DataFrame(np.random.randn(1000, 4), index=ts.index, columns=list('ABCD'))
+df = df.cumsum()
+
+df.plot()       # 繪圖 plot
+
+plt.show()
+
+
+
+
+
+

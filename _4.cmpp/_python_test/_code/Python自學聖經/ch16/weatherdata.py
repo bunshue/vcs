@@ -1,4 +1,5 @@
 import requests
+
 try:
     import xml.etree.cElementTree as et
 except ImportError:

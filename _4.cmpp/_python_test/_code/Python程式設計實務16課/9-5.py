@@ -11,6 +11,7 @@ all_links = sp.find_all('a')
 for link in all_links:
     href = link.get('href')
     if href != None and href.startswith('http://'):
+        print('取得資料')
         print(href)
 
 

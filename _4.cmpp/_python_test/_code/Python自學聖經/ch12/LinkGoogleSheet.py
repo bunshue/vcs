@@ -1,5 +1,6 @@
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials as sac
+
 # 設定金鑰檔路徑及驗證範圍
 auth_json = 'PythonConnectGsheet1-6a6086d149c5.json'
 gs_scopes = ['https://spreadsheets.google.com/feeds']

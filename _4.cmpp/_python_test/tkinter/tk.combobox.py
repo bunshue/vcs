@@ -12,7 +12,7 @@ window = tk.Tk()
 window.geometry('300x300')
 
 cbVar = tk.StringVar()
-cb = ttk.Combobox(window, textvariable=cbVar)
+cb = ttk.Combobox(window, textvariable=cbVar)   #下拉式選單元件
 cb['value'] = ("籃球","排球","足球","其他")  #設定選項
 cb.current(0)  #預設第一個選項
 cb.bind('<<ComboboxSelected>>', combobox_selected)  #設定選取選項後執行的程式

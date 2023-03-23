@@ -2,11 +2,10 @@
 
 import twstock
 
+'''
 # 以鴻海的股票代號建立 Stock 物件
 stock = twstock.Stock('2317')  
 print(stock.price)
-
-
 
 '''
 
@@ -145,9 +144,9 @@ import csv
 with open('2019_2330.csv', 'w', newline='') as f:
     writer = csv.writer(f)
     writer.writerows(slist)
+
+
 '''
-
-
 print('讀取csv檔')
 
 import matplotlib.pyplot as plt
@@ -178,4 +177,4 @@ with open(filename, 'r', newline='') as f:
 plt.figure(figsize=(20,5))
 #plt.plot([x.close for x in slist]) //tmp comment out
 #plt.show() 
-
+'''

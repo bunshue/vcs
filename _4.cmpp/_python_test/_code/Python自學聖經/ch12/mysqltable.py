@@ -1,4 +1,5 @@
 import pymysql
+
 conn = pymysql.connect('localhost',port=3306,user='root',passwd='1234',charset='utf8', db='pythondb')  #連結資料庫
 
 with conn.cursor() as cursor:
@@ -13,4 +14,5 @@ with conn.cursor() as cursor:
     """
     cursor.execute(sql)  #執行SQL指令
     conn.commit()  #提交資料庫
+
 conn.close()
