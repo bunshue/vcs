@@ -1,27 +1,37 @@
+'''
 import numpy as np
 import matplotlib.pyplot as plt
 
 fig = plt.figure()
-fig.subplots_adjust(top=0.8)
-ax1 = fig.add_subplot(211)
-ax1.set_ylabel('Voltage [V]')
-ax1.set_title('A sine wave')
+
+x_st = 0.15
+y_st = 0.60
+w = 0.7
+h = 0.3
+pic1 = fig.add_axes([x_st, y_st, w, h])
+
+pic1.set_ylabel('Voltage [V]')
+pic1.set_title('A sine wave')
 
 t = np.arange(0.0, 1.0, 0.01)
 s = np.sin(2*np.pi*t)
-line, = ax1.plot(t, s, color='blue', lw=2)
+line, = pic1.plot(t, s, color='blue', lw=2)
 
 # Fixing random state for reproducibility
-np.random.seed(19680801)
+np.random.seed(1234567)
 
-ax2 = fig.add_axes([0.15, 0.1, 0.7, 0.3])
-n, bins, patches = ax2.hist(np.random.randn(1000), 50,
+#設定圖表在整個視窗的位置與大小
+x_st = 0.15
+y_st = 0.10
+w = 0.7
+h = 0.3
+pic2 = fig.add_axes([x_st, y_st, w, h])
+N = 10 #資料數
+n, bins, patches = pic2.hist(np.random.randn(1000), N,
                             facecolor='yellow', edgecolor='yellow')
-ax2.set_xlabel('Time [s]')
+pic2.set_xlabel('Time [s]')
 
 plt.show()
-
-
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -37,7 +47,6 @@ ax.set_ylabel('Damped oscillation [V]')
 
 
 plt.show()
-
 
 
 
@@ -69,18 +78,19 @@ ax[1].set_title("margins(0.2)")
 
 plt.show()
 
-
-
-
+'''
 
 
 #直方圖
 import matplotlib.pyplot as plt
 from numpy.random import normal,rand
 x = normal(size=200)
-plt.hist(x,bins=30)
+
+N = 10 #資料數
+plt.hist(x,bins=N)
 plt.show()
 
+'''
 #散點圖
 import matplotlib.pyplot as plt
 from numpy.random import rand
@@ -88,6 +98,8 @@ a = rand(100)
 b = rand(100)
 plt.scatter(a,b)
 plt.show()
+'''
+
 
 
 

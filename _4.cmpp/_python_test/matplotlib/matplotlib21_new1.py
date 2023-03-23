@@ -196,7 +196,9 @@ import matplotlib.pyplot as plt
 fig = plt.figure()
 s = plt.scatter([1, 2, 3], [4, 5, 6])
 s.set_urls(['https://www.bbc.com/news', 'https://www.google.com/', None])
-fig.savefig('scatter.svg')
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/scatter.svg'
+fig.savefig(filename)
+print('已存圖' + filename)
 
 fig = plt.figure()
 delta = 0.025
@@ -210,7 +212,9 @@ im = plt.imshow(Z, interpolation='bilinear', cmap=cm.gray,
                 origin='lower', extent=[-3, 3, -3, 3])
 
 im.set_url('https://www.google.com/')
-fig.savefig('image.svg')
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/image.svg'
+fig.savefig(filename)
+print('已存圖' + filename)
 
 plt.show()
 

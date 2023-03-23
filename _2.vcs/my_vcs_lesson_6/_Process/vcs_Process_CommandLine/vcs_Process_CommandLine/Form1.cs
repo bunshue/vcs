@@ -14,8 +14,6 @@ namespace vcs_Process_CommandLine
 {
     public partial class Form1 : Form
     {
-        Process process_async = new Process();    //創建一個進程用於調用外部程序
-
         //一維List for string
         List<string> cmd_output_data = new List<string>();
 
@@ -26,6 +24,8 @@ namespace vcs_Process_CommandLine
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
+
             show_item_location();
 
             richTextBox2.KeyUp += new KeyEventHandler(richTextBox2_KeyUp);
@@ -211,6 +211,7 @@ namespace vcs_Process_CommandLine
             show_result_index = 0;
             //timer_get_result.Enabled = true;
 
+            Process process_async = new Process();    //創建一個進程用於調用外部程序
             process_async.StartInfo.FileName = exe_filename;  //設定要啟動的程式
             //process_async.StartInfo.Arguments = "/c " + command; //設定程式執行參數, 也可直接把command寫在這裡, 就不用後面的 StandardInput.WriteLine 了, 要加/c
             //process_async.StartInfo.Arguments = "/c systeminfo";  //可, 要加/c
@@ -240,20 +241,23 @@ namespace vcs_Process_CommandLine
 
             richTextBox1.Text += "等待程式結束.......\n";
             process_async.WaitForExit();	//等待退出
-            richTextBox1.Text += "程式結束\n";
+            //richTextBox1.Text += "程式結束\n";
+
+            process_async.CancelOutputRead();
+            process_async.CancelErrorRead();
+            process_async.Dispose();
         }
 
         void OutputHandler(object sendingProcess, DataReceivedEventArgs outLine)
         {
-            /*
             //目前無法做到換行, 也不能操作richTextBox的內容
             richTextBox1.Text += outLine.Data;
 
             //跳至最後面 fail
             //richTextBox1.Focus();
             //richTextBox1.Select(richTextBox1.Text.Length, 0);
-            */
 
+            /*
             if (process_async.HasExited == false)
             {
                 Console.WriteLine("process.HasExited = " + process_async.HasExited.ToString());
@@ -266,6 +270,7 @@ namespace vcs_Process_CommandLine
             {
                 cmd_output_data.Add("已結束");
             }
+            */
         }
 
         private void button6_Click(object sender, EventArgs e)

@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E150A5C6-0F7A-4286-89A4-220CD313C897}</ProjectGuid>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <RootNamespace>BinaryComponents.WorldClocks</RootNamespace>
+    <AssemblyName>WorldClocks</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <WarningLevel>4</WarningLevel>
+    <OutputType>winexe</OutputType>
+    <PublishUrl>Publish\</PublishUrl>
+    <StartupObject>BinaryComponents.WorldClocks.App</StartupObject>
+    <ApplicationIcon>Resources\Icons\WorldClocks.ico</ApplicationIcon>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>3.5</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="UIAutomationProvider">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationCore">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Page Include="Controls\Clock.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ClockDisplay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TimeZoneMap.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\ChooseTimeZoneWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\SettingsWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Windows\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\Clock.xaml.cs">
+      <DependentUpon>Clock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ClockDisplay.xaml.cs">
+      <DependentUpon>ClockDisplay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TimeZoneMap.xaml.cs">
+      <DependentUpon>TimeZoneMap.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Settings.cs" />
+    <Compile Include="Data\TimeInfo.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Windows\ChooseTimeZoneWindow.xaml.cs">
+      <DependentUpon>ChooseTimeZoneWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SettingsWindow.xaml.cs">
+      <DependentUpon>SettingsWindow.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\WorldClocks.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Components\PresentationUtility\PresentationUtility.csproj">
+      <Project>{65A1D572-3648-4D14-B3BD-D647A61EF833}</Project>
+      <Name>PresentationUtility</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Icons\WorldClocksTray.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\L1.png" />
+    <Resource Include="Resources\Images\L10.png" />
+    <Resource Include="Resources\Images\L2.png" />
+    <Resource Include="Resources\Images\L3.5.png" />
+    <Resource Include="Resources\Images\L3.png" />
+    <Resource Include="Resources\Images\L4.png" />
+    <Resource Include="Resources\Images\L5.png" />
+    <Resource Include="Resources\Images\L6.png" />
+    <Resource Include="Resources\Images\L7.png" />
+    <Resource Include="Resources\Images\L8.png" />
+    <Resource Include="Resources\Images\L9.5.png" />
+    <Resource Include="Resources\Images\L9.png" />
+    <Resource Include="Resources\Images\R1.png" />
+    <Resource Include="Resources\Images\R10.png" />
+    <Resource Include="Resources\Images\R11.png" />
+    <Resource Include="Resources\Images\R12.png" />
+    <Resource Include="Resources\Images\R2.png" />
+    <Resource Include="Resources\Images\R3.5.png" />
+    <Resource Include="Resources\Images\R3.png" />
+    <Resource Include="Resources\Images\R4.5.png" />
+    <Resource Include="Resources\Images\R4.png" />
+    <Resource Include="Resources\Images\R5.5.png" />
+    <Resource Include="Resources\Images\R5.png" />
+    <Resource Include="Resources\Images\R6.png" />
+    <Resource Include="Resources\Images\R7.png" />
+    <Resource Include="Resources\Images\R8.png" />
+    <Resource Include="Resources\Images\R9.5.png" />
+    <Resource Include="Resources\Images\R9.png" />
+    <Resource Include="Resources\Images\World.png" />
+    <Resource Include="Resources\Images\Z0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\R6.5.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

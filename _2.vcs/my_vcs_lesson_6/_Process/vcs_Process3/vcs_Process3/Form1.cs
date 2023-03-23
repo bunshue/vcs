@@ -20,6 +20,17 @@ namespace vcs_Process3
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
+            list_all_processes();
+        }
+
+        private void bt_clear_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Clear();
+        }
+
+        void list_all_processes()
+        {
             listBox1.Items.Clear();
 
             richTextBox1.Text += "取得所有程序\n";
@@ -44,6 +55,8 @@ namespace vcs_Process3
 
         private void button1_Click(object sender, EventArgs e)
         {
+            if (listBox1.SelectedItem == null)
+                return;
             richTextBox1.Text += "欲關閉程序名稱 : " + listBox1.SelectedItem.ToString().Trim() + "\n";
             Process[] processes = Process.GetProcessesByName(listBox1.SelectedItem.ToString().Trim());
             foreach (Process process in processes)
@@ -54,5 +67,18 @@ namespace vcs_Process3
 
             richTextBox1.Text += "程序已關閉\n";
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            list_all_processes();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (listBox1.SelectedItem == null)
+                return;
+            richTextBox1.Text += "selected = " + listBox1.SelectedItem.ToString() + "\n";
+        }
+
     }
 }

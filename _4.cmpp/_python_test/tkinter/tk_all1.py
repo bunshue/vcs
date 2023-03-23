@@ -12,11 +12,16 @@ window.geometry(size)
 title = "這是主視窗"
 window.title(title)
 
-tk.Label(window, text='紅', bg='red', width=20).pack()
-tk.Label(window, text='綠', bg='green', width=20).pack()
-tk.Label(window, text='藍', bg='blue', width=20).pack()
+# Label測試
+tk.Label(text='有背景色的Label測試').pack()
+tk.Label(window, text='有背景色的Label 紅', bg='red',   width=20).pack()
+tk.Label(        text='有背景色的Label 綠', bg='green', width=30).pack()
+tk.Label(window, text='有背景色的Label 藍', bg='blue',  width=20).pack()
 
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
 
+# CheckBox測試
+tk.Label(text='CheckBox測試').pack(anchor=tk.W)
 topping = {0:'海苔', 1:'水煮蛋', 2:'豆芽菜', 3:'叉燒'}
 
 check_value={}
@@ -30,10 +35,12 @@ def buy():
 		if check_value[i].get() == True:
 			print(topping[i])
 
-tk.Button(window, text='點菜', command=buy).pack()
+tk.Button(window, text='點菜', command=buy).pack(anchor=tk.W)
 
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
 
-
+# RadioButton測試
+tk.Label(text='RadioButton測試').pack()
 radio_value = tk.IntVar()
 radio_value.set(1)
 lunch = {0:'A套餐',1:'B套餐',2:'C套餐'}
@@ -46,15 +53,18 @@ def buy():
 
 tk.Button(window, text='點菜', command=buy).pack()
 
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
 
-
-
+# Entry與Label測試
+tk.Label(text='Entry與Label測試').pack()
 string = tk.StringVar()
 entry = tk.Entry(window, textvariable=string).pack()
 label = tk.Label(window, textvariable=string).pack()
 
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
 
-
+# Button測試
+tk.Label(text='Button測試').pack()
 def clickme():
     global count
     count += 1
@@ -76,9 +86,10 @@ button1 = tk.Button(window, textvariable=btntext, command=clickme)
 btntext.set("按我！")
 button1.pack()
 
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
 
-
-
+# Frame測試
+tk.Label(text='Frame測試').pack()
 frame1 = tk.Frame(window)
 frame1.pack()
 

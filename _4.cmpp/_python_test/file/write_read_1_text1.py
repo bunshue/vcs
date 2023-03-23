@@ -7,11 +7,6 @@ fo = open(filename_rw, 'w')
 fo.write('this is sample of python.')
 fo.close()
 
-print("寫入檔案 : " + filename_rw)
-fo = open(filename_rw, 'w')
-fo.write('this is sample of python.\n')
-fo.flush()	
-
 print("讀取檔案 : " + filename_rw)
 fo = open(filename_rw, 'r')
 fo.read()

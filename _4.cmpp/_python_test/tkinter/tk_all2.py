@@ -12,9 +12,8 @@ window.geometry(size)
 title = "這是主視窗"
 window.title(title)
 
-
-print('ListBox測試')
-
+# ListBox測試
+tk.Label(text='ListBox測試').pack()
 listbox = tk.Listbox(window)
 listbox.pack()
 
@@ -23,22 +22,12 @@ listbox.insert(tk.END, "a list entry")
 for item in ["one", "two", "three", "four"]:
     listbox.insert(tk.END, item)
 
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
 
-
-print('Label測試')
-
-tk.Label(text="one").pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN)
-separator.pack(fill=tk.X, padx=5, pady=5)
-
-tk.Label(text="two").pack()
-
-
-print('RadioButton測試')
+# RadioButton測試
+tk.Label(text='RadioButton測試').pack()
 
 v = tk.IntVar()
-
 tk.Radiobutton(window, text="One", variable=v, value=1).pack(anchor=tk.W)
 tk.Radiobutton(window, text="Two", variable=v, value=2).pack(anchor=tk.W)
 
@@ -57,7 +46,7 @@ for text, mode in MODES:
     b.pack(anchor=tk.W)
 
 
-
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
 
 def changeString():
     stringToCopy = entry.get()
@@ -90,7 +79,7 @@ class App:
 app = App(window)
 
 
-
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
 
 import time
 
@@ -104,7 +93,7 @@ label.pack()
 #label.config(text="Time: " + str(score))
 
 
-
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
 
 print('Label 測試')
 w = tk.Label(window, text="Hello, world!")
@@ -115,6 +104,7 @@ color = "#FF0000"
 canvas = tk.Canvas(window, width=300, height=50, bg=color)
 canvas.pack()
 
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
 
 print('Scale 測試')
 slider = tk.Scale(window, from_=0, to=100)

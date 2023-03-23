@@ -38,7 +38,12 @@ namespace vcs_Process5
             //C# 跨 Thread 存取 UI
             Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效
 
+            label1.Text = "偵測程式 : " + program_name;
             richTextBox1.Text += "偵測程式 : " + program_name + " 開始, 時間 : " + DateTime.Now.ToString() + "\n";
+            if (falg_keep_program_running == true)
+                richTextBox1.Text += "維持程式運行模式\n";
+            else
+                richTextBox1.Text += "監控模式\n";
         }
 
         private void process_exited(object sender, EventArgs e)//被觸發的程序

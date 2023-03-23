@@ -1,0 +1,32 @@
+# python import module : requests
+
+from bs4 import BeautifulSoup
+import requests
+import sys
+
+url = 'https://www.google.com.tw/'
+
+html = requests.get(url).text
+sp = BeautifulSoup(html, 'html.parser')
+all_links = sp.find_all('a')
+
+for link in all_links:
+    href = link.get('href')
+    if href != None and href.startswith('http://'):
+        print('取得資料')
+        print(href)
+
+
+
+
+
+
+
+
+
+
+
+print('OK')
+
+
+

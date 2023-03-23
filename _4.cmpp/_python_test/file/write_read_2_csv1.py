@@ -183,5 +183,23 @@ print(data)
 
 
 
+import csv
+
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/zipcode.csv'
+
+with open(filename, 'r', encoding='utf-8') as f:
+    datas = csv.reader(f)
+    for data in datas:
+        if data != "":
+            sqlstr = "insert into zipcode (Zip5, City, Area, Road, Scope) values ('{}', '{}', '{}', '{}', '{}')".format(data[0], data[1], data[2], data[3], data[4])
+            print(sqlstr)
+            #cursor.execute(sqlstr)
+
+
+
+
+
+
+
 
 
