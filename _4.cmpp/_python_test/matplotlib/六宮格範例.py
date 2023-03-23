@@ -1,4 +1,4 @@
-# bar 集合
+# plot 集合
 
 selected_font = 'C:/_git/vcs/_4.cmpp/_python_test/data/msch.ttf'
 

@@ -55,6 +55,29 @@ tk.Button(window, text='點菜', command=buy).pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
 
+# RadioButton測試
+tk.Label(text='RadioButton測試').pack()
+
+v = tk.IntVar()
+tk.Radiobutton(window, text="One", variable=v, value=1).pack(anchor=tk.W)
+tk.Radiobutton(window, text="Two", variable=v, value=2).pack(anchor=tk.W)
+
+MODES = [
+    ("Monochrome", "1"),
+    ("Grayscale", "L"),
+    ("True color", "RGB"),
+    ("Color separation", "CMYK"),
+]
+
+v = tk.StringVar()
+v.set("L") # initialize
+
+for text, mode in MODES:
+    b = tk.Radiobutton(window, text=text, variable=v, value=mode)
+    b.pack(anchor=tk.W)
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
+
 # Entry與Label測試
 tk.Label(text='Entry與Label測試').pack()
 string = tk.StringVar()
@@ -88,151 +111,9 @@ button1.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
 
-# Frame測試
-tk.Label(text='Frame測試').pack()
-frame1 = tk.Frame(window)
-frame1.pack()
-
-label1=tk.Label(frame1, text="標籤一：")
-entry1 = tk.Entry(frame1)
-label1.grid(row=0, column=0)
-entry1.grid(row=0, column=1)
-
-frame2 = tk.Frame(window)
-frame2.pack()
-
-button1 = tk.Button(frame2, text="確定")
-button2 = tk.Button(frame2, text="取消")
-button1.grid(row=0, column=0)
-button2.grid(row=0, column=1)
-
-
-
-w = tk.Canvas(window, width=200, height=100)
-w.pack()
-w.create_line(0, 0, 200, 100)
-w.create_line(0, 100, 200, 0, fill="red", dash=(4, 4))
-w.create_rectangle(50, 25, 150, 75, fill="blue")
-
-
-
-#w = tk.Message(window, text="this is a relatively long message")    #自動換行
-w = tk.Message(window, text="this is a relatively long message", width=50)  #限定寬度
-w.pack()
-
-
-
-#GroupBox之大小, 若小於內附控件大小, 則會撐大
-w = 10
-h = 10
-group = tk.LabelFrame(window, text="Group", padx=w, pady=h)
-
-#GroupBox之位置, 相較於目前表單位置
-x_st = 0
-y_st = 0
-group.pack(padx=x_st, pady=y_st)
-
-#GroupBox內 放幾個控件
-w = tk.Entry(group).pack()
-w = tk.Entry(group).pack()
-w = tk.Entry(group).pack()
-w = tk.Entry(group).pack()
-
-
-
-
-'''
-import tkinter as tk
-
-import tkinter.messagebox as msg
-
-window = tk.Tk()
-
-window.withdraw()
-
-response = msg.askyesno('糟糕!!!', '還好嗎？')
-
-
-if(response==True):
-	print('沒問題');
-else:
-	print('有問題');
-	
-
-
-
-
-
-import tkinter as tk
-
-window = tk.Tk()
-
-def supermode():
-	print('super mode!')
-
-menubar = tk.Menu(window)
-
-filemenu = tk.Menu(menubar)
-
-filemenu.add_command(label='supermode', command=supermode)
-
-menubar.add_cascade(label='Operation', menu=filemenu)
-
-window.config(menu=menubar)
-
-
-
-
-
-
-import tkinter as tk
-
-import tkinter.filedialog as fd
-
-window = tk.Tk()
-
-def open():
-	filename = fd.askopenfilename()
-	print('open file => ' + filename)
-
-def exit():
-	window.destroy()
-
-
-def find():
-	print('find ! ')
-
-
-menubar = tk.Menu(window)
-
-filemenu = tk.Menu(menubar)
-
-menubar.add_cascade(label='File', menu=filemenu)
-
-filemenu.add_command(label='open', command=open)
-
-filemenu.add_separator()
-
-filemenu.add_command(label='exit', command=exit)
-
-editmenu = tk.Menu(menubar)
-
-menubar.add_cascade(label='Edit', menu=editmenu)
-
-editmenu.add_command(label='find', command=find)
-
-window.config(menu=menubar)
-
-
-
-'''
-
-
-
-
 window.mainloop()
 
-window.destroy() # optional; see description below
+#window.destroy()
 
 
 

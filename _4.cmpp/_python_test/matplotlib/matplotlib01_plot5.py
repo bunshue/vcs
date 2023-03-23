@@ -1,57 +1,50 @@
-# Python æ–°é€²æ¸¬è©¦ 17
+# plot ¶°¦X
 
+selected_font = 'C:/_git/vcs/_4.cmpp/_python_test/data/msch.ttf'
 
-
-print("ç•«åœ–è¡¨ 1")
 import matplotlib.pyplot as plt
+import numpy as np
 
-listx = [1,5,7,9,13,16]
-listy = [15,50,80,40,70,50]
-plt.plot(listx, listy, 'g--*', markersize=12)
+#plt.figure(figsize=(8,8))	#³]©w¹Ï¤ùµøµ¡¤j¤p
+plt.figure(figsize=[12, 10], dpi=84, facecolor="whitesmoke", edgecolor="r", linewidth=1, frameon=True)
+#³]©w¤¤¤å¦r«¬¤Î­t¸¹¥¿½TÅã¥Ü
+#³]©w¤¤¤å¦r«¬ÀÉ
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # ±N¦rÅé´«¦¨ Microsoft JhengHei
+#³]©w­t¸¹
+plt.rcParams["axes.unicode_minus"] = False # Åı­t¸¹¥i¥¿±`Åã¥Ü
+
+#²Ä¤@±i¹Ï
+plt.subplot(231)
+
+
+
+#²Ä¤G±i¹Ï
+plt.subplot(232)
+
+
+
+#²Ä¤T±i¹Ï
+plt.subplot(233)
+
+
+
+#²Ä¥|±i¹Ï
+plt.subplot(234)
+
+
+
+#²Ä¤­±i¹Ï
+plt.subplot(235)
+
+
+
+#²Ä¤»±i¹Ï
+plt.subplot(236)
+
+
+
 plt.show()
 
 
-print("ç•«åœ–è¡¨ 2")
-import matplotlib.pyplot as plt
-
-listx = [1,5,7,9,13,16]
-listy = [15,50,80,40,70,50]
-plt.plot(listx, listy, color="red", lw="2.0", ls="--", label="label")
-plt.title("Chart Title", fontsize=20)	#åœ–è¡¨æ¨™é¡Œ
-plt.xlabel("X-Label", fontsize=14)		#xåº§æ¨™æ¨™é¡Œ
-plt.ylabel("Y-Label", fontsize=14)		#yåº§æ¨™æ¨™é¡Œ
-plt.legend()
-plt.show()
-
-
-print("ç•«åœ–è¡¨ 3")
-import matplotlib.pyplot as plt
-
-listx = [1,5,7,9,13,16]
-listy = [15,50,80,40,70,50]
-plt.plot(listx, listy, color="red", lw="2.0", ls="--", label="label")
-plt.title("Chart Title")	#åœ–è¡¨æ¨™é¡Œ
-plt.xlabel("X-Label")		#xåº§æ¨™æ¨™é¡Œ
-plt.ylabel("Y-Label")		#yåº§æ¨™æ¨™é¡Œ
-plt.xlim(0, 20)            #è¨­å®šxåº§æ¨™ç¯„åœ
-plt.ylim(0, 100)             #è¨­å®šyåº§æ¨™ç¯„åœ
-plt.legend()
-plt.show()
-
-
-print("ç•«åœ–è¡¨ 4")
-import matplotlib.pyplot as plt
-
-listx = [1,5,7,9,13,18]
-listy = [15,50,80,40,70,50]
-plt.plot(listx, listy, color="red", lw="2.0", ls="--", label="label")
-plt.title("Chart Title")	#åœ–è¡¨æ¨™é¡Œ
-plt.xlabel("X-Label")		#xåº§æ¨™æ¨™é¡Œ
-plt.ylabel("Y-Label")		#yåº§æ¨™æ¨™é¡Œ
-plt.xlim(0, 20)            #è¨­å®šxåº§æ¨™ç¯„åœ
-plt.ylim(0, 100)             #è¨­å®šyåº§æ¨™ç¯„åœ
-plt.grid(color='black', linestyle=":", linewidth='1', alpha=0.5)
-plt.legend()
-plt.show()
 
 

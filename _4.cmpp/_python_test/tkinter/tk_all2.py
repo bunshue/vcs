@@ -24,30 +24,6 @@ for item in ["one", "two", "three", "four"]:
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
 
-# RadioButton測試
-tk.Label(text='RadioButton測試').pack()
-
-v = tk.IntVar()
-tk.Radiobutton(window, text="One", variable=v, value=1).pack(anchor=tk.W)
-tk.Radiobutton(window, text="Two", variable=v, value=2).pack(anchor=tk.W)
-
-MODES = [
-    ("Monochrome", "1"),
-    ("Grayscale", "L"),
-    ("True color", "RGB"),
-    ("Color separation", "CMYK"),
-]
-
-v = tk.StringVar()
-v.set("L") # initialize
-
-for text, mode in MODES:
-    b = tk.Radiobutton(window, text=text, variable=v, value=mode)
-    b.pack(anchor=tk.W)
-
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
-
 def changeString():
     stringToCopy = entry.get()
     #stringToCopy = stringToCopy[::-1]
@@ -81,6 +57,14 @@ app = App(window)
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
 
+tk.Label(text='Canvas 測試').pack()
+color = "#FF0000"
+canvas = tk.Canvas(window, width=300, height=50, bg=color)
+canvas.pack()
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
+
+
 import time
 
 slider = tk.Scale(window, from_=0, to=10)
@@ -95,27 +79,20 @@ label.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
 
-print('Label 測試')
-w = tk.Label(window, text="Hello, world!")
-w.pack()
-
-print('Canvas 測試')
-color = "#FF0000"
-canvas = tk.Canvas(window, width=300, height=50, bg=color)
-canvas.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
-
 print('Scale 測試')
 slider = tk.Scale(window, from_=0, to=100)
 slider.pack()
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
 
 
 print('Checkbutton 測試')
 var = tk.IntVar()
 
-c = tk.Checkbutton(window, text="Expand", variable=var)
+c = tk.Checkbutton(window, text="CheckButton", variable=var)
 c.pack()
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
 
 
 

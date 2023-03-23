@@ -1,21 +1,7 @@
-'''
 import numpy as np
 import matplotlib.pyplot as plt
 
 fig = plt.figure()
-
-x_st = 0.15
-y_st = 0.60
-w = 0.7
-h = 0.3
-pic1 = fig.add_axes([x_st, y_st, w, h])
-
-pic1.set_ylabel('Voltage [V]')
-pic1.set_title('A sine wave')
-
-t = np.arange(0.0, 1.0, 0.01)
-s = np.sin(2*np.pi*t)
-line, = pic1.plot(t, s, color='blue', lw=2)
 
 # Fixing random state for reproducibility
 np.random.seed(1234567)
@@ -33,6 +19,8 @@ pic2.set_xlabel('Time [s]')
 
 plt.show()
 
+
+'''
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -80,6 +68,7 @@ plt.show()
 
 '''
 
+'''
 
 #直方圖
 import matplotlib.pyplot as plt
@@ -89,6 +78,7 @@ x = normal(size=200)
 N = 10 #資料數
 plt.hist(x,bins=N)
 plt.show()
+'''
 
 '''
 #散點圖
