@@ -1,4 +1,17 @@
-# subplot 畫4圖
+# plot 集合
+
+selected_font = 'C:/_git/vcs/_4.cmpp/_python_test/data/msch.ttf'
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+#plt.figure(figsize=(8,8))	#設定圖片視窗大小
+plt.figure(num = 'plot 集合 6', figsize=[20, 15], dpi=84, facecolor="whitesmoke", edgecolor="r", linewidth=1, frameon=True)
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -40,25 +53,42 @@ for yr in yrlist:
 yr = range(1986, 2016)
 ind = np.arange(len(bp))
 
-plt.subplot(221)
+#第一張圖
+plt.subplot(231)
+
 plt.plot(yr, bp, lw=2)
 plt.xlim(1986,2015)
 plt.title('1986 - 2015 (Total)')
 
-plt.subplot(222)
+#第二張圖
+plt.subplot(232)
+
 plt.plot(yr, school,lw=2)
 plt.xlim(1986,2015)
 plt.title('1986 - 2015 School Numbers')
 
-plt.subplot(223)
+#第三張圖
+plt.subplot(233)
+
 plt.plot(yr, list(map(f1, ind)), lw=2)
 plt.xlim(1986,2015)
 plt.title('Person/School')
 
-plt.subplot(224)
+#第四張圖
+plt.subplot(234)
+
 plt.plot(yr, list(map(f2, ind)), lw=2, color='r')
 plt.xlim(1986,2015)
 plt.title('School/Person')
 
+#第五張圖
+plt.subplot(235)
+
+
+
+#第六張圖
+plt.subplot(236)
+
 plt.show()
+
 

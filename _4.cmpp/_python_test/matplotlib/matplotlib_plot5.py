@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-print("在圖表的指定地方畫圖")
+print("在圖表的指定地方畫圖, 不用subplot")
 
 listx = [1,2,3,4,5]
 listy = [15,50,80,40,70]
