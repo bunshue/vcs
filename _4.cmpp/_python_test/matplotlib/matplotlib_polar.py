@@ -16,6 +16,6 @@ xticks(xt, ['' for q in range(len(xt))])
 yticks(yt, ['' for q in range(len(yt))])
 
 #存圖命令
-savefig('logarithmic_spiral.svg')
+#savefig('logarithmic_spiral.svg')
 
 show()

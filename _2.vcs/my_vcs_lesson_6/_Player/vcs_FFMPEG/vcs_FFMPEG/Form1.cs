@@ -439,7 +439,7 @@ namespace vcs_FFMPEG
                 //-vcodec copy : 影像編碼格式和來源檔案相同
                 string command_arg = "-y -i \"" + mp3_filename + "\" -ss " + startTime + " -t " + cutTime + " -acodec copy \"" + mp3_cut_filename + "\"";
 
-                ExcuteProcess(ffmpeg_filename, command_arg);
+                run_command_line_process2(ffmpeg_filename, command_arg);
 
                 richTextBox1.Text += "命令 : " + ffmpeg_filename + "\n";
                 richTextBox1.Text += "參數 : " + command_arg + "\n";
@@ -560,16 +560,16 @@ namespace vcs_FFMPEG
 
 
             // Execute command to let FFMPEG extract the frame
-            Execute(ffmpeg_filename, cmdParams);
+            run_command_line_process1(ffmpeg_filename, cmdParams);
         }
 
-        private static string Execute(string exePath, string parameters)
+        private static string run_command_line_process1(string exe_filename, string parameters)
         {
             string result = String.Empty;
 
             using (Process process = new Process()) //創建一個進程用於調用外部程序
             {
-                process.StartInfo.FileName = exePath;
+                process.StartInfo.FileName = exe_filename;
                 process.StartInfo.Arguments = parameters;
                 process.StartInfo.UseShellExecute = false;  //false, 關閉Shell的使用, 是否指定操作系統外殼進程啟動程序, 可能接受來自調用程序的輸入信息
                 process.StartInfo.RedirectStandardInput = true; //重定向標準輸入, 可能接受來自調用程序的輸入信息
@@ -620,7 +620,7 @@ namespace vcs_FFMPEG
             //ffmpeg -i input.mp4 -vf scale = 3840x2560：flags = lanczos -c：v libx264 -preset slow -crf 21 output_compress_4k.mp4
 
             // Execute command to let FFMPEG extract the frame
-            Execute(ffmpeg_filename, cmdParams);
+            run_command_line_process1(ffmpeg_filename, cmdParams);
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -643,7 +643,6 @@ namespace vcs_FFMPEG
         /// </summary>
         /// <param name="vFileName">視頻文件地址,如:/Web/FlvFile/User1/00001.Flv</param>
         /// <returns>成功:返回圖片虛擬地址; 失敗:返回空字符串</returns>
-
         public string CatchImg(string vFileName)
         {
             if ((File.Exists(ffmpeg_filename) == false) || (File.Exists(vFileName) == false))
@@ -767,7 +766,7 @@ namespace vcs_FFMPEG
 
             try
             {
-                ExcuteProcess(ffmpeg_filename, "-y -ab " + bitrate + " -ar " + Hz.ToString() + " -i \"" + filename1 + "\" \"" + filename2 + "\"");
+                run_command_line_process2(ffmpeg_filename, "-y -ab " + bitrate + " -ar " + Hz.ToString() + " -i \"" + filename1 + "\" \"" + filename2 + "\"");
 
                 richTextBox1.Text += "-y -ab " + bitrate + " -ar " + Hz.ToString() + " -i \"" + filename1 + "\" \"" + filename2 + "\"";
                 richTextBox1.Text += "轉換完成\n";
@@ -794,7 +793,7 @@ namespace vcs_FFMPEG
                 //-vcodec copy : 影像編碼格式和來源檔案相同
                 string command_arg = "-y -i \"" + mp3_filename + "\" -ss " + startTime + " -t " + cutTime + " -acodec copy \"" + mp3_cut_filename + "\"";
 
-                ExcuteProcess(ffmpeg_filename, command_arg);
+                run_command_line_process2(ffmpeg_filename, command_arg);
 
                 richTextBox1.Text += "命令 : " + ffmpeg_filename + "\n";
                 richTextBox1.Text += "參數 : " + command_arg + "\n";
@@ -806,17 +805,12 @@ namespace vcs_FFMPEG
             }
         }
 
-        /// <summary>
-        /// 轉換函數
-        /// </summary>
-        /// <param name="exe">ffmpeg程序</param>
-        /// <param name="arg">執行參數</param>
-        public static void ExcuteProcess(string exe, string arg)
+        public static void run_command_line_process2(string exe_filename, string parameters)
         {
             using (Process process = new Process())
             {
-                process.StartInfo.FileName = exe;
-                process.StartInfo.Arguments = arg;
+                process.StartInfo.FileName = exe_filename;
+                process.StartInfo.Arguments = parameters;
                 process.StartInfo.UseShellExecute = false;  //false, 關閉Shell的使用, 是否指定操作系統外殼進程啟動程序, 可能接受來自調用程序的輸入信息
                 process.StartInfo.RedirectStandardInput = true; //重定向標準輸入, 可能接受來自調用程序的輸入信息
                 process.StartInfo.RedirectStandardOutput = true; //重定向標準輸出, 由調用程序獲取輸出信息
@@ -829,7 +823,6 @@ namespace vcs_FFMPEG
                 process.BeginErrorReadLine();
                 process.WaitForExit();//等待進程結束                                        
             }
-
         }
 
         private void button12_Click(object sender, EventArgs e)
@@ -855,12 +848,8 @@ namespace vcs_FFMPEG
             //CMD 命令  通過ffmpeg執行一條CMD命令可以讀取出視頻的幀高度和幀寬度信息。
             //C:\______test_files\_exe>ffmpeg.exe -i "C:\______test_files\_video\i2c.avi"
 
-            //string ffmpeg_filename = @"C:\______test_files\_exe\ffmpeg.exe";
-
             string video_filename1 = @"C:\______test_files\_video\i2c.avi";
             string video_filename2 = @"D:\內視鏡影片\190902-0827.mp4";
-
-            //System.Diagnostics.Process.Start(ffmpeg_filename, video_filename);
 
             int? width, height;
 
