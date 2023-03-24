@@ -30,7 +30,7 @@ for value in stocklist:
     listx.append(value.date.strftime('%Y-%m-%d'))
     listy.append(value.close)
 
-plt.figure(figsize=(10,10)) # 設定圖表區寬高
+plt.figure(num = '股票分析', figsize=(10,10)) # 設定圖表區寬高
 
 plt.xlabel('日期', fontsize="16") # 設定 x 軸標題內容及大小
 plt.ylabel('股價', fontsize="16") # 設定 y 軸標題標題內容及大小

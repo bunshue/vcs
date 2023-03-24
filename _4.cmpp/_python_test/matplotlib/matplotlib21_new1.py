@@ -1,36 +1,4 @@
-import matplotlib.pyplot as plt
-import matplotlib.image as img
-from PIL import Image, ImageEnhance
 
-filename = 'C:/______test_files/_emgu/lena.jpg'
-
-plt.figure(figsize=(10,10))    # 改變圖表尺寸 單位是英吋
-
-image1 = Image.open(filename)              # 開啟圖片
-enhancer = ImageEnhance.Brightness(image1)   # 建立調整亮度的方法
-
-# 顯示原圖
-plt.subplot(221)                   # 建立 2x2 子圖表的左上方圖表
-plt.imshow(image1)                  # 在子圖表中繪製圖片
-
-# 顯示亮度 x0.5 的圖片
-image2 = enhancer.enhance(0.5)  # 顯示亮度 x0.5 的圖片
-plt.subplot(222)                   # 建立 2x2 子圖表的右上方圖表
-plt.imshow(image2)                  # 在子圖表中繪製圖片
-
-plt.subplot(223)                   # 建立 2x2 子圖表的左下方圖表
-image3 = enhancer.enhance(1.5)  # 顯示亮度 x1.5 的圖片
-plt.imshow(image3)                  # 在子圖表中繪製圖片
-
-plt.subplot(224)                   # 建立 2x2 子圖表的右下方圖表
-image4 = enhancer.enhance(3)    # 顯示亮度 x3 的圖片
-plt.imshow(image4)                  # 在子圖表中繪製圖片
-
-plt.show()
-
-
-
-'''
 #Layer Images
 import matplotlib.pyplot as plt
 import numpy as np
@@ -67,9 +35,9 @@ im2 = plt.imshow(Z2, cmap=plt.cm.viridis, alpha=.9, interpolation='bilinear',
                  extent=extent)
 
 plt.show()
-'''
 
-'''
+
+
 # Subplots spacings and margins
 import matplotlib.pyplot as plt
 import numpy as np
@@ -87,7 +55,8 @@ cax = plt.axes([0.85, 0.1, 0.075, 0.8])
 plt.colorbar(cax=cax)
 
 plt.show()
-'''
+
+
 
 '''
 #Dolphins
@@ -187,37 +156,5 @@ ax.add_patch(dolphin_patch2)
 
 plt.show()
 '''
-
-#Hyperlinks
-import numpy as np
-import matplotlib.cm as cm
-import matplotlib.pyplot as plt
-
-fig = plt.figure()
-s = plt.scatter([1, 2, 3], [4, 5, 6])
-s.set_urls(['https://www.bbc.com/news', 'https://www.google.com/', None])
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/scatter.svg'
-fig.savefig(filename)
-print('已存圖' + filename)
-
-fig = plt.figure()
-delta = 0.025
-x = y = np.arange(-3.0, 3.0, delta)
-X, Y = np.meshgrid(x, y)
-Z1 = np.exp(-X**2 - Y**2)
-Z2 = np.exp(-(X - 1)**2 - (Y - 1)**2)
-Z = (Z1 - Z2) * 2
-
-im = plt.imshow(Z, interpolation='bilinear', cmap=cm.gray,
-                origin='lower', extent=[-3, 3, -3, 3])
-
-im.set_url('https://www.google.com/')
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/image.svg'
-fig.savefig(filename)
-print('已存圖' + filename)
-
-plt.show()
-
-
 
 

@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 #plt.figure(figsize=(8,8))	#設定圖片視窗大小
-plt.figure(figsize=[12, 10], dpi=84, facecolor="whitesmoke", edgecolor="r", linewidth=1, frameon=True)
+plt.figure(num = 'plot 集合 4', figsize=[20, 15], dpi=84, facecolor="whitesmoke", edgecolor="r", linewidth=1, frameon=True)
 #設定中文字型及負號正確顯示
 #設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei

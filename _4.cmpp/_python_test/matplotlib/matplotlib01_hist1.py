@@ -1,4 +1,4 @@
-# bar 集合
+# hist 集合
 
 selected_font = 'C:/_git/vcs/_4.cmpp/_python_test/data/msch.ttf'
 
@@ -16,11 +16,21 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 #第一張圖
 plt.subplot(231)
 
+# Fixing random state for reproducibility
+np.random.seed(1234567)
 
+N = 10 #資料數
+plt.hist(np.random.randn(1000), N, facecolor='yellow', edgecolor='yellow')
 
 #第二張圖
 plt.subplot(232)
 
+import matplotlib.pyplot as plt
+from numpy.random import normal,rand
+x = normal(size=200)
+
+N = 10 #資料數
+plt.hist(x,bins=N)
 
 
 #第三張圖
