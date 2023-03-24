@@ -6,24 +6,6 @@ url = 'https://oldsiao.neocities.org/'
 response = requests.get(url)
 print(response.text)
 
-print("抓取網頁資料 2")
-import requests
-#url = 'https://httpbin.org/get?value1=1&value2=2'
-url = 'https://tw.dictionary.search.yahoo.com/?value1=lion'
-#url = 'https://www.google.com.tw/'
-response = requests.get(url)
-print(response.text)
-print(response.status_code)
-if response.status_code == requests.codes.ok:
-    print("抓取網頁OK")
-else:
-    print("抓取網頁NG")
-
-
-
-
-
-
 
 import requests
 from bs4 import BeautifulSoup

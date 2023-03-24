@@ -142,7 +142,40 @@ data=data.decode('UTF-8')
 print(data)
 
 
+from urllib import parse
+
+url = 'https://www.cnblogs.com/angelyan/'
+
+result = parse.urlparse(url=url,scheme='http',allow_fragments=True)
+
+print(result)
+print(result.scheme)
 
 
+
+
+
+
+from urllib.parse import urlparse
+
+url = 'https://www.most.gov.tw/folksonomy/list?menu_id=ba3d22f3-96fd-4adf-a078-91a05b8f0166&filter_uid=none&listKeyword=&pageNum=2&pageSize=18&view_mode=listView&subSite=main&l=ch&tagUid='
+
+uc = urlparse(url)
+print("NetLoc:", uc.netloc)
+print("Path:", uc.path)
+
+q_cmds = uc.query.split('&')
+print("Query Commands:")
+for cmd in q_cmds:
+    print(cmd)
+
+
+#web = input("請輸入網址：")
+web = 'https://www.google.com.tw/'
+
+if web.startswith("http://") or web.startswith("https://"):
+    print("輸入的網址格式正確！")
+else:
+    print("輸入的網址格式錯誤！")
 
 
