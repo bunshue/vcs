@@ -1,6 +1,3 @@
-# _*_ coding: utf-8 *_*
-# 程式 10-8 (Python 3 version)
-
 from selenium import webdriver
 
 #lost
@@ -14,3 +11,4 @@ web.find_element_by_name('username').send_keys('your account')
 web.find_element_by_name('password').clear()
 web.find_element_by_name('password').send_keys('your password')
 web.find_element_by_id('login-send').click()
+

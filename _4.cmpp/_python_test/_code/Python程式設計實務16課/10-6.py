@@ -1,6 +1,3 @@
-# _*_ coding: utf-8 *_*
-# 程式 10-6 (Python 3 version)
-
 from selenium import webdriver
 urls = [
 'https://www.google.com.tw/',

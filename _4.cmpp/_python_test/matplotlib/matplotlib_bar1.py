@@ -53,14 +53,9 @@ print("水平長條圖");
 #繪製出水平 Bar，這邊使用的是 barh 函數，設定的是 height 寬度
 plt.barh(x, y, height=0.5, color='blue')
 
-#設定 x, y 及圖表標題
-plt.xlabel('x label', fontsize="10") # 設定 x 軸標題內容及大小
-plt.ylabel('y label', fontsize="10") # 設定 y 軸標題標題內容及大小
-plt.title('Bar title', fontsize="18") # 設定圖表標題內容及大小
-
-plt.title("資訊程式課程選修人數")
-plt.xlabel("程式課程")
-plt.ylabel("選修人數")
+plt.xlabel('程式課程', fontsize="10") # 設定 x 軸標題內容及大小
+plt.ylabel('選修人數', fontsize="10") # 設定 y 軸標題標題內容及大小
+plt.title('資訊程式課程選修人數', fontsize="18") # 設定圖表標題內容及大小
 
 
 #第三張圖
@@ -84,30 +79,26 @@ y2 = [20, 31, 24, 24, 33]
 plt.bar(x, y1, width=0.5, label='Male')
 plt.bar(x, y2, width=0.5, bottom=y1, label='Female')
 
-#設定 x, y 及圖表標題
-plt.xlabel('x label', fontsize="10") # 設定 x 軸標題內容及大小
-plt.ylabel('y label', fontsize="10") # 設定 y 軸標題標題內容及大小
-plt.title('Bar title', fontsize="18") # 設定圖表標題內容及大小
-
-#Step 5. 將圖表顯示出來，並顯示圖例名稱
+plt.xlabel('程式課程', fontsize="10") # 設定 x 軸標題內容及大小
+plt.ylabel('選修人數', fontsize="10") # 設定 y 軸標題標題內容及大小
+plt.title('資訊程式課程選修人數', fontsize="18") # 設定圖表標題內容及大小
 plt.legend()
 
 
 #第四張圖
 plt.subplot(234)
 
-listx = ['c','c++','c#','java','python']
-listy1 = [25,20,20,16,28]
-listy2 = [20,8,18,16,22]
+x = ['c','c++','c#','java','python']
+y1 = [25,20,20,16,28]
+y2 = [20,8,18,16,22]
 
-plt.bar(listx, listy1, width=0.5, label='男')
-plt.bar(listx, listy2, width=0.5, bottom=listy1, label='女')
+plt.bar(x, y1, width=0.5, label='男')
+plt.bar(x, y2, width=0.5, bottom=y1, label='女')
 
-plt.legend()
-plt.title("資訊程式課程選修人數")
 plt.xlabel("程式課程")
 plt.ylabel("選修人數")
-
+plt.title("資訊程式課程選修人數")
+plt.legend()
 
 #第五張圖
 plt.subplot(235)
@@ -123,29 +114,17 @@ plt.bar(listx1, listy1, width, label='男')
 plt.bar(listx2, listy2, width, label='女')
 
 plt.xticks(range(len(listx)), labels=listx)
-plt.legend()
-plt.title("資訊程式課程選修人數")
+
 plt.xlabel("程式課程")
 plt.ylabel("選修人數")
+plt.title("資訊程式課程選修人數")
+plt.legend()
 
 
 
 #第六張圖
 plt.subplot(236)
 
-
-listx = ['c','c++','c#','java','python']
-listy = [45,28,38,32,50]
-
-#直式
-#plt.bar(listx, listy, width=0.5, color='red')
-
-#橫式
-plt.barh(listx, listy, height=0.5, color='red')
-
-plt.title("資訊程式課程選修人數")
-plt.xlabel("程式課程")
-plt.ylabel("選修人數")
 
 
 

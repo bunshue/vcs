@@ -1,4 +1,6 @@
-import requests, jieba, operator
+import requests
+import jieba
+import operator
 from bs4 import BeautifulSoup
 
 url = 'https://tw.nextapple.com/realtime/headlines'
@@ -16,8 +18,14 @@ print(news_title)
 
 headlines = ''
 for t in news_title:
-	title = t.find_all('a')[0]
-	headlines += title.text
+        title = t.find_all('a')[0]
+        headlines += title.text
+        print(title.text)
+
+'''
+print('headlines')
+print(headlines)
+'''	
 
 words = jieba.cut(headlines)
 

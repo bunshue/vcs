@@ -1,6 +1,5 @@
 import os, time, glob, sys, shutil
 
-
 source_dir = 'C:/_git/vcs/_4.cmpp/_python_test/data/source_pic'
 target_dir = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/photos'
 if not os.path.exists(target_dir):
@@ -23,5 +22,4 @@ for imagefile in allfiles:
 			ext = '.' + ori_filename.split('.')[-1]
 			filename = ori_filename.split(ext)[0] + '_' + str(i) + ext
 			i = i + 1
-
 

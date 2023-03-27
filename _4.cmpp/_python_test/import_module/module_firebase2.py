@@ -1,6 +1,3 @@
-# _*_ coding: utf-8 _*_
-# 程式 11-4 (Python 3 version)
-
 from firebase import firebase
 db_url = 'https://python01.firebaseio.com'
 fdb = firebase.FirebaseApplication(db_url, None)

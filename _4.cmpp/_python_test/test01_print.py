@@ -22,7 +22,7 @@ a, b = b, a
 print(a, b)
 
 s = "Hello Python"
-print("字串 : " + s +", 長度 : "+str(len(s)))   # 要先轉成字串
+print("字串 : " + s + ", 長度 : " + str(len(s)))   # 要先轉成字串
 print("第0字元 " + s[0])     # prints "H"
 print("第1字元 " + s[1])     # prints "e"
 
@@ -77,11 +77,49 @@ list.sort()    # sorts the list in alphabetical order
 print("排序後, list全部內容"); 
 print(list)     # prints all elements
 
+print('list測試')
+#建立一個list
+moneytotal=[]
+i=0
+while i < 17:
+  moneytotal.append(0)
+  i=i+1
 
+print("moneytotal list 長度 : "+ str(len(moneytotal)))
+    
     
 print("格式化列印")
 print("姓名   座號  國文  數學  英文")
 print("%3s  %2d   %3d   %3d  %3d" % ("林大明", 1, 100, 87, 79))
 print("%3s  %2d   %3d   %3d  %3d" % ("陳阿中", 2, 74, 88, 100))
 print("%3s  %2d   %3d   %3d  %3d" % ("張小英", 11, 82, 65, 8))
+
+print("格式化列印")
+sentence = 'This is a lion-mouse'
+print('直接列印, 靠左對齊')
+print(sentence)
+print('40格 靠右對齊')
+print("%40s" % sentence)
+print("%40s" % 'This is a lion-mouse')
+
+print("不換行, 接著印")
+money = 123.456
+print("%10s" % money, end="")
+print("%10s" % money, end="")
+print("%10s" % money, end="")
+print("%10s" % money, end="")
+print("%10s" % money, end="")
+
+
+print("四捨五入")
+money = 123.456789123456789
+print('直接列印')
+print("%20s" % money)
+print("四捨五入到小數點以下第2位")
+print("%20s" % round(money, 2))
+
+
+
+
+
 

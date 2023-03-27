@@ -1,12 +1,83 @@
 import requests
-from bs4 import BeautifulSoup
 
-url = 'http://ehappy.tw/bsdemo1.htm'
-html = requests.get(url)
-html.encoding = 'UTF-8'
-sp = BeautifulSoup(html.text, 'html.parser')
+print('檢查HTTP回應碼是否為200(requests.code.ok)')
+url = 'http://www.ehappy.tw/demo.htm'
+r = requests.get(url)
+if r.status_code == requests.codes.ok:
+    print("擷取網頁資料 OK")
+    print(r.text)
+else:
+    print("擷取網頁資料 NG")
 
-print(sp.title)
-print(sp.title.text)
-print(sp.h1)
-print(sp.p)
+
+print('將查詢參數加入 POST 請求中')
+payload = {'key1': 'value1', 'key2': 'value2'}
+url = 'http://httpbin.org/post'
+r = requests.post(url, data=payload)
+print(r.text)
+
+print('將查詢參數定義為字典資料加入GET請求中')
+payload = {'key1': 'value1', 'key2': 'value2'}
+url = 'http://httpbin.org/get'
+r = requests.get(url, params=payload)
+print(r.text)
+
+
+
+print('設定查詢目前IP的api網址')
+url = 'https://api.ipify.org'
+r = requests.get(url)
+
+print('我目前的IP是：', r.text)
+
+
+print('設定cookies的值')
+
+url = 'https://www.ptt.cc/bbs/Gossiping/index.html'
+cookies = {'over18':'1'}
+r = requests.get(url, cookies=cookies)
+print(r.text)
+
+
+'''
+print('將自訂表頭加入 GET 請求中')
+
+url = 'https://irs.thsrc.com.tw/IMINT/'
+# 自訂表頭
+headers={
+   'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36'
+}
+r = requests.get(url, headers=headers)
+print(r)
+'''
+
+
+
+print("抓取網頁資料 2")
+#url = 'https://httpbin.org/get?value1=1&value2=2'
+url = 'https://tw.dictionary.search.yahoo.com/?value1=lion'
+#url = 'https://www.google.com.tw/'
+response = requests.get(url)
+print(response.text)
+print(response.status_code)
+if response.status_code == requests.codes.ok:
+    print("抓取網頁OK")
+else:
+    print("抓取網頁NG")
+
+
+
+
+print("抓取網頁資料 3")
+
+url = 'http://udb.moe.edu.tw/Home/About'
+#html = requests.get(url).text.splitlines()
+for i in range(0,15):
+    print(i)
+    #print(html[i])
+
+
+
+
+
+

@@ -1,11 +1,6 @@
-# _*_ coding: utf-8 _*_
-# 程式 11-6 (Python 3 version)
-
 from firebase import firebase
 db_url = 'https://python01.firebaseio.com'
-auth = firebase.FirebaseAuthentication('****', 'skynet.tw@gmail.com', 
-    extra={'eAuth': 'GX453Q3U7hTqjvtCnSf****BX8Fa8kI3v7f4gWNN'})
-fdb = firebase.FirebaseApplication(db_url, auth)
+fdb = firebase.FirebaseApplication(db_url, None)
 
 def disp_menu():
     print('統一發票號碼管理')
