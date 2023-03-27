@@ -1,9 +1,3 @@
-# _*_ coding: utf-8 _*_
-# 程式 9-9 (Python 3 version)
-
-from bs4 import BeautifulSoup
-import requests
-
 pre_html = '''
 <!DOCTYPE html>
 <html>
@@ -22,21 +16,9 @@ post_html = '''
 </body>
 </html>
 '''
-
-url = 'http://new.cpc.com.tw/division/mb/oil-more4.aspx'
-
-html = requests.get(url).text
-sp = BeautifulSoup(html, 'html.parser')
-data = sp.find_all('span', {'id':'Showtd'})
-rows = data[0].find_all('tr')
-
 prices = list()
-for row in rows:
-    cols = row.find_all('td')
-    if len(cols[1].text) > 0:
-        item = [cols[0].text, cols[1].text, \
-                cols[2].text, cols[3].text]
-        prices.append(item)
+#item = [cols[0].text, cols[1].text, cols[2].text, cols[3].text]
+prices.append('1234')
 
 html_body = ''
 for p in prices:

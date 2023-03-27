@@ -1,5 +1,5 @@
-# _*_ coding: utf-8 *_*
- 
+#世界地震資料 json格式
+
 import json, requests, datetime
  
 url = 'http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson'
