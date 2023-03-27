@@ -2,9 +2,9 @@ import requests
 from bs4 import BeautifulSoup
 
 url = 'http://ehappy.tw/bsdemo1.htm'
-html = requests.get(url)
-html.encoding = 'UTF-8'
-sp = BeautifulSoup(html.text, 'html.parser')
+html_data = requests.get(url)
+html_data.encoding = 'UTF-8'
+sp = BeautifulSoup(html_data.text, 'html.parser')
 
 print(sp.title)
 print(sp.title.text)
@@ -14,7 +14,7 @@ print(sp.p)
 
 from bs4 import BeautifulSoup
 
-html = '''
+html_data = '''
 <html>
   <head><meta charset="UTF-8"><title>我是網頁標題</title></head>
   <body>
@@ -24,7 +24,7 @@ html = '''
 </html>
 '''
 
-sp = BeautifulSoup(html, 'html.parser')
+sp = BeautifulSoup(html_data, 'html.parser')
 print(sp.find('p'))
 print(sp.find_all('p'))
 print(sp.find('p', {'id':'p2', 'class':'red'}))
@@ -33,7 +33,7 @@ print(sp.find('p', id='p2', class_= 'red'))
 
 from bs4 import BeautifulSoup
 
-html = '''
+html_data = '''
 <html>
   <head><meta charset="UTF-8"><title>我是網頁標題</title></head>
   <body>
@@ -43,7 +43,7 @@ html = '''
 </html>
 '''
 
-sp = BeautifulSoup(html, 'html.parser')
+sp = BeautifulSoup(html_data, 'html.parser')
 print(sp.select('title'))
 print(sp.select('p'))
 print(sp.select('#p1'))
@@ -54,7 +54,7 @@ print(sp.select('.red'))
 
 from bs4 import BeautifulSoup
 
-html = '''
+html_data = '''
 <html>
   <head><meta charset="UTF-8"><title>我是網頁標題</title></head>
   <body>
@@ -63,8 +63,7 @@ html = '''
   </body>
 </html>
 '''
-sp = BeautifulSoup(html, 'html.parser')
-
+sp = BeautifulSoup(html_data, 'html.parser')
 print(sp.select('img')[0].get('src'))
 print(sp.select('a')[0].get('href'))
 print(sp.select('img')[0]['src'])
@@ -72,7 +71,7 @@ print(sp.select('a')[0]['href'])
 
 
 
-html = """
+html_data = """
 <html><head><title>網頁標題</title></head>
 <h1>文件標題</h1>
 <div class="content">
@@ -87,7 +86,7 @@ html = """
 """
 
 from bs4 import BeautifulSoup
-sp = BeautifulSoup(html,'html.parser') 
+sp = BeautifulSoup(html_data, 'html.parser') 
 
 print(sp.title) # <title>網頁標題</title>
 

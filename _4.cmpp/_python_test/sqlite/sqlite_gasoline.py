@@ -5,13 +5,11 @@ import matplotlib.pyplot as plt
 def disp_menu():
     print("中油歷年油價查詢系統")
     print("------------")
-    print("1.從網站載入最新油價")
-    print("2.顯示歷年油價資訊")
-    print("3.最近10週油價資訊")
-    print("4.油價走勢圖")
+    print("1.顯示歷年油價資訊")
+    print("2.最近10週油價資訊")
+    print("3.油價走勢圖")
     print("0.結束")
     print("------------")
-
 
 def disp_10data():
     cursor = conn.execute('select * from prices order by gdate desc;')
@@ -64,16 +62,16 @@ conn = sqlite3.connect('gasoline.sqlite')
 while True:
     disp_menu()
     choice = int(input("請輸入您的選擇:"))
-    if choice == 0 : break
+    if choice == 0 :
+        break
     if choice == 1: 
-        print('廢棄')
-    elif choice == 2:
         disp_alldata()
-    elif choice == 3:
+    elif choice == 2:
         disp_10data()
-    elif choice == 4:
+    elif choice == 3:
         chart()
-    else: break
+    else:
+        break
     x = input("請按Enter鍵回主選單")
 
 
