@@ -3,6 +3,7 @@
 
 from selenium import webdriver
 
+#lost
 url = 'http://yourblog.pixnet.net'
 
 web = webdriver.Firefox()

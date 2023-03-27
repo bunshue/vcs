@@ -1,9 +1,7 @@
-# _*_ coding: utf-8 *_*
-# 程式 10-7 (Python 3 version)
-
 import time
 from selenium import webdriver
 
+#url lost
 url = 'http://drho.tw/news'
 
 web = webdriver.Firefox()

@@ -1,31 +1,17 @@
-import os, time, exifread, glob, sys, shutil
+import os, time, glob, sys, shutil
 
-def get_year_month(fullpathname):
-	fp = open(fullpathname, 'rb')
-	exif = exifread.process_file(fp)
-	ym = 0
-	if 'EXIF DateTimeOriginal' in exif:
-		ym = exif['EXIF DateTimeOriginal'].values
-	else:
-		ym = time.strftime('%Y:%m:%d', time.localtime(os.stat(fullpathname).st_ctime))
-	fp.close()
-	return ym[0:4], ym[5:7]
 
 source_dir = 'C:/_git/vcs/_4.cmpp/_python_test/data/source_pic'
+target_dir = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/photos'
+if not os.path.exists(target_dir):
+        os.makedirs(target_dir, exist_ok=True)
 
-if not os.path.exists('photos'):
-	os.mkdir('photos')
-	
 allfiles = glob.glob(source_dir+'/*.jpg') + glob.glob(source_dir+'/*.png')
 for imagefile in allfiles:
         print(imagefile)
 
 for imagefile in allfiles:
 	filename = imagefile.split('\\')[-1]
-	y, m = get_year_month(imagefile)
-	target_dir = 'photos/' + y +'/' + m
-	if not os.path.exists(target_dir):
-		os.makedirs(target_dir, exist_ok=True)
 	i=0
 	ori_filename = filename
 	while True:
@@ -35,8 +21,7 @@ for imagefile in allfiles:
 			break
 		else:
 			ext = '.' + ori_filename.split('.')[-1]
-			filename = ori_filename.split(ext)[0] + '_' + str(i) \
-				+ ext
+			filename = ori_filename.split(ext)[0] + '_' + str(i) + ext
 			i = i + 1
 
 

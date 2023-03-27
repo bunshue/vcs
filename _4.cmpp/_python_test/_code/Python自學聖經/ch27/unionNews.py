@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup as soup
 from PIL import Image
 import matplotlib.pyplot as plt
-from wordcloud import WordCloud
+#from wordcloud import WordCloud
 import jieba
 import numpy as np
 from collections import Counter
@@ -38,6 +38,7 @@ for t in jieba.cut(text_news, cut_all=False):  #拆解句子為字詞
         terms.append(t)
 diction = Counter(terms)
 
+'''
 font = 'C:/_git/vcs/_4.cmpp/_python_test/data/msch.ttf'	#設定字型
 mask = np.array(Image.open("heart.png"))  #設定文字雲形狀 
 unioncloud = WordCloud(background_color="white",mask=mask,font_path=font)  #背景顏色預設黑色,改為白色 
@@ -50,3 +51,6 @@ plt.axis("off")
 plt.show()
 
 unioncloud.to_file("union_Wordcloud.png")  #存檔
+'''
+
+

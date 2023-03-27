@@ -1,15 +1,18 @@
-# _*_ coding: utf-8 _*_
-# 程式 12-11 (Python 3 Version)
-
 import requests, jieba, operator
 from bs4 import BeautifulSoup
 
-url = 'http://www.appledaily.com.tw/appledaily/hotdaily/headline'
-
+url = 'https://tw.nextapple.com/realtime/headlines'
 news_page = requests.get(url)
-news = BeautifulSoup(news_page.text, 'html.parser')
 
-news_title = news.find_all('div', {'class': 'aht_title'})
+print('news_page.text')
+print(news_page.text)
+
+news = BeautifulSoup(news_page.text, 'html.parser')
+news_title = news.find_all('div', {'class': 'post-inner'})
+'''
+print('news_title')
+print(news_title)
+'''
 
 headlines = ''
 for t in news_title:
@@ -28,8 +31,13 @@ for word in words:
 
 	sorted_wc = sorted(word_count.items(), key=operator.itemgetter(1), reverse=True)
 
+'''
 for item in sorted_wc:
 	if item[1]>1:
 		print(item)
 	else:
 		break
+'''
+
+print('done')
+
