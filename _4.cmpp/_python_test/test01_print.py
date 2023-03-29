@@ -118,6 +118,16 @@ print("%20s" % money)
 print("四捨五入到小數點以下第2位")
 print("%20s" % round(money, 2))
 
+pi = 3.14159265358979323846
+print("圓周率 四捨五入到小數點以下第6位 : ", format(pi, ".6f"))
+print("圓周率 四捨五入到整數 : ", round(pi))
+
+
+'''
+print(format(i * j, '4d'), end = '')
+print()# Jump to the new line
+'''
+
 
 
 

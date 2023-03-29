@@ -2916,7 +2916,7 @@ namespace vcs_DrAP
             if (cb_option2.Checked == true)
                 path = specified_search_path;
 
-            richTextBox1.Text += "資料夾: " + path + "\n\n";
+            richTextBox1.Text += "搜尋資料夾: " + path + "\n\n";
             if (System.IO.File.Exists(path) == true)
             {
                 // This path is a file
@@ -3054,9 +3054,9 @@ namespace vcs_DrAP
             //確認資料夾是否存在
             string Path = "C:\\______test_files_file_name2\\aaaa\\bbbb";
             if (Directory.Exists(Path) == false)    //確認資料夾是否存在
-                richTextBox1.Text += "資料夾: " + Path + " 不存在\n";
+                richTextBox1.Text += "搜尋資料夾: " + Path + " 不存在\n";
             else
-                richTextBox1.Text += "資料夾: " + Path + " 存在\n";
+                richTextBox1.Text += "搜尋資料夾: " + Path + " 存在\n";
             */
 
             //string path = default_vcs_path;
@@ -3066,7 +3066,7 @@ namespace vcs_DrAP
 
             //folder_name.Clear();
 
-            //richTextBox1.Text += "資料夾: " + path + "\n\n";
+            //richTextBox1.Text += "搜尋資料夾: " + path + "\n\n";
             if (Directory.Exists(path) == true)
             {
                 // This path is a directory
