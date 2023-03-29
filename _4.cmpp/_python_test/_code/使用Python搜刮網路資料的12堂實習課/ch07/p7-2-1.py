@@ -1,5 +1,7 @@
 import requests, time, sqlite3
 from bs4 import BeautifulSoup
+
+#連不上此網址
 url = 'https://www.nkust.edu.tw/p/403-1000-12-{}.php?Lang=zh-tw'
 titles = list()
 for page in range(11, 12):
@@ -9,7 +11,10 @@ for page in range(11, 12):
     data = soup.select(sel)
     for item in data:
         titles.append((item['title'], item['href']))
+        print('11111')
+        print(titles)
     time.sleep(3)
+
 db = sqlite3.connect('headlines.db')
 cur = db.cursor()
 sql = "insert into titles (title, link) values(?, ?)"
@@ -22,3 +27,4 @@ for title in titles:
 db.commit()
 db.close()
 print('Done!')
+
