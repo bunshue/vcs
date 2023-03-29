@@ -17,40 +17,10 @@ import pprint
 url = 'http://tw.yahoo.com'
 html_data = requests.get(url)
 #pprint.pprint(html_data.text)  #OK many
+'''
 
 
-print('取得網頁資料 9')
-try:
-    import xml.etree.cElementTree as ET
-except ImportError:
-    import xml.etree.ElementTree as ET
-
-url = 'http://invoice.etax.nat.gov.tw/invoice.xml'
-html_data = requests.get(url)
-tree = ET.fromstring(html_data.text)
-print('根目錄標籤：' + tree.tag)
-print('根目錄屬性：' + str(tree.attrib))
-print('根目錄值：' + str(tree.text))
-
-
-print('取得網頁資料 10')
-try:
-    import xml.etree.cElementTree as ET
-except ImportError:
-    import xml.etree.ElementTree as ET
-
-url = 'http://invoice.etax.nat.gov.tw/invoice.xml'
-html_data = requests.get(url)
-tree = ET.fromstring(html_data.text)
-
-item = tree[0].find('item')
-print('find 方法：' + item[0].text)
-
-items = tree[0].findall('item')
-print('findall 方法：' + items[0][0].text)
-
-items = list(tree.iter(tag='item'))
-print('iter 方法：' + items[0][0].text)
+'''
 
 #有參數
 print('取得網頁資料 3')
