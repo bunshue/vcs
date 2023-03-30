@@ -115,15 +115,10 @@ print("Test time is", testTime, "seconds")
 #filename = input("Enter a filename: ").strip()
 
 print('測試 strip()')
-input_string = input("input a string: ")
-print('無strip |' + input_string + '|')
-input_string = input("input a string: ").strip()
-print('有strip |' + input_string + '|')
-
-
-
-
-
+input_string = 'ABCDEFG       '
+print('無strip <<<' + input_string + '>>>')
+input_string = input_string.strip()
+print('有strip <<<' + input_string + '>>>')
 
 def printArea(width = 1, height = 2):
     area = width * height
@@ -155,4 +150,28 @@ def random_test1():
     infile.close() # Close the file
     
 random_test1()
+
+a = 5
+b = "Hello"
+c = 0.15
+d = True
+
+print(type(a))
+print(type(b))
+print(type(c))
+print(type(d))
+
+a = "Why not to learn "
+b = "Python?"
+
+print(len(a))
+print(a[2])
+print(a[4:7])
+print(a.replace("learn", "teach"))
+print(a.split(" "))
+print(a+b)
+
+
+
+
 

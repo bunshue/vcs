@@ -1,1 +1,0 @@
-@"X:\Python34\python.exe" "X:\Python34\Scripts\markdown_py" %*

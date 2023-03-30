@@ -54,4 +54,7 @@ print("The three angles are ", round(A * 100) / 100.0,
 
 
 
+#取1024以2為底的log：
+print(math.log(1024, 2)) # 10
+
 
