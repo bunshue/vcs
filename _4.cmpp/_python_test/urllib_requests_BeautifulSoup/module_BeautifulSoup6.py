@@ -17,5 +17,6 @@ print(response.status_code)
 
 root = BeautifulSoup(response.text, "html.parser")
 links = root.find_all("div", class_="title")    # 文章標題
+print(links)
 for link in links:
     print(link.text.strip())  # strip()用來刪除文字前面和後面多餘的空白

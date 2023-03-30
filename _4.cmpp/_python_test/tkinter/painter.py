@@ -66,13 +66,11 @@ class PaintCanvas(Canvas):
 #
 # main
 
-if len(sys.argv) != 2:
-    print("Usage: painter file")
-    sys.exit(1)
-
 root = Tk()
 
-im = Image.open(sys.argv[1])
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/human.jpg'
+
+im = Image.open(filename)
 
 if im.mode != "RGB":
     im = im.convert("RGB")

@@ -1,5 +1,6 @@
 # 目前 webcam 僅 x64 電腦可用
 
+'''
 filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/output.avi'
 
 import cv2
@@ -83,10 +84,9 @@ cap.release()   # 釋放攝影機
 cv2.destroyAllWindows() # 關閉所有 OpenCV 視窗
 
 print('已存檔 ' + filename)
-
-
-
 '''
+
+
 import cv2
 
 # 開啟影片檔案
@@ -98,10 +98,16 @@ while(cap.isOpened()):
   ret, frame = cap.read()
 
   cv2.imshow('frame',frame)
-  if cv2.waitKey(1) & 0xFF == ord('q'):
+
+  c = cv2.waitKey(1)
+  if c == 27:     #ESC
     break
+  elif c == ord('q'): # 若按下 q 鍵則離開迴圈
+    break
+  elif c == ord('s'): # 若按下 s 鍵則存圖
+    cv2.imwrite('test.jpg', frame)
 
 cap.release()
 cv2.destroyAllWindows()
-'''
+
 

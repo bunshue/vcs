@@ -20,6 +20,7 @@ sizes = [25, 30, 15, 10]
 labels = ["北部", "西部", "南部", "東部"]
 colors = ["red", "green", "blue", "yellow"]
 explode = (0, 0, 0.2, 0)
+#explode = (0, 0, 0.05, 0)
 plt.pie(sizes, 
 	explode = explode, 
 	labels = labels, 
@@ -29,6 +30,10 @@ plt.pie(sizes,
 	pctdistance = 0.6,
 	shadow = True,
 	startangle = 90)
+
+plt.axis("equal")
+plt.legend()
+
 
 #第二張圖
 plt.subplot(232)

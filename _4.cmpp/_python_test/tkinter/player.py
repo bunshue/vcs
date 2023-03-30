@@ -76,26 +76,23 @@ class UI(Label):
 # --------------------------------------------------------------------
 # script interface
 
+filename1 = 'C:/_git/vcs/_4.cmpp/_python_test/data/human.jpg'
+filename2 = 'C:/_git/vcs/_4.cmpp/_python_test/data/human2.jpg'
+
 if __name__ == "__main__":
 
-    if not sys.argv[1:]:
-        print("Syntax: python player.py imagefile(s)")
-        sys.exit(1)
-
-    filename = sys.argv[1]
+    filename = filename1
 
     root = Tk()
     root.title(filename)
 
-    if len(sys.argv) > 2:
-        # list of images
-        print("loading...")
-        im = []
-        for filename in sys.argv[1:]:
-            im.append(Image.open(filename))
-    else:
-        # sequence
-        im = Image.open(filename)
+    # list of images
+    print("loading...")
+    im = []
+    im.append(Image.open(filename1))
+    im.append(Image.open(filename2))
+    
+    #im = Image.open(filename)
 
     UI(root, im).pack()
 

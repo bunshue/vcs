@@ -1,10 +1,13 @@
 import requests
 from bs4 import BeautifulSoup
 
-response = requests.get(
-    "https://www.ptt.cc/bbs/Gossiping/index.html")  # 改成八卦板的網址
-root = BeautifulSoup(response.text, "html.parser")  # 解析原始碼
+my_headers = {"cookie": "over18=1"}  # cookie設定
 
+response = requests.get(
+    #"https://www.ptt.cc/bbs/Gossiping/index.html")  # 改成八卦板的網址
+    "https://www.ptt.cc/bbs/Gossiping/index.html", headers=my_headers)  # 放在headers欄位中傳送
+root = BeautifulSoup(response.text, "html.parser")  # 解析原始碼
+print(root.prettify())
 links = root.find_all("div", class_="title")    # 文章標題
 print(links)
 for link in links:

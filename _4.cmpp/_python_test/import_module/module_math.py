@@ -16,7 +16,8 @@ n = 16
 r = math.sqrt(n)
 print("16的平方根 為 : "+str(r))
 
-
+print('取1024以2為底的log：')
+print(math.log(1024, 2)) # 10
 
 import math # import Math module to use the math functions
  
@@ -39,7 +40,6 @@ import math
 x1, y1 = 0, 0
 x2, y2 = 4, 0
 x3, y3 = 0, 3
-
  
 a = math.sqrt((x2 - x3) * (x2 - x3) + (y2 - y3) * (y2 - y3))
 b = math.sqrt((x1 - x3) * (x1 - x3) + (y1 - y3) * (y1 - y3))
@@ -49,12 +49,8 @@ A = math.degrees(math.acos((a * a - b * b - c * c) / (-2 * b * c)))
 B = math.degrees(math.acos((b * b - a * a - c * c) / (-2 * a * c)))
 C = math.degrees(math.acos((c * c - b * b - a * a) / (-2 * a * b)))
 
-print("The three angles are ", round(A * 100) / 100.0,  
-    round(B * 100) / 100.0, round(C * 100) / 100.0)
-
-
-
-#取1024以2為底的log：
-print(math.log(1024, 2)) # 10
-
+print('計算三角形3個內角角度 : ',
+      round(A * 100) / 100.0,
+      round(B * 100) / 100.0,
+      round(C * 100) / 100.0)
 

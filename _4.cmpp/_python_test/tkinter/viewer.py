@@ -31,24 +31,13 @@ class UI(Label):
             self.image = ImageTk.PhotoImage(im)
             Label.__init__(self, master, image=self.image, bd=0)
 
-#
-# script interface
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/human2.jpg'
 
-if __name__ == "__main__":
+root = Tk()
+root.title(filename)
 
-    import sys
+im = Image.open(filename)
 
-    if not sys.argv[1:]:
-        print("Syntax: python viewer.py imagefile")
-        sys.exit(1)
+UI(root, im).pack()
 
-    filename = sys.argv[1]
-
-    root = Tk()
-    root.title(filename)
-
-    im = Image.open(filename)
-
-    UI(root, im).pack()
-
-    root.mainloop()
+root.mainloop()

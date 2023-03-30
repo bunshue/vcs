@@ -1,3 +1,8 @@
+
+print("python寫資料到 html 檔")
+
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/html_data.html'
+
 import pandas as pd
 datas = [[65,92,78,83,70], [90,72,76,93,56], [81,85,91,89,77], [79,53,47,94,80]]
 indexs = ["林大明", "陳聰明", "黃美麗", "熊小娟"]
@@ -5,4 +10,14 @@ columns = ["國文", "數學", "英文", "自然", "社會"]
 df = pd.DataFrame(datas, columns=columns,  index=indexs)
 print(df)
 
-df.to_html('out.html')
+df.to_html(filename)
+
+
+print("讀取一個 html 檔案 : " + filename)
+
+import pandas as pd
+data = pd.read_html(filename, encoding="utf-8-sig", index_col=0)
+
+print(data[0])
+
+

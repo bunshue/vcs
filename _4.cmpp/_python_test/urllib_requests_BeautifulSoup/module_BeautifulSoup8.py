@@ -1,4 +1,19 @@
 import requests
+url = 'http://www.e-happy.com.tw'
+html = requests.get(url)
+html.encoding="utf-8"
+if html.status_code == requests.codes.ok:
+    print(html.text)
+
+
+import requests
+from bs4 import BeautifulSoup
+url = 'http://www.e-happy.com.tw'
+html = requests.get(url)
+sp = BeautifulSoup(html.text, 'html.parser')
+
+
+import requests
 from bs4 import BeautifulSoup
 payload = {
    'from': 'https://www.ptt.cc/bbs/Gossiping/index.html',
