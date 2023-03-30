@@ -1,0 +1,3 @@
+#!C:\Winpython\basedir35\build\winpython-32bit-3.5.x.2\python-3.5.2\python.exe
+from numba.pycc import main
+main()

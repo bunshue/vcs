@@ -1,4 +1,4 @@
-# 目前僅 64-bit 電腦可用
+# 目前 webcam 僅 x64 電腦可用
 
 filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/output.avi'
 
