@@ -1,20 +1,5 @@
 import RandomCharacter # Defined in Listing 6.9
 
-def main():
-    # Create a list of characters
-    chars = createList()
-    
-    # Display the list
-    print("The lowercase letters are:")
-    displayList(chars)
-    
-    # Count the occurrences of each letter
-    counts = countLetters(chars)
-   
-    # Display counts
-    print("The occurrences of each letter are:")
-    displayCounts(counts)
-  
 # Create a list of characters 
 def createList():
     # Create an empty list
@@ -55,4 +40,35 @@ def displayCounts(counts):
         else:
             print(counts[i], chr(i + ord('a')), end = ' ')
 
-main() # Call the main function
+
+# Create a list of characters
+chars = createList()
+    
+# Display the list
+print("The lowercase letters are:")
+displayList(chars)
+    
+# Count the occurrences of each letter
+counts = countLetters(chars)
+   
+# Display counts
+print("The occurrences of each letter are:")
+displayCounts(counts)
+
+
+
+
+            
+import RandomCharacter
+
+NUMBER_OF_CHARS = 175 # Number of characters to generate
+CHARS_PER_LINE = 25 # Number of characters to display per line
+
+# Print random characters between 'a' and 'z', 25 chars per line
+for i in range(NUMBER_OF_CHARS):
+    print(RandomCharacter.getRandomLowerCaseLetter(), end = "")
+    if (i + 1) % CHARS_PER_LINE == 0:
+        print()  # Jump to the new line
+
+
+

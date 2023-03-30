@@ -132,25 +132,6 @@ printArea(height = 6.2) # Default widht = 1
 
 
 
-from random import randint 
-
-def random_test1():
-    # Open file for writing data
-    outfile = open("Numbers.txt", "w")
-    for i in range(10):
-        outfile.write(str(randint(0, 9)) + " ")
-    outfile.close() # Close the file
-
-    # Open file for reading data
-    infile = open("Numbers.txt", "r")
-    s = infile.read()
-    numbers = [eval(x) for x in s.split()]
-    for number in numbers:
-        print(number, end = " ")
-    infile.close() # Close the file
-    
-random_test1()
-
 a = 5
 b = "Hello"
 c = 0.15
@@ -170,6 +151,144 @@ print(a[4:7])
 print(a.replace("learn", "teach"))
 print(a.split(" "))
 print(a+b)
+
+
+
+import re
+
+regex = "\d{3}-\d{2}-\d{4}"
+text = '543-87-3388'
+match1 = re.search(regex, text)
+
+if match1 != None:
+    print(text, " contains a SSN")
+    print("start position of the matched text is " + str(match1.start()))
+    print("start and end position of the matched text is " + str(match1.span()))
+else:
+    print(text, " does not contain a SSN")
+
+
+
+
+
+candyCan = ["apple", "strawberry", "grape", "mango"]
+
+candyCan[1] = "peach"
+print(candyCan)
+
+
+candyCan = ["apple", "strawberry", "grape", "mango"]
+
+candyCan.append("banana")
+print(candyCan)
+
+
+candyCan = ["apple", "strawberry", "grape", "mango"]
+
+candyCan.insert(1, "orange")
+print(candyCan)
+
+
+
+candyCan = ["apple", "strawberry", "grape", "mango"]
+
+print(candyCan[1])
+print(candyCan[-1])
+print(candyCan[1:3])
+
+
+
+candyCan = ["apple", "strawberry", "grape", "mango"]
+
+print(candyCan)
+print(len(candyCan))
+print(type(candyCan))
+
+candyCan = ["apple", "strawberry", "grape", "mango"]
+
+print("apple" in candyCan)
+print("banana" in candyCan)
+
+
+candyCan = ["apple", "strawberry", "grape", "mango"]
+
+newCandy = ["banana", "orange"]
+temp = candyCan + newCandy
+print(temp)
+print(candyCan)
+print(newCandy)
+
+
+candyCan = ("apple", "strawberry", "mango", "peach", "grape")
+
+candyCan[1] = "banana"
+
+
+candyCan = ("apple", "strawberry", "mango", "peach", "grape")
+
+print(candyCan)
+print(len(candyCan))
+
+print(candyCan[0])
+print(candyCan[1:3])
+
+print(candyCan.count("mango"))
+print(candyCan.index("mango"))
+
+
+
+
+candyFlavor = {"apple", "strawberry", "mango", "mango"}
+print(candyFlavor)
+
+candyFlavor.add("orange")
+print(candyFlavor)
+
+candyFlavor.remove("orange")
+print(candyFlavor)
+
+newFlavor = {"apple", "banana"}
+candyFlavor.update(newFlavor)
+print(candyFlavor)
+
+
+
+candyNumber = {"apple": 5, "strawberry": 10, "mango": 3}
+
+print(candyNumber)
+
+print(candyNumber["apple"])
+candyNumber["apple"] = 6
+print(candyNumber)
+
+candyNumber["banana"] = 8
+print(candyNumber)
+
+candyNumber.pop("banana")
+print(candyNumber)
+
+print(candyNumber.keys())
+print(candyNumber.values())
+print(candyNumber.items())
+
+
+
+
+
+
+#一維list
+mylist = ["A", "B", "C", "D", "E"]
+
+for elem in mylist:
+    print(elem)
+    
+
+
+
+
+
+
+
 
 
 
