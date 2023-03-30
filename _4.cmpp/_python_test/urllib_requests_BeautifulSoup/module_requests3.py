@@ -13,17 +13,7 @@ input = urllib.request.urlopen('http://www.yahoo.com/index.html')
 print(input.read())
 '''
 
-import requests
 
-response = requests.get("https://www.ptt.cc/bbs/C_Chat/index.html")    # 以ptt C_Chat版為例
-print(response.text)
-print(response.status_code)
-
-
-
-
-
-    
 
 
 

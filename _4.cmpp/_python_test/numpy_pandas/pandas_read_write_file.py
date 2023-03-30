@@ -51,3 +51,66 @@ print(data)
 
 
 
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/score333.csv'
+
+import pandas as pd
+datas = [[65,92,78,83,70], [90,72,76,93,56], [81,85,91,89,77], [79,53,47,94,80]]
+indexs = ["林大明", "陳聰明", "黃美麗", "熊小娟"]
+columns = ["國文", "數學", "英文", "自然", "社會"]
+df = pd.DataFrame(datas, columns=columns,  index=indexs)
+print(df)
+
+df.to_csv(filename, encoding="utf-8-sig")
+
+
+import pandas as pd
+data = pd.read_csv(filename, encoding="utf-8-sig",index_col=0)
+
+print(data)
+
+
+
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/score444.json'
+
+import pandas as pd
+datas = [[65,92,78,83,70], [90,72,76,93,56], [81,85,91,89,77], [79,53,47,94,80]]
+indexs = ["林大明", "陳聰明", "黃美麗", "熊小娟"]
+columns = ["國文", "數學", "英文", "自然", "社會"]
+df = pd.DataFrame(datas, columns=columns,  index=indexs)
+print(df)
+
+df.to_json(filename, force_ascii=False)
+
+
+import pandas as pd
+data = pd.read_json(filename, typ='series')
+
+print(data)
+
+
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/score555.xlsx'
+
+import pandas as pd
+datas = [[65,92,78,83,70], [90,72,76,93,56], [81,85,91,89,77], [79,53,47,94,80]]
+indexs = ["林大明", "陳聰明", "黃美麗", "熊小娟"]
+columns = ["國文", "數學", "英文", "自然", "社會"]
+df = pd.DataFrame(datas, columns=columns,  index=indexs)
+print(df)
+
+df.to_excel(filename, encoding="utf-8-sig")
+
+
+import pandas as pd
+data = pd.read_excel(filename, encoding="utf-8-sig",index_col=0)
+
+print(data)
+
+
+
+
+
+
+
+
+
+
