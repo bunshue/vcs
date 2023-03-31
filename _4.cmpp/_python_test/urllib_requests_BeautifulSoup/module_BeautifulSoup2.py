@@ -1,59 +1,122 @@
-import requests
-from bs4 import BeautifulSoup
+# Python 測試 BeautifulSoup
 
-
-print("使用 BeautifulSoup 分析網頁")
-
-url = 'https://oldsiao.neocities.org/'
-response = requests.get(url)
-#print(response.text)
-
-sp = BeautifulSoup(response.text, 'html.parser')
-
-print("標題")
-print(sp.title)
-print("標題文字")
-print(sp.title.text)
-
-#尋找指定標籤find()、find_all()
-
-print("尋找標籤「<div>」")
-print(sp.find("div"))
-
-print("尋找標籤「<title>」")
-print(sp.find_all("title"))
-
-import requests
 from bs4 import BeautifulSoup
 
 '''
-# 題問說明
-question_description = "[1]牡羊座 [2]金牛座 [3]雙子座 [4]巨蟹座 [5]獅子座 [6]處女座 [7]天秤座 [8]天蠍座 [9]射手座 [10]摩羯座 [11]水瓶座 [12]雙魚座，請選擇星座(僅能填數字):"
+print('BeautifulSoup 測試 2')
+import requests
+from bs4 import BeautifulSoup
 
-# 限制填寫內容為數字
-while True:
-    ans_data = input(question_description)
-    # ans_data為數字且數值介於1~12
-    if ans_data.isdigit() == True and int(ans_data) > 0 and int(ans_data) < 13:
-        break
-    else:
-        pass
+url = 'http://tw.yahoo.com'
+html_data = requests.get(url)
+soup = BeautifulSoup(html_data.text, "html.parser")
+soup.title
+
+print("取得網頁標題")
+print(soup.title)
+
+
+print('BeautifulSoup 測試 3')
+import requests
+from bs4 import BeautifulSoup
+
+url = 'https://tw.news.yahoo.com/rss/technology'
+html_data = requests.get(url)
+soup = BeautifulSoup(html_data.text, "html.parser")
+type(soup)
+soup.findAll('item')
+
+print("取得Yahoo奇摩新聞-科技新聞-標題")
+for news in soup.findAll('item'):
+	print(news.title)
+
+print('BeautifulSoup 測試 5')
+from bs4 import BeautifulSoup
+import requests
+import sys
+
+url = 'https://www.google.com.tw/'
+html_data = requests.get(url).text
+soup = BeautifulSoup(html_data, 'html.parser')
+all_links = soup.find_all('a')
+
+for link in all_links:
+    href = link.get('href')
+    if href != None and href.startswith('http://'):
+        print('取得資料')
+        print(href)
+
+
+print('BeautifulSoup 測試 6')
+import requests
+from bs4 import BeautifulSoup
+
+url = "https://www.ptt.cc/bbs/NBA/index.html" # PTT NBA 板
+html_data = requests.get(url) # 用 requests 的 get 方法把網頁抓下來
+html_doc = html_data.text # text 屬性就是 html 檔案
+soup = BeautifulSoup(html_data.text, "lxml") # 指定 lxml 作為解析器
+#print(soup.prettify()) # 把排版後的 html 印出來
+
+# 一些屬性或方法
+print(soup.title) # 把 tag 抓出來
+print("---")
+print(soup.title.name) # 把 title 的 tag 名稱抓出來
+print("---")
+print(soup.title.string) # 把 title tag 的內容欻出來
+print("---")
+print(soup.title.parent.name) # title tag 的上一層 tag
+print("---")
+print(soup.a) # 把第一個 <a></a> 抓出來
+print("---")
+print(soup.find_all('a')) # 把所有的 <a></a> 抓出來
+
+
 '''
-    
-url = 'https://oldsiao.neocities.org/'
-print(url)
 
-response = requests.get(url)
+'''
+print('BeautifulSoup 測試 8')
+from urllib.request import urlopen
+from urllib.error import HTTPError
+from bs4 import BeautifulSoup
+import sys
 
-# 設定讀取編碼(預設 UTF-8)
-response.encoding = 'UTF-8'
+def getTitle(url):
+    try:
+        html = urlopen(url)
+    except HTTPError as e:
+        print(e)
+        return None
+    try:
+        soup = BeautifulSoup(html, "html.parser")
+        title = soup.body.h1
+    except AttributeError as e:
+        return None
+    return title
 
-# 檢查 HTTP 回應碼是否為 200
-if response.status_code == requests.codes.ok:
-    sp = BeautifulSoup(response.text, 'html.parser')
-    print("使用 BeautifulSoup 分析網頁")
-    print("標題")
-    print(sp.title)
-    print("標題文字")
-    print(sp.title.text)
+url = 'http://www.pythonscraping.com/exercises/exercise1.html'
+title = getTitle(url)
+if title == None:
+    print("找不到網頁標題")
+else:
+    print("取得網頁標題:")
+    print(title)
+'''
+
+
+
+import requests
+from bs4 import BeautifulSoup
+
+url = 'http://ehappy.tw/bsdemo1.htm'
+html_data = requests.get(url)
+html_data.encoding = 'UTF-8'
+soup = BeautifulSoup(html_data.text, 'html.parser')
+
+print(soup.title)
+print(soup.title.text)
+print(soup.h1)
+print(soup.p)
+
+
+
 

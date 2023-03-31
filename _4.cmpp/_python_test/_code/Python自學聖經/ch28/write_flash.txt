@@ -1,1 +1,0 @@
-esptool --port COM6 --baud 115200 write_flash --flash_size=detect -fm dio 0 C:\tools\esp8266-20190529-v1.11.bin

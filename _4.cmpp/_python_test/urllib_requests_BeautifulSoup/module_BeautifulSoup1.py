@@ -1,122 +1,220 @@
-# Python 測試 BeautifulSoup
+#解讀本地網頁資料
 
 from bs4 import BeautifulSoup
 
-'''
-print('BeautifulSoup 測試 2')
-import requests
-from bs4 import BeautifulSoup
+print('解讀本地網頁資料1')
 
-url = 'http://tw.yahoo.com'
-html_data = requests.get(url)
-soup = BeautifulSoup(html_data.text, "html.parser")
-soup.title
+html_data = """
+<html> Lollipop </html>
+"""
 
+soup = BeautifulSoup(html_data, 'html.parser')
 print("取得網頁標題")
 print(soup.title)
+print("取得網頁內容")
+print(soup.text)
 
 
-print('BeautifulSoup 測試 3')
-import requests
-from bs4 import BeautifulSoup
+print('解讀本地網頁資料2')
 
-url = 'https://tw.news.yahoo.com/rss/technology'
-html_data = requests.get(url)
-soup = BeautifulSoup(html_data.text, "html.parser")
-type(soup)
-soup.findAll('item')
+html_data = """
+<html><head><title>網頁標題</title></head>
+<p class="header"><h2>文件標題</h2></p>
+<div class="content">
+    <div class="item1">
+        <a href="http://example.com/one" class="red" id="link1">First</a>
+        <a href="http://example.com/two" class="red" id="link2">Second</a>
+    </div>
+    <a href="http://example.com/three" class="blue" id="link3">
+        <img src="http://example.com/three.jpg">Third
+    </a>
+</div>
+"""
 
-print("取得Yahoo奇摩新聞-科技新聞-標題")
-for news in soup.findAll('item'):
-	print(news.title)
+soup = BeautifulSoup(html_data, 'html.parser') 
 
-print('BeautifulSoup 測試 5')
-from bs4 import BeautifulSoup
-import requests
-import sys
+print(soup.title) # <title>網頁標題</title>
+print(soup.find('h2')) # <h2>文件標題</h2>
+print(soup.find_all('a')) 
+print(soup.find_all("a", {"class":"red"}))
+data1=soup.find("a", {"href":"http://example.com/one"})
+print(data1.text) # First
+data2 = soup.select("#link1") 
+print(data2[0].text) # First
+print(data2[0].get("href")) # http://example.com/one
+print(data2[0]["href"])     # http://example.com/one
+print(soup.find_all(['title','h2'])) # [<title>網頁標題</title>, <h2>文件標題</h2>]
+print(soup.select('div img')[0]['src']) # http://example.com/three.jpg
 
-url = 'https://www.google.com.tw/'
-html_data = requests.get(url).text
+
+
+print('解讀本地網頁資料3')
+
+html_data = '''
+<html>
+  <head><meta charset="UTF-8"><title>我是網頁標題</title></head>
+  <body>
+      <p id="p1">我是段落一</p>
+      <p id="p2" class='red'>我是段落二</p>
+  </body>
+</html>
+'''
 soup = BeautifulSoup(html_data, 'html.parser')
-all_links = soup.find_all('a')
-
-for link in all_links:
-    href = link.get('href')
-    if href != None and href.startswith('http://'):
-        print('取得資料')
-        print(href)
+print(soup.find('p'))
+print(soup.find_all('p'))
+print(soup.find('p', {'id':'p2', 'class':'red'}))
+print(soup.find('p', id='p2', class_= 'red'))
 
 
-print('BeautifulSoup 測試 6')
-import requests
-from bs4 import BeautifulSoup
+print('解讀本地網頁資料4')
 
-url = "https://www.ptt.cc/bbs/NBA/index.html" # PTT NBA 板
-html_data = requests.get(url) # 用 requests 的 get 方法把網頁抓下來
-html_doc = html_data.text # text 屬性就是 html 檔案
-soup = BeautifulSoup(html_data.text, "lxml") # 指定 lxml 作為解析器
-#print(soup.prettify()) # 把排版後的 html 印出來
-
-# 一些屬性或方法
-print(soup.title) # 把 tag 抓出來
-print("---")
-print(soup.title.name) # 把 title 的 tag 名稱抓出來
-print("---")
-print(soup.title.string) # 把 title tag 的內容欻出來
-print("---")
-print(soup.title.parent.name) # title tag 的上一層 tag
-print("---")
-print(soup.a) # 把第一個 <a></a> 抓出來
-print("---")
-print(soup.find_all('a')) # 把所有的 <a></a> 抓出來
-
-
+html_data = '''
+<html>
+  <head><meta charset="UTF-8"><title>我是網頁標題</title></head>
+  <body>
+      <p id="p1">我是段落一</p>
+      <p id="p2" class='red'>我是段落二</p>
+  </body>
+</html>
 '''
+soup = BeautifulSoup(html_data, 'html.parser')
+print(soup.select('title'))
+print(soup.select('p'))
+print(soup.select('#p1'))
+print(soup.select('.red'))
 
+
+print('解讀本地網頁資料5')
+html_data = '''
+<html>
+  <head><meta charset="UTF-8"><title>我是網頁標題</title></head>
+  <body>
+      <img src="http://www.ehappy.tw/python.png">
+      <a href="http://www.e-happy.com.tw">超連結</a>
+  </body>
+</html>
 '''
-print('BeautifulSoup 測試 8')
-from urllib.request import urlopen
-from urllib.error import HTTPError
-from bs4 import BeautifulSoup
-import sys
-
-def getTitle(url):
-    try:
-        html = urlopen(url)
-    except HTTPError as e:
-        print(e)
-        return None
-    try:
-        soup = BeautifulSoup(html, "html.parser")
-        title = soup.body.h1
-    except AttributeError as e:
-        return None
-    return title
-
-url = 'http://www.pythonscraping.com/exercises/exercise1.html'
-title = getTitle(url)
-if title == None:
-    print("找不到網頁標題")
-else:
-    print("取得網頁標題:")
-    print(title)
-'''
+soup = BeautifulSoup(html_data, 'html.parser')
+print(soup.select('img')[0].get('src'))
+print(soup.select('a')[0].get('href'))
+print(soup.select('img')[0]['src'])
+print(soup.select('a')[0]['href'])
 
 
+print('解讀本地網頁資料6')
+html_data = """
+<html><head><title>網頁標題</title></head>
+<h1>文件標題</h1>
+<div class="content">
+    <div class="item1">
+        <a href="http://example.com/one" class="red" id="link1">First</a>
+        <a href="http://example.com/two" class="red" id="link2">Second</a>
+    </div>
+    <a href="http://example.com/three" class="blue" id="link3">
+        <img src="http://example.com/three.jpg">Third
+    </a>
+</div>
+"""
 
-import requests
-from bs4 import BeautifulSoup
+soup = BeautifulSoup(html_data, 'html.parser') 
+print(soup.title) # <title>網頁標題</title>
+print(soup.find('h1')) # <h1>文件標題</h1>
+print(soup.find_all('a')) 
+print(soup.find_all("a", {"class":"red"}))
+data1=soup.find("a", {"href":"http://example.com/one"})
+print(data1.text) # First
+data2 = soup.select("#link1") 
+print(data2[0].text) # First
+print(data2[0].get("href")) # http://example.com/one
+print(data2[0]["href"])     # http://example.com/one
+print(soup.find_all(['title','h1'])) # [<title>網頁標題</title>, <h1>文件標題</h1>]
+print(soup.select('div img')[0]['src']) # http://example.com/three.jpg
 
-url = 'http://ehappy.tw/bsdemo1.htm'
-html_data = requests.get(url)
-html_data.encoding = 'UTF-8'
-soup = BeautifulSoup(html_data.text, 'html.parser')
 
-print(soup.title)
-print(soup.title.text)
-print(soup.h1)
-print(soup.p)
+print('解讀本地網頁資料7')
 
+# 讀檔
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/beautifulsoup_data.html'
+
+html_data = ""
+with open(filename, "r", encoding="utf8") as file:
+    html_data = file.read()
+
+# BeautifulSoup解析原始碼
+soup = BeautifulSoup(html_data, 'html.parser')
+print(soup.prettify())  #prettify()這個函數可以將DOM tree以比較美觀的方式印出。
+
+# find h1
+#尋找符合標籤的第一個節點
+h1 = soup.find("h1")
+print(h1)
+
+# find by class
+# 使用class屬性定位，但因為在Python中已經有class保留字了，所以改用class_
+container = soup.find("div", class_="container")
+print(container)
+
+# find by id
+# 用id屬性定位。
+this = soup.find("h2", id="this")
+print(this)
+
+# find_all h2
+# find_all()定位符合標籤的所有節點，回傳的是一個列表。
+h2s = soup.find_all("h2")
+print(h2s)
+print(len(h2s)) # 共找到幾筆資料
+print(h2s[1])   # 使用索引值
+
+# find_all h1 and h2
+# 定位多個標籤，則將標籤打包成一個列表就好了。limit屬性則可以限制數量。
+h1_h2s = soup.find_all(["h1", "h2"], limit=3)
+print(h1_h2s)
+print(len(h1_h2s))
+
+
+# select_one
+# select_one()使用CSS選擇器的語法來定位節點
+h1 = soup.select_one("h1")
+print(h1)
+
+# select
+# select()其實就是使用CSS選擇器語法的find_all()
+h2s = soup.select("h2")
+print(h2s)
+print(len(h2s)) # 共找到幾筆資料
+print(h2s[1])   # 使用索引值
+
+# select by class
+# class 定位
+p = soup.select_one("div.container")
+print(p)
+
+# select by id
+# id定位
+this = soup.select_one("h2#this")
+print(this)
+
+# 尋找parent和sibling
+# this = soup.find("h2", id="this")
+# print(this)
+# print(this.find_previous_sibling())
+# print(this.find_next_sibling())
+# print(this.find_parent())
+
+# 取得文字
+# 定位到指定的節點後，可以使用text或string取得文字，或者也可以用getText()
+h1 = soup.find("h1")
+print(h1.getText())
+print(h1.text)
+print(h1.string)
+
+# 取得屬性值
+# 對於有屬性值的節點，就用get("屬性")或類似字典的方式["屬性"]取得屬性值。
+# 取得<img>標籤中的src屬性值：
+img = soup.find("img")
+print(img["src"])
+print(img.get("src"))
 
 
 
