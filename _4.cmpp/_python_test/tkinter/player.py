@@ -73,27 +73,24 @@ class UI(Label):
         self.update_idletasks()
 
 
-# --------------------------------------------------------------------
-# script interface
-
 filename1 = 'C:/_git/vcs/_4.cmpp/_python_test/data/human.jpg'
 filename2 = 'C:/_git/vcs/_4.cmpp/_python_test/data/human2.jpg'
 
-if __name__ == "__main__":
+filename = filename1
 
-    filename = filename1
+window = Tk()
+window.title(filename)
 
-    root = Tk()
-    root.title(filename)
-
-    # list of images
-    print("loading...")
-    im = []
-    im.append(Image.open(filename1))
-    im.append(Image.open(filename2))
+# list of images
+print("loading...")
+im = []
+im.append(Image.open(filename1))
+im.append(Image.open(filename2))
     
-    #im = Image.open(filename)
+#im = Image.open(filename)
 
-    UI(root, im).pack()
+UI(window, im).pack()
 
-    root.mainloop()
+window.mainloop()
+
+

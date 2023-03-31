@@ -66,15 +66,15 @@ class PaintCanvas(Canvas):
 #
 # main
 
-root = Tk()
+window = Tk()
 
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/human.jpg'
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/human2.jpg'
 
 im = Image.open(filename)
 
 if im.mode != "RGB":
     im = im.convert("RGB")
 
-PaintCanvas(root, im).pack()
+PaintCanvas(window, im).pack()
 
-root.mainloop()
+window.mainloop()

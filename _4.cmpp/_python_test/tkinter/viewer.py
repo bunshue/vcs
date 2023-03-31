@@ -1,43 +1,35 @@
-#!/usr/bin/env python
-#
-# The Python Imaging Library
-# $Id$
-#
+# The Python Imaging Viewer
 
-from __future__ import print_function
-
-try:
-    from tkinter import Tk, Label
-except ImportError:
-    from Tkinter import Tk, Label
-
+import tkinter as tk
 from PIL import Image, ImageTk
-
-#
-# an image viewer
-
-
-class UI(Label):
-
-    def __init__(self, master, im):
-
-        if im.mode == "1":
-            # bitmap image
-            self.image = ImageTk.BitmapImage(im, foreground="white")
-            Label.__init__(self, master, image=self.image, bg="black", bd=0)
-
-        else:
-            # photo image
-            self.image = ImageTk.PhotoImage(im)
-            Label.__init__(self, master, image=self.image, bd=0)
 
 filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/human2.jpg'
 
-root = Tk()
-root.title(filename)
+
+window = tk.Tk()
+
+# 設定主視窗標題
+title = "這是主視窗"
+window.title(title)
 
 im = Image.open(filename)
 
-UI(root, im).pack()
+'''
+#case 1 bitmap image
+# bitmap image
+self_image = ImageTk.BitmapImage(im, foreground="white")
+tk.Label(window, image=self_image, bg="blue", bd=0).pack()
+'''
 
-root.mainloop()
+#case 2 picture image
+# photo image
+self_image = ImageTk.PhotoImage(im)
+
+tk.Label(window, text='多人圖片', image=self_image, bd=50, bg='red').pack()
+#tk.Label(window, text='多人圖片', image=self_image, bd=0, bg='red',   width=1200).pack()
+
+window.mainloop()
+
+
+
+

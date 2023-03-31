@@ -1,3 +1,5 @@
+#import tkinter as tk
+
 try:
     from tkinter import Tk, Toplevel, Frame, Label, Scale, HORIZONTAL
 except ImportError:
@@ -34,15 +36,16 @@ class Enhance(Frame):
 
 filename = 'C:/______test_files/picture1.jpg'
 
-root = Tk()
+window = Tk()
+#window = tk.Tk()
 
 im = Image.open(filename)
 
 im.thumbnail((305, 400))
 
-Enhance(root, im, "Color", ImageEnhance.Color, 0.0, 4.0).pack()
+Enhance(window, im, "Color", ImageEnhance.Color, 0.0, 4.0).pack()
 Enhance(Toplevel(), im, "Sharpness", ImageEnhance.Sharpness, -2.0, 2.0).pack()
 Enhance(Toplevel(), im, "Brightness", ImageEnhance.Brightness, -1.0, 3.0).pack()
 Enhance(Toplevel(), im, "Contrast", ImageEnhance.Contrast, -1.0, 3.0).pack()
 
-root.mainloop()
+window.mainloop()

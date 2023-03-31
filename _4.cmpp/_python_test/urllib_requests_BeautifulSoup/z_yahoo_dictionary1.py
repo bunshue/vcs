@@ -6,8 +6,7 @@ import html5lib
 YAHOO_DICTIONARY_URL = "https://tw.dictionary.yahoo.com/dictionary?p="
 YAHOO_REFERER_VALUE  = "https://tw.dictionary.yahoo.com/dictionary"
 
-def searchdic():
-    global search_word
+def searchdic1(search_word):
 
     search_word = urllib.parse.quote_plus(search_word)
     html_data = requests.get(YAHOO_DICTIONARY_URL + search_word, headers={'Referer': YAHOO_REFERER_VALUE})
@@ -18,7 +17,6 @@ def searchdic():
     else:
         page = html_data.text
 
-    if page:
         #get_dict_info(page)
         #soup = BeautifulSoup(page, 'html5lib')   #也可
         soup = BeautifulSoup(page, 'lxml')   # 指定 lxml 作為解析器
@@ -61,8 +59,7 @@ def searchdic():
                 #print(di)
                 print(di.text.replace('\n', ''))    #只是刪除換行符號, 或許不一定有
 
-
-        print('釋義 :')        
+        print('釋義 :')
         #divs = soup.find_all('span', 'fz-14')
         divs = soup.find_all('span', 'd-i fz-14 lh-20')
         #print(divs)
@@ -73,12 +70,15 @@ def searchdic():
                 print(di.text.replace('\n', ''))
                 i = i + 1
 
-    else:
-        print('找不到資料')  #何時會跑到這？
+def example01():
+    print('Yahoo字典1')
+    search_word1 = 'oat'
+    #search_word1 = '英國'
+    searchdic1(search_word1)
+
+example01()
 
 
 
-search_word = 'oat'
-#search_word = '英國'
 
-searchdic()
+

@@ -1,5 +1,3 @@
-# python import module : requests
-
 import requests
 
 '''

@@ -57,20 +57,12 @@ class UI(Frame):
         self.canvas.create_image(0, 0, image=self.overlay, anchor=NW,
                                  tags="overlay")
 
-# --------------------------------------------------------------------
-# main
-
 filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/human2.jpg'
-
-root = Tk()
-
+window = Tk()
 im = Image.open(filename)
-
 if im.mode != "L":
     im = im.convert("L")
 
 # im.thumbnail((320,200))
-
-UI(root, im).pack()
-
-root.mainloop()
+UI(window, im).pack()
+window.mainloop()

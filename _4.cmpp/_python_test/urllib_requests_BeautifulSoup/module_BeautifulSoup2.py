@@ -1,27 +1,19 @@
-# 一種可以在網路上自動抓取資料的工具，又稱「網路爬蟲」(Web Crawler)
-
-print("抓取網頁資料 1")
-import requests
-url = 'https://oldsiao.neocities.org/'
-response = requests.get(url)
-print(response.text)
-
-
 import requests
 from bs4 import BeautifulSoup
 
-url = 'https://oldsiao.neocities.org/'
-response = requests.get(url)
-
-sp = BeautifulSoup(response.text, 'html.parser')
 
 print("使用 BeautifulSoup 分析網頁")
+
+url = 'https://oldsiao.neocities.org/'
+response = requests.get(url)
+#print(response.text)
+
+sp = BeautifulSoup(response.text, 'html.parser')
 
 print("標題")
 print(sp.title)
 print("標題文字")
 print(sp.title.text)
-
 
 #尋找指定標籤find()、find_all()
 

@@ -1,8 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-def searchdic():
-  global search_word
+def searchdic2(search_word):
   a = "https://tw.dictionary.search.yahoo.com/search;_ylt=AwrtXGvbWIJibWYAFCp9rolQ"
   b = ";_ylc=X1MDMTM1MTIwMDM4MQRfcgMyBGZyA3NmcARmcjIDc2ItdG9wBGdwcmlkAwRuX3JzbHQDMARuX3N1Z2cDMARvcmlnaW4DdHcuZGljdGlvbmFyeS5zZWFyY2gueWFob28uY29tBHBvcwMwBHBxc3RyAwRwcXN0cmwDMARxc3RybAM0BHF1ZXJ5A3RhcGUEdF9zdG1wAzE2NTI3MDk5NTM-?"
   c = "p="
@@ -70,7 +69,6 @@ def searchdic():
           #print(di)
           print(di.text.replace('\n', ''))    #只是刪除換行符號, 或許不一定有
 
-
   print('釋義 :')        
   #divs = soup.find_all('span', 'fz-14')
   divs = soup.find_all('span', 'd-i fz-14 lh-20')
@@ -83,11 +81,11 @@ def searchdic():
           i = i + 1
 
 
+def example02():
+    print('Yahoo字典2')
+    search_word2 = 'oat'
+    #search_word2 = '英國'
+    searchdic2(search_word2)
 
+example02()
 
-
-  
-search_word = 'oat'
-#search_word = '英國'
-
-searchdic()

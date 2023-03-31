@@ -3,13 +3,6 @@
 from bs4 import BeautifulSoup
 
 '''
-print('BeautifulSoup 測試 1')
-soup = BeautifulSoup("<html> Lollipop </html>", "html.parser")
-print("取得網頁標題")
-print(soup.title)
-print("取得網頁內容")
-print(soup.text)
-
 print('BeautifulSoup 測試 2')
 import requests
 from bs4 import BeautifulSoup
@@ -108,6 +101,22 @@ else:
     print("取得網頁標題:")
     print(title)
 '''
+
+
+
+import requests
+from bs4 import BeautifulSoup
+
+url = 'http://ehappy.tw/bsdemo1.htm'
+html_data = requests.get(url)
+html_data.encoding = 'UTF-8'
+soup = BeautifulSoup(html_data.text, 'html.parser')
+
+print(soup.title)
+print(soup.title.text)
+print(soup.h1)
+print(soup.p)
+
 
 
 
