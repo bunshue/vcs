@@ -3,7 +3,7 @@
 from bs4 import BeautifulSoup
 
 '''
-print('BeautifulSoup 測試 2')
+print('BeautifulSoup 測試 1')
 import requests
 from bs4 import BeautifulSoup
 
@@ -16,7 +16,7 @@ print("取得網頁標題")
 print(soup.title)
 
 
-print('BeautifulSoup 測試 3')
+print('BeautifulSoup 測試 2')
 import requests
 from bs4 import BeautifulSoup
 
@@ -30,7 +30,7 @@ print("取得Yahoo奇摩新聞-科技新聞-標題")
 for news in soup.findAll('item'):
 	print(news.title)
 
-print('BeautifulSoup 測試 5')
+print('BeautifulSoup 測試 3')
 from bs4 import BeautifulSoup
 import requests
 import sys
@@ -47,7 +47,7 @@ for link in all_links:
         print(href)
 
 
-print('BeautifulSoup 測試 6')
+print('BeautifulSoup 測試 4')
 import requests
 from bs4 import BeautifulSoup
 
@@ -74,7 +74,7 @@ print(soup.find_all('a')) # 把所有的 <a></a> 抓出來
 '''
 
 '''
-print('BeautifulSoup 測試 8')
+print('BeautifulSoup 測試 5')
 from urllib.request import urlopen
 from urllib.error import HTTPError
 from bs4 import BeautifulSoup

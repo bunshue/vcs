@@ -30,14 +30,6 @@ html_data = requests.get(url)
 print('我目前的IP是：', html_data.text)
 
 
-print('設定cookies的值')
-
-url = 'https://www.ptt.cc/bbs/Gossiping/index.html'
-cookies = {'over18':'1'}
-html_data = requests.get(url, cookies=cookies)
-print(html_data.text)
-
-
 '''
 print('將自訂表頭加入 GET 請求中')
 
@@ -70,6 +62,16 @@ url = 'http://udb.moe.edu.tw/Home/About'
 for i in range(0,15):
     print(i)
     #print(html[i])
+
+
+print("抓取網頁資料 4")
+url = 'http://www.e-happy.com.tw'
+html_data = requests.get(url)
+html_data.encoding="utf-8"
+if html_data.status_code == requests.codes.ok:
+    print(html_data.text)
+
+
 
 
 

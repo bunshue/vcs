@@ -1,19 +1,6 @@
-#解讀本地網頁資料
+#解讀本地網頁資料, 都是使用 html.parser 解析器
 
 from bs4 import BeautifulSoup
-
-print('解讀本地網頁資料1')
-
-html_data = """
-<html> Lollipop </html>
-"""
-
-soup = BeautifulSoup(html_data, 'html.parser')
-print("取得網頁標題")
-print(soup.title)
-print("取得網頁內容")
-print(soup.text)
-
 
 print('解讀本地網頁資料2')
 
@@ -32,7 +19,10 @@ html_data = """
 """
 
 soup = BeautifulSoup(html_data, 'html.parser') 
-
+print("取得網頁標題")
+print(soup.title)
+print("取得網頁內容")
+print(soup.text)
 print(soup.title) # <title>網頁標題</title>
 print(soup.find('h2')) # <h2>文件標題</h2>
 print(soup.find_all('a')) 
@@ -47,7 +37,6 @@ print(soup.find_all(['title','h2'])) # [<title>網頁標題</title>, <h2>文件�
 print(soup.select('div img')[0]['src']) # http://example.com/three.jpg
 
 
-
 print('解讀本地網頁資料3')
 
 html_data = '''
@@ -60,24 +49,12 @@ html_data = '''
 </html>
 '''
 soup = BeautifulSoup(html_data, 'html.parser')
+#用find
 print(soup.find('p'))
 print(soup.find_all('p'))
 print(soup.find('p', {'id':'p2', 'class':'red'}))
 print(soup.find('p', id='p2', class_= 'red'))
-
-
-print('解讀本地網頁資料4')
-
-html_data = '''
-<html>
-  <head><meta charset="UTF-8"><title>我是網頁標題</title></head>
-  <body>
-      <p id="p1">我是段落一</p>
-      <p id="p2" class='red'>我是段落二</p>
-  </body>
-</html>
-'''
-soup = BeautifulSoup(html_data, 'html.parser')
+#用select
 print(soup.select('title'))
 print(soup.select('p'))
 print(soup.select('#p1'))
