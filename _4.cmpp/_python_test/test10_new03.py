@@ -37,5 +37,29 @@ else:
 
 
 
+import sys
+print(sys.version_info)
+print(sys.version_info[0])
+if sys.version_info[0] >= 3:
+    print('python 新版')
+else:
+    print('python 舊版')
+    
+if sys.version < '3':
+    print('python 舊版')
+else:
+    print('python 新版')
+
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/human2.jpg'
+
+name = filename.split('/')
+print(len(name))
+print(name)
+print(type(name))
+
+ccc = name.reverse()
+print(ccc)
+
+
 
 

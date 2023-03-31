@@ -1,0 +1,226 @@
+
+print('BeautifulSoup 測試 2')
+
+import requests
+from bs4 import BeautifulSoup
+url = 'http://www.e-happy.com.tw'
+html_data = requests.get(url)
+soup = BeautifulSoup(html_data.text, 'html.parser')
+print(soup.prettify())
+
+
+GET
+將資料全部寫在URL中，就像你寫明信片一樣，傳遞上較不安全。
+
+GET加上參數的格式：https://www.example.com/index.html?key1=value1&key2=value2
+
+POST
+將資料寫在內部，就像你寫信然後裝進信封袋一樣，傳遞上比較安全且傳遞的資訊可以比較多。
+
+
+now=datetime.now()
+
+    no1=random.randint(1,6)   # 1~6
+    no2=random.randint(1,6)   # 1~6
+    no3=random.randint(1,6)   # 1~6
+
+
+    person1={"name":"Amy","phone":"049-1234567","age":20}
+    person2={"name":"Jack","phone":"02-4455666","age":25}
+    person3={"name":"Nacy","phone":"04-9876543","age":17}
+    persons=[person1,person2,person3]
+
+import matplotlib.pyplot as plt
+
+plt.gcf().set_size_inches(12, 14)
+
+num=25 
+
+for i in range(num):
+    ax=plt.subplot(5,5, i+1)
+    #ax.imshow(images[start_id], cmap='binary')  #顯示黑白圖片
+    title = 'label = ' + str(labels[start_id])
+    ax.set_title(title,fontsize=12)  # X,Y軸不顯示刻度
+    ax.set_xticks([]);ax.set_yticks([])        
+    start_id+=1 
+plt.show()
+
+
+import matplotlib.pyplot as plt
+
+    plt.gcf().set_size_inches(12, 14)
+    if num>25: num=25 
+    for i in range(0, num):
+        ax=plt.subplot(5,5, i+1)
+        #ax.imshow(images[start_id], cmap='binary')  #顯示黑白圖片
+        if( len(predictions) > 0 ) :  #有傳入預測資料
+            title = 'ai = ' + str(predictions[start_id])
+            # 預測正確顯示(o), 錯誤顯示(x)
+            title += (' (o)' if predictions[start_id]==labels[start_id] else ' (x)') 
+            title += '\nlabel = ' + str(labels[start_id])
+        else :  #沒有傳入預測資料
+            title = 'label = ' + str(labels[start_id])
+        ax.set_title(title,fontsize=12)  #X,Y軸不顯示刻度
+        ax.set_xticks([]);ax.set_yticks([])        
+        start_id+=1 
+    plt.show()
+
+
+
+
+    plt.gcf().set_size_inches(12, 14)
+    if num>25: num=25 
+    for i in range(0, num):
+        ax=plt.subplot(5,5, i+1)
+        ax.imshow(images[start_id], cmap='binary')  #顯示黑白圖片
+        if( len(predictions) > 0 ) :  #有傳入預測資料
+            title = 'ai = ' + str(predictions[start_id])
+            # 預測正確顯示(o), 錯誤顯示(x)
+            title += (' (o)' if predictions[start_id]==labels[start_id] else ' (x)') 
+            title += '\nlabel = ' + str(labels[start_id])
+        else :  #沒有傳入預測資料
+            title = 'label = ' + str(labels[start_id])
+        ax.set_title(title,fontsize=12)  #X,Y軸不顯示刻度
+        ax.set_xticks([]);ax.set_yticks([])        
+        start_id+=1 
+    plt.show()
+
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+import glob,cv2
+
+files = glob.glob("imagedata\*.jpg")  #建立測試資料
+test_feature=[]
+for file in files:
+    print(file)
+    img=cv2.imread(file)
+    img=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)  #灰階    
+    _, img = cv2.threshold(img, 120, 255, cv2.THRESH_BINARY_INV) #轉為反相黑白 
+    test_feature.append(img)
+
+print(test_feature)
+
+
+
+
+from machine import Pin, PWM
+import time
+
+pitches = {
+    'C':261, # D0
+    'D':294, # Re
+    'E':329, # Mi
+    'F':349, # Fa
+    'G':392, # So
+    'A':440, # La
+    'B':493, # Si
+    'S':0    # Stop
+}
+
+music = (
+    ('C',1),('C',1),('G',1),('G',1),('A',1),('A',1),('G',2),
+    ('F',1),('F',1),('E',1),('E',1),('D',1),('D',1),('C',2),
+    ('G',1),('G',1),('F',1),('F',1),('E',1),('E',1),('D',2),
+    ('G',1),('G',1),('F',1),('F',1),('E',1),('E',1),('D',2),
+    ('C',1),('C',1),('G',1),('G',1),('A',1),('A',1),('G',2),
+    ('F',1),('F',1),('E',1),('E',1),('D',1),('D',1),('C',1)
+)
+
+speed=400 # 設定節拍速度
+period=10 # 設定每拍停頓時間
+
+buzzer = PWM(Pin(14, Pin.OUT), duty=1000) # D5
+try:
+    for tone,tempo in music:
+        if (tone=="S"):
+            buzzer.duty(0) # 靜音
+        else:
+            buzzer.duty(1000)
+            buzzer.freq(pitches[tone])
+        time.sleep_ms(tempo*speed)
+        print(pitches[tone])
+        #以靜音設定每拍間稍為停頓
+        buzzer.duty(0)         # 靜音
+        time.sleep_ms(period)  # 停頓時間
+    buzzer.deinit()
+except:  # CTRL + C 中斷
+    buzzer.deinit()       
+
+
+
+
+
+
+
+
+
+
+'''
+print(html_data.status_code) # 获取返回状态, 200 為 OK
+
+'''
+
+
+
+def changechinesetourl():
+  print('changechinesetourl')
+  global search_word
+  from urllib import parse
+  str = search_word
+  search_word = parse.quote(str)
+
+
+
+檢查有無包含中文
+def is_contains_chinese():
+  print('is_contains_chinese')
+  global search_word
+  for _char in search_word:
+    if '\u4e00' <= _char <= '\u9fa5':
+      print('True')
+      return True
+  print('False')
+  return False
+  
+
+search_word = 'oat'
+search_word = '英國'
+is_contains_chinese()
+
+
+
+
+'''
+def fetch_data():
+    url = 'http://new.cpc.com.tw/division/mb/oil-more4.aspx'
+
+    html = requests.get(url).text
+    sp = BeautifulSoup(html, 'html.parser')
+    data = sp.find_all('span', {'id':'Showtd'})
+    rows = data[0].find_all('tr')
+
+    prices = list()
+    for row in rows:
+        cols = row.find_all('td')
+        if len(cols[1].text) > 0:
+            item = [cols[0].text, cols[1].text, \
+                    cols[2].text, cols[3].text]
+            prices.append(item)
+    for p in prices:
+        sqlstr = "select * from prices where gdate='{}';".format(p[0])
+        cursor = conn.execute(sqlstr)
+        if len(cursor.fetchall()) == 0:
+            g92 = 0 if p[1]=='' else float(p[1])
+            g95 = 0 if p[2]=='' else float(p[2])
+            g98 = 0 if p[3]=='' else float(p[3])
+            sqlstr = "insert into prices values('{}', {}, {}, {});". \
+                format(p[0], g92, g95, g98)
+            print(sqlstr)
+            conn.execute(sqlstr)
+            conn.commit()
+'''
+
+
+
