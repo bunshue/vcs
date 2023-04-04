@@ -52,10 +52,12 @@ def disp_alldata():
         print("日期：{}，92無鉛：{}，95無鉛：{}，98無鉛：{}". \
             format(row[0],row[1],row[2],row[3]))
         n = n + 1
+        '''
         if n == 20:
             x = input("請按Enter鍵繼續...(Q:回主選單)")
             if x == 'Q' or x == 'q': break
             n = 0
+        '''
 
 conn = sqlite3.connect('gasoline.sqlite')
 

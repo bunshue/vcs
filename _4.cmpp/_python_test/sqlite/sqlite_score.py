@@ -17,6 +17,7 @@ def append_data():
         name = input("請輸入學生姓名:")
         sqlstr = "select * from student where stdno={};".format(no)
         cursor = conn.execute(sqlstr)
+        #讀取全部資料
         if len(cursor.fetchall()) > 0:
             print("您輸入的座號已經有資料了")
         else:
@@ -29,7 +30,7 @@ def edit_data():
     no = input("請輸入要編輯的學生座號:")
     sqlstr = "select * from student where stdno={};".format(no)
     cursor = conn.execute(sqlstr)
-    rows = cursor.fetchall()
+    rows = cursor.fetchall()    #讀取全部資料
     if len(rows) > 0:
         print("目前的學生姓名:",rows[0][1])
         name = input("請輸入學生姓名：")
@@ -43,7 +44,7 @@ def del_data():
     no = input("請輸入要刪除的學生座號:")
     sqlstr = "select * from student where stdno={};".format(no)
     cursor = conn.execute(sqlstr)
-    rows = cursor.fetchall()
+    rows = cursor.fetchall()    #讀取全部資料
     if len(rows) > 0:
         print("你目前要刪除的是座號{}的{}".format(rows[0][0], rows[0][1]))
         answer = input("確定要刪除嗎？(y/n)")

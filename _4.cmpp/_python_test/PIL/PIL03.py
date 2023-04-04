@@ -5,10 +5,19 @@ from PIL import Image
 filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/sample.jpg'
 
 sample = Image.open(filename)
+
+
 im = sample.convert('L')
 w, h = im.size
 print(w)
 print(h)
+
+#show picture here
+
+plt.imshow(sample)
+plt.imshow(im)
+plt.show()
+
 
 crop = im.crop((w/2-300, h/2-300, w/2+300, h/2+300))
 

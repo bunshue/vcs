@@ -1,8 +1,8 @@
 import sqlite3
 
-db = sqlite3.connect("db")
+conn = sqlite3.connect("db")
 
-cursor = db.cursor()
+cursor = conn.cursor()
 
 cursor.execute("create table Course ( " +
                "courseId char(5), subjectId char(4) not null, " +
@@ -16,12 +16,12 @@ cursor.execute("insert into Course (courseId, subjectId, " +
 cursor.execute("insert into Course (courseId, subjectId, " + 
                " courseNumber, title, numOfCredits) " + 
                "values ('11111', 'CSCI', '1301', 'Introduction to Programming', 3)")
-db.commit()
+conn.commit()
 
 cursor.execute("select * from Course")
 
-rows = cursor.fetchall()
+rows = cursor.fetchall()    #讀取全部資料
 
 print(rows)
 
-db.close()
+conn.close()  # 關閉資料庫連線

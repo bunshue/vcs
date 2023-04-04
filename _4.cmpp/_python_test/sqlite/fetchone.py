@@ -16,8 +16,7 @@ row = cursor.fetchone()
 print(row[0], row[1])
 '''
 
-#讀取全部資料
-rows = cursor.fetchall()
+rows = cursor.fetchall()    #讀取全部資料
 print('顯示原始資料')
 print(rows)
 
