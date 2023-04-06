@@ -3,6 +3,10 @@
 print("各種python專用的語法")
 
 print(__name__)
+import pandas
+import pandas as pd
+print(pandas.__name__)
+print(pd.__name__)
 
 if __name__ == '__main__':
     print('happy new year !!')

@@ -1,15 +1,5 @@
 import tkinter as tk
 
-window = tk.Tk()
-
-redDirection = "up"
-greenDirection = "up"
-blueDirection = "up"
-
-red = 0
-green = 0
-blue = 0
-
 def colorUpdate():
     global red
     global green
@@ -41,8 +31,7 @@ def colorUpdate():
     color = "#" + redHex + greenHex + blueHex
     canvas.config(bg=color)
     #window.after(100, colorUpdate)    #這行是什麼意思
-    #print('設定顏色')
-
+    print('設定顏色' + color)
 
 def incrementColor(colorValue, increment, direction):
     if direction == "up":
@@ -56,7 +45,6 @@ def incrementColor(colorValue, increment, direction):
         else:
             return colorValue - increment
 
-
 def updateDirection(colorValue, direction):
     if colorValue >= 255:
         return "down"
@@ -65,11 +53,22 @@ def updateDirection(colorValue, direction):
     else:
         return direction
 
+
+window = tk.Tk()
+
+redDirection = "up"
+greenDirection = "up"
+blueDirection = "up"
+
+red = 0
+green = 0
+blue = 0
+
 scale1 = tk.Scale(window, from_=0, to=20)
 scale2 = tk.Scale(window, from_=0, to=20)
 scale3 = tk.Scale(window, from_=0, to=20)
 canvas = tk.Canvas(window, width=300, height=300)
-button = tk.Button(window, text="Go!", command=colorUpdate)
+button = tk.Button(window, text="Go!", command = colorUpdate)
 
 #設定控件的排列位置
 scale1.grid(row=1, column=1)

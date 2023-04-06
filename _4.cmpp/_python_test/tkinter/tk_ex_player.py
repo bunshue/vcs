@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 #
 # The Python Imaging Library
-# $Id$
 #
 
 from __future__ import print_function

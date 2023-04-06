@@ -1,13 +1,4 @@
-#!/usr/bin/env python
-#
 # The Python Imaging Library
-# $Id$
-#
-# this demo script illustrates pasting into an already displayed
-# photoimage.  note that the current version of Tk updates the whole
-# image every time we paste, so to get decent performance, we split
-# the image into a set of tiles.
-#
 
 try:
     from tkinter import Tk, Canvas, NW
@@ -17,9 +8,7 @@ except ImportError:
 from PIL import Image, ImageTk
 import sys
 
-#
 # painter widget
-
 
 class PaintCanvas(Canvas):
     def __init__(self, master, image):
@@ -63,18 +52,15 @@ class PaintCanvas(Canvas):
                     pass  # outside the image
         self.update_idletasks()
 
-#
-# main
 
 window = Tk()
-
 filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/human2.jpg'
-
 im = Image.open(filename)
-
 if im.mode != "RGB":
+    print('圖片非RGB模式, 要轉成RGB格式')
     im = im.convert("RGB")
 
 PaintCanvas(window, im).pack()
 
 window.mainloop()
+

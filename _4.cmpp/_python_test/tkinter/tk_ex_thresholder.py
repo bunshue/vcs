@@ -1,12 +1,3 @@
-#!/usr/bin/env python
-#
-# The Python Imaging Library
-# $Id$
-#
-# this demo script illustrates how a 1-bit BitmapImage can be used
-# as a dynamically updated overlay
-#
-
 try:
     from tkinter import *
 except ImportError:
@@ -17,7 +8,6 @@ import sys
 
 #
 # an image viewer
-
 
 class UI(Frame):
     def __init__(self, master, im, value=128):
@@ -54,8 +44,7 @@ class UI(Frame):
 
         # update canvas
         self.canvas.delete("overlay")
-        self.canvas.create_image(0, 0, image=self.overlay, anchor=NW,
-                                 tags="overlay")
+        self.canvas.create_image(0, 0, image=self.overlay, anchor=NW, tags="overlay")
 
 filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/human2.jpg'
 window = Tk()
@@ -63,6 +52,7 @@ im = Image.open(filename)
 if im.mode != "L":
     im = im.convert("L")
 
-# im.thumbnail((320,200))
+#im.thumbnail((320,200))
 UI(window, im).pack()
 window.mainloop()
+

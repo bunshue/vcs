@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
 
+import time
+import datetime
+from time import sleep
+
+
 """
 Animated Towers of Hanoi using Tk with optional bitmap file in background.
 
@@ -74,10 +79,14 @@ class Tkhanoi:
             y1, y2 = y1 - pieceheight-2, y2-pieceheight-2
             self.tk.update()
             self.tk.after(25)
+            print('a')
+            time.sleep(0.01)
 
     # Run -- never returns
     def run(self):
         while 1:
+            print('b')
+            time.sleep(0.01)
             hanoi(self.n, 0, 1, 2, self.report)
             hanoi(self.n, 1, 2, 0, self.report)
             hanoi(self.n, 2, 0, 1, self.report)
@@ -95,6 +104,8 @@ class Tkhanoi:
         # Lift the piece above peg a
         ax1, ay1, ax2, ay2 = c.bbox(self.pegs[a])
         while 1:
+            #print('上')
+            time.sleep(0.01)
             x1, y1, x2, y2 = c.bbox(p)
             if y2 < ay1: break
             c.move(p, 0, -1)
@@ -104,6 +115,8 @@ class Tkhanoi:
         bx1, by1, bx2, by2 = c.bbox(self.pegs[b])
         newcenter = (bx1+bx2)//2
         while 1:
+            #print('左右')
+            time.sleep(0.01)
             x1, y1, x2, y2 = c.bbox(p)
             center = (x1+x2)//2
             if center == newcenter: break
@@ -115,6 +128,8 @@ class Tkhanoi:
         pieceheight = y2-y1
         newbottom = by2 - pieceheight*len(self.pegstate[b]) - 2
         while 1:
+            #print('下')
+            time.sleep(0.01)
             x1, y1, x2, y2 = c.bbox(p)
             if y2 >= newbottom: break
             c.move(p, 0, 1)

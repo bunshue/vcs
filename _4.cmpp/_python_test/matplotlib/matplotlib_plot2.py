@@ -53,59 +53,18 @@ plt.plot(np.random.randn(100))
 #第三張圖
 plt.subplot(233)
 
-x1 = [1, 5, 9, 13, 17]
-y1 = [5, 30, 15, 35, 5]
+speed = [4, 4, 7, 7, 8, 9, 10, 10, 10, 11, 11, 12, 12, 12, 12, 13, 13, 13, 13, 14, 14, 14, 14, 15, 15, 15, 16, 16, 17, 17, 17, 18, 18, 18, 18, 19, 19, 19, 20, 20, 20, 20, 20, 22, 23, 24, 24, 24, 24, 25]
+dist = [2, 10, 4, 22, 16, 10, 18, 26, 34, 17, 28, 14, 20, 24, 28, 26, 34, 34, 46, 26, 36, 60, 80, 20, 26, 54, 32, 40, 32, 40, 50, 42, 56, 76, 84, 36, 46, 68, 32, 48, 52, 56, 64, 66, 54, 70, 92, 93, 120, 85]
 
-#連線
-#plt.plot(x1, y1, color='red')
-
-#linestyle 虛線樣式
-#plt.plot(x1, y1, color='red', linestyle="--")
-
-#linestyle 虛點樣式
-#plt.plot(x1, y1, color='red', linestyle="-.")
-
-#linestyle 虛點樣式「:」
-#plt.plot(x1, y1, color='red', linestyle=":")
-
-#marker 點「.」標記
-#因為需要展示出效果，因此把 linestyle 設為實線，linewidth 為 2.0，markersize 設為 16
-#plt.plot(x1, y1, color='red', linestyle="-", linewidth="2", markersize="16", marker=".")
-
-#marker 圓「o」標記
-#plt.plot(x1, y1, color='red', linestyle="-", linewidth="2", markersize="16", marker="o")
-
-#marker 星「*」標記
-#plt.plot(x1, y1, color='red', linestyle="-", linewidth="2", markersize="16", marker="*")
-
-#marker 矩形「s」標記
-#plt.plot(x1, y1, color='red', linestyle="-", linewidth="2", markersize="16", marker="s")
-
-#plt.plot(x1, y1, color='red', linestyle="-", linewidth="2", markersize="16", marker=".", label="Test")
-
-# 繪製折線圖，顏色「紅色」，線條樣式「-」，線條寬度「2」，標記大小「16」，標記樣式「.」，圖例名稱「Plot 1」
-plt.plot(x1, y1, color='red', linestyle="-", linewidth="2", markersize="16", marker=".", label="Plot 1")
-
-x2 = [3, 8, 12, 16, 20]
-y2 = [8, 33, 18, 38, 8]
-# 繪製折線圖，顏色「藍色」，線條樣式「-」，線條寬度「2」，標記大小「16」，標記樣式「.」，圖例名稱「Plot 2」
-plt.plot(x2, y2, color='blue', linestyle="-", linewidth="2", markersize="16", marker=".", label="Plot 2")
-
-plt.xlabel('x label', fontsize="10") # 設定 x 軸標題內容及大小
-plt.ylabel('y label', fontsize="10") # 設定 y 軸標題內容及大小
-plt.title('Plot title', fontsize="18") # 設定圖表標題內容及大小
-
-#設定 x, y 軸座標範圍
-#plt.xlim(0, 30) # 設定 x 軸座標範圍
-#plt.ylim(0, 50) # 設定 y 軸座標範圍
-
-plt.legend()
-
-
+plt.plot(speed, dist)
 
 
 #第四張圖
 plt.subplot(234)
+
+
+
+
 
 
 

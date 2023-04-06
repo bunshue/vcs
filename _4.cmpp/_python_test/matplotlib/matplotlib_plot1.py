@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 #plt.figure(figsize=(8,8))	#設定圖片視窗大小
-plt.figure(num = 'plot 集合 1', figsize=[20, 15], dpi=84, facecolor="whitesmoke", edgecolor="r", linewidth=1, frameon=True)
+plt.figure(num = 'plot 集合 1 函數曲線', figsize=[20, 15], dpi=84, facecolor="whitesmoke", edgecolor="r", linewidth=1, frameon=True)
 #設定中文字型及負號正確顯示
 #設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
@@ -15,6 +15,57 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
 #第一張圖
 plt.subplot(231)
+
+x = np.linspace(0, 6.28, 10)
+y = np.sin(x / 2)
+
+dx = 0.3
+#連線
+plt.plot(x + dx * 0, y, color='red')
+
+#linestyle 虛線樣式
+plt.plot(x + dx * 1, y, color='red', linestyle="--")
+
+#linestyle 虛點樣式
+plt.plot(x + dx * 2, y, color='red', linestyle="-.")
+
+#linestyle 虛點樣式「:」
+plt.plot(x + dx * 3, y, color='red', linestyle=":")
+
+#marker 點「.」標記
+#因為需要展示出效果，因此把 linestyle 設為實線，linewidth 為 2.0，markersize 設為 8
+plt.plot(x + dx * 4, y, color='red', linestyle="-", linewidth="2", markersize="8", marker=".")
+
+#marker 圓「o」標記
+plt.plot(x + dx * 5, y, color='red', linestyle="-", linewidth="2", markersize="8", marker="o")
+
+#marker 星「*」標記
+plt.plot(x + dx * 6, y, color='red', linestyle="-", linewidth="2", markersize="8", marker="*")
+
+#marker 矩形「s」標記
+plt.plot(x + dx * 7, y, color='red', linestyle="-", linewidth="2", markersize="8", marker="s")
+
+plt.plot(x + dx * 8, y, color='red', linestyle="-", linewidth="2", markersize="8", marker=".", label="Test")
+
+# 繪製折線圖，顏色「紅色」，線條樣式「-」，線條寬度「2」，標記大小「16」，標記樣式「.」，圖例名稱「Plot 1」
+plt.plot(x + dx * 9, y, color='red', linestyle="-", linewidth="2", markersize="8", marker=".", label="Plot 1")
+
+# 繪製折線圖，顏色「藍色」，線條樣式「-」，線條寬度「2」，標記大小「16」，標記樣式「.」，圖例名稱「Plot 2」
+plt.plot(x + dx * 9, y, color='blue', linestyle="-", linewidth="2", markersize="8", marker=".", label="Plot 2")
+
+plt.xlabel('x label', fontsize="10") # 設定 x 軸標題內容及大小
+plt.ylabel('y label', fontsize="10") # 設定 y 軸標題內容及大小
+plt.title('Plot title', fontsize="18") # 設定圖表標題內容及大小
+
+#設定 x, y 軸座標範圍
+#plt.xlim(0, 30) # 設定 x 軸座標範圍
+#plt.ylim(0, 50) # 設定 y 軸座標範圍
+
+plt.legend()
+
+
+#第二張圖
+plt.subplot(232)
 
 degree = np.linspace(0, 2*np.pi, 36)    #共 36 個點
  
@@ -37,17 +88,6 @@ plt.xlabel('角度(弧度)')
 plt.ylabel('sin cos tan')
 #plt.legend()
 plt.title('三角函數')
-
-#第二張圖
-plt.subplot(232)
-
-x1 = [1, 2, 3, 4, 5, 6]
-y1 = [20, 30, 14, 67, 42, 12]
-plt.plot(x1, y1, lw=2, label='Mary')
-
-x2 = [1, 3, 4, 5, 9, 11]
-y2 = [12, 33, 43, 22, 34, 20]
-plt.plot(x2, y2, lw=2, label='Tom')
 
 #第三張圖
 plt.subplot(233)
@@ -116,9 +156,9 @@ z = np.cos(x**2)
 plt.plot(x, y, label="$sin(x)$", color="red", linewidth=2)
 plt.plot(x, z, "b--", label="$cos(x^2)$")
 
-plt.xlabel("Time(s)", fontproperties=font)
-plt.ylabel("Amplitude", fontproperties=font)
-plt.title(u"中文測試中...", fontproperties=font)
+plt.xlabel('Time(s)', fontproperties=font)
+plt.ylabel('Amplitude', fontproperties=font)
+plt.title(u'三角函數', fontproperties=font, fontsize=24)
 
 plt.ylim(-1.2, 1.2)
 plt.legend()
@@ -181,7 +221,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 #plt.figure(figsize=(8,8))	#設定圖片視窗大小
-plt.figure(num = 'plot 集合 2', figsize=[20, 15], dpi=84, facecolor="whitesmoke", edgecolor="r", linewidth=1, frameon=True)
+plt.figure(num = 'plot 集合 2 函數曲線', figsize=[20, 15], dpi=84, facecolor="whitesmoke", edgecolor="r", linewidth=1, frameon=True)
 #設定中文字型及負號正確顯示
 #設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
@@ -221,29 +261,16 @@ plt.plot(x1, y1*10000)
 #第四張圖
 plt.subplot(234)
 
-x = np.linspace(-2 * np.pi, 2 * np.pi, 100)
-y = np.sinc(x)
-plt.plot(x, y)
-plt.margins(0.2, 0.2)
-plt.title('多了margins設定 ')
-
-#第五~六張圖
-
-#x, y 承上
-
-xx, yy = np.meshgrid(x, x)
-zz = np.sinc(np.sqrt((xx - 1)**2 + (yy - 1)**2))
-
 #第五張圖
 plt.subplot(235)
-plt.imshow(zz)
-plt.title('default margins')
+
+
+
 
 #第六張圖
 plt.subplot(236)
-plt.imshow(zz)
-plt.margins(0.2)
-plt.title('margins(0.2)')
+
+
 
 
 plt.show()
@@ -257,7 +284,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 #plt.figure(figsize=(8,8))	#設定圖片視窗大小
-plt.figure(num = 'plot 集合 3', figsize=[20, 15], dpi=84, facecolor="whitesmoke", edgecolor="r", linewidth=1, frameon=True)
+plt.figure(num = 'plot 集合 3 直線連線', figsize=[20, 15], dpi=84, facecolor="whitesmoke", edgecolor="r", linewidth=1, frameon=True)
 #設定中文字型及負號正確顯示
 #設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
@@ -333,8 +360,13 @@ plt.ylabel("零用金數目")
 #第六張圖
 plt.subplot(236)
 
+x1 = [1, 2, 3, 4, 5, 6]
+y1 = [20, 30, 14, 67, 42, 12]
+plt.plot(x1, y1, lw=2, label='Mary')
 
-
+x2 = [1, 3, 4, 5, 9, 11]
+y2 = [12, 33, 43, 22, 34, 20]
+plt.plot(x2, y2, lw=2, label='Tom')
 
 plt.show()
 

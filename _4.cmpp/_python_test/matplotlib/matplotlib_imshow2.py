@@ -1,6 +1,7 @@
 # imshow 集合
 
 selected_font = 'C:/_git/vcs/_4.cmpp/_python_test/data/msch.ttf'
+filename = 'C:/______test_files/bug.bmp'
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -14,8 +15,6 @@ plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microso
 #設定負號
 plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 
-
-filename = 'C:/______test_files/bug.bmp'
 img = np.asarray(Image.open(filename))
 #print(repr(img))
 
@@ -31,7 +30,6 @@ plt.subplot(232)
 #1 偽色彩
 lum_img = img[:, :, 0]
 plt.imshow(lum_img)
-
 
 #第三張圖
 plt.subplot(233)

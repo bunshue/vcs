@@ -59,71 +59,6 @@ lblmsg = tk.Label(window, fg="red", textvariable=msg)
 lblmsg.pack()
 
 
-button1 = tk.Button(window, text="這是按鈕一", width=20)
-button1.pack(padx=20, pady=5, side="right")
-button2 = tk.Button(window, text="這是按鈕二", width=20)
-button2.pack(padx=20, pady=5, side="left")
-button3 = tk.Button(window, text="這是按鈕三", width=20)
-button3.pack(padx=20, pady=5, side="bottom")
-button4 = tk.Button(window, text="這是按鈕四", width=20)
-button4.pack(padx=20, pady=5)
-
-
-button1 = tk.Button(window, text="這是按鈕一", width=20)
-button1.pack(padx=20, pady=5)
-button2 = tk.Button(window, text="這是按鈕二", width=20)
-button2.pack(padx=20, pady=5)
-button3 = tk.Button(window, text="這是按鈕三", width=20)
-button3.pack(padx=20, pady=5)
-button4 = tk.Button(window, text="這是按鈕四", width=20)
-button4.pack(padx=20, pady=5)
-
-button1 = tk.Button(window, text="這是按鈕一", width=20)
-button1.pack()
-button2 = tk.Button(window, text="這是按鈕二", width=20)
-button2.pack()
-button3 = tk.Button(window, text="這是按鈕三", width=20)
-button3.pack()
-button4 = tk.Button(window, text="這是按鈕四", width=20)
-button4.pack()
-
-button1 = tk.Button(window, text="這是按鈕一", width=20)
-button1.place(relx=0.5, rely=0.5, anchor="center")
-button2 = tk.Button(window, text="這是按鈕二", width=20)
-button2.place(relx=0.1, rely=0.1, anchor="nw")
-button3 = tk.Button(window, text="這是按鈕三", width=20)
-button3.place(relx=0.1, rely=0.8, anchor="w")
-
-
-button1 = tk.Button(window, text="這是按鈕一", width=20)
-button1.grid(row=0, column=0, padx=5, pady=5)
-button2 = tk.Button(window, text="這是按鈕二", width=20)
-button2.grid(row=0, column=1, padx=5, pady=5)
-button3 = tk.Button(window, text="這是按鈕三", width=20)
-button3.grid(row=0, column=2, padx=5, pady=5)
-button4 = tk.Button(window, text="這是按鈕四", width=20)
-button4.grid(row=1, column=0, padx=5, pady=5)
-button5 = tk.Button(window, text="這是按鈕五", width=20)
-button5.grid(row=1, column=1, padx=5, pady=5)
-button6 = tk.Button(window, text="這是按鈕六", width=20)
-button6.grid(row=1, column=2, padx=5, pady=5)
-
-
-button1 = tk.Button(window, text="這是按鈕一", width=20)
-button1.grid(row=0, column=0, padx=5, pady=5)
-button2 = tk.Button(window, text="這是按鈕二", width=20)
-button2.grid(row=0, column=1, padx=5, pady=5, columnspan=2,sticky="e")
-button3 = tk.Button(window, text="這是按鈕三", width=20)
-button3.grid(row=0, column=3, padx=5, pady=5)
-button4 = tk.Button(window, text="這是按鈕四", width=20)
-button4.grid(row=1, column=0, padx=5, pady=5)
-button5 = tk.Button(window, text="這是按鈕五", width=20)
-button5.grid(row=1, column=1, padx=5, pady=5)
-button6 = tk.Button(window, text="這是按鈕六", width=20)
-button6.grid(row=1, column=2, padx=5, pady=5)
-
-
-
 '''
 import tkinter as tk
 window = tk.Tk()
@@ -190,6 +125,6 @@ window.mainloop()
 
 window.mainloop()
 
-window.destroy() # optional; see description below
+#window.destroy() # optional; see description below
 
 
