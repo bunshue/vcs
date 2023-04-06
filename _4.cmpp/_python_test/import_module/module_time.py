@@ -1,27 +1,11 @@
 # python import module : time, datetime, calendar
 
 import time
-import datetime
 from time import sleep
 #from time import sleep_ms
 
 print("測試兩事件所經歷的時間 ST")
 time_start = time.time()
-
-
-#取得查詢當年年份及上個月月份
-now_date = datetime.datetime.now() # 取得查詢當下的時間
-now_year = now_date.year # 取得查詢當下當年年份
-
-# 取得查詢當下上個月月份
-if(now_date.month != 1):
-    last_month = now_date.month - 1
-else:
-    last_month = 12
-
-print("now_year = " + str(now_year))
-print("last_month = " + str(last_month))
-
 
 print("每0.3秒打印一字")
 a = 0;
@@ -41,12 +25,6 @@ def countdown(n):
 print("倒數計時")
 countdown(5)
  
-
-
-print("打印現在時間")
-from datetime import datetime
-now = datetime.today()
-print(now)
 
 start = time.time()
 time1 = time.gmtime(28800)
@@ -89,7 +67,6 @@ print("從1/1/1970 12:00:00至今的 tick數 : ", ticks)
 import time;  # This is required to include time module.
 
 
-
 print("獲取當前時間");
 localtime = time.localtime(time.time())
 print("Local current time :", localtime)
@@ -98,52 +75,6 @@ print("Local current time :", localtime)
 print("獲取格式化的時間");
 localtime = time.asctime( time.localtime(time.time()) )
 print("Local current time :", localtime)
-
-#import datetime
-from datetime import *
-#from dateutil.relativedelta import *
-
-NOW = datetime.now()
-TODAY = date.today()
-
-print(NOW)
-print(TODAY)
-
-#how old is john
-johnbirthday = datetime(1978, 4, 5, 12, 0)
-#relativedelta(NOW, johnbirthday)
-
-#print(relativedelta(NOW, johnbirthday))
-
-
-#python template
-import time
-import datetime
-
-a = datetime.datetime(2012,3,1)
-b = datetime.datetime(2012,2,28)
-
-print(a - b)
-print("兩者時間差" , a - b)
-
-a = datetime.datetime(2012,3,1,10,5,30)
-b = datetime.datetime(2012,2,28,12,34,56)
-
-print(a - b)
-print("兩者時間差" , a - b)
-
-
-a = datetime.datetime(2006,3,11,9,15,30)
-b = datetime.datetime.now
-
-#print(a - b)
-#print("兩者時間差" , a - b)
-
-print(datetime.datetime.now())
-
-d = datetime.datetime.now()
-#print("現在時間" , d)
-#print("過去時間" , a)
 
 
 import time
@@ -157,75 +88,13 @@ print("時" , t.tm_hour)
 print("分" , t.tm_min)
 print("秒" , t.tm_sec)
 
-import datetime
-
-today = datetime.date.today()
-month = int(input("請問你是在哪一個月份出生："))
-day = int(input("請問你是出生日是幾號："))
-birthday = datetime.date(today.year, month, day)
-
-if birthday < today:
-  birthday = datetime.date(today.year+1, month, day)
-
-diff = birthday - today
-if diff.days == 0:
-  print("不會吧！今天是你的生日，祝你生日快樂！")
-else:
-  print("哇！再過 " + str(diff.days) + " 天就是你的生日了！")
-
-
-age = int(input("你的年紀是："))
+#age = int(input("你的年紀是："))
+age = 25
 if age >= 20:
   print("請記得今年要去投票")
 else:
   diff = str(20 - age)
   print("要年滿20歲才能夠投票，你還差 " + diff + " 歲")
-
-print("獲取昨天的日期");
-def getYesterday():
-    today = datetime.date.today()
-    oneday = datetime.timedelta(days=1)
-    yesterday = today - oneday
-    #print(type(today))  # 檢視獲取到時間的型別
-    #print(type(yesterday))
-    return yesterday
-yesterday = getYesterday()
-print("昨天的時間：", yesterday)
-
-
-# 字串轉換為時間
-def strTodatetime(datestr, format):
-    return datetime.datetime.strptime(datestr, format)
-print(time.strftime("%Y-%m-%d", time.localtime()))
-print(strTodatetime("2014-3-1","%Y-%m-%d"))
-print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-print(strTodatetime("2019-4-15","%Y-%m-%d")-strTodatetime("2006-03-11","%Y-%m-%d"))
-
-
-
-
-print("獲取當天的日期");
-#print(datetime.datetime.now()) fail
-#print(datetime.date.today())   fail
-
-#兩日期相減 
-d1 = datetime.datetime(2005, 2, 16) 
-d2 = datetime.datetime(2004, 12, 31) 
-print((d1 - d2).days)
-#執行時間： 
-starttime = datetime.datetime.now() 
-endtime = datetime.datetime.now() 
-print((endtime - starttime).seconds)
-#計算當前時間向後10天的時間。 
-# 如果是小時 days 換成 hours 
-d1 = datetime.datetime.now() 
-d3 = d1 - datetime.timedelta(days =10) 
-print(str(d3) )
-print(d3.ctime())
-#print(time.ctime([sec]))#把秒數轉換成日期格式，如果不帶引數，則顯示當前的時間。
-#time.ctime([ sec ])
-print("time.ctime() : %s" % time.ctime())
-
 
 
 
@@ -278,6 +147,202 @@ print("Current time is " + str(currentHour) + ":"
     + str(currentMinute) + ":" + str(currentSecond) + " GMT")
     
 
+
+
+
+# python import module : datetime
+
+import datetime
+
+#取得查詢當年年份及上個月月份
+now_date = datetime.datetime.now() # 取得查詢當下的時間
+now_year = now_date.year # 取得查詢當下當年年份
+
+# 取得查詢當下上個月月份
+if(now_date.month != 1):
+    last_month = now_date.month - 1
+else:
+    last_month = 12
+
+print("now_year = " + str(now_year))
+print("last_month = " + str(last_month))
+
+
+
+print("打印現在時間")
+from datetime import datetime
+now = datetime.today()
+print(now)
+
+#import datetime
+from datetime import *
+#from dateutil.relativedelta import *
+
+NOW = datetime.now()
+TODAY = date.today()
+
+print(NOW)
+print(TODAY)
+
+#how old is john
+johnbirthday = datetime(1978, 4, 5, 12, 0)
+#relativedelta(NOW, johnbirthday)
+
+#print(relativedelta(NOW, johnbirthday))
+
+
+
+#python template
+import time
+import datetime
+
+a = datetime.datetime(2012,3,1)
+b = datetime.datetime(2012,2,28)
+
+print(a - b)
+print("兩者時間差" , a - b)
+
+a = datetime.datetime(2012,3,1,10,5,30)
+b = datetime.datetime(2012,2,28,12,34,56)
+
+print(a - b)
+print("兩者時間差" , a - b)
+
+
+a = datetime.datetime(2006,3,11,9,15,30)
+b = datetime.datetime.now
+
+#print(a - b)
+#print("兩者時間差" , a - b)
+
+print(datetime.datetime.now())
+
+d = datetime.datetime.now()
+#print("現在時間" , d)
+#print("過去時間" , a)
+
+import datetime
+
+today = datetime.date.today()
+#month = int(input("請問你是在哪一個月份出生："))
+month = 3
+#day = int(input("請問你是出生日是幾號："))
+day = 11
+birthday = datetime.date(today.year, month, day)
+
+if birthday < today:
+  birthday = datetime.date(today.year+1, month, day)
+
+diff = birthday - today
+if diff.days == 0:
+  print("不會吧！今天是你的生日，祝你生日快樂！")
+else:
+  print("哇！再過 " + str(diff.days) + " 天就是你的生日了！")
+
+
+print("獲取昨天的日期");
+def getYesterday():
+    today = datetime.date.today()
+    oneday = datetime.timedelta(days=1)
+    yesterday = today - oneday
+    #print(type(today))  # 檢視獲取到時間的型別
+    #print(type(yesterday))
+    return yesterday
+yesterday = getYesterday()
+print("昨天的時間：", yesterday)
+
+
+# 字串轉換為時間
+def strTodatetime(datestr, format):
+    return datetime.datetime.strptime(datestr, format)
+print(time.strftime("%Y-%m-%d", time.localtime()))
+print(strTodatetime("2014-3-1","%Y-%m-%d"))
+print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+print(strTodatetime("2019-4-15","%Y-%m-%d")-strTodatetime("2006-03-11","%Y-%m-%d"))
+
+
+
+
+print("獲取當天的日期");
+#print(datetime.datetime.now()) fail
+#print(datetime.date.today())   fail
+
+#兩日期相減 
+d1 = datetime.datetime(2005, 2, 16) 
+d2 = datetime.datetime(2004, 12, 31) 
+print((d1 - d2).days)
+#執行時間： 
+starttime = datetime.datetime.now() 
+endtime = datetime.datetime.now() 
+print((endtime - starttime).seconds)
+#計算當前時間向後10天的時間。 
+# 如果是小時 days 換成 hours 
+d1 = datetime.datetime.now() 
+d3 = d1 - datetime.timedelta(days =10) 
+print(str(d3) )
+print(d3.ctime())
+#print(time.ctime([sec]))#把秒數轉換成日期格式，如果不帶引數，則顯示當前的時間。
+#time.ctime([ sec ])
+print("time.ctime() : %s" % time.ctime())
+
+
+
+
+import datetime as dt
+
+now = dt.datetime.now() # current date and time
+
+year = now.strftime("%Y")
+print("year:", year)
+
+month = now.strftime("%m")
+print("month:", month)
+
+day = now.strftime("%d")
+print("day:", day)
+
+time = now.strftime("%H:%M:%S")
+print("time:", time)
+
+date_time = now.strftime("%Y-%m-%d, %H:%M:%S")
+print("date and time:",date_time)
+
+
+from datetime import datetime
+
+tt = datetime.strptime("2018-01-31", "%Y-%m-%d")
+print(tt)
+
+
+from datetime import datetime
+
+dateString = "7-May-2018"
+dateFormatter = "%u-%b-%Y"
+tt = datetime.strptime(dateString, dateFormatter)
+print(tt)
+
+
+from datetime import datetime
+
+dateString = "31/12/2013"
+dateFormatter = "%d/%m/%Y"
+tt = datetime.strptime(dateString, dateFormatter)
+print(tt)
+
+
+from datetime import datetime
+
+dateString = "31/12/2013"
+dateFormatter = "%d/%m/%Y"
+tt = datetime.strptime(dateString, dateFormatter)
+print(tt)
+
+from datetime import datetime
+
+dateString = "Monday, July 16, 2018 20:01:56"
+dateFormatter = "%A, %B %d, %Y %H:%M:%S"
+tt = datetime.strptime(dateString, dateFormatter)
+print(tt)
 
 
 

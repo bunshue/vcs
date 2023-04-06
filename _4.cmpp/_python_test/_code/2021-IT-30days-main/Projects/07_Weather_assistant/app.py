@@ -7,7 +7,7 @@ def get_data():
     url = "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-C0032-001"
     params = {
         "Authorization": "你的API授權碼",
-        "locationName": "你的城市",
+        "locationName": "新竹市",
     }
 
     response = requests.get(url, params=params)
