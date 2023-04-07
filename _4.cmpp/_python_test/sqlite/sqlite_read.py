@@ -17,6 +17,7 @@ print(row[0], row[1])
 '''
 
 rows = cursor.fetchall()    #讀取全部資料
+print('共有 : ' + str(len(rows)) + " 筆資料")
 print('顯示原始資料')
 print(rows)
 

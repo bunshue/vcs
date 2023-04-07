@@ -73,8 +73,9 @@ ax.set_yticks([])
 plt.tight_layout()
 plt.show()
 
+'''
 #存圖命令
 filename = 'Helmholtz_coil,_B_magnitude_cross_section.svg'
 fig.savefig(filename)
-
+'''
 

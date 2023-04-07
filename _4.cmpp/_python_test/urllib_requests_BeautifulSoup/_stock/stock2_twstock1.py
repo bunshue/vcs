@@ -1,4 +1,4 @@
-# Python 新進測試 17
+# Python 測試 twstock 1
 
 import twstock
 

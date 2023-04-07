@@ -1,8 +1,10 @@
-import twstock as t
+# Python 測試 twstock 3
+
+import twstock
 import pandas as p
 
-#在('')裡打股票代碼
-stock = t.realtime.get('2330')
+stock_code = str(2330)
+stock = twstock.realtime.get(stock_code)
 
 #檢查是不是即時資料 是:顯示True 不是:顯示False  
 print(stock['success'])

@@ -1,3 +1,5 @@
+# Python 測試 yfinance
+
 import yfinance as yf
 import matplotlib.pyplot as plt
 
@@ -26,8 +28,6 @@ tw2330=yf.Ticker("2330.TW")      # 台積電
 print(type(tw2330))
 #<class 'yfinance.ticker.Ticker'>
 '''
-
-
 
 import yfinance as yf
 

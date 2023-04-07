@@ -1,3 +1,5 @@
+# Python 測試 twse 2
+
 #4.5 台灣證券交易所API
 #這個API長得大概像這樣:
 #http://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=20160501&stockNo=2330

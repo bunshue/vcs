@@ -1,3 +1,5 @@
+# Python 測試 twse 1
+
 import json
 import pandas as pd
 import requests

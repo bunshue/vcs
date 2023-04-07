@@ -47,6 +47,55 @@ os.system("notepad " + filename_r)
 
 
 
+import sys
+print(sys.version_info)
+print(sys.version_info[0])
+if sys.version_info[0] >= 3:
+    print('python 新版')
+else:
+    print('python 舊版')
+    
+if sys.version < '3':
+    print('python 舊版')
+else:
+    print('python 新版')
+
+
+import os
+
+print(__file__)
+
+print(os.path.abspath(__file__))
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+print(BASE_DIR)
+
+DIRS = os.path.join(BASE_DIR, 'templates')
+NAME = os.path.join(BASE_DIR, 'db.sqlite3')
+AAAA = os.path.join(BASE_DIR, 'static')
+
+print(DIRS)
+print(NAME)
+print(AAAA)
+
+
+import os
+
+PATH = "/".join(os.path.abspath(__file__).split("/")[:-2])
+
+#sys.path.append(PATH)
+print(PATH)
+
+import os
+
+print(os.environ.get("CI_COMMIT_TAG", "0.0.0"))
+_version = os.environ.get("CI_COMMIT_TAG", "0.0.1.dev2")
+
+
+'''here = os.path.abspath(os.path.dirname(__file__))
+with open(os.path.join(here, "README.md"), encoding="utf-8") as f:
+    long_description = f.read()
+'''
 
 
 

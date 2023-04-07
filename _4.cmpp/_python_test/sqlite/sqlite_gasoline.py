@@ -11,8 +11,25 @@ def disp_menu():
     print("0.結束")
     print("------------")
 
-def disp_10data():
+def disp_alldata():
+    conn = sqlite3.connect('gasoline.sqlite')
     cursor = conn.execute('select * from prices order by gdate desc;')
+
+    n = 0
+    for row in cursor:
+        print("日期：{}，92無鉛：{}，95無鉛：{}，98無鉛：{}". \
+            format(row[0],row[1],row[2],row[3]))
+        n = n + 1
+        '''
+        if n == 20:
+            x = input("請按Enter鍵繼續...(Q:回主選單)")
+            if x == 'Q' or x == 'q': break
+            n = 0
+        '''
+def disp_10data():
+    conn = sqlite3.connect('gasoline.sqlite')
+    cursor = conn.execute('select * from prices order by gdate desc;')
+    
     n = 0
     for row in cursor:
         print("日期：{}，92無鉛：{}，95無鉛：{}，98無鉛：{}". \
@@ -22,8 +39,10 @@ def disp_10data():
             break
 
 def chart():
-    data = []
+    conn = sqlite3.connect('gasoline.sqlite')
     cursor = conn.execute('select * from prices order by gdate;')
+    
+    data = []
     for row in cursor:
         data.append(list(row))
     x = np.arange(0,len(data))
@@ -45,25 +64,15 @@ def chart():
     plt.legend()
     plt.show()
 
-def disp_alldata():
-    cursor = conn.execute('select * from prices order by gdate desc;')
-    n = 0
-    for row in cursor:
-        print("日期：{}，92無鉛：{}，95無鉛：{}，98無鉛：{}". \
-            format(row[0],row[1],row[2],row[3]))
-        n = n + 1
-        '''
-        if n == 20:
-            x = input("請按Enter鍵繼續...(Q:回主選單)")
-            if x == 'Q' or x == 'q': break
-            n = 0
-        '''
-
-conn = sqlite3.connect('gasoline.sqlite')
-
 while True:
+    print()
     disp_menu()
-    choice = int(input("請輸入您的選擇:"))
+    sel = input("請輸入您的選擇:")
+    if sel < '0' or sel > '3':
+        continue
+    
+    choice = int(sel)
+
     if choice == 0 :
         break
     if choice == 1: 
@@ -74,11 +83,6 @@ while True:
         chart()
     else:
         break
-    x = input("請按Enter鍵回主選單")
-
-
-
-
 
 
 
