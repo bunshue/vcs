@@ -12,12 +12,12 @@ while(cap.isOpened()):
 
   cv2.imshow('frame',frame)
 
-  c = cv2.waitKey(1)
-  if c == 27:     #ESC
+  k = cv2.waitKey(1)
+  if k == 27:     #ESC
     break
-  elif c == ord('q'): # 若按下 q 鍵則離開迴圈
+  elif k == ord('q'): # 若按下 q 鍵則離開迴圈
     break
-  elif c == ord('s'): # 若按下 s 鍵則存圖
+  elif k == ord('s'): # 若按下 s 鍵則存圖
     cv2.imwrite('test.jpg', frame)
 
 cap.release()

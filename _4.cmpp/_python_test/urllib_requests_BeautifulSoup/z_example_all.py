@@ -435,13 +435,14 @@ def example08():
 def example09():
     print('範例09')
 
-def example10():
-    print('範例10')
-
-
 while True:
+    print()
     disp_menu()
-    choice = int(input("請輸入您的選擇:"))
+    sel = input("請輸入您的選擇:")
+    if sel < '0' or sel > '9':
+        continue
+    
+    choice = int(sel)
     if choice == 0 :
         break
     if choice == 1: 
@@ -462,14 +463,8 @@ while True:
         example08()
     elif choice == 9:
         example09()
-    elif choice == 10:
-        example10()
     else:
         break
-    x = input("請按Enter鍵回主選單")
-
-
-
 
 
 
