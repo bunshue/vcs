@@ -2,6 +2,8 @@ import sqlite3
 import numpy as np
 import matplotlib.pyplot as plt
 
+db_filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/_db/gasoline.sqlite'
+
 def disp_menu():
     print("中油歷年油價查詢系統")
     print("------------")
@@ -12,7 +14,7 @@ def disp_menu():
     print("------------")
 
 def disp_alldata():
-    conn = sqlite3.connect('gasoline.sqlite')
+    conn = sqlite3.connect(db_filename)
     cursor = conn.execute('select * from prices order by gdate desc;')
 
     n = 0
@@ -27,7 +29,7 @@ def disp_alldata():
             n = 0
         '''
 def disp_10data():
-    conn = sqlite3.connect('gasoline.sqlite')
+    conn = sqlite3.connect(db_filename)
     cursor = conn.execute('select * from prices order by gdate desc;')
     
     n = 0
@@ -39,7 +41,7 @@ def disp_10data():
             break
 
 def chart():
-    conn = sqlite3.connect('gasoline.sqlite')
+    conn = sqlite3.connect(db_filename)
     cursor = conn.execute('select * from prices order by gdate;')
     
     data = []
@@ -73,7 +75,7 @@ while True:
     
     choice = int(sel)
 
-    if choice == 0 :
+    if choice == 0:
         break
     if choice == 1: 
         disp_alldata()

@@ -9,16 +9,16 @@ import time
 
 TWSE_URL = 'http://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json'
 
-def get_web_content(stock_id, current_date):
-    resp = requests.get(TWSE_URL + '&date=' + current_date + '&stockNo=' + stock_id)
+def get_web_content(search_stock, current_date):
+    resp = requests.get(TWSE_URL + '&date=' + current_date + '&stockNo=' + search_stock)
     if resp.status_code != 200:
         return None
     else:
         return resp.json()
 
-def get_data(stock_id, current_date):
+def get_data(search_stock, current_date):
     info = list()
-    resp = get_web_content(stock_id, current_date)
+    resp = get_web_content(search_stock, current_date)
     if resp is None:
         return None
     else:
@@ -33,16 +33,17 @@ def get_data(stock_id, current_date):
                 info.append(record)
         return info
 
-def main():
-    stock_id = '2330'
+def get_stock_data_twse(search_stock):
     current_date = time.strftime('%Y%m%d')
     current_year = time.strftime('%Y')
     current_month = time.strftime('%m')
     print('Processing data for %s %s...' % (current_year, current_month))
-    get_data(stock_id, current_date)
-    collected_info = get_data(stock_id, current_date)
+    get_data(search_stock, current_date)
+    collected_info = get_data(search_stock, current_date)
     for info in collected_info:
         print(info)
 
-if __name__ == '__main__':
-    main()
+search_stock = '2330'
+get_stock_data_twse(search_stock)
+
+

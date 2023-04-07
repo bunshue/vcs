@@ -1,4 +1,4 @@
-
+'''
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -54,8 +54,82 @@ plt.hist(normal_samples)
 plt.savefig(fname = "my_hist.png", format = "png")
 
 
+import matplotlib.pyplot as plt
+#import matplotlib.gridspec as gridspec
+import numpy as np
+
+x = np.linspace(0, 6.28, 10)
+y = np.sin(x * 2)
+y2 = np.sin(x * 2) * np.sin(x * 2) *10
+
+fig = plt.figure(figsize=(12, 8))
+#gs = gridspec.GridSpec(4, 1, figure=fig)
+ax = fig.add_subplot()
+
+ax.plot(x, y, marker="", alpha=0.8)
+
+ax.grid(20)
+axx = ax.twinx()
+axx.bar(
+	x, y2,
+	alpha=0.2,
+	label="hold_volume",
+	color="pink",
+)
+
+plt.show()
+'''
 
 
 
+import matplotlib.pyplot as plt
+import numpy as np
+
+plt.rcParams['savefig.facecolor'] = "0.8"
+
+
+
+arr = np.arange(100).reshape((10, 10))
+
+plt.close('all')
+fig = plt.figure(figsize=(5, 4))
+
+ax = plt.subplot()
+im = ax.imshow(arr, interpolation="none")
+
+plt.tight_layout()
+
+
+
+
+plt.show()
+
+
+
+plt.close('all')
+arr = np.arange(100).reshape((10, 10))
+fig = plt.figure(figsize=(4, 4))
+im = plt.imshow(arr, interpolation="none")
+
+plt.colorbar(im)
+
+plt.tight_layout()
+plt.show()
+
+
+from mpl_toolkits.axes_grid1 import make_axes_locatable
+
+plt.close('all')
+arr = np.arange(100).reshape((10, 10))
+fig = plt.figure(figsize=(4, 4))
+im = plt.imshow(arr, interpolation="none")
+
+divider = make_axes_locatable(plt.gca())
+cax = divider.append_axes("right", "5%", pad="3%")
+plt.colorbar(im, cax=cax)
+
+plt.tight_layout()
+
+plt.show()
 
 

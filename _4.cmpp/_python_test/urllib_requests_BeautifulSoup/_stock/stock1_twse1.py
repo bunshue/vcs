@@ -138,6 +138,13 @@ plt.grid()
 # 存成圖片, 要放在show()之前
 # plt.savefig("pandas_chart.png")
 # 顯示圖片
+
+#設定中文字型及負號正確顯示
+#設定中文字型檔
+plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
+#設定負號
+plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
+
 plt.show()
 
 

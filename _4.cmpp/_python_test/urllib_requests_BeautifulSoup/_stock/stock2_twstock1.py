@@ -1,26 +1,18 @@
 # Python 測試 twstock 1
 
 import twstock
+import matplotlib.pyplot as plt
+import time
 
-'''
 # 以鴻海的股票代號建立 Stock 物件
-stock = twstock.Stock('2317')  
+stock = twstock.Stock('2317')
+print('最新資料')
 print(stock.price)
-
-'''
-
-import twstock
-
-# 以鴻海的股票代號建立 Stock 物件
-stock = twstock.Stock('2317')  
-print("日期：",stock.date[-1])
-print("開盤價：",stock.open[-1])
-print("最高價：",stock.high[-1])
-print("最低價：",stock.low[-1])
-print("收盤價：",stock.price[-1])
-
-
-import twstock
+print('日期：',stock.date[-1])
+print('開盤價：',stock.open[-1])
+print('最高價：',stock.high[-1])
+print('最低價：',stock.low[-1])
+print('收盤價：',stock.price[-1])
 
 # 以鴻海的股票代號建立 Stock 物件
 stock = twstock.Stock('2317')
@@ -34,11 +26,6 @@ for s in stocklist:
     print(s.close)
 
 
-
-
-
-import twstock
-
 # 鴻海股票即時交易資訊
 real = twstock.realtime.get('2317') 
 if real['success']:  #如果讀取成功
@@ -50,10 +37,6 @@ if real['success']:  #如果讀取成功
 else:
     print('錯誤：' + real['rtmessage'])
 
-
-
-import matplotlib.pyplot as plt
-import twstock
 
 # 以鴻海的股票代號建立 Stock 物件
 stock = twstock.Stock('2317')  
@@ -85,10 +68,6 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 plt.show() 
 
 
-
-import matplotlib.pyplot as plt
-import twstock
-
 companys = ['2330','2912','3293']
 plt.figure(figsize=[10,5])
 for company in companys:
@@ -106,10 +85,6 @@ for company in companys:
 plt.show()
 
 
-
-import matplotlib.pyplot as plt
-import twstock
-import time
 
 #plt.figure(figsize=[12,30])
 stock = twstock.Stock('2317') 

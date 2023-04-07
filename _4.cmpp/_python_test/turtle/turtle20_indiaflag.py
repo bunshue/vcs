@@ -4,7 +4,7 @@ wn=turtle.Screen()
 turtle.up()
 turtle.goto(-190,0)
 turtle.down()
-time.sleep(6)
+time.sleep(1)
 for i in range(2):
 	turtle.color("green")
 	turtle.begin_fill()

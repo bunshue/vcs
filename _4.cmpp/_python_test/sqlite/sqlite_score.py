@@ -25,7 +25,6 @@ def append_data():
             conn.execute(sqlstr)
             conn.commit()
 
-
 def edit_data():
     no = input("請輸入要編輯的學生座號:")
     sqlstr = "select * from student where stdno={};".format(no)
@@ -61,12 +60,21 @@ def disp_data():
     for row in cursor:
         print("No {}: {}".format(row[0],row[1]))
 
-conn = sqlite3.connect('scores.sqlite')
+db_filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/_db/scores.sqlite'
+print('建立資料庫連線, 資料庫 : ' + db_filename)
+conn = sqlite3.connect(db_filename)
 
 while True:
+    print()
     disp_menu()
-    choice = int(input("請輸入您的選擇:"))
-    if choice == 0 : break
+    sel = input("請輸入您的選擇:")
+    if sel < '0' or sel > '4':
+        continue
+    
+    choice = int(sel)
+    
+    if choice == 0:
+        break
     if choice == 1: 
         append_data()
     elif choice == 2:
@@ -75,5 +83,5 @@ while True:
         del_data()
     elif choice == 4:
         disp_data()
-    else: break
-    x = input("請按Enter鍵回主選單")
+    else:
+        break

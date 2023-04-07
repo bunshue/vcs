@@ -1,4 +1,159 @@
 
+
+
+
+C:\Users\david\AppData\Local\Programs\Python\Python38-32>python.exe -m pip install PyPDF2
+C:\Users\david\AppData\Local\Programs\Python\Python38-32>python.exe -m pip install PdfReader
+C:\Users\david\AppData\Local\Programs\Python\Python38-32>python.exe -m pip install auto-py-to-exe
+
+
+C:\Users\david\AppData\Local\Programs\Python\Python38-32>auto-py-to-exe
+
+
+
+Python 列出目錄中所有檔案教學：os.listdir 與 os.walk
+
+
+
+os.listdir 取得檔案列表
+os.listdir 可以取得指定目錄中所有的檔案與子目錄名稱，以下是一個簡單的範例：
+
+
+
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+from os import listdir
+from os.path import isfile, isdir, join
+
+# 指定要列出所有檔案的目錄
+mypath = "/var/log"
+
+# 取得所有檔案與子目錄名稱
+files = listdir(mypath)
+
+# 以迴圈處理
+for f in files:
+  # 產生檔案的絕對路徑
+  fullpath = join(mypath, f)
+  # 判斷 fullpath 是檔案還是目錄
+  if isfile(fullpath):
+    print("檔案：", f)
+  elif isdir(fullpath):
+    print("目錄：", f)
+    
+    
+    
+
+os.walk 遞迴搜尋檔案
+
+os.walk 是一個以遞迴方式列出特定路徑下，所有子目錄與檔案的函數，以下是一個使用範例：
+
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+from os import walk
+
+# 指定要列出所有檔案的目錄
+mypath = "/var/log"
+
+# 遞迴列出所有子目錄與檔案
+for root, dirs, files in walk(mypath):
+  print("路徑：", root)
+  print("  目錄：", dirs)
+  print("  檔案：", files)
+  
+  
+若要取得所有檔案的絕對路徑，讓程式逐一處理的話，可以這樣寫：
+
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+from os import walk
+from os.path import join
+
+# 指定要列出所有檔案的目錄
+mypath = "/var/log"
+
+# 遞迴列出所有檔案的絕對路徑
+for root, dirs, files in walk(mypath):
+  for f in files:
+    fullpath = join(root, f)
+    print(fullpath)
+    
+
+Python 以模組名稱 __name__ 分辨程式執行模式
+
+
+
+
+
+MapKeyboard 重設鍵盤按鍵功能、讓指定按鍵失效！（remap鍵盤、停用按鍵）
+https://123.briian.com/forum.php?mod=viewthread&tid=3668
+MapKeyboard v1.5 停用鍵盤按鍵、將按鍵指定其他功能 REMAP
+https://123.briian.com/forum.php?mod=viewthread&tid=3668
+
+
+
+
+    
+      
+
+
+
+
+
+reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
+
+
+
+on-line compiler
+https://www.tutorialspoint.com/execute_python_online.php
+https://www.tutorialspoint.com/codingground.htm
+
+time
+https://tw.piliapp.com/time-now/tw/taipei/+
+
+同步不同台電腦的python套件之phthon程式
+
+需安裝之套件做成一個list
+
+檢查本機電腦是否有安裝此套件
+若無 則安裝之
+
+
+
+
+
+
+
+http://the.earth.li/~sgtatham/putty/latest/x86/putty.exe
+
+
+
+chatgpt
+gmail/fullname
+
+x=[4 3 9 -7 1 2 0 0]';
+y=fft(x);
+
+
+clear
+t=0:1/50:6.28;
+x=sin(2*pi*15*t);
+y=fft(x);
+m=abs(y);
+%p=unwrap(angle(y));
+f=(0:length(y)-1)'*50/length(y);
+figure(1);plot(t,x),ylabel('Sin(x)'),grid on
+figure(2);plot(f,m),ylabel('Abs.'),grid on
+%figure(3);plot(f,p*180/pi),ylabel('Phase'),grid on
+
+
+
+
+
+
+
+
+
 print('BeautifulSoup 測試 2')
 
 import requests
@@ -221,6 +376,32 @@ def fetch_data():
             conn.execute(sqlstr)
             conn.commit()
 '''
+
+
+
+
+TextBox預設值
+# widgets 
+entry_string = tk.StringVar(value = 'test1111')
+entry = ttk.Entry(window, textvariable = entry_string)
+entry.pack()
+
+TextBox取值
+print(entry_string.get())
+
+
+
+建立一組密碼 並將此密碼拷貝至剪貼簿
+import random
+import pyperclip
+chars = 'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()'
+password = ''
+for c in range(6):
+   password += random.choice(chars)
+print('The Generated Password is %r and it has been copied to your clipboard' %(password))
+pyperclip.copy(password)
+
+
 
 
 
