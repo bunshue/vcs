@@ -4,7 +4,7 @@ import sys
 import requests
 from bs4 import BeautifulSoup
 
-def get_html_data(url):
+def get_html_data1(url):
     print('取得網頁資料: ', url)
     resp = requests.get(url)
     # 檢查 HTTP 回應碼是否為 requests.codes.ok(200)
@@ -17,7 +17,7 @@ def get_html_data(url):
 print('BeautifulSoup 測試 1')
 
 url = 'http://tw.yahoo.com'
-html_data = get_html_data(url)
+html_data = get_html_data1(url)
 if html_data:
         soup = BeautifulSoup(html_data.text, "html.parser")
         print("取得網頁標題", soup.title)
@@ -27,7 +27,7 @@ else:
 print('BeautifulSoup 測試 2')
 
 url = 'https://tw.news.yahoo.com/rss/technology'
-html_data = get_html_data(url)
+html_data = get_html_data1(url)
 if html_data:
         soup = BeautifulSoup(html_data.text, "html.parser")
         type(soup)
@@ -42,7 +42,7 @@ else:
 print('BeautifulSoup 測試 3')
 
 url = 'https://www.google.com.tw/'
-html_data = get_html_data(url)
+html_data = get_html_data1(url)
 if html_data:
         soup = BeautifulSoup(html_data.text, 'html.parser')
         all_links = soup.find_all('a')
@@ -83,7 +83,7 @@ else:
 print('BeautifulSoup 測試 5')
 
 url = 'http://ehappy.tw/bsdemo1.htm'
-html_data = get_html_data(url)
+html_data = get_html_data1(url)
 if html_data:
         html_data.encoding = 'UTF-8'
         soup = BeautifulSoup(html_data.text, 'html.parser')
@@ -98,7 +98,7 @@ else:
 print('BeautifulSoup 測試 6')
 
 url = 'https://oldsiao.neocities.org/'
-html_data = get_html_data(url)
+html_data = get_html_data1(url)
 if html_data:
         soup = BeautifulSoup(html_data.text, 'html.parser')
 
@@ -133,7 +133,7 @@ while True:
 '''
     
 url = 'https://oldsiao.neocities.org/'
-html_data = get_html_data(url)
+html_data = get_html_data1(url)
 if html_data:
         html_data.encoding = 'UTF-8'    # 設定讀取編碼(預設 UTF-8)
         soup = BeautifulSoup(html_data.text, 'html.parser')
@@ -155,7 +155,7 @@ from urllib.request import urlopen
 print('BeautifulSoup 測試 8')
 
 url = 'https://www.ptt.cc/bbs/C_Chat/index.html'
-html_data = get_html_data(url)
+html_data = get_html_data1(url)
 if html_data:
     soup = BeautifulSoup(html_data.text, "html.parser")  # 解析原始碼
     #print(soup.prettify())  #prettify()這個函數可以將DOM tree以比較美觀的方式印出。
@@ -171,7 +171,7 @@ else:
 print('BeautifulSoup 測試 9')
 
 url = 'http://blog.castman.net/web-crawler-tutorial/ch1/connect.html'
-html_data = get_html_data(url)
+html_data = get_html_data1(url)
 if html_data:
     soup = BeautifulSoup(html_data.text, 'html.parser')
     #print(soup.prettify())  #prettify()這個函數可以將DOM tree以比較美觀的方式印出。
@@ -200,7 +200,7 @@ print('BeautifulSoup 測試 10')
 url = 'https://www.ptt.cc/bbs/C_Chat/index.html'
 
 domain = "{}://{}".format(urlparse(url).scheme, urlparse(url).hostname)
-html_data = get_html_data(url)
+html_data = get_html_data1(url)
 soup = BeautifulSoup(html_data.text, 'html.parser')
 #print(soup.prettify())  #prettify()這個函數可以將DOM tree以比較美觀的方式印出。
 all_links = soup.find_all(['a','img'])
@@ -219,7 +219,7 @@ for link in all_links:
 print('BeautifulSoup 測試 11')
 
 domain = "{}://{}".format(urlparse(url).scheme, urlparse(url).hostname)
-html_data = get_html_data(url)
+html_data = get_html_data1(url)
 soup = BeautifulSoup(html_data.text, 'html.parser')
 #print(soup.prettify())  #prettify()這個函數可以將DOM tree以比較美觀的方式印出。
 all_links = soup.find_all(['a','img'])
@@ -255,7 +255,7 @@ post_html = '''
 '''
 
 domain = "{}://{}".format(urlparse(url).scheme, urlparse(url).hostname)
-html_data = get_html_data(url)
+html_data = get_html_data1(url)
 soup = BeautifulSoup(html_data.text, 'html.parser')
 #print(soup.prettify())  #prettify()這個函數可以將DOM tree以比較美觀的方式印出。
 

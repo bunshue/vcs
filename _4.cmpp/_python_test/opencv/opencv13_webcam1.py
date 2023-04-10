@@ -4,6 +4,14 @@ filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/output.avi'
 
 import cv2
 import sys
+import time
+
+#準備存檔用設定
+#使用 XVID 編碼
+fourcc = cv2.VideoWriter_fourcc(*'XVID')
+# 建立 VideoWriter 物件，輸出影片至檔案
+# FPS 值為 20.0，解析度為 640x360
+out = cv2.VideoWriter(filename, fourcc, 20.0, (640, 480))
 
 cap = cv2.VideoCapture(0)
 
@@ -42,14 +50,6 @@ else:
 #cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
 #cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 360)
 
-# 存檔用
-# 使用 XVID 編碼
-fourcc = cv2.VideoWriter_fourcc(*'XVID')
-
-# 建立 VideoWriter 物件，輸出影片至檔案
-# FPS 值為 20.0，解析度為 640x360
-out = cv2.VideoWriter(filename, fourcc, 20.0, (640, 480))
-
 while(True):
     ret, frame = cap.read()   # 從攝影機擷取一張影像
 
@@ -75,7 +75,9 @@ while(True):
     elif k == ord('q'): # 若按下 q 鍵則離開迴圈
         break
     elif k == ord('s'): # 若按下 s 鍵則存圖
-        cv2.imwrite('test.jpg', frame)
+        image_filename = 'Image_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.jpg';
+        cv2.imwrite(image_filename, frame)
+        print('已存圖')
 
 # 釋放所有資源
 out.release()

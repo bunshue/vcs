@@ -60,8 +60,6 @@ while 1:
            if closed.count == 3:
                sound()
 
-
-
     cv2.imshow('WebCam', img)
     k = cv2.waitKey(1)
     if k == 27:     #ESC
@@ -69,7 +67,9 @@ while 1:
     elif k == ord('q'): # 若按下 q 鍵則離開迴圈
         break
     elif k == ord('s'): # 若按下 s 鍵則存圖
-        cv2.imwrite('test.jpg', frame)
+        image_filename = 'Image_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.jpg';
+        cv2.imwrite(image_filename, frame)
+        print('已存圖')
 
 # 釋放所有資源
 cap.release()   # 釋放攝影機

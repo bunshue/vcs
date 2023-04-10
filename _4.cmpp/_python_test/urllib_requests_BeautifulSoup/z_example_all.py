@@ -8,15 +8,27 @@ def disp_menu():
     print('5.台灣樂透開彩')
     print('6.取得氣象資料')
     print('7.蘋果日報標題')
+    print('8.Yahoo字典1b')
     print('0.結束')
     print('------------------------')
-
-#Yahoo字典1 ST
 
 import requests
 from bs4 import BeautifulSoup
 import urllib.parse
 import html5lib
+
+#無參數
+def get_html_data1(url):
+    print('取得網頁資料: ', url)
+    resp = requests.get(url)
+    # 檢查 HTTP 回應碼是否為 requests.codes.ok(200)
+    if resp.status_code != requests.codes.ok:
+        print('讀取網頁資料錯誤, url: ', resp.url)
+        return None
+    else:
+        return resp
+
+#Yahoo字典1 ST
 
 YAHOO_DICTIONARY_URL = "https://tw.dictionary.yahoo.com/dictionary?p="
 YAHOO_REFERER_VALUE  = "https://tw.dictionary.yahoo.com/dictionary"
@@ -95,6 +107,123 @@ def example01():
 
 #Yahoo字典1 SP
 
+#Yahoo字典1b ST
+'''
+此方法是使用yahoo字典檢視網頁原始碼查找要抓取的資料段落及屬性
+然後將要的資料一層一層剖析出來
+'''
+
+def searchdic1b(search_word):
+
+    #yahoo字典的網址，可修改網址查詢想要的單字，網址當中的%s為格式化字串
+    url = "https://tw.dictionary.search.yahoo.com/search?p=%s&fr2=dict" % (search_word)
+    html_data = get_html_data1(url)
+    if html_data:
+        print("擷取網頁資料 OK")
+        #print(html_data.text)
+    else:
+        print('無法取得網頁資料')
+
+    soup = BeautifulSoup(html_data.text, "html.parser")
+    #print(soup.prettify()) # 把排版後的 html 印出來
+
+    try:
+        mainBlock = soup.find_all('div', class_='grp grp-main pl-25')
+
+        #print(mainBlock)
+        #print(mainBlock[0].find_all('span', class_='fz-24 fw-500 c-black lh-24'))
+        #class_ 的"_"符號是因為class是保留字，所以加上_符號作區別
+        search_word = mainBlock[0].find_all('span', class_='fz-24 fw-500 c-black lh-24')
+        print('搜尋英文字 :')
+        #print(search_word)
+        for sw in search_word:
+            #print(sw)
+            for di in sw:
+                print(di.text.replace('\n', ''))
+    except:
+        print("查詢錯誤")
+                  
+    else:
+        print('找出音標並print出來')
+        pronunciation = soup.find_all('span',class_='fz-14')
+        print('000', pronunciation[0].text) #第0個是KK音標
+        print('111', pronunciation[1].text) #第1個是DJ音標
+
+        pos = soup.find_all('li', class_='lh-22 mh-22 mt-12 mb-12 mr-25 last')
+        #print(pos)
+        nnn = pos[0].find_all('div')
+        #print(nnn)
+        for n in nnn:
+            #print(n)
+            for di in n:
+                print(di.text.replace('\n', ''))
+
+        print('釋義:')
+        meaning = soup.find_all('div', class_='grp grp-tab-content-explanation tabsContent-s tab-content-explanation pt-24 tabActived')
+        #print(meaning)
+        print('詞性:')
+        nnn = meaning[0].find_all('div', class_='compTitle lh-25')
+        nnn2 = nnn[0].find_all('span')
+        #print(nnn)
+        for n in nnn2:
+            #print(n)
+            for di in n:
+                print(di.text.replace('\n', ''))
+        print('解釋:')
+        nnn = meaning[0].find_all('div', class_='compTextList ml-50')
+        nnn2 = nnn[0].find_all('span')
+        #print(nnn)
+        for n in nnn2:
+            #print(n)
+            for di in n:
+                print(di.text.replace('\n', ''))
+
+
+'''   old
+        
+        allBlock = soup.find_all('div', class_='compTitle mt-25 mb-10')
+        meaningBlock = allBlock[0].find_all('span', class_='fz-24 fw-500 c-black lh-24')
+
+        # 先找出詞性，詞性使用h3標籤，但在allBlock裡沒有其他h3標籤，所以就不指定class了
+        parts = allBlock[0].find_all('h3')
+        print((len(meaningBlock)))
+        # 依照詞性數量的區塊做迴圈，將一個一個區塊作處理
+        for i in range(len(meaningBlock)):
+            # 顯示方面我們先顯示詞性值，後續再顯示單字意思
+            print(parts[i].text)
+            
+            # 這個迴圈將詞性區塊裡的單字意思一個一個抓出來顯示
+            # 而每個單字意思及例句都是使用li標籤所包起來，所以將每個li標籤抓出來顯示他的單字意思及例句
+            for j in meaningBlock[i].find_all('li'):
+                # 印出其中一個單字意思，單字意思是使用h4標籤，可如下對j抓取它的指定下一層標籤h4
+                print("\t"+j.h4.text)
+                hasES=False
+                # 有些單字意思沒例句會出錯，所以對沒有例句的意思做例外跳過
+                try:
+                    #由於有些解釋有多個例句，因此去找所有例句
+                    exampleSentence =j.find_all('span')
+                    #第一個span會抓到中文意思，因此跳過，後面的例句每句後面都會多抓到一次中文解釋，因此k=k+2
+                    for k in range(1, len(exampleSentence),2):
+                        #有時會抓到雖然沒例句但是卻有span的時候，內容會是空白，因此過濾掉
+                        if exampleSentence[k].text!=' ':
+                            print("\t\t例句："+exampleSentence[k].text)
+                            hasES=True
+                except:
+                    #跳過沒抓到span的
+                    pass
+                #如果沒例句時所作的處理
+                if hasES==False:
+                    print("\t\t沒例句。")
+'''
+
+def example01b():
+    print('Yahoo字典1b')
+    search_word1b = 'oat'
+    #search_word1b = '英國'
+    searchdic1b(search_word1b)
+
+#Yahoo字典1b ST
+    
 #Yahoo字典2 ST
 
 import requests
@@ -107,15 +236,14 @@ def searchdic2(search_word):
   e = "&fr2=sb-top&fr=sfp"
   search = a + b + c + search_word + e
   
-  #print(search)
-
-  html_data = requests.get(search)
-  if html_data.status_code != 200:
-    print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
-    print('Invalid url: ', html_data.url)
-    return None
+  html_data = get_html_data1(search)
+  if html_data:
+      print("擷取網頁資料 OK")
+      #print(html_data.text)
+      page = html_data.text
   else:
-    page = html_data.text
+      print('無法取得網頁資料')
+      return None
   
   soup = BeautifulSoup(page, 'html.parser')
   #print(soup.prettify()) # 把排版後的 html 印出來
@@ -198,7 +326,13 @@ def example03():
         import xml.etree.ElementTree as ET
 
     url = 'http://invoice.etax.nat.gov.tw/invoice.xml'   #統一發票中獎號碼
-    html_data = requests.get(url)
+    html_data = get_html_data1(url)
+    if html_data:
+        print("擷取網頁資料 OK")
+        #print(html_data.text)
+    else:
+        print('無法取得網頁資料')
+    
     print('1111')
     #print(html_data.text)
     tree = ET.fromstring(html_data.text)
@@ -220,7 +354,7 @@ def example03():
     import requests
     url = 'https://invoice.etax.nat.gov.tw/index.html'
     # 取得網頁html
-    web = requests.get(url)    
+    web = get_html_data1(url)    
     # 設置編碼，避免中文亂碼
     web.encoding='utf-8'       
 
@@ -251,7 +385,15 @@ def example04():
     import json, requests, datetime
      
     url = 'http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson'
-    earthquakes = json.loads(requests.get(url).text)
+
+    html_data = get_html_data1(url)
+    if html_data:
+        print("擷取網頁資料 OK")
+        #print(html_data.text)
+    else:
+        print('無法取得網頁資料')
+    
+    earthquakes = json.loads(html_data.text)
      
     for eq in earthquakes['features']:
         if(float(eq['properties']['mag'])>5.0):
@@ -265,8 +407,15 @@ def example05():
     from bs4 import BeautifulSoup
 
     url = 'https://www.taiwanlottery.com.tw/'
-    r = requests.get(url)
-    sp = BeautifulSoup(r.text, 'html.parser')
+    
+    html_data = get_html_data1(url)
+    if html_data:
+        print("擷取網頁資料 OK")
+        #print(html_data.text)
+    else:
+        print('無法取得網頁資料')
+    
+    sp = BeautifulSoup(html_data.text, 'html.parser')
     # 找到威力彩的區塊
     datas = sp.find('div', class_='contents_box02')
     # 開獎期數
@@ -387,12 +536,18 @@ def example07():
     from bs4 import BeautifulSoup
 
     url = 'https://tw.nextapple.com/realtime/headlines'
-    news_page = requests.get(url)
 
-    print('news_page.text')
-    print(news_page.text)
+    html_data = get_html_data1(url)
+    if html_data:
+        print("擷取網頁資料 OK")
+        #print(html_data.text)
+    else:
+        print('無法取得網頁資料')
 
-    news = BeautifulSoup(news_page.text, 'html.parser')
+    print('html_data.text')
+    print(html_data.text)
+
+    news = BeautifulSoup(html_data.text, 'html.parser')
     news_title = news.find_all('div', {'class': 'post-inner'})
     '''
     print('news_title')
@@ -463,7 +618,8 @@ while True:
     elif choice == 7:
         example07()
     elif choice == 8:
-        example08()
+        #example08()
+        example01b()
     elif choice == 9:
         example09()
     else:

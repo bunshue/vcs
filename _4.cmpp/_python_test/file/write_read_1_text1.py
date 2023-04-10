@@ -1,31 +1,55 @@
 #各種檔案寫讀範例 txt 1
 
-filename_rw = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/sample.txt'
+filename_rw1 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/sample1.txt'
 
-print("寫入檔案 : " + filename_rw)
-fo = open(filename_rw, 'w')
-fo.write('this is sample of python.')
+print("將字串寫入檔案 : " + filename_rw1)
+fo = open(filename_rw1, 'w')
+fo.write('ABCDE')
+fo.write('FGHIJ')
+fo.write('KLMNO')
+fo.write('PQRST')
 fo.close()
 
-print("讀取檔案 : " + filename_rw)
-fo = open(filename_rw, 'r')
-fo.read()
+print("讀取檔案 : " + filename_rw1)
+fo = open(filename_rw1, 'r')
+read_data = fo.read()
+fo.close()
+print('檔案內容: ', read_data)
+
+print("附加檔案 : " + filename_rw1)
+fo = open(filename_rw1, 'a') 
+fo.write('UVWXYZ')
 fo.close()
 
-print("附加檔案 : " + filename_rw)
-fo = open(filename_rw, 'a') 
-fo.write('Add data from program!!')
-fo.close()
+print("讀取檔案 : " + filename_rw1)
+fo = open(filename_rw1, 'r+')
+read_data = fo.read()
+print('檔案內容: ', read_data)
 
-print("讀取檔案 : " + filename_rw)
-fo = open(filename_rw, 'r+')
-fo.read()
-
-print("寫入檔案 : " + filename_rw)
-fo.write('Add data from program!!')
-
-with open(filename_rw, 'w') as fo:
+'''
+with open(filename_rw1, 'w') as fo:
 	fo.write('using with!')
+'''
+
+print("測試fseek")
+
+fo=open(filename_rw1,'rb')
+print("目前文件索引位置：",fo.tell()) #0
+fo.seek(6) #移到索引第 6 (第7個字元)位置
+str1=fo.read(7) #讀取 7 個字元
+print(str1)  # b'Python\n'
+print("目前文件索引位置：",fo.tell()) #13
+
+fo.seek(0) #回文件最前端
+print("目前文件索引位置：",fo.tell()) #0
+str2=fo.read(5) #讀取 5 個字元
+print(str2)  # b'Hello'
+
+fo.seek(-8,2) #移至最尾端，向前取 8 個字元
+str3=fo.read()
+print(str3)  # b'Welcome\n'
+
+fo.close()
 
 filename_rw2 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/sample2.txt'
 
@@ -55,49 +79,20 @@ str = fo.read(10);
 print("讀取10拜 : ", str)
 fo.close()
 
+filename_rw3 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/file.bin'
 
-print("測試fseek")
-# filename_rw 內容
-'''Hello Python
-中文字測試
-Welcome
-'''
-
-fo=open(filename_rw,'rb')
-print("目前文件索引位置：",fo.tell()) #0
-fo.seek(6) #移到索引第 6 (第7個字元)位置
-str1=fo.read(7) #讀取 7 個字元
-print(str1)  # b'Python\n'
-print("目前文件索引位置：",fo.tell()) #13
-
-fo.seek(0) #回文件最前端
-print("目前文件索引位置：",fo.tell()) #0
-str2=fo.read(5) #讀取 5 個字元
-print(str2)  # b'Hello'
-
-fo.seek(-8,2) #移至最尾端，向前取 8 個字元
-str3=fo.read()
-print(str3)  # b'Welcome\n'
-
-fo.close()
-
-
-
-
-filename_rw = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/file.bin'
-
-print("建立一個檔案 binary, 檔名 : " + filename_rw)
+print("建立一個檔案 binary, 檔名 : " + filename_rw3)
 content='''Hello Python
 中文字測試
 Welcome
 '''
 
 content=content.encode("utf-8") #轉成 bytes
-with open(filename_rw,'wb') as fo:
+with open(filename_rw3,'wb') as fo:
     fo.write(content)
 
-print("讀取一個檔案 binary, 檔名 : " + filename_rw)
-with open(filename_rw,'rb') as fo:
+print("讀取一個檔案 binary, 檔名 : " + filename_rw3)
+with open(filename_rw3,'rb') as fo:
     content=fo.read().decode("utf-8") 
     print(content) 
 

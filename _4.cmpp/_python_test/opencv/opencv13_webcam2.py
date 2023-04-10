@@ -3,13 +3,16 @@
 filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/output.avi'
 
 import cv2
+import time
 import numpy as np
 
-## Preparation for writing the ouput video
+#準備存檔用設定
+#使用 XVID 編碼
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
+# 建立 VideoWriter 物件，輸出影片至檔案
+# FPS 值為 20.0，解析度為 640x360
 out = cv2.VideoWriter(filename, fourcc,20.0, (640,480))
 
-##reading from the webcam 
 cap = cv2.VideoCapture(0)
 
 count = 0
@@ -20,17 +23,22 @@ for i in range(60):
     ret,background = cap.read()
 background = np.flip(background,axis=1)
 
+if not cap.isOpened():
+    print('Could not open video device')
+    sys.exit()
+else:
+    print('Video device opened')
 
 ## Read every frame from the webcam, until the camera is open
 while(cap.isOpened()):
-    ret, img = cap.read()
+    ret, frame = cap.read()   # 從攝影機擷取一張影像
     if not ret:
         break
     count+=1
-    img = np.flip(img,axis=1)
+    frame = np.flip(frame, axis=1)
     
     ## Convert the color space from BGR to HSV
-    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
 
     ## Generat masks to detect red color
     lower_red = np.array([0,100,0])
@@ -46,19 +54,16 @@ while(cap.isOpened()):
     ## Open and Dilate the mask image
     mask1 = cv2.morphologyEx(mask1, cv2.MORPH_OPEN, np.ones((3,3),np.uint8))
     mask1 = cv2.morphologyEx(mask1, cv2.MORPH_DILATE, np.ones((3,3),np.uint8))
- 
- 
+  
     ## Create an inverted mask to segment out the red color from the frame
     mask2 = cv2.bitwise_not(mask1)
  
- 
     ## Segment the red color part out of the frame using bitwise and with the inverted mask
-    res1 = cv2.bitwise_and(img,img,mask=mask2)
+    res1 = cv2.bitwise_and(frame, frame, mask=mask2)
 
     ## Create image showing static background frame pixels only for the masked region
     res2 = cv2.bitwise_and(background, background, mask = mask1)
- 
- 
+  
     ## Generating the final output and writing
     finalOutput = cv2.addWeighted(res1,1,res2,1,0)
     out.write(finalOutput)
@@ -70,7 +75,9 @@ while(cap.isOpened()):
     elif k == ord('q'): # 若按下 q 鍵則離開迴圈
         break
     elif k == ord('s'): # 若按下 s 鍵則存圖
-        cv2.imwrite('test.jpg', frame)
+        image_filename = 'Image_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.jpg';
+        cv2.imwrite(image_filename, frame)
+        print('已存圖')
 
 # 釋放所有資源
 out.release()

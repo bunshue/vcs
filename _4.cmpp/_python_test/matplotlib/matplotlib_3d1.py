@@ -325,13 +325,40 @@ ax.set_zlabel(r'$V(\phi)$')
 ax.set_title('3D surface plot')
 
 
-#XXXXXXX2
+'''
+參考 使用Matplotlib绘制3D图形
+https://paul.pub/matplotlib-3d-plotting/
+'''
+#曲面圖
 ax = fig.add_subplot(232, projection='3d')  #第二張圖
 
-#
-#
-#
-ax.set_title('XXXXXXX2')
+import matplotlib.pyplot as plt
+import numpy as np
+
+from matplotlib import cm
+from mpl_toolkits.mplot3d import Axes3D
+
+
+x = np.arange(-10, 10, 0.1)
+y = np.arange(-10, 10, 0.1)
+X, Y = np.meshgrid(x, y)
+
+Z = np.add(-np.power(X, 4), np.power(Y, 4))
+
+ax.set_xlabel("X")
+ax.set_ylabel("Y")
+ax.set_title('曲面圖')
+ax.plot_surface(X, Y, Z, cmap = cm.hsv)
+
+'''
+#製作動圖
+for angle in np.arange(95, 180, 12):
+    ax.set_zlabel("Angle: " + str(angle))
+    ax.view_init(30, angle)
+    filename = "./" + str(angle) + ".png"
+    plt.savefig(filename)
+    print("Save " + filename + " finish")
+'''
 
 #XXXXXXX3
 ax = fig.add_subplot(233, projection='3d')  #第三張圖

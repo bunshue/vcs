@@ -158,6 +158,7 @@ plt.hist(np.random.randn(1000), N, facecolor='yellow', edgecolor='yellow')
 #第二張圖
 plt.subplot(232)
 
+import numpy as np
 import matplotlib.pyplot as plt
 from numpy.random import normal,rand
 x = normal(size=200)
@@ -168,12 +169,16 @@ plt.hist(x,bins=N)
 
 #第三張圖
 plt.subplot(233)
+normal_samples = np.random.normal(size = 100000) # 生成 100000 組標準常態分配（平均值為 0，標準差為 1 的常態分配）隨機變數
+plt.hist(normal_samples)
 
 
 
 #第四張圖
 plt.subplot(234)
 
+uniform_samples = np.random.uniform(size = 100000) # 生成 100000 組介於 0 與 1 之間均勻分配隨機變數
+plt.hist(uniform_samples)
 
 
 #第五張圖
