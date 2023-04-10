@@ -12,26 +12,40 @@ def searchdic3(search_word):
     inp = 'lion'
 
     #yahoo字典的網址，可修改網址查詢想要的單字，網址當中的%s為格式化字串
-    html_data = requests.get("http://tw.dictionary.search.yahoo.com/search?p=%s&fr2=dict" % (inp))
+    url = "https://tw.dictionary.search.yahoo.com/search?p=%s&fr2=dict" % (inp)
+    html_data = requests.get(url)
+    #print(url)
 
     soup = BeautifulSoup(html_data.text, "html.parser")
-    print(soup.prettify()) # 把排版後的 html 印出來
+    #print(soup.prettify()) # 把排版後的 html 印出來
 
     try:
+        mainBlock = soup.find_all('div', class_='grp grp-main pl-25')
+
+        print(mainBlock)
+        print(mainBlock[0].find_all('span', class_='fz-24 fw-500 c-black lh-24'))
+        search_word = mainBlock[0].find_all('span', class_='fz-24 fw-500 c-black lh-24')
+        print(search_word)
+        
         # 查詢結果的整個區塊，用find_all方法找出所有div標籤且class屬性名稱為'dd algo explain mt-20 lst DictionaryResults'的資料
         # class_ 的"_"符號是因為class是保留字，所以加上_符號作區別
-        allBlock = soup.find_all('div', class_='dd algo explain mt-20 lst DictionaryResults')
         
+        allBlock = soup.find_all('div', class_='compTitle mt-25 mb-10')
+
         # yahoo字典的結果會依照詞性分作區塊，各個詞性的所有意思會被class為'compArticleList mb-15 ml-10'的ul標籤包在一起
         # 所以將上面allBlock的資料，以英文詞性區塊全部找出來，一樣使用find_all方法，找出ul標籤且屬性名稱為'compArticleList mb-15 ml-10'的資料
-        meaningBlock = allBlock[0].find_all('ul', class_='compArticleList mb-15 ml-10')
+        meaningBlock = allBlock[0].find_all('span', class_='fz-24 fw-500 c-black lh-24')
+
+        print('------------')
+        print(meaningBlock)
+        print('------------')
         
     except:
         print("查詢錯誤")
-        
+                  
     else:
-        # 找出音標並print出來
-        pronunciation=soup.find_all('span',class_='cite')
+        print('找出音標並print出來')
+        pronunciation=soup.find_all('span',class_='fz-14')
         print(pronunciation[0].text)
         # 先找出詞性，詞性使用h3標籤，但在allBlock裡沒有其他h3標籤，所以就不指定class了
         parts = allBlock[0].find_all('h3')
@@ -62,6 +76,7 @@ def searchdic3(search_word):
                 #如果沒例句時所作的處理
                 if hasES==False:
                     print("\t\t沒例句。")
+
 
 def example03():
     print('Yahoo字典3')

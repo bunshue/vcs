@@ -1,16 +1,17 @@
+# 目前 webcam 僅 x64 電腦可用
+
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/output.avi'
+
 import cv2
-import time
 import numpy as np
 
 ## Preparation for writing the ouput video
 fourcc = cv2.VideoWriter_fourcc(*'XVID')
-out = cv2.VideoWriter('output.avi',fourcc,20.0, (640,480))
+out = cv2.VideoWriter(filename, fourcc,20.0, (640,480))
 
 ##reading from the webcam 
 cap = cv2.VideoCapture(0)
 
-## Allow the system to sleep for 3 seconds before the webcam starts
-time.sleep(3)
 count = 0
 background = 0
 
@@ -61,11 +62,19 @@ while(cap.isOpened()):
     ## Generating the final output and writing
     finalOutput = cv2.addWeighted(res1,1,res2,1,0)
     out.write(finalOutput)
-    cv2.imshow("magic",finalOutput)
+    cv2.imshow('WebCam', finalOutput)
+    
     k = cv2.waitKey(1)
-    if k == 27:
+    if k == 27:     #ESC
         break
+    elif k == ord('q'): # 若按下 q 鍵則離開迴圈
+        break
+    elif k == ord('s'): # 若按下 s 鍵則存圖
+        cv2.imwrite('test.jpg', frame)
 
-cap.release()
+# 釋放所有資源
 out.release()
-cv2.destroyAllWindows()
+cap.release()   # 釋放攝影機
+cv2.destroyAllWindows() # 關閉所有 OpenCV 視窗
+
+print('已存檔 ' + filename)

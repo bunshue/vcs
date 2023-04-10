@@ -3,8 +3,6 @@ import random
 import time
 import math
  
- 
- 
 height = 800
 width = 800
 sizePosition = (714, 84)
@@ -19,9 +17,7 @@ swatchOffset = (0,0)
 colors = { 'black':(1, 3), 'blue':(1, 9), 'red':(1, 4), 'orange':(1, 5),
            'yellow':(1, 6), 'green':(1, 7), 'purple':(1, 9)}
            
- 
 center = (width/2 + canvasOrigin[0], height/2 + canvasOrigin[1])
- 
  
 pyautogui.moveTo(center)
  

@@ -10,6 +10,38 @@ C:\Users\david\AppData\Local\Programs\Python\Python38-32>python.exe -m pip insta
 C:\Users\david\AppData\Local\Programs\Python\Python38-32>auto-py-to-exe
 
 
+string = '測試字串是不是有被包含'
+ss = '要'
+if ss in string:
+    print('有被包含')
+else:
+    print('沒有被包含')
+
+ss = '包含'
+if ss in string:
+    print('有被包含')
+else:
+    print('沒有被包含')
+
+
+
+
+
+print('拆解e-mail')
+import re
+
+regex = r"([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)"
+url = 'http://icho.chem.ntnu.edu.tw/pub/54con/54con.html'
+html_data = requests.get(url).text
+
+emails = re.findall(regex, html_data)
+for email in emails:
+    print(email)
+
+
+
+
+
 
 Python 列出目錄中所有檔案教學：os.listdir 與 os.walk
 

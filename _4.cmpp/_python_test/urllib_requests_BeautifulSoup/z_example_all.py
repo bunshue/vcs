@@ -24,6 +24,7 @@ YAHOO_REFERER_VALUE  = "https://tw.dictionary.yahoo.com/dictionary"
 def searchdic1(search_word):
 
     search_word = urllib.parse.quote_plus(search_word)
+    #print(YAHOO_DICTIONARY_URL + search_word)
     html_data = requests.get(YAHOO_DICTIONARY_URL + search_word, headers={'Referer': YAHOO_REFERER_VALUE})
     if html_data.status_code != 200:
         print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
@@ -35,6 +36,7 @@ def searchdic1(search_word):
         #get_dict_info(page)
         #soup = BeautifulSoup(page, 'html5lib')   #也可
         soup = BeautifulSoup(page, 'lxml')   # 指定 lxml 作為解析器
+        #print(soup.prettify()) # 把排版後的 html 印出來
         #print(soup.text)
 
         '''
@@ -116,6 +118,7 @@ def searchdic2(search_word):
     page = html_data.text
   
   soup = BeautifulSoup(page, 'html.parser')
+  #print(soup.prettify()) # 把排版後的 html 印出來
 
   '''
   print('主解釋 :')

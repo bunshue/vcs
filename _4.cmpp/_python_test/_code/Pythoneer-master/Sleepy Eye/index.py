@@ -1,10 +1,11 @@
+# 目前 webcam 僅 x64 電腦可用
+
 import cv2
 from functools import wraps
 from pygame import mixer
 import time
 
 lastsave = 0
-
 
 def counter(func):
     @wraps(func)
@@ -26,15 +27,12 @@ eye_cascade = cv2.CascadeClassifier('haarcascade_eye.xml')
 
 cap = cv2.VideoCapture(0)
 
-
 @counter
 def closed():
   print ("Eye Closed")
 
-
 def openeye():
   print ("Eye is Open")
-
 
 def sound():
     mixer.init()
@@ -64,11 +62,16 @@ while 1:
 
 
 
+    cv2.imshow('WebCam', img)
+    k = cv2.waitKey(1)
+    if k == 27:     #ESC
+        break
+    elif k == ord('q'): # 若按下 q 鍵則離開迴圈
+        break
+    elif k == ord('s'): # 若按下 s 鍵則存圖
+        cv2.imwrite('test.jpg', frame)
 
+# 釋放所有資源
+cap.release()   # 釋放攝影機
+cv2.destroyAllWindows() # 關閉所有 OpenCV 視窗
 
-    cv2.imshow('img', img)
-    k = cv2.waitKey(30) & 0xff
-
-
-cap.release()
-cv2.destroyAllWindows()
