@@ -9,29 +9,46 @@ conn = sqlite3.connect(db_filename) # 建立資料庫連線
 cursor = conn.cursor() # 建立 cursor 物件
 
 print('建立一個資料表')
+''' 其他寫法
+#cursor.execute("create table table01 ( id char(5), subjectId char(4) not null, " +
+#               "animalNumber integer, title varchar(50) not null, primary key (id))")
+
+#id可重複
+#cursor.execute("create table table01 ( id char(5), subjectId char(4) not null, " +
+#               "animalNumber integer, title varchar(50) not null)")
+
+#id可重複, 若資料庫已存在 則不用重新建立
+cursor.execute("create table if not exists table01 ( id char(5), subjectId char(4) not null, " +
+               "animalNumber integer, title varchar(50) not null)")
+'''
 #Create
 #Create table table01, id 和 name 和 tel,
-#primary key (id), id不可重複 
+#primary key (id), id不可重複
 sqlstr='create table if not exists table01 ("id" INTEGER PRIMARY KEY NOT NULL, "name"  TEXT NOT NULL, "tel"  TEXT NOT NULL)'
 #sqlstr='create table table01 ("id" INTEGER PRIMARY KEY NOT NULL, "name"  TEXT NOT NULL, "tel"  TEXT NOT NULL)'
 
 cursor.execute(sqlstr)
 conn.commit() # 更新
 
-print('新增資料 3筆')
+print('新增資料 3 筆 寫法一')
 #Insert
 #Insert 新增資料, id不可重複
-sqlstr='insert into table01 values(1, "David", "02-22222222")'
+sqlstr='insert into table01 values(1, "Apple", "01-11111111")'
 cursor.execute(sqlstr)
-sqlstr='insert into table01 values(2, "Chole", "03-33333333")'
+sqlstr='insert into table01 values(2, "Banana", "02-22222222")'
 cursor.execute(sqlstr)
-sqlstr='insert into table01 values(3, "Peter", "04-44444444")'
+sqlstr='insert into table01 values(3, "Cat", "03-33333333")'
 cursor.execute(sqlstr)
 
-print('新增資料 2筆')
+print('新增資料 2 筆 寫法二')
+cursor.execute("insert into table01 (id, name, tel) " + "values (4, 'Dog', '04-44444444')")
+#id不重複 但name重複
+cursor.execute("insert into table01 (id, name, tel) " + "values (5, 'Dog', '05-55555555')")
+
+print('新增資料 2 筆 寫法三')
 # 定義資料串列
-datas = [[4, 'Michael', '05-55555555'],
-        [5, 'Bob', '06-66666666'],]
+datas = [[6, 'Frog', '06-66666666'],
+        [7, 'Giraffe', '07-77777777'],]
 
 #Insert
 for data in datas:
