@@ -20,7 +20,6 @@ url = 'https://movies.yahoo.com.tw/chart.html'
 html_data = urllib.request.urlopen(url).read()
 html_data = html_data.decode('utf-8')
 print(html_data)
-
 soup = BeautifulSoup(html_data, 'html.parser')
 print(soup.prettify())
 

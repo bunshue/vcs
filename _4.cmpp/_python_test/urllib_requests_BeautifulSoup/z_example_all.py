@@ -8,7 +8,6 @@ def disp_menu():
     print('5.台灣樂透開彩')
     print('6.取得氣象資料')
     print('7.蘋果日報標題')
-    print('8.Yahoo字典1b')
     print('0.結束')
     print('------------------------')
 
@@ -29,161 +28,131 @@ def get_html_data1(url):
         return resp
 
 #Yahoo字典1 ST
-
-YAHOO_DICTIONARY_URL = "https://tw.dictionary.yahoo.com/dictionary?p="
-YAHOO_REFERER_VALUE  = "https://tw.dictionary.yahoo.com/dictionary"
-
 def searchdic1(search_word):
-
-    search_word = urllib.parse.quote_plus(search_word)
-    #print(YAHOO_DICTIONARY_URL + search_word)
-    html_data = requests.get(YAHOO_DICTIONARY_URL + search_word, headers={'Referer': YAHOO_REFERER_VALUE})
-    if html_data.status_code != 200:
-        print('XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX')
-        print('Invalid url: ', html_data.url)
-        return None
-    else:
-        page = html_data.text
-
-        #get_dict_info(page)
-        #soup = BeautifulSoup(page, 'html5lib')   #也可
-        soup = BeautifulSoup(page, 'lxml')   # 指定 lxml 作為解析器
-        #print(soup.prettify()) # 把排版後的 html 印出來
-        #print(soup.text)
-
-        '''
-        print(soup.prettify()) # 把排版後的 html 印出來
-        # 一些屬性或方法
-        print('---title---')
-        print(soup.title) # 把 tag 抓出來
-        print('---title.name---')
-        print(soup.title.name) # 把 title 的 tag 名稱抓出來
-        print('---title.string---')
-        print(soup.title.string) # 把 title tag 的內容抓出來
-        print('---title.parent.name---')
-        print(soup.title.parent.name) # title tag 的上一層 tag
-        print('---a---')
-        print(soup.a) # 把第一個 <a></a> 抓出來
-        print('---all a---')
-        print(soup.find_all('a')) # 把所有的 <a></a> 抓出來
-        print('---all div---')
-        print(soup.find_all('div')) # 把所有的 <a></a> 抓出來
-        '''
-
-        divs = soup.find_all('span', 'fz-24 fw-500 c-black lh-24')
-        print('搜尋英文字 :')
-        #print(divs)
-        for div in divs:
-            #print(div)
-            for di in div:
-                print(di.text.replace('\n', ''))
-
-        print('主解釋 :')
-        #divs = soup.find_all('div', 'fz-16 fl-l dictionaryExplanation')
-        divs = soup.find_all('div', 'compList mb-25 p-rel') #如此可以框選較大範圍之資料 找到較大的區塊包含所有資料
-        #print(divs)
-        for div in divs:
-            #print(div)
-            for di in div:
-                #print(di)
-                print(di.text.replace('\n', ''))    #只是刪除換行符號, 或許不一定有
-
-        print('釋義 :')
-        #divs = soup.find_all('span', 'fz-14')
-        divs = soup.find_all('span', 'd-i fz-14 lh-20')
-        #print(divs)
-        i = 1
-        for div in divs:
-            for di in div:
-                print(i)
-                print(di.text.replace('\n', ''))
-                i = i + 1
-
-def example01():
-    print('Yahoo字典1')
-    search_word1 = 'oat'
-    #search_word1 = '英國'
-    searchdic1(search_word1)
-
-#Yahoo字典1 SP
-
-#Yahoo字典1b ST
-'''
-此方法是使用yahoo字典檢視網頁原始碼查找要抓取的資料段落及屬性
-然後將要的資料一層一層剖析出來
-'''
-
-def searchdic1b(search_word):
-
     #yahoo字典的網址，可修改網址查詢想要的單字，網址當中的%s為格式化字串
-    url = "https://tw.dictionary.search.yahoo.com/search?p=%s&fr2=dict" % (search_word)
+    url = "https://tw.dictionary.search.yahoo.com/search?p=%s" % (search_word)
     html_data = get_html_data1(url)
     if html_data:
         print("擷取網頁資料 OK")
         #print(html_data.text)
     else:
         print('無法取得網頁資料')
+        return None
 
     soup = BeautifulSoup(html_data.text, "html.parser")
+    #soup = BeautifulSoup(html_data.text, 'html5lib')   #也可
+    #soup = BeautifulSoup(html_data.text, 'lxml')   # 指定 lxml 作為解析器
     #print(soup.prettify()) # 把排版後的 html 印出來
 
-    try:
-        mainBlock = soup.find_all('div', class_='grp grp-main pl-25')
+    '''
+    # 一些屬性或方法
+    print('---title---')
+    print(soup.title) # 把 tag 抓出來
+    print('---title.name---')
+    print(soup.title.name) # 把 title 的 tag 名稱抓出來
+    print('---title.string---')
+    print(soup.title.string) # 把 title tag 的內容抓出來
+    print('---title.parent.name---')
+    print(soup.title.parent.name) # title tag 的上一層 tag
+    print('---a---')
+    print(soup.a) # 把第一個 <a></a> 抓出來
+    print('---all a---')
+    print(soup.find_all('a')) # 把所有的 <a></a> 抓出來
+    print('---all div---')
+    print(soup.find_all('div')) # 把所有的 <a></a> 抓出來
+    '''
+    divs = soup.find_all('span', 'fz-24 fw-500 c-black lh-24')
+    print('搜尋英文字 :')
+    #print(divs)
+    for div in divs:
+        #print(div)
+        for di in div:
+            print(di.text.replace('\n', ''))
 
-        #print(mainBlock)
-        #print(mainBlock[0].find_all('span', class_='fz-24 fw-500 c-black lh-24'))
-        #class_ 的"_"符號是因為class是保留字，所以加上_符號作區別
-        search_word = mainBlock[0].find_all('span', class_='fz-24 fw-500 c-black lh-24')
-        print('搜尋英文字 :')
-        #print(search_word)
-        for sw in search_word:
-            #print(sw)
-            for di in sw:
-                print(di.text.replace('\n', ''))
-    except:
-        print("查詢錯誤")
-                  
-    else:
-        print('找出音標並print出來')
-        pronunciation = soup.find_all('span',class_='fz-14')
-        print('000', pronunciation[0].text) #第0個是KK音標
-        print('111', pronunciation[1].text) #第1個是DJ音標
+    print('主解釋 :')
+    
+    #divs = soup.find_all('div', 'fz-16 fl-l dictionaryExplanation')
 
-        pos = soup.find_all('li', class_='lh-22 mh-22 mt-12 mb-12 mr-25 last')
-        #print(pos)
-        nnn = pos[0].find_all('div')
-        #print(nnn)
-        for n in nnn:
-            #print(n)
-            for di in n:
-                print(di.text.replace('\n', ''))
+    #音標
+    print('找出音標並print出來')
+    pronunciation = soup.find_all('span',class_='fz-14')
+    print('000', pronunciation[0].text) #第0個是KK音標
+    print('111', pronunciation[1].text) #第1個是DJ音標
 
-        print('釋義:')
-        meaning = soup.find_all('div', class_='grp grp-tab-content-explanation tabsContent-s tab-content-explanation pt-24 tabActived')
-        #print(meaning)
-        print('詞性:')
-        nnn = meaning[0].find_all('div', class_='compTitle lh-25')
-        nnn2 = nnn[0].find_all('span')
-        #print(nnn)
-        for n in nnn2:
-            #print(n)
-            for di in n:
-                print(di.text.replace('\n', ''))
-        print('解釋:')
-        nnn = meaning[0].find_all('div', class_='compTextList ml-50')
-        nnn2 = nnn[0].find_all('span')
-        #print(nnn)
-        for n in nnn2:
-            #print(n)
-            for di in n:
-                print(di.text.replace('\n', ''))
+    #詞性
+    divs = soup.find_all('div', 'compList mb-25 p-rel') #如此可以框選較大範圍之資料 找到較大的區塊包含所有資料
+  
+    #print(divs)
+    for div in divs:
+        #print(div)
+        for di in div:
+            for tt in di.find_all('li'):
+                #print(tt)
+                print(tt.text.replace('\n', ''))    #只是刪除換行符號, 或許不一定有
+
+    
+
+
+
+    print('釋義 :')
+    #divs = soup.find_all('span', 'fz-14')
+    divs = soup.find_all('span', 'd-i fz-14 lh-20')
+    #print(divs)
+    i = 1
+    for div in divs:
+        for di in div:
+            print(i)
+            print(di.text.replace('\n', ''))
+            i = i + 1
+
+    mainBlock = soup.find_all('div', class_='grp grp-main pl-25')
+
+    #class_ 的"_"符號是因為class是保留字，所以加上_符號作區別
+    search_word = mainBlock[0].find_all('span', class_='fz-24 fw-500 c-black lh-24')
+    print('搜尋英文字 :')
+    #print(search_word)
+    for sw in search_word:
+        #print(sw)
+        for di in sw:
+            print(di.text.replace('\n', ''))
+
+    print('找出音標並print出來')
+    pronunciation = soup.find_all('span',class_='fz-14')
+    print('000', pronunciation[0].text) #第0個是KK音標
+    print('111', pronunciation[1].text) #第1個是DJ音標
+
+    pos = soup.find_all('li', class_='lh-22 mh-22 mt-12 mb-12 mr-25 last')
+    #print(pos)
+    nnn = pos[0].find_all('div')
+    #print(nnn)
+    for n in nnn:
+        #print(n)
+        for di in n:
+            print(di.text.replace('\n', ''))
+
+    print('釋義:')
+    meaning = soup.find_all('div', class_='grp grp-tab-content-explanation tabsContent-s tab-content-explanation pt-24 tabActived')
+    #print(meaning)
+    print('詞性:')
+    nnn = meaning[0].find_all('div', class_='compTitle lh-25')
+    nnn2 = nnn[0].find_all('span')
+    #print(nnn)
+    for n in nnn2:
+        #print(n)
+        for di in n:
+            print(di.text.replace('\n', ''))
+    print('解釋:')
+    nnn = meaning[0].find_all('div', class_='compTextList ml-50')
+    nnn2 = nnn[0].find_all('span')
+    #print(nnn)
+    for n in nnn2:
+        #print(n)
+        for di in n:
+            print(di.text.replace('\n', ''))
 
 
 '''   old
-        
-        allBlock = soup.find_all('div', class_='compTitle mt-25 mb-10')
-        meaningBlock = allBlock[0].find_all('span', class_='fz-24 fw-500 c-black lh-24')
-
+       
         # 先找出詞性，詞性使用h3標籤，但在allBlock裡沒有其他h3標籤，所以就不指定class了
         parts = allBlock[0].find_all('h3')
         print((len(meaningBlock)))
@@ -216,36 +185,28 @@ def searchdic1b(search_word):
                     print("\t\t沒例句。")
 '''
 
-def example01b():
-    print('Yahoo字典1b')
-    search_word1b = 'oat'
-    #search_word1b = '英國'
-    searchdic1b(search_word1b)
 
-#Yahoo字典1b ST
-    
+def example01():
+    print('Yahoo字典1')
+    search_word1 = 'coordinate'
+    #search_word1 = '英國'
+    searchdic1(search_word1)
+
+#Yahoo字典1 SP
+
 #Yahoo字典2 ST
-
-import requests
-from bs4 import BeautifulSoup
-
 def searchdic2(search_word):
-  a = "https://tw.dictionary.search.yahoo.com/search;_ylt=AwrtXGvbWIJibWYAFCp9rolQ"
-  b = ";_ylc=X1MDMTM1MTIwMDM4MQRfcgMyBGZyA3NmcARmcjIDc2ItdG9wBGdwcmlkAwRuX3JzbHQDMARuX3N1Z2cDMARvcmlnaW4DdHcuZGljdGlvbmFyeS5zZWFyY2gueWFob28uY29tBHBvcwMwBHBxc3RyAwRwcXN0cmwDMARxc3RybAM0BHF1ZXJ5A3RhcGUEdF9zdG1wAzE2NTI3MDk5NTM-?"
-  c = "p="
-  e = "&fr2=sb-top&fr=sfp"
-  search = a + b + c + search_word + e
-  
-  html_data = get_html_data1(search)
+  #yahoo字典的網址，可修改網址查詢想要的單字，網址當中的%s為格式化字串
+  url = "https://tw.dictionary.search.yahoo.com/search?p=%s" % (search_word)
+  html_data = get_html_data1(url)
   if html_data:
-      print("擷取網頁資料 OK")
-      #print(html_data.text)
-      page = html_data.text
+    print("擷取網頁資料 OK")
+    #print(html_data.text)
   else:
-      print('無法取得網頁資料')
-      return None
-  
-  soup = BeautifulSoup(page, 'html.parser')
+    print('無法取得網頁資料')
+    return None
+
+  soup = BeautifulSoup(html_data.text, "html.parser")
   #print(soup.prettify()) # 把排版後的 html 印出來
 
   '''
@@ -298,7 +259,6 @@ def searchdic2(search_word):
           print(di.text.replace('\n', ''))    #只是刪除換行符號, 或許不一定有
 
   print('釋義 :')        
-  #divs = soup.find_all('span', 'fz-14')
   divs = soup.find_all('span', 'd-i fz-14 lh-20')
   #print(divs)
   i = 1
@@ -310,7 +270,7 @@ def searchdic2(search_word):
 
 def example02():
     print('Yahoo字典2')
-    search_word2 = 'oat'
+    search_word2 = 'coordinate'
     #search_word2 = '英國'
     searchdic2(search_word2)
 
@@ -332,6 +292,7 @@ def example03():
         #print(html_data.text)
     else:
         print('無法取得網頁資料')
+        return None
     
     print('1111')
     #print(html_data.text)
@@ -392,6 +353,7 @@ def example04():
         #print(html_data.text)
     else:
         print('無法取得網頁資料')
+        return None
     
     earthquakes = json.loads(html_data.text)
      
@@ -414,6 +376,7 @@ def example05():
         #print(html_data.text)
     else:
         print('無法取得網頁資料')
+        return None
     
     sp = BeautifulSoup(html_data.text, 'html.parser')
     # 找到威力彩的區塊
@@ -543,6 +506,7 @@ def example07():
         #print(html_data.text)
     else:
         print('無法取得網頁資料')
+        return None
 
     print('html_data.text')
     print(html_data.text)
@@ -618,8 +582,7 @@ while True:
     elif choice == 7:
         example07()
     elif choice == 8:
-        #example08()
-        example01b()
+        example08()
     elif choice == 9:
         example09()
     else:

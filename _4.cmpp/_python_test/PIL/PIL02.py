@@ -12,6 +12,7 @@ print("將資料夾 " + source_dir + " 內所有圖片檔調整寬度成 " + str
 
 print('Processing: {}'.format(source_dir))
 
+#單層
 allfiles = glob.glob(source_dir+'/*.jpg') + glob.glob(source_dir+'/*.png')
 if not os.path.exists(target_dir):
 	os.mkdir(target_dir)

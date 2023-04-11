@@ -1,17 +1,20 @@
-# Python 測試 BeautifulSoup
+# Python 測試 BeautifulSoup 好樂迪 K歌排行
 
 import sys
 import requests
 from bs4 import BeautifulSoup
 
-
 import ssl
 from urllib import request, parse
-from bs4 import BeautifulSoup
 import pandas as pd
 
+#urlopen https時需要驗證一次SSL證書，
+#當網站目標使用自簽名的證書時就會跳出錯誤
+#使用SSL module把證書驗證改成不需要驗證
+#context = ssl._create_unverified_context()
 # 使用 ssl 模組，避免遇到 CERTIFICATE_VERIFY_FAILED 錯誤
 context = ssl._create_unverified_context()
+
 # 給好樂迪的網址建立 Request
 url = 'https://www.holiday.com.tw/SongInfo/SongList.aspx'
 req_obj = request.Request(url)
