@@ -75,17 +75,5 @@ games= ["Wii Sports", "Super Mario Bros", "Mario Kart Wii", "Wii Sports Resort",
         "Pokemon Gold/Pokemon Silver", "Wii Fit", "Kinect Adventures!", "Wii Fit Plus",
         "Gramd Theft Auto V", "Grand Theft Auto: San Andreas","Super Mario World" ]
 
-print('取得 OpenCV 版本')
-import cv2
-# Find OpenCV version
-(major_ver, minor_ver, subminor_ver) = (cv2.__version__).split('.')
-
-print(cv2.__version__)
-print(major_ver)
-print(minor_ver)
-print(subminor_ver)
-
-
-
 
 

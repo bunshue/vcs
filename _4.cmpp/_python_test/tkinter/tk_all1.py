@@ -12,6 +12,21 @@ window.geometry(size)
 title = "這是主視窗"
 window.title(title)
 
+def popup():
+    popupwindow = tk.Toplevel(window)
+    popupwindow.title('新視窗')
+    popupwindow.geometry('300x300')
+    alert = tk.Label(popupwindow, text='已開啟新視窗')
+    button1 = tk.Button(popupwindow, text = '離開此視窗', command = popupwindow.destroy)
+    alert.pack()
+    button1.pack()
+    popupwindow.mainloop()
+    
+button = tk.Button(window, text='開啟新視窗', command = popup)
+button.pack()
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
+
 # Label測試
 tk.Label(text='有背景色的Label測試').pack()
 tk.Label(window, text='有背景色的Label 紅', bg='red',   width=20).pack()

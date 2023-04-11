@@ -1,6 +1,19 @@
 filename = 'C:/______test_files/_emgu/lena.jpg'
 #filename = 'C:/______test_files/ims01.bmp'
 
+
+
+print('取得 OpenCV 版本')
+import cv2
+# Find OpenCV version
+(major_ver, minor_ver, subminor_ver) = (cv2.__version__).split('.')
+
+print(cv2.__version__)
+print(major_ver)
+print(minor_ver)
+print(subminor_ver)
+
+
 '''
 import cv2	#導入 OpenCV 模組
 import numpy as np
