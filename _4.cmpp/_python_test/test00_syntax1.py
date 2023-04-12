@@ -1,6 +1,11 @@
-# 各種python專用的語法
+"""
+====================
+各種python專用的語法
+====================
+"""
 
-print("各種python專用的語法")
+#打印使用說明
+print(__doc__)
 
 print(__name__)
 import pandas
