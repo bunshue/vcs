@@ -105,12 +105,9 @@ def getNumberOfDaysInMonth(year, month):
 def isLeapYear(year): 
     return year % 400 == 0 or (year % 4 == 0 and year % 100 != 0)
 
-def main():
-    # Prompt the user to enter year and month 
-    year = eval(input("Enter full year (e.g., 2001): "))
-    month = eval(input(("Enter month as number between 1 and 12: ")))
 
-    # Print calendar for the month of the year
-    printMonth(year, month)
- 
-main() # Call the main function
+year = 2006
+month = 3
+# Print calendar for the month of the year
+printMonth(year, month)
+
