@@ -321,6 +321,7 @@ def find_shape(dataset):
 
 
 def read_files(path, showProgress=False, readPixelData=False, force=False):
+    print(path)
     """ read_files(path, showProgress=False, readPixelData=False)
 
     Reads dicom files and returns a list of DicomSeries objects, which
@@ -354,14 +355,18 @@ def read_files(path, showProgress=False, readPixelData=False, force=False):
             raise ValueError('The given path is not a valid directory.')
         # Find files recursively
         _listFiles(files, basedir)
+        print('files a')
 
     elif isinstance(path, (tuple, list)):
         # Iterate over all elements, which can be files or directories
         for p in path:
+            print(p)
             if os.path.isdir(p):
                 _listFiles(files, os.path.abspath(p))
+                print('files b')
             elif os.path.isfile(p):
                 files.append(p)
+                print('files c')
             else:
                 print(f"Warning, the path '{p}' is not valid.")
     else:
@@ -381,29 +386,36 @@ def read_files(path, showProgress=False, readPixelData=False, force=False):
     # Gather file data and put in DicomSeries
     series = {}
     count = 0
+    print('111')
     showProgress('Loading series information:')
     for filename in files:
+        print(filename)
 
         # Skip DICOMDIR files
         if filename.count("DICOMDIR"):
+            print('skip 1')
             continue
 
         # Try loading dicom ...
         try:
             dcm = pydicom.dcmread(filename, deferSize, force=force)
         except pydicom.filereader.InvalidDicomError:
+            print('skip 2')
             continue  # skip non-dicom file
         except Exception as why:
             if showProgress is _progressCallback:
                 _progressBar.PrintMessage(str(why))
             else:
                 print('Warning:', why)
+            print('skip 3')
             continue
 
         # Get SUID and register the file with an existing or new series object
         try:
             suid = dcm.SeriesInstanceUID
+            print('suid = ', suid)
         except AttributeError:
+            print('skip 4')
             continue  # some other kind of dicom file
         if suid not in series:
             series[suid] = DicomSeries(suid, showProgress)
@@ -413,6 +425,7 @@ def read_files(path, showProgress=False, readPixelData=False, force=False):
         showProgress(float(count) / len(files))
         count += 1
 
+    print('222')
     # Finish progress
     showProgress(None)
 
@@ -424,13 +437,17 @@ def read_files(path, showProgress=False, readPixelData=False, force=False):
     for serie in reversed([serie for serie in series]):
         _splitSerieIfRequired(serie, series)
 
+    print('333')
     # Finish all series
     showProgress('Analysing series')
     series_ = []
     for i in range(len(series)):
+        print(i)
+        print(series[i])
         try:
-            series[i]._finish()
+            #series[i]._finish()    ????
             series_.append(series[i])
+            print('append ', series[i])
         except Exception:
             pass  # Skip serie (probably report-like file without pixels)
         showProgress(float(i + 1) / len(series))
@@ -685,14 +702,13 @@ class DicomSeries(object):
 
 if __name__ == '__main__':
     import sys
+    
+    foldername = 'C:/______test_files/__RW/_dicom'
 
-    if len(sys.argv) != 2:
-        print("Expected a single argument: a directory with dicom files in it")
-    else:
-        adir = sys.argv[1]
-        t0 = time.time()
-        all_series = read_files(adir, False, False)
-        print("Summary of each series:")
-        for series in all_series:
-            print(series.description)
-            arr = series.get_pixel_array()
+    adir = foldername
+    t0 = time.time()
+    all_series = read_files(adir, False, False)
+    print("Summary of each series:")
+    for series in all_series:
+        print(series.description)
+        arr = series.get_pixel_array()

@@ -45,7 +45,7 @@ def searchdic1(search_word):
     #print(soup.prettify()) # 把排版後的 html 印出來
 
     '''
-    # 一些屬性或方法
+    # 一些屬性或方法, BeautifulSoup的用法
     print('---title---')
     print(soup.title) # 把 tag 抓出來
     print('---title.name---')
@@ -61,25 +61,23 @@ def searchdic1(search_word):
     print('---all div---')
     print(soup.find_all('div')) # 把所有的 <a></a> 抓出來
     '''
+
+    print('上框')
+    print('上框 搜尋英文字 :')
     divs = soup.find_all('span', 'fz-24 fw-500 c-black lh-24')
-    print('搜尋英文字 :')
-    #print(divs)
     for div in divs:
-        #print(div)
         for di in div:
             print(di.text.replace('\n', ''))
 
-    print('主解釋 :')
+    print('上框 音標 :')
     
-    #divs = soup.find_all('div', 'fz-16 fl-l dictionaryExplanation')
-
     #音標
     print('找出音標並print出來')
     pronunciation = soup.find_all('span',class_='fz-14')
     print('000', pronunciation[0].text) #第0個是KK音標
     print('111', pronunciation[1].text) #第1個是DJ音標
 
-    #詞性
+    print('上框 詞性 :')
     divs = soup.find_all('div', 'compList mb-25 p-rel') #如此可以框選較大範圍之資料 找到較大的區塊包含所有資料
   
     #print(divs)
@@ -87,14 +85,51 @@ def searchdic1(search_word):
         #print(div)
         for di in div:
             for tt in di.find_all('li'):
-                #print(tt)
-                print(tt.text.replace('\n', ''))    #只是刪除換行符號, 或許不一定有
+                print('詞性')
+                print(tt.find('div', 'pos_button fz-14 fl-l mr-12').text.replace('\n', '')) #只是刪除換行符號, 或許不一定有
+                print('解釋')
+                print(tt.find('div', 'fz-16 fl-l dictionaryExplanation').text.replace('\n', '')) #只是刪除換行符號, 或許不一定有
 
+    print('中框')
+    print('中框 釋義 :')
+
+    ''' TBD
+    divs = soup.find_all('div', 'grp grp-tab-content-explanation tabsContent-s tab-content-explanation pt-24 tabActived') #如此可以框選較大範圍之資料 找到較大的區塊包含所有資料
+    print('divs')
+    print(divs)
+
+    print('111')
+    print(divs[0].find('div', 'compTitle lh-25'))
+    print('222')
+    print(divs[0].find('div', 'compTitle lh-25'))
+    print('333')
+    print(divs[0].find('div', 'compTitle lh-25'))
+    print('444')
+    print(divs[0].find('div', 'compTitle lh-25'))
+    print('555')
+    print(divs[0].find('div', 'compTitle lh-25'))
     
+    i = 1
+    for div in divs:
+        dd = div.find_all('div', 'compTitle lh-25')
+        print('dd')
+        print(dd)
+        
+        for tt in dd:
+            print('tt')
+            print(tt)
+            print('詞性')
+            print(tt.find('span', 'pos_button fz-14').text.replace('\n', '')) #只是刪除換行符號, 或許不一定有
+            print(tt.find('span', 'fz-14 va-mid lh-22 ml-5').text.replace('\n', '')) #只是刪除換行符號, 或許不一定有
+            mm = tt.find_all('span', 'd-i fz-14 lh-20')
+            
+            print('mm')
+            print(mm)
+            for m in mm:
+                print(m.text.replace('\n', ''))
+           
 
-
-
-    print('釋義 :')
+    '''
     #divs = soup.find_all('span', 'fz-14')
     divs = soup.find_all('span', 'd-i fz-14 lh-20')
     #print(divs)

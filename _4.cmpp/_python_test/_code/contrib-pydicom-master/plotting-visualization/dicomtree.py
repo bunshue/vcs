@@ -44,7 +44,7 @@ def RunTree(w, filename):
 
 def show_file(filename, tree):
     tree.hlist.add("root", text=filename)
-    ds = pydicom.dcmread(sys.argv[1])
+    ds = pydicom.dcmread(filename)
     ds.decode()  # change strings to unicode
     recurse_tree(tree, ds, "root", False)
     tree.autosetmode()
@@ -70,16 +70,13 @@ def recurse_tree(tree, dataset, parent, hide=False):
 
 
 if __name__ == '__main__':
-    import sys
     import pydicom
 
-    if len(sys.argv) != 2:
-        print("Please supply a dicom file name:\n")
-        print(usage)
-        sys.exit(-1)
+    filename = 'C:/______test_files/__RW/_dicom/CT_small.dcm'
+
     root = tkinter_tix.Tk()
-    root.title("DICOM tree viewer - " + sys.argv[1])
+    root.title("DICOM tree viewer - " + filename)
     root.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(1200, 900, 0, 0))
 
-    RunTree(root, sys.argv[1])
+    RunTree(root, filename)
     root.mainloop()

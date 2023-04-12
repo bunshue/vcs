@@ -6,6 +6,7 @@ from pydicom.data import get_testdata_file
 
 filename1 = 'C:/______test_files/__RW/_dicom/test.dcm'
 filename2 = 'C:/______test_files/__RW/_dicom/ims000525.dcm'
+filename3 = 'C:/______test_files/__RW/_dicom/CT_small.dcm'
 
 ds = pydicom.dcmread(filename1)
 #ds = pydicom.dcmread(filename2, force=True)
@@ -52,5 +53,13 @@ ds.save_as("de-identification.dcm")
 
 '''
 
+
+
+import matplotlib.pyplot as plt
+import pydicom
+
+ds = pydicom.dcmread(filename3)
+plt.imshow(ds.pixel_array, cmap=plt.cm.bone)
+plt.show()
 
 

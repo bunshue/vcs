@@ -192,7 +192,8 @@ def change_axis(ax):
 
 
 # Define the path folder where the file is , or directly the RTdose full file name
-path = "C:/Users/kpiqu/OneDrive - Universitat de Valencia/Máster Física Médica/TFM/Comienzos PyDICOM y Slicer/SlicerRtData-/eclipse-8.1.20-phantom-ent/Original"
+#path = "C:/Users/kpiqu/OneDrive - Universitat de Valencia/Máster Física Médica/TFM/Comienzos PyDICOM y Slicer/SlicerRtData-/eclipse-8.1.20-phantom-ent/Original"
+path = 'C:/______test_files/__RW/_dicom'
 global cMin, cMax, cMap
 cMap = "inferno"
 cMin = None

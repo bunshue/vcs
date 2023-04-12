@@ -73,17 +73,11 @@ def parse_args(argv=None):
     return parser.parse_args()
 
 
-def main(argv=None):
-    """main for dicom_dir"""
-    if argv is None:
-        argv = sys.argv
-    args = parse_args(argv=argv[1:])
-    print(pformat(args))
+def main():
+    foldername = 'C:/______test_files/__RW/_dicom'
+    args = foldername
     patients = list()
-    for x in find_dicom_files(directory=args.dicom_dir,
-                              pattern="*.dcm",
-                              directory_exclude_pattern=".*",
-                              recursive=args.recursive):
+    for x in find_dicom_files(directory=foldername, pattern="*.dcm", directory_exclude_pattern=".*"):
         f = pydicom.dcmread(x)
         for p in patients:
             try:
@@ -95,11 +89,13 @@ def main(argv=None):
         else:
             print("New patient!")
             patients.append(Patient(dicom_dataset=f))
+            
     print("Found", len(patients), "patients")
     for x in patients:
         print(repr(x))
         print("\n")
 
-
 if __name__ == "__main__":
     main()
+
+

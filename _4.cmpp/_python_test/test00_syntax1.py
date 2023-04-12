@@ -8,6 +8,7 @@
 print(__doc__)
 
 print(__name__)
+
 import pandas
 import pandas as pd
 print(pandas.__name__)
@@ -53,7 +54,7 @@ print(ROWS)
 print(COLUMNS)
 
 #設定一個二維矩陣
-money=[[41.36, 28.96, 3.77, 8.45],
+money = [[41.36, 28.96, 3.77, 8.45],
 [29.08, 3.58, 6.81, 0.77],
 [15.68, 12.76, 3.79, 3.29],
 [15.61, 10.93, 3.28, 2.95],
@@ -74,11 +75,14 @@ money=[[41.36, 28.96, 3.77, 8.45],
 [12.78, 3.75, 3.54, 0.55]]
 
 #設定一個一維矩陣
-games= ["Wii Sports", "Super Mario Bros", "Mario Kart Wii", "Wii Sports Resort",
+games = ["Wii Sports", "Super Mario Bros", "Mario Kart Wii", "Wii Sports Resort",
         "Pokemon Red/Pokemon Blue", "Tetris", "New Super Mario Bros", "Wii Play", 
         "New Super Mario Bros Wii", "Duck Hunt", "Nintendogs", "Mario Kart DS",
         "Pokemon Gold/Pokemon Silver", "Wii Fit", "Kinect Adventures!", "Wii Fit Plus",
         "Gramd Theft Auto V", "Grand Theft Auto: San Andreas","Super Mario World" ]
+
+
+
 
 
 

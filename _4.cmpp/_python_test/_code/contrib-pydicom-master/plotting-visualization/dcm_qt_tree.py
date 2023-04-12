@@ -93,12 +93,10 @@ class DicomTree(object):
         app.exec_()
         return tree
 
-
 def main():
-    filename = sys.argv[1]
+    filename = 'C:/______test_files/__RW/_dicom/CT_small.dcm'
     dicomTree = DicomTree(filename)
     dicomTree.show_tree()
-
 
 if __name__ == "__main__":
     main()
