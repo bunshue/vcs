@@ -146,3 +146,15 @@ img = soup.find("img")
 print('取得圖片超連結 取得 img src', img["src"])
 print('取得圖片超連結 取得 img src', img.get("src"))
 
+#下載圖片
+import requests
+img = requests.get(img["src"])
+with open('ccccc.png', "wb") as file:
+    file.write(img.content)
+print('圖片下載完成!')
+
+
+
+
+
+

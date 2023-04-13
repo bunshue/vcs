@@ -12,11 +12,11 @@ search_stock = '2330'
 url = 'https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date='+search_date+'&stockNo='+search_stock
 
 # 取得股票資料json字串
-response = requests.get(url)
-#print(response.text)
+html_data = requests.get(url)
+#print(html_data.text)
 
 # 從json字串轉為python的字典格式
-json_data = json.loads(response.text)
+json_data = json.loads(html_data.text)
 datas = json_data["data"]
 fields = json_data["fields"]
 print(datas)    #由List組成的二維陣列
@@ -38,7 +38,7 @@ df.to_html("./month_stock.html")
 #抓一整年的資料 2022年
 year_df = pd.DataFrame()
 headers = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36"
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36'
 }
 search_year = '2022'
 search_stock = '2330'
@@ -51,11 +51,11 @@ for m in range(1, 13):
     print(url)
 
     # 取得股票資料json字串
-    response = requests.get(url, headers=headers)
-    # print(response.text)
+    html_data = requests.get(url, headers = headers)
+    # print(html_data.text)
 
     # 從json字串轉為python的字典格式
-    json_data = json.loads(response.text)
+    json_data = json.loads(html_data.text)
     datas = json_data["data"]
     fields = json_data["fields"]
 

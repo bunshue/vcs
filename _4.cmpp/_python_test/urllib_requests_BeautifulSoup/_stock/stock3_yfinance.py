@@ -31,8 +31,8 @@ print(type(tw2330))
 
 import yfinance as yf
 
-tw2330=yf.Ticker('2330.TW')
-tsla=yf.Ticker('TSLA')
+tw2330 = yf.Ticker('2330.TW')
+tsla = yf.Ticker('TSLA')
      
 #print(tw2330.info)
 print(tsla.get_info())

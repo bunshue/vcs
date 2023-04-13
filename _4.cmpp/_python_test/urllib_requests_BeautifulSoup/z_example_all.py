@@ -3,8 +3,8 @@
 def disp_menu():
     print('各種網路資料抓取範例')
     print('------------------------')
-    print('1.Yahoo字典1')
-    print('2.Yahoo字典2')
+    print('1.Yahoo字典')
+    print('2.ptt電影板標題')
     print('3.統一發票號碼')
     print('4.世界地震資料 json格式')
     print('5.台灣樂透開彩')
@@ -29,8 +29,8 @@ def get_html_data1(url):
     else:
         return resp
 
-#Yahoo字典1 ST
-def searchdic1(search_word):
+#Yahoo字典 ST
+def searchdic(search_word):
     #yahoo字典的網址，可修改網址查詢想要的單字，網址當中的%s為格式化字串
     url = "https://tw.dictionary.search.yahoo.com/search?p=%s" % (search_word)
     html_data = get_html_data1(url)
@@ -139,35 +139,58 @@ def searchdic1(search_word):
             print()
 
 def example01():
-    print('Yahoo字典1')
-    search_word1 = 'coordinate'
-    #search_word1 = '英國'
-    searchdic1(search_word1)
+    print('Yahoo字典')
+    search_word = 'coordinate'
+    #search_word = '英國'
+    searchdic(search_word)
 
-    print('Yahoo字典1')
+    print('Yahoo字典')
     print('------------------------------')
-    search_word1 = 'oat'
-    searchdic1(search_word1)
+    search_word = 'oat'
+    searchdic(search_word)
     print('------------------------------')
     
-    search_word1 = '英國'
-    searchdic1(search_word1)
+    search_word = '英國'
+    searchdic(search_word)
     print('------------------------------')
 
-#Yahoo字典1 SP
+#Yahoo字典 SP
 
-#Yahoo字典2 ST
-def searchdic2(search_word):
-    print('Yahoo字典2')
-    
 def example02():
-    print('Yahoo字典2')
-    search_word2 = 'coordinate'
-    #search_word2 = '英國'
-    searchdic2(search_word2)
+    url = 'https://www.ptt.cc/bbs/movie/index.html'
+    headers = {'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/109.0.0.0 Safari/537.36'}
 
-#Yahoo字典2 SP
-    
+    import bs4
+
+    '''
+    import urllib
+    #建立一個Request物件, 附加Request Headers的資訊
+    request = urllib.request.Request(url, headers = headers)
+    page = urllib.request.urlopen(request)
+    html_data = page.read().decode("utf-8")
+    soup = bs4.BeautifulSoup(html_data, "html.parser")
+    '''
+
+    import requests
+    requests.adapters.DEFAULT_RETRIES = 25
+    html_data = requests.get(url, headers = headers)
+    soup = bs4.BeautifulSoup(html_data.text, "html.parser")
+
+    print(soup.title)   #抓整個標籤
+    print(soup.title.text)  #抓標籤裡面的文字
+    print(soup.title.string)#抓標籤裡面的文字
+
+    #尋找class = 'title' 的 div 標籤
+    titles = soup.find("div", class_= "title")
+
+    #尋找所有class = 'title' 的 div 標籤 用列表表示
+    titles = soup.find_all("div", class_= "title")
+
+    #print(titles)
+    for title in titles:
+        if title.a != None: #如果標題包含a標籤(沒有被刪除), 印出來
+            print(title.a.string)
+   
 def example03():
     print("3.統一發票號碼")
     import requests
@@ -308,7 +331,7 @@ def get_content(url,data = None):
     timeout = random.choice(range(80,180))
     while True:
         try:
-            html_data = requests.get(url,headers =header,timeout = timeout)
+            html_data = requests.get(url, headers = header,timeout = timeout)
             html_data.encoding= 'utf-8'
             break
         except socket.timeout as e:

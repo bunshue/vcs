@@ -1,34 +1,40 @@
-# python import module : urllib
+import urllib
+import urllib.request   #用來建立請求
+
+print('讀取html檔')
+url = 'http://pythonscraping.com/pages/page1.html'
+html = urllib.request.urlopen(url)
+html_data = html.read()
+print(html_data)
 
 print('讀取遠端純文字檔1')
-from urllib.request import urlopen
 url = 'http://www.pythonscraping.com/pages/warandpeace/chapter1.txt'
-textPage = urlopen(url)
-print(textPage.read())
+html = urllib.request.urlopen(url)
+html_data = html.read()
+print(html_data)
 print('OK')
-
 
 print('讀取遠端純文字檔2')
 #encoding:Big5
 #Perl的基本語法
 #http://ind.ntou.edu.tw/~dada/cgi/Perlsynx.htm
 
-import urllib.request   #用來建立請求
+print('讀取遠端html檔1')
 url = 'http://ind.ntou.edu.tw/~dada/cgi/Perlsynx.htm'
-data = urllib.request.urlopen(url).read()
-data = data.decode('Big5')      #將bytes轉成str
-print(data)
+html = urllib.request.urlopen(url).read()
+html_data = html.decode('Big5')      #將bytes轉成str
+print(html_data)
+print('OK')
 
+print('資料寫出到本地檔案')
 filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/perl.html'
 fd = open(filename, "w")
-fd.write(data)
+fd.write(html_data)
 fd.close()
+print('抓取網頁資料 並存檔成 : ' + filename)
 print('OK')
 
 print("抓取網頁資料, 並存檔")
-import urllib
-import urllib.request
- 
 data={}
 data['word']='明仁天皇'
  
@@ -39,52 +45,41 @@ full_url = url + url_values
 data = urllib.request.urlopen(full_url).read()
 #data=data.decode('UTF-8')
 print(data)
+print('OK')
 
+print('資料寫出到本地檔案')
 filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/b2.html'
-print('抓取網頁資料 並存檔成 : '+filename)
 fd = open(filename, "wb")
 fd.write(data)
 fd.close()
+print('抓取網頁資料 並存檔成 : ' + filename)
 print('OK')
-
 
 print('抓取網頁資料 1')
-from urllib.request import urlopen
 url = 'http://pythonscraping.com/pages/page1.html'
-html = urlopen(url)
-#print(html.read())
-print(html.read(), 'utf-8')
+html = urllib.request.urlopen(url)
+html_data = html.read()
+print(html_data, 'utf-8')
 print('OK')
-
 
 print('抓取網頁資料 2')
 #encoding:UTF-8
 
 #百度
 #http://ind.ntou.edu.tw/~dada/cgi/Perlsynx.htm
-import urllib.request   #用來建立請求
 url = "http://www.baidu.com"
 data = urllib.request.urlopen(url).read()
 print(data)
 
+print('資料寫出到本地檔案')
 filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/bbb.html'
 fd = open(filename, "wb")
 fd.write(data)
 fd.close()
+print('抓取網頁資料 並存檔成 : ' + filename)
 print('OK')
-
-print("讀取遠端純文字檔")
-from urllib.request import urlopen
-url = 'http://www.pythonscraping.com/pages/warandpeace/chapter1.txt'
-textPage = urlopen(url)
-print(textPage.read())
-print('OK')
-
 
 print('讀取遠端純文字檔3')
-import urllib
-import urllib.request
- 
 data={}
 data['word']='Jecvay Notes'
  
@@ -95,25 +90,19 @@ full_url=url+url_values
 data=urllib.request.urlopen(full_url).read()
 data=data.decode('UTF-8')
 print(data)
-
+print('OK')
 
 print('抓取網頁資料 4')
 
-from urllib import parse
-
 url = 'https://www.cnblogs.com/angelyan/'
-result = parse.urlparse(url=url,scheme='http',allow_fragments=True)
+result = urllib.parse.urlparse(url = url, scheme = 'http', allow_fragments = True)
 print(result)
 print(result.scheme)
-
 print('OK')
 
-
-
 print('抓取網頁資料 5')
-from urllib.parse import urlparse
 url = 'https://www.most.gov.tw/folksonomy/list?menu_id=ba3d22f3-96fd-4adf-a078-91a05b8f0166&filter_uid=none&listKeyword=&pageNum=2&pageSize=18&view_mode=listView&subSite=main&l=ch&tagUid='
-uc = urlparse(url)
+uc = urllib.parse.urlparse(url)
 print("NetLoc:", uc.netloc)
 print("Path:", uc.path)
 
@@ -126,14 +115,10 @@ print('抓取網頁資料 OK')
 
 #url = input("請輸入網址：")
 url = 'https://www.google.com.tw/'
-
 if url.startswith("http://") or url.startswith("https://"):
     print("輸入的網址格式正確！")
 else:
     print("輸入的網址格式錯誤！")
-
-
-import urllib.request   #用來建立請求
 
 url = "http://ind.ntou.edu.tw/~dada/cgi/Perlsynx.htm"
 a = urllib.request.urlopen(url)
@@ -156,24 +141,44 @@ print(a.version)
 data = a.read()
 #data = data.decode('UTF-8')
 #print(data)
-
-fd = open("tmp.html", "wb")
+print('資料寫出到本地檔案')
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/tmp.html'
+fd = open(filename, "wb")
 fd.write(data)
 fd.close()
+print('抓取網頁資料 並存檔成 : ' + filename)
 
 
-#讀取html檔
+'''
+import requests
+
+url = 'https://httpbin.org/get'
+headers = {'Content-Type': 'text/html'}
+
+html_data = requests.get(url, headers=headers)
+
+print(html_data.text)
+'''
+
+import ssl
+import requests
 from urllib.request import urlopen
-html = urlopen("http://pythonscraping.com/pages/page1.html")
-print(html.read())
+import urllib.request   #用來建立請求
+from bs4 import BeautifulSoup
+
+context = ssl._create_unverified_context()
+url = 'https://movies.yahoo.com.tw/chart.html'
+html_data = urllib.request.urlopen(url).read()
+html_data = html_data.decode('utf-8')
+print(html_data)
+soup = BeautifulSoup(html_data, 'html.parser')
+print(soup.prettify())
 
 
 
-import urllib.request
-input = urllib.request.urlopen('http://www.yahoo.com/index.html')
-print(input.read())
 
 
 
 print('作業完成')
+
 

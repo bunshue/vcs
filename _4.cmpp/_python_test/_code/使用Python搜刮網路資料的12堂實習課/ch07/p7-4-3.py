@@ -1,9 +1,11 @@
 import requests
 from bs4 import BeautifulSoup
+
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) '
             'AppleWebKit/537.36 (KHTML, like Gecko) '
             'Chrome/77.0.3865.120 Safari/537.36'}
-html=requests.get("https://www.books.com.tw/web/sys_saletopb/books/19/?loc=P_0002_020",headers=headers).text
+html_data = requests.get("https://www.books.com.tw/web/sys_saletopb/books/19/?loc=P_0002_020",headers=headers).text
+
 import mysql.connector
 
 conn = mysql.connector.connect(
@@ -17,7 +19,7 @@ sql = """
 insert into `ranking30` (`rank`, `title`, `author`, `price`) 
     values({},'{}','{}','{}');
 """
-soup=BeautifulSoup(html,"html.parser")
+soup = BeautifulSoup(html_data, "html.parser")
 sel = 'li.item'
 ranking=soup.select(sel)
 for rank, book in enumerate(ranking, 1):
@@ -33,4 +35,5 @@ for rank, book in enumerate(ranking, 1):
         pass
     conn.commit()
 conn.close()
+
 print("Done")
