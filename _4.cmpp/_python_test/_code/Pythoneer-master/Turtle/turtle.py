@@ -1,6 +1,5 @@
 import turtle
 
-
 def main():
     initTurtle()
     drawSquare()

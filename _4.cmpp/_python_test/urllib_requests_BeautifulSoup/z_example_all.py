@@ -1,3 +1,5 @@
+#class_ 的"_"符號是因為class是保留字，所以加上_符號作區別
+
 def disp_menu():
     print('各種網路資料抓取範例')
     print('------------------------')
@@ -64,15 +66,14 @@ def searchdic1(search_word):
 
     print('上框')
     print('上框 搜尋英文字 :')
-    divs = soup.find_all('span', 'fz-24 fw-500 c-black lh-24')
-    for div in divs:
-        for di in div:
+    search_word = soup.find_all('span', class_='fz-24 fw-500 c-black lh-24')
+    for sw in search_word:
+        for di in sw:
             print(di.text.replace('\n', ''))
 
     print('上框 音標 :')
     
     #音標
-    print('找出音標並print出來')
     pronunciation = soup.find_all('span',class_='fz-14')
     print('000', pronunciation[0].text) #第0個是KK音標
     print('111', pronunciation[1].text) #第1個是DJ音標
@@ -85,141 +86,57 @@ def searchdic1(search_word):
         #print(div)
         for di in div:
             for tt in di.find_all('li'):
-                print('詞性')
-                print(tt.find('div', 'pos_button fz-14 fl-l mr-12').text.replace('\n', '')) #只是刪除換行符號, 或許不一定有
-                print('解釋')
-                print(tt.find('div', 'fz-16 fl-l dictionaryExplanation').text.replace('\n', '')) #只是刪除換行符號, 或許不一定有
+                cc = tt.find('div', 'pos_button fz-14 fl-l mr-12')
+                if cc != None: #如果標題包含資料, 印出來
+                    print('詞性')
+                    print(cc.text.replace('\n', '')) #只是刪除換行符號, 或許不一定有
+                
+                dd = tt.find('div', 'fz-16 fl-l dictionaryExplanation')
+                if dd != None: #如果標題包含資料, 印出來
+                    print('解釋')
+                    print(dd.text.replace('\n', '')) #只是刪除換行符號, 或許不一定有
 
     print('中框')
     print('中框 釋義 :')
 
-    ''' TBD
-    divs = soup.find_all('div', 'grp grp-tab-content-explanation tabsContent-s tab-content-explanation pt-24 tabActived') #如此可以框選較大範圍之資料 找到較大的區塊包含所有資料
-    print('divs')
-    print(divs)
-
-    print('111')
-    print(divs[0].find('div', 'compTitle lh-25'))
-    print('222')
-    print(divs[0].find('div', 'compTitle lh-25'))
-    print('333')
-    print(divs[0].find('div', 'compTitle lh-25'))
-    print('444')
-    print(divs[0].find('div', 'compTitle lh-25'))
-    print('555')
-    print(divs[0].find('div', 'compTitle lh-25'))
-    
-    i = 1
-    for div in divs:
-        dd = div.find_all('div', 'compTitle lh-25')
-        print('dd')
-        print(dd)
-        
-        for tt in dd:
-            print('tt')
-            print(tt)
-            print('詞性')
-            print(tt.find('span', 'pos_button fz-14').text.replace('\n', '')) #只是刪除換行符號, 或許不一定有
-            print(tt.find('span', 'fz-14 va-mid lh-22 ml-5').text.replace('\n', '')) #只是刪除換行符號, 或許不一定有
-            mm = tt.find_all('span', 'd-i fz-14 lh-20')
-            
-            print('mm')
-            print(mm)
-            for m in mm:
-                print(m.text.replace('\n', ''))
-           
-
-    '''
-    #divs = soup.find_all('span', 'fz-14')
-    divs = soup.find_all('span', 'd-i fz-14 lh-20')
+    divs = soup.find_all('div', class_ = 'grp grp-tab-content-explanation tabsContent-s tab-content-explanation pt-24 tabActived')    #如此可以框選較大範圍之資料 找到較大的區塊包含所有資料
     #print(divs)
-    i = 1
-    for div in divs:
-        for di in div:
-            print(i)
-            print(di.text.replace('\n', ''))
-            i = i + 1
+    
+    if divs == []:
+        return
 
-    mainBlock = soup.find_all('div', class_='grp grp-main pl-25')
+    div1 = divs[0].find_all('div', 'compTitle lh-25')
+    length = len(div1)
+    #print('a共找到', length, '筆資料')
 
-    #class_ 的"_"符號是因為class是保留字，所以加上_符號作區別
-    search_word = mainBlock[0].find_all('span', class_='fz-24 fw-500 c-black lh-24')
-    print('搜尋英文字 :')
-    #print(search_word)
-    for sw in search_word:
-        #print(sw)
-        for di in sw:
-            print(di.text.replace('\n', ''))
+    div2 = divs[0].find_all('div', 'compTextList ml-50')
+    length = len(div2)
+    #print('b共找到', length, '筆資料')
 
-    print('找出音標並print出來')
-    pronunciation = soup.find_all('span',class_='fz-14')
-    print('000', pronunciation[0].text) #第0個是KK音標
-    print('111', pronunciation[1].text) #第1個是DJ音標
+    # 依照詞性數量的區塊做迴圈，將一個一個區塊作處理
+    for nn in range(length):
+        ''' debug
+        print(nn)
+        print('--------------------')
+        print(div1[nn])   # 使用索引值, 只印出text部分
+        print('--------------------')
+        print(div2[nn])   # 使用索引值, 只印出text部分
+        print('--------------------')
+        '''
+        print('詞性')
+        print(div1[nn].find('span', 'pos_button fz-14').text.replace('\n', ''), end = "") #只是刪除換行符號, 或許不一定有
+        print(div1[nn].find('span', 'fz-14 va-mid lh-22 ml-5').text.replace('\n', '')) #只是刪除換行符號, 或許不一定有
 
-    pos = soup.find_all('li', class_='lh-22 mh-22 mt-12 mb-12 mr-25 last')
-    #print(pos)
-    nnn = pos[0].find_all('div')
-    #print(nnn)
-    for n in nnn:
-        #print(n)
-        for di in n:
-            print(di.text.replace('\n', ''))
-
-    print('釋義:')
-    meaning = soup.find_all('div', class_='grp grp-tab-content-explanation tabsContent-s tab-content-explanation pt-24 tabActived')
-    #print(meaning)
-    print('詞性:')
-    nnn = meaning[0].find_all('div', class_='compTitle lh-25')
-    nnn2 = nnn[0].find_all('span')
-    #print(nnn)
-    for n in nnn2:
-        #print(n)
-        for di in n:
-            print(di.text.replace('\n', ''))
-    print('解釋:')
-    nnn = meaning[0].find_all('div', class_='compTextList ml-50')
-    nnn2 = nnn[0].find_all('span')
-    #print(nnn)
-    for n in nnn2:
-        #print(n)
-        for di in n:
-            print(di.text.replace('\n', ''))
-
-
-'''   old
-       
-        # 先找出詞性，詞性使用h3標籤，但在allBlock裡沒有其他h3標籤，所以就不指定class了
-        parts = allBlock[0].find_all('h3')
-        print((len(meaningBlock)))
-        # 依照詞性數量的區塊做迴圈，將一個一個區塊作處理
-        for i in range(len(meaningBlock)):
-            # 顯示方面我們先顯示詞性值，後續再顯示單字意思
-            print(parts[i].text)
-            
-            # 這個迴圈將詞性區塊裡的單字意思一個一個抓出來顯示
-            # 而每個單字意思及例句都是使用li標籤所包起來，所以將每個li標籤抓出來顯示他的單字意思及例句
-            for j in meaningBlock[i].find_all('li'):
-                # 印出其中一個單字意思，單字意思是使用h4標籤，可如下對j抓取它的指定下一層標籤h4
-                print("\t"+j.h4.text)
-                hasES=False
-                # 有些單字意思沒例句會出錯，所以對沒有例句的意思做例外跳過
-                try:
-                    #由於有些解釋有多個例句，因此去找所有例句
-                    exampleSentence =j.find_all('span')
-                    #第一個span會抓到中文意思，因此跳過，後面的例句每句後面都會多抓到一次中文解釋，因此k=k+2
-                    for k in range(1, len(exampleSentence),2):
-                        #有時會抓到雖然沒例句但是卻有span的時候，內容會是空白，因此過濾掉
-                        if exampleSentence[k].text!=' ':
-                            print("\t\t例句："+exampleSentence[k].text)
-                            hasES=True
-                except:
-                    #跳過沒抓到span的
-                    pass
-                #如果沒例句時所作的處理
-                if hasES==False:
-                    print("\t\t沒例句。")
-'''
-
+        print('解釋:')
+        nnn2 = div2[nn].find_all('span')
+        #print(nnn)
+        # 這個迴圈將詞性區塊裡的單字意思一個一個抓出來顯示
+        # 而每個單字意思及例句都是使用li標籤所包起來，所以將每個li標籤抓出來顯示他的單字意思及例句
+        for n in nnn2:
+            #print(n)
+            for di in n:
+                print(di.text.replace('\n', ''), end = "")
+            print()
 
 def example01():
     print('Yahoo字典1')
@@ -227,82 +144,22 @@ def example01():
     #search_word1 = '英國'
     searchdic1(search_word1)
 
+    print('Yahoo字典1')
+    print('------------------------------')
+    search_word1 = 'oat'
+    searchdic1(search_word1)
+    print('------------------------------')
+    
+    search_word1 = '英國'
+    searchdic1(search_word1)
+    print('------------------------------')
+
 #Yahoo字典1 SP
 
 #Yahoo字典2 ST
 def searchdic2(search_word):
-  #yahoo字典的網址，可修改網址查詢想要的單字，網址當中的%s為格式化字串
-  url = "https://tw.dictionary.search.yahoo.com/search?p=%s" % (search_word)
-  html_data = get_html_data1(url)
-  if html_data:
-    print("擷取網頁資料 OK")
-    #print(html_data.text)
-  else:
-    print('無法取得網頁資料')
-    return None
-
-  soup = BeautifulSoup(html_data.text, "html.parser")
-  #print(soup.prettify()) # 把排版後的 html 印出來
-
-  '''
-  print('主解釋 :')
-  divs = soup.find_all('div', 'compList mb-25 p-rel') #如此可以框選較大範圍之資料 找到較大的區塊包含所有資料
-  #print(divs)
-  for div in divs:
-    #print(div)
-    lis = div.find_all('li')  #把li下的所有資料印出來
-    for li in lis:
-      print('2')
-      print(li)
-      print(li.text.replace('\n', ''))
-  '''
-  '''
-  print(soup.prettify()) # 把排版後的 html 印出來
-  # 一些屬性或方法
-  print('---title---')
-  print(soup.title) # 把 tag 抓出來
-  print('---title.name---')
-  print(soup.title.name) # 把 title 的 tag 名稱抓出來
-  print('---title.string---')
-  print(soup.title.string) # 把 title tag 的內容抓出來
-  print('---title.parent.name---')
-  print(soup.title.parent.name) # title tag 的上一層 tag
-  print('---a---')
-  print(soup.a) # 把第一個 <a></a> 抓出來
-  print('---all a---')
-  print(soup.find_all('a')) # 把所有的 <a></a> 抓出來
-  print('---all div---')
-  print(soup.find_all('div')) # 把所有的 <a></a> 抓出來
-  '''
-
-  divs = soup.find_all('span', 'fz-24 fw-500 c-black lh-24')
-  print('搜尋英文字 :')
-  #print(divs)
-  for div in divs:
-      #print(div)
-      for di in div:
-          print(di.text.replace('\n', ''))
-
-  print('主解釋 :')
-  #divs = soup.find_all('div', 'fz-16 fl-l dictionaryExplanation')
-  divs = soup.find_all('div', 'compList mb-25 p-rel') #如此可以框選較大範圍之資料 找到較大的區塊包含所有資料
-  #print(divs)
-  for div in divs:
-      #print(div)
-      for di in div:
-          #print(di)
-          print(di.text.replace('\n', ''))    #只是刪除換行符號, 或許不一定有
-
-  print('釋義 :')        
-  divs = soup.find_all('span', 'd-i fz-14 lh-20')
-  #print(divs)
-  i = 1
-  for div in divs:
-      for di in div:
-          print(i)
-          print(di.text.replace('\n', ''))
-          i = i + 1
-
+    print('Yahoo字典2')
+    
 def example02():
     print('Yahoo字典2')
     search_word2 = 'coordinate'

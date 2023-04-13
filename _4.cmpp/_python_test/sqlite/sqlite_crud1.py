@@ -12,12 +12,12 @@
 	id	name	money
 第1筆 : 5	Apple	333
 第2筆 : 1	Banana	777
-第3筆 : 4	Cat	444
+第3筆 : 4	Cat	444    (此筆資料多餘, 應刪除)
 
 第4筆 : 9	Dog	888
-第5筆 : 2	Dog	111
+第5筆 : 2	Dog	888    (此筆資料錯誤, 應為Eagle 111)
 
-第6筆 : 8	Frog	666
+第6筆 : 8	Frog	666    (詢問是否刪除此筆資料)
 第7筆 : 3	Giraffe	222
 
 第8筆 : 7	Happy	999
@@ -76,8 +76,8 @@ cursor.execute(sqlstr)
 
 print('新增資料 2 筆 寫法二')
 cursor.execute("insert into table01 (id_num, name, money) " + "values (9, 'Dog', 888)")
-#id_num不重複 但name重複
-cursor.execute("insert into table01 (id_num, name, money) " + "values (2, 'Dog', 111)")
+#id_num不重複 但name money 重複
+cursor.execute("insert into table01 (id_num, name, money) " + "values (2, 'Dog', 888)")
 
 print('新增資料 2 筆 寫法三')
 # 定義資料串列
@@ -91,7 +91,7 @@ for data in datas:
     conn.execute("insert into table01 (id_num, name, money) VALUES ({}, '{}', '{}')".format(data[0], data[1], data[2]))
 conn.commit() # 更新
 
-print('新增資料 2 筆 寫法三b')
+print('新增資料 2 筆 寫法四')
 #Insert
 number = 7
 name = 'Happy'
@@ -110,8 +110,8 @@ conn.close()  # 關閉資料庫連線
 print('更新資料, 修改2號的資料')
 #print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename) # 建立資料庫連線
-
-conn.execute("update table01 SET name='{}' WHERE id_num={}".format('Eagle', 2))   #修改2號的資料, 要先確保已經有2號的資料, 才可以修改
+conn.execute("update table01 SET name = '{}'  WHERE id_num={}".format('Eagle', 2))  #修改2號的資料, 要先確保已經有2號的資料, 才可以修改
+conn.execute("update table01 SET money = '{}' WHERE id_num={}".format(111, 2))      #修改2號的資料, 要先確保已經有2號的資料, 才可以修改
 conn.commit() # 更新
 conn.close()  # 關閉資料庫連線
 
@@ -119,8 +119,6 @@ conn.close()  # 關閉資料庫連線
 print('刪除資料, 刪除4號的資料')
 #print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename) # 建立資料庫連線
-
-# Delete 刪除資料
 conn.execute("delete FROM table01 WHERE id_num={}".format(4))
 conn.commit() # 更新
 conn.close()  # 關閉資料庫連線
@@ -128,17 +126,35 @@ conn.close()  # 關閉資料庫連線
 #Select 讀取
 print('讀取資料庫資料')
 #print('建立資料庫連線, 資料庫 : ' + db_filename)
-conn = sqlite3.connect(db_filename)
+conn = sqlite3.connect(db_filename) # 建立資料庫連線
 cursor = conn.execute('select * from table01')
+conn.commit() # 更新
+conn.close()  # 關閉資料庫連線
 
-'''
-print('指名抓一筆資料')
-
-cursor = conn.execute('select * from table01 where id_num = 3')
+#Select 讀取
+#print('建立資料庫連線, 資料庫 : ' + db_filename)
+conn = sqlite3.connect(db_filename) # 建立資料庫連線
+print('指明抓一筆資料, 9號')
+number = 9
+cursor = conn.execute('select * from table01 where id_num = ' + str(number))
 row = cursor.fetchone()
-if not row==None:
+if not row == None:
     print("{}\t{}\t{}".format(row[0], row[1], row[2]))
-'''
+else:
+    print('找不到' + str(number) + '號資料')
+
+print('指明抓一筆資料, 15號')
+number = 15
+cursor = conn.execute('select * from table01 where id_num = ' + str(number))
+row = cursor.fetchone()
+if not row == None:
+    print("{}\t{}\t{}".format(row[0], row[1], row[2]))
+else:
+    print('找不到' + str(number) + '號資料')
+    
+conn.commit() # 更新
+conn.close()  # 關閉資料庫連線
+
 
 '''
 #讀取一筆資料
@@ -159,8 +175,6 @@ print('逐筆顯示資料')
 for row in rows:
     print(row[0], row[1], row[2])
 '''
-
-conn.close()  # 關閉資料庫連線
 
 print('尋找資料')
 #print('建立資料庫連線, 資料庫 : ' + db_filename)

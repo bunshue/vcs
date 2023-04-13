@@ -1,6 +1,7 @@
 import turtle
-import random 
-import math 
+import random
+import math
+
 turtle.screensize(900,900)
 c = (0.1,0.01,0.3)
 turtle.bgcolor(c)
