@@ -10,37 +10,6 @@ C:\Users\david\AppData\Local\Programs\Python\Python38-32>python.exe -m pip insta
 C:\Users\david\AppData\Local\Programs\Python\Python38-32>auto-py-to-exe
 
 
-string = '測試字串是不是有被包含'
-ss = '要'
-if ss in string:
-    print('有被包含')
-else:
-    print('沒有被包含')
-
-ss = '包含'
-if ss in string:
-    print('有被包含')
-else:
-    print('沒有被包含')
-
-
-
-
-
-print('拆解e-mail')
-import re
-
-regex = r"([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)"
-url = 'http://icho.chem.ntnu.edu.tw/pub/54con/54con.html'
-html_data = requests.get(url).text
-
-emails = re.findall(regex, html_data)
-for email in emails:
-    print(email)
-
-
-
-
 
 
 Python 列出目錄中所有檔案教學：os.listdir 與 os.walk
@@ -177,23 +146,6 @@ f=(0:length(y)-1)'*50/length(y);
 figure(1);plot(t,x),ylabel('Sin(x)'),grid on
 figure(2);plot(f,m),ylabel('Abs.'),grid on
 %figure(3);plot(f,p*180/pi),ylabel('Phase'),grid on
-
-
-
-
-
-
-
-
-
-print('BeautifulSoup 測試 2')
-
-import requests
-from bs4 import BeautifulSoup
-url = 'http://www.e-happy.com.tw'
-html_data = requests.get(url)
-soup = BeautifulSoup(html_data.text, 'html.parser')
-print(soup.prettify())
 
 
 GET
@@ -335,50 +287,6 @@ try:
 except:  # CTRL + C 中斷
     buzzer.deinit()       
 
-
-
-
-
-
-
-
-
-
-'''
-print(html_data.status_code) # 获取返回状态, 200 為 OK
-
-'''
-
-
-
-def changechinesetourl():
-  print('changechinesetourl')
-  global search_word
-  from urllib import parse
-  str = search_word
-  search_word = parse.quote(str)
-
-
-
-檢查有無包含中文
-def is_contains_chinese():
-  print('is_contains_chinese')
-  global search_word
-  for _char in search_word:
-    if '\u4e00' <= _char <= '\u9fa5':
-      print('True')
-      return True
-  print('False')
-  return False
-  
-
-search_word = 'oat'
-search_word = '英國'
-is_contains_chinese()
-
-
-
-
 '''
 def fetch_data():
     url = 'http://new.cpc.com.tw/division/mb/oil-more4.aspx'
@@ -420,20 +328,3 @@ entry.pack()
 
 TextBox取值
 print(entry_string.get())
-
-
-
-建立一組密碼 並將此密碼拷貝至剪貼簿
-import random
-import pyperclip
-chars = 'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()'
-password = ''
-for c in range(6):
-   password += random.choice(chars)
-print('The Generated Password is %r and it has been copied to your clipboard' %(password))
-pyperclip.copy(password)
-
-
-
-
-

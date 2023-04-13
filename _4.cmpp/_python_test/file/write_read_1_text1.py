@@ -131,41 +131,41 @@ fo.close()
 filename2 = 'C:/_git/vcs/_4.cmpp/_python_test/data/file2.txt'
 
 print("讀取檔案 " + filename2)
-with open(filename2,'r',encoding ='UTF-8') as fo:
+with open(filename2, 'r', encoding = 'UTF-8') as fo:
     print(fo.readline())  # 123中文字\n
     print(fo.readline(3)) # abc
 
 print("讀取檔案 " + filename1)    
-with open(filename1,'r') as fo:
+with open(filename1, 'r') as fo:
     content=fo.readlines() 
     print(type(content))   # <class 'list'>
     print(content)  
 
 print("讀取檔案 " + filename2)
-with open(filename2,'r',encoding ='UTF-8') as fo:
+with open(filename2, 'r', encoding = 'UTF-8') as fo:
     doc=fo.readlines() 
     print(doc)      
 
 print("讀取檔案 " + filename2)    
-with open(filename2,'r',encoding ='UTF-8') as fo:
+with open(filename2, 'r', encoding = 'UTF-8') as fo:
     str1=fo.read(5)
     print(str1)  # 123中
 
 print("讀取檔案 " + filename2)
-with open(filename2,'r',encoding ='UTF-8-sig') as fo:
+with open(filename2, 'r', encoding = 'UTF-8-sig') as fo:
     doc=fo.readlines() 
     print(doc)      
 
 print("讀取檔案 " + filename2)
-with open(filename2,'r',encoding ='UTF-8-sig') as fo:
+with open(filename2, 'r', encoding = 'UTF-8-sig') as fo:
     str1=fo.read(5)
     print(str1)  # 123中文
 
 print("使用cp950編碼 讀取檔案")
 filename_utf8 = 'C:/_git/vcs/_4.cmpp/_python_test/data/fileUTF8.txt'
-fo=open(filename_utf8,'r',encoding ='cp950')
+fo=open(filename_utf8, 'r', encoding = 'cp950')
 for line in fo:
-    print(line,end="")
+    print(line, end = "")
 fo.close()
 
 

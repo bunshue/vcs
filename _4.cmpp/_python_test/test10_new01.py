@@ -159,20 +159,6 @@ print(__name__)
 #print(__name__._version)
 
 
-
-'''
-import requests
-
-r=requests.get("http://www.e-happy.com.tw")
-r.encoding='utf-8'
-print("下載完畢!")
-if (r.status_code==200):
-    print(1111)
-    print(r.text)
-    print(r.raw.read(100))
-'''
-
-
 username = 'david'
 password = '1234'
 if username=='david' and password=='1234':
@@ -190,6 +176,23 @@ print(type(name))
 
 ccc = name.reverse()
 print(ccc)
+
+
+
+
+
+
+timeout = random.choice(range(80,180))
+
+
+from urllib import parse
+
+string = '豬頭三'
+
+string_url = parse.quote(string)
+print('原字串:\t' + string)
+print('轉網址:\t' + string_url)
+
 
 
 

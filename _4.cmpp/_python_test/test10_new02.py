@@ -202,7 +202,7 @@ print(temp)
 print(candyCan)
 print(newCandy)
 
-
+'''
 candyCan = ("apple", "strawberry", "mango", "peach", "grape")
 
 candyCan[1] = "banana"
@@ -218,7 +218,7 @@ print(candyCan[1:3])
 
 print(candyCan.count("mango"))
 print(candyCan.index("mango"))
-
+'''
 
 
 
@@ -255,11 +255,6 @@ print(candyNumber.keys())
 print(candyNumber.values())
 print(candyNumber.items())
 
-
-
-
-
-
 #一維list
 mylist = ["A", "B", "C", "D", "E"]
 
@@ -267,10 +262,66 @@ for elem in mylist:
     print(elem)
     
 
+string = '測試字串是不是有被包含'
+ss = '要'
+if ss in string:
+    print('有被包含')
+else:
+    print('沒有被包含')
+
+ss = '包含'
+if ss in string:
+    print('有被包含')
+else:
+    print('沒有被包含')
+
+
+
+print('拆解e-mail')
+import re
+import requests
+regex = r"([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)"
+url = 'http://csharphelper.com/blog/'
+html_data = requests.get(url).text
+
+emails = re.findall(regex, html_data)
+for email in emails:
+    print(email)
+
+
+
+#檢查有無包含中文
+def is_contains_chinese():
+  print('is_contains_chinese')
+  global search_word
+  for _char in search_word:
+    if '\u4e00' <= _char <= '\u9fa5':
+      print('True')
+      return True
+  print('False')
+  return False
+  
+
+search_word = 'oat'
+is_contains_chinese()
+search_word = '英國'
+is_contains_chinese()
 
 
 
 
+
+
+
+print('建立一組密碼 並將此密碼拷貝至剪貼簿')
+import random
+import pyperclip
+chars = 'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()'
+password = ''
+for c in range(20):
+   password += random.choice(chars)
+print('建立一組密碼:\t%r, 並已拷貝至剪貼簿' %(password))
+pyperclip.copy(password)
 
 
 

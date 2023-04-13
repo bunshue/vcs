@@ -127,18 +127,69 @@ f=open(filename_rw2, 'r',encoding ='UTF-8-sig')
 print(f.readline())  # 123中文字\n
 print(f.readline(3)) # abc
 f.close()
-
+'''
 f=open(filename_rw2, 'r',encoding ='cp950')
 for line in f:
     print(line,end="")
 f.close()
+'''
+
+filename_rw3 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/Presidents.txt'
+
+# Open file for output
+outfile = open(filename_rw3, "w")
+
+# Write data to the file
+outfile.write("Bill Clinton\n")
+outfile.write("George Bush\n")
+outfile.write("Barack Obama")
+
+outfile.close() # Close the output file
+
+
+filename_rw4 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/Info.txt'
+# Open file for appending data
+outfile = open(filename_rw4, "a")
+outfile.write("\nPython is interpreted\n")
+outfile.close() # Close the input file
+
+
+
+import random
+
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/numbers.txt'
+
+# Open file for writing data
+outfile = open(filename, "w")
+for i in range(10):
+    outfile.write(str(random.randint(0, 9)) + " ")
+outfile.close() # Close the file
+
+# Open file for reading data
+infile = open(filename, "r")
+s = infile.read()
+numbers = [eval(x) for x in s.split()]
+for number in numbers:
+    print(number, end = " ")
+infile.close() # Close the file
 
 
 
 
 
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/Presidents.txt'
 
+fp = open(filename, "r")
+zops = fp.readlines()
+fp.close()
 
+i=1
+print("檔案內容")
+for zen in zops:
+    print("第 {} 行 : {}".format(i, zen), end="")
+    i += 1
+
+print()
 
 
 

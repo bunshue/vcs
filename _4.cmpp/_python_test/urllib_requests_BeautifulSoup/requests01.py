@@ -170,6 +170,33 @@ if html_data:
 else:
     print("抓取網頁NG")
 
+
+
+print('BeautifulSoup 測試 2')
+
+import requests
+from bs4 import BeautifulSoup
+url = 'http://www.e-happy.com.tw'
+html_data = requests.get(url)
+soup = BeautifulSoup(html_data.text, 'html.parser')
+print(soup.prettify())
+
+
+'''
+import requests
+
+r=requests.get("http://www.e-happy.com.tw")
+r.encoding='utf-8'
+print("下載完畢!")
+if (r.status_code==200):
+    print(1111)
+    print(r.text)
+    print(r.raw.read(100))
+'''
+
+
+
+
     
 
 
