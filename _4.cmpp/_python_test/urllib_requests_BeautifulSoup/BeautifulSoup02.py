@@ -351,6 +351,17 @@ fp.write(pre_html+html_body+post_html)
 fp.close()            
 '''
 
+print('BeautifulSoup 測試 13')
+
+import requests
+from bs4 import BeautifulSoup
+
+url = "https://kma.kkbox.com/charts/daily/newrelease?terr=tw&lang=tc"
+
+html_data = requests.get(url)
+soup = BeautifulSoup(html_data.text, "html.parser")
+
+print(soup.prettify())
 
 
 

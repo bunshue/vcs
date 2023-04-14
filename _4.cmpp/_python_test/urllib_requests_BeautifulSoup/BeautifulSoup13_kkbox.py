@@ -4,18 +4,21 @@ import time
 import requests
 from bs4 import BeautifulSoup
 
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/kkbox_songs.csv'
+
 # KKBOX華語新歌日榜
 url = "https://kma.kkbox.com/charts/api/v1/daily?category=390&lang=tc&limit=50&terr=tw&type=newrelease"
 
 # 取得歌曲資訊json檔
-response = requests.get(url)
-# print(response.status_code)
-# print(response.text)
+html_data = requests.get(url)
+# print(html_data.status_code)
+# print(html_data.text)
 
 # 將json字串轉為Python的字典型態
-data = json.loads(response.text)
+data = json.loads(html_data.text)
 song_list = data["data"]["charts"]["newrelease"]
-with open('songs.csv', 'w', newline='', encoding="big5") as csvfile:
+
+with open(filename, 'w', newline='', encoding="big5") as csvfile:
     # 建立 CSV 檔寫入器
     writer = csv.writer(csvfile)
     # 寫入一列資料
@@ -28,8 +31,7 @@ with open('songs.csv', 'w', newline='', encoding="big5") as csvfile:
         song_artist = song["artist_name"]
         song_timestamp = int(song["release_date"])
         # 從timestamp轉為日期格式
-        song_date = time.strftime(
-            "%Y-%m-%d", time.localtime(song_timestamp))
+        song_date = time.strftime("%Y-%m-%d", time.localtime(song_timestamp))
 
         print("排名:", song_rank)
         print("歌名:", song_name)
@@ -37,8 +39,7 @@ with open('songs.csv', 'w', newline='', encoding="big5") as csvfile:
         print("發行日期:", song_date)
         print("連結:", song_url)
 
-        writer.writerow(
-            [song_rank, song_name, song_artist, song_date, song_url])
+        writer.writerow([song_rank, song_name, song_artist.encode('utf-8'), song_date, song_url])
 
         # # 從歌曲連結取得歌詞
         # song_response = requests.get(song_url)
@@ -48,4 +49,6 @@ with open('songs.csv', 'w', newline='', encoding="big5") as csvfile:
 
         print("-" * 30)
 
-print("END of program!")
+print('將資料寫入檔案 : ' + filename)
+print('OK')
+
