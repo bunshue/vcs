@@ -31,9 +31,16 @@ def get_html_data1(url):
 
 #Yahoo字典 ST
 def searchdic(search_word):
+
     #yahoo字典的網址，可修改網址查詢想要的單字，網址當中的%s為格式化字串
     url = "https://tw.dictionary.search.yahoo.com/search?p=%s" % (search_word)
     html_data = get_html_data1(url)
+    ''' same
+    payload = {'p': search_word}
+    html_data = requests.get('https://tw.dictionary.search.yahoo.com/search?', params = payload)
+    #相當於寫了 : https://tw.dictionary.search.yahoo.com/search?p=search_word
+    '''
+    
     if html_data:
         print("擷取網頁資料 OK")
         #print(html_data.text)

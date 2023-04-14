@@ -53,17 +53,6 @@ else:
 
 
 
-import random 
-
-# Generate random numbers
-number1 = random.randint(0, 9)
-number2 = random.randint(0, 9)
-
-
-number = random.randint(0, 100) 
-number = random.randint(1, 100)
-
-
 def bubbleSort(list):
     needNextPass = True
     
@@ -98,18 +87,6 @@ print(students)
 print(sorted(students, key = lambda t: (t[2]), reverse = True))
 
         
-import time
-
-startTime = time.time() # Get start time
-
-#do something
-#do something
-#do something
-
-endTime = time.time() # Get end time
-testTime = int(endTime - startTime) # Get test time
-print("Test time is", testTime, "seconds")
-
 
 #test strip
 #filename = input("Enter a filename: ").strip()
@@ -277,19 +254,6 @@ else:
 
 
 
-print('拆解e-mail')
-import re
-import requests
-regex = r"([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)"
-url = 'http://csharphelper.com/blog/'
-html_data = requests.get(url).text
-
-emails = re.findall(regex, html_data)
-for email in emails:
-    print(email)
-
-
-
 #檢查有無包含中文
 def is_contains_chinese():
   print('is_contains_chinese')
@@ -313,19 +277,43 @@ is_contains_chinese()
 
 
 
-print('建立一組密碼 並將此密碼拷貝至剪貼簿')
-import random
-import pyperclip
-chars = 'abcdefghijklmnopqrstuvwxyz1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()'
-password = ''
-for c in range(20):
-   password += random.choice(chars)
-print('建立一組密碼:\t%r, 並已拷貝至剪貼簿' %(password))
-pyperclip.copy(password)
+import random 
+
+# Generate random numbers
+number1 = random.randint(0, 9)
+number2 = random.randint(0, 9)
+
+
+number = random.randint(0, 100) 
+number = random.randint(1, 100)
+
+
+
+import time
+
+startTime = time.time() # Get start time
+
+#do something
+#do something
+#do something
+
+endTime = time.time() # Get end time
+testTime = int(endTime - startTime) # Get test time
+print("Test time is", testTime, "seconds")
 
 
 
 
 
+print('拆解e-mail')
+import re
+import requests
+regex = r"([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)"
+url = 'http://csharphelper.com/blog/'
+html_data = requests.get(url).text
+
+emails = re.findall(regex, html_data)
+for email in emails:
+    print(email)
 
 
