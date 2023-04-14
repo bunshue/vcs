@@ -31,6 +31,7 @@ def get_html_data1(url):
 
 #Yahoo字典 ST
 def searchdic(search_word):
+    result = ""
 
     #yahoo字典的網址，可修改網址查詢想要的單字，網址當中的%s為格式化字串
     url = "https://tw.dictionary.search.yahoo.com/search?p=%s" % (search_word)
@@ -42,7 +43,7 @@ def searchdic(search_word):
     '''
     
     if html_data:
-        print("擷取網頁資料 OK")
+        result += '擷取網頁資料 OK\n'
         #print(html_data.text)
     else:
         print('無法取得網頁資料')
@@ -71,21 +72,21 @@ def searchdic(search_word):
     print(soup.find_all('div')) # 把所有的 <a></a> 抓出來
     '''
 
-    print('上框')
-    print('上框 搜尋英文字 :')
+    result += '上框\n'
+    result += '上框 搜尋英文字 :\n'
     search_word = soup.find_all('span', class_='fz-24 fw-500 c-black lh-24')
     for sw in search_word:
         for di in sw:
-            print(di.text.replace('\n', ''))
+            result += di.text.replace('\n', '')+'\n'
 
-    print('上框 音標 :')
+    result += '上框 音標 :\n'
     
     #音標
     pronunciation = soup.find_all('span',class_='fz-14')
-    print('000', pronunciation[0].text) #第0個是KK音標
-    print('111', pronunciation[1].text) #第1個是DJ音標
+    result += '000'+ pronunciation[0].text+'\n' #第0個是KK音標
+    result += '111'+ pronunciation[1].text+'\n' #第1個是DJ音標
 
-    print('上框 詞性 :')
+    result += '上框 詞性 :\n'
     divs = soup.find_all('div', 'compList mb-25 p-rel') #如此可以框選較大範圍之資料 找到較大的區塊包含所有資料
   
     #print(divs)
@@ -95,22 +96,22 @@ def searchdic(search_word):
             for tt in di.find_all('li'):
                 cc = tt.find('div', 'pos_button fz-14 fl-l mr-12')
                 if cc != None: #如果標題包含資料, 印出來
-                    print('詞性')
-                    print(cc.text.replace('\n', '')) #只是刪除換行符號, 或許不一定有
+                    result += '詞性\n'
+                    result += cc.text.replace('\n', '') + '\n' #只是刪除換行符號, 或許不一定有
                 
                 dd = tt.find('div', 'fz-16 fl-l dictionaryExplanation')
                 if dd != None: #如果標題包含資料, 印出來
-                    print('解釋')
-                    print(dd.text.replace('\n', '')) #只是刪除換行符號, 或許不一定有
+                    result += '解釋\n'
+                    result += dd.text.replace('\n', '') + '\n' #只是刪除換行符號, 或許不一定有
 
-    print('中框')
-    print('中框 釋義 :')
+    result += '中框\n'
+    result += '中框 釋義 :\n'
 
     divs = soup.find_all('div', class_ = 'grp grp-tab-content-explanation tabsContent-s tab-content-explanation pt-24 tabActived')    #如此可以框選較大範圍之資料 找到較大的區塊包含所有資料
     #print(divs)
     
     if divs == []:
-        return
+        return result
 
     div1 = divs[0].find_all('div', 'compTitle lh-25')
     length = len(div1)
@@ -130,11 +131,11 @@ def searchdic(search_word):
         print(div2[nn])   # 使用索引值, 只印出text部分
         print('--------------------')
         '''
-        print('詞性')
-        print(div1[nn].find('span', 'pos_button fz-14').text.replace('\n', ''), end = "") #只是刪除換行符號, 或許不一定有
-        print(div1[nn].find('span', 'fz-14 va-mid lh-22 ml-5').text.replace('\n', '')) #只是刪除換行符號, 或許不一定有
+        result += '詞性\n'
+        result += div1[nn].find('span', 'pos_button fz-14').text.replace('\n', '')              #只是刪除換行符號, 或許不一定有
+        result += div1[nn].find('span', 'fz-14 va-mid lh-22 ml-5').text.replace('\n', '') +'\n' #只是刪除換行符號, 或許不一定有
 
-        print('解釋:')
+        result += '解釋:\n'
         nnn2 = div2[nn].find_all('span')
         #print(nnn)
         # 這個迴圈將詞性區塊裡的單字意思一個一個抓出來顯示
@@ -142,23 +143,26 @@ def searchdic(search_word):
         for n in nnn2:
             #print(n)
             for di in n:
-                print(di.text.replace('\n', ''), end = "")
-            print()
+                result += di.text.replace('\n', '')
+            result += '\n'
+    return result
 
 def example01():
+    print('------------------------------')
     print('Yahoo字典')
     search_word = 'coordinate'
     #search_word = '英國'
-    searchdic(search_word)
-
+    result = searchdic(search_word)
+    print(result)
+    print('------------------------------')
     print('Yahoo字典')
-    print('------------------------------')
     search_word = 'oat'
-    searchdic(search_word)
+    result = searchdic(search_word)
+    print(result)
     print('------------------------------')
-    
     search_word = '英國'
-    searchdic(search_word)
+    result = searchdic(search_word)
+    print(result)
     print('------------------------------')
 
 #Yahoo字典 SP

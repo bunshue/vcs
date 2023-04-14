@@ -31,3 +31,15 @@ def get_random_quote():
     quote = "".join(line[start_line:end_line])
 
     return quote
+
+
+mesg = get_random_quote()
+print(mesg)
+mesg = get_random_quote()
+print(mesg)
+mesg = get_random_quote()
+print(mesg)
+mesg = get_random_quote()
+print(mesg)
+mesg = get_random_quote()
+print(mesg)

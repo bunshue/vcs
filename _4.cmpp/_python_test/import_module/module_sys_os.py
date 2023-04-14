@@ -44,9 +44,6 @@ filename_r = '../data/article.txt'
 os.system("notepad " + filename_r)
 #os.system("svn checkout%s -q %s %s" % (creds, url, filename))
 
-
-
-
 import sys
 print(sys.version_info)
 print(sys.version_info[0])

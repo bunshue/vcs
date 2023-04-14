@@ -3,21 +3,10 @@
 
 
 import os
-filename=os.path.abspath("test10_new10.py")
+filename = os.path.abspath("test10_new10.py")
 if os.path.exists(filename): #檢查檔案是否存在
     print("完整路徑名稱：" + filename)
     print("檔案大小：" , os.path.getsize(filename))
-
-
-
-
-
-#尋找檔案
-import glob
-print('尋找目前目錄下之 *.py *.txt')
-files = glob.glob("glob.py") + glob.glob("os*.py") + glob.glob("*.txt") 
-for file in files:
-    print(file)
 
 import os,shutil
 cur_path = os.path.dirname(__file__) # 取得目前路徑
@@ -167,10 +156,10 @@ print("單層資料夾內所有檔案容量")
 
 source_dir = 'C:/______test_files/__pic/_peony1/'
 
-pngfiles = glob.glob(source_dir+"*.png")
-jpgfiles = glob.glob(source_dir+"*.jpg")
-giffiles = glob.glob(source_dir+"*.gif")
-bmpfiles = glob.glob(source_dir+"*.bmp")
+pngfiles = glob.glob(source_dir + "*.png")
+jpgfiles = glob.glob(source_dir + "*.jpg")
+giffiles = glob.glob(source_dir + "*.gif")
+bmpfiles = glob.glob(source_dir + "*.bmp")
 allfiles = pngfiles + jpgfiles + giffiles + bmpfiles
 
 allfilesize = 0
@@ -246,56 +235,6 @@ if not os.path.exists(source_dir):
 
 '''
 
-
-
-
-
-import glob, os
-
-allfiles = glob.glob('*.jpg') + glob.glob('*.png')
-count = 1
-for afile in allfiles:
-	print(afile)
-	ext = afile.split('.')[-1]
-	newfilename = "{}.{}".format(str(count), ext)
-	os.rename(afile, newfilename)
-	count += 1
-print("完成...")
-
-
-import os, hashlib, glob
-
-allfiles = glob.glob('*.jpg') + glob.glob('*.png')
-
-allmd5s = dict()
-for imagefile in allfiles:
-	print(imagefile + " is processing...")
-	img_md5 = hashlib.md5(open(imagefile,'rb').read()).digest()
-	if img_md5 in allmd5s:
-		print("---------------")
-		print("以下為重覆的檔案：")
-		os.system("open " + os.path.abspath(imagefile))
-		os.system("open " + allmd5s[img_md5])
-	else:
-		allmd5s[img_md5] = 	os.path.abspath(imagefile) 
-
-
-
-import os, hashlib, glob
-
-allfiles = glob.glob('*.jpg') + glob.glob('*.png')
-
-allmd5s = dict()
-for imagefile in allfiles:
-	print(imagefile + " is processing...")
-	img_md5 = hashlib.md5(open(imagefile,'rb').read()).digest()
-	if img_md5 in allmd5s:
-		print("---------------")
-		print("以下為重覆的檔案：")
-		print(os.path.abspath(imagefile))
-		print(allmd5s[img_md5])
-	else:
-		allmd5s[img_md5] = 	os.path.abspath(imagefile) 
 
 
 

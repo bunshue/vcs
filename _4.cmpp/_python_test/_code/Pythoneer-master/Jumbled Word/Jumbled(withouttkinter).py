@@ -1,12 +1,13 @@
 import os
 import sys
+
 from collections import defaultdict
 print " ";
 print "................................Jumbled ......................................";
 print "NOTE : Please make sure, you enter all the letters necessary to make the word!";
 print " ";
 print " ";
-word=raw_input("Enter the word: ")
+word = input("Enter the word: ")
 print " ";
 #word = sys.argv[1]
 word1 = word
@@ -18,7 +19,7 @@ no = leng
 chek=''
 dict = defaultdict(list)
 
-    #word=raw_input("Enter the : ")
+    #word = input("Enter the : ")
 word = word.lower()
 word = sorted(word)
 word = ''.join(word)

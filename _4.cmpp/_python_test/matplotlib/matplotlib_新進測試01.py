@@ -1,4 +1,3 @@
-'''
 from collections import Counter
 import matplotlib.pyplot as plt
 import numpy as np
@@ -13,6 +12,7 @@ plt.xticks(indexes, labels)
 plt.show()
 
 
+'''
 #盒鬚圖（Box plot）
 import numpy as np
 import matplotlib.pyplot as plt
@@ -30,7 +30,7 @@ normal_samples = np.random.normal(size = 100000) # 生成 100000 組標準常態
 plt.hist(normal_samples)
 plt.savefig(fname = "my_hist.png", format = "png")
 
-'''
+
 
 #plot + bar
 import matplotlib.pyplot as plt
@@ -61,7 +61,7 @@ plt.show()
 
 
 
-'''
+
 import matplotlib.pyplot as plt
 import numpy as np
 
