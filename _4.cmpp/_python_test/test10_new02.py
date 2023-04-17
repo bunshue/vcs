@@ -302,6 +302,9 @@ testTime = int(endTime - startTime) # Get test time
 print("Test time is", testTime, "seconds")
 
 
+import time
+version = time.strftime("-%Y%m%d")
+print(version)
 
 
 

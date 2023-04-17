@@ -3,6 +3,19 @@ print(items)
 
 
 
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/human2.jpg'
+
+name = filename.split('/')
+print(len(name))
+print(name)
+print(type(name))
+
+ccc = name.reverse()
+print(ccc)
+
+
+
+
 x = 2
 y = 0.5
 
@@ -57,27 +70,12 @@ else:
 
 
 
-print(__name__)
-#print(__name__._version)
-
-
 username = 'david'
 password = '1234'
 if username=='david' and password=='1234':
     print('歡迎光臨本網站！')
 else:
     print('帳號或密碼錯誤！')
-
-
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/human2.jpg'
-
-name = filename.split('/')
-print(len(name))
-print(name)
-print(type(name))
-
-ccc = name.reverse()
-print(ccc)
 
 
 

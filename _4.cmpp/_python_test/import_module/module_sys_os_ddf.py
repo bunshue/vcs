@@ -238,6 +238,9 @@ if not os.path.exists(source_dir):
 
 
 
+print(os.curdir)
+
+
 
 
 

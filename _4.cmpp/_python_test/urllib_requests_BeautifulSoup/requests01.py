@@ -91,10 +91,6 @@ fo = codecs.open('wiki搜尋結果2' + search_word + '.html', 'w', 'utf-8')
 fo.write(html_data.text)
 fo.close()
 
-'''
-
-
-
 import requests
 
 url = 'http://www.ehappy.tw/demo.htm'
@@ -120,14 +116,6 @@ if html_data:
 else:
     print('無法取得網頁資料')
 
-
-print('設定查詢目前IP的api網址')
-url = 'https://api.ipify.org'
-html_data = get_html_data1(url)
-print('我目前的IP是：', html_data.text)
-
-
-'''
 print('將自訂表頭加入 GET 請求中')
 
 url = 'https://irs.thsrc.com.tw/IMINT/'
@@ -137,6 +125,8 @@ headers={
 }
 html_data = requests.get(url, headers = headers)
 print(html_data)
+'''
+
 '''
 
 print("抓取網頁資料 2")
@@ -150,27 +140,7 @@ if html_data:
 else:
     print("抓取網頁NG")
 
-
-print("抓取網頁資料 3")
-
-url = 'http://udb.moe.edu.tw/Home/About'
-#html = requests.get(url).text.splitlines()
-for i in range(0,15):
-    print(i)
-    #print(html[i])
-
-
-print("抓取網頁資料 4")
-url = 'http://www.e-happy.com.tw'
-html_data = get_html_data1(url)
-html_data.encoding="utf-8"
-if html_data:
-    print("抓取網頁OK")
-    #print(html_data.text)
-else:
-    print("抓取網頁NG")
-
-
+'''
 
 print('BeautifulSoup 測試 2')
 
@@ -181,31 +151,7 @@ html_data = requests.get(url)
 soup = BeautifulSoup(html_data.text, 'html.parser')
 print(soup.prettify())
 
-
-'''
-import requests
-
-r=requests.get("http://www.e-happy.com.tw")
-r.encoding='utf-8'
-print("下載完畢!")
-if (r.status_code==200):
-    print(1111)
-    print(r.text)
-    print(r.raw.read(100))
-'''
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
+import pprint as pp
+pp.pprint(html_data.text)
 
 
