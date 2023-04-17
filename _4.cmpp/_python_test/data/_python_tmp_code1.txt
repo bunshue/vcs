@@ -1,3 +1,14 @@
+OCR 破解驗證碼
+
+因為驗證碼通常會有很多噪點，
+我上網引用了大大寫好的降噪副程式，
+先將驗證碼降噪後再進行 OCR 辨識，
+會大大的提高成功率。
+
+
+https://stackoverflow.max-everyday.com/2019/06/python-opencv-denoising/
+
+
 
 
 
