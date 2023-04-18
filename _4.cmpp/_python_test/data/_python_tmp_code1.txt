@@ -1,9 +1,269 @@
-
-簡易顯示圖片的各種方法
-
-
+from PIL import Image,ImageDraw
+image = Image.open("captcha.png").convert("L")
 
 
+    simpleaudio：播放WAV文件和NumPy數組。
+    winsound：播放WAV文件或鳴響您的系統揚聲器
+    https://docs.python.org/3/library/winsound.html
+
+
+
+
+簡易播放一檔
+
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/captcha02.png'
+
+from matplotlib import pyplot as plt
+img = cv2.imread(filename)
+plt.imshow(img)
+plt.show()
+
+
+filename = 'C:/______test_files/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3'
+
+from pygame import mixer  # Load the popular external library
+
+mixer.init()
+mixer.music.load(filename)
+mixer.music.play()
+
+
+
+'''
+import os, sys, glob, shutil, time
+import winreg as winreg
+
+        im = Image.open(file)
+        print("%s:" % file, im.format, "%dx%d" % im.size, im.mode, end=' ')
+        if verbose:
+            print(im.info, im.tile, end=' ')
+
+'''
+
+
+        xlrd_version = getattr(xlrd, "__VERSION__", "unknown; before 0.5")
+
+            print("Python:", sys.version)
+            
+                    t0 = time.time()
+
+                    t1 = time.time()
+                    if not options.suppress_timing:
+                        print("Open took %.2f seconds" % (t1-t0,))
+
+
+                t0 = time.time()
+
+                    t1 = time.time()
+                    print("\ncommand took %.2f seconds\n" % (t1-t0,))
+
+
+
+
+
+import time
+import sys
+
+    while True:
+        data = repr(time.time()).encode('utf-8') + b'\0'
+        s.sendto(data, (addrinfo[4][0], MYPORT))
+        time.sleep(1)
+
+
+
+        options = self.__options
+        timestamp = time.strftime('%Y-%m-%d %H:%M%z')
+        encoding = fp.encoding if fp.encoding else 'UTF-8'
+        print(pot_header % {'time': timestamp, 'version': __version__,
+                            'charset': encoding,
+                            'encoding': '8bit'}, file=fp)
+
+
+                        print(_(
+                            '# File: %(filename)s, line: %(lineno)d') % d, file=fp)
+
+
+
+
+def usage(code, msg=''):
+    print(__doc__ % globals(), file=sys.stderr)
+    if msg:
+        print(msg, file=sys.stderr)
+    sys.exit(code)
+
+def getFilesForName(name):
+    """Get a list of module files for a filename, a module or package name,
+    or a directory.
+    """
+    if not os.path.exists(name):
+        # check for glob chars
+        if containsAny(name, "*?[]"):
+            files = glob.glob(name)
+            list = []
+            for file in files:
+                list.extend(getFilesForName(file))
+            return list
+
+        # try to find module or package
+        name = _get_modpkg_path(name)
+        if not name:
+            return []
+
+    if os.path.isdir(name):
+        # find all python files in directory
+        list = []
+        os.walk(name, _visit_pyfiles, list)
+        return list
+    elif os.path.exists(name):
+        # a single file
+        return [name]
+
+    return []
+
+class TokenEater:
+            print(_(
+                '*** %(file)s:%(lineno)s: Seen unexpected token "%(token)s"'
+                ) % {
+                'token': tstring,
+                'file': self.__curfile,
+                'lineno': self.__lineno
+                }, file=sys.stderr)
+
+def main():
+        usage(1, msg)
+
+        elif opt in ('-V', '--version'):
+            print(_('pygettext.py (xgettext for Python) %s') % __version__)
+                usage(1, _('--width argument must be an integer: %s') % arg)
+
+        elif opt in ('-X', '--no-docstrings'):
+            fp = open(arg)
+            try:
+                while 1:
+                    line = fp.readline()
+                    if not line:
+                        break
+                    options.nodocstrings[line[:-1]] = 1
+            finally:
+                fp.close()
+
+            fp = open(options.excludefilename)
+            options.toexclude = fp.readlines()
+            fp.close()
+
+
+                print('%s: %s, line %d, column %d' % (
+                    e.args[0], filename, e.args[1][0], e.args[1][1]),
+                    file=sys.stderr)
+
+
+
+
+
+
+            c.execute("create table talbe01"
+                      "("
+                      "   lock_file varchar(32),"
+                      "   unique_name varchar(32)"
+                      ")")
+
+                cursor.execute("insert into talbe01"
+                               "  (lock_file, unique_name)"
+                               "  values"
+                               "  (?, ?)",
+                               (self.lock_file, self.unique_name))
+
+                cursor.execute("select * from talbe01"
+                               "  where unique_name = ?",
+                               (self.unique_name,))
+
+                rows = cursor.fetchall()
+                if len(rows) > 1:
+                    # Nope.  Someone else got there.  Remove our lock.
+                    cursor.execute("delete from talbe01"
+                                   "  where unique_name = ?",
+                                   (self.unique_name,))
+                    self.connection.commit()
+                else:
+                    # Yup.  We're done, so go home.
+                    return
+            else:
+                # Check to see if we are the only lock holder.
+                cursor.execute("select * from talbe01"
+                               "  where unique_name = ?",
+                               (self.unique_name,))
+                rows = cursor.fetchall()
+                if len(rows) == 1:
+                    # We're the locker, so go home.
+                    return
+
+        cursor.execute("delete from talbe01"
+                       "  where unique_name = ?",
+                       (self.unique_name,))
+
+
+
+
+
+https://www.pysimplegui.org/en/latest/cookbook/
+
+
+
+import os
+from pydicom import dcmread
+
+input_folder = "C:/Users/USER/Desktop/test"
+output_folder = "C:/Users/USER/Desktop/test2"
+
+# Loop through all files in the input folder
+for filename in os.listdir(input_folder):
+if filename.endswith(".dcm"):
+# Read DICOM file
+ds = dcmread(os.path.join(input_folder, filename))
+
+# Change Patient Name data
+ds.PhotometricInterpretation = "gary"
+
+# Save DICOM file as
+output_filename = os.path.join(output_folder, filename)
+ds.save_as(output_filename)
+
+print(f"File {filename} processed and saved as {output_filename}")
+
+
+
+
+## Tested@Colab-Python-3.9.16;
+import os, pydicom
+from pydicom.data import get_testdata_file
+## 
+mySrcBase = r'/usr/local/lib/python3.9/dist-packages/pydicom/data/test_files'
+myDstBase = r'/usr/local/lib/python3.9/dist-packages/pydicom/data/myOut'
+## 
+if not os.path.exists(myDstBase):
+    os.makedirs(myDstBase, exist_ok = True)
+myFileNames = [
+    i for i in os.listdir(mySrcBase) 
+    if (
+        os.path.isfile(os.path.join(mySrcBase, i))
+        and i.endswith('.dcm')
+    )
+]
+for i in myFileNames:
+    try:
+        ds = pydicom.dcmread(os.path.join(mySrcBase, i))
+        ds.PhotometricInterpretation = "gary"
+        ds.save_as(os.path.join(myDstBase, i))
+    except Exception as err:
+        print(f'□ Exception@[{i}]:[{type(err).__name__}]: {err}')
+        continue
+        
+        
+        
+        
+        
+        
+        
 
 
 OCR 破解驗證碼
@@ -15,9 +275,6 @@ OCR 破解驗證碼
 
 
 https://stackoverflow.max-everyday.com/2019/06/python-opencv-denoising/
-
-
-
 
 
 
@@ -187,80 +444,6 @@ now=datetime.now()
     person2={"name":"Jack","phone":"02-4455666","age":25}
     person3={"name":"Nacy","phone":"04-9876543","age":17}
     persons=[person1,person2,person3]
-
-import matplotlib.pyplot as plt
-
-plt.gcf().set_size_inches(12, 14)
-
-num=25 
-
-for i in range(num):
-    ax=plt.subplot(5,5, i+1)
-    #ax.imshow(images[start_id], cmap='binary')  #顯示黑白圖片
-    title = 'label = ' + str(labels[start_id])
-    ax.set_title(title,fontsize=12)  # X,Y軸不顯示刻度
-    ax.set_xticks([]);ax.set_yticks([])        
-    start_id+=1 
-plt.show()
-
-
-import matplotlib.pyplot as plt
-
-    plt.gcf().set_size_inches(12, 14)
-    if num>25: num=25 
-    for i in range(0, num):
-        ax=plt.subplot(5,5, i+1)
-        #ax.imshow(images[start_id], cmap='binary')  #顯示黑白圖片
-        if( len(predictions) > 0 ) :  #有傳入預測資料
-            title = 'ai = ' + str(predictions[start_id])
-            # 預測正確顯示(o), 錯誤顯示(x)
-            title += (' (o)' if predictions[start_id]==labels[start_id] else ' (x)') 
-            title += '\nlabel = ' + str(labels[start_id])
-        else :  #沒有傳入預測資料
-            title = 'label = ' + str(labels[start_id])
-        ax.set_title(title,fontsize=12)  #X,Y軸不顯示刻度
-        ax.set_xticks([]);ax.set_yticks([])        
-        start_id+=1 
-    plt.show()
-
-
-
-
-    plt.gcf().set_size_inches(12, 14)
-    if num>25: num=25 
-    for i in range(0, num):
-        ax=plt.subplot(5,5, i+1)
-        ax.imshow(images[start_id], cmap='binary')  #顯示黑白圖片
-        if( len(predictions) > 0 ) :  #有傳入預測資料
-            title = 'ai = ' + str(predictions[start_id])
-            # 預測正確顯示(o), 錯誤顯示(x)
-            title += (' (o)' if predictions[start_id]==labels[start_id] else ' (x)') 
-            title += '\nlabel = ' + str(labels[start_id])
-        else :  #沒有傳入預測資料
-            title = 'label = ' + str(labels[start_id])
-        ax.set_title(title,fontsize=12)  #X,Y軸不顯示刻度
-        ax.set_xticks([]);ax.set_yticks([])        
-        start_id+=1 
-    plt.show()
-
-
-
-import numpy as np
-import matplotlib.pyplot as plt
-import glob,cv2
-
-files = glob.glob("imagedata\*.jpg")  #建立測試資料
-test_feature=[]
-for file in files:
-    print(file)
-    img=cv2.imread(file)
-    img=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)  #灰階    
-    _, img = cv2.threshold(img, 120, 255, cv2.THRESH_BINARY_INV) #轉為反相黑白 
-    test_feature.append(img)
-
-print(test_feature)
-
-
 
 
 from machine import Pin, PWM

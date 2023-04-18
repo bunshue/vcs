@@ -11,12 +11,6 @@ class Extra(tk.Toplevel):
 		ttk.Button(self, text = 'A button').pack()
 		ttk.Label(self, text = 'another label').pack(expand = True)
 
-# https://docs.python.org/3/library/tkinter.messagebox.html
-def ask_yes_no():
-	# answer = messagebox.askquestion('Title', 'Body')
-	# print(answer)
-	messagebox.showerror('Info title', 'Here is some information')
-
 def create_window():
 	global extra_window
 	extra_window = Extra()
@@ -40,9 +34,6 @@ button1.pack(expand = True)
 
 button2 = ttk.Button(window, text = 'close main window', command = close_window)
 button2.pack(expand = True)
-
-button3 = ttk.Button(window, text = 'create yes no window', command = ask_yes_no)
-button3.pack(expand = True)
 
 # run 
 window.mainloop()

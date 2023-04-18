@@ -101,22 +101,6 @@ w = tk.Entry(group).pack()
 w = tk.Entry(group).pack()
 
 
-''' MessageBox測試
-import tkinter.messagebox as msg
-
-#window.withdraw() ????
-
-response = msg.askyesno('糟糕!!!', '還好嗎？')
-
-if(response==True):
-	print('沒問題');
-else:
-	print('有問題');
-	
-'''
-
-
-
 '''
 menu
 import tkinter as tk

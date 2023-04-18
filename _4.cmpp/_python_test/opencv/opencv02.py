@@ -137,19 +137,12 @@ cv2.imwrite('output.jpg', img, [cv2.IMWRITE_JPEG_QUALITY, 90])
 # 設定 PNG 壓縮層級為 5（可用值為 0 ~ 9）
 cv2.imwrite('output.png', img, [cv2.IMWRITE_PNG_COMPRESSION, 5])
 
-
-
-
-
 import numpy as np
 import cv2
 from matplotlib import pyplot as plt
 
-# 使用 OpenCV 讀取圖檔
-img_bgr = cv2.imread(filename)
-
-# 將 BGR 圖片轉為 RGB 圖片
-img_rgb = img_bgr[:,:,::-1]
+img_bgr = cv2.imread(filename)  # 使用 OpenCV 讀取圖檔
+img_rgb = img_bgr[:,:,::-1]     # 將 BGR 圖片轉為 RGB 圖片
 
 # 或是這樣亦可
 # img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
