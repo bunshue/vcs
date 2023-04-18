@@ -8,10 +8,34 @@ print(__name__)
 #print(__name__._version)
 
 
+print(__doc__)
+
 
 import sys
 print(sys.path)
 
+
+import os
+this_dir = os.path.dirname(__file__)
+print(this_dir)
+
+cwd = os.getcwd()
+print(cwd)
+
+aa = os.chdir(cwd)
+print(aa)
+
+dirname = 'C:/_git/vcs/_4.cmpp/_python_test'
+cc = os.chdir(dirname)
+print(cc)
+
+cmd = '%s "%s" %s' % (sys.executable, 'aaaa', 'bbbb')
+print(cmd)
+
+
+print('顯示目前的系統編碼')
+import sys
+print(sys.getdefaultencoding())
 
 
 
@@ -46,8 +70,56 @@ print(string_data2)
 
 
 
+
+
+
+
+import sys
+print(sys.platform)
+
+print(sys.version)
+
+'''
+import win32api, win32con
+rc = win32api.MessageBox(0, 'kkkkk', "Installation Error", win32con.MB_ABORTRETRYIGNORE)
+if rc == win32con.IDABORT:
+    print('1111')
+elif rc == win32con.IDIGNORE:
+    print('2222')
+else:
+    print('3333')
+'''
+
+
+ver_string = "%d.%d" % (sys.version_info[0], sys.version_info[1])
+root_key_name = "Software\\Python\\PythonCore\\" + ver_string
+print(sys.version_info)
+print(ver_string)
+print(root_key_name)
+
+
+
+import tempfile
+#tee_f = open(os.path.join(tempfile.gettempdir(), 'pywin32_postinstall.log'), "w")
+
+print(tempfile.gettempdir())
+
+tmp_filename = os.path.join(tempfile.gettempdir(), 'pywin32_postinstall.log')
+print(tmp_filename)
+
+tmp_filename = os.path.join(tempfile.gettempdir(), 'pywin32_postinstall.log', 'ccccc')
+print(tmp_filename)
+
+vi = sys.version_info
+install_group = "Python %d.%d" % (vi[0], vi[1])
+print(install_group)
+
+filename1 = 'C:/_git/vcs/_4.cmpp/_python_test/data/aaaaa.jpg'
+filename2 = 'C:/_git/vcs/_4.cmpp/_python_test/data/bbbbb.jpg'
+
+print("Copied %s to %s" % (filename1, filename2))
+
 #強制離開程式, 並說明原因
 sys.exit('強制離開程式, 並說明原因')
-
 
 

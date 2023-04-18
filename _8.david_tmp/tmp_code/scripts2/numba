@@ -1,8 +1,0 @@
-#!C:\Winpython\basedir35\build\winpython-32bit-3.5.x.2\python-3.5.2\python.exe
-# -*- coding: UTF-8 -*-
-from __future__ import print_function, division, absolute_import
-
-from numba.numba_entry import main
-
-if __name__ == "__main__":
-    main()

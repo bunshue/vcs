@@ -1,28 +1,5 @@
 #! /usr/bin/env python3
 
-"""Script to synchronize two source trees.
-
-Invoke with two arguments:
-
-python treesync.py slave master
-
-The assumption is that "master" contains CVS administration while
-slave doesn't.  All files in the slave tree that have a CVS/Entries
-entry in the master tree are synchronized.  This means:
-
-    If the files differ:
-        if the slave file is newer:
-            normalize the slave file
-            if the files still differ:
-                copy the slave to the master
-        else (the master is newer):
-            copy the master to the slave
-
-    normalizing the slave means replacing CRLF with LF when the master
-    doesn't use CRLF
-
-"""
-
 import os, sys, stat, getopt
 
 # Interactivity options
