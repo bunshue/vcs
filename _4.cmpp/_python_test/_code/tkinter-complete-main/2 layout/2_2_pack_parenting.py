@@ -14,17 +14,28 @@ label2 = ttk.Label(top_frame, text = 'Label 2', background = 'blue')
 # middle widget
 label3 = ttk.Label(window, text = 'Another label', background = 'green')
 
+def button1_click():
+    print('你按了Button 1')
+def button2_click():
+    print('你按了Button 2')
+def button3_click():
+    print('你按了Button 3')
+def button4_click():
+    print('你按了Button 4')
+def button5_click():
+    print('你按了Button 5')
+
 # bottom frame
 bottom_frame = ttk.Frame(window)
 label4 = ttk.Label(bottom_frame, text = 'Last of the labels', background = 'orange')
-button = ttk.Button(bottom_frame, text = 'A Button')
-button2 = ttk.Button(bottom_frame, text = 'Another Button')
+button1 = ttk.Button(bottom_frame, text = 'A Button', command = button1_click)
+button2 = ttk.Button(bottom_frame, text = 'Another Button', command = button2_click)
 
 # exercise widgets 
 exercise_frame = ttk.Frame(bottom_frame)
-button3 = ttk.Button(exercise_frame, text = 'Button 3')
-button4 = ttk.Button(exercise_frame, text = 'Button 4')
-button5 = ttk.Button(exercise_frame, text = 'Button 5')
+button3 = ttk.Button(exercise_frame, text = 'Button 3', command = button3_click)
+button4 = ttk.Button(exercise_frame, text = 'Button 4', command = button4_click)
+button5 = ttk.Button(exercise_frame, text = 'Button 5', command = button5_click)
 
 # top layout 
 label1.pack(side = 'left', fill = 'both', expand = True)
@@ -35,7 +46,7 @@ top_frame.pack(fill = 'both', expand = True)
 label3.pack(expand = True)
 
 # bottom layout
-button.pack(side = 'left', expand = True, fill = 'both')
+button1.pack(side = 'left', expand = True, fill = 'both')
 label4.pack(side = 'left', expand = True, fill = 'both')
 button2.pack(side = 'left', expand = True, fill = 'both')
 bottom_frame.pack(expand = True, fill = 'both', padx = 20, pady = 20)

@@ -29,36 +29,14 @@ mixer.music.play()
 
 
 
-'''
-import os, sys, glob, shutil, time
-import winreg as winreg
 
-        im = Image.open(file)
-        print("%s:" % file, im.format, "%dx%d" % im.size, im.mode, end=' ')
-        if verbose:
-            print(im.info, im.tile, end=' ')
+t0 = time.time()
+ :
+ :
+t1 = time.time()
 
-'''
-
-
-        xlrd_version = getattr(xlrd, "__VERSION__", "unknown; before 0.5")
-
-            print("Python:", sys.version)
-            
-                    t0 = time.time()
-
-                    t1 = time.time()
-                    if not options.suppress_timing:
-                        print("Open took %.2f seconds" % (t1-t0,))
-
-
-                t0 = time.time()
-
-                    t1 = time.time()
-                    print("\ncommand took %.2f seconds\n" % (t1-t0,))
-
-
-
+print("Open took %.2f seconds" % (t1-t0,))
+print("\ncommand took %.2f seconds\n" % (t1-t0,))
 
 
 import time
@@ -69,8 +47,6 @@ import sys
         s.sendto(data, (addrinfo[4][0], MYPORT))
         time.sleep(1)
 
-
-
         options = self.__options
         timestamp = time.strftime('%Y-%m-%d %H:%M%z')
         encoding = fp.encoding if fp.encoding else 'UTF-8'
@@ -79,17 +55,8 @@ import sys
                             'encoding': '8bit'}, file=fp)
 
 
-                        print(_(
-                            '# File: %(filename)s, line: %(lineno)d') % d, file=fp)
-
-
 
 
-def usage(code, msg=''):
-    print(__doc__ % globals(), file=sys.stderr)
-    if msg:
-        print(msg, file=sys.stderr)
-    sys.exit(code)
 
 def getFilesForName(name):
     """Get a list of module files for a filename, a module or package name,
@@ -120,87 +87,7 @@ def getFilesForName(name):
 
     return []
 
-class TokenEater:
-            print(_(
-                '*** %(file)s:%(lineno)s: Seen unexpected token "%(token)s"'
-                ) % {
-                'token': tstring,
-                'file': self.__curfile,
-                'lineno': self.__lineno
-                }, file=sys.stderr)
 
-def main():
-        usage(1, msg)
-
-        elif opt in ('-V', '--version'):
-            print(_('pygettext.py (xgettext for Python) %s') % __version__)
-                usage(1, _('--width argument must be an integer: %s') % arg)
-
-        elif opt in ('-X', '--no-docstrings'):
-            fp = open(arg)
-            try:
-                while 1:
-                    line = fp.readline()
-                    if not line:
-                        break
-                    options.nodocstrings[line[:-1]] = 1
-            finally:
-                fp.close()
-
-            fp = open(options.excludefilename)
-            options.toexclude = fp.readlines()
-            fp.close()
-
-
-                print('%s: %s, line %d, column %d' % (
-                    e.args[0], filename, e.args[1][0], e.args[1][1]),
-                    file=sys.stderr)
-
-
-
-
-
-
-            c.execute("create table talbe01"
-                      "("
-                      "   lock_file varchar(32),"
-                      "   unique_name varchar(32)"
-                      ")")
-
-                cursor.execute("insert into talbe01"
-                               "  (lock_file, unique_name)"
-                               "  values"
-                               "  (?, ?)",
-                               (self.lock_file, self.unique_name))
-
-                cursor.execute("select * from talbe01"
-                               "  where unique_name = ?",
-                               (self.unique_name,))
-
-                rows = cursor.fetchall()
-                if len(rows) > 1:
-                    # Nope.  Someone else got there.  Remove our lock.
-                    cursor.execute("delete from talbe01"
-                                   "  where unique_name = ?",
-                                   (self.unique_name,))
-                    self.connection.commit()
-                else:
-                    # Yup.  We're done, so go home.
-                    return
-            else:
-                # Check to see if we are the only lock holder.
-                cursor.execute("select * from talbe01"
-                               "  where unique_name = ?",
-                               (self.unique_name,))
-                rows = cursor.fetchall()
-                if len(rows) == 1:
-                    # We're the locker, so go home.
-                    return
-
-        cursor.execute("delete from talbe01"
-                       "  where unique_name = ?",
-                       (self.unique_name,))
-
 
 
 
@@ -530,3 +417,13 @@ entry.pack()
 
 TextBox取值
 print(entry_string.get())
+
+
+
+//----------------------------------------------------------------------------------
+
+
+
+
+
+

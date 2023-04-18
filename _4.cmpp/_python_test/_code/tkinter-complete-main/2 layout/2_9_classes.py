@@ -1,6 +1,13 @@
 import tkinter as tk
 from tkinter import ttk
 
+def button1_click():
+        print('你按了Button 1')
+def button2_click():
+        print('你按了Button 2')
+def button3_click():
+        print('你按了Button 3')
+
 class App(tk.Tk):
 	def __init__(self, title, size):
 		
@@ -27,9 +34,9 @@ class Menu(ttk.Frame):
 	def create_widgets(self):
 		
 		# create the widgets 
-		menu_button1 = ttk.Button(self, text = 'Button 1')
-		menu_button2 = ttk.Button(self, text = 'Button 2')
-		menu_button3 = ttk.Button(self, text = 'Button 3')
+		menu_button1 = ttk.Button(self, text = 'Button 1', command = button1_click)
+		menu_button2 = ttk.Button(self, text = 'Button 2', command = button2_click)
+		menu_button3 = ttk.Button(self, text = 'Button 3', command = button3_click)
 
 		menu_slider1 = ttk.Scale(self, orient = 'vertical')
 		menu_slider2 = ttk.Scale(self, orient = 'vertical')
@@ -64,16 +71,19 @@ class Main(ttk.Frame):
 	def __init__(self, parent):
 		super().__init__(parent)
 		self.place(relx = 0.3, y = 0, relwidth = 0.7, relheight = 1)
-		Entry(self, 'Entry 1','Button 1','green')
-		Entry(self, 'Entry 2','Button 2','blue')
-		Entry(self, 'Entry 3','Button 3','green')
+		Entry(self, 'Entry 1','Button 1','red')
+		Entry(self, 'Entry 2','Button 2','green')
+		Entry(self, 'Entry 3','Button 3','blue')
+
+def button_click():
+        print('你按了Button')
 
 class Entry(ttk.Frame):
 	def __init__(self, parent, label_text, button_text, label_background):
 		super().__init__(parent)
 
 		label = ttk.Label(self, text = label_text, background = label_background)
-		button = ttk.Button(self, text = button_text)
+		button = ttk.Button(self, text = button_text, command = button_click)
 
 		label.pack(expand = True, fill = 'both')
 		button.pack(expand = True, fill = 'both', pady = 10)

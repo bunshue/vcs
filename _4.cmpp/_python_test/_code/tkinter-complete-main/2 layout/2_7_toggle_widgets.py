@@ -47,6 +47,7 @@ window.title('Hide widgets')
 
 # pack
 def toggle_label_pack():
+	print('你按了Button Toggle')
 	global label_visible
 
 	if label_visible:

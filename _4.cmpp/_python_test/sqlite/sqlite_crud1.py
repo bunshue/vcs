@@ -267,3 +267,76 @@ for i in range(length):
     print("{}\t{}\t{}".format(rows[i][0], rows[i][1], rows[i][2]))
 conn.close()  # 關閉資料庫連線
 
+
+import time
+import sqlite3
+
+db_filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/ddb_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
+
+#print('建立資料庫連線, 資料庫 : ' + db_filename)
+conn = sqlite3.connect(db_filename) # 建立資料庫連線
+
+cursor = conn.cursor() # 建立 cursor 物件
+
+print('建立表單')
+cursor.execute("create table talbe01"
+"("
+"   filename varchar(32),"
+"   filesize varchar(32)"
+")")
+
+
+print('Insert')
+cursor.execute("insert into talbe01"
+"  (filename, filesize)"
+"  values"
+"  (?, ?)",
+('aaaa.mp4', '12345'))
+
+
+print('Select')
+cursor.execute("select * from talbe01"
+"  where filename = ?",
+('aaaa.mp4',))
+
+print('Fetchall')
+rows = cursor.fetchall()
+if len(rows) > 1:
+    print(rows)
+
+
+
+'''    
+    # Nope.  Someone else got there.  Remove our lock.
+    cursor.execute("delete from talbe01"
+                   "  where filename = ?",
+                   (self.filename,))
+    self.connection.commit()
+else:
+    # Yup.  We're done, so go home.
+    return
+else:
+'''
+
+'''
+print('Select')
+cursor.execute("select * from talbe01"
+               "  where filename = ?",
+               (self.filename,))
+rows = cursor.fetchall()
+if len(rows) == 1:
+    print('aaaaaa')
+
+print('Delete')
+cursor.execute("delete from talbe01"
+               "  where filename = ?",
+               ('aaaa.mp4',))
+'''
+
+
+
+
+
+
+conn.close()  # 關閉資料庫連線
+

@@ -2,6 +2,8 @@ import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
 
+extra_window = None
+
 class Extra(tk.Toplevel):
 	def __init__(self):
 		super().__init__()
@@ -22,17 +24,18 @@ def create_window():
 	# ttk.Label(extra_window, text = 'another label').pack(expand = True)
 
 def close_window():
-	extra_window.destroy()
+        if extra_window != None:
+                extra_window.destroy()
 
 # window
 window = tk.Tk()
 window.geometry('600x400')
 window.title('Multiple windows')
 
-button1 = ttk.Button(window, text = 'open main window', command = create_window)
+button1 = ttk.Button(window, text = '開啟新視窗', command = create_window)
 button1.pack(expand = True)
 
-button2 = ttk.Button(window, text = 'close main window', command = close_window)
+button2 = ttk.Button(window, text = '關閉視窗', command = close_window)
 button2.pack(expand = True)
 
 # run 

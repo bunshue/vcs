@@ -6,11 +6,14 @@ window = tk.Tk()
 window.title('Place')
 window.geometry('400x600')
 
+def button_click():
+    print('你按了Button')
+
 # widgets 
 label1 = ttk.Label(window, text = 'Label 1', background = 'red')
 label2 = ttk.Label(window, text = 'Label 2', background = 'blue')
 label3 = ttk.Label(window, text = 'Label 3', background = 'green')
-button = ttk.Button(window, text = 'Button')
+button = ttk.Button(window, text = 'Button', command = button_click)
 
 # layout 
 label1.place(x = 300, y = 100, width = 100, height = 200)
