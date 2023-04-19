@@ -1,5 +1,9 @@
 # print data
 
+print('字符串格式化操作')
+print('My name is %s and weight is %d kg!' % ('David', 82) )
+#可用%c %s %d %u %x %X %f
+
 print("打印各種數值")
 
 x = 3              # an integer stored (in variable x)
@@ -128,6 +132,12 @@ print(format(i * j, '4d'), end = '')
 print()# Jump to the new line
 '''
 
+
+var1 = 'Hello World!'
+var2 = "Python Programming"
+
+print('var1[0]: ', var1[0])
+print('var2[1:5]: ', var2[1:5])
 
 
 

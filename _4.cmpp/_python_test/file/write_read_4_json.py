@@ -98,3 +98,15 @@ print('測試完成')
 
 
 
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/jdata.json'
+
+import pprint as pp
+import json
+
+with open(filename, "rt") as fp:
+    data = json.loads(fp.read())
+pp.pprint(data)
+print(data)
+    
+
+

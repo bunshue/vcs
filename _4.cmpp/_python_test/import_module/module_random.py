@@ -69,13 +69,21 @@ while x != 6:
   x = random.randint(1,6)
   print("取得亂數 : " + str(x))
 
+
+no1 = random.randint(1,6)   # 1~6
+no2 = random.randint(1,6)   # 1~6
+no3 = random.randint(1,6)   # 1~6
+
+#print('取得(%d, %d, %d)' % no1, no2, no3)
+
+
 print("亂數分配工作")
 member = ["花媽", "花橘子", "花柚子", "花爸"]
 housework = ["掃地", "拖地", "洗衣服", "擦窗戶"]
 random.shuffle(housework)
 for i in range(4):
     print("%s今天負責%s" % (member[i], housework[i]))
-    
+
 for count in range(20):
     x = random.randrange(-10, 10)       #-10~9之間的整數
     y = random.randrange(-10, 10)       #-10~9之間的整數

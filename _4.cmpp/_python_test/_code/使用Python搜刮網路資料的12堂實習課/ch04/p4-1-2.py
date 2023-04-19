@@ -13,6 +13,9 @@ regex0800 = r'0800-\d{6}'
 matches = re.findall(regex04a, html)
 matches += re.findall(regex04b, html)
 matches += re.findall(regex0800, html)
+
 for match in matches:
-    print(match)
+    print('抓到符合條件的 : ', match)
+    
+print('全部資料')
 print(matches)

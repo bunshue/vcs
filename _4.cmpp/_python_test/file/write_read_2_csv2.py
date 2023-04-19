@@ -1,4 +1,5 @@
-filename = 'info.csv'
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/info.csv'
+
 with open(filename, 'rt') as fp:
     data = fp.readlines()
 print(data)
@@ -6,7 +7,6 @@ print(data)
 
 import pprint as pp
 import csv
-filename = 'info.csv'
 data = list()
 with open(filename, 'rt') as fp:
     rows = csv.DictReader(fp)
@@ -18,7 +18,6 @@ pp.pprint(data)
 
 import pprint as pp
 import csv
-filename = 'info.csv'
 with open(filename, 'rt') as fp:
     rows = csv.DictReader(fp)
     data = [dict(row) for row in rows]
@@ -26,7 +25,6 @@ pp.pprint(data)
 
 
 import pprint as pp
-filename = 'info.csv'
 data = list()
 with open(filename, 'rt') as fp:
     columns = fp.readline().split(",")

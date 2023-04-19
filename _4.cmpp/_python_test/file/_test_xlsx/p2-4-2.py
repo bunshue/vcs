@@ -1,4 +1,5 @@
 import xlrd
+
 filename = "scores.xlsx"
 
 data = xlrd.open_workbook(filename)

@@ -322,11 +322,6 @@ POST
 
 now=datetime.now()
 
-    no1=random.randint(1,6)   # 1~6
-    no2=random.randint(1,6)   # 1~6
-    no3=random.randint(1,6)   # 1~6
-
-
     person1={"name":"Amy","phone":"049-1234567","age":20}
     person2={"name":"Jack","phone":"02-4455666","age":25}
     person3={"name":"Nacy","phone":"04-9876543","age":17}
