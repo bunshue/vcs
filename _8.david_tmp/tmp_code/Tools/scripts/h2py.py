@@ -1,26 +1,3 @@
-#! /usr/bin/env python3
-
-# Read #define's and translate to Python code.
-# Handle #include statements.
-# Handle #define macros with one argument.
-# Anything that isn't recognized or doesn't translate into valid
-# Python is ignored.
-
-# Without filename arguments, acts as a filter.
-# If one or more filenames are given, output is written to corresponding
-# filenames in the local directory, translated to all uppercase, with
-# the extension replaced by ".py".
-
-# By passing one or more options of the form "-i regular_expression"
-# you can specify additional strings to be ignored.  This is useful
-# e.g. to ignore casts to u_long: simply specify "-i '(u_long)'".
-
-# XXX To do:
-# - turn trailing C comments into Python comments
-# - turn C Boolean operators "&& || !" into Python "and or not"
-# - what to do about #if(def)?
-# - what to do about macros with multiple parameters?
-
 import sys, re, getopt, os
 
 p_define = re.compile('^[\t ]*#[\t ]*define[\t ]+([a-zA-Z0-9_]+)[\t ]+')

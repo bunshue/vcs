@@ -1,21 +1,5 @@
 #! /usr/bin/env python3
-"""Create a TAGS file for Python programs, usable with GNU Emacs.
 
-usage: eptags pyfiles...
-
-The output TAGS file is usable with Emacs version 18, 19, 20.
-Tagged are:
- - functions (even inside other defs or classes)
- - classes
-
-eptags warns about files it cannot open.
-eptags will not give warnings about duplicate tags.
-
-BUGS:
-   Because of tag duplication (methods with the same name in different
-   classes), TAGS files are not very useful for most object-oriented
-   python projects.
-"""
 import sys,re
 
 expr = r'^[ \t]*(def|class)[ \t]+([a-zA-Z_][a-zA-Z0-9_]*)[ \t]*[:\(]'

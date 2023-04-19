@@ -1,5 +1,6 @@
 import requests, time
 from bs4 import BeautifulSoup
+
 target = 'https://tw.appledaily.com/new/realtime/{}'
 
 titles = list()

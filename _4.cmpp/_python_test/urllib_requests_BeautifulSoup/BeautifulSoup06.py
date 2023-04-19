@@ -2,8 +2,8 @@ import urllib.parse
 from bs4 import BeautifulSoup
 import requests
 
-html = requests.get('https://www.mvdis.gov.tw/m3-emv-plate/webpickno/queryPickNo#').text
-soup = BeautifulSoup(html, 'html.parser')
+html_data = requests.get('https://www.mvdis.gov.tw/m3-emv-plate/webpickno/queryPickNo#')
+soup = BeautifulSoup(html_data.text, 'html.parser')
 captcha_image = soup.find('img', id='pickimg')['src'] 
 csrf_token = soup.find_all('input', type='hidden') 
 image_url = urllib.parse.urljoin('https://www.mvdis.gov.tw/', captcha_image)
@@ -27,8 +27,14 @@ data = {
     'queryNo': '*',
     'CSRFToken': str(csrf_token[2]['value']),
 }
+
 html = requests.post('https://www.mvdis.gov.tw/m3-emv-plate/webpickno/queryPickNo', data = data, headers = headers).text
 soup = BeautifulSoup(html, 'html.parser')
 plate_numbers = soup.find_all('a','number')
+print(plate_numbers)
+
 for plate_number in plate_numbers:
+    print('aaaaaaaaaaaaaa')
     print(plate_number.text)
+
+    

@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 '''Add syntax highlighting to Python source code'''
 
-__author__ = 'Raymond Hettinger'
-
 import builtins
 import functools
 import html as html_module

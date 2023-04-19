@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+
 url = 'https://www.bagong.cn/dog/'
 
 html = requests.get(url).text

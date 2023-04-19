@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
+
 url = 'https://newcar.u-car.com.tw/newcar'
+
 html = requests.get(url).text
 soup = BeautifulSoup(html, "html.parser")
 models = soup.select('#modelselect > option')

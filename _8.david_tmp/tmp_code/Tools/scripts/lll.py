@@ -8,10 +8,14 @@
 import sys, os
 
 def lll(dirname):
+    print('lll')
     for name in os.listdir(dirname):
+        print('a')
         if name not in (os.curdir, os.pardir):
+            print('b')
             full = os.path.join(dirname, name)
-            if os.path.islink(full):
+            if os.path.islink(full):    #尋找link
+                print('c')
                 print(name, '->', os.readlink(full))
 def main():
     args = sys.argv[1:]
@@ -26,3 +30,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+

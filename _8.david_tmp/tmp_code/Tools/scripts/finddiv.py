@@ -1,20 +1,3 @@
-#! /usr/bin/env python3
-
-"""finddiv - a grep-like tool that looks for division operators.
-
-Usage: finddiv [-l] file_or_directory ...
-
-For directory arguments, all files in the directory whose name ends in
-.py are processed, and subdirectories are processed recursively.
-
-This actually tokenizes the files to avoid false hits in comments or
-strings literals.
-
-By default, this prints all lines containing a / or /= operator, in
-grep -n style.  With the -l option specified, it prints the filename
-of files that contain at least one / or /= operator.
-"""
-
 import os
 import sys
 import getopt

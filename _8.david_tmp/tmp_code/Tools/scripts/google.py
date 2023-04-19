@@ -3,7 +3,7 @@
 import sys, webbrowser
 
 def main():
-    args = sys.argv[1:]
+    args = 'lion'
     if not args:
         print("Usage: %s querystring" % sys.argv[0])
         return

@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
+
 url = 'https://www.ptt.cc/bbs/Gossiping/index.html'
+
 session = requests.Session()
 payload = {
     "from": "/bbs/Gossiping/index.html",

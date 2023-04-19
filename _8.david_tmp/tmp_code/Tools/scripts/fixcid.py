@@ -1,39 +1,3 @@
-#! /usr/bin/env python3
-
-# Perform massive identifier substitution on C source files.
-# This actually tokenizes the files (to some extent) so it can
-# avoid making substitutions inside strings or comments.
-# Inside strings, substitutions are never made; inside comments,
-# it is a user option (off by default).
-#
-# The substitutions are read from one or more files whose lines,
-# when not empty, after stripping comments starting with #,
-# must contain exactly two words separated by whitespace: the
-# old identifier and its replacement.
-#
-# The option -r reverses the sense of the substitutions (this may be
-# useful to undo a particular substitution).
-#
-# If the old identifier is prefixed with a '*' (with no intervening
-# whitespace), then it will not be substituted inside comments.
-#
-# Command line arguments are files or directories to be processed.
-# Directories are searched recursively for files whose name looks
-# like a C file (ends in .h or .c).  The special filename '-' means
-# operate in filter mode: read stdin, write stdout.
-#
-# Symbolic links are always ignored (except as explicit directory
-# arguments).
-#
-# The original files are kept as back-up with a "~" suffix.
-#
-# Changes made are reported to stdout in a diff-like format.
-#
-# NB: by changing only the function fixline() you can turn this
-# into a program for different changes to C source files; by
-# changing the function wanted() you can make a different selection of
-# files.
-
 import sys
 import re
 import os

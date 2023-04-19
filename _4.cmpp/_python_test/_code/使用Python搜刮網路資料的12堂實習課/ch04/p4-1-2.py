@@ -1,5 +1,8 @@
 import requests
 import re
+
+print('抓取網頁中的電話號碼')
+
 url = 'https://www.taichung.gov.tw/10179/12034/'
 
 html = requests.get(url).text
