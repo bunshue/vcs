@@ -6,14 +6,17 @@ window = tk.Tk()
 window.title('Place')
 window.geometry('400x600')
 
-def button_click():
-    print('你按了Button')
+def button1_click():
+    print('你按了Button 1')
+
+def button2_click():
+    print('你按了Button 2')
 
 # widgets 
 label1 = ttk.Label(window, text = 'Label 1', background = 'red')
 label2 = ttk.Label(window, text = 'Label 2', background = 'blue')
 label3 = ttk.Label(window, text = 'Label 3', background = 'green')
-button = ttk.Button(window, text = 'Button', command = button_click)
+button = ttk.Button(window, text = 'Button', command = button1_click)
 
 # layout 
 label1.place(x = 300, y = 100, width = 100, height = 200)
@@ -24,7 +27,7 @@ button.place(relx = 1, rely = 1, anchor = 'se')
 # frame 
 frame = ttk.Frame(window)
 frame_label = ttk.Label(frame, text = 'Frame label', background = 'yellow')
-frame_button = ttk.Button(frame, text = 'Frame Button')
+frame_button = ttk.Button(frame, text = 'Frame Button', command = button2_click)
 
 # frame layout
 frame.place(relx = 0, rely = 0, relwidth = 0.3, relheight = 1)

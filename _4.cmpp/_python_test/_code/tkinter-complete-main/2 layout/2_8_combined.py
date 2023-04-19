@@ -2,6 +2,27 @@ import tkinter as tk
 import ttkbootstrap as ttk
 # from tkinter import ttk
 
+def button1_click():
+    print('你按了Button 1')
+
+def button2_click():
+    print('你按了Button 2')
+
+def button3_click():
+    print('你按了Button 3')
+
+def button4_click():
+    print('你按了Button 4')
+
+def button5_click():
+    print('你按了Button 5')
+
+def checkbutton1_click():
+    print('你按了Checkbutton 1')
+
+def checkbutton2_click():
+    print('你按了Checkbutton 2')
+
 # window
 window = ttk.Window(themename = 'lumen')
 window.title('Combined layout')
@@ -17,16 +38,16 @@ menu_frame.place(x = 0, y = 0, relwidth = 0.3, relheight = 1)
 main_frame.place(relx = 0.3, y = 0, relwidth = 0.7, relheight = 1)
 
 # menu widgets
-menu_button1 = ttk.Button(menu_frame, text = 'Button 1')
-menu_button2 = ttk.Button(menu_frame, text = 'Button 2')
-menu_button3 = ttk.Button(menu_frame, text = 'Button 3')
+menu_button1 = ttk.Button(menu_frame, text = 'Button 1', command = button1_click)
+menu_button2 = ttk.Button(menu_frame, text = 'Button 2', command = button2_click)
+menu_button3 = ttk.Button(menu_frame, text = 'Button 3', command = button3_click)
 
 menu_slider1 = ttk.Scale(menu_frame, orient = 'vertical')
 menu_slider2 = ttk.Scale(menu_frame, orient = 'vertical')
 
 toggle_frame = ttk.Frame(menu_frame)
-menu_toggle1 = ttk.Checkbutton(toggle_frame, text = 'check 1')
-menu_toggle2 = ttk.Checkbutton(toggle_frame, text = 'check 2')
+menu_toggle1 = ttk.Checkbutton(toggle_frame, text = 'check 1', command = checkbutton1_click)
+menu_toggle2 = ttk.Checkbutton(toggle_frame, text = 'check 2', command = checkbutton2_click)
 
 entry = ttk.Entry(menu_frame)
 
@@ -52,11 +73,11 @@ entry.place(relx = 0.5, rely = 0.95, relwidth = 0.9, anchor = 'center')
 # main widgets 
 entry_frame1 = ttk.Frame(main_frame)
 main_label1 = ttk.Label(entry_frame1, text = 'label 1', background = 'red')
-main_button1 = ttk.Button(entry_frame1, text = 'Button 1')
+main_button1 = ttk.Button(entry_frame1, text = 'Button 1', command = button4_click)
 
 entry_frame2 = ttk.Frame(main_frame)
 main_label2 = ttk.Label(entry_frame2, text = 'label 2', background = 'blue')
-main_button2 = ttk.Button(entry_frame2, text = 'Button 2')
+main_button2 = ttk.Button(entry_frame2, text = 'Button 2', command = button5_click)
 
 # main layout
 entry_frame1.pack(side = 'left', expand = True, fill = 'both', padx = 20, pady = 20)

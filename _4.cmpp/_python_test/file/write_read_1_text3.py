@@ -1,14 +1,14 @@
 from random import randint
 
-quote_file = 'C:/_git/vcs/_4.cmpp/_python_test/data/quotes.txt'
-#quote_file = 'C:/_git/vcs/_4.cmpp/_python_test/data/poetry2.txt'
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/quotes.txt'
+#filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/poetry2.txt'
 
 def get_random_quote():
     start_line  = None
     end_line    = None
 
     # Open the quote file
-    with open(quote_file) as file:
+    with open(filename) as file:
         line = file.readlines()
         print('total lines = ', str(len(line)))
 
@@ -36,7 +36,6 @@ def get_random_quote():
     quote = "".join(line[start_line:end_line])
 
     return quote
-
 
 mesg = get_random_quote()
 print(mesg)

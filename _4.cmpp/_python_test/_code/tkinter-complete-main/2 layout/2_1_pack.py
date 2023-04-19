@@ -11,8 +11,8 @@ def button1_click():
 
 # widgets 
 label1 = ttk.Label(window, text = 'First label', background = 'red')
-label2 = ttk.Label(window, text = 'Label 2', background = 'blue')
-label3 = ttk.Label(window, text = 'Last of the labels', background = 'green')
+label2 = ttk.Label(window, text = 'Label 2', background = 'green')
+label3 = ttk.Label(window, text = 'Last of the labels', background = 'blue')
 button1 = ttk.Button(window, text = 'Button', command = button1_click)
 
 # layout 

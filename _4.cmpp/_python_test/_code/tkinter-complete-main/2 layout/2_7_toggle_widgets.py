@@ -69,5 +69,6 @@ button = ttk.Button(window, text = 'toggle Label', command = toggle_label_pack)
 button.pack()
 
 frame = ttk.Frame(window)
+
 # run
 window.mainloop()

@@ -1,6 +1,8 @@
 #解讀本地網頁資料, 都是使用 html.parser 解析器
 
+import os
 from bs4 import BeautifulSoup
+from urllib.request import urlopen
 
 # 讀檔
 filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/beautifulsoup_data.html'
@@ -153,8 +155,48 @@ with open('ccccc.png', "wb") as file:
     file.write(img.content)
 print('圖片下載完成!')
 
+print('下載網頁中的所有圖片')
 
+# 以標題建立目錄儲存圖片
+title = soup.title.text
+images_dir = '下載圖片_' + title + "/"
+if not os.path.exists(images_dir):
+    os.mkdir(images_dir)
 
+#all_imgs = soup.find_all('img', {"class": "photo_img photo-img"})
+all_imgs = soup.find_all('img')
+print(all_imgs)
+
+# 處理所有 <img> 標籤
+n=0
+for img in all_imgs:
+    print(img)
+    # 讀取 src 屬性內容
+    src=img.get('src')
+    print(src)
+    # 讀取 .jpg 檔
+    if src != None and ('.png' in src):
+        # 設定圖檔完整路徑
+        full_path = src
+        print(full_path)
+        filename = full_path.split('/')[-1]  # 取得圖檔名
+        print(filename)
+        # 儲存圖片
+        try:
+            print(full_path)
+            image = urlopen(full_path) #問題在此
+            print('aaaaaaaaaaaa')
+            '''
+            with open(os.path.join(images_dir,filename),'wb') as f:
+                f.write(image.read())  
+            n+=1
+            if n>=1000: # 最多下載 1000 張
+                break
+            '''
+        except:
+            print("{} 無法讀取!".format(filename))
+            
+print("共下載",n,"張圖片")
 
 
 

@@ -9,10 +9,10 @@ window.geometry('400x600')
 # Top frame
 top_frame = ttk.Frame(window) 
 label1 = ttk.Label(top_frame, text = 'First label', background = 'red')
-label2 = ttk.Label(top_frame, text = 'Label 2', background = 'blue')
+label2 = ttk.Label(top_frame, text = 'Label 2', background = 'green')
 
 # middle widget
-label3 = ttk.Label(window, text = 'Another label', background = 'green')
+label3 = ttk.Label(window, text = 'Another label', background = 'blue')
 
 def button1_click():
     print('你按了Button 1')
@@ -27,7 +27,7 @@ def button5_click():
 
 # bottom frame
 bottom_frame = ttk.Frame(window)
-label4 = ttk.Label(bottom_frame, text = 'Last of the labels', background = 'orange')
+label4 = ttk.Label(bottom_frame, text = 'Last of the labels', background = 'yellow')
 button1 = ttk.Button(bottom_frame, text = 'A Button', command = button1_click)
 button2 = ttk.Button(bottom_frame, text = 'Another Button', command = button2_click)
 

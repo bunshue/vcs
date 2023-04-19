@@ -415,10 +415,7 @@ entry_string = tk.StringVar(value = 'test1111')
 entry = ttk.Entry(window, textvariable = entry_string)
 entry.pack()
 
-TextBox取值
-print(entry_string.get())
-
-
+print('Entry內容 :', entry_string.get())	#TextBox取值
 
 //----------------------------------------------------------------------------------
 

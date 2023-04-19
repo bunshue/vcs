@@ -28,31 +28,42 @@ plt.imshow(img_rgb)
 plt.show()
 '''
 
+'''
 im = Image.open(filename)
 print("%s:" % filename, im.format, "%dx%d" % im.size, im.mode)
 print(im.info, im.tile)
-
-
-
-
 '''
+
+
 filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/poetry.txt'
-fp = open(filename)
+#filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/quotes.txt'
+
+fp = open(filename, 'r', encoding = 'UTF-8')
 try:
     while 1:
         line = fp.readline()
         if not line:
             break
-        print(line)
+        print(line, end = '')
 finally:
     fp.close()
 
+
+with open(filename, 'r', encoding = 'UTF-8') as file:
+    line = file.readlines()
+#print(line)
+    
+for l in line:
+    #print(l, end ="")
+    print(l[:3])    #每行的前三字
+    print(l[3:])    #每行的第三字開始到最後
+    
+
 '''
-'''
-fp = open(filename)
-options.toexclude = fp.readlines()
+fp = open(filename, 'r', encoding = 'UTF-8')
+line = fp.readlines()
 fp.close()
+
+print(line)
 '''
-
-
 
