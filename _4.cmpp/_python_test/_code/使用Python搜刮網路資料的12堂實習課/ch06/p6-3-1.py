@@ -15,5 +15,9 @@ target = soup.select('#County option')
 counties = list()
 for item in target:
     counties.append((item.text,item['value']))
+    
 print(counties)
+
+for c in counties:
+    print(c)
 

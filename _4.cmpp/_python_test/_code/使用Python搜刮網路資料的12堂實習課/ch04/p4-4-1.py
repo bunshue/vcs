@@ -8,6 +8,9 @@ soup = BeautifulSoup(html_data.text, 'html.parser')
 #print(soup.prettify())  #prettify()這個函數可以將DOM tree以比較美觀的方式印出。
 
 links = soup.find_all("a")
+
+print(links)
+
 for link in links:
     try:
         if ".jpg" in link['href']:

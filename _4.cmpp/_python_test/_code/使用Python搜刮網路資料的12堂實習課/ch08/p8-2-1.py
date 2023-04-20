@@ -1,5 +1,6 @@
 import requests, time
 from bs4 import BeautifulSoup
+
 target_url = 'https://www.nkust.edu.tw/p/403-1000-12-{}.php'
 
 data = list()

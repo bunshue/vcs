@@ -1,3 +1,5 @@
+#把自己偽裝成一個瀏覽器
+
 from selenium import webdriver
 from bs4 import BeautifulSoup
 import time
@@ -8,5 +10,6 @@ web = webdriver.Chrome('chromedriver.exe')
 web.implicitly_wait(60)
 web.get(url)
 html = web.page_source
-web.quit()
+#web.quit()
+#print(html)
 

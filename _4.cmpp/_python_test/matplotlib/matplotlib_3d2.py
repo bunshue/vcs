@@ -72,7 +72,9 @@ y = np.arange(-1.0, 3.0 + s, s)
 X, Y = np.meshgrid(x, y)
 Z = (1.0 - X)**2 + 100.0 * (Y - X*X)**2
 
-#??? plot
+
+surf = ax.plot_surface(X, Y, Z, rstride=1, cstride=1, cmap=cm.coolwarm)
+
 
 ax.set_title('XXXXXXX3')
 
