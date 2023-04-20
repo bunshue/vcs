@@ -1,13 +1,4 @@
-#! /usr/bin/env python3
-
-# Add some standard cpp magic to a header file
-
 import sys
-
-def main():
-    args = sys.argv[1:]
-    for filename in args:
-        process(filename)
 
 def process(filename):
     try:
@@ -45,5 +36,11 @@ def process(filename):
     print('#endif')
     print('#endif /*', '!'+magic, '*/')
 
-if __name__ == '__main__':
-    main()
+
+
+foldername = 'C:/_git/vcs/_4.cmpp/_python_test/_code/使用Python搜刮網路資料的12堂實習課'
+for filename in foldername:
+    process(filename)
+
+
+

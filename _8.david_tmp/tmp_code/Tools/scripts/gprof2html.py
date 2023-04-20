@@ -1,7 +1,3 @@
-#! /usr/bin/env python3
-
-"""Transform gprof(1) output into useful HTML."""
-
 import html
 import os
 import re
