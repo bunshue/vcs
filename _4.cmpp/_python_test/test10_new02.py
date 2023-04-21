@@ -1,5 +1,7 @@
 import sys
 
+print('打印訊息')
+
 print('有顏色的打印訊息', file=sys.stderr)
 
 print('%s: %s, line %d, column %d' % (
@@ -24,6 +26,10 @@ print("aaaaaa", file=sys.stdout)
 
 
 print(__doc__, file=sys.stderr)
+
+
+byteyears = 1234
+print(repr(int(byteyears)).rjust(8))
 
 
 

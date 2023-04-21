@@ -4,6 +4,7 @@ import pandas as pd
 import time
 
 url = "https://www.twse.com.tw/zh/page/trading/exchange/STOCK_DAY.html"
+
 web = webdriver.Chrome("chromedriver.exe")
 web.implicitly_wait(60)
 web.get(url)

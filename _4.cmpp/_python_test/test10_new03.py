@@ -28,15 +28,14 @@ print(fnfilter)
 
 #os.rename(filename, backup)
 
-byteyears = 1234
-print(repr(int(byteyears)).rjust(8))
-
-
 import sys
 if sys.platform == 'win32':
     print('Windows')
 else:
     print('Non-Windows')
+
+
+
 
 
 

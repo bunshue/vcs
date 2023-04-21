@@ -1,8 +1,19 @@
+# Python 測試 tkinter
+
 import tkinter as tk
 
+# 建立主視窗
 window = tk.Tk()
-window.geometry("600x400")
-window.title("測試grid")
+
+# 設定主視窗大小
+w = 800
+h = 600
+size = str(w)+'x'+str(h)
+window.geometry(size)
+
+# 設定主視窗標題
+title = "測試grid"
+window.title(title)
 
 window.columnconfigure(0, weight=1)
 window.columnconfigure(1, weight=2)
