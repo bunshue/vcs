@@ -1,14 +1,9 @@
 import urllib
 import urllib.request   #用來建立請求
 
-print('讀取html檔')
+print('讀取遠端html檔或純文字檔')
 url = 'http://pythonscraping.com/pages/page1.html'
-html = urllib.request.urlopen(url)
-html_data = html.read()
-print(html_data)
-
-print('讀取遠端純文字檔1')
-url = 'http://www.pythonscraping.com/pages/warandpeace/chapter1.txt'
+#url = 'http://www.pythonscraping.com/pages/warandpeace/chapter1.txt'
 html = urllib.request.urlopen(url)
 html_data = html.read()
 print(html_data)
@@ -112,13 +107,6 @@ for cmd in q_cmds:
     print(cmd)
 
 print('抓取網頁資料 OK')
-
-#url = input("請輸入網址：")
-url = 'https://www.google.com.tw/'
-if url.startswith("http://") or url.startswith("https://"):
-    print("輸入的網址格式正確！")
-else:
-    print("輸入的網址格式錯誤！")
 
 url = "http://ind.ntou.edu.tw/~dada/cgi/Perlsynx.htm"
 a = urllib.request.urlopen(url)

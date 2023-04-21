@@ -26,16 +26,16 @@ window主視窗的，column 0 , 2, 3為基礎寬度，column 1 為其他column�
 '''
 
 '''
-rectangle_1 = tk.Label(window, text="Region 1", bg="magenta", fg="black")
+rectangle_1 = tk.Button(window, text="Region 1", bg="magenta", fg="black")
 rectangle_1.grid(column=0, ipadx=10, ipady=10)
-rectangle_2 = tk.Label(window, text="Region 2", bg="cyan", fg="black")
+rectangle_2 = tk.Button(window, text="Region 2", bg="cyan", fg="black")
 rectangle_2.grid(column=1, ipadx=10, ipady=10)
 '''
 
 '''
-rectangle_1 = tk.Label(window, text="Region 1", bg="magenta", fg="black")
+rectangle_1 = tk.Button(window, text="Region 1", bg="magenta", fg="black")
 rectangle_1.grid(column=0,row=0, ipadx=10, ipady=10)
-rectangle_2 = tk.Label(window, text="Region 2", bg="cyan", fg="black")
+rectangle_2 = tk.Button(window, text="Region 2", bg="cyan", fg="black")
 rectangle_2.grid(column=1,row=0, ipadx=10, ipady=10)
 '''
 
@@ -43,10 +43,18 @@ rectangle_2.grid(column=1,row=0, ipadx=10, ipady=10)
 參數Sticky填充元件大小
 sticky 可以輸入N ,S, E, W或是 混搭例如:EW，NS，NSEW，代表靠N(北方) 、S(南方)、E(東方)、W(西方)，NS(北南延伸)，EW(東西延伸)，NSEW(全方位延伸)
 '''
-rectangle_1 = tk.Label(window, text="Region 1", bg="magenta", fg="black")
-rectangle_1.grid(column=0,row=0, ipadx=10, ipady=10, sticky="EW")
-rectangle_2 = tk.Label(window, text="Region 2", bg="cyan", fg="black")
-rectangle_2.grid(column=1,row=0, ipadx=10, ipady=10, sticky="EW")
+
+'''
+rectangle_1 = tk.Button(window, text="Region 1", bg="magenta", fg="black")
+rectangle_1.grid(column=0, row=0, ipadx=10, ipady=10, sticky="EW")
+rectangle_2 = tk.Button(window, text="Region 2", bg="cyan", fg="black")
+rectangle_2.grid(column=1, row=0, ipadx=10, ipady=10, sticky="EW")
+'''
+
+rectangle_1 = tk.Button(window, text="Region 1", bg="magenta", fg="black")
+rectangle_1.grid(column=0, row=0, ipadx=10, ipady=10)
+rectangle_2 = tk.Button(window, text="Region 2", bg="cyan", fg="black")
+rectangle_2.grid(column=1, row=0, ipadx=10, ipady=10)
 
 
 

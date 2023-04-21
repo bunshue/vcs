@@ -11,10 +11,7 @@ def get_html_data1(url):
     else:
         return resp
 
-'''
-#無參數
-    
-print('取得網頁資料 1')
+print('無參數 取得網頁資料 1')
 url = 'https://tw.news.yahoo.com/most-popular/'
 url = 'http://www.itwhy.org'
 url = 'http://tw.yahoo.com'
@@ -24,8 +21,7 @@ if html_data:
 else:
     print('無法取得網頁資料')
 
-
-print('取得網頁資料 2')
+print('無參數 取得網頁資料 2')
 import pprint
 url = 'http://tw.yahoo.com'
 html_data = get_html_data1(url)
@@ -34,8 +30,6 @@ if html_data:
     #pprint.pprint(html_data.text)  #OK many
 else:
     print('無法取得網頁資料')
-
-'''
 
 #有參數
 def get_html_data2(api_url, api_params):
@@ -49,9 +43,7 @@ def get_html_data2(api_url, api_params):
     else:
         return resp
 
-'''
-#有參數
-print('取得網頁資料 3')
+print('有參數 取得網頁資料 3')
 api_url = 'http://dict.baidu.com/s'
 api_params = {'wd':'python'}
 html_data = get_html_data2(api_url, api_params)
@@ -60,7 +52,7 @@ print('111', html_data.url)
 print('222', html_data.text) #打印解码后的返回数据
 print('333', html_data)
 
-print('取得網頁資料 4')
+print('有參數 取得網頁資料 4')
 import pprint
 api_url = 'https://zh.wikipedia.org/w/api.php'
 api_params = {'format':'json', 'action':'query', 'titles':'椎名林檎', 'prop':'revisions', 'rvprop':'content'}
@@ -68,7 +60,7 @@ html_data = get_html_data2(api_url, api_params)
 pprint.pprint(html_data)
 
 
-print('取得網頁資料 5')
+print('有參數 取得網頁資料 5')
 import codecs
 api_url = 'https://zh.wikipedia.org/w/api.php'
 api_params = {'format':'xmlfm', 'action':'query', 'titles':'椎名林檎', 'prop':'revisions', 'rvprop':'content'}
@@ -79,7 +71,7 @@ fo.write(html_data.text)
 fo.close()
 
 
-print('取得網頁資料 6')
+print('有參數 取得網頁資料 6')
 import codecs
 search_word = 'lion'
 api_url = 'https://zh.wikipedia.org/w/api.php'
@@ -125,9 +117,6 @@ headers={
 }
 html_data = requests.get(url, headers = headers)
 print(html_data)
-'''
-
-'''
 
 print("抓取網頁資料 2")
 #url = 'https://httpbin.org/get?value1=1&value2=2'
@@ -139,8 +128,6 @@ if html_data:
     #print(html_data.text)
 else:
     print("抓取網頁NG")
-
-'''
 
 print('BeautifulSoup 測試 2')
 

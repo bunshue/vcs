@@ -1,73 +1,69 @@
+# Python 測試 tkinter
+
 import tkinter as tk
 
+# 建立主視窗
 window = tk.Tk()
 
-count =0;
+# 設定主視窗大小
+w = 800
+h = 600
+size = str(w)+'x'+str(h)
+window.geometry(size)
 
-def buttonClick():
-    global count
-    count = count + 1
-    print("Beep! " +str(count))
-    button1.config(text="Clicked " + str(count))
+# 設定主視窗標題
+title = "測試grid"
+window.title(title)
 
-def buttonExit():
-    window.quit();
+#window.resizable(0, 0)  #此行拒絕改變視窗大小
 
-button = tk.Button(window, text='PUSH!')    #無動作
-button.pack()
+# configure the grid
+window.columnconfigure(0, weight = 1)
+window.columnconfigure(1, weight = 1)
+window.columnconfigure(2, weight = 1)
+window.columnconfigure(3, weight = 1)
 
+def button00Click():
+    print('你按了 button00')
+def button01Click():
+    print('你按了 button01')
+def button02Click():
+    print('你按了 button02')
+def button03Click():
+    print('你按了 button03')
+def button10Click():
+    print('你按了 button10')
+def button11Click():
+    print('你按了 button11')
+def button12Click():
+    print('你按了 button12')
+def button13Click():
+    print('你按了 button13')
 
-button5 = tk.Button(window, text='Very Wide Button', width=50, height = 5).pack()
-#button5.pack()
+button00 = tk.Button(window, text='(0, 0)', width = 20, height = 3, bg = 'white', fg = 'black', command = button00Click)
+button00.grid(row = 0, column = 0, padx = 5, pady = 5)
+button01 = tk.Button(window, text='(0, 1)', width = 20, height = 3, bg = 'white', fg = 'black', command = button01Click)
+button01.grid(row = 0, column = 1, padx = 5, pady = 5)
+button02 = tk.Button(window, text='(0, 2)', width = 20, height = 3, bg = 'white', fg = 'black', command = button02Click)
+button02.grid(row = 0, column = 2, padx = 5, pady = 5)
+button03 = tk.Button(window, text='(0, 3)', width = 20, height = 3, bg = 'white', fg = 'black', command = button03Click)
+button03.grid(row = 0, column = 3, padx = 5, pady = 5)
 
-button1 = tk.Button(window, text="Click me!", command=buttonClick)
-button1.pack(side=tk.LEFT)
+button10 = tk.Button(window, text='(1, 0)', width = 20, height = 3, bg = 'white', fg = 'black', command = button10Click)
+button10.grid(row = 1, column = 0, padx = 5, pady = 5)
+button11 = tk.Button(window, text='(1, 1)', width = 20, height = 3, bg = 'white', fg = 'black', command = button11Click)
+button11.grid(row = 1, column = 1, padx = 5, pady = 5)
+button12 = tk.Button(window, text='(1, 2)', width = 20, height = 3, bg = 'white', fg = 'black', command = button12Click)
+button12.grid(row = 1, column = 2, padx = 5, pady = 5)
+button13 = tk.Button(window, text='(1, 3)', width = 20, height = 3, bg = 'white', fg = 'black', command = button13Click)
+button13.grid(row = 1, column = 3, padx = 5, pady = 5)
 
-button2 = tk.Button(window, text="Exit", command=buttonExit)
-button2.pack(side=tk.LEFT)
-
-#side=tk.RIGHT
-
-
-'''
-btn0 = tk.Button(window, text='btn(0, 0)')
-btn1 = tk.Button(window, text='btn(1, 0)')
-btn2 = tk.Button(window, text='btn(0, 1)')
-btn3 = tk.Button(window, text='btn(1, 1)')
-
-btn0.grid(row=0, column=0)
-btn1.grid(row=0, column=1)
-btn2.grid(row=1, column=0)
-btn3.grid(row=1, column=1)
-'''
-
-button1 = tk.Button(window, text='pos(0, 0)', width=10, height = 2)
-button2 = tk.Button(window, text='pos(50, 50)', width=10, height = 2)
-button3 = tk.Button(window, text='pos(100, 100)', width=10, height = 2)
-
-button1.place(x=0, y=0)
-button2.place(x=50, y=50)
-button3.place(x=100, y=100)
-
-
-print("建立toolbar");
-
-def callback():
-    print("called the callback!")
-
-# create a toolbar
-toolbar = tk.Frame(window)
-
-b = tk.Button(toolbar, text="new", width=6, command=callback)
-b.pack(side=tk.LEFT, padx=2, pady=2)
-
-b = tk.Button(toolbar, text="open", width=6, command=callback)
-b.pack(side=tk.LEFT, padx=2, pady=2)
-
-toolbar.pack(side=tk.TOP, fill=tk.X)
-
+#像是richTextBox
+text1 = tk.Text(window, height=10)  # 放入多行輸入框
+text1.grid(row = 2, column = 0, padx = 5, pady = 5)
 
 
 window.mainloop()
 
-window.destroy()    # 使用quit()離開上面的mainloop
+
+

@@ -59,6 +59,11 @@ print('取得網頁超連結 取得 a href', soup.select('a')[0].get('href'))
 print('取得圖片超連結 取得 img src', soup.select('img')[0]['src'])
 print('取得網頁超連結 取得 a href', soup.select('a')[0]['href'])
 
+print('多重條件選擇')
+data = soup.select('div div p') #尋找 div 標籤裡面的 div 標籤裡面的 p 標籤 三者都要符合的抓出來
+print('符合條件的資料', len(data), '筆')
+print(data)
+
 print('解讀本地網頁資料3')
 
 print('尋找符合標籤的第一個節點 find h1')

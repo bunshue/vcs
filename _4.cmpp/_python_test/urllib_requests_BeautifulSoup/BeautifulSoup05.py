@@ -1,5 +1,3 @@
-# Python 測試 BeautifulSoup
-
 import sys
 import requests
 from bs4 import BeautifulSoup
@@ -14,10 +12,8 @@ def get_html_data1(url):
     else:
         return resp
 
-
-
 url = 'https://www.nkust.edu.tw/'
-sel = '#sm_div_cmb_1_15062 > div > div > section'
+sel = '#sm_div_cmb_1_15062 > div > div > section'   #沒用到
 
 html = requests.get(url).text
 soup = BeautifulSoup(html, 'html.parser')
