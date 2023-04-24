@@ -59,9 +59,8 @@ button13 = tk.Button(window, text='(1, 3)', width = 20, height = 3, bg = 'white'
 button13.grid(row = 1, column = 3, padx = 5, pady = 5)
 
 #像是richTextBox
-text1 = tk.Text(window, height=10)  # 放入多行輸入框
-text1.grid(row = 2, column = 0, padx = 5, pady = 5)
-
+text1 = tk.Text(window, height = 20)  # 放入多行輸入框
+text1.grid(row = 2, column = 0, columnspan = 4, padx = 5, pady = 5, sticky='news')
 
 window.mainloop()
 
