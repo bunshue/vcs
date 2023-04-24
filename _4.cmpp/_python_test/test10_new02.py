@@ -54,4 +54,14 @@ if sys.platform.startswith("win"):
 else:
     print('你用的作業系統不是Windows')
 
+
+import sys
+if sys.platform == 'win32':
+    print('Windows')
+else:
+    print('Non-Windows')
+
+
+
+
 sys.exit(1)	#立刻退出程式

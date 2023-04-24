@@ -1,7 +1,7 @@
 import re
 
 regex = "\d{3}-\d{2}-\d{4}"
-ssn = input("Enter SSN: ")
+ssn = '543-87-3388'
 match1 = re.match(regex, ssn)
 
 if match1 != None:

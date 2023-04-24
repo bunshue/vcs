@@ -6,14 +6,14 @@ class ImageDemo:
         window.title("Image Demo") # Set title
         
         # Create PhotoImage objects
-        caImage = PhotoImage(file = "image/ca.gif")
-        chinaImage = PhotoImage(file = "image/china.gif")
-        leftImage = PhotoImage(file = "image/left.gif")
-        rightImage = PhotoImage(file = "image/right.gif")
-        usImage = PhotoImage(file = "image/usIcon.gif")
-        ukImage = PhotoImage(file = "image/ukIcon.gif")
-        crossImage = PhotoImage(file = "image/x.gif")
-        circleImage = PhotoImage(file = "image/o.gif")
+        caImage = PhotoImage(file = "C:/book/image/ca.gif")
+        chinaImage = PhotoImage(file = "C:/book/image/china.gif")
+        leftImage = PhotoImage(file = "C:/book/image/left.gif")
+        rightImage = PhotoImage(file = "C:/book/image/right.gif")
+        usImage = PhotoImage(file = "C:/book/image/usIcon.gif")
+        ukImage = PhotoImage(file = "C:/book/image/ukIcon.gif")
+        crossImage = PhotoImage(file = "C:/book/image/x.gif")
+        circleImage = PhotoImage(file = "C:/book/image/o.gif")
         
         # frame1 to contain label and canvas
         frame1 = Frame(window)

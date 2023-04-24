@@ -24,8 +24,8 @@ class FileEditor:
         frame0.grid(row = 1, column = 1, sticky = W)
         
         # Create images
-        opneImage = PhotoImage(file = "image/open.gif")
-        saveImage = PhotoImage(file = "image/save.gif")
+        opneImage = PhotoImage(file = "C:/book/image/open.gif")
+        saveImage = PhotoImage(file = "C:/book/image/save.gif")
         
         Button(frame0, image = opneImage, command = 
             self.openFile).grid(row = 1, column = 1, sticky = W)

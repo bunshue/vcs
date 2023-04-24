@@ -1,13 +1,6 @@
 # python import module : sys, os
 # python import module : DDF 磁碟檔案資料夾操作
 
-
-import os
-filename = os.path.abspath("test10_new10.py")
-if os.path.exists(filename): #檢查檔案是否存在
-    print("完整路徑名稱：" + filename)
-    print("檔案大小：" , os.path.getsize(filename))
-
 import os,shutil
 cur_path = os.path.dirname(__file__) # 取得目前路徑
 print("現在路徑："+cur_path)
@@ -69,6 +62,38 @@ print("檔案時間 : ", time.ctime(os.path.getmtime(filename_r)))
 
 
 print("檔案是否存在 : ", os.path.isfile(filename_r))
+
+
+
+import os
+filename = os.path.abspath("test10_new10.py")
+if os.path.exists(filename): #檢查檔案是否存在
+    print("完整路徑名稱：" + filename)
+    print("檔案大小：" , os.path.getsize(filename))
+
+
+
+    
+import os, shutil, glob
+
+print("單層資料夾內所有檔案容量")
+
+source_dir = 'C:/______test_files/__pic/_peony1/'
+
+pngfiles = glob.glob(source_dir + "*.png")
+jpgfiles = glob.glob(source_dir + "*.jpg")
+giffiles = glob.glob(source_dir + "*.gif")
+bmpfiles = glob.glob(source_dir + "*.bmp")
+allfiles = pngfiles + jpgfiles + giffiles + bmpfiles
+
+allfilesize = 0
+for f in allfiles:
+    allfilesize += os.path.getsize(f)
+    print("檔案 : " + f + ", 大小 : " + str(os.path.getsize(f)) + " 拜")
+
+print("總容量 : " + str(allfilesize) + " 拜")
+
+
 
 
 
@@ -149,25 +174,6 @@ for dirname,subdir,files in sample_tree:
     print("目錄串列：" , subdir)   
     print("檔案串列：",files)
     print()
-    
-import os, shutil, glob
-
-print("單層資料夾內所有檔案容量")
-
-source_dir = 'C:/______test_files/__pic/_peony1/'
-
-pngfiles = glob.glob(source_dir + "*.png")
-jpgfiles = glob.glob(source_dir + "*.jpg")
-giffiles = glob.glob(source_dir + "*.gif")
-bmpfiles = glob.glob(source_dir + "*.bmp")
-allfiles = pngfiles + jpgfiles + giffiles + bmpfiles
-
-allfilesize = 0
-for f in allfiles:
-    allfilesize += os.path.getsize(f)
-    print("檔案 : " + f + ", 大小 : " + str(os.path.getsize(f)) + " 拜")
-
-print("總容量 : " + str(allfilesize) + " 拜")
 
 print('拷貝檔案')
 

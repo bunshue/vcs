@@ -1,12 +1,13 @@
 import os
 
 def main():
-    # Prompt the user to enter a directory or a file
-    path = input("Enter a directory or a file: ").strip()   
+
+    filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/human2.jpg'
+    foldername = 'C:/_git/vcs/_4.cmpp/_python_test/data'
    
     # Display the size
     try:
-        print(getSize(path), "bytes")
+        print(getSize(foldername), "bytes")
     except:
         print("Directory or file does not exist")
 

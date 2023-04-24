@@ -28,14 +28,6 @@ print(fnfilter)
 
 #os.rename(filename, backup)
 
-import sys
-if sys.platform == 'win32':
-    print('Windows')
-else:
-    print('Non-Windows')
-
-
-
 
 
 

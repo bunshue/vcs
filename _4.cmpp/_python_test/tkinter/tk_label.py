@@ -1,0 +1,31 @@
+import tkinter as tk
+
+# 建立主視窗
+window = tk.Tk()
+
+# 設定主視窗大小
+w = 800
+h = 800
+size = str(w)+'x'+str(h)
+window.geometry(size)
+
+# 設定主視窗標題
+title = "Label測試"
+window.title(title)
+
+# 設定主視窗之背景色
+window.configure(bg="#7AFEC6")
+
+filename = 'C:/______test_files/_icon/DrAP.ico'
+window.iconbitmap(filename) #設定icon
+
+font_size = 24
+w = 40
+h = 30
+
+# 設定 Label 
+label1 = tk.Label(window, text="開啟程式", foreground="red", font=("標楷體", font_size), padx = w, pady = h)
+label1.pack()
+
+window.mainloop()
+

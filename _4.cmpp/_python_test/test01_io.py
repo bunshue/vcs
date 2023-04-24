@@ -10,33 +10,29 @@ print('Hi, %s.' % name)
 print("計算BMI")
 #height = float(input("請輸入你的身高"))
 height = 1.55
-print ("取得身高 %s "%height )
+print ("取得身高 %s "% height )
 
 #weight = float(input("請輸入你的體重"))
 weight = 52
-print ("取得體重 %s" %weight )
+print ("取得體重 %s" % weight )
 
 #age = int(input("請輸入你的年齡"))
 age = 30
-print ("取得年齡 %s" %age )
+print ("取得年齡 %s" % age )
 
 bmi = weight/(height*height);
-print ("你得 BMI 值%s" %bmi )
+print ("你得 BMI 值%s" % bmi )
 
-if age<45:
-    if bmi<22:
+if age < 45:
+    if bmi < 22:
         print("Low")
     else:
         print("Medium")
 else:
-    if bmi<22:
+    if bmi < 22:
         print("Medium")
     else:
         print("High")
-    
-
-
-
 
 score = int(input("Please input your score:"))
 
@@ -52,7 +48,6 @@ if score >= 60:
         print("Grade D")
 else:
     print("You fail the test!")
-
 
 score = int(input("Please input your score:"))
 
@@ -79,12 +74,6 @@ elif (age >= 6 and age < 12) and (with_parent == 'Y' or with_parent == 'y'):
   print("可以看保護級電影")
 else:
   print("只能看普遍級電影")
-
-
-
-
-
-
 
 
 
