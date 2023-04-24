@@ -1,6 +1,6 @@
 from tkinter import * # Import tkinter
 
-filename = 'c:/book/image/us.gif'
+filename = 'image/us.gif'
 
 root = Tk() # Create a root window
 root.title("Display Image") # Set title

@@ -10,7 +10,7 @@ class EightQueens:
         window = Tk() # Create a window
         window.title("Eight Queens") # Set a title
         
-        image = PhotoImage(file = "C:/book/image/queen.gif")
+        image = PhotoImage(file = "image/queen.gif")
         for i in range(SIZE):
             for j in range(SIZE):
                 if self.queens[i] == j:

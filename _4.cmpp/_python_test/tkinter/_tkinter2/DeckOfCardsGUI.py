@@ -8,7 +8,7 @@ class DeckOfCardsGUI:
         
         self.imageList = [] # Store images for cards
         for i in range(1, 53):
-            self.imageList.append(PhotoImage(file = "C:/book/image/card/" + str(i) + ".gif"))
+            self.imageList.append(PhotoImage(file = "image/card/" + str(i) + ".gif"))
         
         frame = Frame(window) # Hold four labels for cards
         frame.pack()
