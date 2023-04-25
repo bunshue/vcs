@@ -4,21 +4,21 @@ from PIL import Image
 
 filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/sample.jpg'
 
-sample = Image.open(filename)
+image = Image.open(filename)
 
-
-im = sample.convert('L')
+im = image.convert('L')
 w, h = im.size
 print(w)
 print(h)
 
 #show picture here
 
-plt.imshow(sample)
-plt.imshow(im)
+plt.imshow(image)
+#plt.imshow(im)
 plt.show()
 
 
+'''
 crop = im.crop((w/2-300, h/2-300, w/2+300, h/2+300))
 
 print(w/2-300)
@@ -28,7 +28,7 @@ print(h/2+300)
 
 crop_hist = crop.histogram()
 
-ori = sample.resize((600,600))  #修改圖像大小
+ori = image.resize((600,600))  #修改圖像大小
 
 im = ori.convert('L')
 hist = im.histogram()
@@ -50,3 +50,4 @@ plt.ylim(0,8000)
 plt.legend()
 
 plt.show()
+'''

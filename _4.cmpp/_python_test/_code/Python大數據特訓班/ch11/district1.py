@@ -1,6 +1,7 @@
 import pandas
 
 df = pandas.read_excel('712693030RPKUP4RX.xlsx')
+
 header = df.iloc[2]  #取得標題
 df1 = df[3:].copy()  #去除前三列
 df1 = df1.rename(columns = header)  #重置標題
