@@ -4,12 +4,10 @@ def main():
     # Open file for writing binary
     outfile = open("numbers.dat", "wb")
     
-    data = eval(input("Enter an integer (the input exits " + 
-        "if the input is 0): "))
+    data = eval(input("Enter an integer (the input exits if the input is 0): "))
     while data != 0:
         pickle.dump(data, outfile)
-        data = eval(input("Enter an integer (the input exits " + 
-            "if the input is 0): "))
+        data = eval(input("Enter an integer (the input exits if the input is 0): "))
 
     outfile.close() # Close the output file
 
@@ -28,3 +26,4 @@ def main():
     print("\nAll objects are read")
     
 main() # Call the main function
+

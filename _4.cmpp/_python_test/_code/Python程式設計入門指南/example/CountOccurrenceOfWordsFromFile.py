@@ -1,6 +1,7 @@
 def main():
     # Prompt the user to enter a file
-    filename = input("Enter a filename: ").strip()
+    #filename = input("Enter a filename: ").strip()
+    filename = 'weather.txt'
     infile = open(filename, "r") # Open the file
 
     wordCounts = {} # Create an empty dictionary to count words

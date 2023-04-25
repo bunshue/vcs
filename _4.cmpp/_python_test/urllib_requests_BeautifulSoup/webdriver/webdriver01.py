@@ -2,15 +2,14 @@
 
 import time
 from selenium import webdriver
-
 from bs4 import BeautifulSoup
 
 url = 'https://www.google.com.tw/'
 
 web = webdriver.Chrome()    #使用Chrome
 #web = webdriver.Firefox()   #使用Firefox
-web.set_window_position(0,0)
-web.set_window_size(800,600)
+web.set_window_position(0,0)	#設定視窗位置
+web.set_window_size(800,600)	#設定視窗大小
 
 web.get(url)
 web.save_screenshot('screenshot.png')  #存圖
@@ -41,7 +40,7 @@ url = 'https://www.cwb.gov.tw/V8/C/W/OBS_County.html?ID=menu'
 web = webdriver.Chrome('chromedriver.exe')
 web.implicitly_wait(60)
 web.get(url)
-html = web.page_source
+html = web.page_source	#讀取網頁的原始碼
 #web.quit()
 #print(html)
 web.quit()
@@ -59,24 +58,6 @@ for c in counties:
 
 '''
 
-
-'''
-from selenium import webdriver
-
-# 設定facebook登入資訊
-url = 'https://www.facebook.com/'
-email='你的faceook電子郵件'
-password='你的faceook密碼'
-# 建立瀏覽器物件
-driver = webdriver.Chrome()
-# 最大化視窗後開啟facebook網站
-driver.maximize_window()  #視窗最大化
-driver.get(url)
-# 執行自動登入動作
-driver.find_element_by_id('email').send_keys(email) #輸入郵件
-driver.find_element_by_id('pass').send_keys(password)#輸入密碼
-driver.find_element_by_id('loginbutton').click()    # 按登入鈕
-'''
 
 
 

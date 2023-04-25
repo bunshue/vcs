@@ -191,7 +191,7 @@ if len(rows) > 0:
     if answer == 'y' or answer == 'Y':
         sqlstr = "delete from table01 where id_num={};".format(number)
         conn.execute(sqlstr)
-        conn.commit()
+        conn.commit() # 更新
         print("已刪除指定的資料")
 else:
     print('找不到資料')
@@ -267,6 +267,14 @@ for i in range(length):
     print("{}\t{}\t{}".format(rows[i][0], rows[i][1], rows[i][2]))
 conn.close()  # 關閉資料庫連線
 
+'''
+print('刪除資料庫中的資料表')
+#print('建立資料庫連線, 資料庫 : ' + db_filename)
+conn = sqlite3.connect(db_filename) # 建立資料庫連線
+cursor = conn.execute('drop table table01')
+conn.commit() # 更新
+conn.close()  # 關閉資料庫連線
+'''
 
 import time
 import sqlite3
@@ -311,7 +319,7 @@ if len(rows) > 1:
     cursor.execute("delete from talbe01"
                    "  where filename = ?",
                    (self.filename,))
-    self.connection.commit()
+    self.connection.commit()  # 更新
 else:
     # Yup.  We're done, so go home.
     return

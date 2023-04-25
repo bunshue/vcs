@@ -75,8 +75,6 @@ def createDF(district):
                 pops.append(td.text)
     df['降雨機率'] = pops
 
-from django.shortcuts import render
-from django.http import HttpResponse
 import requests
 from bs4 import BeautifulSoup
 import pandas
