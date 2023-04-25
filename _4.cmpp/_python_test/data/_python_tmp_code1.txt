@@ -1,3 +1,24 @@
+
+
+@app.route('/user/<username>')
+def show_user(username):
+    return 'User Name is {}'.format(username)
+
+if __name__ == '__main__':
+    app.run()
+
+
+
+
+print(__doc__)
+print(globals())
+
+
+
+print()
+
+
+
 for i in range(30):
     print("webpage{}.png".format(i))
 

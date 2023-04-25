@@ -446,10 +446,22 @@ date5 = datetime.datetime.strptime(date4, "%Y-%m-%d %H:%M:%S")
 print(date5)
 
 
+import time
+
+startTime = time.time() # Get start time
+
+#do something
+#do something
+#do something
+
+endTime = time.time() # Get end time
+testTime = int(endTime - startTime) # Get test time
+print("Test time is", testTime, "seconds")
 
 
-
-
+import time
+version = time.strftime("-%Y%m%d")
+print(version)
 
 
 

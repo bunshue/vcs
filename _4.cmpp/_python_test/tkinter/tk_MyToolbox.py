@@ -18,7 +18,7 @@ window.title(title)
 # 設定主視窗之背景色
 window.configure(bg="#7AFEC6")
 
-filename = 'C:/______test_files/_icon/DrAP.ico'
+filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/python.ico'
 window.iconbitmap(filename) #設定icon
 
 show_mesg = tk.StringVar()

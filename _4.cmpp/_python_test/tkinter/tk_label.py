@@ -16,9 +16,6 @@ window.title(title)
 # 設定主視窗之背景色
 window.configure(bg="#7AFEC6")
 
-filename = 'C:/______test_files/_icon/DrAP.ico'
-window.iconbitmap(filename) #設定icon
-
 font_size = 24
 w = 40
 h = 30

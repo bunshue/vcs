@@ -127,6 +127,11 @@ print("圓周率 四捨五入到小數點以下第6位 : ", format(pi, ".6f"))
 print("圓周率 四捨五入到整數 : ", round(pi))
 
 
+
+byteyears = 1234
+print(repr(int(byteyears)).rjust(8))
+
+
 '''
 print(format(i * j, '4d'), end = '')
 print()# Jump to the new line
@@ -140,6 +145,47 @@ print('var1[0]: ', var1[0])
 print('var2[1:5]: ', var2[1:5])
 
 
+import sys
+
+print('有顏色的打印訊息', file = sys.stderr)
+
+print('%s: %s, line %d, column %d' % (
+'aaaa', 'bbbb', 123, 456),
+file=sys.stderr)
+
+print((
+'*** %(file)s:%(lineno)s: 發生錯誤在 "%(token)s"'
+) % {
+'token': '函數名',
+'file': '檔案',
+'lineno': '行號'
+}, file=sys.stderr)
 
 
+infile = 'aaaaaaa'
+lno = 1234
+print('Syntax error on %s:%d' % (infile, lno), 'before:', file=sys.stderr)
+
+
+print("aaaaaa", file=sys.stdout)
+
+
+print(__doc__, file=sys.stderr)
+
+print("(%s:%s)" % (sys.exc_info()[0], sys.exc_info()[1]))
+
+
+
+cmd = '%s "%s" %s' % (sys.executable, 'aaaa', 'bbbb')
+print(cmd)
+
+
+
+
+
+ver_string = "%d.%d" % (sys.version_info[0], sys.version_info[1])
+root_key_name = "Software\\Python\\PythonCore\\" + ver_string
+print(sys.version_info)
+print(ver_string)
+print(root_key_name)
 

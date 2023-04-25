@@ -15,8 +15,6 @@ window.title(title)
 # 設定主視窗之背景色
 window.configure(bg="#7AFEC6")
 
-#window.iconbitmap('heart_green.ico')
-
 def cut():
     text.event_generate("<<Cut>>")
 

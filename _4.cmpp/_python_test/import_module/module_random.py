@@ -159,4 +159,17 @@ while True:
 
 
 
+import random 
+
+# Generate random numbers
+number1 = random.randint(0, 9)
+number2 = random.randint(0, 9)
+
+
+number = random.randint(0, 100) 
+number = random.randint(1, 100)
+
+
+
+
 

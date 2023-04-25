@@ -236,10 +236,6 @@ print(__name__)
 print(__doc__)
 
 
-import sys
-print(sys.path)
-
-
 import os
 this_dir = os.path.dirname(__file__)
 print(this_dir)
@@ -253,10 +249,6 @@ print(aa)
 dirname = 'C:/_git/vcs/_4.cmpp/_python_test'
 cc = os.chdir(dirname)
 print(cc)
-
-cmd = '%s "%s" %s' % (sys.executable, 'aaaa', 'bbbb')
-print(cmd)
-
 
 import os
 import sys
@@ -285,22 +277,6 @@ import sympy
 VERSION = sympy.__version__
 print(VERSION)
 
-
-
-
-
-
-
-
-
-
-
-
-import sys
-print(sys.platform)
-
-print(sys.version)
-
 '''
 import win32api, win32con
 rc = win32api.MessageBox(0, 'kkkkk', "Installation Error", win32con.MB_ABORTRETRYIGNORE)
@@ -311,14 +287,6 @@ elif rc == win32con.IDIGNORE:
 else:
     print('3333')
 '''
-
-
-ver_string = "%d.%d" % (sys.version_info[0], sys.version_info[1])
-root_key_name = "Software\\Python\\PythonCore\\" + ver_string
-print(sys.version_info)
-print(ver_string)
-print(root_key_name)
-
 
 
 import tempfile
@@ -616,42 +584,6 @@ search_word = '英國'
 is_contains_chinese()
 
 
-
-
-
-
-
-import random 
-
-# Generate random numbers
-number1 = random.randint(0, 9)
-number2 = random.randint(0, 9)
-
-
-number = random.randint(0, 100) 
-number = random.randint(1, 100)
-
-
-
-import time
-
-startTime = time.time() # Get start time
-
-#do something
-#do something
-#do something
-
-endTime = time.time() # Get end time
-testTime = int(endTime - startTime) # Get test time
-print("Test time is", testTime, "seconds")
-
-
-import time
-version = time.strftime("-%Y%m%d")
-print(version)
-
-
-
 print('拆解e-mail')
 import re
 import requests
@@ -662,13 +594,6 @@ html_data = requests.get(url).text
 emails = re.findall(regex, html_data)
 for email in emails:
     print(email)
-
-
-
-
-#強制離開程式, 並說明原因
-sys.exit('強制離開程式, 並說明原因')
-
 
 
 

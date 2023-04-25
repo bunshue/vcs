@@ -30,9 +30,6 @@ window.title(title)
 # 設定主視窗之背景色
 window.configure(bg="#7AFEC6")
 
-filename = 'C:/______test_files/_icon/DrAP.ico'
-window.iconbitmap(filename) #設定icon
-
 #像是richTextBox
 text1 = tk.Text(window, height = 10)  # 放入多行輸入框
 text1.pack()
