@@ -6,8 +6,9 @@ from PIL import Image # pillow 安裝 Anaconda 時已自動安裝
 url="http://irs.thsrc.com.tw/IMINT"
 driver=webdriver.Chrome()
 driver.get(url)
-driver.maximize_window()
-driver.save_screenshot("img_screenshot.png") 
+driver.maximize_window()	#視窗最大化
+driver.save_screenshot("img_screenshot.png") 	#存圖
+
 element=driver.find_element_by_id('BookingS1Form_homeCaptcha_passCode')
 
 left=element.location['x']

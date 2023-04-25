@@ -206,17 +206,16 @@ plt.subplot(231)
 sizes = [25, 30, 15, 10]
 labels = ["北部", "西部", "南部", "東部"]
 colors = ["red", "green", "blue", "yellow"]
-explode = (0, 0, 0.2, 0)
-#explode = (0, 0, 0.05, 0)
+explode = (0, 0, 0.2, 0)        # 設定分隔的區塊位置
 plt.pie(sizes, 
-	explode = explode, 
+	explode = explode,      # 設定分隔的區塊位置
 	labels = labels, 
 	colors = colors,
 	labeldistance = 1.1, 
-	autopct = "%2.1f%%", 
+	autopct = "%2.1f%%",    #項目百分比的格式
 	pctdistance = 0.6,
 	shadow = True,
-	startangle = 90)
+	startangle = 90)        # 繪製起始角度
 
 plt.axis("equal")
 plt.legend()
@@ -246,7 +245,7 @@ radius 	圓餅圖的半徑，預設是1
 labels = ['A', 'B', 'C', 'D']
 values = [60, 42, 83, 37]
 colors = ['r', 'g', 'b', 'y']
-explode = (0, 0, 0, 0.08)
+explode = (0, 0, 0, 0.08)       #設定分隔的區塊位置
 
 #設定 pie 函數參數繪製圓餅圖
 plt.pie(

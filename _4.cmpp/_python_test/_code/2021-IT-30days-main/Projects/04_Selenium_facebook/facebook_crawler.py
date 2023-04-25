@@ -21,8 +21,8 @@ chrome_options.add_experimental_option("prefs", prefs)
 driver = webdriver.Chrome(
     ChromeDriverManager().install(), chrome_options=chrome_options)
 
-# 最大化視窗
-driver.maximize_window()
+driver.maximize_window()	#視窗最大化
+
 # 進入Facebook登入畫面
 driver.get(url)
 

@@ -8,7 +8,8 @@ url = "https://www.twse.com.tw/zh/page/trading/exchange/STOCK_DAY.html"
 web = webdriver.Chrome("chromedriver.exe")
 web.implicitly_wait(60)
 web.get(url)
-web.maximize_window()
+web.maximize_window()	#視窗最大化
+
 auto.PAUSE = 3
 auto.moveTo(1263, 438, 2)
 auto.click()

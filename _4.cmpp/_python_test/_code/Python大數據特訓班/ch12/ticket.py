@@ -20,7 +20,7 @@ def get_photo():
     driver=requests.Session()   
     driver=webdriver.Chrome()
     driver.get(url)
-    driver.maximize_window()
+    driver.maximize_window()	#視窗最大化
     
     # 從 screenshot 中取得驗證碼的圖片
     driver.save_screenshot("img_screenshot.png") 

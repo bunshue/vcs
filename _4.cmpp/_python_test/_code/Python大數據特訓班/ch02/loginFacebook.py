@@ -13,7 +13,7 @@ driver = webdriver.Chrome()
 #chrome_options.add_experimental_option("prefs",prefs)
 #driver = webdriver.Chrome(chrome_options=chrome_options)
 
-driver.maximize_window()
+driver.maximize_window()	#視窗最大化
 driver.get(url)
 
 driver.find_element_by_id('email').send_keys(email)
