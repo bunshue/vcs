@@ -1,4 +1,155 @@
 
+def make_backup(filename):
+    import os, os.path
+    backup = filename + '~'
+    if os.path.lexists(backup):
+        try:
+            os.remove(backup)
+        except OSError:
+            print("Can't remove backup %r" % (backup,), file=sys.stderr)
+        # end try
+    # end if
+    try:
+        os.rename(filename, backup)
+    except OSError:
+        print("Can't rename %r to %r" % (filename, backup), file=sys.stderr)
+    # end try
+# end def make_backup
+
+
+    if os.path.isdir(file) and not os.path.islink(file):
+        if verbose:
+            print("listing directory", file)
+        names = os.listdir(file)
+        for name in names:
+            fullname = os.path.join(file, name)
+            if ((recurse and os.path.isdir(fullname) and
+                 not os.path.islink(fullname) and
+                 not os.path.split(fullname)[1].startswith("."))
+                or name.lower().endswith(".py")):
+                check(fullname)
+        return
+
+            bak = file + ".bak"
+            if makebackup:
+                shutil.copyfile(file, bak)
+                if verbose:
+                    print("backed up", file, "to", bak)
+
+
+
+    fp = open(substfile, 'r')
+    lineno = 0
+    while 1:
+        line = fp.readline()
+        if not line: break
+        lineno = lineno + 1
+        try:
+            i = line.index('#')
+        except ValueError:
+            i = -1          # Happens to delete trailing \n
+        words = line[:i].split()
+        if not words: continue
+        if len(words) == 3 and words[0] == 'struct':
+            words[:2] = [words[0] + ' ' + words[1]]
+        elif len(words) != 2:
+            err(substfile + '%s:%r: warning: bad line: %r' % (substfile, lineno, line))
+            continue
+        if Reverse:
+            [value, key] = words
+        else:
+            [key, value] = words
+        if value[0] == '*':
+            value = value[1:]
+        if key[0] == '*':
+            key = key[1:]
+            NotInComment[key] = value
+        if key in Dict:
+            err('%s:%r: warning: overriding: %r %r\n' % (substfile, lineno, key, value))
+            err('%s:%r: warning: previous: %r\n' % (substfile, lineno, Dict[key]))
+    fp.close()
+
+
+
+
+    try:
+        names = os.listdir(dirname)
+    except OSError as msg:
+        err(dirname + ': cannot list directory: ' + str(msg) + '\n')
+    names.sort()
+    for name in names:
+        if name in (os.curdir, os.pardir): continue
+        fullname = os.path.join(dirname, name)
+        if os.path.islink(fullname): pass
+        elif os.path.isdir(fullname):
+            subdirs.append(fullname)
+        elif wanted(name):
+            if fix(fullname): bad = 1
+    for fullname in subdirs:
+        if recursedown(fullname): bad = 1
+    return bad
+
+        statbuf = os.stat(filename)
+        os.chmod(tempname, statbuf[ST_MODE] & 0o7777)
+
+
+        os.rename(filename, filename + '~')
+
+
+    print("%d objects before, %d after" % (before, after))
+
+
+    if os.path.isdir(file) and not os.path.islink(file):
+        
+        for name in names:
+            fullname = os.path.join(file, name)
+            if ((recurse and os.path.isdir(fullname) and
+                 not os.path.islink(fullname))
+                or name.lower().endswith(".py")):
+                check(fullname)
+
+names = os.listdir(file)
+
+        print("checking", file, "...", end=' ')
+            print("%r lines %d-%d" % (file, s+1, e+1))
+            if os.path.exists(bak):
+                os.remove(bak)
+            os.rename(file, bak)
+
+
+
+            outfile = os.path.basename(filename)
+
+
+def usage():
+    sys.stderr.write(__doc__ % globals())
+
+sys.stderr.write(msg)
+
+import tkinter as tk
+import tkinter.messagebox
+
+        kilo = 123.456
+
+        # Convert kilometers to miles.
+        miles = kilo * 0.6214
+
+        # Display the results in an info dialog box.
+        tk.messagebox.showinfo('Results', \
+            str(kilo) + ' kilometers is equal to ' + \
+            str(miles) + ' miles.')
+
+
+
+
+測試list之最後5筆資料
+
+my_list[-5:]
+
+
+IFTTT	IF This Then That
+網路自動連結工具
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 

@@ -1,3 +1,5 @@
+#右鍵選單
+
 from tkinter import * # Import tkinter
     
 class PopupMenuDemo:

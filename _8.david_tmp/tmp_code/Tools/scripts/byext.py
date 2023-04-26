@@ -1,10 +1,7 @@
-#! /usr/bin/env python3
-
 """Show file statistics by extension."""
 
 import os
 import sys
-
 
 class Stats:
 
@@ -120,13 +117,12 @@ class Stats:
 
 
 def main():
-    args = sys.argv[1:]
-    if not args:
-        args = [os.curdir]
+
+    args = [os.curdir]
+        
     s = Stats()
     s.statargs(args)
     s.report()
-
 
 if __name__ == "__main__":
     main()

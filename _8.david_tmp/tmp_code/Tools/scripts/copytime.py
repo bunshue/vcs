@@ -4,13 +4,12 @@
 
 import sys
 import os
+
 from stat import ST_ATIME, ST_MTIME # Really constants 7 and 8
 
 def main():
-    if len(sys.argv) != 3:
-        sys.stderr.write('usage: copytime source destination\n')
-        sys.exit(2)
-    file1, file2 = sys.argv[1], sys.argv[2]
+    file1 = 'C:/_git/vcs/_4.cmpp/_python_test/test02_if_else.py'
+    file2 = 'C:/_git/vcs/_4.cmpp/_python_test/test02_if_else.py'
     try:
         stat1 = os.stat(file1)
     except OSError:
