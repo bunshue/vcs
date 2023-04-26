@@ -28,7 +28,7 @@ filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/human2.jpg'
 im = Image.open(filename)
 if im.mode != "RGB":
     print('圖片非RGB模式, 要轉成RGB格式')
-    im = im.convert("RGB")
+    im = im.convert("RGB")	#轉換成RGB圖像
 
 PaintCanvas(window, im).pack()
 

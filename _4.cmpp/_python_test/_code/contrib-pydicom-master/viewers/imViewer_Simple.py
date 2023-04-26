@@ -298,7 +298,7 @@ class ImFrame(wx.Frame):
 
             # Convert mode to L since LUT has only 256 values:
             # http://www.pythonware.com/library/pil/handbook/image.htm
-            im = PIL.Image.fromarray(image).convert('L')
+            im = PIL.Image.fromarray(image).convert('L')	#轉換成灰階圖像
         return im
 
     def show_file(self, imageFile, fullPath):

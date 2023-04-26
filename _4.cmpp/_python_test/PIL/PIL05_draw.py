@@ -252,7 +252,7 @@ filename = 'C:/______test_files/picture1.jpg'
 image1 = Image.open(filename)
   
 image = Image.open(filename)
-image_1 = image.convert('1')
+image_1 = image.convert('1')	#轉換成二值化圖像
 
 plt.subplot(121)
 plt.imshow(image)

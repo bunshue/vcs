@@ -71,7 +71,7 @@ class CaptchaBroker():
         image = enhancer.enhance(10.0)
 
 
-        im2 = image.convert('1')
+        im2 = image.convert('1')	#轉換成二值化圖像
         im2 = clearNoise(im2,50,4,6)
 
         w, h = image.size

@@ -6,7 +6,7 @@ filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/sample.jpg'
 
 image = Image.open(filename)
 
-im = image.convert('L')
+im = image.convert('L')	#轉換成灰階圖像
 w, h = im.size
 print(w)
 print(h)
@@ -30,7 +30,7 @@ crop_hist = crop.histogram()
 
 ori = image.resize((600,600))  #修改圖像大小
 
-im = ori.convert('L')
+im = ori.convert('L')	#轉換成灰階圖像
 hist = im.histogram()
 
 r, g, b = ori.split()

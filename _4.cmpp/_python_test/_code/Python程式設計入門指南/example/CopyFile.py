@@ -3,8 +3,8 @@ import sys
 
 def main():
     # Prompt the user to enter filenames
-    f1 = input("Enter a source file: ").strip()
-    f2 = input("Enter a target file: ").strip()
+    f1 = 'C:/_git/vcs/_4.cmpp/_python_test/data/article.txt'
+    f2 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/articledddddd.txt'
 
     # Check if target file exists
     if os.path.isfile(f2):

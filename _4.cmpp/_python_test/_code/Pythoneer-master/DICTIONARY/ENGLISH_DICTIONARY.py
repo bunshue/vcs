@@ -61,13 +61,9 @@ b1=Button(text='Enter',bg='black',fg='white',command=lambda :findMeaning())
 b1.pack()
 b2=Button(text='Speak',bg='black',fg='white',command=lambda: speakWord())
 b2.pack()
-text1=Text(font=('Times',20),height=10)
+text1=Text(font=('Times',20),height=12)
 text1.pack()
-l3=Label(text='Created by Harsh Bardhan Mishra',font=('Times',22),fg='brown')
-l3.pack()
-window.geometry('500x500')
+window.geometry('500x520')
 window.mainloop()
-
-
 
 #-----------------------Program Ends-----------------------

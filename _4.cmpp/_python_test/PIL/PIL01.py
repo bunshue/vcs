@@ -9,7 +9,7 @@ filename3 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/gray_image.jpg'
 filename4 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/rotate_90.jpg'
 
 image_file = Image.open(filename0)
-image_file = image_file.convert('1') # convert image to black and white
+image_file = image_file.convert('1') #轉換成二值化圖像
 image_file.save('result.png')
 
 '''
@@ -21,12 +21,12 @@ convert_image.save(filename1)
 '''
 
 image_file = Image.open(filename0)
-black_and_white = image_file.convert('1')
+black_and_white = image_file.convert('1')	#轉換成二值化圖像
 #black_and_white.show() #顯示圖片
 black_and_white.save(filename2)
 
 image_file = Image.open(filename0)
-gray_iamge = image_file.convert('L')
+gray_iamge = image_file.convert('L')	#轉換成灰階圖像
 #gray_iamge.show()  #顯示圖片
 gray_iamge.save(filename3) 
 

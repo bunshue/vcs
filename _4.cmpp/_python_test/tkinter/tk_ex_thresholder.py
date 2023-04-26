@@ -50,7 +50,7 @@ filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/human2.jpg'
 window = Tk()
 im = Image.open(filename)
 if im.mode != "L":
-    im = im.convert("L")
+    im = im.convert("L")	#轉換成灰階圖像
 
 #im.thumbnail((320,200))
 UI(window, im).pack()

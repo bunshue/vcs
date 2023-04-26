@@ -34,7 +34,7 @@ class PaintCanvas(Canvas):
         im = self.image.crop(xy)
 
         # process the image in some fashion
-        im = im.convert("L")
+        im = im.convert("L")	#轉換成灰階圖像
 
         self.image.paste(im, xy)
         self.repair(xy)
@@ -58,7 +58,7 @@ filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/human2.jpg'
 im = Image.open(filename)
 if im.mode != "RGB":
     print('圖片非RGB模式, 要轉成RGB格式')
-    im = im.convert("RGB")
+    im = im.convert("RGB")	#轉換成RGB圖像
 
 PaintCanvas(window, im).pack()
 

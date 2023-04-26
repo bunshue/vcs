@@ -1,8 +1,8 @@
-#PIL有九种不同模式: 1，L，P，RGB，RGBA，CMYK，YCbCr，I，F。
+#PIL有九種不同模式: 1，L，P，RGB，RGBA，CMYK，YCbCr，I，F。
 #呼叫預設程式開啟圖片
 
 '''
-PIL保存图片的方式，调用方法 Image.save() 即可，保存的是RGB格式的图片。
+PIL保存圖片的方式，調用方法 Image.save() 即可，保存的是RGB格式的圖片。
 
 '''
 
@@ -10,23 +10,23 @@ from PIL import Image
 
 filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/sample.jpg'
 
-image = Image.open(filename)    #读取的是RGB格式的图片
+image = Image.open(filename)    #讀取的是RGB格式的圖片
 image.show()
 
     
-# 输出图片维度
+# 輸出圖片維度
 print("image_shape: ", image.size)
 w, h = image.size
 print(w)
 print(h)
 
-#轉为二值图像，非黑即白。每个像素用8个bit表示，0表示黑，255表示白。
-image_1 = image.convert('1')
+#轉為二值圖像，非黑即白。每個像素用8個bit表示，0表示黑，255表示白。
+image_1 = image.convert('1')	#轉換成二值化圖像
 image_1.show()
 
-#轉为灰度图像，每个像素用8个bit表示，0表示黑，255表示白，其他数字表示不同的灰度。
-#转换公式：L = R * 299/1000 + G * 587/1000+ B * 114/1000。
-image_L = image.convert('L')
+#轉為灰度圖像，每個像素用8個bit表示，0表示黑，255表示白，其他數字表示不同的灰度。
+#轉換公式：L = R * 299/1000 + G * 587/1000+ B * 114/1000。
+image_L = image.convert('L')	#轉換成灰階圖像
 image_L.show()
 
 '''
