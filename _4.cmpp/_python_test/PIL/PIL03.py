@@ -7,18 +7,15 @@ filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/sample.jpg'
 image = Image.open(filename)
 
 im = image.convert('L')	#轉換成灰階圖像
+
 w, h = im.size
 print(w)
 print(h)
 
-#show picture here
-
-plt.imshow(image)
-#plt.imshow(im)
+#plt.imshow(image)
+plt.imshow(im)
 plt.show()
 
-
-'''
 crop = im.crop((w/2-300, h/2-300, w/2+300, h/2+300))
 
 print(w/2-300)
@@ -30,10 +27,16 @@ crop_hist = crop.histogram()
 
 ori = image.resize((600,600))  #修改圖像大小
 
+print('ori')
+print(ori)
+
 im = ori.convert('L')	#轉換成灰階圖像
 hist = im.histogram()
 
-r, g, b = ori.split()
+r, g, b = ori.split()   #r, g, b為三個通道的list
+print('r', r)
+print('g', g)
+print('b', b)
 r_hist = r.histogram()
 g_hist = g.histogram()
 b_hist = b.histogram()
@@ -50,4 +53,5 @@ plt.ylim(0,8000)
 plt.legend()
 
 plt.show()
-'''
+
+

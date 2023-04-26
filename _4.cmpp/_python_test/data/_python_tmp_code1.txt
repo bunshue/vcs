@@ -1,3 +1,28 @@
+
+
+JSON剖析器
+http://json.parser.online.fr/
+
+
+
+啟用一個測試用的本地端伺服器
+python -m http.server -d www
+
+瀏覽器輸入
+localhost:8000
+就可以看到www資料夾下的檔案列表
+
+DOM	Document Object Model
+
+
+
+now = datetime.now()
+filename = now.strftime("news-%y-%m-%d-%H-%M-%S.json")
+
+
+
+
+
 tk之string的用法
 
 radio_var = tk.StringVar()

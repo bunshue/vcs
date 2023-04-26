@@ -54,6 +54,7 @@ namespace vcs_Process5
             falg_program_running = false;
         }
 
+        int program_executed_time = 1;
         int count = 0;
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -70,7 +71,7 @@ namespace vcs_Process5
                     if (count == 120)
                     {
                         count = 0;
-                        richTextBox1.Text += "已100秒 開啟\n";
+                        richTextBox1.Text += "\n已100秒 開啟\n";
 
                         //開啟imsLink
                         Process process = new Process();    //創建一個進程用於調用外部程序
@@ -88,7 +89,7 @@ namespace vcs_Process5
                     if (process.ProcessName.ToLower() == program_name.ToLower())
                     {
                         flag_EnableRaisingEvents = true;
-                        richTextBox1.Text += "偵測到程式 " + program_name + " 被開啟, 時間 : " + DateTime.Now.ToString() + "\n";
+                        richTextBox1.Text += "\n第 " + (program_executed_time++).ToString() + " 次偵測到程式 " + program_name + " 被開啟, 時間 : " + DateTime.Now.ToString() + "\n";
                         process.EnableRaisingEvents = true;//設置進程終止時觸發的時間
                         process.Exited += new EventHandler(process_exited);//發現外部程序關閉即觸發方法process_exited
                         falg_program_running = true;

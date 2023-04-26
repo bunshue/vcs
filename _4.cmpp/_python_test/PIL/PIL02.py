@@ -35,12 +35,4 @@ for target_image in allfiles:
 	im.close()
 
 print("完成")
-
-
-filename = 'C:/______test_files/picture1.jpg'
-
-im = Image.open(filename)
-
-print(im.size,im.mode,im.format)
-
 	

@@ -3,33 +3,64 @@
 
 '''
 PIL保存圖片的方式，調用方法 Image.save() 即可，保存的是RGB格式的圖片。
-
 '''
 
+import numpy as np
+import torchvision.transforms as transforms
 from PIL import Image
 
 filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/sample.jpg'
 
 image = Image.open(filename)    #讀取的是RGB格式的圖片
-image.show()
+#image.show()
 
-    
-# 輸出圖片維度
+'''
+print('使用plt顯示圖片')
+import matplotlib.pyplot as plt
+plt.imshow(image)
+plt.show()
+'''
+
+#圖片維度 圖片資訊
 print("image_shape: ", image.size)
 w, h = image.size
 print(w)
 print(h)
 
+
+image_dim_len = len(np.array(image).shape)
+
+#image.show()
+print("The dim of Image: ", image_dim_len)
+
+print("RGB圖像的維度：", np.array(image).shape)
+
+
+# RGB轉換成灰階圖像
+image_transforms = transforms.Compose([
+transforms.Grayscale(1)
+])
+
+image = image_transforms(image)
+# 輸出灰度圖像的維度
+print("灰度圖像維度： ", np.array(image).shape)
+
+im = Image.open(filename)
+print(im.size,im.mode,im.format)
+
+
+#1
 #轉為二值圖像，非黑即白。每個像素用8個bit表示，0表示黑，255表示白。
 image_1 = image.convert('1')	#轉換成二值化圖像
-image_1.show()
+#image_1.show()
 
+'''
+#L
 #轉為灰度圖像，每個像素用8個bit表示，0表示黑，255表示白，其他數字表示不同的灰度。
 #轉換公式：L = R * 299/1000 + G * 587/1000+ B * 114/1000。
 image_L = image.convert('L')	#轉換成灰階圖像
 image_L.show()
 
-'''
 #P
 image_P = image.convert('P')
 image_P.show()
@@ -58,5 +89,20 @@ image_I.show()
 image_F = image.convert('F')
 image_F.show()
 '''
+
+print('影像存圖')
+print('將二值畫圖像存圖')
+image_1.save('image_1.png')
+
+'''
+
+image_file = Image.open(filename)
+r, g, b = image_file.split()
+convert_image = image_file.merge('RGB', (b, g, r))
+convert_image.save('image_bgr.png')
+'''
+
+
+
 
 print('OK')
