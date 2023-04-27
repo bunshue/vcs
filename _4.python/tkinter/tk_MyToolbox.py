@@ -18,8 +18,8 @@ window.title(title)
 # 設定主視窗之背景色
 window.configure(bg="#7AFEC6")
 
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/python.ico'
-window.iconbitmap(filename) #設定icon
+#filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/python.ico'
+#window.iconbitmap(filename) #設定icon
 
 show_mesg = tk.StringVar()
 
@@ -31,47 +31,61 @@ window.columnconfigure(1, weight = 1)
 window.columnconfigure(2, weight = 1)
 window.columnconfigure(3, weight = 1)
 
-def button00Click():
-    print('你按了 button00')
-    show_mesg.set("執行命令 : \n")
-def button01Click():
-    print('你按了 button01')
-    show_mesg.set("執行命令 : \n")
-def button02Click():
-    print('你按了 button02')
-    show_mesg.set("執行命令 : \n")
-def button03Click():
-    print('你按了 button03')
-    show_mesg.set("執行命令 : \n")
-def button10Click():
-    print('你按了 button10')
-    show_mesg.set("執行命令 : \n")
-def button11Click():
-    print('你按了 button11')
-    show_mesg.set("執行命令 : \n")
-def button12Click():
-    print('你按了 button12')
-    show_mesg.set("執行命令 : \n")
-def button13Click():
-    print('你按了 button13')
-    show_mesg.set("執行命令 : \n")
+def buttonClick(cmd):
+    #print('你按了 ', cmd)
+    show_mesg.set("執行命令 : " +  cmd)
+    if cmd == 'button00':
+        doFunction00()
+    elif cmd == 'button01':
+        doFunction01()
+    elif cmd == 'button02':
+        doFunction02()
+    elif cmd == 'button03':
+        doFunction03()
+    elif cmd == 'button10':
+        doFunction10()
+    elif cmd == 'button11':
+        doFunction11()
+    elif cmd == 'button12':
+        doFunction12()
+    elif cmd == 'button13':
+        doFunction13()
+    else:
+        print('XXXXXXXXXXXXXXXXXXXXXXXX')
 
-button00 = tk.Button(window, text='(0, 0)', width = 20, height = 3, bg = 'white', fg = 'black', command = button00Click)
+def doFunction00():
+    print('執行 doFunction00')
+def doFunction01():
+    print('執行 doFunction01')
+def doFunction02():
+    print('執行 doFunction02')
+def doFunction03():
+    print('執行 doFunction03')
+def doFunction10():
+    print('執行 doFunction10')
+def doFunction11():
+    print('執行 doFunction11')
+def doFunction12():
+    print('執行 doFunction12')
+def doFunction13():
+    print('執行 doFunction13')
+
+button00 = tk.Button(window, text='(0, 0)', width = 20, height = 3, bg = 'white', fg = 'black', command = lambda:buttonClick('button00'))   #給參數
 button00.grid(row = 0, column = 0, padx = 5, pady = 5)
-button01 = tk.Button(window, text='(0, 1)', width = 20, height = 3, bg = 'white', fg = 'black', command = button01Click)
+button01 = tk.Button(window, text='(0, 1)', width = 20, height = 3, bg = 'white', fg = 'black', command = lambda:buttonClick('button01'))   #給參數
 button01.grid(row = 0, column = 1, padx = 5, pady = 5)
-button02 = tk.Button(window, text='(0, 2)', width = 20, height = 3, bg = 'white', fg = 'black', command = button02Click)
+button02 = tk.Button(window, text='(0, 2)', width = 20, height = 3, bg = 'white', fg = 'black', command = lambda:buttonClick('button02'))   #給參數
 button02.grid(row = 0, column = 2, padx = 5, pady = 5)
-button03 = tk.Button(window, text='(0, 3)', width = 20, height = 3, bg = 'white', fg = 'black', command = button03Click)
+button03 = tk.Button(window, text='(0, 3)', width = 20, height = 3, bg = 'white', fg = 'black', command = lambda:buttonClick('button03'))   #給參數
 button03.grid(row = 0, column = 3, padx = 5, pady = 5)
 
-button10 = tk.Button(window, text='(1, 0)', width = 20, height = 3, bg = 'white', fg = 'black', command = button10Click)
+button10 = tk.Button(window, text='(1, 0)', width = 20, height = 3, bg = 'white', fg = 'black', command = lambda:buttonClick('button10'))   #給參數
 button10.grid(row = 1, column = 0, padx = 5, pady = 5)
-button11 = tk.Button(window, text='(1, 1)', width = 20, height = 3, bg = 'white', fg = 'black', command = button11Click)
+button11 = tk.Button(window, text='(1, 1)', width = 20, height = 3, bg = 'white', fg = 'black', command = lambda:buttonClick('button11'))   #給參數
 button11.grid(row = 1, column = 1, padx = 5, pady = 5)
-button12 = tk.Button(window, text='(1, 2)', width = 20, height = 3, bg = 'white', fg = 'black', command = button12Click)
+button12 = tk.Button(window, text='(1, 2)', width = 20, height = 3, bg = 'white', fg = 'black', command = lambda:buttonClick('button12'))   #給參數
 button12.grid(row = 1, column = 2, padx = 5, pady = 5)
-button13 = tk.Button(window, text='(1, 3)', width = 20, height = 3, bg = 'white', fg = 'black', command = button13Click)
+button13 = tk.Button(window, text='(1, 3)', width = 20, height = 3, bg = 'white', fg = 'black', command = lambda:buttonClick('button13'))   #給參數
 button13.grid(row = 1, column = 3, padx = 5, pady = 5)
 
 #像是richTextBox
