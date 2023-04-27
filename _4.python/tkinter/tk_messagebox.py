@@ -4,10 +4,7 @@
 
 import tkinter as tk
 from tkinter import ttk
-import tkinter.messagebox as messagebox
-#from tkinter import messagebox
-
-import tkinter.messagebox as msg
+import tkinter.messagebox
 
 '''
 參考
@@ -15,18 +12,18 @@ https://docs.python.org/3/library/tkinter.messagebox.html
 '''
 
 def ask_yes_no():
-    # answer = messagebox.askquestion('Title', 'Body')
+    # answer = tkinter.messagebox.askquestion('Title', 'Body')
     # print(answer)
-    messagebox.showerror('Info title', 'Here is some information')
+    tkinter.messagebox.showerror('Info title', 'Here is some information')
 
 def error_mesg_box():
-    messagebox.showerror(title='錯誤',
+    tkinter.messagebox.showerror(title='錯誤',
                          message=('錯誤訊息1\n' +
                                   '錯誤訊息2\n' +
                                   '錯誤訊息3\n' +
                                   '錯誤訊息4'))
 def ask_yes_no2():
-    response = msg.askyesno('糟糕!!!', '還好嗎？')
+    response = tkinter.messagebox.askyesno('糟糕!!!', '還好嗎？')
     if(response==True):
         print('沒問題');
     else:
@@ -74,10 +71,11 @@ msg.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
 
-
+def func1():
+    if tkinter.messagebox.askyesno("關閉窗口","確認關閉窗口嗎"):
+        window.destroy()
+window.protocol("WM_DELETE_WINDOW",func1)
 
 window.mainloop()
-
-#window.destroy() # optional; see description below
 
 
