@@ -4141,6 +4141,440 @@ $ 匹配一行的結束。 例如正則表達式 food$ 能夠匹配到 “he's  
 
 
 
+
+
+typedef double point[3];
+
+point v[] =
+{
+    {0.0, 0.0, 1.0},
+    {0.0, 0.942809, -0.33333},
+    {-0.816497, -0.471405, -0.333333},
+    {0.816497, -0.471405, -0.333333}
+};
+
+    point v1, v2, v3;
+        normal(v1);
+
+
+/* normalize a vector */
+void normal(point p)
+{
+    double d = 0.0;
+    int i;
+    for (i = 0; i < 3; i++)
+    {
+        d += p[i] * p[i];
+    }
+    d = sqrt(d);
+    if (d > 0.0)
+    {
+        for (i = 0; i < 3; i++)
+        {
+            p[i] /= d;
+        }
+    }
+}
+
+
+
+
+
+
+            string dir1 = @"C:\______test_files\compare1";
+
+            string[] file_names1 = Directory.GetFiles(dir1);
+            for (int i = 0; i < file_names1.Length; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + file_names1[i] + "\n";
+                file_names1[i] = file_names1[i].Replace(dir1, "");
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + file_names1[i] + "\n";
+            }
+            Array.Sort(file_names1);
+
+            List<string> name_list = new List<string>();
+            for (int i = 0; i < file_names1.Length; i++)
+            {
+                richTextBox1.Text += "i = " + i.ToString() + "\t" + file_names1[i] + "\n";
+                name_list.Add(file_names1[i]);
+
+            }
+
+
+            DirectoryInfo dir1_info = new DirectoryInfo(dir1);
+            FileInfo[] fi = dir1_info.GetFiles();
+
+            int len = fi.Length;
+            richTextBox1.Text += "len = " + len.ToString() + "\n";
+
+            for (int i = 0; i < len; i++)
+            {
+                richTextBox1.Text += fi[i].Name + "\n";
+
+            }
+
+
+
+
+//以下未預設值, 寫不寫都一樣
+//gluOrtho2D(-1.0, 1.0, -1.0, 1.0);   //窗口座標範圍2D, 顯示範圍 : X軸(-1.0 ~ 1.0) Y軸(-1.0 ~ 1.0), 左下為原點
+
+
+
+/* Address in MSF format */
+struct cdrom_msf0
+{
+	__u8	minute;
+	__u8	second;
+	__u8	frame;
+};
+
+/* Address in either MSF or logical format */
+union cdrom_addr
+{
+	struct cdrom_msf0	msf;
+	int			lba;
+};
+
+
+
+typedef struct {
+    int data;
+    int audio;
+    int cdi;
+    int xa;
+    long error;
+} tracktype;
+
+
+
+
+
+---------util.h---------
+// Define Data type
+
+typedef unsigned int       INT32U;
+typedef unsigned short int INT16U;
+typedef unsigned char      INT8U;
+typedef int                INT32;
+typedef short int          INT16;
+typedef char               INT8;
+typedef unsigned char      BOOLEAN;
+#define true               (1 == 1)
+#define false              (0 == 1)
+#define OK                 true
+#define NG                 false
+// macro definition
+#define READ_REG_INT32U(Addr)        *((INT32U*)(Addr))
+#define WRITE_REG_INT32U(Addr,Value) *((INT32U*)(Addr))=Value
+#define READ_REG_INT8U(Addr)         *((INT8U*)(Addr))
+#define WRITE_REG_INT8U(Addr,Value)  *((INT8U*)(Addr))=Value
+
+
+
+bool animate = true;
+
+        animate ^= 1;
+
+
+// display image to the screen as textured quad
+void displayImage(GLuint texture)
+{
+    glBindTexture(GL_TEXTURE_2D, texture);	//綁定紋理
+    glEnable(GL_TEXTURE_2D);
+    glDisable(GL_DEPTH_TEST);
+    glDisable(GL_LIGHTING);
+    glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+
+    glMatrixMode(GL_PROJECTION);
+    glPushMatrix();
+    glLoadIdentity();	//設置單位矩陣
+    glOrtho(-1.0, 1.0, -1.0, 1.0, -1.0, 1.0);
+
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();	//設置單位矩陣
+
+    glViewport(0, 0, window_width, window_height);
+
+    // if the texture is a 8 bits UI, scale the fetch with a GLSL shader
+
+    glBegin(GL_QUADS);
+    glTexCoord2f(0.0, 0.0);
+    glVertex3f(-1.0, -1.0, 0.5);
+    glTexCoord2f(1.0, 0.0);
+    glVertex3f(1.0, -1.0, 0.5);
+    glTexCoord2f(1.0, 1.0);
+    glVertex3f(1.0, 1.0, 0.5);
+    glTexCoord2f(0.0, 1.0);
+    glVertex3f(-1.0, 1.0, 0.5);
+    glEnd();
+
+    glMatrixMode(GL_PROJECTION);
+    glPopMatrix();
+
+    glDisable(GL_TEXTURE_2D);
+
+    SDK_CHECK_ERROR_GL();
+}
+
+
+void runAutoTest(int argc, char** argv, const char* filename, int kernel_param)
+{
+
+
+
+//這邊擷取出來讀取bmp的部分
+
+    const char* image_path = sdkFindFilePath("portrait_noise.bmp", argv[0]);
+
+    if (image_path == NULL)
+    {
+        printf(
+            "imageDenoisingGL was unable to find and load image file "
+            "<portrait_noise.bmp>.\nExiting...\n");
+        exit(EXIT_FAILURE);
+    }
+
+    LoadBMPFile(&h_Src1, &imageW, &imageH, image_path);
+    printf("Data init done.\n");
+
+    checkCudaErrors(CUDA_MallocArray(&h_Src1, imageW, imageH));
+
+    TColor* d_dst = NULL;
+    unsigned char* h_dst = NULL;
+    checkCudaErrors(cudaMalloc((void**)&d_dst, imageW * imageH * sizeof(TColor)));
+    h_dst = (unsigned char*)malloc(imageH * imageW * 4);
+
+    {
+        g_Kernel = kernel_param;
+        printf("[AutoTest]: %s <%s>\n", sSDKsample, filterMode[g_Kernel]);
+
+        checkCudaErrors(cudaDeviceSynchronize());
+
+        checkCudaErrors(cudaMemcpy(h_dst, d_dst, imageW * imageH * sizeof(TColor),
+            cudaMemcpyDeviceToHost));
+        sdkSavePPM4ub(filename, h_dst, imageW, imageH);
+    }
+
+    checkCudaErrors(CUDA_FreeArray());
+    free(h_Src1);
+
+    checkCudaErrors(cudaFree(d_dst));
+    free(h_dst);
+
+    printf("\n[%s] -> Kernel %d, Saved: %s\n", sSDKsample, kernel_param, filename);
+
+    exit(g_TotalErrors == 0 ? EXIT_SUCCESS : EXIT_FAILURE);
+}
+
+
+
+
+
+
+
+    glDeleteTextures(1, &texture);
+    if (imgBuf)
+    {
+        delete[] imgBuf;
+        imgBuf = nullptr;
+    }
+
+
+
+
+
+
+/** CUDA Runtime API Version */
+#define CUDART_VERSION  11070
+
+
+#if CUDART_VERSION >= 2020
+
+    if (!deviceProp.canMapHostMemory)
+    {
+        fprintf(stderr, "Device %d does not support mapping CPU host memory!\n", idev);
+
+        exit(EXIT_SUCCESS);
+    }
+
+    checkCudaErrors(cudaSetDeviceFlags(cudaDeviceMapHost));
+#else
+    fprintf(stderr,
+        "CUDART version %d.%d does not support "
+        "<cudaDeviceProp.canMapHostMemory> field\n",
+        , CUDART_VERSION / 1000, (CUDART_VERSION % 100) / 10);
+
+    exit(EXIT_SUCCESS);
+#endif
+
+
+
+
+
+// Device code: 送入GPU執行的部分
+
+__global__ void VecAdd(float* A, float* B, float* C)
+{
+:
+:
+}
+            
+// Host code: 送入CPU執行的部分
+
+int main()
+{
+:
+:
+
+
+
+	// 動態分配位於"host(CPU) 記憶體" 的向量
+	float* h_A = (float*)malloc(size);
+	// 隨機初始化輸入向量
+	for(i = 0; i < N; i++){
+		h_A[i] = (float)rand() / (float)RAND_MAX;
+	}
+
+	// 動態分配位於"device(GPU) 記憶體"的向量
+	float* d_A;
+	cudaMalloc(&d_A, size); // cudaError_t cudaMalloc ( void** devPtr, size_t size )
+	
+	
+	// 將向量從 CPU 複製到 GPU
+	cudaMemcpy(d_A, h_A, size, cudaMemcpyHostToDevice);
+	
+
+	// 將 device code 送入 GPU 並執行，執行時一個 Grid 只有一個 block ，一個 block 有 N 個 thread
+	VecAdd<<<1, N>>>(d_A, d_B, d_C);	
+
+
+	// 將算好的向量從 GPU 複製到 CPU
+	cudaMemcpy(h_C, d_C, size, cudaMemcpyDeviceToHost);
+
+	// 印出運算結果
+	printf("%f ", h_C[i]);
+
+
+	// 釋放 GPU 記憶體
+	cudaFree(d_A);
+	cudaFree(d_B);
+	cudaFree(d_C);
+ 
+	// 釋放 CPU 記憶體
+    free(h_A);
+	free(h_B);
+	free(h_C);
+	
+
+    
+
+
+#if __CUDA_ARCH__ < 700
+        return *(volatile unsigned char*)arrived;
+#else
+        unsigned int result;
+        asm volatile("ld.acquire.sys.global.u8 %0, [%1];"
+            : "=r"(result)
+            : "l"(arrived)
+            : "memory");
+        return result;
+#endif
+
+
+
+
+
+
+
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+gluLookAt
+
+   gluLookAt(0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0)
+1. gluLookAt(0.0, 0.0, 5.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+
+相當于我們的腦袋位置在(0.0,0.0,5.0)處，
+眼睛望向(0.0,0.0,0.0),即原點。
+后面的三個參數(0.0,1.0,0.0),y軸為1，其余為0，表示腦袋朝上，就是正常的情況。
+壺嘴在右，壺柄在坐，壺底在下，壺蓋在上。
+ 
+2.將gluLookAt的后三個參數設置為（0.0,-1.0,0.0）,即y軸為-1,其余為0。這樣表示腦袋向下，即人眼倒著看
+
+
+
+3.修改gluLookAt的后三個參數為（1.0,0.0,0.0）;
+x軸為1，其余為0.
+即人的腦袋像右歪90度來看，即順時針轉90度（換個角度思考就是壺逆時針轉90度）
+，猜想看到的結果應該是壺嘴在上，壺蓋在右，壺底在左，壺柄在下。如下圖：
+
+ 
+ 
+gluLookAt的參數，
+前三個參數表示的是腦袋的位置，
+中間三個參數是人眼的朝向，
+后三個位置表示的是腦袋朝向的方向。
+
+ 
+在默認情況下，照相機位于原點，指向z軸的負方向，朝上向量為(0,1,0)。
+ 
+可以修改原來的代碼。把視圖變換函數gluLookAt()函數，改為模型變換函數glTranslatef(),并使用參數(0.0,0.0,-5.0)。這個函數的效果和使用gluLookAt()函數的效果是完全相同的，原因：
+
+
+gluLookAt()函數是通過移動照相機（使用試圖變換）來觀察這個立方體，
+glTranslatef()函數是通過移動茶壺（使用模型變換）。
+
+//--------------------------------------------------------------------------------------------------------------------------
+
+選單範例
+
+
+openGL
+最小化可用之openGL
+有視窗之範例
+有讀寫檔案之範例
+
+
+			
+
+
+//------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+//------------------------------------------------------------------------------
+
+
+
+
+
+
+
+//------------------------------------------------------------------------------
+
+
+
+
+
+
+
+//------------------------------------------------------------------------------
+
+
+
+
+
+
+//------------------------------------------------------------------------------
+
+
+
    
 
 
@@ -5972,6 +6406,7 @@ old 暫存一下
 
         				
 //--------------------------------------------------------------------------------------------------------------------------
+
 
 
 

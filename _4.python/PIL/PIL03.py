@@ -8,24 +8,23 @@ image = Image.open(filename)
 
 im = image.convert('L')	#轉換成灰階圖像
 
-w, h = im.size
-print(w)
-print(h)
-
-#plt.imshow(image)
-plt.imshow(im)
+#plt.imshow(image)  #原圖
+plt.imshow(im)      #灰階圖
 plt.show()
 
-crop = im.crop((w/2-300, h/2-300, w/2+300, h/2+300))
+w, h = im.size
+print('寬 : ', w, '高 : ', h)
 
-print(w/2-300)
-print(h/2-300)
-print(w/2+300)
-print(h/2+300)
+crop = im.crop((w / 2 - 300, h / 2 - 300, w / 2 + 300, h / 2 + 300))
+
+print(w / 2 - 300)
+print(h / 2 - 300)
+print(w / 2 + 300)
+print(h / 2 + 300)
 
 crop_hist = crop.histogram()
 
-ori = image.resize((600,600))  #修改圖像大小
+ori = image.resize((600, 600))  #修改圖像大小
 
 print('ori')
 print(ori)
@@ -48,8 +47,8 @@ plt.plot(ind, hist, color='black', lw=2, label='original')
 plt.plot(ind, r_hist, color='red', label='Red Plane')
 plt.plot(ind, g_hist, color='green', label='Green Plane')
 plt.plot(ind, g_hist, color='blue', label='Blue Plane')
-plt.xlim(0,255)
-plt.ylim(0,8000)
+plt.xlim(0, 255)
+plt.ylim(0, 8000)
 plt.legend()
 
 plt.show()

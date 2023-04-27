@@ -21,7 +21,7 @@ if not os.path.exists(target_dir):
 logo_filename = 'C:/______test_files2/logo.png'
 logo = Image.open(logo_filename)
 
-logo = logo.resize((150,150))   #修改圖像大小
+logo = logo.resize((150, 150))   #修改圖像大小
 
 for target_image in allfiles:
 	pathname, filename = os.path.split(target_image)
@@ -29,9 +29,9 @@ for target_image in allfiles:
 	if filename[0] == '.': continue  # Only for MacOS to skip the hidden files
 	im = Image.open(target_image)
 	w, h = im.size
-	im = im.resize((800, int(800/float(w) * h)))
-	im.paste(logo, (0,0), logo)
-	im.save(target_dir+'/'+filename)
+	im = im.resize((800, int(800 / float(w) * h)))
+	im.paste(logo, (0, 0), logo)
+	im.save(target_dir + '/' + filename)
 	im.close()
 
 print("完成")

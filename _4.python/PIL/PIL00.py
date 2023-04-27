@@ -1,10 +1,6 @@
 #PIL有九種不同模式: 1，L，P，RGB，RGBA，CMYK，YCbCr，I，F。
 #呼叫預設程式開啟圖片
 
-'''
-PIL保存圖片的方式，調用方法 Image.save() 即可，保存的是RGB格式的圖片。
-'''
-
 import numpy as np
 import torchvision.transforms as transforms
 from PIL import Image
@@ -21,32 +17,23 @@ plt.imshow(image)
 plt.show()
 '''
 
-#圖片維度 圖片資訊
-print("image_shape: ", image.size)
+print('圖片維度 圖片資訊')
+print('Size : ', image.size, 'Mode : ', image.mode, 'Format : ', image.format)
 w, h = image.size
-print(w)
-print(h)
-
-
-image_dim_len = len(np.array(image).shape)
-
-#image.show()
-print("The dim of Image: ", image_dim_len)
+print('寬 : ', w, '高 : ', h)
 
 print("RGB圖像的維度：", np.array(image).shape)
-
+image_dim_len = len(np.array(image).shape)
+print("The dim of Image: ", image_dim_len)
 
 # RGB轉換成灰階圖像
-image_transforms = transforms.Compose([
-transforms.Grayscale(1)
-])
+image_transforms = transforms.Compose([transforms.Grayscale(1)])
 
 image = image_transforms(image)
 # 輸出灰度圖像的維度
 print("灰度圖像維度： ", np.array(image).shape)
-
-im = Image.open(filename)
-print(im.size,im.mode,im.format)
+image_dim_len = len(np.array(image).shape)
+print("The dim of Image: ", image_dim_len)
 
 
 #1
@@ -90,12 +77,19 @@ image_F = image.convert('F')
 image_F.show()
 '''
 
+'''
+#90度旋轉的圖片
+image_90 = image.transpose(Image.ROTATE_90)
+image_90.show()
+'''
+
+#PIL保存圖片的方式，調用方法 Image.save() 即可
 print('影像存圖')
 print('將二值畫圖像存圖')
 image_1.save('image_1.png')
 
-'''
 
+'''  ???
 image_file = Image.open(filename)
 r, g, b = image_file.split()
 convert_image = image_file.merge('RGB', (b, g, r))

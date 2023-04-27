@@ -1,3 +1,7 @@
+'''
+新北市公共自行車即時資訊
+'''
+
 import urllib.request   #用來建立請求
 import zipfile
 import csv

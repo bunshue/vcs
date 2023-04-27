@@ -76,4 +76,22 @@ for i in range(0, 6):
     print(myList[i], end = " ")
 
 
+print('')
+print('多維list')
+
+data = list()
+
+data.append((1, 'Banana', 777))
+data.append((2, 'Eagle', 111))
+data.append((3, 'Giraffe', 222))
+data.append((5, 'Apple', 333))
+data.append((6, 'India', 555))
+data.append((7, 'Happy', 999))
+data.append((8, 'Frog', 666))
+data.append((9, 'Dog', 888))
+             
+print(data)
+
+
+
 
