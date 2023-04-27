@@ -13,7 +13,7 @@ scores = {'國文':{'王小明':65,'李小美':90,'陳大同':81,'林小玉':79}
 df = pd.DataFrame(scores)
 
 print("另存新檔");
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/score_this.csv'
+filename = 'C:/______test_files3/score_this.csv'
 df.to_csv(filename, encoding='utf-8-sig')
 print("寫入完成")
 
@@ -23,7 +23,7 @@ print('pandas 讀取 csv檔')
 import numpy as np
 
 print("讀取 .csv 檔 1")
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/scores.csv'
+filename = 'C:/______test_files2/scores.csv'
 na = np.genfromtxt(filename, delimiter=',', skip_header=1)
 print("資料寬高")
 print(na.shape)
@@ -42,7 +42,7 @@ print('全班最高總分：',total2.max())
 print('pandas 讀取 csv檔')
 
 import pandas as pd
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/scores2.csv'
+filename = 'C:/______test_files2/scores2.csv'
 data = pd.read_csv(filename, header=0, index_col=0)
 print('打印資料')
 print(data)
@@ -51,7 +51,7 @@ print(data)
 
 
 
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/score333.csv'
+filename = 'C:/______test_files3/score333.csv'
 
 import pandas as pd
 datas = [[65,92,78,83,70], [90,72,76,93,56], [81,85,91,89,77], [79,53,47,94,80]]
@@ -70,7 +70,7 @@ print(data)
 
 
 
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/score444.json'
+filename = 'C:/______test_files3/score444.json'
 
 import pandas as pd
 datas = [[65,92,78,83,70], [90,72,76,93,56], [81,85,91,89,77], [79,53,47,94,80]]
@@ -88,7 +88,7 @@ data = pd.read_json(filename, typ='series')
 print(data)
 
 
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/score555.xlsx'
+filename = 'C:/______test_files3/score555.xlsx'
 
 import pandas as pd
 datas = [[65,92,78,83,70], [90,72,76,93,56], [81,85,91,89,77], [79,53,47,94,80]]

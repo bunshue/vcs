@@ -285,7 +285,7 @@ image = Image.open("captcha.png").convert("L")	#轉換成灰階圖像
 
 簡易播放一檔
 
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/captcha02.png'
+filename = 'C:/______test_files2/captcha02.png'
 
 from matplotlib import pyplot as plt
 img = cv2.imread(filename)

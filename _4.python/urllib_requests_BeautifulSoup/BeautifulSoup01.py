@@ -5,7 +5,7 @@ from bs4 import BeautifulSoup
 from urllib.request import urlopen
 
 # 讀檔
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/beautifulsoup_data.html'
+filename = 'C:/______test_files2/beautifulsoup_data.html'
 
 html_data = ""
 with open(filename, "r", encoding="big5") as file:

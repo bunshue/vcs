@@ -37,7 +37,7 @@
 import time
 import sqlite3
 
-db_filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/db_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
+db_filename = 'C:/______test_files3/db_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
 
 #print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename) # 建立資料庫連線
@@ -279,7 +279,7 @@ conn.close()  # 關閉資料庫連線
 import time
 import sqlite3
 
-db_filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/ddb_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
+db_filename = 'C:/______test_files3/ddb_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
 
 #print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename) # 建立資料庫連線

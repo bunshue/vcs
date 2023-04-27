@@ -1,7 +1,7 @@
 print('可下載成 .mp4 檔案')
 
 #下載資料夾
-foldername = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/youtube_download'
+foldername = 'C:/______test_files3/youtube_download'
 
 from pytube import YouTube
 

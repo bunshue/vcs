@@ -3,7 +3,7 @@ from pytube import YouTube
 import re
 
 #下載資料夾
-foldername = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/youtube_download'
+foldername = 'C:/______test_files3/youtube_download'
 
 videourlList = []  #儲存所有影片網址的串列
 

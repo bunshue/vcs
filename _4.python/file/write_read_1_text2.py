@@ -1,7 +1,7 @@
 #各種檔案寫讀範例 txt 2
 
 
-filename_rw2 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/sample5.txt'
+filename_rw2 = 'C:/______test_files3/sample5.txt'
 
 content='''Hello Python
 中文字測試
@@ -77,7 +77,7 @@ for line in f:
 f.close()
 '''
 
-filename_rw3 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/Presidents.txt'
+filename_rw3 = 'C:/______test_files3/Presidents.txt'
 
 # Open file for output
 outfile = open(filename_rw3, "w")
@@ -90,7 +90,7 @@ outfile.write("Barack Obama")
 outfile.close() # Close the output file
 
 
-filename_rw4 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/Info.txt'
+filename_rw4 = 'C:/______test_files3/Info.txt'
 # Open file for appending data
 outfile = open(filename_rw4, "a")
 outfile.write("\nPython is interpreted\n")
@@ -100,7 +100,7 @@ outfile.close() # Close the input file
 
 import random
 
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/numbers.txt'
+filename = 'C:/______test_files3/numbers.txt'
 
 # Open file for writing data
 outfile = open(filename, "w")
@@ -120,7 +120,7 @@ infile.close() # Close the file
 
 
 
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/Presidents.txt'
+filename = 'C:/______test_files2/Presidents.txt'
 
 fp = open(filename, "r")
 zops = fp.readlines()
@@ -137,7 +137,7 @@ print()
 
 
 print('讀出檔案 1 英文')
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/demo_en.txt'
+filename = 'C:/______test_files2/demo_en.txt'
 file = open(filename, "r")
 
 content = file.read()
@@ -146,7 +146,7 @@ print(content)
 file.close()
 
 print('讀出檔案 2 中文')
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/demo_ch.txt'
+filename = 'C:/______test_files2/demo_ch.txt'
 file = open(filename, "r", encoding="utf-8")
 
 content = file.read()
@@ -155,7 +155,7 @@ print(content)
 file.close()
 
 print('讀出檔案 3')
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/demo_en.txt'
+filename = 'C:/______test_files2/demo_en.txt'
 file = open(filename, "r")
 
 lines = file.readlines()
@@ -164,14 +164,14 @@ print(lines)
 file.close()
 
 print('讀出檔案 4')
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/demo_en.txt'
+filename = 'C:/______test_files2/demo_en.txt'
 with open(filename, "r") as file:
     content = file.read()
     print(content)
 
 
 print('寫入檔案')
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/demo_en222.txt'
+filename = 'C:/______test_files3/demo_en222.txt'
 
 file = open(filename, "a")
 

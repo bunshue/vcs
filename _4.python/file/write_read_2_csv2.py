@@ -1,4 +1,4 @@
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/info.csv'
+filename = 'C:/______test_files2/info.csv'
 
 with open(filename, 'rt') as fp:
     data = fp.readlines()

@@ -1,7 +1,7 @@
 import os, time, glob, sys, shutil
 
-source_dir = 'C:/_git/vcs/_4.cmpp/_python_test/data/source_pic'
-target_dir = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/photos'
+source_dir = 'C:/______test_files2/source_pic'
+target_dir = 'C:/______test_files3/photos'
 if not os.path.exists(target_dir):
         os.makedirs(target_dir, exist_ok=True)
 

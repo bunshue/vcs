@@ -4,7 +4,7 @@ import time
 import requests
 from bs4 import BeautifulSoup
 
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/kkbox_songs.csv'
+filename = 'C:/______test_files3/kkbox_songs.csv'
 
 # KKBOX華語新歌日榜
 url = "https://kma.kkbox.com/charts/api/v1/daily?category=390&lang=tc&limit=50&terr=tw&type=newrelease"

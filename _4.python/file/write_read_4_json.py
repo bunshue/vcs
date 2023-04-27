@@ -2,7 +2,7 @@
 
 import json, datetime
 
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/data_earthquake.json'
+filename = 'C:/______test_files2/data_earthquake.json'
 fp = open(filename, 'r')
 earthquakes = json.load(fp)
 
@@ -98,7 +98,7 @@ print('測試完成')
 
 
 
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/jdata.json'
+filename = 'C:/______test_files2/jdata.json'
 
 import pprint as pp
 import json

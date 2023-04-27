@@ -113,8 +113,8 @@ plt.show()
 
 
 '''
-#foldername = 'C:/_git/vcs/_4.cmpp/_python_test/data/source_pic'
-foldername = 'C:/_git/vcs/_4.cmpp/_python_test/data'
+#foldername = 'C:/______test_files2/source_pic'
+foldername = 'C:/______test_files2'
 
 import numpy as np
 import matplotlib.pyplot as plt

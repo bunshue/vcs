@@ -1,6 +1,6 @@
 # imshow 集合
 
-selected_font = 'C:/_git/vcs/_4.cmpp/_python_test/data/msch.ttf'
+selected_font = 'C:/______test_files2/msch.ttf'
 filename = 'C:/______test_files/_emgu/lena.jpg'
 
 import matplotlib.pyplot as plt
@@ -165,7 +165,7 @@ im = plt.imshow(Z, interpolation='bilinear', cmap=cm.gray,
                 origin='lower', extent=[-3, 3, -3, 3])
 '''
 im.set_url('https://www.google.com/')
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/image.svg'
+filename = 'C:/______test_files3/image.svg'
 fig.savefig(filename)
 print('已存圖' + filename)
 '''

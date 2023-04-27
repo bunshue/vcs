@@ -2,8 +2,8 @@ import os
 
 def main():
 
-    filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/human2.jpg'
-    foldername = 'C:/_git/vcs/_4.cmpp/_python_test/data'
+    filename = 'C:/______test_files2/human2.jpg'
+    foldername = 'C:/______test_files2'
    
     # Display the size
     try:

@@ -22,7 +22,7 @@ print(html_data)
 print('OK')
 
 print('資料寫出到本地檔案')
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/perl.html'
+filename = 'C:/______test_files3/perl.html'
 fd = open(filename, "w")
 fd.write(html_data)
 fd.close()
@@ -43,7 +43,7 @@ print(data)
 print('OK')
 
 print('資料寫出到本地檔案')
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/b2.html'
+filename = 'C:/______test_files3/b2.html'
 fd = open(filename, "wb")
 fd.write(data)
 fd.close()
@@ -67,7 +67,7 @@ data = urllib.request.urlopen(url).read()
 print(data)
 
 print('資料寫出到本地檔案')
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/bbb.html'
+filename = 'C:/______test_files3/bbb.html'
 fd = open(filename, "wb")
 fd.write(data)
 fd.close()
@@ -130,7 +130,7 @@ data = a.read()
 #data = data.decode('UTF-8')
 #print(data)
 print('資料寫出到本地檔案')
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/tmp.html'
+filename = 'C:/______test_files3/tmp.html'
 fd = open(filename, "wb")
 fd.write(data)
 fd.close()

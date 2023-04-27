@@ -72,8 +72,8 @@ class UI(Label):
         self.update_idletasks()
 
 
-filename1 = 'C:/_git/vcs/_4.cmpp/_python_test/data/human.jpg'
-filename2 = 'C:/_git/vcs/_4.cmpp/_python_test/data/human2.jpg'
+filename1 = 'C:/______test_files2/human.jpg'
+filename2 = 'C:/______test_files2/human2.jpg'
 
 filename = filename1
 

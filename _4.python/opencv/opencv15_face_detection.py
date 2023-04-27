@@ -43,12 +43,12 @@ def detectFace(img):
 
     # 將結果圖片輸出
 
-    filename2 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/human_face.jpg'
+    filename2 = 'C:/______test_files3/human_face.jpg'
     print(filename2)
     cv2.imwrite(filename2, img)	#寫入本機圖片
 
 
 print("框出照片中的人臉")
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/human.jpg'
+filename = 'C:/______test_files2/human.jpg'
 detectFace(filename)
 

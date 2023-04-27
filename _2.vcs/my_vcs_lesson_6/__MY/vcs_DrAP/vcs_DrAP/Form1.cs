@@ -58,8 +58,8 @@ namespace vcs_DrAP
         string specified_search_path = String.Empty;
 
         string default_vcs_path = @"C:\_git\vcs\_2.vcs";
-        string default_python_path = @"C:\_git\vcs\_4.cmpp\_python_test";
-        string default_matlab_path = @"C:\_git\vcs\_4.cmpp\_matlab1_test";
+        string default_python_path = @"C:\_git\vcs\_4.python";
+        string default_matlab_path = @"C:\_git\vcs\_7.cmpp\_matlab1_test";
         string default_cuda_path = @"C:\_git\vcs\_3.cuda";
         string default_opengl_path = @"C:\_git\vcs\_6.opengl";
 

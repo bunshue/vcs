@@ -2,7 +2,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 import matplotlib.pyplot as plt
 
-selected_font = 'C:/_git/vcs/_4.cmpp/_python_test/data/ubuntu.ttf'
+selected_font = 'C:/______test_files2/ubuntu.ttf'
 
 font_size=30
 
@@ -25,7 +25,7 @@ draw = ImageDraw.Draw(img)
 #寫字
 draw.text((0,0), mesg, (0,0,0), font)
 
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/pil_test01.png'
+filename = 'C:/______test_files3/pil_test01.png'
 img.save(filename)
 print('已寫入檔案：' + filename)
 
@@ -36,7 +36,7 @@ plt.show()
 from PIL import Image, ImageDraw, ImageFont
 
 msg = 'lion-mouse'
-selected_font = 'C:/_git/vcs/_4.cmpp/_python_test/data/ubuntu.ttf'
+selected_font = 'C:/______test_files2/ubuntu.ttf'
 
 font_size = 30; #文字大小
 font_r = 255;   #紅色值
@@ -77,7 +77,7 @@ dw = ImageDraw.Draw(im)
 dw.text((0,0), msg, font=font, fill=fill)
 
 #im.show()
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/tmppic_new'
+filename = 'C:/______test_files3/tmppic_new'
 im.save(filename+'.png', 'PNG')
 print('新檔存圖, 已寫入檔案：'+filename+'.png')
 
@@ -88,11 +88,11 @@ print('新檔存圖, 已寫入檔案：'+filename+'.png')
 import sys, os, glob
 from PIL import Image, ImageDraw, ImageFont
 
-selected_font = 'C:/_git/vcs/_4.cmpp/_python_test/data/ubuntu.ttf'
+selected_font = 'C:/______test_files2/ubuntu.ttf'
 
-filename1 = 'C:/_git/vcs/_4.cmpp/_python_test/data/sample_s.jpg'
-filename2 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/tmppic_old.png'
-filename3 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/tmppic_new.png'
+filename1 = 'C:/______test_files2/sample_s.jpg'
+filename2 = 'C:/______test_files3/tmppic_old.png'
+filename3 = 'C:/______test_files3/tmppic_new.png'
 
 text_msg = 'Hello, world!'
 im = Image.open(filename1)
@@ -128,9 +128,9 @@ plt.show()
 import os, sys
 from PIL import Image, ImageDraw, ImageFont
 
-filename1 = 'C:/_git/vcs/_4.cmpp/_python_test/data/sample.jpg'
-filename2 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/pil_test03.png'
-selected_font = 'C:/_git/vcs/_4.cmpp/_python_test/data/ubuntu.ttf'
+filename1 = 'C:/______test_files2/sample.jpg'
+filename2 = 'C:/______test_files3/pil_test03.png'
+selected_font = 'C:/______test_files2/ubuntu.ttf'
 
 #要做浮水印的文字
 msg = "lion-mouse"
@@ -167,10 +167,10 @@ print('新檔存圖, 已寫入檔案：' + filename2)
 
 from PIL import Image, ImageDraw, ImageFont
 
-selected_font = 'C:/_git/vcs/_4.cmpp/_python_test/data/ubuntu.ttf'
-filename1 = 'C:/_git/vcs/_4.cmpp/_python_test/data/sample_s.jpg'
-filename2 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/tmppic_old.png'
-filename3 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/tmppic_new.png'
+selected_font = 'C:/______test_files2/ubuntu.ttf'
+filename1 = 'C:/______test_files2/sample_s.jpg'
+filename2 = 'C:/______test_files3/tmppic_old.png'
+filename3 = 'C:/______test_files3/tmppic_new.png'
 
 
 im = Image.open(filename1)
@@ -206,9 +206,9 @@ print('新檔存圖, 已寫入檔案：'+filename3)
 
 from PIL import Image, ImageDraw
 
-filename1 = 'C:/_git/vcs/_4.cmpp/_python_test/data/sample_s.jpg'
-filename2 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/tmppic_old.png'
-filename3 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/tmppic_new.png'
+filename1 = 'C:/______test_files2/sample_s.jpg'
+filename2 = 'C:/______test_files3/tmppic_old.png'
+filename3 = 'C:/______test_files3/tmppic_new.png'
 
 
 im = Image.open(filename1)

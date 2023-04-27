@@ -4,7 +4,7 @@ print("寫讀 xlsx")
 
 print("建立 xlsx")
 
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/test2.xlsx'
+filename = 'C:/______test_files3/test2.xlsx'
 
 import openpyxl        
 workbook=openpyxl.Workbook()   #建立一個工作簿
@@ -44,7 +44,7 @@ for i in range(1, sheet.max_row+1):
 
 sheet['A3'] = 'David'
 
-filename2 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/test2b.xlsx'
+filename2 = 'C:/______test_files3/test2b.xlsx'
 
 workbook.save(filename2)
 

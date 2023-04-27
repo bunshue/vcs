@@ -2,7 +2,7 @@ import sqlite3
 import numpy as np
 import matplotlib.pyplot as plt
 
-db_filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/_db/gasoline.sqlite'
+db_filename = 'C:/______test_files2/_db/gasoline.sqlite'
 
 print("油價走勢圖")
 

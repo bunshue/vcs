@@ -7,19 +7,19 @@ print("現在路徑："+cur_path)
 
 '''
 #拷貝檔案
-destfile = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/' + "ccccc.py"
+destfile = 'C:/______test_files3/' + "ccccc.py"
 print("拷貝檔案 " + destfile)
 shutil.copy("test10_new12_file2.py",destfile )  # 檔案複製
 
 print("拷貝檔案 " + destfile)
-destfile = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/' + "ccccc2.py"
+destfile = 'C:/______test_files3/' + "ccccc2.py"
 shutil.copyfile('test10_new12_file2.py', destfile)  # 檔案複製
 '''
 
 #目錄拷貝
 import shutil
-source_dir = 'C:/_git/vcs/_4.cmpp/_python_test/data/source_pic'
-dest_dir = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/source_pic'
+source_dir = 'C:/______test_files2/source_pic'
+dest_dir = 'C:/______test_files3/source_pic'
 print('cp -r ' + source_dir + ' ' + dest_dir)
 #shutil.copytree(source_dir, dest_dir)  # 目錄複製
 
@@ -189,7 +189,7 @@ for f in allfiles:
   print('前檔名 : ' + mainname)
   print('副檔名 : ' + extname)
 
-  targetfolder = 'C:/_git/vcs/_4.cmpp/_python_test/__temp'
+  targetfolder = 'C:/______test_files3'
   targetfile = targetfolder + '/' + str(imageno) + '.' + extname
 
   print('新檔名 : ' + targetfile)

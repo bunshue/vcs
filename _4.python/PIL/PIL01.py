@@ -2,7 +2,7 @@
 
 from PIL import Image
 
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/flower.jpg'
+filename = 'C:/______test_files2/flower.jpg'
 
 image = Image.open(filename)    #讀取的是RGB格式的圖片
 #image.show()
@@ -15,7 +15,7 @@ image.transpose(Image.ROTATE_90)
 from PIL import Image, ImageFilter
 
 filename1 = 'C:/______test_files/orient2_RightTop.jpg'
-filename2 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/orient2_RightTopffff.jpg'
+filename2 = 'C:/______test_files3/orient2_RightTopffff.jpg'
 
 #讀取圖形
 image = Image.open(filename1)

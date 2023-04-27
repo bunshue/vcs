@@ -3,8 +3,8 @@
 import sys, os, glob
 from PIL import Image, ImageDraw
 
-source_dir = 'C:/_git/vcs/_4.cmpp/_python_test/data/source_pic'
-target_dir = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/resized_pic'
+source_dir = 'C:/______test_files2/source_pic'
+target_dir = 'C:/______test_files3/resized_pic'
 
 image_width = 800
 
@@ -17,8 +17,8 @@ allfiles = glob.glob(source_dir+'/*.jpg') + glob.glob(source_dir+'/*.png')
 if not os.path.exists(target_dir):
 	os.mkdir(target_dir)
 
-#logo_filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/burn.bmp'        #fail
-logo_filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/logo.png'
+#logo_filename = 'C:/______test_files2/burn.bmp'        #fail
+logo_filename = 'C:/______test_files2/logo.png'
 logo = Image.open(logo_filename)
 
 logo = logo.resize((150,150))   #修改圖像大小

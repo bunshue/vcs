@@ -98,7 +98,7 @@ for user in new_users:
 #讀取檔案字典範例
 
 print("將 字典 寫入檔案")
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/sssssss3.txt'
+filename = 'C:/______test_files3/sssssss3.txt'
 
 scores=dict()
 

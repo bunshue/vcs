@@ -4,7 +4,7 @@ print('字串處理')
 items = "03/11/2006".split("/")
 print(items)
 
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/human2.jpg'
+filename = 'C:/______test_files2/human2.jpg'
 
 name = filename.split('/')
 print(len(name))
@@ -246,7 +246,7 @@ print(cwd)
 aa = os.chdir(cwd)
 print(aa)
 
-dirname = 'C:/_git/vcs/_4.cmpp/_python_test'
+dirname = 'C:/_git/vcs/_4.python'
 cc = os.chdir(dirname)
 print(cc)
 
@@ -304,8 +304,8 @@ vi = sys.version_info
 install_group = "Python %d.%d" % (vi[0], vi[1])
 print(install_group)
 
-filename1 = 'C:/_git/vcs/_4.cmpp/_python_test/data/aaaaa.jpg'
-filename2 = 'C:/_git/vcs/_4.cmpp/_python_test/data/bbbbb.jpg'
+filename1 = 'C:/______test_files2/aaaaa.jpg'
+filename2 = 'C:/______test_files2/bbbbb.jpg'
 
 print("Copied %s to %s" % (filename1, filename2))
 
@@ -623,7 +623,7 @@ def usage():
 import sys, os, time, difflib, argparse
 from datetime import datetime, timezone
 
-path = 'C:/_git/vcs/_4.cmpp/_python_test'
+path = 'C:/_git/vcs/_4.python'
 t1 = datetime.fromtimestamp(os.stat(path).st_mtime, timezone.utc)
 
 print(t1)
@@ -633,7 +633,7 @@ t2 = t1.astimezone().isoformat()
 print(t2)
 
 
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/human2.jpg'
+filename = 'C:/______test_files2/human2.jpg'
 
 print(filename)
 
@@ -683,7 +683,7 @@ usage(msg)
 
 
 
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/human2.jpg'
+filename = 'C:/______test_files2/human2.jpg'
 
 
 import os

@@ -1,6 +1,6 @@
 import sqlite3
 
-db_filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/_db/gasoline.sqlite'
+db_filename = 'C:/______test_files2/_db/gasoline.sqlite'
 
 def disp_menu():
     print("中油歷年油價查詢系統")

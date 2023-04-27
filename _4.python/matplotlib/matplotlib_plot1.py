@@ -1,6 +1,6 @@
 # plot 集合
 
-selected_font = 'C:/_git/vcs/_4.cmpp/_python_test/data/msch.ttf'
+selected_font = 'C:/______test_files2/msch.ttf'
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -215,7 +215,7 @@ plt.show()
 
 # plot 集合
 
-selected_font = 'C:/_git/vcs/_4.cmpp/_python_test/data/msch.ttf'
+selected_font = 'C:/______test_files2/msch.ttf'
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -278,7 +278,7 @@ plt.show()
 
 # plot 集合
 
-selected_font = 'C:/_git/vcs/_4.cmpp/_python_test/data/msch.ttf'
+selected_font = 'C:/______test_files2/msch.ttf'
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -373,7 +373,7 @@ plt.show()
 
 # plot 集合
 
-selected_font = 'C:/_git/vcs/_4.cmpp/_python_test/data/msch.ttf'
+selected_font = 'C:/______test_files2/msch.ttf'
 
 import matplotlib.pyplot as plt
 import numpy as np

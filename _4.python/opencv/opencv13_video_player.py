@@ -62,7 +62,7 @@ while success:
     cv2.imshow("video",frame)
     #cv2.waitKey(1000/int(fps))
     #cv2.waitKey(20)
-    cv2.imwrite("C:/_git/vcs/_4.cmpp/_python_test/__temp/img/%05d.jpg" % i, frame)
+    cv2.imwrite("C:/______test_files3/img/%05d.jpg" % i, frame)
     i = i + 1
     success, frame = video.read()
 video.release();

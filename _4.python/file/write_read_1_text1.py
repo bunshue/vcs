@@ -1,6 +1,6 @@
 #各種檔案寫讀範例 txt 1
 
-filename_rw1 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/sample1.txt'
+filename_rw1 = 'C:/______test_files3/sample1.txt'
 
 print("將字串寫入檔案 : " + filename_rw1)
 fo = open(filename_rw1, 'w')
@@ -51,7 +51,7 @@ print(str3)  # b'Welcome\n'
 
 fo.close()
 
-filename_rw2 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/sample2.txt'
+filename_rw2 = 'C:/______test_files3/sample2.txt'
 
 print("寫入檔案 : " + filename_rw2)
 fo = open(filename_rw2, "w")
@@ -79,7 +79,7 @@ str = fo.read(10);
 print("讀取10拜 : ", str)
 fo.close()
 
-filename_rw3 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/file.bin'
+filename_rw3 = 'C:/______test_files3/file.bin'
 
 print("建立一個檔案 binary, 檔名 : " + filename_rw3)
 content='''Hello Python
@@ -96,7 +96,7 @@ with open(filename_rw3,'rb') as fo:
     content=fo.read().decode("utf-8") 
     print(content) 
 
-filename1 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/file1.txt'
+filename1 = 'C:/______test_files3/file1.txt'
 
 print("建立一個檔案")
 
@@ -128,7 +128,7 @@ with open(filename1,'r') as fo:
     print(str1)  # Hello
 fo.close()
 
-filename2 = 'C:/_git/vcs/_4.cmpp/_python_test/data/file2.txt'
+filename2 = 'C:/______test_files2/file2.txt'
 
 print("讀取檔案 " + filename2)
 with open(filename2, 'r', encoding = 'UTF-8') as fo:
@@ -162,7 +162,7 @@ with open(filename2, 'r', encoding = 'UTF-8-sig') as fo:
     print(str1)  # 123中文
 
 print("使用cp950編碼 讀取檔案")
-filename_utf8 = 'C:/_git/vcs/_4.cmpp/_python_test/data/fileUTF8.txt'
+filename_utf8 = 'C:/______test_files2/fileUTF8.txt'
 fo=open(filename_utf8, 'r', encoding = 'cp950')
 for line in fo:
     print(line, end = "")
@@ -174,14 +174,14 @@ fo.close()
 #各種檔案寫讀範例 txt 2
 
 print("附加模式寫檔案")
-filename_w = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/TestFileW1.txt'
+filename_w = 'C:/______test_files3/TestFileW1.txt'
 fo = open(filename_w, "a")
 data = "123456789\n"
 fo.write(data)
 fo.close()
 
 print("寫入檔案範例")
-filename_w = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/TestFileW2.txt'
+filename_w = 'C:/______test_files3/TestFileW2.txt'
 
 #寫資料到檔案中
 #打開一個文件
@@ -199,8 +199,8 @@ print("讀取一檔並將資料寫到另檔的範例")
 
 #python讀和寫文件
 
-filename_r = 'C:/_git/vcs/_4.cmpp/_python_test/data/poetry.txt'
-filename_w = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/poetry_another.txt'
+filename_r = 'C:/______test_files2/poetry.txt'
+filename_w = 'C:/______test_files3/poetry_another.txt'
 
 with open(filename_r, 'rt', encoding = 'utf8') as fo:
     data = fo.read()
@@ -217,7 +217,7 @@ fo.close()
 
 #各種檔案寫讀範例
 
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/poetry.txt'
+filename = 'C:/______test_files2/poetry.txt'
 
 print("讀取檔案 : "+filename)
 
@@ -345,7 +345,7 @@ def disp_temp(data):
     print("---------------------")
 
 
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/data_climate.txt'
+filename = 'C:/______test_files2/data_climate.txt'
 
 with open(filename, 'r', encoding='utf-8') as fp:
     raw_data = fp.readlines()
@@ -359,7 +359,7 @@ disp_temp(climate_data[4])
 
 print('各種讀取檔案的方法')
 
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/Presidents.txt'
+filename = 'C:/______test_files2/Presidents.txt'
 
 # Open file for input
 infile = open(filename, "r")
@@ -397,7 +397,7 @@ infile.close() # Close the input file
 
 
 print('指定編碼讀取檔案')
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/stopWord_test.txt'
+filename = 'C:/______test_files2/stopWord_test.txt'
 with open(filename, 'r', encoding='utf-8-sig') as f:  #設定停用詞
     stops = f.read().split('\n')   
 

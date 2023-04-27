@@ -7,7 +7,7 @@ import csv
 
 print("python寫資料到CSV檔 1")
 
-filename_w = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/TestCSVFileW.csv'
+filename_w = 'C:/______test_files3/TestCSVFileW.csv'
 
 print("打開一個csv檔案 : "+filename_w)
 csvFile = open(filename_w, 'w+', newline='')
@@ -36,7 +36,7 @@ print("寫入檔案 " + filename_w + " 完成")
 import csv
 
 # 開啟 csv 檔案
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/test1.csv'
+filename = 'C:/______test_files2/test1.csv'
 with open(filename, newline='') as csvfile:
     # 讀取 csv 檔案內容
     rows = csv.reader(csvfile)
@@ -48,7 +48,7 @@ with open(filename, newline='') as csvfile:
 
 import csv
 # 開啟 csv 檔案
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/test1.csv'
+filename = 'C:/______test_files2/test1.csv'
 with open(filename, newline='') as csvfile:
     # 讀取 csv 檔內容，將每一列轉成 dictionary
     rows = csv.DictReader(csvfile)   
@@ -58,7 +58,7 @@ with open(filename, newline='') as csvfile:
         print(row['姓名'],row['身高'],row['體重'])
         
 import csv
-filename_w = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/test3.csv'
+filename_w = 'C:/______test_files3/test3.csv'
 with open(filename_w, 'w', newline='') as csvfile:
     # 定義欄位
     fieldnames = ['姓名', '身高', '體重']
@@ -75,7 +75,7 @@ with open(filename_w, 'w', newline='') as csvfile:
     
 import csv
 # 開啟輸出的 csv 檔案
-filename_w = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/test1.csv'
+filename_w = 'C:/______test_files3/test1.csv'
 with open(filename_w, 'w', newline='') as csvfile:
   # 建立 csv 檔寫入物件
   writer = csv.writer(csvfile)
@@ -96,7 +96,7 @@ csvtable = [
 ]
 
 # 開啟輸出的 csv 檔案
-filename_w = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/test2.csv'
+filename_w = 'C:/______test_files3/test2.csv'
 with open(filename_w, 'w', newline='') as csvfile:
     # 建立 csv 檔寫入物件
     writer = csv.writer(csvfile)
@@ -115,7 +115,7 @@ filename_r1 = "http://pythonscraping.com/files/MontyPythonAlbums.csv"
 print("讀取一個遠端csv檔案 : "+filename_r1)
 
 #本地檔案
-filename_r2 = 'C:/_git/vcs/_4.cmpp/_python_test/data/MontyPythonAlbums.local.csv'
+filename_r2 = 'C:/______test_files2/MontyPythonAlbums.local.csv'
 
 print("讀取一個本地csv檔案 : "+filename_r2)
 
@@ -134,7 +134,7 @@ for row in csvReader:
 
 import csv
 
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/zipcode.csv'
+filename = 'C:/______test_files2/zipcode.csv'
 
 with open(filename, 'r', encoding='utf-8') as f:
     datas = csv.reader(f)
@@ -147,7 +147,7 @@ with open(filename, 'r', encoding='utf-8') as f:
 
 
 
-filename_rw1 = 'C:/_git/vcs/_4.cmpp/_python_test/__temp/sample3.csv'
+filename_rw1 = 'C:/______test_files3/sample3.csv'
 
 import csv
 # 開啟輸出的 csv 檔案

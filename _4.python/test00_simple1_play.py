@@ -35,8 +35,8 @@ print(im.info, im.tile)
 '''
 
 
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/poetry.txt'
-#filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/quotes.txt'
+filename = 'C:/______test_files2/poetry.txt'
+#filename = 'C:/______test_files2/quotes.txt'
 
 fp = open(filename, 'r', encoding = 'UTF-8')
 try:

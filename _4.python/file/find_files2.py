@@ -18,5 +18,5 @@ def find_files(foldername):
 
 print('撈出資料夾下所有檔案')
 
-foldername = 'C:/_git/vcs/_4.cmpp/_python_test/__temp'
+foldername = 'C:/______test_files3'
 find_files(foldername)

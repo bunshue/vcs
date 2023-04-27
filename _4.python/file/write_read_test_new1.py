@@ -4,7 +4,7 @@
 import sys, ast
 
 #filename = 'scores.csv'
-filename = 'C:/_git/vcs/_4.cmpp/_python_test/data/scores.csv'
+filename = 'C:/______test_files2/scores.csv'
 
 scores = dict()
 with open(filename,'r') as fp:
