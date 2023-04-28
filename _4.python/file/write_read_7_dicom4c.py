@@ -1,50 +1,12 @@
-# pydicom_PIL.py
-
-"""View DICOM images using Python image Library (PIL)
-
-Usage:
->>> import pydicom
->>> from pydicom.contrib.pydicom_PIL import show_PIL
->>> ds = pydicom.dcmread("filename")
->>> show_PIL(ds)
-
-Requires Numpy:
-    http://numpy.scipy.org/
-
-and Python Imaging Library:
-    http://www.pythonware.com/products/pil/
-
-"""
-# Copyright (c) 2009 Darcy Mason, Adit Panchal
-# This file is part of pydicom, relased under an MIT license.
-#    See the file LICENSE included with this distribution, also
-#    available at https://github.com/pydicom/pydicom
-
-# Based on image.py from pydicom version 0.9.3,
-#    LUT code added by Adit Panchal
-# Tested on Python 2.5.4 (32-bit) on Mac OS X 10.6
-#    using numpy 1.3.0 and PIL 1.1.7b1
-
-try:
-    import PIL.Image
-    have_PIL = True
-except ImportError:
-    have_PIL = False
-
-try:
-    import numpy as np
-    have_numpy = True
-except ImportError:
-    have_numpy = False
-
+import pydicom
+import tkinter as tk
+import PIL.Image
+from PIL import Image, ImageTk
+import numpy as np
 
 def get_LUT_value(data, window, level):
     """Apply the RGB Look-Up Table for the given
        data and window/level value."""
-    if not have_numpy:
-        raise ImportError("Numpy is not available."
-                          "See http://numpy.scipy.org/"
-                          "to download and install")
 
     return np.piecewise(data,
                         [data <= (level - 0.5 - (window - 1) / 2),
@@ -55,10 +17,6 @@ def get_LUT_value(data, window, level):
 
 def get_PIL_image(dataset):
     """Get Image object from Python Imaging Library(PIL)"""
-    if not have_PIL:
-        raise ImportError("Python Imaging Library is not available. "
-                          "See http://www.pythonware.com/products/pil/ "
-                          "to download and install")
 
     if ('PixelData' not in dataset):
         raise TypeError("Cannot show image -- DICOM dataset does not have "
@@ -96,7 +54,7 @@ def get_PIL_image(dataset):
         image = get_LUT_value(dataset.pixel_array, ww, wc)
         # Convert mode to L since LUT has only 256 values:
         #   http://www.pythonware.com/library/pil/handbook/image.htm
-        im = PIL.Image.fromarray(image).convert('L')	#�ഫ���Ƕ��Ϲ�
+        im = PIL.Image.fromarray(image).convert('L')	#轉換成灰階圖像
 
     return im
 
@@ -105,3 +63,45 @@ def show_PIL(dataset):
     """Display an image using the Python Imaging Library (PIL)"""
     im = get_PIL_image(dataset)
     im.show()
+
+def show_image(data, block=True, master=None):
+    frame = tk.Frame(master=master, background='#000')
+    if 'SeriesDescription' in data and 'InstanceNumber' in data:
+        title = ', '.join(('Ser: ' + data.SeriesDescription,
+                           'Img: ' + str(data.InstanceNumber)))
+    else:
+        title = 'pydicom image'
+    frame.master.title(title)
+
+    photo_image = get_PIL_image(data)
+    photo_image = ImageTk.PhotoImage(photo_image)
+    label = tk.Label(frame, image = photo_image, background = '#000')
+
+    # keep a reference to avoid disappearance upon garbage collection
+    label.photo_reference = photo_image
+    label.grid()
+    frame.grid()
+
+    if block:
+        frame.mainloop()
+
+def show_PIL_in_tk(dataset):
+    """Display an image using the Python Imaging Library (PIL)"""
+    im = get_PIL_image(dataset)
+    im.show()
+
+
+print('讀取dicom檔案內的圖片')
+
+filename1 = 'C:/______test_files/__RW/_dicom/CT_small.dcm'
+filename2 = 'C:/______test_files/__RW/_dicom/ims000525.dcm'
+filename3 = 'C:/______test_files/__RW/_dicom/test.dcm'
+
+df = pydicom.dcmread(filename3)
+
+show_image(df)
+
+
+
+
+

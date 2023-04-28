@@ -1,4 +1,367 @@
 
+item_text = "%s %d" % (item_describe, i + 1)
+
+
+item_text = "%s %d" % (item_describe, i + 1)
+rjust = item_text.rjust(128)
+parentNodeID = self.dsTreeView.AppendItem(ip, text=rjust)
+self.recurse_tree(ds, parentNodeID)
+
+
+
+
+            st = statfunc(filename)
+        except OSError as msg:
+            sys.stderr.write("can't stat %r: %r\n" % (filename, msg))
+            status = 1
+            st = ()
+        if st:
+
+
+
+f.write("    '%s':\t%s,  \t# %s\n" % (name,charcode,comment))
+f.write('\n}\n')
+
+
+        for line in reversed(lines):
+            if prog.search(line):
+                print(line)
+
+    # Use lstat() to stat files if it exists, else stat()
+    try:
+        statfunc = os.lstat
+    except AttributeError:
+        statfunc = os.stat
+
+
+
+
+VERSION = "pilprint 0.3/2003-05-05"
+
+sys.exit(main(sys.argv[1:], sys.stdout))
+
+sys.stderr.write('%s: %s\n%s' % (sys.argv[0], msg, usage))
+sys.stderr.write("%s: %s\n" % (sys.argv[0], msg))
+
+
+print("%s:%d:%s" % (filename, row, line), end=' ')
+
+
+if os.path.normcase(fn).endswith(".py") or os.path.isdir(fn):
+        
+
+
+如果資料夾不存在  建立之
+    # Create the win32com\gen_py directory.
+    make_dir = os.path.join(lib_dir, "win32com", "gen_py")
+    if not os.path.isdir(make_dir):
+        if verbose:
+            print("Creating directory", make_dir)
+        directory_created(make_dir)
+        os.mkdir(make_dir)
+
+
+
+
+            os.remove(os.path.join(lib_dir, "win32", "dbi.pyd.old"))
+
+
+
+
+
+
+//xil_printf("david0217: %s:%s(%d) ST setup g_exposure = %d\r\n",__FILE__,__func__,__LINE__, g_exposure);
+
+david1031: ../src/vid_io_intf.c:vid_io_intf_init(279) FMC IMAGEON card not exist
+
+字串的用法
+split replace
+            lang, encoding = locale.split('.')[:2]
+            encoding = encoding.replace('-', '')
+            encoding = encoding.replace('_', '')
+    if test_func_name.startswith("test_"):
+
+
+
+
+自定義版本 資料
+
+__version__ = "1.1"
+
+__author__ = 'Raymond Hettinger'
+
+print("msgfmt.py", __version__)
+
+
+print('msgid_plural not preceded by msgid on %s:%d' % (infile, lno), file=sys.stderr)
+print('plural without msgid_plural on %s:%d' % (infile, lno), file=sys.stderr)
+print('ERROR: %a -> %a != %a' % (k, locale.normalize(k), v), file=sys.stderr)
+
+print('    %-40s%a,' % ('%a:' % k, v))
+print('#    removed %a' % k)
+print('#    updated %a -> %a to %a' % (k, olddata[k], data[k]))
+
+
+
+import re
+import os
+import sys
+
+import tempfile
+
+            tn = tempfile.mktemp()
+            fp = open(tn, "wb")
+            fp.write(m.group(1) + b"\n")
+            fp.close()
+
+	tfile = tempfile.mktemp()
+        fp = open(tfile, "w")
+        fp.write("quit\n")
+        fp.close()
+
+
+
+
+print(__doc__ % globals())
+
+    print("-"*70)
+
+
+def chop(line):
+    if line.endswith("\n"):
+        return line[:-1]
+    else:
+        return line
+
+
+def testdir(a):
+    try:
+        names = [n for n in os.listdir(a) if n.endswith('.py')]
+    except OSError:
+        print("Directory not readable: %s" % a, file=sys.stderr)
+    else:
+        for n in names:
+            fullname = os.path.join(a, n)
+            if os.path.isfile(fullname):
+                output = io.StringIO()
+                print('Testing %s' % fullname)
+                try:
+                    roundtrip(fullname, output)
+                except Exception as e:
+                    print('  Failed to compile, exception is %s' % repr(e))
+            elif os.path.isdir(fullname):
+                testdir(fullname)
+
+testdir(a)
+
+
+
+
+def parse(filename):
+
+    with open(filename, encoding='latin1') as f:
+        lines = list(f)
+    data = {}
+    for line in lines:
+        line = line.strip()
+        if not line:
+            continue
+        if line[:1] == '#':
+            continue
+        locale, alias = line.split()
+        
+        # Fix non-standard locale names, e.g. ks_IN@devanagari.UTF-8
+        if '@' in alias:
+            alias_lang, _, alias_mod = alias.partition('@')
+            if '.' in alias_mod:
+                alias_mod, _, alias_enc = alias_mod.partition('.')
+                alias = alias_lang + '.' + alias_enc + '@' + alias_mod
+    return data
+
+def parse_glibc_supported(filename):
+
+    with open(filename, encoding='latin1') as f:
+        lines = list(f)
+    data = {}
+    for line in lines:
+        line = line.strip()
+        if not line:
+            continue
+        if line[:1] == '#':
+            continue
+        line = line.replace('/', ' ').strip()
+        line = line.rstrip('\\').rstrip()
+        words = line.split()
+        if len(words) != 2:
+            continue
+
+
+
+
+
+
+
+
+
+
+bind的用法：控件.bind(event, handler),其中event是tkinter已经定义好的的事件，handler是处理器，可以是一个处理函数，如果相关事件发生, handler 函数会被触发, 事件对象 event 会传递给 handler 函数
+基本所有控件都能bind
+
+常见event有：
+
+鼠标单击事件：
+鼠标左键点击为 <Button-1>,
+鼠标中键点击为 <Button-2>,
+鼠标右键点击为 <Button-3>,
+向上滚动滑轮为 <Button-4>,
+向下滚动滑轮为 <Button-5>.
+
+鼠标双击事件.：
+鼠标左键点击为 <Double-Button-1>,
+鼠标中键点击为 <Double-Button-2>,
+鼠标右键点击为 <Double-Button-3>.
+
+鼠标释放事件：
+鼠标左键点击为 <ButtonRelease-1>,
+鼠标中键点击为 <ButtonRelease-2>,
+鼠标右键点击为 <ButtonRelease-3>.
+鼠标相对当前控件的位置会被存储在 event 对象中的 x 和 y 字段中传递给回调函数.
+
+鼠标移入控件事件：<Enter>
+
+获得焦点事件：<FocusIn>
+
+鼠标移出控件事件: <Leave>
+
+失去焦点事件:<FocusOut>
+
+鼠标按下移动事件：
+鼠标左键点击为 <B1-Motion>,
+鼠标中键点击为 <B2-Motion>,
+鼠标右键点击为 <B3-Motion>.
+鼠标相对当前控件的位置会被存储在 event 对象中的 x 和 y 字段中传递给回调函数.
+
+键盘按下事件:<Key>，event中的keysym ,keycode,char都可以获取按下的键【其他想要获取值的也可以先看看event中有什么】
+键位绑定事件：<Return>回车键，<BackSpace>,<Escape>,<Left>,<Up>,<Right>,<Down>…….
+控件大小改变事件：<Configure>，新的控件大小会存储在 event 对象中的 width 和 height 属性传递. 有些平台上该事件也可能代表控件位置改变.
+
+
+    Event中的属性：
+        widget：产生事件的控件
+        x, y：当前鼠标的位置
+        x_root, y_root：当前鼠标相对于屏幕左上角的位置，以像素为单位。
+        char：字符代码（仅限键盘事件），作为字符串。
+        keysym：关键符号（仅限键盘事件）。
+        keycode：关键代码（仅限键盘事件）。
+        num：按钮号码（仅限鼠标按钮事件）。
+        width, height：小部件的新大小（以像素为单位）（仅限配置事件）。
+        type：事件类型。
+
+
+
+
+
+
+
+
+ 
+#width 選項的單位是文字單位，而不是畫素
+
+字串處理
+
+#url = input("請輸入網址：")
+url = 'https://www.google.com.tw/'
+if url.startswith("http://") or url.startswith("https://"):
+    print("輸入的網址格式正確！")
+else:
+    print("輸入的網址格式錯誤！")
+
+
+
+start = datetime.datetime(2016, 1, 1)
+end = datetime.datetime(2017, 1, 1)
+
+
+#熊貓是python的excel
+
+
+import os
+import sys
+import getopt
+import tokenize
+
+def main():
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], "lh")
+    except getopt.error as msg:
+        usage(msg)
+        return 2
+    if not args:
+        usage("at least one file argument is required")
+        return 2
+    listnames = 0
+    for o, a in opts:
+        if o == "-h":
+            print(__doc__)
+            return
+        if o == "-l":
+            listnames = 1
+    exit = None
+    for filename in args:
+        x = process(filename, listnames)
+        exit = exit or x
+    return exit
+
+def usage(msg):
+    sys.stderr.write("%s: %s\n" % (sys.argv[0], msg))
+    sys.stderr.write("Usage: %s [-l] file ...\n" % sys.argv[0])
+    sys.stderr.write("Try `%s -h' for more information.\n" % sys.argv[0])
+
+def process(filename, listnames):
+    if os.path.isdir(filename):
+        return processdir(filename, listnames)
+    try:
+        fp = open(filename)
+    except IOError as msg:
+        sys.stderr.write("Can't open: %s\n" % msg)
+        return 1
+    g = tokenize.generate_tokens(fp.readline)
+    lastrow = None
+    for type, token, (row, col), end, line in g:
+        if token in ("/", "/="):
+            if listnames:
+                print(filename)
+                break
+            if row != lastrow:
+                lastrow = row
+                print("%s:%d:%s" % (filename, row, line), end=' ')
+    fp.close()
+
+def processdir(dir, listnames):
+    try:
+        names = os.listdir(dir)
+    except OSError as msg:
+        sys.stderr.write("Can't list directory: %s\n" % dir)
+        return 1
+    files = []
+    for name in names:
+        fn = os.path.join(dir, name)
+        if os.path.normcase(fn).endswith(".py") or os.path.isdir(fn):
+            files.append(fn)
+    files.sort(key=os.path.normcase)
+    exit = None
+    for fn in files:
+        x = process(fn, listnames)
+        exit = exit or x
+    return exit
+
+if __name__ == "__main__":
+    sys.exit(main())
+
+
+
+
+
 
 JSON剖析器
 http://json.parser.online.fr/

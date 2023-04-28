@@ -1,19 +1,3 @@
-#!/usr/bin/env python
-"""
-This example will read a directory of dicom files and parse them into
-a list of Patients with Studies, Series, and Instances for each.
-
-run with
-./dicom_dir -d directory --recursive
-
-This example just prints out the patient/study/series/instance hierarchy
-"""
-
-# Copyright (c) 2017 Robert Haxton
-# This file is part of pydicom, released under a modified MIT license.
-#    See the file LICENSE included with this distribution, also
-#    available at https://github.com/pydicom/pydicom
-
 import argparse
 import fnmatch
 import os
@@ -27,11 +11,7 @@ from patient import Patient
 
 
 def find_dicom_files(directory, pattern="*", directory_exclude_pattern='', recursive=True):
-    """
-    search a root directory for all files matching a given pattern (in Glob format - *.dcm etc)
-    and that have the "DICM" magic number
-    returns a full path name
-    """
+
     for root, dirs, files in os.walk(directory):
         if not recursive:
             dirs = []
@@ -47,55 +27,27 @@ def find_dicom_files(directory, pattern="*", directory_exclude_pattern='', recur
                 if is_dicom(filename):
                     yield filename
 
-
-def parse_args(argv=None):
-    """Argument parser for Dicom Tools"""
-    if argv is None:
-        argv = sys.argv[1:]
-    parser = argparse.ArgumentParser(
-        description="Scan a directory of dicom files "
-                    "and assemble a list of patient, "
-                    "study, series, image sets")
-    parser.add_argument("-d", "--dicom-dir",
-                        dest='dicom_dir',
-                        type=str,
-                        help="Directory of dicom files ",
-                        default=".")
-    parser.add_argument("-r", "--recursive",
-                        dest='recursive',
-                        action='store_true',
-                        help="Process recursively")
-    parser.add_argument("--no-recursive",
-                        dest='recursive',
-                        action='store_false',
-                        help="Do not process recursively")
-    parser.set_defaults(recursive=True)
-    return parser.parse_args()
-
-
-def main():
-    foldername = 'C:/______test_files/__RW/_dicom'
-    args = foldername
-    patients = list()
-    for x in find_dicom_files(directory=foldername, pattern="*.dcm", directory_exclude_pattern=".*"):
-        f = pydicom.dcmread(x)
-        for p in patients:
-            try:
-                p.add_dataset(f)
-            except Exception as e:
-                pass
-            else:
-                break
+foldername = 'C:/______test_files/__RW/_dicom'
+patients = list()
+for x in find_dicom_files(directory=foldername, pattern="*.dcm", directory_exclude_pattern=".*"):
+    print('檔案 : ', x)
+    f = pydicom.dcmread(x)
+    for p in patients:
+        print('已有資料')
+        try:
+            p.add_dataset(f)
+        except Exception as e:
+            print('無法添入資料')
+            pass
         else:
-            print("New patient!")
-            patients.append(Patient(dicom_dataset=f))
+            print('其他錯誤')
+            break
+    else:
+        print("新增資料")
+        patients.append(Patient(dicom_dataset = f))
             
-    print("Found", len(patients), "patients")
-    for x in patients:
-        print(repr(x))
-        print("\n")
-
-if __name__ == "__main__":
-    main()
-
+print("Found", len(patients), "patients")
+for x in patients:
+    print(repr(x))
+    print("\n")
 
