@@ -15,3 +15,12 @@ for fileName in f.namelist(): #壓縮檔案列表檔名
     print('解壓縮檔案 : ', fileName) #印出解壓縮檔案名稱
 
 f.close() #關檔
+
+
+print('判斷是否為一個壓縮檔')
+#filename = 'C:/______test_files2/human2.jpg'
+
+if zipfile.is_zipfile(filename):
+    print('是壓縮檔')
+else:
+    print('不是壓縮檔')

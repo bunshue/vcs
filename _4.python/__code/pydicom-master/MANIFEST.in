@@ -1,0 +1,8 @@
+
+recursive-include doc *
+recursive-include examples *
+recursive-include pydicom/data *
+include pydicom/*
+include CONTRIBUTING.md
+include LICENSE
+include README.md

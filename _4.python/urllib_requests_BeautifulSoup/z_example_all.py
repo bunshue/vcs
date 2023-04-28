@@ -205,11 +205,8 @@ def example02():
 def example03():
     print("3.統一發票號碼")
     import requests
-
-    try:
-        import xml.etree.cElementTree as ET
-    except ImportError:
-        import xml.etree.ElementTree as ET
+    import xml.etree.cElementTree as ET
+    #import xml.etree.ElementTree as ET  看起來一樣
 
     url = 'http://invoice.etax.nat.gov.tw/invoice.xml'   #統一發票中獎號碼
     html_data = get_html_data1(url)
