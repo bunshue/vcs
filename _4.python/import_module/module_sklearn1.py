@@ -1,0 +1,46 @@
+'''
+pip install scikit-learn
+'''
+
+import numpy as np
+from scipy.linalg import norm
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+'''
+def similarity_tfidf(s1, s2):
+    def add_space(s):
+        return ' '.join(list(s))
+
+    s1, s2 = add_space(s1), add_space(s2)
+
+    cv = TfidfVectorizer(tokenizer = lambda s: s.split())
+    corpus = [s1, s2]
+    vectors = cv.fit_transform(corpus).toarray()
+
+    return np.dot(vectors[0], vectors[1])/(norm(vectors[0]) * norm(vectors[1]))
+
+
+string1 = '漢堡蛋'
+
+string2 = '我要一份漢堡蛋'
+#string2 = '請給我來一份漢堡蛋'
+#string2 = '你是一個漢堡蛋嗎?'
+
+result = similarity_tfidf(string1, string2)
+
+print('相似度 : ', result)
+if result > 0.2:
+    print('OK, 一個漢堡蛋')
+else:
+    print('Sorry, 無法接受訂餐')
+'''
+
+'''
+import seaborn as sns
+iris = sns.load_dataset('iris')
+iris.head()
+
+sns.set()
+sns.pairplot(iris, hue='species', height=3);
+'''
+

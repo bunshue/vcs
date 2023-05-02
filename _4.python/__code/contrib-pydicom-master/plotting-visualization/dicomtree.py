@@ -18,12 +18,10 @@ print(__doc__)
 
 usage = "Usage: python dicomtree.py dicom_filename"
 
-
 def RunTree(w, filename):
     top = tkinter_tix.Frame(w, relief=tkinter_tix.RAISED, bd=1)
     tree = tkinter_tix.Tree(top, options="hlist.columns 2")
-    tree.pack(expand=1, fill=tkinter_tix.BOTH, padx=10, pady=10,
-              side=tkinter_tix.LEFT)
+    tree.pack(expand=1, fill=tkinter_tix.BOTH, padx=10, pady=10, side=tkinter_tix.LEFT)
     # print(tree.hlist.keys())   # use to see the available configure() options
     tree.hlist.configure(bg='white', font='Courier 10', indent=30)
     tree.hlist.configure(selectbackground='light yellow', gap=150)
@@ -77,6 +75,8 @@ if __name__ == '__main__':
     root = tkinter_tix.Tk()
     root.title("DICOM tree viewer - " + filename)
     root.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(1200, 900, 0, 0))
+    print("{0:d}x{1:d}+{2:d}+{3:d}".format(1200, 900, 0, 0))
 
     RunTree(root, filename)
     root.mainloop()
+

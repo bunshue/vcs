@@ -1,12 +1,3 @@
-import tempfile
-
-filename = tempfile.NamedTemporaryFile().name
-print('製作暫存檔案')
-print(filename)
-
-
-
-
 print('建立一組密碼 並將此密碼拷貝至剪貼簿')
 import random
 import pyperclip

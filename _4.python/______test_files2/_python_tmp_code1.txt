@@ -1,4 +1,24 @@
 
+
+ax.imshow(volume[ax.index, :, :], cMap, vmin=cMin, vmax=cMax)
+
+
+
+
+
+import time
+
+startTime = time.time()
+
+'''
+do something
+'''
+
+elapsedTime = time.time() - startTime
+print("Time for LinkedList is", elapsedTime, "seconds")
+
+
+
 item_text = "%s %d" % (item_describe, i + 1)
 
 

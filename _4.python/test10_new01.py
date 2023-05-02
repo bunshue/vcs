@@ -170,21 +170,6 @@ print('dist.jaccard : ')
 print(dist.pdist(matV, 'jaccard'))
 
 '''
-'''
-import numpy as np
-import matplotlib.pyplot as plt
-
-#曲線資料加入雜訊
-x = np.linspace(-5,5,200)
-y = np.sin(x)
-yn = y + np.random.rand(1, len(y))*1.5
-
-fig = plt.figure()
-ax = fig.add_subplot(111)
-ax.scatter(x,yn,c='blue',marker = '.')
-ax.plot(x,y+0.75,'r')
-plt.show()
-'''
 
 '''
 cnstr = '中文 test'
@@ -288,18 +273,6 @@ else:
     print('3333')
 '''
 
-
-import tempfile
-#tee_f = open(os.path.join(tempfile.gettempdir(), 'pywin32_postinstall.log'), "w")
-
-print(tempfile.gettempdir())
-
-tmp_filename = os.path.join(tempfile.gettempdir(), 'pywin32_postinstall.log')
-print(tmp_filename)
-
-tmp_filename = os.path.join(tempfile.gettempdir(), 'pywin32_postinstall.log', 'ccccc')
-print(tmp_filename)
-
 vi = sys.version_info
 install_group = "Python %d.%d" % (vi[0], vi[1])
 print(install_group)
@@ -309,14 +282,11 @@ filename2 = 'C:/______test_files2/bbbbb.jpg'
 
 print("Copied %s to %s" % (filename1, filename2))
 
-
-
 print('兩點距離')
 x1, y1 = 0, 0
 x2, y2 = 3, 4
 distance = ((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2)) ** 0.5
 print('兩點距離 : ', distance) 
- 
 
 
 print('if and or')

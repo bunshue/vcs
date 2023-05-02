@@ -14,3 +14,6 @@ for i in range(100000):
    list.insert(0, "Chicago")
 elapsedTime = time.time() - startTime
 print("Time for list is", elapsedTime, "seconds")
+
+
+print('使用 LinkedList 約快50倍')

@@ -34,10 +34,40 @@ print(y3)
 print("sinc(x) = ")
 print(y4)
 
-print("亂數")
-from numpy.random import rand
-r = rand(3, 3)      # 建立一個 3x3 隨機矩陣
+print('亂數')
+r = np.random.rand(3, 3)      # 建立一個 3x3 隨機矩陣
 print(r)
+
+print('亂數')
+r = np.random.rand(10)
+print(r)
+
+print('最大值 : ', np.max(r))
+print('最小值 : ', np.min(r))
+print('平均值 : ', np.mean(r))
+print('中間值 : ', np.median(r))
+
+
+import numpy as np
+
+data = [37, 24, 6, 51, 83, 28, 51, 58, 82, 95,
+8, 43, 86, 78, 71, 82, 58, 10, 15, 56,
+4, 75, 6, 95, 23, 79, 90, 35, 72, 25,
+50, 29, 44, 67, 67, 61, 40, 44, 13, 59,
+60, 67, 93, 69, 71, 8, 76, 81, 17, 72,
+83, 6, 42, 53, 98, 6, 90, 4, 59, 87,
+28, 17, 28, 46, 40, 53, 70, 49, 55, 41,
+74, 57, 31, 55, 5, 65, 44, 98, 36, 4]
+
+data = np.array(data)
+
+print('資料型態：%s' % type(data))
+print('平均值：%.2f' % np.mean(data))
+print('中位數：%.2f' % np.median(data))
+print('標準差：%.2f' % np.std(data))
+print('變異數：%.2f' % np.var(data))
+print('極差值：%.2f' % np.ptp(data))
+
 
 
 np1 = np.array([1,2,3,4])	#使用list
