@@ -1,1 +1,0 @@
-This text file started in Dir1 and was copied into Dir2.

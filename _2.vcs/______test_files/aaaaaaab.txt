@@ -1,1 +1,0 @@
-lion	mouse	cat	dog	elephant	eagle	pig	horse
