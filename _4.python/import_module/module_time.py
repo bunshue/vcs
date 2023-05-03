@@ -97,26 +97,8 @@ else:
   print("要年滿20歲才能夠投票，你還差 " + diff + " 歲")
 
 
-
-import calendar
-print(calendar.__file__)
-
-print("獲取某個月的日曆，返回字串型別")
-cal = calendar.month(2023, 3)
-print(cal)
-calendar.setfirstweekday(calendar.SUNDAY) # 設定日曆的第一天
-
-print("獲取日曆月份 2023/3");
-cal = calendar.month(2023, 3)
-print(cal)
-
-print("獲取一年的日曆")
-cal = calendar.calendar(2023)
-print(cal)
-
 time_stop = time.time() - time_start
 print("測試兩事件所經歷的時間 SP, 經歷時間 : "+str(time_stop) + " 秒")
-
 
 
 

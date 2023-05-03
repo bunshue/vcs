@@ -2,22 +2,10 @@ import os
 import os, sys, stat, getopt
 
 '''
-import calendar
-
-date = '%s %02d' % (calendar.month_abbr[0], dd)
-
-print(date)
-'''
-
-
-'''
-
 import pydoc
 if __name__ == '__main__':
     pydoc.cli()
 '''
-
-
 
 def mtime(f):
     st = os.fstat(f.fileno())

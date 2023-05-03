@@ -1,12 +1,3 @@
-#!.\python.exe
-#
-# Very simple serial terminal
-#
-# This file is part of pySerial. https://github.com/pyserial/pyserial
-# (C)2002-2015 Chris Liechti <cliechti@gmx.net>
-#
-# SPDX-License-Identifier:    BSD-3-Clause
-
 import codecs
 import os
 import sys
@@ -708,7 +699,7 @@ class Miniterm(object):
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 # default args can be used to override when calling main() from an other script
 # e.g to create a miniterm-my-device.py
-def main(default_port=None, default_baudrate=9600, default_rts=None, default_dtr=None):
+def main(default_port=None, default_baudrate=115200, default_rts=None, default_dtr=None):
     """Command line tool, entry point"""
 
     import argparse
