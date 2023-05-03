@@ -1,0 +1,904 @@
+
+	SendBuffer[0] = 0xFF;	//sync
+	SendBuffer[1] = 0xAA;	//sync
+	SendBuffer[2] = 0x05;	//len			data0
+	SendBuffer[3] = 0x67;	//op code	I2C_WR	data1
+	SendBuffer[4] = 0x78;	//			data2, sensor address 0x78
+	SendBuffer[5] = 0x30;	//			data3
+	SendBuffer[6] = 0x0A;	//			data4
+
+      //------------------------------------------------------------------
+      //   I2C Software Reset
+      //------------------------------------------------------------------
+06   //Len						data0
+67   //I2C Write  CMD					data1
+78  							data2
+01  //0x0103	SOFTWARE RESET	0:Off, 1:On		data3	
+03  							data4
+01        // Software Reset  register resets to 0x00	data5
+	
+
+    	//=== Delay 2ms ===    
+03      //Len			0
+70      //Delay  CMD		1
+F0      //Delay Cycle           2         
+
+	//fe  
+	//01  
+	//01  
+	//00        // Add 1ms delay to make sure sensor is reset  byte0 = control command  byte1 = delay function id  byte2~3 = 16 bit little endian number
+	
+	  // Sensor Hardware
+06  //Len
+67   //I2C Write  CMD
+78  
+30  //0x3001	PCLK/HREF/VSYNC OEN
+01  
+07        // PCLK  HREF  VSYNC output enable, 3­Ó³£enable
+
+06   //Len
+67   //I2C Write  CMD
+78  
+30  //0x3002	IO Y OEN
+02  
+ff        // D0~D7 output enable
+
+06   //Len
+67   //I2C Write  CMD
+78  
+30  //0x3009	OUTPUT DRIVE CAPABILITY CTRL
+09  
+02        // Output drive  tune later to save power
+
+06   //Len
+67   //I2C Write  CMD
+78  
+30  //0x301e	SPI_CLK_DIV
+1e  
+09      // SPI clock divider  default = 0x09
+
+06
+67
+78  
+30  	//0x3080	PRE_PLL_CLK_DIV
+80  
+02        // Pre-PLL clock divider  default = 0x02
+
+06
+67
+78  
+30 	//0x3081	PLL_MULTIPLIER
+81  
+10        // PLL Multiplier  default = 0x10
+
+06
+67
+78  
+30  	//0x3082	VT_SYS_CLK_DIV
+82  
+01        // Video Timing System  default = 0x01
+
+06
+67
+78  
+30  	//0x3083	VT_PIXEL_CLK_DIV
+83  
+01      // Pixel Clock Divider  default = 0x01
+
+06
+67
+78  
+30  	//?? unknown
+84  
+01      // Undocumented
+
+06
+67
+78  
+31  	//0x3103 SYS_CLK_DIV
+03  
+01        // Output system clock divider  default = 0x01
+
+  // Gain/Exposure Control
+06
+67
+78  
+35  	//0x3503 GAIN_EXPO_CTRL
+03  
+00        // AEC on  AGC on  Digital AGC on
+
+  // Analog control - Undocumented
+06
+67
+78  
+36  	//0x3600~0x363f	Reserved
+00  
+03 
+
+06
+67
+78  
+36  	//0x3600~0x363f	Reserved
+02  
+0e 
+
+06
+67
+78  
+36  	//0x3600~0x363f	Reserved
+12  
+0d 
+
+06
+67
+78  
+36  	//0x3600~0x363f	Reserved
+14  
+53 
+
+  // Sensor Control  undocumented
+06
+67
+78  
+37  	//0x37c0	Reserved
+c0  
+07 
+
+  // PSRAM - undocumented
+  // Frame Timing
+06
+67
+78  
+38 	//0x3800 H_CROP_START	high
+00 
+00        // x start high  x start = 0
+
+06
+67
+78  
+38  	//0x3801 H_CROP_START	low
+01  
+00        // x start low 
+
+06
+67
+78  
+38  	//0x3802 V_CROP_START	high
+02  
+00        // y start high  y start = 0
+
+06
+67
+78  
+38  	//0x3803 V_CROP_START	low
+03  
+00      // y start low
+
+06
+67
+78  
+38  	//0x3804 H_CROP_END	high
+04  
+02        // x end high  x end = 647
+
+06
+67
+78  
+38  	//0x3804 H_CROP_END	low
+05  
+87        // x end low
+
+06
+67
+78  
+38  	//0x3806 V_CROP_END	high
+06  
+01      // y end high  y end = 487
+
+06
+67
+78  
+38  	//0x3807 V_CROP_END	low
+07  
+e7        // y end low
+
+06
+67
+78  
+38  	//0x3808 H_OURPUT_SIZE	high
+08  
+02        // x output size high  x size = 640
+
+06
+67
+78  
+38  	//0x3809 H_OURPUT_SIZE	low
+09  
+80        // x output size low
+
+06
+67
+78  
+38  	//0x380A V_OURPUT_SIZE	high
+0a  
+01      // y output size high  y size = 480
+
+06
+67
+78  
+38  	//0x380B V_OURPUT_SIZE	low
+0b  
+e0      // y output size low
+
+  //0x78  0x38  0x12  0x03        // line width high  line width = 786
+
+06
+67
+78  
+38  	//0x380C TIMING_HTS high
+0c  
+03        // line width high  line width = 780
+
+06
+67
+78  
+38  	//0x380D TIMING_HTS low
+0d  
+12        // line width low
+
+  //0x78  0x38  0x0e  0x01        // frame height high  frame height = 509
+
+06
+67
+78  
+38  	?????? should be 0x380e ??	//0x380e TIMING_VTS high
+0d  
+01        // frame height high  frame height = 508
+
+06
+67
+78  
+38  	//0x380f TIMING_VTS low
+0f  
+fd        // frame height low
+
+06
+67
+78  
+38  	//0x3810 H_WIN_OFF high
+10  
+00        // ISP horizontal window offset high  H-offset = 4
+
+06
+67
+78  
+38  	//0x3811 H_WIN_OFF low
+11  
+04        // ISP horizontal window offset low
+
+06
+67
+78  
+38  	//0x3812 V_WIN_OFF high
+12  
+00      // ISP vertical window offset high  V-offset = 4
+
+06
+67
+78  
+38  	//0x3813 V_WIN_OFF low
+13  
+04      // ISP vertical window offset low
+
+06
+67
+78  
+38  	//0x3820 FORMAT0	ORIENTATION
+20  
+1C        // mirror/flip/HV binning  none
+
+06
+67
+78  
+38  	//0x3821 FORMAT1	ORIENTATION
+21  
+00        // HV binning  full
+
+  // AEC
+06
+67
+78  
+3a  	//0x3A00 AEC CTRL0
+00  
+41        // AEC CTRL0
+
+06
+67
+78  
+3a  	//0x3A01 MIN EXPO
+01  
+04        // MIN_EXPO
+
+06
+67
+78  
+3a  	//0x3A02 AEC CTRL2
+02  
+10        // AEC CTRL2
+
+  //0x78  0x3a  0x03  0x48        // AEC CTRL3
+06
+67
+78  
+3a  	//0x3A03 AEC CTRL3
+03  
+64        // AEC CTRL3
+
+06
+67
+78  
+3a  	//0x3A04 AEC CTRL4
+04  
+38        // AEC CTRL4
+
+06
+67
+78  
+3a  	//0x3A05 AEC CTRL5
+05  
+18        // AEC CTRL5
+
+06
+67
+78  
+3a  	//0x3A06 B50 STEP high
+06  
+00        // B50 step high
+
+06
+67
+78  
+3a  	//0x3A07 B50 STEP low
+07  
+a1        // B50 step low
+
+06
+67
+78  
+3a  	//0x3A08 B60 STEP high
+08  
+00        // B60 step high
+
+06
+67
+78  
+3a  	//0x3A09 B60 STEP low
+09  
+86        // B60 step low
+
+06
+67
+78  
+3a  	//0x3A0A B50 EXPO MAX high
+0a  
+00        // B50 expo max high
+
+06
+67
+78  
+3a  	//0x3A0B B50 EXPO MAX low
+0b  
+a1        // B50 expo max low
+
+06
+67
+78  
+3a  	//0x3A0C B60 EXPO MAX high
+0c  
+00        // B60 expo max high
+
+06
+67
+78  
+3a  	//0x3A0C B60 EXPO MAX low
+0d  
+86        // B60 expo max low
+
+06
+67
+78  
+3a  	//0x3A0E VTS_50 high
+0e  
+01        // VTS_50 high
+
+06
+67
+78  
+3a  	//0x3A0F VTS_50 low
+0f  
+e3        // VTS_50 low
+
+06
+67
+78  
+3a  	//0x3A10 VTS_60 high
+10  
+01        // VTS_60 high
+
+06
+67
+78  
+3a  	//0x3A11 VTS_60 low
+11  
+fc        // VTS_60 low
+
+06
+67
+78  
+3a  	//0x3A12 MAX_GAIN high
+12  
+00        // max_gain high
+
+06
+67
+78  
+3a  	//0x3A13 MAX_GAIN low
+13  
+f8        // max_gain low
+
+06
+67
+78  
+3a  	//0x3A14 MIN_GAIN
+14  
+10        // min_gain
+
+06
+67
+78  
+3a  	//0x3A15 AEC CTRL15
+15  
+20        // AEC CTRL15
+
+06
+67
+78  
+3a  	//0x3A16 AEC CTRL16
+16  
+04        // AEC CTRL16
+
+06
+67
+78  
+3a  	//0x3A1A AEC CTRL1A
+1a  
+01        // AEC CTRL1A
+
+  // Black level calibration	(BLC)
+
+06
+67
+78  
+40  	//0x4008 BLC CTRL08	bl_start
+08  
+00        // start line
+
+06
+67
+78  
+40  	//0x4009 BLC CTRL09	bl_end
+09  
+03        // end line
+
+06
+67
+78  
+40  	//0x4011 BLC CTRL11
+11  
+f0      // BLC_CTRL11  update
+
+06
+67
+78  
+40  	//0x4013 BLC CTRL13
+13  
+05        // BLC_CTRL13  frame number of format change
+
+06
+67
+78  
+40  	//0x4014 BLC CTRL14
+14  
+05        // BLC_CTRL14  frame number of gain change
+
+06
+67
+78  
+40  	//0x4015 BLC CTRL15
+15  
+05        // BLC_CTRL15  frame number of offset change
+
+06
+67
+78  
+40  	//0x4017 OFF TRIG TH	low
+17  
+08        // offset trigger threshold low
+
+  // Output clipping (color space)
+06
+67
+78  
+43  	//0x4300 YMAX high
+00  
+03        // YMAX high
+
+06
+67
+78  
+43  	//0x4301 YMAX low
+01  
+ff        // YMAX low
+
+06
+67
+78  
+43  	//0x4304 UVMAX high
+04  
+03        // UVMAX high
+
+06
+67
+78  
+43  	//0x4304 UVMAX low
+05  
+ff        // UVMAX low
+
+06
+67
+78  
+43  	//0x4308 FMT CTRL
+08  
+04        // Output Format control  set YUV422  default is RAW
+
+  // DVP Control - add later
+  // SPI
+06
+67
+78  
+4f  	//0x4f00	xxxx
+00  
+80        // undocumented
+
+06
+67
+78  
+4f  	//0x4f01 CORE REG1
+01  
+10        // CORE_REG1
+
+06
+67
+78  
+4f  	//0x4f02 CORE REG2
+02 
+00        // CORE_REG2  does this do anything?
+
+  // ISP
+06
+67
+78  
+50 	//0x5000 ISP_CTRL00
+00  
+ff        // ISP_CTRL00  enable ISP blocks
+  //0x78  0x50  0x01  0x3f        // ISP_CTRL01  enable ISP blocks
+
+06
+67
+78  
+50  	//0x5001 ISP_CTRL01
+01  
+3f        // ISP_CTRL01  enable ISP blocks
+
+06
+67
+78  
+50  	//0x5002 ISP_CTRL02
+02  
+c8        // ISP_CTRL02  video pipeline controls
+
+06
+67
+78  
+50  	//0x5080 PRE CTRL 00, test pattern register, 0:disable, 1: enable
+80  
+00      // Test Pattern  turn off
+
+  // Lens Correction - add later
+  // AWB
+06	//len		data0
+67	//I2C_WR	data1
+78  	//		data2, sensor address 0x78	data2
+52  	//		0x5201	R AWB CTRL01		data3
+01  							data4
+05	// R AWB CTRL01	value				data5
+
+06	//len
+67
+78  
+52  	//0x5204 R WIN BL X	high
+04  
+00        // R WIN BL X high
+
+06
+67
+78  
+52  	//0x5205 R WIN BL X	low
+05  
+14        // R WIN BL X low
+
+06
+67
+78  
+52  	//0x5206 R WIN BL Y	high
+06  
+00        // R WIN BL Y high
+
+06
+67
+78  
+52  	//0x5207 R WIN BL Y	low
+07  
+fe        // R WIN BL Y low
+
+06
+67
+78  
+52  	//0x5208 R WIN TR X	high
+08  
+00      // R WIN TR X high
+
+06
+67
+78  
+52  	//0x5209 R WIN TR X	low
+09  
+54        // R WIN TR X low
+
+06
+67
+78  
+52  	//0x520A R WIN TR Y	high
+0a  
+01        // R WIN TR Y high
+
+06
+67
+78  
+52  	//0x520B R WIN TR Y	low
+0b  
+31        // R WIN TR Y low
+
+06
+67
+78  
+52  	//0x520C R SKIN DX	high
+0c  
+00        // R SKIN DX high
+
+06
+67
+78  
+52  	//0x520D R SKIN DX	low
+0d  
+22        // R SKIN DX low
+
+06
+67
+78  
+52  	//0x520E R SKIN DY	high
+0e  
+01        // R SKIN DY high
+
+06
+67
+78  
+52  	//0x520F R SKIN DY	low
+0f  
+ed        // R SKIN DY low
+
+06
+67
+78  
+52  	//0x5210 R SKIN RX
+10  
+10        // R SKIN RX
+
+06
+67
+78  
+52  	//0x5211 R SKIN RY
+11  
+05        // R SKIN RY
+
+06
+67
+78  
+52 	//0x5228 R WIN SX high
+28  
+00        // R WIN SX high
+
+06
+67
+78  
+52  	//0x5228 R WIN SX low
+29  
+5f        // R WIN SX low
+
+06
+67
+78  
+52  	//0x522c R WIN SY high
+2c  
+01        // R WIN SY high
+
+06
+67
+78  
+52  	//0x522d R WIN SY low
+2d  
+22        // R WIN SY low
+
+06
+67
+78  
+52  	//0x522a R WIN EX high
+2a  
+00        // R WIN EX high
+
+06
+67
+78  
+52  	//0x522b R WIN EX low
+2b  
+e0        // R WIN EX low
+
+06
+67
+78  
+52  	//0x522e R WIN EY high
+2e  
+01        // R WIN EY high
+
+06
+67
+78  
+52  	//0x522e R WIN EY low
+2f  
+6e        // R WIN EY low
+
+06
+67
+78  
+52  	//0x5230 R AWB CTRL30
+30  
+70        // R AWB CTRL30
+
+  // Gamma - add later
+  // Defect pixel correction - add later
+  // Color interpolation CIP
+06
+67
+78  
+55  	//0x550d recursive dnsen
+0d  
+00        // recursive de-noise disable
+
+06
+67
+78 
+55  	//0x5500 SHRP MT GAIN TH1
+00  
+0b        // SHRP MT GAIN TH1
+
+06
+67
+78  
+55  	//0x5501 SHRP MT GAIN TH2
+01  
+1b        // SHRP MT GAIN TH2
+
+06
+67
+78  
+55  	//0x5502 SHRP MT TH1
+02  
+22        // SHRP MT TH1
+
+06
+67
+78  
+55  	//0x5503 SHRP MT TH2
+03  
+07        // SHRP MT TH2
+
+06
+67
+78  
+55  	//0x5504 DNS GAIN TH1
+04  
+0b        // DNS GAIN TH1
+
+06
+67
+78  
+55  	//0x5505 DNS GAIN TH2
+05  
+24        // DNS GAIN TH2
+
+06
+67
+78  
+55  	//0x5506 DNS TH1
+06  
+0E        // DNS TH1
+
+06
+67
+78  
+55  	//0x5507 DNS TH2
+07  
+25        // DNS TH2
+
+06
+67
+78  
+55  	//0x5509 SHRP TH GAIN TH1
+09  
+10        // SHRP TH GAIN TH1
+
+06
+67
+78  
+55  	//0x550a SHRP TH GAIN TH2
+0a  
+24        // SHRP TH GAIN TH2
+
+  // Color matrix  - add later
+  // Special digital effects Control
+06
+67
+78  
+58  	//0x5804 SATURATION TH1
+04  
+28        // SATURATION TH1
+
+06
+67
+78  
+58  	//0x5809 UVADJ GAIN TH1
+09  
+10        // UVADJ GAIN TH1
+
+06
+67
+78  
+58  	//0x580a UVADJ GAIN TH2
+0a  
+40        // UVADJ GAIN TH2
+
+  // Start Streaming
+06
+67
+78  
+01 	//0x0100	MODE_SELECT	0:Sleep, 1:Streaming 
+00  
+01 	//Streaming
+
+  //0xff  0x00  0x00  0x00        // End Script  byte0 = end script  byte1~3 = don't care
+//------------------------------------------------------------------
+//   End of I2C Initial 
+//------------------------------------------------------------------
+
+
+FF   //END of Table
