@@ -27,10 +27,15 @@ window = tk.Tk()
 window.title('縣市天氣資料')
 
 # 設定主視窗大小
-w = 300
-h = 350
-size = str(w)+'x'+str(h)
-window.geometry(size)
+w = 800
+h = 800
+x_st = 100
+y_st = 100
+#size = str(w)+'x'+str(h)
+#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 
 cbVar = tk.StringVar()
 cb = ttk.Combobox(window, textvariable=cbVar)   #下拉式選單元件

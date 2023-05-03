@@ -4,10 +4,15 @@ window = Tk() # Create a window
 window.title('左鍵變大 右鍵變小')
 
 # 設定主視窗大小
-w = 400
-h = 400
-size = str(w)+'x'+str(h)
-window.geometry(size)
+w = 800
+h = 800
+x_st = 100
+y_st = 100
+#size = str(w)+'x'+str(h)
+#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 
 def mouseClick1(event):
     canvas.delete("oval")

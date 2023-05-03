@@ -1,13 +1,3 @@
-#!/usr/bin/env python3
-"""
-Utility for parsing HTML5 entity definitions available from:
-
-    http://dev.w3.org/html5/spec/entities.json
-
-Written by Ezio Melotti and Iuliia Proskurnia.
-
-"""
-
 import os
 import sys
 import json

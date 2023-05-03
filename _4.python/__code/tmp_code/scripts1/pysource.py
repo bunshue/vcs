@@ -1,24 +1,8 @@
-#!/usr/bin/env python3
+'''
+列出所有python檔案
 
-"""\
-List python source files.
 
-There are three functions to check whether a file is a Python source, listed
-here with increasing complexity:
-
-- has_python_ext() checks whether a file name ends in '.py[w]'.
-- look_like_python() checks whether the file is not binary and either has
-  the '.py[w]' extension or the first line contains the word 'python'.
-- can_be_compiled() checks whether the file can be compiled by compile().
-
-The file also must be of appropriate size - not bigger than a megabyte.
-
-walk_python_files() recursively lists all Python files under the given directories.
-"""
-__author__ = "Oleg Broytmann, Georg Brandl"
-
-__all__ = ["has_python_ext", "looks_like_python", "can_be_compiled", "walk_python_files"]
-
+'''
 
 import os, re
 
