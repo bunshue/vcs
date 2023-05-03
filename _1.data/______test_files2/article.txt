@@ -1,0 +1,4 @@
+Command Prompt, also known as cmd.exe or cmd, is the default command-line interpreter for the OS/2, eComStation, ArcaOS, Microsoft Windows (Windows NT family and Windows CE family), and ReactOS operating systems. On Windows CE .NET 4.2, Windows CE 5.0 and Windows Embedded CE 6.0 it is referred to as the Command Processor Shell. Its implementations differ between operating systems, but the behavior and basic set of commands are consistent. cmd.exe is the counterpart of COMMAND.COM in DOS and Windows 9x systems, and analogous to the Unix shells used on Unix-like systems. The initial version of cmd.exe for Windows NT was developed by Therese Stowell. Windows CE 2.11 was the first embedded Windows release to support a console and a Windows CE version of cmd.exe. The ReactOS implementation of cmd.exe is derived from FreeCOM, the FreeDOS command line interpreter. 
+
+
+

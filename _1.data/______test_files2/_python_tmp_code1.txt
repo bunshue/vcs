@@ -1,0 +1,1078 @@
+
+
+ax.imshow(volume[ax.index, :, :], cMap, vmin=cMin, vmax=cMax)
+
+
+
+
+
+import time
+
+startTime = time.time()
+
+'''
+do something
+'''
+
+elapsedTime = time.time() - startTime
+print("Time for LinkedList is", elapsedTime, "seconds")
+
+
+
+item_text = "%s %d" % (item_describe, i + 1)
+
+
+item_text = "%s %d" % (item_describe, i + 1)
+rjust = item_text.rjust(128)
+parentNodeID = self.dsTreeView.AppendItem(ip, text=rjust)
+self.recurse_tree(ds, parentNodeID)
+
+
+
+
+            st = statfunc(filename)
+        except OSError as msg:
+            sys.stderr.write("can't stat %r: %r\n" % (filename, msg))
+            status = 1
+            st = ()
+        if st:
+
+
+
+f.write("    '%s':\t%s,  \t# %s\n" % (name,charcode,comment))
+f.write('\n}\n')
+
+
+        for line in reversed(lines):
+            if prog.search(line):
+                print(line)
+
+    # Use lstat() to stat files if it exists, else stat()
+    try:
+        statfunc = os.lstat
+    except AttributeError:
+        statfunc = os.stat
+
+
+
+
+VERSION = "pilprint 0.3/2003-05-05"
+
+sys.exit(main(sys.argv[1:], sys.stdout))
+
+sys.stderr.write('%s: %s\n%s' % (sys.argv[0], msg, usage))
+sys.stderr.write("%s: %s\n" % (sys.argv[0], msg))
+
+
+print("%s:%d:%s" % (filename, row, line), end=' ')
+
+
+if os.path.normcase(fn).endswith(".py") or os.path.isdir(fn):
+        
+
+
+如果資料夾不存在  建立之
+    # Create the win32com\gen_py directory.
+    make_dir = os.path.join(lib_dir, "win32com", "gen_py")
+    if not os.path.isdir(make_dir):
+        if verbose:
+            print("Creating directory", make_dir)
+        directory_created(make_dir)
+        os.mkdir(make_dir)
+
+
+
+
+            os.remove(os.path.join(lib_dir, "win32", "dbi.pyd.old"))
+
+
+
+
+
+
+//xil_printf("david0217: %s:%s(%d) ST setup g_exposure = %d\r\n",__FILE__,__func__,__LINE__, g_exposure);
+
+david1031: ../src/vid_io_intf.c:vid_io_intf_init(279) FMC IMAGEON card not exist
+
+字串的用法
+split replace
+            lang, encoding = locale.split('.')[:2]
+            encoding = encoding.replace('-', '')
+            encoding = encoding.replace('_', '')
+    if test_func_name.startswith("test_"):
+
+
+
+
+自定義版本 資料
+
+__version__ = "1.1"
+
+__author__ = 'Raymond Hettinger'
+
+print("msgfmt.py", __version__)
+
+
+print('msgid_plural not preceded by msgid on %s:%d' % (infile, lno), file=sys.stderr)
+print('plural without msgid_plural on %s:%d' % (infile, lno), file=sys.stderr)
+print('ERROR: %a -> %a != %a' % (k, locale.normalize(k), v), file=sys.stderr)
+
+print('    %-40s%a,' % ('%a:' % k, v))
+print('#    removed %a' % k)
+print('#    updated %a -> %a to %a' % (k, olddata[k], data[k]))
+
+
+
+import re
+import os
+import sys
+
+import tempfile
+
+            tn = tempfile.mktemp()
+            fp = open(tn, "wb")
+            fp.write(m.group(1) + b"\n")
+            fp.close()
+
+	tfile = tempfile.mktemp()
+        fp = open(tfile, "w")
+        fp.write("quit\n")
+        fp.close()
+
+
+
+
+print(__doc__ % globals())
+
+    print("-"*70)
+
+
+def chop(line):
+    if line.endswith("\n"):
+        return line[:-1]
+    else:
+        return line
+
+
+def testdir(a):
+    try:
+        names = [n for n in os.listdir(a) if n.endswith('.py')]
+    except OSError:
+        print("Directory not readable: %s" % a, file=sys.stderr)
+    else:
+        for n in names:
+            fullname = os.path.join(a, n)
+            if os.path.isfile(fullname):
+                output = io.StringIO()
+                print('Testing %s' % fullname)
+                try:
+                    roundtrip(fullname, output)
+                except Exception as e:
+                    print('  Failed to compile, exception is %s' % repr(e))
+            elif os.path.isdir(fullname):
+                testdir(fullname)
+
+testdir(a)
+
+
+
+
+def parse(filename):
+
+    with open(filename, encoding='latin1') as f:
+        lines = list(f)
+    data = {}
+    for line in lines:
+        line = line.strip()
+        if not line:
+            continue
+        if line[:1] == '#':
+            continue
+        locale, alias = line.split()
+        
+        # Fix non-standard locale names, e.g. ks_IN@devanagari.UTF-8
+        if '@' in alias:
+            alias_lang, _, alias_mod = alias.partition('@')
+            if '.' in alias_mod:
+                alias_mod, _, alias_enc = alias_mod.partition('.')
+                alias = alias_lang + '.' + alias_enc + '@' + alias_mod
+    return data
+
+def parse_glibc_supported(filename):
+
+    with open(filename, encoding='latin1') as f:
+        lines = list(f)
+    data = {}
+    for line in lines:
+        line = line.strip()
+        if not line:
+            continue
+        if line[:1] == '#':
+            continue
+        line = line.replace('/', ' ').strip()
+        line = line.rstrip('\\').rstrip()
+        words = line.split()
+        if len(words) != 2:
+            continue
+
+
+
+
+
+
+
+
+
+
+bind的用法：控件.bind(event, handler),其中event是tkinter已经定义好的的事件，handler是处理器，可以是一个处理函数，如果相关事件发生, handler 函数会被触发, 事件对象 event 会传递给 handler 函数
+基本所有控件都能bind
+
+常见event有：
+
+鼠标单击事件：
+鼠标左键点击为 <Button-1>,
+鼠标中键点击为 <Button-2>,
+鼠标右键点击为 <Button-3>,
+向上滚动滑轮为 <Button-4>,
+向下滚动滑轮为 <Button-5>.
+
+鼠标双击事件.：
+鼠标左键点击为 <Double-Button-1>,
+鼠标中键点击为 <Double-Button-2>,
+鼠标右键点击为 <Double-Button-3>.
+
+鼠标释放事件：
+鼠标左键点击为 <ButtonRelease-1>,
+鼠标中键点击为 <ButtonRelease-2>,
+鼠标右键点击为 <ButtonRelease-3>.
+鼠标相对当前控件的位置会被存储在 event 对象中的 x 和 y 字段中传递给回调函数.
+
+鼠标移入控件事件：<Enter>
+
+获得焦点事件：<FocusIn>
+
+鼠标移出控件事件: <Leave>
+
+失去焦点事件:<FocusOut>
+
+鼠标按下移动事件：
+鼠标左键点击为 <B1-Motion>,
+鼠标中键点击为 <B2-Motion>,
+鼠标右键点击为 <B3-Motion>.
+鼠标相对当前控件的位置会被存储在 event 对象中的 x 和 y 字段中传递给回调函数.
+
+键盘按下事件:<Key>，event中的keysym ,keycode,char都可以获取按下的键【其他想要获取值的也可以先看看event中有什么】
+键位绑定事件：<Return>回车键，<BackSpace>,<Escape>,<Left>,<Up>,<Right>,<Down>…….
+控件大小改变事件：<Configure>，新的控件大小会存储在 event 对象中的 width 和 height 属性传递. 有些平台上该事件也可能代表控件位置改变.
+
+
+    Event中的属性：
+        widget：产生事件的控件
+        x, y：当前鼠标的位置
+        x_root, y_root：当前鼠标相对于屏幕左上角的位置，以像素为单位。
+        char：字符代码（仅限键盘事件），作为字符串。
+        keysym：关键符号（仅限键盘事件）。
+        keycode：关键代码（仅限键盘事件）。
+        num：按钮号码（仅限鼠标按钮事件）。
+        width, height：小部件的新大小（以像素为单位）（仅限配置事件）。
+        type：事件类型。
+
+
+
+
+
+
+
+
+ 
+#width 選項的單位是文字單位，而不是畫素
+
+字串處理
+
+#url = input("請輸入網址：")
+url = 'https://www.google.com.tw/'
+if url.startswith("http://") or url.startswith("https://"):
+    print("輸入的網址格式正確！")
+else:
+    print("輸入的網址格式錯誤！")
+
+
+
+start = datetime.datetime(2016, 1, 1)
+end = datetime.datetime(2017, 1, 1)
+
+
+#熊貓是python的excel
+
+
+import os
+import sys
+import getopt
+import tokenize
+
+def main():
+    try:
+        opts, args = getopt.getopt(sys.argv[1:], "lh")
+    except getopt.error as msg:
+        usage(msg)
+        return 2
+    if not args:
+        usage("at least one file argument is required")
+        return 2
+    listnames = 0
+    for o, a in opts:
+        if o == "-h":
+            print(__doc__)
+            return
+        if o == "-l":
+            listnames = 1
+    exit = None
+    for filename in args:
+        x = process(filename, listnames)
+        exit = exit or x
+    return exit
+
+def usage(msg):
+    sys.stderr.write("%s: %s\n" % (sys.argv[0], msg))
+    sys.stderr.write("Usage: %s [-l] file ...\n" % sys.argv[0])
+    sys.stderr.write("Try `%s -h' for more information.\n" % sys.argv[0])
+
+def process(filename, listnames):
+    if os.path.isdir(filename):
+        return processdir(filename, listnames)
+    try:
+        fp = open(filename)
+    except IOError as msg:
+        sys.stderr.write("Can't open: %s\n" % msg)
+        return 1
+    g = tokenize.generate_tokens(fp.readline)
+    lastrow = None
+    for type, token, (row, col), end, line in g:
+        if token in ("/", "/="):
+            if listnames:
+                print(filename)
+                break
+            if row != lastrow:
+                lastrow = row
+                print("%s:%d:%s" % (filename, row, line), end=' ')
+    fp.close()
+
+def processdir(dir, listnames):
+    try:
+        names = os.listdir(dir)
+    except OSError as msg:
+        sys.stderr.write("Can't list directory: %s\n" % dir)
+        return 1
+    files = []
+    for name in names:
+        fn = os.path.join(dir, name)
+        if os.path.normcase(fn).endswith(".py") or os.path.isdir(fn):
+            files.append(fn)
+    files.sort(key=os.path.normcase)
+    exit = None
+    for fn in files:
+        x = process(fn, listnames)
+        exit = exit or x
+    return exit
+
+if __name__ == "__main__":
+    sys.exit(main())
+
+
+
+
+
+
+JSON剖析器
+http://json.parser.online.fr/
+
+
+
+啟用一個測試用的本地端伺服器
+python -m http.server -d www
+
+瀏覽器輸入
+localhost:8000
+就可以看到www資料夾下的檔案列表
+
+DOM	Document Object Model
+
+
+
+now = datetime.now()
+filename = now.strftime("news-%y-%m-%d-%H-%M-%S.json")
+
+
+
+
+
+tk之string的用法
+
+radio_var = tk.StringVar()
+
+print(radio_var.get()))
+
+check_var = tk.IntVar(value = 10)
+print(check_var.get()),
+check_var.set(5))
+
+button_string = tk.StringVar(value = 'A button with string var')
+
+
+label的寫法
+l3=Label(text='Created by Harsh Bardhan Mishra',font=('Times',22),fg='brown')
+
+
+import os
+cur_path=os.path.dirname(__file__) # 取得目前路徑
+sample_tree=os.walk(cur_path)
+for dirname,subdir,files in sample_tree:
+    print("檔案路徑：",dirname)
+    print("目錄串列：" , subdir)   
+    print("檔案串列：",files)
+    print()
+    
+    
+
+def make_backup(filename):
+    import os, os.path
+    backup = filename + '~'
+    if os.path.lexists(backup):
+        try:
+            os.remove(backup)
+        except OSError:
+            print("Can't remove backup %r" % (backup,), file=sys.stderr)
+        # end try
+    # end if
+    try:
+        os.rename(filename, backup)
+    except OSError:
+        print("Can't rename %r to %r" % (filename, backup), file=sys.stderr)
+    # end try
+# end def make_backup
+
+
+    if os.path.isdir(file) and not os.path.islink(file):
+        if verbose:
+            print("listing directory", file)
+        names = os.listdir(file)
+        for name in names:
+            fullname = os.path.join(file, name)
+            if ((recurse and os.path.isdir(fullname) and
+                 not os.path.islink(fullname) and
+                 not os.path.split(fullname)[1].startswith("."))
+                or name.lower().endswith(".py")):
+                check(fullname)
+        return
+
+            bak = file + ".bak"
+            if makebackup:
+                shutil.copyfile(file, bak)
+                if verbose:
+                    print("backed up", file, "to", bak)
+
+
+
+    fp = open(substfile, 'r')
+    lineno = 0
+    while 1:
+        line = fp.readline()
+        if not line: break
+        lineno = lineno + 1
+        try:
+            i = line.index('#')
+        except ValueError:
+            i = -1          # Happens to delete trailing \n
+        words = line[:i].split()
+        if not words: continue
+        if len(words) == 3 and words[0] == 'struct':
+            words[:2] = [words[0] + ' ' + words[1]]
+        elif len(words) != 2:
+            err(substfile + '%s:%r: warning: bad line: %r' % (substfile, lineno, line))
+            continue
+        if Reverse:
+            [value, key] = words
+        else:
+            [key, value] = words
+        if value[0] == '*':
+            value = value[1:]
+        if key[0] == '*':
+            key = key[1:]
+            NotInComment[key] = value
+        if key in Dict:
+            err('%s:%r: warning: overriding: %r %r\n' % (substfile, lineno, key, value))
+            err('%s:%r: warning: previous: %r\n' % (substfile, lineno, Dict[key]))
+    fp.close()
+
+
+
+
+    try:
+        names = os.listdir(dirname)
+    except OSError as msg:
+        err(dirname + ': cannot list directory: ' + str(msg) + '\n')
+    names.sort()
+    for name in names:
+        if name in (os.curdir, os.pardir): continue
+        fullname = os.path.join(dirname, name)
+        if os.path.islink(fullname): pass
+        elif os.path.isdir(fullname):
+            subdirs.append(fullname)
+        elif wanted(name):
+            if fix(fullname): bad = 1
+    for fullname in subdirs:
+        if recursedown(fullname): bad = 1
+    return bad
+
+        statbuf = os.stat(filename)
+        os.chmod(tempname, statbuf[ST_MODE] & 0o7777)
+
+
+        os.rename(filename, filename + '~')
+
+
+    print("%d objects before, %d after" % (before, after))
+
+
+    if os.path.isdir(file) and not os.path.islink(file):
+        
+        for name in names:
+            fullname = os.path.join(file, name)
+            if ((recurse and os.path.isdir(fullname) and
+                 not os.path.islink(fullname))
+                or name.lower().endswith(".py")):
+                check(fullname)
+
+names = os.listdir(file)
+
+        print("checking", file, "...", end=' ')
+            print("%r lines %d-%d" % (file, s+1, e+1))
+            if os.path.exists(bak):
+                os.remove(bak)
+            os.rename(file, bak)
+
+
+
+            outfile = os.path.basename(filename)
+
+
+def usage():
+    sys.stderr.write(__doc__ % globals())
+
+sys.stderr.write(msg)
+
+import tkinter as tk
+import tkinter.messagebox
+
+        kilo = 123.456
+
+        # Convert kilometers to miles.
+        miles = kilo * 0.6214
+
+        # Display the results in an info dialog box.
+        tk.messagebox.showinfo('Results', \
+            str(kilo) + ' kilometers is equal to ' + \
+            str(miles) + ' miles.')
+
+
+
+
+測試list之最後5筆資料
+
+my_list[-5:]
+
+
+IFTTT	IF This Then That
+網路自動連結工具
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+
+import PySimpleGUI as sg
+import subprocess
+import shutil
+import os
+import sys
+
+
+
+
+layout = [[sg.Text('PyInstaller EXE Creator', font='Any 15')],
+              [sg.Text('Source Python File'), sg.Input(key='-sourcefile-', size=(45, 1)),
+               sg.FileBrowse(file_types=(("Python Files", "*.py"),))],
+              [sg.Text('Icon File'), sg.Input(key='-iconfile-', size=(45, 1)),
+               sg.FileBrowse(file_types=(("Icon Files", "*.ico"),))],
+              [sg.Frame('Output', font='Any 15', layout=[
+                        [sg.Output(size=(65, 15), font='Courier 10')]])],
+              [sg.Button('Make EXE', bind_return_key=True),
+               sg.Button('Quit', button_color=('white', 'firebrick3')) ],
+              [sg.Text('Made with PySimpleGUI (www.PySimpleGUI.org)', auto_size_text=True, font='Courier 8')]]
+
+window = sg.Window('PySimpleGUI EXE Maker', layout, auto_size_text=False, auto_size_buttons=False, default_element_size=(20,1), text_justification='right')
+
+
+
+
+
+
+@app.route('/user/<username>')
+def show_user(username):
+    return 'User Name is {}'.format(username)
+
+if __name__ == '__main__':
+    app.run()
+
+
+
+
+print(__doc__)
+print(globals())
+
+
+
+print()
+
+
+
+for i in range(30):
+    print("webpage{}.png".format(i))
+
+
+
+
+DB Browser for SQLite
+https://sqlitebrowser.org/
+
+encoding = 'utf-8-sig'	編碼設定為將BOM去除的的utf-8編碼
+
+https://pythex.org/
+
+
+import turtle
+turtle.write("\u6B22\u8FCE \u03b1 \u03b2 \u03b3")
+turtle.done() 
+
+
+
+
+from PIL import Image,ImageDraw
+image = Image.open("captcha.png").convert("L")	#轉換成灰階圖像
+
+
+    simpleaudio：播放WAV文件和NumPy數組。
+    winsound：播放WAV文件或鳴響您的系統揚聲器
+    https://docs.python.org/3/library/winsound.html
+
+
+
+
+簡易播放一檔
+
+filename = 'C:/______test_files2/captcha02.png'
+
+from matplotlib import pyplot as plt
+img = cv2.imread(filename)
+plt.imshow(img)
+plt.show()
+
+
+filename = 'C:/______test_files/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3'
+
+from pygame import mixer  # Load the popular external library
+
+mixer.init()
+mixer.music.load(filename)
+mixer.music.play()
+
+
+
+
+t0 = time.time()
+ :
+ :
+t1 = time.time()
+
+print("Open took %.2f seconds" % (t1-t0,))
+print("\ncommand took %.2f seconds\n" % (t1-t0,))
+
+
+import time
+import sys
+
+    while True:
+        data = repr(time.time()).encode('utf-8') + b'\0'
+        s.sendto(data, (addrinfo[4][0], MYPORT))
+        time.sleep(1)
+
+        options = self.__options
+        timestamp = time.strftime('%Y-%m-%d %H:%M%z')
+        encoding = fp.encoding if fp.encoding else 'UTF-8'
+        print(pot_header % {'time': timestamp, 'version': __version__,
+                            'charset': encoding,
+                            'encoding': '8bit'}, file=fp)
+
+
+
+
+
+def getFilesForName(name):
+    """Get a list of module files for a filename, a module or package name,
+    or a directory.
+    """
+    if not os.path.exists(name):
+        # check for glob chars
+        if containsAny(name, "*?[]"):
+            files = glob.glob(name)
+            list = []
+            for file in files:
+                list.extend(getFilesForName(file))
+            return list
+
+        # try to find module or package
+        name = _get_modpkg_path(name)
+        if not name:
+            return []
+
+    if os.path.isdir(name):
+        # find all python files in directory
+        list = []
+        os.walk(name, _visit_pyfiles, list)
+        return list
+    elif os.path.exists(name):
+        # a single file
+        return [name]
+
+    return []
+
+
+
+
+
+
+https://www.pysimplegui.org/en/latest/cookbook/
+
+
+
+import os
+from pydicom import dcmread
+
+input_folder = "C:/Users/USER/Desktop/test"
+output_folder = "C:/Users/USER/Desktop/test2"
+
+# Loop through all files in the input folder
+for filename in os.listdir(input_folder):
+if filename.endswith(".dcm"):
+# Read DICOM file
+ds = dcmread(os.path.join(input_folder, filename))
+
+# Change Patient Name data
+ds.PhotometricInterpretation = "gary"
+
+# Save DICOM file as
+output_filename = os.path.join(output_folder, filename)
+ds.save_as(output_filename)
+
+print(f"File {filename} processed and saved as {output_filename}")
+
+
+
+
+## Tested@Colab-Python-3.9.16;
+import os, pydicom
+from pydicom.data import get_testdata_file
+## 
+mySrcBase = r'/usr/local/lib/python3.9/dist-packages/pydicom/data/test_files'
+myDstBase = r'/usr/local/lib/python3.9/dist-packages/pydicom/data/myOut'
+## 
+if not os.path.exists(myDstBase):
+    os.makedirs(myDstBase, exist_ok = True)
+myFileNames = [
+    i for i in os.listdir(mySrcBase) 
+    if (
+        os.path.isfile(os.path.join(mySrcBase, i))
+        and i.endswith('.dcm')
+    )
+]
+for i in myFileNames:
+    try:
+        ds = pydicom.dcmread(os.path.join(mySrcBase, i))
+        ds.PhotometricInterpretation = "gary"
+        ds.save_as(os.path.join(myDstBase, i))
+    except Exception as err:
+        print(f'□ Exception@[{i}]:[{type(err).__name__}]: {err}')
+        continue
+        
+        
+        
+        
+        
+        
+        
+
+
+OCR 破解驗證碼
+
+因為驗證碼通常會有很多噪點，
+我上網引用了大大寫好的降噪副程式，
+先將驗證碼降噪後再進行 OCR 辨識，
+會大大的提高成功率。
+
+
+https://stackoverflow.max-everyday.com/2019/06/python-opencv-denoising/
+
+
+
+C:\Users\david\AppData\Local\Programs\Python\Python38-32>python.exe -m pip install PyPDF2
+C:\Users\david\AppData\Local\Programs\Python\Python38-32>python.exe -m pip install PdfReader
+C:\Users\david\AppData\Local\Programs\Python\Python38-32>python.exe -m pip install auto-py-to-exe
+
+
+C:\Users\david\AppData\Local\Programs\Python\Python38-32>auto-py-to-exe
+
+
+
+
+Python 列出目錄中所有檔案教學：os.listdir 與 os.walk
+
+
+
+os.listdir 取得檔案列表
+os.listdir 可以取得指定目錄中所有的檔案與子目錄名稱，以下是一個簡單的範例：
+
+
+
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+from os import listdir
+from os.path import isfile, isdir, join
+
+# 指定要列出所有檔案的目錄
+mypath = "/var/log"
+
+# 取得所有檔案與子目錄名稱
+files = listdir(mypath)
+
+# 以迴圈處理
+for f in files:
+  # 產生檔案的絕對路徑
+  fullpath = join(mypath, f)
+  # 判斷 fullpath 是檔案還是目錄
+  if isfile(fullpath):
+    print("檔案：", f)
+  elif isdir(fullpath):
+    print("目錄：", f)
+    
+    
+    
+
+os.walk 遞迴搜尋檔案
+
+os.walk 是一個以遞迴方式列出特定路徑下，所有子目錄與檔案的函數，以下是一個使用範例：
+
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+from os import walk
+
+# 指定要列出所有檔案的目錄
+mypath = "/var/log"
+
+# 遞迴列出所有子目錄與檔案
+for root, dirs, files in walk(mypath):
+  print("路徑：", root)
+  print("  目錄：", dirs)
+  print("  檔案：", files)
+  
+  
+若要取得所有檔案的絕對路徑，讓程式逐一處理的話，可以這樣寫：
+
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+from os import walk
+from os.path import join
+
+# 指定要列出所有檔案的目錄
+mypath = "/var/log"
+
+# 遞迴列出所有檔案的絕對路徑
+for root, dirs, files in walk(mypath):
+  for f in files:
+    fullpath = join(root, f)
+    print(fullpath)
+    
+
+Python 以模組名稱 __name__ 分辨程式執行模式
+
+
+
+
+
+MapKeyboard 重設鍵盤按鍵功能、讓指定按鍵失效！（remap鍵盤、停用按鍵）
+https://123.briian.com/forum.php?mod=viewthread&tid=3668
+MapKeyboard v1.5 停用鍵盤按鍵、將按鍵指定其他功能 REMAP
+https://123.briian.com/forum.php?mod=viewthread&tid=3668
+
+
+
+
+    
+      
+
+
+
+
+
+reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
+
+
+
+on-line compiler
+https://www.tutorialspoint.com/execute_python_online.php
+https://www.tutorialspoint.com/codingground.htm
+
+time
+https://tw.piliapp.com/time-now/tw/taipei/+
+
+同步不同台電腦的python套件之phthon程式
+
+需安裝之套件做成一個list
+
+檢查本機電腦是否有安裝此套件
+若無 則安裝之
+
+
+
+
+
+
+
+http://the.earth.li/~sgtatham/putty/latest/x86/putty.exe
+
+
+
+chatgpt
+gmail/fullname
+
+x=[4 3 9 -7 1 2 0 0]';
+y=fft(x);
+
+
+clear
+t=0:1/50:6.28;
+x=sin(2*pi*15*t);
+y=fft(x);
+m=abs(y);
+%p=unwrap(angle(y));
+f=(0:length(y)-1)'*50/length(y);
+figure(1);plot(t,x),ylabel('Sin(x)'),grid on
+figure(2);plot(f,m),ylabel('Abs.'),grid on
+%figure(3);plot(f,p*180/pi),ylabel('Phase'),grid on
+
+
+GET
+將資料全部寫在URL中，就像你寫明信片一樣，傳遞上較不安全。
+
+GET加上參數的格式：https://www.example.com/index.html?key1=value1&key2=value2
+
+POST
+將資料寫在內部，就像你寫信然後裝進信封袋一樣，傳遞上比較安全且傳遞的資訊可以比較多。
+
+
+now=datetime.now()
+
+    person1={"name":"Amy","phone":"049-1234567","age":20}
+    person2={"name":"Jack","phone":"02-4455666","age":25}
+    person3={"name":"Nacy","phone":"04-9876543","age":17}
+    persons=[person1,person2,person3]
+
+
+from machine import Pin, PWM
+import time
+
+pitches = {
+    'C':261, # D0
+    'D':294, # Re
+    'E':329, # Mi
+    'F':349, # Fa
+    'G':392, # So
+    'A':440, # La
+    'B':493, # Si
+    'S':0    # Stop
+}
+
+music = (
+    ('C',1),('C',1),('G',1),('G',1),('A',1),('A',1),('G',2),
+    ('F',1),('F',1),('E',1),('E',1),('D',1),('D',1),('C',2),
+    ('G',1),('G',1),('F',1),('F',1),('E',1),('E',1),('D',2),
+    ('G',1),('G',1),('F',1),('F',1),('E',1),('E',1),('D',2),
+    ('C',1),('C',1),('G',1),('G',1),('A',1),('A',1),('G',2),
+    ('F',1),('F',1),('E',1),('E',1),('D',1),('D',1),('C',1)
+)
+
+speed=400 # 設定節拍速度
+period=10 # 設定每拍停頓時間
+
+buzzer = PWM(Pin(14, Pin.OUT), duty=1000) # D5
+try:
+    for tone,tempo in music:
+        if (tone=="S"):
+            buzzer.duty(0) # 靜音
+        else:
+            buzzer.duty(1000)
+            buzzer.freq(pitches[tone])
+        time.sleep_ms(tempo*speed)
+        print(pitches[tone])
+        #以靜音設定每拍間稍為停頓
+        buzzer.duty(0)         # 靜音
+        time.sleep_ms(period)  # 停頓時間
+    buzzer.deinit()
+except:  # CTRL + C 中斷
+    buzzer.deinit()       
+
+'''
+def fetch_data():
+    url = 'http://new.cpc.com.tw/division/mb/oil-more4.aspx'
+
+    html = requests.get(url).text
+    sp = BeautifulSoup(html, 'html.parser')
+    data = sp.find_all('span', {'id':'Showtd'})
+    rows = data[0].find_all('tr')
+
+    prices = list()
+    for row in rows:
+        cols = row.find_all('td')
+        if len(cols[1].text) > 0:
+            item = [cols[0].text, cols[1].text, \
+                    cols[2].text, cols[3].text]
+            prices.append(item)
+    for p in prices:
+        sqlstr = "select * from prices where gdate='{}';".format(p[0])
+        cursor = conn.execute(sqlstr)
+        if len(cursor.fetchall()) == 0:
+            g92 = 0 if p[1]=='' else float(p[1])
+            g95 = 0 if p[2]=='' else float(p[2])
+            g98 = 0 if p[3]=='' else float(p[3])
+            sqlstr = "insert into prices values('{}', {}, {}, {});". \
+                format(p[0], g92, g95, g98)
+            print(sqlstr)
+            conn.execute(sqlstr)
+            conn.commit()
+'''
+
+
+
+
+TextBox預設值
+# widgets 
+entry_string = tk.StringVar(value = 'test1111')
+entry = ttk.Entry(window, textvariable = entry_string)
+entry.pack()
+
+print('Entry內容 :', entry_string.get())	#TextBox取值
+
+//----------------------------------------------------------------------------------
+
+
+
+
+
+
