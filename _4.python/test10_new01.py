@@ -15,10 +15,6 @@ ccc = name.reverse()
 print(ccc)
 
 
-
-
-
-
 x = 2
 y = 0.5
 
@@ -204,59 +200,14 @@ plotfigure(X, X_test,y,yp)
 
 
 
-
-
-
-
 print(__file__)
 print(__file__.upper())
 print(__file__.lower())
 print(__name__)
-
-
 print(__name__)
 #print(__name__._version)
-
-
 print(__doc__)
-
-
-import os
-this_dir = os.path.dirname(__file__)
-print(this_dir)
-
-cwd = os.getcwd()
-print(cwd)
-
-aa = os.chdir(cwd)
-print(aa)
-
-dirname = 'C:/_git/vcs/_4.python'
-cc = os.chdir(dirname)
-print(cc)
-
-import os
-import sys
-
-isympy_path = os.path.abspath(__file__)
-isympy_dir = os.path.dirname(isympy_path)
-sympy_top = os.path.split(isympy_dir)[0]
-sympy_dir = os.path.join(sympy_top, 'sympy')
-
-if os.path.isdir(sympy_dir):
-    #sys.path.insert(0, sympy_top)
-    print('is dir')
-
-#print(__path__[0])
-
-theano_nose = os.path.realpath(__file__)
-print(theano_nose)
-
-
-#print(os.listdir(cache.dirname))
-
 print(__doc__)  # the docstring of this module above
-
 
 import sympy
 VERSION = sympy.__version__
@@ -595,11 +546,9 @@ from datetime import datetime, timezone
 
 path = 'C:/_git/vcs/_4.python'
 t1 = datetime.fromtimestamp(os.stat(path).st_mtime, timezone.utc)
-
 print(t1)
 
 t2 = t1.astimezone().isoformat()
-
 print(t2)
 
 
@@ -651,11 +600,9 @@ usage(msg)
 
 
 
-
+#os專區 
 
 filename = 'C:/______test_files2/human2.jpg'
-
-
 import os
 from stat import ST_MTIME
 from stat import ST_CTIME
@@ -667,22 +614,47 @@ print(st)
 print(st[ST_MTIME])
 print(st[ST_CTIME])
 
-
-
-
-#print("Serving {} on port {}, control-C to stop".format(path, port))
-
-
-
 base = os.path.basename(filename)
 print(base)
 
 fnfilter = os.path.basename
 print(fnfilter)
 
-
 #os.rename(filename, backup)
 
+import os
+this_dir = os.path.dirname(__file__)
+print(__file__)
+print(this_dir)
+
+cwd = os.getcwd()
+print(cwd)
+
+aa = os.chdir(cwd)
+print(aa)
+
+dirname = 'C:/_git/vcs/_4.python'
+cc = os.chdir(dirname)
+print(cc)
+
+import os
+import sys
+
+isympy_path = os.path.abspath(__file__)
+isympy_dir = os.path.dirname(isympy_path)
+sympy_top = os.path.split(isympy_dir)[0]
+sympy_dir = os.path.join(sympy_top, 'sympy')
+
+if os.path.isdir(sympy_dir):
+    #sys.path.insert(0, sympy_top)
+    print('is dir')
+
+#print(__path__[0])
+
+theano_nose = os.path.realpath(__file__)
+print(theano_nose)
+
+#print(os.listdir(cache.dirname))
 
 
 
@@ -690,13 +662,10 @@ print(fnfilter)
 
 
 
-    
 
 
-
-
-
-
+#print專區
+#print("Serving {} on port {}, control-C to stop".format(path, port))
 
 
 
