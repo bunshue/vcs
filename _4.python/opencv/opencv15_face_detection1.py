@@ -1,31 +1,29 @@
-# python import module : OpenCV 人臉辨識
+#OpenCV 人臉辨識
 
-import cv2	#導入 OpenCV 模組
+import cv2
 
-#建立 detectFace Function 並可帶入 img 圖片名稱變數
-
-def detectFace(img):
+def detectFace(filename):
 #取得將使用的檔案名稱，並讀取圖檔，接著把圖檔透過轉換函式轉為灰階影像，定義框出人臉時的框顏色
 
-    print(img)
-    filename = img.split(".")[0] # 取得檔案名稱(不添加副檔名)
     print(filename)
-    img = cv2.imread(img)	#讀取本機圖片
-    grayImg = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY) # 透過轉換函式轉為灰階影像
+    filename1 = filename.split(".")[0] # 取得檔案名稱(不添加副檔名)
+    print(filename1)
+    image = cv2.imread(filename)	#讀取本機圖片
+    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) # 透過轉換函式轉為灰階影像
     color = (0, 255, 0)  # 定義框的顏色
 
     # OpenCV 人臉識別分類器
     face_classifier = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
     
     # 調用偵測識別人臉函式
-    faceRects = face_classifier.detectMultiScale(grayImg, scaleFactor=1.2, minNeighbors=3, minSize=(32, 32))
+    faces = face_classifier.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=3, minSize=(32, 32))
 
     '''
-    print('共偵測到 ' + str(len(faceRects)) + ' 張人臉')
-    for nn in range(len(faceRects)):
+    print('共偵測到 ' + str(len(faces)) + ' 張人臉')
+    for nn in range(len(faces)):
         print(nn)
-        print(faceRects[nn])
-        print(faceRects[nn][0], faceRects[nn][1], faceRects[nn][2], faceRects[nn][3])
+        print(faces[nn])
+        print(faces[nn][0], faces[nn][1], faces[nn][2], faces[nn][3])
     '''
 
     #參數
@@ -35,18 +33,18 @@ def detectFace(img):
     #minSize & maxSize 	用來限制得到的目標區域範圍
     
     # 大於 0 則檢測到人臉
-    if len(faceRects):  
+    if len(faces):  
         # 框出每一張人臉
-        for faceRect in faceRects: 
-            x, y, w, h = faceRect
-            cv2.rectangle(img, (x, y), (x + h, y + w), color, 2)
+        for face in faces: 
+            x, y, w, h = face
+            cv2.rectangle(image, (x, y), (x + h, y + w), color, 2)
 
     # 將結果圖片輸出
 
     filename2 = 'C:/______test_files3/human_face.jpg'
+    #另存新檔
+    cv2.imwrite(filename2, image)	#寫入本機圖片
     print(filename2)
-    cv2.imwrite(filename2, img)	#寫入本機圖片
-
 
 print("框出照片中的人臉")
 filename = 'C:/______test_files2/human.jpg'

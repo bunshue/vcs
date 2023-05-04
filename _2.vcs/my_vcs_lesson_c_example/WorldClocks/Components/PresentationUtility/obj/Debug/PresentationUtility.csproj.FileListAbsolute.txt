@@ -1,6 +1,0 @@
-C:\_git\__david''''\WorldClocks_src\WorldClocks\Components\PresentationUtility\bin\Debug\BinaryComponents.PresentationUtility.dll
-C:\_git\__david''''\WorldClocks_src\WorldClocks\Components\PresentationUtility\bin\Debug\BinaryComponents.PresentationUtility.pdb
-C:\_git\__david''''\WorldClocks_src\WorldClocks\Components\PresentationUtility\obj\Debug\BinaryComponents.PresentationUtility.Properties.Resources.resources
-C:\_git\__david''''\WorldClocks_src\WorldClocks\Components\PresentationUtility\obj\Debug\PresentationUtility.csproj.GenerateResource.Cache
-C:\_git\__david''''\WorldClocks_src\WorldClocks\Components\PresentationUtility\obj\Debug\BinaryComponents.PresentationUtility.dll
-C:\_git\__david''''\WorldClocks_src\WorldClocks\Components\PresentationUtility\obj\Debug\BinaryComponents.PresentationUtility.pdb

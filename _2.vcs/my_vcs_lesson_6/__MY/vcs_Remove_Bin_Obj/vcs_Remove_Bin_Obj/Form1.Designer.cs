@@ -47,10 +47,22 @@
             this.button2 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
             this.groupBox_remove = new System.Windows.Forms.GroupBox();
-            this.rb_remove_vcs = new System.Windows.Forms.RadioButton();
-            this.rb_remove_cuda = new System.Windows.Forms.RadioButton();
             this.rb_remove_opengl = new System.Windows.Forms.RadioButton();
+            this.rb_remove_cuda = new System.Windows.Forms.RadioButton();
+            this.rb_remove_vcs = new System.Windows.Forms.RadioButton();
+            this.groupBox_replace = new System.Windows.Forms.GroupBox();
+            this.rb_file_type2 = new System.Windows.Forms.RadioButton();
+            this.rb_file_type1 = new System.Windows.Forms.RadioButton();
+            this.rb_file_type0 = new System.Windows.Forms.RadioButton();
+            this.cb_confirm = new System.Windows.Forms.CheckBox();
+            this.bt_replace = new System.Windows.Forms.Button();
+            this.tb_string_old = new System.Windows.Forms.TextBox();
+            this.tb_string_new = new System.Windows.Forms.TextBox();
+            this.lb_string_old = new System.Windows.Forms.Label();
+            this.lb_string_new = new System.Windows.Forms.Label();
+            this.rb_file_type3 = new System.Windows.Forms.RadioButton();
             this.groupBox_remove.SuspendLayout();
+            this.groupBox_replace.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
@@ -68,7 +80,7 @@
             // 
             this.richTextBox1.Location = new System.Drawing.Point(258, 51);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(658, 580);
+            this.richTextBox1.Size = new System.Drawing.Size(285, 267);
             this.richTextBox1.TabIndex = 1;
             this.richTextBox1.Text = "";
             // 
@@ -173,7 +185,7 @@
             // bt_clear
             // 
             this.bt_clear.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_clear.Location = new System.Drawing.Point(808, 529);
+            this.bt_clear.Location = new System.Drawing.Point(363, 163);
             this.bt_clear.Name = "bt_clear";
             this.bt_clear.Size = new System.Drawing.Size(85, 35);
             this.bt_clear.TabIndex = 135;
@@ -265,6 +277,26 @@
             this.groupBox_remove.TabStop = false;
             this.groupBox_remove.Text = "清理範圍";
             // 
+            // rb_remove_opengl
+            // 
+            this.rb_remove_opengl.AutoSize = true;
+            this.rb_remove_opengl.Location = new System.Drawing.Point(20, 70);
+            this.rb_remove_opengl.Name = "rb_remove_opengl";
+            this.rb_remove_opengl.Size = new System.Drawing.Size(55, 16);
+            this.rb_remove_opengl.TabIndex = 2;
+            this.rb_remove_opengl.Text = "opengl";
+            this.rb_remove_opengl.UseVisualStyleBackColor = true;
+            // 
+            // rb_remove_cuda
+            // 
+            this.rb_remove_cuda.AutoSize = true;
+            this.rb_remove_cuda.Location = new System.Drawing.Point(20, 45);
+            this.rb_remove_cuda.Name = "rb_remove_cuda";
+            this.rb_remove_cuda.Size = new System.Drawing.Size(45, 16);
+            this.rb_remove_cuda.TabIndex = 1;
+            this.rb_remove_cuda.Text = "cuda";
+            this.rb_remove_cuda.UseVisualStyleBackColor = true;
+            // 
             // rb_remove_vcs
             // 
             this.rb_remove_vcs.AutoSize = true;
@@ -277,31 +309,135 @@
             this.rb_remove_vcs.Text = "vcs";
             this.rb_remove_vcs.UseVisualStyleBackColor = true;
             // 
-            // rb_remove_cuda
+            // groupBox_replace
             // 
-            this.rb_remove_cuda.AutoSize = true;
-            this.rb_remove_cuda.Location = new System.Drawing.Point(20, 45);
-            this.rb_remove_cuda.Name = "rb_remove_cuda";
-            this.rb_remove_cuda.Size = new System.Drawing.Size(45, 16);
-            this.rb_remove_cuda.TabIndex = 1;
-            this.rb_remove_cuda.Text = "cuda";
-            this.rb_remove_cuda.UseVisualStyleBackColor = true;
+            this.groupBox_replace.Controls.Add(this.rb_file_type3);
+            this.groupBox_replace.Controls.Add(this.lb_string_new);
+            this.groupBox_replace.Controls.Add(this.bt_replace);
+            this.groupBox_replace.Controls.Add(this.lb_string_old);
+            this.groupBox_replace.Controls.Add(this.tb_string_new);
+            this.groupBox_replace.Controls.Add(this.cb_confirm);
+            this.groupBox_replace.Controls.Add(this.tb_string_old);
+            this.groupBox_replace.Controls.Add(this.rb_file_type2);
+            this.groupBox_replace.Controls.Add(this.rb_file_type1);
+            this.groupBox_replace.Controls.Add(this.rb_file_type0);
+            this.groupBox_replace.Location = new System.Drawing.Point(258, 335);
+            this.groupBox_replace.Name = "groupBox_replace";
+            this.groupBox_replace.Size = new System.Drawing.Size(320, 150);
+            this.groupBox_replace.TabIndex = 145;
+            this.groupBox_replace.TabStop = false;
+            this.groupBox_replace.Text = "置換檔案內的文字";
             // 
-            // rb_remove_opengl
+            // rb_file_type2
             // 
-            this.rb_remove_opengl.AutoSize = true;
-            this.rb_remove_opengl.Location = new System.Drawing.Point(20, 70);
-            this.rb_remove_opengl.Name = "rb_remove_opengl";
-            this.rb_remove_opengl.Size = new System.Drawing.Size(55, 16);
-            this.rb_remove_opengl.TabIndex = 2;
-            this.rb_remove_opengl.Text = "opengl";
-            this.rb_remove_opengl.UseVisualStyleBackColor = true;
+            this.rb_file_type2.AutoSize = true;
+            this.rb_file_type2.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_file_type2.Location = new System.Drawing.Point(228, 70);
+            this.rb_file_type2.Name = "rb_file_type2";
+            this.rb_file_type2.Size = new System.Drawing.Size(58, 23);
+            this.rb_file_type2.TabIndex = 2;
+            this.rb_file_type2.Text = "*.py";
+            this.rb_file_type2.UseVisualStyleBackColor = true;
+            // 
+            // rb_file_type1
+            // 
+            this.rb_file_type1.AutoSize = true;
+            this.rb_file_type1.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_file_type1.Location = new System.Drawing.Point(228, 45);
+            this.rb_file_type1.Name = "rb_file_type1";
+            this.rb_file_type1.Size = new System.Drawing.Size(92, 23);
+            this.rb_file_type1.TabIndex = 1;
+            this.rb_file_type1.Text = "*.c *.cpp";
+            this.rb_file_type1.UseVisualStyleBackColor = true;
+            // 
+            // rb_file_type0
+            // 
+            this.rb_file_type0.AutoSize = true;
+            this.rb_file_type0.Checked = true;
+            this.rb_file_type0.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_file_type0.Location = new System.Drawing.Point(228, 20);
+            this.rb_file_type0.Name = "rb_file_type0";
+            this.rb_file_type0.Size = new System.Drawing.Size(55, 23);
+            this.rb_file_type0.TabIndex = 0;
+            this.rb_file_type0.TabStop = true;
+            this.rb_file_type0.Text = "*.cs";
+            this.rb_file_type0.UseVisualStyleBackColor = true;
+            // 
+            // cb_confirm
+            // 
+            this.cb_confirm.AutoSize = true;
+            this.cb_confirm.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_confirm.Location = new System.Drawing.Point(8, 92);
+            this.cb_confirm.Name = "cb_confirm";
+            this.cb_confirm.Size = new System.Drawing.Size(104, 23);
+            this.cb_confirm.TabIndex = 146;
+            this.cb_confirm.Text = "確認置換";
+            this.cb_confirm.UseVisualStyleBackColor = true;
+            // 
+            // bt_replace
+            // 
+            this.bt_replace.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_replace.Location = new System.Drawing.Point(105, 93);
+            this.bt_replace.Name = "bt_replace";
+            this.bt_replace.Size = new System.Drawing.Size(100, 40);
+            this.bt_replace.TabIndex = 146;
+            this.bt_replace.Text = "置換";
+            this.bt_replace.UseVisualStyleBackColor = true;
+            this.bt_replace.Click += new System.EventHandler(this.bt_replace_Click);
+            // 
+            // tb_string_old
+            // 
+            this.tb_string_old.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_string_old.Location = new System.Drawing.Point(73, 27);
+            this.tb_string_old.Name = "tb_string_old";
+            this.tb_string_old.Size = new System.Drawing.Size(150, 30);
+            this.tb_string_old.TabIndex = 146;
+            // 
+            // tb_string_new
+            // 
+            this.tb_string_new.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_string_new.Location = new System.Drawing.Point(73, 55);
+            this.tb_string_new.Name = "tb_string_new";
+            this.tb_string_new.Size = new System.Drawing.Size(150, 30);
+            this.tb_string_new.TabIndex = 147;
+            // 
+            // lb_string_old
+            // 
+            this.lb_string_old.AutoSize = true;
+            this.lb_string_old.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_string_old.Location = new System.Drawing.Point(6, 27);
+            this.lb_string_old.Name = "lb_string_old";
+            this.lb_string_old.Size = new System.Drawing.Size(66, 19);
+            this.lb_string_old.TabIndex = 148;
+            this.lb_string_old.Text = "原字串";
+            // 
+            // lb_string_new
+            // 
+            this.lb_string_new.AutoSize = true;
+            this.lb_string_new.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_string_new.Location = new System.Drawing.Point(4, 58);
+            this.lb_string_new.Name = "lb_string_new";
+            this.lb_string_new.Size = new System.Drawing.Size(66, 19);
+            this.lb_string_new.TabIndex = 149;
+            this.lb_string_new.Text = "新字串";
+            // 
+            // rb_file_type3
+            // 
+            this.rb_file_type3.AutoSize = true;
+            this.rb_file_type3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_file_type3.Location = new System.Drawing.Point(228, 96);
+            this.rb_file_type3.Name = "rb_file_type3";
+            this.rb_file_type3.Size = new System.Drawing.Size(49, 23);
+            this.rb_file_type3.TabIndex = 150;
+            this.rb_file_type3.Text = "*.*";
+            this.rb_file_type3.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(928, 675);
+            this.ClientSize = new System.Drawing.Size(588, 678);
+            this.Controls.Add(this.groupBox_replace);
             this.Controls.Add(this.groupBox_remove);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button2);
@@ -326,6 +462,8 @@
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox_remove.ResumeLayout(false);
             this.groupBox_remove.PerformLayout();
+            this.groupBox_replace.ResumeLayout(false);
+            this.groupBox_replace.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -354,6 +492,17 @@
         private System.Windows.Forms.RadioButton rb_remove_opengl;
         private System.Windows.Forms.RadioButton rb_remove_cuda;
         private System.Windows.Forms.RadioButton rb_remove_vcs;
+        private System.Windows.Forms.GroupBox groupBox_replace;
+        private System.Windows.Forms.RadioButton rb_file_type2;
+        private System.Windows.Forms.RadioButton rb_file_type1;
+        private System.Windows.Forms.RadioButton rb_file_type0;
+        private System.Windows.Forms.Button bt_replace;
+        private System.Windows.Forms.CheckBox cb_confirm;
+        private System.Windows.Forms.Label lb_string_new;
+        private System.Windows.Forms.Label lb_string_old;
+        private System.Windows.Forms.TextBox tb_string_new;
+        private System.Windows.Forms.TextBox tb_string_old;
+        private System.Windows.Forms.RadioButton rb_file_type3;
     }
 }
 

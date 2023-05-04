@@ -1,3 +1,5 @@
+#OpenCV 人臉辨識
+
 import cv2
 import numpy as np
 
@@ -41,7 +43,7 @@ for (x,y,w,h) in faces:
 cv2.imshow('image', image)
 
 #另存新檔
-#cv2.imwrite('aaaaa.jpg', image)
+#cv2.imwrite('aaaaa.jpg', image)    #寫入本機圖片
 
 print('wait kere')
 cv2.waitKey(0)
