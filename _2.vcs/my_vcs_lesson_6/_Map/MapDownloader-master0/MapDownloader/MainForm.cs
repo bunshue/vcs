@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -56,7 +56,7 @@ namespace MapDownloader
         private GMapOverlay regionOverlay = new GMapOverlay("region");
 
         private int retryNum = 3;
-        private string tilePath = "C:\\______test_files\\GisMap";
+        private string tilePath = "C:\\______test_files1\\GisMap";
         private SQLitePureImageCache sqliteCache = new SQLitePureImageCache();
         private MySQLPureImageCacheMulti mysqlCache = new MySQLPureImageCacheMulti();
 

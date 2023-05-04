@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,7 +17,7 @@ namespace howto_make_light_transparent
         // The original image.
         Bitmap bitmap1 = null;
 
-        //string filename = "C:\\______test_files\\bear.jpg";
+        //string filename = "C:\\______test_files1\\bear.jpg";
         string filename = @"C:\______test_files\elephant.jpg";
         int cutoff_value = 0;
 

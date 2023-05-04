@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -63,10 +63,10 @@ namespace vcs_PictureBox3
             pictureBox1.Image = Resource1.bear;
             
             //2. picturebox載入一圖
-            //pictureBox1.Image = Image.FromFile("c:\\______test_files\\picture1.jpg"); //載入圖檔，由檔案
+            //pictureBox1.Image = Image.FromFile("c:\\______test_files1\\picture1.jpg"); //載入圖檔，由檔案
 
             //3. picturebox顯示圖檔
-            //Image img = Image.FromFile("c:\\______test_files\\picture1.jpg");
+            //Image img = Image.FromFile("c:\\______test_files1\\picture1.jpg");
             //pictureBox1.Image = img;
 
             //pictureBox1.Height = 800; 設定圖片高度和寬度

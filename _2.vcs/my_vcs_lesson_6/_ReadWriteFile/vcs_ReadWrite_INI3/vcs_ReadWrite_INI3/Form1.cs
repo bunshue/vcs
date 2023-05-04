@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,7 +14,7 @@ namespace vcs_ReadWrite_INI3
 {
     public partial class Form1 : Form
     {
-        public string filename = "c:\\______test_files\\__RW\\_ini\\vcs_ReadWrite_INI3.ini";//要注意全域變數都是放在public Form1()上面
+        public string filename = "c:\\______test_files1\\__RW\\_ini\\vcs_ReadWrite_INI3.ini";//要注意全域變數都是放在public Form1()上面
 
         SetupIniIP ini = new SetupIniIP();
 

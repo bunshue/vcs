@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -68,7 +68,7 @@ namespace vcs_ReadWrite_QR_code2
             // bitmap = (System.Drawing.Bitmap)System.Drawing.Bitmap.FromFile(@"D:\Test\QRCode\temp.png");
 
             //讀取要解碼的圖片
-            string filename = "C:\\______test_files\\__RW\\_qr_code\\vcs_ReadWrite_QR_code.png";
+            string filename = "C:\\______test_files1\\__RW\\_qr_code\\vcs_ReadWrite_QR_code.png";
             FileStream fs = new FileStream(filename, FileMode.Open);
             Byte[] data = new Byte[fs.Length];
             // 把檔案讀取到位元組陣列

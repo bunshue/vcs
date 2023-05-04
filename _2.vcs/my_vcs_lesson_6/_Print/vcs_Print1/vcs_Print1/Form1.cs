@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -247,7 +247,7 @@ namespace vcs_Print1
             richTextBox1.Text += "列印一個純文字檔\n";
             // The text contained in the file.
             string FileContents;
-            string filename = @"C:\\______test_files\\article.txt";
+            string filename = @"C:\\______test_files1\\article.txt";
 
             // Read the file's contents.
             try

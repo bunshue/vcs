@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -81,10 +81,10 @@ namespace vcs_ListViewE
             ImageList imageListLarge = new ImageList();
 
             // Initialize the ImageList objects with bitmaps.
-            imageListSmall.Images.Add(Bitmap.FromFile("C:\\______test_files\\_case1\\pic1.jpg"));
-            imageListSmall.Images.Add(Bitmap.FromFile("C:\\______test_files\\_case1\\pic2.jpg"));
-            imageListSmall.Images.Add(Bitmap.FromFile("C:\\______test_files\\_case1\\pic3.jpg"));
-            imageListSmall.Images.Add(Bitmap.FromFile("C:\\______test_files\\_case1\\pic4.jpg"));
+            imageListSmall.Images.Add(Bitmap.FromFile("C:\\______test_files1\\_case1\\pic1.jpg"));
+            imageListSmall.Images.Add(Bitmap.FromFile("C:\\______test_files1\\_case1\\pic2.jpg"));
+            imageListSmall.Images.Add(Bitmap.FromFile("C:\\______test_files1\\_case1\\pic3.jpg"));
+            imageListSmall.Images.Add(Bitmap.FromFile("C:\\______test_files1\\_case1\\pic4.jpg"));
 
             //Assign the ImageList objects to the ListView.
             listView1.LargeImageList = imageListLarge;

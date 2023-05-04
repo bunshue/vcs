@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -95,7 +95,7 @@ namespace vcs_Password
 
             try
             {
-                richTextBox1.LoadFile("C:\\______test_files\\__RW\\_rtf\\VS2013Express.rtf");
+                richTextBox1.LoadFile("C:\\______test_files1\\__RW\\_rtf\\VS2013Express.rtf");
                 richTextBox1.Find("Text", RichTextBoxFinds.MatchCase);
 
                 richTextBox1.SelectionFont = new Font("Verdana", 12, FontStyle.Bold);

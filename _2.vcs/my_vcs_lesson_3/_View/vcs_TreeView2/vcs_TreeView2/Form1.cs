@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,7 +25,7 @@ namespace vcs_TreeView2
         private void Form1_Load(object sender, EventArgs e)
         {
             //string dir = Path.Combine(Environment.CurrentDirectory, "..\\..");
-            string dir = "C:\\______test_files\\";
+            string dir = "C:\\______test_files1\\";
 
             DirectoryInfo dir_info = new DirectoryInfo(dir);
 

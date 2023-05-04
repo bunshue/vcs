@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -136,7 +136,7 @@ namespace vcs_ReadWrite_EXCEL4
             openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = "c:\\______test_files\\__RW\\_excel";  //預設開啟的路徑
+            openFileDialog1.InitialDirectory = "c:\\______test_files1\\__RW\\_excel";  //預設開啟的路徑
             openFileDialog1.Multiselect = false;    //允許多選檔案
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {

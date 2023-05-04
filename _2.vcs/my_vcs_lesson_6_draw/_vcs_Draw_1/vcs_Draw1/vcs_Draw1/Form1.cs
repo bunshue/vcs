@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -770,8 +770,8 @@ namespace vcs_Draw1
 
         private void button9_Click(object sender, EventArgs e)
         {
-            Bitmap bitmap1 = new Bitmap("C:\\______test_files\\bear.jpg");
-            Bitmap bitmap2 = new Bitmap("C:\\______test_files\\__RW\\_png\\vcs_ReadWrite_PNG.png");
+            Bitmap bitmap1 = new Bitmap("C:\\______test_files1\\bear.jpg");
+            Bitmap bitmap2 = new Bitmap("C:\\______test_files1\\__RW\\_png\\vcs_ReadWrite_PNG.png");
 
             //將圖２貼到圖１左上角
             Graphics g = Graphics.FromImage(bitmap1);   //以記憶體圖像 bitmap1 建立 記憶體畫布g
@@ -899,7 +899,7 @@ namespace vcs_Draw1
 
         private void button12_Click(object sender, EventArgs e)
         {
-            string filename = "C:\\______test_files\\step2.png";
+            string filename = "C:\\______test_files1\\step2.png";
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
             bitmap1 = new Bitmap(filename);
@@ -1007,7 +1007,7 @@ namespace vcs_Draw1
 
         private void button15_Click(object sender, EventArgs e)
         {
-            string filename = "C:\\______test_files\\sample.png";
+            string filename = "C:\\______test_files1\\sample.png";
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
             bitmap1 = new Bitmap(filename);
@@ -1066,7 +1066,7 @@ namespace vcs_Draw1
             // Create image.
             //Image newImage = Image.FromFile(@"C:\______test_files\step3.png");
 
-            string filename = "C:\\______test_files\\step3.png";
+            string filename = "C:\\______test_files1\\step3.png";
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
             Bitmap bitmap3 = new Bitmap(filename);
@@ -1283,7 +1283,7 @@ namespace vcs_Draw1
 
         private void button20_Click(object sender, EventArgs e)
         {
-            string filename = "C:\\______test_files\\bear.jpg";
+            string filename = "C:\\______test_files1\\bear.jpg";
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
             bitmap1 = new Bitmap(filename);

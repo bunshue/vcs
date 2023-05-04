@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -113,7 +113,7 @@ namespace vcs_Draw3A
         Graphics radar_g;
         //畫雷達掃瞄圖 SP
 
-        string filename = "C:\\______test_files\\picture1.jpg";
+        string filename = "C:\\______test_files1\\picture1.jpg";
 
         public Form1()
         {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -511,7 +511,7 @@ namespace vcs_RichTextBox1
             richTextBox1.Clear();
             try
             {
-                string filename = "C:\\______test_files\\__RW\\_rtf\\SAMPO(PA63)變頻分離式室外機功能規格書_2014.08.18doc.rtf";
+                string filename = "C:\\______test_files1\\__RW\\_rtf\\SAMPO(PA63)變頻分離式室外機功能規格書_2014.08.18doc.rtf";
 
                 richTextBox1.LoadFile(filename);
             }

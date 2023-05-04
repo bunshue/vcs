@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -398,7 +398,7 @@ namespace vcs_ImageProcessing1
 
         private void button19_Click(object sender, EventArgs e)
         {
-            string filename = "C:\\______test_files\\ims_image.bmp";
+            string filename = "C:\\______test_files1\\ims_image.bmp";
 
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 

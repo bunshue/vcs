@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -210,8 +210,8 @@ namespace vcs_Cryptography1_MD5
         {
             //用MD5比較兩個檔案
 
-            string filename1 = "C:\\______test_files\\compare\\aaaa.txt";
-            string filename2 = "C:\\______test_files\\compare\\bbbb.txt";
+            string filename1 = "C:\\______test_files1\\compare\\aaaa.txt";
+            string filename2 = "C:\\______test_files1\\compare\\bbbb.txt";
             string FileMD5_1 = string.Empty;    //第1個檔案的MD5碼
             string FileMD5_2 = string.Empty;    //第2個檔案的MD5碼
 

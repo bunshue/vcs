@@ -136,9 +136,9 @@ namespace vcs_ReadWrite_CSV2
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string filename = "C:\\______test_files\\__RW\\_csv\\vcs_ReadWrite_CSV_state_data.csv";
+            string filename = "C:\\______test_files1\\__RW\\_csv\\vcs_ReadWrite_CSV_state_data.csv";
 
-            //filename = "C:\\______test_files\\__RW\\_csv\\vcs_ReadWrite_CSV_¦¨ÁZÀÉ.csv";
+            //filename = "C:\\______test_files1\\__RW\\_csv\\vcs_ReadWrite_CSV_ï¿½ï¿½ï¿½Zï¿½ï¿½.csv";
 
             richTextBox1.Text += "filename = " + filename + "\n";
 
@@ -154,11 +154,11 @@ namespace vcs_ReadWrite_CSV2
         {
             if (fields == null)
             {
-                richTextBox1.Text += "µL¸ê®Æ\n";
+                richTextBox1.Text += "ï¿½Lï¿½ï¿½ï¿½\n";
                 return;
             }
             else
-                richTextBox1.Text += "¸ê®ÆOK\n";
+                richTextBox1.Text += "ï¿½ï¿½ï¿½OK\n";
 
             int i;
             int j;
@@ -167,12 +167,12 @@ namespace vcs_ReadWrite_CSV2
             int num_column = column_sp - column_st + 1;
             int num_row = fields.GetUpperBound(0);
 
-            richTextBox1.Text += "¦@¦³ " + num_column.ToString() + " Äæ(column)¸ê®Æ\n";
-            richTextBox1.Text += "¦@¦³ " + num_row.ToString() + " ¦C(row)¸ê®Æ\n";
+            richTextBox1.Text += "ï¿½@ï¿½ï¿½ " + num_column.ToString() + " ï¿½ï¿½(column)ï¿½ï¿½ï¿½\n";
+            richTextBox1.Text += "ï¿½@ï¿½ï¿½ " + num_row.ToString() + " ï¿½C(row)ï¿½ï¿½ï¿½\n";
 
             for (i = fields.GetLowerBound(1); i <= fields.GetUpperBound(1); i++)
             {
-                richTextBox1.Text += "²Ä¤@¦C ²Ä " + i.ToString() + " Äæ : " + fields[1, i].ToString() + "\n";
+                richTextBox1.Text += "ï¿½Ä¤@ï¿½C ï¿½ï¿½ " + i.ToString() + " ï¿½ï¿½ : " + fields[1, i].ToString() + "\n";
             }
 
             if (num_row > 10)

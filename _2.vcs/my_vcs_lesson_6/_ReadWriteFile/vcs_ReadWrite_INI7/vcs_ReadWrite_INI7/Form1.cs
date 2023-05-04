@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -37,7 +37,7 @@ namespace vcs_ReadWrite_INI7
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = "c:\\______test_files\\__RW\\_ini\\vcs_ReadWrite_INI1a.ini";
+            string filename = "c:\\______test_files1\\__RW\\_ini\\vcs_ReadWrite_INI1a.ini";
             IniFile ini = new IniFile(filename);
 
             string session_name = "SearchFolders";

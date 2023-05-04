@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -253,7 +253,7 @@ namespace vcs_Draw_Dynamics2
             Rectangle srcRect = new Rectangle(sx, sy, sw, sh);   //擷取部分區域
             GraphicsUnit units = GraphicsUnit.Pixel;
 
-            Image img = Image.FromFile("c:\\______test_files\\picture1.jpg");
+            Image img = Image.FromFile("c:\\______test_files1\\picture1.jpg");
 
             //Bitmap bitmap = new Bitmap(srcRect.Width, srcRect.Height);
             //             貼上位置x,貼上位置y,貼上大小W,貼上大小H

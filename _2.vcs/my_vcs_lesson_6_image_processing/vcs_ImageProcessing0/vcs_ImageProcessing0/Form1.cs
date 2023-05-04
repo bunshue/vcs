@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -1748,9 +1748,9 @@ namespace vcs_ImageProcessing0
         {
             int data_offset = 0;
             // Create a new bitmap.
-            //Bitmap bmp = new Bitmap("c:\\______test_files\\IMG_256X32.bmp");
-            Bitmap bmp0 = new Bitmap("c:\\______test_files\\picture1.jpg");
-            Bitmap bmp = new Bitmap("c:\\______test_files\\picture1.jpg");
+            //Bitmap bmp = new Bitmap("c:\\______test_files1\\IMG_256X32.bmp");
+            Bitmap bmp0 = new Bitmap("c:\\______test_files1\\picture1.jpg");
+            Bitmap bmp = new Bitmap("c:\\______test_files1\\picture1.jpg");
             pictureBox1.Image = bmp0;
 
             richTextBox1.Text += "W = " + bmp.Width.ToString() + ", H = " + bmp.Height.ToString() + "\n";

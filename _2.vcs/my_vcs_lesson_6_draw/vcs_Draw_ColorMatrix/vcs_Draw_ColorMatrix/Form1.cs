@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -101,10 +101,10 @@ namespace vcs_Draw_ColorMatrix
 
             using (Graphics gr = Graphics.FromImage(bm))
             {
-                Image img = Image.FromFile("c:\\______test_files\\picture1.jpg");
+                Image img = Image.FromFile("c:\\______test_files1\\picture1.jpg");
                 gr.Clear(Color.White);
                 gr.DrawImage(img, 0, 0, img.Width, img.Height);
-                Image banner = Image.FromFile("c:\\______test_files\\_material\\ims3.bmp");
+                Image banner = Image.FromFile("c:\\______test_files1\\_material\\ims3.bmp");
                 gr.DrawImage(banner, 0, 200, 300, 130);
             }
             pictureBox1.Image = bm;
@@ -118,12 +118,12 @@ namespace vcs_Draw_ColorMatrix
             Bitmap bm = new Bitmap(pictureBox1.ClientSize.Width, pictureBox1.ClientSize.Height);
 
             // Make adjusted images.
-            Image banner = AdjustAlpha(Image.FromFile("c:\\______test_files\\_material\\ims3.bmp"), 0.60f);
+            Image banner = AdjustAlpha(Image.FromFile("c:\\______test_files1\\_material\\ims3.bmp"), 0.60f);
 
             // Draw the adjusted images.
             using (Graphics gr = Graphics.FromImage(bm))
             {
-                Image img = Image.FromFile("c:\\______test_files\\picture1.jpg");
+                Image img = Image.FromFile("c:\\______test_files1\\picture1.jpg");
                 gr.Clear(Color.White);
                 gr.DrawImage(img, 0, 0, img.Width, img.Height);
                 gr.DrawImage(banner, 0, 200, 300, 130);

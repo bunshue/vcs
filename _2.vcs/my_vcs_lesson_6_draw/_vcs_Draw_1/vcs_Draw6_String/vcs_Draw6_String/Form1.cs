@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -323,7 +323,7 @@ namespace vcs_Draw6_String
 
         void DrawTranslucentText()
         {
-            string filename = "C:\\______test_files\\picture1.jpg";
+            string filename = "C:\\______test_files1\\picture1.jpg";
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
             Bitmap bm = new Bitmap(filename);

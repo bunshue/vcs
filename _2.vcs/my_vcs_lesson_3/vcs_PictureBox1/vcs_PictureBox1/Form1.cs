@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -58,7 +58,7 @@ namespace vcs_PictureBox1
             pictureBox1.BorderStyle = BorderStyle.Fixed3D;
             pictureBox1.Cursor = Cursors.Cross;  //移到控件上，改變鼠標
 
-            image1 = Image.FromFile("C:\\______test_files\\ims_image.bmp");
+            image1 = Image.FromFile("C:\\______test_files1\\ims_image.bmp");
             pictureBox1.Image = image1;
             richTextBox1.Text += "W = " + image1.Width.ToString() + ", H = " + image1.Height.ToString() + "\n";
 
@@ -102,7 +102,7 @@ namespace vcs_PictureBox1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            image1 = Image.FromFile("C:\\______test_files\\_case1\\pic1.jpg");
+            image1 = Image.FromFile("C:\\______test_files1\\_case1\\pic1.jpg");
             pictureBox1.Image = image1;
         }
 
@@ -116,16 +116,16 @@ namespace vcs_PictureBox1
         {
             //法一
             //ImageLocation	取得或設定路徑或影像 URL 中顯示 PictureBox
-            //pictureBox1.ImageLocation = "C:\\______test_files\\_case1\\pic3.jpg";
+            //pictureBox1.ImageLocation = "C:\\______test_files1\\_case1\\pic3.jpg";
 
             //法二
             //Load()		顯示所指定的影像 ImageLocation 屬性 PictureBox。
-            //string ImageLocation = "C:\\______test_files\\_case1\\pic3.jpg";
+            //string ImageLocation = "C:\\______test_files1\\_case1\\pic3.jpg";
             //pictureBox1.Load(ImageLocation);
 
             //法三
             //Load(String)	設定 ImageLocation 到指定的 URL，並顯示所指出的影像。
-            pictureBox1.Load("C:\\______test_files\\_case1\\pic3.jpg");
+            pictureBox1.Load("C:\\______test_files1\\_case1\\pic3.jpg");
         }
 
         private void button4_Click(object sender, EventArgs e)

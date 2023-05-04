@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -235,7 +235,7 @@ namespace vcs_DriveInfo
             //找資料夾所在的硬碟的標籤
             string path = String.Empty;
 
-            path = "C:\\______test_files\\_case1";
+            path = "C:\\______test_files1\\_case1";
 
             richTextBox1.Text += "\n資料夾路徑" + path + "\n";
 

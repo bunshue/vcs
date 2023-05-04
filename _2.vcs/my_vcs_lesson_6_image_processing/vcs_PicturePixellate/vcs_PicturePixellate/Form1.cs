@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,7 +21,7 @@ namespace vcs_PicturePixellate
         // The current image without the rubberband rectangle.
         private Bitmap CurrentBitmap = null;
 
-        string filename = "C:\\______test_files\\elephant.jpg";
+        string filename = "C:\\______test_files1\\elephant.jpg";
 
         public Form1()
         {
