@@ -651,8 +651,8 @@ if os.path.isdir(sympy_dir):
 
 #print(__path__[0])
 
-theano_nose = os.path.realpath(__file__)
-print(theano_nose)
+tmp = os.path.realpath(__file__)
+print(tmp)
 
 #print(os.listdir(cache.dirname))
 

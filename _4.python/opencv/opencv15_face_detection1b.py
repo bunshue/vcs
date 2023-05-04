@@ -5,7 +5,12 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 filename = 'C:/______test_files1/_emgu/lena.jpg'
-face_cascade = cv2.CascadeClassifier('/usr/local/lib/python3.7/dist-packages/cv2/data/haarcascade_frontalface_default.xml')
+
+# OpenCV 人臉識別分類器
+xml_filename1 = 'C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml'
+#face_classifier = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
+face_classifier = cv2.CascadeClassifier(xml_filename1)
+
 img = cv2.imread(filename)	#讀取本機圖片
 cv2.imshow('Original Picture', img) #顯示圖片
 
@@ -14,7 +19,7 @@ cv2.imshow('Original Picture', img) #顯示圖片
 gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
 
 #人臉辨識
-faces = face_cascade.detectMultiScale(
+faces = face_classifier.detectMultiScale(
     gray,
     scaleFactor=1.08,
     minNeighbors=6,

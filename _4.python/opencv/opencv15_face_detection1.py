@@ -6,7 +6,9 @@ print("框出照片中的人臉")
 filename = 'C:/______test_files2/human2.jpg'
 
 # OpenCV 人臉識別分類器
-face_classifier = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
+xml_filename1 = 'C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml'
+#face_classifier = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
+face_classifier = cv2.CascadeClassifier(xml_filename1)
 
 #取得將使用的檔案名稱，並讀取圖檔，接著把圖檔透過轉換函式轉為灰階影像，定義框出人臉時的框顏色
 print(filename)

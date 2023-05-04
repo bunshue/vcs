@@ -76,6 +76,27 @@ msg.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
 
+
+import sys
+import tkinter as tk
+import tkinter.messagebox as messagebox
+
+def show_error():
+
+    root = tk.Tk()
+    root.withdraw()
+    messagebox.showerror(title='IdleX Error',
+                         message=('Unable to located "idlexlib".\n' +
+                                  'Make sure it is located in the same directory ' +
+                                  'as "idlexlib" or run setup.py to install IdleX.\n' +
+                                  '  python setup.py install --user'))
+
+show_error()
+
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
+
+
 def func1():
     if tkinter.messagebox.askyesno("關閉窗口","確認關閉窗口嗎"):
         window.destroy()

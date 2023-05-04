@@ -302,3 +302,62 @@ def testdir(foldername):
 foldername = 'C:\______test_files3'
 testdir(foldername)
 
+
+
+import os, sys
+from stat import *
+
+def walktree(top, callback):
+    '''recursively descend the directory tree rooted at top,
+       calling the callback function for each regular file'''
+
+    for f in os.listdir(top):
+        pathname = os.path.join(top, f)
+        mode = os.lstat(pathname).st_mode
+        if S_ISDIR(mode):
+            # It's a directory, recurse into it
+            walktree(pathname, callback)
+        elif S_ISREG(mode):
+            # It's a file, call the callback function
+            callback(pathname)
+        else:
+            # Unknown file type, print a message
+            print('Skipping %s' % pathname)
+
+def visitfile(file):
+    print('visiting', file)
+
+foldername = 'C:/______test_files3'
+walktree(foldername, visitfile)
+
+
+
+import os
+
+testfiles = os.listdir('C:/______test_files1/__RW/_dicom')
+
+#簡檔名
+testfiles = [x for x in testfiles if x.endswith('dcm')]
+
+#全檔名
+testfiles = [os.path.join('C:/______test_files1/__RW/_dicom', x) for x in testfiles]
+
+for dcmfile in testfiles:
+    print(dcmfile)
+
+
+
+import os
+
+filename = 'C:/______test_files2/human2.jpg'
+
+file, ext = os.path.splitext(filename)
+
+print(file)
+print(ext)
+
+
+
+
+
+
