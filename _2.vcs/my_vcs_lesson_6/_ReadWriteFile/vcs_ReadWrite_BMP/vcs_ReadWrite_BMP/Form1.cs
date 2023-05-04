@@ -630,7 +630,7 @@ namespace vcs_ReadWrite_BMP
             //編譯時要選用/unsafe選項
 
             // Create a Bitmap object from a file.
-            using (Bitmap bmp = new Bitmap(@"C:/______test_files/test_ReadAllBytes.bmp"))
+            using (Bitmap bmp = new Bitmap(@"C:/______test_files1/test_ReadAllBytes.bmp"))
             {
                 int W;
                 int H;

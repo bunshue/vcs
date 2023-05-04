@@ -86,7 +86,7 @@ def calculate_file_hash(filename):
 
     return hasher.hexdigest()
 
-filename = 'C:/______test_files/picture1.jpg'
+filename = 'C:/______test_files1/picture1.jpg'
 calculated_filehash = calculate_file_hash(filename)
 print('SHA256')
 print('預設答案 : ', '5d57e3deb441b789f6035d28dcbbaf6a436c54450972786fad4ce4527059d291')

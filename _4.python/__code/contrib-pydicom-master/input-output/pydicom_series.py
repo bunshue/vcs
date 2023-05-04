@@ -503,7 +503,7 @@ class DicomSeries(object):
 
 
 import sys
-foldername = 'C:/______test_files/__RW/_dicom'
+foldername = 'C:/______test_files1/__RW/_dicom'
 
 adir = foldername
 all_series = read_files(adir, False, False)

@@ -1,7 +1,7 @@
 # imshow 集合
 
 selected_font = 'C:/______test_files2/msch.ttf'
-filename = 'C:/______test_files/_emgu/lena.jpg'
+filename = 'C:/______test_files1/_emgu/lena.jpg'
 
 import matplotlib.pyplot as plt
 import matplotlib.image as img
@@ -57,7 +57,7 @@ plt.show()
 
 # imshow 集合
 
-filename = 'C:/______test_files/bug.bmp'
+filename = 'C:/______test_files1/bug.bmp'
 
 #plt.figure(figsize=(8,8))	#設定圖片視窗大小
 plt.figure(num = 'imshow 集合 2', figsize=[20, 15], dpi=84, facecolor="whitesmoke", edgecolor="r", linewidth=1, frameon=True)

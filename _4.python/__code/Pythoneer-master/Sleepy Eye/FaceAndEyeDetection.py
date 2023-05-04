@@ -78,7 +78,7 @@ cv2.destroyAllWindows() # 關閉所有 OpenCV 視窗
 '''
 
 filename = 'C:/______test_files2/human2.jpg'
-filename = 'C:/______test_files/_emgu/lena.jpg'
+filename = 'C:/______test_files1/_emgu/lena.jpg'
 
 import numpy as np
 import cv2

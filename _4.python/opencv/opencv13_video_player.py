@@ -47,7 +47,7 @@ while success:
 
 
 '''
-filename = 'C:/______test_files/_video/鹿港.mp4'
+filename = 'C:/______test_files1/_video/鹿港.mp4'
 
 import cv2
 

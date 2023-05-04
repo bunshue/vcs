@@ -70,7 +70,7 @@ def recurse_tree(tree, dataset, parent, hide=False):
 if __name__ == '__main__':
     import pydicom
 
-    filename = 'C:/______test_files/__RW/_dicom/CT_small.dcm'
+    filename = 'C:/______test_files1/__RW/_dicom/CT_small.dcm'
 
     root = tkinter_tix.Tk()
     root.title("DICOM tree viewer - " + filename)

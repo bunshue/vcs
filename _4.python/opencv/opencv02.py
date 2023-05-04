@@ -1,5 +1,5 @@
-filename = 'C:/______test_files/_emgu/lena.jpg'
-#filename = 'C:/______test_files/ims01.bmp'
+filename = 'C:/______test_files1/_emgu/lena.jpg'
+#filename = 'C:/______test_files1/ims01.bmp'
 
 #import numpy as np
 #import matplotlib.pyplot as plt
@@ -11,7 +11,7 @@ filename = 'C:/______test_files/_emgu/lena.jpg'
 
 import cv2	#導入 OpenCV 模組
 
-filename = 'C:/______test_files/_emgu/lena.jpg'
+filename = 'C:/______test_files1/_emgu/lena.jpg'
 img = cv2.imread(filename)	# 讀取本機圖片
 
 #這裡用 OpenCV 讀取進來的圖片 img 其實就是 NumPy 的陣列，如果想要對圖片進行裁切，就用索引的方式，將指定的區域取出即可：

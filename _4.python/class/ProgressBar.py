@@ -136,7 +136,7 @@ def read_files(path):
     _progressBar.PrintMessage(msg)
 
 import sys
-foldername = 'C:/______test_files/__RW/_dicom'
+foldername = 'C:/______test_files1/__RW/_dicom'
 t0 = time.time()
 read_files(foldername)
 

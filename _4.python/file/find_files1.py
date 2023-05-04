@@ -1,6 +1,6 @@
 import sys, os, glob
 
-source_dir = 'C:/______test_files/__pic'
+source_dir = 'C:/______test_files1/__pic'
 
 print('資料夾: ' + source_dir)
 
@@ -30,7 +30,7 @@ print("完成")
 import sys, os, glob
 from PIL import Image, ImageDraw
 
-source_dir = 'C:/______test_files/__pic'
+source_dir = 'C:/______test_files1/__pic'
 
 print('Processing: {}'.format(source_dir))
 

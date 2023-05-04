@@ -77,9 +77,9 @@ def show_file(fullPath):
 
 print('讀取dicom檔案內的圖片')
 
-filename1 = 'C:/______test_files/__RW/_dicom/CT_small.dcm'
-filename2 = 'C:/______test_files/__RW/_dicom/ims000525.dcm'
-filename3 = 'C:/______test_files/__RW/_dicom/test.dcm'
+filename1 = 'C:/______test_files1/__RW/_dicom/CT_small.dcm'
+filename2 = 'C:/______test_files1/__RW/_dicom/ims000525.dcm'
+filename3 = 'C:/______test_files1/__RW/_dicom/test.dcm'
 
 show_file(filename3)
 

@@ -15,7 +15,7 @@ def get_year_month(fullpathname):
         fp.close()
     return ym[0:4], ym[5:7]
 
-imagefile = 'C:/______test_files/orient1.jpg'
+imagefile = 'C:/______test_files1/orient1.jpg'
 y, m = get_year_month(imagefile)
 print(y)
 print(m)

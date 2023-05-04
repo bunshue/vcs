@@ -57,8 +57,8 @@ int main(int argc, char** argv)
     int ImgStride;
     int ImgDataSize;
 
-    char filename_read1[] = "C:\\______test_files\\ims01.bmp";
-    char filename_read2[] = "C:\\______test_files\\ims03.bmp";
+    char filename_read1[] = "C:\\______test_files1\\ims01.bmp";
+    char filename_read2[] = "C:\\______test_files1\\ims03.bmp";
 
     printf("Åª¨úÀÉ®× : %s\n", filename_read1);
     res = PreLoadBmp2(filename_read1, &ImgWidth, &ImgHeight, &ColorDepth);

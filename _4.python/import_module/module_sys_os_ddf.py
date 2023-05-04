@@ -78,7 +78,7 @@ import os, shutil, glob
 
 print("單層資料夾內所有檔案容量")
 
-source_dir = 'C:/______test_files/__pic/_peony1/'
+source_dir = 'C:/______test_files1/__pic/_peony1/'
 
 pngfiles = glob.glob(source_dir + "*.png")
 jpgfiles = glob.glob(source_dir + "*.jpg")

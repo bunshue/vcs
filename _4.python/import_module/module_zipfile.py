@@ -4,8 +4,8 @@
 
 import zipfile
 
-filename = 'C:/______test_files/_exe/ffmpeg.zip'
-#filename = 'C:/______test_files/__pic/_ntuh.zip'
+filename = 'C:/______test_files1/_exe/ffmpeg.zip'
+#filename = 'C:/______test_files1/__pic/_ntuh.zip'
 file_dir = './' #解壓縮目錄
 
 f = zipfile.ZipFile(filename) #開啟壓縮檔

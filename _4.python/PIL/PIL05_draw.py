@@ -245,8 +245,8 @@ from PIL import Image
 from matplotlib import patches
 import matplotlib.pyplot as plt
 
-#filename = 'C:/______test_files/_emgu/lena.jpg'
-filename = 'C:/______test_files/picture1.jpg'
+#filename = 'C:/______test_files1/_emgu/lena.jpg'
+filename = 'C:/______test_files1/picture1.jpg'
 
 '''
 image1 = Image.open(filename)

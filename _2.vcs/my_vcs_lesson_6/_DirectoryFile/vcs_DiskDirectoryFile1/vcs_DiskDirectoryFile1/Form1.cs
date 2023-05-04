@@ -878,7 +878,7 @@ namespace vcs_DiskDirectoryFile1
             {
                 richTextBox1.Clear();
                 //讀取中文檔案
-                StreamReader sw = new StreamReader(@"c:/______test_files/read_file.txt", Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
+                StreamReader sw = new StreamReader(@"c:/______test_files1/read_file.txt", Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
                 richTextBox1.Text += sw.ReadToEnd();	//讀取所有文字內容
             }
         }
@@ -1067,7 +1067,7 @@ namespace vcs_DiskDirectoryFile1
             openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = "c:\\______test_files";  //預設開啟的路徑
+            openFileDialog1.InitialDirectory = "c:\\______test_files1";  //預設開啟的路徑
             openFileDialog1.Multiselect = false;    //單選
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {

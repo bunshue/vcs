@@ -1,5 +1,5 @@
-#filename = 'C:/______test_files/_emgu/lena.jpg'
-filename = 'C:/______test_files/ims01.bmp'
+#filename = 'C:/______test_files1/_emgu/lena.jpg'
+filename = 'C:/______test_files1/ims01.bmp'
 
 import matplotlib.pyplot as plt
 

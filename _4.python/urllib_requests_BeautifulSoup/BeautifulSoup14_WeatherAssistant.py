@@ -4,7 +4,7 @@ import requests
 import json
 
 def get_cwb_key():
-    filename = 'C:/______test_files/_key/cwb_key.txt'
+    filename = 'C:/______test_files1/_key/cwb_key.txt'
 
     import os
     filename=os.path.abspath(filename)
@@ -81,7 +81,7 @@ def get_data():
 
 
 def get_line_key():
-    filename = 'C:/______test_files/_key/line_key.txt'
+    filename = 'C:/______test_files1/_key/line_key.txt'
 
     import os
     filename=os.path.abspath(filename)

@@ -181,7 +181,7 @@ int main(int argc, char **argv)
   FreePlane(ImgDst);
 
   //讀取一個bmp檔案 ST, 判斷位元深度
-  char filename_read[] = "C:\\______test_files\\pic_256X100b.bmp";
+  char filename_read[] = "C:\\______test_files1\\pic_256X100b.bmp";
   printf("讀取檔案 : %s\n", filename_read);
 
   res = PreLoadBmp2(filename_read, &ImgWidth, &ImgHeight, &ColorDepth);
@@ -234,8 +234,8 @@ int main(int argc, char **argv)
 
   FreePlane(ImageData);
 
-  char filename_read1[] = "C:\\______test_files\\ims01.bmp";
-  char filename_read2[] = "C:\\______test_files\\ims03.bmp";
+  char filename_read1[] = "C:\\______test_files1\\ims01.bmp";
+  char filename_read2[] = "C:\\______test_files1\\ims03.bmp";
 
   printf("讀取檔案 : %s\n", filename_read1);
   res = PreLoadBmp2(filename_read1, &ImgWidth, &ImgHeight, &ColorDepth);

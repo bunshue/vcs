@@ -34,7 +34,7 @@ class Enhance(Frame):
 #
 # main
 
-filename = 'C:/______test_files/picture1.jpg'
+filename = 'C:/______test_files1/picture1.jpg'
 
 window = Tk()
 #window = tk.Tk()

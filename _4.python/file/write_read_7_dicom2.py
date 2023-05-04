@@ -96,8 +96,8 @@ class DicomTree(object):
         return tree
 
 
-filename1 = 'C:/______test_files/__RW/_dicom/test.dcm'
-filename2 = 'C:/______test_files/__RW/_dicom/ims000525.dcm'
+filename1 = 'C:/______test_files1/__RW/_dicom/test.dcm'
+filename2 = 'C:/______test_files1/__RW/_dicom/ims000525.dcm'
 
 dicomTree = DicomTree(filename1)
 dicomTree.show_tree()

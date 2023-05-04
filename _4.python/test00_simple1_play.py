@@ -12,7 +12,7 @@
 
 from PIL import Image
 
-filename = 'C:/______test_files/picture1.jpg'
+filename = 'C:/______test_files1/picture1.jpg'
 
 import cv2
 from matplotlib import pyplot as plt

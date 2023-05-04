@@ -137,7 +137,7 @@ st_mtime: 最後一次修改的時間。
 '''
 
 print('將檔案1的時間拷貝到檔案2')
-filename1 = 'C:/______test_files/aaaaaaab.txt'
+filename1 = 'C:/______test_files1/aaaaaaab.txt'
 filename2 = 'C:/______test_files3/country_data_out1.xml'
    
 try:

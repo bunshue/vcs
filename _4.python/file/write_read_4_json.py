@@ -15,7 +15,7 @@ for eq in earthquakes['features']:
     print("時間:{}".format(d))
 
 
-filename_json = 'C:/______test_files/_json/ChinaBoundary_Province_City'
+filename_json = 'C:/______test_files1/_json/ChinaBoundary_Province_City'
 fp = open(filename_json, 'r', encoding ='UTF-8')
 boundary_data = json.load(fp)
 for b_data in boundary_data['Province']:

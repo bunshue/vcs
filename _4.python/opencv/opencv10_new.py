@@ -2,7 +2,7 @@ import cv2	#導入 OpenCV 模組
 import numpy as np
 import matplotlib.pyplot as plt
 
-filename = 'C:/______test_files/_emgu/lena.jpg'
+filename = 'C:/______test_files1/_emgu/lena.jpg'
 face_cascade = cv2.CascadeClassifier('/usr/local/lib/python3.7/dist-packages/cv2/data/haarcascade_frontalface_default.xml')
 img = cv2.imread(filename)	#讀取本機圖片
 cv2.imshow('Original Picture', img) #顯示圖片
@@ -34,7 +34,7 @@ cv2.imshow('New Picture', img) #顯示圖片
 import cv2
 import numpy as np
 
-filename = 'C:/______test_files/_emgu/lena.jpg'
+filename = 'C:/______test_files1/_emgu/lena.jpg'
 
 #== Parameters =======================================================================
 BLUR = 21
@@ -72,7 +72,7 @@ cv2.waitKey()
 import cv2
 import numpy as np
 
-filename = 'C:/______test_files/_emgu/lena.jpg'
+filename = 'C:/______test_files1/_emgu/lena.jpg'
 
 img = cv2.imread(filename)
 
@@ -97,7 +97,7 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
-filename = 'C:/______test_files/_emgu/lena.jpg'
+filename = 'C:/______test_files1/_emgu/lena.jpg'
 
 #== Parameters =======================================================================
 BLUR = 21
