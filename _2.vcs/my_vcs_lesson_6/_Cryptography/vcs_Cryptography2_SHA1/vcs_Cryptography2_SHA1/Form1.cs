@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,7 +20,7 @@ namespace vcs_Cryptography2_SHA1
         //加密後的結果
         string str_encrypted_text = string.Empty;
 
-        string filename = @"C:\______test_files\picture1.jpg";                      //準備算SHA1的檔案
+        string filename = @"C:\______test_files1\picture1.jpg";                      //準備算SHA1的檔案
 
         public Form1()
         {
@@ -433,7 +433,7 @@ namespace vcs_Cryptography2_SHA1
 
 
             //算一個檔案的 SHA1, SHA256值
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
 
 
             //SHA1

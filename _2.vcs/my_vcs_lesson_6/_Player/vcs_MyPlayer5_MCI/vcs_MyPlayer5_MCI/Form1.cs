@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,7 +14,7 @@ namespace vcs_MyPlayer5_MCI
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\_mp3\aaaa.mp3";
+        string filename = @"C:\______test_files1\_mp3\aaaa.mp3";
         classMci mci = new classMci();
 
         public Form1()

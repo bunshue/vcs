@@ -349,7 +349,7 @@ namespace vcs_DiskDirectoryFile1
                 richTextBox1.Text += "檔案: " + filename + " 已存在, 無法再建立\n";
 
             //建立檔案
-            string destFileName = @"c:\______test_files\picture1a.jpg";
+            string destFileName = @"c:\______test_files1\picture1a.jpg";
             FileStream fs = File.Create(destFileName);
             fs.Close();
             richTextBox1.Text += "已建立檔案: " + destFileName + "\n";
@@ -376,8 +376,8 @@ namespace vcs_DiskDirectoryFile1
                 richTextBox1.Text += "檔案: " + filename2 + " 已存在, 無法再拷貝\n";
 
             //複製檔案，從 sourceFileName 複製到 destFileName
-            string sourceFileName = @"c:\______test_files\picture1.jpg";
-            string destFileName = @"c:\______test_files\picture1a.jpg";
+            string sourceFileName = @"c:\______test_files1\picture1.jpg";
+            string destFileName = @"c:\______test_files1\picture1a.jpg";
 
             if (File.Exists(sourceFileName))    //確認原始檔案是否存在
             {
@@ -420,8 +420,8 @@ namespace vcs_DiskDirectoryFile1
             else
                 richTextBox1.Text += "找不到檔案\n";
 
-            string destFileName = @"c:\______test_files\picture1a.jpg";
-            string destFileName2 = @"c:\______test_files\picture1b.jpg";
+            string destFileName = @"c:\______test_files1\picture1a.jpg";
+            string destFileName2 = @"c:\______test_files1\picture1b.jpg";
 
             //刪除檔案
             if (File.Exists(destFileName))      //確認檔案是否存在
@@ -462,8 +462,8 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_file05_Click(object sender, EventArgs e)
         {
-            string sourceFileName = @"c:\______test_files\picture1a.jpg";
-            string destFileName = @"c:\______test_files\picture1b.jpg";
+            string sourceFileName = @"c:\______test_files1\picture1a.jpg";
+            string destFileName = @"c:\______test_files1\picture1b.jpg";
 
             //移動檔案，從 sourceFileName 移動到 destFileName
             if (File.Exists(sourceFileName))        //確認原始檔案是否存在
@@ -520,7 +520,7 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_file07_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\_case1\_case1a\_case1bb\eula.3086b.txt";
+            string filename = @"C:\______test_files1\_case1\_case1a\_case1bb\eula.3086b.txt";
             if (File.Exists(filename))      //確認檔案是否存在
             {
                 richTextBox1.Text += "取得完整路徑檔名:\t" + Path.GetFullPath(filename) + "\n";
@@ -537,7 +537,7 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_file08_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\_case1\_case1a\eula.3085.txt";
+            string filename = @"C:\______test_files1\_case1\_case1a\eula.3085.txt";
             if (File.Exists(filename))  //確認檔案是否存在
             {
                 richTextBox1.Text += "檔名(包含副檔名)： " + Path.GetFileName(filename) + "\n";
@@ -557,7 +557,7 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_file09_Click(object sender, EventArgs e)
         {
-            string pathname = @"C:\______test_files\_case1\_case1a\_case1bb\";
+            string pathname = @"C:\______test_files1\_case1\_case1a\_case1bb\";
             string foldername = "";
             int got_slash = 0;
             richTextBox1.Text += "length = " + pathname.Length.ToString() + "\n";
@@ -640,7 +640,7 @@ namespace vcs_DiskDirectoryFile1
         private void bt_file12_Click(object sender, EventArgs e)
         {
             //讀取設定檔案時間
-            string filename = @"C:\______test_files\mega.txt";
+            string filename = @"C:\______test_files1\mega.txt";
 
             richTextBox1.Text += "檔案: " + filename + "\t原讀寫時間\n";
             richTextBox1.Text += "CreationTime\t" + File.GetCreationTime(filename).ToString() + "\n";
@@ -714,8 +714,8 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_dir03_Click(object sender, EventArgs e)
         {
-            string destDirName = @"c:\______test_files\folder2";
-            string destDirName2 = @"c:\______test_files\folder22";
+            string destDirName = @"c:\______test_files1\folder2";
+            string destDirName2 = @"c:\______test_files1\folder22";
             DeleteDirectory(destDirName, true);
             DeleteDirectory(destDirName2, true);
         }
@@ -774,8 +774,8 @@ namespace vcs_DiskDirectoryFile1
             richTextBox1.Text += "移動/更名 完成，從原始資料夾: " + Path_old + " 到目的資料夾: " + Path_new + "\n";
 
             //移動資料夾，從 sourceDirName 移動到 destDirName
-            string sourceDirName = @"c:\______test_files\folder2";
-            string destDirName = @"c:\______test_files\folder22";
+            string sourceDirName = @"c:\______test_files1\folder2";
+            string destDirName = @"c:\______test_files1\folder22";
             if (Directory.Exists(sourceDirName))        //確認資料夾是否存在
             {
                 if (!Directory.Exists(destDirName))     //確認資料夾是否存在
@@ -860,7 +860,7 @@ namespace vcs_DiskDirectoryFile1
         private void bt_read03_Click(object sender, EventArgs e)
         {
             //讀檔4
-            string fileReadName = @"c:\______test_files\data.txt";
+            string fileReadName = @"c:\______test_files1\data.txt";
             ReadFile(fileReadName);
         }
 
@@ -1231,7 +1231,7 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_write04_Click(object sender, EventArgs e)
         {
-            string path = @"C:\______test_files\";
+            string path = @"C:\______test_files1\";
             string fileName = "filewrite.txt";
 
             if (!Directory.Exists(path))
@@ -1383,7 +1383,7 @@ namespace vcs_DiskDirectoryFile1
 
             //openFileDialog1.InitialDirectory = "c:\\";
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = @"C:\______test_files\";
+            openFileDialog1.InitialDirectory = @"C:\______test_files1\";
             openFileDialog1.RestoreDirectory = true;
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -2098,8 +2098,8 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_new07_Click(object sender, EventArgs e)
         {
-            string filename_source = @"C:\______test_files\bear.jpg";
-            string filename_destination = @"C:\______test_files\_cpfile\ccc.jpg";   //要寫完整檔名
+            string filename_source = @"C:\______test_files1\bear.jpg";
+            string filename_destination = @"C:\______test_files1\_cpfile\ccc.jpg";   //要寫完整檔名
 
             richTextBox1.Text += "檔案已存在的FileCopy/Move\n";
             try
@@ -2117,7 +2117,7 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_new08_Click(object sender, EventArgs e)
         {
-            string pathname = @"C:\______test_files\_cpfile";
+            string pathname = @"C:\______test_files1\_cpfile";
 
             richTextBox1.Text += "Directory.Delete 目錄不是空的\n";
             try
@@ -2133,7 +2133,7 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_new09_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\bear.jpg";
+            string filename = @"C:\______test_files1\bear.jpg";
 
             richTextBox1.Text += File.GetAttributes(filename) + "\n";
             File.SetAttributes(filename, FileAttributes.ReadOnly);

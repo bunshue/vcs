@@ -20,7 +20,7 @@ namespace FacialMouseControl
         private Capture cap;
         private HaarCascade _face;
 
-        string filename = @"C:\______test_files\__RW\_xml\haarcascades\haarcascade_frontalface_default.xml";
+        string filename = @"C:\______test_files1\__RW\_xml\haarcascades\haarcascade_frontalface_default.xml";
 
         public Form1()
         {
@@ -36,7 +36,7 @@ namespace FacialMouseControl
             {
                 try
                 {
-                    cap = new Capture(1);   //預設使用第一台的webcam
+                    cap = new Capture(1);   //嚙緩嚙稽嚙誕用第一嚙綞嚙踝蕭webcam
                 }
                 catch (NullReferenceException excpt)
                 {

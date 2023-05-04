@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -258,7 +258,7 @@ namespace vcs_WebRequest
             Application.DoEvents();
 
             string url = "http://weisico.com/program/2015/0630/237.html";
-            //string filename = @"C:\______test_files\aaaaaaaa.html";
+            //string filename = @"C:\______test_files1\aaaaaaaa.html";
             string filename = Application.StartupPath + "\\" + "aaaaaaaa.html";
 
             DownloadFile_percentage(url, filename);

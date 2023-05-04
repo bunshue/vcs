@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -29,7 +29,7 @@ namespace vcs__all
             numericUpDown2.Value = 0.75m;
 
             notifyIcon1.Text = "Notify Icon Example";
-            notifyIcon1.Icon = new Icon(@"C:\______test_files\_material\ims.ico");
+            notifyIcon1.Icon = new Icon(@"C:\______test_files1\_material\ims.ico");
             notifyIcon1.ContextMenuStrip = this.contextMenuStrip1;
 
             // Handle the DoubleClick event to activate the form.
@@ -48,7 +48,7 @@ namespace vcs__all
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start(@"C:\______test_files\__RW\_txt\article.txt");
+            Process.Start(@"C:\______test_files1\__RW\_txt\article.txt");
         }
 
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

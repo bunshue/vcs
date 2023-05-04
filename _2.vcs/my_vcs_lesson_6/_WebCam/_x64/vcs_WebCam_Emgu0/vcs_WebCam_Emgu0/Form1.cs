@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -188,7 +188,7 @@ namespace vcs_WebCam_Emgu0
                         richTextBox1.Text += "開啟Webcam ......try webcam_no = " + webcam_no.ToString() + "\n";
 
                         cap = new Capture(webcam_no);   //預設使用的webcam
-                        //cap = new Capture(@"C:\______test_files\_video\i2c.avi");
+                        //cap = new Capture(@"C:\______test_files1\_video\i2c.avi");
 
                         if (cap == null)
                         {
@@ -680,7 +680,7 @@ namespace vcs_WebCam_Emgu0
         {
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             //播放影片檔案
-            //string filename = @"C:\______test_files\_video\i2c.avi";
+            //string filename = @"C:\______test_files1\_video\i2c.avi";
 
             //string filename = @"D:\內視鏡影片\院長平島徹朗が実際に胃内視鏡検査を受けました Full ver [720p].mp4";
             string filename = @"D:\aaaa.mp4";

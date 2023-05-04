@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -439,7 +439,7 @@ namespace vcs_Dictionary
 
             richTextBox1.Text += "len = " + ImageTypes.Count.ToString() + "\n";
 
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
 
             string builtHex = string.Empty;
             string ext = string.Empty;

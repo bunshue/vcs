@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -206,11 +206,11 @@ namespace vcs_PictureMontage
         // to True at design time.
         private void button2_Click(object sender, EventArgs e)
         {
-            string filename1 = @"C:\______test_files\__pic\_書畫字圖\_peony1\p1.jpg";
-            string filename2 = @"C:\______test_files\__pic\_書畫字圖\_peony1\p2.jpg";
-            string filename3 = @"C:\______test_files\__pic\_書畫字圖\_peony1\p3.jpg";
-            string filename4 = @"C:\______test_files\__pic\_書畫字圖\_peony1\p4.jpg";
-            string filename5 = @"C:\______test_files\__pic\_書畫字圖\_peony1\p5.jpg";
+            string filename1 = @"C:\______test_files1\__pic\_書畫字圖\_peony1\p1.jpg";
+            string filename2 = @"C:\______test_files1\__pic\_書畫字圖\_peony1\p2.jpg";
+            string filename3 = @"C:\______test_files1\__pic\_書畫字圖\_peony1\p3.jpg";
+            string filename4 = @"C:\______test_files1\__pic\_書畫字圖\_peony1\p4.jpg";
+            string filename5 = @"C:\______test_files1\__pic\_書畫字圖\_peony1\p5.jpg";
 
             ImageInfo image;
             image = new ImageInfo(filename1);

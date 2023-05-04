@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,7 +27,7 @@ namespace vcs_PictureThumbnail3
 {
     public partial class Form1 : Form
     {
-        string filename1 = @"C:\______test_files\picture1.jpg";
+        string filename1 = @"C:\______test_files1\picture1.jpg";
         string filename2 = @"picture1_thumbnail.jpg";
 
         public enum MakeThumbnailMode

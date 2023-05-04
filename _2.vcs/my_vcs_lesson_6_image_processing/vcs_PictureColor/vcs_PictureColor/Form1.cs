@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -50,15 +50,15 @@ namespace vcs_PictureColor
         private void Form1_Load(object sender, EventArgs e)
         {
             if (radioButton0.Checked == true)
-                filename = @"C:\______test_files\ims01.bmp"; //stomach
+                filename = @"C:\______test_files1\ims01.bmp"; //stomach
             else if (radioButton1.Checked == true)
-                filename = @"C:\______test_files\ims04.bmp"; //normal
+                filename = @"C:\______test_files1\ims04.bmp"; //normal
             else if (radioButton2.Checked == true)
-                filename = @"C:\______test_files\ims05.bmp"; //black
+                filename = @"C:\______test_files1\ims05.bmp"; //black
             else if (radioButton3.Checked == true)
-                filename = @"C:\______test_files\ims06.bmp"; //color bar
+                filename = @"C:\______test_files1\ims06.bmp"; //color bar
             else
-                filename = @"C:\______test_files\ims01.bmp"; //stomach
+                filename = @"C:\______test_files1\ims01.bmp"; //stomach
 
             show_item_location();
 

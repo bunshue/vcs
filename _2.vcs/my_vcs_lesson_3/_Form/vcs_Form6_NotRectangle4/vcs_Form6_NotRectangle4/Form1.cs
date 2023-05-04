@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -29,7 +29,7 @@ namespace vcs_Form6_NotRectangle4
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //string filename = @"C:\______test_files\__RW\_png\ladybug.png"; //128X128
+            //string filename = @"C:\______test_files1\__RW\_png\ladybug.png"; //128X128
             string filename = @"../../matlab.png";  //圖很大 900X800, 後面要改成Zoom
             this.BackgroundImage = Bitmap.FromFile(filename);
 

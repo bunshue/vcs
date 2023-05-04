@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -114,10 +114,10 @@ namespace vcs_ComboBox1
 
             //comboBox4
             //添加項 
-            comboBox4.Items.Add(new MyItem("000000", Image.FromFile(@"C:\______test_files\__pic\_angry_bird\AB_red.jpg")));
-            comboBox4.Items.Add(new MyItem("111111", Image.FromFile(@"C:\______test_files\__pic\_angry_bird\AB_yellow.jpg")));
-            comboBox4.Items.Add(new MyItem("222222", Image.FromFile(@"C:\______test_files\__pic\_angry_bird\AB_blue.jpg")));
-            comboBox4.Items.Add(new MyItem("333333", Image.FromFile(@"C:\______test_files\__pic\_angry_bird\AB_black.jpg")));
+            comboBox4.Items.Add(new MyItem("000000", Image.FromFile(@"C:\______test_files1\__pic\_angry_bird\AB_red.jpg")));
+            comboBox4.Items.Add(new MyItem("111111", Image.FromFile(@"C:\______test_files1\__pic\_angry_bird\AB_yellow.jpg")));
+            comboBox4.Items.Add(new MyItem("222222", Image.FromFile(@"C:\______test_files1\__pic\_angry_bird\AB_blue.jpg")));
+            comboBox4.Items.Add(new MyItem("333333", Image.FromFile(@"C:\______test_files1\__pic\_angry_bird\AB_black.jpg")));
 
             //默認選中項索引 
             comboBox4.SelectedIndex = 0;

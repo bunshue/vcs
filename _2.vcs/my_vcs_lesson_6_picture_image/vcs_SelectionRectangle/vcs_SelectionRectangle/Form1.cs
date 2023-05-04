@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -30,7 +30,7 @@ namespace vcs_SelectionRectangle
             selectionRec1.ResizePinSize = 10;  //改變ResizePin圓直徑大小
             selectionRec1.Create();
 
-            string filename = @"C:\______test_files\elephant.jpg";
+            string filename = @"C:\______test_files1\elephant.jpg";
             pictureBox1.Image = Image.FromFile(filename);
 
 

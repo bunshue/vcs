@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,8 +11,8 @@ namespace DynamicQuery
 {
     public partial class Frm_Main : Form
     {
-        string filename = @"C:\______test_files\_vcs200_db\db_TomeTwo.mdf";
-        //string filename = @"C:\______test_files\_vcs200_db\db_TomeTwo_log.ldf";   another
+        string filename = @"C:\______test_files1\_vcs200_db\db_TomeTwo.mdf";
+        //string filename = @"C:\______test_files1\_vcs200_db\db_TomeTwo_log.ldf";   another
 
         public Frm_Main()
         {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -189,7 +189,7 @@ namespace vcs_ListBox1_CheckedListBox
             //文字檔  => listBox
             listBox1.Items.Clear();
 
-            string filename = @"C:\______test_files\__RW\_txt\琵琶行.txt";
+            string filename = @"C:\______test_files1\__RW\_txt\琵琶行.txt";
 
             //按行讀取文件：
 

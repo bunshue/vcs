@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -1537,7 +1537,7 @@ namespace vcs_Color
 
             this.pictureBox1.BackColor = Color.FromArgb(255, 213, 94);
 
-            string filename = @"C:\______test_files\__pic\_anime\minion-yellow.png";
+            string filename = @"C:\______test_files1\__pic\_anime\minion-yellow.png";
             pictureBox1.Image = Image.FromFile(filename);
         }
 

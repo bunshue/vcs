@@ -54,9 +54,9 @@ namespace vcs_SendMail
         string smtp_server = "smtp.gmail.com";  //POP3服務器的名稱
         int smtp_server_port = 25;              //指定 SMTP 交易連接埠, 預設是25
 
-        string attach_filename1 = @"C:\______test_files\picture1.jpg";
-        string attach_filename2 = @"C:\______test_files\__RW\_excel\2019~2021新竹日出日沒時刻表.xls";
-        string attach_filename3 = @"C:\______test_files\__RW\_word\Step.doc";   //RTF檔案
+        string attach_filename1 = @"C:\______test_files1\picture1.jpg";
+        string attach_filename2 = @"C:\______test_files1\__RW\_excel\2019~2021新竹日出日沒時刻表.xls";
+        string attach_filename3 = @"C:\______test_files1\__RW\_word\Step.doc";   //RTF檔案
 
         public Form1()
         {
@@ -68,7 +68,7 @@ namespace vcs_SendMail
             mail_body = richTextBox_mail.Text;
             show_item_location();
 
-            string filename = @"C:\______test_files\_key\gmail_key.txt";
+            string filename = @"C:\______test_files1\_key\gmail_key.txt";
             if (File.Exists(filename) == false)
             {
                 MessageBox.Show("Gmail_KEY 檔案不存在, 離開", "vcs_SendMail", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -349,7 +349,7 @@ namespace vcs_SendMail
             mail.IsBodyHtml = true; //是否是HTML郵件
 
             // 設定附件檔案(Attachment)
-            string strFilePath = @"C:\______test_files\_material\signature.png";
+            string strFilePath = @"C:\______test_files1\_material\signature.png";
             Attachment attachment = new Attachment(strFilePath);
             attachment.Name = Path.GetFileName(strFilePath);
             attachment.NameEncoding = Encoding.GetEncoding(email_encoding);
@@ -487,9 +487,9 @@ namespace vcs_SendMail
             string smtp_server = "smtp.gmail.com";  //POP3服務器的名稱
             int smtp_server_port = 25;              //指定 SMTP 交易連接埠, 預設是25
 
-            string attach_filename1 = @"C:\______test_files\picture1.jpg";
-            string attach_filename2 = @"C:\______test_files\__RW\_excel\2019~2021新竹日出日沒時刻表.xls";
-            string attach_filename3 = @"C:\______test_files\__RW\_word\Step.doc";   //RTF檔案
+            string attach_filename1 = @"C:\______test_files1\picture1.jpg";
+            string attach_filename2 = @"C:\______test_files1\__RW\_excel\2019~2021新竹日出日沒時刻表.xls";
+            string attach_filename3 = @"C:\______test_files1\__RW\_word\Step.doc";   //RTF檔案
             */
 
             /*

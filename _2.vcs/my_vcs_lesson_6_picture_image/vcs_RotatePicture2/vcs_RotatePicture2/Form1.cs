@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,7 +18,7 @@ namespace vcs_RotatePicture2
         // The current scale.
         private float angle = 0;
 
-        string filename = @"C:\______test_files\picture1.jpg";
+        string filename = @"C:\______test_files1\picture1.jpg";
         private Bitmap bitmap1 = null;  //原圖
         private Bitmap bitmap2 = null;  //旋轉過的圖
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,7 +24,7 @@ namespace vcs_PictureBox4
         private void button1_Click(object sender, EventArgs e)
         {
             //讀取圖檔
-            string filename = @"C:\______test_files\bear.jpg";
+            string filename = @"C:\______test_files1\bear.jpg";
 
             Image image = Image.FromFile(filename);
             pictureBox1.Image = image;

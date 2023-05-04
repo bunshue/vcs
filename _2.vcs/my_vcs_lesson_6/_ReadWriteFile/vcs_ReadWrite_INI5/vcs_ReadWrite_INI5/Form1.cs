@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,7 +18,7 @@ namespace vcs_ReadWrite_INI5
             InitializeComponent();
         }
 
-        string filename = @"c:\______test_files\__RW\_ini\vcs_ReadWrite_INI5.ini";
+        string filename = @"c:\______test_files1\__RW\_ini\vcs_ReadWrite_INI5.ini";
 
         private void button1_Click(object sender, EventArgs e)
         {

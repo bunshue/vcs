@@ -47,7 +47,7 @@ namespace vcs_Draw5_Image3
 
         private void button2_Click_1(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
 
             int W = this.pictureBox1.Width;
             int H = this.pictureBox1.Height;

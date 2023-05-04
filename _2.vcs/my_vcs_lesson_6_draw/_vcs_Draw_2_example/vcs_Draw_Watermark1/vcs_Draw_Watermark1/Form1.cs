@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -30,19 +30,19 @@ namespace vcs_Draw_Watermark1
         private void bt_reset_Click(object sender, EventArgs e)
         {
             //讀取圖檔, 多一層Image結構
-            string filename1 = @"C:\______test_files\picture1.jpg";
+            string filename1 = @"C:\______test_files1\picture1.jpg";
             Image image = Image.FromFile(filename1);
 
             pictureBox1.Image = image;
 
-            string filename2 = @"C:\______test_files\_material\ims-small-logo.png";
+            string filename2 = @"C:\______test_files1\_material\ims-small-logo.png";
             pictureBox2.Image = Image.FromFile(filename2);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             //讀取圖檔, 多一層Image結構
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             Image image = Image.FromFile(filename);
 
             image = AddTextToImg(image, "牡丹亭");
@@ -88,8 +88,8 @@ namespace vcs_Draw_Watermark1
         {
             pictureBox1.Image.Dispose();
 
-            string filename1 = @"C:\______test_files\picture1.jpg";
-            string filename2 = @"C:\______test_files\picture1add.jpg";
+            string filename1 = @"C:\______test_files1\picture1.jpg";
+            string filename2 = @"C:\______test_files1\picture1add.jpg";
             string text = "牡丹亭";
             int alpha = 255;
             int fontsize = 30;

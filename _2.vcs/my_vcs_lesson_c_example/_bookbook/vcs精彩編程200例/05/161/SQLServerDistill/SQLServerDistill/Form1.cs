@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,8 +13,8 @@ namespace SQLServerDistill
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\_vcs200_db\db_20.mdf";
-        //string filename = @"C:\______test_files\_vcs200_db\db_20_log.LDF";   another
+        string filename = @"C:\______test_files1\_vcs200_db\db_20.mdf";
+        //string filename = @"C:\______test_files1\_vcs200_db\db_20_log.LDF";   another
 
         public Form1()
         {

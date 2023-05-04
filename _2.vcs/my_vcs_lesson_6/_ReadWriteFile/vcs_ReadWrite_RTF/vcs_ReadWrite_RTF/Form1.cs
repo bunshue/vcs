@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,7 +18,7 @@ namespace vcs_ReadWrite_RTF
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\__RW\_rtf\VS2013Express.rtf";
+            string filename = @"C:\______test_files1\__RW\_rtf\VS2013Express.rtf";
 
             this.richTextBox1.LoadFile(filename, RichTextBoxStreamType.RichText);//從指定位置加載RTF文件
             richTextBox2.Text += "開啟檔案 : " + filename + "\n";

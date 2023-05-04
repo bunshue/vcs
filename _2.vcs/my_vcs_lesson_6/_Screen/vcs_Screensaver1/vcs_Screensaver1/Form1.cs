@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -34,7 +34,7 @@ namespace vcs_Screensaver1
     {
         //加入私有成員變量
 
-        private string filename = @"C:\______test_files\picture1.jpg";
+        private string filename = @"C:\______test_files1\picture1.jpg";
         private int iSpeed = 2;
         private string banner = "群曜醫電 Insight Medical Solutions Inc.";
         private Font TextStringFont = new Font("標楷體", 48, FontStyle.Bold);

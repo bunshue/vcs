@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,7 +27,7 @@ namespace vcs_Word2HTML
 
         private void btn_Open_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\__RW\_word\Step.doc";
+            string filename = @"C:\______test_files1\__RW\_word\Step.doc";
 
             btn_New.Enabled = false;//停用新建按钮
             btn_Open.Enabled = false;//停用打开按钮

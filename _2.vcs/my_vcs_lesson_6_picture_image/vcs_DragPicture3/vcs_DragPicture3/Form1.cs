@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,7 +14,7 @@ namespace vcs_DragPicture3
         bool isPress = false;   //判斷是否有按下
         int oldX, oldY;         //記錄按下的位置
 
-        string filename = @"C:\______test_files\very_long_pic.jpg";
+        string filename = @"C:\______test_files1\very_long_pic.jpg";
 
         public Form1()
         {

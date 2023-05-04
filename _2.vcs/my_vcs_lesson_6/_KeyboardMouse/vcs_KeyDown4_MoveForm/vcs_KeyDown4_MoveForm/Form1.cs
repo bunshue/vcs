@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,7 +18,7 @@ namespace vcs_KeyDown4_MoveForm
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             this.BackgroundImage = Image.FromFile(filename);//设置窗体的背景图片
             this.ClientSize = this.BackgroundImage.Size;
             this.StartPosition = FormStartPosition.CenterScreen; //居中顯示

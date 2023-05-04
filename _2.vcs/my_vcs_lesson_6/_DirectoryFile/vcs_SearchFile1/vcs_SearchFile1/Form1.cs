@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,7 +20,7 @@ namespace vcs_SearchFile1
         int strings_count = 0;
         int favorite_strings_count = 0;
 
-        string favorite_filename = @"C:\______test_files\__RW\_txt\favorite_list.txt";
+        string favorite_filename = @"C:\______test_files1\__RW\_txt\favorite_list.txt";
 
         public Form1()
         {
@@ -38,7 +38,7 @@ namespace vcs_SearchFile1
             /*
             //檢查文字檔所在的資料夾
             //string Path = Application.StartupPath + "\\data";
-            //string Path = @"C:\______test_files\__RW\_txt\vcs_SearchFile1_data";
+            //string Path = @"C:\______test_files1\__RW\_txt\vcs_SearchFile1_data";
             string Path = txtDirectory.Text;
             if (Directory.Exists(Path) == false)     //確認資料夾是否存在
             {
@@ -120,7 +120,7 @@ namespace vcs_SearchFile1
         {
             //撈出資料夾內特定類型的檔案
             //string searchDirectory = Application.StartupPath + "\\data";
-            //string searchDirectory = @"C:\______test_files\__RW\_txt\vcs_SearchFile1_data";
+            //string searchDirectory = @"C:\______test_files1\__RW\_txt\vcs_SearchFile1_data";
             string searchDirectory = txtDirectory.Text;
             string searchPattern = "*.txt";
             bool recurrsive = false;

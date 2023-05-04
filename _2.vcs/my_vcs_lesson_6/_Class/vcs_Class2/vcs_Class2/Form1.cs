@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,7 +17,7 @@ namespace vcs_Class2
 {
     public partial class Form1 : Form
     {
-        string filename2 = @"C:\______test_files\picture1.jpg";
+        string filename2 = @"C:\______test_files1\picture1.jpg";
 
         Color2Gray c2g; // 宣告一個物件
 

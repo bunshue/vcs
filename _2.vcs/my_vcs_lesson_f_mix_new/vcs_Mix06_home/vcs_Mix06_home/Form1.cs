@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -52,7 +52,7 @@ namespace vcs_Mix06_home
             //Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效	same
             Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
 
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
             pictureBox1.Image = bitmap1;

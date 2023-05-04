@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -27,7 +27,7 @@ namespace WordStatistics
             wb.StartWord();
 
             //创建读取文件,发送的BufferBlock
-            FileBufferBlock fb = new FileBufferBlock(buffer, @"C:\______test_files\__RW\_txt\english_text.txt");
+            FileBufferBlock fb = new FileBufferBlock(buffer, @"C:\______test_files1\__RW\_txt\english_text.txt");
             fb.ReadFile();
 
             Dictionary<string,int> dic = new Dictionary<string,int>();

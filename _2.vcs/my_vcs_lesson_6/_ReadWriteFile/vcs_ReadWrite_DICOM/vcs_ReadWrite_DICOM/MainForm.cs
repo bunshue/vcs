@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Linq;
@@ -59,8 +59,8 @@ namespace vcs_ReadWrite_DICOM
         int maxPixelValue;    // Updated July 2012
         int minPixelValue;
 
-        string filename1 = @"C:\______test_files\__RW\_dicom\test.dcm";
-        string filename2 = @"C:\______test_files\__RW\_dicom\ims000525.dcm";
+        string filename1 = @"C:\______test_files1\__RW\_dicom\test.dcm";
+        string filename2 = @"C:\______test_files1\__RW\_dicom\ims000525.dcm";
 
         public MainForm()
         {

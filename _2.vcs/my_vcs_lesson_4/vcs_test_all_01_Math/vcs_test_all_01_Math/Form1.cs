@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -960,7 +960,7 @@ namespace vcs_test_all_01_Math
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            Bitmap bitmap1 = new Bitmap(@"C:\______test_files\_material\sddev1.png");
+            Bitmap bitmap1 = new Bitmap(@"C:\______test_files1\_material\sddev1.png");
             e.Graphics.DrawImage(bitmap1, 8, this.ClientSize.Height - bitmap1.Height - 8);
         }
 

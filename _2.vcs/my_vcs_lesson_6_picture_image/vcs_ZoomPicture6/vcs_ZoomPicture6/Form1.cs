@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,7 +20,7 @@ namespace vcs_ZoomPicture6
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             myImage = System.Drawing.Image.FromFile(filename);
             pictureBox1.Image = myImage;
             pictureBox1.Height = myImage.Height;

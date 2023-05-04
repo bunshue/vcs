@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,9 +27,9 @@ namespace IMGAddDate
 
         //字串陣列的寫法(一維)：
         string[] pic_array = { 
-            @"C:\______test_files\p3.jpg", 
-            @"C:\______test_files\p3.jpg", 
-            @"C:\______test_files\p3.jpg", 
+            @"C:\______test_files1\p3.jpg", 
+            @"C:\______test_files1\p3.jpg", 
+            @"C:\______test_files1\p3.jpg", 
                              };
 
         public Frm_Main()

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,7 +21,7 @@ namespace vcs_ImageProcessing6b
         // Display the initial image.
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             pictureBox0.Image = Image.FromFile(filename);
             pictureBox1.Image = pictureBox0.Image.Clone() as Image;
         }

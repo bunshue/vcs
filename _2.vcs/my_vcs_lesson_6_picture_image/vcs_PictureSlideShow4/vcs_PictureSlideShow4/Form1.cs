@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,7 +12,7 @@ namespace vcs_PictureSlideShow4
 {
     public partial class Form1 : Form
     {
-        string foldername = @"C:\______test_files\__pic\_MU";
+        string foldername = @"C:\______test_files1\__pic\_MU";
         string strInfo = "";
         string[] strName = null;
         int Num = 0;

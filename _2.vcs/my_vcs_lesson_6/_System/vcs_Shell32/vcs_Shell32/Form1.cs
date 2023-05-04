@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -35,7 +35,7 @@ namespace vcs_Shell32
         private void button1_Click(object sender, EventArgs e)
         {
             //取得所有檔案屬性1
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
 
             string filePath = filename;
 
@@ -248,7 +248,7 @@ namespace vcs_Shell32
         {
             //取得所有檔案屬性2
 
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
 
             Dictionary<string, int> _propertyIndex2 = new Dictionary<string, int>();
 
@@ -278,7 +278,7 @@ namespace vcs_Shell32
         private void button3_Click(object sender, EventArgs e)
         {
             //取得一項檔案屬性1
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
 
             string result = GetPropertyByIndex(filename, 31);
             richTextBox1.Text += "尺寸 : " + result + "\n";
@@ -298,7 +298,7 @@ namespace vcs_Shell32
         {
             richTextBox1.Text += "取得檔案內容中的詳細資料\n";
 
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
 
             int i;
             for (i = 0; i < 30; i++)
@@ -331,8 +331,8 @@ namespace vcs_Shell32
             */
 
             //取得媒體資訊
-            //string filename = @"C:\______test_files\_mp3\02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
-            string filename = @"C:\______test_files\_mp3\aaaa.mp3";
+            //string filename = @"C:\______test_files1\_mp3\02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
+            string filename = @"C:\______test_files1\_mp3\aaaa.mp3";
             int i;
             for (i = 0; i < 30; i++)
             {

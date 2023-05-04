@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -36,7 +36,7 @@ namespace vcs_SaveFileDialog
 
             //saveFileDialog1.InitialDirectory = "c:\\";
             //saveFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            saveFileDialog1.InitialDirectory = @"C:\______test_files\";
+            saveFileDialog1.InitialDirectory = @"C:\______test_files1\";
             saveFileDialog1.RestoreDirectory = true;
             saveFileDialog1.FileName = "test_write_a_file.txt";
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)

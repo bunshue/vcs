@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,7 +15,7 @@ namespace vcs_ReadWrite_INI6
     public partial class Frm_Main : Form
     {
         #region 变量声明区
-        public string filename = @"C:\______test_files\__RW\_ini\ConnectString.ini";    //该变量保存INI文件所在的具体物理位置
+        public string filename = @"C:\______test_files1\__RW\_ini\ConnectString.ini";    //该变量保存INI文件所在的具体物理位置
         public string strOne = "";
         [DllImport("kernel32")]
         private static extern int GetPrivateProfileString(

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,7 +28,7 @@ namespace vcs_Ladybug
         private void Form1_Load(object sender, EventArgs e)
         {
             //漫遊演算法 ST
-            string filename2 = @"C:\______test_files\__RW\_png\ladybug.png";
+            string filename2 = @"C:\______test_files1\__RW\_png\ladybug.png";
             gc = new GC_2D_Wander(new Bitmap(filename2));
             //cir = new GC_2D_MovableCircle(20, new Point(this.pictureBox2.ClientSize.Width / 2, this.pictureBox2.ClientSize.Height / 2));
             gc.Update();

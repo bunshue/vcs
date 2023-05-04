@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,10 +20,10 @@ namespace vcs_PictureEnhance_YUV
     {
         int flag_operation_mode = 0;    //0 : 圖片模式, 1 : 視訊模式
 
-        string filename1 = @"C:\______test_files\ims01.bmp";
-        //string filename1 = @"C:\______test_files\__pic\_ntuh\op1.bmp";
-        //string filename1 = @"C:\______test_files\color1.bmp";
-        //string filename2 = @"C:\______test_files\color2.bmp";
+        string filename1 = @"C:\______test_files1\ims01.bmp";
+        //string filename1 = @"C:\______test_files1\__pic\_ntuh\op1.bmp";
+        //string filename1 = @"C:\______test_files1\color1.bmp";
+        //string filename2 = @"C:\______test_files1\color2.bmp";
 
         private Point pt_st = Point.Empty;//記錄鼠標按下時的坐標，用來確定繪圖起點
         private Point pt_sp = Point.Empty;//記錄鼠標放開時的坐標，用來確定繪圖終點
@@ -423,7 +423,7 @@ namespace vcs_PictureEnhance_YUV
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
             //openFileDialog1.InitialDirectory = @"c:\______test_files";  //預設開啟的路徑
-            openFileDialog1.InitialDirectory = @"C:\______test_files\__pic\_ntuh";  //預設開啟的路徑
+            openFileDialog1.InitialDirectory = @"C:\______test_files1\__pic\_ntuh";  //預設開啟的路徑
             openFileDialog1.Multiselect = false;    //單選
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -1022,8 +1022,8 @@ namespace vcs_PictureEnhance_YUV
         {
             //偽色彩
 
-            string filename1 = @"C:\______test_files\__pic\_ntuh\op1.jpg";
-            //string filename1 = @"C:\______test_files\fakecolor.jpg";
+            string filename1 = @"C:\______test_files1\__pic\_ntuh\op1.jpg";
+            //string filename1 = @"C:\______test_files1\fakecolor.jpg";
 
             /*
             //彩色轉灰階

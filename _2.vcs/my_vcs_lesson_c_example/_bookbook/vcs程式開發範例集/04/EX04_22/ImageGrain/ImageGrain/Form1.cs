@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -23,7 +23,7 @@ namespace ImageGrain
         private void button1_Click(object sender, EventArgs e)
         {
             openFileDialog1.Filter = "*.jpg,*.jpeg,*.bmp|*.jpg;*.jpeg;*.bmp";
-            openFileDialog1.InitialDirectory = @"C:\______test_files\";
+            openFileDialog1.InitialDirectory = @"C:\______test_files1\";
             openFileDialog1.ShowDialog();
             Image image = System.Drawing.Image.FromFile(openFileDialog1.FileName);
             bitmap1 = new Bitmap(image);

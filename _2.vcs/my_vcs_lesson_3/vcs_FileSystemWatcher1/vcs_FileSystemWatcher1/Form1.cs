@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,7 +25,7 @@ namespace vcs_FileSystemWatcher1
 {
     public partial class Form1 : Form
     {
-        string foldername = @"C:\______test_files\__pic";
+        string foldername = @"C:\______test_files1\__pic";
 
         FileInfo fi;
         StringBuilder sb;

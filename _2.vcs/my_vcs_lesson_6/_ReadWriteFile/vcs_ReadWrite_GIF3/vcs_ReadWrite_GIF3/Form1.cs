@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,7 +11,7 @@ namespace vcs_ReadWrite_GIF3
 {
     public partial class Form1 : Form
     {
-        static string filename = @"C:\______test_files\__pic\_gif\cat.gif";
+        static string filename = @"C:\______test_files1\__pic\_gif\cat.gif";
 
         Bitmap bitmap = new Bitmap(filename);
         bool current = false;

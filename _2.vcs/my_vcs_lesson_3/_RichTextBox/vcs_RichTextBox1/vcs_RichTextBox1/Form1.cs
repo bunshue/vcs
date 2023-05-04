@@ -20,7 +20,7 @@ namespace vcs_RichTextBox1
             InitializeComponent();
         }
 
-        string rtf_filename = @"C:\______test_files\__RW\_rtf\text.rtf";
+        string rtf_filename = @"C:\______test_files1\__RW\_rtf\text.rtf";
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -817,7 +817,7 @@ namespace vcs_RichTextBox1
             //讀取純文字檔到richTextBox裏
             try
             {
-                richTextBox1.LoadFile(@"C:\______test_files\article.txt", RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
+                richTextBox1.LoadFile(@"C:\______test_files1\article.txt", RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
             }
             catch (FileNotFoundException)
             {

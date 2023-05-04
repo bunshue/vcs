@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -73,7 +73,7 @@ namespace xCh5_4_2_11
 
         private void button6_Click(object sender, EventArgs e)
         {
-            string fileName = @"C:\______test_files\__RW\_word\bmp_format.docx";
+            string fileName = @"C:\______test_files1\__RW\_word\bmp_format.docx";
             ProcessStartInfo startInfo = new ProcessStartInfo(fileName);
 
             if (File.Exists(fileName))

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -48,7 +48,7 @@ namespace vcs_ExternalProgram
         {
             //想做一個開啟pdf的, 目前無法指名檔案
             const string exe_filename = @"C:\Program Files\Adobe\Acrobat DC\Acrobat\Acrobat.exe";
-            string filename = @"C:\______test_files\__RW\_pdf\note_Linux_workstation.pdf";
+            string filename = @"C:\______test_files1\__RW\_pdf\note_Linux_workstation.pdf";
 
             panel1.Location = new Point(200, 10);
             panel1.Size = new Size(300, 400);

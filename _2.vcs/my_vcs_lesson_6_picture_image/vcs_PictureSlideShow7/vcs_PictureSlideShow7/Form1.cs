@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -57,7 +57,7 @@ namespace vcs_PictureSlideShow7
             try
             {
                 bool flag = false;
-                string foldername = @"C:\______test_files\__pic\_書畫字圖\_peony1";
+                string foldername = @"C:\______test_files1\__pic\_書畫字圖\_peony1";
 
                 DirectoryInfo di = new DirectoryInfo(foldername);
                 FileInfo[] fi = di.GetFiles();

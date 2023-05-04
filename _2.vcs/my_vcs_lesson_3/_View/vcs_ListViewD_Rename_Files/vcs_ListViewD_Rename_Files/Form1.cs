@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,7 +18,7 @@ namespace vcs_ListViewD_Rename_Files
 {
     public partial class Form1 : Form
     {
-        string dirname = @"C:\______test_files\_case1";
+        string dirname = @"C:\______test_files1\_case1";
 
         public Form1()
         {

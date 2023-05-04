@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,7 +18,7 @@ namespace Mosaic
 
         private void Frm_Main_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             Image img = Image.FromFile(filename);
             this.BackgroundImage = img;
         }

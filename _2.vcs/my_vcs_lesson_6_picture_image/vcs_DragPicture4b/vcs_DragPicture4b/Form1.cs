@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,7 +21,7 @@ namespace vcs_DragPicture4b
         private void Form1_Load(object sender, EventArgs e)
         {
             //讀取圖檔
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             Image image = System.Drawing.Image.FromFile(filename);
             pictureBox1.Image = image;
             pictureBox1.Height = image.Height;

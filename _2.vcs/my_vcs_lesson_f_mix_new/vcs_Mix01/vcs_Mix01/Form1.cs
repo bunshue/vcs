@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -140,7 +140,7 @@ namespace vcs_Mix01
             show_button_text(sender);
 
 
-            string foldername = @"C:\______test_files\__pic";
+            string foldername = @"C:\______test_files1\__pic";
 
             DirectoryInfo dir = new DirectoryInfo(foldername);
             if (!dir.Exists)  //判斷資料夾路徑是否不存在

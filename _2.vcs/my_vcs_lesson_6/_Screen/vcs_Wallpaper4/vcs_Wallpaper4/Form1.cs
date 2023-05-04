@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,7 +14,7 @@ namespace vcs_Wallpaper4
 {
     public partial class Form1 : Form
     {
-        static string imgFile = @"C:\______test_files\";
+        static string imgFile = @"C:\______test_files1\";
         static string imgName = "bear.bmp";
 
         [DllImport("User32.dll")]
@@ -154,7 +154,7 @@ namespace vcs_Wallpaper4
         private void button1_Click(object sender, EventArgs e)
         {
             //設置桌面圖片  OK
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             SetDesktopPicture(filename);
         }
 

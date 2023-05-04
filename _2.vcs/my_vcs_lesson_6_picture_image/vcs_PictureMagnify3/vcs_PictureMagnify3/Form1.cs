@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,7 +14,7 @@ namespace vcs_PictureMagnify3
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\picture1.jpg";
+        string filename = @"C:\______test_files1\picture1.jpg";
         Bitmap bitmap1;
 
         public Form1()

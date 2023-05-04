@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,7 +21,7 @@ namespace vcs_PictureThumbnail
             [MarshalAs(UnmanagedType.LPTStr)] StringBuilder buffer,
             int bufferSize);
 
-        string foldername = @"C:\______test_files\__pic";
+        string foldername = @"C:\______test_files1\__pic";
 
         public Form1()
         {

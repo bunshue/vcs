@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -89,7 +89,7 @@ namespace SoundCalculator
         private void button1_Click(object sender, EventArgs e)
         {
             openFileDialog1.FileName = "";
-            openFileDialog1.InitialDirectory = @"C:\______test_files\";
+            openFileDialog1.InitialDirectory = @"C:\______test_files1\";
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,7 +12,7 @@ namespace vcs_Spotlight1
 {
     public partial class Form1 : Form
     {
-        string filename1 = @"C:\______test_files\__RW\_png\VanGogh.png";
+        string filename1 = @"C:\______test_files1\__RW\_png\VanGogh.png";
         Bitmap bitmap1;
         Point[] pArr1a = new Point[3];
         Point[] pArr2a = new Point[3];

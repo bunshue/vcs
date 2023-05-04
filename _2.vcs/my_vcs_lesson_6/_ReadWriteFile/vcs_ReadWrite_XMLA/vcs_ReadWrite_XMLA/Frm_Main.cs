@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,7 +19,7 @@ namespace vcs_ReadWrite_XMLA
             InitializeComponent();
         }
 
-        static string filename = @"C:\_git\vcs\_2.vcs\______test_files\__RW\_xml\Employee.xml";
+        static string filename = @"C:\_git\vcs\_2.vcs\______test_files1\__RW\_xml\Employee.xml";
         static string strID = "";
 
         //窗體加載時加載XML文件

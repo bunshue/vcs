@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,7 +27,7 @@ namespace PedestrianDetection
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\_emgu\pedestrian.png";
+            string filename = @"C:\______test_files1\_emgu\pedestrian.png";
 
             Image<Bgr, Byte> image = new Image<Bgr, byte>(filename);
 

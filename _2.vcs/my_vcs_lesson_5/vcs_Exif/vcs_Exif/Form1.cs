@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -26,7 +26,7 @@ namespace vcs_Exif
             label3.Text = "取得圖片內的方向值,\n自動轉換圖片方向";
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
-            string filename = @"C:\______test_files\orient1.jpg";
+            string filename = @"C:\______test_files1\orient1.jpg";
 
             // Open the file.
             using (Bitmap bm = new Bitmap(filename))
@@ -46,7 +46,7 @@ namespace vcs_Exif
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\__pic\_icon\IMG_20180228_215525.jpg";
+            string filename = @"C:\______test_files1\__pic\_icon\IMG_20180228_215525.jpg";
 
             richTextBox1.Text += "讀取檔案:\t" + filename + "\n";
 
@@ -91,7 +91,7 @@ namespace vcs_Exif
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\__pic\_icon\IMG_20180228_215525.jpg";
+            string filename = @"C:\______test_files1\__pic\_icon\IMG_20180228_215525.jpg";
 
             richTextBox1.Text += "相片檔案:\t" + filename + "\n";
 
@@ -132,7 +132,7 @@ namespace vcs_Exif
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\p3.jpg";
+            string filename = @"C:\______test_files1\p3.jpg";
 
             PropertyItem[] pi;
             pi = GetExif2(filename);
@@ -184,7 +184,7 @@ namespace vcs_Exif
         private void button4_Click(object sender, EventArgs e)
         {
             //取得拍照時間
-            string filename = @"C:\______test_files\orient1.jpg";
+            string filename = @"C:\______test_files1\orient1.jpg";
             string TakePicDateTime = GetTakePicDateTime(GetExifPropertIEs(filename));
             richTextBox1.Text += TakePicDateTime + "\n\n\n";
 
@@ -232,7 +232,7 @@ namespace vcs_Exif
 
         private void button5_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\orient1.jpg";
+            string filename = @"C:\______test_files1\orient1.jpg";
 
             Picturexif em = new Picturexif();
 
@@ -265,7 +265,7 @@ namespace vcs_Exif
         private void button6_Click(object sender, EventArgs e)
         {
             //檢查圖片的方向
-            string filename = @"C:\______test_files\orient1.jpg";
+            string filename = @"C:\______test_files1\orient1.jpg";
 
 
             // Open the file.

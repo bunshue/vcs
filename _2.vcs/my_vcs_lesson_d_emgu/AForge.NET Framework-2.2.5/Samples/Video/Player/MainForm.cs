@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -143,7 +143,7 @@ namespace Player
         private void button2_Click(object sender, EventArgs e)
         {
             //Open video file (using DirectShow)
-            string filename = @"C:\______test_files\__RWa\_avi\enka.avi";
+            string filename = @"C:\______test_files1\__RWa\_avi\enka.avi";
             {
                 // create video source
                 FileVideoSource fileSource = new FileVideoSource(filename);

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,7 +10,7 @@ namespace RevolveImageByAngle
 {
     public partial class Frm_Main : Form
     {
-        string filename = @"C:\______test_files\picture1.jpg";
+        string filename = @"C:\______test_files1\picture1.jpg";
         private Bitmap bitmap1;
         private Bitmap bitmap2;
 

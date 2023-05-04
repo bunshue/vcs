@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,7 +12,7 @@ namespace WindowsFormsApplication1
     public partial class Form1 : Form
     {
         Bitmap bitmap1; // Bitmap 影像
-        string filename = @"C:\______test_files\picture1.bmp";
+        string filename = @"C:\______test_files1\picture1.bmp";
 
         public Form1()
         {

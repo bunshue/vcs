@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -32,7 +32,7 @@ namespace vcs_PictureCrop3
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\bear.jpg";
+            string filename = @"C:\______test_files1\bear.jpg";
 
             bitmap1 = new Bitmap(filename);
             pictureBox1.Image = bitmap1;

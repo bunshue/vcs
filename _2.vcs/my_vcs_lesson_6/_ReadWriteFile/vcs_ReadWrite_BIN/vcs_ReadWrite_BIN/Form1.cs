@@ -75,8 +75,8 @@ namespace vcs_ReadWrite_BIN
         {
             //讀寫binary的範例
 
-            string filename1 = @"C:\______test_files\bear.bmp";
-            string filename2 = @"C:\______test_files\bear2.bmp";
+            string filename1 = @"C:\______test_files1\bear.bmp";
+            string filename2 = @"C:\______test_files1\bear2.bmp";
 
             using (FileStream fsWriter = new FileStream(filename2, FileMode.Create, FileAccess.Write))
             {

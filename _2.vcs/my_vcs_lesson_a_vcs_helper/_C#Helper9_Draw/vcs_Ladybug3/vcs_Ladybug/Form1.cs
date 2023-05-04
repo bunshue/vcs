@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -29,7 +29,7 @@ namespace vcs_Ladybug
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\__RW\_png\ladybug.png";
+            string filename = @"C:\______test_files1\__RW\_png\ladybug.png";
             bitmap1 = new Bitmap(filename);
             Run_Ladybug();
 

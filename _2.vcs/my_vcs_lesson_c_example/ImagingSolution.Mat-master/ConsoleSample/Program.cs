@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +13,7 @@ namespace ConsoleSample
     {
         static void Main(string[] args)
         {
-            string filename = @"C:\______test_files\__RW\_bmp\0.bmp";
+            string filename = @"C:\______test_files1\__RW\_bmp\0.bmp";
 
             // 行列(matA)の設定例（二次元配列で行列を設定）
             var matA = new double[3, 3];

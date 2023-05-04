@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -17,7 +17,7 @@ namespace _EmguLoadImage0
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\picture1.jpg";
+        string filename = @"C:\______test_files1\picture1.jpg";
 
         public Form1()
         {

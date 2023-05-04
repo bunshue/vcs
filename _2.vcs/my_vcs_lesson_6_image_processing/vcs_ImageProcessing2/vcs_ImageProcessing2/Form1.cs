@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,9 +15,9 @@ namespace vcs_ImageProcessing2
 {
     public partial class Form1 : Form
     {
-        string filename1 = @"C:\______test_files\picture1.jpg";
-        string filename2 = @"C:\______test_files\bear.jpg";
-        string filename3 = @"C:\______test_files\fakecolor.jpg";    //偽色彩處理
+        string filename1 = @"C:\______test_files1\picture1.jpg";
+        string filename2 = @"C:\______test_files1\bear.jpg";
+        string filename3 = @"C:\______test_files1\fakecolor.jpg";    //偽色彩處理
 
         public Form1()
         {

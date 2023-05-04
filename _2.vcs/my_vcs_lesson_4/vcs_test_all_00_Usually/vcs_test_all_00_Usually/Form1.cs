@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -85,21 +85,21 @@ namespace vcs_test_all_00_Usually
 
             /*
             //讀取圖檔
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             pictureBox1.Image = Image.FromFile(filename);
             */
 
             //讀取圖檔, 多一層Image結構
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             Image image = Image.FromFile(filename);
             pictureBox1.Image = image;
 
             /*
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
             pictureBox1.Image = bitmap1;
 
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             FileStream fs = new FileStream(filename, FileMode.Open, FileAccess.Read);
             pictureBox1.Image = Image.FromStream(fs);
             fs.Close();
@@ -241,7 +241,7 @@ namespace vcs_test_all_00_Usually
         {
             //Bitmap bitmap1 = new Bitmap(640, 480);
 
-            string filename0 = @"C:\______test_files\picture1.jpg";
+            string filename0 = @"C:\______test_files1\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename0);	//Bitmap.FromFile出來的是Image格式
             //pictureBox1.Image = bitmap1;
 
@@ -315,7 +315,7 @@ namespace vcs_test_all_00_Usually
             this.Controls.Add(this.axWindowsMediaPlayer1);
             axWindowsMediaPlayer1.Visible = false;
 
-            string mp3_filename = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
+            string mp3_filename = @"C:\______test_files1\_mp3\16.監獄風雲.mp3";
             axWindowsMediaPlayer1.URL = mp3_filename;
         }
 
@@ -546,7 +546,7 @@ namespace vcs_test_all_00_Usually
             pbox.BringToFront();
 
             //讀取圖檔
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             pbox.Image = Image.FromFile(filename);
 
             pbox.MouseDown += new MouseEventHandler(pbox_MouseDown);    // 加入事件

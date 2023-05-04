@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,10 +16,10 @@ namespace vcs_ShowPicture8
         int D = 0; // 第 D 張
         Point pos; // 圖的中心位置
 
-        string filename0 = @"C:\______test_files\__pic\_scenery\Blue hills.jpg";
-        string filename1 = @"C:\______test_files\__pic\_scenery\Sunset.jpg";
-        string filename2 = @"C:\______test_files\__pic\_scenery\Water lilies.jpg";
-        string filename3 = @"C:\______test_files\__pic\_scenery\Winter.jpg";
+        string filename0 = @"C:\______test_files1\__pic\_scenery\Blue hills.jpg";
+        string filename1 = @"C:\______test_files1\__pic\_scenery\Sunset.jpg";
+        string filename2 = @"C:\______test_files1\__pic\_scenery\Water lilies.jpg";
+        string filename3 = @"C:\______test_files1\__pic\_scenery\Winter.jpg";
 
         public Form1()
         {

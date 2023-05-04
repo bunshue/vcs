@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -14,8 +14,8 @@ namespace DatabaseCon
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\_vcs200_db\db_09_Data.MDF";
-        //string filename = @"C:\______test_files\_vcs200_db\db_09_Log.LDF";   another
+        string filename = @"C:\______test_files1\_vcs200_db\db_09_Data.MDF";
+        //string filename = @"C:\______test_files1\_vcs200_db\db_09_Log.LDF";   another
 
         public static string strCon = "";
 

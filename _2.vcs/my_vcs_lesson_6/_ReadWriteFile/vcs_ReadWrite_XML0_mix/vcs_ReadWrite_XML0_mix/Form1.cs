@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -84,7 +84,7 @@ namespace vcs_ReadWrite_XML0_mix
             //XML讀取
             //read_xml.xml
 
-            string filename = @"C:\______test_files\__RW\_xml\vcs_ReadWrite_XML0.xml";
+            string filename = @"C:\______test_files1\__RW\_xml\vcs_ReadWrite_XML0.xml";
 
             //XDocument doc = XDocument.Load(Server.MapPath("html5Reader/ReaderData.xml")); 
             StringBuilder sb = new StringBuilder();
@@ -264,7 +264,7 @@ namespace vcs_ReadWrite_XML0_mix
             XmlProcess xml = new XmlProcess();
             xml.CreatNewXml();
 
-            string filename = @"C:\______test_files\__RW\_xml\vcs_ReadWrite_XML0b.xml";
+            string filename = @"C:\______test_files1\__RW\_xml\vcs_ReadWrite_XML0b.xml";
             xml.DataIn(filename);
             xml.DataOut();
         }
@@ -925,7 +925,7 @@ namespace vcs_ReadWrite_XML0_mix
 
         private void button20_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\__RW\_xml\school.xml";
+            string filename = @"C:\______test_files1\__RW\_xml\school.xml";
 
             //將XmlDocument轉化為string函數
             //讀取普通XML
@@ -1237,7 +1237,7 @@ namespace vcs_ReadWrite_XML0_mix
 
     class XML_RW
     {
-        string xml_filename = @"C:\______test_files\__RW\_xml\bookshop.xml";
+        string xml_filename = @"C:\______test_files1\__RW\_xml\bookshop.xml";
 
 
         XmlDocument xmlDoc;

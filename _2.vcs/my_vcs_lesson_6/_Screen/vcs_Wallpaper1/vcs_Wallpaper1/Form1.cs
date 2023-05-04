@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -96,7 +96,7 @@ namespace vcs_Wallpaper1
         }
 
         int sel_picture = 0;
-        string foldername = @"C:\______test_files\__pic\_MU\";
+        string foldername = @"C:\______test_files1\__pic\_MU\";
         int image_type = 0;
 
         public Form1()
@@ -169,25 +169,25 @@ namespace vcs_Wallpaper1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.bmp";
+            string filename = @"C:\______test_files1\picture1.bmp";
             SetDesktopPicture(filename);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\bear.bmp";
+            string filename = @"C:\______test_files1\bear.bmp";
             SetDesktopPicture(filename);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\__pic\tiger.bmp";
+            string filename = @"C:\______test_files1\__pic\tiger.bmp";
             SetDesktopPicture(filename);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\_material\ims1.bmp";
+            string filename = @"C:\______test_files1\_material\ims1.bmp";
             SetDesktopPicture(filename);
 
             //SetWallPaper(filename, Style.Center); //置中
@@ -201,7 +201,7 @@ namespace vcs_Wallpaper1
         private void button5_Click(object sender, EventArgs e)
         {
             //下次開機後才套用
-            string filename = @"C:\______test_files\picture1.bmp";
+            string filename = @"C:\______test_files1\picture1.bmp";
 
             RegistryKey myRegKey = Registry.CurrentUser.OpenSubKey("Control Panel\\Desktop", true);
             myRegKey.SetValue("TileWallpaper", "0");

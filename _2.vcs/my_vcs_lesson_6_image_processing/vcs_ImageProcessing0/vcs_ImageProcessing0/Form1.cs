@@ -28,10 +28,10 @@ namespace vcs_ImageProcessing0
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\__pic\_anime\doraemon1.jpg";
-        //string filename = @"C:\______test_files\pic_256X100.bmp";
-        //string filename = @"C:\______test_files\__pic\global.c.gif";   //超大圖, 要很久
-        //string filename = @"C:\______test_files\elephant.jpg";
+        string filename = @"C:\______test_files1\__pic\_anime\doraemon1.jpg";
+        //string filename = @"C:\______test_files1\pic_256X100.bmp";
+        //string filename = @"C:\______test_files1\__pic\global.c.gif";   //超大圖, 要很久
+        //string filename = @"C:\______test_files1\elephant.jpg";
 
         Stopwatch sw = new Stopwatch();
 
@@ -725,7 +725,7 @@ namespace vcs_ImageProcessing0
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
             //pictureBox1.Image = bitmap1;
 
@@ -1244,7 +1244,7 @@ namespace vcs_ImageProcessing0
         {
             //LockBitmap內存法
             richTextBox1.Text += "内存法\t";
-            string filename = @"C:\______test_files\__pic\_anime\doraemon1.jpg";
+            string filename = @"C:\______test_files1\__pic\_anime\doraemon1.jpg";
             Application.DoEvents();
 
             //内存法
@@ -1286,7 +1286,7 @@ namespace vcs_ImageProcessing0
             //LockBitmap指針法
 
             richTextBox1.Text += "指針法\t";
-            string filename = @"C:\______test_files\__pic\_anime\doraemon1.jpg";
+            string filename = @"C:\______test_files1\__pic\_anime\doraemon1.jpg";
             Application.DoEvents();
 
             //指針法
@@ -1322,7 +1322,7 @@ namespace vcs_ImageProcessing0
             button13.BackColor = Color.Red;
             Application.DoEvents();
             //量測時間 黑白
-            string filename = @"C:\______test_files\__pic\_book\2016122615573727.jpg";
+            string filename = @"C:\______test_files1\__pic\_book\2016122615573727.jpg";
             Bitmap bitmap1 = new Bitmap(filename);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.Image = bitmap1; //顯示在 pictureBox1 圖片控制項中
@@ -1370,7 +1370,7 @@ namespace vcs_ImageProcessing0
             Application.DoEvents();
 
             //量測時間 測光
-            string filename = @"C:\______test_files\__pic\_book\2016122615573727.jpg";
+            string filename = @"C:\______test_files1\__pic\_book\2016122615573727.jpg";
             Bitmap bitmap1 = new Bitmap(filename);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox1.Image = bitmap1; //顯示在 pictureBox1 圖片控制項中
@@ -1423,7 +1423,7 @@ namespace vcs_ImageProcessing0
         private void button15_Click(object sender, EventArgs e)
         {
             //圖片測試
-            string filename = @"C:\______test_files\elephant.jpg";
+            string filename = @"C:\______test_files1\elephant.jpg";
             Image sample = new Bitmap(filename);
             MemoryStream buf = new MemoryStream();
             sample.Save(buf, ImageFormat.Bmp);
@@ -1459,7 +1459,7 @@ namespace vcs_ImageProcessing0
         {
             //將圖片放入拜列
 
-            string filename = @"C:\______test_files\pic_256X100.bmp";
+            string filename = @"C:\______test_files1\pic_256X100.bmp";
 
             Image image = Image.FromFile(filename);
 
@@ -1481,7 +1481,7 @@ namespace vcs_ImageProcessing0
             //BitmapData使用
             //用Marshal做影像處理, TBD
 
-            filename = @"C:\______test_files\picture1.jpg";
+            filename = @"C:\______test_files1\picture1.jpg";
             LoadBitmap(filename);
 
 
@@ -1555,7 +1555,7 @@ namespace vcs_ImageProcessing0
 
             //均值濾波
 
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             Bitmap bitmap1 = new Bitmap(filename);
 
             if (bitmap1 == null)
@@ -1571,7 +1571,7 @@ namespace vcs_ImageProcessing0
             //建立一個GrayBitmapData類做影像處理
 
             //轉換爲灰度圖
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             Bitmap bitmap1 = new Bitmap(filename);
 
             if (bitmap1 == null)
@@ -1586,7 +1586,7 @@ namespace vcs_ImageProcessing0
         {
             //使用unsafe加快處理圖像速度
 
-            string filename = @"C:\______test_files\red.bmp";
+            string filename = @"C:\______test_files1\red.bmp";
 
             Bitmap bitmap1 = new Bitmap(filename);
 
@@ -1652,7 +1652,7 @@ namespace vcs_ImageProcessing0
 
         private void LockUnlockBitsExample1()
         {
-            string filename = @"C:\______test_files\_case1\\pic3.jpg";
+            string filename = @"C:\______test_files1\_case1\\pic3.jpg";
 
             int data_offset = 0;
             // Create a new bitmap.

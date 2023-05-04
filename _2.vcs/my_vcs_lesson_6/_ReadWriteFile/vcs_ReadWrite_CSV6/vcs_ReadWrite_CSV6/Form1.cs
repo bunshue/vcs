@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -28,7 +28,7 @@ namespace vcs_ReadWrite_CSV6
         // Open a delimited file in Excel.
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\__RW\_csv\vcs_ReadWrite_CSV_F0035CH1.CSV";
+            string filename = @"C:\______test_files1\__RW\_csv\vcs_ReadWrite_CSV_F0035CH1.CSV";
 
             richTextBox1.Text += "開啟檔案 : " + filename + "\n";
 

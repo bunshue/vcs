@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,7 +24,7 @@ namespace vcs_ZoomPicture4
         {
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
 
             Bitmap bm = LoadBitmapUnlocked(filename);
             pictureBox1.ClientSize = new Size(bm.Width, bm.Height);

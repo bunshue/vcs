@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -20,7 +20,7 @@ namespace ImageViewer
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\elephant.jpg";
+            string filename = @"C:\______test_files1\elephant.jpg";
 
             try
             {

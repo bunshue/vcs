@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -45,7 +45,7 @@ namespace vcs_StartupScreen2
             StartPosition = FormStartPosition.CenterScreen;
             ShowInTaskbar = false;
 
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             bitmap = new Bitmap(filename);
             ClientSize = bitmap.Size;
 

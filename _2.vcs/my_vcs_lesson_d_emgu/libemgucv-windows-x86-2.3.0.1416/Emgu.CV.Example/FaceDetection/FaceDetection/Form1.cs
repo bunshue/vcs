@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -26,13 +26,13 @@ namespace FaceDetection
         private void button1_Click(object sender, EventArgs e)
         {
 
-            string filename = @"C:\______test_files\_emgu\lena.jpg";
+            string filename = @"C:\______test_files1\_emgu\lena.jpg";
 
             Image<Bgr, Byte> image = new Image<Bgr, byte>(filename); //Read the files as an 8-bit Bgr image  
 
             Stopwatch watch;
-            String faceFileName = @"C:\______test_files\_emgu\haarcascades\haarcascade_frontalface_default.xml";
-            String eyeFileName = @"C:\______test_files\_emgu\haarcascades\haarcascade_eye.xml";
+            String faceFileName = @"C:\______test_files1\_emgu\haarcascades\haarcascade_frontalface_default.xml";
+            String eyeFileName = @"C:\______test_files1\_emgu\haarcascades\haarcascade_eye.xml";
 
             if (GpuInvoke.HasCuda)
             {

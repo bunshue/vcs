@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -246,7 +246,7 @@ namespace vcs_PictureMontageHex
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string foldername = @"C:\______test_files\__pic\_MU";
+            string foldername = @"C:\______test_files1\__pic\_MU";
 
             // Get a list of the files in the directory.
             DirectoryInfo dir_info = new DirectoryInfo(foldername);
@@ -298,7 +298,7 @@ namespace vcs_PictureMontageHex
         {
             // Load the files from a directory.
 
-            string foldername = @"C:\______test_files\__pic\_MU";
+            string foldername = @"C:\______test_files1\__pic\_MU";
 
             DirectoryInfo dir_info = new DirectoryInfo(foldername);
             List<FileInfo> file_infos = new List<FileInfo>();

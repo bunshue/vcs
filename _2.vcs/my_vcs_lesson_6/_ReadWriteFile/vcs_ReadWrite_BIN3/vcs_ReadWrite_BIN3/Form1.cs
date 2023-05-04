@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,7 +12,7 @@ namespace vcs_ReadWrite_BIN3
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\__RW\_bin\ball.bin";
+        string filename = @"C:\______test_files1\__RW\_bin\ball.bin";
 
         Random rd = new Random(); // 亂數
         List<ClassBall> ballList = new List<ClassBall>();  // ClassBall 物件的動態陣列

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -32,7 +32,7 @@ namespace vcs_Form6_NotRectangle1
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            string filename = @"C:\______test_files\__pic\banner_ims.png";
+            string filename = @"C:\______test_files1\__pic\banner_ims.png";
             Bitmap bitmap1;    //聲明一個System.Drawing.Bitmap類的對象bitmap1
 
             bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式

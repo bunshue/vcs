@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -150,7 +150,7 @@ namespace vcs_Draw_Brush
         {
             //使用TextureBrush類繪製圖像
 
-            string filename = @"C:\______test_files\_icon\唐.ico";
+            string filename = @"C:\______test_files1\_icon\唐.ico";
 
             Image theimage;
             Image smallimage;
@@ -187,7 +187,7 @@ namespace vcs_Draw_Brush
             int W = 305;
             int H = 400;
 
-            string filename = @"C:\______test_files\picture1.jpg";  //使用一張背景圖
+            string filename = @"C:\______test_files1\picture1.jpg";  //使用一張背景圖
 
             Bitmap _bitmap = new Bitmap(filename);
             TextureBrush tb = new TextureBrush(_bitmap);
@@ -242,7 +242,7 @@ namespace vcs_Draw_Brush
             Rectangle rect = new Rectangle(x_st, y_st, w, h);
 
             //(紋理刷)
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             TextureBrush textureBrush = new TextureBrush(new Bitmap(filename));
 
             //對原圖(x_st,y_st) w, h 抓一塊出來放在(x_st,y_st)
@@ -320,7 +320,7 @@ namespace vcs_Draw_Brush
             Rectangle rect = new Rectangle(10, 10, 50, 50);//定義矩形,參數為起點橫縱坐標以及其長和寬
 
             //用圖片填充
-            TextureBrush b2 = new TextureBrush(Image.FromFile(@"C:\______test_files\picture1.jpg"));
+            TextureBrush b2 = new TextureBrush(Image.FromFile(@"C:\______test_files1\picture1.jpg"));
             rect.Location = new Point(10, 70);//更改這個矩形的起點坐標
             rect.Width = 200;//更改這個矩形的寬來
             rect.Height = 200;//更改這個矩形的高
@@ -658,7 +658,7 @@ namespace vcs_Draw_Brush
         int x, y;　// 紀錄上一個筆畫的起始點
         Graphics g2; // 畫布物件
 
-        string filename = @"C:\______test_files\picture1.jpg";
+        string filename = @"C:\______test_files1\picture1.jpg";
         bool flag_mouse_down = false;
 
         private void pictureBox2_MouseDown(object sender, MouseEventArgs e)

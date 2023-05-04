@@ -1,4 +1,4 @@
-﻿/* This file contains the Form1 class, which is the main GUI for the AudioMerger application.
+/* This file contains the Form1 class, which is the main GUI for the AudioMerger application.
  *
  * Date       Author         Description
  * 2009-03-09 erico          Created
@@ -45,10 +45,10 @@ namespace AudioMerger
 
             mSoundFilePaths = new ArrayList();
 
-            string filename1 = @"C:\______test_files\_wav\1.wav";
-            string filename2 = @"C:\______test_files\_wav\2.wav";
-            string filename3 = @"C:\______test_files\_wav\3.wav";
-            string filename4 = @"C:\______test_files\_wav\4.wav";
+            string filename1 = @"C:\______test_files1\_wav\1.wav";
+            string filename2 = @"C:\______test_files1\_wav\2.wav";
+            string filename3 = @"C:\______test_files1\_wav\3.wav";
+            string filename4 = @"C:\______test_files1\_wav\4.wav";
             AddAudioFilename(filename1);
             AddAudioFilename(filename2);
             AddAudioFilename(filename3);

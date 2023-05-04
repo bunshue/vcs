@@ -41,7 +41,7 @@ using System.Runtime.InteropServices;   //for DllImport
             }
 
             //用預設的程式開啟檔案
-            filename = @"C:\______test_files\__pic\_gif\sky.gif";
+            filename = @"C:\______test_files1\__pic\_gif\sky.gif";
 
             Process.Start("explorer.exe", filename);
             //Process.Start(filename);    //same
@@ -416,7 +416,7 @@ namespace vcs_Process_Start
             ProcessStartInfo processStartInfo = new ProcessStartInfo();
             processStartInfo.FileName = "notepad.exe";  //設置外部程序名
             processStartInfo.Arguments = "article.txt"; //設置外部程序的啟動參數（命令行參數）為test.txt
-            processStartInfo.WorkingDirectory = @"C:\______test_files\__RW\_txt";   //設置外部程序工作目錄
+            processStartInfo.WorkingDirectory = @"C:\______test_files1\__RW\_txt";   //設置外部程序工作目錄
 
             Process process = new Process();    //創建一個進程用於調用外部程序
             try
@@ -452,8 +452,8 @@ namespace vcs_Process_Start
             //ProcessStartInfo 3
             //使用預設程式打開指定文件
 
-            string filename = @"C:\______test_files\__RW\_txt\poem.txt";
-            //string filename = @"C:\______test_files\__RW\_txt\琵琶行.txt";
+            string filename = @"C:\______test_files1\__RW\_txt\poem.txt";
+            //string filename = @"C:\______test_files1\__RW\_txt\琵琶行.txt";
 
             ProcessStartInfo psi = new ProcessStartInfo(filename);
             Process process = new Process();    //創建一個進程用於調用外部程序
@@ -466,7 +466,7 @@ namespace vcs_Process_Start
             //ProcessStartInfo 4
             //調用外部程序
 
-            string filename = @"C:\______test_files\__RW\_txt\琵琶行.txt";
+            string filename = @"C:\______test_files1\__RW\_txt\琵琶行.txt";
 
             //聲明一個程序信息類
             ProcessStartInfo processStartInfo = new ProcessStartInfo();

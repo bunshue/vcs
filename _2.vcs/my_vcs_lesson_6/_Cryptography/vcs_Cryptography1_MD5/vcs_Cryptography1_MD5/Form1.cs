@@ -20,7 +20,7 @@ namespace vcs_Cryptography1_MD5
         //加密後的結果
         string str_encrypted_text = string.Empty;
 
-        string filename = @"C:\______test_files\picture1.jpg";                      //準備算MD5的檔案
+        string filename = @"C:\______test_files1\picture1.jpg";                      //準備算MD5的檔案
 
         public Form1()
         {
@@ -318,7 +318,7 @@ namespace vcs_Cryptography1_MD5
         private void button14_Click(object sender, EventArgs e)
         {
             //算一個檔案的MD5值
-            string filename = @"C:\______test_files\picture1.jpg";                      //準備算MD5的檔案
+            string filename = @"C:\______test_files1\picture1.jpg";                      //準備算MD5的檔案
 
             //加密後的結果
             string str_encrypted_text = string.Empty;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -27,7 +27,7 @@ namespace vcs_PictureCrop6
         private Graphics g2 = null;
         private bool MadeSelection = false;
 
-        string filename = @"C:\______test_files\picture1.bmp";
+        string filename = @"C:\______test_files1\picture1.bmp";
 
         private void Form1_Load(object sender, EventArgs e)
         {

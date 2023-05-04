@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -35,7 +35,7 @@ namespace vcs_ImageConversion2
         }
         private void toolStripButton3_Click(object sender, EventArgs e)//選擇轉換文件的按鈕
         {
-            openFileDialog1.InitialDirectory = @"C:\______test_files\";
+            openFileDialog1.InitialDirectory = @"C:\______test_files1\";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)        //判斷是否選擇文件
             {
                 listView1.Items.Clear();                                //清空listView1

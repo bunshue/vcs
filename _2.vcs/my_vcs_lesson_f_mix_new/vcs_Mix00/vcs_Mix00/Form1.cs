@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -53,7 +53,7 @@ namespace vcs_Mix00
             //Form1.CheckForIllegalCrossThreadCalls = false;  //解決跨執行緒控制無效	same
             Control.CheckForIllegalCrossThreadCalls = false;//忽略跨執行緒錯誤
 
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
             pictureBox1.Image = bitmap1;
@@ -144,7 +144,7 @@ namespace vcs_Mix00
             show_button_text(sender);
 
             //從檔案完整路徑分離出資料夾,檔案名稱,副檔名
-            string full_filename = @"C:\______test_files\_case1\_case1a\_case1aa\eula.3081a.txt";
+            string full_filename = @"C:\______test_files1\_case1\_case1a\_case1aa\eula.3081a.txt";
             //取得資料夾路徑
             string foldername = full_filename.Substring(0, full_filename.LastIndexOf("\\") + 1);
             //取得檔案名稱
@@ -198,7 +198,7 @@ namespace vcs_Mix00
             //動態驗證碼變成靜態
             //將一個gif拆成多圖
 
-            string filename1 = @"C:\______test_files\__pic\_gif\run.gif";
+            string filename1 = @"C:\______test_files1\__pic\_gif\run.gif";
 
             Image image1 = Image.FromFile(filename1);
             FrameDimension frameDimension = new FrameDimension(image1.FrameDimensionsList[0]);
@@ -272,8 +272,8 @@ namespace vcs_Mix00
 
             //兩圖檔疊合
 
-            string filename1 = @"C:\______test_files\__pic\_MU\id_card_03.jpg";
-            string filename2 = @"C:\______test_files\__pic\_MU\id_card_01.jpg";
+            string filename1 = @"C:\______test_files1\__pic\_MU\id_card_03.jpg";
+            string filename2 = @"C:\______test_files1\__pic\_MU\id_card_01.jpg";
 
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename1);	//Image.FromFile出來的是Image格式
             Bitmap bitmap2 = (Bitmap)Image.FromFile(filename2);	//Image.FromFile出來的是Image格式
@@ -341,7 +341,7 @@ namespace vcs_Mix00
 
             //Image Cut
 
-            string filename1 = @"C:\______test_files\picture1.jpg";
+            string filename1 = @"C:\______test_files1\picture1.jpg";
             string filename2 = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";
             string mesg = "lion-mouse";
 
@@ -652,7 +652,7 @@ namespace vcs_Mix00
         private void button15_Click(object sender, EventArgs e)
         {
             //統計英文文本中的單詞數並排序
-            string filename = @"C:\______test_files\__RW\_txt\english_text.txt";
+            string filename = @"C:\______test_files1\__RW\_txt\english_text.txt";
             StatisticsWords(filename);
         }
 
@@ -664,15 +664,15 @@ namespace vcs_Mix00
             string filename = string.Empty;
             string result = string.Empty;
 
-            filename = @"C:\______test_files\picture1.jpg";
+            filename = @"C:\______test_files1\picture1.jpg";
             result = ImageComparer.GetImageHashCode(filename);
             richTextBox1.Text += result + "\n";
 
-            filename = @"C:\______test_files\elephant.jpg";
+            filename = @"C:\______test_files1\elephant.jpg";
             result = ImageComparer.GetImageHashCode(filename);
             richTextBox1.Text += result + "\n";
 
-            filename = @"C:\______test_files\picture1.bmp";
+            filename = @"C:\______test_files1\picture1.bmp";
             result = ImageComparer.GetImageHashCode(filename);
             richTextBox1.Text += result + "\n";
 

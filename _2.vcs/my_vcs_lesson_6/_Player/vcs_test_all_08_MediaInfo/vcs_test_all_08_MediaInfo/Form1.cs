@@ -156,7 +156,7 @@ namespace vcs_test_all_08_MediaInfo
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\_mp3\02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
+            string filename = @"C:\______test_files1\_mp3\02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3";
             richTextBox1.Text += "檔案名稱: " + filename + "\n";
             get_MediaInfo(filename);
         }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -31,7 +31,7 @@ namespace vcs_ShowPicture5
 {
     public partial class Form1 : Form
     {
-        string foldername = @"C:\______test_files\__pic\_MU\";
+        string foldername = @"C:\______test_files1\__pic\_MU\";
         string filename = string.Empty;
         int total_picture_count = 0;
         int sel_picture = -1;
@@ -74,7 +74,7 @@ namespace vcs_ShowPicture5
         private void timer1_Tick(object sender, EventArgs e)
         {
             //固定一張圖
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
 
             /*
             //任選一張圖

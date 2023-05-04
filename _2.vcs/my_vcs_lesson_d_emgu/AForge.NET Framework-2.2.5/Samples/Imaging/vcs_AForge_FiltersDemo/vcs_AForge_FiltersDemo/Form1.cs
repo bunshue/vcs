@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -345,7 +345,7 @@ namespace vcs_AForge_FiltersDemo
             try
             {
                 // show file open dialog
-                openFileDialog.InitialDirectory = @"C:\______test_files\";
+                openFileDialog.InitialDirectory = @"C:\______test_files1\";
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     // load image

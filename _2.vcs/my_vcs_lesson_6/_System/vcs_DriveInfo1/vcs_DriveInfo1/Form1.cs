@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -177,7 +177,7 @@ namespace vcs_DriveInfo1
             //取得硬碟資訊
             //取得硬碟資訊
             long fb, ftb, tfb;
-            string foldername = @"C:\______test_files\__RW\_excel";
+            string foldername = @"C:\______test_files1\__RW\_excel";
 
             //this.textBox4.Text = foldername;
             richTextBox1.Text += "get : " + foldername + "\n";

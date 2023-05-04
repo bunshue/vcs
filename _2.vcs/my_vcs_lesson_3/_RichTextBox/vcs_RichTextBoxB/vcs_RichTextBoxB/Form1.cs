@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -31,7 +31,7 @@ namespace vcs_RichTextBoxB
         private void button1_Click(object sender, EventArgs e)
         {
             //開啟RTF檔案
-            string filename = @"C:\_git\vcs\_2.vcs\______test_files\__RW\_rtf\text.rtf";
+            string filename = @"C:\_git\vcs\_2.vcs\______test_files1\__RW\_rtf\text.rtf";
 
             try
             {

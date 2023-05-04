@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -20,8 +20,8 @@ namespace vcs_CompareDirectory
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            textBox1.Text = @"C:\______test_files\Dir1";
-            textBox2.Text = @"C:\______test_files\Dir2";
+            textBox1.Text = @"C:\______test_files1\Dir1";
+            textBox2.Text = @"C:\______test_files1\Dir2";
 
             SizeColumns();
         }

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,7 +25,7 @@ namespace vcs_ImageViewer
         /// <summary>
         /// 開いた画像ファイル名
         /// </summary>
-        string filename = @"C:\______test_files\ims01.bmp";
+        string filename = @"C:\______test_files1\ims01.bmp";
         /// <summary>
         /// 画像データ
         /// </summary>

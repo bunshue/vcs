@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,7 +11,7 @@ namespace vcs_RichTextBox4_Find2
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\__RW\_txt\poetry.txt";
+        string filename = @"C:\______test_files1\__RW\_txt\poetry.txt";
 
         public Form1()
         {

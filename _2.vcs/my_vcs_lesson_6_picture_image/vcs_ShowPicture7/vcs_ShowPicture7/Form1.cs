@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,8 +15,8 @@ namespace vcs_ShowPicture7
     {
         bool debug_mode = false;
 
-        //string foldername = @"C:\______test_files\__pic\_書畫字圖\_peony1";
-        string foldername = @"C:\______test_files\__pic\_MU";
+        //string foldername = @"C:\______test_files1\__pic\_書畫字圖\_peony1";
+        string foldername = @"C:\______test_files1\__pic\_MU";
 
         // The list of files we will pick from.
         private List<string> FileNames = new List<string>();
@@ -101,7 +101,7 @@ namespace vcs_ShowPicture7
             Random r = new Random();
             int selected_index = r.Next(len);
 
-            //string filename = @"C:\______test_files\picture1.jpg";
+            //string filename = @"C:\______test_files1\picture1.jpg";
             string filename = FileNames[selected_index];
             Form2 f2 = new Form2(filename);
             f2.Show();

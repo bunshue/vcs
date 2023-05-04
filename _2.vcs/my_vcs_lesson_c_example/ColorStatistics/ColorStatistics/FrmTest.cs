@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -21,7 +21,7 @@ namespace ColorStatistics
 {
     public partial class FrmTest : Form
     {
-        string filename = @"C:\______test_files\ims01.bmp";
+        string filename = @"C:\______test_files1\ims01.bmp";
 
         List<Statistics.MajorColor> MC;
         int PixelAmount = 0;
@@ -42,7 +42,7 @@ namespace ColorStatistics
 
         private void CmdOpen_Click(object sender, EventArgs e)
         {
-            openFileDialog1.InitialDirectory = @"C:\______test_files\";
+            openFileDialog1.InitialDirectory = @"C:\______test_files1\";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 pictureBox1.Image = (Bitmap)Bitmap.FromFile(openFileDialog1.FileName);

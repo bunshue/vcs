@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,7 +13,7 @@ namespace vcs_axWindowsMediaPlayer3_playlist
 {
     public partial class Form1 : Form
     {
-        string filename_r = @"C:\______test_files\_mp3\list.m3u";
+        string filename_r = @"C:\______test_files1\_mp3\list.m3u";
 
         public Form1()
         {
@@ -40,7 +40,7 @@ namespace vcs_axWindowsMediaPlayer3_playlist
 
         private void button1_Click(object sender, EventArgs e)
         {
-            openFileDialog1.InitialDirectory = @"C:\______test_files\_mp3";
+            openFileDialog1.InitialDirectory = @"C:\______test_files1\_mp3";
             openFileDialog1.Multiselect = true;
             openFileDialog1.FileName = "";
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -201,7 +201,7 @@ namespace vcs_axWindowsMediaPlayer3_playlist
             string full_filename;   //全名
             string short_filename;  //簡名
 
-            full_filename = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
+            full_filename = @"C:\______test_files1\_mp3\16.監獄風雲.mp3";
             short_filename = Path.GetFileNameWithoutExtension(full_filename);//保存打開的文件的文件名
             m3uWrite(full_filename, m3u_filename);//向M3U文件中寫入內容
 
@@ -215,7 +215,7 @@ namespace vcs_axWindowsMediaPlayer3_playlist
             m3uWrite(full_filename, m3u_filename);//向M3U文件中寫入內容
             */
 
-            full_filename = @"C:\_git\vcs\_2.vcs\______test_files\_wav\start.wav";
+            full_filename = @"C:\_git\vcs\_2.vcs\______test_files1\_wav\start.wav";
             short_filename = Path.GetFileNameWithoutExtension(full_filename);//保存打開的文件的文件名
             m3uWrite(full_filename, m3u_filename);//向M3U文件中寫入內容
 

@@ -19,7 +19,7 @@ namespace ShapeDetection
         {
             InitializeComponent();
 
-            fileNameTextBox.Text = @"C:\______test_files\_emgu\pic3.png";
+            fileNameTextBox.Text = @"C:\______test_files1\_emgu\pic3.png";
         }
 
         public void PerformShapeDetection()
@@ -153,7 +153,7 @@ namespace ShapeDetection
 
         private void loadImageButton_Click(object sender, EventArgs e)
         {
-            openFileDialog1.InitialDirectory = @"C:\______test_files\";
+            openFileDialog1.InitialDirectory = @"C:\______test_files1\";
             DialogResult result = openFileDialog1.ShowDialog();
             if (result == DialogResult.OK || result == DialogResult.Yes)
             {
@@ -163,7 +163,7 @@ namespace ShapeDetection
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
 
             Image<Bgr, Byte> img = new Image<Bgr, byte>(filename).Resize(200, 200, Emgu.CV.CvEnum.INTER.CV_INTER_LINEAR, true);
             //CV_INTER_CUBIC
@@ -171,7 +171,7 @@ namespace ShapeDetection
             //imageBox1.Image = img;
 
 
-            //Âà¦Ç¶¥
+            //ï¿½ï¿½Ç¶ï¿½
             Image<Gray, Byte> gray = img.Convert<Gray, Byte>();
             //Image<Gray, Byte> gray = img.Convert<Gray, Byte>().PyrDown().PyrUp();
 

@@ -17,7 +17,7 @@ namespace LicensePlateRecognition
     {
         private LicensePlateDetector _licensePlateDetector;
 
-        string filename = @"C:\______test_files\_emgu\license-plate.jpg";
+        string filename = @"C:\______test_files1\_emgu\license-plate.jpg";
 
         public LicensePlateRecognitionForm()
         {

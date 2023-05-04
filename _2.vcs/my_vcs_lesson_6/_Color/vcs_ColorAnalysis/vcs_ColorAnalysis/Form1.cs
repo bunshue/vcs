@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,7 +18,7 @@ namespace vcs_ColorAnalysis
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\ims03.bmp";
+            string filename = @"C:\______test_files1\ims03.bmp";
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
 
             Graphics g = Graphics.FromImage(bitmap1);   //畫字用

@@ -32,14 +32,14 @@ namespace vcs_ReadWrite_Zip
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //À£ÁYÀÉ®×
+            //ï¿½ï¿½ï¿½Yï¿½É®ï¿½
 
             List<String> filenames = new List<String>();
 
-            string filename1 = @"C:\______test_files\picture1.jpg";
-            string filename2 = @"C:\______test_files\picture2.jpg";
-            string filename3 = @"C:\______test_files\elephant.jpg";
-            string filename4 = @"C:\______test_files\bear.jpg";
+            string filename1 = @"C:\______test_files1\picture1.jpg";
+            string filename2 = @"C:\______test_files1\picture2.jpg";
+            string filename3 = @"C:\______test_files1\elephant.jpg";
+            string filename4 = @"C:\______test_files1\bear.jpg";
 
             filenames.Clear();
             filenames.Add(filename1);

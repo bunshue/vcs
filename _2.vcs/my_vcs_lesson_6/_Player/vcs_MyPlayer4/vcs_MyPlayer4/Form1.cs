@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -83,8 +83,8 @@ namespace vcs_MyPlayer4
 
         private void button1_Click(object sender, EventArgs e)
         {
-            //string filename = @"C:\______test_files\_video\i2c.avi";
-            string filename = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
+            //string filename = @"C:\______test_files1\_video\i2c.avi";
+            string filename = @"C:\______test_files1\_mp3\16.監獄風雲.mp3";
             //string filename = @"D:\vcs\_烏龍派出所\_烏龍派出所251~300\烏龍派出所268(日語).mp4";
 
             //axWindowsMediaPlayer1.Visible = false;

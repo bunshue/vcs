@@ -338,14 +338,14 @@ namespace vcs_ReadWrite_CSV
         private void button10_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "讀取CSV檔至DataTable 1 有標題\n";
-            string filename = @"C:\______test_files\__RW\_csv\vcs_ReadWrite_CSV_成績檔_有標題.csv"; //cvs文件路徑
+            string filename = @"C:\______test_files1\__RW\_csv\vcs_ReadWrite_CSV_成績檔_有標題.csv"; //cvs文件路徑
             DataTable dt = export_csv_to_dataTable(filename, true);
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "讀取CSV檔至DataTable 2 無標題\n";
-            string filename = @"C:\______test_files\__RW\_csv\vcs_ReadWrite_CSV_成績檔.csv"; //cvs文件路徑
+            string filename = @"C:\______test_files1\__RW\_csv\vcs_ReadWrite_CSV_成績檔.csv"; //cvs文件路徑
             DataTable dt = export_csv_to_dataTable(filename, false);
         }
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -39,7 +39,7 @@ namespace vcs_FolderInfo
             listView1.Columns.Add("大小", 200, HorizontalAlignment.Center);
             listView1.Columns.Add("修改日期", 200, HorizontalAlignment.Center);
             //string filePath = @"c:/______test_files/";
-            string filePath = @"C:\______test_files\__pic\_book_magazine";
+            string filePath = @"C:\______test_files1\__pic\_book_magazine";
 
             /*
             richTextBox1.Text += "轉出一層,獲得指定目錄下的所有文檔：\n";

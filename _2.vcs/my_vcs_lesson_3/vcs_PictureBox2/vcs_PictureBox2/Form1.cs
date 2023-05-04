@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -26,7 +26,7 @@ namespace vcs_PictureBox2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\__pic\_pic_combine\poster_04.jpg";
+            string filename = @"C:\______test_files1\__pic\_pic_combine\poster_04.jpg";
 
             OpenImageFile(filename);
             /*

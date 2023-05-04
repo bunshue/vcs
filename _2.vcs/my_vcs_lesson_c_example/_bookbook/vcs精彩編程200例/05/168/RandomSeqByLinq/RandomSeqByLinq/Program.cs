@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,8 +9,8 @@ namespace RandomSeqByLinq
     {
         static void Main(string[] args)
         {
-            //string filename = @"C:\______test_files\_vcs200_db\db_TomeTwo.mdf";
-            //string filename = @"C:\______test_files\_vcs200_db\db_TomeTwo_log.ldf";   another
+            //string filename = @"C:\______test_files1\_vcs200_db\db_TomeTwo.mdf";
+            //string filename = @"C:\______test_files1\_vcs200_db\db_TomeTwo_log.ldf";   another
             //像是沒有用到資料庫
 
             Random rand = new Random();//创建一个随机数生成器

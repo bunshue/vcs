@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -75,7 +75,7 @@ namespace vcs_Draw_Transform1
             Pen p = new Pen(Color.Red, 5);
             Rectangle rect = new Rectangle(10, 10, 200, 50);
 
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
 
             int w = bitmap1.Width;
@@ -265,7 +265,7 @@ namespace vcs_Draw_Transform1
 
         private void button6_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
 
             int W = 305 * 2;
@@ -307,7 +307,7 @@ namespace vcs_Draw_Transform1
 
         private void button7_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
 
             int W = 305 * 2;
@@ -368,7 +368,7 @@ namespace vcs_Draw_Transform1
             int cx = W / 2;
             int cy = H / 2;
 
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
 
             int angle = 0;
 
@@ -446,7 +446,7 @@ namespace vcs_Draw_Transform1
         {
             //旋轉一張圖片
 
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             pictureBox1.Image = Image.FromFile(filename);
 
             #region 影像旋轉(以中心順時針轉10度)

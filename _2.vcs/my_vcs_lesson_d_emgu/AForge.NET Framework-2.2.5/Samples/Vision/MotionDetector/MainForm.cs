@@ -145,7 +145,7 @@ namespace MotionDetectorSample
         // Open video file using DirectShow
         private void openVideoFileusingDirectShowToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            openFileDialog.InitialDirectory = @"C:\______test_files\";
+            openFileDialog.InitialDirectory = @"C:\______test_files1\";
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 // create video source

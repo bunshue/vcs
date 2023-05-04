@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -31,7 +31,7 @@ namespace vcs_PictureCrop2
         private float RectWidth = 1f;
         private float RectHeight = 1f;
 
-        string filename = @"C:\______test_files\elephant.jpg";
+        string filename = @"C:\______test_files1\elephant.jpg";
 
         public Form1()
         {

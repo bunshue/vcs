@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,7 +16,7 @@ namespace vcs_Screensaver3
     {
         int W = 0;
         int H = 0;
-        string foldername = @"C:\______test_files\_mp3b";
+        string foldername = @"C:\______test_files1\_mp3b";
 
         public Form1()
         {

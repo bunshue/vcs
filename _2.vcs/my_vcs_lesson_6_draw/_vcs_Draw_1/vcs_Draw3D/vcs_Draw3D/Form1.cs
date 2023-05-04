@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -548,7 +548,7 @@ namespace vcs_Draw3D
         float ratio_y = 1.0f;
         private void timer10_Tick(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\__RW\_png\scale16X16.png";
+            string filename = @"C:\______test_files1\__RW\_png\scale16X16.png";
 
             ratio_x += 0.1f;
             ratio_y += 0.1f;

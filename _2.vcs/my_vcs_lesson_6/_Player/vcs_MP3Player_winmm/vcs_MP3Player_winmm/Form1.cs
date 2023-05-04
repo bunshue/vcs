@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -50,7 +50,7 @@ namespace vcs_MP3Player_winmm
         int hwndCallback
         );
 
-        string filename = @"C:\______test_files\_mp3\aaaa.mp3";
+        string filename = @"C:\______test_files1\_mp3\aaaa.mp3";
 
         /// <summary>  
 
@@ -154,15 +154,15 @@ namespace vcs_MP3Player_winmm
 
         private void button6_Click(object sender, EventArgs e)
         {
-            //richTextBox1.Text += (GetMediaLen(@"C:\______test_files\_wav\WindowsShutdown.wav").ToString() + " 秒\n");
-            //richTextBox1.Text += (GetMediaLen(@"C:\______test_files\_mp3\aaaa.mp3").ToString() + " 秒");
+            //richTextBox1.Text += (GetMediaLen(@"C:\______test_files1\_wav\WindowsShutdown.wav").ToString() + " 秒\n");
+            //richTextBox1.Text += (GetMediaLen(@"C:\______test_files1\_mp3\aaaa.mp3").ToString() + " 秒");
             //richTextBox1.Text += (GetMediaLen(@"F:\_______VIDEO_ALL_all1\[诸神字幕组][TBS][世界遗产][20160124 加德满都谷地].mp4").ToString() + " 秒");
 
-            string filename = @"C:\______test_files\_mp3\aaaa.mp3";
+            string filename = @"C:\______test_files1\_mp3\aaaa.mp3";
             long len = GetMediaLen(filename);
             richTextBox1.Text += "檔案 : " + filename + ", 長度 : " + len.ToString() + " 秒\n";
 
-            filename = @"C:\______test_files\_wav\WindowsShutdown.wav";
+            filename = @"C:\______test_files1\_wav\WindowsShutdown.wav";
             len = GetMediaLen(filename);
             richTextBox1.Text += "檔案 : " + filename + ", 長度 : " + len.ToString() + " 秒\n";
         }

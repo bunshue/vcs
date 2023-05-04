@@ -13,7 +13,7 @@ namespace vcs_ReadWrite_CSV3
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\__RW\_csv\vcs_ReadWrite_CSV_data.csv";
+        string filename = @"C:\______test_files1\__RW\_csv\vcs_ReadWrite_CSV_data.csv";
 
         public Form1()
         {
@@ -31,7 +31,7 @@ namespace vcs_ReadWrite_CSV3
         {
             if (File.Exists(filename) == false)
             {
-                richTextBox1.Text += "ÀÉ®× " + filename + " ¤£¦s¦b¡AÂ÷¶}¡C\n";
+                richTextBox1.Text += "ï¿½É®ï¿½ " + filename + " ï¿½ï¿½ï¿½sï¿½bï¿½Aï¿½ï¿½ï¿½}ï¿½C\n";
                 return;
             }
 
@@ -40,8 +40,8 @@ namespace vcs_ReadWrite_CSV3
             int num_rows = values.GetUpperBound(0) + 1;
             int num_cols = values.GetUpperBound(1) + 1;
 
-            richTextBox1.Text += "¦@¦³ " + num_cols.ToString() + " Äæ(column)¸ê®Æ\n";
-            richTextBox1.Text += "¦@¦³ " + num_rows.ToString() + " ¦C(row)¸ê®Æ\n";
+            richTextBox1.Text += "ï¿½@ï¿½ï¿½ " + num_cols.ToString() + " ï¿½ï¿½(column)ï¿½ï¿½ï¿½\n";
+            richTextBox1.Text += "ï¿½@ï¿½ï¿½ " + num_rows.ToString() + " ï¿½C(row)ï¿½ï¿½ï¿½\n";
 
             // Display the data to show we have it.
 

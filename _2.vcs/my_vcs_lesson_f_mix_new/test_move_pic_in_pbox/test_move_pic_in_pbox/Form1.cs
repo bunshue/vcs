@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,7 +11,7 @@ namespace test_move_pic_in_pbox
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\picture1.jpg";
+        string filename = @"C:\______test_files1\picture1.jpg";
         Bitmap bitmap0; //放底圖
         Bitmap bitmap1; //放貼上的小圖
         Graphics g;

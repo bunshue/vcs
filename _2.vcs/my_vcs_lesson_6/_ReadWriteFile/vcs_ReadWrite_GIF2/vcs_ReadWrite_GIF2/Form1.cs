@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -31,7 +31,7 @@ namespace vcs_ReadWrite_GIF2
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\__pic\_gif\cat.gif";
+            string filename = @"C:\______test_files1\__pic\_gif\cat.gif";
 
             image = new AnimateImage(Image.FromFile(filename));
             image.OnFrameChanged += new EventHandler<EventArgs>(image_OnFrameChanged);

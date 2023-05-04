@@ -1337,7 +1337,7 @@ namespace vcs_Draw3A
 
         void show_card(int card_no)
         {
-            Image img = Image.FromFile(@"C:\______test_files\__pic\_poker_card\cards1.png");
+            Image img = Image.FromFile(@"C:\______test_files1\__pic\_poker_card\cards1.png");
             int W = img.Width;
             int H = img.Height;
             int w = W / 13;
@@ -1394,7 +1394,7 @@ namespace vcs_Draw3A
 
         void show_card2(int card_no)
         {
-            Image img = Image.FromFile(@"C:\______test_files\__pic\_poker_card\cards2.png");
+            Image img = Image.FromFile(@"C:\______test_files1\__pic\_poker_card\cards2.png");
             int W = img.Width;
             int H = img.Height;
             int w = W / 13;

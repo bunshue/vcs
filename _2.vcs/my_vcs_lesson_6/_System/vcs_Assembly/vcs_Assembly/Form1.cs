@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -86,7 +86,7 @@ namespace vcs_Assembly
             //讀取exe版本號
             //讀取exe版本號
 
-            string filename = @"C:\______test_files\_material\_dll\AForge.Video.dll";
+            string filename = @"C:\______test_files1\_material\_dll\AForge.Video.dll";
 
             Assembly currentAssembly = Assembly.LoadFile(filename);
             //Assembly updatedAssembly = Assembly.LoadFile(updatedAssemblyPath);

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,7 +16,7 @@ namespace vcs_ImageProcessing4
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\naruto.jpg";
+        string filename = @"C:\______test_files1\naruto.jpg";
 
         public Form1()
         {

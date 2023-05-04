@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -16,7 +16,7 @@ namespace vcs_ReadWrite_LRC
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\__RW\_lrc\04-三月雪(&黃妃).lrc";
+        string filename = @"C:\______test_files1\__RW\_lrc\04-三月雪(&黃妃).lrc";
 
         public Form1()
         {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,7 +19,7 @@ namespace vcs_TreeView6
             InitializeComponent();
         }
 
-        string foldername = @"C:\______test_files\";
+        string foldername = @"C:\______test_files1\";
 
         public static string tempstr = "";
         string Tem_Dir = "";

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,7 +18,7 @@ namespace vcs_ReadWrite_PDF5
 {
     public partial class Form1 : Form
     {
-        string filename1 = @"C:\______test_files\picture1.jpg";
+        string filename1 = @"C:\______test_files1\picture1.jpg";
         string filename2 = string.Empty;
 
         bool success = false;
@@ -79,7 +79,7 @@ namespace vcs_ReadWrite_PDF5
         {
             try
             {
-                string filename1 = @"C:\______test_files\picture1.jpg";
+                string filename1 = @"C:\______test_files1\picture1.jpg";
                 string filename2 = Application.StartupPath + "\\pdf_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".pdf";
 
                 PdfDocument doc = new PdfDocument();

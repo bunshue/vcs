@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,7 +13,7 @@ namespace vcs_DragPicture3b
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\very_long_pic.jpg";
+        string filename = @"C:\______test_files1\very_long_pic.jpg";
 
         private Bitmap bitmap1;
         private float CurrentScale;

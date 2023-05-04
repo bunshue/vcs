@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -62,7 +62,7 @@ namespace vcs_ReadWrite_TXT4
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\__RW\_txt\score.txt";
+            string filename = @"C:\______test_files1\__RW\_txt\score.txt";
 
             richTextBox2.Text += "開啟檔案 : " + filename + "\n";
 
@@ -109,7 +109,7 @@ namespace vcs_ReadWrite_TXT4
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\__RW\_bin\score.dat";
+            string filename = @"C:\______test_files1\__RW\_bin\score.dat";
 
             richTextBox2.Text += "開啟檔案 : " + filename + "\n";
 

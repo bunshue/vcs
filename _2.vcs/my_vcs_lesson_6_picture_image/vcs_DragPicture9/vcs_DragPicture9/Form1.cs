@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -43,10 +43,10 @@ namespace vcs_DragPicture9
             this.Location = new System.Drawing.Point(0, 0);
 
             filenames.Clear();
-            filenames.Add(@"C:\______test_files\__pic\_書畫字圖\_peony1\p1.jpg");
-            filenames.Add(@"C:\______test_files\__pic\_書畫字圖\_peony1\p2.jpg");
-            filenames.Add(@"C:\______test_files\__pic\_書畫字圖\_peony1\p3.jpg");
-            filenames.Add(@"C:\______test_files\__pic\_書畫字圖\_peony1\p4.jpg");
+            filenames.Add(@"C:\______test_files1\__pic\_書畫字圖\_peony1\p1.jpg");
+            filenames.Add(@"C:\______test_files1\__pic\_書畫字圖\_peony1\p2.jpg");
+            filenames.Add(@"C:\______test_files1\__pic\_書畫字圖\_peony1\p3.jpg");
+            filenames.Add(@"C:\______test_files1\__pic\_書畫字圖\_peony1\p4.jpg");
 
             showPictures();
         }

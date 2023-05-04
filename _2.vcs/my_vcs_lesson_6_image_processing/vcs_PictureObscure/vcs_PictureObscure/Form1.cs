@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -203,7 +203,7 @@ namespace vcs_PictureObscure
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\elephant.jpg";
+            string filename = @"C:\______test_files1\elephant.jpg";
             try
             {
                 // Load the image without locking its file.

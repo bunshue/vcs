@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -576,13 +576,13 @@ namespace ImageViewer
 
         void open_image_file()
         {
-            string filename = @"C:\______test_files\ims01.bmp";
+            string filename = @"C:\______test_files1\ims01.bmp";
             OpenImageFile(filename);
 
             /*
             // ファイルを開くダイアログの作成 
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.InitialDirectory = @"C:\______test_files\";
+            openFileDialog1.InitialDirectory = @"C:\______test_files1\";
             // ファイルフィルタ 
             openFileDialog1.Filter = "画像ﾌｧｲﾙ(*.bmp,*.jpg,*.png,*.tif,*.ico)|*.bmp;*.jpg;*.png;*.tif;*.ico";
             // ダイアログの表示 （Cancelボタンがクリックされた場合は何もしない）

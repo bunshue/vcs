@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,8 +22,8 @@ namespace vcs_Screensaver4
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\picture1.jpg";
-        //string filename = @"C:\______test_files\_material\ims1.bmp";
+        string filename = @"C:\______test_files1\picture1.jpg";
+        //string filename = @"C:\______test_files1\_material\ims1.bmp";
 
         Label label1 = new Label();
         Timer timer1 = new Timer();

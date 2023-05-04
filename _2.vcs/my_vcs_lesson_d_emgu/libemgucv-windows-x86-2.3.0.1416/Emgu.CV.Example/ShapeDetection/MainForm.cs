@@ -17,7 +17,7 @@ namespace ShapeDetection
         {
             InitializeComponent();
 
-            fileNameTextBox.Text = @"C:\______test_files\_emgu\pic3.png";
+            fileNameTextBox.Text = @"C:\______test_files1\_emgu\pic3.png";
         }
 
         public void PerformShapeDetection()

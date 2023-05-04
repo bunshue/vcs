@@ -14,7 +14,7 @@ namespace vcs_ImageProcessing1
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files\_case1\\pic3.jpg";
+        string filename = @"C:\______test_files1\_case1\\pic3.jpg";
         //Graphics g;
         Pen p;
         Bitmap bitmap1;
@@ -555,7 +555,7 @@ namespace vcs_ImageProcessing1
         {
             //恢復
             //讀取圖檔
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             pictureBox1.Image = Image.FromFile(filename);
             pictureBox1.BackColor = Color.Lime;
         }
@@ -564,7 +564,7 @@ namespace vcs_ImageProcessing1
         {
             //白色轉為透明
             //C#將圖片白色背景設置為透明
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             Image image = Image.FromFile(filename);
             Bitmap bitmap1 = new Bitmap(image);
             bitmap1.MakeTransparent(Color.White);

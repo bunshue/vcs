@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
@@ -23,7 +23,7 @@ namespace OCR
 
         private void loadImageButton_Click(object sender, EventArgs e)
         {
-            openImageFileDialog.InitialDirectory = @"C:\______test_files\";
+            openImageFileDialog.InitialDirectory = @"C:\______test_files1\";
             if (openImageFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 Bgr drawColor = new Bgr(Color.Blue);

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -46,7 +46,7 @@ namespace vcs_Form5_AutoSize
 
         private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            System.Diagnostics.Process.Start(@"C:\______test_files\__RW\_txt\琵琶行.txt");
+            System.Diagnostics.Process.Start(@"C:\______test_files1\__RW\_txt\琵琶行.txt");
         }
 
         private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

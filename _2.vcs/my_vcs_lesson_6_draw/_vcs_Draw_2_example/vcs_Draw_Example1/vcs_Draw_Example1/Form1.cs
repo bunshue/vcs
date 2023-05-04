@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -475,7 +475,7 @@ namespace vcs_Draw_Example1
 
         private void button6_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             try
             {
                 Image myImage = Image.FromFile(filename);
@@ -2856,7 +2856,7 @@ namespace vcs_Draw_Example1
             y_st = H - dh;
             g.DrawRectangle(new Pen(Color.Black), new Rectangle(x_st, y_st, dw, dh));
 
-            Bitmap bmp = new Bitmap(@"C:\______test_files\__pic\BMW.jfif");
+            Bitmap bmp = new Bitmap(@"C:\______test_files1\__pic\BMW.jfif");
 
             Rectangle destRect1 = new Rectangle(x_st + 12, y_st + 10, 180, 180);
 
@@ -2929,7 +2929,7 @@ namespace vcs_Draw_Example1
         void open_test_file()
         {
             //開檔
-            string filename = @"C:\______test_files\ims03.bmp";
+            string filename = @"C:\______test_files1\ims03.bmp";
             Image image1 = new Bitmap(filename, true);
             pictureBox1.Image = image1;
             pictureBox1.BorderStyle = BorderStyle.Fixed3D;
@@ -2941,7 +2941,7 @@ namespace vcs_Draw_Example1
         void find_brightness()
         {
             //找過亮
-            string filename = @"C:\______test_files\ims03.bmp";
+            string filename = @"C:\______test_files1\ims03.bmp";
             bitmap1 = new Bitmap(filename);
             Graphics g = Graphics.FromImage(bitmap1);
             pictureBox1.Image = bitmap1;
@@ -3013,7 +3013,7 @@ namespace vcs_Draw_Example1
 
             //統計
 
-            string filename = @"C:\______test_files\ims03.bmp";
+            string filename = @"C:\______test_files1\ims03.bmp";
             bitmap1 = new Bitmap(filename);
             Graphics g = Graphics.FromImage(bitmap1);
             pictureBox1.Image = bitmap1;
@@ -5217,7 +5217,7 @@ namespace vcs_Draw_Example1
         private void button34_Click(object sender, EventArgs e)
         {
             //影像的寬高可以是負的, 做倒影鏡射
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
 
             Bitmap bitmap1 = new Bitmap(filename);
 
@@ -5520,7 +5520,7 @@ namespace vcs_Draw_Example1
             //讀取純文字檔到richTextBox裏
             try
             {
-                richTextBox1.LoadFile(@"C:\______test_files\article.txt", RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
+                richTextBox1.LoadFile(@"C:\______test_files1\article.txt", RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
             }
             catch (FileNotFoundException)
             {
@@ -5732,7 +5732,7 @@ namespace vcs_Draw_Example1
         private void button41_Click(object sender, EventArgs e)
         {
             //擷取部分圖形
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             Image image = Image.FromFile(filename);
             pictureBox1.Image = image;
 
@@ -7763,7 +7763,7 @@ namespace vcs_Draw_Example1
         private void bt_long2_Click(object sender, EventArgs e)
         {
             //以四周擴散形式顯示圖片
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             DiffuseEffect(filename.Trim(), pictureBox1);//呼叫自定義方法完成圖片向四周的擴充
         }
 
@@ -7791,7 +7791,7 @@ namespace vcs_Draw_Example1
         private void bt_long3_Click(object sender, EventArgs e)
         {
             //圖片的上下對接顯示
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             UpDownConnect(filename.Trim(), pictureBox1);//呼叫自定義方法
         }
 
@@ -7933,7 +7933,7 @@ namespace vcs_Draw_Example1
             //以任意角度旋轉圖像
             //實現任意角度旋轉圖像主要使用Graphics類提供的RotateTransform()方法
 
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
             //pictureBox1.Image = bitmap1;
 
@@ -7955,7 +7955,7 @@ namespace vcs_Draw_Example1
         private void bt_long7_Click(object sender, EventArgs e)
         {
             //實現任意角度旋轉圖片
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             Image image = Image.FromFile(filename);
 
             //以任意角度旋轉顯示圖像
@@ -7975,7 +7975,7 @@ namespace vcs_Draw_Example1
         private void bt_long8_Click(object sender, EventArgs e)
         {
             //任意角度旋轉圖片
-            string filename = @"C:\______test_files\picture1.jpg";
+            string filename = @"C:\______test_files1\picture1.jpg";
             CircumgyrateEffect(filename.Trim(), pictureBox1);//呼叫自定義方法
         }
 
