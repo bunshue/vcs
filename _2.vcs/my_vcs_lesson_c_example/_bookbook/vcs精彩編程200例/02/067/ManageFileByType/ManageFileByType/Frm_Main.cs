@@ -21,7 +21,7 @@ namespace ManageFileByType
         private void button1_Click(object sender, EventArgs e)
         {
             FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();//创建FolderBrowserDialog对象
-            folderBrowserDialog1.SelectedPath = @"C:\______test_files";
+            folderBrowserDialog1.SelectedPath = @"C:\______test_files1";
 
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)//判断是否选择了文件夹
             {

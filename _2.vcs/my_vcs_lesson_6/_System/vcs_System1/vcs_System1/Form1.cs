@@ -1001,7 +1001,7 @@ namespace vcs_System1
 
             richTextBox1.Text += "取得系統目前目錄 : " + Environment.CurrentDirectory + "\n";
 
-            string foldername = @"C:\______test_files";
+            string foldername = @"C:\______test_files1";
 
             richTextBox1.Text += "設定新的系統目前目錄\n";
             Environment.CurrentDirectory = foldername;

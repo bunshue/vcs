@@ -34,7 +34,7 @@ namespace FileCopyPlan
 
         private void button2_Click(object sender, EventArgs e)
         {
-            folderBrowserDialog1.SelectedPath = @"C:\______test_files";
+            folderBrowserDialog1.SelectedPath = @"C:\______test_files1";
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)//打开文件夹对话框
             {
                 textBox2.Text = folderBrowserDialog1.SelectedPath;//获取目的文件的路径

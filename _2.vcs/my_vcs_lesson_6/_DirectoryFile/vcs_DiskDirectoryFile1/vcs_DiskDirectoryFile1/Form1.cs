@@ -1319,7 +1319,7 @@ namespace vcs_DiskDirectoryFile1
             openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = "c:\\______test_files";  //預設開啟的路徑
+            openFileDialog1.InitialDirectory = "c:\\______test_files1";  //預設開啟的路徑
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 richTextBox1.Text += "get filename : " + openFileDialog1.FileName + "\n";
@@ -1347,7 +1347,7 @@ namespace vcs_DiskDirectoryFile1
             openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = "c:\\______test_files";  //預設開啟的路徑
+            openFileDialog1.InitialDirectory = "c:\\______test_files1";  //預設開啟的路徑
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 richTextBox1.Text += "get filename : " + openFileDialog1.FileName + "\n";
@@ -1492,7 +1492,7 @@ namespace vcs_DiskDirectoryFile1
             message = "";
             filesize_all = 0;
             //計算某個檔案夾下的檔案大小，並可以用不同的單位(KB,MB,GB)顯示。
-            DirectoryInfo d = new DirectoryInfo(@"C:\______test_files");//輸入檔案夾
+            DirectoryInfo d = new DirectoryInfo(@"C:\______test_files1");//輸入檔案夾
             double size = DirSize(d);
             //SizeFormat sizeFormat = SizeFormat.KiloBytes;
             SizeFormat sizeFormat = SizeFormat.Bytes;
@@ -1528,7 +1528,7 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_files03_Click(object sender, EventArgs e)
         {
-            string target_dir = @"C:\______test_files";
+            string target_dir = @"C:\______test_files1";
             ShowDirectory2(target_dir);
         }
 
@@ -1570,7 +1570,7 @@ namespace vcs_DiskDirectoryFile1
         {
             message = "";
 
-            DriveInfo di = new DriveInfo(@"C:\______test_files");
+            DriveInfo di = new DriveInfo(@"C:\______test_files1");
 
             // Get the root directory and print out some information about it.
             DirectoryInfo dirInfo = di.RootDirectory;
@@ -1606,7 +1606,7 @@ namespace vcs_DiskDirectoryFile1
         private void bt_files05_Click(object sender, EventArgs e)
         {
             message = "";
-            string strFolderPath = @"C:\______test_files";
+            string strFolderPath = @"C:\______test_files1";
             DirectoryInfo DIFO = new DirectoryInfo(strFolderPath);
             if (DIFO.Exists)        //確認資料夾是否存在
             {
@@ -1735,7 +1735,7 @@ namespace vcs_DiskDirectoryFile1
         {
             message = "";
             //計算某個檔案夾下的檔案大小，並可以用不同的單位(KB,MB,GB)顯示。
-            DirectoryInfo d = new DirectoryInfo(@"C:\______test_files");//輸入檔案夾
+            DirectoryInfo d = new DirectoryInfo(@"C:\______test_files1");//輸入檔案夾
             double size = DirSize(d);
             //SizeFormat sizeFormat = SizeFormat.KiloBytes;
             SizeFormat sizeFormat = SizeFormat.Bytes;
@@ -1798,19 +1798,19 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_files07_Click(object sender, EventArgs e)
         {
-            string path = @"c:\______test_files";
+            string path = @"c:\______test_files1";
             GetDirectories(path);
         }
 
         private void bt_files08_Click(object sender, EventArgs e)
         {
-            string path = @"c:\______test_files";
+            string path = @"c:\______test_files1";
             GetFiles(path);
         }
 
         private void bt_files09_Click(object sender, EventArgs e)
         {
-            string target_dir = "C:\\______test_files";
+            string target_dir = "C:\\______test_files1";
             richTextBox1.Text += "資料夾: " + target_dir + "\n";
             ShowDirectory(target_dir);
         }
@@ -1850,7 +1850,7 @@ namespace vcs_DiskDirectoryFile1
         private Boolean GetFile()
         {
             richTextBox1.Text += "尋找檔案 IMG_20180228_215525.jpg\n";
-            DirectoryInfo dirInfo = new DirectoryInfo(@"C:\______test_files");
+            DirectoryInfo dirInfo = new DirectoryInfo(@"C:\______test_files1");
             foreach (FileInfo info in dirInfo.GetFiles("IMG_20180228_215525.jpg"))
             {
                 return true;
@@ -1861,7 +1861,7 @@ namespace vcs_DiskDirectoryFile1
         private void bt_files11_Click(object sender, EventArgs e)
         {
             //撈出資料夾內所有jpg檔
-            var dirnames = Directory.GetDirectories(@"C:\______test_files");
+            var dirnames = Directory.GetDirectories(@"C:\______test_files1");
             int i = 0;
 
             try
@@ -1907,7 +1907,7 @@ namespace vcs_DiskDirectoryFile1
         {
             //撈出資料夾內特定類型的檔案
 
-            string searchDirectory = @"C:\______test_files";
+            string searchDirectory = @"C:\______test_files1";
             string searchPattern = "*.cs;*.csv;*.ico";
             bool recurrsive = false;
 

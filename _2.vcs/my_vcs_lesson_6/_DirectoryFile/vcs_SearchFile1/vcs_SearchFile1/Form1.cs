@@ -256,7 +256,7 @@ namespace vcs_SearchFile1
         {
             if (txtDirectory.Text == "")
             {
-                folderBrowserDialog1.SelectedPath = "c:\\______test_files";  //預設開啟的路徑
+                folderBrowserDialog1.SelectedPath = "c:\\______test_files1";  //預設開啟的路徑
             }
             else
             {

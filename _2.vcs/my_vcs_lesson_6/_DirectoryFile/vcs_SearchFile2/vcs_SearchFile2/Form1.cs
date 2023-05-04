@@ -21,7 +21,7 @@ namespace vcs_SearchFile2
         private void Form1_Load(object sender, EventArgs e)
         {
             textBox1.Text = "angry_bird.jpg";
-            textBox2.Text = @"C:\______test_files";
+            textBox2.Text = @"C:\______test_files1";
         }
 
         private void button1_Click(object sender, EventArgs e)

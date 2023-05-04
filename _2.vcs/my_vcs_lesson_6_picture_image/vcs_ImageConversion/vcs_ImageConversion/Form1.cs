@@ -59,7 +59,7 @@ namespace vcs_ImageConversion
 
             //選取檔案
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = "c:\\______test_files";  //預設開啟的路徑
+            openFileDialog1.InitialDirectory = "c:\\______test_files1";  //預設開啟的路徑
             openFileDialog1.Filter = "bmp文件(*.bmp)|*.bmp|gif文件(*.gif)|*.gif|Jpeg文件	(*.jpg)|*.jpg";	//設置當前選定篩選器字符串以決定對話框中“文檔類型”選項
             openFileDialog1.FilterIndex = 3;            //設置對話框中當前選定篩選器的索引, 預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = false;   //關閉對話框，還原當前的目錄

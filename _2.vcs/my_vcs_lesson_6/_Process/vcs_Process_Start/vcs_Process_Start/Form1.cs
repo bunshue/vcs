@@ -364,7 +364,7 @@ namespace vcs_Process_Start
             //設置外部程序的啟動參數（命令行參數）為test.txt
             processStartInfo.Arguments = "file_to_save.txt";
             //設置外部程序工作目錄為  C:\
-            processStartInfo.WorkingDirectory = @"C:\______test_files";
+            processStartInfo.WorkingDirectory = @"C:\______test_files1";
 
             ///////////聲明一個程序類,也就是創建一個進程
             Process Proc;
