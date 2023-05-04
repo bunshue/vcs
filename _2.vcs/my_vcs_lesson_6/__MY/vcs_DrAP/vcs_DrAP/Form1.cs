@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -1915,7 +1915,7 @@ namespace vcs_DrAP
             Properties.Settings.Default.Save();
             */
 
-            string foldername = @"C:\______test_files\_case1\";
+            string foldername = @"C:\______test_files1\_case1\";
             richTextBox1.Text += "讀出一資料夾內所有檔案 -r, 資料夾\t" + foldername + "\n";
 
             //get_all_files(foldername);
@@ -2320,7 +2320,7 @@ namespace vcs_DrAP
             total_size = 0;
             total_files = 0;
 
-            path = "C:\\______test_files\\_case1";
+            path = "C:\\______test_files1\\_case1";
 
             richTextBox2.Text += "\n搜尋路徑 " + path + "\n";
 

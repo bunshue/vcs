@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -668,7 +668,7 @@ namespace vcs_Remove_Bin_Obj
 
             //string path = @"C:\_git\vcs\_2.vcs";
 
-            string path = @"C:\______test_files\rename001";
+            string path = @"C:\______test_files1\rename001";
             //string path = search_path;
 
             filename_rename.Clear();

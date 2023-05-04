@@ -1,8 +1,10 @@
 import cv2
 import numpy as np
 
+video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
+
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-vid = cv2.VideoCapture('spiderman.mp4')
+vid = cv2.VideoCapture(video_filename)
 
 #In the [your_file_name] mention the Video File that you want to process and detect the Face in
 

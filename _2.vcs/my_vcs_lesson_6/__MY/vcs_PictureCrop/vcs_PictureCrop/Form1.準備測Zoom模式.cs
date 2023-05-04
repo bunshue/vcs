@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,8 +22,8 @@ namespace vcs_PictureCrop
     {
         int flag_operation_mode = 1;    //0 : 空白模式, 1 : 圖片模式
 
-        //string filename = @"C:\______test_files\picture1.jpg";
-        string filename = @"C:\______test_files\__report\connection1.jpg";
+        //string filename = @"C:\______test_files1\picture1.jpg";
+        string filename = @"C:\______test_files1\__report\connection1.jpg";
 
         private int intStartX = 0;
         private int intStartY = 0;
@@ -167,7 +167,7 @@ namespace vcs_PictureCrop
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
             //openFileDialog1.InitialDirectory = @"c:\______test_files";  //預設開啟的路徑
-            openFileDialog1.InitialDirectory = @"C:\______test_files\__pic\_ntuh";  //預設開啟的路徑
+            openFileDialog1.InitialDirectory = @"C:\______test_files1\__pic\_ntuh";  //預設開啟的路徑
             openFileDialog1.Multiselect = false;    //單選
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {

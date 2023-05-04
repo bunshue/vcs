@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -40,7 +40,7 @@ namespace vcs_MyPlayer3
             Init_WMP();
             richTextBox1.Text += "AAAAAAAAAAAAAAAAAAA";
 
-            string mp3_filename = @"C:\______test_files\_mp3\16.監獄風雲.mp3";
+            string mp3_filename = @"C:\______test_files1\_mp3\16.監獄風雲.mp3";
             axWindowsMediaPlayer1.Visible = false;
             axWindowsMediaPlayer1.URL = mp3_filename;
 

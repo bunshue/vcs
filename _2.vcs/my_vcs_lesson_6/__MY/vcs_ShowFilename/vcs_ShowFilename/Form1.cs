@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -417,7 +417,7 @@ namespace vcs_ShowFilename
             total_size = 0;
             total_files = 0;
 
-            string foldername = @"C:\______test_files\__pic\_book_magazine";
+            string foldername = @"C:\______test_files1\__pic\_book_magazine";
 
             richTextBox1.Text += "\n搜尋路徑" + foldername + "\n";
 
@@ -494,7 +494,7 @@ namespace vcs_ShowFilename
             total_size = 0;
             total_files = 0;
 
-            string foldername = @"C:\______test_files\__pic\_book_magazine";
+            string foldername = @"C:\______test_files1\__pic\_book_magazine";
 
             richTextBox1.Text += "\n搜尋路徑" + foldername + "\n";
 
