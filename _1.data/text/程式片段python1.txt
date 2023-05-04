@@ -62,24 +62,7 @@ print("%s:%d:%s" % (filename, row, line), end=' ')
 if os.path.normcase(fn).endswith(".py") or os.path.isdir(fn):
         
 
-
-如果資料夾不存在  建立之
-    # Create the win32com\gen_py directory.
-    make_dir = os.path.join(lib_dir, "win32com", "gen_py")
-    if not os.path.isdir(make_dir):
-        if verbose:
-            print("Creating directory", make_dir)
-        directory_created(make_dir)
-        os.mkdir(make_dir)
-
-
-
-
-            os.remove(os.path.join(lib_dir, "win32", "dbi.pyd.old"))
-
-
-
-
+os.remove(os.path.join(lib_dir, "win32", "dbi.pyd.old"))
 
 
 //xil_printf("david0217: %s:%s(%d) ST setup g_exposure = %d\r\n",__FILE__,__func__,__LINE__, g_exposure);
@@ -146,29 +129,6 @@ def chop(line):
         return line
 
 
-def testdir(a):
-    try:
-        names = [n for n in os.listdir(a) if n.endswith('.py')]
-    except OSError:
-        print("Directory not readable: %s" % a, file=sys.stderr)
-    else:
-        for n in names:
-            fullname = os.path.join(a, n)
-            if os.path.isfile(fullname):
-                output = io.StringIO()
-                print('Testing %s' % fullname)
-                try:
-                    roundtrip(fullname, output)
-                except Exception as e:
-                    print('  Failed to compile, exception is %s' % repr(e))
-            elif os.path.isdir(fullname):
-                testdir(fullname)
-
-testdir(a)
-
-
-
-
 def parse(filename):
 
     with open(filename, encoding='latin1') as f:
@@ -206,12 +166,6 @@ def parse_glibc_supported(filename):
         words = line.split()
         if len(words) != 2:
             continue
-
-
-
-
-
-
 
 
 

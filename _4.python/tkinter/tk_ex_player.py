@@ -72,7 +72,7 @@ class UI(Label):
         self.update_idletasks()
 
 
-filename1 = 'C:/______test_files2/human.jpg'
+filename1 = 'C:/______test_files2/human1.jpg'
 filename2 = 'C:/______test_files2/human2.jpg'
 
 filename = filename1

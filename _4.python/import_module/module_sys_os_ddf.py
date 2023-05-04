@@ -49,7 +49,7 @@ print("mkdir")
 print("chdir")
 #os.chdir("test_python_dir")
 
-filename_r = '../data/article.txt'
+filename_r = 'C:\______test_files2/article.txt'
 print("檔案名稱 : ", os.path.getmtime(filename_r))
 
 import os.path
@@ -167,12 +167,12 @@ if os.path.exists(filename+'_wm.png'):
 '''
 
 import os
-cur_path=os.path.dirname(__file__) # 取得目前路徑
-sample_tree=os.walk(cur_path)
+cur_path = os.path.dirname(__file__) # 取得目前路徑
+sample_tree = os.walk(cur_path)
 for dirname,subdir,files in sample_tree:
-    print("檔案路徑：",dirname)
+    print("檔案路徑：", dirname)
     print("目錄串列：" , subdir)   
-    print("檔案串列：",files)
+    print("檔案串列：", files)
     print()
 
 print('拷貝檔案')
@@ -248,5 +248,57 @@ print(os.curdir)
 
 
 
+foldername = 'C:\______test_files3'
 
+filenames = os.listdir(foldername)
+print(filenames)
+for filename in filenames:
+    print(filename, end = '')
+    if os.path.isdir(filename):
+        print('資料夾', end = '')
+    if os.path.islink(filename):
+        print('連結', end = '')
+    print()
+
+'''
+dirname = 'New Folder'
+try:
+  os.mkdir(dirname)
+except OSError as dirname:
+  print("can't make slave directory", dirname, ":", dirname)
+'''
+
+'''
+dirname = 'New Foldercccc'
+print('如果資料夾不存在  建立之')
+## Create the win32com\gen_py directory.
+#make_dir = os.path.join(lib_dir, "win32com", "gen_py")
+if not os.path.isdir(dirname):
+    print('建立資料夾 : ', dirname)
+    os.mkdir(dirname)
+else:
+    print('資料夾已存在, 無法再建立')
+'''    
+
+
+def testdir(foldername):
+    try:
+        names = [n for n in os.listdir(foldername) if n.endswith('.py')]
+    except OSError:
+        print("Directory not readable: %s" % foldername, file=sys.stderr)
+    else:
+        for n in names:
+            fullname = os.path.join(foldername, n)
+            if os.path.isfile(fullname):
+                output = io.StringIO()
+                print('Testing %s' % fullname)
+                try:
+                    roundtrip(fullname, output)
+                except Exception as e:
+                    print('  Failed to compile, exception is %s' % repr(e))
+            elif os.path.isdir(fullname):
+                testdir(fullname)
+
+foldername = 'C:\______test_files3'
+testdir(foldername)
 

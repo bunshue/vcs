@@ -3,9 +3,12 @@
 import cv2
 import numpy as np
 
+print("框出照片中的人臉")
 filename = 'C:/______test_files2/human2.jpg'
 
-face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+# OpenCV 人臉識別分類器
+#face_classifier = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
+face_classifier = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
 '''
 #影片
@@ -15,8 +18,9 @@ vid = cv2.VideoCapture('spiderman.mp4')
 while True:
     ret, frame = vid.read()
     frame = cv2.resize(frame,(int(frame.shape[1]/2),int(frame.shape[0]/2)))
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)       
-    faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+    # 調用偵測識別人臉函式
+    faces = face_classifier.detectMultiScale(gray, 1.3, 5)
     for (x,y,w,h) in faces:
         cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)        
     cv2.imshow('Video', frame)
@@ -30,7 +34,9 @@ vid.release()
 image = cv2.imread(filename)
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)    #設定圖片顏色, 先將圖片轉成灰階
 
-faces = face_cascade.detectMultiScale(gray, 1.2, 3)
+# 調用偵測識別人臉函式
+faces = face_classifier.detectMultiScale(gray, 1.2, 3)
+#faces = face_classifier.detectMultiScale(gray, scaleFactor = 1.2, minNeighbors = 3, minSize = (32, 32))
 #1.2 表示每次影像尺寸減小的比例
 #3 表示每一個目標至少要被檢測到4次才算是真正的目標
 #faces表示檢測到的人臉目標list
@@ -43,7 +49,8 @@ for (x,y,w,h) in faces:
 cv2.imshow('image', image)
 
 #另存新檔
-#cv2.imwrite('aaaaa.jpg', image)    #寫入本機圖片
+filename2 = 'C:/______test_files3/human_face.jpg'
+cv2.imwrite(filename2, image)	#寫入本機圖片
 
 print('wait kere')
 cv2.waitKey(0)

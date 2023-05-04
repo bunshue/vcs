@@ -189,3 +189,22 @@ print(sys.version_info)
 print(ver_string)
 print(root_key_name)
 
+string1 = 'abcde'
+print('%s\t%-40s\t'%(string1, string1), end=' ')
+
+num = 123
+print('%d %s - %s\t%s' % (num, string1, string1, string1))
+
+
+print("-"*40)
+print('Error: %s' % string1, file=sys.stderr)
+
+debug = False #debug訊息之開關
+
+def print_debug(msg):
+    if debug: print(msg)
+
+print_debug("%s: permission denied: %s" % (string1, string1))
+
+
+

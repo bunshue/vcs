@@ -12,7 +12,7 @@ def mtime(f):
     return st[stat.ST_MTIME]
 
 
-filename1 = 'C:/______test_files2/human.jpg'
+filename1 = 'C:/______test_files2/human1.jpg'
 filename2 = 'C:/______test_files2/human2.jpg'
 
 try:
