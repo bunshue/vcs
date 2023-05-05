@@ -56,7 +56,7 @@ namespace MapDownloader
         private GMapOverlay regionOverlay = new GMapOverlay("region");
 
         private int retryNum = 3;
-        private string tilePath = "C:\\______test_files1\\GisMap";
+        private string tilePath = @"C:\_git\vcs\_1.data\______test_files1\GisMap";
         private SQLitePureImageCache sqliteCache = new SQLitePureImageCache();
         private MySQLPureImageCacheMulti mysqlCache = new MySQLPureImageCacheMulti();
 

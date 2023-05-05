@@ -61,7 +61,7 @@ namespace vcs_FolderFileName
 
             if (path == String.Empty)
             {
-                //path = "C:\\______test_files1";
+                //path = @"C:\_git\vcs\_1.data\______test_files1";
                 path = @"D:\vcs\astro\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
             }
 
@@ -138,7 +138,7 @@ namespace vcs_FolderFileName
 
         private void button8_Click(object sender, EventArgs e)
         {
-            folderBrowserDialog1.SelectedPath = "c:\\______test_files1";  //預設開啟的路徑
+            folderBrowserDialog1.SelectedPath = @"C:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 path = folderBrowserDialog1.SelectedPath;
@@ -323,7 +323,7 @@ namespace vcs_FolderFileName
         {
             /*  無法依子目錄排序 廢棄
             if (path == String.Empty)
-                path = "C:\\______test_files1";
+                path = @"C:\_git\vcs\_1.data\______test_files1";
 
             //C# 取得資料夾下的所有檔案(包括子目錄)
             string[] files = System.IO.Directory.GetFiles(path, filetype2, System.IO.SearchOption.AllDirectories);
@@ -340,7 +340,7 @@ namespace vcs_FolderFileName
 
             if (path == String.Empty)
             {
-                //path = "C:\\______test_files1";
+                //path = @"C:\_git\vcs\_1.data\______test_files1";
                 path = @"D:\vcs\astro\_DATA2\_VIDEO_全為備份\百家讲坛_清十二帝疑案";
             }
 

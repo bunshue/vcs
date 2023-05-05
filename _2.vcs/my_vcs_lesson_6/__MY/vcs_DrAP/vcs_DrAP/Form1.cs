@@ -2320,7 +2320,7 @@ namespace vcs_DrAP
             total_size = 0;
             total_files = 0;
 
-            path = "C:\\______test_files1\\_case1";
+            path = @"C:\_git\vcs\_1.data\______test_files1\_case1";
 
             richTextBox2.Text += "\n搜尋路徑 " + path + "\n";
 

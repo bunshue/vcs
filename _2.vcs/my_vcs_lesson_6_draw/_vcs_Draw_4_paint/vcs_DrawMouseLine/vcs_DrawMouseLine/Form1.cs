@@ -13,7 +13,7 @@ namespace vcs_DrawMouseLine
     {
         Point[] pt = new Point[30];
         int pt_index = -1;
-        Image img = Image.FromFile("c:\\______test_files1\\picture1.jpg");
+        Image img = Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\picture1.jpg");
         bool flag_mouse_down = false;
 
         int flag_operation_mode = MODE_1;
@@ -114,7 +114,7 @@ namespace vcs_DrawMouseLine
             {
                 //richTextBox1.Text += "idx = " + pt_index.ToString() + "\n";
                 //Point[] pt2 = new Point[pt_index + 1];
-                Bitmap bmp = new Bitmap("c:\\______test_files1\\BMW.jfif");
+                Bitmap bmp = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\BMW.jfif");
                 int i;
                 for (i = 0; i <= pt_index; i++)
                 {

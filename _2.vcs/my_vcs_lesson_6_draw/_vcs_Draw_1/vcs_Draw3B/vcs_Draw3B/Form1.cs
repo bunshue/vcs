@@ -35,7 +35,7 @@ namespace vcs_Draw3B
         private int CurrentValue = 0;   //指南針
 
         #region 畫字
-        string filename = "C:\\______test_files1\\__RW\\_txt\\琵琶行s.txt";
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行s.txt";
         int word_position = 0;
         string word_string = "";
         Bitmap bmp;

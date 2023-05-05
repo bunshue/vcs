@@ -18,7 +18,7 @@ namespace vcs_ReadWrite_INI5
             InitializeComponent();
         }
 
-        string filename = @"c:\______test_files1\__RW\_ini\vcs_ReadWrite_INI5.ini";
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_ini\vcs_ReadWrite_INI5.ini";
 
         private void button1_Click(object sender, EventArgs e)
         {

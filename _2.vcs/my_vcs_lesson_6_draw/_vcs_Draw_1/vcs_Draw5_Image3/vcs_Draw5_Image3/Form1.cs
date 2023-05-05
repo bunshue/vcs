@@ -137,7 +137,7 @@ namespace vcs_Draw5_Image3
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string filename = "C:\\______test_files1\\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
             Bitmap bitmap1 = new Bitmap(filename);

@@ -28,7 +28,7 @@ namespace vcs_ListView3
         {
             createHeadersAndFillListView();
 
-            string foldername = @"C:\______test_files1";
+            string foldername = @"C:\_git\vcs\_1.data\______test_files1";
 
             ShowListView(foldername);
         }

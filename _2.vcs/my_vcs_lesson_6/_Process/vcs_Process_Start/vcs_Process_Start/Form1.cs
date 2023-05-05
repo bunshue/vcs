@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;   //for DllImport
 //Win10不可用 或許可以用在舊版的Windows
 
 //開啟檔案 由預設程式開啟
-//Process.Start("C:\\______test_files1\\my_text_file.txt");
+//Process.Start(@"C:\_git\vcs\_1.data\______test_files1\my_text_file.txt");
 
 //開啟程式
 //Process.Start("rundll32.exe", "shell32.dll,Control_RunDLL");
@@ -28,7 +28,7 @@ using System.Runtime.InteropServices;   //for DllImport
 //Process.Start(textBox1.Text);  //呼叫 *.exe
 
             //用預設的程式開啟檔案
-            string filename = "C:\\______test_files1\\aaaaaaa.txt";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\aaaaaaa.txt";
 
             if (File.Exists(filename) == false)
             {
@@ -282,7 +282,7 @@ namespace vcs_Process_Start
         private void button12_Click(object sender, EventArgs e)
         {
             //用Adobe開啟pdf檔案
-            string filename = "C:\\______test_files1\\__RW\\_pdf\\note_Linux_workstation.pdf";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_pdf\note_Linux_workstation.pdf";
             Process process = new Process();    //創建一個進程用於調用外部程序
             process = Process.Start(filename);
             process.WaitForExit();  //需等開啟的程式結束後才可以回到表單
@@ -364,7 +364,7 @@ namespace vcs_Process_Start
             //設置外部程序的啟動參數（命令行參數）為test.txt
             processStartInfo.Arguments = "file_to_save.txt";
             //設置外部程序工作目錄為  C:\
-            processStartInfo.WorkingDirectory = @"C:\______test_files1";
+            processStartInfo.WorkingDirectory = @"C:\_git\vcs\_1.data\______test_files1";
 
             ///////////聲明一個程序類,也就是創建一個進程
             Process Proc;

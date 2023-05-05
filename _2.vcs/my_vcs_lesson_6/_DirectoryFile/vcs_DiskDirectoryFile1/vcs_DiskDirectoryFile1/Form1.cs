@@ -322,7 +322,7 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_file00_Click(object sender, EventArgs e)
         {
-            string filename1 = "C:\\______test_files1\\aaaaaaa.txt";
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\aaaaaaa.txt";
             string filename2 = "C:\\aaaa.txt";
 
             if (File.Exists(filename1) == false)            //確認檔案是否存在
@@ -339,7 +339,7 @@ namespace vcs_DiskDirectoryFile1
         private void bt_file01_Click(object sender, EventArgs e)
         {
             //建立檔案
-            string filename = "C:\\______test_files1\\aaaaaaab.txt";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\aaaaaaab.txt";
             if (File.Exists(filename) == false)         //確認檔案是否存在
             {
                 File.Create(filename);
@@ -349,7 +349,7 @@ namespace vcs_DiskDirectoryFile1
                 richTextBox1.Text += "檔案: " + filename + " 已存在, 無法再建立\n";
 
             //建立檔案
-            string destFileName = @"c:\______test_files1\picture1a.jpg";
+            string destFileName = @"C:\_git\vcs\_1.data\______test_files1\picture1a.jpg";
             FileStream fs = File.Create(destFileName);
             fs.Close();
             richTextBox1.Text += "已建立檔案: " + destFileName + "\n";
@@ -358,8 +358,8 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_file02_Click(object sender, EventArgs e)
         {
-            string filename1 = "C:\\______test_files1\\aaaaaaa.txt";
-            string filename2 = "C:\\______test_files1\\aaaaaaab.txt";
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\aaaaaaa.txt";
+            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\aaaaaaab.txt";
 
             if (File.Exists(filename1) == false)    //確認原始檔案是否存在
             {
@@ -376,8 +376,8 @@ namespace vcs_DiskDirectoryFile1
                 richTextBox1.Text += "檔案: " + filename2 + " 已存在, 無法再拷貝\n";
 
             //複製檔案，從 sourceFileName 複製到 destFileName
-            string sourceFileName = @"c:\______test_files1\picture1.jpg";
-            string destFileName = @"c:\______test_files1\picture1a.jpg";
+            string sourceFileName = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string destFileName = @"C:\_git\vcs\_1.data\______test_files1\picture1a.jpg";
 
             if (File.Exists(sourceFileName))    //確認原始檔案是否存在
             {
@@ -400,7 +400,7 @@ namespace vcs_DiskDirectoryFile1
         {
             //刪除檔案
             //法一
-            string filename = "C:\\______test_files1\\aaaaaaab.txt";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\aaaaaaab.txt";
             if (File.Exists(filename) == false)     //確認檔案是否存在
                 richTextBox1.Text += "檔案: " + filename + " 不存在, 無法刪除\n";
             else
@@ -411,7 +411,7 @@ namespace vcs_DiskDirectoryFile1
 
             //刪除檔案
             //法二
-            FileInfo f = new FileInfo("c:\\______test_files1\\vcs_test.txt");
+            FileInfo f = new FileInfo(@"C:\_git\vcs\_1.data\______test_files1\vcs_test.txt");
             if (f.Exists)       //確認檔案是否存在
             {
                 f.Delete();
@@ -420,8 +420,8 @@ namespace vcs_DiskDirectoryFile1
             else
                 richTextBox1.Text += "找不到檔案\n";
 
-            string destFileName = @"c:\______test_files1\picture1a.jpg";
-            string destFileName2 = @"c:\______test_files1\picture1b.jpg";
+            string destFileName = @"C:\_git\vcs\_1.data\______test_files1\picture1a.jpg";
+            string destFileName2 = @"C:\_git\vcs\_1.data\______test_files1\picture1b.jpg";
 
             //刪除檔案
             if (File.Exists(destFileName))      //確認檔案是否存在
@@ -462,8 +462,8 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_file05_Click(object sender, EventArgs e)
         {
-            string sourceFileName = @"c:\______test_files1\picture1a.jpg";
-            string destFileName = @"c:\______test_files1\picture1b.jpg";
+            string sourceFileName = @"C:\_git\vcs\_1.data\______test_files1\picture1a.jpg";
+            string destFileName = @"C:\_git\vcs\_1.data\______test_files1\picture1b.jpg";
 
             //移動檔案，從 sourceFileName 移動到 destFileName
             if (File.Exists(sourceFileName))        //確認原始檔案是否存在
@@ -485,7 +485,7 @@ namespace vcs_DiskDirectoryFile1
         {
             //取得檔案資訊
             //法一
-            string filename = "c:\\______test_files1\\vcs_test.old.txt";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\vcs_test.old.txt";
             if (File.Exists(filename) == false)   //確認檔案是否存在
             {
                 richTextBox1.Text += "檔案: " + filename + " 不存在\n";
@@ -586,7 +586,7 @@ namespace vcs_DiskDirectoryFile1
         private void bt_file10_Click(object sender, EventArgs e)
         {
             //修改檔案時間 屬性
-            string filename = @"C:\\______test_files1\\article.txt";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\article.txt";
             if (File.Exists(filename) == false) //確認檔案是否存在
             {
                 richTextBox1.Text += "檔案: " + filename + " 不存在\n";
@@ -714,8 +714,8 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_dir03_Click(object sender, EventArgs e)
         {
-            string destDirName = @"c:\______test_files1\folder2";
-            string destDirName2 = @"c:\______test_files1\folder22";
+            string destDirName = @"C:\_git\vcs\_1.data\______test_files1\folder2";
+            string destDirName2 = @"C:\_git\vcs\_1.data\______test_files1\folder22";
             DeleteDirectory(destDirName, true);
             DeleteDirectory(destDirName2, true);
         }
@@ -774,8 +774,8 @@ namespace vcs_DiskDirectoryFile1
             richTextBox1.Text += "移動/更名 完成，從原始資料夾: " + Path_old + " 到目的資料夾: " + Path_new + "\n";
 
             //移動資料夾，從 sourceDirName 移動到 destDirName
-            string sourceDirName = @"c:\______test_files1\folder2";
-            string destDirName = @"c:\______test_files1\folder22";
+            string sourceDirName = @"C:\_git\vcs\_1.data\______test_files1\folder2";
+            string destDirName = @"C:\_git\vcs\_1.data\______test_files1\folder22";
             if (Directory.Exists(sourceDirName))        //確認資料夾是否存在
             {
                 if (!Directory.Exists(destDirName))     //確認資料夾是否存在
@@ -821,7 +821,7 @@ namespace vcs_DiskDirectoryFile1
         {
             //讀檔1
             //一次讀取檔案內所有資料
-            FileInfo f = new FileInfo("c:\\______test_files1\\vcs_test.txt");
+            FileInfo f = new FileInfo(@"C:\_git\vcs\_1.data\______test_files1\vcs_test.txt");
             StreamReader sr = f.OpenText();
             richTextBox1.Text += sr.ReadToEnd();	//讀取所有文字內容
             sr.Close();
@@ -832,7 +832,7 @@ namespace vcs_DiskDirectoryFile1
         {
             //讀檔2
             //一次讀取檔案內一行資料
-            FileInfo f = new FileInfo("c:\\______test_files1\\vcs_test.txt");
+            FileInfo f = new FileInfo(@"C:\_git\vcs\_1.data\______test_files1\vcs_test.txt");
             StreamReader sr = f.OpenText();
             while (sr.Peek() > 0)
             {
@@ -846,7 +846,7 @@ namespace vcs_DiskDirectoryFile1
         {
             //讀檔3
             //一次讀取檔案內一個字元
-            FileInfo f = new FileInfo("c:\\______test_files1\\vcs_test.txt");
+            FileInfo f = new FileInfo(@"C:\_git\vcs\_1.data\______test_files1\vcs_test.txt");
             StreamReader sr = f.OpenText();
             while (sr.Peek() > 0)
             {
@@ -860,14 +860,14 @@ namespace vcs_DiskDirectoryFile1
         private void bt_read03_Click(object sender, EventArgs e)
         {
             //讀檔4
-            string fileReadName = @"c:\______test_files1\data.txt";
+            string fileReadName = @"C:\_git\vcs\_1.data\______test_files1\data.txt";
             ReadFile(fileReadName);
         }
 
         private void bt_read04_Click(object sender, EventArgs e)
         {
             //讀取中文檔案
-            String pathname = "C:\\______test_files1\\read_file.txt";
+            String pathname = @"C:\_git\vcs\_1.data\______test_files1\read_file.txt";
 
             if (File.Exists(pathname) == false) //確認檔案是否存在
             {
@@ -878,7 +878,7 @@ namespace vcs_DiskDirectoryFile1
             {
                 richTextBox1.Clear();
                 //讀取中文檔案
-                StreamReader sw = new StreamReader(@"c:/______test_files1/read_file.txt", Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
+                StreamReader sw = new StreamReader(@"C:\_git\vcs\_1.data\______test_files1/read_file.txt", Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
                 richTextBox1.Text += sw.ReadToEnd();	//讀取所有文字內容
             }
         }
@@ -934,7 +934,7 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_read06_Click(object sender, EventArgs e)
         {
-            string filepath = "C:\\______test_files1\\aaaaaaab.txt";
+            string filepath = @"C:\_git\vcs\_1.data\______test_files1\aaaaaaab.txt";
 
             string[] rowdat = new string[3];
             string[] paraname = new string[16];
@@ -989,7 +989,7 @@ namespace vcs_DiskDirectoryFile1
         {
             richTextBox1.Clear();
 
-            string filepath = "C:\\______test_files1\\aaaaaaa.txt";
+            string filepath = @"C:\_git\vcs\_1.data\______test_files1\aaaaaaa.txt";
 
             string[] rowdat = new string[3];
             string[] paraname = new string[16];
@@ -1067,7 +1067,7 @@ namespace vcs_DiskDirectoryFile1
             openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = "c:\\______test_files1";  //預設開啟的路徑
+            openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
             openFileDialog1.Multiselect = false;    //單選
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -1103,15 +1103,15 @@ namespace vcs_DiskDirectoryFile1
             richTextBox1.Text += "建立時間檔案：" + filename + "\n";
 
             //儲存檔案1
-            FileInfo f = new FileInfo("c:\\______test_files1\\vcs_test.txt");
+            FileInfo f = new FileInfo(@"C:\_git\vcs\_1.data\______test_files3\vcs_test.txt");
             StreamWriter sw1 = f.CreateText();
             sw1.Write(richTextBox1.Text);
             sw1.Flush();
             sw1.Close();
-            richTextBox1.Text += "儲存檔案1 OK，檔名：c:\\______test_files1\\vcs_test.txt\n";
+            richTextBox1.Text += "儲存檔案1 OK，檔名：C:\_git\vcs\_1.data\______test_files3\vcs_test.txt\n";
 
             //儲存檔案2
-            string filename2 = "c:\\______test_files1\\SaveDataToFile.txt";
+            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\SaveDataToFile.txt";
             StreamWriter sw2 = File.CreateText(filename2);
             string content = "";
             for (int i = 0; i < 10; i++)
@@ -1134,7 +1134,7 @@ namespace vcs_DiskDirectoryFile1
             richTextBox1.Text += "儲存檔案3 OK，檔名：" + filename3 + "\n";
 
             //儲存檔案4     儲存二進位檔
-            string filename4 = "c:\\______test_files1\\save_file_test.bin";
+            string filename4 = @"C:\_git\vcs\_1.data\______test_files1\save_file_test.bin";
             byte[] cbuffer = new byte[256];
             for (int i = 0; i < 256; i++)
                 cbuffer[i] = (byte)i;
@@ -1154,7 +1154,7 @@ namespace vcs_DiskDirectoryFile1
             int[] x = { 0, 40, 80, 120, 160, 200, 240, 280, 320, 360, 400, 440, 480, 520, 560, 600 };
             int[] y = { 200, 328, 396, 373, 268, 131, 26, 3, 71, 200, 328, 396, 373, 268, 131, 26 };
             //把資料儲存成檔案
-            string filename5 = "C:\\______test_files1\\aaaaaaa.txt";
+            string filename5 = @"C:\_git\vcs\_1.data\______test_files1\aaaaaaa.txt";
             string context = string.Empty;
             FileStream filestream = File.Open(filename5, FileMode.Create);
             StreamWriter str_writer = new StreamWriter(filestream);
@@ -1173,7 +1173,7 @@ namespace vcs_DiskDirectoryFile1
         private void bt_write01_Click(object sender, EventArgs e)
         {
             //附加檔案
-            FileInfo f = new FileInfo("c:\\______test_files1\\vcs_test.txt");
+            FileInfo f = new FileInfo(@"C:\_git\vcs\_1.data\______test_files1\vcs_test.txt");
             StreamWriter sw = f.AppendText();
             sw.Write(richTextBox1.Text);
             sw.Flush();
@@ -1255,8 +1255,8 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_write05_Click(object sender, EventArgs e)
         {
-            string fileName1 = "c:\\______test_files1\\test_ReadAllBytes.bmp";
-            string fileName2 = "c:\\______test_files1\\test_WriteAllBytes.bmp";
+            string fileName1 = @"C:\_git\vcs\_1.data\______test_files1\test_ReadAllBytes.bmp";
+            string fileName2 = @"C:\_git\vcs\_1.data\______test_files1\test_WriteAllBytes.bmp";
 
             //讀取資料
             byte[] data_read = File.ReadAllBytes(fileName1);
@@ -1319,7 +1319,7 @@ namespace vcs_DiskDirectoryFile1
             openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = "c:\\______test_files1";  //預設開啟的路徑
+            openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 richTextBox1.Text += "get filename : " + openFileDialog1.FileName + "\n";
@@ -1347,7 +1347,7 @@ namespace vcs_DiskDirectoryFile1
             openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = "c:\\______test_files1";  //預設開啟的路徑
+            openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 richTextBox1.Text += "get filename : " + openFileDialog1.FileName + "\n";
@@ -1432,9 +1432,9 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_files00_Click(object sender, EventArgs e)
         {
-            string filename1 = "c:\\______test_files1\\compare\\aaaa.txt";
-            string filename2 = "c:\\______test_files1\\compare\\bbbb.txt";
-            string filename3 = "c:\\______test_files1\\compare\\ssss.txt";
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\compare\aaaa.txt";
+            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\compare\bbbb.txt";
+            string filename3 = @"C:\_git\vcs\_1.data\______test_files1\compare\ssss.txt";
             if (FileCompare(filename1, filename2))
             {
                 richTextBox1.Text += "檔案 " + filename1 + " 和 檔案 " + filename2 + " 相同。\n";
@@ -1455,9 +1455,9 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_files01_Click(object sender, EventArgs e)
         {
-            StreamReader sr1 = new StreamReader("c:\\______test_files1\\compare\\aaaa.txt", Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
-            StreamReader sr2 = new StreamReader("c:\\______test_files1\\compare\\bbbb.txt", Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
-            StreamReader sr3 = new StreamReader("c:\\______test_files1\\compare\\ssss.txt", Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
+            StreamReader sr1 = new StreamReader(@"C:\_git\vcs\_1.data\______test_files1\compare\aaaa.txt", Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
+            StreamReader sr2 = new StreamReader(@"C:\_git\vcs\_1.data\______test_files1\compare\bbbb.txt", Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
+            StreamReader sr3 = new StreamReader(@"C:\_git\vcs\_1.data\______test_files1\compare\ssss.txt", Encoding.Default);	//Encoding.Default解決讀取一般編碼檔案中文字錯亂的問題
             if (object.Equals(sr1.ReadToEnd(), sr2.ReadToEnd()))	//讀取所有文字內容
             {
                 richTextBox1.Text += "兩個文件相等\n";
@@ -1492,7 +1492,7 @@ namespace vcs_DiskDirectoryFile1
             message = "";
             filesize_all = 0;
             //計算某個檔案夾下的檔案大小，並可以用不同的單位(KB,MB,GB)顯示。
-            DirectoryInfo d = new DirectoryInfo(@"C:\______test_files1");//輸入檔案夾
+            DirectoryInfo d = new DirectoryInfo(@"C:\_git\vcs\_1.data\______test_files1");//輸入檔案夾
             double size = DirSize(d);
             //SizeFormat sizeFormat = SizeFormat.KiloBytes;
             SizeFormat sizeFormat = SizeFormat.Bytes;
@@ -1528,7 +1528,7 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_files03_Click(object sender, EventArgs e)
         {
-            string target_dir = @"C:\______test_files1";
+            string target_dir = @"C:\_git\vcs\_1.data\______test_files1";
             ShowDirectory2(target_dir);
         }
 
@@ -1570,7 +1570,7 @@ namespace vcs_DiskDirectoryFile1
         {
             message = "";
 
-            DriveInfo di = new DriveInfo(@"C:\______test_files1");
+            DriveInfo di = new DriveInfo(@"C:\_git\vcs\_1.data\______test_files1");
 
             // Get the root directory and print out some information about it.
             DirectoryInfo dirInfo = di.RootDirectory;
@@ -1606,7 +1606,7 @@ namespace vcs_DiskDirectoryFile1
         private void bt_files05_Click(object sender, EventArgs e)
         {
             message = "";
-            string strFolderPath = @"C:\______test_files1";
+            string strFolderPath = @"C:\_git\vcs\_1.data\______test_files1";
             DirectoryInfo DIFO = new DirectoryInfo(strFolderPath);
             if (DIFO.Exists)        //確認資料夾是否存在
             {
@@ -1735,7 +1735,7 @@ namespace vcs_DiskDirectoryFile1
         {
             message = "";
             //計算某個檔案夾下的檔案大小，並可以用不同的單位(KB,MB,GB)顯示。
-            DirectoryInfo d = new DirectoryInfo(@"C:\______test_files1");//輸入檔案夾
+            DirectoryInfo d = new DirectoryInfo(@"C:\_git\vcs\_1.data\______test_files1");//輸入檔案夾
             double size = DirSize(d);
             //SizeFormat sizeFormat = SizeFormat.KiloBytes;
             SizeFormat sizeFormat = SizeFormat.Bytes;
@@ -1798,19 +1798,19 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_files07_Click(object sender, EventArgs e)
         {
-            string path = @"c:\______test_files1";
+            string path = @"C:\_git\vcs\_1.data\______test_files1";
             GetDirectories(path);
         }
 
         private void bt_files08_Click(object sender, EventArgs e)
         {
-            string path = @"c:\______test_files1";
+            string path = @"C:\_git\vcs\_1.data\______test_files1";
             GetFiles(path);
         }
 
         private void bt_files09_Click(object sender, EventArgs e)
         {
-            string target_dir = "C:\\______test_files1";
+            string target_dir = @"C:\_git\vcs\_1.data\______test_files1";
             richTextBox1.Text += "資料夾: " + target_dir + "\n";
             ShowDirectory(target_dir);
         }
@@ -1850,7 +1850,7 @@ namespace vcs_DiskDirectoryFile1
         private Boolean GetFile()
         {
             richTextBox1.Text += "尋找檔案 IMG_20180228_215525.jpg\n";
-            DirectoryInfo dirInfo = new DirectoryInfo(@"C:\______test_files1");
+            DirectoryInfo dirInfo = new DirectoryInfo(@"C:\_git\vcs\_1.data\______test_files1");
             foreach (FileInfo info in dirInfo.GetFiles("IMG_20180228_215525.jpg"))
             {
                 return true;
@@ -1861,7 +1861,7 @@ namespace vcs_DiskDirectoryFile1
         private void bt_files11_Click(object sender, EventArgs e)
         {
             //撈出資料夾內所有jpg檔
-            var dirnames = Directory.GetDirectories(@"C:\______test_files1");
+            var dirnames = Directory.GetDirectories(@"C:\_git\vcs\_1.data\______test_files1");
             int i = 0;
 
             try
@@ -1907,7 +1907,7 @@ namespace vcs_DiskDirectoryFile1
         {
             //撈出資料夾內特定類型的檔案
 
-            string searchDirectory = @"C:\______test_files1";
+            string searchDirectory = @"C:\_git\vcs\_1.data\______test_files1";
             string searchPattern = "*.cs;*.csv;*.ico";
             bool recurrsive = false;
 
@@ -1970,8 +1970,8 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_new00_Click(object sender, EventArgs e)
         {
-            string fileName1 = "c:\\______test_files1\\test_ReadAllBytes.bmp";
-            string fileName2 = "c:\\______test_files1\\test_ReadAllBytes_half.bmp";
+            string fileName1 = @"C:\_git\vcs\_1.data\______test_files1\test_ReadAllBytes.bmp";
+            string fileName2 = @"C:\_git\vcs\_1.data\______test_files1\test_ReadAllBytes_half.bmp";
 
             //讀取資料
             byte[] data_read = File.ReadAllBytes(fileName1);
@@ -2013,7 +2013,7 @@ namespace vcs_DiskDirectoryFile1
 
             richTextBox1.Text += "讀檔案的一部分\n";
 
-            filename = "c:\\______test_files1\\test_ReadAllBytes.bmp";
+            filename = @"C:\_git\vcs\_1.data\______test_files1\test_ReadAllBytes.bmp";
             len = 100;
             richTextBox1.Text += "讀bmp檔, 從頭讀\t長度: " + len.ToString() + " 拜\n";
 

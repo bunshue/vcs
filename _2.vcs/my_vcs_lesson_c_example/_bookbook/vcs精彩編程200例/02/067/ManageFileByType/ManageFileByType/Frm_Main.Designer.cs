@@ -61,7 +61,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(225, 22);
             this.textBox1.TabIndex = 2;
-            this.textBox1.Text = "C:\\______test_files1";
+            this.textBox1.Text = @"C:\_git\vcs\_1.data\______test_files1";
             // 
             // button2
             // 

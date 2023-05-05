@@ -20,8 +20,8 @@ namespace vcs_ReadWrite_EMF_WMF
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename1 = "C:\\______test_files1\\__RW\\_emf_wmf\\test.emf";
-            string filename2 = "C:\\______test_files1\\__RW\\_emf_wmf\\Volleyball.wmf";
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_emf_wmf\test.emf";
+            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_emf_wmf\Volleyball.wmf";
 
             Metafile mf1 = (Metafile)Metafile.FromFile(filename1);
             pictureBox1.Image = mf1;

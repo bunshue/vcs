@@ -33,7 +33,7 @@ namespace vcs_OpenFileDialog
             openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = "c:\\______test_files1";  //預設開啟的路徑
+            openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 richTextBox1.Text += "get filename : " + openFileDialog1.FileName + "\n";
@@ -66,7 +66,7 @@ namespace vcs_OpenFileDialog
             openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = "c:\\______test_files1";  //預設開啟的路徑
+            openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
             openFileDialog1.Multiselect = false;    //單選
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -95,7 +95,7 @@ namespace vcs_OpenFileDialog
             openFileDialog1.FilterIndex = 1;    //預設上述種類的第幾項，由1開始。
             openFileDialog1.RestoreDirectory = true;
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = "c:\\______test_files1";  //預設開啟的路徑
+            openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
             openFileDialog1.Multiselect = true;    //允許多選檔案
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -125,7 +125,7 @@ namespace vcs_OpenFileDialog
             openFileDialog1.RestoreDirectory = true;
             openFileDialog1.Title = "開啟";
             openFileDialog1.FileName = "";              //預設開啟的檔名
-            openFileDialog1.InitialDirectory = "c:\\______test_files1";  //預設開啟的路徑
+            openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {

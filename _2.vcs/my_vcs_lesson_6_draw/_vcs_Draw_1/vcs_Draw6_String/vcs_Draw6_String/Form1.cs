@@ -323,7 +323,7 @@ namespace vcs_Draw6_String
 
         void DrawTranslucentText()
         {
-            string filename = "C:\\______test_files1\\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
             Bitmap bm = new Bitmap(filename);

@@ -831,7 +831,7 @@ namespace vcs_MyToolbox
                 }
 
                 //用Adobe開啟pdf檔案
-                //string filename = "C:\\______test_files1\\__RW\\_pdf\\note_Linux_workstation.pdf";
+                //string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_pdf\note_Linux_workstation.pdf";
                 //Process process;
                 //process = Process.Start(filename);
 

@@ -434,7 +434,7 @@ namespace vcs_ReadWrite_BIN
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string filename1 = "C:\\______test_files1\\__RW\\_txt\\poetry.txt";
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\poetry.txt";
             string filename2 = Application.StartupPath + "\\hex_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
 
             //讀取資料
@@ -476,7 +476,7 @@ namespace vcs_ReadWrite_BIN
 
         private void button5_Click(object sender, EventArgs e)
         {
-            string filename1 = "C:\\______test_files1\\__RW\\_txt\\poetry.txt";
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\poetry.txt";
             string filename2 = Application.StartupPath + "\\hex_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
 
             //讀取資料
@@ -534,7 +534,7 @@ namespace vcs_ReadWrite_BIN
             richTextBox1.Text += "\n存檔完成, 檔名 : " + filename2 + "\n";
         }
 
-        string filename = "C:\\______test_files1\\__RW\\_bin\\vcs_ReadWrite_BIN.bin";
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_bin\vcs_ReadWrite_BIN.bin";
 
         void print_data(byte[] data, int len)
         {
@@ -575,7 +575,7 @@ namespace vcs_ReadWrite_BIN
 
         private void button7_Click(object sender, EventArgs e)
         {
-            filename = "C:\\______test_files1\\_mp3\\aaaa.mp3";
+            filename = @"C:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";
 
             //讀取資料
             byte[] data = File.ReadAllBytes(filename);
@@ -699,7 +699,7 @@ namespace vcs_ReadWrite_BIN
             fs.Close();
 
             richTextBox1.Text += "\n讀一個mp3檔的末128拜\n";
-            string filename2 = "C:\\______test_files1\\_mp3\\aaaa.mp3";
+            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";
             len = 128;
             //隨機binary讀取
             fs = new FileStream(filename2, FileMode.Open, FileAccess.Read);
@@ -748,7 +748,7 @@ namespace vcs_ReadWrite_BIN
             }
             richTextBox1.Text += "\nWriteByte存檔完成, 檔名 : " + filename + "\n";
 
-            filename = "C:\\______test_files1\\__RW\\_bin\\vcs_ReadWrite_BIN.bin";
+            filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_bin\vcs_ReadWrite_BIN.bin";
             richTextBox1.Text += "\nReadByte, 檔名 : " + filename + "\n";
 
             using (FileStream fileStream = new FileStream(filename, FileMode.Open))

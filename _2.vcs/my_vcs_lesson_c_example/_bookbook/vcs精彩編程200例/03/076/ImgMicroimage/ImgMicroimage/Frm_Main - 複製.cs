@@ -80,7 +80,7 @@ namespace ImgMicroimage
             string[] a = new string[2];
             DirectoryInfo di = new DirectoryInfo(filePath);
             FileSystemInfo[] fi = di.GetFileSystemInfos();
-            DirectoryInfo di2 = new DirectoryInfo("C:\\______test_files1\\_pic_thumbnail");
+            DirectoryInfo di2 = new DirectoryInfo(@"C:\_git\vcs\_1.data\______test_files1\_pic_thumbnail");
             for (int i = 0; i < fi.Length; i++)
             {
                 string imgType = fi[i].ToString().Substring(fi[i].ToString().LastIndexOf(".") + 1, fi[i].ToString().Length - 1 - fi[i].ToString().LastIndexOf("."));
@@ -108,10 +108,10 @@ namespace ImgMicroimage
                     }
                     if (!di2.Exists)
                     {
-                        Directory.CreateDirectory("C:\\______test_files1\\_pic_thumbnail");
-                        if (GetReducedImage(percent, "C:\\______test_files1\\_pic_thumbnail\\_" + imgName + ".JPG"))
+                        Directory.CreateDirectory(@"C:\_git\vcs\_1.data\______test_files1\_pic_thumbnail");
+                        if (GetReducedImage(percent, @"C:\_git\vcs\_1.data\______test_files1\_pic_thumbnail\_" + imgName + ".JPG"))
                         {
-                            imageList1.Images.Add(i.ToString(), Image.FromFile("C:\\______test_files1\\_pic_thumbnail\\_" + imgName + ".JPG"));
+                            imageList1.Images.Add(i.ToString(), Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\_pic_thumbnail\_" + imgName + ".JPG"));
                             a[0] = imgName + "." + imgType;
                             ListViewItem lvi = new ListViewItem(a);
                             lvi.ImageKey = i.ToString();
@@ -120,9 +120,9 @@ namespace ImgMicroimage
                     }
                     else
                     {
-                        if (GetReducedImage(percent, "C:\\______test_files1\\_pic_thumbnail\\_" + imgName + ".JPG"))
+                        if (GetReducedImage(percent, @"C:\_git\vcs\_1.data\______test_files1\_pic_thumbnail\_" + imgName + ".JPG"))
                         {
-                            imageList1.Images.Add(i.ToString(), Image.FromFile("C:\\______test_files1\\_pic_thumbnail\\_" + imgName + ".JPG"));
+                            imageList1.Images.Add(i.ToString(), Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\_pic_thumbnail\_" + imgName + ".JPG"));
                             a[0] = imgName + "." + imgType;
                             ListViewItem lvi = new ListViewItem(a);
                             lvi.ImageKey = i.ToString();
@@ -137,7 +137,7 @@ namespace ImgMicroimage
         }
         private void toolStripButton1_Click_1(object sender, EventArgs e)
         {
-            folderBrowserDialog1.SelectedPath = "C:\\______test_files1\\_pic";
+            folderBrowserDialog1.SelectedPath = @"C:\_git\vcs\_1.data\______test_files1\_pic";
             
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -157,11 +157,11 @@ namespace ImgMicroimage
         {
             try
             {
-                DirectoryInfo di2 = new DirectoryInfo("C:\\______test_files1\\_pic_thumbnail");
+                DirectoryInfo di2 = new DirectoryInfo(@"C:\_git\vcs\_1.data\______test_files1\_pic_thumbnail");
                 if (di2.Exists)
                 {
                     Scripting.FileSystemObject fso = new Scripting.FileSystemObject();
-                    fso.DeleteFolder("C:\\______test_files1\\_pic_thumbnail", true);
+                    fso.DeleteFolder(@"C:\_git\vcs\_1.data\______test_files1\_pic_thumbnail", true);
                 }
             }
             catch

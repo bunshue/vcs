@@ -36,7 +36,7 @@ namespace vcs_ZoomPicture1
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            Image image = Image.FromFile("C:\\______test_files1\\_case1\\pic2.jpg");
+            Image image = Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\_case1\pic2.jpg");
             //pictureBox1.Image = image1;
             int width = image.Width;
             int height = image.Height;

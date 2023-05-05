@@ -19,7 +19,7 @@ namespace 利用INI文件對軟件進行註冊
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            FileStream c = new FileStream("C:\\______test_files1\\desck.ini", FileMode.OpenOrCreate, FileAccess.Write);
+            FileStream c = new FileStream(@"C:\_git\vcs\_1.data\______test_files1\desck.ini", FileMode.OpenOrCreate, FileAccess.Write);
             
         }
         //*********************

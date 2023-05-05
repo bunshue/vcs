@@ -21,7 +21,7 @@ namespace vcs_PicturePixellate
         // The current image without the rubberband rectangle.
         private Bitmap CurrentBitmap = null;
 
-        string filename = "C:\\______test_files1\\elephant.jpg";
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
 
         public Form1()
         {

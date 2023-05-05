@@ -397,9 +397,9 @@ void runAutoTest(int argc, char** argv, const char* filename, int kernel_param)
 int main(int argc, char** argv)
 {
     //const char* image_path = sdkFindFilePath("portrait_noise.bmp", argv[0]);
-    //const char* filename_read1 = "C:\\______test_files1\\ims01.bmp"; //32 bits
-    const char* filename_read1 = "C:\\______test_files1\\ims01.24.bmp"; //24 bits
-    const char* filename_read2 = "C:\\______test_files1\\ims03.24.bmp"; //24 bits
+    //const char* filename_read1 = "C:\\_git\\vcs\\_1.data\\______test_files1\\ims01.bmp"; //32 bits
+    const char* filename_read1 = "C:\\_git\\vcs\\_1.data\\______test_files1\\ims01.24.bmp"; //24 bits
+    const char* filename_read2 = "C:\\_git\\vcs\\_1.data\\______test_files1\\ims03.24.bmp"; //24 bits
 
     W = 0;
     H = 0;

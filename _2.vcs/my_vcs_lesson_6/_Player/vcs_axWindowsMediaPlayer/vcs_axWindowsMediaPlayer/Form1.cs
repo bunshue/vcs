@@ -79,7 +79,7 @@ namespace vcs_axWindowsMediaPlayer
     public partial class Form1 : Form
     {
         string filename = @"C:\_git\vcs\_1.data\______test_files1\enka.avi";
-        //string filename = "C:\\______test_files1\\_mp3\\07    都はろみ--妻戀道中(他鄉思妻兒).mp3";
+        //string filename = @"C:\_git\vcs\_1.data\______test_files1\_mp3\07    都はろみ--妻戀道中(他鄉思妻兒).mp3";
 
         //用來儲存音樂檔案的全路徑
         List<string> listSong = new List<string>();

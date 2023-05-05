@@ -132,7 +132,7 @@ namespace vcs_ReadWrite_BMP
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string filename = "C:\\______test_files1\\__RW\\_bmp\\vcs_ReadWrite_BMP.bmp";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_bmp\vcs_ReadWrite_BMP.bmp";
 
             //讀取資料
             byte[] data = File.ReadAllBytes(filename);
@@ -353,7 +353,7 @@ namespace vcs_ReadWrite_BMP
             int width;
             int height;
 
-            //string filename = "C:\\______test_files1\\step2.png";
+            //string filename = @"C:\_git\vcs\_1.data\______test_files1\step2.png";
             ///richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
             bitmap1 = new Bitmap(FileName);
@@ -545,8 +545,8 @@ namespace vcs_ReadWrite_BMP
         private void button6_Click(object sender, EventArgs e)
         {
             Bitmap bitmap;
-            string filename1 = "c:\\______test_files1\\bear.bmp";
-            string filename2 = "c:\\______test_files1\\bear.bmp.jpg";
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\bear.bmp";
+            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\bear.bmp.jpg";
             bitmap = new Bitmap(filename1);
             richTextBox1.Text += "width = " + bitmap.Width.ToString() + "\n";
             richTextBox1.Text += "height = " + bitmap.Height.ToString() + "\n";
@@ -558,7 +558,7 @@ namespace vcs_ReadWrite_BMP
         private void button7_Click(object sender, EventArgs e)
         {
             //???????
-            string filename = "c:\\______test_files1\\test_ReadAllBytes.bmp";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\test_ReadAllBytes.bmp";
 
             byte[] bmp_data = new byte[256];
             FileStream fs = new FileStream(filename, FileMode.Open);
@@ -587,8 +587,8 @@ namespace vcs_ReadWrite_BMP
 
         private void button8_Click(object sender, EventArgs e)
         {
-            string filename1 = "c:\\______test_files1\\test_ReadAllBytes.bmp";
-            string filename2 = "c:\\______test_files1\\test_WriteAllBytes.bmp";
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\test_ReadAllBytes.bmp";
+            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\test_WriteAllBytes.bmp";
 
             //讀取資料
             byte[] data_read = File.ReadAllBytes(filename1);

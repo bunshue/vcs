@@ -479,14 +479,14 @@ int main(int argc, char** argv)
         if (mode == 0)  //小圖
         {
             //使用圖片640X480
-            filename_read1 = "C:\\______test_files1\\ims01.24.bmp"; //24 bits
-            filename_read2 = "C:\\______test_files1\\ims03.24.bmp"; //24 bits
+            filename_read1 = "C:\\_git\\vcs\\_1.data\\______test_files1\\ims01.24.bmp"; //24 bits
+            filename_read2 = "C:\\_git\\vcs\\_1.data\\______test_files1\\ims03.24.bmp"; //24 bits
         }
         else  //mode 1 大圖
         {
             //使用圖片1920X1080
-            filename_read1 = "C:\\______test_files1\\__pic\\_ggb\\ggb1.bmp"; //24 bits
-            filename_read2 = "C:\\______test_files1\\__pic\\_ggb\\ggb2.bmp"; //24 bits
+            filename_read1 = "C:\\_git\\vcs\\_1.data\\______test_files1\\__pic\\_ggb\\ggb1.bmp"; //24 bits
+            filename_read2 = "C:\\_git\\vcs\\_1.data\\______test_files1\\__pic\\_ggb\\ggb2.bmp"; //24 bits
         }
 
         imageW = 0;

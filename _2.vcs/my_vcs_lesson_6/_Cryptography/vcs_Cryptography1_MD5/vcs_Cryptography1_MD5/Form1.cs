@@ -210,8 +210,8 @@ namespace vcs_Cryptography1_MD5
         {
             //用MD5比較兩個檔案
 
-            string filename1 = "C:\\______test_files1\\compare\\aaaa.txt";
-            string filename2 = "C:\\______test_files1\\compare\\bbbb.txt";
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\compare\aaaa.txt";
+            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\compare\bbbb.txt";
             string FileMD5_1 = string.Empty;    //第1個檔案的MD5碼
             string FileMD5_2 = string.Empty;    //第2個檔案的MD5碼
 

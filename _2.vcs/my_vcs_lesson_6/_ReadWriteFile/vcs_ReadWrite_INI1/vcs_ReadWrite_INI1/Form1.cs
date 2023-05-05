@@ -18,7 +18,7 @@ namespace vcs_ReadWrite_INI1
             InitializeComponent();
         }
 
-        private string filename = "c:\\______test_files1\\__RW\\_ini\\vcs_ReadWrite_INI1a.ini";
+        private string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_ini\vcs_ReadWrite_INI1a.ini";
 
         [DllImport("kernel32", CharSet = CharSet.Unicode, SetLastError = true)]
         private static extern bool WritePrivateProfileString(string lpAppName, string lpKeyName, string lpString, string lpFileName);
@@ -36,14 +36,14 @@ namespace vcs_ReadWrite_INI1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = "c:\\______test_files1\\__RW\\_ini\\vcs_ReadWrite_INI1b.ini";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_ini\vcs_ReadWrite_INI1b.ini";
             richTextBox1.Text += "Write ini data to " + filename + "\n";
             WritePrivateProfileString("Demo", "abc", "123", filename);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string filename = "c:\\______test_files1\\__RW\\_ini\\vcs_ReadWrite_INI1b.ini";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_ini\vcs_ReadWrite_INI1b.ini";
             richTextBox1.Text += "Read ini data from " + filename + "\n";
             StringBuilder temp = new StringBuilder();
             GetPrivateProfileString("Demo", "abc", "", temp, 255, filename);

@@ -46,7 +46,7 @@ namespace vcs_ReadWrite_INI2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            filename = "c:\\______test_files1\\__RW\\_ini\\vcs_ReadWrite_INI2a.ini";  //INI文件的物理地址
+            filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_ini\vcs_ReadWrite_INI2a.ini";  //INI文件的物理地址
             richTextBox1.Text += "Read ini data from " + filename + "\n";
             strOne = System.IO.Path.GetFileNameWithoutExtension(filename); 		//獲取INI文件的文件名
             if (File.Exists(filename)) 						//判斷是否存在該INI文件
@@ -65,7 +65,7 @@ namespace vcs_ReadWrite_INI2
 
         private void button2_Click(object sender, EventArgs e)
         {
-            filename = "c:\\______test_files1\\__RW\\_ini\\vcs_ReadWrite_INI2b.ini";  //INI文件的物理地址
+            filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_ini\vcs_ReadWrite_INI2b.ini";  //INI文件的物理地址
             richTextBox1.Text += "Write ini data to " + filename + "\n";
             //if (File.Exists(filename))											//判断是否存在INI文件
             {

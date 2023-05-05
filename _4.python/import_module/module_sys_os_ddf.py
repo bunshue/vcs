@@ -49,7 +49,7 @@ print("mkdir")
 print("chdir")
 #os.chdir("test_python_dir")
 
-filename_r = 'C:\______test_files2/article.txt'
+filename_r = 'C:/_git/vcs/_1.data/______test_files1/article2.txt'
 print("檔案名稱 : ", os.path.getmtime(filename_r))
 
 import os.path

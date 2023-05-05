@@ -379,7 +379,7 @@ namespace vcs_Wallpaper1
 
         private void bt_folder_Click(object sender, EventArgs e)
         {
-            folderBrowserDialog1.SelectedPath = "c:\\______test_files1";  //預設開啟的路徑
+            folderBrowserDialog1.SelectedPath = @"C:\_git\vcs\_1.data\______test_files1";  //預設開啟的路徑
             if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
             {
                 foldername = folderBrowserDialog1.SelectedPath + "\\";
