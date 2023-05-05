@@ -574,15 +574,14 @@ image = Image.open("captcha.png").convert("L")	#轉換成灰階圖像
 
 簡易播放一檔
 
-filename = 'C:/______test_files2/captcha02.png'
+filename = 'C:/_git/vcs/_1.data/______test_files1/captcha02.png'
 
 from matplotlib import pyplot as plt
 img = cv2.imread(filename)
 plt.imshow(img)
 plt.show()
 
-
-filename = 'C:/______test_files/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3'
 
 from pygame import mixer  # Load the popular external library
 
@@ -969,20 +968,13 @@ print('Entry內容 :', entry_string.get())	#TextBox取值
 
 ----------------常用的程式片段 ST cccc----------------
 
-filename = 'C:/______test_files2/human1.jpg'
-filename = 'C:/______test_files2/file2.txt'
-filename = 'C:/______test_files3/output.avi'
+filename = 'C:/_git/vcs/_1.data/______test_files1/human1.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/file2.txt'
+filename = 'C:/_git/vcs/_1.data/______test_files2/output.avi'
 
-filename1 = 'C:/______test_files2/human1.jpg'
-filename2 = 'C:/______test_files2/poetry2.txt'
-filename3 = 'C:/______test_files2'
-
-
-
-
-
-
-
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/human1.jpg'
+filename2 = 'C:/_git/vcs/_1.data/______test_files1/poetry2.txt'
+filename3 = 'C:/_git/vcs/_1.data/______test_files1'
 
 ----------------import os 大集合----------------
 
