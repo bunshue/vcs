@@ -5,6 +5,8 @@ from PIL import Image, ImageDraw
 
 source_dir = 'C:/_git/vcs/_1.data/______test_files1/source_pic'
 target_dir = 'C:/_git/vcs/_1.data/______test_files2/resized_pic'
+#logo_filename = 'C:/_git/vcs/_1.data/______test_files1/burn.bmp'        #fail
+logo_filename = 'C:/_git/vcs/_1.data/______test_files1/logo.png'
 
 image_width = 800
 
@@ -13,20 +15,16 @@ print("將資料夾 " + source_dir + " 內所有圖片檔調整寬度成 " + str
 print('Processing: {}'.format(source_dir))
 
 #單層
-allfiles = glob.glob(source_dir+'/*.jpg') + glob.glob(source_dir+'/*.png')
+allfiles = glob.glob(source_dir + '/*.jpg') + glob.glob(source_dir + '/*.png')
 if not os.path.exists(target_dir):
 	os.mkdir(target_dir)
 
-#logo_filename = 'C:/_git/vcs/_1.data/______test_files1/burn.bmp'        #fail
-logo_filename = 'C:/_git/vcs/_1.data/______test_files1/logo.png'
 logo = Image.open(logo_filename)
-
-logo = logo.resize((150, 150))   #修改圖像大小
+logo = logo.resize((150, 150))   #調整圖像大小
 
 for target_image in allfiles:
 	pathname, filename = os.path.split(target_image)
 	print(filename)
-	if filename[0] == '.': continue  # Only for MacOS to skip the hidden files
 	im = Image.open(target_image)
 	w, h = im.size
 	im = im.resize((800, int(800 / float(w) * h)))

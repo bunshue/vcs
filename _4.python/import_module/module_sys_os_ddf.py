@@ -361,3 +361,64 @@ print(ext)
 
 
 
+
+
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/human1.jpg'
+import os
+from stat import ST_MTIME
+from stat import ST_CTIME
+
+st = os.stat(filename)
+
+print(st)
+
+print(st[ST_MTIME])
+print(st[ST_CTIME])
+
+base = os.path.basename(filename)
+print(base)
+
+fnfilter = os.path.basename
+print(fnfilter)
+
+#os.rename(filename, backup)
+
+import os
+this_dir = os.path.dirname(__file__)
+print(__file__)
+print(this_dir)
+
+cwd = os.getcwd()
+print(cwd)
+
+aa = os.chdir(cwd)
+print(aa)
+
+dirname = 'C:/_git/vcs/_4.python'
+cc = os.chdir(dirname)
+print(cc)
+
+import os
+import sys
+
+isympy_path = os.path.abspath(__file__)
+isympy_dir = os.path.dirname(isympy_path)
+sympy_top = os.path.split(isympy_dir)[0]
+sympy_dir = os.path.join(sympy_top, 'sympy')
+
+if os.path.isdir(sympy_dir):
+    #sys.path.insert(0, sympy_top)
+    print('is dir')
+
+#print(__path__[0])
+
+tmp = os.path.realpath(__file__)
+print(tmp)
+
+#print(os.listdir(cache.dirname))
+
+
+
+
+

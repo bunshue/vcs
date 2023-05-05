@@ -15,7 +15,6 @@ for target_image in allfiles:
 	print(filename)
 	cnt = cnt + 1
 	'''
-	if filename[0] == '.': continue  # Only for MacOS to skip the hidden files
 	im = Image.open(target_image)
 	w, h = im.size
 	'''

@@ -207,4 +207,56 @@ def print_debug(msg):
 print_debug("%s: permission denied: %s" % (string1, string1))
 
 
+err = sys.stderr.write
+dbg = err
+rep = sys.stdout.write
+
+err('AAAAA')
+dbg('BBBBB')
+rep('CCCCC')
+
+#err(str(msg) + '\n')
+
+err('-i option or file-or-directory missing\n')
+
+
+
+import sys
+
+err = sys.stderr.write
+
+def usage():
+    progname = sys.argv[0]
+    err('Usage: ' + progname +
+              ' [-c] [-r] [-s file] ... file-or-directory ...\n')
+    err('\n')
+    err('-c           : substitute inside comments\n')
+    err('-r           : reverse direction for following -s options\n')
+    err('-s substfile : add a file of substitutions\n')
+    err('\n')
+    err('Each non-empty non-comment line in a substitution file must\n')
+    err('contain exactly two words: an identifier and its replacement.\n')
+    err('Comments start with a # character and end at end of line.\n')
+    err('If an identifier is preceded with a *, it is not substituted\n')
+    err('inside a comment even when -c is specified.\n')
+
+usage()
+
+def usage(msg=None):
+    if msg is None:
+        msg = __doc__
+    print(msg, file=sys.stderr)
+
+
+msg = 'adfkajdfad;jlfkjl'
+usage(msg)
+
+
+
+#print("Serving {} on port {}, control-C to stop".format(path, port))
+
+
+
+
+
 

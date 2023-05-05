@@ -13,3 +13,19 @@ if match1 != None:
 else:
     print(ssn, " is not a valid SSN")
     
+
+
+print('拆解e-mail')
+import re
+import requests
+regex = r"([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)"
+url = 'http://csharphelper.com/blog/'
+html_data = requests.get(url).text
+
+emails = re.findall(regex, html_data)
+for email in emails:
+    print(email)
+
+
+
+

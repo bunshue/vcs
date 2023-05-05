@@ -1,5 +1,12 @@
 print('list使用範例')
 
+#一維list
+mylist = ["A", "B", "C", "D", "E"]
+
+for elem in mylist:
+    print(elem)
+    
+
 #多維list
 def list_test1():
     dates = [
@@ -64,6 +71,17 @@ lst = [3, 4, 1, 2, 0]
 SelectionSort.selectionSort(lst)
 print(lst)
 '''
+
+
+
+students = [
+    ("John", "Smith", 96),
+    ("Susan", "King", 76),
+    ("Kim", "Yao", 99)
+]
+students.sort(key=lambda e: (e[1]))
+print(students)
+print(sorted(students, key = lambda t: (t[2]), reverse = True))
 
 
 

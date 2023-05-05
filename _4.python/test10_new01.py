@@ -285,42 +285,6 @@ else:
     print("Sorry, no match")
 
 
-
-def bubbleSort(list):
-    needNextPass = True
-    
-    k = 1
-    while k < len(list) and needNextPass:
-        # List may be sorted and next pass not needed
-        needNextPass = False
-        for i in range(len(list) - k): 
-            if list[i] > list[i + 1]:
-                # swap list[i] with list[i + 1]
-                temp = list[i]
-                list[i] = list[i + 1]
-                list[i + 1] = temp
-          
-                needNextPass = True # Next pass still needed
-
-list = [2, 3, 2, 5, 6, 1, -2, 3, 14, 12]
-bubbleSort(list)
-for v in list:
-    print(v)
-
-
-
-
-students = [
-    ("John", "Smith", 96),
-    ("Susan", "King", 76),
-    ("Kim", "Yao", 99)
-]
-students.sort(key=lambda e: (e[1]))
-print(students)
-print(sorted(students, key = lambda t: (t[2]), reverse = True))
-
-        
-
 #test strip
 #filename = input("Enter a filename: ").strip()
 
@@ -465,13 +429,6 @@ print(candyNumber.keys())
 print(candyNumber.values())
 print(candyNumber.items())
 
-#一維list
-mylist = ["A", "B", "C", "D", "E"]
-
-for elem in mylist:
-    print(elem)
-    
-
 string = '測試字串是不是有被包含'
 ss = '要'
 if ss in string:
@@ -505,40 +462,7 @@ search_word = '英國'
 is_contains_chinese()
 
 
-print('拆解e-mail')
-import re
-import requests
-regex = r"([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)"
-url = 'http://csharphelper.com/blog/'
-html_data = requests.get(url).text
 
-emails = re.findall(regex, html_data)
-for email in emails:
-    print(email)
-
-
-
-
-
-
-import sys
-
-err = sys.stderr.write
-
-def usage():
-    progname = sys.argv[0]
-    err('Usage: ' + progname +
-              ' [-c] [-r] [-s file] ... file-or-directory ...\n')
-    err('\n')
-    err('-c           : substitute inside comments\n')
-    err('-r           : reverse direction for following -s options\n')
-    err('-s substfile : add a file of substitutions\n')
-    err('\n')
-    err('Each non-empty non-comment line in a substitution file must\n')
-    err('contain exactly two words: an identifier and its replacement.\n')
-    err('Comments start with a # character and end at end of line.\n')
-    err('If an identifier is preceded with a *, it is not substituted\n')
-    err('inside a comment even when -c is specified.\n')
 
 
 import sys, os, time, difflib, argparse
@@ -584,88 +508,5 @@ print('[FILES]', file=fp)
 print('', file=fp)
 fp.close()
 '''
-
-#usage()
-
-
-def usage(msg=None):
-    if msg is None:
-        msg = __doc__
-    print(msg, file=sys.stderr)
-
-
-msg = 'adfkajdfad;jlfkjl'
-usage(msg)
-
-
-
-
-#os專區 
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/human1.jpg'
-import os
-from stat import ST_MTIME
-from stat import ST_CTIME
-
-st = os.stat(filename)
-
-print(st)
-
-print(st[ST_MTIME])
-print(st[ST_CTIME])
-
-base = os.path.basename(filename)
-print(base)
-
-fnfilter = os.path.basename
-print(fnfilter)
-
-#os.rename(filename, backup)
-
-import os
-this_dir = os.path.dirname(__file__)
-print(__file__)
-print(this_dir)
-
-cwd = os.getcwd()
-print(cwd)
-
-aa = os.chdir(cwd)
-print(aa)
-
-dirname = 'C:/_git/vcs/_4.python'
-cc = os.chdir(dirname)
-print(cc)
-
-import os
-import sys
-
-isympy_path = os.path.abspath(__file__)
-isympy_dir = os.path.dirname(isympy_path)
-sympy_top = os.path.split(isympy_dir)[0]
-sympy_dir = os.path.join(sympy_top, 'sympy')
-
-if os.path.isdir(sympy_dir):
-    #sys.path.insert(0, sympy_top)
-    print('is dir')
-
-#print(__path__[0])
-
-tmp = os.path.realpath(__file__)
-print(tmp)
-
-#print(os.listdir(cache.dirname))
-
-
-
-
-
-
-
-
-
-#print專區
-#print("Serving {} on port {}, control-C to stop".format(path, port))
-
 
 
