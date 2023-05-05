@@ -1,4 +1,10 @@
-# 目前 webcam 僅 x64 電腦可用
+'''
+WebCam 使用
+一般使用
+錄影存檔
+
+目前 webcam 僅 x64 電腦可用
+'''
 
 filename = 'C:/_git/vcs/_1.data/______test_files2/output.avi'
 
@@ -19,7 +25,6 @@ cap = cv2.VideoCapture(0)
 # 設定影像的尺寸大小
 #cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
 #cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 960)
-
 
 # 解析 Fourcc 格式資料的函數
 def decode_fourcc(v):
@@ -53,9 +58,9 @@ else:
 while(True):
     ret, frame = cap.read()   # 從攝影機擷取一張影像
 
-    if not ret:
-        print("Can't receive frame (stream end?). Exiting ...")
-        break
+    if ret == False:
+      print('無影像, 離開')
+      break
 
     # 彩色轉灰階
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)

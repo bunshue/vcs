@@ -2,7 +2,6 @@ import cv2	#導入 OpenCV 模組
 import numpy as np
 import matplotlib.pyplot as plt
 
-'''
 import cv2
 import numpy as np
 
@@ -22,23 +21,23 @@ MASK_COLOR = (0.0,0.0,1.0) # In BGR format
 #-- Read image -----------------------------------------------------------------------
 img = cv2.imread(filename)
 gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
-cv2.imshow('原圖灰階', gray)
+cv2.imshow('Gray', gray)
 cv2.waitKey()
 
 #-- Edge detection -------------------------------------------------------------------
 
 edges = cv2.Canny(gray, CANNY_THRESH_1, CANNY_THRESH_2)
-cv2.imshow('Canny 處理', edges)
+cv2.imshow('Canny', edges)
 cv2.waitKey()
 edges = cv2.dilate(edges, None)
-cv2.imshow('Dilate 處理', edges)
+cv2.imshow('Dilate', edges)
 cv2.waitKey()
 edges = cv2.erode(edges, None)
-cv2.imshow('Erode 處理', edges)
+cv2.imshow('Erode', edges)
 cv2.waitKey()
 
 #cv2.imwrite('C:/Temp/person-masked.jpg', masked)           # Save
-'''
+
 
 '''
 import cv2

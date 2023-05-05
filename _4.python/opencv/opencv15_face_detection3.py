@@ -20,15 +20,24 @@ while True:
         faces = face_classifier.detectMultiScale(gray, 1.3, 5)
         for (x,y,w,h) in faces:
             cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
-        cv2.imshow('Video', frame)
+        cv2.imshow('Video', frame)    # 顯示圖片, 彩色
 
-        if cv2.waitKey(1) == 27:
+        k = cv2.waitKey(1)
+        if k == 27:     #ESC
             break
+        elif k == ord('q'): # 若按下 q 鍵則離開迴圈
+            break
+        elif k == ord('s'): # 若按下 s 鍵則存圖
+            image_filename = 'Image_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.jpg';
+            cv2.imwrite(image_filename, frame)
+            print('已存圖')
     else:
         break
 
+# 釋放所有資源
 vid.release()
-cv2.destroyAllWindows()
+cv2.destroyAllWindows() # 關閉所有 OpenCV 視窗
+
     
 
     

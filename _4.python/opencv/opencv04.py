@@ -1,12 +1,10 @@
 #filename = 'C:/_git/vcs/_1.data/______test_files1/_emgu/lena.jpg'
 filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
 
-import matplotlib.pyplot as plt
-
-#顯示圖片代碼：
-
 import cv2
 import numpy as np
+import matplotlib.pyplot as plt
+
 #讀取圖片
 img = cv2.imread(filename)
 #實例化8位圖

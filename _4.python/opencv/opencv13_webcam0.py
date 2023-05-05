@@ -1,8 +1,7 @@
 '''
 WebCam 使用
-一般使用
 
-人臉辨識
+一般使用
 
 目前 webcam 僅 x64 電腦可用
 '''
@@ -10,11 +9,6 @@ WebCam 使用
 import cv2
 import sys
 import time
-
-# OpenCV 人臉識別分類器
-xml_filename1 = 'C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml'
-#face_classifier = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
-face_classifier = cv2.CascadeClassifier(xml_filename1)
 
 cap = cv2.VideoCapture(0)
 
@@ -29,18 +23,12 @@ if not cap.isOpened():
 else:
     print('Video device opened')
 
-while True:
+while(True):
     ret, frame = cap.read()   # 從攝影機擷取一張影像
 
     if ret == False:
       print('無影像, 離開')
       break
-
-    #frame = cv2.resize(frame,(int(frame.shape[1]/2),int(frame.shape[0]/2))) #調整畫面大小
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    faces = face_classifier.detectMultiScale(gray, 1.3, 5)
-    for (x,y,w,h) in faces:
-        cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
 
     cv2.imshow('WebCam', frame)    # 顯示圖片, 彩色
 
