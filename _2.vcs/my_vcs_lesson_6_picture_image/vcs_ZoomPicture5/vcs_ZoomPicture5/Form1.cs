@@ -29,7 +29,7 @@ namespace vcs_ZoomPicture5
         private void Form1_Load(object sender, EventArgs e)
         {
             // Load an image file.
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             try
             {

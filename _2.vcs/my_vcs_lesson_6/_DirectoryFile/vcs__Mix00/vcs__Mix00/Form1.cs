@@ -18,7 +18,7 @@ namespace vcs__Mix00
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files1\_case1\_case1a\_case1aa\picture1.jpg";
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\_case1\_case1a\_case1aa\picture1.jpg";
 
         public Form1()
         {
@@ -29,7 +29,7 @@ namespace vcs__Mix00
         {
             show_item_location();
 
-            //string filename = @"C:\______test_files1\picture1.jpg";
+            //string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             var GetFileName = Path.GetFileName(filename);
             var GetFileNameWithoutExtension = Path.GetFileNameWithoutExtension(filename);
@@ -120,8 +120,8 @@ namespace vcs__Mix00
             listView1.Items.Clear();
 
             //遍歷文件夾實例
-            //string foldername = @"C:\______test_files1\__pic";
-            string foldername = @"C:\______test_files1\__pic\_book_magazine";
+            //string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic";
+            string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_book_magazine";
             //實例化DirectoryInfo對象
             DirectoryInfo dinfo = new DirectoryInfo(foldername);
             //獲取指定目錄下的所有子目錄及文件類型
@@ -156,8 +156,8 @@ namespace vcs__Mix00
         private void button1_Click(object sender, EventArgs e)
         {
             //遍歷文件夾實例 2
-            //string foldername = @"C:\______test_files1\__pic";
-            string foldername = @"C:\______test_files1\__pic\_book_magazine";
+            //string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic";
+            string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_book_magazine";
             DirectoryInfo TheFolder = new DirectoryInfo(foldername);
 
             richTextBox1.Text += "遍歷文件夾\n";
@@ -182,8 +182,8 @@ namespace vcs__Mix00
         {
             //遍歷文件夾實例 3
             //找出資料夾內所有檔案
-            //string foldername = @"C:\______test_files1\__pic";
-            string foldername = @"C:\______test_files1\__pic\_book_magazine";
+            //string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic";
+            string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_book_magazine";
 
             // Enumerate the files.
             DirectoryInfo dir_info = new DirectoryInfo(foldername);
@@ -294,7 +294,7 @@ namespace vcs__Mix00
         private void button5_Click(object sender, EventArgs e)
         {
             //檔案資訊
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             var GetFileName = Path.GetFileName(filename);
             var GetFileNameWithoutExtension = Path.GetFileNameWithoutExtension(filename);
@@ -315,7 +315,7 @@ namespace vcs__Mix00
             richTextBox1.Text += "GetRandomFileName\t" + GetRandomFileName + "\n";
 
             //檔案資訊
-            //string filename = @"C:\______test_files1\__RW\_word\word_for_vcs_ReadWrite_WORD.doc";
+            //string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_word\word_for_vcs_ReadWrite_WORD.doc";
 
             FileInfo fileInfo = new FileInfo(filename);
             string fileSize = (fileInfo.Length / 1024).ToString() + " KB";
@@ -341,7 +341,7 @@ namespace vcs__Mix00
         private void button8_Click(object sender, EventArgs e)
         {
             //獲取文件的版本信息
-            string filename = @"C:\______test_files1\_material\_dll\AForge.Video.dll";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\_material\_dll\AForge.Video.dll";
 
             FileVersionInfo myFileVersionInfo1 = FileVersionInfo.GetVersionInfo(filename);
             richTextBox1.Text += "版本號: " + myFileVersionInfo1.FileVersion + "\n";
@@ -445,7 +445,7 @@ namespace vcs__Mix00
 
         private void button15_Click(object sender, EventArgs e)
         {
-            string foldername = @"C:\______test_files1\__text";
+            string foldername = @"C:\_git\vcs\_1.data\______test_files1\__text";
 
             foreach (String a in Directory.GetDirectories(foldername))
             {
@@ -513,7 +513,7 @@ namespace vcs__Mix00
             //拷貝檔案, 限定拷貝大小
             //拷貝檔案, 每次拷貝1024拜
 
-            string filename1 = @"C:\______test_files1\picture1.jpg";
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             string filename2 = Application.StartupPath + "\\jpg_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
 
@@ -788,7 +788,7 @@ namespace vcs__Mix00
         {
             //取得檔案類型
 
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             string fileTypeName = GetTypeName(filename);
 
             richTextBox1.Text += "檔案 : " + filename + "\n";
@@ -798,8 +798,8 @@ namespace vcs__Mix00
 
         private void button23_Click(object sender, EventArgs e)
         {
-            string filename1 = @"C:\______test_files1\compare\aaaa.txt";
-            string filename2 = @"C:\______test_files1\compare\bbbb.txt";
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\compare\aaaa.txt";
+            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\compare\bbbb.txt";
 
             StreamReader sr1 = new StreamReader(filename1);
             StreamReader sr2 = new StreamReader(filename2);
@@ -815,8 +815,8 @@ namespace vcs__Mix00
             sr2.Close();
 
 
-            filename1 = @"C:\______test_files1\compare\aaaa.txt";
-            filename2 = @"C:\______test_files1\compare\bbbb.txt";
+            filename1 = @"C:\_git\vcs\_1.data\______test_files1\compare\aaaa.txt";
+            filename2 = @"C:\_git\vcs\_1.data\______test_files1\compare\bbbb.txt";
             if (FileCompare(filename1, filename2) == true)
             {
                 richTextBox1.Text += "兩個檔案相同\n";
@@ -989,7 +989,7 @@ namespace vcs__Mix00
         {
             //根據文件頭判斷上傳的文件類型
             //根據文件頭判斷上傳的文件類型
-            string filename = @"C:\______test_files1\doraemon.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\doraemon.jpg";
             string result = getFileType(filename);
             richTextBox1.Text += "File Type : " + result + "\n";
         }

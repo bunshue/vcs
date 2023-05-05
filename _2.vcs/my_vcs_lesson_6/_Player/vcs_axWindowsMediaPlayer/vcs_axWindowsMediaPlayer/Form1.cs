@@ -78,7 +78,7 @@ namespace vcs_axWindowsMediaPlayer
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files1\enka.avi";
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\enka.avi";
         //string filename = "C:\\______test_files1\\_mp3\\07    都はろみ--妻戀道中(他鄉思妻兒).mp3";
 
         //用來儲存音樂檔案的全路徑
@@ -97,7 +97,7 @@ namespace vcs_axWindowsMediaPlayer
             axWindowsMediaPlayer1.settings.volume = 50;         // 音量　int 0 ~ 100   100 是最大音量
             //axWindowsMediaPlayer1.settings.autoStart = false; //設定不自動播放, 預設是自動播放
 
-            //axWindowsMediaPlayer1.URL = @"C:\______test_files1\_mp3\16.監獄風雲.mp3";
+            //axWindowsMediaPlayer1.URL = @"C:\_git\vcs\_1.data\______test_files1\_mp3\16.監獄風雲.mp3";
             axWindowsMediaPlayer1.settings.rate = 1;    //播放速度
             //axWindowsMediaPlayer1.settings.getMode("loop"); //useless
 
@@ -117,7 +117,7 @@ namespace vcs_axWindowsMediaPlayer
             ofd.Title = "請選擇檔案";
             ofd.Multiselect = true;
             //ofd.InitialDirectory = @"D:\vcs\astro\_DATA2\_mp3\";
-            ofd.InitialDirectory = @"C:\______test_files1\_mp3";
+            ofd.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1\_mp3";
             ofd.Filter = "音樂檔案|*.wav|mp3檔案|*.mp3|所有檔案|*.*";
             //ofd.Filter = "mp3文件|*.mp3|wav文件|*.wav|wma文件|*.wma|wmv文件|*.wmv|所有格式|*.*";
 

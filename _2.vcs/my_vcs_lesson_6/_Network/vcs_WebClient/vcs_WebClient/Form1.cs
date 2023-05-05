@@ -213,7 +213,7 @@ namespace vcs_WebClient
             int n = url0.LastIndexOf("/");
             string url = url0;//.Substring(0, n);
             string fileName = url0.Substring(n + 1, url0.Length - n - 1);
-            string Dir = @"C:\______test_files1\";
+            string Dir = @"C:\_git\vcs\_1.data\______test_files1\";
             //下载文件，直接覆盖
             string Path = Dir + fileName;
 

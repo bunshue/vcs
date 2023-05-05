@@ -36,10 +36,10 @@ namespace vcs_ReadWrite_Zip
 
             List<String> filenames = new List<String>();
 
-            string filename1 = @"C:\______test_files1\picture1.jpg";
-            string filename2 = @"C:\______test_files1\picture2.jpg";
-            string filename3 = @"C:\______test_files1\elephant.jpg";
-            string filename4 = @"C:\______test_files1\bear.jpg";
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\picture2.jpg";
+            string filename3 = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+            string filename4 = @"C:\_git\vcs\_1.data\______test_files1\bear.jpg";
 
             filenames.Clear();
             filenames.Add(filename1);

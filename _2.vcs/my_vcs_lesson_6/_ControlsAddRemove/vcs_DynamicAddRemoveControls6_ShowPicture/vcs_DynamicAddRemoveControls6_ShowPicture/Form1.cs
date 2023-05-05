@@ -19,7 +19,7 @@ namespace vcs_DynamicAddRemoveControls6_ShowPicture
         private const int PICTURE_WIDTH = 1920 / COLUMNS * 9 / 10;
         private const int PICTURE_HEIGHT = 1080 / ROWS * 9 / 10;
 
-        string path = @"C:\______test_files1\__pic\_MU";
+        string path = @"C:\_git\vcs\_1.data\______test_files1\__pic\_MU";
 
         ArrayList picture_files = new ArrayList();
 

@@ -30,7 +30,7 @@ namespace vcs_WMPLibWindowsMediaPlayer
         {
             InitializeComponent();
             wmp = new WindowsMediaPlayer();
-            //wmp.URL = @"C:\______test_files1\_mp3\aaaa.mp3";   //指名單一檔案
+            //wmp.URL = @"C:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";   //指名單一檔案
             wmp.URL = mp3_filename;
             wmp.settings.setMode("loop", true);
 
@@ -206,7 +206,7 @@ namespace vcs_WMPLibWindowsMediaPlayer
         //using WMPLib;
         private void button5_Click(object sender, EventArgs e)
         {
-            //wmp.URL = @"C:\______test_files1\_mp3\aaaa.mp3";   //指名單一檔案
+            //wmp.URL = @"C:\_git\vcs\_1.data\______test_files1\_mp3\aaaa.mp3";   //指名單一檔案
             //wmp.settings.setMode("loop", true);
             wmp.URL = mp3_filename;
 

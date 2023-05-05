@@ -17,8 +17,8 @@ namespace vcs_ReadWrite_GIF
 {
     public partial class Form1 : Form
     {
-        string filename1 = @"C:\______test_files1\__pic\_gif\dog.gif";
-        string filename2 = @"C:\______test_files1\__pic\_gif\cat.gif";
+        string filename1 = @"C:\_git\vcs\_1.data\______test_files1\__pic\_gif\dog.gif";
+        string filename2 = @"C:\_git\vcs\_1.data\______test_files1\__pic\_gif\cat.gif";
 
         Bitmap bitmap1;
         Bitmap bitmap2;
@@ -54,7 +54,7 @@ namespace vcs_ReadWrite_GIF
         private void button1_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "讀GIF 做成PNG\n";
-            string filename = @"C:\______test_files1\__pic\_gif\sky.gif";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_gif\sky.gif";
             string dirname = Application.StartupPath + "\\gif_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
 
             GifToPngs(filename, dirname);
@@ -66,7 +66,7 @@ namespace vcs_ReadWrite_GIF
         private void button2_Click(object sender, EventArgs e)
         {
             richTextBox1.Text += "讀PNG 做成GIF\n";
-            string dirname = @"C:\______test_files1\__pic\_gif\png2gif";
+            string dirname = @"C:\_git\vcs\_1.data\______test_files1\__pic\_gif\png2gif";
             string filename = Application.StartupPath + "\\gif_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".gif";
 
             PngsToGif(dirname, filename, 500, true);

@@ -45,10 +45,10 @@ namespace AudioMerger
 
             mSoundFilePaths = new ArrayList();
 
-            string filename1 = @"C:\______test_files1\_wav\1.wav";
-            string filename2 = @"C:\______test_files1\_wav\2.wav";
-            string filename3 = @"C:\______test_files1\_wav\3.wav";
-            string filename4 = @"C:\______test_files1\_wav\4.wav";
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\_wav\1.wav";
+            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\_wav\2.wav";
+            string filename3 = @"C:\_git\vcs\_1.data\______test_files1\_wav\3.wav";
+            string filename4 = @"C:\_git\vcs\_1.data\______test_files1\_wav\4.wav";
             AddAudioFilename(filename1);
             AddAudioFilename(filename2);
             AddAudioFilename(filename3);

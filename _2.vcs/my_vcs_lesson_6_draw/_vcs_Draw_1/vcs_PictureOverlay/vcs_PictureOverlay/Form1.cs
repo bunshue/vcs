@@ -34,7 +34,7 @@ namespace vcs_PictureOverlay
         //開啟底圖
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename1 = @"C:\______test_files1\elephant.jpg";
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
 
             bitmap1 = new Bitmap(filename1);
             pictureBox1.Image = bitmap1;
@@ -43,7 +43,7 @@ namespace vcs_PictureOverlay
         //選擇貼上圖片
         private void button2_Click(object sender, EventArgs e)
         {
-            string filename2 = @"C:\______test_files1\_material\ims-small-logo.png";
+            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\_material\ims-small-logo.png";
 
             bitmap2 = new Bitmap(filename2);
             pictureBox1.Cursor = Cursors.Cross;

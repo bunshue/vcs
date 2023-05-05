@@ -15,7 +15,7 @@ namespace vcs_PictureCrop1
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files1\elephant.jpg";
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
 
         private bool flag_select_area = false;  //開始選取的旗標
         private Point pt_st = Point.Empty;//記錄鼠標按下時的坐標，用來確定繪圖起點

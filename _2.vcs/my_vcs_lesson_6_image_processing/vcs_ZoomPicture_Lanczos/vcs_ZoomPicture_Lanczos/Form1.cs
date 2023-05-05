@@ -22,7 +22,7 @@ namespace vcs_ZoomPicture_Lanczos
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files1\ims02.bmp";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims02.bmp";
             bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
             pictureBox1.Image = bitmap1;
@@ -57,7 +57,7 @@ namespace vcs_ZoomPicture_Lanczos
         {
             pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
 
-            string filename = @"C:\______test_files1\ims02.bmp";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims02.bmp";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             double k = 2.0;
             Bitmap bitmap2 = ZoomLanczos2Apply(bitmap1, k);
@@ -197,7 +197,7 @@ namespace vcs_ZoomPicture_Lanczos
         {
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
 
-            string filename = @"C:\______test_files1\ims02.bmp";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims02.bmp";
             bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
             pictureBox2.Image = bitmap1;
@@ -207,7 +207,7 @@ namespace vcs_ZoomPicture_Lanczos
         {
             pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
 
-            string filename = @"C:\______test_files1\ims02.bmp";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims02.bmp";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             Bitmap bitmap2 = Zoom2_copy(bitmap1);
             pictureBox2.Image = bitmap2;
@@ -244,7 +244,7 @@ namespace vcs_ZoomPicture_Lanczos
         {
             pictureBox2.SizeMode = PictureBoxSizeMode.Normal;
 
-            string filename = @"C:\______test_files1\ims02.bmp";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims02.bmp";
             bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             //Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
             pictureBox2.Image = bitmap1;

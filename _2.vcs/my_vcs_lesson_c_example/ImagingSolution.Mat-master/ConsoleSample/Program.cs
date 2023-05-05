@@ -13,7 +13,7 @@ namespace ConsoleSample
     {
         static void Main(string[] args)
         {
-            string filename = @"C:\______test_files1\__RW\_bmp\0.bmp";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_bmp\0.bmp";
 
             // 行列(matA)の設定例（二次元配列で行列を設定）
             var matA = new double[3, 3];

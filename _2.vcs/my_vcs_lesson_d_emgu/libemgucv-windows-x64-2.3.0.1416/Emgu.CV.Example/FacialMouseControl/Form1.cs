@@ -20,7 +20,7 @@ namespace FacialMouseControl
         private Capture cap;
         private HaarCascade _face;
 
-        string filename = @"C:\______test_files1\__RW\_xml\haarcascades\haarcascade_frontalface_default.xml";
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\haarcascades\haarcascade_frontalface_default.xml";
 
         public Form1()
         {

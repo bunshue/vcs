@@ -26,7 +26,7 @@ namespace vcs_CombinePicture
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string foldername = @"C:\______test_files1\__pic\_animals";
+            string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_animals";
 
             richTextBox1.Text += "撈出資料夾 " + foldername + " 內所有圖片檔案合併\n";
 
@@ -234,7 +234,7 @@ namespace vcs_CombinePicture
         private void button2_Click(object sender, EventArgs e)
         {
             //把多個圖片合成為一個圖片
-            string foldername = @"C:\______test_files1\__pic\_animals";
+            string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_animals";
 
             var images = new DirectoryInfo(foldername).GetFiles("*.jpg", SearchOption.TopDirectoryOnly);
 

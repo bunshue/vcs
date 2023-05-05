@@ -58,7 +58,7 @@ namespace WindowsFormsApplication1tttt
         /// <param name="e"></param>
         private void button3_Click(object sender, System.EventArgs e)
         {
-            string filename1 = @"C:\______test_files1\__RW\_word\Step.doc";
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_word\Step.doc";
             FileStream inFile = new FileStream(filename1, FileMode.Open, FileAccess.Read);
             byte[] binaryData = new byte[inFile.Length];
             inFile.Read(binaryData, 0, (int)inFile.Length);
@@ -87,7 +87,7 @@ namespace WindowsFormsApplication1tttt
         /// <param name="e"></param>
         private void button4_Click(object sender, System.EventArgs e)
         {
-            string filename = @"C:\______test_files1\__RW\_xml\vcs_ReadWrite_XML1.xml";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1.xml";
             XmlDocument doc = new XmlDocument();
             doc.Load(filename);
             richTextBox1.Text += "加載成功\n";

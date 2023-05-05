@@ -15,7 +15,7 @@ namespace ConnectExcel2
         //定義OleDb======================================================
         //1.檔案位置    注意絕對路徑 -> 非 \  是 \\
         //private const string FileName = "C:\\Users\\user\\documents\\visual studio 2010\\Projects\\WindowsFormsApplication1\\WindowsFormsApplication1\\Data\\Book1.xlsx";
-        private const string FileName = @"C:\______test_files1\__RW\_excel\excel_20210602_131921.xls";
+        private const string FileName = @"C:\_git\vcs\_1.data\______test_files1\__RW\_excel\excel_20210602_131921.xls";
         //2.提供者名稱  Microsoft.Jet.OLEDB.4.0適用於2003以前版本，Microsoft.ACE.OLEDB.12.0 適用於2007以後的版本處理 xlsx 檔案
         //private const string ProviderName = "Microsoft.ACE.OLEDB.12.0;";
         private const string ProviderName = "Microsoft.Jet.OLEDB.4.0;";

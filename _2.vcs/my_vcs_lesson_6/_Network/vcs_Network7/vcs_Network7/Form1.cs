@@ -38,7 +38,7 @@ namespace vcs_Network7
             bt_clear_html1.Location = new Point(richTextBox_html1.Location.X + richTextBox_html1.Size.Width - bt_clear_html1.Size.Width, richTextBox_html1.Location.Y + richTextBox_html1.Size.Height - bt_clear_html1.Size.Height);
             bt_clear_html2.Location = new Point(richTextBox_html2.Location.X + richTextBox_html2.Size.Width - bt_clear_html2.Size.Width, richTextBox_html2.Location.Y + richTextBox_html2.Size.Height - bt_clear_html2.Size.Height);
 
-            string filename = @"C:\______test_files1\mmmmm.txt";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\mmmmm.txt";
             try
             {
                 richTextBox_html2.LoadFile(filename, RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox

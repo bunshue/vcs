@@ -28,7 +28,7 @@ namespace vcs_MyACDSee
             //this.WindowState = FormWindowState.Maximized;
             this.WindowState = FormWindowState.Maximized;  // 設定表單最大化
 
-            string src = @"C:\______test_files1\bear.jpg";
+            string src = @"C:\_git\vcs\_1.data\______test_files1\bear.jpg";
             pictureBox1.Dock = DockStyle.Fill;
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
             Image loadedImage = Image.FromFile(src);

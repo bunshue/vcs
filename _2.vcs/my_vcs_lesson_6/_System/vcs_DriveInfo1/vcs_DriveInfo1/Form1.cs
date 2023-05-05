@@ -177,7 +177,7 @@ namespace vcs_DriveInfo1
             //取得硬碟資訊
             //取得硬碟資訊
             long fb, ftb, tfb;
-            string foldername = @"C:\______test_files1\__RW\_excel";
+            string foldername = @"C:\_git\vcs\_1.data\______test_files1\__RW\_excel";
 
             //this.textBox4.Text = foldername;
             richTextBox1.Text += "get : " + foldername + "\n";

@@ -1915,7 +1915,7 @@ namespace vcs_DrAP
             Properties.Settings.Default.Save();
             */
 
-            string foldername = @"C:\______test_files1\_case1\";
+            string foldername = @"C:\_git\vcs\_1.data\______test_files1\_case1\";
             richTextBox1.Text += "讀出一資料夾內所有檔案 -r, 資料夾\t" + foldername + "\n";
 
             //get_all_files(foldername);

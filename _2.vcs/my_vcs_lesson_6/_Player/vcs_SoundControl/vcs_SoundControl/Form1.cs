@@ -63,7 +63,7 @@ namespace vcs_SoundControl
         private void button5_Click(object sender, EventArgs e)
         {
             // 播放外部的聲音檔
-            string filename = @"C:\______test_files1\_wav\chimes.wav";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\_wav\chimes.wav";
             myComputer.Audio.Play(filename); // 聲音檔與執行檔同目錄
         }
 
@@ -75,7 +75,7 @@ namespace vcs_SoundControl
 
         private void button7_Click(object sender, EventArgs e)
         {
-            string foldername = @"C:\______test_files1\_wav\";
+            string foldername = @"C:\_git\vcs\_1.data\______test_files1\_wav\";
             string filename = string.Empty;
 
             Random rnd = new Random();  //產生亂數物件rnd

@@ -24,7 +24,7 @@ namespace vcs_ZoomPicture4
         {
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
 
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             Bitmap bm = LoadBitmapUnlocked(filename);
             pictureBox1.ClientSize = new Size(bm.Width, bm.Height);

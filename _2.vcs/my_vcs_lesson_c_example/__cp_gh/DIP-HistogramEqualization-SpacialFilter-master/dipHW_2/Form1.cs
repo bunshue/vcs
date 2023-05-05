@@ -15,7 +15,7 @@ namespace dipHW_2
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files1\picture1.jpg";
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
         private Bitmap img;
         byte[] srcData;
         int[] histoData;

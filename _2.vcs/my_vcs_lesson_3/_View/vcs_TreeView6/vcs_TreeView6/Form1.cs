@@ -19,7 +19,7 @@ namespace vcs_TreeView6
             InitializeComponent();
         }
 
-        string foldername = @"C:\______test_files1\";
+        string foldername = @"C:\_git\vcs\_1.data\______test_files1\";
 
         public static string tempstr = "";
         string Tem_Dir = "";

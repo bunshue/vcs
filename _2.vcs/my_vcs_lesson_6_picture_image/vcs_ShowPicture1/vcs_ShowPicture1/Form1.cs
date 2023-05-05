@@ -15,7 +15,7 @@ namespace vcs_ShowPicture1
     {
         Hashtable ht = new Hashtable();
 
-        string foldername = @"C:\______test_files1\__pic\_MU";
+        string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_MU";
 
         public Form1()
         {

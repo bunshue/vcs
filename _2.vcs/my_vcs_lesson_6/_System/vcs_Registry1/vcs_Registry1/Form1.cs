@@ -24,7 +24,7 @@ namespace vcs_Registry1
             label1.Text = hScrollBar1.Value.ToString();
             if (textBox1.Text == "")
             {
-                textBox1.Text = @"C:\______test_files1\picture1.jpg";
+                textBox1.Text = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             }
             label1.Text = hScrollBar1.Value.ToString();
         }
@@ -36,7 +36,7 @@ namespace vcs_Registry1
 
             if (textBox1.Text == "")
             {
-                textBox1.Text = @"C:\______test_files1\picture1.jpg";
+                textBox1.Text = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             }
             label1.Text = hScrollBar1.Value.ToString();
         }

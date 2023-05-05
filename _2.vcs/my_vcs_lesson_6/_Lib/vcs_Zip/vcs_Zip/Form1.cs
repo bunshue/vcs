@@ -26,7 +26,7 @@ namespace vcs_Zip
         {
             // Add the file to the archive.
             string filename_zip = Application.StartupPath + "\\zip_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".zip";
-            string filename = @"C:\______test_files1\orient1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\orient1.jpg";
 
             richTextBox1.Text += "原檔案 : " + filename + "\n";
             richTextBox1.Text += "壓縮檔 : " + filename_zip + "\n";
@@ -59,7 +59,7 @@ namespace vcs_Zip
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string filename_zip = @"C:\______test_files1\peony2.zip";
+            string filename_zip = @"C:\_git\vcs\_1.data\______test_files1\peony2.zip";
             string extract_path = Application.StartupPath + "\\unzip_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");
 
             richTextBox1.Text += "壓縮檔 : " + filename_zip + "\n";

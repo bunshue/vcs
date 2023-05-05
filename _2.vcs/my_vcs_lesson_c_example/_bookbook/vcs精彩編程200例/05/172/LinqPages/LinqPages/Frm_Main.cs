@@ -11,8 +11,8 @@ namespace LinqPages
 {
     public partial class Frm_Main : Form
     {
-        //string filename = @"C:\______test_files1\_vcs200_db\AdventureWorks_Data.mdf";	//超大檔
-        string filename = @"C:\______test_files1\_vcs200_db\AdventureWorks_log.ldf";   //another
+        //string filename = @"C:\_git\vcs\_1.data\______test_files1\_vcs200_db\AdventureWorks_Data.mdf";	//超大檔
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\_vcs200_db\AdventureWorks_log.ldf";   //another
 
         public Frm_Main()
         {

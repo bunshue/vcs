@@ -28,7 +28,7 @@ namespace vcs_FileSystemWatcher3
         private void button1_Click(object sender, EventArgs e)
         {
             FileSystemWatcher k8watcher = new FileSystemWatcher();
-            k8watcher.Path = @"C:\______test_files1\_pic";
+            k8watcher.Path = @"C:\_git\vcs\_1.data\______test_files1\_pic";
             k8watcher.IncludeSubdirectories = true;
             k8watcher.EnableRaisingEvents = true;
             k8watcher.SynchronizingObject = this;

@@ -86,7 +86,7 @@ namespace vcs_ReadWrite_PDF1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files1\__RW\_pdf\note_Linux_workstation.pdf";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_pdf\note_Linux_workstation.pdf";
 
             string result = ReadPdf(filename);
             richTextBox1.Text += "result : " + result + "\n";

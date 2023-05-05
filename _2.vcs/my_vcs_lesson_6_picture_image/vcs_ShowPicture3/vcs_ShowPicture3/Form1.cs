@@ -17,7 +17,7 @@ namespace vcs_ShowPicture3
 {
     public partial class Form1 : Form
     {
-        string foldername = @"C:\______test_files1\__pic\_MU\";
+        string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\";
         string filename = string.Empty;
 
         int flag_operation_mode = MODE_0;
@@ -99,7 +99,7 @@ namespace vcs_ShowPicture3
         private void timer1_Tick(object sender, EventArgs e)
         {
             //固定一張圖
-            //string filename = @"C:\______test_files1\picture1.jpg";
+            //string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             //任選一張圖
             DirectoryInfo DInfo = new DirectoryInfo(foldername);

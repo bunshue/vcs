@@ -12,7 +12,7 @@ namespace vcs_RotatePicture8
     public partial class Form1 : Form
     {
         float angle = 0;
-        string filename = @"C:\______test_files1\picture1.jpg";
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
         public Form1()
         {
@@ -30,7 +30,7 @@ namespace vcs_RotatePicture8
         {
             angle += 15;
 
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Image image = Image.FromFile(filename);
 
             Image image_rotated = image.GetRotateImage(angle);

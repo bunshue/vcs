@@ -13,7 +13,7 @@ namespace vcs_ListViewJ
 {
     public partial class Form1 : Form
     {
-        string foldername = @"C:\______test_files1\__pic";
+        string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic";
 
         public Form1()
         {

@@ -22,10 +22,10 @@ namespace vcs_ImageProcessing3
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files1\elephant.jpg";
-        //string filename = @"C:\______test_files1\picture1.jpg";
-        //string filename = @"C:\______test_files1\isinbaeva.jpg";
-        //string filename = @"C:\______test_files1\naruto.jpg";
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
+        //string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+        //string filename = @"C:\_git\vcs\_1.data\______test_files1\isinbaeva.jpg";
+        //string filename = @"C:\_git\vcs\_1.data\______test_files1\naruto.jpg";
 
         Stopwatch sw = new Stopwatch();
 
@@ -303,7 +303,7 @@ namespace vcs_ImageProcessing3
 
         private void button13_Click(object sender, EventArgs e)
         {
-            filename = @"C:\______test_files1\isinbaeva.jpg";
+            filename = @"C:\_git\vcs\_1.data\______test_files1\isinbaeva.jpg";
             image_processing11(filename);
         }
 
@@ -887,7 +887,7 @@ namespace vcs_ImageProcessing3
 
         private void button15_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Image image;
 
             //推拉效果顯示圖像
@@ -1215,7 +1215,7 @@ namespace vcs_ImageProcessing3
             lb_title.Text = "馬賽克效果2";
 
             //C#處理數碼相片之馬賽克的實現
-            //string filename2 = @"C:\______test_files1\elephant.jpg";
+            //string filename2 = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
             int val = 10;
             Bitmap bitmap2 = KiMosaic(bitmap1, val);
@@ -1403,7 +1403,7 @@ f(x,y)=sqrt((g(x,y)-g(x+1,y+1))^2+(g(x+1,y)-g(x,y+1))^2)
             博主一共寫了三段代碼，第一段是邊緣提取，第二段是線條加粗，第三段是原圖和邊緣圖重合，三段代碼可以放在一起，但為了看得清晰我就把他們分開了。
             */
 
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             pictureBox1.Image = Image.FromFile(filename);
 
             if (this.pictureBox1.Image != null)

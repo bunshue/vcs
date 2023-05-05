@@ -51,16 +51,18 @@
             this.rb_remove_cuda = new System.Windows.Forms.RadioButton();
             this.rb_remove_vcs = new System.Windows.Forms.RadioButton();
             this.groupBox_replace = new System.Windows.Forms.GroupBox();
+            this.lb_path = new System.Windows.Forms.Label();
+            this.bt_open_dir = new System.Windows.Forms.Button();
+            this.rb_file_type3 = new System.Windows.Forms.RadioButton();
+            this.lb_string_new = new System.Windows.Forms.Label();
+            this.bt_replace = new System.Windows.Forms.Button();
+            this.lb_string_old = new System.Windows.Forms.Label();
+            this.tb_string_new = new System.Windows.Forms.TextBox();
+            this.cb_confirm = new System.Windows.Forms.CheckBox();
+            this.tb_string_old = new System.Windows.Forms.TextBox();
             this.rb_file_type2 = new System.Windows.Forms.RadioButton();
             this.rb_file_type1 = new System.Windows.Forms.RadioButton();
             this.rb_file_type0 = new System.Windows.Forms.RadioButton();
-            this.cb_confirm = new System.Windows.Forms.CheckBox();
-            this.bt_replace = new System.Windows.Forms.Button();
-            this.tb_string_old = new System.Windows.Forms.TextBox();
-            this.tb_string_new = new System.Windows.Forms.TextBox();
-            this.lb_string_old = new System.Windows.Forms.Label();
-            this.lb_string_new = new System.Windows.Forms.Label();
-            this.rb_file_type3 = new System.Windows.Forms.RadioButton();
             this.groupBox_remove.SuspendLayout();
             this.groupBox_replace.SuspendLayout();
             this.SuspendLayout();
@@ -311,6 +313,8 @@
             // 
             // groupBox_replace
             // 
+            this.groupBox_replace.Controls.Add(this.lb_path);
+            this.groupBox_replace.Controls.Add(this.bt_open_dir);
             this.groupBox_replace.Controls.Add(this.rb_file_type3);
             this.groupBox_replace.Controls.Add(this.lb_string_new);
             this.groupBox_replace.Controls.Add(this.bt_replace);
@@ -327,6 +331,97 @@
             this.groupBox_replace.TabIndex = 145;
             this.groupBox_replace.TabStop = false;
             this.groupBox_replace.Text = "置換檔案內的文字";
+            // 
+            // lb_path
+            // 
+            this.lb_path.AutoSize = true;
+            this.lb_path.Font = new System.Drawing.Font("新細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_path.Location = new System.Drawing.Point(12, 130);
+            this.lb_path.Name = "lb_path";
+            this.lb_path.Size = new System.Drawing.Size(33, 13);
+            this.lb_path.TabIndex = 151;
+            this.lb_path.Text = "路徑";
+            // 
+            // bt_open_dir
+            // 
+            this.bt_open_dir.BackgroundImage = global::vcs_Remove_Bin_Obj.Properties.Resources.open_folder;
+            this.bt_open_dir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.bt_open_dir.Font = new System.Drawing.Font("細明體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_open_dir.Location = new System.Drawing.Point(116, 110);
+            this.bt_open_dir.Name = "bt_open_dir";
+            this.bt_open_dir.Size = new System.Drawing.Size(40, 40);
+            this.bt_open_dir.TabIndex = 146;
+            this.bt_open_dir.UseVisualStyleBackColor = true;
+            this.bt_open_dir.Click += new System.EventHandler(this.bt_open_dir_Click);
+            // 
+            // rb_file_type3
+            // 
+            this.rb_file_type3.AutoSize = true;
+            this.rb_file_type3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.rb_file_type3.Location = new System.Drawing.Point(228, 96);
+            this.rb_file_type3.Name = "rb_file_type3";
+            this.rb_file_type3.Size = new System.Drawing.Size(49, 23);
+            this.rb_file_type3.TabIndex = 150;
+            this.rb_file_type3.Text = "*.*";
+            this.rb_file_type3.UseVisualStyleBackColor = true;
+            // 
+            // lb_string_new
+            // 
+            this.lb_string_new.AutoSize = true;
+            this.lb_string_new.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_string_new.Location = new System.Drawing.Point(4, 58);
+            this.lb_string_new.Name = "lb_string_new";
+            this.lb_string_new.Size = new System.Drawing.Size(66, 19);
+            this.lb_string_new.TabIndex = 149;
+            this.lb_string_new.Text = "新字串";
+            // 
+            // bt_replace
+            // 
+            this.bt_replace.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.bt_replace.Location = new System.Drawing.Point(10, 87);
+            this.bt_replace.Name = "bt_replace";
+            this.bt_replace.Size = new System.Drawing.Size(100, 40);
+            this.bt_replace.TabIndex = 146;
+            this.bt_replace.Text = "置換";
+            this.bt_replace.UseVisualStyleBackColor = true;
+            this.bt_replace.Click += new System.EventHandler(this.bt_replace_Click);
+            // 
+            // lb_string_old
+            // 
+            this.lb_string_old.AutoSize = true;
+            this.lb_string_old.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.lb_string_old.Location = new System.Drawing.Point(6, 27);
+            this.lb_string_old.Name = "lb_string_old";
+            this.lb_string_old.Size = new System.Drawing.Size(66, 19);
+            this.lb_string_old.TabIndex = 148;
+            this.lb_string_old.Text = "原字串";
+            // 
+            // tb_string_new
+            // 
+            this.tb_string_new.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_string_new.Location = new System.Drawing.Point(73, 55);
+            this.tb_string_new.Name = "tb_string_new";
+            this.tb_string_new.Size = new System.Drawing.Size(150, 30);
+            this.tb_string_new.TabIndex = 147;
+            // 
+            // cb_confirm
+            // 
+            this.cb_confirm.AutoSize = true;
+            this.cb_confirm.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.cb_confirm.Location = new System.Drawing.Point(116, 91);
+            this.cb_confirm.Name = "cb_confirm";
+            this.cb_confirm.Size = new System.Drawing.Size(104, 23);
+            this.cb_confirm.TabIndex = 146;
+            this.cb_confirm.Text = "確認置換";
+            this.cb_confirm.UseVisualStyleBackColor = true;
+            // 
+            // tb_string_old
+            // 
+            this.tb_string_old.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.tb_string_old.Location = new System.Drawing.Point(73, 27);
+            this.tb_string_old.Name = "tb_string_old";
+            this.tb_string_old.Size = new System.Drawing.Size(150, 30);
+            this.tb_string_old.TabIndex = 146;
             // 
             // rb_file_type2
             // 
@@ -362,75 +457,6 @@
             this.rb_file_type0.TabStop = true;
             this.rb_file_type0.Text = "*.cs";
             this.rb_file_type0.UseVisualStyleBackColor = true;
-            // 
-            // cb_confirm
-            // 
-            this.cb_confirm.AutoSize = true;
-            this.cb_confirm.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.cb_confirm.Location = new System.Drawing.Point(8, 92);
-            this.cb_confirm.Name = "cb_confirm";
-            this.cb_confirm.Size = new System.Drawing.Size(104, 23);
-            this.cb_confirm.TabIndex = 146;
-            this.cb_confirm.Text = "確認置換";
-            this.cb_confirm.UseVisualStyleBackColor = true;
-            // 
-            // bt_replace
-            // 
-            this.bt_replace.Font = new System.Drawing.Font("新細明體", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.bt_replace.Location = new System.Drawing.Point(105, 93);
-            this.bt_replace.Name = "bt_replace";
-            this.bt_replace.Size = new System.Drawing.Size(100, 40);
-            this.bt_replace.TabIndex = 146;
-            this.bt_replace.Text = "置換";
-            this.bt_replace.UseVisualStyleBackColor = true;
-            this.bt_replace.Click += new System.EventHandler(this.bt_replace_Click);
-            // 
-            // tb_string_old
-            // 
-            this.tb_string_old.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_string_old.Location = new System.Drawing.Point(73, 27);
-            this.tb_string_old.Name = "tb_string_old";
-            this.tb_string_old.Size = new System.Drawing.Size(150, 30);
-            this.tb_string_old.TabIndex = 146;
-            // 
-            // tb_string_new
-            // 
-            this.tb_string_new.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.tb_string_new.Location = new System.Drawing.Point(73, 55);
-            this.tb_string_new.Name = "tb_string_new";
-            this.tb_string_new.Size = new System.Drawing.Size(150, 30);
-            this.tb_string_new.TabIndex = 147;
-            // 
-            // lb_string_old
-            // 
-            this.lb_string_old.AutoSize = true;
-            this.lb_string_old.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_string_old.Location = new System.Drawing.Point(6, 27);
-            this.lb_string_old.Name = "lb_string_old";
-            this.lb_string_old.Size = new System.Drawing.Size(66, 19);
-            this.lb_string_old.TabIndex = 148;
-            this.lb_string_old.Text = "原字串";
-            // 
-            // lb_string_new
-            // 
-            this.lb_string_new.AutoSize = true;
-            this.lb_string_new.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.lb_string_new.Location = new System.Drawing.Point(4, 58);
-            this.lb_string_new.Name = "lb_string_new";
-            this.lb_string_new.Size = new System.Drawing.Size(66, 19);
-            this.lb_string_new.TabIndex = 149;
-            this.lb_string_new.Text = "新字串";
-            // 
-            // rb_file_type3
-            // 
-            this.rb_file_type3.AutoSize = true;
-            this.rb_file_type3.Font = new System.Drawing.Font("新細明體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.rb_file_type3.Location = new System.Drawing.Point(228, 96);
-            this.rb_file_type3.Name = "rb_file_type3";
-            this.rb_file_type3.Size = new System.Drawing.Size(49, 23);
-            this.rb_file_type3.TabIndex = 150;
-            this.rb_file_type3.Text = "*.*";
-            this.rb_file_type3.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -503,6 +529,8 @@
         private System.Windows.Forms.TextBox tb_string_new;
         private System.Windows.Forms.TextBox tb_string_old;
         private System.Windows.Forms.RadioButton rb_file_type3;
+        private System.Windows.Forms.Button bt_open_dir;
+        private System.Windows.Forms.Label lb_path;
     }
 }
 

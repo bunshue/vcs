@@ -258,7 +258,7 @@ namespace vcs_WebRequest
             Application.DoEvents();
 
             string url = "http://weisico.com/program/2015/0630/237.html";
-            //string filename = @"C:\______test_files1\aaaaaaaa.html";
+            //string filename = @"C:\_git\vcs\_1.data\______test_files1\aaaaaaaa.html";
             string filename = Application.StartupPath + "\\" + "aaaaaaaa.html";
 
             DownloadFile_percentage(url, filename);

@@ -78,7 +78,7 @@ namespace vcs_Form1
             //表單的背景圖案 法一
             //方案總管/加入/現有項目/選圖片
             //圖片之屬性 複製到輸出目錄 改成 有更新時才複製
-            string filename = @"C:\______test_files1\__pic\_背景圖\bg1.png";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_背景圖\bg1.png";
             BackgroundImage = new Bitmap(filename);
             //ClientSize = BackgroundImage.Size;    //表單符合圖片大小
         }
@@ -638,7 +638,7 @@ namespace vcs_Form1
 
             /*
             //表單的背景圖案 法二  // Tile the image.
-            string filename = @"C:\______test_files1\__pic\_背景圖\bg2.png";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_背景圖\bg2.png";
             
             using (TextureBrush brush = new TextureBrush(new Bitmap(filename)))
             {

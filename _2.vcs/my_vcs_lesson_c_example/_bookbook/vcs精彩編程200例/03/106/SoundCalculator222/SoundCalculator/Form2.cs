@@ -89,7 +89,7 @@ namespace SoundCalculator
         private void button1_Click(object sender, EventArgs e)
         {
             openFileDialog1.FileName = "";
-            openFileDialog1.InitialDirectory = @"C:\______test_files1\";
+            openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1\";
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {

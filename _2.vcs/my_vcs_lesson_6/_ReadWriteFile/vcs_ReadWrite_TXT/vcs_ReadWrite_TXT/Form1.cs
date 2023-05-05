@@ -37,7 +37,7 @@ namespace vcs_ReadWrite_TXT
         private void button0_Click(object sender, EventArgs e)
         {
             //ReadAllLines 1
-            string filename = @"C:\______test_files1\__RW\_txt\article.txt";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\article.txt";
 
             StringBuilder sb = new StringBuilder();
 
@@ -52,7 +52,7 @@ namespace vcs_ReadWrite_TXT
 
             //ReadAllLines 2
             //將純文字檔拆成一行一行的字串陣列, 可以去除前後空白
-            filename = @"C:\______test_files1\__RW\_txt\poem.txt";
+            filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\poem.txt";
             string[] patterns;
             patterns = File.ReadAllLines(filename).Select(i => i.Trim()).Where(i => i != string.Empty).ToArray();
             int len = patterns.Length;
@@ -65,7 +65,7 @@ namespace vcs_ReadWrite_TXT
 
             //ReadAllLines 3
             //開檔ReadAllLines存檔
-            filename = @"C:\______test_files1\__RW\_txt\琵琶行.txt";
+            filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt";
             // Read the whole file to a string array
             string[] input_lines = File.ReadAllLines(filename, Encoding.Default);
 
@@ -114,7 +114,7 @@ namespace vcs_ReadWrite_TXT
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files1\__RW\_txt\琵琶行.txt";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt";
             try
             {
                 richTextBox1.LoadFile(filename, RichTextBoxStreamType.PlainText);  //將指定的文字檔載入到richTextBox
@@ -127,7 +127,7 @@ namespace vcs_ReadWrite_TXT
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files1\__RW\_txt\琵琶行.txt";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt";
             //法一
             // 運用 ReadAllText 方法 (String, Encoding) ，其中 Encoding 針對您txt檔案的編碼做變更，讀出的資料才不會有亂碼
             //richTextBox1.Text = System.IO.File.ReadAllText(filename, Encoding.Default);
@@ -208,7 +208,7 @@ namespace vcs_ReadWrite_TXT
 
         private void button8_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files1\__RW\_txt\琵琶行.txt";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt";
 
             //創建一個讀取器
             StreamReader sr = new StreamReader(filename);
@@ -475,7 +475,7 @@ namespace vcs_ReadWrite_TXT
         private void button18_Click(object sender, EventArgs e)
         {
             //ReadLine 1
-            string filename = @"C:\______test_files1\__RW\_txt\琵琶行.txt";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt";
             int i;
 
             richTextBox1.Text += "\n檔案 : " + filename + "\t內容\n";
@@ -510,7 +510,7 @@ namespace vcs_ReadWrite_TXT
             //ReadLine 3
 
             //一行一行讀取文字檔
-            filename = @"C:\______test_files1\_case1\_case1a\_case1aa\eula.3081a.txt";
+            filename = @"C:\_git\vcs\_1.data\______test_files1\_case1\_case1a\_case1aa\eula.3081a.txt";
 
             StreamReader SReader = new StreamReader(filename, Encoding.Default);
             string strLine = string.Empty;
@@ -523,7 +523,7 @@ namespace vcs_ReadWrite_TXT
 
             //ReadLine 4
 
-            filename = @"C:\______test_files1\__RW\_txt\琵琶行.txt";
+            filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\琵琶行.txt";
             try
             {
                 StreamReader sr = new StreamReader(filename, Encoding.Default);
@@ -563,7 +563,7 @@ namespace vcs_ReadWrite_TXT
             //文字檔的整行寫入與讀出
 
             //寫入文字檔 
-            string filename = @"C:\______test_files1\__RW\_txt\txt_rw.txt";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_txt\txt_rw.txt";
 
             //StreamWriter sw = new StreamWriter(filename); // true 是資料可附加至檔案, open write
             StreamWriter sw = new StreamWriter(filename, true); // true 是資料可附加至檔案 open write append

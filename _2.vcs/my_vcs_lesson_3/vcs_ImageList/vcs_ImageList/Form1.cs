@@ -31,7 +31,7 @@ namespace vcs_ImageList
             int i;
             for (i = 1; i <= 9; i++)
             {
-                imageList1.Images.Add(new Bitmap(@"C:\______test_files1\__pic\_MU\poster_0" + i.ToString() + ".jpg"));
+                imageList1.Images.Add(new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_0" + i.ToString() + ".jpg"));
 
             }
 

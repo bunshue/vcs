@@ -520,7 +520,7 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_file07_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files1\_case1\_case1a\_case1bb\eula.3086b.txt";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\_case1\_case1a\_case1bb\eula.3086b.txt";
             if (File.Exists(filename))      //確認檔案是否存在
             {
                 richTextBox1.Text += "取得完整路徑檔名:\t" + Path.GetFullPath(filename) + "\n";
@@ -537,7 +537,7 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_file08_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files1\_case1\_case1a\eula.3085.txt";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\_case1\_case1a\eula.3085.txt";
             if (File.Exists(filename))  //確認檔案是否存在
             {
                 richTextBox1.Text += "檔名(包含副檔名)： " + Path.GetFileName(filename) + "\n";
@@ -557,7 +557,7 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_file09_Click(object sender, EventArgs e)
         {
-            string pathname = @"C:\______test_files1\_case1\_case1a\_case1bb\";
+            string pathname = @"C:\_git\vcs\_1.data\______test_files1\_case1\_case1a\_case1bb\";
             string foldername = "";
             int got_slash = 0;
             richTextBox1.Text += "length = " + pathname.Length.ToString() + "\n";
@@ -640,7 +640,7 @@ namespace vcs_DiskDirectoryFile1
         private void bt_file12_Click(object sender, EventArgs e)
         {
             //讀取設定檔案時間
-            string filename = @"C:\______test_files1\mega.txt";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\mega.txt";
 
             richTextBox1.Text += "檔案: " + filename + "\t原讀寫時間\n";
             richTextBox1.Text += "CreationTime\t" + File.GetCreationTime(filename).ToString() + "\n";
@@ -1231,7 +1231,7 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_write04_Click(object sender, EventArgs e)
         {
-            string path = @"C:\______test_files1\";
+            string path = @"C:\_git\vcs\_1.data\______test_files1\";
             string fileName = "filewrite.txt";
 
             if (!Directory.Exists(path))
@@ -1383,7 +1383,7 @@ namespace vcs_DiskDirectoryFile1
 
             //openFileDialog1.InitialDirectory = "c:\\";
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
-            openFileDialog1.InitialDirectory = @"C:\______test_files1\";
+            openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1\";
             openFileDialog1.RestoreDirectory = true;
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -2098,8 +2098,8 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_new07_Click(object sender, EventArgs e)
         {
-            string filename_source = @"C:\______test_files1\bear.jpg";
-            string filename_destination = @"C:\______test_files1\_cpfile\ccc.jpg";   //要寫完整檔名
+            string filename_source = @"C:\_git\vcs\_1.data\______test_files1\bear.jpg";
+            string filename_destination = @"C:\_git\vcs\_1.data\______test_files1\_cpfile\ccc.jpg";   //要寫完整檔名
 
             richTextBox1.Text += "檔案已存在的FileCopy/Move\n";
             try
@@ -2117,7 +2117,7 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_new08_Click(object sender, EventArgs e)
         {
-            string pathname = @"C:\______test_files1\_cpfile";
+            string pathname = @"C:\_git\vcs\_1.data\______test_files1\_cpfile";
 
             richTextBox1.Text += "Directory.Delete 目錄不是空的\n";
             try
@@ -2133,7 +2133,7 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_new09_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files1\bear.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\bear.jpg";
 
             richTextBox1.Text += File.GetAttributes(filename) + "\n";
             File.SetAttributes(filename, FileAttributes.ReadOnly);

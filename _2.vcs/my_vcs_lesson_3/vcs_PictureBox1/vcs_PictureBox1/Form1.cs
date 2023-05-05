@@ -108,7 +108,7 @@ namespace vcs_PictureBox1
 
         private void button2_Click(object sender, EventArgs e)
         {
-            image1 = new Bitmap(@"C:\______test_files1\_case1\\pic2.jpg", true);
+            image1 = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\_case1\\pic2.jpg", true);
             pictureBox1.Image = image1;
         }
 
@@ -277,7 +277,7 @@ namespace vcs_PictureBox1
             int H = h - zoom_step * zoom_cnt * 3 / 4;
             richTextBox1.Text += "zoom_cnt = " + zoom_cnt.ToString() + "\tx_st = " + x_st.ToString() + "\ty_st = " + y_st.ToString() + "\tW = " + W.ToString() + "\tH = " + H.ToString() + "\n";
 
-            Bitmap bm = new Bitmap(@"C:\______test_files1\ims_image.bmp", true);
+            Bitmap bm = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\ims_image.bmp", true);
 
             /*
             RectangleF rect = new RectangleF(zoom_step * zoom_cnt / 2 + zoom_step * btn_right_left_cnt / 2,
@@ -303,7 +303,7 @@ namespace vcs_PictureBox1
 
         void reload_picturebox2()
         {
-            Bitmap bm = new Bitmap(@"C:\______test_files1\ims_image.bmp", true);
+            Bitmap bm = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\ims_image.bmp", true);
 
             //將圖片縮放
             bmp_zoom = new Bitmap(bm, bm.Width + zoom_step * zoom_cnt, bm.Height + zoom_step * zoom_cnt * 3 / 4);   //用Bitmap直接進行縮放，比例自行調整，w -> w + dw, h -> h + dh

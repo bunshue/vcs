@@ -237,7 +237,7 @@ namespace vcs_CheckVideoFiles
         {
             show_button_text(sender);
 
-            string foldername = @"C:\______test_files1\_mp4";
+            string foldername = @"C:\_git\vcs\_1.data\______test_files1\_mp4";
 
             FindAllFiles(foldername);
         }
@@ -683,7 +683,7 @@ namespace vcs_CheckVideoFiles
             show_button_text(sender);
 
             //檔案資訊
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             var GetFileName = Path.GetFileName(filename);
             var GetFileNameWithoutExtension = Path.GetFileNameWithoutExtension(filename);
@@ -713,7 +713,7 @@ namespace vcs_CheckVideoFiles
         {
             show_button_text(sender);
             //搜尋一個資料夾內所有特定格式的檔案
-            string foldername = @"C:\______test_files1\_mp4";
+            string foldername = @"C:\_git\vcs\_1.data\______test_files1\_mp4";
 
             ///根據路徑實例化一個對象
             var di = new DirectoryInfo(foldername);

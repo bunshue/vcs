@@ -221,7 +221,7 @@ namespace vcs_ImageConversion
 /*
             //bmp2jpg
             Bitmap bitmap;
-            string filename1 = @"C:\______test_files1\bear.bmp";
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\bear.bmp";
             bitmap = new Bitmap(filename1);
             pictureBox1.Image = bitmap;
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -237,7 +237,7 @@ namespace vcs_ImageConversion
 
             //jpg2bmp
             Bitmap bitmap;
-            string filename1 = @"C:\______test_files1\picture1.jpg";
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             bitmap = new Bitmap(filename1);
             pictureBox1.Image = bitmap;
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -252,7 +252,7 @@ namespace vcs_ImageConversion
 
             //ico2bmp
             Bitmap bitmap;
-            string filename1 = @"C:\______test_files1\_icon\唐.ico";
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\_icon\唐.ico";
             bitmap = new Bitmap(filename1);
             pictureBox1.Image = bitmap;
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;

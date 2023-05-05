@@ -110,7 +110,7 @@ namespace vcs_Draw_Dynamics3
 
             Bitmap bmp_pisa;
 
-            bmp_pisa = new Bitmap(@"C:\______test_files1\__pic\_angry_bird\Leaning_Tower_of_Pisa.jpg");
+            bmp_pisa = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\Leaning_Tower_of_Pisa.jpg");
 
             int picture_width = bmp_pisa.Width;
             int picture_height = bmp_pisa.Height;
@@ -142,15 +142,15 @@ namespace vcs_Draw_Dynamics3
             Bitmap bmp;
 
             if (rb1.Checked == true)
-                bmp = new Bitmap(@"C:\______test_files1\__pic\_angry_bird\AB_red.jpg");
+                bmp = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\AB_red.jpg");
             else if (rb2.Checked == true)
-                bmp = new Bitmap(@"C:\______test_files1\__pic\_angry_bird\AB_yellow.jpg");
+                bmp = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\AB_yellow.jpg");
             else if (rb3.Checked == true)
-                bmp = new Bitmap(@"C:\______test_files1\__pic\_angry_bird\AB_blue.jpg");
+                bmp = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\AB_blue.jpg");
             else if (rb4.Checked == true)
-                bmp = new Bitmap(@"C:\______test_files1\__pic\_angry_bird\AB_black.jpg");
+                bmp = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\AB_black.jpg");
             else
-                bmp = new Bitmap(@"C:\______test_files1\__pic\_angry_bird\AB_red.jpg");
+                bmp = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\AB_red.jpg");
 
             bmp.MakeTransparent(Color.White); ;  //MakeTransparent 用法, bmp2 去背景, 可以多重去背, 連續寫即可
 
@@ -275,35 +275,35 @@ namespace vcs_Draw_Dynamics3
             if (rb1.Checked == true)
             {
                 richTextBox1.Text += "改用 紅鳥 1 Kg\n";
-                pictureBox_bird.Image = Image.FromFile(@"C:\______test_files1\__pic\_angry_bird\AB_red.jpg");
+                pictureBox_bird.Image = Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\AB_red.jpg");
                 mass = 1;
                 use_bird_kind = 0;
             }
             else if (rb2.Checked == true)
             {
                 richTextBox1.Text += "改用 黃鳥 0.6 Kg\n";
-                pictureBox_bird.Image = Image.FromFile(@"C:\______test_files1\__pic\_angry_bird\AB_yellow.jpg");
+                pictureBox_bird.Image = Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\AB_yellow.jpg");
                 mass = 0.6f;
                 use_bird_kind = 1;
             }
             else if (rb3.Checked == true)
             {
                 richTextBox1.Text += "改用 藍鳥 0.3 Kg\n";
-                pictureBox_bird.Image = Image.FromFile(@"C:\______test_files1\__pic\_angry_bird\AB_blue.jpg");
+                pictureBox_bird.Image = Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\AB_blue.jpg");
                 mass = 0.3f;
                 use_bird_kind = 2;
             }
             else if (rb4.Checked == true)
             {
                 richTextBox1.Text += "改用 炸彈鳥 2 Kg\n";
-                pictureBox_bird.Image = Image.FromFile(@"C:\______test_files1\__pic\_angry_bird\AB_black.jpg");
+                pictureBox_bird.Image = Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\AB_black.jpg");
                 mass = 2;
                 use_bird_kind = 3;
             }
             else
             {
                 richTextBox1.Text += "改用 紅鳥 1 Kg\n";
-                pictureBox_bird.Image = Image.FromFile(@"C:\______test_files1\__pic\_angry_bird\AB_red.jpg");
+                pictureBox_bird.Image = Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\AB_red.jpg");
                 use_bird_kind = 0;
             }
             ball_size_width = (int)((float)ball_size_width0 * mass);

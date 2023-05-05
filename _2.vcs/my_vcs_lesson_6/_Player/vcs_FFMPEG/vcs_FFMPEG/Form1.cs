@@ -20,7 +20,7 @@ namespace vcs_FFMPEG
 {
     public partial class Form1 : Form
     {
-        string ffmpeg_filename = @"C:\______test_files1\_exe\ffmpeg\ffmpeg.exe";
+        string ffmpeg_filename = @"C:\_git\vcs\_1.data\______test_files1\_exe\ffmpeg\ffmpeg.exe";
         string mp3_filename = string.Empty;
         string extension = string.Empty;
 
@@ -362,7 +362,7 @@ namespace vcs_FFMPEG
             richTextBox1.Text += "取得音樂檔案長度 :\n";
 
             //string filename = @"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_日本演歌\__石川さゆり\Ishikawa Sayuri 【アルバム】[演歌] 石川さゆり ‐ 全曲集 Super Best.mp3";
-            string filename = @"C:\______test_files1\_mp3\16.監獄風雲.mp3";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\_mp3\16.監獄風雲.mp3";
             //string filename = @"D:\內視鏡影片\川﨑院長が胃カメラ内視鏡検査を受けてみました！ 胃カメラは怖くない！ 痛みや苦痛が少ない胃カメラとは？.mp4";
 
             extension = Path.GetExtension(filename);
@@ -722,7 +722,7 @@ namespace vcs_FFMPEG
 
             richTextBox1.Text += "取得音樂檔案長度 :\n";
 
-            //string filename = @"C:\______test_files1\_mp3\16.監獄風雲.mp3";
+            //string filename = @"C:\_git\vcs\_1.data\______test_files1\_mp3\16.監獄風雲.mp3";
             string filename = @"D:\vcs\astro\_DATA2\_________整理_mp3\_mp3_日本演歌\__石川さゆり\Ishikawa Sayuri 【アルバム】[演歌] 石川さゆり ‐ 全曲集 Super Best.mp3";
 
             richTextBox1.Text += "檔案 : " + filename + "\n";
@@ -757,8 +757,8 @@ namespace vcs_FFMPEG
             //音頻轉換與音頻切割
 
             //音頻轉換
-            //string filename1 = @"C:\______test_files1\_mp3\16.監獄風雲.mp3";
-            string filename1 = @"C:\______test_files1\_wav\WindowsShutdown.wav";
+            //string filename1 = @"C:\_git\vcs\_1.data\______test_files1\_mp3\16.監獄風雲.mp3";
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\_wav\WindowsShutdown.wav";
             string filename2 = @"aaaaa.wav";
 
             int bitrate = 12 * 1000;//恒定碼率
@@ -777,7 +777,7 @@ namespace vcs_FFMPEG
             }
 
             //音頻切割
-            string mp3_filename = @"C:\______test_files1\_wav\harumi99.wav";
+            string mp3_filename = @"C:\_git\vcs\_1.data\______test_files1\_wav\harumi99.wav";
             string mp3_cut_filename = Application.StartupPath + "\\cut_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".wav";
 
             string startTime = "0:0:30";
@@ -846,9 +846,9 @@ namespace vcs_FFMPEG
             //取得影片的寬高
 
             //CMD 命令  通過ffmpeg執行一條CMD命令可以讀取出視頻的幀高度和幀寬度信息。
-            //C:\______test_files1\_exe>ffmpeg.exe -i "C:\______test_files1\_video\i2c.avi"
+            //C:\_git\vcs\_1.data\______test_files1\_exe>ffmpeg.exe -i "C:\_git\vcs\_1.data\______test_files1\_video\i2c.avi"
 
-            string video_filename1 = @"C:\______test_files1\_video\i2c.avi";
+            string video_filename1 = @"C:\_git\vcs\_1.data\______test_files1\_video\i2c.avi";
             string video_filename2 = @"D:\內視鏡影片\190902-0827.mp4";
 
             int? width, height;
@@ -863,7 +863,7 @@ namespace vcs_FFMPEG
         private void bt_ffmpeg1_Click(object sender, EventArgs e)
         {
             //獲取視頻時長
-            string video_filename1 = @"C:\______test_files1\_video\i2c.avi";
+            string video_filename1 = @"C:\_git\vcs\_1.data\______test_files1\_video\i2c.avi";
             string video_filename2 = @"D:\內視鏡影片\190902-0827.mp4";
 
             string length;
@@ -879,7 +879,7 @@ namespace vcs_FFMPEG
         {
             //獲取視頻第一秒圖片
 
-            string video_filename1 = @"C:\______test_files1\_video\i2c.avi";
+            string video_filename1 = @"C:\_git\vcs\_1.data\______test_files1\_video\i2c.avi";
             //string video_filename2 = @"D:\內視鏡影片\190902-0827.mp4";
 
             string filename = Application.StartupPath + "\\bmp_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".bmp";

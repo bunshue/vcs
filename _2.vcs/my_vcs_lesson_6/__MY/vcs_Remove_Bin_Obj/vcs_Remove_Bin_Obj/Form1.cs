@@ -15,7 +15,12 @@ namespace vcs_Remove_Bin_Obj
     {
         List<string> folder_name = new List<string>();      //宣告string型態的List
         List<string> filename_rename = new List<string>();  //宣告string型態的List
-        string search_path = string.Empty;
+        //string search_path = string.Empty;
+        string search_path = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\vcs_ReadWrite_TXT";
+        //string search_path = @"C:\_git\vcs\_2.vcs";
+        //string specified_search_path = String.Empty;
+        string specified_search_path = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\vcs_ReadWrite_TXT";
+
         int total_show_empty_folder_cnt = 0;
         int total_delete_empty_folder_cnt = 0;
 
@@ -52,8 +57,11 @@ namespace vcs_Remove_Bin_Obj
             richTextBox1.Size = new Size(630, 550);
             richTextBox1.Location = new Point(x_st + dx * 1, y_st + dy * 1);
 
-            groupBox_replace.Size = new Size(350, 150);
+            groupBox_replace.Size = new Size(550, 170);
             groupBox_replace.Location = new Point(x_st + dx * 0, y_st + dy * 17 - 10);
+            tb_string_old.Size = new Size(350, 30);
+            tb_string_new.Size = new Size(350, 30);
+
             x_st = 10;
             y_st = 20;
             dx = 70;
@@ -62,25 +70,29 @@ namespace vcs_Remove_Bin_Obj
             lb_string_new.Location = new Point(x_st + dx * 0, y_st + dy * 1 + 5);
             tb_string_old.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             tb_string_new.Location = new Point(x_st + dx * 1, y_st + dy * 1);
-            cb_confirm.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            bt_replace.Location = new Point(x_st + dx * 2 - 20, y_st + dy * 2);
-            int dd = 35;
-            dy = 32;
-            rb_file_type0.Location = new Point(x_st + dx * 3 + dd, y_st + dy * 0);
-            rb_file_type1.Location = new Point(x_st + dx * 3 + dd, y_st + dy * 1);
-            rb_file_type2.Location = new Point(x_st + dx * 3 + dd, y_st + dy * 2);
-            rb_file_type3.Location = new Point(x_st + dx * 3 + dd, y_st + dy * 3);
+            bt_replace.Location = new Point(x_st + dx * 0, y_st + dy * 2);
+            cb_confirm.Location = new Point(x_st + dx * 1+40, y_st + dy * 2+10);
+            bt_open_dir.Location = new Point(x_st + dx * 3 + 10, y_st + dy * 2);
+            lb_path.Location = new Point(x_st + dx * 0, y_st + dy * 3 + 8);
+            int dd = 20;
+            dy = 30;
+            rb_file_type0.Location = new Point(x_st + dx * 6 + dd, y_st + dy * 0);
+            rb_file_type1.Location = new Point(x_st + dx * 6 + dd, y_st + dy * 1);
+            rb_file_type2.Location = new Point(x_st + dx * 6 + dd, y_st + dy * 2);
+            rb_file_type3.Location = new Point(x_st + dx * 6 + dd, y_st + dy * 3);
 
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //取得目前所在路徑
-            string currentPath = Directory.GetCurrentDirectory();
+            //string currentPath = Directory.GetCurrentDirectory();
+            string currentPath = search_path;
 
             this.Text = "目前位置 : " + currentPath;
             search_path = currentPath;
+            lb_path.Text = search_path;
             lb_main_mesg.Text = "";
 
-            this.Size = new Size(900, 800);
+            this.Size = new Size(900, 820);
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -690,7 +702,7 @@ namespace vcs_Remove_Bin_Obj
 
             //string path = @"C:\_git\vcs\_2.vcs";
 
-            string path = @"C:\______test_files1\rename001";
+            string path = @"C:\_git\vcs\_1.data\______test_files1\rename001";
             //string path = search_path;
 
             filename_rename.Clear();
@@ -1194,13 +1206,20 @@ namespace vcs_Remove_Bin_Obj
             //資料夾內 檔案置換文字
 
             //撈出所有圖片檔 並存成一個List
-            string foldername = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\vcs_ReadWrite_TXT";
+            //string foldername = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\vcs_ReadWrite_TXT";
+            string foldername = specified_search_path;
+            if (foldername == "")
+            {
+                richTextBox1.Text += "無置換路徑, 離開\n";
+                return;
+            }
+            richTextBox1.Text += "置換路徑 : " + foldername + "\n";
 
             filenames.Clear();
 
             GetAllFiles(foldername, extension);
             int len = filenames.Count;
-            richTextBox1.Text += "len = " + len.ToString() + "\n";
+            richTextBox1.Text += "找到檔案個數 : " + len.ToString() + "\n";
 
             //private Icon icon1 = new Icon(@"C:\______test_files\_icon\快.ico");
             string pattern1 = string_old;
@@ -1325,6 +1344,23 @@ namespace vcs_Remove_Bin_Obj
                         filenames.Add(fullname);
                     }
                 }
+            }
+        }
+
+        private void bt_open_dir_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Text += "search_path = " + search_path + "\n";
+            FolderBrowserDialog folderBrowserDialog1 = new FolderBrowserDialog();
+            folderBrowserDialog1.SelectedPath = search_path;  //預設開啟的路徑
+            if (folderBrowserDialog1.ShowDialog() == DialogResult.OK)
+            {
+                specified_search_path = folderBrowserDialog1.SelectedPath;
+                richTextBox1.Text += "選取資料夾: " + folderBrowserDialog1.SelectedPath + "\n";
+            }
+            else
+            {
+                richTextBox1.Text = "未選取資料夾\n";
+                specified_search_path = String.Empty;
             }
         }
     }

@@ -18,7 +18,7 @@ namespace vcs_RotatePicture2
         // The current scale.
         private float angle = 0;
 
-        string filename = @"C:\______test_files1\picture1.jpg";
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
         private Bitmap bitmap1 = null;  //原圖
         private Bitmap bitmap2 = null;  //旋轉過的圖
 

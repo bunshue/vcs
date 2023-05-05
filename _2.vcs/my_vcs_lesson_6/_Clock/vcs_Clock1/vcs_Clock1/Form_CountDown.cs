@@ -466,7 +466,7 @@ namespace vcs_Clock1
                 {
                     richTextBox1.Text += "時間到\n";
 
-                    Bitmap bitmap1 = new Bitmap(@"C:\______test_files1\picture1.jpg");
+                    Bitmap bitmap1 = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\picture1.jpg");
 
                     int W = this.Size.Width;
                     int H = this.Size.Height;

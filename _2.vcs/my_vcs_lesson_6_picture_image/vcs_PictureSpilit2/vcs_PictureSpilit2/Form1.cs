@@ -28,7 +28,7 @@ namespace vcs_PictureSpilit2
         {
             //將一圖拆成 3X2 共六圖, 像素法
 
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Bitmap bmpRes = null;
 
             try
@@ -91,7 +91,7 @@ namespace vcs_PictureSpilit2
         {
             //將一圖拆成 3X2 共六圖, Clone法, 運用Clone函數局部複製
 
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Bitmap bmpRes = null;
 
             try
@@ -146,7 +146,7 @@ namespace vcs_PictureSpilit2
         private void button3_Click(object sender, EventArgs e)
         {
             //圖片切割, 切成 M X N 個
-            string filename1 = @"C:\______test_files1\picture1.jpg";
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             string filename2 = Application.StartupPath + "\\cut_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
             bool result = imageCut(filename1, 2, 2, 100, filename2);
 

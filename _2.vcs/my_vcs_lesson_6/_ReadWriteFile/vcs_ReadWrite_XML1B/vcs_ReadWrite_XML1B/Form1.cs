@@ -429,8 +429,8 @@ namespace vcs_ReadWrite_XML1B
 
         public void AddElement(string FromUserName)
         {
-            string filename1 = @"C:\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ba.xml";
-            string filename2 = @"C:\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ba_add.xml";
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ba.xml";
+            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ba_add.xml";
             LoadXml(filename1);
             XmlNode xmldocSelect = xmlDoc.SelectSingleNode("Root");
             //查詢節點
@@ -451,8 +451,8 @@ namespace vcs_ReadWrite_XML1B
         /// <param name="FromUserName"></param>
         public void editXml(string FromUserName)
         {
-            string filename1 = @"C:\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ba.xml";
-            string filename2 = @"C:\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ba_edit.xml";
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ba.xml";
+            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ba_edit.xml";
 
             LoadXml(filename1);
             XmlNodeList xnl = xmlDoc.DocumentElement.ChildNodes;
@@ -476,8 +476,8 @@ namespace vcs_ReadWrite_XML1B
         /// <param name="FromUserName"></param>
         public void deleteXml(string FromUserName)
         {
-            string filename1 = @"C:\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ba.xml";
-            string filename2 = @"C:\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ba_delete.xml";
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ba.xml";
+            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ba_delete.xml";
 
             LoadXml(filename1);
             XmlNodeList xnl = xmlDoc.DocumentElement.ChildNodes;
@@ -500,7 +500,7 @@ namespace vcs_ReadWrite_XML1B
         public string IsExitXml(string FromUserName)
         {
             string datetime = "";
-            string filename = @"C:\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ba.xml";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ba.xml";
             LoadXml(filename);
             XmlNodeList xnl = xmlDoc.DocumentElement.ChildNodes;
             foreach (XmlElement element in xnl)
@@ -518,7 +518,7 @@ namespace vcs_ReadWrite_XML1B
 
         private void button30_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ba.xml";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Ba.xml";
             richTextBox1.Text += "載入XML, 檔案 : " + filename + "\n";
             LoadXml(filename);
         }
@@ -659,7 +659,7 @@ namespace vcs_ReadWrite_XML1B
 
         private void button50_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Bb.xml";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Bb.xml";
             richTextBox1.Text += "載入XML, 檔案 : " + filename + "\n";
 
             if (File.Exists(filename))
@@ -691,8 +691,8 @@ namespace vcs_ReadWrite_XML1B
 
         private void button51_Click(object sender, EventArgs e)
         {
-            string filename1 = @"C:\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Bb.xml";
-            string filename2 = @"C:\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Bb_modify.xml";
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Bb.xml";
+            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_xml\vcs_ReadWrite_XML1Bb_modify.xml";
 
             //使用XPath的方式來讀取XML檔案
             // 獲取文件物件

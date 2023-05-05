@@ -13,7 +13,7 @@ namespace vcs_ImageProcessingG
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files1\picture1.jpg";
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
         public Form1()
         {
@@ -28,79 +28,79 @@ namespace vcs_ImageProcessingG
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             image_processing1(filename);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             image_processing2(filename);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             image_processing3(filename);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             image_processing4(filename);
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             image_processing5(filename);
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             image_processing6(filename);
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             image_processing7(filename);
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             image_processing8a(filename);
         }
 
         private void button9_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             image_processing9(filename);
         }
 
         private void button10_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             image_processing10(filename);
         }
 
         private void button11_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             image_processing8b(filename);
         }
 
         private void button12_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             image_processing12(filename);
         }
 
         private void button13_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             image_processing11(filename);
         }
 

@@ -21,7 +21,7 @@ namespace TrafficSignRecognition
          InitializeComponent();
          _stopSignDetector = new StopSignDetector();
 
-         string filename = @"C:\______test_files1\_emgu\stop-sign.jpg";
+         string filename = @"C:\_git\vcs\_1.data\______test_files1\_emgu\stop-sign.jpg";
 
          ProcessImage(new Image<Bgr, byte>(filename));
       }

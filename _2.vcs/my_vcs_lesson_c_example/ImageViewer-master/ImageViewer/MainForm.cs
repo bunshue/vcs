@@ -576,13 +576,13 @@ namespace ImageViewer
 
         void open_image_file()
         {
-            string filename = @"C:\______test_files1\ims01.bmp";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\ims01.bmp";
             OpenImageFile(filename);
 
             /*
             // ファイルを開くダイアログの作成 
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            openFileDialog1.InitialDirectory = @"C:\______test_files1\";
+            openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1\";
             // ファイルフィルタ 
             openFileDialog1.Filter = "画像ﾌｧｲﾙ(*.bmp,*.jpg,*.png,*.tif,*.ico)|*.bmp;*.jpg;*.png;*.tif;*.ico";
             // ダイアログの表示 （Cancelボタンがクリックされた場合は何もしない）

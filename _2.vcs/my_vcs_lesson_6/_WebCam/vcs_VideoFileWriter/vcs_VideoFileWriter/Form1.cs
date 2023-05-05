@@ -295,7 +295,7 @@ namespace vcs_VideoFileWriter
 
             Bitmap image = new Bitmap(W, H);
 
-            string pic_filename = @"C:\______test_files1\bear.bmp";
+            string pic_filename = @"C:\_git\vcs\_1.data\______test_files1\bear.bmp";
 
             image = new Bitmap(pic_filename);
 
@@ -321,10 +321,10 @@ namespace vcs_VideoFileWriter
                 File.Delete(filename);
             }
 
-            string foldername = @"C:\______test_files1\__pic\_MU";
+            string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_MU";
             var dinfo = new DirectoryInfo(foldername);
             var files = dinfo.GetFiles().OrderBy(p => p.Name).ToArray();
-            string pic_filename = @"C:\______test_files1\__pic\_MU\id_card_01.jpg";
+            string pic_filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\id_card_01.jpg";
             Bitmap image = (Bitmap)Image.FromFile(pic_filename);
             VideoFileWriter writer = new VideoFileWriter();
 
@@ -489,7 +489,7 @@ namespace vcs_VideoFileWriter
                 File.Delete(audio_filename);
             }
 
-            string filename = @"C:\______test_files1\_video\i2c.avi";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\_video\i2c.avi";
 
             AviManager aviManager = new AviManager(filename, true);
 

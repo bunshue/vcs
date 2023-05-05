@@ -13,7 +13,7 @@ namespace vcs_TreeView3
 {
     public partial class Form1 : Form
     {
-        string dir_name = @"C:\______test_files1\_case1";
+        string dir_name = @"C:\_git\vcs\_1.data\______test_files1\_case1";
         public Form1()
         {
             InitializeComponent();

@@ -345,7 +345,7 @@ namespace vcs_AForge_FiltersDemo
             try
             {
                 // show file open dialog
-                openFileDialog.InitialDirectory = @"C:\______test_files1\";
+                openFileDialog.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1\";
                 if (openFileDialog.ShowDialog() == DialogResult.OK)
                 {
                     // load image

@@ -22,7 +22,7 @@ namespace vcs_PictureResize3
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            textBox1.Text = @"C:\______test_files1\_pic_resize";
+            textBox1.Text = @"C:\_git\vcs\_1.data\______test_files1\_pic_resize";
         }
 
         // Process the files in the selected directory.

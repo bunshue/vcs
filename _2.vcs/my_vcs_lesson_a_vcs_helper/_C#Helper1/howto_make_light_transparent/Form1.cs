@@ -18,7 +18,7 @@ namespace howto_make_light_transparent
         Bitmap bitmap1 = null;
 
         //string filename = "C:\\______test_files1\\bear.jpg";
-        string filename = @"C:\______test_files1\elephant.jpg";
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
         int cutoff_value = 0;
 
         public Form1()

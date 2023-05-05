@@ -38,7 +38,7 @@ namespace vcs_Picasa
             int cx = W / 2;
             int cy = H / 2;
 
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             int angle = 0;
 

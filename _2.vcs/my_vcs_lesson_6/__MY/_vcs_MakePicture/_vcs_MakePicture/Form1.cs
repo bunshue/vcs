@@ -2236,7 +2236,7 @@ namespace _vcs_MakePicture
                 }
             }
 
-            string filename = @"C:\______test_files1\__pic\_painting\SpringBouquet.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_painting\SpringBouquet.jpg";
             Bitmap bitmap2 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
 
             g.DrawImage(bitmap2, (W - bitmap2.Width) / 2, (H - bitmap2.Height) / 2, bitmap2.Width, bitmap2.Height);
@@ -2687,7 +2687,7 @@ namespace _vcs_MakePicture
         {
             //製作icon
             //一個ICON圖標的轉換程序
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
             pictureBox1.Image = bitmap1;
 

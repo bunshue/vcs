@@ -32,7 +32,7 @@ namespace vcs_ReadWrite_RTF2
         private void unfold_Click(object sender, EventArgs e)
         {
             OpenFileDialog TxTOpenDialog = new OpenFileDialog();//聲明一個用於打開文件對話框的對象
-            TxTOpenDialog.InitialDirectory = @"C:\______test_files1\__RW\_rtf";
+            TxTOpenDialog.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1\__RW\_rtf";
             TxTOpenDialog.Filter = "RTF文件(*.RTF)|*.RTF";//定義打開文件對話框的過濾參數
             if (TxTOpenDialog.ShowDialog() == DialogResult.OK)//當在打開對話框中單擊「打開」按鈕時
             {

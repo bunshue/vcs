@@ -13,7 +13,7 @@ namespace vcs_Draw_ColorMatrix
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files1\picture1.jpg";
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
         public Form1()
         {
@@ -52,7 +52,7 @@ namespace vcs_Draw_ColorMatrix
         private void button0_Click(object sender, EventArgs e)
         {
             //測試ColorMatrix
-            string pic_filename = @"C:\______test_files1\picture1.jpg";
+            string pic_filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             Image image = new Bitmap(pic_filename);
             ImageAttributes imageAttributes = new ImageAttributes();
@@ -190,7 +190,7 @@ namespace vcs_Draw_ColorMatrix
             System.Drawing.Imaging.ColorMatrix cm = new System.Drawing.Imaging.ColorMatrix(matrix);
             System.Drawing.Imaging.ImageAttributes attr = new System.Drawing.Imaging.ImageAttributes();
             attr.SetColorMatrix(cm);
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             Image tmp = Image.FromFile(filename);
 
@@ -212,7 +212,7 @@ namespace vcs_Draw_ColorMatrix
         private void button4_Click(object sender, EventArgs e)
         {
             //使用ColorMatrix取灰度
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             //取灰度
             this.pictureBox1.Image = Image.FromFile(filename);

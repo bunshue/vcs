@@ -15,9 +15,9 @@ namespace ConnectExcel
         //string filename = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_excel\2006年圖書銷售情況.xls";    //not used
         //string filename = "C:\\_git\\vcs\\_2.vcs\\my_vcs_lesson_6\\_DB\\__db\\_excel\\2006年圖書銷售情況.xls";   //not used
 
-        string filename = @"C:\______test_files1\__RW\_excel\2006年圖書銷售情況.xls";
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_excel\2006年圖書銷售情況.xls";
         //string filename = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_DB\__db\_excel\2006年圖書銷售情況.xls";
-        //string filename = @"C:\______test_files1\__RW\_excel\Books.xlsx";
+        //string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_excel\Books.xlsx";
 
         public Form1()
         {

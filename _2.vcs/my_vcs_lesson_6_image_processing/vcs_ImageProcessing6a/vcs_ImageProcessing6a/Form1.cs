@@ -13,7 +13,7 @@ namespace vcs_ImageProcessing6a
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files1\picture1.jpg";
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
         Stopwatch sw = new Stopwatch();
 
         public Form1()

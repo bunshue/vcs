@@ -6,16 +6,7 @@ ax.imshow(volume[ax.index, :, :], cMap, vmin=cMin, vmax=cMax)
 
 
 
-import time
 
-startTime = time.time()
-
-'''
-do something
-'''
-
-elapsedTime = time.time() - startTime
-print("Time for LinkedList is", elapsedTime, "seconds")
 
 item_text = "%s %d" % (item_describe, i + 1)
 rjust = item_text.rjust(128)
@@ -29,10 +20,6 @@ self.recurse_tree(ds, parentNodeID)
             st = ()
         if st:
 
-
-
-f.write("    '%s':\t%s,  \t# %s\n" % (name,charcode,comment))
-f.write('\n}\n')
 
 
         for line in reversed(lines):
@@ -244,10 +231,6 @@ else:
 
 
 
-start = datetime.datetime(2016, 1, 1)
-end = datetime.datetime(2017, 1, 1)
-
-
 #熊貓是python的excel
 
 
@@ -342,12 +325,6 @@ localhost:8000
 就可以看到www資料夾下的檔案列表
 
 DOM	Document Object Model
-
-
-
-now = datetime.now()
-filename = now.strftime("news-%y-%m-%d-%H-%M-%S.json")
-
 
 
 
@@ -569,23 +546,6 @@ if __name__ == '__main__':
     app.run()
 
 
-
-
-print(__doc__)
-print(globals())
-
-
-
-print()
-
-
-
-for i in range(30):
-    print("webpage{}.png".format(i))
-
-
-
-
 DB Browser for SQLite
 https://sqlitebrowser.org/
 
@@ -633,13 +593,6 @@ mixer.music.play()
 
 
 
-t0 = time.time()
- :
- :
-t1 = time.time()
-
-print("Open took %.2f seconds" % (t1-t0,))
-print("\ncommand took %.2f seconds\n" % (t1-t0,))
 
 
 import time
@@ -922,15 +875,6 @@ GET加上參數的格式：https://www.example.com/index.html?key1=value1&key2=v
 POST
 將資料寫在內部，就像你寫信然後裝進信封袋一樣，傳遞上比較安全且傳遞的資訊可以比較多。
 
-
-now=datetime.now()
-
-    person1={"name":"Amy","phone":"049-1234567","age":20}
-    person2={"name":"Jack","phone":"02-4455666","age":25}
-    person3={"name":"Nacy","phone":"04-9876543","age":17}
-    persons=[person1,person2,person3]
-
-
 from machine import Pin, PWM
 import time
 
@@ -1032,5 +976,84 @@ filename = 'C:/______test_files3/output.avi'
 filename1 = 'C:/______test_files2/human2.jpg'
 filename2 = 'C:/______test_files2/poetry2.txt'
 filename3 = 'C:/______test_files2'
+
+
+
+
+
+
+
+
+----------------import os 大集合----------------
+
+size = os.stat(fullpath).st_size
+
+
+os.chdir(dir)
+os.rename(fn, ','+fn)
+
+
+
+
+
+----------------import time 大集合----------------
+now=datetime.now()
+
+
+
+import time
+
+startTime = time.time()
+
+'''
+do something
+'''
+
+elapsedTime = time.time() - startTime
+print("Time for LinkedList is", elapsedTime, "seconds")
+
+
+
+
+start = datetime.datetime(2016, 1, 1)
+end = datetime.datetime(2017, 1, 1)
+
+
+
+from datetime import datetime
+now = datetime.now()
+now = datetime.now()
+
+filename = now.strftime("news-%y-%m-%d-%H-%M-%S.json")
+
+
+t0 = time.time()
+ :
+ :
+t1 = time.time()
+
+print("Open took %.2f seconds" % (t1-t0,))
+print("\ncommand took %.2f seconds\n" % (t1-t0,))
+
+
+
+
+
+
+
+----------------print 大集合----------------
+
+
+
+
+----------------字串處理 大集合----------------
+
+
+return fullpath.endswith(".py") or fullpath.endswith(".pyw")
+
+
+
+
+
 
 

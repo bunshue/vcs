@@ -23,7 +23,7 @@ namespace vcs_Draw1
 
         bool flag_print_mouse_cursor = false;
 
-        string filename = @"C:\______test_files1\picture1.jpg";
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
         public Form1()
         {
@@ -759,7 +759,7 @@ namespace vcs_Draw1
             }
 
             //畫示意圖
-            string filename = @"C:\______test_files1\_material\AntiAlias.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\_material\AntiAlias.jpg";
             //讀檔 至 Image 影像
             Image img = Image.FromFile(filename); // 產生一個Image物件
             //畫出來
@@ -853,7 +853,7 @@ namespace vcs_Draw1
 
         private void button11_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
 
@@ -1064,7 +1064,7 @@ namespace vcs_Draw1
 
             //在指定位置畫上一圖
             // Create image.
-            //Image newImage = Image.FromFile(@"C:\______test_files1\step3.png");
+            //Image newImage = Image.FromFile(@"C:\_git\vcs\_1.data\______test_files1\step3.png");
 
             string filename = "C:\\______test_files1\\step3.png";
             richTextBox1.Text += "開啟檔案: " + filename + ", 並顯示之\n";
@@ -1297,7 +1297,7 @@ namespace vcs_Draw1
             //pictureBox1.Image = bitmap1; //顯示在 pictureBox1 圖片控制項中
 
             /*
-            bitmap1 = new Bitmap(@"C:\______test_files1\bear.jpg");
+            bitmap1 = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\bear.jpg");
             Draw = Graphics.FromImage(bmp);
             this.Size = bmp.Size;
             g = this.CreateGraphics();
@@ -2606,7 +2606,7 @@ namespace vcs_Draw1
 
             //貼圖
             g.DrawString("貼圖", new Font("標楷體", 20), new SolidBrush(Color.Blue), new PointF(W - 80, 30));
-            Bitmap bmp = new Bitmap(@"C:\______test_files1\__pic\_ball\red-ball-icon.png");
+            Bitmap bmp = new Bitmap(@"C:\_git\vcs\_1.data\______test_files1\__pic\_ball\red-ball-icon.png");
             for (y_st = 60; y_st < H; y_st += 80)
             {
                 g.DrawImage(bmp, W - 75, y_st);

@@ -13,7 +13,7 @@ namespace vcs_ReadWrite_BIN2
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files1\__RW\_bin\txt_rw.bin";
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_bin\txt_rw.bin";
 
         string a_string = "Wonderful";  // 字串
         float a_float = 3.1415926f;     // 四位元組浮點數

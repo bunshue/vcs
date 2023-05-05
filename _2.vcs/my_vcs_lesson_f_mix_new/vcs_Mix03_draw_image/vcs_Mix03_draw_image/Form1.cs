@@ -103,7 +103,7 @@ namespace vcs_Mix03_draw_image
             show_button_text(sender);
             //圖像切割
 
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             //圖像切割 每100X100 切成一個小圖
             ImageManager.Cut(filename, 100, 100);
         }
@@ -244,8 +244,8 @@ namespace vcs_Mix03_draw_image
             show_button_text(sender);
 
             //圖片剪下一塊存檔, 圖片裁剪
-            string filename1 = @"C:\______test_files1\picture1.jpg";
-            string filename2 = @"C:\______test_files1\picture1_cut.jpg";
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\picture1_cut.jpg";
 
             ImgReduceCutOut(200, 200, filename1, filename2);
 
@@ -351,8 +351,8 @@ namespace vcs_Mix03_draw_image
             show_button_text(sender);
 
             //圖片剪下一塊存檔 另法
-            string filename1 = @"C:\______test_files1\picture1.jpg";
-            string filename2 = @"C:\______test_files1\picture1_cut.jpg";
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
+            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\picture1_cut.jpg";
 
             pictureBox1.Image = CutForCustomx(filename1, 150, 150);
             pictureBox1.Image.Save(filename2);
@@ -451,7 +451,7 @@ namespace vcs_Mix03_draw_image
             show_button_text(sender);
             //圖片質量壓縮(不改變尺寸)
 
-            string filename = @"C:\______test_files1\elephant.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
             richTextBox1.Text += "原圖 : " + filename + "\n";
 
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
@@ -467,7 +467,7 @@ namespace vcs_Mix03_draw_image
         {
             show_button_text(sender);
             //影像資料處理1
-            string filename = @"C:\______test_files1\__pic\rgb.bmp";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\rgb.bmp";
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
             pictureBox1.Image = bitmap1;
 
@@ -482,7 +482,7 @@ namespace vcs_Mix03_draw_image
             //影像資料處理2
             Graphics g = this.pictureBox1.CreateGraphics();
 
-            string filename = @"C:\______test_files1\__pic\rgb.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\rgb.jpg";
 
             richTextBox1.Text += "filename : " + filename + "\n";
             //Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);  //使用Image.FromFile創建圖形對象 same
@@ -573,7 +573,7 @@ namespace vcs_Mix03_draw_image
             Graphics g = Graphics.FromImage(bitmap1);
             g.Clear(Color.White);
 
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             Bitmap bmp = new Bitmap(filename);
             g.FillRectangle(Brushes.White, this.ClientRectangle);
@@ -607,7 +607,7 @@ namespace vcs_Mix03_draw_image
             show_button_text(sender);
             //獲取圖片的指定部分
 
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             Bitmap bitmap1 = GetPart(filename, 0, 0, 150, 200, 0, 0);
 
@@ -922,7 +922,7 @@ namespace vcs_Mix03_draw_image
             //清空畫布並用透明色填充
             g.Clear(Color.Transparent);
 
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
 
             //將另一幅圖片畫到畫布上
@@ -942,7 +942,7 @@ namespace vcs_Mix03_draw_image
         {
             show_button_text(sender);
 
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             pictureBox1.Image = Image.FromFile(filename);
 
 
@@ -968,7 +968,7 @@ namespace vcs_Mix03_draw_image
 
         private void VaryQualityLevel()
         {
-            string filename = @"C:\______test_files1\elephant.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
 
             // Get a bitmap.
             Bitmap bitmap1 = new Bitmap(filename);
@@ -1161,7 +1161,7 @@ namespace vcs_Mix03_draw_image
         {
             show_button_text(sender);
             //撈出所有圖片檔 並存成一個List
-            string foldername = @"C:\______test_files1\__pic\_book_magazine";
+            string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_book_magazine";
 
             filenames.Clear();
 
@@ -1212,7 +1212,7 @@ namespace vcs_Mix03_draw_image
             show_button_text(sender);
 
             //檢視圖片的像素
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             Image image = Image.FromFile(filename);
             richTextBox1.Text += "檔案 : " + filename + ",\t" + "圖片像素：[" + image.Width + "*" + image.Height + "]" + "\n";
@@ -1310,7 +1310,7 @@ namespace vcs_Mix03_draw_image
 
             //圖片 拜列 MemoryStream Bitmap轉換
 
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
             richTextBox1.Text += "圖檔 轉 Bitmap\n";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
@@ -1343,7 +1343,7 @@ namespace vcs_Mix03_draw_image
         {
             show_button_text(sender);
             //圖片壓縮
-            string filename1 = @"C:\______test_files1\picture1.jpg";
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             string filename2 = Application.StartupPath + "\\compress_" + DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".jpg";
             bool result = imageCompress(filename1, 30, filename2);
             if (result == true)
@@ -1356,7 +1356,7 @@ namespace vcs_Mix03_draw_image
         {
             show_button_text(sender);
 
-            string foldername = @"C:\______test_files1\__pic\_書畫字圖\_peony1";
+            string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony1";
 
             filenames.Clear();
 
@@ -1412,7 +1412,7 @@ namespace vcs_Mix03_draw_image
             show_button_text(sender);
             //取得一層jpg檔
 
-            string foldername = @"C:\______test_files1\__pic\_書畫字圖\_peony1";
+            string foldername = @"C:\_git\vcs\_1.data\______test_files1\__pic\_書畫字圖\_peony1";
             string[] filenames = Directory.GetFiles(foldername, "*.jpg");
 
 
@@ -1434,7 +1434,7 @@ namespace vcs_Mix03_draw_image
             //格式轉換
             //Stream 和 byte[] 之間的轉換
 
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
 
             // 打開文件

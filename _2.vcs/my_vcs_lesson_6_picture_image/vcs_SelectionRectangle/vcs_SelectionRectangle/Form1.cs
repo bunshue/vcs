@@ -30,7 +30,7 @@ namespace vcs_SelectionRectangle
             selectionRec1.ResizePinSize = 10;  //改變ResizePin圓直徑大小
             selectionRec1.Create();
 
-            string filename = @"C:\______test_files1\elephant.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
             pictureBox1.Image = Image.FromFile(filename);
 
 

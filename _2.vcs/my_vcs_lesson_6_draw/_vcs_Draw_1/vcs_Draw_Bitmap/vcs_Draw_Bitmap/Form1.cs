@@ -20,7 +20,7 @@ namespace vcs_Draw_Bitmap
         Bitmap bitmap1;
         Font f;
 
-        string filename = @"C:\______test_files1\picture1.jpg";
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
 
         public Form1()
         {
@@ -111,7 +111,7 @@ namespace vcs_Draw_Bitmap
         {
 
             //Bitmap 經過 Rotate後, 會改變其寬高
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);
             richTextBox1.Text += "W = " + bitmap1.Width.ToString() + ", H = " + bitmap1.Height.ToString() + "\n";
 
@@ -127,7 +127,7 @@ namespace vcs_Draw_Bitmap
             richTextBox1.Text += "將Bitmap的資料放到剪貼簿裏\n";
 
 
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             pictureBox1.Image = bitmap1;
 
@@ -157,7 +157,7 @@ namespace vcs_Draw_Bitmap
             //一個大bitmap貼上多個小bitmap
 
             //小圖
-            string filename = @"C:\______test_files1\__pic\_angry_bird\AB_red.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\AB_red.jpg";
 
             //大bitmap
             Bitmap bitmap1 = new Bitmap(pictureBox1.Width, pictureBox1.Height);
@@ -206,7 +206,7 @@ namespace vcs_Draw_Bitmap
             richTextBox1.Text += "clone語法\t";
             richTextBox1.Text += "從bitmap1抓取一部分貼到bitmap2上\n";
 
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             pictureBox1.Image = bitmap1;
 
@@ -276,7 +276,7 @@ namespace vcs_Draw_Bitmap
         private void button11_Click(object sender, EventArgs e)
         {
             //改變Bitmap大小
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Image image = Image.FromFile(filename);
 
             int W1 = image.Width;
@@ -389,7 +389,7 @@ namespace vcs_Draw_Bitmap
 
             //設置圖像分辨率
 
-            filename = @"C:\______test_files1\elephant.jpg";
+            filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
             Bitmap bmp = new Bitmap(filename);
 
             int W = bmp.Width;
@@ -436,7 +436,7 @@ namespace vcs_Draw_Bitmap
         {
             //設定bmp檔之位元深度
             //讀取圖檔, 先放在Bitmap裏
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Image.FromFile(filename);	//Image.FromFile出來的是Image格式
             pictureBox1.Image = bitmap1;
 
@@ -479,7 +479,7 @@ namespace vcs_Draw_Bitmap
         private void button20_Click(object sender, EventArgs e)
         {
             //改變圖片透明度
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Bitmap bitmap1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
             Bitmap bitmap80 = returnAlpha(bitmap1, 80);
             Bitmap bitmap160 = returnAlpha(bitmap1, 160);
@@ -529,7 +529,7 @@ namespace vcs_Draw_Bitmap
         {
             //調整影像大小 1
             //使用 C# 中的 Bitmap 類調整影象大小
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Image image1 = Image.FromFile(filename);
             Bitmap bitmap1 = new Bitmap(image1);
             //Image image2 = resizeImage(bitmap1, new Size(image1.Width / 2, image1.Height / 2));
@@ -542,7 +542,7 @@ namespace vcs_Draw_Bitmap
         {
             //調整影像大小 2
             //使用 C# 中的 Graphics.DrawImage() 函式調整影象大小
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Image image1 = Image.FromFile(filename);
             Bitmap bitmap1 = new Bitmap(image1);
             Image image2 = resizeImage(bitmap1, new Size(200, 200));
@@ -590,7 +590,7 @@ namespace vcs_Draw_Bitmap
         private void button24_Click(object sender, EventArgs e)
         {
             //MakeTransparent 使用 去背效果1
-            string filename = @"C:\______test_files1\__pic\banner_ims.png";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\banner_ims.png";
             Bitmap bitmap2 = (Bitmap)Image.FromFile(filename);	//給不透明使用
             Bitmap bitmap3 = (Bitmap)Image.FromFile(filename);	//給透明使用
 
@@ -617,7 +617,7 @@ namespace vcs_Draw_Bitmap
 
             pictureBox1.BackColor = Color.Pink;
 
-            string filename = @"C:\______test_files1\__pic\_angry_bird\thumb-1920-283652.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_angry_bird\thumb-1920-283652.jpg";
 
             GraphicsUnit units = GraphicsUnit.Pixel;
 
@@ -699,7 +699,7 @@ namespace vcs_Draw_Bitmap
 
             //MakeTransparent 功能
 
-            string filename = @"C:\______test_files1\__pic\lion.bmp";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\lion.bmp";
 
             richTextBox1.Text += "無 MakeTransparent\n";
             Bitmap bmp1 = (Bitmap)Bitmap.FromFile(filename);	//Bitmap.FromFile出來的是Image格式
@@ -736,7 +736,7 @@ namespace vcs_Draw_Bitmap
 
             open_new_file();
 
-            string filename = @"C:\______test_files1\__pic\banner_ims.png";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\banner_ims.png";
             Bitmap bmp0 = (Bitmap)Image.FromFile(filename);
             Bitmap bmp1 = (Bitmap)bmp0.Clone();
 
@@ -756,7 +756,7 @@ namespace vcs_Draw_Bitmap
             open_new_file();
             g.Clear(Color.Pink);
 
-            string filename = @"C:\______test_files1\__pic\_logo\cloud.png";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_logo\cloud.png";
             Bitmap bmp0 = (Bitmap)Image.FromFile(filename);
             Bitmap bmp1 = (Bitmap)bmp0.Clone();
 
@@ -767,7 +767,7 @@ namespace vcs_Draw_Bitmap
             g.DrawImage(bmp1, 0, 210, bmp1.Width, bmp1.Height);
 
 
-            filename = @"C:\______test_files1\__pic\_logo\cloud.bmp";
+            filename = @"C:\_git\vcs\_1.data\______test_files1\__pic\_logo\cloud.bmp";
             bmp0 = (Bitmap)Image.FromFile(filename);
             bmp1 = (Bitmap)bmp0.Clone();
 
@@ -783,7 +783,7 @@ namespace vcs_Draw_Bitmap
         private void timer1_Tick(object sender, EventArgs e)
         {
             //讀取圖檔, 多一層Image結構
-            string filename = @"C:\______test_files1\picture1.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
             Image image = Image.FromFile(filename);
             //pictureBox1.Image = image;
 

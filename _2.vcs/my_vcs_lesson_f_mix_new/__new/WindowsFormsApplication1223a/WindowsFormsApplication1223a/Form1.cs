@@ -13,7 +13,7 @@ namespace WindowsFormsApplication1223a
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files1\airplane.bmp";
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\airplane.bmp";
 
         int x_st;
         int y_st;

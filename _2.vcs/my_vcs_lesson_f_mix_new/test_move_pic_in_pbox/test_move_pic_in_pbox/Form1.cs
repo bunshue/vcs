@@ -11,7 +11,7 @@ namespace test_move_pic_in_pbox
 {
     public partial class Form1 : Form
     {
-        string filename = @"C:\______test_files1\picture1.jpg";
+        string filename = @"C:\_git\vcs\_1.data\______test_files1\picture1.jpg";
         Bitmap bitmap0; //放底圖
         Bitmap bitmap1; //放貼上的小圖
         Graphics g;

@@ -112,7 +112,7 @@ namespace vcs_Draw3C
             this.pictureBox1.KeyDown += new KeyEventHandler(pictureBox1_KeyDown);
             this.ActiveControl = this.pictureBox1;//选中pictureBox1，不然没法触发事件
 
-            string filename1 = @"C:\______test_files1\__RW\_png\butterfly.png";
+            string filename1 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_png\butterfly.png";
 
             Rectangle rect = new Rectangle(0, 0, this.pictureBox1.ClientSize.Width, this.pictureBox1.ClientSize.Height);
             npc = new NPC(new Bitmap(filename1));
@@ -123,7 +123,7 @@ namespace vcs_Draw3C
             //追逐滑鼠游標的蝴蝶 SP
 
             //漫遊演算法 ST
-            string filename2 = @"C:\______test_files1\__RW\_png\ladybug.png";
+            string filename2 = @"C:\_git\vcs\_1.data\______test_files1\__RW\_png\ladybug.png";
             gc = new GC_2D_Wander(new Bitmap(filename2));
             cir = new GC_2D_MovableCircle(20, new Point(this.pictureBox2.ClientSize.Width / 2, this.pictureBox2.ClientSize.Height / 2));
             gc.Update();

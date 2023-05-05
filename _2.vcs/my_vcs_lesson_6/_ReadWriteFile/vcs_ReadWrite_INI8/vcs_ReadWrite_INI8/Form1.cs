@@ -44,14 +44,14 @@ namespace vcs_ReadWrite_INI8
         private void button1_Click(object sender, EventArgs e)
         {
             //read
-            string filename = @"C:\______test_files1\__RW\_ini\ConnectString.ini";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_ini\ConnectString.ini";
             richTextBox1.Text += IniReadValue("ConnectString", "DataBase", filename) + "\n";
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             //write
-            string filename = @"C:\______test_files1\__RW\_ini\ConnectString2.ini";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\__RW\_ini\ConnectString2.ini";
             IniWriteValue("ConnectString", "DataBase", this.textBox1.Text, filename);
         }
     }

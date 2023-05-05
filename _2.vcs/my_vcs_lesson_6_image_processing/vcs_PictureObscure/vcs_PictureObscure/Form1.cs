@@ -203,7 +203,7 @@ namespace vcs_PictureObscure
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string filename = @"C:\______test_files1\elephant.jpg";
+            string filename = @"C:\_git\vcs\_1.data\______test_files1\elephant.jpg";
             try
             {
                 // Load the image without locking its file.

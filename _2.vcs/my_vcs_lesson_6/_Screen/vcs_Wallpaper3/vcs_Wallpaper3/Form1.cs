@@ -38,10 +38,10 @@ namespace vcs_Wallpaper3
             //新增圖檔
             //字串陣列的寫法(一維)：
             string[] files = { 
-            @"C:\______test_files1\__pic\_MU\poster_01.jpg",
-            @"C:\______test_files1\__pic\_MU\poster_02.jpg",
-            @"C:\______test_files1\__pic\_MU\poster_03.jpg",
-            @"C:\______test_files1\__pic\_MU\poster_04.jpg"
+            @"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_01.jpg",
+            @"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_02.jpg",
+            @"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_03.jpg",
+            @"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_04.jpg"
             };
 
             //listView1.Items.Clear();

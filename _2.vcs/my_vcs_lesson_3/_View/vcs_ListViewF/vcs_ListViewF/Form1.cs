@@ -24,13 +24,13 @@ namespace vcs_ListViewF
         private void LoadImageList()
         {
             var list = new List<string>();
-            list.Add(@"C:\______test_files1\__pic\_MU\poster_01.jpg");
-            list.Add(@"C:\______test_files1\__pic\_MU\poster_02.jpg");
-            list.Add(@"C:\______test_files1\__pic\_MU\poster_03.jpg");
-            list.Add(@"C:\______test_files1\__pic\_MU\poster_04.jpg");
-            list.Add(@"C:\______test_files1\__pic\_MU\poster_05.jpg");
-            list.Add(@"C:\______test_files1\__pic\_MU\poster_06.jpg");
-            list.Add(@"C:\______test_files1\__pic\_MU\poster_07.jpg");
+            list.Add(@"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_01.jpg");
+            list.Add(@"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_02.jpg");
+            list.Add(@"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_03.jpg");
+            list.Add(@"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_04.jpg");
+            list.Add(@"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_05.jpg");
+            list.Add(@"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_06.jpg");
+            list.Add(@"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_07.jpg");
 
             ImageList imglist = new ImageList();
             imglist.ImageSize = new Size(200, 200);
@@ -110,10 +110,10 @@ namespace vcs_ListViewF
             ImageList imageListLarge = new ImageList();
 
             // Initialize the ImageList objects with bitmaps.
-            imageListSmall.Images.Add(Bitmap.FromFile(@"C:\______test_files1\__pic\_MU\poster_01.jpg"));
-            imageListSmall.Images.Add(Bitmap.FromFile(@"C:\______test_files1\__pic\_MU\poster_02.jpg"));
-            imageListLarge.Images.Add(Bitmap.FromFile(@"C:\______test_files1\__pic\_MU\poster_03.jpg"));
-            imageListLarge.Images.Add(Bitmap.FromFile(@"C:\______test_files1\__pic\_MU\poster_04.jpg"));
+            imageListSmall.Images.Add(Bitmap.FromFile(@"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_01.jpg"));
+            imageListSmall.Images.Add(Bitmap.FromFile(@"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_02.jpg"));
+            imageListLarge.Images.Add(Bitmap.FromFile(@"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_03.jpg"));
+            imageListLarge.Images.Add(Bitmap.FromFile(@"C:\_git\vcs\_1.data\______test_files1\__pic\_MU\poster_04.jpg"));
 
             //Assign the ImageList objects to the ListView.
             listView1.LargeImageList = imageListLarge;
