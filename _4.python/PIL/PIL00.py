@@ -1,5 +1,11 @@
+'''
+PIP 基本使用
+
+顯示圖片
+
 #PIL有九種不同模式: 1，L，P，RGB，RGBA，CMYK，YCbCr，I，F。
 #呼叫預設程式開啟圖片
+'''
 
 import numpy as np
 import torchvision.transforms as transforms

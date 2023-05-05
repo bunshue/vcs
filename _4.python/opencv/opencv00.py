@@ -1,9 +1,18 @@
+'''
+OpenCV 基本使用
+
+顯示圖片
+
+播放檔案
+
+'''
+
 filename = 'C:/_git/vcs/_1.data/______test_files1/_emgu/lena.jpg'
 #filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
 
 import cv2
 
-print('使用 OpenCV 顯示一圖')
+print('使用 OpenCV 顯示圖片')
 image = cv2.imread(filename)	#讀取本機圖片
 
 cv2.imshow('Show Picture', image) #顯示圖片
@@ -13,13 +22,20 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 
-'''
-print('使用 matplotlib 顯示一圖')
-import matplotlib.pyplot as plt
-import matplotlib.image as img
+video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
+vid = cv2.VideoCapture(video_filename)
+#In the [your_file_name] mention the Video File that you want to process and detect the Face in
 
-image = img.imread(filename)
+while True:
+    ret, frame = vid.read()
+    if ret == True:
+        #frame = cv2.resize(frame,(int(frame.shape[1]/2),int(frame.shape[0]/2)))    #調整畫面大小
+        cv2.imshow('Video', frame)
+        if cv2.waitKey(1) == 27:
+            break
+    else:
+        break
 
-plt.imshow(image)	#顯示圖片, 兩行都要
-plt.show()              #顯示圖片, 兩行都要
-'''
+vid.release()
+cv2.destroyAllWindows()
+

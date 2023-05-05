@@ -4,7 +4,7 @@ import cv2
 import numpy as np
 
 print("框出照片中的人臉")
-filename = 'C:/_git/vcs/_1.data/______test_files1/human2.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/human1.jpg'
 
 # OpenCV 人臉識別分類器 Haar Cascase
 xml_filename1 = 'C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml'

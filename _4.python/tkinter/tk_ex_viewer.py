@@ -3,8 +3,7 @@
 import tkinter as tk
 from PIL import Image, ImageTk
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/human2.jpg'
-
+filename = 'C:/_git/vcs/_1.data/______test_files1/human1.jpg'
 
 window = tk.Tk()
 

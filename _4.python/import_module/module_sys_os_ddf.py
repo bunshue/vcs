@@ -349,7 +349,7 @@ for dcmfile in testfiles:
 
 import os
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/human2.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/human1.jpg'
 
 file, ext = os.path.splitext(filename)
 

@@ -969,11 +969,11 @@ print('Entry內容 :', entry_string.get())	#TextBox取值
 
 ----------------常用的程式片段 ST cccc----------------
 
-filename = 'C:/______test_files2/human2.jpg'
+filename = 'C:/______test_files2/human1.jpg'
 filename = 'C:/______test_files2/file2.txt'
 filename = 'C:/______test_files3/output.avi'
 
-filename1 = 'C:/______test_files2/human2.jpg'
+filename1 = 'C:/______test_files2/human1.jpg'
 filename2 = 'C:/______test_files2/poetry2.txt'
 filename3 = 'C:/______test_files2'
 

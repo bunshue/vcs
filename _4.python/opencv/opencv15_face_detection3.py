@@ -14,14 +14,17 @@ vid = cv2.VideoCapture(video_filename)
 
 while True:
     ret, frame = vid.read()
-    frame = cv2.resize(frame,(int(frame.shape[1]/2),int(frame.shape[0]/2)))
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)       
-    faces = face_classifier.detectMultiScale(gray, 1.3, 5)
-    for (x,y,w,h) in faces:
-        cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)        
-    cv2.imshow('Video', frame)
-    
-    if cv2.waitKey(1) == 27:
+    if ret == True:
+        #frame = cv2.resize(frame,(int(frame.shape[1]/2),int(frame.shape[0]/2))) #調整畫面大小
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        faces = face_classifier.detectMultiScale(gray, 1.3, 5)
+        for (x,y,w,h) in faces:
+            cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
+        cv2.imshow('Video', frame)
+
+        if cv2.waitKey(1) == 27:
+            break
+    else:
         break
 
 vid.release()
