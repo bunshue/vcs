@@ -46,7 +46,7 @@ if len(faces):
 cv2.imshow('image', image)
 
 #另存新檔
-filename2 = 'C:/______test_files3/human_face.jpg'
+filename2 = 'C:/_git/vcs/_1.data/______test_files2/human_face.jpg'
 cv2.imwrite(filename2, image)	#寫入本機圖片
 
 print('wait kere')

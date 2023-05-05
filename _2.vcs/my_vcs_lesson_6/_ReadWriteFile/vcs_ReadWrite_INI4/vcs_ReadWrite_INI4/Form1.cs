@@ -17,7 +17,7 @@ namespace vcs_ReadWrite_INI4
 {
     public partial class Form1 : Form
     {
-        string ini_filename = "c://______test_files1//__RW//_ini//vcs_ReadWrite_INI4.ini";
+        string ini_filename = @"C:/_git/vcs/_1.data/______test_files1/__RW/_ini/vcs_ReadWrite_INI4.ini";
 
         public Form1()
         {

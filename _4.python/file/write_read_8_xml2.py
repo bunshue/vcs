@@ -44,8 +44,8 @@ for country in root.findall('country'):
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/country_data.xml'
 
-output_filename1 = 'C:/______test_files3/country_data_out1.xml'
-output_filename2 = 'C:/______test_files3/country_data_out2.xml'
+output_filename1 = 'C:/_git/vcs/_1.data/______test_files2/country_data_out1.xml'
+output_filename2 = 'C:/_git/vcs/_1.data/______test_files2/country_data_out2.xml'
 
 import xml.etree.ElementTree as ET
 tree = ET.parse(filename) #解析xml檔，回傳ElementTree物件

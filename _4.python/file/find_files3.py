@@ -34,7 +34,7 @@ def read_files(path, showProgress = False, readPixelData=False, force=False):
 
 print('撈出資料夾下所有檔案')
 '''
-foldername = 'C:/______test_files3'
+foldername = 'C:/_git/vcs/_1.data/______test_files2'
 find_files(foldername)
 '''
 

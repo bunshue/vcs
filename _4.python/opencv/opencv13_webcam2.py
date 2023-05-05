@@ -1,6 +1,6 @@
 # 目前 webcam 僅 x64 電腦可用
 
-filename = 'C:/______test_files3/output.avi'
+filename = 'C:/_git/vcs/_1.data/______test_files2/output.avi'
 
 import cv2
 import time

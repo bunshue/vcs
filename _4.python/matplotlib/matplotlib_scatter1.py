@@ -33,7 +33,7 @@ import matplotlib.pyplot as plt
 s = plt.scatter([1, 2, 3], [4, 5, 6])
 s.set_urls(['https://www.bbc.com/news', 'https://www.google.com/', None])
 '''
-filename = 'C:/______test_files3/scatter.svg'
+filename = 'C:/_git/vcs/_1.data/______test_files2/scatter.svg'
 fig.savefig(filename)
 print('已存圖' + filename)
 '''

@@ -4,7 +4,7 @@ import sys, os, glob
 from PIL import Image, ImageDraw
 
 source_dir = 'C:/_git/vcs/_1.data/______test_files1/source_pic'
-target_dir = 'C:/______test_files3/resized_pic'
+target_dir = 'C:/_git/vcs/_1.data/______test_files2/resized_pic'
 
 image_width = 800
 

@@ -53,7 +53,7 @@ def recurse_tree(tree, dataset, parent, hide=False):
                 tree.hlist.hide_entry(item_id)
                 recurse_tree(tree, dataset, item_id, hide=True)
 
-filename = 'C:/______test_files/__RW/_dicom/CT_small.dcm'
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/CT_small.dcm'
 
 window = tk.Tk()
 window.title("DICOM tree viewer - " + filename)

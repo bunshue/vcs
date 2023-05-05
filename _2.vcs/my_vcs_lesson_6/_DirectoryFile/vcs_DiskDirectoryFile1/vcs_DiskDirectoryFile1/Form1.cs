@@ -323,7 +323,7 @@ namespace vcs_DiskDirectoryFile1
         private void bt_file00_Click(object sender, EventArgs e)
         {
             string filename1 = @"C:\_git\vcs\_1.data\______test_files1\aaaaaaa.txt";
-            string filename2 = "C:\\aaaa.txt";
+            string filename2 = @"C:/_git/vcs/_1.data/______test_files2/aaaa.txt";
 
             if (File.Exists(filename1) == false)            //確認檔案是否存在
                 richTextBox1.Text += "檔案: " + filename1 + " 不存在\n";
@@ -672,7 +672,7 @@ namespace vcs_DiskDirectoryFile1
         private void bt_dir01_Click(object sender, EventArgs e)
         {
             //確認資料夾是否存在
-            string Path = "C:\\______test_files_file_name2\\aaaa\\bbbb";
+            string Path = @"C:/_git/vcs/_1.data/______test_files1/aaaa/bbbb";
             if (Directory.Exists(Path) == false)    //確認資料夾是否存在
                 richTextBox1.Text += "資料夾: " + Path + " 不存在\n";
             else
@@ -683,7 +683,7 @@ namespace vcs_DiskDirectoryFile1
         private void bt_dir02_Click(object sender, EventArgs e)
         {
             //刪除資料夾
-            string Path = "C:\\______test_files_file_name2";
+            string Path = @"C:/_git/vcs/_1.data/______test_files_file_name2";
             /*
             if (Directory.Exists(Path) == false)    //確認資料夾是否存在
                 richTextBox1.Text += "資料夾: " + Path + " 不存在，不能刪除\n";
@@ -723,7 +723,7 @@ namespace vcs_DiskDirectoryFile1
         private void bt_dir04_Click(object sender, EventArgs e)
         {
             //建立一個新資料夾
-            string newPath = "C:\\______test_files_file_name2\\aaaa\\bbbb";
+            string newPath = @"C:/_git/vcs/_1.data/______test_files_file_name2/aaaa/bbbb";
             if (Directory.Exists(newPath) == false)     //確認資料夾是否存在
             {
                 Directory.CreateDirectory(newPath);
@@ -737,8 +737,8 @@ namespace vcs_DiskDirectoryFile1
         private void bt_dir05_Click(object sender, EventArgs e)
         {
             //未完成
-            string Path_old = "C:\\______test_files_file_name1";
-            string Path_new = "C:\\______test_files_file_name2";
+            string Path_old = @"C:/_git/vcs/_1.data/______test_files_file_name1";
+            string Path_new = @"C:/_git/vcs/_1.data/______test_files_file_name2";
             if (Directory.Exists(Path_old) == false)    //確認資料夾是否存在
             {
                 richTextBox1.Text += "原始資料夾: " + Path_old + " 不存在, 不能拷貝\n";
@@ -758,8 +758,8 @@ namespace vcs_DiskDirectoryFile1
 
         private void bt_dir06_Click(object sender, EventArgs e)
         {
-            string Path_old = "C:\\______test_files_file_name2";
-            string Path_new = "C:\\______test_files_file_name3";
+            string Path_old = @"C:/_git/vcs/_1.data/______test_files_file_name2";
+            string Path_new = @"C:/_git/vcs/_1.data/______test_files_file_name3";
             if (Directory.Exists(Path_old) == false)    //確認資料夾是否存在
             {
                 richTextBox1.Text += "原始資料夾: " + Path_old + " 不存在, 不能拷貝\n";
@@ -794,7 +794,7 @@ namespace vcs_DiskDirectoryFile1
         private void bt_dir07_Click(object sender, EventArgs e)
         {
             //刪除資料夾
-            string target_dir = "C:\\______test_files_file_name2";
+            string target_dir = @"C:/_git/vcs/_1.data/______test_files_file_name2";
 
             if (Directory.Exists(target_dir))       //確認資料夾是否存在
             {
@@ -1103,12 +1103,12 @@ namespace vcs_DiskDirectoryFile1
             richTextBox1.Text += "建立時間檔案：" + filename + "\n";
 
             //儲存檔案1
-            FileInfo f = new FileInfo(@"C:\_git\vcs\_1.data\______test_files3\vcs_test.txt");
+            FileInfo f = new FileInfo(@"C:\_git\vcs\_1.data\______test_files2\vcs_test.txt");
             StreamWriter sw1 = f.CreateText();
             sw1.Write(richTextBox1.Text);
             sw1.Flush();
             sw1.Close();
-            richTextBox1.Text += "儲存檔案1 OK，檔名：C:\_git\vcs\_1.data\______test_files3\vcs_test.txt\n";
+            richTextBox1.Text += "儲存檔案1 OK，檔名：C:\_git\vcs\_1.data\______test_files2\vcs_test.txt\n";
 
             //儲存檔案2
             string filename2 = @"C:\_git\vcs\_1.data\______test_files1\SaveDataToFile.txt";
@@ -1183,7 +1183,7 @@ namespace vcs_DiskDirectoryFile1
         private void bt_write02_Click(object sender, EventArgs e)
         {
             //string wmi_data_filename = "wmi-" + DateTime.Now.ToString("yyyy-MMdd-HHmm") + ".txt";
-            string wmi_data_filename = "C:\\vcs-" + DateTime.Now.ToString("yyyy-MMdd-HHmm") + ".txt";
+            string wmi_data_filename = @"C:/_git/vcs/_1.data/______test_files2/vcs-" + DateTime.Now.ToString("yyyy-MMdd-HHmm") + ".txt";
             if (File.Exists(wmi_data_filename) == false)
             {
                 MessageBox.Show("檔案 " + wmi_data_filename + " 不存在，製作一個。");
@@ -1381,7 +1381,7 @@ namespace vcs_DiskDirectoryFile1
             openFileDialog1.FilterIndex = 1;
             openFileDialog1.RestoreDirectory = true;
 
-            //openFileDialog1.InitialDirectory = "c:\\";
+            //openFileDialog1.InitialDirectory = @"C:/_git/vcs/_1.data/______test_files2";
             //openFileDialog1.InitialDirectory = Directory.GetCurrentDirectory();         //從目前目錄開始尋找檔案
             openFileDialog1.InitialDirectory = @"C:\_git\vcs\_1.data\______test_files1\";
             openFileDialog1.RestoreDirectory = true;

@@ -7,19 +7,19 @@ print("現在路徑："+cur_path)
 
 '''
 #拷貝檔案
-destfile = 'C:/______test_files3/' + "ccccc.py"
+destfile = 'C:/_git/vcs/_1.data/______test_files2/' + "ccccc.py"
 print("拷貝檔案 " + destfile)
 shutil.copy("test10_new12_file2.py",destfile )  # 檔案複製
 
 print("拷貝檔案 " + destfile)
-destfile = 'C:/______test_files3/' + "ccccc2.py"
+destfile = 'C:/_git/vcs/_1.data/______test_files2/' + "ccccc2.py"
 shutil.copyfile('test10_new12_file2.py', destfile)  # 檔案複製
 '''
 
 #目錄拷貝
 import shutil
 source_dir = 'C:/_git/vcs/_1.data/______test_files1/source_pic'
-dest_dir = 'C:/______test_files3/source_pic'
+dest_dir = 'C:/_git/vcs/_1.data/______test_files2/source_pic'
 print('cp -r ' + source_dir + ' ' + dest_dir)
 #shutil.copytree(source_dir, dest_dir)  # 目錄複製
 
@@ -189,7 +189,7 @@ for f in allfiles:
   print('前檔名 : ' + mainname)
   print('副檔名 : ' + extname)
 
-  targetfolder = 'C:/______test_files3'
+  targetfolder = 'C:/_git/vcs/_1.data/______test_files2'
   targetfile = targetfolder + '/' + str(imageno) + '.' + extname
 
   print('新檔名 : ' + targetfile)
@@ -248,7 +248,7 @@ print(os.curdir)
 
 
 
-foldername = 'C:\______test_files3'
+foldername = 'C:/_git/vcs/_1.data/______test_files2'
 
 filenames = os.listdir(foldername)
 print(filenames)
@@ -299,7 +299,7 @@ def testdir(foldername):
             elif os.path.isdir(fullname):
                 testdir(fullname)
 
-foldername = 'C:\______test_files3'
+foldername = 'C:/_git/vcs/_1.data/______test_files2'
 testdir(foldername)
 
 
@@ -327,7 +327,7 @@ def walktree(top, callback):
 def visitfile(file):
     print('visiting', file)
 
-foldername = 'C:/______test_files3'
+foldername = 'C:/_git/vcs/_1.data/______test_files2'
 walktree(foldername, visitfile)
 
 

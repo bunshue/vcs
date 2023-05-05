@@ -73,7 +73,7 @@ namespace vcs_ReadWrite_INI1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string filename = "c://______test_files1//__RW//_ini//vcs_ReadWrite_INI1c.ini";
+            string filename = @"C:/_git/vcs/_1.data/______test_files1/__RW/_ini/vcs_ReadWrite_INI1c.ini";
             richTextBox1.Text += "Write ini data to " + filename + "\n";
 
             string strName;
@@ -86,7 +86,7 @@ namespace vcs_ReadWrite_INI1
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string filename = "c://______test_files1//__RW//_ini//vcs_ReadWrite_INI1c.ini";
+            string filename = @"C:/_git/vcs/_1.data/______test_files1/__RW/_ini/vcs_ReadWrite_INI1c.ini";
             richTextBox1.Text += "Read ini data from " + filename + "\n";
 
             //TBD

@@ -1,6 +1,6 @@
 #各種檔案寫讀範例 txt 1
 
-filename_rw1 = 'C:/______test_files3/sample1.txt'
+filename_rw1 = 'C:/_git/vcs/_1.data/______test_files2/sample1.txt'
 
 print("將字串寫入檔案 : " + filename_rw1)
 fo = open(filename_rw1, 'w')
@@ -51,7 +51,7 @@ print(str3)  # b'Welcome\n'
 
 fo.close()
 
-filename_rw2 = 'C:/______test_files3/sample2.txt'
+filename_rw2 = 'C:/_git/vcs/_1.data/______test_files2/sample2.txt'
 
 print("寫入檔案 : " + filename_rw2)
 fo = open(filename_rw2, "w")
@@ -79,7 +79,7 @@ str = fo.read(10);
 print("讀取10拜 : ", str)
 fo.close()
 
-filename_rw3 = 'C:/______test_files3/file.bin'
+filename_rw3 = 'C:/_git/vcs/_1.data/______test_files2/file.bin'
 
 print("建立一個檔案 binary, 檔名 : " + filename_rw3)
 content='''Hello Python
@@ -96,7 +96,7 @@ with open(filename_rw3,'rb') as fo:
     content=fo.read().decode("utf-8") 
     print(content) 
 
-filename1 = 'C:/______test_files3/file1.txt'
+filename1 = 'C:/_git/vcs/_1.data/______test_files2/file1.txt'
 
 print("建立一個檔案")
 
@@ -174,14 +174,14 @@ fo.close()
 #各種檔案寫讀範例 txt 2
 
 print("附加模式寫檔案")
-filename_w = 'C:/______test_files3/TestFileW1.txt'
+filename_w = 'C:/_git/vcs/_1.data/______test_files2/TestFileW1.txt'
 fo = open(filename_w, "a")
 data = "123456789\n"
 fo.write(data)
 fo.close()
 
 print("寫入檔案範例")
-filename_w = 'C:/______test_files3/TestFileW2.txt'
+filename_w = 'C:/_git/vcs/_1.data/______test_files2/TestFileW2.txt'
 
 #寫資料到檔案中
 #打開一個文件
@@ -200,7 +200,7 @@ print("讀取一檔並將資料寫到另檔的範例")
 #python讀和寫文件
 
 filename_r = 'C:/_git/vcs/_1.data/______test_files1/poetry.txt'
-filename_w = 'C:/______test_files3/poetry_another.txt'
+filename_w = 'C:/_git/vcs/_1.data/______test_files2/poetry_another.txt'
 
 with open(filename_r, 'rt', encoding = 'utf8') as fo:
     data = fo.read()

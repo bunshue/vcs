@@ -15,11 +15,9 @@ namespace vcs_Remove_Bin_Obj
     {
         List<string> folder_name = new List<string>();      //宣告string型態的List
         List<string> filename_rename = new List<string>();  //宣告string型態的List
-        //string search_path = string.Empty;
-        string search_path = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\vcs_ReadWrite_TXT";
+        string search_path = string.Empty;
         //string search_path = @"C:\_git\vcs\_2.vcs";
-        //string specified_search_path = String.Empty;
-        string specified_search_path = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\vcs_ReadWrite_TXT";
+        string specified_search_path = String.Empty;
 
         int total_show_empty_folder_cnt = 0;
         int total_delete_empty_folder_cnt = 0;
@@ -84,17 +82,17 @@ namespace vcs_Remove_Bin_Obj
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             //取得目前所在路徑
-            //string currentPath = Directory.GetCurrentDirectory();
-            string currentPath = search_path;
+            string currentPath = Directory.GetCurrentDirectory();
 
             this.Text = "目前位置 : " + currentPath;
             search_path = currentPath;
+            specified_search_path = currentPath;
             lb_path.Text = search_path;
             lb_main_mesg.Text = "";
 
             this.Size = new Size(900, 820);
 
-            tb_string_old.Text = @"C:/______test_files2/";
+            tb_string_old.Text = @"C:/_git/vcs/_1.data/______test_files2";
             tb_string_new.Text = @"C:/_git/vcs/_1.data/______test_files1/";
         }
 
@@ -115,7 +113,7 @@ namespace vcs_Remove_Bin_Obj
             richTextBox1.Text += "目前所在路徑: " + currentPath + "\n";
 
             //確認資料夾是否存在
-            string Path = "C:\\______test_files_file_name2\\aaaa\\bbbb";
+            string Path = @"C:/_git/vcs/_1.data/______test_files2/aaaa/bbbb";
             if (Directory.Exists(Path) == false)    //確認資料夾是否存在
                 richTextBox1.Text += "資料夾: " + Path + " 不存在\n";
             else
@@ -527,7 +525,7 @@ namespace vcs_Remove_Bin_Obj
             richTextBox1.Text += "目前所在路徑: " + currentPath + "\n";
 
             //確認資料夾是否存在
-            string Path = "C:\\______test_files_file_name2\\aaaa\\bbbb";
+            string Path = @"C:/_git/vcs/_1.data/______test_files2/aaaa/bbbb";
             if (Directory.Exists(Path) == false)    //確認資料夾是否存在
                 richTextBox1.Text += "資料夾: " + Path + " 不存在\n";
             else
@@ -696,7 +694,7 @@ namespace vcs_Remove_Bin_Obj
             richTextBox1.Text += "目前所在路徑: " + currentPath + "\n";
 
             //確認資料夾是否存在
-            string Path = "C:\\______test_files_file_name2\\aaaa\\bbbb";
+            string Path = @"C:/_git/vcs/_1.data/______test_files2/aaaa/bbbb";
             if (Directory.Exists(Path) == false)    //確認資料夾是否存在
                 richTextBox1.Text += "資料夾: " + Path + " 不存在\n";
             else
@@ -1209,7 +1207,6 @@ namespace vcs_Remove_Bin_Obj
             //資料夾內 檔案置換文字
 
             //撈出所有圖片檔 並存成一個List
-            //string foldername = @"C:\_git\vcs\_2.vcs\my_vcs_lesson_6\_ReadWriteFile\vcs_ReadWrite_TXT";
             string foldername = specified_search_path;
             if (foldername == "")
             {
@@ -1224,7 +1221,7 @@ namespace vcs_Remove_Bin_Obj
             int len = filenames.Count;
             richTextBox1.Text += "找到檔案個數 : " + len.ToString() + "\n";
 
-            //private Icon icon1 = new Icon(@"C:\______test_files\_icon\快.ico");
+            //private Icon icon1 = new Icon(@"C:/_git/vcs/_1.data/______test_files1/_icon/快.ico");
             string pattern1 = string_old;
             string pattern2 = string_new;
 

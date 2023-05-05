@@ -1,7 +1,7 @@
 from pytube import YouTube
 
 #下載資料夾
-foldername = 'C:/______test_files3/youtube_download'
+foldername = 'C:/_git/vcs/_1.data/______test_files2/youtube_download'
 
 # 超好用的10個Win10小技巧，學會讓你事半功倍！ | 零度解說
 url = 'https://www.youtube.com/watch?v=36asE86iGmQ'

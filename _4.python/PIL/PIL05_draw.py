@@ -25,7 +25,7 @@ draw = ImageDraw.Draw(img)
 #寫字
 draw.text((0,0), mesg, (0,0,0), font)
 
-filename = 'C:/______test_files3/pil_test01.png'
+filename = 'C:/_git/vcs/_1.data/______test_files2/pil_test01.png'
 img.save(filename)
 print('已寫入檔案：' + filename)
 
@@ -77,7 +77,7 @@ dw = ImageDraw.Draw(im)
 dw.text((0,0), msg, font=font, fill=fill)
 
 #im.show()
-filename = 'C:/______test_files3/tmppic_new'
+filename = 'C:/_git/vcs/_1.data/______test_files2/tmppic_new'
 im.save(filename+'.png', 'PNG')
 print('新檔存圖, 已寫入檔案：'+filename+'.png')
 
@@ -91,8 +91,8 @@ from PIL import Image, ImageDraw, ImageFont
 selected_font = 'C:/_git/vcs/_1.data/______test_files1/ubuntu.ttf'
 
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/sample_s.jpg'
-filename2 = 'C:/______test_files3/tmppic_old.png'
-filename3 = 'C:/______test_files3/tmppic_new.png'
+filename2 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_old.png'
+filename3 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_new.png'
 
 text_msg = 'Hello, world!'
 im = Image.open(filename1)
@@ -129,7 +129,7 @@ import os, sys
 from PIL import Image, ImageDraw, ImageFont
 
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/sample.jpg'
-filename2 = 'C:/______test_files3/pil_test03.png'
+filename2 = 'C:/_git/vcs/_1.data/______test_files2/pil_test03.png'
 selected_font = 'C:/_git/vcs/_1.data/______test_files1/ubuntu.ttf'
 
 #要做浮水印的文字
@@ -169,8 +169,8 @@ from PIL import Image, ImageDraw, ImageFont
 
 selected_font = 'C:/_git/vcs/_1.data/______test_files1/ubuntu.ttf'
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/sample_s.jpg'
-filename2 = 'C:/______test_files3/tmppic_old.png'
-filename3 = 'C:/______test_files3/tmppic_new.png'
+filename2 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_old.png'
+filename3 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_new.png'
 
 
 im = Image.open(filename1)
@@ -207,8 +207,8 @@ print('新檔存圖, 已寫入檔案：'+filename3)
 from PIL import Image, ImageDraw
 
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/sample_s.jpg'
-filename2 = 'C:/______test_files3/tmppic_old.png'
-filename3 = 'C:/______test_files3/tmppic_new.png'
+filename2 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_old.png'
+filename3 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_new.png'
 
 
 im = Image.open(filename1)

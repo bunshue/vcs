@@ -3052,7 +3052,7 @@ namespace vcs_DrAP
             richTextBox1.Text += "目前所在路徑: " + currentPath + "\n";
 
             //確認資料夾是否存在
-            string Path = "C:\\______test_files_file_name2\\aaaa\\bbbb";
+            string Path = @"C:/_git/vcs/_1.data/______test_files1/aaaa/bbbb";
             if (Directory.Exists(Path) == false)    //確認資料夾是否存在
                 richTextBox1.Text += "搜尋資料夾: " + Path + " 不存在\n";
             else

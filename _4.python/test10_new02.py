@@ -138,7 +138,7 @@ st_mtime: 最後一次修改的時間。
 
 print('將檔案1的時間拷貝到檔案2')
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/aaaaaaab.txt'
-filename2 = 'C:/______test_files3/country_data_out1.xml'
+filename2 = 'C:/_git/vcs/_1.data/______test_files2/country_data_out1.xml'
    
 try:
     stat1 = os.stat(filename1)

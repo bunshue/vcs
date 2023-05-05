@@ -4,7 +4,7 @@ import sys
 def main():
     # Prompt the user to enter filenames
     f1 = 'C:/_git/vcs/_1.data/______test_files1/article.txt'
-    f2 = 'C:/______test_files3/articledddddd.txt'
+    f2 = 'C:/_git/vcs/_1.data/______test_files2/articledddddd.txt'
 
     # Check if target file exists
     if os.path.isfile(f2):

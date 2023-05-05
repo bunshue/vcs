@@ -165,7 +165,7 @@ im = plt.imshow(Z, interpolation='bilinear', cmap=cm.gray,
                 origin='lower', extent=[-3, 3, -3, 3])
 '''
 im.set_url('https://www.google.com/')
-filename = 'C:/______test_files3/image.svg'
+filename = 'C:/_git/vcs/_1.data/______test_files2/image.svg'
 fig.savefig(filename)
 print('已存圖' + filename)
 '''

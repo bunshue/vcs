@@ -7,7 +7,7 @@ import csv
 
 print("python寫資料到CSV檔 1")
 
-filename_w = 'C:/______test_files3/TestCSVFileW.csv'
+filename_w = 'C:/_git/vcs/_1.data/______test_files2/TestCSVFileW.csv'
 
 print("打開一個csv檔案 : "+filename_w)
 csvFile = open(filename_w, 'w+', newline='')
@@ -58,7 +58,7 @@ with open(filename, newline='') as csvfile:
         print(row['姓名'],row['身高'],row['體重'])
         
 import csv
-filename_w = 'C:/______test_files3/test3.csv'
+filename_w = 'C:/_git/vcs/_1.data/______test_files2/test3.csv'
 with open(filename_w, 'w', newline='') as csvfile:
     # 定義欄位
     fieldnames = ['姓名', '身高', '體重']
@@ -75,7 +75,7 @@ with open(filename_w, 'w', newline='') as csvfile:
     
 import csv
 # 開啟輸出的 csv 檔案
-filename_w = 'C:/______test_files3/test1.csv'
+filename_w = 'C:/_git/vcs/_1.data/______test_files2/test1.csv'
 with open(filename_w, 'w', newline='') as csvfile:
   # 建立 csv 檔寫入物件
   writer = csv.writer(csvfile)
@@ -96,7 +96,7 @@ csvtable = [
 ]
 
 # 開啟輸出的 csv 檔案
-filename_w = 'C:/______test_files3/test2.csv'
+filename_w = 'C:/_git/vcs/_1.data/______test_files2/test2.csv'
 with open(filename_w, 'w', newline='') as csvfile:
     # 建立 csv 檔寫入物件
     writer = csv.writer(csvfile)
@@ -147,7 +147,7 @@ with open(filename, 'r', encoding='utf-8') as f:
 
 
 
-filename_rw1 = 'C:/______test_files3/sample3.csv'
+filename_rw1 = 'C:/_git/vcs/_1.data/______test_files2/sample3.csv'
 
 import csv
 # 開啟輸出的 csv 檔案

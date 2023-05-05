@@ -13,7 +13,7 @@ scores = {'國文':{'王小明':65,'李小美':90,'陳大同':81,'林小玉':79}
 df = pd.DataFrame(scores)
 
 print("另存新檔");
-filename = 'C:/______test_files3/score_this.csv'
+filename = 'C:/_git/vcs/_1.data/______test_files2/score_this.csv'
 df.to_csv(filename, encoding='utf-8-sig')
 print("寫入完成")
 
@@ -51,7 +51,7 @@ print(data)
 
 
 
-filename = 'C:/______test_files3/score333.csv'
+filename = 'C:/_git/vcs/_1.data/______test_files2/score333.csv'
 
 import pandas as pd
 datas = [[65,92,78,83,70], [90,72,76,93,56], [81,85,91,89,77], [79,53,47,94,80]]
@@ -70,7 +70,7 @@ print(data)
 
 
 
-filename = 'C:/______test_files3/score444.json'
+filename = 'C:/_git/vcs/_1.data/______test_files2/score444.json'
 
 import pandas as pd
 datas = [[65,92,78,83,70], [90,72,76,93,56], [81,85,91,89,77], [79,53,47,94,80]]
@@ -88,7 +88,7 @@ data = pd.read_json(filename, typ='series')
 print(data)
 
 
-filename = 'C:/______test_files3/score555.xlsx'
+filename = 'C:/_git/vcs/_1.data/______test_files2/score555.xlsx'
 
 import pandas as pd
 datas = [[65,92,78,83,70], [90,72,76,93,56], [81,85,91,89,77], [79,53,47,94,80]]

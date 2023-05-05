@@ -1,7 +1,7 @@
 
 print("python寫資料到 html 檔")
 
-filename = 'C:/______test_files3/html_data.html'
+filename = 'C:/_git/vcs/_1.data/______test_files2/html_data.html'
 
 import pandas as pd
 datas = [[65,92,78,83,70], [90,72,76,93,56], [81,85,91,89,77], [79,53,47,94,80]]

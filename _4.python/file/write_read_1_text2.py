@@ -1,7 +1,7 @@
 #各種檔案寫讀範例 txt 2
 
 
-filename_rw2 = 'C:/______test_files3/sample5.txt'
+filename_rw2 = 'C:/_git/vcs/_1.data/______test_files2/sample5.txt'
 
 content='''Hello Python
 中文字測試
@@ -77,7 +77,7 @@ for line in f:
 f.close()
 '''
 
-filename_rw3 = 'C:/______test_files3/Presidents.txt'
+filename_rw3 = 'C:/_git/vcs/_1.data/______test_files2/Presidents.txt'
 
 # Open file for output
 outfile = open(filename_rw3, "w")
@@ -90,7 +90,7 @@ outfile.write("Barack Obama")
 outfile.close() # Close the output file
 
 
-filename_rw4 = 'C:/______test_files3/Info.txt'
+filename_rw4 = 'C:/_git/vcs/_1.data/______test_files2/Info.txt'
 # Open file for appending data
 outfile = open(filename_rw4, "a")
 outfile.write("\nPython is interpreted\n")
@@ -100,7 +100,7 @@ outfile.close() # Close the input file
 
 import random
 
-filename = 'C:/______test_files3/numbers.txt'
+filename = 'C:/_git/vcs/_1.data/______test_files2/numbers.txt'
 
 # Open file for writing data
 outfile = open(filename, "w")
@@ -171,7 +171,7 @@ with open(filename, "r") as file:
 
 
 print('寫入檔案')
-filename = 'C:/______test_files3/demo_en222.txt'
+filename = 'C:/_git/vcs/_1.data/______test_files2/demo_en222.txt'
 
 file = open(filename, "a")
 
