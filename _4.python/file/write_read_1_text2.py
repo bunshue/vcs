@@ -120,7 +120,7 @@ infile.close() # Close the file
 
 
 
-filename = 'C:/______test_files2/Presidents.txt'
+filename = 'C:/_git/vcs/_1.data/______test_files1/Presidents.txt'
 
 fp = open(filename, "r")
 zops = fp.readlines()
@@ -137,7 +137,7 @@ print()
 
 
 print('讀出檔案 1 英文')
-filename = 'C:/______test_files2/demo_en.txt'
+filename = 'C:/_git/vcs/_1.data/______test_files1/demo_en.txt'
 file = open(filename, "r")
 
 content = file.read()
@@ -146,7 +146,7 @@ print(content)
 file.close()
 
 print('讀出檔案 2 中文')
-filename = 'C:/______test_files2/demo_ch.txt'
+filename = 'C:/_git/vcs/_1.data/______test_files1/demo_ch.txt'
 file = open(filename, "r", encoding="utf-8")
 
 content = file.read()
@@ -155,7 +155,7 @@ print(content)
 file.close()
 
 print('讀出檔案 3')
-filename = 'C:/______test_files2/demo_en.txt'
+filename = 'C:/_git/vcs/_1.data/______test_files1/demo_en.txt'
 file = open(filename, "r")
 
 lines = file.readlines()
@@ -164,7 +164,7 @@ print(lines)
 file.close()
 
 print('讀出檔案 4')
-filename = 'C:/______test_files2/demo_en.txt'
+filename = 'C:/_git/vcs/_1.data/______test_files1/demo_en.txt'
 with open(filename, "r") as file:
     content = file.read()
     print(content)

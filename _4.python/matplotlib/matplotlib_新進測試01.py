@@ -113,7 +113,7 @@ plt.show()
 
 
 '''
-#foldername = 'C:/______test_files2/source_pic'
+#foldername = 'C:/_git/vcs/_1.data/______test_files1/source_pic'
 foldername = 'C:/______test_files2'
 
 import numpy as np

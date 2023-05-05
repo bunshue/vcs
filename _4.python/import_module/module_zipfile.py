@@ -4,8 +4,8 @@
 
 import zipfile
 
-filename = 'C:/______test_files1/_exe/ffmpeg.zip'
-#filename = 'C:/______test_files1/__pic/_ntuh.zip'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_exe/ffmpeg.zip'
+#filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_ntuh.zip'
 file_dir = './' #解壓縮目錄
 
 f = zipfile.ZipFile(filename) #開啟壓縮檔
@@ -18,7 +18,7 @@ f.close() #關檔
 
 
 print('判斷是否為一個壓縮檔')
-#filename = 'C:/______test_files2/human2.jpg'
+#filename = 'C:/_git/vcs/_1.data/______test_files1/human2.jpg'
 
 if zipfile.is_zipfile(filename):
     print('是壓縮檔')

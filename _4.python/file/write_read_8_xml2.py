@@ -1,4 +1,4 @@
-filename = 'C:/______test_files2/menu.xml'
+filename = 'C:/_git/vcs/_1.data/______test_files1/menu.xml'
 
 import xml.etree.ElementTree as ET
 
@@ -18,7 +18,7 @@ print(len(root[0])) # 早餐選項的數目
 
 
 
-filename = 'C:/______test_files2/country_data.xml'
+filename = 'C:/_git/vcs/_1.data/______test_files1/country_data.xml'
 
 tree = ET.parse(filename) # 解析xml檔，回傳ElementTree物件。
 root = tree.getroot() #獲得根節點
@@ -42,7 +42,7 @@ for country in root.findall('country'):
 
 
 
-filename = 'C:/______test_files2/country_data.xml'
+filename = 'C:/_git/vcs/_1.data/______test_files1/country_data.xml'
 
 output_filename1 = 'C:/______test_files3/country_data_out1.xml'
 output_filename2 = 'C:/______test_files3/country_data_out2.xml'

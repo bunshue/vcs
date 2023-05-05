@@ -16,8 +16,8 @@ C:/Users/070601/AppData/Local/Programs/Tesseract-OCR/tesseract.exe
 from PIL import Image
 import pytesseract
 
-#filename = 'C:/______test_files2/ocr01.png'
-filename = 'C:/______test_files2/ocr02.jpg'
+#filename = 'C:/_git/vcs/_1.data/______test_files1/ocr01.png'
+filename = 'C:/_git/vcs/_1.data/______test_files1/ocr02.jpg'
 
 pytesseract.pytesseract.tesseract_cmd = r'C:/Users/070601/AppData/Local/Programs/Tesseract-OCR/tesseract.exe'
 image = Image.open(filename)
@@ -33,7 +33,7 @@ OCR 辨識繁體中文
 下載並將檔案放到 C:\Program Files\Tesseract-OCR\tessdata 中，修改 lang 參數變成 chi_tra 就可以啦
 '''
 
-filename = 'C:/______test_files2/ocr03.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/ocr03.jpg'
 
 pytesseract.pytesseract.tesseract_cmd = r'C:/Users/070601/AppData/Local/Programs/Tesseract-OCR/tesseract.exe'
 #pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
@@ -42,7 +42,7 @@ img = Image.open(filename)
 print(pytesseract.image_to_string(img, lang="chi_tra"))
 
 
-filename = 'C:/______test_files2/ocr04.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/ocr04.jpg'
 
 pytesseract.pytesseract.tesseract_cmd = r'C:/Users/070601/AppData/Local/Programs/Tesseract-OCR/tesseract.exe'
 #pytesseract.pytesseract.tesseract_cmd = r"C:\Program Files\Tesseract-OCR\tesseract.exe"

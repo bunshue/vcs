@@ -12,8 +12,8 @@ def mtime(f):
     return st[stat.ST_MTIME]
 
 
-filename1 = 'C:/______test_files2/human1.jpg'
-filename2 = 'C:/______test_files2/human2.jpg'
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/human1.jpg'
+filename2 = 'C:/_git/vcs/_1.data/______test_files1/human2.jpg'
 
 try:
     sf = open(filename1, 'rb')
@@ -47,8 +47,8 @@ def identical(sf, mf):
         if not sd: break
     return 1
 
-filename1 = 'C:/______test_files2/poetry2.txt'
-filename2 = 'C:/______test_files2/poetry2.txt'
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/poetry2.txt'
+filename2 = 'C:/_git/vcs/_1.data/______test_files1/poetry2.txt'
 
 try:
     sf = open(filename1, 'r')
@@ -105,7 +105,7 @@ st_ctime: 由操作系統報告的"ctime"。在某些系統上（如Unix）是�
 
 print('stat 結構:')
 
-filename = 'C:/______test_files2/human2.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/human2.jpg'
 
 import os, sys
 import stat
@@ -137,7 +137,7 @@ st_mtime: 最後一次修改的時間。
 '''
 
 print('將檔案1的時間拷貝到檔案2')
-filename1 = 'C:/______test_files1/aaaaaaab.txt'
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/aaaaaaab.txt'
 filename2 = 'C:/______test_files3/country_data_out1.xml'
    
 try:

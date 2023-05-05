@@ -18,7 +18,7 @@ shutil.copyfile('test10_new12_file2.py', destfile)  # 檔案複製
 
 #目錄拷貝
 import shutil
-source_dir = 'C:/______test_files2/source_pic'
+source_dir = 'C:/_git/vcs/_1.data/______test_files1/source_pic'
 dest_dir = 'C:/______test_files3/source_pic'
 print('cp -r ' + source_dir + ' ' + dest_dir)
 #shutil.copytree(source_dir, dest_dir)  # 目錄複製
@@ -78,7 +78,7 @@ import os, shutil, glob
 
 print("單層資料夾內所有檔案容量")
 
-source_dir = 'C:/______test_files1/__pic/_peony1/'
+source_dir = 'C:/_git/vcs/_1.data/______test_files1/__pic/_peony1/'
 
 pngfiles = glob.glob(source_dir + "*.png")
 jpgfiles = glob.glob(source_dir + "*.jpg")
@@ -334,13 +334,13 @@ walktree(foldername, visitfile)
 
 import os
 
-testfiles = os.listdir('C:/______test_files1/__RW/_dicom')
+testfiles = os.listdir('C:/_git/vcs/_1.data/______test_files1/__RW/_dicom')
 
 #簡檔名
 testfiles = [x for x in testfiles if x.endswith('dcm')]
 
 #全檔名
-testfiles = [os.path.join('C:/______test_files1/__RW/_dicom', x) for x in testfiles]
+testfiles = [os.path.join('C:/_git/vcs/_1.data/______test_files1/__RW/_dicom', x) for x in testfiles]
 
 for dcmfile in testfiles:
     print(dcmfile)
@@ -349,7 +349,7 @@ for dcmfile in testfiles:
 
 import os
 
-filename = 'C:/______test_files2/human2.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/human2.jpg'
 
 file, ext = os.path.splitext(filename)
 

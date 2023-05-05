@@ -2,7 +2,7 @@
 
 import json, datetime
 
-filename = 'C:/______test_files2/data_earthquake.json'
+filename = 'C:/_git/vcs/_1.data/______test_files1/data_earthquake.json'
 fp = open(filename, 'r')
 earthquakes = json.load(fp)
 
@@ -15,7 +15,7 @@ for eq in earthquakes['features']:
     print("時間:{}".format(d))
 
 
-filename_json = 'C:/______test_files1/_json/ChinaBoundary_Province_City'
+filename_json = 'C:/_git/vcs/_1.data/______test_files1/_json/ChinaBoundary_Province_City'
 fp = open(filename_json, 'r', encoding ='UTF-8')
 boundary_data = json.load(fp)
 for b_data in boundary_data['Province']:
@@ -98,7 +98,7 @@ print('測試完成')
 
 
 
-filename = 'C:/______test_files2/jdata.json'
+filename = 'C:/_git/vcs/_1.data/______test_files1/jdata.json'
 
 import pprint as pp
 import json

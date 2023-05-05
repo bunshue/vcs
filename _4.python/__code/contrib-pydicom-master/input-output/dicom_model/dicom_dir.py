@@ -27,7 +27,7 @@ def find_dicom_files(directory, pattern="*", directory_exclude_pattern='', recur
                 if is_dicom(filename):
                     yield filename
 
-foldername = 'C:/______test_files1/__RW/_dicom'
+foldername = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom'
 patients = list()
 for x in find_dicom_files(directory=foldername, pattern="*.dcm", directory_exclude_pattern=".*"):
     print('檔案 : ', x)

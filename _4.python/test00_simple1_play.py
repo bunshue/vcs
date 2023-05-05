@@ -12,7 +12,7 @@
 
 from PIL import Image
 
-filename = 'C:/______test_files1/picture1.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 import cv2
 from matplotlib import pyplot as plt
@@ -35,8 +35,8 @@ print(im.info, im.tile)
 '''
 
 
-filename = 'C:/______test_files2/poetry.txt'
-#filename = 'C:/______test_files2/quotes.txt'
+filename = 'C:/_git/vcs/_1.data/______test_files1/poetry.txt'
+#filename = 'C:/_git/vcs/_1.data/______test_files1/quotes.txt'
 
 fp = open(filename, 'r', encoding = 'UTF-8')
 try:

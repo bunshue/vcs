@@ -17,9 +17,9 @@ def show_patient_IDs(file_list=None):
 
 print('讀取dicom檔案內的資料')
 
-filename1 = 'C:/______test_files1/__RW/_dicom/CT_small.dcm'
-filename2 = 'C:/______test_files1/__RW/_dicom/ims000525.dcm'
-filename3 = 'C:/______test_files1/__RW/_dicom/test.dcm'
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/CT_small.dcm'
+filename2 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/ims000525.dcm'
+filename3 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/test.dcm'
 
 file_list = []
 file_list.append(filename1)

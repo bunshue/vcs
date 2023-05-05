@@ -6,7 +6,7 @@ print('讀取csv檔')
 import matplotlib.pyplot as plt
 import csv
 
-filename = 'C:/______test_files2/stock_data_2019_2330.csv'
+filename = 'C:/_git/vcs/_1.data/______test_files1/stock_data_2019_2330.csv'
 with open(filename, 'r', newline='') as f:
     datas = csv.reader(f)  
     listx = []

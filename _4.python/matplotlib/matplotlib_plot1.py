@@ -1,6 +1,6 @@
 # plot 集合
 
-selected_font = 'C:/______test_files2/msch.ttf'
+selected_font = 'C:/_git/vcs/_1.data/______test_files1/msch.ttf'
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -215,7 +215,7 @@ plt.show()
 
 # plot 集合
 
-selected_font = 'C:/______test_files2/msch.ttf'
+selected_font = 'C:/_git/vcs/_1.data/______test_files1/msch.ttf'
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -278,7 +278,7 @@ plt.show()
 
 # plot 集合
 
-selected_font = 'C:/______test_files2/msch.ttf'
+selected_font = 'C:/_git/vcs/_1.data/______test_files1/msch.ttf'
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -373,7 +373,7 @@ plt.show()
 
 # plot 集合
 
-selected_font = 'C:/______test_files2/msch.ttf'
+selected_font = 'C:/_git/vcs/_1.data/______test_files1/msch.ttf'
 
 import matplotlib.pyplot as plt
 import numpy as np

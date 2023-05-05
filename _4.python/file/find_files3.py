@@ -39,7 +39,7 @@ find_files(foldername)
 '''
 
 
-foldername = 'C:/______test_files1/__RW/_dicom'
+foldername = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom'
 
 all_series = read_files(foldername, True, False, False)
 

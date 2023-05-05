@@ -1,5 +1,5 @@
 import cv2
-filename = 'C:/______test_files1/_video/鹿港.mp4'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_video/鹿港.mp4'
 
 video = cv2.VideoCapture(filename);
 

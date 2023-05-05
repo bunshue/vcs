@@ -5,7 +5,7 @@ EXIF
 from PIL import Image
 from PIL import Image, ImageFilter
 
-filename1 = 'C:/______test_files1/orient2_RightTop.jpg'
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/orient2_RightTop.jpg'
 filename2 = 'C:/______test_files3/orient2_RightTopffff.jpg'
 
 image = Image.open(filename1)    #讀取的是RGB格式的圖片

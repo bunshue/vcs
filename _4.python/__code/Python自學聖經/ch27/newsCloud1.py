@@ -17,7 +17,7 @@ for t in jieba.cut(text, cut_all=False):  #拆解句子為字詞
         terms.append(t)
 diction = Counter(terms)
 
-font = 'C:/______test_files2/msch.ttf'	#設定字型
+font = 'C:/_git/vcs/_1.data/______test_files1/msch.ttf'	#設定字型
 #mask = np.array(Image.open("heart.png"))  #設定文字雲形狀 
 wordcloud = WordCloud(font_path=font) 
 #wordcloud = WordCloud(background_color="white",mask=mask,font_path=font)  #背景顏色預設黑色,改為白色 

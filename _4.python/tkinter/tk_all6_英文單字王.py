@@ -70,7 +70,7 @@ import math
 page,pagesize=0,10
 datas=dict()
 
-filename = 'C:/______test_files2/eword.txt'
+filename = 'C:/_git/vcs/_1.data/______test_files1/eword.txt'
 with open(filename,'r', encoding = 'UTF-8-sig') as f:
     for line in f:
         eword,cword = line.rstrip('\n').split(',')

@@ -10,7 +10,7 @@ import cv2
 user_tesseract_cmd = r'C:/Users/070601/AppData/Local/Programs/Tesseract-OCR/tesseract.exe'
 show_image = False
 
-filename = 'C:/______test_files2/captcha01.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/captcha01.jpg'
 
 
 #Code from https://stackoverflow.max-everyday.com/2019/06/python-opencv-denoising/

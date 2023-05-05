@@ -37,7 +37,7 @@ print(h)
 #計算檔案的 MD5 雜湊值
 import hashlib
 
-filename = 'C:/______test_files2/calculate_hash.txt'
+filename = 'C:/_git/vcs/_1.data/______test_files1/calculate_hash.txt'
 
 m = hashlib.md5()
 
@@ -86,7 +86,7 @@ def calculate_file_hash(filename):
 
     return hasher.hexdigest()
 
-filename = 'C:/______test_files1/picture1.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 calculated_filehash = calculate_file_hash(filename)
 print('SHA256')
 print('預設答案 : ', '5d57e3deb441b789f6035d28dcbbaf6a436c54450972786fad4ce4527059d291')

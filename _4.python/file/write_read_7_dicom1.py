@@ -4,9 +4,9 @@ import pydicom
 from pydicom.data import get_testdata_files
 from pydicom.data import get_testdata_file
 
-filename1 = 'C:/______test_files1/__RW/_dicom/test.dcm'
-filename2 = 'C:/______test_files1/__RW/_dicom/ims000525.dcm'
-filename3 = 'C:/______test_files1/__RW/_dicom/CT_small.dcm'
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/test.dcm'
+filename2 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/ims000525.dcm'
+filename3 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/CT_small.dcm'
 
 ds = pydicom.dcmread(filename1)
 #ds = pydicom.dcmread(filename2, force=True)

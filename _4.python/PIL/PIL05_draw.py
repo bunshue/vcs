@@ -2,7 +2,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 import matplotlib.pyplot as plt
 
-selected_font = 'C:/______test_files2/ubuntu.ttf'
+selected_font = 'C:/_git/vcs/_1.data/______test_files1/ubuntu.ttf'
 
 font_size=30
 
@@ -36,7 +36,7 @@ plt.show()
 from PIL import Image, ImageDraw, ImageFont
 
 msg = 'lion-mouse'
-selected_font = 'C:/______test_files2/ubuntu.ttf'
+selected_font = 'C:/_git/vcs/_1.data/______test_files1/ubuntu.ttf'
 
 font_size = 30; #文字大小
 font_r = 255;   #紅色值
@@ -88,9 +88,9 @@ print('新檔存圖, 已寫入檔案：'+filename+'.png')
 import sys, os, glob
 from PIL import Image, ImageDraw, ImageFont
 
-selected_font = 'C:/______test_files2/ubuntu.ttf'
+selected_font = 'C:/_git/vcs/_1.data/______test_files1/ubuntu.ttf'
 
-filename1 = 'C:/______test_files2/sample_s.jpg'
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/sample_s.jpg'
 filename2 = 'C:/______test_files3/tmppic_old.png'
 filename3 = 'C:/______test_files3/tmppic_new.png'
 
@@ -128,9 +128,9 @@ plt.show()
 import os, sys
 from PIL import Image, ImageDraw, ImageFont
 
-filename1 = 'C:/______test_files2/sample.jpg'
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/sample.jpg'
 filename2 = 'C:/______test_files3/pil_test03.png'
-selected_font = 'C:/______test_files2/ubuntu.ttf'
+selected_font = 'C:/_git/vcs/_1.data/______test_files1/ubuntu.ttf'
 
 #要做浮水印的文字
 msg = "lion-mouse"
@@ -167,8 +167,8 @@ print('新檔存圖, 已寫入檔案：' + filename2)
 
 from PIL import Image, ImageDraw, ImageFont
 
-selected_font = 'C:/______test_files2/ubuntu.ttf'
-filename1 = 'C:/______test_files2/sample_s.jpg'
+selected_font = 'C:/_git/vcs/_1.data/______test_files1/ubuntu.ttf'
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/sample_s.jpg'
 filename2 = 'C:/______test_files3/tmppic_old.png'
 filename3 = 'C:/______test_files3/tmppic_new.png'
 
@@ -206,7 +206,7 @@ print('新檔存圖, 已寫入檔案：'+filename3)
 
 from PIL import Image, ImageDraw
 
-filename1 = 'C:/______test_files2/sample_s.jpg'
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/sample_s.jpg'
 filename2 = 'C:/______test_files3/tmppic_old.png'
 filename3 = 'C:/______test_files3/tmppic_new.png'
 
@@ -245,8 +245,8 @@ from PIL import Image
 from matplotlib import patches
 import matplotlib.pyplot as plt
 
-#filename = 'C:/______test_files1/_emgu/lena.jpg'
-filename = 'C:/______test_files1/picture1.jpg'
+#filename = 'C:/_git/vcs/_1.data/______test_files1/_emgu/lena.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 '''
 image1 = Image.open(filename)

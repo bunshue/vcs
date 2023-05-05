@@ -4,7 +4,7 @@ print('字串處理')
 items = "03/11/2006".split("/")
 print(items)
 
-filename = 'C:/______test_files2/human2.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/human2.jpg'
 
 name = filename.split('/')
 print(len(name))
@@ -228,8 +228,8 @@ vi = sys.version_info
 install_group = "Python %d.%d" % (vi[0], vi[1])
 print(install_group)
 
-filename1 = 'C:/______test_files2/aaaaa.jpg'
-filename2 = 'C:/______test_files2/bbbbb.jpg'
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/aaaaa.jpg'
+filename2 = 'C:/_git/vcs/_1.data/______test_files1/bbbbb.jpg'
 
 print("Copied %s to %s" % (filename1, filename2))
 
@@ -552,7 +552,7 @@ t2 = t1.astimezone().isoformat()
 print(t2)
 
 
-filename = 'C:/______test_files2/human2.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/human2.jpg'
 
 print(filename)
 
@@ -602,7 +602,7 @@ usage(msg)
 
 #os專區 
 
-filename = 'C:/______test_files2/human2.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/human2.jpg'
 import os
 from stat import ST_MTIME
 from stat import ST_CTIME

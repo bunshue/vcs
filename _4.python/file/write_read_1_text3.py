@@ -1,7 +1,7 @@
 from random import randint
 
-filename = 'C:/______test_files2/quotes.txt'
-#filename = 'C:/______test_files2/poetry2.txt'
+filename = 'C:/_git/vcs/_1.data/______test_files1/quotes.txt'
+#filename = 'C:/_git/vcs/_1.data/______test_files1/poetry2.txt'
 
 def get_random_quote():
     start_line  = None

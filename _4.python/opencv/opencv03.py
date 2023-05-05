@@ -7,8 +7,8 @@ https://docs.opencv.org/3.1.0/d1/db7/tutorial_py_histogram_begins.html
 
 '''
 
-#filename = 'C:/______test_files1/_emgu/lena.jpg'
-filename = 'C:/______test_files1/ims01.bmp'
+#filename = 'C:/_git/vcs/_1.data/______test_files1/_emgu/lena.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
 
 
 #import numpy as np

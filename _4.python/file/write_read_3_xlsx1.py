@@ -28,7 +28,7 @@ print("建立 xlsx OK, 檔案 : " + filename)
 
 import openpyxl
 
-filename = 'C:/______test_files2/test2.xlsx'
+filename = 'C:/_git/vcs/_1.data/______test_files1/test2.xlsx'
 
 print("讀取 xlsx, 檔案 : " + filename)
 

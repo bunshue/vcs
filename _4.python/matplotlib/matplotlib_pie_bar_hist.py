@@ -1,6 +1,6 @@
 # bar 集合
 
-selected_font = 'C:/______test_files2/msch.ttf'
+selected_font = 'C:/_git/vcs/_1.data/______test_files1/msch.ttf'
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -16,7 +16,7 @@ plt.rcParams["axes.unicode_minus"] = False # 讓負號可正常顯示
 #第一張圖
 plt.subplot(231)
 
-filename = 'C:/______test_files2/popu.txt'
+filename = 'C:/_git/vcs/_1.data/______test_files1/popu.txt'
 
 with open(filename, 'r') as fp:
 	populations = fp.readlines()

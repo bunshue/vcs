@@ -2,7 +2,7 @@ import os
 
 def main():
 
-    filename = 'C:/______test_files2/human2.jpg'
+    filename = 'C:/_git/vcs/_1.data/______test_files1/human2.jpg'
     foldername = 'C:/______test_files2'
    
     # Display the size

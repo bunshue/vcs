@@ -4,7 +4,7 @@ import cv2	#導入 OpenCV 模組
 import numpy as np
 import matplotlib.pyplot as plt
 
-filename = 'C:/______test_files1/_emgu/lena.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_emgu/lena.jpg'
 
 # OpenCV 人臉識別分類器
 xml_filename1 = 'C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml'

@@ -36,7 +36,7 @@ print("寫入檔案 " + filename_w + " 完成")
 import csv
 
 # 開啟 csv 檔案
-filename = 'C:/______test_files2/test1.csv'
+filename = 'C:/_git/vcs/_1.data/______test_files1/test1.csv'
 with open(filename, newline='') as csvfile:
     # 讀取 csv 檔案內容
     rows = csv.reader(csvfile)
@@ -48,7 +48,7 @@ with open(filename, newline='') as csvfile:
 
 import csv
 # 開啟 csv 檔案
-filename = 'C:/______test_files2/test1.csv'
+filename = 'C:/_git/vcs/_1.data/______test_files1/test1.csv'
 with open(filename, newline='') as csvfile:
     # 讀取 csv 檔內容，將每一列轉成 dictionary
     rows = csv.DictReader(csvfile)   
@@ -115,7 +115,7 @@ filename_r1 = "http://pythonscraping.com/files/MontyPythonAlbums.csv"
 print("讀取一個遠端csv檔案 : "+filename_r1)
 
 #本地檔案
-filename_r2 = 'C:/______test_files2/MontyPythonAlbums.local.csv'
+filename_r2 = 'C:/_git/vcs/_1.data/______test_files1/MontyPythonAlbums.local.csv'
 
 print("讀取一個本地csv檔案 : "+filename_r2)
 
@@ -134,7 +134,7 @@ for row in csvReader:
 
 import csv
 
-filename = 'C:/______test_files2/zipcode.csv'
+filename = 'C:/_git/vcs/_1.data/______test_files1/zipcode.csv'
 
 with open(filename, 'r', encoding='utf-8') as f:
     datas = csv.reader(f)

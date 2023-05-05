@@ -128,7 +128,7 @@ with open(filename1,'r') as fo:
     print(str1)  # Hello
 fo.close()
 
-filename2 = 'C:/______test_files2/file2.txt'
+filename2 = 'C:/_git/vcs/_1.data/______test_files1/file2.txt'
 
 print("讀取檔案 " + filename2)
 with open(filename2, 'r', encoding = 'UTF-8') as fo:
@@ -162,7 +162,7 @@ with open(filename2, 'r', encoding = 'UTF-8-sig') as fo:
     print(str1)  # 123中文
 
 print("使用cp950編碼 讀取檔案")
-filename_utf8 = 'C:/______test_files2/fileUTF8.txt'
+filename_utf8 = 'C:/_git/vcs/_1.data/______test_files1/fileUTF8.txt'
 fo=open(filename_utf8, 'r', encoding = 'cp950')
 for line in fo:
     print(line, end = "")
@@ -199,7 +199,7 @@ print("讀取一檔並將資料寫到另檔的範例")
 
 #python讀和寫文件
 
-filename_r = 'C:/______test_files2/poetry.txt'
+filename_r = 'C:/_git/vcs/_1.data/______test_files1/poetry.txt'
 filename_w = 'C:/______test_files3/poetry_another.txt'
 
 with open(filename_r, 'rt', encoding = 'utf8') as fo:
@@ -217,7 +217,7 @@ fo.close()
 
 #各種檔案寫讀範例
 
-filename = 'C:/______test_files2/poetry.txt'
+filename = 'C:/_git/vcs/_1.data/______test_files1/poetry.txt'
 
 print("讀取檔案 : "+filename)
 
@@ -345,7 +345,7 @@ def disp_temp(data):
     print("---------------------")
 
 
-filename = 'C:/______test_files2/data_climate.txt'
+filename = 'C:/_git/vcs/_1.data/______test_files1/data_climate.txt'
 
 with open(filename, 'r', encoding='utf-8') as fp:
     raw_data = fp.readlines()
@@ -359,7 +359,7 @@ disp_temp(climate_data[4])
 
 print('各種讀取檔案的方法')
 
-filename = 'C:/______test_files2/Presidents.txt'
+filename = 'C:/_git/vcs/_1.data/______test_files1/Presidents.txt'
 
 # Open file for input
 infile = open(filename, "r")
@@ -397,7 +397,7 @@ infile.close() # Close the input file
 
 
 print('指定編碼讀取檔案')
-filename = 'C:/______test_files2/stopWord_test.txt'
+filename = 'C:/_git/vcs/_1.data/______test_files1/stopWord_test.txt'
 with open(filename, 'r', encoding='utf-8-sig') as f:  #設定停用詞
     stops = f.read().split('\n')   
 

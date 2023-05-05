@@ -46,11 +46,11 @@ class UI(Frame):
         self.canvas.delete("overlay")
         self.canvas.create_image(0, 0, image=self.overlay, anchor=NW, tags="overlay")
 
-filename = 'C:/______test_files2/human2.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/human2.jpg'
 window = Tk()
 im = Image.open(filename)
 if im.mode != "L":
-    im = im.convert("L")	#Âà´«¦¨¦Ç¶¥¹Ï¹³
+    im = im.convert("L")	#ï¿½à´«ï¿½ï¿½ï¿½Ç¶ï¿½ï¿½Ï¹ï¿½
 
 #im.thumbnail((320,200))
 UI(window, im).pack()

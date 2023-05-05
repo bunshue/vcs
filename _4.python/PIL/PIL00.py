@@ -5,7 +5,7 @@ import numpy as np
 import torchvision.transforms as transforms
 from PIL import Image
 
-filename = 'C:/______test_files2/sample.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/sample.jpg'
 
 image = Image.open(filename)    #讀取的是RGB格式的圖片
 #image.show()

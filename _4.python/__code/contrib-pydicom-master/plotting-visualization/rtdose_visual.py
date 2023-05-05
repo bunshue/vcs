@@ -5,8 +5,8 @@ import numpy as np
 import gzip
 import sys
 
-#path = 'C:/______test_files1/__RW/_dicom'
-path = 'C:/______test_files1/__RW/_dicom/ims000525.dcm'
+#path = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom'
+path = 'C:/_git/vcs/_1.data/______test_files1/__RW/_dicom/ims000525.dcm'
 global cMin, cMax, cMap
 cMap = "inferno"
 cMin = None

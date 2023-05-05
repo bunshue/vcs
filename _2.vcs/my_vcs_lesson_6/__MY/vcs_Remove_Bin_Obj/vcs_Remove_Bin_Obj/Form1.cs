@@ -71,7 +71,7 @@ namespace vcs_Remove_Bin_Obj
             tb_string_old.Location = new Point(x_st + dx * 1, y_st + dy * 0);
             tb_string_new.Location = new Point(x_st + dx * 1, y_st + dy * 1);
             bt_replace.Location = new Point(x_st + dx * 0, y_st + dy * 2);
-            cb_confirm.Location = new Point(x_st + dx * 1+40, y_st + dy * 2+10);
+            cb_confirm.Location = new Point(x_st + dx * 1 + 40, y_st + dy * 2 + 10);
             bt_open_dir.Location = new Point(x_st + dx * 3 + 10, y_st + dy * 2);
             lb_path.Location = new Point(x_st + dx * 0, y_st + dy * 3 + 8);
             int dd = 20;
@@ -93,6 +93,9 @@ namespace vcs_Remove_Bin_Obj
             lb_main_mesg.Text = "";
 
             this.Size = new Size(900, 820);
+
+            tb_string_old.Text = @"C:/______test_files2/";
+            tb_string_new.Text = @"C:/_git/vcs/_1.data/______test_files1/";
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -1185,7 +1188,7 @@ namespace vcs_Remove_Bin_Obj
             else if (rb_file_type1.Checked == true)
             {
                 richTextBox1.Text += "置換 C/C++ 檔案\n";
-                extension = ".c";
+                extension = ".cpp";
             }
             else if (rb_file_type2.Checked == true)
             {

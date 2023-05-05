@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
 
-filename = 'C:/______test_files2/sample.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/sample.jpg'
 
 image = Image.open(filename)
 

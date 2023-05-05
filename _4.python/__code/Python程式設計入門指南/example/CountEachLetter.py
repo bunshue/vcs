@@ -1,5 +1,5 @@
 def main():
-    filename = 'C:/______test_files2/article.txt'
+    filename = 'C:/_git/vcs/_1.data/______test_files1/article.txt'
     infile = open(filename, "r") # Open the file
 
     counts = 26 * [0] # Create and initialize counts

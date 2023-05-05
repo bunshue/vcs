@@ -1,6 +1,6 @@
 # plot 集合
 
-selected_font = 'C:/______test_files2/msch.ttf'
+selected_font = 'C:/_git/vcs/_1.data/______test_files1/msch.ttf'
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -93,7 +93,7 @@ def f1(x):
 def f2(x):
     return float(float(school[x])/float(bp[x]))
 
-filename = 'C:/______test_files2/school.txt'
+filename = 'C:/_git/vcs/_1.data/______test_files1/school.txt'
 with open(filename, 'r') as fp:
     schools = fp.readlines()
 
@@ -103,7 +103,7 @@ for s in schools:
 
 #共取得??筆資料 list的用法
 
-filename = 'C:/______test_files2/yrborn.txt'
+filename = 'C:/_git/vcs/_1.data/______test_files1/yrborn.txt'
 with open(filename, 'r') as fp:
 	populations = fp.readlines()
 
@@ -169,7 +169,7 @@ plt.show()
 plt.figure(num = 'plot 集合', figsize=[20, 15], dpi=84, facecolor="whitesmoke", edgecolor="r", linewidth=1, frameon=True)
 
 #第1~2張圖
-filename = 'C:/______test_files2/yrborn.txt'
+filename = 'C:/_git/vcs/_1.data/______test_files1/yrborn.txt'
 
 with open(filename, 'r') as fp:
 	populations = fp.readlines()
@@ -210,7 +210,7 @@ plt.title('1986 - 2015 (Boy:Girl)')
 
 #第3~4張圖
 
-filename = 'C:/______test_files2/yrborn.txt'
+filename = 'C:/_git/vcs/_1.data/______test_files1/yrborn.txt'
 
 with open(filename, 'r') as fp:
 	populations = fp.readlines()

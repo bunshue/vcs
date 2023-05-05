@@ -20,7 +20,7 @@ seg_list = jieba.cut_for_search(string)
 print(' / '.join(seg_list))     #全切分
 
 
-filename = 'C:/______test_files2/dict.txt.big'
+filename = 'C:/_git/vcs/_1.data/______test_files1/dict.txt.big'
 #下載繁體中文詞庫後，使用set_dictionary()方法匯入
 jieba.set_dictionary(filename)  #不一定要設定詞庫，內建的效果也不錯
 

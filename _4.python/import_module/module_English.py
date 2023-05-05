@@ -3,7 +3,7 @@ import numpy as np
 import re
 from collections import Counter
 
-with open ("C:/______test_files1/Determinant.txt",'r',encoding='UTF-8') as f:
+with open ("C:/_git/vcs/_1.data/______test_files1/Determinant.txt",'r',encoding='UTF-8') as f:
     words=f.read().lower()
 
 rule=re.compile(r'w+')
