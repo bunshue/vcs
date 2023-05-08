@@ -79,7 +79,7 @@ namespace MapDownloader
         // Tile Downloader, init 5 threads
         private TileDownloader tileDownloader = new TileDownloader(5);
 
-        string gMapCacheLocation = @"C:\_git\vcs\_1.data\______test_files1\GMapCache2"; //緩存位置
+        string gMapCacheLocation = @"C:\_git\vcs\_1.data\______test_files2\GMapCache2"; //緩存位置
 
         public MainForm()
         {

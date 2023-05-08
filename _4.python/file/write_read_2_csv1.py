@@ -36,7 +36,8 @@ print("寫入檔案 " + filename_w + " 完成")
 import csv
 
 # 開啟 csv 檔案
-filename = 'C:/_git/vcs/_1.data/______test_files1/test1.csv'
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV2.csv'
+
 with open(filename, newline='') as csvfile:
     # 讀取 csv 檔案內容
     rows = csv.reader(csvfile)
@@ -48,7 +49,7 @@ with open(filename, newline='') as csvfile:
 
 import csv
 # 開啟 csv 檔案
-filename = 'C:/_git/vcs/_1.data/______test_files1/test1.csv'
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/python_ReadWrite_CSV2.csv'
 with open(filename, newline='') as csvfile:
     # 讀取 csv 檔內容，將每一列轉成 dictionary
     rows = csv.DictReader(csvfile)   
@@ -75,7 +76,7 @@ with open(filename_w, 'w', newline='') as csvfile:
     
 import csv
 # 開啟輸出的 csv 檔案
-filename_w = 'C:/_git/vcs/_1.data/______test_files2/test1.csv'
+filename_w = 'C:/_git/vcs/_1.data/______test_files2/python_ReadWrite_CSV2.csv'
 with open(filename_w, 'w', newline='') as csvfile:
   # 建立 csv 檔寫入物件
   writer = csv.writer(csvfile)
