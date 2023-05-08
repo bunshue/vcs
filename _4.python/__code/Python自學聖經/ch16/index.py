@@ -40,7 +40,7 @@ window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 #print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 
 cbVar = tk.StringVar()
-cb = ttk.Combobox(window, textvariable=cbVar)  #下拉選單元件
+cb = ttk.Combobox(window, textvariable=cbVar)   #下拉式選單元件
 cb['value'] = ("請選擇：","臺北","新北","桃園","臺中","臺南","高雄","基隆","新竹","嘉義","苗栗","彰化","南投","雲林","嘉義","屏東","宜蘭","花蓮","臺東","澎湖","金門","連江" )  #設定選項
 cb.current(0)  #預設第一個選項
 cb.bind('<<ComboboxSelected>>', showWeather)  #設定選取選項後執行的程式

@@ -1,0 +1,25 @@
+# Maintainer: Danny Fajardo <br1ghtch1p@gmail.com>
+pkgname=python-simpleguics2pygame
+_pkgname=SimpleGUICS2Pygame
+pkgver=2.1.0
+pkgrel=1
+pkgdesc="A module reimplementing the SimpleGUI particular module of CodeSkulptor and CodeSkulptor3 (a Python browser environment)"
+arch=('any')
+url="https://simpleguics2pygame.readthedocs.io/en/latest/"
+license=("GPLv3")
+depends=('python')
+makedepends=('python-setuptools')
+conflicts=("${pkgname}" "${pkgname}-git")
+source=("https://bitbucket.org/OPiMedia/simpleguics2pygame/downloads/$_pkgname-$pkgver.tar.gz")
+sha256sums=('ba4e1d7e0aadaf8883a1a2e5e840215e964881c1e085fda518f7ab333a8ff9e3')
+
+
+build() {
+    cd "$srcdir/$_pkgname-$pkgver"
+    python setup.py build
+}
+
+package() {
+    cd "$srcdir/$_pkgname-$pkgver"
+    python setup.py install --skip-build --root="$pkgdir/" --optimize=1
+}

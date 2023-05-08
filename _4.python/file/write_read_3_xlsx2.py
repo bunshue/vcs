@@ -1,35 +1,36 @@
 #各種檔案寫讀範例 xlsx 2
 
+import openpyxl
+
 print("寫讀 xlsx")
 
 print("建立 xlsx")
 
 filename = 'C:/_git/vcs/_1.data/______test_files2/test2.xlsx'
 
-import openpyxl        
 workbook=openpyxl.Workbook()   #建立一個工作簿
 # 取得第 1 個工作表
 sheet = workbook.worksheets[0]
-
+# 以儲存格位置寫入資料
 sheet['A1'] = 'Hello'
 sheet['B1'] = 'World'
+# 以串列寫入資料
 listtitle=["姓名","電話"]
 sheet.append(listtitle)  
-listdata=["chiou","0937-1234567"]
+listdata=["David","0999-1234567"]
 sheet.append(listdata)  
-    
+
+# 儲存檔案    
 workbook.save(filename)    
 
+print("建立 xlsx OK, 檔案 : " + filename)
 
-
-
-import openpyxl
  
 #  讀取檔案
 workbook = openpyxl.load_workbook(filename)
 # 取得第 1 個工作表
 sheet = workbook.worksheets[0]
-
+print("顯示資料");
 # 取得指定儲存格
 print(sheet['A1'], sheet['A1'].value)
 

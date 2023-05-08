@@ -1,0 +1,169 @@
+Lint (mardi 4 mai 2021, 22:14:08 (UTC+0200)) of SimpleGUICS2Pygame 2.1.1
+
+===== pycodestyle (pep8) 2.7.0 =====
+
+===== pyflakes 2.3.1 Python 3.7.3 on Linux =====
+
+===== pylint 2.8.2 astroid 2.5.6 Python 3.7.3 (default, Jan 22 2021, 20:04:44) [GCC 8.3.0] =====
+************* Module SimpleGUICS2Pygame.numeric
+SimpleGUICS2Pygame/numeric.py:356:11: R1729: Use a generator instead 'all(abs(x) <= _epsilon for x in reversed(mat._data[-1]))' (use-a-generator)
+************* Module Mandelbrot_Set
+SimpleGUICS2Pygame/example/Mandelbrot_Set.py:251:13: R1728: Consider using a generator instead 'tuple('#%s%s%s' % (hex2(255 - 256 * int(math.log10(i) // NB_ITER_MAX)), hex2(255 - 256 * i // NB_ITER_MAX), hex2(255 - 256 * i // NB_ITER_MAX)) for i in range(1, NB_ITER_MAX))' (consider-using-generator)
+************* Module Memory
+SimpleGUICS2Pygame/example/Memory.py:313:43: R1729: Use a generator instead 'all(c.num == self.selected_cards[0].num for c in self.selected_cards[1:])' (use-a-generator)
+************* Module Stress_Balls
+SimpleGUICS2Pygame/example/Stress_Balls/Stress_Balls.py:169:13: R1728: Consider using a generator instead 'tuple(Shape((47 + n % (WIDTH - 100), 47 + n % (HEIGHT - 100)), 19 + n % 11, n_to_rgba((n + 1) % len(RGB_COLORS), 0.2 + float(n % 13) / 15), n_to_rgba((n + 2) % len(RGB_COLORS), 0.2 + float((n + 3) % 14) / 17), (3 + n % 7, 2 + n % 5), (n + 2) % 6) for n in range(NB_SHAPES))' (consider-using-generator)
+************* Module make_img_links
+Sphinx/_static/links/data/make_img_links.py:46:4: R1732: Consider using 'with' for resource-allocating operations (consider-using-with)
+************* Module make_links
+Sphinx/_static/links/data/make_links.py:170:4: R1732: Consider using 'with' for resource-allocating operations (consider-using-with)
+************* Module make_prog_links
+Sphinx/_static/links/data/make_prog_links.py:46:4: R1732: Consider using 'with' for resource-allocating operations (consider-using-with)
+************* Module make_snd_links
+Sphinx/_static/links/data/make_snd_links.py:46:4: R1732: Consider using 'with' for resource-allocating operations (consider-using-with)
+
+
+Report
+======
+6611 statements analysed.
+
+Statistics by type
+------------------
+
++---------+-------+-----------+-----------+------------+---------+
+|type     |number |old number |difference |%documented |%badname |
++=========+=======+===========+===========+============+=========+
+|module   |68     |68         |=          |100.00      |11.76    |
++---------+-------+-----------+-----------+------------+---------+
+|class    |36     |36         |=          |100.00      |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|method   |268    |268        |=          |100.00      |0.00     |
++---------+-------+-----------+-----------+------------+---------+
+|function |207    |207        |=          |100.00      |0.48     |
++---------+-------+-----------+-----------+------------+---------+
+
+
+
+Raw metrics
+-----------
+
++----------+-------+------+---------+-----------+
+|type      |number |%     |previous |difference |
++==========+=======+======+=========+===========+
+|code      |8568   |48.49 |8568     |=          |
++----------+-------+------+---------+-----------+
+|docstring |4940   |27.96 |4940     |=          |
++----------+-------+------+---------+-----------+
+|comment   |940    |5.32  |940      |=          |
++----------+-------+------+---------+-----------+
+|empty     |3220   |18.23 |3220     |=          |
++----------+-------+------+---------+-----------+
+
+
+
+Duplication
+-----------
+
++-------------------------+------+---------+-----------+
+|                         |now   |previous |difference |
++=========================+======+=========+===========+
+|nb duplicated lines      |1726  |1726     |=          |
++-------------------------+------+---------+-----------+
+|percent duplicated lines |9.874 |9.874    |=          |
++-------------------------+------+---------+-----------+
+
+
+
+Messages by category
+--------------------
+
++-----------+-------+---------+-----------+
+|type       |number |previous |difference |
++===========+=======+=========+===========+
+|convention |0      |0        |=          |
++-----------+-------+---------+-----------+
+|refactor   |8      |8        |=          |
++-----------+-------+---------+-----------+
+|warning    |0      |0        |=          |
++-----------+-------+---------+-----------+
+|error      |0      |0        |=          |
++-----------+-------+---------+-----------+
+
+
+
+% errors / warnings by module
+-----------------------------
+
++---------------------------+------+--------+---------+-----------+
+|module                     |error |warning |refactor |convention |
++===========================+======+========+=========+===========+
+|make_snd_links             |0.00  |0.00    |12.50    |0.00       |
++---------------------------+------+--------+---------+-----------+
+|make_prog_links            |0.00  |0.00    |12.50    |0.00       |
++---------------------------+------+--------+---------+-----------+
+|make_links                 |0.00  |0.00    |12.50    |0.00       |
++---------------------------+------+--------+---------+-----------+
+|make_img_links             |0.00  |0.00    |12.50    |0.00       |
++---------------------------+------+--------+---------+-----------+
+|Stress_Balls               |0.00  |0.00    |12.50    |0.00       |
++---------------------------+------+--------+---------+-----------+
+|SimpleGUICS2Pygame.numeric |0.00  |0.00    |12.50    |0.00       |
++---------------------------+------+--------+---------+-----------+
+|Memory                     |0.00  |0.00    |12.50    |0.00       |
++---------------------------+------+--------+---------+-----------+
+|Mandelbrot_Set             |0.00  |0.00    |12.50    |0.00       |
++---------------------------+------+--------+---------+-----------+
+
+
+
+Messages
+--------
+
++-------------------------+------------+
+|message id               |occurrences |
++=========================+============+
+|consider-using-with      |4           |
++-------------------------+------------+
+|use-a-generator          |2           |
++-------------------------+------------+
+|consider-using-generator |2           |
++-------------------------+------------+
+
+
+
+
+------------------------------------------------------------------
+Your code has been rated at 9.99/10 (previous run: 9.99/10, +0.00)
+
+
+===== pytype --unresolved =====
+Computing dependencies
+Unresolved dependencies:
+  UserDict.UserDict
+  codeskulptor
+  codeskulptor.file2url
+  codeskulptor.set_timeout
+  numeric
+  simplegui
+  simplegui.KEY_MAP
+  simplegui.create_timer
+  simplegui.load_image
+  simplegui.load_sound
+  simpleguitk
+  simplemap
+  simpleplot
+  urllib2.urlopen
+  urlparse.urlsplit
+
+===== pytype 2021.04.26 =====
+ninja: Entering directory `.pytype'
+ninja: no work to do.
+Computing dependencies
+Analyzing 68 sources with 0 local dependencies
+Leaving directory '.pytype'
+Success: no errors found
+
+===== mypy 0.812 =====
+Success: no issues found in 68 source files
+
+===== pydocstyle 6.0.0 =====

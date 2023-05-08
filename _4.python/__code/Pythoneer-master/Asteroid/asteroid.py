@@ -1,4 +1,5 @@
-import simplegui
+#import simplegui  用 SimpleGUICS2Pygame 替代
+import SimpleGUICS2Pygame.simpleguics2pygame as simplegui
 import math
 import random
 

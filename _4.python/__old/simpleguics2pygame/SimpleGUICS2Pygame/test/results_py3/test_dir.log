@@ -1,0 +1,12 @@
+List dir() differences between CodeSkulptor (May 2020) and this "Python":
+
+CodeSkulptor simplemap	!= Python 3.7.3 simplemap
+-------------------------------------------------------
+Line
+Map
+Marker
+Rice
+__name__
+create_map
+service
+

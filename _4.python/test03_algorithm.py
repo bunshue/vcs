@@ -23,3 +23,16 @@ list = [2, 3, 2, 5, 6, 1, -2, 3, 14, 12]
 bubbleSort(list)
 for v in list:
     print(v)
+
+
+
+def Fibonacci(n):  # 写出从第0项到第n项的Fibonacci系列
+    a, b, i = 0, 1, 0 
+    while i <= n:
+        print(a, end=' ')
+        a, b, i = b, a+b, i+1
+    print()
+
+print(Fibonacci(10))
+
+    

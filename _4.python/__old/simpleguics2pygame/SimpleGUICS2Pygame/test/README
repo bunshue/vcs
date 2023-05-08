@@ -1,0 +1,11 @@
+$ test_?.py filename
+
+Execute the test program
+and after 1 second SAVE the canvas image to filename (WARNING!)
+and quit the test program.
+
+
+
+$ test_?.py
+
+Only execute the test program.

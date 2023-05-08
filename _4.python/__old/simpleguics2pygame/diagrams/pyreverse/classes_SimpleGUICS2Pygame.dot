@@ -1,0 +1,22 @@
+digraph "classes_SimpleGUICS2Pygame" {
+charset="utf-8"
+rankdir=BT
+"0" [label="{SimpleGUICS2Pygame.numeric.Matrix|\l|abs()\lcopy()\lgetcol(j)\lgetrow(i)\linverse(_epsilon)\lscale(factor)\lshape()\lsummation()\ltranspose()\l}", shape="record"];
+"1" [label="{SimpleGUICS2Pygame.simplegui_lib_fps.FPS|\l|draw_fct(canvas)\lis_started()\lstart()\lstop()\l}", shape="record"];
+"2" [label="{SimpleGUICS2Pygame.simplegui_lib_keys.Keys|\l|active_handlers()\lactive_keydown_handler()\lactive_keyup_handler()\lis_pressed(key_code)\lis_pressed_key_map(key_str)\lpressed_keys()\lset_keydown_fct(key_code, fct)\lset_keydown_fct_key_map(key_str, fct)\lset_keyup_fct(key_code, fct)\lset_keyup_fct_key_map(key_str, fct)\l}", shape="record"];
+"3" [label="{SimpleGUICS2Pygame.simplegui_lib_loader.Loader|\l|add_image(url, name)\ladd_sound(url, name)\lcache_clear()\lget_image(name)\lget_nb_images()\lget_nb_images_loaded()\lget_nb_sounds()\lget_nb_sounds_loaded()\lget_sound(name)\lload()\lpause_sounds()\lprint_stats_cache()\lwait_loaded()\l}", shape="record"];
+"4" [label="{SimpleGUICS2Pygame.simpleguics2pygame.canvas.Canvas|\l|draw_arc(center_point, radius, start_angle, end_angle, line_width, line_color)\ldraw_circle(center_point, radius, line_width, line_color, fill_color)\ldraw_image(image, center_source, width_height_source, center_dest, width_height_dest, rotation)\ldraw_line(point1, point2, line_width, line_color)\ldraw_point(position, color)\ldraw_polygon(point_list, line_width, line_color, fill_color)\ldraw_polyline(point_list, line_width, line_color)\ldraw_text(text, point, font_size, font_color, font_face, _font_size_coef)\l}", shape="record"];
+"5" [label="{SimpleGUICS2Pygame.simpleguics2pygame.control.Control|\l|get_text()\lset_text(text)\l}", shape="record"];
+"6" [label="{SimpleGUICS2Pygame.simpleguics2pygame.control.TextAreaControl|\l|get_text()\lset_text(input_text)\l}", shape="record"];
+"7" [label="{SimpleGUICS2Pygame.simpleguics2pygame.frame.Frame|\l|add_button(text, button_handler, width)\ladd_input(text, input_handler, width)\ladd_label(text, width)\ldownload_canvas_image(filename)\lget_canvas_image()\lget_canvas_textwidth(text, font_size, font_face)\lset_canvas_background(color)\lset_draw_handler(draw_handler)\lset_keydown_handler(key_handler)\lset_keyup_handler(key_handler)\lset_mouseclick_handler(mouse_handler)\lset_mousedrag_handler(mouse_handler)\lstart()\lstop()\l}", shape="record"];
+"8" [label="{SimpleGUICS2Pygame.simpleguics2pygame.image.Image|\l|get_height()\lget_width()\l}", shape="record"];
+"9" [label="{SimpleGUICS2Pygame.simpleguics2pygame.image._LocalImage|\l|}", shape="record"];
+"10" [label="{SimpleGUICS2Pygame.simpleguics2pygame.sound.Sound|\l|pause()\lplay()\lrewind()\lset_volume(volume)\l}", shape="record"];
+"11" [label="{SimpleGUICS2Pygame.simpleguics2pygame.sound._LocalSound|\l|}", shape="record"];
+"12" [label="{SimpleGUICS2Pygame.simpleguics2pygame.timer.Timer|\l|get_interval()\lis_running()\lstart()\lstop()\l}", shape="record"];
+"9" -> "8" [arrowhead="empty", arrowtail="none"];
+"11" -> "10" [arrowhead="empty", arrowtail="none"];
+"4" -> "7" [arrowhead="diamond", arrowtail="none", fontcolor="green", label="_canvas", style="solid"];
+"12" -> "1" [arrowhead="diamond", arrowtail="none", fontcolor="green", label="_timer", style="solid"];
+"12" -> "3" [arrowhead="diamond", arrowtail="none", fontcolor="green", label="__timer", style="solid"];
+}

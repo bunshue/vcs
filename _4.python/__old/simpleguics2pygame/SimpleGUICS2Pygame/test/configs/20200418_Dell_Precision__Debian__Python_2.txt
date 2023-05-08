@@ -1,0 +1,64 @@
+script/SimpleGUICS2Pygame_check.py (April 14, 2020)
+===================================================
+PATH:
+  /home/opi/.cargo/bin
+  /home/opi/bin
+  /usr/local/bin
+  /usr/bin
+  /bin
+  /usr/local/games
+  /usr/games
+  /QUICK/progs/bin
+  /snap/bin
+  /QUICK/progs/Java
+  /home/opi/data/hg/vNu-scripts/vNu-scripts
+  /QUICK/progs/pypy3.6-v7.3.0-linux64/bin
+  /QUICK/progs/tikzit/bin
+  /home/opi/data/hg/tsv2htmltable_WORK/src/scripts
+  /home/opi/.local/bin
+
+PYTHONPATH:
+
+
+python - version 2.7.13 (default, Sep 26 2018, 18:42:22) 
+[GCC 6.3.0 20170516]
+
+sys.path:
+  /home/opi/data/git/current/simpleguics2pygame/SimpleGUICS2Pygame/script
+  /usr/lib/python2.7
+  /usr/lib/python2.7/plat-x86_64-linux-gnu
+  /usr/lib/python2.7/lib-tk
+  /usr/lib/python2.7/lib-old
+  /usr/lib/python2.7/lib-dynload
+  /home/opi/.local/lib/python2.7/site-packages
+  /usr/local/lib/python2.7/dist-packages
+  /usr/lib/python2.7/dist-packages
+  /usr/lib/python2.7/dist-packages/PILcompat
+  /usr/lib/python2.7/dist-packages/gtk-2.0
+  /usr/lib/python2.7/dist-packages/wx-3.0-gtk2
+
+
+pygame 1.9.6
+Hello from the pygame community. https://www.pygame.org/contribute.html
+import pygame ok - Version 1.9.6
+  pygame.init() 6 modules loaded ok
+
+
+import audioread ok - Version 2.1.8
+
+
+import matplotlib ok - Version 2.2.5
+
+
+import SimpleGUICS2Pygame ok - Version 02.00.00a2
+
+import SimpleGUICS2Pygame.codeskulptor ok
+import SimpleGUICS2Pygame.codeskulptor_lib ok
+import SimpleGUICS2Pygame.numeric ok
+import SimpleGUICS2Pygame.simplegui_lib ok
+import SimpleGUICS2Pygame.simplegui_lib_draw ok
+import SimpleGUICS2Pygame.simplegui_lib_fps ok
+import SimpleGUICS2Pygame.simplegui_lib_keys ok
+import SimpleGUICS2Pygame.simplegui_lib_loader ok
+import SimpleGUICS2Pygame.simpleguics2pygame ok
+import SimpleGUICS2Pygame.simpleplot ok

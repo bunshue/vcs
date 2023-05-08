@@ -50,8 +50,9 @@ def twobyte(kindno):
 
 #主程式
 import requests
-from bs4 import BeautifulSoup 
-kindno=1  # 計算共有多少分類  
+from bs4 import BeautifulSoup
+
+kindno=1  # 計算共有多少分類
 homeurl = 'http://www.books.com.tw/web/books_nbtopm_01/?o=5&v=1'
 mode="?o=5&v=1" #顯示模式：直式  排序依：暢銷度
 url="http://www.books.com.tw/web/books_nbtopm_" 
@@ -67,4 +68,4 @@ for href in hrefs:
     showbook(kindurl,kind) # 顯示該分類所有書籍
     kindno+=1  
 #    if kindno==2: break  # 開發階段    
-    
+

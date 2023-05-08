@@ -1,0 +1,13 @@
+Load from web "bonus.wav"
+Load from web "jump.ogg"
+Load from web "arrow.mp3"
+Load local "chirp_1s.wav"
+Load local "missile.ogg"
+Load local "missile.mp3"
+Play "chirp_1s.wav" 1.000000s loaded from local
+Play "missile.ogg" 0.208980s loaded from local
+Play "missile.mp3" 0.287347s loaded from local
+Play "bonus.wav" 0.448481s loaded from web
+Play "jump.ogg" 0.350884s loaded from web
+Play "arrow.mp3" 1.436735s loaded from web
+End of test_sound

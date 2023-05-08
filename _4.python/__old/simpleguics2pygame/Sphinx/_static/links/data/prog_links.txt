@@ -1,0 +1,587 @@
++ SimpleGUICS2Pygame helper <strong>modules</strong> (also available in <a class="url" href="https://bitbucket.org/OPiMedia/simpleguics2pygame/src/master/SimpleGUICS2Pygame/" target="_blank">https://bitbucket.org/OPiMedia/simpleguics2pygame/src/master/SimpleGUICS2Pygame/</a> )
+
+https://py3.codeskulptor.org/#user305_SXBsmszNiUxIeoV.py
+Module <strong>codeskulptor_lib</strong>.py
+Some miscellaneous functions to help in CodeSkulptor: <a href="../../codeskulptor_lib.html" target="_blank">Documentation</a>.
+
+https://py3.codeskulptor.org/#user305_SZNWcbqQHXN4pow.py
+Module <strong>simplegui_lib</strong>.py
+Some functions and classes to help in SimpleGUI of CodeSkulptor, from simplegui_lib_draw, from simplegui_lib_fps, simplegui_lib_keys and simplegui_lib_loader: <a href="../../simplegui_lib.html" target="_blank">Documentation</a>.
+
+https://py3.codeskulptor.org/#user305_SaT1YKoOikl4ax9.py
+Module <strong>simplegui_lib_draw</strong>.py
+Draw functions to help in SimpleGUI of CodeSkulptor: <a href="../../simplegui_lib_draw.html" target="_blank">Documentation</a>.
+
+https://py3.codeskulptor.org/#user305_tXfH4AcbNLtjfHy.py
+Module <strong>simplegui_lib_fps</strong>.py
+A class to calculate and display FPS (Frames Per Second) in SimpleGUI of CodeSkulptor: <a href="../../simplegui_lib_fps.html" target="_blank">Documentation</a>.
+
+https://py3.codeskulptor.org/#user305_EtIUDiM87dN1mD2.py
+Module <strong>simplegui_lib_keys</strong>.py
+A class to help manage keyboard handling in SimpleGUI of CodeSkulptor: <a href="../../simplegui_lib_keys.html" target="_blank">Documentation</a>.
+
+https://py3.codeskulptor.org/#user305_SZPJfNxJlVTjbAy.py
+Module <strong>simplegui_lib_loader</strong>.py
+A class to help load images and sounds in SimpleGUI of CodeSkulptor: <a href="../../simplegui_lib_loader.html" target="_blank">Documentation</a>.
+
+
+
++ SimpleGUICS2Pygame <strong>test</strong> (also available in <a class="url" href="https://bitbucket.org/OPiMedia/simpleguics2pygame/src/master/SimpleGUICS2Pygame/test/" target="_blank">https://bitbucket.org/OPiMedia/simpleguics2pygame/src/master/SimpleGUICS2Pygame/test/</a> )
+
+https://py3.codeskulptor.org/#user306_FCwrtOGfJPom5vo.py
+test_arc.py
+
+https://py3.codeskulptor.org/#user306_XRSVU3U4Jra6jNE.py
+test_button_label.py
+
+https://py3.codeskulptor.org/#user306_9mQpgiLNvicaTXJ.py
+test_circle.py
+
+https://py3.codeskulptor.org/#user306_7EpmqcdwZ6ApKkJ.py
+test_colors_constants.py
+
+https://py3.codeskulptor.org/#user306_Re9zfFMKbc6rqGl.py
+test_colors_html.py
+
+https://py3.codeskulptor.org/#user306_MN0hJt5K2vsKq9B.py
+test_colors_html_hsla.py
+
+https://py3.codeskulptor.org/#user306_3NTv7FHfIFZXdML.py
+test_colors_html_rgba.py
+
+https://py3.codeskulptor.org/#user306_JJGcv01FFDzfETX.py
+test_dir.py
+in CodeSkulptor2
+
+https://py3.codeskulptor.org/#user306_JJGcv01FFDzfETX.py
+test_dir.py
+in CodeSkulptor3
+
+https://py3.codeskulptor.org/#user306_ECN0USSqdQwUecH.py
+test_grid.py
+
+https://py3.codeskulptor.org/#user306_Z5qiKFLrvKnOV1i.py
+test_image.py
+
+https://py3.codeskulptor.org/#user306_o35plDFQ8fUMBqI.py
+test_input.py
+
+https://py3.codeskulptor.org/#user306_LJlU0QrylOuNtDP.py
+test_line.py
+
+https://py3.codeskulptor.org/#user306_rFzV2giTyjko6EU.py
+test_numeric.py
+
+https://py3.codeskulptor.org/#user306_HwTaZk7GpVaJdP7.py
+test_objects.py
+
+https://py3.codeskulptor.org/#user305_nWfBoMidU0KpXZc.py
+test_simpleplot_bars.py
+
+https://py3.codeskulptor.org/#user305_g06PPOkkvTtICa6.py
+test_simpleplot_lines.py
+
+https://py3.codeskulptor.org/#user305_wrM6Q7Hx7bHg9Bc.py
+test_simpleplot_scatter.py
+
+https://py2.codeskulptor.org/#user305_hASxftLJa4cHiL8.py
+test_sound.py
+in CodeSkulptor2
+
+https://py3.codeskulptor.org/#user305_hASxftLJa4cHiL8.py
+test_sound.py
+in CodeSkulptor3
+
+https://py3.codeskulptor.org/#user306_qavUJqhwyzm3Qvr.py
+test_text.py
+
+
+
++ SimpleGUICS2Pygame <strong>examples</strong> (also available in <a class="url" href="https://bitbucket.org/OPiMedia/simpleguics2pygame/src/master/SimpleGUICS2Pygame/example/" target="_blank">https://bitbucket.org/OPiMedia/simpleguics2pygame/src/master/SimpleGUICS2Pygame/example/</a> )
+
+https://py3.codeskulptor.org/#user305_tpFJSFuIMPjzs0F.py
+Blackjack.py
+
+https://py3.codeskulptor.org/#user305_ELuwGUIuxh7hmlE.py
+Frame_example.py
+Very simple canvas example.
+
+https://py2.codeskulptor.org/#user305_y6XS9Bq5JFD4eOU.py
+keys.py
+in CodeSkulptor2
+
+https://py3.codeskulptor.org/#user305_y6XS9Bq5JFD4eOU.py
+keys.py
+in CodeSkulptor3. Example of simplegui_lib_keys. Keys use: <a href="../../simplegui_lib_keys.html" target="_blank">Documentation</a>.
+
+https://py3.codeskulptor.org/#user305_vyR7lzNAMOV0BbV.py
+loader.py
+Example of simplegui_lib_loader. Loader use: <a href="../../simplegui_lib_loader.html" target="_blank">Documentation</a>.
+
+https://py3.codeskulptor.org/#user305_Yt9yNwyY3FKRgom.py
+<strong>Mandelbrot_Set</strong>.py
+
+https://py3.codeskulptor.org/#user305_4w0E1uUDm1bQsoK.py
+<strong>Memory</strong>.py
+
+https://py3.codeskulptor.org/#user305_vRkc5CSjtaTgW4y.py
+Nostalgic_Basic_Blitz.py
+(Old version written in AmigaBASIC: <a href="http://www.opimedia.be/DS/grenier/Amiga/online-Amiga/?run=Blitz" target="_blank">Blitz</a>.)
+
+https://py3.codeskulptor.org/#user305_X62vPplhMJxqOWu.py
+<strong>Pong</strong>.py
+
+https://py3.codeskulptor.org/#user306_QDvMS3LY8vYOaZ5.py
+presentation.py
+Little draw images and texts.
+
+https://py3.codeskulptor.org/#user305_XNvcqTxIBngtHPu.py
+<strong>RiceRocks_Asteroids</strong>.py
+
+https://py3.codeskulptor.org/#user305_oBWI7SgNVos3Lgx.py
+Spaceship_prototype.py
+
+https://py3.codeskulptor.org/#user305_Ylfzr5S6zqIpTgH.py
+stop_example.py
+
+https://py3.codeskulptor.org/#user305_GBuMcYugBi4gZIw.py
+Stopwatch.py
+
+https://py2.codeskulptor.org/#user305_tmjR8lBkaJjmXy7.py
+<strong>Stress_Balls</strong>.py
+in CodeSkulptor2
+
+https://py3.codeskulptor.org/#user305_tmjR8lBkaJjmXy7.py
+<strong>Stress_Balls</strong>.py
+in CodeSkulptor3
+
+https://py3.codeskulptor.org/#user306_mGg4qTqILzZ4ZoZ.py
+Stress_Balls_results.py
+
+
+
++ CodeSkulptor Applications
+
+https://py2.codeskulptor.org/#demos-pystep.py
+Pystep
+in CodeSkulptor2
+
+https://py2.codeskulptor.org/#user22_1rfesRC4kb_0.py
+<strong>Pystep</strong> <span class="adapted">adapted</span>
+in CodeSkulptor2
+
+
+
++ <a href="https://py3.codeskulptor.org/demos.html" target="_blank">CodeSkulptor Demos</a>
+
+https://py2.codeskulptor.org/#demos-doodleJump.py
+Doodle Jump prototype
+in CodeSkulptor2
+
+https://py3.codeskulptor.org/#user16_RB6j2S6ieI_0.py
+Doodle Jump prototype <span class="adapted">adapted</span>
+
+https://py3.codeskulptor.org/#demos-magnifier.py
+Draggable map magnifier
+
+https://py3.codeskulptor.org/#demos-musicplayer.py
+Simple music player
+
+https://py3.codeskulptor.org/#user16_jfhoO5x1x8_0.py
+<strong>Simple music player</strong> <span class="adapted">adapted</span>
+
+https://py3.codeskulptor.org/#demos-animation.py
+Sprite sheet animation
+
+https://py3.codeskulptor.org/#user16_ddNddbF9nI_0.py
+Sprite sheet animation <span class="adapted">adapted</span>
+
+https://py2.codeskulptor.org/#demos-tetris-clone.py
+Tetris prototype (Sarah <span class="surname">Davies</span>)
+in CodeSkulptor2
+
+https://py3.codeskulptor.org/#user16_eVd1AVpep0_0.py
+<strong>Tetris</strong> prototype (Sarah <span class="surname">Davies</span>) <span class="adapted">adapted</span>
+
+https://py2.codeskulptor.org/#user38_boBRhn8xEiaR2UK.py
+Visualizer for county-based cancer data <span class="adapted">adapted</span>
+in CodeSkulptor2
+
+
+
++ <a href="https://py3.codeskulptor.org/demos.html" target="_blank">CodeSkulptor Hall of Fame</a>
+
+https://py3.codeskulptor.org/#demos-clock.py
+Analog Clock (Kostya <span class="surname">Shkryob</span>)
+
+https://py3.codeskulptor.org/#user30_ZYGzrQiijeOqmTf.py
+Analog Clock (Kostya <span class="surname">Shkryob</span>) <span class="adapted">adapted</span>
+
+https://py2.codeskulptor.org/#demos_bunny_adventure.py
+Bunny&rsquo;s Big Adventure (Jenna <span class="surname">Netland</span>)
+in CodeSkulptor2
+
+https://py2.codeskulptor.org/#demos_bunny_game_objects.py
+Bunny&rsquo;s Big Adventure (game objects require Bunny&rsquo;s Big Adventure, Jenna <span class="surname">Netland</span>)
+in CodeSkulptor2
+
+https://py3.codeskulptor.org/#save2_cxBnS2wLPz.py
+Bunny&rsquo;s Big Adventure (Jenna <span class="surname">Netland</span>) <span class="adapted">adapted</span>
+
+https://py3.codeskulptor.org/#user16_fn3IdoDS8y_0.py
+Bunny&rsquo;s Big Adventure (game objects require by Bunny&rsquo;s Big Adventure, Jenna <span class="surname">Netland</span>) <span class="adapted">adapted</span>
+
+https://py3.codeskulptor.org/#demos_card_animation.py
+Card Animation (Simon <span class="surname">Nicholson</span>)
+
+https://py3.codeskulptor.org/#user38_XGSkQMugrgoabVX.py
+Card Animation (Simon <span class="surname">Nicholson</span>) <span class="adapted">adapted</span>
+
+https://py2.codeskulptor.org/#demos-ddr.py
+DDR clone (Emily <span class="surname">Wachtel</span>)
+in CodeSkulptor2
+
+https://py2.codeskulptor.org/#user19_hLghEN2n2P_0.py
+<strong>DDR clone</strong> (Emily <span class="surname">Wachtel</span>) <span class="adapted">adapted</span>
+in CodeSkulptor2
+
+https://py3.codeskulptor.org/#demos-towerdefence.py
+Elemental Tower Defence (Scott <span class="surname">Reynolds</span>)
+
+https://py3.codeskulptor.org/#user16_pkjMxzxZCY_0.py
+Elemental Tower Defence (Scott <span class="surname">Reynolds</span>) <span class="adapted">adapted</span> (but I don&rsquo;t understand anything in this game!)
+
+https://py2.codeskulptor.org/#demos-galaxy_invaders.py
+Galaxy Invaders (Igor <span class="surname">Petetskih</span>)
+in CodeSkulptor2
+
+https://py3.codeskulptor.org/#user33_IpiC59t14EadEvK.py
+<strong>Galaxy Invaders</strong> (Igor <span class="surname">Petetskih</span>) <span class="adapted">adapted</span>
+
+https://py2.codeskulptor.org/#demos-game_of_life.py
+Game of Life (Jonathan <span class="surname">Nixon</span>)
+in CodeSkulptor2
+
+https://py3.codeskulptor.org/#user19_kx6pNaJ16J_0.py
+<strong>Game of Life</strong> (Jonathan <span class="surname">Nixon</span>) <span class="adapted">adapted</span>
+
+https://py3.codeskulptor.org/#demos_hex.py
+Hex (Vladimir <span class="surname">Cvetkovic</span>)
+
+https://py3.codeskulptor.org/#user38_1AgwOF3jnpHn3Dm.py
+<strong>Hex</strong> (Vladimir <span class="surname">Cvetkovic</span>) <span class="adapted">adapted</span>
+
+https://py3.codeskulptor.org/#demos_lunar_lander.py
+Lunar Lander (John <span class="surname">Zavadil</span>)
+
+https://py3.codeskulptor.org/#user38_asuy99WcGJddHD6.py
+Lunar Lander (John <span class="surname">Zavadil</span>) <span class="adapted">adapted</span>
+
+https://py3.codeskulptor.org/#demos-pang.py
+Pang (Ender <span class="surname">Kasim</span>)
+
+https://py3.codeskulptor.org/#user33_TL0mU2EnpCzFqZv.py
+<strong>Pang</strong> (Ender <span class="surname">Kasim</span>) <span class="adapted">adapted</span>
+
+https://py3.codeskulptor.org/#demos-automata.py
+Psychedelic 1D Cellular Automata (Scott <span class="surname">Reynolds</span>)
+
+https://py3.codeskulptor.org/#user16_QMF8HFt8de_0.py
+<strong>Psychedelic 1D Cellular Automata</strong> (Scott <span class="surname">Reynolds</span>) <span class="adapted">adapted</span>
+
+https://py3.codeskulptor.org/#demos-pybert.py
+Py*bert (Jeff <span class="surname">Botts</span>)
+
+https://py3.codeskulptor.org/#save2_Gh6BSQnjSn.py
+<strong>Py*bert</strong> (Jeff <span class="surname">Botts</span>) <span class="adapted">adapted</span>
+
+https://py2.codeskulptor.org/#demos-pyman.py
+Pyman (Lawrence <span class="surname">Strickland</span>)
+in CodeSkulptor2
+
+https://py3.codeskulptor.org/#user305_p0V4bwZMjst5DEx.py
+<strong>Pyman</strong> (Lawrence <span class="surname">Strickland</span>) <span class="adapted">adapted</span>
+
+https://py2.codeskulptor.org/#demos-riceracer.py
+Rice Racer (Steve <span class="surname">Knock</span>) (don&rsquo;t work in Python, due to incorrect use of classes)
+in CodeSkulptor2
+
+https://py2.codeskulptor.org/#demos-Rubik.py
+Rubik&rsquo;s Cube (Karen <span class="surname">Ward</span>, Dennis <span class="surname">della Corte</span>)
+in CodeSkulptor2
+
+https://py2.codeskulptor.org/#user33_eg2RVgcIpLed7nz.py
+Rubik&rsquo;s Cube (Karen <span class="surname">Ward</span>, Dennis <span class="surname">della Corte</span>) <span class="adapted">adapted</span>
+in CodeSkulptor2
+
+https://py3.codeskulptor.org/#demos_sine_wave.py
+Sine Wave Text (Jason <span class="surname">Butwell</span>)
+
+https://py3.codeskulptor.org/#user38_2xloMPb7GsDDoFb.py
+Sine Wave Text (Jason <span class="surname">Butwell</span>) <span class="adapted">adapted</span>
+
+https://py2.codeskulptor.org/#demos-starwars.py
+Star Wars (Steve <span class="surname">Knock</span>)
+in CodeSkulptor2
+
+https://py3.codeskulptor.org/#user16_aLi8h3NpYe_0.py
+<strong>Star Wars</strong> (Steve <span class="surname">Knock</span>) <span class="adapted">adapted</span>
+
+https://py2.codeskulptor.org/#demos-adventures_of_tom.py
+The Adventures of Tom (Derek <span class="surname">Peirce</span>) (don&rsquo;t work in Python, due to incorrect use of classes)
+in CodeSkulptor2
+
+https://py3.codeskulptor.org/#demos-descent.py
+The Descent (Jiaqi <span class="surname">Liu</span>)
+
+https://py3.codeskulptor.org/#save2_WIzjLAwh92.py
+The Descent (Jiaqi <span class="surname">Liu</span>) <span class="adapted">adapted</span>
+
+https://py2.codeskulptor.org/#demos-tile_flood.py
+Tile Flood (Sergey <span class="surname">Efimov</span>)
+in CodeSkulptor2
+
+https://py3.codeskulptor.org/#user19_Sd5A76hlsV_0.py
+<strong>Tile Flood</strong> (Sergey <span class="surname">Efimov</span>) <span class="adapted">adapted</span>
+
+
+
++ By students of <a href="https://www.coursera.org/learn/interactive-python-1" target="_blank"><i>An Introduction to Interactive Programming in Python</i></a> (Coursera 2013 &ndash;&nbsp;2016)
+
+https://py2.codeskulptor.org/#user40_ntyd9O4ZQtVJss3_0.py
+2048 (Miguel Alejandro Moreno <span class="surname">Barrientos</span> 2015)
+in CodeSkulptor2 <a href="https://miguelalejandromorenobarrientos.github.io/CodeskulptorGames/" target="_blank">Codeskulptor Games</a>
+
+https://py3.codeskulptor.org/#user33_LAnBofUUkve1Qq0.py
+Amiga Tribute Demo (Jason <span class="surname">Butwell</span>)
+
+https://py3.codeskulptor.org/#user33_jyTuKmjjPoQEs8x.py
+Amiga Tribute Demo (Jason <span class="surname">Butwell</span>) <span class="adapted">adapted</span>
+
+https://py2.codeskulptor.org/#user16_KeOVeTmuOn2iucr_0.py
+Bouncing balls (Andrew <span class="surname">Meadows</span>)
+(bug) in CodeSkulptor2
+
+https://py2.codeskulptor.org/#user31_OSZd7TWcrlNBUJY.py
+Chess (Matthew <span class="surname">Phillips</span>)
+in CodeSkulptor2
+
+https://py3.codeskulptor.org/#user33_49qNv8QY2GYypLB.py
+Chess (Matthew <span class="surname">Phillips</span>) <span class="adapted">adapted</span>
+
+https://py3.codeskulptor.org/#user26_h8UsCGgIqmyoQDy.py
+Classic Breakout game (Roberto <span class="surname">Diaz</span>)
+
+https://py3.codeskulptor.org/#user28_qLoYgDbTWgiS0ni.py
+<strong>Classic Breakout game</strong> (Roberto <span class="surname">Diaz</span>) <span class="adapted">adapted</span>
+
+https://py2.codeskulptor.org/#user40_d7T6JWi5cWW0GXX.py
+Collision Detection Comparison (Jason <span class="surname">Ong</span>)
+in CodeSkulptor2
+
+https://py3.codeskulptor.org/#user40_BbDROUwu9VOoQb3.py
+<strong>Collision Detection Comparison</strong> (Jason <span class="surname">Ong</span>) <span class="adapted">adapted</span>
+
+https://py2.codeskulptor.org/#user28_wBpHroOrjnRy2A1.py
+Fish Pond (Chris <span class="surname">Arbuthnott</span>)
+in CodeSkulptor2
+
+https://py3.codeskulptor.org/#user28_9FxkYgKObhWu03B.py
+<strong>Fish Pond</strong> (Chris <span class="surname">Arbuthnott</span>) <span class="adapted">adapted</span>
+
+https://py3.codeskulptor.org/#user16_xfbbqbrHIbO8zDv_4.py
+Fractal (Roger <span class="surname">Foreman</span>)
+
+https://py3.codeskulptor.org/#user305_caStsMDczRaesfk.py
+<strong>Fractal</strong> (Roger <span class="surname">Foreman</span>) <span class="adapted">adapted</span>
+
+https://py3.codeskulptor.org/#user16_JERSJkUJn2WSSOk_3.py
+Fractal: Dragon Curve (Roger <span class="surname">Foreman</span>)
+
+https://py3.codeskulptor.org/#user305_6Pix0X24ww9nIOf.py
+<strong>Fractal: Dragon Curve</strong> (Roger <span class="surname">Foreman</span>) <span class="adapted">adapted</span>
+
+https://py3.codeskulptor.org/#user16_Iuy7xIrAnI_25.py
+Pitfall (Corrado <span class="surname">Musumeci</span>)
+
+https://py3.codeskulptor.org/#user16_F5TtoDE53v_0.py
+<strong>Pitfall</strong> (Corrado <span class="surname">Musumeci</span>) <span class="adapted">adapted</span>
+
+https://py3.codeskulptor.org/#user27_k063bQs8gFXh7Ox.py
+P-Jeweld (Ender <span class="surname">Kasim</span>)
+
+https://py3.codeskulptor.org/#user28_uWCY9If554rxeGr.py
+<strong>P-Jeweld</strong> (Ender <span class="surname">Kasim</span>) <span class="adapted">adapted</span>
+
+https://py2.codeskulptor.org/#user16_HasV5HkNlG_18.py
+Raycasting (Mike <span class="surname">Bendele</span>, with of Helder <span class="surname">Sepulveda</span>)
+in CodeSkulptor2
+
+https://py3.codeskulptor.org/#user16_fRCKqpqKA5_0.py
+<strong>Raycasting</strong> (Mike <span class="surname">Bendele</span>, with of Helder <span class="surname">Sepulveda</span>) <span class="adapted">adapted</span>
+
+https://py3.codeskulptor.org/#user28_ekPzwIkvoc8GTXK.py
+Sokoban (Rajesh <span class="surname">Vijayarajan</span>)
+
+https://py3.codeskulptor.org/#user28_CsOtpCYCJtDcRXG.py
+<strong>Sokoban</strong> (Rajesh <span class="surname">Vijayarajan</span>) <span class="adapted">adapted</span>
+
+https://py2.codeskulptor.org/#user40_lK9qI0yzG3ZemSr.py
+Sokoban (Manuel <span class="surname">Sgobino</span>)
+in CodeSkulptor2
+
+https://py3.codeskulptor.org/#user40_Oq675GoILL0imJ2.py
+<strong>Sokoban</strong> (Manuel <span class="surname">Sgobino</span>) <span class="adapted">adapted</span>
+
+https://py3.codeskulptor.org/#user16_SawZhBSY55_0.py
+<strong>Solarsystem</strong> (Diego <span class="surname">Romero</span>)
+
+https://py2.codeskulptor.org/#user16_bQhY2qfBlgprppk.py
+Tetris (John <span class="surname">Shea</span>)
+in CodeSkulptor2
+
+https://py3.codeskulptor.org/#user16_EGTMrlExln_0.py
+<strong>Tetris</strong> (John <span class="surname">Shea</span>) <span class="adapted">adapted</span>
+
+https://py3.codeskulptor.org/#user28_G1uPGqBLiegH2Uw.py
+Tetris (Kunfeng <span class="surname">Qiu</span>)
+
+https://py3.codeskulptor.org/#user28_UOLZ1DC39UoK3ta.py
+<strong>Tetris</strong> (Kunfeng <span class="surname">Qiu</span>) <span class="adapted">adapted</span>
+
+https://py2.codeskulptor.org/#user16_z2JMGgdos8_2.py
+Tetris Attack (Stephen <span class="surname">Ferguson</span>)
+in CodeSkulptor2
+
+https://py3.codeskulptor.org/#user16_1WZB5ONMqmVd8TF.py
+<strong>Tetris Attack</strong> (Stephen <span class="surname">Ferguson</span>) <span class="adapted">adapted</span>
+
+
+
++ Examples of <a href="https://www.coursera.org/learn/interactive-python-1" target="_blank"><i>An Introduction to Interactive Programming in Python</i></a> (Coursera 2013), Week 3
+
+https://py3.codeskulptor.org/#examples-more-3a_interactive_drawing-hidden_picture.py
+interactive_drawing-hidden_picture.py
+
+https://py3.codeskulptor.org/#examples-more-3a_interactive_drawing-pictures.py
+interactive_drawing-pictures.py
+
+https://py3.codeskulptor.org/#examples-more-3a_interactive_drawing-shapes.py
+interactive_drawing-shapes.py
+
+https://py2.codeskulptor.org/#examples-more-3b_timers-reaction_time.py
+timers-reaction_time.py
+in CodeSkulptor2
+
+https://py3.codeskulptor.org/#user16_kekWAX4zah_0.py
+timers-reaction_time.py <span class="adapted">adapted</span>
+
+
+
++ Examples of <i>An Introduction to Interactive Programming in Python</i> (Coursera 2013), Week 4
+
+https://py3.codeskulptor.org/#examples-keyboard-0.py
+keyboard-0.py
+
+https://py3.codeskulptor.org/#examples-more-4a_keyboard_input-shape_selection.py
+keyboard_input-shape_selection.py
+
+https://py2.codeskulptor.org/#examples-more-4a_lists-digital_numbers.py
+lists-digital_numbers.py
+in CodeSkulptor2
+
+https://py3.codeskulptor.org/#examples-more-4b_velocity_control-ball_track.py
+velocity_control-ball_track.py
+
+
+
++ Examples of <i>An Introduction to Interactive Programming in Python</i> (Coursera 2013), Week 5
+
+https://py3.codeskulptor.org/#examples-images.py
+images.py
+
+https://py3.codeskulptor.org/#examples-list_selection.py
+list_selection.py
+
+https://py3.codeskulptor.org/#examples-more-5_images-backgrounds.py
+more-5_images-backgrounds.py
+
+https://py3.codeskulptor.org/#examples-more-5_images-changes.py
+more-5_images-changes.py
+
+https://py2.codeskulptor.org/#examples-more-5_iteration-equilateral_polygons.py
+more-5_iteration-equilateral_polygons.py
+in CodeSkulptor2
+
+https://py3.codeskulptor.org/#user16_rUI85oYQ5D_0.py
+more-5_iteration-equilateral_polygons.py <span class="adapted">adapted</span>
+
+https://py3.codeskulptor.org/#examples-more-5_mouseclick_handlers-ball_movement.py
+more-5_mouseclick_handlers-ball_movement.py
+
+https://py2.codeskulptor.org/#examples-more-5_mouseclick_handlers-click_lines.py
+more-5_mouseclick_handlers-click_lines.py
+in CodeSkulptor2
+
+https://py3.codeskulptor.org/#examples-more-5_mouseclick_handlers-tic_tac_toe.py
+more-5_mouseclick_handlers-tic_tac_toe.py
+
+
+
++ Examples of <i>An Introduction to Interactive Programming in Python</i> (Coursera 2013), Week 6
+
+https://py3.codeskulptor.org/#examples-more-6_object_oriented_programming-bubbles.py
+more-6_object_oriented_programming-bubbles.py
+
+https://py3.codeskulptor.org/#examples-more-6_object_oriented_programming-flowers.py
+more-6_object_oriented_programming-flowers.py
+
+https://py2.codeskulptor.org/#examples-more-6_tiled_images-bunny_emotions.py
+examples-more-6_tiled_images-bunny_emotions.py
+in CodeSkulptor2
+
+
+
++ Examples of <i>An Introduction to Interactive Programming in Python</i> (Coursera 2013), Week 7
+
+https://py3.codeskulptor.org/#examples-more-7_acceleration_and_friction-balancing.py
+more-7_acceleration_and_friction-balancing.py
+
+https://py3.codeskulptor.org/#examples-more-7_acceleration_and_friction-curling.py
+more-7_acceleration_and_friction-curling.py
+
+https://py2.codeskulptor.org/#examples-more-7_colors-fading_dots.py
+more-7_colors-fading_dots.py
+in CodeSkulptor2
+
+https://py3.codeskulptor.org/#examples-more-7_sound-bouncing_sounds.py
+more-7_sound-bouncing_sounds.py
+
+https://py3.codeskulptor.org/#examples-spaceship_template.py
+spaceship_template.py
+
+https://py3.codeskulptor.org/#examples-sprite_example.py
+sprite_example.py
+
+
+
++ Examples of <i>An Introduction to Interactive Programming in Python</i> (Coursera 2013), Week 8
+
+https://py3.codeskulptor.org/#examples-asteroid_animation.py
+asteroid_animation.py
+
+https://py3.codeskulptor.org/#examples-explosion_animation.py
+explosion_animation.py
+
+https://py3.codeskulptor.org/#examples-more-8_sprite_animation-running_bunny.py
+more-8_sprite_animation-running_bunny.py
+
+https://py2.codeskulptor.org/#examples-more-8_collisions-balloon_pop.py
+more-8_collisions-balloon_pop.py
+in CodeSkulptor2
+
+https://py3.codeskulptor.org/#user16_bordh1K5TC_0.py
+more-8_collisions-balloon_pop.py <span class="adapted">adapted</span>
+
+https://py3.codeskulptor.org/#exercises_sets_final_solution.py
+sets_final_solution.py

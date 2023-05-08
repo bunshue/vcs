@@ -1,0 +1,218 @@
++ <a href="http://bbcsfx.acropolis.org.uk/" target="_blank">BBC Sound Effects</a> &mdash; Research &amp; Education Space
+
+
+
++ <a href="https://www.bfxr.net/" target="_blank">Bfxr</a> &ndash; Make sound effects for your games
+
+
+
++  <a href="http://www.clker.com/" target="_blank">Clker.com</a> (profile <a href="http://www.clker.com/profile-201124.html" target="_blank">O<span class="surname">Pi</span></a>)
+
+
+
++ <a href="https://py3.codeskulptor.org/#user19_hLghEN2n2P_0.py" target="_blank">DDR clone</a> by (Emily <span class="surname">Wachtel</span>) Hall of Fame <a href="https://www.coursera.org/learn/interactive-python-1" target="_blank"><i>An Introduction to Interactive Programming in Python</i></a> (Coursera 2013)
+
+http://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Kangaroo_MusiQue_-_The_Neverwritten_Role_Playing_Game.mp3
+
+http://commondatastorage.googleapis.com/codeskulptor-demos/DDR_assets/Sevish_-__nbsp_.mp3
+
+
+
++ Examples used in <a href="https://www.coursera.org/learn/interactive-python-1" target="_blank"><i>An Introduction to Interactive Programming in Python</i></a> (Coursera 2013)
+
+http://commondatastorage.googleapis.com/codeskulptor-assets/Collision8-Bit.ogg
+
+http://commondatastorage.googleapis.com/codeskulptor-assets/Epoq-Lepidoptera.ogg
+
+http://commondatastorage.googleapis.com/codeskulptor-assets/Evillaugh.ogg
+
+http://commondatastorage.googleapis.com/codeskulptor-assets/jump.ogg
+
+http://commondatastorage.googleapis.com/codeskulptor-assets/week7-bounce.m4a
+
+http://commondatastorage.googleapis.com/codeskulptor-assets/week7-brrring.m4a
+
+http://commondatastorage.googleapis.com/codeskulptor-assets/week7-button.m4a
+
+
+
++  <a href="https://www.findsounds.com/" target="_blank">FindSounds</a> &mdash; Search the Web for Sounds
+
+
+
++  <a href="https://freemusicarchive.org/" target="_blank">Free Music Archive</a>
+
+
+
++  <a href="https://www.freesfx.co.uk/" target="_blank">freeSFX</a>
+
+
+
++  <a href="https://freesound.org/" target="_blank">Freesound.org</a> (profile <a href="https://freesound.org/people/OPiMedia/" target="_blank">O<span class="surname">Pi</span>Media</a>)
+
+
+
++ <a href="https://py3.codeskulptor.org/#user33_IpiC59t14EadEvK.py" target="_blank">Galaxy Invaders</a> by (Igor <span class="surname">Petetskih</span>) Hall of Fame <a href="https://www.coursera.org/learn/interactive-python-1" target="_blank"><i>An Introduction to Interactive Programming in Python</i></a> (Coursera 2013)
+
+http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_hit.wav
+
+http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/alien_shoot.wav
+
+http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/bonus.wav
+
+http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/explosion_02.wav
+
+http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/explosion%2001.wav
+
+http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/pause.wav
+
+http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/player_shoot.wav
+
+http://codeskulptor-demos.commondatastorage.googleapis.com/GalaxyInvaders/theme_01.mp3
+
+
+
++ <a href="https://archive.org/" target="_blank">Internet Archives</a>/ <a href="https://archive.org/details/audio" target="_blank">Audio Archive</a>
+
+
+
++ <a href="https://itch.io/" target="_blank">itch.io</a>: Free <a href="https://itch.io/game-assets/free" target="_blank">Game assets</a>, Free <a href="https://itch.io/soundtracks/free" target="_blank">Soundtracks</a>
+
+
+
++ <a href="https://opengameart.org/" target="_blank">OpenGameArt.org</a>: <a href="https://opengameart.org/art-search-advanced?keys=&amp;field_art_type_tid%5B%5D=12" target="_blank">Music</a>, <a href="https://opengameart.org/art-search-advanced?keys=&amp;field_art_type_tid%5B%5D=13" target="_blank">Sound Effects</a>
+
+
+
++ <a href="https://py3.codeskulptor.org/#user33_TL0mU2EnpCzFqZv.py" target="_blank">Pang</a> by (Ender <span class="surname">Kasim</span>) Hall of Fame <a href="https://www.coursera.org/learn/interactive-python-1" target="_blank"><i>An Introduction to Interactive Programming in Python</i></a> (Coursera 2013)
+
+http://codeskulptor-demos.commondatastorage.googleapis.com/pang/arrow.mp3
+
+http://codeskulptor-demos.commondatastorage.googleapis.com/pang/paza-moduless.mp3
+
+http://codeskulptor-demos.commondatastorage.googleapis.com/pang/pop.mp3
+
+
+
++ <a href="https://py3.codeskulptor.org/#user16_1cRHwBcpa4_0.py" target="_blank">Pyman</a> by (Lawrence <span class="surname">Strickland</span>) Hall of Fame <a href="https://www.coursera.org/learn/interactive-python-1" target="_blank"><i>An Introduction to Interactive Programming in Python</i></a> (Coursera 2012) (<a href="http://www.noiseforfun.com/" target="_blank">NoiseForFun.com</a>, <a href="http://www.playonloop.com/" target="_blank">PlayOnLoop.com</a>)
+
+http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/ateapill.ogg
+
+http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/eatedible.ogg
+
+http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/eatpellet.ogg
+
+http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/extralife.ogg
+
+http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/intromusic.ogg
+
+http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/theygotcha.ogg
+
+
+
++ <a href="https://py2.codeskulptor.org/#demos-riceracer.py" target="_blank">Rice Racer</a> by (Steve <span class="surname">Knock</span>) Hall of Fame <a href="https://www.coursera.org/learn/interactive-python-1" target="_blank"><i>An Introduction to Interactive Programming in Python</i></a> (Coursera 2012)
+
+http://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/fx/engine-1.ogg
+
+http://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/fx/engine-2.ogg
+
+http://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/fx/engine-3.ogg
+
+http://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/fx/engine-4.ogg
+
+http://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/fx/engine-5.ogg
+
+http://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/fx/engine-6.ogg
+
+http://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/fx/engine-7.ogg
+
+http://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/fx/engine-8.ogg
+
+http://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/fx/engine-9.ogg
+
+http://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/fx/engine-10.ogg
+
+http://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/fx/engine-11.ogg
+
+http://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/fx/engine-12.ogg
+
+http://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/music/lose.ogg
+
+http://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/music/menu.ogg
+
+http://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/music/race1.ogg
+
+http://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/music/race2.ogg
+
+http://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/music/start.ogg
+
+http://commondatastorage.googleapis.com/codeskulptor-demos/riceracer_assets/music/win.ogg
+
+
+
+
++ <a href="http://soundbible.com/" target="_blank">SoundBible.com</a>
+
+
+
++ <a href="https://www.sounddesigners.org/" target="_blank">Sound Designers .Org</a>: <a href="https://www.sounddesigners.org/sonotheque.html" target="_blank">La Sonothèque</a>
+
+
+
++ <a href="https://www.sounddogs.com/" target="_blank">SoundDogs.com</a> (not free) used in <a href="https://www.coursera.org/learn/interactive-python-1" target="_blank"><i>An Introduction to Interactive Programming in Python</i></a> (Coursera 2013)
+
+http://commondatastorage.googleapis.com/codeskulptor-assets/sounddogs/explosion.mp3
+
+http://commondatastorage.googleapis.com/codeskulptor-assets/sounddogs/explosion.ogg
+
+http://commondatastorage.googleapis.com/codeskulptor-assets/sounddogs/missile.mp3
+
+http://commondatastorage.googleapis.com/codeskulptor-assets/sounddogs/missile.ogg
+
+http://commondatastorage.googleapis.com/codeskulptor-assets/sounddogs/soundtrack.mp3
+
+http://commondatastorage.googleapis.com/codeskulptor-assets/sounddogs/soundtrack.ogg
+
+http://commondatastorage.googleapis.com/codeskulptor-assets/sounddogs/thrust.mp3
+
+http://commondatastorage.googleapis.com/codeskulptor-assets/sounddogs/thrust.ogg
+
+
+
++ <a href="https://py3.codeskulptor.org/#save2_WIzjLAwh92.py" target="_blank">The Descent</a> by (Jiaqi <span class="surname">Liu</span>) Hall of Fame <a href="https://www.coursera.org/learn/interactive-python-1" target="_blank"><i>An Introduction to Interactive Programming in Python</i></a> (Coursera 2013)
+
+http://codeskulptor-demos.commondatastorage.googleapis.com/descent/background%20music.mp3
+
+http://codeskulptor-demos.commondatastorage.googleapis.com/descent/bomb.mp3
+
+http://codeskulptor-demos.commondatastorage.googleapis.com/descent/Crumble%20Sound.mp3
+
+http://codeskulptor-demos.commondatastorage.googleapis.com/descent/gotitem.mp3
+
+http://codeskulptor-demos.commondatastorage.googleapis.com/descent/spring.mp3
+
+http://codeskulptor-demos.commondatastorage.googleapis.com/descent/Zombie.mp3
+
+
+
++ <a href="https://www.vg-resource.com/" target="_blank">The VG Resource</a> (profile <a href="https://www.vg-resource.com/member.php?action=profile&amp;uid=21390" target="_blank">O<span class="surname">Pi</span>Media</a>): <a href="https://www.sounds-resource.com/" target="_blank">Sounds</a>
+
+
+
++ <a href="http://www.universal-soundbank.com/" target="_blank">Universal-Soundbank.com</a>
+
+
+
++ <a href="https://rpg.hamsterrepublic.com/ohrrpgce/Where_can_I_find_sound_effects%3F" target="_blank">Where can I find sound effects?</a> of <a href="https://rpg.hamsterrepublic.com/ohrrpgce/About" target="_blank">O.H.R.RPG.C.E.</a>
+
+https://rpg.hamsterrepublic.com/wiki-images/2/21/Collision8-Bit.ogg
+
+https://rpg.hamsterrepublic.com/wiki-images/d/db/Crush8-Bit.ogg
+
+https://rpg.hamsterrepublic.com/wiki-images/7/72/Metal_Hit.ogg
+
+https://rpg.hamsterrepublic.com/wiki-images/d/d7/Oddbounce.ogg
+
+
+
++ <a href="https://www.youtube.com/audiolibrary/music" target="_blank">YouTube Audio Library</a>

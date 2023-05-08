@@ -44,7 +44,8 @@ def twobyte(kindno):
 #主程式
 import requests
 from bs4 import BeautifulSoup
-import openpyxl        
+import openpyxl
+
 workbook=openpyxl.Workbook()   #建立一個工作簿
 sheet = workbook.worksheets[0] #獲取工作表 
 list1=[]    
@@ -70,4 +71,5 @@ sheet.append(listtitle)  # 標題
 for item1 in list1: #資料
     sheet.append(item1) 
     
-workbook.save('books_all.xlsx')    
+workbook.save('books_all.xlsx')
+

@@ -1,0 +1,68 @@
+script/SimpleGUICS2Pygame_check.py (April 14, 2020)
+===================================================
+PATH:
+  /QUICK/progs/graalvm-ee-java11-20.1.1/bin
+  /snap/bin
+  /home/opi/.local/bin
+  /home/opi/bin
+  /usr/local/bin
+  /usr/bin
+  /bin
+  /usr/local/games
+  /usr/games
+  /snap/bin
+  /home/opi/data/git/WORK/outcmp__WORK
+  /home/opi/data/git/WORK/tsv2htmltable__WORK/src/scripts
+  /home/opi/data/git/archives/prog/vnu-scripts/vNu-scripts
+  /home/opi/.local/bin
+  /home/opi/.local/share/coursier/bin
+  /home/opi/.config/composer/vendor/bin
+  /home/opi/bin
+  /QUICK/progs/infer-linux64-v0.17.0/bin
+  /QUICK/progs/scala-2.13.3/bin
+
+PYTHONPATH:
+
+
+python - version 2.7.16 (default, Oct 10 2019, 22:02:15) 
+[GCC 8.3.0]
+
+sys.path:
+  /home/opi/.local/bin
+  /usr/lib/python2.7
+  /usr/lib/python2.7/plat-x86_64-linux-gnu
+  /usr/lib/python2.7/lib-tk
+  /usr/lib/python2.7/lib-old
+  /usr/lib/python2.7/lib-dynload
+  /home/opi/.local/lib/python2.7/site-packages
+  /home/opi/.local/lib/python2.7/site-packages/SimpleGUICS2Pygame-2.1.0-py2.7.egg
+  /home/opi/.local/lib/python2.7/site-packages
+  /usr/local/lib/python2.7/dist-packages
+  /usr/lib/python2.7/dist-packages
+  /usr/lib/python2.7/dist-packages/gtk-2.0
+
+
+pygame 2.0.0 (SDL 2.0.12, python 2.7.16)
+Hello from the pygame community. https://www.pygame.org/contribute.html
+import pygame ok - Version 2.0.0
+  pygame.init() 6 modules loaded ok
+
+
+import audioread ok - Version 2.1.9
+
+
+import matplotlib ok - Version 2.2.5
+
+
+import SimpleGUICS2Pygame ok - Version 2.1.0
+
+import SimpleGUICS2Pygame.codeskulptor ok
+import SimpleGUICS2Pygame.codeskulptor_lib ok
+import SimpleGUICS2Pygame.numeric ok
+import SimpleGUICS2Pygame.simplegui_lib ok
+import SimpleGUICS2Pygame.simplegui_lib_draw ok
+import SimpleGUICS2Pygame.simplegui_lib_fps ok
+import SimpleGUICS2Pygame.simplegui_lib_keys ok
+import SimpleGUICS2Pygame.simplegui_lib_loader ok
+import SimpleGUICS2Pygame.simpleguics2pygame ok
+import SimpleGUICS2Pygame.simpleplot ok

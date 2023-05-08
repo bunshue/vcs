@@ -1,0 +1,19 @@
+include README.rst
+include requirements.txt
+
+include SimpleGUICS2Pygame/_img/SimpleGUICS2Pygame_152x261.bmp SimpleGUICS2Pygame/_img/SimpleGUICS2Pygame_32x32.ico
+include SimpleGUICS2Pygame/_img/*.png
+include SimpleGUICS2Pygame/COPYING/gpl-3.0.txt
+
+include SimpleGUICS2Pygame/*.py
+include SimpleGUICS2Pygame/simpleguics2pygame/*.py
+
+include SimpleGUICS2Pygame/example/*.py
+include SimpleGUICS2Pygame/example/Stress_Balls/*.py
+include SimpleGUICS2Pygame/example/Stress_Balls/old_results/Stress_Balls_results.*
+
+include SimpleGUICS2Pygame/script/*.py
+
+include SimpleGUICS2Pygame/test/README
+include SimpleGUICS2Pygame/test/*.py
+include SimpleGUICS2Pygame/test/*/*

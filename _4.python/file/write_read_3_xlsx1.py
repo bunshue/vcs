@@ -8,8 +8,7 @@ print("建立 xlsx")
 
 filename = 'C:/_git/vcs/_1.data/______test_files2/test1.xlsx'
 
-# 建立一個工作簿     
-workbook=openpyxl.Workbook()   
+workbook=openpyxl.Workbook()    # 建立一個工作簿
 # 取得第 1 個工作表
 sheet = workbook.worksheets[0]
 # 以儲存格位置寫入資料
@@ -21,7 +20,7 @@ sheet.append(listtitle)
 listdata=["David","0999-1234567"]
 sheet.append(listdata)
 
-# 儲存檔案   
+# 儲存檔案
 workbook.save(filename)
 
 print("建立 xlsx OK, 檔案 : " + filename)

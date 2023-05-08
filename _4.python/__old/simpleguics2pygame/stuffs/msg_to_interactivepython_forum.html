@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>SimpleGUICS2Pygame (package to allow run CodeSkulptor programs outside CodeSkulptor)</title>
+
+    <style type="text/css">
+code {
+    background-color: #f0f0f0;
+    font-family: monospace;
+}
+
+main {
+    border: 1px solid black;
+    margin: 1em;
+    padding: 1em;
+}
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>SimpleGUICS2Pygame (package to allow run CodeSkulptor programs outside CodeSkulptor)</h1>
+
+      <div>
+        CodeSkulptor, SimpleGUI, numeric, matrix, SimpleGUICS2Pygame, GUI, Python2, Python3, SimplePlot, SimpleGUITk
+      </div>
+    </header>
+
+    <main>
+
+      <img alt="[SimpleGUICS2Pygame]" src="https://simpleguics2pygame.readthedocs.io/en/latest/_images/SimpleGUICS2Pygame_64x64_t.png" width="64" height="64"><strong>SimpleGUICS2Pygame</strong><br>
+      It’s a standard Python 2 and 3 package that <strong>replace the special CodeSkulptor modules</strong>
+      (<code>simplegui</code>, <code>simpleplot</code> and <code>numeric</code>).
+
+      <ul>
+        <li>
+          <a href="https://simpleguics2pygame.readthedocs.io/"><strong>Online HTML documentation</strong></a><br>
+          (<a href="https://simpleguics2pygame.readthedocs.io/en/latest/#complete-installation-on-window-in-few-steps"><em>Complete installation on Window$ in few steps</em></a>)
+        </li>
+        <li>
+          <a href="https://bitbucket.org/OPiMedia/simpleguics2pygame">Complete sources and installers on Bitbucket</a>
+        </li>
+      </ul>
+
+      <div>
+        <p>
+          <strong>The goal is to use the same program in Python 2, 3 and CodeSkulptor.</strong><br>
+          Simply change<br>
+          <code>import simplegui</code><br>
+          by<br>
+          <code>try:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;import simplegui<br>
+            except ImportError:<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;import SimpleGUICS2Pygame.simpleguics2pygame as simplegui</code><br>
+          in your CodeSkulptor’s programs.
+        </p>
+        <p>
+          There are also some other modules usable in Python 2, 3 and CodeSkulptor.
+          For example, <a href="https://simpleguics2pygame.readthedocs.io/en/latest/simplegui_lib_loader.html"><code>simplegui_lib_loader</code></a>
+          provides a class to dealing
+          the loading images and sounds problem in CodeSkulptor.
+          It waits until all media are completely loaded and draw a progression bar.
+        </p>
+
+        <p>
+          Read the first page of documentation for how to install and learn few
+          <a href="https://simpleguics2pygame.readthedocs.io/en/latest/Tips.html">tips</a>.<br>
+          Read also the
+          <a href="https://simpleguics2pygame.readthedocs.io/en/latest/Compatibility.html">compatibility note</a>.
+        </p>
+
+        <p>If you have a problem, tell me…</p>
+
+        <p>
+          And if you want change some stuffs, you can, all sources are available.
+          It’s a completely <strong>free software</strong>.
+        </p>
+        <p>
+          <strong>Warning:</strong>
+          If you use it to write your mini-projects, be careful,
+          make sure they are perfectly correct in CodeSkulptor.<br>
+          <strong>Only CodeSkulptor must be used to evaluate mini-projects.</strong>
+        </p>
+      </div>
+
+      <div>
+        <h3>Message to developers</h3>
+        <p>
+          This is a <strong>free software</strong>, so you can download it,
+          <strong>modify it</strong> and <strong>submit your modifications</strong>.
+          You can also <strong>redistribute</strong> your own version
+          (keeping the <a href="https://simpleguics2pygame.readthedocs.io/en/latest/License.html">GPL license</a>).
+        </p>
+        <p>
+          Complete <strong>sources</strong> on Bitbucket:
+          <a href="https://bitbucket.org/OPiMedia/simpleguics2pygame">https://bitbucket.org/OPiMedia/simpleguics2pygame</a>
+        </p>
+      </div>
+
+    </main>
+  </body>
+</html>
