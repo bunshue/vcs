@@ -23,8 +23,20 @@ window.title(title)
 # 設定主視窗之背景色
 window.configure(bg="#7AFEC6")
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/python.ico'
-window.iconbitmap(filename) #設定icon
+# 設定主視窗之背景色
+#window.config(background="#5cfcff")
+
+
+'''
+#使用icon方法一 .ico
+icon_filename = 'C:/_git/vcs/_1.data/______test_files1/python.ico'
+window.iconbitmap(icon_filename) #設定icon
+'''
+
+#使用icon方法二 .png
+logo_filename = 'C:/_git/vcs/_1.data/______test_files1/__pic\_icon/option.png'
+icon = tk.PhotoImage(file = logo_filename)
+window.iconphoto(True,icon)
 
 show_mesg = tk.StringVar()
 

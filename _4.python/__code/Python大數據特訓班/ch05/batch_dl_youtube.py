@@ -5,6 +5,10 @@ import re
 #下載資料夾
 foldername = 'C:/_git/vcs/_1.data/______test_files2/youtube_download'
 
+#準備輸出資料夾 若不存在, 則建立
+if not os.path.exists(foldername):
+        os.mkdir(foldername)
+
 videourlList = []  #儲存所有影片網址的串列
 
 urltext = '/watch?v=36asE86iGmQ'    # 超好用的10個Win10小技巧，學會讓你事半功倍！ | 零度解說
@@ -41,4 +45,7 @@ for video in videourlList:
         yt.streams.filter(subtype='mp4', res='360p', progressive=True).first().download(foldername)  #下載mp4,360p影片
         n = n + 1
 print('下載完成！')
+print('下載影片資料夾 : ', foldername)
+
 '''
+

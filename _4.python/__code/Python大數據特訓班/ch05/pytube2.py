@@ -3,6 +3,10 @@ from pytube import YouTube
 #下載資料夾
 foldername = 'C:/_git/vcs/_1.data/______test_files2/youtube_download'
 
+#準備輸出資料夾 若不存在, 則建立
+if not os.path.exists(foldername):
+        os.mkdir(foldername)
+
 # 超好用的10個Win10小技巧，學會讓你事半功倍！ | 零度解說
 url = 'https://www.youtube.com/watch?v=36asE86iGmQ'
 
@@ -13,4 +17,7 @@ print('開始下載：' + yt.title)
 yt.streams.first().download(foldername)
 
 print('「' + yt.title + '」下載完成！')
+
+print("完成")
+print('下載影片資料夾 : ', foldername)
 
