@@ -7,6 +7,10 @@ pages = list()
 for pg in range(1, 4):
     pages.append(url.format(pg))
 
+pp.pprint(pages)
+print()
+print(pages)
+
 for page in pages:
     html = requests.get(page).text
     pp.pprint(html)

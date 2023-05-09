@@ -1,6 +1,8 @@
 import requests
 from bs4 import BeautifulSoup
+
 url = 'https://tw.stock.yahoo.com/news_list/url/d/e/N1.html'
+
 html = requests.get(url).text
 soup = BeautifulSoup(html, 'html.parser')
 titles_sel = '#newListTable span.mbody'
@@ -16,4 +18,5 @@ for item, ts in zip(titles, timestamp):
         temp['title'] = item.text
     temp['datetime'] = ts.text
     data.append(temp)
+
 print(data)

@@ -1,6 +1,8 @@
 import requests
 import os, csv, time
+
 url = 'http://stats.moe.gov.tw/files/detail/{0}/{0}_student.csv'
+
 for year in range(103, 109):
     csvdata = requests.get(url.format(year)).text
     rows = csvdata.split('\n')

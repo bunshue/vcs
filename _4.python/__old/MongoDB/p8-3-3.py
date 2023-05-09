@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+
 conn = MongoClient()
 db = conn.news
 collection = db.nkust

@@ -6,10 +6,11 @@ from tkinter import colorchooser
 
 ###########################################################################################################
 
-root = Tk()
-root.geometry('700x500')
+window = Tk()
+window.geometry('700x500')
 
 ###########################################################################################################
+
 class text_editor:
     current_file = 'no_file'
     def tsize(self):
@@ -54,7 +55,7 @@ class text_editor:
         for line in returned:
             self.text_box.insert(END, line)
             self.current_file = returned.name
-            root.title('Text Editor - ' + self.current_file)
+            window.title('Text Editor - ' + self.current_file)
         returned.close()
 
     def new(self):
@@ -63,17 +64,13 @@ class text_editor:
             self.save_func()
             self.text_box.delete(1.0, END)
             self.current_file = 'no_file'
-            root.title('Text Editor')
-            
-            
-
+            window.title('Text Editor')
         elif msg == None:
             print('')
-        
         else:
             self.text_box.delete(1.0, END)
             self.current_file = 'no_file'
-            root.title('Text Editor')
+            window.title('Text Editor')
 
 ###########################################################################################################
 
@@ -89,22 +86,19 @@ class text_editor:
     def save_func(self):
         if self.current_file == 'no_file':
             self.saveas_func()
-        
         else:
             f = open(self.current_file, 'w+')
             f.write(self.text_box.get(1.0, END))
-
 
     def exit(self):
         msg = messagebox.askyesnocancel('title','All the Progress will be not saved.\n Do you want to save.')
         if msg == True:
             self.save_func()
-            root.destroy()
-
+            window.destroy()
         elif msg == None:
             print('')
         else:
-            root.destroy()
+            window.destroy()
 
     def copy(self):
         self.text_box.clipboard_clear()
@@ -122,24 +116,17 @@ class text_editor:
         more.configure(bg='powder blue')
         more.geometry('400x200+300+450')
 
-
         Label(more, text='Text Editor',bg='powder blue',font=('Arial Black',10,'bold')).pack()
-
         Label(more, text='By: Harsh Bardhan Mishra',bg='powder blue',font=('Arial Black',10,'bold')).pack()
-
         Label(more, text='This Text Editor was created as a hobby project just for time-pass.',bg='powder blue',font=('Arial Black',10,'bold')).pack()
-
         Label(more, text='Contact us at:\nhbmcasper@gmail.com',bg='powder blue',font=('Arial Black',10,'bold')).pack(side=LEFT)
- 
-
         
 ###########################################################################################################
-        
     
     def __init__(self, master):
         master.title('TEXT EDITOR')
 
-        self.scroll = Scrollbar(root)
+        self.scroll = Scrollbar(window)
         self.scroll.pack(side=RIGHT,fill=Y)
         self.text_box = Text(yscrollcommand = self.scroll.set,font=('',15),undo=True)
         self.text_box.pack(fill=BOTH, expand = 1)
@@ -177,15 +164,14 @@ class text_editor:
         self.edit.add_command(label='Cut', command=self.cut)
         self.edit.add_command(label='Paste', command=self.paste)
 
-
         self.about.add_command(label='About Us', command = self.more)
 
         self.format.add_command(label='Change Text Size', command = self.tsize)
         self.format.add_command(label='Change Text Color', command = self.tcolor)
-        
 
 ###########################################################################################################
 
-te = text_editor(root)
+te = text_editor(window)
 
-root.mainloop()
+window.mainloop()
+

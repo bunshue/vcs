@@ -5,8 +5,6 @@ from tkinter import *
 
 master = Tk()
 
-
-
 def callback2():
             #scrollbar = Scrollbar(master)
             #scrollbar.pack( side = RIGHT, fill=Y )

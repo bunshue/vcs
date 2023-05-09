@@ -1,6 +1,8 @@
 import requests
 import os, csv
+
 url = 'http://stats.moe.gov.tw/files/detail/108/108_student.csv'
+
 csvdata = requests.get(url).text
 rows = csvdata.split('\n')
 data = list()
@@ -18,4 +20,5 @@ with open(os.path.basename(url), "w", encoding='utf-8', newline="") as fp:
     writer = csv.writer(fp)
     writer.writerow(columns[1:5])
     writer.writerows(data)
+    
 print("done")

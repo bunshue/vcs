@@ -1,7 +1,9 @@
 from pymongo import MongoClient
 import requests
 from bs4 import BeautifulSoup
+
 url = 'https://tw.stock.yahoo.com/news_list/url/d/e/N1.html'
+
 html = requests.get(url).text
 soup = BeautifulSoup(html, 'html.parser')
 titles_sel = '#newListTable span.mbody'
@@ -27,4 +29,5 @@ for item in data:
         print(item['title'])
     except:
         pass
+
 print("Done")

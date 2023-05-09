@@ -6,6 +6,8 @@ pages = list()
 for pg in range(1, 4):
     pages.append(url.format(pg))
 
+print(pages)
+
 for pg_no, page in enumerate(pages, 1):
     html = requests.get(page).text
     filename = "page-{}.txt".format(pg_no)

@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 import requests, time
 from bs4 import BeautifulSoup
+
 target_url = 'https://www.nkust.edu.tw/p/403-1000-12-{}.php'
 
 data = list()
@@ -42,4 +43,5 @@ for article in data[:5]:
         pass
     print(content)
     time.sleep(3)
+
 print("Done")
