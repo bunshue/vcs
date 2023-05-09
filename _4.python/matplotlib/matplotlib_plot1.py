@@ -1,6 +1,6 @@
 # plot 集合
 
-selected_font = 'C:/_git/vcs/_1.data/______test_files1/msch.ttf'
+selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -147,7 +147,7 @@ plt.legend()
 plt.subplot(235)
 from matplotlib.font_manager import FontProperties
 
-font = FontProperties(fname=r"c:\windows\Fonts\SimSun.ttc", size=20)
+font = FontProperties(fname=r"c:\windows\Fonts\mingliu.ttc", size=20)
 
 x = np.linspace(0, 10, 1000)
 y = np.sin(x)
@@ -215,7 +215,7 @@ plt.show()
 
 # plot 集合
 
-selected_font = 'C:/_git/vcs/_1.data/______test_files1/msch.ttf'
+selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -278,7 +278,7 @@ plt.show()
 
 # plot 集合
 
-selected_font = 'C:/_git/vcs/_1.data/______test_files1/msch.ttf'
+selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -373,7 +373,7 @@ plt.show()
 
 # plot 集合
 
-selected_font = 'C:/_git/vcs/_1.data/______test_files1/msch.ttf'
+selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
 
 import matplotlib.pyplot as plt
 import numpy as np

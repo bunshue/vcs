@@ -2,7 +2,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 import matplotlib.pyplot as plt
 
-selected_font = 'C:/_git/vcs/_1.data/______test_files1/ubuntu.ttf'
+selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'
 
 font_size=30
 
@@ -36,7 +36,7 @@ plt.show()
 from PIL import Image, ImageDraw, ImageFont
 
 msg = 'lion-mouse'
-selected_font = 'C:/_git/vcs/_1.data/______test_files1/ubuntu.ttf'
+selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'
 
 font_size = 30; #文字大小
 font_r = 255;   #紅色值
@@ -88,7 +88,7 @@ print('新檔存圖, 已寫入檔案：'+filename+'.png')
 import sys, os, glob
 from PIL import Image, ImageDraw, ImageFont
 
-selected_font = 'C:/_git/vcs/_1.data/______test_files1/ubuntu.ttf'
+selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'
 
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/_emgu/lena.jpg'
 filename2 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_old.png'
@@ -130,7 +130,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/_emgu/lena.jpg'
 filename2 = 'C:/_git/vcs/_1.data/______test_files2/pil_test03.png'
-selected_font = 'C:/_git/vcs/_1.data/______test_files1/ubuntu.ttf'
+selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'
 
 #要做浮水印的文字
 msg = "lion-mouse"
@@ -167,7 +167,7 @@ print('新檔存圖, 已寫入檔案：' + filename2)
 
 from PIL import Image, ImageDraw, ImageFont
 
-selected_font = 'C:/_git/vcs/_1.data/______test_files1/ubuntu.ttf'
+selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/_emgu/lena.jpg'
 filename2 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_old.png'
 filename3 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_new.png'

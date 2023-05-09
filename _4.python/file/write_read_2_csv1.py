@@ -2,12 +2,11 @@
 
 #csv檔 逗號分隔值(comma-seperated values)
 
-
 import csv
 
 print("python寫資料到CSV檔 1")
 
-filename_w = 'C:/_git/vcs/_1.data/______test_files2/TestCSVFileW.csv'
+filename_w = 'C:/_git/vcs/_1.data/______test_files2/TestCSVFileW1.csv'
 
 print("打開一個csv檔案 : "+filename_w)
 csvFile = open(filename_w, 'w+', newline='')
@@ -59,7 +58,7 @@ with open(filename, newline='') as csvfile:
         print(row['姓名'],row['身高'],row['體重'])
         
 import csv
-filename_w = 'C:/_git/vcs/_1.data/______test_files2/test3.csv'
+filename_w = 'C:/_git/vcs/_1.data/______test_files2/TestCSVFileW2.csv'
 with open(filename_w, 'w', newline='') as csvfile:
     # 定義欄位
     fieldnames = ['姓名', '身高', '體重']
@@ -97,7 +96,7 @@ csvtable = [
 ]
 
 # 開啟輸出的 csv 檔案
-filename_w = 'C:/_git/vcs/_1.data/______test_files2/test2.csv'
+filename_w = 'C:/_git/vcs/_1.data/______test_files2/TestCSVFileW3.csv'
 with open(filename_w, 'w', newline='') as csvfile:
     # 建立 csv 檔寫入物件
     writer = csv.writer(csvfile)
@@ -116,7 +115,7 @@ filename_r1 = "http://pythonscraping.com/files/MontyPythonAlbums.csv"
 print("讀取一個遠端csv檔案 : "+filename_r1)
 
 #本地檔案
-filename_r2 = 'C:/_git/vcs/_1.data/______test_files1/MontyPythonAlbums.local.csv'
+filename_r2 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/MontyPythonAlbums.local.csv'
 
 print("讀取一個本地csv檔案 : "+filename_r2)
 
@@ -134,8 +133,7 @@ for row in csvReader:
 
 
 import csv
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/zipcode.csv'
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/zipcode.csv'
 
 with open(filename, 'r', encoding='utf-8') as f:
     datas = csv.reader(f)
@@ -148,7 +146,7 @@ with open(filename, 'r', encoding='utf-8') as f:
 
 
 
-filename_rw1 = 'C:/_git/vcs/_1.data/______test_files2/sample3.csv'
+filename_rw1 = 'C:/_git/vcs/_1.data/______test_files2/TestCSVFileW4.csv'
 
 import csv
 # 開啟輸出的 csv 檔案

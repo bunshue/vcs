@@ -23,7 +23,7 @@ print('pandas 讀取 csv檔')
 import numpy as np
 
 print("讀取 .csv 檔 1")
-filename = 'C:/_git/vcs/_1.data/______test_files1/scores.csv'
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/scores.csv'
 na = np.genfromtxt(filename, delimiter=',', skip_header=1)
 print("資料寬高")
 print(na.shape)
@@ -42,7 +42,7 @@ print('全班最高總分：',total2.max())
 print('pandas 讀取 csv檔')
 
 import pandas as pd
-filename = 'C:/_git/vcs/_1.data/______test_files1/scores2.csv'
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_csv/scores2.csv'
 data = pd.read_csv(filename, header=0, index_col=0)
 print('打印資料')
 print(data)
