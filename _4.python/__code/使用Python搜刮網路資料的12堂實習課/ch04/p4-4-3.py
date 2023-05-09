@@ -1,4 +1,8 @@
-import requests, re, urllib, os, time
+import requests
+import re
+import urllib
+import os
+import time
 from bs4 import BeautifulSoup
 
 url = 'https://autos.udn.com/autos/story/9060/2187994'
@@ -9,15 +13,21 @@ soup = BeautifulSoup(html_data.text, 'html.parser')
 
 regex = r'http.+jpg'
 links = soup.find_all("a")
+
+print(links)
+
 photos = list()
+
 for link in links:
     try:
         if ".jpg" in link['href']:
+            print(link['href'])
             target = link['href']
             for item in re.findall(regex, target):
                 photos.append(item)
     except:
         pass
+
 for link in photos:
     item = urllib.parse.urlparse(link)
     q = urllib.parse.parse_qs(item.query)

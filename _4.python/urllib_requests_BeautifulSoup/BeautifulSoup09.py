@@ -1,6 +1,22 @@
 import requests, json
 from bs4 import BeautifulSoup
 
+print('PC Home 電腦售價')
+url = 'https://ecshweb.pchome.com.tw/search/v3.3/all/results?q=mac%20Mini&page=1&sort=sale/dc'
+
+html = requests.get(url).text
+products = json.loads(html)['prods']
+for product in products:
+    if product['price'] > 20000:
+        print("NT$:{}, {}".format(product['price'], product['name']))
+
+
+
+
+
+import requests, json
+from bs4 import BeautifulSoup
+
 '''
 def send_simple_message(title, body):
     return requests.post(
@@ -24,3 +40,5 @@ for product in products:
 print("Mac Mini價格通知", message)
 
 print("Done")
+
+

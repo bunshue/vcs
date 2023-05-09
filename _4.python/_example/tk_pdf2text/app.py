@@ -8,8 +8,10 @@ window = tk.Tk()
 canvas = tk.Canvas(window, width=600, height=300)
 canvas.grid(columnspan=3, rowspan=3)
 
-#顯示logo
-logo = Image.open('logo.png')
+#tk顯示一張圖片
+#filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = 'logo.png'
+logo = Image.open(filename)
 logo = ImageTk.PhotoImage(logo)
 label1 = tk.Label(image=logo)
 label1.image = logo

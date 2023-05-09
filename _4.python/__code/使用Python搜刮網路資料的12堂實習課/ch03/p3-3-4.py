@@ -1,6 +1,7 @@
 import requests
 import os, csv, time
 
+print('教育部統計處資料')
 url = 'http://stats.moe.gov.tw/files/detail/{0}/{0}_student.csv'
 
 for year in range(103, 109):
@@ -24,4 +25,5 @@ for year in range(103, 109):
         writer.writerow(columns[1:5])
         writer.writerows(data)
     time.sleep(3)
+
 print("done")

@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter.filedialog import askopenfile #tk之openFileDialog
 
 window = tk.Tk()
 
@@ -31,6 +32,24 @@ button = tk.Button(window, text='開啟新視窗', command = popup)
 button.pack()
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
+
+def open_file():
+    button_ofd_text.set("loading...")
+    file = askopenfile(parent=window, mode='rb', title="選取檔案", filetypes=[("Text file", "*.txt")])
+    if file:
+        print('已選取檔案 : ', file.name)
+
+    button_ofd_text.set("Browse")
+
+
+#瀏覽檔案按鈕
+button_ofd_text = tk.StringVar()
+button_ofd = tk.Button(window, textvariable=button_ofd_text, command=lambda:open_file(), font="Raleway", bg="#20bebe", fg="white", height=2, width=15)
+#button_ofd = tk.Button(window, text='選取檔案', command = xxxxxxx)
+button_ofd_text.set("Browse")
+button_ofd.pack()
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
+
 
 # Label測試
 tk.Label(text='有背景色的Label測試').pack()

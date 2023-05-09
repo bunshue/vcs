@@ -72,7 +72,7 @@ RGB_TXT = [
     # Linux
     '/usr/lib/X11/rgb.txt',
     # The X11R6.4 rgb.txt file
-    os.path.join(sys.path[0], 'X/rgb.txt'),
+    'rgb.txt',
     # add more here
     ]
 

@@ -244,7 +244,7 @@ def triplet_to_brightness(rgbtuple):
 
 
 if __name__ == '__main__':
-    colordb = get_colordb('/usr/openwin/lib/rgb.txt')
+    colordb = get_colordb('rgb.txt')
     if not colordb:
         print('No parseable color database found')
         sys.exit(1)

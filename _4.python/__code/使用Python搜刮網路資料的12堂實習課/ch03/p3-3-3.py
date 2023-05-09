@@ -1,6 +1,7 @@
 import requests
 import os, csv
 
+print('教育部統計處資料')
 url = 'http://stats.moe.gov.tw/files/detail/108/108_student.csv'
 
 csvdata = requests.get(url).text
