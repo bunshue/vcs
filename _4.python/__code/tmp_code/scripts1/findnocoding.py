@@ -5,8 +5,6 @@
 Usage: findnocoding.py dir1 [dir2...]
 """
 
-__author__ = "Oleg Broytmann, Georg Brandl"
-
 import sys, os, re, getopt
 
 # our pysource module finds Python source files

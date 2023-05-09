@@ -2,7 +2,9 @@
 
 "Replace LF with CRLF in argument files.  Print names of changed files."
 
-import sys, re, os
+import sys
+import re
+import os
 
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/human1.jpg'
 filename2 = 'C:/_git/vcs/_1.data/______test_files1/poetry2.txt'
@@ -24,3 +26,4 @@ for filename in filenames:
         print(filename)
         with open(filename, "wb") as f:
             f.write(newdata)
+

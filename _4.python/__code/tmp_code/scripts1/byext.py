@@ -116,13 +116,10 @@ class Stats:
         printheader()  # Another header at the bottom
 
 
-def main():
+args = [os.curdir]
+print(args)
 
-    args = [os.curdir]
-        
-    s = Stats()
-    s.statargs(args)
-    s.report()
+s = Stats()
+s.statargs(args)
+s.report()
 
-if __name__ == "__main__":
-    main()

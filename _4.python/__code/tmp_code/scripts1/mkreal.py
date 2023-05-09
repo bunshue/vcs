@@ -1,9 +1,3 @@
-#! /usr/bin/env python3
-
-# mkreal
-#
-# turn a symlink to a directory into a real directory
-
 import sys
 import os
 from stat import *
@@ -37,7 +31,7 @@ def mkrealdir(name):
     os.mkdir(name, mode)
     os.chmod(name, mode)
     linkto = join(os.pardir, linkto)
-    #
+
     for filename in files:
         if filename not in (os.curdir, os.pardir):
             os.symlink(join(linkto, filename), join(name, filename))
@@ -45,11 +39,14 @@ def mkrealdir(name):
 def main():
     sys.stdout = sys.stderr
     progname = os.path.basename(sys.argv[0])
-    if progname == '-c': progname = 'mkreal'
+    if progname == '-c':
+        progname = 'mkreal'
     args = sys.argv[1:]
+    
     if not args:
         print('usage:', progname, 'path ...')
         sys.exit(2)
+        
     status = 0
     for name in args:
         if not os.path.islink(name):
