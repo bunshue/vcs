@@ -1,30 +1,7 @@
 # tk common message boxes
-#
-# this module provides an interface to the native message boxes
-# available in Tk 4.2 and newer.
-#
-# written by Fredrik Lundh, May 1997
-#
-
-#
-# options (all have default values):
-#
-# - default: which button to make default (one of the reply codes)
-#
-# - icon: which icon to display (see below)
-#
-# - message: the message to display
-#
-# - parent: which window to place the dialog on top of
-#
-# - title: dialog title
-#
-# - type: dialog type; that is, which buttons to display (see below)
-#
 
 from tkinter.commondialog import Dialog
 
-#
 # constants
 
 # icons

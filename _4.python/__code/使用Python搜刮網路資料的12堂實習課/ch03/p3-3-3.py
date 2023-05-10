@@ -1,7 +1,7 @@
 import requests
 import os, csv
 
-print('±Ð¨|³¡²Î­p³B¸ê®Æ')
+print('æ•™è‚²éƒ¨çµ±è¨ˆè™•è³‡æ–™')
 url = 'http://stats.moe.gov.tw/files/detail/108/108_student.csv'
 
 csvdata = requests.get(url).text

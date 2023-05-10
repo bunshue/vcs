@@ -1,7 +1,7 @@
 import csv
 import requests
 
-print('±Ð¨|³¡²Î­p³B¸ê®Æ')
+print('æ•™è‚²éƒ¨çµ±è¨ˆè™•è³‡æ–™')
 url = 'http://stats.moe.gov.tw/files/detail/{}/{}_student.csv'
 
 for year in range(103, 109):

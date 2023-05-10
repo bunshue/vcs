@@ -1,10 +1,3 @@
-"""Script to compile the dependencies of _tkinter
-
-Copyright (c) 2007 by Christian Heimes <christian@cheimes.de>
-
-Licensed to PSF under a Contributor Agreement.
-"""
-
 import os
 import sys
 
