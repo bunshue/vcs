@@ -22,7 +22,7 @@ def get_mailgun_key():
         return ""
     return maingun_key
 
-def send_simple_message(email_from, email_to, subject, body):
+def send_simple_message(email_nicknane, email_from, email_to, subject, body):
     maingun_key = get_mailgun_key()
     length = len(maingun_key)
     if length != 50:
@@ -32,7 +32,7 @@ def send_simple_message(email_from, email_to, subject, body):
     return requests.post(
         "https://api.mailgun.net/v3/sandboxbfcaff2ba2ce446eb4972796eabec7da.mailgun.org/messages",
         auth=("api", maingun_key),
-        data={"from": "David Wang <david@insighteyes.com>",
+        data={"from": "%s <%s>" % (email_nicknane, email_from),
               "to": [email_to],
               "subject": subject,
               "text": body })
@@ -48,7 +48,7 @@ email_addr_cc = "bunshue@gmail.com"
 mail_subject = '測試郵件標題' #郵件標題
 mail_body = '測試郵件內容測試郵件內容測試郵件內容測試郵件內容'  #郵件內容
 
-ret = send_simple_message(email_addr_from, email_addr_to, mail_subject, mail_body)
+ret = send_simple_message(email_addr_from_nicknane, email_addr_from, email_addr_to, mail_subject, mail_body)
 print(ret)
                     
 
