@@ -5,14 +5,20 @@ def createDF():
     dates = []  #存日期
     days = []  #存星期幾
     url = 'http://www.cwb.gov.tw/V7/forecast/town368/3Hr/6301000.htm'  #內湖區三日預報
-    res = requests.get(url)
-    res.encoding = 'utf-8'
-    soup = BeautifulSoup(res.text, 'html.parser')
+    html_data = requests.get(url)
+    html_data.encoding = 'utf-8'
+    
+    soup = BeautifulSoup(html_data.text, 'html.parser')
+    print(soup.prettify())  #prettify()這個函數可以將DOM tree以比較美觀的方式印出。
+    
     trs = soup.find_all('tr')  #取得所有「tr」標籤
     
     year3.append("%d" % datetime.datetime.now().year)
     year3.append("%d" % (datetime.datetime.now() + datetime.timedelta(days=1)).year) #第二天年份
     year3.append("%d" % (datetime.datetime.now() + datetime.timedelta(days=2)).year) #第三天年份
+
+    print(trs)
+    '''
     tdall = trs[0].findAll('td')  #第1列:月、日及星期
     k=0
     for i in range(len(tdall)): 
@@ -49,7 +55,7 @@ def createDF():
     #處理第9列以外的第4到10列
     vals = []  
     for i in range(3, 10):
-        if i is not 8:  #排除第9列
+        if i != 8:  #排除第9列
             tdall = trs[i].findAll('td')
             for j in range(len(tdall)):
                 td = tdall[j]    
@@ -72,6 +78,7 @@ def createDF():
             for j in range(0, rep):  #重複取值
                 pops.append(td.text)
     df['降雨機率'] = pops
+    '''
 
 def writeMySql():
     global df
@@ -123,4 +130,4 @@ import pymysql
 columns = ['日期時間','星期','天氣狀況','溫度','體感溫度','蒲福風級','風向','相對溼度','降雨機率','舒適度']  #欄位名稱
 df = pandas.DataFrame(columns=columns)  #建立DataFrame
 createDF()  #擷取天氣資料
-writeMySql()  #寫入MySql資料庫
+#writeMySql()  #寫入MySql資料庫

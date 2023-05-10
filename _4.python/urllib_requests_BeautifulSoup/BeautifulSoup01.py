@@ -204,4 +204,39 @@ for img in all_imgs:
 print("共下載",n,"張圖片")
 
 
+html_data = """
+<div class="content">
+    E-Mail：<a href="mailto:mail@test.com.tw">mail</a><br>
+    E-Mail2：<a href="mailto:mail2@test.com.tw">mail2</a><br>
+    <ul class="price">定價：360元 </ul>
+    <img src="http://test.com.tw/p1.jpg">
+    <img src="http://test.com.tw/p2.jpg">
+    <img src="http://test.com.tw/p3.png">
+</div>
+"""
+
+import re
+from bs4 import BeautifulSoup
+
+soup = BeautifulSoup(html_data, 'html.parser')
+#print(soup.prettify())  #prettify()這個函數可以將DOM tree以比較美觀的方式印出。
+
+print('用 re 搭配搜尋')
+print('搜尋網頁中的 e-mail')
+emails = re.findall(r'[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+', html_data)
+for email in emails:
+    print(email)
+
+print('搜尋網頁中的 價格')
+price = re.findall(r"[\d]+", soup.select('.price')[0].text)[0] #價格
+print(price)
+
+print('搜尋網頁中的 jpg圖片連結')
+regex = re.compile('.*\.jpg')
+imglist = soup.find_all("img", {"src":regex})
+for img in imglist:
+    print(img["src"])
+
+
+
 
