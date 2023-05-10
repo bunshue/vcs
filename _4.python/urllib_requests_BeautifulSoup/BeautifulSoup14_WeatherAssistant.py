@@ -7,7 +7,7 @@ def get_cwb_key():
     filename = 'C:/_git/vcs/_1.data/______test_files1/_key/cwb_key.txt'
 
     import os
-    filename=os.path.abspath(filename)
+    filename = os.path.abspath(filename)
     if not os.path.exists(filename): #檢查檔案是否存在
         print('CWB_KEY 檔案不存在, 離開, 檔案 : ' + filename)
         return ""
@@ -84,7 +84,7 @@ def get_line_key():
     filename = 'C:/_git/vcs/_1.data/______test_files1/_key/line_key.txt'
 
     import os
-    filename=os.path.abspath(filename)
+    filename = os.path.abspath(filename)
     if not os.path.exists(filename): #檢查檔案是否存在
         print('LINE_KEY 檔案不存在, 離開, 檔案 : ' + filename)
         return ""
