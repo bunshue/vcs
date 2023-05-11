@@ -1,6 +1,8 @@
-from bokeh.plotting import figure, show
+from bokeh.plotting import figure, show, output_file
 from bs4 import BeautifulSoup as bs
 import requests
+
+output_file("personbokeh.html")
 
 year = []
 person = []

@@ -1,4 +1,6 @@
-from bokeh.plotting import figure, show
+from bokeh.plotting import figure, show, output_file
+
+output_file("circle1.html")
 
 p = figure(width=800, height=400, title="零用金統計")
 p.title.text_font_size = "18pt"

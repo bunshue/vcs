@@ -75,7 +75,9 @@ def delete_data():
 
 import os,sqlite3
 
-conn = sqlite3.connect('Sqlite01.sqlite')
+db_filename = 'C:/_git/vcs/_1.data/______test_files1/_db/python02.sqlite';
+
+conn = sqlite3.connect(db_filename)
 while True:
     menu()
     choice = int(input("請輸入您的選擇："))
