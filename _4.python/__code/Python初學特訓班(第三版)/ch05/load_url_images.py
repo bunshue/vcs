@@ -1,4 +1,5 @@
-import requests,os
+import requests
+import os
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 
