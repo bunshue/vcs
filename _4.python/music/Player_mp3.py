@@ -34,7 +34,8 @@ from pygame import mixer
 import glob,os
 mixer.init()
 
-source_dir = "mp3/"
+source_dir = 'C:/_git/vcs/_1.data/______test_files1/_mp3/'
+
 mp3files = glob.glob(source_dir+"*.mp3")
 index=0
 status=""

@@ -28,7 +28,8 @@ from pygame import mixer
 import glob,os
 mixer.init()
 
-source_dir = "wav/"
+source_dir = 'C:/_git/vcs/_1.data/______test_files1/_wav/'
+
 wavfiles = glob.glob(source_dir+"*.wav")
 index=0
 status=""

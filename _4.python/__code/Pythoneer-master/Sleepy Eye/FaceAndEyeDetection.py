@@ -3,7 +3,6 @@
 
 import cv2
 from functools import wraps
-from pygame import mixer
 import time
 
 lastsave = 0
@@ -35,10 +34,8 @@ def closed():
 def openeye():
   print ("Eye is Open")
 
-def sound():
-    mixer.init()
-    mixer.music.load('sound.mp3')
-    mixer.music.play()
+def warning():
+    print('XXXXXXXXXXXXXXXXXX')
 
 while 1:
     ret, img = cap.read()
@@ -59,7 +56,7 @@ while 1:
         else:
            closed()
            if closed.count == 3:
-               sound()
+               warning()
 
     cv2.imshow('WebCam', img)
     k = cv2.waitKey(1)

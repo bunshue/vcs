@@ -1,4 +1,5 @@
 import cv2
+
 cv2.namedWindow("ShowImage")
 image = cv2.imread("media\\img01.jpg", 0)
 cv2.imshow("ShowImage", image)
