@@ -162,13 +162,19 @@ with open(filename2, 'r', encoding = 'UTF-8-sig') as fo:
     print(str1)  # 123中文
 
 print("使用cp950編碼 讀取檔案")
-filename_utf8 = 'C:/_git/vcs/_1.data/______test_files1/fileUTF8.txt'
-fo=open(filename_utf8, 'r', encoding = 'cp950')
-for line in fo:
+filename_utf8 = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/fileUTF8.txt'
+f=open(filename_utf8, 'r', encoding = 'cp950')
+for line in f:
     print(line, end = "")
-fo.close()
+f.close()
 
+#david: 其實也不怎麼對, 後面才對
 
+print('111111111111111111')
+f=open(filename_utf8, 'r',encoding ='UTF-8-sig')
+print(f.readline())  # 123中文字\n
+print(f.readline(3)) # abc
+f.close()
 
 
 #各種檔案寫讀範例 txt 2

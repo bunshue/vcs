@@ -1,3 +1,5 @@
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/python_password.txt'
+
 def menu():
     os.system("cls")
     print("帳號、密碼管理系統")
@@ -10,7 +12,7 @@ def menu():
     print("-------------------------")
     
 def ReadData(): 
-    with open('password.txt','r', encoding = 'UTF-8-sig') as f:
+    with open(filename,'r', encoding = 'UTF-8-sig') as f:
         filedata = f.read()
         if filedata != "":
             data = ast.literal_eval(filedata)
@@ -33,7 +35,7 @@ def input_data():
             continue
         password=input("請輸入密碼：")
         data[name]=password
-        with open('password.txt','w',encoding = 'UTF-8-sig') as f:
+        with open(filename,'w',encoding = 'UTF-8-sig') as f:
             f.write(str(data))
         print("{}已被儲存完畢".format(name)) 
     
@@ -47,7 +49,7 @@ def edit_data():
         print("原來密碼為：{}".format(data[name]))
         password=input("請輸入新密碼：")
         data[name]=password
-        with open('password.txt','w',encoding = 'UTF-8-sig') as f:
+        with open(filename,'w',encoding = 'UTF-8-sig') as f:
             f.write(str(data))
             input("密碼更改完畢，請按任意鍵返回主選單") 
             break
@@ -63,7 +65,7 @@ def delete_data():
         yn=input("(Y/N)?")
         if (yn=="Y" or yn=="y"):
             del data[name]
-            with open('password.txt','w',encoding = 'UTF-8-sig') as f:
+            with open(filename,'w',encoding = 'UTF-8-sig') as f:
                 f.write(str(data))
                 input("已刪除完畢，請按任意鍵返回主選單") 
                 break
