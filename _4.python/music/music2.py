@@ -8,7 +8,7 @@ pygame.display.set_mode(windowSize)
 
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/_mp3/02 渡り鳥仁義(1984.07.01-候鳥仁義).mp3'
 filename2 = 'C:/_git/vcs/_1.data/______test_files1/_mp3/16.監獄風雲.mp3'
-filename3 = 'C:/_git/vcs/_1.data/______test_files1/_wav/harumi.wav'
+filename3 = 'C:/_git/vcs/_1.data/______test_files1/_wav/harumi99.wav'
 
 '''
 file1 = pygame.mixer.Sound(filename1)
@@ -41,9 +41,7 @@ pygame.quit()
 '''
 
 
-
 import pygame
-
 
 pygame.mixer.init()
 pygame.mixer.music.load(filename3)
