@@ -26,8 +26,10 @@ import cv2, os, math, operator
 from PIL import Image
 from functools import reduce
 
-casc_path = "C:\\Users\\jeng\\AppData\\Local\\conda\\conda\\pkgs\\opencv3-3.1.0-py34_0\\Library\\etc\\haarcascades\\haarcascade_frontalface_default.xml"
-faceCascade = cv2.CascadeClassifier(casc_path)  #建立辨識物件
+# OpenCV 人臉識別分類器
+xml_filename = 'C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml'
+faceCascade = cv2.CascadeClassifier(xml_filename)   #建立辨識物件
+
 recogname = "media\\recogface.jpg"  #使用者人臉檔案
 loginname = "media\\loginface.jpg"  #登入者人臉檔案
 os.system("cls")  #清除螢幕

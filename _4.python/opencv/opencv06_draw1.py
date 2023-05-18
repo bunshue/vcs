@@ -11,35 +11,35 @@ print('設定圖片大小')
 W = 800
 H = 600
 BORDER = 100
-img = np.zeros((H, W, 3))
+image = np.zeros((H, W, 3))
 #-----------------------------------------------------------------------------
 print('畫直線')
 px1 = BORDER
 py1 = BORDER
 px2 = W - BORDER
 py2 = H - BORDER
-cv2.line(img, (px1, py1), (px2, py2), 2)
-cv2.line(img, (px1, py2), (px2, py1), 2)
+cv2.line(image, (px1, py1), (px2, py2), 2)
+cv2.line(image, (px1, py2), (px2, py1), 2)
 #-----------------------------------------------------------------------------
 print('畫矩形')
 px1 = BORDER
 py1 = BORDER
 px2 = W - BORDER
 py2 = H - BORDER
-cv2.rectangle(img, (px1, py1), (px2, py2), (255, 255, 0), 2)
+cv2.rectangle(image, (px1, py1), (px2, py2), (0, 0, 255), 2)
 #-----------------------------------------------------------------------------
 print('畫圓')
 cx = int(W / 2)
 cy = int(H / 2)
 r = 100
-cv2.circle(img, (cx, cy), r, (255, 255, 0), 2)
+cv2.circle(image, (cx, cy), r, (255, 255, 0), 2)
 #-----------------------------------------------------------------------------
 print('畫橢圓')
 cx = int(W / 2)
 cy = int(H / 2)
 a = 250  #長軸
 b = 100  #短軸
-cv2.ellipse(img, (cx, cy), (a, b), 0, 0, 360, (255, 255, 0), 2)
+cv2.ellipse(image, (cx, cy), (a, b), 0, 0, 360, (255, 255, 0), 2)
 #-----------------------------------------------------------------------------
 print('畫多邊形')
 px1 = int(W / 2)
@@ -59,16 +59,25 @@ py7 = int(H / 2)
 px8 = W - BORDER
 py8 = BORDER
 pts = np.array([[px1, py1], [px2, py2], [px3, py3], [px4, py4], [px5, py5], [px6, py6], [px7, py7], [px8, py8]])
-cv2.polylines(img, [pts], True, (255, 255, 0), 2)   #True表示封口
+cv2.polylines(image, [pts], True, (255, 255, 0), 2)   #True表示封口
 #-----------------------------------------------------------------------------
 print('畫字')
 font = cv2.FONT_HERSHEY_SIMPLEX
+
 x_st = BORDER
 y_st = H - 70
-cv2.putText(img, 'Only Show English', (x_st, y_st), font, 2, (255, 255, 0), 2)
+cv2.putText(image, 'Only Show English', (x_st, y_st), font, 2, (255, 255, 0), 2)
+
+text = 'Hello, World!'
+font_size = 1
+line_width = 1
+x_st = 20
+y_st = 20
+cv2.putText(image, text, (x_st, y_st), cv2.FONT_HERSHEY_SIMPLEX, font_size, (0, 0, 255), line_width, cv2.LINE_AA)
+
 #-----------------------------------------------------------------------------
 print('把圖片顯示出來')
-cv2.imshow('OpenCV Draw Picture', img)
+cv2.imshow('OpenCV Draw Picture', image)
 
 print('wait kere')
 cv2.waitKey(0)

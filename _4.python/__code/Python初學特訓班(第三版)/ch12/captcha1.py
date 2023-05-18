@@ -1,4 +1,6 @@
-import cv2, subprocess
+import cv2
+import subprocess
+
 img = cv2.imread("media\\bank.jpg")  #讀圖
 cv2.namedWindow("Image")  
 cv2.imshow("Image", img) #顯示圖形

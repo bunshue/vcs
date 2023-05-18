@@ -5,6 +5,7 @@ cv2.imwrite(filename2, image)	#寫入本機圖片
 
 cv2.imwrite("face_detection.jpg", image)
 
+cv2.imwrite('7.jpg', image)
 
 
 

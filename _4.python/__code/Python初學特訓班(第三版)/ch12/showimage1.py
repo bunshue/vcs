@@ -1,6 +1,5 @@
 import cv2
 
-
 cv2.namedWindow("ShowImage1")
 cv2.namedWindow("ShowImage2")
 image1 = cv2.imread("media\\img01.jpg")
