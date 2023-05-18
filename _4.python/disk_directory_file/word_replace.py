@@ -2,7 +2,7 @@ import sys, os
 
 print('判斷檔案路徑屬性')
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/human1.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 if os.path.isdir(filename):
     print(filename, '目錄')
 else:

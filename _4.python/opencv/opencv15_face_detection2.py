@@ -1,10 +1,14 @@
 #OpenCV 人臉辨識
 
-import cv2
+import cv2	#導入 OpenCV 模組
 import numpy as np
 
 print("框出照片中的人臉")
-filename = 'C:/_git/vcs/_1.data/______test_files1/human1.jpg'
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/lena.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/human1.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/YaltaSummit1945.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/SolvayConference1927.jpg'
 
 # OpenCV 人臉識別分類器 Haar Cascase
 xml_filename1 = 'C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml'
@@ -53,11 +57,9 @@ for (x,y,w,h) in faces:
     roi_gray = gray[y:y+h, x:x+w]
     roi_color = image[y:y+h, x:x+w]
 
-cv2.imshow('image', image)
-
-#另存新檔
-filename2 = 'C:/_git/vcs/_1.data/______test_files2/human_face.jpg'
-cv2.imwrite(filename2, image)	#寫入本機圖片
+# 顯示結果
+#cv2.imshow(image)
+cv2.imshow('New Picture', image) #顯示圖片
 
 print('wait kere')
 cv2.waitKey(0)

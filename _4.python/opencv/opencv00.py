@@ -10,7 +10,7 @@ import cv2
 
 #-----------------------------------------------------------------------------
 #顯示圖片
-filename = 'C:/_git/vcs/_1.data/______test_files1/_emgu/lena.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/lena.jpg'
 
 print('使用 OpenCV 顯示圖片')
 image = cv2.imread(filename)	#讀取本機圖片

@@ -1,6 +1,6 @@
 # 使用 Python 與 OpenCV 處理影像圖檔
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_emgu/lena.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/lena.jpg'
 
 import numpy as np
 import cv2

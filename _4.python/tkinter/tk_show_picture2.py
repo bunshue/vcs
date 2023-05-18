@@ -24,7 +24,9 @@ class PaintCanvas(Canvas):
         self.image = im
 
 window = Tk()
-filename = 'C:/_git/vcs/_1.data/______test_files1/human1.jpg'
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
 im = Image.open(filename)
 if im.mode != "RGB":
     print('圖片非RGB模式, 要轉成RGB格式')

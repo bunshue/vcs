@@ -6,7 +6,7 @@ import sys
 import re
 import os
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/human1.jpg'
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 filename2 = 'C:/_git/vcs/_1.data/______test_files1/poetry2.txt'
 filename3 = 'C:/_git/vcs/_1.data/______test_files1'
 

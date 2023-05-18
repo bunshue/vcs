@@ -130,7 +130,7 @@ cur_path=os.path.dirname(__file__) # 取得目前目錄路徑
 print('現在目錄路徑:', cur_path)
 
 filename=os.path.abspath("ospath.py")
-filename = 'C:/_git/vcs/_1.data/______test_files1/human1.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 if os.path.exists(filename):   
     print('完整路徑名稱:', filename)
@@ -323,7 +323,7 @@ for dcmfile in testfiles:
 
 import os
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/human1.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 file, ext = os.path.splitext(filename)
 
@@ -338,7 +338,7 @@ print(ext)
 
 
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/human1.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 import os
 from stat import ST_MTIME
 from stat import ST_CTIME

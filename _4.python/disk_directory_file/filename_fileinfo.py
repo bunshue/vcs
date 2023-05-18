@@ -17,7 +17,7 @@ st_ctime: 由操作系統報告的"ctime"。在某些系統上（如Unix）是�
 
 print('stat 結構:')
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/human1.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 import os, sys
 import stat

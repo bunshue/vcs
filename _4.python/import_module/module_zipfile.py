@@ -18,7 +18,7 @@ f.close() #關檔
 
 
 print('判斷是否為一個壓縮檔')
-#filename = 'C:/_git/vcs/_1.data/______test_files1/human1.jpg'
+#filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 if zipfile.is_zipfile(filename):
     print('是壓縮檔')

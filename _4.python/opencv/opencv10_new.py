@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import cv2
 import numpy as np
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_emgu/lena.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/lena.jpg'
 
 #== Parameters =======================================================================
 BLUR = 21
@@ -43,7 +43,7 @@ cv2.waitKey()
 import cv2
 import numpy as np
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_emgu/lena.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/lena.jpg'
 
 img = cv2.imread(filename)
 
@@ -68,7 +68,7 @@ import cv2
 import numpy as np
 from matplotlib import pyplot as plt
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_emgu/lena.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/lena.jpg'
 
 #== Parameters =======================================================================
 BLUR = 21

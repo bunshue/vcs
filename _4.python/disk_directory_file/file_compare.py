@@ -12,8 +12,8 @@ def mtime(f):
     return st[stat.ST_MTIME]
 
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/human1.jpg'
-filename2 = 'C:/_git/vcs/_1.data/______test_files1/human2.jpg'
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename2 = 'C:/_git/vcs/_1.data/______test_files1/picture2.jpg'
 
 try:
     sf = open(filename1, 'rb')

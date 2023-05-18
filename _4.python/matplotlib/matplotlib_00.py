@@ -5,7 +5,7 @@ matplotlib 基本使用
 
 '''
 
-filename = 'C:/______test_files2/human1.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 print('使用 matplotlib 顯示一圖')
 import matplotlib.pyplot as plt

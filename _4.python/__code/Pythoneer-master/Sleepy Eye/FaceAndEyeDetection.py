@@ -74,8 +74,8 @@ cap.release()   # 釋放攝影機
 cv2.destroyAllWindows() # 關閉所有 OpenCV 視窗
 '''
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/human1.jpg'
-filename = 'C:/_git/vcs/_1.data/______test_files1/_emgu/lena.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/human1.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/lena.jpg'
 
 import numpy as np
 import cv2

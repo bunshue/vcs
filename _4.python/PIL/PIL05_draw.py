@@ -90,7 +90,7 @@ from PIL import Image, ImageDraw, ImageFont
 
 selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/_emgu/lena.jpg'
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/lena.jpg'
 filename2 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_old.png'
 filename3 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_new.png'
 
@@ -128,7 +128,7 @@ plt.show()
 import os, sys
 from PIL import Image, ImageDraw, ImageFont
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/_emgu/lena.jpg'
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/lena.jpg'
 filename2 = 'C:/_git/vcs/_1.data/______test_files2/pil_test03.png'
 selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'
 
@@ -168,7 +168,7 @@ print('新檔存圖, 已寫入檔案：' + filename2)
 from PIL import Image, ImageDraw, ImageFont
 
 selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/ubuntu.ttf'
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/_emgu/lena.jpg'
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/lena.jpg'
 filename2 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_old.png'
 filename3 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_new.png'
 
@@ -203,7 +203,7 @@ print('新檔存圖, 已寫入檔案：'+filename3)
 
 from PIL import Image, ImageDraw
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/_emgu/lena.jpg'
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/lena.jpg'
 filename2 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_old.png'
 filename3 = 'C:/_git/vcs/_1.data/______test_files2/tmppic_new.png'
 
@@ -241,7 +241,7 @@ from PIL import Image
 from matplotlib import patches
 import matplotlib.pyplot as plt
 
-#filename = 'C:/_git/vcs/_1.data/______test_files1/_emgu/lena.jpg'
+#filename = 'C:/_git/vcs/_1.data/______test_files1/lena.jpg'
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 '''

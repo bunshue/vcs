@@ -4,7 +4,7 @@ print('字串處理')
 items = "03/11/2006".split("/")
 print(items)
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/human1.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 name = filename.split('/')
 print(len(name))
@@ -476,7 +476,7 @@ t2 = t1.astimezone().isoformat()
 print(t2)
 
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/human1.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
 print(filename)
 

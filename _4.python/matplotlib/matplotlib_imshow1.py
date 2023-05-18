@@ -1,7 +1,7 @@
 # imshow 集合
 
 selected_font = 'C:/_git/vcs/_1.data/______test_files1/_font/msch.ttf'
-filename = 'C:/_git/vcs/_1.data/______test_files1/_emgu/lena.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/lena.jpg'
 
 import matplotlib.pyplot as plt
 import matplotlib.image as img
