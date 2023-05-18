@@ -1,7 +1,10 @@
 import cv2
 import subprocess
 
-img = cv2.imread("media\\bank.jpg")  #讀圖
+filename = 'media\\bank.jpg'
+#filename = 'C:/_git/vcs/_1.data/______test_files1/captcha01.jpg'
+
+img = cv2.imread(filename)  #讀圖
 cv2.namedWindow("Image")  
 cv2.imshow("Image", img) #顯示圖形
 cv2.waitKey (0) 
@@ -21,9 +24,13 @@ for i in range(len(inv)):  #i為每一列
                         pass
             if count <= 6:  #週圍少於等於6個白點
                 inv[i][j] = 0  #將白點去除
+
 dilation = cv2.dilate(inv, (8,8), iterations=1)  #圖形加粗
+
 cv2.imwrite("media\\bank_t.jpg", dilation)  #存檔
+
 child = subprocess.Popen('tesseract media\\bank_t.jpg result', shell=True)  #OCR辨識
 child.wait()
+
 text = open('result.txt').read().strip()
 print("驗證碼為 " + text)

@@ -19,10 +19,11 @@ def counter(func):
     tmp.count = 0
     return tmp
 
-# https://github.com/Itseez/opencv/blob/master/data/haarcascades/haarcascade_frontalface_default.xml
-face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-# https://github.com/Itseez/opencv/blob/master/data/haarcascades/haarcascade_eye.xml
-eye_cascade = cv2.CascadeClassifier('haarcascade_eye.xml')
+xml_filename1 = 'C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml'
+face_cascade = cv2.CascadeClassifier(xml_filename1)
+
+xml_filename2 = 'C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_eye.xml'
+eye_cascade = cv2.CascadeClassifier(xml_filename2)
 
 cap = cv2.VideoCapture(0)
 

@@ -6,6 +6,7 @@
 
 import hashlib
 
+'''
 print('可用的雜湊演算法')
 print(hashlib.algorithms_available)
 
@@ -61,7 +62,7 @@ s.update(data.encode("utf-8"))
 h = s.hexdigest()
 print(h)
 
-
+'''
 
 def calculate_file_hash(filename):
     """Return the SHA256 checksum for the file at `fpath`.
@@ -91,4 +92,31 @@ calculated_filehash = calculate_file_hash(filename)
 print('SHA256')
 print('預設答案 : ', '5d57e3deb441b789f6035d28dcbbaf6a436c54450972786fad4ce4527059d291')
 print('計算結果 : ', calculated_filehash)
+
+
+
+print('算一個字串的hashcode')
+import hashlib
+
+s = hashlib.sha1()
+data = "this is a lion-mouse"
+s.update(data.encode('utf-8'))
+h = s.hexdigest()
+print(h)
+
+
+print('算一個檔案的hashcode')
+
+import hashlib
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+s = hashlib.sha1()
+s.update(filename.encode('utf-8'))
+
+with open(filename, 'rb') as f:
+    s.update(f.read())
+
+h = s.hexdigest()
+print(h)
 
