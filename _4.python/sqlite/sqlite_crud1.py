@@ -453,6 +453,34 @@ conn.close()  # 關閉資料庫連線
 
 #----------------------------------------------------------------
 
+print('讀取資料庫範例')
+
+db_filename = 'C:/_git/vcs/_1.data/______test_files1/_db/DataBasePM25.sqlite'
+
+import sqlite3
+
+conn = sqlite3.connect(db_filename) # 建立資料庫連線
+cursor = conn.cursor() # 建立 cursor 物件
+
+'''
+# 建立一個資料表
+sqlstr= 'CREATE TABLE IF NOT EXISTS TablePM25 ("no" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE ,"SiteName" TEXT NOT NULL ,"PM25" INTEGER)'
+cursor.execute(sqlstr)
+'''
+
+print('從資料庫讀取資料...') 
+cursor=conn.execute("select *  from TablePM25")
+rows=cursor.fetchall()
+
+i = 0;
+for row in rows:
+    print("站名:{}   PM2.5={}".format(row[1],row[2]))
+    i += 1
+    if i > 10:
+        break
+
+conn.close()  # 關閉資料庫連線
+
 
 
 

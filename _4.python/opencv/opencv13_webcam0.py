@@ -22,7 +22,7 @@ if not cap.isOpened():
 else:
     print('Video device opened')
 
-while(True):
+while True:
     ret, frame = cap.read()   # 從攝影機擷取一張影像
 
     if ret == False:

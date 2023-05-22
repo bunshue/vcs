@@ -13,10 +13,11 @@ cursor.execute(sqlstr)
 
 url = "http://opendata.epa.gov.tw/webapi/Data/REWIQA/?$orderby=SiteName&$skip=0&$top=1000&format=json"
 # 讀取網頁原始碼
-html=requests.get(url).text.encode('utf-8-sig')
+html = requests.get(url).text.encode('utf-8-sig')
 
 # 判斷網頁是否更新
 md5 = hashlib.md5(html).hexdigest()
+
 old_md5 = ""
 
 if os.path.exists('old_md5.txt'):
@@ -53,4 +54,5 @@ else:
     for row in rows:
         print("站名:{}   PM2.5={}".format(row[1],row[2]))    
 
-conn.close()  # 關閉資料庫連線  
+conn.close()  # 關閉資料庫連線
+

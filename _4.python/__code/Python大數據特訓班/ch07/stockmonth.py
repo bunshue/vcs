@@ -1,3 +1,10 @@
+def twodigit(n):  #將數值轉為二位數字串
+    if(n < 10):
+        retstr = '0' + str(n)
+    else:
+        retstr = str(n)
+    return retstr
+
 def convertDate(date):  #轉捔民國日期為西元:106/01/02->20170102
     str1 = str(date)
     yearstr = str1[:3]  #取出民國年
@@ -12,10 +19,10 @@ import os
 
 pd.options.mode.chained_assignment = None  #取消顯示pandas資料重設警告
 
+url_twse = 'http://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=20170101&stockNo=2317&_=1521363562193'
 filepath = 'stockmonth01.csv'
 
 if not os.path.isfile(filepath):  #如果檔案不存在就建立檔案
-    url_twse = 'http://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=20170101&stockNo=2317&_=1521363562193'
     res = requests.get(url_twse)  #回傳為json資料
     jdata = json.loads(res.text)  #json解析
     

@@ -19,27 +19,18 @@ fourcc = cv2.VideoWriter_fourcc(*'XVID')
 # FPS 值為 20.0，解析度為 640x360
 out = cv2.VideoWriter(filename, fourcc, 20.0, (640, 480))
 
-cap = cv2.VideoCapture(0)
-
-#無效
-# 設定影像的尺寸大小
-#cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-#cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 960)
-
 # 解析 Fourcc 格式資料的函數
 def decode_fourcc(v):
   v = int(v)
   return "".join([chr((v >> 8 * i) & 0xFF) for i in range(4)])
 
+
+cap = cv2.VideoCapture(0)
+
 # 取得影像的尺寸大小
 w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
 h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
 print("Image Size: %d x %d" % (w, h))
-
-# 取得 Codec 名稱
-fourcc = cap.get(cv2.CAP_PROP_FOURCC)
-codec = decode_fourcc(fourcc)
-print("Codec: " + codec)
 
 if not cap.isOpened():
     print('Could not open video device')
@@ -47,15 +38,17 @@ if not cap.isOpened():
 else:
     print('Video device opened')
 
-#無效
-#cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-#cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+# 取得 Codec 名稱
+fourcc = cap.get(cv2.CAP_PROP_FOURCC)
+codec = decode_fourcc(fourcc)
+print("Codec: " + codec)
 
+#無效
 # 設定擷取影像的尺寸大小
 #cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
 #cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 360)
 
-while(True):
+while True:
     ret, frame = cap.read()   # 從攝影機擷取一張影像
 
     if ret == False:

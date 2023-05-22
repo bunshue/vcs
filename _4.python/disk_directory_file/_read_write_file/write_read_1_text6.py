@@ -41,3 +41,12 @@ filename = 'C:/_git/vcs/_1.data/______test_files2/test_write2.txt'
 with open(filename, "w") as out_file:
     out_file.write("This Text is going to out file\nLook at it and see!")
 
+
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/python_file4.txt'
+text = open(filename).read().strip()
+print(text)
+
+
+
+

@@ -1,5 +1,7 @@
 import hashlib,os,requests 
 
+print('以md5檢查網站內容是否更新')
+
 url = "http://opendata.epa.gov.tw/ws/Data/REWXQA/?\
 $orderby=SiteName&$skip=0&$top=1000&format=json"
 

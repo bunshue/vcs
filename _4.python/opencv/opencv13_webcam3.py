@@ -22,6 +22,12 @@ out = cv2.VideoWriter(filename, fourcc, 20.0, (640,480))
 
 cap = cv2.VideoCapture(0)
 
+if not cap.isOpened():
+    print('Could not open video device')
+    sys.exit()
+else:
+    print('Video device opened')
+
 #無效
 # 設定影像的尺寸大小
 #cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
@@ -34,12 +40,6 @@ background = 0
 for i in range(60):
     ret,background = cap.read()
 background = np.flip(background,axis=1)
-
-if not cap.isOpened():
-    print('Could not open video device')
-    sys.exit()
-else:
-    print('Video device opened')
 
 ## Read every frame from the webcam, until the camera is open
 while(cap.isOpened()):

@@ -6,8 +6,9 @@ print("框出照片中的人臉")
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/lena.jpg'
 filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/human1.jpg'
-filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/YaltaSummit1945.jpg'
-filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/SolvayConference1927.jpg'
+#filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/YaltaSummit1945.jpg'
+#filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/SolvayConference1927.jpg'
+#filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/ming_emperor3.jpg'
 
 xml_filename = 'C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml'
 

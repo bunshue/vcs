@@ -26,7 +26,10 @@ px1 = BORDER
 py1 = BORDER
 px2 = W - BORDER
 py2 = H - BORDER
+#空心矩形 2
 cv2.rectangle(image, (px1, py1), (px2, py2), (0, 0, 255), 2)
+#實心矩形 -1
+cv2.rectangle(image, (px1+100, py1+100), (px2-100, py2-100), (0, 128, 128),-1)
 #-----------------------------------------------------------------------------
 print('畫圓')
 cx = int(W / 2)
