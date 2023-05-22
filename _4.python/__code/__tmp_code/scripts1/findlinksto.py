@@ -9,29 +9,17 @@ import sys
 import re
 import getopt
 
-def main():
-    try:
-        opts, args = getopt.getopt(sys.argv[1:], '')
-        if len(args) < 2:
-            raise getopt.GetoptError('not enough arguments', None)
-    except getopt.GetoptError as msg:
-        sys.stdout = sys.stderr
-        print(msg)
-        print('usage: findlinksto pattern directory ...')
-        sys.exit(2)
-    pat, dirs = args[0], args[1:]
-    prog = re.compile(pat)
-    for dirname in dirs:
-        os.walk(dirname, visit, prog)
-
 def visit(prog, dirname, names):
+    print('a')
     if os.path.islink(dirname):
+        print('link')
         names[:] = []
         return
     if os.path.ismount(dirname):
         print('descend into', dirname)
     for name in names:
         name = os.path.join(dirname, name)
+        print(name)
         try:
             linkto = os.readlink(name)
             if prog.search(linkto) is not None:
@@ -39,5 +27,12 @@ def visit(prog, dirname, names):
         except OSError:
             pass
 
-if __name__ == '__main__':
-    main()
+pattern = 'pic'
+foldername = 'C:/_git/vcs/_1.data/______test_files1/'
+
+prog = re.compile(pattern)
+for dirname in foldername:
+    os.walk(dirname, visit, prog)
+
+
+

@@ -27,11 +27,14 @@ def clickDown():  #按「下載影片」鈕後處理函式
         
 import tkinter as tk
 from pytube import YouTube
+
 import os
 
 win=tk.Tk()
+
 win.geometry("560x280")  #設定主視窗解析度
 win.title("下載Youtube影片")
+
 getvideo = "360p"  #影片格式
 videorb = tk.StringVar()  #選項按鈕值
 url = tk.StringVar()  #影片網址

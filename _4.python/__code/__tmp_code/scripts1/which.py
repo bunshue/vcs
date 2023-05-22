@@ -15,6 +15,7 @@ def msg(str):
 
 def main():
     pathlist = os.environ['PATH'].split(os.pathsep)
+    print(pathlist)
 
     sts = 0
     longlist = ''

@@ -11,6 +11,6 @@ res1 = re.findall(r'/watch[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]', 
 for temurl in res1:
     if 'list=' and 'index=' in temurl:  #必須包含list=及index=
         if temurl not in videourlList:  #如果串列中不存在就加入串列
-        videourlList.append(temurl)
+            videourlList.append(temurl)
 print(videourlList)
 

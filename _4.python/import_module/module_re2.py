@@ -26,6 +26,14 @@ emails = re.findall(regex, html_data)
 for email in emails:
     print(email)
 
+print('拆解e-mail')
+import re
+import requests
 
+regex = re.compile('[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+')
+url = 'https://auth.cht.com.tw/ldaps/'
+html = requests.get(url)
+emails = regex.findall(html.text)
 
-
+for email in emails:
+    print(email)

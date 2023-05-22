@@ -1,4 +1,28 @@
 
+import re
+
+pat = re.compile('[a-z]+')
+
+m = pat.findall('tem12po')
+print(m)  # ['tem', 'po']
+
+
+
+
+import os
+
+'''
+開啟外部程式
+#rc = os.system("nasm -f win64 -DNEAR -Ox -g ms\\uptable.asm")
+
+rc = os.system('calc')
+'''
+
+
+sys.stdout = sys.stderr
+print('usage: findlinksto pattern directory ...')
+
+
 
 
 cv2.putText(image,"Find " + str(len(faces)) + " face!", (10,image.shape[0]-5), cv2.FONT_HERSHEY_SIMPLEX, 0.5, (255,255,255), 2)

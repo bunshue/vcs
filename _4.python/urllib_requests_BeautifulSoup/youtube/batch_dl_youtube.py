@@ -2,6 +2,8 @@ import requests
 from pytube import YouTube
 import re
 
+import os
+
 #下載資料夾
 foldername = 'C:/_git/vcs/_1.data/______test_files2/youtube_download'
 

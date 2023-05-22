@@ -3,9 +3,9 @@ from bs4 import BeautifulSoup
 
 url = 'http://www.taiwanlottery.com.tw/'
 html = requests.get(url)
-sp = BeautifulSoup(html.text, 'html.parser')
+soup = BeautifulSoup(html.text, 'html.parser')
 
-data1 = sp.select("#rightdown")
+data1 = soup.select("#rightdown")
 #print(data1)
 
 data2 = data1[0].find('div', {'class':'contents_box02'})
