@@ -7,7 +7,6 @@ WebCam 使用
 '''
 
 import cv2
-import sys
 import time
 
 cap = cv2.VideoCapture(0)

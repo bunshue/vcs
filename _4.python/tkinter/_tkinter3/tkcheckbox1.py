@@ -20,4 +20,5 @@ for i in range(0, len(ball)):
     item.pack()
 lblmsg = tk.Label(win, fg="red", textvariable=msg)
 lblmsg.pack()
+
 win.mainloop()

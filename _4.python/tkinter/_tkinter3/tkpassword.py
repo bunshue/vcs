@@ -7,6 +7,7 @@ def checkPW():
 import tkinter as tk
 
 win = tk.Tk()
+
 pw = tk.StringVar()
 msg = tk.StringVar()
 label = tk.Label(win, text="請輸入密碼：")
@@ -17,4 +18,5 @@ button = tk.Button(win, text="登入", command=checkPW)
 button.pack()
 lblmsg = tk.Label(win, fg="red", textvariable=msg)
 lblmsg.pack()
+
 win.mainloop()

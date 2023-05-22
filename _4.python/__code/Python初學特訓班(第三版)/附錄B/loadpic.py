@@ -1,5 +1,7 @@
 import pygame
+
 pygame.init()
+
 screen = pygame.display.set_mode((640, 280))
 pygame.display.set_caption("載入圖片")
 background = pygame.Surface(screen.get_size())
@@ -18,4 +20,5 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+
 pygame.quit()

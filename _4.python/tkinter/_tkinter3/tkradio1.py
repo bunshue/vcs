@@ -4,6 +4,7 @@ def choose():
 import tkinter as tk
 
 win = tk.Tk()
+
 choice = tk.StringVar()
 msg = tk.StringVar()
 label = tk.Label(win, text="選擇最喜歡的球類運動：")
@@ -18,4 +19,5 @@ lblmsg = tk.Label(win, fg="red", textvariable=msg)
 lblmsg.pack()
 item1.select()
 choose()
+
 win.mainloop()

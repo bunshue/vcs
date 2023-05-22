@@ -10,6 +10,7 @@ def clickme():
 import tkinter as tk
 
 win = tk.Tk()
+
 labeltext = tk.StringVar()
 btntext = tk.StringVar()
 count = 0
@@ -19,4 +20,5 @@ label1.pack()
 button1 = tk.Button(win, textvariable=btntext, command=clickme)
 btntext.set("按我！")
 button1.pack()
+
 win.mainloop()
