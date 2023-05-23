@@ -15,25 +15,25 @@ def HideAllFrame():
     frameDelete.pack_forget()
     frameDeleteCheck.pack_forget()    
         
-def First(): 
+def First():  # 首頁
     global page
     HideAllFrame()
     page=0
     disp_data()
  
-def Prev():  
+def Prev():  #上一頁
     global page
     if page>0:
         page -=1
         disp_data()     
        
-def Next(): 
+def Next(): #下一頁
     global page
     if page<pagesize:
         page +=1
         disp_data()
     
-def Bottom():
+def Bottom(): #最後頁
     global page
     page=pagesize    
     disp_data() 
@@ -150,7 +150,7 @@ def DoDelete():
     return  
             
 def exit(): # 結束
-    win.destroy()    
+    window.destroy()    
 
 def DoInput(): 
     global varewordInput, varcwordInput
@@ -181,23 +181,38 @@ def DoSearch():
         msgSearch.set("\n{} 單字未建立!".format(eword))
     return  
 
-### 主程式從這裡開始 ###    
 
+# 導入套件
 import tkinter as tk
-import operator,math
+import math
+import operator
 
-win=tk.Tk()
-win.geometry("800x600")
-win.title("英文單字王")
+# 建立主視窗
+window = tk.Tk()
+
+# 設定主視窗大小
+w = 800
+h = 800
+x_st = 100
+y_st = 100
+#size = str(w)+'x'+str(h)
+#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+
+# 設定主視窗標題
+title = "英文單字王"
+window.title(title)
 
 page,pagesize=0,10
 datasize=10 #資料筆數
 totpage=math.ceil(datasize/pagesize) #總頁數
 
-labeltitle = tk.Label(win, text="\n", fg="red",font=("新細明體",12))
+labeltitle = tk.Label(window, text="\n", fg="red",font=("新細明體",12))
 labeltitle.pack()
 
-frameCommand = tk.Frame(win)  # 翻頁按鈕容器
+frameCommand = tk.Frame(window)  # 翻頁按鈕容器
 frameCommand.pack()  
 btnFirst = tk.Button(frameCommand, text="第一頁", width=8,command=First)
 btnPrev = tk.Button(frameCommand, text="上一頁", width=8,command=Prev)
@@ -209,19 +224,19 @@ btnNext.grid(row=0, column=2, padx=5, pady=5)
 btnBottom.grid(row=0, column=3, padx=5, pady=5)
 
 # 單字顯示區
-frameShow = tk.Frame(win)  
+frameShow = tk.Frame(window)  
 frameShow.pack()
 varwords = tk.StringVar()
-labelwords = tk.Label(win, textvariable=varwords,fg="blue",font=("新細明體",10))
+labelwords = tk.Label(window, textvariable=varwords,fg="blue",font=("新細明體",10))
 labelwords.pack() 
 
    
-frameSepArea = tk.Frame(win)  # 空白列
+frameSepArea = tk.Frame(window)  # 空白列
 frameSepArea.pack()
 labelSep= tk.Label(frameSepArea, text="\n<<< 資料編輯 >>>\n",fg="brown",font=("新細明體",12))
 labelSep.pack()  
    
-frameCommand2 = tk.Frame(win)  # 按鈕容器
+frameCommand2 = tk.Frame(window)  # 按鈕容器
 frameCommand2.pack()    
 button1 = tk.Button(frameCommand2, text="查  詢", width=8,command=search_data)
 button2 = tk.Button(frameCommand2, text="輸  入", width=8,command=input_data)
@@ -233,12 +248,12 @@ button2.grid(row=0, column=1, padx=5, pady=5)
 button3.grid(row=0, column=3, padx=5, pady=5)
 button4.grid(row=0, column=4, padx=5, pady=5)
 button5.grid(row=0, column=5, padx=5, pady=5)
-win.protocol("WM_DELETE_WINDOW", exit)
+window.protocol("WM_DELETE_WINDOW", exit)
 
 # 單字輸入區
 msginput = tk.StringVar()
 msginput.set("\n")
-frameInput = tk.Frame(win)  
+frameInput = tk.Frame(window)  
 varewordInput = tk.StringVar()
 labelewordInput = tk.Label(frameInput, text="請輸入英文單字",fg="blue",font=("新細明體",10))
 entryewordInput=tk.Entry(frameInput,textvariable=varewordInput)
@@ -250,7 +265,7 @@ entrycwordInput=tk.Entry(frameInput,textvariable=varcwordInput)
 labelcwordInput.grid(row=1, column=0, padx=5, pady=5)
 entrycwordInput.grid(row=1, column=1, padx=5, pady=5)
 
-frameInputCheck = tk.Frame(win)  # 單字輸入確認區
+frameInputCheck = tk.Frame(window)  # 單字輸入確認區
 btnDoInput = tk.Button(frameInputCheck, text="確定輸入", width=8,command=DoInput)
 btnDoInput.pack()  
 labelmsgInput = tk.Label(frameInputCheck, textvariable=msginput,fg="red",font=("新細明體",10))
@@ -259,14 +274,14 @@ labelmsgInput.pack()
 # 單字查詢區
 msgSearch = tk.StringVar()
 msgSearch.set("\n")
-frameSearch = tk.Frame(win)  
+frameSearch = tk.Frame(window)  
 varewordSearch = tk.StringVar()
 labelewordSearch = tk.Label(frameSearch, text="請輸入要查詢的英文單字",fg="blue",font=("新細明體",10))
 entryewordSearch=tk.Entry(frameSearch,textvariable=varewordSearch)
 labelewordSearch.grid(row=0, column=0, padx=5, pady=5)
 entryewordSearch.grid(row=0, column=1, padx=5, pady=5)
 
-frameSearchChech = tk.Frame(win)  # 查詢輸入確認區
+frameSearchChech = tk.Frame(window)  # 查詢輸入確認區
 btnDoSearch = tk.Button(frameSearchChech, text="確定", width=8,command=DoSearch)
 btnDoSearch.pack()  
 labelmsgSearch = tk.Label(frameSearchChech, textvariable=msgSearch,fg="red",font=("新細明體",10))
@@ -275,7 +290,7 @@ labelmsgSearch.pack()
 # 單字修改區
 msgedit = tk.StringVar()
 msgedit.set("\n")
-frameEdit = tk.Frame(win) 
+frameEdit = tk.Frame(window) 
 varewordedit = tk.StringVar()
 labelewordedit = tk.Label(frameEdit, text="請輸入要修改的英文單字(Enter 結束輸入)",fg="blue",font=("新細明體",10))
 entryewordedit=tk.Entry(frameEdit,textvariable=varewordedit)
@@ -289,7 +304,7 @@ entrycwordedit=tk.Entry(frameEdit,textvariable=varcwordedit)
 labelcwordedit.grid(row=1, column=0, padx=5, pady=5)
 entrycwordedit.grid(row=1, column=1, padx=5, pady=5)
 
-frameEditCheck = tk.Frame(win)  # 單字修改確認區
+frameEditCheck = tk.Frame(window)  # 單字修改確認區
 btnDoedit = tk.Button(frameEditCheck, text="確定修改", width=8,command=DoEdit)
 btnDoedit.pack()  
 labelmsgedit = tk.Label(frameEditCheck, textvariable=msgedit,fg="red",font=("新細明體",10))
@@ -299,7 +314,7 @@ entryewordedit.bind('<Return>', keyEdit) # 按 Enter鍵的處理
 # 單字刪除區
 msgDelete = tk.StringVar()
 msgDelete.set("\n")
-frameDelete= tk.Frame(win)  
+frameDelete= tk.Frame(window)  
 varewordDelete = tk.StringVar()
 labelewordDelete = tk.Label(frameDelete, text="請輸入要刪除的英文單字(Enter 結束輸入)",fg="blue",font=("新細明體",10))
 entryewordDelete=tk.Entry(frameDelete,textvariable=varewordDelete)
@@ -307,7 +322,7 @@ buttonDeleteInput = tk.Button(frameDelete, text="輸入完成", width=8,command=
 labelewordDelete.grid(row=0, column=0, padx=5, pady=5)
 entryewordDelete.grid(row=0, column=1, padx=5, pady=5)
 buttonDeleteInput.grid(row=0, column=2, padx=5, pady=5)
-frameDeleteCheck = tk.Frame(win)  # 刪除確認區
+frameDeleteCheck = tk.Frame(window)  # 刪除確認區
 btnDoDelete = tk.Button(frameDeleteCheck, text="確定刪除", width=8,command=DoDelete)
 btnDoDelete.pack()  
 labelmsgDelete = tk.Label(frameDeleteCheck, textvariable=msgDelete,fg="red",font=("新細明體",10))
@@ -315,4 +330,4 @@ labelmsgDelete.pack()
 entryewordDelete.bind('<Return>', keyDelete) # 按 Enter鍵的處理
 
 First()
-win.mainloop()
+window.mainloop()

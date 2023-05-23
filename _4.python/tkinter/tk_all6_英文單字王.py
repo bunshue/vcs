@@ -46,6 +46,7 @@ def disp_data():
 
 # 導入套件
 import tkinter as tk
+import math
 
 # 建立主視窗
 window = tk.Tk()
@@ -64,8 +65,6 @@ window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 # 設定主視窗標題
 title = "英文單字王"
 window.title(title)
-
-import math
 
 page,pagesize=0,10
 datas=dict()

@@ -16,11 +16,6 @@ def CkeckKey(no):
     return key_id
         
 
-import subprocess
-
-ocr = subprocess.Popen("tesseract media\\text1.jpg media\\result", shell=True)
-ocr.wait()
-
 
 
 
@@ -631,7 +626,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 import PySimpleGUI as sg
-import subprocess
 import shutil
 import os
 import sys

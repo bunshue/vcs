@@ -29,7 +29,7 @@ namespace vcs_System1
                 return;
             }
 
-            if (id == "david" || pw == "jp6rmp4")
+            if (id == "david" || pw == "abc123")
             {
                 richTextBox1.Text += "登入成功\n";
 

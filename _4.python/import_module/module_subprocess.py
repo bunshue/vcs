@@ -20,3 +20,5 @@ ocr = subprocess.Popen("tesseract media\\text1.jpg media\\result", shell=True)
 ocr.wait()
 
 '''
+
+

@@ -2,8 +2,7 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/imagedata/2.jpg'
 
 import numpy as np
 import matplotlib.pyplot as plt
-from keras.models import load_model
-import glob,cv2
+import cv2
 
 plt.gcf().set_size_inches(12, 14)
 #ax=plt.subplot(5,5, i+1)
