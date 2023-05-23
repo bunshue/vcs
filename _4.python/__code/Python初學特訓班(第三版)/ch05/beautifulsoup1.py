@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup
 
+#台灣彩券官網首頁
 url = 'http://www.taiwanlottery.com.tw/'
 html = requests.get(url)
 soup = BeautifulSoup(html.text, 'html.parser')
@@ -44,4 +45,22 @@ print(data1.get("href")) # http://example.com/elsie
 print(data1["href"])     # http://example.com/elsie
 
 
+
+
+import requests
+from bs4 import BeautifulSoup
+
+#台灣彩券官網首頁
+url = 'http://www.taiwanlottery.com.tw/'
+html = requests.get(url)
+soup = BeautifulSoup(html.text, 'html.parser')
+
+data1 = soup.select("#rightdown")
+#print(data1)
+
+data2 = data1[0].find('div', {'class':'contents_box02'})
+#print(data2)
+
+data3 = data2.find_all('div', {'class':'ball_tx'})
+print(data3)
 

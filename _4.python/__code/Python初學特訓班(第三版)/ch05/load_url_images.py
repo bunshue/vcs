@@ -3,6 +3,7 @@ import os
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 
+#某圖庫網站
 url = 'https://www.dreamstime.com/free-images_pg1'
 
 html = requests.get(url)

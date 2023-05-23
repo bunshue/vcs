@@ -1,3 +1,59 @@
+plt有此語法否?
+plt.gcf().set_size_inches(12, 14)
+
+
+    apiURL='%s/update?api_key=%s&field1=%s' %(host, api_key, value) 
+    print(apiURL)
+
+  
+apiURL='%s/channels/%s/feeds.json?api_key=%s&results=%d' %(host,ChannelID, api_key,records) 
+print(apiURL)
+
+
+            fileSize = os.stat(web+fileName)[6] #檔案大小
+            if fileSize != None:
+                f = open(web+fileName, 'r') #開啟檔案
+                client.write(httpResponse)  #伺服器回應
+                while True:
+                    data = f.read(256) #次每次讀取 128 個字元
+                    if len(data) == 0: #讀取完畢
+                        break
+                    client.write(data)   #伺服器回應
+                f.close()
+            else:
+                err(client, "404", "Not Found")      
+
+
+    if httpMethod == 'GET': # 接受GET 請求
+        fileName = path.strip('/')
+        if fileName == '':
+            fileName = 'index.html'
+        print("傳送檔案",web+fileName)
+        fileSize = os.stat(web+fileName)[6] #檔案大小
+        if fileSize != None:
+            f = open(web+fileName, 'r') #開啟檔案
+            client.write(httpResponse)  #伺服器回應
+            while True:
+                data = f.read(128) #次每次讀取 128 個字元
+                if len(data) == 0: #讀取完畢                        
+                    break
+                client.write(data)   #伺服器回應
+            f.close()
+        else:
+            err(client, "404", "Not Found")      
+
+
+
+import glob,cv2
+
+files = glob.glob("imagedata\*.jpg")  #建立測試資料
+for file in files:
+    image = cv2.imread(file)
+    image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  #灰階
+    _, image = cv2.threshold(image, 120, 255, cv2.THRESH_BINARY_INV) #轉為反相黑白
+    print(file)
+
+
 
 import re
 
