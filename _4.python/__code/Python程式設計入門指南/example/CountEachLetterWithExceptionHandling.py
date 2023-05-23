@@ -1,7 +1,7 @@
 def main():
     while True:
         try:
-            filename = input("Enter a filename: ").strip()
+            filename = 'C:/_git/vcs/_1.data/______test_files1/article2.txt'
             infile = open(filename, "r") # Open the file
             break 
         except IOError:
@@ -26,5 +26,6 @@ def countLetters(line, counts):
         if ch.isalpha():
             counts[ord(ch) - ord('a')] += 1
 
+print('統計一個檔案內每個英文字母出現的字數')
 main()
 

@@ -1,3 +1,34 @@
+
+
+Firebase 專案是應用程式的容器
+
+
+    os.system("cls")
+
+檢查key
+def CkeckKey(no):
+    key_id=""
+    if datas != None:
+        for key in datas:
+            if no==datas[key]["no"]: # 找到鍵名稱
+                key_id = key
+                break
+    return key_id
+        
+
+import subprocess
+
+ocr = subprocess.Popen("tesseract media\\text1.jpg media\\result", shell=True)
+ocr.wait()
+
+
+
+
+
+
+
+
+
 plt有此語法否?
 plt.gcf().set_size_inches(12, 14)
 

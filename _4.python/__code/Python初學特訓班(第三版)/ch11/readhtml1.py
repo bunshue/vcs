@@ -1,5 +1,6 @@
 import pandas as pd
 
+#原物料商品行情
 tables = pd.read_html("http://www.stockq.org/market/commodity.php")
 
 n = 1
@@ -10,9 +11,9 @@ for table in tables:
     n += 1
 
 
-
 import pandas as pd
 
+#原物料商品行情
 tables = pd.read_html("http://www.stockq.org/market/commodity.php")
 
 print(tables)

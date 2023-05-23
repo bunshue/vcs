@@ -47,6 +47,14 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/python_file4.txt'
 text = open(filename).read().strip()
 print(text)
 
+print('----------------------------------------------------')
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_txt/python_file3.txt'
+
+text = open(filename).read().strip()
+print(text)
+
+
 
 
 

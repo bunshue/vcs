@@ -23,4 +23,5 @@ p.title.text_font_size = "20pt"
 p.xaxis.axis_label = "年度"
 p.yaxis.axis_label = "戶數"
 p.line(year, person, line_width=2)
+
 show(p)

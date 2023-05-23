@@ -18,4 +18,5 @@ listx2 = [2,6,8,11,14,16]
 listy2 = [10,40,30,50,80,60]
 #p.line(listx2, listy2, line_width=4, legend = "女性")
 p.line(listx2, listy2, line_width=4)
+
 show(p)

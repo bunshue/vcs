@@ -13,4 +13,5 @@ colors=["red","blue","green","pink","violet","gray"]
 #sizes=25  #所有點相同大小
 #colors="red"  #所有點相同顏色
 p.circle(listx, listy, size=sizes, color=colors, alpha=0.5)
+
 show(p)

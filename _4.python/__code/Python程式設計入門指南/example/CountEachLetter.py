@@ -21,4 +21,6 @@ def countLetters(line, counts):
         if ch.isalpha():
             counts[ord(ch) - ord('a')] += 1
 
+print('xxxxxxxxxxxxxxxxx')
+print('統計一個檔案內每個英文字母出現的字數')
 main() # Call the main function

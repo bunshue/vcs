@@ -33,6 +33,26 @@ print('每月應付本息金額', format(loan.getMonthlyPayment(), '.2f'), '元'
 print('20年總應付本息金額', format(loan.getTotalPayment(), '.2f'), '元')
 
 
+'''
+直接計算
+#貸款利率
+annualInterestRate = 2.345  #percent
 
+monthlyInterestRate = annualInterestRate / 1200
 
+#貸款年限
+numberOfYears = 20  #年
+
+#貸款金額
+loanAmount = 34560000 #元
+    
+# Calculate payment
+monthlyPayment = loanAmount * monthlyInterestRate / (1
+  - 1 / (1 + monthlyInterestRate) ** (numberOfYears * 12))
+totalPayment = monthlyPayment * numberOfYears * 12
+
+# Display results
+print("The monthly payment is", int(monthlyPayment * 100) / 100)
+print("The total payment is", int(totalPayment * 100) /100)
+'''
 
