@@ -14,7 +14,7 @@ url = 'http://www.e-happy.com.tw'
 html = requests.get(url)
 html.encoding="utf-8"
 
-htmllist = html.text.splitlines()
+htmllist = html.text.splitlines()   #將網頁資料一行一行地分割成串列
 for row in htmllist:
    print(row)
 

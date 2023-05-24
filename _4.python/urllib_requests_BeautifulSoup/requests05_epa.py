@@ -1,3 +1,7 @@
+import urllib.request   #用來建立請求
+import zipfile
+import csv
+
 import sys
 import requests
 
@@ -82,8 +86,6 @@ print('作業完成')
 
 
 
-'''
-
 import urllib.request   #用來建立請求
 import zipfile
 import csv
@@ -97,9 +99,8 @@ url = 'https://data.epa.gov.tw/api/v2/%s?format=%s&offset=%s&limit=%s&api_key=%s
 
 filename = 'AQI.json'   #圖檔名稱
 
-urllib.request.urlretrieve(url, filename) #下載遠端 csv 檔案
+urllib.request.urlretrieve(url, filename) #下載遠端 json 檔案
 
-'''
 
 '''
 print()
@@ -160,6 +161,7 @@ print(f'AQI: {data["aqi"]}')
 print(f'PM2.5: {data["pm2.5"]}')
 '''
 
+'''
 import tkinter as tk
 import urllib3 #外部的packages
 import certifi #https的連線方式
@@ -198,6 +200,99 @@ window.title("範例一")
 window.geometry("500x300") #沒有設定寬x高，將依元件調整視窗大小
 tk.Button(window, text = "下載資料", command = downloadAQI).pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 window.mainloop()
+
+'''
+
+import hashlib
+import os
+import requests
+import sqlite3
+import ast
+from bs4 import BeautifulSoup
+
+db_filename = 'C:/_git/vcs/_1.data/______test_files1/_db/DataBasePM25.sqlite'
+md5_filename = 'C:/_git/vcs/_1.data/______test_files2/old_md5.txt'
+
+conn = sqlite3.connect(db_filename) # 建立資料庫連線
+cursor = conn.cursor() # 建立 cursor 物件
+
+# 建立一個資料表
+sqlstr='''
+CREATE TABLE IF NOT EXISTS TablePM25 ("no" INTEGER PRIMARY KEY AUTOINCREMENT 
+NOT NULL UNIQUE ,"SiteName" TEXT NOT NULL ,"PM25" INTEGER)
+'''
+cursor.execute(sqlstr)
+
+
+print('以md5檢查網站內容是否更新')
+
+DataID = 'aqx_p_488'
+format = 'csv'
+limit = '10'
+api_key = epa_key
+
+url = 'https://data.epa.gov.tw/api/v2/%s?format=%s&year_month=%s&offset=%s&limit=%s&api_key=%s&filters=%s' % (DataID, format, year_month, offset, limit, api_key, filters1)
+print(url)
+
+# 讀取網頁原始碼
+html = requests.get(url).text.encode('utf-8-sig')
+#print(html)
+
+# 判斷網頁是否更新
+md5 = hashlib.md5(html).hexdigest()
+print('新md5 : ', md5)
+
+old_md5 = ""
+if os.path.exists(md5_filename):
+    print('111')
+    with open(md5_filename, 'r') as f:
+        print('111a')
+        old_md5 = f.read()
+        
+with open(md5_filename, 'w') as f:
+    print('222')
+    f.write(md5)
+
+print('舊md5 : ', old_md5)
+
+
+if md5 != old_md5:
+    print('資料已更新...')
+
+    # 刪除資料表內容
+    conn.execute("delete from TablePM25")
+    conn.commit()
+
+    soup = BeautifulSoup(html,'html.parser')    
+    # 將網頁內轉換為 list,list 中的元素是 dict 
+    #jsondata = ast.literal_eval(soup.text)
+    print(soup.text)
+
+
+    '''
+    因為json格式改了
+
+    n=1
+    for site in jsondata:
+        SiteName=site["SiteName"]
+        if site["PM2.5"] == "ND":
+            continue
+        PM25=0 if site["PM2.5"] == "" else int(site["PM2.5"])     
+        print("站名:{}   PM2.5={}".format(SiteName,PM25))
+        # 新增一筆記錄
+        sqlstr="insert into TablePM25 values({},'{}',{})" .format(n,SiteName,PM25)
+        cursor.execute(sqlstr)
+        n+=1
+        conn.commit() # 主動更新
+    '''
+else:
+    print('資料未更新，從資料庫讀取...') 
+    cursor=conn.execute("select *  from TablePM25")
+    rows=cursor.fetchall()
+    for row in rows:
+        print("站名:{}   PM2.5={}".format(row[1],row[2]))    
+
+conn.close()  # 關閉資料庫連線
 
 
  

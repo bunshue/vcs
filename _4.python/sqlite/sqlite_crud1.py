@@ -60,8 +60,8 @@ cursor.execute("create table if not exists table01 ( id_num char(5), subjectId c
 #Create 建立
 #Create table table01, id_num(int) 和 name(text) 和 money(int),
 #primary key (id_num), id_num不可重複
-sqlstr='create table if not exists table01 ("id_num" INTEGER PRIMARY KEY NOT NULL, "name"  TEXT NOT NULL, "money"  TEXT NOT NULL)'
-#sqlstr='create table table01 ("id_num" INTEGER PRIMARY KEY NOT NULL, "name"  TEXT NOT NULL, "money"  TEXT NOT NULL)'
+sqlstr = 'create table if not exists table01 ("id_num" INTEGER PRIMARY KEY NOT NULL, "name"  TEXT NOT NULL, "money"  TEXT NOT NULL)'
+#sqlstr = 'create table table01 ("id_num" INTEGER PRIMARY KEY NOT NULL, "name"  TEXT NOT NULL, "money"  TEXT NOT NULL)'
 
 cursor.execute(sqlstr)
 conn.commit() # 更新

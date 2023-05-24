@@ -38,9 +38,12 @@ print(lines)
 file.close()
 
 
-
-
-
-
 '''
+
+
+
+
+
+
+
 print('測試完成')

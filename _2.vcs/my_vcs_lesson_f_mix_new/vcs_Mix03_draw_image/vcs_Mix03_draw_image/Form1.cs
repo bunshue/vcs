@@ -953,9 +953,151 @@ namespace vcs_Mix03_draw_image
             richTextBox1.Text += "獲得圖片的分辨率和大小 : " + w.ToString("f2") + ":" + h.ToString("f2") + "\n";
         }
 
+        double red = 0;
+        double green = 0;
+        double blue = 0;
+
         private void button13_Click(object sender, EventArgs e)
         {
             show_button_text(sender);
+
+            //test
+
+          //title: "Wavelength",
+          //value: 500,
+          //units: "nm",
+          //range:[380,780],
+          //resolution:1
+            /*
+            int wavelength = 720;
+            nmToRGB(wavelength);
+            richTextBox1.Text += "R = " + red.ToString() + "\n";
+            richTextBox1.Text += "G = " + green.ToString() + "\n";
+            richTextBox1.Text += "B = " + blue.ToString() + "\n";
+            this.BackColor = Color.FromArgb(255, (int)red, (int)green, (int)blue);
+            */
+
+
+            Graphics g = pictureBox1.CreateGraphics();				//實例化pictureBox1控件的Graphics類
+            //g.DrawLines(Pens.Red, gray.ToArray());
+
+            g.Clear(Color.White);
+
+            g.DrawRectangle(Pens.Red, 0, 0, 440, 300);
+
+            for (int wavelength = 380; wavelength <= 780; wavelength+=4)
+            {
+                nmToRGB(wavelength);
+                Color cc = Color.FromArgb(255, (int)red, (int)green, (int)blue);
+
+                g.DrawLine(new Pen(cc, 2), wavelength - 380, 0, wavelength - 380, 300);
+
+            }
+
+
+            /*
+            Point[] curvePoints = new Point[220];    //一維陣列內有 8 個Point
+
+            int i;
+            for (i = 0; i < 220; i++)
+            {
+                curvePoints[i].X = i * 2;
+                curvePoints[i].Y = 255 - (gray[i]);
+            }
+
+
+            // Draw lines between original points to screen.
+            g.DrawLines(Pens.Red, curvePoints);   //畫直線
+            // Draw curve to screen.
+            //gc.DrawCurve(redPen, curvePoints); //畫曲線
+
+            */
+
+        }
+
+
+        void nmToRGB(int wavelength)
+        {
+            var Gamma = 0.80;
+            var IntensityMax = 255;
+            double factor = 0;
+
+            red = 0;
+            green = 0;
+            blue = 0;
+
+            if ((wavelength >= 380) && (wavelength < 440))
+            {
+                red = -(wavelength - 440) / (440 - 380);
+                green = 0.0;
+                blue = 1.0;
+            }
+            else if ((wavelength >= 440) && (wavelength < 490))
+            {
+                red = 0.0;
+                green = (wavelength - 440) / (490 - 440);
+                blue = 1.0;
+            }
+            else if ((wavelength >= 490) && (wavelength < 510))
+            {
+                red = 0.0;
+                green = 1.0;
+                blue = -(wavelength - 510) / (510 - 490);
+            }
+            else if ((wavelength >= 510) && (wavelength < 580))
+            {
+                red = (wavelength - 510) / (580 - 510);
+                green = 1.0;
+                blue = 0.0;
+            }
+            else if ((wavelength >= 580) && (wavelength < 645))
+            {
+                red = 1.0;
+                green = -(wavelength - 645) / (645 - 580);
+                blue = 0.0;
+            }
+            else if ((wavelength >= 645) && (wavelength < 781))
+            {
+                red = 1.0;
+                green = 0.0;
+                blue = 0.0;
+            }
+            else
+            {
+                red = 0.0;
+                green = 0.0;
+                blue = 0.0;
+            };
+            // Let the intensity fall off near the vision limits
+            if ((wavelength >= 380) && (wavelength < 420))
+            {
+                factor = 0.3 + 0.7 * (wavelength - 380) / (420 - 380);
+            }
+            else if ((wavelength >= 420) && (wavelength < 701))
+            {
+                factor = 1.0;
+            }
+            else if ((wavelength >= 701) && (wavelength < 781))
+            {
+                factor = 0.3 + 0.7 * (780 - wavelength) / (780 - 700);
+            }
+            else
+            {
+                factor = 0.0;
+            };
+            if (red != 0)
+            {
+                red = Math.Round(IntensityMax * Math.Pow(red * factor, Gamma));
+            }
+            if (green != 0)
+            {
+                green = Math.Round(IntensityMax * Math.Pow(green * factor, Gamma));
+            }
+            if (blue != 0)
+            {
+                blue = Math.Round(IntensityMax * Math.Pow(blue * factor, Gamma));
+            }
+            //return [red,green,blue];
         }
 
         private void button14_Click(object sender, EventArgs e)

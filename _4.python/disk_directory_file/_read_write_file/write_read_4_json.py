@@ -2,7 +2,7 @@
 
 import json, datetime
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/data_earthquake.json'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_json/data_earthquake.json'
 fp = open(filename, 'r')
 earthquakes = json.load(fp)
 
@@ -31,9 +31,9 @@ for b_data in boundary_data['Province']:
 import json, requests, datetime
 
 url = 'http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson'
-r = requests.get(url)
+html = requests.get(url)
 
-earthquakes = json.loads(r.text)
+earthquakes = json.loads(html.text)
 dataset = list()
 for eq in earthquakes['features']:
     item = dict()
@@ -56,8 +56,8 @@ for data in dataset:
 import json, requests, hashlib, datetime, os.path
 
 url = 'http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/4.5_week.geojson'
-r = requests.get(url)
-sig = hashlib.md5(r.text.encode('utf-8')).hexdigest()
+html = requests.get(url)
+sig = hashlib.md5(html.text.encode('utf-8')).hexdigest()
 old_sig=''
 
 if os.path.exists('eq_sig.txt'):
@@ -73,7 +73,7 @@ if sig == old_sig:
     print('資料未更新，不需要處理...')
     exit()
 
-earthquakes = json.loads(r.text)
+earthquakes = json.loads(html.text)
 dataset = list()
 for eq in earthquakes['features']:
     item = dict()
@@ -98,7 +98,8 @@ print('測試完成')
 
 
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/jdata.json'
+filename = 'C:/_git/vcs/_1.data/______test_files1/_json/jdata.json'
+#filename = 'C:/_git/vcs/_1.data/______test_files1/_json/AQI1.json'  #fail
 
 import pprint as pp
 import json
@@ -107,6 +108,6 @@ with open(filename, "rt") as fp:
     data = json.loads(fp.read())
 pp.pprint(data)
 print(data)
-    
+
 
 

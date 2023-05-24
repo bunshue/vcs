@@ -120,3 +120,7 @@ with open(filename, 'rb') as f:
 h = s.hexdigest()
 print(h)
 
+string = 'this is a lion-mouse'
+md5 = hashlib.md5(string).hexdigest()
+print('md5 : ', md5)
+
