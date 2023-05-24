@@ -3,7 +3,7 @@ from time import sleep
 
 urls = ['http://www.google.com',
         'http://www.e-happy.com.tw',
-        'http://opendata.epa.gov.tw/',
+        'https://www.ruten.com.tw/',
         'https://tw.yahoo.com/']
 
 driver = webdriver.Chrome()

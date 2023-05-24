@@ -1,4 +1,6 @@
-import hashlib,os,requests 
+import hashlib
+import os
+import requests
 
 print('以md5檢查網站內容是否更新')
 

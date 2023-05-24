@@ -4,7 +4,6 @@ import PIL.ImageDraw
 from PIL import *
 from PIL import ImageEnhance
 from PIL import Image
-import cv2
 
 # Important variables
 user_tesseract_cmd = r'C:/Users/070601/AppData/Local/Programs/Tesseract-OCR/tesseract.exe'

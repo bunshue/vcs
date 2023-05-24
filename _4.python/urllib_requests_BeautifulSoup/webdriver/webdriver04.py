@@ -2,7 +2,7 @@ from selenium import webdriver
 from time import sleep
 from selenium.webdriver.common.keys import Keys
 
-url = 'https://opendata.epa.gov.tw/'
+url = 'https://data.epa.gov.tw/'
 
 driver = webdriver.Chrome()
 driver.maximize_window()
