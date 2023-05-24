@@ -450,3 +450,22 @@ print(version)
 
 
 
+import datetime
+
+def transform_date(date): #轉換日期
+    y, m, d, h = date[:4],date[5:7],date[8:10],date[11:13]
+    return y + '/' + m  + '/' + d  + '/' + h  
+
+old_date = datetime.datetime.now() # 取得查詢當下的時間
+
+old_date = str(old_date)    #先轉成字串
+
+#old_date = '2023/05/24 13:00:00' ex
+
+print(old_date)
+
+new_date = transform_date(old_date)
+
+print(new_date)
+
+

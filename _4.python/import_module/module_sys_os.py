@@ -94,8 +94,6 @@ with open(os.path.join(here, "README.md"), encoding="utf-8") as f:
     long_description = f.read()
 '''
 
-print("Python:", sys.version)
-
 print(sys.platform)
 
 if sys.platform.startswith("win"):
@@ -103,42 +101,22 @@ if sys.platform.startswith("win"):
 else:
     print('你用的作業系統不是Windows')
 
-
 import sys
 if sys.platform == 'win32':
     print('Windows')
 else:
     print('Non-Windows')
 
-
-
-import sys
-print(sys.platform)
-
+print("Python:", sys.version)
 print(sys.version)
-
-
 print(sys.version)
-
-
 
 import sys
 print(sys.path)
-
-
 sys.exit(1)	#立刻退出程式
-
-
 
 #強制離開程式, 並說明原因
 sys.exit('強制離開程式, 並說明原因')
-
-
-
-
-
-
-
 
 
 

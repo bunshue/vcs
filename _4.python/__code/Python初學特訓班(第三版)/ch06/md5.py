@@ -5,7 +5,8 @@ import requests
 print('以md5檢查網站內容是否更新')
 
 #環保署資料網址要修改
-url = "http://opendata.epa.gov.tw/ws/Data/REWXQA/?$orderby=SiteName&$skip=0&$top=1000&format=json"
+#url = "http://opendata.epa.gov.tw/ws/Data/REWXQA/?$orderby=SiteName&$skip=0&$top=1000&format=json"
+url = 'https://data.epa.gov.tw/api/v2/aqx_p_488?format=csv&year_month=2023_04&offset=0&limit=100&api_key=9e273741-dad9-4c98-86cc-73e75137f66c&filters=SiteName,EQ,馬公'
 
 # 讀取網頁原始碼
 html = requests.get(url).text.encode('utf-8-sig')

@@ -13,25 +13,25 @@ def get_mailgun_key():
 
     print("讀取檔案 : " + filename)
     fo = open(filename, 'r')
-    maingun_key = fo.read()
+    mailgun_key = fo.read()
     fo.close()
 
-    length = len(maingun_key)
+    length = len(mailgun_key)
     if length != 50:
         print('MAILGUN_KEY 錯誤, 離開')
         return ""
-    return maingun_key
+    return mailgun_key
 
 def send_simple_message(email_nicknane, email_from, email_to, subject, body):
-    maingun_key = get_mailgun_key()
-    length = len(maingun_key)
+    mailgun_key = get_mailgun_key()
+    length = len(mailgun_key)
     if length != 50:
         print('MAILGUN_KEY 錯誤, 離開')
         return ""
     
     return requests.post(
         "https://api.mailgun.net/v3/sandboxbfcaff2ba2ce446eb4972796eabec7da.mailgun.org/messages",
-        auth=("api", maingun_key),
+        auth=("api", mailgun_key),
         data={"from": "%s <%s>" % (email_nicknane, email_from),
               "to": [email_to],
               "subject": subject,
