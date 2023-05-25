@@ -1,9 +1,18 @@
+'''
+空氣品質指標(AQI)
+資料集代碼 	AQX_P_432
+
+空氣品質指標(AQI)(歷史資料)
+資料集代碼 	AQX_P_488
+'''
+
 import urllib.request   #用來建立請求
 import zipfile
 import csv
 
 import sys
 import requests
+import time
 
 def get_epa_key():
     filename = 'C:/_git/vcs/_1.data/______test_files1/_key/epa_key.txt'
@@ -32,7 +41,7 @@ if length != 36:
     print('EPA_KEY 錯誤, 離開')
     sys.exit(1)	#立刻退出程式
 
-DataID = 'aqx_p_488'
+DataID = 'AQX_P_432'
 format = 'csv'
 year_month = '2023_04'
 offset = '0'
@@ -56,10 +65,8 @@ print(r.text)
 '''
 
 #有查詢條件
-'''
-條件查詢方式是使用filters參數加在API網址後：&filters='{資料字典英文欄位}',EQ,'{搜尋值}‘
-ex：&filters=SiteName,EQ,馬公
-'''
+#條件查詢方式是使用filters參數加在API網址後：&filters='{資料字典英文欄位}',EQ,'{搜尋值}‘
+#ex：&filters=SiteName,EQ,馬公
 filters1 = 'SiteName,EQ,馬公'
 filters2 = 'SiteName,EQ,馬公,金門'
 filters3 = 'SiteName,EQ,馬公,金門|status,EQ,普通'
@@ -73,34 +80,22 @@ print(url)
 url = 'https://data.epa.gov.tw/api/v2/%s?format=%s&year_month=%s&offset=%s&limit=%s&api_key=%s&filters=%s' % (DataID, format, year_month, offset, limit, api_key, filters3)
 print(url)
 
-
 '''
 r = requests.get(url)
 print(r.text)
 '''
-
-print('作業完成')
-
-
-
-
-
 
 import urllib.request   #用來建立請求
 import zipfile
 import csv
 
 print('讀取遠端 json 檔案')
-
 format = 'json'
-
 url = 'https://data.epa.gov.tw/api/v2/%s?format=%s&offset=%s&limit=%s&api_key=%s' % (DataID, format, offset, limit, api_key)
-
-
-filename = 'AQI.json'   #圖檔名稱
-
+filename = 'C:/_git/vcs/_1.data/______test_files2/AQI.json' #json檔案名稱
 urllib.request.urlretrieve(url, filename) #下載遠端 json 檔案
 
+time.sleep(3)
 
 '''
 print()
@@ -117,10 +112,10 @@ data = pd.read_csv(url)
 print(data)
 '''
 
-'''
 #JSON格式
 def getAQI(key, filters):
-    url = f'https://data.epa.gov.tw/api/v2/aqx_p_432?filters={filters}&api_key={key}&format=json'
+    url = f'https://data.epa.gov.tw/api/v2/{DataID}?filters={filters}&api_key={key}&format=json'
+    print(url)
     r = requests.get(url)
     jObj = r.json()['records']
     r.close()
@@ -128,7 +123,7 @@ def getAQI(key, filters):
 
 #filters = 'sitename,EQ,桃園'
 filters = 'siteid,EQ,17'
-data = getAQI(api_key, filters)[0]
+data = getAQI(api_key, filters)[0]  #只看第1筆資料, index = 0
 # 欄位都是小寫的
 print(f'縣市: {data["county"]}')
 print(f'測站名稱: {data["sitename"]}')
@@ -136,10 +131,12 @@ print(f'AQI: {data["aqi"]}')
 print(f'PM2.5: {data["pm2.5"]}')
 
 
+time.sleep(3)
+
 #CSV格式
 
 def getAQI_csv(key, filters):
-    url = f'https://data.epa.gov.tw/api/v2/aqx_p_432?filters={filters}&api_key={key}&format=csv'
+    url = f'https://data.epa.gov.tw/api/v2/{DataID}?filters={filters}&api_key={key}&format=csv'
     r = requests.get(url)
     csv = r.text
     r.close()
@@ -159,9 +156,9 @@ print(f'縣市: {data["county"]}')
 print(f'測站名稱: {data["sitename"]}')
 print(f'AQI: {data["aqi"]}')
 print(f'PM2.5: {data["pm2.5"]}')
-'''
 
-'''
+time.sleep(3)
+
 import tkinter as tk
 import urllib3 #外部的packages
 import certifi #https的連線方式
@@ -169,7 +166,7 @@ import certifi #https的連線方式
 def downloadAQI():
     print("開始下載資料")
 
-    DataID = 'aqx_p_432'
+    DataID = 'AQX_P_432'
     format = 'csv'
     limit = '1000'
     api_key = epa_key
@@ -177,7 +174,7 @@ def downloadAQI():
     url = 'https://data.epa.gov.tw/api/v2/%s?format=%s&limit=%s&api_key=%s' % (DataID, format, limit, api_key)
     print(url)
     
-    #url = 'https://data.epa.gov.tw/api/v2/aqx_p_432?format=csv&limit=1000&api_key=xxxxxx'
+    #url = 'https://data.epa.gov.tw/api/v2/AQX_P_432?format=csv&limit=1000&api_key=xxxxxx'
     
     http=urllib3.PoolManager(cert_reqs='CERT_REQUIRED',ca_certs=certifi.where()) #建立https連線
     #如下載網址為http://....則建立http連線為：http = urllib3.PoolManager()
@@ -186,7 +183,8 @@ def downloadAQI():
         print("下載成功")
         print(response.data)
         #儲存檔案，建立file實體
-        file=open("空氣品質指標.csv","wb")
+        filename = 'C:/_git/vcs/_1.data/______test_files2/空氣品質指標.csv'
+        file = open(filename, "wb")
         file.write(response.data)
         print("存檔成功")
         file.close() #關閉檔案
@@ -201,7 +199,7 @@ window.geometry("500x300") #沒有設定寬x高，將依元件調整視窗大小
 tk.Button(window, text = "下載資料", command = downloadAQI).pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 window.mainloop()
 
-'''
+time.sleep(3)
 
 import hashlib
 import os
@@ -223,23 +221,40 @@ NOT NULL UNIQUE ,"SiteName" TEXT NOT NULL ,"PM25" INTEGER)
 '''
 cursor.execute(sqlstr)
 
-
 print('以md5檢查網站內容是否更新')
 
-DataID = 'aqx_p_488'
-format = 'csv'
+DataID = 'AQX_P_432'
+format = 'json'
 limit = '10'
 api_key = epa_key
 
+#fail
 url = 'https://data.epa.gov.tw/api/v2/%s?format=%s&year_month=%s&offset=%s&limit=%s&api_key=%s&filters=%s' % (DataID, format, year_month, offset, limit, api_key, filters1)
+print(url)
+#fail same
+url = f'https://data.epa.gov.tw/api/v2/{DataID}?format={format}&year_month={year_month}&offset={offset}&limit={limit}&api_key={api_key}&filters={filters1}'
+print(url)
+
+#filters = 'sitename,EQ,桃園'
+filters = 'siteid,EQ,17'
+
+DataID = 'AQX_P_432'
+#ok  AQX_P_432
+url = f'https://data.epa.gov.tw/api/v2/{DataID}?filters={filters}&api_key={api_key}&format=json'
+print(url)
+url = f'https://data.epa.gov.tw/api/v2/{DataID}?format=json&api_key={api_key}&filters={filters1}'
+print(url)
+
+url = f'https://data.epa.gov.tw/api/v2/{DataID}?format=json&api_key={api_key}'
 print(url)
 
 # 讀取網頁原始碼
-html = requests.get(url).text.encode('utf-8-sig')
+#html = requests.get(url).text.encode('utf-8-sig')
+html = requests.get(url)
 #print(html)
 
 # 判斷網頁是否更新
-md5 = hashlib.md5(html).hexdigest()
+md5 = hashlib.md5(html.text.encode('utf-8-sig')).hexdigest()
 print('新md5 : ', md5)
 
 old_md5 = ""
@@ -255,36 +270,45 @@ with open(md5_filename, 'w') as f:
 
 print('舊md5 : ', old_md5)
 
-
 if md5 != old_md5:
     print('資料已更新...')
 
     # 刪除資料表內容
     conn.execute("delete from TablePM25")
     conn.commit()
+    
 
-    soup = BeautifulSoup(html,'html.parser')    
-    # 將網頁內轉換為 list,list 中的元素是 dict 
-    #jsondata = ast.literal_eval(soup.text)
-    print(soup.text)
-
+    # 欄位都是小寫的
+    jsondata = html.json()['records']
 
     '''
-    因為json格式改了
-
-    n=1
+    # debug
+    #print(jsondata)
+    print(len(jsondata))
+    n = 1
     for site in jsondata:
-        SiteName=site["SiteName"]
-        if site["PM2.5"] == "ND":
-            continue
-        PM25=0 if site["PM2.5"] == "" else int(site["PM2.5"])     
-        print("站名:{}   PM2.5={}".format(SiteName,PM25))
-        # 新增一筆記錄
-        sqlstr="insert into TablePM25 values({},'{}',{})" .format(n,SiteName,PM25)
-        cursor.execute(sqlstr)
-        n+=1
-        conn.commit() # 主動更新
+        print(f'縣市: {site["county"]}')
+        print(f'測站名稱: {site["sitename"]}')
+        print(f'AQI: {site["aqi"]}')
+        print(f'PM2.5: {site["pm2.5"]}')
+        n += 1
+        if n == 10:
+            break;
     '''
+    
+    n = 1
+    for site in jsondata:
+        SiteName=site["sitename"]
+        if site["pm2.5"] == "ND":
+            continue
+        PM25 = 0 if site["pm2.5"] == "" else int(site["pm2.5"])
+        print("站名:{}   PM2.5={}".format(SiteName, PM25))
+        # 新增一筆記錄
+        sqlstr="insert into TablePM25 values({},'{}',{})" .format(n, SiteName, PM25)
+        cursor.execute(sqlstr)
+        n += 1
+        conn.commit() # 主動更新
+
 else:
     print('資料未更新，從資料庫讀取...') 
     cursor=conn.execute("select *  from TablePM25")
@@ -295,6 +319,5 @@ else:
 conn.close()  # 關閉資料庫連線
 
 
- 
-
+print('作業完成')
 
