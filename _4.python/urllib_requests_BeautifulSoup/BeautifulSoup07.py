@@ -163,12 +163,10 @@ for title in titles:
         pass
     time.sleep(3)
     
-now = datetime.now()
-filename = now.strftime("news-%y-%m-%d-%H-%M-%S.json")
+filename = 'C:/_git/vcs/_1.data/______test_files2/news_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.json';
 with open(filename, "w", encoding='utf-8') as fp:
     print(filename + " is dumping...")
     json.dump(titles, fp)
-
 
 
 #----------------------------------------------------------------------------------

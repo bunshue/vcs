@@ -1,9 +1,12 @@
 # PM2.5即時監測顯示器
 
+import os
+import tkinter as tk
+import pandas as pd
+
 def get_epa_key():
     filename = 'C:/_git/vcs/_1.data/______test_files1/_key/epa_key.txt'
 
-    import os
     filename = os.path.abspath(filename)
     if not os.path.exists(filename): #檢查檔案是否存在
         print('EPA_KEY 檔案不存在, 離開, 檔案 : ' + filename)
@@ -25,7 +28,6 @@ length = len(epa_key)
 if length != 36:
     print('EPA_KEY 錯誤, 離開')
     sys.exit(1)	#立刻退出程式
-
 
 def rbCity():  #點選縣市選項按鈕後處理函式
     global sitelist, listradio
@@ -74,9 +76,6 @@ def sitemake():  #建立測站選項按鈕
             rbtem.select()
         rbtem.pack(side="left")  #靠左排列
 
-import tkinter as tk
-import pandas as pd
-
 DataID = 'AQX_P_432'
 format = 'csv'
 year_month = '2023_04'
@@ -111,30 +110,33 @@ for c1 in data["county"]:
         sitelist.append(data.iloc[count, 0])
     count += 1
 
-label1 = tk.Label(window, text="縣市：", pady=6, fg="blue", font=("新細明體", 12))
+label1 = tk.Label(window, text = "縣市：", pady = 6, fg = "blue", font = ("新細明體", 12))
 label1.pack()
 frame1 = tk.Frame(window)  #縣市容器
 frame1.pack()
-for i in range(0,3):  #3列選項按鈕
-    for j in range(0,8):  #每列8個選項按鈕
+for i in range(0, 3):  #3列選項按鈕
+    for j in range(0, 8):  #每列8個選項按鈕
         n = i * 8 + j  #第n個選項按鈕
         if(n < len(citylist)):
             city1 = citylist[n]  #取得縣市名稱
-            rbtem = tk.Radiobutton(frame1, text=city1, variable=city, value=city1, command=rbCity)  #建立選項按鈕
-            rbtem.grid(row=i, column=j)  #設定選項按鈕位置
-            if(n==0):  #選取第1個縣市
+            rbtem = tk.Radiobutton(frame1, text = city1, variable = city, value = city1, command = rbCity)  #建立選項按鈕
+            rbtem.grid(row = i, column = j)  #設定選項按鈕位置
+            if(n == 0):  #選取第1個縣市
                 rbtem.select()
 
-label2 = tk.Label(window, text="測站：", pady=6, fg="blue", font=("新細明體", 12))
+label2 = tk.Label(window, text = "測站：", pady = 6, fg = "blue", font = ("新細明體", 12))
 label2.pack()
 frame2 = tk.Frame(window)  #測站容器
 frame2.pack()
+
 sitemake()
 
-btnDown = tk.Button(window, text="更新資料", font=("新細明體", 12), command=clickRefresh)
-btnDown.pack(pady=6)
-lblResult1 = tk.Label(window, textvariable=result1, fg="red", font=("新細明體", 16))
-lblResult1.pack(pady=6)
+button1 = tk.Button(window, text = "更新資料", font = ("新細明體", 12), command = clickRefresh)
+button1.pack(pady = 6)
+
+label3 = tk.Label(window, textvariable = result1, fg = "red", font = ("新細明體", 16))
+label3.pack(pady = 6)
+
 rbSite()  #顯示測站訊息
 
 window.mainloop()

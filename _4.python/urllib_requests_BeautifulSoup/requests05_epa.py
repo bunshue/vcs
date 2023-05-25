@@ -1,4 +1,11 @@
 '''
+AQI綜合指標（Air Quality Index 空氣品質指標）
+
+空氣品質指標值(AQI)
+
+細懸浮微粒(PM2.5)
+懸浮微粒(PM10)
+
 空氣品質指標(AQI)
 資料集代碼 	AQX_P_432
 
@@ -6,18 +13,28 @@
 資料集代碼 	AQX_P_488
 '''
 
+import requests
+
 import urllib.request   #用來建立請求
 import zipfile
 import csv
 
+import os
 import sys
-import requests
 import time
+
+import pandas as pd
+
+import urllib3 #外部的packages
+import certifi #https的連線方式
+import hashlib
+import sqlite3
+import ast
+from bs4 import BeautifulSoup
 
 def get_epa_key():
     filename = 'C:/_git/vcs/_1.data/______test_files1/_key/epa_key.txt'
 
-    import os
     filename = os.path.abspath(filename)
     if not os.path.exists(filename): #檢查檔案是否存在
         print('EPA_KEY 檔案不存在, 離開, 檔案 : ' + filename)
@@ -85,24 +102,17 @@ r = requests.get(url)
 print(r.text)
 '''
 
-import urllib.request   #用來建立請求
-import zipfile
-import csv
+print('----------------------------------------------------------------------')	#70個
+time.sleep(3)
 
 print('讀取遠端 json 檔案')
 format = 'json'
 url = 'https://data.epa.gov.tw/api/v2/%s?format=%s&offset=%s&limit=%s&api_key=%s' % (DataID, format, offset, limit, api_key)
-filename = 'C:/_git/vcs/_1.data/______test_files2/AQI.json' #json檔案名稱
+filename = 'C:/_git/vcs/_1.data/______test_files2/AQI_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.json';   #json檔案名稱
 urllib.request.urlretrieve(url, filename) #下載遠端 json 檔案
 
+print('----------------------------------------------------------------------')	#70個
 time.sleep(3)
-
-'''
-print()
-print()
-
-import pandas as pd
-
 
 format = 'csv'
 url = 'https://data.epa.gov.tw/api/v2/%s?format=%s&offset=%s&limit=%s&api_key=%s' % (DataID, format, offset, limit, api_key)
@@ -110,7 +120,9 @@ url = 'https://data.epa.gov.tw/api/v2/%s?format=%s&offset=%s&limit=%s&api_key=%s
 data = pd.read_csv(url)
 
 print(data)
-'''
+
+print('----------------------------------------------------------------------')	#70個
+time.sleep(3)
 
 #JSON格式
 def getAQI(key, filters):
@@ -130,7 +142,7 @@ print(f'測站名稱: {data["sitename"]}')
 print(f'AQI: {data["aqi"]}')
 print(f'PM2.5: {data["pm2.5"]}')
 
-
+print('----------------------------------------------------------------------')	#70個
 time.sleep(3)
 
 #CSV格式
@@ -157,11 +169,8 @@ print(f'測站名稱: {data["sitename"]}')
 print(f'AQI: {data["aqi"]}')
 print(f'PM2.5: {data["pm2.5"]}')
 
+print('----------------------------------------------------------------------')	#70個
 time.sleep(3)
-
-import tkinter as tk
-import urllib3 #外部的packages
-import certifi #https的連線方式
 
 def downloadAQI():
     print("開始下載資料")
@@ -176,14 +185,14 @@ def downloadAQI():
     
     #url = 'https://data.epa.gov.tw/api/v2/AQX_P_432?format=csv&limit=1000&api_key=xxxxxx'
     
-    http=urllib3.PoolManager(cert_reqs='CERT_REQUIRED',ca_certs=certifi.where()) #建立https連線
+    http = urllib3.PoolManager(cert_reqs = 'CERT_REQUIRED', ca_certs = certifi.where()) #建立https連線
     #如下載網址為http://....則建立http連線為：http = urllib3.PoolManager()
     response = http.request('GET', url) #使用GET方法儲存
     if response.status == 200:
         print("下載成功")
         print(response.data)
         #儲存檔案，建立file實體
-        filename = 'C:/_git/vcs/_1.data/______test_files2/空氣品質指標.csv'
+        filename = 'C:/_git/vcs/_1.data/______test_files2/AQI_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.csv';
         file = open(filename, "wb")
         file.write(response.data)
         print("存檔成功")
@@ -193,20 +202,11 @@ def downloadAQI():
         print("下載失敗")
         return #中斷，跳出downloadAQI
 
-window = tk.Tk()
-window.title("範例一")
-window.geometry("500x300") #沒有設定寬x高，將依元件調整視窗大小
-tk.Button(window, text = "下載資料", command = downloadAQI).pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-window.mainloop()
+downloadAQI()
 
+print('----------------------------------------------------------------------')	#70個
 time.sleep(3)
 
-import hashlib
-import os
-import requests
-import sqlite3
-import ast
-from bs4 import BeautifulSoup
 
 db_filename = 'C:/_git/vcs/_1.data/______test_files1/_db/DataBasePM25.sqlite'
 md5_filename = 'C:/_git/vcs/_1.data/______test_files2/old_md5.txt'
@@ -317,7 +317,6 @@ else:
         print("站名:{}   PM2.5={}".format(row[1],row[2]))    
 
 conn.close()  # 關閉資料庫連線
-
 
 print('作業完成')
 

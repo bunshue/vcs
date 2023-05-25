@@ -1,5 +1,5 @@
 from selenium import webdriver
-from PIL import Image # pillow 安裝 Anaconda 時已自動安裝
+from PIL import Image
 
 # 取出 綱頁圖中的驗證圖片，存入 <img_source.png> 檔
 # 請調整解析度
@@ -22,3 +22,5 @@ bottom=element.location['y'] + element.size['height']
 img=Image.open("img_screenshot.png")
 img2=img.crop((left,top,right,bottom))
 img2.save('img_source.png')
+
+

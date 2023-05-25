@@ -1,5 +1,8 @@
 # print data
 
+print('-' * 40)
+print('----------------------------------------------------------------------')	#70個
+
 print('字符串格式化操作')
 print('My name is %s and weight is %d kg!' % ('David', 82) )
 #可用%c %s %d %u %x %X %f
@@ -195,8 +198,6 @@ print('%s\t%-40s\t'%(string1, string1), end=' ')
 num = 123
 print('%d %s - %s\t%s' % (num, string1, string1, string1))
 
-
-print("-"*40)
 print('Error: %s' % string1, file=sys.stderr)
 
 debug = False #debug訊息之開關

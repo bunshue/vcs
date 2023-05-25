@@ -8,10 +8,10 @@ from sklearn.linear_model import LinearRegression
 
 def codeocr(offset):
     global result    
-    img=cv2.imread("img_source.png")
-    dst=cv2.fastNlMeansDenoisingColored(img,None,30,30,7,21) # 去雜點
-    ret,thresh=cv2.threshold(dst,127,255,cv2.THRESH_BINARY_INV)  #黑白
-    imgarr=cv2.cvtColor(thresh,cv2.COLOR_BGR2GRAY) #灰階    
+    img = cv2.imread("img_source.png")
+    dst = cv2.fastNlMeansDenoisingColored(img, None, 30, 30, 7, 21) # 去雜點
+    ret,thresh = cv2.threshold(dst, 127, 255, cv2.THRESH_BINARY_INV)  #黑白
+    imgarr = cv2.cvtColor(thresh, cv2.COLOR_BGR2GRAY) #灰階    
 #    plt.imshow(thresh)
 #    plt.show()
     
@@ -19,34 +19,34 @@ def codeocr(offset):
     height= imgarr.shape[0]  # 高度
     width = imgarr.shape[1]  # 寬度
     
-    start=offset   # 要測試後調整，offset 為左右留的邊界
-    end=width-offset 
+    start = offset   # 要測試後調整，offset 為左右留的邊界
+    end = width-offset 
     
     # 去除回歸曲線
-    imgarr[:,start:end]=0  # 從左邊界起至右邊界止，全部挖空
-    imagedata=np.where(imgarr==255) # 找到所有白色的點
+    imgarr[:, start:end] = 0  # 從左邊界起至右邊界止，全部挖空
+    imagedata = np.where(imgarr == 255) # 找到所有白色的點
     
-    plt.scatter(imagedata[1],height-imagedata[0],s=100,color="red",label="Cluster")
-    plt.ylim(0,height)
+    plt.scatter(imagedata[1], height - imagedata[0], s = 100, color = "red", label = "Cluster")
+    plt.ylim(0, height)
     plt.show() # 顯示起始、結束
     
-    ploy_reg =PolynomialFeatures(degree=2)    
-    X=np.array([imagedata[1]])
-    Y=height-imagedata[0]
-    X_=ploy_reg.fit_transform(X.T)
-    regr=LinearRegression()
-    regr.fit(X_,Y)
-    LinearRegression(copy_X=True,fit_intercept=True,n_jobs=1,normalize=False)
+    ploy_reg = PolynomialFeatures(degree = 2)
+    X = np.array([imagedata[1]])
+    Y = height-imagedata[0]
+    X_ = ploy_reg.fit_transform(X.T)
+    regr = LinearRegression()
+    regr.fit(X_, Y)
+    LinearRegression(copy_X = True, fit_intercept = True, n_jobs = 1, normalize = False)
     
-    X2=np.array([[i for i in range(0,width)]])
-    X2_=ploy_reg.fit_transform(X2.T)
-    plt.plot(X2.T,regr.predict(X2_),color="blue",linewidth=30) #顯示回歸線
+    X2 = np.array([[i for i in range(0,width)]])
+    X2_ = ploy_reg.fit_transform(X2.T)
+    plt.plot(X2.T, regr.predict(X2_), color = "blue", linewidth = 30) #顯示回歸線
     
-    grayimg=cv2.cvtColor(thresh,cv2.COLOR_BGR2GRAY) 
-    for ele in np.column_stack([regr.predict(X2_).round(0),X2[0],] ):
-        pos=height-int(ele[0])
+    grayimg = cv2.cvtColor(thresh, cv2.COLOR_BGR2GRAY) 
+    for ele in np.column_stack([regr.predict(X2_).round(0), X2[0],] ):
+        pos = height-int(ele[0])
         try:
-            grayimg[pos-3:pos+3,int(ele[1])]=255-grayimg[pos-3:pos+3,int(ele[1])]
+            grayimg[pos-3:pos+3, int(ele[1])] = 255 - grayimg[pos - 3:pos + 3, int(ele[1])]
         except IndexError:
             pass
     
