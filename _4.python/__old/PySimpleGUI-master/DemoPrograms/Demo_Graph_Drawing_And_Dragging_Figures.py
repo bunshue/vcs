@@ -125,7 +125,7 @@ def main():
             window["-INFO-"].update(value=f"mouse freely moving {values['-GRAPH-']}")
         elif event == '-SAVE-':
             # filename = sg.popup_get_file('Choose file (PNG, JPG, GIF) to save to', save_as=True)
-            filename=r'test.jpg'
+            filename = r'test.jpg'
             save_element_as_file(window['-GRAPH-'], filename)
         elif event == 'Erase item':
             window["-INFO-"].update(value=f"Right click erase at {values['-GRAPH-']}")

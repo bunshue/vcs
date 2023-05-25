@@ -2,7 +2,6 @@ from crawler import PttSpider, ArticleInfo
 from run_time import my_time
 import sys
 
-
 @my_time
 def main():
     # python app.py [版名] [爬幾頁]
@@ -17,7 +16,6 @@ def main():
     print("檔案處理中...")
     ArticleInfo.data_process(spider.info, spider.board)
     print("完成...")
-
 
 if __name__ == "__main__":
     main()

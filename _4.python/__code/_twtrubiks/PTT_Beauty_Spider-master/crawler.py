@@ -11,7 +11,6 @@ urllib3.disable_warnings()
 logging.basicConfig(level=logging.WARNING)
 HTTP_ERROR_MSG = 'HTTP error {res.status_code} - {res.reason}'
 
-
 class PttSpider:
     rs = requests.session()
     ptt_head = 'https://www.ptt.cc'

@@ -1,7 +1,6 @@
 import unittest
 from crawler import PttSpider
 
-
 class TestCase(unittest.TestCase):
 
     def test_01(self):

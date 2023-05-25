@@ -18,7 +18,7 @@ while(cap.isOpened()):
   elif k == ord('q'): # 若按下 q 鍵則離開迴圈
     break
   elif k == ord('s'): # 若按下 s 鍵則存圖
-    cv2.imwrite('test.jpg', frame)
+    cv2.imwrite('video_snapshot.jpg', frame)
 
 cap.release()
 cv2.destroyAllWindows()

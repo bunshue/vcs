@@ -131,7 +131,7 @@ def main():
             prior_rect = None
         elif event == '-SAVE-':
             # filename = sg.popup_get_file('Choose file (PNG, JPG, GIF) to save to', save_as=True)
-            filename=r'test.jpg'
+            filename = r'test.jpg'
             save_element_as_file(window['-GRAPH-'], filename)
 
     window.close()

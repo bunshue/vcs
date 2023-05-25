@@ -2,6 +2,7 @@ from urllib import request
 import json
 import csv
 
+#行政院農業委員會資料開放平台
 url = 'https://data.coa.gov.tw/Service/OpenData/FromM/FarmTransData.aspx'
 
 with request.urlopen(url) as res:

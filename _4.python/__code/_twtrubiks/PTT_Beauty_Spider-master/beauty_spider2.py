@@ -3,7 +3,6 @@ import sys
 from run_time import my_time
 from crawler import PttSpider, Download, ArticleInfo
 
-
 @my_time
 def main():
     # python beauty_spider2.py [版名] [爬幾頁] [推文多少以上]
@@ -23,6 +22,6 @@ def main():
     download.run()
     print("下載完畢...")
 
-
 if __name__ == '__main__':
     main()
+

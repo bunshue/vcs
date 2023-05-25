@@ -3,7 +3,10 @@ from PIL import Image # pillow 安裝 Anaconda 時已自動安裝
 
 # 取出 綱頁圖中的驗證圖片，存入 <img_source.png> 檔
 # 請調整解析度
-url="http://irs.thsrc.com.tw/IMINT"
+
+#台灣高鐵訂票系統
+url = 'http://irs.thsrc.com.tw/IMINT'
+
 driver=webdriver.Chrome()
 driver.get(url)
 driver.maximize_window()	#視窗最大化

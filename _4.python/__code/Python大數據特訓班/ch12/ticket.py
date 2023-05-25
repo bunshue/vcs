@@ -16,7 +16,10 @@ def get_photo():
     global driver
     # 取出 綱頁圖中的驗證圖片，存入 <img_source.png> 檔
     # 請調整解析度
-    url="http://irs.thsrc.com.tw/IMINT"
+
+    #台灣高鐵訂票系統
+    url = 'http://irs.thsrc.com.tw/IMINT'
+    
     driver=requests.Session()   
     driver=webdriver.Chrome()
     driver.get(url)

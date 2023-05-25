@@ -1,7 +1,6 @@
 import click
 from eynyMovieCrawler import EynyMovie, WriteFile
 
-
 @click.command()
 @click.option('--page',
               default=5,
@@ -11,6 +10,7 @@ from eynyMovieCrawler import EynyMovie, WriteFile
               default='eyny-Movie-Mage.txt',
               type=click.File('wb'),
               help='output fileName (default eyny-Movie-Mage.txt)')
+
 def cli(page, output):
     click.echo('Start parsing eyny movie....')
     url = 'http://www.eyny.com/forum-205-1.html'

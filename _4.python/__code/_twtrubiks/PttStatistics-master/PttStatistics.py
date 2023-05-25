@@ -7,6 +7,7 @@ import operator
 from datetime import datetime
 from bs4 import BeautifulSoup
 requests.packages.urllib3.disable_warnings()
+
 #可自行加入新的詞進去,增加斷詞精準度
 jieba.load_userdict("dictNew.txt")
 rs = requests.session()
@@ -15,7 +16,7 @@ def over18(board):
     res = rs.get('https://www.ptt.cc/bbs/' + board + '/index.html', verify = False)
     #先檢查網址是否包含'over18'字串 ,如有則為18禁網站
     if ( res.url.find('over18') > -1 ):
-       print u"18禁網頁"
+       print(u"18禁網頁")
        load = {
            'from':'/bbs/'+board+'/index.html',
            'yes':'yes' 
@@ -43,7 +44,7 @@ def title_count(PttName, ParsingPage, ALLpage):
         soup = BeautifulSoup(res.text,'html.parser')
 
         if (soup.title.text.find('Service Temporarily') > -1) :
-            print 'Service Temporarily', soup.title.text
+            print('Service Temporarily', soup.title.text)
 
         for r_ent in soup.find_all( class_="r-ent"):
             link = r_ent.find('a') 
@@ -53,7 +54,7 @@ def title_count(PttName, ParsingPage, ALLpage):
                    Titlesplit += title.split(']')[1].strip()
                except:
                    Titlesplit += title.strip()
-        print u"等稍等: " + str(100 * count / ParsingPage ) + " %."
+        print(u"等稍等: " + str(100 * count / ParsingPage ) + " %.")
 
     return jieba.cut(Titlesplit)
 
@@ -71,7 +72,7 @@ def push_count(PttName, ParsingPage, ALLpage):
         soup = BeautifulSoup(res.text,'html.parser')
 
         if (soup.title.text.find('Service Temporarily') > -1) :
-            print 'Service Temporarily', soup.title.text
+            print('Service Temporarily', soup.title.text)
 
         for r_ent in soup.find_all( class_="r-ent"):
             link = r_ent.find('a') 
@@ -88,14 +89,14 @@ def push_count(PttName, ParsingPage, ALLpage):
        soup = BeautifulSoup(res.text, 'html.parser')
        if ( soup.title.text.find('Service Temporarily') > -1 ) :
           UrlPer.append( url )
-          #print 'error_URL:',url
+          #print('error_URL:', url)
           time.sleep(1)   
        else :     
           count += 1
-          #print 'OK_URL:', url       
+          #print('OK_URL:', url)
           for push in soup.select('.push-content') :
               pushcontent += push.text[1:]
-          print u"等稍等: " + str(100 * count / total ) + " %."
+          print(u"等稍等: " + str(100 * count / total ) + " %.")
 
     return  jieba.cut(pushcontent)                 
 
@@ -103,18 +104,18 @@ def push_count(PttName, ParsingPage, ALLpage):
 # python PttStatistics.py title gossiping 10
 if __name__ == "__main__":
     search, PttName, ParsingPage = str(sys.argv[1]), str(sys.argv[2]) , int(sys.argv[3])
-    print 'Start parsing ' + PttName + '....'
+    print('Start parsing ' + PttName + '....')
     fileName = '-'+ PttName + '-' + datetime.now().strftime('%Y%m%d%H%M%S') + '.txt'
     start_time = time.time()
     soup = over18(PttName) 
     ALLpageURL = soup.select('.btn.wide')[1]['href']
     ALLpage = int(getPageNumber(ALLpageURL)) + 1
-    #print 'Total pages:',ALLpage
-    print 'Start parsing ' + search + ' count....'
+    #print('Total pages:',ALLpage)
+    print('Start parsing ' + search + ' count....')
     fileName = search + fileName
     
     if( search!='title' and search != 'push' ) :
-        print u"ERROR !! 請輸入 title or push !!"
+        print(u"ERROR !! 請輸入 title or push !!")
         sys.exit()
     if( search == 'title'):
         dataList = title_count(PttName, ParsingPage, ALLpage )
@@ -122,7 +123,7 @@ if __name__ == "__main__":
         dataList = push_count(PttName, ParsingPage, ALLpage)
 
 
-    print u"字詞統計中,請稍等......"
+    print(u"字詞統計中,請稍等......")
 
     dic = {}
   
@@ -144,6 +145,6 @@ if __name__ == "__main__":
          f.write( line.encode('utf8') )   
 
           
-    print u'====================完成===================='
-    print u'execution time:' + str(time.time() - start_time)+'s'
+    print(u'====================完成====================')
+    print(u'execution time:' + str(time.time() - start_time) + 's')
     
