@@ -6,11 +6,11 @@ WebCam 使用
 目前 webcam 僅 x64 電腦可用
 '''
 
-filename = 'C:/_git/vcs/_1.data/______test_files2/output.avi'
-
 import cv2
 import time
 import sys
+
+filename = 'C:/_git/vcs/_1.data/______test_files2/webcam_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.avi'
 
 #準備存檔用設定
 #使用 XVID 編碼
@@ -43,7 +43,7 @@ codec = decode_fourcc(fourcc)
 print("Codec: " + codec)
 
 #無效
-# 設定擷取影像的尺寸大小
+# 設定影像的尺寸大小
 #cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
 #cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 360)
 
@@ -54,14 +54,13 @@ while True:
       print('無影像, 離開')
       break
 
-    # 彩色轉灰階
-    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-
     #改變圖片大小
     #frame = cv2.resize(frame, None, fx = 1.5, fy = 1.5, interpolation = cv2.INTER_AREA)
 
-    cv2.imshow('WebCam', frame)    # 顯示圖片, 彩色
-    #cv2.imshow('WebCam', gray)    # 顯示圖片, 黑白
+    #彩色轉灰階
+    #frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+
+    cv2.imshow('WebCam', frame)    # 顯示圖片
 
     # 寫入影格
     out.write(frame)

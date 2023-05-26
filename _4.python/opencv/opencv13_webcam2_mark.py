@@ -23,10 +23,15 @@ if not cap.isOpened():
 else:
     print('Video device opened')
 
+# 取得 Codec 名稱
+fourcc = cap.get(cv2.CAP_PROP_FOURCC)
+codec = decode_fourcc(fourcc)
+print("Codec: " + codec)
+
 #無效
 # 設定影像的尺寸大小
-#cap.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
-#cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 960)
+#cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+#cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 360)
 
 count = 0
 background = 0
@@ -34,7 +39,7 @@ background = 0
 ## Capture the background in range of 60
 for i in range(60):
     ret,background = cap.read()
-background = np.flip(background,axis=1)
+background = np.flip(background, axis = 1)
 
 while True:
     ret, frame = cap.read()   # 從攝影機擷取一張影像

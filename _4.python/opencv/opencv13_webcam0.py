@@ -22,6 +22,16 @@ if not cap.isOpened():
 else:
     print('Video device opened')
 
+# 取得 Codec 名稱
+fourcc = cap.get(cv2.CAP_PROP_FOURCC)
+codec = decode_fourcc(fourcc)
+print("Codec: " + codec)
+
+#無效
+# 設定影像的尺寸大小
+#cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
+#cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 360)
+
 while True:
     ret, frame = cap.read()   # 從攝影機擷取一張影像
 
@@ -29,7 +39,7 @@ while True:
       print('無影像, 離開')
       break
 
-    cv2.imshow('WebCam', frame)    # 顯示圖片, 彩色
+    cv2.imshow('WebCam', frame)    # 顯示圖片, 原圖
 
     k = cv2.waitKey(1)
     if k == 27:     #ESC

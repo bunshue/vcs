@@ -40,6 +40,7 @@ while True:
 
     #frame = cv2.resize(frame,(int(frame.shape[1] / 2), int(frame.shape[0] / 2))) #調整畫面大小
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+	# 調用偵測識別人臉函式
     # faces = face_classifier.detectMultiScale(gray, scaleFactor = 1.3, minNeighbors = 5, minSize = (200, 200))
     faces = face_classifier.detectMultiScale(gray, scaleFactor = 1.3, minNeighbors = 5)
     #將抓到的人像標記並存檔

@@ -23,7 +23,7 @@ faces = faceCascade.detectMultiScale(image, scaleFactor=1.1, minNeighbors=5, min
 
 count = 1
 for (x,y,w,h) in faces:
-    cv2.rectangle(image, (x,y), (x+w,y+h), (128,255,0), 2)
+    cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 255), 2)
     filename2 = "face" + str(count)+ ".jpg"
     image1 = Image.open(filename)   #使用PIL
     image2 = image1.crop((x, y, x+w, y+h))

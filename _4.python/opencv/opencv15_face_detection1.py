@@ -52,6 +52,10 @@ if len(faces):
         x, y, w, h = face
         cv2.rectangle(image, (x, y), (x + h, y + w), color, 2)
 
+# 繪製人臉部份的方框
+for (x, y, w, h) in faces:
+    cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 255), 2)
+
 # 顯示結果
 #cv2.imshow(image)
 cv2.imshow('New Picture', image) #顯示圖片
