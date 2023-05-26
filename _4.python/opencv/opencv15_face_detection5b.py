@@ -32,6 +32,7 @@ for (x,y,w,h) in faces:
     count += 1
 
 # 顯示結果
+#cv2.imshow(image)
 cv2.imshow('New Picture', image) #顯示圖片
 
 print('wait kere')

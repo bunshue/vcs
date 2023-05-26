@@ -1,14 +1,11 @@
 import cv2
-import subprocess
 
-filename = 'media\\bank.jpg'
-#filename = 'C:/_git/vcs/_1.data/______test_files1/captcha01.jpg'
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/_opencv/captcha/captcha01.jpg'
 
-img = cv2.imread(filename)  #讀圖
+img = cv2.imread(filename1)  #讀圖
 cv2.namedWindow("Image")  
 cv2.imshow("Image", img) #顯示圖形
-cv2.waitKey (0) 
-cv2.destroyWindow("Image")
+
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  #轉為灰階
 _, inv = cv2.threshold(gray, 150, 255, cv2.THRESH_BINARY_INV)  #轉為反相黑白
 for i in range(len(inv)):  #i為每一列
@@ -27,10 +24,6 @@ for i in range(len(inv)):  #i為每一列
 
 dilation = cv2.dilate(inv, (8,8), iterations=1)  #圖形加粗
 
-cv2.imwrite("media\\bank_t.jpg", dilation)  #存檔
+filename2 = 'C:/_git/vcs/_1.data/______test_files2/catpcha_after.jpg'
+cv2.imwrite(filename2, dilation)  #存檔
 
-child = subprocess.Popen('tesseract media\\bank_t.jpg result', shell=True)  #OCR辨識
-child.wait()
-
-text = open('result.txt').read().strip()
-print("驗證碼為 " + text)

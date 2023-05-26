@@ -1,20 +1,3 @@
-def main():
-    # Prompt the user to enter a file
-    filename = input("Enter a filename: ").strip()
-    infile = open(filename, "r") # Open the file
-
-    wordCounts = {} # Create an empty dictionary to count words
-    for line in infile:
-        processLine(line.lower(), wordCounts)
-     
-    pairs = list(wordCounts.items()) # Get pairs from the dictionary   
-
-    items = [[count, word] for (word, count) in pairs] 
-    items.sort(reverse = True) # Sort pairs in items
-    
-    for count, word in items[ : 10]: # Slice the first 10 items
-        print(word, count, sep =  '\t')  
-  
 # Count each word in the line
 def processLine(line, wordCounts): 
     line = replacePunctuation(line) # Replace punctuation with space
@@ -33,4 +16,19 @@ def replacePunctuation(line):
 
     return line
 
-main() # Call the main function
+filename = 'C:/_git/vcs/_1.data/______test_files1/wordCounts1.txt'
+infile = open(filename, "r") # Open the file
+
+wordCounts = {} # Create an empty dictionary to count words
+for line in infile:
+    processLine(line.lower(), wordCounts)
+     
+pairs = list(wordCounts.items()) # Get pairs from the dictionary   
+
+items = [[count, word] for (word, count) in pairs] 
+items.sort(reverse = True) # Sort pairs in items
+    
+for count, word in items[ : 10]: # Slice the first 10 items
+    print(word, count, sep =  '\t')  
+  
+

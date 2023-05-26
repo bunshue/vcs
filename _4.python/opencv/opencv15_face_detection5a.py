@@ -26,6 +26,7 @@ for (x,y,w,h) in faces:
 print('共找到 : ' + str(len(faces)) + ' 張圖')
 
 # 顯示結果
+#cv2.imshow(image)
 cv2.imshow('New Picture', image) #顯示圖片
 
 print('wait kere')

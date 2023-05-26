@@ -5,7 +5,7 @@ def twodigit(n):  #將數值轉為二位數字串
         retstr = str(n)
     return retstr
 
-def convertDate(date):  #轉捔民國日期為西元:106/03/02->20170302
+def convertDate(date):  #轉換民國日期為西元:106/03/02->20170302
     str1 = str(date)
     yearstr = str1[:3]  #取出民國年
     realyear = str(int(yearstr) + 1911)  #轉為西元年

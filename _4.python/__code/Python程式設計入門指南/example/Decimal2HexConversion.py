@@ -1,3 +1,5 @@
+print('十進位 轉 十六進位')
+
 # Convert a decimal to a hex as a string 
 def decimalToHex(decimalValue):
     hex = ""
@@ -16,11 +18,12 @@ def toHexChar(hexValue):
     else:  # 10 <= hexValue <= 15
         return chr(hexValue - 10 + ord('A'))
 
-def main():
-    # Prompt the user to enter a decimal integer
-    decimalValue = eval(input("Enter a decimal number: "))
+decimalValue = 170
+hexValue = decimalToHex(decimalValue)
+print('decimal : %d\thex : %s' % (decimalValue, hexValue) )
 
-    print("The hex number for decimal", 
-        decimalValue, "is", decimalToHex(decimalValue))
+decimalValue = 65535
+hexValue = decimalToHex(decimalValue)
+print('decimal : %d\thex : %s' % (decimalValue, hexValue) )
+
   
-main() # Call the main function

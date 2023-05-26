@@ -9,10 +9,10 @@ from PIL import Image
 user_tesseract_cmd = r'C:/Users/070601/AppData/Local/Programs/Tesseract-OCR/tesseract.exe'
 show_image = False
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/captcha01.jpg'
-
+filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/captcha/captcha01.jpg'
 
 #Code from https://stackoverflow.max-everyday.com/2019/06/python-opencv-denoising/
+
 def getPixel(image,x,y,G,N):
     L = image.getpixel((x,y))
     if L > G:
@@ -75,25 +75,31 @@ class CaptchaBroker():
 
         w, h = image.size
 
-        if(show_image):
+        if(show_image == True):
             im2.show()
 
         #Very important, tesseract-ocr path here
         pytesseract.pytesseract.tesseract_cmd = user_tesseract_cmd
+        
         '''
         code = pytesseract.image_to_string(im2, lang="eng")
         print(code)
         return code
         '''
+
         image = Image.open(image_path)
-        image.show()
-        code = pytesseract.image_to_string(image, lang="eng")
-        print('aaaaa',code)
+        
+        if(show_image == True):
+            image.show()
+            
+        code = pytesseract.image_to_string(image, lang = "eng")
+        print('解出來的資料 : ', code)
 
         return code
 
 ccc = CaptchaBroker()
 result = ccc.decode(filename)
+print('結果')
 print(result)
 
 

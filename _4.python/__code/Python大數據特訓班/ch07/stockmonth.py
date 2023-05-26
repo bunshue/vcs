@@ -5,7 +5,7 @@ def twodigit(n):  #將數值轉為二位數字串
         retstr = str(n)
     return retstr
 
-def convertDate(date):  #轉捔民國日期為西元:106/01/02->20170102
+def convertDate(date):  #轉換民國日期為西元:106/03/02->20170302
     str1 = str(date)
     yearstr = str1[:3]  #取出民國年
     realyear = str(int(yearstr) + 1911)  #轉為西元年
@@ -16,6 +16,7 @@ import requests
 import json, csv
 import pandas as pd
 import os
+import time
 
 pd.options.mode.chained_assignment = None  #取消顯示pandas資料重設警告
 
@@ -34,7 +35,7 @@ if not os.path.isfile(filepath):  #如果檔案不存在就建立檔案
     outputfile.close()  #關閉檔案
 
 pdstock = pd.read_csv(filepath, encoding='utf-8')  #以pandas讀取檔案
-for i in range(len(pdstock['日期'])):  #轉換日期式為西元年格
+for i in range(len(pdstock['日期'])):  #轉換日期式為西元年格式
     pdstock['日期'][i] = convertDate(pdstock['日期'][i])
 pdstock['日期'] = pd.to_datetime(pdstock['日期'])  #轉換日期欄位為日期格式
 pdstock.plot(kind='line', figsize=(12, 6), x='日期', y=['收盤價', '最低價', '最高價'])  #繪製統計圖

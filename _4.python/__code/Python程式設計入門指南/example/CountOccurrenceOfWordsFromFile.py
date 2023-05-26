@@ -1,22 +1,5 @@
-def main():
-    # Prompt the user to enter a file
-    #filename = input("Enter a filename: ").strip()
-    filename = 'weather.txt'
-    infile = open(filename, "r") # Open the file
+print('統計英文單詞出現的次數')
 
-    wordCounts = {} # Create an empty dictionary to count words
-    for line in infile:
-        processLine(line.lower(), wordCounts)
-     
-    pairs = list(wordCounts.items()) # Get pairs from the dictionary   
-
-    items = [[x, y] for (y, x) in pairs] # Reverse pairs in the list
-
-    items.sort() # Sort pairs in items
-
-    for i in range(len(items) - 1, len(items) - 11, -1):
-        print(items[i][1] + "\t" + str(items[i][0]))
-  
 # Count each word in the line
 def processLine(line, wordCounts): 
     line = replacePunctuations(line) # Replace punctuations with space
@@ -35,4 +18,24 @@ def replacePunctuations(line):
 
     return line
 
-main()
+filename = 'C:/_git/vcs/_1.data/______test_files1/wordCounts1.txt'
+
+infile = open(filename, "r") # Open the file
+
+wordCounts = {} # Create an empty dictionary to count words
+for line in infile:
+    processLine(line.lower(), wordCounts)
+
+#print(wordCounts)
+
+pairs = list(wordCounts.items()) # Get pairs from the dictionary   
+
+items = [[x, y] for (y, x) in pairs] # Reverse pairs in the list
+
+items.sort() # Sort pairs in items
+
+for i in range(len(items) - 1, len(items) - 11, -1):
+    print(items[i][1] + "\t" + str(items[i][0]))
+
+
+    

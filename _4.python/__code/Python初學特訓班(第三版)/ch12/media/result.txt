@@ -1,2 +1,0 @@
-How to change background image without changing drawn lines
-
