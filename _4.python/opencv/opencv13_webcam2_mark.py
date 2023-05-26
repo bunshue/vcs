@@ -1,26 +1,21 @@
 '''
 WebCam 使用
 一般使用
-錄影存檔
 偵測特定顏色 紅色
 
 目前 webcam 僅 x64 電腦可用
 '''
 
-filename = 'C:/_git/vcs/_1.data/______test_files2/output.avi'
-
 import cv2
 import time
 import numpy as np
 
-#準備存檔用設定
-#使用 XVID 編碼
-fourcc = cv2.VideoWriter_fourcc(*'XVID')
-# 建立 VideoWriter 物件，輸出影片至檔案
-# FPS 值為 20.0，解析度為 640x360
-out = cv2.VideoWriter(filename, fourcc, 20.0, (640,480))
-
 cap = cv2.VideoCapture(0)
+
+# 取得影像的尺寸大小
+w = cap.get(cv2.CAP_PROP_FRAME_WIDTH)
+h = cap.get(cv2.CAP_PROP_FRAME_HEIGHT)
+print("Image Size: %d x %d" % (w, h))
 
 if not cap.isOpened():
     print('Could not open video device')
@@ -41,9 +36,9 @@ for i in range(60):
     ret,background = cap.read()
 background = np.flip(background,axis=1)
 
-## Read every frame from the webcam, until the camera is open
-while(cap.isOpened()):
+while True:
     ret, frame = cap.read()   # 從攝影機擷取一張影像
+    
     if ret == False:
       print('無影像, 離開')
       break
@@ -64,7 +59,7 @@ while(cap.isOpened()):
     upper_red = np.array([180,255,255])
     mask2 = cv2.inRange(hsv,lower_red,upper_red)
 
-    mask1 = mask1+mask2
+    mask1 = mask1 + mask2
 
     ## Open and Dilate the mask image
     mask1 = cv2.morphologyEx(mask1, cv2.MORPH_OPEN, np.ones((3,3),np.uint8))
@@ -81,7 +76,6 @@ while(cap.isOpened()):
   
     ## Generating the final output and writing
     finalOutput = cv2.addWeighted(res1,1,res2,1,0)
-    out.write(finalOutput)
     cv2.imshow('WebCam', finalOutput)
     
     k = cv2.waitKey(1)
@@ -95,8 +89,5 @@ while(cap.isOpened()):
         print('已存圖')
 
 # 釋放所有資源
-out.release()
 cap.release()   # 釋放攝影機
 cv2.destroyAllWindows() # 關閉所有 OpenCV 視窗
-
-print('已存檔 ' + filename)

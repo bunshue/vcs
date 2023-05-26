@@ -9,8 +9,8 @@ WebCam 使用
 filename = 'C:/_git/vcs/_1.data/______test_files2/output.avi'
 
 import cv2
-import sys
 import time
+import sys
 
 #準備存檔用設定
 #使用 XVID 編碼
@@ -23,7 +23,6 @@ out = cv2.VideoWriter(filename, fourcc, 20.0, (640, 480))
 def decode_fourcc(v):
   v = int(v)
   return "".join([chr((v >> 8 * i) & 0xFF) for i in range(4)])
-
 
 cap = cv2.VideoCapture(0)
 
