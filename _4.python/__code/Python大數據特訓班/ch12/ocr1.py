@@ -36,7 +36,7 @@ def codeocr(offset):
     X_ = ploy_reg.fit_transform(X.T)
     regr = LinearRegression()
     regr.fit(X_, Y)
-    LinearRegression(copy_X = True, fit_intercept = True, n_jobs = 1, normalize = False)
+    LinearRegression()
     
     X2 = np.array([[i for i in range(0,width)]])
     X2_ = ploy_reg.fit_transform(X2.T)
