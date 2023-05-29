@@ -45,17 +45,43 @@ time7 = time.ctime(time.time())
 print(time6)
 print(time7)
 
+
+print('----- localtime -----------------------------------------------------------------')	#70個
+
 print("打印現在時間")
 localtime = time.strftime("%Y/%m/%d %A %H:%M:%S", time.localtime(time.time()))
 print("現在是: ", localtime)
 
+print("獲取此時的時間");
+print(time.localtime())
+
+print("獲取當前時間");
+localtime = time.localtime(time.time())
+print("Local current time :", localtime)
+
+
+print("獲取格式化的時間");
+localtime = time.asctime( time.localtime(time.time()) )
+print("Local current time :", localtime)
+
+
+
+import time
+import datetime
+
+# 字串轉換為時間
+def strTodatetime(datestr, format):
+    return datetime.datetime.strptime(datestr, format)
+print(time.strftime("%Y-%m-%d", time.localtime()))
+print(strTodatetime("2014-3-1", "%Y-%m-%d"))
+print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+print(strTodatetime("2019-4-15","%Y-%m-%d") - strTodatetime("2006-03-11","%Y-%m-%d"))
+
+
+
 stop = time.time()
 diff = stop - start
 print("使用時間 " + str(diff) + " 秒")
-
-
-print("獲取此時的時間");
-print(time.localtime())
 
 
 #取得tick數
@@ -66,15 +92,6 @@ print("從1/1/1970 12:00:00至今的 tick數 : ", ticks)
 #!/usr/bin/python
 import time;  # This is required to include time module.
 
-
-print("獲取當前時間");
-localtime = time.localtime(time.time())
-print("Local current time :", localtime)
-
-
-print("獲取格式化的時間");
-localtime = time.asctime( time.localtime(time.time()) )
-print("Local current time :", localtime)
 
 
 import time
@@ -97,10 +114,62 @@ else:
   print("要年滿20歲才能夠投票，你還差 " + diff + " 歲")
 
 
+
+time.localtime() #可以輸出 struct_time 的時間格式
+
+import time  # 引入 time 模組
+
+localtime = time.localtime() # 取得當前時間
+print(localtime)
+
+
+import time  # 引入 time 模組
+
+localtime = time.localtime() # 取得當前時間
+print("年:", localtime.tm_year)
+print("月:", localtime.tm_mon)
+print("日:", localtime.tm_mday)
+print("時:", localtime.tm_hour)
+print("分:", localtime.tm_min)
+print("秒:", localtime.tm_sec)
+print("星期(0為星期一):", localtime.tm_wday)
+print("今天為今年第幾天:", localtime.tm_yday)
+print("夏令時間(0為不是，1為是):", localtime.tm_isdst)
+
+
+#strftime() 可以將時間格式化
+
+
+import time
+
+# 格式化為 2020-09-26 21:14:30
+print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
+
+# 格式化為Sat Sep 26 21:14:30 2020
+print(time.strftime("%a %b %d %H:%M:%S %Y", time.localtime()))
+
+
+
+
+
+
+import time
+def get_time():
+    return time.strftime("%Y/%m/%d %A %H:%M:%S", time.localtime(time.time()))
+
+localtime = get_time()
+print('現在時間 : ' + localtime)
+
+
+import time
+print("現在時間")
+localtime = time.strftime("%Y/%m/%d %A %H:%M:%S", time.localtime(time.time()))
+print('現在時間 : ' + localtime)
+
+
+
 time_stop = time.time() - time_start
 print("測試兩事件所經歷的時間 SP, 經歷時間 : "+str(time_stop) + " 秒")
-
-
 
 import time
 
@@ -174,6 +243,9 @@ johnbirthday = datetime(1978, 4, 5, 12, 0)
 
 
 
+
+print('----- timediff -----------------------------------------------------------------')	#70個
+
 #python template
 import time
 import datetime
@@ -233,18 +305,6 @@ def getYesterday():
 yesterday = getYesterday()
 print("昨天的時間：", yesterday)
 
-
-# 字串轉換為時間
-def strTodatetime(datestr, format):
-    return datetime.datetime.strptime(datestr, format)
-print(time.strftime("%Y-%m-%d", time.localtime()))
-print(strTodatetime("2014-3-1","%Y-%m-%d"))
-print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-print(strTodatetime("2019-4-15","%Y-%m-%d")-strTodatetime("2006-03-11","%Y-%m-%d"))
-
-
-
-
 print("獲取當天的日期");
 #print(datetime.datetime.now()) fail
 #print(datetime.date.today())   fail
@@ -269,6 +329,8 @@ print("time.ctime() : %s" % time.ctime())
 
 
 
+
+print('----- datetime.now() -----------------------------------------------------------------')	#70個
 
 import datetime as dt
 
@@ -338,59 +400,6 @@ import time # 引入 time 模組
 
 seconds = time.time()
 print(seconds)
-
-
-time.localtime() #可以輸出 struct_time 的時間格式
-
-import time  # 引入 time 模組
-
-localtime = time.localtime() # 取得當前時間
-print(localtime)
-
-
-import time  # 引入 time 模組
-
-localtime = time.localtime() # 取得當前時間
-print("年:", localtime.tm_year)
-print("月:", localtime.tm_mon)
-print("日:", localtime.tm_mday)
-print("時:", localtime.tm_hour)
-print("分:", localtime.tm_min)
-print("秒:", localtime.tm_sec)
-print("星期(0為星期一):", localtime.tm_wday)
-print("今天為今年第幾天:", localtime.tm_yday)
-print("夏令時間(0為不是，1為是):", localtime.tm_isdst)
-
-
-#strftime() 可以將時間格式化
-
-
-import time
-
-# 格式化為 2020-09-26 21:14:30
-print(time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-
-# 格式化為Sat Sep 26 21:14:30 2020
-print(time.strftime("%a %b %d %H:%M:%S %Y", time.localtime()))
-
-
-
-
-
-import time
-def get_time():
-    return time.strftime("%Y/%m/%d %A %H:%M:%S", time.localtime(time.time()))
-
-localtime = get_time()
-print('現在時間 : ' + localtime)
-
-
-import time
-print("現在時間")
-localtime = time.strftime("%Y/%m/%d %A %H:%M:%S", time.localtime(time.time()))
-print('現在時間 : ' + localtime)
-
-
 
 
 
@@ -467,5 +476,23 @@ print(old_date)
 new_date = transform_date(old_date)
 
 print(new_date)
+
+print('----- new -----------------------------------------------------------------')	#70個
+
+
+string = ("%d" % datetime.datetime.now().year)
+print(string)
+
+now = datetime.datetime.now()
+filename = now.strftime("news-%y-%m-%d-%H-%M-%S.json")
+print(filename)
+
+string = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+print(string)
+
+
+
+
+
 
 
