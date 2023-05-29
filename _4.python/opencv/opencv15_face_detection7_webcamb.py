@@ -12,8 +12,7 @@ import sys
 
 # OpenCV 人臉識別分類器
 xml_filename1 = 'C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml'
-#face_classifier = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
-face_classifier = cv2.CascadeClassifier(xml_filename1)
+face_cascade_classifier = cv2.CascadeClassifier(xml_filename1)
 
 name = "webcam"
 number = 0
@@ -40,9 +39,18 @@ while True:
 
     #frame = cv2.resize(frame,(int(frame.shape[1] / 2), int(frame.shape[0] / 2))) #調整畫面大小
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-	# 調用偵測識別人臉函式
-    # faces = face_classifier.detectMultiScale(gray, scaleFactor = 1.3, minNeighbors = 5, minSize = (200, 200))
-    faces = face_classifier.detectMultiScale(gray, scaleFactor = 1.3, minNeighbors = 5)
+    # 調用偵測識別人臉函式
+    '''
+    faces = face_cascade_classifier.detectMultiScale(
+        gray,
+        scaleFactor = 1.3,
+        minNeighbors = 5,
+        minSize = (200, 200))
+    '''
+    faces = face_cascade_classifier.detectMultiScale(
+        gray,
+        scaleFactor = 1.3,
+        minNeighbors = 5)
     #將抓到的人像標記並存檔
     for (x, y, w, h) in faces:
         cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 0, 255), 2)

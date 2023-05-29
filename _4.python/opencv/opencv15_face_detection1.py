@@ -12,25 +12,22 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/human1.jpg'
 
 # OpenCV 人臉識別分類器
 xml_filename1 = 'C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml'
-#face_classifier = cv2.CascadeClassifier(cv2.data.haarcascades + "haarcascade_frontalface_default.xml")
-face_classifier = cv2.CascadeClassifier(xml_filename1)
+face_cascade_classifier = cv2.CascadeClassifier(xml_filename1)
 
-#取得將使用的檔案名稱，並讀取圖檔，接著把圖檔透過轉換函式轉為灰階影像，定義框出人臉時的框顏色
-print(filename)
-filename1 = filename.split(".")[0] # 取得檔案名稱(不添加副檔名)
-print(filename1)
 image = cv2.imread(filename)	#讀取本機圖片
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) # 透過轉換函式轉為灰階影像
+
+#gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) # 透過轉換函式轉為灰階影像
+gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
 
 # 調用偵測識別人臉函式
-faces = face_classifier.detectMultiScale(
+faces = face_cascade_classifier.detectMultiScale(
     gray,
     scaleFactor = 1.2,
     minNeighbors = 3,
     minSize = (32, 32))
 
-'''
 print('共偵測到 ' + str(len(faces)) + ' 張人臉')
+'''
 for nn in range(len(faces)):
     print(nn)
     print(faces[nn])
@@ -43,18 +40,10 @@ for nn in range(len(faces)):
 #minNeighbors 	構成偵測目標的相鄰矩形的最小個數，默認值為 3
 #minSize & maxSize 	用來限制得到的目標區域範圍
 
-color = (0, 255, 0)  # 定義框的顏色
-
-# 大於 0 則檢測到人臉
-if len(faces):  
-    # 繪製人臉部份的方框
-    for face in faces: 
-        x, y, w, h = face
-        cv2.rectangle(image, (x, y), (x + h, y + w), color, 2)
-
 # 繪製人臉部份的方框
+color = (0, 255, 0)  # 定義框的顏色
 for (x, y, w, h) in faces:
-    cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 255), 2)
+    cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
 
 # 顯示結果
 #cv2.imshow(image)

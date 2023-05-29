@@ -11,7 +11,7 @@ def makeFace(facename, msg, endstr):
             if k == ord("z") or k == ord("Z"):  #使用者按「z」鍵
                 cv2.imwrite(facename,img)  #存檔
                 image = cv2.imread(facename)  #讀檔做人臉辨識
-                faces = faceCascade.detectMultiScale(image, scaleFactor=1.1, minNeighbors=5, minSize=(30,30), flags = cv2.CASCADE_SCALE_IMAGE)
+                faces = face_cascade_classifier.detectMultiScale(image, scaleFactor=1.1, minNeighbors=5, minSize=(30,30), flags = cv2.CASCADE_SCALE_IMAGE)
                 (x, y, w, h) = (faces[0][0], faces[0][1], faces[0][2], faces[0][3])  #只取第一張人臉
                 image1 = Image.open(facename).crop((x, y, x+w, y+h))  #擷取人臉
                 image1 = image1.resize((200, 200), Image.ANTIALIAS)  #轉為解析度200x200
@@ -28,7 +28,7 @@ from functools import reduce
 
 # OpenCV 人臉識別分類器
 xml_filename = 'C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml'
-faceCascade = cv2.CascadeClassifier(xml_filename)   #建立辨識物件
+face_cascade_classifier = cv2.CascadeClassifier(xml_filename)   #建立辨識物件
 
 recogname = "media\\recogface.jpg"  #使用者人臉檔案
 loginname = "media\\loginface.jpg"  #登入者人臉檔案
