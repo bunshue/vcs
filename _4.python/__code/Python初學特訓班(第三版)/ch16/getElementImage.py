@@ -1,13 +1,17 @@
 from selenium import webdriver
+import time
 from PIL import Image
-from time import sleep
 
 url = "http://irs.thsrc.com.tw/IMINT"
 driver = webdriver.Chrome()
+
 driver.get(url)
-driver.maximize_window()
+
+driver.maximize_window()    #全螢幕顯示
+
 driver.find_element_by_id("btn-confirm").click()
-sleep(0.3)
+time.sleep(0.3)
+
 driver.save_screenshot("wholepage.png")
 element=driver.find_element_by_id('header')  #取得網頁元素
 #取得網頁元素位置

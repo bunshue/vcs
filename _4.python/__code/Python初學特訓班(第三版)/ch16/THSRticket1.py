@@ -6,7 +6,8 @@ from simshow import simshow  #以 pip install simple-imshow 安裝模組
 delay = 0.3
 url = 'https://irs.thsrc.com.tw/IMINT/'  #高鐵訂票網頁
 driver = webdriver.Chrome()
-driver.maximize_window()
+driver.maximize_window()    #全螢幕顯示
+
 driver.get(url)
 sleep(delay)  #加入等待
 driver.find_element_by_id("btn-confirm").click()
@@ -26,49 +27,72 @@ captchatext = input('輸入驗證碼：')
 
 driver.find_element_by_name("selectStartStation").click()
 sleep(delay)
+
 driver.find_element_by_xpath("(//option[@value='2'])[1]").click()
 sleep(delay)
+
 driver.find_element_by_name("selectDestinationStation").click()
 sleep(delay)
+
 driver.find_element_by_xpath("(//option[@value='7'])[2]").click()
 sleep(delay)
+
 driver.find_element_by_id("seatRadio1").click()
 sleep(delay)
+
 driver.find_element_by_id("ToTimePicker").click()
 sleep(delay)
+
 driver.find_element_by_xpath("//tbody/tr[3]/td[3]").click()
 sleep(delay)
+
 driver.find_element_by_name("toTimeTable").send_keys("\n")
 sleep(delay)
+
 driver.find_element_by_xpath("(//option[@value='800A'])[1]").click()
 sleep(delay)
+
 driver.find_element_by_name("homeCaptcha:securityCode").send_keys("\n")
 sleep(delay)
+
 driver.find_element_by_name("homeCaptcha:securityCode").clear()
 sleep(delay)
+
 driver.find_element_by_name("homeCaptcha:securityCode").send_keys(captchatext)
 sleep(delay)
+
 driver.find_element_by_id("SubmitButton").click()
 sleep(delay)
+
 driver.find_element_by_xpath("(//input[@name='TrainQueryDataViewPanel:TrainGroup'])[3]").click()
 sleep(delay)
+
 driver.find_element_by_name("SubmitButton").click()
 sleep(delay)
+
 driver.find_element_by_id("idNumber").click()
 sleep(delay)
+
 driver.find_element_by_id("idNumber").clear()
 sleep(delay)
+
 driver.find_element_by_id("idNumber").send_keys("身分證字號")
 sleep(delay)
+
 driver.find_element_by_id("mobileInputRadio").click()
 sleep(delay)
+
 driver.find_element_by_id("mobilePhone").click()
 sleep(delay)
+
 driver.find_element_by_id("mobilePhone").clear()
 sleep(delay)
+
 driver.find_element_by_id("mobilePhone").send_keys("0922735901")
 sleep(delay)
+
 driver.find_element_by_name("agree").click()
 sleep(delay)
+
 #driver.find_element_by_id("isSubmit").click()
 print('完成訂票！')

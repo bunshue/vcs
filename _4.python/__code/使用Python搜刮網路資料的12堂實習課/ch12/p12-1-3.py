@@ -19,10 +19,10 @@ stocks = [
 ]
 
 url = "https://www.twse.com.tw/zh/page/trading/exchange/STOCK_DAY.html"
-web = webdriver.Chrome("chromedriver.exe")
-web.implicitly_wait(60)
-web.get(url)
-web.maximize_window()
+driver = webdriver.Chrome("chromedriver.exe")
+driver.implicitly_wait(60)
+driver.get(url)
+driver.maximize_window()    #全螢幕顯示
 auto.PAUSE = 3
 for stock in stocks:
     auto.moveTo(1263, 438, 2)
@@ -31,9 +31,9 @@ for stock in stocks:
     auto.moveTo(1461, 438, 2)
     auto.click()
     time.sleep(5)
-    html = web.page_source
+    html = driver.page_source
     data = pd.read_html(html)
     print(stock["name"])
     print(data[0])
-web.quit()
+driver.quit()
 

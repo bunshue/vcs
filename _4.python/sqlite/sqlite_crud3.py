@@ -38,6 +38,20 @@ print('建立一個資料表')
 
 sqlstr = 'create table if not exists table01 ("filename" TEXT NOT NULL, "filesize"  INT, "description"  TEXT NOT NULL)'
 
+'''
+print('建立表單')
+cursor.execute("create table talbe01"
+"("
+"   filename varchar(32),"
+"   filesize varchar(32)"
+")")
+cursor.execute("insert into talbe01"
+"  (filename, filesize)"
+"  values"
+"  (?, ?)",
+('aaaa.mp4', '12345'))
+'''
+
 cursor.execute(sqlstr)
 conn.commit() # 更新
 

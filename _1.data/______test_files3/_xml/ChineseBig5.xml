@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<LayoutConfig>
+    <StyleName Name="DefaultStyle">
+        <Styles>
+            <!-- Default Style -->
+            <StyleItem Name="Default" FontName="標楷體" FontSize="12" 
+                       FontBold="0" FontColor="000000" />
+            <StyleItem Name="PrintImageHospital" FontName="標楷體" FontSize="20" 
+                       FontBold="0" FontColor="000000" />
+            <StyleItem Name="PrintImagePatient" FontName="標楷體" FontSize="18" 
+                       FontBold="0" FontColor="000000" />
+            <StyleItem Name="PrintImagePage" FontName="標楷體" FontSize="12" 
+                       FontBold="0" FontColor="000000" />
+        </Styles>
+        <Layouts>
+            <!-- HPos=horizontal 0:Left 1:Center 2:Right
+                 VPos=vertical   0:Top  1:Center 2:Bottom -->
+            <LayoutName Name="PrintImage">
+                <LayoutItem Left="0" Top="0" Width="1" Height="1" HPos="0" VPos="1" IdName="0" LIValue="" DSStyle="Default"> 
+                    <!-- Patient info -->
+                    <!-- <LayoutItem Left="0" Top="0" Width="1" Height="0.15" HPos="0" VPos="1" IdName="30" LIValue="0" DSStyle="Default"> -->
+                    <LayoutItem Left="0" Top="0" Width="0" Height="0" HPos="0" VPos="1" IdName="30" LIValue="0" DSStyle="Default">
+                        <LayoutItem Left="0"    Top="0.2"  Width="1"    Height="0.2"   HPos="1" VPos="1" IdName="28" LIValue="醫院名稱" DSStyle="PrintImageHospital" />
+                        <LayoutItem Left="0.02" Top="0.42" Width="0.20" Height="0.18"  HPos="0" VPos="1" IdName="28" LIValue="病歷號碼：" DSStyle="PrintImagePatient" />
+                        <LayoutItem Left="0.20" Top="0.42" Width="0.30" Height="0.18"  HPos="0" VPos="1" IdName="29" LIValue="0010,0020" DSStyle="PrintImagePatient" />
+                        <LayoutItem Left="0.02" Top="0.60" Width="0.20" Height="0.18"  HPos="0" VPos="1" IdName="28" LIValue="病患姓名：" DSStyle="PrintImagePatient" />
+                        <LayoutItem Left="0.20" Top="0.60" Width="0.30" Height="0.18"  HPos="0" VPos="1" IdName="29" LIValue="0010,0010" DSStyle="PrintImagePatient" />
+                        <LayoutItem Left="0.52" Top="0.42" Width="0.20" Height="0.18"  HPos="0" VPos="1" IdName="28" LIValue="檢查日期：" DSStyle="PrintImagePatient" />
+                        <LayoutItem Left="0.70" Top="0.42" Width="0.30" Height="0.18"  HPos="0" VPos="1" IdName="29" LIValue="0008,0020" DSStyle="PrintImagePatient" />
+                        <LayoutItem Left="0.02" Top="0.78" Width="0.20" Height="0.18"  HPos="0" VPos="1" IdName="28" LIValue="檢查說明：" DSStyle="PrintImagePatient" />
+                        <LayoutItem Left="0.20" Top="0.78" Width="0.80" Height="0.18"  HPos="0" VPos="1" IdName="29" LIValue="0008,1030" DSStyle="PrintImagePatient" />
+                    </LayoutItem>
+                    <!-- Print page end -->
+                    <!-- <LayoutItem Left="0" Top="0.98" Width="1" Height="0.02" HPos="0" VPos="1" IdName="30" LIValue="1" DSStyle="Default" > -->
+                    <LayoutItem Left="0" Top="0" Width="0" Height="0" HPos="0" VPos="1" IdName="30" LIValue="1" DSStyle="Default" >
+                        <LayoutItem Left="0" Top="0" Width="1" Height="1" HPos="1" VPos="1" IdName="33" LIValue="$index / $total" DSStyle="PrintImagePage" />
+                        <!-- <LayoutItem Left="0.70" Top="0" Width="0.10" Height="1" HPos="2" VPos="1" IdName="28" LIValue="列印日期：" DSStyle="PrintImagePage" /> -->
+                        <!-- <LayoutItem Left="0.80" Top="0" Width="0.20" Height="1" HPos="0" VPos="1" IdName="35" LIValue="yyyy/mm/dd hh:nn:ss" DSStyle="PrintImagePage" /> -->
+                    </LayoutItem>
+                </LayoutItem>
+            </LayoutName>
+        </Layouts>
+    </StyleName>
+</LayoutConfig>

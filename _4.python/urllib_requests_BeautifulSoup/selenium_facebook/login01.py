@@ -11,7 +11,7 @@ password = "YOUR PASSWORD"
 driver = webdriver.Chrome(
     ChromeDriverManager().install())
 
-driver.maximize_window()	#視窗最大化
+driver.maximize_window()    #全螢幕顯示
 
 # 進入Facebook登入畫面
 driver.get(url)
@@ -23,5 +23,6 @@ driver.find_element_by_name("login").click()
 
 # 等待10秒
 time.sleep(10)
+
 # 關閉瀏覽器
 driver.quit()

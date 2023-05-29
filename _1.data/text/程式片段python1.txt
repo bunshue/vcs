@@ -661,10 +661,6 @@ encoding = 'utf-8-sig'	編碼設定為將BOM去除的的utf-8編碼
 https://pythex.org/
 
 
-import turtle
-turtle.write("\u6B22\u8FCE \u03b1 \u03b2 \u03b3")
-turtle.done() 
-
 
 
 

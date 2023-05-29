@@ -1,16 +1,22 @@
+import time
 from selenium import webdriver
-from time import sleep
 
-urls = ['http://www.google.com',
-        'http://www.e-happy.com.tw',
-        'https://www.ruten.com.tw/',
-        'https://tw.yahoo.com/']
+url = 'https://tw.yahoo.com/'
 
-driver = webdriver.Chrome()
-driver.maximize_window()
+driver = webdriver.Chrome()    #使用Chrome
+#driver = webdriver.Firefox()   #使用Firefox
+driver.set_window_position(0, 0)	#設定視窗位置
+driver.set_window_size(800, 600)	#設定視窗大小
+driver.maximize_window()    #全螢幕顯示
 
-for url in urls:
-    driver.get(url) 
-    sleep(3)
+driver.get(url)
 
-driver.close()
+for i in range(0, 10):
+    print(i)	# 0~9
+    time.sleep(1)
+
+driver.close()  #關閉瀏覽器
+
+
+
+

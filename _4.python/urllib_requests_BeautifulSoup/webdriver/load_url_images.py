@@ -1,10 +1,11 @@
-import time,os
+import os
+import time
 from urllib.request import urlopen
 from selenium import webdriver
 from bs4 import BeautifulSoup
 
 driver = webdriver.Chrome()
-driver.maximize_window()	#視窗最大化
+driver.maximize_window()    #全螢幕顯示
 
 # 第3屆埔里跑 Puli Power 山城派對馬拉松  向善橋(約34K)
 url = 'http://tw.running.biji.co/index.php?q=album&act=photo_list&album_id=30668&cid=5791&type=album&subtitle=第3屆埔里跑 Puli Power 山城派對馬拉松-向善橋(約34K)'

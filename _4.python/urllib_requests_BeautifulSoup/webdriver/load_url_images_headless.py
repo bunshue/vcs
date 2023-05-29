@@ -1,4 +1,5 @@
-import time,os
+import os
+import time
 from urllib.request import urlopen
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options

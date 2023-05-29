@@ -6,5 +6,6 @@ driver = webdriver.Chrome("./chromedriver")
 
 # 等待10秒
 time.sleep(10)
+
 # 關閉瀏覽器
 driver.quit()
