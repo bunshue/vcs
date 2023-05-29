@@ -1051,7 +1051,7 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/file2.txt'
 filename = 'C:/_git/vcs/_1.data/______test_files1/__RW/_word/python_docx1.docx'
 filename = 'C:/_git/vcs/_1.data/______test_files2/output.avi'
 
-filename1 = 'C:/_git/vcs/_1.data/______test_files1/human1.jpg'
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 filename2 = 'C:/_git/vcs/_1.data/______test_files1/poetry2.txt'
 filename3 = 'C:/_git/vcs/_1.data/______test_files1'
 

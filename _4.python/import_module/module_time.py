@@ -310,18 +310,18 @@ print("獲取當天的日期");
 #print(datetime.date.today())   fail
 
 #兩日期相減 
-d1 = datetime.datetime(2005, 2, 16) 
-d2 = datetime.datetime(2004, 12, 31) 
+d1 = datetime.datetime(2005, 2, 16)
+d2 = datetime.datetime(2004, 12, 31)
 print((d1 - d2).days)
 #執行時間： 
-starttime = datetime.datetime.now() 
-endtime = datetime.datetime.now() 
+starttime = datetime.datetime.now()
+endtime = datetime.datetime.now()
 print((endtime - starttime).seconds)
-#計算當前時間向後10天的時間。 
-# 如果是小時 days 換成 hours 
-d1 = datetime.datetime.now() 
-d3 = d1 - datetime.timedelta(days =10) 
-print(str(d3) )
+#計算當前時間向後10天的時間。
+# 如果是小時 days 換成 hours
+d1 = datetime.datetime.now()
+d3 = d1 - datetime.timedelta(days =10)
+print(str(d3))
 print(d3.ctime())
 #print(time.ctime([sec]))#把秒數轉換成日期格式，如果不帶引數，則顯示當前的時間。
 #time.ctime([ sec ])
@@ -465,7 +465,7 @@ def transform_date(date): #轉換日期
     y, m, d, h = date[:4],date[5:7],date[8:10],date[11:13]
     return y + '/' + m  + '/' + d  + '/' + h  
 
-old_date = datetime.datetime.now() # 取得查詢當下的時間
+old_date = datetime.datetime.now() # 取得現在時間
 
 old_date = str(old_date)    #先轉成字串
 
