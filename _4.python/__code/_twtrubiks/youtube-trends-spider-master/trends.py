@@ -90,11 +90,15 @@ def main():
     
     for link in links:
         count += 1
-        URL, tag = link[0] ,link[1] 
+        URL, tag = link[0] ,link[1]
+        print('URL : ', URL)
+        print('tag : ', tag)
         crawler(URL, tag)
-        print(u"download: " + str(100 * count / len(links) ) + " %.")
     print('Completed')
-        
+
+
+#連結已斷
+    
 if __name__ == "__main__": 
    main() 
    

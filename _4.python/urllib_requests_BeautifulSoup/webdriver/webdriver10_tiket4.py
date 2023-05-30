@@ -5,7 +5,8 @@ from simshow import simshow  #以 pip install simple-imshow 安裝模組
 
 delay = 0.3
 
-url = 'https://irs.thsrc.com.tw/IMINT/'  #高鐵訂票網頁
+url = 'https://irs.thsrc.com.tw/IMINT'		#台灣高鐵訂票系統
+
 driver = webdriver.Chrome()
 driver.maximize_window()    #全螢幕顯示
 

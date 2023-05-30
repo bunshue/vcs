@@ -1,7 +1,8 @@
 import time
 from selenium import webdriver
 
-url = 'https://irs.thsrc.com.tw/IMINT/'  #高鐵訂票網頁
+url = 'https://irs.thsrc.com.tw/IMINT'		#台灣高鐵訂票系統
+
 driver = webdriver.Chrome()
 
 driver.get(url)
