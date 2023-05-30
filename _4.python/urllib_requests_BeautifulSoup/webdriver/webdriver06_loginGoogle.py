@@ -1,7 +1,7 @@
 url = 'http://www.google.com'
 #url = 'https://www.gmail.com'
-mail_address = 'bunshue@gmail.com'
-password = 'iloveims0311'
+mail_address = 'XXXXXXX'
+password = 'XXXXXXX'
 
 import time
 from selenium import webdriver
