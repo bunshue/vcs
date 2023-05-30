@@ -1,8 +1,6 @@
 # python import module : time, datetime, calendar
 
 import time
-from time import sleep
-#from time import sleep_ms
 
 print("測試兩事件所經歷的時間 ST")
 time_start = time.time()
@@ -13,8 +11,7 @@ while a < 3:
     a += 1;
     print("hello " + str(a))
     time.sleep(0.3)
-    sleep(0.1)
-    #sleep_ms(100)
+    time.sleep(0.1)
 
 def countdown(n):
     while n > 0:
@@ -24,7 +21,6 @@ def countdown(n):
 
 print("倒數計時")
 countdown(5)
- 
 
 start = time.time()
 time1 = time.gmtime(28800)

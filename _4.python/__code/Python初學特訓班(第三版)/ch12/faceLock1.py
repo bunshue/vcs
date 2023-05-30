@@ -18,7 +18,8 @@ def makeFace(facename, msg, endstr):
                 image1.save(facename)  #存檔
                 break;
     cap.release()  #關閉攝影機攝影機
-    cv2.destroyAllWindows()
+    # 釋放所有資源
+    cv2.destroyAllWindows() # 關閉所有 OpenCV 視窗
     print(endstr)
     return
 

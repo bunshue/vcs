@@ -4,8 +4,6 @@ import numpy as np
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
 
-#from time import sleep
-
 def codeocr(offset):
     global result    
     img = cv2.imread("img_source.png")

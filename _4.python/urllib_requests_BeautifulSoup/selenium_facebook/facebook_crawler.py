@@ -76,5 +76,4 @@ if len(images) != 0:
 # 等待5秒
 time.sleep(5)
 
-# 關閉瀏覽器
-driver.quit()
+driver.quit()   #關閉瀏覽器並且退出驅動程序

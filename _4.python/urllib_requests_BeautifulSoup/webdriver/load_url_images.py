@@ -53,4 +53,4 @@ for img in all_imgs:
             print("{} 無法讀取!".format(filename))
             
 print("共下載",n,"張圖片")                
-driver.quit(); #關閉瀏覽器並退出驅動程式
+driver.quit()   #關閉瀏覽器並且退出驅動程序

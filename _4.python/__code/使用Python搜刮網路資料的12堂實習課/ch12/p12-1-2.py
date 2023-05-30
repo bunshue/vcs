@@ -19,7 +19,9 @@ auto.moveTo(1461, 438, 2)
 auto.click()
 time.sleep(5)
 html = driver.page_source
-driver.quit()
+
+driver.quit()   #關閉瀏覽器並且退出驅動程序
+
 data = pd.read_html(html)
 print(data)
 

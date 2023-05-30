@@ -8,5 +8,4 @@ driver = webdriver.Chrome(ChromeDriverManager().install())
 # 等待10秒
 time.sleep(10)
 
-# 關閉瀏覽器
-driver.quit()
+driver.quit()   #關閉瀏覽器並且退出驅動程序

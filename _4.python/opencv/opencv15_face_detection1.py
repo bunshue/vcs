@@ -11,13 +11,14 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/human1.jpg'
 #filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/ming_emperor3.jpg'
 
 # OpenCV 人臉識別分類器
-xml_filename1 = 'C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml'
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename1)
+xml_filename = 'C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml'
+face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
 
 image = cv2.imread(filename)	#讀取本機圖片
+#image.shape[0]:圖片高度，image.shape[1]:圖片寬度
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) # 透過轉換函式轉為灰階影像
 
-#gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) # 透過轉換函式轉為灰階影像
-gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
+#gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
 
 # 調用偵測識別人臉函式
 faces = face_cascade_classifier.detectMultiScale(
@@ -52,5 +53,8 @@ cv2.imshow('New Picture', image) #顯示圖片
 print('wait kere')
 cv2.waitKey(0)
 print('收到按鍵')
-cv2.destroyAllWindows() #銷毀建立的物件
+
+# 釋放所有資源
+cv2.destroyAllWindows() # 關閉所有 OpenCV 視窗
+
 

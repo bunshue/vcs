@@ -9,18 +9,19 @@ url = 'http://irs.thsrc.com.tw/IMINT'
 
 driver=webdriver.Chrome()
 driver.get(url)
-driver.maximize_window()	#視窗最大化
+driver.maximize_window()    #全螢幕顯示
+
 driver.save_screenshot("img_screenshot.png") 	#存圖
 
-element=driver.find_element_by_id('BookingS1Form_homeCaptcha_passCode')
+element = driver.find_element_by_id('BookingS1Form_homeCaptcha_passCode')
 
-left=element.location['x']
-top=element.location['y']
-right=element.location['x'] + element.size['width']
-bottom=element.location['y'] + element.size['height']
+left = element.location['x']
+top = element.location['y']
+right = element.location['x'] + element.size['width']
+bottom = element.location['y'] + element.size['height']
 
-img=Image.open("img_screenshot.png")
-img2=img.crop((left,top,right,bottom))
+img = Image.open("img_screenshot.png")
+img2 = img.crop((left,top,right,bottom))
 img2.save('img_source.png')
 
 

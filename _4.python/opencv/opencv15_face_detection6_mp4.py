@@ -6,13 +6,13 @@ import numpy as np
 video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
 
 # OpenCV 人臉識別分類器 Haar Cascase
-xml_filename1 = 'C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml'
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename1)
+xml_filename = 'C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml'
+face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
 
 '''
 # OpenCV 人臉識別分類器 LBP Cascase
-xml_filename2 = 'C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/lbpcascades/lbpcascade_frontalface.xml'
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename2)
+xml_filename = 'C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/lbpcascades/lbpcascade_frontalface.xml'
+face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
 '''
 
 #影片

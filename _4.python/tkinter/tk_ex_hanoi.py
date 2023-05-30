@@ -1,9 +1,5 @@
-#!/usr/bin/env python3
-
 import time
 import datetime
-from time import sleep
-
 
 """
 Animated Towers of Hanoi using Tk with optional bitmap file in background.

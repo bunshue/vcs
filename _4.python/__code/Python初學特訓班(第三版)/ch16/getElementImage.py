@@ -1,5 +1,5 @@
-from selenium import webdriver
 import time
+from selenium import webdriver
 from PIL import Image
 
 url = "http://irs.thsrc.com.tw/IMINT"

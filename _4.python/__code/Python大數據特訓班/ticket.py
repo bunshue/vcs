@@ -20,66 +20,66 @@ def get_photo():
     #台灣高鐵訂票系統
     url = 'http://irs.thsrc.com.tw/IMINT'
     
-    driver=requests.Session()   
-    driver=webdriver.Chrome()
+    driver = requests.Session()   
+    driver = webdriver.Chrome()
     driver.get(url)
-    driver.maximize_window()	#視窗最大化
+    driver.maximize_window()    #全螢幕顯示
     
     # 從 screenshot 中取得驗證碼的圖片
     driver.save_screenshot("img_screenshot.png") 
-    element=driver.find_element_by_id('BookingS1Form_homeCaptcha_passCode')
+    element = driver.find_element_by_id('BookingS1Form_homeCaptcha_passCode')
     
-    left=element.location['x']
-    top=element.location['y']
-    right=element.location['x'] + element.size['width']
-    bottom=element.location['y'] + element.size['height']
+    left = element.location['x']
+    top = element.location['y']
+    right = element.location['x'] + element.size['width']
+    bottom = element.location['y'] + element.size['height']
     
-    img=Image.open("img_screenshot.png")
-    img2=img.crop((left,top,right,bottom))
+    img = Image.open("img_screenshot.png")
+    img2 = img.crop((left,top,right,bottom))
     #img2.show()
     img2.save('img_source.png')
 
 def codeocr(offset):
     global result    
-    img=cv2.imread("img_source.png")
-    dst=cv2.fastNlMeansDenoisingColored(img,None,30,30,7,21) # 去雜點
-    ret,thresh=cv2.threshold(dst,127,255,cv2.THRESH_BINARY_INV)  #黑白
-    imgarr=cv2.cvtColor(thresh,cv2.COLOR_BGR2GRAY) #灰階    
+    img = cv2.imread("img_source.png")
+    dst = cv2.fastNlMeansDenoisingColored(img,None,30,30,7,21) # 去雜點
+    ret,thresh = cv2.threshold(dst,127,255,cv2.THRESH_BINARY_INV)  #黑白
+    imgarr = cv2.cvtColor(thresh,cv2.COLOR_BGR2GRAY) #灰階    
 #    plt.imshow(thresh)
 #    plt.show()
     
 #    print(imgarr.shape)
-    height= imgarr.shape[0]  # 高度
+    height = imgarr.shape[0]  # 高度
     width = imgarr.shape[1]  # 寬度
     
-    start=offset   # 要測試後調整，offset 為左右留的邊界
-    end=width-offset 
+    start = offset   # 要測試後調整，offset 為左右留的邊界
+    end = width-offset 
     
     # 去除回歸曲線
-    imgarr[:,start:end]=0  # 從左邊界起至右邊界止，全部挖空
-    imagedata=np.where(imgarr==255) # 找到所有白色的點
+    imgarr[:,start:end] = 0  # 從左邊界起至右邊界止，全部挖空
+    imagedata=np.where(imgarr == 255) # 找到所有白色的點
     
-    plt.scatter(imagedata[1],height-imagedata[0],s=100,color="red",label="Cluster")
-    plt.ylim(0,height)
+    plt.scatter(imagedata[1], height - imagedata[0], s = 100, color = "red", label = "Cluster")
+    plt.ylim(0, height)
 #    plt.show() # 顯示起始、結束
     
-    ploy_reg =PolynomialFeatures(degree=2) #以二次多項式建立特徵   
-    X=np.array([imagedata[1]]) #取得 X座標
-    Y=height-imagedata[0]
-    X_=ploy_reg.fit_transform(X.T) #特徵數據轉換
-    regr=LinearRegression() #建立線性回歸線
-    regr.fit(X_,Y)
-    LinearRegression(copy_X=True,fit_intercept=True,n_jobs=1,normalize=False)
+    ploy_reg = PolynomialFeatures(degree = 2) #以二次多項式建立特徵   
+    X = np.array([imagedata[1]]) #取得 X座標
+    Y = height-imagedata[0]
+    X_ = ploy_reg.fit_transform(X.T) #特徵數據轉換
+    regr = LinearRegression() #建立線性回歸線
+    regr.fit(X_, Y)
+    LinearRegression(copy_X = True, fit_intercept = True, n_jobs = 1, normalize = False)
     
-    X2=np.array([[i for i in range(0,width)]])
-    X2_=ploy_reg.fit_transform(X2.T)
-#    plt.plot(X2.T,regr.predict(X2_),color="blue",linewidth=30) #顯示回歸線
+    X2 = np.array([[i for i in range(0,width)]])
+    X2_ = ploy_reg.fit_transform(X2.T)
+#    plt.plot(X2.T, regr.predict(X2_), color = "blue", linewidth = 30) #顯示回歸線
     
-    grayimg=cv2.cvtColor(thresh,cv2.COLOR_BGR2GRAY) 
-    for ele in np.column_stack([regr.predict(X2_).round(0),X2[0],] ):
+    grayimg = cv2.cvtColor(thresh, cv2.COLOR_BGR2GRAY) 
+    for ele in np.column_stack([regr.predict(X2_).round(0), X2[0],] ):
         pos=height-int(ele[0])
         try:
-            grayimg[pos-3:pos+3,int(ele[1])]=255-grayimg[pos-3:pos+3,int(ele[1])]
+            grayimg[pos-3:pos+3, int(ele[1])] = 255 - grayimg[pos-3:pos + 3, int(ele[1])]
         except IndexError:
             pass
     
@@ -99,8 +99,8 @@ def codeocr(offset):
                 if count <= 6:  #週圍少於等於6個白點
                     inv[i][j] = 0  #將白點去除    
             
-    dilation = cv2.dilate(inv, (8,8), iterations=1)  #圖形加粗
-    cv2.imwrite("final.png",dilation)
+    dilation = cv2.dilate(inv, (8, 8), iterations = 1)  #圖形加粗
+    cv2.imwrite("final.png", dilation)
     
     #文字辨識 
     tools = pyocr.get_available_tools()
@@ -176,7 +176,7 @@ for i in range(1,11): # 每測一次後停 2 秒，重複測10次
         break
     else:
         print("關閉第",i,"次開啟的瀏覽器")
-        driver.quit()
+        driver.quit()   #關閉瀏覽器並且退出驅動程序
     
 if login_sucess==True:
     driver.find_element_by_xpath("//input[@name='SubmitButton']").click() # 按 確認車次 鈕

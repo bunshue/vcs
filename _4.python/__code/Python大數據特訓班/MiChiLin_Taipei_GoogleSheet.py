@@ -36,11 +36,11 @@ def auth_gss_client(path, scopes):
     return gspread.authorize(credentials)        
 
 #主程式 
+import time
 import requests
 from bs4 import BeautifulSoup 
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-from time import sleep
 
 list1=[]
 n=0 #計算總共有多少家店
@@ -71,6 +71,6 @@ sheet.append_row(listtitle)  # 標題
 
 for item1 in list1: #資料
     sheet.append_row(item1)
-    sleep(1) # 必須加上適當的 delay
+    time.sleep(1) # 必須加上適當的 delay
        
 print("\n總共有",n,"間")

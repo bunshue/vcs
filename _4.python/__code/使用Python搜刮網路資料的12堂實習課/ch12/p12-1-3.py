@@ -19,10 +19,13 @@ stocks = [
 ]
 
 url = "https://www.twse.com.tw/zh/page/trading/exchange/STOCK_DAY.html"
+
 driver = webdriver.Chrome("chromedriver.exe")
 driver.implicitly_wait(60)
 driver.get(url)
+
 driver.maximize_window()    #全螢幕顯示
+
 auto.PAUSE = 3
 for stock in stocks:
     auto.moveTo(1263, 438, 2)
@@ -35,5 +38,6 @@ for stock in stocks:
     data = pd.read_html(html)
     print(stock["name"])
     print(data[0])
-driver.quit()
+
+driver.quit()   #關閉瀏覽器並且退出驅動程序
 

@@ -12,8 +12,8 @@ import sys
 import time
 
 # OpenCV 人臉識別分類器
-xml_filename1 = 'C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml'
-face_cascade_classifier = cv2.CascadeClassifier(xml_filename1)
+xml_filename = 'C:/_git/vcs/_1.data/______test_files1/_material/_face-detection/haarcascades/haarcascade_frontalface_default.xml'
+face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
 
 cap = cv2.VideoCapture(0)
 
@@ -40,10 +40,14 @@ while True:
 	# 調用偵測識別人臉函式
     faces = face_cascade_classifier.detectMultiScale(
         gray,
-        1.3,
-        5)
+        scaleFactor = 1.2,
+        minNeighbors = 3)
+
+    #print('共偵測到 ' + str(len(faces)) + ' 張人臉')
+    # 繪製人臉部份的方框
+    color = (0, 255, 0)  # 定義框的顏色
     for (x,y,w,h) in faces:
-        cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
+        cv2.rectangle(frame, (x, y), (x + w, y + h), color, 2)
 
     cv2.imshow('WebCam', frame)    # 顯示圖片, 彩色
 

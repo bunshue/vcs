@@ -1,17 +1,20 @@
+import time
 from selenium import webdriver
-from time import sleep
 from PIL import Image
 from simshow import simshow  #以 pip install simple-imshow 安裝模組
 
 delay = 0.3
+
 url = 'https://irs.thsrc.com.tw/IMINT/'  #高鐵訂票網頁
 driver = webdriver.Chrome()
 driver.maximize_window()    #全螢幕顯示
 
 driver.get(url)
-sleep(delay)  #加入等待
+time.sleep(delay)  #加入等待
+
 driver.find_element_by_id("btn-confirm").click()
-sleep(delay)
+time.sleep(delay)
+
 driver.save_screenshot('tem.png')  #擷取螢幕後存檔
 captchaid = driver.find_element_by_id('BookingS1Form_homeCaptcha_passCode')  #驗證碼圖形id
 #取得圖形位置
@@ -26,73 +29,73 @@ simshow(image2)  #顯示圖形
 captchatext = input('輸入驗證碼：')  
 
 driver.find_element_by_name("selectStartStation").click()
-sleep(delay)
+time.sleep(delay)
 
 driver.find_element_by_xpath("(//option[@value='2'])[1]").click()
-sleep(delay)
+time.sleep(delay)
 
 driver.find_element_by_name("selectDestinationStation").click()
-sleep(delay)
+time.sleep(delay)
 
 driver.find_element_by_xpath("(//option[@value='7'])[2]").click()
-sleep(delay)
+time.sleep(delay)
 
 driver.find_element_by_id("seatRadio1").click()
-sleep(delay)
+time.sleep(delay)
 
 driver.find_element_by_id("ToTimePicker").click()
-sleep(delay)
+time.sleep(delay)
 
 driver.find_element_by_xpath("//tbody/tr[3]/td[3]").click()
-sleep(delay)
+time.sleep(delay)
 
 driver.find_element_by_name("toTimeTable").send_keys("\n")
-sleep(delay)
+time.sleep(delay)
 
 driver.find_element_by_xpath("(//option[@value='800A'])[1]").click()
-sleep(delay)
+time.sleep(delay)
 
 driver.find_element_by_name("homeCaptcha:securityCode").send_keys("\n")
-sleep(delay)
+time.sleep(delay)
 
 driver.find_element_by_name("homeCaptcha:securityCode").clear()
-sleep(delay)
+time.sleep(delay)
 
 driver.find_element_by_name("homeCaptcha:securityCode").send_keys(captchatext)
-sleep(delay)
+time.sleep(delay)
 
 driver.find_element_by_id("SubmitButton").click()
-sleep(delay)
+time.sleep(delay)
 
 driver.find_element_by_xpath("(//input[@name='TrainQueryDataViewPanel:TrainGroup'])[3]").click()
-sleep(delay)
+time.sleep(delay)
 
 driver.find_element_by_name("SubmitButton").click()
-sleep(delay)
+time.sleep(delay)
 
 driver.find_element_by_id("idNumber").click()
-sleep(delay)
+time.sleep(delay)
 
 driver.find_element_by_id("idNumber").clear()
-sleep(delay)
+time.sleep(delay)
 
 driver.find_element_by_id("idNumber").send_keys("身分證字號")
-sleep(delay)
+time.sleep(delay)
 
 driver.find_element_by_id("mobileInputRadio").click()
-sleep(delay)
+time.sleep(delay)
 
 driver.find_element_by_id("mobilePhone").click()
-sleep(delay)
+time.sleep(delay)
 
 driver.find_element_by_id("mobilePhone").clear()
-sleep(delay)
+time.sleep(delay)
 
 driver.find_element_by_id("mobilePhone").send_keys("0922735901")
-sleep(delay)
+time.sleep(delay)
 
 driver.find_element_by_name("agree").click()
-sleep(delay)
+time.sleep(delay)
 
 #driver.find_element_by_id("isSubmit").click()
 print('完成訂票！')
