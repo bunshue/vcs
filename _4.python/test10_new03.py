@@ -1,15 +1,4 @@
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/lena.jpg'
-filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/human1.jpg'
-
-print(filename)
-
-filename1 = filename.split(".")[0] # 取得檔案名稱(不添加副檔名)
-
-print(filename1)
-
-
-
 import time
 
 ttt = time.time()
@@ -35,8 +24,6 @@ print(__doc__)
 print(globals())
 
 
-
-
 import sys
 
 major, minor, micro, level, serial = sys.version_info
@@ -52,6 +39,25 @@ print(serial)
 level = 123
 levelnum = 170
 print(" * PY_RELEASE_LEVEL = %r = %s" % (level, hex(levelnum)))
+
+
+
+
+
+import sys
+
+usage = """Usage: %s [-cd] paths...
+    -c: recognize Python source files trying to compile them
+    -d: debug output""" % sys.argv[0]
+
+print('msgsssssss', file = sys.stderr)
+print(usage, file = sys.stderr)
+
+import os
+import sys
+
+print(sys.maxsize)
+print(2**32)
 
 
 

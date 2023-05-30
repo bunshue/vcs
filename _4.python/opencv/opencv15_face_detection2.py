@@ -1,6 +1,7 @@
 #OpenCV 人臉辨識
 
 import cv2	#導入 OpenCV 模組
+from PIL import Image
 
 print("框出照片中的人臉")
 
@@ -16,10 +17,13 @@ face_cascade_classifier = cv2.CascadeClassifier(xml_filename)
 
 image = cv2.imread(filename)	#讀取本機圖片
 #image.shape[0]:圖片高度，image.shape[1]:圖片寬度
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) # 透過轉換函式轉為灰階影像
+
+#gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
 
 # 調用偵測識別人臉函式
 faces = face_cascade_classifier.detectMultiScale(
-    image,
+    gray,   #也可直接用 image 來偵測
     scaleFactor = 1.2,
     minNeighbors = 3,
     minSize = (32, 32),
@@ -32,17 +36,29 @@ for nn in range(len(faces)):
     print(faces[nn])
     print(faces[nn][0], faces[nn][1], faces[nn][2], faces[nn][3])
 '''
-
 #參數
 #image 	        待檢測圖片，一般為灰階影像，以便加快偵測速度
 #scaleFactor 	在前後兩次相繼的掃描中，搜索範圍的比例係數，默認值為 1.1
 #minNeighbors 	構成偵測目標的相鄰矩形的最小個數，默認值為 3
 #minSize & maxSize 	用來限制得到的目標區域範圍
 
+#1.2 表示每次影像尺寸減小的比例
+#3 表示每一個目標至少要被檢測到4次才算是真正的目標
+#faces表示檢測到的人臉目標list
+
+count = 1
 # 繪製人臉部份的方框
 color = (0, 255, 0)  # 定義框的顏色
 for (x,y,w,h) in faces:
     cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
+    roi_gray = gray[y : y + h, x : x + w]
+    roi_color = image[y : y + h, x : x + w]
+    filename2 = "face" + str(count)+ ".jpg"
+    image1 = Image.open(filename)   #使用PIL
+    image2 = image1.crop((x, y, x+w, y+h))
+    #image3 = image2.resize((200, 200), Image.ANTIALIAS)
+    #image3.save(filename2)
+    count += 1
 
 # 顯示結果
 #cv2.imshow(image)

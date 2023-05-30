@@ -6,6 +6,7 @@ from bs4 import BeautifulSoup
 
 url = 'https://www.google.com.tw/'
 
+# 建立瀏覽器物件
 driver = webdriver.Chrome()    #使用Chrome
 #driver = webdriver.Firefox()   #使用Firefox
 driver.set_window_position(0, 0)	#設定視窗位置
@@ -44,6 +45,7 @@ url = 'https://www.cwb.gov.tw/V8/C/W/OBS_County.html?ID=menu'
 driver = webdriver.Chrome('chromedriver.exe')
 driver.implicitly_wait(60)
 driver.get(url)
+
 html = driver.page_source	#讀取網頁的原始碼
 #print(html)
 driver.quit()   #關閉瀏覽器並且退出驅動程序

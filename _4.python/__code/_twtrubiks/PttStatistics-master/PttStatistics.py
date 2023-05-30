@@ -1,4 +1,3 @@
-# coding=UTF-8
 import time
 import requests
 import sys

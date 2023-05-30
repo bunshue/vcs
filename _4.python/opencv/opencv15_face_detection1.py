@@ -22,10 +22,11 @@ gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY) # 透過轉換函式轉為灰階�
 
 # 調用偵測識別人臉函式
 faces = face_cascade_classifier.detectMultiScale(
-    gray,
+    gray,   #也可直接用 image 來偵測
     scaleFactor = 1.2,
     minNeighbors = 3,
-    minSize = (32, 32))
+    minSize = (32, 32),
+    flags = cv2.CASCADE_SCALE_IMAGE)
 
 print('共偵測到 ' + str(len(faces)) + ' 張人臉')
 '''
@@ -41,10 +42,16 @@ for nn in range(len(faces)):
 #minNeighbors 	構成偵測目標的相鄰矩形的最小個數，默認值為 3
 #minSize & maxSize 	用來限制得到的目標區域範圍
 
+#1.2 表示每次影像尺寸減小的比例
+#3 表示每一個目標至少要被檢測到4次才算是真正的目標
+#faces表示檢測到的人臉目標list
+
 # 繪製人臉部份的方框
 color = (0, 255, 0)  # 定義框的顏色
 for (x, y, w, h) in faces:
     cv2.rectangle(image, (x, y), (x + w, y + h), color, 2)
+    roi_gray = gray[y : y + h, x : x + w]
+    roi_color = image[y : y + h, x : x + w]
 
 # 顯示結果
 #cv2.imshow(image)
