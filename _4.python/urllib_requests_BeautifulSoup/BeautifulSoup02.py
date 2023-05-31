@@ -1,8 +1,12 @@
 # Python 測試 BeautifulSoup
 
+import os
 import sys
+import time
+import json
 import requests
 from bs4 import BeautifulSoup
+from datetime import datetime
 
 def get_html_data1(url):
     print('取得網頁資料: ', url)
@@ -14,6 +18,7 @@ def get_html_data1(url):
     else:
         return resp
 
+print('----------------------------------------------------------------------')	#70個
 print('BeautifulSoup 測試 1')
 
 url = 'http://tw.yahoo.com'
@@ -24,6 +29,7 @@ if html_data:
 else:
         print('無法取得網頁資料')
 
+print('----------------------------------------------------------------------')	#70個
 print('BeautifulSoup 測試 2')
 
 url = 'https://tw.news.yahoo.com/rss/technology'
@@ -39,6 +45,7 @@ if html_data:
 else:
         print('無法取得網頁資料')
 
+print('----------------------------------------------------------------------')	#70個
 print('BeautifulSoup 測試 3')
 
 url = 'https://www.google.com.tw/'
@@ -55,31 +62,7 @@ if html_data:
 else:
         print('無法取得網頁資料')
 
-print('BeautifulSoup 測試 4')
-from urllib.request import urlopen
-from urllib.error import HTTPError
-
-def getTitle(url):
-    try:
-        html = urlopen(url)
-    except HTTPError as e:
-        print(e)
-        return None
-    try:
-        soup = BeautifulSoup(html, "html.parser")
-        title = soup.body.h1
-    except AttributeError as e:
-        return None
-    return title
-
-url = 'http://www.pythonscraping.com/exercises/exercise1.html'
-title = getTitle(url)
-if title == None:
-    print("找不到網頁標題")
-else:
-    print("取得網頁標題:")
-    print(title)
-
+print('----------------------------------------------------------------------')	#70個
 print('BeautifulSoup 測試 5')
 
 url = 'http://ehappy.tw/bsdemo1.htm'
@@ -95,6 +78,7 @@ if html_data:
 else:
         print('無法取得網頁資料')
 
+print('----------------------------------------------------------------------')	#70個
 print('BeautifulSoup 測試 6')
 
 url = 'https://oldsiao.neocities.org/'
@@ -115,7 +99,7 @@ if html_data:
 else:
         print('無法取得網頁資料')
 
-
+print('----------------------------------------------------------------------')	#70個
 print('BeautifulSoup 測試 7')
 
 '''
@@ -143,16 +127,10 @@ if html_data:
 else:
         print('無法取得網頁資料')
 
+print('----------------------------------------------------------------------')	#70個
+print('BeautifulSoup 測試 8')
 
 #PTT C_Chat板每篇文章的標題
-
-import os
-import requests
-from bs4 import BeautifulSoup
-from urllib.parse import urlparse
-from urllib.request import urlopen
-
-print('BeautifulSoup 測試 8')
 
 url = 'https://www.ptt.cc/bbs/C_Chat/index.html'
 html_data = get_html_data1(url)
@@ -168,6 +146,7 @@ else:
     print('無法取得網頁資料')
 
 
+print('----------------------------------------------------------------------')	#70個
 print('BeautifulSoup 測試 9')
 
 url = 'http://blog.castman.net/web-crawler-tutorial/ch1/connect.html'
@@ -193,168 +172,8 @@ if html_data:
 else:
     print('無法取得網頁資料')
 
-print('BeautifulSoup 測試 10')
-
-#用 BeautifulSoup 分析網頁資料
-
-url = 'https://www.ptt.cc/bbs/C_Chat/index.html'
-
-domain = "{}://{}".format(urlparse(url).scheme, urlparse(url).hostname)
-html_data = get_html_data1(url)
-soup = BeautifulSoup(html_data.text, 'html.parser')
-#print(soup.prettify())  #prettify()這個函數可以將DOM tree以比較美觀的方式印出。
-all_links = soup.find_all(['a','img'])
-
-for link in all_links:
-    src = link.get('src')
-    href = link.get('href')
-    targets = [src, href]
-    for t in targets:
-        if t != None and ('.jpg' in t or '.png' in t):
-            if t.startswith('http'):
-                print(t)
-            else:
-                print(domain+t)
-
-print('BeautifulSoup 測試 11')
-
-domain = "{}://{}".format(urlparse(url).scheme, urlparse(url).hostname)
-html_data = get_html_data1(url)
-soup = BeautifulSoup(html_data.text, 'html.parser')
-#print(soup.prettify())  #prettify()這個函數可以將DOM tree以比較美觀的方式印出。
-all_links = soup.find_all(['a','img'])
-
-for link in all_links:
-    src = link.get('src')
-    href = link.get('href')
-    targets = [src, href]
-    for t in targets:
-        if t != None and ('.jpg' in t or '.png' in t):
-            if t.startswith('http'): full_path = t
-            else:                    full_path = domain+t
-            print(full_path)
-            image_dir = url.split('/')[-1]
-            if not os.path.exists(image_dir): os.mkdir(image_dir)
-            filename = full_path.split('/')[-1]
-            ext = filename.split('.')[-1]
-            filename = filename.split('.')[-2]
-            if 'jpg' in ext: filename = filename + '.jpg'
-            else:            filename = filename + '.png'
-            image = urlopen(full_path)
-            fp = open(os.path.join(image_dir,filename),'wb')
-            fp.write(image.read())
-            fp.close()
-
-
-
-print('BeautifulSoup 測試 12')
-
-post_html = '''
-</body>
-</html>
-'''
-
-domain = "{}://{}".format(urlparse(url).scheme, urlparse(url).hostname)
-html_data = get_html_data1(url)
-soup = BeautifulSoup(html_data.text, 'html.parser')
-#print(soup.prettify())  #prettify()這個函數可以將DOM tree以比較美觀的方式印出。
-
-pre_html = """
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset='utf-8'>
-<title>網頁搜集來的資料</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-  <style>
-  .carousel-inner > .item > img,
-  .carousel-inner > .item > a > img {
-      border: 5px solid white;
-      width: 50%;
-      box-shadow: 10px 10px 5px #888888;
-      margin: auto;
-  }
-  </style>
-
-</head>
-<body>
-<center><h3>以下是從網頁搜集來的圖片跑馬燈</h3></center>
-"""
-
-all_links = soup.find_all(['a','img'])
-
-carousel_part1 = ""
-carousel_part2 = ""
-picno = 0
-
-for link in all_links:
-    src = link.get('src')
-    href = link.get('href')
-    targets = [src, href]
-    for t in targets:
-        if t != None and ('.jpg' in t or '.png' in t):
-            if t.startswith('http'): full_path = t
-            else:                    full_path = domain+t
-            print(full_path)
-            image_dir = url.split('/')[-1]
-            if not os.path.exists(image_dir): os.mkdir(image_dir)
-            filename = full_path.split('/')[-1]
-            ext = filename.split('.')[-1]
-            filename = filename.split('.')[-2]
-            if 'jpg' in ext: filename = filename + '.jpg'
-            else:            filename = filename + '.png'
-            image = urlopen(full_path)
-            fp = open(os.path.join(image_dir,filename),'wb')
-            fp.write(image.read())
-            fp.close()
-
-            if picno==0:
-                carousel_part1 += "<li data-target='#myC' data-slide-to='{}' class='active'></li>".format(picno)
-                carousel_part2 += """
-                    <div class='item active'>
-                        <img src='{}' alt='{}'>  
-                    </div>""".format(filename, filename)
-
-            else:
-                carousel_part1 += "<li data-target='#myC' data-slide-to='{}'></li>".format(picno)
-                carousel_part2 += """
-                    <div class='item'>
-                        <img src='{}' alt='{}'>  
-                    </div>""".format(filename, filename)
-            picno += 1
-
-            html_body = """
-            <div id='myC' class='carousel slide' data-ride='carousel'>
-                <ol class='carousel-indicators'>
-                {}
-                </ol>
-                <div class='carousel-inner' role='listbox'>
-                {}
-                </div>
-                <a class="left carousel-control" href="#myC" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    <span class="sr-only">前一張</span>
-                </a>
-                <a class="right carousel-control" href="#myC" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                    <span class="sr-only">後一張</span>
-                </a>
-            </div>
-            """.format(carousel_part1, carousel_part2)
-
-'''
-fp = open('index.html', 'w')
-fp.write(pre_html+html_body+post_html)
-fp.close()            
-'''
-
+print('----------------------------------------------------------------------')	#70個
 print('BeautifulSoup 測試 13')
-
-import requests
-from bs4 import BeautifulSoup
 
 url = "https://kma.kkbox.com/charts/daily/newrelease?terr=tw&lang=tc"
 
@@ -362,6 +181,198 @@ html_data = requests.get(url)
 soup = BeautifulSoup(html_data.text, "html.parser")
 
 print(soup.prettify())
+
+print('----------------------------------------------------------------------')	#70個
+print('BeautifulSoup 測試 14')
+
+url = 'https://www.nkust.edu.tw/'
+sel = '#sm_div_cmb_1_15062 > div > div > section'   #沒用到
+
+html = requests.get(url).text
+soup = BeautifulSoup(html, 'html.parser')
+
+print(soup.prettify())  #prettify()這個函數可以將DOM tree以比較美觀的方式印出。
+
+print()
+print('找第一個標籤p')
+target = soup.p
+print(target)
+print()
+
+print('找第一個標籤p')
+target = soup.p
+print(target)
+print()
+
+print('----------------------------------------------------------------------')	#70個
+print('BeautifulSoup 測試 15')
+
+'''
+url = 'https://udn.com/news/breaknews/1'
+
+html = requests.get(url).text
+sel = '#breaknews > div.context-box__content.story-list__holder.story-list__holder--full > div> div.story-list__text'
+soup = BeautifulSoup(html, 'html.parser')
+target = soup.select(sel)
+for news in target:
+    print(news.h3.a['title'])
+'''
+
+print('----------------------------------------------------------------------')	#70個
+print('BeautifulSoup 測試 16')
+
+url = 'https://newcar.u-car.com.tw/newcar'
+
+html = requests.get(url).text
+soup = BeautifulSoup(html, "html.parser")
+makes = soup.select('#makeselect > option')
+makers = dict()
+for make in makes:
+    if make['value'] != '0':
+        makers[int(make['value'])] = make.text
+print(makers)
+
+print('----------------------------------------------------------------------')	#70個
+print('BeautifulSoup 測試 17')
+
+url = 'https://newcar.u-car.com.tw/newcar'
+
+html = requests.get(url).text
+soup = BeautifulSoup(html, "html.parser")
+models = soup.select('#modelselect > option')
+cars = list()
+for model in models:
+    if model['value'] != '0':
+        car = dict()
+        car['id'] = int(model['value'])
+        car['make'] = int(model['data-make'])
+        car['name'] = model.text
+        cars.append(car)
+print(cars)
+
+
+print('----------------------------------------------------------------------')	#70個
+print('BeautifulSoup 測試 18')
+
+url = 'https://newcar.u-car.com.tw/newcar'
+
+html = requests.get(url).text
+soup = BeautifulSoup(html, "html.parser")
+makes = soup.select('#makeselect > option')
+makers = dict()
+for make in makes:
+    if make['value'] != '0':
+        makers[int(make['value'])] = make.text
+        
+models = soup.select('#modelselect > option')
+cars = list()
+for model in models:
+    if model['value'] != '0':
+        car = dict()
+        car['id'] = int(model['value'])
+        car['make'] = int(model['data-make'])
+        car['make-name'] = makers[car['make']]
+        car['name'] = model.text
+        cars.append(car)
+print(cars)
+
+print('----------------------------------------------------------------------')	#70個
+print('BeautifulSoup 測試 19')
+
+url = 'https://tw.appledaily.com/new/realtime/2'
+
+html = requests.get(url).text
+soup = BeautifulSoup(html, 'html.parser')
+sel = '#maincontent > div.thoracis > div.abdominis.rlby.clearmen > ul > li.rtddt > a'
+data = soup.select(sel)
+for item in data:
+    print(item.time.text)
+    print(item.h1.text)
+    print(item['href'])
+
+print('----------------------------------------------------------------------')	#70個
+print('BeautifulSoup 測試 20')
+
+target = 'https://tw.appledaily.com/new/realtime/{}'
+
+titles = list()
+for page in range(1, 11):
+    url = target.format(page)
+    html = requests.get(url).text
+    soup = BeautifulSoup(html, 'html.parser')
+    sel = '#maincontent > div.thoracis > div.abdominis.rlby.clearmen > ul > li.rtddt > a'
+    data = soup.select(sel)
+    for item in data:
+        title = dict()
+        title['time'] = item.time.text
+        title['title'] = item.h1.text
+        title['link'] = item['href']
+        titles.append(title)
+    time.sleep(3)
+print(titles)
+
+print('----------------------------------------------------------------------')	#70個
+print('BeautifulSoup 測試 21')
+
+target = 'https://tw.appledaily.com/new/realtime/{}'
+
+titles = list()
+for page in range(1, 11):
+    url = target.format(page)
+    html = requests.get(url).text
+    soup = BeautifulSoup(html, 'html.parser')
+    sel = '#maincontent > div.thoracis > div.abdominis.rlby.clearmen > ul > li.rtddt > a'
+    data = soup.select(sel)
+    for item in data:
+        title = dict()
+        title['time'] = item.time.text
+        title['title'] = item.h1.text
+        title['link'] = item['href']
+        titles.append(title)
+    time.sleep(3)
+for title in titles:
+    try:
+        url = title['link']
+        html = requests.get(url).text
+        soup = BeautifulSoup(html, 'html.parser')
+        sel = '#article-header > header > div > h2 > span'
+        target = soup.select(sel)
+        print(target[0].text)
+        title['title'] = target[0].text
+    except:
+        pass
+    time.sleep(3)
+    
+filename = 'C:/_git/vcs/_1.data/______test_files2/news_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.json';
+with open(filename, "w", encoding='utf-8') as fp:
+    print(filename + " is dumping...")
+    json.dump(titles, fp)
+
+print('----------------------------------------------------------------------')	#70個
+print('BeautifulSoup 測試 22')
+
+print('PC Home 電腦售價')
+url = 'https://ecshweb.pchome.com.tw/search/v3.3/all/results?q=mac%20Mini&page=1&sort=sale/dc'
+
+html = requests.get(url).text
+products = json.loads(html)['prods']
+for product in products:
+    if product['price'] > 20000:
+        print("NT$:{}, {}".format(product['price'], product['name']))
+
+print('----------------------------------------------------------------------')	#70個
+print('BeautifulSoup 測試 23')
+
+url = 'https://ecshweb.pchome.com.tw/search/v3.3/all/results?q=mac%20Mini&page=1&sort=sale/dc'
+html = requests.get(url).text
+products = json.loads(html)['prods']
+message = ""
+for product in products:
+    if product['price'] > 20000:
+        message = message + "NT$:{}, {}\n".format(product['price'], product['name'])
+        
+print("Mac Mini價格通知", message)
+
 
 
 

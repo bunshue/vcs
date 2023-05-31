@@ -1,3 +1,7 @@
+print('----------------------------------------------------------------------')	#70個
+print('requests 測試 1')
+
+
 import pprint as pp
 import time, requests
 
@@ -18,6 +22,8 @@ for page in pages:
     print("=========================")
 
 
+print('----------------------------------------------------------------------')	#70個
+print('requests 測試 1')
 
 import pprint as pp
 import time, requests

@@ -132,7 +132,9 @@ else:
 
 print('BeautifulSoup 測試 2')
 
-import requests
+print('----------------------------------------------------------------------')	#70個
+print('requests 測試 1')
+
 from bs4 import BeautifulSoup
 url = 'http://www.e-happy.com.tw'
 html_data = requests.get(url)
@@ -143,7 +145,9 @@ import pprint as pp
 pp.pprint(html_data.text)
 
 
-import requests
+print('----------------------------------------------------------------------')	#70個
+print('requests 測試 1')
+
 
 print('將查詢參數加入 GET 請求中')
 
@@ -163,7 +167,9 @@ print(html_data.url)
 print(html_data.text)
 
 
-import requests
+print('----------------------------------------------------------------------')	#70個
+print('requests 測試 1')
+
 
 print('將查詢參數加入 GET 請求中')
 
