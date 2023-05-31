@@ -35,7 +35,6 @@ for nn in range(len(faces)):
     print(faces[nn])
     print(faces[nn][0], faces[nn][1], faces[nn][2], faces[nn][3])
 '''
-
 #參數
 #image 	        待檢測圖片，一般為灰階影像，以便加快偵測速度
 #scaleFactor 	在前後兩次相繼的掃描中，搜索範圍的比例係數，默認值為 1.1

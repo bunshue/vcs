@@ -38,6 +38,13 @@ while True:
     #frame = cv2.resize(frame,(int(frame.shape[1] / 2), int(frame.shape[0] / 2))) #調整畫面大小
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 	# 調用偵測識別人臉函式
+    '''
+    faces = face_cascade_classifier.detectMultiScale(
+        gray,
+        scaleFactor = 1.2,
+        minNeighbors = 3,
+        minSize = (200, 200))
+    '''
     faces = face_cascade_classifier.detectMultiScale(
         gray,
         scaleFactor = 1.2,

@@ -1,0 +1,23 @@
+<html lang="en">
+  <head>
+    <meta charset="big5" />
+  </head>
+  <body>
+    <textarea id="show"></textarea><br><br><br>
+    <button id="aaa">AAA ( id="aaa" )</button><br>
+    <button name="bbb">BBB ( name="bbb" )</button><br>
+    <button class="ccc">CCC ( class="ccc" )</button><br>
+    <button class="ddd">DDD ( class="ddd" )</button><br>
+    <a href="https://www.google.com" target="_blank">點擊開啟 Google 網站</a>
+  </body>
+  <script>
+    show = document.getElementById("show");
+    buttons = document.querySelectorAll("button");
+    buttons.forEach((e) => {
+      let text = e.innerText;
+      e.addEventListener("click", () => {
+        show.value = "你按了 : " + text;
+      });
+    });
+  </script>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="big5" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Selenium demo page</title>
+    <style>
+      body {
+        padding: 10px;
+      }
+      button,
+      select {
+        margin: 5px;
+        padding: 10px;
+        font-size: 16px;
+      }
+      #show {
+        box-sizing: content-box;
+        display: block;
+        width: 300px;
+        height: 100px;
+        margin: 5px 5px 10px;
+        padding: 10px;
+        border: 1px solid #000;
+        font-size: 16px;
+      }
+      h1::selection,
+      h2::selection {
+        background: #ccc;
+        color: red;
+      }
+      a{
+        color:#09f;
+      }
+      a:hover{
+        color:#f00
+      }
+    </style>
+  </head>
+  <body>
+	<textarea id="show"></textarea><br><br><br>
+    <button id="aaa">AAA ( id="aaa" )</button><br>
+    <button name="bbb">BBB ( name="bbb" )</button><br>
+    <button class="ccc">CCC ( class="ccc" )</button><br>
+    <button class="ddd">DDD ( class="ddd" )</button><br>
+    <button id="add">EEE 點擊增加數字</button>
+    <select id="select">
+      <option value="OXXO">OXXO</option>
+      <option value="GKPen">GKPen</option>
+      <option value="OK">OK</option>
+      <option value="Hello">Hello</option>
+    </select>
+    <h1 title="我是大標題">大標題</h1>
+    <h2 title="我是次標題">次標題</h2>
+    <a href="https://www.google.com" target="_blank">點擊開啟 Google 網站</a>
+  </body>
+  <script>
+    show = document.getElementById("show");
+    select = document.getElementById("select");
+    buttons = document.querySelectorAll("button");
+    buttons.forEach((e) => {
+      let text = e.innerText;
+      e.addEventListener("click", () => {
+        show.value = "你按了 : " + text;
+      });
+    });
+    select.addEventListener("change", (e) => {
+      show.value = e.target.value;
+    });
+    h1 = document.querySelector("h1")
+    h1.addEventListener("click", (e) => {
+      show.value = "你點選了h1 " + h1.innerText;
+    });
+    h2 = document.querySelector("h2")
+    document.querySelector("h2").addEventListener("click", (e) => {
+      show.value = "你點選了h2 " + h2.innerText;
+    });
+    add = document.getElementById('add')
+    let n = 0
+    add.addEventListener('click',()=>{
+      n = n + 1;
+      show.value = "累加數字為 : " + n
+    })
+  </script>
+</html>
