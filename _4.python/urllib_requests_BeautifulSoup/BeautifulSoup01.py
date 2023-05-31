@@ -8,7 +8,7 @@ from urllib.request import urlopen
 filename = 'C:/_git/vcs/_1.data/______test_files1/beautifulsoup_data.html'
 
 html_data = ""
-with open(filename, "r", encoding="big5") as file:
+with open(filename, "r", encoding = "big5") as file:
     html_data = file.read()
 
 print('解讀本地網頁資料1')
@@ -204,6 +204,9 @@ for img in all_imgs:
 print("共下載",n,"張圖片")
 
 
+print('----------------------------------------------------------------------')	#70個
+print('BeautifulSoup 測試 1')
+
 html_data = """
 <div class="content">
     E-Mail：<a href="mailto:mail@test.com.tw">mail</a><br>
@@ -237,6 +240,10 @@ imglist = soup.find_all("img", {"src":regex})
 for img in imglist:
     print(img["src"])
 
+
+
+
+print('BeautifulSoup 測試 作業完成')
 
 
 
