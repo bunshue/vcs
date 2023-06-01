@@ -1,5 +1,14 @@
+# Python 測試 urllib
+
+print('----------------------------------------------------------------------')	#70個
+print('準備工作')
+
+
 import urllib
 import urllib.request   #用來建立請求
+
+print('----------------------------------------------------------------------')	#70個
+print('urllib 測試 1')
 
 print('讀取遠端html檔或純文字檔')
 url = 'http://pythonscraping.com/pages/page1.html'
@@ -9,6 +18,9 @@ html_data = html.read()
 print(html_data)
 print('OK')
 
+print('----------------------------------------------------------------------')	#70個
+print('urllib 測試 2')
+
 print('讀取遠端純文字檔2')
 #encoding:Big5
 #Perl的基本語法
@@ -16,8 +28,9 @@ print('讀取遠端純文字檔2')
 
 print('讀取遠端html檔1')
 url = 'http://ind.ntou.edu.tw/~dada/cgi/Perlsynx.htm'
-html = urllib.request.urlopen(url).read()
-html_data = html.decode('Big5')      #將bytes轉成str
+html = urllib.request.urlopen(url)
+html_data = html.read()
+html_data = html_data.decode('Big5')      #將bytes轉成str
 print(html_data)
 print('OK')
 
@@ -29,33 +42,52 @@ fd.close()
 print('抓取網頁資料 並存檔成 : ' + filename)
 print('OK')
 
+print('----------------------------------------------------------------------')	#70個
+print('urllib 測試 3')
+
 print("抓取網頁資料, 並存檔")
 data={}
 data['word']='明仁天皇'
  
 url_values = urllib.parse.urlencode(data)
 url = 'http://www.baidu.com/s?'
-full_url = url + url_values
+url = url + url_values
  
-data = urllib.request.urlopen(full_url).read()
-#data=data.decode('UTF-8')
-print(data)
+html = urllib.request.urlopen(url)
+html_data = html.read()
+
+#html_data = html_data.decode('UTF-8')
+print(html_data)
 print('OK')
+
+print('----------------------------------------------------------------------')	#70個
+print('urllib 測試 4')
 
 print('資料寫出到本地檔案')
 filename = 'C:/_git/vcs/_1.data/______test_files2/b2.html'
 fd = open(filename, "wb")
-fd.write(data)
+fd.write(html_data)
 fd.close()
 print('抓取網頁資料 並存檔成 : ' + filename)
 print('OK')
 
+
+print('----------------------------------------------------------------------')	#70個
+print('urllib 測試 5')
+
+
 print('抓取網頁資料 1')
 url = 'http://pythonscraping.com/pages/page1.html'
+
 html = urllib.request.urlopen(url)
 html_data = html.read()
 print(html_data, 'utf-8')
 print('OK')
+
+
+print('----------------------------------------------------------------------')	#70個
+print('urllib 測試 6')
+
 
 print('抓取網頁資料 2')
 #encoding:UTF-8
@@ -63,16 +95,22 @@ print('抓取網頁資料 2')
 #百度
 #http://ind.ntou.edu.tw/~dada/cgi/Perlsynx.htm
 url = "http://www.baidu.com"
-data = urllib.request.urlopen(url).read()
-print(data)
+
+html = urllib.request.urlopen(url)
+html_data = html.read()
+
+print(html_data)
 
 print('資料寫出到本地檔案')
 filename = 'C:/_git/vcs/_1.data/______test_files2/bbb.html'
 fd = open(filename, "wb")
-fd.write(data)
+fd.write(html_data)
 fd.close()
 print('抓取網頁資料 並存檔成 : ' + filename)
 print('OK')
+
+print('----------------------------------------------------------------------')	#70個
+print('urllib 測試 7')
 
 print('讀取遠端純文字檔3')
 data={}
@@ -80,12 +118,16 @@ data['word']='Jecvay Notes'
  
 url_values=urllib.parse.urlencode(data)
 url="http://www.baidu.com/s?"
-full_url=url+url_values
+url = url + url_values
  
-data=urllib.request.urlopen(full_url).read()
-data=data.decode('UTF-8')
-print(data)
+html = urllib.request.urlopen(url)
+html_data = html.read()
+html_data = html_data.decode('UTF-8')
+print(html_data)
 print('OK')
+
+print('----------------------------------------------------------------------')	#70個
+print('urllib 測試 8')
 
 print('抓取網頁資料 4')
 
@@ -94,6 +136,9 @@ result = urllib.parse.urlparse(url = url, scheme = 'http', allow_fragments = Tru
 print(result)
 print(result.scheme)
 print('OK')
+
+print('----------------------------------------------------------------------')	#70個
+print('urllib 測試 9')
 
 print('抓取網頁資料 5')
 url = 'https://www.most.gov.tw/folksonomy/list?menu_id=ba3d22f3-96fd-4adf-a078-91a05b8f0166&filter_uid=none&listKeyword=&pageNum=2&pageSize=18&view_mode=listView&subSite=main&l=ch&tagUid='
@@ -108,8 +153,12 @@ for cmd in q_cmds:
 
 print('抓取網頁資料 OK')
 
+print('----------------------------------------------------------------------')	#70個
+print('urllib 測試 10')
+
 url = "http://ind.ntou.edu.tw/~dada/cgi/Perlsynx.htm"
 a = urllib.request.urlopen(url)
+
 print("type : ")
 print(type(a))
 print("info : ")
@@ -135,6 +184,9 @@ fd = open(filename, "wb")
 fd.write(data)
 fd.close()
 print('抓取網頁資料 並存檔成 : ' + filename)
+
+print('----------------------------------------------------------------------')	#70個
+print('urllib 測試 11')
 
 
 '''
@@ -164,9 +216,5 @@ print(soup.prettify())
 
 
 
-
-
-
-print('作業完成')
-
+print('urllib 測試 作業完成')
 

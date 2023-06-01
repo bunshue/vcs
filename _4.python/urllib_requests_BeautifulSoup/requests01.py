@@ -3,7 +3,17 @@
 print('----------------------------------------------------------------------')	#70個
 print('準備工作')
 
+import os
+import sys
+import csv
+import json
+import time
+import codecs
+import pprint
 import requests
+from datetime import datetime
+from urllib import request
+from bs4 import BeautifulSoup
 
 #無參數
 def get_html_data1(url):
@@ -28,10 +38,17 @@ def get_html_data2(api_url, api_params):
     else:
         return resp
 
+def get_html_data_from_url(url):
+    html_data = get_html_data1(url)
+    if html_data == None:
+        print('無法取得網頁資料')
+        sys.exit(1)	#立刻退出程式
+
+    html_data.encoding = 'UTF-8' # 或是 unicode 也可, 指定編碼方式
+    return html_data.text
 
 print('----------------------------------------------------------------------')	#70個
 print('requests 測試 1')
-
 
 print('無參數 取得網頁資料 1')
 url = 'https://tw.news.yahoo.com/most-popular/'
@@ -44,10 +61,9 @@ else:
     print('無法取得網頁資料')
 
 print('----------------------------------------------------------------------')	#70個
-print('requests 測試 1')
+print('requests 測試 2')
 
 print('無參數 取得網頁資料 2')
-import pprint
 url = 'http://tw.yahoo.com'
 html_data = get_html_data1(url)
 if html_data:
@@ -57,7 +73,7 @@ else:
     print('無法取得網頁資料')
 
 print('----------------------------------------------------------------------')	#70個
-print('requests 測試 1')
+print('requests 測試 3')
 
 print('有參數 取得網頁資料 3')
 api_url = 'http://dict.baidu.com/s'
@@ -69,20 +85,18 @@ print('222', html_data.text) #打印解码后的返回数据
 print('333', html_data)
 
 print('----------------------------------------------------------------------')	#70個
-print('requests 測試 1')
+print('requests 測試 4')
 
 print('有參數 取得網頁資料 4')
-import pprint
 api_url = 'https://zh.wikipedia.org/w/api.php'
 api_params = {'format':'json', 'action':'query', 'titles':'椎名林檎', 'prop':'revisions', 'rvprop':'content'}
 html_data = get_html_data2(api_url, api_params)
 pprint.pprint(html_data)
 
 print('----------------------------------------------------------------------')	#70個
-print('requests 測試 1')
+print('requests 測試 5')
 
 print('有參數 取得網頁資料 5')
-import codecs
 api_url = 'https://zh.wikipedia.org/w/api.php'
 api_params = {'format':'xmlfm', 'action':'query', 'titles':'椎名林檎', 'prop':'revisions', 'rvprop':'content'}
 html_data = get_html_data2(api_url, api_params)
@@ -92,10 +106,9 @@ fo.write(html_data.text)
 fo.close()
 
 print('----------------------------------------------------------------------')	#70個
-print('requests 測試 1')
+print('requests 測試 6')
 
 print('有參數 取得網頁資料 6')
-import codecs
 search_word = 'lion'
 api_url = 'https://zh.wikipedia.org/w/api.php'
 api_params = {'format':'xmlfm', 'action':'query', 'prop':'revisions', 'rvprop':'content'}
@@ -107,9 +120,7 @@ fo.write(html_data.text)
 fo.close()
 
 print('----------------------------------------------------------------------')	#70個
-print('requests 測試 1')
-
-import requests
+print('requests 測試 7a')
 
 url = 'http://www.ehappy.tw/demo.htm'
 html_data = get_html_data1(url)
@@ -119,11 +130,18 @@ if html_data:
 else:
     print('無法取得網頁資料')
 
+'''
+print('----------------------------------------------------------------------')	#70個
+print('requests 測試 7b')
+
 print('將查詢參數加入 POST 請求中')
 payload = {'key1': 'value1', 'key2': 'value2'}
 url = 'http://httpbin.org/post'
 html_data = requests.post(url, data=payload)
 print(html_data.text)
+
+print('----------------------------------------------------------------------')	#70個
+print('requests 測試 7c')
 
 print('將查詢參數定義為字典資料加入GET請求中')
 api_url = 'http://httpbin.org/get'
@@ -134,6 +152,9 @@ if html_data:
 else:
     print('無法取得網頁資料')
 
+'''
+
+'''
 print('將自訂表頭加入 GET 請求中')
 
 url = 'https://irs.thsrc.com.tw/IMINT'		#台灣高鐵訂票系統
@@ -156,24 +177,19 @@ if html_data:
 else:
     print("抓取網頁NG")
 
-print('BeautifulSoup 測試 2')
+'''
 
 print('----------------------------------------------------------------------')	#70個
-print('requests 測試 1')
+print('requests 測試 8')
 
-from bs4 import BeautifulSoup
 url = 'http://www.e-happy.com.tw'
 html_data = requests.get(url)
 soup = BeautifulSoup(html_data.text, 'html.parser')
-print(soup.prettify())
-
-import pprint as pp
-pp.pprint(html_data.text)
-
+#print(soup.prettify())
+#pprint.pprint(html_data.text) # many
 
 print('----------------------------------------------------------------------')	#70個
-print('requests 測試 1')
-
+print('requests 測試 9')
 
 print('將查詢參數加入 GET 請求中')
 
@@ -192,9 +208,8 @@ html_data = requests.get('https://zh.wikipedia.org/w/index.php', params = payloa
 print(html_data.url)
 print(html_data.text)
 
-
 print('----------------------------------------------------------------------')	#70個
-print('requests 測試 1')
+print('requests 測試 10')
 
 
 print('將查詢參數加入 GET 請求中')
@@ -204,6 +219,267 @@ html_data = requests.post("http://httpbin.org/post", data = payload)
 
 print(html_data.url)
 print(html_data.text)
+
+print('----------------------------------------------------------------------')	#70個
+print('requests 測試 11')
+
+url = 'https://www.ptt.cc/bbs/hotboards.html'
+html_data_text = get_html_data_from_url(url)
+
+htmllist = html_data_text.splitlines()   #將網頁資料一行一行地分割成串列
+
+n=0
+for row in htmllist:
+    if "音樂" in row:
+        n+=1
+
+print("找到 {} 次!".format(n))
+
+print('----------------------------------------------------------------------')	#70個
+print('requests 測試 12')
+
+print('教育部統計處資料 很多')
+url = 'http://stats.moe.gov.tw/files/detail/{}/{}_student.csv'
+'''
+for year in range(103, 109):
+    print(url.format(year, year))
+'''
+
+print('----------------------------------------------------------------------')	#70個
+print('requests 測試 13')
+
+print('教育部統計處資料')
+url = 'http://stats.moe.gov.tw/files/detail/111/111_student.csv'
+html_data_text = get_html_data_from_url(url)
+
+rows = html_data_text.split('\n')
+print(rows[0])
+print(rows[1])
+
+print('----------------------------------------------------------------------')	#70個
+print('requests 測試 14')
+
+print('教育部統計處資料')
+url = 'http://stats.moe.gov.tw/files/detail/108/108_student.csv'
+
+html_data_text = get_html_data_from_url(url)
+rows = html_data_text.split('\n')
+data = list()
+columns = rows[0].split(',')
+for row in rows[1:]:
+    try:
+        row = row.split(',')
+        item = list()
+        for f_index in range(1, 5):
+            item.append(row[f_index].replace('"', ''))
+        data.append(item)
+    except:
+        pass
+with open(os.path.basename(url), "w", encoding='utf-8', newline="") as fp:
+    writer = csv.writer(fp)
+    writer.writerow(columns[1:5])
+    writer.writerows(data)
+    
+print("done")
+
+
+print('----------------------------------------------------------------------')	#70個
+print('requests 測試 15')
+
+print('教育部統計處資料 很多')
+url = 'http://stats.moe.gov.tw/files/detail/{0}/{0}_student.csv'
+
+'''
+for year in range(103, 109):
+    csvdata = requests.get(url.format(year)).text
+    rows = csvdata.split('\n')
+    data = list()
+    columns = rows[0].split(',')
+    for row in rows[1:]:
+        try:
+            row = row.split(',')
+            item = list()
+            for f_index in range(1, 5):
+                item.append(row[f_index].replace('"', ''))
+            data.append(item)
+        except:
+            pass
+    filename = os.path.basename(url.format(year))
+    print(filename, "is writing...")
+    with open(filename, "w", encoding='utf-8', newline="") as fp:
+        writer = csv.writer(fp)
+        writer.writerow(columns[1:5])
+        writer.writerows(data)
+    time.sleep(3)
+'''
+print("done")
+
+print('----------------------------------------------------------------------')	#70個
+print('requests 測試 16')
+
+url = "https://www.nkust.edu.tw/p/403-1000-14-{}.php?Lang=zh-tw"
+
+'''many
+pages = list()
+for pg in range(1, 4):
+    pages.append(url.format(pg))
+
+pprint.pprint(pages)
+print()
+print(pages)
+
+for page in pages:
+    html = requests.get(page).text
+    pprint.pprint(html)
+    time.sleep(3)
+    print("=========================")
+'''
+
+print('----------------------------------------------------------------------')	#70個
+print('requests 測試 17')
+
+url = "https://www.nkust.edu.tw/p/403-1000-14-{}.php?Lang=zh-tw"
+
+pages = list()
+for pg in range(1, 4):
+    pages.append(url.format(pg))
+
+pprint.pprint(pages)
+print()
+print(pages)
+
+for pg_no, page in enumerate(pages, 1):
+    html = requests.get(page).text
+    filename = "page-{}.txt".format(pg_no)
+    with open(filename, "wt") as fp:
+        fp.write(html)
+    print(filename, "儲存完成！")
+    time.sleep(3)
+    print("=========================")
+
+print('----------------------------------------------------------------------')	#70個
+print('requests 測試 18')
+
+#行政院農業委員會資料開放平台
+url = 'https://data.coa.gov.tw/Service/OpenData/FromM/FarmTransData.aspx'
+
+with request.urlopen(url) as res:
+    data = json.loads(res.read().decode())
+
+print(data)
+print()
+print(data[0])
+
+filename = 'C:/_git/vcs/_1.data/______test_files2/products.csv'
+print('將資料寫出到csv檔, 檔案 : ', filename)
+
+with open(filename, 'w', encoding = 'big5', newline = '\n') as fp:
+    writer = csv.writer(fp)
+    writer.writerow(('作物名稱','平均價','交易量'))
+    for item in data:
+        writer.writerow((item['作物名稱'],item['平均價'],item['交易量']))
+
+print('----------------------------------------------------------------------')	#70個
+print('requests 測試 19')
+
+print('PC Home 電腦售價')
+url = 'https://ecshweb.pchome.com.tw/search/v3.3/all/results?q=mac%20Mini&page=1&sort=sale/dc'
+
+html_data_text = get_html_data_from_url(url)
+
+products = json.loads(html_data_text)['prods']
+for product in products:
+    if product['price'] > 20000:
+        print("NT$:{}, {}".format(product['price'], product['name']))
+
+print('----------------------------------------------------------------------')	#70個
+print('requests 測試 20')
+
+url = 'https://ecshweb.pchome.com.tw/search/v3.3/all/results?q=mac%20Mini&page=1&sort=sale/dc'
+
+html_data_text = get_html_data_from_url(url)
+
+products = json.loads(html_data_text)['prods']
+message = ""
+for product in products:
+    if product['price'] > 20000:
+        message = message + "NT$:{}, {}\n".format(product['price'], product['name'])
+        
+print("Mac Mini價格通知", message)
+
+print('----------------------------------------------------------------------')	#70個
+print('requests 測試 21')
+
+import requests
+
+url = "https://udn.com/api/more?page=2&id=&channelId=1&cate_id=0&type=breaknews&totalRecNo=6561"
+
+'''many
+data = requests.get(url).text
+print(data)
+'''
+
+import json
+import urllib.parse
+import requests
+
+url = "https://udn.com/api/more?page=2&id=&channelId=1&cate_id=0&type=breaknews&totalRecNo=6561"
+
+''' many
+html = requests.get(url).text
+data = json.loads(html)
+titles = data['lists']
+for title in titles:
+    print(title['title'])
+    print(urllib.parse.urljoin("https://udn.com", title['titleLink']))
+'''
+
+
+print('----------------------------------------------------------------------')	#70個
+print('requests 測試 22')
+
+
+import json, time
+import urllib.parse
+import requests
+url_pattern = "https://udn.com/api/more?page={}&id=&channelId=1&cate_id=0&type=breaknews&totalRecNo=6561"
+alldata = list()
+for page in range(1, 11):
+    url = url_pattern.format(page)
+    html = requests.get(url).text
+    data = json.loads(html)
+    titles = data['lists']
+    for title in titles:
+        item = dict()
+        print(title['title'])
+        item['title'] = title['title']
+        item['url'] = urllib.parse.urljoin("https://udn.com", title['titleLink'])
+        alldata.append(item)
+    time.sleep(3)
+with open("allnews.json", "w") as fp:
+    json.dump(alldata, fp)
+print("下載完畢！")
+
+
+
+
+
+
+print('----------------------------------------------------------------------')	#70個
+
+
+
+
+
+
+
+
+print('完成')
+
+
+
+
+
 
 
 

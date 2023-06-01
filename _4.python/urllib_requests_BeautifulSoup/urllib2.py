@@ -1,3 +1,10 @@
+# Python 測試 urllib
+
+print('----------------------------------------------------------------------')	#70個
+print('準備工作')
+
+
+import urllib
 import urllib.request   #用來建立請求
 import zipfile
 import csv
@@ -17,6 +24,8 @@ def get_html_data1(url):
     else:
         return resp
 
+print('----------------------------------------------------------------------')	#70個
+print('urllib 測試 1')
 
 '''
 #新北市公共自行車即時資訊
@@ -326,4 +335,5 @@ for plate_number in plate_numbers:
     print(plate_number.text)
 
     
+print('urllib 測試 作業完成')
 
