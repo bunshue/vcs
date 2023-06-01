@@ -51,7 +51,7 @@ def createDF(district):
     #處理第9列以外的第4到10列
     vals = []  
     for i in range(3, 10):
-        if i is not 8:  #排除第9列
+        if i != 8:  #排除第9列
             tdall = trs[i].findAll('td')
             for j in range(len(tdall)):
                 td = tdall[j]    

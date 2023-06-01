@@ -1,8 +1,17 @@
-#解讀本地網頁資料, 都是使用 html.parser 解析器
+# Python 測試 BeautifulSoup
+#解讀 本地 網頁資料, 都是使用 html.parser 解析器
+
+print('----------------------------------------------------------------------')	#70個
+print('準備工作')
 
 import os
+import re
+import requests
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
+
+print('----------------------------------------------------------------------')	#70個
+print('BeautifulSoup 測試 1')
 
 # 讀檔
 filename = 'C:/_git/vcs/_1.data/______test_files1/beautifulsoup_data.html'
@@ -153,10 +162,7 @@ img = soup.find("img")
 print('取得圖片超連結 取得 img src', img["src"])
 print('取得圖片超連結 取得 img src', img.get("src"))
 
-#下載圖片
-import requests
-
-# 另存新檔
+#下載圖片 另存新檔
 filename = img["src"].split('/')[-1]  # 取得圖檔名
 foldername = 'C:/_git/vcs/_1.data/______test_files2/'
 filename2 = os.path.join(foldername, filename)
@@ -212,7 +218,7 @@ print("共下載",n,"張圖片")
 
 
 print('----------------------------------------------------------------------')	#70個
-print('BeautifulSoup 測試 1')
+print('BeautifulSoup 測試 2')
 
 html_data = """
 <div class="content">
@@ -224,9 +230,6 @@ html_data = """
     <img src="http://test.com.tw/p3.png">
 </div>
 """
-
-import re
-from bs4 import BeautifulSoup
 
 soup = BeautifulSoup(html_data, 'html.parser')
 #print(soup.prettify())  #prettify()這個函數可以將DOM tree以比較美觀的方式印出。
@@ -246,8 +249,6 @@ regex = re.compile('.*\.jpg')
 imglist = soup.find_all("img", {"src":regex})
 for img in imglist:
     print(img["src"])
-
-
 
 
 print('BeautifulSoup 測試 作業完成')

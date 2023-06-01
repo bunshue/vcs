@@ -1,4 +1,5 @@
 # Python 測試 BeautifulSoup
+#解讀 遠端 網頁資料, 都是使用 html.parser 解析器
 
 print('----------------------------------------------------------------------')	#70個
 print('準備工作')
@@ -27,6 +28,7 @@ def get_soup_from_url(url):
         print('無法取得網頁資料')
         sys.exit(1)	#立刻退出程式
 
+    html_data.encoding = 'UTF-8' # 或是 unicode 也可, 指定編碼方式
     soup = BeautifulSoup(html_data.text, "html.parser")  # 解析原始碼
     #print(soup.prettify())  #prettify()這個函數可以將DOM tree以比較美觀的方式印出。
     print("取得網頁標題", soup.title)
@@ -67,13 +69,7 @@ print('BeautifulSoup 測試 3')
 
 url = 'http://ehappy.tw/bsdemo1.htm'
 
-html_data = get_html_data1(url)
-if html_data == None:
-    print('無法取得網頁資料')
-    sys.exit(1)	#立刻退出程式
-
-html_data.encoding = 'UTF-8'
-soup = BeautifulSoup(html_data.text, 'html.parser')
+soup = get_soup_from_url(url)
 
 print("取得網頁標題", soup.title)
 print("取得網頁標題", soup.title.text)
@@ -148,19 +144,6 @@ print('找第一個標籤p')
 target = soup.p
 print(target)
 print()
-
-print('----------------------------------------------------------------------')	#70個
-print('BeautifulSoup 測試 8')
-
-#聯合新聞網
-url = 'https://udn.com/news/breaknews/1'
-soup = get_soup_from_url(url)
-
-target = soup.find_all("h2", {"class":"breaking-news"})
-#print(target)
-
-for news in target:
-    print(news.a['title'])
 
 print('----------------------------------------------------------------------')	#70個
 print('BeautifulSoup 測試 9')
@@ -249,7 +232,7 @@ and they lived at the bottom of a well.</p>
 """
 
 from bs4 import BeautifulSoup
-soup = BeautifulSoup(html_doc,'html.parser') 
+soup = BeautifulSoup(html_doc, 'html.parser') 
 
 print(soup.find('b')) # <b>文件標題</b>
 print(soup.find_all('a'))
@@ -325,7 +308,6 @@ for item in data:
     print(item.h1.text)
     print(item['href'])
 '''
-
 '''
 print('----------------------------------------------------------------------')	#70個
 print('BeautifulSoup 測試 16 很久')
@@ -334,10 +316,10 @@ target = 'https://tw.appledaily.com/new/realtime/{}'
 
 titles = list()
 for page in range(1, 11):
-    print(page)
     url = target.format(page)
-    html = requests.get(url).text
-    soup = BeautifulSoup(html, 'html.parser')
+    print(url)
+    html_data = requests.get(url)
+    soup = BeautifulSoup(html_data.text, 'html.parser')
     sel = '#maincontent > div.thoracis > div.abdominis.rlby.clearmen > ul > li.rtddt > a'
     data = soup.select(sel)
     for item in data:
@@ -356,10 +338,10 @@ target = 'https://tw.appledaily.com/new/realtime/{}'
 
 titles = list()
 for page in range(1, 11):
-    print(page)
     url = target.format(page)
-    html = requests.get(url).text
-    soup = BeautifulSoup(html, 'html.parser')
+    print(url)
+    html_data = requests.get(url)
+    soup = BeautifulSoup(html_data.text, 'html.parser')
     sel = '#maincontent > div.thoracis > div.abdominis.rlby.clearmen > ul > li.rtddt > a'
     data = soup.select(sel)
     for item in data:
@@ -372,8 +354,9 @@ for page in range(1, 11):
 for title in titles:
     try:
         url = title['link']
-        html = requests.get(url).text
-        soup = BeautifulSoup(html, 'html.parser')
+        print(url)
+        html_data = requests.get(url)
+        soup = BeautifulSoup(html_data.text, 'html.parser')
         sel = '#article-header > header > div > h2 > span'
         target = soup.select(sel)
         print(target[0].text)
@@ -386,9 +369,184 @@ filename = 'C:/_git/vcs/_1.data/______test_files2/news_' + time.strftime("%Y%m%d
 with open(filename, "w", encoding = 'utf-8') as fp:
     print(filename + " is dumping...")
     json.dump(titles, fp)
-
 '''
 
+print('----------------------------------------------------------------------')	#70個
+print('BeautifulSoup 測試 8 udn news')
 
-print('BeautifulSoup 測試 作業完成')
+#聯合新聞網
+url = 'https://udn.com/news/breaknews/1'
+soup = get_soup_from_url(url)
+
+target = soup.find_all("h2", {"class":"breaking-news"})
+#print(target)
+
+for news in target:
+    print(news.a['title'])
+
+
+print('----------------------------------------------------------------------')	#70個
+print('BeautifulSoup 測試 8 udn news')
+
+
+
+
+
+print('----------------------------------------------------------------------')	#70個
+print('BeautifulSoup 測試 8 udn news')
+
+
+
+
+print('----------------------------------------------------------------------')	#70個
+print('BeautifulSoup 測試 8 udn news')
+
+
+
+
+print('----------------------------------------------------------------------')	#70個
+print('BeautifulSoup 測試 8 udn news')
+
+
+import requests
+
+url = "https://udn.com/api/more?page=2&id=&channelId=1&cate_id=0&type=breaknews&totalRecNo=6561"
+
+data = requests.get(url).text
+print(data)
+
+
+import json
+import urllib.parse
+import requests
+
+url = "https://udn.com/api/more?page=2&id=&channelId=1&cate_id=0&type=breaknews&totalRecNo=6561"
+
+html = requests.get(url).text
+data = json.loads(html)
+titles = data['lists']
+for title in titles:
+    print(title['title'])
+    print(urllib.parse.urljoin("https://udn.com", title['titleLink']))
+
+
+
+import json, time
+import urllib.parse
+import requests
+url_pattern = "https://udn.com/api/more?page={}&id=&channelId=1&cate_id=0&type=breaknews&totalRecNo=6561"
+alldata = list()
+for page in range(1, 11):
+    url = url_pattern.format(page)
+    html = requests.get(url).text
+    data = json.loads(html)
+    titles = data['lists']
+    for title in titles:
+        item = dict()
+        print(title['title'])
+        item['title'] = title['title']
+        item['url'] = urllib.parse.urljoin("https://udn.com", title['titleLink'])
+        alldata.append(item)
+    time.sleep(3)
+with open("allnews.json", "w") as fp:
+    json.dump(alldata, fp)
+print("下載完畢！")
+
+
+
+
+
+
+
+
+import requests
+from bs4 import BeautifulSoup
+
+url = 'https://udn.com/news/breaknews/1'
+
+html_data = requests.get(url)
+soup = BeautifulSoup(html_data.text, 'html.parser')
+
+#print(soup.prettify())  #prettify()這個函數可以將DOM tree以比較美觀的方式印出。
+
+links = soup.find_all(class_='story-list__text')
+
+print(links)
+
+headlines = list()
+
+for link in links:
+    title = link.find('h2')
+    try:
+        print(title.a['title'])
+        print(title.a['href'])
+        item = dict()
+        item['title'] = title.a['title']
+        if not title.a['href'].startswith('http'):
+            item['link'] = "https://udn.com{}".format(title.a['href'])
+        else:
+            item['link'] = title.a['href']
+        headlines.append(item)
+    except:
+        pass
+
+print(headlines)
+
+print('OK')
+
+
+
+
+import requests
+import re
+import urllib
+import os
+import time
+from bs4 import BeautifulSoup
+
+url = 'https://autos.udn.com/autos/story/9060/2187994'
+
+html_data = requests.get(url)
+soup = BeautifulSoup(html_data.text, 'html.parser')
+#print(soup.prettify())  #prettify()這個函數可以將DOM tree以比較美觀的方式印出。
+
+regex = r'http.+jpg'
+links = soup.find_all("a")
+
+print(links)
+
+photos = list()
+
+for link in links:
+    try:
+        if ".jpg" in link['href']:
+            print(link['href'])
+            target = link['href']
+            for item in re.findall(regex, target):
+                photos.append(item)
+    except:
+        pass
+
+for link in photos:
+    item = urllib.parse.urlparse(link)
+    q = urllib.parse.parse_qs(item.query)
+    target = urllib.parse.urlparse(q['u'][0])
+    filename = os.path.basename(target.path)
+    urllib.request.urlretrieve(link, os.path.join("images", filename))
+    print("Storing " + filename)
+    time.sleep(3)
+    
+print("Done...")
+
+
+
+
+
+
+
+
+
+
+
+print('\n\nBeautifulSoup 測試 作業完成\n')
 
