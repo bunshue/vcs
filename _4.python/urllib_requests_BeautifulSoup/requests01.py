@@ -1,3 +1,8 @@
+# Python 測試 requests
+
+print('----------------------------------------------------------------------')	#70個
+print('準備工作')
+
 import requests
 
 #無參數
@@ -11,26 +16,6 @@ def get_html_data1(url):
     else:
         return resp
 
-print('無參數 取得網頁資料 1')
-url = 'https://tw.news.yahoo.com/most-popular/'
-url = 'http://www.itwhy.org'
-url = 'http://tw.yahoo.com'
-html_data = get_html_data1(url)
-if html_data:
-    print(html_data.text)
-else:
-    print('無法取得網頁資料')
-
-print('無參數 取得網頁資料 2')
-import pprint
-url = 'http://tw.yahoo.com'
-html_data = get_html_data1(url)
-if html_data:
-    print('OK')
-    #pprint.pprint(html_data.text)  #OK many
-else:
-    print('無法取得網頁資料')
-
 #有參數
 def get_html_data2(api_url, api_params):
     print('取得網頁資料: ', api_url)
@@ -43,6 +28,37 @@ def get_html_data2(api_url, api_params):
     else:
         return resp
 
+
+print('----------------------------------------------------------------------')	#70個
+print('requests 測試 1')
+
+
+print('無參數 取得網頁資料 1')
+url = 'https://tw.news.yahoo.com/most-popular/'
+url = 'http://www.itwhy.org'
+url = 'http://tw.yahoo.com'
+html_data = get_html_data1(url)
+if html_data:
+    print(html_data.text)
+else:
+    print('無法取得網頁資料')
+
+print('----------------------------------------------------------------------')	#70個
+print('requests 測試 1')
+
+print('無參數 取得網頁資料 2')
+import pprint
+url = 'http://tw.yahoo.com'
+html_data = get_html_data1(url)
+if html_data:
+    print('OK')
+    #pprint.pprint(html_data.text)  #OK many
+else:
+    print('無法取得網頁資料')
+
+print('----------------------------------------------------------------------')	#70個
+print('requests 測試 1')
+
 print('有參數 取得網頁資料 3')
 api_url = 'http://dict.baidu.com/s'
 api_params = {'wd':'python'}
@@ -52,6 +68,9 @@ print('111', html_data.url)
 print('222', html_data.text) #打印解码后的返回数据
 print('333', html_data)
 
+print('----------------------------------------------------------------------')	#70個
+print('requests 測試 1')
+
 print('有參數 取得網頁資料 4')
 import pprint
 api_url = 'https://zh.wikipedia.org/w/api.php'
@@ -59,6 +78,8 @@ api_params = {'format':'json', 'action':'query', 'titles':'椎名林檎', 'prop'
 html_data = get_html_data2(api_url, api_params)
 pprint.pprint(html_data)
 
+print('----------------------------------------------------------------------')	#70個
+print('requests 測試 1')
 
 print('有參數 取得網頁資料 5')
 import codecs
@@ -70,6 +91,8 @@ fo = codecs.open('wiki搜尋結果1.html', 'w', 'utf-8')
 fo.write(html_data.text)
 fo.close()
 
+print('----------------------------------------------------------------------')	#70個
+print('requests 測試 1')
 
 print('有參數 取得網頁資料 6')
 import codecs
@@ -82,6 +105,9 @@ fo = codecs.open('wiki搜尋結果2' + search_word + '.html', 'w', 'utf-8')
 #fo = open('bbbbb'+ search_word + '.html', 'w')
 fo.write(html_data.text)
 fo.close()
+
+print('----------------------------------------------------------------------')	#70個
+print('requests 測試 1')
 
 import requests
 

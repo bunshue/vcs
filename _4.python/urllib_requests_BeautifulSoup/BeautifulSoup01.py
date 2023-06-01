@@ -27,7 +27,7 @@ print("取得全部 a : ", soup.find_all('a'))
 print('有3個, 需要縮小範圍')
 print("取得全部 a class red : ", soup.find_all("a", {"class":"red"}))
 print('有2個, 需要縮小範圍')
-data1=soup.find("a", {"href":"https://easun.org/perl/perl-toc/ch05.html"})
+data1 = soup.find("a", {"href":"https://easun.org/perl/perl-toc/ch05.html"})
 print("取得a 指明 href: ", data1)   #印出整行資料
 print("取得a 指明 href: ", data1.text) #只印出text部分
 
@@ -47,7 +47,7 @@ print('解讀本地網頁資料2')
 print('取得一個 p', soup.find('p'))
 print('取得全部 p', soup.find_all('p'))
 print('取得 p, p2 class red', soup.find('p', {'id':'p2', 'class':'red'}))
-print('取得 p, p2 class red', soup.find('p', id='p2', class_= 'red'))
+print('取得 p, p2 class red', soup.find('p', id = 'p2', class_ = 'red'))
 #用select
 print('select title', soup.select('title'))
 print('select p', soup.select('p'))
@@ -73,7 +73,7 @@ print("取得<h1>??</h1>: ", h1.text)   #只印出text部分
 
 print('尋找符合標籤的第一個節點 find by class')
 # 使用class屬性定位，但因為在Python中已經有class保留字了，所以改用class_
-container = soup.find("div", class_="container")
+container = soup.find("div", class_ = "container")
 print("取得div container: ", container)        #印出整行資料
 print("取得div container: ", container.text)   #只印出text部分
 
@@ -155,10 +155,17 @@ print('取得圖片超連結 取得 img src', img.get("src"))
 
 #下載圖片
 import requests
+
+# 另存新檔
+filename = img["src"].split('/')[-1]  # 取得圖檔名
+foldername = 'C:/_git/vcs/_1.data/______test_files2/'
+filename2 = os.path.join(foldername, filename)
+    
 img = requests.get(img["src"])
-with open('ccccc.png', "wb") as file:
+
+with open(filename2, "wb") as file:
     file.write(img.content)
-print('圖片下載完成!')
+print('圖片下載完成, 檔案 : ' + filename2)
 
 print('下載網頁中的所有圖片')
 
@@ -192,7 +199,7 @@ for img in all_imgs:
             image = urlopen(full_path) #問題在此
             print('aaaaaaaaaaaa')
             '''
-            with open(os.path.join(images_dir,filename),'wb') as f:
+            with open(os.path.join(images_dir, filename),'wb') as f:
                 f.write(image.read())  
             n+=1
             if n>=1000: # 最多下載 1000 張

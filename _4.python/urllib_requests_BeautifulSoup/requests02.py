@@ -1,3 +1,8 @@
+# Python 測試 requests
+
+print('----------------------------------------------------------------------')	#70個
+print('準備工作')
+
 import requests
 import os
 import csv
@@ -19,18 +24,18 @@ for row in htmllist:
 print("找到 {} 次!".format(n))
 
 print('----------------------------------------------------------------------')	#70個
-print('requests 測試 1')
+print('requests 測試 2')
 
 
-print('教育部統計處資料')
+print('教育部統計處資料 很多')
 url = 'http://stats.moe.gov.tw/files/detail/{}/{}_student.csv'
-
+'''
 for year in range(103, 109):
     print(url.format(year, year))
-
+'''
 
 print('----------------------------------------------------------------------')	#70個
-print('requests 測試 1')
+print('requests 測試 3')
 
 print('教育部統計處資料')
 url = 'http://stats.moe.gov.tw/files/detail/111/111_student.csv'
@@ -42,7 +47,7 @@ print(rows[0])
 print(rows[1])
 
 print('----------------------------------------------------------------------')	#70個
-print('requests 測試 1')
+print('requests 測試 4')
 
 print('教育部統計處資料')
 url = 'http://stats.moe.gov.tw/files/detail/108/108_student.csv'
@@ -69,11 +74,12 @@ print("done")
 
 
 print('----------------------------------------------------------------------')	#70個
-print('requests 測試 1')
+print('requests 測試 5')
 
-print('教育部統計處資料')
+print('教育部統計處資料 很多')
 url = 'http://stats.moe.gov.tw/files/detail/{0}/{0}_student.csv'
 
+'''
 for year in range(103, 109):
     csvdata = requests.get(url.format(year)).text
     rows = csvdata.split('\n')
@@ -95,15 +101,12 @@ for year in range(103, 109):
         writer.writerow(columns[1:5])
         writer.writerows(data)
     time.sleep(3)
-
+'''
 print("done")
 
 
-
-
 print('----------------------------------------------------------------------')	#70個
-print('requests 測試 1')
-
+print('requests 測試 6')
 
 import pprint as pp
 import time, requests
@@ -126,7 +129,7 @@ for page in pages:
 
 
 print('----------------------------------------------------------------------')	#70個
-print('requests 測試 1')
+print('requests 測試 7')
 
 import pprint as pp
 import time, requests
@@ -158,7 +161,7 @@ import json
 import csv
 
 print('----------------------------------------------------------------------')	#70個
-print('requests 測試 1')
+print('requests 測試 8')
 
 #行政院農業委員會資料開放平台
 url = 'https://data.coa.gov.tw/Service/OpenData/FromM/FarmTransData.aspx'
@@ -178,6 +181,65 @@ with open(filename, 'w', encoding ='UTF-8', newline = '\n') as fp:
     writer.writerow(('作物名稱','平均價','交易量'))
     for item in data:
         writer.writerow((item['作物名稱'],item['平均價'],item['交易量']))
+
+
+
+
+
+import os
+import sys
+import time
+import json
+import requests
+from bs4 import BeautifulSoup
+from datetime import datetime
+
+def get_html_data1(url):
+    print('取得網頁資料: ', url)
+    resp = requests.get(url)
+    # 檢查 HTTP 回應碼是否為 requests.codes.ok(200)
+    if resp.status_code != requests.codes.ok:
+        print('讀取網頁資料錯誤, url: ', resp.url)
+        return None
+    else:
+        return resp
+
+
+print('----------------------------------------------------------------------')	#70個
+
+print('PC Home 電腦售價')
+url = 'https://ecshweb.pchome.com.tw/search/v3.3/all/results?q=mac%20Mini&page=1&sort=sale/dc'
+
+html_data = get_html_data1(url)
+if html_data == None:
+    print('無法取得網頁資料')
+    sys.exit(1)	#立刻退出程式
+
+products = json.loads(html_data.text)['prods']
+for product in products:
+    if product['price'] > 20000:
+        print("NT$:{}, {}".format(product['price'], product['name']))
+
+print('----------------------------------------------------------------------')	#70個
+
+url = 'https://ecshweb.pchome.com.tw/search/v3.3/all/results?q=mac%20Mini&page=1&sort=sale/dc'
+
+html_data = get_html_data1(url)
+if html_data == None:
+    print('無法取得網頁資料')
+    sys.exit(1)	#立刻退出程式
+
+products = json.loads(html_data.text)['prods']
+message = ""
+for product in products:
+    if product['price'] > 20000:
+        message = message + "NT$:{}, {}\n".format(product['price'], product['name'])
+        
+print("Mac Mini價格通知", message)
+
+
+
+
 
 print('完成')
 
