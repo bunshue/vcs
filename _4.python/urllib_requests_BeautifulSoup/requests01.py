@@ -13,7 +13,6 @@ import pprint
 import requests
 from datetime import datetime
 from urllib import request
-from bs4 import BeautifulSoup
 
 #無參數
 def get_html_data1(url):
@@ -48,34 +47,25 @@ def get_html_data_from_url(url):
     return html_data.text
 
 print('----------------------------------------------------------------------')	#70個
-print('requests 測試 1')
+print('requests 測試 1 無參數 取得網頁資料 只是把網頁抓下來')
 
-print('無參數 取得網頁資料 1')
 url = 'https://tw.news.yahoo.com/most-popular/'
 url = 'http://www.itwhy.org'
+url = 'http://www.ehappy.tw/demo.htm'
 url = 'http://tw.yahoo.com'
+
 html_data = get_html_data1(url)
 if html_data:
-    print(html_data.text)
-else:
-    print('無法取得網頁資料')
-
-print('----------------------------------------------------------------------')	#70個
-print('requests 測試 2')
-
-print('無參數 取得網頁資料 2')
-url = 'http://tw.yahoo.com'
-html_data = get_html_data1(url)
-if html_data:
-    print('OK')
+    print("擷取網頁資料 OK")
+    #print(html_data.text)  #OK many
     #pprint.pprint(html_data.text)  #OK many
 else:
     print('無法取得網頁資料')
 
 print('----------------------------------------------------------------------')	#70個
-print('requests 測試 3')
+print('requests 測試 2 有參數 取得網頁資料 只是把網頁抓下來')
 
-print('有參數 取得網頁資料 3')
+print('有參數 取得網頁資料 a')
 api_url = 'http://dict.baidu.com/s'
 api_params = {'wd':'python'}
 html_data = get_html_data2(api_url, api_params)
@@ -84,19 +74,15 @@ print('111', html_data.url)
 print('222', html_data.text) #打印解码后的返回数据
 print('333', html_data)
 
-print('----------------------------------------------------------------------')	#70個
-print('requests 測試 4')
 
-print('有參數 取得網頁資料 4')
+print('有參數 取得網頁資料 b')
 api_url = 'https://zh.wikipedia.org/w/api.php'
 api_params = {'format':'json', 'action':'query', 'titles':'椎名林檎', 'prop':'revisions', 'rvprop':'content'}
 html_data = get_html_data2(api_url, api_params)
 pprint.pprint(html_data)
 
-print('----------------------------------------------------------------------')	#70個
-print('requests 測試 5')
 
-print('有參數 取得網頁資料 5')
+print('有參數 取得網頁資料 c')
 api_url = 'https://zh.wikipedia.org/w/api.php'
 api_params = {'format':'xmlfm', 'action':'query', 'titles':'椎名林檎', 'prop':'revisions', 'rvprop':'content'}
 html_data = get_html_data2(api_url, api_params)
@@ -105,10 +91,7 @@ fo = codecs.open('wiki搜尋結果1.html', 'w', 'utf-8')
 fo.write(html_data.text)
 fo.close()
 
-print('----------------------------------------------------------------------')	#70個
-print('requests 測試 6')
-
-print('有參數 取得網頁資料 6')
+print('有參數 取得網頁資料 d')
 search_word = 'lion'
 api_url = 'https://zh.wikipedia.org/w/api.php'
 api_params = {'format':'xmlfm', 'action':'query', 'prop':'revisions', 'rvprop':'content'}
@@ -120,15 +103,6 @@ fo.write(html_data.text)
 fo.close()
 
 print('----------------------------------------------------------------------')	#70個
-print('requests 測試 7a')
-
-url = 'http://www.ehappy.tw/demo.htm'
-html_data = get_html_data1(url)
-if html_data:
-    print("擷取網頁資料 OK")
-    print(html_data.text)
-else:
-    print('無法取得網頁資料')
 
 '''
 print('----------------------------------------------------------------------')	#70個
@@ -180,15 +154,6 @@ else:
 '''
 
 print('----------------------------------------------------------------------')	#70個
-print('requests 測試 8')
-
-url = 'http://www.e-happy.com.tw'
-html_data = requests.get(url)
-soup = BeautifulSoup(html_data.text, 'html.parser')
-#print(soup.prettify())
-#pprint.pprint(html_data.text) # many
-
-print('----------------------------------------------------------------------')	#70個
 print('requests 測試 9')
 
 print('將查詢參數加入 GET 請求中')
@@ -209,8 +174,8 @@ print(html_data.url)
 print(html_data.text)
 
 print('----------------------------------------------------------------------')	#70個
-print('requests 測試 10')
-
+print('requests 測試 10 很久 timeout')
+'''
 
 print('將查詢參數加入 GET 請求中')
 
@@ -219,6 +184,7 @@ html_data = requests.post("http://httpbin.org/post", data = payload)
 
 print(html_data.url)
 print(html_data.text)
+'''
 
 print('----------------------------------------------------------------------')	#70個
 print('requests 測試 11')
@@ -446,18 +412,21 @@ url_pattern = "https://udn.com/api/more?page={}&id=&channelId=1&cate_id=0&type=b
 alldata = list()
 for page in range(1, 11):
     url = url_pattern.format(page)
+    print(url)
     html = requests.get(url).text
     data = json.loads(html)
     titles = data['lists']
     for title in titles:
         item = dict()
-        print(title['title'])
+        #print(title['title'])  many
         item['title'] = title['title']
         item['url'] = urllib.parse.urljoin("https://udn.com", title['titleLink'])
         alldata.append(item)
     time.sleep(3)
+''' many
 with open("allnews.json", "w") as fp:
     json.dump(alldata, fp)
+'''
 print("下載完畢！")
 
 
