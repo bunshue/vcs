@@ -55,6 +55,7 @@ plt.show()              #顯示圖片, 兩行都要
 #以影像中心為準，順時針旋轉30度 縮小為 0.5 倍
 
 image = cv2.imread(filename)	#讀取本機圖片
+
 h,w,d = image.shape   #d為dimension d=3 全彩 d=1 灰階  #讀取圖片格式
 
 center = (w//2, h//2)
@@ -110,6 +111,7 @@ def modify_contrast_and_brightness(image, alpha=1.0, beta = 0.0):
     return image
 
 image = cv2.imread(filename)	#讀取本機圖片
+
 modified_image = modify_contrast_and_brightness(image, 1.5, 10.0)
 cv2.imshow('Modified Picture', modified_image) #顯示圖片
 
@@ -122,6 +124,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
+
 plt.hist(image.ravel(), 256, [0,256])
 cv2.imshow('GrayScale Picture', image) #顯示圖片
 plt.show()
@@ -135,6 +138,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
+
 equa = cv2.equalizeHist(image)
 cv2.imshow('Histogram', equa)#顯示圖片
 plt.hist(equa.ravel(), 256, [0,256])
@@ -157,6 +161,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
+
 ret, th1 = cv2.threshold(image, 127, 255, cv2.THRESH_BINARY)
 cv2.imshow('Binary', th1)#顯示圖片
 
@@ -200,7 +205,8 @@ def sobel(image):
     sobel_image = cv2.addWeighted(abs_x, 0.5, abs_y, 0.5, 0)
     return sobel_image
 
-gray_image = cv2.imread(filename)
+gray_image = cv2.imread(filename)	#讀取本機圖片
+
 sobel_image = sobel(gray_image)
 cv2.imshow('Sobel', sobel_image)#顯示圖片
 

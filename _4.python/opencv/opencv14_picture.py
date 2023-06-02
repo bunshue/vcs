@@ -5,14 +5,13 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/lena.jpg'
 import numpy as np
 import cv2
 
-# 讀取圖檔(一般)
 image = cv2.imread(filename)	#讀取本機圖片
 
-# 以灰階的方式讀取圖檔
-image_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+image_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
 
-# 以 cv2.imread 讀進來的資料，會儲存成一個 NumPy 的陣列，我們可以用 type 檢查一下
+#以 cv2.imread 讀進來的資料，會儲存成一個 NumPy 的陣列
 
+'''
 # 查看資料型態
 print(type(image))
 print(type(image_gray))
@@ -30,9 +29,8 @@ cv2.imshow('Picture Viewer', image) #顯示圖片
 
 '''
 # cv2.imwrite 可透過圖片的副檔名來指定輸出的圖檔格式
-# 寫入圖檔
-cv2.imwrite('output.jpg', image)
 # 寫入不同圖檔格式
+cv2.imwrite('output.jpg', image)
 cv2.imwrite('output.png', image)
 cv2.imwrite('output.tiff', image)
 
@@ -59,13 +57,11 @@ import numpy as np
 import cv2
 from matplotlib import pyplot as plt
 
-# 使用 OpenCV 讀取圖檔
-image_bgr = cv2.imread(filename)
+image_bgr = cv2.imread(filename)	#讀取本機圖片
 
 # 將 OpenCV 讀入的 BGR 格式轉為 Matplotlib 用的 RGB 格式，再交給 Matplotlib 顯示
-# 將 BGR 圖片轉為 RGB 圖片
-image_rgb = image_bgr[:,:,::-1]
 
+image_rgb = image_bgr[:,:,::-1]     # 將 BGR 圖片轉為 RGB 圖片
 # 或是這樣亦可
 # image_rgb = cv2.cvtColor(image_bgr, cv2.COLOR_BGR2RGB)
 
@@ -73,11 +69,10 @@ image_rgb = image_bgr[:,:,::-1]
 plt.imshow(image_rgb)
 plt.show()
 
-# 使用 OpenCV 讀取灰階圖檔
-image_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+image_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉為灰階
 
 # 使用 Matplotlib 顯示圖片
 plt.imshow(image_gray, cmap = 'gray')
 plt.show()
-
+'''
 

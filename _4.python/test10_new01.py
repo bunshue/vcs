@@ -18,7 +18,7 @@ print(ccc)
 x = 2
 y = 0.5
 
-print("x**y = "+str(x**y))
+print("x**y = " + str(x ** y))
 
 
 lst = [3, 2, 1, 5, 9, 0]
@@ -124,10 +124,6 @@ for i in ran:
 index.sort()
 '''
 
-
-
-
-
 for i in range(10):
     timeout = random.choice(range(80,180))
     print('timeout', timeout)
@@ -173,33 +169,6 @@ print(cnstr, len(cnstr))
 #utfstr = unicode(cnstr, 'utf-8')
 '''
 
-def plotfigure(X, X_test, y, yp):
-    plt.figure()
-    plt.scatter(X, y, c = 'k', label = 'data')
-    plt.plot(X_test, yp, c = 'r', label = 'max_depth = 5', linewidth = 2)
-    plt.xlabel('data')
-    plt.ylabel('target')
-    plt.title('Decision Tree Regression')
-    plt.legend()
-    plt.show()
-
-import numpy as np
-from numpy import *
-#from sklearn.tree import DecisionTreeRegressor
-
-import matplotlib.pyplot as plt
-
-x = np.linspace(-5, 5, 200)
-siny = np.sin(x)
-
-X = mat(x).T
-y = siny + np.random.rand(1, len(siny))*1.5 #加入雜訊的點集
-y = y.tolist()[0]
-
-plotfigure(X, X_test,y,yp)
-
-
-
 print(__file__)
 print(__file__.upper())
 print(__file__.lower())
@@ -224,6 +193,7 @@ else:
     print('3333')
 '''
 
+import sys
 vi = sys.version_info
 install_group = "Python %d.%d" % (vi[0], vi[1])
 print(install_group)
@@ -509,113 +479,6 @@ print('', file=fp)
 fp.close()
 '''
 
-
-
-
-
-print('字元轉unicode')
-string = '你'
-
-print(ord(string))
-
-print(hex(ord(string)))
-
-
-number1 = 3
-number2 = 5
-
-try:
-    result = number1 / number2
-    print("Result is " + str(result))
-except ZeroDivisionError:
-    print("Division by zero!")
-except SyntaxError:
-    print("A comma may be missing in the input")
-except:
-    print("Something wrong in the input")
-else:
-    print("No exceptions")
-finally:
-    print("The finally clause is executed")
-
-
-
-print('十進位 轉 十六進位')
-
-# Convert a decimal to a hex as a string 
-def decimalToHex(decimalValue):
-    hex = ""
- 
-    while decimalValue != 0:
-        hexValue = decimalValue % 16 
-        hex = toHexChar(hexValue) + hex
-        decimalValue = decimalValue // 16
-    
-    return hex
-  
-# Convert an integer to a single hex digit in a character 
-def toHexChar(hexValue):
-    if 0 <= hexValue <= 9:
-        return chr(hexValue + ord('0'))
-    else:  # 10 <= hexValue <= 15
-        return chr(hexValue - 10 + ord('A'))
-
-decimalValue = 170
-hexValue = decimalToHex(decimalValue)
-print('decimal : %d\thex : %s' % (decimalValue, hexValue) )
-
-decimalValue = 65535
-hexValue = decimalToHex(decimalValue)
-print('decimal : %d\thex : %s' % (decimalValue, hexValue) )
-
-  
-
-
-import time
-
-ttt = time.time()
-#returns the seconds with millisecond precision since the UNIX epoch.
-print(ttt)
-
-ttt = int(time.time())
-print(ttt)
-
-import os
-user = os.getlogin()
-print(user)
-
-version = __version__ = "4.61.0.166 Unreleased"
-print(version)
-
-font_file = os.path.join(os.path.dirname(__file__), "OpenFlame.ttf")
-print(font_file)
-
-
-
-print(__doc__)
-print(globals())
-
-
-import sys
-
-major, minor, micro, level, serial = sys.version_info
-
-print('version_info')
-print(sys.version_info)
-print(major)
-print(minor)
-print(micro)
-print(level)
-print(serial)
-
-level = 123
-levelnum = 170
-print(" * PY_RELEASE_LEVEL = %r = %s" % (level, hex(levelnum)))
-
-
-
-
-
 import sys
 
 usage = """Usage: %s [-cd] paths...
@@ -629,14 +492,11 @@ import os
 import sys
 
 print(sys.maxsize)
-print(2**32)
-
-
+print(2 ** 32)
 
 import selenium
 
 print(selenium.__version__)
-
 
 import os
 import stat

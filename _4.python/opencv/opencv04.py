@@ -5,8 +5,8 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-#讀取圖片
 image = cv2.imread(filename)	#讀取本機圖片
+
 #實例化8位圖
 emptyImage = np.zeros(image.shape, np.uint8)
 emptyImage2 = image.copy()
@@ -52,6 +52,7 @@ MASK_COLOR = (0.0,0.0,1.0) # In BGR format
 
 #-- Read image -----------------------------------------------------------------------
 image = cv2.imread(filename)	#讀取本機圖片
+
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 cv2.imshow('Gray', gray)
 cv2.waitKey()
@@ -114,6 +115,7 @@ MASK_COLOR = (0.0,0.0,1.0) # In BGR format
 
 #-- Read image -----------------------------------------------------------------------
 image = cv2.imread(filename)	#讀取本機圖片
+
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 #-- Edge detection -------------------------------------------------------------------

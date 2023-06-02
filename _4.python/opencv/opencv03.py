@@ -21,13 +21,9 @@ import matplotlib.pyplot as plt
 
 '''
 
-
-# 讀取圖檔
 image = cv2.imread(filename)	#讀取本機圖片
 
 # 轉為灰階圖片
-# 轉為灰階圖片
-gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 # 計算直方圖每個 bin 的數值
@@ -72,7 +68,6 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-# 讀取圖檔
 image = cv2.imread(filename)	#讀取本機圖片
 
 # 轉為灰階圖片

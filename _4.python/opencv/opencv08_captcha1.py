@@ -2,11 +2,12 @@ import cv2
 
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/_opencv/captcha/captcha01.jpg'
 
-img = cv2.imread(filename1)  #讀圖
-cv2.namedWindow("Image")  
-cv2.imshow("Image", img) #顯示圖形
+image = cv2.imread(filename1)	#讀取本機圖片
 
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)  #轉為灰階
+cv2.namedWindow("Image")  
+cv2.imshow("Image", image) #顯示圖形
+
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  #轉為灰階
 _, inv = cv2.threshold(gray, 150, 255, cv2.THRESH_BINARY_INV)  #轉為反相黑白
 for i in range(len(inv)):  #i為每一列
     for j in range(len(inv[i])):  #j為每一行

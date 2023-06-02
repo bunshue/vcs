@@ -92,7 +92,7 @@ eye_cascade_classifier = cv2.CascadeClassifier(xml_filename2)
 
 #save the image(i) in the same directory
 
-img = cv2.imread(filename)
+img = cv2.imread(filename)	#讀取本機圖片
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 faces = face_cascade_classifier.detectMultiScale(gray, 1.3, 5)
 for (x,y,w,h) in faces:

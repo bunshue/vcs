@@ -8,7 +8,7 @@ plt.gcf().set_size_inches(12, 14)
 #ax=plt.subplot(5,5, i+1)
 #ax.imshow(images[start_id], cmap='binary')  #顯示黑白圖片
 
-image = cv2.imread(filename)
+image = cv2.imread(filename)	#讀取本機圖片
 image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  #灰階
 _, image = cv2.threshold(image, 120, 255, cv2.THRESH_BINARY_INV) #轉為反相黑白
 

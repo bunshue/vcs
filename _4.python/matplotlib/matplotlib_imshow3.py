@@ -19,8 +19,8 @@ files = glob.glob(foldername+'*.jpg')  #建立測試資料
 test_feature=[]
 test_label=[]
 for file in files:
-    img=cv2.imread(file)
-    img=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)  #灰階    
+    img = cv2.imread(file)	#讀取本機圖片
+    img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)  #灰階    
     _, img = cv2.threshold(img, 120, 255, cv2.THRESH_BINARY_INV) #轉為反相黑白 
     test_feature.append(img)
     label=file[54:55]  #"imagedata\1.jpg"第10個字元1為label

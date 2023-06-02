@@ -3,6 +3,7 @@
 print('----------------------------------------------------------------------')	#70個
 print('準備工作')
 
+import re
 import os
 import sys
 import csv
@@ -323,28 +324,6 @@ for pg_no, page in enumerate(pages, 1):
     print("=========================")
 
 print('----------------------------------------------------------------------')	#70個
-print('requests 測試 18')
-
-#行政院農業委員會資料開放平台
-url = 'https://data.coa.gov.tw/Service/OpenData/FromM/FarmTransData.aspx'
-
-with request.urlopen(url) as res:
-    data = json.loads(res.read().decode())
-
-print(data)
-print()
-print(data[0])
-
-filename = 'C:/_git/vcs/_1.data/______test_files2/products.csv'
-print('將資料寫出到csv檔, 檔案 : ', filename)
-
-with open(filename, 'w', encoding = 'big5', newline = '\n') as fp:
-    writer = csv.writer(fp)
-    writer.writerow(('作物名稱','平均價','交易量'))
-    for item in data:
-        writer.writerow((item['作物名稱'],item['平均價'],item['交易量']))
-
-print('----------------------------------------------------------------------')	#70個
 print('requests 測試 19')
 
 print('PC Home 電腦售價')
@@ -373,7 +352,35 @@ for product in products:
 print("Mac Mini價格通知", message)
 
 print('----------------------------------------------------------------------')	#70個
-print('requests 測試 21')
+print('requests 測試 21 中油油價')
+
+url = "https://www.cpc.com.tw/historyprice.aspx?n=2890"
+html_data = requests.get(url)
+
+m = re.search("var pieSeries = (.*);", html_data.text)
+jsonstr = m.group(0).strip('var pieSeries = ').strip(";")
+j = json.loads(jsonstr)
+#print(j)
+cnt = 1
+for item in reversed(j):    #反向排序, 利用 reversed 反轉了排序(原內容由舊到新, 利用這個改為由新到舊)
+    new_line = 0
+    for data in item['data']:
+        if(data['name'] == '超級/高級柴油'):
+            new_line = 0
+            continue
+        else:
+            new_line = 1
+        print("date:" + item['name'])   #第一層的 name 為日期
+        print(data['name'] + ":" + str(data['y']))  #後面再接一層 array data 其中的 name 為產品名, 而 y 為單價
+    if (new_line == 1):
+        print("================")
+
+    cnt += 1
+    if cnt == 10:
+        break
+
+print('----------------------------------------------------------------------')	#70個
+print('requests 測試 22')
 
 import requests
 

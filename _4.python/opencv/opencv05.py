@@ -5,6 +5,7 @@ import cv2
 
 '''
 cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
+
 image = cv2.imread(filename, 1)	  #讀取本機圖片, 0: 黑白圖片 1: 原色圖片
 cv2.imshow(window_name, image)
 
@@ -20,7 +21,9 @@ cv2.destroyAllWindows() #銷毀建立的物件
 '''
 print('使用matplotlib顯示圖片')
 import matplotlib.pyplot as plt
+
 image = cv2.imread(filename, 1)	  #讀取本機圖片, 0: 黑白圖片 1: 原色圖片
+
 plt.imshow(image, cmap = 'gray', interpolation = 'bicubic')
 plt.xticks([])  #隱藏x座標
 plt.yticks([])  #隱藏y座標

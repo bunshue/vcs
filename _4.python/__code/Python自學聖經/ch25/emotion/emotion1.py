@@ -16,12 +16,13 @@ try:
     for i in range(len(emotion)):
         print('%-10s %-10s' % (emotion[i]['label'],emotion[i]['confidence']))
     
-    img = cv2.imread('../media/facedetect2.jpg')  #讀取本機圖片
+    filename = '../media/facedetect2.jpg'
+    image = cv2.imread(filename)	#讀取本機圖片
     rect = algo.pipe(input).result['results'][0]['bbox']  #取得臉部坐標
-    cv2.rectangle(img, (rect['left'],rect['top']), (rect['right'],rect['bottom']), (0,0,255), 2)  #畫出框線
+    cv2.rectangle(image, (rect['left'],rect['top']), (rect['right'],rect['bottom']), (0,0,255), 2)  #畫出框線
     
     cv2.namedWindow("win")
-    cv2.imshow("win", img)  #顯示圖片
+    cv2.imshow("win", image)  #顯示圖片
     cv2.waitKey(0)  
     cv2.destroyWindow("win")
 except:

@@ -19,10 +19,10 @@ plt.imshow(image)	#顯示圖片, 兩行都要
 plt.show()              #顯示圖片, 兩行都要
 '''
 
-
 import matplotlib.pyplot as plt
 import cv2
-image = cv2.imread(filename)
+
+image = cv2.imread(filename)	#讀取本機圖片
 
 #plt.imshow(image)#直接顯示 影像錯誤 因為opencv的imread讀出來是BGR排列
 plt.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))#先轉換成RGB再顯示

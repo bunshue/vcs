@@ -412,6 +412,19 @@ print("Time for list is", elapsedTime, "seconds")
 
 
 
+  
+
+
+import time
+
+ttt = time.time()
+#returns the seconds with millisecond precision since the UNIX epoch.
+print(ttt)
+
+ttt = int(time.time())
+print(ttt)
+
+
 
 
 

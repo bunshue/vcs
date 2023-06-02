@@ -17,7 +17,7 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 import cv2
 from matplotlib import pyplot as plt
 '''
-img_bgr = cv2.imread(filename)  # 使用 OpenCV 讀取圖檔
+img_bgr = cv2.imread(filename)	#讀取本機圖片
 img_rgb = img_bgr[:,:,::-1]     # 將 BGR 圖片轉為 RGB 圖片
 
 # 或是這樣亦可
