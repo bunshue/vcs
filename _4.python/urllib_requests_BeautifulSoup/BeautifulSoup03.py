@@ -36,6 +36,7 @@ def get_soup_from_url(url):
     soup = BeautifulSoup(html_data.text, "html.parser")  # 解析原始碼
     #soup = BeautifulSoup(html_data.text, "lxml") # 指定 lxml 作為解析器
     #print(soup.prettify())  #prettify()這個函數可以將DOM tree以比較美觀的方式印出。
+    #pprint.pprint(html_data.text)
     print("取得網頁標題", soup.title)
     return soup
     

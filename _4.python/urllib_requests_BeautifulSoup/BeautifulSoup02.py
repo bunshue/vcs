@@ -7,6 +7,7 @@ print('準備工作')
 import re
 import os
 import sys
+import csv
 import time
 import json
 import urllib

@@ -12,7 +12,6 @@ import codecs
 import pprint
 import requests
 from datetime import datetime
-from urllib import request
 
 #無參數
 def get_html_data1(url):
@@ -385,51 +384,8 @@ data = requests.get(url).text
 print(data)
 '''
 
-import json
-import urllib.parse
-import requests
-
-url = "https://udn.com/api/more?page=2&id=&channelId=1&cate_id=0&type=breaknews&totalRecNo=6561"
-
-''' many
-html = requests.get(url).text
-data = json.loads(html)
-titles = data['lists']
-for title in titles:
-    print(title['title'])
-    print(urllib.parse.urljoin("https://udn.com", title['titleLink']))
-'''
-
-
 print('----------------------------------------------------------------------')	#70個
 print('requests 測試 22')
-
-
-import json, time
-import urllib.parse
-import requests
-url_pattern = "https://udn.com/api/more?page={}&id=&channelId=1&cate_id=0&type=breaknews&totalRecNo=6561"
-alldata = list()
-for page in range(1, 11):
-    url = url_pattern.format(page)
-    print(url)
-    html = requests.get(url).text
-    data = json.loads(html)
-    titles = data['lists']
-    for title in titles:
-        item = dict()
-        #print(title['title'])  many
-        item['title'] = title['title']
-        item['url'] = urllib.parse.urljoin("https://udn.com", title['titleLink'])
-        alldata.append(item)
-    time.sleep(3)
-''' many
-with open("allnews.json", "w") as fp:
-    json.dump(alldata, fp)
-'''
-print("下載完畢！")
-
-
 
 
 

@@ -3,9 +3,15 @@
 print('----------------------------------------------------------------------')	#70個
 print('準備工作')
 
-
+import csv
+import sys
 import urllib
 import urllib.request   #用來建立請求
+
+def get_html_data_by_urlopen(url):
+    print('取得網頁資料: ', url)
+    resp = urllib.request.urlopen(url)
+    return resp.read()
 
 print('----------------------------------------------------------------------')	#70個
 print('urllib 測試 1')
@@ -13,8 +19,8 @@ print('urllib 測試 1')
 print('讀取遠端html檔或純文字檔')
 url = 'http://pythonscraping.com/pages/page1.html'
 #url = 'http://www.pythonscraping.com/pages/warandpeace/chapter1.txt'
-html = urllib.request.urlopen(url)
-html_data = html.read()
+html_data = get_html_data_by_urlopen(url)
+
 print(html_data)
 print('OK')
 
@@ -28,8 +34,8 @@ print('讀取遠端純文字檔2')
 
 print('讀取遠端html檔1')
 url = 'http://ind.ntou.edu.tw/~dada/cgi/Perlsynx.htm'
-html = urllib.request.urlopen(url)
-html_data = html.read()
+
+html_data = get_html_data_by_urlopen(url)
 html_data = html_data.decode('Big5')      #將bytes轉成str
 print(html_data)
 print('OK')
@@ -53,8 +59,7 @@ url_values = urllib.parse.urlencode(data)
 url = 'http://www.baidu.com/s?'
 url = url + url_values
  
-html = urllib.request.urlopen(url)
-html_data = html.read()
+html_data = get_html_data_by_urlopen(url)
 
 #html_data = html_data.decode('UTF-8')
 print(html_data)
@@ -79,8 +84,8 @@ print('urllib 測試 5')
 print('抓取網頁資料 1')
 url = 'http://pythonscraping.com/pages/page1.html'
 
-html = urllib.request.urlopen(url)
-html_data = html.read()
+html_data = get_html_data_by_urlopen(url)
+
 print(html_data, 'utf-8')
 print('OK')
 
@@ -96,8 +101,7 @@ print('抓取網頁資料 2')
 #http://ind.ntou.edu.tw/~dada/cgi/Perlsynx.htm
 url = "http://www.baidu.com"
 
-html = urllib.request.urlopen(url)
-html_data = html.read()
+html_data = get_html_data_by_urlopen(url)
 
 print(html_data)
 
@@ -119,9 +123,8 @@ data['word']='Jecvay Notes'
 url_values=urllib.parse.urlencode(data)
 url="http://www.baidu.com/s?"
 url = url + url_values
- 
-html = urllib.request.urlopen(url)
-html_data = html.read()
+
+html_data = get_html_data_by_urlopen(url)
 html_data = html_data.decode('UTF-8')
 print(html_data)
 print('OK')
@@ -157,25 +160,25 @@ print('----------------------------------------------------------------------')	
 print('urllib 測試 10')
 
 url = "http://ind.ntou.edu.tw/~dada/cgi/Perlsynx.htm"
-a = urllib.request.urlopen(url)
+resp = urllib.request.urlopen(url)
 
 print("type : ")
-print(type(a))
+print(type(resp))
 print("info : ")
-print(a.info())
+print(resp.info())
 
 print("geturl : ")
-print(a.geturl())
+print(resp.geturl())
 print("getcode : ")
-print(a.getcode())
+print(resp.getcode())
 print("getheaders : ")
-print(a.getheaders())
+print(resp.getheaders())
 print("length : ")
-print(a.length)
+print(resp.length)
 print("version : ")
-print(a.version)
+print(resp.version)
 
-data = a.read()
+data = resp.read()
 #data = data.decode('UTF-8')
 #print(data)
 print('資料寫出到本地檔案')
@@ -208,13 +211,155 @@ from bs4 import BeautifulSoup
 
 context = ssl._create_unverified_context()
 url = 'https://movies.yahoo.com.tw/chart.html'
-html_data = urllib.request.urlopen(url).read()
+html_data = get_html_data_by_urlopen(url)
 html_data = html_data.decode('utf-8')
 print(html_data)
 soup = BeautifulSoup(html_data, 'html.parser')
 print(soup.prettify())
 
+print('----------------------------------------------------------------------')	#70個
+print('urllib 測試 12')
+
+'''
+#新北市公共自行車即時資訊
+
+print('讀取遠端zip檔')
+
+# 公開資料檔案
+url ='https://data.ntpc.gov.tw/api/datasets/71CD1490-A2DF-4198-BEF1-318479775E8A/csv/zip'
+filename = 'ntpc_bicycle.zip'   #壓縮檔案名稱
+file_dir = './'     #解壓縮目錄
+
+urllib.request.urlretrieve(url, filename) #下載壓縮檔
+f = zipfile.ZipFile(filename) #開啟壓縮檔
+for fileName in f.namelist(): #壓縮檔案列表檔名
+    f.extract(fileName, file_dir) #擷取壓縮檔案
+    print(fileName) #印出解壓縮檔案名稱
+f.close() #關檔
+
+f = open(fileName, 'r',encoding = 'utf8') #開啟CSV檔案，，唯讀utf-8解碼
+plots = csv.reader(f, delimiter=',') #讀取CSV檔案間隔逗號，設定給plots串列物件
+for row in plots: #印出UBIKE資料
+    print('%5s' %row[0], '%15s' %row[1], '%5s' %row[3], '%5s' %row[12])
+f.close()
+
+print('作業完成')
+'''
+
+'''
+row[0]	sno：站點代號
+row[1]	sna：場站名稱(中文)
+row[2]	tot：場站總停車格
+row[3]	sbi：場站目前車輛數量
+row[4]	sarea：場站區域(中文)
+row[5]	mday：資料更新時間
+row[6]	lat：緯度
+row[7]	lng：經度
+row[8]	ar：地址(中文)
+row[9]	sareaen：場站區域(英文)
+row[10]	snaen：場站名稱(英文)
+row[11]	aren：地址(英文)
+row[12]	bemp：空位數量
+row[13]	act：全站禁用狀態
+'''
+
+print('----------------------------------------------------------------------')	#70個
+print('urllib 測試 13')
+
+
+#全國環境輻射偵測即時資訊
+
+print('讀取遠端zip檔')
+
+# 公開資料檔案
+url ='https://www.aec.gov.tw/dataopen/index.php?id=2'
+filename = 'data.csv'   #壓縮檔案名稱
+
+urllib.request.urlretrieve(url, filename) #下載csv檔
+
+with open(filename, 'r', encoding = 'big5') as csvfile:
+    plots = csv.reader(csvfile, delimiter=',')
+    for row in plots:
+        print(row[0]+" "+row[2]+" "+row[3])
+
+'''
+row[0]	監測站
+row[1]	監測站(英文)
+row[2]	監測值(微西弗/時)
+row[3]	時間
+row[4]	GPS經度
+row[5]	GPS緯度
+'''
+
+print('----------------------------------------------------------------------')	#70個
+print('urllib 測試 14')
+
+print('讀取遠端圖檔')
+
+url ='https://upload.wikimedia.org/wikipedia/commons/4/4c/SMS_Bussard_Sydney_1890s_Flickr_3229538689_b69ae42426_o.jpg'
+
+filename = url.split('/')[-1] #圖片檔名
+
+urllib.request.urlretrieve(url, filename) #下載圖檔
+
+
+print('----------------------------------------------------------------------')	#70個
+print('urllib 測試 15')
+
+
+import json
+import urllib.parse
+import requests
+
+url = "https://udn.com/api/more?page=2&id=&channelId=1&cate_id=0&type=breaknews&totalRecNo=6561"
+
+''' many
+html = requests.get(url).text
+data = json.loads(html)
+titles = data['lists']
+for title in titles:
+    print(title['title'])
+    print(urllib.parse.urljoin("https://udn.com", title['titleLink']))
+'''
+
+
+print('----------------------------------------------------------------------')	#70個
+print('urllib 測試 16')
+
+
+import json, time
+import urllib.parse
+import requests
+
+url_pattern = "https://udn.com/api/more?page={}&id=&channelId=1&cate_id=0&type=breaknews&totalRecNo=6561"
+alldata = list()
+for page in range(1, 11):
+    url = url_pattern.format(page)
+    print(url)
+    html = requests.get(url).text
+    data = json.loads(html)
+    titles = data['lists']
+    for title in titles:
+        item = dict()
+        #print(title['title'])  many
+        item['title'] = title['title']
+        item['url'] = urllib.parse.urljoin("https://udn.com", title['titleLink'])
+        alldata.append(item)
+    time.sleep(3)
+''' many
+with open("allnews.json", "w") as fp:
+    json.dump(alldata, fp)
+'''
+print("下載完畢！")
+
+
+
+print('----------------------------------------------------------------------')	#70個
+print('urllib 測試 17')
+
 
 
 print('urllib 測試 作業完成')
+
+
 
