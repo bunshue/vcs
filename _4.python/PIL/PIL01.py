@@ -6,8 +6,7 @@ from PIL import Image, ImageFilter
 filename1 = 'C:/_git/vcs/_1.data/______test_files1/orient2_RightTop.jpg'
 filename2 = 'C:/_git/vcs/_1.data/______test_files2/orient2_RightTopffff.jpg'
 
-#讀取圖形
-image = Image.open(filename1)    #讀取的是RGB格式的圖片
+image = Image.open(filename1)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
 #image.show()  #顯示圖片
 
 #對圖形套用過濾器

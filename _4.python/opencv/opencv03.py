@@ -23,12 +23,12 @@ import matplotlib.pyplot as plt
 
 
 # 讀取圖檔
-img = cv2.imread(filename)
+image = cv2.imread(filename)	#讀取本機圖片
 
 # 轉為灰階圖片
 # 轉為灰階圖片
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 # 計算直方圖每個 bin 的數值
 hist = cv2.calcHist([gray], [0], None, [256], [0, 256])
@@ -54,12 +54,12 @@ import cv2
 import numpy as np
 import matplotlib.pyplot as plt
 
-img = cv2.imread(filename)
+image = cv2.imread(filename)	#讀取本機圖片
 
 # 畫出 RGB 三種顏色的分佈圖
 color = ('b','g','r')
 for i, col in enumerate(color):
-  histr = cv2.calcHist([img],[i],None,[256],[0, 256])
+  histr = cv2.calcHist([image],[i],None,[256],[0, 256])
   plt.plot(histr, color = col)
   plt.xlim([0, 256])
 plt.show()
@@ -73,10 +73,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 # 讀取圖檔
-img = cv2.imread(filename)
+image = cv2.imread(filename)	#讀取本機圖片
 
 # 轉為灰階圖片
-gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
 # 建立圖形遮罩
 mask = np.zeros(gray.shape, np.uint8)
@@ -95,10 +95,10 @@ mask[y_st:y_st+h, x_st:x_st+w] = 255    #先h 後 w
 masked_gray = cv2.bitwise_and(gray, gray, mask = mask)
 
 # 以原圖計算直方圖
-hist_full = cv2.calcHist([img], [0], None, [256], [0, 256])
+hist_full = cv2.calcHist([image], [0], None, [256], [0, 256])
 
 # 以套用遮罩後的圖計算直方圖
-hist_mask = cv2.calcHist([img], [0], mask, [256], [0, 256])
+hist_mask = cv2.calcHist([image], [0], mask, [256], [0, 256])
 
 # 繪製結果
 plt.subplot(221), plt.imshow(gray, 'gray')

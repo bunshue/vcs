@@ -1,4 +1,5 @@
-filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/lena.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+#filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/lena.jpg'
 #filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
 
 #import numpy as np
@@ -12,9 +13,9 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/lena.jpg'
 import cv2	#導入 OpenCV 模組
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/lena.jpg'
-img = cv2.imread(filename)	# 讀取本機圖片
+image = cv2.imread(filename)	#讀取本機圖片
 
-#這裡用 OpenCV 讀取進來的圖片 img 其實就是 NumPy 的陣列，如果想要對圖片進行裁切，就用索引的方式，將指定的區域取出即可：
+#這裡用 OpenCV 讀取進來的圖片 image 其實就是 NumPy 的陣列，如果想要對圖片進行裁切，就用索引的方式，將指定的區域取出即可：
 
 # 裁切區域的 x 與 y 座標（左上角）
 x = 100
@@ -25,23 +26,21 @@ w = 250
 h = 150
 
 # 裁切圖片
-crop_img = img[y:y+h, x:x+w]
+crop_image = image[y:y+h, x:x+w]
 
 #接著使用 OpenCV 的 imshow 顯示裁切的結果：
 
 # 顯示圖片
-cv2.imshow("cropped", crop_img)
+cv2.imshow("cropped", crop_image)
 
 # 若要將裁切的圖片儲存下來，可使用 imwrite 函數：
 # 寫入圖檔
-cv2.imwrite('crop.jpg', crop_img)
+cv2.imwrite('crop.jpg', crop_image)
 
 
 cv2.waitKey(0)
 
 '''
-
-
 
 #Python 與 OpenCV 基本讀取、顯示與儲存圖片教學
 #首先引入 NumPy 與 OpenCV 的 Python 模組：
@@ -49,14 +48,12 @@ cv2.waitKey(0)
 import numpy as np
 import cv2
 
-# 讀取圖檔
-img = cv2.imread(filename)
-
-#以 cv2.imread 讀進來的資料，會儲存成一個 NumPy 的陣列，我們可以用 type 檢查一下：
+image = cv2.imread(filename)	#讀取本機圖片
+#以 cv2.imread 讀進來的資料，會儲存成一個 NumPy 的陣列
 
 '''
 # 查看資料型態
-type(img)
+type(image)
 
 <class 'numpy.ndarray'>
 
@@ -64,7 +61,7 @@ type(img)
 
 以這個子來說，我們的原始圖片是一張 1920×1080 的彩色圖片，我們可以檢查一下這個 NumPy 陣列的大小：
 
-img.shape
+image.shape
 
 (1080, 1920, 3)
 
@@ -81,10 +78,10 @@ cv2.IMREAD_UNCHANGED
 '''
 
 # 以灰階的方式讀取圖檔
-img_gray = cv2.imread('image.jpg', cv2.IMREAD_GRAYSCALE)
+image_gray = cv2.imread('image.jpg', cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉為灰階
 
 # 顯示圖片
-cv2.imshow('My Image', img)
+cv2.imshow('My Image', image)
 
 # 按下任意鍵則關閉所有視窗
 cv2.waitKey(0)
@@ -103,7 +100,7 @@ cv2.destroyWindow('My Image')
 # 讓視窗可以自由縮放大小
 cv2.namedWindow('My Image', cv2.WINDOW_NORMAL)
 
-cv2.imshow('My Image', img)
+cv2.imshow('My Image', image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
@@ -121,44 +118,44 @@ OpenCV 顯示圖片視窗
 若要將 NumPy 陣列中儲存的圖片寫入檔案，可以使用 OpenCV 的 cv2.imwrite：
 '''
 # 寫入圖檔
-cv2.imwrite('output.jpg', img)
+cv2.imwrite('output.jpg', image)
 
 #cv2.imwrite 可透過圖片的副檔名來指定輸出的圖檔格式：
 
 # 寫入不同圖檔格式
-cv2.imwrite('output.png', img)
-cv2.imwrite('output.tiff', img)
+cv2.imwrite('output.png', image)
+cv2.imwrite('output.tiff', image)
 
 #輸出圖片檔案時，也可以調整圖片的品質或壓縮率：
 
 # 設定 JPEG 圖片品質為 90（可用值為 0 ~ 100）
-cv2.imwrite('output.jpg', img, [cv2.IMWRITE_JPEG_QUALITY, 90])
+cv2.imwrite('output.jpg', image, [cv2.IMWRITE_JPEG_QUALITY, 90])
 
 # 設定 PNG 壓縮層級為 5（可用值為 0 ~ 9）
-cv2.imwrite('output.png', img, [cv2.IMWRITE_PNG_COMPRESSION, 5])
+cv2.imwrite('output.png', image, [cv2.IMWRITE_PNG_COMPRESSION, 5])
 
 import numpy as np
 import cv2
 from matplotlib import pyplot as plt
 
-img_bgr = cv2.imread(filename)  # 使用 OpenCV 讀取圖檔
-img_rgb = img_bgr[:,:,::-1]     # 將 BGR 圖片轉為 RGB 圖片
+image_bgr = cv2.imread(filename)  #讀取本機圖片
+image_rgb = image_bgr[:,:,::-1]     # 將 BGR 圖片轉為 RGB 圖片
 
 # 或是這樣亦可
-# img_rgb = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2RGB)
+# image_rgb = cv2.cvtColor(image_bgr, cv2.COLOR_BGR2RGB)
 
 # 使用 Matplotlib 顯示圖片
-plt.imshow(img_rgb)
+plt.imshow(image_rgb)
 plt.show()
 
 
 # 如果想要以黑白的方式呈現灰階圖片，可以自己設定 colormap：
 
 # 使用 OpenCV 讀取灰階圖檔
-img_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)
+image_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE) #讀取本機圖片
 
 # 使用 Matplotlib 顯示圖片
-plt.imshow(img_gray, cmap = 'gray')
+plt.imshow(image_gray, cmap = 'gray')
 plt.show()
 
 

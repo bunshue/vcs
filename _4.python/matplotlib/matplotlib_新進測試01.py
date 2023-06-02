@@ -1,20 +1,6 @@
-from collections import Counter
-import matplotlib.pyplot as plt
-import numpy as np
 
 '''
-cyl = [6 ,6 ,4 ,6 ,8 ,6 ,8 ,4 ,4 ,6 ,6 ,8 ,8 ,8 ,8 ,8 ,8 ,4 ,4 ,4 ,4 ,8 ,8 ,8 ,8 ,4 ,4 ,4 ,8 ,6 ,8 ,4]
 
-labels, values = zip(*Counter(cyl).items())
-indexes = np.arange(len(values))
-
-plt.bar(indexes, values, width = 0.5)
-plt.xticks(indexes, labels)
-plt.show()
-'''
-
-
-'''
 #盒鬚圖（Box plot）
 import numpy as np
 import matplotlib.pyplot as plt
@@ -23,6 +9,9 @@ normal_samples = np.random.normal(size = 100000) # 生成 100000 組標準常態
 
 plt.boxplot(normal_samples)
 plt.show()
+
+
+
 
 
 #存圖
@@ -59,8 +48,10 @@ axx.bar(
 )
 
 plt.show()
+'''
 
 
+'''
 
 
 
@@ -109,10 +100,6 @@ plt.tight_layout()
 
 plt.show()
 
-'''
-
-
-'''
 #foldername = 'C:/_git/vcs/_1.data/______test_files1/source_pic'
 foldername = 'C:/_git/vcs/_1.data/______test_files1'
 
@@ -130,8 +117,6 @@ for file in files:
     test_feature.append(img)
 
 print(test_feature)
-'''
-
 
 print('畫多張圖')
 import matplotlib.pyplot as plt
@@ -150,7 +135,7 @@ for i in range(num):
 plt.show()
 
 
-
+'''
 
 
 

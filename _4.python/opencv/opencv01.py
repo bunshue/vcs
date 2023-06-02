@@ -11,22 +11,21 @@ print(major_ver)
 print(minor_ver)
 print(subminor_ver)
 
-
 '''
 import cv2	#導入 OpenCV 模組
 import numpy as np
 import matplotlib.pyplot as plt
 
-img = cv2.imread(filename)	#讀取本機圖片
+image = cv2.imread(filename)	#讀取本機圖片
 
-shape = img.shape
+shape = image.shape
 h = shape[0]    #高
 w = shape[1]    #寬
-h,w,d = img.shape   #d為dimension d=3 全彩 d=1 灰階
+h,w,d = image.shape   #d為dimension d=3 全彩 d=1 灰階
 
 print("寬 = ",w,", 高 = ",h,", D = ",d)
 
-cv2.imshow('Original Picture', img) #顯示圖片
+cv2.imshow('Original Picture', image) #顯示圖片
 
 print('在此等待任意鍵繼續, 繼續後刪除本視窗')
 cv2.waitKey()
@@ -55,17 +54,17 @@ plt.show()              #顯示圖片, 兩行都要
 #影像旋轉
 #以影像中心為準，順時針旋轉30度 縮小為 0.5 倍
 
-img = cv2.imread(filename)	#讀取本機圖片
-h,w,d = img.shape   #d為dimension d=3 全彩 d=1 灰階  #讀取圖片格式
+image = cv2.imread(filename)	#讀取本機圖片
+h,w,d = image.shape   #d為dimension d=3 全彩 d=1 灰階  #讀取圖片格式
 
 center = (w//2, h//2)
 
 #                        旋轉中心 旋轉角度 縮放比例
 P = cv2.getRotationMatrix2D(center, -30, 0.7)
 
-rotate_img = cv2.warpAffine(img, P, (w, h))
+rotate_image = cv2.warpAffine(image, P, (w, h))
 
-cv2.imshow('Rotate CW 30 ratio = 0.7', rotate_img)#顯示圖片
+cv2.imshow('Rotate CW 30 ratio = 0.7', rotate_image)#顯示圖片
 
 print('在此等待任意鍵繼續, 繼續後刪除本視窗')
 cv2.waitKey()
@@ -83,13 +82,13 @@ cv2.destroyAllWindows()
 import cv2	#導入 OpenCV 模組
 import numpy as np
 
-img_original = cv2.imread(filename)	#讀取本機圖片
+image_original = cv2.imread(filename)	#讀取本機圖片
 
 #縮放的倍率 fx fy
-img_resized = cv2.resize(img_original, None, fx=1.50, fy=1.00, interpolation = cv2.INTER_LINEAR)
+image_resized = cv2.resize(image_original, None, fx=1.50, fy=1.00, interpolation = cv2.INTER_LINEAR)
 
-cv2.imshow('Original Picture', img_original) #顯示圖片
-cv2.imshow('Resized Picture', img_resized) #顯示圖片
+cv2.imshow('Original Picture', image_original) #顯示圖片
+cv2.imshow('Resized Picture', image_resized) #顯示圖片
 
 print('在此等待任意鍵繼續, 繼續後刪除本視窗')
 cv2.waitKey()
@@ -102,16 +101,16 @@ import numpy as np
 import matplotlib.image as img
 
 # output_image = alpha * imput_image + beta
-def modify_contrast_and_brightness(img, alpha=1.0, beta = 0.0):
+def modify_contrast_and_brightness(image, alpha=1.0, beta = 0.0):
     array_alpha = np.array([alpha]) #對比度
     array_beta = np.array([beta]) #亮度
-    img = cv2.add(img, array_beta)
-    img = cv2.multiply(img, array_alpha)
-    img = np.clip(img, 0, 255)
-    return img
+    image = cv2.add(image, array_beta)
+    image = cv2.multiply(image, array_alpha)
+    image = np.clip(image, 0, 255)
+    return image
 
-img = cv2.imread(filename)	#讀取本機圖片
-modified_image = modify_contrast_and_brightness(img, 1.5, 10.0)
+image = cv2.imread(filename)	#讀取本機圖片
+modified_image = modify_contrast_and_brightness(image, 1.5, 10.0)
 cv2.imshow('Modified Picture', modified_image) #顯示圖片
 
 
@@ -122,9 +121,9 @@ import cv2	#導入 OpenCV 模組
 import numpy as np
 import matplotlib.pyplot as plt
 
-img = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
-plt.hist(img.ravel(), 256, [0,256])
-cv2.imshow('GrayScale Picture', img) #顯示圖片
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
+plt.hist(image.ravel(), 256, [0,256])
+cv2.imshow('GrayScale Picture', image) #顯示圖片
 plt.show()
 
 
@@ -135,8 +134,8 @@ import cv2	#導入 OpenCV 模組
 import numpy as np
 import matplotlib.pyplot as plt
 
-img = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
-equa = cv2.equalizeHist(img)
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
+equa = cv2.equalizeHist(image)
 cv2.imshow('Histogram', equa)#顯示圖片
 plt.hist(equa.ravel(), 256, [0,256])
 plt.show()
@@ -157,8 +156,8 @@ import cv2	#導入 OpenCV 模組
 import numpy as np
 import matplotlib.pyplot as plt
 
-img = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
-ret, th1 = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
+image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
+ret, th1 = cv2.threshold(image, 127, 255, cv2.THRESH_BINARY)
 cv2.imshow('Binary', th1)#顯示圖片
 
 
@@ -170,10 +169,10 @@ import cv2	#導入 OpenCV 模組
 import numpy as np
 import matplotlib.pyplot as plt
 
-gray_img = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
+gray_image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
 
 #執行高斯模糊化
-blur_gray = cv2.GaussianBlur(gray_img, (3,3), 0)
+blur_gray = cv2.GaussianBlur(gray_image, (3,3), 0)
 threshold_1 = 30#強邊緣strong edge
 threshold_2 = 60#弱邊緣weak edge
 edges = cv2.Canny(blur_gray, threshold_1, threshold_2)
@@ -190,19 +189,19 @@ import matplotlib.pyplot as plt
 
 def sobel(image):
     kernel_size = (3, 3)
-    blur_img = cv2.GaussianBlur(image, kernel_size, 0)
+    blur_image = cv2.GaussianBlur(image, kernel_size, 0)
     #水平方向梯度
-    x =cv2.Sobel(blur_img, cv2.CV_16S, 1, 0, kernel_size)
+    x =cv2.Sobel(blur_image, cv2.CV_16S, 1, 0, kernel_size)
     abs_x = cv2.convertScaleAbs(x)
     #垂直方向梯度
-    y =cv2.Sobel(blur_img, cv2.CV_16S, 0, 1, kernel_size)
+    y =cv2.Sobel(blur_image, cv2.CV_16S, 0, 1, kernel_size)
     abs_y = cv2.convertScaleAbs(y)
     #合併兩個方向的梯度
     sobel_image = cv2.addWeighted(abs_x, 0.5, abs_y, 0.5, 0)
     return sobel_image
 
-gray_img = cv2.imread(filename)
-sobel_image = sobel(gray_img)
+gray_image = cv2.imread(filename)
+sobel_image = sobel(gray_image)
 cv2.imshow('Sobel', sobel_image)#顯示圖片
 
 '''
@@ -212,7 +211,7 @@ cv2.imshow('Sobel', sobel_image)#顯示圖片
 
 
 '''
-cv2.imshow('視窗標題 不支持中文', img) #顯示圖片
+cv2.imshow('視窗標題 不支持中文', image) #顯示圖片
 
 cv2.waitKey(0)  #待user輸入內容
 cv2.destroyAllWindows() #關閉視窗

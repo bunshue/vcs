@@ -4,7 +4,7 @@ from PIL import Image
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/sample.jpg'
 
-image = Image.open(filename)
+image = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
 
 im = image.convert('L')	#轉換成灰階圖像
 

@@ -13,7 +13,7 @@ from PIL import Image
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/sample.jpg'
 
-image = Image.open(filename)    #讀取的是RGB格式的圖片
+image = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
 #image.show()
 
 '''
@@ -96,9 +96,9 @@ image_1.save('image_1.png')
 
 
 '''  ???
-image_file = Image.open(filename)
-r, g, b = image_file.split()
-convert_image = image_file.merge('RGB', (b, g, r))
+image = Image.open(filename)    #PIL讀取本機圖片
+r, g, b = image.split()
+convert_image = image.merge('RGB', (b, g, r))
 convert_image.save('image_bgr.png')
 '''
 

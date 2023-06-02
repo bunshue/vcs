@@ -25,18 +25,18 @@ print('Processing: {}'.format(source_dir))
 #單層
 allfiles = glob.glob(source_dir + '/*.jpg') + glob.glob(source_dir + '/*.png')
 
-logo = Image.open(logo_filename)
+logo = Image.open(logo_filename)    #PIL讀取本機圖片
 logo = logo.resize((150, 150))   #調整圖像大小
 
 for target_image in allfiles:
 	pathname, filename = os.path.split(target_image)
 	print(filename)
-	im = Image.open(target_image)
-	w, h = im.size
-	im = im.resize((800, int(800 / float(w) * h)))
-	im.paste(logo, (0, 0), logo)
-	im.save(target_dir + '/' + filename)
-	im.close()
+	image = Image.open(target_image)    #PIL讀取本機圖片
+	w, h = image.size
+	image = image.resize((800, int(800 / float(w) * h)))
+	image.paste(logo, (0, 0), logo)
+	image.save(target_dir + '/' + filename)
+	image.close()
 
 print("完成")
 print('輸出圖片資料夾 : ', target_dir)
