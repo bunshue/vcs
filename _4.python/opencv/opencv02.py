@@ -2,8 +2,9 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 #filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/lena.jpg'
 #filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
 
-#import numpy as np
-#import matplotlib.pyplot as plt
+import cv2
+import numpy as np
+
 
 '''
 
@@ -41,8 +42,6 @@ cv2.waitKey(0)
 
 '''
 
-import numpy as np
-import cv2
 
 image = cv2.imread(filename)	#讀取本機圖片
 
@@ -56,6 +55,18 @@ print(type(image))
 print(type(image_gray))
 
 <class 'numpy.ndarray'>
+
+#此 NumPy 陣列的前兩個維度分別是圖片的高度與寬度
+#第三個維度則是圖片的 channel（RGB 彩色圖片的 channel 是 3，灰階圖片則為 1）
+
+h ,w, d = image.shape
+print("Image Size: %d x %d, channel = %d" % (w, h, d))
+
+h ,w = image_gray.shape
+#print("Image Size: %d x %d, channel = %d" % (w, h, d))
+
+cv2.imshow('Picture Viewer', image) #顯示圖片
+
 
 此 NumPy 陣列的前兩個維度分別是圖片的高度與寬度，第三個維度則是圖片的 channel（RGB 彩色圖片的 channel 是 3，灰階圖片則為 1）。
 
@@ -87,7 +98,9 @@ cv2.waitKey(0)
 cv2.destroyAllWindows()
 
 '''
-這裡 cv2.waitKey 函數是用來等待與讀取使用者按下的按鍵，而其參數是等待時間（單位為毫秒），若設定為 0 就表示持續等待至使用者按下按鍵為止，這樣當我們按下任意按鍵之後，就會呼叫 cv2.destroyAllWindows 關閉所有 OpenCV 的視窗。
+這裡 cv2.waitKey 函數是用來等待與讀取使用者按下的按鍵，而其參數是等待時間（單位為毫秒），
+若設定為 0 就表示持續等待至使用者按下按鍵為止，
+這樣當我們按下任意按鍵之後，就會呼叫 cv2.destroyAllWindows 關閉所有 OpenCV 的視窗。
 
 如果在程式中有許多的 OpenCV 視窗，而我們只要關閉特定的視窗時，可以改用 cv2.destroyWindow 加上視窗名稱，關閉指定的視窗：
 
@@ -103,6 +116,14 @@ cv2.imshow('My Image', image)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
+
+# 按下任意鍵則關閉所有視窗
+cv2.waitKey(0)  # 0 : 持續等待至使用者按下按鍵為止
+cv2.destroyAllWindows() # 關閉所有 OpenCV 的視窗
+
+# 關閉 'My Image' 視窗
+# cv2.destroyWindow('My Image') 指名關閉某視窗
+
 使用 OpenCV 開啟的圖形視窗會類似這樣：
 
 OpenCV 顯示圖片視窗
@@ -112,7 +133,7 @@ OpenCV 顯示圖片視窗
 
 #寫入圖片檔案
 #若要將 NumPy 陣列中儲存的圖片寫入檔案，可以使用 OpenCV 的 cv2.imwrite：
-#cv2.imwrite 可透過圖片的副檔名來指定輸出的圖檔格式：
+#cv2.imwrite 可透過圖片的副檔名來指定輸出的圖檔格式
 # 寫入不同圖檔格式
 cv2.imwrite('output.jpg', image)
 cv2.imwrite('output.png', image)
@@ -149,6 +170,4 @@ image_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直
 # 使用 Matplotlib 顯示圖片
 plt.imshow(image_gray, cmap = 'gray')
 plt.show()
-
-
 

@@ -49,6 +49,13 @@ mail_subject = '測試郵件標題' #郵件標題
 mail_body = '測試郵件內容測試郵件內容測試郵件內容測試郵件內容'  #郵件內容
 
 ret = send_simple_message(email_addr_from_nicknane, email_addr_from, email_addr_to, mail_subject, mail_body)
+
 print(ret)
+'''
+if ret == '<Response [200]>':
+    print('信件已寄出')
+else:
+    print('寄信失敗')
+'''
                     
 
