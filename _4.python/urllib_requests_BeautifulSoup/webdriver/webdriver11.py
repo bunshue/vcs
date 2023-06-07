@@ -16,14 +16,14 @@ def remove(value, deletechars):
         value = value.replace(c,'')
     return value.rstrip();
 
-def crawler(browser, table):  
+def crawler(driver, table):  
     delay = 5 # seconds
     # selenium Wait 用法，可參考 http://selenium-python.readthedocs.org/en/latest/waits.html
     try:
       # 當 javascript or ajax 執行完畢時，在 <div id="videos-0-items">底下，會出多 class = "video-item"
-      WebDriverWait(browser, delay).until(EC.presence_of_element_located((By.CLASS_NAME, "video-item")))
+      WebDriverWait(driver, delay).until(EC.presence_of_element_located((By.CLASS_NAME, "video-item")))
       # 將資料餵給 BeautifulSoup
-      soup = BeautifulSoup(browser.page_source,'html.parser')  
+      soup = BeautifulSoup(driver.page_source,'html.parser')  
       # 開始分析 抓取資料
       for info in soup.select('.video-item-info') :
           # title
@@ -91,16 +91,17 @@ def main():
         
     count = 0
     print (u'Start parsing... ')
-    
-    browser = webdriver.Firefox()
+
+    # 建立瀏覽器物件
+    driver = webdriver.Firefox()   #使用Firefox
     for link in links:
         count += 1
         # link[0] = URL   link[1] = tag    
-        browser.get(link[0])
-        browser.refresh()
-        crawler(browser, link[1])
+        driver.get(link[0])
+        driver.refresh()
+        crawler(driver, link[1])
         print (u"download: " + str(100 * count / len(links) ) + " %.")
-    browser.quit()
+    driver.quit()   #關閉瀏覽器並且退出驅動程序
     print ('Completed')
     
 if __name__ == "__main__": 

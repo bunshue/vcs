@@ -15,12 +15,17 @@ driver.maximize_window()    #全螢幕顯示
 
 driver.get(url)
 
+print('存圖')
 driver.save_screenshot('screenshot.png')  #存圖
 
 for i in range(0, 10):
-    print(i)	# 0~9
+    print(i, '秒')	# 0~9
     time.sleep(1)
 
+#print('關閉瀏覽器')
+#driver.close()  #關閉瀏覽器
+
+print('關閉瀏覽器並且退出驅動程序')
 driver.quit()   #關閉瀏覽器並且退出驅動程序
 
 '''
