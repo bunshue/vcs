@@ -32,24 +32,6 @@ cv2.waitKey()
 cv2.destroyAllWindows()
 
 
-#裁剪圖片
-
-import matplotlib.pyplot as plt
-import matplotlib.image as img
-
-image = img.imread(filename)
-
-plt.imshow(image)	#顯示圖片, 兩行都要
-plt.show()              #顯示圖片, 兩行都要
-
-x_l, x_r = 150, 350 #保留的部分，由左而右
-y_u, y_d = 150, 400 #保留的部分，由上而下
-cut_img = image[y_u:y_d, x_l:x_r]
-
-plt.imshow(cut_img)	#顯示圖片, 兩行都要
-plt.show()              #顯示圖片, 兩行都要
-
-
 
 #影像旋轉
 #以影像中心為準，順時針旋轉30度 縮小為 0.5 倍
@@ -147,73 +129,6 @@ plt.show()
 #均衡化後的灰度直方圖分布
 
 '''
-
-#直方圖二值化
-# 不同模式的Threshold方法
-# cv2.THRESH_BINARY
-# cv2.THRESH_BINARY_INV
-# cv2.THRESH_TRUNC
-# cv2.THRESH_TOZERO
-# cv2.THRESH_TOZERO_INV
-
-import cv2	#導入 OpenCV 模組
-import numpy as np
-import matplotlib.pyplot as plt
-
-image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
-
-ret, th1 = cv2.threshold(image, 127, 255, cv2.THRESH_BINARY)
-cv2.imshow('Binary', th1)#顯示圖片
-
-
-'''
-
-#影像邊緣檢測Canny()函數
-
-import cv2	#導入 OpenCV 模組
-import numpy as np
-import matplotlib.pyplot as plt
-
-gray_image = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
-
-#執行高斯模糊化
-blur_gray = cv2.GaussianBlur(gray_image, (3,3), 0)
-threshold_1 = 30#強邊緣strong edge
-threshold_2 = 60#弱邊緣weak edge
-edges = cv2.Canny(blur_gray, threshold_1, threshold_2)
-cv2.imshow('Canny', edges)#顯示圖片
-
-
-
-
-#影像邊緣檢測Sobel()函數
-
-import cv2	#導入 OpenCV 模組
-import numpy as np
-import matplotlib.pyplot as plt
-
-def sobel(image):
-    kernel_size = (3, 3)
-    blur_image = cv2.GaussianBlur(image, kernel_size, 0)
-    #水平方向梯度
-    x =cv2.Sobel(blur_image, cv2.CV_16S, 1, 0, kernel_size)
-    abs_x = cv2.convertScaleAbs(x)
-    #垂直方向梯度
-    y =cv2.Sobel(blur_image, cv2.CV_16S, 0, 1, kernel_size)
-    abs_y = cv2.convertScaleAbs(y)
-    #合併兩個方向的梯度
-    sobel_image = cv2.addWeighted(abs_x, 0.5, abs_y, 0.5, 0)
-    return sobel_image
-
-gray_image = cv2.imread(filename)	#讀取本機圖片
-
-sobel_image = sobel(gray_image)
-cv2.imshow('Sobel', sobel_image)#顯示圖片
-
-'''
-
-
-
 
 
 '''

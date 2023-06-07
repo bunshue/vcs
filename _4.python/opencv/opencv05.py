@@ -48,9 +48,6 @@ image2 = cv2.imread(filename1, 0)   #讀取本機圖片, 0: 黑白圖片 1: 原�
 cv2.imshow("ShowImage1", image1) 
 cv2.imshow("ShowImage2", image2)
 
-cv2.imwrite(filename2a, image1)
-cv2.imwrite(filename2b, image2, [int(cv2.IMWRITE_JPEG_QUALITY), 50])
-
 
 cv2.waitKey(0)
 #cv2.waitKey(10000)

@@ -16,7 +16,16 @@ print("螢幕解析度 : " + str(display_width) + "*" + str(display_height))
 
 left = int(display_width / 2 - window_width / 2)
 top = int(display_height / 2 - window_height / 2)
+
 window.geometry(f'{window_width}x{window_height}+{left}+{top}')
+
+'''
+window_width = 200
+window_height = 200
+left = 100
+top = 100
+window.geometry(f'{window_width}x{window_height}+{left}+{top}')
+'''
 
 # window sizes 
 window.minsize(200, 100)

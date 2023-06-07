@@ -28,8 +28,8 @@ button.pack()
 
 # window.bind('<Motion>', get_pos)
 
-entry.bind('<FocusIn>', lambda event: print('entry field was selected'))
-entry.bind('<FocusOut>', lambda event: print('entry field was unselected'))
+entry.bind('<FocusIn>', lambda event: print('Entry FocusIn'))
+entry.bind('<FocusOut>', lambda event: print('Entry FocusOut'))
 
 # exercise : 
 # print 'Mousewheel' when the user holds down shift and uses the mousewheel while text is selected

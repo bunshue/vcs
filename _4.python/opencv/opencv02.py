@@ -6,43 +6,6 @@ import cv2
 import numpy as np
 
 
-'''
-
-#Python 與 OpenCV 裁切圖片教學
-#OpenCV 裁切圖片
-
-import cv2	#導入 OpenCV 模組
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/lena.jpg'
-image = cv2.imread(filename)	#讀取本機圖片
-
-#這裡用 OpenCV 讀取進來的圖片 image 其實就是 NumPy 的陣列，如果想要對圖片進行裁切，就用索引的方式，將指定的區域取出即可：
-
-# 裁切區域的 x 與 y 座標（左上角）
-x = 100
-y = 100
-
-# 裁切區域的長度與寬度
-w = 250
-h = 150
-
-# 裁切圖片
-crop_image = image[y:y+h, x:x+w]
-
-#接著使用 OpenCV 的 imshow 顯示裁切的結果：
-
-# 顯示圖片
-cv2.imshow("cropped", crop_image)
-
-# 若要將裁切的圖片儲存下來，可使用 imwrite 函數：
-# 寫入圖檔
-cv2.imwrite('crop.jpg', crop_image)
-
-cv2.waitKey(0)
-
-'''
-
-
 image = cv2.imread(filename)	#讀取本機圖片
 
 image_gray = cv2.imread(filename, cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 直接轉成灰階
@@ -130,23 +93,6 @@ OpenCV 顯示圖片視窗
 
 灰階的圖片也可以顯示，用法都相同：
 '''
-
-#寫入圖片檔案
-#若要將 NumPy 陣列中儲存的圖片寫入檔案，可以使用 OpenCV 的 cv2.imwrite：
-#cv2.imwrite 可透過圖片的副檔名來指定輸出的圖檔格式
-# 寫入不同圖檔格式
-cv2.imwrite('output.jpg', image)
-cv2.imwrite('output.png', image)
-cv2.imwrite('output.tiff', image)
-
-#輸出圖片檔案時，也可以調整圖片的品質或壓縮率：
-
-# 設定 JPEG 圖片品質為 90（可用值為 0 ~ 100）
-cv2.imwrite('output.jpg', image, [cv2.IMWRITE_JPEG_QUALITY, 90])
-
-# 設定 PNG 壓縮層級為 5（可用值為 0 ~ 9）
-cv2.imwrite('output.png', image, [cv2.IMWRITE_PNG_COMPRESSION, 5])
-print('用matplotlib顯示圖片')
 
 import numpy as np
 import cv2
