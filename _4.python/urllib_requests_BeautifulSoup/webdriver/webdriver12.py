@@ -14,12 +14,18 @@ driver.set_window_size(800, 600)	#設定視窗大小
 
 driver.get(url)  # 開啟範例網址
 
+txt = driver.find_element(By.ID, 'show')            # 取得 id 為 show 的網頁元素 ( TextArea )
 a = driver.find_element(By.ID, 'aaa')               # 取得 id 為 aaa 的網頁元素 ( 按鈕 AAA )
 b = driver.find_element(By.NAME, 'bbb')             # 取得屬性 name 為 bbb 的網頁元素 ( 按鈕 BBB )
 c = driver.find_element(By.CLASS_NAME, 'ccc')       # 取得 class 為 ccc 的網頁元素 ( 按鈕 CCC )
 d = driver.find_element(By.CSS_SELECTOR, '.ddd')    # 取得 class 為 ddd 的網頁元素 ( 按鈕 DDD ), 多一個.
 link1 = driver.find_element(By.LINK_TEXT, '點擊開啟 Google 網站')  # 取得指定超連結文字的網頁元素
 link2 = driver.find_element(By.PARTIAL_LINK_TEXT, 'Google') # 取得超連結文字包含 Google 的網頁元素
+
+print('輸入文字')
+txt.send_keys('在TextArea輸入一些文字');
+print(txt.text)    # 印出 txt 元素的內容
+time.sleep(5)
 
 print('點擊 AAA')
 a.click()        # 點擊 a
@@ -48,6 +54,6 @@ time.sleep(3)
 print('點擊 link2')
 link2.click()    # 點擊 link2
 print(link2.get_attribute('href'))   # 印出 link2 元素的 href 屬性
+time.sleep(3)
 
 print('完成')
-
