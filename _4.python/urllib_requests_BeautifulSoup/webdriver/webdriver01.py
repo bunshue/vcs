@@ -1,10 +1,9 @@
-#把自己偽裝成一個瀏覽器
+#抓中央氣象局資料
 
 import time
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from bs4 import BeautifulSoup
-
-url = 'https://www.google.com.tw/'
 
 # 建立瀏覽器物件
 driver = webdriver.Chrome()    #使用Chrome
@@ -13,47 +12,14 @@ driver.set_window_position(0, 0)	#設定視窗位置
 driver.set_window_size(800, 600)	#設定視窗大小
 driver.maximize_window()    #全螢幕顯示
 
-driver.get(url)
-
-print('存圖')
-driver.save_screenshot('screenshot.png')  #存圖
-
-for i in range(0, 10):
-    print(i, '秒')	# 0~9
-    time.sleep(1)
-
-#print('關閉瀏覽器')
-#driver.close()  #關閉瀏覽器
-
-print('關閉瀏覽器並且退出驅動程序')
-driver.quit()   #關閉瀏覽器並且退出驅動程序
-
-'''
-driver.find_element_by_id('topbar__user__login').click()
-driver.find_element_by_name('username').clear()
-driver.find_element_by_name('username').send_keys('your account')
-driver.find_element_by_name('password').clear()
-driver.find_element_by_name('password').send_keys('your password')
-driver.find_element_by_id('login-send').click()
-'''
-'''
-for i in range(1,9):
-    result = driver.find_element_by_id('btn{}'.format(i)).click()
-    print(result)
-    time.sleep(5)
-driver.quit()   #關閉瀏覽器並且退出驅動程序
-'''
-
-'''
 url = 'https://www.cwb.gov.tw/V8/C/W/OBS_County.html?ID=menu'
 
-driver = webdriver.Chrome('chromedriver.exe')
-driver.implicitly_wait(60)
 driver.get(url)
+time.sleep(1)
 
 html = driver.page_source	#讀取網頁的原始碼
 #print(html)
-driver.quit()   #關閉瀏覽器並且退出驅動程序
+#driver.quit()   #關閉瀏覽器並且退出驅動程序
 
 soup = BeautifulSoup(html, 'html.parser')
 target = soup.select('#County option')
@@ -66,6 +32,21 @@ print(counties)
 for c in counties:
     print(c)
 
+
+print('----------------------------------------------------------------------')	#70個
+print('完成')
+
+'''
+print('準備關閉瀏覽器')
+for i in range(0, 10):
+    print(i, '秒')	# 0~9
+    time.sleep(1)
+
+#print('關閉瀏覽器')
+#driver.close()  #關閉瀏覽器
+
+print('關閉瀏覽器並且退出驅動程序')
+driver.quit()   #關閉瀏覽器並且退出驅動程序
 '''
 
 

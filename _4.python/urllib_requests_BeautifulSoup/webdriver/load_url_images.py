@@ -16,12 +16,13 @@ driver.get(url)  #開啟瀏覽器
 #隱性等待 1 秒
 driver.implicitly_wait(1)
 
-for i in range(1,101):
+#for i in range(1,101):
+for i in range(1,10):
     # 向下捲動，會花費一些時間
     driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
     time.sleep(0.3)
    
-soup=BeautifulSoup(driver.page_source,'html.parser')  
+soup = BeautifulSoup(driver.page_source,'html.parser')  
 title = soup.select('.album-title')[0].text.strip()   # 標題
 all_imgs = soup.find_all('img', {"class": "photo_img photo-img"})
 
@@ -31,10 +32,10 @@ if not os.path.exists(images_dir):
     os.mkdir(images_dir)
     
 # 處理所有 <img> 標籤
-n=0
+n = 0
 for img in all_imgs:
     # 讀取 src 屬性內容
-    src=img.get('src')
+    src = img.get('src')
     # 讀取 .jpg 檔
     if src != None and ('.jpg' in src):
         # 設定圖檔完整路徑
@@ -46,11 +47,27 @@ for img in all_imgs:
             image = urlopen(full_path)
             with open(os.path.join(images_dir,filename),'wb') as f:
                 f.write(image.read())  
-            n+=1
-            if n>=1000: # 最多下載 1000 張
+            n += 1
+            if n >= 10: # 最多下載 1000 張
                 break
         except:
             print("{} 無法讀取!".format(filename))
             
-print("共下載",n,"張圖片")                
+print("共下載", n, "張圖片")
+
+print('----------------------------------------------------------------------')	#70個
+print('完成')
+
+'''
+print('準備關閉瀏覽器')
+for i in range(0, 10):
+    print(i, '秒')	# 0~9
+    time.sleep(1)
+
+#print('關閉瀏覽器')
+#driver.close()  #關閉瀏覽器
+
+print('關閉瀏覽器並且退出驅動程序')
 driver.quit()   #關閉瀏覽器並且退出驅動程序
+'''
+

@@ -1,5 +1,6 @@
 import time
 from selenium import webdriver
+from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 
 url = 'https://data.epa.gov.tw/'
@@ -9,18 +10,59 @@ driver.maximize_window()    #全螢幕顯示
 
 driver.get(url)
 
-driver.find_element_by_id('Keyword').send_keys("aqi" + Keys.RETURN) # 輸入 aqi 後按 Enter
+txt = driver.find_element(By.ID, 'searchbar-input')        # 取得 id 為 xxxx 的網頁元素 ( TextArea )
+txt.send_keys("aqi" + Keys.RETURN) # 輸入 aqi 後按 Enter
+
 time.sleep(1)  # 必須加入等待，否則會有誤動作
 
-driver.find_element_by_link_text("空氣品質指標(AQI)").click()  # 點選 空氣品質指標(AQI) 鈕
+
+'''  TBD
+
+btn = driver.find_element_by_link_text("空氣品質指標(AQI)")
+btn.click()  # 點選 空氣品質指標(AQI) 鈕
 time.sleep(3)  # 必須加入等待，否則會有誤動作
 
-driver.find_element_by_link_text("JSON").click() # 下載 JSON
+btn = driver.find_element_by_link_text("JSON")
+btn.click() # 下載 JSON
 time.sleep(3)  # 必須加入等待，否則會有誤動作
 
-driver.find_element_by_link_text("XML").click() # 下載 XML
+btn = driver.find_element_by_link_text("XML")
+btn.click() # 下載 XML
 time.sleep(3)  # 必須加入等待，否則會有誤動作
 
-driver.find_element_by_link_text("CSV").click() # 下載 CSV
+btn = driver.find_element_by_link_text("CSV")
+btn.click() # 下載 CSV
 
+
+'''
+
+
+'''
 driver.close()  #關閉瀏覽器
+
+'''
+
+
+'''
+<input id="searchbar-input" accesskey="S" type="text" name="text"
+placeholder="請輸入關鍵字搜尋，例如:環境或&quot;縣市(臺北市)小時值-每小時&quot;"
+aria-label="請輸入關鍵字搜尋，例如:環境或&quot;縣市(臺北市)小時值-每小時&quot;"
+value="" class="bpa-input" data-v-5e8e3ca1="">
+'''
+
+
+print('----------------------------------------------------------------------')	#70個
+print('完成')
+
+'''
+print('準備關閉瀏覽器')
+for i in range(0, 10):
+    print(i, '秒')	# 0~9
+    time.sleep(1)
+
+#print('關閉瀏覽器')
+#driver.close()  #關閉瀏覽器
+
+print('關閉瀏覽器並且退出驅動程序')
+driver.quit()   #關閉瀏覽器並且退出驅動程序
+'''

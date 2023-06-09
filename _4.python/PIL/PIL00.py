@@ -11,6 +11,9 @@ import numpy as np
 import torchvision.transforms as transforms
 from PIL import Image
 
+
+print('----------------------------------------------------------------------')	#70個
+
 filename = 'C:/_git/vcs/_1.data/______test_files1/sample.jpg'
 
 image = Image.open(filename)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
@@ -102,6 +105,8 @@ convert_image = image.merge('RGB', (b, g, r))
 convert_image.save('image_bgr.png')
 '''
 
+print('----------------------------------------------------------------------')	#70個
+
 from PIL import Image
 
 print('圖片裁剪縮放')
@@ -120,5 +125,33 @@ image1 = Image.open(filename)   #PIL讀取本機圖片
 image2 = image1.crop((x, y, x + w, y + h))
 image3 = image2.resize((100, 300), Image.ANTIALIAS)
 image3.save(filename2)
+
+print('----------------------------------------------------------------------')	#70個
+
+
+# PIL 測試 1
+
+from PIL import Image
+from PIL import Image, ImageFilter
+
+filename1 = 'C:/_git/vcs/_1.data/______test_files1/bear.jpg'
+filename2 = 'C:/_git/vcs/_1.data/______test_files2/bear_filter.jpg'
+
+image = Image.open(filename1)    #PIL讀取本機圖片, 讀取的是RGB格式的圖片
+#image.show()  #顯示圖片
+
+#對圖形套用過濾器
+im_sharp = image.filter(ImageFilter.SHARPEN)
+
+#儲存過濾過的圖形到新檔案
+im_sharp.save(filename2, 'JPEG')
+print("儲存過濾過的圖形, 檔案 : "+filename2);
+
+#分解圖形顏色 例如RGB的紅綠藍
+#看不出效果
+r,g,b = im_sharp.split()
+
+
+print('----------------------------------------------------------------------')	#70個
 
 print('完成')

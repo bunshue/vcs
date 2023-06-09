@@ -4,11 +4,10 @@ OpenCV 基本使用
 顯示圖片
 
 播放檔案
-
 '''
 import cv2
 
-#-----------------------------------------------------------------------------
+print('----------------------------------------------------------------------')	#70個
 #顯示圖片
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
@@ -20,7 +19,37 @@ cv2.imshow('Picture Viewer', image) #顯示圖片
 print('在此等待任意鍵繼續, 繼續後刪除本視窗')
 cv2.waitKey()
 cv2.destroyAllWindows()
-#-----------------------------------------------------------------------------
+
+print('----------------------------------------------------------------------')	#70個
+#顯示圖片
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/ims01.bmp'
+
+import cv2
+import numpy as np
+
+print('使用 OpenCV 顯示圖片')
+image = cv2.imread(filename)	#讀取本機圖片
+
+#實例化8位圖
+image_empty = np.zeros(image.shape, np.uint8)
+image_copy = image.copy()
+image_gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)    #圖片轉為灰階
+
+#顯示圖片
+#cv2.imshow("image_empty", image_empty) #空圖, 全黑
+#cv2.imshow("image_copy", image_copy)   #原圖拷貝
+#cv2.imshow("image_gray", image_gray)   #原圖黑白
+cv2.imshow("image", image)              #原圖
+
+#cv2.namedWindow("image")
+
+print('在此等待任意鍵繼續, 繼續後刪除本視窗')
+cv2.waitKey()
+cv2.destroyAllWindows()
+print('----------------------------------------------------------------------')	#70個
+
+
 '''
 #播放檔案
 video_filename = 'C:/_git/vcs/_1.data/______test_files1/_video/spiderman.mp4'
@@ -40,7 +69,7 @@ while True:
 vid.release()
 cv2.destroyAllWindows()
 '''
-#-----------------------------------------------------------------------------
+print('----------------------------------------------------------------------')	#70個
 #裁剪圖片
 image = cv2.imread(filename)	#讀取本機圖片
 
@@ -84,8 +113,7 @@ cv2.imwrite(filename2, image[y:y + h, x:x + w])
 print('完成')
 
 
-#-----------------------------------------------------------------------------
-
+print('----------------------------------------------------------------------')	#70個
 '''
 #儲存檔案
 image = cv2.imread(filename)	#讀取本機圖片
@@ -128,9 +156,4 @@ cv2.imwrite(filename2b, image2, [int(cv2.IMWRITE_JPEG_QUALITY), 50])
 '''
 
 
-
-#-----------------------------------------------------------------------------
-
-
-
-
+print('----------------------------------------------------------------------')	#70個

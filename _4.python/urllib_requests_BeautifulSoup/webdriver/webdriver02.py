@@ -7,7 +7,13 @@ from selenium import webdriver
 url = 'https://www.facebook.com/'
 email = '您的 Email 帳號'
 password = '您的密碼'
-driver = webdriver.Chrome()
+
+# 建立瀏覽器物件
+driver = webdriver.Chrome()    #使用Chrome
+#driver = webdriver.Firefox()   #使用Firefox
+driver.set_window_position(0, 0)	#設定視窗位置
+driver.set_window_size(800, 600)	#設定視窗大小
+driver.maximize_window()    #全螢幕顯示
 
 # 取消 Alert 視窗
 #url = 'https://www.facebook.com/'
@@ -15,8 +21,6 @@ driver = webdriver.Chrome()
 #prefs = {"profile.default_content_setting_values.notifications" : 2}
 #chrome_options.add_experimental_option("prefs",prefs)
 #driver = webdriver.Chrome(chrome_options=chrome_options)
-
-driver.maximize_window()    #全螢幕顯示
 
 driver.get(url)
 
@@ -57,4 +61,25 @@ driver.find_element_by_id('pass').clear()
 driver.find_element_by_id('pass').send_keys(password)#輸入密碼
 
 driver.find_element_by_id('loginbutton').click()    # 按登入鈕
+
+
+
+
+print('----------------------------------------------------------------------')	#70個
+print('完成')
+
+'''
+print('準備關閉瀏覽器')
+for i in range(0, 10):
+    print(i, '秒')	# 0~9
+    time.sleep(1)
+
+#print('關閉瀏覽器')
+#driver.close()  #關閉瀏覽器
+
+print('關閉瀏覽器並且退出驅動程序')
+driver.quit()   #關閉瀏覽器並且退出驅動程序
+'''
+
+
 
