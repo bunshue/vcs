@@ -94,6 +94,7 @@ def main():
 
     # 建立瀏覽器物件
     driver = webdriver.Firefox()   #使用Firefox
+    
     for link in links:
         count += 1
         # link[0] = URL   link[1] = tag    
@@ -101,6 +102,7 @@ def main():
         driver.refresh()
         crawler(driver, link[1])
         print (u"download: " + str(100 * count / len(links) ) + " %.")
+        
     driver.quit()   #關閉瀏覽器並且退出驅動程序
     print ('Completed')
     

@@ -56,8 +56,8 @@ image_gray = cv2.imread('image.jpg', cv2.IMREAD_GRAYSCALE)	#讀取本機圖片, 
 # 顯示圖片
 cv2.imshow('My Image', image)
 
-# 按下任意鍵則關閉所有視窗
-cv2.waitKey(0)
+print('在此等待任意鍵繼續, 繼續後刪除本視窗')
+cv2.waitKey()
 cv2.destroyAllWindows()
 
 '''
@@ -76,9 +76,10 @@ cv2.destroyWindow('My Image')
 cv2.namedWindow('My Image', cv2.WINDOW_NORMAL)
 
 cv2.imshow('My Image', image)
-cv2.waitKey(0)
-cv2.destroyAllWindows()
 
+print('在此等待任意鍵繼續, 繼續後刪除本視窗')
+cv2.waitKey()
+cv2.destroyAllWindows()
 
 # 按下任意鍵則關閉所有視窗
 cv2.waitKey(0)  # 0 : 持續等待至使用者按下按鍵為止

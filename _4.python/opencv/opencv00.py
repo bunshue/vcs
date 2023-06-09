@@ -8,11 +8,16 @@ OpenCV 基本使用
 import cv2
 
 print('----------------------------------------------------------------------')	#70個
-#顯示圖片
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
-print('使用 OpenCV 顯示圖片')
+print('顯示圖片')
 image = cv2.imread(filename)	#讀取本機圖片
+
+shape = image.shape
+h = shape[0]    #高
+w = shape[1]    #寬
+h, w, d = image.shape   #d為dimension d=3 全彩 d=1 灰階
+print("寬 = ", w, ", 高 = ", h, ", D = ", d)
 
 cv2.imshow('Picture Viewer', image) #顯示圖片
 

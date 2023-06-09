@@ -13,7 +13,7 @@ driver.set_window_position(0, 0)	#設定視窗位置
 driver.set_window_size(800, 600)	#設定視窗大小
 #driver.maximize_window()    #全螢幕顯示
 
-driver.get(url)  # 開啟範例網址
+driver.get(url)  # 開啟網址
 
 txt = driver.find_element(By.ID, 'show')            # 取得 id 為 show 的網頁元素 ( TextArea )
 a = driver.find_element(By.ID, 'aaa')               # 取得 id 為 aaa 的網頁元素 ( 按鈕 AAA )

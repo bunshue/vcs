@@ -3,7 +3,7 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/_opencv/lena.jpg'
 
 print('取得 OpenCV 版本')
 import cv2
-# Find OpenCV version
+
 (major_ver, minor_ver, subminor_ver) = (cv2.__version__).split('.')
 
 print(cv2.__version__)
@@ -11,34 +11,15 @@ print(major_ver)
 print(minor_ver)
 print(subminor_ver)
 
-'''
-import cv2	#導入 OpenCV 模組
-import numpy as np
-import matplotlib.pyplot as plt
-
-image = cv2.imread(filename)	#讀取本機圖片
-
-shape = image.shape
-h = shape[0]    #高
-w = shape[1]    #寬
-h,w,d = image.shape   #d為dimension d=3 全彩 d=1 灰階
-
-print("寬 = ",w,", 高 = ",h,", D = ",d)
-
-cv2.imshow('Original Picture', image) #顯示圖片
-
-print('在此等待任意鍵繼續, 繼續後刪除本視窗')
-cv2.waitKey()
-cv2.destroyAllWindows()
-
-
+print('----------------------------------------------------------------------')	#70個
+print('旋轉圖片')
 
 #影像旋轉
-#以影像中心為準，順時針旋轉30度 縮小為 0.5 倍
+#以影像中心為準，順時針旋轉30度 縮小為 0.7 倍
 
 image = cv2.imread(filename)	#讀取本機圖片
 
-h,w,d = image.shape   #d為dimension d=3 全彩 d=1 灰階  #讀取圖片格式
+h, w, d = image.shape   #d為dimension d=3 全彩 d=1 灰階  #讀取圖片格式
 
 center = (w//2, h//2)
 
@@ -53,7 +34,7 @@ print('在此等待任意鍵繼續, 繼續後刪除本視窗')
 cv2.waitKey()
 cv2.destroyAllWindows()
 
-
+print('----------------------------------------------------------------------')	#70個
 #影像縮放
 # OpenCV中的五種縮放模式
 # 由快到慢
@@ -62,13 +43,13 @@ cv2.destroyAllWindows()
 # 3  L  INTER_LINEAR
 # 4  A  INTER_AREA
 # 5  L  INTER_LANCZOS4
-import cv2	#導入 OpenCV 模組
+
 import numpy as np
 
 image_original = cv2.imread(filename)	#讀取本機圖片
 
 #縮放的倍率 fx fy
-image_resized = cv2.resize(image_original, None, fx=1.50, fy=1.00, interpolation = cv2.INTER_LINEAR)
+image_resized = cv2.resize(image_original, None, fx = 1.50, fy = 1.00, interpolation = cv2.INTER_LINEAR)
 
 cv2.imshow('Original Picture', image_original) #顯示圖片
 cv2.imshow('Resized Picture', image_resized) #顯示圖片
@@ -77,9 +58,9 @@ print('在此等待任意鍵繼續, 繼續後刪除本視窗')
 cv2.waitKey()
 cv2.destroyAllWindows()
 
+print('----------------------------------------------------------------------')	#70個
 
 #影像對比與亮度調整
-import cv2	#導入 OpenCV 模組
 import numpy as np
 import matplotlib.image as img
 
@@ -97,11 +78,16 @@ image = cv2.imread(filename)	#讀取本機圖片
 modified_image = modify_contrast_and_brightness(image, 1.5, 10.0)
 cv2.imshow('Modified Picture', modified_image) #顯示圖片
 
+print('在此等待任意鍵繼續, 繼續後刪除本視窗')
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print('----------------------------------------------------------------------')	#70個
+
 
 #影像分析工具
 #影像直方圖
 
-import cv2	#導入 OpenCV 模組
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -112,10 +98,15 @@ cv2.imshow('GrayScale Picture', image) #顯示圖片
 plt.show()
 
 
+print('在此等待任意鍵繼續, 繼續後刪除本視窗')
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print('----------------------------------------------------------------------')	#70個
+
 #直方圖影像操作
 #直方圖均值化
 
-import cv2	#導入 OpenCV 模組
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -128,7 +119,11 @@ plt.show()
 #均值化的影像
 #均衡化後的灰度直方圖分布
 
-'''
+print('在此等待任意鍵繼續, 繼續後刪除本視窗')
+cv2.waitKey()
+cv2.destroyAllWindows()
+
+print('----------------------------------------------------------------------')	#70個
 
 
 '''
