@@ -652,7 +652,7 @@ def main():
     canvas_elem = window['canvas']
     canvas = canvas_elem.TKCanvas
 
-    fig = plt.figure(figsize=(3.1, 2.25), tight_layout={'pad':0})
+    fig = plt.figure(figsize = (3.1, 2.25), tight_layout = {'pad':0})	#圖像大小[英吋]
     g_my_globals.axis_ping = fig.add_subplot(1,1,1)
     plt.rcParams['xtick.labelsize'] = 8
     plt.rcParams['ytick.labelsize'] = 8

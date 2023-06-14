@@ -248,7 +248,7 @@ def PyplotLineStyles():
          ('dashdotdotted', (0, (3, 5, 1, 5, 1, 5))),
          ('densely dashdotdotted', (0, (3, 1, 1, 1, 1, 1)))])
 
-    plt.figure(figsize=(10, 6))
+    plt.figure(figsize = (10, 6))	#圖像大小[英吋]
     ax = plt.subplot(1, 1, 1)
 
     X, Y = np.linspace(0, 100, 10), np.zeros(10)

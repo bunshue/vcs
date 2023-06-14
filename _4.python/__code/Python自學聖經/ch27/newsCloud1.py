@@ -24,7 +24,7 @@ wordcloud = WordCloud(font_path=font)
 wordcloud.generate_from_frequencies(frequencies=diction)  #產生文字雲
 
 #產生圖片
-plt.figure(figsize=(6,6))
+plt.figure(figsize = (6, 6))	#圖像大小[英吋]
 plt.imshow(wordcloud)
 plt.axis("off")
 plt.show()

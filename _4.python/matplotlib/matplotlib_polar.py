@@ -5,7 +5,7 @@ from pylab import *
 
 rc('grid', color='#aaaaaa', linewidth = 1, linestyle = '-')
 
-figure(figsize = (6, 6))
+figure(figsize = (6, 6))	#圖像大小[英吋]
 ax = axes([0.1, 0.1, 0.8, 0.8], polar = True)
 
 t = arange(-4 * pi, 4 * pi, .1)

@@ -32,7 +32,7 @@ x = np.linspace(0, 6.28, 10)
 y = np.sin(x * 2)
 y2 = np.sin(x * 2) * np.sin(x * 2) *10
 
-fig = plt.figure(figsize=(12, 8))
+fig = plt.figure(figsize=(12, 8))	#圖像大小[英吋]
 #gs = gridspec.GridSpec(4, 1, figure=fig)
 ax = fig.add_subplot()
 
@@ -63,7 +63,7 @@ plt.rcParams['savefig.facecolor'] = "0.8"
 arr = np.arange(100).reshape((10, 10))
 
 plt.close('all')
-fig = plt.figure(figsize=(5, 4))
+fig = plt.figure(figsize=(5, 4))	#圖像大小[英吋]
 
 ax = plt.subplot()
 im = ax.imshow(arr, interpolation="none")
@@ -76,7 +76,7 @@ plt.show()
 
 plt.close('all')
 arr = np.arange(100).reshape((10, 10))
-fig = plt.figure(figsize=(4, 4))
+fig = plt.figure(figsize=(4, 4))	#圖像大小[英吋]
 im = plt.imshow(arr, interpolation="none")
 
 plt.colorbar(im)
@@ -89,7 +89,7 @@ from mpl_toolkits.axes_grid1 import make_axes_locatable
 
 plt.close('all')
 arr = np.arange(100).reshape((10, 10))
-fig = plt.figure(figsize=(4, 4))
+fig = plt.figure(figsize=(4, 4))	#圖像大小[英吋]
 im = plt.imshow(arr, interpolation="none")
 
 divider = make_axes_locatable(plt.gca())

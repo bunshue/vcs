@@ -20,7 +20,7 @@ with open(filename, 'r', newline='') as f:
 
 #    print(len(datas))
 #    print(len(listx), len(listy))
-    plt.figure(figsize=(20,5))
+    plt.figure(figsize=(20,5))	#圖像大小[英吋]
     plt.plot(listx, listy)
     plt.yticks(range(10,200,10))
     plt.show() 

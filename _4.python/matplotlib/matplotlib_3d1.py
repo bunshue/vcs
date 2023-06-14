@@ -18,8 +18,9 @@ from matplotlib.collections import PolyCollection
 from mpl_toolkits.mplot3d import axes3d
 from matplotlib.cm import viridis as colormap
 
-#plt.figure(figsize=(8,8))	#設定圖片視窗大小
-fig = plt.figure(num = '3D繪圖 集合 1', figsize=[20, 15], dpi=84, facecolor="whitesmoke", edgecolor="r", linewidth=1, frameon=True)
+#          編號                          圖像大小[英吋]     解析度    背景色                      邊框顏色                      邊框有無
+fig = plt.figure(num = '3D繪圖 集合 1', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+
 #設定中文字型及負號正確顯示
 #設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
@@ -144,9 +145,9 @@ ax.set_title('柱狀圖')
 
 plt.show()
 
+#          編號                          圖像大小[英吋]     解析度    背景色                      邊框顏色                      邊框有無
+fig = plt.figure(num = '3D繪圖 集合 2', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
-#plt.figure(figsize=(8,8))	#設定圖片視窗大小
-fig = plt.figure(num = '3D繪圖 集合 2', figsize=[20, 15], dpi=84, facecolor="whitesmoke", edgecolor="r", linewidth=1, frameon=True)
 #設定中文字型及負號正確顯示
 #設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
@@ -268,12 +269,11 @@ ax.quiver(x, y, z, u, v, w, length=0.1, normalize=True)
 
 ax.set_title('3D 向量場')
 
-
 plt.show()
 
+#          編號                          圖像大小[英吋]     解析度    背景色                      邊框顏色                      邊框有無
+fig = plt.figure(num = '3D繪圖 集合 3', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
-#plt.figure(figsize=(8,8))	#設定圖片視窗大小
-fig = plt.figure(num = '3D繪圖 集合 3', figsize=[20, 15], dpi=84, facecolor="whitesmoke", edgecolor="r", linewidth=1, frameon=True)
 #設定中文字型及負號正確顯示
 #設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei

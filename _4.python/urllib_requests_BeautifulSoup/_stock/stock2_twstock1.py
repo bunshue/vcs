@@ -48,7 +48,7 @@ for s in stocklist:
     listx.append(s.date.strftime('%Y-%m-%d'))
     listy.append(s.close)
 
-plt.figure(figsize=[10,5])
+plt.figure(figsize=[10,5])	#圖像大小[英吋]
 plt.title('鴻海2019年12月股價',fontsize=18)
 plt.xlabel("日期",fontsize=14)
 plt.ylabel("股價",fontsize=14)
@@ -69,7 +69,7 @@ plt.show()
 
 
 companys = ['2330','2912','3293']
-plt.figure(figsize=[10,5])
+plt.figure(figsize=[10,5])	#圖像大小[英吋]
 for company in companys:
     stock = twstock.Stock(company)  
     # 取得 2019 年 12 月的資料
@@ -86,7 +86,7 @@ plt.show()
 
 
 
-#plt.figure(figsize=[12,30])
+#plt.figure(figsize=[12,30])	#圖像大小[英吋]
 stock = twstock.Stock('2317') 
 slist = []
 for i in range(1,13):

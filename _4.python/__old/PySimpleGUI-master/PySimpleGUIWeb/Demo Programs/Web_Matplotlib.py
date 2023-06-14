@@ -59,7 +59,7 @@ def create_axis_grid():
 
 def create_figure():
     # ------------------------------- START OF YOUR MATPLOTLIB CODE -------------------------------
-    fig = matplotlib.figure.Figure(figsize=(5, 4), dpi=100)
+    fig = matplotlib.figure.Figure(figsize = (5, 4), dpi = 100)	#圖像大小[英吋]
     t = np.arange(0, 3, .01)
     fig.add_subplot(111).plot(t, 2 * np.sin(2 * np.pi * t))
 

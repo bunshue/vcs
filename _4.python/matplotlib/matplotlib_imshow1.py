@@ -8,9 +8,9 @@ import matplotlib.image as img
 import numpy as np
 from PIL import Image, ImageEnhance
 
-#plt.figure(figsize=(10,10))    # 改變圖表尺寸 單位是英吋
-#plt.figure(figsize=(8,8))	#設定圖片視窗大小
-plt.figure(num = 'imshow 集合 1', figsize=[20, 15], dpi=84, facecolor="whitesmoke", edgecolor="r", linewidth=1, frameon=True)
+#          編號                          圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(num = 'imshow 集合 1', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+
 #設定中文字型及負號正確顯示
 #設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
@@ -59,8 +59,8 @@ plt.show()
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/bug.bmp'
 
-#plt.figure(figsize=(8,8))	#設定圖片視窗大小
-plt.figure(num = 'imshow 集合 2', figsize=[20, 15], dpi=84, facecolor="whitesmoke", edgecolor="r", linewidth=1, frameon=True)
+#          編號                  圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(num = 'imshow 集合 2', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 img = np.asarray(Image.open(filename))
 #print(repr(img))
@@ -148,8 +148,9 @@ import matplotlib.cm as cm
 import matplotlib.pyplot as plt
 from PIL import Image
 
-#plt.figure(figsize=(8,8))	#設定圖片視窗大小
-plt.figure(num = 'imshow 集合 3', figsize=[20, 15], dpi=84, facecolor="whitesmoke", edgecolor="r", linewidth=1, frameon=True)
+
+#          編號                   圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(num = 'imshow 集合 3', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 #第一張圖
 plt.subplot(231)
@@ -254,8 +255,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pylab
 
-#plt.figure(figsize=(8,8))	#設定圖片視窗大小
-plt.figure(num = 'plot 集合', figsize=[20, 15], dpi=84, facecolor="whitesmoke", edgecolor="r", linewidth=1, frameon=True)
+#          編號               圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(num = 'plot 集合', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
 
 #第一張圖
 plt.subplot(231)

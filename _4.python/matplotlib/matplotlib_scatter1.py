@@ -6,8 +6,9 @@ import matplotlib.pyplot as plt
 from numpy.random import rand
 import numpy as np
 
-#plt.figure(figsize=(8,8))	#設定圖片視窗大小
-plt.figure(num = 'scatter 集合', figsize=[20, 15], dpi=84, facecolor="whitesmoke", edgecolor="r", linewidth=1, frameon=True)
+#          編號                  圖像大小[英吋]       解析度    背景色                      邊框顏色                      邊框有無
+plt.figure(num = 'scatter 集合', figsize = (20, 15), dpi = 84, facecolor = "whitesmoke", edgecolor = "r", linewidth = 1, frameon = True)
+
 #設定中文字型及負號正確顯示
 #設定中文字型檔
 plt.rcParams["font.sans-serif"] = "Microsoft JhengHei" # 將字體換成 Microsoft JhengHei
