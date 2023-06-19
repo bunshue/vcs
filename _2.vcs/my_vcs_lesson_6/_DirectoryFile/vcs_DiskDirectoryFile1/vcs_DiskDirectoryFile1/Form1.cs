@@ -1108,7 +1108,7 @@ namespace vcs_DiskDirectoryFile1
             sw1.Write(richTextBox1.Text);
             sw1.Flush();
             sw1.Close();
-            richTextBox1.Text += "儲存檔案1 OK，檔名：C:\_git\vcs\_1.data\______test_files2\vcs_test.txt\n";
+            richTextBox1.Text += @"儲存檔案1 OK，檔名：C:\_git\vcs\_1.data\______test_files2\vcs_test.txt\n";
 
             //儲存檔案2
             string filename2 = @"C:\_git\vcs\_1.data\______test_files1\SaveDataToFile.txt";
