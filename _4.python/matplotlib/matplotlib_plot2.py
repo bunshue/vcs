@@ -47,6 +47,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 from numpy import sin
+from numpy import cos
 
 plt.plot(np.random.randn(100))
 
@@ -63,10 +64,25 @@ plt.plot(speed, dist)
 #第四張圖
 plt.subplot(234)
 
+pi = 3.14159
+r = 3
+t = np.linspace(-1*pi, 1*pi, 50)
+
+x = r*cos(t)
+y = r*sin(t)
 
 
+r = 3*(1-sin(t))
+x = r*cos(t)
+y = r*sin(t)
 
 
+plt.plot(x, y, lw=3)
+
+
+r = 3*(1-sin(t))
+x = r*cos(t)
+y = r*sin(t)
 
 
 #第五張圖

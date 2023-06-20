@@ -1904,7 +1904,7 @@ namespace vcs_Color
 
         }
 
-        public void GetHueExample(Graphics g, Color color,int dx)
+        public void GetHueExample(Graphics g, Color color, int dx)
         {
             // Color structures. One is a variable used for temporary storage. The other
             // is a constant used for comparisons.
@@ -1919,7 +1919,7 @@ namespace vcs_Color
             int count = 0;
 
             // Iterate through the KnownColor enums until 15 matches are found.
-            for (KnownColor enumValue = 0;                enumValue <= KnownColor.YellowGreen && count < 15; enumValue++)
+            for (KnownColor enumValue = 0; enumValue <= KnownColor.YellowGreen && count < 15; enumValue++)
             {
                 someColor = Color.FromKnownColor(enumValue);
                 if (someColor.GetHue() == redShade.GetHue())
@@ -1934,7 +1934,7 @@ namespace vcs_Color
             // Display the redShade color and its argb value.
             SolidBrush myBrush1 = new SolidBrush(redShade);
             Font myFont = new Font("Arial", 12);
-            int x = 20+dx;
+            int x = 20 + dx;
             int y = 20;
             someColor = redShade;
             g.FillRectangle(myBrush1, x, y, 100, 30);
@@ -2046,13 +2046,11 @@ namespace vcs_Color
                 cnt++;
                 if ((cnt > 25) && (cnt % 5) == 0)
                 {
-                    this.Size = new Size(240, 55);
+                    //this.Size = new Size(240, 55);
                     g2.Clear(BackColor);
                     g2.DrawString(DateTime.Now.ToString("HH:mm:ss"), new Font("Consolas", 30), new SolidBrush(Color.Blue), new PointF(20, 5));
                 }
             }
-
         }
     }
 }
-

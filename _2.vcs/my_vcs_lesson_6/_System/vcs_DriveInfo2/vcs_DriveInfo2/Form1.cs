@@ -14,6 +14,8 @@ namespace vcs_DriveInfo2
 {
     public partial class Form1 : Form
     {
+        bool flag_debug_mode = false;
+
         private const int THRESHOLD = 20;
         Bitmap bitmap1 = null;
         Graphics g;
@@ -57,6 +59,18 @@ namespace vcs_DriveInfo2
 
         void drawDiskSpace(int cx, int cy, int r, string name, long free, long total)
         {
+            bool flag_disk_free_low = false;
+            if ((free * 100 / total) < THRESHOLD)
+            {
+                flag_disk_free_low = true;
+                //g.FillRectangle(Brushes.Pink,
+                g.FillRectangle(Brushes.Pink, cx, cy, r, r);
+            }
+            else
+            {
+                flag_disk_free_low = false;
+            }
+
             richTextBox1.Text += "drawDiskSpace\n";
             richTextBox1.Text += "cx = " + cx.ToString() + "\tcy = " + cy.ToString() + "\tr = " + r.ToString() + "\n";
             richTextBox1.Text += "free = " + free.ToString() + "\n";
@@ -68,39 +82,41 @@ namespace vcs_DriveInfo2
             int used_angle = (int)(used * 360 / total);
             //richTextBox1.Text += "used_angle = " + used_angle.ToString() + "\n";
 
-            b = new SolidBrush(Color.LightGreen);
+            b = new SolidBrush(Color.GreenYellow);
             g.FillEllipse(b, cx + r / 10, cy + r / 10, r * 80 / 100, r * 80 / 100);
 
-            b = new SolidBrush(Color.Red);
+            b = new SolidBrush(Color.DeepSkyBlue);
             g.FillPie(b, cx + r / 10, cy + r / 10, r * 80 / 100, r * 80 / 100, -180, used_angle);
 
-            b = new SolidBrush(Color.White);
-            g.FillEllipse(b, cx + r / 4, cy + r / 4, r / 2, r / 2);
+            b = new SolidBrush(Color.LightGray);
+            g.FillEllipse(b, cx + r * 3 / 10, cy + r * 3 / 10, r * 4 / 10, r * 4 / 10);
 
             int x_st = 0;
             int y_st = 5;
             int dy = 20;
-            g.DrawString(name, new Font("標楷體", 14), new SolidBrush(Color.Green), new Point(x_st + cx, y_st + cy + r + dy * 0));
+            //g.DrawString(name, new Font("標楷體", 14), new SolidBrush(Color.Green), new Point(x_st + cx, y_st + cy + r + dy * 0));
+            //g.DrawString(name[0].ToString(), new Font("標楷體", 14), new SolidBrush(Color.Green), new Point(x_st + cx, y_st + cy + r + dy * 0));
+            g.DrawString(name[0].ToString(), new Font("標楷體", 18), new SolidBrush(Color.Blue), new Point(cx + r / 2 - 10, cy + r / 2 - 10));
 
             string str1 = ByteConversionGBMBKB(Convert.ToInt64(total));
-            string str2 = ByteConversionGBMBKB(Convert.ToInt64(free));
-            string str3 = ((float)free / (float)total).ToString("P", CultureInfo.InvariantCulture);
+            string str2 = ByteConversionGBMBKB(Convert.ToInt64(total - free));
+            string str3 = ByteConversionGBMBKB(Convert.ToInt64(free));
+            string str4 = ((float)free / (float)total).ToString("P", CultureInfo.InvariantCulture);
 
             Font f = new Font("Times New Roman", 14);
 
-            g.DrawString(str1, f, new SolidBrush(Color.Gray), new Point(x_st + cx, y_st + cy + r + dy * 1));
-            g.DrawString(str2, f, new SolidBrush(Color.Green), new Point(x_st + cx, y_st + cy + r + dy * 2));
+            g.DrawString(str1, f, new SolidBrush(Color.Gray), new Point(x_st + cx, y_st + cy + r + dy * 0));
+            g.DrawString(str2, f, new SolidBrush(Color.DeepSkyBlue), new Point(x_st + cx, y_st + cy + r + dy * 1));
+            g.DrawString(str3, f, new SolidBrush(Color.LimeGreen), new Point(x_st + cx, y_st + cy + r + dy * 2));
 
-            //richTextBox1.Text += "str = " + ((float)free / (float)total).ToString() + "\n";
-
-            if ((free*100 / total) < THRESHOLD)
+            if (flag_disk_free_low == true)
             {
-                g.DrawString(str3, f, Brushes.Red, new Point(x_st + cx, y_st + cy + r + dy * 3));
-                g.DrawRectangle(Pens.Red, cx, cy, r, r);
+                g.DrawString(str4, f, Brushes.Red, new Point(x_st + cx, y_st + cy + r + dy * 3));
+                g.DrawRectangle(new Pen(Color.Red, 7), cx, cy, r, r);
             }
             else
             {
-                g.DrawString(str3, f, Brushes.Green, new Point(x_st + cx, y_st+cy + r + dy * 3));
+                g.DrawString(str4, f, Brushes.Green, new Point(x_st + cx, y_st + cy + r + dy * 3));
                 g.DrawRectangle(Pens.Green, cx, cy, r, r);
             }
             pictureBox1.Image = bitmap1;
@@ -149,7 +165,7 @@ namespace vcs_DriveInfo2
                 richTextBox1.Text += "\n";
             }
 
-            richTextBox1.Text += "共有 : " + total_drives.ToString() + " 台磁碟機\n";
+            richTextBox1.Text += "共有 : " + total_drives.ToString() + " 台固定式磁碟機\n";
 
             int w = 100 * total_drives + 1;
             int h = 320;
@@ -158,9 +174,6 @@ namespace vcs_DriveInfo2
             g.Clear(SystemColors.ControlLight);
             pictureBox1.Size = new Size(w, h);
             pictureBox1.Location = new Point(0, 0);
-            this.BackColor = Color.Pink;
-            this.ClientSize = new Size(w, h -62);
-            this.Location = new Point(1920 - w - 16, 1080 / 2);
 
             int cnt = 0;
             long total = 233905053696;
@@ -206,18 +219,33 @@ namespace vcs_DriveInfo2
             richTextBox1.Text += result + "\n";
 
 
-                        //List<String> warning_directory = new List<String>();
             string warning = "";
             foreach (string s in warning_directory)
             {
                 warning += s + " ";
             }
-            //richTextBox1.Text += s + "\n";
 
+            if (warning.Length > 0)
+            {
+                g.DrawString("磁碟 : " + warning + " 容量不足", new Font("標楷體", 18), new SolidBrush(Color.Red), new Point(10, 195));
+            }
 
-            g.DrawString("磁碟 : " + warning + " 容量不足", new Font("標楷體", 18), new SolidBrush(Color.Red), new Point(10, 195));
+            if (flag_debug_mode == false)
+            {
+                int W = Screen.PrimaryScreen.Bounds.Width;
+                int H = Screen.PrimaryScreen.Bounds.Height;
 
+                this.BackColor = Color.Pink;
+                this.ClientSize = new Size(w, h - 62);
+                this.Location = new Point(W - w - 9, H / 2);
+            }
+            else
+            {
+                this.BackColor = Color.Pink;
+                this.ClientSize = new Size(w + 300, h - 62 + 400);
+                //this.Location = new Point(1920 - w - 16, 1080 / 2);
 
+            }
 
 
         }
