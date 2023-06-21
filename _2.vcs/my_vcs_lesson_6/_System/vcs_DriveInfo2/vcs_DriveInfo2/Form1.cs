@@ -9,6 +9,7 @@ using System.Windows.Forms;
 
 using System.IO;            //for DriveInfo
 using System.Globalization; //for CultureInfo
+using System.Runtime.InteropServices;   //for DllImport
 
 namespace vcs_DriveInfo2
 {
@@ -21,6 +22,11 @@ namespace vcs_DriveInfo2
         private const int THRESHOLD2 = 20;  //警告
         Bitmap bitmap1 = null;
         Graphics g;
+
+        [DllImportAttribute("user32.dll")]
+        private extern static bool ReleaseCapture();
+        [DllImportAttribute("user32.dll")]
+        private extern static int SendMessage(IntPtr handle, int m, int p, int h);
 
         public Form1()
         {
@@ -187,11 +193,11 @@ namespace vcs_DriveInfo2
                 screen_width = total_drives;
 
             int w = 100 * screen_width + 1;
-            int h = 305;
+            int h = 245;
             if (total_drives <= 2)
-                h = 305;
+                h = 245;
             else
-                h = 280;
+                h = 220;
             bitmap1 = new Bitmap(w, h);
             g = Graphics.FromImage(bitmap1);
             g.Clear(SystemColors.ControlLight);
@@ -280,8 +286,8 @@ namespace vcs_DriveInfo2
                 int H = Screen.PrimaryScreen.Bounds.Height;
 
                 this.BackColor = Color.Pink;
-                this.ClientSize = new Size(w, h - 62);
-                this.Location = new Point(W - w - 9, H / 2);
+                this.ClientSize = new Size(w, h);
+                this.Location = new Point(W - w - 6, H - h - 40);
             }
             else
             {
@@ -289,6 +295,15 @@ namespace vcs_DriveInfo2
                 this.ClientSize = new Size(w + 300, h - 62 + 400);
                 //this.Location = new Point(1920 - w - 16, 1080 / 2);
             }
+            int ww = 30;
+            int hh = 30;
+            int x_st = w - ww - 2 - 1;
+            int y_st = h - hh - 2 - 1;
+            g.DrawRectangle(new Pen(Color.Red, 4), x_st, y_st, ww, hh);
+            g.DrawLine(new Pen(Color.Red, 4), x_st, y_st, x_st + ww, y_st + hh);
+            g.DrawLine(new Pen(Color.Red, 4), x_st, y_st + hh, x_st + ww, y_st);
+
+            g.DrawRectangle(Pens.Green, 0, 0, pictureBox1.Width - 1, pictureBox1.Height - 1);
         }
 
         int cnt = 0;
@@ -301,9 +316,34 @@ namespace vcs_DriveInfo2
             }
         }
 
-        private void pictureBox1_DoubleClick(object sender, EventArgs e)
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
         {
-            Application.Exit();
+            if (e.Button == MouseButtons.Left)
+            {
+                this.Cursor = Cursors.SizeAll;
+                ReleaseCapture();
+                SendMessage(this.Handle, 0xA1, 0x2, 0);
+                this.Cursor = Cursors.Default;
+            }
+        }
+
+        private void pictureBox1_MouseDown(object sender, MouseEventArgs e)
+        {
+            richTextBox1.Text += "(" + e.X.ToString() + ", " + e.Y.ToString() + ") ";
+
+            int w = pictureBox1.Size.Width;
+            int h = pictureBox1.Size.Height;
+            int ww = 30;
+            int hh = 30;
+            int x_st = w - ww - 2;
+            int y_st = h - 62 - 2 - hh;
+            //g.DrawRectangle(new Pen(Color.Red, 4), x_st, y_st, ww, hh);
+            //g.DrawLine(new Pen(Color.Red, 4), x_st, y_st, x_st + ww, y_st + hh);
+            //g.DrawLine(new Pen(Color.Red, 4), x_st, y_st + hh, x_st + ww, y_st);
+            if ((e.X > (w - ww)) && (e.X < w) && (e.Y > (h - hh)) && (e.Y < h))
+                Application.Exit();
+
+            Form1_MouseDown(sender, e);
         }
     }
 }
