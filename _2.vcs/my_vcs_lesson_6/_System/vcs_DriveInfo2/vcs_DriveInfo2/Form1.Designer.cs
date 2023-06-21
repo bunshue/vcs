@@ -43,10 +43,11 @@
             this.pictureBox1.Size = new System.Drawing.Size(689, 238);
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            this.pictureBox1.DoubleClick += new System.EventHandler(this.pictureBox1_DoubleClick);
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 256);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 300);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.Size = new System.Drawing.Size(689, 314);
             this.richTextBox1.TabIndex = 1;

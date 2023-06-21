@@ -15,8 +15,10 @@ namespace vcs_DriveInfo2
     public partial class Form1 : Form
     {
         bool flag_debug_mode = false;
+        bool flag_warning = false;
 
-        private const int THRESHOLD = 20;
+        private const int THRESHOLD1 = 10;  //嚴重警告
+        private const int THRESHOLD2 = 20;  //警告
         Bitmap bitmap1 = null;
         Graphics g;
 
@@ -27,6 +29,7 @@ namespace vcs_DriveInfo2
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.FormBorderStyle = FormBorderStyle.None;
             //this.richTextBox1.Visible = false;
             this.Text = "使用 DriveInfo 類別取得磁碟資訊";
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
@@ -60,7 +63,13 @@ namespace vcs_DriveInfo2
         void drawDiskSpace(int cx, int cy, int r, string name, long free, long total)
         {
             bool flag_disk_free_low = false;
-            if ((free * 100 / total) < THRESHOLD)
+            if ((free * 100 / total) < THRESHOLD1)
+            {
+                flag_disk_free_low = true;
+                //g.FillRectangle(Brushes.Pink,
+                g.FillRectangle(Brushes.Red, cx, cy, r, r);
+            }
+            else if ((free * 100 / total) < THRESHOLD2)
             {
                 flag_disk_free_low = true;
                 //g.FillRectangle(Brushes.Pink,
@@ -124,6 +133,8 @@ namespace vcs_DriveInfo2
 
         void get_disk_info()
         {
+            flag_warning = false;
+
             //使用System.IO.DriveInfo來遍歷磁片及其分區資訊
             //引用System.IO後即可調用DriveInfo類來對磁碟空間資訊進行遍歷了，此外DriveInfo只有在普通WINFORM中可以調用，WINCE專案中未封裝此類。
             //獲取磁片設備
@@ -167,8 +178,20 @@ namespace vcs_DriveInfo2
 
             richTextBox1.Text += "共有 : " + total_drives.ToString() + " 台固定式磁碟機\n";
 
-            int w = 100 * total_drives + 1;
-            int h = 320;
+            //total_drives = 1; debug
+
+            int screen_width = 0;
+            if (total_drives <= 2)
+                screen_width = 2;
+            else
+                screen_width = total_drives;
+
+            int w = 100 * screen_width + 1;
+            int h = 305;
+            if (total_drives <= 2)
+                h = 305;
+            else
+                h = 280;
             bitmap1 = new Bitmap(w, h);
             g = Graphics.FromImage(bitmap1);
             g.Clear(SystemColors.ControlLight);
@@ -202,14 +225,21 @@ namespace vcs_DriveInfo2
 
                     cnt++;
 
-                    drawDiskSpace(cx, cy, r, di.Name, free, total);
+                    if (total_drives == 1)
+                        drawDiskSpace(cx + r / 2, cy, r, di.Name, free, total);
+                    else
+                        drawDiskSpace(cx, cy, r, di.Name, free, total);
 
-                    if ((free * 100 / total) < THRESHOLD)
+                    if ((free * 100 / total) < THRESHOLD2)
                     {
                         //richTextBox1.Text += "str = " + ((float)free / (float)total).ToString() + "\n";
                         warning_directory.Add(di.Name);
                     }
 
+                    /*  debug
+                    if (cnt == 1)
+                        break;
+                    */
                 }
                 else
                 {
@@ -227,7 +257,21 @@ namespace vcs_DriveInfo2
 
             if (warning.Length > 0)
             {
-                g.DrawString("磁碟 : " + warning + " 容量不足", new Font("標楷體", 18), new SolidBrush(Color.Red), new Point(10, 195));
+                flag_warning = true;
+                if (total_drives < 2)
+                {
+                    g.DrawString("磁碟 : " + warning, new Font("標楷體", 18), new SolidBrush(Color.Red), new Point(40, 190));
+                    g.DrawString("容量不足", new Font("標楷體", 18), new SolidBrush(Color.Red), new Point(40, 190 + 25));
+                }
+                else if (total_drives == 2)
+                {
+                    g.DrawString("磁碟 : " + warning, new Font("標楷體", 18), new SolidBrush(Color.Red), new Point(10, 190));
+                    g.DrawString("容量不足", new Font("標楷體", 18), new SolidBrush(Color.Red), new Point(10, 190 + 25));
+                }
+                else
+                {
+                    g.DrawString("磁碟 : " + warning + " 容量不足", new Font("標楷體", 18), new SolidBrush(Color.Red), new Point(10, 190));
+                }
             }
 
             if (flag_debug_mode == false)
@@ -244,10 +288,7 @@ namespace vcs_DriveInfo2
                 this.BackColor = Color.Pink;
                 this.ClientSize = new Size(w + 300, h - 62 + 400);
                 //this.Location = new Point(1920 - w - 16, 1080 / 2);
-
             }
-
-
         }
 
         int cnt = 0;
@@ -258,6 +299,11 @@ namespace vcs_DriveInfo2
             {
                 get_disk_info();
             }
+        }
+
+        private void pictureBox1_DoubleClick(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
