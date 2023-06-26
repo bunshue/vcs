@@ -127,7 +127,7 @@ namespace vcs_NetFlux
             else if (size / MB >= 1)//如果目前Byte的值大於等於1MB
                 return (Math.Round(size / (float)MB, 2)).ToString() + " MB";//將其轉換成MB
             else if (size / KB >= 1)//如果目前Byte的值大於等於1KB
-                return (Math.Round(size / (float)KB, 2)).ToString() + " KB";//將其轉換成KGB
+                return (Math.Round(size / (float)KB, 2)).ToString() + " KB";//將其轉換成KB
             else
                 return size.ToString() + " Byte";//顯示Byte值
         }

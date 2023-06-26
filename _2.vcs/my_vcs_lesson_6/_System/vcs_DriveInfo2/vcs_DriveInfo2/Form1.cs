@@ -61,7 +61,7 @@ namespace vcs_DriveInfo2
             else if (KSize / MB >= 1)//如果目前Byte的值大於等於1MB
                 return (Math.Round(KSize / (float)MB, 2)).ToString() + " MB";//將其轉換成MB
             else if (KSize / KB >= 1)//如果目前Byte的值大於等於1KB
-                return (Math.Round(KSize / (float)KB, 2)).ToString() + " KB";//將其轉換成KGB
+                return (Math.Round(KSize / (float)KB, 2)).ToString() + " KB";//將其轉換成KB
             else
                 return KSize.ToString() + " Byte";//顯示Byte值
         }

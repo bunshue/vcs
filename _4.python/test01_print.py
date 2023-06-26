@@ -111,11 +111,11 @@ print("%40s" % 'This is a lion-mouse')
 
 print("不換行, 接著印")
 money = 123.456
-print("%10s" % money, end="")
-print("%10s" % money, end="")
-print("%10s" % money, end="")
-print("%10s" % money, end="")
-print("%10s" % money, end="")
+print("%10s" % money, end = "")
+print("%10s" % money, end = "")
+print("%10s" % money, end = "")
+print("%10s" % money, end = "")
+print("%10s" % money, end = "")
 
 
 print("四捨五入")
@@ -128,8 +128,6 @@ print("%20s" % round(money, 2))
 pi = 3.14159265358979323846
 print("圓周率 四捨五入到小數點以下第6位 : ", format(pi, ".6f"))
 print("圓周率 四捨五入到整數 : ", round(pi))
-
-
 
 byteyears = 1234
 print(repr(int(byteyears)).rjust(8))
@@ -154,7 +152,7 @@ print('有顏色的打印訊息', file = sys.stderr)
 
 print('%s: %s, line %d, column %d' % (
 'aaaa', 'bbbb', 123, 456),
-file=sys.stderr)
+file = sys.stderr)
 
 print((
 '*** %(file)s:%(lineno)s: 發生錯誤在 "%(token)s"'
@@ -167,24 +165,16 @@ print((
 
 infile = 'aaaaaaa'
 lno = 1234
-print('Syntax error on %s:%d' % (infile, lno), 'before:', file=sys.stderr)
+print('Syntax error on %s:%d' % (infile, lno), 'before:', file = sys.stderr)
 
+print("aaaaaa", file = sys.stdout)
 
-print("aaaaaa", file=sys.stdout)
-
-
-print(__doc__, file=sys.stderr)
+print(__doc__, file = sys.stderr)
 
 print("(%s:%s)" % (sys.exc_info()[0], sys.exc_info()[1]))
 
-
-
 cmd = '%s "%s" %s' % (sys.executable, 'aaaa', 'bbbb')
 print(cmd)
-
-
-
-
 
 ver_string = "%d.%d" % (sys.version_info[0], sys.version_info[1])
 root_key_name = "Software\\Python\\PythonCore\\" + ver_string
@@ -193,12 +183,12 @@ print(ver_string)
 print(root_key_name)
 
 string1 = 'abcde'
-print('%s\t%-40s\t'%(string1, string1), end=' ')
+print('%s\t%-40s\t' % (string1, string1), end = ' ')
 
 num = 123
 print('%d %s - %s\t%s' % (num, string1, string1, string1))
 
-print('Error: %s' % string1, file=sys.stderr)
+print('Error: %s' % string1, file = sys.stderr)
 
 debug = False #debug訊息之開關
 
@@ -248,15 +238,10 @@ def usage(msg=None):
         msg = __doc__
     print(msg, file=sys.stderr)
 
-
 msg = 'adfkajdfad;jlfkjl'
 usage(msg)
 
-
-
 #print("Serving {} on port {}, control-C to stop".format(path, port))
-
-
 
 
 

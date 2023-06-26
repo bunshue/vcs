@@ -1,9 +1,10 @@
 # python import module : sys, os
 # python import module : DDF 磁碟檔案資料夾操作
 
-import os,shutil
+import os
+import shutil
 cur_path = os.path.dirname(__file__) # 取得目前路徑
-print("現在路徑："+cur_path)
+print("現在路徑：" + cur_path)
 
 '''
 #拷貝檔案
@@ -28,7 +29,6 @@ print("刪除目錄, 直接刪除, 不會放入資源回收筒")
 import shutil
 shutil.rmtree("C:\\dddddddddd\\aaa" )  # 刪除目錄
 '''
-
 
 import os
 filenames = os.listdir('.')

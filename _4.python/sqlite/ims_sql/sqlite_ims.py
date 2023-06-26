@@ -3,6 +3,7 @@
 print('----------------------------------------------------------------------')	#70個
 print('準備工作')
 
+import os
 import sys
 import csv
 import time
@@ -221,6 +222,10 @@ def import_csv_data():
             #若能正確處理完畢, 再搬到old資料夾
             #shutil.move(filename, target_dir)
 
+    message = "匯入生產資料 完成"
+    print(message)
+    text1.insert('end', message)
+
 
 def read_from_db():
     global all_data
@@ -255,38 +260,59 @@ def read_from_db():
         all_data.append(row)
         message = message + str(row) + '\n'
     conn.close()  # 關閉資料庫連線
-    text1.insert ('end', message)
+    text1.insert('end', message)
+
+    message = "從資料庫讀出全部資料 完成"
+    print(message)
+    text1.insert('end', message)
+
+def show_info():
+    print('show_info')
+    length = len(all_data)
+    print('資料長度 : ', length)
 
 def export_data():
     global all_data
-    # 開啟輸出的 csv 檔案
-    filename_w = 'automation_ims.csv'
-    with open(filename_w, 'w', newline = '') as csvfile:
-        # 建立 csv 檔寫入物件
-        writer = csv.writer(csvfile)
+    length = len(all_data)
+    print('資料長度 : ', length)
+    if length == 0:
+        message = '無資料, 離開'
+        print(message)
+        text1.insert('end', message)
+    else:
+        # 開啟輸出的 csv 檔案
+        filename_w = 'automation_ims.csv'
+        with open(filename_w, 'w', newline = '') as csvfile:
+            # 建立 csv 檔寫入物件
+            writer = csv.writer(csvfile)
 
-        # 寫入二維串列資料
-        writer.writerows(all_data)
+            # 寫入二維串列資料
+            writer.writerows(all_data)
+
+        message = '匯出資料 完成'
+        print(message)
+        text1.insert('end', message)
 
 
 import tkinter as tk
 
 def button0Click():
-    print("你按了button0 匯入生產資料")
+    print("你按了 匯入生產資料")
     import_csv_data()
 
 def button1Click():
-    print("你按了button1 從資料庫讀出全部資料")
+    print("你按了 從資料庫讀出全部資料")
     read_from_db()
 
 def button2Click():
     print("你按了button2")
+    show_info()
 
 def button3Click():
     print("你按了button3")
 
 def button4Click():
-    print("你按了button4 匯出資料")
+    print("你按了 匯出資料")
     export_data()
 
 def set_data():
@@ -296,14 +322,14 @@ def set_data():
     mesg = text1.get("1.0","end")
     mesg= mesg + mmm
     print(mesg)
-    text1.insert ('end', mesg)
+    text1.insert('end', mesg)
     '''
     global count
     count = count + 1
     message = '  次數' + str(count)
     text1.insert('end', message)
 
-def clear():
+def clear_textbox1():
     text1.delete(1.0, 'end')
     # 執行 clear 函式時，清空內容
 
@@ -337,10 +363,10 @@ h = 3
 button0 = tk.Button(window, text = "匯入生產資料", width = w, height = h, command = button0Click)
 button0.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 
-button1 = tk.Button(window, text = "從資料庫讀出全部資料", width = w, height = h, command = button1Click)
+button1 = tk.Button(window, text = "從資料庫\n讀出全部資料", width = w, height = h, command = button1Click)
 button1.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 
-button2 = tk.Button(window, text = "xxx", width = w, height = h, command = button2Click)
+button2 = tk.Button(window, text = "Info", width = w, height = h, command = button2Click)
 button2.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 
 button3 = tk.Button(window, text = "xxx", width = w, height = h, command = button3Click)
@@ -355,18 +381,46 @@ button2.place(x = x_st + dx * 2, y = y_st + dy * 0)
 button3.place(x = x_st + dx * 3, y = y_st + dy * 0)
 button4.place(x = x_st + dx * 4, y = y_st + dy * 0)
 
+
+#stage_no = ["第1站", "第2站", "第3站"]
+
+def choose():
+    str = "你喜歡的球類運動："
+    for i in range(0, len(choice)):
+        if(choice[i].get() == 1):
+            str = str + ball[i] + " "
+    print(str)
+    msg.set(str)
+
+choice = []
+ball = ["足球", "籃球", "棒球", "排球", "網球", "羽毛球"]
+msg = tk.StringVar()
+label1 = tk.Label(window, text = "選擇喜歡的球類運動：")
+label1.pack()
+label1.place(x = x_st + dx * 0, y = y_st + dy * 1 - 20)
+label2 = tk.Label(window, fg = "red", textvariable = msg)
+label2.pack()
+label2.place(x = x_st + dx * 0, y = y_st + dy * 1 + 20)
+
+for i in range(0, len(ball)):
+    item = tk.IntVar()
+    choice.append(item)
+    item = tk.Checkbutton(window, text = ball[i], variable = choice[i], command = choose)
+    item.pack()
+    item.place(x = x_st + dx * i, y = y_st + dy * 1)
+
 mmm = 'abcd'
 count = 0
 
 #像是richTextBox
 text1 = tk.Text(window, width = 80, height = 30)  # 放入多行輸入框
 text1.pack()
-text1.place(x = x_st + dx * 0, y = y_st + dy * 1)
+text1.place(x = x_st + dx * 0, y = y_st + dy * 2)
 
 bt_set_data = tk.Button(window, text = 'set data', command = set_data)  # 放入清空按鈕
 bt_set_data.pack()
 bt_set_data.place(x = x_st + dx * 3, y = y_st + dy * 6)
-bt_clear = tk.Button(window, text = 'clear', command = clear)  # 放入清空按鈕
+bt_clear = tk.Button(window, text = 'clear', command = clear_textbox1)  # 放入清空按鈕
 bt_clear.pack()
 bt_clear.place(x = x_st + dx * 4, y = y_st + dy * 6)
 
