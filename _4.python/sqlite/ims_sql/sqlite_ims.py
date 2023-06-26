@@ -8,6 +8,10 @@ import csv
 import time
 import sqlite3
 
+# 建立csv二維串列資料
+all_data = [
+]
+
 print('----------------------------------------------------------------------')	#70個
 
 def process_csv_file1(filename):
@@ -184,115 +188,195 @@ def process_csv_file2(filename):
         i = i + 1
     conn.close()  # 關閉資料庫連線
 
-print('----------------------------------------------------------------------')	#70個
-
-stage = 0
-tablename = 'table00'
-
-import os, time, glob, sys, shutil
-
-source_dir = 'QC/csv'
-target_dir = 'QC/csv_old'
-
-db_filename = 'C:/_git/vcs/_1.data/______test_files2/db_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
-#db_filename = 'db_ims.sqlite';
-
-
-#準備輸出資料夾 若不存在, 則建立
-if not os.path.exists(target_dir):
-        os.mkdir(target_dir)
-        #os.makedirs(target_dir, exist_ok=True)
-
-#尋找檔案
-import glob
-print('尋找目前目錄下之 *.csv')
-files = glob.glob(source_dir + "/*.csv") 
-for filename in files:
-    print(filename)
+def import_csv_data():
     stage = 0
     tablename = 'table00'
-    process_csv_file1(filename)
-    if stage != 0:
-        print('繼續')
-        #process_csv_file2(filename)
-        #若能正確處理完畢, 再搬到old資料夾
-        #shutil.move(filename, target_dir)
 
-print('----------------------------------------------------------------------')	#70個
+    import os, time, glob, sys, shutil
 
-'''
-filename = 'C:/_git/vcs/_4.python/sqlite/ims_sql/QC/csv/ims_20221218_13b.csv'
+    source_dir = 'QC/csv'
+    target_dir = 'QC/csv_old'
 
-stage = 0
-tablename = 'table00'
-process_csv_file1(filename)
-if stage != 0:
-    process_csv_file2(filename)
-'''
-
-print('----------------------------------------------------------------------')	#70個
+    db_filename = 'C:/_git/vcs/_1.data/______test_files2/db_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
+    #db_filename = 'db_ims.sqlite';
 
 
+    #準備輸出資料夾 若不存在, 則建立
+    if not os.path.exists(target_dir):
+            os.mkdir(target_dir)
+            #os.makedirs(target_dir, exist_ok=True)
+
+    #尋找檔案
+    import glob
+    print('尋找目前目錄下之 *.csv')
+    files = glob.glob(source_dir + "/*.csv") 
+    for filename in files:
+        print(filename)
+        stage = 0
+        tablename = 'table00'
+        process_csv_file1(filename)
+        if stage != 0:
+            print('繼續')
+            #process_csv_file2(filename)
+            #若能正確處理完畢, 再搬到old資料夾
+            #shutil.move(filename, target_dir)
 
 
-print('----------------------------------------------------------------------')	#70個
+def read_from_db():
+    global all_data
+    message = ''
 
-# 建立csv二維串列資料
-'''
-all_data = [
-        ['', '', ''],
-        ['', '', ''],
-        ['', '', ''],
-]
-'''
-all_data = [
-]
+    print('從資料庫讀出全部資料')
 
-print('從資料庫讀出全部資料')
+    db_filename = 'db_ims.sqlite'
 
-db_filename = 'db_ims.sqlite'
+    print('第1站')
+    conn = sqlite3.connect(db_filename) # 建立資料庫連線
+    cursor = conn.execute('select * from table01')
+    rows = cursor.fetchall()
+    #print(rows)
+    index = 1
+    for row in rows:
+        print(len(row))
+        #print("{}\t{}".format(row[0],row[1]))
+        print(row)
+        all_data.append(row)
+        index += 1
+    conn.close()  # 關閉資料庫連線
 
-print('第1站')
-conn = sqlite3.connect(db_filename) # 建立資料庫連線
-cursor = conn.execute('select * from table01')
-rows = cursor.fetchall()
-#print(rows)
-index = 1
-for row in rows:
-    print(len(row))
-    #print("{}\t{}".format(row[0],row[1]))
-    print(row)
-    all_data.append(row)
-    index += 1
-conn.close()  # 關閉資料庫連線
+    print('第2站')
+    conn = sqlite3.connect(db_filename) # 建立資料庫連線
+    cursor = conn.execute('select * from table02')
+    rows = cursor.fetchall()
+    #print(rows)
+    for row in rows:
+        #print("{}\t{}".format(row[0],row[1]))
+        print(row)
+        all_data.append(row)
+        message = message + str(row) + '\n'
+    conn.close()  # 關閉資料庫連線
+    text1.insert ('end', message)
 
-print('第2站')
-conn = sqlite3.connect(db_filename) # 建立資料庫連線
-cursor = conn.execute('select * from table02')
-rows = cursor.fetchall()
-#print(rows)
-for row in rows:
-    #print("{}\t{}".format(row[0],row[1]))
-    print(row)
-    all_data.append(row)
-conn.close()  # 關閉資料庫連線
+def export_data():
+    global all_data
+    # 開啟輸出的 csv 檔案
+    filename_w = 'automation_ims.csv'
+    with open(filename_w, 'w', newline = '') as csvfile:
+        # 建立 csv 檔寫入物件
+        writer = csv.writer(csvfile)
 
-
-
-
-
-print('----------------------------------------------------------------------')	#70個
+        # 寫入二維串列資料
+        writer.writerows(all_data)
 
 
+import tkinter as tk
 
-# 開啟輸出的 csv 檔案
-filename_w = 'automation_ims.csv'
-with open(filename_w, 'w', newline='') as csvfile:
-    # 建立 csv 檔寫入物件
-    writer = csv.writer(csvfile)
+def button0Click():
+    print("你按了button0 匯入生產資料")
+    import_csv_data()
 
-    # 寫入二維串列資料
-    writer.writerows(all_data)
+def button1Click():
+    print("你按了button1 從資料庫讀出全部資料")
+    read_from_db()
+
+def button2Click():
+    print("你按了button2")
+
+def button3Click():
+    print("你按了button3")
+
+def button4Click():
+    print("你按了button4 匯出資料")
+    export_data()
+
+def set_data():
+    '''
+    print('set_data')
+    #回傳結果
+    mesg = text1.get("1.0","end")
+    mesg= mesg + mmm
+    print(mesg)
+    text1.insert ('end', mesg)
+    '''
+    global count
+    count = count + 1
+    message = '  次數' + str(count)
+    text1.insert('end', message)
+
+def clear():
+    text1.delete(1.0, 'end')
+    # 執行 clear 函式時，清空內容
+
+window = tk.Tk()
+
+# 設定主視窗大小
+w = 800
+h = 800
+x_st = 100
+y_st = 100
+#size = str(w)+'x'+str(h)
+#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+
+# 設定主視窗標題
+title = "這是主視窗"
+window.title(title)
+
+# 設定主視窗之背景色
+#window.configure(bg = "#7AFEC6")
+
+x_st = 100
+y_st = 50
+dx = 120
+dy = 100
+w = 12
+h = 3
+
+button0 = tk.Button(window, text = "匯入生產資料", width = w, height = h, command = button0Click)
+button0.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
+
+button1 = tk.Button(window, text = "從資料庫讀出全部資料", width = w, height = h, command = button1Click)
+button1.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
+
+button2 = tk.Button(window, text = "xxx", width = w, height = h, command = button2Click)
+button2.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
+
+button3 = tk.Button(window, text = "xxx", width = w, height = h, command = button3Click)
+button3.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
+
+button4 = tk.Button(window, text = "匯出資料", width = w, height = h, command = button4Click)
+button4.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
+
+button0.place(x = x_st + dx * 0, y = y_st + dy * 0)
+button1.place(x = x_st + dx * 1, y = y_st + dy * 0)
+button2.place(x = x_st + dx * 2, y = y_st + dy * 0)
+button3.place(x = x_st + dx * 3, y = y_st + dy * 0)
+button4.place(x = x_st + dx * 4, y = y_st + dy * 0)
+
+mmm = 'abcd'
+count = 0
+
+#像是richTextBox
+text1 = tk.Text(window, width = 80, height = 30)  # 放入多行輸入框
+text1.pack()
+text1.place(x = x_st + dx * 0, y = y_st + dy * 1)
+
+bt_set_data = tk.Button(window, text = 'set data', command = set_data)  # 放入清空按鈕
+bt_set_data.pack()
+bt_set_data.place(x = x_st + dx * 3, y = y_st + dy * 6)
+bt_clear = tk.Button(window, text = 'clear', command = clear)  # 放入清空按鈕
+bt_clear.pack()
+bt_clear.place(x = x_st + dx * 4, y = y_st + dy * 6)
+
+window.mainloop()
+
+
+
+
+
+
 
 
 

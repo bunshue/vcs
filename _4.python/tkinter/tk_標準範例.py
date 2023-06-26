@@ -17,19 +17,20 @@ window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 title = "這是主視窗"
 window.title(title)
 
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN)
+separator.pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN)
+separator.pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN)
+separator.pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN)
+separator.pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
-
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
-
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN)
+separator.pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 window.mainloop()
 

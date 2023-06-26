@@ -27,7 +27,8 @@ listbox.insert(tk.END, "a list entry")
 for item in ["one", "two", "three", "four"]:
     listbox.insert(tk.END, item)
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN)
+separator.pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 def changeString():
     stringToCopy = entry.get()
@@ -36,7 +37,7 @@ def changeString():
     entry.insert(0, stringToCopy)
 
 entry = tk.Entry(window)
-button = tk.Button(window, text="Change", command=changeString)
+button = tk.Button(window, text = "Change", command = changeString)
 
 entry.pack()
 button.pack()
@@ -48,12 +49,12 @@ class App:
         frame.pack()
 
         self.button = tk.Button(
-            frame, text="QUIT", fg="red", command=frame.quit
+            frame, text = "QUIT", fg = "red", command = frame.quit
             )
-        self.button.pack(side=tk.LEFT)
+        self.button.pack(side = tk.LEFT)
 
-        self.hi_there = tk.Button(frame, text="Hello", command=self.say_hi)
-        self.hi_there.pack(side=tk.LEFT)
+        self.hi_there = tk.Button(frame, text = "Hello", command = self.say_hi)
+        self.hi_there.pack(side = tk.LEFT)
     def say_hi(self):
         print("hi there, everyone!")
 

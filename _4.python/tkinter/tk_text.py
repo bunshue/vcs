@@ -1,12 +1,19 @@
+count = 0
 mmm = 'abcd'
 
 def set_data():
+    '''
     print('set_data')
     #回傳結果
     mesg = text1.get("1.0","end")
     mesg= mesg + mmm
     print(mesg)
     text1.insert ('end', mesg)
+    '''
+    global count
+    count = count + 1
+    message = '  次數' + str(count)
+    text1.insert ('end', message)
 
 def clear():
     text1.delete(1.0,'end')
@@ -33,15 +40,16 @@ title = "Text測試"
 window.title(title)
 
 # 設定主視窗之背景色
-window.configure(bg="#7AFEC6")
+#window.configure(bg = "#7AFEC6")
 
 #像是richTextBox
-text1 = tk.Text(window, height = 10)  # 放入多行輸入框
+text1 = tk.Text(window, width = 80, height = 30)  # 放入多行輸入框
 text1.pack()
+#text1.place(x = 100, y = 100)
 
-bt_set_data = tk.Button(window,text='set data', command=set_data)  # 放入清空按鈕
+bt_set_data = tk.Button(window, text = 'set data', command = set_data)  # 放入清空按鈕
 bt_set_data.pack()
-bt_clear = tk.Button(window,text='clear', command=clear)  # 放入清空按鈕
+bt_clear = tk.Button(window, text = 'clear', command = clear)  # 放入清空按鈕
 bt_clear.pack()
 
 window.mainloop()
