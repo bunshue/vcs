@@ -119,6 +119,16 @@ label = tk.Label(window, textvariable = string).pack()
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 
+label1=tk.Label(window, text = "輸入成績：")
+label1.place(x = 20, y = 20)
+score = tk.StringVar()
+entryUrl = tk.Entry(window, textvariable = score)
+entryUrl.place(x = 90, y = 20)
+btnDown = tk.Button(window, text = "計算成績")
+btnDown.place(x = 80, y = 50)
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
 
 window.mainloop()
 

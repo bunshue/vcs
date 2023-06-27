@@ -56,8 +56,7 @@ exercise_radio2 = ttk.Radiobutton(
 exercise_radio1.pack()
 exercise_radio2.pack()
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
-
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 def choose():
     msg.set("你最喜歡的球類運動：" + choice.get())
@@ -77,7 +76,7 @@ lblmsg.pack()
 item1.select()
 choose()
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 # RadioButton測試
 tk.Label(text='RadioButton測試').pack()
@@ -93,7 +92,7 @@ def buy():
 
 tk.Button(window, text='點菜', command=buy).pack()
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 # RadioButton測試
 tk.Label(text='RadioButton測試').pack()
@@ -116,9 +115,7 @@ for text, mode in MODES:
     b = tk.Radiobutton(window, text=text, variable=v, value=mode)
     b.pack(anchor=tk.W)
 
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
-
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 window.mainloop()
 

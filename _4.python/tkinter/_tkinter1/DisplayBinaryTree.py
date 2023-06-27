@@ -5,8 +5,7 @@ from BinaryTree import BinaryTree
 def insert():
     k = int(key.get())
     if tree.search(k): # key is in the tree already
-        tkinter.messagebox.showinfo("Insertion Status", str(k) + 
-                                    " is already in the tree")
+        tkinter.messagebox.showinfo("Insertion Status", str(k) + " is already in the tree")
     else:
         tree.insert(k) # Insert a new key
         canvas.delete("tree")
@@ -15,8 +14,7 @@ def insert():
 def delete():
     k = int(key.get())
     if not tree.search(k): # key is in the tree already
-        tkinter.messagebox.showinfo("Deletion Status", str(k) + 
-                                    " is not in the tree")
+        tkinter.messagebox.showinfo("Deletion Status", str(k) + " is not in the tree")
     else:
         tree.delete(k) # Delete a key
         canvas.delete("tree")
@@ -27,10 +25,8 @@ def displayTree(root, x, y, hGap):
     if root == None: return # Empty tree
 
     # Display the root
-    canvas.create_oval(x - radius, y - radius,
-                       x + radius, y + radius, tags = "tree")
-    canvas.create_text(x, y, 
-                       text = str(root.element), tags = "tree")
+    canvas.create_oval(x - radius, y - radius, x + radius, y + radius, tags = "tree")
+    canvas.create_text(x, y, text = str(root.element), tags = "tree")
 
     if root.left != None:
         # Draw a line to the left node
@@ -69,9 +65,8 @@ frame1.pack()
 tree = BinaryTree()
 Label(frame1, text = "Enter a key").pack(side = LEFT)
 key = StringVar()
-entry = Entry(frame1, textvariable = key, 
-              justify = RIGHT).pack(side = LEFT)
+entry = Entry(frame1, textvariable = key, justify = RIGHT).pack(side = LEFT)
 Button(frame1, text = "Insert", command = insert).pack(side = LEFT)
 Button(frame1, text = "Delete", command = delete).pack(side = LEFT)
 
-window.mainloop() # Create an event loop
+window.mainloop()

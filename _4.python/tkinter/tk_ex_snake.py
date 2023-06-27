@@ -198,4 +198,5 @@ Label(scoreboard, textvariable=game.score.counter).grid()
 Label(scoreboard, text='High Score').grid()
 Label(scoreboard, textvariable=game.score.maximum).grid()
 scoreboard.grid(column=0, row=2)
+
 root.mainloop()

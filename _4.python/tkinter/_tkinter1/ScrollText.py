@@ -9,8 +9,7 @@ class ScrollText:
         frame1.pack()
         scrollbar = Scrollbar(frame1)
         scrollbar.pack(side = RIGHT, fill = Y)
-        text = Text(frame1, width = 40, height = 10, wrap = WORD, 
-                    yscrollcommand = scrollbar.set)
+        text = Text(frame1, width = 40, height = 10, wrap = WORD, yscrollcommand = scrollbar.set)
         text.pack()
         scrollbar.config(command = text.yview)
         

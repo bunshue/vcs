@@ -34,16 +34,14 @@ class BounceBalls:
         
         self.width = 350 # Width of the self.canvas
         self.height = 150 # Width of the self.canvas
-        self.canvas = Canvas(window, bg = "white", 
-            width = self.width, height = self.height)
+        self.canvas = Canvas(window, bg = "white", width = self.width, height = self.height)
         self.canvas.pack()
         
         frame = Frame(window)
         frame.pack()
         btStop = Button(frame, text = "Stop", command = self.stop)
         btStop.pack(side = LEFT)
-        btResume = Button(frame, text = "Resume",
-            command = self.resume)
+        btResume = Button(frame, text = "Resume", command = self.resume)
         btResume.pack(side = LEFT)
         btAdd = Button(frame, text = "+", command = self.add)
         btAdd.pack(side = LEFT)
@@ -54,7 +52,7 @@ class BounceBalls:
         self.isStopped = False
         self.animate()
         
-        window.mainloop() # Create an event loop
+        window.mainloop()
            
     def stop(self): # Stop animation
         self.isStopped = True

@@ -51,8 +51,8 @@ popupmenu.add_command(label="paste",command=paste)
 
 window.bind("<Button-3>",showPopupMenu)
 
-toolbar=tk.Frame(window,relief="raised",borderwidth=1)
-toolbar.pack(side="top",fill="x",padx=2,pady=1)
+toolbar = tk.Frame(window, relief = "raised", borderwidth = 1)
+toolbar.pack(side = "top",fill = "x", padx = 2, pady = 1)
 
 undoBtn = tk.Button(toolbar, text="Undo", command=undo)
 undoBtn.pack(side="left", pady=2)

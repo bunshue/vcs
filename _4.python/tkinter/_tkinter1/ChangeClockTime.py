@@ -26,7 +26,6 @@ Label(frame, text = "Second: ").pack(side = LEFT)
 second = IntVar()
 second.set(clock.getMinute())
 Entry(frame, textvariable = second, width = 2).pack(side = LEFT) 
-Button(frame, text = "Set New Time", 
-       command = setNewTime).pack(side = LEFT) 
+Button(frame, text = "Set New Time", command = setNewTime).pack(side = LEFT) 
 
-window.mainloop() # Create an event loop
+window.mainloop()

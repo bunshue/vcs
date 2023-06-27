@@ -18,12 +18,9 @@ class SudokuGUI:
         
         for i in range(9):
             for j in range(9):
-                Entry(frame, width = 2, justify = RIGHT, 
-                    textvariable = self.cells[i][j]).grid(
-                        row = i, column = j)
+                Entry(frame, width = 2, justify = RIGHT, textvariable = self.cells[i][j]).grid(row = i, column = j)
         
-        Button(window, text = "Validate", 
-            command = self.validate).pack()
+        Button(window, text = "Validate", command = self.validate).pack()
         
         window.mainloop() # Create an event loop
 
@@ -34,10 +31,8 @@ class SudokuGUI:
                    for x in self.cells[i]] for i in range(9)]
         
         if isValid(values):
-            tkinter.messagebox.showinfo("Check Sudoku Solution", 
-                                        "The solution is valid")
+            tkinter.messagebox.showinfo("Check Sudoku Solution", "The solution is valid")
         else:
-            tkinter.messagebox.showwarning("Check Sudoku Solution", 
-                                        "The solution is invalid")
+            tkinter.messagebox.showwarning("Check Sudoku Solution", "The solution is invalid")
 
 SudokuGUI() # Create GUI

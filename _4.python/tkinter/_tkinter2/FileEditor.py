@@ -14,10 +14,8 @@ class FileEditor:
         # create a pulldown menu, and add it to the menu bar
         operationMenu = Menu(menubar, tearoff = 0)
         menubar.add_cascade(label = "File", menu = operationMenu)
-        operationMenu.add_command(label = "Open",  
-            command = self.openFile)
-        operationMenu.add_command(label = "Save", 
-            command = self.saveFile)
+        operationMenu.add_command(label = "Open", command = self.openFile)
+        operationMenu.add_command(label = "Save", command = self.saveFile)
         
         # Add a tool bar frame 
         frame0 = Frame(window) # Create and add a frame to window
@@ -27,18 +25,15 @@ class FileEditor:
         opneImage = PhotoImage(file = "image/open.gif")
         saveImage = PhotoImage(file = "image/save.gif")
         
-        Button(frame0, image = opneImage, command = 
-            self.openFile).grid(row = 1, column = 1, sticky = W)
-        Button(frame0, image = saveImage,
-            command = self.saveFile).grid(row = 1, column = 2)
+        Button(frame0, image = opneImage, command = self.openFile).grid(row = 1, column = 1, sticky = W)
+        Button(frame0, image = saveImage, command = self.saveFile).grid(row = 1, column = 2)
         
         frame1 = Frame(window) # Hold editor pane
         frame1.grid(row = 2, column = 1)
         
         scrollbar = Scrollbar(frame1)
         scrollbar.pack(side = RIGHT, fill = Y)
-        self.text = Text(frame1, width = 40, height = 20, 
-            wrap = WORD, yscrollcommand = scrollbar.set)
+        self.text = Text(frame1, width = 40, height = 20, wrap = WORD, yscrollcommand = scrollbar.set)
         self.text.pack()
         scrollbar.config(command = self.text.yview)
         

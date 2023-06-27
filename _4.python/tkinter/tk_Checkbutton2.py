@@ -1,13 +1,5 @@
 # Python 測試 tkinter : Checkbutton
 
-def choose():
-    str = "你喜歡的球類運動："
-    for i in range(0, len(choice)):
-        if(choice[i].get() == 1):
-            str = str + ball[i] + " "
-    print(str)
-    msg.set(str)
-
 import tkinter as tk
 
 # 建立主視窗
@@ -46,11 +38,7 @@ check2 = ttk.Checkbutton(
 check2.pack()
 
 
-
-
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
-
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 check_bool = tk.BooleanVar()
 
@@ -63,9 +51,7 @@ exercise_check = ttk.Checkbutton(
 exercise_check.pack()
 
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
-
-
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 window.mainloop()
 

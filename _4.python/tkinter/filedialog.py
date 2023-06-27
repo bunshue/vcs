@@ -73,8 +73,7 @@ class FileDialog:
 
         self.filesbar = Scrollbar(self.midframe)
         self.filesbar.pack(side=RIGHT, fill=Y)
-        self.files = Listbox(self.midframe, exportselection=0,
-                             yscrollcommand=(self.filesbar, 'set'))
+        self.files = Listbox(self.midframe, exportselection=0, yscrollcommand=(self.filesbar, 'set'))
         self.files.pack(side=RIGHT, expand=YES, fill=BOTH)
         btags = self.files.bindtags()
         self.files.bindtags(btags[1:] + btags[:1])
@@ -84,8 +83,7 @@ class FileDialog:
 
         self.dirsbar = Scrollbar(self.midframe)
         self.dirsbar.pack(side=LEFT, fill=Y)
-        self.dirs = Listbox(self.midframe, exportselection=0,
-                            yscrollcommand=(self.dirsbar, 'set'))
+        self.dirs = Listbox(self.midframe, exportselection=0, yscrollcommand=(self.dirsbar, 'set'))
         self.dirs.pack(side=LEFT, expand=YES, fill=BOTH)
         self.dirsbar.config(command=(self.dirs, 'yview'))
         btags = self.dirs.bindtags()
@@ -93,17 +91,11 @@ class FileDialog:
         self.dirs.bind('<ButtonRelease-1>', self.dirs_select_event)
         self.dirs.bind('<Double-ButtonRelease-1>', self.dirs_double_event)
 
-        self.ok_button = Button(self.botframe,
-                                 text="OK",
-                                 command=self.ok_command)
+        self.ok_button = Button(self.botframe, text="OK", command=self.ok_command)
         self.ok_button.pack(side=LEFT)
-        self.filter_button = Button(self.botframe,
-                                    text="Filter",
-                                    command=self.filter_command)
+        self.filter_button = Button(self.botframe, text="Filter", command=self.filter_command)
         self.filter_button.pack(side=LEFT, expand=YES)
-        self.cancel_button = Button(self.botframe,
-                                    text="Cancel",
-                                    command=self.cancel_command)
+        self.cancel_button = Button(self.botframe, text="Cancel", command=self.cancel_command)
         self.cancel_button.pack(side=RIGHT)
 
         self.top.protocol('WM_DELETE_WINDOW', self.cancel_command)
@@ -111,7 +103,7 @@ class FileDialog:
         self.top.bind('<Alt-w>', self.cancel_command)
         self.top.bind('<Alt-W>', self.cancel_command)
 
-    def go(self, dir_or_file=os.curdir, pattern="*", default="", key=None):
+    def go(self, dir_or_file = os.curdir, pattern = "*", default = "", key = None):
         if key and key in dialogstates:
             self.directory, pattern = dialogstates[key]
         else:

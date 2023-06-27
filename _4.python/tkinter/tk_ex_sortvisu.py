@@ -622,14 +622,8 @@ class SortDemo:
             self.array.cancel()
         self.master.after_idle(self.master.quit)
 
+root = Tk()
+demo = SortDemo(root)
+root.protocol('WM_DELETE_WINDOW', demo.c_quit)
+root.mainloop()
 
-# Main program -- for stand-alone operation outside Grail
-
-def main():
-    root = Tk()
-    demo = SortDemo(root)
-    root.protocol('WM_DELETE_WINDOW', demo.c_quit)
-    root.mainloop()
-
-if __name__ == '__main__':
-    main()

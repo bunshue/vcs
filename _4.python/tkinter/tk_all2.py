@@ -27,8 +27,7 @@ listbox.insert(tk.END, "a list entry")
 for item in ["one", "two", "three", "four"]:
     listbox.insert(tk.END, item)
 
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN)
-separator.pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 def changeString():
     stringToCopy = entry.get()
@@ -48,9 +47,7 @@ class App:
         frame = tk.Frame(master)
         frame.pack()
 
-        self.button = tk.Button(
-            frame, text = "QUIT", fg = "red", command = frame.quit
-            )
+        self.button = tk.Button(frame, text = "QUIT", fg = "red", command = frame.quit)
         self.button.pack(side = tk.LEFT)
 
         self.hi_there = tk.Button(frame, text = "Hello", command = self.say_hi)
@@ -60,8 +57,7 @@ class App:
 
 app = App(window)
 
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 import time
 
@@ -74,14 +70,13 @@ label.pack()
 #slider.set(clicks)
 #label.config(text="Time: " + str(score))
 
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 print('Scale 測試')
 slider = tk.Scale(window, from_=0, to=100)
 slider.pack()
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 window.mainloop()
 

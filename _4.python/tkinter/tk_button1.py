@@ -64,7 +64,7 @@ button2.place(x = x_st + dx * 2, y = y_st + dy * 0)
 button3.place(x = x_st + dx * 3, y = y_st + dy * 0)
 button4.place(x = x_st + dx * 4, y = y_st + dy * 0)
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 def open_file():
     button_ofd_text.set("開啟檔案...")
@@ -96,7 +96,7 @@ button_sfd = tk.Button(window, textvariable = button_sfd_text, command = lambda:
 button_sfd_text.set("另存新檔")
 button_sfd.pack()
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 # Button測試
 tk.Label(text = 'Button測試').pack()
@@ -120,7 +120,7 @@ button1 = tk.Button(window, textvariable = btntext, command = clickme)
 btntext.set("按我！")
 button1.pack()
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 def click1():
     textvar.set("我已經被按過了！")
@@ -130,18 +130,16 @@ button1 = tk.Button(window, textvariable = textvar, command = click1)
 textvar.set("按鈕")
 button1.pack()
 
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 w = tk.Button(window, text = "離開", command = window.destroy)
 w.pack()
 
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
-
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 
 window.mainloop()

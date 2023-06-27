@@ -15,13 +15,10 @@ class SierpinskiTriangle:
         frame1 = Frame(window) # Create and add a frame to window
         frame1.pack()
         
-        Label(frame1, 
-            text = "Enter an order: ").pack(side = LEFT)
+        Label(frame1, text = "Enter an order: ").pack(side = LEFT)
         self.order = StringVar()
-        entry = Entry(frame1, textvariable = self.order, 
-                      justify = RIGHT).pack(side = LEFT)
-        Button(frame1, text = "Display Sierpinski Triangle", 
-            command = self.display).pack(side = LEFT)
+        entry = Entry(frame1, textvariable = self.order, justify = RIGHT).pack(side = LEFT)
+        Button(frame1, text = "Display Sierpinski Triangle", command = self.display).pack(side = LEFT)
         
         window.mainloop() # Create an event loop
         
@@ -50,8 +47,7 @@ class SierpinskiTriangle:
             self.displayTriangles(order - 1, p31, p23, p3)
     
     def drawLine(self, p1, p2):
-        self.canvas.create_line(
-            p1[0], p1[1], p2[0], p2[1], tags = "line")
+        self.canvas.create_line(p1[0], p1[1], p2[0], p2[1], tags = "line")
         
     # Return the midpoint between two points
     def midpoint(self, p1, p2):

@@ -15,12 +15,10 @@ class DeckOfCardsGUI:
         
         self.labelList = [] # A list of four labels
         for i in range(4):
-            self.labelList.append(Label(frame, 
-                image = self.imageList[i]))
+            self.labelList.append(Label(frame, image = self.imageList[i]))
             self.labelList[i].pack(side = LEFT)
         
-        Button(window, text = "Shuffle", 
-            command = self.shuffle).pack()
+        Button(window, text = "Shuffle", command = self.shuffle).pack()
         
         window.mainloop() # Create an event loop
 

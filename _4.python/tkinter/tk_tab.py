@@ -41,5 +41,4 @@ label_exercise_2.pack()
 
 notebook.add(tab_exercise, text = 'Tab exercise')
 
-# run 
-window.mainloop()  
+window.mainloop()

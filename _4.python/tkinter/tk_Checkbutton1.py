@@ -51,7 +51,7 @@ for i in range(0, len(ball)):
     item.place(x = x_st + dx * i, y = y_st + dy * 1)
 
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 
 print('Checkbutton 測試')
@@ -60,7 +60,7 @@ var = tk.IntVar()
 c = tk.Checkbutton(window, text = "CheckButton", variable = var)
 c.pack()
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 # Checkbutton測試
 tk.Label(text = 'Checkbutton測試').pack(anchor=tk.W)

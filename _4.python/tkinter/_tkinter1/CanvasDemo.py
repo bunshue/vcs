@@ -6,27 +6,19 @@ class CanvasDemo:
         window.title("Canvas Demo") # Set title
         
         # Place self.canvas in the window
-        self.canvas = Canvas(window, width = 200, height = 100, 
-            bg = "white")
+        self.canvas = Canvas(window, width = 200, height = 100, bg = "white")
         self.canvas.pack()
         
         # Place buttons in frame
         frame = Frame(window)
         frame.pack()
-        btRectangle = Button(frame, text = "Rectangle", 
-            command = self.displayRect)
-        btOval = Button(frame, text = "Oval", 
-            command = self.displayOval)
-        btArc = Button(frame, text = "Arc", 
-            command = self.displayArc)
-        btPolygon = Button(frame, text = "Polygon", 
-            command = self.displayPolygon)
-        btLine = Button(frame, text = "Line", 
-            command = self.displayLine)
-        btString = Button(frame, text = "String", 
-            command = self.displayString)
-        btClear = Button(frame, text = "Clear", 
-            command = self.clearCanvas)
+        btRectangle = Button(frame, text = "Rectangle", command = self.displayRect)
+        btOval = Button(frame, text = "Oval", command = self.displayOval)
+        btArc = Button(frame, text = "Arc", command = self.displayArc)
+        btPolygon = Button(frame, text = "Polygon", command = self.displayPolygon)
+        btLine = Button(frame, text = "Line", command = self.displayLine)
+        btString = Button(frame, text = "String", command = self.displayString)
+        btClear = Button(frame, text = "Clear", command = self.clearCanvas)
         btRectangle.grid(row = 1, column = 1)
         btOval.grid(row = 1, column = 2)
         btArc.grid(row = 1, column = 3)
@@ -35,7 +27,7 @@ class CanvasDemo:
         btString.grid(row = 1, column = 6)
         btClear.grid(row = 1, column = 7)
         
-        window.mainloop() # Create an event loop
+        window.mainloop()
 
     # Display a rectangle
     def displayRect(self):
@@ -43,8 +35,7 @@ class CanvasDemo:
         
     # Display an oval
     def displayOval(self):
-        self.canvas.create_oval(10, 10, 190, 90, fill = "red", 
-            tags = "oval")
+        self.canvas.create_oval(10, 10, 190, 90, fill = "red", tags = "oval")
     
     # Display an arc
     def displayArc(self):
@@ -53,13 +44,11 @@ class CanvasDemo:
     
     # Display a polygon
     def displayPolygon(self):
-        self.canvas.create_polygon(10, 10, 190, 90, 30, 50, 
-            tags = "polygon")
+        self.canvas.create_polygon(10, 10, 190, 90, 30, 50, tags = "polygon")
     
     # Display a line
     def displayLine(self):
-        self.canvas.create_line(10, 10, 190, 90, fill = "red", 
-            tags = "line")
+        self.canvas.create_line(10, 10, 190, 90, fill = "red", tags = "line")
         self.canvas.create_line(10, 90, 190, 10, width = 9, 
             arrow = "last", activefill = "blue", tags = "line")
     
@@ -70,7 +59,6 @@ class CanvasDemo:
     
     # Clear drawings
     def clearCanvas(self):
-        self.canvas.delete("rect", "oval", "arc", "polygon", 
-            "line", "string")
+        self.canvas.delete("rect", "oval", "arc", "polygon", "line", "string")
 
 CanvasDemo() # Create GUI 

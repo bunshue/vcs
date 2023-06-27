@@ -8,11 +8,9 @@ def validate():
                for x in cells[i]] for i in range(9)]
     
     if isValid(values):
-        tkinter.messagebox.showinfo("Check Sudoku Solution", 
-                                    "The solution is valid")
+        tkinter.messagebox.showinfo("Check Sudoku Solution", "The solution is valid")
     else:
-        tkinter.messagebox.showwarning("Check Sudoku Solution", 
-                                    "The solution is invalid")
+        tkinter.messagebox.showwarning("Check Sudoku Solution", "The solution is invalid")
     
 window = Tk() # Create a window
 window.title("Pick Four Cards Randomly") # Set title
@@ -34,4 +32,4 @@ filename = StringVar()
 Entry(frame2, width = 40, textvariable = filename).pack(side = LEFT)
 Button(frame2, text = "Validate", command = validate).pack()
 
-window.mainloop() # Create an event loop
+window.mainloop()
