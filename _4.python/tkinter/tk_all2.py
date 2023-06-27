@@ -63,14 +63,6 @@ app = App(window)
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
 
-tk.Label(text='Canvas 測試').pack()
-color = "#FF0000"
-canvas = tk.Canvas(window, width=300, height=50, bg=color)
-canvas.pack()
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
-
-
 import time
 
 slider = tk.Scale(window, from_=0, to=10)
@@ -93,6 +85,6 @@ separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, p
 
 window.mainloop()
 
-window.destroy() # optional; see description below
+#window.destroy() # optional; see description below
 
 

@@ -297,108 +297,6 @@ print(a.split(" "))
 print(a+b)
 
 
-
-
-candyCan = ["apple", "strawberry", "grape", "mango"]
-
-candyCan[1] = "peach"
-print(candyCan)
-
-
-candyCan = ["apple", "strawberry", "grape", "mango"]
-
-candyCan.append("banana")
-print(candyCan)
-
-
-candyCan = ["apple", "strawberry", "grape", "mango"]
-
-candyCan.insert(1, "orange")
-print(candyCan)
-
-
-
-candyCan = ["apple", "strawberry", "grape", "mango"]
-
-print(candyCan[1])
-print(candyCan[-1])
-print(candyCan[1:3])
-
-
-
-candyCan = ["apple", "strawberry", "grape", "mango"]
-
-print(candyCan)
-print(len(candyCan))
-print(type(candyCan))
-
-candyCan = ["apple", "strawberry", "grape", "mango"]
-
-print("apple" in candyCan)
-print("banana" in candyCan)
-
-
-candyCan = ["apple", "strawberry", "grape", "mango"]
-
-newCandy = ["banana", "orange"]
-temp = candyCan + newCandy
-print(temp)
-print(candyCan)
-print(newCandy)
-
-'''
-candyCan = ("apple", "strawberry", "mango", "peach", "grape")
-
-candyCan[1] = "banana"
-
-
-candyCan = ("apple", "strawberry", "mango", "peach", "grape")
-
-print(candyCan)
-print(len(candyCan))
-
-print(candyCan[0])
-print(candyCan[1:3])
-
-print(candyCan.count("mango"))
-print(candyCan.index("mango"))
-'''
-
-
-
-candyFlavor = {"apple", "strawberry", "mango", "mango"}
-print(candyFlavor)
-
-candyFlavor.add("orange")
-print(candyFlavor)
-
-candyFlavor.remove("orange")
-print(candyFlavor)
-
-newFlavor = {"apple", "banana"}
-candyFlavor.update(newFlavor)
-print(candyFlavor)
-
-
-
-candyNumber = {"apple": 5, "strawberry": 10, "mango": 3}
-
-print(candyNumber)
-
-print(candyNumber["apple"])
-candyNumber["apple"] = 6
-print(candyNumber)
-
-candyNumber["banana"] = 8
-print(candyNumber)
-
-candyNumber.pop("banana")
-print(candyNumber)
-
-print(candyNumber.keys())
-print(candyNumber.values())
-print(candyNumber.items())
-
 string = '測試字串是不是有被包含'
 ss = '要'
 if ss in string:
@@ -507,30 +405,22 @@ print(os.sep)
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
-
 foldername = os.path.dirname(filename)
 print(filename)
 print(foldername)
 
 mode = os.stat(filename).st_mode
-
 print(mode)
-
 print(stat.S_IWOTH)
-
 print(mode & stat.S_IWOTH)
-
 print(mode)
-
 print(stat.S_IWGRP)
-
 print(mode & stat.S_IWGRP)
 
 if os.path.exists(filename):
     print('True')
 else:
     print('False')
-    
 
 if os.path.isdir(filename):
     print('True')

@@ -64,6 +64,9 @@ filename1 = filename.split(".")[-2] # 取得檔案名稱(不添加副檔名)
 print(filename1)
 print('前檔名 : ', filename1)
 
+foldername = os.path.dirname(filename)
+print('全資料夾 : ', foldername)
+
 
 '''
 sql 

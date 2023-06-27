@@ -47,3 +47,112 @@ for info in pieSeries:
         print("================")
 '''
 
+
+
+
+
+
+
+
+print('一維list')
+candyCan = ["apple", "strawberry", "grape", "mango"]
+print(type(candyCan))
+
+candyCan[1] = "peach"
+print(candyCan)
+
+
+candyCan = ["apple", "strawberry", "grape", "mango"]
+
+candyCan.append("banana")
+print(candyCan)
+
+
+candyCan = ["apple", "strawberry", "grape", "mango"]
+
+candyCan.insert(1, "orange")
+print(candyCan)
+
+
+
+candyCan = ["apple", "strawberry", "grape", "mango"]
+
+print(candyCan[1])
+print(candyCan[-1])
+print(candyCan[1:3])
+
+candyCan = ["apple", "strawberry", "grape", "mango"]
+
+print(candyCan)
+print(len(candyCan))
+print(type(candyCan))
+
+candyCan = ["apple", "strawberry", "grape", "mango"]
+
+print("apple" in candyCan)
+print("banana" in candyCan)
+
+
+candyCan = ["apple", "strawberry", "grape", "mango"]
+
+newCandy = ["banana", "orange"]
+temp = candyCan + newCandy
+print(temp)
+print(candyCan)
+print(newCandy)
+
+'''
+candyCan = ("apple", "strawberry", "mango", "peach", "grape")
+
+candyCan[1] = "banana"
+
+
+candyCan = ("apple", "strawberry", "mango", "peach", "grape")
+
+print(candyCan)
+print(len(candyCan))
+
+print(candyCan[0])
+print(candyCan[1:3])
+
+print(candyCan.count("mango"))
+print(candyCan.index("mango"))
+'''
+
+print('set 範例')
+candyFlavor = {"apple", "strawberry", "mango", "mango"}
+print(type(candyFlavor))
+print(candyFlavor)
+
+candyFlavor.add("orange")
+print(candyFlavor)
+
+candyFlavor.remove("orange")
+print(candyFlavor)
+
+newFlavor = {"apple", "banana"}
+candyFlavor.update(newFlavor)
+print(candyFlavor)
+
+
+print('dictionary 範例')
+candyNumber = {"apple": 5, "strawberry": 10, "mango": 3}
+print(type(candyNumber))
+print(candyNumber)
+
+print(candyNumber["apple"])
+candyNumber["apple"] = 6
+print(candyNumber)
+
+candyNumber["banana"] = 8
+print(candyNumber)
+
+candyNumber.pop("banana")
+print(candyNumber)
+
+print(candyNumber.keys())
+print(candyNumber.values())
+print(candyNumber.items())
+
+
+

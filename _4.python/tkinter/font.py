@@ -7,7 +7,7 @@ __version__ = "0.9"
 
 import itertools
 import tkinter
-
+import tkinter as tk
 
 # weight/slant
 NORMAL = "normal"
@@ -65,7 +65,7 @@ class Font:
             options[args[i][1:]] = args[i+1]
         return options
 
-    def __init__(self, root=None, font=None, name=None, exists=False,
+    def __init__(self, root = None, font = None, name = None, exists = False,
                  **options):
         if not root:
             root = tkinter._default_root
@@ -193,42 +193,51 @@ def names(root=None):
     return root.tk.splitlist(root.tk.call("font", "names"))
 
 
-# --------------------------------------------------------------------
-# test stuff
 
-if __name__ == "__main__":
+window = tk.Tk()
 
-    root = tkinter.Tk()
+# 設定主視窗大小
+w = 800
+h = 800
+x_st = 100
+y_st = 100
+#size = str(w)+'x'+str(h)
+#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 
-    # create a font
-    f = Font(family="times", size=30, weight=NORMAL)
+# 設定主視窗標題
+title = "這是主視窗"
+window.title(title)
 
-    print(f.actual())
-    print(f.actual("family"))
-    print(f.actual("weight"))
+# create a font
+f = Font(family = "times", size = 30, weight = NORMAL)
 
-    print(f.config())
-    print(f.cget("family"))
-    print(f.cget("weight"))
+print(f.actual())
+print(f.actual("family"))
+print(f.actual("weight"))
+print(f.config())
+print(f.cget("family"))
+print(f.cget("weight"))
 
-    print(names())
+print(names())
 
-    print(f.measure("hello"), f.metrics("linespace"))
+print(f.measure("hello"), f.metrics("linespace"))
+print(f.metrics(displayof = window))
 
-    print(f.metrics(displayof=root))
+f = Font(font = ("Courier", 20, "bold"))
+print(f.measure("hello"), f.metrics("linespace", displayof = window))
 
-    f = Font(font=("Courier", 20, "bold"))
-    print(f.measure("hello"), f.metrics("linespace", displayof=root))
+w = tk.Label(window, text = "Hello, world", font = f)
+w.pack()
 
-    w = tkinter.Label(root, text="Hello, world", font=f)
-    w.pack()
+w = tk.Button(window, text = "Quit!", command = window.destroy)
+w.pack()
 
-    w = tkinter.Button(root, text="Quit!", command=root.destroy)
-    w.pack()
+fb = Font(font = w["font"]).copy()
+fb.config(weight = BOLD)
 
-    fb = Font(font=w["font"]).copy()
-    fb.config(weight=BOLD)
+w.config(font = fb)
 
-    w.config(font=fb)
-
-    tkinter.mainloop()
+window.mainloop()

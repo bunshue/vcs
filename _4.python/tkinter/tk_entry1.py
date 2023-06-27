@@ -1,4 +1,4 @@
-# Python 測試 tkinter 3
+# Python 測試 tkinter, Entry
 
 def calculate_bmi():
     # BMI 計算，四捨五入取到小數第二位
@@ -54,36 +54,71 @@ weight_msg = tk.IntVar() # 體重
 #設定身高、體重的 Label 及 Entry
 
 font_size = 24
-w = 40
-h = 30
+w = 20
+h = 10
 
 # 設定身高 Label 
-label1 = tk.Label(window, text="請輸入身高:", foreground="red", font=("標楷體", font_size), padx = w, pady = h)
+label1 = tk.Label(window, text = "請輸入身高:", foreground = "red", font = ("標楷體", font_size), padx = w, pady = h)
 label1.pack()
 
 # 設定身高 Entry
-entry1 = tk.Entry(window, foreground="green", textvariable=height_msg)
+entry1 = tk.Entry(window, foreground = "green", textvariable = height_msg)
 entry1.pack()
 
 # 設定 Label
-label2 = tk.Label(window, text="請輸入體重:", foreground="red", font=("標楷體", font_size), padx = w, pady = h)
+label2 = tk.Label(window, text = "請輸入體重:", foreground = "red", font = ("標楷體", font_size), padx = w, pady = h)
 label2.pack()
 
 # 設定 Entry
-entry2 = tk.Entry(window, foreground="green", textvariable=weight_msg)
+entry2 = tk.Entry(window, foreground = "green", textvariable = weight_msg)
 entry2.pack()
 
 #設定回應值 Label
 
 # 設定回應值 Label
-label3 = tk.Label(window, textvariable=return_msg, foreground="red", font=("標楷體", font_size), padx = w, pady = h)
+label3 = tk.Label(window, textvariable = return_msg, foreground = "red", font = ("標楷體", font_size), padx = w, pady = h)
 label3.pack()
 
 #設定功能按鈕，並可觸發自行撰寫的 BMI function
 
 # 設定 Button
-button1 = tk.Button(window, text="BMI 測量", foreground="blue", font=("標楷體", font_size), padx = w, pady = h, command = calculate_bmi)
+button1 = tk.Button(window, text = "BMI 測量", foreground = "blue", font = ("標楷體", font_size), padx = w, pady = h, command = calculate_bmi)
 button1.pack()
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+def checkPW():
+    if(pw.get() == "1234"):
+        msg.set("密碼正確，歡迎登入！")
+    else:
+        msg.set("密碼錯誤，請修正密碼！")
+
+pw = tk.StringVar()
+msg = tk.StringVar()
+label = tk.Label(window, text = "請輸入密碼：(1234)")
+label.pack()
+entry = tk.Entry(window, textvariable = pw)
+entry.pack()
+button = tk.Button(window, text="登入", command = checkPW)
+button.pack()
+lblmsg = tk.Label(window, fg="red", textvariable = msg)
+lblmsg.pack()
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
+# Entry與Label測試
+tk.Label(text = 'Entry與Label測試').pack()
+string = tk.StringVar()
+entry = tk.Entry(window, textvariable = string).pack()
+label = tk.Label(window, textvariable = string).pack()
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
 
 window.mainloop()
 
