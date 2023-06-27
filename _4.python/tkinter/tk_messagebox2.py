@@ -18,14 +18,11 @@ isYesNoCancel = tkinter.messagebox.askyesnocancel(
     "askyesnocancel", "Yes, No, Cancel?") 
 print(isYesNoCancel)
 
-name = tkinter.simpledialog.askstring(
-    "askstring", "Enter your name")
+name = tkinter.simpledialog.askstring("askstring", "Enter your name")
 print(name)
 
-age = tkinter.simpledialog.askinteger(
-    "askinteger", "Enter your age")
+age = tkinter.simpledialog.askinteger("askinteger", "Enter your age")
 print(age)
 
-weight = tkinter.simpledialog.askfloat(
-    "askfloat", "Enter your weight")
+weight = tkinter.simpledialog.askfloat("askfloat", "Enter your weight")
 print(weight)

@@ -1,5 +1,5 @@
-from tkinter import * # Import tkinter
-import tkinter.messagebox # Import tkinter.messagebox
+from tkinter import *
+import tkinter.messagebox
 
 # Check if the numbers entered form a valid solution
 def validate():

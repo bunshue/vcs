@@ -1,4 +1,4 @@
-from tkinter import * # Import tkinter
+from tkinter import *
 import tkinter.messagebox
 from BinaryTree import BinaryTree 
     

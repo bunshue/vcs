@@ -1,5 +1,5 @@
-from tkinter import * # Import tkinter
-import tkinter.messagebox # Import tkinter.messagebox
+from tkinter import *
+import tkinter.messagebox
 from CheckSudokuSolution import isValid # Defined in Listing 11.7
 
 class SudokuGUI:

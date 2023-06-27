@@ -52,8 +52,7 @@ bt_set_data.pack()
 bt_clear = tk.Button(window, text = 'clear', command = clear)  # 放入清空按鈕
 bt_clear.pack()
 
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 text = tk.Text(window)
 text.insert(tk.INSERT, "Tkinter 套件是圖形使用者介面，\n")
@@ -64,7 +63,6 @@ text.insert(tk.END, "不需另外安裝即可使用。")
 text.pack()
 text.config(state=tk.DISABLED)
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
-
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 window.mainloop()

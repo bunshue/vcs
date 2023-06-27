@@ -1,4 +1,6 @@
 import tkinter as tk
+from tkinter import Tk, Canvas, NW
+from PIL import Image, ImageTk
 
 window = tk.Tk()
 
@@ -17,7 +19,7 @@ window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 title = "這是主視窗"
 window.title(title)
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 tk.Label(text = 'Canvas 測試').pack()
 
@@ -25,10 +27,7 @@ color = "#FF0000"
 canvas1 = tk.Canvas(window, width = 300, height = 50, bg=color)
 canvas1.pack()
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
-
-
-
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 def drawABar(x, percent, color, title):
     canvas2.create_line(0, height - 10, width, height - 10)
@@ -36,7 +35,7 @@ def drawABar(x, percent, color, title):
     canvas2.create_text((x + x + width / 4.3 - 5) / 2, (1 - percent) * (height - 30) - 10, text = title)
 
 width = 400
-height = 250
+height = 200
 canvas2 = tk.Canvas(window, bg = "pink", width = width, height = height)
 canvas2.pack()
 
@@ -52,11 +51,7 @@ drawABar(x, 0.3, "green", "Midterm -- 30%")
 x += width / 4.3 - 5 + 10  
 drawABar(x, 0.4, "orange", "Final -- 40%")
 
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
-
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 '''
 def mouse_down(self, event):
@@ -87,7 +82,7 @@ def mouse_up(self, event):
 '''
 
 width = 400
-height = 250
+height = 200
 canvas3 = tk.Canvas(window, bg = "pink", width = width, height = height)
 canvas3.pack()
 
@@ -162,15 +157,26 @@ canvas.tag_bind('<Button1-Motion>', mouse_move)
 canvas.tag_bind('<ButtonRelease-1>', mouse_up)
 '''
 
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+
+image = Image.open(filename)
+if image.mode != "RGB":
+    print('圖片非RGB模式, 要轉成RGB格式')
+    image = image.convert("RGB")	#轉換成RGB圖像
+
+
+box = 50, 50, 50 + 100, 50 + 100
+tile = ImageTk.PhotoImage(image.crop(box))
+x = 270
+y = 50
+canvas3.create_image(x, y, image = tile, anchor = NW)
+
 
 '''
-            self.bitmap = c.create_bitmap(width//2, height//2,
-                                          bitmap=bitmap,
-                                          foreground='blue')
-
+self.bitmap = c.create_bitmap(width//2, height//2,
+                bitmap=bitmap,
+                foreground='blue')
 '''
-
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
 
 def moveCanvas():
     print('move')
@@ -185,9 +191,7 @@ def moveCanvas():
 button1 = tk.Button(window, text = '移動', command = moveCanvas)
 button1.pack()
 
-separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
-
-
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 window.mainloop()
 
