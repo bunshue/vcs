@@ -28,39 +28,44 @@ window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 title = "這是主視窗"
 window.title(title)
 
-x_st = 100
-y_st = 50
-dx = 120
-dy = 100
+from tkinter import ttk
+# checkbutton
+check1 = ttk.Checkbutton(
+	window, 
+	text = 'checkbox 1', 
+	command = lambda: print('ccccc'),
+	variable = 'ccccc',
+	onvalue = 10,
+	offvalue = 5)
+check1.pack()
 
-choice = []
-ball = ["足球", "籃球", "棒球", "排球", "網球", "羽毛球"]
-msg = tk.StringVar()
-label1 = tk.Label(window, text = "選擇喜歡的球類運動：")
-label1.pack()
-label1.place(x = x_st + dx * 0, y = y_st + dy * 1 - 20)
-label2 = tk.Label(window, fg = "red", textvariable = msg)
-label2.pack()
-label2.place(x = x_st + dx * 0, y = y_st + dy * 1 + 20)
+check2 = ttk.Checkbutton(
+	window, 
+	text = 'Checkbox 2',
+	command = '')
+check2.pack()
 
-for i in range(0, len(ball)):
-    item = tk.IntVar()
-    choice.append(item)
-    item = tk.Checkbutton(window, text = ball[i], variable = choice[i], command = choose)
-    item.pack()
-    item.place(x = x_st + dx * i, y = y_st + dy * 1)
+
+
 
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
 
 
-print('Checkbutton 測試')
-var = tk.IntVar()
+check_bool = tk.BooleanVar()
 
-c = tk.Checkbutton(window, text = "CheckButton", variable = var)
-c.pack()
+exercise_check = ttk.Checkbutton(
+	window, 
+	text = 'exercise check', 
+	variable = check_bool, 
+	#command = lambda: print(radio_string.get()))
+        command = lambda: print('你按了check_button'))
+exercise_check.pack()
+
 
 separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
+
+
 
 window.mainloop()
 

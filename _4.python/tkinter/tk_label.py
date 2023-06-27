@@ -29,5 +29,18 @@ h = 30
 label1 = tk.Label(window, text="開啟程式", foreground="red", font=("標楷體", font_size), padx = w, pady = h)
 label1.pack()
 
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
+
+# Label測試
+tk.Label(text='有背景色的Label測試').pack()
+tk.Label(window, text='有背景色的Label 紅', bg='red',   width=20).pack()
+tk.Label(        text='有背景色的Label 綠', bg='green', width=30).pack()
+tk.Label(window, text='有背景色的Label 藍', bg='blue',  width=20).pack()
+
+
+
+separator = tk.Frame(height=2, bd=1, relief=tk.SUNKEN).pack(fill=tk.X, padx=5, pady=5)  #分隔線
+
+
 window.mainloop()
 

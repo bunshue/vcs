@@ -40,6 +40,20 @@ lblmsg = tk.Label(window, fg="red", textvariable=msg)
 lblmsg.pack()
 
 
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
+# Entry與Label測試
+tk.Label(text='Entry與Label測試').pack()
+string = tk.StringVar()
+entry = tk.Entry(window, textvariable=string).pack()
+label = tk.Label(window, textvariable=string).pack()
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
+
 '''
 import tkinter as tk
 window = tk.Tk()

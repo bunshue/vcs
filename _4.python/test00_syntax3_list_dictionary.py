@@ -22,12 +22,9 @@ pieSeries = [
 {"name":"112/04/24","data":[{"name":"92 無鉛汽油","y":29.6,"GroupID":1}]}
 ];
 
-print(type(pieSeries))
-
-print()
-
-print(len(pieSeries))
-
+print('資料型態 :\t', type(pieSeries))
+print('資料長度 :\t', len(pieSeries))
+print('資料內容')
 for info in pieSeries:
     #print(info)
     print('日期:', info['name'])
