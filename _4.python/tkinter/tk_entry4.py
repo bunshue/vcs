@@ -1,4 +1,31 @@
+'''
+Entry內可以接收Enter鍵
+'''
+
 import tkinter as tk
+
+class App(tk.Frame):
+    def __init__(self, master):
+        super().__init__(master)
+        self.pack()
+
+        self.entrythingy = tk.Entry()
+        self.entrythingy.pack()
+
+        # Create the application variable.
+        self.contents = tk.StringVar()
+        # Set it to some value.
+        self.contents.set("this is a variable")
+        # Tell the entry widget to watch this variable.
+        self.entrythingy["textvariable"] = self.contents
+
+        # Define a callback for when the user hits return.
+        # It prints the current value of the variable.
+        self.entrythingy.bind('<Key-Return>',
+                             self.print_contents)
+
+    def print_contents(self, event):
+        print("接收到訊息 : \t", self.contents.get())
 
 window = tk.Tk()
 
@@ -17,29 +44,15 @@ window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 title = "這是主視窗"
 window.title(title)
 
-def checkPassword():
-    password = '1234'
-    enteredPassword = entry2.get()
-    if password == enteredPassword:
-        label_result.config(text="Correct")
-    else:
-        label_result.config(text="Incorrect")
-
-label1 = tk.Label(window, text="Username")
-entry1 = tk.Entry(window)
-
-label2 = tk.Label(window, text="Password:(1234)")
-entry2 = tk.Entry(window, show="*")
-
-button = tk.Button(window, text="Enter", command=checkPassword)
-label_result = tk.Label(window)
-
-label1.grid(row=1, column=1)
-entry1.grid(row=1, column=2)
-label2.grid(row=2, column=1)
-entry2.grid(row=2, column=2)
-button.grid(row=3, column=2)
-label_result.grid(row=4, column=2)
+myapp = App(window)
+myapp.mainloop()
 
 
-window.mainloop()
+
+
+
+
+
+
+
+

@@ -1,5 +1,8 @@
 # Python 測試 tkinter, Entry
 
+import tkinter as tk
+from tkinter import messagebox
+
 def calculate_bmi():
     # BMI 計算，四捨五入取到小數第二位
     BMI_value = round(weight_msg.get() / ((height_msg.get() / 100) ** 2),2)
@@ -23,9 +26,6 @@ def BMI_Status(BMI_value):
             return "BMI 過高，中度肥胖"
         else:
             return "BMI 過高，重度肥胖"
-
-
-import tkinter as tk
 
 window = tk.Tk()
 
@@ -128,6 +128,52 @@ btnDown = tk.Button(window, text = "計算成績")
 btnDown.place(x = 80, y = 50)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
+#add textfields
+label1 = tk.Label(window, text = 'Username:', font = (14))
+label2 = tk.Label(window, text = 'Password:', font = (14))
+#label1.grid(row = 0, column = 0, padx = 5, pady = 5)
+#label2.grid(row = 1, column = 0, padx = 5, pady = 5)
+label1.pack()
+label2.pack()
+
+#get username and password
+username = tk.StringVar()
+password = tk.StringVar()
+entry1 = tk.Entry(window, textvariable = username, font = (14))
+entry2 = tk.Entry(window, textvariable = password, font = (14), show = '*')
+#entry1.grid(row = 0, column = 1)
+#entry2.grid(row = 1, column = 1)
+entry1.pack()
+entry2.pack()
+
+#action when login button is clicked
+def login():
+    if username.get()=='admin' and password.get()=='admin':
+        messagebox.showinfo(title = 'Login status', message = 'You have logged in.')
+    else:
+        messagebox.showerror(title = 'Login error', message = 'Username/Password is incorrect.')
+
+#action when cancel button is clicked
+def cancel():
+    status = messagebox.askyesno(title = 'Question', message = 'Do you want to close the window?')
+    if status==True:
+        window.destroy()
+    else:
+        messagebox.showwarning(title = 'Warning', message = 'Please login again!')
+
+button1 = tk.Button(window, command = login, text = 'Login', font = (14))
+button2 = tk.Button(window, command = cancel, text = 'Cancel', font = (14))
+#button1.grid(row = 2, column = 1, sticky = W)
+#button2.grid(row = 2, column = 1, sticky = E)
+button1.pack()
+button2.pack()
+
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
 
 
 window.mainloop()

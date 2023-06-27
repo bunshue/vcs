@@ -86,21 +86,29 @@ height = 200
 canvas3 = tk.Canvas(window, bg = "pink", width = width, height = height)
 canvas3.pack()
 
-canvas3.create_line(0, 0, 200, 100)
-canvas3.create_line(0, 100, 200, 0, fill = "red", dash = (4, 4))
-canvas3.create_rectangle(50, 25, 150, 75, fill = "blue")
-
+#直線
 canvas3.create_line(0, 0, 100, 100)
 canvas3.create_line(100, 100, 0, 0)
 canvas3.create_line(0, 100, 100, 0)
-x1 = 100
-y1 = 100
-x2 = 200
-y2 = 200
-canvas3.create_rectangle(x1, y1, x2, y2, fill = 'red', outline = 'black', width = 1)
+canvas3.create_line(0, 0, 400, 200, fill = "red", dash = (4, 4))
 
-radius = 40
-canvas3.create_oval(100 - radius, 100 - radius, 100 + radius, 100 + radius, tags = "oval")
+#矩形
+x1 = 150
+y1 = 100
+x2 = x1 + 100
+y2 = y1 + 100
+canvas3.create_rectangle(x1, y1, x2, y2, fill = 'red', outline = 'black', width = 1)
+x1 = 25
+y1 = 125
+x2 = x1 + 100
+y2 = y1 + 50
+canvas3.create_rectangle(x1, y1, x2, y2, fill = "blue")
+
+#圓形
+cx = 50
+cy = 50
+radius = 50
+canvas3.create_oval(cx - radius, cy - radius, cx + radius, cy + radius, tags = "oval")
 
 def mouseClick1(event):
     print('mouseClick1')
