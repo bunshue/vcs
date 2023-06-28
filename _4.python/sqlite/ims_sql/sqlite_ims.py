@@ -13,6 +13,25 @@ import sqlite3
 all_data = [
 ]
 
+list_stage01 = list()
+list_stage02 = list()
+list_stage03 = list()
+list_stage04 = list()
+list_stage05 = list()
+list_stage06 = list()
+list_stage07 = list()
+list_stage08 = list()
+list_stage09 = list()
+list_stage10 = list()
+list_stage11 = list()
+list_stage12 = list()
+list_stage13a = list()
+list_stage13b = list()
+list_stage14 = list()
+list_stage15 = list()
+
+db_filename = 'C:/_git/vcs/_1.data/______test_files2/db_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
+
 print('----------------------------------------------------------------------')	#70個
 
 def process_csv_file1(filename):
@@ -88,17 +107,138 @@ def process_csv_file1(filename):
     if stage == 0:
         print('不合法的csv檔 : ', filename, ',\t跳過')
 
+def save_data_in_list(datas):
+    print(type(datas))
+    data_length = len(datas)
+    if stage == 1:
+        print('第1站')
+        length = len(list_stage01)
+        if length == 0:
+            list_stage01.append(datas[0])   #print('加入檔頭')
+        for i in range(1, data_length):
+            list_stage01.append(datas[i])
+    elif stage == 2:
+        print('第2站')
+        length = len(list_stage02)
+        if length == 0:
+            list_stage02.append(datas[0])   #print('加入檔頭')
+        for i in range(1, data_length):
+            list_stage02.append(datas[i])
+    elif stage == 3:
+        print('第3站')
+        length = len(list_stage03)
+        if length == 0:
+            list_stage03.append(datas[0])   #print('加入檔頭')
+        for i in range(1, data_length):
+            list_stage03.append(datas[i])
+    elif stage == 4:
+        print('第4站')
+        length = len(list_stage04)
+        if length == 0:
+            list_stage04.append(datas[0])   #print('加入檔頭')
+        for i in range(1, data_length):
+            list_stage04.append(datas[i])
+    elif stage == 5:
+        print('第5站')
+        length = len(list_stage05)
+        if length == 0:
+            list_stage05.append(datas[0])   #print('加入檔頭')
+        for i in range(1, data_length):
+            list_stage05.append(datas[i])
+    elif stage == 6:
+        print('第6站')
+        length = len(list_stage06)
+        if length == 0:
+            list_stage06.append(datas[0])   #print('加入檔頭')
+        for i in range(1, data_length):
+            list_stage06.append(datas[i])
+    elif stage == 7:
+        print('第7站')
+        length = len(list_stage07)
+        if length == 0:
+            list_stage07.append(datas[0])   #print('加入檔頭')
+        for i in range(1, data_length):
+            list_stage07.append(datas[i])
+    elif stage == 8:
+        print('第8站')
+        length = len(list_stage08)
+        if length == 0:
+            list_stage08.append(datas[0])   #print('加入檔頭')
+        for i in range(1, data_length):
+            list_stage08.append(datas[i])
+    elif stage == 9:
+        print('第9站')
+        length = len(list_stage09)
+        if length == 0:
+            list_stage09.append(datas[0])   #print('加入檔頭')
+        for i in range(1, data_length):
+            list_stage09.append(datas[i])
+    elif stage == 10:
+        print('第10站')
+        length = len(list_stage10)
+        if length == 0:
+            list_stage10.append(datas[0])   #print('加入檔頭')
+        for i in range(1, data_length):
+            list_stage10.append(datas[i])
+    elif stage == 11:
+        print('第11站')
+        length = len(list_stage11)
+        if length == 0:
+            list_stage11.append(datas[0])   #print('加入檔頭')
+        for i in range(1, data_length):
+            list_stage11.append(datas[i])
+    elif stage == 12:
+        print('第12站')
+        length = len(list_stage12)
+        if length == 0:
+            list_stage12.append(datas[0])   #print('加入檔頭')
+        for i in range(1, data_length):
+            list_stage12.append(datas[i])
+    elif stage == 131:
+        print('第13a站')
+        length = len(list_stage13a)
+        if length == 0:
+            list_stage13a.append(datas[0])   #print('加入檔頭')
+        for i in range(1, data_length):
+            list_stage13a.append(datas[i])
+    elif stage == 132:
+        print('第13b站')
+        length = len(list_stage13b)
+        if length == 0:
+            list_stage13b.append(datas[0])   #print('加入檔頭')
+        for i in range(1, data_length):
+            list_stage13b.append(datas[i])
+    elif stage == 14:
+        print('第14站')
+        length = len(list_stage14)
+        if length == 0:
+            list_stage14.append(datas[0])   #print('加入檔頭')
+        for i in range(1, data_length):
+            list_stage14.append(datas[i])
+    elif stage == 15:
+        print('第15站')
+        length = len(list_stage15)
+        if length == 0:
+            list_stage15.append(datas[0])   #print('加入檔頭')
+        for i in range(1, data_length):
+            list_stage15.append(datas[i])
+    else:
+        print('第XXXXXXXXX站')
+
+
 def process_csv_file2(filename):
     global stage
     global tablename
 
-    with open(filename, encoding = 'big5') as csvFile:
-        csvReader = csv.reader(csvFile)
-        datas = list(csvReader)    #將資料轉成list
+    #with open(filename, newline = '') as csvfile:
+    with open(filename, encoding = 'big5') as csvfile:
+        rows = csv.reader(csvfile)  # 讀取 csv 檔案內容
+        datas = list(rows)    #將資料轉成list
 
     length = len(datas)
-
     print('len = ', length)
+
+    save_data_in_list(datas)
 
     #print(datas)
     data_column = len(datas[0])
@@ -182,7 +322,7 @@ def process_csv_file2(filename):
         #print(len(row))
         #print('第' + str(i + 1) + '筆資料 : ', end = "")
         #print(rows[i])
-        #print("{}\t{}\t{}\t{}\t{}".format(row[0], row[1], row[2], row[3], row[4]))
+        #print('{}\t{}\t{}\t{}\t{}'.format(row[0], row[1], row[2], row[3], row[4]))
         for r in row:
             print(r, end = '\t')
         print()
@@ -190,6 +330,7 @@ def process_csv_file2(filename):
     conn.close()  # 關閉資料庫連線
 
 def import_csv_data():
+    global stage
     stage = 0
     tablename = 'table00'
 
@@ -216,9 +357,10 @@ def import_csv_data():
         stage = 0
         tablename = 'table00'
         process_csv_file1(filename)
+        print('new stage = ', stage)
         if stage != 0:
             print('繼續')
-            #process_csv_file2(filename)
+            process_csv_file2(filename)
             #若能正確處理完畢, 再搬到old資料夾
             #shutil.move(filename, target_dir)
 
@@ -243,7 +385,7 @@ def read_from_db():
     index = 1
     for row in rows:
         print(len(row))
-        #print("{}\t{}".format(row[0],row[1]))
+        #print('{}\t{}'.format(row[0],row[1]))
         print(row)
         all_data.append(row)
         index += 1
@@ -255,7 +397,7 @@ def read_from_db():
     rows = cursor.fetchall()
     #print(rows)
     for row in rows:
-        #print("{}\t{}".format(row[0],row[1]))
+        #print('{}\t{}'.format(row[0],row[1]))
         print(row)
         all_data.append(row)
         message = message + str(row) + '\n'
@@ -270,6 +412,55 @@ def show_info():
     print('show_info')
     length = len(all_data)
     print('資料長度 : ', length)
+
+def do_debug():
+    filename = 'C:/_git/vcs/_4.python/sqlite/ims_sql/QC/csv/ims_20221218_1.csv'
+    print(filename)
+    global stage
+    stage = 0
+    tablename = 'table01'
+    process_csv_file1(filename)
+    print(stage)
+    
+    if stage != 0:
+        print('繼續')
+        process_csv_file2(filename)
+    else:
+        print('XXXXXXXXXXXXXXXX')
+
+def show_list_stage():
+    print('第1站')
+    print(list_stage01)
+    print('第2站')
+    print(list_stage02)
+    print('第3站')
+    print(list_stage03)
+    print('第4站')
+    print(list_stage04)
+    print('第5站')
+    print(list_stage05)
+    print('第6站')
+    print(list_stage06)
+    print('第7站')
+    print(list_stage07)
+    print('第8站')
+    print(list_stage08)
+    print('第9站')
+    print(list_stage09)
+    print('第10站')
+    print(list_stage10)
+    print('第11站')
+    print(list_stage11)
+    print('第12站')
+    print(list_stage12)
+    print('第13a站')
+    print(list_stage13a)
+    print('第13b站')
+    print(list_stage13b)
+    print('第14站')
+    print(list_stage14)
+    print('第15站')
+    print(list_stage15)
 
 def export_data():
     global all_data
@@ -296,24 +487,49 @@ def export_data():
 
 import tkinter as tk
 
-def button0Click():
-    print("你按了 匯入生產資料")
-    import_csv_data()
+def button00Click():
+    print('你按了 新建資料庫')
 
-def button1Click():
-    print("你按了 從資料庫讀出全部資料")
+def button01Click():
+    print('你按了 開啟資料庫')
+
+def button02Click():
+    print('你按了 讀取資料庫資料')
     read_from_db()
 
-def button2Click():
-    print("你按了button2")
+def button03Click():
+    print('你按了 匯入生產資料並將資料加入資料庫')
+    import_csv_data()
+
+def button04Click():
+    print('你按了 匯出生產資料')
+    export_data()
+
+def button05Click():
+    print('你按了button05')
+
+def button10Click():
+    print('你按了button10')
     show_info()
 
-def button3Click():
-    print("你按了button3")
+def button11Click():
+    print('你按了button11')
+    do_debug()
 
-def button4Click():
-    print("你按了 匯出資料")
-    export_data()
+def button12Click():
+    print('你按了button12')
+    show_list_stage()
+
+def button13Click():
+    print('你按了button13')
+
+def button14Click():
+    #print('你按了button14')
+    set_data()
+
+def button15Click():
+    #print('你按了button15')
+    clear_textbox1()
 
 def set_data():
     '''
@@ -344,7 +560,7 @@ y_st = 100
 #size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
 #window.geometry(size)
 window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print('{0:d}x{1:d}+{2:d}+{3:d}'.format(w, h, x_st, y_st))
 
 # 設定主視窗標題
 title = "這是主視窗"
@@ -353,76 +569,89 @@ window.title(title)
 # 設定主視窗之背景色
 #window.configure(bg = "#7AFEC6")
 
-x_st = 100
+x_st = 50
 y_st = 50
 dx = 120
-dy = 100
+dy = 80
 w = 12
 h = 3
 
-button0 = tk.Button(window, text = "匯入生產資料", width = w, height = h, command = button0Click)
-button0.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
+button00 = tk.Button(window, text = '新建資料庫', width = w, height = h, command = button00Click)
+button00.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
+button01 = tk.Button(window, text = '開啟資料庫', width = w, height = h, command = button01Click)
+button01.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
+button02 = tk.Button(window, text = '讀取資料庫資料', width = w, height = h, command = button02Click)
+button02.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
+button03 = tk.Button(window, text = '匯入生產資料\n將資料加入資料庫', width = w, height = h, command = button03Click)
+button03.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
+button04 = tk.Button(window, text = '匯出生產資料', width = w, height = h, command = button04Click)
+button04.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
+button05 = tk.Button(window, text = '', width = w, height = h, command = button05Click)
+button05.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
+button10 = tk.Button(window, text = 'Info', width = w, height = h, command = button10Click)
+button10.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
+button11 = tk.Button(window, text = 'Debug', width = w, height = h, command = button11Click)
+button11.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
+button12 = tk.Button(window, text = 'Show All', width = w, height = h, command = button12Click)
+button12.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
+button13 = tk.Button(window, text = '', width = w, height = h, command = button13Click)
+button13.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
+button14 = tk.Button(window, text = 'Send Data', width = w, height = h, command = button14Click)
+button14.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
+button15 = tk.Button(window, text = 'Clear', width = w, height = h, command = button15Click)
+button15.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 
-button1 = tk.Button(window, text = "從資料庫\n讀出全部資料", width = w, height = h, command = button1Click)
-button1.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-
-button2 = tk.Button(window, text = "Info", width = w, height = h, command = button2Click)
-button2.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-
-button3 = tk.Button(window, text = "xxx", width = w, height = h, command = button3Click)
-button3.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-
-button4 = tk.Button(window, text = "匯出資料", width = w, height = h, command = button4Click)
-button4.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-
-button0.place(x = x_st + dx * 0, y = y_st + dy * 0)
-button1.place(x = x_st + dx * 1, y = y_st + dy * 0)
-button2.place(x = x_st + dx * 2, y = y_st + dy * 0)
-button3.place(x = x_st + dx * 3, y = y_st + dy * 0)
-button4.place(x = x_st + dx * 4, y = y_st + dy * 0)
-
+button00.place(x = x_st + dx * 0, y = y_st + dy * 0)
+button01.place(x = x_st + dx * 1, y = y_st + dy * 0)
+button02.place(x = x_st + dx * 2, y = y_st + dy * 0)
+button03.place(x = x_st + dx * 3, y = y_st + dy * 0)
+button04.place(x = x_st + dx * 4, y = y_st + dy * 0)
+button05.place(x = x_st + dx * 5, y = y_st + dy * 0)
+button10.place(x = x_st + dx * 0, y = y_st + dy * 1)
+button11.place(x = x_st + dx * 1, y = y_st + dy * 1)
+button12.place(x = x_st + dx * 2, y = y_st + dy * 1)
+button13.place(x = x_st + dx * 3, y = y_st + dy * 1)
+button14.place(x = x_st + dx * 4, y = y_st + dy * 1)
+button15.place(x = x_st + dx * 5, y = y_st + dy * 1)
 
 #stage_no = ["第1站", "第2站", "第3站"]
 
 def choose():
-    str = "你喜歡的球類運動："
+    str = "選擇："
     for i in range(0, len(choice)):
         if(choice[i].get() == 1):
-            str = str + ball[i] + " "
+            str = str + stage_no[i] + " "
     print(str)
     msg.set(str)
 
 choice = []
-ball = ["足球", "籃球", "棒球", "排球", "網球", "羽毛球"]
+stage_no = [
+'第1站', '第2站', '第3站', '第4站', '第5站', '第6站', '第7站', '第8站',
+'第9站', '第10站', '第11站', '第12站', '第13a站', '第13b站', '第14站', '第15站'
+]
 msg = tk.StringVar()
-label1 = tk.Label(window, text = "選擇喜歡的球類運動：")
+label1 = tk.Label(window, text = '選擇顯示站別：')
 label1.pack()
-label1.place(x = x_st + dx * 0, y = y_st + dy * 1 - 20)
-label2 = tk.Label(window, fg = "red", textvariable = msg)
+label1.place(x = x_st + dx * 0, y = y_st + dy * 2 - 20)
+label2 = tk.Label(window, fg = 'red', textvariable = msg)
 label2.pack()
-label2.place(x = x_st + dx * 0, y = y_st + dy * 1 + 20)
+label2.place(x = x_st + dx * 0, y = y_st + dy * 2 + 50)
 
-for i in range(0, len(ball)):
+dx2 = dx * 3 / 4
+for i in range(0, len(stage_no)):
     item = tk.IntVar()
     choice.append(item)
-    item = tk.Checkbutton(window, text = ball[i], variable = choice[i], command = choose)
+    item = tk.Checkbutton(window, text = stage_no[i], variable = choice[i], command = choose)
     item.pack()
-    item.place(x = x_st + dx * i, y = y_st + dy * 1)
+    item.place(x = x_st + dx2 * (i % 8), y = y_st + dy * 2 + int(i / 8) * 25)
 
 mmm = 'abcd'
 count = 0
 
 #像是richTextBox
-text1 = tk.Text(window, width = 80, height = 30)  # 放入多行輸入框
+text1 = tk.Text(window, width = 100, height = 30)  # 放入多行輸入框
 text1.pack()
-text1.place(x = x_st + dx * 0, y = y_st + dy * 2)
-
-bt_set_data = tk.Button(window, text = 'set data', command = set_data)  # 放入清空按鈕
-bt_set_data.pack()
-bt_set_data.place(x = x_st + dx * 3, y = y_st + dy * 6)
-bt_clear = tk.Button(window, text = 'clear', command = clear_textbox1)  # 放入清空按鈕
-bt_clear.pack()
-bt_clear.place(x = x_st + dx * 4, y = y_st + dy * 6)
+text1.place(x = x_st + dx * 0, y = y_st + dy * 3)
 
 window.mainloop()
 
