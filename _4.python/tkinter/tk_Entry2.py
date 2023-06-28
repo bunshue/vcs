@@ -1,8 +1,7 @@
-'''
-Frame 綁定鍵盤滑鼠事件
-'''
-
 import tkinter as tk
+
+def get_pos(event):
+	print(f'x: {event.x} y: {event.y}')
 
 window = tk.Tk()
 
@@ -18,21 +17,19 @@ window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 #print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 
 # 設定主視窗標題
-title = "取得滑鼠位置與鍵碼"
+title = "這是主視窗"
 window.title(title)
 #window.title('Event Binding')
 
-def key(event):
-    print("鍵碼 : ", repr(event.char))
+# widgets 
+text = tk.Text(window)
+text.pack()
 
-def callback(event):
-    frame.focus_set()
-    print('滑鼠位置(' + str(event.x) + ', ' + str(event.y) + ')')
+# exercise : 
+# print 'Mousewheel' when the user holds down shift and uses the mousewheel while text is selected
+text.bind('<Shift-MouseWheel>', lambda event: print('Mousewheel'))
 
-frame = tk.Frame(window, width = 300, height = 300)
-frame.bind("<Key>", key)
-frame.bind("<Button-1>", callback)
-frame.pack()
+#window.bind('<Motion>', get_pos)       #顯示目前的滑鼠位置, 很多
 
 window.mainloop()
 

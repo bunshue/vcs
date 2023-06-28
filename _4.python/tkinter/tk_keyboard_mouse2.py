@@ -1,7 +1,10 @@
-from tkinter import * # Import tkinter
+'''
+Canvas 綁定鍵盤滑鼠事件
+'''
 
-window = Tk() # Create a window
-window.title('左鍵變大 右鍵變小')
+import tkinter as tk
+
+window = tk.Tk()
 
 # 設定主視窗大小
 w = 800
@@ -13,6 +16,13 @@ y_st = 100
 #window.geometry(size)
 window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 #print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+
+# 設定主視窗標題
+title = "取得滑鼠位置與鍵碼"
+window.title(title)
+#window.title('Event Binding')
+
+window.title('左鍵變大 右鍵變小')
 
 def mouseClick1(event):
     canvas.delete("oval")
@@ -47,7 +57,7 @@ def motion(event):
     window.title('Mouse position: (%s, %s)' % (event.x, event.y))
     return
     
-canvas = Canvas(window, bg = "white", width = 200, height = 200)
+canvas = tk.Canvas(window, bg = "white", width = 200, height = 200)
 canvas.pack()
 radius = 50
 canvas.create_oval(100 - radius, 100 - radius, 
@@ -62,4 +72,4 @@ canvas.bind("<Button-5>", mouseClick5)
 canvas.bind("<Double-1>", mouseDoubleClick1)
 canvas.bind('<Motion>',motion)
 
-window.mainloop() # Create an event loop
+window.mainloop()

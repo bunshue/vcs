@@ -1,10 +1,9 @@
+'''
+各種控件 綁定鍵盤滑鼠事件
+'''
+
 import tkinter as tk
 from tkinter import ttk
-
-#一些視窗事件
-
-def get_pos(event):
-	print(f'x: {event.x} y: {event.y}')
 
 window = tk.Tk()
 
@@ -23,6 +22,9 @@ window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 title = "這是主視窗"
 window.title(title)
 #window.title('Event Binding')
+
+def get_pos(event):
+	print(f'x: {event.x} y: {event.y}')
 
 # widgets 
 text = tk.Text(window)
