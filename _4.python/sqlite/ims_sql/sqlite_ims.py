@@ -10,6 +10,8 @@ import time
 import sqlite3
 import tkinter as tk
 
+flag_debug_mode = True
+
 # 建立csv二維串列資料
 all_data = [
 ]
@@ -356,9 +358,12 @@ def import_csv_data():
     source_dir = 'QC/csv'
     target_dir = 'QC/csv_old'
 
+    if flag_debug_mode == True:
+        source_dir = 'QC_debug/csv'
+        target_dir = 'QC_debug/csv_old'
+
     db_filename = 'C:/_git/vcs/_1.data/______test_files2/db_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
     #db_filename = 'db_ims.sqlite';
-
 
     #準備輸出資料夾 若不存在, 則建立
     if not os.path.exists(target_dir):
@@ -490,6 +495,7 @@ def merge_stage_data():
     print('第3站')
     merge_stage_data0(list_stage03)
 
+    '''
     print('第4站')
     merge_stage_data0(list_stage04)
 
@@ -507,10 +513,12 @@ def merge_stage_data():
 
     print('第9站')
     merge_stage_data0(list_stage09)
+    '''
 
     print('第10站')
     merge_stage_data0(list_stage10)
 
+    '''
     print('第11站')
     merge_stage_data0(list_stage11)
     
@@ -528,6 +536,7 @@ def merge_stage_data():
 
     print('第15站')
     merge_stage_data0(list_stage15)
+    '''
 
 def show_info():
     print('show_info')

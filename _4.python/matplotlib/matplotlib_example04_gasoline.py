@@ -8,7 +8,7 @@ print("油價走勢圖")
 
 print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename) # 建立資料庫連線
-cursor = conn.execute('select * from prices order by gdate;')
+cursor = conn.execute('SELECT * FROM prices ORDER BY gdate;')
 
 data = []
 for row in cursor:

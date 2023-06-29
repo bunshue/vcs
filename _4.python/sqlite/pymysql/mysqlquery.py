@@ -8,6 +8,7 @@ with conn.cursor() as cursor:
     datas = cursor.fetchall()   # 取出所有資料
     print(datas)
     print('-' * 30)             # 畫分隔線
+    
     sql = "select * from scores"
     cursor.execute(sql)    
     data = cursor.fetchone()    # 取出第一筆資料

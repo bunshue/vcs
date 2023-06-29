@@ -6,6 +6,7 @@ with conn.cursor() as cursor:
     sql = "delete from scores where ID = 4"
     cursor.execute(sql)
     conn.commit()
+    
     sql = "select * from scores"
     cursor.execute(sql)    
     data = cursor.fetchall()
