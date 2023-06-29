@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}賴田捕手：訓練紀錄{% endblock %}
+
+{% block main %}
+
+<!-- 宣告一個巨集的誕生 -->
+{% macro easy_row(data, tag) -%}
+  {% for record in data %}
+  <div class="row">
+    {% for item in record %}
+    <div class="col">
+    <{{ tag }}>{{ item }}</{{ tag }}>
+    </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+{%- endmacro %}
+<!-- 宣告一個巨集的結束 -->
+
+<div class="container my-5 py-5">
+  <div class="row">
+  <div class="col">
+    <h1>訓練紀錄</h1>
+  </div>
+  </div>
+
+  <!-- 將所有草泥馬的訓練紀錄列在下面 -->
+  <!-- 宣告一些等等會用來創造欄位說明的變數 -->
+  {% set col_names = (("record_no", "alpaca_name", "training", "duration", "date"),) %}
+
+  <!-- 用巨集快速創造欄位名稱 -->
+  {{ easy_row(col_names, "h2") }}
+
+  <hr class="my-4">
+
+  <!-- 將所有草泥馬的訓練紀錄列在下面 -->
+  {{ easy_row(html_dataclip, "p") }}
+  <!-- 將所有草泥馬的訓練紀錄列在上面 -->
+
+</div>
+{% endblock %}
+
+
+
+

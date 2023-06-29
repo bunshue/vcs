@@ -53,36 +53,8 @@ drawABar(x, 0.4, "orange", "Final -- 40%")
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
-'''
-def mouse_down(self, event):
-    lastx = event.x
-    lasty = event.y
-    origx = event.x
-    origy = event.y
-    canvas.tag_raise(item_id)
-
-def mouse_move(self, event):
-    canvas.move(item_id,event.x - lastx, event.y - lasty)
-    lastx = event.x
-    lasty = event.y
-
-def mouse_up(self, event):
-    i = nearestindex(event.x)
-    if i >= array.getsize():
-        i = array.getsize() - 1
-    if i < 0:
-        i = 0
-    other = array.items[i]
-    here = index
-    array.items[here], array.items[i] = other, self
-    index = i
-    x1, y1, x2, y2 = position()
-    canvas.coords(item_id, (x1, y1, x2, y2))
-    other.setindex(here)
-'''
-
 width = 400
-height = 200
+height = 400
 canvas3 = tk.Canvas(window, bg = "pink", width = width, height = height)
 canvas3.pack()
 
@@ -109,61 +81,6 @@ cx = 50
 cy = 50
 radius = 50
 canvas3.create_oval(cx - radius, cy - radius, cx + radius, cy + radius, tags = "oval")
-
-def mouseClick1(event):
-    print('mouseClick1')
-    '''
-    canvas.delete("oval")
-    global radius
-    if radius < 100:
-        radius += 2
-    canvas.create_oval(100 - radius, 100 - radius, 
-                       100 + radius, 100 + radius, tags = "oval")
-    '''
-
-def mouseClick2(event):
-    print('你按了滑鼠中鍵')
-    
-def mouseClick3(event):
-    print('mouseClick3')
-    '''
-    canvas.delete("oval")
-    global radius
-    if radius > 2:
-        radius -= 2
-    canvas.create_oval(100 - radius, 100 - radius, 
-                       100 + radius, 100 + radius, tags = "oval")
-    '''
-
-def mouseClick4(event):
-    print('上一頁')
-    
-def mouseClick5(event):
-    print('下一頁')
-
-def mouseDoubleClick1(event):
-    print('雙擊左鍵')
-
-def motion(event):
-    #print("Mouse position: (%s %s)" % (event.x, event.y))
-    window.title('Mouse position: (%s, %s)' % (event.x, event.y))
-    return
-    
-
-canvas3.bind("<Button-1>", mouseClick1)
-canvas3.bind("<Button-2>", mouseClick2)
-canvas3.bind("<Button-3>", mouseClick3)
-canvas3.bind("<Button-4>", mouseClick4)
-canvas3.bind("<Button-5>", mouseClick5)
-canvas3.bind("<Double-1>", mouseDoubleClick1)
-canvas3.bind('<Motion>',motion)
-
-
-'''
-canvas.tag_bind('<Button-1>', mouse_down)
-canvas.tag_bind('<Button1-Motion>', mouse_move)
-canvas.tag_bind('<ButtonRelease-1>', mouse_up)
-'''
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 

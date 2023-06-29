@@ -18,16 +18,22 @@ if __name__ == '__main__':
     print('happy new year !!')
 
 menu = {'拉麵':500, '炒飯':430, '煎餃':210}
+print(type(menu))
+print(menu)
 for order in menu:
 	print(order)
 	print(menu[order] * 1.08)
 
 
 music_list = ['DEATH METAL', 'ROCK', 'ANIME', 'POP']
+print(type(music_list))
+print(music_list)
 for music in music_list:
 	print('now playing... ' + music)
 
 family = ['ryo-ko', 'mako', 'satsuki']
+print(type(family))
+print(family)
 for kid in family:
 	print('早安！' + kid)
 	print('起床')
@@ -73,6 +79,7 @@ money = [[41.36, 28.96, 3.77, 8.45],
 [7.02, 9.09, 0.98, 3.96],
 [9.43, 0.40, 0.41, 10.57],
 [12.78, 3.75, 3.54, 0.55]]
+print(type(money))
 
 #設定一個一維矩陣
 games = ["Wii Sports", "Super Mario Bros", "Mario Kart Wii", "Wii Sports Resort",
@@ -172,6 +179,9 @@ def pick(x):
 
 alist = [1, 4, 2, 5, 0, 3, 4, 4, 2]
 choices = map(pick, alist)
+print(type(alist))
+print(type(choices))
+
 for choice in choices:
     print(choice)
 
@@ -189,7 +199,7 @@ listchinese = [100, 74, 82]
 listmath = [87, 88, 65]
 listenglish = [79, 100, 8]
 print("姓名     座號  國文  數學  英文")
-for i in range(0,3):
+for i in range(0, 3):
     print(listname[i].ljust(5), str(i+1).rjust(3), str(listchinese[i]).rjust(5), str(listmath[i]).rjust(5), str(listenglish[i]).rjust(5))
 
 

@@ -22,6 +22,8 @@ print("x**y = " + str(x ** y))
 
 
 lst = [3, 2, 1, 5, 9, 0]
+print(type(lst))
+print(lst)
 sorted(lst)
 print(lst)
 
@@ -181,6 +183,12 @@ print(__doc__)  # the docstring of this module above
 import sympy
 VERSION = sympy.__version__
 print(VERSION)
+
+import selenium
+print(selenium.__version__)
+
+
+
 
 '''
 import win32api, win32con
@@ -392,16 +400,11 @@ import sys
 print(sys.maxsize)
 print(2 ** 32)
 
-import selenium
-
-print(selenium.__version__)
-
 import os
 import stat
 
 print(os.name)
 print(os.sep)
-
 
 filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
