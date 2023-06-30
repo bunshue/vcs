@@ -375,13 +375,10 @@ def import_csv_data():
         source_dir = 'QC_debug/csv'
         target_dir = 'QC_debug/csv_old'
 
-    #db_filename = 'C:/_git/vcs/_1.data/______test_files2/db_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
-    #db_filename = 'db_ims.sqlite';
-
     #準備輸出資料夾 若不存在, 則建立
     if not os.path.exists(target_dir):
             os.mkdir(target_dir)
-            #os.makedirs(target_dir, exist_ok=True)
+            #os.makedirs(target_dir, exist_ok = True)
 
     #尋找檔案
     import glob
@@ -403,12 +400,34 @@ def import_csv_data():
     text1.insert('end', message)
 
 def read_from_db():
+    
+    # 還有其他站 TBD
+    
+    if db_filename == '':
+        message = '尚未開啟資料庫, 離開'
+        print(message)
+        text1.insert('end', message)
+        return
+    
     global all_data
+    all_data = [
+    ]
     message = ''
 
     print('從資料庫讀出全部資料')
 
-    #db_filename = 'db_ims.sqlite'
+    print('從資料庫讀出全部表單的名稱')
+
+    conn = sqlite3.connect(db_filename) # 建立資料庫連線
+
+    table_names = []
+    cursor = conn.execute("SELECT name FROM sqlite_master WHERE type = 'table';")
+    for table in cursor.fetchall():
+        table_names.append(table[0])
+    print(table_names)
+
+    conn.close()  # 關閉資料庫連線
+
 
     print('第1站')
     conn = sqlite3.connect(db_filename) # 建立資料庫連線
@@ -545,6 +564,7 @@ def merge_stage_data():
     #print('第15站')
     merge_stage_data0(list_stage15)
 
+
 def show_info():
     print('show_info')
     length = len(all_data)
@@ -556,8 +576,7 @@ def show_info():
             str = str + stage_no[i] + " "
     print(str)
 
-def do_debug():
-    print('debug')
+    
 
 def show_list_stage():
     print('第1站')
@@ -623,19 +642,31 @@ def export_data():
         text1.insert('end', message)
 
 def button00Click():
-    global db_filename
     print('你按了 新建資料庫')
+    global db_filename
     db_filename = 'db_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
     message = '已建立資料庫 : ' + db_filename
     print(message)
     text1.insert('end', message)
-    window.title(message)
+    main_message1.set(message)
 
 def button01Click():
-    print('你按了 開啟資料庫 XXXXXXXX')
+    print('你按了 開啟資料庫')
+    button01_text.set("開啟資料庫...")
+    file = askopenfile(parent = window, mode = 'rb', title = "選取資料庫", filetypes = [("資料庫檔案", "*.sqlite")])
+    if file:
+        global db_filename
+        db_filename = file.name
+        message = '已開啟資料庫 : ' + db_filename
+        print(message)
+        text1.insert('end', message)
+        main_message1.set(message)
+
+    button01_text.set("開啟資料庫")
 
 def button02Click():
     print('你按了 讀取資料庫資料')
+    global db_filename
     if db_filename == '':
         message = '尚未開啟資料庫, 離開'
         print(message)
@@ -645,9 +676,9 @@ def button02Click():
     read_from_db()
 
 def button03Click():
+    print('你按了 匯入生產資料並將資料加入資料庫')
     global db_filename
     print(db_filename)
-    print('你按了 匯入生產資料並將資料加入資料庫')
     if db_filename == '':
         message = '尚未開啟資料庫, 離開'
         print(message)
@@ -670,7 +701,6 @@ def button10Click():
 
 def button11Click():
     print('你按了button11')
-    do_debug()
 
 def button12Click():
     print('你按了button12')
@@ -714,17 +744,10 @@ def choose():
     print(str)
     msg.set(str)
 
-def open_file():
-    button01_text.set("開啟資料庫...")
-    file = askopenfile(parent = window, mode = 'rb', title = "選取資料庫", filetypes = [("資料庫檔案", "*.sqlite")])
-    if file:
-        mesg = '已開啟資料庫 : ' + db_filename
-        print(mesg)
-        window.title(mesg)
-
-    button01_text.set("開啟資料庫")
-
 window = tk.Tk()
+
+main_message1 = tk.StringVar()
+main_message2 = tk.StringVar()
 
 # 設定主視窗大小
 w = 800
@@ -738,8 +761,7 @@ window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 #print('{0:d}x{1:d}+{2:d}+{3:d}'.format(w, h, x_st, y_st))
 
 # 設定主視窗標題
-title = "未開啟資料庫"
-window.title(title)
+window.title('自動化產線生產資料庫')
 
 # 設定主視窗之背景色
 #window.configure(bg = "#7AFEC6")
@@ -758,8 +780,8 @@ button00.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 #button01 = tk.Button(window, text = '開啟資料庫', width = w, height = h, command = button01Click)
 #button01.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 button01_text = tk.StringVar()
-#button01 = tk.Button(window, textvariable = button01_text, command = lambda:open_file(), font="Raleway", bg="#20bebe", fg="white", height=2, width=15)
-button01 = tk.Button(window, textvariable = button01_text, width = w, height = h, command = lambda:open_file())
+#button01 = tk.Button(window, textvariable = button01_text, command = lambda:button01Click(), font="Raleway", bg="#20bebe", fg="white", height=2, width=15)
+button01 = tk.Button(window, textvariable = button01_text, width = w, height = h, command = lambda:button01Click())
 #button01 = tk.Button(window, text='選取檔案', command = xxxxxxx)
 button01_text.set("開啟資料庫")
 
@@ -781,9 +803,9 @@ button05.place(x = x_st + dx * 5, y = y_st + dy * 0)
 if flag_debug_mode == True:
     button10 = tk.Button(window, text = 'Info', width = w, height = h, command = button10Click)
     button10.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-    button11 = tk.Button(window, text = 'Debug', width = w, height = h, command = button11Click)
+    button11 = tk.Button(window, text = '', width = w, height = h, command = button11Click)
     button11.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-    button12 = tk.Button(window, text = 'Show All', width = w, height = h, command = button12Click)
+    button12 = tk.Button(window, text = '顯示各站資料', width = w, height = h, command = button12Click)
     button12.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
     button13 = tk.Button(window, text = 'Show all_data', width = w, height = h, command = button13Click)
     button13.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
@@ -800,6 +822,16 @@ if flag_debug_mode == True:
     button15.place(x = x_st + dx * 5, y = y_st + dy * 1)
 
 # 加入 Label
+label_message1 = tk.Label(window, fg = 'red', textvariable = main_message1)
+label_message1.pack()
+label_message1.place(x = 0, y = 0)
+main_message1.set('')
+
+label_message2 = tk.Label(window, fg = 'red', textvariable = main_message2)
+label_message2.pack()
+label_message2.place(x = 0, y = 0 + 25)
+main_message2.set('')
+
 msg = tk.StringVar()
 label1 = tk.Label(window, text = '選擇顯示站別：')
 label1.pack()
@@ -809,7 +841,7 @@ label2.pack()
 label2.place(x = x_st + dx * 0, y = y_st + dy * 2 + 80)
 
 # 加入 Checkbutton
-dx2 = dx * 4 / 4
+dx2 = dx * 4 / 4   #為了微調距離用
 for i in range(0, len(stage_no)):
     item = tk.IntVar()
     choice.append(item)
@@ -821,6 +853,9 @@ for i in range(0, len(stage_no)):
 text1 = tk.Text(window, width = 100, height = 30)  # 放入多行輸入框
 text1.pack()
 text1.place(x = x_st + dx * 0, y = y_st + dy * 3 + 50)
+
+message = "尚未開啟資料庫"
+main_message1.set(message)
 
 window.mainloop()
 
