@@ -44,10 +44,19 @@ SELECT 什麼 FROM 哪裏;
 SELECT 什麼 FROM 哪裏 WHERE 條件; (可用邏輯運算子做組合條件)
        欄名      表格名稱
 
+
+SELECT * FROM customer WHERE birthday < '1990-01-01';
+
 SELECT 什麼 FROM 哪裏 ORDER BY 什麼 ASC;
       欄名      表格名稱       欄名,排列方法
 以升冪排序 ASC(預設)
 以降冪排序 DESC
+
+
+限制讀取個數
+SELECT 什麼 FROM 哪裏 LIMIT 10         #只讀前10筆
+SELECT * FROM titles LIMIT 3, 5        #從第3筆開始讀5筆資料(從0起算)
+SELECT * FROM titles LIMIT 5 OFFSET 3  #讀5筆資料出來, 從第3筆開始讀 (從0起算)'
 
 
 SQL之資料一定要'方正'

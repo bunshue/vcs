@@ -47,6 +47,21 @@ stage_no = [
 '第13a站 等級判定', '第13b站 資料燒錄', '第14站 前2站NG', '第15站 包裝出料'
 ]
 
+table_list = [
+'table01', 'table02', 'table03', 'table04',
+'table05', 'table06', 'table07', 'table08',
+'table09', 'table10', 'table11', 'table12',
+'table13a', 'table13b', 'table14', 'table15'
+]
+
+list_stage_list = [
+'list_stage01', 'list_stage02', 'list_stage03', 'list_stage04',
+'list_stage05', 'list_stage06', 'list_stage07', 'list_stage08',
+'list_stage09', 'list_stage10', 'list_stage11', 'list_stage12',
+'list_stage13a', 'list_stage13b', 'list_stage14', 'list_stage15'
+]
+
+
 stage = -1
 tablename = ''
 db_filename = ''
@@ -55,6 +70,66 @@ db_filename = ''
 dummy_data = 'abcd'
 count = 0
 
+print('----------------------------------------------------------------------')	#70個
+
+#公用副程式
+
+#取得一個資料庫內所有表單的名稱, list格式
+def get_table_names(conn):
+    table_names = []
+    tables = conn.execute("SELECT name FROM sqlite_master WHERE type='table';")
+    for table in tables.fetchall():
+        table_names.append(table[0])
+    return table_names
+
+#取得一個表單內所有欄位的名稱, list格式
+def get_column_names(conn, table_name):
+    column_names = []
+    columns = conn.execute(f"PRAGMA table_info('{table_name}');").fetchall()
+    for col in columns:
+        column_names.append(col[1])
+    return column_names
+
+#清除記憶體內的資料
+def clear_all_data():
+    global all_data
+    all_data = [
+    ]
+
+    global list_stage01
+    global list_stage02
+    global list_stage03
+    global list_stage04
+    global list_stage05
+    global list_stage06
+    global list_stage07
+    global list_stage08
+    global list_stage09
+    global list_stage10
+    global list_stage11
+    global list_stage12
+    global list_stage13a
+    global list_stage13b
+    global list_stage14
+    global list_stage15
+    
+    list_stage01 = list()
+    list_stage02 = list()
+    list_stage03 = list()
+    list_stage04 = list()
+    list_stage05 = list()
+    list_stage06 = list()
+    list_stage07 = list()
+    list_stage08 = list()
+    list_stage09 = list()
+    list_stage10 = list()
+    list_stage11 = list()
+    list_stage12 = list()
+    list_stage13a = list()
+    list_stage13b = list()
+    list_stage14 = list()
+    list_stage15 = list()
+    
 print('----------------------------------------------------------------------')	#70個
 
 def process_csv_file1(filename):
@@ -401,7 +476,7 @@ def import_csv_data():
 
 def read_from_db():
     
-    # 還有其他站 TBD
+    # 還有其他站 TBD,  還要讀出資料後 將資料 加/附加 到list裏
     
     if db_filename == '':
         message = '尚未開啟資料庫, 離開'
@@ -416,18 +491,33 @@ def read_from_db():
 
     print('從資料庫讀出全部資料')
 
-    print('從資料庫讀出全部表單的名稱')
-
     conn = sqlite3.connect(db_filename) # 建立資料庫連線
 
-    table_names = []
-    cursor = conn.execute("SELECT name FROM sqlite_master WHERE type = 'table';")
-    for table in cursor.fetchall():
-        table_names.append(table[0])
-    print(table_names)
+    print('目前資料庫 : ' + db_filename)
 
-    conn.close()  # 關閉資料庫連線
+    conn = sqlite3.connect(db_filename)
 
+    table_names = get_table_names(conn)
+    print(type(table_names))
+    talbe_names_length = len(table_names)
+    if talbe_names_length <= 0:
+        print('資料庫內無表單, 離開')
+        conn.close()
+        return;
+    
+    print('裡面有:', talbe_names_length, ' 個表單')
+        
+    conn.close()
+
+    table_data_exists = False
+    for table_name in table_names:
+        if(table_name == 'table01'):
+            print('第1站資料存在')
+            table_data_exists = True
+
+    if table_data_exists == False:
+        print('無第1站資料, 離開')
+        return;
 
     print('第1站')
     conn = sqlite3.connect(db_filename) # 建立資料庫連線
@@ -438,10 +528,21 @@ def read_from_db():
     for row in rows:
         print(len(row))
         #print('{}\t{}'.format(row[0], row[1]))
-        print(row)
+        #print(row)
         all_data.append(row)
         index += 1
     conn.close()  # 關閉資料庫連線
+
+
+    table_data_exists = False
+    for table_name in table_names:
+        if(table_name == 'table02'):
+            print('第1站資料存在')
+            table_data_exists = True
+
+    if table_data_exists == False:
+        print('無第2站資料, 離開')
+        return;
 
     print('第2站')
     conn = sqlite3.connect(db_filename) # 建立資料庫連線
@@ -450,11 +551,42 @@ def read_from_db():
     #print(rows)
     for row in rows:
         #print('{}\t{}'.format(row[0], row[1]))
-        print(row)
+        #print(row)
         all_data.append(row)
         message = message + str(row) + '\n'
     conn.close()  # 關閉資料庫連線
     text1.insert('end', message)
+
+    for i in range(1, len(table_list)):
+        print('檢查 : ', table_list[i])
+
+        table_data_exists = False
+        for table_name in table_names:
+            if(table_name == table_list[i]):
+                print('表單: ', table_list[i], ' 存在')
+                table_data_exists = True
+
+        if table_data_exists == False:
+            print('表單: ', table_list[i], ' 不存在')
+            continue
+
+        print('讀取表單: ', table_list[i], ' 資料')
+        conn = sqlite3.connect(db_filename) # 建立資料庫連線
+
+
+        sqlstr = "SELECT * FROM {}".format(table_list[i])
+        #print(sqlstr)
+        cursor = conn.execute(sqlstr)
+        rows = cursor.fetchall()
+        #print(rows)
+        for row in rows:
+            #print('{}\t{}'.format(row[0], row[1]))
+            #print(row)
+            all_data.append(row)
+            message = message + str(row) + '\n'
+        conn.close()  # 關閉資料庫連線
+        text1.insert('end', message)
+
 
     message = "從資料庫讀出全部資料 完成"
     print(message)
@@ -576,7 +708,41 @@ def show_info():
             str = str + stage_no[i] + " "
     print(str)
 
-    
+
+    length = len(list_stage01)
+    print('第1站 資料長度: ', length)
+
+
+    '''
+    global db_filename
+    if db_filename == '':
+        message = '尚未開啟資料庫, 離開'
+        print(message)
+        text1.insert('end', message)
+        return
+
+    print('目前資料庫 : ' + db_filename)
+
+    conn = sqlite3.connect(db_filename)
+
+    table_names = get_table_names(conn)
+    print(type(table_names))
+    talbe_names_length = len(table_names)
+    print('裡面有:', talbe_names_length, ' 個表單')
+    print('分別是:')
+    for table_name in table_names:
+        print('表單:', table_name, end = '\t')
+        column_names = get_column_names(conn, table_name)
+        column_names_length = len(column_names)
+        print('裡面有:', column_names_length, ' 個欄位', end = ' ')
+        print('分別是:', end = ' ')
+        for column_name in column_names:
+            print(column_name, end = ' ')
+        print()
+
+
+    conn.close()
+    '''
 
 def show_list_stage():
     print('第1站')
@@ -589,6 +755,7 @@ def show_list_stage():
     print(list_stage04)
     print('第5站')
     print(list_stage05)
+    '''
     print('第6站')
     print(list_stage06)
     print('第7站')
@@ -611,6 +778,15 @@ def show_list_stage():
     print(list_stage14)
     print('第15站')
     print(list_stage15)
+    '''
+
+    '''
+    #還是只能當字串 不能當變數.......
+    int('合在一起')
+    for i in range(0, len(list_stage_list)):
+        print('顯示 : ', list_stage_list[i])
+        print(list_stage_list[i])
+    '''
 
 def show_all_data():
 
@@ -650,6 +826,9 @@ def button00Click():
     text1.insert('end', message)
     main_message1.set(message)
 
+    print('新建資料庫, 清除記憶體資料')
+    clear_all_data()
+
 def button01Click():
     print('你按了 開啟資料庫')
     button01_text.set("開啟資料庫...")
@@ -663,6 +842,8 @@ def button01Click():
         main_message1.set(message)
 
     button01_text.set("開啟資料庫")
+    print('開啟資料庫, 清除記憶體資料')
+    clear_all_data()
 
 def button02Click():
     print('你按了 讀取資料庫資料')
@@ -807,7 +988,7 @@ if flag_debug_mode == True:
     button11.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
     button12 = tk.Button(window, text = '顯示各站資料', width = w, height = h, command = button12Click)
     button12.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-    button13 = tk.Button(window, text = 'Show all_data', width = w, height = h, command = button13Click)
+    button13 = tk.Button(window, text = 'Show  all_data', width = w, height = h, command = button13Click)
     button13.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
     button14 = tk.Button(window, text = 'Send Data', width = w, height = h, command = button14Click)
     button14.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)

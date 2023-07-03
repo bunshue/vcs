@@ -121,6 +121,8 @@ print('從資料庫讀出全部資料')
 db_filename = 'C:/_git/vcs/_1.data/______test_files1/_db/headlines.sqlite';
 
 conn = sqlite3.connect(db_filename) # 建立資料庫連線
+
+print('讀取全部, 只顯示前10筆')
 cursor = conn.execute('SELECT * FROM titles')
 rows = cursor.fetchall()
 #print(rows)
@@ -130,6 +132,23 @@ for row in rows:
     r += 1
     if r == 10:
         break;
+
+print('只讀前10筆')
+cursor = conn.execute('SELECT * FROM titles LIMIT 10')
+rows = cursor.fetchall()
+print(rows)
+
+print('從第3筆開始讀5筆資料(從0起算)')
+cursor = conn.execute('SELECT * FROM titles LIMIT 3, 5')
+rows = cursor.fetchall()
+print(rows)
+
+print('讀5筆資料出來, 從第3筆開始讀 (從0起算)')
+cursor = conn.execute('SELECT * FROM titles LIMIT 5 OFFSET 3')
+rows = cursor.fetchall()
+print(rows)
+
+
 
 conn.close()  # 關閉資料庫連線
 
