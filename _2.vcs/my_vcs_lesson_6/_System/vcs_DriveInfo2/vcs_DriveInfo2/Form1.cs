@@ -28,6 +28,9 @@ namespace vcs_DriveInfo2
         [DllImportAttribute("user32.dll")]
         private extern static int SendMessage(IntPtr handle, int m, int p, int h);
 
+        int hdd_space_threshold1 = 100;
+        int hdd_space_threshold2 = 100;
+
         public Form1()
         {
             InitializeComponent();
@@ -35,12 +38,24 @@ namespace vcs_DriveInfo2
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            update_default_setting();
+
             this.FormBorderStyle = FormBorderStyle.None;
             //this.richTextBox1.Visible = false;
             this.Text = "使用 DriveInfo 類別取得磁碟資訊";
             bt_clear.Location = new Point(richTextBox1.Location.X + richTextBox1.Size.Width - bt_clear.Size.Width, richTextBox1.Location.Y + richTextBox1.Size.Height - bt_clear.Size.Height);
 
             get_disk_info();
+        }
+
+        void update_default_setting()
+        {
+            hdd_space_threshold1 = Properties.Settings.Default.hdd_space_threshold1;
+            hdd_space_threshold2 = Properties.Settings.Default.hdd_space_threshold2;
+
+            richTextBox1.Text += "取得 hdd_space_threshold1 = " + hdd_space_threshold1.ToString() + "\n";
+            richTextBox1.Text += "取得 hdd_space_threshold2 = " + hdd_space_threshold2.ToString() + "\n";
+
         }
 
         private void bt_clear_Click(object sender, EventArgs e)
@@ -303,6 +318,19 @@ namespace vcs_DriveInfo2
             g.DrawLine(new Pen(Color.Red, 4), x_st, y_st, x_st + ww, y_st + hh);
             g.DrawLine(new Pen(Color.Red, 4), x_st, y_st + hh, x_st + ww, y_st);
 
+
+            Bitmap bmp = new Bitmap(Properties.Resources.setup);
+            x_st = x_st - ww;
+            Rectangle destRect1 = new Rectangle(x_st+1, y_st+1, ww-2, hh-2);
+            float x = 0;
+            float y = 0;
+            float width = bmp.Width;
+            float height = bmp.Height;
+            GraphicsUnit units = GraphicsUnit.Pixel;
+            g.DrawImage(bmp, destRect1, x, y, width, height, units);
+            g.DrawRectangle(new Pen(Color.Red, 4), x_st, y_st, ww, hh);
+
+
             g.DrawRectangle(Pens.Green, 0, 0, pictureBox1.Width - 1, pictureBox1.Height - 1);
         }
 
@@ -322,7 +350,15 @@ namespace vcs_DriveInfo2
             {
                 this.Cursor = Cursors.SizeAll;
                 ReleaseCapture();
-                SendMessage(this.Handle, 0xA1, 0x2, 0);
+                try
+                {
+                    SendMessage(this.Handle, 0xA1, 0x2, 0);
+                }
+                catch (Exception ex)
+                {
+                    //richTextBox1.Text += "xxx錯誤訊息e39 : " + ex.Message + "\n";
+                }
+
                 this.Cursor = Cursors.Default;
             }
         }
@@ -342,6 +378,22 @@ namespace vcs_DriveInfo2
             //g.DrawLine(new Pen(Color.Red, 4), x_st, y_st + hh, x_st + ww, y_st);
             if ((e.X > (w - ww)) && (e.X < w) && (e.Y > (h - hh)) && (e.Y < h))
                 Application.Exit();
+            else if ((e.X > (w - ww*2)) && (e.X < (w-ww)) && (e.Y > (h - hh)) && (e.Y < h))
+            {
+                richTextBox1.Text += "SETUP ";
+                Form_Setup frm = new Form_Setup();    //實體化 Form_Setup 視窗物件
+                frm.StartPosition = FormStartPosition.CenterScreen;      //設定視窗居中顯示
+                frm.ShowDialog();   //顯示 frm 視窗
+
+                //update_default_setting();
+
+
+            }
+
+
+
+
+            //另一區做setup
 
             Form1_MouseDown(sender, e);
         }
