@@ -25,7 +25,7 @@ namespace vcs_DriveInfo2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        [global::System.Configuration.DefaultSettingValueAttribute("80")]
         public int hdd_space_threshold1 {
             get {
                 return ((int)(this["hdd_space_threshold1"]));
@@ -37,13 +37,61 @@ namespace vcs_DriveInfo2.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100")]
+        [global::System.Configuration.DefaultSettingValueAttribute("90")]
         public int hdd_space_threshold2 {
             get {
                 return ((int)(this["hdd_space_threshold2"]));
             }
             set {
                 this["hdd_space_threshold2"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string upload_source_directory {
+            get {
+                return ((string)(this["upload_source_directory"]));
+            }
+            set {
+                this["upload_source_directory"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string upload_destination_directory {
+            get {
+                return ((string)(this["upload_destination_directory"]));
+            }
+            set {
+                this["upload_destination_directory"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public int upload_interval {
+            get {
+                return ((int)(this["upload_interval"]));
+            }
+            set {
+                this["upload_interval"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool upload_enabled {
+            get {
+                return ((bool)(this["upload_enabled"]));
+            }
+            set {
+                this["upload_enabled"] = value;
             }
         }
     }

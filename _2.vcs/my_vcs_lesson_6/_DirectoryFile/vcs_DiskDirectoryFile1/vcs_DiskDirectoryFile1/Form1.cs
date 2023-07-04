@@ -634,7 +634,6 @@ namespace vcs_DiskDirectoryFile1
             richTextBox1.Text += "建立隨機檔案: " + RandomFileName + "\n";
             string TempFileName = Path.GetTempFileName();
             richTextBox1.Text += "建立暫存檔案: " + TempFileName + "\n";
-
         }
 
         private void bt_file12_Click(object sender, EventArgs e)
@@ -666,7 +665,6 @@ namespace vcs_DiskDirectoryFile1
             //取得目前所在路徑
             string currentPath = Directory.GetCurrentDirectory();
             richTextBox1.Text += "目前所在路徑: " + currentPath + "\n";
-
         }
 
         private void bt_dir01_Click(object sender, EventArgs e)
@@ -677,7 +675,6 @@ namespace vcs_DiskDirectoryFile1
                 richTextBox1.Text += "資料夾: " + Path + " 不存在\n";
             else
                 richTextBox1.Text += "資料夾: " + Path + " 存在\n";
-
         }
 
         private void bt_dir02_Click(object sender, EventArgs e)
@@ -730,8 +727,9 @@ namespace vcs_DiskDirectoryFile1
                 richTextBox1.Text += "已建立一個新資料夾: " + newPath + "\n";
             }
             else
+            {
                 richTextBox1.Text += "資料夾: " + newPath + " 已存在，不能再建立\n";
-
+            }
         }
 
         private void bt_dir05_Click(object sender, EventArgs e)
@@ -2138,7 +2136,6 @@ namespace vcs_DiskDirectoryFile1
             richTextBox1.Text += File.GetAttributes(filename) + "\n";
             File.SetAttributes(filename, FileAttributes.ReadOnly);
             richTextBox1.Text += File.GetAttributes(filename) + "\n";
-
         }
 
         private void bt_new10_Click(object sender, EventArgs e)
