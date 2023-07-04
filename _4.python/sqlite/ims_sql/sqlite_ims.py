@@ -437,6 +437,49 @@ def process_csv_file2(filename):
     '''
     conn.close()  # 關閉資料庫連線
 
+def precheck_csv_data():
+    print('預先檢查這些csv檔案是否皆可用')
+    
+    #1. 無舊資料
+    #2. 有舊資料 要考慮序號是否
+    #3. 第一站資料必定要先存在
+    
+    import os, time, glob, sys, shutil
+
+    source_dir = 'QC/csv'
+    target_dir = 'QC/csv_old'
+
+    if flag_debug_mode == True:
+        source_dir = 'QC_debug/csv'
+        target_dir = 'QC_debug/csv_old'
+
+    #準備輸出資料夾 若不存在, 則建立
+    if not os.path.exists(target_dir):
+            os.mkdir(target_dir)
+            #os.makedirs(target_dir, exist_ok = True)
+
+    #尋找檔案
+    import glob
+    print('尋找目前目錄下之 *.csv')
+    files = glob.glob(source_dir + "/*.csv") 
+    for filename in files:
+        #print(filename)
+        stage = 0
+        tablename = 'table00'
+        #process_csv_file1(filename)
+        if stage != 0:
+            print('繼續')
+            #process_csv_file2(filename)
+            #若能正確處理完畢, 再搬到old資料夾
+            #shutil.move(filename, target_dir)
+
+    #message = "匯入生產資料 完成"
+    #print(message)
+    #text1.insert('end', message)
+    
+def precheck_data_base():
+    print('匯入資料庫時要預先檢查這個新的資料庫資料是否皆可用')
+    
 def import_csv_data():
     global stage
     global tablename
@@ -803,6 +846,7 @@ def export_data():
         message = '無資料, 離開'
         print(message)
         text1.insert('end', message)
+        main_message2.set(message)
     else:
         # 開啟輸出的 csv 檔案
         filename_w = '匯出資料範例.csv'
@@ -821,7 +865,7 @@ def button00Click():
     print('你按了 新建資料庫')
     global db_filename
     db_filename = 'db_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
-    message = '已建立資料庫 : ' + db_filename
+    message = '資料庫 : ' + db_filename
     print(message)
     text1.insert('end', message)
     main_message1.set(message)
@@ -836,7 +880,7 @@ def button01Click():
     if file:
         global db_filename
         db_filename = file.name
-        message = '已開啟資料庫 : ' + db_filename
+        message = '資料庫 : ' + db_filename
         print(message)
         text1.insert('end', message)
         main_message1.set(message)
@@ -870,11 +914,11 @@ def button03Click():
     merge_stage_data()
 
 def button04Click():
-    print('你按了 匯出生產資料')
-    export_data()
+    print('你按了 匯入資料庫 TBD')
 
 def button05Click():
-    print('你按了button05')
+    print('你按了 匯出生產資料')
+    export_data()
 
 def button10Click():
     print('你按了button10')
@@ -882,14 +926,15 @@ def button10Click():
 
 def button11Click():
     print('你按了button11')
+    precheck_csv_data()
 
 def button12Click():
     print('你按了button12')
     show_list_stage()
+    show_all_data()
 
 def button13Click():
     print('你按了button13')
-    show_all_data()
 
 def button14Click():
     #print('你按了button14')
@@ -931,15 +976,15 @@ main_message1 = tk.StringVar()
 main_message2 = tk.StringVar()
 
 # 設定主視窗大小
-w = 800
-h = 800
+W = 800
+H = 800
 x_st = 100
 y_st = 100
-#size = str(w)+'x'+str(h)
-#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#size = str(W)+'x'+str(H)
+#size = str(W)+'x'+str(H)+'+'+str(x_st)+'+'+str(y_st)
 #window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
-#print('{0:d}x{1:d}+{2:d}+{3:d}'.format(w, h, x_st, y_st))
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(W, H, x_st, y_st))
+#print('{0:d}x{1:d}+{2:d}+{3:d}'.format(W, H, x_st, y_st))
 
 # 設定主視窗標題
 window.title('自動化產線生產資料庫')
@@ -954,25 +999,25 @@ dy = 80
 w = 12
 h = 3
 
-button00 = tk.Button(window, text = '新建資料庫', width = w, height = h, command = button00Click)
+button00 = tk.Button(window, width = w, height = h, command = button00Click, text = '新建資料庫')
 button00.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 
 #開啟資料庫按鈕
-#button01 = tk.Button(window, text = '開啟資料庫', width = w, height = h, command = button01Click)
+#button01 = tk.Button(window, width = w, height = h, command = button01Click, text = '開啟資料庫')
 #button01.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 button01_text = tk.StringVar()
 #button01 = tk.Button(window, textvariable = button01_text, command = lambda:button01Click(), font="Raleway", bg="#20bebe", fg="white", height=2, width=15)
 button01 = tk.Button(window, textvariable = button01_text, width = w, height = h, command = lambda:button01Click())
-#button01 = tk.Button(window, text='選取檔案', command = xxxxxxx)
+#button01 = tk.Button(window, command = xxxxxxx, text='選取檔案')
 button01_text.set("開啟資料庫")
 
-button02 = tk.Button(window, text = '讀取資料庫資料', width = w, height = h, command = button02Click)
+button02 = tk.Button(window, width = w, height = h, command = button02Click, text = '讀取資料庫資料')
 button02.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-button03 = tk.Button(window, text = '匯入生產資料\n將資料加入資料庫', width = w, height = h, command = button03Click)
+button03 = tk.Button(window, width = w, height = h, command = button03Click, text = '匯入生產資料\n將資料加入資料庫')
 button03.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-button04 = tk.Button(window, text = '匯出生產資料', width = w, height = h, command = button04Click)
+button04 = tk.Button(window, width = w, height = h, command = button04Click, text = '匯入資料庫')
 button04.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-button05 = tk.Button(window, text = '', width = w, height = h, command = button05Click)
+button05 = tk.Button(window, width = w, height = h, command = button05Click, text = '匯出生產資料')
 button05.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 button00.place(x = x_st + dx * 0, y = y_st + dy * 0)
 button01.place(x = x_st + dx * 1, y = y_st + dy * 0)
@@ -982,17 +1027,17 @@ button04.place(x = x_st + dx * 4, y = y_st + dy * 0)
 button05.place(x = x_st + dx * 5, y = y_st + dy * 0)
 
 if flag_debug_mode == True:
-    button10 = tk.Button(window, text = 'Info', width = w, height = h, command = button10Click)
+    button10 = tk.Button(window, width = w, height = h, command = button10Click, text = 'Info')
     button10.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-    button11 = tk.Button(window, text = '', width = w, height = h, command = button11Click)
+    button11 = tk.Button(window, width = w, height = h, command = button11Click, text = '檢查csv/db')
     button11.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-    button12 = tk.Button(window, text = '顯示各站資料', width = w, height = h, command = button12Click)
+    button12 = tk.Button(window, width = w, height = h, command = button12Click, text = '顯示記憶體資料')
     button12.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-    button13 = tk.Button(window, text = 'Show  all_data', width = w, height = h, command = button13Click)
+    button13 = tk.Button(window, width = w, height = h, command = button13Click, text = '')
     button13.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-    button14 = tk.Button(window, text = 'Send Data', width = w, height = h, command = button14Click)
+    button14 = tk.Button(window, width = w, height = h, command = button14Click, text = 'Send Data')
     button14.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
-    button15 = tk.Button(window, text = 'Clear', width = w, height = h, command = button15Click)
+    button15 = tk.Button(window, width = w, height = h, command = button15Click, text = 'Clear')
     button15.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
 
     button10.place(x = x_st + dx * 0, y = y_st + dy * 1)
@@ -1002,15 +1047,17 @@ if flag_debug_mode == True:
     button14.place(x = x_st + dx * 4, y = y_st + dy * 1)
     button15.place(x = x_st + dx * 5, y = y_st + dy * 1)
 
+font_size = 20
+
 # 加入 Label
-label_message1 = tk.Label(window, fg = 'red', textvariable = main_message1)
+label_message1 = tk.Label(window, font=("標楷體", font_size), fg = 'red', textvariable = main_message1)
 label_message1.pack()
-label_message1.place(x = 0, y = 0)
+label_message1.place(x = 5, y = 0 + 10)
 main_message1.set('')
 
-label_message2 = tk.Label(window, fg = 'red', textvariable = main_message2)
+label_message2 = tk.Label(window, font=("標楷體", font_size), fg = 'red', textvariable = main_message2)
 label_message2.pack()
-label_message2.place(x = 0, y = 0 + 25)
+label_message2.place(x = 5 + W * 3 / 4, y = 0 + 10)
 main_message2.set('')
 
 msg = tk.StringVar()

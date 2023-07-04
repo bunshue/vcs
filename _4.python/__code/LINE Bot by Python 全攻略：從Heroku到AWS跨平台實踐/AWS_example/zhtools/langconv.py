@@ -241,12 +241,9 @@ def run():
     import sys
     from optparse import OptionParser
     parser = OptionParser()
-    parser.add_option('-e', type='string', dest='encoding',
-            help='encoding')
-    parser.add_option('-f', type='string', dest='file_in',
-            help='input file (- for stdin)')
-    parser.add_option('-t', type='string', dest='file_out',
-            help='output file')
+    parser.add_option('-e', type='string', dest='encoding', help='encoding')
+    parser.add_option('-f', type='string', dest='file_in', help='input file (- for stdin)')
+    parser.add_option('-t', type='string', dest='file_out', help='output file')
     (options, args) = parser.parse_args()
     if not options.encoding:
         parser.error('encoding must be set')
@@ -268,8 +265,7 @@ def run():
     c = Converter(options.encoding)
     for line in file_in:
         # print >> file_out, c.convert(line.rstrip('\n').decode(
-        file_out.write(c.convert(line.rstrip('\n').decode(
-            'utf8')).encode('utf8'))
+        file_out.write(c.convert(line.rstrip('\n').decode('utf8')).encode('utf8'))
 
 
 if __name__ == '__main__':
