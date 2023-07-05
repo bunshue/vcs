@@ -14,23 +14,20 @@ window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(W, H, x_st, y_st))
 #print("{0:d}x{1:d}+{2:d}+{3:d}".format(W, H, x_st, y_st))
 
 # 設定主視窗標題
-title = "這是主視窗"
-#window.title(title)
-window.title("Six Flags") # Set title
+title = 'Scale 測試'
+window.title(title)
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 
-x = 90
-y = 50
-width = 400
-height = 200
-filename = 'image/ca.gif'
 
-caImage = tk.PhotoImage(file = filename)
 
-canvas = tk.Canvas(window, width = width, height = height)
-canvas.pack()
-canvas.create_image(x, y, image = caImage)
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
 
 window.mainloop()
+
+
 
 

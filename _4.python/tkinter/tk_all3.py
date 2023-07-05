@@ -34,19 +34,6 @@ w.pack()
 
 '''
 
-tk.Label(text='Scrollbar測試').pack()
-
-scrollbar = tk.Scrollbar(window)
-scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
-
-tk.Label(text='Listbox測試').pack()
-listbox = tk.Listbox(window, yscrollcommand=scrollbar.set)
-for i in range(10):
-    listbox.insert(tk.END, str(i))
-    
-listbox.pack(side=tk.LEFT, fill=tk.BOTH)
-
-scrollbar.config(command=listbox.yview)
 
 tk.Label(text='Scale測試').pack()
 #w = tk.Scale(window, from_=0, to=100)

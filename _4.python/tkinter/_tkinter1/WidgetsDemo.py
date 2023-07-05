@@ -11,10 +11,8 @@ class WidgetsDemo:
         self.v1 = IntVar()
         cbtBold = Checkbutton(frame1, text = "Bold", variable = self.v1, command = self.processCheckbutton) 
         self.v2 = IntVar()
-        rbRed = Radiobutton(frame1, text = "Red", bg = "red",
-                variable = self.v2, value = 1, command = self.processRadiobutton) 
-        rbYellow = Radiobutton(frame1, text = "Yellow", 
-                bg = "yellow", variable = self.v2, value = 2, command = self.processRadiobutton) 
+        rbRed = Radiobutton(frame1, text = "Red", bg = "red", variable = self.v2, value = 1, command = self.processRadiobutton) 
+        rbYellow = Radiobutton(frame1, text = "Yellow", bg = "yellow", variable = self.v2, value = 2, command = self.processRadiobutton) 
         cbtBold.grid(row = 1, column = 1)
         rbRed.grid(row = 1, column = 2)
         rbYellow.grid(row = 1, column = 3)

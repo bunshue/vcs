@@ -25,4 +25,23 @@ filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_gif/dragon-boat-festiva
 photo = tk.PhotoImage(file = filename)
 tk.Label(window, text = "Blue", image = photo, bg = "gray").pack(fill = tk.BOTH, expand = 1)
 
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
+filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_gif/dragon-boat-festival.gif'
+caImage = tk.PhotoImage(file = filename)
+
+x = 90
+y = 50
+width = 400
+height = 200
+
+canvas = tk.Canvas(window, width = width, height = height)
+canvas.pack()
+canvas.create_image(x, y, image = caImage)
+
 window.mainloop()

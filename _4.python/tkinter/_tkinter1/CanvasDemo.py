@@ -1,24 +1,40 @@
-from tkinter import * # Import tkinter
+import tkinter as tk
     
 class CanvasDemo:
     def __init__(self):
-        window = Tk() # Create a window
+        window = tk.Tk()
+
+        # 設定主視窗大小
+        W = 800
+        H = 800
+        x_st = 100
+        y_st = 100
+        #size = str(W) + 'x' + str(H)
+        #size = str(W) + 'x' + str(H) + '+' + str(x_st) + '+' + str(y_st)
+        #window.geometry(size)
+        window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(W, H, x_st, y_st))
+        #print("{0:d}x{1:d}+{2:d}+{3:d}".format(W, H, x_st, y_st))
+
+        # 設定主視窗標題
+        title = "這是主視窗"
+        window.title(title)
+
         window.title("Canvas Demo") # Set title
         
         # Place self.canvas in the window
-        self.canvas = Canvas(window, width = 200, height = 100, bg = "white")
+        self.canvas = tk.Canvas(window, width = 400, height = 400, bg = "white")
         self.canvas.pack()
         
         # Place buttons in frame
-        frame = Frame(window)
+        frame = tk.Frame(window)
         frame.pack()
-        btRectangle = Button(frame, text = "Rectangle", command = self.displayRect)
-        btOval = Button(frame, text = "Oval", command = self.displayOval)
-        btArc = Button(frame, text = "Arc", command = self.displayArc)
-        btPolygon = Button(frame, text = "Polygon", command = self.displayPolygon)
-        btLine = Button(frame, text = "Line", command = self.displayLine)
-        btString = Button(frame, text = "String", command = self.displayString)
-        btClear = Button(frame, text = "Clear", command = self.clearCanvas)
+        btRectangle = tk.Button(frame, text = "Rectangle", command = self.displayRect)
+        btOval = tk.Button(frame, text = "Oval", command = self.displayOval)
+        btArc = tk.Button(frame, text = "Arc", command = self.displayArc)
+        btPolygon = tk.Button(frame, text = "Polygon", command = self.displayPolygon)
+        btLine = tk.Button(frame, text = "Line", command = self.displayLine)
+        btString = tk.Button(frame, text = "String", command = self.displayString)
+        btClear = tk.Button(frame, text = "Clear", command = self.clearCanvas)
         btRectangle.grid(row = 1, column = 1)
         btOval.grid(row = 1, column = 2)
         btArc.grid(row = 1, column = 3)
@@ -39,8 +55,7 @@ class CanvasDemo:
     
     # Display an arc
     def displayArc(self):
-        self.canvas.create_arc(10, 10, 190, 90, start = 0, 
-            extent = 90, width = 8, fill = "red", tags = "arc")
+        self.canvas.create_arc(10, 10, 190, 90, start = 0, extent = 90, width = 8, fill = "red", tags = "arc")
     
     # Display a polygon
     def displayPolygon(self):
@@ -49,13 +64,11 @@ class CanvasDemo:
     # Display a line
     def displayLine(self):
         self.canvas.create_line(10, 10, 190, 90, fill = "red", tags = "line")
-        self.canvas.create_line(10, 90, 190, 10, width = 9, 
-            arrow = "last", activefill = "blue", tags = "line")
+        self.canvas.create_line(10, 90, 190, 10, width = 9, arrow = "last", activefill = "blue", tags = "line")
     
     # Display a string
     def displayString(self):
-        self.canvas.create_text(60, 40, text = "Hi, I am a string", 
-           font = "Times 10 bold underline", tags = "string")
+        self.canvas.create_text(60, 40, text = "Hi, I am a string", font = "Times 10 bold underline", tags = "string")
     
     # Clear drawings
     def clearCanvas(self):

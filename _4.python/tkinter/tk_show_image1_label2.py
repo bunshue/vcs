@@ -27,7 +27,7 @@ window.title(title)
 
 imageList = [] # Store images for cards
 for i in range(1, 53):
-    imageList.append(tk.PhotoImage(file = "image/card/" + str(i) + ".gif"))
+    imageList.append(tk.PhotoImage(file = "C:/_git/vcs/_1.data/______test_files1/__pic/_poker_card/card/" + str(i) + ".gif"))
 
 frame = tk.Frame(window) # Hold four labels for cards
 frame.pack()
