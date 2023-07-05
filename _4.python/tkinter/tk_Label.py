@@ -50,7 +50,6 @@ image = Image.open(filename)
 image = ImageTk.PhotoImage(image)
 label1 = tk.Label(image = image)
 label1.image = image
-#label1.grid()
 label1.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線

@@ -37,7 +37,7 @@ title = "這是主視窗"
 window.title(title)
 
 x_st = 100
-y_st = 350
+y_st = 500
 dx = 120;
 dy = 100;
 w = 12

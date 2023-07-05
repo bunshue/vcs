@@ -8,9 +8,8 @@ def processCancel():
     
 root = Tk() # Create a root window
 btOK = Button(root, text = "OK", fg = "red", command = processOK) 
-btCancel = Button(root, text = "Cancel", bg = "yellow", 
-                  command = processCancel) 
 btOK.pack() # Place the button in the window
+btCancel = Button(root, text = "Cancel", bg = "yellow", command = processCancel) 
 btCancel.pack() # Place the button in the window
 
-root.mainloop() # Create an event loop
+root.mainloop()

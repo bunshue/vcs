@@ -1,7 +1,0 @@
-Flask==1.1.1
-gunicorn==19.9.0
-line-bot-sdk==1.14.0
-APScheduler==3.6.3
-psycopg2==2.8.4
-Flask-Login==0.5.0
-flask-talisman==0.7.0

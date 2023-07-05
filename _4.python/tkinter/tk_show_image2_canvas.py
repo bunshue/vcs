@@ -1,3 +1,6 @@
+'''
+使用 canvas 顯示圖片
+'''
 import tkinter as tk
 
 window = tk.Tk()

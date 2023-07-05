@@ -46,5 +46,4 @@ entry2.grid(row=2, column=2)
 button.grid(row=3, column=2)
 label_result.grid(row=4, column=2)
 
-
 window.mainloop()

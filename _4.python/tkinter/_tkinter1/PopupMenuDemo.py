@@ -9,18 +9,13 @@ class PopupMenuDemo:
 
         # Create a popup menu
         self.menu = Menu(window, tearoff = 0)
-        self.menu.add_command(label = "Draw a line", 
-            command = self.displayLine)
-        self.menu.add_command(label = "Draw an oval", 
-            command = self.displayOval)
-        self.menu.add_command(label = "Draw a rectangle", 
-            command = self.displayRect)
-        self.menu.add_command(label = "Clear", 
-            command = self.clearCanvas)
+        self.menu.add_command(label = "Draw a line", command = self.displayLine)
+        self.menu.add_command(label = "Draw an oval", command = self.displayOval)
+        self.menu.add_command(label = "Draw a rectangle", command = self.displayRect)
+        self.menu.add_command(label = "Clear", command = self.clearCanvas)
         
         # Place canvas in window
-        self.canvas = Canvas(window, width = 200, 
-            height = 100, bg = "white")
+        self.canvas = Canvas(window, width = 200, height = 100, bg = "white")
         self.canvas.pack()
         
         # Bind popup to canvas

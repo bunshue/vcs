@@ -35,12 +35,15 @@ namespace vcs_SendTo_Cat
 
             for (i = 1; i < len; i++)
             {
-                print_file_content(System.Environment.GetCommandLineArgs()[i]);
+                string filename = System.Environment.GetCommandLineArgs()[i];
+                print_file_content(filename);
             }
         }
 
         void print_file_content(string filename)
         {
+            richTextBox1.Text += "檔案 : " + filename + "\n";
+
             StringBuilder sb = new StringBuilder();
 
             string[] Txt_All_Lines = File.ReadAllLines(filename, Encoding.Default);
