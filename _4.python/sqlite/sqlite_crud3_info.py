@@ -31,7 +31,9 @@ db_filename  = 'ims_sql/db_ims.sqlite'
 #db_filename = 'C:/_git/vcs/_1.data/______test_files1/_db/gasoline.sqlite'
 db_filename  = 'db_20230703_113217.sqlite'
 
-conn = sqlite3.connect(db_filename)
+
+print('建立資料庫連線, 資料庫 : ' + db_filename)
+conn = sqlite3.connect(db_filename) # 建立資料庫連線
 
 table_names = get_table_names(conn)
 print(type(table_names))
@@ -48,8 +50,6 @@ for table_name in table_names:
         print(column_name, end = ' ')
     print()
 
-
-conn.close()
-
+conn.close()  # 關閉資料庫連線
 
 print("程式執行完畢！")

@@ -43,7 +43,7 @@ window.title(title)
 #window.configure(bg = "#7AFEC6")
 
 #像是richTextBox
-text1 = tk.Text(window, width = 80, height = 30)  # 放入多行輸入框
+text1 = tk.Text(window, width = 80, height = 10)  # 放入多行輸入框
 text1.pack()
 #text1.place(x = 100, y = 100)
 
@@ -62,6 +62,21 @@ text.insert(tk.INSERT, "而且是內含於 Python 系統中，\n")
 text.insert(tk.END, "不需另外安裝即可使用。")
 text.pack()
 text.config(state=tk.DISABLED)
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+label1=tk.Label(window, text="輸入成績：")
+#label1.place(x=20, y=20)
+label1.pack()
+score = tk.StringVar()
+entryUrl = tk.Entry(window, textvariable = score)
+#entryUrl.place(x=90, y=20)
+entryUrl.pack()
+btnDown = tk.Button(window, text="計算成績")
+#btnDown.place(x=80, y=50)
+btnDown.pack()
+
+
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 

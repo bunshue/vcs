@@ -1,3 +1,8 @@
+'''
+使用grid
+
+'''
+
 import tkinter as tk
 
 window = tk.Tk()
