@@ -1,31 +1,44 @@
-from tkinter import * # Import tkinter
+import tkinter as tk
 import random
 
-class DeckOfCardsGUI:
-    def __init__(self):       
-        window = Tk() # Create a window
-        window.title("Pick Four Cards Randomly") # Set title
+# Choose four random cards
+def shuffle():
+    random.shuffle(imageList)
+    for i in range(4):
+        labelList[i]["image"] = imageList[i]
         
-        self.imageList = [] # Store images for cards
-        for i in range(1, 53):
-            self.imageList.append(PhotoImage(file = "image/card/" + str(i) + ".gif"))
-        
-        frame = Frame(window) # Hold four labels for cards
-        frame.pack()
-        
-        self.labelList = [] # A list of four labels
-        for i in range(4):
-            self.labelList.append(Label(frame, image = self.imageList[i]))
-            self.labelList[i].pack(side = LEFT)
-        
-        Button(window, text = "Shuffle", command = self.shuffle).pack()
-        
-        window.mainloop() # Create an event loop
 
-    # Choose four random cards
-    def shuffle(self):
-        random.shuffle(self.imageList)
-        for i in range(4):
-            self.labelList[i]["image"] = self.imageList[i]
-        
-DeckOfCardsGUI() # Create GUI
+window = tk.Tk()
+
+# 設定主視窗大小
+W = 800
+H = 800
+x_st = 100
+y_st = 100
+#size = str(W) + 'x' + str(H)
+#size = str(W) + 'x' + str(H) + '+' + str(x_st) + '+' + str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(W, H, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(W, H, x_st, y_st))
+
+# 設定主視窗標題
+title = 'Pick Four Cards Randomly'
+window.title(title)
+
+imageList = [] # Store images for cards
+for i in range(1, 53):
+    imageList.append(tk.PhotoImage(file = "image/card/" + str(i) + ".gif"))
+
+frame = tk.Frame(window) # Hold four labels for cards
+frame.pack()
+
+labelList = [] # A list of four labels
+for i in range(4):
+    labelList.append(tk.Label(frame, image = imageList[i]))
+    labelList[i].pack(side = tk.LEFT)
+
+tk.Button(window, text = "Shuffle", command = shuffle).pack()
+
+window.mainloop()
+
+

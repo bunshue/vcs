@@ -1,4 +1,4 @@
-from tkinter import * # Import tkinter
+import tkinter as tk
 
 SIZE = 8 # The size of the chessboard
 class EightQueens:
@@ -7,20 +7,18 @@ class EightQueens:
         self.search(0) # Search for a solution from row 0
 
         # Display solution in queens
-        window = Tk() # Create a window
-        window.title("Eight Queens") # Set a title
+        window = tk.Tk()
+        window.title("Eight Queens")
         
-        image = PhotoImage(file = "image/queen.gif")
+        image = tk.PhotoImage(file = "image/queen.gif")
         for i in range(SIZE):
             for j in range(SIZE):
                 if self.queens[i] == j:
-                    Label(window, image = image).grid(
-                        row = i, column = j)
+                    tk.Label(window, image = image).grid(row = i, column = j)
                 else:
-                    Label(window, width = 5, height = 2, 
-                        bg = "red").grid(row = i, column = j)
+                    tk.Label(window, width = 5, height = 2, bg = "red").grid(row = i, column = j)
                 
-        window.mainloop() # Create an event loop    
+        window.mainloop()
            
     # Search for a solution starting from a specified row 
     def search(self, row):

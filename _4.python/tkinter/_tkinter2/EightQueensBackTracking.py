@@ -1,3 +1,5 @@
+import tkinter as tk
+
 SIZE = 8 # The size of the chessboard
 queens = [-1, -1, -1, -1, -1, -1, -1, -1] # Queen positions 
 
@@ -42,17 +44,16 @@ def search():
 search() # Search for a solution 
 
 # Display solution in queens
-from tkinter import * # Import tkinter
-window = Tk() # Create a window
-window.title("Eight Queens") # Set a title
+window = tk.Tk()
+window.title("Eight Queens")
 
-image = PhotoImage(file = "image/queen.gif")
+image = tk.PhotoImage(file = "image/queen.gif")
 for i in range(8):
     for j in range(8):
         if queens[i] == j:
-            Label(window, image = image).grid(row = i, column = j)
+            tk.Label(window, image = image).grid(row = i, column = j)
         else:
-            Label(window, width = 5, height = 2, bg = "red") \
-                .grid(row = i, column = j)
+            tk.Label(window, width = 5, height = 2, bg = "red").grid(row = i, column = j)
         
-window.mainloop() # Create an event loop    
+window.mainloop()
+
