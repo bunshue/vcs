@@ -1,5 +1,5 @@
 '''
-Text 綁定鍵盤滑鼠事件
+Text 綁定鍵盤滑鼠事件 Text
 '''
 
 import tkinter as tk
@@ -29,27 +29,27 @@ def func(event):
     print(event)
 def func_release(event):
     print("release")
-#单击
+#單擊
 # text.bind("<Button-1>",func)
 # window.bind("<Button-1>",func)
-#双击
+#雙擊
 # text.bind("<Double-Button-1>",func)
-# 鼠标释放
+# 鼠標釋放
 # text.bind("<ButtonRelease-1>",func_release)
-#鼠标移入
+#鼠標移入
 # text.bind("<Enter>",func)
-#鼠标按住移动事件
+#鼠標按住移動事件
 # text.bind("<B1-Motion>",func)
-#键盘按下事件
+#鍵盤按下事件
 # text.bind("<Key>",func)
 
-#键位绑定事件
+#鍵位綁定事件
 # def func3(event):
-#     print("你按下了回车!")
+#     print("你按下了回車!")
 # text.bind("<Return>",func3)
 
 
-#实现的一个拖拽功能
+#實現的一個拖拽功能
 def func4(event):
     # print(event)
     x=str(event.x_root)
@@ -59,4 +59,3 @@ def func4(event):
 text.bind("<B1-Motion>",func4)
 
 window.mainloop()
-

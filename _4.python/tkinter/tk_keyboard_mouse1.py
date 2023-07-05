@@ -1,5 +1,5 @@
 '''
-Frame 綁定鍵盤滑鼠事件
+Frame 綁定鍵盤滑鼠事件 Frame
 '''
 
 import tkinter as tk

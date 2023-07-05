@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import ttk
 
 window = tk.Tk()
 
@@ -18,32 +19,16 @@ title = "這是主視窗"
 window.title(title)
 
 
-'''
+spinbox = ttk.Spinbox(window, from_=0, to=100, increment=0.1)
+spinbox.pack()
 
-window = Tk()
-
-#w = Spinbox(window, from_=0, to=10)
-w = Spinbox(window, values=(1, 2, 4, 8))
+#w = ttk.Spinbox(window, from_=0, to=10)
+w = ttk.Spinbox(window, values=(1, 2, 4, 8))
 w.pack()
 
-window = Tk()
-
-#w = Spinbox(window, from_=0, to=10)
-w = Spinbox(window, values=(1, 2, 4, 8))
+#w = ttk.Spinbox(window, from_=0, to=10)
+w = ttk.Spinbox(window, values=(1, 2, 4, 8))
 w.pack()
-
-'''
-
-
-tk.Label(text='Scale測試').pack()
-#w = tk.Scale(window, from_=0, to=100)
-w = tk.Scale(window, from_=0, to=100, resolution=0.1)
-w.pack()
-
-w = tk.Scale(window, from_=0, to=200, orient=tk.HORIZONTAL)
-w.pack()
-
-print(w.get())
 
 
 window.mainloop()
