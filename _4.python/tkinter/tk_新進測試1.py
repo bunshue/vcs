@@ -43,5 +43,52 @@ button.pack(side = tk.LEFT)
 hi_there = tk.Button(frame, text = "Hello", command = say_hi)
 hi_there.pack(side = tk.LEFT)
 
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
+tk.Label(window, text = "Blue", bg = "blue").place(x = 20, y = 20)
+tk.Label(window, text = "Red", bg = "red").place(x = 50, y = 50)
+tk.Label(window, text = "Green", bg = "green").place(x = 80, y = 80)
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
+
 window.mainloop()
+
+
+'''
+        # Add a label, an entry, and a button to frame1
+        frame1 = Frame(window, bg = 'pink') # Create and add a frame to window
+        frame1.pack()
+        
+        Label(frame1, text = "Enter an order: ").pack(side = LEFT)
+        self.order = StringVar()
+        entry = Entry(frame1, textvariable = self.order, justify = RIGHT).pack(side = LEFT)
+        Button(frame1, text = "Display Sierpinski Triangle", command = self.display).pack(side = LEFT)
+
+
+
+displayTriangles(int(order.get()), p1, p2, p3)
+
+
+
+
+btOK = Button(window, text = "OK", fg = "red", command = '') 
+btCancel = Button(window, text = "Cancel", bg = "yellow", command = '') 
+
+btOK = Button(root, text = "OK", fg = "red", command = '') 
+btCancel = Button(root, text = "Cancel", bg = "yellow", command = '') 
+
+
+
+
+
+
+
+
+
+'''
 

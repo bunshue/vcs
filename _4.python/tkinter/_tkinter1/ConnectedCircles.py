@@ -6,13 +6,13 @@ def add(event):
     repaint()
 
 def distance(circle1, circle2):
-    return ((circle1[0] - circle2[0]) ** 2 
-            + (circle1[1] - circle2[1]) ** 2) ** 0.5
+    return ((circle1[0] - circle2[0]) ** 2 + (circle1[1] - circle2[1]) ** 2) ** 0.5
 
 def repaint():
     canvas.delete("point")
     
-    if len(circles) == 0: return # Nothing to paint
+    if len(circles) == 0:
+        return # Nothing to paint
 
     # Build the edges
     edges = []
@@ -29,11 +29,9 @@ def repaint():
 
     for [x, y] in circles:
         if isAllCirclesConnected: # All circles are connected
-            canvas.create_oval(x - radius, y - radius, x + radius, 
-                y + radius, fill = "red", tags = "point")
+            canvas.create_oval(x - radius, y - radius, x + radius, y + radius, fill = "red", tags = "point")
         else:
-            canvas.create_oval(x - radius, y - radius, x + radius, 
-                y + radius, tags = "point")            
+            canvas.create_oval(x - radius, y - radius, x + radius, y + radius, tags = "point")
 
 window = Tk() # Create a window
 window.title("ConnectedCircles") # Set title
@@ -49,4 +47,4 @@ circles = []
 
 canvas.bind("<Button-1>", add)
 
-window.mainloop() # Create an event loop
+window.mainloop()

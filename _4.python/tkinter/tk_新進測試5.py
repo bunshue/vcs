@@ -11,6 +11,6 @@ Checkbutton(root, text = "Italic").pack(side = LEFT)
 Radiobutton(root, text = "Red").pack(side = LEFT)
 Radiobutton(root, text = "Yellow").pack(side = LEFT)
 
-forward(200)
+#forward(200)
 
 root.mainloop()

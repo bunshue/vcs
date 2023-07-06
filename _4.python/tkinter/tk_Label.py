@@ -40,5 +40,22 @@ tk.Label(window, text = '有背景色的Label 藍', bg = 'blue',  width = 20).pa
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
+tk.Label(window, text = "Blue", bg = "blue").pack()
+#tk.Label(window, text = "Red", bg = "red").pack(fill = tk.BOTH, expand = 1)
+tk.Label(window, text = "Red", bg = "red").pack(fill = tk.BOTH)
+tk.Label(window, text = "Green", bg = "green").pack(fill = tk.BOTH)
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
+tk.Label(window, text = "Blue", bg = "blue").pack(side = tk.LEFT)
+#tk.Label(window, text = "Red", bg = "red").pack(side = tk.LEFT, fill = tk.BOTH, expand = 1)
+tk.Label(window, text = "Red", bg = "red").pack(side = tk.LEFT, fill = tk.BOTH)
+tk.Label(window, text = "Green", bg = "green").pack(side = tk.LEFT, fill = tk.BOTH)
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
 window.mainloop()
 

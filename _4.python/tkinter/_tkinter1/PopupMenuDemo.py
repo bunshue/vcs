@@ -1,27 +1,27 @@
 #右鍵選單
 
-from tkinter import * # Import tkinter
+import tkinter as tk
     
 class PopupMenuDemo:
     def __init__(self):
-        window = Tk() # Create a window
-        window.title("Popup Menu Demo") # Set title
+        window = tk.Tk()
+        window.title("Popup Menu Demo")
 
-        # Create a popup menu
-        self.menu = Menu(window, tearoff = 0)
+        #右鍵選單
+        self.menu = tk.Menu(window, tearoff = 0)
         self.menu.add_command(label = "Draw a line", command = self.displayLine)
         self.menu.add_command(label = "Draw an oval", command = self.displayOval)
         self.menu.add_command(label = "Draw a rectangle", command = self.displayRect)
         self.menu.add_command(label = "Clear", command = self.clearCanvas)
         
         # Place canvas in window
-        self.canvas = Canvas(window, width = 200, height = 100, bg = "white")
+        self.canvas = tk.Canvas(window, width = 200, height = 100, bg = 'white')
         self.canvas.pack()
         
         # Bind popup to canvas
         self.canvas.bind("<Button-3>", self.popup)
         
-        window.mainloop() # Create an event loop
+        window.mainloop()
         
     # Display a rectangle
     def displayRect(self):

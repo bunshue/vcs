@@ -1,6 +1,6 @@
-from tkinter import *
+import tkinter as tk
 import tkinter.messagebox
-from BinaryTree import BinaryTree 
+#from BinaryTree import BinaryTree 
     
 def insert():
     k = int(key.get())
@@ -49,24 +49,24 @@ def connectTwoCircles(x1, y1, x2, y2):
     y21 = y2 + radius * (y1 - y2) / d
     canvas.create_line(x11, y11, x21, y21, tags = "tree")
 
-window = Tk() # Create a window
-window.title("DisplayBinaryTree") # Set a title
+window = tk.Tk()
+window.title("DisplayBinaryTree")
 
 width = 200
 height = 200
 radius = 20
 vGap = 50
-canvas = Canvas(window, width = width, height = height)
+canvas = tk.Canvas(window, width = width, height = height)
 canvas.pack()
 
-frame1 = Frame(window) # Create and add a frame to window
+frame1 = tk.Frame(window) # Create and add a frame to window
 frame1.pack()
 
-tree = BinaryTree()
-Label(frame1, text = "Enter a key").pack(side = LEFT)
-key = StringVar()
-entry = Entry(frame1, textvariable = key, justify = RIGHT).pack(side = LEFT)
-Button(frame1, text = "Insert", command = insert).pack(side = LEFT)
-Button(frame1, text = "Delete", command = delete).pack(side = LEFT)
+#tree = BinaryTree()
+tk.Label(frame1, text = "Enter a key").pack(side = tk.LEFT)
+key = tk.StringVar()
+entry = tk.Entry(frame1, textvariable = key, justify = tk.RIGHT).pack(side = tk.LEFT)
+tk.Button(frame1, text = "Insert", command = insert).pack(side = tk.LEFT)
+tk.Button(frame1, text = "Delete", command = delete).pack(side = tk.LEFT)
 
 window.mainloop()

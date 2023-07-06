@@ -1,4 +1,4 @@
-from tkinter import * # Import tkinter
+import tkinter as tk
 from StillClock import StillClock
    
 def setNewTime():
@@ -6,26 +6,27 @@ def setNewTime():
     clock.setMinute(minute.get())
     clock.setSecond(second.get())
     
-window = Tk() # Create a window
-window.title("Change Clock Time") # Set title
+window = tk.Tk()
+window.title("Change Clock Time")
 
 clock = StillClock(window) # Create a clock
 clock.pack()
 
-frame = Frame(window)
+frame = tk.Frame(window)
 frame.pack()
-Label(frame, text = "Hour: ").pack(side = LEFT)
-hour = IntVar()
+
+tk.Label(frame, text = "Hour: ").pack(side = tk.LEFT)
+hour = tk.IntVar()
 hour.set(clock.getHour())
-Entry(frame, textvariable = hour, width = 2).pack(side = LEFT) 
-Label(frame, text = "Minute: ").pack(side = LEFT)
-minute = IntVar()
+tk.Entry(frame, textvariable = hour, width = 2).pack(side = tk.LEFT) 
+tk.Label(frame, text = "Minute: ").pack(side = tk.LEFT)
+minute = tk.IntVar()
 minute.set(clock.getMinute())
-Entry(frame, textvariable = minute, width = 2).pack(side = LEFT) 
-Label(frame, text = "Second: ").pack(side = LEFT)
-second = IntVar()
+tk.Entry(frame, textvariable = minute, width = 2).pack(side = tk.LEFT)
+tk.Label(frame, text = "Second: ").pack(side = tk.LEFT)
+second = tk.IntVar()
 second.set(clock.getMinute())
-Entry(frame, textvariable = second, width = 2).pack(side = LEFT) 
-Button(frame, text = "Set New Time", command = setNewTime).pack(side = LEFT) 
+tk.Entry(frame, textvariable = second, width = 2).pack(side = tk.LEFT)
+tk.Button(frame, text = "Set New Time", command = setNewTime).pack(side = tk.LEFT)
 
 window.mainloop()

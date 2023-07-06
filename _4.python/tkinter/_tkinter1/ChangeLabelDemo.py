@@ -19,10 +19,8 @@ class ChangeLabelDemo:
         entry = Entry(frame2, textvariable = self.msg) 
         btChangeText = Button(frame2, text = "Change Text", command = self.processButton)
         self.v1 = StringVar()
-        rbRed = Radiobutton(frame2, text = "Red", bg = "red",
-            variable = self.v1, value = 'R', command = self.processRadiobutton) 
-        rbYellow = Radiobutton(frame2, text = "Yellow", 
-            bg = "yellow", variable = self.v1, value = 'Y', command = self.processRadiobutton) 
+        rbRed = Radiobutton(frame2, text = "Red", bg = "red", variable = self.v1, value = 'R', command = self.processRadiobutton) 
+        rbYellow = Radiobutton(frame2, text = "Yellow", bg = "yellow", variable = self.v1, value = 'Y', command = self.processRadiobutton) 
         
         label.grid(row = 1, column = 1)
         entry.grid(row = 1, column = 2)
