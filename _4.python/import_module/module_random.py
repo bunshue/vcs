@@ -23,7 +23,18 @@ no1 = random.randint(1,6)   # 1~6
 no2 = random.randint(1,6)   # 1~6
 no3 = random.randint(1,6)   # 1~6
 
-#print('取得(%d, %d, %d)' % no1, no2, no3)
+print("亂數1：{}\n亂數2：{}\n亂數3：{}".format(no1, no2, no3))
+print("取得亂數(%d, %d, %d)" % (no1, no2, no3))
+
+pretty_note = '♫♪♬'
+pretty_text = ''
+
+string_message = 'abcdefg'
+for i in string_message:
+    pretty_text += i
+    pretty_text += random.choice(pretty_note)
+    
+print(pretty_text)
 
 def randomNoun():
     nouns = ["cats", "hippos", "cakes"]
@@ -41,7 +52,6 @@ for i in range(4):
   sentence = "david " + verb + " " + noun
   print(sentence)
 
-import random
 while True:
     x = random.randint(1,6)
     print(x)
@@ -121,8 +131,6 @@ print(random.choice(values))
 
 print("猜數字遊戲")
 '''
-import random
-
 game_count = 0
 all_counts = []
 while True:
@@ -161,7 +169,6 @@ ranks = ["Ace", "2", "3", "4", "5", "6", "7", "8", "9",
       "10", "Jack", "Queen", "King"]
         
 # Shuffle the cards
-import random
 random.shuffle(deck)
 
 # Display the first four cards

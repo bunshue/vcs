@@ -39,15 +39,15 @@ def save_file():
 
 #開啟檔案按鈕
 button_ofd_text = tk.StringVar()
-button_ofd = tk.Button(window, textvariable = button_ofd_text, command = lambda:open_file(), font="Raleway", bg="#20bebe", fg="white", height=2, width=15)
-#button_ofd = tk.Button(window, text='選取檔案', command = xxxxxxx)
+button_ofd = tk.Button(window, textvariable = button_ofd_text, command = lambda:open_file(), font = "Raleway", bg = "#20bebe", fg = "white", height = 2, width = 15)
+#button_ofd = tk.Button(window, text = '選取檔案', command = xxxxxxx)
 button_ofd_text.set("開啟檔案")
 button_ofd.pack()
 
 #另存新檔按鈕
 button_sfd_text = tk.StringVar()
-button_sfd = tk.Button(window, textvariable = button_sfd_text, command = lambda:save_file(), font="Raleway", bg="#20bebe", fg="white", height=2, width=15)
-#button_sfd = tk.Button(window, text='選取檔案', command = xxxxxxx)
+button_sfd = tk.Button(window, textvariable = button_sfd_text, command = lambda:save_file(), font = "Raleway", bg = "#20bebe", fg = "white", height = 2, width = 15)
+#button_sfd = tk.Button(window, text = '選取檔案', command = xxxxxxx)
 button_sfd_text.set("另存新檔")
 button_sfd.pack()
 
@@ -95,8 +95,30 @@ separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, p
 w = tk.Button(window, text = "離開", command = window.destroy)
 w.pack()
 
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+def buttonClick():
+    global count
+    count = count + 1
+    print("Beep! " + str(count))
+    button1.config(text = "Clicked " + str(count))
+
+count = 0;
+
+button1 = tk.Button(window, text = "按鍵數次數, 不指定按鍵大小", command = buttonClick)
+button1.pack(side = tk.LEFT)    #靠左對齊
+
+button2 = tk.Button(window, text = "離開", command = '')
+button2.pack(side = tk.RIGHT)   #靠右對齊
+
+#side=tk.RIGHT
+
+
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
+
 
 
 window.mainloop()

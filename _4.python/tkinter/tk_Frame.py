@@ -24,24 +24,38 @@ separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, p
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
-print('用Frame做一個toolbar')
-frame_toolbar = tk.Frame(window, relief = "raised", borderwidth = 1)
-frame_toolbar.pack(side = "top", fill = "x", padx = 2, pady = 1)
+def buttonClick():
+    print('click')
 
-button1 = tk.Button(frame_toolbar, text = "Function 1")
+print('用Frame做一個toolbar 1')
+frame_toolbar1 = tk.Frame(window, relief = "raised", borderwidth = 1)
+frame_toolbar1.pack(side = "top", fill = "x", padx = 2, pady = 1)
+
+button1 = tk.Button(frame_toolbar1, text = "Function 1", command = buttonClick)
 button1.pack(side = "left", pady = 2)
-button2 = tk.Button(frame_toolbar, text = "Function 2")
+button2 = tk.Button(frame_toolbar1, text = "Function 2", command = buttonClick)
 button2.pack(side = "left", pady = 2)
-button3 = tk.Button(frame_toolbar, text = "Function 3")
+button3 = tk.Button(frame_toolbar1, text = "Function 3", command = buttonClick)
 button3.pack(side = "left", pady = 2)
-button4 = tk.Button(frame_toolbar, text = "Function 4")
+button4 = tk.Button(frame_toolbar1, text = "Function 4", command = buttonClick)
 button4.pack(side = "left", pady = 2)
-button5 = tk.Button(frame_toolbar, text = "Function 5")
+button5 = tk.Button(frame_toolbar1, text = "Function 5", command = buttonClick)
 button5.pack(side = "left", pady = 2)
-button6 = tk.Button(frame_toolbar, text = "Function 6")
+button6 = tk.Button(frame_toolbar1, text = "Function 6", command = buttonClick)
 button6.pack(side = "left", pady = 2)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+print('用Frame做一個toolbar 2')
+frame_toolbar2 = tk.Frame(window)
+frame_toolbar2.pack(side = tk.TOP, fill = tk.X)
+
+button1 = tk.Button(frame_toolbar2, text = "new", width = 6, command = buttonClick)
+button1.pack(side = tk.LEFT, padx = 2, pady = 2)
+button2 = tk.Button(frame_toolbar2, text = "open", width = 6, command = buttonClick)
+button2.pack(side = tk.LEFT, padx = 2, pady = 2)
+
+
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 

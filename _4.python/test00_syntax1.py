@@ -150,7 +150,7 @@ except Exception as e:
     print("種類：{}\n訊息：{}\n資訊：{}".format(e_type, e_value, e_tb))
 
 def div(a,b):
-    return a/b
+    return a / b
 
 print(div(6,2))  # 3.0
 try:
@@ -281,7 +281,7 @@ print('求1~N的正整數的和')
 sum = 0
 #n = int(input("請輸入正整數："))
 n = 1234
-for i in range(1, n+1):
+for i in range(1, n + 1):
     sum += i
 print("1 到 %d 的整數和為 %d" % (n, sum))
 

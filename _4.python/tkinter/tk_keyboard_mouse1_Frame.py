@@ -1,5 +1,5 @@
 '''
-Frame 綁定鍵盤滑鼠事件 Frame
+綁定鍵盤滑鼠事件 Frame
 '''
 
 import tkinter as tk
@@ -18,9 +18,8 @@ window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 #print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 
 # 設定主視窗標題
-title = "取得滑鼠位置與鍵碼"
+title = '綁定鍵盤滑鼠事件 Frame'
 window.title(title)
-#window.title('Event Binding')
 
 def key(event):
     print("鍵碼 : ", repr(event.char))
@@ -29,7 +28,7 @@ def callback(event):
     frame.focus_set()
     print('滑鼠位置(' + str(event.x) + ', ' + str(event.y) + ')')
 
-frame = tk.Frame(window, width = 300, height = 300)
+frame = tk.Frame(window, bg = 'pink', width = 300, height = 300)
 frame.bind("<Key>", key)
 frame.bind("<Button-1>", callback)
 frame.pack()

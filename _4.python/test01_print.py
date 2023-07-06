@@ -1,6 +1,6 @@
 # print data
 
-print('-' * 40)
+print('-' * 70)	#70個
 print('----------------------------------------------------------------------')	#70個
 
 print('字符串格式化操作')
@@ -12,7 +12,7 @@ print("打印各種數值")
 x = 3              # an integer stored (in variable x)
 f = 3.1415926      # a floating real point (in variable f)
 name = "Python"    # a string
-big = 358315791   # long, a very large number
+big = 358315791    # long, a very large number
 z = complex(2,3)   # (2+3i)  a complex number. consists of real and imaginary part.
  
 #print("整數 : " + x) fail
@@ -160,7 +160,7 @@ print((
 'token': '函數名',
 'file': '檔案',
 'lineno': '行號'
-}, file=sys.stderr)
+}, file = sys.stderr)
 
 
 infile = 'aaaaaaa'
@@ -233,10 +233,10 @@ def usage():
 
 usage()
 
-def usage(msg=None):
+def usage(msg = None):
     if msg is None:
         msg = __doc__
-    print(msg, file=sys.stderr)
+    print(msg, file = sys.stderr)
 
 msg = 'adfkajdfad;jlfkjl'
 usage(msg)

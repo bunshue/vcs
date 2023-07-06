@@ -17,9 +17,8 @@ window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 #print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 
 # 設定主視窗標題
-title = "這是主視窗"
+title = '綁定鍵盤滑鼠事件 Text'
 window.title(title)
-#window.title('Event Binding')
 
 text=tk.Text(window)
 text.pack()

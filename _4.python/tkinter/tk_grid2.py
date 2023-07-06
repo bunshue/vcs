@@ -37,8 +37,8 @@ center.grid(row = 1, sticky = "nsew")
 model_label = tk.Label(top_frame, text = 'Model Dimensions')
 width_label = tk.Label(top_frame, text = 'Width:')
 length_label = tk.Label(top_frame, text = 'Length:')
-entry_W = tk.Entry(top_frame, background = "pink")
-entry_L = tk.Entry(top_frame, background = "orange")
+entry_W = tk.Entry(top_frame, background = 'pink')
+entry_L = tk.Entry(top_frame, background = 'orange')
 
 # layout the widgets in the top frame
 model_label.grid(row = 0, columnspan = 3)

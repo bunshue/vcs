@@ -17,11 +17,10 @@ window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 #print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 
 # 設定主視窗標題
-title = "取得滑鼠位置與鍵碼"
+title = '綁定鍵盤滑鼠事件 Canvas'
 window.title(title)
-#window.title('Event Binding')
 
-window.title('左鍵變大 右鍵變小')
+print('左鍵變大 右鍵變小')
 
 def mouseClick1(event):
     canvas.delete("oval")

@@ -17,7 +17,7 @@ y_st = 100
 #print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 
 # 設定主視窗標題
-title = "Grid 測試"
+title = "Grid 測試 Label"
 window.title(title)
 
 SIZE = 8

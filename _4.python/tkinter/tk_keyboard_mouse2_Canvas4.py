@@ -5,9 +5,10 @@ from tkinter import * # Import tkinter
 
 class MouseKeyEventDemo:
     def __init__(self):
-        window = Tk() # Create a window
-        window.title("Event Demo") # Set a title
-        canvas = Canvas(window, bg = "white", width = 200, height = 100)
+        window = Tk()
+        title = '綁定鍵盤滑鼠事件 Canvas'
+        window.title(title)
+        canvas = Canvas(window, bg = 'pink', width = 300, height = 300)
         canvas.pack()
         
         # Bind with <Button-1> event
