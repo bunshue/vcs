@@ -21,11 +21,10 @@ class App(tk.Frame):
 
         # Define a callback for when the user hits return.
         # It prints the current value of the variable.
-        self.entrythingy.bind('<Key-Return>',
-                             self.print_contents)
+        self.entrythingy.bind('<Key-Return>', self.print_contents)
 
     def print_contents(self, event):
-        print("接收到訊息 : \t", self.contents.get())
+        print("接收到訊息 : ", self.contents.get())
 
 window = tk.Tk()
 

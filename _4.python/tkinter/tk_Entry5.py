@@ -1,28 +1,24 @@
 import tkinter as tk
+import random
+
+print('用 Entry 和 grid 做 表格')
 
 COLUMN = 10
-ROW = 5
+ROW = 8
 
-# Check if the numbers entered form a valid solution
-def validate():
-    print('需要全數字')
-    '''
-    # Get the numbers from the entries
-    values = [[eval(x.get()) for x in cells[i]] for i in range(3)]
-    print(values)
-    for i in range(3):
-        for j in range(3):
-            print(cells[i][j]) # XXXXX
-    '''
-
-def fill_numbers():
-    print('需要全數字')
+def set_numbers():
     for i in range(ROW):
         for j in range(COLUMN):
-            print('a')
-            cells[i][j] = 5
+            cells[i][j].set(random.randint(0, 9))
 
+def get_numbers1():
+    for i in range(ROW):
+        for j in range(COLUMN):
+            print(cells[i][j].get())
 
+def get_numbers2():
+    values = [[eval(x.get()) for x in cells[i]] for i in range(ROW)]
+    print(values)
     
 window = tk.Tk()
 
@@ -41,7 +37,7 @@ window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(W, H, x_st, y_st))
 title = "Entry 測試"
 window.title(title)
 
-frame = tk.Frame(window) # Hold entries 
+frame = tk.Frame(window, height = 0, width = 0, bg = 'pink', bd = 5) # Hold entries 
 frame.pack()
 
 cells = []
@@ -52,11 +48,14 @@ for i in range(ROW):
         
 for i in range(ROW):
     for j in range(COLUMN):
-        tk.Entry(frame, width = 6, justify = tk.RIGHT, textvariable = cells[i][j]).grid(row = i, column = j)
+        tk.Entry(frame, width = 8, justify = tk.RIGHT, textvariable = cells[i][j]).grid(row = i, column = j)
         
-tk.Button(window, text = "Validate", command = validate).pack()
-tk.Button(window, text = "填數字", command = fill_numbers).pack()
-        
+tk.Button(window, text = "填數字", command = set_numbers).pack()
+tk.Button(window, text = "取得數字1", command = get_numbers1).pack()
+tk.Button(window, text = "取得數字2", command = get_numbers2).pack()
+
+set_numbers()
+
 window.mainloop()
 
 

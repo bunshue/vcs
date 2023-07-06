@@ -95,12 +95,12 @@ def askretrycancel(title = None, message = None, **options):
     s = _show(title, message, WARNING, RETRYCANCEL, **options)
     return s == RETRY
 
-print("info", showinfo("Spam", "Egg Information"))
-print("warning", showwarning("Spam", "Egg Warning"))
-print("error", showerror("Spam", "Egg Alert"))
-print("question", askquestion("Spam", "Question?"))
-print("proceed", askokcancel("Spam", "Proceed?"))
-print("yes/no", askyesno("Spam", "Got it?"))
-print("yes/no/cancel", askyesnocancel("Spam", "Want it?"))
-print("try again", askretrycancel("Spam", "Try again?"))
+print("取得 info 結果 : ", showinfo("IMS", "IMS show information"))
+print("取得 warning 結果 : ", showwarning("IMS", "IMS show warning"))
+print("取得 error 結果 : ", showerror("IMS", "IMS show error"))
+print("取得 question 結果 : ", askquestion("IMS", "IMS ask question"))
+print("取得 proceed 結果 : ", askokcancel("IMS", "IMS ask ok cancel"))
+print("取得 yes/no 結果 : ", askyesno("IMS", "IMS ask yes no"))
+print("取得 yes/no/cancel 結果 : ", askyesnocancel("IMS", "IMS ask yes no cancel"))
+print("取得 try again 結果 : ", askretrycancel("IMS", "IMS ask retry cancel"))
 

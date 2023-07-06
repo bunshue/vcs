@@ -1,7 +1,6 @@
 '''
-各種控件 綁定鍵盤滑鼠事件 Canvas
+綁定鍵盤滑鼠事件 Canvas
 '''
-
 import tkinter as tk
 
 window = tk.Tk()

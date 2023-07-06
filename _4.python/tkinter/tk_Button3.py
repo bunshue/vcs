@@ -6,10 +6,6 @@ def buttonClick():
     print("Beep! " + str(count))
     button1.config(text = "Clicked " + str(count))
 
-def buttonExit():
-    print('離開, 看似無效')
-    window.quit();
-
 window = tk.Tk()
 
 # 設定主視窗大小
@@ -29,37 +25,13 @@ window.title(title)
 
 count = 0;
 
-button5 = tk.Button(window, text = '指定按鍵大小', width = 20, height = 5)
-button5.pack()  #pack無參數, 控件置中
-
 button1 = tk.Button(window, text = "按鍵數次數, 不指定按鍵大小", command = buttonClick)
 button1.pack(side = tk.LEFT)    #靠左對齊
 
-button2 = tk.Button(window, text = "離開", command = buttonExit)
+button2 = tk.Button(window, text = "離開", command = '')
 button2.pack(side = tk.RIGHT)   #靠右對齊
 
 #side=tk.RIGHT
-
-
-'''
-btn0 = tk.Button(window, text = 'btn(0, 0)')
-btn1 = tk.Button(window, text = 'btn(1, 0)')
-btn2 = tk.Button(window, text = 'btn(0, 1)')
-btn3 = tk.Button(window, text = 'btn(1, 1)')
-
-btn0.grid(row = 0, column = 0)
-btn1.grid(row = 0, column = 1)
-btn2.grid(row = 1, column = 0)
-btn3.grid(row = 1, column = 1)
-'''
-
-button1 = tk.Button(window, text = '位置(0, 0)', width = 10, height = 2)
-button2 = tk.Button(window, text = '位置(50, 50)', width = 10, height = 2)
-button3 = tk.Button(window, text = '位置(100, 100)', width = 10, height = 2)
-
-button1.place(x = 0, y = 0)
-button2.place(x = 50, y = 50)
-button3.place(x = 100, y = 100)
 
 
 print("建立toolbar");

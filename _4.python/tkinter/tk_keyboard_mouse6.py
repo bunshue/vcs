@@ -1,7 +1,6 @@
 '''
-各種控件 綁定鍵盤滑鼠事件 Cavas
+綁定鍵盤滑鼠事件 Canvas
 '''
-
 from tkinter import * # Import tkinter
 
 class MouseKeyEventDemo:

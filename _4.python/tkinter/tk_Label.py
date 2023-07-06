@@ -1,7 +1,5 @@
 import tkinter as tk
-from PIL import Image, ImageTk
 
-# 建立主視窗
 window = tk.Tk()
 
 # 設定主視窗大小
@@ -22,7 +20,6 @@ window.title(title)
 # 設定主視窗之背景色
 window.configure(bg="#7AFEC6")
 
-
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 font_size = 24
@@ -40,17 +37,6 @@ tk.Label(text = '有背景色的Label測試').pack()
 tk.Label(window, text = '有背景色的Label 紅', bg = 'red',   width = 20).pack()
 tk.Label(        text = '有背景色的Label 綠', bg = 'green', width = 30).pack()
 tk.Label(window, text = '有背景色的Label 藍', bg = 'blue',  width = 20).pack()
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-print('用 Label 顯示一張圖片')
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-image = Image.open(filename)
-image = ImageTk.PhotoImage(image)
-label1 = tk.Label(image = image)
-label1.image = image
-label1.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 

@@ -1,7 +1,6 @@
 '''
-各種控件 綁定鍵盤滑鼠事件 Text
+綁定鍵盤滑鼠事件 Text
 '''
-
 import tkinter as tk
 
 def get_pos(event):

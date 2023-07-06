@@ -1,7 +1,6 @@
 '''
-各種控件 綁定鍵盤滑鼠事件 Entry Text
+綁定鍵盤滑鼠事件 Entry Text
 '''
-
 import tkinter as tk
 from tkinter import ttk
 

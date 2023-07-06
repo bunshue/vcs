@@ -2,6 +2,29 @@
 
 import random
 
+number1 = random.randint(0, 10)  #0~10之間的整數 包含 0 10
+
+R = random.randint(0, 1023) # 產生 0~1023 的亂數
+G = random.randint(0, 1023) # 產生 0~1023 的亂數
+B = random.randint(0, 1023) # 產生 0~1023 的亂數
+print(R,G,B)
+
+maxNo=10
+result = random.randrange(1, 10)
+print("取得亂數 : " + str(result))
+
+x = random.randint(1,6)
+print("取得亂數 : " + str(x))
+while x != 6:
+  x = random.randint(1,6)
+  print("取得亂數 : " + str(x))
+
+no1 = random.randint(1,6)   # 1~6
+no2 = random.randint(1,6)   # 1~6
+no3 = random.randint(1,6)   # 1~6
+
+#print('取得(%d, %d, %d)' % no1, no2, no3)
+
 def randomNoun():
     nouns = ["cats", "hippos", "cakes"]
     noun = random.choice(nouns)
@@ -18,19 +41,12 @@ for i in range(4):
   sentence = "david " + verb + " " + noun
   print(sentence)
 
-R= random.randint(0,1023) # 產生 0~1023 的亂數
-G= random.randint(0,1023) # 產生 0~1023 的亂數
-B= random.randint(0,1023) # 產生 0~1023 的亂數
-print(R,G,B)
-
-
 import random
 while True:
     x = random.randint(1,6)
     print(x)
-    if x == 6 : break
-
-
+    if x == 6:
+        break
 
 import random as r
 
@@ -43,9 +59,6 @@ while True:
         print("遊戲結束！")
         break
 
-
-
-
 import random as r
 
 list1 = r.sample(range(1,50), 7)
@@ -56,25 +69,6 @@ for i in range(0,6):
     if i == 5:    print(str(list1[i]))
     else:    print(str(list1[i]), end=", ")
 print("本期大樂透特別號為：" + str(special))
-
-
-
-maxNo=10
-result = random.randrange(1, 10)
-print("取得亂數 : " + str(result))
-
-x = random.randint(1,6)
-print("取得亂數 : " + str(x))
-while x != 6:
-  x = random.randint(1,6)
-  print("取得亂數 : " + str(x))
-
-
-no1 = random.randint(1,6)   # 1~6
-no2 = random.randint(1,6)   # 1~6
-no3 = random.randint(1,6)   # 1~6
-
-#print('取得(%d, %d, %d)' % no1, no2, no3)
 
 
 print("亂數分配工作")
@@ -155,18 +149,6 @@ while True:
     print("平均猜中次數" + str(sum(all_counts)/float(len(all_counts))))
     break;
 '''
-
-import random 
-
-# Generate random numbers
-number1 = random.randint(0, 9)
-number2 = random.randint(0, 9)
-
-
-number = random.randint(0, 100) 
-number = random.randint(1, 100)
-
-
 
 #發牌遊戲
 

@@ -14,8 +14,7 @@ print(isYes)
 isOK = tkinter.messagebox.askokcancel("ashokcancle", "OK?")
 print(isOK)
 
-isYesNoCancel = tkinter.messagebox.askyesnocancel(
-    "askyesnocancel", "Yes, No, Cancel?") 
+isYesNoCancel = tkinter.messagebox.askyesnocancel("askyesnocancel", "Yes, No, Cancel?") 
 print(isYesNoCancel)
 
 name = tkinter.simpledialog.askstring("askstring", "Enter your name")

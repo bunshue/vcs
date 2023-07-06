@@ -44,4 +44,25 @@ button2.place(relx=0.1, rely=0.1, anchor="nw")
 button3 = tk.Button(window, text="這是按鈕左下", width=20)
 button3.place(relx=0.1, rely=0.8, anchor="w")
 
+x_st = 600
+y_st = 50
+dx = 120;
+dy = 80;
+w = 12
+h = 3
+
+button0 = tk.Button(window, text = "用place 0", width = w, height = h, command = '')
+button0.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
+button1 = tk.Button(window, text = "用place 1", width = w, height = h, command = '')
+button1.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
+button2 = tk.Button(window, text = "用place 2", width = w, height = h, command = '')
+button2.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
+button3 = tk.Button(window, text = "用place 3", width = w, height = h, command = '')
+button3.pack(side = tk.LEFT, ipadx = 25, ipady = 25, expand = tk.YES)
+
+button0.place(x = x_st + dx * 0, y = y_st + dy * 0)
+button1.place(x = x_st + dx * 0, y = y_st + dy * 1)
+button2.place(x = x_st + dx * 0, y = y_st + dy * 2)
+button3.place(x = x_st + dx * 0, y = y_st + dy * 3)
+
 window.mainloop()
