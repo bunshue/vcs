@@ -1,5 +1,5 @@
 '''
-使用 label 顯示圖片
+使用 label 顯示圖片 jpg + gif
 '''
 
 import tkinter as tk

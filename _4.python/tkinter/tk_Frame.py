@@ -79,6 +79,12 @@ separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, p
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
+width = 100
+height = 100
+frame = tk.Frame(window, bg = 'pink', width = width, height = height)
+frame.pack()
+frame = tk.Frame(window, bg = 'yellow', width = width, height = height)
+frame.pack()
 
 window.mainloop()
 

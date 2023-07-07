@@ -1,5 +1,5 @@
 '''
-使用 canvas 顯示圖片
+使用 canvas 顯示圖片 gif
 '''
 import tkinter as tk
 

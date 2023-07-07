@@ -92,8 +92,8 @@ button1.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
-w = tk.Button(window, text = "離開", command = window.destroy)
-w.pack()
+button_exit = tk.Button(window, text = "關閉視窗", command = window.destroy)
+button_exit.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 

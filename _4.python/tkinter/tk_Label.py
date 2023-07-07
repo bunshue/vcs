@@ -22,6 +22,25 @@ window.configure(bg="#7AFEC6")
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
+font1 = ("Courier", 40, "bold")
+
+label1 = tk.Label(window, text = 'label之字型', font = font1)
+label1.pack()
+
+label2a = tk.Label(window, text = '不使用label1之字型')
+label2a.pack()
+
+label2b = tk.Label(window, text = '使用label1之字型')
+label2b.pack()
+
+font2 = label1["font"]  #將label1的字型讀出來
+
+#label2a.config(font = font2)  #label2a 不使用
+label2b.config(font = font2)   #label2b 使用
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
 font_size = 24
 w = 40
 h = 30

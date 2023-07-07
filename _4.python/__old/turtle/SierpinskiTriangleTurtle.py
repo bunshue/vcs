@@ -53,7 +53,7 @@ def main():
     p2 = [-150, -125]
     p3 = [150, -125]
 
-    order = eval(input("Enter an order: "))
+    order = 3
     displayTriangles(order, p1, p2, p3)
 
     turtle.done() 
