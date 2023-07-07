@@ -10,9 +10,9 @@ window = tk.Tk()
 
 # 設定主視窗大小
 w = 800
-h = 800
+h = 900
 x_st = 100
-y_st = 100
+y_st = 50
 #size = str(w)+'x'+str(h)
 #size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
 #window.geometry(size)
@@ -23,8 +23,7 @@ window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 title = "使用 label 顯示圖片"
 window.title(title)
 
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
+filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_書畫字圖/_peony3/原來奼紫嫣紅開遍.jpg'
 im = Image.open(filename)
 
 '''
@@ -45,13 +44,38 @@ label1.pack()
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 print('用 Label 顯示一張圖片')
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
+filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_書畫字圖/_peony3/原來奼紫嫣紅開遍.jpg'
 
 image2 = Image.open(filename)
 image2 = ImageTk.PhotoImage(image2)
 label2 = tk.Label(image = image2)
 label2.image = image
 label2.pack()
+
+
+
+import random
+
+# Choose four random cards
+def shuffle():
+    random.shuffle(imageList)
+    for i in range(4):
+        labelList[i]["image"] = imageList[i]
+
+imageList = [] # Store images for cards
+for i in range(1, 53):
+    imageList.append(tk.PhotoImage(file = "C:/_git/vcs/_1.data/______test_files1/__pic/_poker_card/card/" + str(i) + ".gif"))
+
+frame = tk.Frame(window) # Hold four labels for cards
+frame.pack()
+
+labelList = [] # A list of four labels
+for i in range(4):
+    labelList.append(tk.Label(frame, image = imageList[i]))
+    labelList[i].pack(side = tk.LEFT)
+
+tk.Button(window, text = "Shuffle", command = shuffle).pack()
+
 
 window.mainloop()
 
