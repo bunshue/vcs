@@ -32,7 +32,7 @@ window.title(title)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
-#新建一個Frame, row, column重新計算
+#新建一個Frame, row, column重新計算, 控件要依附新的Frame
 frame1 = tk.Frame(window)
 frame1.pack()
 
@@ -41,7 +41,7 @@ entry1 = tk.Entry(frame1)
 label1.grid(row = 0, column = 0)
 entry1.grid(row = 0, column = 1)
 
-#新建一個Frame, row, column重新計算
+#新建一個Frame, row, column重新計算, 控件要依附新的Frame
 frame2 = tk.Frame(window)
 frame2.pack()
 
@@ -52,7 +52,7 @@ button2.grid(row = 0, column = 1)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
-#新建一個Frame, row, column重新計算
+#新建一個Frame, row, column重新計算, 控件要依附新的Frame
 frame3 = tk.Frame(window)
 frame3.pack()
 
@@ -74,9 +74,7 @@ label_result.grid(row = 4, column = 2)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
-
-
-#新建一個Frame, row, column重新計算
+#新建一個Frame, row, column重新計算, 控件要依附新的Frame
 frame4 = tk.Frame(window)
 frame4.pack()
 

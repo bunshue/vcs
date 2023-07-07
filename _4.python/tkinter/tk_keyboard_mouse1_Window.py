@@ -1,6 +1,9 @@
+'''
+綁定鍵盤滑鼠事件 Window
+'''
 import tkinter as tk
 
-window = tk.Tk()
+cccc = tk.Tk()
 
 # 設定主視窗大小
 w = 800
@@ -10,19 +13,12 @@ y_st = 100
 #size = str(w)+'x'+str(h)
 #size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
 #window.geometry(size)
-window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+cccc.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 #print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
 
 # 設定主視窗標題
-title = "這是主視窗"
-window.title(title)
-
-width = 600
-height = 400
-cccc = tk.Canvas(window, bg = "pink", width = width, height = height)
-cccc.pack()
-
-flag_mouse_down = False
+title = '綁定鍵盤滑鼠事件 Window'
+cccc.title(title)
 
 def mouseDoubleClick1(event):
     print('雙擊左鍵', end = ' ')
@@ -38,29 +34,16 @@ def mouseDoubleClick4(event):
 
 def mouse_down1(event):
     print('你按了滑鼠左鍵', end = ' ')
-    global flag_mouse_down
-    flag_mouse_down = True
     '''
     print("在控件位置 : ", event.x, event.y, end = ' ')
     print("視窗位置 : ", event.x_root, event.y_root, end = ' ')
     print("按鍵 : ", event.num, end = ' ')
     '''
-    global radius
-    cccc.delete("oval")
-    if radius < 100:
-        radius += 2
-    cccc.create_oval(100 - radius, 100 - radius, 100 + radius, 100 + radius, tags = "oval")
-
 def mouse_down2(event):
     print('你按了滑鼠中鍵', end = ' ')
     
 def mouse_down3(event):
     print('你按了滑鼠右鍵', end = ' ')
-    global radius
-    cccc.delete("oval")
-    if radius > 2:
-        radius -= 2
-    cccc.create_oval(100 - radius, 100 - radius, 100 + radius, 100 + radius, tags = "oval")
 
 def mouse_down4(event):
     print('上一頁', end = ' ')
@@ -69,15 +52,7 @@ def mouse_down5(event):
     print('下一頁', end = ' ')
 
 def mouse_move1(event):
-    #print('m1', end = ' ')
-    global flag_mouse_down
-    if flag_mouse_down == True:
-        #用鼠標在canvas上畫圖
-        x = event.x
-        y = event.y
-        brush_size = 4
-        cccc.create_oval((x - brush_size / 2,y - brush_size / 2, x + brush_size / 2,y + brush_size / 2), fill = 'black')
-        return
+    print('m1', end = ' ')
 
 def mouse_move2(event):
     print('m2', end = ' ')
@@ -93,8 +68,6 @@ def mouse_move5(event):
 
 def mouse_up1(event):
     print('up1', end = ' ')
-    global flag_mouse_down
-    flag_mouse_down = False
 
 def mouse_up2(event):
     print('up2', end = ' ')
@@ -109,9 +82,9 @@ def mouse_up5(event):
     print('up5', end = ' ')
 
 def mouse_motion(event):
+    #print(f'x: {event.x} y: {event.y}')
     #print('滑鼠位置: (%s, %s)' % (event.x, event.y), end = ' ')
-    #window.title('滑鼠位置: (%s, %s)' % (event.x, event.y))
-    return
+    cccc.title('滑鼠位置: (%s, %s)' % (event.x, event.y))
 
 def mouse_wheel_event(event):
     if event.delta > 0:
@@ -158,10 +131,8 @@ cccc.bind('<MouseWheel>', mouse_wheel_event)  #滾輪事件
 cccc.bind("<Key>", processKeyEvent)
 cccc.focus_set()
 
-print('左鍵變大 右鍵變小')
+cccc.bind('<KeyPress>', lambda event: print(f'KeyPress ({event.char})'))
+cccc.bind('<Alt-KeyPress-a>', lambda event: print('你按了Alt+A ', event))
 
-radius = 50
-cccc.create_oval(100 - radius, 100 - radius, 100 + radius, 100 + radius, tags = "oval")
-
-window.mainloop()
+cccc.mainloop()
 

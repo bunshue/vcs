@@ -48,7 +48,7 @@ class BounceBalls:
         btRemove = Button(frame, text = "-", command = self.remove)
         btRemove.pack(side = LEFT)
         
-        self.sleepTime = 100 # Set a sleep time 
+        self.sleepTime = 100 # Set a sleep time, in msec
         self.isStopped = False
         self.animate()
         
