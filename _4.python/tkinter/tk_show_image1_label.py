@@ -42,11 +42,16 @@ label1 = tk.Label(window, text = '多人圖片', image = image, bd = 20, bg = 'r
 label1.pack()
 #tk.Label(window, text = '多人圖片', image = image, bd = 0, bg = 'red', width = 1200).pack()
 
-
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
+print('用 Label 顯示一張圖片')
+filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
 
-
+image2 = Image.open(filename)
+image2 = ImageTk.PhotoImage(image2)
+label2 = tk.Label(image = image2)
+label2.image = image
+label2.pack()
 
 window.mainloop()
 

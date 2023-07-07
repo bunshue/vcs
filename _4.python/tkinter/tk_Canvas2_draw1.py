@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import Tk, Canvas, NW
-from PIL import Image, ImageTk
 
 window = tk.Tk()
 
@@ -73,27 +72,6 @@ cx = 50
 cy = 50
 radius = 50
 canvas3.create_oval(cx - radius, cy - radius, cx + radius, cy + radius, tags = "oval")
-
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-
-image = Image.open(filename)
-if image.mode != "RGB":
-    print('圖片非RGB模式, 要轉成RGB格式')
-    image = image.convert("RGB")	#轉換成RGB圖像
-
-
-box = 50, 50, 50 + 100, 50 + 100
-tile = ImageTk.PhotoImage(image.crop(box))
-x = 270
-y = 50
-canvas3.create_image(x, y, image = tile, anchor = NW)
-
-
-'''
-self.bitmap = c.create_bitmap(width//2, height//2,
-                bitmap=bitmap,
-                foreground='blue')
-'''
 
 def moveCanvas():
     print('move')

@@ -1,6 +1,5 @@
 import tkinter as tk
 from tkinter import Tk, Canvas, NW
-from PIL import Image, ImageTk
 
 window = tk.Tk()
 
@@ -74,24 +73,6 @@ canvas.create_polygon( 40 + dx, 40 + dy,  60 + dx, 20 + dy,  80 + dx, 40 + dy,  
 canvas.create_polygon(100 + dx, 40 + dy, 120 + dx, 20 + dy, 140 + dx, 40 + dy, 140 + dx, 80 + dy, 100 + dx, 80 + dy, fill = '', outline = 'black')
 canvas.create_polygon(160 + dx, 80 + dy, 200 + dx, 80 + dy, 180 + dx, 20 + dy, fill = 'yellow')
 canvas.create_polygon(220 + dx, 80 + dy, 260 + dx, 80 + dy, 240 + dx, 20 + dy, fill = 'red', outline = 'black')
-
-#create_image 繪製影像
-filename = 'C:/_git/vcs/_1.data/______test_files1/picture1.jpg'
-#filename = 'C:/_git/vcs/_1.data/______test_files1/__pic/_gif/train.gif'
-
-img1 = Image.open(filename)
-img2 = ImageTk.PhotoImage(img1)
-#img2 = tk.PhotoImage(file = filename)   #gif專用
-
-canvas = tk.Canvas(window, width = img1.size[0], height = img1.size[1])
-canvas.pack()
-
-x_st = 0
-y_st = 0
-canvas.create_image(x_st, y_st, anchor = tk.NW, image = img2)
-
-
-
 
 
 
