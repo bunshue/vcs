@@ -1,36 +1,47 @@
 import tkinter as tk
-from tkinter import ttk
 
-# window
 window = tk.Tk()
-window.geometry('600x400')
-window.title('Frames and parenting')
 
-# frame
-frame = ttk.Frame(window, width = 200, height = 200, borderwidth = 10, relief = tk.GROOVE)
-frame.pack_propagate(False)
-frame.pack(side = 'left')
+# 設定主視窗大小
+w = 800
+h = 800
+x_st = 100
+y_st = 100
+#size = str(w)+'x'+str(h)
+#size = str(w)+'x'+str(h)+'+'+str(x_st)+'+'+str(y_st)
+#window.geometry(size)
+window.geometry("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+#print("{0:d}x{1:d}+{2:d}+{3:d}".format(w, h, x_st, y_st))
+
+# 設定主視窗標題
+title = "Frame 測試"
+window.title(title)
+
+# frame1
+frame1 = tk.Frame(window, bg = 'pink', width = 200, height = 200, borderwidth = 10, relief = tk.GROOVE)
+frame1.pack_propagate(False)
+frame1.pack(side = 'left')
 
 # master setting
-label = ttk.Label(frame, text = 'Label in frame')
+label = tk.Label(frame1, text = 'Frame1內之Label')
 label.pack()
 
-button = ttk.Button(frame, text = 'button in a frame')
+button = tk.Button(frame1, text = 'Frame1內之Button')
 button.pack()
 
 # example 
-label2 = ttk.Label(window, text = 'Label outside frame')
+label2 = tk.Label(window, text = 'Frame1外之Label')
 label2.pack(side = 'left')
 
-# exercise
+# frame2
 # create another frame with a label, a button and an entry and place it to the right
 # of the other widgets 
+frame2 = tk.Frame(window, bg = 'yellow')
+tk.Label(frame2, text = 'Frame2內之Label').pack()
+tk.Button(frame2, text = 'Frame1內之Button').pack()
+tk.Entry(frame2).pack()
+frame2.pack(side = 'left')
 
-exercise_frame = ttk.Frame(window)
-ttk.Label(exercise_frame, text = 'label in frame 2').pack()
-ttk.Button(exercise_frame, text = 'button in frame 2').pack()
-ttk.Entry(exercise_frame).pack()
-exercise_frame.pack(side = 'left')
-
-# run
 window.mainloop()
+
+

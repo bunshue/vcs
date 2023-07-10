@@ -1,14 +1,9 @@
 '''
 使用grid Entry
 '''
-def checkPassword():
-    password = '1234'
-    enteredPassword = entry2.get()
-    if password == enteredPassword:
-        label_result.config(text="Correct")
-    else:
-        label_result.config(text="Incorrect")
-
+def get_entry_text():
+    print('取得 id : ', entry1.get())
+    print('取得 pd : ', entry2.get())
 
 import tkinter as tk
 from tkinter import messagebox
@@ -56,21 +51,19 @@ separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, p
 frame3 = tk.Frame(window)
 frame3.pack()
 
-label1 = tk.Label(frame3, text = "Username")
+label1 = tk.Label(frame3, text = "Username:")
 entry1 = tk.Entry(frame3)
 
-label2 = tk.Label(frame3, text = "Password:(1234)")
+label2 = tk.Label(frame3, text = "Password:")
 entry2 = tk.Entry(frame3, show = "*")
 
-button = tk.Button(frame3, text = "Enter", command = checkPassword)
-label_result = tk.Label(frame3)
+button = tk.Button(frame3, text = "取得Entry資料", command = get_entry_text)
 
 label1.grid(row = 1, column = 1)
 entry1.grid(row = 1, column = 2)
 label2.grid(row = 2, column = 1)
 entry2.grid(row = 2, column = 2)
 button.grid(row = 3, column = 2)
-label_result.grid(row = 4, column = 2)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
@@ -89,30 +82,22 @@ label2.pack()
 #get username and password
 username = tk.StringVar()
 password = tk.StringVar()
-entry1 = tk.Entry(frame4, textvariable = username, font = (14))
-entry2 = tk.Entry(frame4, textvariable = password, font = (14), show = '*')
-#entry1.grid(row = 0, column = 1)
-#entry2.grid(row = 1, column = 1)
-entry1.pack()
-entry2.pack()
+entry1b = tk.Entry(frame4, textvariable = username, font = (14))
+entry2b = tk.Entry(frame4, textvariable = password, font = (14), show = '*')
+#entry1b.grid(row = 0, column = 1)
+#entry2b.grid(row = 1, column = 1)
+entry1b.pack()
+entry2b.pack()
 
-#action when login button is clicked
 def login():
-    if username.get()=='admin' and password.get()=='admin':
-        messagebox.showinfo(title = 'Login status', message = 'You have logged in.')
-    else:
-        messagebox.showerror(title = 'Login error', message = 'Username/Password is incorrect.')
+    print('取得帳號 : ', username.get())
+    print('取得密碼 : ', password.get())
 
-#action when cancel button is clicked
 def cancel():
-    status = messagebox.askyesno(title = 'Question', message = 'Do you want to close the window?')
-    if status==True:
-        window.destroy()
-    else:
-        messagebox.showwarning(title = 'Warning', message = 'Please login again!')
+    window.destroy()
 
-button1 = tk.Button(frame4, command = login, text = 'Login', font = (14))
-button2 = tk.Button(frame4, command = cancel, text = 'Cancel', font = (14))
+button1 = tk.Button(frame4, command = login, text = '取得Entry資料', font = (20))
+button2 = tk.Button(frame4, command = cancel, text = '離開', font = (14))
 #button1.grid(row = 2, column = 1, sticky = tk.W)
 #button2.grid(row = 2, column = 1, sticky = tk.E)
 button1.pack()

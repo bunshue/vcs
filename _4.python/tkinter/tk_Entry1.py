@@ -2,6 +2,22 @@
 
 import tkinter as tk
 
+def calculate():
+    print('第零項 : ', name.get())
+    print('第一項 : ', num1.get())
+    print('第二項 : ', num2.get())
+    print('第三項 : ', num3.get())
+    num3.set(num1.get() * num2.get())
+    name.set('good')
+
+    '''
+    # BMI 計算，四捨五入取到小數第二位
+    BMI_value = round(weight_msg.get() / ((height_msg.get() / 100) ** 2),2)
+    
+    #回傳結果，設定 return_msg 數值及評語
+    return_msg.set("BMI 計算後數值 = " + str(BMI_value) + "\n" + BMI_Status(BMI_value))
+    '''
+
 def calculate_bmi():
     # BMI 計算，四捨五入取到小數第二位
     BMI_value = round(weight_msg.get() / ((height_msg.get() / 100) ** 2),2)
@@ -87,47 +103,35 @@ button1.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
-def checkPW():
-    if(pw.get() == "1234"):
-        msg.set("密碼正確，歡迎登入！")
-    else:
-        msg.set("密碼錯誤，請修正密碼！")
+name = tk.StringVar()
+num1 = tk.IntVar()
+num2 = tk.IntVar()
+num3 = tk.IntVar()
 
-pw = tk.StringVar()
-msg = tk.StringVar()
-label = tk.Label(window, text = "請輸入密碼：(1234)")
-label.pack()
-entry = tk.Entry(window, textvariable = pw)
-entry.pack()
-button = tk.Button(window, text="登入", command = checkPW)
-button.pack()
-lblmsg = tk.Label(window, fg="red", textvariable = msg)
-lblmsg.pack()
-
+entry0 = tk.Entry(window, textvariable = name)
+entry0.pack()
+entry1 = tk.Entry(window, textvariable = num1)
+entry1.pack()
+entry2 = tk.Entry(window, textvariable = num2)
+entry2.pack()
+entry3 = tk.Entry(window, textvariable = num3)
+entry3.pack()
+button2 = tk.Button(window, text = "計算", command = calculate)
+button2.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 
 # Entry與Label測試
-tk.Label(text = 'Entry與Label測試').pack()
+tk.Label(text = 'Entry與Label同步改變Text').pack()
+
 string = tk.StringVar()
-entry = tk.Entry(window, textvariable = string).pack()
-label = tk.Label(window, textvariable = string).pack()
-
-
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
-
-label1=tk.Label(window, text = "輸入成績：")
-label1.place(x = 20, y = 20)
-score = tk.StringVar()
-entryUrl = tk.Entry(window, textvariable = score)
-entryUrl.place(x = 90, y = 20)
-btnDown = tk.Button(window, text = "計算成績")
-btnDown.place(x = 80, y = 50)
+entry = tk.Entry(window, textvariable = string)
+entry.pack()
+label = tk.Label(window, textvariable = string)
+label.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-
 
 
 

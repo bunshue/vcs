@@ -49,6 +49,33 @@ h = 30
 label1 = tk.Label(window, text = '這是標籤元件', fg = 'red', bg = 'yellow', font = ("標楷體", font_size), padx = w, pady = h)
 label1.pack()
 
+cnt = 1
+def changeLabelText1():
+    global cnt
+    cnt += 1
+    label1.config(text = "這是標籤元件 " + str(cnt))
+    
+button1 = tk.Button(window, text = "修改標籤之Text", foreground = "blue", font = ("標楷體", font_size), padx = w / 3, pady = h / 3, command = changeLabelText1)
+button1.pack()
+
+def changeLabelText2():
+    global cnt
+    cnt += 1
+    label_text.set("這是標籤元件 " + str(cnt))
+    print()
+
+msg = tk.StringVar()
+
+label_text = tk.StringVar()
+label_text.set('這是標籤元件')
+# 設定 Label 
+
+label2 = tk.Label(window, textvariable = label_text, fg = 'red', bg = 'yellow', font = ("標楷體", font_size), padx = w, pady = h)
+label2.pack()
+
+button2 = tk.Button(window, text = "修改標籤之Text", foreground = "blue", font = ("標楷體", font_size), padx = w / 3, pady = h / 3, command = changeLabelText2)
+button2.pack()
+
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 # Label測試

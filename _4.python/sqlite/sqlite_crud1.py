@@ -100,6 +100,8 @@ sqlite試用一下輸入NULL 或是用'' ""即可
 各種排序顯示資料庫內容
 '''
 
+print('----------------------------------------------------------------------')	#70個
+
 import time
 import sqlite3
 
@@ -348,6 +350,8 @@ conn.commit() # 更新
 conn.close()  # 關閉資料庫連線
 '''
 
+print('----------------------------------------------------------------------')	#70個
+
 import time
 import sqlite3
 
@@ -412,11 +416,97 @@ cursor.execute("DELETE FROM talbe01"
 '''
 conn.close()  # 關閉資料庫連線
 
-#----------------------------------------------------------------
+print('----------------------------------------------------------------------')	#70個
+
+def disp_data():
+    return
+    print('顯示所有資料')
+    cursor = conn.execute('SELECT * FROM password')
+    print("帳號\t密碼")
+    print("================")
+    for row in cursor:
+        print("{}\t{}".format(row[0], row[1]))
+    
+import sqlite3
+
+db_filename = 'C:/_git/vcs/_1.data/______test_files1/_db/python02.sqlite';
+
+conn = sqlite3.connect(db_filename)
+
+disp_data()
+
+print('新增資料')
+
+new_name = 'John'
+sqlstr = "SELECT * FROM password WHERE name = '{}'".format(new_name)    #一定要符合大小寫
+#sqlstr = "SELECT * FROM password WHERE name LIKE '{}'".format(new_name) #大小寫皆可
+
+cursor = conn.execute(sqlstr) 
+row = cursor.fetchone()
+
+if not row == None:
+    print("{} 帳號已存在!".format(new_name), '無法再新增')
+else:
+    new_password = '12345678'
+    sqlstr = "INSERT INTO password VALUES('{}', '{}');".format(new_name, new_password)
+    conn.execute(sqlstr)
+    conn.commit()
+    print("資料 {} 已儲存完畢".format(new_name))
+
+disp_data()
+
+print('修改資料')
+
+old_name = 'David'
+sqlstr = "SELECT * FROM password WHERE name = '{}'".format(old_name)
+cursor = conn.execute(sqlstr) 
+row = cursor.fetchone()
+#print(row)
+if row == None:
+    print("{} 帳號不存在!".format(old_name), '無法修改資料')
+else:
+    print("原來密碼為：{}".format(row[1]))
+    new_password = 'abcdefg'
+    sqlstr = "UPDATE password SET pass = '{}' WHERE name = '{}'".format(new_password, old_name)
+    conn.execute(sqlstr)
+    conn.commit()
+    print("資料 {} 已修改完成".format(old_name))    
+
+disp_data()
+
+print('刪除資料')
+name = 'John'
+sqlstr = "SELECT * FROM password WHERE name = '{}'" .format(name)
+cursor = conn.execute(sqlstr) 
+row = cursor.fetchone()
+if row == None:
+    print("{} 帳號不存在!".format(name), '無法刪除資料')
+else:
+    sqlstr = "delete from password where name = '{}'".format(name)
+    conn.execute(sqlstr)
+    conn.commit()
+    print("刪除{}的資料!：".format(name), '已完成')
+
+disp_data()
+
+conn.close()
+
+print("程式執行完畢！")
 
 
 
-#----------------------------------------------------------------
+
+print('----------------------------------------------------------------------')	#70個
+
+
+
+
+
+
+
+
+
+
 
 
 

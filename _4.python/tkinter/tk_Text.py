@@ -5,7 +5,7 @@ def set_data():
     '''
     print('set_data')
     #回傳結果
-    mesg = text1.get("1.0","end")
+    mesg = text1.get("1.0", "end")
     mesg= mesg + mmm
     print(mesg)
     text1.insert ('end', mesg)
@@ -13,7 +13,7 @@ def set_data():
     global count
     count = count + 1
     message = '  次數' + str(count)
-    text1.insert ('end', message)
+    text1.insert('end', message)
 
 def clear():
     text1.delete(1.0,'end')
@@ -54,25 +54,25 @@ bt_clear.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
-text = tk.Text(window, width = 80, height = 10)  # 放入多行輸入框
-text.insert(tk.INSERT, "Tkinter 套件是圖形使用者介面，\n")
-text.insert(tk.INSERT, "雖然功能略為陽春，\n")
-text.insert(tk.INSERT, "但已足夠一般應用程式使用，\n")
-text.insert(tk.INSERT, "而且是內含於 Python 系統中，\n")
-text.insert(tk.END, "不需另外安裝即可使用。")
-text.pack()
-text.config(state=tk.DISABLED)
+text2 = tk.Text(window, width = 80, height = 10)  # 放入多行輸入框
+text2.insert(tk.INSERT, "Tkinter 套件是圖形使用者介面，\n")
+text2.insert(tk.INSERT, "雖然功能略為陽春，\n")
+text2.insert(tk.INSERT, "但已足夠一般應用程式使用，\n")
+text2.insert(tk.INSERT, "而且是內含於 Python 系統中，\n")
+text2.insert(tk.END, "不需另外安裝即可使用。")
+text2.pack()
+text2.config(state = tk.DISABLED)   #此行設定Text內容不可改變
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
-label1 = tk.Label(window, text="輸入成績：")
+label1 = tk.Label(window, text = "輸入成績：")
 #label1.place(x=20, y=20)
 label1.pack()
 score = tk.StringVar()
 entry1 = tk.Entry(window, textvariable = score)
 #entry1.place(x=90, y=20)
 entry1.pack()
-button1 = tk.Button(window, text="計算成績")
+button1 = tk.Button(window, text = "計算成績")
 #button1.place(x=80, y=50)
 button1.pack()
 
@@ -81,10 +81,17 @@ separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, p
 frame1 = tk.Frame(window, bg = 'pink') # Hold four labels for displaying cards
 frame1.pack()
 
+def getTextData3():
+    mesg = text3.get("1.0", "end")
+    print('取得Text的資料 :', mesg)
+    
 scrollbar = tk.Scrollbar(frame1)
 scrollbar.pack(side = tk.RIGHT, fill = tk.Y)
-text = tk.Text(frame1, width = 80, height = 10, wrap = tk.WORD, yscrollcommand = scrollbar.set)  # 放入多行輸入框
-text.pack()
-scrollbar.config(command = text.yview)
+text3 = tk.Text(frame1, width = 80, height = 10, wrap = tk.WORD, yscrollcommand = scrollbar.set)  # 放入多行輸入框
+text3.pack()
+scrollbar.config(command = text3.yview)
+
+button1 = tk.Button(window, text = "取得Text的資料", command = getTextData3)
+button1.pack()
 
 window.mainloop()
