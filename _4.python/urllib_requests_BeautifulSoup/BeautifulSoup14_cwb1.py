@@ -94,7 +94,7 @@ def writeMySql():
         cursor.execute(sql)
     except :  #產生錯誤表示資烞表不存在
         sql = """
-        CREATE TABLE if not exists threeday (
+        CREATE TABLE IF NOT EXISTS threeday (
         rid int not null auto_increment primary key,
         日期時間 timestamp,
         星期 char(3),

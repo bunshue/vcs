@@ -52,7 +52,7 @@ def crawler(driver, table):
           conn = sqlite3.connect(filename)         
           with conn:
                cursor = conn.cursor()
-               sql = 'create table if not exists ' + table + '(Id INTEGER PRIMARY key autoincrement, title TEXT, link TEXT, autor_name TEXT, autor_link TEXT, views TEXT )'
+               sql = 'CREATE TABLE IF NOT EXISTS ' + table + '(Id INTEGER PRIMARY key autoincrement, title TEXT, link TEXT, autor_name TEXT, autor_link TEXT, views TEXT )'
                cursor.execute(sql)
                # INSERT INTO table VALUES(NULL,'title','link','autor_name','autor_link','watch')
                sql = "INSERT INTO "+ table +" VALUES(NULL,\'"+ title +"\',\'"+ link +"\',\'"+ autor_name +"\',\'"+ autor_link +"\',\'"+ watch +"\')"                

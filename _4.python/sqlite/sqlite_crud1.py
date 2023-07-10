@@ -120,13 +120,13 @@ print('建立一個資料表')
 #               "animalNumber integer, title varchar(50) not null)")
 
 #id_num可重複, 若資料庫已存在 則不用重新建立
-cursor.execute("CREATE TABLE if not exists table01 ( id_num char(5), subjectId char(4) not null, " +
+cursor.execute("CREATE TABLE IF NOT EXISTS table01 ( id_num char(5), subjectId char(4) not null, " +
                "animalNumber integer, title varchar(50) not null)")
 '''
 #CREATE 建立
 #CREATE TABLE table01, id_num(int) 和 name(text) 和 money(int),
 #primary key (id_num), id_num不可重複
-sqlstr = 'CREATE TABLE if not exists table01 ("id_num" INTEGER PRIMARY KEY NOT NULL, "name"  TEXT NOT NULL, "money"  TEXT NOT NULL)'
+sqlstr = 'CREATE TABLE IF NOT EXISTS table01 ("id_num" INTEGER PRIMARY KEY NOT NULL, "name"  TEXT NOT NULL, "money"  TEXT NOT NULL)'
 #sqlstr = 'CREATE TABLE table01 ("id_num" INTEGER PRIMARY KEY NOT NULL, "name"  TEXT NOT NULL, "money"  TEXT NOT NULL)'
 
 cursor.execute(sqlstr)
@@ -135,11 +135,11 @@ conn.commit() # 更新
 print('新增資料 3 筆 寫法一')
 #INSERT 增加
 #INSERT 新增資料, id_num不可重複
-sqlstr='INSERT INTO table01 VALUES(5, "Apple", 333)'
+sqlstr = 'INSERT INTO table01 VALUES (5, "Apple", 333)'
 cursor.execute(sqlstr)
-sqlstr='INSERT INTO table01 VALUES(1, "Banana", 777)'
+sqlstr = 'INSERT INTO table01 VALUES (1, "Banana", 777)'
 cursor.execute(sqlstr)
-sqlstr='INSERT INTO table01 VALUES(4, "Cat", 444)'
+sqlstr = 'INSERT INTO table01 VALUES (4, "Cat", 444)'
 cursor.execute(sqlstr)
 
 print('新增資料 2 筆 寫法二')
@@ -164,12 +164,12 @@ print('新增資料 2 筆 寫法四')
 number = 7
 name = 'Happy'
 money = 999
-sqlstr = "INSERT INTO table01 VALUES({},'{}','{}');".format(number, name, money)
+sqlstr = "INSERT INTO table01 VALUES ({},'{}','{}');".format(number, name, money)
 cursor.execute(sqlstr)
 number = 6
 name = 'India'
 money = 555
-sqlstr = "INSERT INTO table01 VALUES({},'{}','{}');".format(number, name, money)
+sqlstr = "INSERT INTO table01 VALUES ({},'{}','{}');".format(number, name, money)
 cursor.execute(sqlstr)
 conn.commit() # 更新
 conn.close()  # 關閉資料庫連線
@@ -178,8 +178,8 @@ conn.close()  # 關閉資料庫連線
 print('更新資料, 修改2號的資料')
 #print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename) # 建立資料庫連線
-conn.execute("UPDATE table01 SET name = '{}'  WHERE id_num={}".format('Eagle', 2))  #修改2號的資料, 要先確保已經有2號的資料, 才可以修改
-conn.execute("UPDATE table01 SET money = '{}' WHERE id_num={}".format(111, 2))      #修改2號的資料, 要先確保已經有2號的資料, 才可以修改
+conn.execute("UPDATE table01 SET name = '{}'  WHERE id_num = {}".format('Eagle', 2))  #修改2號的資料, 要先確保已經有2號的資料, 才可以修改
+conn.execute("UPDATE table01 SET money = '{}' WHERE id_num = {}".format(111, 2))      #修改2號的資料, 要先確保已經有2號的資料, 才可以修改
 conn.commit() # 更新
 conn.close()  # 關閉資料庫連線
 
@@ -187,7 +187,7 @@ conn.close()  # 關閉資料庫連線
 print('刪除資料, 刪除4號的資料')
 #print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename) # 建立資料庫連線
-conn.execute("DELETE FROM table01 WHERE id_num={}".format(4))
+conn.execute("DELETE FROM table01 WHERE id_num = {}".format(4))
 conn.commit() # 更新
 conn.close()  # 關閉資料庫連線
 
@@ -248,14 +248,14 @@ print('尋找資料')
 #print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename) # 建立資料庫連線
 number = 8
-sqlstr = "SELECT * FROM table01 WHERE id_num={};".format(number)    #條件
+sqlstr = "SELECT * FROM table01 WHERE id_num = {};".format(number)    #條件
 cursor = conn.execute(sqlstr)
 rows = cursor.fetchall()    #讀取全部資料
 if len(rows) > 0:
     print("找到資料 {}\t{}\t{}".format(rows[0][0], rows[0][1], rows[0][2]))
     answer = input("確定要刪除嗎？(y/n)")
     if answer == 'y' or answer == 'Y':
-        sqlstr = "DELETE FROM table01 WHERE id_num={};".format(number)
+        sqlstr = "DELETE FROM table01 WHERE id_num = {};".format(number)
         conn.execute(sqlstr)
         conn.commit() # 更新
         print("已刪除指定的資料")
@@ -307,7 +307,7 @@ print('用fetchall()讀取 全部資料 依 name 排序, 升冪')
 #print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename) # 建立資料庫連線
 cursor = conn.execute('SELECT * FROM table01 ORDER BY name;') #由小到大, 升冪
-#cursor = conn.execute('SELECT * FROM table01 ORDER BY name DESC;')#由小到大 + 反相 = 由大到小, 降冪
+#cursor = conn.execute('SELECT * FROM table01 ORDER BY name DESC;') #由小到大 + 反相 = 由大到小, 降冪
 rows = cursor.fetchall()    #讀取全部資料
 length = len(rows)
 print('共有', length, '筆資料')
@@ -321,8 +321,8 @@ conn.close()  # 關閉資料庫連線
 print('用fetchall()讀取 全部資料 依 money 排序, 降冪')
 #print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename) # 建立資料庫連線
-#cursor = conn.execute('SELECT * FROM table01 ORDER BY money;')#由小到大, 升冪
-cursor = conn.execute('SELECT * FROM table01 ORDER BY money DESC;')#由小到大 + 反相 = 由大到小, 降冪
+#cursor = conn.execute('SELECT * FROM table01 ORDER BY money;') #由小到大, 升冪
+cursor = conn.execute('SELECT * FROM table01 ORDER BY money DESC;') #由小到大 + 反相 = 由大到小, 降冪
 rows = cursor.fetchall()    #讀取全部資料
 length = len(rows)
 print('共有', length, '筆資料')
@@ -337,7 +337,7 @@ conn.close()  # 關閉資料庫連線
 print('刪除資料庫中的資料表')
 #print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename) # 建立資料庫連線
-cursor = conn.execute('drop table table01')
+cursor = conn.execute('DROP TABLE table01')
 conn.commit() # 更新
 conn.close()  # 關閉資料庫連線
 '''
@@ -420,12 +420,11 @@ conn = sqlite3.connect(db_filename) # 建立資料庫連線
 cursor = conn.cursor() # 建立 cursor 物件
 
 # 建立一個資料表
-sqlstr='CREATE TABLE IF NOT EXISTS table01 \
-("num" INTEGER PRIMARY KEY NOT NULL ,"tel" TEXT)'
+sqlstr = 'CREATE TABLE IF NOT EXISTS table01 ("num" INTEGER PRIMARY KEY NOT NULL, "tel" TEXT)'
 cursor.execute(sqlstr)
 
 # 新增一筆記錄
-sqlstr='INSERT INTO table01 VALUES(1,"02-1234567")'
+sqlstr = 'INSERT INTO table01 VALUES (1, "02-1234567")'
 cursor.execute(sqlstr)
 
 conn.commit() # 主動更新
