@@ -54,7 +54,7 @@ bt_clear.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
-text = tk.Text(window)
+text = tk.Text(window, width = 80, height = 10)  # 放入多行輸入框
 text.insert(tk.INSERT, "Tkinter 套件是圖形使用者介面，\n")
 text.insert(tk.INSERT, "雖然功能略為陽春，\n")
 text.insert(tk.INSERT, "但已足夠一般應用程式使用，\n")
@@ -65,7 +65,7 @@ text.config(state=tk.DISABLED)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
-label1=tk.Label(window, text="輸入成績：")
+label1 = tk.Label(window, text="輸入成績：")
 #label1.place(x=20, y=20)
 label1.pack()
 score = tk.StringVar()
@@ -77,5 +77,14 @@ button1 = tk.Button(window, text="計算成績")
 button1.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+frame1 = tk.Frame(window, bg = 'pink') # Hold four labels for displaying cards
+frame1.pack()
+
+scrollbar = tk.Scrollbar(frame1)
+scrollbar.pack(side = tk.RIGHT, fill = tk.Y)
+text = tk.Text(frame1, width = 80, height = 10, wrap = tk.WORD, yscrollcommand = scrollbar.set)  # 放入多行輸入框
+text.pack()
+scrollbar.config(command = text.yview)
 
 window.mainloop()

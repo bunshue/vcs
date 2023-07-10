@@ -103,11 +103,10 @@ sqlite試用一下輸入NULL 或是用'' ""即可
 import time
 import sqlite3
 
-db_filename = 'C:/_git/vcs/_1.data/______test_files2/db_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
+db_filename = 'C:/_git/vcs/_1.data/______test_files2/db_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.a.qlite';
 
 #print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename) # 建立資料庫連線
-
 cursor = conn.cursor() # 建立 cursor 物件
 
 print('建立一個資料表')
@@ -126,8 +125,15 @@ cursor.execute("CREATE TABLE IF NOT EXISTS table01 ( id_num char(5), subjectId c
 #CREATE 建立
 #CREATE TABLE table01, id_num(int) 和 name(text) 和 money(int),
 #primary key (id_num), id_num不可重複
-sqlstr = 'CREATE TABLE IF NOT EXISTS table01 ("id_num" INTEGER PRIMARY KEY NOT NULL, "name"  TEXT NOT NULL, "money"  TEXT NOT NULL)'
-#sqlstr = 'CREATE TABLE table01 ("id_num" INTEGER PRIMARY KEY NOT NULL, "name"  TEXT NOT NULL, "money"  TEXT NOT NULL)'
+#sqlstr = 'CREATE TABLE IF NOT EXISTS table01 ("id_num" INTEGER PRIMARY KEY NOT NULL, "name"  TEXT NOT NULL, "money" INTEGER NOT NULL)'
+#多了檢查條件
+sqlstr = '''
+CREATE TABLE IF NOT EXISTS table01 (
+    "id_num" INTEGER PRIMARY KEY NOT NULL,
+    "name"  TEXT NOT NULL,
+    "money" INTEGER NOT NULL CHECK(money > 0) -- 預設錯誤時會顯示
+);
+'''
 
 cursor.execute(sqlstr)
 conn.commit() # 更新
@@ -345,7 +351,7 @@ conn.close()  # 關閉資料庫連線
 import time
 import sqlite3
 
-db_filename = 'C:/_git/vcs/_1.data/______test_files2/ddb_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
+db_filename = 'C:/_git/vcs/_1.data/______test_files2/ddb_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.b.sqlite';
 
 #print('建立資料庫連線, 資料庫 : ' + db_filename)
 conn = sqlite3.connect(db_filename) # 建立資料庫連線
@@ -407,36 +413,6 @@ cursor.execute("DELETE FROM talbe01"
 conn.close()  # 關閉資料庫連線
 
 #----------------------------------------------------------------
-
-
-
-import time
-import sqlite3
-
-db_filename = 'C:/_git/vcs/_1.data/______test_files2/db_' + time.strftime("%Y%m%d_%H%M%S", time.localtime()) + '.sqlite';
-
-#print('建立資料庫連線, 資料庫 : ' + db_filename)
-conn = sqlite3.connect(db_filename) # 建立資料庫連線
-cursor = conn.cursor() # 建立 cursor 物件
-
-# 建立一個資料表
-sqlstr = 'CREATE TABLE IF NOT EXISTS table01 ("num" INTEGER PRIMARY KEY NOT NULL, "tel" TEXT)'
-cursor.execute(sqlstr)
-
-# 新增一筆記錄
-sqlstr = 'INSERT INTO table01 VALUES (1, "02-1234567")'
-cursor.execute(sqlstr)
-
-conn.commit() # 主動更新
-conn.close()  # 關閉資料庫連線
-
-#----------------------------------------------------------------
-
-
-
-
-#----------------------------------------------------------------
-
 
 
 

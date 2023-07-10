@@ -1,13 +1,8 @@
-# dialog.py -- Tkinter interface to the tk_dialog script.
-
 from tkinter import *
 from tkinter import _cnfmerge
 
-if TkVersion <= 3.6:
-    DIALOG_ICON = 'warning'
-else:
-    DIALOG_ICON = 'questhead'
-
+#DIALOG_ICON = 'warning'
+DIALOG_ICON = 'questhead'
 
 class Dialog(Widget):
     def __init__(self, master=None, cnf={}, **kw):
@@ -39,11 +34,9 @@ def _test():
     print(d.num)
 
 
-if __name__ == '__main__':
-    t = Button(None, {'text': 'Test',
-                      'command': _test,
-                      Pack: {}})
-    q = Button(None, {'text': 'Quit',
-                      'command': t.quit,
-                      Pack: {}})
-    t.mainloop()
+print(TkVersion)
+
+t = Button(None, {'text': 'Test', 'command': _test, Pack: {}})
+q = Button(None, {'text': 'Quit', 'command': t.quit, Pack: {}})
+t.mainloop()
+
