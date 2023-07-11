@@ -1,9 +1,6 @@
 '''
 列出所有python檔案
-
-
 '''
-
 import os, re
 
 binary_re = re.compile(br'[\x00-\x08\x0E-\x1F\x7F]')
