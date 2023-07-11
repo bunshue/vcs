@@ -7,6 +7,8 @@
 測試 DATE
 測試 CHECK
 
+測試部分填入資料
+
 '''
 
 #----------------------------------------------------------------
@@ -31,42 +33,47 @@ cursor = conn.cursor() # 建立 cursor 物件
 
 sqlstr = '''
 CREATE TABLE IF NOT EXISTS table01 (
-  id SERIAL PRIMARY KEY,
+  --id SERIAL PRIMARY KEY,   無效
+  id_num INTEGER,
   name VARCHAR(50),
-  birthday DATE CHECK(birthday > '1900-01-01' ),
+  birthday DATE CHECK(birthday > '1900-01-01'),
   work_time DATE CHECK(work_time > birthday),
-  money integer CHECK(money > 0) -- 預設錯誤時會顯示
+  money INTEGER CHECK(money > 0), -- 預設錯誤時會顯示
+  update_time TIMESTAMP
 );
 '''
 
 cursor.execute(sqlstr)
 conn.commit() # 更新
 
+id_num = 3
 name = 'David'
 birthday = '2006-03-11'
 work_time = '2023-07-11'
 money = 2345
-sql = "INSERT INTO table01 (name, birthday, work_time, money) VALUES ('{}', '{}', '{}', {})".format(name, birthday, work_time, money)
-print(sql)
-
-#或者直接寫
-#sql = "INSERT INTO table01 (name, birthday, work_time, money) VALUES ('Joe', '1980-02-02', '1990-04-04', 1234);"
-
-cursor.execute(sql)
-
-'''
-id_num = 3
-name = 'David'
-money = 333
 update_time = datetime.datetime.now()
 
-sqlstr = sql.format(id_num, name, money, update_time)
+sql = "INSERT INTO table01 (id_num, name, birthday, work_time, money, update_time) VALUES ({}, '{}', '{}', '{}', {}, '{}')"
+#print(sql)
+sqlstr = sql.format(id_num, name, birthday, work_time, money, update_time)
+
+#或者直接寫
+#sqlstr = "INSERT INTO table01 (id_num, name, birthday, work_time, money) VALUES (5, 'David', 'xxxx', 'xxxx', 1234, 'xxxx');"
+
 cursor.execute(sqlstr)
-'''
+
+print('資料不足時, 部分填入資料')
+id_num = 5
+name = 'Eric'
+update_time = datetime.datetime.now()
+
+sql = "INSERT INTO table01 (id_num, name, update_time) VALUES ({}, '{}', '{}')"
+#print(sql)
+sqlstr = sql.format(id_num, name, update_time)
+cursor.execute(sqlstr)
 
 conn.commit() # 更新
 conn.close()  # 關閉資料庫連線
-
 
 conn = sqlite3.connect(db_filename) # 建立資料庫連線
 
@@ -81,7 +88,6 @@ for row in cursor:
 conn.close()  # 關閉資料庫連線
 
 
-
-
 print("程式執行完畢！")
+
 

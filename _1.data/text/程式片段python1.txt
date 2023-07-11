@@ -281,61 +281,58 @@ def parse_glibc_supported(filename):
             continue
 
 
-
-
-bind的用法：控件.bind(event, handler),其中event是tkinter已经定义好的的事件，handler是处理器，可以是一个处理函数，如果相关事件发生, handler 函数会被触发, 事件对象 event 会传递给 handler 函数
+bind的用法：控件.bind(event, handler),其中event是tkinter已經定義好的的事件，handler是處理器，可以是一個處理函數，如果相關事件發生, handler 函數會被觸發, 事件對象 event 會傳遞給 handler 函數
 基本所有控件都能bind
 
-常见event有：
+常見event有：
 
-鼠标单击事件：
-鼠标左键点击为 <Button-1>,
-鼠标中键点击为 <Button-2>,
-鼠标右键点击为 <Button-3>,
-向上滚动滑轮为 <Button-4>,
-向下滚动滑轮为 <Button-5>.
+鼠標單擊事件：
+鼠標左鍵點擊為 <Button-1>,
+鼠標中鍵點擊為 <Button-2>,
+鼠標右鍵點擊為 <Button-3>,
+向上滾動滑輪為 <Button-4>,
+向下滾動滑輪為 <Button-5>.
 
-鼠标双击事件.：
-鼠标左键点击为 <Double-Button-1>,
-鼠标中键点击为 <Double-Button-2>,
-鼠标右键点击为 <Double-Button-3>.
+鼠標雙擊事件.：
+鼠標左鍵點擊為 <Double-Button-1>,
+鼠標中鍵點擊為 <Double-Button-2>,
+鼠標右鍵點擊為 <Double-Button-3>.
 
-鼠标释放事件：
-鼠标左键点击为 <ButtonRelease-1>,
-鼠标中键点击为 <ButtonRelease-2>,
-鼠标右键点击为 <ButtonRelease-3>.
-鼠标相对当前控件的位置会被存储在 event 对象中的 x 和 y 字段中传递给回调函数.
+鼠標釋放事件：
+鼠標左鍵點擊為 <ButtonRelease-1>,
+鼠標中鍵點擊為 <ButtonRelease-2>,
+鼠標右鍵點擊為 <ButtonRelease-3>.
+鼠標相對當前控件的位置會被存儲在 event 對象中的 x 和 y 字段中傳遞給回調函數.
 
-鼠标移入控件事件：<Enter>
+鼠標移入控件事件：<Enter>
 
-获得焦点事件：<FocusIn>
+獲得焦點事件：<FocusIn>
 
-鼠标移出控件事件: <Leave>
+鼠標移出控件事件: <Leave>
 
-失去焦点事件:<FocusOut>
+失去焦點事件:<FocusOut>
 
-鼠标按下移动事件：
-鼠标左键点击为 <B1-Motion>,
-鼠标中键点击为 <B2-Motion>,
-鼠标右键点击为 <B3-Motion>.
-鼠标相对当前控件的位置会被存储在 event 对象中的 x 和 y 字段中传递给回调函数.
+鼠標按下移動事件：
+鼠標左鍵點擊為 <B1-Motion>,
+鼠標中鍵點擊為 <B2-Motion>,
+鼠標右鍵點擊為 <B3-Motion>.
+鼠標相對當前控件的位置會被存儲在 event 對象中的 x 和 y 字段中傳遞給回調函數.
 
-键盘按下事件:<Key>，event中的keysym ,keycode,char都可以获取按下的键【其他想要获取值的也可以先看看event中有什么】
-键位绑定事件：<Return>回车键，<BackSpace>,<Escape>,<Left>,<Up>,<Right>,<Down>…….
-控件大小改变事件：<Configure>，新的控件大小会存储在 event 对象中的 width 和 height 属性传递. 有些平台上该事件也可能代表控件位置改变.
+鍵盤按下事件:<Key>，event中的keysym ,keycode,char都可以獲取按下的鍵【其他想要獲取值的也可以先看看event中有什么】
+鍵位綁定事件：<Return>回車鍵，<BackSpace>,<Escape>,<Left>,<Up>,<Right>,<Down>…….
+控件大小改變事件：<Configure>，新的控件大小會存儲在 event 對象中的 width 和 height 屬性傳遞. 有些平臺上該事件也可能代表控件位置改變.
 
 
-    Event中的属性：
-        widget：产生事件的控件
-        x, y：当前鼠标的位置
-        x_root, y_root：当前鼠标相对于屏幕左上角的位置，以像素为单位。
-        char：字符代码（仅限键盘事件），作为字符串。
-        keysym：关键符号（仅限键盘事件）。
-        keycode：关键代码（仅限键盘事件）。
-        num：按钮号码（仅限鼠标按钮事件）。
-        width, height：小部件的新大小（以像素为单位）（仅限配置事件）。
-        type：事件类型。
-
+    Event中的屬性：
+        widget：產生事件的控件
+        x, y：當前鼠標的位置
+        x_root, y_root：當前鼠標相對于屏幕左上角的位置，以像素為單位。
+        char：字符代碼（僅限鍵盤事件），作為字符串。
+        keysym：關鍵符號（僅限鍵盤事件）。
+        keycode：關鍵代碼（僅限鍵盤事件）。
+        num：按鈕號碼（僅限鼠標按鈕事件）。
+        width, height：小部件的新大小（以像素為單位）（僅限配置事件）。
+        type：事件類型。
 
 
 
@@ -468,9 +465,6 @@ check_var.set(5))
 button_string = tk.StringVar(value = 'A button with string var')
 
 
-label的寫法
-l3=Label(text='Created by Harsh Bardhan Mishra',font=('Times',22),fg='brown')
-
 
 
 def make_backup(filename):
@@ -600,18 +594,6 @@ def usage():
 
 sys.stderr.write(msg)
 
-import tkinter as tk
-import tkinter.messagebox
-
-        kilo = 123.456
-
-        # Convert kilometers to miles.
-        miles = kilo * 0.6214
-
-        # Display the results in an info dialog box.
-        tk.messagebox.showinfo('Results', \
-            str(kilo) + ' kilometers is equal to ' + \
-            str(miles) + ' miles.')
 
 
 
@@ -1028,13 +1010,8 @@ except:  # CTRL + C 中斷
 
 
 
-TextBox預設值
-# widgets 
-entry_string = tk.StringVar(value = 'test1111')
-entry = ttk.Entry(window, textvariable = entry_string)
-entry.pack()
 
-print('Entry內容 :', entry_string.get())	#TextBox取值
+
 
 //----------------------------------------------------------------------------------
 

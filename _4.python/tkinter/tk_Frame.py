@@ -57,6 +57,25 @@ button2.pack(side = tk.LEFT, padx = 2, pady = 2)
 
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+
+print('將多個控件做在一個Frame上')
+
+frame2 = tk.Frame(window, bg = 'yellow')  # 按鈕容器
+frame2.pack()    
+button1 = tk.Button(frame2, text = "播放", width = 8,command = '')
+button1.grid(row = 0, column = 0, padx = 5, pady = 5)
+button2 = tk.Button(frame2, text = "暫停", width = 8,command = '')
+button2.grid(row = 0, column = 1, padx = 5, pady = 5)
+button3 = tk.Button(frame2, text = "音量調大", width = 8,command = '')
+button3.grid(row = 0, column = 2, padx = 5, pady = 5)
+button4 = tk.Button(frame2, text = "音量調小", width = 8,command = '')
+button4.grid(row = 0, column = 3, padx = 5, pady = 5)
+button5 = tk.Button(frame2, text = "停止", width = 8,command = '')
+button5.grid(row = 0, column = 4, padx = 5, pady = 5)
+button6 = tk.Button(frame2, text = "結束", width = 8,command = '')
+button6.grid(row = 0, column = 5, padx = 5, pady = 5)
+
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 '''
@@ -76,8 +95,6 @@ takefocus:指定該組件是否接受輸入焦點（用戶可以通過 tab 鍵�
 separator = tk.Frame(width = 30, height = 80, bg = 'pink', bd = 5, relief = tk.GROOVE).pack(fill = tk.X, padx = 5, pady = 5)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
-separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 width = 100
 height = 100
@@ -85,6 +102,11 @@ frame = tk.Frame(window, bg = 'pink', width = width, height = height)
 frame.pack()
 frame = tk.Frame(window, bg = 'yellow', width = width, height = height)
 frame.pack()
+
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
 window.mainloop()
 

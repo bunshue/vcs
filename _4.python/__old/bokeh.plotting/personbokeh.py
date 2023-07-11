@@ -14,14 +14,22 @@ rows = data1.find_all("tr")
 for row in rows:
     cols = row.find_all("td")
     if(len(cols) > 0):
-        if cols[1].text!="─":
-            year.append((cols[0].text[:-1]))
+        if cols[1].text != "─":
+            year.append((cols[0].text.strip()[:-1]))
             person.append(cols[1].text)
+        else:
+            print('xxxxxx1111')
+    else:
+        print('xxxxxx2222')
 
-p = figure(width=800, height=400, title="桃園市大溪區歷年戶數")
+p = figure(width = 800, height = 400, title = "桃園市大溪區歷年戶數")
 p.title.text_font_size = "20pt"
 p.xaxis.axis_label = "年度"
 p.yaxis.axis_label = "戶數"
-p.line(year, person, line_width=2)
+p.line(year, person, line_width = 2)
+print('year')
+print(year)
+print('person')
+print(person)
 
 show(p)

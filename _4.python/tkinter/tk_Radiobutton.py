@@ -1,5 +1,6 @@
 # Python 測試 tkinter : Radiobutton
 
+import glob
 import tkinter as tk
 from tkinter import ttk
 
@@ -116,6 +117,31 @@ for text, mode in MODES:
     b.pack(anchor=tk.W)
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
+def choose():
+    print('你選擇了 : ' + choice.get())
+
+frame1 = tk.Frame(window)  # mp3 歌曲容器
+frame1.pack()
+
+source_dir = 'C:/_git/vcs/_1.data/______test_files1/_mp3/'
+
+mp3files = glob.glob(source_dir + "*.mp3")
+
+playsong = preplaysong = ""
+index = 0
+choice = tk.StringVar()
+
+for mp3 in mp3files:  #建立歌曲選項按鈕
+    rbtem = tk.Radiobutton(frame1, text = mp3, variable = choice, value = mp3, command = choose)
+    if(index == 0):  #選取第1個選項按鈕
+        rbtem.select()
+        playsong = preplaysong = mp3
+    rbtem.grid(row = index, column = 0, sticky = 'w')
+    index += 1
+
+separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
+
 
 window.mainloop()
 

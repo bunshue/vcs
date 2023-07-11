@@ -133,7 +133,12 @@ label.pack()
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
+#Entry 預設值
+entry_string = tk.StringVar(value = 'test1111')
+entry = tk.Entry(window, textvariable = entry_string)
+entry.pack()
 
+print('Entry內容 :', entry_string.get())	#Entry取值
 
 separator = tk.Frame(height = 2, bd = 1, relief = tk.SUNKEN).pack(fill = tk.X, padx = 5, pady = 5)  #分隔線
 
