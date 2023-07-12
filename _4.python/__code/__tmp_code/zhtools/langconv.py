@@ -245,6 +245,7 @@ def run():
     parser.add_option('-f', type='string', dest='file_in', help='input file (- for stdin)')
     parser.add_option('-t', type='string', dest='file_out', help='output file')
     (options, args) = parser.parse_args()
+    options.encoding = 'zh-hant'
     if not options.encoding:
         parser.error('encoding must be set')
     if options.file_in:
@@ -267,6 +268,14 @@ def run():
         # print >> file_out, c.convert(line.rstrip('\n').decode(
         file_out.write(c.convert(line.rstrip('\n').decode('utf8')).encode('utf8'))
 
-
+'''
 if __name__ == '__main__':
     run()
+'''
+
+print('簡中用語 => 正中用語')
+word_cn = '丑'
+word_tw = Converter('zh-hant').convert(word_cn)
+print(word_cn, word_tw)
+
+

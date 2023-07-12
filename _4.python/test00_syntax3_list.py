@@ -21,7 +21,7 @@ myList = [1, 2, 3, 4, 5, 6]
 for i in range(4, -1, -1):
     myList[i + 1] = myList[i]
 
-for i in range(0, 6): 
+for i in range(0, 6):
     print(myList[i], end = " ")
 
 
@@ -101,5 +101,40 @@ for i in range(5):
          for k in range(4):
              print(format(dates[i][j][k], '4d'), end = " ")
          print()
+
+person_data = [
+    (110, 48226, 46644, 94870),
+    (109, 48618, 47046, 95664),
+    (108, 48532, 47018, 95550),
+    (107, 48298, 46587, 94885),
+    (106, 48156, 46295, 94451),
+    (105, 48060, 46042, 94102),
+    (104, 47861, 45482, 93343),
+    (103, 47305, 44582, 91887),
+    (102, 47333, 44628, 91961),
+    (101, 47304, 44587, 91891)]
+
+person_data.reverse()
+print(person_data)
+
+print(len(person_data))
+
+print('提取 前n筆資料, 組成一個二維list')
+print(type(person_data[:5]))
+print(person_data[:5])
+print('提取 第n筆資料, tuple')
+print(type(person_data[5]))
+print(person_data[5])
+
+print('提取 從a開始到b, 間隔c')
+a = 0
+b = 5
+c = 2
+print(person_data[a:b:c])
+
+
+#取第一欄出來 成一個list ??
+
+
 
 

@@ -1,8 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
-from bokeh.plotting import figure, show, output_file
-
-output_file("personbokeh.html")
+import matplotlib.pyplot as plt
 
 person_data = list()
 
@@ -54,11 +52,16 @@ print(person2)
 print('person3')
 print(person3)
 
-p = figure(width = 800, height = 400, title = "桃園市大溪區歷年人口數")
-p.title.text_font_size = "20pt"
-p.xaxis.axis_label = "年度"
-p.yaxis.axis_label = "人口數"
-p.line(year, person1, line_width = 2)
-p.line(year, person2, line_width = 2)
+plt.plot(year, person1, linewidth = 2.0)
+plt.plot(year, person2, linewidth = 2.0)
+#plt.title("桃園市大溪區歷年人口數")
+#plt.xlabel("年度")
+#plt.ylabel("人口數")
 
-show(p)
+#戶數
+
+#plt.title("桃園市大溪區歷年戶數")
+#plt.xlabel("年度")
+#plt.ylabel("戶數")
+
+plt.show()
