@@ -1,58 +1,17 @@
-import requests
-from bs4 import BeautifulSoup
 from bokeh.plotting import figure, show, output_file
 
 output_file("personbokeh.html")
 
-person_data = list()
+year =  [81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111]
+person1 = [41500, 41958, 41915, 42773, 43136, 43458, 43642, 43828, 44012, 44011, 44204, 44228, 44928, 45684, 46430, 46801, 47084, 47267, 47506, 47408, 47304, 47333, 47305, 47861, 48060, 48156, 48298, 48532, 48618, 48226, 47821]
+person2 = [37045, 37397, 36796, 38220, 38510, 38661, 38801, 39097, 39336, 39620, 40061, 40269, 41142, 41907, 42935, 43592, 44062, 44608, 44575, 44571, 44587, 44628, 44582, 45482, 46042, 46295, 46587, 47018, 47046, 46644, 46492]
 
-url = "http://www.daxi-hro.tycg.gov.tw/home.jsp?id=25&parentpath=0,21,22"
-content = requests.get(url).text
-soup = BeautifulSoup(content, "html.parser")
-
-#人口統計
-data1 = soup.find("tbody")
-print(data1)
-
-#戶數統計
-#data1 = soup.select("table[summary^='歷年戶數統計列表排版用']")[0]
-
-rows = data1.find_all("tr")
-for row in rows:
-    cols = row.find_all("td")
-    if(len(cols) > 0):
-        if cols[1].text != "─":
-            person_data.append(((int)(cols[0].text.strip()[:-1]), (int)(cols[1].text), (int)(cols[2].text), (int)(cols[3].text)))
-        else:
-            print('xxxxxx1111')
-    else:
-        print('xxxxxx2222')
-
-person_data.reverse()   #反相
-'''
-print('person_data')
-print(person_data)
-'''
-
-year = []
-person1 = []
-person2 = []
-person3 = []
-
-length = len(person_data)
-for i in range(0, length): 
-    year.append(person_data[i][0])
-    person1.append(person_data[i][1])
-    person2.append(person_data[i][2])
-    person3.append(person_data[i][3])
 print('year')
 print(year)
 print('person1')
 print(person1)
 print('person2')
 print(person2)
-print('person3')
-print(person3)
 
 p = figure(width = 800, height = 400, title = "桃園市大溪區歷年人口數")
 p.title.text_font_size = "20pt"

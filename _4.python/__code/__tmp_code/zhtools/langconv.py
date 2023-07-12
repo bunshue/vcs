@@ -10,17 +10,19 @@ try:
 except:
     pass
 
-try:
-    from zh_wiki import zh2Hant, zh2Hans
-except ImportError:
-    from zhtools.zh_wiki import zh2Hant, zh2Hans
+from zh_wiki import zh2Hant, zh2Hans, zh2TW, zh2HK, zh2CN, zh2SG
+#from zhtools.zh_wiki import zh2Hant, zh2Hans, zh2TW, zh2HK, zh2CN, zh2SG
 
 import sys
 py3k = sys.version_info >= (3, 0, 0)
+print(sys.version_info)
+print('py3k = ', py3k)
 
 if py3k:
+    print('1111')
     UEMPTY = ''
 else:
+    print('2222')
     _zh2Hant, _zh2Hans = {}, {}
     for old, new in ((zh2Hant, _zh2Hant), (zh2Hans, _zh2Hans)):
         for k, v in old.items():
@@ -234,48 +236,44 @@ def registery(name, mapping):
 
 registery('zh-hant', zh2Hant)
 registery('zh-hans', zh2Hans)
-del zh2Hant, zh2Hans
+registery('zh-tw', zh2TW)
+registery('zh-hk', zh2HK)
+registery('zh-cn', zh2CN)
+registery('zh-sg', zh2SG)
 
-
-def run():
-    import sys
-    from optparse import OptionParser
-    parser = OptionParser()
-    parser.add_option('-e', type='string', dest='encoding', help='encoding')
-    parser.add_option('-f', type='string', dest='file_in', help='input file (- for stdin)')
-    parser.add_option('-t', type='string', dest='file_out', help='output file')
-    (options, args) = parser.parse_args()
-    options.encoding = 'zh-hant'
-    if not options.encoding:
-        parser.error('encoding must be set')
-    if options.file_in:
-        if options.file_in == '-':
-            file_in = sys.stdin
-        else:
-            file_in = open(options.file_in)
-    else:
-        file_in = sys.stdin
-    if options.file_out:
-        if options.file_out == '-':
-            file_out = sys.stdout
-        else:
-            file_out = open(options.file_out, 'wb')
-    else:
-        file_out = sys.stdout
-
-    c = Converter(options.encoding)
-    for line in file_in:
-        # print >> file_out, c.convert(line.rstrip('\n').decode(
-        file_out.write(c.convert(line.rstrip('\n').decode('utf8')).encode('utf8'))
+del zh2Hant, zh2Hans, zh2TW, zh2HK, zh2CN, zh2SG
 
 '''
-if __name__ == '__main__':
-    run()
+中國大陸（zh-cn）、新加坡（zh-sg）及馬來西亞（zh-my）的地區詞為簡體中文
+台灣（zh-tw）、香港（zh-hk）及澳門（zh-mo）的地區詞為正體／繁體中文
 '''
 
 print('簡中用語 => 正中用語')
-word_cn = '丑'
-word_tw = Converter('zh-hant').convert(word_cn)
-print(word_cn, word_tw)
+word_1 = '帮助文件'
+word_2 = Converter('zh-hant').convert(word_1)
+print(word_1, word_2)
 
+print('正中用語 => 簡中用語')
+word_1 = '顯著'
+word_2 = Converter('zh-hans').convert(word_1)
+print(word_1, word_2)
 
+print('轉 台灣用語')
+word_1 = '缺省'
+word_2 = Converter('zh-tw').convert(word_1)
+print(word_1, word_2)
+
+print('轉 香港用語')
+word_1 = '字节'
+word_2 = Converter('zh-hk').convert(word_1)
+print(word_1, word_2)
+
+print('轉 中國用語')
+word_1 = '記憶體'
+word_2 = Converter('zh-cn').convert(word_1)
+print(word_1, word_2)
+
+print('轉 新加坡用語')
+word_1 = '蹦极跳'
+word_2 = Converter('zh-sg').convert(word_1)
+print(word_1, word_2)

@@ -52,30 +52,9 @@ decimalValue = 65535
 hexValue = decimalToHex(decimalValue)
 print('decimal : %d\thex : %s' % (decimalValue, hexValue) )
 
-import os
-user = os.getlogin()
-print(user)
-
-version = __version__ = "4.61.0.166 Unreleased"
-print(version)
-
-font_file = os.path.join(os.path.dirname(__file__), "OpenFlame.ttf")
-print(font_file)
 
 print(__doc__)
 print(globals())
-
-import sys
-
-major, minor, micro, level, serial = sys.version_info
-
-print('version_info')
-print(sys.version_info)
-print(major)
-print(minor)
-print(micro)
-print(level)
-print(serial)
 
 level = 123
 levelnum = 170
@@ -84,7 +63,6 @@ print(" * PY_RELEASE_LEVEL = %r = %s" % (level, hex(levelnum)))
 
 
 
-import os
 
 target = 'https://tw.appledaily.com/new/realtime/{}'
 
@@ -98,10 +76,6 @@ with open(filename, "w", encoding = 'utf-8') as fp:
     print(filename + " is dumping...")
     json.dump(titles, fp)
 '''
-
-base_dir = os.path.dirname(os.path.abspath(__file__))
-
-print(base_dir)
 
 
 
@@ -145,20 +119,6 @@ for y in range(0, H, h):
         #print(box)
 
 
-
-
-import time
-
-print(time.localtime()) #獲取格式化的時間
-
-localtime = time.asctime(time.localtime())
-print (localtime)
-
-#格式化日期成2016-03-20 11:45:39形式
-print (time.strftime("%Y-%m-%d %H:%M:%S", time.localtime()))
-
-# 格式化成Sat Mar 28 22:24:24 2016形式
-print (time.strftime("%a %b %d %H:%M:%S %Y", time.localtime()))
 
 
 
