@@ -1,4 +1,6 @@
-import os, shutil
+import os
+import shutil
+
 cur_path = os.path.dirname(__file__) # 取得目前路徑
 sample_tree = os.walk(cur_path)
 output_dir = 'output2'

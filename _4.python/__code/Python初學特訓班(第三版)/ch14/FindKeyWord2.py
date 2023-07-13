@@ -1,8 +1,10 @@
-import os,docx
-cur_path=os.path.dirname(__file__) # 取得目前路徑
-sample_tree=os.walk(cur_path)
+import os
+import docx
 
-keyword="籃球"
+cur_path = os.path.dirname(__file__) # 取得目前路徑
+sample_tree = os.walk(cur_path)
+
+keyword = "籃球"
 print("搜尋字串：{}" .format(keyword))
 
 for dirname,subdir,files in sample_tree:

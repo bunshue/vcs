@@ -1,4 +1,6 @@
-import os, shutil
+import os
+import shutil
+
 output_dir = 'output'
 cur_path = os.path.dirname(__file__) # 取得目前路徑
 sample_tree = os.walk(cur_path)
@@ -31,6 +33,7 @@ for dirname,subdir,files in sample_tree:
          destfile = "{}.{}".format(target_dir + '/' + m_filename, ext) # 加上完整路徑
          srcfile = dirname + "/" + file
          print(destfile)
-         shutil.copy(srcfile,destfile); # 複製檔案
+         shutil.copy(srcfile, destfile); # 複製檔案
      
 print("完成...")
+

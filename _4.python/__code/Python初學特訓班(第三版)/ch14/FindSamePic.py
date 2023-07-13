@@ -1,10 +1,12 @@
-import os, hashlib
+import os
+import hashlib
 
 cur_path = os.path.dirname(__file__) # 取得目前路徑
 sample_tree = os.walk(cur_path)
 
 allmd5s = dict() 
 n = 0
+
 for dirname, subdir, files in sample_tree:
    allfiles = []   
    for file in files:  # 取得所有 .png .jpg 檔，存入 allfiles 串列中

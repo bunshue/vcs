@@ -1,20 +1,22 @@
-import os,docx,sys
+import os
+import sys
+import docx
 
 if len(sys.argv) == 1:
-    keyword="shutil" 
+    keyword = "shutil" 
     print("語法：python FindKeyWord3.py 搜尋字串\n")
 else:
-    keyword=sys.argv[1]  
+    keyword = sys.argv[1]  
  
-#cur_path=os.path.dirname(__file__) # 取得目前路徑
-cur_path=os.getcwd()
-sample_tree=os.walk(cur_path)
+#cur_path = os.path.dirname(__file__) # 取得目前路徑
+cur_path = os.getcwd()
+sample_tree = os.walk(cur_path)
 print(cur_path)
 
 for dirname,subdir,files in sample_tree:
-   allfiles=[]   
+   allfiles = []   
    for file in files:  # 取得所有 .py .txt .docx 檔，存入 allfiles 串列中
-      ext=file.split('.')[-1]
+      ext = file.split('.')[-1]
       if ext=="py" or ext=="txt" or ext=="docx": 
          allfiles.append(dirname +'/'+file)
          
@@ -23,18 +25,18 @@ for dirname,subdir,files in sample_tree:
          try:
             if file.split('.')[-1]=="docx": # .docx
                 doc = docx.Document(file)
-                line=0
+                line = 0
                 for p in doc.paragraphs:
-                    line+=1
+                    line += 1
                     if keyword in p.text:
                         print("...在第 {} 段文字中找到「{}」\n {}。".format(line,keyword,p.text))  
             else:  # .py or .txt             
                 fp = open(file, "r", encoding = 'UTF-8')
                 article = fp.readlines()
                 fp.close 
-                line=0            
+                line = 0            
                 for row in article:
-                   line+=1
+                   line += 1
                    if keyword in row:
                        print("在 {}，第 {} 列找到「{}」。".format(file,line,keyword))
          except:
